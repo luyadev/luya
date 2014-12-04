@@ -1,0 +1,12 @@
+{
+	"name" : "zephir/luya",
+	"description" : "Zephir Luya Library, extended from Yii2",
+	"require" : {
+		"php": ">=5.4.0"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"luya\\" : "src/"
+		}
+	}
+}
