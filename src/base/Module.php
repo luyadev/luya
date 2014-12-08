@@ -1,7 +1,7 @@
 <?php
 namespace luya\base;
 
-use \Yii;
+use \yii;
 use \Exception;
 
 /**

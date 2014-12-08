@@ -4,12 +4,11 @@ namespace luya\components;
 use yii;
 use yii\base\Application;
 use yii\helpers\ArrayHelper;
+use luya\Luya;
 
 class Bootstrap implements \yii\base\BootstrapInterface
 {
     private $_modules = [];
-    
-    private $_modulePropertys = [];
     
     private $_apis = [];
     
@@ -26,7 +25,7 @@ class Bootstrap implements \yii\base\BootstrapInterface
             $this->_modules[$id] = [
                 'id' => $id,
                 'class' => $class,
-                'reflection' => $this->getReflectionProperties($class)
+                'reflection' => new \ReflectionClass($class)
             ];
         }
     }
@@ -34,7 +33,7 @@ class Bootstrap implements \yii\base\BootstrapInterface
     private function beforeRun()
     {
         foreach($this->_modules as $item) {
-            // collect all static api properties
+            // collect static apis property
             if ($item['reflection']->hasProperty('apis')) {
                 $prop = $item['reflection']->getProperty('apis')->getValue();
                 foreach ($prop as $alias => $class) {
@@ -48,16 +47,14 @@ class Bootstrap implements \yii\base\BootstrapInterface
             // set admin property
             $this->_modules[$item['id']]['isAdmin'] = ($item['reflection']->hasProperty('isAdmin')) ? true : false;
         }
-        
-        // set params
-        $this->addParam('apis', $this->_apis);
+        // set params before boot
+        luya::setParams('apis', $this->_apis);
     }
     
     private function run()
     {
         $adminAssets = [];
         $adminMenus = [];
-        
         // start the module now
         foreach ($this->_modules as $id => $item) {
             $module = yii::$app->getModule($item['id']);
@@ -68,21 +65,8 @@ class Bootstrap implements \yii\base\BootstrapInterface
                 $adminMenus = ArrayHelper::merge($module->getMenu(), $adminMenus);
             }
         }
-        
-        // change thos names
-        $this->addParam('adminAssets', $adminAssets);
-        $this->addParam('modulesMenu', $adminMenus);
+        // set the parameters to yii via luya::setParams
+        luya::setParams('adminAssets', $adminAssets);
+        luya::setParams('adminMenus', $adminMenus);
     }
-    
-    private function addParam($param, $value)
-    {
-        yii::$app->params[$param] = $value;
-    }
-    
-    public function getReflectionProperties($class)
-    {
-        return new \ReflectionClass($class);
-        //return $reflection->getProperties(\ReflectionProperty::IS_PUBLIC);
-    }
-    
 }
