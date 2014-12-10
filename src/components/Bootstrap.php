@@ -22,6 +22,11 @@ class Bootstrap implements \yii\base\BootstrapInterface
     private function expand($modules)
     {
         foreach($modules as $id => $class) {
+            // avoid exception if the module defintions looks like this ['cms' => ['class' => 'path/to/class']]
+            if (is_array($class)) {
+                $class = $class['class'];
+            }
+            
             $this->_modules[$id] = [
                 'id' => $id,
                 'class' => $class,
