@@ -7,7 +7,33 @@ class UrlRule extends \luya\base\UrlRule
 {
     public function parseRequest($manager, $request)
     {
-        $parts = explode("/", $request->getPathInfo());
+        $pathInfo = $request->getPathInfo();
+        
+        $parts = explode("/", $pathInfo);
+        
+        $pc = yii::$app->getModule('luya')->urlPrefixComposition;
+        
+        $url = $request->getPathInfo();
+        
+        preg_match_all('/<(\w+):?([^>]+)?>/', $pc, $matches, PREG_SET_ORDER);
+        
+        foreach ($matches as $index => $match) {
+            if (isset($parts[$index])) {
+                $urlValue = $parts[$index];
+                $rgx = $match[2];
+                $param = $match[1];
+                
+                preg_match("/^$rgx$/", $urlValue, $res);
+                if (count($res) == 1) {
+                    // ok! remove it, and add requestParam
+                    $request->setQueryParams([$param => $urlValue]);
+                    unset($parts[$index]);
+                }
+            }
+        }
+        
+        $request->setPathInfo(implode("/", $parts));
+        
         // does the module exists in the list
         if (isset($parts[0]) && array_key_exists($parts[0], Yii::$app->modules)) {
             $route = $parts[0];
