@@ -1,7 +1,7 @@
 <script>
 strapCallbackUrl = '<?= $strapCallbackUrl;?>';
 ngrestConfigHash = '<?= $config->getNgRestConfigHash(); ?>';
-zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope, $controller) {
+zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>Controller', function($scope, $controller) {
     /* extend class */
     $.extend(this, $controller('CrudController', { $scope : $scope }));
     /* local controller config */
@@ -12,7 +12,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
     $scope.config.ngrestConfigHash = '<?= $config->getNgRestConfigHash(); ?>';
 });
 </script>
-<div ng-controller="<?=$config->getNgRestConfigHash(); ?>" ng-init="init()">
+<div ng-controller="<?=$config->getNgRestConfigHash(); ?>Controller" ng-init="init()">
     <crud>
     
     	<crud-create>

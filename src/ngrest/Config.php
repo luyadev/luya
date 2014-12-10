@@ -128,6 +128,6 @@ class Config implements ConfigInterface
     
     public function getNgRestConfigHash()
     {
-        return sha1($this->config['restUrl'] . $this->config['restPrimaryKey']);
+        return ucfirst(sha1($this->config['restUrl'] . $this->config['restPrimaryKey']));
     }
 }
