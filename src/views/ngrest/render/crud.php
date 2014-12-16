@@ -12,8 +12,14 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>Controller', functi
     $scope.config.ngrestConfigHash = '<?= $config->getNgRestConfigHash(); ?>';
 });
 </script>
-<div ng-controller="<?=$config->getNgRestConfigHash(); ?>Controller" ng-init="init()">
-    <crud>
+<div ng-controller="<?=$config->getNgRestConfigHash(); ?>Controller" ng-init="init()" class="Crud">
+   <div class="Crud-toolbar">
+
+        <button class="Crud-button Crud-button--add" type="button" ng-click="toggleCreate()">
+            <span class="Crud-icon Crud-icon--success fa fa-plus"></span>
+        </button>
+
+    </div>
     
     	<crud-create>
     	    <form ng-submit="submitCreate()" name="createForm">
@@ -29,33 +35,32 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>Controller', functi
     		</form>
     	</crud-create>
     
-        <crud-list>
-            <div class="well">
-                <input type="text" placeholder="Suchbegriff eingeben" ng-model="search" class="form-control" />
-            </div>
-        
-            <table class="table table-bordered">
-            <thead>
-            <tr>
-                <? foreach($crud->list as $item): ?>
-                <th><?= $item['alias']; ?></th>
+    
+    	<table class="Crud-table">
+		<thead>
+            <tr class="Crud-row Crud-row--header">
+            <? foreach($crud->list as $item): ?>
+                <th class="Curd-cell"><?= $item['alias']; ?></th>
                 <? endforeach; ?>
-                <th>Actions</th>
+                <th class="Crud-cell Crud-cell--center">Actions</th>
             </tr>
-            </thead>
-            <tr ng-repeat="item in data.list | filter:search">
+        </thead>
+        <tbody>
+    
+            <tr class="Crud-row" ng-repeat="item in data.list | filter:search">
                 <? foreach($crud->list as $item): ?>
-                <td><?= $crud->createElement($item, $crud::TYPE_LIST); ?></td>
+                <td class="Crud-cell"><?= $crud->createElement($item, $crud::TYPE_LIST); ?></td>
                 <? endforeach; ?>
-                <td>
+                <td class="Crud-cell Crud-cell--center Crud-cell--noWrap">
                     <button type="button" ng-click="toggleUpdate(item.<?= $config->getRestPrimaryKey(); ?>)" class="btn btn-primary">Bearbeiten</button>
                     <? foreach($crud->getStraps() as $item): ?>
                     <button type="button" ng-click="getStrap('<?= $item['strapHash']; ?>', item.<?= $config->getRestPrimaryKey();?>)"><?=$item['alias']; ?></button>
                     <? endforeach; ?>
                 </td>
             </tr>
-            </table>
-        </crud-list>
+        
+        </tbody>
+        </table>
         
         <crud-update>
             <form ng-submit="submitUpdate()" name="updateForm">
@@ -72,7 +77,5 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>Controller', functi
         </crud-update>
         
         <crud-strap></crud-strap>
-    </crud>
-    <hr />
     <button ng-click="debug()">Debug (console.log)</button>
 </div>

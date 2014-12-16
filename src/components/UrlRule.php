@@ -34,7 +34,12 @@ class UrlRule extends \luya\base\UrlRule
         
         $request->setPathInfo(implode("/", $parts));
         
-        \luya\collection\Factory::instance('\luya\collection\Request')->setPathInfo($request->getPathInfo());
+        $langObject = new \luya\collection\Lang();
+        $langObject->evalRequest($request);
+        
+        Yii::$app->get('collection')->setLang($langObject);
+        
+        //\luya\collection\Factory::instance('\luya\collection\Request')->setPathInfo($request->getPathInfo());
         
         // does the module exists in the list
         if (isset($parts[0]) && array_key_exists($parts[0], Yii::$app->modules)) {

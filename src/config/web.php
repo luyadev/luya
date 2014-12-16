@@ -10,7 +10,8 @@ $config = [
     	'request' => [
     		'cookieValidationKey' => 'cookeivalidationkey',
     		'enableCsrfValidation' => false
-    	]
+    	],
+    	'collection' => 'luya\components\Collection'
     ],
     'bootstrap' => [
         'luya\components\Bootstrap'
