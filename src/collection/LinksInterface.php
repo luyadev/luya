@@ -7,7 +7,7 @@ interface LinksInterface
     
     public function setActiveLink($activeLink);
     
-    public function getAll();
+    public function setLink($links, $args);
     
-    public function setAll($links);
+    public function getAll();
 }

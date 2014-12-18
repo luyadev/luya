@@ -37,9 +37,12 @@ class UrlRule extends \luya\base\UrlRule
         $langObject = new \luya\collection\Lang();
         $langObject->evalRequest($request);
         
-        Yii::$app->get('collection')->setLang($langObject);
+        Yii::$app->get('collection')->lang = $langObject;
         
-        //\luya\collection\Factory::instance('\luya\collection\Request')->setPathInfo($request->getPathInfo());
+        // MODULE ROUTING
+        // NEW: starte module routing from previously cutted route (above)
+        // @todo make a config entry do disabled "direct module booting, except of the admin module" (?idea)
+        $parts = explode("/", $request->getPathInfo());
         
         // does the module exists in the list
         if (isset($parts[0]) && array_key_exists($parts[0], Yii::$app->modules)) {
@@ -47,6 +50,7 @@ class UrlRule extends \luya\base\UrlRule
         } else {
             $route = Yii::$app->defaultRoute;
         }
+        
         $module = Yii::$app->getModule($route);
         // class namespacing
         $class = $module->getModuleNamespace() . '\components\UrlRule'; // @todo: replace with \yii::$app->params['modules']
@@ -61,6 +65,8 @@ class UrlRule extends \luya\base\UrlRule
         } else {
             // we do not have a loading class
             // the module does not have a UrlRule component
+            // we starte loading the default include <module>/default/index
+            return [$route . '/default/index', ['path' => $request->getPathInfo()]];
         }
         // nothing happend here
         return false;

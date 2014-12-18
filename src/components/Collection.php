@@ -1,15 +1,23 @@
 <?php
 namespace luya\components;
 
+/**
+ * dynamic implemention of __set and __get but what does Component already?
+ * @author nadar
+ *
+ */
 class Collection extends \yii\base\Component
 {
     /* page */
     
     private $page;
     
-    public function setPage(\luya\collection\CollectionAbstract $page)
+    public function setPage(\luya\collection\Page $page)
     {
         //$page->trigger($page::EVENT_SET_PAGE);
+        if (!empty($this->page)) {
+            $page->setPrevObject($this->page);
+        }
         $this->page = $page;
     }
     

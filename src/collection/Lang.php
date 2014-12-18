@@ -1,7 +1,7 @@
 <?php
 namespace luya\collection;
 
-class Lang extends \luya\collection\CollectionAbstract implements \luya\collection\LangInterface
+class Lang extends \luya\base\Collection implements \luya\collection\LangInterface
 {
     private $name;
     
@@ -37,6 +37,8 @@ class Lang extends \luya\collection\CollectionAbstract implements \luya\collecti
             return true;
         }
         
-        throw new \Exception("we have no language here... load default .. from where?");
+        // @TODO load default values, from where?
+        $this->setName('de');
+        $this->setShortCode('de');
     }
 }
