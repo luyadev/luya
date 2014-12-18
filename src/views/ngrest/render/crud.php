@@ -40,7 +40,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>Controller', functi
 		<thead>
             <tr class="Crud-row Crud-row--header">
             <? foreach($crud->list as $item): ?>
-                <th class="Curd-cell"><?= $item['alias']; ?></th>
+                <th class="Crud-cell"><?= $item['alias']; ?></th>
                 <? endforeach; ?>
                 <th class="Crud-cell Crud-cell--center">Actions</th>
             </tr>
