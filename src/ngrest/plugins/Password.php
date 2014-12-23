@@ -17,6 +17,7 @@ class Password extends PluginAbstract
         $elmn = $doc->createElement("input");
         $elmn->setAttribute("type", "password");
         $elmn->setAttribute("name", $this->name);
+        $elmn->setAttribute("placeholder", $this->alias);
         $elmn->setAttribute("id", $this->id);
         $elmn->setIdAttribute("id", true);
         $elmn->setAttribute("ng-model", $this->config['ngModel']);
@@ -29,6 +30,7 @@ class Password extends PluginAbstract
         $elmn = $doc->createElement("input");
         $elmn->setAttribute("type", "password");
         $elmn->setAttribute("name", $this->name);
+        $elmn->setAttribute("placeholder", $this->alias);
         $elmn->setAttribute("id", $this->id);
         $elmn->setIdAttribute("id", true);
         $elmn->setAttribute("ng-model", $this->config['ngModel']);

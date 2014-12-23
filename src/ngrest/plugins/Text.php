@@ -16,6 +16,7 @@ class Text extends PluginAbstract
     {
         $elmn = $doc->createElement("input");
         $elmn->setAttribute("type", "text");
+        $elmn->setAttribute("placeholder", $this->alias);
         $elmn->setAttribute("name", $this->name);
         $elmn->setAttribute("id", $this->id);
         $elmn->setIdAttribute("id", true);
@@ -28,6 +29,7 @@ class Text extends PluginAbstract
     {
         $elmn = $doc->createElement("input");
         $elmn->setAttribute("type", "text");
+        $elmn->setAttribute("placeholder", $this->alias);
         $elmn->setAttribute("name", $this->name);
         $elmn->setAttribute("id", $this->id);
         $elmn->setIdAttribute("id", true);

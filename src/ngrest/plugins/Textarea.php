@@ -25,6 +25,7 @@ class Textarea extends PluginAbstract
     {
         $elmn = $doc->createElement("textarea");
         $elmn->setAttribute("name", $this->name);
+        $elmn->setAttribute("placeholder", $this->alias);
         $elmn->setAttribute("rows", $this->rows);
         $elmn->setAttribute("cols", $this->cols);
         $elmn->setAttribute("id", $this->id);
@@ -38,6 +39,7 @@ class Textarea extends PluginAbstract
     {
         $elmn = $doc->createElement("textarea");
         $elmn->setAttribute("name", $this->name);
+        $elmn->setAttribute("placeholder", $this->alias);
         $elmn->setAttribute("rows", $this->rows);
         $elmn->setAttribute("cols", $this->cols);
         $elmn->setAttribute("id", $this->id);

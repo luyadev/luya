@@ -9,6 +9,8 @@ abstract class PluginAbstract
     
     protected $name = null;
     
+    protected $alias = null;
+    
     protected $ngModel = null;
     
     public function setConfig($config)
@@ -16,6 +18,7 @@ abstract class PluginAbstract
         $this->id = $config['id'];
         $this->name = $config['name'];
         $this->ngModel = $config['ngModel'];
+        $this->alias = $config['alias'];
         $this->config = $config;
     }
     
