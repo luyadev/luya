@@ -12,70 +12,97 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>Controller', functi
     $scope.config.ngrestConfigHash = '<?= $config->getNgRestConfigHash(); ?>';
 });
 </script>
-<div ng-controller="<?=$config->getNgRestConfigHash(); ?>Controller" ng-init="init()" class="Crud">
-   <div class="Crud-toolbar">
+<div id="js-crud">
+    <div ng-controller="<?=$config->getNgRestConfigHash(); ?>Controller" ng-init="init()" class="Crud">
+        <div class="Crud-more Crud-more--add" ng-show="toggler.create" style="height:auto;">
 
-        <button class="Crud-button Crud-button--add" type="button" ng-click="toggleCreate()">
-            <span class="Crud-icon Crud-icon--success fa fa-plus"></span>
-        </button>
-
-    </div>
+            <div class="Crud-overlay">
+                <span class="Crud-overlaySpinner">
+                    <i class="Crud-overlayIcon fa fa-check"></i>
+                </span>
+            </div>
     
-    	<crud-create>
-    	    <form ng-submit="submitCreate()" name="createForm">
-        		<table class="table table-bordered">
-        		<? foreach($crud->create as $k => $item): ?>
-        		<tr>
-        		    <td><?= $item['alias'] ?> </td>
-        		    <td><?= $crud->createElement($item, $crud::TYPE_CREATE); ?></td>
-        		</tr>
-        		<? endforeach; ?>
-        		</table>
-        		<button type="submit" class="btn btn-default" ng-disabled="createForm.$invalid">Speichern</button>
-    		</form>
-    	</crud-create>
+            <form class="Crud-form" ng-submit="submitCreate()" name="createForm">
     
-    
-    	<table class="Crud-table">
-		<thead>
-            <tr class="Crud-row Crud-row--header">
-            <? foreach($crud->list as $item): ?>
-                <th class="Crud-cell"><?= $item['alias']; ?></th>
+                <? foreach($crud->create as $k => $item): ?>
+                <div class="Crud-formField">
+                    <?= $crud->createElement($item, $crud::TYPE_CREATE); ?>
+                </div>
                 <? endforeach; ?>
-                <th class="Crud-cell Crud-cell--center">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
     
-            <tr class="Crud-row" ng-repeat="item in data.list | filter:search">
+                <div class="Crud-formControls">
+    
+                    <button class="Crud-button Crud-button--save" ng-disabled="createForm.$invalid" type="submit"> 
+                        <span class="Crud-icon Crud-icon--success fa fa-floppy-o"></span>
+                    </button>
+    
+                </div>
+            </form>
+
+        </div>
+    
+       <div class="Crud-toolbar">
+    
+            <button class="Crud-button Crud-button--add" type="button" ng-click="toggleCreate()">
+                <span class="Crud-icon Crud-icon--success fa fa-plus"></span>
+            </button>
+    
+        </div>
+        
+        	<table class="Crud-table">
+    		<thead>
+                <tr class="Crud-row Crud-row--header">
                 <? foreach($crud->list as $item): ?>
-                <td class="Crud-cell"><?= $crud->createElement($item, $crud::TYPE_LIST); ?></td>
-                <? endforeach; ?>
-                <td class="Crud-cell Crud-cell--center Crud-cell--noWrap">
-                    <button type="button" ng-click="toggleUpdate(item.<?= $config->getRestPrimaryKey(); ?>)" class="btn btn-primary">Bearbeiten</button>
-                    <? foreach($crud->getStraps() as $item): ?>
-                    <button type="button" ng-click="getStrap('<?= $item['strapHash']; ?>', item.<?= $config->getRestPrimaryKey();?>)"><?=$item['alias']; ?></button>
+                    <th class="Crud-cell"><?= $item['alias']; ?></th>
                     <? endforeach; ?>
-                </td>
-            </tr>
+                    <th class="Crud-cell Crud-cell--center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
         
-        </tbody>
-        </table>
-        
-        <crud-update>
-            <form ng-submit="submitUpdate()" name="updateForm">
-        	<table class="table table-bordered">
-        	<? foreach($crud->update as $k => $item): ?>
-    		<tr>
-    		    <td><?= $item['alias'] ?></td>
-    		    <td><?= $crud->createElement($item, $crud::TYPE_UPDATE); ?></td>
-    		</tr>
-    		<? endforeach; ?>
-        	</table>
-        	<button type="submit" class="btn btn-default" ng-disabled="updateForm.$invalid">Speichern</button>
-        	</form>
-        </crud-update>
-        
-        <crud-strap></crud-strap>
-    <button ng-click="debug()">Debug (console.log)</button>
+                <tr class="Crud-row" ng-repeat="item in data.list | filter:search">
+                    <? foreach($crud->list as $item): ?>
+                    <td class="Crud-cell"><?= $crud->createElement($item, $crud::TYPE_LIST); ?></td>
+                    <? endforeach; ?>
+                    <td class="Crud-cell Crud-cell--center Crud-cell--noWrap">
+                        <button type="button" ng-click="toggleUpdate(item.<?= $config->getRestPrimaryKey(); ?>, $event)" class="btn btn-primary">Bearbeiten</button>
+                        <? foreach($crud->getStraps() as $item): ?>
+                        <button type="button" ng-click="getStrap('<?= $item['strapHash']; ?>', item.<?= $config->getRestPrimaryKey();?>)"><?=$item['alias']; ?></button>
+                        <? endforeach; ?>
+                    </td>
+                </tr>
+                
+                <!--  EDIT -->
+                <tr class="Crud-more Crud-more--edit">
+                    <td colspan="100">
+                        <div class="Crud-editWrapper" ng-show="toggler.update" style="height:auto;">
+                            <div class="Crud-overlay">
+                                <span class="Crud-overlaySpinner">
+                                    <i class="Crud-overlayIcon fa fa-check"></i>
+                                </span>
+                            </div>
+
+                            <form ng-submit="submitUpdate()" name="updateForm">
+                        	<table class="table table-bordered">
+                        	<? foreach($crud->update as $k => $item): ?>
+                    		<tr>
+                    		    <td><?= $item['alias'] ?></td>
+                    		    <td><?= $crud->createElement($item, $crud::TYPE_UPDATE); ?></td>
+                    		</tr>
+                    		<? endforeach; ?>
+                        	</table>
+                        	<button type="submit" class="btn btn-default" ng-disabled="updateForm.$invalid">Speichern</button>
+                        	</form>
+                        </div>
+                        <crud-strap></crud-strap>
+                    </td>
+                </tr>
+                <!-- /EDIT -->
+            
+            </tbody>
+            </table>
+            
+            
+        <button ng-click="debug()">Debug (console.log)</button>
+    </div>
 </div>
