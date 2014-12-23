@@ -67,13 +67,13 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>Controller', functi
                     <td class="Crud-cell Crud-cell--center Crud-cell--noWrap">
                         <button type="button" ng-click="toggleUpdate(item.<?= $config->getRestPrimaryKey(); ?>, $event)" class="btn btn-primary">Bearbeiten</button>
                         <? foreach($crud->getStraps() as $item): ?>
-                        <button type="button" ng-click="getStrap('<?= $item['strapHash']; ?>', item.<?= $config->getRestPrimaryKey();?>)"><?=$item['alias']; ?></button>
+                        <button type="button" ng-click="getStrap('<?= $item['strapHash']; ?>', item.<?= $config->getRestPrimaryKey();?>, $event)"><?=$item['alias']; ?></button>
                         <? endforeach; ?>
                     </td>
                 </tr>
                 
                 <!--  EDIT -->
-                <tr class="Crud-more Crud-more--edit">
+                <tr class="Crud-more">
                     <td colspan="100">
                         <div class="Crud-editWrapper" ng-show="toggler.update" style="height:auto;">
                             <div class="Crud-overlay">
@@ -94,7 +94,9 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>Controller', functi
                         	<button type="submit" class="btn btn-default" ng-disabled="updateForm.$invalid">Speichern</button>
                         	</form>
                         </div>
-                        <crud-strap></crud-strap>
+                        <div class="Crud-editWrapper" ng-show="toggler.strap" style="height:auto;">
+                            <div ng-bind-html="data.strap.content"></div>
+                        </div>
                     </td>
                 </tr>
                 <!-- /EDIT -->
