@@ -66,7 +66,7 @@ class UrlRule extends \luya\base\UrlRule
             // we do not have a loading class
             // the module does not have a UrlRule component
             // we starte loading the default include <module>/default/index
-            return [$route . '/default/index', ['path' => $request->getPathInfo()]];
+            //return [$route . '/default/index', ['path' => $request->getPathInfo()]];
         }
         // nothing happend here
         return false;
