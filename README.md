@@ -38,14 +38,16 @@ composer install
 4.
 ---
 
-Directory
-.
-├── application
-│   ├── assets
-│   └── index.php
-├── composer.json
-├── config
-│   └── local.php
+Directory  
+```
+.  
+├── application  
+│   ├── assets  
+│   └── index.php  
+├── composer.json  
+├── config  
+│   └── local.php  
+```
 
 Installtion on MAC OSX with MAMP
 ---
