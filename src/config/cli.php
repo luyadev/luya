@@ -1,7 +1,7 @@
 <?php
 
 $config = [
-    'controllerNamespace' => 'luya\commands'
+    'controllerNamespace' => 'luya\commands',
 ];
 
 return $config;

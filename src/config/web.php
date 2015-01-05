@@ -5,17 +5,17 @@ $config = [
         'urlManager' => 'luya\components\UrlManager',
         'view' => ['class' => 'luya\components\View'],
         'authManager' => [
-            'class' => 'yii\rbaac\PhpManager'
+            'class' => 'yii\rbaac\PhpManager',
         ],
-    	'request' => [
-    		'cookieValidationKey' => 'cookeivalidationkey',
-    		'enableCsrfValidation' => false
-    	],
-    	'collection' => 'luya\components\Collection'
+        'request' => [
+            'cookieValidationKey' => 'cookeivalidationkey',
+            'enableCsrfValidation' => false,
+        ],
+        'collection' => 'luya\components\Collection',
     ],
     'bootstrap' => [
-        'luya\components\Bootstrap'
-    ]
+        'luya\components\Bootstrap',
+    ],
 ];
 
 return $config;

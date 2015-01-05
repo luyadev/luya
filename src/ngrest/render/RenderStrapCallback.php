@@ -1,8 +1,8 @@
 <?php
 namespace luya\ngrest\render;
 
-use \luya\ngrest\RenderAbstract;
-use \luya\ngrest\RenderInterface;
+use luya\ngrest\RenderAbstract;
+use luya\ngrest\RenderInterface;
 
 /**
  * @todo complet rewrite of this class - what is the best practive to acces data in the view? define all functiosn sindie here? re-create methods from config object?
@@ -16,24 +16,24 @@ class RenderStrapCallback extends RenderAbstract implements RenderInterface
     {
         $straps = $this->config->getKey('strap');
         $obj = $straps[$_GET['strapHash']]['object'];
-        
-        $function = "callback" . ucfirst($_GET['strapCallback']);
-        
+
+        $function = "callback".ucfirst($_GET['strapCallback']);
+
         $args = $_POST; // SANITIZE THIS INPUT ? yii?
-        
+
         $reflection = new \ReflectionMethod($obj, $function);
-        
+
         $methodArgs = [];
         foreach ($reflection->getParameters() as $param) {
             if (!array_key_exists($param->name, $args)) {
                 throw new \Exception("the provided argument does not exists in the method args list");
             }
-            
+
             $methodArgs[] = $args[$param->name];
         }
-        
+
         $response = call_user_func_array(array($obj, $function), $methodArgs);
-        
+
         return $response;
     }
 }

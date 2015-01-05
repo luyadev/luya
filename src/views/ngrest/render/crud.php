@@ -21,57 +21,57 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>Controller', functi
                     <i class="Crud-overlayIcon fa fa-check"></i>
                 </span>
             </div>
-    
+
             <form class="Crud-form" ng-submit="submitCreate()" name="createForm">
-    
-                <? foreach($crud->create as $k => $item): ?>
+
+                <?php foreach ($crud->create as $k => $item): ?>
                 <div class="Crud-formField">
                     <?= $crud->createElement($item, $crud::TYPE_CREATE); ?>
                 </div>
-                <? endforeach; ?>
-    
+                <?php endforeach; ?>
+
                 <div class="Crud-formControls">
-    
-                    <button class="Crud-button Crud-button--save" ng-disabled="createForm.$invalid" type="submit"> 
+
+                    <button class="Crud-button Crud-button--save" ng-disabled="createForm.$invalid" type="submit">
                         <span class="Crud-icon Crud-icon--success fa fa-floppy-o"></span>
                     </button>
-    
+
                 </div>
             </form>
 
         </div>
-    
+
        <div class="Crud-toolbar">
-    
+
             <button class="Crud-button Crud-button--add" type="button" ng-click="toggleCreate()">
                 <span class="Crud-icon Crud-icon--success fa fa-plus"></span>
             </button>
-    
+
         </div>
-        
+
         	<table class="Crud-table">
     		<thead>
                 <tr class="Crud-row Crud-row--header">
-                <? foreach($crud->list as $item): ?>
+                <?php foreach ($crud->list as $item): ?>
                     <th class="Crud-cell"><?= $item['alias']; ?></th>
-                    <? endforeach; ?>
+                    <?php endforeach; ?>
                     <th class="Crud-cell Crud-cell--center">Actions</th>
                 </tr>
             </thead>
             <tbody>
-        
+
                 <tr class="Crud-row" ng-repeat="item in data.list | filter:search">
-                    <? foreach($crud->list as $item): ?>
+                    <?php foreach ($crud->list as $item): ?>
                     <td class="Crud-cell"><?= $crud->createElement($item, $crud::TYPE_LIST); ?></td>
-                    <? endforeach; ?>
+                    <?php endforeach; ?>
                     <td class="Crud-cell Crud-cell--center Crud-cell--noWrap">
                         <button type="button" ng-click="toggleUpdate(item.<?= $config->getRestPrimaryKey(); ?>, $event)" class="btn btn-primary">Bearbeiten</button>
-                        <? foreach($crud->getStraps() as $item): ?>
+                        <?php foreach ($crud->getStraps() as $item): ?>
                         <button type="button" ng-click="getStrap('<?= $item['strapHash']; ?>', item.<?= $config->getRestPrimaryKey();?>, $event)"><?=$item['alias']; ?></button>
-                        <? endforeach; ?>
+                        <?php endforeach; ?>
                     </td>
                 </tr>
-                
+
                 <!--  EDIT -->
                 <tr class="Crud-more">
                     <td colspan="100">
@@ -84,12 +84,12 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>Controller', functi
 
                             <form ng-submit="submitUpdate()" name="updateForm">
                         	<table class="table table-bordered">
-                        	<? foreach($crud->update as $k => $item): ?>
+                        	<?php foreach ($crud->update as $k => $item): ?>
                     		<tr>
                     		    <td><?= $item['alias'] ?></td>
                     		    <td><?= $crud->createElement($item, $crud::TYPE_UPDATE); ?></td>
                     		</tr>
-                    		<? endforeach; ?>
+                    		<?php endforeach; ?>
                         	</table>
                         	<button type="submit" class="btn btn-default" ng-disabled="updateForm.$invalid">Speichern</button>
                         	</form>
@@ -100,11 +100,11 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>Controller', functi
                     </td>
                 </tr>
                 <!-- /EDIT -->
-            
+
             </tbody>
             </table>
-            
-            
+
+
         <button ng-click="debug()">Debug (console.log)</button>
     </div>
 </div>

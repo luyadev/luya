@@ -1,7 +1,7 @@
 <?php
 namespace luya\ngrest\plugins;
 
-use \luya\ngrest\PluginAbstract;
+use luya\ngrest\PluginAbstract;
 
 class Text extends PluginAbstract
 {
@@ -9,9 +9,10 @@ class Text extends PluginAbstract
     {
         $elmn = $doc->createElement("span", "{{item.".$this->config['name']."}}");
         $doc->appendChild($elmn);
+
         return $doc;
     }
-    
+
     public function renderCreate($doc)
     {
         $elmn = $doc->createElement("input");
@@ -22,6 +23,7 @@ class Text extends PluginAbstract
         $elmn->setIdAttribute("id", true);
         $elmn->setAttribute("ng-model", $this->config['ngModel']);
         $doc->appendChild($elmn);
+
         return $doc;
     }
 
@@ -35,6 +37,7 @@ class Text extends PluginAbstract
         $elmn->setIdAttribute("id", true);
         $elmn->setAttribute("ng-model", $this->config['ngModel']);
         $doc->appendChild($elmn);
+
         return $doc;
     }
 }

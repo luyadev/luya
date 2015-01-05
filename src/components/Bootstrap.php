@@ -2,42 +2,41 @@
 namespace luya\components;
 
 use yii;
-use yii\base\Application;
 use yii\helpers\ArrayHelper;
 use luya\Luya;
 
 class Bootstrap implements \yii\base\BootstrapInterface
 {
     private $_modules = [];
-    
+
     private $_apis = [];
-    
+
     public function bootstrap($app)
     {
         $this->expand($app->getModules());
         $this->beforeRun();
         $this->run();
     }
-    
+
     private function expand($modules)
     {
-        foreach($modules as $id => $class) {
+        foreach ($modules as $id => $class) {
             // avoid exception if the module defintions looks like this ['cms' => ['class' => 'path/to/class']]
             if (is_array($class)) {
                 $class = $class['class'];
             }
-            
+
             $this->_modules[$id] = [
                 'id' => $id,
                 'class' => $class,
-                'reflection' => new \ReflectionClass($class)
+                'reflection' => new \ReflectionClass($class),
             ];
         }
     }
-    
+
     private function beforeRun()
     {
-        foreach($this->_modules as $item) {
+        foreach ($this->_modules as $item) {
             // collect static apis property
             if ($item['reflection']->hasProperty('apis')) {
                 $prop = $item['reflection']->getProperty('apis')->getValue();
@@ -45,7 +44,7 @@ class Bootstrap implements \yii\base\BootstrapInterface
                     $this->_apis[] = [
                         'moduleId' => $item['id'],
                         'class' => $class,
-                        'alias' => $alias
+                        'alias' => $alias,
                     ];
                 }
             }
@@ -55,7 +54,7 @@ class Bootstrap implements \yii\base\BootstrapInterface
         // set params before boot
         luya::setParams('apis', $this->_apis);
     }
-    
+
     private function run()
     {
         $adminAssets = [];

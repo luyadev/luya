@@ -1,7 +1,7 @@
 <?php
 namespace luya\ngrest\plugins;
 
-use \luya\ngrest\PluginAbstract;
+use luya\ngrest\PluginAbstract;
 
 class Select extends PluginAbstract
 {
@@ -12,9 +12,10 @@ class Select extends PluginAbstract
         $elmn->setAttribute("field-value", "item.".$this->config['name']);
         $elmn->setIdAttribute("id", true);
         $doc->appendChild($elmn);
+
         return $doc;
     }
-    
+
     public function renderCreate($doc)
     {
         $elmn = $doc->createElement("select", "");
@@ -23,6 +24,7 @@ class Select extends PluginAbstract
         $elmn->setIdAttribute("id", true);
         $elmn->setAttribute("ng-model", $this->config['ngModel']);
         $doc->appendChild($elmn);
+
         return $doc;
     }
 
@@ -34,6 +36,7 @@ class Select extends PluginAbstract
         $elmn->setIdAttribute("id", true);
         $elmn->setAttribute("ng-model", $this->config['ngModel']);
         $doc->appendChild($elmn);
+
         return $doc;
     }
 }
