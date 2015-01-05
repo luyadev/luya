@@ -1,7 +1,7 @@
 <script>
 strapCallbackUrl = '<?= $strapCallbackUrl;?>';
 ngrestConfigHash = '<?= $config->getNgRestConfigHash(); ?>';
-zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>Controller', function($scope, $controller) {
+zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope, $controller) {
     /* extend class */
     $.extend(this, $controller('CrudController', { $scope : $scope }));
     /* local controller config */
@@ -13,7 +13,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>Controller', functi
 });
 </script>
 <div id="js-crud">
-    <div ng-controller="<?=$config->getNgRestConfigHash(); ?>Controller" ng-init="init()" class="Crud">
+    <div ng-controller="<?=$config->getNgRestConfigHash(); ?>" ng-init="init()" class="Crud">
         <div class="Crud-more Crud-more--add" ng-show="toggler.create" style="height:auto;">
 
             <div class="Crud-overlay">
