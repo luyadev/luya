@@ -440,7 +440,16 @@ ADMIN API CONTROLLERS MAPPING
 All the rest api controllers are located in "<module_name>/apis/". For example the category api inside a news module would be placed into: "newsadmin/apis/CategoryController.php".
 To let the module know where we have put the Controller we make an entry in the modules apis() array. All api mappings must be prefixed with "api-{module}-", otherwise we can not have a unique routing.
 Admin Api pluralizining is disabled. The location to open this controlle would be:
+```
 http://domain.com/admin/api-news-category
+```
+
+It means all the APIs needs to be called with <SERVER>admin/api-<module>-<modelname>. 
+
+***Why are all apis access via the admin module but are "physically" located in theyr modules?***
+
+Cause all apis nots an access-token, otherwise we can not guarantee all the needed security. So all the apis does require the admin module (which alos provides the functionaly abstraction classes). Another point of decision to have all apis accessed via the admin module url is to have an unique access point otherwise you would have a mess of urls.
+
 
 $controllerMap inside the Module.php:
 ```php
