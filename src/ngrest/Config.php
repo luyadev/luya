@@ -33,7 +33,7 @@ class Config implements ConfigInterface
     {
         $this->restUrl = $this->restUrlPrefix.$restUrl;
         $this->restPrimaryKey = $restPrimaryKey;
-        
+
         $this->list->field($restPrimaryKey, "ID")->text();
     }
 
