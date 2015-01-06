@@ -33,6 +33,8 @@ class Config implements ConfigInterface
     {
         $this->restUrl = $this->restUrlPrefix.$restUrl;
         $this->restPrimaryKey = $restPrimaryKey;
+        
+        $this->list->field($restPrimaryKey, "ID")->text();
     }
 
     public function __set($key, $value)
@@ -117,7 +119,7 @@ class Config implements ConfigInterface
             return $this->config[$key];
         }
 
-        return false;
+        return [];
     }
 
     public function getRestUrl()
