@@ -1,7 +1,6 @@
 <?php
 namespace luya\ngrest;
 
-use luya\ngrest\ConfigInterface;
 use yii\helpers\ArrayHelper;
 
 /**
