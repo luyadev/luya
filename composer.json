@@ -1,10 +1,25 @@
 {
 	"name" : "zephir/luya",
-	"description" : "Zephir Luya Library, extended from Yii2",
+	"type" : "library",
+	"description" : "Zephir Luya Library",
+	"keywords" : ["php", "yii2"],
+	"homepage" : "https://github.com/zephir/luya",
+	"authors" : [
+		{
+			"name" : "nadar",
+			"homepage" : "https://github.com/nadar",
+			"role" : "Creator"
+		}
+	],
 	"require" : {
-		"php": ">=5.4.0"
+		"php": ">=5.4.0",
+		"yiisoft/yii2": "2.0.*"
 	},
-	"autoload" : {
+	"require-dev" : {
+		"phpunit/phpunit" : "@stable",
+		"fabpot/php-cs-fixer" : "@stable"
+	},
+	"autoload-dev" : {
 		"psr-4" : {
 			"luya\\" : "src/"
 		}
