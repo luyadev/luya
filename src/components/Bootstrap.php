@@ -11,11 +11,13 @@ class Bootstrap implements \yii\base\BootstrapInterface
 
     private $_apis = [];
 
+    private $_urlRules = [];
+
     public function bootstrap($app)
     {
         $this->expand($app->getModules());
         $this->beforeRun();
-        $this->run();
+        $this->run($app);
     }
 
     private function expand($modules)
@@ -26,7 +28,7 @@ class Bootstrap implements \yii\base\BootstrapInterface
                 $class = $class['class'];
             }
 
-            $this->_modules[$id] = [
+            $this->_modules[] = [
                 'id' => $id,
                 'class' => $class,
                 'reflection' => new \ReflectionClass($class),
@@ -34,13 +36,28 @@ class Bootstrap implements \yii\base\BootstrapInterface
         }
     }
 
+    private function getReflectionPropertyValue($reflection, $property)
+    {
+        if ($reflection->hasProperty($property)) {
+            return $reflection->getProperty($property)->getValue();
+        }
+
+        return false;
+    }
+
     private function beforeRun()
     {
-        foreach ($this->_modules as $item) {
-            // collect static apis property
-            if ($item['reflection']->hasProperty('apis')) {
-                $prop = $item['reflection']->getProperty('apis')->getValue();
-                foreach ($prop as $alias => $class) {
+        foreach ($this->_modules as $key => $item) {
+            // get static urlRules property
+            if (($urlRules = $this->getReflectionPropertyValue($item['reflection'], 'urlRules')) !== false) {
+                foreach ($urlRules as $k => $v) {
+                    $this->_urlRules[] = $v;
+                }
+            }
+
+            // get static apis property
+            if (($apis = $this->getReflectionPropertyValue($item['reflection'], 'apis')) !== false) {
+                foreach ($apis as $alias => $class) {
                     $this->_apis[] = [
                         'moduleId' => $item['id'],
                         'class' => $class,
@@ -48,20 +65,24 @@ class Bootstrap implements \yii\base\BootstrapInterface
                     ];
                 }
             }
-            // set admin property
-            $this->_modules[$item['id']]['isAdmin'] = ($item['reflection']->hasProperty('isAdmin')) ? true : false;
+
+            // get and set admin property
+            $this->_modules[$key]['isAdmin'] = ($item['reflection']->hasProperty('isAdmin')) ? true : false;
         }
+        // set urlRoultes param
+        luya::setParams('urlRules', $this->_urlRules);
         // set params before boot
         luya::setParams('apis', $this->_apis);
     }
 
-    private function run()
+    private function run($app)
     {
         $adminAssets = [];
         $adminMenus = [];
         // start the module now
-        foreach ($this->_modules as $id => $item) {
+        foreach ($this->_modules as $item) {
             $module = yii::$app->getModule($item['id']);
+            $id = $item['id'];
             $path = $module->getBasePath();
             Yii::setAlias("@$id", $path);
             if ($item['isAdmin']) {
@@ -69,6 +90,9 @@ class Bootstrap implements \yii\base\BootstrapInterface
                 $adminMenus = ArrayHelper::merge($module->getMenu(), $adminMenus);
             }
         }
+
+        $app->getUrlManager()->addRules($this->_urlRules, false);
+
         // set the parameters to yii via luya::setParams
         luya::setParams('adminAssets', $adminAssets);
         luya::setParams('adminMenus', $adminMenus);
