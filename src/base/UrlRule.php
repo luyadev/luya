@@ -5,7 +5,7 @@ abstract class UrlRule extends \yii\web\UrlRule
 {
     public function init()
     {
-        // we do not have automatic initialising of patterns
+        // dot not exec parent initializers
     }
 
     public function createUrl($manager, $route, $params)
