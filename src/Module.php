@@ -11,4 +11,8 @@ class Module extends \luya\base\Module
      * @var string
      */
     public $urlPrefixComposition = '<langId:[a-z]{2}>';
+
+    public static $urlRules = [
+        ['class' => 'luya\components\UrlRule'],
+    ];
 }
