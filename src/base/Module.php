@@ -38,6 +38,14 @@ class Module extends \yii\base\Module
     public static $apis = [];
 
     /**
+     * Contains all urlRules for this module. Can't provided in key value pairing for pattern<=>route. must be array containing
+     * class name or array with pattern, route informations.
+     *
+     * @var array
+     */
+    public static $urlRules = [];
+
+    /**
      *
      * @throws Exception
      */
@@ -50,13 +58,5 @@ class Module extends \yii\base\Module
                 throw new Exception(sprintf('The required component "%s" is not registered in the configuration file', $component));
             }
         }
-    }
-
-    /**
-     * @todo [verify, 3.12.2014] can be removed, cause changed to alias autoloading in bootstrap
-     */
-    public function getModuleNamespace()
-    {
-        return str_replace("\Module", "", get_class($this));
     }
 }
