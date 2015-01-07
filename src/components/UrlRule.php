@@ -39,6 +39,23 @@ class UrlRule extends \luya\base\UrlRule
 
         Yii::$app->get('collection')->lang = $langObject;
 
+        /* new get default url route @ 07.01.2015 */
+
+        $parts = explode("/", $request->getPathInfo());
+
+        if (!empty($parts) && !array_key_exists($parts[0], yii::$app->modules)) {
+            $class = yii::$app->defaultRoute.'\components\UrlRule';
+            $manager->addRules([['class' => $class]], false);
+
+            return $manager->parseRequest($request);
+        }
+
+        return false;
+
+        /* STOP EXEC HERE ! */
+
+        /*
+
         // MODULE ROUTING
         // NEW: starte module routing from previously cutted route (above)
         // @todo make a config entry do disabled "direct module booting, except of the admin module" (?idea)
@@ -70,5 +87,7 @@ class UrlRule extends \luya\base\UrlRule
         }
         // nothing happend here
         return false;
+
+        */
     }
 }
