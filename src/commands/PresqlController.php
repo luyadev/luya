@@ -17,6 +17,8 @@ class PresqlController extends \yii\console\controllers\MigrateController
 
     public $moduleMigrationDirectories = array();
 
+    /* public $migrationTable = 'yii_migration'; @TODO rename migration table? */
+    
     public function beforeAction($action)
     {
         if (parent::beforeAction($action)) {
