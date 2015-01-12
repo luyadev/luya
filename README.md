@@ -65,4 +65,4 @@ change the php version to your current active php version. To verify and test th
 ```
 which php
 php -i
-``
+```
