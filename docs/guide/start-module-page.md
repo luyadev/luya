@@ -43,8 +43,8 @@ class News extends \yii\db\ActiveRecord
     public function scenarios()
     {
         return [
-            ['restcreate', $this->rules()],
-            ['restupdate', $this->rules()],
+            'restcreate' => ['name', 'title', 'text'],
+            'restupdate' => ['name', 'title', 'text'],
         ];
     }
 }
@@ -74,7 +74,7 @@ http://yourexample.com/admin/api-news-news
 
 ```php
 <?php
-namespace cmsadmin;
+namespace news;
 
 class Module extends \admin\base\Module
 {

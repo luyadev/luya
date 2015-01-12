@@ -45,6 +45,9 @@ class Bootstrap implements \yii\base\BootstrapInterface
         return false;
     }
 
+    /**
+     * @todo change urlRules bootstraping, see: https://github.com/yiisoft/yii2/blob/master/extensions/gii/Module.php#L85
+     */
     private function beforeRun()
     {
         foreach ($this->_modules as $key => $item) {
