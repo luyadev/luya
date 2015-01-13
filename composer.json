@@ -19,7 +19,7 @@
 		"phpunit/phpunit" : "@stable",
 		"fabpot/php-cs-fixer" : "@stable"
 	},
-	"autoload-dev" : {
+	"autoload" : {
 		"psr-4" : {
 			"luya\\" : "src/"
 		}
