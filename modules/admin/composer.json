@@ -1,0 +1,12 @@
+{
+	"name" : "zephir/luya-module-admin",
+	"description" : "Zephir Luya Admin",
+	"require" : {
+		"php": ">=5.4.0"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"admin\\" : "src/"
+		}
+	}
+}

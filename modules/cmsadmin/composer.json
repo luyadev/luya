@@ -1,0 +1,12 @@
+{
+	"name" : "zephir/luya-module-cmsadmin",
+	"description" : "Zephir Luya Cmsadmin",
+	"require" : {
+		"php": ">=5.4.0"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"cmsadmin\\" : "src/"
+		}
+	}
+}
