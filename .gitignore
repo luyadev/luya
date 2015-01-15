@@ -26,3 +26,5 @@ local.properties
 # TeXlipse plugin
 .texlipse
 
+# PhpStorm
+.idea/
