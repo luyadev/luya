@@ -14,7 +14,7 @@
         <ul class="treeview__list">
             <li class="treeview__item">
                 <a class="treeview__link treeview__link--green" ui-sref="custom.cmsadd">
-                    <span class="fa fa-plus-circle"></span>
+                    <span class="fa fa-fw fa-plus-circle"></span>
                     Neue Seite
                 </a>
             </li>
