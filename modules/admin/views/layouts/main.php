@@ -2,7 +2,7 @@
     use \Yii;
     use \admin\Module as Admin;
     $user = Admin::getAdminUserData();
-    $gravatar = "http://www.gravatar.com/avatar/".md5(strtolower(trim($user->email)))."?d=".urlencode('https://placeimg.com/60/60/animals&rand=' . rand(1, 50))."&s=40";
+    $gravatar = "http://www.gravatar.com/avatar/".md5(strtolower(trim($user->email)))."?d=".urlencode('https://placeimg.com/60/60/animals&rand='.rand(1, 50))."&s=40";
 
     $this->beginPage()
 ?>

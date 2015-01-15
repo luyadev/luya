@@ -8,6 +8,16 @@ zaa.factory('ApiCmsNav', function($resource) {
 	});
 });
 
+zaa.factory('ApiCmsNavItem', function($resource) {
+	return $resource('admin/api-cms-navitem/:id', { id: '@_id' }, {
+		save : {
+			method : 'POST',
+			isArray : false,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+		}
+	});
+});
+
 zaa.factory('ApiCmsNavItemPage', function($resource) {
 	return $resource('admin/api-cms-navitempage/:id', { id : '@_id' }, {
 		save : {

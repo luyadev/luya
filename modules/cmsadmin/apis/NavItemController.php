@@ -105,10 +105,10 @@ class NavItemController extends \admin\base\RestController
 
                 $placeholderVar = $placeholder['var'];
 
-                    $return['__placeholders'][$placeholderKey]['__nav_item_page_block_items'] = $this->getSub($placeholderVar, $navItemPageId, 0);
+                $return['__placeholders'][$placeholderKey]['__nav_item_page_block_items'] = $this->getSub($placeholderVar, $navItemPageId, 0);
             }
         }
-        
+
         return $return;
     }
 

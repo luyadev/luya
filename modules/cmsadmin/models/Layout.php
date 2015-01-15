@@ -22,19 +22,19 @@ class Layout extends \yii\db\ActiveRecord
             'restupdate' => ['name', 'json_config', 'view_file']
         ];
     }
-    
+
     public function getJsonConfig($node = false)
     {
         $json = @json_decode($this->json_config, true);
-        
+
         if (!$node) {
             return $json;
         }
-        
+
         if (isset($json[$node])) {
             return $json[$node];
         }
-        
+
         return [];
     }
 }
