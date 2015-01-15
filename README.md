@@ -1,42 +1,38 @@
-LUYA INSTALLATION
+The Luya Project
 =================
 
-1.
----
-create a new composer.json
+If you want to install luya on your composer, please use the [Luya Kickstarter](https://github.com/zephir/luya-kickstarter). Otherwise you can create a project as descripbed below:
 
+Installation
+--------------
+
+Go into your project folder (could be an github clone) and add a composer.json, if you have not yet installed composer please follow the [Composer Installation Guide](https://getcomposer.org/doc/00-intro.md).
+
+composer.json File:
 ```
 {
     "minimum-stability": "dev",
     "require": {
-        "php": ">=5.4.0",
-        "yiisoft/yii2": "2.0.*",
         "zephir/luya" : "*",
         "zephir/luya-module-cms" : "*",
         "zephir/luya-module-cmsadmin" : "*",
         "zephir/luya-module-admin" : "*"
-    },
-    "config": {
-        "process-timeout": 1800
     }
 }
 ```
-
-2.
+Add the global requirement command for composer asset plugins which are required as described from the Yii2 project.
 
 ```
 composer global require "fxp/composer-asset-plugin:1.0.0-beta4"
 ```
 
-3.
----
+Install the packages defined in your composer.json
 
 ```
 composer install
 ```
 
-4.
----
+Create you application structur.
 
 Directory  
 ```
@@ -48,6 +44,8 @@ Directory
 ├── config  
 │   └── local.php  
 ```
+
+Go to ***http://localhost/PROJECT/application*** - you'r done!
 
 Installtion on MAC OSX with MAMP
 ---
