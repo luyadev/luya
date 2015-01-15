@@ -2,7 +2,7 @@
 	"name" : "zephir/luya-module-admin",
 	"description" : "Zephir Luya Admin",
 	"require" : {
-		"php": ">=5.4.0"
+		"zephir/luya" : "*",
 	},
 	"autoload" : {
 		"psr-4" : {

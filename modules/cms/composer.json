@@ -2,7 +2,8 @@
 	"name" : "zephir/luya-module-cms",
 	"description" : "Zephir Luya Cms",
 	"require" : {
-		"php": ">=5.4.0"
+		"zephir/luya" : "*",
+		"zephir/luya-module-admin" : "*"
 	},
 	"autoload" : {
 		"psr-4" : {
