@@ -1,20 +1,32 @@
 <script type="text/ng-template" id="reverse.html">
-    <a class="Sidebar-Link" ng-click="go(data.id)">{{data.title}}</a>
-    <ul class="Sidebar-GroupTitle">
-        <li class="Sidebar-Item" ng-repeat="data in data.nodes" ng-include="'reverse.html'"><a href="#">NODE</a></li>
+    <a class="treeview__link" role="link" ng-click="go(data.id)">
+        <span class="treeview__icon fa fa-fw fa-file-o"></span>
+        {{data.title}}
+    </a>
+    <ul class="treeview__list" role="menu">
+        <li class="treeview__item" role="menuitem" ng-repeat="data in data.nodes" ng-include="'reverse.html'"></li>
     </ul>
 </script>
-<div class="Container-Item Container-Item--Sidebar">
-<aside class="Sidebar" id="js-sidebar">
-    <section class="Sidebar-Group">
-            <a ui-sref="custom.cmsadd">Neu Hinzufügen</a>
-            <ul ng-controller="TreeController" class="Sidebar-Nav">
-                <li class="Sidebar-Item" ng-repeat="data in tree" ng-include="'reverse.html'"></li>
-            </ul>
-    </section>
-    <div class="Sidebar-CurrentIndicator"></div>
-</aside>
-</div><!--
---><div class="Container-Item Container-Item--Main Container-Item--100 Container-Item--subtractSidebar">
-    <section class="Main" role="main" ui-view></section>
-</div>
+
+<div class="main__item main__item--left">
+    <nav class="treeview" role="navigation">
+
+        <ul class="treeview__list">
+            <li class="treeview__item">
+                <a class="treeview__link treeview__link--green" ui-sref="custom.cmsadd">
+                    <span class="fa fa-fw fa-plus-circle"></span>
+                    Neue Seite
+                </a>
+            </li>
+        </ul>
+
+        <ul class="treeview__list" role="menu" ng-controller="TreeController">
+            <li class="treeview__item" role="menuitem" ng-repeat="data in tree" ng-include="'reverse.html'">
+            </li>
+
+        </ul> <!-- ./treeview__list -->
+
+    </nav>
+</div><!-- ./main__left
+--><div class="main__item main__item--right" ui-view>
+</div> <!-- ./main__right -->

@@ -26,5 +26,10 @@ local.properties
 # TeXlipse plugin
 .texlipse
 
+<<<<<<< HEAD
 /vendor/
 composer.lock
+=======
+# PhpStorm
+.idea/
+>>>>>>> f75187eae13a33e88dbb82b59fc2468bba93a27d
