@@ -14,13 +14,6 @@ class m141203_143059_cms_nav extends Migration
             "sort_index" => Schema::TYPE_INTEGER,
             "is_deleted" => Schema::TYPE_SMALLINT
         ]);
-
-        $this->insert("cms_nav", [
-            "cat_id" => 1,
-            "parent_nav_id" => 0,
-            "sort_index" => 0,
-            "is_deleted" => 0
-        ]);
     }
 
     public function down()

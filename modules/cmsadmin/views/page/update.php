@@ -1,10 +1,19 @@
 <script type="text/ng-template" id="recursion.html">
+    <div style="margin-left:20px; background-color:#F0F0F0; border: 1px solid #999; margin-bottom:10px;">
     <div style="background-color:#999; font-size:18px; font-weight:bold; padding:5px;">{{placeholder.label}}</div>
-    <div ng-repeat="block in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController" data-drag="true" jqyoui-draggable="" data-jqyoui-options="{revert: true, helper : 'clone'}" ng-model="block">
-        
-            <h3 ng-click="toggleEdit()">{{block.name}}</h3>
 
-            <div ng-show="edit" style="background-color:#F0F0F0;">
+    <div style="padding:10px;">
+
+    <div ng-if="placeholder.__nav_item_page_block_items.length == 0">
+        <p><i>There are no blocks yet! drop a block to be the first</i></p>
+    </div>
+
+    <div ng-repeat="block in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController" data-drag="true" jqyoui-draggable="" data-jqyoui-options="{revert: true, helper : 'clone'}" ng-model="block">
+            
+
+            <h3 ng-click="toggleEdit()" style="margin:0px; padding:5px; border:1px solid #999;">{{block.name}}</h3>
+
+            <div ng-show="edit" style="background-color:#FFF; padding:10px; border:1px solid #333;">
                 <div ng-repeat="field in block.keys">
                     <label style="display:block; padding-bottom:5px;"><strong>{{field.label}}</strong>:</label>
                     <input type="text" ng-model="data[field.var]" style="width:350px; padding:7px;" />
@@ -12,15 +21,18 @@
                 <a ng-click="save()" style="background-color:black; color:white;">SAVE</a>
             </div>
 
-            <div ng-repeat="placeholder in block.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'"></div>
-
+            <div ng-repeat="placeholder in block.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" style="margin-top:10px;"></div>
     </div>
 
-    <div style="background-color:#000; color:white; padding:20px; margin:5px;" ng-controller="DropBlockController" ng-model="droppedBlock" data-drop="true" jqyoui-droppable="{onDrop: 'onDrop', multiple : true}">
+    <div style="background-color:#000; color:white; padding:20px; margin:0px; text-align:center;" ng-controller="DropBlockController" ng-model="droppedBlock" data-drop="true" jqyoui-droppable="{onDrop: 'onDrop', multiple : true}">
         Drop blocks here!
     </div>
+
+    </div>    
+
+    </div>
 </script>
-<div ng-repeat="lang in langs" ng-controller="NavItemController" style="display:inline-block; width:47%; margin-top:100px; float:left; margin:10px; padding:10px; background-color:#e1e1e1;">
+<div ng-repeat="lang in langs" ng-controller="NavItemController" style="display:inline-block; width:47%; margin-top:100px; float:left; margin:10px; padding:10px;">
 
     <h1>{{lang.name}}</h1>
     <div ng-switch on="item.nav_item_type" style="padding-left:10px;">

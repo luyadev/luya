@@ -22,17 +22,6 @@ class m141203_143111_cms_nav_item extends Migration
             "title" => Schema::TYPE_STRING,
             "rewrite" => Schema::TYPE_STRING,
         ]);
-
-        $this->insert("cms_nav_item", [
-            "nav_id" => 1,
-            "lang_id" => 1,
-            "nav_item_type" => 1,
-            "nav_item_type_id" => 1,
-            "is_hidden" => 0,
-            "is_inactive" => 0,
-            "title" => "Startseite",
-            "rewrite" => "startseite"
-        ]);
     }
 
     public function down()
