@@ -38,12 +38,12 @@ class NavItemController extends \admin\base\RestController
     /**
      * @todo do not use active record for such querys, cause they are not slim enough, change to simple dbQuery?
      * @param  unknown_type             $navItemPageId
-     * @param  unknown_type             $placeholderSpace
+     * @param  unknown_type             $placeholderVar
      * @return multitype:multitype:NULL unknown
      */
-    public function actionNavItemBlocks($navItemPageId, $placeholderSpace)
+    public function actionNavItemBlocks($navItemPageId, $placeholderVar)
     {
-        $pageBlockItem = \cmsadmin\models\NavItemPageBlockItem::find()->innerJoinWith("block", false, 'LEFT JOIN')->where(['nav_item_page_id' => $navItemPageId, 'placeholder_space' => $placeholderSpace])->all();
+        $pageBlockItem = \cmsadmin\models\NavItemPageBlockItem::find()->innerJoinWith("block", false, 'LEFT JOIN')->where(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar])->all();
 
         $data = [];
 
@@ -103,21 +103,21 @@ class NavItemController extends \admin\base\RestController
 
                 $return['__placeholders'][$placeholderKey] = $placeholder;
 
-                $placeholderSpace = $placeholder['space'];
+                $placeholderVar = $placeholder['var'];
 
-                    $return['__placeholders'][$placeholderKey]['__nav_item_page_block_items'] = $this->getSub($placeholderSpace, $navItemPageId, 0);
+                    $return['__placeholders'][$placeholderKey]['__nav_item_page_block_items'] = $this->getSub($placeholderVar, $navItemPageId, 0);
             }
         }
         
         return $return;
     }
 
-    private function getSub($placeholderSpace, $navItemPageId, $prevId)
+    private function getSub($placeholderVar, $navItemPageId, $prevId)
     {
         $nav_item_page_block_item_data = (new \yii\db\Query())->select([
-                't1_id' => 't1.id', 't1_nav_item_page_id' => 't1.nav_item_page_id', 't1_json_config_values' => 't1.json_config_values', 't1_placeholder_space' => 't1.placeholder_space', 't1_prev_id' => 't1.prev_id',
+                't1_id' => 't1.id', 't1_nav_item_page_id' => 't1.nav_item_page_id', 't1_json_config_values' => 't1.json_config_values', 't1_placeholder_var' => 't1.placeholder_var', 't1_prev_id' => 't1.prev_id',
                 't2_id' => 't2.id', 't2_name' => 't2.name', 't2_json_config' => 't2.json_config',
-        ])->from("cms_nav_item_page_block_item t1")->leftJoin("cms_block t2", "t2.id=t1.block_id")->where(['t1.prev_id' => $prevId, 't1.nav_item_page_id' => $navItemPageId, 't1.placeholder_space' => $placeholderSpace])->all();
+        ])->from("cms_nav_item_page_block_item t1")->leftJoin("cms_block t2", "t2.id=t1.block_id")->where(['t1.prev_id' => $prevId, 't1.nav_item_page_id' => $navItemPageId, 't1.placeholder_var' => $placeholderVar])->all();
 
         $data = [];
 
@@ -131,9 +131,9 @@ class NavItemController extends \admin\base\RestController
                 foreach ($ipbid_value['t2_json_config']['placeholders'] as $pk => $pv) {
                     $pv['nav_item_page_id'] = $navItemPageId;
                     $pv['prev_id'] = $ipbid_value['t1_id'];
-                    $placeholderSpace = $pv['space'];
+                    $placeholderVar = $pv['var'];
 
-                    $pv['__nav_item_page_block_items'] = $this->getSub($placeholderSpace, $navItemPageId, $ipbid_value['t1_id']);
+                    $pv['__nav_item_page_block_items'] = $this->getSub($placeholderVar, $navItemPageId, $ipbid_value['t1_id']);
 
                     $placeholder = $pv;
 

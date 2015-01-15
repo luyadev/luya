@@ -18,7 +18,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['block_id', 'placeholder_space', 'nav_item_page_id', 'prev_id'], 'required'],
+            [['block_id', 'placeholder_var', 'nav_item_page_id', 'prev_id'], 'required'],
             [['json_config_values'], 'safe']
         ];
     }
@@ -26,7 +26,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     public function scenarios()
     {
         return [
-            'restcreate' => ['block_id', 'placeholder_space', 'nav_item_page_id', 'prev_id'],
+            'restcreate' => ['block_id', 'placeholder_var', 'nav_item_page_id', 'prev_id'],
             'restupdate' => ['block_id', 'json_config_values', 'prev_id'],
         ];
     }

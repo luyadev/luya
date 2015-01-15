@@ -14,7 +14,7 @@ class m150108_155009_cms_nav_item_page_block_item extends Migration
         $this->createTable("cms_nav_item_page_block_item", [
             "id" => "pk",
             "block_id" => Schema::TYPE_INTEGER,
-            "placeholder_space" => Schema::TYPE_STRING,
+            "placeholder_var" => Schema::TYPE_STRING, // old "placeholder_space" => Schema::TYPE_STRING,
             "nav_item_page_id" => Schema::TYPE_INTEGER,
             "prev_id" => Schema::TYPE_INTEGER,
             "json_config_values" => Schema::TYPE_TEXT,

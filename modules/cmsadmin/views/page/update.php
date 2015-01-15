@@ -1,13 +1,13 @@
 <script type="text/ng-template" id="recursion.html">
-    <div style="background-color:#999; font-size:18px; font-weight:bold; padding:5px;">{{placeholder.title}}</div>
+    <div style="background-color:#999; font-size:18px; font-weight:bold; padding:5px;">{{placeholder.label}}</div>
     <div ng-repeat="block in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController" data-drag="true" jqyoui-draggable="" data-jqyoui-options="{revert: true, helper : 'clone'}" ng-model="block">
         
             <h3 ng-click="toggleEdit()">{{block.name}}</h3>
 
             <div ng-show="edit" style="background-color:#F0F0F0;">
                 <div ng-repeat="field in block.keys">
-                    <label style="display:block; padding-bottom:5px;"><strong>{{field.name}}</strong>:</label>
-                    <input type="text" ng-model="data[field.key]" style="width:350px; padding:7px;" />
+                    <label style="display:block; padding-bottom:5px;"><strong>{{field.label}}</strong>:</label>
+                    <input type="text" ng-model="data[field.var]" style="width:350px; padding:7px;" />
                 </div>
                 <a ng-click="save()" style="background-color:black; color:white;">SAVE</a>
             </div>
