@@ -16,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>admin!2.0</title>
+    <title>LUYA CMS</title>
 
     <?php $this->head() ?>
 

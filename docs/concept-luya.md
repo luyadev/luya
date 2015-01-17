@@ -130,7 +130,7 @@ php index.php presql/create fooMigration news
 /*
  * will run the all the migration scripts over all the assigned modules
  */
-php index.php preqsql/up
+php index.php presql/up
 ```
 
 

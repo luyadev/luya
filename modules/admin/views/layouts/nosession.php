@@ -1,38 +1,28 @@
 <?php
     use \yii\helpers\Html;
+    $this->beginPage();
 ?>
-<?php $this->beginPage() ?>
+
 <!DOCTYPE html>
 <html>
-<head>
-    <title>admin!2.0</title>
-    <?php $this->head() ?>
-    <?= Html::csrfMetaTags() ?>
-</head>
-<body>
-<?php $this->beginBody() ?>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<div class="container" style="margin-top:20px;">
-    <div class="row">
-        <div class="col-md-6">
-            <img src="<?=$this->getAssetUrl("admin\Asset");?>/img/zephir-logo.png" />
-        </div>
-        <div class="col-md-6" style="line-height:60px;">
-            <div class="pull-right">
-                Register? No way!
-            </div>
-        </div>
-    </div>
-</div>
+        <title>Login | LUYA CMS</title>
 
-<div class="container">
-    <hr />
-    <?php echo $content; ?>
-    <hr />
-    <p>&copy; Zephir Software Design AG</p>
-</div>
+        <?php $this->head() ?>
 
-<?php $this->endBody() ?>
-</body>
+        <?= Html::csrfMetaTags() ?>
+    </head>
+
+    <body class="login" data-image-path="<?= $this->getAssetUrl("admin\Asset") ?>/img/backgrounds/bg_">
+        <?php $this->beginBody() ?>
+
+        <?php echo $content; ?>
+
+        <?php $this->endBody() ?>
+    </body>
 </html>
 <?php $this->endPage() ?>
