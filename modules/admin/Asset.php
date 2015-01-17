@@ -19,6 +19,7 @@ class Asset extends \yii\web\AssetBundle
         "//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-resource.js",
         "//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.11/angular-ui-router.min.js",
         "js/zaa.js",
+        "js/login.js",
         // "js/admin.js",
         "js/factorys.js",
         "js/controllers/MenuController.js",
