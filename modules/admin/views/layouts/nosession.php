@@ -17,12 +17,20 @@
         <?= Html::csrfMetaTags() ?>
     </head>
 
-    <body class="login" data-image-path="<?= $this->getAssetUrl("admin\Asset") ?>/img/backgrounds/bg_">
+    <body class="login">
         <?php $this->beginBody() ?>
 
         <?php echo $content; ?>
 
+        <script type="text/javascript"> var adminAsset = "<?=$this->getAssetUrl("admin\Asset");?>"; </script>
         <?php $this->endBody() ?>
+
+        <script type="text/javascript">
+            jQuery( function() { loginBackground({
+                imagePath: adminAsset + "/img/backgrounds/bg_",
+                imageCount: 6
+            }); } );
+        </script>
     </body>
 </html>
 <?php $this->endPage() ?>

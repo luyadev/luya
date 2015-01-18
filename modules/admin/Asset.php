@@ -20,13 +20,11 @@ class Asset extends \yii\web\AssetBundle
         "//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.11/angular-ui-router.min.js",
         "js/zaa.js",
         "js/login.js",
-        // "js/admin.js",
         "js/factorys.js",
         "js/controllers/MenuController.js",
         "js/controllers/DefaultController.js",
         'js/controllers/CrudController.js',
         'js/directives/crud.js',
-        // 'js/jvfloat.min.js',
         'ace-builds/src-min-noconflict/ace.js',
         'angular-ui-ace/ui-ace.js',
         //"js/ui-bootstrap-tpls-0.11.2.min.js"
