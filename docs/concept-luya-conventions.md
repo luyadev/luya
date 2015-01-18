@@ -1,5 +1,12 @@
-CONVENTION LANGUAGE
+LANGUAGE CONVENTIONS
 ===================
+
+Table of contents
+
+- sql
+- php
+- css
+- js
 
 SQL
 ----------------------
@@ -69,3 +76,8 @@ CSS
 -----
 
 http://cssguidelin.es/
+
+JS
+-----
+
+https://github.com/airbnb/javascript
