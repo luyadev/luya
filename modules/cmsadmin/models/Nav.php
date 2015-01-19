@@ -47,7 +47,7 @@ class Nav extends \yii\db\ActiveRecord
             'restcreate' => self::OP_ALL
         ];
     }
-    
+
     public function afterCreate()
     {
         $navItem = new NavItem();
