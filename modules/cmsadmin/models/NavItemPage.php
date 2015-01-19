@@ -13,8 +13,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
     public function rules()
     {
         return [
-            [['layout_id'], 'required'],
-            [['text'], 'safe'],
+            [['layout_id'], 'required']
         ];
     }
 
@@ -55,7 +54,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
 
             $configValues = json_decode($placeholder['json_config_values'], true);
 
-            if (!empty($configValues)) {
+            if (empty($configValues)) {
                 $configValues = [];
             }
 
@@ -70,7 +69,6 @@ class NavItemPage extends \cmsadmin\base\NavItemType
 
                 $configValues['placeholders'] = $insertedHolders;
             }
-
             $string .= $twig->render($placeholder['twig_frontend'], $configValues);
         }
 

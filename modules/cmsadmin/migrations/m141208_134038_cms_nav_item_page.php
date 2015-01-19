@@ -9,7 +9,6 @@ class m141208_134038_cms_nav_item_page extends Migration
     {
         $this->createTable("cms_nav_item_page", [
             "id" => "pk",
-            "text" => Schema::TYPE_TEXT,
             "layout_id" => Schema::TYPE_INTEGER,
         ]);
     }
