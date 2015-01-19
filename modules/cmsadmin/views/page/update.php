@@ -37,18 +37,18 @@
 <div ng-repeat="lang in langs" ng-controller="NavItemController" style="display:inline-block; width:47%; margin-top:100px; float:left; margin:10px; padding:10px;">
 
     <h1>{{lang.name}}</h1>
-    
+
     <div ng-if="item.length == 0" style="background-color:#F0F0F0; padding:20px;">
         Die Seite existiert noch nicht in der Sprache {{lang.name}}. <a ng-click="showadd=!showadd">Jetzt erstellen?</a>
-        
+
         <div ng-show="showadd">
            <div ng-controller="CmsadminCreateInlineController">
                 <create-form data="data"></create-form>
             </div>
         </div>
-        
+
     </div>
-    
+
     <div ng-if="item.length != 0" ng-switch on="item.nav_item_type" style="padding-left:10px;">
 
         <div style="background-color:rgba(255,60,51,.8); padding:15px; color:white;">

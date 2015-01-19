@@ -18,15 +18,16 @@ class NavItemController extends \admin\base\RestController
     public function actionCreate()
     {
         $data = $_POST;
-        
+
         $model = new \cmsadmin\models\NavItem();
         $model->attributes = $data;
         if ($model->validate()) {
             $entry = $model->save();
+
             return $entry;
         }
     }
-    
+
     /**
      * returns all the PAGE type specific informations.
      *
