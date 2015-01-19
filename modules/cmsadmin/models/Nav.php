@@ -7,6 +7,7 @@ class Nav extends \yii\db\ActiveRecord
     public $rewrite;
     public $nav_item_type;
     public $nav_item_type_id;
+    public $lang_id;
 
     public static function tableName()
     {
@@ -30,7 +31,7 @@ class Nav extends \yii\db\ActiveRecord
     public function scenarios()
     {
         return [
-            'restcreate' => ['cat_id', 'parent_nav_id', 'nav_item_type', 'nav_item_type_id', 'sort_index', 'is_deleted', 'title', 'rewrite'],
+            'restcreate' => ['cat_id', 'lang_id', 'parent_nav_id', 'nav_item_type', 'nav_item_type_id', 'sort_index', 'is_deleted', 'title', 'rewrite'],
             'restupdate' => []
         ];
     }
@@ -40,14 +41,20 @@ class Nav extends \yii\db\ActiveRecord
         $this->is_deleted = 0;
     }
 
+    public function transactions()
+    {
+        return [
+            'restcreate' => self::OP_ALL
+        ];
+    }
+    
     public function afterCreate()
     {
-        $lang = \admin\models\Lang::getDefault();
         $navItem = new NavItem();
         $navItem->nav_item_type = $this->nav_item_type;
         $navItem->nav_item_type_id = $this->nav_item_type_id;
         $navItem->nav_id = $this->id;
-        $navItem->lang_id = $lang->id;
+        $navItem->lang_id = $this->lang_id;
         $navItem->title = $this->title;
         $navItem->rewrite = $this->rewrite;
         if ($navItem->validate()) {

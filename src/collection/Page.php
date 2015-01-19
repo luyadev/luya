@@ -1,7 +1,7 @@
 <?php
 namespace luya\collection;
 
-class Page extends \luya\base\Collection
+class Page extends \luya\base\Collection implements \luya\collection\PageInterface
 {
     private $title = null;
 

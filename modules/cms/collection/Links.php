@@ -3,17 +3,25 @@ namespace cms\collection;
 
 class Links extends \luya\collection\Links implements \luya\collection\LinksInterface
 {
-    /**
-     * @TODO: the lang id should get injected, so we just get links for the current language
-     * @var integer
-     */
-    private $langId = 1;
 
-    public function init()
+    private $langId;
+    
+    public function setLangId($langShortCode)
+    {
+        // get the langId from shortCode
+        $data = \admin\models\Lang::find()->where(['short_code' => $langShortCode])->one();
+        
+        if (!$data) {
+            throw new \Exception("The provided shortCode $langShortCode does not exists!");
+        }
+        $this->langId = $data->id;
+    }
+    
+    public function start()
     {
         $this->iteration(0, '');
         foreach ($this->urls as $k => $args) {
-            $this->setLink($k, $args);
+            $this->addLink($k, $args);
         }
     }
 
@@ -32,7 +40,7 @@ class Links extends \luya\collection\Links implements \luya\collection\LinksInte
 
     private function getData($parentNavId)
     {
-        return (new \yii\db\Query())->select(['t1.id', 't1.parent_nav_id', 't2.title', 't2.rewrite'])->from('cms_nav t1')->leftJoin("cms_nav_item t2", "t1.id=t2.id")->where(['t1.parent_nav_id' => $parentNavId, 't2.lang_id' => $this->langId])->all();
+        return (new \yii\db\Query())->select(['t1.id', 't1.parent_nav_id', 't2.title', 't2.rewrite'])->from('cms_nav t1')->leftJoin("cms_nav_item t2", "t1.id=t2.nav_id")->where(['t1.parent_nav_id' => $parentNavId, 't2.lang_id' => $this->langId])->all();
     }
 
     private function subNodeExists($parentNavId)

@@ -18,6 +18,7 @@ class NavItem extends \yii\db\ActiveRecord
     {
         parent::init();
         $this->on(self::EVENT_BEFORE_INSERT, [$this, 'beforeCreate']);
+        $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'validateRewrite']);
     }
 
     public static function tableName()
@@ -74,6 +75,21 @@ class NavItem extends \yii\db\ActiveRecord
     }
     */
 
+    public function verifyRewrite($rewrite, $langId)
+    {
+        return $this->find()->where(['rewrite' => $rewrite, 'lang_id' => $langId])->one();
+    }
+
+    public function validateRewrite()
+    {
+        if (!is_null($this->verifyRewrite($this->rewrite, $this->lang_id))) {
+            $this->addError('rewrite', 'Rewrite existiert bereits!');
+            return false;
+        }
+        
+        return true;
+    }
+    
     public function beforeCreate()
     {
         $this->is_hidden = 1;

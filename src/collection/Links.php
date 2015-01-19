@@ -1,16 +1,16 @@
 <?php
 namespace luya\collection;
 
-class Links extends \luya\base\Collection
+class Links extends \luya\base\Collection implements \luya\collection\LinksInterface
 {
-    private $links;
+    private $links = [];
 
     public function getAll()
     {
         return $this->links;
     }
 
-    public function setLink($link, $args)
+    public function addLink($link, $args)
     {
         $this->links[$link] = $args;
     }

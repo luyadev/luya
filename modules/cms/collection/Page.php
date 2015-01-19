@@ -11,7 +11,7 @@ class Page extends \luya\collection\Page
 
     public function find()
     {
-        $linksObject = \Yii::$app->get('collection')->links;
+        $linksObject = \Yii::$app->collection->links;
 
         $urls = $linksObject->getAll();
 
@@ -29,7 +29,7 @@ class Page extends \luya\collection\Page
 
         if (!$activeUrl) {
             // URL NOT FOUND! REDIRECT TO HOME
-            echo "NOT FOUND $fullUrl";
+            echo "NOT FOUND \"$fullUrl\"";
             echo "<p>SHOULD REDIRECT TO HOME NOW?!</p>";
             exit;
         }

@@ -12,7 +12,9 @@ class DefaultController extends \luya\base\Controller
 
         $links = new \cms\collection\Links();
         $links->activeLink = $_GET['path'];
-
+        $links->setLangId(yii::$app->collection->lang->shortCode);
+        $links->start();
+        
         Yii::$app->get('collection')->links = $links;
 
         $page = new \cms\collection\Page();
