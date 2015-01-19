@@ -36,10 +36,6 @@ zaa.directive("createFormPage", function() {
 			
 			$scope.layouts = $resource('admin/api-cms-layout/:id').query();
 			
-			$scope.debug2 = function() {
-				console.log($scope.data);
-			}
-			
 			$scope.save = function() {
 				ApiCmsNavItemPage.save($.param({ layout_id : $scope.data.layout_id }), function(response) {
 					$scope.data.nav_item_type_id = response.id;
