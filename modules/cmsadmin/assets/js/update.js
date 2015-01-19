@@ -2,7 +2,11 @@ zaa.controller("NavController", function($scope, $stateParams, ApiAdminLang) {
 	
 	$scope.id = parseInt($stateParams.navId);
 	
-	$scope.langs = ApiAdminLang.query();
+	$scope.refresh = function() {
+		$scope.langs = ApiAdminLang.query();
+	}
+	
+	$scope.refresh();
 	
 });
 
@@ -33,7 +37,11 @@ zaa.controller("NavItemController", function($scope, $http) {
 		});
 	}
 	
-	$scope.getItem($scope.lang.id, $scope.NavController.id);
+	$scope.refresh = function() {
+		$scope.getItem($scope.lang.id, $scope.NavController.id);
+	}
+	
+	$scope.refresh();
 	
 });
 
@@ -60,7 +68,7 @@ zaa.controller("NavItemTypePageController", function($scope, $http) {
 /**
  * @param $scope.placeholder from ng-repeat
  */
-zaa.controller("PagePlaceholderController", function($scope, $http) {
+zaa.controller("PagePlaceholderController", function($scope) {
 	
 	$scope.NavItemTypePageController = $scope.$parent;
 	

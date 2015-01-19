@@ -1,32 +1,40 @@
-zaa.controller("CreateInlineController", function($scope, $resource, ApiCmsNavItemPage) {
+zaa.controller("CmsadminCreateController", function($scope, $q, ApiCmsNav) {
 	
-	$scope.layouts = $resource('admin/api-cms-layout/:id').query();
-
-	$scope.dataPage = {
-			nav_id : 1,
-			lang_id : 1,
-			nav_item_type : 1,
-			nav_item_type_id : 0,
-			title : 'der titel',
-			rewrite : 'dierewrite'
-	};
+	$scope.data = {};
 	
-	$scope.submitPage = function() {
-		
-		ApiCmsNavItemPage.save($.param({'layout_id' : 1}), function(rsp) {
-			
-			var nav_item_type_page_id = rsp.id;
-			
-			$scope.dataPage.nav_item_type_id = nav_item_type_page_id;
-			
-			/*
-			.save($.param($scope.dataPage), function(response) {
-				console.log(response);
+	$scope.save = function() {
+		return $q(function(resolve, reject) {
+			ApiCmsNav.save($.param($scope.data), function(response) {
+				resolve(response)
 			});
-			*/
-			
 		});
 		
+	}
+	
+});
+
+zaa.controller("CmsadminCreateInlineController", function($scope, $q, $http, ApiCmsNav) {
+	
+	$scope.data = {
+		nav_id : $scope.$parent.NavController.id,
+		lang_id : $scope.lang.id
+	};
+	
+	$scope.save = function() {
+		var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
+		
+		return $q(function(resolve, reject) {
+			$http.post('admin/api-cms-navitem/create', $.param({
+		    	nav_id : $scope.data.nav_id,
+		    	lang_id : $scope.data.lang_id,
+		    	title : $scope.data.title,
+		    	rewrite : $scope.data.rewrite,
+		    	nav_item_type : $scope.data.nav_item_type,
+		    	nav_item_type_id : $scope.data.nav_item_type_id
+		    }), headers).success(function(rsp) {
+				$scope.$parent.refresh();
+			});
+		})
 	}
 	
 });

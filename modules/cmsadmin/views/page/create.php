@@ -1,1 +1,3 @@
-<div ng-include="'create.html'"></div>
+<div ng-controller="CmsadminCreateController">
+    <create-form data="data"></create-form>
+</div>

@@ -33,6 +33,7 @@
 
 </div>
 </script>
+<div ng-controller="NavController">
 <div ng-repeat="lang in langs" ng-controller="NavItemController" style="display:inline-block; width:47%; margin-top:100px; float:left; margin:10px; padding:10px;">
 
     <h1>{{lang.name}}</h1>
@@ -41,10 +42,9 @@
         Die Seite existiert noch nicht in der Sprache {{lang.name}}. <a ng-click="showadd=!showadd">Jetzt erstellen?</a>
         
         <div ng-show="showadd">
-            <div ng-controller="CreateInlineController">
-                <button ng-click="submitPage()">ADD!</button>
+           <div ng-controller="CmsadminCreateInlineController">
+                <create-form data="data"></create-form>
             </div>
-            
         </div>
         
     </div>
@@ -72,4 +72,5 @@
     <div ng-repeat="block in blocks" style="border:1px solid #F0F0F0; font-weight:bold; margin:5px; display:inline-block; text-align:center; padding:15px; min-width:200px; background-color:#e1e1e1; border:1px solid #FFF;" data-drag="true" jqyoui-draggable="{placeholder: 'keep', index : {{$index}}}" ng-model="blocks" data-jqyoui-options="{revert: true, helper : 'clone'}">
         <p>{{block.name}}</p>
     </div>
+</div>
 </div>

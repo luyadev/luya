@@ -8,10 +8,10 @@
     </ul>
 </script>
 
-<script type="text/ng-template" id="create.html">
+<script type="text/ng-template" id="createform.html">
 <div ng-switch on="showType">
-<form ng-submit="submit()" ng-switch-default>
-<h2>Nav_ITEM</h2>
+
+<div ng-switch-default>
 <table>
     <tr>
         <td>Titel</td>
@@ -23,11 +23,11 @@
     </tr>
     <tr>
         <td>Parent Nav Id</td>
-        <td><input type="text" ng-model="data.parent_nav_id" placeholder="0" /></td>
+        <td><div ng-if="!data.nav_id"><input type="text" ng-model="data.parent_nav_id" placeholder="0" /></div></td>
     </tr>
     <tr>
         <td>Cat Id</td>
-        <td><input type="text" ng-model="data.cat_id" placeholder="1" /></td>
+        <td><div ng-if="!data.nav_id"><input type="text" ng-model="data.cat_id" placeholder="1" /></div><div ng-if="data.nav_id">create page from nav_id: {{data.nav_id}}</div></td>
     </tr>
     <tr>
         <td>Lang Id</td>
@@ -44,35 +44,41 @@
         </td>
     </tr>
     <tr>
-        <td><button type="submit">Submit</button></td>
+        <td><button ng-click="showTypeContainer()">NEXT</button></td>
     </tr>
 </table>
-</form>
+</div>
 
-<form ng-switch-when="1" ng-submit="submitPage()">
-<h2>TYPE_PAGE</h2>
-<select ng-model="dataPage.layout_id" ng-options="lts.id as lts.name for lts in getLayouts()">
+<div ng-switch-when="1">
+    <create-form-page data="data"></create-form-page>
+</div>
 
-</select>
-<button type="submit">SUBMIT</button>
-</form>
+<div ng-switch-when="2">
+    REDIR!
+</div>
 
-<form ng-switch-when="2">
-<h2>REDIRECT</h2>
-</form>
-
-<form ng-switch-when="3">
-<h2>MODULE</h2>
-</form>
+<div ng-switch-when="3">
+    MODULE!
+</div>
 
 <div ng-switch-when="true">
-    <h2>Yes!</h2>
-    <p>Sie haben erfolgreich eine neue Seite hinzugefügt!</p>
-    <a ng-click="showDefault()" href="#">ADD NEW ITEM</a>
+    <p>Diese Seite wurde erfolgreich erstellt!
 </div>
 
 </div>
+
 </script>
+
+<script type="text/ng-template" id="createformpage.html">
+<table>
+<tr>
+    <td>Layout</td>
+    <td><select ng-model="data.layout_id" ng-options="lts.id as lts.name for lts in layouts"></select></td>
+</tr>
+</table>
+<button ng-click="save()">SAVE</button>
+</script>
+
 
 <div class="main__item main__item--left">
     <nav class="treeview" role="navigation">
