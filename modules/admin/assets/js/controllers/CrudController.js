@@ -122,6 +122,10 @@ zaa.controller("CrudController", function($scope, $http, $sce) {
 		}
 	}
 
+    $scope.closeUpdate = function () {
+        $scope.toggler.update = false;
+    }
+
 	$scope.submitUpdate = function () {
 		$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, $.param($scope.data.update), {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}

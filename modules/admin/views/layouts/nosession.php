@@ -22,7 +22,7 @@
 
         <?php echo $content; ?>
 
-        <script type="text/javascript"> var adminAsset = "<?=$this->getAssetUrl("admin\Asset");?>"; </script>
+        <script type="text/javascript"> var adminAsset = "<?=$this->getAssetUrl("admin\AssetAdmin");?>"; </script>
         <?php $this->endBody() ?>
 
         <script type="text/javascript">
