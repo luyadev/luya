@@ -3,7 +3,7 @@
 	"description" : "Zephir Luya Admin",
 	"require" : {
 		"zephir/luya" : "*",
-        "bower-asset/jquery" : "2.1.1",
+        "bower-asset/jquery" : "2.*",
         "bower-asset/jquery-ui" : "*",
         "bower-asset/angular" : "1.3.10",
     	"bower-asset/angular-resource": "1.3.10",
