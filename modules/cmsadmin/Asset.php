@@ -10,9 +10,11 @@ class Asset extends \yii\web\AssetBundle
         "js/layout.js",
         "js/update.js",
         "js/create.js",
-        "js/factorys.js",
-        "bower_components/angular-dragdrop/src/angular-dragdrop.min.js",
-        "bower_components/jquery-ui/jquery-ui.min.js",
+        "js/factorys.js"
+    ];
+    
+    public $depends = [
+        'admin\AssetAdmin',
     ];
 
     public $publishOptions = ['forceCopy' => true];

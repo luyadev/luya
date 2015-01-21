@@ -27,5 +27,10 @@
 			"cms\\" : "modules/cms",
 			"cmsadmin\\" : "modules/cmsadmin"
 		}
-	}
+	},
+	"extra": {
+        "asset-installer-paths": {
+            "bower-asset-library": "vendor/bower"
+        }
+    }
 }

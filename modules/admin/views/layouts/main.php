@@ -34,7 +34,7 @@
         <div class="header__item header__item--left">
 
             <div class="logo">
-                <img src="<?=$this->getAssetUrl("admin\Asset");?>/img/logo.png" role="img" alt="LUYA" />
+                <img src="<?=$this->getAssetUrl("admin\AssetAdmin");?>/img/logo.png" role="img" alt="LUYA" />
             </div>
 
         </div><!-- ./header__left

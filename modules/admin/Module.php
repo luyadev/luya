@@ -53,6 +53,9 @@ class Module extends \admin\base\Module
     }
 
     public $assets = [
-        'admin\Asset',
+        'admin\AssetAdmin',
+        'admin\AssetAngularLoadingBar',
+        'admin\AssetAceUi',
+        'admin\AssetAce',
     ];
 }

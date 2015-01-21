@@ -2,11 +2,25 @@
 	"name" : "zephir/luya-module-admin",
 	"description" : "Zephir Luya Admin",
 	"require" : {
-		"zephir/luya" : "*"
+		"zephir/luya" : "*",
+        "bower-asset/jquery" : "2.1.1",
+        "bower-asset/jquery-ui" : "*",
+        "bower-asset/angular" : "1.3.10",
+    	"bower-asset/angular-resource": "1.3.10",
+    	"bower-asset/angular-ui-router" : "0.2.13",
+		"bower-asset/angular-loading-bar" : "dev-master",
+		"bower-asset/angular-ui-ace" : "*",
+		"bower-asset/angular-dragdrop" : "*",
+		"bower-asset/ace-builds" : "1.1.8"
 	},
 	"autoload" : {
 		"psr-4" : {
 			"admin\\" : "src/"
 		}
-	}
+	},
+	"extra": {
+        "asset-installer-paths": {
+            "bower-asset-library": "vendor/bower"
+        }
+    }
 }
