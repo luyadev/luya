@@ -26,7 +26,7 @@
 
 </head>
 
-<body class="main-left-small">
+<body>
     <?php $this->beginBody() ?>
 
     <div class="header" role="menubar">
