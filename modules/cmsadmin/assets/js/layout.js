@@ -10,16 +10,33 @@ zaa.config(function($stateProvider) {
 	});
 });
 
-zaa.controller("TreeController", function($scope, $state, ApiCmsMenu) {
+zaa.service('MenuService', function($rootScope, ApiCmsMenu) {
+	var service = [];
+	
+	service.tree = [];
+	
+	service.refresh = function() {
+		ApiCmsMenu.get(function(response) {
+			service.tree = response;
+		});
+	}
+	
+	service.refresh();
+	
+	return service;
+});
+
+zaa.controller("CmsMenuTreeController", function($scope, $state, MenuService) {
     
-    $scope.tree = [];
-    
+	$scope.tree = [];
+	
+    $scope.$watch(function() { return MenuService.tree }, function(newValue) {
+    	$scope.tree = newValue;
+    })
+	
+	
     $scope.go = function(navId) {
     	$state.go('custom.cmsedit', { navId : navId });
     };
     
-    var entries = ApiCmsMenu.get(function() {
-        $scope.tree = entries;
-     });
-  
 });

@@ -5,11 +5,17 @@ zaa.directive("createForm", function() {
 			data : '='
 		},
 		templateUrl : 'createform.html',
-		controller : function($scope) {
+		controller : function($scope, ApiAdminLang, ApiCmsCat, MenuService) {
 			
 			$scope.controller = $scope.$parent;
 			
 			$scope.showType = 0;
+			
+			
+			$scope.lang = ApiAdminLang.query();
+			
+			$scope.cat = ApiCmsCat.query();
+			
 			
 			$scope.showTypeContainer = function() {
 				/* todo: verify if allowd */
@@ -19,6 +25,7 @@ zaa.directive("createForm", function() {
 			$scope.exec = function () {
 				$scope.controller.save().then(function(response) {
 					$scope.showType = true;
+					MenuService.refresh();
 				})
 			}
 		}

@@ -59,7 +59,7 @@
 
             <div ng-controller="NavItemTypePageController">
                 <p style="border:1px solid #F0F0F0; padding:8px; font-size:11px;">Layout-Name: {{container.nav_item_page.layout_name}}</p>
-                <div ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController"  ng-include="'recursion.html'"></div>
+                <div ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'"></div>
             </div>
 
         </div>

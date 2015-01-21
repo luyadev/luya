@@ -27,11 +27,20 @@
     </tr>
     <tr>
         <td>Cat Id</td>
-        <td><div ng-if="!data.nav_id"><input type="text" ng-model="data.cat_id" placeholder="1" /></div><div ng-if="data.nav_id">create page from nav_id: {{data.nav_id}}</div></td>
+        <td>
+            <div ng-if="!data.nav_id">
+                <select ng-model="data.cat_id" ng-options="item.id as item.name for item in cat" />
+            </div>
+            <div ng-if="data.nav_id">
+                create page from nav_id: {{data.nav_id}}
+            </div>
+        </td>
     </tr>
     <tr>
         <td>Lang Id</td>
-        <td><input type="text" ng-model="data.lang_id" placeholder="" /></td>
+        <td>
+            <select ng-model="data.lang_id" ng-options="item.id as item.name for item in lang" />
+        </td>
     </tr>
     <tr>
         <td>Content Nav-Item-Type Id</td>
@@ -92,10 +101,8 @@
             </li>
         </ul>
 
-        <ul class="treeview__list" role="menu" ng-controller="TreeController">
-            <li class="treeview__item" role="menuitem" ng-repeat="data in tree" ng-include="'reverse.html'">
-            </li>
-
+        <ul class="treeview__list" role="menu" ng-controller="CmsMenuTreeController">
+            <li class="treeview__item" role="menuitem" ng-repeat="data in tree" ng-include="'reverse.html'"></li>
         </ul> <!-- ./treeview__list -->
 
     </nav>

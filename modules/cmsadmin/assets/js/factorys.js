@@ -18,6 +18,10 @@ zaa.factory('ApiCmsNavItemPage', function($resource) {
 	});
 });
 
+zaa.factory('ApiCmsCat', function($resource) {
+	return $resource('admin/api-cms-cat/:id');
+});
+
 zaa.factory('ApiCmsMenu', function($resource) {
 	return $resource('admin/api-cms-menu/:id');
 });
