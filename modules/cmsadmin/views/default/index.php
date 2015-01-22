@@ -47,8 +47,8 @@
         <td>
             <select ng-model="data.nav_item_type">
                 <option value="1" selected>Page</option>
-                <option value="2">Redirect</option>
-                <option value="3">Module</option>
+                <option value="2">Module</option>
+                <option value="3">Redirect</option>
             </select>
         </td>
     </tr>
@@ -63,11 +63,11 @@
 </div>
 
 <div ng-switch-when="2">
-    REDIR!
+    <create-form-module data="data"></create-form-module>
 </div>
 
 <div ng-switch-when="3">
-    MODULE!
+    Redir
 </div>
 
 <div ng-switch-when="true">
@@ -83,6 +83,16 @@
 <tr>
     <td>Layout</td>
     <td><select ng-model="data.layout_id" ng-options="lts.id as lts.name for lts in layouts"></select></td>
+</tr>
+</table>
+<button ng-click="save()">SAVE</button>
+</script>
+
+<script type="text/ng-template" id="createformmodule.html">
+<table>
+<tr>
+    <td>Module Name (Yii2-ID)</td>
+    <td><input type="text" ng-model="data.module_name" /></td>
 </tr>
 </table>
 <button ng-click="save()">SAVE</button>

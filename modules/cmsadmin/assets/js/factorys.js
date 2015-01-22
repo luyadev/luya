@@ -18,6 +18,18 @@ zaa.factory('ApiCmsNavItemPage', function($resource) {
 	});
 });
 
+zaa.factory('ApiCmsNavItemModule', function($resource) {
+	return $resource('admin/api-cms-navitemmodule/:id', { id : '@_id' }, {
+		save : {
+			method : 'POST',
+			isArray : false,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+		}
+	});
+});
+
+
+
 zaa.factory('ApiCmsCat', function($resource) {
 	return $resource('admin/api-cms-cat/:id');
 });

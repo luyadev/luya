@@ -52,3 +52,23 @@ zaa.directive("createFormPage", function() {
 		}
 	}
 });
+
+zaa.directive("createFormModule", function() {
+	return {
+		restrict : 'EA',
+		scope : {
+			data : '='
+		},
+		templateUrl : 'createformmodule.html',
+		controller : function($scope, ApiCmsNavItemModule) {
+			console.log('ApiCmsNavItemModule', ApiCmsNavItemModule);
+			
+			$scope.save = function() {
+				ApiCmsNavItemModule.save($.param({ module_name : $scope.data.module_name }), function(response) {
+					$scope.data.nav_item_type_id = response.id;
+					$scope.$parent.exec();
+				});
+			}
+		}
+	}
+});
