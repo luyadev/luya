@@ -18,7 +18,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
     <div class="toolbar">
 
         <h3 class="toolbar__title" role="heading">
-            <span class="fa fa-fw fa-tasks"></span> Benutzer
+            <span class="fa fa-fw <?= $config->getOption('fa-icon'); ?>"></span> <?= $config->getOption('title'); ?>
         </h3>
 
         <div class="toolbar__items">
@@ -49,7 +49,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
 
                 <div class="toolbar__item">
 
-                    <p class="crud__count">Es werden <b>7</b> Einträge angezeigt.</p>
+                    <p class="crud__count">Es werden <b>{{data.list.length}}</b> Einträge angezeigt.</p>
 
                 </div> <!-- ./toolbar__item -->
 
@@ -57,7 +57,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
 
                     <a class="toolbar__link" role="link">
                         <form class="search" role="search">
-                            <input class="search__input" type="text" placeholder="Filtern..."/>
+                            <input class="search__input" ng-model="search" type="text" placeholder="Filtern..."/>
                         </form>
                     </a>
 
