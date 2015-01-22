@@ -5,7 +5,7 @@ class CatController extends \admin\base\Controller
 {
     public function actionIndex()
     {
-        $config = new \luya\ngrest\Config('api-cms-cat', 'id');
+        $config = new \luya\ngrest\Config('api-cms-cat', 'id', ['title' => 'Kategorien', 'fa-icon' => 'fa-tasks']);
 
         $config->list->field("name", "Name")->text()->required();
         $config->list->field("default_nav_id", "Default-Nav-Id")->text()->required();

@@ -5,7 +5,7 @@ class BlockController extends \admin\base\Controller
 {
     public function actionIndex()
     {
-        $config = new \luya\ngrest\Config('api-cms-block', 'id');
+        $config = new \luya\ngrest\Config('api-cms-block', 'id', ['title' => 'Blöcke', 'fa-icon' => 'fa-tasks']);
 
         $config->list->field("name", "Name")->text()->required();
         $config->list->field("json_config", "JSON Config")->ace(['mode' => 'json']);
