@@ -1,6 +1,11 @@
 <?php
 namespace cmsadmin\components;
 
+/**
+ * @TODO deltete this class, use other class to load 
+ * @author nadar
+ *
+ */
 class Menu
 {
     private $menu = [];
@@ -101,6 +106,6 @@ class Menu
 
     private function getData($parentNavId)
     {
-        return (new \yii\db\Query())->select("cms_nav.id, cms_nav.parent_nav_id, cms_nav_item.title, cms_nav_item.rewrite")->from('cms_nav')->leftJoin("cms_nav_item", "cms_nav.id=cms_nav_item.id")->where(['parent_nav_id' => $parentNavId, 'cat_id' => $this->cat['id'], 'cms_nav_item.lang_id' => $this->lang['id']])->all();
+        return (new \yii\db\Query())->select("cms_nav.id, cms_nav.parent_nav_id, cms_nav_item.title, cms_nav_item.rewrite")->from('cms_nav')->leftJoin("cms_nav_item", "cms_nav.id=cms_nav_item.nav_id")->where(['parent_nav_id' => $parentNavId, 'cat_id' => $this->cat['id'], 'cms_nav_item.lang_id' => $this->lang['id']])->all();
     }
 }
