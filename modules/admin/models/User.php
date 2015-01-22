@@ -30,7 +30,6 @@ class User extends ActiveRecord implements IdentityInterface
             [['title', 'fristname', 'lastname', 'email', 'password'], 'required', 'on' => 'restcreate'],
             [['title', 'firstname', 'lastname', 'email'], 'required', 'on' => 'restupdate'],
             [['email', 'password'], 'required', 'on' => 'login'],
-            //['password', 'verifyPassword']
         ];
     }
 
@@ -48,6 +47,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->auth_token = '';
         $this->is_deleted = 0;
+        $this->encodePassword();
     }
 
     /**
