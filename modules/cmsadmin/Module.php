@@ -9,6 +9,7 @@ class Module extends \admin\base\Module
         'api-cms-navitem' => 'cmsadmin\\apis\\NavItemController',
         'api-cms-menu' => 'cmsadmin\apis\MenuController',
         'api-cms-navitempage' => 'cmsadmin\apis\NavItemPageController',
+        'api-cms-navitemmodule' => 'cmsadmin\\apis\\NavItemModuleController',
         'api-cms-layout' => 'cmsadmin\\apis\\LayoutController',
         'api-cms-block' => 'cmsadmin\\apis\\BlockController',
         'api-cms-navitemplageblockitem' => 'cmsadmin\\apis\\NavItemPageBlockItemController',

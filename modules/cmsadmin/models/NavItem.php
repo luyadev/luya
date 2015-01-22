@@ -39,6 +39,9 @@ class NavItem extends \yii\db\ActiveRecord
             case self::TYPE_PAGE:
                 return \cmsadmin\models\NavItemPage::findOne($this->nav_item_type_id);
                 break;
+            case self::TYPE_MODULE:
+                return \cmsadmin\models\NavItemModule::findONe($this->nav_item_type_id);
+                break;
         }
     }
 
