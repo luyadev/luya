@@ -7,7 +7,7 @@ class AssetAngular extends \yii\web\AssetBundle
     
     public $js = [
         'jquery/dist/jquery.min.js',
-        'jquery-ui/jquery-ui.min.js',
+        'jqueryui/jquery-ui.min.js',
         'angular/angular.min.js',
         'angular-resource/angular-resource.min.js',
         'angular-ui-router/release/angular-ui-router.min.js',
