@@ -29,16 +29,19 @@ class Page extends \luya\collection\Page
 
         if (!$activeUrl) {
             // URL NOT FOUND! REDIRECT TO HOME
-            echo "NOT FOUND \"$fullUrl\"";
-            echo "<p>SHOULD REDIRECT TO HOME NOW?!</p>";
+            echo "<h1>404<h1><h3>Url \"$fullUrl\" not found</h3>";
             exit;
         }
 
         $linkItem = $linksObject->getLink($activeUrl);
-        $this->getPageContent($linkItem['id']);
+        
+        
+        $this->getPageContent($linkItem['id'], [
+            'restString' => substr($fullUrl, strlen($linkItem['url']) + 1)       // negativPath  
+        ]);
     }
 
-    private function getPageContent($navId)
+    private function getPageContent($navId, $options = [])
     {
         // @TODO is $linkItem['id'] a unifyed system or does it only matches cause Links is set via cms\collection\Links?
         $object = \cmsadmin\models\Nav::findOne($navId);
@@ -51,8 +54,11 @@ class Page extends \luya\collection\Page
 
         $this->setTitle($itemType->title);
 
+        $item = $itemType->getType();
+        $item->setOptions($options);
+        
         // @TODO retrieving the different content types: unify them! text not valid!
-        $this->setContent($itemType->getType()->getContent());
+        $this->setContent($item->getContent());
     }
 
     private function findDefaultPage()
