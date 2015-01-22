@@ -88,9 +88,8 @@
 <button ng-click="save()">SAVE</button>
 </script>
 
-
-<div class="main__item main__item--left">
-    <nav class="treeview" role="navigation">
+<div class="main__item main__item--left main__item--fixedsize">
+    <nav class="treeview main__fixeditem" role="navigation">
 
         <ul class="treeview__list">
             <li class="treeview__item">
@@ -107,5 +106,5 @@
 
     </nav>
 </div><!-- ./main__left
---><div class="main__item main__item--right" ui-view>
+--><div class="main__item main__item--right main__item--fixedsize" ui-view>
 </div> <!-- ./main__right -->
