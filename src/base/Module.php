@@ -45,6 +45,8 @@ class Module extends \yii\base\Module
      */
     public static $urlRules = [];
 
+    public $context = null;
+    
     /**
      *
      * @throws Exception
@@ -58,5 +60,15 @@ class Module extends \yii\base\Module
                 throw new Exception(sprintf('The required component "%s" is not registered in the configuration file', $component));
             }
         }
+    }
+    
+    public function setContext($name)
+    {
+        $this->context = $name;
+    }
+    
+    public function getContext()
+    {
+        return $this->context;
     }
 }
