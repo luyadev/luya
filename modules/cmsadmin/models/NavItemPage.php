@@ -27,7 +27,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
 
     public function getContent()
     {
-        $loader = new \Twig_Loader_Filesystem(yii::getAlias('@cmsadmin').'/views');
+        $loader = new \Twig_Loader_Filesystem(yii::getAlias('@cms').'/views');
         $twig = new \Twig_Environment($loader, ['autoescape' => false]);
 
         $insertion = [];

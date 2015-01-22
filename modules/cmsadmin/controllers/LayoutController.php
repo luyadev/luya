@@ -9,7 +9,7 @@ class LayoutController extends \admin\base\Controller
 
         $config->list->field("name", "Name")->text()->required();
         $config->list->field("json_config", "JSON Config")->ace();
-        $config->list->field("view_file", "Path to View-File")->text()->required();
+        $config->list->field("view_file", "Twig Filename (*.twig)")->text()->required();
 
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);
