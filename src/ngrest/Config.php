@@ -27,13 +27,15 @@ class Config implements ConfigInterface
 
     private $pointer = [];
 
+    private $options = [];
+    
     private $restUrlPrefix = 'admin/'; /* could be: http://www.yourdomain.com/admin/; */
 
-    public function __construct($restUrl, $restPrimaryKey)
+    public function __construct($restUrl, $restPrimaryKey, $options = [])
     {
         $this->restUrl = $this->restUrlPrefix.$restUrl;
         $this->restPrimaryKey = $restPrimaryKey;
-
+        $this->options = $options;
         $this->list->field($restPrimaryKey, "ID")->text();
     }
 
@@ -113,6 +115,11 @@ class Config implements ConfigInterface
         return $this->config;
     }
 
+    public function getOption($key, $defaultValue = '')
+    {
+        return (isset($this->options[$key])) ? $this->options[$key] : $defaultValue;
+    }
+    
     public function getKey($key)
     {
         if (isset($this->config[$key])) {
