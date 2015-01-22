@@ -63,7 +63,7 @@
 
             <div class="user">
                 <div class="user__front">
-                    <img class="user__image" src="<?= $gravatar; ?>" role="img" width="60px" height="60px" alt="Marc Stampfli" />
+                    <img class="user__image" src="<?= $gravatar; ?>" role="img" width="60px" height="60px" alt="<?= $user->email ?>" />
                     <span class="user__name"><?= $user->email; ?></span>
                 </div>
                 <div class="user__back">

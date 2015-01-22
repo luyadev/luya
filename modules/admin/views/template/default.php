@@ -1,6 +1,6 @@
 <div class="main__item main__item--left">
 
-    <nav class="subnav" role="navigation" ng-controller="DefaultController" ng-init="get()">
+    <nav class="subnav main__fixeditem" role="navigation" ng-controller="DefaultController" ng-init="get()">
         <div class="subnav__group" ng-repeat="item in items">
 
             <h2 class="subnav__grouptitle">{{item.name}}</h2>

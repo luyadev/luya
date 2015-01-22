@@ -89,7 +89,7 @@
 </script>
 
 <div class="main__item main__item--left main__item--fixedsize">
-    <nav class="treeview" role="navigation">
+    <nav class="treeview main__fixeditem" role="navigation">
 
         <ul class="treeview__list">
             <li class="treeview__item">
