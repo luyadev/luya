@@ -29,10 +29,8 @@ zaa.config(function ($httpProvider, $stateProvider, $controllerProvider) {
 		})
 		.state("home", {
 			url : '',
-			template : function() {
-				return 'DEFAULT_NULL_STATE';
-			}
-		});
+			templateUrl : 'admin/default/dashboard'
+		})
 });
 
 zaa.directive('onFinish', function ($timeout) {
