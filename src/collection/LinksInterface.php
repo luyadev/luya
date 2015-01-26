@@ -10,4 +10,6 @@ interface LinksInterface
     public function addLink($link, $args);
 
     public function getAll();
+    
+    public function getByArguments(array $argsArry);
 }
