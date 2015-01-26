@@ -8,8 +8,4 @@ class AssetAceUi extends \yii\web\AssetBundle
     public $js = [
         'ui-ace.js'
     ];
-    
-    public $css = [
-        "src/loading-bar.css"
-    ];
 }

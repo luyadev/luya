@@ -17,6 +17,7 @@
 		"twig/twig" : "1.*"
 	},
 	"require-dev" : {
+		"yiisoft/yii2-debug" : "*",
 		"phpunit/phpunit" : "@stable",
 		"fabpot/php-cs-fixer" : "@stable"
 	},
