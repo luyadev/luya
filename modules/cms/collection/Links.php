@@ -3,6 +3,7 @@ namespace cms\collection;
 
 class Links extends \luya\collection\Links implements \luya\collection\LinksInterface
 {
+    /*
     private $langId;
 
     public function setLangId($langShortCode)
@@ -15,6 +16,7 @@ class Links extends \luya\collection\Links implements \luya\collection\LinksInte
         }
         $this->langId = $data->id;
     }
+    */
 
     public function start()
     {
@@ -33,13 +35,13 @@ class Links extends \luya\collection\Links implements \luya\collection\LinksInte
             if ($this->subNodeExists($item['id'])) {
                 $this->iteration($item['id'], $urlPrefix.$item['rewrite'].'/');
             }
-            $this->urls[$urlPrefix.$item['rewrite']] = ['url' => $urlPrefix.$item['rewrite'], 'id' => $item['id'], 'title' => $item['title']];
+            $this->urls[$urlPrefix.$item['rewrite']] = ['url' => $urlPrefix.$item['rewrite'], 'parent_nav_id' => $parentNavId, 'id' => $item['id'], 'title' => $item['title'], 'lang' => $item['lang_short_code'], 'cat' => $item['cat_rewrite']];
         }
     }
 
     private function getData($parentNavId)
     {
-        return (new \yii\db\Query())->select(['t1.id', 't1.parent_nav_id', 't2.title', 't2.rewrite'])->from('cms_nav t1')->leftJoin("cms_nav_item t2", "t1.id=t2.nav_id")->where(['t1.parent_nav_id' => $parentNavId, 't2.lang_id' => $this->langId])->all();
+        return \cmsadmin\models\Nav::getItemsData($parentNavId);
     }
 
     private function subNodeExists($parentNavId)

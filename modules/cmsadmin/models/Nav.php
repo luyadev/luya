@@ -68,15 +68,23 @@ class Nav extends \yii\db\ActiveRecord
     {
         return $this->hasMany(\cmsadmin\models\NavItem::className(), ['nav_id' => 'id']);
     }
-    */
+    
 
     public function getItems()
     {
         // return hasMany
     }
-
+    */
+    
     public function getItem($langId)
     {
         return \cmsadmin\models\NavItem::find()->where(['nav_id' => $this->id, 'lang_id' => $langId])->one();
+    }
+    
+    
+    public static function getItemsData($navId) {
+        return \yii::$app->db->createCommand('SELECT t1.id, t1.parent_nav_id, t2.title, t2.rewrite, t3.rewrite AS cat_rewrite, t4.name AS lang_name, t4.short_code AS lang_short_code FROM cms_nav as t1 LEFT JOIN (cms_nav_item as t2 LEFT JOIN (admin_lang as t4) ON (t2.lang_id=t4.id), cms_cat as t3) ON (t1.id=t2.nav_id AND t1.cat_id=t3.id) WHERE t1.parent_nav_id=:id')->bindValues([
+            ':id' => $navId
+        ])->queryAll();
     }
 }
