@@ -13,11 +13,11 @@
 	],
 	"require" : {
 		"php": ">=5.4.0",
-		"yiisoft/yii2": "2.0.*",
-		"twig/twig" : "1.*"
+		"yiisoft/yii2": "2.0.*@stable",
+		"twig/twig" : "1.*@stable"
 	},
 	"require-dev" : {
-		"yiisoft/yii2-debug" : "*",
+		"yiisoft/yii2-debug" : "*@stable",
 		"phpunit/phpunit" : "@stable",
 		"fabpot/php-cs-fixer" : "@stable"
 	},
