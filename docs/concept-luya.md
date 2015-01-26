@@ -195,7 +195,7 @@ If you register a new module which is going to be used in the front (e.g. news),
 ### The Solution
 
 By adding a wrapper class (luya\base\Controller) for the yii controller (yii\web\Controller) we can provided an overwritten getViewPath() method which always targets to @app/views/<module>/<controller>/, all the template will be located in there.
-At the other side we can still go back to use yii default controller behaviour with adding the public method "public $useAppViewPath = true;"
+At the other side we can still go back to use yii default controller behaviour with adding the public method "public $useModuleViewPath = true;"
 
 ### Example
 
@@ -220,7 +220,7 @@ namespace capsulated\controllers;
 
 class DefaultController extends \luya\base\Controller
 {
-	public $useAppViewPath = true;
+	public $useModuleViewPath = true;
 
 	public function actionIndex()
 	{

@@ -6,6 +6,8 @@ use Yii;
 
 class DefaultController extends \luya\base\Controller
 {
+    public $useModuleViewPath = true;
+    
     public function actionIndex()
     {
         $langShortCode = Yii::$app->get('collection')->lang->shortCode;
@@ -20,7 +22,6 @@ class DefaultController extends \luya\base\Controller
         $page = new \cms\collection\Page();
 
         Yii::$app->get('collection')->page = $page;
-
         return $this->render("index", [
             'page' => $page
         ]);
