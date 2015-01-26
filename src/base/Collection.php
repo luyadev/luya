@@ -3,7 +3,7 @@ namespace luya\base;
 
 abstract class Collection extends \yii\base\Component
 {
-    protected $prevObject;
+    protected $prevObject = false;
 
     public function setPrevObject($prevObject)
     {

@@ -23,6 +23,9 @@ class Collection extends \yii\base\Component
 
     public function getPage()
     {
+        if (($pref = $this->page->getPrevObject()) !== false) {
+            return $this->page->getPrevObject();
+        }
         return $this->page;
     }
 
