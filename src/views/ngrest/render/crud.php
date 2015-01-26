@@ -126,6 +126,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
                             <div class="form__item form__inputgroup">
                                 <label class="form__label"><?= $item['alias'] ?>:</label>
                                 <?= $crud->createElement($item, $crud::TYPE_CREATE); ?>
+                                <div class="form__active"></div>
                             </div>
                         <?php endforeach; ?>
 
@@ -170,6 +171,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
                             <div class="form__item form__inputgroup">
                                 <label class="form__label"><?= $item['alias'] ?>:</label>
                                 <?= $crud->createElement($item, $crud::TYPE_UPDATE); ?>
+                                <div class="form__active"></div>
                             </div>
                         <?php endforeach; ?>
 
