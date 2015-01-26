@@ -9,7 +9,7 @@
 
 <!DOCTYPE html>
 
-<html ng-app="zaa">
+<html ng-app="zaa" ng-controller="HtmlController">
 
 <head>
     <meta charset="utf-8">
@@ -26,7 +26,7 @@
 
 </head>
 
-<body>
+<body class="{{AdminService.bodyClass}}">
     <?php $this->beginBody() ?>
 
     <div class="header" role="menubar">

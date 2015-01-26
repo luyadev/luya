@@ -33,6 +33,24 @@ zaa.config(function ($httpProvider, $stateProvider, $controllerProvider) {
 		})
 });
 
+zaa.factory('AdminService', function() {
+	var service = [];
+	
+	service.bodyClass = '';
+	
+	service.addBodyClass = function(className) {
+		service.bodyClass = className;
+	}
+	
+	return service;
+});
+
+zaa.controller("HtmlController", function($scope, AdminService) {
+	
+	$scope.AdminService = AdminService;
+	
+});
+
 zaa.directive('onFinish', function ($timeout) {
 	return {
 	    restrict: 'A',

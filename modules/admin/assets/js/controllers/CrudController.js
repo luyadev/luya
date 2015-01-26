@@ -16,7 +16,9 @@ function closeMore( $more ) {
 
 }
 
-zaa.controller("CrudController", function($scope, $http, $sce) {
+zaa.controller("CrudController", function($scope, $http, $sce, AdminService) {
+	
+	$scope.AdminService = AdminService;
 	
 	$scope.init = function () {
 		$scope.loadList();
@@ -44,70 +46,21 @@ zaa.controller("CrudController", function($scope, $http, $sce) {
 			$scope.toggler.strap = true;
 			$scope.data.strap.id = strapId;
 			$scope.data.strap.content = $sce.trustAsHtml(data);
-			
-			/* move tr */
-
-            var $tr     = $($event.currentTarget).parents( 'tr');
-            var $edit   = $tr.next( '.Crud-more' );
-
-            if( $edit.length <= 0 ) {
-                $edit = $( '.Crud-more' );
-
-                if( $edit.hasClass( 'is-open' ) ) {
-                    closeMore( $edit );
-
-                    setTimeout( function() {
-                        $edit.insertAfter( $tr );
-                        openMore( $edit );
-                    }, 10);
-                } else {
-                    $edit.insertAfter( $tr );
-                    openMore( $edit );
-                }
-            } else {
-                openMore( $edit );
-            }
-			
-			/*// move tr */
-			
+			dispatchEvent('onCrudStrapLoad');
 		})
 	}
 
 	$scope.toggleUpdate = function (id, $event) {
-		$scope.toggler.update = true;
+		$scope.toggler.update = !$scope.toggler.update;
 		$scope.data.updateId = id;
+		$scope.AdminService.bodyClass = 'main-blurred';
+		
+		
 		$http.get($scope.config.apiEndpoint + '/'+id+'?fields=' + $scope.config.update.join())
 		.success(function(data) {
 			$scope.toggler.strap = false;
 			$scope.data.update = data;
-			
-			
-			/* move tr */
-
-             var $tr     = $($event.currentTarget).parents( 'tr');
-             var $edit   = $tr.next( '.Crud-more' );
-
-             if( $edit.length <= 0 ) {
-                 $edit = $( '.Crud-more' );
-
-                 if( $edit.hasClass( 'is-open' ) ) {
-                     closeMore( $edit );
-
-                     setTimeout( function() {
-                         $edit.insertAfter( $tr );
-                         openMore( $edit );
-                     }, 10);
-                 } else {
-                     $edit.insertAfter( $tr );
-                     openMore( $edit );
-                 }
-             } else {
-                 openMore( $edit );
-             }
-			
-			/*// move tr */
-             
-             dispatchEvent('onCrudUpdate');
+            dispatchEvent('onCrudUpdate');
 			
 		})
 		.error(function(data) {
@@ -115,23 +68,30 @@ zaa.controller("CrudController", function($scope, $http, $sce) {
 		})
 	}
 	
+	$scope.closeUpdate = function () {
+        $scope.toggler.update = false;
+        $scope.AdminService.bodyClass = '';
+    }
+	
 	$scope.toggleCreate = function () {
 		$scope.toggler.create = !$scope.toggler.create;
+		if ($scope.toggler.create) {
+			$scope.AdminService.bodyClass = 'main-blurred';
+		} else {
+			$scope.AdminService.bodyClass = '';
+		}
 		if ($scope.toggler.create) {
 			dispatchEvent('onCrudCreate');
 		}
 	}
-
-    $scope.closeUpdate = function () {
-        $scope.toggler.update = false;
-    }
-
+    
 	$scope.submitUpdate = function () {
 		$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, $.param($scope.data.update), {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 		})
 		.success(function(data) {
 			$scope.loadList();
+			$scope.closeUpdate();
 		})
 		.error(function(data) {
 			alert('ERROR UPDATE DATA ' + $scope.data.updateId);
@@ -145,6 +105,7 @@ zaa.controller("CrudController", function($scope, $http, $sce) {
 		.success(function(data) {
 			$scope.loadList();
 			$scope.data.create = {};
+			$scope.toggleCreate();
 		})
 		.error(function(data) {
 			for (var i in data) {
