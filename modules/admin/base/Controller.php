@@ -9,7 +9,7 @@ class Controller extends \luya\base\Controller
 {
     public $layout = '@admin/views/layouts/main';
 
-    public $useYiiViewPath = true;
+    public $useAppViewPath = true;
 
     public $adminUser = null;
 

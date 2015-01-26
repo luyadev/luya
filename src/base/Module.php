@@ -16,6 +16,8 @@ class Module extends \yii\base\Module
      */
     public $requiredComponents = [];
 
+    public $useAppLayoutPath = false;
+    
     /**
      *
      * @var array
@@ -60,6 +62,15 @@ class Module extends \yii\base\Module
                 throw new Exception(sprintf('The required component "%s" is not registered in the configuration file', $component));
             }
         }
+    }
+    
+    public function getLayoutPath()
+    {
+        if ($this->useAppLayoutPath) {
+            return '@app/views/' . $this->id . '/layouts';
+        }
+        
+        return $this->getLayoutPath();
     }
     
     public function setContext($name)

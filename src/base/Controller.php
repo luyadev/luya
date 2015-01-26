@@ -12,7 +12,7 @@ class Controller extends \yii\web\Controller
      *
      * @var boolean
      */
-    public $useYiiViewPath = false;
+    public $useAppViewPath = false;
 
     /**
      * Yii initializer
@@ -40,7 +40,7 @@ class Controller extends \yii\web\Controller
     public function getViewPath()
     {
         // use default yii behaviour
-        if ($this->useYiiViewPath) {
+        if ($this->useAppViewPath) {
             return parent::getViewPath();
         }
         // use client repository specific path
