@@ -1,1 +1,1 @@
-<?= $page->getContent(); ?>
+<?= $page->getContent();

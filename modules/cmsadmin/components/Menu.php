@@ -2,7 +2,7 @@
 namespace cmsadmin\components;
 
 /**
- * @TODO deltete this class, use other class to load 
+ * @TODO deltete this class, use other class to load
  * @author nadar
  *
  */

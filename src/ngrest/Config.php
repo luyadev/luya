@@ -28,7 +28,7 @@ class Config implements ConfigInterface
     private $pointer = [];
 
     private $options = [];
-    
+
     private $restUrlPrefix = 'admin/'; /* could be: http://www.yourdomain.com/admin/; */
 
     public function __construct($restUrl, $restPrimaryKey, $options = [])
@@ -119,7 +119,7 @@ class Config implements ConfigInterface
     {
         return (isset($this->options[$key])) ? $this->options[$key] : $defaultValue;
     }
-    
+
     public function getKey($key)
     {
         if (isset($this->config[$key])) {

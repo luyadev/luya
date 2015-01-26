@@ -34,10 +34,9 @@ class Page extends \luya\collection\Page
         }
 
         $linkItem = $linksObject->getLink($activeUrl);
-        
-        
+
         $this->getPageContent($linkItem['id'], [
-            'restString' => substr($fullUrl, strlen($linkItem['url']) + 1)       // negativPath  
+            'restString' => substr($fullUrl, strlen($linkItem['url']) + 1)       // negativPath
         ]);
     }
 
@@ -56,7 +55,7 @@ class Page extends \luya\collection\Page
 
         $item = $itemType->getType();
         $item->setOptions($options);
-        
+
         // @TODO retrieving the different content types: unify them! text not valid!
         $this->setContent($item->getContent());
     }

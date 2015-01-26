@@ -65,11 +65,11 @@
         </div>
 
         <div ng-switch-when="2"><!-- type:module -->
-            
+
             <p><strong>This page is used as Module!</strong></p>
-            
+
         </div>
-        
+
     </div>
 
 </div>

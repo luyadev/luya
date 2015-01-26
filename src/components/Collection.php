@@ -26,6 +26,7 @@ class Collection extends \yii\base\Component
         if (($pref = $this->page->getPrevObject()) !== false) {
             return $this->page->getPrevObject();
         }
+
         return $this->page;
     }
 

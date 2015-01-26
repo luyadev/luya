@@ -4,7 +4,7 @@ namespace admin;
 class AssetAngular extends \yii\web\AssetBundle
 {
     public $sourcePath = '@bower';
-    
+
     public $js = [
         'jquery/dist/jquery.min.js',
         'jquery-ui/jquery-ui.min.js',

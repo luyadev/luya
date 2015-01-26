@@ -17,7 +17,7 @@ class Module extends \yii\base\Module
     public $requiredComponents = [];
 
     public $useAppLayoutPath = false;
-    
+
     /**
      *
      * @var array
@@ -48,7 +48,7 @@ class Module extends \yii\base\Module
     public static $urlRules = [];
 
     public $context = null;
-    
+
     /**
      *
      * @throws Exception
@@ -63,21 +63,21 @@ class Module extends \yii\base\Module
             }
         }
     }
-    
+
     public function getLayoutPath()
     {
         if ($this->useAppLayoutPath) {
-            return '@app/views/' . $this->id . '/layouts';
+            return '@app/views/'.$this->id.'/layouts';
         }
-        
+
         return $this->getLayoutPath();
     }
-    
+
     public function setContext($name)
     {
         $this->context = $name;
     }
-    
+
     public function getContext()
     {
         return $this->context;

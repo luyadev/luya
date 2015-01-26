@@ -12,6 +12,6 @@ interface ConfigInterface
     public function getRestPrimaryKey();
 
     public function getOption($key, $defaultValue = '');
-    
+
     public function getNgRestConfigHash();
 }

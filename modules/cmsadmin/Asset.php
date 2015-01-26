@@ -10,9 +10,9 @@ class Asset extends \yii\web\AssetBundle
         "js/layout.js",
         "js/update.js",
         "js/create.js",
-        "js/factorys.js"
+        "js/factorys.js",
     ];
-    
+
     public $depends = [
         'admin\AssetAdmin',
     ];
