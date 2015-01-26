@@ -24,6 +24,6 @@
     	"asset-optimize-with-conjunctive": false,
     	"asset-installer-paths": {
             "bower-asset-library": "vendor/bower"
-        },
+        }
     }
 }
