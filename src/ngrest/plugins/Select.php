@@ -23,6 +23,7 @@ class Select extends PluginAbstract
         $elmn->setAttribute("id", $this->id);
         $elmn->setIdAttribute("id", true);
         $elmn->setAttribute("ng-model", $this->config['ngModel']);
+        $elmn->setAttribute("class", "form__select");
         $doc->appendChild($elmn);
 
         return $doc;
@@ -30,13 +31,6 @@ class Select extends PluginAbstract
 
     public function renderUpdate($doc)
     {
-        $elmn = $doc->createElement("select", "");
-        $elmn->setAttribute("name", $this->name);
-        $elmn->setAttribute("id", $this->id);
-        $elmn->setIdAttribute("id", true);
-        $elmn->setAttribute("ng-model", $this->config['ngModel']);
-        $doc->appendChild($elmn);
-
-        return $doc;
+        return $this->renderCreate($doc);
     }
 }

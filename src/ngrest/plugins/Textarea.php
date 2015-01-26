@@ -32,6 +32,7 @@ class Textarea extends PluginAbstract
         $elmn->setAttribute("id", $this->id);
         $elmn->setIdAttribute("id", true);
         $elmn->setAttribute("ng-model", $this->config['ngModel']);
+        $elmn->setAttribute("class", "form__input form__input--textarea");
         $doc->appendChild($elmn);
 
         return $doc;
@@ -39,16 +40,6 @@ class Textarea extends PluginAbstract
 
     public function renderUpdate($doc)
     {
-        $elmn = $doc->createElement("textarea");
-        $elmn->setAttribute("name", $this->name);
-        $elmn->setAttribute("placeholder", $this->alias);
-        $elmn->setAttribute("rows", $this->rows);
-        $elmn->setAttribute("cols", $this->cols);
-        $elmn->setAttribute("id", $this->id);
-        $elmn->setIdAttribute("id", true);
-        $elmn->setAttribute("ng-model", $this->config['ngModel']);
-        $doc->appendChild($elmn);
-
-        return $doc;
+        return $this->renderCreate($doc);
     }
 }
