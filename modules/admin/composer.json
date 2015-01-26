@@ -19,9 +19,6 @@
 		}
 	},
 	"extra": {
-    	"asset-optimize-with-installed-packages": true,
-    	"asset-pattern-skip-version": "(-build)",
-    	"asset-optimize-with-conjunctive": false,
     	"asset-installer-paths": {
             "bower-asset-library": "vendor/bower"
         }

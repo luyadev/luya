@@ -2,8 +2,8 @@
 	"name" : "zephir/luya-module-cmsadmin",
 	"description" : "Zephir Luya Cmsadmin",
 	"require" : {
-		"zephir/luya" : "*",
-		"zephir/luya-module-admin" : "*"
+		"zephir/luya" : "*@dev",
+		"zephir/luya-module-admin" : "*@dev"
 	},
 	"autoload" : {
 		"psr-4" : {
