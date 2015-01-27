@@ -10,8 +10,12 @@ Example
 cmsadmin (Admin-Module)
 cms (Frontend-Module)
 ```
+2. ModuleFile
+-------------
 
-2. Content
+Create Module.php inside the Module structure.
+
+3. Content
 ----------
 Where goes the content? All shared data class (componenets, models) does have to be place in the Admin-Module section. This is because the Rest authentification is allocated in the Admin-Modules.
 
