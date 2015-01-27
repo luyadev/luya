@@ -12,20 +12,7 @@ use yii\web\IdentityInterface;
  */
 class User extends \admin\ngrest\base\Model implements IdentityInterface
 {
-    public static function tableName()
-    {
-        return 'admin_user';
-    }
-
-    public function getNgRestApiEndpoint()
-    {
-        return 'api-admin-user';
-    }
-    
-    public function getNgRestPrimaryKey()
-    {
-        return 'id';
-    }
+    public $ngRestEndpoint = 'api-admin-user';
     
     public function ngRestConfig($config) 
     {
@@ -45,6 +32,11 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
         $config->update->copyFrom('create', ['password']);
         
         return $config;
+    }
+    
+    public static function tableName()
+    {
+        return 'admin_user';
     }
     
     

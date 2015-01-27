@@ -10,7 +10,7 @@ use Yii;
  * @property string $name
  * @property string $text
  */
-class Group extends \yii\db\ActiveRecord
+class Group extends \admin\ngrest\base\Model
 {
     /**
      * @inheritdoc
@@ -38,5 +38,21 @@ class Group extends \yii\db\ActiveRecord
             'restcreate' => ['name', 'text'],
             'restupdate' => ['name', 'text']
         ];
+    }
+    
+    // ngrest
+    
+    public $ngRestEndpoint = 'api-admin-group';
+    
+    public function ngRestConfig($config)
+    {
+        $config->list->field("name", "Name")->text()->required();
+        $config->list->field("text", "Beschreibung")->textarea();
+        $config->list->field("id", "ID")->text();
+        
+        $config->create->copyFrom('list');
+        $config->update->copyFrom('list');
+        
+        return $config;
     }
 }

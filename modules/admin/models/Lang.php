@@ -1,8 +1,22 @@
 <?php
 namespace admin\models;
 
-class Lang extends \yii\db\ActiveRecord
+class Lang extends \admin\ngrest\base\Model
 {
+    public $ngRestEndpoint = 'api-admin-lang';
+    
+    public function ngRestConfig($config)
+    {
+        $config->list->field("name", "Name")->text()->required();
+        $config->list->field("short_code", "Kurz-Code")->text()->required();
+        $config->list->field("id", "ID")->text();
+        
+        $config->create->copyFrom('list', ['id']);
+        $config->update->copyFrom('list', ['id']);
+        
+        return $config;
+    }
+    
     public function init()
     {
         parent::init();
