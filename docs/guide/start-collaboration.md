@@ -110,6 +110,23 @@ All luya relevant files are now loaded from the luya/luya/ folder.
 
 For more informations and troubleshooting: https://github.com/zephir/luya-kickstarter
 
+Working (sh) ***@TBD***
+-------------
+```
+chmod +x rebasemaster.sh
+```
+
+firsttime
+```
+./rebasemaster.sh init
+```
+
+else
+```
+./rebasemaster.sh
+```
+
+
 Define the upstream repo
 -------------------------
 Working directory: luya/luya/
@@ -127,6 +144,7 @@ git checkout master
 git fetch upstream
 git rebase upstream/master
 ```
+
 
 Now that you're on the newest release, create a branch from master:
 Don't forget to replace "newBranch" with a meaningful name.
