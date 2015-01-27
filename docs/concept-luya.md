@@ -102,7 +102,7 @@ class Module extends \luya\base\Module
 
 
 
-SQL MIGRRATION
+SQL MIGRATION
 -------------------------
 
 ### The Problem

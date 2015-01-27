@@ -107,7 +107,7 @@ Each Module can have its own url Rules. Even its not access by module context, e
 
 All the luya module urlRules does have to "prefix" theyr pattern with the current module name, otherwise the urlRouting would load the default module registered for this project. (like cms)
 
-7. Module COntenxt
+7. Module Context
 -------------------
 If a module is invoke by another module the context variable contains the name of the module which has invoke the active module. For example if the cms loades other modules, the loaded module can access the 
 parent module with $this->getContext();
