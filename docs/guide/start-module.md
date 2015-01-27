@@ -10,8 +10,39 @@ Example
 cmsadmin (Admin-Module)
 cms (Frontend-Module)
 ```
+2. Module File
+--------------
 
-2. Content
+Create "Module.php" inside module root
+
+Example
+
+´´´php
+    namespace app\modules\cmsadmin;
+
+    class Module extends \luya\base\Module
+    {
+        public static $urlRules = [];
+    }
+´´´
+
+
+3. Update Configuration
+-----------------------
+
+Update "config/local.php" with path to module.php
+
+Example
+
+```
+    $config = ['modules' => ['myModule'=> 'app\modules\myModule\Module']]
+```
+
+***Important***
+
+The used namespace in Module.php must match config entry
+
+4. Content
 ----------
 Where goes the content? All shared data class (componenets, models) does have to be place in the Admin-Module section. This is because the Rest authentification is allocated in the Admin-Modules.
 
@@ -26,16 +57,16 @@ cmsadmin /
 - apis
 - migrations
 - straps
-
+- - 
 cms /
 - controllers
 - views
 - assets
-- components [example content: UrlRule.php, cause its only affecting the frontend Module]
-
+- components [example content: UrlRule.php, cause its only affecting the frontend Modu
+- le]
 ```
 
-3. Table names
+5. Table names
 --------------
 Alle table names have the prefix of its FRONTEND-MODULE there there is booth or only a frontend-module. If there is only a ADMIN-Module the prefix of the table does have the same name like the module.
 
@@ -61,7 +92,7 @@ the database prefix would be:
 guestbookadmin_
 ```
 
-4. Module urlRules
+6. Module urlRules
 -----------------
 Each Module can have its own url Rules. Even its not access by module context, example ulrRules
 
@@ -76,7 +107,7 @@ Each Module can have its own url Rules. Even its not access by module context, e
 
 All the luya module urlRules does have to "prefix" theyr pattern with the current module name, otherwise the urlRouting would load the default module registered for this project. (like cms)
 
-5. Module COntenxt
+7. Module Context
 -------------------
 If a module is invoke by another module the context variable contains the name of the module which has invoke the active module. For example if the cms loades other modules, the loaded module can access the 
 parent module with $this->getContext();
