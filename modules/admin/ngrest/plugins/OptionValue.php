@@ -1,7 +1,7 @@
 <?php
-namespace luya\ngrest\plugins;
+namespace admin\ngrest\plugins;
 
-use luya\ngrest\PluginAbstract;
+use admin\ngrest\PluginAbstract;
 
 class OptionValue extends PluginAbstract
 {

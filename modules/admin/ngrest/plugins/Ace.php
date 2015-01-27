@@ -1,14 +1,14 @@
 <?php
-namespace luya\ngrest\plugins;
+namespace admin\ngrest\plugins;
 
 /**
  * @todo Put the __construct and getOption methods into the PluginAbstract method and leave the options array with default values in private $options = []
  * @author nadar
  *
  */
-class Ace extends \luya\ngrest\PluginAbstract
+class Ace extends \admin\ngrest\PluginAbstract
 {
-    use \luya\ngrest\PluginTrait;
+    use \admin\ngrest\PluginTrait;
 
     private $options = [
         "theme" => "chrome",

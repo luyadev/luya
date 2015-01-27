@@ -62,7 +62,7 @@ public $apis = [
 ```
 5. Create the NG-Rest Config
 ```php
-	$config = new \luya\ngrest\Config('api-admin-user', 'id');
+	$config = new \admin\ngrest\Config('api-admin-user', 'id');
 
     $config->create->field("title", "Anrede")->select()->optionValue(\admin\models\User::getTitles());
 	$config->create->field("firstname", "Vorname")->text()->required();
@@ -73,8 +73,8 @@ public $apis = [
     $config->list->copyFrom('create', ['password']);
 	$config->update->copyFrom('create', ['password']);
 	
-    $ngrest = new \luya\ngrest\NgRest($config);
+    $ngrest = new \admin\ngrest\NgRest($config);
     
-    return $ngrest->render(new \luya\ngrest\render\RenderCrud());
+    return $ngrest->render(new \admin\ngrest\render\RenderCrud());
 ```
 

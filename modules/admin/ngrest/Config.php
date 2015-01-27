@@ -1,5 +1,5 @@
 <?php
-namespace luya\ngrest;
+namespace admin\ngrest;
 
 use yii\helpers\ArrayHelper;
 
@@ -57,7 +57,7 @@ class Config implements ConfigInterface
     public function __call($name, $args)
     {
         $this->config[$this->pointer['key']][$this->pointer['field']]['plugins'][] = [
-            'class' => '\\luya\\ngrest\\plugins\\'.ucfirst($name), 'args' => $args,
+            'class' => '\\admin\\ngrest\\plugins\\'.ucfirst($name), 'args' => $args,
         ];
 
         return $this;

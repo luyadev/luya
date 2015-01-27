@@ -1,7 +1,7 @@
 <?php
-namespace luya\ngrest\plugins;
+namespace admin\ngrest\plugins;
 
-use luya\ngrest\PluginAbstract;
+use admin\ngrest\PluginAbstract;
 
 /**
  * @todo set requirements, based on a classname for the element, could also be not the main

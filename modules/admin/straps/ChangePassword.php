@@ -1,8 +1,8 @@
 <?php
 namespace admin\straps;
 
-use luya\ngrest\StrapAbstract;
-use luya\ngrest\StrapInterface;
+use admin\ngrest\StrapAbstract;
+use admin\ngrest\StrapInterface;
 
 class ChangePassword extends StrapAbstract implements StrapInterface
 {

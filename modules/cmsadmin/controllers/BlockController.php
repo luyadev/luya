@@ -5,7 +5,7 @@ class BlockController extends \admin\base\Controller
 {
     public function actionIndex()
     {
-        $config = new \luya\ngrest\Config('api-cms-block', 'id', ['title' => 'Blöcke', 'fa-icon' => 'fa-tasks']);
+        $config = new \admin\ngrest\Config('api-cms-block', 'id', ['title' => 'Blöcke', 'fa-icon' => 'fa-tasks']);
 
         $config->list->field("name", "Name")->text()->required();
        
@@ -16,8 +16,8 @@ class BlockController extends \admin\base\Controller
 
         $config->update->copyFrom('create');
 
-        $ngrest = new \luya\ngrest\NgRest($config);
+        $ngrest = new \admin\ngrest\NgRest($config);
 
-        return $ngrest->render((new \luya\ngrest\render\RenderCrud()));
+        return $ngrest->render((new \admin\ngrest\render\RenderCrud()));
     }
 }

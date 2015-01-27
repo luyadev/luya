@@ -1,8 +1,8 @@
 <?php
-namespace luya\ngrest\render;
+namespace admin\ngrest\render;
 
-use luya\ngrest\RenderAbstract;
-use luya\ngrest\RenderInterface;
+use admin\ngrest\RenderAbstract;
+use admin\ngrest\RenderInterface;
 
 /**
  * @todo complet rewrite of this class - what is the best practive to acces data in the view? define all functiosn sindie here? re-create methods from config object?

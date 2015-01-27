@@ -5,7 +5,7 @@ class GroupController extends \admin\base\Controller
 {
     public function actionIndex()
     {
-        $config = new \luya\ngrest\Config('api-admin-group', 'id');
+        $config = new \admin\ngrest\Config('api-admin-group', 'id');
 
         $config->list->field("name", "Name")->text()->required();
         $config->list->field("text", "Beschreibung")->textarea();
@@ -14,8 +14,8 @@ class GroupController extends \admin\base\Controller
         $config->create->copyFrom('list');
         $config->update->copyFrom('list');
 
-        $ngrest = new \luya\ngrest\NgRest($config);
+        $ngrest = new \admin\ngrest\NgRest($config);
 
-        return $ngrest->render(new \luya\ngrest\render\RenderCrud());
+        return $ngrest->render(new \admin\ngrest\render\RenderCrud());
     }
 }

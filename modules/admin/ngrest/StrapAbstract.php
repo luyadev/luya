@@ -1,5 +1,5 @@
 <?php
-namespace luya\ngrest;
+namespace admin\ngrest;
 
 use yii\base\View;
 

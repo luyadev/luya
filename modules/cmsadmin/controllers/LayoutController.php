@@ -5,7 +5,7 @@ class LayoutController extends \admin\base\Controller
 {
     public function actionIndex()
     {
-        $config = new \luya\ngrest\Config('api-cms-layout', 'id');
+        $config = new \admin\ngrest\Config('api-cms-layout', 'id');
 
         $config->list->field("name", "Name")->text()->required();
         $config->list->field("json_config", "JSON Config")->ace();
@@ -14,8 +14,8 @@ class LayoutController extends \admin\base\Controller
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);
 
-        $ngrest = new \luya\ngrest\NgRest($config);
+        $ngrest = new \admin\ngrest\NgRest($config);
 
-        return $ngrest->render((new \luya\ngrest\render\RenderCrud()));
+        return $ngrest->render((new \admin\ngrest\render\RenderCrud()));
     }
 }

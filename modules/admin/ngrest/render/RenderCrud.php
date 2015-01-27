@@ -1,8 +1,8 @@
 <?php
-namespace luya\ngrest\render;
+namespace admin\ngrest\render;
 
-use luya\ngrest\RenderAbstract;
-use luya\ngrest\RenderInterface;
+use admin\ngrest\RenderAbstract;
+use admin\ngrest\RenderInterface;
 
 /**
  * @todo complet rewrite of this class - what is the best practive to acces data in the view? define all functiosn sindie here? re-create methods from config object?
@@ -22,7 +22,7 @@ class RenderCrud extends RenderAbstract implements RenderInterface
     {
         $view = new \yii\base\View();
 
-        return $view->render("@luya/views/ngrest/render/crud.php", array(
+        return $view->render("@admin/views/ngrest/render/crud.php", array(
             "crud" => $this,
             "config" => $this->config,
             "strapCallbackUrl" => "admin/ngrest/callback",

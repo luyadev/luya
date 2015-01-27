@@ -1,5 +1,5 @@
 <?php
-namespace luya\ngrest;
+namespace admin\ngrest;
 
 trait PluginTrait
 {

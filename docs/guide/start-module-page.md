@@ -99,7 +99,7 @@ class NewsController extends \admin\base\Controller
 {
     public function actionIndex()
     {
-        $config = new \luya\ngrest\Config('api-news-news', 'id');
+        $config = new \admin\ngrest\Config('api-news-news', 'id');
         
         $config->list->field("name", "Name")->text()->required();
         $config->list->field("title", "Titel")->text()->required();
@@ -108,9 +108,9 @@ class NewsController extends \admin\base\Controller
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);
         
-        $ngrest = new \luya\ngrest\NgRest($config);
+        $ngrest = new \admin\ngrest\NgRest($config);
         
-        return $ngrest->render((new \luya\ngrest\render\RenderCrud()));
+        return $ngrest->render((new \admin\ngrest\render\RenderCrud()));
     }
 }
 ```

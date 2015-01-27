@@ -1,13 +1,16 @@
 <?php
-namespace luya\ngrest\plugins;
+namespace admin\ngrest\plugins;
 
-use luya\ngrest\PluginAbstract;
+use admin\ngrest\PluginAbstract;
 
-class Password extends PluginAbstract
+class Select extends PluginAbstract
 {
     public function renderList($doc)
     {
-        $elmn = $doc->createElement("span", "{{item.".$this->config['name']."}}");
+        $elmn = $doc->createElement("crud-plugin-select");
+        $elmn->setAttribute("id", $this->id);
+        $elmn->setAttribute("field-value", "item.".$this->config['name']);
+        $elmn->setIdAttribute("id", true);
         $doc->appendChild($elmn);
 
         return $doc;
@@ -15,14 +18,12 @@ class Password extends PluginAbstract
 
     public function renderCreate($doc)
     {
-        $elmn = $doc->createElement("input");
-        $elmn->setAttribute("type", "password");
+        $elmn = $doc->createElement("select", "");
         $elmn->setAttribute("name", $this->name);
-        $elmn->setAttribute("placeholder", $this->alias);
         $elmn->setAttribute("id", $this->id);
         $elmn->setIdAttribute("id", true);
         $elmn->setAttribute("ng-model", $this->config['ngModel']);
-        $elmn->setAttribute("class", "form__input");
+        $elmn->setAttribute("class", "form__select");
         $doc->appendChild($elmn);
 
         return $doc;

@@ -27,7 +27,7 @@ class NgrestController extends \admin\base\Controller
     {
         $config = NgRest::findConfig($_POST['ngrestConfigHash']);
 
-        $render = new \luya\ngrest\render\RenderStrap();
+        $render = new \admin\ngrest\render\RenderStrap();
 
         $render->setItemId($_POST['itemId']);
         $render->setStrapHash($_POST['strapHash']);
@@ -41,7 +41,7 @@ class NgrestController extends \admin\base\Controller
     {
         $config = NgRest::findConfig($_GET['ngrestConfigHash']);
 
-        $render = new \luya\ngrest\render\RenderStrapCallback();
+        $render = new \admin\ngrest\render\RenderStrapCallback();
 
         $ngrest = new NgRest($config);
 
