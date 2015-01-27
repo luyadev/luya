@@ -16,14 +16,15 @@ cms (Frontend-Module)
 Create "Module.php" inside module root
 
 Example
-```
-namespace app\modules\cmsadmin;
 
-class Module extends \luya\base\Module
-{
-    public static $urlRules = [];
-}
-```
+´´´php
+    namespace app\modules\cmsadmin;
+
+    class Module extends \luya\base\Module
+    {
+        public static $urlRules = [];
+    }
+´´´
 
 
 3. Update Configuration
@@ -32,12 +33,14 @@ class Module extends \luya\base\Module
 Update "config/local.php" with path to module.php
 
 Example
+
 ```
-$config = [
-    'modules' => [
-        'myModule'=> 'app\modules\myModule\Module',
+    $config = ['modules' => ['myModule'=> 'app\modules\myModule\Module']]
 ```
 
+***Important***
+
+The used namespace in Module.php must match config entry
 
 4. Content
 ----------
@@ -54,13 +57,13 @@ cmsadmin /
 - apis
 - migrations
 - straps
-
+- - 
 cms /
 - controllers
 - views
 - assets
-- components [example content: UrlRule.php, cause its only affecting the frontend Module]
-
+- components [example content: UrlRule.php, cause its only affecting the frontend Modu
+- le]
 ```
 
 5. Table names
