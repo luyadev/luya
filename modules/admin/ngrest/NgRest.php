@@ -28,6 +28,7 @@ class NgRest
 
     public function __construct(Config $configObject)
     {
+        $configObject->onFinish();
         $this->config = $configObject;
     }
 

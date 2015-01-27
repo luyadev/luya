@@ -14,4 +14,6 @@ interface ConfigInterface
     public function getOption($key, $defaultValue = '');
 
     public function getNgRestConfigHash();
+    
+    public function onFinish();
 }

@@ -27,8 +27,12 @@ class Config implements ConfigInterface
 
     private $pointer = [];
 
+    private $pointersMap = ['list', 'create', 'update', 'delete', 'strap'];
+    
     private $options = [];
 
+    public $i18n = [];
+    
     private $restUrlPrefix = 'admin/'; /* could be: http://www.yourdomain.com/admin/; */
 
     public function __construct($restUrl, $restPrimaryKey, $options = [])
@@ -46,8 +50,14 @@ class Config implements ConfigInterface
         }
     }
 
+    public function pointerExists($pointer)
+    {
+        return array_key_exists($pointer, $this->config);
+    }
+    
     public function __get($key)
     {
+        // @TODO see if pointer exists in $this->$pointersMap
         $this->$key = [];
         $this->pointer['key'] = $key;
 
@@ -62,15 +72,38 @@ class Config implements ConfigInterface
 
         return $this;
     }
+    
+    /**
+     * testing purpose
+     * @param array $fields
+     */
+    public function i18n(array $fields)
+    {
+        $this->i18n = $fields;
+    }
 
     public function field($name, $alias)
     {
         $this->config[$this->pointer['key']][$name] = [
-            'name' => $name, 'alias' => $alias, 'plugins' => [],
+            'name' => $name, 'alias' => $alias, 'plugins' => [], 'i18n' => false
         ];
         $this->pointer['field'] = $name;
 
         return $this;
+    }
+    
+    public function fieldArgAppend($fieldName, $key, $value)
+    {
+        foreach ($this->pointersMap as $pointer) {
+           if ($this->pointerExists($pointer)) {
+               foreach($this->config[$pointer] as $field => $args) {
+                   if ($fieldName !== $field) {
+                       continue;
+                   }
+                   $this->config[$pointer][$field][$key] = $value;
+               }
+           }
+        }
     }
 
     public function copyFrom($key, $removeFields = [])
@@ -101,6 +134,7 @@ class Config implements ConfigInterface
         return $this;
     }
 
+    /*
     public function on($field, $strapMapName)
     {
         $config = $this->config[$this->pointer['key']][$this->pointer['register']];
@@ -109,6 +143,7 @@ class Config implements ConfigInterface
 
         return $this;
     }
+    */
 
     public function get()
     {
@@ -142,5 +177,12 @@ class Config implements ConfigInterface
     public function getNgRestConfigHash()
     {
         return ucfirst(sha1($this->config['restUrl'].$this->config['restPrimaryKey']));
+    }
+    
+    public function onFinish()
+    {
+        foreach($this->i18n as $fieldName) {
+            $this->fieldArgAppend($fieldName, 'i18n', true);
+        }
     }
 }

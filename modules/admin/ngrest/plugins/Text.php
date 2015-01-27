@@ -7,7 +7,7 @@ class Text extends PluginAbstract
 {
     public function renderList($doc)
     {
-        $elmn = $doc->createElement("span", "{{item.".$this->config['name']."}}");
+        $elmn = $doc->createElement("span", "{{item.".$this->name."}}");
         $doc->appendChild($elmn);
 
         return $doc;
@@ -20,7 +20,7 @@ class Text extends PluginAbstract
         $elmn->setAttribute("name", $this->name);
         $elmn->setAttribute("id", $this->id);
         $elmn->setIdAttribute("id", true);
-        $elmn->setAttribute("ng-model", $this->config['ngModel']);
+        $elmn->setAttribute("ng-model", $this->ngModel);
         $elmn->setAttribute("class", "form__input");
         $doc->appendChild($elmn);
 

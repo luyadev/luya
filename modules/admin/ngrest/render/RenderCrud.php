@@ -18,6 +18,11 @@ class RenderCrud extends RenderAbstract implements RenderInterface
 
     const TYPE_UPDATE = 'update';
 
+    public function __get($key)
+    {
+        return $this->config->getKey($key);
+    }
+    
     public function render()
     {
         $view = new \yii\base\View();
@@ -29,11 +34,21 @@ class RenderCrud extends RenderAbstract implements RenderInterface
         ));
     }
 
-    public function __get($key)
+    public function getFields($type)
     {
-        return $this->config->getKey($key);
+        $fields = [];
+        foreach ($this->config->getKey($type) as $item) {
+            $fields[] = $item['name'];
+        }
+    
+        return $fields;
     }
-
+    
+    public function getStraps()
+    {
+        return ($straps = $this->config->getKey('strap')) ? $straps : [];
+    }
+    
     /**
      *
      * @param unknown_type $element
@@ -41,39 +56,51 @@ class RenderCrud extends RenderAbstract implements RenderInterface
      */
     public function createElement($element, $configContext)
     {
-        $element['ngModel'] = $this->createNgModel($configContext, $element['name']);
-        $element['id'] = "id-".md5($element['ngModel']);
-        $doc = new \DOMDocument('1.0');
-        foreach ($element['plugins'] as $key => $plugin) {
-            $ref = new \ReflectionClass($plugin['class']);
-            $obj = $ref->newInstanceArgs($plugin['args']);
-            $obj->setConfig($element);
-            $method = "render".ucfirst($configContext);
-            $doc = $obj->$method($doc);
+        if ($element['i18n'] && $configContext !== self::TYPE_LIST) {
+            $return = [];
+            foreach(\admin\models\Lang::find()->all() as $l => $v) {
+                $ngModel = $this->i18nNgModelString($configContext, $element['name'], $v->short_code);
+                $id = "id-".md5($ngModel);
+                
+                $return[] = $v->short_code . ':<br />' . $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias']);
+            }
+            return implode("", $return);
+        } else {
+            
+            $ngModel = $this->ngModelString($configContext, $element['name']);
+            $id = "id-".md5($ngModel);
+            
+            return $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias']);        
         }
-
-        $html = $doc->saveHTML();
-
-        return $html;
     }
-
-    public function getFields($type)
+    
+    private function renderElementPlugins($configContext, $plugins, $elmnId, $elmnName, $elmnModel, $elmnAlias)
     {
-        $fields = [];
-        foreach ($this->config->getKey($type) as $item) {
-            $fields[] = $item['name'];
+        $doc = new \DOMDocument('1.0');
+        
+        foreach ($plugins as $key => $plugin) {
+            $doc = $this->renderPlugin($doc, $configContext, $plugin['class'], $plugin['args'], $elmnId, $elmnName, $elmnModel, $elmnAlias);
         }
-
-        return $fields;
+        
+        return $doc->saveHTML();
     }
-
-    private function createNgModel($configContext, $fieldId)
+    
+    private function renderPlugin($DOMDocument, $configContext, $className, $classArgs, $elmnId, $elmnName, $elmnModel, $elmnAlias)
+    {
+        $ref = new \ReflectionClass($className);
+        $obj = $ref->newInstanceArgs($classArgs);
+        $obj->setConfig($elmnId, $elmnName, $elmnModel, $elmnAlias);
+        $method = "render".ucfirst($configContext);
+        return $obj->$method($DOMDocument);
+    }
+    
+    private function ngModelString($configContext, $fieldId)
     {
         return 'data.'.$configContext.'.'.$fieldId;
     }
-
-    public function getStraps()
+    
+    private function i18nNgModelString($configContext, $fieldId, $lang)
     {
-        return ($straps = $this->config->getKey('strap')) ? $straps : [];
+        return 'data.'.$configContext.'.'.$fieldId.'[\'' . $lang . '\']';
     }
 }

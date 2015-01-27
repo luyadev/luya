@@ -31,7 +31,7 @@ class Ace extends \admin\ngrest\PluginAbstract
     {
         $elmn = $doc->createElement("div");
         $elmn->setAttribute("ui-ace", "{useWrapMode : true,  showGutter: true, theme:'".$this->getOption('theme')."', mode: '".$this->getOption('mode')."'}");
-        $elmn->setAttribute("ng-model", $this->config['ngModel']);
+        $elmn->setAttribute("ng-model", $this->ngModel);
         $doc->appendChild($elmn);
 
         return $doc;

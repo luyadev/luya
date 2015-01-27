@@ -3,8 +3,6 @@ namespace admin\ngrest;
 
 abstract class PluginAbstract
 {
-    protected $config = [];
-
     protected $id = null;
 
     protected $name = null;
@@ -13,20 +11,14 @@ abstract class PluginAbstract
 
     protected $ngModel = null;
 
-    public function setConfig($config)
-    {
-        $this->id = $config['id'];
-        $this->name = $config['name'];
-        $this->ngModel = $config['ngModel'];
-        $this->alias = $config['alias'];
-        $this->config = $config;
-    }
-
-    public function setId($id)
+    public function setConfig($id, $name, $ngModel, $alias)
     {
         $this->id = $id;
+        $this->name = $name;
+        $this->ngModel = $ngModel;
+        $this->alias = $alias;
     }
-
+    
     abstract public function renderList($doc);
 
     abstract public function renderCreate($doc);

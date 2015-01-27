@@ -16,7 +16,7 @@ class Textarea extends PluginAbstract
 
     public function renderList($doc)
     {
-        $elmn = $doc->createElement("span", "{{item.".$this->config['name']."}}");
+        $elmn = $doc->createElement("span", "{{item.".$this->name."}}");
         $doc->appendChild($elmn);
 
         return $doc;
@@ -31,7 +31,7 @@ class Textarea extends PluginAbstract
         $elmn->setAttribute("cols", $this->cols);
         $elmn->setAttribute("id", $this->id);
         $elmn->setIdAttribute("id", true);
-        $elmn->setAttribute("ng-model", $this->config['ngModel']);
+        $elmn->setAttribute("ng-model", $this->ngModel);
         $elmn->setAttribute("class", "form__input form__input--textarea");
         $doc->appendChild($elmn);
 
