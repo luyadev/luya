@@ -1,7 +1,7 @@
 <?php
 namespace admin;
 
-class AssetAngular extends \yii\web\AssetBundle
+class AssetBower extends \yii\web\AssetBundle
 {
     public $sourcePath = '@bower';
 
@@ -12,5 +12,6 @@ class AssetAngular extends \yii\web\AssetBundle
         'angular-resource/angular-resource.min.js',
         'angular-ui-router/release/angular-ui-router.min.js',
         'angular-dragdrop/src/angular-dragdrop.min.js',
+        'twig.js/twig.min.js',
     ];
 }

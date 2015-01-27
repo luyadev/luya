@@ -73,25 +73,25 @@ class NavItemController extends \admin\base\RestController
     /**
 
      $array = [
-     'nav_item_page' => [...],
-     '__placeholders' => [
-     ['content' => [...]],
-     ['banner' => [
-     ['__nav_item_page_block_items' => [
-     ['block1' => [...],
-     ['block2' => [
-
-     * RECUSRION *
-
-     ['__placholders' => [
-     ['content' => [...]],
-     ['banner' => [...]]
-     ]
-
-     ],
-     ]
-     ],
-     ]
+         'nav_item_page' => [...],
+         '__placeholders' => [
+             ['content' => [...]],
+             ['banner' => [
+                 ['__nav_item_page_block_items' => [
+                     ['block1' => [...],
+                     ['block2' => [
+            
+                     * RECUSRION *
+            
+                         ['__placholders' => [
+                             ['content' => [...]],
+                             ['banner' => [...]]
+                         ]
+        
+                     ],
+                     ]
+             ],
+         ]
      ];
 
      http://localhost/luya-website/application/admin/api-cms-navitem/tree?access-token=<ACCESS_TOKEN>&navItemPageId=3
@@ -129,7 +129,7 @@ class NavItemController extends \admin\base\RestController
     {
         $nav_item_page_block_item_data = (new \yii\db\Query())->select([
                 't1_id' => 't1.id', 't1_nav_item_page_id' => 't1.nav_item_page_id', 't1_json_config_values' => 't1.json_config_values', 't1_placeholder_var' => 't1.placeholder_var', 't1_prev_id' => 't1.prev_id',
-                't2_id' => 't2.id', 't2_name' => 't2.name', 't2_json_config' => 't2.json_config',
+                't2_id' => 't2.id', 't2_name' => 't2.name', 't2_json_config' => 't2.json_config', 't2_twig_admin' => 't2.twig_admin'
         ])->from("cms_nav_item_page_block_item t1")->leftJoin("cms_block t2", "t2.id=t1.block_id")->where(['t1.prev_id' => $prevId, 't1.nav_item_page_id' => $navItemPageId, 't1.placeholder_var' => $placeholderVar])->all();
 
         $data = [];
@@ -163,6 +163,7 @@ class NavItemController extends \admin\base\RestController
             $nav_item_page_block_item = [
                 'id' => $ipbid_value['t1_id'],
                 'name' => $ipbid_value['t2_name'],
+                'twig_admin' => $ipbid_value['t2_twig_admin'],
                 'keys' => $keys,
                 'values' => $ipbid_value['t1_json_config_values'],
                 '__placeholders' => $placeholders,

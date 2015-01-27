@@ -30,7 +30,7 @@ class AssetAdmin extends \yii\web\AssetBundle
     ];
 
     public $depends = [
-        'admin\AssetAngular',
+        'admin\AssetBower',
     ];
 
     public $publishOptions = ['forceCopy' => true];

@@ -11,7 +11,8 @@
         "bower-asset/angular-loading-bar" : "0.*@stable",
         "bower-asset/angular-ui-ace" : "0.*@stable",
         "bower-asset/angular-dragdrop" : "1.*@stable",
-        "bower-asset/ace-builds" : "1.1.8@stable"
+        "bower-asset/ace-builds" : "1.1.8@stable",
+        "bower-asset/twig.js" : "0.7.2@stable"
 	},
 	"autoload" : {
 		"psr-4" : {

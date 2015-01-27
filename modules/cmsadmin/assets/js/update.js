@@ -78,7 +78,7 @@ zaa.controller("PagePlaceholderController", function($scope) {
 /**
  * @param $scope.block from ng-repeat
  */
-zaa.controller("PageBlockEditController", function($scope, ApiCmsNavItemPageBlockItem) {
+zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPageBlockItem) {
 
 	$scope.data = $scope.block.values || {};
 	
@@ -86,6 +86,19 @@ zaa.controller("PageBlockEditController", function($scope, ApiCmsNavItemPageBloc
 	
 	$scope.toggleEdit = function() {
 		$scope.edit = !$scope.edit;
+	}
+	
+	
+	
+	$scope.renderTemplate = function(template, dataVars) {
+		
+		var template = twig({
+		    data: template
+		});
+		
+		var content = template.render(dataVars);
+		
+		return $sce.trustAsHtml(content);
 	}
 	
 	$scope.save = function () {
