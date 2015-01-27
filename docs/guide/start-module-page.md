@@ -7,26 +7,28 @@ Luya Admin Module Page
 
 How to create a new Module Navigation Item (Page) in a Luya Admin Module.
 
-1. Create ActiveRecord Model
+1. Create Model and NG Rest Config
 2. Create API Controller
 3. Add Module API Endpoint
-4. Create Module Controller and NG Rest Config
+4. Create Module Controller
 5. Add Module Menu Entry
 
 We assume to already have Migration Entry which creates the Database table.
 
-1. Create new ActiveRecord Model
+1. Create Model and NG Rest Config
 --------------------------------
 
 Create the ActiveRecord model in <ADMIN_MODULE>/models/<MODEL_NAME>. We assume to create a new News Module Navigation Item, so we call the new model News.
 
 In this example we just have name, title and text which is required for all the rest scenarios "restcreate" and "restupdate". There are cases which does not require fields on create but require them on update.
 
+***NEW*** you now have to implement those ngrest methods: getNgRestApiEndpoint(), getNgRestPrimaryKey(), ngRestConfig($config);
+
 ```php
 <?php
 namespace newsadmin\models;
 
-class News extends \yii\db\ActiveRecord
+class News extends \admin\ngrest\base\Model
 {
     public static function tableName()
     {
@@ -47,6 +49,23 @@ class News extends \yii\db\ActiveRecord
             'restupdate' => ['name', 'title', 'text'],
         ];
     }
+    
+    /* ng-rest method config */
+    
+    public $ngRestEndpoint = 'api-news-news';
+    
+    public function ngRestConfig($config) 
+    {
+        $config->list->field("name", "Name")->text()->required();
+        $config->list->field("title", "Titel")->text()->required();
+        $config->list->field("text", "Text")->textarea()->required();
+        
+        $config->create->copyFrom('list', ['id']);
+        $config->update->copyFrom('list', ['id']);
+        
+        return $config;
+    }
+    
 }
 ```
 2. Create API Controller
@@ -86,32 +105,18 @@ class Module extends \admin\base\Module
 ```
 
 
-4. Create Module Controller and NG Rest Config
+4. Create Module Controller 
 ----------------------------------------------
 
-You can see the first parameter of your ngrest\Config which defines the API Endpoint from Step 3.
+Let the controller know your model
 
 ```php
 <?php
 namespace newsadmin\controllers;
 
-class NewsController extends \admin\base\Controller
+class NewsController extends \admin\ngrest\base\Controller
 {
-    public function actionIndex()
-    {
-        $config = new \admin\ngrest\Config('api-news-news', 'id');
-        
-        $config->list->field("name", "Name")->text()->required();
-        $config->list->field("title", "Titel")->text()->required();
-        $config->list->field("text", "Text")->textarea()->required();
-        
-        $config->create->copyFrom('list', ['id']);
-        $config->update->copyFrom('list', ['id']);
-        
-        $ngrest = new \admin\ngrest\NgRest($config);
-        
-        return $ngrest->render((new \admin\ngrest\render\RenderCrud()));
-    }
+	public $modelClass = 'newsadmin\models\News';
 }
 ```
 

@@ -4,9 +4,22 @@ namespace admin\ngrest\base;
 
 abstract class Model extends \yii\db\ActiveRecord
 {
-    abstract public function getNgRestApiEndpoint();
+    public $ngRestEndpoint = null;
     
-    abstract public function getNgRestPrimaryKey();
+    public $ngRestPrimaryKey = null;
+    
+    public function getNgRestApiEndpoint()
+    {
+        return $this->ngRestEndpoint;
+    }
+    
+    public function getNgRestPrimaryKey()
+    {
+        if (!empty($this->ngRestPrimaryKey)) {
+            return $this->ngRestPrimaryKey;
+        }
+        return $this->getTableSchema()->primaryKey[0];
+    }
     
     abstract public function ngRestConfig($config);
     
