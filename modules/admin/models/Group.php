@@ -49,8 +49,8 @@ class Group extends \admin\ngrest\base\Model
         $config->list->field("text", "Beschreibung")->textarea();
         $config->list->field("id", "ID")->text();
 
-        $config->create->copyFrom('list');
-        $config->update->copyFrom('list');
+        $config->create->copyFrom('list', ['id']);
+        $config->update->copyFrom('list', ['id']);
 
         return $config;
     }
