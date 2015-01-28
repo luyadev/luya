@@ -10,22 +10,10 @@ class Ace extends \admin\ngrest\PluginAbstract
 {
     use \admin\ngrest\PluginTrait;
 
-    private $options = [
+    public $options = [
         "theme" => "chrome",
         "mode" => "json",
     ];
-
-    public function __construct(array $options = [])
-    {
-        foreach ($options as $key => $value) {
-            $this->options[$key] = $value;
-        }
-    }
-
-    private function getOption($key)
-    {
-        return (isset($this->options[$key])) ? $this->options[$key] : false;
-    }
 
     public function renderCreate($doc)
     {

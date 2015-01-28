@@ -8,7 +8,7 @@ zaa.directive('zaaInjector', function($compile) {
 			"options" : '='
 		},
 		link : function($scope, $element, attr) {
-			$element.replaceWith($compile(angular.element('<' + $scope.dir + ' options="options" ng-model="model"/>'))($scope));
+			$element.replaceWith($compile(angular.element('<' + $scope.dir + ' options="options" model="model"/>'))($scope));
 		}
 	}
 });
@@ -17,8 +17,9 @@ zaa.directive('zaaInputText', function(){
 	return {
 		restrict : 'E',
 		transclude : false,
+		replace : true,
 		scope : {
-			"ngModel" : '=',
+			"model" : '=',
 			"name" : '=',
 			"options" : '='
 		},
@@ -26,22 +27,42 @@ zaa.directive('zaaInputText', function(){
 			/* console.log($scope.options) */
 		},
 		template : function() {
-			return '<input type="text" ng-model="ngModel" />';
+			return '<input type="text" ng-model="model" />';
 		}
 	}
 });
 
-zaa.directive('zaaInputTextarea', function(){
+zaa.directive('zaaInputPassword', function(){
 	return {
 		restrict : 'E',
 		transclude : false,
+		replace : true,
 		scope : {
-			"ngModel" : '=',
+			"model" : '=',
+			"name" : '=',
+			"options" : '='
+		},
+		controller : function($scope) {
+			/* console.log($scope.options) */
+		},
+		template : function() {
+			return '<input type="password" ng-model="model" />';
+		}
+	}
+});
+
+zaa.directive('zaaTextarea', function(){
+	return {
+		restrict : 'E',
+		transclude : false,
+		replace : true,
+		scope : {
+			"model" : '=',
 			"name" : '=',
 			"options" : '='
 		},
 		template : function() {
-			return '<texarea ng-model="ngModel" /></textarea>';
+			return '<textarea ng-model="model"></textarea>';
 		}
 	}
 });
@@ -50,8 +71,9 @@ zaa.directive('zaaInputSelect', function(){
 	return {
 		restrict : 'E',
 		transclude : false,
+		replace : true,
 		scope : {
-			"ngModel" : '=',
+			"model" : '=',
 			"name" : '=',
 			"options" : '='
 		},
@@ -61,7 +83,7 @@ zaa.directive('zaaInputSelect', function(){
 		},
 		
 		template : function() {
-			return '<select ng-options="item.id as item.label for item in options" ng-model="ngModel" >';
+			return '<select ng-options="item.id as item.label for item in options" ng-model="model" >';
 		}
 	}
 });
