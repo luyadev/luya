@@ -1,4 +1,4 @@
-zaa.controller("DefaultController", function ($scope, $http, $state) {
+zaa.controller("DefaultController", function ($scope, $http, $state, AdminService) {
 	
 	$scope.moduleId = $state.params.moduleId;
 	
@@ -12,6 +12,7 @@ zaa.controller("DefaultController", function ($scope, $http, $state) {
 		
 		var res = id.split("-");
 		$state.go('default.route', { moduleRouteId : res[0], controllerId : res[1], actionId : res[2]});
+		AdminService.bodyClass = '';
 	}
 	
 	$scope.get = function () {
