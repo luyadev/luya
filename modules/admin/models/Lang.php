@@ -5,10 +5,10 @@ class Lang extends \admin\ngrest\base\Model
 {
     public $ngRestEndpoint = 'api-admin-lang';
 
+    public $i18n = ['name'];
+    
     public function ngRestConfig($config)
     {
-        $config->i18n(['name']);
-
         $config->list->field("name", "Name")->text()->required();
         $config->list->field("short_code", "Kurz-Code")->text()->required();
         $config->list->field("id", "ID")->text();
@@ -23,13 +23,6 @@ class Lang extends \admin\ngrest\base\Model
     {
         parent::init();
         $this->on(self::EVENT_BEFORE_INSERT, [$this, 'beforeCreate']);
-        $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'beforeUpdate']);
-        $this->on(self::EVENT_AFTER_FIND, [$this, 'afterFind']);
-    }
-
-    public function afterFind()
-    {
-        $this->name = json_decode($this->name, true);
     }
 
     public static function tableName()
@@ -51,14 +44,9 @@ class Lang extends \admin\ngrest\base\Model
             'restupdate' => ['name', 'short_code']
         ];
     }
-    public function beforeUpdate()
-    {
-        $this->name = json_encode($this->name);
-    }
 
     public function beforeCreate()
     {
-        $this->name = json_encode($this->name);
         $this->is_default = 0;
     }
 
