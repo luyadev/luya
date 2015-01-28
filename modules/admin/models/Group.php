@@ -1,7 +1,6 @@
 <?php
 namespace admin\models;
 
-use Yii;
 
 /**
  * This is the model class for table "admin_group".
@@ -39,20 +38,20 @@ class Group extends \admin\ngrest\base\Model
             'restupdate' => ['name', 'text']
         ];
     }
-    
+
     // ngrest
-    
+
     public $ngRestEndpoint = 'api-admin-group';
-    
+
     public function ngRestConfig($config)
     {
         $config->list->field("name", "Name")->text()->required();
         $config->list->field("text", "Beschreibung")->textarea();
         $config->list->field("id", "ID")->text();
-        
+
         $config->create->copyFrom('list');
         $config->update->copyFrom('list');
-        
+
         return $config;
     }
 }

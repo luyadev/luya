@@ -18,7 +18,7 @@ abstract class PluginAbstract
         $this->ngModel = $ngModel;
         $this->alias = $alias;
     }
-    
+
     abstract public function renderList($doc);
 
     abstract public function renderCreate($doc);

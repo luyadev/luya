@@ -4,19 +4,19 @@ namespace cmsadmin\models;
 class Layout extends \admin\ngrest\base\Model
 {
     public $ngRestEndpoint = 'api-cms-layout';
-    
+
     public function ngRestConfig($config)
     {
         $config->list->field("name", "Name")->text()->required();
         $config->list->field("json_config", "JSON Config")->ace();
         $config->list->field("view_file", "Twig Filename (*.twig)")->text()->required();
-        
+
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);
-        
+
         return $config;
     }
-    
+
     public static function tableName()
     {
         return 'cms_layout';
