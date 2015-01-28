@@ -17,11 +17,16 @@ JSON CONFIG
         {
             "var" : "h1",
             "label" : "Uebeschrift Inhalt",
-            "type" : "zaa-input-text",
-            "options" : {
-                "test" : 1,
-                "test2" : 2
-            }
+            "type" : "zaa-input-text"
+        },
+        {
+        	"var" : "selection",
+        	"label" : "Select Box Demo",
+        	"type" : "zaa-input-select",
+        	"options" : [
+        		{ "id" : 1, "label" : "Herr" },
+        		{ "id" : 2, "label" : "Frau"; }
+        	]
         }
     ],
     "placeholders" : [
@@ -56,7 +61,7 @@ TWIG ADMIN
 | Availables Vars | Content
 | --------------- | ------- 
 | vars			  | Contains all the rendered variables defined in the json config. for example to output the previous mentiond h1 variable use vars.h1
-| block			  | contains the current block item with the following variables <ul><li>***id*** </li><li>***keys** containing all the variables from vars. Example of accessing the options array from json config like this: block.keys.0.options</li><li>***name*** block name from the database</li><li>*** twig_admin*** the twig admin content itself (which your currently working)</li><li>*** values *** the values which have been generated from the database (not like vars.name which are directly beeing refreshed by angular).</li></ul>
+| block			  | contains the current block item with the following variables <ul><li>***id*** </li><li>***keys*** containing all the variables from vars. Example of accessing the options array from json config like this: block.keys.0.options</li><li>***name*** block name from the database</li><li>***twig_admin*** the twig admin content itself (which your currently working)</li><li>***values*** the values which have been generated from the database (not like vars.name which are directly beeing refreshed by angular).</li></ul>
 
 ```
 <h1>{{ vars.h1 }}</h1>
