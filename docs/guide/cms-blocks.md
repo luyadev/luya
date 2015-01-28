@@ -24,8 +24,14 @@ JSON CONFIG
         	"label" : "Select Box Demo",
         	"type" : "zaa-input-select",
         	"options" : [
-        		{ "id" : 1, "label" : "Herr" },
-        		{ "id" : 2, "label" : "Frau"; }
+        		{ 
+        			"id" : 1, 
+        			"label" : "Herr" 
+    			},
+        		{ 
+        			"id" : 2,
+        			"label" : "Frau"
+    			}
         	]
         }
     ],
