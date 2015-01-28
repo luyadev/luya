@@ -12,35 +12,34 @@ abstract class PluginAbstract
     protected $ngModel = null;
 
     public $options = [];
-    
+
     public function __construct(array $options = [])
     {
         foreach ($options as $key => $value) {
             $this->options[$key] = $value;
         }
-        
+
         $this->init();
     }
-    
+
     public function init()
     {
-        
     }
-    
+
     public function getOption($key)
     {
         return (isset($this->options[$key])) ? $this->options[$key] : false;
     }
-    
+
     public function setOption($key, $value)
     {
         if (!$this->getOption($key)) {
             throw new \Exception("The requested set key does not exists in options list");
         }
-        
+
         $this->options[$key] = $value;
     }
-    
+
     public function setConfig($id, $name, $ngModel, $alias)
     {
         $this->id = $id;

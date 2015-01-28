@@ -66,7 +66,6 @@ class NavItemPage extends \cmsadmin\base\NavItemType
                 foreach ($jsonConfig['placeholders'] as $item) {
                     $insertedHolders[$item['var']] = $this->renderPlaceholder($navItemPageId, $item['var'], $placeholder['id']);
                 }
-
             }
             $string .= $twig->render($placeholder['twig_frontend'], [
                 'vars' => $configValues,

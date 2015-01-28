@@ -6,7 +6,7 @@ class Lang extends \admin\ngrest\base\Model
     public $ngRestEndpoint = 'api-admin-lang';
 
     public $i18n = ['name'];
-    
+
     public function ngRestConfig($config)
     {
         $config->list->field("name", "Name")->text()->required();

@@ -1,7 +1,6 @@
 <?php
 namespace admin\models;
 
-
 /**
  * This is the model class for table "admin_group".
  *

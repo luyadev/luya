@@ -21,7 +21,7 @@ class Password extends PluginAbstract
         $elmn->setAttribute("model", $this->ngModel);
         $elmn->setAttribute("class", "form__input");
         $doc->appendChild($elmn);
-        
+
         return $doc;
     }
 

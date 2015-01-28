@@ -6,18 +6,18 @@ use admin\ngrest\PluginAbstract;
 class Select extends PluginAbstract
 {
     private $_values = [];
-    
+
     public $options = [
-        'values' => []
+        'values' => [],
     ];
-    
+
     public function init()
     {
         $values = [];
-        foreach($this->getOption('values') as $key => $value) {
+        foreach ($this->getOption('values') as $key => $value) {
             $values[] = [
                 "id" => $key,
-                "label" => $value
+                "label" => $value,
             ];
         }
         $this->setOption('values', $values);
@@ -40,7 +40,7 @@ class Select extends PluginAbstract
 
         return $doc;
     }
-    
+
     public function renderUpdate($doc)
     {
         return $this->renderCreate($doc);
