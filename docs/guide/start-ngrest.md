@@ -1,80 +1,53 @@
-NGREST CLASS
+NGREST
 ============
-1. What is NG-REST?
-2. Setup new NG-REST
-3. NG-Rest Config
-4. Available Config Plugins
-5. Straps (&Lifecycle)
-6. Create your own Strap
 
 What is NG-REST?
 ----------------
 NG-Rest is the luya CRUD Configurator for REST APIS. Basicaly create the api and configure the crud (cread, read, update & delete) via the ng-rest configuration and you will get a fully functional Angular Crud Manager.
 
-Setup new NG-REST
------------------
-First of all you have to create a Database Table, we assume to make a News Administration NG-REST Crud. 
-1. Create your MySQL Table (Name: tbl_news)   
-2. Create the Yii2 Model file. ({Module}/models/News.php)
+Where?
+--------
+All the ngrest configurations are made directly in the Model class. Create a ngRestConfig($config) method inside the controller to modify your configuration. By default a configuration object is passed directly into this method.
+
 ```php
-namespace {Module}\models;
-
-use Yii;
-
-class News extends \yii\db\ActiveRecord
+public function ngRestConfig($config)
 {
-	public static function tableName()
-	{
-		return 'tbl_news';
-	}
-
-	public function rules()
-	{
-		return [
-				[['title', 'userId', 'createDate', 'text'], 'required', 'on' => 'restcreate'],
-				[['title', 'userId', 'updateDate', 'text'], 'required', 'on' => 'restupdate']
-		];
-	}
-
-    public function scenarios()
-    {
-        return [
-            'restcreate' => ['title', 'userId', 'createDate', 'text'],
-            'restupdate' => ['title', 'userId', 'updateDate', 'text']
-        ];
-    }
+    // here you can add, modify, delete your config
+    $config->list->field("title", "Title")->text->required();
+    
+    // at the end just return the config variable back
+    return $config;
 }
 ```
-3. Create the API Endpoint class file. ({Module}/apis/NewsController.php)
-```php
-namespace {Module}\apis;
 
-class NewsController extends \admin\base\RestActiveController
-{   
-    public $modelClass = '{Module}\models\News';
+Multilingual fields
+-------------------
+If you want to have multilingual fields based on the system (admin) language table you can just pass the variable ***$i18n*** an array containing are fields which should be translated. like this:
+```php
+class Model extends \admin\ngrest\base\Model
+{
+    public $i18n = ['title', 'description']; // will transform those field into multilingual fields
 }
 ```
-4. Let the Module ({Module}/Module.php) know you have Rest Api and make the Nodename inside of it:
-```php
-public $apis = [
-        'api-news-news' => 'admin\apis\NewsController',
-    ];
-```
-5. Create the NG-Rest Config
-```php
-	$config = new \admin\ngrest\Config('api-admin-user', 'id');
 
-    $config->create->field("title", "Anrede")->select()->optionValue(\admin\models\User::getTitles());
-	$config->create->field("firstname", "Vorname")->text()->required();
-	$config->create->field("lastname", "Nachname")->text()->required();
-	$config->create->field("email", "E-Mail-Adresse")->text()->required();
-	$config->create->field("password", "Passwort")->password()->required();
-    
-    $config->list->copyFrom('create', ['password']);
-	$config->update->copyFrom('create', ['password']);
-	
-    $ngrest = new \admin\ngrest\NgRest($config);
-    
-    return $ngrest->render(new \admin\ngrest\render\RenderCrud());
-```
+Configuration Pointers
+--------------------
+The ng-rest config pointers describes the "scene" where the to configure fields should appear. Available pointers are:
+* ***list*** This pointer describes the moment when the fields are listed in the grid view (tabelaric list)
+* ***create*** This pointer descibtes the "create new entry" form.
+* ***update*** This pointer describtes the "update existing entry" form.
+* ***strap*** This pointer describes the attached "buttons and actions" forms.
+* ***delete*** ***TBD***
 
+For example if you want to add the fields ***title*** and ***description*** into the list and create pointers just put:
+```php
+public function ngRestConfig($config)
+{
+    $this->list->field("title", "Title");
+    $this->list->field("description", "Description");
+    
+    $this->create->field("title", "Title");
+    $this->create->field("description", "Description");
+}
+```
+The fields title and description are now configure in the list and create actions. So you could now see the fields in the grid view and you could create new entrys for those two fields.

@@ -68,6 +68,21 @@ class News extends \admin\ngrest\base\Model
     
 }
 ```
+
+If you want to add multlingual fields, just add an array for the to configure fields in the $i18n variable like this:
+```php
+class News extends \admin\ngrest\base\Model
+{
+	...
+	
+	public $i18n = ['title', 'text'];
+	
+	...
+}
+```
+
+Now all the crud actions for the fields "title" and "text" are available in the system languages. It will generate a json inside of the sql table which gets en/decoded.
+
 2. Create API Controller
 ------------------------
 
