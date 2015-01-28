@@ -88,15 +88,16 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
 		$scope.edit = !$scope.edit;
 	}
 	
-	
-	
-	$scope.renderTemplate = function(template, dataVars) {
+	$scope.renderTemplate = function(template, dataVars, block) {		
 		
 		var template = twig({
 		    data: template
 		});
 		
-		var content = template.render(dataVars);
+		var content = template.render({
+			vars : dataVars,
+			block : block
+		});
 		
 		return $sce.trustAsHtml(content);
 	}

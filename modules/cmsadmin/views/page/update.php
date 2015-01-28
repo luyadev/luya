@@ -11,11 +11,11 @@
 
     <div ng-repeat="block in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController" data-drag="true" jqyoui-draggable="" data-jqyoui-options="{revert: true, helper : 'clone'}" ng-model="block">
 
-        <div ng-click="toggleEdit()" style="margin:0px; padding:5px; border:1px solid #999;"><small>({{block.name}})</small><div ng-bind-html="renderTemplate(block.twig_admin, data)"></div></div>
+        <div ng-click="toggleEdit()" style="margin:0px; padding:5px; border:1px solid #999;"><small>({{block.name}})</small><div ng-bind-html="renderTemplate(block.twig_admin, data, block)"></div></div>
         <div ng-show="edit" style="background-color:#FFF; padding:10px; border:1px solid #333;">
             <div ng-repeat="field in block.keys">
                 <label style="display:block; padding-bottom:5px;"><strong>{{field.label}}</strong>:</label>
-                <input type="text" ng-model="data[field.var]" style="width:350px; padding:7px;" />
+                <zaa-injector dir="field.type" options="field.options" model="data[field.var]"></zaa-injector>
             </div>
             <a ng-click="save()" style="background-color:black; color:white;">SAVE</a>
         </div>

@@ -36,9 +36,9 @@ class NavItemPage extends \cmsadmin\base\NavItemType
             $insertion[$item['var']] = $this->renderPlaceholder($this->id, $item['var'], 0);
         }
 
-        return $twig->render($this->layout->view_file, array(
+        return $twig->render($this->layout->view_file, [
             "placeholders" => $insertion,
-        ));
+        ]);
     }
 
     public function renderPlaceholder($navItemPageId, $placeholderVar, $prevId)
@@ -67,9 +67,11 @@ class NavItemPage extends \cmsadmin\base\NavItemType
                     $insertedHolders[$item['var']] = $this->renderPlaceholder($navItemPageId, $item['var'], $placeholder['id']);
                 }
 
-                $configValues['placeholders'] = $insertedHolders;
             }
-            $string .= $twig->render($placeholder['twig_frontend'], $configValues);
+            $string .= $twig->render($placeholder['twig_frontend'], [
+                'vars' => $configValues,
+                'placeholders' => $insertedHolders
+            ]);
         }
 
         return $string;

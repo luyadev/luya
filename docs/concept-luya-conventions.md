@@ -40,6 +40,8 @@ PHP
 ---------
 PSR2 Naming convention
 
+(http://www.php-fig.org/psr/psr-2/)
+
 ### Example
 
 This example encompasses some of the rules below as a quick overview:
@@ -75,9 +77,14 @@ class Foo extends Bar implements FooInterface
 CSS
 -----
 
-http://cssguidelin.es/
+(http://cssguidelin.es/)
 
 JS
 -----
 
-https://github.com/airbnb/javascript
+(https://github.com/airbnb/javascript)
+
+
+JSON-SCHEMA:
+------------
+(http://json-schema.org/latest/json-schema-core.html)
