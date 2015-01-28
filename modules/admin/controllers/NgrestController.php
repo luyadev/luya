@@ -1,7 +1,7 @@
 <?php
 namespace admin\controllers;
 
-use luya\ngrest\NgRest;
+use admin\ngrest\NgRest;
 use yii\web\Response;
 
 class NgrestController extends \admin\base\Controller
