@@ -24,10 +24,7 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"luya\\" : "src/",
-			"admin\\" : "modules/admin",
-			"cms\\" : "modules/cms",
-			"cmsadmin\\" : "modules/cmsadmin"
+			"luya\\" : "src/"
 		}
 	},
 	"extra": {
