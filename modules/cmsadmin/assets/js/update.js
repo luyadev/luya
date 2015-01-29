@@ -89,7 +89,9 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
 	}
 	
 	$scope.renderTemplate = function(template, dataVars, block) {		
-		
+		if (template == undefined) {
+			return '';
+		}
 		var template = twig({
 		    data: template
 		});
@@ -110,6 +112,9 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
 	
 });
 
+/**
+ * @TODO HANDLING SORT INDEX OF EACH BLOCK
+ */
 zaa.controller("DropBlockController", function($scope, ApiCmsNavItemPageBlockItem) {
 	
 	$scope.PagePlaceholderController = $scope.$parent;
@@ -119,20 +124,18 @@ zaa.controller("DropBlockController", function($scope, ApiCmsNavItemPageBlockIte
 	$scope.onDrop = function() {
 		var moveBlock = $scope.droppedBlock['vars'] || false;
 		if (moveBlock == false) {
-			console.log('add_new_block', $scope.droppedBlock);
 			ApiCmsNavItemPageBlockItem.save($.param({ prev_id : $scope.placeholder.prev_id, block_id : $scope.droppedBlock.id , placeholder_var : $scope.placeholder.var, nav_item_page_id : $scope.placeholder.nav_item_page_id }), function(rsp) {
 				/* @todo: refresh statement, on change statement ? */
 				$scope.PagePlaceholderController.NavItemTypePageController.refresh();
 			})
 		} else {
-			console.log('move_block_to');
-			console.log('current_placeholder', $scope.placeholder);
-			console.log('to_move_block', $scope.droppedBlock);
-			/*
-			ApiCmsNavItemPageBlockItem.update($.param({ prev_id : $scope.placeholder.prev_id, block_id : $scope.droppedBlock.id , placeholder_space : $scope.placeholder.space, nav_item_page_id : $scope.placeholder.nav_item_page_id }), function(rsp) {
-				$scope.par.type.refresh()
-			})
-			*/
+			ApiCmsNavItemPageBlockItem.update({ id : $scope.droppedBlock.id }, $.param({
+				prev_id : $scope.placeholder.prev_id,
+				placeholder_var : $scope.placeholder.var
+			}), function(rsp) {
+				$scope.PagePlaceholderController.NavItemTypePageController.refresh();
+				return;
+			});
 		}
 		
 		
