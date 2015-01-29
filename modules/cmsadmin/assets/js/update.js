@@ -117,7 +117,7 @@ zaa.controller("DropBlockController", function($scope, ApiCmsNavItemPageBlockIte
 	$scope.droppedBlock = {};
 	
 	$scope.onDrop = function() {
-		var moveBlock = $scope.droppedBlock['keys'] || false;
+		var moveBlock = $scope.droppedBlock['vars'] || false;
 		if (moveBlock == false) {
 			console.log('add_new_block', $scope.droppedBlock);
 			ApiCmsNavItemPageBlockItem.save($.param({ prev_id : $scope.placeholder.prev_id, block_id : $scope.droppedBlock.id , placeholder_var : $scope.placeholder.var, nav_item_page_id : $scope.placeholder.nav_item_page_id }), function(rsp) {

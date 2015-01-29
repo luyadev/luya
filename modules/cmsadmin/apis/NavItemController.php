@@ -164,7 +164,7 @@ class NavItemController extends \admin\base\RestController
                 'id' => $ipbid_value['t1_id'],
                 'name' => $ipbid_value['t2_name'],
                 'twig_admin' => $ipbid_value['t2_twig_admin'],
-                'keys' => $keys,
+                'vars' => $keys,
                 'values' => $ipbid_value['t1_json_config_values'],
                 '__placeholders' => $placeholders,
             ];

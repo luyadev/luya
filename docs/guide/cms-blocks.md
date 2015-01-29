@@ -67,7 +67,7 @@ TWIG ADMIN
 | Availables Vars | Content
 | --------------- | ------- 
 | vars			  | Contains all the rendered variables defined in the json config. for example to output the previous mentiond h1 variable use vars.h1
-| block			  | contains the current block item with the following variables <ul><li>***id*** </li><li>***keys*** containing all the variables from vars. Example of accessing the options array from json config like this: block.keys.0.options</li><li>***name*** block name from the database</li><li>***twig_admin*** the twig admin content itself (which your currently working)</li><li>***values*** the values which have been generated from the database (not like vars.name which are directly beeing refreshed by angular).</li></ul>
+| block			  | contains the current block item with the following variables <ul><li>***id*** </li><li>***vars*** containing all the variables from vars. Example of accessing the options array from json config like this: block.vars.0.options</li><li>***name*** block name from the database</li><li>***twig_admin*** the twig admin content itself (which your currently working)</li><li>***values*** the values which have been generated from the database (not like vars.name which are directly beeing refreshed by angular).</li></ul>
 
 ```
 <h1>{{ vars.h1 }}</h1>

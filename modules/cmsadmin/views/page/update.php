@@ -13,7 +13,7 @@
 
         <div ng-click="toggleEdit()" style="margin:0px; padding:5px; border:1px solid #999;"><small>({{block.name}})</small><div ng-bind-html="renderTemplate(block.twig_admin, data, block)"></div></div>
         <div ng-show="edit" style="background-color:#FFF; padding:10px; border:1px solid #333;">
-            <div ng-repeat="field in block.keys">
+            <div ng-repeat="field in block.vars">
                 <label style="display:block; padding-bottom:5px;"><strong>{{field.label}}</strong>:</label>
                 <zaa-injector dir="field.type" options="field.options" model="data[field.var]"></zaa-injector>
             </div>
