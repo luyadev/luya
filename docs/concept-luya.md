@@ -508,7 +508,7 @@ public function getMenu()
 REST MODEL
 ----------------------
 
-All the rest models does need to have two secnarios: ***restcreate*** and ***restupdate***.
+All the rest models does need to have two scenarios: ***restcreate*** and ***restupdate***.
 
 example scenario
 ```php
