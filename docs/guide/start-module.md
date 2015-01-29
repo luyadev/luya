@@ -17,14 +17,14 @@ Create "Module.php" inside module root
 
 Example
 
-´´´php
+```php
     namespace app\modules\cmsadmin;
 
     class Module extends \luya\base\Module
     {
         public static $urlRules = [];
     }
-´´´
+```
 
 
 3. Update Configuration
