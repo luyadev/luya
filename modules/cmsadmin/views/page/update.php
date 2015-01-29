@@ -11,6 +11,10 @@
 
     <div ng-repeat="block in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController" data-drag="true" jqyoui-draggable="" data-jqyoui-options="{revert: true, helper : 'clone'}" ng-model="block">
 
+        <div style="background-color:green; color:white; padding:20px; margin:0px; text-align:center;" ng-controller="DropBlockController" ng-model="droppedBlock" data-drop="true" jqyoui-droppable="{onDrop: 'onDrop', multiple : true}">
+            SUB Drop blocks here!
+        </div>
+
         <div ng-click="toggleEdit()" style="margin:0px; padding:5px; border:1px solid #999;"><small>({{block.name}})</small><div ng-bind-html="renderTemplate(block.twig_admin, data, block)"></div></div>
         <div ng-show="edit" style="background-color:#FFF; padding:10px; border:1px solid #333;">
             <div ng-repeat="field in block.vars">
