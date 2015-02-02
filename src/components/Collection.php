@@ -10,7 +10,7 @@ class Collection extends \yii\base\Component
 {
     /* page */
 
-    private $page;
+    private $page = null;
 
     public function setPage(\luya\collection\Page $page)
     {
@@ -23,7 +23,7 @@ class Collection extends \yii\base\Component
 
     public function getPage()
     {
-        if (($pref = $this->page->getPrevObject()) !== false) {
+        if (!is_null($this->page) && ($pref = $this->page->getPrevObject()) !== false) {
             return $this->page->getPrevObject();
         }
 
