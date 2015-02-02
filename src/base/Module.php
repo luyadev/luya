@@ -16,7 +16,7 @@ class Module extends \yii\base\Module
      */
     public $requiredComponents = [];
 
-    public $useAppLayoutPath = false;
+    public $useAppLayoutPath = true;
 
     /**
      *
@@ -67,10 +67,10 @@ class Module extends \yii\base\Module
     public function getLayoutPath()
     {
         if ($this->useAppLayoutPath) {
-            return '@app/views/'.$this->id.'/layouts';
+            $this->setLayoutPath('@app/views/'.$this->id.'/layouts');
         }
 
-        return $this->getLayoutPath();
+        return parent::getLayoutPath();
     }
 
     public function setContext($name)
