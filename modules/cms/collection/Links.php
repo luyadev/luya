@@ -35,7 +35,7 @@ class Links extends \luya\collection\Links implements \luya\collection\LinksInte
             if ($this->subNodeExists($item['id'])) {
                 $this->iteration($item['id'], $urlPrefix.$item['rewrite'].'/');
             }
-            $this->urls[$urlPrefix.$item['rewrite']] = ['url' => $urlPrefix.$item['rewrite'], 'parent_nav_id' => $parentNavId, 'id' => $item['id'], 'title' => $item['title'], 'lang' => $item['lang_short_code'], 'cat' => $item['cat_rewrite']];
+            $this->urls[$urlPrefix.$item['rewrite']] = ['url' => $urlPrefix.$item['rewrite'], 'parent_nav_id' => (int)$parentNavId, 'id' => (int)$item['id'], 'nav_item_id' => (int)$item['nav_item_id'], 'title' => $item['title'], 'lang' => $item['lang_short_code'], 'cat' => $item['cat_rewrite']];
         }
     }
 
