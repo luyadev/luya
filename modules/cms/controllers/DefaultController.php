@@ -88,6 +88,7 @@ class DefaultController extends \luya\base\PageController
 
         $item = $itemType->getType();
 
+        $options['navItemId'] = $navItemId;
         $item->setOptions($options);
 
         $content = $item->getContent();
