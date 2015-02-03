@@ -7,6 +7,8 @@ abstract class NavItemType extends \yii\db\ActiveRecord
 
     abstract public function getHeaders();
 
+    abstract public function getContext();
+
     public function setOptions($options)
     {
         $this->options = $options;
