@@ -41,6 +41,12 @@ class DefaultController extends \luya\base\PageController
         /* above collection based */
 
         if (empty($fullUrl)) {
+            $pageContent = $this->getPageContent($this->findDefaultPage());
+            
+            return $this->render('index', [
+                'pageContent' => $pageContent
+            ]);
+            
             echo "FIND HOME! 404!";
             exit;
         }
