@@ -14,6 +14,11 @@ abstract class NavItemType extends \yii\db\ActiveRecord
         $this->options = $options;
     }
 
+    public function getOptions()
+    {
+        return $this->options;
+    }
+    
     public function getOption($key)
     {
         return (isset($this->options[$key])) ? $this->options[$key] : false;
