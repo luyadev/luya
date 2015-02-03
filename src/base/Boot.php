@@ -31,7 +31,7 @@ class Boot
     public function __construct()
     {
         foreach ($this->_modes as $name => $value) {
-            $this->setConfig($value, include (__DIR__.'/../config/'.$name.'.php'));
+            $this->setConfig($value, include(__DIR__.'/../config/'.$name.'.php'));
         }
     }
 
