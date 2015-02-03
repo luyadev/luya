@@ -19,7 +19,14 @@ Adding url rules
 ```
     public static $urlRules = [
         ['pattern' => 'estore/warenkorb', 'route' => 'estore/default/basket'],
+        ['pattern' => 'estore/artikel-detail-infos/<articleId:\d+>', 'route' => 'estore/default/article']
     ];
+```
+
+createUrlDepneding on Rules
+---------------------------
+```php
+<?= \luya\helpers\Url::to('estore/default/article', ['articleId' => 123]); ?>
 ```
 
 $useAppLayoutPath
