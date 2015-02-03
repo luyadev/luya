@@ -49,6 +49,8 @@ class Module extends \yii\base\Module
 
     public $context = null;
 
+    public $contextOptions = [];
+    
     /**
      *
      * @throws Exception
@@ -100,6 +102,16 @@ class Module extends \yii\base\Module
     public function getContext()
     {
         return $this->context;
+    }
+    
+    public function setContextOptions(array $options)
+    {
+        $this->contextOptions = $options;
+    }
+    
+    public function getContextOptions()
+    {
+        return $this->contextOptions;
     }
 
     public $moduleLayout = 'moduleLayout';
