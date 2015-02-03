@@ -16,7 +16,6 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         return 'cms_nav_item_page_block_item';
     }
 
-
     public function scenarios()
     {
         return [
@@ -24,12 +23,12 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
             'restupdate' => ['block_id', 'placeholder_var', 'nav_item_page_id', 'json_config_values', 'prev_id'],
         ];
     }
-    
+
     public function beforeUpdate()
     {
         $this->json_config_values = json_encode($this->json_config_values);
     }
-    
+
     public function afterFind()
     {
         $this->json_config_values = json_decode($this->json_config_values, true);
