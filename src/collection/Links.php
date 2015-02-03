@@ -10,11 +10,11 @@ class Links extends \luya\base\Collection implements \luya\collection\LinksInter
         return $this->links;
     }
 
-    public function getByArguments(array $argsArry)
+    public function getByArguments(array $argsArray)
     {
         $_index = $this->getAll();
 
-        foreach ($argsArry as $key => $value) {
+        foreach ($argsArray as $key => $value) {
             foreach ($_index as $link => $args) {
                 if (!isset($args[$key])) {
                     unset($_index[$link]);
@@ -28,6 +28,13 @@ class Links extends \luya\base\Collection implements \luya\collection\LinksInter
 
         return $_index;
     }
+    
+    public function getOneByArguments(array $argsArray)
+    {
+        $links = $this->getByArguments($argsArray);
+        return array_values($links)[0];
+    }
+    
     public function addLink($link, $args)
     {
         $this->links[$link] = $args;
