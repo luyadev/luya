@@ -39,6 +39,7 @@ class NavItemModule extends \cmsadmin\base\NavItemType
 
         $this->_module = \yii::$app->getModule($module);
         $this->_module->setContext('cms');
+        $this->_module->setContextOptions($this->getOptions());
 
         return $this->_module;
     }
