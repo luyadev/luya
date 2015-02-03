@@ -46,9 +46,6 @@ class DefaultController extends \luya\base\PageController
             return $this->render('index', [
                 'pageContent' => $pageContent
             ]);
-            
-            echo "FIND HOME! 404!";
-            exit;
         }
 
         $parts = explode("/", $fullUrl);
