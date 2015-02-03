@@ -19,21 +19,22 @@ class UrlManager extends \yii\web\UrlManager
     public function createUrl($params)
     {
         $response = parent::createUrl($params);
-        
         $params = (array) $params;
         
         $moduleName = \luya\helpers\Url::fromRoute($params[0], 'module');
         
-        $moduleObject = \yii::$app->getModule($moduleName);
+        if ($moduleName !== false) {
         
-        $moduleContext = $moduleObject->getContext();
-        if (!empty($moduleContext)) {
-            $options = $moduleObject->getContextOptions();
-            $navItemId = $options['navItemId'];
-            $link = \yii::$app->collection->links->getOneByArguments(['nav_item_id' => $navItemId]);
-            $response = str_replace($moduleName, $link['url'], $response);
+            $moduleObject = \yii::$app->getModule($moduleName);
+            
+            $moduleContext = $moduleObject->getContext();
+            if (!empty($moduleContext)) {
+                $options = $moduleObject->getContextOptions();
+                $navItemId = $options['navItemId'];
+                $link = \yii::$app->collection->links->getOneByArguments(['nav_item_id' => $navItemId]);
+                $response = str_replace($moduleName, $link['url'], $response);
+            }
         }
-        
         return $response;
     }
 }

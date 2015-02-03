@@ -19,7 +19,7 @@ class Url
         }
         
         if (count($parts) !== 3) {
-            throw new \Exception("can not parse route '$route'. The provided route does not have module/controller/action format.");
+            return false;
         }
         
         $parts = [
