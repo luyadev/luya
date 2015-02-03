@@ -7,6 +7,8 @@ class Page extends \luya\base\Collection implements \luya\collection\PageInterfa
 
     private $content = null;
 
+    private $context = null;
+
     /*
      const EVENT_SET_PAGE = 'SET_PAGE';
 
@@ -40,5 +42,15 @@ class Page extends \luya\base\Collection implements \luya\collection\PageInterfa
     public function getContent()
     {
         return $this->content;
+    }
+
+    public function setContext($context)
+    {
+        $this->context = $context;
+    }
+
+    public function getContext()
+    {
+        return $this->context;
     }
 }

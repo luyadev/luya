@@ -58,6 +58,9 @@ class Page extends \luya\collection\Page
 
         // @TODO retrieving the different content types: unify them! text not valid!
         $this->setContent($item->getContent());
+
+        $con = $item->getContext();
+        $this->setContext($con);
     }
 
     private function findDefaultPage()
