@@ -46,10 +46,10 @@ class Controller extends \yii\web\Controller
         // use client repository specific path
         return '@app/views/'.$this->module->id.'/'.$this->id;
     }
-    
+
     /**
      * if we are acting in the module context and the layout is empty we only should renderPartial the content
-     * 
+     *
      * @param unknown_type $view
      * @param unknown_type $params
      */
@@ -58,7 +58,17 @@ class Controller extends \yii\web\Controller
         if (!empty($this->module->getContext()) && empty($this->layout)) {
             return $this->renderPartial($view, $params);
         }
-    
+
         return parent::render($view, $params);
+    }
+
+    public function getModuleLayoutViewPath()
+    {
+        return '@app/views/'.$this->module->id.'/';
+    }
+
+    public function renderLayout($params = [])
+    {
+        return $this->render($this->getModuleLayoutViewPath().$this->module->moduleLayout, $params);
     }
 }

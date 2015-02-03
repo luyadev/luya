@@ -73,6 +73,25 @@ class Module extends \yii\base\Module
         return parent::getLayoutPath();
     }
 
+    public function findControllerRoute($route)
+    {
+        $xp = explode("/", $route);
+        foreach ($xp as $k => $v) {
+            if ($k == 0 && $v == $this->id) {
+                unset($xp[$k]);
+            }
+            if (empty($v)) {
+                unset($xp[$k]);
+            }
+        }
+
+        if (empty($xp)) {
+            $xp[] = $this->defaultRoute;
+        }
+
+        return implode("/", $xp);
+    }
+
     public function setContext($name)
     {
         $this->context = $name;
@@ -82,4 +101,6 @@ class Module extends \yii\base\Module
     {
         return $this->context;
     }
+
+    public $moduleLayout = 'moduleLayout';
 }
