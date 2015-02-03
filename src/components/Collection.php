@@ -8,28 +8,6 @@ namespace luya\components;
  */
 class Collection extends \yii\base\Component
 {
-    /* page */
-
-    private $page = null;
-
-    public function setPage(\luya\collection\Page $page)
-    {
-        //$page->trigger($page::EVENT_SET_PAGE);
-        if (!empty($this->page)) {
-            $page->setPrevObject($this->page);
-        }
-        $this->page = $page;
-    }
-
-    public function getPage()
-    {
-        if (!is_null($this->page) && ($pref = $this->page->getPrevObject()) !== false) {
-            return $this->page->getPrevObject();
-        }
-
-        return $this->page;
-    }
-
     /* lang */
 
     private $lang;
