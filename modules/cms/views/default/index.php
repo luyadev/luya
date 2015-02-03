@@ -1,1 +1,1 @@
-<?= $page->getContent();
+<?php echo $pageContent;
