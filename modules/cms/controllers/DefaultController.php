@@ -41,13 +41,11 @@ class DefaultController extends \luya\base\PageController
         /* above collection based */
 
         if (empty($fullUrl)) {
-            $pageContent = $this->getPageContent($this->findDefaultPage());
-            
-            return $this->render('index', [
-                'pageContent' => $pageContent
-            ]);
+            $navId = $this->findDefaultPage();
+            $link = $linksObject->findOneByArguments(['id' => $navId]);
+            $fullUrl = $link['url'];
+            yii::$app->collection->links->setActiveLink($fullUrl);
         }
-
         $parts = explode("/", $fullUrl);
 
         $parts[] = '__FIRST_REMOVAL'; // @todo remove
@@ -118,7 +116,7 @@ class DefaultController extends \luya\base\PageController
     {
         $cat = (new \yii\db\Query())->select(['id', 'default_nav_id'])->from("cms_cat")->where(['is_default' => 1])->one();
 
-        return $cat['default_nav_id'];
+        return (int)$cat['default_nav_id'];
     }
 
     private function findActive($urls, $parts)
