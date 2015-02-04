@@ -24,7 +24,6 @@ class UrlManager extends \yii\web\UrlManager
         $moduleName = \luya\helpers\Url::fromRoute($params[0], 'module');
         
         if ($moduleName !== false) {
-        
             $moduleObject = \yii::$app->getModule($moduleName);
             
             $moduleContext = $moduleObject->getContext();
