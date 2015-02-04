@@ -8,14 +8,14 @@ this is an example if you want to get the full navigation tree at once (attentio
 
 ```
 <ul>
-<? foreach(Yii::$app->collection->links->getByArguments(['cat' => 'default', 'lang' => $lang->shortCode, 'parent_nav_id' => 0]) as $item): ?>
+<? foreach(Yii::$app->collection->links->findByArguments(['cat' => 'default', 'lang' => $lang->shortCode, 'parent_nav_id' => 0]) as $item): ?>
         <li><a href="<?= $lang->shortCode; ?>/<?=$item['url'];?>"><?= $item['title']; ?></a> <small>(<?= $item['url'];?>)</small>
             <ul>
-                <? foreach(Yii::$app->collection->links->getByArguments(['lang' => $lang->shortCode, 'parent_nav_id' => $item['id']]) as $subItem): ?>
+                <? foreach(Yii::$app->collection->links->findByArguments(['lang' => $lang->shortCode, 'parent_nav_id' => $item['id']]) as $subItem): ?>
                 <li><a href="<?= $lang->shortCode; ?>/<?=$subItem['url'];?>"><?= $subItem['title']?></a> <small>(<?= $subItem['url'];?>)</small>
                 
                 <ul>
-                    <? foreach(Yii::$app->collection->links->getByArguments(['lang' => $lang->shortCode, 'parent_nav_id' => $subItem['id']]) as $subSubItem): ?>
+                    <? foreach(Yii::$app->collection->links->findByArguments(['lang' => $lang->shortCode, 'parent_nav_id' => $subItem['id']]) as $subSubItem): ?>
                     <li><a href="<?= $lang->shortCode; ?>/<?=$subSubItem['url'];?>"><?= $subSubItem['title']?></a> <small>(<?= $subSubItem['url'];?>)</small>
                     <? endforeach; ?>
                 </ul>
@@ -35,20 +35,20 @@ this is an example of a navigation based on the splitted parts which are display
 ```
 FIRST
 <ul>
-    <? foreach(Yii::$app->collection->links->getByArguments(['cat' => 'default', 'lang' => $lang->shortCode, 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->collection->links, 1)]) as $item): ?>
+    <? foreach(Yii::$app->collection->links->findByArguments(['cat' => 'default', 'lang' => $lang->shortCode, 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->collection->links, 1)]) as $item): ?>
         <li><a href="<?= $lang->shortCode; ?>/<?=$item['url'];?>"><?= $item['title']; ?></a> <small>(<?= $item['url'];?>)</small></li>
     <? endforeach; ?>
 </ul>
 SECOND
 <ul>
-    <? foreach(Yii::$app->collection->links->getByArguments(['cat' => 'default', 'lang' => $lang->shortCode, 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->collection->links, 2)]) as $item): ?>
+    <? foreach(Yii::$app->collection->links->findByArguments(['cat' => 'default', 'lang' => $lang->shortCode, 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->collection->links, 2)]) as $item): ?>
         <li><a href="<?= $lang->shortCode; ?>/<?=$item['url'];?>"><?= $item['title']; ?></a> <small>(<?= $item['url'];?>)</small></li>
     <? endforeach; ?>
     
 </ul>
 THIRD
  <ul>
-    <? foreach(Yii::$app->collection->links->getByArguments(['cat' => 'default', 'lang' => $lang->shortCode, 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->collection->links, 3)]) as $item): ?>
+    <? foreach(Yii::$app->collection->links->findByArguments(['cat' => 'default', 'lang' => $lang->shortCode, 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->collection->links, 3)]) as $item): ?>
         <li><a href="<?= $lang->shortCode; ?>/<?=$item['url'];?>"><?= $item['title']; ?></a> <small>(<?= $item['url'];?>)</small></li>
     <? endforeach; ?>
     

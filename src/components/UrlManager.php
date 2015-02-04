@@ -30,7 +30,7 @@ class UrlManager extends \yii\web\UrlManager
             if (!empty($moduleContext)) {
                 $options = $moduleObject->getContextOptions();
                 $navItemId = $options['navItemId'];
-                $link = \yii::$app->collection->links->getOneByArguments(['nav_item_id' => $navItemId]);
+                $link = \yii::$app->collection->links->findOneByArguments(['nav_item_id' => $navItemId]);
                 $response = str_replace($moduleName, $link['url'], $response);
             }
         }

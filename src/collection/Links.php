@@ -10,7 +10,7 @@ class Links extends \luya\base\Collection implements \luya\collection\LinksInter
         return $this->links;
     }
 
-    public function getByArguments(array $argsArray)
+    public function findByArguments(array $argsArray)
     {
         $_index = $this->getAll();
 
@@ -29,9 +29,9 @@ class Links extends \luya\base\Collection implements \luya\collection\LinksInter
         return $_index;
     }
     
-    public function getOneByArguments(array $argsArray)
+    public function findOneByArguments(array $argsArray)
     {
-        $links = $this->getByArguments($argsArray);
+        $links = $this->findByArguments($argsArray);
         if (empty($links)) {
             return false;
         }
@@ -74,7 +74,7 @@ class Links extends \luya\base\Collection implements \luya\collection\LinksInter
     {
         $link = $this->getLink($link);
         
-        return $this->getOneByArguments(['id' => $link['parent_nav_id']]);
+        return $this->findOneByArguments(['id' => $link['parent_nav_id']]);
     }
     
     public function getChilds($link)
@@ -94,7 +94,7 @@ class Links extends \luya\base\Collection implements \luya\collection\LinksInter
     {
         $link = $this->getLink($link);
         
-        return $this->getOneByArguments(['parent_nav_id' => $link['id']]);
+        return $this->findOneByArguments(['parent_nav_id' => $link['id']]);
     }
     
     public function addLink($link, $args)

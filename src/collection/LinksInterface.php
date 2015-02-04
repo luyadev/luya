@@ -11,9 +11,9 @@ interface LinksInterface
 
     public function getAll();
 
-    public function getByArguments(array $argsArray);
+    public function findByArguments(array $argsArray);
     
-    public function getOneByArguments(array $argsArray);
+    public function findOneByArguments(array $argsArray);
     
     public function teardown($link);
     
