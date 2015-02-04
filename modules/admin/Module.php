@@ -37,7 +37,7 @@ class Module extends \admin\base\Module
     public function getMenu()
     {
         // create menu node
-        $node = $this->menu->createNode('admin', 'Administration', 'fa-dashboard');
+        $node = $this->menu->createNode('admin', 'Administration', 'fa-gears');
         // create menu group
         $this->menu->createGroup($node, 'Authentifizierung', [
             // insert group items
