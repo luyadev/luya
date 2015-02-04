@@ -3,7 +3,6 @@
 namespace admin\base;
 
 use yii\filters\AccessControl;
-use luya\Luya;
 
 class Controller extends \luya\base\Controller
 {
@@ -20,7 +19,7 @@ class Controller extends \luya\base\Controller
         $this->adminUser = \yii::$app->getModule('admin')->getAdminUser();
 
         // get asset bundles which are defined in the module and register them into the view
-        foreach (luya::getParams('adminAssets') as $class) {
+        foreach (\luya\Luya::getParams('adminAssets') as $class) {
             // autoload $class and register with current view
             $class::register($this->view);
         }

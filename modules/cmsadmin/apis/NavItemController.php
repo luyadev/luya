@@ -94,7 +94,7 @@ class NavItemController extends \admin\base\RestController
      ]
      ];
 
-     http://localhost/luya-website/application/admin/api-cms-navitem/tree?access-token=<ACCESS_TOKEN>&navItemPageId=3
+     http://localhost/luya-website/public_html/admin/api-cms-navitem/tree?access-token=<ACCESS_TOKEN>&navItemPageId=3
 
      */
     public function actionTree($navItemPageId)

@@ -4,7 +4,7 @@ creating a frontend module
 $useAppLayoutPath
 -----------------------
 
-Choose if you want to load your layout from the application path (@app) or directly from your module. 
+Choose if you want to load your layout from the project path (@app) or directly from your module. 
 
 ```php
 public $useAppLayoutPath = true;

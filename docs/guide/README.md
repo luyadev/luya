@@ -11,6 +11,7 @@ START
     * [NGREST-Strap](start-ngrest-strap.md)
   * [Module Frontend](start-module-frontend.md)
     * [Menu](start-module-frontend-menu.md)
+    * [Assets](start-module-assets.md)
 
 CMS
 ---
