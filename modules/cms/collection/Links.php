@@ -20,7 +20,7 @@ class Links extends \luya\collection\Links implements \luya\collection\LinksInte
 
     public function start()
     {
-        $this->iteration(0, '');
+        $this->iteration(0, '', 0);
         foreach ($this->urls as $k => $args) {
             $this->addLink($k, $args);
         }
@@ -28,14 +28,24 @@ class Links extends \luya\collection\Links implements \luya\collection\LinksInte
 
     private $urls = [];
 
-    private function iteration($parentNavId, $urlPrefix)
+    private function iteration($parentNavId, $urlPrefix, $depth)
     {
         $tree = $this->getData($parentNavId);
         foreach ($tree as $index => $item) {
             if ($this->subNodeExists($item['id'])) {
-                $this->iteration($item['id'], $urlPrefix.$item['rewrite'].'/');
+                $this->iteration($item['id'], $urlPrefix.$item['rewrite'].'/', ($depth+1));
             }
-            $this->urls[$urlPrefix.$item['rewrite']] = ['url' => $urlPrefix.$item['rewrite'], 'parent_nav_id' => (int)$parentNavId, 'id' => (int)$item['id'], 'nav_item_id' => (int)$item['nav_item_id'], 'title' => $item['title'], 'lang' => $item['lang_short_code'], 'cat' => $item['cat_rewrite']];
+            $this->urls[$urlPrefix.$item['rewrite']] = [
+                'url' => $urlPrefix.$item['rewrite'],
+                'rewrite' => $item['rewrite'],
+                'id' => (int)$item['id'],
+                'parent_nav_id' => (int)$parentNavId,
+                'nav_item_id' => (int)$item['nav_item_id'],
+                'title' => $item['title'],
+                'lang' => $item['lang_short_code'],
+                'cat' => $item['cat_rewrite'],
+                'depth' => (int)$depth,
+            ];
         }
     }
 
