@@ -1,0 +1,13 @@
+{
+	"name" : "zephir/luya-module-news",
+	"description" : "Zephir Luya News",
+	"require" : {
+		"zephir/luya" : "*@dev",
+		"zephir/luya-module-news" : "*@dev"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"news\\" : ""
+		}
+	}
+}
