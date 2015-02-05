@@ -56,7 +56,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, AdminService) {
 		$scope.AdminService.bodyClass = 'main-blurred';
 		
 		
-		$http.get($scope.config.apiEndpoint + '/'+id+'?fields=' + $scope.config.update.join())
+		$http.get($scope.config.apiEndpoint + '/'+id+'?ngrestExpandI18n=true&fields=' + $scope.config.update.join())
 		.success(function(data) {
 			$scope.toggler.strap = false;
 			$scope.data.update = data;
@@ -117,7 +117,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, AdminService) {
 	}
 
 	$scope.loadList = function() {
-		$http.get($scope.config.apiEndpoint + '?fields=' + $scope.config.list.join())
+		$http.get($scope.config.apiEndpoint + '?ngrestExpandI18n=true&fields=' + $scope.config.list.join())
 		.success(function(data) {
 			$scope.data.list = data;
 		})

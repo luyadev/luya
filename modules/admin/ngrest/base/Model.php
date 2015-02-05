@@ -10,6 +10,8 @@ abstract class Model extends \yii\db\ActiveRecord
 
     public $i18n = [];
 
+    public $i18nExpandFields = false;
+    
     abstract public function ngRestConfig($config);
 
     public function init()
@@ -20,6 +22,8 @@ abstract class Model extends \yii\db\ActiveRecord
             $this->on(self::EVENT_BEFORE_INSERT, [$this, 'i18nBeforeUpdateAndCreate']);
             $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'i18nBeforeUpdateAndCreate']);
             $this->on(self::EVENT_AFTER_FIND, [$this, 'i18nAfterFind']);
+            // @todo is there a better to know we are runing the module from the RestActiveController instead of using a get param (ugly)?
+            $this->i18nExpandFields = \yii::$app->request->get('ngrestExpandI18n', false);
         }
     }
 
@@ -31,8 +35,14 @@ abstract class Model extends \yii\db\ActiveRecord
             if (!is_array($values)) {
                 $values = (array) $values;
             }
+            
+            if (!$this->i18nExpandFields) {
+                $values = $values['de']; // @todo: chose langauge based on the current lanague instead of hardcoded response
+            }
+            
             $this->$field = $values;
         }
+        
     }
 
     public function i18nBeforeUpdateAndCreate()
@@ -41,7 +51,7 @@ abstract class Model extends \yii\db\ActiveRecord
             $this->$field = json_encode($this->$field);
         }
     }
-
+    
     public function getI18n()
     {
         return $this->i18n;
@@ -49,8 +59,8 @@ abstract class Model extends \yii\db\ActiveRecord
 
     public function getNgRestApiEndpoint()
     {
-        if (empty($this->ngRestEndpoint)) {
-            throw new \Exception("the model property ngRestEndpoint can not be empty!");
+        if ($this->ngRestEndpoint === null) {
+            throw new \yii\base\InvalidConfigException('The "ngRestEndpoint" property must be set.');
         }
         return $this->ngRestEndpoint;
     }
