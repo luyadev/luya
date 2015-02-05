@@ -1,0 +1,13 @@
+{
+	"name" : "zephir/luya-module-newsadmin",
+	"description" : "Zephir Luya Newsadmin",
+	"require" : {
+		"zephir/luya" : "*@dev",
+		"zephir/luya-module-newsadmin" : "*@dev"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"newsadmin\\" : ""
+		}
+	}
+}

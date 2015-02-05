@@ -1,0 +1,27 @@
+<?php
+
+use yii\db\Schema;
+use yii\db\Migration;
+
+class m150204_144806_news_article extends Migration
+{
+    public function up()
+    {
+        $this->createTable("news_article", [
+            "id" => "pk",
+            "title" => Schema::TYPE_TEXT,
+            "text" => Schema::TYPE_TEXT,
+            "create_user_id" => Schema::TYPE_INTEGER,
+            "update_user_id" => Schema::TYPE_INTEGER,
+            "timestamp_create" => Schema::TYPE_INTEGER,
+            "timestamp_update" => Schema::TYPE_INTEGER,
+        ]);
+    }
+
+    public function down()
+    {
+        echo "m150204_144806_news_article cannot be reverted.\n";
+
+        return false;
+    }
+}
