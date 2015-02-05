@@ -10,7 +10,7 @@ class DefaultController extends \luya\base\PageController
         $model = \newsadmin\models\Article::className();
         
         return $this->render('index', [
-            'model' => $model        
+            'model' => $model
         ]);
     }
 }

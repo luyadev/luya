@@ -68,7 +68,7 @@ class RenderCrud extends RenderAbstract implements RenderInterface
             return implode("", $return);
         }
         
-        if($element['i18n'] && $configContext == self::TYPE_LIST) {
+        if ($element['i18n'] && $configContext == self::TYPE_LIST) {
             $element['name'] = $element['name'] . '.de'; // @todo get default language!
         }
         

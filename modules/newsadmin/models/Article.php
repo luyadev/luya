@@ -29,17 +29,17 @@ class Article extends \admin\ngrest\base\Model
         return $config;
     }
     
-   public function scenarios()
-   {
-       return [
+    public function scenarios()
+    {
+        return [
            'restcreate' => ['title', 'text'],
            'restupdate' => ['title', 'text'],
        ];
-   }
+    }
    
-   public function onCreate()
-   {
-       $this->create_user_id = \admin\Module::getAdminUserData()->id;
-       $this->timestamp_create = time();
-   }
+    public function onCreate()
+    {
+        $this->create_user_id = \admin\Module::getAdminUserData()->id;
+        $this->timestamp_create = time();
+    }
 }

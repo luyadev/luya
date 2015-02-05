@@ -113,7 +113,6 @@ class NavItemController extends \admin\base\RestController
         $data = [];
 
         foreach ($nav_item_page_block_item_data as $ipbid_key => $ipbid_value) {
-            
             $blockObject = \cmsadmin\models\Block::objectId($ipbid_value['block_id']);
             
             $blockJsonConfig = json_decode($blockObject->getJsonConfig(), true);

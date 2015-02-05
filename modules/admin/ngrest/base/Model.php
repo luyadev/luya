@@ -38,8 +38,7 @@ abstract class Model extends \yii\db\ActiveRecord
             
             $langs = \admin\models\Lang::find()->all();
             
-            foreach ($langs as $lang)
-            {
+            foreach ($langs as $lang) {
                 if (!array_key_exists($lang->short_code, $values)) {
                     $values[$lang->short_code] = '';
                 }
@@ -54,12 +53,10 @@ abstract class Model extends \yii\db\ActiveRecord
                 } else {
                     $values = '';
                 }
-                
             }
             
             $this->$field = $values;
         }
-        
     }
 
     public function i18nBeforeUpdateAndCreate()

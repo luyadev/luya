@@ -11,7 +11,8 @@ abstract class Block
     
     public $twigAdmin = null;
     
-    public function __construct() {
+    public function __construct()
+    {
         $fromArray = $this->jsonFromArray();
         
         if ($fromArray) {

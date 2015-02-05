@@ -52,7 +52,6 @@ class NavItemPage extends \cmsadmin\base\NavItemType
         $placeholders = (new \yii\db\Query())->from("cms_nav_item_page_block_item t1")->select("t1.*")->where(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId])->all();
 
         foreach ($placeholders as $key => $placeholder) {
-
             $loader = new \Twig_Loader_String();
 
             $twig = new \Twig_Environment($loader, ['autoescape' => false]);
