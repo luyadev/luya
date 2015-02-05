@@ -6,9 +6,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     public function init()
     {
         parent::init();
-
-        $this->on(self::EVENT_AFTER_FIND, [$this, 'afterFind']);
-        $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'beforeUpdate']);
+        //$this->on(self::EVENT_AFTER_FIND, [$this, 'onAfterFind']);
     }
 
     public static function tableName()
@@ -23,13 +21,8 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
             'restupdate' => ['block_id', 'placeholder_var', 'nav_item_page_id', 'json_config_values', 'prev_id'],
         ];
     }
-
-    public function beforeUpdate()
-    {
-        $this->json_config_values = json_encode($this->json_config_values);
-    }
-
-    public function afterFind()
+    
+    public function onAfterFind()
     {
         $this->json_config_values = json_decode($this->json_config_values, true);
     }

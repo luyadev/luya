@@ -9,10 +9,12 @@ class m150108_154017_cms_block extends Migration
     {
         $this->createTable("cms_block", [
             "id" => "pk",
+            "group_id" => Schema::TYPE_INTEGER,
             "name" => Schema::TYPE_STRING,
             "json_config" => Schema::TYPE_TEXT,
             "twig_frontend" => Schema::TYPE_TEXT,
             "twig_admin" => Schema::TYPE_TEXT,
+            "class" => Schema::TYPE_STRING,
         ]);
     }
 

@@ -38,4 +38,24 @@ class Block extends \admin\ngrest\base\Model
             'restupdate' => ['name', 'json_config', 'twig_frontend', 'twig_admin'],
         ];
     }
+    
+    /* model */
+    
+    public static function objectId($id)
+    {
+        $block = self::find()->where(['id' => $id])->one();
+        
+        if (empty($block->class)) {
+            $object = new \cmsadmin\blocks\EmptyBlock();
+            $object->name = $block->name;
+            $object->jsonConfig = $block->json_config;
+            $object->twigFrontend = $block->twig_frontend;
+            $object->twigAdmin = $block->twig_admin;
+        } else {
+            $class = $block->class;
+            $object = new $class();
+        }
+        
+        return $object;
+    }
 }

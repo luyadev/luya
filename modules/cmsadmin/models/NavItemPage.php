@@ -49,20 +49,23 @@ class NavItemPage extends \cmsadmin\base\NavItemType
     {
         $string = '';
 
-        $placeholders = (new \yii\db\Query())->from("cms_nav_item_page_block_item t1")->select("t1.*, t2.json_config, t2.twig_frontend")->leftJoin('cms_block t2', 't2.id = t1.block_id')->where(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId])->all();
+        $placeholders = (new \yii\db\Query())->from("cms_nav_item_page_block_item t1")->select("t1.*")->where(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId])->all();
 
         foreach ($placeholders as $key => $placeholder) {
+
             $loader = new \Twig_Loader_String();
 
             $twig = new \Twig_Environment($loader, ['autoescape' => false]);
 
+            $blockObject = \cmsadmin\models\Block::objectId($placeholder['block_id']);
+            
             $configValues = json_decode($placeholder['json_config_values'], true);
 
             if (empty($configValues)) {
                 $configValues = [];
             }
 
-            $jsonConfig = json_decode($placeholder['json_config'], true);
+            $jsonConfig = json_decode($blockObject->getJsonConfig(), true);
 
             $insertedHolders = [];
 
@@ -71,7 +74,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
                     $insertedHolders[$item['var']] = $this->renderPlaceholder($navItemPageId, $item['var'], $placeholder['id']);
                 }
             }
-            $string .= $twig->render($placeholder['twig_frontend'], [
+            $string .= $twig->render($blockObject->getTwigFrontend(), [
                 'vars' => $configValues,
                 'placeholders' => $insertedHolders
             ]);

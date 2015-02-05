@@ -49,28 +49,6 @@ class NavItemController extends \admin\base\RestController
     }
 
     /**
-     * @todo do not use active record for such querys, cause they are not slim enough, change to simple dbQuery?
-     * @param  unknown_type             $navItemPageId
-     * @param  unknown_type             $placeholderVar
-     * @return multitype:multitype:NULL unknown
-     */
-    public function actionNavItemBlocks($navItemPageId, $placeholderVar)
-    {
-        $pageBlockItem = \cmsadmin\models\NavItemPageBlockItem::find()->innerJoinWith("block", false, 'LEFT JOIN')->where(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar])->all();
-
-        $data = [];
-
-        foreach ($pageBlockItem as $item) {
-            $block = $item->block;
-
-            $block['json_config'] = json_decode($block['json_config'], true);
-
-            $data[] = array('page_block_item' => $item, 'block' => $block);
-        }
-
-        return $data;
-    }
-    /**
 
      $array = [
      'nav_item_page' => [...],
@@ -128,20 +106,24 @@ class NavItemController extends \admin\base\RestController
     private function getSub($placeholderVar, $navItemPageId, $prevId)
     {
         $nav_item_page_block_item_data = (new \yii\db\Query())->select([
-                't1_id' => 't1.id', 't1_nav_item_page_id' => 't1.nav_item_page_id', 't1_json_config_values' => 't1.json_config_values', 't1_placeholder_var' => 't1.placeholder_var', 't1_prev_id' => 't1.prev_id',
-                't2_id' => 't2.id', 't2_name' => 't2.name', 't2_json_config' => 't2.json_config', 't2_twig_admin' => 't2.twig_admin',
-        ])->from("cms_nav_item_page_block_item t1")->leftJoin("cms_block t2", "t2.id=t1.block_id")->where(['t1.prev_id' => $prevId, 't1.nav_item_page_id' => $navItemPageId, 't1.placeholder_var' => $placeholderVar])->all();
+                't1_id' => 't1.id', 'block_id', 't1_nav_item_page_id' => 't1.nav_item_page_id', 't1_json_config_values' => 't1.json_config_values', 't1_placeholder_var' => 't1.placeholder_var', 't1_prev_id' => 't1.prev_id',
+                //'t2_id' => 't2.id', 't2_name' => 't2.name', 't2_json_config' => 't2.json_config', 't2_twig_admin' => 't2.twig_admin',
+        ])->from("cms_nav_item_page_block_item t1")->where(['t1.prev_id' => $prevId, 't1.nav_item_page_id' => $navItemPageId, 't1.placeholder_var' => $placeholderVar])->all();
 
         $data = [];
 
         foreach ($nav_item_page_block_item_data as $ipbid_key => $ipbid_value) {
+            
+            $blockObject = \cmsadmin\models\Block::objectId($ipbid_value['block_id']);
+            
+            $blockJsonConfig = json_decode($blockObject->getJsonConfig(), true);
+            
             $ipbid_value['t1_json_config_values'] = json_decode($ipbid_value['t1_json_config_values'], true);
-            $ipbid_value['t2_json_config'] = json_decode($ipbid_value['t2_json_config'], true);
 
             $placeholders = [];
 
-            if (isset($ipbid_value['t2_json_config']['placeholders'])) {
-                foreach ($ipbid_value['t2_json_config']['placeholders'] as $pk => $pv) {
+            if (isset($blockJsonConfig['placeholders'])) {
+                foreach ($blockJsonConfig['placeholders'] as $pk => $pv) {
                     $pv['nav_item_page_id'] = $navItemPageId;
                     $pv['prev_id'] = $ipbid_value['t1_id'];
                     $placeholderVar = $pv['var'];
@@ -156,14 +138,14 @@ class NavItemController extends \admin\base\RestController
 
             $keys = [];
 
-            if (isset($ipbid_value['t2_json_config']['vars'])) {
-                $keys = $ipbid_value['t2_json_config']['vars'];
+            if (isset($blockJsonConfig['vars'])) {
+                $keys = $blockJsonConfig['vars'];
             }
 
             $nav_item_page_block_item = [
                 'id' => $ipbid_value['t1_id'],
-                'name' => $ipbid_value['t2_name'],
-                'twig_admin' => $ipbid_value['t2_twig_admin'],
+                'name' => $blockObject->getName(),
+                'twig_admin' => $blockObject->getTwigAdmin(),
                 'vars' => $keys,
                 'values' => $ipbid_value['t1_json_config_values'],
                 '__placeholders' => $placeholders,
