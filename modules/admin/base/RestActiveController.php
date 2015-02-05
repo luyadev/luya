@@ -37,4 +37,14 @@ class RestActiveController extends \yii\rest\ActiveController
 
         return $behaviors;
     }
+    
+    public function actions()
+    {
+        $actions = parent::actions();
+        
+        // change index class
+        $actions['index']['class'] = '\luya\rest\IndexAction';
+        
+        return $actions;
+    }
 }
