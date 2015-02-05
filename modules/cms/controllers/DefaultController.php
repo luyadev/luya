@@ -57,7 +57,9 @@ class DefaultController extends \luya\base\PageController
             echo "<h1>404<h1><h3>Url \"$fullUrl\" not found</h3>";
             exit;
         }
-
+        
+        yii::$app->collection->links->setActiveLink($activeUrl);
+        
         $linkItem = $linksObject->getLink($activeUrl);
 
         $pageContent = $this->getPageContent($linkItem['id'], [
