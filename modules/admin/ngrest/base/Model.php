@@ -49,6 +49,9 @@ abstract class Model extends \yii\db\ActiveRecord
 
     public function getNgRestApiEndpoint()
     {
+        if (empty($this->ngRestEndpoint)) {
+            throw new \Exception("the model property ngRestEndpoint can not be empty!");
+        }
         return $this->ngRestEndpoint;
     }
 

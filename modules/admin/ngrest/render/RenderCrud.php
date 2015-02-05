@@ -60,18 +60,21 @@ class RenderCrud extends RenderAbstract implements RenderInterface
             $return = [];
             foreach (\admin\models\Lang::find()->all() as $l => $v) {
                 $ngModel = $this->i18nNgModelString($configContext, $element['name'], $v->short_code);
-                $id = "id-".md5($ngModel);
+                $id = "id-".md5($ngModel . $v->short_code);
 
                 $return[] = $v->short_code.':<br />'.$this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias']);
             }
 
             return implode("", $return);
-        } else {
-            $ngModel = $this->ngModelString($configContext, $element['name']);
-            $id = "id-".md5($ngModel);
-
-            return $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias']);
         }
+        
+        if($element['i18n'] && $configContext == self::TYPE_LIST) {
+            $element['name'] = $element['name'] . '.de'; // @todo get default language!
+        }
+        
+        $ngModel = $this->ngModelString($configContext, $element['name']);
+        $id = "id-".md5($ngModel);
+        return $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias']);
     }
 
     private function renderElementPlugins($configContext, $plugins, $elmnId, $elmnName, $elmnModel, $elmnAlias)

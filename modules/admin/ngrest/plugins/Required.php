@@ -20,9 +20,9 @@ class Required extends PluginAbstract
         $elmn = $doc->getElementById($this->id);
         $elmn->setAttribute("required", "required");
 
-        $span = $doc->createELement("span", "Sie müssen dieses Feld ausfüllen um Daten zu speichern.");
-        $span->setAttribute("ng-show", 'createForm.'.$this->name.'.$error.required');
-        $doc->appendChild($span);
+        //$span = $doc->createELement("span", "Sie müssen dieses Feld ausfüllen um Daten zu speichern.");
+        //$span->setAttribute("ng-show", 'createForm.'.$this->name.'.$error.required');
+        //$doc->appendChild($span);
 
         return $doc;
     }
@@ -32,9 +32,9 @@ class Required extends PluginAbstract
         $elmn = $doc->getElementById($this->id);
         $elmn->setAttribute("required", "required");
 
-        $span = $doc->createELement("span", "Sie müssen dieses Feld ausfüllen um Daten zu speichern.");
-        $span->setAttribute("ng-show", 'updateForm.'.$this->name.'.$error.required');
-        $doc->appendChild($span);
+        //$span = $doc->createELement("span", "Sie müssen dieses Feld ausfüllen um Daten zu speichern.");
+        //$span->setAttribute("ng-show", 'updateForm.'.$this->name.'.$error.required');
+        //$doc->appendChild($span);
 
         return $doc;
     }
