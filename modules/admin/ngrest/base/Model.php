@@ -36,8 +36,25 @@ abstract class Model extends \yii\db\ActiveRecord
                 $values = (array) $values;
             }
             
+            $langs = \admin\models\Lang::find()->all();
+            
+            foreach ($langs as $lang)
+            {
+                if (!array_key_exists($lang->short_code, $values)) {
+                    $values[$lang->short_code] = '';
+                }
+            }
+            
             if (!$this->i18nExpandFields) {
-                $values = $values['de']; // @todo: chose langauge based on the current lanague instead of hardcoded response
+                $langShortCode = \admin\models\Lang::getDefault()->short_code;
+                
+                // @todo first get data from collection, if not found get data from lang default
+                if (array_key_exists($langShortCode, $values)) {
+                    $values = $values[$langShortCode];
+                } else {
+                    $values = '';
+                }
+                
             }
             
             $this->$field = $values;
