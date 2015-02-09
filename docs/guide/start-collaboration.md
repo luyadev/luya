@@ -10,7 +10,7 @@ How to collaborate with us and contribute to the LUYA Project.
 4.1. Update config
 4.2. Update composer.json
 5. Define the upstream repo
-6. Work routine
+6. Work routine 
 7. Add changes to zephir/luya (Pull request)
 
 1. Fork Luya
@@ -20,21 +20,21 @@ Fork the Luya project on Github: [https://github.com/zephir/luya](https://github
 
 2. Recommended directory structure
 ------------------------------------
-You will have two directories that depends on each other.
+You will have two directories that depend on each other.
 
 1. The «luya» directory
 2. The «luya-kickstarter» directory
 
 I will work with the following structure:
 ```
-luya/
-├ luya/     # luya
-├ website/  # luya-kickstarter
+luya-working-dir/
+├ luya/     	# https://github.com/zephir/luya
+├ website/  	# https://github.com/zephir/luya-kickstarter
 ```
 
 3. Clone luya fork
 -------------------
-Working directory: luya/luya/
+Working directory: luya-working-dir/luya/
 
 Use following command to clone the forked Luya project.
 
@@ -47,25 +47,21 @@ Install Luya. For the complete guide, visit: [https://github.com/zephir/luya](ht
 
 4. Create luya-kickstarter project
 ------------------------------------
-Working directory: luya/website/
+Working directory: luya-working-dir/website/
 
 1. Create the luya-kickstarter project with composer.
-2. Move all files from the created directory into luya/website/
+2. Move all files from the created directory into luya-working-dir/website/
 ```
-composer create-project zephir/luya-kickstarter:dev-master
+composer create-project --prefer-dist zephir/luya-kickstarter:dev-master .
 ```
 You will be asked if you want to remove the .git files. Answer with Y if you want to push the luya-kickstarter project into your own repository.
 ```
 Do you want to remove the existing VCS (.git, .svn..) history? [Y,n]? 
 ```
-Now you have to move all files to your main folder.
-```
-mv luya-kickstarter/* . && mv luya-kickstarter/.* .
-rm -rf luya-kickstarter/
-```
+
 All files are now in the right place.
 
-### 4.1 Updated config
+### 4.1 Update config
 Copy local config template:
 ```
 cp config/local.php.dist config/local.php
@@ -80,7 +76,7 @@ Edit local config and update db informations:
 ]
 ```
 
-### 4.2 Updated composer
+### 4.2 Update composer
 To work on luya modules, we have to update the composer.json.
 Change it's content to the following:
 ```
@@ -89,7 +85,6 @@ Change it's content to the following:
     "require": {
         "yiisoft/yii2": "2.0.*"
     },
-    ...
     "autoload" : {
         "psr-4" : {
             "luya\\" : "../luya/src/",
@@ -106,45 +101,26 @@ Change it's content to the following:
 composer update
 ```
 
-All luya relevant files are now loaded from the luya/luya/ folder.
+All luya relevant files are now loaded from the luya-working-dir/luya/ folder.
 
-For more informations and troubleshooting: https://github.com/zephir/luya-kickstarter
-
-Working (sh) ***@TBD***
--------------
-```
-chmod +x rebasemaster.sh
-```
-
-firsttime
-```
-./rebasemaster.sh init
-```
-
-else
-```
-./rebasemaster.sh
-```
-
-
-Define the upstream repo
--------------------------
-Working directory: luya/luya/
-
-To update your fork you have to add the original repo:
-```
-git remote add upstream https://github.com/zephir/luya.git
-```
+For more informations and troubleshooting: [https://github.com/zephir/luya-kickstarter](https://github.com/zephir/luya-kickstarter)
 
 Working routine
 ----------------
-Before working on luya, you have to update your local master branch to the newest version:
+
+***Firsttime***
+
+Run following command:
 ```
-git checkout master
-git fetch upstream
-git rebase upstream/master
+./scripts/rebasemaster.sh init
 ```
 
+***Otherwise:***
+
+Run following command:
+```
+./scripts/rebasemaster.sh
+```
 
 Now that you're on the newest release, create a branch from master:
 Don't forget to replace "newBranch" with a meaningful name.
