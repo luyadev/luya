@@ -32,8 +32,8 @@ Example - showing three levels of the navigation tree:
 </ul>
 ```
 
-Snapshot of Navigation Tree
----------------------------
+Snapshot of the Navigation Tree
+-------------------------------
 
 If you want to show only the part of the navigation tree which is currently viewed by the web user, you'll have to determine the active part of each level in the hierarchy by
 accessing the helper function ```\luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->collection->links, 1)``` (for level = 1).
