@@ -1,8 +1,11 @@
 <script type="text/ng-template" id="reverse.html">
-    <a class="treeview__link" role="link" ng-click="go(data.id)">
-        <span class="treeview__icon fa fa-fw fa-file-o"></span>
-        {{data.title}}
-    </a>
+    <div class="treeview__node">
+        <span class="treeview__icon treeview__icon--clickable" ng-show="data.nodes" ng-click="toggleChildren($event)"><span class="treeview__icon--open fa fa-fw fa-minus-square"></span><span class="treeview__icon--closed fa fa-fw fa-plus-square"></span></span><!--
+     --><span class="treeview__icon" ng-show="!data.nodes"><span class="fa fa-fw fa-file"></span></span><!--
+     --><a class="treeview__link" role="link" ng-click="go(data.id)">
+            {{data.title}}
+        </a>
+    </div>
     <ul class="treeview__list" role="menu">
         <li class="treeview__item" role="menuitem" ng-repeat="data in data.nodes" ng-include="'reverse.html'"></li>
     </ul>
@@ -101,18 +104,16 @@
 <div class="main__item main__item--left main__item--fixedsize">
     <nav class="treeview main__fixeditem" role="navigation">
 
-        <ul class="treeview__list">
-            <li class="treeview__item">
-                <a class="treeview__link treeview__link--green" ui-sref="custom.cmsadd">
-                    <span class="fa fa-fw fa-plus-circle"></span>
-                    Neue Seite
-                </a>
-            </li>
-        </ul>
+        <div class="treeview__toolbar">
+            <a class="button button--green" ui-sref="custom.cmsadd">
+                <span class="fa fa-fw fa-plus"></span>
+                Neue Seite
+            </a>
+        </div>
 
         <ul class="treeview__list" role="menu" ng-controller="CmsMenuTreeController">
             <li class="treeview__item" role="menuitem" ng-repeat="data in tree" ng-include="'reverse.html'"></li>
-        </ul> <!-- ./treeview__list -->
+        </ul>
 
     </nav>
 </div><!-- ./main__left

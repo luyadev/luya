@@ -34,9 +34,14 @@ zaa.controller("CmsMenuTreeController", function($scope, $state, MenuService) {
     	$scope.tree = newValue;
     })
 	
-	
     $scope.go = function(navId) {
     	$state.go('custom.cmsedit', { navId : navId });
     };
+
+    $scope.toggleChildren = function($event) {
+        // todo: Remove parentNode.parentNode
+        // todo: Not really the "angular way"?
+        $event.currentTarget.parentNode.parentNode.classList.toggle( "treeview__item--is-open" );
+    }
     
 });
