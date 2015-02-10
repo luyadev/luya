@@ -2,6 +2,9 @@
 
 $config = [
     'components' => [
+        'errorHandler' => [
+            'class' => '\luya\components\ErrorHandler'
+        ],
         'urlManager' => 'luya\components\UrlManager',
         'view' => ['class' => 'luya\components\View'],
         'authManager' => [

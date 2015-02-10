@@ -12,6 +12,10 @@ class Module extends \luya\base\Module
      */
     public $urlPrefixComposition = '<langId:[a-z]{2}>';
 
+    public $sendException = true;
+    
+    public $exceptionUrl = 'http://luya.io/errorapi/';
+    
     public static $urlRules = [
         ['class' => 'luya\components\UrlRule'],
     ];
