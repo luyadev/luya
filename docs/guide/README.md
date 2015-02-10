@@ -10,7 +10,7 @@ START
     * [NGREST](start-ngrest.md)
     * [NGREST-Strap](start-ngrest-strap.md)
   * [Module Frontend](start-module-frontend.md)
-    * [Menu](start-module-frontend-menu.md)
+    * [Navigation](start-module-frontend-navigation.md)
     * [Assets](start-module-assets.md)
 
 CMS
