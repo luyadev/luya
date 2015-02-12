@@ -19,10 +19,6 @@ class Menu
     public function setCatByRewrite($catRewrite)
     {
         $this->cat = (new \yii\db\Query())->select(['id', 'default_nav_id'])->from("cms_cat")->where(['rewrite' => $catRewrite])->one();
-        $this->cat = [
-            "id" => 1,
-            "default_nav_id" => 1
-        ];
     }
 
     public function setLangByShortCode($langShortCode)
