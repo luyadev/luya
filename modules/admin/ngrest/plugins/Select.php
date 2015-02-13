@@ -5,8 +5,6 @@ use admin\ngrest\PluginAbstract;
 
 class Select extends PluginAbstract
 {
-    private $_values = [];
-
     public $options = [
         'values' => [],
     ];
