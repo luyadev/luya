@@ -20,7 +20,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
 
         $config->strap->register(new \admin\straps\Delete(), "Löschen");
 
-        $config->create->field("title", "Anrede")->select(['values' => \admin\models\User::getTitles()]);
+        $config->create->field("title", "Anrede")->select(['assocArray' => \admin\models\User::getTitles()]);
         $config->create->field("firstname", "Vorname")->text()->required();
         $config->create->field("lastname", "Nachname")->text()->required();
         $config->create->field("email", "E-Mail-Adresse")->text()->required();
