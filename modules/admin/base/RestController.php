@@ -17,28 +17,10 @@ namespace admin\base;
  * @author nadar
  *
  */
-class RestController extends \yii\web\Controller implements \luya\rest\BehaviorInterface
+class RestController extends \luya\rest\Controller implements \luya\rest\BehaviorInterface
 {
-    use \luya\rest\BehaviorTrait;
-    
-    public $serializer = 'yii\rest\Serializer';
-
-    public $enableCsrfValidation = false;
-
     public function userAuthClass()
     {
         return new \admin\components\User();
-    }
-
-    public function afterAction($action, $result)
-    {
-        $result = parent::afterAction($action, $result);
-
-        return $this->serializeData($result);
-    }
-
-    protected function serializeData($data)
-    {
-        return \Yii::createObject($this->serializer)->serialize($data);
-    }
+    }   
 }
