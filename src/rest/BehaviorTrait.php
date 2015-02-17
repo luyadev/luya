@@ -1,7 +1,7 @@
 <?php
-namespace admin\base;
+namespace luya\rest;
 
-trait RestBehaviorTrait
+trait BehaviorTrait
 {
     private function getUserAuthClass()
     {

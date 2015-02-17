@@ -11,12 +11,42 @@ namespace admin\base;
  * - actionCreate();
  * - actionDelete($id);
  */
-class RestVerbController extends \yii\rest\Controller implements \admin\base\RestInterface
+class RestVerbController extends \yii\rest\Controller implements \luya\rest\BehaviorInterface
 {
-    use \admin\base\RestBehaviorTrait;
+    use \luya\rest\BehaviorTrait;
     
     public function userAuthClass()
     {
         return new \admin\components\User();
+    }
+    
+    public function actionIndex()
+    {
+        $this->throwException(__METHOD__);
+    }
+    
+    public function actionView($id)
+    {
+        $this->throwException(__METHOD__);
+    }
+    
+    public function actionUpdate($id)
+    {
+        $this->throwException(__METHOD__);
+    }
+    
+    public function actionCreate()
+    {
+        $this->throwException(__METHOD__);
+    }
+    
+    public function actionDelete($id)
+    {
+        $this->throwException(__METHOD__);
+    }
+    
+    private function throwException($method)
+    {
+        throw new \Exception("The action ".$method." is not yet supported.");
     }
 }

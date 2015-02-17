@@ -7,9 +7,9 @@ namespace admin\base;
  * 
  * usage like described in the yii2 guide.
  */
-class RestActiveController extends \yii\rest\ActiveController implements \admin\base\RestInterface
+class RestActiveController extends \yii\rest\ActiveController implements \luya\rest\BehaviorInterface
 {
-    use \admin\base\RestBehaviorTrait;
+    use \luya\rest\BehaviorTrait;
     
     public $createScenario = 'restcreate';
 

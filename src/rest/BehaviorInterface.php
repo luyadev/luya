@@ -1,7 +1,7 @@
 <?php
-namespace admin\base;
+namespace luya\rest;
 
-interface RestInterface
+interface BehaviorInterface
 {
     /**
      * Returns the class object for the authentication of the rest api. If the return value is false the

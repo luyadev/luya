@@ -17,9 +17,9 @@ namespace admin\base;
  * @author nadar
  *
  */
-class RestController extends \yii\web\Controller
+class RestController extends \yii\web\Controller implements \luya\rest\BehaviorInterface
 {
-    use \admin\base\RestBehaviorTrait;
+    use \luya\rest\BehaviorTrait;
     
     public $serializer = 'yii\rest\Serializer';
 
