@@ -1,42 +1,22 @@
 <?php
 namespace admin\base;
 
-use yii\web\Response;
-use yii\filters\RateLimiter;
-use yii\filters\ContentNegotiator;
-use yii\filters\auth\CompositeAuth;
-use yii\filters\auth\HttpBearerAuth;
-use yii\filters\auth\QueryParamAuth;
-
 /**
- * RestController Wrapper
+ * Does allow the implementation of a yii2 rest controller based on the verbs inside the 
+ * url rules defintions. The allowed methods must base on the yii2 rest controller norm like.
+ * Allowed actions:
+ * - actionIndex();
+ * - actionView($id);
+ * - actionUpdate($id);
+ * - actionCreate();
+ * - actionDelete($id);
  */
-class RestVerbController extends \yii\rest\Controller
+class RestVerbController extends \yii\rest\Controller implements \admin\base\RestInterface
 {
-    public function behaviors()
+    use \admin\base\RestBehaviorTrait;
+    
+    public function userAuthClass()
     {
-        $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = [
-            'class' => CompositeAuth::className(),
-            'user' => new \admin\components\User(),
-            'authMethods' => [
-                QueryParamAuth::className(),
-                HttpBearerAuth::className(),
-            ],
-        ];
-        $behaviors['rateLimiter'] = [
-            'class' => RateLimiter::className(),
-            'user' => new \admin\components\User(),
-        ];
-
-        $behaviors['contentNegotiator'] = [
-            'class' => ContentNegotiator::className(),
-            'formats' => [
-                'application/json' => Response::FORMAT_JSON,
-                'application/xml' => Response::FORMAT_XML,
-            ],
-        ];
-
-        return $behaviors;
+        return new \admin\components\User();
     }
 }

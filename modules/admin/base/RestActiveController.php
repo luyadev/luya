@@ -1,41 +1,23 @@
 <?php
 namespace admin\base;
 
-use yii\filters\RateLimiter;
-use yii\filters\auth\QueryParamAuth;
-use yii\filters\auth\CompositeAuth;
-use yii\filters\auth\HttpBearerAuth;
-
 /**
- * RestController Wrapper
+ * Wrapper for yii2 basic rest controller used with a model class. The wrapper is made to
+ * change behaviours and overwrite the indexAction.
+ * 
+ * usage like described in the yii2 guide.
  */
-class RestActiveController extends \yii\rest\ActiveController
+class RestActiveController extends \yii\rest\ActiveController implements \admin\base\RestInterface
 {
-    const CREATE_SCENARIO = 'restcreate';
+    use \admin\base\RestBehaviorTrait;
+    
+    public $createScenario = 'restcreate';
 
-    const UPDATE_SCENARIO = 'restupdate';
+    public $updateScenario = 'restupdate';
 
-    public $createScenario = self::CREATE_SCENARIO;
-
-    public $updateScenario = self::UPDATE_SCENARIO;
-
-    public function behaviors()
+    public function userAuthClass()
     {
-        $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = [
-            'class' => CompositeAuth::className(),
-            'user' => new \admin\components\User(),
-            'authMethods' => [
-                QueryParamAuth::className(),
-                HttpBearerAuth::className(),
-            ],
-        ];
-        $behaviors['rateLimiter'] = [
-            'class' => RateLimiter::className(),
-            'user' => new \admin\components\User(),
-        ];
-
-        return $behaviors;
+        return new \admin\components\User();
     }
     
     public function actions()
