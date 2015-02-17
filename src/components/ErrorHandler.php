@@ -20,18 +20,19 @@ class ErrorHandler extends \yii\web\ErrorHandler
             return parent::renderException($exception);
         }
         
-        $data = json_encode($this->getSlimTrace($exception));
+        $data = json_encode($this->getExceptionArray($exception));
         
         // @todo call this url via curl?
         // @todo send error 404 default page
         echo $this->getModule()->exceptionUrl . '/create/?jsonData=' . $data;
     }   
+    
     /**
      * @todo: catch getPrevious() exception
      * @param object $exception Exception
      * @return multitype:multitype:Ambigous <NULL, unknown>
      */
-    public function getSlimTrace($exception)
+    public function getExceptionArray($exception)
     {
         $_trace = [];
         foreach ($exception->getTrace() as $key => $item) {
@@ -43,6 +44,13 @@ class ErrorHandler extends \yii\web\ErrorHandler
             ];
         }
         
-        return $_trace;
+        return [
+            'message' => $exception->getMessage(),
+            'trace' => $_trace,
+            'server' => $_SERVER,
+            'session' => $_SESSION,
+            'get' => $_GET,
+            'post' => $_POST
+        ];
     }
 }
