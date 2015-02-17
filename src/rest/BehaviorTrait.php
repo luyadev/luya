@@ -23,6 +23,7 @@ trait BehaviorTrait
         
         if (!$this->getUserAuthClass()) {
             unset($behaviors['authenticator']);
+            unset($behaviors['rateLimiter']);
         } else {
             // change to admin user auth class
             $behaviors['authenticator'] = [
@@ -33,6 +34,12 @@ trait BehaviorTrait
                     \ yii\filters\auth\HttpBearerAuth::className(),
                 ],
             ];
+            
+            // change to admin rate limiter
+            $behaviors['rateLimiter'] = [
+                'class' => \yii\filters\RateLimiter::className(),
+                'user' => $this->getUserAuthClass(),
+            ];
         }
         
         $behaviors['contentNegotiator'] = [
@@ -41,12 +48,6 @@ trait BehaviorTrait
                 'application/json' => \yii\web\Response::FORMAT_JSON,
                 'application/xml' => \yii\web\Response::FORMAT_XML,
             ],
-        ];
-        
-        // change to admin rate limiter
-        $behaviors['rateLimiter'] = [
-            'class' => \yii\filters\RateLimiter::className(),
-            'user' => new \admin\components\User(),
         ];
             
         return $behaviors;
