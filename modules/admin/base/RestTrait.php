@@ -18,7 +18,7 @@ trait RestTrait
         $this->throwException(__METHOD__);
     }
 
-    public function actionCreate($id)
+    public function actionCreate()
     {
         $this->throwException(__METHOD__);
     }
