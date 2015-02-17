@@ -21,20 +21,19 @@ class MenuController extends \admin\base\RestVerbController
         return $menu;
     }
 
-    public function actionView()
+    public function actionView($id)
     {
-        $getId = $_GET['id'];
 
         /* DUMB ASS CODE! */
         $menu = array();
         $i = 1;
-        foreach (luya::getParams('adminMenus') as $id => $item) {
+        foreach (luya::getParams('adminMenus') as $item) {
             $menu[$i] = $item;
             $i++;
         }
 
         /* END OF DUMB ASS CODE ! */
 
-        return $menu[$getId];
+        return $menu[$id];
     }
 }
