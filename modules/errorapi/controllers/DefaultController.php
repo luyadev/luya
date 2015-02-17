@@ -1,8 +1,13 @@
 <?php
 namespace errorapi\controllers;
 
-class DefaultController extends \luya\base\Controller
+class DefaultController extends \luya\rest\Controller
 {
+    public function userAuthClass()
+    {
+        return false;
+    }
+    
     /**
      * @todo change from get param to post param?
      * @param unknown $errorJson
