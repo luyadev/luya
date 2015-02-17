@@ -8,8 +8,6 @@ namespace cmsadmin\apis;
  */
 class MenuController extends \admin\base\RestVerbController
 {
-    use \admin\base\RestTrait;
-
     public function actionIndex()
     {
         $menu = new \cmsadmin\components\Menu();
