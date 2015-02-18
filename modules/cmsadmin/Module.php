@@ -4,6 +4,7 @@ namespace cmsadmin;
 class Module extends \admin\base\Module
 {
     public static $apis = [
+        'api-cms-defaults' => 'cmsadmin\apis\DefaultsController',
         'api-cms-cat' => 'cmsadmin\apis\CatController',
         'api-cms-nav' => 'cmsadmin\apis\NavController',
         'api-cms-navitem' => 'cmsadmin\\apis\\NavItemController',
