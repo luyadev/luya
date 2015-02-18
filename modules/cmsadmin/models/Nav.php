@@ -9,6 +9,8 @@ class Nav extends \yii\db\ActiveRecord
     public $nav_item_type_id;
     public $lang_id;
 
+    private $_navItem = null;
+    
     public static function tableName()
     {
         return 'cms_nav';
@@ -17,8 +19,7 @@ class Nav extends \yii\db\ActiveRecord
     public function init()
     {
         parent::init();
-        $this->on(self::EVENT_BEFORE_INSERT, [$this, 'beforeCreate']);
-        $this->on(self::EVENT_AFTER_INSERT, [$this, 'afterCreate']);
+        $this->on(self::EVENT_AFTER_INSERT, [$this, 'eventAfterCreate']);
     }
 
     public function rules()
@@ -36,32 +37,36 @@ class Nav extends \yii\db\ActiveRecord
         ];
     }
 
-    public function beforeCreate()
+    public function beforeSave($insert)
     {
-        $this->is_deleted = 0;
-    }
-
-    public function transactions()
-    {
-        return [
-            'restcreate' => self::OP_ALL
-        ];
-    }
-
-    public function afterCreate()
-    {
-        $navItem = new NavItem();
-        $navItem->nav_item_type = $this->nav_item_type;
-        $navItem->nav_item_type_id = $this->nav_item_type_id;
-        $navItem->nav_id = $this->id;
-        $navItem->lang_id = $this->lang_id;
-        $navItem->title = $this->title;
-        $navItem->rewrite = $this->rewrite;
-        if ($navItem->validate()) {
-            $navItem->save();
+        if (parent::beforeSave($insert)) {
+            if ($insert) {
+                $this->is_deleted = 0;
+                $this->_navItem = new NavItem();
+                $this->_navItem->nav_item_type = $this->nav_item_type;
+                $this->_navItem->nav_item_type_id = $this->nav_item_type_id;
+                $this->_navItem->lang_id = $this->lang_id;
+                $this->_navItem->title = $this->title;
+                $this->_navItem->rewrite = $this->rewrite;
+                if ($this->_navItem->validate()) {
+                    $this->_navItem->save();
+                } else {
+                    foreach ($this->_navItem->getErrors() as $k => $v) {
+                        $this->addError($k, $v[0]);
+                    }
+                    return false;
+                }
+            }
+            return true;
         } else {
-            throw new \Exception(print_r($navItem->getErrors(), true));
+            return false;
         }
+    }
+    
+    public function eventAfterCreate()
+    {
+        $this->_navItem->nav_id = $this->id;
+        $resp = $this->_navItem->update();
     }
     /*
     public function getNavItems()
