@@ -6,6 +6,7 @@ use luya\Luya;
 class Module extends \admin\base\Module
 {
     public static $apis = [
+        'api-admin-defaults' => 'admin\apis\DefaultsController',
         'api-admin-user' => 'admin\apis\UserController',
         'api-admin-menu' => 'admin\apis\MenuController',
         'api-admin-group' => 'admin\apis\GroupController',
