@@ -5,26 +5,29 @@ zaa.directive("createForm", function() {
 			data : '='
 		},
 		templateUrl : 'createform.html',
-		controller : function($scope, ApiAdminLang, ApiCmsCat, MenuService) {
+		controller : function($scope, $http, ApiAdminLang, ApiCmsCat, MenuService) {
 			
 			$scope.controller = $scope.$parent;
-			
-			$scope.showType = 0;
-			
 			
 			$scope.lang = ApiAdminLang.query();
 			
 			$scope.cat = ApiCmsCat.query();
 			
+			$scope.data.nav_item_type = 1;
+			$scope.data.parent_nav_id = 0;
 			
-			$scope.showTypeContainer = function() {
-				/* todo: verify if allowd */
-				$scope.showType = parseInt($scope.data.nav_item_type);
-			}
+			$http.get('admin/api-cms-defaults/cat').success(function(response) {
+				$scope.data.cat_id = response.id;
+			});
+			
+			$http.get('admin/api-admin-defaults/lang').success(function(response) {
+				$scope.data.lang_id = response.id;
+			});
 			
 			$scope.exec = function () {
 				$scope.controller.save().then(function(response) {
-					$scope.showType = true;
+					console.log('exec', response);
+					//$scope.data.nav_item_type = true;
 					MenuService.refresh();
 				})
 			}
@@ -61,8 +64,6 @@ zaa.directive("createFormModule", function() {
 		},
 		templateUrl : 'createformmodule.html',
 		controller : function($scope, ApiCmsNavItemModule) {
-			console.log('ApiCmsNavItemModule', ApiCmsNavItemModule);
-			
 			$scope.save = function() {
 				ApiCmsNavItemModule.save($.param({ module_name : $scope.data.module_name }), function(response) {
 					$scope.data.nav_item_type_id = response.id;

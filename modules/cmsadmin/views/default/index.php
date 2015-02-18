@@ -12,9 +12,8 @@
 </script>
 
 <script type="text/ng-template" id="createform.html">
-<div ng-switch on="showType">
-
-<div ng-switch-default>
+<div ng-switch on="data.nav_item_type">
+<div style="padding:20px; background-color:#F0F0F0; margin:20px;">
 <table>
     <tr>
         <td>Titel</td>
@@ -23,10 +22,6 @@
     <tr>
         <td>Rewrite</td>
         <td><input type="text" ng-model="data.rewrite" placeholder="hallo-welt" /></td>
-    </tr>
-    <tr>
-        <td>Parent Nav Id</td>
-        <td><div ng-if="!data.nav_id"><input type="text" ng-model="data.parent_nav_id" placeholder="0" /></div></td>
     </tr>
     <tr>
         <td>Cat Id</td>
@@ -39,28 +34,28 @@
             </div>
         </td>
     </tr>
+    <!-- people should not create pages for other languages as long as there is not a page in the cms original menu
     <tr>
         <td>Lang Id</td>
         <td>
             <select ng-model="data.lang_id" ng-options="item.id as item.name for item in lang" />
         </td>
     </tr>
+    -->
+    <tr>
+        <td>Parent Nav Id</td>
+        <td><div ng-if="!data.nav_id"><input type="text" ng-model="data.parent_nav_id" placeholder="0" /></div></td>
+    </tr>
     <tr>
         <td>Content Nav-Item-Type Id</td>
         <td>
-            <select ng-model="data.nav_item_type">
-                <option value="1" selected>Page</option>
-                <option value="2">Module</option>
-                <option value="3">Redirect</option>
-            </select>
+            <input type="radio" ng-model="data.nav_item_type" value="1"> Page<br />
+            <input type="radio" ng-model="data.nav_item_type" value="2"> Module<br />
+            <input type="radio" ng-model="data.nav_item_type" value="3"> Redirect<br />
         </td>
-    </tr>
-    <tr>
-        <td><button ng-click="showTypeContainer()">NEXT</button></td>
     </tr>
 </table>
 </div>
-
 <div ng-switch-when="1">
     <create-form-page data="data"></create-form-page>
 </div>
@@ -82,22 +77,26 @@
 </script>
 
 <script type="text/ng-template" id="createformpage.html">
+<div style="padding:20px; border:2px solid #F0F0F0; margin:20px;">
 <table>
 <tr>
     <td>Layout</td>
     <td><select ng-model="data.layout_id" ng-options="lts.id as lts.name for lts in layouts"></select></td>
 </tr>
 </table>
+</div>
 <button ng-click="save()">SAVE</button>
 </script>
 
 <script type="text/ng-template" id="createformmodule.html">
+<div style="padding:20px; border:2px solid #CCC; margin:20px;">
 <table>
 <tr>
     <td>Module Name (Yii2-ID)</td>
     <td><input type="text" ng-model="data.module_name" /></td>
 </tr>
 </table>
+</div>
 <button ng-click="save()">SAVE</button>
 </script>
 
