@@ -37,4 +37,9 @@ class Cat extends \admin\ngrest\base\Model
             'restupdate' => ['name', 'rewrite', 'default_nav_id']
         ];
     }
+    
+    public static function getDefault()
+    {
+        return self::find()->where(['is_default' => 1])->one();
+    }
 }
