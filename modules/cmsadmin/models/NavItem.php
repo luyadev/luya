@@ -85,6 +85,10 @@ class NavItem extends \yii\db\ActiveRecord
 
     public function validateRewrite()
     {
+        $dirty = $this->getDirtyAttributes(['rewrite']);
+        if (!isset($dirty['rewrite'])) {
+            return true;
+        }
         if (!is_null($this->verifyRewrite($this->rewrite, $this->lang_id))) {
             $this->addError('rewrite', 'Rewrite existiert bereits!');
 
