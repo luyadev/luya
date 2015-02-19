@@ -17,15 +17,14 @@ class NavItemController extends \admin\base\RestController
 
     public function actionCreate()
     {
-        $data = $_POST;
-
         $model = new \cmsadmin\models\NavItem();
-        $model->attributes = $data;
-        if ($model->validate()) {
-            $entry = $model->save();
-
-            return $entry;
+        $model->attributes = $_POST;
+        
+        if (!$model->save()) {
+            return $model->getErrors();
         }
+        
+        return true;
     }
 
     /**
