@@ -50,6 +50,8 @@ zaa.directive("createFormPage", function() {
 				ApiCmsNavItemPage.save($.param({ layout_id : $scope.data.layout_id }), function(response) {
 					$scope.data.nav_item_type_id = response.id;
 					$scope.$parent.exec();
+				}, function(error) {
+					console.log('err_create_form_page', error.data);
 				});
 			}
 		}

@@ -5,9 +5,10 @@ zaa.controller("CmsadminCreateController", function($scope, $q, ApiCmsNav) {
 	$scope.save = function() {
 		return $q(function(resolve, reject) {
 			ApiCmsNav.save($.param($scope.data), function(response) {
-				console.log(response);
 				resolve(response)
-			});
+			}, function(response) {
+				console.log('error', response);
+			})
 		});
 		
 	}
