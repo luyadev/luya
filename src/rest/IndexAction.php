@@ -17,9 +17,11 @@ class IndexAction extends \yii\rest\IndexAction
         }
         /* @var $modelClass \yii\db\BaseActiveRecord */
         $modelClass = $this->modelClass;
-        return new \yii\data\ActiveDataProvider([
+        $data = new \yii\data\ActiveDataProvider([
             'pagination' => false,
-            'query' => $modelClass::find(),
+            'query' => $modelClass::ngRestFind(),
         ]);
+        
+        return $data;
     }
 }

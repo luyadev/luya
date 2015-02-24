@@ -6,6 +6,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
     $.extend(this, $controller('CrudController', { $scope : $scope }));
     /* local controller config */
     $scope.config.apiEndpoint = '<?=$config->getRestUrl();?>';
+    $scope.config.listMethod = '<?=$config->getListMethod();?>';
     $scope.config.list = <?=json_encode($crud->getFields('list'));?>;
     $scope.config.create = <?=json_encode($crud->getFields('create'));?>;
     $scope.config.update = <?=json_encode($crud->getFields('update'));?>;

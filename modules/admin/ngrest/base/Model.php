@@ -27,6 +27,17 @@ abstract class Model extends \yii\db\ActiveRecord
         }
     }
 
+    /**
+     * @TODO ATTENTION THIS IS NOT SECURE TO HIDE SENSITIVE DATA, TO HIDE SENSTIVIE DATA YOU ALWAYS HAVE TO OVERWRITE find()
+     */
+    public static function ngRestFind()
+    {
+        if (($method = \yii::$app->request->get('ngrestListMethod', false))) {
+            return static::$method();
+        }
+        return static::find();
+    }
+    
     public function i18nAfterFind()
     {
         foreach ($this->getI18n() as $field) {

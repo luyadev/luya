@@ -35,6 +35,8 @@ class Config implements ConfigInterface
 
     private $restUrlPrefix = 'admin/'; /* could be: http://www.yourdomain.com/admin/; */
 
+    public $listMethod = null;
+    
     public function __construct($restUrl, $restPrimaryKey, $options = [])
     {
         $this->restUrl = $this->restUrlPrefix.$restUrl;
@@ -184,5 +186,15 @@ class Config implements ConfigInterface
         foreach ($this->i18n as $fieldName) {
             $this->fieldArgAppend($fieldName, 'i18n', true);
         }
+    }
+    
+    public function setListMethod($method)
+    {
+        $this->listMethod = $method;
+    }
+    
+    public function getListMethod()
+    {
+        return $this->listMethod;
     }
 }
