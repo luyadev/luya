@@ -24,13 +24,6 @@ class Block extends \admin\ngrest\base\Model
         return 'cms_block';
     }
 
-    public function rules()
-    {
-        return [
-            [['name', 'json_config', 'twig_frontend', 'twig_admin'], 'required']
-        ];
-    }
-
     public function scenarios()
     {
         return [

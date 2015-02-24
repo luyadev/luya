@@ -24,7 +24,8 @@ class Module extends \admin\base\Module
         $this->menu->createGroup($node, 'Verwalten', [
             $this->menu->createItem("cat", "Kategorien", "cmsadmin-cat-index", "fa-ils"),
             $this->menu->createItem("layout", "Layouts", "cmsadmin-layout-index", "fa-eyedropper"),
-            $this->menu->createItem('block', "Blocks", "cmsadmin-block-index", "fa-outdent"),
+            $this->menu->createItem('blocksystem', "System Blocks", "cmsadmin-blocksystem-index", "fa-outdent"),
+            $this->menu->createItem('blockproject', "Project Blocks", "cmsadmin-blockproject-index", "fa-outdent"),
         ]);
 
         return $this->menu->get();
