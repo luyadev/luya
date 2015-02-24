@@ -13,7 +13,9 @@ class Block extends \admin\ngrest\base\Model
         $config->create->field("json_config", "JSON Config")->ace(['mode' => 'json']);
         $config->create->field("twig_frontend", "Twig Frontend")->ace(['mode' => 'twig']);
         $config->create->field("twig_admin", "Twig Admin")->ace(['mode' => 'twig']);
-
+       
+        $config->setListMethod('findBlockproject');
+        
         $config->update->copyFrom('create');
 
         return $config;
@@ -24,6 +26,16 @@ class Block extends \admin\ngrest\base\Model
         return 'cms_block';
     }
 
+    public static function findBlocksystem()
+    {
+        return self::find()->where('class != ""');
+    }
+    
+    public static function findBlockproject()
+    {
+        return self::find()->where('class = ""');
+    }
+    
     public function scenarios()
     {
         return [

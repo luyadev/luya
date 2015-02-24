@@ -9,6 +9,8 @@ class BlocksystemController extends \admin\ngrest\base\Controller
     {
         $config = new \admin\ngrest\Config($this->getModelObject()->getNgRestApiEndpoint(), $this->getModelObject()->getNgRestPrimaryKey());
         
+        $config->setListMethod('findBlocksystem');
+        
         $config->i18n($this->getModelObject()->getI18n());
         
         $config->list->field("class", "Klasse")->text();
