@@ -1,13 +1,13 @@
 <?php
 namespace cmsadmin\blocks;
 
-class HeadingBlock extends \cmsadmin\base\Block
+class Heading1Block extends \cmsadmin\base\Block
 {
     public function jsonFromArray()
     {
         return [
             'vars' => [
-                ['var' => 'heading', 'label' => 'Uebeschrift', 'type' => 'zaa-input-text']
+                ['var' => 'heading', 'label' => 'Uebeschrift 1', 'type' => 'zaa-input-text']
             ]
         ];
     }
@@ -19,11 +19,11 @@ class HeadingBlock extends \cmsadmin\base\Block
     
     public function getTwigAdmin()
     {
-        return '<p>{{ vars.heading }}</p>';
+        return '<h1>{{ vars.heading }}</h1>';
     }
     
     public function getName()
     {
-        return 'Read_Heading_Name';
+        return 'Überschrift 1';
     }
 }

@@ -32,9 +32,6 @@ abstract class Model extends \yii\db\ActiveRecord
      */
     public static function ngRestFind()
     {
-        if (($method = \yii::$app->request->get('ngrestListMethod', false))) {
-            return static::$method();
-        }
         return static::find();
     }
     

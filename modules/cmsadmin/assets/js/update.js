@@ -142,8 +142,14 @@ zaa.controller("DropBlockController", function($scope, ApiCmsNavItemPageBlockIte
 	}
 });
 
-zaa.controller("DroppableBlocksController", function($scope, ApiCmsBlock) {
+zaa.controller("DroppableBlocksController", function($scope, $http) {
 
-	$scope.blocks = ApiCmsBlock.query();
+	$http({
+		url : 'admin/api-cms-admin/get-all-blocks',
+		method : 'GET'
+	}).success(function(response) {
+		$scope.blocks = response;
+	});
+	
 	
 });

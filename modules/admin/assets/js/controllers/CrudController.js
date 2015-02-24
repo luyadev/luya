@@ -117,7 +117,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, AdminService) {
 	}
 
 	$scope.loadList = function() {
-		$http.get($scope.config.apiEndpoint + '?ngrestExpandI18n=true&ngrestListMethod='+$scope.config.listMethod+'&fields=' + $scope.config.list.join())
+		$http.get($scope.config.apiEndpoint + '?ngrestExpandI18n=true&fields=' + $scope.config.list.join())
 		.success(function(data) {
 			$scope.data.list = data;
 		})
