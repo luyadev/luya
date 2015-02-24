@@ -46,6 +46,8 @@ class ErrorHandler extends \yii\web\ErrorHandler
         
         return [
             'message' => $exception->getMessage(),
+            'line' => $exception->getLine(),
+            'file' => $exception->getFile(),
             'trace' => $_trace,
             'server' => $_SERVER,
             'session' => $_SESSION,
