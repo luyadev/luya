@@ -68,23 +68,6 @@ class Nav extends \yii\db\ActiveRecord
         $this->_navItem->nav_id = $this->id;
         $resp = $this->_navItem->update();
     }
-    /*
-    public function getNavItems()
-    {
-        return $this->hasMany(\cmsadmin\models\NavItem::className(), ['nav_id' => 'id']);
-    }
-
-
-    public function getItems()
-    {
-        // return hasMany
-    }
-    */
-
-    public function getItem($langId)
-    {
-        return \cmsadmin\models\NavItem::find()->where(['nav_id' => $this->id, 'lang_id' => $langId])->one();
-    }
 
     public static function getItemsData($navId)
     {

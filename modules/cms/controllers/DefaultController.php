@@ -10,8 +10,8 @@ class DefaultController extends \luya\base\PageController
 
     public $pageTitle = 'default none!';
 
-    private $_lang = null;
-
+    public $langId = 0;
+    
     private $_context = null;
 
     public function init()
@@ -19,7 +19,8 @@ class DefaultController extends \luya\base\PageController
         parent::init();
         $this->links();
         $this->_context = $this;
-        $this->_lang = yii::$app->collection->lang->shortCode;
+        
+        $this->langId = $this->getLangIdByShortCode(yii::$app->collection->lang->shortCode);
     }
 
     private function links()
@@ -75,20 +76,13 @@ class DefaultController extends \luya\base\PageController
 
     private function getPageContent($navId, $options = [])
     {
-        // @TODO is $linkItem['id'] a unifyed system or does it only matches cause Links is set via cms\collection\Links?
-        $object = \cmsadmin\models\Nav::findOne($navId);
-
-        // @TODO Language ID
-        $navItemId = $object->getItem(1)->id;
-
-        // @TODO LANGUAGE PARAM SHOULD BE APPLYIED HERE!
-        $itemType = \cmsadmin\models\NavItem::findOne($navItemId);
+        $itemType = \cmsadmin\models\NavItem::find()->where(['nav_id' => $navId, 'lang_id' => $this->langId])->one();
 
         $this->pageTitle = $itemType->title;
 
         $item = $itemType->getType();
 
-        $options['navItemId'] = $navItemId;
+        $options['navItemId'] = $itemType->id;
         $item->setOptions($options);
 
         $content = $item->getContent();
@@ -131,5 +125,12 @@ class DefaultController extends \luya\base\PageController
         }
 
         return false;
+    }
+    
+    private function getLangIdByShortCode($shortCode)
+    {
+        $data = \admin\models\Lang::find()->where(['short_code' => $shortCode])->one();
+        
+        return $data->id;
     }
 }

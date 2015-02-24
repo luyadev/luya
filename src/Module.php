@@ -10,7 +10,7 @@ class Module extends \luya\base\Module
      *
      * @var string
      */
-    public $urlPrefixComposition = '<langId:[a-z]{2}>';
+    public $urlPrefixComposition = '<langShortCode:[a-z]{2}>';
 
     public $sendException = true;
     

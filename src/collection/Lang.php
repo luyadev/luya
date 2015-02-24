@@ -29,11 +29,11 @@ class Lang extends \luya\base\Collection implements \luya\collection\LangInterfa
 
     public function evalRequest($request)
     {
-        $langId = $request->getQueryParam('langId', null);
+        $langShortCode = $request->getQueryParam('langShortCode', null);
 
-        if (!is_null($langId)) {
-            $this->setName($langId);
-            $this->setShortCode($langId);
+        if (!is_null($langShortCode)) {
+            $this->setName($langShortCode);
+            $this->setShortCode($langShortCode);
 
             return true;
         }
