@@ -18,7 +18,7 @@ class Module extends \luya\base\Module
      * 
      * @var string
      */
-    public $urlPrefixComposition = '<langShortCode:[a-z]{2}>';
+    public $urlPrefixComposition = '<langShortCode:[a-z]{2}>'; // rename to compositionPattern (@TODO !)
 
     public $sendException = false;
     

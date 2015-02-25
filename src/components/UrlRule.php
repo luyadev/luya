@@ -17,15 +17,9 @@ class UrlRule extends \luya\base\UrlRule
     
     public function parseRequest($manager, $request)
     {
-        $pathInfo = $request->getPathInfo();
+        $parts = explode("/", $request->getPathInfo());
 
-        $parts = explode("/", $pathInfo);
-
-        $pc = yii::$app->getModule('luya')->urlPrefixComposition;
-
-        //$url = $request->getPathInfo();
-
-        preg_match_all('/<(\w+):?([^>]+)?>/', $pc, $matches, PREG_SET_ORDER);
+        preg_match_all('/<(\w+):?([^>]+)?>/', yii::$app->getModule('luya')->urlPrefixComposition, $matches, PREG_SET_ORDER);
 
         $compositionKeys = [];
         
@@ -34,21 +28,15 @@ class UrlRule extends \luya\base\UrlRule
                 $urlValue = $parts[$index];
                 $rgx = $match[2];
                 $param = $match[1];
-
                 preg_match("/^$rgx$/", $urlValue, $res);
+                
                 if (count($res) == 1) {
-                    // ok! remove it, and add requestParam
-                    
                     $compositionKeys[$param] = $urlValue;
-                    
-                    //$request->setQueryParams([$param => $urlValue]);
                     unset($parts[$index]);
                 }
             }
         }
 
-        //$request->setQueryParams(['urlPrefixCompositionKey' => implode("/", $compositeKeys)]);
-        
         $request->setPathInfo(implode("/", $parts));
 
         $composition = new \luya\collection\PrefixComposition();
@@ -58,7 +46,7 @@ class UrlRule extends \luya\base\UrlRule
 
         /* new get default url route @ 07.01.2015 */
 
-        $parts = explode("/", $request->getPathInfo());
+        $parts = explode("/", $request->getPathInfo()); // can be deleted after reshuffle array
 
         if (!empty($parts) && !array_key_exists($parts[0], yii::$app->modules)) {
             $class = yii::$app->defaultRoute.'\components\UrlRule';
