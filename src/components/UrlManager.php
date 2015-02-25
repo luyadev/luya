@@ -2,19 +2,15 @@
 namespace luya\components;
 
 /**
- * if its not necesary to directly access the modules via /{module} we could
- * implement this solution:
- * http://www.yiiframework.com/doc-2.0/guide-runtime-routing.html#adding-rules-dynamically
- *
+ * 
+ * @todo see http://www.yiiframework.com/doc-2.0/guide-runtime-routing.html#adding-rules-dynamically
  * @author nadar
- *
  */
 class UrlManager extends \yii\web\UrlManager
 {
     public $enablePrettyUrl = true;
 
     public $showScriptName = false;
-    
     
     public function createUrl($params)
     {
@@ -26,12 +22,10 @@ class UrlManager extends \yii\web\UrlManager
         if ($moduleName !== false) {
             $moduleObject = \yii::$app->getModule($moduleName);
             
-            $moduleContext = $moduleObject->getContext();
-            if (!empty($moduleContext)) {
+            if (!empty($moduleObject->getContext())) {
                 $options = $moduleObject->getContextOptions();
-                $navItemId = $options['navItemId'];
-                $link = \yii::$app->collection->links->findOneByArguments(['nav_item_id' => $navItemId]);
-                $response = str_replace($moduleName, $link['url'], $response);
+                $link = \yii::$app->collection->links->findOneByArguments(['nav_item_id' => $options['navItemId']]);
+                $response = str_replace($moduleName, \yii::$app->collection->composition->getFull() . '/' . $link['url'], $response);
             }
         }
         return $response;

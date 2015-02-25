@@ -8,31 +8,29 @@ namespace luya\components;
  */
 class Collection extends \yii\base\Component
 {
-    /* lang */
-
-    private $lang;
-
-    public function setLang($lang)
+    private $_composition;
+    
+    public function setComposition($object)
     {
-        $this->lang = $lang;
+        $this->_composition = $object;
     }
-
-    public function getLang()
+    
+    public function getComposition()
     {
-        return $this->lang;
+        return $this->_composition;
     }
-
+    
     /* url */
 
-    private $links;
+    private $_links;
 
     public function setLinks($url)
     {
-        $this->links = $url;
+        $this->_links = $url;
     }
 
     public function getLinks()
     {
-        return $this->links;
+        return $this->_links;
     }
 }

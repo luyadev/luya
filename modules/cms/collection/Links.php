@@ -3,21 +3,6 @@ namespace cms\collection;
 
 class Links extends \luya\collection\Links implements \luya\collection\LinksInterface
 {
-    /*
-    private $langId;
-
-    public function setLangId($langShortCode)
-    {
-        // get the langId from shortCode
-        $data = \admin\models\Lang::find()->where(['short_code' => $langShortCode])->one();
-
-        if (!$data) {
-            throw new \Exception("The provided shortCode $langShortCode does not exists!");
-        }
-        $this->langId = $data->id;
-    }
-    */
-
     public function start()
     {
         $this->iteration(0, '', 0);

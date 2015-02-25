@@ -29,15 +29,16 @@ class Lang extends \luya\base\Collection implements \luya\collection\LangInterfa
 
     public function evalRequest($request)
     {
-        $langShortCode = $request->getQueryParam('langShortCode', null);
-
+        $langShortCode = $request->getQueryParams();
+        var_dump('hoe?', $langShortCode);
+        exit;
         if (!is_null($langShortCode)) {
             $this->setName($langShortCode);
             $this->setShortCode($langShortCode);
 
             return true;
         }
-
+        
         // @TODO load default values, from where?
         $this->setName('de');
         $this->setShortCode('de');

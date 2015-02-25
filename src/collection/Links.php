@@ -1,7 +1,7 @@
 <?php
 namespace luya\collection;
 
-class Links extends \luya\base\Collection implements \luya\collection\LinksInterface
+class Links implements \luya\collection\LinksInterface
 {
     private $links = [];
 
@@ -107,15 +107,15 @@ class Links extends \luya\base\Collection implements \luya\collection\LinksInter
         return $this->links[$link];
     }
 
-    private $activeLink;
+    private $_activeLink;
 
     public function setActiveLink($activeLink)
     {
-        $this->activeLink = $activeLink;
+        $this->_activeLink = $activeLink;
     }
 
     public function getActiveLink()
     {
-        return $this->activeLink;
+        return $this->_activeLink;
     }
 }

@@ -20,13 +20,19 @@ class DefaultController extends \luya\base\PageController
         $this->links();
         $this->_context = $this;
         
-        $this->langId = $this->getLangIdByShortCode(yii::$app->collection->lang->shortCode);
+        $shortCode = yii::$app->collection->composition->getKey('langShortCode');
+        
+        if (!$shortCode) {
+            yii::$app->collection->composition->setkey('langShortCode', $this->getDefaultLangShortCode());
+        }
+        
+        $this->langId = $this->getLangIdByShortCode(yii::$app->collection->composition->getKey('langShortCode'));
     }
 
     private function links()
     {
         $links = new \cms\collection\Links();
-        $links->activeLink = $_GET['path'];
+        $links->setActiveLink($_GET['path']);
         $links->start();
         yii::$app->collection->links = $links;
     }
@@ -34,11 +40,9 @@ class DefaultController extends \luya\base\PageController
     public function actionIndex()
     {
         $linksObject = \Yii::$app->collection->links;
-
         $urls = $linksObject->getAll();
-
         $fullUrl = $linksObject->getActiveLink();
-
+        
         /* above collection based */
 
         if (empty($fullUrl)) {
@@ -127,10 +131,14 @@ class DefaultController extends \luya\base\PageController
         return false;
     }
     
+    private function getDefaultLangShortCode()
+    {
+        return \admin\models\Lang::find()->where(['is_default' => 1])->one()->short_code;
+        
+    }
+    
     private function getLangIdByShortCode($shortCode)
     {
-        $data = \admin\models\Lang::find()->where(['short_code' => $shortCode])->one();
-        
-        return $data->id;
+        return \admin\models\Lang::find()->where(['short_code' => $shortCode])->one()->id;
     }
 }
