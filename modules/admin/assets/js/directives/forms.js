@@ -83,7 +83,7 @@ zaa.directive('zaaInputSelect', function(){
 		},
 		
 		template : function() {
-			return '<select ng-options="item.id as item.label for item in options" ng-model="model" >';
+			return '<select ng-options="item.value as item.label for item in options" ng-model="model" >';
 		}
 	}
 });

@@ -15,10 +15,7 @@ abstract class PluginAbstract
 
     public function __construct(array $options = [])
     {
-        foreach ($options as $key => $value) {
-            $this->options[$key] = $value;
-        }
-
+        $this->setOptions($options);
         $this->init();
     }
 
@@ -26,11 +23,23 @@ abstract class PluginAbstract
     {
     }
 
+    public function hasOption($key)
+    {
+        return (isset($this->options[$key])) ? true : false;
+    }
+    
     public function getOption($key)
     {
         return (isset($this->options[$key])) ? $this->options[$key] : false;
     }
 
+    public function setOptions(array $optionsArray)
+    {
+        foreach ($optionsArray as $key => $value) {
+            $this->options[$key] = $value;
+        }
+    }
+    
     public function setOption($key, $value)
     {
         if (!$this->getOption($key)) {

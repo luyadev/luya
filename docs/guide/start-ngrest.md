@@ -51,3 +51,5 @@ public function ngRestConfig($config)
 }
 ```
 The fields title and description are now configure in the list and create actions. So you could now see the fields in the grid view and you could create new entrys for those two fields.
+
+If you want to see all configuration possibilitys after field, have a look at the [NGREST FIELDS CONFIGURATIOn GUIDE](start-ngrest-fields.md).

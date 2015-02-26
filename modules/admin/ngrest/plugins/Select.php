@@ -7,7 +7,8 @@ use admin\ngrest\PluginAbstract;
  * create a select dropdown box with option list:
  * 
  * Thee following propertys are provided:
- * - select(['assocArray' => [ 'key' => 'label', 'key2' => 'label2' ]]);
+ * - select(['array' => [ 'key' => 'label', 'key2' => 'label2' ]]);
+ * - select(['model' => ['class' => '\path\to\model\class', 'value' => 'ValueFieldKeyName', 'label' => 'LabelFieldKeyName']]);
  * 
  * @author nadar
  */
@@ -16,18 +17,26 @@ class Select extends PluginAbstract
     use \admin\ngrest\PluginTrait;
     
     private $_values = [];
-    
-    public $options = [
-        'assocArray' => [],
-    ];
 
     public function init()
     {
-        foreach ($this->getOption('assocArray') as $key => $value) {
-            $this->_values[] = [
-                "id" => $key,
-                "label" => $value,
-            ];
+        if ($this->hasOption('array')) {
+            foreach ($this->getOption('array') as $key => $value) {
+                $this->_values[] = [
+                    "value" => $key,
+                    "label" => $value,
+                ];
+            }
+        }
+        
+        if (($modelClass = $this->getOption('model')) !== false) {
+            $className = $modelClass['class'];
+            foreach ($className::find()->all() as $item) {
+                $this->_values[] = [
+                    "value" => $item->$modelClass['value'],
+                    "label" => $item->$modelClass['label'],
+                ];
+            }
         }
     }
 
