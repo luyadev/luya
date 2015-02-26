@@ -16,7 +16,7 @@ class Block extends \admin\ngrest\base\Model
         $config->list->field("class", "Class")->text()->required();
 
         $config->create->field("class", "Class")->text()->required();
-        $config->create->field("group_id", "Gruppe")->text()->required();
+        $config->create->field("group_id", "Gruppe")->selectClass('\cmsadmin\models\BlockGroup', 'id', 'name')->required();
        
         $config->update->copyFrom('create');
 
