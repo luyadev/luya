@@ -3,6 +3,8 @@ namespace cmsadmin\blocks;
 
 class Heading1Block extends \cmsadmin\base\Block
 {
+    public $renderPath = '@cmsadmin/views/blocks';
+    
     public function jsonFromArray()
     {
         return [

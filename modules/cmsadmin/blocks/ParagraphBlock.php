@@ -3,6 +3,8 @@ namespace cmsadmin\blocks;
 
 class ParagraphBlock extends \cmsadmin\base\Block
 {
+    public $renderPath = '@cmsadmin/views/blocks';
+    
     public $name = 'Paragraph Text';
     
     public function jsonFromArray()

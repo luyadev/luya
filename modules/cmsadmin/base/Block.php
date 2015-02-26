@@ -1,6 +1,8 @@
 <?php
 namespace cmsadmin\base;
 
+use yii;
+
 abstract class Block
 {
     public $name = null;
@@ -10,6 +12,8 @@ abstract class Block
     public $twigFrontend = null;
     
     public $twigAdmin = null;
+    
+    public $renderPath = '@app/views/blocks/';
     
     public function __construct()
     {
@@ -43,5 +47,15 @@ abstract class Block
     public function getTwigAdmin()
     {
         return $this->twigAdmin;
+    }
+    
+    public function getRenderPath()
+    {
+        return $this->renderPath;
+    }
+    
+    public function render($twigFile)
+    {
+        return file_get_contents(yii::getAlias($this->getRenderPath() . $twigFile));
     }
 }
