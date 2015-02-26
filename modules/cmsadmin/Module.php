@@ -14,6 +14,7 @@ class Module extends \admin\base\Module
         'api-cms-navitemmodule' => 'cmsadmin\\apis\\NavItemModuleController',
         'api-cms-layout' => 'cmsadmin\\apis\\LayoutController',
         'api-cms-block' => 'cmsadmin\\apis\\BlockController',
+        'api-cms-blockgroup' => 'cmsadmin\\apis\\BlockgroupController',
         'api-cms-navitemplageblockitem' => 'cmsadmin\\apis\\NavItemPageBlockItemController',
     ];
 
@@ -25,7 +26,11 @@ class Module extends \admin\base\Module
         $this->menu->createGroup($node, 'Verwalten', [
             $this->menu->createItem("cat", "Kategorien", "cmsadmin-cat-index", "fa-ils"),
             $this->menu->createItem("layout", "Layouts", "cmsadmin-layout-index", "fa-eyedropper"),
-            $this->menu->createItem('block', "Blöcke", "cmsadmin-block-index", "fa-outdent"),
+        ]);
+        
+        $this->menu->createGroup($node, 'Blöcke', [
+            $this->menu->createItem('blockgroup', 'Gruppen', 'cmsadmin-blockgroup-index', 'fa-group'),
+            $this->menu->createItem('block', "Verwalte", "cmsadmin-block-index", "fa-outdent"),
         ]);
 
         return $this->menu->get();
