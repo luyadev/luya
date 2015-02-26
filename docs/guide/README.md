@@ -15,5 +15,6 @@ START
 
 CMS
 ---
+* [Custom Project Blocks](cms-custom-blocks.md)
 * [Blocks](cms-blocks.md)
 * [Layouts](cms-layouts.md)

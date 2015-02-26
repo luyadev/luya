@@ -16,6 +16,11 @@ class Module extends \yii\base\Module
      */
     public $requiredComponents = [];
 
+    /**
+     * This variable is only available if your not in a context call. A context call would be if the cms renders the module.
+     * 
+     * @var boolean
+     */
     public $useAppLayoutPath = true;
 
     /**
@@ -50,6 +55,8 @@ class Module extends \yii\base\Module
     public $context = null;
 
     public $contextOptions = [];
+    
+    public $moduleLayout = 'moduleLayout';
     
     /**
      *
@@ -113,6 +120,4 @@ class Module extends \yii\base\Module
     {
         return $this->contextOptions;
     }
-
-    public $moduleLayout = 'moduleLayout';
 }
