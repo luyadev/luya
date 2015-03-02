@@ -1,0 +1,13 @@
+{
+	"name" : "zephir/luya-module-Account",
+	"description" : "Zephir Luya User Account",
+	"require" : {
+		"zephir/luya" : "*",
+		"zephir/luya-modules-admin" : "*"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"account\\" : ""
+		}
+	}
+}
