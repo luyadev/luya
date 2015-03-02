@@ -13,84 +13,66 @@ class UrlManager extends \yii\web\UrlManager
     public $enablePrettyUrl = true;
 
     public $showScriptName = false;
-    /*
-    public $compositionPatterns = [];
     
-    private function addCompositionPattern($rule, $composition, $compositionPattern)
+    public $ruleConfig = ['class' => '\luya\base\UrlRule'];
+    
+    public function parseRequest($request)
     {
-        $this->compositionPatterns[$composition][] = [
-            'rule' => $rule,
-            'compositionPattern' => $compositionPattern
-        ];
+        $route = parent::parseRequest($request);
+        
+        $composition = \yii::$app->collection->composition->getFull() . "/";
+        
+        $length = strlen($composition);
+        if (substr($route[0], 0, $length) == $composition) {
+           $route[0] = substr($route[0], $length);
+        }
+        return $route;
     }
     
     public function addRules($rules, $append = true)
     {
         foreach ($rules as $key => $rule) {
-            if (isset($rule['compositionPattern']) && isset($rule['pattern'])) {
-                foreach($rule['compositionPattern'] as $composition => $compositionPattern) {
-                    $this->addCompositionPattern($rule, $composition, $compositionPattern);
+            if (isset($rule['composition'])) {
+                foreach ($rule['composition'] as $comp => $pattern) {
+                    $rules[] = [
+                        'pattern' => $pattern,
+                        'route' => $comp . "/" . $rule['route']
+                    ];
                 }
-                unset ($rules[$key]['compositionPattern']);
             }
         }
-        parent::addRules($rules, $append);
+        return parent::addRules($rules, $append);
     }
     
-    public function parseCompositeRequest($request, $composition)
-    {
-        $_rules = [];
-        
-        foreach ($this->compositionPatterns[$composition] as $rule) {
-            $_rules[] = ['pattern' => $rule['compositionPattern'], 'route' => $rule['rule']['route']];
-        }
-        
-        $_oldRules = $this->rules;
-        
-        parent::addRules($_rules, false);
-        
-        $return = $this->parseRequest($request);
-        
-        $this->rules = $_oldRules;
-        
-        return $return;
-    }
-    
-    
-    public function createCompositeUrl($params, $composition)
-    {
-        $_rules = [];
-        
-        foreach ($this->compositionPatterns[$composition] as $rule) {
-            $_rules[] = ['pattern' => $rule['compositionPattern'], 'route' => $rule['rule']['route']];
-        }
-        
-        $_oldRules = $this->rules;
-        
-        parent::addRules($_rules, false);
-        
-        $return = $this->createUrl($params);
-        
-        $this->rules = $_oldRules;
-        
-        return $return;
-    }
-    */ 
     public function createUrl($params)
     {
+        $composition = \yii::$app->collection->composition->getFull();
+        
+        $originalParams = $params;
+        
+        $params[0] = $composition . '/' . $params[0];
+        
         $response = parent::createUrl($params);
+        
+        // we have not found the composition rule matching against rules, so use the origianl params and try again!
+        if (strpos($response, $params[0]) !== false) {
+            $params = $originalParams;
+            $response = parent::createUrl($params);
+            
+        } else {
+            // now we have to remove the composition informations from the links to make a valid link parsing (read module)
+            $params[0] = str_replace($composition ."/", "", $params[0]);
+        }
+        
         $params = (array) $params;
-        
         $moduleName = \luya\helpers\Url::fromRoute($params[0], 'module');
-        
-        
         if ($moduleName !== false) {
             $moduleObject = \yii::$app->getModule($moduleName);
             
             if (!empty($moduleObject->getContext())) {
                 $options = $moduleObject->getContextOptions();
                 $link = \yii::$app->collection->links->findOneByArguments(['nav_item_id' => $options['navItemId']]);
-                $response = str_replace($moduleName, \yii::$app->collection->composition->getFull() . '/' . $link['url'], $response);
+                $response = str_replace($moduleName, $composition . '/' . $link['url'], $response);
             }
         }
         return $response;
