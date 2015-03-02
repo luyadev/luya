@@ -87,3 +87,25 @@ zaa.directive('zaaInputSelect', function(){
 		}
 	}
 });
+
+zaa.directive('zaaDatepicker', function() {
+	return {
+		restrict : 'E',
+		transclude : false,
+		replace : true,
+		scope : {
+			"model" : "=",
+			"name" : "=",
+			"options" : "="
+		},
+		
+		controller : function($scope)
+		{
+			
+		},
+		
+		template: function(){
+			/* TBD */
+		}
+	}
+});
