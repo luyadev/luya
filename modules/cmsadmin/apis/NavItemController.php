@@ -15,18 +15,6 @@ class NavItemController extends \admin\base\RestController
         return \cmsadmin\models\NavItem::find()->where(['nav_id' => $navId, 'lang_id' => $langId])->all();
     }
 
-    public function actionCreate()
-    {
-        $model = new \cmsadmin\models\NavItem();
-        $model->attributes = $_POST;
-        
-        if (!$model->save()) {
-            return $model->getErrors();
-        }
-        
-        return true;
-    }
-
     /**
      * returns all the PAGE type specific informations.
      *

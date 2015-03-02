@@ -3,8 +3,6 @@ namespace cmsadmin\models;
 
 class NavItemModule extends \cmsadmin\base\NavItemType
 {
-    private $_suffix = null;
-
     public static function tableName()
     {
         return 'cms_nav_item_module';
@@ -14,14 +12,6 @@ class NavItemModule extends \cmsadmin\base\NavItemType
     {
         return [
             [['module_name'], 'required']
-        ];
-    }
-
-    public function scenarios()
-    {
-        return [
-            'restcreate' => ['module_name'],
-            'restupdate' => ['module_name']
         ];
     }
 

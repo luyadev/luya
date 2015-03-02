@@ -26,10 +26,16 @@ zaa.directive("createForm", function() {
 			
 			$scope.exec = function () {
 				$scope.controller.save().then(function(response) {
+					console.log('createForm Drive Response', response);
+					MenuService.refresh();
+				});
+				/*
+				$scope.controller.save().then(function(response) {
 					console.log('exec', response);
 					//$scope.data.nav_item_type = true;
 					MenuService.refresh();
 				})
+				*/
 			}
 		}
 	}
@@ -42,17 +48,21 @@ zaa.directive("createFormPage", function() {
 			data : '='
 		},
 		templateUrl : 'createformpage.html',
-		controller : function($scope, $resource, ApiCmsNavItemPage) {
+		controller : function($scope, $resource) {
 			
 			$scope.layouts = $resource('admin/api-cms-layout/:id').query();
 			
 			$scope.save = function() {
+				
+				$scope.$parent.exec();
+				/*
 				ApiCmsNavItemPage.save($.param({ layout_id : $scope.data.layout_id }), function(response) {
 					$scope.data.nav_item_type_id = response.id;
 					$scope.$parent.exec();
 				}, function(error) {
 					console.log('err_create_form_page', error.data);
 				});
+				*/
 			}
 		}
 	}
@@ -65,12 +75,18 @@ zaa.directive("createFormModule", function() {
 			data : '='
 		},
 		templateUrl : 'createformmodule.html',
-		controller : function($scope, ApiCmsNavItemModule) {
+		controller : function($scope) {
+			
 			$scope.save = function() {
+				
+				$scope.$parent.exec();
+				
+				/*
 				ApiCmsNavItemModule.save($.param({ module_name : $scope.data.module_name }), function(response) {
 					$scope.data.nav_item_type_id = response.id;
 					$scope.$parent.exec();
 				});
+				*/
 			}
 		}
 	}

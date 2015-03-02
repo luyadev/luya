@@ -17,14 +17,6 @@ class NavItemPage extends \cmsadmin\base\NavItemType
         ];
     }
 
-    public function scenarios()
-    {
-        return [
-            'restcreate' => ['layout_id'],
-            'restupdate' => ['layout_id']
-        ];
-    }
-
     public function getContent()
     {
         $loader = new \Twig_Loader_Filesystem(\yii::getAlias('@app/views/cmslayouts/'));

@@ -10,8 +10,8 @@ class Module extends \admin\base\Module
         'api-cms-nav' => 'cmsadmin\apis\NavController',
         'api-cms-navitem' => 'cmsadmin\\apis\\NavItemController',
         'api-cms-menu' => 'cmsadmin\apis\MenuController', // should put into api-cms-admin
-        'api-cms-navitempage' => 'cmsadmin\apis\NavItemPageController', // should put into api-cms-admin
-        'api-cms-navitemmodule' => 'cmsadmin\\apis\\NavItemModuleController',
+        //'api-cms-navitempage' => 'cmsadmin\apis\NavItemPageController', // should put into api-cms-admin
+        //'api-cms-navitemmodule' => 'cmsadmin\\apis\\NavItemModuleController',
         'api-cms-layout' => 'cmsadmin\\apis\\LayoutController',
         'api-cms-block' => 'cmsadmin\\apis\\BlockController',
         'api-cms-blockgroup' => 'cmsadmin\\apis\\BlockgroupController',

@@ -1,3 +1,4 @@
+/*
 zaa.factory('ApiCmsNav', function($resource) {
 	return $resource('admin/api-cms-nav/:id', { id: '@_id' }, {
 		save : {
@@ -27,6 +28,8 @@ zaa.factory('ApiCmsNavItemModule', function($resource) {
 		}
 	});
 });
+*/
+
 
 
 
