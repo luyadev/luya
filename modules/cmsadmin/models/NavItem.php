@@ -29,7 +29,7 @@ class NavItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nav_id', 'lang_id', 'title', 'rewrite', 'nav_item_type', 'nav_item_type_id'], 'required']
+            [['lang_id', 'title', 'rewrite', 'nav_item_type', 'nav_item_type_id'], 'required']
         ];
     }
 
