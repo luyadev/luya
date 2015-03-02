@@ -103,6 +103,22 @@ Each Module can have its own url Rules. Even its not access by module context, e
     ];
 ```
 
+You can also have composition url rules which will also match against the ***collection->composition->getFull()*** url, like this:
+
+```php
+
+    public static $urlRules = [
+        ['pattern' => 'estore/warenkorb', 'route' => 'estore/default/basket', 'composition' => 
+        	[
+	            'en' => 'estore/the-basket',
+	            'de' => 'estore/der-warenkorb'
+        	]
+        ],
+    ];
+```
+
+those rules above will also match against the en/de compsition full url if there is any.
+
 ***Important***
 
 All the luya module urlRules does have to "prefix" theyr pattern with the current module name, otherwise the urlRouting would load the default module registered for this project. (like cms)
