@@ -45,6 +45,7 @@ zaa.controller("CmsadminCreateInlineController", function($scope, $q, $http) {
 			
 			if ($scope.data.nav_item_type == 1) {
 				$http.post('admin/api-cms-nav/create-page-item', $.param($scope.data), headers).success(function(response) {
+					$scope.$parent.refresh();
 					resolve(response);
 				}).error(function(response) {
 					console.log('error', response);
@@ -53,6 +54,7 @@ zaa.controller("CmsadminCreateInlineController", function($scope, $q, $http) {
 			
 			if ($scope.data.nav_item_type == 2) {
 				$http.post('admin/api-cms-nav/create-module-item', $.param($scope.data), headers).success(function(response) {
+					$scope.$parent.refresh();
 					resolve(response);
 				}).error(function(response) {
 					console.log('error', response);
