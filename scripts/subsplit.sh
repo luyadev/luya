@@ -1,0 +1,19 @@
+#!/bin/bash
+# apt-get install svn
+# wget https://github.com/dflydev/git-subsplit/archive/master.zip
+
+REPO="https://github.com/zephir/luya"
+BASE="https://github.com/zephir"
+
+if [ "$1" = "init" ]; then
+	git subsplit init $REPO
+else
+	git subsplit update
+fi
+
+git subsplit publish "
+    modules/admin:$BASE/luya-module-admin.git
+    modules/cms:$BASE/luya-module-cms.git
+    modules/cmsadmin:$BASE/luya-module-cmsadmin.git
+    modules/account:$BASE/luya-module-account.git
+" --heads=master -q
