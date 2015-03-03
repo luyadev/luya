@@ -10,10 +10,11 @@ class DefaultController extends \luya\rest\Controller
     
     /**
      * @todo change from get param to post param?
-     * @param unknown $errorJson
+     * 
+     * @param string $jsonData
      * @return string
      */
-    public function actionCreate($errorJson)
+    public function actionCreate($jsonData)
     {
         $model = new \errorapi\models\Data();
         $model->error_json = $errorJson;
