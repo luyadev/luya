@@ -24,7 +24,13 @@ class ErrorHandler extends \yii\web\ErrorHandler
         
         // @todo call this url via curl?
         // @todo send error 404 default page
-        echo $this->getModule()->exceptionUrl . '/create/?jsonData=' . $data;
+        $curl = new \Curl\Curl();
+        $rsp = $curl->get($this->getModule()->exceptionUrl . '/create', array(
+            'jsonData' => $data,
+        ));
+        
+        echo "es ist ein fehler passiert.";
+        exit;
     }   
     
     /**
@@ -50,7 +56,6 @@ class ErrorHandler extends \yii\web\ErrorHandler
             'file' => $exception->getFile(),
             'trace' => $_trace,
             'server' => $_SERVER,
-            'session' => $_SESSION,
             'get' => $_GET,
             'post' => $_POST
         ];
