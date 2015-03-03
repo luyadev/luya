@@ -4,12 +4,19 @@ namespace account;
 
 class Module extends \luya\base\Module
 {
-    public static $urlRules = [];
+    public static $urlRules = [
+        ['pattern' => 'account/einloggen', 'route' => 'account/default/index'],
+        ['pattern' => 'account/registration', 'route' => 'account/register/index'],
+        ['pattern' => 'account/meinprofil', 'route' => 'account/settings/index'],
+    ];
     
     public $userIdentity = '\account\components\User';
     
-    public function getUserIdentitiy()
+    public $controllerUseModuleViewPath = true;
+    
+    public function getUserIdentity()
     {
-        return $this->userIdentity;
+        $class = $this->userIdentity;
+        return new $class();
     }
 }

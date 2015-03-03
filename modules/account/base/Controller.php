@@ -19,7 +19,7 @@ class Controller extends \luya\base\PageController
         return [
             'access' => [
                 'class' => \yii\filters\AccessControl::className(),
-                'user' => $this->module->getUserIdentitiy(),
+                'user' => $this->module->getUserIdentity(),
                 'rules' => $this->getRules(),
             ]
         ];

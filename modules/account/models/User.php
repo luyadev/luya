@@ -3,9 +3,66 @@ namespace account\models;
 
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
+    public $password_confirm = null;
+    
     public static function tableName()
     {
         return 'account_user';
+    }
+    
+    public static function findByEmail($email)
+    {
+        return self::find()->where(['email' => $email])->one();
+    }
+    
+    public function rules()
+    {
+        return [
+            [['email', 'password'], 'required', 'on' => 'login'],
+            [['firstname', 'lastname', 'email', 'password'], 'required', 'on' => 'register'],
+            [['email'], 'email', 'on' => 'register'],
+            [['email'], 'validateUserExists', 'on' => 'register'],
+            [['password'], 'validatePassword', 'on' => 'register'],
+        ];
+    }
+    
+    public function scenarios()
+    {
+        return [
+            'register' => ['firstname', 'lastname', 'email', 'password', 'password_confirm'],
+            'login' => ['email', 'password']
+        ];
+    }
+    
+    public function validateUserExists($attribute, $params)
+    {
+        if (!empty(self::findByEmail($this->email))) {
+            $this->addError($attribute, 'Dieser Benutzer existiert schon');
+        }
+    }
+    
+    public function validatePassword($attribute, $params)
+    {
+        if (strlen($this->password) < 6) {
+            $this->addError($attribute, 'Das Passwort muss min. 6 Zeichen haben');
+        }
+        if ($this->password !== $this->password_confirm) {
+            $this->addError($attribute, 'Das Passwort muss mit der Passwortwiederholung überein stimmen.');
+        }
+    }
+    
+    public function verifyPassword($password)
+    {
+        return \yii::$app->security->validatePassword($password.$this->password_salt, $this->password);
+    }
+    
+    public function encodePassword()
+    {
+        // create random string for password salting
+        $this->password_salt = \yii::$app->getSecurity()->generateRandomString();
+        // store the password
+        $this->password = \yii::$app->getSecurity()->generatePasswordHash($this->password.$this->password_salt);
+        $this->password_confirm = $this->password;
     }
     
     // identityInterface
