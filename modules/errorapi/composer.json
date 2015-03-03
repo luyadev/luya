@@ -1,0 +1,12 @@
+{
+	"name" : "zephir/luya-module-errorapi",
+	"description" : "Zephir Luya Error Api",
+	"require" : {
+		"zephir/luya" : "*"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"errorapi\\" : ""
+		}
+	}
+}

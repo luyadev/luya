@@ -18,14 +18,17 @@ class DefaultController extends \luya\rest\Controller
         $model = new \errorapi\models\Data();
         $model->error_json = $errorJson;
         if ($model->save()) {
-            return 'SAVE!';
+            return true;
         } else {
-            var_dump($model->getErrors());
+            return $model->getErrors();
         }
     }
     
+    /**
+     * @todo see if the error request have changed based on a bug system.
+     */
     public function actionResolve()
     {
-        return 'verify the identifier and see if sth changes in case of resolving this issue.';
+        
     }
 }

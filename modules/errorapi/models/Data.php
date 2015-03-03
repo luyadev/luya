@@ -29,6 +29,6 @@ class Data extends \yii\db\ActiveRecord
         }
         
         $this->timestamp_create = time();
-        $this->identifier = md5(strlen($this->error_json) . time()); // @todo change time() to uniqueid();
+        $this->identifier = md5(strlen($this->error_json) . uniqid());
     }
 }
