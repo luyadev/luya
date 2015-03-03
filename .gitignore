@@ -30,4 +30,4 @@ local.properties
 composer.lock
 # PhpStorm
 .idea/
-
+scripts/.subsplit
