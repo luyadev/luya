@@ -1,5 +1,5 @@
 {
-	"name" : "zephir/luya-module-Account",
+	"name" : "zephir/luya-module-account",
 	"description" : "Zephir Luya User Account",
 	"require" : {
 		"zephir/luya" : "*",
