@@ -17,7 +17,7 @@ class DefaultController extends \luya\rest\Controller
     public function actionCreate($jsonData)
     {
         $model = new \errorapi\models\Data();
-        $model->error_json = $errorJson;
+        $model->error_json = $jsonData;
         if ($model->save()) {
             return true;
         } else {
