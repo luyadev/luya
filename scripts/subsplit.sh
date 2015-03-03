@@ -16,4 +16,5 @@ git subsplit publish "
     modules/cms:$BASE/luya-module-cms.git
     modules/cmsadmin:$BASE/luya-module-cmsadmin.git
     modules/account:$BASE/luya-module-account.git
+	modules/errorapi:$BASE/luya-module-errorapi.git
 " --heads=master -q
