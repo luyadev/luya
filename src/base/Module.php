@@ -11,25 +11,6 @@ use Exception;
 class Module extends \yii\base\Module
 {
     /**
-     *
-     * @var array
-     */
-    public $requiredComponents = [];
-
-    /**
-     * This variable is only available if your not in a context call. A context call would be if the cms renders the module.
-     * 
-     * @var boolean
-     */
-    public $useAppLayoutPath = true;
-
-    /**
-     *
-     * @var array
-     */
-    public $assets = [];
-
-    /**
      * Contains the apis for each module to provided them in the admin module.
      * They represents the name of the api and the value represents the class.
      *
@@ -43,7 +24,7 @@ class Module extends \yii\base\Module
      * @var array
      */
     public static $apis = [];
-
+    
     /**
      * Contains all urlRules for this module. Can't provided in key value pairing for pattern<=>route. must be array containing
      * class name or array with pattern, route informations.
@@ -51,11 +32,51 @@ class Module extends \yii\base\Module
      * @var array
      */
     public static $urlRules = [];
+    
+    /**
+     *
+     * @var array
+     */
+    public $requiredComponents = [];
 
+    /**
+     * This variable is only available if your not in a context call. A context call would be if the cms renders the module.
+     * 
+     * @var boolean
+     */
+    public $useAppLayoutPath = true;
+
+    /**
+     * This variable can enable the view path defintion for all controllers inside this module.
+     * 
+     * @var boolean true = the view path inside this module will be used, false = the view path of the projects app view will be used.
+     */
+    public $controllerUseModuleViewPath = null;
+    
+    /**
+     *
+     * @var array
+     */
+    public $assets = [];
+
+    /**
+     * if this/the module is included via another module (parent module), the parent module will write its name inside the child modules
+     * $context variable. For example the cms includes the news module, the context variable of news would have the value "cms".
+     * 
+     * @var string
+     */
     public $context = null;
 
+    /**
+     * If a module is set via context it can store context options inside the child modules via an array.
+     * @var array
+     */
     public $contextOptions = [];
     
+    /**
+     * 
+     * @var unknown_type
+     */
     public $moduleLayout = 'moduleLayout';
     
     /**

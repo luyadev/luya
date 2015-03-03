@@ -39,6 +39,11 @@ class Controller extends \yii\web\Controller
      */
     public function getViewPath()
     {
+        // if the module settings is turn to use the module view path we use them always first!
+        if ($this->module->controllerUseModuleViewPath !== null) {
+            $this->useModuleViewPath = $this->module->controllerUseModuleViewPath;
+        }
+        
         // use default yii behaviour
         if ($this->useModuleViewPath) {
             return parent::getViewPath();
