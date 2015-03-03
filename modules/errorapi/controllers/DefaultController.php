@@ -9,15 +9,13 @@ class DefaultController extends \luya\rest\Controller
     }
     
     /**
-     * @todo change from get param to post param?
-     * 
-     * @param string $jsonData
+     * @param $_POST['error_json']
      * @return string
      */
-    public function actionCreate($jsonData)
+    public function actionCreate()
     {
         $model = new \errorapi\models\Data();
-        $model->error_json = $jsonData;
+        $model->error_json = \yii::$app->request->post('error_json', null);
         if ($model->save()) {
             return true;
         } else {
