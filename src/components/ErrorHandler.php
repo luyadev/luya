@@ -25,11 +25,12 @@ class ErrorHandler extends \yii\web\ErrorHandler
         // @todo call this url via curl?
         // @todo send error 404 default page
         $curl = new \Curl\Curl();
-        $rsp = $curl->post($this->getModule()->exceptionUrl . 'create', array(
+        $rsp = $curl->post(\luya\helpers\Url::trailing($this->getModule()->exceptionUrl) . 'create', array(
             'error_json' => $data,
         ));
         
-        echo "Oops es ist ein Fehler passiert.";
+        echo "<h1>Fehler</h1>";
+        echo "<p>Oops es ist ein Fehler passiert.</p>";
         exit;
     }   
     
