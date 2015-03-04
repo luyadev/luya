@@ -1,7 +1,7 @@
 <?
 namespace admin\storage;
 
-class Images
+class Image
 {
     public function createImage($fileId, $filterId = 0)
     {

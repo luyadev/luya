@@ -1,7 +1,7 @@
 <?php
 namespace admin\storage;
 
-class Files
+class File
 {
     public function createFile($path, $hidden = false)
     {

@@ -7,59 +7,59 @@ namespace admin\components;
  */
 class Storage extends \yii\base\Component
 {
-    private $_files = null;
+    private $_file = null;
     
-    private $_filters = null;
+    private $_filter = null;
     
-    private $_effects = null;
+    private $_effect = null;
     
-    private $_images = null;
+    private $_image = null;
     
-    private $_folders = null;
+    private $_folder = null;
     
-    public function getFiles()
+    public function getFile()
     {
-        if (empty($this->_files)) {
-            $this->_files = new \admin\storage\Files();
+        if (empty($this->_file)) {
+            $this->_file = new \admin\storage\File();
         }
         
-        return $this->_files;
+        return $this->_file;
     }
     
-    public function getFilters()
+    public function getFilter()
     {
-        if (empty($this->_filters)) {
-            $this->_filters = new \admin\storage\Filters();
+        if (empty($this->_filter)) {
+            $this->_filter = new \admin\storage\Filter();
         }
         
-        return $this->_filters;
+        return $this->_filter;
     }
     
-    public function getEffects()
+    public function getEffect()
     {
-        if (empty($this->_effects)) {
-            $this->_effects = new \admin\storage\Effects();
+        if (empty($this->_effect)) {
+            $this->_effect = new \admin\storage\Effect();
         }
         
-        return $this->_effects;
+        return $this->_effect;
     }
     
-    public function getImages()
+    public function getImage()
     {
-        if (empty($this->_images)) {
-            $this->_images = new \admin\storage\Images();
+        if (empty($this->_image)) {
+            $this->_image = new \admin\storage\Image();
         }
         
-        return $this->_images;
+        return $this->_image;
     }
     
-    public function getFolders()
+    public function getFolder()
     {
-        if (empty($this->_folders)) {
-            $this->_folders = new \admin\storage\Folders();
+        if (empty($this->_folder)) {
+            $this->_folder = new \admin\storage\Folder();
         }
         
-        return $this->_folders;
+        return $this->_folder;
     }
     
     public function getHttpFolder()

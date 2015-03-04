@@ -1,7 +1,7 @@
 <?php
 namespace admin\storage;
 
-class Filters
+class Filter
 {
     public function createFilter($filterName)
     {

@@ -1,7 +1,7 @@
 <?php
 namespace admin\storage;
 
-class Effects
+class Effect
 {
     public function addEffect($effectName, $effectParams)
     {
