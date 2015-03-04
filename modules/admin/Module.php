@@ -59,4 +59,12 @@ class Module extends \admin\base\Module
         'admin\AssetAceUi',
         'admin\AssetAce',
     ];
+    
+    public function getLuyaConfig()
+    {
+        return [
+            'storage' => new \admin\components\Storage()
+        ];
+    }
+    
 }

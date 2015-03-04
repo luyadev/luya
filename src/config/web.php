@@ -15,6 +15,7 @@ $config = [
             'enableCsrfValidation' => false,
         ],
         'collection' => 'luya\components\Collection',
+        'luya' => 'luya\components\Luya'
     ],
     'bootstrap' => [
         'luya\components\Bootstrap',

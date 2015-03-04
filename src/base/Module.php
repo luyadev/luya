@@ -141,4 +141,18 @@ class Module extends \yii\base\Module
     {
         return $this->contextOptions;
     }
+    
+    /**
+     * Returns the luya componenets config
+     * 
+     * ```
+     * return [
+     *     'storage' => new \admin\componenets\Storage();
+     * ];
+     * ```
+     */
+    public function getLuyaConfig()
+    {
+        return [];   
+    }
 }
