@@ -7,48 +7,64 @@ namespace admin\components;
  */
 class Storage extends \yii\base\Component
 {
-    private $files = null;
+    private $_files = null;
     
-    private $filters = null;
+    private $_filters = null;
     
-    private $effects = null;
+    private $_effects = null;
     
-    private $images = null;
+    private $_images = null;
+    
+    private $_folders = null;
     
     public function getFiles()
     {
-        if (empty($this->files)) {
-            $this->files = new \admin\storage\Files();
+        if (empty($this->_files)) {
+            $this->_files = new \admin\storage\Files();
         }
         
-        return $this->files;
+        return $this->_files;
     }
     
     public function getFilters()
     {
-        if (empty($this->filters)) {
-            $this->filters = new \admin\storage\Filters();
+        if (empty($this->_filters)) {
+            $this->_filters = new \admin\storage\Filters();
         }
         
-        return $this->filters;
+        return $this->_filters;
     }
     
     public function getEffects()
     {
-        if (empty($this->effects)) {
-            $this->effects = new \admin\storage\Effects();
+        if (empty($this->_effects)) {
+            $this->_effects = new \admin\storage\Effects();
         }
         
-        return $this->effects;
+        return $this->_effects;
     }
     
     public function getImages()
     {
-        if (empty($this->images)) {
-            $this->images = new \admin\storage\Images();
+        if (empty($this->_images)) {
+            $this->_images = new \admin\storage\Images();
         }
         
-        return $this->images;
+        return $this->_images;
+    }
+    
+    public function getFolders()
+    {
+        if (empty($this->_folders)) {
+            $this->_folders = new \admin\storage\Folders();
+        }
+        
+        return $this->_folders;
+    }
+    
+    public function getHttpFolder()
+    {
+        return \yii::$app->getModule('admin')->storageFolder;
     }
     
 }

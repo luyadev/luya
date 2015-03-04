@@ -67,4 +67,6 @@ class Module extends \admin\base\Module
         ];
     }
     
+    public $storageFolder = '@web/storage';
+    
 }

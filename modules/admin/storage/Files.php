@@ -12,13 +12,8 @@ class Files
         return 1; // return the file id from the table
     }
     
-    public function createFolder($folderName, $parentFolderId = 0)
-    {
-        
-    }
-    
     public function moveFileToFolder($fileId, $folderId)
     {
-        
+    
     }
 }
