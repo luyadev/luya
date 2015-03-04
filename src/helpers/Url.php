@@ -35,6 +35,22 @@ class Url
         return $parts;
     }
     
+    /**
+     * add a trailing slash to an url if there is no trailing slash at the end of the url
+     * 
+     * @param string $url The url which a trailing slash should be appended
+     */
+    public static function trailing($url)
+    {
+        return $url .  (substr($url, -1) == '/' ? '' : '/');
+    }
+    
+    /**
+     * Wrapper functions for the createUrl function of the url manager.
+     * 
+     * @param string $route
+     * @param array $params
+     */
     public static function to($route, array $params = [])
     {
         $routeParams = [$route];
