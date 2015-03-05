@@ -26,6 +26,13 @@ class Boot
     private $_config = array();
 
     /**
+     * The path where all the configuration files are located.
+     * @todo us configs instead of config?
+     * @var string
+     */
+    public $configPath = '../config/';
+    
+    /**
      * Get the luya default configuration informations and store them to the config (belong to his mode)
      */
     public function __construct()
@@ -45,6 +52,15 @@ class Boot
         } else {
             $this->applicationWeb();
         }
+    }
+    
+    /**
+     * finds the defined config in the configPath an includes the configuration file.
+     * @param string $name The config file name, default server.php
+     */
+    public function findConfig($name = 'server.php')
+    {
+        return require_once($this->configPath . $name);
     }
 
     /**
