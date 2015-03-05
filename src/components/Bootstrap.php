@@ -85,11 +85,11 @@ class Bootstrap implements \yii\base\BootstrapInterface
         // start the module now
         foreach ($this->_modules as $item) {
             $module = yii::$app->getModule($item['id']);
-            
-            foreach ($module->getLuyaConfig() as $key => $value) {
-                \yii::$app->luya->$key = $value;
+            if (method_exists($module, 'getLuyaConfig')) {
+                foreach ($module->getLuyaConfig() as $key => $value) {
+                    \yii::$app->luya->$key = $value;
+                }
             }
-            
             $id = $item['id'];
             $path = $module->getBasePath();
             Yii::setAlias("@$id", $path);
