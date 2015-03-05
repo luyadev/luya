@@ -20,6 +20,10 @@ class UrlManager extends \yii\web\UrlManager
     {
         $route = parent::parseRequest($request);
         
+        if (!is_object(\yii::$app->collection->composition)) {
+            return $route;
+        }
+        
         $composition = \yii::$app->collection->composition->getFull() . "/";
         
         $length = strlen($composition);
@@ -46,6 +50,9 @@ class UrlManager extends \yii\web\UrlManager
     
     public function createUrl($params)
     {
+        if (!is_object(\yii::$app->collection->composition)) {
+            return parent::createUrl($params);
+        }
         $composition = \yii::$app->collection->composition->getFull();
         
         $originalParams = $params;
@@ -69,7 +76,7 @@ class UrlManager extends \yii\web\UrlManager
         if ($moduleName !== false) {
             $moduleObject = \yii::$app->getModule($moduleName);
             
-            if (!empty($moduleObject->getContext())) {
+            if (method_exists($moduleObject, 'getContext') && !empty($moduleObject->getContext())) {
                 $options = $moduleObject->getContextOptions();
                 $link = \yii::$app->collection->links->findOneByArguments(['nav_item_id' => $options['navItemId']]);
                 $response = str_replace($moduleName, $composition . '/' . $link['url'], $response);
