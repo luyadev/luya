@@ -29,9 +29,13 @@ class ErrorHandler extends \yii\web\ErrorHandler
             'error_json' => $data,
         ));
         
-        echo "<h1>Fehler</h1>";
-        echo "<p>Oops es ist ein Fehler passiert.</p>";
-        exit;
+        if (!YII_DEBUG) {
+            echo "<h1>Fehler</h1>";
+            echo "<p>Oops es ist ein Fehler passiert.</p>";
+            exit;
+        }
+        
+        return parent::renderException($exception);
     }   
     
     /**
