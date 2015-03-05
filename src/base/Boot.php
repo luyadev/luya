@@ -14,16 +14,11 @@ if (!version_compare(PHP_VERSION, '5.4.0', '>=')) {
  */
 class Boot
 {
-    const SAPI_WEB = 1;
+    const SAPI_WEB = 'web';
 
-    const SAPI_CLI = 2;
+    const SAPI_CLI = 'cli';
 
-    private $_modes = array(
-        "web" => self::SAPI_WEB,
-        "cli" => self::SAPI_CLI,
-    );
-
-    private $_config = array();
+    public $configValue = [];
 
     /**
      * The path where all the configuration files are located.
@@ -32,14 +27,13 @@ class Boot
      */
     public $configPath = '../config/';
     
-    /**
-     * Get the luya default configuration informations and store them to the config (belong to his mode)
-     */
-    public function __construct()
+    public $configName = 'server.php';
+    
+    public $yiiPath = null;
+
+    private function beforeRun()
     {
-        foreach ($this->_modes as $name => $value) {
-            $this->setConfig($value, include(__DIR__.'/../config/'.$name.'.php'));
-        }
+        $this->setConfigValue(require_once($this->getBaseConfig()));
     }
 
     /**
@@ -47,10 +41,16 @@ class Boot
      */
     public function run()
     {
-        if ($this->getSapiType() == self::SAPI_CLI) {
-            $this->applicationCli();
-        } else {
-            $this->applicationWeb();
+        switch($this->getSapiType()) {
+            case self::SAPI_CLI:
+                $this->applicationCli();
+                break;
+            case self::SAPI_WEB:
+                $this->applicationWeb();
+                break;
+            default:
+                throw new \Exception("This sapi type is not allowed");
+                break;
         }
     }
     
@@ -58,9 +58,29 @@ class Boot
      * finds the defined config in the configPath an includes the configuration file.
      * @param string $name The config file name, default server.php
      */
-    public function findConfig($name = 'server.php')
+    public function setConfigName($name)
     {
-        return require_once($this->configPath . $name);
+        $this->configName = $name;
+    }
+    
+    public function setConfigPath($path)
+    {
+        $this->configPath = $path;
+    }
+    
+    public function getBaseConfig()
+    {
+        return \luya\helpers\Url::trailing($this->configPath) . $this->configName;
+    }
+    
+    public function setYiiPath($yiiPath)
+    {
+        $this->yiiPath = $yiiPath;
+    }
+    
+    public function getYiiPath()
+    {
+        return $this->yiiPath;
     }
 
     /**
@@ -70,42 +90,32 @@ class Boot
      */
     public function getSapiType()
     {
-        if (strtoupper(php_sapi_name()) == "CLI") {
+        if (strtolower(php_sapi_name()) == self::SAPI_CLI) {
             return self::SAPI_CLI;
         }
 
         return self::SAPI_WEB;
     }
 
-    /**
-     *
-     * @todo see if the sapi type is allowed
-     * @param string $sapiType
-     * @param array  $value
-     */
-    public function setConfig($sapiType, $value)
+    public function setConfigValue(array $values = [])
     {
-        if (!isset($this->_config[$sapiType])) {
-            $this->_config[$sapiType] = array();
-        }
-        $this->_config[$sapiType] = ArrayHelper::merge($this->_config[$sapiType], $value);
+        $this->configValue = \yii\helpers\ArrayHelper::merge($this->configValue, $values);
     }
-
-    /**
-     *
-     * @param string $sapiType
-     */
-    private function getConfig($sapiType)
+    
+    public function getConfigValue()
     {
-        return $this->_config[$sapiType];
+        return $this->configValue;
     }
-
+    
     /**
      * @return yii console application
      */
     private function applicationCli()
     {
-        $application = new \yii\console\Application($this->getConfig(self::SAPI_CLI));
+        $this->beforeRun();
+        $this->setConfigValue(include(__DIR__.'/../config/'.self::SAPI_CLI.'.php'));
+        require_once($this->yiiPath);
+        $application = new \yii\console\Application($this->getConfigValue(self::SAPI_CLI));
         $exitCode = $application->run();
         exit($exitCode);
     }
@@ -115,7 +125,10 @@ class Boot
      */
     private function applicationWeb()
     {
-        $yii = new \yii\web\Application($this->getConfig(self::SAPI_WEB));
+        $this->beforeRun();
+        $this->setConfigValue(include(__DIR__.'/../config/'.self::SAPI_WEB.'.php'));
+        require_once($this->yiiPath);
+        $yii = new \yii\web\Application($this->getConfigValue(self::SAPI_WEB));
         $yii->run();
     }
 }
