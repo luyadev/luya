@@ -14,6 +14,7 @@ fields
 | password												| creates a text field with type password
 | [select](start-ngrest-field-select.md)				| creates a select dropdown with options
 | ace													| Creates an ace editor
+| togglestatus                                          | Creates a checkbox
 
 
 
