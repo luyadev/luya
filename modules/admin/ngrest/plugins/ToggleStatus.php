@@ -3,7 +3,7 @@ namespace admin\ngrest\plugins;
 
 use admin\ngrest\PluginAbstract;
 
-class Checkbox extends PluginAbstract
+class ToggleStatus extends PluginAbstract
 {
     public function renderList($doc)
     {
