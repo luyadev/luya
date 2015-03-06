@@ -21,7 +21,7 @@ fields
 field implicits
 ----------------
 
-| Name					| Descriptiont
+| Name					| Description
 |-----------------------| -------------------
 | required				| makes the previous field required (based on the set id)
 
