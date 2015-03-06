@@ -14,13 +14,14 @@ fields
 | password												| creates a text field with type password
 | [select](start-ngrest-field-select.md)				| creates a select dropdown with options
 | ace													| Creates an ace editor
+| togglestatus                                          | Creates a checkbox
 
 
 
 field implicits
 ----------------
 
-| Name					| Descriptiont
+| Name					| Description
 |-----------------------| -------------------
 | required				| makes the previous field required (based on the set id)
 
