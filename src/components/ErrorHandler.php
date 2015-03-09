@@ -25,9 +25,9 @@ class ErrorHandler extends \yii\web\ErrorHandler
         // @todo call this url via curl?
         // @todo send error 404 default page
         $curl = new \Curl\Curl();
-        $rsp = $curl->post(\luya\helpers\Url::trailing($this->getModule()->exceptionUrl) . 'create', array(
+        $rsp = $curl->post(\luya\helpers\Url::trailing($this->getModule()->exceptionUrl) . 'create', [
             'error_json' => $data,
-        ));
+        ]);
         
         if (!YII_DEBUG) {
             echo '
