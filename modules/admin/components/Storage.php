@@ -21,6 +21,7 @@ class Storage extends \yii\base\Component
     {
         if (empty($this->_file)) {
             $this->_file = new \admin\storage\File();
+            $this->_file->setStoragePath(\yii::getAlias(\yii::$app->getModule('admin')->storageFolder));
         }
         
         return $this->_file;

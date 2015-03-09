@@ -1,3 +1,4 @@
+
 zaa.directive('zaaInjector', function($compile) {
 	return {
 		restrict : 'E',
@@ -106,6 +107,19 @@ zaa.directive('zaaDatepicker', function() {
 		
 		template: function(){
 			/* TBD */
+		}
+	}
+});
+
+zaa.directive('zaaFileForm', function($compile) {
+	return {
+		restrict : 'E',
+		replace : true,
+		scope : {
+			"model" : "="
+		},
+		link : function($scope, $element, attr) {
+			$element.replaceWith($compile(angular.element('<storage-upload-form ng-model="model" />'))($scope));
 		}
 	}
 });

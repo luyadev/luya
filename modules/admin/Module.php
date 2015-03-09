@@ -11,6 +11,7 @@ class Module extends \admin\base\Module
         'api-admin-menu' => 'admin\apis\MenuController',
         'api-admin-group' => 'admin\apis\GroupController',
         'api-admin-lang' => 'admin\apis\LangController',
+        'api-admin-storage' => 'admin\apis\StorageController',
     ];
 
     public static $urlRules = [
@@ -37,6 +38,7 @@ class Module extends \admin\base\Module
 
     public function getMenu()
     {
+        $this->menu->createNode('storage', 'Storage', 'fa-hdd-o', 'admin-storage-index');
         // create menu node
         $node = $this->menu->createNode('admin', 'Administration', 'fa-gears');
         // create menu group
@@ -50,6 +52,8 @@ class Module extends \admin\base\Module
             $this->menu->createItem("lang", "Sprachen", "admin-lang-index", "fa-language")
         ]);
 
+        
+        
         return $this->menu->get();
     }
 
@@ -67,6 +71,6 @@ class Module extends \admin\base\Module
         ];
     }
     
-    public $storageFolder = '@web/storage';
+    public $storageFolder = '@webroot/storage';
     
 }

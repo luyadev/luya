@@ -28,6 +28,7 @@ class AssetAdmin extends \yii\web\AssetBundle
         'js/controllers/CrudController.js',
         'js/directives/crud.js',
         'js/directives/forms.js',
+        'js/directives/storage.js',
     ];
 
     public $depends = [
