@@ -2,7 +2,7 @@
     use \Yii;
     use \admin\Module as Admin;
     $user = Admin::getAdminUserData();
-    $gravatar = "http://www.gravatar.com/avatar/".md5(strtolower(trim($user->email)))."?d=".urlencode('https://placeimg.com/60/60/animals&rand='.rand(1, 50))."&s=40";
+    $gravatar = "http://www.gravatar.com/avatar/".md5(strtolower(trim($user->email)))."?d=".urlencode('http://www.zephir.ch/files/rocky_460px_bw.jpg')."&s=40";
 
     $this->beginPage()
 ?>
@@ -49,6 +49,7 @@
 
                         <a class="modulenav__link" role="link" data-label="{{item.alias}}" ng-click="click(item.id, $event)">
                             <span class="modulenav__icon fa fa-fw {{item.icon}}"></span>
+                            <span class="modulenav__icon" style="font-size:9px;">{{item.alias}}</span>
                         </a> <!-- ./modulenav__link -->
 
                     </li> <!-- ./modulenav__item -->
