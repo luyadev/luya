@@ -10,6 +10,7 @@ class Image
         // returns imageId;
     }
     
+    // @web/storage/the-originame_name_$filterId_$fileIdf.jpg
     public function getPath($imageId)
     {
         // get the real full image path to display this file.

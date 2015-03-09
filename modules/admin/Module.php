@@ -12,6 +12,8 @@ class Module extends \admin\base\Module
         'api-admin-group' => 'admin\apis\GroupController',
         'api-admin-lang' => 'admin\apis\LangController',
         'api-admin-storage' => 'admin\apis\StorageController',
+        'api-admin-effect' => 'admin\apis\EffectController',
+        'api-admin-filter' => 'admin\apis\FilterController',
     ];
 
     public static $urlRules = [
