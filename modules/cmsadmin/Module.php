@@ -20,9 +20,9 @@ class Module extends \admin\base\Module
 
     public function getMenu()
     {
-        $this->menu->createNode('cms', 'CMS', 'fa-th-list', 'cmsadmin-default-index');
+        $this->menu->createNode('cms', 'CMS Inhalte', 'fa-th-list', 'cmsadmin-default-index');
 
-        $node = $this->menu->createNode('cms-settings', 'CMS-Settings', 'fa-wrench');
+        $node = $this->menu->createNode('cms-settings', 'CMS Einstellungen', 'fa-wrench');
         $this->menu->createGroup($node, 'Verwalten', [
             $this->menu->createItem("cat", "Kategorien", "cmsadmin-cat-index", "fa-ils"),
             $this->menu->createItem("layout", "Layouts", "cmsadmin-layout-index", "fa-eyedropper"),
