@@ -17,11 +17,31 @@ class Storage extends \yii\base\Component
     
     private $_folder = null;
     
+    private $_dir = null;
+    
+    public function init()
+    {
+        $this->setDir(\yii::getAlias(\yii::$app->getModule('admin')->storageFolder));
+    }
+    
+    /**
+     * @todo remove from file class, should be inside the storage class!
+     * @param unknown_type $path
+     */
+    public function setDir($path)
+    {
+        $this->_dir = $path;
+    }
+    
+    public function getDir()
+    {
+        return \luya\helpers\url::trailing($this->_dir, DIRECTORY_SEPARATOR);
+    }
+    
     public function getFile()
     {
         if (empty($this->_file)) {
             $this->_file = new \admin\storage\File();
-            $this->_file->setStoragePath(\yii::getAlias(\yii::$app->getModule('admin')->storageFolder));
         }
         
         return $this->_file;

@@ -3,12 +3,11 @@ namespace admin\storage;
 
 class File
 {
-    public $storagePath = null;
     
-    public function setStoragePath($path)
-    {
-        $this->storagePath = $path;
-    }
+
+    public $error = null;
+    
+
     
     public function getFileInfo($sourceFile)
     {
@@ -44,15 +43,30 @@ class File
         return sprintf("%s", hash('crc32b', uniqid($fileName, true)));
     }
     
+    public function setError($message)
+    {
+        $this->error = $message;
+        return true;
+    }
+    
+    public function getError()
+    {
+        return $this->error;
+    }
+    
     public function create($sourceFile, $newFileName, $hidden = false)
     {
+        if (empty($sourceFile) || empty($newFileName)) {
+            return !$this->setError("empty source file or create file param. Invalid file uploaded!");
+        }
+        
         $fileInfo = $this->getFileInfo($newFileName);
         $baseName = preg_replace("/[^a-zA-Z0-9\-\_\.]/", "", $fileInfo->name);
         $fileHashName = $this->getNameHash($newFileName);
         $fileHash = $this->getFileHash($sourceFile);
         $mimeType = $this->getMimeType($sourceFile);
         $fileName = implode([$baseName . "_" . $fileHashName, $fileInfo->extension], ".");
-        $savePath = $this->storagePath . DIRECTORY_SEPARATOR . $fileName;
+        $savePath = \yii::$app->luya->storage->dir . DIRECTORY_SEPARATOR . $fileName;
         if (is_uploaded_file($sourceFile)) {
             if (move_uploaded_file($sourceFile, $savePath)) {
                 $model = new \admin\models\StorageFile();
@@ -78,6 +92,21 @@ class File
         }
         
         return false;
+    }
+    
+    public function getPath($fileId)
+    {
+        $file = \admin\models\StorageFile::find()->where(['id' => $fileId])->one();
+        if ($file) {
+            return \yii::$app->luya->storage->dir . $file->name_new_compound;
+        }
+        
+        return false;
+    }
+    
+    public function getInfo($fileId)
+    {
+        return \admin\models\StorageFile::find()->where(['id' => $fileId])->one();
     }
     
     public function moveFileToFolder($fileId, $folderId)

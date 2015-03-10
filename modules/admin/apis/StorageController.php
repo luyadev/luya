@@ -17,9 +17,22 @@ class StorageController extends \admin\base\RestController
     {
         $files = [];
         foreach ($_FILES as $k => $file) {
-            $files[$file['name']] = \yii::$app->luya->storage->file->create($file['tmp_name'], $file['name']);
+            
+            $create = \yii::$app->luya->storage->file->create($file['tmp_name'], $file['name']);
+            
+            $files[$file['name']] = ['id' => $create, 'error' => (bool) !$create, 'message' => \yii::$app->luya->storage->file->getError()];
         }
     
         return $files;
+    }
+    
+    public function actionImageUpload()
+    {
+        $fileId = \yii::$app->request->post('fileId', null);
+        $filterId = \yii::$app->request->post('filterId', null);
+        
+        $create = \yii::$app->luya->storage->image->create($fileId, $filterId);
+        
+        return ['id' => $create, 'error' => (bool) !$create, 'message' => '...'];
     }
 }

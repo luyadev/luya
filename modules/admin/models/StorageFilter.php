@@ -35,13 +35,30 @@ class StorageFilter extends \admin\ngrest\base\Model
             'restupdate' => ['name'],
         ];
     }
-
+    
+    public function applyFilter($imagine)
+    {
+        $chain = \admin\models\StorageFilterChain::find()->where(['filter_id' => $this->id ])->joinWith('effect')->all();
+        
+        foreach ($chain as $item) {
+            switch ($item->effect->imagine_name) {
+                case "resize":
+                    $imagine->resize(new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height));
+                    break;
+            }
+        }
+        
+        return $imagine;
+    }
+    
     // ngrest
 
     public $ngRestEndpoint = 'api-admin-filter';
 
     public function ngRestConfig($config)
     {
+        $config->strap->register(new \admin\straps\FilterEffectChain(), "Chain");
+        
         $config->list->field("name", "Name")->text()->required();
         $config->list->field("id", "ID")->text();
 

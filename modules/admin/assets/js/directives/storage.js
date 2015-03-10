@@ -26,14 +26,13 @@ zaa.directive('fileModel', ['$parse', function ($parse) {
     };
 }]);
 
-zaa.directive('storageUploadForm', function() {
+zaa.directive('storageFileUpload', function() {
 	return {
 		restrict : 'E',
 		scope : {
 			ngModel : '='
 		},
 		controller : function($scope, $http) {
-		
 			$scope.push = function()
 			{
 				var fd = new FormData();
@@ -43,21 +42,45 @@ zaa.directive('storageUploadForm', function() {
 		            headers: {'Content-Type': undefined}
 		        })
 		        .success(function(r){
-		        	console.log(r);
+		        	if (!r[$scope.myFile.name]['error']) {
+		        		$scope.ngModel = r[$scope.myFile.name]['id'];
+		        	}
+		        	
 		        })
 		        .error(function(r){
-		        	conosole.log(r);
+		        	console.log(r);
 		        });
 				
 			}
 		},
 		template : function()
 		{
-			return '<input file-model="myFile" type="file" /><button ng-click="push()" type="button">button</button>';
+			return '<div style="Border:1px solid red;"><table><tr><td>Datei Auswahl:</td><td><input file-model="myFile" type="file" /></td><td><button ng-click="push()" type="button">Datei Hochladen</button></td></tr></table></div>';
 		}
 	}
 });
 
-zaa.directive('storageFilemanager', function() {
-	
+zaa.directive('storageImageUpload', function() {
+	return {
+		restrict : 'E',
+		scope : {
+			ngModel : '='
+		},
+		controller : function($scope, $http) {
+			
+			$scope.push2 = function() {
+				$http.post('admin/api-admin-storage/image-upload', $.param({ fileId : $scope.test, filterId : $scope.filterId }), {
+		        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+		        }).success(function(success) {
+					$scope.ngModel = success.id;
+				}).error(function(error) {
+					console.log('err', error);
+				});
+			}
+			
+		},
+		template : function () {
+			return '<table><tr><td>Filter:</td><td><input type="text" name="filterId" ng-model="filterId" value="0" /></td></tr><tr><td>Datei:</td><td><storage-file-upload ng-model="test"></storage-file-upload></td></tr><tr><td></td><td><button ng-click="push2()" type="button">Bild &amp; Filter Anwenden</button></td></tr></table>';
+		}
+	}
 });

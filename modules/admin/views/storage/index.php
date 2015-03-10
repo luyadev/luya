@@ -1,11 +1,5 @@
-<h1>Filemanager Storage Engine</h1>
 
-
-<div>
-   <button type="button">Datei Hochladen</button>
-   <button type="button">Dateiamanger öffnen</button>
-</div>
-
+<h1>FILE UPLOAD</h1>
 <div ng-controller="UploadController">
 <form ng-submit="save()">
 
@@ -13,7 +7,25 @@
     
         <tr>
             <td>Bild</td>
-            <td><storage-upload-form ng-model="bildId"></storage-upload-form></td>
+            <td><storage-file-upload ng-model="bildId"></storage-file-upload></td>
+        </tr>
+    
+    </table>
+
+    <button type="submit">SENDEN</button>
+    
+</form>
+</div>
+
+<h1>IMAGE UPLOAD</h1>
+<div ng-controller="UploadController">
+<form ng-submit="save()">
+
+    <table>
+    
+        <tr>
+            <td>Bild</td>
+            <td><storage-image-upload ng-model="bildId"></storage-image-upload></td>
         </tr>
     
     </table>
