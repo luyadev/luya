@@ -111,7 +111,7 @@ zaa.directive('zaaDatepicker', function() {
 	}
 });
 
-zaa.directive('zaaFileForm', function($compile) {
+zaa.directive('zaaFileUpload', function($compile) {
 	return {
 		restrict : 'E',
 		replace : true,
@@ -119,7 +119,20 @@ zaa.directive('zaaFileForm', function($compile) {
 			"model" : "="
 		},
 		link : function($scope, $element, attr) {
-			$element.replaceWith($compile(angular.element('<storage-upload-form ng-model="model" />'))($scope));
+			$element.replaceWith($compile(angular.element('<storage-file-upload ng-model="model"></storage-file-upload>'))($scope));
+		}
+	}
+});
+
+zaa.directive('zaaImageUpload', function($compile) {
+	return {
+		restrict : 'E',
+		replace : true,
+		scope : {
+			"model" : "="
+		},
+		link : function($scope, $element, attr) {
+			$element.replaceWith($compile(angular.element('<storage-image-upload ng-model="model"></storage-image-upload>'))($scope));
 		}
 	}
 });

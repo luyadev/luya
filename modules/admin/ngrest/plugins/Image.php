@@ -8,12 +8,20 @@ namespace admin\ngrest\plugins;
  */
 class Image extends \admin\ngrest\PluginAbstract
 {
-    use \admin\ngrest\PluginTrait;
-
+    public function renderList($doc)
+    {
+        $elmn = $doc->createElement("span", "{{item.".$this->name."}}");
+        $doc->appendChild($elmn);
+    
+        return $doc;
+    }
+    
     public function renderCreate($doc)
     {
-        $elmn = $doc->createElement("storage-image-upload");
-        $elmn->setAttribute("ng-model", $this->ngModel);
+        $elmn = $doc->createElement("zaa-image-upload");
+        $elmn->setAttribute("id", $this->id);
+        $elmn->setIdAttribute("id", true);
+        $elmn->setAttribute("model", $this->ngModel);
         $doc->appendChild($elmn);
 
         return $doc;
