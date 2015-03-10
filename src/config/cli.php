@@ -1,7 +1,10 @@
 <?php
 
 $config = [
-    'controllerNamespace' => 'luya\commands',
+    //'controllerNamespace' => 'commands',
+    'controllerMap' => [
+        'presql' => '\luya\commands\PresqlController'
+    ]
 ];
 
 return $config;
