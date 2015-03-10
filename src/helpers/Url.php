@@ -39,10 +39,11 @@ class Url
      * add a trailing slash to an url if there is no trailing slash at the end of the url
      * 
      * @param string $url The url which a trailing slash should be appended
+     * @param string $slash If you want to trail a file on a windows system it gives you the ability to add forward slashes.
      */
-    public static function trailing($url)
+    public static function trailing($url, $slash = "/")
     {
-        return $url .  (substr($url, -1) == '/' ? '' : '/');
+        return $url .  (substr($url, -1) == $slash ? '' : $slash);
     }
     
     /**
