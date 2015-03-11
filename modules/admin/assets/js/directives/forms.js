@@ -3,14 +3,16 @@ zaa.directive('zaaInjector', function($compile) {
 	return {
 		restrict : 'E',
 		replace : true,
+		transclude : false,
 		scope : {
 			"dir" : '=',
 			"model" : '=',
 			"options" : '='
 		},
 		link : function($scope, $element, attr) {
-			$element.replaceWith($compile(angular.element('<' + $scope.dir + ' options="options" model="model"/>'))($scope));
-		}
+			var elmn = $compile(angular.element('<' + $scope.dir + ' options="options" model="model" />'))($scope);
+			$element.replaceWith(elmn);
+		},
 	}
 });
 
@@ -111,28 +113,26 @@ zaa.directive('zaaDatepicker', function() {
 	}
 });
 
-zaa.directive('zaaFileUpload', function($compile) {
+zaa.directive('zaaFileUpload', function($compile){
 	return {
 		restrict : 'E',
-		replace : true,
 		scope : {
 			"model" : "="
 		},
-		link : function($scope, $element, attr) {
-			$element.replaceWith($compile(angular.element('<storage-file-upload ng-model="model"></storage-file-upload>'))($scope));
+		template : function() {
+			return '<storage-file-upload ng-model="model"></storage-file-upload>';
 		}
 	}
 });
 
-zaa.directive('zaaImageUpload', function($compile) {
+zaa.directive('zaaImageUpload', function($compile){
 	return {
 		restrict : 'E',
-		replace : true,
 		scope : {
 			"model" : "="
 		},
-		link : function($scope, $element, attr) {
-			$element.replaceWith($compile(angular.element('<storage-image-upload ng-model="model"></storage-image-upload>'))($scope));
+		template : function() {
+			return '<storage-image-upload ng-model="model"></storage-image-upload>';
 		}
 	}
 });
