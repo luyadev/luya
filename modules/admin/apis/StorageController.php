@@ -20,7 +20,7 @@ class StorageController extends \admin\base\RestController
             
             $create = \yii::$app->luya->storage->file->create($file['tmp_name'], $file['name']);
             
-            $files[$file['name']] = ['id' => $create, 'error' => (bool) !$create, 'message' => \yii::$app->luya->storage->file->getError()];
+            $files[$file['name']] = ['id' => $create, 'error' => (bool) !$create, 'message' => \yii::$app->luya->storage->file->getError(), 'file' => ((bool) $create) ? $this->actionFilePath($create) : false ];
         }
     
         return $files;
@@ -33,6 +33,16 @@ class StorageController extends \admin\base\RestController
         
         $create = \yii::$app->luya->storage->image->create($fileId, $filterId);
         
-        return ['id' => $create, 'error' => (bool) !$create, 'message' => '...'];
+        return ['id' => $create, 'error' => (bool) !$create, 'message' => '...', 'image' => ((bool) $create) ? $this->actionImagePath($create) : false ];
+    }
+    
+    public function actionImagePath($imageId)
+    {
+        return \yii::$app->luya->storage->image->get($imageId);
+    }
+    
+    public function actionFilePath($fileId)
+    {
+        return \yii::$app->luya->storage->file->get($fileId);
     }
 }

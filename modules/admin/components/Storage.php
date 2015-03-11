@@ -1,6 +1,8 @@
 <?php
 namespace admin\components;
 
+use yii;
+
 /**
  * 
  * @author nadar
@@ -19,9 +21,12 @@ class Storage extends \yii\base\Component
     
     private $_dir = null;
     
+    private $_httpDir = null;
+    
     public function init()
     {
-        $this->setDir(\yii::getAlias(\yii::$app->getModule('admin')->storageFolder));
+        $this->setDir(yii::getAlias(yii::$app->getModule('admin')->storageFolder));
+        $this->setHttpDir(yii::getAlias(yii::$app->getModule('admin')->storageFolderHttp));
     }
     
     /**
@@ -36,6 +41,16 @@ class Storage extends \yii\base\Component
     public function getDir()
     {
         return \luya\helpers\url::trailing($this->_dir, DIRECTORY_SEPARATOR);
+    }
+    
+    public function setHttpDir($httpDir)
+    {
+        $this->_httpDir = $httpDir;
+    }
+    
+    public function getHttpDir()
+    {
+        return \luya\helpers\url::trailing($this->_httpDir, "/");
     }
     
     public function getFile()

@@ -23,3 +23,13 @@ zaa.factory('ApiAdminLang', function($resource) {
 		}
 	});
 });
+
+zaa.factory('ApiAdminFilter', function($resource) {
+	return $resource('admin/api-admin-filter/:id', { id: '@_id' }, {
+		save : {
+			method : 'POST',
+			isArray : false,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+		}
+	});
+});

@@ -6,7 +6,7 @@
     <table>
     
         <tr>
-            <td>Bild</td>
+            <td>Datei</td>
             <td><storage-file-upload ng-model="bildId"></storage-file-upload></td>
         </tr>
     

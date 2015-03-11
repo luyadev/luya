@@ -34,8 +34,19 @@ class Image
     }
     
     // @web/storage/the-originame_name_$filterId_$fileIdf.jpg
-    public function getPath($imageId)
+    public function get($imageId)
     {
         // get the real full image path to display this file.
+        $data = \admin\models\StorageImage::find()->where(['id' => $imageId])->with("file")->one();
+        
+        $fileName = implode([$data->filter_id, $data->file->name_new_compound], "_");
+        
+        return [
+            "filter_id" => $data->filter_id,
+            "image_id" => $data->id,
+            "file_source" => $data->file->name_new_compound,
+            "image_source" => $fileName,
+            "source" => \yii::$app->luya->storage->httpDir . $fileName,
+        ];
     }
 }

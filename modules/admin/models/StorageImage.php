@@ -14,4 +14,9 @@ class StorageImage extends \yii\db\ActiveRecord
             [['file_id', 'filter_id'], 'required'],
         ];
     }
+    
+    public function getFile()
+    {
+        return $this->hasOne(\admin\models\StorageFile::className(), ['id' => 'file_id']);
+    }
 }

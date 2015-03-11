@@ -29,6 +29,8 @@ class Module extends \admin\base\Module
     
     public $storageFolder = '@webroot/storage';
     
+    public $storageFolderHttp = 'storage';
+    
     public function init()
     {
         foreach (luya::getParams('apis') as $item) {

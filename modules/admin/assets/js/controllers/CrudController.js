@@ -108,10 +108,12 @@ zaa.controller("CrudController", function($scope, $http, $sce, AdminService) {
 			$scope.toggleCreate();
 		})
 		.error(function(data) {
+			alert('error while create data, see console.log');
+			console.log(data);
 			for (var i in data) {
 				field = data[i]['field'];
 				message = data[i]['message'];
-				alert('Fehler: Feld:' +field+' meldet "' + message + '"');
+				
 			}
 		})
 	}

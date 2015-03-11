@@ -17,18 +17,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>LUYA CMS</title>
-
     <?php $this->head() ?>
-
     <script>
         var authToken = '<?=$user->getAuthToken();?>';
     </script>
-
+    
 </head>
 
 <body class="{{AdminService.bodyClass}}">
     <?php $this->beginBody() ?>
 
+    <script type="text/ng-template" id="storageFileUpload">
+        <div style="Border:1px solid red;">
+            <table>
+                <tr><td>Datei Auswahl:</td><td><input file-model="myFile" type="file" /></td><td><button ng-click="push()" type="button">Datei Hochladen</button></td></tr>
+                <tr><td colspan="3"><a ng-show="filesrc" target="_blank" ng-href="{{filesrc}}">Datei: {{filesrc}}</a></td></tr>
+            </table>
+        </div>
+    </script>
+    
+    <script type="text/ng-template" id="storageImageUpload">
+        <table>
+            <tr><td>Filter:</td><td> <select name="filterId" ng-model="filterId" ng-options="item.id as item.name for item in filters" /></td></tr>
+            <tr><td>Datei:</td><td><storage-file-upload ng-model="test"></storage-file-upload></td></tr>
+            <tr><td></td><td><button ng-click="push2()" type="button">Bild &amp; Filter Anwenden</button></td></tr>
+            <tr><td colspan="2"><img ng-show="imagesrc" ng-src="{{imagesrc}}" /></td></tr>
+        </table>
+    </script>
+    
+    
     <div class="header" role="menubar">
 
         <div class="header__item header__item--left">

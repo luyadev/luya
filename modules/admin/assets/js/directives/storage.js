@@ -44,19 +44,20 @@ zaa.directive('storageFileUpload', function() {
 		        .success(function(r){
 		        	if (!r[$scope.myFile.name]['error']) {
 		        		$scope.ngModel = r[$scope.myFile.name]['id'];
+		        		$scope.filesrc = r[$scope.myFile.name]['file']['source_http'];
+		        	} else {
+		        		alert('ERROR WHILE FILE UPLOAD' + r[$scope.myFile.name]['message']);
 		        	}
 		        	
 		        })
 		        .error(function(r){
+		        	alert('ERROR WHILE FILE UPLOAD');
 		        	console.log(r);
 		        });
 				
 			}
 		},
-		template : function()
-		{
-			return '<div style="Border:1px solid red;"><table><tr><td>Datei Auswahl:</td><td><input file-model="myFile" type="file" /></td><td><button ng-click="push()" type="button">Datei Hochladen</button></td></tr></table></div>';
-		}
+		templateUrl : 'storageFileUpload'
 	}
 });
 
@@ -66,21 +67,28 @@ zaa.directive('storageImageUpload', function() {
 		scope : {
 			ngModel : '='
 		},
-		controller : function($scope, $http) {
+		controller : function($scope, $http, ApiAdminFilter) {
+			
+			$scope.filters = ApiAdminFilter.query();
 			
 			$scope.push2 = function() {
 				$http.post('admin/api-admin-storage/image-upload', $.param({ fileId : $scope.test, filterId : $scope.filterId }), {
 		        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 		        }).success(function(success) {
-					$scope.ngModel = success.id;
+		        	if (!success) {
+		        		alert('IMAGE UPLOAD ERROR!');
+		        	} else {
+		        		$scope.ngModel = success.id;
+		        		
+		        		$scope.imagesrc = success.image.source;
+		        		
+		        	}
 				}).error(function(error) {
 					console.log('err', error);
 				});
 			}
 			
 		},
-		template : function () {
-			return '<table><tr><td>Filter:</td><td><input type="text" name="filterId" ng-model="filterId" value="0" /></td></tr><tr><td>Datei:</td><td><storage-file-upload ng-model="test"></storage-file-upload></td></tr><tr><td></td><td><button ng-click="push2()" type="button">Bild &amp; Filter Anwenden</button></td></tr></table>';
-		}
+		templateUrl : 'storageImageUpload'
 	}
 });

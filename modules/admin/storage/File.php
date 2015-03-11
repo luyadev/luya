@@ -94,6 +94,17 @@ class File
         return false;
     }
     
+    public function get($fileId)
+    {
+        $file = \admin\models\StorageFile::find()->where(['id' => $fileId])->one();
+        
+        return [
+            "file_id" => $file->id,
+            "source_http" => \yii::$app->luya->storage->httpDir . $file->name_new_compound,
+            "source" => \yii::$app->luya->storage->dir . $file->name_new_compound,
+        ];
+    }
+    
     public function getPath($fileId)
     {
         $file = \admin\models\StorageFile::find()->where(['id' => $fileId])->one();
