@@ -33,6 +33,14 @@ zaa.directive('storageFileUpload', function() {
 			ngModel : '='
 		},
 		controller : function($scope, $http) {
+			if ($scope.ngModel) {
+				$http.get('admin/api-admin-storage/file-path', { params: { fileId : $scope.ngModel } }).success(function(response) {
+					$scope.filesrc = response.source_http;
+				}).error(function(response) {
+					console.log('error', response);
+				})
+			}
+			
 			$scope.push = function()
 			{
 				var fd = new FormData();
@@ -69,10 +77,19 @@ zaa.directive('storageImageUpload', function() {
 		},
 		controller : function($scope, $http, ApiAdminFilter) {
 			
+			if ($scope.ngModel) {
+				$http.get('admin/api-admin-storage/image-path', { params: { imageId : $scope.ngModel } }).success(function(response) {
+					$scope.imagesrc = response.source;
+					$scope.fileId = response.file_id;
+				}).error(function(response) {
+					console.log('error', response);
+				})
+			}
+			
 			$scope.filters = ApiAdminFilter.query();
 			
 			$scope.push2 = function() {
-				$http.post('admin/api-admin-storage/image-upload', $.param({ fileId : $scope.test, filterId : $scope.filterId }), {
+				$http.post('admin/api-admin-storage/image-upload', $.param({ fileId : $scope.fileId, filterId : $scope.filterId }), {
 		        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 		        }).success(function(success) {
 		        	if (!success) {

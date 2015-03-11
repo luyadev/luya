@@ -38,11 +38,14 @@ class Image
     {
         // get the real full image path to display this file.
         $data = \admin\models\StorageImage::find()->where(['id' => $imageId])->with("file")->one();
-        
+        if (!$data) {
+            return false;
+        }
         $fileName = implode([$data->filter_id, $data->file->name_new_compound], "_");
         
         return [
             "filter_id" => $data->filter_id,
+            "file_id" => $data->file_id,
             "image_id" => $data->id,
             "file_source" => $data->file->name_new_compound,
             "image_source" => $fileName,

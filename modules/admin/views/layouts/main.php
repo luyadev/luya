@@ -39,7 +39,7 @@
     <script type="text/ng-template" id="storageImageUpload">
         <table>
             <tr><td>Filter:</td><td> <select name="filterId" ng-model="filterId" ng-options="item.id as item.name for item in filters" /></td></tr>
-            <tr><td>Datei:</td><td><storage-file-upload ng-model="test"></storage-file-upload></td></tr>
+            <tr><td>Datei:</td><td><storage-file-upload ng-model="fileId"></storage-file-upload></td></tr>
             <tr><td></td><td><button ng-click="push2()" type="button">Bild &amp; Filter Anwenden</button></td></tr>
             <tr><td colspan="2"><img ng-show="imagesrc" ng-src="{{imagesrc}}" /></td></tr>
         </table>
