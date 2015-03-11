@@ -8,7 +8,7 @@ JSON CONFIG
 
 | Usabled object keys | Type   |  Description
 | ------------------- | ------ | -------------
-| vars				  | array  | creates a new variable with specific values 
+| vars				  | array  | create a new variable with specific values. each var item object must contain: var, label and type
 | placeholders		  | array  | creates new placeholders (with "var" and "label" keys)
 
 ```
@@ -25,11 +25,11 @@ JSON CONFIG
         	"type" : "zaa-input-select",
         	"options" : [
         		{ 
-        			"id" : 1, 
+        			"value" : 1, 
         			"label" : "Herr" 
     			},
         		{ 
-        			"id" : 2,
+        			"value" : 2,
         			"label" : "Frau"
     			}
         	]
@@ -43,6 +43,19 @@ JSON CONFIG
     ]
 }
 ```
+
+AVAILABLE VAR TYPES
+-------------------
+
+| Type Name				| Description
+| --------------------- | -----------
+| zaa-input-text		| create a simple string input text value field
+| zaa-input-password	| create a input password field which hides the input value behind * signs
+| zaa-textarea			| create a multirow input element known as textarea
+| zaa-input-select		| create a select dropdown with options based on the options parameter. The Options item must contain a value and label key
+| zaa-file-upload		| creata a file upload form and returns the fileId on success
+| zaa-image-upload		| creata a image upload form and return the imageId on success
+
 
 TWIG FRONTEND
 ------------

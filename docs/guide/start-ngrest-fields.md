@@ -15,6 +15,8 @@ fields
 | [select](start-ngrest-field-select.md)				| creates a select dropdown with options
 | ace													| Creates an ace editor
 | togglestatus                                          | Creates a checkbox
+| image													| Creates an image uploader and returns the imageId to the obeserved field
+| file													| Creates a file upload and returns the fileId to the observed field
 
 
 
