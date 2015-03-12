@@ -5,6 +5,7 @@ class Module extends \admin\base\Module
 {
     public static $apis = [
         'api-news-article' => 'newsadmin\apis\ArticleController',
+        'api-news-tag' => 'newsadmin\apis\TagController',
     ];
 
     public function getMenu()
@@ -14,6 +15,7 @@ class Module extends \admin\base\Module
         $this->menu->createGroup($node, 'Daten', [
             // insert group items
             $this->menu->createItem("article", "Artikel", "newsadmin-article-index", "fa-newspaper-o"),
+            $this->menu->createItem("tag", "Tags", "newsadmin-tag-index", "fa-tags"),
         ]);
 
         return $this->menu->get();
