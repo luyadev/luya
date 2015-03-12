@@ -56,8 +56,6 @@ class Article extends \admin\ngrest\base\Model
         $config->update->extraField("tags", "Tags")->checkboxReleation(['model' => \newsadmin\models\Tag::className(), 'labelField' => 'title']);
         
         $config->create->copyFrom('list', ['id']);
-    
-        //$config->extra->checkboxRef("Tags Auswahl", $this->getTagReleation());
         
         return $config;
     }
