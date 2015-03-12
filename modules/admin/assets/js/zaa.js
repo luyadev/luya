@@ -101,3 +101,20 @@ var strapRegisterForm = function(form, callback, cb) {
 		});
 	});
 }
+
+var strapAsyncGet = function(callback, params, cb) {
+	var strapHash = $('[ng-controller="'+ngrestConfigHash+'"]').scope().data.strap.id;
+	
+	$.ajax({
+		url: strapCallbackUrl + '?strapCallback=' + callback + '&ngrestConfigHash=' + ngrestConfigHash + '&strapHash=' + strapHash,
+		data : params,
+		type : 'GET',
+		dataType : 'json',
+		success: function(transport) {
+			  cb.call(this, transport);
+		  },
+		  error : function(transport) {
+			  alert('we have an async error');
+		  }
+	});
+};
