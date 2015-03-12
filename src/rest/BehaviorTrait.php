@@ -6,21 +6,20 @@ trait BehaviorTrait
     private function getUserAuthClass()
     {
         $class = $this->userAuthClass();
-        if (!is_object($class)) 
-        {
+        if (!is_object($class)) {
             if (is_string($class)) {
-               $class = new $class(); 
+                $class = new $class();
             }
         }
-        
+
         return $class;
     }
-    
+
     public function behaviors()
     {
         // get the parent behaviors to overwrite
         $behaviors = parent::behaviors();
-        
+
         if (!$this->getUserAuthClass()) {
             unset($behaviors['authenticator']);
             unset($behaviors['rateLimiter']);
@@ -34,14 +33,14 @@ trait BehaviorTrait
                     \ yii\filters\auth\HttpBearerAuth::className(),
                 ],
             ];
-            
+
             // change to admin rate limiter
             $behaviors['rateLimiter'] = [
                 'class' => \yii\filters\RateLimiter::className(),
                 'user' => $this->getUserAuthClass(),
             ];
         }
-        
+
         $behaviors['contentNegotiator'] = [
             'class' => \yii\filters\ContentNegotiator::className(),
             'formats' => [
@@ -49,7 +48,7 @@ trait BehaviorTrait
                 'application/xml' => \yii\web\Response::FORMAT_XML,
             ],
         ];
-            
+
         return $behaviors;
     }
 }

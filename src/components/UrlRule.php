@@ -9,12 +9,12 @@ class UrlRule extends \luya\base\UrlRule
     {
         // override previous UrlRule initializer
     }
-    
+
     public function createUrl($manager, $route, $params)
     {
         return false;
     }
-    
+
     public function parseRequest($manager, $request)
     {
         $parts = explode("/", $request->getPathInfo());
@@ -22,14 +22,14 @@ class UrlRule extends \luya\base\UrlRule
         preg_match_all('/<(\w+):?([^>]+)?>/', yii::$app->getModule('luya')->urlPrefixComposition, $matches, PREG_SET_ORDER);
 
         $compositionKeys = [];
-        
+
         foreach ($matches as $index => $match) {
             if (isset($parts[$index])) {
                 $urlValue = $parts[$index];
                 $rgx = $match[2];
                 $param = $match[1];
                 preg_match("/^$rgx$/", $urlValue, $res);
-                
+
                 if (count($res) == 1) {
                     $compositionKeys[$param] = $urlValue;
                     unset($parts[$index]);
@@ -40,7 +40,7 @@ class UrlRule extends \luya\base\UrlRule
         $request->setPathInfo(implode("/", $parts));
 
         $composition = new \luya\collection\PrefixComposition();
-        $composition->set($compositionKeys);;
+        $composition->set($compositionKeys);
 
         Yii::$app->collection->composition = $composition;
 

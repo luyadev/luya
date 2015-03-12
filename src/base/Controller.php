@@ -2,22 +2,19 @@
 namespace luya\base;
 
 /**
- *
  * @author nadar
  */
 class Controller extends \yii\web\Controller
 {
     /**
-     * Use the default behaviour of Yii. This will result in loading the templates inside the Modules
+     * Use the default behaviour of Yii. This will result in loading the templates inside the Modules.
      *
      * @var boolean
      */
     public $useModuleViewPath = false;
 
     /**
-     * Yii initializer
-     *
-     * @return void
+     * Yii initializer.
      */
     public function init()
     {
@@ -43,7 +40,7 @@ class Controller extends \yii\web\Controller
         if ($this->module->controllerUseModuleViewPath !== null) {
             $this->useModuleViewPath = $this->module->controllerUseModuleViewPath;
         }
-        
+
         // use default yii behaviour
         if ($this->useModuleViewPath) {
             return parent::getViewPath();
@@ -53,7 +50,7 @@ class Controller extends \yii\web\Controller
     }
 
     /**
-     * if we are acting in the module context and the layout is empty we only should renderPartial the content
+     * if we are acting in the module context and the layout is empty we only should renderPartial the content.
      *
      * @param unknown_type $view
      * @param unknown_type $params

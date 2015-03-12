@@ -4,16 +4,17 @@ namespace luya;
 use yii;
 
 /**
- * Luya
+ * Luya.
  *
  * Provides basic functionality to wrap yii functions and make life more easy.
  */
 final class Luya
 {
     /**
-     * Get yii parameter
+     * Get yii parameter.
      *
-     * @param  string $param
+     * @param string $param
+     *
      * @return array
      */
     public static function getParams($param)
@@ -22,7 +23,7 @@ final class Luya
     }
 
     /**
-     * Set new yii parameter
+     * Set new yii parameter.
      *
      * @param string $param
      * @param array  $value

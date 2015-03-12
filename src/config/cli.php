@@ -3,8 +3,8 @@
 $config = [
     //'controllerNamespace' => 'commands',
     'controllerMap' => [
-        'presql' => '\luya\commands\PresqlController'
-    ]
+        'presql' => '\luya\commands\PresqlController',
+    ],
 ];
 
 return $config;

@@ -4,31 +4,31 @@ namespace luya\components;
 class ErrorHandler extends \yii\web\ErrorHandler
 {
     private $_module = null;
-    
+
     public function getModule()
     {
         if ($this->_module === null) {
             $this->_module = \yii::$app->getModule('luya');
         }
-        
+
         return $this->_module;
     }
-    
+
     public function renderException($exception)
     {
         if (!$this->getModule()->sendException) {
             return parent::renderException($exception);
         }
-        
+
         $data = json_encode($this->getExceptionArray($exception));
-        
+
         // @todo call this url via curl?
         // @todo send error 404 default page
         $curl = new \Curl\Curl();
-        $rsp = $curl->post(\luya\helpers\Url::trailing($this->getModule()->exceptionUrl) . 'create', [
+        $rsp = $curl->post(\luya\helpers\Url::trailing($this->getModule()->exceptionUrl).'create', [
             'error_json' => $data,
         ]);
-        
+
         if (!YII_DEBUG) {
             echo '
 <!DOCTYPE html><html style="height:100%"><head><title> 404 Not Found</title></head>
@@ -41,13 +41,15 @@ class ErrorHandler extends \yii\web\ErrorHandler
 </div></div></body></html>';
             exit;
         }
-        
+
         return parent::renderException($exception);
-    }   
-    
+    }
+
     /**
      * @todo: catch getPrevious() exception
+     *
      * @param object $exception Exception
+     *
      * @return multitype:multitype:Ambigous <NULL, unknown>
      */
     public function getExceptionArray($exception)
@@ -61,7 +63,7 @@ class ErrorHandler extends \yii\web\ErrorHandler
                 "class" => isset($item['class']) ? $item['class'] : null,
             ];
         }
-        
+
         return [
             'message' => $exception->getMessage(),
             'line' => $exception->getLine(),
@@ -69,7 +71,7 @@ class ErrorHandler extends \yii\web\ErrorHandler
             'trace' => $_trace,
             'server' => $_SERVER,
             'get' => $_GET,
-            'post' => $_POST
+            'post' => $_POST,
         ];
     }
 }

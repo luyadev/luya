@@ -2,7 +2,7 @@
 namespace luya\rest;
 
 /*
- * Basic 
+ * Basic
  *
  * ´´´
  * class TestController extends \admin\base\RestController
@@ -19,10 +19,10 @@ namespace luya\rest;
 class Controller extends \yii\web\Controller
 {
     use \luya\rest\BehaviorTrait;
-    
+
     public $serializer = 'yii\rest\Serializer';
 
-    public $enableCsrfValidation = false;  
+    public $enableCsrfValidation = false;
 
     public function afterAction($action, $result)
     {

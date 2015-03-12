@@ -12,16 +12,16 @@ interface LinksInterface
     public function getAll();
 
     public function findByArguments(array $argsArray);
-    
+
     public function findOneByArguments(array $argsArray);
-    
+
     public function teardown($link);
-    
+
     public function getParents($link);
-    
+
     public function getParent($link);
-    
+
     public function getChilds($link);
-    
+
     public function getChild($link);
 }

@@ -3,7 +3,7 @@
 $config = [
     'components' => [
         'errorHandler' => [
-            'class' => '\luya\components\ErrorHandler'
+            'class' => '\luya\components\ErrorHandler',
         ],
         'urlManager' => 'luya\components\UrlManager',
         'view' => ['class' => 'luya\components\View'],
@@ -15,7 +15,7 @@ $config = [
             'enableCsrfValidation' => false,
         ],
         'collection' => 'luya\components\Collection',
-        'luya' => 'luya\components\Luya'
+        'luya' => 'luya\components\Luya',
     ],
     'bootstrap' => [
         'luya\components\Bootstrap',

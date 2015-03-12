@@ -4,9 +4,8 @@ namespace luya\rest;
 /**
  * This class is used to wrap the yii rest indexAction cause of a possibility
  * to overwrite the pagination parameter.
- * 
- * @author nadar
  *
+ * @author nadar
  */
 class IndexAction extends \yii\rest\IndexAction
 {
@@ -21,7 +20,7 @@ class IndexAction extends \yii\rest\IndexAction
             'pagination' => false,
             'query' => $modelClass::ngRestFind(),
         ]);
-        
+
         return $data;
     }
 }

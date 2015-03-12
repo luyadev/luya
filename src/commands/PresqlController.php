@@ -9,6 +9,7 @@ namespace luya\commands;
  * @use php yii presql/up
  *
  * @todo create command for module specified, like: php yii postsql/create news foomigration
+ *
  * @author nadar
  */
 class PresqlController extends \yii\console\controllers\MigrateController
@@ -84,6 +85,7 @@ class PresqlController extends \yii\console\controllers\MigrateController
 
     /**
      * Returns the migrations that are not applied.
+     *
      * @return array list of new migrations
      */
     protected function getNewMigrations()
