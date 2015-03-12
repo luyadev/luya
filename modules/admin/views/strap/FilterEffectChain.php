@@ -17,12 +17,22 @@
 
 <hr />
 <h1>Aktueller Effekt Chain</h1>
+<div id="chain"></div>
 
 <script>
 $('.addEffect').each(function(value) {
-    console.log($(this));
     strapRegisterForm($(this), 'addEffect', function(json) {
-        console.log(json);
+        loadChain();
     });
 });
+
+var loadChain = function() {
+	strapAsyncGet('loadEffects', {}, function(json) {
+	    $(json.transport).each(function(key, item) {
+		    $('#chain').html(item['html']);
+	    });
+	});
+};
+
+loadChain();
 </script>

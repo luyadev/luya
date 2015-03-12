@@ -26,4 +26,13 @@ class FilterEffectChain extends \admin\ngrest\StrapAbstract implements \admin\ng
         
         return $this->response(false, $model->getErrors());
     }
+    
+    public function callbackLoadEffects()
+    {
+        $data = \admin\models\StorageFilterChain::find()->where(['filter_id' => $this->getItemId()])->all();
+        $view = $this->view->render('@admin/views/strap/FilterEffectChainList', [
+            "data" => $data        
+        ]);
+        return $this->response(true, ['html' => $view]);
+    }
 }
