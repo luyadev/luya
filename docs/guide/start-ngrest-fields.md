@@ -17,6 +17,7 @@ fields
 | togglestatus                                          | Creates a checkbox
 | image													| Creates an image uploader and returns the imageId to the obeserved field
 | file													| Creates a file upload and returns the fileId to the observed field
+| [checkboxReleation](start-ngrest-field-checkboxreleation.md) | Createa checkbox part based on a refTable/viaTable.
 
 
 
