@@ -5,8 +5,7 @@ use yii\helpers\ArrayHelper;
 
 /**
  *
- * ['list',
- *     [
+ * ['list' => [
  *         'firstname' => [
  *             'name' => 'firstname',
  *             'alias' => 'Vorname',
@@ -15,8 +14,8 @@ use yii\helpers\ArrayHelper;
  *                 'args' => ['arg1' => 'arg1_value', 'arg2' => 'arg2_value']
  *             ]
  *         ]
- *     }
- * ];
+ *     ]
+ * ]
  *
  * @author nadar
  *
@@ -32,6 +31,8 @@ class Config implements ConfigInterface
     private $options = [];
 
     public $i18n = [];
+    
+    public $extraFields = [];
 
     private $restUrlPrefix = 'admin/'; /* could be: http://www.yourdomain.com/admin/; */
 
@@ -58,9 +59,11 @@ class Config implements ConfigInterface
     public function __get($key)
     {
         // @TODO see if pointer exists in $this->$pointersMap
+        if (!in_array($key, $this->pointersMap)) {
+            throw new \Exception("the requested pointer $key does not exists in the pointer map config");
+        }
         $this->$key = [];
         $this->pointer['key'] = $key;
-
         return $this;
     }
 
@@ -85,10 +88,24 @@ class Config implements ConfigInterface
     public function field($name, $alias)
     {
         $this->config[$this->pointer['key']][$name] = [
-            'name' => $name, 'alias' => $alias, 'plugins' => [], 'i18n' => false,
+            'name' => $name, 'alias' => $alias, 'plugins' => [], 'i18n' => false, "extraField" => false
         ];
         $this->pointer['field'] = $name;
 
+        return $this;
+    }
+    
+    public function extraField($name, $alias)
+    {
+        if (!$this->extraFieldExists($name)) {
+            throw new \Exception("you have to set te extra field first to assign extraFields in the ngrest config!");
+        }
+        
+        $this->config[$this->pointer['key']][$name] = [
+            'name' => $name, 'alias' => $alias, 'plugins' => [], 'i18n' => false, "extraField" => true
+        ];
+        $this->pointer['field'] = $name;
+        
         return $this;
     }
 
@@ -120,6 +137,9 @@ class Config implements ConfigInterface
 
     public function register($strapObject, $alias)
     {
+        if ($this->pointer['key'] !== "strap") {
+            throw new \Exception("register method can only be used in strap pointer context.");
+        }
         $strapClass = get_class($strapObject);
         $strapHash = sha1($this->getNgRestConfigHash().$strapClass);
         $this->config[$this->pointer['key']][$strapHash] = [
@@ -179,6 +199,20 @@ class Config implements ConfigInterface
         return ucfirst(sha1($this->config['restUrl'].$this->config['restPrimaryKey']));
     }
 
+    public function extraFieldExists($name)
+    {
+        if (in_array($name, $this->extraFields)) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public function setExtraFields(array $extraFields)
+    {
+        $this->extraFields = $extraFields;
+    }
+    
     public function onFinish()
     {
         foreach ($this->i18n as $fieldName) {

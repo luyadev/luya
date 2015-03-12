@@ -91,6 +91,53 @@ zaa.directive('zaaInputSelect', function(){
 	}
 });
 
+zaa.directive('zaaInputCheckbox', function(){
+	return {
+		restrict : 'E',
+		transclude : false,
+		scope : {
+			"model" : '=',
+			"name" : '=',
+			"options" : '=' 
+			/* 
+			 * options.checked = [value1, value2],
+			 * options.items[] = { 'value' : 1, 'label' => 'Label for Value 1' }
+			 */
+		},
+		
+		controller : function($scope) {
+			
+			$scope.toggleSelection = function (value) {
+				for (var i in $scope.model) {
+					if ($scope.model[i]['id'] == value.id) {
+						$scope.model.splice(i, 1);
+						return;
+					}
+				}
+				
+				$scope.model.push(value);
+			}
+			
+			$scope.ctrlclick = function() {
+				console.log($scope.model);
+			}
+			
+			$scope.isChecked = function(item) {
+				for (var i in $scope.model) {
+					if ($scope.model[i]['id'] == item.id) {
+						return true;
+					}
+				}
+				return false;
+			}
+		},
+		
+		template : function() {
+			return '<div style="border:1px solid #F0F0F0; padding:10px;"><label ng-repeat="item in options.items"><input type="checkbox" ng-checked="isChecked(item)"" ng-click="toggleSelection(item)"> {{item.label}}</label><hr /><button type="button" ng-click="ctrlclick()">DEBUG</button></div>';
+		}
+	}
+});
+
 zaa.directive('zaaDatepicker', function() {
 	return {
 		restrict : 'E',

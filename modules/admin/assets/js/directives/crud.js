@@ -24,7 +24,7 @@ zaa.directive('crudStrap', function(){
 		template : '<div ng-show="toggler.strap"><h2>STRAP_ITEM</h2><div style="border:1px solid red;" ng-bind-html="data.strap.content"></div></div>'
 	}
 })
-
+/*
 zaa.directive('crudPluginSelect', function() {
 	return {
 		restrict : 'EA',
@@ -41,3 +41,4 @@ zaa.directive('crudPluginSelect', function() {
 		}
 	}
 });
+*/

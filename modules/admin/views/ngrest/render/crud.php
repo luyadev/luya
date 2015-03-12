@@ -5,6 +5,8 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
     /* extend class */
     $.extend(this, $controller('CrudController', { $scope : $scope }));
     /* local controller config */
+    $scope.config.apiListQueryString = '<?= $crud->apiQueryString('list'); ?>';
+    $scope.config.apiUpdateQueryString = '<?= $crud->apiQueryString('update'); ?>';
     $scope.config.apiEndpoint = '<?=$config->getRestUrl();?>';
     $scope.config.list = <?=json_encode($crud->getFields('list'));?>;
     $scope.config.create = <?=json_encode($crud->getFields('create'));?>;
@@ -28,15 +30,15 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
                 </button>
             </div> <!-- ./toolbar__item -->
 
+            <!-- 
             <div class="toolbar__item">
-
                 <a class="toolbar__link" role="link">
                     <button class="button button--green" role="button">
                         <span class="button__text">Als CSV exportieren</span>
                     </button>
                 </a>
-
-            </div> <!-- ./toolbar__item -->
+            </div>
+             --> <!-- ./toolbar__item -->
         </div> <!-- ./toolbar__items -->
 
     </div>
@@ -199,7 +201,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
     <div class="overlay overlay--green" ng-class="{'is-active': toggler.strap}">
         <div class="overlay__wrapper">
             <div class="overlay__content" ng-show="toggler.strap">
-                <div ng-bind-html="data.strap.content"></div>
+                <div class="overlay__body" ng-bind-html="data.strap.content"></div>
             </div>
         </div>
     </div>

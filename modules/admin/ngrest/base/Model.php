@@ -12,6 +12,8 @@ abstract class Model extends \yii\db\ActiveRecord
 
     public $i18nExpandFields = false;
     
+    public $extraFields = [];
+    
     abstract public function ngRestConfig($config);
 
     public function init()
@@ -26,7 +28,29 @@ abstract class Model extends \yii\db\ActiveRecord
             $this->i18nExpandFields = \yii::$app->request->get('ngrestExpandI18n', false);
         }
     }
-
+    
+    /**
+     *
+     * @param unknown_type $value
+     * @param unknown_type $viaTableName news_article_tag
+     * @param unknown_type $localTableId article_id
+     * @param unknown_type $foreignTableId tag_id
+     */
+    protected function proccess($value, $viaTableName, $localTableId, $foreignTableId)
+    {
+        $delete = \yii::$app->db->createCommand()->delete($viaTableName, [$localTableId => $this->id ])->execute();
+        $batch = [];
+        foreach ($value as $k => $v) {
+            $batch[] = [$this->id, $v['id']];
+        }
+        $insert = \yii::$app->db->createCommand()->batchInsert($viaTableName, [$localTableId, $foreignTableId], $batch)->execute();
+    }
+    
+    public function extraFields()
+    {
+        return $this->extraFields;
+    }
+    
     /**
      * @TODO ATTENTION THIS IS NOT SECURE TO HIDE SENSITIVE DATA, TO HIDE SENSTIVIE DATA YOU ALWAYS HAVE TO OVERWRITE find()
      */
@@ -100,6 +124,7 @@ abstract class Model extends \yii\db\ActiveRecord
     {
         $config = new \admin\ngrest\Config($this->getNgRestApiEndpoint(), $this->getNgRestPrimaryKey());
 
+        $config->setExtraFields($this->extraFields());
         $config->i18n($this->getI18n());
 
         return $this->ngRestConfig($config);
