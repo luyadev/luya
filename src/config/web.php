@@ -2,6 +2,7 @@
 
 $config = [
     'components' => [
+        'mail' => '\luya\components\Mailer',
         'errorHandler' => [
             'class' => '\luya\components\ErrorHandler',
         ],

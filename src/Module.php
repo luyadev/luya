@@ -20,10 +20,10 @@ class Module extends \luya\base\Module
      */
     public $urlPrefixComposition = '<langShortCode:[a-z]{2}>'; // rename to compositionPattern (@TODO !)
 
-    public $sendException = false;
+    public $sendException = true;
 
     public $exceptionUrl = 'http://luya.io/errorapi/';
-
+    
     public static $urlRules = [
         ['class' => 'luya\components\UrlRule'],
     ];

@@ -17,7 +17,8 @@
 		"yiisoft/yii2": "2.0.*@stable",
 		"twig/twig" : "1.*@stable",
 		"ext-curl" : "*",
-        "curl/curl" : "1.2.0"
+        "curl/curl" : "1.2.0",
+        "phpmailer/phpmailer": "5.2.*@stable"
 	},
 	"require-dev" : {
 		"yiisoft/yii2-debug" : "*@stable",
