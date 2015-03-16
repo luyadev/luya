@@ -30,7 +30,7 @@ class Article extends \admin\ngrest\base\Model
       
     public function setTags($value)
     {
-        $this->proccess($value, "news_article_tag", "article_id", "tag_id");
+        $this->setReleation($value, "news_article_tag", "article_id", "tag_id");
     }
     
     public function getTags()
@@ -54,7 +54,7 @@ class Article extends \admin\ngrest\base\Model
     
         $config->update->copyFrom('list', ['id']);
         $config->update->extraField("tags", "Tags")->checkboxReleation(['model' => \newsadmin\models\Tag::className(), 'labelField' => 'title']);
-        
+
         $config->create->copyFrom('list', ['id']);
         
         return $config;
