@@ -5,17 +5,33 @@ class Mailer extends \yii\base\Component
 {
     public $phpmailer = null;
     
-    public $isSMTP = true;
+    public $isSMTP = null;
     
-    public $host = 'mail.yourserver.com';
+    public $host = null; //'mail.yourserver.com';
     
-    public $username = 'php@yourserver.com';
+    public $username = null; //'php@yourserver.com';
     
-    public $password = 'PASSWORD';
+    public $password = null; //'PASSWORD';
     
     public function init()
     {
         $this->phpmailer = new \PHPMailer();
+        
+        if ($this->host === null) {
+            $this->host = \yii::$app->getModule('luya')->mailerHost;
+        }
+        
+        if ($this->username === null) {
+            $this->host = \yii::$app->getModule('luya')->mailerUsername;
+        }
+        
+        if ($this->password === null) {
+            $this->password = \yii::$app->getModule('luya')->mailerPassword;
+        }
+        
+        if ($this->isSMTP === null) {
+            $this->isSMTP = \yii::$app->getModule('luya')->mailerIsSMTP;
+        }
         
         if ($this->isSMTP) {
             $this->phpmailer->SMTPDebug = 2;
