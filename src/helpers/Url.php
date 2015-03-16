@@ -61,4 +61,22 @@ class Url
 
         return yii::$app->urlManager->createUrl($routeParams);
     }
+    
+    /**
+     * Create a link to use when point to an ajax script. 
+     * 
+     * @param string $route The base routing path defined in yii. module/controller/action
+     * @param array $params Optional array containing get parameters with key value pairing
+     * @return string
+     */
+    public static function toAjax($route, array $params = [])
+    {
+        if (!empty($params)) {
+            $params = '?' . http_build_query($params);
+        } else {
+            $params = null;
+        }
+        
+        return self::trailing(yii::$app->urlManager->baseUrl) . $route . $params;
+    }
 }
