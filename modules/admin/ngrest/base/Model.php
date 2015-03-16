@@ -38,14 +38,35 @@ abstract class Model extends \yii\db\ActiveRecord
      */
     protected function proccess($value, $viaTableName, $localTableId, $foreignTableId)
     {
+        throw new \Exception("use setReleation() method instead of proccess() method!");
+    }
+    
+    /**
+     *
+     * @param string $value The valued which is provided from the setter method
+     * @param string $viaTableName Example viaTable name: news_article_tag
+     * @param string $localTableId The name of the field inside the viaTable which represents the match against the local table, example: article_id
+     * @param string $foreignTableId The name of the field inside the viaTable which represents the match against the foreign table, example: tag_id
+     * @return boolean
+     */
+    public function setReleation($value, $viaTableName, $localTableId, $foreignTableId)
+    {
         $delete = \yii::$app->db->createCommand()->delete($viaTableName, [$localTableId => $this->id ])->execute();
         $batch = [];
         foreach ($value as $k => $v) {
             $batch[] = [$this->id, $v['id']];
         }
         $insert = \yii::$app->db->createCommand()->batchInsert($viaTableName, [$localTableId, $foreignTableId], $batch)->execute();
+        
+        // @todo check if an error happends wile the delete and/or update proccess.
+        return true;
     }
     
+    /**
+     * can be overwritte in the model class or could be directly defined as property $extraFields.
+     * 
+     * @return array Array containing extrafields, where value is the extraField name.
+     */
     public function extraFields()
     {
         return $this->extraFields;

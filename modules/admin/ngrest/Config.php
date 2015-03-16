@@ -98,7 +98,7 @@ class Config implements ConfigInterface
     public function extraField($name, $alias)
     {
         if (!$this->extraFieldExists($name)) {
-            throw new \Exception("you have to set te extra field first to assign extraFields in the ngrest config!");
+            throw new \Exception("If you set extraFields, you have to define them first as a property inside your AR model.");
         }
         
         $this->config[$this->pointer['key']][$name] = [
@@ -153,17 +153,6 @@ class Config implements ConfigInterface
 
         return $this;
     }
-
-    /*
-    public function on($field, $strapMapName)
-    {
-        $config = $this->config[$this->pointer['key']][$this->pointer['register']];
-        $on = ArrayHelper::merge([$field => $strapMapName], $config['on']);
-        $config = $this->config[$this->pointer['key']][$this->pointer['register']]['on'] = $on;
-
-        return $this;
-    }
-    */
 
     public function get()
     {
