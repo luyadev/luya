@@ -17,7 +17,7 @@ mailer object notation:
 
 ```php
 $mailer = \yii::$app->mail;
-$mailer->composer('Subject', '<h1>Html content</h1><p>nice!</p>');
+$mailer->compose('Subject', '<h1>Html content</h1><p>nice!</p>');
 $mailer->address("mail1@luya.io");
 $mailer->address("mail2@luya.io". "John Doe");
 if ($mailer->send()) {
