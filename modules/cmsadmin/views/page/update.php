@@ -1,3 +1,8 @@
+<style>
+    .test {
+        background-color:red; color:black; padding:20px
+    }
+</style>
 <script type="text/ng-template" id="recursion-old.html">
     <div style="margin-left:20px; background-color:#F0F0F0; border: 1px solid #999; margin-bottom:10px;">
 
@@ -36,7 +41,6 @@
 
     </div>
 </script>
-
 <script type="text/ng-template" id="recursion.html">
     <div class=" cms__placeholder placeholder ">
 
@@ -48,9 +52,9 @@
             <div class="block"><div class="block__view"><div class="block__item block__item--preview">Noch keine Blöcke vorhanden.</div></div></div>
         </div>
 
-        <div ng-repeat="block in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController" data-drag="true" jqyoui-draggable="" data-jqyoui-options="{revert: true, helper : 'clone'}" ng-model="block">
+        <div ng-repeat="block in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController" data-drag="true" jqyoui-draggable="" data-jqyoui-options="{revert: true, handle : '.drag-icon', helper : 'clone'}" ng-model="block">
 
-            <div class=" cms__drag-here " ng-controller="DropBlockController" ng-model="droppedBlock" data-drop="true" jqyoui-droppable="{onDrop: 'onDrop', multiple : true}">
+            <div class=" cms__drag-here " ng-controller="DropBlockController" ng-model="droppedBlock" data-drop="true" data-jqyoui-options="{greedy : true, hoverClass : 'test' }" jqyoui-droppable="{onDrop: 'onDrop', multiple : true}">
                 <div class="cms__dropzone">
                     <span class="fa fa-long-arrow-left"></span>
                 </div>
@@ -59,7 +63,7 @@
             <div class=" block " ng-class="{'block--is-active': edit}">
                 <div class=" block__view ">
                     <div class=" block__item block__item--icons ">
-                        <span class=" block__icon fa fa-fw fa-arrows "></span>
+                        <span class=" block__icon fa fa-fw fa-arrows drag-icon"></span>
                         <span class=" block__icon fa fa-fw fa-paragraph "></span>
                     </div><!-- ./block__item--icons
 
@@ -87,7 +91,7 @@
             </div> <!-- ./block -->
         </div>
 
-        <div class=" cms__drag-here " ng-controller="DropBlockController" ng-model="droppedBlock" data-drop="true" jqyoui-droppable="{onDrop: 'onDrop', multiple : true}">
+        <div class=" cms__drag-here " ng-controller="DropBlockController" ng-model="droppedBlock" data-drop="true" data-jqyoui-options="{greedy : true, hoverClass : 'test' }" jqyoui-droppable="{onDrop: 'onDrop', multiple : true}">
             <div class="cms__dropzone">
                 <span class="fa fa-long-arrow-left"></span>
             </div>
