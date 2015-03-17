@@ -38,6 +38,7 @@ class NavItem extends \yii\db\ActiveRecord
     public function scenarios()
     {
         return [
+            'default' => ['title', 'rewrite', 'nav_item_type', 'nav_id', 'lang_id'],
             'meta' => ['title', 'rewrite'],
         ];
     }
