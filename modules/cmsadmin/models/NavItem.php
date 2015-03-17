@@ -30,10 +30,18 @@ class NavItem extends \yii\db\ActiveRecord
     {
         return [
             [['lang_id', 'title', 'rewrite', 'nav_item_type'], 'required'],
+            [['rewrite'], 'validateRewrite', 'on' => ['meta']],
             [['nav_id'], 'safe'],
         ];
     }
 
+    public function scenarios()
+    {
+        return [
+            'meta' => ['title', 'rewrite'],
+        ];
+    }
+    
     public function getType()
     {
         switch ($this->nav_item_type) {

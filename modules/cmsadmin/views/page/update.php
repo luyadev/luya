@@ -128,46 +128,35 @@
                 </div>
 
                 <div class=" cms__page-toolbar ">
-                    <button class="button button--green">
+                    <button class="button button--green" ng-click="toggleSettings()">
                         <span class="button__icon fa fa-fw fa-cogs"></span>
                     </button>
                 </div>
             </div>
 
-            <div class=" cms__page-settings dropdown ">
+            <div class=" cms__page-settings dropdown " ng-show="settings">
                 <div class=" dropdown__content ">
-
                     <form class="form form--invert" role="form">
-
+                    
                         <div class="form__item form__inputgroup">
                             <label class="form__label" for="sitename">Seitenname:</label>
-                            <input class="form__input" type="text" id="sitename" name="sitename" value="Startseite" />
+                            <input class="form__input" type="text" ng-model="copy.title" />
                             <div class="form__active"></div>
                         </div>
 
                         <div class="form__item form__inputgroup">
                             <label class="form__label" for="url">URL:</label>
-                            <input class="form__input" type="text" id="url" name="url" value="/" />
-                            <div class="form__active"></div>
-                        </div>
-
-                        <div class="form__item form__inputgroup">
-                            <label class="form__label" for="url">Typ:</label>
-                            <select class="form__input" id="type" name="type">
-                                <option value="site" selected>Seite</option>
-                                <option value="module">Modul</option>
-                                <option value="redirect">Weiterleitung</option>
-                            </select>
+                            <input class="form__input" type="text" ng-model="copy.rewrite" />
                             <div class="form__active"></div>
                         </div>
 
                         <div class="form__actions">
 
-                            <button class="button button--red" type="reset">
+                            <button class="button button--red" ng-click="reset()" type="button">
                                 <span class="button__icon fa fa-fw fa-times"></span>
                             </button>
 
-                            <button class="button button--green" type="submit">
+                            <button class="button button--green" ng-click="save(copy)" type="button">
                                 <span class="button__icon fa fa-fw fa-save"></span>
                             </button>
 

@@ -16,6 +16,31 @@ class NavItemController extends \admin\base\RestController
     }
 
     /**
+     * admin/api-cms-navitem/update-item?navItemId=2 
+     * @param unknown_type $navItemId
+     * @return unknown
+     */
+    public function actionUpdateItem($navItemId)
+    {
+        $model = \cmsadmin\models\NavItem::find()->where(['id' => $navItemId])->one();
+        
+        if (!$model) {
+            throw new \Exception("could not find the model to validate");
+        }
+        
+        $model->scenario = 'meta';
+        $model->attributes = $_POST;
+        $v = $model->validate();
+        if ($model->validate()) {
+            if($model->save()) {
+                return true;   
+            }
+        }
+        
+        return $model->getErrors();
+    }
+    
+    /**
      * returns all the PAGE type specific informations.
      *
      */

@@ -17,7 +17,33 @@ zaa.controller("NavItemController", function($scope, $http) {
 	
 	$scope.NavController = $scope.$parent;
 	
-	$scope.item = [];
+	$scope.item = {};
+	
+	$scope.copy = {};
+	
+	$scope.settings = false;
+	
+	$scope.reset = function() {
+		$scope.copy = angular.copy($scope.item);
+	}
+	
+	$scope.save = function(data) {
+		
+		var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
+		var navItemId = data.id;
+		$http.post('admin/api-cms-navitem/update-item?navItemId=' + navItemId, $.param({ title : data.title, rewrite : data.rewrite }), headers).success(function(response) {
+			$scope.refresh();
+			$scope.toggleSettings();
+		}).error(function(e) {
+			alert('error! see console');
+			console.log(e);
+		})
+	}
+	
+	$scope.toggleSettings = function() {
+		$scope.reset();
+		$scope.settings = !$scope.settings;
+	}
 	
 	$scope.getItem = function(langId, navId) {
 		$http({
@@ -32,6 +58,7 @@ zaa.controller("NavItemController", function($scope, $http) {
 					//alert('THIS PAGE IS NOT YET TRANSLATED');
 				} else {
 					$scope.item = rsp[0];
+					$scope.reset();
 				}
 			}
 		});
