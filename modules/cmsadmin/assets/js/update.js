@@ -17,9 +17,9 @@ zaa.controller("NavItemController", function($scope, $http) {
 	
 	$scope.NavController = $scope.$parent;
 	
-	$scope.item = {};
+	$scope.item = [];
 	
-	$scope.copy = {};
+	$scope.copy = [];
 	
 	$scope.settings = false;
 	
