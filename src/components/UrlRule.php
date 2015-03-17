@@ -42,9 +42,10 @@ class UrlRule extends \luya\base\UrlRule
         $composition = new \luya\collection\PrefixComposition();
         $composition->set($compositionKeys);
 
-        Yii::$app->collection->composition = $composition;
+        yii::$app->collection->composition = $composition;
 
-        /* new get default url route @ 07.01.2015 */
+        // set the yii app language param based on the composition fullUrl
+        yii::$app->language = $composition->getFull();
 
         $parts = explode("/", $request->getPathInfo()); // can be deleted after reshuffle array
 
