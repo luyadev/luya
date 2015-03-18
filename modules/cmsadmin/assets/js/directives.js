@@ -24,6 +24,17 @@ zaa.directive("createForm", function() {
 				$scope.data.lang_id = response.id;
 			});
 			
+			$scope.navitems = [];
+			
+			$scope.$watch(function() { return $scope.data.cat_id }, function(newValue) {
+				if (newValue !== undefined) {
+					$http.get('admin/api-cms-menu/get-by-cat-id/', { params: { 'catId' : newValue }}).success(function(response) {
+						$scope.data.parent_nav_id = 0;
+						$scope.navitems = response;
+					});
+				}
+			})
+			
 			$scope.exec = function () {
 				$scope.controller.save().then(function(response) {
 					console.log('createForm Drive Response', response);

@@ -25,4 +25,12 @@ class MenuController extends \admin\base\RestController
         $menu->setLangByShortCode(\admin\models\Lang::getDefault()->short_code);
         return $menu->childrenRecursive(0, 'nodes');
     }
+    
+    public function actionGetByCatId($catId)
+    {
+        $menu = new \cmsadmin\components\Menu();
+        $menu->setCatById($catId);
+        $menu->setLangByShortCode(\admin\models\Lang::getDefault()->short_code);
+        return $menu->childrenRecursive(0, 'nodes');
+    }
 }

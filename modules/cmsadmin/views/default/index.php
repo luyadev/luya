@@ -44,7 +44,14 @@
     -->
     <tr>
         <td>Parent Nav Id</td>
-        <td><div ng-if="!data.nav_id"><input type="text" ng-model="data.parent_nav_id" placeholder="0" /></div></td>
+        <td>
+            <div ng-if="!data.nav_id">
+                <select ng-model="data.parent_nav_id">
+                    <option value="0">[ROOT]</option>
+                    <option ng-repeat="nav in navitems" value="{{nav.id}}">{{nav.title}}</option>
+                </select>
+            </div>
+        </td>
     </tr>
     <tr>
         <td>Content Nav-Item-Type Id</td>

@@ -20,6 +20,11 @@ class Menu
     {
         $this->cat = (new \yii\db\Query())->select(['id', 'default_nav_id'])->from("cms_cat")->where(['rewrite' => $catRewrite])->one();
     }
+    
+    public function setCatById($catId)
+    {
+        $this->cat = (new \yii\db\Query())->select(['id', 'default_nav_id'])->from("cms_cat")->where(['id' => $catId])->one();
+    }
 
     public function setLangByShortCode($langShortCode)
     {

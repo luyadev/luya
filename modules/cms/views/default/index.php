@@ -1,1 +1,3 @@
-<?php echo $pageContent;
+<!-- <render> -->
+<?php echo $pageContent; ?>
+<!-- </render> -->
