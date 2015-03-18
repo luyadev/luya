@@ -52,9 +52,9 @@
             <div class="block"><div class="block__view"><div class="block__item block__item--preview">Noch keine Blöcke vorhanden.</div></div></div>
         </div>
 
-        <div ng-repeat="block in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController" data-drag="true" jqyoui-draggable="" data-jqyoui-options="{revert: true, handle : '.drag-icon', helper : 'clone'}" ng-model="block">
+        <div ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController" data-drag="true" jqyoui-draggable="" data-jqyoui-options="{revert: true, handle : '.drag-icon', helper : 'clone'}" ng-model="block">
 
-            <div class=" cms__drag-here " ng-controller="DropBlockController" ng-model="droppedBlock" data-drop="true" data-jqyoui-options="{greedy : true, hoverClass : 'test' }" jqyoui-droppable="{onDrop: 'onDrop', multiple : true}">
+            <div class=" cms__drag-here " ng-controller="DropBlockController" data-sortindex="{{key}}" ng-model="droppedBlock" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'test' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}">
                 <div class="cms__dropzone">
                     <span class="fa fa-long-arrow-left"></span>
                 </div>
@@ -91,7 +91,7 @@
             </div> <!-- ./block -->
         </div>
 
-        <div class=" cms__drag-here " ng-controller="DropBlockController" ng-model="droppedBlock" data-drop="true" data-jqyoui-options="{greedy : true, hoverClass : 'test' }" jqyoui-droppable="{onDrop: 'onDrop', multiple : true}">
+        <div class=" cms__drag-here " ng-controller="DropBlockController" ng-model="droppedBlock" data-sortindex="-1" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'test' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}">
             <div class="cms__dropzone">
                 <span class="fa fa-long-arrow-left"></span>
             </div>

@@ -18,6 +18,7 @@ class m150108_155009_cms_nav_item_page_block_item extends Migration
             "nav_item_page_id" => Schema::TYPE_INTEGER,
             "prev_id" => Schema::TYPE_INTEGER,
             "json_config_values" => Schema::TYPE_TEXT,
+            "sort_index" => Schema::TYPE_INTEGER . ' default 0'
         ]);
     }
 
