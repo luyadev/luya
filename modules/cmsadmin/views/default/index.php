@@ -110,9 +110,14 @@
             </a>
         </div>
 
-        <ul class="treeview__list" role="menu" ng-controller="CmsMenuTreeController">
-            <li class="treeview__item" role="menuitem" ng-repeat="data in tree" ng-include="'reverse.html'"></li>
-        </ul>
+        <div ng-controller="CmsMenuTreeController">
+            <div ng-repeat="catitem in menu">
+                <h2 class="subnav__grouptitle">{{catitem.name}}</h2>
+                <ul class="treeview__list" role="menu" >
+                    <li class="treeview__item" role="menuitem" ng-repeat="data in catitem.__items" ng-include="'reverse.html'"></li>
+                </ul>
+            </div>
+        </div>
 
     </nav>
 </div><!-- ./main__left

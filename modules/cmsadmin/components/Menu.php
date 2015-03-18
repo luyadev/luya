@@ -42,6 +42,9 @@ class Menu
             $this->getFromParentNode(0);
         }
         $data = [];
+        if (!isset($this->menu[$parentId])) {
+            return [];
+        }
         $items = $this->menu[$parentId];
         foreach ($items as $k => $v) {
             $data[$k] = $v;

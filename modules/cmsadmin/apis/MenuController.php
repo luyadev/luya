@@ -1,28 +1,28 @@
 <?php
 namespace cmsadmin\apis;
 
-/**
- * @todo set default catId and langId
- * @author nadar
- *
- */
-class MenuController extends \admin\base\RestVerbController
+class MenuController extends \admin\base\RestController
 {
-    public function actionIndex()
+    public function actionAll()
     {
-        $menu = new \cmsadmin\components\Menu();
-        $menu->setCatByRewrite('default');
-        $menu->setLangByShortCode('de');
-
-        return $menu->childrenRecursive(0, 'nodes');
+        $data = [];
+        foreach(\cmsadmin\models\Cat::find()->all() as $cat) {
+            $data[] = [
+                "name" => $cat->name,
+                "rewrite" => $cat->rewrite,
+                "id" => $cat->id,
+                "default_nav_id" => $cat->default_nav_id,
+                "__items" => $this->actionGetByCatRewrite($cat->rewrite)
+            ];
+        }
+        return $data;
     }
-
-    public function actionView($id)
+    
+    public function actionGetByCatRewrite($catRewrite)
     {
         $menu = new \cmsadmin\components\Menu();
-        $menu->setCatByRewrite('default');
-        $menu->setLangByShortCode('de');
-
-        return $menu->children($id);
+        $menu->setCatByRewrite($catRewrite);
+        $menu->setLangByShortCode(\admin\models\Lang::getDefault()->short_code);
+        return $menu->childrenRecursive(0, 'nodes');
     }
 }

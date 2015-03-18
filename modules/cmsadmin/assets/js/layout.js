@@ -10,14 +10,15 @@ zaa.config(function($stateProvider) {
 	});
 });
 
-zaa.service('MenuService', function($rootScope, ApiCmsMenu) {
+zaa.service('MenuService', function($http) {
 	var service = [];
 	
-	service.tree = [];
+	service.menu = [];
 	
 	service.refresh = function() {
-		ApiCmsMenu.get(function(response) {
-			service.tree = response;
+		
+		$http.get('admin/api-cms-menu/all').success(function(response) {
+			service.menu = response;
 		});
 	}
 	
@@ -28,10 +29,10 @@ zaa.service('MenuService', function($rootScope, ApiCmsMenu) {
 
 zaa.controller("CmsMenuTreeController", function($scope, $state, MenuService) {
     
-	$scope.tree = [];
+	$scope.menu = [];
 	
-    $scope.$watch(function() { return MenuService.tree }, function(newValue) {
-    	$scope.tree = newValue;
+    $scope.$watch(function() { return MenuService.menu }, function(newValue) {
+    	$scope.menu = newValue;
     })
 	
     $scope.go = function(navId) {
