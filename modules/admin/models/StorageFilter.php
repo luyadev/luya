@@ -45,6 +45,12 @@ class StorageFilter extends \admin\ngrest\base\Model
                 case "resize":
                     $imagine->resize(new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height));
                     break;
+                case "thumbnail":
+                    $imagine->thumbnail(new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height), \Imagine\Image\ImageInterface::THUMBNAIL_INSET);
+                    break;
+                case "crop":
+                    $imagine->crop(new \Imagine\Image\Point(0, 0), new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height));
+                    break;
             }
         }
         

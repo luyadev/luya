@@ -13,6 +13,34 @@ class m150304_152250_admin_storage_effect extends Migration
             "imagine_name" => Schema::TYPE_STRING,
             "imagine_json_params" => Schema::TYPE_STRING,
         ]);
+        
+        $this->insert("admin_storage_effect", [
+            "name" => "Thumbnail",
+            "imagine_name" => "thumbnail",
+            "imagine_json_params" => json_encode(['vars' => [
+                ['var' => "width", 'label' => 'Breit in Pixel'],
+                ['var' => 'height', 'label' => 'Hoehe in Pixel'],
+            ]])
+        ]);
+        
+        $this->insert("admin_storage_effect", [
+            "name" => "Zuschneiden",
+            "imagine_name" => "resize",
+            "imagine_json_params" => json_encode(['vars' => [
+                ['var' => "width", 'label' => 'Breit in Pixel'],
+                ['var' => 'height', 'label' => 'Hoehe in Pixel'],        
+            ]])  
+        ]);
+        
+        $this->insert("admin_storage_effect", [
+            "name" => "Crop",
+            "imagine_name" => "crop",
+            "imagine_json_params" => json_encode(['vars' => [
+                ['var' => "width", 'label' => 'Breit in Pixel'],
+                ['var' => 'height', 'label' => 'Hoehe in Pixel'],
+            ]])
+        ]);
+        
     }
 
     public function down()
