@@ -31,6 +31,12 @@ class m150108_154017_cms_block extends Migration
             "system_block" => 1,
             "class" => "\cmsadmin\blocks\ParagraphBlock"
         ]);
+        
+        $this->insert("cms_block", [
+            "group_id" => 2,
+            "system_block" => 1,
+            "class" => "\cmsadmin\blocks\ImageBlock"
+        ]);
     }
 
     public function down()

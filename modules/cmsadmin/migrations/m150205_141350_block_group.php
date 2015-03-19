@@ -16,6 +16,11 @@ class m150205_141350_block_group extends Migration
             "id" => 1,
             "name" => "Text Abschnitte"
         ]);
+        
+        $this->insert("cms_block_group", [
+            "id" => 2,
+            "name" => "Desgin Elemente"
+        ]);
     }
 
     public function down()
