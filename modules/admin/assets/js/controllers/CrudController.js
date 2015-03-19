@@ -20,6 +20,8 @@ zaa.controller("CrudController", function($scope, $http, $sce, AdminService) {
 	
 	$scope.AdminService = AdminService;
 	
+	$scope.showCrudList = true;
+	
 	$scope.init = function () {
 		$scope.loadList();
 	}

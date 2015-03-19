@@ -56,11 +56,8 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
                 </div> <!-- ./toolbar__item -->
 
                 <div class="toolbar__item toolbar__item--pullright">
-
                     <a class="toolbar__link" role="link">
-                        <form class="search" role="search">
-                            <input class="search__input" ng-model="search" type="text" placeholder="Filtern..."/>
-                        </form>
+                        <input class="search__input" ng-model="search" type="text" focus-me="showCrudList" placeholder="Filtern..."/>
                     </a>
 
                 </div> <!-- ./toolbar__item -->
