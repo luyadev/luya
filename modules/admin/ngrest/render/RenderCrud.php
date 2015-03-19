@@ -34,7 +34,41 @@ class RenderCrud extends RenderAbstract implements RenderInterface
         ));
     }
 
-    
+    /**
+     * collection all the buttons in the crud list.
+     * 
+     * each items required the following keys (ngClick, icon, label):
+     * 
+     * ```php
+     * return [
+     *     ['ngClick' => 'toggle(...)', 'icon' => 'fa fa-fw fa-edit', 'label' => 'Button Label']
+     * ];
+     * ```
+     * 
+     * @return returns array with all buttons for this crud
+     */
+    public function getButtons()
+    {
+        $buttons = [];
+        // do we have an edit button
+        if (!empty($this->getFields('update'))) {
+            $buttons[] = [
+                'ngClick' => 'toggleUpdate(item.'.$this->config->getRestPrimaryKey().', $event)',
+                'icon' => 'fa fa-fw fa-edit',
+                'label' => '',
+            ];   
+        }
+        // get all straps assign to the crud
+        foreach($this->getStraps() as $strap) {
+            $buttons[] = [
+                'ngClick' => 'getStrap(\''.$strap['strapHash'].'\', item.'.$this->config->getRestPrimaryKey().', $event)',
+                'icon' => '',
+                'label' => $strap['alias']
+            ];
+        }
+        
+        return $buttons;
+    }
     
     public function apiQueryString($type)
     {

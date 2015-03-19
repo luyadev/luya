@@ -24,11 +24,13 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
         </h3>
 
         <div class="toolbar__items">
+            <?php if(!empty($crud->getFields('create'))): ?>
             <div class="toolbar__item">
                 <button class="button button--green" role="button" ng-click="toggleCreate()">
                     <span class="button__text fa fa-plus-circle"> Hinzufügen</span>
                 </button>
-            </div> <!-- ./toolbar__item -->
+            </div>
+            <?php endif; ?>
 
             <!-- 
             <div class="toolbar__item">
@@ -71,7 +73,9 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
                         <?php foreach ($crud->list as $item): ?>
                             <th class="table__column table__column--head"><?= $item['alias']; ?></th>
                         <?php endforeach; ?>
+                        <?php if (!empty($crud->getButtons())): ?>
                         <th class="table__column table__column--head">Aktionen</th>
+                        <?php endif; ?>
                     </tr>
                 </thead>
 
@@ -80,18 +84,17 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
                         <?php foreach ($crud->list as $item): ?>
                             <td class="table__column"><?= $crud->createElement($item, $crud::TYPE_LIST); ?></td>
                         <?php endforeach; ?>
+                        <?php if (!empty($crud->getButtons())): ?>
                         <td class="table__column table__column--actions">
-                            <button class="button button--yellow" ng-click="toggleUpdate(item.<?= $config->getRestPrimaryKey(); ?>, $event)">
-                                <span class="button__icon fa fa-fw fa-edit"></span>
-                            </button>
-                            <?php foreach ($crud->getStraps() as $item): ?>
-                                <button class="button button--yellow" ng-click="getStrap('<?= $item['strapHash']; ?>', item.<?= $config->getRestPrimaryKey();?>, $event)">
-                                    <span class="button__text"><?=$item['alias']; ?></span>
-                                </button>
+                            <?php foreach($crud->getButtons() as $item): ?>
+                            <button class="button button--yellow" ng-click="<?= $item['ngClick']; ?>">
+                                <span class="<? if(empty($item['label'])): ?>button__icon<?else:?>button__text<?endif;?> <?=$item['icon']; ?>"><?=$item['label']; ?></span>
+                            </button> 
                             <?php endforeach; ?>
 
                             <!--<a href="delete-overlay.html" class="button button--red"><span class="button__icon fa fa-fw fa-trash"></span></a>-->
                         </td>
+                        <?php endif; ?>
                     </tr>
 
 
