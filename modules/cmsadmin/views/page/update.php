@@ -52,7 +52,7 @@
             <div class="block"><div class="block__view"><div class="block__item block__item--preview">Noch keine Blöcke vorhanden.</div></div></div>
         </div>
 
-        <div ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController" data-drag="true" jqyoui-draggable="" data-jqyoui-options="{revert: true, handle : '.drag-icon', helper : 'clone'}" ng-model="block">
+        <div ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController" data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{revert: true, handle : '.drag-icon', helper : 'clone'}" ng-model="block">
 
             <div class=" cms__drag-here " ng-controller="DropBlockController" data-sortindex="{{key}}" ng-model="droppedBlock" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'test' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}">
                 <div class="cms__dropzone">
@@ -101,7 +101,7 @@
 </script>
 
 <div ng-controller="NavController">
-    <div class=" cms cms--drag-active ">
+    <div class="cms {{AdminClassService.getClassSpace('onDragStart')}}">
         <div class=" cms__page " ng-repeat="lang in langs" ng-controller="NavItemController">
 
             <!-- If page don't exists -->
@@ -193,7 +193,7 @@
     <div style="clear:both; "></div>
 
     <div ng-controller="DroppableBlocksController" style="margin-top:50px; background-color:#F0F0F0;">
-        <div ng-repeat="block in blocks" style="border:1px solid #F0F0F0; font-weight:bold; margin:5px; display:inline-block; text-align:center; padding:15px; min-width:200px; background-color:#e1e1e1; border:1px solid #FFF;" data-drag="true" jqyoui-draggable="{placeholder: 'keep', index : {{$index}}}" ng-model="blocks" data-jqyoui-options="{revert: true, helper : 'clone'}">
+        <div ng-repeat="block in blocks" style="border:1px solid #F0F0F0; font-weight:bold; margin:5px; display:inline-block; text-align:center; padding:15px; min-width:200px; background-color:#e1e1e1; border:1px solid #FFF;" data-drag="true" jqyoui-draggable="{placeholder: 'keep', index : {{$index}}, onStart : 'onStart', onStop : 'onStop'}" ng-model="blocks" data-jqyoui-options="{revert: true, helper : 'clone'}">
             <p>{{block.name}}</p>
         </div>
     </div>

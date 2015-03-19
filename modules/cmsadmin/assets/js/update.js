@@ -1,13 +1,14 @@
-zaa.controller("NavController", function($scope, $stateParams, ApiAdminLang) {
+zaa.controller("NavController", function($scope, $stateParams, ApiAdminLang, AdminClassService) {
 	
 	$scope.id = parseInt($stateParams.navId);
+	
+	$scope.AdminClassService = AdminClassService;
 	
 	$scope.refresh = function() {
 		$scope.langs = ApiAdminLang.query();
 	}
 	
 	$scope.refresh();
-	
 });
 
 /**
@@ -105,7 +106,7 @@ zaa.controller("PagePlaceholderController", function($scope) {
 /**
  * @param $scope.block from ng-repeat
  */
-zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPageBlockItem) {
+zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPageBlockItem, AdminClassService) {
 
 	$scope.data = $scope.block.values || {};
 	
@@ -113,6 +114,18 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
 	
 	$scope.toggleEdit = function() {
 		$scope.edit = !$scope.edit;
+	}
+
+	$scope.onStart = function() {
+		$scope.$apply(function() {
+			AdminClassService.setClassSpace('onDragStart', 'cms--drag-active');
+		});
+	}
+	
+	$scope.onStop = function() {
+		$scope.$apply(function() {
+			AdminClassService.setClassSpace('onDragStart', '');
+		});
 	}
 	
 	$scope.renderTemplate = function(template, dataVars, block) {		
@@ -171,8 +184,20 @@ zaa.controller("DropBlockController", function($scope, ApiCmsNavItemPageBlockIte
 	}
 });
 
-zaa.controller("DroppableBlocksController", function($scope, $http) {
+zaa.controller("DroppableBlocksController", function($scope, $http, AdminClassService) {
 
+	$scope.onStart = function() {
+		$scope.$apply(function() {
+			AdminClassService.setClassSpace('onDragStart', 'cms--drag-active');
+		});
+	}
+	
+	$scope.onStop = function() {
+		$scope.$apply(function() {
+			AdminClassService.setClassSpace('onDragStart', '');
+		});
+	}
+	
 	$http({
 		url : 'admin/api-cms-admin/get-all-blocks',
 		method : 'GET'

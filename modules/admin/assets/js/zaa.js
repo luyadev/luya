@@ -45,6 +45,25 @@ zaa.factory('AdminService', function() {
 	return service;
 });
 
+zaa.factory('AdminClassService', function() {
+	
+	var service = [];
+	
+	service.vars = [];
+	
+	service.getClassSpace = function(spaceName) {
+		if (service.vars.hasOwnProperty(spaceName)) {
+			return service.vars[spaceName];
+		}
+	}
+	
+	service.setClassSpace = function(spaceName, className) {
+		service.vars[spaceName] = className;
+	}
+	
+	return service;
+});
+
 zaa.controller("HtmlController", function($scope, AdminService) {
 	
 	$scope.AdminService = AdminService;
