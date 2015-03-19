@@ -59,35 +59,44 @@ class File
         if (empty($sourceFile) || empty($newFileName)) {
             return !$this->setError("empty source file or create file param. Invalid file uploaded!");
         }
-        
+        $copyFile = false;
         $fileInfo = $this->getFileInfo($newFileName);
         $baseName = preg_replace("/[^a-zA-Z0-9\-\_\.]/", "", $fileInfo->name);
         $fileHashName = $this->getNameHash($newFileName);
         $fileHash = $this->getFileHash($sourceFile);
         $mimeType = $this->getMimeType($sourceFile);
         $fileName = implode([$baseName . "_" . $fileHashName, $fileInfo->extension], ".");
-        $savePath = \yii::$app->luya->storage->dir . DIRECTORY_SEPARATOR . $fileName;
+        $savePath = \yii::$app->luya->storage->dir . $fileName;
         if (is_uploaded_file($sourceFile)) {
             if (move_uploaded_file($sourceFile, $savePath)) {
-                $model = new \admin\models\StorageFile();
-                $model->setAttributes([
-                    'name_original' => $newFileName,
-                    'name_new' => $baseName,
-                    'name_new_compound' => $fileName,
-                    'mime_type' => $mimeType,
-                    'extension' => $fileInfo->extension,
-                    'hash_file' => $fileHash,
-                    'hash_name' => $fileHashName,
-                    'is_hidden' => $hidden,
-                ]);
-                if ($model->validate()) {
-                    if ($model->save()) {
-                        return $model->id;
-                    }
+                $copyFile = true;
+            } else {
+                $this->setError("error while moving uploaded file from $sourceFile to $savePath");
+            }
+        } else {
+            if(copy($sourceFile, $savePath)) {
+                $copyFile = true;
+            } else {
+                $this->setError("error while copy file from $sourceFile to $savePath.");
+            }
+        }
+        
+        if ($copyFile) {
+            $model = new \admin\models\StorageFile();
+            $model->setAttributes([
+                'name_original' => $newFileName,
+                'name_new' => $baseName,
+                'name_new_compound' => $fileName,
+                'mime_type' => $mimeType,
+                'extension' => $fileInfo->extension,
+                'hash_file' => $fileHash,
+                'hash_name' => $fileHashName,
+                'is_hidden' => $hidden,
+            ]);
+            if ($model->validate()) {
+                if ($model->save()) {
+                    return $model->id;
                 }
-                
-                // remove the uploaded file again if model insert does not work
-                unlink($savePath);
             }
         }
         
