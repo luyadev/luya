@@ -27,9 +27,9 @@ class Controller extends \luya\base\Controller
 
     public function getUserId()
     {
-        return new \admin\components\User();   
+        return new \admin\components\User();
     }
-    
+
     public function getRules()
     {
         return [
@@ -37,7 +37,7 @@ class Controller extends \luya\base\Controller
                 'allow' => true,
                 'actions' => [], // apply to all actions by default
                 'roles' => ['@'],
-                'matchCallback' => function($rule, $action) {
+                'matchCallback' => function ($rule, $action) {
                     /*
                     $actionName = $action->id;
                     $controllerName = $action->controller->id;
@@ -46,10 +46,10 @@ class Controller extends \luya\base\Controller
                     return true;
                     //var_dump($action->controller->adminUser);
                     //var_dump($actionName, $controllerName, $moduleName);
-                    
+
                     // \yii::$app->luya->auth->match($action->controller->getUserId(), $moduleName, $controllerName, $actionName);
-                }
-            ]
+                },
+            ],
         ];
     }
 
@@ -60,7 +60,7 @@ class Controller extends \luya\base\Controller
                 'class' => AccessControl::className(),
                 'user' => '\admin\components\User',
                 'rules' => $this->getRules(),
-            ]
+            ],
         ];
     }
 }

@@ -12,7 +12,7 @@ class LoginForm extends \yii\base\Model
     {
         return [
             [['email', 'password'], 'required'],
-            ['password', 'validatePassword']
+            ['password', 'validatePassword'],
         ];
     }
 

@@ -2,12 +2,11 @@
 namespace cmsadmin\apis;
 
 /**
- * api-cms-admin
- * 
+ * api-cms-admin.
+ *
  * Basic admin rest jobs
- * 
+ *
  * @author nadar
- * 
  */
 class AdminController extends \admin\base\RestController
 {
@@ -18,10 +17,10 @@ class AdminController extends \admin\base\RestController
             $object = \cmsadmin\models\Block::objectId($item['id']);
             $data[] = [
                 'id' => $item['id'],
-                'name' => $object->getName()
+                'name' => $object->getName(),
             ];
         }
-        
+
         return $data;
     }
 }

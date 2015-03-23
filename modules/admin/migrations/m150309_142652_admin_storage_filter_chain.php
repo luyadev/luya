@@ -22,13 +22,13 @@ class m150309_142652_admin_storage_filter_chain extends Migration
 
         return false;
     }
-    
+
     /*
     // Use safeUp/safeDown to run migration code within a transaction
     public function safeUp()
     {
     }
-    
+
     public function safeDown()
     {
     }

@@ -7,8 +7,8 @@ use admin\ngrest\RenderInterface;
 /**
  * @todo complet rewrite of this class - what is the best practive to acces data in the view? define all functiosn sindie here? re-create methods from config object?
  *  $this->config() $this....
- * @author nadar
  *
+ * @author nadar
  */
 class RenderCrud extends RenderAbstract implements RenderInterface
 {
@@ -36,15 +36,15 @@ class RenderCrud extends RenderAbstract implements RenderInterface
 
     /**
      * collection all the buttons in the crud list.
-     * 
+     *
      * each items required the following keys (ngClick, icon, label):
-     * 
+     *
      * ```php
      * return [
      *     ['ngClick' => 'toggle(...)', 'icon' => 'fa fa-fw fa-edit', 'label' => 'Button Label']
      * ];
      * ```
-     * 
+     *
      * @return returns array with all buttons for this crud
      */
     public function getButtons()
@@ -56,26 +56,26 @@ class RenderCrud extends RenderAbstract implements RenderInterface
                 'ngClick' => 'toggleUpdate(item.'.$this->config->getRestPrimaryKey().', $event)',
                 'icon' => 'fa fa-fw fa-edit',
                 'label' => '',
-            ];   
+            ];
         }
         // get all straps assign to the crud
-        foreach($this->getStraps() as $strap) {
+        foreach ($this->getStraps() as $strap) {
             $buttons[] = [
                 'ngClick' => 'getStrap(\''.$strap['strapHash'].'\', item.'.$this->config->getRestPrimaryKey().', $event)',
                 'icon' => '',
-                'label' => $strap['alias']
+                'label' => $strap['alias'],
             ];
         }
-        
+
         return $buttons;
     }
-    
+
     public function apiQueryString($type)
     {
         // ($scope.config.apiEndpoint + '?ngrestExpandI18n=true&fields=' + $scope.config.list.join()
-        return 'ngrestExpandI18n=true&fields=' . implode(",", $this->getFields($type)) . '&expand=' . implode(",", $this->config->extraFields);
+        return 'ngrestExpandI18n=true&fields='.implode(",", $this->getFields($type)).'&expand='.implode(",", $this->config->extraFields);
     }
-    
+
     public function getFields($type)
     {
         $fields = [];
@@ -92,7 +92,6 @@ class RenderCrud extends RenderAbstract implements RenderInterface
     }
 
     /**
-     *
      * @param unknown_type $element
      * @param string       $configContext list,create,update
      */
@@ -102,20 +101,21 @@ class RenderCrud extends RenderAbstract implements RenderInterface
             $return = [];
             foreach (\admin\models\Lang::find()->all() as $l => $v) {
                 $ngModel = $this->i18nNgModelString($configContext, $element['name'], $v->short_code);
-                $id = "id-".md5($ngModel . $v->short_code);
+                $id = "id-".md5($ngModel.$v->short_code);
 
                 $return[] = $v->short_code.':<br />'.$this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias']);
             }
 
             return implode("", $return);
         }
-        
+
         if ($element['i18n'] && $configContext == self::TYPE_LIST) {
-            $element['name'] = $element['name'] . '.de'; // @todo get default language!
+            $element['name'] = $element['name'].'.de'; // @todo get default language!
         }
-        
+
         $ngModel = $this->ngModelString($configContext, $element['name']);
         $id = "id-".md5($ngModel);
+
         return $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias']);
     }
 

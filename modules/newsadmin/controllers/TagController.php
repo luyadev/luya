@@ -4,7 +4,7 @@ namespace newsadmin\controllers;
 class TagController extends \admin\ngrest\base\Controller
 {
     public $modelClass = '\\newsadmin\\models\\Tag';
-    
+
     /*
     public function actionIndex() {
         $data = \newsadmin\models\Article::find()->with('tags')->where(['id' => 1])->one();

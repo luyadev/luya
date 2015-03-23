@@ -11,7 +11,7 @@ class DefaultController extends \luya\base\PageController
     public $pageTitle = 'default none!';
 
     public $langId = 0;
-    
+
     private $_context = null;
 
     public function init()
@@ -19,13 +19,13 @@ class DefaultController extends \luya\base\PageController
         parent::init();
         $this->links();
         $this->_context = $this;
-        
+
         $shortCode = yii::$app->collection->composition->getKey('langShortCode');
-        
+
         if (!$shortCode) {
             yii::$app->collection->composition->setkey('langShortCode', $this->getDefaultLangShortCode());
         }
-        
+
         $this->langId = $this->getLangIdByShortCode(yii::$app->collection->composition->getKey('langShortCode'));
     }
 
@@ -42,7 +42,7 @@ class DefaultController extends \luya\base\PageController
         $linksObject = \Yii::$app->collection->links;
         $urls = $linksObject->getAll();
         $fullUrl = $linksObject->getActiveLink();
-        
+
         /* above collection based */
 
         if (empty($fullUrl)) {
@@ -62,17 +62,17 @@ class DefaultController extends \luya\base\PageController
             echo "<h1>404<h1><h3>Url \"$fullUrl\" not found</h3>";
             exit;
         }
-        
+
         yii::$app->collection->links->setActiveLink($activeUrl);
-        
+
         $linkItem = $linksObject->getLink($activeUrl);
 
         $pageContent = $this->getPageContent($linkItem['id'], [
-            'restString' => substr($fullUrl, strlen($linkItem['url']) + 1)       // negativPath
+            'restString' => substr($fullUrl, strlen($linkItem['url']) + 1),       // negativPath
         ]);
 
         return $this->render('index', [
-            'pageContent' => $pageContent
+            'pageContent' => $pageContent,
         ]);
     }
 
@@ -116,7 +116,7 @@ class DefaultController extends \luya\base\PageController
     {
         $cat = (new \yii\db\Query())->select(['id', 'default_nav_id'])->from("cms_cat")->where(['is_default' => 1])->one();
 
-        return (int)$cat['default_nav_id'];
+        return (int) $cat['default_nav_id'];
     }
 
     private function findActive($urls, $parts)
@@ -130,13 +130,12 @@ class DefaultController extends \luya\base\PageController
 
         return false;
     }
-    
+
     private function getDefaultLangShortCode()
     {
         return \admin\models\Lang::find()->where(['is_default' => 1])->one()->short_code;
-        
     }
-    
+
     private function getLangIdByShortCode($shortCode)
     {
         return \admin\models\Lang::find()->where(['short_code' => $shortCode])->one()->id;

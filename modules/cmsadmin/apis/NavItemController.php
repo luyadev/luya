@@ -4,10 +4,11 @@ namespace cmsadmin\apis;
 class NavItemController extends \admin\base\RestController
 {
     /**
-     * http://example.com/admin/api-cms-navitem/nav-lang-items?access-token=XXX&navId=A&langId=B
+     * http://example.com/admin/api-cms-navitem/nav-lang-items?access-token=XXX&navId=A&langId=B.
      *
-     * @param  unknown_type      $navId
-     * @param  unknown_type      $langId
+     * @param unknown_type $navId
+     * @param unknown_type $langId
+     *
      * @return multitype:unknown
      */
     public function actionNavLangItems($navId, $langId)
@@ -16,33 +17,34 @@ class NavItemController extends \admin\base\RestController
     }
 
     /**
-     * admin/api-cms-navitem/update-item?navItemId=2 
+     * admin/api-cms-navitem/update-item?navItemId=2.
+     *
      * @param unknown_type $navItemId
+     *
      * @return unknown
      */
     public function actionUpdateItem($navItemId)
     {
         $model = \cmsadmin\models\NavItem::find()->where(['id' => $navItemId])->one();
-        
+
         if (!$model) {
             throw new \Exception("could not find the model to validate");
         }
-        
+
         $model->scenario = 'meta';
         $model->attributes = $_POST;
         $v = $model->validate();
         if ($model->validate()) {
-            if($model->save()) {
-                return true;   
+            if ($model->save()) {
+                return true;
             }
         }
-        
+
         return $model->getErrors();
     }
-    
+
     /**
      * returns all the PAGE type specific informations.
-     *
      */
     public function actionTypePageContainer($navItemId)
     {
@@ -56,36 +58,13 @@ class NavItemController extends \admin\base\RestController
         return [
             //'nav_item' => $navItem,
             'layout' => $layout,
-            'type_container' => $type
+            'type_container' => $type,
         ];
     }
 
     /**
 
-     $array = [
-     'nav_item_page' => [...],
-     '__placeholders' => [
-     ['content' => [...]],
-     ['banner' => [
-     ['__nav_item_page_block_items' => [
-     ['block1' => [...],
-     ['block2' => [
-
-     * RECUSRION *
-
-     ['__placholders' => [
-     ['content' => [...]],
-     ['banner' => [...]]
-     ]
-
-     ],
-     ]
-     ],
-     ]
-     ];
-
-     http://localhost/luya-website/public_html/admin/api-cms-navitem/tree?access-token=<ACCESS_TOKEN>&navItemPageId=3
-
+     * RECUSRION *.
      */
     public function actionTree($navItemPageId)
     {
@@ -126,9 +105,9 @@ class NavItemController extends \admin\base\RestController
 
         foreach ($nav_item_page_block_item_data as $ipbid_key => $ipbid_value) {
             $blockObject = \cmsadmin\models\Block::objectId($ipbid_value['block_id']);
-            
+
             $blockJsonConfig = json_decode($blockObject->getJsonConfig(), true);
-            
+
             $ipbid_value['t1_json_config_values'] = json_decode($ipbid_value['t1_json_config_values'], true);
 
             $placeholders = [];

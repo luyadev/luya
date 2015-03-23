@@ -23,35 +23,35 @@ class Module extends \luya\base\Module
     public $sendException = true;
 
     public $exceptionUrl = 'http://luya.io/errorapi/';
-    
+
     public static $urlRules = [
         ['class' => 'luya\components\UrlRule'],
     ];
-    
+
     /**
-     * The smtp host where phpmailer use as smtp gateway
-     * 
+     * The smtp host where phpmailer use as smtp gateway.
+     *
      * @var string mail.example.com
      */
     public $mailerHost = null;
-    
+
     /**
      * The smtp host authentification username.
-     * 
+     *
      * @var string phpmail@example.com
      */
     public $mailerUsername = null;
-    
+
     /**
      * The smtp host username password for the authentification.
-     * 
+     *
      * @var string
      */
     public $mailerPassword = null;
-    
+
     /**
      * Should the phpmailer make an smtp authentification or use the local phpmailer() function.
-     * 
+     *
      * @var boolean
      */
     public $mailerIsSMTP = false;

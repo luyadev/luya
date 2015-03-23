@@ -1,7 +1,8 @@
 <?php
     use \Yii;
-    use \admin\Module as Admin;
-    $user = Admin::getAdminUserData();
+use \admin\Module as Admin;
+
+$user = Admin::getAdminUserData();
     $gravatar = "http://www.gravatar.com/avatar/".md5(strtolower(trim($user->email)))."?d=".urlencode('http://www.zephir.ch/files/rocky_460px_bw.jpg')."&s=40";
 
     $this->beginPage()
@@ -21,7 +22,7 @@
     <script>
         var authToken = '<?=$user->getAuthToken();?>';
     </script>
-    
+
 </head>
 
 <body class="{{AdminService.bodyClass}}">
@@ -35,7 +36,7 @@
             </table>
         </div>
     </script>
-    
+
     <script type="text/ng-template" id="storageImageUpload">
         <table>
             <tr><td>Filter:</td><td> <select name="filterId" ng-model="filterId" ng-options="item.id as item.name for item in filters" /></td></tr>
@@ -44,8 +45,8 @@
             <tr><td colspan="2"><img ng-show="imagesrc" ng-src="{{imagesrc}}" /></td></tr>
         </table>
     </script>
-    
-    
+
+
     <div class="header" role="menubar">
 
         <div class="header__item header__item--left">

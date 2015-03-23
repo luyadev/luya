@@ -6,7 +6,7 @@ use yii\web\IdentityInterface;
 
 /**
  * $salt = \Yii::$app->getSecurity()->generateRandomString();
- * $password = \Yii::$app->getSecurity()->generatePasswordHash("yourpass" . $salt);
+ * $password = \Yii::$app->getSecurity()->generatePasswordHash("yourpass" . $salt);.
  *
  * @author nadar
  */
@@ -60,7 +60,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
             'restcreate' => ['title', 'firstname', 'lastname', 'email', 'password'],
             'restupdate' => ['title', 'firstname', 'lastname', 'email'],
             'changepassword' => ['password', 'password_salt'],
-            'login' => ['email', 'password']
+            'login' => ['email', 'password'],
         ];
     }
 
@@ -72,7 +72,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
     }
 
     /**
-     * override default scope find()
+     * override default scope find().
      */
     public static function find()
     {
@@ -188,7 +188,8 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
     /**
      * Finds an identity by the given ID.
      *
-     * @param  string|integer         $id the ID to be looked for
+     * @param string|integer $id the ID to be looked for
+     *
      * @return IdentityInterface|null the identity object that matches the given ID.
      */
     public static function findIdentity($id)
@@ -199,7 +200,8 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
     /**
      * Finds an identity by the given token.
      *
-     * @param  string                 $token the token to be looked for
+     * @param string $token the token to be looked for
+     *
      * @return IdentityInterface|null the identity object that matches the given token.
      */
     public static function findIdentityByAccessToken($token, $type = null)
@@ -229,7 +231,8 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
     }
 
     /**
-     * @param  string  $authKey
+     * @param string $authKey
+     *
      * @return boolean if auth key is valid for current user
      */
     public function validateAuthKey($authKey)

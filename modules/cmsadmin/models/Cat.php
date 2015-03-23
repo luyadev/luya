@@ -26,7 +26,7 @@ class Cat extends \admin\ngrest\base\Model
     public function rules()
     {
         return [
-            [['name', 'rewrite', 'default_nav_id'], 'required']
+            [['name', 'rewrite', 'default_nav_id'], 'required'],
         ];
     }
 
@@ -34,10 +34,10 @@ class Cat extends \admin\ngrest\base\Model
     {
         return [
             'restcreate' => ['name', 'rewrite', 'default_nav_id'],
-            'restupdate' => ['name', 'rewrite', 'default_nav_id']
+            'restupdate' => ['name', 'rewrite', 'default_nav_id'],
         ];
     }
-    
+
     public static function getDefault()
     {
         return self::find()->where(['is_default' => 1])->one();

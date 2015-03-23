@@ -5,6 +5,7 @@ namespace luya\components;
  * dynamic implemention of __set and __get but what does Component already?
  *
  * @todo changed to \yii::$app->luya->collection instead of \yii::$app->collection
+ *
  * @author nadar
  */
 class Collection extends \yii\base\Component

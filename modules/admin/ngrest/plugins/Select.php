@@ -4,18 +4,18 @@ namespace admin\ngrest\plugins;
 use admin\ngrest\PluginAbstract;
 
 /**
- * create a select dropdown box with option list:
- * 
+ * create a select dropdown box with option list:.
+ *
  * Thee following propertys are provided:
  * - select(['array' => [ 'key' => 'label', 'key2' => 'label2' ]]);
  * - select(['model' => ['class' => '\path\to\model\class', 'value' => 'ValueFieldKeyName', 'label' => 'LabelFieldKeyName']]);
- * 
+ *
  * @author nadar
  */
 class Select extends PluginAbstract
 {
     use \admin\ngrest\PluginTrait;
-    
+
     private $_values = [];
 
     public function init()
@@ -28,7 +28,7 @@ class Select extends PluginAbstract
                 ];
             }
         }
-        
+
         if (($modelClass = $this->getOption('model')) !== false) {
             $className = $modelClass['class'];
             foreach ($className::find()->all() as $item) {

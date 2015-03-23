@@ -141,7 +141,7 @@
             <div class=" cms__page-settings dropdown " ng-show="settings">
                 <div class=" dropdown__content ">
                     <form class="form form--invert" role="form">
-                    
+
                         <div class="form__item form__inputgroup">
                             <label class="form__label" for="sitename">Seitenname:</label>
                             <input class="form__input" type="text" ng-model="copy.title" />

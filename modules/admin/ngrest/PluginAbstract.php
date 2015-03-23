@@ -27,7 +27,7 @@ abstract class PluginAbstract
     {
         return (isset($this->options[$key])) ? true : false;
     }
-    
+
     public function getOption($key)
     {
         return (isset($this->options[$key])) ? $this->options[$key] : false;
@@ -39,7 +39,7 @@ abstract class PluginAbstract
             $this->options[$key] = $value;
         }
     }
-    
+
     public function setOption($key, $value)
     {
         if (!$this->getOption($key)) {

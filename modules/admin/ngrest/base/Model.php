@@ -11,9 +11,9 @@ abstract class Model extends \yii\db\ActiveRecord
     public $i18n = [];
 
     public $i18nExpandFields = false;
-    
+
     public $extraFields = [];
-    
+
     abstract public function ngRestConfig($config);
 
     public function init()
@@ -28,25 +28,24 @@ abstract class Model extends \yii\db\ActiveRecord
             $this->i18nExpandFields = \yii::$app->request->get('ngrestExpandI18n', false);
         }
     }
-    
+
     /**
-     *
      * @param unknown_type $value
-     * @param unknown_type $viaTableName news_article_tag
-     * @param unknown_type $localTableId article_id
+     * @param unknown_type $viaTableName   news_article_tag
+     * @param unknown_type $localTableId   article_id
      * @param unknown_type $foreignTableId tag_id
      */
     protected function proccess($value, $viaTableName, $localTableId, $foreignTableId)
     {
         throw new \Exception("use setReleation() method instead of proccess() method!");
     }
-    
+
     /**
-     *
-     * @param string $value The valued which is provided from the setter method
-     * @param string $viaTableName Example viaTable name: news_article_tag
-     * @param string $localTableId The name of the field inside the viaTable which represents the match against the local table, example: article_id
+     * @param string $value          The valued which is provided from the setter method
+     * @param string $viaTableName   Example viaTable name: news_article_tag
+     * @param string $localTableId   The name of the field inside the viaTable which represents the match against the local table, example: article_id
      * @param string $foreignTableId The name of the field inside the viaTable which represents the match against the foreign table, example: tag_id
+     *
      * @return boolean
      */
     public function setReleation($value, $viaTableName, $localTableId, $foreignTableId)
@@ -57,21 +56,21 @@ abstract class Model extends \yii\db\ActiveRecord
             $batch[] = [$this->id, $v['id']];
         }
         $insert = \yii::$app->db->createCommand()->batchInsert($viaTableName, [$localTableId, $foreignTableId], $batch)->execute();
-        
+
         // @todo check if an error happends wile the delete and/or update proccess.
         return true;
     }
-    
+
     /**
      * can be overwritte in the model class or could be directly defined as property $extraFields.
-     * 
+     *
      * @return array Array containing extrafields, where value is the extraField name.
      */
     public function extraFields()
     {
         return $this->extraFields;
     }
-    
+
     /**
      * @TODO ATTENTION THIS IS NOT SECURE TO HIDE SENSITIVE DATA, TO HIDE SENSTIVIE DATA YOU ALWAYS HAVE TO OVERWRITE find()
      */
@@ -79,7 +78,7 @@ abstract class Model extends \yii\db\ActiveRecord
     {
         return static::find();
     }
-    
+
     public function i18nAfterFind()
     {
         foreach ($this->getI18n() as $field) {
@@ -88,18 +87,18 @@ abstract class Model extends \yii\db\ActiveRecord
             if (!is_array($values)) {
                 $values = (array) $values;
             }
-            
+
             $langs = \admin\models\Lang::find()->all();
-            
+
             foreach ($langs as $lang) {
                 if (!array_key_exists($lang->short_code, $values)) {
                     $values[$lang->short_code] = '';
                 }
             }
-            
+
             if (!$this->i18nExpandFields) {
                 $langShortCode = \admin\models\Lang::getDefault()->short_code;
-                
+
                 // @todo first get data from collection, if not found get data from lang default
                 if (array_key_exists($langShortCode, $values)) {
                     $values = $values[$langShortCode];
@@ -107,7 +106,7 @@ abstract class Model extends \yii\db\ActiveRecord
                     $values = '';
                 }
             }
-            
+
             $this->$field = $values;
         }
     }
@@ -118,7 +117,7 @@ abstract class Model extends \yii\db\ActiveRecord
             $this->$field = json_encode($this->$field);
         }
     }
-    
+
     public function getI18n()
     {
         return $this->i18n;
@@ -129,6 +128,7 @@ abstract class Model extends \yii\db\ActiveRecord
         if ($this->ngRestEndpoint === null) {
             throw new \yii\base\InvalidConfigException('The "ngRestEndpoint" property must be set.');
         }
+
         return $this->ngRestEndpoint;
     }
 

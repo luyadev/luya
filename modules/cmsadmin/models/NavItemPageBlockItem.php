@@ -2,16 +2,16 @@
 namespace cmsadmin\models;
 
 /**
- * sort_index numbers always starts from 0 and not from 1, like a default array behaviour. If a 
+ * sort_index numbers always starts from 0 and not from 1, like a default array behaviour. If a
  * negative sort_index is provided its always the last sort_index item (reason: we dont know the sort key of
  * the "at the end" dropparea).
- * 
+ *
  * @author nadar
  */
 class NavItemPageBlockItem extends \yii\db\ActiveRecord
 {
     private $_olds = [];
-    
+
     public static function tableName()
     {
         return 'cms_nav_item_page_block_item';
@@ -23,17 +23,17 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         $this->on(self::EVENT_AFTER_INSERT, [$this, 'eventAfterInsert']);
         $this->on(self::EVENT_AFTER_UPDATE, [$this, 'eventAfterUpdate']);
     }
-    
+
     public function rules()
     {
         return [
             [['sort_index'], 'resortIndex', 'on' => ['restcreate']],
             [['sort_index'], 'resortIndex', 'on' => ['restupdate']],
-        ];   
+        ];
     }
-    
+
     /**
-     * resort the sort_index numbers for all items on the same: naav_item_page_id and prev_id and placholder_var
+     * resort the sort_index numbers for all items on the same: naav_item_page_id and prev_id and placholder_var.
      */
     public function resortIndex()
     {
@@ -50,15 +50,14 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
             }
         } else { // its not a negative value, we have to find the positions after the current sort index and update to a higher level
             $higher = self::find()->where("sort_index >= :index", ['index' => $this->sort_index])->andWhere(['nav_item_page_id' => $this->nav_item_page_id, 'placeholder_var' => $this->placeholder_var, 'prev_id' => $this->prev_id])->all();
-           
-            foreach($higher as $item) {
+
+            foreach ($higher as $item) {
                 $newSortIndex = $item->sort_index + 1;
                 \yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $newSortIndex], ['id' => $item->id])->execute();
             }
-            
         }
     }
-    
+
     public function eventAfterUpdate()
     {
         $oldPlaceholderVar = $this->_olds['placeholder_var'];
@@ -68,12 +67,12 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         }
         $this->reindex($this->nav_item_page_id, $this->placeholder_var, $this->prev_id);
     }
-    
+
     public function eventAfterInsert()
     {
         $this->reindex($this->nav_item_page_id, $this->placeholder_var, $this->prev_id);
     }
-    
+
     private function reindex($navItemPageId, $placeholderVar, $prevId)
     {
         $index = 0;
@@ -83,12 +82,12 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
             $index++;
         }
     }
-    
+
     public static function find()
     {
         return parent::find()->orderBy('sort_index ASC');
     }
-    
+
     public function scenarios()
     {
         return [

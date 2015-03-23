@@ -16,7 +16,7 @@ class m141104_114809_admin_user extends Migration
             "password" => Schema::TYPE_STRING,
             "password_salt" => Schema::TYPE_STRING,
             "auth_token" => Schema::TYPE_STRING,
-            "is_deleted" => Schema::TYPE_SMALLINT
+            "is_deleted" => Schema::TYPE_SMALLINT,
         ]);
 
         $salt = \Yii::$app->getSecurity()->generateRandomString();
@@ -28,7 +28,7 @@ class m141104_114809_admin_user extends Migration
             "email" => "info@zephir.ch",
             "password" => $password,
             "password_salt" => $salt,
-            "is_deleted" => 0
+            "is_deleted" => 0,
         ]);
     }
 

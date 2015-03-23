@@ -11,15 +11,15 @@ class m150205_141350_block_group extends Migration
             "id" => "pk",
             "name" => Schema::TYPE_STRING,
         ]);
-        
+
         $this->insert("cms_block_group", [
             "id" => 1,
-            "name" => "Text Abschnitte"
+            "name" => "Text Abschnitte",
         ]);
-        
+
         $this->insert("cms_block_group", [
             "id" => 2,
-            "name" => "Desgin Elemente"
+            "name" => "Desgin Elemente",
         ]);
     }
 

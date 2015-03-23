@@ -7,7 +7,7 @@ class StorageFile extends \yii\db\ActiveRecord
     {
         return 'admin_storage_file';
     }
-    
+
     public function rules()
     {
         return [

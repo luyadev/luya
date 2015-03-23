@@ -2,12 +2,11 @@
 namespace luya\base;
 
 use yii;
-use yii\helpers\ArrayHelper;
 
 /**
- * create basic bootstraping which is allowed for console and web components
- * @author nadar
+ * create basic bootstraping which is allowed for console and web components.
  *
+ * @author nadar
  */
 abstract class Bootstrap implements \yii\base\BootstrapInterface
 {
@@ -20,7 +19,7 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
         $this->configLuyaComponents();
         $this->run($app);
     }
-    
+
     private function configLuyaComponents()
     {
         foreach ($this->getModules() as $item) {
@@ -32,17 +31,17 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
             }
         }
     }
-    
+
     protected function getModule($key)
     {
         return (array_key_exists($key, $this->_modules)) ? $this->_modules[$key] : false;
     }
-    
+
     protected function getModules()
     {
         return $this->_modules;
     }
-    
+
     private function expand($modules)
     {
         foreach ($modules as $id => $class) {
@@ -67,11 +66,10 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
 
         return false;
     }
-    
+
     public function beforeRun()
     {
-        
     }
-    
+
     abstract public function run($app);
 }

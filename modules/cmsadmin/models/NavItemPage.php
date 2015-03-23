@@ -13,7 +13,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
     public function rules()
     {
         return [
-            [['layout_id'], 'required']
+            [['layout_id'], 'required'],
         ];
     }
 
@@ -49,7 +49,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
             $twig = new \Twig_Environment($loader, ['autoescape' => false]);
 
             $blockObject = \cmsadmin\models\Block::objectId($placeholder['block_id']);
-            
+
             $configValues = json_decode($placeholder['json_config_values'], true);
 
             if (empty($configValues)) {
@@ -67,7 +67,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
             }
             $string .= $twig->render($blockObject->getTwigFrontend(), [
                 'vars' => $configValues,
-                'placeholders' => $insertedHolders
+                'placeholders' => $insertedHolders,
             ]);
         }
 

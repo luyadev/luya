@@ -24,7 +24,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
         </h3>
 
         <div class="toolbar__items">
-            <?php if(!empty($crud->getFields('create'))): ?>
+            <?php if (!empty($crud->getFields('create'))): ?>
             <div class="toolbar__item">
                 <button class="button button--green" role="button" ng-click="toggleCreate()">
                     <span class="button__text fa fa-plus-circle"> Hinzufügen</span>
@@ -32,7 +32,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
             </div>
             <?php endif; ?>
 
-            <!-- 
+            <!--
             <div class="toolbar__item">
                 <a class="toolbar__link" role="link">
                     <button class="button button--green" role="button">
@@ -86,10 +86,10 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
                         <?php endforeach; ?>
                         <?php if (!empty($crud->getButtons())): ?>
                         <td class="table__column table__column--actions">
-                            <?php foreach($crud->getButtons() as $item): ?>
+                            <?php foreach ($crud->getButtons() as $item): ?>
                             <button class="button button--yellow" ng-click="<?= $item['ngClick']; ?>">
-                                <span class="<? if(empty($item['label'])): ?>button__icon<?else:?>button__text<?endif;?> <?=$item['icon']; ?>"><?=$item['label']; ?></span>
-                            </button> 
+                                <span class="<?php if (empty($item['label'])): ?>button__icon<?else:?>button__text<?endif;?> <?=$item['icon']; ?>"><?=$item['label']; ?></span>
+                            </button>
                             <?php endforeach; ?>
 
                             <!--<a href="delete-overlay.html" class="button button--red"><span class="button__icon fa fa-fw fa-trash"></span></a>-->

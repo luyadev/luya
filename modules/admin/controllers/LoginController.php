@@ -14,7 +14,7 @@ class LoginController extends \admin\base\Controller
                 'allow' => true,
                 'actions' => ['index'],
                 'roles' => ['?', '@'],
-            ]
+            ],
         ];
     }
 

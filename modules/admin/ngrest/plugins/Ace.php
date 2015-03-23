@@ -3,8 +3,8 @@ namespace admin\ngrest\plugins;
 
 /**
  * @todo Put the __construct and getOption methods into the PluginAbstract method and leave the options array with default values in private $options = []
- * @author nadar
  *
+ * @author nadar
  */
 class Ace extends \admin\ngrest\PluginAbstract
 {

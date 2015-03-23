@@ -11,7 +11,7 @@ class NavItemModule extends \cmsadmin\base\NavItemType
     public function rules()
     {
         return [
-            [['module_name'], 'required']
+            [['module_name'], 'required'],
         ];
     }
 
@@ -37,6 +37,7 @@ class NavItemModule extends \cmsadmin\base\NavItemType
     /**
      * @todo: see if $pathAfterRoute could be available in the urlRules, otherwise display default
      * (non-PHPdoc)
+     *
      * @see cmsadmin\base.NavItemType::getContent()
      */
     public function getContent()

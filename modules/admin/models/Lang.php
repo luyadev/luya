@@ -31,7 +31,7 @@ class Lang extends \admin\ngrest\base\Model
     public function rules()
     {
         return [
-            [['name', 'short_code'], 'required']
+            [['name', 'short_code'], 'required'],
         ];
     }
 
@@ -39,7 +39,7 @@ class Lang extends \admin\ngrest\base\Model
     {
         return [
             'restcreate' => ['name', 'short_code'],
-            'restupdate' => ['name', 'short_code']
+            'restupdate' => ['name', 'short_code'],
         ];
     }
 

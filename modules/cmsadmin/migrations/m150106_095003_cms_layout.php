@@ -11,7 +11,7 @@ class m150106_095003_cms_layout extends Migration
             "id" => "pk",
             "name" => Schema::TYPE_STRING,
             "json_config" => Schema::TYPE_TEXT,
-            "view_file" => Schema::TYPE_STRING
+            "view_file" => Schema::TYPE_STRING,
         ]);
     }
 

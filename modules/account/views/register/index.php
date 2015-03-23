@@ -1,10 +1,10 @@
-<? if(!empty($errors)): ?>
+<?php if (!empty($errors)): ?>
     <ul>
-    <? foreach($errors as $field => $msgs): ?>
+    <?php foreach ($errors as $field => $msgs): ?>
         <li><?= $field; ?>: <?php print_r($msgs); ?></li>
-    <? endforeach; ?>
+    <?php endforeach; ?>
     </ul>
-<? endif; ?>
+<?php endif; ?>
 <form method="post">
     Vorname: <input type="text" name="Register[firstname]" /><br />
     Nachname: <input type="text" name="Register[lastname]" /><br />

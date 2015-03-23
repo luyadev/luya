@@ -11,7 +11,7 @@ class m150304_152220_admin_storage_folder extends Migration
             "id" => "pk",
             "name" => Schema::TYPE_STRING,
             "parent_id" => Schema::TYPE_INTEGER,
-            "timestamp_create" => Schema::TYPE_INTEGER
+            "timestamp_create" => Schema::TYPE_INTEGER,
         ]);
     }
 
@@ -21,13 +21,13 @@ class m150304_152220_admin_storage_folder extends Migration
 
         return false;
     }
-    
+
     /*
     // Use safeUp/safeDown to run migration code within a transaction
     public function safeUp()
     {
     }
-    
+
     public function safeDown()
     {
     }

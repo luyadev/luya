@@ -12,7 +12,7 @@ class m141203_143059_cms_nav extends Migration
             "cat_id" => Schema::TYPE_INTEGER,
             "parent_nav_id" => Schema::TYPE_INTEGER,
             "sort_index" => Schema::TYPE_INTEGER,
-            "is_deleted" => Schema::TYPE_SMALLINT
+            "is_deleted" => Schema::TYPE_SMALLINT,
         ]);
     }
 

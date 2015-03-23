@@ -2,7 +2,7 @@
 namespace cmsadmin\models;
 
 /**
- * Each creation of a navigation block requires the nav_item_type_id which need to be created first with NavItemType Model
+ * Each creation of a navigation block requires the nav_item_type_id which need to be created first with NavItemType Model.
  *
  * @author nadar
  */
@@ -42,7 +42,7 @@ class NavItem extends \yii\db\ActiveRecord
             'meta' => ['title', 'rewrite'],
         ];
     }
-    
+
     public function getType()
     {
         switch ($this->nav_item_type) {

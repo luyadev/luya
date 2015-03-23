@@ -46,6 +46,7 @@ class StorageEffect extends \admin\ngrest\base\Model
         $config->list->field("imagine_name", "imagine_name")->text()->required();
         $config->list->field("imagine_json_params", "imagine_json_params")->ace();
         $config->list->field("id", "ID")->text();
+
         return $config;
     }
 }

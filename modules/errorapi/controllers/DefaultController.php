@@ -7,9 +7,10 @@ class DefaultController extends \luya\rest\Controller
     {
         return false;
     }
-    
+
     /**
      * @param $_POST['error_json']
+     *
      * @return string
      */
     public function actionCreate()
@@ -22,12 +23,11 @@ class DefaultController extends \luya\rest\Controller
             return $model->getErrors();
         }
     }
-    
+
     /**
      * @todo see if the error request have changed based on a bug system.
      */
     public function actionResolve()
     {
-        
     }
 }

@@ -16,7 +16,7 @@ class Param
     {
         return (isset(yii::$app->params[$param])) ? yii::$app->params[$param] : $default;
     }
-    
+
     /**
      * Set new yii parameter.
      *

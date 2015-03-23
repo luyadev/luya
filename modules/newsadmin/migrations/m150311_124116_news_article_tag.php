@@ -10,7 +10,7 @@ class m150311_124116_news_article_tag extends Migration
         $this->createTable("news_article_tag", [
             "id" => "pk",
             "article_id" => Schema::TYPE_INTEGER,
-            "tag_id" => Schema::TYPE_INTEGER,     
+            "tag_id" => Schema::TYPE_INTEGER,
         ]);
     }
 
@@ -20,13 +20,13 @@ class m150311_124116_news_article_tag extends Migration
 
         return false;
     }
-    
+
     /*
     // Use safeUp/safeDown to run migration code within a transaction
     public function safeUp()
     {
     }
-    
+
     public function safeDown()
     {
     }

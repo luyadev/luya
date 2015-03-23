@@ -25,7 +25,7 @@ class Layout extends \admin\ngrest\base\Model
     public function rules()
     {
         return [
-            [["name", "json_config", "view_file"], "required"]
+            [["name", "json_config", "view_file"], "required"],
         ];
     }
 
@@ -33,7 +33,7 @@ class Layout extends \admin\ngrest\base\Model
     {
         return [
             'restcreate' => ['name', 'json_config', 'view_file'],
-            'restupdate' => ['name', 'json_config', 'view_file']
+            'restupdate' => ['name', 'json_config', 'view_file'],
         ];
     }
 

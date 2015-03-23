@@ -3,8 +3,8 @@ namespace admin\ngrest\plugins;
 
 /**
  * @todo check if the plugin is opened by an extraField, cause its not working on casual fields
- * @author nadar
  *
+ * @author nadar
  */
 class CheckboxReleation extends \admin\ngrest\PluginAbstract
 {
@@ -18,18 +18,18 @@ class CheckboxReleation extends \admin\ngrest\PluginAbstract
     {
         $className = $this->getOption('model');
         $data = $className::find()->all();
-        
+
         foreach ($data as $item) {
             $newItem = $item->toArray();
             //$newItem['label'] = $newItem['title'];
             $newItem['label'] = $newItem[$this->getOption('labelField')];
             $x[] = $newItem;
         }
-        
+
         $options = [
-            "items" => $x
+            "items" => $x,
         ];
-        
+
         $elmn = $doc->createElement("zaa-input-checkbox", "");
         $elmn->setAttribute("id", $this->id);
         $elmn->setIdAttribute("id", true);

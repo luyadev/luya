@@ -1,10 +1,8 @@
 <?php
 namespace admin\ngrest;
 
-use yii\helpers\ArrayHelper;
 
 /**
- *
  * ['list' => [
  *         'firstname' => [
  *             'name' => 'firstname',
@@ -15,10 +13,9 @@ use yii\helpers\ArrayHelper;
  *             ]
  *         ]
  *     ]
- * ]
+ * ].
  *
  * @author nadar
- *
  */
 class Config implements ConfigInterface
 {
@@ -31,7 +28,7 @@ class Config implements ConfigInterface
     private $options = [];
 
     public $i18n = [];
-    
+
     public $extraFields = [];
 
     private $restUrlPrefix = 'admin/'; /* could be: http://www.yourdomain.com/admin/; */
@@ -64,6 +61,7 @@ class Config implements ConfigInterface
         }
         $this->$key = [];
         $this->pointer['key'] = $key;
+
         return $this;
     }
 
@@ -77,7 +75,8 @@ class Config implements ConfigInterface
     }
 
     /**
-     * testing purpose
+     * testing purpose.
+     *
      * @param array $fields
      */
     public function i18n(array $fields)
@@ -88,24 +87,24 @@ class Config implements ConfigInterface
     public function field($name, $alias)
     {
         $this->config[$this->pointer['key']][$name] = [
-            'name' => $name, 'alias' => $alias, 'plugins' => [], 'i18n' => false, "extraField" => false
+            'name' => $name, 'alias' => $alias, 'plugins' => [], 'i18n' => false, "extraField" => false,
         ];
         $this->pointer['field'] = $name;
 
         return $this;
     }
-    
+
     public function extraField($name, $alias)
     {
         if (!$this->extraFieldExists($name)) {
             throw new \Exception("If you set extraFields, you have to define them first as a property inside your AR model.");
         }
-        
+
         $this->config[$this->pointer['key']][$name] = [
-            'name' => $name, 'alias' => $alias, 'plugins' => [], 'i18n' => false, "extraField" => true
+            'name' => $name, 'alias' => $alias, 'plugins' => [], 'i18n' => false, "extraField" => true,
         ];
         $this->pointer['field'] = $name;
-        
+
         return $this;
     }
 
@@ -193,15 +192,15 @@ class Config implements ConfigInterface
         if (in_array($name, $this->extraFields)) {
             return true;
         }
-        
+
         return false;
     }
-    
+
     public function setExtraFields(array $extraFields)
     {
         $this->extraFields = $extraFields;
     }
-    
+
     public function onFinish()
     {
         foreach ($this->i18n as $fieldName) {

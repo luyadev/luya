@@ -4,7 +4,7 @@ $config = [
     //'controllerNamespace' => 'commands',
     'controllerMap' => [
         'presql' => '\luya\commands\PresqlController',
-        'exec' => '\luya\commands\ExecutableController'
+        'exec' => '\luya\commands\ExecutableController',
     ],
     'components' => [
         'collection' => 'luya\components\Collection',

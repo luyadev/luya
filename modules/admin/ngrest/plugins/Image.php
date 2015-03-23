@@ -3,8 +3,8 @@ namespace admin\ngrest\plugins;
 
 /**
  * @todo Put the __construct and getOption methods into the PluginAbstract method and leave the options array with default values in private $options = []
- * @author nadar
  *
+ * @author nadar
  */
 class Image extends \admin\ngrest\PluginAbstract
 {
@@ -12,10 +12,10 @@ class Image extends \admin\ngrest\PluginAbstract
     {
         $elmn = $doc->createElement("span", "{{item.".$this->name."}}");
         $doc->appendChild($elmn);
-    
+
         return $doc;
     }
-    
+
     public function renderCreate($doc)
     {
         $elmn = $doc->createElement("zaa-image-upload");

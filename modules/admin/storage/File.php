@@ -3,57 +3,56 @@ namespace admin\storage;
 
 class File
 {
-    
-
     public $error = null;
-    
 
-    
     public function getFileInfo($sourceFile)
     {
         $path = pathinfo($sourceFile);
-        
+
         return (object) [
             'extension' => $path['extension'],
             'name' => $path['filename'],
         ];
     }
-    
+
     public function getMimeType($sourceFile)
     {
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $mime = finfo_file($finfo, $sourceFile);
         finfo_close($finfo);
+
         return $mime;
     }
-    
+
     public function getFileHash($sourceFile)
     {
-        return hash_file('md5', $sourceFile);   
+        return hash_file('md5', $sourceFile);
     }
-    
+
     /**
      * Warning
      * Because PHP's integer type is signed many crc32 checksums will result in negative integers on 32bit platforms. On 64bit installations all crc32() results will be positive integers though.
      * So you need to use the "%u" formatter of sprintf() or printf() to get the string representation of the unsigned crc32() checksum in decimal format.
+     *
      * @var string
      */
     public function getNameHash($fileName)
     {
         return sprintf("%s", hash('crc32b', uniqid($fileName, true)));
     }
-    
+
     public function setError($message)
     {
         $this->error = $message;
+
         return true;
     }
-    
+
     public function getError()
     {
         return $this->error;
     }
-    
+
     public function create($sourceFile, $newFileName, $hidden = false)
     {
         if (empty($sourceFile) || empty($newFileName)) {
@@ -65,8 +64,8 @@ class File
         $fileHashName = $this->getNameHash($newFileName);
         $fileHash = $this->getFileHash($sourceFile);
         $mimeType = $this->getMimeType($sourceFile);
-        $fileName = implode([$baseName . "_" . $fileHashName, $fileInfo->extension], ".");
-        $savePath = \yii::$app->luya->storage->dir . $fileName;
+        $fileName = implode([$baseName."_".$fileHashName, $fileInfo->extension], ".");
+        $savePath = \yii::$app->luya->storage->dir.$fileName;
         if (is_uploaded_file($sourceFile)) {
             if (move_uploaded_file($sourceFile, $savePath)) {
                 $copyFile = true;
@@ -74,13 +73,13 @@ class File
                 $this->setError("error while moving uploaded file from $sourceFile to $savePath");
             }
         } else {
-            if(copy($sourceFile, $savePath)) {
+            if (copy($sourceFile, $savePath)) {
                 $copyFile = true;
             } else {
                 $this->setError("error while copy file from $sourceFile to $savePath.");
             }
         }
-        
+
         if ($copyFile) {
             $model = new \admin\models\StorageFile();
             $model->setAttributes([
@@ -99,38 +98,37 @@ class File
                 }
             }
         }
-        
+
         return false;
     }
-    
+
     public function get($fileId)
     {
         $file = \admin\models\StorageFile::find()->where(['id' => $fileId])->one();
-        
+
         return [
             "file_id" => $file->id,
-            "source_http" => \yii::$app->luya->storage->httpDir . $file->name_new_compound,
-            "source" => \yii::$app->luya->storage->dir . $file->name_new_compound,
+            "source_http" => \yii::$app->luya->storage->httpDir.$file->name_new_compound,
+            "source" => \yii::$app->luya->storage->dir.$file->name_new_compound,
         ];
     }
-    
+
     public function getPath($fileId)
     {
         $file = \admin\models\StorageFile::find()->where(['id' => $fileId])->one();
         if ($file) {
-            return \yii::$app->luya->storage->dir . $file->name_new_compound;
+            return \yii::$app->luya->storage->dir.$file->name_new_compound;
         }
-        
+
         return false;
     }
-    
+
     public function getInfo($fileId)
     {
         return \admin\models\StorageFile::find()->where(['id' => $fileId])->one();
     }
-    
+
     public function moveFileToFolder($fileId, $folderId)
     {
-    
     }
 }

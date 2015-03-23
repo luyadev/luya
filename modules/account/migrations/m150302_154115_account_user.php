@@ -9,7 +9,7 @@ class m150302_154115_account_user extends Migration
     {
         $this->createTable('account_user', [
             "id" => "pk",
-            "firstname" => Schema::TYPE_TEXT,    
+            "firstname" => Schema::TYPE_TEXT,
             "lastname" => Schema::TYPE_TEXT,
             "email" => Schema::TYPE_TEXT,
             "password" => Schema::TYPE_STRING,
@@ -25,13 +25,13 @@ class m150302_154115_account_user extends Migration
 
         return false;
     }
-    
+
     /*
     // Use safeUp/safeDown to run migration code within a transaction
     public function safeUp()
     {
     }
-    
+
     public function safeDown()
     {
     }

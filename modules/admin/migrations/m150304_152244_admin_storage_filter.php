@@ -9,7 +9,7 @@ class m150304_152244_admin_storage_filter extends Migration
     {
         $this->createTable("admin_storage_filter", [
             "id" => "pk",
-            "name" => Schema::TYPE_STRING     
+            "name" => Schema::TYPE_STRING,
         ]);
     }
 
@@ -19,13 +19,13 @@ class m150304_152244_admin_storage_filter extends Migration
 
         return false;
     }
-    
+
     /*
     // Use safeUp/safeDown to run migration code within a transaction
     public function safeUp()
     {
     }
-    
+
     public function safeDown()
     {
     }

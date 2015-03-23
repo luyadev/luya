@@ -3,8 +3,8 @@ namespace cmsadmin\components;
 
 /**
  * @TODO deltete this class, use other class to load
- * @author nadar
  *
+ * @author nadar
  */
 class Menu
 {
@@ -20,7 +20,7 @@ class Menu
     {
         $this->cat = (new \yii\db\Query())->select(['id', 'default_nav_id'])->from("cms_cat")->where(['rewrite' => $catRewrite])->one();
     }
-    
+
     public function setCatById($catId)
     {
         $this->cat = (new \yii\db\Query())->select(['id', 'default_nav_id'])->from("cms_cat")->where(['id' => $catId])->one();
@@ -87,6 +87,7 @@ class Menu
      *     ]
      * ]
      * ```
+     *
      * @param integer $node parent_nav_id value
      */
     private function getFromParentNode($parentNavId)

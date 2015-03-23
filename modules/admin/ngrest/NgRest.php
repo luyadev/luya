@@ -4,7 +4,7 @@ namespace admin\ngrest;
 use yii;
 
 /**
- * create from new config
+ * create from new config.
  *
  * $config = new ngrest\Config();
  * $ngrest = new NgRest($config);

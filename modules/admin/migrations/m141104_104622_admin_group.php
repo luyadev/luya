@@ -10,7 +10,7 @@ class m141104_104622_admin_group extends Migration
         $this->createTable("admin_group", [
             "id" => "pk",
             "name" => Schema::TYPE_STRING.' NOT NULL',
-            "text" => Schema::TYPE_TEXT
+            "text" => Schema::TYPE_TEXT,
         ]);
     }
 

@@ -6,7 +6,7 @@
         <td>Effect-Name</td>
         <td>Effect Parameters</td>
     </tr>
-    <? foreach($data as $item): ?>
+    <?php foreach ($data as $item): ?>
         <tr>
             <td><?= $item->id; ?></td>
             <td><?= $item->effect_id; ?></td>
@@ -14,5 +14,5 @@
             <td><?= $item->effect->name; ?></td>
             <td><?= print_r($item->effect_json_values); ?></td>
         </tr>
-    <? endforeach; ?>
+    <?php endforeach; ?>
 </table>

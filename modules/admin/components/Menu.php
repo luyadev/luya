@@ -2,8 +2,7 @@
 namespace admin\components;
 
 /**
- *
- * following code:
+ * following code:.
  *
  * $menu = new Menu();
  * $node = $menu->createNode('admin', 'Administrator', 'fa-bullet');
@@ -44,7 +43,6 @@ namespace admin\components;
  *
  *
  * @author nadar
- *
  */
 class Menu
 {
@@ -78,7 +76,7 @@ class Menu
             'id' => $id,
             'alias' => $alias,
             'route' => $route,
-            'icon' => $icon
+            'icon' => $icon,
         ];
     }
 

@@ -23,13 +23,13 @@ class Links extends \luya\collection\Links implements \luya\collection\LinksInte
             $this->urls[$urlPrefix.$item['rewrite']] = [
                 'url' => $urlPrefix.$item['rewrite'],
                 'rewrite' => $item['rewrite'],
-                'id' => (int)$item['id'],
-                'parent_nav_id' => (int)$parentNavId,
-                'nav_item_id' => (int)$item['nav_item_id'],
+                'id' => (int) $item['id'],
+                'parent_nav_id' => (int) $parentNavId,
+                'nav_item_id' => (int) $item['nav_item_id'],
                 'title' => $item['title'],
                 'lang' => $item['lang_short_code'],
                 'cat' => $item['cat_rewrite'],
-                'depth' => (int)$depth,
+                'depth' => (int) $depth,
             ];
         }
     }

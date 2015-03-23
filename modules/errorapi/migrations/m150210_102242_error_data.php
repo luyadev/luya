@@ -10,7 +10,7 @@ class m150210_102242_error_data extends Migration
         $this->createTable('error_data', [
             "id" => "pk",
             "identifier" => Schema::TYPE_STRING,
-            "error_json" => Schema::TYPE_TEXT, 
+            "error_json" => Schema::TYPE_TEXT,
             "timestamp_create" => Schema::TYPE_INTEGER,
         ]);
     }

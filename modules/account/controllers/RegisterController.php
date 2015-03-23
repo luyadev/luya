@@ -10,10 +10,10 @@ class RegisterController extends \account\base\Controller
                 'allow' => true,
                 'actions' => ['index'],
                 'roles' => ['?'],
-            ]
+            ],
         ];
     }
-    
+
     public function actionIndex()
     {
         $model = new \account\models\User();
@@ -25,7 +25,7 @@ class RegisterController extends \account\base\Controller
                 $save = $model->save();
             }
         }
-        
+
         return $this->render('index', ['model' => $model, 'errors' => $model->getErrors(), 'save' => (isset($save)) ? $save : false ]);
     }
 }

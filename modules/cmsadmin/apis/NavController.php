@@ -2,61 +2,57 @@
 namespace cmsadmin\apis;
 
 /**
- * 
  * example.com/admin/api-cms-nav/create-page
  * example.com/admin/api-cms-nav/create-item-page
  * example.com/admin/api-cms-nav/create-module
- * example.com/admin/api-cms-nav/create-item-module
- * 
- * @author nadar
+ * example.com/admin/api-cms-nav/create-item-module.
  *
+ * @author nadar
  */
 class NavController extends \admin\base\RestController
 {
-    
     private function postArg($name)
     {
         return \yii::$app->request->post($name, null);
     }
-    
+
     /**
-     * creates a new nav entry for the type page (nav_id will be created
-     * 
-     * @param array $_POST: 
+     * creates a new nav entry for the type page (nav_id will be created.
+     *
+     * @param array $_POST:
      */
     public function actionCreatePage()
     {
         $model = new \cmsadmin\models\Nav();
-        $create = $model->createPage($this->postArg('parent_nav_id'), $this->postArg('cat_id'), $this->postArg('lang_id'), $this->postArg('title'),$this->postArg('rewrite'), $this->postArg('layout_id'));
-        
+        $create = $model->createPage($this->postArg('parent_nav_id'), $this->postArg('cat_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('rewrite'), $this->postArg('layout_id'));
+
         return $create;
     }
-    
+
     /**
-     * creates a new nav_item entry for the type page (it means nav_id will be delivered)
+     * creates a new nav_item entry for the type page (it means nav_id will be delivered).
      */
     public function actionCreatePageItem()
     {
         $model = new \cmsadmin\models\Nav();
-        $create = $model->createPageItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'),$this->postArg('rewrite'), $this->postArg('layout_id'));
-        
+        $create = $model->createPageItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('rewrite'), $this->postArg('layout_id'));
+
         return $create;
     }
-    
+
     public function actionCreateModule()
     {
         $model = new \cmsadmin\models\Nav();
-        $create = $model->createModule($this->postArg('parent_nav_id'), $this->postArg('cat_id'), $this->postArg('lang_id'), $this->postArg('title'),$this->postArg('rewrite'), $this->postArg('module_name'));
-        
+        $create = $model->createModule($this->postArg('parent_nav_id'), $this->postArg('cat_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('rewrite'), $this->postArg('module_name'));
+
         return $create;
     }
-    
+
     public function actionCreateModuleItem()
     {
         $model = new \cmsadmin\models\Nav();
-        $create = $model->createModuleItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'),$this->postArg('rewrite'), $this->postArg('module_name'));
-        
+        $create = $model->createModuleItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('rewrite'), $this->postArg('module_name'));
+
         return $create;
     }
-    
 }

@@ -26,11 +26,11 @@ class Module extends \admin\base\Module
         'admin\AssetAceUi',
         'admin\AssetAce',
     ];
-    
+
     public $storageFolder = '@webroot/storage';
-    
+
     public $storageFolderHttp = 'storage';
-    
+
     public function init()
     {
         foreach (\luya\helpers\Param::get('apis') as $item) {
@@ -64,21 +64,20 @@ class Module extends \admin\base\Module
         $this->menu->createGroup($node, 'Zugriff', [
             // insert group items
             $this->menu->createItem("user", "Benutzer", "admin-user-index", "fa-user"),
-            $this->menu->createItem("group", "Gruppen", "admin-group-index", "fa-users")
+            $this->menu->createItem("group", "Gruppen", "admin-group-index", "fa-users"),
         ]);
 
         $this->menu->createGroup($node, 'System', [
-            $this->menu->createItem("lang", "Sprachen", "admin-lang-index", "fa-language")
+            $this->menu->createItem("lang", "Sprachen", "admin-lang-index", "fa-language"),
         ]);
-        
+
         $this->menu->createGroup($node, 'Bilder', [
             $this->menu->createItem('effect', 'Effekte', 'admin-effect-index', 'fa-link'),
             $this->menu->createItem('filter', 'Filter', 'admin-filter-index', 'fa-filter'),
         ]);
-        
+
         return $this->menu->get();
     }
-
 
     public function getLuyaComponents()
     {

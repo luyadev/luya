@@ -10,10 +10,10 @@ class Controller extends \luya\base\PageController
                 'allow' => true,
                 'actions' => [], // apply to all actions by default
                 'roles' => ['@'],
-            ]
+            ],
         ];
     }
-    
+
     public function behaviors()
     {
         return [
@@ -21,7 +21,7 @@ class Controller extends \luya\base\PageController
                 'class' => \yii\filters\AccessControl::className(),
                 'user' => $this->module->getUserIdentity(),
                 'rules' => $this->getRules(),
-            ]
+            ],
         ];
     }
 }

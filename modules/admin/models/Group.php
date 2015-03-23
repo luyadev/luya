@@ -26,7 +26,7 @@ class Group extends \admin\ngrest\base\Model
         return [
                 [['name'], 'required'],
                 [['text'], 'string'],
-                [['name'], 'string', 'max' => 255]
+                [['name'], 'string', 'max' => 255],
         ];
     }
 
@@ -34,7 +34,7 @@ class Group extends \admin\ngrest\base\Model
     {
         return [
             'restcreate' => ['name', 'text'],
-            'restupdate' => ['name', 'text']
+            'restupdate' => ['name', 'text'],
         ];
     }
 
