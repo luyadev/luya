@@ -19,6 +19,9 @@ class BootstrapWeb extends \luya\base\Bootstrap
 
     private $_adminMenus = [];
 
+    /**
+     * @todo see if the api already exstis, api urls must be unique (otherwise the auth process will not work anymore)
+     */
     public function beforeRun()
     {
         foreach ($this->getModules() as $item) {
@@ -32,9 +35,9 @@ class BootstrapWeb extends \luya\base\Bootstrap
             if (($apis = $this->getReflectionPropertyValue($item['reflection'], 'apis')) !== false) {
                 foreach ($apis as $alias => $class) {
                     $this->_apis[] = [
-                    'moduleId' => $item['id'],
-                    'class' => $class,
-                    'alias' => $alias,
+                        'moduleId' => $item['id'],
+                        'class' => $class,
+                        'alias' => $alias,
                     ];
                 }
             }
