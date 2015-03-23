@@ -90,7 +90,7 @@ class Module extends \admin\base\Module
     public function getAuthApis()
     {
         return [
-            ['api' => 'api-admin-group', 'alias' => 'Gruppe'],
+            ['api' => 'api-admin-group', 'alias' => 'Gruppen'],
             ['api' => 'api-admin-user', 'alias' => 'Benutzer'],
             ['api' => 'api-admin-lang', 'alias' => 'Sprachen'],
             ['api' => 'api-admin-effect', 'alias' => 'Bild-Effekte'],

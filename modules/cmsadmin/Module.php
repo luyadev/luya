@@ -5,8 +5,8 @@ class Module extends \admin\base\Module
 {
     public static $apis = [
         'api-cms-admin' => 'cmsadmin\\apis\\AdminController',
+        'api-cms-navitemplageblockitem' => 'cmsadmin\\apis\\NavItemPageBlockItemController',
         'api-cms-defaults' => 'cmsadmin\apis\DefaultsController',
-        'api-cms-cat' => 'cmsadmin\apis\CatController',
         'api-cms-nav' => 'cmsadmin\apis\NavController',
         'api-cms-navitem' => 'cmsadmin\\apis\\NavItemController',
         'api-cms-menu' => 'cmsadmin\apis\MenuController', // should put into api-cms-admin
@@ -15,7 +15,8 @@ class Module extends \admin\base\Module
         'api-cms-layout' => 'cmsadmin\\apis\\LayoutController',
         'api-cms-block' => 'cmsadmin\\apis\\BlockController',
         'api-cms-blockgroup' => 'cmsadmin\\apis\\BlockgroupController',
-        'api-cms-navitemplageblockitem' => 'cmsadmin\\apis\\NavItemPageBlockItemController',
+        'api-cms-cat' => 'cmsadmin\apis\CatController',
+        
     ];
 
     public function getMenu()
@@ -39,4 +40,15 @@ class Module extends \admin\base\Module
     public $assets = [
         'cmsadmin\Asset',
     ];
+    
+    public function getAuthApis()
+    {
+        return [
+            ['api' => 'api-cms-cat', 'alias' => 'Kategorien/Navcontainer'],
+            ['api' => 'api-cms-layout', 'alias' => 'Layouts'],
+            ['api' => 'api-cms-blockgroup', 'alias' => 'Block Gruppen'],
+            ['api' => 'api-cms-block', 'alias' => 'Blöcke'],
+            ['api' => 'api-cms-navitemplageblockitem', 'alias' => 'Blöcke Einfügen und Verschiebe'],
+        ];
+    }
 }

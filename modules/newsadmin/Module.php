@@ -20,4 +20,12 @@ class Module extends \admin\base\Module
 
         return $this->menu->get();
     }
+    
+    public function getAuthApis()
+    {
+        return [
+            ['api' => 'api-news-article', 'alias' => 'Artikel'],
+            ['api' => 'api-news-tag', 'alias' => 'Tags'],
+        ];
+    }
 }
