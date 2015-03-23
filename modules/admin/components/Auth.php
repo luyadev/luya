@@ -68,18 +68,20 @@ class Auth extends \yii\base\Component
     {
     }
     
-    public function addApi($apiEndpoint, $name)
+    public function addApi($moduleName, $apiEndpoint, $name)
     {
         $handler = (new \yii\db\Query())->select('COUNT(*) AS count')->from('admin_auth')->where(['api' => $apiEndpoint])->one();
         if ($handler['count'] == 1) {
             echo "UPDATE";
             \yii::$app->db->createCommand()->update('admin_auth', [
-                "alias_name" => $name        
+                "alias_name" => $name,
+                "module_name" => $moduleName,
             ], ['api' => $apiEndpoint])->execute();
         } elseif ($handler['count'] == 0) {
             echo "INSERT";
             \yii::$app->db->createCommand()->insert('admin_auth', [
                 "alias_name" => $name,
+                "module_name" => $moduleName,
                 "is_crud" => 1,
                 "route" => 0,
                 "api" => $apiEndpoint

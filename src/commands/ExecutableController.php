@@ -65,7 +65,7 @@ class ExecutableController extends \yii\console\Controller
             $object = \yii::$app->getModule($id);
             if (method_exists($object, 'getAuthApis')) {
                 foreach ($object->getAuthApis() as $item) {
-                    \yii::$app->luya->auth->addApi($item['api'], $item['alias']);
+                    \yii::$app->luya->auth->addApi($object->id, $item['api'], $item['alias']);
                 }
             }
         }
