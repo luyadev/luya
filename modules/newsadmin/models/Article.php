@@ -30,7 +30,7 @@ class Article extends \admin\ngrest\base\Model
 
     public function setTags($value)
     {
-        $this->setReleation($value, "news_article_tag", "article_id", "tag_id");
+        $this->setRelation($value, "news_article_tag", "article_id", "tag_id");
     }
 
     public function getTags()

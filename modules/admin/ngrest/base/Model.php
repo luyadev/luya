@@ -37,7 +37,7 @@ abstract class Model extends \yii\db\ActiveRecord
      */
     protected function proccess($value, $viaTableName, $localTableId, $foreignTableId)
     {
-        throw new \Exception("use setReleation() method instead of proccess() method!");
+        throw new \Exception("use setRelation() method instead of proccess() method!");
     }
 
     /**
@@ -48,7 +48,7 @@ abstract class Model extends \yii\db\ActiveRecord
      *
      * @return boolean
      */
-    public function setReleation($value, $viaTableName, $localTableId, $foreignTableId)
+    public function setRelation($value, $viaTableName, $localTableId, $foreignTableId)
     {
         $delete = \yii::$app->db->createCommand()->delete($viaTableName, [$localTableId => $this->id ])->execute();
         $batch = [];
