@@ -73,9 +73,9 @@ class Bootstrap implements \yii\base\BootstrapInterface
             $this->_modules[$key]['isAdmin'] = ($item['reflection']->hasProperty('isAdmin')) ? true : false;
         }
         // set urlRoultes param
-        luya::setParams('urlRules', $this->_urlRules);
+        \luya\helpers\Params::set('urlRules', $this->_urlRules);
         // set params before boot
-        luya::setParams('apis', $this->_apis);
+        \luya\helpers\Params::set('apis', $this->_apis);
     }
 
     private function run($app)
@@ -102,7 +102,7 @@ class Bootstrap implements \yii\base\BootstrapInterface
         $app->getUrlManager()->addRules($this->_urlRules, false);
 
         // set the parameters to yii via luya::setParams
-        luya::setParams('adminAssets', $adminAssets);
-        luya::setParams('adminMenus', $adminMenus);
+        \luya\helpers\Params::set('adminAssets', $adminAssets);
+        \luya\helpers\Params::set('adminMenus', $adminMenus);
     }
 }

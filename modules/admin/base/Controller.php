@@ -19,7 +19,7 @@ class Controller extends \luya\base\Controller
         $this->adminUser = \yii::$app->getModule('admin')->getAdminUser();
 
         // get asset bundles which are defined in the module and register them into the view
-        foreach (\luya\Luya::getParams('adminAssets') as $class) {
+        foreach (\luya\helpers\params::get('adminAssets') as $class) {
             // autoload $class and register with current view
             $class::register($this->view);
         }

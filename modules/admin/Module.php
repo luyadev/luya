@@ -33,7 +33,7 @@ class Module extends \admin\base\Module
     
     public function init()
     {
-        foreach (luya::getParams('apis') as $item) {
+        foreach (\luya\helpers\params::get('apis') as $item) {
             $this->controllerMap[$item['alias']] = $item['class'];
         }
         parent::init();
