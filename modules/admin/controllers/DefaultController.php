@@ -8,6 +8,11 @@ class DefaultController extends \admin\base\Controller
         return $this->render("index");
     }
 
+    public function actionTest()
+    {
+        return 'hi';
+    }
+    
     public function actionDashboard()
     {
         return $this->renderPartial("dashboard.php");

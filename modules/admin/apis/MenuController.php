@@ -10,7 +10,7 @@ class MenuController extends \admin\base\RestVerbController
         $menu = array();
 
         $i = 1;
-        foreach (\luya\helpers\params::get('adminMenus') as $id => $item) {
+        foreach (\luya\helpers\Param::get('adminMenus') as $id => $item) {
             $x = $item;
             $x['id'] = $i;
 
@@ -27,7 +27,7 @@ class MenuController extends \admin\base\RestVerbController
         /* DUMB ASS CODE! */
         $menu = array();
         $i = 1;
-        foreach (\luya\helpers\params::get('adminMenus') as $item) {
+        foreach (\luya\helpers\Param::get('adminMenus') as $item) {
             $menu[$i] = $item;
             $i++;
         }

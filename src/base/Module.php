@@ -143,11 +143,11 @@ class Module extends \yii\base\Module
      *
      * ```
      * return [
-     *     'storage' => new \admin\componenets\Storage();
+     *     'storage' => new \admin\components\Storage();
      * ];
      * ```
      */
-    public function getLuyaConfig()
+    public function getLuyaComponents()
     {
         return [];
     }

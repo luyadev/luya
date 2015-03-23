@@ -29,4 +29,12 @@ class RestActiveController extends \yii\rest\ActiveController implements \luya\r
         
         return $actions;
     }
+    
+    public function checkAccess($action, $model = null, $params = [])
+    {
+        /*
+        $moduleName = $this->module->id;
+        $apiId = $this->id;
+        */
+    }
 }

@@ -5,6 +5,11 @@ use yii;
 use yii\helpers\ArrayHelper;
 use luya\Luya;
 
+/**
+ * @todo rename to WebBootstrap and inherite the base Bootstrap class and add the web specific bootstrap stuff (like url manager)
+ * @author nadar
+ *
+ */
 class Bootstrap implements \yii\base\BootstrapInterface
 {
     private $_modules = [];
@@ -73,9 +78,9 @@ class Bootstrap implements \yii\base\BootstrapInterface
             $this->_modules[$key]['isAdmin'] = ($item['reflection']->hasProperty('isAdmin')) ? true : false;
         }
         // set urlRoultes param
-        \luya\helpers\Params::set('urlRules', $this->_urlRules);
+        \luya\helpers\Param::set('urlRules', $this->_urlRules);
         // set params before boot
-        \luya\helpers\Params::set('apis', $this->_apis);
+        \luya\helpers\Param::set('apis', $this->_apis);
     }
 
     private function run($app)
@@ -85,8 +90,8 @@ class Bootstrap implements \yii\base\BootstrapInterface
         // start the module now
         foreach ($this->_modules as $item) {
             $module = yii::$app->getModule($item['id']);
-            if (method_exists($module, 'getLuyaConfig')) {
-                foreach ($module->getLuyaConfig() as $key => $value) {
+            if (method_exists($module, 'getLuyaComponents')) {
+                foreach ($module->getLuyaComponents() as $key => $value) {
                     \yii::$app->luya->$key = $value;
                 }
             }
@@ -102,7 +107,7 @@ class Bootstrap implements \yii\base\BootstrapInterface
         $app->getUrlManager()->addRules($this->_urlRules, false);
 
         // set the parameters to yii via luya::setParams
-        \luya\helpers\Params::set('adminAssets', $adminAssets);
-        \luya\helpers\Params::set('adminMenus', $adminMenus);
+        \luya\helpers\Param::set('adminAssets', $adminAssets);
+        \luya\helpers\Param::set('adminMenus', $adminMenus);
     }
 }

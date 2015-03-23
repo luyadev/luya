@@ -3,7 +3,7 @@ namespace luya\helpers;
 
 use Yii;
 
-class Params
+class Param
 {
     /**
      * Get yii parameter.

@@ -33,7 +33,7 @@ class Module extends \admin\base\Module
     
     public function init()
     {
-        foreach (\luya\helpers\params::get('apis') as $item) {
+        foreach (\luya\helpers\Param::get('apis') as $item) {
             $this->controllerMap[$item['alias']] = $item['class'];
         }
         parent::init();
@@ -80,10 +80,11 @@ class Module extends \admin\base\Module
     }
 
 
-    public function getLuyaConfig()
+    public function getLuyaComponents()
     {
         return [
             'storage' => new \admin\components\Storage(),
+            'auth' => new \admin\components\Auth(),
         ];
     }
 }
