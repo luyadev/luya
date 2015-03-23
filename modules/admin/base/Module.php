@@ -18,4 +18,14 @@ class Module extends \luya\base\Module
         parent::init();
         $this->menu = new \admin\components\Menu();
     }
+    
+    public function getAuthApis()
+    {
+        return [];
+    }
+    
+    public function getAuthRoutes()
+    {
+        return [];
+    }
 }

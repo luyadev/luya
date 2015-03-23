@@ -50,11 +50,24 @@ class ExecutableController extends \yii\console\Controller
 
     /**
      * find all auth.php files, invoke them and return to \yii::$app->luya->auth->addRule.
+     * 
+     * before: 
+     * ```
+     * foreach ($this->getFiles('auth.php') as $source) {
+     *     include($source);
+     * }
+     * ```
      */
     public function actionAuth()
     {
-        foreach ($this->getFiles('auth.php') as $source) {
-            include($source);
+        $modules = \yii::$app->getModules();
+        foreach ($modules as $id => $item) {
+            $object = \yii::$app->getModule($id);
+            if (method_exists($object, 'getAuthApis')) {
+                foreach ($object->getAuthApis() as $item) {
+                    \yii::$app->luya->auth->addApi($item['api'], $item['alias']);
+                }
+            }
         }
     }
 }

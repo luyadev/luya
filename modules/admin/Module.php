@@ -86,4 +86,15 @@ class Module extends \admin\base\Module
             'auth' => new \admin\components\Auth(),
         ];
     }
+    
+    public function getAuthApis()
+    {
+        return [
+            ['api' => 'api-admin-group', 'alias' => 'Gruppe'],
+            ['api' => 'api-admin-user', 'alias' => 'Benutzer'],
+            ['api' => 'api-admin-lang', 'alias' => 'Sprachen'],
+            ['api' => 'api-admin-effect', 'alias' => 'Bild-Effekte'],
+            ['api' => 'api-admin-filter', 'alias' => 'Bild-Fiter'],
+        ];
+    }
 }
