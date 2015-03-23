@@ -8,8 +8,11 @@ $config = [
     ],
     'components' => [
         'collection' => 'luya\components\Collection',
-        'luya' => 'luya\components\Luya',
-    ]
+        'luya' => 'luya\components\LuyaComponents',
+    ],
+    'bootstrap' => [
+        'luya\components\BootstrapCli',
+    ],
 ];
 
 return $config;

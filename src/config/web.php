@@ -19,7 +19,7 @@ $config = [
         'luya' => 'luya\components\LuyaComponents',
     ],
     'bootstrap' => [
-        'luya\components\Bootstrap',
+        'luya\components\BootstrapWeb',
     ],
 ];
 
