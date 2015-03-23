@@ -52,6 +52,11 @@ zaa.controller("CrudController", function($scope, $http, $sce, AdminService) {
 		})
 	}
 
+	$scope.toggleStrap = function()
+	{
+		$scope.toggler.strap = !$scope.toggler.strap;
+	}
+	
 	$scope.toggleUpdate = function (id, $event) {
 		$scope.toggler.update = !$scope.toggler.update;
 		$scope.data.updateId = id;

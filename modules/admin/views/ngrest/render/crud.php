@@ -202,6 +202,12 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
         <div class="overlay__wrapper">
             <div class="overlay__content" ng-show="toggler.strap">
                 <div class="overlay__body" ng-bind-html="data.strap.content"></div>
+                <div class="form__actions">
+                    <hr /> Strap Close Buttons
+                    <button class="button button--red" type="button" ng-click="toggleStrap()">
+                        <span class="button__icon fa fa-fw fa-times"></span>
+                    </button>
+               </div>
             </div>
         </div>
     </div>
