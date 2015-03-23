@@ -44,6 +44,8 @@ class Group extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
+        $config->strap->register(new \admin\straps\GroupAuth(), "Gruppen Berechtigungen");
+        
         $config->list->field("name", "Name")->text()->required();
         $config->list->field("text", "Beschreibung")->textarea();
         $config->list->field("id", "ID")->text();
