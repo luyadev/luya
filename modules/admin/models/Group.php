@@ -33,23 +33,36 @@ class Group extends \admin\ngrest\base\Model
     public function scenarios()
     {
         return [
-            'restcreate' => ['name', 'text'],
-            'restupdate' => ['name', 'text'],
+            'restcreate' => ['name', 'text', 'users'],
+            'restupdate' => ['name', 'text', 'users'],
         ];
     }
 
+    public $extraFields = ['users'];
+    
+    public function getUsers()
+    {
+        return $this->hasMany(\admin\models\User::className(), ['id' => 'user_id'])->viaTable("admin_user_group", ['group_id' => 'id']);
+    }
+    
+    public function setUsers($value)
+    {
+        $this->setRelation($value, "admin_user_group", "group_id", "user_id");
+    }
+    
     // ngrest
 
     public $ngRestEndpoint = 'api-admin-group';
 
     public function ngRestConfig($config)
     {
-        $config->strap->register(new \admin\straps\GroupAuth(), "Gruppen Berechtigungen");
-        
+        $config->strap->register(new \admin\straps\GroupAuth(), "Berechtigungen");
+
         $config->list->field("name", "Name")->text()->required();
         $config->list->field("text", "Beschreibung")->textarea();
         $config->list->field("id", "ID")->text();
-
+        $config->list->extraField("users", "Benutzer")->checkboxReleation(['model' => \admin\models\User::className(), 'labelField' => 'email']);
+        
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);
 
