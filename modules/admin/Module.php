@@ -7,13 +7,13 @@ class Module extends \admin\base\Module
 {
     public static $apis = [
         'api-admin-defaults' => 'admin\apis\DefaultsController',
-        'api-admin-user' => 'admin\apis\UserController',
-        'api-admin-menu' => 'admin\apis\MenuController',
-        'api-admin-group' => 'admin\apis\GroupController',
-        'api-admin-lang' => 'admin\apis\LangController',
         'api-admin-storage' => 'admin\apis\StorageController',
-        'api-admin-effect' => 'admin\apis\EffectController',
-        'api-admin-filter' => 'admin\apis\FilterController',
+        'api-admin-menu' => 'admin\apis\MenuController',
+        'api-admin-user' => 'admin\apis\UserController', // protected by auth()
+        'api-admin-group' => 'admin\apis\GroupController', // protected by auth()
+        'api-admin-lang' => 'admin\apis\LangController', // protected by auth()
+        'api-admin-effect' => 'admin\apis\EffectController', // protected by auth()
+        'api-admin-filter' => 'admin\apis\FilterController', // protected by auth()
     ];
 
     public static $urlRules = [

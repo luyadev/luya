@@ -53,7 +53,8 @@ class ExecutableController extends \yii\console\Controller
      */
     public function actionAuth()
     {
-        $f = $this->getFiles('auth.php');
-        var_dump($f);
+        foreach ($this->getFiles('auth.php') as $source) {
+            include($source);
+        }
     }
 }
