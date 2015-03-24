@@ -33,15 +33,20 @@ class MenuController extends \admin\base\RestController
                     continue;
                 }
             }
-            
+
             // this item does have groups
             if (isset($item['groups'])) {
+
+                $permissionGranted = false;
+
                 // see if the groups has items
                 foreach ($item['groups'] as $groupName => $groupItem) {
                     
                     if (count($groupItem['items'])  > 0) {
-                        
-                        $permissionGranted = false;
+
+                        if ($permissionGranted) {
+                            continue;
+                        }
                         
                         foreach($groupItem['items'] as $groupItemEntry) {
                             // a previous entry already has solved the question if the permission is granted
@@ -59,7 +64,7 @@ class MenuController extends \admin\base\RestController
                                     $permissionGranted = true;
                                 }
                             } else {
-                                throw new \Exception("Menu itrem detected without permission entry");
+                                throw new \Exception("Menu item detected without permission entry");
                             }
                         }
                     }
