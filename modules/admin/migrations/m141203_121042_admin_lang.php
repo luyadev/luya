@@ -13,12 +13,6 @@ class m141203_121042_admin_lang extends Migration
             "short_code" => Schema::TYPE_STRING,
             "is_default" => Schema::TYPE_SMALLINT,
         ]);
-
-        $this->insert("admin_lang", [
-            "name" => "Deutsch",
-            "short_code" => "de",
-            "is_default" => 1,
-        ]);
     }
 
     public function down()

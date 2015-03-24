@@ -18,18 +18,6 @@ class m141104_114809_admin_user extends Migration
             "auth_token" => Schema::TYPE_STRING,
             "is_deleted" => Schema::TYPE_SMALLINT,
         ]);
-
-        $salt = \Yii::$app->getSecurity()->generateRandomString();
-        $password = \Yii::$app->getSecurity()->generatePasswordHash("defaultPassword".$salt);
-
-        $this->insert("admin_user", [
-            "firstname" => "Zephir",
-            "lastname" => "Software Design AG",
-            "email" => "info@zephir.ch",
-            "password" => $password,
-            "password_salt" => $salt,
-            "is_deleted" => 0,
-        ]);
     }
 
     public function down()
