@@ -143,13 +143,10 @@ the newsadmin-news-index references to the yii MVC path for the controller defin
 ```php
 public function getMenu()
 {
-    $node = $this->menu->createNode('news', 'News', 'fa-ils');
-    $this->menu->createGroup($node, 'Verwalten', [
-    	...
-        $this->menu->createItem('news', "News Items", "newsadmin-news-index", "<FONTAWESOME_CLASS"),
-        ....
-    ]);
-
-    return $this->menu->get();
+return $this
+->node("News", "fa-wrench")
+    ->group("Verwalten")
+        ->itemApi("News Items", "newsadmin-news-index", "fa-ils", "api-news-news")
+->menu();
 }
 ```
