@@ -61,13 +61,13 @@ class Module extends \admin\base\Module
         ->node("Datei Manager", "fa-hdd-o", "admin-storage-index")
         ->node("Admin Einstellungen", "fa-gears")
             ->group("Zrugriff")
-                ->item("Benutzer", "admin-user-index", "fa-user")
-                ->item("Gruppen", "admin-group-index", "fa-users")
+                ->itemApi("Benutzer", "admin-user-index", "fa-user", "api-admin-user")
+                ->itemApi("Gruppen", "admin-group-index", "fa-users", "api-admin-group")
             ->group("System")
-                ->item("Sprachen", "admin-lang-index", "fa-language")
+                ->itemApi("Sprachen", "admin-lang-index", "fa-language", "api-admin-lang")
             ->group("Bilder")
-                ->item("Effekte", "admin-effect-index", "fa-link")
-                ->item("Filter", "admin-filter-index", "fa-filter")
+                ->itemApi("Effekte", "admin-effect-index", "fa-link", "api-admin-effect")
+                ->itemApi("Filter", "admin-filter-index", "fa-filter", "api-admin-filter")
         ->menu();
     }
     /*
@@ -101,17 +101,6 @@ class Module extends \admin\base\Module
         return [
             'storage' => new \admin\components\Storage(),
             'auth' => new \admin\components\Auth(),
-        ];
-    }
-    
-    public function getAuthApis()
-    {
-        return [
-            ['api' => 'api-admin-group', 'alias' => 'Gruppen'],
-            ['api' => 'api-admin-user', 'alias' => 'Benutzer'],
-            ['api' => 'api-admin-lang', 'alias' => 'Sprachen'],
-            ['api' => 'api-admin-effect', 'alias' => 'Bild-Effekte'],
-            ['api' => 'api-admin-filter', 'alias' => 'Bild-Fiter'],
         ];
     }
 }

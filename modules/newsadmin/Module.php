@@ -13,8 +13,8 @@ class Module extends \admin\base\Module
         return $this
         ->node("News", "fa-newspaper-o")
             ->group("Daten")
-                ->item("Artikel", "newsadmin-article-index", "fa-newspaper-o")
-                ->item("Tags", "newsadmin-tag-index", "fa-tags")
+                ->itemApi("Artikel", "newsadmin-article-index", "fa-newspaper-o", "api-news-article")
+                ->itemApi("Tags", "newsadmin-tag-index", "fa-tags", "api-news-tag")
         ->menu();
     }
     
@@ -33,11 +33,4 @@ class Module extends \admin\base\Module
     }
     */
     
-    public function getAuthApis()
-    {
-        return [
-            ['api' => 'api-news-article', 'alias' => 'Artikel'],
-            ['api' => 'api-news-tag', 'alias' => 'Tags'],
-        ];
-    }
 }

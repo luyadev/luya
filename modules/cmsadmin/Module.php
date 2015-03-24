@@ -29,11 +29,11 @@ class Module extends \admin\base\Module
             ->node("CMS Inhalt", "fa-th-list", "cmsadmin-default-index")
             ->node("CMS Settings", "fa-wrench")
                 ->group("Verwalten")
-                    ->item("KategorieN", "cmsadmin-cat-index", "fa-ils")
-                    ->item("Layout", "cmsadmin-layout-index", "fa-eyedropper")
+                    ->itemApi("Kategorien", "cmsadmin-cat-index", "fa-ils", "api-cms-cat")
+                    ->itemApi("Layout", "cmsadmin-layout-index", "fa-eyedropper", "api-cms-layout")
                 ->group("Blöcke")
-                    ->item("Gruppen", "cmsadmin-blockgroup-index", "fa-group")
-                    ->item("Verwalten", "cmsadmin-block-index", "fa-outdent")
+                    ->itemApi("Gruppen", "cmsadmin-blockgroup-index", "fa-group", "api-cms-blockgroup")
+                    ->itemApi("Verwalten", "cmsadmin-block-index", "fa-outdent", "api-cms-block")
             ->menu();
                 
         /*
@@ -54,18 +54,14 @@ class Module extends \admin\base\Module
         */
     }
     
-    public function getAuthApis()
+    public function extendPermissionApis()
     {
         return [
-            ['api' => 'api-cms-cat', 'alias' => 'Kategorien/Navcontainer'],
-            ['api' => 'api-cms-layout', 'alias' => 'Layouts'],
-            ['api' => 'api-cms-blockgroup', 'alias' => 'Block Gruppen'],
-            ['api' => 'api-cms-block', 'alias' => 'Blöcke'],
             ['api' => 'api-cms-navitemplageblockitem', 'alias' => 'Blöcke Einfügen und Verschiebe'],
         ];
     }
     
-    public function getAuthRoutes()
+    public function extendPermissionRoutes()
     {
         return [
             ['route' => 'cmsadmin/default/index', 'alias' => 'Dashboard'],
