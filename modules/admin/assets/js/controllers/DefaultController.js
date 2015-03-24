@@ -16,7 +16,7 @@ zaa.controller("DefaultController", function ($scope, $http, $state, AdminServic
 	}
 	
 	$scope.get = function () {
-		$http.get('admin/api-admin-menu/' + $scope.moduleId)
+		$http.get('admin/api-admin-menu/items', { params : { 'nodeId' : $scope.moduleId }} )
 		.success(function(data) {
 			for (var itm in data.groups) {
 				grp = data.groups[itm];

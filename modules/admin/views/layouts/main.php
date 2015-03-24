@@ -63,9 +63,9 @@ $user = Admin::getAdminUserData();
 
                 <ul class="modulenav__list" role="menu">
 
-                    <li class="modulenav__item" role="menuitem" ng-repeat="item in items" ng-class="getCurrent(item.id)" on-finish="onMenuFinish">
+                    <li class="modulenav__item" role="menuitem" ng-repeat="item in items">
 
-                        <a class="modulenav__link" role="link" data-label="{{item.alias}}" ng-click="click(item.id, $event)">
+                        <a class="modulenav__link" role="link" data-label="{{item.alias}}" ng-click="click(item, $event)">
                             <span class="modulenav__icon fa fa-fw {{item.icon}}"></span>
                             <span class="modulenav__icon" style="font-size:9px;">{{item.alias}}</span>
                         </a> <!-- ./modulenav__link -->

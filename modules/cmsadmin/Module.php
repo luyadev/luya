@@ -26,7 +26,7 @@ class Module extends \admin\base\Module
     public function getMenu()
     {
         return $this
-            ->node("CMS Inhalt", "fa-th-list", "cmsadmin-default-index")
+            ->nodeRoute("CMS Inhalt", "fa-th-list", "cmsadmin-default-index", "cmsadmin/default/index")
             ->node("CMS Settings", "fa-wrench")
                 ->group("Verwalten")
                     ->itemApi("Kategorien", "cmsadmin-cat-index", "fa-ils", "api-cms-cat")
@@ -64,7 +64,6 @@ class Module extends \admin\base\Module
     public function extendPermissionRoutes()
     {
         return [
-            ['route' => 'cmsadmin/default/index', 'alias' => 'Dashboard'],
             ['route' => 'cmsadmin/page/create', 'alias' => 'Seiten Erstellen'],
             ['route' => 'cmsadmin/page/update', 'alias' => 'Seiten Bearbeiten'],
         ];

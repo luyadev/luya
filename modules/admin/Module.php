@@ -58,7 +58,7 @@ class Module extends \admin\base\Module
     public function getMenu()
     {
         return $this
-        ->node("Datei Manager", "fa-hdd-o", "admin-storage-index")
+        ->nodeRoute("Datei Manager", "fa-hdd-o", "admin-storage-index", "admin/storage/index")
         ->node("Admin Einstellungen", "fa-gears")
             ->group("Zrugriff")
                 ->itemApi("Benutzer", "admin-user-index", "fa-user", "api-admin-user")

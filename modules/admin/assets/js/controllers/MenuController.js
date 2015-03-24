@@ -8,21 +8,17 @@ zaa.controller("MenuController", function ($scope, $http, $state, $location) {
 	}
 	*/
 	
-	$scope.currentMenuId = 0;
+	//$scope.currentMenuId = 0;
 	
 	$scope.itemAdd = function(item) {
 		$scope.items.push(item);
 	}
 	
-	$scope.click = function(menuId, $event) {
-		//console.log($event.currentTarget);
-		//console.log(menuId);
-		$scope.currentMenuId = menuId;
-		var obj = $scope.items[(menuId-1)];
-		if (obj.template) {
-			$state.go('custom', { 'templateId' : obj.template });
+	$scope.click = function(menuItem, $event) {
+		if (menuItem.template) {
+			$state.go('custom', { 'templateId' : menuItem.template });
 		} else {
-			$state.go('default', { 'moduleId' : menuId});
+			$state.go('default', { 'moduleId' : menuItem.id});
 		}
 	}
 	
@@ -33,7 +29,6 @@ zaa.controller("MenuController", function ($scope, $http, $state, $location) {
 				item = data[i];
 				$scope.itemAdd(item)
 			}
-			/* $scope.itemAdd(item.title, item.icon, item.identification, item.id); */
 		});
 	}
 	
