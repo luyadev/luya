@@ -5,6 +5,8 @@ class Controller extends \admin\base\Controller
 {
     public $modelClass = null;
 
+    public $disablePermissionCheck = true;
+    
     private $_model = null;
 
     public function getModelClass()

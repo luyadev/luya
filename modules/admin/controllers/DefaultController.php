@@ -3,14 +3,11 @@ namespace admin\controllers;
 
 class DefaultController extends \admin\base\Controller
 {
+    public $disablePermissionCheck = true;
+    
     public function actionIndex()
     {
         return $this->render("index");
-    }
-
-    public function actionTest()
-    {
-        return 'hi';
     }
 
     public function actionDashboard()

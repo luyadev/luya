@@ -12,6 +12,8 @@ class Controller extends \luya\base\Controller
 
     public $adminUser = null;
 
+    public $disablePermissionCheck = false;
+    
     public function init()
     {
         parent::init();
@@ -25,11 +27,6 @@ class Controller extends \luya\base\Controller
         }
     }
 
-    public function getUserId()
-    {
-        return new \admin\components\User();
-    }
-
     public function getRules()
     {
         return [
@@ -38,16 +35,15 @@ class Controller extends \luya\base\Controller
                 'actions' => [], // apply to all actions by default
                 'roles' => ['@'],
                 'matchCallback' => function ($rule, $action) {
-                    /*
-                    $actionName = $action->id;
-                    $controllerName = $action->controller->id;
-                    $moduleName = $action->controller->module->id;
-                    */
-                    return true;
-                    //var_dump($action->controller->adminUser);
-                    //var_dump($actionName, $controllerName, $moduleName);
-
-                    // \yii::$app->luya->auth->match($action->controller->getUserId(), $moduleName, $controllerName, $actionName);
+                    // see if a controller property has been defined to disabled the permission checks
+                    // @todo but we should check for logged in admin?
+                    if ($action->controller->disablePermissionCheck) {
+                        return true;
+                    }
+                    // get the route based on the current $action object
+                    $route = implode("/", [$action->controller->module->id, $action->controller->id, $action->id]);
+                    // check the access inside luya->auth->matchRoute and return true/false.
+                    return \yii::$app->luya->auth->matchRoute((new \admin\components\User())->getIdentity()->id, $route);
                 },
             ],
         ];
