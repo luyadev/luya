@@ -57,6 +57,22 @@ class Module extends \admin\base\Module
 
     public function getMenu()
     {
+        return $this
+        ->node("Datei Manager", "fa-hdd-o", "admin-storage-index")
+        ->node("Admin Einstellungen", "fa-gears")
+            ->group("Zrugriff")
+                ->item("Benutzer", "admin-user-index", "fa-user")
+                ->item("Gruppen", "admin-group-index", "fa-users")
+            ->group("System")
+                ->item("Sprachen", "admin-lang-index", "fa-language")
+            ->group("Bilder")
+                ->item("Effekte", "admin-effect-index", "fa-link")
+                ->item("Filter", "admin-filter-index", "fa-filter")
+        ->menu();
+    }
+    /*
+    public function getMenu()
+    {
         $this->menu->createNode('storage', 'Dateien Manager', 'fa-hdd-o', 'admin-storage-index');
         // create menu node
         $node = $this->menu->createNode('admin', 'Admin Einstellungen', 'fa-gears');
@@ -78,6 +94,7 @@ class Module extends \admin\base\Module
 
         return $this->menu->get();
     }
+    */
 
     public function getLuyaComponents()
     {

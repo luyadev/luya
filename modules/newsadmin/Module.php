@@ -10,6 +10,17 @@ class Module extends \admin\base\Module
 
     public function getMenu()
     {
+        return $this
+        ->node("News", "fa-newspaper-o")
+            ->group("Daten")
+                ->item("Artikel", "newsadmin-article-index", "fa-newspaper-o")
+                ->item("Tags", "newsadmin-tag-index", "fa-tags")
+        ->menu();
+    }
+    
+    /*
+    public function getMenu()
+    {
         $node = $this->menu->createNode('newsadmin', 'News', 'fa-newspaper-o');
         // create menu group
         $this->menu->createGroup($node, 'Daten', [
@@ -20,6 +31,7 @@ class Module extends \admin\base\Module
 
         return $this->menu->get();
     }
+    */
     
     public function getAuthApis()
     {

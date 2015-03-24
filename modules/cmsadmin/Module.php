@@ -19,8 +19,24 @@ class Module extends \admin\base\Module
         
     ];
 
+    public $assets = [
+        'cmsadmin\Asset',
+    ];
+    
     public function getMenu()
     {
+        return $this
+            ->node("CMS Inhalt", "fa-th-list", "cmsadmin-default-index")
+            ->node("CMS Settings", "fa-wrench")
+                ->group("Verwalten")
+                    ->item("KategorieN", "cmsadmin-cat-index", "fa-ils")
+                    ->item("Layout", "cmsadmin-layout-index", "fa-eyedropper")
+                ->group("Blöcke")
+                    ->item("Gruppen", "cmsadmin-blockgroup-index", "fa-group")
+                    ->item("Verwalten", "cmsadmin-block-index", "fa-outdent")
+            ->menu();
+                
+        /*
         $this->menu->createNode('cms', 'CMS Inhalte', 'fa-th-list', 'cmsadmin-default-index');
 
         $node = $this->menu->createNode('cms-settings', 'CMS Einstellungen', 'fa-wrench');
@@ -35,11 +51,8 @@ class Module extends \admin\base\Module
         ]);
 
         return $this->menu->get();
+        */
     }
-
-    public $assets = [
-        'cmsadmin\Asset',
-    ];
     
     public function getAuthApis()
     {
@@ -49,6 +62,15 @@ class Module extends \admin\base\Module
             ['api' => 'api-cms-blockgroup', 'alias' => 'Block Gruppen'],
             ['api' => 'api-cms-block', 'alias' => 'Blöcke'],
             ['api' => 'api-cms-navitemplageblockitem', 'alias' => 'Blöcke Einfügen und Verschiebe'],
+        ];
+    }
+    
+    public function getAuthRoutes()
+    {
+        return [
+            ['route' => 'cmsadmin/default/index', 'alias' => 'Dashboard'],
+            ['route' => 'cmsadmin/page/create', 'alias' => 'Seiten Erstellen'],
+            ['route' => 'cmsadmin/page/update', 'alias' => 'Seiten Bearbeiten'],
         ];
     }
 }
