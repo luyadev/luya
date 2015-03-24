@@ -68,6 +68,12 @@ class ExecutableController extends \yii\console\Controller
                     \yii::$app->luya->auth->addApi($object->id, $item['api'], $item['alias']);
                 }
             }
+            
+            if (method_exists($object, 'getAuthRoutes')) {
+                foreach ($object->getAuthRoutes() as $item) {
+                    \yii::$app->luya->auth->addRoute($object->id, $item['route'], $item['alias']);
+                }
+            }
         }
     }
 }
