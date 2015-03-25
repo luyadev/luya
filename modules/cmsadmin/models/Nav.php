@@ -20,6 +20,7 @@ class Nav extends \yii\db\ActiveRecord
     {
         return [
             [['cat_id', 'parent_nav_id'], 'required'],
+            [['is_hidden', 'sort_index', 'is_deleted'], 'safe'],
         ];
     }
     
@@ -38,18 +39,9 @@ class Nav extends \yii\db\ActiveRecord
     
     public static function resort($navId, $newSortIndex)
     {
+        /*
         $item = self::find()->where(['id' => $navId])->one();
         $newSortIndex = (int) $newSortIndex;
-        
-        echo "alt: " . $item->sort_index . " | neu: " . $newSortIndex . "\n\n";
-        
-        if ($item->sort_index > $newSortIndex) {
-            echo "VON UNTEN NACH OBEN";
-        } else {
-            echo "VON OBEN NACH UNTEN";
-        }
-        
-        exit;
         // find entrie on the current sort_index point
         $higher = self::find()->where("sort_index >= :index", ['index' => $newSortIndex])->andWhere(['cat_id' => $item->cat_id, 'parent_nav_id' => $item->parent_nav_id])->all();
         
@@ -62,6 +54,7 @@ class Nav extends \yii\db\ActiveRecord
         $item->update(false);
         
         return true;
+        */
     }
 
     public function createPage($parentNavId, $catId, $langId, $title, $rewrite, $layoutId)
@@ -72,7 +65,7 @@ class Nav extends \yii\db\ActiveRecord
         $navItem = new \cmsadmin\models\NavItem();
         $navItemPage = new \cmsadmin\models\NavItemPage();
 
-        $nav->attributes = ['parent_nav_id' => $parentNavId, 'cat_id' => $catId];
+        $nav->attributes = ['parent_nav_id' => $parentNavId, 'cat_id' => $catId, 'is_hidden' => 1];
         $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'rewrite' => $rewrite, 'nav_item_type' => 1];
         $navItemPage->attributes = ['layout_id' => $layoutId];
 
@@ -137,7 +130,7 @@ class Nav extends \yii\db\ActiveRecord
         $navItem = new \cmsadmin\models\NavItem();
         $navItemModule = new \cmsadmin\models\NavItemModule();
 
-        $nav->attributes = ['parent_nav_id' => $parentNavId, 'cat_id' => $catId];
+        $nav->attributes = ['parent_nav_id' => $parentNavId, 'cat_id' => $catId, 'is_hidden' => 1];
         $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'rewrite' => $rewrite, 'nav_item_type' => 2];
         $navItemModule->attributes = ['module_name' => $moduleName];
 

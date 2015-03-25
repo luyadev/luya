@@ -13,6 +13,7 @@ class m141203_143059_cms_nav extends Migration
             "parent_nav_id" => 'int(11) NOT NULL DEFAULT 0',
             "sort_index" => 'int(11) NOT NULL DEFAULT 0',
             "is_deleted" => 'tinyint(1) DEFAULT 0',
+            "is_hidden" => 'tinyint(1) DEFAULT 0',
         ]);
     }
 

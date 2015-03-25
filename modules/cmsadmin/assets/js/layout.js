@@ -27,13 +27,20 @@ zaa.service('MenuService', function($http) {
 	return service;
 });
 
-zaa.controller("CmsMenuTreeController", function($scope, $state, MenuService) {
+zaa.controller("CmsMenuTreeController", function($scope, $state, $http, MenuService) {
     
 	$scope.menu = [];
 	
     $scope.$watch(function() { return MenuService.menu }, function(newValue) {
     	$scope.menu = newValue;
     })
+    
+    $scope.toggleHidden = function(dataItem) {
+    
+    	$http.get('admin/api-cms-nav/toggle-hidden', { params : { navId : dataItem.id }}).success(function(response) {
+			MenuService.refresh();
+		});
+    }
 	
     $scope.go = function(navId) {
     	$state.go('custom.cmsedit', { navId : navId });

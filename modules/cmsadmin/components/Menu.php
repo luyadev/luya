@@ -117,6 +117,12 @@ class Menu
 
     private function getData($parentNavId)
     {
-        return (new \yii\db\Query())->select("cms_nav.id, cms_nav.sort_index, cms_nav.parent_nav_id, cms_nav_item.title, cms_nav_item.rewrite")->from('cms_nav')->leftJoin("cms_nav_item", "cms_nav.id=cms_nav_item.nav_id")->orderBy("cms_nav.sort_index ASC")->where(['parent_nav_id' => $parentNavId, 'cat_id' => $this->cat['id'], 'cms_nav_item.lang_id' => $this->lang['id']])->all();
+        return (new \yii\db\Query())
+            ->select("cms_nav.id, cms_nav.sort_index, cms_nav.parent_nav_id, cms_nav_item.title, cms_nav_item.rewrite, cms_nav.is_hidden")
+            ->from('cms_nav')
+            ->leftJoin("cms_nav_item", "cms_nav.id=cms_nav_item.nav_id")
+            ->orderBy("cms_nav.sort_index ASC")
+            ->where(['parent_nav_id' => $parentNavId, 'cat_id' => $this->cat['id'], 'cms_nav_item.lang_id' => $this->lang['id'], 'cms_nav.is_deleted' => 0])
+            ->all();
     }
 }

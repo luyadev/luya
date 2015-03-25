@@ -24,6 +24,7 @@ cms_nav
 + parent_nav_id
 + sort_index
 + is_deleted [0,1]
++ is_hidden [0,1] the url still works, but well not be shown in the navigation
 
 cms_nav_item
 -------------
@@ -34,7 +35,6 @@ cms_nav_item
 + rewrite [welcome-page]
 + nav_item_type [0,3] 1 = Page; 2 = Redirect; 3 = Application
 + nav_item_type_id [0,X] The id of the selected type table
-+ is_hidden [0,1] the url still works, but well not be shown in the navigation
 + is_inactive [0,1] the url does not work (404) and it will not be shown in the navigation
 + create_user_id
 + update_user_id

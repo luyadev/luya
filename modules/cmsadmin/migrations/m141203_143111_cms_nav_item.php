@@ -13,7 +13,6 @@ class m141203_143111_cms_nav_item extends Migration
             "lang_id" => Schema::TYPE_INTEGER,
             "nav_item_type" => Schema::TYPE_SMALLINT,
             "nav_item_type_id" => Schema::TYPE_INTEGER,
-            "is_hidden" => Schema::TYPE_SMALLINT,
             "is_inactive" => Schema::TYPE_SMALLINT,
             "create_user_id" => Schema::TYPE_INTEGER,
             "update_user_id" => Schema::TYPE_INTEGER,

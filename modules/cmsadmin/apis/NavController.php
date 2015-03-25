@@ -16,6 +16,19 @@ class NavController extends \admin\base\RestController
         return \yii::$app->request->post($name, null);
     }
 
+    public function actionToggleHidden($navId)
+    {
+        $item = \cmsadmin\models\Nav::find()->where(['id' => $navId])->one();
+        
+        if ($item) {
+            $item->is_hidden = (empty($item->is_hidden)) ? 1 : 0;
+            $item->update(false);
+            return true;
+        }
+    
+        return false;
+    }
+    
     public function actionResort()
     {
         $navItemId = $this->postArg('nav_item_id');

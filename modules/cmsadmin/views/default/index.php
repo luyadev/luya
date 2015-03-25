@@ -5,6 +5,7 @@
      --><a class="treeview__link" role="link" ng-click="go(data.id)">
             {{data.title}}
         </a>
+        <button ng-click="toggleHidden(data)">{{data.is_hidden}}</button>
     </div>
     <ul class="treeview__list" role="menu">
         <li class="treeview__item" role="menuitem" ng-repeat="data in data.nodes" ng-include="'reverse.html'"></li>
