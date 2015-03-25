@@ -51,11 +51,13 @@ class Menu
             return [];
         }
         $items = $this->menu[$parentId];
+        $i=0;
         foreach ($items as $k => $v) {
-            $data[$k] = $v;
+            $data[$i] = $v;
             if (isset($this->menu[$v['id']])) {
-                $data[$k][$subName] = $this->childrenRecursive($v['id'], $subName);
+                $data[$i][$subName] = $this->childrenRecursive($v['id'], $subName);
             }
+            $i++;
         }
 
         return $data;
@@ -115,6 +117,6 @@ class Menu
 
     private function getData($parentNavId)
     {
-        return (new \yii\db\Query())->select("cms_nav.id, cms_nav.parent_nav_id, cms_nav_item.title, cms_nav_item.rewrite")->from('cms_nav')->leftJoin("cms_nav_item", "cms_nav.id=cms_nav_item.nav_id")->where(['parent_nav_id' => $parentNavId, 'cat_id' => $this->cat['id'], 'cms_nav_item.lang_id' => $this->lang['id']])->all();
+        return (new \yii\db\Query())->select("cms_nav.id, cms_nav.sort_index, cms_nav.parent_nav_id, cms_nav_item.title, cms_nav_item.rewrite")->from('cms_nav')->leftJoin("cms_nav_item", "cms_nav.id=cms_nav_item.nav_id")->orderBy("cms_nav.sort_index ASC")->where(['parent_nav_id' => $parentNavId, 'cat_id' => $this->cat['id'], 'cms_nav_item.lang_id' => $this->lang['id']])->all();
     }
 }

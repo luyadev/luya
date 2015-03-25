@@ -35,6 +35,34 @@ class Nav extends \yii\db\ActiveRecord
             $this->sort_index = $item->sort_index + 1;
         }
     }
+    
+    public static function resort($navId, $newSortIndex)
+    {
+        $item = self::find()->where(['id' => $navId])->one();
+        $newSortIndex = (int) $newSortIndex;
+        
+        echo "alt: " . $item->sort_index . " | neu: " . $newSortIndex . "\n\n";
+        
+        if ($item->sort_index > $newSortIndex) {
+            echo "VON UNTEN NACH OBEN";
+        } else {
+            echo "VON OBEN NACH UNTEN";
+        }
+        
+        exit;
+        // find entrie on the current sort_index point
+        $higher = self::find()->where("sort_index >= :index", ['index' => $newSortIndex])->andWhere(['cat_id' => $item->cat_id, 'parent_nav_id' => $item->parent_nav_id])->all();
+        
+        foreach($higher as $ritem) {
+            $ritem->sort_index = $ritem->sort_index + 1;
+            $ritem->update(false);
+        }
+        
+        $item->sort_index = $newSortIndex;
+        $item->update(false);
+        
+        return true;
+    }
 
     public function createPage($parentNavId, $catId, $langId, $title, $rewrite, $layoutId)
     {
