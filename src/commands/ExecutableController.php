@@ -90,6 +90,10 @@ class ExecutableController extends \yii\console\Controller
      */
     public function actionSetup($email, $password)
     {
+        if (!$this->confirm("create setup with email $email and password $password?")) {
+            exit(1);
+        }
+        
         $this->actionAuth();
         // create user
         
