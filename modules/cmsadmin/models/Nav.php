@@ -10,11 +10,30 @@ class Nav extends \yii\db\ActiveRecord
         return 'cms_nav';
     }
 
+    public function init()
+    {
+        parent::init();
+        $this->on(self::EVENT_BEFORE_INSERT, [$this, 'eventBeforeInsert']);
+    }
+    
     public function rules()
     {
         return [
             [['cat_id', 'parent_nav_id'], 'required'],
         ];
+    }
+    
+    /**
+     * find the latest sort index cms_nav item for the current cat_id and parent_nav_id and set internal index count plus one.
+     */
+    public function eventBeforeInsert()
+    {
+        $item = self::find()->where(['cat_id' => $this->cat_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index DESC')->limit(1)->one();
+        if (!$item) {
+            $this->sort_index = 0;
+        } else {
+            $this->sort_index = $item->sort_index + 1;
+        }
     }
 
     public function createPage($parentNavId, $catId, $langId, $title, $rewrite, $layoutId)
