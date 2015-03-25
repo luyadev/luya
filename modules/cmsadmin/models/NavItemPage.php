@@ -45,9 +45,9 @@ class NavItemPage extends \cmsadmin\base\NavItemType
 
         foreach ($placeholders as $key => $placeholder) {
             $loader = new \Twig_Loader_String();
-
-            $twig = new \Twig_Environment($loader, ['autoescape' => false]);
-
+			// @todo disable debugging
+            $twig = new \Twig_Environment($loader, ['autoescape' => false, 'debug' => true]);
+            $twig->addExtension(new \Twig_Extension_Debug());
             $blockObject = \cmsadmin\models\Block::objectId($placeholder['block_id']);
 
             $configValues = json_decode($placeholder['json_config_values'], true);
@@ -56,6 +56,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
                 $configValues = [];
             }
 
+            $blockObject->setVarValues($configValues);
             $jsonConfig = json_decode($blockObject->getJsonConfig(), true);
 
             $insertedHolders = [];
@@ -68,6 +69,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
             $string .= $twig->render($blockObject->getTwigFrontend(), [
                 'vars' => $configValues,
                 'placeholders' => $insertedHolders,
+                'extras' => $blockObject->getExtraVars(),
             ]);
         }
 

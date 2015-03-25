@@ -128,7 +128,7 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
 		});
 	}
 	
-	$scope.renderTemplate = function(template, dataVars, block) {		
+	$scope.renderTemplate = function(template, dataVars, block, extras) {		
 		if (template == undefined) {
 			return '';
 		}
@@ -138,7 +138,8 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
 		
 		var content = template.render({
 			vars : dataVars,
-			block : block
+			block : block,
+			extras : extras
 		});
 		
 		return $sce.trustAsHtml(content);

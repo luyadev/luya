@@ -107,9 +107,13 @@ class NavItemController extends \admin\base\RestController
             $blockObject = \cmsadmin\models\Block::objectId($ipbid_value['block_id']);
 
             $blockJsonConfig = json_decode($blockObject->getJsonConfig(), true);
-
+            
             $ipbid_value['t1_json_config_values'] = json_decode($ipbid_value['t1_json_config_values'], true);
-
+            
+            $blockValue = $ipbid_value['t1_json_config_values'];
+            
+            $blockObject->setVarValues((empty($blockValue)) ? [] : $blockValue);
+            
             $placeholders = [];
 
             if (isset($blockJsonConfig['placeholders'])) {
@@ -132,11 +136,14 @@ class NavItemController extends \admin\base\RestController
                 $keys = $blockJsonConfig['vars'];
             }
 
+            
+            
             $nav_item_page_block_item = [
                 'id' => $ipbid_value['t1_id'],
                 'name' => $blockObject->getName(),
                 'twig_admin' => $blockObject->getTwigAdmin(),
                 'vars' => $keys,
+                'extras' => $blockObject->getExtraVars(),
                 'values' => $ipbid_value['t1_json_config_values'],
                 '__placeholders' => $placeholders,
             ];

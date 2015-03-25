@@ -69,7 +69,7 @@
 
                  --><div class=" block__item block__item--preview ">
 
-                        <div><small>({{block.name}})</small><div ng-bind-html="renderTemplate(block.twig_admin, data, block)"></div></div>
+                        <div><small>({{block.name}})</small><div ng-bind-html="renderTemplate(block.twig_admin, data, block, block.extras)"></div></div>
 
                     </div><!-- ./block__item--preview
 

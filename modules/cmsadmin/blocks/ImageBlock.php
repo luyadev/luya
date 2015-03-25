@@ -14,14 +14,21 @@ class ImageBlock extends \cmsadmin\base\Block
         ];
     }
 
+    public function getExtraVars()
+    {
+        return [
+            'image' => \yii::$app->luya->storage->image->get($this->getVarValue('imageId'))
+        ];
+    }
+    
     public function getTwigFrontend()
     {
-        return '<p>{{vars.imageId}}</p>';
+        return '<img src="{{extras.image.source}}" border="0" /> {{dump(extras)}}';
     }
 
     public function getTwigAdmin()
     {
-        return '<p>{{vars.imageId}}</p>';
+        return '<p><img src="{{extras.image.source}}" border="0" height="100" /></p>';
     }
 
     public function getName()

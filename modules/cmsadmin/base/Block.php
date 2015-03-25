@@ -15,6 +15,8 @@ abstract class Block
 
     public $renderPath = '@app/views/blocks/';
 
+    public $values = [];
+    
     public function __construct()
     {
         $fromArray = $this->jsonFromArray();
@@ -23,7 +25,22 @@ abstract class Block
             $this->jsonConfig = json_encode($fromArray);
         }
     }
-
+    
+    public function setVarValues(array $values)
+    {
+        $this->values = $values;
+    }
+    
+    public function getExtraVars()
+    {
+        return [];
+    }
+    
+    public function getVarValue($key, $default = false)
+    {
+        return (array_key_exists($key, $this->values)) ? $this->values[$key] : $default;
+    }
+    
     public function jsonFromArray()
     {
         return false;
