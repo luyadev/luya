@@ -24,7 +24,7 @@ class Test extends \cmsadmin\base\Block
     {
     	return [
     		'time' => time(),
-    		'upperHeading' => strtopupper($this->getVarValue('heading')),
+    		'upperHeading' => strtoupper($this->getVarValue('heading')),
     	];
     }
     
@@ -51,7 +51,7 @@ To see all configuration possibilitys checkout the [Cms Block Guide](cms-blocks.
 
 you can also render files instead of simple return strings, like this:
 
-```
+```php
 
 public function getTwigFrontend()
 {
