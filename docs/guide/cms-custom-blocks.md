@@ -20,14 +20,22 @@ class Test extends \cmsadmin\base\Block
         ];
     }
     
+    public function getExtraVars()
+    {
+    	return [
+    		'time' => time(),
+    		'upperHeading' => strtopupper($this->getVarValue('heading')),
+    	];
+    }
+    
     public function getTwigFrontend()
     {
-        return '<h1>{{ vars.heading }}</h1>';
+        return '<h1>{{ vars.heading }} in time {{ extras.time }} and uppercase {{ extras.upperHeading }}</h1>';
     }
     
     public function getTwigAdmin()
     {
-        return '<h1>{{ vars.heading }}</h1>';
+        return '<h1>{{ vars.heading }} in time {{ extras.time }} and uppercase {{ extras.upperHeading }}</h1>';
     }
     
     public function getName()
