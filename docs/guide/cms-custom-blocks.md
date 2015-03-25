@@ -5,7 +5,7 @@ Put all your project specific cms blocks inside a ***blocks*** folder. This bloc
 
 An example code of a block could look like this: (The file Test is placed in ***blocks/Test.php***
 
-```
+```php
 <?php
 namespace app\blocks;
 
