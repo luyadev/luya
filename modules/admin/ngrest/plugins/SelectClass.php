@@ -1,6 +1,11 @@
 <?php
 namespace admin\ngrest\plugins;
 
+/**
+ * @todo rename to SelectModel instead of SelectClass
+ * @author nadar
+ *
+ */
 class SelectClass extends \admin\ngrest\plugins\Select
 {
     public function __construct($class, $valueField, $labelField)
