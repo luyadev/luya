@@ -51,14 +51,8 @@ class BootstrapWeb extends \luya\base\Bootstrap
     {
         // start the module now
         foreach ($this->getModules() as $item) {
+
             $module = \yii::$app->getModule($item['id']);
-
-            // get static urlRules property
-
-
-            $id = $item['id'];
-            $path = $module->getBasePath();
-            \yii::setAlias("@$id", $path);
 
             if ($item['reflection']->hasProperty('isAdmin')) {
                 $this->_adminAssets = ArrayHelper::merge($module->assets, $this->_adminAssets);

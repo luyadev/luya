@@ -24,6 +24,12 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
     {
         foreach ($this->getModules() as $item) {
             $module = yii::$app->getModule($item['id']);
+            
+            // set the yii alias for each module
+            $id = $item['id'];
+            $path = $module->getBasePath();
+            \yii::setAlias("@$id", $path);
+            
             if (method_exists($module, 'getLuyaComponents')) {
                 foreach ($module->getLuyaComponents() as $key => $value) {
                     \yii::$app->luya->$key = $value;
