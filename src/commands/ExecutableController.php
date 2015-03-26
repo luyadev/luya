@@ -45,9 +45,27 @@ class ExecutableController extends \yii\console\Controller
 
     public function actionIndex()
     {
-        $this->stdout("use: exec/auth\n");
+        $this->stdout("the following exec commands are avialable:\n- exec/auth\n\n- exec/import\n");
     }
 
+    public function actionImport()
+    {
+        $response = [];
+        $modules = \yii::$app->getModules();
+        foreach ($modules as $id => $item) {
+            $object = \yii::$app->getModule($id);
+            if (method_exists($object, 'import')) {
+                $response[] = $object->import();
+            }
+        }
+        if (empty($response)) {
+            echo "NOTHING TO IMPORT";
+            exit(1);
+        }
+        echo print_r($response);
+        exit(0);
+    }
+    
     /**
      * find all auth.php files, invoke them and return to \yii::$app->luya->auth->addRule.
      * 
@@ -88,9 +106,12 @@ class ExecutableController extends \yii\console\Controller
      * @param string $email
      * @param string $password
      */
-    public function actionSetup($email, $password)
+    public function actionSetup()
     {
-        if (!$this->confirm("create setup with email $email and password $password?")) {
+        $email = $this->prompt("Benutzer E-Mail:");
+        $password = $this->prompt("Benutzer Passwort:");
+        
+        if (!$this->confirm("Create a new user ($email) with password '$password'?")) {
             exit(1);
         }
         
@@ -165,6 +186,14 @@ class ExecutableController extends \yii\console\Controller
             ]]),
         ]);
         
+        $this->insert("cms_cat", [
+            "name" => "Main Navigation Container",
+            "rewrite" => "default",
+            "default_nav_id" => 1,
+            "is_default" => 1,
+        ]);
+        
         echo "You can now login with E-Mail: '$email' and password: '$password'";
+        exit(0);
     }
 }

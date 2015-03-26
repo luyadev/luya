@@ -151,4 +151,14 @@ class Module extends \yii\base\Module
     {
         return [];
     }
+    
+    /**
+     * The import method will be called from exec/import command
+     * 
+     * @return void|string
+     */
+    public function import()
+    {
+        // override in your module.
+    }
 }
