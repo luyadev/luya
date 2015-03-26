@@ -9,17 +9,17 @@ class m141203_143111_cms_nav_item extends Migration
     {
         $this->createTable("cms_nav_item", [
             "id" => "pk",
-            "nav_id" => Schema::TYPE_INTEGER,
-            "lang_id" => Schema::TYPE_INTEGER,
-            "nav_item_type" => Schema::TYPE_SMALLINT,
-            "nav_item_type_id" => Schema::TYPE_INTEGER,
-            "is_inactive" => Schema::TYPE_SMALLINT,
-            "create_user_id" => Schema::TYPE_INTEGER,
-            "update_user_id" => Schema::TYPE_INTEGER,
-            "timestamp_create" => Schema::TYPE_INTEGER,
-            "timestamp_update" => Schema::TYPE_INTEGER,
-            "title" => Schema::TYPE_STRING,
-            "rewrite" => Schema::TYPE_STRING,
+            "nav_id" => "INT(11) NOT NULL",
+            "lang_id" => "INT(11) NOT NULL",
+            "nav_item_type" => "INT(11) NOT NULL",
+            "nav_item_type_id" => "INT(11) NOT NULL",
+            //"is_inactive" => Schema::TYPE_SMALLINT,
+            "create_user_id" => "INT(11) NOT NULL",
+            "update_user_id" => "INT(11) NOT NULL",
+            "timestamp_create" => "INT(11) NULL",
+            "timestamp_update" => "INT(11) NULL",
+            "title" => "VARCHAR(180) NOT NULL",
+            "rewrite" => "VARCHAR(80) NOT NULL",
         ]);
     }
 

@@ -9,14 +9,14 @@ class m141203_143052_cms_cat extends Migration
     {
         $this->createTable("cms_cat", [
             "id" => "pk",
-            "name" => Schema::TYPE_STRING,
-            "rewrite" => Schema::TYPE_STRING,
-            "default_nav_id" => Schema::TYPE_INTEGER,
-            "is_default" => Schema::TYPE_SMALLINT,
+            "name" => "VARCHAR(180) NOT NULL",
+            "rewrite" => "VARCHAR(80) NOT NULL",
+            "default_nav_id" => "INT(11) NOT NULL",
+            "is_default" => "TINYINT(1) NOT NULL DEFAULT 0",
         ]);
 
         $this->insert("cms_cat", [
-            "name" => "Default Kategorie",
+            "name" => "Main Navigation Container",
             "rewrite" => "default",
             "default_nav_id" => 1,
             "is_default" => 1,
