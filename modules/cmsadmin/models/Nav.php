@@ -28,6 +28,11 @@ class Nav extends \yii\db\ActiveRecord
         ];
     }
     
+    public function getNavItems()
+    {
+        return $this->hasMany(\cmsadmin\models\NavItem::className(), ['nav_id' => 'id']);
+    }
+    
     /**
      * find the latest sort index cms_nav item for the current cat_id and parent_nav_id and set internal index count plus one.
      */
