@@ -157,8 +157,8 @@ class Module extends \yii\base\Module
      * 
      * @return void|string
      */
-    public function import()
+    public function import(\luya\commands\ExecutableController $exec)
     {
-        // override in your module.
+        return get_class($this) . ' nothing to import.';
     }
 }

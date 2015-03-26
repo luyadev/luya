@@ -13,7 +13,7 @@ namespace luya\commands;
 class ExecutableController extends \yii\console\Controller
 {
     private $_dirs = [];
-
+    
     public function init()
     {
         foreach (\yii::$app->modules as $key => $item) {
@@ -55,7 +55,7 @@ class ExecutableController extends \yii\console\Controller
         foreach ($modules as $id => $item) {
             $object = \yii::$app->getModule($id);
             if (method_exists($object, 'import')) {
-                $response[] = $object->import();
+                $response[] = $object->import($this);
             }
         }
         if (empty($response)) {
