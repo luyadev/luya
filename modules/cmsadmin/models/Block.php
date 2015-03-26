@@ -32,8 +32,8 @@ class Block extends \admin\ngrest\base\Model
     public function scenarios()
     {
         return [
-            'restcreate' => ['class', 'group_id'],
-            'restupdate' => ['class', 'group_id'],
+            'restcreate' => ['class', 'group_id', 'system_block'],
+            'restupdate' => ['class', 'group_id', 'system_block'],
         ];
     }
 

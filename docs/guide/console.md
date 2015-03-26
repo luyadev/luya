@@ -16,10 +16,14 @@ now you can execute all the console commands described below.
 presql
 --------
 
+***create***
+
 create a new migration script
 ```
 php index.php presql/create TABLE_NAME MODULE_NAME
 ```
+
+***up***
 
 execute all migrations for all modules
 
@@ -49,3 +53,4 @@ The import command will call the import() method inside of your Module class.
 php index.php exec/import
 ```
 
+A uscase for the abovce example are project(app) layouts and blocks. The importer detect layouts and blocks defined in the project and inserts those into your local database.

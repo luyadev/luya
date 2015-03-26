@@ -69,8 +69,36 @@ class Module extends \admin\base\Module
         ];
     }
     
+    /**
+     * @todo do not only import, also update changes in the template
+     * @todo how do we send back values into the executblae controller for output purposes?
+     */
     public function import(\luya\commands\ExecutableController $exec)
     {
+        /* import project blocks */ 
+        $blocks = \yii::getAlias('@app/blocks');
+        if (file_exists($blocks)) {
+            foreach (scandir($blocks) as $file) {
+                if ($file == '.' || $file == '..') {
+                    continue;
+                }
+                $ns = '\\app\\blocks\\' . basename($file, '.php');
+                
+                if (!\cmsadmin\models\Block::find()->where(['class' => $ns])->one()) {
+                    $block = new \cmsadmin\models\Block();
+                    $block->scenario = 'restcreate';
+                    $block->setAttributes([
+                        "group_id" => 1,
+                        "system_block" => 0,
+                        "class" => $ns
+                    ]);
+                    $block->insert();
+                    echo "$ns block found and inserted";
+                }
+            }
+        }
+        
+        /* import project specific layouts */
         $cmslayouts = \yii::getAlias('@app/views/cmslayouts');
         
         if (file_exists($cmslayouts)) {
@@ -78,19 +106,14 @@ class Module extends \admin\base\Module
                 if ($file == '.' || $file == '..') {
                     continue;
                 }
-                
-                $item = \cmsadmin\models\Layout::find()->where(['view_file' => $file])->one();
-                
-                if (!$item) {
-                    
+                if (!\cmsadmin\models\Layout::find()->where(['view_file' => $file])->one()) {
                     $content = file_get_contents($cmslayouts . DIRECTORY_SEPARATOR . $file);
-                    
-                    // find placeholders
+                    // find all twig brackets
                     preg_match_all("/\{\{(.*?)\}\}/", $content, $results);
-                    
+                    // local vars
                     $_placeholders = [];
                     $_vars = [];
-                    
+                    // explode the specific vars for each type
                     foreach($results[1] as $match) {
                         $parts = explode(".", trim($match));
                         switch ($parts[0]) {
@@ -102,8 +125,7 @@ class Module extends \admin\base\Module
                                 break;
                         }
                     }
-                    
-                    
+                    // add item into the database table
                     $data = new \cmsadmin\models\Layout();
                     $data->scenario = 'restcreate';
                     $data->setAttributes([
@@ -116,7 +138,6 @@ class Module extends \admin\base\Module
                         ),
                     ]);
                     $data->save();
-                    
                     echo "$file found and insereted.";
                 }
             }
