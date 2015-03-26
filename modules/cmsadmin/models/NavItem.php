@@ -77,7 +77,6 @@ class NavItem extends \yii\db\ActiveRecord
 
     public function beforeCreate()
     {
-        $this->is_inactive = 0;
         $this->timestamp_create = time();
         $this->timestamp_update = 0;
         $this->create_user_id = \admin\Module::getAdminUserData()->id;

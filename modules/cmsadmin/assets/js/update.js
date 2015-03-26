@@ -110,6 +110,8 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
 
 	$scope.data = $scope.block.values || {};
 	
+	$scope.cfgdata = $scope.block.cfgvalues || {};
+	
 	$scope.edit = false;
 	
 	$scope.toggleEdit = function() {
@@ -128,7 +130,7 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
 		});
 	}
 	
-	$scope.renderTemplate = function(template, dataVars, block, extras) {		
+	$scope.renderTemplate = function(template, dataVars, cfgVars, block, extras) {		
 		if (template == undefined) {
 			return '';
 		}
@@ -138,6 +140,7 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
 		
 		var content = template.render({
 			vars : dataVars,
+			cfgs : cfgVars,
 			block : block,
 			extras : extras
 		});
@@ -146,7 +149,7 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
 	}
 	
 	$scope.save = function () {
-		ApiCmsNavItemPageBlockItem.update({ id : $scope.block.id }, $.param({json_config_values : JSON.stringify($scope.data) }), function(rsp) {
+		ApiCmsNavItemPageBlockItem.update({ id : $scope.block.id }, $.param({json_config_values : JSON.stringify($scope.data), json_config_cfg_values : JSON.stringify($scope.cfgdata) }), function(rsp) {
 			$scope.edit = false;
 		});
 	}

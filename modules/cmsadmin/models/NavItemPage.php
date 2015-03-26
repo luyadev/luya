@@ -51,6 +51,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
             $blockObject = \cmsadmin\models\Block::objectId($placeholder['block_id']);
 
             $configValues = json_decode($placeholder['json_config_values'], true);
+            $cfgValues = json_decode($placeholder['json_config_cfg_values'], true);
 
             if (empty($configValues)) {
                 $configValues = [];
@@ -68,6 +69,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
             }
             $string .= $twig->render($blockObject->getTwigFrontend(), [
                 'vars' => $configValues,
+                'cfgs' => $cfgValues,
                 'placeholders' => $insertedHolders,
                 'extras' => $blockObject->getExtraVars(),
             ]);

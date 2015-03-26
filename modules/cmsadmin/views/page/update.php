@@ -3,44 +3,6 @@
         background-color:red; color:black; padding:20px
     }
 </style>
-<script type="text/ng-template" id="recursion-old.html">
-    <div style="margin-left:20px; background-color:#F0F0F0; border: 1px solid #999; margin-bottom:10px;">
-
-        <div style="background-color:#999; font-size:18px; font-weight:bold; padding:5px;">{{placeholder.label}}</div>
-
-        <div style="padding:10px;">
-
-        <div ng-if="placeholder.__nav_item_page_block_items.length == 0">
-            <p><i>There are no blocks yet! drop a block to be the first</i></p>
-        </div>
-
-        <div ng-repeat="block in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController" data-drag="true" jqyoui-draggable="" data-jqyoui-options="{revert: true, helper : 'clone'}" ng-model="block">
-
-            <div style="background-color:green; color:white; padding:20px; margin:0px; text-align:center;" ng-controller="DropBlockController" ng-model="droppedBlock" data-drop="true" jqyoui-droppable="{onDrop: 'onDrop', multiple : true}">
-                SUB Drop blocks here!
-            </div>
-
-            <div ng-click="toggleEdit()" style="margin:0px; padding:5px; border:1px solid #999;"><small>({{block.name}})</small><div ng-bind-html="renderTemplate(block.twig_admin, data, block)"></div></div>
-            <div ng-show="edit" style="background-color:#FFF; padding:10px; border:1px solid #333;">
-                <div ng-repeat="field in block.vars">
-                    <label style="display:block; padding-bottom:5px;"><strong>{{field.label}}</strong>:</label>
-                    <zaa-injector dir="field.type" options="field.options" model="data[field.var]"></zaa-injector>
-                </div>
-                <a ng-click="save()" style="background-color:black; color:white;">SAVE</a>
-            </div>
-
-            <div ng-repeat="placeholder in block.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" style="margin-top:10px;"></div>
-
-       </div>
-
-        <div style="background-color:#000; color:white; padding:20px; margin:0px; text-align:center;" ng-controller="DropBlockController" ng-model="droppedBlock" data-drop="true" jqyoui-droppable="{onDrop: 'onDrop', multiple : true}">
-            Drop blocks here!
-        </div>
-
-        </div>
-
-    </div>
-</script>
 <script type="text/ng-template" id="recursion.html">
     <div class=" cms__placeholder placeholder ">
 
@@ -69,7 +31,7 @@
 
                  --><div class=" block__item block__item--preview ">
 
-                        <div><small>({{block.name}})</small><div ng-bind-html="renderTemplate(block.twig_admin, data, block, block.extras)"></div></div>
+                        <div><small>({{block.name}})</small><div ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div></div>
 
                     </div><!-- ./block__item--preview
 
@@ -84,7 +46,14 @@
                         <zaa-injector dir="field.type" options="field.options" model="data[field.var]"></zaa-injector>
                         <div class="form__active"></div>
                     </div>
+                    <hr />
+                    <h3>Optional Configuration Variables</h3>
+                    <div ng-repeat="cfgField in block.cfgs">
+                        <label style="display:block; padding-bottom:5px;"><strong>{{cfgField.label}}</strong>:</label>
+                        <zaa-injector dir="cfgField.type" options="cfgField.options" model="cfgdata[cfgField.var]"></zaa-injector>
+                    </div>
                     <a ng-click="save()" style="background-color:black; color:white;">SAVE</a>
+
                 </div> <!-- ./block__edit -->
 
                 <div ng-repeat="placeholder in block.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'"></div>

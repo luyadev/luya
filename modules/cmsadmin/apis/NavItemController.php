@@ -97,7 +97,7 @@ class NavItemController extends \admin\base\RestController
     private function getSub($placeholderVar, $navItemPageId, $prevId)
     {
         $nav_item_page_block_item_data = (new \yii\db\Query())->select([
-                't1_id' => 't1.id', 'block_id', 't1_nav_item_page_id' => 't1.nav_item_page_id', 't1_json_config_values' => 't1.json_config_values', 't1_placeholder_var' => 't1.placeholder_var', 't1_prev_id' => 't1.prev_id',
+                't1_id' => 't1.id', 'block_id', 't1_nav_item_page_id' => 't1.nav_item_page_id', 't1_json_config_values' => 't1.json_config_values', 't1_json_config_cfg_values' => 't1.json_config_cfg_values', 't1_placeholder_var' => 't1.placeholder_var', 't1_prev_id' => 't1.prev_id',
                 //'t2_id' => 't2.id', 't2_name' => 't2.name', 't2_json_config' => 't2.json_config', 't2_twig_admin' => 't2.twig_admin',
         ])->from("cms_nav_item_page_block_item t1")->orderBy('t1.sort_index ASC')->where(['t1.prev_id' => $prevId, 't1.nav_item_page_id' => $navItemPageId, 't1.placeholder_var' => $placeholderVar])->all();
 
@@ -109,6 +109,7 @@ class NavItemController extends \admin\base\RestController
             $blockJsonConfig = json_decode($blockObject->getJsonConfig(), true);
             
             $ipbid_value['t1_json_config_values'] = json_decode($ipbid_value['t1_json_config_values'], true);
+            $ipbid_value['t1_json_config_cfg_values'] = json_decode($ipbid_value['t1_json_config_cfg_values'], true);
             
             $blockValue = $ipbid_value['t1_json_config_values'];
             
@@ -135,16 +136,22 @@ class NavItemController extends \admin\base\RestController
             if (isset($blockJsonConfig['vars'])) {
                 $keys = $blockJsonConfig['vars'];
             }
+            
+            $cfgs = [];
+            
+            if (isset($blockJsonConfig['cfgs'])) {
+                $cfgs = $blockJsonConfig['cfgs'];
+            }
 
-            
-            
             $nav_item_page_block_item = [
                 'id' => $ipbid_value['t1_id'],
                 'name' => $blockObject->getName(),
                 'twig_admin' => $blockObject->getTwigAdmin(),
                 'vars' => $keys,
+                'cfgs' => $cfgs,
                 'extras' => $blockObject->getExtraVars(),
                 'values' => $ipbid_value['t1_json_config_values'],
+                'cfgvalues' => $ipbid_value['t1_json_config_cfg_values'], // add: t1_json_config_cfg_values
                 '__placeholders' => $placeholders,
             ];
 
