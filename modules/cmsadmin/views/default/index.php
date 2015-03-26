@@ -5,7 +5,7 @@
      --><a class="treeview__link" role="link" ng-click="go(data.id)">
             {{data.title}}
         </a>
-        <button ng-click="toggleHidden(data)">{{data.is_hidden}}</button>
+        <button ng-click="toggleHidden(data)"><i class="fa" ng-class="{ 'fa-toggle-off' : {{data.is_hidden}}, 'fa-toggle-on' : {{data.is_hidden == 0}} }"></i></button>
     </div>
     <ul class="treeview__list" role="menu">
         <li class="treeview__item" role="menuitem" ng-repeat="data in data.nodes" ng-include="'reverse.html'"></li>
