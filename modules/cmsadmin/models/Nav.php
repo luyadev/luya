@@ -3,6 +3,10 @@ namespace cmsadmin\models;
 
 use yii\helpers\ArrayHelper;
 
+/**
+ * @todo what happens when resort items if an items is deleted?
+ * @author nadar
+ */
 class Nav extends \yii\db\ActiveRecord
 {
     public static function tableName()

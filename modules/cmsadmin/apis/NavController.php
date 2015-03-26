@@ -29,6 +29,15 @@ class NavController extends \admin\base\RestController
         return false;
     }
     
+    public function actionDelete($navId)
+    {
+        $model = \cmsadmin\models\Nav::find()->where(['id' => $navId])->one();
+        if ($model) {
+            $model->is_deleted = 1;
+            return $model->update(false);
+        }
+    }
+    
     public function actionResort()
     {
         $navItemId = $this->postArg('nav_item_id');

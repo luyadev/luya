@@ -35,6 +35,15 @@ zaa.controller("CmsMenuTreeController", function($scope, $state, $http, MenuServ
     	$scope.menu = newValue;
     })
     
+    $scope.delete = function(dataItem) {
+    	console.log(dataItem);
+    	if (confirm('your are sure you want to delete ' + dataItem.title )) {
+    		$http.get('admin/api-cms-nav/delete', { params : { navId : dataItem.id }}).success(function(response) {
+    			MenuService.refresh();
+    		});
+    	}
+    }
+    
     $scope.toggleHidden = function(dataItem) {
     
     	$http.get('admin/api-cms-nav/toggle-hidden', { params : { navId : dataItem.id }}).success(function(response) {
