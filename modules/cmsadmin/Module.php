@@ -68,4 +68,60 @@ class Module extends \admin\base\Module
             ['route' => 'cmsadmin/page/update', 'alias' => 'Seiten Bearbeiten'],
         ];
     }
+    
+    public function import(\luya\commands\ExecutableController $exec)
+    {
+        $cmslayouts = \yii::getAlias('@app/views/cmslayouts');
+        
+        if (file_exists($cmslayouts)) {
+            foreach(scandir($cmslayouts) as $file) {
+                if ($file == '.' || $file == '..') {
+                    continue;
+                }
+                
+                $item = \cmsadmin\models\Layout::find()->where(['view_file' => $file])->one();
+                
+                if (!$item) {
+                    
+                    $content = file_get_contents($cmslayouts . DIRECTORY_SEPARATOR . $file);
+                    
+                    // find placeholders
+                    preg_match_all("/\{\{(.*?)\}\}/", $content, $results);
+                    
+                    $_placeholders = [];
+                    $_vars = [];
+                    
+                    foreach($results[1] as $match) {
+                        $parts = explode(".", trim($match));
+                        switch ($parts[0]) {
+                            case "placeholders":
+                                $_placeholders = ['label' => $parts[1], 'var' => $parts[1]];
+                                break;
+                            case "vars":
+                                $_vars = $parts[1];
+                                break;
+                        }
+                    }
+                    
+                    
+                    $data = new \cmsadmin\models\Layout();
+                    $data->scenario = 'restcreate';
+                    $data->setAttributes([
+                        "name" => ucfirst($file),
+                        "view_file" => $file,
+                        "json_config" => json_encode(
+                            ['placeholders' => [
+                                $_placeholders
+                            ]]
+                        ),
+                    ]);
+                    $data->save();
+                    
+                    echo "$file found and insereted.";
+                }
+            }
+        }
+        
+        return "importer finished";
+    }
 }
