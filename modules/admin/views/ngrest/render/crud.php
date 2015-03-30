@@ -15,7 +15,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
 });
 </script>
 
-<div ng-controller="<?=$config->getNgRestConfigHash(); ?>" ng-init="init()" style="width: 100%; height: 100%;">
+<div ng-controller="<?=$config->getNgRestConfigHash(); ?>" ng-init="init()" style="width: 100%; height: 100%;" zaa-esc="closeDialogs()">
 
     <div class="toolbar">
 

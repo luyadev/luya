@@ -15,19 +15,19 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 		});
 	}
 	
+	$scope.closeDialogs = function() {
+		$scope.toggler.update = false;
+		$scope.toggler.strap = false;
+		$scope.toggler.create = false;
+		$scope.AdminService.bodyClass = '';
+		$scope.search = '';
+	}
+	
 	$scope.debug = function() {
 		console.log('config', $scope.config);
 		console.log('data', $scope.data);
 	}
-	/*
-	$scope.submitStrap = function(strapHash) {
-		console.log(strapHash);
-	}
 	
-	$scope.postStrapUrl = function(callback, params) {
-		console.log(callback, params);
-	}
-	*/
 	$scope.getStrap = function (strapId, id, $event) {
 		$http.post('admin/ngrest/render', $.param({ itemId : id, strapHash : strapId , ngrestConfigHash : $scope.config.ngrestConfigHash }), {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
@@ -41,8 +41,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 		})
 	}
 
-	$scope.toggleStrap = function()
-	{
+	$scope.toggleStrap = function() {
 		$scope.toggler.strap = !$scope.toggler.strap;
 	}
 	
