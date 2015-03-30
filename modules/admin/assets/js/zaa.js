@@ -33,18 +33,30 @@ zaa.config(function ($httpProvider, $stateProvider, $controllerProvider) {
 		})
 });
 
+zaa.directive('zaaEsc', function() {
+	return function(scope, element, attrs) {
+		$(document).on('keyup', function(e) {
+			if (e.keyCode == 27) {
+				scope.$apply(function() {
+					scope.$eval(attrs.zaaEsc);
+				});
+			}
+		})
+	};
+});
+
 zaa.directive('focusMe', function($timeout) {
-  return {
-    scope: { trigger: '=focusMe' },
-    link: function(scope, element) {
-      scope.$watch('trigger', function(value) {
-        if(value === true) {
-            element[0].focus();
-            scope.trigger = false;
-        }
-      });
-    }
-  };
+	return {
+		scope : { trigger : '=focusMe' },
+		link : function(scope, element) {
+			scope.$watch('trigger', function(value) {
+				if (value === true) {
+					element[0].focus();
+					scope.trigger = false;
+				}
+			})
+		}
+	}
 });
 
 zaa.factory('AdminService', function() {
