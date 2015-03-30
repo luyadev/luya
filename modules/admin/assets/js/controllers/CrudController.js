@@ -1,21 +1,3 @@
-function openMore( $more ) {
-    var $editWrapper = $more.find( '.Crud-editWrapper' );
-
-    $more.addClass( 'is-open' );
-    if( $editWrapper.length > 0 )
-        $more = $editWrapper;
-}
-
-function closeMore( $more ) {
-    var $editWrapper = $more.find( '.Crud-editWrapper' );
-
-    $more.removeClass( 'is-open' );
-    if( $editWrapper.length > 0 ) {
-        $more = $editWrapper;
-    }
-
-}
-
 zaa.controller("CrudController", function($scope, $http, $sce, AdminService) {
 	
 	$scope.AdminService = AdminService;
