@@ -1,11 +1,18 @@
-zaa.controller("CrudController", function($scope, $http, $sce, AdminService) {
+zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminService) {
+	
+	$scope.parentController = $scope.$parent;
 	
 	$scope.AdminService = AdminService;
 	
 	$scope.showCrudList = true;
 	
+	$scope.currentMenuItem = null;
+	
 	$scope.init = function () {
 		$scope.loadList();
+		$scope.$watch(function() { return $scope.parentController.currentItem }, function(newValue) {
+			$scope.currentMenuItem = newValue;
+		});
 	}
 	
 	$scope.debug = function() {

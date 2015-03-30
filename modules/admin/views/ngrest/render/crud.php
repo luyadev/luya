@@ -20,7 +20,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
     <div class="toolbar">
 
         <h3 class="toolbar__title" role="heading">
-            <span class="fa fa-fw <?= $config->getOption('fa-icon'); ?>"></span> <?= $config->getOption('title'); ?>
+            <span class="fa fa-fw {{currentMenuItem.icon}}"></span> {{currentMenuItem.alias}}
         </h3>
 
         <div class="toolbar__items">
