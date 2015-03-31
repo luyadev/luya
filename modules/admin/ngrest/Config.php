@@ -73,6 +73,21 @@ class Config implements ConfigInterface
 
         return $this;
     }
+    
+    /**
+	 * return the all plugins fore this type
+	 * @todo should we directly return the static class method from the plugin as lambda function?
+	 */
+    public function getEvents($type)
+    {
+        $events = [];
+        foreach($this->getKey($type) as $item) {
+            foreach($item['plugins'] as $plugin) {
+                $events[$item['name']][] = $plugin;
+            }
+        }
+        return $events;
+    }
 
     /**
      * testing purpose.

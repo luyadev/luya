@@ -56,6 +56,21 @@ abstract class PluginAbstract
         $this->ngModel = $ngModel;
         $this->alias = $alias;
     }
+    
+    public static function onBeforeCreate($fieldValue)
+    {
+        return $fieldValue;
+    }
+    
+    public static function onBeforeUpdate($fieldValue)
+    {
+        return $fieldValue;
+    }
+    
+    public static function onAfterList($fieldValue)
+    {
+        return $fieldValue;
+    }
 
     abstract public function renderList($doc);
 

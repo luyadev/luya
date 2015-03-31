@@ -2,6 +2,8 @@
 
 namespace admin\ngrest\base;
 
+use \admin\ngrest\base\EventBehavior;
+
 abstract class Model extends \yii\db\ActiveRecord
 {
     public $ngRestEndpoint = null;
@@ -16,6 +18,16 @@ abstract class Model extends \yii\db\ActiveRecord
 
     abstract public function ngRestConfig($config);
 
+    public function behaviors()
+    {
+        return [
+            'EventBehavior' => [
+                'class' => EventBehavior::className(),
+                'ngRestConfig' => $this->getNgRestConfig()
+            ]
+        ];
+    }
+    
     public function init()
     {
         parent::init();
