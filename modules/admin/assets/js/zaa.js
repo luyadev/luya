@@ -1,11 +1,16 @@
 /* zephir angular admin */
 
-var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ui.ace', 'ngDragDrop', 'angular-loading-bar']);
+var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ui.ace', 'ngDragDrop', 'angular-loading-bar', 'pickadate']);
 
-zaa.config(function ($httpProvider, $stateProvider, $controllerProvider) {
+zaa.config(function ($httpProvider, $stateProvider, $controllerProvider, pickadateI18nProvider) {
 	$httpProvider.interceptors.push('authInterceptor');
 	
 	zaa.bootstrap = $controllerProvider;
+	
+	pickadateI18nProvider.translations = {
+		prev : 'Vorheriger',
+		next : 'Nächster',
+	};
 	
 	$stateProvider
 		.state("default", {
@@ -32,6 +37,16 @@ zaa.config(function ($httpProvider, $stateProvider, $controllerProvider) {
 			templateUrl : 'admin/default/dashboard'
 		})
 });
+
+zaa.controller("DashboardController", function($scope) {
+	
+	$scope.date = null;
+	
+	$scope.debug = function() {
+		console.log($scope.date);
+	}
+	
+})
 
 zaa.directive('zaaEsc', function() {
 	return function(scope, element, attrs) {

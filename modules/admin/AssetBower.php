@@ -12,6 +12,11 @@ class AssetBower extends \yii\web\AssetBundle
         'angular-resource/angular-resource.min.js',
         'angular-ui-router/release/angular-ui-router.min.js',
         'angular-dragdrop/src/angular-dragdrop.min.js',
+        'angular-pickadate/dist/angular-pickadate.min.js',
         'twig.js/twig.min.js',
+    ];
+    
+    public $css = [
+        'angular-pickadate/dist/angular-pickadate.css',
     ];
 }

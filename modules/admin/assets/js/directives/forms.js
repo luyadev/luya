@@ -141,21 +141,13 @@ zaa.directive('zaaInputCheckbox', function(){
 zaa.directive('zaaDatepicker', function() {
 	return {
 		restrict : 'E',
-		transclude : false,
-		replace : true,
 		scope : {
 			"model" : "=",
 			"name" : "=",
 			"options" : "="
 		},
-		
-		controller : function($scope)
-		{
-			
-		},
-		
 		template: function(){
-			/* TBD */
+			return '<input pickadate="" format="dd-mm-yyyy" ng-model="model" week-starts-on="1"></input>';
 		}
 	}
 });
