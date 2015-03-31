@@ -3,6 +3,7 @@
 namespace admin\ngrest\base;
 
 use \admin\ngrest\base\EventBehavior;
+use \admin\behaviors\LogBehavior;
 
 abstract class Model extends \yii\db\ActiveRecord
 {
@@ -24,6 +25,10 @@ abstract class Model extends \yii\db\ActiveRecord
             'EventBehavior' => [
                 'class' => EventBehavior::className(),
                 'ngRestConfig' => $this->getNgRestConfig()
+            ],
+            'LogBehavior' => [
+                'class' => LogBehavior::className(),
+                'api' => $this->ngRestEndpoint,
             ]
         ];
     }
