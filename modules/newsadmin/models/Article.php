@@ -17,8 +17,8 @@ class Article extends \admin\ngrest\base\Model
     public function scenarios()
     {
         return [
-           'restcreate' => ['title', 'text', 'image_id'],
-           'restupdate' => ['title', 'text', 'image_id', 'tags'],
+           'restcreate' => ['title', 'text', 'image_id', 'timestamp_update'],
+           'restupdate' => ['title', 'text', 'image_id', 'tags', 'timestamp_update'],
        ];
     }
 
@@ -50,6 +50,7 @@ class Article extends \admin\ngrest\base\Model
     {
         $config->list->field("title", "Titel")->text()->required();
         $config->list->field("text", "Text")->textarea()->required();
+        $config->list->field("timestamp_update", "Update Datum")->datepicker()->required();
         $config->list->field("image_id", "Bild")->image();
 
         $config->update->copyFrom('list', ['id']);
