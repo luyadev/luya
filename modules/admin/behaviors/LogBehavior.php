@@ -18,6 +18,13 @@ class LogBehavior extends \yii\base\Behavior
         ];
     }
     
+    public function init()
+    {
+        if (empty($this->route) && empty($this->api)) {
+            throw new \Exception("LogBehavior route or api property must be set.");
+        }
+    }
+    
     public function eventAfterInsert($event)
     {
         \yii::$app->db->createCommand()->insert('admin_ngrest_log', [
