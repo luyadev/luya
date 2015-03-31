@@ -67,8 +67,9 @@ abstract class Model extends \yii\db\ActiveRecord
         foreach ($value as $k => $v) {
             $batch[] = [$this->id, $v['id']];
         }
-        $insert = \yii::$app->db->createCommand()->batchInsert($viaTableName, [$localTableId, $foreignTableId], $batch)->execute();
-
+        if (!empty($batch)) {
+            $insert = \yii::$app->db->createCommand()->batchInsert($viaTableName, [$localTableId, $foreignTableId], $batch)->execute();
+        }
         // @todo check if an error happends wile the delete and/or update proccess.
         return true;
     }
