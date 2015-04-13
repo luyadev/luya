@@ -8,6 +8,8 @@ zaa.controller("DefaultController", function ($scope, $http, $state, $stateParam
 	
 	$scope.currentItem = null;
 	
+	$scope.dashboard = [];
+	
 	$scope.itemAdd = function (name, items) {
 		$scope.items.push({name : name, items : items});
 		
@@ -18,8 +20,16 @@ zaa.controller("DefaultController", function ($scope, $http, $state, $stateParam
 		})
 	}
 	
+	$scope.getDashboard = function(nodeId) {
+		$http.get('admin/api-admin-menu/dashboard', { params : { 'nodeId' : nodeId }} )
+		.success(function(data) {
+			$scope.dashboard = data;
+		});
+	}
+	
 	$scope.init = function() {
 		$scope.get();
+		$scope.getDashboard($scope.moduleId);
 	}
 	
 	$scope.resolveCurrentItem = function() {
