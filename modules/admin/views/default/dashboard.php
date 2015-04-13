@@ -3,7 +3,7 @@
     <p>http://luya.io</p>
 </div>
 
-<!--  -->
+<!--
 <div ng-controller="DashboardController">
 <div pickadate ng-model="date"></div>
 <button ng-click="debug()">debug</button>
