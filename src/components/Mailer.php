@@ -13,26 +13,26 @@ class Mailer extends \yii\base\Component
 
     public $password = null; //'PASSWORD';
 
-    public function init()
+    public function create()
     {
         $this->phpmailer = new \PHPMailer();
-
+        
         if ($this->host === null) {
             $this->host = \yii::$app->getModule('luya')->mailerHost;
         }
-
+        
         if ($this->username === null) {
             $this->host = \yii::$app->getModule('luya')->mailerUsername;
         }
-
+        
         if ($this->password === null) {
             $this->password = \yii::$app->getModule('luya')->mailerPassword;
         }
-
+        
         if ($this->isSMTP === null) {
             $this->isSMTP = \yii::$app->getModule('luya')->mailerIsSMTP;
         }
-
+        
         if ($this->isSMTP) {
             $this->phpmailer->SMTPDebug = 2;
             $this->phpmailer->isSMTP();
@@ -48,9 +48,11 @@ class Mailer extends \yii\base\Component
         $this->phpmailer->isHTML(true);
         $this->phpmailer->AltBody = 'Please use a HTML compatible E-Mail-Client to read this E-Mail.';
     }
-
+    
     public function compose($subject, $body)
     {
+        $this->cleanup();
+        $this->create();
         $this->phpmailer->Subject = $subject;
         $this->phpmailer->Body = $body;
 
@@ -72,5 +74,10 @@ class Mailer extends \yii\base\Component
     public function error()
     {
         return $this->phpmailer->ErrorInfo;
+    }
+    
+    public function cleanup()
+    {
+        $this->phpmailer = null;
     }
 }
