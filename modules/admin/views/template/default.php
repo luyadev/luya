@@ -26,7 +26,7 @@
     
         <h2><i class="fa {{ item.menu.icon}} "></i> {{ item.menu.alias }}</h">
         <div ng-repeat="log in item.data">
-            <p>Benutzer {{ log.user_id }} hat einen Datensatz
+            <p>{{ log.firstname }} {{ log.lastname}} hat einen Datensatz
             
                 <strong ng-if="log.is_update == 1">bearbeitet</strong>
                 <strong ng-if="log.is_insert == 1">hinzugefügt</strong>
