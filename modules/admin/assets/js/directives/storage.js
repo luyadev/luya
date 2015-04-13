@@ -41,6 +41,19 @@ zaa.directive('storageFileUpload', function() {
 				})
 			}
 			
+			$scope.showFileManager = true;
+			
+			$scope.$watch(function() { return $scope.ngModel }, function(newValue, oldValue) {
+				if (newValue) {
+					$scope.showFileManager = true;
+				}
+			});
+			
+			$scope.toggleFileManager = function() {
+				console.log($scope.showFileManager);
+				$scope.showFileManager = !$scope.showFileManager;
+			}
+			
 			$scope.push = function()
 			{
 				var fd = new FormData();
@@ -109,3 +122,54 @@ zaa.directive('storageImageUpload', function() {
 		templateUrl : 'storageImageUpload'
 	}
 });
+
+zaa.directive("storageFileManager", function() {
+	return {
+		restrict : 'E',
+		transclude : false,
+		scope : {
+			ngModel : '=',
+			isHidden : '=',
+			allowSelection : '@selection'
+		},
+		transclude : false,
+		controller : function($scope, $http) {
+			$scope.files = [];
+			$scope.folders = [];
+			$scope.breadcrumbs = [];
+			$scope.currentFolderId = 0;
+			$scope.allowSelection = $scope.allowSelection || true; 
+			
+			$scope.createNewFolder = function(newFolderName) {
+				newFolderName
+				$http.post('admin/api-admin-storage/folder-create', $.param({ folderName : newFolderName , parentFolderId : $scope.currentFolderId }), {
+		        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+		        }).success(function(transport) {
+		        	if (transport) {
+		        		$scope.getFiles($scope.currentFolderId);
+		        	}
+		        });
+			}
+			
+			$scope.selectFile = function(file) {
+				$scope.ngModel = file.id;
+			}
+			
+			$scope.loadFolder = function(folderId) {
+				$scope.currentFolderId = folderId;
+				$scope.getFiles(folderId);
+			}
+			
+			$scope.getFiles = function(folderId) {
+				$http.get('admin/api-admin-storage/files', { params : { folderId : folderId } }).success(function(response) {
+					$scope.folders = response.folders;
+					$scope.files = response.files;
+					$scope.breadcrumbs = response.breadcrumbs;
+				});
+			}
+			
+			$scope.getFiles(0);
+		},
+		templateUrl : 'storageFileManager'
+	}
+})

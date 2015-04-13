@@ -2,6 +2,8 @@
 
 namespace admin\apis;
 
+use Yii;
+
 /**
  * @author nadar
  */
@@ -42,5 +44,22 @@ class StorageController extends \admin\base\RestController
     public function actionFilePath($fileId)
     {
         return \yii::$app->luya->storage->file->get($fileId);
+    }
+    
+    public function actionFiles($folderId = 0)
+    {
+        return [
+            'breadcrumbs' => Yii::$app->luya->storage->folder->breadcrumbs($folderId),
+            'folders' => Yii::$app->luya->storage->folder->getSubFolders($folderId),
+            'files' => Yii::$app->luya->storage->file->allFromFolder($folderId),
+        ];
+    }
+    
+    public function actionFolderCreate()
+    {
+        $folderName = Yii::$app->request->post('folderName', null);
+        $parentFolderId = Yii::$app->request->post('parentFolderId', 0);
+        
+        return Yii::$app->luya->storage->folder->createFolder($folderName, $parentFolderId);
     }
 }

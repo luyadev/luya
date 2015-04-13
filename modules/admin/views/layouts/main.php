@@ -30,9 +30,23 @@ $user = Admin::getAdminUserData();
 
     <script type="text/ng-template" id="storageFileUpload">
         <div style="Border:1px solid red;">
+            <table border="1">
+                <tr>
+                    <td style="padding:20px;">
             <table>
                 <tr><td>Datei Auswahl:</td><td><input file-model="myFile" type="file" /></td><td><button ng-click="push()" type="button">Datei Hochladen</button></td></tr>
                 <tr><td colspan="3"><a ng-show="filesrc" target="_blank" ng-href="{{filesrc}}">Datei: {{filesrc}}</a></td></tr>
+            </table>
+                    </td>
+                    <td style="background-color:#999;">Upload - or - Select</td>
+                    <td style="padding:20px;">
+                        <button type="button" ng-click="toggleFileManager()">Show File manager</button>
+                        <storage-file-manager is-hidden="showFileManager" ng-model="ngModel"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">fileId: {{ ngModel }}</td>
+                </tr>
             </table>
         </div>
     </script>
@@ -46,6 +60,26 @@ $user = Admin::getAdminUserData();
         </table>
     </script>
 
+    <script type="text/ng-template" id="storageFileManager">
+        <div style="border:1px solid #333; background-color:#e1e1e1; padding:10px;" ng-if="!isHidden">
+            <ul style="padding:0px; margin:0px;">
+                <li style="display:inline-block;" ng-repeat="crumb in breadcrumbs"><button type="button" ng-click="loadFolder(crumb.id)">{{ crumb.name }}</button> <i class="fa fa-caret-right"></i></li>
+            </ul>
+            <table border="1">
+            <tr>
+                <td><i class="fa fa-folder-o"></i></td><td colspan="4"><input type="text" ng-model="newFolderName" /><button type="button" ng-click="createNewFolder(newFolderName)"><i class="fa fa-plus-circle"></i> Ordner erstellen</button></td>
+            </tr>
+            
+            <tr ng-repeat="folder in folders">
+                <td><i class="fa fa-folder"></i></td><td colspan="3"><button ng-click="loadFolder(folder.id)" type="button">{{ folder.name }}</button></td>
+            </tr>
+            
+            <tr ng-repeat="file in files">
+                <td>{{ file.id }}</td><td><strong>{{file.name_original}}</strong></td><td>{{ file.extension }}</td><td><button type="button" ng-if="allowSelection == true" ng-click="selectFile(file)"><i class="fa fa-check-circle" /></button></td>
+            </tr>
+            </table>
+        </div>
+    </script>
 
     <div class="header" role="menubar">
 

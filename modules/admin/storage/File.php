@@ -102,6 +102,13 @@ class File
         return false;
     }
 
+    public function allFromFolder($folderId)
+    {
+        $files = \admin\models\StorageFile::find()->select(["id", "name_original", "extension"])->where(['folder_id' => $folderId, "is_hidden" => 0])->asArray()->all();
+        
+        return $files;
+    }
+    
     public function get($fileId)
     {
         $file = \admin\models\StorageFile::find()->where(['id' => $fileId])->one();
