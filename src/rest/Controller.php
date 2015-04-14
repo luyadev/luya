@@ -1,6 +1,8 @@
 <?php
 namespace luya\rest;
 
+use Yii;
+
 /*
  * Basic
  *
@@ -33,6 +35,24 @@ class Controller extends \yii\web\Controller
 
     protected function serializeData($data)
     {
-        return \Yii::createObject($this->serializer)->serialize($data);
+        return Yii::createObject($this->serializer)->serialize($data);
+    }
+    
+    public function sendModelError($model)
+    {
+        if (!$model->hasErrors()) {
+            throw new ServerErrorHttpException('Object error for unknown reason.');
+        }
+        
+        Yii::$app->response->setStatusCode(422, 'Data Validation Failed.');
+        $result = [];
+        foreach ($model->getFirstErrors() as $name => $message) {
+            $result[] = [
+                'field' => $name,
+                'message' => $message,
+            ];
+        }
+        
+        return $result;
     }
 }
