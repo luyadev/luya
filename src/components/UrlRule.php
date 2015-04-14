@@ -51,6 +51,10 @@ class UrlRule extends \luya\base\UrlRule
 
         if (!empty($parts) && !array_key_exists($parts[0], yii::$app->modules)) {
             $class = yii::$app->defaultRoute.'\components\UrlRule';
+            
+            if (!class_exists($class)) {
+                return false;
+            }
             $manager->addRules([['class' => $class]], false);
 
             return $manager->parseRequest($request);
