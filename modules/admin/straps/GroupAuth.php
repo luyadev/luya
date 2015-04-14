@@ -26,11 +26,13 @@ class GroupAuth extends \admin\ngrest\StrapAbstract implements \admin\ngrest\Str
         ]);
     }
     
-    public function callbackUpdateSubscription($rights = [])
+    public function callbackUpdateSubscription()
     {
-        $safeCopy = [];
+        $rights = \yii::$app->request->post('rights', []);
         
+        $safeCopy = [];
         foreach($rights as $authId => $options) {
+
             if (!isset($options['base'])) {
                 return $this->response(false, ['message' => 'you have to select at least the ANZEIGEN value.']);
             }
