@@ -71,11 +71,11 @@ $user = Admin::getAdminUserData();
             </tr>
             
             <tr ng-repeat="folder in folders">
-                <td><i class="fa fa-folder"></i></td><td colspan="3"><button ng-click="loadFolder(folder.id)" type="button">{{ folder.name }}</button></td>
+                <td><i class="fa fa-folder"></i></td><td colspan="3"><button ng-click="loadFolder(folder.id)" type="button">{{ folder.name }}</button></td><td><button ng-show="hasSelection()" ng-click="moveFilesTo(folder)" type="button"><i class="fa fa-long-arrow-left"></i> move to</button></div>
             </tr>
             
-            <tr ng-repeat="file in files">
-                <td>{{ file.id }}</td><td><strong>{{file.name_original}}</strong></td><td>{{ file.extension }}</td><td><button type="button" ng-if="allowSelection == true" ng-click="selectFile(file)"><i class="fa fa-check-circle" /></button></td>
+            <tr ng-repeat="file in files" ng-click="toggleSelection(file)" ng-class="{'is-active' : inSelection(file)}">
+                <td>{{ file.id }} <span ng-if="inSelection(file)">SELECTED</span></td><td><strong>{{file.name_original}}</strong></td><td>{{ file.extension }}</td><td><button type="button" ng-if="allowSelection == true" ng-click="selectFile(file)"><i class="fa fa-check-circle" /></button></td>
             </tr>
             </table>
         </div>

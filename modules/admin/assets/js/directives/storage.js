@@ -139,9 +139,40 @@ zaa.directive("storageFileManager", function() {
 			$scope.breadcrumbs = [];
 			$scope.currentFolderId = 0;
 			$scope.allowSelection = $scope.allowSelection || true; 
+			$scope.selectedFiles = [];
+			
+			$scope.hasSelection = function() {
+				if ($scope.selectedFiles.length > 0) {
+					return true;
+				}
+				
+				return false;
+			}
+			
+			$scope.moveFilesTo = function(folder) {
+				console.log(folder);
+			}
+			
+			$scope.toggleSelection = function(file) {
+				var i = $scope.selectedFiles.indexOf(file.id);
+				if (i > -1) {
+					$scope.selectedFiles.splice(i, 1);
+				} else {
+					$scope.selectedFiles.push(file.id);
+				}
+			}
+			
+			$scope.inSelection = function(file) {
+				response = $scope.selectedFiles.indexOf(file.id);
+				
+				if (response != -1) {
+					return true;
+				}
+				
+				return false;
+			}
 			
 			$scope.createNewFolder = function(newFolderName) {
-				newFolderName
 				$http.post('admin/api-admin-storage/folder-create', $.param({ folderName : newFolderName , parentFolderId : $scope.currentFolderId }), {
 		        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 		        }).success(function(transport) {
