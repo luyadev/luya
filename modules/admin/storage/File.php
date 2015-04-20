@@ -113,6 +113,10 @@ class File
     {
         $file = \admin\models\StorageFile::find()->where(['id' => $fileId])->one();
 
+        if (!$file) {
+            return false;
+        }
+        
         return [
             "file_id" => $file->id,
             "source_http" => \yii::$app->luya->storage->httpDir.$file->name_new_compound,
