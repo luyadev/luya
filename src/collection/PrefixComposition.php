@@ -5,6 +5,8 @@ class PrefixComposition
 {
     private $_composition = [];
 
+    public $hideComposition = false;
+    
     public function __get($key)
     {
         return $this->getKey($key, false);
@@ -22,6 +24,10 @@ class PrefixComposition
 
     public function getFull()
     {
+        if ($this->hideComposition) {
+            return;
+        }
+        
         return  \luya\helpers\Url::trailing(implode("/", $this->_composition));
     }
 

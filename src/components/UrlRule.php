@@ -40,6 +40,7 @@ class UrlRule extends \luya\base\UrlRule
         $request->setPathInfo(implode("/", $parts));
 
         $composition = new \luya\collection\PrefixComposition();
+        $composition->hideComposition = yii::$app->getModule('luya')->hideComposition;
         $composition->set($compositionKeys);
 
         yii::$app->collection->composition = $composition;
