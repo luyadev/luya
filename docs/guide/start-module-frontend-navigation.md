@@ -18,13 +18,13 @@ Example - showing three levels of the navigation tree:
 ```
 <ul>
 <? foreach(Yii::$app->collection->links->findByArguments(['cat' => 'default', 'lang' => $composition->langShortCode, 'parent_nav_id' => 0]) as $item): ?>
-        <li><a href="<?= $composition->getFull(); ?>/<?=$item['url'];?>"><?= $item['title']; ?></a>
+        <li><a href="<?= $composition->getFull() . $item['url'];?>"><?= $item['title']; ?></a>
             <ul>
                 <? foreach(Yii::$app->collection->links->findByArguments(['lang' => $composition->langShortCode, 'parent_nav_id' => $item['id']]) as $subItem): ?>
-                <li><a href="<?= $composition->getFull(); ?>/<?=$subItem['url'];?>"><?= $subItem['title']?></a>
+                <li><a href="<?= $composition->getFull() . $subItem['url'];?>"><?= $subItem['title']?></a>
                 <ul>
                     <? foreach(Yii::$app->collection->links->findByArguments(['lang' => $composition->langShortCode, 'parent_nav_id' => $subItem['id']]) as $subSubItem): ?>
-                    <li><a href="<?= $composition->getFull(); ?>/<?=$subSubItem['url'];?>"><?= $subSubItem['title']?></a>
+                    <li><a href="<?= $composition->getFull() . $subSubItem['url'];?>"><?= $subSubItem['title']?></a>
                     <? endforeach; ?>
                 </ul>
                 <? endforeach; ?>
@@ -46,21 +46,21 @@ Example - showing three levels of the navigation hierarchy:
 <!-- FIRST LEVEL -->
 <ul>
     <? foreach(Yii::$app->collection->links->findByArguments(['cat' => 'default', 'lang' => $composition->langShortCode, 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->collection->links, 1)]) as $item): ?>
-        <li><a href="<?= $composition->getFull(); ?>/<?=$item['url'];?>"><?= $item['title']; ?></a></li>
+        <li><a href="<?= $composition->getFull() . $item['url'];?>"><?= $item['title']; ?></a></li>
     <? endforeach; ?>
 </ul>
 
 <!-- SECOND LEVEL -->
 <ul>
     <? foreach(Yii::$app->collection->links->findByArguments(['cat' => 'default', 'lang' => $composition->langShortCode, 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->collection->links, 2)]) as $item): ?>
-        <li><a href="<?= $composition->getFull(); ?>/<?=$item['url'];?>"><?= $item['title']; ?></a></li>
+        <li><a href="<?= $composition->getFull() . $item['url'];?>"><?= $item['title']; ?></a></li>
     <? endforeach; ?>
 </ul>
 
 <!-- THIRD LEVEL -->
  <ul>
     <? foreach(Yii::$app->collection->links->findByArguments(['cat' => 'default', 'lang' => $composition->langShortCode, 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->collection->links, 3)]) as $item): ?>
-        <li><a href="<?= $composition->getFull(); ?>/<?=$item['url'];?>"><?= $item['title']; ?></a></li>
+        <li><a href="<?= $composition->getFull() . $item['url'];?>"><?= $item['title']; ?></a></li>
     <? endforeach; ?>
 </ul>
 ```
