@@ -75,6 +75,10 @@ class Module extends \admin\base\Module
      */
     public function import(\luya\commands\ExecutableController $exec)
     {
+        $_log = [
+            'blocks' => [],
+            'layouts' => [],
+        ];
         /* import project blocks */ 
         $blocks = \yii::getAlias('@app/blocks');
         if (file_exists($blocks)) {
@@ -93,7 +97,7 @@ class Module extends \admin\base\Module
                         "class" => $ns
                     ]);
                     $block->insert();
-                    echo "$ns block found and inserted";
+                    $_log['blocks'][$file] = "new block $file has been found and inserted.";
                 }
             }
         }
@@ -106,25 +110,44 @@ class Module extends \admin\base\Module
                 if ($file == '.' || $file == '..') {
                     continue;
                 }
-                if (!\cmsadmin\models\Layout::find()->where(['view_file' => $file])->one()) {
-                    $content = file_get_contents($cmslayouts . DIRECTORY_SEPARATOR . $file);
-                    // find all twig brackets
-                    preg_match_all("/\{\{(.*?)\}\}/", $content, $results);
-                    // local vars
-                    $_placeholders = [];
-                    $_vars = [];
-                    // explode the specific vars for each type
-                    foreach($results[1] as $match) {
-                        $parts = explode(".", trim($match));
-                        switch ($parts[0]) {
-                            case "placeholders":
-                                $_placeholders = ['label' => $parts[1], 'var' => $parts[1]];
-                                break;
-                            case "vars":
-                                $_vars = $parts[1];
-                                break;
-                        }
+                
+                $layoutItem = \cmsadmin\models\Layout::find()->where(['view_file' => $file])->one();
+                
+                    
+                $content = file_get_contents($cmslayouts . DIRECTORY_SEPARATOR . $file);
+                // find all twig brackets
+                preg_match_all("/\{\{(.*?)\}\}/", $content, $results);
+                // local vars
+                $_placeholders = [];
+                $_vars = [];
+                // explode the specific vars for each type
+                foreach($results[1] as $match) {
+                    $parts = explode(".", trim($match));
+                    switch ($parts[0]) {
+                        case "placeholders":
+                            $_placeholders[] = ['label' => $parts[1], 'var' => $parts[1]];
+                            break;
+                        case "vars":
+                            $_vars = $parts[1];
+                            break;
                     }
+                }
+                if ($layoutItem) {
+                    
+                    $layoutItem->scenario = 'restupdate';
+                    $layoutItem->setAttributes([
+                        "name" => ucfirst($file),
+                        "view_file" => $file,
+                        "json_config" => json_encode(
+                                ['placeholders' => 
+                                    $_placeholders
+                                ]
+                        ),
+                    ]);
+                    $layoutItem->save();
+                    
+                    $_log['layouts'][$file] = "existing cmslayout $file updated.";
+                } else {
                     // add item into the database table
                     $data = new \cmsadmin\models\Layout();
                     $data->scenario = 'restcreate';
@@ -132,17 +155,17 @@ class Module extends \admin\base\Module
                         "name" => ucfirst($file),
                         "view_file" => $file,
                         "json_config" => json_encode(
-                            ['placeholders' => [
-                                $_placeholders
-                            ]]
+                                ['placeholders' => 
+                                    $_placeholders
+                                ]
                         ),
-                    ]);
+                        ]);
                     $data->save();
-                    echo "$file found and insereted.";
+                    $_log['layouts'][$file] = "new cmslayout $file found and inserted.";
                 }
             }
         }
         
-        return "importer finished";
+        return $_log;
     }
 }

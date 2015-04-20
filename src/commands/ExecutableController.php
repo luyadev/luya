@@ -55,14 +55,14 @@ class ExecutableController extends \yii\console\Controller
         foreach ($modules as $id => $item) {
             $object = \yii::$app->getModule($id);
             if (method_exists($object, 'import')) {
-                $response[] = $object->import($this);
+                $response[$id] = $object->import($this);
             }
         }
         if (empty($response)) {
-            echo "NOTHING TO IMPORT";
+            echo "Importer has not found any files to import.";
             exit(1);
         }
-        echo print_r($response);
+        print_r($response);
         exit(0);
     }
     
