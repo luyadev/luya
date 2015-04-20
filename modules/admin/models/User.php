@@ -43,6 +43,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
     {
         parent::init();
         $this->on(self::EVENT_BEFORE_INSERT, [$this, 'beforeCreate']);
+        $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'eventBeforeValidate']);
     }
 
     public function rules()
@@ -68,9 +69,15 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
     {
         $this->auth_token = '';
         $this->is_deleted = 0;
-        $this->encodePassword();
     }
 
+    public function eventBeforeValidate()
+    {
+        if ($this->scenario == 'restcreate') {
+            $this->encodePassword();
+        }
+    }
+    
     /**
      * override default scope find().
      */
@@ -137,6 +144,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
     public function encodePassword()
     {
         if (empty($this->password) || strlen($this->password) < 8) {
+            $this->addError("password", "the password must be 8 chars");
             return false;
         }
         // create random string for password salting
