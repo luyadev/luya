@@ -110,7 +110,8 @@ class ExecutableController extends \yii\console\Controller
     {
         $email = $this->prompt("Benutzer E-Mail:");
         $password = $this->prompt("Benutzer Passwort:");
-        
+        $firstname = $this->prompt("Vorname:");
+        $lastname = $this->prompt("Nachname:");
         if (!$this->confirm("Create a new user ($email) with password '$password'?")) {
             exit(1);
         }
@@ -122,8 +123,8 @@ class ExecutableController extends \yii\console\Controller
         $pw = \Yii::$app->getSecurity()->generatePasswordHash($password.$salt);
         
         $this->insert("admin_user", [
-            "firstname" => "Zephir",
-            "lastname" => "Software Design AG",
+            "firstname" => $firstname,
+            "lastname" => $lastname,
             "email" => $email,
             "password" => $pw,
             "password_salt" => $salt,
