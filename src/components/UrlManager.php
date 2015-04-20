@@ -23,7 +23,7 @@ class UrlManager extends \yii\web\UrlManager
             return $route;
         }
 
-        $composition = \yii::$app->collection->composition->getFull()."/";
+        $composition = \yii::$app->collection->composition->getFull();
 
         $length = strlen($composition);
         if (substr($route[0], 0, $length) == $composition) {
@@ -58,7 +58,7 @@ class UrlManager extends \yii\web\UrlManager
 
         $originalParams = $params;
 
-        $params[0] = $composition.'/'.$params[0];
+        $params[0] = $composition.$params[0];
 
         $response = parent::createUrl($params);
 
@@ -68,7 +68,7 @@ class UrlManager extends \yii\web\UrlManager
             $response = parent::createUrl($params);
         } else {
             // now we have to remove the composition informations from the links to make a valid link parsing (read module)
-            $params[0] = str_replace($composition."/", "", $params[0]);
+            $params[0] = str_replace($composition, "", $params[0]);
         }
 
         $params = (array) $params;
@@ -79,7 +79,7 @@ class UrlManager extends \yii\web\UrlManager
             if (method_exists($moduleObject, 'getContext') && !empty($moduleObject->getContext())) {
                 $options = $moduleObject->getContextOptions();
                 $link = \yii::$app->collection->links->findOneByArguments(['nav_item_id' => $options['navItemId']]);
-                $response = str_replace($moduleName, $composition.'/'.$link['url'], $response);
+                $response = str_replace($moduleName, $composition . $link['url'], $response);
             }
         }
 

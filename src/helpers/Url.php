@@ -45,6 +45,11 @@ class Url
     {
         return $url.(substr($url, -1) == $slash ? '' : $slash);
     }
+    
+    public static function removeTrailing($url, $slash = '/')
+    {
+        return rtrim($url, $slash);
+    }
 
     /**
      * Wrapper functions for the createUrl function of the url manager.

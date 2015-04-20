@@ -22,7 +22,7 @@ class PrefixComposition
 
     public function getFull()
     {
-        return implode("/", $this->_composition);
+        return  \luya\helpers\Url::trailing(implode("/", $this->_composition));
     }
 
     public function set($array)
