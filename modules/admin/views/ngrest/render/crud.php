@@ -132,6 +132,12 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
                             </div>
                         <?php endforeach; ?>
 
+                        <div style="background-color:red; padding:20px;" ng-show="createErrors.length">
+                            <ul>
+                                <li ng-repeat="error in createErrors" style="padding:10px;"><strong>{{error.field}}</strong>: {{error.message}}</li>
+                            </ul>
+                        </div>
+                        
                         <div class="form__actions">
 
                             <button class="button button--red" type="button" ng-click="toggleCreate()">
@@ -176,6 +182,12 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
                                 <div class="form__active"></div>
                             </div>
                         <?php endforeach; ?>
+                        
+                        <div style="background-color:red; padding:20px;" ng-show="updateErrors.length">
+                            <ul>
+                                <li ng-repeat="error in updateErrors" style="padding:10px;"><strong>{{error.field}}</strong>: {{error.message}}</li>
+                            </ul>
+                        </div>
 
                         <div class="form__actions">
 

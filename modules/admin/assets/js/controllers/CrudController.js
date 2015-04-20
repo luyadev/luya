@@ -8,6 +8,10 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 	
 	$scope.currentMenuItem = null;
 	
+	$scope.createErrors = [];
+	
+	$scope.updateErrors = [];
+	
 	$scope.init = function () {
 		$scope.loadList();
 		$scope.$watch(function() { return $scope.parentController.currentItem }, function(newValue) {
@@ -81,6 +85,9 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 	}
     
 	$scope.submitUpdate = function () {
+		
+		$scope.updateErrors = [];
+		
 		$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, $.param($scope.data.update), {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 		})
@@ -89,11 +96,14 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 			$scope.closeUpdate();
 		})
 		.error(function(data) {
-			alert('ERROR UPDATE DATA ' + $scope.data.updateId);
+			$scope.updateErrors = data;
 		})
 	}
 	
 	$scope.submitCreate = function() {
+		
+		$scope.createErrors = [];
+		
 		$http.post($scope.config.apiEndpoint, $.param($scope.data.create), {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 		})
@@ -103,13 +113,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 			$scope.toggleCreate();
 		})
 		.error(function(data) {
-			alert('error while create data, see console.log');
-			console.log(data);
-			for (var i in data) {
-				field = data[i]['field'];
-				message = data[i]['message'];
-				
-			}
+			$scope.createErrors = data;
 		})
 	}
 
