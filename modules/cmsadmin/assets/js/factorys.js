@@ -52,6 +52,9 @@ zaa.factory('ApiCmsNavItemPageBlockItem', function($resource) {
 			method : 'PUT',
 			isArray : false,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+		},
+		'delete' : {
+			method : 'DELETE'
 		}
 	});
 });

@@ -112,6 +112,8 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
 	
 	$scope.cfgdata = $scope.block.cfgvalues || {};
 	
+	$scope.PagePlaceholderController = $scope.$parent;
+	
 	$scope.edit = false;
 	
 	$scope.toggleEdit = function() {
@@ -146,6 +148,12 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
 		});
 		
 		return $sce.trustAsHtml(content);
+	}
+	
+	$scope.removeBlock = function(block) {
+		ApiCmsNavItemPageBlockItem.delete({ id : block.id }, function(rsp) {
+			$scope.PagePlaceholderController.NavItemTypePageController.refresh();
+		});
 	}
 	
 	$scope.save = function () {
