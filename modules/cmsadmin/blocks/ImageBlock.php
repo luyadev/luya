@@ -28,7 +28,7 @@ class ImageBlock extends \cmsadmin\base\Block
 
     public function getTwigAdmin()
     {
-        return '<p><img src="{{extras.image.source}}" border="0" height="100" /></p>';
+        return '<p>{% if extras.image.source %}<img src="{{extras.image.source}}" border="0" height="100" />{% else %}<strong>Es wurde noch kein Bild Hochgeladen.</strong>{% endif %}</p>';
     }
 
     public function getName()
