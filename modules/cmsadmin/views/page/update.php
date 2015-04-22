@@ -55,7 +55,7 @@
                             <zaa-injector dir="cfgField.type" options="cfgField.options" model="cfgdata[cfgField.var]"></zaa-injector>
                         </div>
                     </div>
-                    <a ng-click="save()" style="background-color:black; color:white;">SAVE</a>
+                    <button type="button" ng-click="save()" style="padding:8px; font-size:14px; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;">Speichern</button>
 
                 </div> <!-- ./block__edit -->
 
