@@ -81,6 +81,12 @@ $user = Admin::getAdminUserData();
         </div>
     </script>
 
+    <div ng-repeat="modal in AdminModalService.get()" style="position:absolute; z-index:10000; background-color:#F0F0F0; width:80%; border:1px solid red; top:100px; padding:20px; margin:40px;">
+        <h1>{{ modal.title }}</h1>
+        <p><button type="button" ng-click="AdminModalService.hide(modal.name)">CLOSE</button>
+        <div ng-bind="modal.content" style="padding:20px; border:1px solid green;"></div>
+    </div>
+    
     <div class="header" role="menubar">
 
         <div class="header__item header__item--left">

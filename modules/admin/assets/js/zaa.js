@@ -38,15 +38,7 @@ zaa.config(function ($httpProvider, $stateProvider, $controllerProvider, pickada
 		})
 });
 
-zaa.controller("DashboardController", function($scope) {
-	
-	$scope.date = null;
-	
-	$scope.debug = function() {
-		console.log($scope.date);
-	}
-	
-})
+
 
 zaa.directive('zaaEsc', function() {
 	return function(scope, element, attrs) {
@@ -105,9 +97,81 @@ zaa.factory('AdminClassService', function() {
 	return service;
 });
 
-zaa.controller("HtmlController", function($scope, AdminService) {
+zaa.factory('AdminModalService', function() {
+	
+	var service = [];
+	
+	service.modalsActive = {};
+	
+	service.modalsHidden =  {};
+	
+	service.add = function(name, title, content) {
+		service.modalsHidden[name] = {name : name, title : title, content : content};
+	}
+	
+	service.show = function(name) {
+		if (!service.exists(name)) {
+			alert('the modal' + name + ' does not exists!');
+			return;
+		}
+		
+		if (service.isHidden(name) && !service.isActive(name)) {
+			var data = service.modalsHidden[name];
+			delete service.modalsHidden[name];
+			service.modalsActive[name] = data;
+		}
+	}
+	
+	service.hide = function(name) {
+		if (!service.exists(name)) {
+			alert('the modal' + name + ' does not exists!');
+			return;
+		}
+		
+		if (!service.isHidden(name) && service.isActive(name)) {
+			var data = service.modalsActive[name];
+			delete service.modalsActive[name];
+			service.modalsHidden[name] = data;
+		}
+	}
+	
+	service.exists = function(name) {
+		if (service.isHidden(name) || service.isActive(name)) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	service.isHidden = function(name) {
+		return service.modalsHidden.hasOwnProperty(name);
+	}
+	
+	service.isActive = function(name) {
+		return service.modalsActive.hasOwnProperty(name);
+	}
+	
+	service.get = function() {
+		return service.modalsActive;
+	}
+	
+	return service;
+	
+});
+
+zaa.controller("DashboardController", function($scope, AdminModalService) {
+	
+	$scope.date = null;
+	
+	$scope.AdminModalService = AdminModalService;
+	
+})
+
+zaa.controller("HtmlController", function($scope, AdminService, AdminModalService) {
 	
 	$scope.AdminService = AdminService;
+	
+	$scope.AdminModalService = AdminModalService;
 	
 });
 
