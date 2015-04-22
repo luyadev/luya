@@ -41,21 +41,23 @@ zaa.directive('storageFileUpload', function() {
 				})
 			}
 			
-			$scope.showFileManager = true;
+			$scope.showFileManager = false;
 			
 			$scope.$watch(function() { return $scope.ngModel }, function(newValue, oldValue) {
 				if (newValue) {
-					$scope.showFileManager = true;
+					$scope.showFileManager = false;
 				}
 			});
 			
+			$scope.close = function() {
+				$scope.toggleFileManager();
+			}
+			
 			$scope.toggleFileManager = function() {
-				console.log($scope.showFileManager);
 				$scope.showFileManager = !$scope.showFileManager;
 			}
 			
-			$scope.push = function()
-			{
+			$scope.push = function() {
 				var fd = new FormData();
 		        fd.append('file', $scope.myFile);
 		        $http.post('admin/api-admin-storage/files-upload', fd, {

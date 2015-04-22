@@ -97,6 +97,19 @@ zaa.factory('AdminClassService', function() {
 	return service;
 });
 
+zaa.directive('modal', function() {
+	return {
+		restrict : 'E',
+		scope : false,
+		replace : false,
+		transclude : true,
+		template : function() {
+			return '<div style="position:absolute; z-index:10000; background-color:#F0F0F0; left:10px; top:0px; width:80%; border:1px solid red; padding:20px; margin:40px;"><button ng-click="close()" type="button">close</button><div ng-transclude></div></div>';
+		}
+	}
+});
+
+/*
 zaa.factory('AdminModalService', function() {
 	
 	var service = [];
@@ -158,20 +171,17 @@ zaa.factory('AdminModalService', function() {
 	return service;
 	
 });
+*/
 
-zaa.controller("DashboardController", function($scope, AdminModalService) {
+zaa.controller("DashboardController", function($scope) {
 	
 	$scope.date = null;
 	
-	$scope.AdminModalService = AdminModalService;
-	
 })
 
-zaa.controller("HtmlController", function($scope, AdminService, AdminModalService) {
+zaa.controller("HtmlController", function($scope, AdminService) {
 	
 	$scope.AdminService = AdminService;
-	
-	$scope.AdminModalService = AdminModalService;
 	
 });
 
