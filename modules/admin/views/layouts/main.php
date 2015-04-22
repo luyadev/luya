@@ -29,7 +29,7 @@ $user = Admin::getAdminUserData();
     <?php $this->beginBody() ?>
 
     <script type="text/ng-template" id="storageFileUpload">
-        <div style="Border:1px solid red;">
+        <div>
             <table border="1">
                 <tr>
                     <td style="padding:20px;">
@@ -52,11 +52,17 @@ $user = Admin::getAdminUserData();
     </script>
 
     <script type="text/ng-template" id="storageImageUpload">
-        <table>
+        <table border="1">
             <tr><td>Filter:</td><td> <select name="filterId" ng-model="filterId" ng-options="item.id as item.name for item in filters" /></td></tr>
             <tr><td>Datei:</td><td><storage-file-upload ng-model="fileId"></storage-file-upload></td></tr>
-            <tr><td></td><td><button ng-click="push2()" type="button">Bild &amp; Filter Anwenden</button></td></tr>
-            <tr><td colspan="2"><img ng-show="imagesrc" ng-src="{{imagesrc}}" /></td></tr>
+            <tr><td></td><td><button ng-click="push2()" type="button">Hochladen</button></td></tr>
+            <tr>
+                <td>Bild</td>
+                <td>
+                    <div ng-show="imagesrc"><a href="{{imagesrc}}" target="_blank"><img ng-show="imagesrc" ng-src="{{imagesrc}}" height="100" /></a></div>
+                    <div ng-show="!imagesrc"><p>Sie müssen zuerst einen Filter und eine Datei auswählen und danach auf <strong>Hochladen</strong> klicken um das Bild anzuzeigen.</div>
+                </td>
+            </tr>
         </table>
     </script>
 
