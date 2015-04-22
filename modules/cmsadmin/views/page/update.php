@@ -46,11 +46,12 @@
                         <zaa-injector dir="field.type" options="field.options" model="data[field.var]"></zaa-injector>
                         <div class="form__active"></div>
                     </div>
-                    <hr />
-                    <h3>Optional Configuration Variables</h3>
-                    <div ng-repeat="cfgField in block.cfgs">
-                        <label style="display:block; padding-bottom:5px;"><strong>{{cfgField.label}}</strong>:</label>
-                        <zaa-injector dir="cfgField.type" options="cfgField.options" model="cfgdata[cfgField.var]"></zaa-injector>
+                    <div ng-show="block.cfgs.length" style="background-color:#F0F0F0; padding:10px; margin-top:20px; margin-bottom:20px;">
+                        <small style="float:right; background-color:#f44336; color:white; padding:4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;">CFG Variabeln</small>
+                        <div ng-repeat="cfgField in block.cfgs">
+                            <label style="display:block; padding-bottom:5px;"><strong>{{cfgField.label}}</strong>:</label>
+                            <zaa-injector dir="cfgField.type" options="cfgField.options" model="cfgdata[cfgField.var]"></zaa-injector>
+                        </div>
                     </div>
                     <a ng-click="save()" style="background-color:black; color:white;">SAVE</a>
 
