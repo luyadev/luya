@@ -12,6 +12,7 @@ class m150204_144806_news_article extends Migration
             "title" => Schema::TYPE_TEXT,
             "text" => Schema::TYPE_TEXT,
             "image_id" => Schema::TYPE_INTEGER,
+            "image_list" => Schema::TYPE_TEXT,
             "create_user_id" => Schema::TYPE_INTEGER,
             "update_user_id" => Schema::TYPE_INTEGER,
             "timestamp_create" => Schema::TYPE_INTEGER,

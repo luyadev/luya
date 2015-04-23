@@ -17,8 +17,8 @@ class Article extends \admin\ngrest\base\Model
     public function scenarios()
     {
         return [
-           'restcreate' => ['title', 'text', 'image_id', 'timestamp_update'],
-           'restupdate' => ['title', 'text', 'image_id', 'tags', 'timestamp_update'],
+           'restcreate' => ['title', 'text', 'image_id', 'image_list', 'timestamp_update'],
+           'restupdate' => ['title', 'text', 'image_id', 'image_list', 'tags', 'timestamp_update'],
        ];
     }
 
@@ -52,6 +52,7 @@ class Article extends \admin\ngrest\base\Model
         $config->list->field("text", "Text")->textarea()->required();
         $config->list->field("timestamp_update", "Update Datum")->datepicker()->required();
         $config->list->field("image_id", "Bild")->image();
+        $config->list->field("image_list", "Bild LIste")->imageArray();
 
         $config->update->copyFrom('list', ['id']);
         $config->update->extraField("tags", "Tags")->checkboxReleation(['model' => \newsadmin\models\Tag::className(), 'labelField' => 'title']);
