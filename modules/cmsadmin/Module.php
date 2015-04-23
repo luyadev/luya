@@ -79,26 +79,37 @@ class Module extends \admin\base\Module
             'blocks' => [],
             'layouts' => [],
         ];
+        
+        $toInsertBlocks = [];
+        
+        $files = $exec->getFilesNamespace('blocks');
+        foreach ($files as $file) {
+            $toInsertBlocks[] = '\\' . $file;
+        }
+        
         /* import project blocks */ 
         $blocks = \yii::getAlias('@app/blocks');
+        
         if (file_exists($blocks)) {
             foreach (scandir($blocks) as $file) {
                 if ($file == '.' || $file == '..') {
                     continue;
                 }
-                $ns = '\\app\\blocks\\' . basename($file, '.php');
-                
-                if (!\cmsadmin\models\Block::find()->where(['class' => $ns])->one()) {
-                    $block = new \cmsadmin\models\Block();
-                    $block->scenario = 'restcreate';
-                    $block->setAttributes([
-                        "group_id" => 1,
-                        "system_block" => 0,
-                        "class" => $ns
-                    ]);
-                    $block->insert();
-                    $_log['blocks'][$file] = "new block $file has been found and inserted.";
-                }
+                $toInsertBlocks[] = '\\app\\blocks\\' . basename($file, '.php');
+            }
+        }
+        
+        foreach($toInsertBlocks as $ns) {
+            if (!\cmsadmin\models\Block::find()->where(['class' => $ns])->asArray()->one()) {
+                $block = new \cmsadmin\models\Block();
+                $block->scenario = 'commandinsert';
+                $block->setAttributes([
+                    "group_id" => 1,
+                    "system_block" => 0,
+                    "class" => $ns
+                ]);
+                $block->insert();
+                $_log['blocks'][$ns] = "new block $file has been found and inserted.";
             }
         }
         

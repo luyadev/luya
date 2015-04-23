@@ -32,6 +32,7 @@ class Block extends \admin\ngrest\base\Model
     public function scenarios()
     {
         return [
+            'commandinsert' => ['class', 'system_block', 'group_id'],
             'restcreate' => ['class', 'group_id', 'system_block'],
             'restupdate' => ['class', 'group_id', 'system_block'],
         ];
