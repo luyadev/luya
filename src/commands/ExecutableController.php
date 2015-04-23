@@ -14,29 +14,41 @@ class ExecutableController extends \yii\console\Controller
 {
     private $_dirs = [];
     
+    private $_blockFolders = [];
+    
     public function init()
     {
         foreach (\yii::$app->modules as $key => $item) {
             $module = \Yii::$app->getModule($key);
-            $folder = $module->getBasePath().DIRECTORY_SEPARATOR.'executables';
-            if (file_exists($folder)) {
-                $this->_dirs[] = [
-                    'module' => $module->id,
-                    'folderPath' => $folder.DIRECTORY_SEPARATOR,
-                    'files' => scandir($folder),
-                ];
+            foreach(['blocks'] as $folderName) {
+                $folder = $module->getBasePath().DIRECTORY_SEPARATOR.$folderName;
+                if (file_exists($folder)) {
+                    $this->_dirs[$folderName][] = [
+                        'ns' => $module->getNamespace() . '\\' . $folderName,
+                        'module' => $module->id,
+                        'folderPath' => $folder.DIRECTORY_SEPARATOR,
+                        'folderName' => $folderName,
+                        'files' => scandir($folder),
+                    ];
+                }
             }
         }
     }
 
-    public function getFiles($fileName)
+    public function getFilesNamespace($folderName)
     {
+        if (!array_key_exists($folderName, $this->_dirs)) {
+            return [];
+        }
+        
         $files = [];
-        foreach ($this->_dirs as $item) {
-            foreach ($item['files'] as $file) {
-                if ($file == $fileName) {
-                    $files[] = $item['folderPath'].$file;
+
+        foreach ($this->_dirs[$folderName] as $item) {
+            foreach($item['files'] as $file) {
+                if ($file == "." || $file == "..") {
+                    continue;
                 }
+                $files[] = $item['ns'] . '\\' . pathinfo($file, PATHINFO_FILENAME);
             }
         }
 
