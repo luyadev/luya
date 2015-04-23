@@ -20,8 +20,12 @@ class NavItemPage extends \cmsadmin\base\NavItemType
     public function getContent()
     {
         $loader = new \Twig_Loader_Filesystem(\yii::getAlias('@app/views/cmslayouts/'));
-        $twig = new \Twig_Environment($loader, ['autoescape' => false]);
-
+        $twig = new \Twig_Environment($loader, ['autoescape' => false, 'debug' => true]);
+        $twig->addExtension(new \Twig_Extension_Debug());
+        $linksFunction = new \Twig_SimpleFunction('links', function($cat, $lang, $parent_nav_id) {
+            return yii::$app->collection->links->findByArguments(['cat' => $cat, 'lang' => $lang, 'parent_nav_id' => $parent_nav_id ]);
+        });
+        $twig->addFunction($linksFunction);
         $insertion = [];
 
         foreach ($this->layout->getJsonConfig('placeholders') as $item) {
@@ -30,6 +34,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
 
         return $twig->render($this->layout->view_file, [
             "placeholders" => $insertion,
+            "activeLink" => \yii::$app->collection->links->getActiveLink()
         ]);
     }
 
