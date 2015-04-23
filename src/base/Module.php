@@ -161,4 +161,13 @@ class Module extends \yii\base\Module
     {
         return get_class($this) . ' does not use the import() method.';
     }
+    
+    /**
+     * returns "luya\base" for example
+     * @return string
+     */
+    public function getNamespace()
+    {
+        return implode('\\', array_slice(explode('\\', get_class($this)), 0, -1));
+    }
 }
