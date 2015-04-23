@@ -175,3 +175,29 @@ zaa.directive('zaaImageUpload', function($compile){
 		}
 	}
 });
+
+zaa.directive('zaaImageArrayUpload', function($compile){
+	return {
+		restrict : 'E',
+		scope : {
+			"model" : "="
+		},
+		controller : function($scope) {
+			
+			$scope.model = [];
+			
+			$scope.insert = function() {
+				$scope.model.push({ fileId : 0, caption : '' });
+			}
+			
+			$scope.debug = function() {
+				console.log($scope.model);
+			}
+			
+		},
+		template : function() {
+			return '<div><ul><li ng-repeat="(key,file) in model"><input type="text" ng-model="file.caption" /> <storage-image-upload ng-model="file.fileId"></storage-image-upload> </li></ul><button type="button" ng-click="insert()">+ Bild</button><button type="button" ng-click="debug()">Debug</button></div>';
+			// 
+		}
+	}
+});
