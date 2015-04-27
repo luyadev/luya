@@ -92,6 +92,10 @@ zaa.directive('storageImageUpload', function() {
 		},
 		controller : function($scope, $http, ApiAdminFilter) {
 			
+			if ($scope.filterId == undefined) {
+				$scope.filterId = 0;
+			}
+			
 			if ($scope.ngModel) {
 				$http.get('admin/api-admin-storage/image-path', { params: { imageId : $scope.ngModel } }).success(function(response) {
 					$scope.imagesrc = response.source;

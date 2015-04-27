@@ -11,7 +11,8 @@ class StorageImage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['file_id', 'filter_id'], 'required'],
+            [['file_id'], 'required'],
+            [['filter_id'], 'safe'],
         ];
     }
 

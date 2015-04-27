@@ -50,10 +50,10 @@ $user = Admin::getAdminUserData();
             </table>
         </div>
     </script>
-
+    
     <script type="text/ng-template" id="storageImageUpload">
         <table border="1">
-            <tr><td>Filter:</td><td> <select name="filterId" ng-model="filterId" ng-options="item.id as item.name for item in filters" /></td></tr>
+            <tr><td>Filter:</td><td> <select name="filterId" ng-model="filterId"><option value="0">Kein Filter</option><option ng-repeat="item in filters" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select></td></tr>
             <tr><td>Datei:</td><td><storage-file-upload ng-model="fileId"></storage-file-upload></td></tr>
             <tr><td></td><td><button ng-click="push2()" type="button">Hochladen</button></td></tr>
             <tr>

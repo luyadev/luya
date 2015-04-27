@@ -10,14 +10,19 @@ class Image
         $info = \yii::$app->luya->storage->file->getInfo($fileId);
         $imagine = new \Imagine\Gd\Imagine();
         $image = $imagine->open($file);
-
-        $model = \admin\models\StorageFilter::find()->where(['id' => $filterId])->one();
-        
-        $newimage = $model->applyFilter($image, $imagine);
-
         $fileName = $filterId.'_'.$info->name_new_compound;
-
-        $save = $newimage->save(\yii::$app->luya->storage->dir.$fileName);
+        
+        if (empty($filterId)) {
+            $save = $image->save(\yii::$app->luya->storage->dir.$fileName);
+        } else {
+            $model = \admin\models\StorageFilter::find()->where(['id' => $filterId])->one();
+            if (!$model) {
+                throw new \Exception("could not find the provided filter id '$filterId'.");
+            }
+            $newimage = $model->applyFilter($image, $imagine);
+            $save = $newimage->save(\yii::$app->luya->storage->dir.$fileName);
+        }
+        
 
         if ($save) {
             $model = new \admin\models\StorageImage();

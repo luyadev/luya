@@ -33,7 +33,7 @@ class StorageController extends \admin\base\RestController
 
         $create = \yii::$app->luya->storage->image->create($fileId, $filterId);
 
-        return ['id' => $create, 'error' => (bool) !$create, 'message' => '...', 'image' => ((bool) $create) ? $this->actionImagePath($create) : false ];
+        return ['id' => $create, 'error' => (bool) !$create, 'message' => 'Error while uploading image and/or store to database.', 'image' => ((bool) $create) ? $this->actionImagePath($create) : false ];
     }
 
     public function actionImagePath($imageId)
