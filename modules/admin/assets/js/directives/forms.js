@@ -187,6 +187,31 @@ zaa.directive('zaaImageArrayUpload', function(){
 			$scope.model = [];
 			
 			$scope.add = function() {
+				$scope.model.push({ imageId : 0, caption : '' });
+			}
+			
+			$scope.debug = function() {
+				console.log($scope.model);
+			}
+			
+		},
+		template : function() {
+			return '<div><ul><li ng-repeat="(key,image) in model"><input type="text" ng-model="image.caption" /> <storage-image-upload ng-model="image.imageId"></storage-image-upload> </li></ul><button type="button" ng-click="add()">+ Bild</button><button type="button" ng-click="debug()">Debug</button></div>';
+		}
+	}
+});
+
+zaa.directive('zaaFileArrayUpload', function(){
+	return {
+		restrict : 'E',
+		scope : {
+			"model" : "="
+		},
+		controller : function($scope) {
+			
+			$scope.model = [];
+			
+			$scope.add = function() {
 				$scope.model.push({ fileId : 0, caption : '' });
 			}
 			
@@ -196,8 +221,7 @@ zaa.directive('zaaImageArrayUpload', function(){
 			
 		},
 		template : function() {
-			return '<div><ul><li ng-repeat="(key,file) in model"><input type="text" ng-model="file.caption" /> <storage-image-upload ng-model="file.fileId"></storage-image-upload> </li></ul><button type="button" ng-click="add()">+ Bild</button><button type="button" ng-click="debug()">Debug</button></div>';
-			// 
+			return '<div><ul><li ng-repeat="(key,file) in model"><input type="text" ng-model="file.caption" /> <storage-file-upload ng-model="file.fileId"></storage-file-upload> </li></ul><button type="button" ng-click="add()">+ Datei</button><button type="button" ng-click="debug()">Debug</button></div>';
 		}
 	}
 });
