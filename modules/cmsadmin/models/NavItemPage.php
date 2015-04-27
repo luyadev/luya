@@ -54,7 +54,9 @@ class NavItemPage extends \cmsadmin\base\NavItemType
             $twig = new \Twig_Environment($loader, ['autoescape' => false, 'debug' => true]);
             $twig->addExtension(new \Twig_Extension_Debug());
             $blockObject = \cmsadmin\models\Block::objectId($placeholder['block_id']);
-
+            if ($blockObject === false) {
+                continue;
+            }
             $configValues = json_decode($placeholder['json_config_values'], true);
             $cfgValues = json_decode($placeholder['json_config_cfg_values'], true);
 

@@ -41,8 +41,14 @@ class Block extends \admin\ngrest\base\Model
     public static function objectId($id)
     {
         $block = self::find()->where(['id' => $id])->one();
-
+        if (!$block) {
+            return false;
+        }
+        
         $class = $block->class;
+        if (!class_exists($class)) {
+            return false;
+        }
         $object = new $class();
 
         return $object;
