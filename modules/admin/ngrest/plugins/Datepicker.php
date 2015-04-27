@@ -34,12 +34,15 @@ class Datepicker extends PluginAbstract
     
     public static function onBeforeCreate($value)
     {
+        if (empty($value)) {
+            return 0;
+        }
         return DateTime::createFromFormat("d-m-Y", $value)->getTimestamp();
     }
     
     public static function onBeforeUpdate($value)
     {
-        return DateTime::createFromFormat("d-m-Y", $value)->getTimestamp();
+        return self::onBeforeCreate($value);
     }
     
     public static function onAfterList($value)
