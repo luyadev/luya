@@ -33,9 +33,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 	}
 	
 	$scope.getStrap = function (strapId, id, $event) {
-		$http.post('admin/ngrest/render', $.param({ itemId : id, strapHash : strapId , ngrestConfigHash : $scope.config.ngrestConfigHash }), {
-			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-		})
+		$http.post('admin/ngrest/render', angular.toJson({ itemId : id, strapHash : strapId , ngrestConfigHash : $scope.config.ngrestConfigHash }))
 		.success(function(data) {
 			$scope.toggler.update = false;
 			$scope.toggler.strap = true;
@@ -88,9 +86,9 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 		
 		$scope.updateErrors = [];
 		
-		$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, $.param($scope.data.update), {
-			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-		})
+		console.log($scope.data.update);
+		console.log(angular.toJson($scope.data.update));
+		$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true))
 		.success(function(data) {
 			$scope.loadList();
 			$scope.closeUpdate();
@@ -104,9 +102,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 		
 		$scope.createErrors = [];
 		
-		$http.post($scope.config.apiEndpoint, $.param($scope.data.create), {
-			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-		})
+		$http.post($scope.config.apiEndpoint, angular.toJson($scope.data.create, true))
 		.success(function(data) {
 			$scope.loadList();
 			$scope.data.create = {};
