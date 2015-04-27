@@ -62,7 +62,7 @@ abstract class PluginAbstract
         return $fieldValue;
     }
     
-    public static function onBeforeUpdate($fieldValue)
+    public static function onBeforeUpdate($fieldValue, $oldValue)
     {
         return $fieldValue;
     }

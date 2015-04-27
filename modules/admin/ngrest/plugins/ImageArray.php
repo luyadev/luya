@@ -31,7 +31,7 @@ class ImageArray extends \admin\ngrest\PluginAbstract
     
     public static function onAfterList($value)
     {
-        return json_decode($value);
+        return json_decode($value, true);
     }
     
     public static function onBeforeCreate($value)
@@ -50,7 +50,7 @@ class ImageArray extends \admin\ngrest\PluginAbstract
         return json_encode($data);
     }
     
-    public static function onBeforeUpdate($value)
+    public static function onBeforeUpdate($value, $oldValue)
     {
         return static::onBeforeCreate($value);
     }

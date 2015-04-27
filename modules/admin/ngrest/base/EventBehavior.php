@@ -36,7 +36,7 @@ class EventBehavior extends \yii\base\Behavior
         foreach ($events as $field => $plugins) {
             foreach ($plugins as $plugin) {
                 $class = $plugin['class'];
-                $event->sender->$field = $class::onBeforeUpdate($event->sender->$field);
+                $event->sender->$field = $class::onBeforeUpdate($event->sender->$field, $event->sender->getOldAttribute($field));
             }
         }
     }
