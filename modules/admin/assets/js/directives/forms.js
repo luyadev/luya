@@ -176,7 +176,7 @@ zaa.directive('zaaImageUpload', function($compile){
 	}
 });
 
-zaa.directive('zaaImageArrayUpload', function($compile){
+zaa.directive('zaaImageArrayUpload', function(){
 	return {
 		restrict : 'E',
 		scope : {
@@ -186,7 +186,7 @@ zaa.directive('zaaImageArrayUpload', function($compile){
 			
 			$scope.model = [];
 			
-			$scope.insert = function() {
+			$scope.add = function() {
 				$scope.model.push({ fileId : 0, caption : '' });
 			}
 			
@@ -196,8 +196,35 @@ zaa.directive('zaaImageArrayUpload', function($compile){
 			
 		},
 		template : function() {
-			return '<div><ul><li ng-repeat="(key,file) in model"><input type="text" ng-model="file.caption" /> <storage-image-upload ng-model="file.fileId"></storage-image-upload> </li></ul><button type="button" ng-click="insert()">+ Bild</button><button type="button" ng-click="debug()">Debug</button></div>';
+			return '<div><ul><li ng-repeat="(key,file) in model"><input type="text" ng-model="file.caption" /> <storage-image-upload ng-model="file.fileId"></storage-image-upload> </li></ul><button type="button" ng-click="add()">+ Bild</button><button type="button" ng-click="debug()">Debug</button></div>';
 			// 
+		}
+	}
+});
+
+zaa.directive("zaaListArray", function() {
+	return {
+		restrict : 'E',
+		scope : {
+			"model" : "="
+		},
+		controller : function($scope) {
+
+			if ($scope.model == undefined) {
+				$scope.model = [];
+			}
+			
+			$scope.add = function() {
+				$scope.model.push({ value : '' });
+			}
+			
+			$scope.debug = function() {
+				console.log($scope.model);
+			}
+			
+		},
+		template : function() {
+			return '<div><ul><li ng-repeat="(key,row) in model"><input type="text" ng-model="row.value" /></li></ul><button ng-click="add()" type="button">+ Element</button><button ng-click="debug()" type="button">Debug</button></div>';
 		}
 	}
 });
