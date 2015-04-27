@@ -36,10 +36,13 @@ class ImageArray extends \admin\ngrest\PluginAbstract
     
     public static function onBeforeCreate($value)
     {
+        if (empty($value) || !is_array($value)) {
+            return json_encode([]);
+        }
         $data = [];
         foreach($value as $key => $item) {
             $data[$key] = [
-                "fileId" => $item['fileId'],
+                "imageId" => $item['imageId'],
                 "caption" => $item['caption'],
             ];
         }
