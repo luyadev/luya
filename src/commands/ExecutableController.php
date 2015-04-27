@@ -14,7 +14,7 @@ class ExecutableController extends \yii\console\Controller
 {
     private $_dirs = [];
     
-    private $_scanFolders = ['blocks'];
+    private $_scanFolders = ['blocks', 'filters'];
     
     public function init()
     {
@@ -186,6 +186,7 @@ class ExecutableController extends \yii\console\Controller
         
         $this->insert("admin_storage_effect", [
             "name" => "Thumbnail",
+            "identifier" => "thumbnail",
             "imagine_name" => "thumbnail",
             "imagine_json_params" => json_encode(['vars' => [
                 ['var' => "width", 'label' => 'Breit in Pixel'],
@@ -195,6 +196,7 @@ class ExecutableController extends \yii\console\Controller
     
         $this->insert("admin_storage_effect", [
             "name" => "Zuschneiden",
+            "identifier" => "resize",
             "imagine_name" => "resize",
             "imagine_json_params" => json_encode(['vars' => [
                 ['var' => "width", 'label' => 'Breit in Pixel'],
@@ -204,6 +206,7 @@ class ExecutableController extends \yii\console\Controller
     
         $this->insert("admin_storage_effect", [
             "name" => "Crop",
+            "identifier" => "crop",
             "imagine_name" => "crop",
             "imagine_json_params" => json_encode(['vars' => [
                 ['var' => "width", 'label' => 'Breit in Pixel'],

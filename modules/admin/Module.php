@@ -103,4 +103,21 @@ class Module extends \admin\base\Module
             'auth' => new \admin\components\Auth(),
         ];
     }
+    
+    public function import(\luya\commands\ExecutableController $exec)
+    {
+        $log = [
+            'filters' => []
+        ];
+        
+        foreach ($exec->getFilesNamespace('filters') as $filterClassName) {
+            if (!class_exists($filterClassName)) {
+                continue;
+            }
+            $object = new $filterClassName();
+            $log['filters'][$filterClassName] = $object->save();
+        }
+        
+        return $log;
+    }
 }
