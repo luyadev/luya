@@ -9,6 +9,7 @@ class m150304_152244_admin_storage_filter extends Migration
     {
         $this->createTable("admin_storage_filter", [
             "id" => "pk",
+            "identifier" => "VARCHAR(100) NOT NULL UNIQUE",
             "name" => Schema::TYPE_STRING,
         ]);
     }

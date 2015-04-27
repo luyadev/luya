@@ -24,15 +24,15 @@ class StorageFilter extends \admin\ngrest\base\Model
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name', 'identifier'], 'required'],
         ];
     }
 
     public function scenarios()
     {
         return [
-            'restcreate' => ['name'],
-            'restupdate' => ['name'],
+            'restcreate' => ['name', 'identifier'],
+            'restupdate' => ['name', 'identifier'],
         ];
     }
 
@@ -66,6 +66,7 @@ class StorageFilter extends \admin\ngrest\base\Model
         $config->strap->register(new \admin\straps\FilterEffectChain(), "Chain");
 
         $config->list->field("name", "Name")->text()->required();
+        $config->list->field("identifier", "Identifier")->text()->required();
         $config->list->field("id", "ID")->text();
 
         $config->create->copyFrom('list', ['id']);

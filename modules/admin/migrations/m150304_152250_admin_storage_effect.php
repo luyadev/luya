@@ -9,6 +9,7 @@ class m150304_152250_admin_storage_effect extends Migration
     {
         $this->createTable("admin_storage_effect", [
             "id" => "pk",
+            "identifier" => "VARCHAR(100) NOT NULL UNIQUE",
             "name" => Schema::TYPE_STRING,
             "imagine_name" => Schema::TYPE_STRING,
             "imagine_json_params" => Schema::TYPE_STRING,
