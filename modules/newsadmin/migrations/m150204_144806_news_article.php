@@ -13,10 +13,13 @@ class m150204_144806_news_article extends Migration
             "text" => Schema::TYPE_TEXT,
             "image_id" => Schema::TYPE_INTEGER,
             "image_list" => Schema::TYPE_TEXT,
+            "file_list" => Schema::TYPE_TEXT,
             "create_user_id" => Schema::TYPE_INTEGER,
             "update_user_id" => Schema::TYPE_INTEGER,
             "timestamp_create" => Schema::TYPE_INTEGER,
             "timestamp_update" => Schema::TYPE_INTEGER,
+            "timestamp_display_from" => Schema::TYPE_INTEGER,
+            "timestamp_display_until" => Schema::TYPE_INTEGER,
         ]);
     }
 

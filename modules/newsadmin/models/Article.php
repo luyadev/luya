@@ -12,20 +12,29 @@ class Article extends \admin\ngrest\base\Model
     {
         parent::init();
         $this->on(self::EVENT_BEFORE_INSERT, [$this, 'eventBeforeInsert']);
+        $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'eventBeforeUpdate']);
     }
 
     public function scenarios()
     {
         return [
-           'restcreate' => ['title', 'text', 'image_id', 'image_list', 'timestamp_update'],
-           'restupdate' => ['title', 'text', 'image_id', 'image_list', 'tags', 'timestamp_update'],
+           'restcreate' => ['title', 'text', 'image_id', 'image_list', 'tags', 'timestamp_display_from', 'timestamp_display_until', 'file_list'],
+           'restupdate' => ['title', 'text', 'image_id', 'image_list', 'tags', 'timestamp_display_from', 'timestamp_display_until', 'file_list'],
        ];
     }
 
+    public function eventBeforeUpdate()
+    {
+        $this->update_user_id = \admin\Module::getAdminUserData()->id;
+        $this->timestamp_update = time();
+    }
+    
     public function eventBeforeInsert()
     {
         $this->create_user_id = \admin\Module::getAdminUserData()->id;
+        $this->update_user_id = \admin\Module::getAdminUserData()->id;
         $this->timestamp_create = time();
+        $this->timestamp_update = time();
     }
 
     public function setTags($value)
@@ -50,9 +59,11 @@ class Article extends \admin\ngrest\base\Model
     {
         $config->list->field("title", "Titel")->text()->required();
         $config->list->field("text", "Text")->textarea()->required();
-        $config->list->field("timestamp_update", "Update Datum")->datepicker()->required();
-        $config->list->field("image_id", "Bild")->image();
-        $config->list->field("image_list", "Bild LIste")->imageArray();
+        $config->list->field("timestamp_display_from", "News anzeigen ab")->datepicker();
+        $config->list->field("timestamp_display_until", "News anzeigen bis")->datepicker();
+        $config->list->field("image_id", "Bild")->image()->required();
+        $config->list->field("image_list", "Bild Liste")->imageArray();
+        $config->list->field("file_list", "Datei Liste")->fileArray();
 
         $config->update->copyFrom('list', ['id']);
         $config->update->extraField("tags", "Tags")->checkboxReleation(['model' => \newsadmin\models\Tag::className(), 'labelField' => 'title']);
