@@ -42,9 +42,9 @@ class StorageEffect extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
-        $config->list->field("name", "Name")->text()->required();
-        $config->list->field("imagine_name", "imagine_name")->text()->required();
-        $config->list->field("imagine_json_params", "imagine_json_params")->ace();
+        $config->list->field("name", "Name")->text();
+        $config->list->field("imagine_name", "imagine_name")->text();
+        $config->list->field("imagine_json_params", "imagine_json_params")->text();
         $config->list->field("id", "ID")->text();
 
         return $config;
