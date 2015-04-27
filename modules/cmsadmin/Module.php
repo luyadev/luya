@@ -80,26 +80,7 @@ class Module extends \admin\base\Module
             'layouts' => [],
         ];
         
-        $toInsertBlocks = [];
-        
-        $files = $exec->getFilesNamespace('blocks');
-        foreach ($files as $file) {
-            $toInsertBlocks[] = '\\' . $file;
-        }
-        
-        /* import project blocks */ 
-        $blocks = \yii::getAlias('@app/blocks');
-        
-        if (file_exists($blocks)) {
-            foreach (scandir($blocks) as $file) {
-                if ($file == '.' || $file == '..') {
-                    continue;
-                }
-                $toInsertBlocks[] = '\\app\\blocks\\' . basename($file, '.php');
-            }
-        }
-        
-        foreach($toInsertBlocks as $ns) {
+        foreach ($exec->getFilesNamespace('blocks') as $ns) {
             if (!\cmsadmin\models\Block::find()->where(['class' => $ns])->asArray()->one()) {
                 $block = new \cmsadmin\models\Block();
                 $block->scenario = 'commandinsert';
@@ -109,10 +90,11 @@ class Module extends \admin\base\Module
                     "class" => $ns
                 ]);
                 $block->insert();
-                $_log['blocks'][$ns] = "new block $file has been found and inserted.";
+                $_log['blocks'][$ns] = "new block has been added to database.";
+            } else {
+                $_log['blocks'][$ns] = "already in the database.";
             }
         }
-        
         /* import project specific layouts */
         $cmslayouts = \yii::getAlias('@app/views/cmslayouts');
         

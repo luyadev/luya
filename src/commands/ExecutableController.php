@@ -14,23 +14,35 @@ class ExecutableController extends \yii\console\Controller
 {
     private $_dirs = [];
     
-    private $_blockFolders = [];
+    private $_scanFolders = ['blocks'];
     
     public function init()
     {
         foreach (\yii::$app->modules as $key => $item) {
             $module = \Yii::$app->getModule($key);
-            foreach(['blocks'] as $folderName) {
+            foreach($this->_scanFolders as $folderName) {
                 $folder = $module->getBasePath().DIRECTORY_SEPARATOR.$folderName;
                 if (file_exists($folder)) {
                     $this->_dirs[$folderName][] = [
-                        'ns' => $module->getNamespace() . '\\' . $folderName,
+                        'ns' => "\\" . $module->getNamespace() . '\\' . $folderName,
                         'module' => $module->id,
                         'folderPath' => $folder.DIRECTORY_SEPARATOR,
                         'folderName' => $folderName,
                         'files' => scandir($folder),
                     ];
                 }
+            }
+        }
+        // add scan to app folders
+        foreach ($this->_scanFolders as $folderName) {
+            $path = \yii::getAlias("@app/$folderName");
+            if (file_exists($path)) {
+                $this->_dirs[$folderName][] = [
+                    'ns' => "\\app\\" . $folderName,
+                    'module' => '@app',
+                    'folderPath' => $path . DIRECTORY_SEPARATOR,
+                    'files' => scandir($path)  
+                ];
             }
         }
     }
