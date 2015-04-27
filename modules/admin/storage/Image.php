@@ -12,11 +12,12 @@ class Image
         $image = $imagine->open($file);
 
         $model = \admin\models\StorageFilter::find()->where(['id' => $filterId])->one();
-        $image = $model->applyFilter($image);
+        
+        $newimage = $model->applyFilter($image, $imagine);
 
         $fileName = $filterId.'_'.$info->name_new_compound;
 
-        $save = $image->save(\yii::$app->luya->storage->dir.$fileName);
+        $save = $newimage->save(\yii::$app->luya->storage->dir.$fileName);
 
         if ($save) {
             $model = new \admin\models\StorageImage();

@@ -36,25 +36,40 @@ class StorageFilter extends \admin\ngrest\base\Model
         ];
     }
 
-    public function applyFilter($imagine)
+    public function applyFilter($image, $imagine)
     {
+        $newimage = null;
+        
         $chain = \admin\models\StorageFilterChain::find()->where(['filter_id' => $this->id ])->joinWith('effect')->all();
 
         foreach ($chain as $item) {
             switch ($item->effect->imagine_name) {
                 case "resize":
-                    $imagine->resize(new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height));
+                    if (is_null($newimage)) {
+                        $newimage = $image->resize(new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height));
+                    } else {
+                        $newimage = $newimage->resize(new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height));
+                    }
                     break;
                 case "thumbnail":
-                    $imagine->thumbnail(new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height), \Imagine\Image\ImageInterface::THUMBNAIL_INSET);
+                    if (is_null($newimage)) {
+                        $newimage = $image->thumbnail(new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height), \Imagine\Image\ImageInterface::THUMBNAIL_INSET);
+                    } else {
+                        $newimage = $newimage->thumbnail(new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height), \Imagine\Image\ImageInterface::THUMBNAIL_INSET);
+                    }
                     break;
                 case "crop":
-                    $imagine->crop(new \Imagine\Image\Point(0, 0), new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height));
+                    if (is_null($newimage)) {
+                        $newimage = $image->crop(new \Imagine\Image\Point(0, 0), new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height));
+                    } else {
+                        $newimage = $newimage->crop(new \Imagine\Image\Point(0, 0), new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height));
+                    }
                     break;
             }
         }
 
-        return $imagine;
+            
+        return $newimage;
     }
 
     // ngrest
