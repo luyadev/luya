@@ -66,6 +66,13 @@ class Url
 
         return yii::$app->urlManager->createUrl($routeParams);
     }
+    
+    public static function toModule($navItemId, $route, array $params = [])
+    {
+        Yii::$app->urlManager->setContextNavItemId($navItemId);
+        
+        return static::to($route, $params);
+    }
 
     /**
      * Create a link to use when point to an ajax script.

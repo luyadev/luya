@@ -15,6 +15,8 @@ class UrlManager extends \yii\web\UrlManager
 
     public $ruleConfig = ['class' => '\luya\base\UrlRule'];
 
+    private $_contextNavItemId = false;
+    
     public function parseRequest($request)
     {
         $route = parent::parseRequest($request);
@@ -49,6 +51,21 @@ class UrlManager extends \yii\web\UrlManager
         return parent::addRules($rules, $append);
     }
 
+    public function setContextNavItemId($navItemId)
+    {
+        $this->_contextNavItemId = $navItemId;
+    }
+    
+    public function getContextNavItemId()
+    {
+        return $this->_contextNavItemId;
+    }
+    
+    public function resetContext()
+    {
+        $this->_contextNavItemId = false;
+    }
+    
     public function createUrl($params)
     {
         if (!is_object(\yii::$app->collection->composition)) {
@@ -62,7 +79,7 @@ class UrlManager extends \yii\web\UrlManager
 
         $response = parent::createUrl($params);
 
-        // we have not found the composition rule matching against rules, so use the origianl params and try again!
+        // we have not found the composition rule matching against rules, so use the original params and try again!
         if (strpos($response, $params[0]) !== false) {
             $params = $originalParams;
             $response = parent::createUrl($params);
@@ -73,12 +90,20 @@ class UrlManager extends \yii\web\UrlManager
 
         $params = (array) $params;
         $moduleName = \luya\helpers\Url::fromRoute($params[0], 'module');
+        
+        if ($this->getContextNavItemId()) {
+            $link = \yii::$app->collection->links->findOneByArguments(['nav_item_id' => (int) $this->getContextNavItemId()]);
+            $this->resetContext();
+            return str_replace($moduleName, $composition . $link['url'], $response);
+        }
+        
+        
         if ($moduleName !== false) {
             $moduleObject = \yii::$app->getModule($moduleName);
 
             if (method_exists($moduleObject, 'getContext') && !empty($moduleObject->getContext())) {
                 $options = $moduleObject->getContextOptions();
-                $link = \yii::$app->collection->links->findOneByArguments(['nav_item_id' => $options['navItemId']]);
+                $link = \yii::$app->collection->links->findOneByArguments(['nav_item_id' => (int) $options['navItemId']]);
                 $response = str_replace($moduleName, $composition . $link['url'], $response);
             }
         }
