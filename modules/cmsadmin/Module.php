@@ -80,8 +80,11 @@ class Module extends \admin\base\Module
             'layouts' => [],
         ];
         
+        $allblocks = \cmsadmin\models\Block::find()->all();
+        $exists = [];
         foreach ($exec->getFilesNamespace('blocks') as $ns) {
-            if (!\cmsadmin\models\Block::find()->where(['class' => $ns])->asArray()->one()) {
+            $model = \cmsadmin\models\Block::find()->where(['class' => $ns])->asArray()->one();
+            if (!$model) {
                 $block = new \cmsadmin\models\Block();
                 $block->scenario = 'commandinsert';
                 $block->setAttributes([
@@ -93,8 +96,21 @@ class Module extends \admin\base\Module
                 $_log['blocks'][$ns] = "new block has been added to database.";
             } else {
                 $_log['blocks'][$ns] = "already in the database.";
+                $exists[] = $model['id'];
             }
         }
+        foreach ($allblocks as $block) {
+            if (!in_array($block->id, $exists)) {
+                /*
+                $items = \cmsadmin\models\NavItemPageBlockItem::find()->where(['block_id' => $block->id])->all();
+                foreach($items as $it) {
+                    $it->delete();
+                }
+                */
+                $block->delete();
+            }
+        }
+        
         /* import project specific layouts */
         $cmslayouts = \yii::getAlias('@app/views/cmslayouts');
         
