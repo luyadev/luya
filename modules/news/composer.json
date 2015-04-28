@@ -3,7 +3,7 @@
 	"description" : "Zephir Luya News",
 	"require" : {
 		"zephir/luya" : "*@dev",
-		"zephir/luya-module-news" : "*@dev"
+		"zephir/luya-module-newsadmin" : "*@dev"
 	},
 	"autoload" : {
 		"psr-4" : {
