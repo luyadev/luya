@@ -43,7 +43,7 @@ abstract class Block implements BlockInterface
         return $this->renderPath;
     }
     
-    private function render($twigFile)
+    protected function render($twigFile)
     {
         return file_get_contents(yii::getAlias($this->getRenderPath().$twigFile));
     }
