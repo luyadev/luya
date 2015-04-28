@@ -11,6 +11,7 @@ class m150204_144806_news_article extends Migration
             "id" => "pk",
             "title" => Schema::TYPE_TEXT,
             "text" => Schema::TYPE_TEXT,
+            "cat_id" => "int(11) NOT NULL default 0",
             "image_id" => Schema::TYPE_INTEGER,
             "image_list" => Schema::TYPE_TEXT,
             "file_list" => Schema::TYPE_TEXT,

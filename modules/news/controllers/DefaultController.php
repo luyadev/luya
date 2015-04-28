@@ -13,4 +13,13 @@ class DefaultController extends \luya\base\PageController
             'model' => $model,
         ]);
     }
+    
+    public function actionDetail($id, $title)
+    {
+        $model = \newsadmin\models\Article::find($id)->one();
+        
+        return $this->render('detail', [
+            'model' => $model
+        ]);
+    }
 }

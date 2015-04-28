@@ -6,6 +6,11 @@ class Module extends \admin\base\Module
     public static $apis = [
         'api-news-article' => 'newsadmin\apis\ArticleController',
         'api-news-tag' => 'newsadmin\apis\TagController',
+        'api-news-cat' => 'newsadmin\apis\CatController',
+    ];
+    
+    public static $urlRules = [
+        ['pattern' => 'news/detail/<id:\d+>/<title:[a-zA-Z0-9\-]+>/', 'route' => 'news/default/detail']  
     ];
 
     public function getMenu()
@@ -15,6 +20,7 @@ class Module extends \admin\base\Module
             ->group("Daten")
                 ->itemApi("Artikel", "newsadmin-article-index", "fa-newspaper-o", "api-news-article")
                 ->itemApi("Tags", "newsadmin-tag-index", "fa-tags", "api-news-tag")
+                ->itemApi("Katgorien", "newsadmin-cat-index", "fa-list-alt", "api-news-cat")
         ->menu();
     }
     

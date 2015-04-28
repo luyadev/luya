@@ -18,8 +18,8 @@ class Article extends \admin\ngrest\base\Model
     public function scenarios()
     {
         return [
-           'restcreate' => ['title', 'text', 'image_id', 'image_list', 'tags', 'timestamp_display_from', 'timestamp_display_until', 'file_list'],
-           'restupdate' => ['title', 'text', 'image_id', 'image_list', 'tags', 'timestamp_display_from', 'timestamp_display_until', 'file_list'],
+           'restcreate' => ['title', 'text', 'cat_id', 'image_id', 'image_list', 'tags', 'timestamp_display_from', 'timestamp_display_until', 'file_list'],
+           'restupdate' => ['title', 'text', 'cat_id', 'image_id', 'image_list', 'tags', 'timestamp_display_from', 'timestamp_display_until', 'file_list'],
        ];
     }
 
@@ -47,6 +47,11 @@ class Article extends \admin\ngrest\base\Model
         return $this->hasMany(\newsadmin\models\Tag::className(), ['id' => 'tag_id'])->viaTable('news_article_tag', ['article_id' => 'id']);
     }
 
+    public function getDetailUrl()
+    {
+        return \luya\helpers\Url::to('news/default/detail', ['id' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
+    }
+    
     // ngrest
 
     public $ngRestEndpoint = 'api-news-article';
@@ -57,6 +62,7 @@ class Article extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
+        $config->list->field("cat_id", "Kategorie")->selectClass('\newsadmin\models\Cat', 'id', 'title');
         $config->list->field("title", "Titel")->text()->required();
         $config->list->field("text", "Text")->textarea()->required();
         $config->list->field("timestamp_display_from", "News anzeigen ab")->datepicker();
