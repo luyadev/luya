@@ -8,7 +8,9 @@ abstract class Block implements BlockInterface
 {
     private $_jsonConfig = [];
     
-    private $_values = [];
+    private $_varValues = [];
+    
+    private $_cfgValues = [];
     
     public $renderPath = '@app/views/blocks/';
 
@@ -19,12 +21,21 @@ abstract class Block implements BlockInterface
     
     public function setVarValues(array $values)
     {
-        $this->_values = $values;
+        $this->_varValuesvalues = $values;
+    }
+    
+    public function getCfgValue($key, $default = false)
+    {
+        return (array_key_exists($key, $this->_cfgValues)) ? $this->_cfgValues[$key] : $default;
     }
     
     public function getVarValue($key, $default = false)
     {
-        return (array_key_exists($key, $this->_values)) ? $this->_values[$key] : $default;
+        return (array_key_exists($key, $this->_varValues)) ? $this->_varValues[$key] : $default;
+    }
+    
+    public function setCfgValues(array $values) {
+        $this->_cfgValues = $values;
     }
     
     public function getRenderPath()

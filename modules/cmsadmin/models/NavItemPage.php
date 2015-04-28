@@ -63,8 +63,14 @@ class NavItemPage extends \cmsadmin\base\NavItemType
             if (empty($configValues)) {
                 $configValues = [];
             }
+            
+            if (empty($cfgValues)) {
+                $cfgValues = [];
+            }
 
             $blockObject->setVarValues($configValues);
+            $blockObject->setCfgValues($cfgValues);
+            
             $jsonConfig = json_decode($blockObject->jsonConfig(), true);
 
             $insertedHolders = [];

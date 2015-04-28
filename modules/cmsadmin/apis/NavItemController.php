@@ -114,8 +114,10 @@ class NavItemController extends \admin\base\RestController
             $ipbid_value['t1_json_config_cfg_values'] = json_decode($ipbid_value['t1_json_config_cfg_values'], true);
             
             $blockValue = $ipbid_value['t1_json_config_values'];
+            $blockCfgValue = $ipbid_value['t1_json_config_cfg_values'];
             
             $blockObject->setVarValues((empty($blockValue)) ? [] : $blockValue);
+            $blockObject->setCfgValues((empty($blockCfgValue)) ? [] : $blockCfgValue);
             
             $placeholders = [];
 
