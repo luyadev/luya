@@ -33,7 +33,9 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 	}
 	
 	$scope.getStrap = function (strapId, id, $event) {
-		$http.post('admin/ngrest/render', angular.toJson({ itemId : id, strapHash : strapId , ngrestConfigHash : $scope.config.ngrestConfigHash }))
+		$http.post('admin/ngrest/render', $.param({ itemId : id, strapHash : strapId , ngrestConfigHash : $scope.config.ngrestConfigHash }), {
+			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+		})
 		.success(function(data) {
 			$scope.toggler.update = false;
 			$scope.toggler.strap = true;
