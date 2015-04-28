@@ -3,11 +3,12 @@ namespace cmsadmin\blocks;
 
 class ParagraphBlock extends \cmsadmin\base\Block
 {
-    public $renderPath = '@cmsadmin/views/blocks';
+    public function name()
+    {
+        return 'Text Absatz';
+    }
 
-    public $name = 'Paragraph Text';
-
-    public function jsonFromArray()
+    public function config()
     {
         return [
             'vars' => [
@@ -20,12 +21,12 @@ class ParagraphBlock extends \cmsadmin\base\Block
         ];
     }
 
-    public function getTwigFrontend()
+    public function twigFrontend()
     {
         return '<p>{{ vars.content }}</p>';
     }
 
-    public function getTwigAdmin()
+    public function twigAdmin()
     {
         return '<p>{{ vars.content }}</p>';
     }

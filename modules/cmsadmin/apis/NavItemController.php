@@ -108,7 +108,7 @@ class NavItemController extends \admin\base\RestController
             if ($blockObject === false) {
                 continue;
             }
-            $blockJsonConfig = json_decode($blockObject->getJsonConfig(), true);
+            $blockJsonConfig = json_decode($blockObject->jsonConfig(), true);
             
             $ipbid_value['t1_json_config_values'] = json_decode($ipbid_value['t1_json_config_values'], true);
             $ipbid_value['t1_json_config_cfg_values'] = json_decode($ipbid_value['t1_json_config_cfg_values'], true);
@@ -147,11 +147,11 @@ class NavItemController extends \admin\base\RestController
 
             $nav_item_page_block_item = [
                 'id' => $ipbid_value['t1_id'],
-                'name' => $blockObject->getName(),
-                'twig_admin' => $blockObject->getTwigAdmin(),
+                'name' => $blockObject->name(),
+                'twig_admin' => $blockObject->twigAdmin(),
                 'vars' => $keys,
                 'cfgs' => $cfgs,
-                'extras' => $blockObject->getExtraVars(),
+                'extras' => $blockObject->extraVars(),
                 'values' => $ipbid_value['t1_json_config_values'],
                 'cfgvalues' => $ipbid_value['t1_json_config_cfg_values'], // add: t1_json_config_cfg_values
                 '__placeholders' => $placeholders,

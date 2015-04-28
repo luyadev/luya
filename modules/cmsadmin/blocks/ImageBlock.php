@@ -3,9 +3,7 @@ namespace cmsadmin\blocks;
 
 class ImageBlock extends \cmsadmin\base\Block
 {
-    public $renderPath = '@cmsadmin/views/blocks';
-
-    public function jsonFromArray()
+    public function config()
     {
         return [
             'vars' => [
@@ -14,24 +12,24 @@ class ImageBlock extends \cmsadmin\base\Block
         ];
     }
 
-    public function getExtraVars()
+    public function extraVars()
     {
         return [
             'image' => \yii::$app->luya->storage->image->get($this->getVarValue('imageId'))
         ];
     }
     
-    public function getTwigFrontend()
+    public function twigFrontend()
     {
         return '<img src="{{extras.image.source}}" border="0" /> {{dump(extras)}}';
     }
 
-    public function getTwigAdmin()
+    public function twigAdmin()
     {
         return '<p>{% if extras.image.source %}<img src="{{extras.image.source}}" border="0" height="100" />{% else %}<strong>Es wurde noch kein Bild Hochgeladen.</strong>{% endif %}</p>';
     }
 
-    public function getName()
+    public function name()
     {
         return 'Bild';
     }

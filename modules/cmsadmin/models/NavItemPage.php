@@ -65,7 +65,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
             }
 
             $blockObject->setVarValues($configValues);
-            $jsonConfig = json_decode($blockObject->getJsonConfig(), true);
+            $jsonConfig = json_decode($blockObject->jsonConfig(), true);
 
             $insertedHolders = [];
 
@@ -74,11 +74,11 @@ class NavItemPage extends \cmsadmin\base\NavItemType
                     $insertedHolders[$item['var']] = $this->renderPlaceholder($navItemPageId, $item['var'], $placeholder['id']);
                 }
             }
-            $string .= $twig->render($blockObject->getTwigFrontend(), [
+            $string .= $twig->render($blockObject->twigFrontend(), [
                 'vars' => $configValues,
                 'cfgs' => $cfgValues,
                 'placeholders' => $insertedHolders,
-                'extras' => $blockObject->getExtraVars(),
+                'extras' => $blockObject->extraVars(),
             ]);
         }
 

@@ -1,78 +1,69 @@
 <?php
+
 namespace cmsadmin\base;
 
 use yii;
 
-abstract class Block
+abstract class Block implements BlockInterface
 {
-    public $name = null;
-
-    public $jsonConfig = [];
-
-    public $twigFrontend = null;
-
-    public $twigAdmin = null;
-
+    private $_jsonConfig = [];
+    
+    private $_values = [];
+    
     public $renderPath = '@app/views/blocks/';
 
-    public $values = [];
-    
     public function __construct()
     {
-        $fromArray = $this->jsonFromArray();
-
-        if ($fromArray) {
-            $this->jsonConfig = json_encode($fromArray);
-        }
+        $this->_jsonConfig = json_encode($this->config());
     }
     
     public function setVarValues(array $values)
     {
-        $this->values = $values;
-    }
-    
-    public function getExtraVars()
-    {
-        return [];
+        $this->_values = $values;
     }
     
     public function getVarValue($key, $default = false)
     {
-        return (array_key_exists($key, $this->values)) ? $this->values[$key] : $default;
+        return (array_key_exists($key, $this->_values)) ? $this->_values[$key] : $default;
     }
     
-    public function jsonFromArray()
-    {
-        return false;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function getJsonConfig()
-    {
-        return $this->jsonConfig;
-    }
-
-    public function getTwigFrontend()
-    {
-        return $this->twigFrontend;
-    }
-
-    public function getTwigAdmin()
-    {
-        return $this->twigAdmin;
-    }
-
     public function getRenderPath()
     {
         return $this->renderPath;
     }
-
-    public function render($twigFile)
+    
+    private function render($twigFile)
     {
         return file_get_contents(yii::getAlias($this->getRenderPath().$twigFile));
     }
+    
+    // access from outside
+    
+    public function extraVars()
+    {
+        return [];
+    }
+    
+    public function jsonConfig()
+    {
+        return $this->_jsonConfig;
+    }
+    
+    /*
+    public function getName()
+    {
+        return $this->name();
+    }
+    
+
+    public function getTwigFrontend()
+    {
+        return $this->twigFrontend();
+    }
+
+    public function getTwigAdmin()
+    {
+        return $this->twigAdmin();
+    }
+    */
 }

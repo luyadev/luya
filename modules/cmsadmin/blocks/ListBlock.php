@@ -3,9 +3,12 @@ namespace cmsadmin\blocks;
 
 class ListBlock extends \cmsadmin\base\Block
 {
-    public $name = 'Auflistungen';
-
-    public function jsonFromArray()
+    public function name()
+    {
+        return 'Auflistung';
+    }
+    
+    public function config()
     {
         return [
             'vars' => [
@@ -20,12 +23,12 @@ class ListBlock extends \cmsadmin\base\Block
         ];
     }
 
-    public function getTwigFrontend()
+    public function twigFrontend()
     {
         return '<{{cfgs.listType}}>{% for row in vars.elements %}<li>{{ row.value }}</li>{% endfor %}</{{cfgs.listType}}>';
     }
 
-    public function getTwigAdmin()
+    public function twigAdmin()
     {
         return '<{{ cfgs.listType }}>{% for row in vars.elements %}<li>{{ row.value }}</li>{% endfor %} </{{ cfgs.listType }}>';
     }

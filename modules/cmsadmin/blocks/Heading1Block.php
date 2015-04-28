@@ -5,7 +5,7 @@ class Heading1Block extends \cmsadmin\base\Block
 {
     public $renderPath = '@cmsadmin/views/blocks';
 
-    public function jsonFromArray()
+    public function config()
     {
         return [
             'vars' => [
@@ -17,17 +17,17 @@ class Heading1Block extends \cmsadmin\base\Block
         ];
     }
 
-    public function getTwigFrontend()
+    public function twigFrontend()
     {
         return '<h1 class="{{ cfgs.css_class }}">{{ vars.heading }}</h1>';
     }
 
-    public function getTwigAdmin()
+    public function twigAdmin()
     {
         return '<h1>{{ vars.heading }} {{ cfgs.css_class }}</h1>';
     }
 
-    public function getName()
+    public function name()
     {
         return 'Überschrift 1';
     }

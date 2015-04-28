@@ -7,42 +7,42 @@ An example code of a block could look like this: (The file Test is placed in ***
 
 ```php
 <?php
-namespace app\blocks;
+namespace cmsadmin\blocks;
 
-class Test extends \cmsadmin\base\Block
+class ImageBlock extends \cmsadmin\base\Block
 {
-    public function jsonFromArray()
+    public function config()
     {
         return [
             'vars' => [
-                ['var' => 'heading', 'label' => 'Uebeschrift 1', 'type' => 'zaa-input-text']
-            ]
+                ['var' => 'imageId', 'label' => 'Bild', 'type' => 'zaa-image-upload'],
+            ],
+        ];
+    }
+
+    public function extraVars()
+    {
+        return [
+            'image' => \yii::$app->luya->storage->image->get($this->getVarValue('imageId'))
         ];
     }
     
-    public function getExtraVars()
+    public function twigFrontend()
     {
-    	return [
-    		'time' => time(),
-    		'upperHeading' => strtoupper($this->getVarValue('heading')),
-    	];
+        return '<img src="{{extras.image.source}}" border="0" /> {{dump(extras)}}';
     }
-    
-    public function getTwigFrontend()
+
+    public function twigAdmin()
     {
-        return '<h1>{{ vars.heading }} in time {{ extras.time }} and uppercase {{ extras.upperHeading }}</h1>';
+        return '<p>{% if extras.image.source %}<img src="{{extras.image.source}}" border="0" height="100" />{% else %}<strong>Es wurde noch kein Bild Hochgeladen.</strong>{% endif %}</p>';
     }
-    
-    public function getTwigAdmin()
+
+    public function name()
     {
-        return '<h1>{{ vars.heading }} in time {{ extras.time }} and uppercase {{ extras.upperHeading }}</h1>';
-    }
-    
-    public function getName()
-    {
-        return 'Überschrift 1';
+        return 'Bild';
     }
 }
+
 ```
 
 To see all configuration possibilitys checkout the [Cms Block Guide](cms-blocks.md).
@@ -53,7 +53,7 @@ you can also render files instead of simple return strings, like this:
 
 ```php
 
-public function getTwigFrontend()
+public function twigFrontend()
 {
 	return $this->render('my_block_template.twig');
 }
