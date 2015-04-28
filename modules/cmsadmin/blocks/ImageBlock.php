@@ -3,6 +3,11 @@ namespace cmsadmin\blocks;
 
 class ImageBlock extends \cmsadmin\base\Block
 {
+    public function name()
+    {
+        return 'Bild';
+    }
+    
     public function config()
     {
         return [
@@ -27,10 +32,5 @@ class ImageBlock extends \cmsadmin\base\Block
     public function twigAdmin()
     {
         return '<p>{% if extras.image.source %}<img src="{{extras.image.source}}" border="0" height="100" />{% else %}<strong>Es wurde noch kein Bild Hochgeladen.</strong>{% endif %}</p>';
-    }
-
-    public function name()
-    {
-        return 'Bild';
     }
 }

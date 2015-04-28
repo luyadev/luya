@@ -13,8 +13,10 @@ class ParagraphBlock extends \cmsadmin\base\Block
         return [
             'vars' => [
                 ['var' => 'content', 'label' => 'Inhalt', 'type' => 'zaa-textarea'],
-                ['var' => 'parseMarkdown', 'label' => 'Parse Markdown?', 'type' => 'zaa-input-select', 'options' => [
-                        ["id" => 0 , "label" => "Nein" ] , ["id" => 1, "label" => "Ja"],
+                ['var' => 'parseMarkdown', 'label' => 'Parse Markdown?', 'type' => 'zaa-input-select', 'options' => 
+                    [
+                        ["id" => 0 , "label" => "Nein" ],
+                        ["id" => 1, "label" => "Ja"],
                     ],
                 ],
             ],
@@ -23,7 +25,7 @@ class ParagraphBlock extends \cmsadmin\base\Block
 
     public function twigFrontend()
     {
-        return '<p>{{ vars.content }}</p>';
+        return '<p>{{ vars.content|nl2br }}</p>';
     }
 
     public function twigAdmin()

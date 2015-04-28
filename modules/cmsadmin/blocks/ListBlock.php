@@ -15,10 +15,12 @@ class ListBlock extends \cmsadmin\base\Block
                 ['var' => 'elements', 'label' => 'Elemente', 'type' => 'zaa-list-array'],
             ],
             'cfgs' => [
-                ['var' => 'listType', 'label' => 'Type', 'type' => 'zaa-input-select', 'options' => [
-                    ['value' => 'ul', 'label' => 'UL-Liste'],
-                    ['value' => 'ol', 'label' => 'OL-Liste']
-                ]]
+                ['var' => 'listType', 'label' => 'Type', 'type' => 'zaa-input-select', 'options' => 
+                    [
+                        ['value' => 'ul', 'label' => 'UL-Liste'],
+                        ['value' => 'ol', 'label' => 'OL-Liste']
+                    ]
+                ]
             ],
         ];
     }
