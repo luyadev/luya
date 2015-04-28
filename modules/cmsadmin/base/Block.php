@@ -17,6 +17,12 @@ abstract class Block implements BlockInterface
     public function __construct()
     {
         $this->_jsonConfig = json_encode($this->config());
+        $this->init();
+    }
+    
+    public function init()
+    {
+        // use
     }
     
     public function setVarValues(array $values)
