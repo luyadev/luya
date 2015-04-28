@@ -47,8 +47,12 @@ class Article extends \admin\ngrest\base\Model
         return $this->hasMany(\newsadmin\models\Tag::className(), ['id' => 'tag_id'])->viaTable('news_article_tag', ['article_id' => 'id']);
     }
 
-    public function getDetailUrl()
+    public function getDetailUrl($contextNavItemId = null)
     {
+        if ($contextNavItemId) {
+            return \luya\helpers\Url::toModule($contextNavItemId, 'news/default/detail', ['id' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
+        }
+        
         return \luya\helpers\Url::to('news/default/detail', ['id' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
     }
     

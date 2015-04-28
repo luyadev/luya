@@ -13,7 +13,8 @@ class LatestNews extends \cmsadmin\base\Block
     {
         return [
             "cfgs" => [
-                ['var' => 'limit', 'label' => 'News Num Rows', 'type' => 'zaa-input-text']
+                ['var' => 'limit', 'label' => 'News Num Rows', 'type' => 'zaa-input-text'],
+                ['var' => 'nav_item_id', 'label' => 'Nav_Item_Id where module is running', 'type' => 'zaa-input-text'],
             ]  
         ];
     }
@@ -35,6 +36,6 @@ class LatestNews extends \cmsadmin\base\Block
      */
     public function twigFrontend()
     {
-        return '<ul>{% for item in extras.items %}<li><a href="{{ item.getDetailUrl() }}">{{ item.title }}</a></li>{% endfor %}</ul>';
+        return '<ul>{% for item in extras.items %}<li><a href="{{ item.getDetailUrl(cfgs.nav_item_id) }}">{{ item.title }}</a></li>{% endfor %}</ul>';
     }
 }
