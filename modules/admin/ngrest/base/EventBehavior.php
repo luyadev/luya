@@ -24,7 +24,10 @@ class EventBehavior extends \yii\base\Behavior
         foreach ($events as $field => $plugins) {
             foreach ($plugins as $plugin) {
                 $class = $plugin['class'];
-                $event->sender->$field = $class::onBeforeCreate($event->sender->$field);
+                $response = $class::onBeforeCreate($event->sender->$field);
+                if ($response !== false) {
+                    $event->sender->$field = $response;
+                }
             }
         }
     }
@@ -36,7 +39,10 @@ class EventBehavior extends \yii\base\Behavior
         foreach ($events as $field => $plugins) {
             foreach ($plugins as $plugin) {
                 $class = $plugin['class'];
-                $event->sender->$field = $class::onBeforeUpdate($event->sender->$field, $event->sender->getOldAttribute($field));
+                $response = $class::onBeforeUpdate($event->sender->$field, $event->sender->getOldAttribute($field));
+                if ($response !== false) {
+                    $event->sender->$field = $response;
+                }
             }
         }
     }
@@ -48,7 +54,10 @@ class EventBehavior extends \yii\base\Behavior
         foreach ($events as $field => $plugins) {
             foreach ($plugins as $plugin) {
                 $class = $plugin['class'];
-                $event->sender->$field = $class::onAfterList($event->sender->$field);
+                $response = $class::onAfterList($event->sender->$field);
+                if ($response !== false) {
+                    $event->sender->$field = $response;
+                }
             }
         }
     }

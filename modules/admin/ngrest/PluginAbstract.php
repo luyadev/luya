@@ -59,17 +59,17 @@ abstract class PluginAbstract
     
     public static function onBeforeCreate($fieldValue)
     {
-        return $fieldValue;
+        return false;
     }
     
     public static function onBeforeUpdate($fieldValue, $oldValue)
     {
-        return $fieldValue;
+        return false;
     }
     
     public static function onAfterList($fieldValue)
     {
-        return $fieldValue;
+        return false;
     }
 
     abstract public function renderList($doc);
