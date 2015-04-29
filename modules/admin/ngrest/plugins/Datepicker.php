@@ -32,7 +32,9 @@ class Datepicker extends PluginAbstract
         return $this->renderCreate($doc);
     }
     
-    public static function onBeforeCreate($value)
+    //
+    
+    public function onBeforeCreate($value)
     {
         if (empty($value)) {
             return 0;
@@ -40,12 +42,12 @@ class Datepicker extends PluginAbstract
         return DateTime::createFromFormat("d-m-Y", $value)->getTimestamp();
     }
     
-    public static function onBeforeUpdate($value, $oldValue)
+    public function onBeforeUpdate($value, $oldValue)
     {
-        return static::onBeforeCreate($value);
+        return $this->onBeforeCreate($value);
     }
     
-    public static function onAfterList($value)
+    public function onAfterList($value)
     {
         return (is_numeric($value)) ? date("d-m-Y", $value) : $value;
     }

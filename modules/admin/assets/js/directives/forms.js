@@ -107,6 +107,8 @@ zaa.directive('zaaInputCheckbox', function(){
 		
 		controller : function($scope) {
 			
+			$scope.model = [];
+			
 			$scope.toggleSelection = function (value) {
 				for (var i in $scope.model) {
 					if ($scope.model[i]['id'] == value.id) {
@@ -133,7 +135,7 @@ zaa.directive('zaaInputCheckbox', function(){
 		},
 		
 		template : function() {
-			return '<div style="border:1px solid #F0F0F0; padding:10px;"><label ng-repeat="item in options.items"><input type="checkbox" ng-checked="isChecked(item)"" ng-click="toggleSelection(item)"> {{item.label}}</label><hr /><button type="button" ng-click="ctrlclick()">DEBUG</button></div>';
+			return '<div style="border:1px solid #F0F0F0; padding:10px;"><label style="display:block; padding:5px;" ng-repeat="item in options.items"><input type="checkbox" ng-checked="isChecked(item)"" ng-click="toggleSelection(item)"> {{item.label}}</label></div>';
 		}
 	}
 });
@@ -200,7 +202,7 @@ zaa.directive('zaaImageArrayUpload', function(){
 			
 		},
 		template : function() {
-			return '<div><ul><li style="padding:5px; margin:5px; background-color:#F0F0F0;" ng-repeat="(key,image) in model">Caption: <input type="text" ng-model="image.caption" /><button type="button" ng-click="remove(key)">Entfernen</button><storage-image-upload ng-model="image.imageId"></storage-image-upload></li></ul></div>';
+			return '<div><ul><li style="padding:5px; margin:5px; background-color:#F0F0F0;" ng-repeat="(key,image) in model">Caption: <input type="text" ng-model="image.caption" /><button type="button" ng-click="remove(key)">Entfernen</button><storage-image-upload ng-model="image.imageId"></storage-image-upload></li></ul><button ng-click="add()" type="button">+ Element</button></div>';
 		}
 	}
 });
@@ -228,7 +230,7 @@ zaa.directive('zaaFileArrayUpload', function(){
 			}
 		},
 		template : function() {
-			return '<div><ul><li style="padding:5px; margin:5px; background-color:#F0F0F0;" ng-repeat="(key,file) in model">Caption: <input type="text" ng-model="file.caption" /><button type="button" ng-click="remove(key)">Entfernen</button><storage-file-upload ng-model="file.fileId"></storage-file-upload> </li></ul></div>';
+			return '<div><ul><li style="padding:5px; margin:5px; background-color:#F0F0F0;" ng-repeat="(key,file) in model">Caption: <input type="text" ng-model="file.caption" /><button type="button" ng-click="remove(key)">Entfernen</button><storage-file-upload ng-model="file.fileId"></storage-file-upload> </li></ul><button ng-click="add()" type="button">+ Element</button></div>';
 		}
 	}
 });

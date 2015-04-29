@@ -13,9 +13,12 @@ class SelectClass extends \admin\ngrest\plugins\Select
         if (is_object($class)) {
             $class = $class::className();
         }
-
-        $options = ['model' => ['class' => $class, 'value' => $valueField, 'label' => $labelField]];
-
-        parent::__construct($options);
+        
+        foreach ($class::find()->asArray()->all() as $item) {
+            $this->data[] = [
+                "value" => (int) $item[$valueField],
+                "label" => $item[$labelField],
+            ];
+        }
     }
 }

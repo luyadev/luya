@@ -37,15 +37,18 @@ class Article extends \admin\ngrest\base\Model
         $this->timestamp_update = time();
     }
 
+    /*
     public function setTags($value)
     {
-        $this->setRelation($value, "news_article_tag", "article_id", "tag_id");
+        $this->tags = $value;
+        //$this->setRelation($value, "news_article_tag", "article_id", "tag_id");
     }
 
     public function getTags()
     {
         return $this->hasMany(\newsadmin\models\Tag::className(), ['id' => 'tag_id'])->viaTable('news_article_tag', ['article_id' => 'id']);
     }
+    */
 
     public function getDetailUrl($contextNavItemId = null)
     {
@@ -57,6 +60,8 @@ class Article extends \admin\ngrest\base\Model
     }
     
     // ngrest
+    
+    public $tags = []; // cause of extra fields - will pe parsed trough the ngrest plugins.
 
     public $ngRestEndpoint = 'api-news-article';
 
@@ -74,10 +79,10 @@ class Article extends \admin\ngrest\base\Model
         $config->list->field("image_id", "Bild")->image()->required();
         $config->list->field("image_list", "Bild Liste")->imageArray();
         $config->list->field("file_list", "Datei Liste")->fileArray();
-
+        $config->list->extraField("tags", "Tags")->checkboxReleation(\newsadmin\models\Tag::className(), 'news_article_tag', 'article_id', 'tag_id');
+        //$config->list->extraField("tags", "Tags")->checkboxReleation(['model' => \newsadmin\models\Tag::className(), 'labelField' => 'title']);
+        
         $config->update->copyFrom('list', ['id']);
-        $config->update->extraField("tags", "Tags")->checkboxReleation(['model' => \newsadmin\models\Tag::className(), 'labelField' => 'title']);
-
         $config->create->copyFrom('list', ['id']);
 
         return $config;

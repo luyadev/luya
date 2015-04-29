@@ -11,8 +11,9 @@ abstract class PluginAbstract
 
     protected $ngModel = null;
 
-    public $options = [];
+    //public $options = [];
 
+    /*
     public function __construct(array $options = [])
     {
         $this->setOptions($options);
@@ -22,7 +23,9 @@ abstract class PluginAbstract
     public function init()
     {
     }
+    */
 
+    /*
     public function hasOption($key)
     {
         return (isset($this->options[$key])) ? true : false;
@@ -49,6 +52,20 @@ abstract class PluginAbstract
         $this->options[$key] = $value;
     }
 
+    */
+    
+    private $_model = null;
+    
+    public function setModel($model)
+    {
+        $this->_model = $model;
+    }
+    
+    public function getModel()
+    {
+        return $this->_model;
+    }
+
     public function setConfig($id, $name, $ngModel, $alias)
     {
         $this->id = $id;
@@ -57,17 +74,22 @@ abstract class PluginAbstract
         $this->alias = $alias;
     }
     
-    public static function onBeforeCreate($fieldValue)
+    public function onBeforeCreate($fieldValue)
     {
         return false;
     }
     
-    public static function onBeforeUpdate($fieldValue, $oldValue)
+    public function onAfterCreate($fieldValue)
     {
         return false;
     }
     
-    public static function onAfterList($fieldValue)
+    public function onBeforeUpdate($fieldValue, $oldValue)
+    {
+        return false;
+    }
+    
+    public function onAfterList($fieldValue)
     {
         return false;
     }

@@ -10,15 +10,20 @@ class Ace extends \admin\ngrest\PluginAbstract
 {
     use \admin\ngrest\PluginTrait;
 
-    public $options = [
-        "theme" => "chrome",
-        "mode" => "json",
-    ];
+    public $theme = null;
+    
+    public $mode = null;
+    
+    public function __construct($theme = 'chrome', $mode = 'json')
+    {
+        $this->theme = $theme;
+        $this->mode = $mode;
+    }
 
     public function renderCreate($doc)
     {
         $elmn = $doc->createElement("div");
-        $elmn->setAttribute("ui-ace", "{useWrapMode : true,  showGutter: true, theme:'".$this->getOption('theme')."', mode: '".$this->getOption('mode')."'}");
+        $elmn->setAttribute("ui-ace", "{useWrapMode : true,  showGutter: true, theme:'".$this->theme."', mode: '".$this->mode."'}");
         $elmn->setAttribute("ng-model", $this->ngModel);
         $doc->appendChild($elmn);
 

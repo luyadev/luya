@@ -29,12 +29,14 @@ class FileArray extends \admin\ngrest\PluginAbstract
         return $this->renderCreate($doc);
     }
     
-    public static function onAfterList($value)
+    //
+    
+    public function onAfterList($value)
     {
         return json_decode($value, true);
     }
     
-    public static function onBeforeCreate($value)
+    public function onBeforeCreate($value)
     {
         if (empty($value) || !is_array($value)) {
             return json_encode([]);
@@ -50,8 +52,8 @@ class FileArray extends \admin\ngrest\PluginAbstract
         return json_encode($data);
     }
     
-    public static function onBeforeUpdate($value, $oldValue)
+    public function onBeforeUpdate($value, $oldValue)
     {
-        return static::onBeforeCreate($value);
+        return $this->onBeforeCreate($value);
     }
 }

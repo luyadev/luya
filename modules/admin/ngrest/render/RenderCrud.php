@@ -103,10 +103,10 @@ class RenderCrud extends RenderAbstract implements RenderInterface
                 $ngModel = $this->i18nNgModelString($configContext, $element['name'], $v->short_code);
                 $id = "id-".md5($ngModel.$v->short_code);
 
-                $return[] = $v->short_code.':<br />'.$this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias']);
+                $return[] = '<li>' . $v->short_code.': '.$this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias']) . '</li>';
             }
 
-            return implode("", $return);
+            return '<ul>' . implode("", $return) . '</ul>';
         }
 
         if ($element['i18n'] && $configContext == self::TYPE_LIST) {
