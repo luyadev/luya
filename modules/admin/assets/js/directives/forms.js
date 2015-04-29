@@ -200,7 +200,7 @@ zaa.directive('zaaImageArrayUpload', function(){
 			
 		},
 		template : function() {
-			return '<div><ul><li style="padding:5px; margin:5px; background-color:#F0F0F0;" ng-repeat="(key,image) in model">Caption: <input type="text" ng-model="image.caption" /><button type="button" ng-click="remove(key)">Entfernen</button><storage-image-upload ng-model="image.imageId"></storage-image-upload></li></ul><button type="button" ng-click="add()">+ Bild</button><button type="button" ng-click="debug()">Debug</button></div>';
+			return '<div><ul><li style="padding:5px; margin:5px; background-color:#F0F0F0;" ng-repeat="(key,image) in model">Caption: <input type="text" ng-model="image.caption" /><button type="button" ng-click="remove(key)">Entfernen</button><storage-image-upload ng-model="image.imageId"></storage-image-upload></li></ul></div>';
 		}
 	}
 });
@@ -226,10 +226,9 @@ zaa.directive('zaaFileArrayUpload', function(){
 			$scope.debug = function() {
 				console.log($scope.model);
 			}
-			
 		},
 		template : function() {
-			return '<div><ul><li style="padding:5px; margin:5px; background-color:#F0F0F0;" ng-repeat="(key,file) in model">Caption: <input type="text" ng-model="file.caption" /><button type="button" ng-click="remove(key)">Entfernen</button><storage-file-upload ng-model="file.fileId"></storage-file-upload> </li></ul><button type="button" ng-click="add()">+ Datei</button><button type="button" ng-click="debug()">Debug</button></div>';
+			return '<div><ul><li style="padding:5px; margin:5px; background-color:#F0F0F0;" ng-repeat="(key,file) in model">Caption: <input type="text" ng-model="file.caption" /><button type="button" ng-click="remove(key)">Entfernen</button><storage-file-upload ng-model="file.fileId"></storage-file-upload> </li></ul></div>';
 		}
 	}
 });
@@ -250,13 +249,17 @@ zaa.directive("zaaListArray", function() {
 				$scope.model.push({ value : '' });
 			}
 			
+			$scope.remove = function(key) {
+				$scope.model.splice(key, 1);
+			}
+			
 			$scope.debug = function() {
 				console.log($scope.model);
 			}
 			
 		},
 		template : function() {
-			return '<div><ul><li ng-repeat="(key,row) in model"><input type="text" ng-model="row.value" /></li></ul><button ng-click="add()" type="button">+ Element</button><button ng-click="debug()" type="button">Debug</button></div>';
+			return '<div><ul><li ng-repeat="(key,row) in model"><input type="text" ng-model="row.value" /><button type="button" ng-click="remove(key)">Entfernen</button></li></ul><button ng-click="add()" type="button">+ Element</button></div>';
 		}
 	}
 });
