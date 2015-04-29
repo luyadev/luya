@@ -2,8 +2,7 @@
 	"name" : "zephir/luya-module-newsadmin",
 	"description" : "Zephir Luya Newsadmin",
 	"require" : {
-		"zephir/luya" : "*@dev",
-		"zephir/luya-module-news" : "*@dev"
+		"zephir/luya" : "*@dev"
 	},
 	"autoload" : {
 		"psr-4" : {
