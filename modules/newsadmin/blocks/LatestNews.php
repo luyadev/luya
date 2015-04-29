@@ -4,6 +4,15 @@ namespace newsadmin\blocks;
 
 class LatestNews extends \cmsadmin\base\Block
 {
+    private $_dropdown = [];
+    
+    public function init()
+    {
+        foreach (\cmsadmin\models\NavItem::fromModule('news') as $item) {
+            $this->_dropdown[] = ['value' => $item->id, 'label' => $item->title];
+        }
+    }
+    
     public function name()
     {
         return 'News: Latest Headlines';
@@ -14,7 +23,7 @@ class LatestNews extends \cmsadmin\base\Block
         return [
             "cfgs" => [
                 ['var' => 'limit', 'label' => 'News Num Rows', 'type' => 'zaa-input-text'],
-                ['var' => 'nav_item_id', 'label' => 'Nav_Item_Id where module is running', 'type' => 'zaa-input-text'],
+                ['var' => 'nav_item_id', 'label' => 'Nav_Item_Id where module is running', 'type' => 'zaa-input-select', 'options' => $this->_dropdown],
             ]  
         ];
     }
