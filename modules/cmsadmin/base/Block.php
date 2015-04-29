@@ -16,7 +16,6 @@ abstract class Block implements BlockInterface
 
     public function __construct()
     {
-        $this->_jsonConfig = json_encode($this->config());
         $this->init();
     }
     
@@ -63,7 +62,7 @@ abstract class Block implements BlockInterface
     
     public function jsonConfig()
     {
-        return $this->_jsonConfig;
+        return json_encode($this->config());
     }
     
     /*
