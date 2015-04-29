@@ -82,4 +82,9 @@ class NavItem extends \yii\db\ActiveRecord
         $this->create_user_id = \admin\Module::getAdminUserData()->id;
         $this->update_user_id = \admin\Module::getAdminUserData()->id;
     }
+    
+    static public function fromModule($moduleName)
+    {
+        return self::find()->leftJoin('cms_nav_item_module', 'nav_item_type_id=cms_nav_item_module.id')->where("nav_item_type=2")->all();
+    }
 }
