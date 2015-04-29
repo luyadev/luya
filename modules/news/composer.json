@@ -2,7 +2,7 @@
 	"name" : "zephir/luya-module-news",
 	"description" : "Zephir Luya News",
 	"require" : {
-		"zephir/luya" : "*@"
+		"zephir/luya" : "*"
 	},
 	"autoload" : {
 		"psr-4" : {
