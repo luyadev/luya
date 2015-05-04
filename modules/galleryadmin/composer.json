@@ -1,0 +1,12 @@
+{
+	"name" : "zephir/luya-module-galleryadmin",
+	"description" : "Zephir Luya Gallery Admin-Module",
+	"require" : {
+		"zephir/luya" : "*"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"galleryadmin\\" : ""
+		}
+	}
+}
