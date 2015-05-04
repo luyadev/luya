@@ -2,18 +2,23 @@
 namespace admin\ngrest;
 
 use yii\base\View;
+use yii\base\yii\base;
 
-abstract class StrapAbstract
+abstract class StrapAbstract implements \admin\ngrest\StrapInterface
 {
     private $itemId = false;
 
     public $config = false;
 
     protected $view = null;
-
-    public function __construct()
+    
+    public function getView()
     {
-        $this->view = new View();
+        if ($this->view === null) {
+            $this->view = new View();
+        }
+        
+        return $this->view;
     }
 
     public function setItemId($itemId)
