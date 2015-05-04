@@ -12,7 +12,10 @@ use yii\web\IdentityInterface;
  */
 class User extends \admin\ngrest\base\Model implements IdentityInterface
 {
-    public $ngRestEndpoint = 'api-admin-user';
+    public function ngRestApiEndpoint()
+    {
+        return 'api-admin-user';
+    }
 
     public function ngRestConfig($config)
     {

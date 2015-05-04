@@ -74,7 +74,10 @@ class StorageFilter extends \admin\ngrest\base\Model
 
     // ngrest
 
-    public $ngRestEndpoint = 'api-admin-filter';
+    public function ngRestApiEndpoint()
+    {
+        return 'api-admin-filter';
+    }
 
     public function ngRestConfig($config)
     {

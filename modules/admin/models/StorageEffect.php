@@ -38,8 +38,11 @@ class StorageEffect extends \admin\ngrest\base\Model
 
     // ngrest
 
-    public $ngRestEndpoint = 'api-admin-effect';
-
+    public function ngRestApiEndpoint()
+    {
+        return 'api-admin-effect';
+    }
+    
     public function ngRestConfig($config)
     {
         $config->list->field("name", "Name")->text()->required();

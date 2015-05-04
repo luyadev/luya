@@ -3,8 +3,11 @@ namespace admin\models;
 
 class Lang extends \admin\ngrest\base\Model
 {
-    public $ngRestEndpoint = 'api-admin-lang';
-
+    public function ngRestApiEndpoint()
+    {
+        return 'api-admin-lang';
+    }
+    
     public function ngRestConfig($config)
     {
         $config->list->field("name", "Name")->text()->required();
