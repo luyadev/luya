@@ -15,6 +15,7 @@
         "bower-asset/angular-pickadate" : "1.0.0@stable",
         "bower-asset/ace-builds" : "1.1.8@stable",
         "bower-asset/twig.js" : "0.7.2@stable",
+        "bower-asset/ng-flow" : "2.6.*@stable",
         "imagine/imagine": "~0.5.0"
 	},
 	"autoload" : {

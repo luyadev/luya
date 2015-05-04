@@ -15,6 +15,7 @@ class AssetBower extends \yii\web\AssetBundle
         'angular-dragdrop/src/angular-dragdrop.min.js',
         'angular-pickadate/dist/angular-pickadate.min.js',
         'twig.js/twig.min.js',
+        'ng-flow/dist/ng-flow-standalone.min.js',
     ];
     
     public $css = [
