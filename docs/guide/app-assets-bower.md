@@ -1,7 +1,9 @@
 load assets via composer bower
 ==============================
 
-composer.json
+require
+--------
+added your bower packages into the require part:
 ```json
 require : {
     "bower-asset/jquery" : "2.1.*@stable",
@@ -9,7 +11,20 @@ require : {
 }
 ```
 
-create asset for the packages above:
+extras
+------
+check your composer.json to set the extra informations:
+```json
+    "extra": {
+        "asset-installer-paths": {
+            "bower-asset-library": "vendor/bower"
+        }
+    },
+```
+
+asset
+-----
+create php asset class based in your config above:
 ```php
 class AssetBower extends \yii\web\AssetBundle
 {
