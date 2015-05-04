@@ -16,7 +16,7 @@ class Album extends \admin\ngrest\base\Model
     
     public function ngRestConfig($config)
     {
-        $config->strap->register(new \admin\straps\Gallery('gallery_album_image', 'image_id', 'album_id'), 'Bilder');
+        $config->strap->register(new \admin\straps\Gallery('gallery_album_image', 'image_id', 'album_id'), 'Bilder Hochladen &amp; Verwalten');
         
         $config->list->field('title', 'Titel')->text()->required();
         $config->list->field('description', 'Beschreibung')->textarea();
