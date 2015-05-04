@@ -9,10 +9,6 @@ class Module extends \admin\base\Module
         'api-news-cat' => 'newsadmin\apis\CatController',
     ];
     
-    public static $urlRules = [
-        ['pattern' => 'news/detail/<id:\d+>/<title:[a-zA-Z0-9\-]+>/', 'route' => 'news/default/detail']  
-    ];
-
     public function getMenu()
     {
         return $this
