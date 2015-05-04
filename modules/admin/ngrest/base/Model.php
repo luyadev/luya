@@ -28,7 +28,7 @@ abstract class Model extends \yii\db\ActiveRecord
             ],
             'LogBehavior' => [
                 'class' => LogBehavior::className(),
-                'api' => $this->ngRestEndpoint,
+                'api' => $this->getNgRestApiEndpoint(),
             ]
         ];
     }
