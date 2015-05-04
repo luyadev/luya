@@ -49,13 +49,15 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 		})
 	}
 
-	$scope.sendPostCallback = function(callback, data) {
-		console.log(callback, data);
-		
-		$http.post($scope.data.strap.configCallbackUrl + '?strapCallback=' + callback + '&ngrestConfigHash=' + $scope.data.strap.configHash + '&strapHash=' + $scope.data.strap.hash, $.param(data), {
+	$scope.getStrapCallbackUrl = function(callback) {
+		return $scope.data.strap.configCallbackUrl + '?strapCallback=' + callback + '&ngrestConfigHash=' + $scope.data.strap.configHash + '&strapHash=' + $scope.data.strap.hash;
+	}
+	
+	$scope.sendStrapCallback = function(callback, data) {
+		$http.post($scope.getStrapCallbackUrl(callback), $.param(data), {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-		}).success(function(r) {
-			console.log(r);
+		}).success(function(response) {
+			$scope.strapCallbackResponse = response;
 		});
 	}
 	
