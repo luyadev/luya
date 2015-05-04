@@ -7,10 +7,12 @@ use \admin\behaviors\LogBehavior;
 
 abstract class Model extends \yii\db\ActiveRecord
 {
+    /*
     public $ngRestEndpoint = null;
 
     public $ngRestPrimaryKey = null;
-
+    */
+    
     public $i18n = [];
 
     public $i18nExpandFields = false;
@@ -18,6 +20,8 @@ abstract class Model extends \yii\db\ActiveRecord
     public $extraFields = [];
 
     abstract public function ngRestConfig($config);
+    
+    abstract public function ngRestApiEndpoint();
 
     public function behaviors()
     {
@@ -28,7 +32,7 @@ abstract class Model extends \yii\db\ActiveRecord
             ],
             'LogBehavior' => [
                 'class' => LogBehavior::className(),
-                'api' => $this->getNgRestApiEndpoint(),
+                'api' => $this->ngRestApiEndpoint(),
             ]
         ];
     }
@@ -141,7 +145,8 @@ abstract class Model extends \yii\db\ActiveRecord
         return $this->i18n;
     }
 
-    public function getNgRestApiEndpoint()
+    /*
+    public function ngRestApiEndpoint()
     {
         if ($this->ngRestEndpoint === null) {
             throw new \yii\base\InvalidConfigException('The "ngRestEndpoint" property must be set.');
@@ -149,19 +154,16 @@ abstract class Model extends \yii\db\ActiveRecord
 
         return $this->ngRestEndpoint;
     }
-
-    public function getNgRestPrimaryKey()
+    */
+    
+    public function ngRestPrimaryKey()
     {
-        if (!empty($this->ngRestPrimaryKey)) {
-            return $this->ngRestPrimaryKey;
-        }
-
         return $this->getTableSchema()->primaryKey[0];
     }
-
+    
     public function getNgRestConfig()
     {
-        $config = new \admin\ngrest\Config($this->getNgRestApiEndpoint(), $this->getNgRestPrimaryKey());
+        $config = new \admin\ngrest\Config($this->ngRestApiEndpoint(), $this->ngRestPrimaryKey());
 
         $config->setExtraFields($this->extraFields());
         $config->i18n($this->getI18n());
