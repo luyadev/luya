@@ -5,6 +5,7 @@ APP (your luya project application)
 - app.md
 - app-filters.md
 - app-assets.md
+- app-assets-bower.md
 - app-blocks.md
 - app-menu.md
 
