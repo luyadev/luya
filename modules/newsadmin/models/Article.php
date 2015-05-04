@@ -63,12 +63,15 @@ class Article extends \admin\ngrest\base\Model
     
     public $tags = []; // cause of extra fields - will pe parsed trough the ngrest plugins.
 
-    public $ngRestEndpoint = 'api-news-article';
-
     public $i18n = ['title', 'text'];
 
     public $extraFields = ['tags'];
 
+    public function ngRestApiEndpoint()
+    {
+        return 'api-news-article';
+    }
+    
     public function ngRestConfig($config)
     {
         $config->list->field("cat_id", "Kategorie")->selectClass('\newsadmin\models\Cat', 'id', 'title');

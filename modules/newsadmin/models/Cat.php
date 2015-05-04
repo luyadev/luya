@@ -4,8 +4,6 @@ namespace newsadmin\models;
 
 class Cat extends \admin\ngrest\base\Model
 {
-    public $ngRestEndpoint = 'api-news-cat';
-    
     public static function tableName()
     {
         return 'news_cat';
@@ -17,6 +15,11 @@ class Cat extends \admin\ngrest\base\Model
             "restcreate" => ['title'],
             "restupdate" => ['title'],
         ];
+    }
+    
+    public function ngRestApiEndpoint()
+    {
+        return 'api-news-cat';
     }
     
     public function ngRestConfig($config)

@@ -3,13 +3,16 @@ namespace newsadmin\models;
 
 class Tag extends \admin\ngrest\base\Model
 {
-    public $ngRestEndpoint = 'api-news-tag';
-
     public $i18n = ['title'];
 
     public static function tableName()
     {
         return 'news_tag';
+    }
+    
+    public function ngRestApiEndpoint()
+    {
+        return 'api-news-tag';
     }
 
     public function ngRestConfig($config)
