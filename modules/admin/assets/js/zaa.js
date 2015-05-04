@@ -38,7 +38,18 @@ zaa.config(function ($httpProvider, $stateProvider, $controllerProvider, pickada
 		})
 });
 
-
+zaa.directive('compileHtml', function($compile, $parse) {
+	return {
+		restrict: 'A',
+		link: function(scope, element, attr) {
+			var parsed = $parse(attr.ngBindHtml);
+  
+			scope.$watch(function() { return (parsed(scope) || '').toString(); }, function() {
+		        $compile(element, null, -9999)(scope);  //The -9999 makes it skip directives so that we do not recompile ourselves
+	        });
+	    }
+	};
+});
 
 zaa.directive('zaaEsc', function() {
 	return function(scope, element, attrs) {
