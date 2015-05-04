@@ -3,8 +3,11 @@ namespace cmsadmin\models;
 
 class Cat extends \admin\ngrest\base\Model
 {
-    public $ngRestEndpoint = 'api-cms-cat';
-
+    public function ngRestApiEndpoint()
+    {
+        return 'api-cms-cat';
+    }
+    
     private function getNavData()
     {
         $_data = [];

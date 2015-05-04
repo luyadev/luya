@@ -3,8 +3,11 @@ namespace cmsadmin\models;
 
 class Block extends \admin\ngrest\base\Model
 {
-    public $ngRestEndpoint = 'api-cms-block';
-
+    public function ngRestApiEndpoint()
+    {
+        return 'api-cms-block';
+    }
+    
     public static function tableName()
     {
         return 'cms_block';

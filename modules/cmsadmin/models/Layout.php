@@ -3,8 +3,11 @@ namespace cmsadmin\models;
 
 class Layout extends \admin\ngrest\base\Model
 {
-    public $ngRestEndpoint = 'api-cms-layout';
-
+    public function ngRestApiEndpoint()
+    {
+        return 'api-cms-layout';
+    }
+    
     public function ngRestConfig($config)
     {
         $config->list->field("name", "Name")->text()->required();
