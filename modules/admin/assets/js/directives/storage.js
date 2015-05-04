@@ -84,6 +84,27 @@ zaa.directive('storageFileUpload', function() {
 	}
 });
 
+/*
+zaa.directive('storageImageUrl', function() {
+	return {
+		restrict : 'E',
+		scope : {
+			image : '@'
+		},
+		controller : function($scope, $http) {
+			$http.get('admin/api-admin-storage/image-path', { params: { imageId : $scope.image } }).success(function(response) {
+				$scope.imagesrc = response.source;
+				$scope.fileId = response.file_id;
+			}).error(function(response) {
+			})
+		},
+		template : function() {
+			return '<div>{{imagesrc}} {{fileId}} </div>';
+		}
+	}
+});
+*/
+
 zaa.directive('storageImageUpload', function() {
 	return {
 		restrict : 'E',
