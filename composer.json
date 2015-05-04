@@ -1,8 +1,8 @@
 {
 	"name" : "zephir/luya",
 	"type" : "library",
-	"description" : "Zephir Luya Library",
-	"keywords" : ["php", "yii2"],
+	"description" : "Zephir Luya Yii2 Cms",
+	"keywords" : ["php", "yii2", "cms", "admin", "modules"],
 	"homepage" : "https://github.com/zephir/luya",
 	"minimum-stability": "dev",
 	"authors" : [
