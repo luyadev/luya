@@ -2,7 +2,7 @@
 
 namespace admin\straps;
 
-class GroupAuth extends \admin\ngrest\StrapAbstract implements \admin\ngrest\StrapInterface
+class GroupAuth extends \admin\ngrest\StrapAbstract
 {
     public function render()
     {
@@ -19,7 +19,7 @@ class GroupAuth extends \admin\ngrest\StrapAbstract implements \admin\ngrest\Str
             ];
         }
         
-        return $this->view->render("@admin/views/strap/groupAuth", [
+        return $this->getView()->render("@admin/views/strap/groupAuth", [
             "groupId" => $this->getItemId(),
             "auth" => (new \yii\db\Query())->select("*")->from("admin_auth")->orderBy('module_name, alias_name ASC')->all(),
             "subs" => $subs,

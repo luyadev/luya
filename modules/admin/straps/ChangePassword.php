@@ -2,13 +2,12 @@
 namespace admin\straps;
 
 use admin\ngrest\StrapAbstract;
-use admin\ngrest\StrapInterface;
 
-class ChangePassword extends StrapAbstract implements StrapInterface
+class ChangePassword extends StrapAbstract
 {
     public function render()
     {
-        return $this->view->render("@admin/views/strap/changePassword", array(
+        return $this->getView()->render("@admin/views/strap/changePassword", array(
             "itemId" => $this->getItemId(),
             "strap" => $this,
         ));

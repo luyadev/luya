@@ -2,9 +2,8 @@
 namespace admin\straps;
 
 use admin\ngrest\StrapAbstract;
-use admin\ngrest\StrapInterface;
 
-class Delete extends StrapAbstract implements StrapInterface
+class Delete extends StrapAbstract
 {
     public function render()
     {

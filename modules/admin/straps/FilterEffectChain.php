@@ -1,11 +1,11 @@
 <?php
 namespace admin\straps;
 
-class FilterEffectChain extends \admin\ngrest\StrapAbstract implements \admin\ngrest\StrapInterface
+class FilterEffectChain extends \admin\ngrest\StrapAbstract
 {
     public function render()
     {
-        return $this->view->render("@admin/views/strap/FilterEffectChain", [
+        return $this->getView()->render("@admin/views/strap/FilterEffectChain", [
             'effectModel' => new \admin\models\StorageEffect(),
         ]);
     }
@@ -30,7 +30,7 @@ class FilterEffectChain extends \admin\ngrest\StrapAbstract implements \admin\ng
     public function callbackLoadEffects()
     {
         $data = \admin\models\StorageFilterChain::find()->where(['filter_id' => $this->getItemId()])->all();
-        $view = $this->view->render('@admin/views/strap/FilterEffectChainList', [
+        $view = $this->getView()->render('@admin/views/strap/FilterEffectChainList', [
             "data" => $data,
         ]);
 
