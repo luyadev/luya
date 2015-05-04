@@ -18,7 +18,8 @@
 		"twig/twig" : "1.*@stable",
 		"ext-curl" : "*",
         "curl/curl" : "1.2.0",
-        "phpmailer/phpmailer": "5.2.*@stable"
+        "phpmailer/phpmailer": "5.2.*@stable",
+        "flowjs/flow-php-server" : "1.0.*@stable"
 	},
 	"require-dev" : {
 		"yiisoft/yii2-debug" : "*@stable",
