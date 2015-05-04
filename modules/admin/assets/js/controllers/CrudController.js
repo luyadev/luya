@@ -39,12 +39,26 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 		.success(function(data) {
 			$scope.toggler.update = false;
 			$scope.toggler.strap = true;
-			$scope.data.strap.id = strapId;
+			$scope.data.strap.itemId = id;
+			$scope.data.strap.configCallbackUrl = $scope.config.strapCallbackUrl;
+			$scope.data.strap.configHash = $scope.config.ngrestConfigHash;
+			$scope.data.strap.hash = strapId;
+			$scope.data.strap.id = strapId; /* @todo: remove! BUT: equal to above, but still need in jquery accessing */
 			$scope.data.strap.content = $sce.trustAsHtml(data);
 			dispatchEvent('onCrudStrapLoad');
 		})
 	}
 
+	$scope.sendPostCallback = function(callback, data) {
+		console.log(callback, data);
+		
+		$http.post($scope.data.strap.configCallbackUrl + '?strapCallback=' + callback + '&ngrestConfigHash=' + $scope.data.strap.configHash + '&strapHash=' + $scope.data.strap.hash, $.param(data), {
+			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+		}).success(function(r) {
+			console.log(r);
+		});
+	}
+	
 	$scope.toggleStrap = function() {
 		$scope.toggler.strap = !$scope.toggler.strap;
 	}

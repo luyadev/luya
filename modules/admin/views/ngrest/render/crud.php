@@ -12,6 +12,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
     $scope.config.create = <?=json_encode($crud->getFields('create'));?>;
     $scope.config.update = <?=json_encode($crud->getFields('update'));?>;
     $scope.config.ngrestConfigHash = '<?= $config->getNgRestConfigHash(); ?>';
+    $scope.config.strapCallbackUrl = '<?= $strapCallbackUrl;?>';
 });
 </script>
 
@@ -213,7 +214,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
     <div class="overlay overlay--green" ng-class="{'is-active': toggler.strap}">
         <div class="overlay__wrapper">
             <div class="overlay__content" ng-show="toggler.strap">
-                <div class="overlay__body" ng-bind-html="data.strap.content"></div>
+                <div class="overlay__body" compile-html ng-bind-html="data.strap.content"></div>
                 <div class="form__actions">
                     <hr /> Strap Close Buttons
                     <button class="button button--red" type="button" ng-click="toggleStrap()">
