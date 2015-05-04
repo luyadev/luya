@@ -1,21 +1,34 @@
 LUYA GUIDE
 ==========
 
-START
-------
-* [Collaboration](start-collaboration.md)
-* Create Project ***TBD***
-* [Module](start-module.md)
-  * [Module Page](start-module-page.md)
-    * [NGREST](start-ngrest.md)
-    * [NGREST-Field](start-ngrest-fields.md)
-    * [NGREST-Strap](start-ngrest-strap.md)
-  * [Module Frontend](start-module-frontend.md)
-    * [Navigation](start-module-frontend-navigation.md)
-    * [Assets](start-module-assets.md)
+APP (your luya project application)
+- app.md
+- app-filters.md
+- app-assets.md
+- app-blocks.md
+- app-menu.md
 
-CMS
----
-* [Custom Project Blocks](cms-custom-blocks.md)
-* [Blocks](cms-blocks.md)
-* [Layouts](cms-layouts.md)
+CMS (general cms infos)
+- cms-blocks.md
+- cms-layouts.md
+
+ADMIN (general admin infos)
+- admin-effects.md
+
+APP-MODULE (your luya project modules)
+- app-module.md
+- app-module-frontend.md
+- app-module-admin.md
+- app-module-assets.md
+
+LUYA (general luya infos)
+- luya-collaboration.md
+- luya-console.md
+- luya-mail.md
+
+NGREST (general ngrest infos)
+- ngrest.md
+- ngrest-plugins.md
+- ngrest-straps.md
+- ngrest-plugin-checkboxrelation.md
+- ngrest-plugin-select.md

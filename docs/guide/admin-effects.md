@@ -1,13 +1,10 @@
+
+
 Admin Effects
 ==============
 
-Json example for an effect:
+the following effects are available
 
-```
-{
-    "vars" : [
-        { "var" : "width", "label" : "Breite in Pixel" },
-        { "var" : "height", "label" : "Höhe in Pixel" }
-    ]
-}
-```
+- resize (params: width (in px), height (in px))
+- thumbnail (params: width (in px), height (in px))
+- crop (params: width (in px), height (in px))
