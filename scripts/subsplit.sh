@@ -2,8 +2,8 @@
 # apt-get install svn
 # wget https://github.com/dflydev/git-subsplit/archive/master.zip
 
-REPO="https://github.com/zephir/luya"
-BASE="https://github.com/zephir"
+REPO="git@github.com:zephir/luya"
+BASE="git@github.com:zephir"
 
 if [ "$1" = "init" ]; then
 	git subsplit init $REPO
