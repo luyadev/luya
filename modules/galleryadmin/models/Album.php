@@ -35,4 +35,18 @@ class Album extends \admin\ngrest\base\Model
             'restupdate' => ['title', 'description', 'cover_image_id'],
         ];
     }
+    
+    public function getDetailUrl($contextNavItemId = null)
+    {
+        if ($contextNavItemId) {
+            return \luya\helpers\Url::toModule($contextNavItemId, 'gallery/default/detail', ['id' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
+        }
+    
+        return \luya\helpers\Url::to('gallery/default/detail', ['id' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
+    }
+    
+    public function images()
+    {
+        return (new \yii\db\Query())->from('gallery_album_image')->where(['album_id' => $this->id])->all();
+    }
 }
