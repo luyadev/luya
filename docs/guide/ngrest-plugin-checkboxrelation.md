@@ -32,7 +32,7 @@ class Model extends \luya\admin\ngrest\base\Model
 	{
 		...
 		
-		$config->update->extraField("tags", "Tags")->checkboxReleation(['model' => \newsadmin\models\Tag::className(), 'labelField' => 'title']);
+		$config->update->extraField("tags", "Tags")->checkboxRelation(['model' => \newsadmin\models\Tag::className(), 'labelField' => 'title']);
 		
 		...
 	}

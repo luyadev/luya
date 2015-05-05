@@ -37,19 +37,6 @@ class Article extends \admin\ngrest\base\Model
         $this->timestamp_update = time();
     }
 
-    /*
-    public function setTags($value)
-    {
-        $this->tags = $value;
-        //$this->setRelation($value, "news_article_tag", "article_id", "tag_id");
-    }
-
-    public function getTags()
-    {
-        return $this->hasMany(\newsadmin\models\Tag::className(), ['id' => 'tag_id'])->viaTable('news_article_tag', ['article_id' => 'id']);
-    }
-    */
-
     public function getDetailUrl($contextNavItemId = null)
     {
         if ($contextNavItemId) {
@@ -82,8 +69,7 @@ class Article extends \admin\ngrest\base\Model
         $config->list->field("image_id", "Bild")->image()->required();
         $config->list->field("image_list", "Bild Liste")->imageArray();
         $config->list->field("file_list", "Datei Liste")->fileArray();
-        $config->list->extraField("tags", "Tags")->checkboxReleation(\newsadmin\models\Tag::className(), 'news_article_tag', 'article_id', 'tag_id');
-        //$config->list->extraField("tags", "Tags")->checkboxReleation(['model' => \newsadmin\models\Tag::className(), 'labelField' => 'title']);
+        $config->list->extraField("tags", "Tags")->checkboxRelation(\newsadmin\models\Tag::className(), 'news_article_tag', 'article_id', 'tag_id');
         
         $config->update->copyFrom('list', ['id']);
         $config->create->copyFrom('list', ['id']);

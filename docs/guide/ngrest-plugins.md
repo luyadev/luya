@@ -18,7 +18,7 @@ fields
 | image													| Creates an image uploader and returns the imageId to the obeserved field
 | imageArray											| Creates an uploader for multiple images and serialize them as json into the data tabel (type must be text).
 | file													| Creates a file upload and returns the fileId to the observed field
-| [checkboxReleation](start-ngrest-field-checkboxreleation.md) | Createa checkbox part based on a refTable/viaTable.
+| [checkboxRelation](start-ngrest-field-checkboxRelation.md) | Createa checkbox part based on a refTable/viaTable.
 | datepicker											| Creates an input field with a datepicker popover (model value: dd-mm-yyyy)
 
 
