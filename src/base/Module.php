@@ -52,7 +52,9 @@ class Module extends \yii\base\Module
     public $controllerUseModuleViewPath = null;
 
     /**
-     * @var array
+     * each module can have assets, all module controllers will register those assets in the view.
+     * 
+     * @var array Valid class name to the asset e.g. \app\assets\TestAsset
      */
     public $assets = [];
 
