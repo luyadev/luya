@@ -3,6 +3,7 @@
 $config = [
     'components' => [
         'mail' => '\luya\components\Mailer',
+        'twig' => '\luya\components\Twig',
         'errorHandler' => [
             'class' => '\luya\components\ErrorHandler',
         ],
