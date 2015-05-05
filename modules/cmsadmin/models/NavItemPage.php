@@ -60,7 +60,8 @@ class NavItemPage extends \cmsadmin\base\NavItemType
             if (empty($cfgValues)) {
                 $cfgValues = [];
             }
-
+            
+            $blockObject->setEnvOptions($this->getOptions());
             $blockObject->setVarValues($configValues);
             $blockObject->setCfgValues($cfgValues);
             

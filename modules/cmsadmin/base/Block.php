@@ -12,6 +12,8 @@ abstract class Block implements BlockInterface
     
     private $_cfgValues = [];
     
+    private $_envOptions = [];
+    
     public $renderPath = '@app/views/blocks/';
 
     public function __construct()
@@ -22,6 +24,21 @@ abstract class Block implements BlockInterface
     public function init()
     {
         // use
+    }
+    
+    public function setEnvOptions(array $values)
+    {
+        $this->_envOptions = $values;
+    }
+    
+    public function getEnvOption($key, $default = false)
+    {
+        return (array_key_exists($key, $this->_envOptions)) ? $this->_envOptions[$key] : $default;
+    }
+    
+    public function getEnvOptions()
+    {
+        return $this->_envOptions;
     }
     
     public function setVarValues(array $values)

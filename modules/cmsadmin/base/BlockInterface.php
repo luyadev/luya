@@ -19,4 +19,6 @@ interface BlockInterface
     public function setVarValues(array $values);
     
     public function setCfgValues(array $values);
+    
+    public function setEnvOptions(array $values);
 }
