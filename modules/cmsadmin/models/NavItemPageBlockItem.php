@@ -21,6 +21,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     public function init()
     {
         parent::init();
+        $this->on(self::EVENT_BEFORE_INSERT, [$this, 'eventBeforeInsert']);
         $this->on(self::EVENT_AFTER_INSERT, [$this, 'eventAfterInsert']);
         $this->on(self::EVENT_AFTER_UPDATE, [$this, 'eventAfterUpdate']);
     }
@@ -74,6 +75,17 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         $this->reindex($this->nav_item_page_id, $this->placeholder_var, $this->prev_id);
     }
 
+    public function eventBeforeInsert()
+    {
+        if (empty($this->json_config_cfg_values)) {
+            $this->json_config_cfg_values = json_encode([], JSON_FORCE_OBJECT);
+        }
+        
+        if (empty($this->json_config_values)) {
+            $this->json_config_values = json_encode([], JSON_FORCE_OBJECT);
+        }
+    }
+    
     private function reindex($navItemPageId, $placeholderVar, $prevId)
     {
         $index = 0;

@@ -147,6 +147,14 @@ class NavItemController extends \admin\base\RestController
                 $cfgs = $blockJsonConfig['cfgs'];
             }
 
+            if (empty($ipbid_value['t1_json_config_values'])) {
+                $ipbid_value['t1_json_config_values'] = new \stdClass();
+            }
+            
+            if (empty($ipbid_value['t1_json_config_cfg_values'])) {
+                $ipbid_value['t1_json_config_cfg_values'] = new \stdClass();
+            }
+
             $nav_item_page_block_item = [
                 'id' => $ipbid_value['t1_id'],
                 'name' => $blockObject->name(),
