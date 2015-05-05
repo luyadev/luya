@@ -4,6 +4,9 @@ namespace admin\storage;
 
 class Image
 {
+    /**
+	 * @todo see if the image for this filterid does already exists.
+	 */
     public function create($fileId, $filterId = 0)
     {
         $file = \yii::$app->luya->storage->file->getPath($fileId);
@@ -38,6 +41,39 @@ class Image
         return false;
     }
 
+    /**
+     * 
+     * see if the filter for this image already has been applyd, yes return the image_source, otherwise apply
+     * filter and return the new image_source.
+     * 
+     * @param integer $imageId
+     * @param string $filterIdentifier
+     */
+    public function filterApply($imageId, $filterIdentifier)
+    {
+        // resolve $filterIdentifier
+        $filter = \admin\models\StorageFilter::find()->where(['identifier' => $filterIdentifier])->asArray()->one();
+        if (!$filter) {
+            throw new \Exception("could not find the filterIdentifier " . $filterIdentifier);
+        }
+        $filterId = $filter['id'];
+        
+        $image = $this->get($imageId);
+        if (!$image) {
+            return false;
+        }
+        
+        $data = (new \yii\db\Query())->from("admin_storage_image")->where(['file_id' => $image->file_id, 'filter_id' => $filterId])->one();
+        
+        if ($data) {
+            $imageId = $data['id'];
+        } else {
+            $imageId = $this->create($image->file_id, $filterId);
+        }
+        
+        return $this->get($imageId);
+    }
+    
     // @web/storage/the-originame_name_$filterId_$fileIdf.jpg
     public function get($imageId)
     {
