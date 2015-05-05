@@ -26,7 +26,7 @@ abstract class Block implements BlockInterface
     
     public function setVarValues(array $values)
     {
-        $this->_varValuesvalues = $values;
+        $this->_varValues = $values;
     }
     
     public function getCfgValue($key, $default = false)
