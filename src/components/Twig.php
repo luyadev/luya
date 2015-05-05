@@ -23,6 +23,9 @@ class Twig extends \yii\base\Component
             },
             'asset' => function($name) {
                 return \yii::$app->getAssetManager()->getBundle($name);
+            },
+            'filterApply' => function($imageId, $filterIdentifier) {
+                return \yii::$app->luya->storage->image->filterApply($imageId, $filterIdentifier)->source;
             }
         ];
     }
