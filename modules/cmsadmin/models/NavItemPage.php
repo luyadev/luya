@@ -19,13 +19,8 @@ class NavItemPage extends \cmsadmin\base\NavItemType
 
     public function getContent()
     {
-        $loader = new \Twig_Loader_Filesystem(\yii::getAlias('@app/views/cmslayouts/'));
-        $twig = new \Twig_Environment($loader, ['autoescape' => false, 'debug' => true]);
-        $twig->addExtension(new \Twig_Extension_Debug());
-        $linksFunction = new \Twig_SimpleFunction('links', function($cat, $lang, $parent_nav_id) {
-            return yii::$app->collection->links->findByArguments(['cat' => $cat, 'lang' => $lang, 'parent_nav_id' => $parent_nav_id ]);
-        });
-        $twig->addFunction($linksFunction);
+        $twig = Yii::$app->twig->env(new \Twig_Loader_Filesystem(\yii::getAlias('@app/views/cmslayouts/')));
+        
         $insertion = [];
 
         foreach ($this->layout->getJsonConfig('placeholders') as $item) {
@@ -48,11 +43,9 @@ class NavItemPage extends \cmsadmin\base\NavItemType
 
         $placeholders = (new \yii\db\Query())->from("cms_nav_item_page_block_item t1")->select("t1.*")->where(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId])->orderBy('sort_index ASC')->all();
 
+        $twig = Yii::$app->twig->env(new \Twig_Loader_String());
+        
         foreach ($placeholders as $key => $placeholder) {
-            $loader = new \Twig_Loader_String();
-			// @todo disable debugging
-            $twig = new \Twig_Environment($loader, ['autoescape' => false, 'debug' => true]);
-            $twig->addExtension(new \Twig_Extension_Debug());
             $blockObject = \cmsadmin\models\Block::objectId($placeholder['block_id']);
             if ($blockObject === false) {
                 continue;
