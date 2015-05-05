@@ -85,6 +85,6 @@ class NavItem extends \yii\db\ActiveRecord
     
     static public function fromModule($moduleName)
     {
-        return self::find()->leftJoin('cms_nav_item_module', 'nav_item_type_id=cms_nav_item_module.id')->where("nav_item_type=2")->all();
+        return self::find()->leftJoin('cms_nav_item_module', 'nav_item_type_id=cms_nav_item_module.id')->where(['nav_item_type' => 2, 'cms_nav_item_module.module_name' => $moduleName])->all();
     }
 }
