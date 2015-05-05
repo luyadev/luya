@@ -37,6 +37,9 @@ class ModuleBlock extends \cmsadmin\base\Block
     
     private function moduleContent($moduleName)
     {
+        if (empty($moduleName)) {
+            return null;
+        }
         $module = \yii::$app->getModule($moduleName);
         $module->setContext('cms');
         $module->setContextOptions($this->getEnvOptions());
