@@ -43,8 +43,6 @@ Don't forget to replace "username" with your Github username
 git clone https://github.com/username/luya.git .
 ```
 
-Install Luya. For the complete guide, visit: [https://github.com/zephir/luya](https://github.com/zephir/luya)
-
 4. Create luya-kickstarter project
 ------------------------------------
 Working directory: luya-working-dir/website/
@@ -75,6 +73,18 @@ Edit local config and update db informations:
     'password' => 'your_password'
 ]
 ```
+
+Copy preproduction config:
+```
+cp config/prep.php.dist config/prep.php
+```
+
+Copy server config:
+```
+cp config/server.php.dist config/server.php
+```
+
+Per default, no other changes to the config are required.
 
 ### 4.2 Update composer
 To work on luya modules, we have to update the composer.json.
