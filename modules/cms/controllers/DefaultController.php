@@ -101,9 +101,10 @@ class DefaultController extends \luya\base\PageController
         if (empty($context)) {
             return;
         }
-
         foreach ($context as $prop => $value) {
-            $this->$prop = $value;
+            if (!empty($value)) {
+                $this->$prop = $value;
+            }
         }
     }
 
