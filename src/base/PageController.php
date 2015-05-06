@@ -3,11 +3,9 @@ namespace luya\base;
 
 class PageController extends \luya\base\Controller implements \yii\base\ViewContextInterface
 {
-    public $pageTitle = '';
-
-    public $pageMeta = [];
-
+    public $pageTitle = null;
+    
     public $propertyMap = [
-        'pageTitle', 'pageMeta',
+        'pageTitle',
     ];
 }
