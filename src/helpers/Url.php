@@ -1,4 +1,5 @@
 <?php
+
 namespace luya\helpers;
 
 use yii;
@@ -12,7 +13,7 @@ class Url
      */
     public static function fromRoute($route, $returnPart = false)
     {
-        $parts = explode("/", $route);
+        $parts = explode('/', $route);
 
         if (count($parts) == 3) {
             list($module, $controller, $action) = $parts;
@@ -23,9 +24,9 @@ class Url
         }
 
         $parts = [
-            "module" => $module,
-            "controller" => $controller,
-            "action" => $action,
+            'module' => $module,
+            'controller' => $controller,
+            'action' => $action,
         ];
 
         if ($returnPart !== false) {
@@ -41,11 +42,11 @@ class Url
      * @param string $url   The url which a trailing slash should be appended
      * @param string $slash If you want to trail a file on a windows system it gives you the ability to add forward slashes.
      */
-    public static function trailing($url, $slash = "/")
+    public static function trailing($url, $slash = '/')
     {
         return $url.(substr($url, -1) == $slash ? '' : $slash);
     }
-    
+
     public static function removeTrailing($url, $slash = '/')
     {
         return rtrim($url, $slash);
@@ -66,11 +67,11 @@ class Url
 
         return yii::$app->urlManager->createUrl($routeParams);
     }
-    
+
     public static function toModule($navItemId, $route, array $params = [])
     {
         Yii::$app->urlManager->setContextNavItemId($navItemId);
-        
+
         return static::to($route, $params);
     }
 

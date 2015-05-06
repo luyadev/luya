@@ -1,10 +1,11 @@
 <?php
+
 namespace admin\ngrest\plugins;
 
 /**
  * @todo rename to SelectModel instead of SelectClass
- * @author nadar
  *
+ * @author nadar
  */
 class SelectClass extends \admin\ngrest\plugins\Select
 {
@@ -13,11 +14,11 @@ class SelectClass extends \admin\ngrest\plugins\Select
         if (is_object($class)) {
             $class = $class::className();
         }
-        
+
         foreach ($class::find()->asArray()->all() as $item) {
             $this->data[] = [
-                "value" => (int) $item[$valueField],
-                "label" => $item[$labelField],
+                'value' => (int) $item[$valueField],
+                'label' => $item[$labelField],
             ];
         }
     }

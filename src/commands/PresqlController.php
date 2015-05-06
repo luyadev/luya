@@ -60,7 +60,7 @@ class PresqlController extends \yii\console\controllers\MigrateController
     public function actionCreate($name, $module = false)
     {
         if (!preg_match('/^\w+$/', $name)) {
-            throw new Exception("The migration name should contain letters, digits and/or underscore characters only.");
+            throw new Exception('The migration name should contain letters, digits and/or underscore characters only.');
         }
 
         $name = 'm'.gmdate('ymd_His').'_'.$name;
@@ -116,7 +116,7 @@ class PresqlController extends \yii\console\controllers\MigrateController
             $handle = opendir($moduleMigrationPath);
 
             while (($file = readdir($handle)) !== false) {
-                if ($file === "." || $file === "..") {
+                if ($file === '.' || $file === '..') {
                     continue;
                 }
                 if (preg_match('/^(m(\d{6}_\d{6})_.*?)\.php$/', $file, $matches) && is_file($moduleMigrationPath.DIRECTORY_SEPARATOR.$file) && !isset($applied[$matches[2]])) {

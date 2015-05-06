@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\straps;
 
 use admin\ngrest\StrapAbstract;
@@ -7,9 +8,9 @@ class ChangePassword extends StrapAbstract
 {
     public function render()
     {
-        return $this->getView()->render("@admin/views/strap/changePassword", array(
-            "itemId" => $this->getItemId(),
-            "strap" => $this,
+        return $this->getView()->render('@admin/views/strap/changePassword', array(
+            'itemId' => $this->getItemId(),
+            'strap' => $this,
         ));
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace cmsadmin\models;
 
 class BlockGroup extends \admin\ngrest\base\Model
@@ -7,7 +8,7 @@ class BlockGroup extends \admin\ngrest\base\Model
     {
         return 'api-cms-blockgroup';
     }
-    
+
     public static function tableName()
     {
         return 'cms_block_group';

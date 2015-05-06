@@ -1,4 +1,5 @@
 <?php
+
 namespace newsadmin\controllers;
 
 class TagController extends \admin\ngrest\base\Controller

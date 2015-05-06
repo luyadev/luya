@@ -1,4 +1,5 @@
 <?php
+
 namespace cmsadmin\models;
 
 class Block extends \admin\ngrest\base\Model
@@ -7,7 +8,7 @@ class Block extends \admin\ngrest\base\Model
     {
         return 'api-cms-block';
     }
-    
+
     public static function tableName()
     {
         return 'cms_block';
@@ -15,10 +16,10 @@ class Block extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
-        $config->list->field("class", "Class")->text()->required();
+        $config->list->field('class', 'Class')->text()->required();
 
-        $config->create->field("class", "Class")->text()->required();
-        $config->create->field("group_id", "Gruppe")->selectClass('\cmsadmin\models\BlockGroup', 'id', 'name')->required();
+        $config->create->field('class', 'Class')->text()->required();
+        $config->create->field('group_id', 'Gruppe')->selectClass('\cmsadmin\models\BlockGroup', 'id', 'name')->required();
 
         $config->update->copyFrom('create');
 
@@ -47,7 +48,7 @@ class Block extends \admin\ngrest\base\Model
         if (!$block) {
             return false;
         }
-        
+
         $class = $block->class;
         if (!class_exists($class)) {
             return false;

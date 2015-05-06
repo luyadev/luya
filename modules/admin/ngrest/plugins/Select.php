@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\ngrest\plugins;
 
 use admin\ngrest\PluginAbstract;
@@ -20,12 +21,12 @@ abstract class Select extends PluginAbstract
 
     public function renderCreate($doc)
     {
-        $elmn = $doc->createElement("zaa-input-select");
-        $elmn->setAttribute("id", $this->id);
-        $elmn->setIdAttribute("id", true);
-        $elmn->setAttribute("model", $this->ngModel);
-        $elmn->setAttribute("options", json_encode($this->data));
-        $elmn->setAttribute("class", "form__input");
+        $elmn = $doc->createElement('zaa-input-select');
+        $elmn->setAttribute('id', $this->id);
+        $elmn->setIdAttribute('id', true);
+        $elmn->setAttribute('model', $this->ngModel);
+        $elmn->setAttribute('options', json_encode($this->data));
+        $elmn->setAttribute('class', 'form__input');
         $doc->appendChild($elmn);
 
         return $doc;

@@ -2,8 +2,8 @@
 
 namespace admin\ngrest\base;
 
-use \admin\ngrest\base\EventBehavior;
-use \admin\behaviors\LogBehavior;
+use admin\ngrest\base\EventBehavior;
+use admin\behaviors\LogBehavior;
 
 abstract class Model extends \yii\db\ActiveRecord
 {
@@ -12,7 +12,7 @@ abstract class Model extends \yii\db\ActiveRecord
 
     public $ngRestPrimaryKey = null;
     */
-    
+
     public $i18n = [];
 
     public $i18nExpandFields = false;
@@ -20,7 +20,7 @@ abstract class Model extends \yii\db\ActiveRecord
     public $extraFields = [];
 
     abstract public function ngRestConfig($config);
-    
+
     abstract public function ngRestApiEndpoint();
 
     public function behaviors()
@@ -28,15 +28,15 @@ abstract class Model extends \yii\db\ActiveRecord
         return [
             'EventBehavior' => [
                 'class' => EventBehavior::className(),
-                'ngRestConfig' => $this->getNgRestConfig()
+                'ngRestConfig' => $this->getNgRestConfig(),
             ],
             'LogBehavior' => [
                 'class' => LogBehavior::className(),
                 'api' => $this->ngRestApiEndpoint(),
-            ]
+            ],
         ];
     }
-    
+
     public function init()
     {
         parent::init();
@@ -58,7 +58,7 @@ abstract class Model extends \yii\db\ActiveRecord
      */
     protected function proccess($value, $viaTableName, $localTableId, $foreignTableId)
     {
-        throw new \Exception("use setRelation() method instead of proccess() method!");
+        throw new \Exception('use setRelation() method instead of proccess() method!');
     }
 
     /**
@@ -67,11 +67,11 @@ abstract class Model extends \yii\db\ActiveRecord
      * @param string $localTableId   The name of the field inside the viaTable which represents the match against the local table, example: article_id
      * @param string $foreignTableId The name of the field inside the viaTable which represents the match against the foreign table, example: tag_id
      *
-     * @return boolean
+     * @return bool
      */
     public function setRelation($value, $viaTableName, $localTableId, $foreignTableId)
     {
-        $delete = \yii::$app->db->createCommand()->delete($viaTableName, [$localTableId => $this->id ])->execute();
+        $delete = \yii::$app->db->createCommand()->delete($viaTableName, [$localTableId => $this->id])->execute();
         $batch = [];
         foreach ($value as $k => $v) {
             $batch[] = [$this->id, $v['id']];
@@ -155,12 +155,12 @@ abstract class Model extends \yii\db\ActiveRecord
         return $this->ngRestEndpoint;
     }
     */
-    
+
     public function ngRestPrimaryKey()
     {
         return $this->getTableSchema()->primaryKey[0];
     }
-    
+
     public function getNgRestConfig()
     {
         $config = new \admin\ngrest\Config($this->ngRestApiEndpoint(), $this->ngRestPrimaryKey());

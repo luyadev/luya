@@ -1,4 +1,5 @@
 <?php
+
 namespace cms;
 
 class Module extends \luya\base\Module

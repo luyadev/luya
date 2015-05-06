@@ -1,4 +1,5 @@
 <?php
+
 namespace cms\collection;
 
 class Links extends \luya\collection\Links implements \luya\collection\LinksInterface
@@ -18,7 +19,7 @@ class Links extends \luya\collection\Links implements \luya\collection\LinksInte
         $tree = $this->getData($parentNavId);
         foreach ($tree as $index => $item) {
             if ($this->subNodeExists($item['id'])) {
-                $this->iteration($item['id'], $urlPrefix.$item['rewrite'].'/', ($depth+1));
+                $this->iteration($item['id'], $urlPrefix.$item['rewrite'].'/', ($depth + 1));
             }
             $this->urls[$urlPrefix.$item['rewrite']] = [
                 'url' => $urlPrefix.$item['rewrite'],
@@ -41,6 +42,6 @@ class Links extends \luya\collection\Links implements \luya\collection\LinksInte
 
     private function subNodeExists($parentNavId)
     {
-        return (new \yii\db\Query())->select("id")->from("cms_nav")->where(['parent_nav_id' => $parentNavId])->count();
+        return (new \yii\db\Query())->select('id')->from('cms_nav')->where(['parent_nav_id' => $parentNavId])->count();
     }
 }

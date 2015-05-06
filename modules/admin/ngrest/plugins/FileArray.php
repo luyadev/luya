@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\ngrest\plugins;
 
 /**
@@ -8,17 +9,18 @@ class FileArray extends \admin\ngrest\PluginAbstract
 {
     public function renderList($doc)
     {
-        $elmn = $doc->createElement("span", "[Datei-Liste]");
+        $elmn = $doc->createElement('span', '[Datei-Liste]');
         $doc->appendChild($elmn);
+
         return $doc;
     }
 
     public function renderCreate($doc)
     {
-        $elmn = $doc->createElement("zaa-file-array-upload");
-        $elmn->setAttribute("id", $this->id);
-        $elmn->setIdAttribute("id", true);
-        $elmn->setAttribute("model", $this->ngModel);
+        $elmn = $doc->createElement('zaa-file-array-upload');
+        $elmn->setAttribute('id', $this->id);
+        $elmn->setIdAttribute('id', true);
+        $elmn->setAttribute('model', $this->ngModel);
         $doc->appendChild($elmn);
 
         return $doc;
@@ -28,30 +30,30 @@ class FileArray extends \admin\ngrest\PluginAbstract
     {
         return $this->renderCreate($doc);
     }
-    
+
     //
-    
+
     public function onAfterList($value)
     {
         return json_decode($value, true);
     }
-    
+
     public function onBeforeCreate($value)
     {
         if (empty($value) || !is_array($value)) {
             return json_encode([]);
         }
         $data = [];
-        foreach($value as $key => $item) {
+        foreach ($value as $key => $item) {
             $data[$key] = [
-                "fileId" => $item['fileId'],
-                "caption" => $item['caption'],
+                'fileId' => $item['fileId'],
+                'caption' => $item['caption'],
             ];
         }
-        
+
         return json_encode($data);
     }
-    
+
     public function onBeforeUpdate($value, $oldValue)
     {
         return $this->onBeforeCreate($value);

@@ -1,4 +1,5 @@
 <?php
+
 namespace luya\base;
 
 use yii;
@@ -40,20 +41,20 @@ class Module extends \yii\base\Module
     /**
      * This variable is only available if your not in a context call. A context call would be if the cms renders the module.
      *
-     * @var boolean
+     * @var bool
      */
     public $useAppLayoutPath = true;
 
     /**
      * This variable can enable the view path defintion for all controllers inside this module.
      *
-     * @var boolean true = the view path inside this module will be used, false = the view path of the projects app view will be used.
+     * @var bool true = the view path inside this module will be used, false = the view path of the projects app view will be used.
      */
     public $controllerUseModuleViewPath = null;
 
     /**
      * each module can have assets, all module controllers will register those assets in the view.
-     * 
+     *
      * @var array Valid class name to the asset e.g. \app\assets\TestAsset
      */
     public $assets = [];
@@ -103,7 +104,7 @@ class Module extends \yii\base\Module
 
     public function findControllerRoute($route)
     {
-        $xp = explode("/", $route);
+        $xp = explode('/', $route);
         foreach ($xp as $k => $v) {
             if ($k == 0 && $v == $this->id) {
                 unset($xp[$k]);
@@ -117,7 +118,7 @@ class Module extends \yii\base\Module
             $xp[] = $this->defaultRoute;
         }
 
-        return implode("/", $xp);
+        return implode('/', $xp);
     }
 
     public function setContext($name)
@@ -153,19 +154,20 @@ class Module extends \yii\base\Module
     {
         return [];
     }
-    
+
     /**
-     * The import method will be called from exec/import command
-     * 
+     * The import method will be called from exec/import command.
+     *
      * @return void|string
      */
     public function import(\luya\commands\ExecutableController $exec)
     {
-        return get_class($this) . ' does not use the import() method.';
+        return get_class($this).' does not use the import() method.';
     }
-    
+
     /**
-     * returns "luya\base" for example
+     * returns "luya\base" for example.
+     *
      * @return string
      */
     public function getNamespace()

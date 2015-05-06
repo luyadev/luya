@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\controllers;
 
 use yii;
@@ -37,6 +38,6 @@ class LoginController extends \admin\base\Controller
             }
         }
 
-        return $this->render("index", ['model' => $model]);
+        return $this->render('index', ['model' => $model]);
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\controllers;
 
 class StorageController extends \admin\base\Controller

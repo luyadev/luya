@@ -1,4 +1,5 @@
 <?php
+
 namespace cmsadmin\apis;
 
 class MenuController extends \admin\base\RestController
@@ -8,11 +9,11 @@ class MenuController extends \admin\base\RestController
         $data = [];
         foreach (\cmsadmin\models\Cat::find()->all() as $cat) {
             $data[] = [
-                "name" => $cat->name,
-                "rewrite" => $cat->rewrite,
-                "id" => $cat->id,
-                "default_nav_id" => $cat->default_nav_id,
-                "__items" => $this->actionGetByCatRewrite($cat->rewrite),
+                'name' => $cat->name,
+                'rewrite' => $cat->rewrite,
+                'id' => $cat->id,
+                'default_nav_id' => $cat->default_nav_id,
+                '__items' => $this->actionGetByCatRewrite($cat->rewrite),
             ];
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace cmsadmin\blocks;
 
 class HtmlBlock extends \cmsadmin\base\Block

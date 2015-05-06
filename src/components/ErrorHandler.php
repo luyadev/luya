@@ -1,4 +1,5 @@
 <?php
+
 namespace luya\components;
 
 class ErrorHandler extends \yii\web\ErrorHandler
@@ -57,10 +58,10 @@ class ErrorHandler extends \yii\web\ErrorHandler
         $_trace = [];
         foreach ($exception->getTrace() as $key => $item) {
             $_trace[$key] = [
-                "file" => isset($item['file']) ? $item['file'] : null,
-                "line" => isset($item['line']) ? $item['line'] : null,
-                "function" => isset($item['function']) ? $item['function'] : null,
-                "class" => isset($item['class']) ? $item['class'] : null,
+                'file' => isset($item['file']) ? $item['file'] : null,
+                'line' => isset($item['line']) ? $item['line'] : null,
+                'function' => isset($item['function']) ? $item['function'] : null,
+                'class' => isset($item['class']) ? $item['class'] : null,
             ];
         }
 

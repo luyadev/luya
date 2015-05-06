@@ -1,4 +1,5 @@
 <?php
+
 namespace newsadmin\controllers;
 
 class ArticleController extends \admin\ngrest\base\Controller

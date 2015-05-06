@@ -1,4 +1,5 @@
 <?php
+
 namespace cmsadmin\base;
 
 abstract class NavItemType extends \yii\db\ActiveRecord

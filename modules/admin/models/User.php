@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\models;
 
 use yii;
@@ -19,19 +20,19 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
 
     public function ngRestConfig($config)
     {
-        $config->strap->register(new \admin\straps\ChangePassword(), "Passwort ändern");
+        $config->strap->register(new \admin\straps\ChangePassword(), 'Passwort ändern');
 
-        $config->strap->register(new \admin\straps\Delete(), "Löschen");
+        $config->strap->register(new \admin\straps\Delete(), 'Löschen');
 
-        $config->create->field("title", "Anrede")->selectArray(\admin\models\User::getTitles());
-        $config->create->field("firstname", "Vorname")->text()->required();
-        $config->create->field("lastname", "Nachname")->text()->required();
-        $config->create->field("email", "E-Mail-Adresse")->text()->required();
-        $config->create->field("password", "Passwort")->password()->required();
+        $config->create->field('title', 'Anrede')->selectArray(\admin\models\User::getTitles());
+        $config->create->field('firstname', 'Vorname')->text()->required();
+        $config->create->field('lastname', 'Nachname')->text()->required();
+        $config->create->field('email', 'E-Mail-Adresse')->text()->required();
+        $config->create->field('password', 'Passwort')->password()->required();
 
-        $config->list->field("id", "ID")->text();
-        $config->list->field("firstname", "Vorname")->text();
-        $config->list->field("lastname", "Nachname")->text();
+        $config->list->field('id', 'ID')->text();
+        $config->list->field('firstname', 'Vorname')->text();
+        $config->list->field('lastname', 'Nachname')->text();
         $config->update->copyFrom('create', ['password']);
 
         return $config;
@@ -80,7 +81,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
             $this->encodePassword();
         }
     }
-    
+
     /**
      * override default scope find().
      */
@@ -147,7 +148,8 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
     public function encodePassword()
     {
         if (empty($this->password) || strlen($this->password) < 8) {
-            $this->addError("password", "the password must be 8 chars");
+            $this->addError('password', 'the password must be 8 chars');
+
             return false;
         }
         // create random string for password salting
@@ -199,7 +201,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
     /**
      * Finds an identity by the given ID.
      *
-     * @param string|integer $id the ID to be looked for
+     * @param string|int $id the ID to be looked for
      *
      * @return IdentityInterface|null the identity object that matches the given ID.
      */
@@ -244,7 +246,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
     /**
      * @param string $authKey
      *
-     * @return boolean if auth key is valid for current user
+     * @return bool if auth key is valid for current user
      */
     public function validateAuthKey($authKey)
     {

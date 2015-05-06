@@ -1,4 +1,5 @@
 <?php
+
 namespace account\controllers;
 
 class DefaultController extends \account\base\Controller
@@ -44,7 +45,7 @@ class DefaultController extends \account\base\Controller
             }
         }
 
-        return $this->render("index", ['model' => $model]);
+        return $this->render('index', ['model' => $model]);
     }
 
     public function actionLostpass()

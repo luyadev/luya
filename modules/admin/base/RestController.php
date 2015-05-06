@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\base;
 
 /*
@@ -23,7 +24,7 @@ class RestController extends \luya\rest\Controller implements \luya\rest\Behavio
     {
         return new \admin\components\User();
     }
-    
+
     public function getUser()
     {
         return $this->userAuthClass()->getIdentity();

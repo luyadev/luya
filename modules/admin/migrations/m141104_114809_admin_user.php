@@ -7,16 +7,16 @@ class m141104_114809_admin_user extends Migration
 {
     public function up()
     {
-        $this->createTable("admin_user", [
-            "id" => "pk",
-            "firstname" => Schema::TYPE_STRING,
-            "lastname" => Schema::TYPE_STRING,
-            "title" => Schema::TYPE_SMALLINT,
-            "email" => Schema::TYPE_STRING,
-            "password" => Schema::TYPE_STRING,
-            "password_salt" => Schema::TYPE_STRING,
-            "auth_token" => Schema::TYPE_STRING,
-            "is_deleted" => Schema::TYPE_SMALLINT,
+        $this->createTable('admin_user', [
+            'id' => 'pk',
+            'firstname' => Schema::TYPE_STRING,
+            'lastname' => Schema::TYPE_STRING,
+            'title' => Schema::TYPE_SMALLINT,
+            'email' => Schema::TYPE_STRING,
+            'password' => Schema::TYPE_STRING,
+            'password_salt' => Schema::TYPE_STRING,
+            'auth_token' => Schema::TYPE_STRING,
+            'is_deleted' => Schema::TYPE_SMALLINT,
         ]);
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\apis;
 
 class LangController extends \admin\base\RestActiveController

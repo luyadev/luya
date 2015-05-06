@@ -1,4 +1,5 @@
 <?php
+
 namespace account\controllers;
 
 class SettingsController extends \account\base\Controller

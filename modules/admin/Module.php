@@ -1,7 +1,6 @@
 <?php
-namespace admin;
 
-use luya\Luya;
+namespace admin;
 
 class Module extends \admin\base\Module
 {
@@ -58,16 +57,16 @@ class Module extends \admin\base\Module
     public function getMenu()
     {
         return $this
-        ->nodeRoute("Datei Manager", "fa-hdd-o", "admin-storage-index", "admin/storage/index")
-        ->node("Admin Einstellungen", "fa-gears")
-            ->group("Zrugriff")
-                ->itemApi("Benutzer", "admin-user-index", "fa-user", "api-admin-user")
-                ->itemApi("Gruppen", "admin-group-index", "fa-users", "api-admin-group")
-            ->group("System")
-                ->itemApi("Sprachen", "admin-lang-index", "fa-language", "api-admin-lang")
-            ->group("Bilder")
-                ->itemApi("Effekte", "admin-effect-index", "fa-link", "api-admin-effect")
-                ->itemApi("Filter", "admin-filter-index", "fa-filter", "api-admin-filter")
+        ->nodeRoute('Datei Manager', 'fa-hdd-o', 'admin-storage-index', 'admin/storage/index')
+        ->node('Admin Einstellungen', 'fa-gears')
+            ->group('Zrugriff')
+                ->itemApi('Benutzer', 'admin-user-index', 'fa-user', 'api-admin-user')
+                ->itemApi('Gruppen', 'admin-group-index', 'fa-users', 'api-admin-group')
+            ->group('System')
+                ->itemApi('Sprachen', 'admin-lang-index', 'fa-language', 'api-admin-lang')
+            ->group('Bilder')
+                ->itemApi('Effekte', 'admin-effect-index', 'fa-link', 'api-admin-effect')
+                ->itemApi('Filter', 'admin-filter-index', 'fa-filter', 'api-admin-filter')
         ->menu();
     }
     /*
@@ -103,13 +102,13 @@ class Module extends \admin\base\Module
             'auth' => new \admin\components\Auth(),
         ];
     }
-    
+
     public function import(\luya\commands\ExecutableController $exec)
     {
         $log = [
-            'filters' => []
+            'filters' => [],
         ];
-        
+
         foreach ($exec->getFilesNamespace('filters') as $filterClassName) {
             if (!class_exists($filterClassName)) {
                 continue;
@@ -117,7 +116,7 @@ class Module extends \admin\base\Module
             $object = new $filterClassName();
             $log['filters'][$filterClassName] = $object->save();
         }
-        
+
         return $log;
     }
 }

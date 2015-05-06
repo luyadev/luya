@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\ngrest\plugins;
 
 /**
@@ -10,7 +11,7 @@ class File extends \admin\ngrest\PluginAbstract
 {
     public function renderList($doc)
     {
-        $elmn = $doc->createElement("span", "{{item.".$this->name."}}");
+        $elmn = $doc->createElement('span', '{{item.'.$this->name.'}}');
         $doc->appendChild($elmn);
 
         return $doc;
@@ -18,10 +19,10 @@ class File extends \admin\ngrest\PluginAbstract
 
     public function renderCreate($doc)
     {
-        $elmn = $doc->createElement("zaa-file-upload");
-        $elmn->setAttribute("id", $this->id);
-        $elmn->setIdAttribute("id", true);
-        $elmn->setAttribute("model", $this->ngModel);
+        $elmn = $doc->createElement('zaa-file-upload');
+        $elmn->setAttribute('id', $this->id);
+        $elmn->setIdAttribute('id', true);
+        $elmn->setAttribute('model', $this->ngModel);
         $doc->appendChild($elmn);
 
         return $doc;

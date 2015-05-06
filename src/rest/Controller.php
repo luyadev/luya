@@ -1,4 +1,5 @@
 <?php
+
 namespace luya\rest;
 
 use Yii;
@@ -37,13 +38,13 @@ class Controller extends \yii\web\Controller
     {
         return Yii::createObject($this->serializer)->serialize($data);
     }
-    
+
     public function sendModelError($model)
     {
         if (!$model->hasErrors()) {
             throw new ServerErrorHttpException('Object error for unknown reason.');
         }
-        
+
         Yii::$app->response->setStatusCode(422, 'Data Validation Failed.');
         $result = [];
         foreach ($model->getFirstErrors() as $name => $message) {
@@ -52,7 +53,7 @@ class Controller extends \yii\web\Controller
                 'message' => $message,
             ];
         }
-        
+
         return $result;
     }
 }

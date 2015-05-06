@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\ngrest\plugins;
 
 use admin\ngrest\PluginAbstract;
@@ -19,7 +20,7 @@ class Required extends PluginAbstract
     public function renderCreate($doc)
     {
         $elmn = $doc->getElementById($this->id);
-        $elmn->setAttribute("required", "required");
+        $elmn->setAttribute('required', 'required');
 
         //$span = $doc->createELement("span", "Sie müssen dieses Feld ausfüllen um Daten zu speichern.");
         //$span->setAttribute("ng-show", 'createForm.'.$this->name.'.$error.required');
@@ -31,7 +32,7 @@ class Required extends PluginAbstract
     public function renderUpdate($doc)
     {
         $elmn = $doc->getElementById($this->id);
-        $elmn->setAttribute("required", "required");
+        $elmn->setAttribute('required', 'required');
 
         //$span = $doc->createELement("span", "Sie müssen dieses Feld ausfüllen um Daten zu speichern.");
         //$span->setAttribute("ng-show", 'updateForm.'.$this->name.'.$error.required');

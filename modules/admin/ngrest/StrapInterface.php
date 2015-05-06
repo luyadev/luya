@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\ngrest;
 
 interface StrapInterface

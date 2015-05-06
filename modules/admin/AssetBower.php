@@ -1,4 +1,5 @@
 <?php
+
 namespace admin;
 
 class AssetBower extends \yii\web\AssetBundle
@@ -17,7 +18,7 @@ class AssetBower extends \yii\web\AssetBundle
         'twig.js/twig.min.js',
         'ng-flow/dist/ng-flow-standalone.min.js',
     ];
-    
+
     public $css = [
         'angular-pickadate/dist/angular-pickadate.css',
     ];

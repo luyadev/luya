@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\models;
 
 /**
@@ -39,26 +40,26 @@ class StorageFilter extends \admin\ngrest\base\Model
     public function applyFilter($image, $imagine)
     {
         $newimage = null;
-        
-        $chain = \admin\models\StorageFilterChain::find()->where(['filter_id' => $this->id ])->joinWith('effect')->all();
+
+        $chain = \admin\models\StorageFilterChain::find()->where(['filter_id' => $this->id])->joinWith('effect')->all();
 
         foreach ($chain as $item) {
             switch ($item->effect->imagine_name) {
-                case "resize":
+                case 'resize':
                     if (is_null($newimage)) {
                         $newimage = $image->resize(new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height));
                     } else {
                         $newimage = $newimage->resize(new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height));
                     }
                     break;
-                case "thumbnail":
+                case 'thumbnail':
                     if (is_null($newimage)) {
                         $newimage = $image->thumbnail(new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height), \Imagine\Image\ImageInterface::THUMBNAIL_INSET);
                     } else {
                         $newimage = $newimage->thumbnail(new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height), \Imagine\Image\ImageInterface::THUMBNAIL_INSET);
                     }
                     break;
-                case "crop":
+                case 'crop':
                     if (is_null($newimage)) {
                         $newimage = $image->crop(new \Imagine\Image\Point(0, 0), new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height));
                     } else {
@@ -68,7 +69,6 @@ class StorageFilter extends \admin\ngrest\base\Model
             }
         }
 
-            
         return $newimage;
     }
 
@@ -81,11 +81,11 @@ class StorageFilter extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
-        $config->strap->register(new \admin\straps\FilterEffectChain(), "Chain");
+        $config->strap->register(new \admin\straps\FilterEffectChain(), 'Chain');
 
-        $config->list->field("name", "Name")->text()->required();
-        $config->list->field("identifier", "Identifier")->text()->required();
-        $config->list->field("id", "ID")->text();
+        $config->list->field('name', 'Name')->text()->required();
+        $config->list->field('identifier', 'Identifier')->text()->required();
+        $config->list->field('id', 'ID')->text();
 
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);

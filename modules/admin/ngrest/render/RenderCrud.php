@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\ngrest\render;
 
 use admin\ngrest\RenderAbstract;
@@ -27,10 +28,10 @@ class RenderCrud extends RenderAbstract implements RenderInterface
     {
         $view = new \yii\base\View();
 
-        return $view->render("@admin/views/ngrest/render/crud.php", array(
-            "crud" => $this,
-            "config" => $this->config,
-            "strapCallbackUrl" => "admin/ngrest/callback",
+        return $view->render('@admin/views/ngrest/render/crud.php', array(
+            'crud' => $this,
+            'config' => $this->config,
+            'strapCallbackUrl' => 'admin/ngrest/callback',
         ));
     }
 
@@ -73,7 +74,7 @@ class RenderCrud extends RenderAbstract implements RenderInterface
     public function apiQueryString($type)
     {
         // ($scope.config.apiEndpoint + '?ngrestExpandI18n=true&fields=' + $scope.config.list.join()
-        return 'ngrestExpandI18n=true&fields='.implode(",", $this->getFields($type)).'&expand='.implode(",", $this->config->extraFields);
+        return 'ngrestExpandI18n=true&fields='.implode(',', $this->getFields($type)).'&expand='.implode(',', $this->config->extraFields);
     }
 
     public function getFields($type)
@@ -101,12 +102,12 @@ class RenderCrud extends RenderAbstract implements RenderInterface
             $return = [];
             foreach (\admin\models\Lang::find()->all() as $l => $v) {
                 $ngModel = $this->i18nNgModelString($configContext, $element['name'], $v->short_code);
-                $id = "id-".md5($ngModel.$v->short_code);
+                $id = 'id-'.md5($ngModel.$v->short_code);
 
-                $return[] = '<li>' . $v->short_code.': '.$this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias']) . '</li>';
+                $return[] = '<li>'.$v->short_code.': '.$this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias']).'</li>';
             }
 
-            return '<ul>' . implode("", $return) . '</ul>';
+            return '<ul>'.implode('', $return).'</ul>';
         }
 
         if ($element['i18n'] && $configContext == self::TYPE_LIST) {
@@ -114,7 +115,7 @@ class RenderCrud extends RenderAbstract implements RenderInterface
         }
 
         $ngModel = $this->ngModelString($configContext, $element['name']);
-        $id = "id-".md5($ngModel);
+        $id = 'id-'.md5($ngModel);
 
         return $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias']);
     }
@@ -135,7 +136,7 @@ class RenderCrud extends RenderAbstract implements RenderInterface
         $ref = new \ReflectionClass($className);
         $obj = $ref->newInstanceArgs($classArgs);
         $obj->setConfig($elmnId, $elmnName, $elmnModel, $elmnAlias);
-        $method = "render".ucfirst($configContext);
+        $method = 'render'.ucfirst($configContext);
 
         return $obj->$method($DOMDocument);
     }

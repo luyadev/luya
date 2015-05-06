@@ -1,4 +1,5 @@
 <?php
+
 namespace newsadmin\models;
 
 class Tag extends \admin\ngrest\base\Model
@@ -9,7 +10,7 @@ class Tag extends \admin\ngrest\base\Model
     {
         return 'news_tag';
     }
-    
+
     public function ngRestApiEndpoint()
     {
         return 'api-news-tag';
@@ -17,7 +18,7 @@ class Tag extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
-        $config->list->field("title", "Titel")->text()->required();
+        $config->list->field('title', 'Titel')->text()->required();
 
         $config->update->copyFrom('list', ['id']);
         $config->create->copyFrom('list', ['id']);

@@ -1,8 +1,8 @@
 <?php
+
 namespace admin\ngrest;
 
 use yii\base\View;
-use yii\base\yii\base;
 
 abstract class StrapAbstract implements \admin\ngrest\StrapInterface
 {
@@ -11,13 +11,13 @@ abstract class StrapAbstract implements \admin\ngrest\StrapInterface
     public $config = false;
 
     protected $view = null;
-    
+
     public function getView()
     {
         if ($this->view === null) {
             $this->view = new View();
         }
-        
+
         return $this->view;
     }
 

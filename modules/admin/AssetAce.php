@@ -1,4 +1,5 @@
 <?php
+
 namespace admin;
 
 class AssetAce extends \yii\web\AssetBundle

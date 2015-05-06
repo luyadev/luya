@@ -1,4 +1,5 @@
 <?php
+
 namespace newsadmin\models;
 
 class Article extends \admin\ngrest\base\Model
@@ -28,7 +29,7 @@ class Article extends \admin\ngrest\base\Model
         $this->update_user_id = \admin\Module::getAdminUserData()->id;
         $this->timestamp_update = time();
     }
-    
+
     public function eventBeforeInsert()
     {
         $this->create_user_id = \admin\Module::getAdminUserData()->id;
@@ -42,12 +43,12 @@ class Article extends \admin\ngrest\base\Model
         if ($contextNavItemId) {
             return \luya\helpers\Url::toModule($contextNavItemId, 'news/default/detail', ['id' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
         }
-        
+
         return \luya\helpers\Url::to('news/default/detail', ['id' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
     }
-    
+
     // ngrest
-    
+
     public $tags = []; // cause of extra fields - will pe parsed trough the ngrest plugins.
 
     public $i18n = ['title', 'text'];
@@ -58,19 +59,19 @@ class Article extends \admin\ngrest\base\Model
     {
         return 'api-news-article';
     }
-    
+
     public function ngRestConfig($config)
     {
-        $config->list->field("cat_id", "Kategorie")->selectClass('\newsadmin\models\Cat', 'id', 'title');
-        $config->list->field("title", "Titel")->text()->required();
-        $config->list->field("text", "Text")->textarea()->required();
-        $config->list->field("timestamp_display_from", "News anzeigen ab")->datepicker();
-        $config->list->field("timestamp_display_until", "News anzeigen bis")->datepicker();
-        $config->list->field("image_id", "Bild")->image()->required();
-        $config->list->field("image_list", "Bild Liste")->imageArray();
-        $config->list->field("file_list", "Datei Liste")->fileArray();
-        $config->list->extraField("tags", "Tags")->checkboxRelation(\newsadmin\models\Tag::className(), 'news_article_tag', 'article_id', 'tag_id');
-        
+        $config->list->field('cat_id', 'Kategorie')->selectClass('\newsadmin\models\Cat', 'id', 'title');
+        $config->list->field('title', 'Titel')->text()->required();
+        $config->list->field('text', 'Text')->textarea()->required();
+        $config->list->field('timestamp_display_from', 'News anzeigen ab')->datepicker();
+        $config->list->field('timestamp_display_until', 'News anzeigen bis')->datepicker();
+        $config->list->field('image_id', 'Bild')->image()->required();
+        $config->list->field('image_list', 'Bild Liste')->imageArray();
+        $config->list->field('file_list', 'Datei Liste')->fileArray();
+        $config->list->extraField('tags', 'Tags')->checkboxRelation(\newsadmin\models\Tag::className(), 'news_article_tag', 'article_id', 'tag_id');
+
         $config->update->copyFrom('list', ['id']);
         $config->create->copyFrom('list', ['id']);
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\storage;
 
 class File
@@ -38,7 +39,7 @@ class File
      */
     public function getNameHash($fileName)
     {
-        return sprintf("%s", hash('crc32b', uniqid($fileName, true)));
+        return sprintf('%s', hash('crc32b', uniqid($fileName, true)));
     }
 
     public function setError($message)
@@ -56,15 +57,15 @@ class File
     public function create($sourceFile, $newFileName, $hidden = false)
     {
         if (empty($sourceFile) || empty($newFileName)) {
-            return !$this->setError("empty source file or create file param. Invalid file uploaded!");
+            return !$this->setError('empty source file or create file param. Invalid file uploaded!');
         }
         $copyFile = false;
         $fileInfo = $this->getFileInfo($newFileName);
-        $baseName = preg_replace("/[^a-zA-Z0-9\-\_\.]/", "", $fileInfo->name);
+        $baseName = preg_replace("/[^a-zA-Z0-9\-\_\.]/", '', $fileInfo->name);
         $fileHashName = $this->getNameHash($newFileName);
         $fileHash = $this->getFileHash($sourceFile);
         $mimeType = $this->getMimeType($sourceFile);
-        $fileName = implode([$baseName."_".$fileHashName, $fileInfo->extension], ".");
+        $fileName = implode([$baseName.'_'.$fileHashName, $fileInfo->extension], '.');
         $savePath = \yii::$app->luya->storage->dir.$fileName;
         if (is_uploaded_file($sourceFile)) {
             if (move_uploaded_file($sourceFile, $savePath)) {
@@ -104,11 +105,11 @@ class File
 
     public function allFromFolder($folderId)
     {
-        $files = \admin\models\StorageFile::find()->select(["id", "name_original", "extension"])->where(['folder_id' => $folderId, "is_hidden" => 0])->asArray()->all();
-        
+        $files = \admin\models\StorageFile::find()->select(['id', 'name_original', 'extension'])->where(['folder_id' => $folderId, 'is_hidden' => 0])->asArray()->all();
+
         return $files;
     }
-    
+
     public function get($fileId)
     {
         $file = \admin\models\StorageFile::find()->where(['id' => $fileId])->one();
@@ -116,11 +117,11 @@ class File
         if (!$file) {
             return false;
         }
-        
+
         return [
-            "file_id" => $file->id,
-            "source_http" => \yii::$app->luya->storage->httpDir.$file->name_new_compound,
-            "source" => \yii::$app->luya->storage->dir.$file->name_new_compound,
+            'file_id' => $file->id,
+            'source_http' => \yii::$app->luya->storage->httpDir.$file->name_new_compound,
+            'source' => \yii::$app->luya->storage->dir.$file->name_new_compound,
         ];
     }
 

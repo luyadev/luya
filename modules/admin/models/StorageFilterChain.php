@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\models;
 
 class StorageFilterChain extends \yii\db\ActiveRecord

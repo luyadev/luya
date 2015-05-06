@@ -1,4 +1,5 @@
 <?php
+
 namespace luya\collection;
 
 class PrefixComposition
@@ -6,7 +7,7 @@ class PrefixComposition
     private $_composition = [];
 
     public $hideComposition = false;
-    
+
     public function __get($key)
     {
         return $this->getKey($key, false);
@@ -27,8 +28,8 @@ class PrefixComposition
         if ($this->hideComposition) {
             return;
         }
-        
-        return  \luya\helpers\Url::trailing(implode("/", $this->_composition));
+
+        return  \luya\helpers\Url::trailing(implode('/', $this->_composition));
     }
 
     public function set($array)

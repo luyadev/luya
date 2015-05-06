@@ -1,4 +1,5 @@
 <?php
+
 namespace errorapi;
 
 class Module extends \luya\base\Module

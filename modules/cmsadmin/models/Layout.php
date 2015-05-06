@@ -1,4 +1,5 @@
 <?php
+
 namespace cmsadmin\models;
 
 class Layout extends \admin\ngrest\base\Model
@@ -7,12 +8,12 @@ class Layout extends \admin\ngrest\base\Model
     {
         return 'api-cms-layout';
     }
-    
+
     public function ngRestConfig($config)
     {
-        $config->list->field("name", "Name")->text()->required();
-        $config->list->field("json_config", "JSON Config")->ace();
-        $config->list->field("view_file", "Twig Filename (*.twig)")->text()->required();
+        $config->list->field('name', 'Name')->text()->required();
+        $config->list->field('json_config', 'JSON Config')->ace();
+        $config->list->field('view_file', 'Twig Filename (*.twig)')->text()->required();
 
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);
@@ -28,7 +29,7 @@ class Layout extends \admin\ngrest\base\Model
     public function rules()
     {
         return [
-            [["name", "json_config", "view_file"], "required"],
+            [['name', 'json_config', 'view_file'], 'required'],
         ];
     }
 

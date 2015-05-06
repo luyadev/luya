@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\models;
 
 class Lang extends \admin\ngrest\base\Model
@@ -7,12 +8,12 @@ class Lang extends \admin\ngrest\base\Model
     {
         return 'api-admin-lang';
     }
-    
+
     public function ngRestConfig($config)
     {
-        $config->list->field("name", "Name")->text()->required();
-        $config->list->field("short_code", "Kurz-Code")->text()->required();
-        $config->list->field("id", "ID")->text();
+        $config->list->field('name', 'Name')->text()->required();
+        $config->list->field('short_code', 'Kurz-Code')->text()->required();
+        $config->list->field('id', 'ID')->text();
 
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);

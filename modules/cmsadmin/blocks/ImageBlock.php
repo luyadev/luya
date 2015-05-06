@@ -1,4 +1,5 @@
 <?php
+
 namespace cmsadmin\blocks;
 
 class ImageBlock extends \cmsadmin\base\Block
@@ -7,7 +8,7 @@ class ImageBlock extends \cmsadmin\base\Block
     {
         return 'Bild';
     }
-    
+
     public function config()
     {
         return [
@@ -20,10 +21,10 @@ class ImageBlock extends \cmsadmin\base\Block
     public function extraVars()
     {
         return [
-            'image' => \yii::$app->luya->storage->image->get($this->getVarValue('imageId'))
+            'image' => \yii::$app->luya->storage->image->get($this->getVarValue('imageId')),
         ];
     }
-    
+
     public function twigFrontend()
     {
         return '<img src="{{extras.image.source}}" border="0" /> {{dump(extras)}}';

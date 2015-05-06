@@ -1,4 +1,5 @@
 <?php
+
 namespace luya\components;
 
 class Mailer extends \yii\base\Component
@@ -14,35 +15,34 @@ class Mailer extends \yii\base\Component
     public $password = null; //'PASSWORD';
 
     public $portSMTP = null;
-    
+
     public function create()
     {
         $this->phpmailer = new \PHPMailer();
-        
+
         if ($this->host === null) {
             $this->host = \yii::$app->getModule('luya')->mailerHost;
         }
-        
+
         if ($this->username === null) {
             $this->username = \yii::$app->getModule('luya')->mailerUsername;
         }
-        
+
         if ($this->password === null) {
             $this->password = \yii::$app->getModule('luya')->mailerPassword;
         }
-        
+
         if ($this->isSMTP === null) {
             $this->isSMTP = \yii::$app->getModule('luya')->mailerIsSMTP;
         }
-        
+
         if ($this->isSMTP) {
-            
             $this->phpmailer->SMTPOptions = array(
                 'ssl' => array(
                     'verify_peer' => false,
                     'verify_peer_name' => false,
-                    'allow_self_signed' => true
-                )
+                    'allow_self_signed' => true,
+                ),
             );
             $this->phpmailer->SMTPDebug = 4;
             $this->phpmailer->isSMTP();
@@ -58,7 +58,7 @@ class Mailer extends \yii\base\Component
         $this->phpmailer->isHTML(true);
         $this->phpmailer->AltBody = 'Please use a HTML compatible E-Mail-Client to read this E-Mail.';
     }
-    
+
     public function compose($subject, $body)
     {
         $this->cleanup();
@@ -85,7 +85,7 @@ class Mailer extends \yii\base\Component
     {
         return $this->phpmailer->ErrorInfo;
     }
-    
+
     public function cleanup()
     {
         $this->phpmailer = null;

@@ -1,4 +1,5 @@
 <?php
+
 namespace luya\collection;
 
 class Links implements \luya\collection\LinksInterface

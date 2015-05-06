@@ -1,4 +1,5 @@
 <?php
+
 namespace errorapi\models;
 
 class Data extends \yii\db\ActiveRecord

@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\storage;
 
 class Effect

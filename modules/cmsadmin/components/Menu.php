@@ -1,4 +1,5 @@
 <?php
+
 namespace cmsadmin\components;
 
 /**
@@ -18,17 +19,17 @@ class Menu
 
     public function setCatByRewrite($catRewrite)
     {
-        $this->cat = (new \yii\db\Query())->select(['id', 'default_nav_id'])->from("cms_cat")->where(['rewrite' => $catRewrite])->one();
+        $this->cat = (new \yii\db\Query())->select(['id', 'default_nav_id'])->from('cms_cat')->where(['rewrite' => $catRewrite])->one();
     }
 
     public function setCatById($catId)
     {
-        $this->cat = (new \yii\db\Query())->select(['id', 'default_nav_id'])->from("cms_cat")->where(['id' => $catId])->one();
+        $this->cat = (new \yii\db\Query())->select(['id', 'default_nav_id'])->from('cms_cat')->where(['id' => $catId])->one();
     }
 
     public function setLangByShortCode($langShortCode)
     {
-        $this->lang = (new \yii\db\Query())->select(['id', 'short_code'])->from("admin_lang")->where(['short_code' => $langShortCode])->one();
+        $this->lang = (new \yii\db\Query())->select(['id', 'short_code'])->from('admin_lang')->where(['short_code' => $langShortCode])->one();
     }
 
     public function all()
@@ -51,7 +52,7 @@ class Menu
             return [];
         }
         $items = $this->menu[$parentId];
-        $i=0;
+        $i = 0;
         foreach ($items as $k => $v) {
             $data[$i] = $v;
             if (isset($this->menu[$v['id']])) {
@@ -90,7 +91,7 @@ class Menu
      * ]
      * ```
      *
-     * @param integer $node parent_nav_id value
+     * @param int $node parent_nav_id value
      */
     private function getFromParentNode($parentNavId)
     {
@@ -112,16 +113,16 @@ class Menu
 
     private function subNodeExists($parentNavId)
     {
-        return (new \yii\db\Query())->select("id")->from("cms_nav")->where(['parent_nav_id' => $parentNavId])->count();
+        return (new \yii\db\Query())->select('id')->from('cms_nav')->where(['parent_nav_id' => $parentNavId])->count();
     }
 
     private function getData($parentNavId)
     {
         return (new \yii\db\Query())
-            ->select("cms_nav.id, cms_nav.sort_index, cms_nav.parent_nav_id, cms_nav_item.title, cms_nav_item.rewrite, cms_nav.is_hidden")
+            ->select('cms_nav.id, cms_nav.sort_index, cms_nav.parent_nav_id, cms_nav_item.title, cms_nav_item.rewrite, cms_nav.is_hidden')
             ->from('cms_nav')
-            ->leftJoin("cms_nav_item", "cms_nav.id=cms_nav_item.nav_id")
-            ->orderBy("cms_nav.sort_index ASC")
+            ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')
+            ->orderBy('cms_nav.sort_index ASC')
             ->where(['parent_nav_id' => $parentNavId, 'cat_id' => $this->cat['id'], 'cms_nav_item.lang_id' => $this->lang['id'], 'cms_nav.is_deleted' => 0])
             ->all();
     }

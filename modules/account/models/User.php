@@ -1,4 +1,5 @@
 <?php
+
 namespace account\models;
 
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
@@ -72,7 +73,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     /**
      * Finds an identity by the given ID.
      *
-     * @param string|integer $id the ID to be looked for
+     * @param string|int $id the ID to be looked for
      *
      * @return IdentityInterface|null the identity object that matches the given ID.
      */
@@ -112,7 +113,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     /**
      * @param string $authKey
      *
-     * @return boolean if auth key is valid for current user
+     * @return bool if auth key is valid for current user
      */
     public function validateAuthKey($authKey)
     {

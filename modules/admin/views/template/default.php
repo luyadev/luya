@@ -23,19 +23,19 @@
 
     <h1>Dashboard</h1>
     <div ng-repeat="item in dashboard">
-    
+
         <h2><i class="fa {{ item.menu.icon}} "></i> {{ item.menu.alias }}</h">
         <div ng-repeat="log in item.data">
             <p>{{ log.firstname }} {{ log.lastname}} hat einen Datensatz
-            
+
                 <strong ng-if="log.is_update == 1">bearbeitet</strong>
                 <strong ng-if="log.is_insert == 1">hinzugefügt</strong>
-            
+
                 am {{ log.timestamp_create * 1000 | date:"dd.MM.yyyy ' um ' HH:mm" }} Uhr.
             </p>
         </div>
-    
+
     </div>
-    
+
 </div><!-- ./main__right -->
 </div>

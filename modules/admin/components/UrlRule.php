@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\components;
 
 use yii;
@@ -8,7 +9,7 @@ class UrlRule extends \yii\rest\UrlRule
     public function init()
     {
         foreach (yii::$app->params['apis'] as $item) {
-            $class = sprintf("%s/%s", 'admin', $item['alias']);
+            $class = sprintf('%s/%s', 'admin', $item['alias']);
             $this->controller[] = $class;
         }
         parent::init();

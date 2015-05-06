@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\ngrest;
 
 abstract class PluginAbstract
@@ -53,14 +54,14 @@ abstract class PluginAbstract
     }
 
     */
-    
+
     private $_model = null;
-    
+
     public function setModel($model)
     {
         $this->_model = $model;
     }
-    
+
     public function getModel()
     {
         return $this->_model;
@@ -73,22 +74,22 @@ abstract class PluginAbstract
         $this->ngModel = $ngModel;
         $this->alias = $alias;
     }
-    
+
     public function onBeforeCreate($fieldValue)
     {
         return false;
     }
-    
+
     public function onAfterCreate($fieldValue)
     {
         return false;
     }
-    
+
     public function onBeforeUpdate($fieldValue, $oldValue)
     {
         return false;
     }
-    
+
     public function onAfterList($fieldValue)
     {
         return false;

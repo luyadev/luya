@@ -1,4 +1,5 @@
 <?php
+
 namespace luya;
 
 class Module extends \luya\base\Module
@@ -21,13 +22,13 @@ class Module extends \luya\base\Module
     public $urlPrefixComposition = '<langShortCode:[a-z]{2}>'; // rename to compositionPattern (@TODO !)
 
     /**
-     * Enable or disable the $composition->getFull() prefix. If disabled the response of getFull() would be empty, otherwhise it 
+     * Enable or disable the $composition->getFull() prefix. If disabled the response of getFull() would be empty, otherwhise it
      * returns the full prefix composition pattern based url.
-     * 
-     * @var boolean
+     *
+     * @var bool
      */
     public $hideComposition = false;
-    
+
     public $sendException = true;
 
     public $exceptionUrl = 'http://luya.io/errorapi/';
@@ -60,7 +61,7 @@ class Module extends \luya\base\Module
     /**
      * Should the phpmailer make an smtp authentification or use the local phpmailer() function.
      *
-     * @var boolean
+     * @var bool
      */
     public $mailerIsSMTP = false;
 }

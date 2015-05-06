@@ -1,4 +1,5 @@
 <?php
+
 namespace errorapi\controllers;
 
 class DefaultController extends \luya\rest\Controller

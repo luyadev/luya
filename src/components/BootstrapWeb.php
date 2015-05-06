@@ -1,4 +1,5 @@
 <?php
+
 namespace luya\components;
 
 use yii\helpers\ArrayHelper;
@@ -51,7 +52,6 @@ class BootstrapWeb extends \luya\base\Bootstrap
     {
         // start the module now
         foreach ($this->getModules() as $item) {
-
             $module = \yii::$app->getModule($item['id']);
 
             if ($item['reflection']->hasProperty('isAdmin')) {

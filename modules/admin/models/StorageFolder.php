@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\models;
 
 class StorageFolder extends \yii\db\ActiveRecord

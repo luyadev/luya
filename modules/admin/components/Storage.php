@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\components;
 
 use yii;
@@ -50,7 +51,7 @@ class Storage extends \yii\base\Component
 
     public function getHttpDir()
     {
-        return \luya\helpers\url::trailing($this->_httpDir, "/");
+        return \luya\helpers\url::trailing($this->_httpDir, '/');
     }
 
     public function getFile()

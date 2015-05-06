@@ -1,10 +1,12 @@
 <?php
+
 namespace admin\apis;
 
 use Yii;
 
 /**
  * @todo rename from auth to permission
+ *
  * @author nadar
  */
 class MenuController extends \admin\base\RestController
@@ -13,12 +15,12 @@ class MenuController extends \admin\base\RestController
     {
         return $this->getUser()->id;
     }
-    
+
     private function getMenu()
     {
         return \luya\helpers\Param::get('adminMenus');
     }
-    
+
     private function getNodeData($id)
     {
         $i = 1;
@@ -29,9 +31,10 @@ class MenuController extends \admin\base\RestController
                 break;
             }
         }
+
         return $data;
     }
-    
+
     public function actionIndex()
     {
         $responseData = [];
@@ -50,19 +53,16 @@ class MenuController extends \admin\base\RestController
 
             // this item does have groups
             if (isset($item['groups'])) {
-
                 $permissionGranted = false;
 
                 // see if the groups has items
                 foreach ($item['groups'] as $groupName => $groupItem) {
-                    
                     if (count($groupItem['items'])  > 0) {
-
                         if ($permissionGranted) {
                             continue;
                         }
-                        
-                        foreach($groupItem['items'] as $groupItemEntry) {
+
+                        foreach ($groupItem['items'] as $groupItemEntry) {
                             // a previous entry already has solved the question if the permission is granted
                             if ($permissionGranted) {
                                 continue;
@@ -78,17 +78,17 @@ class MenuController extends \admin\base\RestController
                                     $permissionGranted = true;
                                 }
                             } else {
-                                throw new \Exception("Menu item detected without permission entry");
+                                throw new \Exception('Menu item detected without permission entry');
                             }
                         }
                     }
                 }
-                
+
                 if (!$permissionGranted) {
                     continue;
                 }
             }
-            
+
             // ok we have passed all the tests, lets make an entry
             $responseData[] = [
                 'id' => $index,
@@ -98,18 +98,17 @@ class MenuController extends \admin\base\RestController
                 'icon' => $item['icon'],
             ];
         }
-        
+
         return $responseData;
-        
-    }   
-    
+    }
+
     public function actionItems($nodeId)
     {
         $data = $this->getNodeData($nodeId);
-        
+
         if (isset($data['groups'])) {
-            foreach($data['groups'] as $groupName => $groupItem) {
-                foreach($groupItem['items'] as $groupItemKey => $groupItemEntry) {
+            foreach ($data['groups'] as $groupName => $groupItem) {
+                foreach ($groupItem['items'] as $groupItemKey => $groupItemEntry) {
                     if ($groupItemEntry['permissionIsRoute']) {
                         // when true, set permissionGranted to true
                         if (!Yii::$app->luya->auth->matchRoute($this->getUserId(), $groupItemEntry['route'])) {
@@ -121,48 +120,49 @@ class MenuController extends \admin\base\RestController
                             unset($data['groups'][$groupName]['items'][$groupItemKey]);
                         }
                     } else {
-                        throw new \Exception("Menu item detected without permission entry");
+                        throw new \Exception('Menu item detected without permission entry');
                     }
                 }
             }
         }
-        
+
         return $data;
     }
-    
+
     /**
      * @todo add access list for routes (example cms admin)
-     * @param integer $nodeId
+     *
+     * @param int $nodeId
      */
     public function actionDashboard($nodeId)
     {
         $data = $this->getNodeData($nodeId);
-        
+
         $accessList = [];
-        
-        foreach($data['groups'] as $groupkey => $groupvalue) {
-            foreach($groupvalue['items'] as $row) {
+
+        foreach ($data['groups'] as $groupkey => $groupvalue) {
+            foreach ($groupvalue['items'] as $row) {
                 if ($row['permissionIsApi']) {
                     // @todo check if the user can access this api, otherwise hide this log informations?
                     $accessList[] = ['api' => $row['permssionApiEndpoint'], 'route' => false, 'row' => $row];
                 }
             }
         }
-        
+
         $log = [];
         foreach ($accessList as $access) {
             if (!empty($access['api'])) {
                 // its an api log entry
-                $data = (new \yii\db\Query())->select(['timestamp_create', 'is_update', 'is_insert', 'admin_user.firstname', 'admin_user.lastname'])->from("admin_ngrest_log")->leftJoin('admin_user', 'admin_ngrest_log.user_id = admin_user.id')->orderBy('timestamp_create DESC')->where(['api' => $access['api']])->all();
+                $data = (new \yii\db\Query())->select(['timestamp_create', 'is_update', 'is_insert', 'admin_user.firstname', 'admin_user.lastname'])->from('admin_ngrest_log')->leftJoin('admin_user', 'admin_ngrest_log.user_id = admin_user.id')->orderBy('timestamp_create DESC')->where(['api' => $access['api']])->all();
                 $log[] = [
                     'data' => $data,
                     'menu' => $access['row'],
-                ];                
+                ];
             } else {
                 // its a route log entry
             }
         }
-        
+
         return $log;
     }
 }

@@ -13,7 +13,7 @@ class Controller extends \luya\base\Controller
     public $adminUser = null;
 
     public $disablePermissionCheck = false;
-    
+
     public function init()
     {
         parent::init();
@@ -41,7 +41,7 @@ class Controller extends \luya\base\Controller
                         return true;
                     }
                     // get the route based on the current $action object
-                    $route = implode("/", [$action->controller->module->id, $action->controller->id, $action->id]);
+                    $route = implode('/', [$action->controller->module->id, $action->controller->id, $action->id]);
                     // check the access inside luya->auth->matchRoute and return true/false.
                     return \yii::$app->luya->auth->matchRoute((new \admin\components\User())->getIdentity()->id, $route);
                 },

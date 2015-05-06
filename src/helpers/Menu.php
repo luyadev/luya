@@ -1,4 +1,5 @@
 <?php
+
 namespace luya\helpers;
 
 /**
@@ -9,8 +10,8 @@ namespace luya\helpers;
 class Menu
 {
     /**
-     * @param Links   $linksCollection
-     * @param integer $level           1 = first, 2 = second, 3 = third
+     * @param Links $linksCollection
+     * @param int   $level           1 = first, 2 = second, 3 = third
      */
     public static function parentNavIdByCurrentLink(\luya\collection\Links $linksCollection, $level)
     {

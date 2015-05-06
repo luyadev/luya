@@ -1,4 +1,5 @@
 <?php
+
 namespace cmsadmin\models;
 
 use yii;
@@ -20,7 +21,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
     public function getContent()
     {
         $twig = Yii::$app->twig->env(new \Twig_Loader_Filesystem(\yii::getAlias('@app/views/cmslayouts/')));
-        
+
         $insertion = [];
 
         foreach ($this->layout->getJsonConfig('placeholders') as $item) {
@@ -28,8 +29,8 @@ class NavItemPage extends \cmsadmin\base\NavItemType
         }
 
         return $twig->render($this->layout->view_file, [
-            "placeholders" => $insertion,
-            "activeLink" => \yii::$app->collection->links->getActiveLink()
+            'placeholders' => $insertion,
+            'activeLink' => \yii::$app->collection->links->getActiveLink(),
         ]);
     }
 
@@ -41,10 +42,10 @@ class NavItemPage extends \cmsadmin\base\NavItemType
     {
         $string = '';
 
-        $placeholders = (new \yii\db\Query())->from("cms_nav_item_page_block_item t1")->select("t1.*")->where(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId])->orderBy('sort_index ASC')->all();
+        $placeholders = (new \yii\db\Query())->from('cms_nav_item_page_block_item t1')->select('t1.*')->where(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId])->orderBy('sort_index ASC')->all();
 
         $twig = Yii::$app->twig->env(new \Twig_Loader_String());
-        
+
         foreach ($placeholders as $key => $placeholder) {
             $blockObject = \cmsadmin\models\Block::objectId($placeholder['block_id']);
             if ($blockObject === false) {
@@ -56,15 +57,15 @@ class NavItemPage extends \cmsadmin\base\NavItemType
             if (empty($configValues)) {
                 $configValues = [];
             }
-            
+
             if (empty($cfgValues)) {
                 $cfgValues = [];
             }
-            
+
             $blockObject->setEnvOptions($this->getOptions());
             $blockObject->setVarValues($configValues);
             $blockObject->setCfgValues($cfgValues);
-            
+
             $jsonConfig = json_decode($blockObject->jsonConfig(), true);
 
             $insertedHolders = [];

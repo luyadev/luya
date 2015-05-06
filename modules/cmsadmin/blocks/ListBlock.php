@@ -1,4 +1,5 @@
 <?php
+
 namespace cmsadmin\blocks;
 
 class ListBlock extends \cmsadmin\base\Block
@@ -7,7 +8,7 @@ class ListBlock extends \cmsadmin\base\Block
     {
         return 'Auflistung';
     }
-    
+
     public function config()
     {
         return [
@@ -15,12 +16,11 @@ class ListBlock extends \cmsadmin\base\Block
                 ['var' => 'elements', 'label' => 'Elemente', 'type' => 'zaa-list-array'],
             ],
             'cfgs' => [
-                ['var' => 'listType', 'label' => 'Type', 'type' => 'zaa-input-select', 'options' => 
-                    [
+                ['var' => 'listType', 'label' => 'Type', 'type' => 'zaa-input-select', 'options' => [
                         ['value' => 'ul', 'label' => 'UL-Liste'],
-                        ['value' => 'ol', 'label' => 'OL-Liste']
-                    ]
-                ]
+                        ['value' => 'ol', 'label' => 'OL-Liste'],
+                    ],
+                ],
             ],
         ];
     }

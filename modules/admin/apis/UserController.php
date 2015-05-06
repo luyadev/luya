@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\apis;
 
 class UserController extends \admin\base\RestActiveController

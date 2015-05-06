@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\ngrest\plugins;
 
 class SelectArray extends \admin\ngrest\plugins\Select
@@ -7,8 +8,8 @@ class SelectArray extends \admin\ngrest\plugins\Select
     {
         foreach ($assocArray as $key => $value) {
             $this->data[] = [
-                "value" => $key,
-                "label" => $value,
+                'value' => $key,
+                'label' => $value,
             ];
         }
     }

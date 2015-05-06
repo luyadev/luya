@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\controllers;
 
 class LangController extends \admin\ngrest\base\Controller

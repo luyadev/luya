@@ -38,7 +38,7 @@
                  --><div class=" block__item block__item--edit ">
 <span class="block__icon fa fa-fw fa-trash-o" ng-click="removeBlock(block)"></span>
                         <span class=" block__icon fa fa-fw fa-pencil " ng-click="toggleEdit()"></span>
-                        
+
                     </div> <!-- ./block__item--edit -->
                 </div> <!-- ./block__view -->
 

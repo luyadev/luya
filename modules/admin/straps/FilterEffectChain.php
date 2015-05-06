@@ -1,11 +1,12 @@
 <?php
+
 namespace admin\straps;
 
 class FilterEffectChain extends \admin\ngrest\StrapAbstract
 {
     public function render()
     {
-        return $this->getView()->render("@admin/views/strap/FilterEffectChain", [
+        return $this->getView()->render('@admin/views/strap/FilterEffectChain', [
             'effectModel' => new \admin\models\StorageEffect(),
         ]);
     }
@@ -15,9 +16,9 @@ class FilterEffectChain extends \admin\ngrest\StrapAbstract
         $model = new \admin\models\StorageFilterChain();
 
         $model->setAttributes([
-            "filter_id" => $this->getItemId(),
-            "effect_id" => $effectId,
-            "effect_json_values" => $effectArguments,
+            'filter_id' => $this->getItemId(),
+            'effect_id' => $effectId,
+            'effect_json_values' => $effectArguments,
         ]);
 
         if ($model->save()) {
@@ -31,7 +32,7 @@ class FilterEffectChain extends \admin\ngrest\StrapAbstract
     {
         $data = \admin\models\StorageFilterChain::find()->where(['filter_id' => $this->getItemId()])->all();
         $view = $this->getView()->render('@admin/views/strap/FilterEffectChainList', [
-            "data" => $data,
+            'data' => $data,
         ]);
 
         return $this->response(true, ['html' => $view]);

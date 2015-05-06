@@ -1,4 +1,5 @@
 <?php
+
 namespace cmsadmin\controllers;
 
 class DefaultController extends \admin\base\Controller

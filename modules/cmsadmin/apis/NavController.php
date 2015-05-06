@@ -1,4 +1,5 @@
 <?php
+
 namespace cmsadmin\apis;
 
 /**
@@ -19,33 +20,35 @@ class NavController extends \admin\base\RestController
     public function actionToggleHidden($navId)
     {
         $item = \cmsadmin\models\Nav::find()->where(['id' => $navId])->one();
-        
+
         if ($item) {
             $item->is_hidden = (empty($item->is_hidden)) ? 1 : 0;
             $item->update(false);
+
             return true;
         }
-    
+
         return false;
     }
-    
+
     public function actionDelete($navId)
     {
         $model = \cmsadmin\models\Nav::find()->where(['id' => $navId])->one();
         if ($model) {
             $model->is_deleted = 1;
+
             return $model->update(false);
         }
     }
-    
+
     public function actionResort()
     {
         $navItemId = $this->postArg('nav_item_id');
         $newSortIndex = $this->postArg('new_sort_index');
-        
+
         $response = \cmsadmin\models\Nav::resort($navItemId, $newSortIndex);
     }
-    
+
     /**
      * creates a new nav entry for the type page (nav_id will be created.
      *

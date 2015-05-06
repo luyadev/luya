@@ -7,12 +7,12 @@ class m150309_142652_admin_storage_filter_chain extends Migration
 {
     public function up()
     {
-        $this->createTable("admin_storage_filter_chain", [
-            "id" => "pk",
-            "sort_index" => Schema::TYPE_INTEGER,
-            "filter_id" => Schema::TYPE_INTEGER,
-            "effect_id" => Schema::TYPE_INTEGER,
-            "effect_json_values" => Schema::TYPE_TEXT,
+        $this->createTable('admin_storage_filter_chain', [
+            'id' => 'pk',
+            'sort_index' => Schema::TYPE_INTEGER,
+            'filter_id' => Schema::TYPE_INTEGER,
+            'effect_id' => Schema::TYPE_INTEGER,
+            'effect_json_values' => Schema::TYPE_TEXT,
         ]);
     }
 

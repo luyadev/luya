@@ -1,4 +1,5 @@
 <?php
+
 namespace cmsadmin;
 
 class Module extends \admin\base\Module
@@ -16,26 +17,26 @@ class Module extends \admin\base\Module
         'api-cms-block' => 'cmsadmin\\apis\\BlockController',
         'api-cms-blockgroup' => 'cmsadmin\\apis\\BlockgroupController',
         'api-cms-cat' => 'cmsadmin\apis\CatController',
-        
+
     ];
 
     public $assets = [
         'cmsadmin\Asset',
     ];
-    
+
     public function getMenu()
     {
         return $this
-            ->nodeRoute("CMS Inhalt", "fa-th-list", "cmsadmin-default-index", "cmsadmin/default/index")
-            ->node("CMS Settings", "fa-wrench")
-                ->group("Verwalten")
-                    ->itemApi("Kategorien", "cmsadmin-cat-index", "fa-ils", "api-cms-cat")
-                    ->itemApi("Layout", "cmsadmin-layout-index", "fa-eyedropper", "api-cms-layout")
-                ->group("Blöcke")
-                    ->itemApi("Gruppen", "cmsadmin-blockgroup-index", "fa-group", "api-cms-blockgroup")
-                    ->itemApi("Verwalten", "cmsadmin-block-index", "fa-outdent", "api-cms-block")
+            ->nodeRoute('CMS Inhalt', 'fa-th-list', 'cmsadmin-default-index', 'cmsadmin/default/index')
+            ->node('CMS Settings', 'fa-wrench')
+                ->group('Verwalten')
+                    ->itemApi('Kategorien', 'cmsadmin-cat-index', 'fa-ils', 'api-cms-cat')
+                    ->itemApi('Layout', 'cmsadmin-layout-index', 'fa-eyedropper', 'api-cms-layout')
+                ->group('Blöcke')
+                    ->itemApi('Gruppen', 'cmsadmin-blockgroup-index', 'fa-group', 'api-cms-blockgroup')
+                    ->itemApi('Verwalten', 'cmsadmin-block-index', 'fa-outdent', 'api-cms-block')
             ->menu();
-                
+
         /*
         $this->menu->createNode('cms', 'CMS Inhalte', 'fa-th-list', 'cmsadmin-default-index');
 
@@ -53,14 +54,14 @@ class Module extends \admin\base\Module
         return $this->menu->get();
         */
     }
-    
+
     public function extendPermissionApis()
     {
         return [
             ['api' => 'api-cms-navitemplageblockitem', 'alias' => 'Blöcke Einfügen und Verschiebe'],
         ];
     }
-    
+
     public function extendPermissionRoutes()
     {
         return [
@@ -68,7 +69,7 @@ class Module extends \admin\base\Module
             ['route' => 'cmsadmin/page/update', 'alias' => 'Seiten Bearbeiten'],
         ];
     }
-    
+
     /**
      * @todo do not only import, also update changes in the template
      * @todo how do we send back values into the executblae controller for output purposes?
@@ -79,7 +80,7 @@ class Module extends \admin\base\Module
             'blocks' => [],
             'layouts' => [],
         ];
-        
+
         $allblocks = \cmsadmin\models\Block::find()->all();
         $exists = [];
         foreach ($exec->getFilesNamespace('blocks') as $ns) {
@@ -88,14 +89,14 @@ class Module extends \admin\base\Module
                 $block = new \cmsadmin\models\Block();
                 $block->scenario = 'commandinsert';
                 $block->setAttributes([
-                    "group_id" => 1,
-                    "system_block" => 0,
-                    "class" => $ns
+                    'group_id' => 1,
+                    'system_block' => 0,
+                    'class' => $ns,
                 ]);
                 $block->insert();
-                $_log['blocks'][$ns] = "new block has been added to database.";
+                $_log['blocks'][$ns] = 'new block has been added to database.';
             } else {
-                $_log['blocks'][$ns] = "already in the database.";
+                $_log['blocks'][$ns] = 'already in the database.';
                 $exists[] = $model['id'];
             }
         }
@@ -110,62 +111,58 @@ class Module extends \admin\base\Module
                 $block->delete();
             }
         }
-        
+
         /* import project specific layouts */
         $cmslayouts = \yii::getAlias('@app/views/cmslayouts');
-        
+
         if (file_exists($cmslayouts)) {
-            foreach(scandir($cmslayouts) as $file) {
+            foreach (scandir($cmslayouts) as $file) {
                 if ($file == '.' || $file == '..') {
                     continue;
                 }
-                
+
                 $layoutItem = \cmsadmin\models\Layout::find()->where(['view_file' => $file])->one();
-                
-                    
-                $content = file_get_contents($cmslayouts . DIRECTORY_SEPARATOR . $file);
+
+                $content = file_get_contents($cmslayouts.DIRECTORY_SEPARATOR.$file);
                 // find all twig brackets
                 preg_match_all("/\{\{(.*?)\}\}/", $content, $results);
                 // local vars
                 $_placeholders = [];
                 $_vars = [];
                 // explode the specific vars for each type
-                foreach($results[1] as $match) {
-                    $parts = explode(".", trim($match));
+                foreach ($results[1] as $match) {
+                    $parts = explode('.', trim($match));
                     switch ($parts[0]) {
-                        case "placeholders":
+                        case 'placeholders':
                             $_placeholders[] = ['label' => $parts[1], 'var' => $parts[1]];
                             break;
-                        case "vars":
+                        case 'vars':
                             $_vars = $parts[1];
                             break;
                     }
                 }
                 if ($layoutItem) {
-                    
                     $layoutItem->scenario = 'restupdate';
                     $layoutItem->setAttributes([
-                        "name" => ucfirst($file),
-                        "view_file" => $file,
-                        "json_config" => json_encode(
-                                ['placeholders' => 
-                                    $_placeholders
+                        'name' => ucfirst($file),
+                        'view_file' => $file,
+                        'json_config' => json_encode(
+                                ['placeholders' => $_placeholders,
                                 ]
                         ),
                     ]);
                     $layoutItem->save();
-                    
+
                     $_log['layouts'][$file] = "existing cmslayout $file updated.";
                 } else {
                     // add item into the database table
                     $data = new \cmsadmin\models\Layout();
                     $data->scenario = 'restcreate';
                     $data->setAttributes([
-                        "name" => ucfirst($file),
-                        "view_file" => $file,
-                        "json_config" => json_encode(
-                                ['placeholders' => 
-                                    $_placeholders
+                        'name' => ucfirst($file),
+                        'view_file' => $file,
+                        'json_config' => json_encode(
+                                ['placeholders' => $_placeholders,
                                 ]
                         ),
                         ]);
@@ -174,7 +171,7 @@ class Module extends \admin\base\Module
                 }
             }
         }
-        
+
         return $_log;
     }
 }

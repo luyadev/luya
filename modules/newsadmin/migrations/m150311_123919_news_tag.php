@@ -7,9 +7,9 @@ class m150311_123919_news_tag extends Migration
 {
     public function up()
     {
-        $this->createTable("news_tag", [
-            "id" => "pk",
-            "title" => Schema::TYPE_STRING,
+        $this->createTable('news_tag', [
+            'id' => 'pk',
+            'title' => Schema::TYPE_STRING,
         ]);
     }
 

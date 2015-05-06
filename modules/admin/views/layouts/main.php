@@ -1,9 +1,8 @@
 <?php
-    use \Yii;
 use \admin\Module as Admin;
 
 $user = Admin::getAdminUserData();
-    $gravatar = "http://www.gravatar.com/avatar/".md5(strtolower(trim($user->email)))."?d=".urlencode('http://www.zephir.ch/files/rocky_460px_bw.jpg')."&s=40";
+    $gravatar = 'http://www.gravatar.com/avatar/'.md5(strtolower(trim($user->email))).'?d='.urlencode('http://www.zephir.ch/files/rocky_460px_bw.jpg').'&s=40';
 
     $this->beginPage()
 ?>
@@ -50,7 +49,7 @@ $user = Admin::getAdminUserData();
             </table>
         </div>
     </script>
-    
+
     <script type="text/ng-template" id="storageImageUpload">
         <table border="1">
             <tr><td>Filter:</td><td> <select name="filterId" ng-model="filterId"><option value="0">Kein Filter</option><option ng-repeat="item in filters" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select></td></tr>
@@ -75,18 +74,18 @@ $user = Admin::getAdminUserData();
             <tr>
                 <td><i class="fa fa-folder-o"></i></td><td colspan="4"><input type="text" ng-model="newFolderName" /><button type="button" ng-click="createNewFolder(newFolderName)"><i class="fa fa-plus-circle"></i> Ordner erstellen</button></td>
             </tr>
-            
+
             <tr ng-repeat="folder in folders">
                 <td><i class="fa fa-folder"></i></td><td colspan="3"><button ng-click="loadFolder(folder.id)" type="button">{{ folder.name }}</button></td><td><button ng-show="hasSelection()" ng-click="moveFilesTo(folder)" type="button"><i class="fa fa-long-arrow-left"></i> move to</button></div>
             </tr>
-            
+
             <tr ng-repeat="file in files" ng-click="toggleSelection(file)" ng-class="{'is-active' : inSelection(file)}">
                 <td>{{ file.id }} <span ng-if="inSelection(file)">SELECTED</span></td><td><strong>{{file.name_original}}</strong></td><td>{{ file.extension }}</td><td><button type="button" ng-if="allowSelection == true" ng-click="selectFile(file)"><i class="fa fa-check-circle" /></button></td>
             </tr>
             </table>
         </div>
     </script>
-    
+
     <div class="header" role="menubar">
 
         <div class="header__item header__item--left">

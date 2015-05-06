@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\straps;
 
 use admin\ngrest\StrapAbstract;

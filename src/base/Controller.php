@@ -1,4 +1,5 @@
 <?php
+
 namespace luya\base;
 
 /**
@@ -9,7 +10,7 @@ class Controller extends \yii\web\Controller
     /**
      * Use the default behaviour of Yii. This will result in loading the templates inside the Modules.
      *
-     * @var boolean
+     * @var bool
      */
     public $useModuleViewPath = false;
 

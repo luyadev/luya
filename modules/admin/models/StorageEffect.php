@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\models;
 
 /**
@@ -42,14 +43,14 @@ class StorageEffect extends \admin\ngrest\base\Model
     {
         return 'api-admin-effect';
     }
-    
+
     public function ngRestConfig($config)
     {
-        $config->list->field("name", "Name")->text()->required();
-        $config->list->field("identifier", "Unique Identifier")->text()->required();
-        $config->list->field("imagine_name", "imagine_name")->text()->required();
-        $config->list->field("imagine_json_params", "imagine_json_params")->text();
-        $config->list->field("id", "ID")->text();
+        $config->list->field('name', 'Name')->text()->required();
+        $config->list->field('identifier', 'Unique Identifier')->text()->required();
+        $config->list->field('imagine_name', 'imagine_name')->text()->required();
+        $config->list->field('imagine_json_params', 'imagine_json_params')->text();
+        $config->list->field('id', 'ID')->text();
 
         return $config;
     }

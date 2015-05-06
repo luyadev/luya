@@ -1,10 +1,12 @@
 <?php
+
 namespace cmsadmin\models;
 
 use yii\helpers\ArrayHelper;
 
 /**
  * @todo what happens when resort items if an items is deleted?
+ *
  * @author nadar
  */
 class Nav extends \yii\db\ActiveRecord
@@ -19,7 +21,7 @@ class Nav extends \yii\db\ActiveRecord
         parent::init();
         $this->on(self::EVENT_BEFORE_INSERT, [$this, 'eventBeforeInsert']);
     }
-    
+
     public function rules()
     {
         return [
@@ -27,12 +29,12 @@ class Nav extends \yii\db\ActiveRecord
             [['is_hidden', 'sort_index', 'is_deleted'], 'safe'],
         ];
     }
-    
+
     public function getNavItems()
     {
         return $this->hasMany(\cmsadmin\models\NavItem::className(), ['nav_id' => 'id']);
     }
-    
+
     /**
      * find the latest sort index cms_nav item for the current cat_id and parent_nav_id and set internal index count plus one.
      */
@@ -45,7 +47,7 @@ class Nav extends \yii\db\ActiveRecord
             $this->sort_index = $item->sort_index + 1;
         }
     }
-    
+
     public static function resort($navId, $newSortIndex)
     {
         /*
@@ -53,15 +55,15 @@ class Nav extends \yii\db\ActiveRecord
         $newSortIndex = (int) $newSortIndex;
         // find entrie on the current sort_index point
         $higher = self::find()->where("sort_index >= :index", ['index' => $newSortIndex])->andWhere(['cat_id' => $item->cat_id, 'parent_nav_id' => $item->parent_nav_id])->all();
-        
+
         foreach($higher as $ritem) {
             $ritem->sort_index = $ritem->sort_index + 1;
             $ritem->update(false);
         }
-        
+
         $item->sort_index = $newSortIndex;
         $item->update(false);
-        
+
         return true;
         */
     }

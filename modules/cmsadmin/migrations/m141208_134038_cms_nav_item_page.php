@@ -7,9 +7,9 @@ class m141208_134038_cms_nav_item_page extends Migration
 {
     public function up()
     {
-        $this->createTable("cms_nav_item_page", [
-            "id" => "pk",
-            "layout_id" => Schema::TYPE_INTEGER,
+        $this->createTable('cms_nav_item_page', [
+            'id' => 'pk',
+            'layout_id' => Schema::TYPE_INTEGER,
         ]);
     }
 

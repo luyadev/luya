@@ -1,4 +1,5 @@
 <?php
+
 namespace cmsadmin\models;
 
 class NavItemModule extends \cmsadmin\base\NavItemType

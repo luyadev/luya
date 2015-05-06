@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\base;
 
 /**
@@ -47,6 +48,6 @@ class RestVerbController extends \yii\rest\Controller implements \luya\rest\Beha
 
     private function throwException($method)
     {
-        throw new \Exception("The action ".$method." is not yet supported.");
+        throw new \Exception('The action '.$method.' is not yet supported.');
     }
 }

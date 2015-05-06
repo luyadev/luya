@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\ngrest\render;
 
 use admin\ngrest\RenderAbstract;

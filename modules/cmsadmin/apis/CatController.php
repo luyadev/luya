@@ -1,4 +1,5 @@
 <?php
+
 namespace cmsadmin\apis;
 
 class CatController extends \admin\base\RestActiveController

@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\apis;
 
 class GroupController extends \admin\base\RestActiveController

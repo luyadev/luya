@@ -17,7 +17,7 @@ $config = [
             'enableCsrfValidation' => false,
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
-            ]
+            ],
         ],
         'collection' => 'luya\components\Collection',
         'luya' => 'luya\components\LuyaComponents',

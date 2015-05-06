@@ -1,4 +1,5 @@
 <?php
+
 namespace cms\components;
 
 class UrlRule extends \luya\base\UrlRule

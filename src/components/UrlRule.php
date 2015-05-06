@@ -1,4 +1,5 @@
 <?php
+
 namespace luya\components;
 
 use Yii;
@@ -17,7 +18,7 @@ class UrlRule extends \luya\base\UrlRule
 
     public function parseRequest($manager, $request)
     {
-        $parts = explode("/", $request->getPathInfo());
+        $parts = explode('/', $request->getPathInfo());
 
         preg_match_all('/<(\w+):?([^>]+)?>/', yii::$app->getModule('luya')->urlPrefixComposition, $matches, PREG_SET_ORDER);
 
@@ -37,7 +38,7 @@ class UrlRule extends \luya\base\UrlRule
             }
         }
 
-        $request->setPathInfo(implode("/", $parts));
+        $request->setPathInfo(implode('/', $parts));
 
         $composition = new \luya\collection\PrefixComposition();
         $composition->hideComposition = yii::$app->getModule('luya')->hideComposition;
@@ -48,11 +49,11 @@ class UrlRule extends \luya\base\UrlRule
         // set the yii app language param based on the composition fullUrl
         yii::$app->language = \luya\helpers\Url::removeTrailing($composition->getFull());
 
-        $parts = explode("/", $request->getPathInfo()); // can be deleted after reshuffle array
+        $parts = explode('/', $request->getPathInfo()); // can be deleted after reshuffle array
 
         if (!empty($parts) && !array_key_exists($parts[0], yii::$app->modules)) {
             $class = yii::$app->defaultRoute.'\components\UrlRule';
-            
+
             if (!class_exists($class)) {
                 return false;
             }

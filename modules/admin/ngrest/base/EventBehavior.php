@@ -2,12 +2,12 @@
 
 namespace admin\ngrest\base;
 
-use \yii\db\ActiveRecord;
+use yii\db\ActiveRecord;
 
 class EventBehavior extends \yii\base\Behavior
 {
     public $ngRestConfig = null;
-    
+
     public function events()
     {
         return [
@@ -17,9 +17,9 @@ class EventBehavior extends \yii\base\Behavior
             ActiveRecord::EVENT_AFTER_FIND => 'eventAfterFind',
         ];
     }
-    
+
     private $_instances = [];
-    
+
     private function createPluginObject(array $plugin, $model)
     {
         $class = $plugin['class'];
@@ -27,18 +27,19 @@ class EventBehavior extends \yii\base\Behavior
         if (array_key_exists($class, $this->_instances)) {
             return $this->_instances[$class];
         }
-        
+
         $obj = new \ReflectionClass($class);
         $instance = $obj->newInstanceArgs($args);
         $this->_instances[$class] = $instance;
         $instance->setModel($model);
+
         return $instance;
     }
-    
+
     public function eventAfterInsert($event)
     {
         $events = $this->ngRestConfig->getPlugins('create'); // ngCrud is create not insert
-        
+
         foreach ($events as $field => $plugins) {
             foreach ($plugins as $plugin) {
                 $obj = $this->createPluginObject($plugin, $event->sender);
@@ -47,13 +48,13 @@ class EventBehavior extends \yii\base\Behavior
                     $event->sender->$field = $response;
                 }
             }
-        }        
+        }
     }
-    
+
     public function eventBeforeInsert($event)
     {
         $events = $this->ngRestConfig->getPlugins('create'); // ngCrud is create not insert
-        
+
         foreach ($events as $field => $plugins) {
             foreach ($plugins as $plugin) {
                 $obj = $this->createPluginObject($plugin, $event->sender);
@@ -64,11 +65,11 @@ class EventBehavior extends \yii\base\Behavior
             }
         }
     }
-    
+
     public function eventBeforeUpdate($event)
     {
         $events = $this->ngRestConfig->getPlugins('update');
-    
+
         foreach ($events as $field => $plugins) {
             foreach ($plugins as $plugin) {
                 $obj = $this->createPluginObject($plugin, $event->sender);
@@ -79,11 +80,11 @@ class EventBehavior extends \yii\base\Behavior
             }
         }
     }
-    
+
     public function eventAfterFind($event)
     {
         $events = $this->ngRestConfig->getPlugins('list'); // ngCrud ist list not find
-    
+
         foreach ($events as $field => $plugins) {
             foreach ($plugins as $plugin) {
                 $obj = $this->createPluginObject($plugin, $event->sender);

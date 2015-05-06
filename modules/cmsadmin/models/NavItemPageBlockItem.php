@@ -1,12 +1,14 @@
 <?php
+
 namespace cmsadmin\models;
 
 /**
  * sort_index numbers always starts from 0 and not from 1, like a default array behaviour. If a
  * negative sort_index is provided its always the last sort_index item (reason: we dont know the sort key of
  * the "at the end" dropparea).
- * 
+ *
  * @todo remove scenarios?
+ *
  * @author nadar
  */
 class NavItemPageBlockItem extends \yii\db\ActiveRecord
@@ -51,7 +53,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
                 $this->sort_index = $last->sort_index + 1;
             }
         } else { // its not a negative value, we have to find the positions after the current sort index and update to a higher level
-            $higher = self::find()->where("sort_index >= :index", ['index' => $this->sort_index])->andWhere(['nav_item_page_id' => $this->nav_item_page_id, 'placeholder_var' => $this->placeholder_var, 'prev_id' => $this->prev_id])->all();
+            $higher = self::find()->where('sort_index >= :index', ['index' => $this->sort_index])->andWhere(['nav_item_page_id' => $this->nav_item_page_id, 'placeholder_var' => $this->placeholder_var, 'prev_id' => $this->prev_id])->all();
 
             foreach ($higher as $item) {
                 $newSortIndex = $item->sort_index + 1;
@@ -80,12 +82,12 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         if (empty($this->json_config_cfg_values)) {
             $this->json_config_cfg_values = json_encode([], JSON_FORCE_OBJECT);
         }
-        
+
         if (empty($this->json_config_values)) {
             $this->json_config_values = json_encode([], JSON_FORCE_OBJECT);
         }
     }
-    
+
     private function reindex($navItemPageId, $placeholderVar, $prevId)
     {
         $index = 0;

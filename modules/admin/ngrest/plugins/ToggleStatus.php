@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\ngrest\plugins;
 
 use admin\ngrest\PluginAbstract;
@@ -7,7 +8,7 @@ class ToggleStatus extends PluginAbstract
 {
     public function renderList($doc)
     {
-        $elmn = $doc->createElement("span", "{{item.".$this->name."}}");
+        $elmn = $doc->createElement('span', '{{item.'.$this->name.'}}');
         $doc->appendChild($elmn);
 
         return $doc;
@@ -15,15 +16,15 @@ class ToggleStatus extends PluginAbstract
 
     public function renderCreate($doc)
     {
-        $elmn = $doc->createElement("input");
-        $elmn->setAttribute("id", $this->id);
-        $elmn->setIdAttribute("id", true);
-        $elmn->setAttribute("ng-model", $this->ngModel);
-        $elmn->setAttribute("ng-true-value", "1");
-        $elmn->setAttribute("ng-false-value", "0");
-        $elmn->setAttribute("value", 1);
-        $elmn->setAttribute("class", "form__input");
-        $elmn->setAttribute("type", "checkbox");
+        $elmn = $doc->createElement('input');
+        $elmn->setAttribute('id', $this->id);
+        $elmn->setIdAttribute('id', true);
+        $elmn->setAttribute('ng-model', $this->ngModel);
+        $elmn->setAttribute('ng-true-value', '1');
+        $elmn->setAttribute('ng-false-value', '0');
+        $elmn->setAttribute('value', 1);
+        $elmn->setAttribute('class', 'form__input');
+        $elmn->setAttribute('type', 'checkbox');
         $doc->appendChild($elmn);
 
         return $doc;

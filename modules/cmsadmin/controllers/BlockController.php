@@ -1,4 +1,5 @@
 <?php
+
 namespace cmsadmin\controllers;
 
 class BlockController extends \admin\ngrest\base\Controller

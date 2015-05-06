@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\controllers;
 
 class UserController extends \admin\ngrest\base\Controller

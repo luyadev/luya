@@ -3,17 +3,17 @@
 namespace admin\filters;
 
 class SmallThumbnail extends \admin\base\Filter
-{    
+{
     public function identifier()
     {
         return 'small-thumbnail';
     }
-    
+
     public function name()
     {
         return 'kleines Thumbnail';
     }
-    
+
     public function chain()
     {
         return [

@@ -1,4 +1,5 @@
 <?php
+
 namespace account\base;
 
 class Controller extends \luya\base\PageController

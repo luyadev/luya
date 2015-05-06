@@ -1,6 +1,6 @@
 <?php
-namespace admin\ngrest;
 
+namespace admin\ngrest;
 
 /**
  * ['list' => [
@@ -38,7 +38,7 @@ class Config implements ConfigInterface
         $this->restUrl = $this->restUrlPrefix.$restUrl;
         $this->restPrimaryKey = $restPrimaryKey;
         $this->options = $options;
-        $this->list->field($restPrimaryKey, "ID")->text();
+        $this->list->field($restPrimaryKey, 'ID')->text();
     }
 
     public function __set($key, $value)
@@ -73,19 +73,21 @@ class Config implements ConfigInterface
 
         return $this;
     }
-    
+
     /**
-	 * return the all plugins fore this type
-	 * @todo should we directly return the static class method from the plugin as lambda function?
-	 */
+     * return the all plugins fore this type.
+     *
+     * @todo should we directly return the static class method from the plugin as lambda function?
+     */
     public function getPlugins($type)
     {
         $events = [];
-        foreach($this->getKey($type) as $item) {
-            foreach($item['plugins'] as $plugin) {
+        foreach ($this->getKey($type) as $item) {
+            foreach ($item['plugins'] as $plugin) {
                 $events[$item['name']][] = $plugin;
             }
         }
+
         return $events;
     }
 
@@ -102,7 +104,7 @@ class Config implements ConfigInterface
     public function field($name, $alias)
     {
         $this->config[$this->pointer['key']][$name] = [
-            'name' => $name, 'alias' => $alias, 'plugins' => [], 'i18n' => false, "extraField" => false,
+            'name' => $name, 'alias' => $alias, 'plugins' => [], 'i18n' => false, 'extraField' => false,
         ];
         $this->pointer['field'] = $name;
 
@@ -112,11 +114,11 @@ class Config implements ConfigInterface
     public function extraField($name, $alias)
     {
         if (!$this->extraFieldExists($name)) {
-            throw new \Exception("If you set extraFields, you have to define them first as a property inside your AR model.");
+            throw new \Exception('If you set extraFields, you have to define them first as a property inside your AR model.');
         }
 
         $this->config[$this->pointer['key']][$name] = [
-            'name' => $name, 'alias' => $alias, 'plugins' => [], 'i18n' => false, "extraField" => true,
+            'name' => $name, 'alias' => $alias, 'plugins' => [], 'i18n' => false, 'extraField' => true,
         ];
         $this->pointer['field'] = $name;
 
@@ -142,7 +144,7 @@ class Config implements ConfigInterface
         $temp = $this->config[$key];
         foreach ($removeFields as $name) {
             if (!array_key_exists($name, $temp)) {
-                throw new \Exception("Error"); // @todo create exception class
+                throw new \Exception('Error'); // @todo create exception class
             }
             unset($temp[$name]);
         }
@@ -151,8 +153,8 @@ class Config implements ConfigInterface
 
     public function register($strapObject, $alias)
     {
-        if ($this->pointer['key'] !== "strap") {
-            throw new \Exception("register method can only be used in strap pointer context.");
+        if ($this->pointer['key'] !== 'strap') {
+            throw new \Exception('register method can only be used in strap pointer context.');
         }
         $strapClass = get_class($strapObject);
         $strapHash = sha1($this->getNgRestConfigHash().$strapClass);

@@ -1,4 +1,5 @@
 <?php
+
 namespace admin\apis;
 
 class FilterController extends \admin\base\RestActiveController

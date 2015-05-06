@@ -7,10 +7,10 @@ class m150304_152256_admin_storage_image extends Migration
 {
     public function up()
     {
-        $this->createTable("admin_storage_image", [
-            "id" => "pk",
-            "file_id" => Schema::TYPE_INTEGER,
-            "filter_id" => Schema::TYPE_INTEGER,
+        $this->createTable('admin_storage_image', [
+            'id' => 'pk',
+            'file_id' => Schema::TYPE_INTEGER,
+            'filter_id' => Schema::TYPE_INTEGER,
         ]);
     }
 
