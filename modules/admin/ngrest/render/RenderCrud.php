@@ -52,7 +52,7 @@ class RenderCrud extends RenderAbstract implements RenderInterface
     {
         $buttons = [];
         // do we have an edit button
-        if (!empty($this->getFields('update'))) {
+        if (count($this->getFields('update')) > 0) {
             $buttons[] = [
                 'ngClick' => 'toggleUpdate(item.'.$this->config->getRestPrimaryKey().', $event)',
                 'icon' => 'fa fa-fw fa-edit',

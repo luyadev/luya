@@ -25,7 +25,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
         </h3>
 
         <div class="toolbar__items">
-            <?php if (!empty($crud->getFields('create'))): ?>
+            <?php if (count($crud->getFields('create')) > 0): ?>
             <div class="toolbar__item">
                 <button class="button button--green" role="button" ng-click="toggleCreate()">
                     <span class="button__text fa fa-plus-circle"> Hinzufügen</span>
@@ -74,7 +74,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
                         <?php foreach ($crud->list as $item): ?>
                             <th class="table__column table__column--head"><?= $item['alias']; ?></th>
                         <?php endforeach; ?>
-                        <?php if (!empty($crud->getButtons())): ?>
+                        <?php if (count($crud->getButtons()) > 0): ?>
                         <th class="table__column table__column--head">Aktionen</th>
                         <?php endif; ?>
                     </tr>
@@ -85,7 +85,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
                         <?php foreach ($crud->list as $item): ?>
                             <td class="table__column"><?= $crud->createElement($item, $crud::TYPE_LIST); ?></td>
                         <?php endforeach; ?>
-                        <?php if (!empty($crud->getButtons())): ?>
+                        <?php if (count($crud->getButtons()) > 0): ?>
                         <td class="table__column table__column--actions">
                             <?php foreach ($crud->getButtons() as $item): ?>
                             <button class="button button--yellow" ng-click="<?= $item['ngClick']; ?>">

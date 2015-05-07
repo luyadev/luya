@@ -37,7 +37,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public function validateUserExists($attribute, $params)
     {
-        if (!empty(self::findByEmail($this->email))) {
+        $exists = self::findByEmail($this->email);
+        if (!empty($exists)) {
             $this->addError($attribute, 'Dieser Benutzer existiert schon');
         }
     }
