@@ -1,16 +1,11 @@
 /* zephir angular admin */
 
-var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ui.ace', 'ngDragDrop', 'angular-loading-bar', 'pickadate', 'flow']);
+var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ui.ace', 'ngDragDrop', 'angular-loading-bar', 'flow', 'ui.bootstrap']);
 
-zaa.config(function ($httpProvider, $stateProvider, $controllerProvider, pickadateI18nProvider) {
+zaa.config(function ($httpProvider, $stateProvider, $controllerProvider) {
 	$httpProvider.interceptors.push('authInterceptor');
 	
 	zaa.bootstrap = $controllerProvider;
-	
-	pickadateI18nProvider.translations = {
-		prev : 'Vorheriger',
-		next : 'Nächster',
-	};
 	
 	$stateProvider
 		.state("default", {

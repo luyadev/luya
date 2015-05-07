@@ -148,8 +148,34 @@ zaa.directive('zaaDatepicker', function() {
 			"name" : "=",
 			"options" : "="
 		},
+		controller : function($scope, $filter) {
+			
+			$scope.datemodel = null;
+			
+			$scope.open = function($event) {
+			    $event.preventDefault();
+			    $event.stopPropagation();
+			    $scope.opened = true;
+			};
+			
+			$scope.$watch(function() { return $scope.model }, function(n) {
+				if ($scope.model !== undefined) {
+					var res = $scope.model.split("-");
+					$scope.datemodel = new Date(res[2], (res[1]-1), res[0]); /* $scope.model; */
+				}
+			});
+			
+			$scope.dateOptions = {
+				formatYear: 'yyyy',
+				startingDay: 1
+			};
+			
+			$scope.changer = function() {
+				$scope.model = $filter('date')($scope.datemodel, 'dd-MM-yyyy');
+			}
+		},
 		template: function(){
-			return '<input pickadate="" format="dd-mm-yyyy" ng-model="model" week-starts-on="1"></input>';
+			return '<div><input type="text" datepicker-options="dateOptions" ng-change="changer()" datepicker-popup="dd-MM-yyyy" ng-model="datemodel" is-open="opened" close-text="Close" /><button type="button" ng-click="open($event)">OPEN</button></div>';
 		}
 	}
 });
