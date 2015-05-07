@@ -72,7 +72,7 @@ class NavItemModule extends \cmsadmin\base\NavItemType
         return;
     }
 
-    public function getContext()
+    public function getContextPropertysArray()
     {
         return $this->_context;
     }

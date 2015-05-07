@@ -34,10 +34,6 @@ class NavItemPage extends \cmsadmin\base\NavItemType
         ]);
     }
 
-    public function getContext()
-    {
-    }
-
     public function renderPlaceholder($navItemPageId, $placeholderVar, $prevId)
     {
         $string = '';

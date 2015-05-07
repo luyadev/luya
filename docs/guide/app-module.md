@@ -126,4 +126,4 @@ All the luya module urlRules does have to "prefix" theyr pattern with the curren
 7. Module Context
 -------------------
 If a module is invoke by another module the context variable contains the name of the module which has invoke the active module. For example if the cms loades other modules, the loaded module can access the 
-parent module with $this->getContext();
+parent module with $this->context;

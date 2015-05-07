@@ -102,13 +102,10 @@ class UrlManager extends \yii\web\UrlManager
         if ($moduleName !== false) {
             $moduleObject = \yii::$app->getModule($moduleName);
 
-            if (method_exists($moduleObject, 'getContext')) {
-                $context = $moduleObject->getContext();
-                if (!empty($context)) {
-                    $options = $moduleObject->getContextOptions();
-                    $link = \yii::$app->collection->links->findOneByArguments(['nav_item_id' => (int) $options['navItemId']]);
-                    $response = str_replace($moduleName, $composition.$link['url'], $response);
-                }
+            if (method_exists($moduleObject, 'setContext') && !empty($moduleObject->context)) {
+                $options = $moduleObject->getContextOptions();
+                $link = \yii::$app->collection->links->findOneByArguments(['nav_item_id' => (int) $options['navItemId']]);
+                $response = str_replace($moduleName, $composition.$link['url'], $response);
             }
         }
 

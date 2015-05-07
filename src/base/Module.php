@@ -126,10 +126,12 @@ class Module extends \yii\base\Module
         $this->context = $name;
     }
 
+    /*
     public function getContext()
     {
         return $this->context;
     }
+    */
 
     public function setContextOptions(array $options)
     {

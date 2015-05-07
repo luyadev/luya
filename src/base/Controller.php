@@ -58,7 +58,7 @@ class Controller extends \yii\web\Controller
      */
     public function render($view, $params = [])
     {
-        if (!empty($this->module->getContext()) && empty($this->layout)) {
+        if (!empty($this->module->context) && empty($this->layout)) {
             return $this->renderPartial($view, $params);
         }
 

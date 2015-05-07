@@ -91,11 +91,16 @@ class DefaultController extends \luya\base\PageController
 
         $content = $item->getContent();
 
-        $this->setContext($item->getContext());
+        foreach($item->getContextPropertysArray() as $prop => $value) {
+            if (!empty($value)) {
+                $this->$prop = $value;
+            }
+        }
 
         return $content;
     }
-
+    
+    /*
     private function setContext($context)
     {
         if (empty($context)) {
@@ -112,6 +117,9 @@ class DefaultController extends \luya\base\PageController
     {
         return $this->_context;
     }
+
+        */
+
 
     private function findDefaultPage()
     {
