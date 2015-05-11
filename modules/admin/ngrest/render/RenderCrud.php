@@ -55,8 +55,8 @@ class RenderCrud extends RenderAbstract implements RenderInterface
         if (count($this->getFields('update')) > 0) {
             $buttons[] = [
                 'ngClick' => 'toggleUpdate(item.'.$this->config->getRestPrimaryKey().', $event)',
-                'icon' => 'fa fa-fw fa-edit',
-                'label' => '',
+                'icon' => 'mdi-editor-border-color',
+                'label' => 'Bearbeiten',
             ];
         }
         // get all straps assign to the crud
@@ -93,6 +93,7 @@ class RenderCrud extends RenderAbstract implements RenderInterface
     }
 
     /**
+     * @todo do not return the specofic type content, but return an array contain more infos also about is multi linguage and foreach in view file! 
      * @param unknown_type $element
      * @param string       $configContext list,create,update
      */
@@ -103,11 +104,11 @@ class RenderCrud extends RenderAbstract implements RenderInterface
             foreach (\admin\models\Lang::find()->all() as $l => $v) {
                 $ngModel = $this->i18nNgModelString($configContext, $element['name'], $v->short_code);
                 $id = 'id-'.md5($ngModel.$v->short_code);
-
-                $return[] = '<li>'.$v->short_code.': '.$this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias']).'</li>';
+                // anzahl cols durch anzahl sprachen
+                $return[] = '<div class="input-field col s6" input-field>'.$this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias']).'<label for="'.$id.'">'.$element['alias'] . ' ' . $v->name.'</label></div>';
             }
 
-            return '<ul>'.implode('', $return).'</ul>';
+            return implode('', $return);
         }
 
         if ($element['i18n'] && $configContext == self::TYPE_LIST) {
@@ -117,7 +118,21 @@ class RenderCrud extends RenderAbstract implements RenderInterface
         $ngModel = $this->ngModelString($configContext, $element['name']);
         $id = 'id-'.md5($ngModel);
 
-        return $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias']);
+        $htmlField = $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias']);
+        
+        switch($configContext) {
+            case self::TYPE_LIST:
+                return $htmlField;
+                break;
+                
+            case self::TYPE_CREATE:
+                return '<div class="input-field col s12" input-field>' . $htmlField . '<label for="'.$id.'">' . $element['alias'] . '</label></div>';
+                break;
+                
+            case self::TYPE_UPDATE:
+                return '<div class="input-field col s12" input-field>' . $htmlField . '<label for="'.$id.'">' . $element['alias'] . '</label></div>';
+                break;
+        }
     }
 
     private function renderElementPlugins($configContext, $plugins, $elmnId, $elmnName, $elmnModel, $elmnAlias)

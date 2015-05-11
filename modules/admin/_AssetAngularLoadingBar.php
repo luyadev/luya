@@ -2,7 +2,7 @@
 
 namespace admin;
 
-class AssetAngularLoadingBar extends \yii\web\AssetBundle
+class _AssetAngularLoadingBar extends \yii\web\AssetBundle
 {
     public $sourcePath = '@bower/angular-loading-bar';
 

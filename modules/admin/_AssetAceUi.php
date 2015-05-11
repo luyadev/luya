@@ -2,7 +2,7 @@
 
 namespace admin;
 
-class AssetAceUi extends \yii\web\AssetBundle
+class _AssetAceUi extends \yii\web\AssetBundle
 {
     public $sourcePath = '@bower/angular-ui-ace';
 

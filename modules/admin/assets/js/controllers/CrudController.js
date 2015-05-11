@@ -66,16 +66,18 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 	}
 	
 	$scope.toggleUpdate = function (id, $event) {
+		
+		/*
 		$scope.toggler.update = !$scope.toggler.update;
-		$scope.data.updateId = id;
 		$scope.AdminService.bodyClass = 'main-blurred';
-		
-		
+		*/
+		$scope.data.updateId = id;
 		$http.get($scope.config.apiEndpoint + '/'+id+'?' + $scope.config.apiUpdateQueryString)
 		.success(function(data) {
 			$scope.toggler.strap = false;
 			$scope.data.update = data;
             dispatchEvent('onCrudUpdate');
+            $('#updateModal').openModal();
 			
 		})
 		.error(function(data) {
@@ -84,11 +86,17 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 	}
 	
 	$scope.closeUpdate = function () {
-        $scope.toggler.update = false;
+		$('#updateModal').closeModal();
         $scope.AdminService.bodyClass = '';
     }
 	
-	$scope.toggleCreate = function () {
+	$scope.closeCreate = function() {
+		$('#createModal').closeModal();
+	}
+	
+	$scope.openCreate = function () {
+		$('#createModal').openModal();
+		/*
 		$scope.toggler.create = !$scope.toggler.create;
 		if ($scope.toggler.create) {
 			$scope.AdminService.bodyClass = 'main-blurred';
@@ -98,6 +106,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 		if ($scope.toggler.create) {
 			dispatchEvent('onCrudCreate');
 		}
+		*/
 	}
     
 	$scope.submitUpdate = function () {
@@ -109,7 +118,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 		$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true))
 		.success(function(data) {
 			$scope.loadList();
-			$scope.closeUpdate();
+			$('#updateModal').closeModal();
 		})
 		.error(function(data) {
 			$scope.updateErrors = data;
@@ -124,7 +133,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 		.success(function(data) {
 			$scope.loadList();
 			$scope.data.create = {};
-			$scope.toggleCreate();
+			$('#createModal').closeModal();
 		})
 		.error(function(data) {
 			$scope.createErrors = data;

@@ -20,7 +20,7 @@ class Textarea extends PluginAbstract
         $elmn->setAttribute('id', $this->id);
         $elmn->setIdAttribute('id', true);
         $elmn->setAttribute('model', $this->ngModel);
-        $elmn->setAttribute('class', 'form__input form__input--textarea');
+        $elmn->setAttribute('class', 'materialize-textarea');
         $doc->appendChild($elmn);
 
         return $doc;

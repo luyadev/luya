@@ -19,6 +19,14 @@ abstract class Select extends PluginAbstract
 
     public $data = [];
 
+    public function renderList($doc)
+    {
+        $elmn = $doc->createElement('span', '{{item.'.$this->name.'}}');
+        $doc->appendChild($elmn);
+        
+        return $doc;
+    }
+    
     public function renderCreate($doc)
     {
         $elmn = $doc->createElement('zaa-input-select');
@@ -26,7 +34,6 @@ abstract class Select extends PluginAbstract
         $elmn->setIdAttribute('id', true);
         $elmn->setAttribute('model', $this->ngModel);
         $elmn->setAttribute('options', json_encode($this->data));
-        $elmn->setAttribute('class', 'form__input');
         $doc->appendChild($elmn);
 
         return $doc;

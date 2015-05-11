@@ -30,7 +30,7 @@ zaa.directive('zaaInputText', function(){
 			/* console.log($scope.options) */
 		},
 		template : function() {
-			return '<input class="form__input" type="text" ng-model="model" />';
+			return '<input class="form__input" type="text" ng-model="model" /><label>asdfasdf</label>';
 		}
 	}
 });
@@ -86,7 +86,7 @@ zaa.directive('zaaInputSelect', function(){
 		},
 		
 		template : function() {
-			return '<select ng-options="item.value as item.label for item in options" ng-model="model" >';
+			return '<select class="browser-default" ng-options="item.value as item.label for item in options" ng-model="model" >';
 		}
 	}
 });
@@ -110,6 +110,7 @@ zaa.directive('zaaInputCheckbox', function(){
 			$scope.model = [];
 			
 			$scope.toggleSelection = function (value) {
+				console.log(value);
 				for (var i in $scope.model) {
 					if ($scope.model[i]['id'] == value.id) {
 						$scope.model.splice(i, 1);
@@ -135,7 +136,7 @@ zaa.directive('zaaInputCheckbox', function(){
 		},
 		
 		template : function() {
-			return '<div style="border:1px solid #F0F0F0; padding:10px;"><label style="display:block; padding:5px;" ng-repeat="item in options.items"><input type="checkbox" ng-checked="isChecked(item)"" ng-click="toggleSelection(item)"> {{item.label}}</label></div>';
+			return '<p ng-repeat="item in options.items"><input type="checkbox" ng-checked="isChecked(item)" ng-click="toggleSelection(item)" /><label>{{item.label}}</label></p>';
 		}
 	}
 });
