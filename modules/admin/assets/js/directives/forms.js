@@ -30,7 +30,7 @@ zaa.directive('zaaInputText', function(){
 			/* console.log($scope.options) */
 		},
 		template : function() {
-			return '<input class="form__input" type="text" ng-model="model" /><label>asdfasdf</label>';
+			return '<input class="form__input" type="text" ng-model="model" />';
 		}
 	}
 });
