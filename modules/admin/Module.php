@@ -21,9 +21,9 @@ class Module extends \admin\base\Module
 
     public $assets = [
         'admin\AssetAdmin',
-        'admin\AssetAngularLoadingBar',
-        'admin\AssetAceUi',
-        'admin\AssetAce',
+        //'admin\AssetAngularLoadingBar',
+        //'admin\AssetAceUi',
+        //'admin\AssetAce',
     ];
 
     public $storageFolder = '@webroot/storage';
