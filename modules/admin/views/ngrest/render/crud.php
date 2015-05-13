@@ -33,7 +33,9 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
 <tbody>
     <tr ng-repeat="item in data.list">
         <?php foreach ($crud->list as $item): ?>
-            <td><?= $crud->createElement($item, $crud::TYPE_LIST); ?></td>
+            <? foreach($crud->createElements($item, $crud::TYPE_LIST) as $element): ?>
+                <td><?= $element['html']; ?></td>
+            <? endforeach; ?>
         <?php endforeach; ?>
         <?php if (count($crud->getButtons()) > 0): ?>
         <td style="text-align:right;">
@@ -51,7 +53,9 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
         <div class="modal-content">
             <?php foreach ($crud->create as $k => $item): ?>
             <div class="row">
-                <?= $crud->createElement($item, $crud::TYPE_CREATE); ?>
+                <? foreach($crud->createElements($item, $crud::TYPE_CREATE) as $element): ?>
+                    <?= $element['html']; ?>
+                <? endforeach; ?>
             </div>
             <? endforeach; ?>
             <!-- 
@@ -78,7 +82,9 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
         <div class="modal-content">
             <?php foreach ($crud->update as $k => $item): ?>
             <div class="row">
-                <?= $crud->createElement($item, $crud::TYPE_UPDATE); ?>
+                <? foreach($crud->createElements($item, $crud::TYPE_UPDATE) as $element): ?>
+                    <?= $element['html']; ?>
+                <? endforeach; ?>
             </div>
             <? endforeach; ?>
             <!-- 

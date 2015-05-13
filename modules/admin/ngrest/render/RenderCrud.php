@@ -97,7 +97,7 @@ class RenderCrud extends RenderAbstract implements RenderInterface
      * @param unknown_type $element
      * @param string       $configContext list,create,update
      */
-    public function createElement($element, $configContext)
+    public function createElements($element, $configContext)
     {
         if ($element['i18n'] && $configContext !== self::TYPE_LIST) {
             $return = [];
@@ -105,10 +105,14 @@ class RenderCrud extends RenderAbstract implements RenderInterface
                 $ngModel = $this->i18nNgModelString($configContext, $element['name'], $v->short_code);
                 $id = 'id-'.md5($ngModel.$v->short_code);
                 // anzahl cols durch anzahl sprachen
-                $return[] = '<div class="input-field col s6" input-field>'.$this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias']).'<label for="'.$id.'">'.$element['alias'] . ' ' . $v->name.'</label></div>';
+                $return[] = [
+                    'id' => $id,
+                    'label' => $element['alias'] . ' ' . $v->name,
+                    'html' => $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'] . ' ' . $v->name, $element['gridCols'])
+                ];
             }
 
-            return implode('', $return);
+            return $return;
         }
 
         if ($element['i18n'] && $configContext == self::TYPE_LIST) {
@@ -118,39 +122,31 @@ class RenderCrud extends RenderAbstract implements RenderInterface
         $ngModel = $this->ngModelString($configContext, $element['name']);
         $id = 'id-'.md5($ngModel);
 
-        $htmlField = $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias']);
-        
-        switch($configContext) {
-            case self::TYPE_LIST:
-                return $htmlField;
-                break;
-                
-            case self::TYPE_CREATE:
-                return '<div class="input-field col s12" input-field>' . $htmlField . '<label for="'.$id.'">' . $element['alias'] . '</label></div>';
-                break;
-                
-            case self::TYPE_UPDATE:
-                return '<div class="input-field col s12" input-field>' . $htmlField . '<label for="'.$id.'">' . $element['alias'] . '</label></div>';
-                break;
-        }
+        return [
+            [
+                'id' => $id,
+                'label' => $element['alias'],
+                'html' => $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'], $element['gridCols']),
+            ]
+        ];
     }
 
-    private function renderElementPlugins($configContext, $plugins, $elmnId, $elmnName, $elmnModel, $elmnAlias)
+    private function renderElementPlugins($configContext, $plugins, $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmnGridCols)
     {
         $doc = new \DOMDocument('1.0');
 
         foreach ($plugins as $key => $plugin) {
-            $doc = $this->renderPlugin($doc, $configContext, $plugin['class'], $plugin['args'], $elmnId, $elmnName, $elmnModel, $elmnAlias);
+            $doc = $this->renderPlugin($doc, $configContext, $plugin['class'], $plugin['args'], $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmnGridCols);
         }
 
         return $doc->saveHTML();
     }
 
-    private function renderPlugin($DOMDocument, $configContext, $className, $classArgs, $elmnId, $elmnName, $elmnModel, $elmnAlias)
+    private function renderPlugin($DOMDocument, $configContext, $className, $classArgs, $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmnGridCols)
     {
         $ref = new \ReflectionClass($className);
         $obj = $ref->newInstanceArgs($classArgs);
-        $obj->setConfig($elmnId, $elmnName, $elmnModel, $elmnAlias);
+        $obj->setConfig($elmnId, $elmnName, $elmnModel, $elmnAlias, $elmnGridCols);
         $method = 'render'.ucfirst($configContext);
 
         return $obj->$method($DOMDocument);

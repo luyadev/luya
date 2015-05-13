@@ -34,6 +34,8 @@ abstract class Select extends PluginAbstract
         $elmn->setIdAttribute('id', true);
         $elmn->setAttribute('model', $this->ngModel);
         $elmn->setAttribute('options', json_encode($this->data));
+        $elmn->setAttribute('label', $this->alias);
+        $elmn->setAttribute('grid', $this->gridCols);
         $doc->appendChild($elmn);
 
         return $doc;

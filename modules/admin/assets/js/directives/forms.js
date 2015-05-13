@@ -7,10 +7,12 @@ zaa.directive('zaaInjector', function($compile) {
 		scope : {
 			"dir" : '=',
 			"model" : '=',
-			"options" : '='
+			"options" : '=',
+			"label" : "@label",
+			'grid' : '@grid'
 		},
 		link : function($scope, $element, attr) {
-			var elmn = $compile(angular.element('<' + $scope.dir + ' options="options" model="model" />'))($scope);
+			var elmn = $compile(angular.element('<' + $scope.dir + ' options="options" model="model" label="{{label}}" grid="{{grid}}" />'))($scope);
 			$element.replaceWith(elmn);
 		},
 	}
@@ -19,37 +21,14 @@ zaa.directive('zaaInjector', function($compile) {
 zaa.directive('zaaInputText', function(){
 	return {
 		restrict : 'E',
-		transclude : false,
-		replace : true,
 		scope : {
-			"model" : '=',
-			"name" : '=',
-			"options" : '='
-		},
-		controller : function($scope) {
-			/* console.log($scope.options) */
+			'model' : '=',
+			'options' : '=',
+			'label' : '@label',
+			'grid' : '@grid'
 		},
 		template : function() {
-			return '<input class="form__input" type="text" ng-model="model" />';
-		}
-	}
-});
-
-zaa.directive('zaaInputPassword', function(){
-	return {
-		restrict : 'E',
-		transclude : false,
-		replace : true,
-		scope : {
-			"model" : '=',
-			"name" : '=',
-			"options" : '='
-		},
-		controller : function($scope) {
-			/* console.log($scope.options) */
-		},
-		template : function() {
-			return '<input type="password" ng-model="model" />';
+			return '<input-field class="col s{{grid}}"><input ng-model="model" type="text" /><label>{{label}}</label></input-field>';
 		}
 	}
 });
@@ -57,72 +36,76 @@ zaa.directive('zaaInputPassword', function(){
 zaa.directive('zaaTextarea', function(){
 	return {
 		restrict : 'E',
-		transclude : false,
-		replace : true,
 		scope : {
-			"model" : '=',
-			"name" : '=',
-			"options" : '='
+			'model' : '=',
+			'options' : '=',
+			'label' : '@label',
+			'grid' : '@grid'
 		},
 		template : function() {
-			return '<textarea ng-model="model"></textarea>';
+			return '<input-field class="col s{{grid}}"><textarea ng-model="model" class="materialize-textarea"></textarea>{{model}} <label>{{label}}</label></input-field>';
 		}
 	}
 });
+
+zaa.directive('zaaInputPassword', function(){
+	return {
+		restrict : 'E',
+		scope : {
+			'model' : '=',
+			'options' : '=',
+			'label' : '@label',
+			'grid' : '@grid',
+		},
+		template : function() {
+			return '<input-field class="col s{{grid}}"><input type="password" ng-model="model" /><label>{{label}}</label></input-field>';
+		}
+	}
+});
+
+
 
 zaa.directive('zaaInputSelect', function(){
 	return {
 		restrict : 'E',
-		transclude : false,
-		replace : true,
 		scope : {
-			"model" : '=',
-			"name" : '=',
-			"options" : '='
+			'model' : '=',
+			'options' : '=',
+			'label' : '@label',
+			'grid' : '@grid'
 		},
-		
-		controller : function($scope) {
-			/* console.log($scope.options); */
-		},
-		
 		template : function() {
-			return '<select class="browser-default" ng-options="item.value as item.label for item in options" ng-model="model" >';
+			return '<input-field class="col s{{grid}}"><select material-select ng-options="item.value as item.label for item in options" ng-model="model"></select><label>{{label}}</label></input-field>';
 		}
 	}
 });
 
+/** 
+ * options arg object:
+ * 
+ * options.checked = [value1, value2],
+ * options.items[] = { 'value' : 1, 'label' => 'Label for Value 1' }
+ */
 zaa.directive('zaaInputCheckbox', function(){
 	return {
 		restrict : 'E',
-		transclude : false,
 		scope : {
-			"model" : '=',
-			"name" : '=',
-			"options" : '=' 
-			/* 
-			 * options.checked = [value1, value2],
-			 * options.items[] = { 'value' : 1, 'label' => 'Label for Value 1' }
-			 */
+			'model' : '=',
+			'options' : '=',
+			'grid' : '@grid'
 		},
-		
 		controller : function($scope) {
 			
 			$scope.model = [];
 			
 			$scope.toggleSelection = function (value) {
-				console.log(value);
 				for (var i in $scope.model) {
 					if ($scope.model[i]['id'] == value.id) {
 						$scope.model.splice(i, 1);
 						return;
 					}
 				}
-				
 				$scope.model.push(value);
-			}
-			
-			$scope.ctrlclick = function() {
-				console.log($scope.model);
 			}
 			
 			$scope.isChecked = function(item) {
@@ -136,18 +119,96 @@ zaa.directive('zaaInputCheckbox', function(){
 		},
 		
 		template : function() {
-			return '<p ng-repeat="item in options.items"><input type="checkbox" ng-checked="isChecked(item)" ng-click="toggleSelection(item)" /><label>{{item.label}}</label></p>';
+			return '<input-field class="col s{{grid}}"><p ng-repeat="(k, item) in options.items"><input type="checkbox" ng-checked="isChecked(item)" id="__inpc_{{k}}" ng-click="toggleSelection(item)" /><label for="__inpc_{{k}}">{{item.label}}</label></p></input-field>';
 		}
 	}
 });
 
+/**
+ * <input input-date
+    type="text"
+    name="created"
+    id="inputCreated"
+    ng-model="currentTime"
+    format="dd/mm/yyyy"
+    months-full="{{ month }}"
+    months-short="{{ monthShort }}"
+    weekdays-full="{{ weekdaysFull }}"
+    weekdays-short="{{ weekdaysShort }}"
+    weekdays-letter="{{ weekdaysLetter }}"
+    today="today"
+    clear="clear"
+    close="close"
+    on-start="onStart()"
+    on-render="onRender()"
+    on-open="onOpen()"
+    on-close="onClose()"
+    on-set="onSet()"
+    on-stop="onStop()" />
+ */
 zaa.directive('zaaDatepicker', function() {
 	return {
 		restrict : 'E',
 		scope : {
-			"model" : "=",
-			"name" : "=",
-			"options" : "="
+			'model' : '=',
+			'options' : '=',
+			'label' : '@label',
+			'grid' : '@grid'
+		},
+		controller : function($scope) {
+			$scope.month = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+			$scope.monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
+			$scope.weekdaysFull = ['Sonntag', 'Monatg', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
+			$scope.weekdaysLetter = ['S', 'M', 'D', 'M', 'D', 'F', 'S'];
+			$scope.today = 'Heute';
+			$scope.clear = 'Leeren';
+			$scope.close = 'Schliessen';
+			$scope.onStart = function () {
+				if ($scope.model == undefined) {
+					$scope.model = new Date();
+					//console.log('start hat kein date!');
+				} else {
+					//console.log('start', $scope.model);
+				}
+			    //console.log('onStart', $scope.model);
+			};
+			$scope.onRender = function () {
+				if ($scope.model == undefined) {
+					$scope.model = new Date();
+					//console.log('render HAT DATE!');
+				} else {
+					//console.log('render', $scope.model);
+				}
+			};
+			$scope.onOpen = function () {
+			    //console.log('onOpen', $scope.model);
+			};
+			$scope.onClose = function () {
+			    //console.log('onClose', $scope.model);
+			};
+			$scope.onSet = function () {
+			    //console.log('onSet', $scope.model);
+			};
+			$scope.onStop = function () {
+			    //console.log('onStop', $scope.model);
+			};
+		},
+		template: function(){
+			return '<input-field class="col s{{grid}}"><label>{{label}}</label><input type="text" ng-model="model"></input></input-field>';
+			return '<input-field class="col s{{grid}}"><label>{{label}}</label><input months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}" weekdays-letter="{{ weekdaysLetter }}" today="today" clear="clear" close="close" on-start="onStart()" on-render="onRender()" on-open="onOpen()" on-close="onClose()" on-set="onSet()" on-stop="onStop()" input-date type="text" ng-model="model" format="dd/mm/yyyy"></input></input-field>';
+		}
+	}
+});
+
+/*
+zaa.directive('zaaDatepicker', function() {
+	return {
+		restrict : 'E',
+		scope : {
+			'model' : '=',
+			'options' : '=',
+			'label' : '@label',
+			'grid' : '@grid'
 		},
 		controller : function($scope, $filter) {
 			
@@ -162,7 +223,7 @@ zaa.directive('zaaDatepicker', function() {
 			$scope.$watch(function() { return $scope.model }, function(n) {
 				if ($scope.model !== undefined) {
 					var res = $scope.model.split("-");
-					$scope.datemodel = new Date(res[2], (res[1]-1), res[0]); /* $scope.model; */
+					$scope.datemodel = new Date(res[2], (res[1]-1), res[0]);
 				}
 			});
 			
@@ -180,12 +241,16 @@ zaa.directive('zaaDatepicker', function() {
 		}
 	}
 });
+*/
 
 zaa.directive('zaaFileUpload', function($compile){
 	return {
 		restrict : 'E',
 		scope : {
-			"model" : "="
+			'model' : '=',
+			'options' : '=',
+			'label' : '@label',
+			'grid' : '@grid'
 		},
 		template : function() {
 			return '<storage-file-upload ng-model="model"></storage-file-upload>';
@@ -197,7 +262,10 @@ zaa.directive('zaaImageUpload', function($compile){
 	return {
 		restrict : 'E',
 		scope : {
-			"model" : "="
+			'model' : '=',
+			'options' : '=',
+			'label' : '@label',
+			'grid' : '@grid'
 		},
 		template : function() {
 			return '<storage-image-upload ng-model="model"></storage-image-upload>';
@@ -209,7 +277,10 @@ zaa.directive('zaaImageArrayUpload', function(){
 	return {
 		restrict : 'E',
 		scope : {
-			"model" : "="
+			'model' : '=',
+			'options' : '=',
+			'label' : '@label',
+			'grid' : '@grid'
 		},
 		controller : function($scope) {
 			
@@ -238,7 +309,10 @@ zaa.directive('zaaFileArrayUpload', function(){
 	return {
 		restrict : 'E',
 		scope : {
-			"model" : "="
+			'model' : '=',
+			'options' : '=',
+			'label' : '@label',
+			'grid' : '@grid'
 		},
 		controller : function($scope) {
 			
@@ -266,7 +340,10 @@ zaa.directive("zaaListArray", function() {
 	return {
 		restrict : 'E',
 		scope : {
-			"model" : "="
+			'model' : '=',
+			'options' : '=',
+			'label' : '@label',
+			'grid' : '@grid'
 		},
 		controller : function($scope) {
 

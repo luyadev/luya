@@ -24,7 +24,8 @@ class Datepicker extends PluginAbstract
         $elmn->setAttribute('id', $this->id);
         $elmn->setIdAttribute('id', true);
         $elmn->setAttribute('model', $this->ngModel);
-        $elmn->setAttribute('class', 'form__input');
+        $elmn->setAttribute('label', $this->alias);
+        $elmn->setAttribute('grid', $this->gridCols);
         $doc->appendChild($elmn);
 
         return $doc;
@@ -53,6 +54,6 @@ class Datepicker extends PluginAbstract
 
     public function onAfterList($value)
     {
-        return (is_numeric($value)) ? date('d-m-Y', $value) : $value;
+        return (is_numeric($value)) ? $value * 1000 : $value;
     }
 }
