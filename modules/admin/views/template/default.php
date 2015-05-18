@@ -1,10 +1,10 @@
 <div class="row" ng-controller="DefaultController">
       <div class="col s12 m4 l2">
-        <div ng-repeat="item in items">
-            <ul class="collection with-header">
-                <li class="collection-header"><h5>{{item.name}}</h5></li>
-                <li class="collection-item" ng-repeat="sub in item.items"><a ng-click="click(sub)">{{sub.alias}}</a></li>
-            </ul>
+        <div class="card-panel blue lighten-5">
+            <div ng-repeat="item in items">
+                <h5>{{item.name}}</h5>
+                <p ng-repeat="sub in item.items"><a ng-click="click(sub)" class="waves-effect waves-teal btn-flat"><i class="mdi-file-cloud left"></i> {{sub.alias}}</a></p>
+            </div>
         </div>
       </div>
       <div class="col s12 m8 l10" ui-view>

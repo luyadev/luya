@@ -19,34 +19,36 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
 <div ng-controller="<?=$config->getNgRestConfigHash(); ?>" ng-init="init()">
 <a class="btn-floating btn-large waves-effect waves-light right red" style="margin:20px;" ng-click="openCreate()"><i class="mdi-content-add"></i></a>
 <!-- LIST -->
-<table class="striped responsive-table">
-<thead>
-    <tr>
-        <?php foreach ($crud->list as $item): ?>
-            <th><?= $item['alias']; ?></th>
-        <?php endforeach; ?>
-        <?php if (count($crud->getButtons()) > 0): ?>
-            <th style="text-align:right;">Aktionen</th>
-        <?php endif; ?>
-  </tr>
-</thead>
-<tbody>
-    <tr ng-repeat="item in data.list">
-        <?php foreach ($crud->list as $item): ?>
-            <? foreach($crud->createElements($item, $crud::TYPE_LIST) as $element): ?>
-                <td><?= $element['html']; ?></td>
-            <? endforeach; ?>
-        <?php endforeach; ?>
-        <?php if (count($crud->getButtons()) > 0): ?>
-        <td style="text-align:right;">
-            <?php foreach ($crud->getButtons() as $item): ?>
-            <a class="waves-effect waves-light btn" ng-click="<?= $item['ngClick']; ?>"><i class="<?=$item['icon']; ?> left"></i><?=$item['label']; ?></a>
+<div class="card-panel">
+    <table class="striped responsive-table">
+    <thead>
+        <tr>
+            <?php foreach ($crud->list as $item): ?>
+                <th><?= $item['alias']; ?></th>
             <?php endforeach; ?>
-        </td>
-        <?php endif; ?>
-    </tr>
-</tbody>
-</table>
+            <?php if (count($crud->getButtons()) > 0): ?>
+                <th style="text-align:right;">Aktionen</th>
+            <?php endif; ?>
+      </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in data.list">
+            <?php foreach ($crud->list as $item): ?>
+                <? foreach($crud->createElements($item, $crud::TYPE_LIST) as $element): ?>
+                    <td><?= $element['html']; ?></td>
+                <? endforeach; ?>
+            <?php endforeach; ?>
+            <?php if (count($crud->getButtons()) > 0): ?>
+            <td style="text-align:right;">
+                <?php foreach ($crud->getButtons() as $item): ?>
+                <a class="waves-effect waves-light btn" ng-click="<?= $item['ngClick']; ?>"><i class="<?=$item['icon']; ?> left"></i><?=$item['label']; ?></a>
+                <?php endforeach; ?>
+            </td>
+            <?php endif; ?>
+        </tr>
+    </tbody>
+    </table>
+</div>
 <!-- CREATE MODAL -->
 <div id="createModal" class="modal">
     <form role="form" ng-submit="submitCreate()">
