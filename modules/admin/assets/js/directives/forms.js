@@ -28,7 +28,7 @@ zaa.directive('zaaInputText', function(){
 			'grid' : '@grid'
 		},
 		template : function() {
-			return '<input-field class="col s{{grid}}"><input ng-model="model" type="text" /><label>{{label}}</label></input-field>';
+			return '<div class="input-field col s{{grid}}"><input ng-model="model" type="text" /><label>{{label}}</label></div>';
 		}
 	}
 });
@@ -43,7 +43,7 @@ zaa.directive('zaaTextarea', function(){
 			'grid' : '@grid'
 		},
 		template : function() {
-			return '<input-field class="col s{{grid}}"><textarea ng-model="model" class="materialize-textarea"></textarea>{{model}} <label>{{label}}</label></input-field>';
+			return '<div class="input-field col s{{grid}}"><textarea ng-model="model" class="materialize-textarea"></textarea><label>{{label}}</label></div>';
 		}
 	}
 });
@@ -58,14 +58,14 @@ zaa.directive('zaaInputPassword', function(){
 			'grid' : '@grid',
 		},
 		template : function() {
-			return '<input-field class="col s{{grid}}"><input type="password" ng-model="model" /><label>{{label}}</label></input-field>';
+			return '<div class="input-field col s{{grid}}"><input type="password" ng-model="model" /><label>{{label}}</label></div>';
 		}
 	}
 });
 
 
 
-zaa.directive('zaaInputSelect', function(){
+zaa.directive('zaaInputSelect', function($compile){
 	return {
 		restrict : 'E',
 		scope : {
@@ -75,7 +75,7 @@ zaa.directive('zaaInputSelect', function(){
 			'grid' : '@grid'
 		},
 		template : function() {
-			return '<input-field class="col s{{grid}}"><select material-select ng-options="item.value as item.label for item in options" ng-model="model"></select><label>{{label}}</label></input-field>';
+			return '<div class="col s{{grid}}"><label>{{label}}</label><select class="browser-default" ng-options="item.value as item.label for item in options" ng-model="model"></select></div>';
 		}
 	}
 });
@@ -117,9 +117,11 @@ zaa.directive('zaaInputCheckbox', function(){
 				return false;
 			}
 		},
-		
+		link : function(scope) {
+			scope.random = Math.random().toString(36).substring(7);
+		},
 		template : function() {
-			return '<input-field class="col s{{grid}}"><p ng-repeat="(k, item) in options.items"><input type="checkbox" ng-checked="isChecked(item)" id="__inpc_{{k}}" ng-click="toggleSelection(item)" /><label for="__inpc_{{k}}">{{item.label}}</label></p></input-field>';
+			return '<div class="input-field col s{{grid}}"><p ng-repeat="(k, item) in options.items"><input type="checkbox" ng-checked="isChecked(item)" id="{{random}}_{{k}}" ng-click="toggleSelection(item)" /><label for="{{random}}_{{k}}">{{item.label}}</label></p></div>';
 		}
 	}
 });
@@ -194,8 +196,8 @@ zaa.directive('zaaDatepicker', function() {
 			};
 		},
 		template: function(){
-			return '<input-field class="col s{{grid}}"><label>{{label}}</label><input type="text" ng-model="model"></input></input-field>';
-			return '<input-field class="col s{{grid}}"><label>{{label}}</label><input months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}" weekdays-letter="{{ weekdaysLetter }}" today="today" clear="clear" close="close" on-start="onStart()" on-render="onRender()" on-open="onOpen()" on-close="onClose()" on-set="onSet()" on-stop="onStop()" input-date type="text" ng-model="model" format="dd/mm/yyyy"></input></input-field>';
+			return '<div class="input-field col s{{grid}}"><label>{{label}}</label><input type="text" ng-model="model"></input></div>';
+			return '<div class="input-field col s{{grid}}"><label>{{label}}</label><input months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}" weekdays-letter="{{ weekdaysLetter }}" today="today" clear="clear" close="close" on-start="onStart()" on-render="onRender()" on-open="onOpen()" on-close="onClose()" on-set="onSet()" on-stop="onStop()" input-date type="text" ng-model="model" format="dd/mm/yyyy"></input></div>';
 		}
 	}
 });
