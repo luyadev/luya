@@ -1,5 +1,5 @@
 (function (angular) {
-    angular.module("ui.materialize", ["ui.materialize.ngModel", "ui.materialize.collapsible", "ui.materialize.toast", "ui.materialize.sidenav", "ui.materialize.material_select", "ui.materialize.dropdown", "ui.materialize.inputfield", "ui.materialize.input_date", "ui.materialize.tabs", "ui.materialize.pagination", "ui.materialize.pushpin"]);
+    angular.module("ui.materialize", ["ui.materialize.ngModel", "ui.materialize.collapsible", "ui.materialize.toast", "ui.materialize.sidenav", "ui.materialize.material_select", "ui.materialize.dropdown", "ui.materialize.inputfield", "ui.materialize.input_date", "ui.materialize.tabs", "ui.materialize.pagination", "ui.materialize.pushpin", "ui.materialize.parallax"]);
 
     angular.module("ui.materialize.ngModel", [])
         .directive("ngModel",["$timeout", function($timeout){
@@ -30,6 +30,17 @@
               });
             }
           };
+        }]);
+
+    angular.module("ui.materialize.parallax", [])
+        .directive("parallax", ["$timeout", function($timeout){
+            return {
+                link: function(scope, element, attrs) {
+                    $timeout(function(){
+                        element.parallax();
+                    });
+                }
+            };
         }]);
 
     angular.module("ui.materialize.toast", [])
@@ -374,12 +385,12 @@
                             today: (angular.isDefined(scope.today)) ? scope.today : undefined,
                             clear: (angular.isDefined(scope.clear)) ? scope.clear : undefined,
                             close: (angular.isDefined(scope.close)) ? scope.close : undefined,
-                            onStart: (angular.isDefined(scope.close)) ? function(){ scope.onStart() } : undefined,
-                            onRender: (angular.isDefined(scope.close)) ? function(){ scope.onRender() } : undefined,
-                            onOpen: (angular.isDefined(scope.close)) ? function(){ scope.onOpen() } : undefined,
-                            onClose: (angular.isDefined(scope.close)) ? function(){ scope.onClose() } : undefined,
-                            onSet: (angular.isDefined(scope.close)) ? function(){ scope.onSet() } : undefined,
-                            onStop: (angular.isDefined(scope.close)) ? function(){ scope.onStop() } : undefined
+                            onStart: (angular.isDefined(scope.onStart)) ? function(){ scope.onStart() } : undefined,
+                            onRender: (angular.isDefined(scope.onRender)) ? function(){ scope.onRender() } : undefined,
+                            onOpen: (angular.isDefined(scope.onOpen)) ? function(){ scope.onOpen() } : undefined,
+                            onClose: (angular.isDefined(scope.onClose)) ? function(){ scope.onClose() } : undefined,
+                            onSet: (angular.isDefined(scope.onSet)) ? function(){ scope.onSet() } : undefined,
+                            onStop: (angular.isDefined(scope.onStop)) ? function(){ scope.onStop() } : undefined
                         });
                     });
                 }

@@ -11,7 +11,7 @@
     </div>
     <div class="col s11">
         <div ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController" data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{revert: true, handle : '.drag-icon', helper : 'clone'}" ng-model="block">
-        <div ng-controller="DropBlockController" data-sortindex="{{key}}" ng-model="droppedBlock" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'test' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}">DRAG HERE</div>
+        <div ng-controller="DropBlockController" data-sortindex="{{key}}" ng-model="droppedBlock" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'test' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}"></div>
                     
         <div class="card" style="margin-bottom:5px;">
             <div class="card-content" style="padding:10px;">
@@ -43,7 +43,7 @@
         </div><!-- // CLOSEING ng-controller dropBlockController -->
 
         <div ng-controller="DropBlockController" ng-model="droppedBlock" data-sortindex="-1" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'test' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}">
-            OR DRAG HERE
+            
         </div>
     </div>
 
@@ -81,3 +81,5 @@
         </div> 
     </div>
 </div>
+
+
