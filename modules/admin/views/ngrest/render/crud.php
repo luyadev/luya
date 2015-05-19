@@ -107,5 +107,8 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
         </div>
     </form>
 </div>
-          
+<!-- STRAP MODAL -->
+<div id="strapModal" class="modal">
+    <div class="modal-content" compile-html ng-bind-html="data.strap.content"></div>
+</div>
 </div>

@@ -37,8 +37,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 		})
 		.success(function(data) {
-			$scope.toggler.update = false;
-			$scope.toggler.strap = true;
+			$scope.openStrap();
 			$scope.data.strap.itemId = id;
 			$scope.data.strap.configCallbackUrl = $scope.config.strapCallbackUrl;
 			$scope.data.strap.configHash = $scope.config.ngrestConfigHash;
@@ -61,12 +60,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 		});
 	}
 	
-	$scope.toggleStrap = function() {
-		$scope.toggler.strap = !$scope.toggler.strap;
-	}
-	
 	$scope.toggleUpdate = function (id, $event) {
-		
 		/*
 		$scope.toggler.update = !$scope.toggler.update;
 		$scope.AdminService.bodyClass = 'main-blurred';
@@ -74,7 +68,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 		$scope.data.updateId = id;
 		$http.get($scope.config.apiEndpoint + '/'+id+'?' + $scope.config.apiUpdateQueryString)
 		.success(function(data) {
-			$scope.toggler.strap = false;
+			//$scope.toggler.strap = false;
 			$scope.data.update = data;
             //dispatchEvent('onCrudUpdate');
             $('#updateModal').openModal({
@@ -94,6 +88,14 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 	
 	$scope.closeCreate = function() {
 		$('#createModal').closeModal();
+	}
+	
+	$scope.openStrap = function() {
+		$('#strapModal').openModal();
+	}
+	
+	$scope.closeStrap = function() {
+		$('#strapModal').closeModal();
 	}
 	
 	$scope.openCreate = function () {
@@ -151,10 +153,12 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 		})
 	}
 	
+	/*
 	$scope.toggler = {
 		create : false,
 		update : false
 	}
+	*/
 	
 	$scope.data = {
 		create : {},
