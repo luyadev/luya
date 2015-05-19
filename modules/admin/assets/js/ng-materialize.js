@@ -376,6 +376,7 @@
                     $compile(element.contents())(scope);
                     $timeout(function () {
                         element.pickadate({
+                        	container : 'body',
                             format: (angular.isDefined(scope.format)) ? scope.format : undefined,
                             formatSubmit: (angular.isDefined(scope.formatSubmit)) ? scope.formatSubmit : undefined,
                             monthsFull: (angular.isDefined(monthsFull)) ? monthsFull : undefined,

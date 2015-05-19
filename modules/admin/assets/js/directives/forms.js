@@ -126,28 +126,6 @@ zaa.directive('zaaInputCheckbox', function(){
 	}
 });
 
-/**
- * <input input-date
-    type="text"
-    name="created"
-    id="inputCreated"
-    ng-model="currentTime"
-    format="dd/mm/yyyy"
-    months-full="{{ month }}"
-    months-short="{{ monthShort }}"
-    weekdays-full="{{ weekdaysFull }}"
-    weekdays-short="{{ weekdaysShort }}"
-    weekdays-letter="{{ weekdaysLetter }}"
-    today="today"
-    clear="clear"
-    close="close"
-    on-start="onStart()"
-    on-render="onRender()"
-    on-open="onOpen()"
-    on-close="onClose()"
-    on-set="onSet()"
-    on-stop="onStop()" />
- */
 zaa.directive('zaaDatepicker', function() {
 	return {
 		restrict : 'E',
@@ -157,7 +135,6 @@ zaa.directive('zaaDatepicker', function() {
 			'label' : '@label',
 			'grid' : '@grid'
 		},
-		/*
 		controller : function($scope) {
 			$scope.month = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
 			$scope.monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
@@ -166,56 +143,35 @@ zaa.directive('zaaDatepicker', function() {
 			$scope.today = 'Heute';
 			$scope.clear = 'Leeren';
 			$scope.close = 'Schliessen';
-			$scope.onStart = function () {
-				console.log('onStart', $scope.model);
-			};
-			$scope.onRender = function () {
-				console.log('onRender', $scope.model);
-			};
-			$scope.onOpen = function () {
-			    console.log('onOpen', $scope.model);
-			    console.log($scope.model);
-			};
-			$scope.onClose = function () {
-			    console.log('onClose', $scope.model);
-			};
-			$scope.onSet = function () {
-			    console.log('onSet', $scope.model);
-			};
-			$scope.onStop = function () {
-			    console.log('onStop', $scope.model);
-			};
 		},
-		
 		link : function(scope) {
 			scope.$watch('model', function(n) {
 				if (n == undefined) {
 					scope.model = new Date();
-				} else {
-					console.log('link watch', scope.model);
-					//scope.model = new Date(scope.model);
 				}
 			})
 		},
-		*/
 		template: function(){
-			//return '<div class="input-field col s{{grid}}"><label>{{label}}</label><input type="text" ng-model="model"></input></div>';
-			return '<div class="input-field col s{{grid}}"><label>{{label}}</label><input datetimez type="text" class="datepicker" ng-model="model"></input></div>';
+			return '<div class="input-field col s{{grid}}"><label>{{label}}</label><input input-date  months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}" weekdays-letter="{{ weekdaysLetter }}" today="today"  clear="clear" close="close" format="dd-mm-yyyy" formatSubmit="dd-mm-yyyy" type="text" class="datepicker" ng-model="model"></input></div>';
 		}
 	}
 });
 
+/*
 zaa.directive('datetimez', function($compile, $timeout) {
     return {
         restrict: 'A',
         require : 'ngModel',
+        scope : false,
         link: function(scope, element, attrs, ngModelCtrl) {
+        	
+        	//scope.model = new Date(1431952496);
         	
         	ngModelCtrl.$formatters.unshift(function (modelValue) {
                 if (modelValue) {
-                	console.log(modelValue);
+                	return new Date(modelValue);
+                	console.log('ngModel value', modelValue);
                     var date = new Date(parseInt(modelValue, 10));
-                    console.log(date);
                     
                     var dd = date.getDate();
                     var mm = date.getMonth()+1; //January is 0!
@@ -224,26 +180,34 @@ zaa.directive('datetimez', function($compile, $timeout) {
                     
                     if(dd<10){
                         dd='0'+dd
-                    } 
+                    }
+                    
                     if(mm<10){
                         mm='0'+mm
-                    } 
+                    }
+                    
+                    console.log('ngModel value set to', dd+mm+yyyy);
                     
                     return dd+'/'+mm+'/'+yyyy;
                 }
                 return null;
             });
-        	
-        	
         	$compile(element.contents())(scope);
+        	
         	$timeout(function () {
+        		console.log('init-picker');
 	        	element.pickadate({
-	                format: 'dd/mm/yyyy',
+	        		container : 'body',
+	                //format: 'dd/mm/yyyy',
+	                //formatSubmit : 'dd/mm/yyyy',
 	                onStart : function(e) {
 	                	console.log('onStart', e, scope.model);
 	                },
 	                onSet : function(e) {
 	                	console.log('set', e, scope.model);
+	                },
+	                onOpen : function(e) {
+	                	console.log('onOpen', e, scope.model);
 	                },
 	                onRender : function(e) {
 	                	console.log('onRedner', scope.model);
@@ -253,6 +217,7 @@ zaa.directive('datetimez', function($compile, $timeout) {
     	}
     }
 });
+*/
 
 /*
 zaa.directive('zaaDatepicker', function() {

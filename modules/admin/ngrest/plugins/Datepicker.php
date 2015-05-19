@@ -54,6 +54,6 @@ class Datepicker extends PluginAbstract
 
     public function onAfterList($value)
     {
-        return (is_numeric($value)) ? $value * 1000 : $value;
+        return (is_numeric($value)) ? date('D M d Y H:i:s O', $value) : $value;
     }
 }
