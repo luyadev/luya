@@ -1,8 +1,8 @@
-zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminService) {
+zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 	
 	$scope.parentController = $scope.$parent;
 	
-	$scope.AdminService = AdminService;
+	//$scope.AdminService = AdminService;
 	
 	$scope.showCrudList = true;
 	
@@ -23,7 +23,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 		$scope.toggler.update = false;
 		$scope.toggler.strap = false;
 		$scope.toggler.create = false;
-		$scope.AdminService.bodyClass = '';
+		//$scope.AdminService.bodyClass = '';
 		$scope.search = '';
 	}
 	
@@ -45,7 +45,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 			$scope.data.strap.hash = strapId;
 			$scope.data.strap.id = strapId; /* @todo: remove! BUT: equal to above, but still need in jquery accessing */
 			$scope.data.strap.content = $sce.trustAsHtml(data);
-			dispatchEvent('onCrudStrapLoad');
+			//dispatchEvent('onCrudStrapLoad');
 		})
 	}
 
@@ -76,8 +76,10 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 		.success(function(data) {
 			$scope.toggler.strap = false;
 			$scope.data.update = data;
-            dispatchEvent('onCrudUpdate');
-            $('#updateModal').openModal();
+            //dispatchEvent('onCrudUpdate');
+            $('#updateModal').openModal({
+            	dismissible: false
+            });
 			
 		})
 		.error(function(data) {
@@ -87,7 +89,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 	
 	$scope.closeUpdate = function () {
 		$('#updateModal').closeModal();
-        $scope.AdminService.bodyClass = '';
+        //$scope.AdminService.bodyClass = '';
     }
 	
 	$scope.closeCreate = function() {
@@ -95,7 +97,9 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 	}
 	
 	$scope.openCreate = function () {
-		$('#createModal').openModal();
+		$('#createModal').openModal({
+			dismissible: false
+		});
 		/*
 		$scope.toggler.create = !$scope.toggler.create;
 		if ($scope.toggler.create) {

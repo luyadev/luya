@@ -1,8 +1,9 @@
+<!-- 
 <h1>FileManager Directive</h1>
 <storage-file-manager is-hidden="false" selection="false"></storage-file-manager>
 
 <hr />
-
+ -->
 <h1>File Upload Directive</h1>
 <div ng-controller="UploadController">
 <form ng-submit="save()">
