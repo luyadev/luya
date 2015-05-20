@@ -13,7 +13,7 @@ class ModuleBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'moduleName', 'label' => 'Module Name', 'type' => 'zaa-input-text'],
+                ['var' => 'moduleName', 'label' => 'Module Name', 'type' => 'zaa-text'],
             ],
         ];
     }

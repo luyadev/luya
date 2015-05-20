@@ -17,8 +17,8 @@
             <div class="card-content" style="padding:10px;">
                 <span class="card-title activator grey-text text-darken-4">{{block.name}} <i class="mdi-navigation-more-vert right"></i> <i class="mdi-content-select-all right drag-icon"></i></span>
                 <div ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)" />
-                </div>
-            <div class="card-reveal" style="z-index:999999">
+            </div>
+            <div class="card-reveal" style="z-index:999999;">
                 <span class="card-title grey-text text-darken-4">{{block.name}} <i class="mdi-navigation-close right"></i></span>
                 <form class="col s12">
                     <div class="row" ng-repeat="field in block.vars">

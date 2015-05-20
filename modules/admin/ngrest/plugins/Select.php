@@ -29,7 +29,7 @@ abstract class Select extends PluginAbstract
     
     public function renderCreate($doc)
     {
-        $elmn = $doc->createElement('zaa-input-select');
+        $elmn = $doc->createElement('zaa-select');
         $elmn->setAttribute('id', $this->id);
         $elmn->setIdAttribute('id', true);
         $elmn->setAttribute('model', $this->ngModel);

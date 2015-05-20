@@ -12,7 +12,8 @@ zaa.controller("NavController", function($scope, $stateParams, ApiAdminLang, Adm
 });
 
 /**
- * @param $scope.lang from ng-repeat
+ * @param $scope.lang
+ *            from ng-repeat
  */
 zaa.controller("NavItemController", function($scope, $http) {
 	
@@ -56,7 +57,7 @@ zaa.controller("NavItemController", function($scope, $http) {
 				alert('FEHLER BEIM LADEN DER LANG. NAVID,LANGID Kombination kann nur 1 Datensatz erhalten.')
 			} else {
 				if (rsp.length == 0) {
-					//alert('THIS PAGE IS NOT YET TRANSLATED');
+					// alert('THIS PAGE IS NOT YET TRANSLATED');
 				} else {
 					$scope.item = rsp[0];
 					$scope.reset();
@@ -94,7 +95,8 @@ zaa.controller("NavItemTypePageController", function($scope, $http) {
 });
 
 /**
- * @param $scope.placeholder from ng-repeat
+ * @param $scope.placeholder
+ *            from ng-repeat
  */
 zaa.controller("PagePlaceholderController", function($scope) {
 	
@@ -104,11 +106,15 @@ zaa.controller("PagePlaceholderController", function($scope) {
 
 
 /**
- * @param $scope.block from ng-repeat
+ * @param $scope.block
+ *            from ng-repeat
  */
 zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPageBlockItem, AdminClassService) {
 
-	$scope.data = $scope.block.values || {};
+	
+	$scope.$watch(function() { return $scope.block.values }, function(n, o) {
+		$scope.data = n;
+	});
 	
 	$scope.cfgdata = $scope.block.cfgvalues || {};
 	

@@ -16,7 +16,7 @@ class Text extends PluginAbstract
 
     public function renderCreate($doc)
     {
-        $elmn = $doc->createElement('zaa-input-text');
+        $elmn = $doc->createElement('zaa-text');
         $elmn->setAttribute('id', $this->id);
         $elmn->setIdAttribute('id', true);
         $elmn->setAttribute('model', $this->ngModel);

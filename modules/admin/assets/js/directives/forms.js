@@ -18,7 +18,7 @@ zaa.directive('zaaInjector', function($compile) {
 	}
 });
 
-zaa.directive('zaaInputText', function(){
+zaa.directive('zaaText', function(){
 	return {
 		restrict : 'E',
 		scope : {
@@ -48,7 +48,7 @@ zaa.directive('zaaTextarea', function(){
 	}
 });
 
-zaa.directive('zaaInputPassword', function(){
+zaa.directive('zaaPassword', function(){
 	return {
 		restrict : 'E',
 		scope : {
@@ -65,7 +65,7 @@ zaa.directive('zaaInputPassword', function(){
 
 
 
-zaa.directive('zaaInputSelect', function($compile){
+zaa.directive('zaaSelect', function($compile){
 	return {
 		restrict : 'E',
 		scope : {
@@ -83,20 +83,22 @@ zaa.directive('zaaInputSelect', function($compile){
 /** 
  * options arg object:
  * 
- * options.checked = [value1, value2],
- * options.items[] = { 'value' : 1, 'label' => 'Label for Value 1' }
+ * options.items[] = { 'id' : 1, 'label' => 'Label for Value 1' }
  */
-zaa.directive('zaaInputCheckbox', function(){
+zaa.directive('zaaCheckbox', function(){
 	return {
 		restrict : 'E',
 		scope : {
 			'model' : '=',
 			'options' : '=',
-			'grid' : '@grid'
+			'grid' : '@grid',
+			'label' : '@label'
 		},
 		controller : function($scope) {
 			
-			$scope.model = [];
+			if ($scope.model == undefined) {
+				$scope.model = [];
+			}
 			
 			$scope.toggleSelection = function (value) {
 				for (var i in $scope.model) {
@@ -121,7 +123,7 @@ zaa.directive('zaaInputCheckbox', function(){
 			scope.random = Math.random().toString(36).substring(7);
 		},
 		template : function() {
-			return '<div class="input-field col s{{grid}}"><p ng-repeat="(k, item) in options.items"><input type="checkbox" ng-checked="isChecked(item)" id="{{random}}_{{k}}" ng-click="toggleSelection(item)" /><label for="{{random}}_{{k}}">{{item.label}}</label></p></div>';
+			return '<div class="input-field col s{{grid}}"><h5>{{label}}</h5><p ng-repeat="(k, item) in options.items"><input type="checkbox" ng-checked="isChecked(item)" id="{{random}}_{{k}}" ng-click="toggleSelection(item)" /><label for="{{random}}_{{k}}">{{item.label}}</label></p></div>';
 		}
 	}
 });
@@ -303,7 +305,9 @@ zaa.directive('zaaImageArrayUpload', function(){
 		},
 		controller : function($scope) {
 			
-			$scope.model = [];
+			if ($scope.model == undefined) {
+				$scope.model = [];
+			}
 			
 			$scope.add = function() {
 				$scope.model.push({ imageId : 0, caption : '' });
@@ -336,8 +340,9 @@ zaa.directive('zaaFileArrayUpload', function(){
 		},
 		controller : function($scope) {
 			
-			$scope.model = [];
-			
+			if ($scope.model == undefined) {
+				$scope.model = [];
+			}
 			$scope.add = function() {
 				$scope.model.push({ fileId : 0, caption : '' });
 			}

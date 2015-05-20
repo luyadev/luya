@@ -16,7 +16,7 @@ class Password extends PluginAbstract
 
     public function renderCreate($doc)
     {
-        $elmn = $doc->createElement('zaa-input-password');
+        $elmn = $doc->createElement('zaa-password');
         $elmn->setAttribute('id', $this->id);
         $elmn->setIdAttribute('id', true);
         $elmn->setAttribute('model', $this->ngModel);

@@ -48,11 +48,13 @@ class CheckboxRelation extends \admin\ngrest\PluginAbstract
             $items[] = ['id' => $item->id, 'label' => implode(' | ', $item->toArray())];
         }
 
-        $elmn = $doc->createElement('zaa-input-checkbox', '');
+        $elmn = $doc->createElement('zaa-checkbox', '');
         $elmn->setAttribute('id', $this->id);
         $elmn->setIdAttribute('id', true);
         $elmn->setAttribute('model', $this->ngModel);
         $elmn->setAttribute('options', json_encode(['items' => $items]));
+        $elmn->setAttribute('label', $this->alias);
+        $elmn->setAttribute('grid', $this->gridCols);
         $doc->appendChild($elmn);
 
         return $doc;
