@@ -33,10 +33,10 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
     <thead>
         <tr>
             <?php foreach ($crud->list as $item): ?>
-                <th><?= $item['alias']; ?> <i ng-click="changeOrder('<?= $item['name']; ?>', '+')" class="mdi-hardware-keyboard-arrow-up sort-btn"></i> <i ng-click="changeOrder('<?= $item['name']; ?>', '-')" class="mdi-hardware-keyboard-arrow-down sort-btn"></i></th>
+                <th><?= $item['alias']; ?> <i ng-click="changeOrder('<?= $item['name']; ?>', '+')" class="mdi-hardware-keyboard-arrow-up grid-sort-btn"></i> <i ng-click="changeOrder('<?= $item['name']; ?>', '-')" class="mdi-hardware-keyboard-arrow-down sort-btn"></i></th>
             <?php endforeach; ?>
             <?php if (count($crud->getButtons()) > 0): ?>
-                <th style="text-align:right;">Aktionen</th>
+                <th style="text-align:right;"><span class="grid-data-length">{{data.list.length}} Einträge</span></th>
             <?php endif; ?>
       </tr>
     </thead>
@@ -50,7 +50,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
             <?php if (count($crud->getButtons()) > 0): ?>
             <td style="text-align:right;">
                 <?php foreach ($crud->getButtons() as $item): ?>
-                <a class="waves-effect waves-light btn" ng-click="<?= $item['ngClick']; ?>"><i class="<?=$item['icon']; ?> left"></i><?=$item['label']; ?></a>
+                <a class="waves-effect waves-light btn-flat" ng-click="<?= $item['ngClick']; ?>"><i class="<?=$item['icon']; ?>"></i><?=$item['label']; ?></a>
                 <?php endforeach; ?>
             </td>
             <?php endif; ?>

@@ -55,8 +55,8 @@ class RenderCrud extends RenderAbstract implements RenderInterface
         if (count($this->getFields('update')) > 0) {
             $buttons[] = [
                 'ngClick' => 'toggleUpdate(item.'.$this->config->getRestPrimaryKey().', $event)',
-                'icon' => 'mdi-editor-border-color',
-                'label' => 'Bearbeiten',
+                'icon' => 'mdi-editor-mode-edit',
+                'label' => '',
             ];
         }
         // get all straps assign to the crud
