@@ -99,7 +99,7 @@ $this->beginPage()
                 <li ng-repeat="item in items" ng-class="{'active' : isActive(item) }"><a ng-click="click(item)" style="cursor: pointer;"><i class="{{item.icon}} left"></i>{{item.alias}}</a></li>
             </ul>
             <ul class="right">
-                <li><a class="dropdown-button" data-hover="true" dropdown data-activates="userMenu"><i class="mdi-navigation-more-vert right"></i><strong><?php echo $user->email; ?></strong></a></li>
+                <li><a class="dropdown-button" data-hover="true" dropdown data-activates="userMenu"><i class="mdi-action-account-circle right"></i><strong><?php echo $user->email; ?></strong></a></li>
             </ul>
         </div>
     </nav>
