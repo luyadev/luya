@@ -1,5 +1,7 @@
 zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 	
+	$scope.loading = true;
+	
 	$scope.parentController = $scope.$parent;
 	
 	//$scope.AdminService = AdminService;
@@ -155,6 +157,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 	$scope.loadList = function() {
 		$http.get($scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString)
 		.success(function(data) {
+			$scope.loading = false;
 			$scope.data.list = data;
 		})
 	}

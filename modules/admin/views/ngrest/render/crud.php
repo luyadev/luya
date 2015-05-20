@@ -19,9 +19,19 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
 <div ng-controller="<?=$config->getNgRestConfigHash(); ?>" ng-init="init()">
 <a class="btn-floating btn-large waves-effect waves-light right red" style="margin:20px;" ng-click="openCreate()"><i class="mdi-content-add"></i></a>
 
+<div class="card-panel" ng-show="loading">
+    <div class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- LIST -->
-<div class="card-panel">
+<div class="card-panel" ng-show="!loading">
+
     <div class="row">
         <div class="input-field col s6">
             <i class="mdi-action-search prefix"></i>
@@ -29,7 +39,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
             <label for="searchString">in der Tabelle <strong>{{currentMenuItem.alias}}</strong> suchen.</label>
         </div>
     </div>
-    <table class="striped responsive-table">
+    <table class="striped hoverable responsive-table">
     <thead>
         <tr>
             <?php foreach ($crud->list as $item): ?>
