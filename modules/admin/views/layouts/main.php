@@ -7,11 +7,11 @@ $gravatar = 'http://www.gravatar.com/avatar/'.md5(strtolower(trim($user->email))
 $this->beginPage()
 ?>
 <!DOCTYPE html>
-<html ng-app="zaa">
+<html ng-app="zaa" ng-controller="LayoutMenuController">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>LUYA</title>
+    <title>LUYA // {{currentItem.alias}}</title>
     <?php $this->head() ?>
     <script>
         var authToken = '<?=$user->getAuthToken();?>';
@@ -87,17 +87,19 @@ $this->beginPage()
         </ul>
     </div>
 </div>
-
 </script>
-<!-- active: blue darken-2 -->
+<ul id="userMenu" class="dropdown-content">
+    <li><a href="<?= \Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>">Abmelden</a></li>
+    <li><a href="#!">Einstellungen</a></li>
+</ul>
 <div class="navbar-fixed">
     <nav>
-        <div class="nav-wrapper blue" ng-controller="LayoutMenuController">
-            <ul id="mainnav" class="left hide-on-med-and-down">
-                <li ng-repeat="item in items" ng-class="{'active' : isActive(item) }"><a ng-click="click(item, $event)" style="cursor: pointer;"><i class="{{item.icon}} left"></i> {{item.alias}}</a></li>
+        <div class="nav-wrapper blue">
+            <ul id="mainnav" class="left">
+                <li ng-repeat="item in items" ng-class="{'active' : isActive(item) }"><a ng-click="click(item)" style="cursor: pointer;"><i class="{{item.icon}} left"></i>{{item.alias}}</a></li>
             </ul>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="sass.html"><i class="mdi-action-search"></i></a></li>
+            <ul class="right">
+                <li><a class="dropdown-button" data-hover="true" dropdown data-activates="userMenu"><i class="mdi-navigation-more-vert right"></i><strong><?php echo $user->email; ?></strong></a></li>
             </ul>
         </div>
     </nav>

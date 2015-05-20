@@ -2,7 +2,9 @@ zaa.controller("LayoutMenuController", function ($scope, $http, $state, $locatio
 	
 	$scope.items = [];
 	
-	$scope.click = function(menuItem, $event) {
+	$scope.currentItem = {};
+	
+	$scope.click = function(menuItem) {
 		if (menuItem.template) {
 			$state.go('custom', { 'templateId' : menuItem.template });
 		} else {
@@ -13,10 +15,12 @@ zaa.controller("LayoutMenuController", function ($scope, $http, $state, $locatio
 	$scope.isActive = function(item) {
 		if (item.template) {
 			if ($state.params.templateId == item.template) {
+				$scope.currentItem = item;
 				return true;
 			}
 		} else {
 			if ($state.params.moduleId == item.id) {
+				$scope.currentItem = item;
 				return true;
 			}
 		}
