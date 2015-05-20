@@ -4,6 +4,8 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 	
 	//$scope.AdminService = AdminService;
 	
+	$scope.orderBy = 'id';
+	
 	$scope.showCrudList = true;
 	
 	$scope.currentMenuItem = null;
@@ -17,6 +19,10 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 		$scope.$watch(function() { return $scope.parentController.currentItem }, function(newValue) {
 			$scope.currentMenuItem = newValue;
 		});
+	}
+	
+	$scope.changeOrder = function(field, sort) {
+		$scope.orderBy = sort + field;
 	}
 	
 	$scope.closeDialogs = function() {

@@ -18,13 +18,22 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
 
 <div ng-controller="<?=$config->getNgRestConfigHash(); ?>" ng-init="init()">
 <a class="btn-floating btn-large waves-effect waves-light right red" style="margin:20px;" ng-click="openCreate()"><i class="mdi-content-add"></i></a>
+
+
 <!-- LIST -->
 <div class="card-panel">
+    <div class="row">
+        <div class="input-field col s6">
+            <i class="mdi-action-search prefix"></i>
+            <input id="searchString" ng-model="searchString" type="text">
+            <label for="searchString">in der Tabelle <strong>{{currentMenuItem.alias}}</strong> suchen.</label>
+        </div>
+    </div>
     <table class="striped responsive-table">
     <thead>
         <tr>
             <?php foreach ($crud->list as $item): ?>
-                <th><?= $item['alias']; ?></th>
+                <th><?= $item['alias']; ?> <i ng-click="changeOrder('<?= $item['name']; ?>', '+')" class="mdi-hardware-keyboard-arrow-up sort-btn"></i> <i ng-click="changeOrder('<?= $item['name']; ?>', '-')" class="mdi-hardware-keyboard-arrow-down sort-btn"></i></th>
             <?php endforeach; ?>
             <?php if (count($crud->getButtons()) > 0): ?>
                 <th style="text-align:right;">Aktionen</th>
@@ -32,7 +41,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
       </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="item in data.list">
+        <tr ng-repeat="item in data.list |  filter:searchString | orderBy:orderBy" >
             <?php foreach ($crud->list as $item): ?>
                 <? foreach($crud->createElements($item, $crud::TYPE_LIST) as $element): ?>
                     <td><?= $element['html']; ?></td>

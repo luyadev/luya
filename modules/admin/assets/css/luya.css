@@ -8,7 +8,16 @@ header, main, footer {
    }
  }
  
+/* luya custom css */
  
 body {
 	background-color:#F5F5F5;
+}
+
+.sort-btn {
+	padding:2px; cursor:pointer;
+}
+
+.sort-btn:hover {
+	background-color:#F0F0F0;
 }
