@@ -1,8 +1,14 @@
 <script type="text/ng-template" id="reverse.html">
-    <a class="waves-effect waves-teal btn-flat" ng-click="go(data.id)">
+    <div class="treeview__node">
+        <span class="treeview__icon treeview__icon--clickable" ng-show="data.nodes" ng-click="toggleChildren($event)"><span class="treeview__icon--open fa fa-fw fa-minus-square"></span><span class="treeview__icon--closed fa fa-fw fa-plus-square"></span></span><!--
+     --><span class="treeview__icon" ng-show="!data.nodes"><span class="fa fa-fw fa-file"></span></span><!--
+     --><a class="treeview__link" role="link" ng-click="go(data.id)">
             {{data.title}}
         </a>
-    <ul class="treeview__list" role="menu" style="margin-left:20px;">
+        <button ng-click="toggleHidden(data)"><i class="fa" ng-class="{ 'fa-toggle-off' : {{data.is_hidden}}, 'fa-toggle-on' : {{data.is_hidden == 0}} }"></i></button>
+        <button ng-click="delete(data)"><i class="fa fa-trash"></i></button>
+    </div>
+    <ul class="treeview__list" role="menu">
         <li class="treeview__item" role="menuitem" ng-repeat="data in data.nodes" ng-include="'reverse.html'"></li>
     </ul>
 </script>
@@ -102,18 +108,27 @@
 </div>
 <button ng-click="save()">SAVE</button>
 </script>
-<a class="btn-floating btn-large waves-effect waves-light red" style="position:absolute; margin-left:334px; margin-top:20px;" ui-sref="custom.cmsadd"><i class="mdi-content-add"></i></a>
-<div class="row">
-      <div class="col s12 m4 l2">
-            
-            <div ng-controller="CmsMenuTreeController">
-                <div ng-repeat="catitem in menu" class="card-panel blue lighten-5">
-                    <h5 style="text-transform: uppercase">{{catitem.name}}</h5>
-                    <ul>
-                        <li ng-repeat="data in catitem.__items" ng-include="'reverse.html'"></li>
-                    </ul>
-                </div>
+
+<div class="main__item main__item--left main__item--fixedsize">
+    <nav class="treeview main__fixeditem" role="navigation">
+
+        <div class="treeview__toolbar">
+            <a class="button button--green" ui-sref="custom.cmsadd">
+                <span class="fa fa-fw fa-plus"></span>
+                Neue Seite
+            </a>
+        </div>
+
+        <div ng-controller="CmsMenuTreeController">
+            <div ng-repeat="catitem in menu">
+                <h2 class="subnav__grouptitle">{{catitem.name}}</h2>
+                <ul class="treeview__list" role="menu" >
+                    <li class="treeview__item" role="menuitem" ng-repeat="data in catitem.__items" ng-include="'reverse.html'"></li>
+                </ul>
             </div>
-      </div>
-      <div class="col s12 m8 l10" ui-view></div>
-</div>
+        </div>
+
+    </nav>
+</div><!-- ./main__left
+--><div class="main__item main__item--right main__item--fixedsize" ui-view>
+</div> <!-- ./main__right -->

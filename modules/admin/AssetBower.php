@@ -18,5 +18,12 @@ class AssetBower extends \yii\web\AssetBundle
         'angular-dragdrop/src/angular-dragdrop.min.js',
         'twig.js/twig.min.js',
         'ng-flow/dist/ng-flow-standalone.min.js',
+        'angular-loading-bar/build/loading-bar.min.js',
+        'ace-builds/src-min-noconflict/ace.js',
+        'angular-ui-ace/ui-ace.js',
+    ];
+    
+    public $css = [
+        'angular-loading-bar/build/loading-bar.min.css'  
     ];
 }

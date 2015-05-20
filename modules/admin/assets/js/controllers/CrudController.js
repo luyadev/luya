@@ -1,8 +1,8 @@
-zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminService) {
+zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 	
 	$scope.parentController = $scope.$parent;
 	
-	$scope.AdminService = AdminService;
+	//$scope.AdminService = AdminService;
 	
 	$scope.showCrudList = true;
 	
@@ -23,7 +23,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 		$scope.toggler.update = false;
 		$scope.toggler.strap = false;
 		$scope.toggler.create = false;
-		$scope.AdminService.bodyClass = '';
+		//$scope.AdminService.bodyClass = '';
 		$scope.search = '';
 	}
 	
@@ -37,15 +37,14 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 		})
 		.success(function(data) {
-			$scope.toggler.update = false;
-			$scope.toggler.strap = true;
+			$scope.openStrap();
 			$scope.data.strap.itemId = id;
 			$scope.data.strap.configCallbackUrl = $scope.config.strapCallbackUrl;
 			$scope.data.strap.configHash = $scope.config.ngrestConfigHash;
 			$scope.data.strap.hash = strapId;
 			$scope.data.strap.id = strapId; /* @todo: remove! BUT: equal to above, but still need in jquery accessing */
 			$scope.data.strap.content = $sce.trustAsHtml(data);
-			dispatchEvent('onCrudStrapLoad');
+			//dispatchEvent('onCrudStrapLoad');
 		})
 	}
 
@@ -61,21 +60,20 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 		});
 	}
 	
-	$scope.toggleStrap = function() {
-		$scope.toggler.strap = !$scope.toggler.strap;
-	}
-	
 	$scope.toggleUpdate = function (id, $event) {
+		/*
 		$scope.toggler.update = !$scope.toggler.update;
-		$scope.data.updateId = id;
 		$scope.AdminService.bodyClass = 'main-blurred';
-		
-		
+		*/
+		$scope.data.updateId = id;
 		$http.get($scope.config.apiEndpoint + '/'+id+'?' + $scope.config.apiUpdateQueryString)
 		.success(function(data) {
-			$scope.toggler.strap = false;
+			//$scope.toggler.strap = false;
 			$scope.data.update = data;
-            dispatchEvent('onCrudUpdate');
+            //dispatchEvent('onCrudUpdate');
+            $('#updateModal').openModal({
+            	dismissible: false
+            });
 			
 		})
 		.error(function(data) {
@@ -84,11 +82,27 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 	}
 	
 	$scope.closeUpdate = function () {
-        $scope.toggler.update = false;
-        $scope.AdminService.bodyClass = '';
+		$('#updateModal').closeModal();
+        //$scope.AdminService.bodyClass = '';
     }
 	
-	$scope.toggleCreate = function () {
+	$scope.closeCreate = function() {
+		$('#createModal').closeModal();
+	}
+	
+	$scope.openStrap = function() {
+		$('#strapModal').openModal();
+	}
+	
+	$scope.closeStrap = function() {
+		$('#strapModal').closeModal();
+	}
+	
+	$scope.openCreate = function () {
+		$('#createModal').openModal({
+			dismissible: false
+		});
+		/*
 		$scope.toggler.create = !$scope.toggler.create;
 		if ($scope.toggler.create) {
 			$scope.AdminService.bodyClass = 'main-blurred';
@@ -98,6 +112,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 		if ($scope.toggler.create) {
 			dispatchEvent('onCrudCreate');
 		}
+		*/
 	}
     
 	$scope.submitUpdate = function () {
@@ -109,7 +124,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 		$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true))
 		.success(function(data) {
 			$scope.loadList();
-			$scope.closeUpdate();
+			$('#updateModal').closeModal();
 		})
 		.error(function(data) {
 			$scope.updateErrors = data;
@@ -124,7 +139,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 		.success(function(data) {
 			$scope.loadList();
 			$scope.data.create = {};
-			$scope.toggleCreate();
+			$('#createModal').closeModal();
 		})
 		.error(function(data) {
 			$scope.createErrors = data;
@@ -138,10 +153,12 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminServ
 		})
 	}
 	
+	/*
 	$scope.toggler = {
 		create : false,
 		update : false
 	}
+	*/
 	
 	$scope.data = {
 		create : {},

@@ -101,24 +101,24 @@ class Config implements ConfigInterface
         $this->i18n = $fields;
     }
 
-    public function field($name, $alias)
+    public function field($name, $alias, $gridCols = 12)
     {
         $this->config[$this->pointer['key']][$name] = [
-            'name' => $name, 'alias' => $alias, 'plugins' => [], 'i18n' => false, 'extraField' => false,
+            'name' => $name, 'gridCols' => $gridCols, 'alias' => $alias, 'plugins' => [], 'i18n' => false, 'extraField' => false,
         ];
         $this->pointer['field'] = $name;
 
         return $this;
     }
 
-    public function extraField($name, $alias)
+    public function extraField($name, $alias, $gridCols = 12)
     {
         if (!$this->extraFieldExists($name)) {
             throw new \Exception('If you set extraFields, you have to define them first as a property inside your AR model.');
         }
 
         $this->config[$this->pointer['key']][$name] = [
-            'name' => $name, 'alias' => $alias, 'plugins' => [], 'i18n' => false, 'extraField' => true,
+            'name' => $name, 'gridCols' => $gridCols, 'alias' => $alias, 'plugins' => [], 'i18n' => false, 'extraField' => true,
         ];
         $this->pointer['field'] = $name;
 

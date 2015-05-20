@@ -2,7 +2,7 @@
 
 namespace admin;
 
-class AssetAce extends \yii\web\AssetBundle
+class _AssetAce extends \yii\web\AssetBundle
 {
     public $sourcePath = '@bower/ace-builds';
 

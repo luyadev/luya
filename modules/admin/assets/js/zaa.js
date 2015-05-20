@@ -1,6 +1,6 @@
 /* zephir angular admin */
 
-var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ui.ace', 'ngDragDrop', 'angular-loading-bar', 'flow', 'ui.bootstrap']);
+var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ui.ace', 'ngDragDrop', 'angular-loading-bar', 'flow', 'ui.bootstrap', 'ui.materialize']);
 
 zaa.config(function ($httpProvider, $stateProvider, $controllerProvider) {
 	$httpProvider.interceptors.push('authInterceptor');
@@ -71,7 +71,7 @@ zaa.directive('focusMe', function($timeout) {
 		}
 	}
 });
-
+/*
 zaa.factory('AdminService', function() {
 	var service = [];
 	
@@ -83,6 +83,7 @@ zaa.factory('AdminService', function() {
 	
 	return service;
 });
+*/
 
 zaa.factory('AdminClassService', function() {
 	
@@ -103,14 +104,37 @@ zaa.factory('AdminClassService', function() {
 	return service;
 });
 
-zaa.directive('modal', function() {
+zaa.directive('modal', function($timeout) {
 	return {
 		restrict : 'E',
-		scope : false,
-		replace : false,
+		scope : {
+			isModalHidden : '='
+		},
+		replace : true,
 		transclude : true,
-		template : function() {
-			return '<div style="position:absolute; z-index:10000; background-color:#F0F0F0; left:10px; top:0px; width:80%; border:1px solid red; padding:20px; margin:40px;"><button ng-click="close()" type="button">close</button><div ng-transclude></div></div>';
+		templateUrl : 'modal',
+		link : function(scope, element, attrs) {
+			$timeout(function() {
+				scope.$watch('isModalHidden', function(n) {
+					if (n == false) {
+						$(element).openModal({
+					      dismissible: false, // Modal can be dismissed by clicking outside of the modal
+					      opacity: .5, // Opacity of modal background
+					      in_duration: 300, // Transition in duration
+					      out_duration: 200, // Transition out duration
+					      ready: function() {  }, // Callback for Modal open
+					      complete: function() { 
+					    	  scope.$apply(function() {
+					    		  scope.isModalHidden = true;
+					    	  });
+					      } // Callback for Modal close
+					    });
+					} else {
+						$(element).closeModal();
+					}
+				})
+			})
+			
 		}
 	}
 });
@@ -185,12 +209,15 @@ zaa.controller("DashboardController", function($scope) {
 	
 })
 
+/*
 zaa.controller("HtmlController", function($scope, AdminService) {
 	
 	$scope.AdminService = AdminService;
 	
 });
+*/
 
+/*
 zaa.directive('onFinish', function ($timeout) {
 	return {
 	    restrict: 'A',
@@ -203,24 +230,27 @@ zaa.directive('onFinish', function ($timeout) {
 	    }
 	}
 });
+*/
 
 /**
  * event dispatcher
  */
+/*
 var dispatchEvent = function(eventName) {
 	var event = new Event(eventName);
 	document.dispatchEvent(event);
 };
-
+*/
 /**
  * names:
  * onMenuFinish
  * onSubMenuFinish
  */
+/*
 var registerEvent = function(name, cb) {
-	/* verify available events */
 	document.addEventListener(name, cb, false);
 }
+*/
 
 /* non angular strap send - testing purpose */
 var strapRegisterForm = function(form, callback, cb) {

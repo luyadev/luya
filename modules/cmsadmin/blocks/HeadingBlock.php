@@ -15,8 +15,8 @@ class HeadingBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'heading', 'label' => 'Uebeschrift', 'type' => 'zaa-input-text'],
-                ['var' => 'headingType', 'label' => 'Type', 'type' => 'zaa-input-select', 'options' => [
+                ['var' => 'heading', 'label' => 'Uebeschrift', 'type' => 'zaa-text'],
+                ['var' => 'headingType', 'label' => 'Type', 'type' => 'zaa-select', 'options' => [
                         ['value' => 'h1', 'label' => 'Ueberschrift 1 (h1)'],
                         ['value' => 'h2', 'label' => 'Ueberschrift 2 (h2)'],
                         ['value' => 'h3', 'label' => 'Ueberschrift 3 (h3)'],
@@ -27,8 +27,11 @@ class HeadingBlock extends \cmsadmin\base\Block
                 ],
             ],
             'cfgs' => [
-                ['var' => 'css_class', 'label' => 'CSS Klasse', 'type' => 'zaa-input-text'],
+                ['var' => 'css_class', 'label' => 'CSS Klasse', 'type' => 'zaa-text'],
             ],
+            'placeholders' => [
+                ['var' => 'subito', 'label' => 'Unter']
+            ]
         ];
     }
 

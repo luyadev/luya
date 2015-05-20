@@ -21,9 +21,9 @@ class Module extends \admin\base\Module
 
     public $assets = [
         'admin\AssetAdmin',
-        'admin\AssetAngularLoadingBar',
-        'admin\AssetAceUi',
-        'admin\AssetAce',
+        //'admin\AssetAngularLoadingBar',
+        //'admin\AssetAceUi',
+        //'admin\AssetAce',
     ];
 
     public $storageFolder = '@webroot/storage';
@@ -58,7 +58,7 @@ class Module extends \admin\base\Module
     {
         return $this
         ->nodeRoute('Datei Manager', 'fa-hdd-o', 'admin-storage-index', 'admin/storage/index')
-        ->node('Admin Einstellungen', 'fa-gears')
+        ->node('Admin Einstellungen', 'mdi-action-android')
             ->group('Zrugriff')
                 ->itemApi('Benutzer', 'admin-user-index', 'fa-user', 'api-admin-user')
                 ->itemApi('Gruppen', 'admin-group-index', 'fa-users', 'api-admin-group')

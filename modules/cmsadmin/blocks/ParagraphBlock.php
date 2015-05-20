@@ -14,7 +14,7 @@ class ParagraphBlock extends \cmsadmin\base\Block
         return [
             'vars' => [
                 ['var' => 'content', 'label' => 'Inhalt', 'type' => 'zaa-textarea'],
-                ['var' => 'parseMarkdown', 'label' => 'Parse Markdown?', 'type' => 'zaa-input-select', 'options' => [
+                ['var' => 'parseMarkdown', 'label' => 'Parse Markdown?', 'type' => 'zaa-select', 'options' => [
                         ['id' => 0 , 'label' => 'Nein'],
                         ['id' => 1, 'label' => 'Ja'],
                     ],

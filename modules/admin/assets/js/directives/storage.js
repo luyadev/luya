@@ -32,6 +32,9 @@ zaa.directive('storageFileUpload', function() {
 		scope : {
 			ngModel : '='
 		},
+		link : function(scope) {
+			scope.modal = true;
+		},
 		controller : function($scope, $http) {
 			if ($scope.ngModel) {
 				$http.get('admin/api-admin-storage/file-path', { params: { fileId : $scope.ngModel } }).success(function(response) {
@@ -41,20 +44,14 @@ zaa.directive('storageFileUpload', function() {
 				})
 			}
 			
-			$scope.showFileManager = false;
-			
 			$scope.$watch(function() { return $scope.ngModel }, function(newValue, oldValue) {
 				if (newValue) {
-					$scope.showFileManager = false;
+					$scope.modal = true;
 				}
 			});
 			
-			$scope.close = function() {
-				$scope.toggleFileManager();
-			}
-			
-			$scope.toggleFileManager = function() {
-				$scope.showFileManager = !$scope.showFileManager;
+			$scope.openModal = function() {
+				$scope.modal = !$scope.modal;
 			}
 			
 			$scope.push = function() {
@@ -77,7 +74,6 @@ zaa.directive('storageFileUpload', function() {
 		        	alert('ERROR WHILE FILE UPLOAD');
 		        	console.log(r);
 		        });
-				
 			}
 		},
 		templateUrl : 'storageFileUpload'
@@ -109,7 +105,8 @@ zaa.directive('storageImageUpload', function() {
 	return {
 		restrict : 'E',
 		scope : {
-			ngModel : '='
+			ngModel : '=',
+			label : '@'
 		},
 		controller : function($scope, $http, ApiAdminFilter) {
 			

@@ -23,6 +23,8 @@ class File extends \admin\ngrest\PluginAbstract
         $elmn->setAttribute('id', $this->id);
         $elmn->setIdAttribute('id', true);
         $elmn->setAttribute('model', $this->ngModel);
+        $elmn->setAttribute('label', $this->alias);
+        $elmn->setAttribute('grid', $this->gridCols);
         $doc->appendChild($elmn);
 
         return $doc;

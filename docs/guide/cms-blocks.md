@@ -17,12 +17,12 @@ JSON CONFIG
         {
             "var" : "h1",
             "label" : "Uebeschrift Inhalt",
-            "type" : "zaa-input-text"
+            "type" : "zaa-text"
         },
         {
         	"var" : "selection",
         	"label" : "Select Box Demo",
-        	"type" : "zaa-input-select",
+        	"type" : "zaa-select",
         	"options" : [
         		{ 
         			"value" : 1, 
@@ -49,10 +49,10 @@ AVAILABLE VAR TYPES
 
 | Type Name				| Description
 | --------------------- | -----------
-| zaa-input-text		| create a simple string input text value field
-| zaa-input-password	| create a input password field which hides the input value behind * signs
+| zaa-text		| create a simple string input text value field
+| zaa-password	| create a input password field which hides the input value behind * signs
 | zaa-textarea			| create a multirow input element known as textarea
-| zaa-input-select		| create a select dropdown with options based on the options parameter. The Options item must contain a value and label key
+| zaa-select		| create a select dropdown with options based on the options parameter. The Options item must contain a value and label key
 | zaa-file-upload		| creata a file upload form and returns the fileId on success
 | zaa-image-upload		| creata a image upload form and return the imageId on success
 
