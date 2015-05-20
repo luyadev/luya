@@ -27,8 +27,8 @@ class Module extends \admin\base\Module
     public function getMenu()
     {
         return $this
-            ->nodeRoute('CMS Inhalt', 'fa-th-list', 'cmsadmin-default-index', 'cmsadmin/default/index')
-            ->node('CMS Settings', 'fa-wrench')
+            ->nodeRoute('CMS Inhalte', 'mdi-social-public', 'cmsadmin-default-index', 'cmsadmin/default/index')
+            ->node('CMS Einstellungen', 'mdi-image-tune')
                 ->group('Verwalten')
                     ->itemApi('Kategorien', 'cmsadmin-cat-index', 'fa-ils', 'api-cms-cat')
                     ->itemApi('Layout', 'cmsadmin-layout-index', 'fa-eyedropper', 'api-cms-layout')
@@ -36,23 +36,6 @@ class Module extends \admin\base\Module
                     ->itemApi('Gruppen', 'cmsadmin-blockgroup-index', 'fa-group', 'api-cms-blockgroup')
                     ->itemApi('Verwalten', 'cmsadmin-block-index', 'fa-outdent', 'api-cms-block')
             ->menu();
-
-        /*
-        $this->menu->createNode('cms', 'CMS Inhalte', 'fa-th-list', 'cmsadmin-default-index');
-
-        $node = $this->menu->createNode('cms-settings', 'CMS Einstellungen', 'fa-wrench');
-        $this->menu->createGroup($node, 'Verwalten', [
-            $this->menu->createItem("cat", "Kategorien", "cmsadmin-cat-index", "fa-ils"),
-            $this->menu->createItem("layout", "Layouts", "cmsadmin-layout-index", "fa-eyedropper"),
-        ]);
-
-        $this->menu->createGroup($node, 'Blöcke', [
-            $this->menu->createItem('blockgroup', 'Gruppen', 'cmsadmin-blockgroup-index', 'fa-group'),
-            $this->menu->createItem('block', "Verwalte", "cmsadmin-block-index", "fa-outdent"),
-        ]);
-
-        return $this->menu->get();
-        */
     }
 
     public function extendPermissionApis()

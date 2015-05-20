@@ -89,11 +89,12 @@ $this->beginPage()
 </div>
 
 </script>
+<!-- active: blue darken-2 -->
 <div class="navbar-fixed">
     <nav>
-        <div class="nav-wrapper light-blue darken-3" ng-controller="MenuController">
+        <div class="nav-wrapper blue" ng-controller="LayoutMenuController">
             <ul id="mainnav" class="left hide-on-med-and-down">
-                <li ng-repeat="item in items"><a ng-click="click(item, $event)"><i class="{{item.icon}} left"></i> {{item.alias}}</a></li>
+                <li ng-repeat="item in items" ng-class="{'active' : isActive(item) }"><a ng-click="click(item, $event)" style="cursor: pointer;"><i class="{{item.icon}} left"></i> {{item.alias}}</a></li>
             </ul>
             <ul class="right hide-on-med-and-down">
                 <li><a href="sass.html"><i class="mdi-action-search"></i></a></li>

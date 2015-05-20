@@ -10,7 +10,7 @@ class Module extends \admin\base\Module
 
     public function getMenu()
     {
-        return $this->node('Gallery', 'fa-image')
+        return $this->node('Gallerien', 'mdi-image-photo-album')
             ->group('Verwalten')
                 ->itemApi('Alben', 'galleryadmin-album-index', 'fa-folder-open', 'api-gallery-album')
         ->menu();

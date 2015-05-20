@@ -57,9 +57,9 @@ class Module extends \admin\base\Module
     public function getMenu()
     {
         return $this
-        ->nodeRoute('Datei Manager', 'fa-hdd-o', 'admin-storage-index', 'admin/storage/index')
-        ->node('Admin Einstellungen', 'mdi-action-android')
-            ->group('Zrugriff')
+        ->nodeRoute('Datei Manager', 'mdi-image-photo-library', 'admin-storage-index', 'admin/storage/index')
+        ->node('Administration', 'mdi-navigation-apps')
+            ->group('Zugriff')
                 ->itemApi('Benutzer', 'admin-user-index', 'fa-user', 'api-admin-user')
                 ->itemApi('Gruppen', 'admin-group-index', 'fa-users', 'api-admin-group')
             ->group('System')
@@ -69,31 +69,6 @@ class Module extends \admin\base\Module
                 ->itemApi('Filter', 'admin-filter-index', 'fa-filter', 'api-admin-filter')
         ->menu();
     }
-    /*
-    public function getMenu()
-    {
-        $this->menu->createNode('storage', 'Dateien Manager', 'fa-hdd-o', 'admin-storage-index');
-        // create menu node
-        $node = $this->menu->createNode('admin', 'Admin Einstellungen', 'fa-gears');
-        // create menu group
-        $this->menu->createGroup($node, 'Zugriff', [
-            // insert group items
-            $this->menu->createItem("user", "Benutzer", "admin-user-index", "fa-user"),
-            $this->menu->createItem("group", "Gruppen", "admin-group-index", "fa-users"),
-        ]);
-
-        $this->menu->createGroup($node, 'System', [
-            $this->menu->createItem("lang", "Sprachen", "admin-lang-index", "fa-language"),
-        ]);
-
-        $this->menu->createGroup($node, 'Bilder', [
-            $this->menu->createItem('effect', 'Effekte', 'admin-effect-index', 'fa-link'),
-            $this->menu->createItem('filter', 'Filter', 'admin-filter-index', 'fa-filter'),
-        ]);
-
-        return $this->menu->get();
-    }
-    */
 
     public function getLuyaComponents()
     {

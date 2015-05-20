@@ -13,7 +13,7 @@ class Module extends \admin\base\Module
     public function getMenu()
     {
         return $this
-        ->node('News', 'fa-newspaper-o')
+        ->node('Neuigkeiten', 'mdi-av-new-releases')
             ->group('Daten')
                 ->itemApi('Artikel', 'newsadmin-article-index', 'fa-newspaper-o', 'api-news-article')
                 ->itemApi('Tags', 'newsadmin-tag-index', 'fa-tags', 'api-news-tag')
