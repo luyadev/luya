@@ -33,7 +33,7 @@ class GalleryAlbum extends \cmsadmin\base\Block
                 ['var' => 'albumId', 'label' => 'Album', 'type' => 'zaa-select', 'options' => $this->_alben],
             ],
             'cfgs' => [
-                ['var' => 'nav_item_id', 'label' => 'Gallery für Albumansicht', 'type' => 'zaa-select', 'options' => $this->_dropdown],
+                ['var' => 'nav_item_id', 'label' => 'Link zum Gallery-Modul', 'type' => 'zaa-select', 'options' => $this->_dropdown],
             ],
         ];
     }
@@ -52,6 +52,6 @@ class GalleryAlbum extends \cmsadmin\base\Block
 
     public function twigFrontend()
     {
-        return '<div class="well"><h3>{{ extras.album.title }}</h3><p>{{ extras.album.description }}</p><p><img src="{{ filterApply(extras.album.cover_image_id, "medium-thumbnail") }}" border="0" /></p><p><a href="{{ extras.album.getDetailUrl(cfgs.nav_item_id) }}">GO TO</a></p></div>';
+        return '<h1>{{ extras.album.title }}</h1><p>{{ extras.album.description }}</p><p><a href="{{ extras.album.getDetailUrl(cfgs.nav_item_id) }}"><img class="img-responsive img-rounded" src="{{ filterApply(extras.album.cover_image_id, "medium-thumbnail") }}" border="0" /></a></p>';
     }
 }
