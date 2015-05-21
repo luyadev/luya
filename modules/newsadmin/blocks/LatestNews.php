@@ -24,8 +24,8 @@ class LatestNews extends \cmsadmin\base\Block
     {
         return [
             'cfgs' => [
-                ['var' => 'limit', 'label' => 'Anzahl News Einträge', 'type' => 'zaa-input-text'],
-                ['var' => 'nav_item_id', 'label' => 'Newsseite für Detailansicht', 'type' => 'zaa-input-select', 'options' => $this->_dropdown],
+                ['var' => 'limit', 'label' => 'Anzahl News Einträge', 'type' => 'zaa-text'],
+                ['var' => 'nav_item_id', 'label' => 'Newsseite für Detailansicht', 'type' => 'zaa-select', 'options' => $this->_dropdown],
             ],
         ];
     }

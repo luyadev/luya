@@ -30,10 +30,10 @@ class GalleryAlbum extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'albumId', 'label' => 'Album', 'type' => 'zaa-input-select', 'options' => $this->_alben],
+                ['var' => 'albumId', 'label' => 'Album', 'type' => 'zaa-select', 'options' => $this->_alben],
             ],
             'cfgs' => [
-                ['var' => 'nav_item_id', 'label' => 'Gallery für Albumansicht', 'type' => 'zaa-input-select', 'options' => $this->_dropdown],
+                ['var' => 'nav_item_id', 'label' => 'Gallery für Albumansicht', 'type' => 'zaa-select', 'options' => $this->_dropdown],
             ],
         ];
     }
