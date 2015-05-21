@@ -27,6 +27,9 @@ class Twig extends \yii\base\Component
             'filterApply' => function ($imageId, $filterIdentifier) {
                 return \yii::$app->luya->storage->image->filterApply($imageId, $filterIdentifier)->source;
             },
+            'image' => function($imageId) {
+                return \yii::$app->luya->storage->image->get($imageId);
+            }
         ];
     }
 
