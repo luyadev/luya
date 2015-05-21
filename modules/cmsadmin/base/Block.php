@@ -14,7 +14,7 @@ abstract class Block implements BlockInterface
 
     private $_envOptions = [];
 
-    public $module = '@app';
+    public $module = 'app';
     
     public function __construct()
     {
