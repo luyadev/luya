@@ -19,7 +19,7 @@ class Twig extends \yii\base\Component
     {
         return [
             'links' => function ($cat, $lang, $parent_nav_id) {
-                return \yii::$app->collection->links->findByArguments(['cat' => $cat, 'lang' => $lang, 'parent_nav_id' => $parent_nav_id]);
+                return \yii::$app->collection->links->findByArguments(['cat' => $cat, 'lang' => $lang, 'parent_nav_id' => (int) $parent_nav_id]);
             },
             'asset' => function ($name) {
                 return \yii::$app->getAssetManager()->getBundle($name);
