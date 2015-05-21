@@ -13,6 +13,15 @@ wrapper functions for the luya links collection findByArguments function. Will r
 	{% endfor %}
 ```
 
+linksFindParent
+---------------
+find the parent navigation id for the current active navigation link for a specific level:
+```
+	parent level 1 for active link: {{ linksFindParent(1) }}
+	parent level 2 for active link: {{ linksFindParent(2) }}
+	parent level 3 for active link: {{ linksFindParent(3) }}
+```
+
 asset
 -----
 Get the bundle object from an asset class

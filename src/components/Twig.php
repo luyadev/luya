@@ -21,6 +21,9 @@ class Twig extends \yii\base\Component
             'links' => function ($cat, $lang, $parent_nav_id) {
                 return \yii::$app->collection->links->findByArguments(['cat' => $cat, 'lang' => $lang, 'parent_nav_id' => (int) $parent_nav_id]);
             },
+            'linksFindParent' => function($level) {
+                return \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->collection->links, $level);  
+            },
             'asset' => function ($name) {
                 return \yii::$app->getAssetManager()->getBundle($name);
             },
