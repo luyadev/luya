@@ -25,7 +25,7 @@ class AssetAdmin extends \yii\web\AssetBundle
         "//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.11/angular-ui-router.min.js", // ja
         */
         'js/zaa.js',
-        'js/login.js',
+        //'js/login.js',
         'js/factorys.js',
         'js/controllers/LayoutMenuController.js',
         'js/controllers/DefaultController.js',

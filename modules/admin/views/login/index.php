@@ -1,35 +1,27 @@
-<?php $hasError = count($model->getErrors()) > 0; ?>
-
-<div class="login__wrapper">
-    <div class="login__innerwrapper">
-
-        <?php
-            $options = array('class' => 'login__form');
-            if ($hasError == true) {
-                $options[ 'class' ] .= ' has-error';
-            }
-            echo \yii\helpers\Html::beginForm('', 'post', $options);
-        ?>
-            <div class="login_error">
-                <p>
-                    <?php if ($hasError): ?>
-                        Bitte versuchen Sie es erneut.
-                    <?php endif; ?>
-                </p>
+<div class="container">
+    <h5 style="margin-top:100px;">Luya Login</h5>
+    <div class="card-panel">
+        <?php echo \yii\helpers\Html::beginForm('', 'post'); ?>
+            <div class="input-field col s12">
+                <i class="mdi-content-mail prefix"></i>
+                <input type="text" name="login[email]" />
+                <label>E-Mail-Adresse</label>
             </div>
-
-            <div class="login__group">
-                <label class="login__label<?php echo($hasError) ? ' error' : ''; ?>" for="login[email]"><span class="fa fa-fw fa-envelope"></span></label><!--
-             --><input class="login__input" type="text" id="login[email]" name="login[email]" placeholder="E-Mail" />
+            <div class="input-field col s12">
+                <i class="mdi-communication-vpn-key prefix"></i>
+                <input type="password" name="login[password]" />
+                <label>Passwort</label>
             </div>
-
-            <div class="login__group">
-                <label class="login__label<?php echo($hasError) ? ' error' : ''; ?>" for="login[password]"><span class="fa fa-fw fa-lock"></span></label><!--
-             --><input class="login__input" type="password" id="login[password]" name="login[password]" placeholder="Passwort" />
+            <? if (count($model->getErrors()) > 0): ?>
+             <div class="card-panel red lighten-1 white-text">
+                <ul>
+                    <? foreach($model->getErrors() as $item): ?>
+                        <li><? echo $item[0]; ?></li>
+                    <? endforeach; ?>
+                </ul>
             </div>
-
-            <input class="login__submit" type="submit" value="Log in">
-        <?= \yii\helpers\Html::endForm(); ?>
-
+        <? endif; ?>
     </div>
+    <input class="btn" type="submit" value="Einloggen">
+    <?= \yii\helpers\Html::endForm(); ?>
 </div>
