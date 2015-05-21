@@ -1,6 +1,8 @@
 <script type="text/ng-template" id="reverse.html">
+    <button ng-click="toggleHidden(data)" class="waves-effect waves-teal"><i ng-class="{ 'mdi-action-visibility-off' : {{data.is_hidden}}, 'mdi-action-visibility' : {{data.is_hidden == 0}} }"></i></button>
+    <button ng-click="delete(data)" class="waves-effect waves-teal"><i class="mdi-action-delete"></i></button>
     <a class="waves-effect waves-teal btn-flat" ng-click="go(data.id)">
-            {{data.title}}
+            {{data.title}} 
         </a>
     <ul class="treeview__list" role="menu" style="margin-left:20px;">
         <li class="treeview__item" role="menuitem" ng-repeat="data in data.nodes" ng-include="'reverse.html'"></li>
@@ -36,10 +38,9 @@
     <div class="col s12">
         <label>Navigations Punkt von</label>
         <select class="browser-default" ng-model="data.parent_nav_id">
-            <option value="0">[Oberstes Level]</option>
+            <option value="0">[Root Level]</option>
             <option ng-repeat="nav in navitems" value="{{nav.id}}">{{nav.title}}</option>
         </select>
-        
     </div>
 </div>
 <div class="row">
