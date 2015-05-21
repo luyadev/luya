@@ -96,19 +96,23 @@ abstract class Block implements BlockInterface
     
     protected function render()
     {
-        $twigFile = $this->getTwigRenderFile($this->getModule());
+        return $this->baseRender($this->getModule());
+    }
+
+    private function baseRender($module)
+    {
+        $twigFile = $this->getTwigRenderFile($module);
         if (!file_exists($twigFile)) {
             throw new \Exception("Twig file '$twigFile' does not exists!");
         }
         return file_get_contents($twigFile);
     }
-
+    
     public function getTwigFrontendContent()
     {
         $twigFile = $this->getTwigRenderFile('@app');
         if (file_exists($twigFile)) {
-            $this->module = '@app';
-            return $this->render();
+            return $this->baseRender('@app');
         }
         return $this->twigFrontend();
     }
