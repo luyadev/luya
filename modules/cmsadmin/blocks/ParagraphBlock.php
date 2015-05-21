@@ -4,6 +4,8 @@ namespace cmsadmin\blocks;
 
 class ParagraphBlock extends \cmsadmin\base\Block
 {
+    public $module = 'cmsadmin';
+    
     public function name()
     {
         return 'Text Absatz';

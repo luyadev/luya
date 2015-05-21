@@ -4,6 +4,8 @@ namespace cmsadmin\blocks;
 
 class ImageBlock extends \cmsadmin\base\Block
 {
+    public $module = 'cmsadmin';
+    
     public function name()
     {
         return 'Bild';

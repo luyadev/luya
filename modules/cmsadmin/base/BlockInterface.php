@@ -16,6 +16,8 @@ interface BlockInterface
 
     public function twigAdmin();
 
+    public function getTwigFrontendContent();
+    
     public function setVarValues(array $values);
 
     public function setCfgValues(array $values);

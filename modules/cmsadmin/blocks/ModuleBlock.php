@@ -4,6 +4,8 @@ namespace cmsadmin\blocks;
 
 class ModuleBlock extends \cmsadmin\base\Block
 {
+    public $module = 'cmsadmin';
+    
     public function name()
     {
         return 'Module Integration';

@@ -55,10 +55,30 @@ you can also render files instead of simple return strings, like this:
 
 public function twigFrontend()
 {
-	return $this->render('my_block_template.twig');
+	return $this->render();
 }
 
 ```
+
+by default it will look for a view file inside @app/views/blocks. By changing the module property inside the class object you can changed the path in where the file should be found:
+
+```php
+
+public $module = 'mymodule';
+
+```
+or
+```php
+
+public function getModule()
+{
+	return '@mymodule';
+}
+```
+
+
+Register Block
+--------------
 
 Now you have to register the block to your database. Go into the administration area, navigation to Cms Settings -> Blocks and add a new item. The field ***class*** you have to provied would look like this, based on the above example:
 

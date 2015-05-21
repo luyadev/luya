@@ -4,6 +4,8 @@ namespace cmsadmin\blocks;
 
 class HtmlBlock extends \cmsadmin\base\Block
 {
+    public $module = 'cmsadmin';
+    
     public function name()
     {
         return 'Html';

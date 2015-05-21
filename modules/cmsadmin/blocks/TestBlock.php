@@ -4,6 +4,8 @@ namespace cmsadmin\blocks;
 
 class TestBlock extends \cmsadmin\base\Block
 {
+    public $module = 'cmsadmin';
+    
     public function name()
     {
         return '[DEV TEST BLOCk]';

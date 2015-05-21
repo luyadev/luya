@@ -71,7 +71,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
                     $insertedHolders[$item['var']] = $this->renderPlaceholder($navItemPageId, $item['var'], $placeholder['id']);
                 }
             }
-            $string .= $twig->render($blockObject->twigFrontend(), [
+            $string .= $twig->render($blockObject->getTwigFrontendContent(), [
                 'vars' => $configValues,
                 'cfgs' => $cfgValues,
                 'placeholders' => $insertedHolders,

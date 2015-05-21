@@ -14,8 +14,8 @@ abstract class Block implements BlockInterface
 
     private $_envOptions = [];
 
-    public $renderPath = '@app/views/blocks/';
-
+    public $module = '@app';
+    
     public function __construct()
     {
         $this->init();
@@ -23,8 +23,10 @@ abstract class Block implements BlockInterface
 
     public function init()
     {
-        // use
+        // override
     }
+    
+    /* getter & setter EnvOptions */
 
     public function setEnvOptions(array $values)
     {
@@ -41,36 +43,76 @@ abstract class Block implements BlockInterface
         return $this->_envOptions;
     }
 
+    /* getter & setter VarValue */
+    
+    public function getVarValue($key, $default = false)
+    {
+        return (array_key_exists($key, $this->_varValues)) ? $this->_varValues[$key] : $default;
+    }
+    
     public function setVarValues(array $values)
     {
         $this->_varValues = $values;
     }
-
+    
+    /* getter & setter CfgValue */
+    
     public function getCfgValue($key, $default = false)
     {
         return (array_key_exists($key, $this->_cfgValues)) ? $this->_cfgValues[$key] : $default;
-    }
-
-    public function getVarValue($key, $default = false)
-    {
-        return (array_key_exists($key, $this->_varValues)) ? $this->_varValues[$key] : $default;
     }
 
     public function setCfgValues(array $values)
     {
         $this->_cfgValues = $values;
     }
+    
+    /* render methods */
 
-    public function getRenderPath()
+    /**
+     * @todo does first char alread contain '@'
+     * @return string
+     */
+    private function getModule()
     {
-        return $this->renderPath;
+        return '@' . $this->module;
+    }
+    
+    public function getRenderFileName()
+    {
+        $classname = get_class($this);
+
+        if (preg_match('/\\\\([\w]+)$/', $classname, $matches)) {
+            $classname = $matches[1];
+        }
+    
+        return $classname . '.twig';
     }
 
-    protected function render($twigFile)
+    protected function getTwigRenderFile($app)
     {
-        return file_get_contents(yii::getAlias($this->getRenderPath().$twigFile));
+        return yii::getAlias($app . '/views/blocks/' . $this->getRenderFileName());
+    }
+    
+    protected function render()
+    {
+        $twigFile = $this->getTwigRenderFile($this->getModule());
+        if (!file_exists($twigFile)) {
+            throw new \Exception("Twig file '$twigFile' does not exists!");
+        }
+        return file_get_contents($twigFile);
     }
 
+    public function getTwigFrontendContent()
+    {
+        $twigFile = $this->getTwigRenderFile('@app');
+        if (file_exists($twigFile)) {
+            $this->module = '@app';
+            return $this->render();
+        }
+        return $this->twigFrontend();
+    }
+    
     // access from outside
 
     public function extraVars()
@@ -82,22 +124,4 @@ abstract class Block implements BlockInterface
     {
         return json_encode($this->config());
     }
-
-    /*
-    public function getName()
-    {
-        return $this->name();
-    }
-
-
-    public function getTwigFrontend()
-    {
-        return $this->twigFrontend();
-    }
-
-    public function getTwigAdmin()
-    {
-        return $this->twigAdmin();
-    }
-    */
 }

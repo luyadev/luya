@@ -4,8 +4,8 @@ namespace cmsadmin\blocks;
 
 class HeadingBlock extends \cmsadmin\base\Block
 {
-    public $renderPath = '@cmsadmin/views/blocks';
-
+    public $module = 'cmsadmin';
+    
     public function name()
     {
         return 'Überschrift';
