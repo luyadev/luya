@@ -24,7 +24,8 @@
                     <div class="row" ng-repeat="field in block.vars">
                         <zaa-injector dir="field.type" options="field.options" label="{{field.label}}" grid="12" model="data[field.var]"></zaa-injector>
                     </div>
-                    <div ng-show="block.cfgs.length">
+                    <div ng-show="block.cfgs.length > 0">
+                        <h5>Konfigurations Parameter</h5>
                         <div class="row" ng-repeat="cfgField in block.cfgs">
                             <zaa-injector dir="cfgField.type" options="cfgField.options" label="{{cfgField.label}}" grid="12" model="cfgdata[cfgField.var]"></zaa-injector>
                         </div>
