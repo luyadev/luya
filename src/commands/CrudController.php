@@ -135,7 +135,7 @@ class CrudController extends \yii\console\Controller
                         $content.= '        $config->list->field(\''.ucfirst($n).'\', \''.$n.'\')->text()->required();'. PHP_EOL;
                         }
                         foreach($ngrest['textarea'] as $n) {
-                        $content.= '        $config->list->field(\''.ucfirst($n).'\', \''.$n.'\')->textarea()->required();'. PHP_EOL;
+                        $content.= '        $config->list->field(\''.$n.'\', \''.ucfirst($n).'\')->textarea()->required();'. PHP_EOL;
                         }
                         $content.= '        $config->create->copyFrom(\'list\', [\'id\']);' . PHP_EOL;
                         $content.= '        $config->update->copyFrom(\'list\', [\'id\']);' . PHP_EOL;
