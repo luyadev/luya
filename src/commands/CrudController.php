@@ -116,14 +116,14 @@ class CrudController extends \yii\console\Controller
                         $content.= '    public function rules()' . PHP_EOL;
                         $content.= '    {' . PHP_EOL;
                         $content.= '        return [' . PHP_EOL;
-                        $content.= '            [[\''.implode("','", $names).'\'], \'required\'],' . PHP_EOL;
+                        $content.= '            [[\''.implode("', '", $names).'\'], \'required\'],' . PHP_EOL;
                         $content.= '        ];' . PHP_EOL;
                         $content.= '    }' . PHP_EOL . PHP_EOL;
                         $content.= '    public function scenarios()' . PHP_EOL;
                         $content.= '    {' . PHP_EOL;
                         $content.= '        return [' . PHP_EOL;
-                        $content.= '            \'restcreate\' => [\''.implode("','", $names).'\'],' . PHP_EOL;http://luya.io/
-                        $content.= '            \'restupdate\' => [\''.implode("','", $names).'\'],' . PHP_EOL;
+                        $content.= '            \'restcreate\' => [\''.implode("', '", $names).'\'],' . PHP_EOL;http://luya.io/
+                        $content.= '            \'restupdate\' => [\''.implode("', '", $names).'\'],' . PHP_EOL;
                         $content.= '        ];' . PHP_EOL;
                         $content.= '    }' . PHP_EOL . PHP_EOL;
                         $content.= '    /* ngrest model properties */'. PHP_EOL . PHP_EOL;
