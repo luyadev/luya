@@ -10,23 +10,16 @@ class CrudController extends \yii\console\Controller
 
     public function actionCreate()
     {
-        /*
+        
         $module = $this->prompt('Module Name (e.g. galleryadmin):');
         $modelName = $this->prompt('Model Name (e.g. Album)');
         $apiEndpoint = $this->prompt('Api Endpoint (e.g. api-gallery-album)');
         $sqlTable = $this->prompt('Database Table name (e.g. gallery_album)');
-        */
         
-        $module = 'estore';
-        $modelName = 'Foo';
-        $apiEndpoint = 'api-estore-foo';
-        $sqlTable = 'my_sql_table';
         
-        /*
-        if (!$this->confirm("Create '$modelName' data (controller, api, model) in module '$module' ?")) {
+        if (!$this->confirm("Create '$modelName' controller, api & model based on sql table '$sqlTable' in module '$module' for api endpoint '$apiEndpoint'?")) {
             exit(1);
         }
-        */
         
         $yiiModule = Yii::$app->getModule($module);
         
