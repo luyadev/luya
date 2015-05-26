@@ -118,9 +118,9 @@ class CrudController extends \yii\console\Controller
         
         $getMenu = 'public function getMenu()
 {
-    return $this->node(\'Kalender\', \'mdi-action-today\')
-        ->group(\'Daten\')
-            ->itemApi(\'YOUR NAME\', \''.$data['api']['route'].'\', \'matteriliaze-icon-class-name\', \''.$apiEndpoint.'\')
+    return $this->node(\''.ucfirst($modelName).'\', \'http://materializecss.com/icons.html\')
+        ->group(\'GROUP\')
+            ->itemApi(\'YOUR NAME\', \''.$data['api']['route'].'\', \'http://materializecss.com/icons.html\', \''.$apiEndpoint.'\')
     ->menu();
 }
             ';
