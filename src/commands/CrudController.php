@@ -10,15 +10,21 @@ class CrudController extends \yii\console\Controller
 
     public function actionCreate()
     {
-        
         $module = $this->prompt('Module Name (e.g. galleryadmin):');
+        $modulePre = $new_str = preg_replace('/admin$/', '', $module);
         $modelName = $this->prompt('Model Name (e.g. Album)');
-        $apiEndpoint = $this->prompt('Api Endpoint (e.g. api-gallery-album)');
-        $sqlTable = $this->prompt('Database Table name (e.g. gallery_album)');
-        
+        $apiEndpoint = $this->prompt('Api Endpoint (e.g. api-'.$modulePre.'-'.strtolower($modelName).')');
+        $sqlTable = $this->prompt('Database Table name (e.g. '.strtolower($modulePre).'_'.strtolower($modelName).')');
         
         if (!$this->confirm("Create '$modelName' controller, api & model based on sql table '$sqlTable' in module '$module' for api endpoint '$apiEndpoint'?")) {
             exit(1);
+        }
+        
+        $shema = Yii::$app->db->getTableSchema($sqlTable);
+        
+        if (!$shema) {
+            echo "you have to create a migration script and execute the migration first. the table must exists!";
+            exit(0);
         }
         
         $yiiModule = Yii::$app->getModule($module);
@@ -60,7 +66,7 @@ class CrudController extends \yii\console\Controller
             }
             
             if (file_exists($folder . DIRECTORY_SEPARATOR . $item['file'])) {
-                echo "Die Datei $folder" . DIRECTORY_SEPARATOR . $item['file'] . "existiert bereits!";
+                echo $this->ansiFormat("Can not create $folder" . DIRECTORY_SEPARATOR . $item['file'] . ", file does already exists!", Console::FG_RED) . PHP_EOL;
             } else {
                 
                 $content = '<?php' . PHP_EOL . PHP_EOL;
@@ -82,17 +88,41 @@ class CrudController extends \yii\console\Controller
                         break;
                         
                     case "model":
+                        
+                        $names = [];
+                        $ngrest = [
+                            'text' => [],
+                            'textarea' => [],
+                        ];
+                        foreach($shema->columns as $k => $v) {
+                            if ($v->phpType == 'string') {
+                                $names[] = $v->name;
+                                if ($v->type == 'text') {
+                                    $ngrest['textarea'][] = $v->name;
+                                }
+                                if ($v->type == 'string') {
+                                    $ngrest['text'][] = $v->name;
+                                }
+                            }
+                        }
+                        
                         $content.= 'class '.$item['class'].' extends \admin\ngrest\base\Model' . PHP_EOL;
                         $content.= '{' . PHP_EOL;
                         $content.= '    public static function tableName()' . PHP_EOL;
                         $content.= '    {' . PHP_EOL;
                         $content.= '        return \''.$sqlTable.'\';' . PHP_EOL;
                         $content.= '    }' . PHP_EOL . PHP_EOL;
+                        $content.= '    public function rules()' . PHP_EOL;
+                        $content.= '    {' . PHP_EOL;
+                        $content.= '        return [' . PHP_EOL;
+                        $content.= '            [[\''.implode("','", $names).'\'], \'required\'],' . PHP_EOL;
+                        $content.= '        ];' . PHP_EOL;
+                        $content.= '    }' . PHP_EOL . PHP_EOL;
                         $content.= '    public function scenarios()' . PHP_EOL;
                         $content.= '    {' . PHP_EOL;
                         $content.= '        return [' . PHP_EOL;
-                        $content.= '            \'restcreate\' => [],' . PHP_EOL;
-                        $content.= '            \'restupdate\' => [],' . PHP_EOL;
+                        $content.= '            \'restcreate\' => [\''.implode("','", $names).'\'],' . PHP_EOL;http://luya.io/
+                        $content.= '            \'restupdate\' => [\''.implode("','", $names).'\'],' . PHP_EOL;
                         $content.= '        ];' . PHP_EOL;
                         $content.= '    }' . PHP_EOL . PHP_EOL;
                         $content.= '    public function ngRestApiEndpoint()' . PHP_EOL;
@@ -101,7 +131,14 @@ class CrudController extends \yii\console\Controller
                         $content.= '    }' . PHP_EOL . PHP_EOL;
                         $content.= '    public function ngRestConfig($config)' . PHP_EOL;
                         $content.= '    {' . PHP_EOL;
-                        $content.= '        // defined your ngrest config here' . PHP_EOL;
+                        foreach($ngrest['text'] as $n) {
+                        $content.= '        $config->list->field(\''.ucfirst($n).'\', \''.$n.'\')->text()->required();'. PHP_EOL;
+                        }
+                        foreach($ngrest['textarea'] as $n) {
+                        $content.= '        $config->list->field(\''.ucfirst($n).'\', \''.$n.'\')->textarea()->required();'. PHP_EOL;
+                        }
+                        $content.= '        $config->create->copyFrom(\'list\', [\'id\']);' . PHP_EOL;
+                        $content.= '        $config->update->copyFrom(\'list\', [\'id\']);' . PHP_EOL;
                         $content.= '        return $config;' . PHP_EOL;
                         $content.= '    }' . PHP_EOL;
                         $content.= '}';
