@@ -97,12 +97,12 @@ class CrudController extends \yii\console\Controller
                         $content.= '    }' . PHP_EOL . PHP_EOL;
                         $content.= '    public function ngRestApiEndpoint()' . PHP_EOL;
                         $content.= '    {' . PHP_EOL;
-                        $content.= '         return \''.$apiEndpoint.'\';' . PHP_EOL;
+                        $content.= '        return \''.$apiEndpoint.'\';' . PHP_EOL;
                         $content.= '    }' . PHP_EOL . PHP_EOL;
                         $content.= '    public function ngRestConfig($config)' . PHP_EOL;
-                        $content.= '    {' . PHP_EOL . PHP_EOL;
-                        $content.= '         // defined your ngrest config here' . PHP_EOL;
-                        $content.= '         return $config;' . PHP_EOL;
+                        $content.= '    {' . PHP_EOL;
+                        $content.= '        // defined your ngrest config here' . PHP_EOL;
+                        $content.= '        return $config;' . PHP_EOL;
                         $content.= '    }' . PHP_EOL;
                         $content.= '}';
                         break;
