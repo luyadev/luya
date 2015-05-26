@@ -77,7 +77,7 @@ class Module extends \yii\base\Module
     /**
      * @var unknown_type
      */
-    public $moduleLayout = 'moduleLayout';
+    public $moduleLayout = 'layout';
 
     /**
      * @throws Exception
