@@ -1,0 +1,49 @@
+/**
+ * Set height of the sidebar and main containers
+ */
+.luya-container__sidebar,
+.luya-container__main {
+
+	// Display & Dimensions
+	display: inline-block;
+	height: 100%;
+
+}
+
+/**
+ * Width of the main container
+ */
+.luya-container__main {
+
+	// Positioning
+	padding-left: $luya-container__sidebar--width;
+
+	// Dimensions
+	width: 100%;
+
+	// Look & Feel
+	background-color: color("grey", "lighten-4");
+
+}
+
+/**
+ * Width of the sidebar container
+ */
+.luya-container__sidebar {
+
+	// Positioning
+	position: fixed;
+	top: $navbar-height;
+	bottom: 0;
+	left: 0;
+
+	// Dimensions
+	width: $luya-container__sidebar--width;
+
+	// Look & Feel
+	background-color: color('shades', 'white');
+
+	@media #{$small-and-down} {
+		top: $navbar-height-mobile;
+	}
+}

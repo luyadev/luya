@@ -1,0 +1,14 @@
+/**
+ * HTML, body
+ * Set height and width to 100%
+ */
+html,
+body {
+	// Dimensions
+	height: 100%;
+	width: 100%;
+}
+
+*, *:before, *:after {
+	box-sizing: border-box;
+}
