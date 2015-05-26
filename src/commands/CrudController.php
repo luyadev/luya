@@ -108,6 +108,7 @@ class CrudController extends \yii\console\Controller
                         
                         $content.= 'class '.$item['class'].' extends \admin\ngrest\base\Model' . PHP_EOL;
                         $content.= '{' . PHP_EOL;
+                        $content.= '    /* yii model properties */'. PHP_EOL . PHP_EOL;
                         $content.= '    public static function tableName()' . PHP_EOL;
                         $content.= '    {' . PHP_EOL;
                         $content.= '        return \''.$sqlTable.'\';' . PHP_EOL;
@@ -125,6 +126,7 @@ class CrudController extends \yii\console\Controller
                         $content.= '            \'restupdate\' => [\''.implode("','", $names).'\'],' . PHP_EOL;
                         $content.= '        ];' . PHP_EOL;
                         $content.= '    }' . PHP_EOL . PHP_EOL;
+                        $content.= '    /* ngrest model properties */'. PHP_EOL . PHP_EOL;
                         $content.= '    public function ngRestApiEndpoint()' . PHP_EOL;
                         $content.= '    {' . PHP_EOL;
                         $content.= '        return \''.$apiEndpoint.'\';' . PHP_EOL;
