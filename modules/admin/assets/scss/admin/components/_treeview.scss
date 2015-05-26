@@ -1,0 +1,26 @@
+/**
+ * #TREEVIEW__LIST
+ */
+.treeview__list {
+	margin: 0;
+
+	& .treeview__list {
+		margin-left: 20px;
+	}
+}
+
+/**
+ * #TREEVIEW__ITEM
+ */
+.treeview__item {
+	margin-bottom: 2px;
+}
+
+/**
+ * #TREEVIEW__BUTTON
+ */
+.treeview__button {
+	text-align: left;
+	padding: 0 10px;
+	width: 100%;
+}

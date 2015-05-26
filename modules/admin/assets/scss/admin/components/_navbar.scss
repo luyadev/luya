@@ -1,0 +1,18 @@
+/**
+ * #NAVBAR__LINK
+ */
+.navbar__link {
+	cursor: pointer;
+}
+
+/**
+ * #NAVBAR__ICON
+ */
+.navbar__icon {
+	&.right {
+		margin-left: 8px;
+	}
+	&.left {
+		margin-right: 8px;
+	}
+}

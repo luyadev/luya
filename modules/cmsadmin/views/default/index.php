@@ -1,10 +1,6 @@
 <script type="text/ng-template" id="reverse.html">
-    <button ng-click="toggleHidden(data)" class="waves-effect waves-teal"><i ng-class="{ 'mdi-action-visibility-off' : {{data.is_hidden}}, 'mdi-action-visibility' : {{data.is_hidden == 0}} }"></i></button>
-    <button ng-click="delete(data)" class="waves-effect waves-teal"><i class="mdi-action-delete"></i></button>
-    <a class="waves-effect waves-teal btn-flat" ng-click="go(data.id)">
-            {{data.title}} 
-        </a>
-    <ul class="treeview__list" role="menu" style="margin-left:20px;">
+    <a class="treeview__button btn-flat [ waves-effect waves-teal ]" ng-click="go(data.id)">{{data.title}}</a>
+    <ul class="treeview__list" role="menu">
         <li class="treeview__item" role="menuitem" ng-repeat="data in data.nodes" ng-include="'reverse.html'"></li>
     </ul>
 </script>
@@ -98,16 +94,25 @@
 </script>
 
 <a class="btn-floating btn-large waves-effect waves-light red" style="position:absolute; margin-left:334px; margin-top:20px;" ui-sref="custom.cmsadd"><i class="mdi-content-add"></i></a>
-<div class="row">
-      <div class="col s12 m4 l2">
+<div class="luya-container__sidebar">
+    <div class="row">
+        <div class="col s12">
             <div ng-controller="CmsMenuTreeController">
-                <div ng-repeat="catitem in menu" class="card-panel blue lighten-5">
-                    <h5 style="text-transform: uppercase">{{catitem.name}}</h5>
-                    <ul>
-                        <li ng-repeat="data in catitem.__items" ng-include="'reverse.html'"></li>
+                <div class="treeview" ng-repeat="catitem in menu">
+                    <h5 class="treeview__title">{{catitem.name}}</h5>
+                    <ul class="treeview__list"
+                        <li class="treeview__item" ng-repeat="data in catitem.__items" ng-include="'reverse.html'"></li>
                     </ul>
                 </div>
             </div>
-      </div>
-      <div class="col s12 m8 l10" ui-view></div>
-</div>
+        </div>
+    </div>
+</div>  <!-- /.luya-sidebar -->
+
+<div class="luya-container__main">
+
+    <div class="col s12">
+        <div ui-view></div>
+    </div>
+
+</div>  <!-- /.luya-main -->
