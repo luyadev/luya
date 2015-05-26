@@ -54,3 +54,15 @@ php index.php exec/import
 ```
 
 A uscase for the abovce example are project(app) layouts and blocks. The importer detect layouts and blocks defined in the project and inserts those into your local database.
+
+crud
+----
+
+create full crud data within one command.
+
+***create****
+
+```
+php index.php crud/create
+```
+
