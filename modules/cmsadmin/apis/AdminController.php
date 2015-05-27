@@ -16,10 +16,12 @@ class AdminController extends \admin\base\RestController
         $data = [];
         foreach (\cmsadmin\models\Block::find()->all() as $item) {
             $object = \cmsadmin\models\Block::objectId($item['id']);
-            $data[] = [
-                'id' => $item['id'],
-                'name' => $object->name(),
-            ];
+            if ($object) {
+                $data[] = [
+                    'id' => $item['id'],
+                    'name' => $object->name(),
+                ];
+            }
         }
 
         return $data;
