@@ -1,6 +1,48 @@
-zaa.controller("NavController", function($scope, $stateParams, ApiAdminLang, AdminClassService) {
+zaa.controller("NavController", function($scope, $stateParams, $http, ApiAdminLang, AdminClassService, MenuService) {
 	
 	$scope.id = parseInt($stateParams.navId);
+	
+	$scope.isDeleted = false;
+	
+	$scope.menuCats = MenuService.cats;
+	
+	$scope.navData = {};
+	
+	$http.get('admin/api-cms-nav/detail', { params : { navId : $scope.id }}).success(function(response) {
+		$scope.navData = response;
+	});
+	
+	$scope.$watch(function() { return $scope.navData.is_hidden }, function(n, o) {
+		if (o !== undefined) {
+			$http.get('admin/api-cms-nav/toggle-hidden', { params : { navId : $scope.navData.id , hiddenStatus : n }}).success(function(response) {
+				// send toast
+				if (n == 1) {
+					Materialize.toast('<span>Die Seite ist nun Unsichtbar.</span>', 2000)
+				} else {
+					Materialize.toast('<span>Die Seite ist nun Sichtbar.</span>', 2000)
+				}
+			});
+		}
+	});
+	
+	$scope.$watch(function() { return $scope.navData.cat_id }, function(n, o) {
+		if (o != undefined && o != null && n != o) {
+			$http.get('admin/api-cms-nav/update-cat', { params : { navId : $scope.navData.id , catId : n }}).success(function(response) {
+				MenuService.refresh();
+				Materialize.toast('<span>Die Seite wurde der Navigation ' + n + ' zugewiesen.</span>', 2000)
+			});
+			
+		}
+	});
+	
+    $scope.trash = function() {
+    	if (confirm('your are sure you want to delete this page?')) {
+    		$http.get('admin/api-cms-nav/delete', { params : { navId : $scope.navData.id }}).success(function(response) {
+    			MenuService.refresh();
+    			$scope.isDeleted = true;
+    		});
+    	}
+    }
 	
 	$scope.AdminClassService = AdminClassService;
 	

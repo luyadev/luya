@@ -49,7 +49,7 @@
     </div>
 
 </script>
-<div ng-controller="NavController">
+<div ng-controller="NavController" ng-show="!isDeleted">
     <div class="row">
         <div class="col s12">
     
@@ -87,12 +87,7 @@
     
                             <!-- NAVIGATION DROPDOWN -->
                             <div class="toolbar__group">
-                                <select class="browser-default">
-                                    <option value="" disabled selected>Navigation</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
-                                </select>
+                                <select class="browser-default" ng-model="navData.cat_id" ng-options="item.id as item.name for item in menuCats" />
                             </div>
                             <!-- /NAVIGATION DROPDOWN -->
     
@@ -100,16 +95,13 @@
                             <div class="toolbar__group">
                                 <select class="browser-default">
                                     <option value="" disabled selected>Seitenplatzierung</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
                                 </select>
                             </div>
                             <!-- /SITE PLACEMENET -->
     
                             <!-- DELETE BUTTON -->
                             <div class="toolbar__group">
-                                <a class="[ waves-effect waves-tale ][ btn-flat btn--small ][ grey-text text-darken-2 ]"><i class="mdi-action-delete"></i></a>
+                                <a ng-click="trash()" class="[ waves-effect waves-tale ][ btn-flat btn--small ][ grey-text text-darken-2 ]"><i class="mdi-action-delete"></i></a>
                             </div>
                             <!-- /DELETE BUTTON -->
     
@@ -118,7 +110,7 @@
                                 <div class="switch">
                                     <label>
                                         Sichtbar
-                                        <input type="checkbox">
+                                        <input type="checkbox" ng-model="navData.is_hidden" ng-true-value="0" ng-false-value="1">
                                         <span class="lever"></span>
                                     </label>
                                 </div>

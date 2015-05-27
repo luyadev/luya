@@ -15,9 +15,14 @@ zaa.service('MenuService', function($http) {
 	
 	service.menu = [];
 	
+	service.cats = [];
+	
 	service.refresh = function() {
-		
+		service.cats = [];
 		$http.get('admin/api-cms-menu/all').success(function(response) {
+			for (var i in response) {
+				service.cats.push({ name : response[i]['name'], id : response[i]['id']});
+			}
 			service.menu = response;
 		});
 	}
@@ -35,8 +40,11 @@ zaa.controller("CmsMenuTreeController", function($scope, $state, $http, MenuServ
 	
     $scope.$watch(function() { return MenuService.menu }, function(newValue) {
     	$scope.menu = newValue;
-    })
+    });
     
+    /*
+     * moved to: 
+     
     $scope.delete = function(dataItem) {
     	console.log(dataItem);
     	if (confirm('your are sure you want to delete ' + dataItem.title )) {
@@ -52,15 +60,17 @@ zaa.controller("CmsMenuTreeController", function($scope, $state, $http, MenuServ
 			MenuService.refresh();
 		});
     }
-	
+	*/
+    
     $scope.go = function(navId) {
     	$state.go('custom.cmsedit', { navId : navId });
     };
-
+    
+    /*
     $scope.toggleChildren = function($event) {
         // todo: Remove parentNode.parentNode
         // todo: Not really the "angular way"?
         $event.currentTarget.parentNode.parentNode.classList.toggle( "treeview__item--is-open" );
     }
-    
+    */
 });
