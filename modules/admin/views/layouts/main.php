@@ -137,7 +137,7 @@
             <!-- /User dropdown -->
 
             <!-- ANGULAR-VIEW -->
-            <div class="luya-container__angular-placeholder" ui-view></div>
+            <div class="luya-container__angular-placeholder module-{{currentItem.moduleId}}" ui-view></div>
             <!-- /ANGULAR-VIEW -->
 
         </div> <!-- /.luya-container -->

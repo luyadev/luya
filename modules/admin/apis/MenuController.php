@@ -91,6 +91,7 @@ class MenuController extends \admin\base\RestController
 
             // ok we have passed all the tests, lets make an entry
             $responseData[] = [
+                'moduleId' => $item['moduleId'],
                 'id' => $index,
                 'template' => $item['template'],
                 'routing' => $item['routing'],

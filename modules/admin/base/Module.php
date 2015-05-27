@@ -25,6 +25,7 @@ class Module extends \luya\base\Module
     {
         $this->_pointers['node'] = $name;
         $this->_menu[$name] = [
+            'moduleId' => $this->id,
             'template' => $template,
             'routing' => $template ? 'custom' : 'default',
             'alias' => $name,
@@ -40,6 +41,7 @@ class Module extends \luya\base\Module
     {
         $this->_pointers['node'] = $name;
         $this->_menu[$name] = [
+            'moduleId' => $this->id,
             'template' => $template,
             'routing' => $template ? 'custom' : 'default',
             'alias' => $name,
