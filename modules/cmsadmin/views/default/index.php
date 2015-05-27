@@ -93,7 +93,7 @@
 </div>
 </script>
 
-<a class="btn-floating btn-large waves-effect waves-light red" style="position:absolute; margin-left:334px; margin-top:20px;" ui-sref="custom.cmsadd"><i class="mdi-content-add"></i></a>
+<!--<a class="btn-floating btn-large waves-effect waves-light red" style="position:absolute; margin-left:334px; margin-top:20px;" ui-sref="custom.cmsadd"><i class="mdi-content-add"></i></a>-->
 <div class="luya-container__sidebar">
     <div class="row">
         <div class="col s12">

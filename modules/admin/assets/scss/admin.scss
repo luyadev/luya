@@ -7,24 +7,30 @@
 
 /**
  * Basic styles
- * 		base: 				HTML & Body tags
- * 		typography: 		Typography styles
- * 		variables:			Variables to use later
+ * 		variables:				Variables to use later
+ * 		base: 					HTML & Body tags
+ * 		typography: 			Typography styles
+ * 		materialize-overwrite: 	Overwrite styles from Materialize that we don't need
  */
 @import "base/variables";
 @import "base/base";
 @import "base/typography";
+@import "base/materialize-overwrite";
 
 /**
  * Components
- * 		luya-container:		Size and position of the Sidebar and the Main container (luya-container__sidebar, luya-container__main)
- * 		navbar:				Some Improvements to the normal materialize navbar
+ * 		btn:					Extends the default Materialize behavior with some useful classes
+ * 		luya-container:			Size and position of the Sidebar and the Main container (luya-container__sidebar, luya-container__main)
+ * 		navbar:					Some Improvements to the normal materialize navbar
+ *		toolbar:				Defines the .toolbar background and proportions
  */
+@import "components/btn";
 @import "components/luya-container";
 @import "components/navbar";
+@import "components/toolbar";
 
 /**
  * Layouts
- *		luya-container:		Dimensiions and positionng of the luya-container
+ *		luya-container:			Dimensiions and positionng of the luya-container
  */
 @import "layouts/luya-container";

@@ -1,0 +1,19 @@
+/**
+ * Extends the default Materialize behavior with some useful classes
+ **/
+
+/**
+ * #BTN--SMALL
+ * Decrease the default padding (left & right) on buttons
+ **/
+.btn--small {
+	padding: 0 1rem;
+}
+
+/**
+ * #BTN--BOLD
+ * Bold button label
+ **/
+.btn--bold {
+	font-weight: 500;
+}

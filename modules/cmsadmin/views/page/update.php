@@ -49,6 +49,94 @@
     </div>
 
 </script>
+
+<div class="row">
+    <div class="col s12">
+
+        <div class="toolbar [ grey lighten-3 ]">
+            <div class="row">
+                <div class="col s12">
+
+                    <!-- LEFT TOOLBAR -->
+                    <div class="left">
+
+                        <!-- LANGUAGE SWITCH -->
+                        <div class="toolbar__group">
+                            <a class="[ waves-effect waves-tale ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ][ grey lighten-2 ]">DE</a>
+                            <a class="[ waves-effect waves-tale ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ][ grey lighten-2 ]">EN</a>
+                            <a class="[ waves-effect waves-tale ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ]">FR</a>
+                        </div>
+                        <!-- /LANGUAGE SWITCH -->
+
+                        <!-- PLACEHOLDER TOGGLE -->
+                        <div class="toolbar__group">
+                            <div class="switch">
+                                <label>
+                                    Platzhalter offen
+                                    <input type="checkbox">
+                                    <span class="lever"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /PLACEHOLDER TOGGLE -->
+
+                    </div> <!-- /LEFT TOOLBAR -->
+
+                    <!-- RIGHT TOOLBAR -->
+                    <div class="right">
+
+                        <!-- NAVIGATION DROPDOWN -->
+                        <div class="toolbar__group">
+                            <select class="browser-default">
+                                <option value="" disabled selected>Navigation</option>
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                            </select>
+                        </div>
+                        <!-- /NAVIGATION DROPDOWN -->
+
+                        <!-- SITE PLACEMENET -->
+                        <div class="toolbar__group">
+                            <select class="browser-default">
+                                <option value="" disabled selected>Seitenplatzierung</option>
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                            </select>
+                        </div>
+                        <!-- /SITE PLACEMENET -->
+
+                        <!-- DELETE BUTTON -->
+                        <div class="toolbar__group">
+                            <a class="[ waves-effect waves-tale ][ btn-flat btn--small ][ grey-text text-darken-2 ]"><i class="mdi-action-delete"></i></a>
+                        </div>
+                        <!-- /DELETE BUTTON -->
+
+                        <!-- VISIBILITY SWITCH -->
+                        <div class="toolbar__group">
+                            <div class="switch">
+                                <label>
+                                    Sichtbar
+                                    <input type="checkbox">
+                                    <span class="lever"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /VISIBILITY SWITCH -->
+
+                    </div>
+                    <!-- /RIGHT TOOLBAR -->
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
 <div ng-controller="NavController">
     <div class="row">
         <div class="col s{{(12/langs.length)}}" ng-repeat="lang in langs" ng-controller="NavItemController">
@@ -59,12 +147,12 @@
             <div class="card-panel" ng-if="item.length != 0">
                 <h6>{{lang.name}}</h6>
                 <h4>{{item.title}} <a class="btn-floating btn-large red right"><i class="large mdi-editor-mode-edit"></i></a></h4>
-                
+
                 <div ng-switch on="item.nav_item_type">
                     <div ng-switch-when="1" ng-controller="NavItemTypePageController"><!-- type:page -->
                         <div ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" class="row"></div>
                     </div>
-        
+
                     <div ng-switch-when="2"><!-- type:module -->
                         <p><b>This page is used as Module!</b></p>
                     </div>
@@ -79,8 +167,6 @@
                     <span class="waves-effect waves-light btn light-blue darken-3" style="margin-right:5px; font-size:11px;">{{block.name}}</span>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
 </div>
-
-
