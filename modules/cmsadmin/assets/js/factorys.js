@@ -59,3 +59,19 @@ zaa.factory('ApiCmsNavItemPageBlockItem', function($resource) {
 	});
 });
 
+zaa.factory('DroppableBlocksService', function($http) {
+	var service = [];
+	
+	service.blocks = [];
+	
+	service.load = function() {
+		$http({
+			url : 'admin/api-cms-admin/get-all-blocks',
+			method : 'GET'
+		}).success(function(response) {
+			service.blocks = response;
+		});
+	}
+	
+	return service;
+});

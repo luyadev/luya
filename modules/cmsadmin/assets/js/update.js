@@ -202,7 +202,7 @@ zaa.controller("DropBlockController", function($scope, ApiCmsNavItemPageBlockIte
 	}
 });
 
-zaa.controller("DroppableBlocksController", function($scope, $http, AdminClassService) {
+zaa.controller("DroppableBlocksController", function($scope, $http, AdminClassService, DroppableBlocksService) {
 
 	$scope.onStart = function() {
 		$scope.$apply(function() {
@@ -216,12 +216,5 @@ zaa.controller("DroppableBlocksController", function($scope, $http, AdminClassSe
 		});
 	}
 	
-	$http({
-		url : 'admin/api-cms-admin/get-all-blocks',
-		method : 'GET'
-	}).success(function(response) {
-		$scope.blocks = response;
-	});
-	
-	
+	$scope.blocks = DroppableBlocksService.blocks;
 });

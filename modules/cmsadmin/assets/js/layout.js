@@ -27,9 +27,11 @@ zaa.service('MenuService', function($http) {
 	return service;
 });
 
-zaa.controller("CmsMenuTreeController", function($scope, $state, $http, MenuService) {
+zaa.controller("CmsMenuTreeController", function($scope, $state, $http, MenuService, DroppableBlocksService) {
     
 	$scope.menu = [];
+	
+	DroppableBlocksService.load();
 	
     $scope.$watch(function() { return MenuService.menu }, function(newValue) {
     	$scope.menu = newValue;
