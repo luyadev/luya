@@ -1,0 +1,25 @@
+/**
+ * Toolbar
+ */
+.toolbar {
+	margin: 20px 0;
+	background-color: rgba(0, 0, 0, 0.05);
+	padding: 10px 0;
+
+	select {
+		height: 2rem;
+	}
+}
+
+.toolbar__group {
+	display: inline-block;
+	padding-right: 15px;
+	margin-right: 15px;
+	border-right: 1px solid color('grey', 'lighten-2');
+
+	&:last-of-type {
+		border-right: 0;
+		padding-right: 0;
+		margin-right: 0;
+	}
+}

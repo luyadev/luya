@@ -14,6 +14,10 @@ class Asset extends \yii\web\AssetBundle
         'js/factorys.js',
     ];
 
+    public $css = [
+        'css/cmsadmin.css'
+    ];
+
     public $depends = [
         'admin\AssetAdmin',
     ];
