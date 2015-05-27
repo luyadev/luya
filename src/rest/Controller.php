@@ -8,7 +8,7 @@ use Yii;
  * Basic
  *
  * ´´´
- * class TestController extends \admin\base\RestController
+ * class TestController extends \luya\rest\Controller
  * {
  *     public function actionFooBar()
  *     {
@@ -17,7 +17,6 @@ use Yii;
  * }
  *
  * @author nadar
- *
  */
 class Controller extends \yii\web\Controller
 {

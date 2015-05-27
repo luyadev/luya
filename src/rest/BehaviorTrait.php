@@ -31,7 +31,7 @@ trait BehaviorTrait
                 'user' => $this->getUserAuthClass(),
                 'authMethods' => [
                     \yii\filters\auth\QueryParamAuth::className(),
-                    \ yii\filters\auth\HttpBearerAuth::className(),
+                    \yii\filters\auth\HttpBearerAuth::className(),
                 ],
             ];
 
