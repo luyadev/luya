@@ -3,7 +3,7 @@
  * http://materializecss.com/
  */
 
-@import "admin/materialize/materialize";
+@import "materialize/materialize";
 
 /**
  * Basic styles
@@ -11,22 +11,20 @@
  * 		typography: 		Typography styles
  * 		variables:			Variables to use later
  */
-@import "admin/base/variables";
-@import "admin/base/base";
-@import "admin/base/typography";
+@import "base/variables";
+@import "base/base";
+@import "base/typography";
 
 /**
  * Components
  * 		luya-container:		Size and position of the Sidebar and the Main container (luya-container__sidebar, luya-container__main)
  * 		navbar:				Some Improvements to the normal materialize navbar
- * 		treeview:			Positioning of items inside treeview
  */
-@import "admin/components/luya-container";
-@import "admin/components/navbar";
-@import "admin/components/treeview";
+@import "components/luya-container";
+@import "components/navbar";
 
 /**
  * Layouts
  *		luya-container:		Dimensiions and positionng of the luya-container
  */
-@import "admin/layouts/luya-container";
+@import "layouts/luya-container";
