@@ -26,7 +26,18 @@
           return {
             link: function(scope, element, attrs) {
               $timeout(function(){
-                element.collapsible();
+            	// recursion  
+            	scope.$on('$includeContentLoaded', function(){
+            		    element.collapsible();
+            	});
+            	  
+            	// watcher
+            	scope.$watch('container.__placeholders', function(n, o) {
+            		element.collapsible();
+            	});
+            	
+            	// basic integration
+            	element.collapsible();
               });
             }
           };
@@ -185,7 +196,7 @@
                 scope: {},
                 link: function (scope, element) {
                     $timeout(function () {
-                        angular.element(element).find("input").change();
+                        Materialize.updateTextFields();
                     });
                 },
                 template: '<div ng-transclude class="input-field"></div>'

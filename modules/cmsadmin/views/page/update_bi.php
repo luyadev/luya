@@ -177,6 +177,7 @@
                                 {{item.title}} <i class="mdi-navigation-more-vert right [ waves-effect waves-tale ]"></i>
                             </h4>
                             <p>{{lang.name}}</p>
+
                         </div>
                     </div>
                 </div>
@@ -198,6 +199,38 @@
 
             </div>
             <!-- /page -->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s{{(12/langs.length)}}" ng-repeat="lang in langs" ng-controller="NavItemController">
+            <div class="card-panel red lighten-1" ng-if="item.length == 0">
+                <h6>{{lang.name}}</h6>
+                <p>Diese Seite wurde noch nicht in {{lang.name}} übersetzt.</p>
+            </div>
+            <div class="card-panel" ng-if="item.length != 0">
+                <h6>{{lang.name}}</h6>
+                <h4>{{item.title}} <a class="btn-floating btn-large red right"><i class="large mdi-editor-mode-edit"></i></a></h4>
+
+                <div ng-switch on="item.nav_item_type">
+                    <div ng-switch-when="1" ng-controller="NavItemTypePageController"><!-- type:page -->
+                        <div ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" class="row"></div>
+                    </div>
+
+                    <div ng-switch-when="2"><!-- type:module -->
+                        <p><b>This page is used as Module!</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12" style="position: fixed; bottom:0px;">
+            <div ng-controller="DroppableBlocksController">
+                <div ng-repeat="block in blocks" style="display: inline-block;" data-drag="true" jqyoui-draggable="{placeholder: 'keep', index : {{$index}}, onStart : 'onStart', onStop : 'onStop'}" ng-model="blocks" data-jqyoui-options="{revert: true, helper : 'clone'}">
+                    <span class="waves-effect waves-light btn light-blue darken-3" style="margin-right:5px; font-size:11px;">{{block.name}}</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
