@@ -1,0 +1,32 @@
+/**
+ * Base colors
+ */
+
+$white: #fff;
+$black: #000;
+$grey: #f5f5f5;
+
+$blue: #2196F3;
+
+/**
+ * Page settings
+ */
+$page--background: 					$white;
+$page__header--background:			$grey;
+$page__header--color:				$black;
+
+/**
+ * Collapsible
+ */
+$collapsible__header--background:	$white;
+$collapsible__header--color:		$black;
+$collapsible--background:			$grey;
+
+/**
+ * Blocks
+ */
+$block--background:					$white;
+
+$block__toolbar--height:			37px;
+$block__toolbar--background:		$blue;
+$block__toolbar--color:				$white;

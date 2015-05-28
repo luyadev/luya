@@ -1,5 +1,25 @@
 @import "base/variables";
 
+
+/**
+ * Prefix every module style with the module class
+ */
 .module-cmsadmin {
+	/**
+	 * #HELPERS
+	 *		clearfix:		Clearfix mixin
+ 	 */
+	@import "helpers/clearfix";
+
+	/**
+	 * #COMPONENTS
+	 *		block:			Block styles
+	 *		collapsible:	Accordion styles
+     * 		page:			Styles for the page in the cms admin
+     *		treeview:		Styles for the treeview
+ 	 */
+	@import "components/block";
+	@import "components/collapsible";
+	@import "components/page";
 	@import "components/treeview";
 }

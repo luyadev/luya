@@ -123,7 +123,133 @@
                     </div>
                 </div>
             </div>
-    
+
+            <div class="page">
+
+                <div class="page__header">
+                    <div class="row">
+                        <div class="col s12">
+
+                            <h4>
+                                Über uns <i class="mdi-navigation-more-vert right [ waves-effect waves-tale ]"></i>
+                            </h4>
+                            <p>Sprache: Deutsch</p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page__content">
+                    <div class="row">
+                        <div class="col s12">
+
+                            <ul class="collapsible" data-collapsible="expandable">
+                                <li>
+                                    <div class="collapsible__header collapsible-header"><i class="mdi-navigation-unfold-more"></i> Kopfzeile</div>
+                                    <div class="collapsible__body collapsible-body">
+                                        <p>Empty!</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="collapsible__header collapsible-header"><i class="mdi-navigation-unfold-more"></i> Hauptinhalt</div>
+                                    <div class="collapsible__body collapsible-body">
+
+                                        <!--<div class="block">
+                                            <div class="block__toolbar">
+                                                <div class="left">
+                                                    <i class="block__move mdi-action-open-with"></i>
+
+                                                    <div class="block__title">
+                                                        <i class="mdi-editor-format-align-left"></i>
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                                <div class="right">
+                                                    <i class="mdi-editor-mode-edit [ waves-effect waves-tale ]"></i>
+                                                    <i class="mdi-navigation-more-vert [ waves-effect waves-tale ]"></i>
+                                                </div>
+                                            </div>
+                                            <div class="block__body">
+                                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</p>
+                                            </div>
+                                        </div>-->
+
+                                        <div class="block">
+                                            <div class="block__toolbar">
+                                                <div class="left">
+                                                    <i class="block__move mdi-action-open-with"></i>
+
+                                                    <div class="block__title">
+                                                        <i class="mdi-editor-format-align-left"></i>
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                                <div class="right">
+                                                    <i class="mdi-editor-mode-edit [ waves-effect waves-tale ]" onclick="$(this).parents('.block').toggleClass('block--edit');"></i>
+                                                    <i class="mdi-navigation-more-vert [ waves-effect waves-tale ]"></i>
+                                                </div>
+                                            </div>
+                                            <div class="block__body">
+                                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</p>
+                                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</p>
+                                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</p>
+                                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</p>
+                                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</p>
+                                            </div>
+                                            <div class="block__edit">
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                                        <label for="textarea1">Textarea</label>
+                                                    </div>
+
+                                                    <div class="input-field col s12">
+                                                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                                        <label for="textarea1">Textarea</label>
+                                                    </div>
+
+                                                    <div class="input-field col s12">
+                                                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                                        <label for="textarea1">Textarea</label>
+                                                    </div>
+
+                                                    <div class="input-field col s12">
+                                                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                                        <label for="textarea1">Textarea</label>
+                                                    </div>
+
+                                                    <div class="input-field col s12">
+                                                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                                        <label for="textarea1">Textarea</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col s12">
+                                                        <div class="right">
+                                                            <button class="[ waves-effect waves-light ] btn btn--small teal"><i class="mdi-action-done left"></i> Speichern</button>
+                                                            <button class="[ waves-effect waves-light ] btn btn--small red"><i class="mdi-navigation-close left"></i> Abbrechen</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="collapsible__header collapsible-header"><i class="mdi-navigation-unfold-more"></i> Fusszeile</div>
+                                    <div class="collapsible__body collapsible-body">
+                                        <p>Empty!</p>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
 

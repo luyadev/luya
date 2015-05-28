@@ -1,0 +1,85 @@
+/**
+ * #BLOCK
+ */
+.block {
+	background-color: $block--background;
+	padding: 10px;
+	margin-bottom: 20px;
+	position: relative;
+	overflow: hidden;
+	transition: 0.5s ease padding-top;
+
+	&:hover .block__toolbar,
+	&.block--edit .block__toolbar {
+		transform: translateY(0%);
+	}
+	&:last-of-type {
+		margin-bottom: 0;
+	}
+	&.block--edit {
+		padding-top: $block__toolbar--height + 5px;
+	}
+}
+
+.block__toolbar {
+	background-color: $block__toolbar--background;
+	color: $block__toolbar--color;
+	font-size: 18px;
+	padding: 2px 10px;
+	z-index: 50;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+
+	i {
+		font-size: 22px;
+		vertical-align: middle;
+	}
+
+	// Hover animation
+	transform: translateY(-100%);
+	transition: 0.25s ease transform;
+}
+
+.block__move {
+	cursor: move;
+	margin-right: 15px;
+}
+
+.block__title {
+	display: inline-block;
+
+	p {
+		display: inline-block;
+		vertical-align: middle;
+	}
+}
+
+.block__body {
+	opacity: 1;
+	transition: 0.25s 0.25s ease opacity, 0.25s 0.25s ease height;
+	height: 100%;
+}
+.block--edit .block__body {
+	opacity: 0;
+	padding: 0;
+	margin: 0;
+	height: 0;
+	overflow: hidden;
+	transition: 0.25s ease opacity, 0.25s ease height;
+}
+
+.block__edit {
+	opacity: 0;
+	padding: 0;
+	margin: 0;
+	height: 0;
+	overflow: hidden;
+	transition: 0.25s ease opacity, 0.25s ease height;
+}
+.block--edit .block__edit {
+	opacity: 1;
+	height: 100%;
+	transition: 0.25s 0.25s ease opacity, 0.25s 0.25s ease height;
+}
