@@ -83,7 +83,10 @@
 			    </div>
 			</div>
 		</div>
-        </div>
+        <ul ng-show="block.__placeholders.length" class="collapsible" data-collapsible="accordion">
+            <li ng-repeat="placeholder in block.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion2.html'"></li>
+        </ul>
+    </div>  
 </div>
 </script>
 <div ng-controller="NavController" ng-show="!isDeleted">
