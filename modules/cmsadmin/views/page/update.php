@@ -203,4 +203,8 @@
             <!-- /page -->
         </div>
     </div>
+    
+    <div ng-controller="DroppableBlocksController">
+        {{DroppableBlocksService.blocks | json}}
+    </div>
 </div>

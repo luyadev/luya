@@ -258,5 +258,5 @@ zaa.controller("DroppableBlocksController", function($scope, $http, AdminClassSe
 		});
 	}
 	
-	$scope.blocks = DroppableBlocksService.blocks;
+	$scope.DroppableBlocksService = DroppableBlocksService;
 });
