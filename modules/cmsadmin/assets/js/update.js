@@ -1,4 +1,4 @@
-zaa.controller("NavController", function($scope, $stateParams, $http, ApiAdminLang, AdminClassService, MenuService) {
+zaa.controller("NavController", function($scope, $stateParams, $http, AdminLangService, AdminClassService, MenuService) {
 	
 	$scope.id = parseInt($stateParams.navId);
 	
@@ -46,8 +46,11 @@ zaa.controller("NavController", function($scope, $stateParams, $http, ApiAdminLa
 	
 	$scope.AdminClassService = AdminClassService;
 	
+	$scope.AdminLangService = AdminLangService;
+	
 	$scope.refresh = function() {
-		$scope.langs = ApiAdminLang.query();
+		$scope.AdminLangService.load();
+		$scope.langs = $scope.AdminLangService.data;
 	}
 	
 	$scope.refresh();

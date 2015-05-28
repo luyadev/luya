@@ -5,11 +5,13 @@ zaa.directive("createForm", function() {
 			data : '='
 		},
 		templateUrl : 'createform.html',
-		controller : function($scope, $http, ApiAdminLang, ApiCmsCat, MenuService) {
+		controller : function($scope, $http, AdminLangService, ApiCmsCat, MenuService) {
 			
 			$scope.controller = $scope.$parent;
 			
-			$scope.lang = ApiAdminLang.query();
+			$scope.AdminLangService = AdminLangService;
+			$scope.AdminLangService.load();
+			$scope.lang = $scope.AdminLangService.data;
 			
 			$scope.cat = ApiCmsCat.query();
 			

@@ -102,9 +102,7 @@
     
                             <!-- LANGUAGE SWITCH -->
                             <div class="toolbar__group">
-                                <a class="[ waves-effect waves-tale ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ][ grey lighten-2 ]">DE</a>
-                                <a class="[ waves-effect waves-tale ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ][ grey lighten-2 ]">EN</a>
-                                <a class="[ waves-effect waves-tale ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ]">FR</a>
+                                <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'[ grey lighten-2 ]' : AdminLangService.isInSelection(lang)}" class="[ waves-effect waves-tale ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ]">{{lang.name}}</a> 
                             </div>
                             <!-- /LANGUAGE SWITCH -->
     
@@ -166,13 +164,12 @@
 
             <div class="row">
             
-            <div class="col s{{(12/langs.length)}}" ng-repeat="lang in langs" ng-controller="NavItemController">
+            <div class="col s{{(12/AdminLangService.selection.length)}}" ng-repeat="lang in langs" ng-show="AdminLangService.isInSelection(lang)" ng-controller="NavItemController">
             <!-- page -->
             <div class="page" ng-if="item.length == 0">
                 <p>Seite noch nicht übersetzt.</p>
             </div>
             <div class="page" ng-if="item.length != 0">
-
                 <div class="page__header">
                     <div class="row">
                         <div class="col s12">

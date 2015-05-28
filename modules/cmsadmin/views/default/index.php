@@ -100,7 +100,7 @@
             <div ng-controller="CmsMenuTreeController">
                 <div class="treeview" ng-repeat="catitem in menu">
                     <h5 class="treeview__title">{{catitem.name}}</h5>
-                    <ul class="treeview__list"
+                    <ul class="treeview__list">
                         <li class="treeview__item" ng-repeat="data in catitem.__items" ng-include="'reverse.html'"></li>
                     </ul>
                 </div>

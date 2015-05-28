@@ -34,9 +34,10 @@ zaa.factory('DroppableBlocksService', function($http) {
 			url : 'admin/api-cms-admin/get-all-blocks',
 			method : 'GET'
 		}).success(function(response) {
+			console.log('DroppableBlocksService loading data', response);
 			service.blocks = response;
 		});
-	}
+	};
 	
 	return service;
 });
