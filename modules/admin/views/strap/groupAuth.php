@@ -1,44 +1,50 @@
 <form id="updateSubscription">
-<button type="button" onclick="toggleAll(true)"><strong>Alle Markieren</strong></button>
-<button type="button" onclick="toggleAll(false)"><strong>Alle Entziehen</strong></button>
-<button type="button" onclick="toggleSelector('view', true)">Alle nur Anzeigen</button>
-<button type="button" onclick="toggleSelector('create', true)">Alle nur Erstellen</button>
-<button type="button" onclick="toggleSelector('update', true)">Alle nur Bearbeiten</button>
-<button type="button" onclick="toggleSelector('delete', true)">Alle nur Löschen</button>
-<table border="0" style="border-spacing: 10px;  border-collapse: separate;">
+<button type="button" class="btn" onclick="toggleAll(true)"><strong>Alle Markieren</strong></button>
+<button type="button" class="btn" onclick="toggleAll(false)"><strong>Alle Entziehen</strong></button>
+<button type="button" class="btn" onclick="toggleSelector('view', true)">Alle nur Anzeigen</button>
+<button type="button" class="btn" onclick="toggleSelector('create', true)">Alle nur Erstellen</button>
+<button type="button" class="btn" onclick="toggleSelector('update', true)">Alle nur Bearbeiten</button>
+<button type="button" class="btn" onclick="toggleSelector('delete', true)">Alle nur Löschen</button>
+<table class="bordered hoverable">
 <?php $last = null; foreach ($auth as $item):?>
 <?php  if ($last !== $item['module_name']): ?>
-    <tr><td colspan="9"><h1><?= ucfirst($item['module_name']); ?> <button type="button" onclick="toggleSelector('<?= $item['module_name']; ?>', true)">+</button><button type="button" onclick="toggleSelector('<?= $item['module_name']; ?>', false)">-</button></h1></td></tr>
-<?php endif; ?>
+    <thead>
+        <tr><th colspan="4"><?= ucfirst($item['module_name']); ?> <button class="btn-flat" type="button" onclick="toggleSelector('<?= $item['module_name']; ?>', true)">+</button><button class="btn-flat" type="button" onclick="toggleSelector('<?= $item['module_name']; ?>', false)">-</button></th></tr>
+    </thead>
+    <?php endif; ?>
 <tr>
-    <td><strong><?= $item['alias_name']; ?>:</strong></td>
-    <td><input class="<?=$item['module_name'];?> view" type="checkbox" name="rights[<?= $item['id'];?>][base]" value="1" <?php if (isset($subs[$item['id']])): ?>checked="checked"<?endif;?>' /></td>
-    <td>Anzeigen</td>
+    <td>
+        <input id="<?= $item['module_name']; ?>_base_<?= $item['id']; ?>" class="<?=$item['module_name'];?> view" type="checkbox" name="rights[<?= $item['id'];?>][base]" value="1" <?php if (isset($subs[$item['id']])): ?>checked="checked"<?endif;?>' />
+        <label for="<?= $item['module_name']; ?>_base_<?= $item['id']; ?>"><?= $item['alias_name']; ?></label>    
+    </td>
     <?php if ($item['is_crud']): ?>
-    <td><input class="<?=$item['module_name'];?> create" type="checkbox" name="rights[<?= $item['id'];?>][create]" <?php if (isset($subs[$item['id']]) && $subs[$item['id']]['create'] == 1): ?>checked="checked"<?endif;?> value="1" /></td>
-    <td>Hinzufügen</td>
-    <td><input class="<?=$item['module_name'];?> update" type="checkbox" name="rights[<?= $item['id'];?>][update]" <?php if (isset($subs[$item['id']]) && $subs[$item['id']]['update'] == 1): ?>checked="checked"<?endif;?> value="1" /></td>
-    <td>Bearbeiten</td>
-    <td><input class="<?=$item['module_name'];?> delete" type="checkbox" name="rights[<?= $item['id'];?>][delete]" <?php if (isset($subs[$item['id']]) && $subs[$item['id']]['delete'] == 1): ?>checked="checked"<?endif;?> value="1" /></td>
-    <td>Löschen</td>
+    <td>
+        <input id="<?= $item['module_name']; ?>_create_<?= $item['id']; ?>" class="<?=$item['module_name'];?> create" type="checkbox" name="rights[<?= $item['id'];?>][create]" <?php if (isset($subs[$item['id']]) && $subs[$item['id']]['create'] == 1): ?>checked="checked"<?endif;?> value="1" />
+        <label for="<?= $item['module_name']; ?>_create_<?= $item['id']; ?>">Hinzufügen</label>
+    </td>
+    <td>
+        <input id="<?= $item['module_name']; ?>_update_<?= $item['id']; ?>" class="<?=$item['module_name'];?> update" type="checkbox" name="rights[<?= $item['id'];?>][update]" <?php if (isset($subs[$item['id']]) && $subs[$item['id']]['update'] == 1): ?>checked="checked"<?endif;?> value="1" />
+        <label for="<?= $item['module_name']; ?>_update_<?= $item['id']; ?>">Bearbeiten</label>
+    </td>
+    <td>
+        <input id="<?= $item['module_name']; ?>_del_<?= $item['id']; ?>" class="<?=$item['module_name'];?> delete" type="checkbox" name="rights[<?= $item['id'];?>][delete]" <?php if (isset($subs[$item['id']]) && $subs[$item['id']]['delete'] == 1): ?>checked="checked"<?endif;?> value="1" />
+        <label for="<?= $item['module_name']; ?>_del_<?= $item['id']; ?>">Löschen</label>    
+    </td>
     <?php else: ?>
-        <td colspan="6">&nbsp;</td>
+        <td colspan="3">&nbsp;</td>
     <?php endif; ?>
 </tr>
 <?php $last = $item['module_name']; endforeach; ?>
 </table>
-
-<button type="submit" name="submit"><h2>Speichern</h2></button>
-<div id="success" style="display:none; color:green;">
-    Die neuen Berechtigungen wurden gespeichert, Sie können diesen Dialog nun schliessen. <p><i>Tipp: Drücken Sie ESC</i></p>
-</div>
+<button style="margin-top:20px;" type="submit" name="submit" class="btn">Speichern</button>
 </form>
 <script>
 strapRegisterForm('#updateSubscription', 'UpdateSubscription', function(json) {
 	if (json.error) {
 		alert('error while update, see console .log');
 	} else {
-		$('#success').show();
+		 Materialize.toast('Die neuen Gruppen Berechtigungen wurden gespeichert.', 3000) // 4000 is the duration of the toast
+		 $('#strapModal').closeModal();
 	}
 });
 
