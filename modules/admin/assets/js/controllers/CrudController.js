@@ -28,11 +28,13 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 	}
 	
 	$scope.closeDialogs = function() {
+		/*
 		$scope.toggler.update = false;
 		$scope.toggler.strap = false;
 		$scope.toggler.create = false;
 		//$scope.AdminService.bodyClass = '';
 		$scope.search = '';
+		*/
 	}
 	
 	$scope.debug = function() {
@@ -131,8 +133,9 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 		console.log(angular.toJson($scope.data.update));
 		$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true))
 		.success(function(data) {
-			$scope.loadList();
 			$('#updateModal').closeModal();
+			$scope.loadList();
+			Materialize.toast('Der Datensatz wurde erfolgreich aktualsiert.', 3000);
 		})
 		.error(function(data) {
 			$scope.updateErrors = data;
@@ -145,9 +148,10 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 		
 		$http.post($scope.config.apiEndpoint, angular.toJson($scope.data.create, true))
 		.success(function(data) {
+			$('#createModal').closeModal();
 			$scope.loadList();
 			$scope.data.create = {};
-			$('#createModal').closeModal();
+			Materialize.toast('Der neue Datensatz wurde erfolgreich erstellt.', 3000);
 		})
 		.error(function(data) {
 			$scope.createErrors = data;
