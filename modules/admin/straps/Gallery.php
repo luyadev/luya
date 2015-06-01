@@ -31,13 +31,23 @@ class Gallery extends \admin\ngrest\StrapAbstract
 
     public function render()
     {
-        $data = (new \yii\db\Query())->select(['image_id' => $this->imageIdFieldName])->where([$this->refFieldName => $this->getItemId()])->from($this->refTableName)->all();
-
-        return $this->getView()->render('@admin/views/strap/gallery.php', [
-            'images' => $data,
-        ]);
+        return $this->getView()->render('@admin/views/strap/gallery.php');
     }
 
+    public function callbackImages()
+    {
+        $data = (new \yii\db\Query())->select(['image_id' => $this->imageIdFieldName])->where([$this->refFieldName => $this->getItemId()])->from($this->refTableName)->all();
+        $files = [];
+        foreach($data as $k => $v) {
+            $files[] = [
+                'source' => \yii::$app->luya->storage->image->filterApply($v['image_id'], 'small-crop')->source,
+                'image_id' => $v['image_id'],
+            ];
+        }
+        
+        return $files;
+    }
+    
     public function callbackUpload()
     {
         try {
