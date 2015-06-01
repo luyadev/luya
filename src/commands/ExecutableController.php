@@ -190,6 +190,7 @@ class ExecutableController extends \yii\console\Controller
             'identifier' => 'thumbnail',
             'imagine_name' => 'thumbnail',
             'imagine_json_params' => json_encode(['vars' => [
+                ['var' => 'type', 'label' => 'outbound or inset'], // THUMBNAIL_OUTBOUND & THUMBNAIL_INSET
                 ['var' => 'width', 'label' => 'Breit in Pixel'],
                 ['var' => 'height', 'label' => 'Hoehe in Pixel'],
             ]]),
