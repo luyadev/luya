@@ -18,10 +18,11 @@ class Album extends \admin\ngrest\base\Model
     {
         $config->strap->register(new \admin\straps\Gallery('gallery_album_image', 'image_id', 'album_id'), 'Bilder Hochladen &amp; Verwalten');
 
+        $config->list->field('cat_id', 'Kategorie')->selectClass('\galleryadmin\models\Cat', 'id', 'title')->required();
         $config->list->field('title', 'Titel')->text()->required();
         $config->list->field('description', 'Beschreibung')->textarea();
         $config->list->field('cover_image_id', 'Cover-Bild')->image()->required();
-
+        
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);
 
@@ -31,8 +32,8 @@ class Album extends \admin\ngrest\base\Model
     public function scenarios()
     {
         return [
-            'restcreate' => ['title', 'description', 'cover_image_id'],
-            'restupdate' => ['title', 'description', 'cover_image_id'],
+            'restcreate' => ['title', 'description', 'cover_image_id', 'cat_id'],
+            'restupdate' => ['title', 'description', 'cover_image_id', 'cat_id'],
         ];
     }
 

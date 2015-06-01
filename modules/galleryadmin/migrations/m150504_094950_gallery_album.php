@@ -8,6 +8,7 @@ class m150504_094950_gallery_album extends Migration
     {
         $this->createTable('gallery_album', [
             'id' => 'pk',
+            'cat_id' => 'int(11) NOT NULL default 0',
             'title' => 'varchar(150) NOT NULL',
             'description' => 'text',
             'cover_image_id' => 'int(11) default 0',
