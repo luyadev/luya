@@ -1,9 +1,19 @@
-index.php
-==========
+cat/index.php
+=============
+```
+<? foreach($catData as $item): ?>
+    <div class="well">
+        <h1><?= $item->title; ?></h1>
+        <a href="<?= \luya\helpers\Url::to('gallery/alben/index', ['catId' => $item->id, 'title' => \yii\helpers\Inflector::slug($item->title)]); ?>">Alben anzeigen</a>
+    </div>
+<? endforeach; ?>
+```
 
+alben/index.php
+===============
 ```
 <table border="1">
-<? foreach($model::find()->all() as $item): ?>
+<? foreach($albenData as $item): ?>
 <tr>
     <td><img src="<?= \yii::$app->luya->storage->image->filterApply($item->cover_image_id, 'medium-thumbnail')->source; ?>" border="0" /></td>
     <td>
@@ -19,10 +29,10 @@ index.php
 </table>
 ```
 
-detail.php
-==========
-
+album/index.php
+===============
 ```
+<div class="well">
 <table border="1">
 <tr>
     <td><img src="<?= \yii::$app->luya->storage->image->filterApply($model->cover_image_id, 'medium-thumbnail')->source; ?>" border="0" /></td>
@@ -43,4 +53,5 @@ detail.php
     </td>
 </tr>
 </table>
+</div>
 ```
