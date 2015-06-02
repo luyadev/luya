@@ -102,6 +102,12 @@ class Module extends \yii\base\Module
         return parent::getLayoutPath();
     }
 
+    /**
+     * @todo rename the resolveControllerRoute
+     * 
+     * @param unknown $route
+     * @return string
+     */
     public function findControllerRoute($route)
     {
         $xp = explode('/', $route);
