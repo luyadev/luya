@@ -174,12 +174,18 @@
                     <div class="row">
                         <div class="col s12">
                             <h4>
-                                {{item.title}} <i class="mdi-navigation-more-vert right [ waves-effect waves-tale ]"></i>
+                                {{item.title}} <i class="mdi-navigation-more-vert right [ waves-effect waves-tale ]" dropdown data-constrainwidth="false" data-beloworigin="true" data-activates="pageMenu-{{item.title}}"></i>
                             </h4>
                             <p>{{lang.name}}</p>
                         </div>
                     </div>
                 </div>
+
+                <!-- Page Settings dropdown, called by javascript -->
+                <ul id="pageMenu-{{item.title}}" class="dropdown-content">
+                    <li><a href="#!">Seiteninformationen bearbeiten</a></li>
+                </ul>
+                <!-- /Page Settings dropdown -->
 
                 <div class="page__content" ng-switch on="item.nav_item_type">
                     <div class="row">
