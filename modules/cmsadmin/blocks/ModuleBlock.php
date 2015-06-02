@@ -2,6 +2,8 @@
 
 namespace cmsadmin\blocks;
 
+use Yii;
+
 class ModuleBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
@@ -17,6 +19,11 @@ class ModuleBlock extends \cmsadmin\base\Block
             'vars' => [
                 ['var' => 'moduleName', 'label' => 'Module Name', 'type' => 'zaa-text'],
             ],
+            'cfgs' => [
+                ['var' => 'moduleController', 'label' => 'Controller Name (ohne Controller suffix)', 'type' => 'zaa-text'],
+                ['var' => 'moduleAction', 'label' => 'Action Name (ohne action prefix)', 'type' => 'zaa-text'],
+                ['var' => 'moduleActionArgs', 'label' => 'Action Arguments (json: {"var":"value"})', 'type' => 'zaa-text'],
+            ]
         ];
     }
 
@@ -36,7 +43,37 @@ class ModuleBlock extends \cmsadmin\base\Block
     {
         return '{{ extras.moduleContent }}';
     }
+    
+    private function moduleContent($moduleName)
+    {
+        if (empty($moduleName)) {
+            return null;
+        }
+        
+        $ctrl = $this->getCfgValue('moduleController');
+        $action = $this->getCfgValue('moduleAction');
+        $actionArgs = json_decode($this->getCfgValue('moduleActionArgs'), true);
+        
+        // get module
+        $module = Yii::$app->getModule($moduleName);
+        $module->setContext('cms');
+        $module->setContextOptions($this->getEnvOptions());
+        
+        // start module reflection
+        $reflection = new \luya\module\Reflection($module);
+        $reflection->setModuleSuffix($this->getEnvOption('restString'));
+        if ($ctrl && $action) {
+            $reflection->setInitRun($ctrl, $action, $actionArgs);
+        }
+        
+        $response = $reflection->responseContent();
+        
+        $context = $reflection->getContext();
+        
+        return $response;
+    }
 
+    /*
     private function moduleContent($moduleName)
     {
         if (empty($moduleName)) {
@@ -60,4 +97,5 @@ class ModuleBlock extends \cmsadmin\base\Block
 
         return $action;
     }
+    */
 }
