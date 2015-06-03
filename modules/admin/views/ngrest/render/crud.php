@@ -84,18 +84,17 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
         </div>
     </div>
     <!-- /MODAL HEADER -->
-
+    
+    <form role="form" ng-submit="submitCreate()">
     <!-- MODAL CONTENT -->
     <div class="modal__content">
-        <form role="form" ng-submit="submitCreate()">
-            <?php foreach ($crud->create as $k => $item): ?>
-                <div class="row">
-                    <? foreach($crud->createElements($item, $crud::TYPE_CREATE) as $element): ?>
-                        <?= $element['html']; ?>
-                    <? endforeach; ?>
-                </div>
-            <? endforeach; ?>
-        </form>
+        <?php foreach ($crud->create as $k => $item): ?>
+            <div class="row">
+                <? foreach($crud->createElements($item, $crud::TYPE_CREATE) as $element): ?>
+                    <?= $element['html']; ?>
+                <? endforeach; ?>
+            </div>
+        <? endforeach; ?>
     </div>
     <!-- /MODAL CONTENT -->
 
@@ -115,7 +114,8 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
         </div>
     </div>
     <!-- /MODAL FOOTER -->
-
+    </form>
+    
 </div>
 <!-- /CREATE MODAL -->
 
@@ -134,18 +134,17 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
         </div>
     </div>
     <!-- /MODAL HEADER -->
-
+    
+    <form role="form" ng-submit="submitUpdate()">
     <!-- MODAL CONTENT -->
     <div class="modal__content">
-        <form role="form" ng-submit="submitUpdate()">
-            <?php foreach ($crud->update as $k => $item): ?>
-                <div class="row">
-                    <? foreach($crud->createElements($item, $crud::TYPE_UPDATE) as $element): ?>
-                        <?= $element['html']; ?>
-                    <? endforeach; ?>
-                </div>
-            <? endforeach; ?>
-        </form>
+        <?php foreach ($crud->update as $k => $item): ?>
+            <div class="row">
+                <? foreach($crud->createElements($item, $crud::TYPE_UPDATE) as $element): ?>
+                    <?= $element['html']; ?>
+                <? endforeach; ?>
+            </div>
+        <? endforeach; ?>
     </div>
     <!-- /MODAL CONTENT -->
 
@@ -165,7 +164,8 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
         </div>
     </div>
     <!-- /MODAL FOOTER -->
-
+    </form>
+    
 </div>
 <!-- /UPDATE MODAL -->
 
