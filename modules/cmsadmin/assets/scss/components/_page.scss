@@ -27,21 +27,21 @@
  * #PAGE__DROP
  */
 .page__drop {
-	height: 3px;
+	height: 1px;
 	margin: 0;
-	background-color: rgba(0, 0, 0, 0.3);
+	background-color: transparent;
 	width: 100%;
 	display: block;
 	transition: 0.25s ease transform, 0.4s ease background-color;
 	position: relative;
 }
 
-.page--drop-active .page__drop {
-	transform: scale(1, 4);
+.page--drag-active .page__drop {
+	transform: scale(1, 20);
 	background-color: $blue;
 
-	&:hover {
-		transform: scale(1, 8);
+	&.page__drop--hover {
+		transform: scale(1, 35);
 		background-color: $teal;
 		z-index: 20;
 	}
