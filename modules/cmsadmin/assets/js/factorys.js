@@ -30,13 +30,15 @@ zaa.factory('DroppableBlocksService', function($http) {
 	service.blocks = [];
 	
 	service.load = function() {
-		$http({
-			url : 'admin/api-cms-admin/get-all-blocks',
-			method : 'GET'
-		}).success(function(response) {
-			console.log('DroppableBlocksService loading data', response);
-			service.blocks = response;
-		});
+		if (service.blocks.length == 0) { /* do not reload block data if there is already. what about force reload? */
+			$http({
+				url : 'admin/api-cms-admin/get-all-blocks',
+				method : 'GET'
+			}).success(function(response) {
+				console.log('DroppableBlocksService loading data', response);
+				service.blocks = response;
+			});
+		}
 	};
 	
 	return service;
