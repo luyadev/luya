@@ -23,4 +23,8 @@
 	text-align: left;
 	padding: 0 10px;
 	width: 100%;
+
+	&.active {
+		background-color: rgba($black, 0.2);
+	}
 }
