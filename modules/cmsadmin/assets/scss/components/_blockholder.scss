@@ -1,0 +1,58 @@
+.blockholder {
+	position: absolute;
+	bottom: 0;
+	left: 300px;
+	right: 0;
+	overflow: hidden;
+
+	&:hover .blockholder__inner {
+		transform: translateY(0);
+	}
+}
+
+.blockholder__inner {
+	background-color: #4E4E4E;
+	@include clearfix;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+	transform: translateY(63%);
+	transition: 0.25s ease transform;
+}
+
+.blockholder__tabs {
+	background-color: rgba(0, 0, 0, 0.1);
+
+	.indicator {
+		background-color: $blue;
+	}
+}
+
+.blockholder__tab a {
+	color: rgba($white, 0.5);
+
+	&:hover,
+	&.active {
+		color: $white;
+	}
+}
+
+.blockholder__blocks {
+	padding: 20px;
+	height: 84px;
+}
+
+.blockholder__block {
+	background-color: #4E4E4E;
+	cursor: move;
+	display: inline-block;
+	color: rgba($white, 0.5);
+	padding: 4px 10px;
+	border: 2px dotted rgba($white, 0.5);
+	margin-right: 10px;
+	font-size: 20px;
+	transition: 0.25s ease box-shadow;
+	user-select: none;
+
+	&:hover {
+		box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+	}
+}

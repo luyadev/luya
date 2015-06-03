@@ -14,11 +14,13 @@
 	/**
 	 * #COMPONENTS
 	 *		block:			Block styles
+	 *		blockholder:	Styles for the blockholder
 	 *		collapsible:	Accordion styles
      * 		page:			Styles for the page in the cms admin
      *		treeview:		Styles for the treeview
  	 */
 	@import "components/block";
+	@import "components/blockholder";
 	@import "components/collapsible";
 	@import "components/page";
 	@import "components/treeview";

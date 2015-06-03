@@ -53,40 +53,48 @@
 <script type="text/ng-template" id="recursion2.html">
 <div class="collapsible__header collapsible-header"><i class="mdi-navigation-unfold-more"></i> {{placeholder.label}}</div>
 <div class="collapsible__body collapsible-body">
-	<div class="block" ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController">
-		<div class="block__toolbar">
-                	<div class="left">
-				<i class="block__move mdi-action-open-with"></i>
-				<div class="block__title">
-                                	<i class="mdi-editor-format-align-left"></i><p>{{block.name}}</p>
-				</div>
-                        </div>
-                        <div class="right">
-                            <i class="mdi-editor-mode-edit [ waves-effect waves-tale ]" onclick="$(this).parents('.block').toggleClass('block--edit');"></i>
-                            <i class="mdi-navigation-more-vert [ waves-effect waves-tale ]"></i>
-                        </div>
-		</div>
-		<div class="block__body" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
-		<div class="block__edit">
-			<div class="row" ng-repeat="field in block.vars">
-			     <zaa-injector dir="field.type" options="field.options" label="{{field.label}}" grid="12" model="data[field.var]"></zaa-injector>
-			</div>
-			<hr /><h5>Konfigurations Parameter</h5>
-			<div class="row" ng-repeat="cfgField in block.cfgs">
-			    <zaa-injector dir="cfgField.type" options="cfgField.options" label="{{cfgField.label}}" grid="12" model="cfgdata[cfgField.var]"></zaa-injector>
-			</div>
-			<div class="row">
-			    <div class="col s12">
-				<div class="right">
-				    <button class="[ waves-effect waves-light ] btn btn--small teal" ng-click="save()"><i class="mdi-action-done left"></i> Speichern</button>
-				</div>
-			    </div>
-			</div>
-		</div>
-        <ul ng-show="block.__placeholders.length" class="collapsible" data-collapsible="accordion">
-            <li ng-repeat="placeholder in block.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion2.html'"></li>
-        </ul>
-    </div>  
+
+    <div class="page__drop"></div>
+
+    <div ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController">
+        <div class="block">
+            <div class="block__toolbar">
+                        <div class="left">
+                    <i class="block__move mdi-action-open-with"></i>
+                    <div class="block__title">
+                                        <i class="mdi-editor-format-align-left"></i><p>{{block.name}}</p>
+                    </div>
+                            </div>
+                            <div class="right">
+                                <i class="mdi-editor-mode-edit [ waves-effect waves-tale ]" onclick="$(this).parents('.block').toggleClass('block--edit');"></i>
+                                <i class="mdi-navigation-more-vert [ waves-effect waves-tale ]"></i>
+                            </div>
+            </div>
+            <div class="block__body" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
+            <div class="block__edit">
+                <div class="row" ng-repeat="field in block.vars">
+                     <zaa-injector dir="field.type" options="field.options" label="{{field.label}}" grid="12" model="data[field.var]"></zaa-injector>
+                </div>
+                <hr /><h5>Konfigurations Parameter</h5>
+                <div class="row" ng-repeat="cfgField in block.cfgs">
+                    <zaa-injector dir="cfgField.type" options="cfgField.options" label="{{cfgField.label}}" grid="12" model="cfgdata[cfgField.var]"></zaa-injector>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                    <div class="right">
+                        <button class="[ waves-effect waves-light ] btn btn--small teal" ng-click="save()"><i class="mdi-action-done left"></i> Speichern</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <ul ng-show="block.__placeholders.length" class="collapsible" data-collapsible="accordion">
+                <li ng-repeat="placeholder in block.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion2.html'"></li>
+            </ul>
+        </div>
+
+        <div class="page__drop"></div>
+
+    </div>
 </div>
 </script>
 <div ng-controller="NavController" ng-show="!isDeleted">
@@ -174,7 +182,7 @@
                     <div class="row">
                         <div class="col s12">
                             <h4>
-                                {{item.title}} <i class="mdi-navigation-more-vert right [ waves-effect waves-tale ]" dropdown data-constrainwidth="false" data-beloworigin="true" data-activates="pageMenu-{{item.title}}"></i>
+                                {{item.title}} <i class="mdi-navigation-more-vert right [ waves-effect waves-tale ]" dropdown data-constrainwidth="false" data-beloworigin="true" data-activates="pageMenu-{{item.id}}"></i>
                             </h4>
                             <p>{{lang.name}}</p>
                         </div>
@@ -182,7 +190,7 @@
                 </div>
 
                 <!-- Page Settings dropdown, called by javascript -->
-                <ul id="pageMenu-{{item.title}}" class="dropdown-content">
+                <ul id="pageMenu-{{item.id}}" class="dropdown-content">
                     <li><a href="#!">Seiteninformationen bearbeiten</a></li>
                 </ul>
                 <!-- /Page Settings dropdown -->
@@ -205,7 +213,50 @@
             </div>
             <!-- /page -->
         </div>
+
+        <div class="blockholder">
+            <div class="col s12">
+                <div class="blockholder__inner">
+                    <ul class="blockholder__tabs tabs">
+                        <li class="blockholder__tab tab col s3"><a class="active" href="#block-group-1">Inhaltsblöcke</a></li>
+                        <li class="blockholder__tab tab col s3"><a href="#block-group-2">Grafische Elemente</a></li>
+                        <li class="blockholder__tab tab col s3"><a href="#block-group-3">Kalenderblöcke</a></li>
+                    </ul>
+
+                    <div id="block-group-1" class="blockholder__blocks">
+
+                        <div class="blockholder__block">
+                            <i class="mdi-editor-format-align-left"></i>
+                            Text
+                        </div>
+
+                        <div class="blockholder__block">
+                            <i class="mdi-image-image"></i>
+                            Bild
+                        </div>
+
+                        <div class="blockholder__block">
+                            <i class="mdi-editor-format-list-bulleted"></i>
+                            Liste
+                        </div>
+
+                        <div class="blockholder__block">
+                            <i class="mdi-editor-format-list-numbered"></i>
+                            Aufzählung
+                        </div>
+
+                    </div>
+                    <div id="block-group-2" class="blockholder__blocks">Test 2</div>
+                    <div id="block-group-3" class="blockholder__blocks">Test 3</div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script type="text/javascript">
+        $('.blockholder .tabs').tabs();
+    </script>
+
     
     <div ng-controller="DroppableBlocksController">
         {{DroppableBlocksService.blocks | json}}
