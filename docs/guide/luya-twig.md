@@ -26,9 +26,14 @@ asset
 -----
 Get the bundle object from an asset class
 ```
-	<p>{{ asset('my\project\Asset') }}</p>
+	<p>{{ asset('\\my\\project\\Asset') }}</p>
 ```
-(error cause of object to string conversion, use dump() twig function to look inside the object.
+(error cause of object to string conversion, use dump() twig function to look inside the object.)
+
+Real world example for accessing baseUrl:
+```
+	<img src="{{ asset('\\app\\assets\\ResourcesAsset').baseUrl }}/img/asset.jpg" />
+```
 
 filterApply
 -----------
