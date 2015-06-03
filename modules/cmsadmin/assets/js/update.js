@@ -156,6 +156,17 @@ zaa.controller("PagePlaceholderController", function($scope) {
  */
 zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPageBlockItem, AdminClassService) {
 
+	$scope.onStart = function() {
+		$scope.$apply(function() {
+			AdminClassService.setClassSpace('onDragStart', 'page--drop-active');
+		});
+	}
+	
+	$scope.onStop = function() {
+		$scope.$apply(function() {
+			AdminClassService.setClassSpace('onDragStart', '');
+		});
+	}
 	
 	$scope.$watch(function() { return $scope.block.values }, function(n, o) {
 		$scope.data = n;
@@ -169,18 +180,6 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
 	
 	$scope.toggleEdit = function() {
 		$scope.edit = !$scope.edit;
-	}
-
-	$scope.onStart = function() {
-		$scope.$apply(function() {
-			AdminClassService.setClassSpace('onDragStart', 'cms--drag-active');
-		});
-	}
-	
-	$scope.onStop = function() {
-		$scope.$apply(function() {
-			AdminClassService.setClassSpace('onDragStart', '');
-		});
 	}
 	
 	$scope.renderTemplate = function(template, dataVars, cfgVars, block, extras) {		
@@ -251,7 +250,8 @@ zaa.controller("DroppableBlocksController", function($scope, $http, AdminClassSe
 
 	$scope.onStart = function() {
 		$scope.$apply(function() {
-			AdminClassService.setClassSpace('onDragStart', 'cms--drag-active');
+			console.log('on_start');
+			AdminClassService.setClassSpace('onDragStart', 'page--drop-active');
 		});
 	}
 	

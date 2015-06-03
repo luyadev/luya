@@ -96,10 +96,16 @@
         }]);
 
     angular.module("ui.materialize.tabs", [])
-        .directive("tabs", [function(){
+        .directive("tabs", ["$timeout", function($timeout){
             return {
                 link: function (scope, element, attrs) {
-                    element.tabs();
+                	$timeout(function() {
+                		scope.$watch('DroppableBlocksService.blocks', function(n, o) {
+                			if (n.length > 0) {
+                				element.tabs();
+                			}
+                		});
+                    });
                 }
             };
         }]);

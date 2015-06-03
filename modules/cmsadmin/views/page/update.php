@@ -1,62 +1,10 @@
-<style>
-    .test {
-        background-color:red; color:black; padding:20px
-    }
-</style>
 <script type="text/ng-template" id="recursion.html">
-    <div class="col s1">
-        <div class="card blue lighten-5">
-        <span>{{placeholder.label | uppercase}}</span>
-        </div>
-    </div>
-    <div class="col s11">
-        <div ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController" data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{revert: true, handle : '.drag-icon', helper : 'clone'}" ng-model="block">
-        <div ng-controller="DropBlockController" data-sortindex="{{key}}" ng-model="droppedBlock" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'test' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}"></div>
-                    
-        <div class="card" style="margin-bottom:5px; min-height:300px;">
-            <div class="card-content" style="padding:10px;">
-                <span class="card-title activator grey-text text-darken-4">{{block.name}} <i class="mdi-navigation-more-vert right"></i> <i class="mdi-content-select-all right drag-icon"></i></span>
-                <div ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)" />
-            </div>
-            <div class="card-reveal" style="z-index:999999;">
-                <span class="card-title grey-text text-darken-4">{{block.name}} <i class="mdi-navigation-close right"></i></span>
-                <form class="col s12">
-                    <div class="row" ng-repeat="field in block.vars">
-                        <zaa-injector dir="field.type" options="field.options" label="{{field.label}}" grid="12" model="data[field.var]"></zaa-injector>
-                    </div>
-                    <div ng-show="block.cfgs.length > 0">
-                        <h5>Konfigurations Parameter</h5>
-                        <div class="row" ng-repeat="cfgField in block.cfgs">
-                            <zaa-injector dir="cfgField.type" options="cfgField.options" label="{{cfgField.label}}" grid="12" model="cfgdata[cfgField.var]"></zaa-injector>
-                        </div>
-                    </div>
-                    <button type="button" ng-click="save()">Speichern</button>
-                </form>
-            </div>
-            
-        </div>
-        <div>
-            <div ng-show="block.__placeholders.length" class="card blue lighten-4">
-                <div ng-repeat="placeholder in block.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" class="row"></div>
-            </div>
-        </div>
-
-        </div><!-- // CLOSEING ng-controller dropBlockController -->
-
-        <div ng-controller="DropBlockController" ng-model="droppedBlock" data-sortindex="-1" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'test' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}">
-            
-        </div>
-    </div>
-
-</script>
-
-<script type="text/ng-template" id="recursion2.html">
 <div class="collapsible__header collapsible-header"><i class="mdi-navigation-unfold-more"></i> {{placeholder.label}}</div>
 <div class="collapsible__body collapsible-body">
 
-    <div class="page__drop"></div>
+    <div class="page__drop" ></div>
 
-    <div ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController">
+    <div ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController" data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{revert: false, handle : '.block__move', helper : 'clone'}" ng-model="block">
         <div class="block">
             <div class="block__toolbar">
                         <div class="left">
@@ -88,11 +36,11 @@
                 </div>
             </div>
             <ul ng-show="block.__placeholders.length" class="collapsible" data-collapsible="accordion">
-                <li ng-repeat="placeholder in block.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion2.html'"></li>
+                <li ng-repeat="placeholder in block.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'"></li>
             </ul>
         </div>
 
-        <div class="page__drop"></div>
+        <div class="page__drop" ng-controller="DropBlockController" data-sortindex="{{key}}" ng-model="droppedBlock" data-sortindex="-1" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'page__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}"></div>
 
     </div>
 </div>
@@ -177,7 +125,7 @@
             <div class="page" ng-if="item.length == 0">
                 <p>Seite noch nicht übersetzt.</p>
             </div>
-            <div class="page" ng-if="item.length != 0">
+            <div class="page {{AdminClassService.getClassSpace('onDragStart')}}" ng-if="item.length != 0">
                 <div class="page__header">
                     <div class="row">
                         <div class="col s12">
@@ -203,7 +151,7 @@
                         <div class="col s12" ng-switch-when="1" ng-controller="NavItemTypePageController">
 
                             <ul class="collapsible" data-collapsible="accordion">
-                                <li ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion2.html'"></li>
+                                <li ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'"></li>
                             </ul>
 
                         </div>
@@ -216,49 +164,19 @@
 
         <div class="blockholder">
             <div class="col s12">
-                <div class="blockholder__inner">
-                    <ul class="blockholder__tabs tabs">
-                        <li class="blockholder__tab tab col s3"><a class="active" href="#block-group-1">Inhaltsblöcke</a></li>
-                        <li class="blockholder__tab tab col s3"><a href="#block-group-2">Grafische Elemente</a></li>
-                        <li class="blockholder__tab tab col s3"><a href="#block-group-3">Kalenderblöcke</a></li>
+                <div class="blockholder__inner" ng-controller="DroppableBlocksController">
+                    <ul class="blockholder__tabs tabs" tabs>
+                        <li class="blockholder__tab tab col s6" ng-repeat="item in DroppableBlocksService.blocks"><a ng-href="#blocks-{{item.group.id}}">{{item.group.name}}</a></li>
                     </ul>
-
-                    <div id="block-group-1" class="blockholder__blocks">
-
-                        <div class="blockholder__block">
+                    <div ng-repeat="item in DroppableBlocksService.blocks" id="blocks-{{item.group.id}}" class="blockholder__blocks">
+                        <div class="blockholder__block" ng-repeat="block in item.blocks" data-drag="true" jqyoui-draggable="{placeholder: 'keep', index : {{$index}}, onStart : 'onStart', onStop : 'onStop'}" ng-model="item.blocks" data-jqyoui-options="{revert: true, helper : 'clone'}">
                             <i class="mdi-editor-format-align-left"></i>
-                            Text
+                            {{ block.name}} {{block.id}}
                         </div>
-
-                        <div class="blockholder__block">
-                            <i class="mdi-image-image"></i>
-                            Bild
-                        </div>
-
-                        <div class="blockholder__block">
-                            <i class="mdi-editor-format-list-bulleted"></i>
-                            Liste
-                        </div>
-
-                        <div class="blockholder__block">
-                            <i class="mdi-editor-format-list-numbered"></i>
-                            Aufzählung
-                        </div>
-
                     </div>
-                    <div id="block-group-2" class="blockholder__blocks">Test 2</div>
-                    <div id="block-group-3" class="blockholder__blocks">Test 3</div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <script type="text/javascript">
-        $('.blockholder .tabs').tabs();
-    </script>
-
-    
-    <div ng-controller="DroppableBlocksController">
-        {{DroppableBlocksService.blocks | json}}
+        
     </div>
 </div>
