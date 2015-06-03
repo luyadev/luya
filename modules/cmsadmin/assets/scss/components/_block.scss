@@ -4,7 +4,7 @@
 .block {
 	background-color: $block--background;
 	padding: 10px;
-	margin-bottom: 20px;
+	margin: 10px 0;
 	position: relative;
 	overflow: hidden;
 	transition: 0.5s ease padding-top;
@@ -40,6 +40,9 @@
 	// Hover animation
 	transform: translateY(-100%);
 	transition: 0.25s ease transform;
+}
+.page--drop-active .block__toolbar {
+	display: none;
 }
 
 .block__move {
