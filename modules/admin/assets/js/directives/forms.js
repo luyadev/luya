@@ -146,6 +146,7 @@ zaa.directive('zaaDatepicker', function() {
 			$scope.clear = 'Leeren';
 			$scope.close = 'Schliessen';
 		},
+		/*
 		link : function(scope) {
 			scope.$watch('model', function(n) {
 				if (n == undefined) {
@@ -153,10 +154,35 @@ zaa.directive('zaaDatepicker', function() {
 				}
 			})
 		},
+		*/
 		template: function(){
-			return '<div class="input-field col s{{grid}}"><label>{{label}}</label><input input-date  months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}" weekdays-letter="{{ weekdaysLetter }}" today="today"  clear="clear" close="close" format="dd-mm-yyyy" formatSubmit="dd-mm-yyyy" type="text" class="datepicker" ng-model="model"></input></div>';
+			return '<div class="input-field col s{{grid}}"><label>{{label}}</label><input input-date months-full="{{ month }}" format="dd.mm.yyyy" date-format months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}" weekdays-letter="{{ weekdaysLetter }}" today="today"  clear="clear" close="close" type="text" class="datepicker" ng-model="model"></input></div>';
 		}
 	}
+});
+
+zaa.directive('dateFormat', function() {
+	return {
+	    require: 'ngModel',
+	    link: function(scope, element, attr, ngModelCtrl) {
+			ngModelCtrl.$formatters.unshift(function(timestamp) {
+				//console.log('unshift_date', timestamp);
+				if (timestamp == undefined) {
+					var tp = new Date();
+				} else {
+					var tp = new Date(timestamp*1000);
+				}
+				return tp.format('dd.mm.yyyy');
+			});
+			ngModelCtrl.$parsers.push(function(date) {
+				//console.log('push_date', date);
+				md = date.split(".");
+				var eng = md[1] +"/" + md[0] + "/" + md[2];
+				var mil = new Date(eng).getTime();
+				return (mil/1000);
+			});
+	    }
+	};
 });
 
 /*

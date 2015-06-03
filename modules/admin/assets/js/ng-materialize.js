@@ -370,15 +370,18 @@
                     onStop: "&"
                 },
                 link: function (scope, element, attrs, ngModelCtrl) {
-
+                		
+                	/*
                     ngModelCtrl.$formatters.unshift(function (modelValue) {
                         if (modelValue) {
+                        	console.log('ng-materialize unshift', modelValue);
                             var date = new Date(modelValue);
                             return (angular.isDefined(scope.format)) ? date.format(scope.format) : date.format('d mmmm, yyyy');
                         }
                         return null;
                     });
-
+					*/
+                	
                     var monthsFull = (angular.isDefined(scope.monthsFull)) ? scope.$eval(scope.monthsFull) : undefined,
                         monthsShort = (angular.isDefined(scope.monthsShort)) ? scope.$eval(scope.monthsShort) : undefined,
                         weekdaysFull = (angular.isDefined(scope.weekdaysFull)) ? scope.$eval(scope.weekdaysFull) : undefined,
