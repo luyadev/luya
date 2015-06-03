@@ -2,6 +2,9 @@
 
 namespace cmsadmin\apis;
 
+use cmsadmin\models\Block;
+use cmsadmin\models\BlockGroup;
+
 /**
  * api-cms-admin.
  *
@@ -11,6 +14,19 @@ namespace cmsadmin\apis;
  */
 class AdminController extends \admin\base\RestController
 {
+    public function actionGetAllBlocks()
+    {
+        $groups = [];
+        foreach (BlockGroup::find()->asArray()->all() as $group) {
+            $groups[] = [
+                'group' => $group,
+                'blocks' => Block::find()->where(['group_id' => $group['id']])->asArray()->all(),
+            ];
+        }
+        return $groups;
+    }
+    
+    /*
     public function actionGetAllBlocks()
     {
         $data = [];
@@ -26,4 +42,5 @@ class AdminController extends \admin\base\RestController
 
         return $data;
     }
+    */
 }
