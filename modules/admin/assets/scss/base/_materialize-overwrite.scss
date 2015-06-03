@@ -3,8 +3,19 @@
  */
 
 /**
- * Rows souldn't have a margin-bottom
+ * Rows sould not have a margin-bottom by default
  */
 .row {
 	margin-bottom: 0;
+}
+
+/**
+ * In forms, row shoul have 10px margin-bottom, except the last one
+ */
+form .row {
+	margin-bottom: 5px;
+
+	&:last-of-type {
+		margin-bottom: 0;
+	}
 }

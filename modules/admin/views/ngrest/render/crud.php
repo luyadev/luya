@@ -68,64 +68,108 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
     </tbody>
     </table>
 </div>
+
 <!-- CREATE MODAL -->
 <div id="createModal" class="modal">
-    <form role="form" ng-submit="submitCreate()">
-        <div class="modal-content">
-            <?php foreach ($crud->create as $k => $item): ?>
-            <div class="row">
-                <? foreach($crud->createElements($item, $crud::TYPE_CREATE) as $element): ?>
-                    <?= $element['html']; ?>
-                <? endforeach; ?>
+
+    <!-- MODAL HEADER -->
+    <div class="modal__header">
+        <div class="row">
+            <div class="col s12">
+                <h5>
+                    <i class="mdi-action-note-add"></i> Datensatz hinzufügen
+                    <i class="mdi-navigation-close right" ng-click="closeCreate()"></i>
+                </h5>
             </div>
-            <? endforeach; ?>
-            <!-- 
-                <div style="background-color:red; padding:20px;" ng-show="createErrors.length">
-                    <ul>
-                        <li ng-repeat="error in createErrors" style="padding:10px;"><strong>{{error.field}}</strong>: {{error.message}}</li>
-                    </ul>
+        </div>
+    </div>
+    <!-- /MODAL HEADER -->
+
+    <!-- MODAL CONTENT -->
+    <div class="modal__content">
+        <form role="form" ng-submit="submitCreate()">
+            <?php foreach ($crud->create as $k => $item): ?>
+                <div class="row">
+                    <? foreach($crud->createElements($item, $crud::TYPE_CREATE) as $element): ?>
+                        <?= $element['html']; ?>
+                    <? endforeach; ?>
                 </div>
-             -->
+            <? endforeach; ?>
+        </form>
+    </div>
+    <!-- /MODAL CONTENT -->
+
+    <!-- MODAL FOOTER -->
+    <div class="modal__footer">
+        <div class="row">
+            <div class="col s12">
+                <div class="right">
+                    <button class="btn waves-effect waves-light" type="submit" ng-disabled="createForm.$invalid">
+                        <i class="mdi-content-send"></i> Erstellen
+                    </button>
+                    <button class="btn waves-effect waves-light" type="button" ng-click="closeCreate()">
+                        <i class="mdi-navigation-cancel"></i> Abbrechen
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="modal-footer">
-            <button class="btn waves-effect waves-light" type="submit" ng-disabled="createForm.$invalid">
-                <i class="mdi-content-send"></i> Hinzufügen
-            </button>
-            <button class="btn waves-effect waves-light" type="button" ng-click="closeCreate()">
-                <i class="mdi-navigation-cancel"></i> Cancel
-            </button>
-        </div>
-    </form>
+    </div>
+    <!-- /MODAL FOOTER -->
+
 </div>
+<!-- /CREATE MODAL -->
+
 <!-- UPDATE MODAL -->
 <div id="updateModal" class="modal">
-    <form role="form" ng-submit="submitUpdate()">
-        <div class="modal-content">
-            <?php foreach ($crud->update as $k => $item): ?>
-            <div class="row">
-                <? foreach($crud->createElements($item, $crud::TYPE_UPDATE) as $element): ?>
-                    <?= $element['html']; ?>
-                <? endforeach; ?>
+
+    <!-- MODAL HEADER -->
+    <div class="modal__header">
+        <div class="row">
+            <div class="col s12">
+                <h5>
+                    <i class="mdi-editor-mode-edit"></i> Bearbeiten
+                    <i class="mdi-navigation-close right" ng-click="closeUpdate()"></i>
+                </h5>
             </div>
-            <? endforeach; ?>
-            <!-- 
-                <div style="background-color:red; padding:20px;" ng-show="createErrors.length">
-                    <ul>
-                        <li ng-repeat="error in updateErrors" style="padding:10px;"><strong>{{error.field}}</strong>: {{error.message}}</li>
-                    </ul>
+        </div>
+    </div>
+    <!-- /MODAL HEADER -->
+
+    <!-- MODAL CONTENT -->
+    <div class="modal__content">
+        <form role="form" ng-submit="submitUpdate()">
+            <?php foreach ($crud->update as $k => $item): ?>
+                <div class="row">
+                    <? foreach($crud->createElements($item, $crud::TYPE_UPDATE) as $element): ?>
+                        <?= $element['html']; ?>
+                    <? endforeach; ?>
                 </div>
-             -->
+            <? endforeach; ?>
+        </form>
+    </div>
+    <!-- /MODAL CONTENT -->
+
+    <!-- MODAL FOOTER -->
+    <div class="modal__footer">
+        <div class="row">
+            <div class="col s12">
+                <div class="right">
+                    <button class="btn waves-effect waves-light" type="submit" ng-disabled="updateForm.$invalid">
+                        <i class="mdi-content-send"></i> Speichern
+                    </button>
+                    <button class="btn waves-effect waves-light" type="button" ng-click="closeUpdate()">
+                        <i class="mdi-navigation-cancel"></i> Cancel
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="modal-footer">
-            <button class="btn waves-effect waves-light" type="submit" ng-disabled="createForm.$invalid">
-                <i class="mdi-content-send"></i> Speichern
-            </button>
-            <button class="btn waves-effect waves-light" type="button" ng-click="closeUpdate()">
-                <i class="mdi-navigation-cancel"></i> Cancel
-            </button>
-        </div>
-    </form>
+    </div>
+    <!-- /MODAL FOOTER -->
+
 </div>
+<!-- /UPDATE MODAL -->
+
+
 <!-- STRAP MODAL -->
 <div id="strapModal" class="modal">
     <div class="modal-content" compile-html ng-bind-html="data.strap.content"></div>

@@ -8,7 +8,6 @@ class AssetAdmin extends \yii\web\AssetBundle
 
     public $css = [
         'css/admin.css',    // Admin styles
-        'css/cms.css',      // CMS Styles
         //'//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css',
         //'css/main.css',
         //'css/style.css',
