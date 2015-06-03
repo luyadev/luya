@@ -1,8 +1,8 @@
 <script type="text/ng-template" id="recursion.html">
 <div class="collapsible__header collapsible-header"><i class="mdi-navigation-unfold-more"></i> {{placeholder.label}}</div>
 <div class="collapsible__body collapsible-body">
-
-    <div class="page__drop" ></div>
+    
+    <div class="page__drop"  ng-controller="DropBlockController" ng-model="droppedBlock" data-sortindex="0" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'page__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}"></div>
 
     <div ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController" data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{revert: false, handle : '.block__move', helper : 'clone'}" ng-model="block">
         <div class="block">
@@ -39,8 +39,7 @@
                 <li ng-repeat="placeholder in block.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'"></li>
             </ul>
         </div>
-
-        <div class="page__drop" ng-controller="DropBlockController" data-sortindex="{{key}}" ng-model="droppedBlock" data-sortindex="-1" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'page__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}"></div>
+        <div class="page__drop" ng-controller="DropBlockController" data-sortindex="{{key+1}}" ng-model="droppedBlock" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'page__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}"></div>
 
     </div>
 </div>
@@ -169,9 +168,8 @@
                         <li class="blockholder__tab tab col s6" ng-repeat="item in DroppableBlocksService.blocks"><a ng-href="#blocks-{{item.group.id}}">{{item.group.name}}</a></li>
                     </ul>
                     <div ng-repeat="item in DroppableBlocksService.blocks" id="blocks-{{item.group.id}}" class="blockholder__blocks">
-                        <div class="blockholder__block" ng-repeat="block in item.blocks" data-drag="true" jqyoui-draggable="{placeholder: 'keep', index : {{$index}}, onStart : 'onStart', onStop : 'onStop'}" ng-model="item.blocks" data-jqyoui-options="{revert: true, helper : 'clone'}">
-                            <i class="mdi-editor-format-align-left"></i>
-                            {{ block.name}} {{block.id}}
+                        <div class="blockholder__block" ng-repeat="block in item.blocks" data-drag="true" jqyoui-draggable="{placeholder: 'keep', index : {{$index}}, onStart : 'onStart', onStop : 'onStop'}" ng-model="item.blocks" data-jqyoui-options="{revert: false, helper : 'clone'}">
+                            <i class="mdi-editor-format-align-left"></i> {{ block.name}} 
                         </div>
                     </div>
                 </div>

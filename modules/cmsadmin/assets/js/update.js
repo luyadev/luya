@@ -158,7 +158,7 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
 
 	$scope.onStart = function() {
 		$scope.$apply(function() {
-			AdminClassService.setClassSpace('onDragStart', 'page--drop-active');
+			AdminClassService.setClassSpace('onDragStart', 'page--drag-active');
 		});
 	}
 	
@@ -250,8 +250,7 @@ zaa.controller("DroppableBlocksController", function($scope, $http, AdminClassSe
 
 	$scope.onStart = function() {
 		$scope.$apply(function() {
-			console.log('on_start');
-			AdminClassService.setClassSpace('onDragStart', 'page--drop-active');
+			AdminClassService.setClassSpace('onDragStart', 'page--drag-active');
 		});
 	}
 	
