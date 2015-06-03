@@ -29,9 +29,6 @@ class HeadingBlock extends \cmsadmin\base\Block
             'cfgs' => [
                 ['var' => 'css_class', 'label' => 'CSS Klasse', 'type' => 'zaa-text'],
             ],
-            'placeholders' => [
-                ['var' => 'subito', 'label' => 'Unter']
-            ]
         ];
     }
 
