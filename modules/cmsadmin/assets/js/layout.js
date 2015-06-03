@@ -32,7 +32,7 @@ zaa.service('MenuService', function($http) {
 	return service;
 });
 
-zaa.controller("CmsMenuTreeController", function($scope, $state, $http, MenuService, DroppableBlocksService) {
+zaa.controller("CmsMenuTreeController", function($scope, $state, MenuService, DroppableBlocksService) {
     
 	$scope.menu = [];
 	
@@ -42,35 +42,15 @@ zaa.controller("CmsMenuTreeController", function($scope, $state, $http, MenuServ
     	$scope.menu = newValue;
     });
     
-    /*
-     * moved to: 
-     
-    $scope.delete = function(dataItem) {
-    	console.log(dataItem);
-    	if (confirm('your are sure you want to delete ' + dataItem.title )) {
-    		$http.get('admin/api-cms-nav/delete', { params : { navId : dataItem.id }}).success(function(response) {
-    			MenuService.refresh();
-    		});
+    $scope.isCurrentElement = function(navId) {
+    	if ($state.params.navId == navId) {
+    		return true;
     	}
+    	
+    	return false;
     }
-    
-    $scope.toggleHidden = function(dataItem) {
-    
-    	$http.get('admin/api-cms-nav/toggle-hidden', { params : { navId : dataItem.id }}).success(function(response) {
-			MenuService.refresh();
-		});
-    }
-	*/
     
     $scope.go = function(navId) {
     	$state.go('custom.cmsedit', { navId : navId });
     };
-    
-    /*
-    $scope.toggleChildren = function($event) {
-        // todo: Remove parentNode.parentNode
-        // todo: Not really the "angular way"?
-        $event.currentTarget.parentNode.parentNode.classList.toggle( "treeview__item--is-open" );
-    }
-    */
 });
