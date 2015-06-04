@@ -12,6 +12,10 @@ $config = [
         'authManager' => [
             'class' => 'yii\rbaac\PhpManager',
         ],
+        'assetManager' => [
+            'class' => 'yii\web\AssetManager',
+            'forceCopy' => YII_DEBUG  
+        ],
         'request' => [
             'cookieValidationKey' => 'cookeivalidationkey',
             'enableCsrfValidation' => false,
