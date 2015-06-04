@@ -23,7 +23,7 @@ class Config implements ConfigInterface
 
     private $pointer = [];
 
-    private $pointersMap = ['list', 'create', 'update', 'delete', 'activeWindow'];
+    private $pointersMap = ['list', 'create', 'update', 'delete', 'aw'];
 
     private $options = [];
 
@@ -153,8 +153,8 @@ class Config implements ConfigInterface
 
     public function register($activeWindowObject, $alias)
     {
-        if ($this->pointer['key'] !== 'activeWindow') {
-            throw new \Exception('register method can only be used in activeWindow pointer context.');
+        if ($this->pointer['key'] !== 'aw') {
+            throw new \Exception('register method can only be used in aw pointer context.');
         }
         $activeWindowClass = get_class($activeWindowObject);
         $activeWindowHash = sha1($this->getNgRestConfigHash().$activeWindowClass);

@@ -172,6 +172,6 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
 
 <!-- activeWindow MODAL -->
 <div id="activeWindowModal" class="modal">
-    <div class="modal-content" compile-html ng-bind-html="data.activeWindow.content"></div>
+    <div class="modal-content" compile-html ng-bind-html="data.aw.content"></div>
 </div>
 </div>

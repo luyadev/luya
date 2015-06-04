@@ -17,7 +17,7 @@ class RenderActiveWindowCallback extends RenderAbstract implements RenderInterfa
 {
     public function render()
     {
-        $activeWindows = $this->config->getKey('activeWindow');
+        $activeWindows = $this->config->getKey('aw');
         $obj = $activeWindows[$_GET['activeWindowHash']]['object'];
 
         $function = 'callback'.ucfirst($_GET['activeWindowCallback']);

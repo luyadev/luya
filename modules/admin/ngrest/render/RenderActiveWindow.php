@@ -39,7 +39,7 @@ class RenderActiveWindow extends RenderAbstract implements RenderInterface
 
     public function findActiveWindow($activeWindowHash)
     {
-        $activeWindows = $this->config->getKey('activeWindow');
+        $activeWindows = $this->config->getKey('aw');
         if (array_key_exists($activeWindowHash, $activeWindows)) {
             return $activeWindows[$activeWindowHash];
         }

@@ -48,18 +48,18 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 		})
 		.success(function(data) {
 			$scope.openActiveWindow();
-			$scope.data.activeWindow.itemId = id;
-			$scope.data.activeWindow.configCallbackUrl = $scope.config.activeWindowCallbackUrl;
-			$scope.data.activeWindow.configHash = $scope.config.ngrestConfigHash;
-			$scope.data.activeWindow.hash = activeWindowId;
-			$scope.data.activeWindow.id = activeWindowId; /* @todo: remove! BUT: equal to above, but still need in jquery accessing */
-			$scope.data.activeWindow.content = $sce.trustAsHtml(data);
+			$scope.data.aw.itemId = id;
+			$scope.data.aw.configCallbackUrl = $scope.config.activeWindowCallbackUrl;
+			$scope.data.aw.configHash = $scope.config.ngrestConfigHash;
+			$scope.data.aw.hash = activeWindowId;
+			$scope.data.aw.id = activeWindowId; /* @todo: remove! BUT: equal to above, but still need in jquery accessing */
+			$scope.data.aw.content = $sce.trustAsHtml(data);
 			//dispatchEvent('onCrudActiveWindowLoad');
 		})
 	}
 
 	$scope.getActiveWindowCallbackUrl = function(callback) {
-		return $scope.data.activeWindow.configCallbackUrl + '?activeWindowCallback=' + callback + '&ngrestConfigHash=' + $scope.data.activeWindow.configHash + '&activeWindowHash=' + $scope.data.activeWindow.hash;
+		return $scope.data.aw.configCallbackUrl + '?activeWindowCallback=' + callback + '&ngrestConfigHash=' + $scope.data.aw.configHash + '&activeWindowHash=' + $scope.data.aw.hash;
 	}
 	
 	$scope.sendActiveWindowCallback = function(callback, data) {
@@ -175,7 +175,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 	$scope.data = {
 		create : {},
 		update : {},
-		activeWindow : {},
+		aw : {},
 		list : {},
 		updateId : 0
 	};

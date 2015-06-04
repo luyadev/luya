@@ -89,7 +89,7 @@ class RenderCrud extends RenderAbstract implements RenderInterface
 
     public function getActiveWindows()
     {
-        return ($activeWindows = $this->config->getKey('activeWindow')) ? $activeWindows : [];
+        return ($activeWindows = $this->config->getKey('aw')) ? $activeWindows : [];
     }
 
     /**
