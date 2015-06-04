@@ -18,6 +18,21 @@ zaa.directive('zaaInjector', function($compile) {
 	}
 });
 
+zaa.directive('zaaWysiwyg', function() {
+	return {
+		restrict : 'E',
+		scope : {
+			'model' : '=',
+			'options' : '=',
+			'label' : '@label',
+			'grid' : '@grid'
+		},
+		template : function() {
+			return '<textarea ng-wig="model"></textarea>';
+		}
+	}
+});
+
 zaa.directive('zaaText', function(){
 	return {
 		restrict : 'E',

@@ -6,16 +6,14 @@
         "bower-asset/jquery" : "2.1.*@stable",
         "bower-asset/jquery-ui" : "1.*@stable",
         "bower-asset/angular" : "1.3.10@stable",
-        "bower-asset/angular-bootstrap" : "0.13.*@stable",
         "bower-asset/angular-i18n" : "1.3.10@stable",
         "bower-asset/angular-resource": "1.3.10@stable",
         "bower-asset/angular-ui-router" : "0.2.*@stable",
         "bower-asset/angular-loading-bar" : "0.*@stable",
-        "bower-asset/angular-ui-ace" : "0.*@stable",
         "bower-asset/angular-dragdrop" : "1.*@stable",
-        "bower-asset/ace-builds" : "1.1.8@stable",
         "bower-asset/twig.js" : "0.7.2@stable",
         "bower-asset/ng-flow" : "2.6.*@stable",
+        "bower-asset/ng-wig" : "1.1.9",
         "imagine/imagine": "~0.5.0"
 	},
 	"autoload" : {
