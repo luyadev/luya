@@ -64,7 +64,7 @@ class Group extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
-        $config->activeWindow->register(new \admin\aws\GroupAuth(), 'Berechtigungen');
+        $config->aw->register(new \admin\aws\GroupAuth(), 'Berechtigungen');
 
         $config->list->field('name', 'Name')->text()->required();
         $config->list->field('text', 'Beschreibung')->textarea();

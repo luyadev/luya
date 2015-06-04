@@ -20,7 +20,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
 
     public function ngRestConfig($config)
     {
-        $config->activeWindow->register(new \admin\aws\ChangePassword(), 'Passwort ändern');
+        $config->aw->register(new \admin\aws\ChangePassword(), 'Passwort ändern');
 
         //$config->activeWindow->register(new \admin\aws\Delete(), 'Löschen');
 
