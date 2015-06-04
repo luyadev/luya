@@ -21,6 +21,4 @@ class Asset extends \yii\web\AssetBundle
     public $depends = [
         'admin\AssetAdmin',
     ];
-
-    public $publishOptions = ['forceCopy' => true];
 }

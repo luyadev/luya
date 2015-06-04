@@ -38,6 +38,4 @@ class AssetAdmin extends \yii\web\AssetBundle
     public $depends = [
         'admin\AssetBower',
     ];
-
-    public $publishOptions = ['forceCopy' => true];
 }
