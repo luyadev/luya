@@ -160,13 +160,13 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
 		$scope.$apply(function() {
 			AdminClassService.setClassSpace('onDragStart', 'page--drag-active');
 		});
-	}
+	};
 	
 	$scope.onStop = function() {
 		$scope.$apply(function() {
 			AdminClassService.setClassSpace('onDragStart', '');
 		});
-	}
+	};
 	
 	$scope.$watch(function() { return $scope.block.values }, function(n, o) {
 		$scope.data = n;
@@ -180,7 +180,7 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
 	
 	$scope.toggleEdit = function() {
 		$scope.edit = !$scope.edit;
-	}
+	};
 	
 	$scope.renderTemplate = function(template, dataVars, cfgVars, block, extras) {		
 		if (template == undefined) {
@@ -198,13 +198,17 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
 		});
 		
 		return $sce.trustAsHtml(content);
-	}
+	};
 	
 	$scope.removeBlock = function(block) {
-		ApiCmsNavItemPageBlockItem.delete({ id : block.id }, function(rsp) {
-			$scope.PagePlaceholderController.NavItemTypePageController.refresh();
-		});
-	}
+        if (confirm('Block «' + block.name + '» wirklich löschen?')) {
+            ApiCmsNavItemPageBlockItem.delete({id: block.id}, function (rsp) {
+                $scope.PagePlaceholderController.NavItemTypePageController.refresh();
+
+                Materialize.toast('Block «' + block.name + '» wurde gelöscht!', 3000);
+            });
+        }
+	};
 	
 	$scope.save = function () {
 		ApiCmsNavItemPageBlockItem.update({ id : $scope.block.id }, $.param({json_config_values : JSON.stringify($scope.data), json_config_cfg_values : JSON.stringify($scope.cfgdata) }), function(rsp) {

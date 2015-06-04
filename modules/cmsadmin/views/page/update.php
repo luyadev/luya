@@ -15,7 +15,8 @@
                             </div>
                             <div class="right">
                                 <i class="mdi-editor-mode-edit [ waves-effect waves-tale ]" onclick="$(this).parents('.block').toggleClass('block--edit');"></i>
-                                <i class="mdi-navigation-more-vert [ waves-effect waves-tale ]"></i>
+                                <i class="mdi-action-delete [ waves-effect waves-tale ]" ng-click="removeBlock(block)"></i>
+                                <!--<i class="mdi-navigation-more-vert [ waves-effect waves-tale ]"></i>-->
                             </div>
             </div>
             <div class="block__body" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
