@@ -1,14 +1,16 @@
 <?php
 
-namespace admin\straps;
+namespace admin\aws;
 
-class Gallery extends \admin\ngrest\StrapAbstract
+class Gallery extends \admin\ngrest\base\ActiveWindow
 {
     public $refTableName = null;
 
     public $imageIdFieldName = null;
 
     public $refFieldName = null;
+    
+    public $module = 'admin';
 
     /**
      * based on the example table.
@@ -29,9 +31,9 @@ class Gallery extends \admin\ngrest\StrapAbstract
         $this->refFieldName = $refFieldName;
     }
 
-    public function render()
+    public function index()
     {
-        return $this->getView()->render('@admin/views/strap/gallery.php');
+        return $this->render('index');
     }
 
     public function callbackImages()

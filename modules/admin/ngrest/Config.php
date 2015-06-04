@@ -23,7 +23,7 @@ class Config implements ConfigInterface
 
     private $pointer = [];
 
-    private $pointersMap = ['list', 'create', 'update', 'delete', 'strap'];
+    private $pointersMap = ['list', 'create', 'update', 'delete', 'activeWindow'];
 
     private $options = [];
 
@@ -151,21 +151,21 @@ class Config implements ConfigInterface
         $this->config[$this->pointer['key']] = $temp;
     }
 
-    public function register($strapObject, $alias)
+    public function register($activeWindowObject, $alias)
     {
-        if ($this->pointer['key'] !== 'strap') {
-            throw new \Exception('register method can only be used in strap pointer context.');
+        if ($this->pointer['key'] !== 'activeWindow') {
+            throw new \Exception('register method can only be used in activeWindow pointer context.');
         }
-        $strapClass = get_class($strapObject);
-        $strapHash = sha1($this->getNgRestConfigHash().$strapClass);
-        $this->config[$this->pointer['key']][$strapHash] = [
-            'object' => $strapObject,
-            'strapHash' => $strapHash,
-            'class' => $strapClass,
+        $activeWindowClass = get_class($activeWindowObject);
+        $activeWindowHash = sha1($this->getNgRestConfigHash().$activeWindowClass);
+        $this->config[$this->pointer['key']][$activeWindowHash] = [
+            'object' => $activeWindowObject,
+            'activeWindowHash' => $activeWindowHash,
+            'class' => $activeWindowClass,
             'alias' => $alias,
             'on' => [], // remove fully
         ];
-        $this->pointer['register'] = $strapHash;
+        $this->pointer['register'] = $activeWindowHash;
 
         return $this;
     }

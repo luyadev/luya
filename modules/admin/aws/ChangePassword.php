@@ -1,17 +1,16 @@
 <?php
 
-namespace admin\straps;
+namespace admin\aws;
 
-use admin\ngrest\StrapAbstract;
-
-class ChangePassword extends StrapAbstract
+class ChangePassword extends \admin\ngrest\base\ActiveWindow
 {
-    public function render()
+    public $module = 'admin';
+    
+    public function index()
     {
-        return $this->getView()->render('@admin/views/strap/changePassword', array(
-            'itemId' => $this->getItemId(),
-            'strap' => $this,
-        ));
+        return $this->render('index', [
+            'itemId' => $this->getItemId()
+        ]);
     }
 
     public function callbackChangeAsync($newpass, $newpasswd)

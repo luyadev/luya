@@ -31,7 +31,7 @@ class RenderCrud extends RenderAbstract implements RenderInterface
         return $view->render('@admin/views/ngrest/render/crud.php', array(
             'crud' => $this,
             'config' => $this->config,
-            'strapCallbackUrl' => 'admin/ngrest/callback',
+            'activeWindowCallbackUrl' => 'admin/ngrest/callback',
         ));
     }
 
@@ -59,12 +59,12 @@ class RenderCrud extends RenderAbstract implements RenderInterface
                 'label' => '',
             ];
         }
-        // get all straps assign to the crud
-        foreach ($this->getStraps() as $strap) {
+        // get all activeWindows assign to the crud
+        foreach ($this->getActiveWindows() as $activeWindow) {
             $buttons[] = [
-                'ngClick' => 'getStrap(\''.$strap['strapHash'].'\', item.'.$this->config->getRestPrimaryKey().', $event)',
+                'ngClick' => 'getActiveWindow(\''.$activeWindow['activeWindowHash'].'\', item.'.$this->config->getRestPrimaryKey().', $event)',
                 'icon' => '',
-                'label' => $strap['alias'],
+                'label' => $activeWindow['alias'],
             ];
         }
 
@@ -87,9 +87,9 @@ class RenderCrud extends RenderAbstract implements RenderInterface
         return $fields;
     }
 
-    public function getStraps()
+    public function getActiveWindows()
     {
-        return ($straps = $this->config->getKey('strap')) ? $straps : [];
+        return ($activeWindows = $this->config->getKey('activeWindow')) ? $activeWindows : [];
     }
 
     /**

@@ -13,14 +13,14 @@ use admin\ngrest\RenderInterface;
  *
  * @author nadar
  */
-class RenderStrapCallback extends RenderAbstract implements RenderInterface
+class RenderActiveWindowCallback extends RenderAbstract implements RenderInterface
 {
     public function render()
     {
-        $straps = $this->config->getKey('strap');
-        $obj = $straps[$_GET['strapHash']]['object'];
+        $activeWindows = $this->config->getKey('activeWindow');
+        $obj = $activeWindows[$_GET['activeWindowHash']]['object'];
 
-        $function = 'callback'.ucfirst($_GET['strapCallback']);
+        $function = 'callback'.ucfirst($_GET['activeWindowCallback']);
 
         $args = Yii::$app->request->post();
 

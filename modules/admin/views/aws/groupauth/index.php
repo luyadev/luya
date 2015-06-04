@@ -39,12 +39,12 @@
 <button style="margin-top:20px;" type="submit" name="submit" class="btn">Speichern</button>
 </form>
 <script>
-strapRegisterForm('#updateSubscription', 'UpdateSubscription', function(json) {
+activeWindowRegisterForm('#updateSubscription', 'UpdateSubscription', function(json) {
 	if (json.error) {
 		alert('error while update, see console .log');
 	} else {
 		 Materialize.toast('Die neuen Gruppen Berechtigungen wurden gespeichert.', 3000) // 4000 is the duration of the toast
-		 $('#strapModal').closeModal();
+		 $('#activeWindowModal').closeModal();
 	}
 });
 

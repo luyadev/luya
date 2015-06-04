@@ -21,13 +21,13 @@
 
 <script>
 $('.addEffect').each(function(value) {
-    strapRegisterForm($(this), 'addEffect', function(json) {
+	activeWindowRegisterForm($(this), 'addEffect', function(json) {
         loadChain();
     });
 });
 
 var loadChain = function() {
-	strapAsyncGet('loadEffects', {}, function(json) {
+	activeWindowAsyncGet('loadEffects', {}, function(json) {
 	    $(json.transport).each(function(key, item) {
 		    $('#chain').html(item['html']);
 	    });

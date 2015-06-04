@@ -42,31 +42,31 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 		console.log('data', $scope.data);
 	}
 	
-	$scope.getStrap = function (strapId, id, $event) {
-		$http.post('admin/ngrest/render', $.param({ itemId : id, strapHash : strapId , ngrestConfigHash : $scope.config.ngrestConfigHash }), {
+	$scope.getActiveWindow = function (activeWindowId, id, $event) {
+		$http.post('admin/ngrest/render', $.param({ itemId : id, activeWindowHash : activeWindowId , ngrestConfigHash : $scope.config.ngrestConfigHash }), {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 		})
 		.success(function(data) {
-			$scope.openStrap();
-			$scope.data.strap.itemId = id;
-			$scope.data.strap.configCallbackUrl = $scope.config.strapCallbackUrl;
-			$scope.data.strap.configHash = $scope.config.ngrestConfigHash;
-			$scope.data.strap.hash = strapId;
-			$scope.data.strap.id = strapId; /* @todo: remove! BUT: equal to above, but still need in jquery accessing */
-			$scope.data.strap.content = $sce.trustAsHtml(data);
-			//dispatchEvent('onCrudStrapLoad');
+			$scope.openActiveWindow();
+			$scope.data.activeWindow.itemId = id;
+			$scope.data.activeWindow.configCallbackUrl = $scope.config.activeWindowCallbackUrl;
+			$scope.data.activeWindow.configHash = $scope.config.ngrestConfigHash;
+			$scope.data.activeWindow.hash = activeWindowId;
+			$scope.data.activeWindow.id = activeWindowId; /* @todo: remove! BUT: equal to above, but still need in jquery accessing */
+			$scope.data.activeWindow.content = $sce.trustAsHtml(data);
+			//dispatchEvent('onCrudActiveWindowLoad');
 		})
 	}
 
-	$scope.getStrapCallbackUrl = function(callback) {
-		return $scope.data.strap.configCallbackUrl + '?strapCallback=' + callback + '&ngrestConfigHash=' + $scope.data.strap.configHash + '&strapHash=' + $scope.data.strap.hash;
+	$scope.getActiveWindowCallbackUrl = function(callback) {
+		return $scope.data.activeWindow.configCallbackUrl + '?activeWindowCallback=' + callback + '&ngrestConfigHash=' + $scope.data.activeWindow.configHash + '&activeWindowHash=' + $scope.data.activeWindow.hash;
 	}
 	
-	$scope.sendStrapCallback = function(callback, data) {
-		$http.post($scope.getStrapCallbackUrl(callback), $.param(data), {
+	$scope.sendActiveWindowCallback = function(callback, data) {
+		$http.post($scope.getActiveWindowCallbackUrl(callback), $.param(data), {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 		}).success(function(response) {
-			$scope.strapCallbackResponse = response;
+			$scope.activeWindowCallbackResponse = response;
 		});
 	}
 	
@@ -78,7 +78,6 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 		$scope.data.updateId = id;
 		$http.get($scope.config.apiEndpoint + '/'+id+'?' + $scope.config.apiUpdateQueryString)
 		.success(function(data) {
-			//$scope.toggler.strap = false;
 			$scope.data.update = data;
             //dispatchEvent('onCrudUpdate');
             $('#updateModal').openModal({
@@ -100,12 +99,12 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 		$('#createModal').closeModal();
 	}
 	
-	$scope.openStrap = function() {
-		$('#strapModal').openModal();
+	$scope.openActiveWindow = function() {
+		$('#activeWindowModal').openModal();
 	}
 	
-	$scope.closeStrap = function() {
-		$('#strapModal').closeModal();
+	$scope.closeActiveWindow = function() {
+		$('#activeWindowModal').closeModal();
 	}
 	
 	$scope.openCreate = function () {
@@ -176,7 +175,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 	$scope.data = {
 		create : {},
 		update : {},
-		strap : {},
+		activeWindow : {},
 		list : {},
 		updateId : 0
 	};

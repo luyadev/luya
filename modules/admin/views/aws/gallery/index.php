@@ -1,5 +1,5 @@
-<div ng-controller="StrapGalleryController">
-    <div class="card-panel" flow-init="{target: getStrapCallbackUrl('upload') , testChunks:false}" flow-files-submitted="$flow.upload()" flow-complete="loadImages()">
+<div ng-controller="ActiveWindowGalleryController">
+    <div class="card-panel" flow-init="{target: getActiveWindowCallbackUrl('upload') , testChunks:false}" flow-files-submitted="$flow.upload()" flow-complete="loadImages()">
         <h4>Hochladen</h4   >
         <div class="row">
             <div class="s6">

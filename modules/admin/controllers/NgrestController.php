@@ -28,10 +28,10 @@ class NgrestController extends \admin\base\Controller
     {
         $config = NgRest::findConfig($_POST['ngrestConfigHash']);
 
-        $render = new \admin\ngrest\render\RenderStrap();
+        $render = new \admin\ngrest\render\RenderActiveWindow();
 
         $render->setItemId($_POST['itemId']);
-        $render->setStrapHash($_POST['strapHash']);
+        $render->setActiveWindowHash($_POST['activeWindowHash']);
 
         $ngrest = new NgRest($config);
 
@@ -42,7 +42,7 @@ class NgrestController extends \admin\base\Controller
     {
         $config = NgRest::findConfig($_GET['ngrestConfigHash']);
 
-        $render = new \admin\ngrest\render\RenderStrapCallback();
+        $render = new \admin\ngrest\render\RenderActiveWindowCallback();
 
         $ngrest = new NgRest($config);
 

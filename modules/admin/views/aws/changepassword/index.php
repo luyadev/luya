@@ -16,7 +16,7 @@
 <button type="submit" name="submit">SAVE</button>
 </form>
 <script>
-strapRegisterForm('#changePassword', 'ChangeAsync', function(json) {
+activeWindowRegisterForm('#changePassword', 'ChangeAsync', function(json) {
     if (json.error) {
         $('#responseError').show();
         var text = '';

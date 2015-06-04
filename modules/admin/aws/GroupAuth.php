@@ -1,10 +1,12 @@
 <?php
 
-namespace admin\straps;
+namespace admin\aws;
 
-class GroupAuth extends \admin\ngrest\StrapAbstract
+class GroupAuth extends \admin\ngrest\base\ActiveWindow
 {
-    public function render()
+    public $module = 'admin';
+    
+    public function index()
     {
         $query = (new \yii\db\Query())->select('*')->from('admin_group_auth')->where(['group_id' => $this->getItemId()])->all();
 
@@ -19,7 +21,7 @@ class GroupAuth extends \admin\ngrest\StrapAbstract
             ];
         }
 
-        return $this->getView()->render('@admin/views/strap/groupAuth', [
+        return $this->render('index', [
             'groupId' => $this->getItemId(),
             'auth' => (new \yii\db\Query())->select('*')->from('admin_auth')->orderBy('module_name, alias_name ASC')->all(),
             'subs' => $subs,

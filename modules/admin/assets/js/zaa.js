@@ -252,13 +252,13 @@ var registerEvent = function(name, cb) {
 }
 */
 
-/* non angular strap send - testing purpose */
-var strapRegisterForm = function(form, callback, cb) {
+/* non angular activeWindow send - testing purpose */
+var activeWindowRegisterForm = function(form, callback, cb) {
 	$(form).submit(function(event) {
 	  event.preventDefault();
-	  var strapHash = $('[ng-controller="'+ngrestConfigHash+'"]').scope().data.strap.id;
+	  var activeWindowHash = $('[ng-controller="'+ngrestConfigHash+'"]').scope().data.activeWindow.id;
 	  $.ajax({
-		  url: strapCallbackUrl + '?strapCallback=' + callback + '&ngrestConfigHash=' + ngrestConfigHash + '&strapHash=' + strapHash, 
+		  url: activeWindowCallbackUrl + '?activeWindowCallback=' + callback + '&ngrestConfigHash=' + ngrestConfigHash + '&activeWindowHash=' + activeWindowHash, 
 		  data: $(form).serialize(),
 		  type : 'POST',
 		  dataType : 'json',
@@ -272,11 +272,11 @@ var strapRegisterForm = function(form, callback, cb) {
 	});
 }
 
-var strapAsyncGet = function(callback, params, cb) {
-	var strapHash = $('[ng-controller="'+ngrestConfigHash+'"]').scope().data.strap.id;
+var activeWindowAsyncGet = function(callback, params, cb) {
+	var activeWindowHash = $('[ng-controller="'+ngrestConfigHash+'"]').scope().data.activeWindow.id;
 	
 	$.ajax({
-		url: strapCallbackUrl + '?strapCallback=' + callback + '&ngrestConfigHash=' + ngrestConfigHash + '&strapHash=' + strapHash,
+		url: activeWindowCallbackUrl + '?activeWindowCallback=' + callback + '&ngrestConfigHash=' + ngrestConfigHash + '&activeWindowHash=' + activeWindowHash,
 		data : params,
 		type : 'GET',
 		dataType : 'json',

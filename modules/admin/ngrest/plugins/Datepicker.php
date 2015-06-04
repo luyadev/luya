@@ -10,9 +10,6 @@ class Datepicker extends PluginAbstract
     public function renderList($doc)
     {
         $elmn = $doc->createElement('span', ' {{item.'.$this->name.'}}');
-        $icon = $doc->createElement('i', ''); // fa-clock-o
-        $icon->setAttribute('class', 'fa fa-clock-o');
-        $doc->appendChild($icon);
         $doc->appendChild($elmn);
 
         return $doc;

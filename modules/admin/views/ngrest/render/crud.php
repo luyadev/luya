@@ -1,5 +1,5 @@
 <script>
-strapCallbackUrl = '<?= $strapCallbackUrl;?>';
+activeWindowCallbackUrl = '<?= $activeWindowCallbackUrl;?>';
 ngrestConfigHash = '<?= $config->getNgRestConfigHash(); ?>';
 zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope, $controller) {
     /* extend class */
@@ -12,7 +12,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
     $scope.config.create = <?=json_encode($crud->getFields('create'));?>;
     $scope.config.update = <?=json_encode($crud->getFields('update'));?>;
     $scope.config.ngrestConfigHash = '<?= $config->getNgRestConfigHash(); ?>';
-    $scope.config.strapCallbackUrl = '<?= $strapCallbackUrl;?>';
+    $scope.config.activeWindowCallbackUrl = '<?= $activeWindowCallbackUrl;?>';
 });
 </script>
 
@@ -170,8 +170,8 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
 <!-- /UPDATE MODAL -->
 
 
-<!-- STRAP MODAL -->
-<div id="strapModal" class="modal">
-    <div class="modal-content" compile-html ng-bind-html="data.strap.content"></div>
+<!-- activeWindow MODAL -->
+<div id="activeWindowModal" class="modal">
+    <div class="modal-content" compile-html ng-bind-html="data.activeWindow.content"></div>
 </div>
 </div>
