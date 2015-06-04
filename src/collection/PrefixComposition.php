@@ -34,6 +34,9 @@ class PrefixComposition
 
     public function set($array)
     {
+        foreach($array as $locale) {
+            setlocale(LC_ALL, $locale, $locale . '.utf8');
+        }
         $this->_composition = $array;
     }
 }
