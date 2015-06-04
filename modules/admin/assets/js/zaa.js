@@ -256,7 +256,7 @@ var registerEvent = function(name, cb) {
 var activeWindowRegisterForm = function(form, callback, cb) {
 	$(form).submit(function(event) {
 	  event.preventDefault();
-	  var activeWindowHash = $('[ng-controller="'+ngrestConfigHash+'"]').scope().data.activeWindow.id;
+      var activeWindowHash = $('[ng-controller="'+ngrestConfigHash+'"]').scope().data.aw.id;
 	  $.ajax({
 		  url: activeWindowCallbackUrl + '?activeWindowCallback=' + callback + '&ngrestConfigHash=' + ngrestConfigHash + '&activeWindowHash=' + activeWindowHash, 
 		  data: $(form).serialize(),
