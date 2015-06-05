@@ -1,8 +1,14 @@
 .blockholder {
-	position: absolute;
-	bottom: 0;
+	position: fixed;
+	bottom: -84px;
 	left: 300px;
 	right: 0;
+	overflow: visible;
+	transition: 0.25s ease bottom;
+
+	&:hover {
+		bottom: 0;
+	}
 }
 
 .blockholder__inner {
