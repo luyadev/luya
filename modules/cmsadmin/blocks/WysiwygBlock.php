@@ -20,11 +20,11 @@ class WysiwygBlock extends \cmsadmin\base\Block
     
     public function twigFrontend()
     {
-        return '{{ wysiwyg }}';
+        return '{{ vars.wysiwyg }}';
     }
     
     public function twigAdmin()
     {
-        return '{{ wysiwyg }}';
+        return '{{ vars.wysiwyg }}';
     }
 }
