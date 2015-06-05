@@ -29,7 +29,7 @@ class ImageBlock extends \cmsadmin\base\Block
 
     public function twigFrontend()
     {
-        return '<img src="{{extras.image.source}}" border="0" /> {{dump(extras)}}';
+        return '<div class="image"><img class="img-responsive" src="{{extras.image.source}}" border="0" /></div>';
     }
 
     public function twigAdmin()
