@@ -41,7 +41,6 @@ NGREST (general ngrest infos)
 --
 - ngrest.md
 - ngrest-plugins.md
-- ngrest-straps.md
-- ngrest-strap-angular.md
+- ngrest-activewindow.md
 - ngrest-plugin-checkboxrelation.md
 - ngrest-plugin-select.md

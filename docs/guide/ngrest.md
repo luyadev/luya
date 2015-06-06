@@ -36,7 +36,7 @@ The ng-rest config pointers describes the "scene" where the to configure fields 
 * ***list*** This pointer describes the moment when the fields are listed in the grid view (tabelaric list)
 * ***create*** This pointer descibtes the "create new entry" form.
 * ***update*** This pointer describtes the "update existing entry" form.
-* ***strap*** This pointer describes the attached "buttons and actions" forms.
+* ***aw*** This pointer describes the attached "buttons and actions" forms.
 * ***delete*** ***TBD***
 
 For example if you want to add the fields ***title*** and ***description*** into the list and create pointers just put:

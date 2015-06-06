@@ -56,7 +56,7 @@ cmsadmin /
 - models
 - apis
 - migrations
-- straps
+- aws (active windows)
 - - 
 cms /
 - controllers
