@@ -14,14 +14,39 @@ default is true.
 
 $urlRules
 ---------
-Adding url rules
+Each Module can have its own url Rules. Even its not access by module context, example ulrRules
 
-```
+```php
     public static $urlRules = [
-        ['pattern' => 'estore/warenkorb', 'route' => 'estore/default/basket'],
-        ['pattern' => 'estore/artikel-detail-infos/<articleId:\d+>', 'route' => 'estore/default/article']
+        ['pattern' => 'estore/testof/<id:\d+>', 'route' => 'estore/default/debug'],
+        ['pattern' => 'estore/xyz', 'route' => 'estore/default/debug'],
     ];
 ```
+
+You can also have composition url rules which will also match against the ***collection->composition->getFull()*** url, like this:
+
+```php
+
+    public static $urlRules = [
+        ['pattern' => 'estore/warenkorb', 'route' => 'estore/default/basket', 'composition' => 
+            [
+                'en' => 'estore/the-basket',
+                'de' => 'estore/der-warenkorb'
+            ]
+        ],
+    ];
+```
+
+those rules above will also match against the en/de compsition full url if there is any.
+
+***Important***
+
+All the luya module urlRules does have to "prefix" theyr pattern with the current module name, otherwise the urlRouting would load the default module registered for this project. (like cms)
+
+Module Context
+-------------------
+If a module is invoke by another module the context variable contains the name of the module which has invoke the active module. For example if the cms loades other modules, the loaded module can access the 
+parent module with $this->context;
 
 createUrlDepneding on Rules
 ---------------------------
@@ -50,20 +75,16 @@ use
 $this->renderLayout([
 
 ]]); 
-```php
+```
 
 to render a fake like layout inside modules
 
 
 EXAMPLE
 =======
-
 controllers/DefaultController.php
 ```php
-<?php
 namespace app\modules\estore\controllers;
-
-use Yii;
 
 class DefaultController extends \app\modules\estore\base\EstoreController
 {
@@ -72,8 +93,7 @@ class DefaultController extends \app\modules\estore\base\EstoreController
     {
         return $this->renderLayout([
                "content" => $this->renderPartial('_index')  
-        ]);
-        
+        ]);        
     }
     
     public function actionBasket()
@@ -86,7 +106,6 @@ class DefaultController extends \app\modules\estore\base\EstoreController
 ```
 base/EstoreController.php
 ```php
-<?php
 namespace app\modules\estore\base;
 
 class EstoreController extends \luya\base\PageController

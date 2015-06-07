@@ -1,11 +1,6 @@
-Luya Admin Module Page
-======================
-
-![module-image-item](img/start-module-page-pageitem.png "Module Image Item")
-
-@TODO: change from news example to news category example cause of not clear declarated api name "api-news-news"
-
-How to create a new Module Navigation Item (Page) in a Luya Admin Module.
+Luya Admin Module
+=================
+The `exec/crud` command will guide you trough the described steps below.
 
 1. Create Model and NG Rest Config
 2. Create API Controller
@@ -15,14 +10,14 @@ How to create a new Module Navigation Item (Page) in a Luya Admin Module.
 
 We assume to already have Migration Entry which creates the Database table.
 
-1. Create Model and NG Rest Config
+1.) Create Model and NG Rest Config
 --------------------------------
 
 Create the ActiveRecord model in <ADMIN_MODULE>/models/<MODEL_NAME>. We assume to create a new News Module Navigation Item, so we call the new model News.
 
 In this example we just have name, title and text which is required for all the rest scenarios "restcreate" and "restupdate". There are cases which does not require fields on create but require them on update.
 
-***NEW*** you now have to implement those ngrest methods: getNgRestApiEndpoint(), getNgRestPrimaryKey(), ngRestConfig($config);
+__new:__ You have to implement those ngrest methods: getNgRestApiEndpoint(), getNgRestPrimaryKey(), ngRestConfig($config);
 
 ```php
 <?php
