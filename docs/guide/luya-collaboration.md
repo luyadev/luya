@@ -146,7 +146,7 @@ Now that you've committed and pushed all of your files, go to your forked luya p
 Click on «Pull request» on the right side and then on the green button «New pull request».
 
 On the following screen, choose your branch to merge, check everything and create the pull request.
-![pull-request](https://github.com/zephir/luya/blob/master/docs/guide/img/start-collaboration-pull-request.jpg "Pull request")
+![pull-request](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/start-collaboration-pull-request.jpg "Pull request")
 
 
 Installtion on MAC OSX with MAMP
