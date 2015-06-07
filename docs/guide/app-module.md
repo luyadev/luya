@@ -41,21 +41,23 @@ All shared classes (components, models) have to be stored in the Admin-Module. T
 
 admin module example structure (contactadmin):
 ```
-- controllers
-- views
-- assets
-- components
-- models
-- apis
-- migrations
-- aws (active windows)
+.
+├── controllers
+├── views
+├── assets
+├── components
+├── models
+├── apis
+├── migrations
+└── aws (active windows)
 ```
 
 frontend module example structure (contact):
-´´´
-- controllers
-- assets
-- components (example content: UrlRule.php, cause its only affecting the frontend Module)
+```
+.
+├── controllers
+├── assets
+└── components (example content: UrlRule.php, cause its only affecting the frontend Module)
 ```
 
 Database table naming convention
