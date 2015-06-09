@@ -174,7 +174,7 @@ zaa.directive('zaaDatetime', function() {
 			'label' : '@label',
 			'grid' : '@grid'
 		},
-		link : function($scope, element, attr, ngModelCtrl) {
+		controller : function($scope) {
 			$scope.reform = function() {
 				var date = new Date($scope.year, ($scope.month-1), $scope.day, $scope.hour, $scope.min);
 				var mil = date.getTime();
@@ -182,7 +182,7 @@ zaa.directive('zaaDatetime', function() {
 			}
 			
 			$scope.$watch(function() { return $scope.model }, function(n, o) {
-				if (n !== undefined & o == undefined) {
+				if (n !== undefined) {
 					var date = new Date(n*1000);
 					$scope.day = date.getDate(),
 					$scope.month = date.getMonth() + 1;
