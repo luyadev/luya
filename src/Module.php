@@ -19,7 +19,7 @@ class Module extends \luya\base\Module
      *
      * @var string
      */
-    public $urlPrefixComposition = '<langShortCode:[a-z]{2}>'; // rename to compositionPattern (@TODO !)
+    public $urlPrefixComposition = '<langShortCode:[a-z]{2}>'; // rename to patternComposition (@TODO !)
 
     /**
      * Enable or disable the $composition->getFull() prefix. If disabled the response of getFull() would be empty, otherwhise it
@@ -28,6 +28,14 @@ class Module extends \luya\base\Module
      * @var bool
      */
     public $hideComposition = false;
+    
+    /**
+     * Default value if there is no composition provided in the url. The default value must match the $urlPrefixComposition url.
+     * 
+     * @var array
+     */
+    public $defaultComposition = ['langShortCode' => 'de'];
+    
 
     public $sendException = true;
 
