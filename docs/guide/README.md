@@ -14,6 +14,7 @@ APP (your luya project application)
 - app-assets-bower.md
 - app-blocks.md
 - app-menu.md
+- app-translation.md
 
 CMS (general cms infos)
 --
