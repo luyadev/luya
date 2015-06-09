@@ -8,7 +8,7 @@ class SelectArray extends \admin\ngrest\plugins\Select
     {
         foreach ($assocArray as $key => $value) {
             $this->data[] = [
-                'value' => $key,
+                'value' => (int) $key,
                 'label' => $value,
             ];
         }

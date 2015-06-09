@@ -67,7 +67,7 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
 
     //
 
-    public function onAfterList($value)
+    public function onAfterFind($value)
     {
         return $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where($this->refJoinTable.'.'.$this->refModelPkId.'='.$this->getModel()->id)->all();
     }

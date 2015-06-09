@@ -90,7 +90,7 @@ class EventBehavior extends \yii\base\Behavior
         foreach ($events as $field => $plugins) {
             foreach ($plugins as $plugin) {
                 $obj = $this->createPluginObject($plugin, $event->sender);
-                $response = $obj->onAfterList($event->sender->$field);
+                $response = $obj->onAfterFind($event->sender->$field);
                 if ($response !== false) {
                     $event->sender->$field = $response;
                 }

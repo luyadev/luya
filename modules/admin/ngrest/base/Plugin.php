@@ -50,7 +50,7 @@ abstract class Plugin
         return false;
     }
 
-    public function onAfterList($fieldValue)
+    public function onAfterFind($fieldValue)
     {
         return false;
     }

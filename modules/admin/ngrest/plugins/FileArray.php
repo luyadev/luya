@@ -35,7 +35,7 @@ class FileArray extends \admin\ngrest\base\Plugin
 
     //
 
-    public function onAfterList($value)
+    public function onAfterFind($value)
     {
         return json_decode($value, true);
     }

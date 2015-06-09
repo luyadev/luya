@@ -43,4 +43,15 @@ abstract class Select extends \admin\ngrest\base\Plugin
     {
         return $this->renderCreate($doc);
     }
+    
+    public function onAfterNgRestList($fieldValue)
+    {
+        foreach($this->data as $item) {
+            if ($item['value'] == $fieldValue) {
+                return $item['label'];
+            }
+        }
+        
+        return $fieldValue;
+    }
 }

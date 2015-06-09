@@ -45,10 +45,4 @@ class Datepicker extends \admin\ngrest\base\Plugin
     {
         return $this->onBeforeCreate($value);
     }
-
-    public function onAfterList($value)
-    {
-        return $value;
-        //return (is_numeric($value)) ? date('D M d Y H:i:s O', $value) : $value;
-    }
 }
