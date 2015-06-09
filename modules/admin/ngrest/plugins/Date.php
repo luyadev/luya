@@ -2,9 +2,7 @@
 
 namespace admin\ngrest\plugins;
 
-use DateTime;
-
-class Datepicker extends \admin\ngrest\base\Plugin
+class Date extends \admin\ngrest\base\Plugin
 {
     public function renderList($doc)
     {
@@ -14,7 +12,7 @@ class Datepicker extends \admin\ngrest\base\Plugin
 
     public function renderCreate($doc)
     {
-        $elmn = $doc->createElement('zaa-datepicker');
+        $elmn = $doc->createElement('zaa-date');
         $elmn->setAttribute('id', $this->id);
         $elmn->setIdAttribute('id', true);
         $elmn->setAttribute('model', $this->ngModel);

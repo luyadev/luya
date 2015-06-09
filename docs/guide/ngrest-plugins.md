@@ -19,8 +19,8 @@ fields
 | imageArray											| Creates an uploader for multiple images and serialize them as json into the data tabel (type must be text).
 | file													| Creates a file upload and returns the fileId to the observed field
 | [checkboxRelation](start-ngrest-field-checkboxRelation.md) | Createa checkbox part based on a refTable/viaTable.
-| datepicker											| Creates an input field with a datepicker popover (model value: dd-mm-yyyy)
-
+| date											| Creates an input field with a datepicker popover (model value: dd-mm-yyyy)
+| datetime | creates a date and time input (basic test)
 
 
 field implicits

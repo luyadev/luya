@@ -64,14 +64,14 @@ class Article extends \admin\ngrest\base\Model
     {
         $config->list->field('cat_id', 'Kategorie')->selectClass('\newsadmin\models\Cat', 'id', 'title');
         $config->list->field('title', 'Titel')->text()->required();
-        $config->list->field('timestamp_display_from', 'News anzeigen ab')->datepicker();
-        $config->list->field('timestamp_display_until', 'News anzeigen bis')->datepicker();
+        $config->list->field('timestamp_display_from', 'News anzeigen ab')->date();
+        $config->list->field('timestamp_display_until', 'News anzeigen bis')->date();
         
         $config->update->field('cat_id', 'Kategorie')->selectClass('\newsadmin\models\Cat', 'id', 'title');
         $config->update->field('title', 'Titel')->text()->required();
         $config->update->field('text', 'Text')->textarea()->required();
-        $config->update->field('timestamp_display_from', 'News anzeigen ab')->datepicker();
-        $config->update->field('timestamp_display_until', 'News anzeigen bis')->datepicker();
+        $config->update->field('timestamp_display_from', 'News anzeigen ab')->date();
+        $config->update->field('timestamp_display_until', 'News anzeigen bis')->date();
         $config->update->field('image_id', 'Bild')->image()->required();
         $config->update->field('image_list', 'Bild Liste')->imageArray();
         $config->update->field('file_list', 'Datei Liste')->fileArray();

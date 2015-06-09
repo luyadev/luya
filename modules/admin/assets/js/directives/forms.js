@@ -165,7 +165,40 @@ zaa.directive('zaaCheckbox', function(){
 	}
 });
 
-zaa.directive('zaaDatepicker', function() {
+zaa.directive('zaaDatetime', function() {
+	return {
+		restrict : 'E',
+		scope : {
+			'model' : '=',
+			'options' : '=',
+			'label' : '@label',
+			'grid' : '@grid'
+		},
+		link : function($scope, element, attr, ngModelCtrl) {
+			$scope.reform = function() {
+				var date = new Date($scope.year, ($scope.month-1), $scope.day, $scope.hour, $scope.min);
+				var mil = date.getTime();
+				$scope.model = (mil/1000);
+			}
+			
+			$scope.$watch(function() { return $scope.model }, function(n, o) {
+				if (n !== undefined & o == undefined) {
+					var date = new Date(n*1000);
+					$scope.day = date.getDate(),
+					$scope.month = date.getMonth() + 1;
+					$scope.year = date.getFullYear();
+					$scope.min = date.getMinutes();
+					$scope.hour = date.getHours();
+				}
+			})
+		},
+		template : function() {
+			return '<div class="col s{{grid}}">Datum: <input ng-change="reform()" type="number" ng-model="day" min="1" max="31" style="width:34px;" />.<input ng-change="reform()" type="number" ng-model="month" min="1" max="12" style="width:34px;" />.<input ng-change="reform()" type="number" ng-model="year" min="1970" max="2050"  style="width:50px;" /> Zeit: <input ng-change="reform()" type="number" ng-model="hour" min="0" max="23" style="width:34px;" />:<input ng-change="reform()" type="number" ng-model="min" min="0" max="59" style="width:34px;" /></div>';
+		}
+	}
+});
+
+zaa.directive('zaaDate', function() {
 	return {
 		restrict : 'E',
 		scope : {
@@ -221,111 +254,6 @@ zaa.directive('dateFormat', function() {
 	    }
 	};
 });
-
-/*
-zaa.directive('datetimez', function($compile, $timeout) {
-    return {
-        restrict: 'A',
-        require : 'ngModel',
-        scope : false,
-        link: function(scope, element, attrs, ngModelCtrl) {
-        	
-        	//scope.model = new Date(1431952496);
-        	
-        	ngModelCtrl.$formatters.unshift(function (modelValue) {
-                if (modelValue) {
-                	return new Date(modelValue);
-                	console.log('ngModel value', modelValue);
-                    var date = new Date(parseInt(modelValue, 10));
-                    
-                    var dd = date.getDate();
-                    var mm = date.getMonth()+1; //January is 0!
-
-                    var yyyy = date.getFullYear();
-                    
-                    if(dd<10){
-                        dd='0'+dd
-                    }
-                    
-                    if(mm<10){
-                        mm='0'+mm
-                    }
-                    
-                    console.log('ngModel value set to', dd+mm+yyyy);
-                    
-                    return dd+'/'+mm+'/'+yyyy;
-                }
-                return null;
-            });
-        	$compile(element.contents())(scope);
-        	
-        	$timeout(function () {
-        		console.log('init-picker');
-	        	element.pickadate({
-	        		container : 'body',
-	                //format: 'dd/mm/yyyy',
-	                //formatSubmit : 'dd/mm/yyyy',
-	                onStart : function(e) {
-	                	console.log('onStart', e, scope.model);
-	                },
-	                onSet : function(e) {
-	                	console.log('set', e, scope.model);
-	                },
-	                onOpen : function(e) {
-	                	console.log('onOpen', e, scope.model);
-	                },
-	                onRender : function(e) {
-	                	console.log('onRedner', scope.model);
-	                }
-	    		})
-        	});
-    	}
-    }
-});
-*/
-
-/*
-zaa.directive('zaaDatepicker', function() {
-	return {
-		restrict : 'E',
-		scope : {
-			'model' : '=',
-			'options' : '=',
-			'label' : '@label',
-			'grid' : '@grid'
-		},
-		controller : function($scope, $filter) {
-			
-			$scope.datemodel = null;
-			
-			$scope.open = function($event) {
-			    $event.preventDefault();
-			    $event.stopPropagation();
-			    $scope.opened = true;
-			};
-			
-			$scope.$watch(function() { return $scope.model }, function(n) {
-				if ($scope.model !== undefined) {
-					var res = $scope.model.split("-");
-					$scope.datemodel = new Date(res[2], (res[1]-1), res[0]);
-				}
-			});
-			
-			$scope.dateOptions = {
-				formatYear: 'yyyy',
-				startingDay: 1
-			};
-			
-			$scope.changer = function() {
-				$scope.model = $filter('date')($scope.datemodel, 'dd-MM-yyyy');
-			}
-		},
-		template: function(){
-			return '<div><input type="text" datepicker-options="dateOptions" ng-change="changer()" datepicker-popup="dd-MM-yyyy" ng-model="datemodel" is-open="opened" close-text="Close" /><button type="button" ng-click="open($event)">OPEN</button></div>';
-		}
-	}
-});
-*/
 
 zaa.directive('zaaFileUpload', function($compile){
 	return {
