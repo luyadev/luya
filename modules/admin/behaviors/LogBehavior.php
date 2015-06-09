@@ -9,8 +9,6 @@ class LogBehavior extends \yii\base\Behavior
     public $route = '';
 
     public $api = '';
-
-    public $userId = 0;
     
     public function events()
     {
@@ -25,20 +23,13 @@ class LogBehavior extends \yii\base\Behavior
         if (empty($this->route) && empty($this->api)) {
             throw new \Exception('LogBehavior route or api property must be set.');
         }
-        
-        $user = \admin\Module::getAdminUserData();
-        if (empty($user)) {
-            $this->userId = 0;
-        } else {
-            $this->userId = \admin\Module::getAdminUserData()->id;
-        }
     }
 
     public function eventAfterInsert($event)
     {
         if (\yii::$app instanceof \yii\web\Application) {
             \yii::$app->db->createCommand()->insert('admin_ngrest_log', [
-                'user_id' => $this->userId,
+                'user_id' => (is_null(\admin\Module::getAdminUserData())) ? 0 : \admin\Module::getAdminUserData()->id,
                 'timestamp_create' => time(),
                 'route' => $this->route,
                 'api' => $this->api,
@@ -53,7 +44,7 @@ class LogBehavior extends \yii\base\Behavior
     {
         if (\yii::$app instanceof \yii\web\Application) {
             \yii::$app->db->createCommand()->insert('admin_ngrest_log', [
-                'user_id' => $this->userId,
+                'user_id' => (is_null(\admin\Module::getAdminUserData())) ? 0 : \admin\Module::getAdminUserData()->id,
                 'timestamp_create' => time(),
                 'route' => $this->route,
                 'api' => $this->api,
