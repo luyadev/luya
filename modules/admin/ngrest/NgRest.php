@@ -27,13 +27,13 @@ class NgRest
 
     private $render = null;
 
-    public function __construct(Config $configObject)
+    public function __construct(\admin\ngrest\Config $configObject)
     {
         $configObject->onFinish();
         $this->config = $configObject;
     }
 
-    public function render(RenderAbstract $render)
+    public function render(\admin\ngrest\base\Render $render)
     {
         $this->renderer = $render;
         $this->renderer->setConfig($this->config);

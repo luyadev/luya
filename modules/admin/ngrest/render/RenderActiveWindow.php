@@ -2,16 +2,13 @@
 
 namespace admin\ngrest\render;
 
-use admin\ngrest\RenderAbstract;
-use admin\ngrest\RenderInterface;
-
 /**
  * @todo complet rewrite of this class - what is the best practive to acces data in the view? define all functiosn sindie here? re-create methods from config object?
  *  $this->config() $this....
  *
  * @author nadar
  */
-class RenderActiveWindow extends RenderAbstract implements RenderInterface
+class RenderActiveWindow extends \admin\ngrest\base\Render implements \admin\ngrest\base\RenderInterface
 {
     private $itemId = null;
 

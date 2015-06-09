@@ -17,7 +17,7 @@ namespace admin\ngrest;
  *
  * @author nadar
  */
-class Config implements ConfigInterface
+class Config implements \admin\ngrest\base\ConfigInterface
 {
     private $config = [];
 

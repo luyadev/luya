@@ -3,8 +3,6 @@
 namespace admin\ngrest\render;
 
 use Yii;
-use admin\ngrest\RenderAbstract;
-use admin\ngrest\RenderInterface;
 
 /**
  * @todo complet rewrite of this class - what is the best practive to acces data in the view? define all functions inside here? re-create methods from config object? $this->config() $this....
@@ -13,7 +11,7 @@ use admin\ngrest\RenderInterface;
  *
  * @author nadar
  */
-class RenderActiveWindowCallback extends RenderAbstract implements RenderInterface
+class RenderActiveWindowCallback extends \admin\ngrest\base\Render implements \admin\ngrest\base\RenderInterface
 {
     public function render()
     {

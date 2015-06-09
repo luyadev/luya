@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\ngrest;
+namespace admin\ngrest\base;
 
 interface ConfigInterface
 {
