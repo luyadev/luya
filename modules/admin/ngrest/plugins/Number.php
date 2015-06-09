@@ -2,7 +2,7 @@
 
 namespace admin\ngrest\plugins;
 
-class Text extends \admin\ngrest\base\Plugin
+class Number extends \admin\ngrest\base\Plugin
 {
     public function renderList($doc)
     {
@@ -12,7 +12,7 @@ class Text extends \admin\ngrest\base\Plugin
 
     public function renderCreate($doc)
     {
-        $elmn = $doc->createElement('zaa-text');
+        $elmn = $doc->createElement('zaa-number');
         $elmn->setAttribute('id', $this->id);
         $elmn->setIdAttribute('id', true);
         $elmn->setAttribute('model', $this->ngModel);

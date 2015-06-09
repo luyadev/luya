@@ -33,6 +33,28 @@ zaa.directive('zaaWysiwyg', function() {
 	}
 });
 
+zaa.directive('zaaNumber', function() {
+	return {
+		restrict : 'E',
+		scope : {
+			'model' : '=',
+			'options' : '=',
+			'label' : '@label',
+			'grid' : '@grid'		
+		}, link: function($scope) {
+			$scope.$watch(function() { return $scope.model }, function(n, o) {
+				if(angular.isNumber($scope.model)) {
+					$scope.isValid = true;
+				} else {
+					$scope.isValid = false;
+				}
+			})
+		}, template : function() {
+			return '<div class="input-field col s{{grid}}"><input ng-class="{\'invalid\' : !isValid }" type="number" ng-model="model" min="0" /><label>{{label}}</label></div>';
+		}
+	}
+});
+
 zaa.directive('zaaText', function(){
 	return {
 		restrict : 'E',
