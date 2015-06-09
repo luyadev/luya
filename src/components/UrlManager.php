@@ -2,6 +2,9 @@
 
 namespace luya\components;
 
+use Yii;
+use luya\helpers\Url;
+
 /**
  * @todo see http://www.yiiframework.com/doc-2.0/guide-runtime-routing.html#adding-rules-dynamically
  * @todo change to public $ruleConfig = ['class' => 'yii\web\UrlRule'];
@@ -108,7 +111,11 @@ class UrlManager extends \yii\web\UrlManager
                 $response = str_replace($moduleName, $composition.$link['url'], $response);
             }
         }
-
-        return $composition . $response;
+	
+       	// because the urlCreation of yii returns a realtive url we have to manually add the composition getFull() path.
+        $baseUrl = yii::$app->request->baseUrl;
+        $response = str_replace($baseUrl, Url::trailing($baseUrl) . Url::removeTrailing($composition), $response);
+        
+        return $response;
     }
 }
