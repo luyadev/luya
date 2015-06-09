@@ -109,6 +109,6 @@ class UrlManager extends \yii\web\UrlManager
             }
         }
 
-        return $response;
+        return $composition . $response;
     }
 }
