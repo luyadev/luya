@@ -15,7 +15,7 @@ $config = [
         'assetManager' => [
             'class' => 'yii\web\AssetManager',
             'forceCopy' => YII_DEBUG,
-            'appendTimestamp' => true,
+            'appendTimestamp' => !YII_DEBUG,
         ],
         'request' => [
             'cookieValidationKey' => 'cookeivalidationkey',
