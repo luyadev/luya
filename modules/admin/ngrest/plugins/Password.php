@@ -2,9 +2,7 @@
 
 namespace admin\ngrest\plugins;
 
-use admin\ngrest\PluginAbstract;
-
-class Password extends PluginAbstract
+class Password extends \admin\ngrest\base\Plugin
 {
     public function renderList($doc)
     {

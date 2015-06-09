@@ -2,6 +2,7 @@
 
 namespace admin\ngrest\base;
 
+use Yii;
 use admin\ngrest\base\EventBehavior;
 use admin\behaviors\LogBehavior;
 
@@ -13,12 +14,16 @@ abstract class Model extends \yii\db\ActiveRecord
     public $ngRestPrimaryKey = null;
     */
 
+    const EVENT_AFTER_NGREST_FIND = 'afterNgrestFind';
+    
     public $i18n = [];
 
-    public $i18nExpandFields = false;
+    //public $i18nExpandFields = false;
 
     public $extraFields = [];
 
+    private $_ngrestCall = false;
+    
     abstract public function ngRestConfig($config);
 
     abstract public function ngRestApiEndpoint();
@@ -41,12 +46,14 @@ abstract class Model extends \yii\db\ActiveRecord
     {
         parent::init();
 
+        $this->_ngrestCall = Yii::$app->request->get('ngrestCall', false);
+        
         if (count($this->getI18n()) > 0) {
             $this->on(self::EVENT_BEFORE_INSERT, [$this, 'i18nBeforeUpdateAndCreate']);
             $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'i18nBeforeUpdateAndCreate']);
             $this->on(self::EVENT_AFTER_FIND, [$this, 'i18nAfterFind']);
             // @todo is there a better to know we are runing the module from the RestActiveController instead of using a get param (ugly)?
-            $this->i18nExpandFields = \yii::$app->request->get('ngrestExpandI18n', false);
+            //$this->i18nExpandFields = \yii::$app->request->get('ngrestCall', false);
         }
     }
 
@@ -100,6 +107,15 @@ abstract class Model extends \yii\db\ActiveRecord
     {
         return static::find();
     }
+    
+    public function afterFind()
+    {
+        if ($this->_ngrestCall) {
+            $this->trigger(self::EVENT_AFTER_NGREST_FIND);
+        }   
+        
+        return parent::afterFind();
+    }
 
     public function i18nAfterFind()
     {
@@ -118,7 +134,7 @@ abstract class Model extends \yii\db\ActiveRecord
                 }
             }
 
-            if (!$this->i18nExpandFields) {
+            if (!$this->_ngrestCall) {
                 $langShortCode = \admin\models\Lang::getDefault()->short_code;
 
                 // @todo first get data from collection, if not found get data from lang default

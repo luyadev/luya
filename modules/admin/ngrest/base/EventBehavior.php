@@ -3,6 +3,7 @@
 namespace admin\ngrest\base;
 
 use yii\db\ActiveRecord;
+use \admin\ngrest\base\Model;
 
 class EventBehavior extends \yii\base\Behavior
 {
@@ -15,6 +16,7 @@ class EventBehavior extends \yii\base\Behavior
             ActiveRecord::EVENT_AFTER_INSERT => 'eventAfterInsert',
             ActiveRecord::EVENT_BEFORE_UPDATE => 'eventBeforeUpdate',
             ActiveRecord::EVENT_AFTER_FIND => 'eventAfterFind',
+            Model::EVENT_AFTER_NGREST_FIND => 'eventAfterNgrestFind',
         ];
     }
 
@@ -89,6 +91,21 @@ class EventBehavior extends \yii\base\Behavior
             foreach ($plugins as $plugin) {
                 $obj = $this->createPluginObject($plugin, $event->sender);
                 $response = $obj->onAfterList($event->sender->$field);
+                if ($response !== false) {
+                    $event->sender->$field = $response;
+                }
+            }
+        }
+    }
+    
+    public function eventAfterNgrestFind($event)
+    {
+        $events = $this->ngRestConfig->getPlugins('list'); // ngCrud ist list not find
+        
+        foreach ($events as $field => $plugins) {
+            foreach ($plugins as $plugin) {
+                $obj = $this->createPluginObject($plugin, $event->sender);
+                $response = $obj->onAfterNgRestList($event->sender->$field);
                 if ($response !== false) {
                     $event->sender->$field = $response;
                 }

@@ -2,8 +2,6 @@
 
 namespace admin\ngrest\plugins;
 
-use admin\ngrest\PluginAbstract;
-
 /**
  * create a select dropdown box with option list:.
  *
@@ -13,7 +11,7 @@ use admin\ngrest\PluginAbstract;
  *
  * @author nadar
  */
-abstract class Select extends PluginAbstract
+abstract class Select extends \admin\ngrest\base\Plugin
 {
     use \admin\ngrest\PluginTrait;
 

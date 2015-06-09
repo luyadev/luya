@@ -7,7 +7,7 @@ namespace admin\ngrest\plugins;
  *
  * @author nadar
  */
-class Ace extends \admin\ngrest\PluginAbstract
+class Ace extends \admin\ngrest\base\Plugin
 {
     use \admin\ngrest\PluginTrait;
 

@@ -7,7 +7,7 @@ namespace admin\ngrest\plugins;
  *
  * @author nadar
  */
-class CheckboxRelation extends \admin\ngrest\PluginAbstract
+class CheckboxRelation extends \admin\ngrest\base\Plugin
 {
     use \admin\ngrest\PluginTrait;
 

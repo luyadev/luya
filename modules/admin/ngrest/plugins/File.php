@@ -7,7 +7,7 @@ namespace admin\ngrest\plugins;
  *
  * @author nadar
  */
-class File extends \admin\ngrest\PluginAbstract
+class File extends \admin\ngrest\base\Plugin
 {
     public function renderList($doc)
     {

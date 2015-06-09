@@ -3,9 +3,8 @@
 namespace admin\ngrest\plugins;
 
 use DateTime;
-use admin\ngrest\PluginAbstract;
 
-class Datepicker extends PluginAbstract
+class Datepicker extends \admin\ngrest\base\Plugin
 {
     public function renderList($doc)
     {

@@ -1,8 +1,8 @@
 <?php
 
-namespace admin\ngrest;
+namespace admin\ngrest\base;
 
-abstract class PluginAbstract
+abstract class Plugin
 {
     protected $id = null;
 
@@ -14,49 +14,6 @@ abstract class PluginAbstract
 
     protected $gridCols = null;
     
-    //public $options = [];
-
-    /*
-    public function __construct(array $options = [])
-    {
-        $this->setOptions($options);
-        $this->init();
-    }
-
-    public function init()
-    {
-    }
-    */
-
-    /*
-    public function hasOption($key)
-    {
-        return (isset($this->options[$key])) ? true : false;
-    }
-
-    public function getOption($key)
-    {
-        return (isset($this->options[$key])) ? $this->options[$key] : false;
-    }
-
-    public function setOptions(array $optionsArray)
-    {
-        foreach ($optionsArray as $key => $value) {
-            $this->options[$key] = $value;
-        }
-    }
-
-    public function setOption($key, $value)
-    {
-        if (!$this->getOption($key)) {
-            throw new \Exception("The requested set key does not exists in options list");
-        }
-
-        $this->options[$key] = $value;
-    }
-
-    */
-
     private $_model = null;
 
     public function setModel($model)
@@ -94,6 +51,11 @@ abstract class PluginAbstract
     }
 
     public function onAfterList($fieldValue)
+    {
+        return false;
+    }
+    
+    public function onAfterNgRestList($fieldValue)
     {
         return false;
     }

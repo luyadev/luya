@@ -73,8 +73,9 @@ class RenderCrud extends RenderAbstract implements RenderInterface
 
     public function apiQueryString($type)
     {
+        // ngrestCall was previous ngrestExpandI18n
         // ($scope.config.apiEndpoint + '?ngrestExpandI18n=true&fields=' + $scope.config.list.join()
-        return 'ngrestExpandI18n=true&fields='.implode(',', $this->getFields($type)).'&expand='.implode(',', $this->config->extraFields);
+        return 'ngrestCall=true&fields='.implode(',', $this->getFields($type)).'&expand='.implode(',', $this->config->extraFields);
     }
 
     public function getFields($type)

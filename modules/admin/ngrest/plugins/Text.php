@@ -2,9 +2,7 @@
 
 namespace admin\ngrest\plugins;
 
-use admin\ngrest\PluginAbstract;
-
-class Text extends PluginAbstract
+class Text extends \admin\ngrest\base\Plugin
 {
     public function renderList($doc)
     {

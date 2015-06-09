@@ -2,9 +2,7 @@
 
 namespace admin\ngrest\plugins;
 
-use admin\ngrest\PluginAbstract;
-
-class Textarea extends PluginAbstract
+class Textarea extends \admin\ngrest\base\Plugin
 {
     public function renderList($doc)
     {
