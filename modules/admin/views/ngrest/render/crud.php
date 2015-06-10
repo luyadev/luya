@@ -17,7 +17,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
 </script>
 
 <div ng-controller="<?=$config->getNgRestConfigHash(); ?>" ng-init="init()">
-<a class="btn-floating btn-large waves-effect waves-light right red" style="margin:20px;" ng-click="openCreate()"><i class="mdi-content-add"></i></a>
+<a ng-show="config.create.length" class="btn-floating btn-large waves-effect waves-light right red" style="margin:20px;" ng-click="openCreate()"><i class="mdi-content-add"></i></a>
 
 <div class="card-panel" ng-show="loading">
     <div class="preloader-wrapper big active">
