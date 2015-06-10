@@ -36,11 +36,11 @@ class Module extends \luya\base\Module
      */
     public $defaultComposition = ['langShortCode' => 'de'];
     
-
-    public $sendException = true;
-
-    public $exceptionUrl = 'http://luya.io/errorapi/';
-
+    /**
+     * Default url behavior if luya is included. first rule which will be picked.
+     * 
+     * @var array
+     */
     public static $urlRules = [
         ['class' => 'luya\components\UrlRule'],
     ];
