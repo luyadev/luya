@@ -32,11 +32,25 @@ class PrefixComposition
         return  \luya\helpers\Url::trailing(implode('/', $this->_composition));
     }
 
+    public function getLocale()
+    {
+        switch($this->_composition['langShortCode']) {
+            case "de":
+                return "de_CH";
+                break;
+            case "en":
+                return "en_EN";
+                break;
+        }
+    }
+    
+    public function getLanguage()
+    {
+        return $this->_composition['langShortCode'];
+    }
+    
     public function set($array)
     {
-        foreach($array as $locale) {
-            setlocale(LC_ALL, $locale, $locale . '.utf8');
-        }
         $this->_composition = $array;
     }
 }

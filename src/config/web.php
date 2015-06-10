@@ -30,6 +30,7 @@ $config = [
     'bootstrap' => [
         'luya\components\BootstrapWeb',
     ],
+    'timezone' => 'Europe/Berlin',
 ];
 
 return $config;

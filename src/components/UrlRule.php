@@ -52,8 +52,10 @@ class UrlRule extends \luya\base\UrlRule
         yii::$app->collection->composition = $composition;
 
         // set the yii app language param based on the composition fullUrl
-        yii::$app->language = \luya\helpers\Url::removeTrailing($composition->getFull());
-
+        $locale = $composition->getLocale();
+        yii::$app->language = $composition->getLanguage();
+        setlocale(LC_ALL, $locale, $locale . ".utf8");
+        
         $parts = explode('/', $request->getPathInfo()); // can be deleted after reshuffle array
 
         if (!empty($parts) && !array_key_exists($parts[0], yii::$app->modules)) {
