@@ -41,7 +41,7 @@ class ModuleBlock extends \cmsadmin\base\Block
 
     public function twigFrontend()
     {
-        return '{{ extras.moduleContent }}';
+        return '{{extras.moduleContent}}';
     }
     
     private function moduleContent($moduleName)
