@@ -27,7 +27,7 @@ class DefaultController extends \luya\rest\Controller
                 $html.='<td><strong>'.$k.'</strong></td>';
                 $html.='<td>';
                 if (is_array($v)) {
-                    $html.= print_r($v, true);
+                    $html.= "<pre><code>" . print_r($v, true) . "</code></pre>";
                 } else {
                     $html.= $v;
                 }
