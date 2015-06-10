@@ -7,7 +7,7 @@ $config = [
         ],
         'twig' => '\luya\components\Twig',
         'errorHandler' => [
-            'class' => '\luya\components\ErrorHandler',
+            'class' => '\luya\components\ErrorHandlerWeb',
         ],
         'urlManager' => 'luya\components\UrlManager',
         'view' => ['class' => 'luya\components\View'],

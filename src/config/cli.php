@@ -13,6 +13,9 @@ $config = [
         'mail' => [
             'class' => '\luya\components\Mail',
         ],
+        'errorHandler' => [
+            'class' => '\luya\components\ErrorHandlerCli',
+        ],
     ],
     'bootstrap' => [
         'luya\components\BootstrapCli',
