@@ -110,11 +110,11 @@ class UrlManager extends \yii\web\UrlManager
                 $link = \yii::$app->collection->links->findOneByArguments(['nav_item_id' => (int) $options['navItemId']]);
                 $response = str_replace($moduleName, $composition.$link['url'], $response);
             }
+        } else {
+            // because the urlCreation of yii returns a realtive url we have to manually add the composition getFull() path.
+            $baseUrl = yii::$app->request->baseUrl;
+            $response = str_replace($baseUrl, Url::trailing($baseUrl) . Url::removeTrailing($composition), $response);
         }
-	
-       	// because the urlCreation of yii returns a realtive url we have to manually add the composition getFull() path.
-        $baseUrl = yii::$app->request->baseUrl;
-        $response = str_replace($baseUrl, Url::trailing($baseUrl) . Url::removeTrailing($composition), $response);
         
         return $response;
     }
