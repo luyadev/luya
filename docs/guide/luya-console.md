@@ -78,7 +78,7 @@ namespace yourmodule\commands;
 /**
  * php index.php command yourmodule notify
  */
-class NotifyController extends \yii\console\Controller
+class NotifyController extends \luya\base\Command
 {
     public function actionIndex()
     {
