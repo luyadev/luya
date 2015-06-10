@@ -21,9 +21,18 @@ class DefaultController extends \luya\rest\Controller
         $model = new \errorapi\models\Data();
         $model->error_json = \yii::$app->request->post('error_json', null);
         if ($model->save()) {
-            $html = '<table border="1">';
+            $html = '<table border="1" cellpadding="5" cellspacing="0">';
             foreach(json_decode($model->error_json, true) as $k => $v) {
-                $html.='<tr><td>' . $k . '</td><td>' . print_r($v, true) . '</td></tr>';
+                $html.='<tr>';
+                $html.='<td><strong>'.$k.'</strong></td>';
+                $html.='<td>';
+                if (is_array($v)) {
+                    $html.= print_r($v, true);
+                } else {
+                    $html.= $v;
+                }
+                $html.='</td>';
+                $html.='</tr>';
             }
             $html.= '</table>';
             Yii::$app->mail->compose('Subject', $html)->address($this->module->recipient)->send();
