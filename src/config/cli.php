@@ -1,7 +1,6 @@
 <?php
 
 $config = [
-    //'controllerNamespace' => 'commands',
     'controllerMap' => [
         'presql' => '\luya\commands\PresqlController',
         'exec' => '\luya\commands\ExecutableController',
@@ -11,6 +10,9 @@ $config = [
     'components' => [
         'collection' => 'luya\components\Collection',
         'luya' => 'luya\components\LuyaComponents',
+        'mail' => [
+            'class' => '\luya\components\Mail',
+        ],
     ],
     'bootstrap' => [
         'luya\components\BootstrapCli',
