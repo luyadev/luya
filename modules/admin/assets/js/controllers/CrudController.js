@@ -62,12 +62,21 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 		return $scope.data.aw.configCallbackUrl + '?activeWindowCallback=' + callback + '&ngrestConfigHash=' + $scope.data.aw.configHash + '&activeWindowHash=' + $scope.data.aw.hash;
 	}
 	
+	/**
+	 * new returns a promise promise.hten(function(answer) {
+	 * 
+	 * }, function(error) {
+	 * 
+	 * }, function(progress) {
+	 * 
+	 * });
+	 * 
+	 * instead of return variable
+	 */
 	$scope.sendActiveWindowCallback = function(callback, data) {
 		var data = data || {};
-		$http.post($scope.getActiveWindowCallbackUrl(callback), $.param(data), {
+		return $http.post($scope.getActiveWindowCallbackUrl(callback), $.param(data), {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-		}).success(function(response) {
-			$scope.activeWindowCallbackResponse = response;
 		});
 	}
 	

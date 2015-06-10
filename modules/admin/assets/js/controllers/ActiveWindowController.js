@@ -10,7 +10,7 @@ zaa.controller("ActiveWindowGalleryController", function($scope, $http) {
 		})
 	}
 	
-	$scope.$watch(function() { return $scope.data.activeWindow.itemId }, function(n, o) {
+	$scope.$watch(function() { return $scope.data.aw.itemId }, function(n, o) {
 		$scope.loadImages();
 	});
 	

@@ -15,7 +15,7 @@ class AssetAdmin extends \yii\web\AssetBundle
         'js/factorys.js',
         'js/controllers/LayoutMenuController.js',
         'js/controllers/DefaultController.js',
-        'js/controllers/StrapsController.js',
+        'js/controllers/ActiveWindowController.js',
         'js/controllers/CrudController.js',
         'js/directives/forms.js',
         'js/directives/storage.js',
