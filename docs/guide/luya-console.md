@@ -66,3 +66,38 @@ create full crud data within one command.
 php index.php crud/create
 ```
 
+Create your console command
+---------------------------
+To add a module console command just create a file inside `@module/commands` like below
+
+```
+<?php
+
+namespace yourmodule\commands;
+
+/**
+ * php index.php command yourmodule notify
+ */
+class NotifyController extends \yii\console\Controller
+{
+    public function actionIndex()
+    {
+        return 'hello world!';
+    }
+    
+    public function actionBar()
+    {
+    	return 'foo';
+    }
+}
+```
+
+execute the command in your terminal:
+```
+php index.php command yourmodule notify
+```
+
+to execute the bar action you have the execute the command like this:
+```
+php index.php command yourmodule notify/bar
+```
