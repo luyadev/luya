@@ -48,9 +48,10 @@ abstract class Model extends \yii\db\ActiveRecord
     {
         parent::init();
 
-        $this->_ngrestCall = Yii::$app->request->get('ngrestCall', false);
-        $this->_ngrestCallType = Yii::$app->request->get('ngrestCallType', false);
-        
+        if (Yii::$app instanceof \yii\web\Application) {
+            $this->_ngrestCall = Yii::$app->request->get('ngrestCall', false);
+            $this->_ngrestCallType = Yii::$app->request->get('ngrestCallType', false);
+        }
         if (count($this->getI18n()) > 0) {
             $this->on(self::EVENT_BEFORE_INSERT, [$this, 'i18nBeforeUpdateAndCreate']);
             $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'i18nBeforeUpdateAndCreate']);
