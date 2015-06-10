@@ -63,6 +63,7 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 	}
 	
 	$scope.sendActiveWindowCallback = function(callback, data) {
+		var data = data || {};
 		$http.post($scope.getActiveWindowCallbackUrl(callback), $.param(data), {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 		}).success(function(response) {
