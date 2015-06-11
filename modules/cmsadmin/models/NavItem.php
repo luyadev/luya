@@ -84,8 +84,16 @@ class NavItem extends \yii\db\ActiveRecord
         $this->update_user_id = \admin\Module::getAdminUserData()->id;
     }
 
+    /**
+     * temp disabled the links for the specific module, cause we are not yet able to handle module integration blocks (find the module inside the content), so wo just
+     * display all nav items tempo.
+     * 
+     * @todo fix me above!
+     * @param unknown $moduleName
+     */
     public static function fromModule($moduleName)
     {
-        return self::find()->leftJoin('cms_nav_item_module', 'nav_item_type_id=cms_nav_item_module.id')->where(['nav_item_type' => 2, 'cms_nav_item_module.module_name' => $moduleName])->all();
+        return self::find()->all();
+        //return self::find()->leftJoin('cms_nav_item_module', 'nav_item_type_id=cms_nav_item_module.id')->where(['nav_item_type' => 2, 'cms_nav_item_module.module_name' => $moduleName])->all();
     }
 }
