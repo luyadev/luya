@@ -11,7 +11,7 @@ class LargeThumbnail extends \admin\base\Filter
 
     public function name()
     {
-        return 'grosses Thumbnail';
+        return 'Thumbnail gross (800x800)';
     }
 
     public function chain()

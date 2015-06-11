@@ -11,7 +11,7 @@ class MediumThumbnail extends \admin\base\Filter
 
     public function name()
     {
-        return 'mittleres Thumbnail';
+        return 'Thumbnail mittel (300x300)';
     }
 
     public function chain()

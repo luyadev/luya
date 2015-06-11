@@ -11,7 +11,7 @@ class SmallThumbnail extends \admin\base\Filter
 
     public function name()
     {
-        return 'kleines Thumbnail';
+        return 'Thumbnail klein (100x100)';
     }
 
     public function chain()
