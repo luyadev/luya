@@ -24,6 +24,12 @@ class Twig extends \yii\base\Component
             'linksFindParent' => function($level) {
                 return \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->collection->links, $level);  
             },
+            'linkActive' => function() {
+                return \yii::$app->collection->links->getActiveLink();
+            },
+            'linkActivePart' => function($part) {
+                return \yii::$app->collection->links->getActiveLinkPart($part);
+            },
             'asset' => function ($name) {
                 return \yii::$app->getAssetManager()->getBundle($name);
             },

@@ -120,4 +120,10 @@ class Links implements \luya\collection\LinksInterface
     {
         return $this->_activeLink;
     }
+    
+    public function getActiveLinkPart($part)
+    {
+        $parts = explode("/", $this->getActiveLink());
+        return (array_key_exists($part, $parts)) ? $parts[$part] : null;
+    }
 }
