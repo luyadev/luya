@@ -27,6 +27,8 @@ class Config implements \admin\ngrest\base\ConfigInterface
 
     private $options = [];
 
+    private $_plugins = [];
+    
     public $i18n = [];
 
     public $extraFields = [];
@@ -67,19 +69,23 @@ class Config implements \admin\ngrest\base\ConfigInterface
 
     public function __call($name, $args)
     {
-        $this->config[$this->pointer['key']][$this->pointer['field']]['plugins'][] = [
-            'class' => '\\admin\\ngrest\\plugins\\'.ucfirst($name), 'args' => $args,
-        ];
-
+        $plugin = ['class' => '\\admin\\ngrest\\plugins\\'.ucfirst($name), 'args' => $args ];
+        $this->config[$this->pointer['key']][$this->pointer['field']]['plugins'][] = $plugin;
+        $this->_plugins[$this->pointer['field']][] = $plugin;
         return $this;
     }
 
+    public function getPlugins()
+    {
+        return $this->_plugins;
+    }
+    
     /**
      * return the all plugins fore this type.
      *
      * @todo should we directly return the static class method from the plugin as lambda function?
      */
-    public function getPlugins($type)
+    public function getPluginsByType($type)
     {
         $events = [];
         foreach ($this->getKey($type) as $item) {

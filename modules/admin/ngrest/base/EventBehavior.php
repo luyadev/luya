@@ -40,7 +40,7 @@ class EventBehavior extends \yii\base\Behavior
 
     public function eventAfterInsert($event)
     {
-        $events = $this->ngRestConfig->getPlugins('create'); // ngCrud is create not insert
+        $events = $this->ngRestConfig->getPlugins(); // ngCrud is create not insert
 
         foreach ($events as $field => $plugins) {
             foreach ($plugins as $plugin) {
@@ -55,7 +55,7 @@ class EventBehavior extends \yii\base\Behavior
 
     public function eventBeforeInsert($event)
     {
-        $events = $this->ngRestConfig->getPlugins('create'); // ngCrud is create not insert
+        $events = $this->ngRestConfig->getPlugins(); // ngCrud is create not insert
 
         foreach ($events as $field => $plugins) {
             foreach ($plugins as $plugin) {
@@ -70,7 +70,7 @@ class EventBehavior extends \yii\base\Behavior
 
     public function eventBeforeUpdate($event)
     {
-        $events = $this->ngRestConfig->getPlugins('update');
+        $events = $this->ngRestConfig->getPlugins();
 
         foreach ($events as $field => $plugins) {
             foreach ($plugins as $plugin) {
@@ -85,8 +85,7 @@ class EventBehavior extends \yii\base\Behavior
 
     public function eventAfterFind($event)
     {
-        $events = $this->ngRestConfig->getPlugins('list'); // ngCrud ist list not find
-
+        $events = $this->ngRestConfig->getPlugins(); // ngCrud ist list not find
         foreach ($events as $field => $plugins) {
             foreach ($plugins as $plugin) {
                 $obj = $this->createPluginObject($plugin, $event->sender);
@@ -100,8 +99,7 @@ class EventBehavior extends \yii\base\Behavior
     
     public function eventAfterNgrestFind($event)
     {
-        $events = $this->ngRestConfig->getPlugins('list'); // ngCrud ist list not find
-        
+        $events = $this->ngRestConfig->getPlugins(); // ngCrud ist list not find
         foreach ($events as $field => $plugins) {
             foreach ($plugins as $plugin) {
                 $obj = $this->createPluginObject($plugin, $event->sender);
