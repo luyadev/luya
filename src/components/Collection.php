@@ -11,7 +11,7 @@ namespace luya\components;
  */
 class Collection extends \yii\base\Component
 {
-    private $_composition;
+    private $_composition = null;
 
     public function setComposition($object)
     {
@@ -25,7 +25,7 @@ class Collection extends \yii\base\Component
 
     /* url */
 
-    private $_links;
+    private $_links = null;
 
     public function setLinks($url)
     {

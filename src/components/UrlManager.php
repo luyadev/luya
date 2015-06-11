@@ -72,11 +72,12 @@ class UrlManager extends \yii\web\UrlManager
 
     public function createUrl($params)
     {
-        if (!is_object(\yii::$app->collection->composition)) {
+        if (!is_object(Yii::$app->collection->composition)) {
             return parent::createUrl($params);
         }
-        $composition = \yii::$app->collection->composition->getFull();
-
+        $composition = Yii::$app->collection->composition->getFull();
+        $links = Yii::$app->collection->links;
+        
         $originalParams = $params;
 
         $params[0] = $composition.$params[0];
@@ -96,7 +97,7 @@ class UrlManager extends \yii\web\UrlManager
         $moduleName = \luya\helpers\Url::fromRoute($params[0], 'module');
 
         if ($this->getContextNavItemId()) {
-            $link = \yii::$app->collection->links->findOneByArguments(['nav_item_id' => (int) $this->getContextNavItemId()]);
+            $link = $links->findOneByArguments(['nav_item_id' => (int) $this->getContextNavItemId()]);
             $this->resetContext();
 
             return str_replace($moduleName, $composition.$link['url'], $response);
@@ -106,9 +107,11 @@ class UrlManager extends \yii\web\UrlManager
             $moduleObject = \yii::$app->getModule($moduleName);
 
             if (method_exists($moduleObject, 'setContext') && !empty($moduleObject->context)) {
-                $options = $moduleObject->getContextOptions();
-                $link = \yii::$app->collection->links->findOneByArguments(['nav_item_id' => (int) $options['navItemId']]);
-                $response = str_replace($moduleName, $composition.$link['url'], $response);
+                if ($links !== null) {
+                    $options = $moduleObject->getContextOptions();
+                    $link = $links->findOneByArguments(['nav_item_id' => (int) $options['navItemId']]);
+                    $response = str_replace($moduleName, $composition.$link['url'], $response);
+                }
             }
         } else {
             // because the urlCreation of yii returns a realtive url we have to manually add the composition getFull() path.
