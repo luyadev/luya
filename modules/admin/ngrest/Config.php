@@ -144,7 +144,7 @@ class Config implements \admin\ngrest\base\ConfigInterface
         $temp = $this->config[$key];
         foreach ($removeFields as $name) {
             if (!array_key_exists($name, $temp)) {
-                throw new \Exception('Error'); // @todo create exception class
+                throw new \Exception("Unable to remove field '$name' from '$key' config. The field does not exists in the provided config.");
             }
             unset($temp[$name]);
         }
