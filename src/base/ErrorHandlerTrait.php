@@ -49,7 +49,7 @@ trait ErrorHandlerTrait {
     
         return [
             'message' => $exception->getMessage(),
-            'server' => (isset($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : null,
+            'serverName' => (isset($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : null,
             'request_uri' => (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : null,
             'date' => date("d.m.Y H:i"),
             'line' => $exception->getLine(),

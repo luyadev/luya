@@ -21,7 +21,7 @@ class DefaultController extends \luya\rest\Controller
         $model = new \errorapi\models\Data();
         $model->error_json = \yii::$app->request->post('error_json', null);
         if ($model->save()) {
-            $this->slack("#" .$model->identifier . ' | ' . $model->server . ': ' . $model->msg, '#luya');
+            $this->slack("#" .$model->identifier . ' | ' . $model->serverName . ': ' . $model->msg, '#luya');
             $html = '<table border="1" cellpadding="5" cellspacing="0">';
             foreach(json_decode($model->error_json, true) as $k => $v) {
                 $html.='<tr>';

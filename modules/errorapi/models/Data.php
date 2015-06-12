@@ -6,7 +6,7 @@ class Data extends \yii\db\ActiveRecord
 {
     public $msg = null;
 
-    public $server = null;
+    public $serverName = null;
     
     public static function tableName()
     {
@@ -33,12 +33,12 @@ class Data extends \yii\db\ActiveRecord
     {
         if (is_array($this->error_json)) {
             $this->msg = $this->error_json['message'];
-            $this->server = $this->error_json['server'];
+            $this->serverName = $this->error_json['serverName'];
             $this->error_json = json_encode($this->error_json);
         } else {
             $arr = json_decode($this->error_json, true);
             $this->msg = $arr['message'];
-            $this->server = $arr['server'];
+            $this->serverName = $arr['serverName'];
         }
 
         $this->timestamp_create = time();
