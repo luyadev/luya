@@ -14,7 +14,7 @@
 	],
 	"require" : {
 		"php": ">=5.4.0",
-		"yiisoft/yii2": "2.0.*@stable",
+		"yiisoft/yii2": "2.0.4",
 		"twig/twig" : "1.*@stable",
 		"ext-curl" : "*",
         "curl/curl" : "1.2.0",
@@ -22,7 +22,7 @@
         "flowjs/flow-php-server" : "1.0.*@stable"
 	},
 	"require-dev" : {
-		"yiisoft/yii2-debug" : "*@stable",
+		"yiisoft/yii2-debug" : "2.0.4",
 		"phpunit/phpunit" : "@stable",
 		"fabpot/php-cs-fixer" : "@stable"
 	},
