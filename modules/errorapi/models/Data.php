@@ -4,6 +4,8 @@ namespace errorapi\models;
 
 class Data extends \yii\db\ActiveRecord
 {
+    public $msg = null;
+    
     public static function tableName()
     {
         return 'error_data';
@@ -22,19 +24,21 @@ class Data extends \yii\db\ActiveRecord
 
         $this->on(self::EVENT_BEFORE_INSERT, [$this, 'eventBeforeCreate']);
     }
+    
+    
 
     public function eventBeforeCreate()
     {
         if (is_array($this->error_json)) {
-            $msg = $this->error_json['message'];
+            $this->msg = $this->error_json['message'];
             $this->error_json = json_encode($this->error_json);
         } else {
             $arr = json_decode($this->error_json, true);
-            $msg = $arr['message'];
+            $this->msg = $arr['message'];
         }
 
         $this->timestamp_create = time();
-        $this->identifier = $this->hash($msg);
+        $this->identifier = $this->hash($this->msg, 'luya');
     }
     
     private function hash($msg)
