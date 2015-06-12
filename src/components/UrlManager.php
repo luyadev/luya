@@ -120,7 +120,11 @@ class UrlManager extends \yii\web\UrlManager
         if (!$context) {
             // because the urlCreation of yii returns a realtive url we have to manually add the composition getFull() path.
             $baseUrl = yii::$app->request->baseUrl;
-            $response = str_replace($baseUrl, Url::trailing($baseUrl) . Url::removeTrailing($composition), $response);
+            if (empty($baseUrl)) {
+                $response = Url::removeTrailing($composition) . $response;
+            } else {
+                $response = str_replace($baseUrl, Url::trailing($baseUrl) . Url::removeTrailing($composition), $response);
+            }
         }
         return $response;
     }
