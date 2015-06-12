@@ -26,6 +26,7 @@ class Mail extends \yii\base\Component
     {
         $this->_phpmailer = new \PHPMailer();
         $this->_phpmailer->do_debug = 0;
+        $this->_phpmailer->CharSet = 'UTF-8';
         if ($this->isSMTP) {
             $this->_phpmailer->SMTPDebug = false;
             $this->_phpmailer->isSMTP();
