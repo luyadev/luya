@@ -103,22 +103,25 @@ class UrlManager extends \yii\web\UrlManager
             return str_replace($moduleName, $composition.$link['url'], $response);
         }
 
+        $context = false;
+        
         if ($moduleName !== false) {
             $moduleObject = \yii::$app->getModule($moduleName);
 
             if (method_exists($moduleObject, 'setContext') && !empty($moduleObject->context)) {
                 if ($links !== null) {
+                    $context = true;
                     $options = $moduleObject->getContextOptions();
                     $link = $links->findOneByArguments(['nav_item_id' => (int) $options['navItemId']]);
                     $response = str_replace($moduleName, $composition.$link['url'], $response);
                 }
             }
-        } else {
+        }
+        if (!$context) {
             // because the urlCreation of yii returns a realtive url we have to manually add the composition getFull() path.
             $baseUrl = yii::$app->request->baseUrl;
             $response = str_replace($baseUrl, Url::trailing($baseUrl) . Url::removeTrailing($composition), $response);
         }
-        
         return $response;
     }
 }
