@@ -36,10 +36,16 @@ class PrefixComposition
     {
         switch($this->_composition['langShortCode']) {
             case "de":
-                return "de_CH";
+                return "de_DE";
                 break;
             case "en":
                 return "en_EN";
+                break;
+            case "fr":
+                return "fr_FR";
+                break;
+            case "it":
+                return "it_IT";
                 break;
         }
     }
