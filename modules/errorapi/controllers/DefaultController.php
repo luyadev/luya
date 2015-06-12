@@ -24,7 +24,7 @@ class DefaultController extends \luya\rest\Controller
             $html = '<table border="1" cellpadding="5" cellspacing="0">';
             foreach(json_decode($model->error_json, true) as $k => $v) {
                 $html.='<tr>';
-                $html.='<td><strong>'.$k.'</strong></td>';
+                $html.='<td><strong>'.$k.':</strong></td>';
                 $html.='<td>';
                 if (is_array($v)) {
                     $html.= "<pre><code>" . print_r($v, true) . "</code></pre>";

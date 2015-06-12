@@ -49,11 +49,13 @@ trait ErrorHandlerTrait {
     
         return [
             'message' => $exception->getMessage(),
+            'request_uri' => (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : null,
             'date' => date("d.m.Y H:i"),
             'line' => $exception->getLine(),
             'file' => $exception->getFile(),
             'trace' => $_trace,
             'server' => $_SERVER,
+            'ip' => (isset($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : null,
             'get' => $_GET,
             'post' => $_POST,
         ];

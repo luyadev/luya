@@ -26,10 +26,19 @@ class Data extends \yii\db\ActiveRecord
     public function eventBeforeCreate()
     {
         if (is_array($this->error_json)) {
+            $msg = $this->error_json['message'];
             $this->error_json = json_encode($this->error_json);
+        } else {
+            $arr = json_decode($this->error_json, true);
+            $msg = $arr['message'];
         }
 
         $this->timestamp_create = time();
-        $this->identifier = md5(strlen($this->error_json).uniqid());
+        $this->identifier = $this->hash($msg);
+    }
+    
+    private function hash($msg)
+    {
+        return sprintf('%s', hash('crc32b', $msg));
     }
 }
