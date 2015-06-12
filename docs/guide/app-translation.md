@@ -33,5 +33,22 @@ return [
 
 use:
 ```php
-$i18n = Yii::t('app', 'foo');
+echo Yii::t('app', 'foo');
 ```
+
+Variables in translations
+--------------------------
+if you have a parameter to use in the translation
+```php
+$paramValue = time();
+
+echo Yii::t('app', 'foo-param', $paramValue);
+```
+
+the translation inside the messages array must look like:
+```php
+return [
+	'foo-param' => 'Its now {0} in unix timestamp!'
+];
+```
+see: [yii2 messages dok](https://github.com/yiisoft/yii2/blob/master/docs/guide/tutorial-i18n.md)
