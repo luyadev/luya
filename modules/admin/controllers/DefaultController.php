@@ -2,6 +2,8 @@
 
 namespace admin\controllers;
 
+use Yii;
+
 class DefaultController extends \admin\base\Controller
 {
     public $disablePermissionCheck = true;
@@ -19,7 +21,7 @@ class DefaultController extends \admin\base\Controller
     public function actionLogout()
     {
         $this->adminUser->logout();
-
-        return $this->redirect(\Yii::$app->urlManager->createUrl(['admin']));
+        $url = \luya\helpers\Url::to('admin/login/index');
+        return Yii::$app->getResponse()->redirect($url);
     }
 }
