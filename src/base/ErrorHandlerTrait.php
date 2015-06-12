@@ -2,6 +2,8 @@
 
 namespace luya\base;
 
+use \yii\web\NotFoundHttpException;
+
 trait ErrorHandlerTrait {
     
     public $api = 'http://luya.io/errorapi';
@@ -10,7 +12,7 @@ trait ErrorHandlerTrait {
     
     public function renderException($exception)
     {
-        if (!$this->transferException) {
+        if ($exception instanceof NotFoundHttpException || !$this->transferException) {
             return parent::renderException($exception);
         }
     
