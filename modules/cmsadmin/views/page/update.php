@@ -5,7 +5,7 @@
     <div class="page__drop"  ng-controller="DropBlockController" ng-model="droppedBlock" data-sortindex="0" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'page__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}"></div>
 
     <div ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController" data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{revert: false, handle : '.block__move', helper : 'clone'}" ng-model="block">
-        <div class="block">
+        <div class="block" ng-class="{ 'block--edit' : edit }">
             <div class="block__toolbar">
                         <div class="left">
                     <i class="block__move mdi-action-open-with"></i>
@@ -14,7 +14,7 @@
                     </div>
                             </div>
                             <div class="right">
-                                <i class="mdi-editor-mode-edit [ waves-effect waves-tale ]" onclick="$(this).parents('.block').toggleClass('block--edit');"></i>
+                                <i class="mdi-editor-mode-edit [ waves-effect waves-tale ]" ng-click="toggleEdit()"></i>
                                 <i class="mdi-action-delete [ waves-effect waves-tale ]" ng-click="removeBlock(block)"></i>
                                 <!--<i class="mdi-navigation-more-vert [ waves-effect waves-tale ]"></i>-->
                             </div>
@@ -24,15 +24,17 @@
                 <div class="row" ng-repeat="field in block.vars">
                      <zaa-injector dir="field.type" options="field.options" label="{{field.label}}" grid="12" model="data[field.var]"></zaa-injector>
                 </div>
-                <hr /><h5>Konfigurations Parameter</h5>
-                <div class="row" ng-repeat="cfgField in block.cfgs">
-                    <zaa-injector dir="cfgField.type" options="cfgField.options" label="{{cfgField.label}}" grid="12" model="cfgdata[cfgField.var]"></zaa-injector>
+                <div ng-show="block.cfgs.length" class="blue lighten-5" style="margin-top:20px; margin-bottom:20px;">
+                    <p class="flow-text" style="padding:10px; font-weight:bold;">Konfiguration</p>
+                    <div class="row" ng-repeat="cfgField in block.cfgs">
+                       <zaa-injector dir="cfgField.type" options="cfgField.options" label="{{cfgField.label}}" grid="12" model="cfgdata[cfgField.var]"></zaa-injector>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col s12">
-                    <div class="right">
-                        <button class="[ waves-effect waves-light ] btn btn--small teal" ng-click="save()"><i class="mdi-action-done left"></i> Speichern</button>
-                    </div>
+                        <div class="right">
+                            <button class="[ waves-effect waves-light ] btn btn--small teal" ng-click="save()"><i class="mdi-action-done left"></i> Speichern</button>
+                        </div>
                     </div>
                 </div>
             </div>

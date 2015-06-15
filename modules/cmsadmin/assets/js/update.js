@@ -179,6 +179,7 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
 	$scope.edit = false;
 	
 	$scope.toggleEdit = function() {
+		/* onclick="$(this).parents('.block').toggleClass('block--edit');" */
 		$scope.edit = !$scope.edit;
 	};
 	
@@ -204,14 +205,14 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
         if (confirm('Block «' + block.name + '» wirklich löschen?')) {
             ApiCmsNavItemPageBlockItem.delete({id: block.id}, function (rsp) {
                 $scope.PagePlaceholderController.NavItemTypePageController.refresh();
-
-                Materialize.toast('Block «' + block.name + '» wurde gelöscht!', 3000);
+                Materialize.toast('Block «' + block.name + '» wurde entfernt!', 3000);
             });
         }
 	};
 	
 	$scope.save = function () {
 		ApiCmsNavItemPageBlockItem.update({ id : $scope.block.id }, $.param({json_config_values : JSON.stringify($scope.data), json_config_cfg_values : JSON.stringify($scope.cfgdata) }), function(rsp) {
+			Materialize.toast('<span> Block «'+$scope.block.name+'» wurde aktualisiert.</span>', 2000)
 			$scope.edit = false;
 		});
 	}
