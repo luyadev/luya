@@ -96,9 +96,9 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
             </div>
         <? endforeach; ?>
         
-        <div style="background-color:red; padding:20px;" ng-show="createErrors.length">
+        <div class="red lighten-2" style="color:white;" ng-show="createErrors.length">
             <ul>
-                <li ng-repeat="error in createErrors" style="padding:10px;"><strong>{{error.field}}</strong>: {{error.message}}</li>
+                <li ng-repeat="error in createErrors" style="padding:6px;">- {{error.message}}</li>
             </ul>
         </div>
         
@@ -153,9 +153,9 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
             </div>
         <? endforeach; ?>
         
-        <div style="background-color:red; padding:20px;" ng-show="updateErrors.length">
+        <div class="red lighten-2" style="color:white;" ng-show="updateErrors.length">
             <ul>
-                <li ng-repeat="error in updateErrors" style="padding:10px;"><strong>{{error.field}}</strong>: {{error.message}}</li>
+                <li ng-repeat="error in updateErrors" style="padding:6px;">- {{error.message}}</li>
             </ul>
         </div>
     </div>
