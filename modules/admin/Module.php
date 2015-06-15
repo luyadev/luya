@@ -60,13 +60,13 @@ class Module extends \admin\base\Module
         ->nodeRoute('Datei Manager', 'mdi-image-photo-library', 'admin-storage-index', 'admin/storage/index')
         ->node('Administration', 'mdi-navigation-apps')
             ->group('Zugriff')
-                ->itemApi('Benutzer', 'admin-user-index', 'fa-user', 'api-admin-user')
-                ->itemApi('Gruppen', 'admin-group-index', 'fa-users', 'api-admin-group')
+                ->itemApi('Benutzer', 'admin-user-index', 'mdi-action-account-circle', 'api-admin-user')
+                ->itemApi('Gruppen', 'admin-group-index', 'mdi-action-account-child', 'api-admin-group')
             ->group('System')
-                ->itemApi('Sprachen', 'admin-lang-index', 'fa-language', 'api-admin-lang')
+                ->itemApi('Sprachen', 'admin-lang-index', 'mdi-action-language', 'api-admin-lang')
             ->group('Bilder')
-                ->itemApi('Effekte', 'admin-effect-index', 'fa-link', 'api-admin-effect')
-                ->itemApi('Filter', 'admin-filter-index', 'fa-filter', 'api-admin-filter')
+                ->itemApi('Effekte', 'admin-effect-index', 'mdi-image-blur-linear', 'api-admin-effect')
+                ->itemApi('Filter', 'admin-filter-index', 'mdi-image-adjust', 'api-admin-filter')
         ->menu();
     }
 

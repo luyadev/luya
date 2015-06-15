@@ -13,11 +13,11 @@ class Module extends \admin\base\Module
     public function getMenu()
     {
         return $this
-        ->node('Neuigkeiten', 'mdi-av-new-releases')
+        ->node('Neuigkeiten', 'mdi-action-description')
             ->group('Daten')
-                ->itemApi('Artikel', 'newsadmin-article-index', 'fa-newspaper-o', 'api-news-article')
-                ->itemApi('Tags', 'newsadmin-tag-index', 'fa-tags', 'api-news-tag')
-                ->itemApi('Katgorien', 'newsadmin-cat-index', 'fa-list-alt', 'api-news-cat')
+                ->itemApi('Artikel', 'newsadmin-article-index', 'mdi-action-description', 'api-news-article')
+                ->itemApi('Tags', 'newsadmin-tag-index', 'mdi-social-share', 'api-news-tag')
+                ->itemApi('Katgorien', 'newsadmin-cat-index', 'mdi-action-group-work', 'api-news-cat')
         ->menu();
     }
 

@@ -4,7 +4,7 @@
             <div class="col s12">
                 <div ng-repeat="item in items">
                     <h5>{{item.name}}</h5>
-                    <p ng-repeat="sub in item.items"><a ng-click="click(sub)" class="waves-effect waves-teal btn-flat"><i class="mdi-file-cloud left"></i> {{sub.alias}}</a></p>
+                    <p ng-repeat="sub in item.items"><a ng-click="click(sub)" class="waves-effect waves-teal btn-flat"><i class="{{sub.icon}}"></i> {{sub.alias}}</a></p>
                 </div>
             </div>
         </div>
@@ -18,7 +18,7 @@
                     <div ng-repeat="item in dashboard">
                         <div class="col s6">
                             <div class="card-panel  blue lighten-5">
-                                <h5>{{ item.menu.alias }}</h5>
+                                <h5><i class="{{item.menu.icon}}"></i> {{ item.menu.alias }}</h5>
                                 <p ng-repeat="log in item.data"><i>{{ log.firstname }} {{ log.lastname}}</i> hat einen Datensatz
                                     <strong ng-if="log.is_update == 1">bearbeitet</strong>
                                     <strong ng-if="log.is_insert == 1">hinzugefügt</strong>

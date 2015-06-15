@@ -13,8 +13,8 @@ class Module extends \admin\base\Module
     {
         return $this->node('Gallerien', 'mdi-image-photo-album')
             ->group('Verwalten')
-                ->itemApi('Alben', 'galleryadmin-album-index', 'fa-folder-open', 'api-gallery-album')
-                ->itemApi('Kategorien', 'galleryadmin-cat-index', 'fa-folder-openl', 'api-gallery-cat')
+                ->itemApi('Alben', 'galleryadmin-album-index', 'mdi-image-camera', 'api-gallery-album')
+                ->itemApi('Kategorien', 'galleryadmin-cat-index', 'mdi-image-collections', 'api-gallery-cat')
         ->menu();
     }
 }

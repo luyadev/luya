@@ -30,11 +30,11 @@ class Module extends \admin\base\Module
             ->nodeRoute('CMS Inhalte', 'mdi-social-public', 'cmsadmin-default-index', 'cmsadmin/default/index')
             ->node('CMS Einstellungen', 'mdi-image-tune')
                 ->group('Verwalten')
-                    ->itemApi('Kategorien', 'cmsadmin-cat-index', 'fa-ils', 'api-cms-cat')
-                    ->itemApi('Layout', 'cmsadmin-layout-index', 'fa-eyedropper', 'api-cms-layout')
+                    ->itemApi('Kategorien', 'cmsadmin-cat-index', 'mdi-action-settings-applications', 'api-cms-cat')
+                    ->itemApi('Layout', 'cmsadmin-layout-index', 'mdi-image-style', 'api-cms-layout')
                 ->group('Blöcke')
-                    ->itemApi('Gruppen', 'cmsadmin-blockgroup-index', 'fa-group', 'api-cms-blockgroup')
-                    ->itemApi('Verwalten', 'cmsadmin-block-index', 'fa-outdent', 'api-cms-block')
+                    ->itemApi('Gruppen', 'cmsadmin-blockgroup-index', 'mdi-content-content-copy', 'api-cms-blockgroup')
+                    ->itemApi('Verwalten', 'cmsadmin-block-index', 'mdi-editor-format-align-left', 'api-cms-block')
             ->menu();
     }
 
