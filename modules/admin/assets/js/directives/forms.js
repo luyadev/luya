@@ -182,7 +182,7 @@ zaa.directive('zaaDatetime', function() {
 			}
 			
 			$scope.$watch(function() { return $scope.model }, function(n, o) {
-				if (n !== undefined) {
+				if (n !== undefined && n != o) {
 					var date = new Date(n*1000);
 					$scope.day = date.getDate(),
 					$scope.month = date.getMonth() + 1;
@@ -193,7 +193,7 @@ zaa.directive('zaaDatetime', function() {
 			})
 		},
 		template : function() {
-			return '<div class="col s{{grid}}">Datum: <input ng-change="reform()" type="number" ng-model="day" min="1" max="31" style="width:34px;" />.<input ng-change="reform()" type="number" ng-model="month" min="1" max="12" style="width:34px;" />.<input ng-change="reform()" type="number" ng-model="year" min="1970" max="2050"  style="width:50px;" /> Zeit: <input ng-change="reform()" type="number" ng-model="hour" min="0" max="23" style="width:34px;" />:<input ng-change="reform()" type="number" ng-model="min" min="0" max="59" style="width:34px;" /></div>';
+			return '<div class="col s{{grid}}">Datum: <input ng-blur="reform()" type="text" ng-model="day" style="width:34px;" />.<input ng-blur="reform()" type="text" ng-model="month" style="width:34px;" />.<input ng-blur="reform()" type="text" ng-model="year" style="width:50px;" /> Zeit: <input ng-blur="reform()" type="text" ng-model="hour" style="width:34px;" />:<input ng-blur="reform()" type="text" ng-model="min" style="width:34px;" /></div>';
 		}
 	}
 });

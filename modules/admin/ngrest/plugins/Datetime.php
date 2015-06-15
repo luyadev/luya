@@ -28,19 +28,4 @@ class Datetime extends \admin\ngrest\base\Plugin
         return $this->renderCreate($doc);
     }
 
-    //
-
-    public function onBeforeCreate($value)
-    {
-        if (empty($value)) {
-            return 0;
-        }
-
-        return strtotime($value);
-    }
-
-    public function onBeforeUpdate($value, $oldValue)
-    {
-        return $this->onBeforeCreate($value);
-    }
 }
