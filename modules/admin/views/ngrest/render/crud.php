@@ -95,6 +95,13 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
                 <? endforeach; ?>
             </div>
         <? endforeach; ?>
+        
+        <div style="background-color:red; padding:20px;" ng-show="createErrors.length">
+            <ul>
+                <li ng-repeat="error in createErrors" style="padding:10px;"><strong>{{error.field}}</strong>: {{error.message}}</li>
+            </ul>
+        </div>
+        
     </div>
     <!-- /MODAL CONTENT -->
 
@@ -145,6 +152,12 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
                 <? endforeach; ?>
             </div>
         <? endforeach; ?>
+        
+        <div style="background-color:red; padding:20px;" ng-show="updateErrors.length">
+            <ul>
+                <li ng-repeat="error in updateErrors" style="padding:10px;"><strong>{{error.field}}</strong>: {{error.message}}</li>
+            </ul>
+        </div>
     </div>
     <!-- /MODAL CONTENT -->
 
