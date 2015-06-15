@@ -4,6 +4,10 @@
     
     <div class="page__drop"  ng-controller="DropBlockController" ng-model="droppedBlock" data-sortindex="0" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'page__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}"></div>
 
+    <div ng-show="!placeholder.__nav_item_page_block_items.length">
+        <p>Inhaltsblöcke hier platzieren</p>
+    </div>
+
     <div ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController" data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{revert: false, handle : '.block__move', helper : 'clone'}" ng-model="block">
         <div class="block" ng-class="{ 'block--edit' : edit }">
             <div class="block__toolbar">
@@ -38,7 +42,7 @@
                     </div>
                 </div>
             </div>
-            <ul ng-show="block.__placeholders.length" class="collapsible" data-collapsible="accordion">
+            <ul ng-show="block.__placeholders.length" class="collapsible" data-collapsible="expandable">
                 <li ng-repeat="placeholder in block.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'"></li>
             </ul>
         </div>
@@ -152,7 +156,7 @@
                         </div>
                         <div class="col s12" ng-switch-when="1" ng-controller="NavItemTypePageController">
 
-                            <ul class="collapsible" data-collapsible="accordion">
+                            <ul class="collapsible" data-collapsible="expandable">
                                 <li ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'"></li>
                             </ul>
 
