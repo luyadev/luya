@@ -24,7 +24,7 @@ zaa.factory('ApiAdminLang', function($resource) {
 	});
 });
 
-zaa.factory('AdminLangService', function(ApiAdminLang) {
+zaa.factory('AdminLangService', function(ApiAdminLang, $http) {
 	var service = [];
 	
 	service.data = [];
@@ -51,6 +51,11 @@ zaa.factory('AdminLangService', function(ApiAdminLang) {
 	service.load = function() {
 		if (service.data.length == 0) {
 			service.data = ApiAdminLang.query();
+			$http.get('admin/api-admin-defaults/lang').success(function(response) {
+				if (!service.isInSelection(response)) {
+					service.toggleSelection(response);
+				}
+			});
 			console.log('AdminLangService loading data', service.data);
 		}
 	}
