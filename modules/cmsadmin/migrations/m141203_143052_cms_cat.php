@@ -13,6 +13,13 @@ class m141203_143052_cms_cat extends Migration
             'default_nav_id' => 'INT(11) NOT NULL',
             'is_default' => 'TINYINT(1) NOT NULL DEFAULT 0',
         ]);
+        
+        $this->insert('cms_cat', [
+            'name' => 'Hauptnavigation',
+            'rewrite' => 'default',
+            'default_nav_id' => 1,
+            'is_default' => 1,
+        ]);
     }
 
     public function down()
