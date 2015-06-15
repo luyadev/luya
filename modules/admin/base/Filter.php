@@ -20,9 +20,12 @@ abstract class Filter
 
     public function getFilterId()
     {
-        $data = \admin\models\StorageFilter::find()->where(['identifier' => $this->identifier()])->asArray()->one();
+        $data = \admin\models\StorageFilter::find()->where(['identifier' => $this->identifier()])->one();
         if ($data) {
-            return $data['id'];
+            $data->scenario = 'restupdate';
+            $data->name = $this->name();
+            $data->update();
+            return $data->id;
         } else {
             // insert new filter
             $model = new \admin\models\StorageFilter();
