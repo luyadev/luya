@@ -74,6 +74,18 @@ class ExecutableController extends \yii\console\Controller
 
     public function actionImport()
     {
+        $this->execAuth();
+        $import = $this->execImport();
+        if (count($import) == 0) {
+            echo 'No response from the exec/import.';
+            exit(1);
+        }
+        print_r($import);
+        exit(0);
+    }
+
+    private function execImport()
+    {
         $response = [];
         $modules = \yii::$app->getModules();
         foreach ($modules as $id => $item) {
@@ -82,17 +94,9 @@ class ExecutableController extends \yii\console\Controller
                 $response[$id] = $object->import($this);
             }
         }
-        
-        $this->execAuth();
-        
-        if (empty($response)) {
-            echo 'Importer has not found any files to import.';
-            exit(1);
-        }
-        print_r($response);
-        exit(0);
+        return $response;
     }
-
+    
     /**
      * find all auth.php files, invoke them and return to \yii::$app->luya->auth->addRule.
      *
@@ -144,9 +148,8 @@ class ExecutableController extends \yii\console\Controller
             exit(1);
         }
 
-        $this->actionAuth();
-        // create user
-
+        $this->execAuth();
+        
         $salt = \Yii::$app->getSecurity()->generateRandomString();
         $pw = \Yii::$app->getSecurity()->generatePasswordHash($password.$salt);
 
@@ -219,13 +222,9 @@ class ExecutableController extends \yii\console\Controller
             ]]),
         ]);
 
-        $this->insert('cms_cat', [
-            'name' => 'Main Navigation Container',
-            'rewrite' => 'default',
-            'default_nav_id' => 1,
-            'is_default' => 1,
-        ]);
-
+        
+        $this->execImport();
+        
         echo "You can now login with E-Mail: '$email' and password: '$password'";
         exit(0);
     }
