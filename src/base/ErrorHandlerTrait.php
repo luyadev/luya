@@ -55,10 +55,11 @@ trait ErrorHandlerTrait {
             'line' => $exception->getLine(),
             'file' => $exception->getFile(),
             'trace' => $_trace,
-            'server' => $_SERVER,
             'ip' => (isset($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : null,
             'get' => $_GET,
             'post' => $_POST,
+            'server' => $_SERVER,
+            'session' => $_SESSION,
         ];
     }
     
