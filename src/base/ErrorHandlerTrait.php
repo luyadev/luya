@@ -59,7 +59,7 @@ trait ErrorHandlerTrait {
             'get' => $_GET,
             'post' => $_POST,
             'server' => $_SERVER,
-            'session' => $_SESSION,
+            'session' => (isset($_SESSION)) ? $_SESSION : null,
         ];
     }
     
