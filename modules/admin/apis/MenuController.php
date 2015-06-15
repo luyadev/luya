@@ -154,7 +154,7 @@ class MenuController extends \admin\base\RestController
         foreach ($accessList as $access) {
             if (!empty($access['api'])) {
                 // its an api log entry
-                $data = (new \yii\db\Query())->select(['timestamp_create', 'is_update', 'is_insert', 'admin_user.firstname', 'admin_user.lastname'])->from('admin_ngrest_log')->leftJoin('admin_user', 'admin_ngrest_log.user_id = admin_user.id')->orderBy('timestamp_create DESC')->where(['api' => $access['api']])->all();
+                $data = (new \yii\db\Query())->select(['timestamp_create', 'is_update', 'is_insert', 'admin_user.firstname', 'admin_user.lastname'])->from('admin_ngrest_log')->leftJoin('admin_user', 'admin_ngrest_log.user_id = admin_user.id')->orderBy('timestamp_create DESC')->where('api=:api and user_id!=0', [':api' => $access['api']])->all();
                 $log[] = [
                     'data' => $data,
                     'menu' => $access['row'],

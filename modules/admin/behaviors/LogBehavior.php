@@ -2,7 +2,10 @@
 
 namespace admin\behaviors;
 
+use Yii;
 use yii\db\ActiveRecord;
+use yii\web\Application;
+use admin\Module;
 
 class LogBehavior extends \yii\base\Behavior
 {
@@ -27,9 +30,9 @@ class LogBehavior extends \yii\base\Behavior
 
     public function eventAfterInsert($event)
     {
-        if (\yii::$app instanceof \yii\web\Application) {
-            \yii::$app->db->createCommand()->insert('admin_ngrest_log', [
-                'user_id' => (is_null(\admin\Module::getAdminUserData())) ? 0 : \admin\Module::getAdminUserData()->id,
+        if (Yii::$app instanceof Application) {
+            Yii::$app->db->createCommand()->insert('admin_ngrest_log', [
+                'user_id' => (is_null(Module::getAdminUserData())) ? 0 : Module::getAdminUserData()->id,
                 'timestamp_create' => time(),
                 'route' => $this->route,
                 'api' => $this->api,
@@ -42,9 +45,9 @@ class LogBehavior extends \yii\base\Behavior
 
     public function eventAfterUpdate($event)
     {
-        if (\yii::$app instanceof \yii\web\Application) {
-            \yii::$app->db->createCommand()->insert('admin_ngrest_log', [
-                'user_id' => (is_null(\admin\Module::getAdminUserData())) ? 0 : \admin\Module::getAdminUserData()->id,
+        if (Yii::$app instanceof Application) {
+            Yii::$app->db->createCommand()->insert('admin_ngrest_log', [
+                'user_id' => (is_null(Module::getAdminUserData())) ? 0 : Module::getAdminUserData()->id,
                 'timestamp_create' => time(),
                 'route' => $this->route,
                 'api' => $this->api,
