@@ -2,6 +2,8 @@
 
 namespace admin\models;
 
+use \admin\models\UserLogin;
+
 class LoginForm extends \yii\base\Model
 {
     private $_user = false;
@@ -34,7 +36,14 @@ class LoginForm extends \yii\base\Model
             $user->scenario = 'login';
             $user->auth_token = \yii::$app->security->hashData(\yii::$app->security->generateRandomString(), $user->password_salt);
             $user->save();
-
+            
+            $login = new UserLogin();
+            $login->setAttributes([
+                "auth_token" => $user->auth_token,
+                "user_id" => $user->id, 
+            ]);
+            $login->insert();
+            
             return $user;
         } else {
             return false;
