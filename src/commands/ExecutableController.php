@@ -82,6 +82,9 @@ class ExecutableController extends \yii\console\Controller
                 $response[$id] = $object->import($this);
             }
         }
+        
+        $this->execAuth();
+        
         if (empty($response)) {
             echo 'Importer has not found any files to import.';
             exit(1);
@@ -100,7 +103,7 @@ class ExecutableController extends \yii\console\Controller
      * }
      * ```
      */
-    public function actionAuth()
+    private function execAuth()
     {
         $modules = \yii::$app->getModules();
         foreach ($modules as $id => $item) {
