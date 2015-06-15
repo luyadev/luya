@@ -9,6 +9,7 @@
 	overflow: hidden;
 	transition: 0.5s ease padding-top;
 	border: 1px solid transparent;
+	min-height: 50px;
 
 	&:hover > .block__toolbar,
 	&.block--edit .block__toolbar {
