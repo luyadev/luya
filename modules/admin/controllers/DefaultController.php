@@ -3,6 +3,8 @@
 namespace admin\controllers;
 
 use Yii;
+use \luya\helpers\Url;
+use \yii\helpers\Url as YiiUrl;
 
 class DefaultController extends \admin\base\Controller
 {
@@ -21,7 +23,9 @@ class DefaultController extends \admin\base\Controller
     public function actionLogout()
     {
         $this->adminUser->logout();
-        $url = \luya\helpers\Url::to('admin/login/index');
-        return Yii::$app->getResponse()->redirect($url);
+        $url = YiiUrl::to(Url::to('admin'), true);
+        return $this->redirect($url);
+        //$url = \luya\helpers\Url::to('admin/login/index');
+        //return Yii::$app->getResponse()->redirect($url);
     }
 }

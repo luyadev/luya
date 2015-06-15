@@ -4,6 +4,7 @@ namespace admin\controllers;
 
 use yii;
 use \luya\helpers\Url;
+use \yii\helpers\Url as YiiUrl;
 
 class LoginController extends \admin\base\Controller
 {
@@ -22,10 +23,13 @@ class LoginController extends \admin\base\Controller
 
     public function actionIndex()
     {
+        $url = YiiUrl::to(Url::to('admin'), true);
+        
         // redirect logged in users
         if (!$this->adminUser->isGuest) {
-            $url = \luya\helpers\Url::to('admin');
-            return Yii::$app->getResponse()->redirect($url);
+            return $this->redirect($url);
+            //$url = \luya\helpers\Url::to('admin');
+            //return Yii::$app->getResponse()->redirect($url);
             //return $this->redirect(Yii::$app->urlManager->createUrl(['admin']));
         }
 
@@ -36,8 +40,9 @@ class LoginController extends \admin\base\Controller
             $model->attributes = $_POST['login'];
             if (($userObject = $model->login()) !== false) {
                 if ($this->adminUser->login($userObject)) {
-                    $url = \luya\helpers\Url::to('admin');
-                    return Yii::$app->getResponse()->redirect($url);
+                    return $this->redirect($url);
+                    //$url = \luya\helpers\Url::to('admin');
+                    //return Yii::$app->getResponse()->redirect($url);
                 }
             }
         }
