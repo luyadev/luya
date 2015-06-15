@@ -79,10 +79,10 @@ zaa.controller("NavItemController", function($scope, $http) {
 		var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 		var navItemId = data.id;
 		$http.post('admin/api-cms-navitem/update-item?navItemId=' + navItemId, $.param({ title : data.title, rewrite : data.rewrite }), headers).success(function(response) {
+			Materialize.toast('<span> Die Seite «'+data.title+'» wurde aktualisiert.</span>', 2000)
 			$scope.refresh();
 			$scope.toggleSettings();
 		}).error(function(e) {
-			alert('error! see console');
 			console.log(e);
 		})
 	}

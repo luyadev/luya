@@ -136,20 +136,36 @@
                     <div class="row">
                         <div class="col s12">
                             <h4>
-                                {{item.title}} <i class="mdi-navigation-more-vert right [ waves-effect waves-tale ]" dropdown data-constrainwidth="false" data-beloworigin="true" data-activates="pageMenu-{{item.id}}"></i>
+                                {{item.title}} <a ng-click="toggleSettings()"><i class="mdi-editor-mode-edit right [ waves-effect waves-tale ]"></i></a>
                             </h4>
                             <p>{{lang.name}}</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Page Settings dropdown, called by javascript -->
-                <ul id="pageMenu-{{item.id}}" class="dropdown-content">
-                    <li><a href="#!">Seiteninformationen bearbeiten</a></li>
-                </ul>
                 <!-- /Page Settings dropdown -->
 
-                <div class="page__content" ng-switch on="item.nav_item_type">
+                <div class="page__content" ng-show="settings">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input ng-model="copy.title" type="text" class="validate">
+                            <label>Seitenname</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input ng-model="copy.rewrite"  type="text" class="validate">
+                            <label>Url</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <button class="btn waves-effect waves-light" type="button" ng-click="toggleSettings()">Abbrechen <i class="mdi-content-clear right"></i></button>
+                            <button class="btn waves-effect waves-light" type="button" ng-click="save(copy)">Speichern <i class="mdi-content-send right"></i></button>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <div class="page__content" ng-show="!settings" ng-switch on="item.nav_item_type">
                     <div class="row">
                         <div class="col s12" ng-switch-when="2">
                             <p>Diese Seite ist als Module hinterlegt.
