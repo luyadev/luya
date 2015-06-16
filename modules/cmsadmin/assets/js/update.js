@@ -7,6 +7,8 @@ zaa.controller("NavController", function($scope, $stateParams, $http, AdminLangS
 	$scope.menuCats = MenuService.cats;
 	
 	$scope.navData = {};
+
+    $scope.sidebar = true;
 	
 	$http.get('admin/api-cms-nav/detail', { params : { navId : $scope.id }}).success(function(response) {
 		$scope.navData = response;
@@ -42,7 +44,11 @@ zaa.controller("NavController", function($scope, $stateParams, $http, AdminLangS
     			$scope.isDeleted = true;
     		});
     	}
-    }
+    };
+
+    $scope.toggleSidebar = function() {
+        $scope.sidebar = !$scope.sidebar;
+    };
 	
 	$scope.AdminClassService = AdminClassService;
 	
@@ -67,7 +73,7 @@ zaa.controller("NavItemController", function($scope, $http) {
 	$scope.item = [];
 	
 	$scope.copy = [];
-	
+
 	$scope.settings = false;
 	
 	$scope.reset = function() {
@@ -85,12 +91,12 @@ zaa.controller("NavItemController", function($scope, $http) {
 		}).error(function(e) {
 			console.log(e);
 		})
-	}
+	};
 	
 	$scope.toggleSettings = function() {
 		$scope.reset();
 		$scope.settings = !$scope.settings;
-	}
+	};
 	
 	$scope.getItem = function(langId, navId) {
 		$http({

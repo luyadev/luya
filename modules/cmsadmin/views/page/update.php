@@ -59,83 +59,84 @@
 </div>
 </script>
 <div ng-controller="NavController" ng-show="!isDeleted">
-    <div class="row">
-        <div class="col s12">
-    
-            <div class="toolbar [ grey lighten-3 ]">
-                <div class="row">
-                    <div class="col s12">
-    
-                        <!-- LEFT TOOLBAR -->
-                        <div class="left">
-    
-                            <!-- LANGUAGE SWITCH -->
-                            <div class="toolbar__group">
-                                <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'[ grey lighten-2 ]' : AdminLangService.isInSelection(lang)}" class="[ waves-effect waves-tale ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ]">{{lang.name}}</a> 
-                            </div>
-                            <!-- /LANGUAGE SWITCH -->
-    
-                            <!-- PLACEHOLDER TOGGLE -->
-                            <div class="toolbar__group">
-                                <div class="switch">
-                                    <label>
-                                        Platzhalter offen
-                                        <input type="checkbox">
-                                        <span class="lever"></span>
-                                    </label>
+
+    <div class="cms" ng-class="{'cms--sidebar-hidden' : !sidebar}">
+        <div class="cms__pages">
+
+            <div class="row">
+                <div class="col s12">
+
+                    <div class="toolbar [ grey lighten-3 ]">
+                        <div class="row">
+                            <div class="col s12">
+
+                                <!-- LEFT TOOLBAR -->
+                                <div class="left">
+
+                                    <!-- LANGUAGE SWITCH -->
+                                    <div class="toolbar__group">
+                                        <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'[ grey lighten-2 ]' : AdminLangService.isInSelection(lang)}" class="[ waves-effect waves-tale ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ]">{{lang.name}}</a>
+                                    </div>
+                                    <!-- /LANGUAGE SWITCH -->
+
+                                    <!-- PLACEHOLDER TOGGLE -->
+                                    <div class="toolbar__group">
+                                        <div class="switch">
+                                            <label>
+                                                Platzhalter offen
+                                                <input type="checkbox">
+                                                <span class="lever"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- /PLACEHOLDER TOGGLE -->
+
+                                </div> <!-- /LEFT TOOLBAR -->
+
+                                <!-- RIGHT TOOLBAR -->
+                                <div class="right">
+
+                                    <!-- NAVIGATION DROPDOWN -->
+                                    <div class="toolbar__group">
+                                        <select class="browser-default" ng-model="navData.cat_id" ng-options="item.id as item.name for item in menuCats" />
+                                    </div>
+                                    <!-- /NAVIGATION DROPDOWN -->
+
+                                    <!-- SITE PLACEMENET -->
+                                    <div class="toolbar__group">
+                                        <select class="browser-default">
+                                            <option value="" disabled selected>Seitenplatzierung</option>
+                                        </select>
+                                    </div>
+                                    <!-- /SITE PLACEMENET -->
+
+                                    <!-- DELETE BUTTON -->
+                                    <div class="toolbar__group">
+                                        <a ng-click="trash()" class="[ waves-effect waves-tale ][ btn-flat btn--small ][ grey-text text-darken-2 ]"><i class="mdi-action-delete"></i></a>
+                                    </div>
+                                    <!-- /DELETE BUTTON -->
+
+                                    <!-- VISIBILITY SWITCH -->
+                                    <div class="toolbar__group">
+                                        <div class="switch">
+                                            <label>
+                                                Sichtbar
+                                                <input type="checkbox" ng-model="navData.is_hidden" ng-true-value="0" ng-false-value="1">
+                                                <span class="lever"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- /VISIBILITY SWITCH -->
+
                                 </div>
+                                <!-- /RIGHT TOOLBAR -->
+
                             </div>
-                            <!-- /PLACEHOLDER TOGGLE -->
-    
-                        </div> <!-- /LEFT TOOLBAR -->
-    
-                        <!-- RIGHT TOOLBAR -->
-                        <div class="right">
-    
-                            <!-- NAVIGATION DROPDOWN -->
-                            <div class="toolbar__group">
-                                <select class="browser-default" ng-model="navData.cat_id" ng-options="item.id as item.name for item in menuCats" />
-                            </div>
-                            <!-- /NAVIGATION DROPDOWN -->
-    
-                            <!-- SITE PLACEMENET -->
-                            <div class="toolbar__group">
-                                <select class="browser-default">
-                                    <option value="" disabled selected>Seitenplatzierung</option>
-                                </select>
-                            </div>
-                            <!-- /SITE PLACEMENET -->
-    
-                            <!-- DELETE BUTTON -->
-                            <div class="toolbar__group">
-                                <a ng-click="trash()" class="[ waves-effect waves-tale ][ btn-flat btn--small ][ grey-text text-darken-2 ]"><i class="mdi-action-delete"></i></a>
-                            </div>
-                            <!-- /DELETE BUTTON -->
-    
-                            <!-- VISIBILITY SWITCH -->
-                            <div class="toolbar__group">
-                                <div class="switch">
-                                    <label>
-                                        Sichtbar
-                                        <input type="checkbox" ng-model="navData.is_hidden" ng-true-value="0" ng-false-value="1">
-                                        <span class="lever"></span>
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- /VISIBILITY SWITCH -->
-    
                         </div>
-                        <!-- /RIGHT TOOLBAR -->
-    
                     </div>
+
                 </div>
             </div>
-
-        </div>
-    </div>
-
-    <div class="cms">
-        <div class="cms__pages">
 
             <div class="row">
 
@@ -204,6 +205,7 @@
 
             </div>
         </div>
+
         <div class="cms__sidebar">
 
             <div class="blockholder" ng-controller="DroppableBlocksController">
@@ -217,6 +219,10 @@
                 </div>
             </div>
 
+            <div class="cms__sidebar-toggler" ng-click="toggleSidebar()">
+                <i class="mdi-hardware-keyboard-arrow-right" ng-show="sidebar"></i>
+                <i class="mdi-hardware-keyboard-arrow-left" ng-show="!sidebar"></i>
+            </div>
         </div>
     </div>
 

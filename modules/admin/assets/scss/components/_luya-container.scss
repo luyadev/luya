@@ -42,6 +42,7 @@
 
 	// Look & Feel
 	background-color: color('shades', 'white');
+	overflow: auto;
 
 	@media #{$small-and-down} {
 		top: $navbar-height-mobile;

@@ -1,5 +1,7 @@
+$mainnav-height: 64px;
 $cms__sidebar--width: 200px;
 $cms__pages--width: calc( 100% - #{$cms__sidebar--width} );
+$cms__pages--width-full: 100%;
 
 .cms {
 	position: relative;
@@ -7,16 +9,45 @@ $cms__pages--width: calc( 100% - #{$cms__sidebar--width} );
 
 .cms__pages, .cms__sidebar {
 	display: inline-block;
-	height: 100%;
 }
 
 .cms__pages {
 	width: $cms__pages--width;
+	transition: 0.25s ease width;
+}
+.cms--sidebar-hidden .cms__pages {
+	width: $cms__pages--width-full;
 }
 
 .cms__sidebar {
+	background-color: #4E4E4E;
 	width: $cms__sidebar--width;
 	position: fixed;
 	right: 0;
-	top: auto;
+	top: $mainnav-height;
+	bottom: 0;
+	transition: 0.25s ease right;
+}
+.cms--sidebar-hidden .cms__sidebar {
+	right: -$cms__sidebar--width;
+}
+
+.cms__sidebar-toggler {
+	position: absolute;
+	bottom: 0;
+	left: -28px;
+	display: inline-block;
+	width: 28px;
+	height: 28px;
+	text-align: center;
+	vertical-align: middle;
+	background-color: #4E4E4E;
+	border-radius: 5px 0 0 0;
+	cursor: pointer;
+
+	i {
+		color: #fff;
+		font-size: 28px;
+		line-height: 32px;
+	}
 }
