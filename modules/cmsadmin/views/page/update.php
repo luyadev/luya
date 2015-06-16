@@ -2,7 +2,10 @@
 <div class="collapsible__header collapsible-header"><i class="mdi-navigation-unfold-more"></i> {{placeholder.label}}</div>
 <div class="collapsible__body collapsible-body">
     
-    <div class="page__drop"  ng-controller="DropBlockController" ng-model="droppedBlock" data-sortindex="0" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'page__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}"></div>
+    <div class="page__drop">
+        <div class="page__drop-zone" ng-controller="DropBlockController" ng-model="droppedBlock" data-sortindex="0" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'page__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}">
+        </div>
+    </div>
 
     <div ng-show="!placeholder.__nav_item_page_block_items.length">
         <p>Inhaltsblöcke hier platzieren</p>
@@ -46,7 +49,11 @@
                 <li ng-repeat="placeholder in block.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'"></li>
             </ul>
         </div>
-        <div class="page__drop" ng-controller="DropBlockController" data-sortindex="{{key+1}}" ng-model="droppedBlock" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'page__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}"></div>
+
+        <div class="page__drop">
+            <div class="page__drop-zone" ng-controller="DropBlockController" ng-model="droppedBlock" data-sortindex="0" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'page__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}">
+            </div>
+        </div>
 
     </div>
 </div>
@@ -124,80 +131,93 @@
                 </div>
             </div>
 
-            <div class="row">
-            
-            <div class="col s{{(12/AdminLangService.selection.length)}}" ng-repeat="lang in langs" ng-show="AdminLangService.isInSelection(lang)" ng-controller="NavItemController">
-            <!-- page -->
-            <div class="page" ng-if="item.length == 0">
-                <p>Seite noch nicht übersetzt.</p>
-            </div>
-            <div class="page {{AdminClassService.getClassSpace('onDragStart')}}" ng-if="item.length != 0">
-                <div class="page__header">
-                    <div class="row">
-                        <div class="col s12">
-                            <h4>
-                                {{item.title}} <a ng-click="toggleSettings()"><i class="mdi-editor-mode-edit right [ waves-effect waves-tale ]"></i></a>
-                            </h4>
-                            <p>{{lang.name}}</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- /Page Settings dropdown -->
-
-                <div class="page__content" ng-show="settings">
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input ng-model="copy.title" type="text" class="validate">
-                            <label>Seitenname</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input ng-model="copy.rewrite"  type="text" class="validate">
-                            <label>Url</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s12">
-                            <button class="btn waves-effect waves-light" type="button" ng-click="toggleSettings()">Abbrechen <i class="mdi-content-clear right"></i></button>
-                            <button class="btn waves-effect waves-light" type="button" ng-click="save(copy)">Speichern <i class="mdi-content-send right"></i></button>
-                        </div>
-                    </div>
-                    
-                </div>
-                
-                <div class="page__content" ng-show="!settings" ng-switch on="item.nav_item_type">
-                    <div class="row">
-                        <div class="col s12" ng-switch-when="2">
-                            <p>Diese Seite ist als Module hinterlegt.
-                        </div>
-                        <div class="col s12" ng-switch-when="1" ng-controller="NavItemTypePageController">
-
-                            <ul class="collapsible" data-collapsible="expandable">
-                                <li ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'"></li>
-                            </ul>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <!-- /page -->
         </div>
-
-        <div class="blockholder">
-            <div class="col s12">
-                <div class="blockholder__inner" ng-controller="DroppableBlocksController">
-                    <ul class="blockholder__tabs tabs" tabs>
-                        <li class="blockholder__tab tab col s6" ng-repeat="item in DroppableBlocksService.blocks"><a ng-href="#blocks-{{item.group.id}}">{{item.group.name}}</a></li>
-                    </ul>
-                    <div ng-repeat="item in DroppableBlocksService.blocks" id="blocks-{{item.group.id}}" class="blockholder__blocks">
-                        <div class="blockholder__block" ng-repeat="block in item.blocks" data-drag="true" jqyoui-draggable="{placeholder: 'keep', index : {{$index}}, onStart : 'onStart', onStop : 'onStop'}" ng-model="item.blocks" data-jqyoui-options="{revert: false, helper : 'clone'}">
-                            <i class="mdi-editor-format-align-left"></i> {{ block.name}} 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
     </div>
+
+    <div class="cms">
+        <div class="cms__pages">
+
+            <div class="row">
+
+                <div class="col s{{(12/AdminLangService.selection.length)}}" ng-repeat="lang in langs" ng-show="AdminLangService.isInSelection(lang)" ng-controller="NavItemController">
+
+                    <!-- PAGE -->
+
+                    <div class="page" ng-if="item.length == 0">
+                        <p>Seite noch nicht übersetzt.</p>
+                    </div>
+                    <div class="page {{AdminClassService.getClassSpace('onDragStart')}}" ng-if="item.length != 0">
+
+                        <!-- PAGE__HEADER -->
+                        <div class="page__header">
+                            <div class="row">
+                                <div class="col s12">
+                                    <h4>
+                                        {{item.title}} <a ng-click="toggleSettings()"><i class="mdi-editor-mode-edit right [ waves-effect waves-tale ]"></i></a>
+                                    </h4>
+                                    <p>{{lang.name}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /PAGE__HEADER -->
+
+                        <!-- PAGE__CONTENT -->
+                        <div class="page__content" ng-show="settings">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input ng-model="copy.title" type="text" class="validate">
+                                    <label>Seitenname</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input ng-model="copy.rewrite"  type="text" class="validate">
+                                    <label>Url</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12">
+                                    <button class="btn waves-effect waves-light" type="button" ng-click="toggleSettings()">Abbrechen <i class="mdi-content-clear right"></i></button>
+                                    <button class="btn waves-effect waves-light" type="button" ng-click="save(copy)">Speichern <i class="mdi-content-send right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /PAGE__CONTENT -->
+
+                        <!-- PAGE__CONTENT--SETTINGS -->
+                        <div class="page__content page__content--settings" ng-show="!settings" ng-switch on="item.nav_item_type">
+                            <div class="row">
+                                <div class="col s12" ng-switch-when="2">
+                                    <p>Diese Seite ist als Module hinterlegt.
+                                </div>
+                                <div class="col s12" ng-switch-when="1" ng-controller="NavItemTypePageController">
+
+                                    <ul class="collapsible" data-collapsible="expandable">
+                                        <li ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'"></li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /PAGE__CONTENT--SETTINGS -->
+                    </div>
+                    <!-- /PAGE -->
+                </div>
+
+            </div>
+        </div>
+        <div class="cms__sidebar">
+
+            <div class="blockholder" ng-controller="DroppableBlocksController">
+                <div class="col s12">
+                    <div class="blockholder__group" ng-repeat="item in DroppableBlocksService.blocks">
+                        <b class="blockholder__group-title">{{item.group.name}}</b>
+                        <div class="blockholder__block" ng-repeat="block in item.blocks" data-drag="true" jqyoui-draggable="{placeholder: 'keep', index : {{$index}}, onStart : 'onStart', onStop : 'onStop'}" ng-model="item.blocks" data-jqyoui-options="{revert: false, helper : 'original'}">
+                            <i class="mdi-editor-format-align-left"></i> {{ block.name}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </div>

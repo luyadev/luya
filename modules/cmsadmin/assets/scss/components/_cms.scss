@@ -1,0 +1,22 @@
+$cms__sidebar--width: 200px;
+$cms__pages--width: calc( 100% - #{$cms__sidebar--width} );
+
+.cms {
+	position: relative;
+}
+
+.cms__pages, .cms__sidebar {
+	display: inline-block;
+	height: 100%;
+}
+
+.cms__pages {
+	width: $cms__pages--width;
+}
+
+.cms__sidebar {
+	width: $cms__sidebar--width;
+	position: fixed;
+	right: 0;
+	top: auto;
+}
