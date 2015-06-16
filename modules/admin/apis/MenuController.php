@@ -130,40 +130,46 @@ class MenuController extends \admin\base\RestController
         return $data;
     }
 
-    /**
-     * @todo add access list for routes (example cms admin)
-     *
-     * @param int $nodeId
-     */
     public function actionDashboard($nodeId)
     {
         $data = $this->getNodeData($nodeId);
-
         $accessList = [];
-
+        
         foreach ($data['groups'] as $groupkey => $groupvalue) {
             foreach ($groupvalue['items'] as $row) {
                 if ($row['permissionIsApi']) {
                     // @todo check if the user can access this api, otherwise hide this log informations?
-                    $accessList[] = ['api' => $row['permssionApiEndpoint'], 'route' => false, 'row' => $row];
+                    $accessList[] = $row;
                 }
             }
         }
-
+        
         $log = [];
-        foreach ($accessList as $access) {
-            if (!empty($access['api'])) {
-                // its an api log entry
-                $data = (new \yii\db\Query())->select(['timestamp_create', 'is_update', 'is_insert', 'admin_user.firstname', 'admin_user.lastname'])->from('admin_ngrest_log')->leftJoin('admin_user', 'admin_ngrest_log.user_id = admin_user.id')->orderBy('timestamp_create DESC')->limit(20)->where('api=:api and user_id!=0', [':api' => $access['api']])->all();
-                $log[] = [
-                    'data' => $data,
-                    'menu' => $access['row'],
+        foreach($accessList as $access) {
+            $data = (new \yii\db\Query())->select(['timestamp_create', 'admin_ngrest_log.id', 'is_update', 'is_insert', 'admin_user.firstname', 'admin_user.lastname'])->from('admin_ngrest_log')->leftJoin('admin_user', 'admin_ngrest_log.user_id = admin_user.id')->orderBy('timestamp_create DESC')->where('api=:api and user_id!=0', [':api' => $access['permssionApiEndpoint']])->all();
+            foreach($data as $row) {
+                $date = mktime(0,0,0, date("n", $row['timestamp_create']), date("j", $row['timestamp_create']), date("Y", $row['timestamp_create']));
+                $log[$date][$row['id']] = [
+                    'name' => $row['firstname'] . " " . $row['lastname'],
+                    'is_update' => $row['is_update'],
+                    'is_insert' => $row['is_insert'],
+                    'timestamp' => $row['timestamp_create'],
+                    'alias' => $access['alias'],
+                    'icon' => $access['icon'],
                 ];
-            } else {
-                // its a route log entry
             }
         }
-
-        return $log;
+        
+        
+        $array = [];
+        
+        foreach($log as $day => $values) {
+            $array[] = [
+                'day' => $day,
+                'items' => $values,
+            ];
+        }
+        
+        return $array;
     }
 }
