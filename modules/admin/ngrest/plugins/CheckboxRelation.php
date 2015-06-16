@@ -34,6 +34,16 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
         $this->refJoinPkId = $refJoinPkId;
     }
 
+    private function getOptionsData()
+    {
+        $items = [];
+        foreach ($this->model->find()->all() as $item) {
+            $items[] = ['id' => $item->id, 'label' => implode(' | ', $item->toArray())];
+        }
+        
+        return ['items' => $items];
+    }
+    
     /*
     public $options = [
         "model" => "",
@@ -52,12 +62,18 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
         $elmn->setAttribute('id', $this->id);
         $elmn->setIdAttribute('id', true);
         $elmn->setAttribute('model', $this->ngModel);
-        $elmn->setAttribute('options', json_encode(['items' => $items]));
+        //$elmn->setAttribute('options', json_encode(['items' => $items]));
+        $elmn->setAttribute('options', $this->getServiceName('relationdata'));
         $elmn->setAttribute('label', $this->alias);
         $elmn->setAttribute('grid', $this->gridCols);
         $doc->appendChild($elmn);
 
         return $doc;
+    }
+    
+    public function serviceData()
+    {
+        return ['relationdata' => $this->getOptionsData()];
     }
 
     public function renderUpdate($doc)

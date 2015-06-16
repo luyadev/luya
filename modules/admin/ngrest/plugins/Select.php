@@ -31,12 +31,18 @@ abstract class Select extends \admin\ngrest\base\Plugin
         $elmn->setAttribute('id', $this->id);
         $elmn->setIdAttribute('id', true);
         $elmn->setAttribute('model', $this->ngModel);
-        $elmn->setAttribute('options', json_encode($this->data));
+        //$elmn->setAttribute('options', json_encode($this->data));
+        $elmn->setAttribute('options', $this->getServiceName('selectdata'));
         $elmn->setAttribute('label', $this->alias);
         $elmn->setAttribute('grid', $this->gridCols);
         $doc->appendChild($elmn);
 
         return $doc;
+    }
+    
+    public function serviceData()
+    {
+        return ['selectdata' => $this->data];
     }
 
     public function renderUpdate($doc)
