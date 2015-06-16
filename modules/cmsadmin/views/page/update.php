@@ -210,7 +210,7 @@
                 <div class="col s12">
                     <div class="blockholder__group" ng-repeat="item in DroppableBlocksService.blocks">
                         <b class="blockholder__group-title">{{item.group.name}}</b>
-                        <div class="blockholder__block" ng-repeat="block in item.blocks" data-drag="true" jqyoui-draggable="{placeholder: 'keep', index : {{$index}}, onStart : 'onStart', onStop : 'onStop'}" ng-model="item.blocks" data-jqyoui-options="{revert: false, helper : 'original'}">
+                        <div class="blockholder__block" ng-repeat="block in item.blocks" data-drag="true" jqyoui-draggable="{placeholder: 'keep', index : {{$index}}, onStart : 'onStart', onStop : 'onStop'}" ng-model="item.blocks" data-jqyoui-options="{revert: false, helper : 'clone'}">
                             <i class="mdi-editor-format-align-left"></i> {{ block.name}}
                         </div>
                     </div>
