@@ -12,6 +12,7 @@
 .collapsible__body {
 	background-color: $collapsible--background;
 	padding: 20px;
+	overflow: visible;
 
 	p {
 		margin: 0;
