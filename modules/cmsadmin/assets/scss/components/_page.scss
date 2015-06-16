@@ -32,17 +32,29 @@
 	background-color: transparent;
 	width: 100%;
 	display: block;
-	transition: 0.25s ease transform, 0.4s ease background-color;
 	position: relative;
 }
 
-.page--drag-active .page__drop {
-	transform: scale(1, 20);
-	background-color: $blue;
+.page__drop-zone {
+	position: absolute;
+	width: 100%;
+	height: 0;
+	margin-top: 0;
+	background-color: #e3f2fd;
+	border: 0 dashed #2196f3;
+	z-index: 100;
+	pointer-events: none;
+	transition: 0.25s ease height, 0.25s ease margin-top, 0.25s ease background-color, 0.5s ease border-color;
+}
+
+.page--drag-active .page__drop-zone {
+	border: 2px dashed #2196f3;
+	pointer-events: auto;
+	height: 50px;
+	margin-top: -25px;
 
 	&.page__drop--hover {
-		transform: scale(1, 35);
-		background-color: $teal;
-		z-index: 20;
+		background-color: #e0f2f1;
+		border-color: #009688;
 	}
 }
