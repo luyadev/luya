@@ -131,7 +131,16 @@ zaa.controller("NavItemTypePageController", function($scope, $http) {
 			method : 'GET',
 			params : { navItemPageId : $scope.NavItemController.item.nav_item_type_id }
 		}).success(function(response) {
-			$scope.container = response;
+			if ($scope.container.length == 0) {
+				$scope.container = response;
+			} else {
+				// merge new content item to placeholder
+				var old_ph = $scope.container.__placeholders;
+				var new_ph = response.__placeholders;
+				for (var i in old_ph) {
+					$scope.container.__placeholders[i]['__nav_item_page_block_items'] = new_ph[i]['__nav_item_page_block_items'];
+				}
+			}
 		});
 	}
 	
@@ -233,7 +242,6 @@ zaa.controller("DropBlockController", function($scope, ApiCmsNavItemPageBlockIte
 		var moveBlock = $scope.droppedBlock['vars'] || false;
 		if (moveBlock == false) {
 			ApiCmsNavItemPageBlockItem.save($.param({ prev_id : $scope.placeholder.prev_id, sort_index : sortIndex, block_id : $scope.droppedBlock.id , placeholder_var : $scope.placeholder.var, nav_item_page_id : $scope.placeholder.nav_item_page_id }), function(rsp) {
-				/* @todo: refresh statement, on change statement ? */
 				$scope.PagePlaceholderController.NavItemTypePageController.refresh();
 			})
 		} else {
@@ -243,7 +251,7 @@ zaa.controller("DropBlockController", function($scope, ApiCmsNavItemPageBlockIte
 				sort_index : sortIndex
 			}), function(rsp) {
 				$scope.PagePlaceholderController.NavItemTypePageController.refresh();
-				return;
+				
 			});
 		}
 		
