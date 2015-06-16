@@ -85,7 +85,7 @@ class Module extends \luya\base\Module
             'alias' => $name,
             'route' => $route,
             'icon' => $icon,
-            'permssionApiEndpoint' => $apiEndpoint,
+            'permssionApiEndpoint' => null,
             'permissionIsRoute' => true,
             'permissionIsApi' => false,
         ];
