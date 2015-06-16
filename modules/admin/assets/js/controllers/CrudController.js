@@ -173,7 +173,13 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 			$scope.loading = false;
 			$scope.data.list = data;
 		})
+		
+		$http.get($scope.config.apiEndpoint + '/services').success(function(rsp) {
+			$scope.service = rsp;
+		})
 	}
+	
+	$scope.service = [];
 	
 	/*
 	$scope.toggler = {

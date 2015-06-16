@@ -16,15 +16,21 @@ abstract class Model extends \yii\db\ActiveRecord
 
     const EVENT_AFTER_NGREST_FIND = 'afterNgrestFind';
     
+    const EVENT_SERVICE_NGREST = 'serviceNgrest';
+    
     public $i18n = [];
 
     //public $i18nExpandFields = false;
 
     public $extraFields = [];
 
+    public $ngRestServiceArray = [];
+    
     private $_ngrestCall = false;
     
     private $_ngrestCallType = false;
+    
+    private $_config = null;
     
     abstract public function ngRestConfig($config);
 
@@ -181,13 +187,23 @@ abstract class Model extends \yii\db\ActiveRecord
         return $this->getTableSchema()->primaryKey[0];
     }
 
+    public function getNgrestServices()
+    {
+        $this->trigger(self::EVENT_SERVICE_NGREST);
+        return $this->ngRestServiceArray;
+    }
+    
     public function getNgRestConfig()
     {
-        $config = new \admin\ngrest\Config($this->ngRestApiEndpoint(), $this->ngRestPrimaryKey());
-
-        $config->setExtraFields($this->extraFields());
-        $config->i18n($this->getI18n());
-
-        return $this->ngRestConfig($config);
+        if ($this->_config == null) {
+            $config = new \admin\ngrest\Config($this->ngRestApiEndpoint(), $this->ngRestPrimaryKey());
+            
+            $config->setExtraFields($this->extraFields());
+            $config->i18n($this->getI18n());
+            
+            $this->_config = $this->ngRestConfig($config);
+        }
+        
+        return $this->_config;
     }
 }

@@ -35,6 +35,16 @@ abstract class Plugin
         $this->gridCols = $gridCols;
     }
 
+    public function getServiceName($name)
+    {
+        return 'service.'.$this->name.'.'.$name;
+    }
+    
+    public function serviceData()
+    {
+        return false;
+    }
+    
     public function onBeforeCreate($fieldValue)
     {
         return false;

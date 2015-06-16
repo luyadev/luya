@@ -17,6 +17,7 @@ class EventBehavior extends \yii\base\Behavior
             ActiveRecord::EVENT_BEFORE_UPDATE => 'eventBeforeUpdate',
             ActiveRecord::EVENT_AFTER_FIND => 'eventAfterFind',
             Model::EVENT_AFTER_NGREST_FIND => 'eventAfterNgrestFind',
+            Model::EVENT_SERVICE_NGREST => 'eventServiceNgrest',
         ];
     }
 
@@ -38,6 +39,24 @@ class EventBehavior extends \yii\base\Behavior
         return $instance;
     }
 
+    public function eventServiceNgrest($event)
+    {
+        $events = $this->ngRestConfig->getPlugins(); // ngCrud is create not insert
+        
+        $service = [];
+        foreach ($events as $field => $plugins) {
+            foreach ($plugins as $plugin) {
+                $obj = $this->createPluginObject($plugin, $event->sender);
+                $response = $obj->serviceData();
+                if ($response) {
+                    $service[$field] = $response;
+                }
+            }
+        }
+        
+        $event->sender->ngRestServiceArray = $service;
+    }
+    
     public function eventAfterInsert($event)
     {
         $events = $this->ngRestConfig->getPlugins(); // ngCrud is create not insert
