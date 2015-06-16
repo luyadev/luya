@@ -71,8 +71,17 @@ class Config implements \admin\ngrest\base\ConfigInterface
     {
         $plugin = ['class' => '\\admin\\ngrest\\plugins\\'.ucfirst($name), 'args' => $args ];
         $this->config[$this->pointer['key']][$this->pointer['field']]['plugins'][] = $plugin;
-        $this->_plugins[$this->pointer['field']][] = $plugin;
+        $this->addPlugin($this->pointer['field'], $plugin);
         return $this;
+    }
+    
+    private function addPlugin($field, $plugin)
+    {
+        $class = $plugin['class'];
+        if (!isset($this->_plugins[$field])) { $this->_plugins[$field] = []; }
+        if (!array_key_exists(md5($class), $this->_plugins[$field])) {
+            $this->_plugins[$field][md5($class)] = $plugin;
+        }
     }
 
     public function getPlugins()
