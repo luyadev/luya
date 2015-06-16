@@ -87,7 +87,7 @@ Create a new file in the apis folder. For instance NewsController.php
 <?php
 namespace news\apis;
 
-class NewsController extends \admin\base\RestActiveController
+class NewsController extends \admin\ngrest\base\Api
 {
     public $modelClass = 'newsadmin\models\News';
 }

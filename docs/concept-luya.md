@@ -406,7 +406,7 @@ Example of a Controller:
 
 namespace admin\controllers;
 
-class UserController extends \admin\base\RestActiveController
+class UserController extends \admin\ngrest\base\Api
 {
     public $modelClass = 'admin\models\User';
 }

@@ -74,7 +74,7 @@ class CrudController extends \yii\console\Controller
                 switch($name) {
                     
                     case "api":
-                        $content.= 'class '.$item['class'].' extends \admin\base\RestActiveController' . PHP_EOL;
+                        $content.= 'class '.$item['class'].' extends \admin\ngrest\base\Api' . PHP_EOL;
                         $content.= '{' . PHP_EOL;
                         $content.= '    public $modelClass = \''.$modelNs.'\';' . PHP_EOL;
                         $content.= '}';

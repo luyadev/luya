@@ -2,7 +2,7 @@
 
 namespace cmsadmin\apis;
 
-class BlockController extends \admin\base\RestActiveController
+class BlockController extends \admin\ngrest\base\Api
 {
     public $modelClass = 'cmsadmin\models\Block';
 }

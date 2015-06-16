@@ -2,7 +2,7 @@
 
 namespace newsadmin\apis;
 
-class ArticleController extends \admin\base\RestActiveController
+class ArticleController extends \admin\ngrest\base\Api
 {
     public $modelClass = '\\newsadmin\\models\\Article';
 }

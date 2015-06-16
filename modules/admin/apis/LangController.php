@@ -2,7 +2,7 @@
 
 namespace admin\apis;
 
-class LangController extends \admin\base\RestActiveController
+class LangController extends \admin\ngrest\base\Api
 {
     public $modelClass = 'admin\models\Lang';
 }

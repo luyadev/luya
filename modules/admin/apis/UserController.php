@@ -2,7 +2,7 @@
 
 namespace admin\apis;
 
-class UserController extends \admin\base\RestActiveController
+class UserController extends \admin\ngrest\base\Api
 {
     public function actions()
     {
