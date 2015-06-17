@@ -39,11 +39,12 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
             <label for="searchString">in der Tabelle <strong>{{currentMenuItem.alias}}</strong> suchen.</label>
         </div>
     </div>
+    {{ orderBy }}
     <table class="striped hoverable responsive-table">
     <thead>
         <tr>
             <?php foreach ($crud->list as $item): ?>
-                <th><?= $item['alias']; ?> <i ng-click="changeOrder('<?= $item['name']; ?>', '+')" class="mdi-hardware-keyboard-arrow-up grid-sort-btn"></i> <i ng-click="changeOrder('<?= $item['name']; ?>', '-')" class="mdi-hardware-keyboard-arrow-down grid-sort-btn"></i></th>
+                <th><?= $item['alias']; ?> <i ng-click="changeOrder('<?= $item['name']; ?>', '+')" ng-class="{'active-orderby' : isOrderBy('+<?= $item['name']; ?>') }" class="mdi-hardware-keyboard-arrow-up grid-sort-btn"></i> <i ng-click="changeOrder('<?= $item['name']; ?>', '-')" ng-class="{'active-orderby' : isOrderBy('-<?= $item['name']; ?>') }" class="mdi-hardware-keyboard-arrow-down grid-sort-btn"></i></th>
             <?php endforeach; ?>
             <?php if (count($crud->getButtons()) > 0): ?>
                 <th style="text-align:right;"><span class="grid-data-length">{{data.list.length}} Einträge</span></th>
