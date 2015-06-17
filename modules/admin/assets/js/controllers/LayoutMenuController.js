@@ -1,4 +1,13 @@
-zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location) {
+zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout) {
+	
+	$scope.notify = null;
+	
+	(function tick(){
+		$http.get('admin/api-admin-timestamp', { ignoreLoadingBar: true }).success(function(response) {
+			$scope.notify = response;
+			$timeout(tick, 25000);
+		})
+	})();
 	
 	$scope.items = [];
 	

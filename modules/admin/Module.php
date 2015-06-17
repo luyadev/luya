@@ -8,6 +8,7 @@ class Module extends \admin\base\Module
         'api-admin-defaults' => 'admin\apis\DefaultsController',
         'api-admin-storage' => 'admin\apis\StorageController',
         'api-admin-menu' => 'admin\apis\MenuController',
+        'api-admin-timestamp' => 'admin\apis\TimestampController',
         'api-admin-user' => 'admin\apis\UserController', // protected by auth()
         'api-admin-group' => 'admin\apis\GroupController', // protected by auth()
         'api-admin-lang' => 'admin\apis\LangController', // protected by auth()

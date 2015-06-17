@@ -117,6 +117,9 @@
                         </ul>
                         <ul class="right">
                             <li>
+                                Benutzer Online <strong>{{notify.length}}</strong>
+                            </li>
+                            <li>
                                 <a class="dropdown-button" data-hover="true" dropdown data-activates="userMenu"><i class="mdi-action-account-circle right"></i><strong><?php echo $user->email; ?></strong></a>
                             </li>
                         </ul>

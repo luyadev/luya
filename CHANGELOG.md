@@ -4,6 +4,7 @@ LUYA CHANGELOG
 1.0.0-alpha6 (in progress)
 --------------------------
 - added luya version constante to module `luya\Module::VERSION`.
+- added user online overview in admin panel.
 
 1.0.0-alpha5 (17. Jun 2015)
 -------------------------------
