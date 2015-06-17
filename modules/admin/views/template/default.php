@@ -5,7 +5,7 @@
                 <div ng-repeat="item in items" class="submenu__group">
                     <h5 class="submenu__title">{{item.name}}</h5>
                     <div class="submenu__item" ng-repeat="sub in item.items">
-                        <a ng-click="click(sub)" ng-class="{'active' : isActiveElement(sub) }" class="submenu__link [ waves-effect waves-teal ] btn-flat">
+                        <a ng-click="click(sub)" ng-class="{'active' : sub.route == currentItem.route }" class="submenu__link [ waves-effect waves-teal ] btn-flat">
                             <i class="{{sub.icon}}"></i> {{sub.alias}}
                         </a>
                     </div>
