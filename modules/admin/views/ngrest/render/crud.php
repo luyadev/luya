@@ -39,7 +39,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
             <label for="searchString">in der Tabelle <strong>{{currentMenuItem.alias}}</strong> suchen.</label>
         </div>
     </div>
-    {{ orderBy }}
+    
     <table class="striped hoverable responsive-table">
     <thead>
         <tr>
