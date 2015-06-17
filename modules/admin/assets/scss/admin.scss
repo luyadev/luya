@@ -23,6 +23,7 @@
  * 		luya-container:			Size and position of the Sidebar and the Main container (luya-container__sidebar, luya-container__main)
  * 		modal:					Sizes and styling for modals
  * 		navbar:					Some Improvements to the normal materialize navbar
+ * 		navbar:					Default styles for submenu (left side)
  *		toolbar:				Defines the .toolbar background and proportions
  */
 @import "components/btn";
@@ -30,6 +31,8 @@
 @import "components/luya-container";
 @import "components/modal";
 @import "components/navbar";
+@import "components/submenu";
+@import "components/table";
 @import "components/toolbar";
 
 /**
