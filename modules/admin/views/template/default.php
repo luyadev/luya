@@ -5,8 +5,9 @@
                 <div ng-repeat="item in items" class="submenu__group">
                     <h5 class="submenu__title">{{item.name}}</h5>
                     <div class="submenu__item" ng-repeat="sub in item.items">
-                        <a ng-click="click(sub)" class="submenu__link [ waves-effect waves-teal ] btn-flat">
-                            <i class="{{sub.icon}}"></i> {{sub.alias}}
+                        <a ng-click="click(sub)" class="submenu__link [ waves-effect waves-blue ] btn-flat">
+                            <i class="{{sub.icon}}"></i>
+                            <span>{{sub.alias}}</span>
                         </a>
                     </div>
                 </div>
