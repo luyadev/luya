@@ -93,7 +93,7 @@
                     </li>
                     <li ng-if="files.length == 0"  class="collection-item">
                         <span class="title"><strong>Ordner ist leer</strong></span>
-                        <p>Es wurden noch keine Dateine in diesen Ordner hochgleaden.</p>
+                        <p>Es wurden noch keine Dateien in diesen Ordner hochgeladen.</p>
                     </li>
                 </ul>
             </div>
