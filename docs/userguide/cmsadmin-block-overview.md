@@ -21,19 +21,23 @@ CMS BLOCK ÜBERSICHT
 | Abstandhalter       | Struktur | Variable Leerfläche
 
 
-Block-Text
----------
-Variabeln:
-var.content = Inhalt selber
-cfg.isMarkDown = Wird var.content als markdown gepartste ja/nein
+Block-Überschrift
+-----------------
 
-Block-Link
------
-| var           | type           | label
-----------------------------------------
-| href          | zaa-text      | Ziel-Adresse
+### User-Info:
 
-var.href = Den Link
-var.target = blank oder nicht
+Setzt eine Überschrift in einer bestimmten Grösse.
+
+Beispiel:
+Bei Auswahl der Grösse "Mittel" wird die Überschrift mit dem \<H2\> HTML-Tag gesetzt:
+
+`<h2>Überschrift</h2>`
+
+### Entwickler-Info:
+
+| Gruppe        | Variable      | Label-Name      | Typ             | Optionen
+------------------------------------------------------------------------------------
+| vars          | content       | Titel           | zaa-text        | -
+| vars          | headingType   | Grösse          | zaa-select      | value/label: h1/Gross, h2/Mittel, h3/Klein
 
 
