@@ -2,6 +2,8 @@
 
 namespace cmsadmin\apis;
 
+use Yii;
+
 /**
  * example.com/admin/api-cms-nav/create-page
  * example.com/admin/api-cms-nav/create-item-page
@@ -78,6 +80,9 @@ class NavController extends \admin\base\RestController
         $model = new \cmsadmin\models\Nav();
         $create = $model->createPage($this->postArg('parent_nav_id'), $this->postArg('cat_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('rewrite'), $this->postArg('layout_id'));
 
+        if ($create !== true) {
+            Yii::$app->response->statusCode = 422;
+        }
         return $create;
     }
 
@@ -88,7 +93,9 @@ class NavController extends \admin\base\RestController
     {
         $model = new \cmsadmin\models\Nav();
         $create = $model->createPageItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('rewrite'), $this->postArg('layout_id'));
-
+        if ($create !== true) {
+            Yii::$app->response->statusCode = 422;
+        }
         return $create;
     }
 
@@ -96,7 +103,9 @@ class NavController extends \admin\base\RestController
     {
         $model = new \cmsadmin\models\Nav();
         $create = $model->createModule($this->postArg('parent_nav_id'), $this->postArg('cat_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('rewrite'), $this->postArg('module_name'));
-
+        if ($create !== true) {
+            Yii::$app->response->statusCode = 422;
+        }
         return $create;
     }
 
@@ -104,7 +113,9 @@ class NavController extends \admin\base\RestController
     {
         $model = new \cmsadmin\models\Nav();
         $create = $model->createModuleItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('rewrite'), $this->postArg('module_name'));
-
+        if ($create !== true) {
+            Yii::$app->response->statusCode = 422;
+        }
         return $create;
     }
 }

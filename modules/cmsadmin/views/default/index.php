@@ -62,6 +62,12 @@
     <p>Diese Seite wurde erfolgreich erstellt!
 </div>
 
+<div ng-show="error.length != 0" class="alert alert--danger">
+    <ul>
+        <li ng-repeat="err in error">{{ err[0] }}</li>
+    </ul>
+</div>
+
 </div>
 </script>
 

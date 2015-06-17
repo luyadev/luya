@@ -7,6 +7,8 @@ zaa.directive("createForm", function() {
 		templateUrl : 'createform.html',
 		controller : function($scope, $http, AdminLangService, ApiCmsCat, MenuService) {
 			
+			$scope.error = [];
+			
 			$scope.controller = $scope.$parent;
 			
 			$scope.AdminLangService = AdminLangService;
@@ -39,16 +41,10 @@ zaa.directive("createForm", function() {
 			
 			$scope.exec = function () {
 				$scope.controller.save().then(function(response) {
-					console.log('createForm Drive Response', response);
 					MenuService.refresh();
+				}, function(reason) {
+					$scope.error = reason;
 				});
-				/*
-				$scope.controller.save().then(function(response) {
-					console.log('exec', response);
-					//$scope.data.nav_item_type = true;
-					MenuService.refresh();
-				})
-				*/
 			}
 		}
 	}
