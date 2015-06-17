@@ -16,7 +16,9 @@ class Layout extends \admin\ngrest\base\Model
         $config->list->field('view_file', 'Twig Filename (*.twig)')->text()->required();
 
         $config->create->copyFrom('list', ['id']);
+        
         $config->update->copyFrom('list', ['id']);
+        $config->update->field('json_config', 'JSON Konfiguration')->text()->required();
 
         return $config;
     }
