@@ -1,9 +1,31 @@
 #!/bin/bash
 
-if [ "$1" = "init" ];  then
-	git remote add upstream https://github.com/zephir/luya.git
+SCRIPTS_PATH=$(pwd)/
+
+if [[ "$SCRIPTS_PATH" == */scripts/ ]]
+then
+    SCRIPTS_PATH=$SCRIPTS_PATH"../"
 fi
 
-git checkout master
-git fetch upstream
-git rebase upstream/master
+echo $SCRIPTS_PATH
+
+BASE_PATH="modules/"
+ASSETS_PATH="assets/"
+
+PATHS=( "admin/" "cmsadmin/" )
+
+for path in ${PATHS[@]}
+do
+    MODULE_ASSET_PATH=$SCRIPTS_PATH$BASE_PATH$path$ASSETS_PATH
+
+    echo $MODULE_ASSET_PATH;
+
+    if [ -e $MODULE_ASSET_PATH"config.rb" ]
+    then
+        echo "Compass compile: $path"
+        cd $MODULE_ASSET_PATH
+        compass compile
+    fi
+
+    cd $SCRIPTS_PATH
+done
