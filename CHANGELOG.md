@@ -9,3 +9,4 @@ LUYA CHANGELOG
 - fixed #51 itemRoute issue added permission guide.
 - moved blockholder from bottom to right side / added toggle button for blockholder
 - Fixed overflow bug in sidebar
+- Fixed #56 display current active sort arrow
