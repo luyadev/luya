@@ -170,7 +170,7 @@ class Module extends \yii\base\Module
      */
     public function import(\luya\commands\ExecutableController $exec)
     {
-        return get_class($this).' does not use the import() method.';
+        return false;
     }
 
     /**

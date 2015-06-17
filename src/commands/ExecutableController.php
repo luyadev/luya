@@ -91,7 +91,10 @@ class ExecutableController extends \yii\console\Controller
         foreach ($modules as $id => $item) {
             $object = \yii::$app->getModule($id);
             if (method_exists($object, 'import')) {
-                $response[$id] = $object->import($this);
+                $importResponse = $object->import($this);
+                if ($importResponse !== false) {
+                    $response[$id] = $importResponse;
+                }
             }
         }
         return $response;
