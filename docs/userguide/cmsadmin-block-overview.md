@@ -12,7 +12,7 @@ CMS BLOCK ÜBERSICHT
 | Bild		          | Einfach  | Einfaches Bild
 | Karte	              | Einfach  | Google Map Kartenausschnitt mit Anzeige einer definierten Adresse
 | Code                | Einfach  | HTML Code Block
-| ------------------- | ---------| -------------
+|                     |          | 
 | Trenner             | Struktur | Trennlinie
 | Abstandhalter       | Struktur | Variable Leerfläche
 
