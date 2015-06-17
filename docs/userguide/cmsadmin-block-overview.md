@@ -1,11 +1,17 @@
-CMS BLOCKS OVERVIEW
+CMS BLOCK ÜBERSICHT
 ===================
 
-Defining all CMS Blocks and getting an overview
+Überblick über alle verfügbaren Basis CMS Blöcke.
 
 
-| Block Name          | Type   |  Description
-| ------------------- | ------ | -------------
-| Title				  | Basic  | Adding a headline
-| Text		          | Basic  | Adding a text block
-| Text		          | Basic  | Adding a text block
+| Block Name          | Typ      |  Beschreibung
+| ------------------- | ---------| -------------
+| Titel				  | Einfach  | Überschrift
+| Text		          | Einfach  | Text Block
+| Zitat               | Einfach  | Ein besonders hervorgehobenes Zitat
+| Bild		          | Einfach  | Einfaches Bild
+| Karte	              | Einfach  | Google Map Kartenausschnitt mit Anzeige einer definierten Adresse
+| Code                | Einfach  | HTML Code Block
+| Trenner             | Struktur | Trennlinie
+| Abstandhalter       | Struktur | Variable Leerfläche
+
