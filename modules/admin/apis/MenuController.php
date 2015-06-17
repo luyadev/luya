@@ -114,6 +114,9 @@ class MenuController extends \admin\base\RestController
                         // when true, set permissionGranted to true
                         if (!Yii::$app->luya->auth->matchRoute($this->getUserId(), $groupItemEntry['route'])) {
                             unset($data['groups'][$groupName]['items'][$groupItemKey]);
+                        } else {
+                            /* fixed bug #51 */
+                            $data['groups'][$groupName]['items'][$groupItemKey]['route'] = str_replace("/", "-", $data['groups'][$groupName]['items'][$groupItemKey]['route']);
                         }
                     } elseif ($groupItemEntry['permissionIsApi']) {
                         // when true, set permissionGranted to true
