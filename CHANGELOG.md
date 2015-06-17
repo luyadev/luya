@@ -6,3 +6,4 @@ LUYA CHANGELOG
 - added new `serviceData()` method for ngrest plugins.
 - module dashboard sort by date.
 - cms admin placeholder do not close after insert/resport block.
+- fixed #51 itemRoute issue added permission guide.
