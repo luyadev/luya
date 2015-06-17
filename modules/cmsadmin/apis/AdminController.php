@@ -24,7 +24,7 @@ class AdminController extends \admin\base\RestController
                 $obj = Block::objectId($block['id']);
                 $blocks[] = [
                     'id' => $block['id'],
-                    'name' => $obj->name()
+                    'name' => $obj->getFullName(),
                 ];
             }
             

@@ -265,12 +265,16 @@ zaa.controller("DropBlockController", function($scope, ApiCmsNavItemPageBlockIte
 	}
 });
 
-zaa.controller("DroppableBlocksController", function($scope, $http, AdminClassService, DroppableBlocksService) {
+zaa.controller("DroppableBlocksController", function($scope, $http, AdminClassService, DroppableBlocksService, $sce) {
 
 	$scope.onStart = function() {
 		$scope.$apply(function() {
 			AdminClassService.setClassSpace('onDragStart', 'page--drag-active');
 		});
+	}
+	
+	$scope.safe = function(html) {
+		return $sce.trustAsHtml(html);
 	}
 	
 	$scope.onStop = function() {
