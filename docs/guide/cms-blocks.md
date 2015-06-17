@@ -52,9 +52,17 @@ AVAILABLE VAR TYPES
 | zaa-text		| create a simple string input text value field
 | zaa-password	| create a input password field which hides the input value behind * signs
 | zaa-textarea			| create a multirow input element known as textarea
+| zaa-number | create a numerics values
+| zaa-wysiwyg | create a small wysiwg editor
 | zaa-select		| create a select dropdown with options based on the options parameter. The Options item must contain a value and label key
+| zaa-datetime | creates an integer value of datetime
+| zaa-date | creates an integer value of a date
+| zaa-checkbox | createa an array with checkboxes
 | zaa-file-upload		| creata a file upload form and returns the fileId on success
+| zaa-file-array-upload | creates an array with file id and caption string
 | zaa-image-upload		| creata a image upload form and return the imageId on success
+| zaa-image-array-upload | creates an asrray with image id an caption string
+| zaa-list-array | creates an array with a key variable `value`
 
 
 TWIG FRONTEND
