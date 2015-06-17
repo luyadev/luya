@@ -29,7 +29,7 @@ Block-Überschrift
 Setzt eine Überschrift in einer bestimmten Grösse.
 
 Beispiel:
-Bei Auswahl der Grösse "Mittel" wird die Überschrift mit dem \<H2\> HTML-Tag gesetzt:
+Bei Auswahl der Grösse "Mittel" wird die Überschrift mit dem \<H2\> HTML-Tag im Frontend gesetzt:
 
 `<h2>Überschrift</h2>`
 
