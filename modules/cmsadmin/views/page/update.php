@@ -21,9 +21,9 @@
                     </div>
                             </div>
                             <div class="right">
-                                <i class="mdi-editor-mode-edit [ waves-effect waves-tale ]" ng-click="toggleEdit()"></i>
-                                <i class="mdi-action-delete [ waves-effect waves-tale ]" ng-click="removeBlock(block)"></i>
-                                <!--<i class="mdi-navigation-more-vert [ waves-effect waves-tale ]"></i>-->
+                                <i class="mdi-editor-mode-edit [ waves-effect waves-blue ]" ng-click="toggleEdit()"></i>
+                                <i class="mdi-action-delete [ waves-effect waves-blue ]" ng-click="removeBlock(block)"></i>
+                                <!--<i class="mdi-navigation-more-vert [ waves-effect waves-blue ]"></i>-->
                             </div>
             </div>
             <div class="block__body" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
@@ -75,7 +75,7 @@
 
                                     <!-- LANGUAGE SWITCH -->
                                     <div class="toolbar__group">
-                                        <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'[ grey lighten-2 ]' : AdminLangService.isInSelection(lang)}" class="[ waves-effect waves-tale ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ]">{{lang.name}}</a>
+                                        <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'[ grey lighten-2 ]' : AdminLangService.isInSelection(lang)}" class="[ waves-effect waves-blue ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ]">{{lang.name}}</a>
                                     </div>
                                     <!-- /LANGUAGE SWITCH -->
 
@@ -112,7 +112,7 @@
 
                                     <!-- DELETE BUTTON -->
                                     <div class="toolbar__group">
-                                        <a ng-click="trash()" class="[ waves-effect waves-tale ][ btn-flat btn--small ][ grey-text text-darken-2 ]"><i class="mdi-action-delete"></i></a>
+                                        <a ng-click="trash()" class="[ waves-effect waves-blue ][ btn-flat btn--small ][ grey-text text-darken-2 ]"><i class="mdi-action-delete"></i></a>
                                     </div>
                                     <!-- /DELETE BUTTON -->
 
@@ -154,7 +154,7 @@
                             <div class="row">
                                 <div class="col s12">
                                     <h4>
-                                        {{item.title}} <a ng-click="toggleSettings()"><i class="mdi-editor-mode-edit right [ waves-effect waves-tale ]"></i></a>
+                                        {{item.title}} <a ng-click="toggleSettings()"><i class="mdi-editor-mode-edit right [ waves-effect waves-blue ]"></i></a>
                                     </h4>
                                     <p>{{lang.name}}</p>
                                 </div>
