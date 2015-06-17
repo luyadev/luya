@@ -1,7 +1,7 @@
-CMS BLOCK ÜBERSICHT
-===================
+CMS INHALTSBLÖCKE
+=================
 
-Überblick über alle verfügbaren Basis CMS Blöcke.
+Überblick über alle standardmässig verfügbaren CMS Blöcke.
 
 
 | Block Name          | Typ      |  Beschreibung
