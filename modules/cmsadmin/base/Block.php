@@ -128,4 +128,14 @@ abstract class Block implements BlockInterface
     {
         return json_encode($this->config());
     }
+    
+    public function icon()
+    {
+        return null;   
+    }
+    
+    public function getFullName()
+    {
+        return ($this->icon() === null) ? $this->name() : '<i class="'.$this->icon().'"></i> ' . $this->name();
+    }
 }
