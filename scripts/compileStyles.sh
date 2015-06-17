@@ -24,7 +24,7 @@ do
     then
         echo "Compass compile: $path"
         cd $MODULE_ASSET_PATH
-        compass compile
+        compass watch
     fi
 
     cd $SCRIPTS_PATH

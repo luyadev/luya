@@ -1,0 +1,12 @@
+.grid-sort-btn {
+	display: none;
+	color: color("blue", "base");
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 1;
+	vertical-align: middle;
+
+	&.active-orderby {
+		display: inline-block;
+	}
+}
