@@ -10,6 +10,14 @@ zaa.controller("DefaultController", function ($scope, $http, $state, $stateParam
 	
 	$scope.dashboard = [];
 	
+	$scope.isActiveElement = function(elmn) {
+		if (elmn.route == $scope.currentItem.route) {
+			return true;
+		}
+		
+		return false;
+	};
+	
 	$scope.itemAdd = function (name, items) {
 		$scope.items.push({name : name, items : items});
 		
