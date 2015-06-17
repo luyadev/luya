@@ -1,5 +1,5 @@
 <script type="text/ng-template" id="reverse.html">
-    <a class="treeview__button btn-flat [ waves-effect waves-teal ]" ng-click="go(data.id)" ng-class="{'active' : isCurrentElement(data.id) }">{{data.title}}</a>
+    <a class="treeview__button btn-flat [ waves-effect waves-blue ]" ng-click="go(data.id)" ng-class="{'active' : isCurrentElement(data.id) }">{{data.title}}</a>
     <ul class="treeview__list" role="menu">
         <li class="treeview__item" role="menuitem" ng-repeat="data in data.nodes" ng-include="'reverse.html'"></li>
     </ul>
