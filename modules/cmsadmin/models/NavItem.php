@@ -2,6 +2,8 @@
 
 namespace cmsadmin\models;
 
+use Yii;
+
 /**
  * Each creation of a navigation block requires the nav_item_type_id which need to be created first with NavItemType Model.
  *
@@ -58,7 +60,15 @@ class NavItem extends \yii\db\ActiveRecord
 
     public function verifyRewrite($rewrite, $langId)
     {
-        return $this->find()->where(['rewrite' => $rewrite, 'lang_id' => $langId])->one();
+        if (Yii::$app->hasModule($rewrite)) {
+            $this->addError('rewrite', 'Die URL darf nicht verwendet werden da es ein Modul mit dem gleichen Namen gibt.');
+            return false;
+        }
+        
+        if ($this->find()->where(['rewrite' => $rewrite, 'lang_id' => $langId])->one()) {
+            $this->addError('rewrite', 'Diese URL existiert bereits und ist deshalb ungültig');
+            return false;
+        }
     }
 
     public function validateRewrite()
@@ -67,13 +77,10 @@ class NavItem extends \yii\db\ActiveRecord
         if (!isset($dirty['rewrite'])) {
             return true;
         }
-        if (!is_null($this->verifyRewrite($this->rewrite, $this->lang_id))) {
-            $this->addError('rewrite', 'Rewrite existiert bereits!');
-
+        
+        if (!$this->verifyRewrite($this->rewrite, $this->lang_id)) {
             return false;
         }
-
-        return true;
     }
 
     public function beforeCreate()
