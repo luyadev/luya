@@ -44,7 +44,7 @@ class LoginForm extends \yii\base\Model
                 "user_id" => $user->id, 
             ]);
             $login->insert();
-            UserOnline::refreshUser($user->id);
+            UserOnline::refreshUser($user->id, 'login');
             return $user;
         } else {
             return false;

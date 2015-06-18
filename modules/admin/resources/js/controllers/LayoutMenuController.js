@@ -2,6 +2,8 @@ zaa.controller("LayoutMenuController", function ($scope, $http, $state, $locatio
 	
 	$scope.notify = null;
 	
+	$scope.showOnlineContainer = false;
+	
 	(function tick(){
 		$http.get('admin/api-admin-timestamp').success(function(response) {
 			$scope.notify = response;

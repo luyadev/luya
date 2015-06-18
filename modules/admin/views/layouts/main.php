@@ -14,9 +14,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-
         <title><?= \Yii::$app->siteTitle; ?> // {{currentItem.alias}}</title>
-
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <base href="<?= Url::base(true); ?>/" 
@@ -117,7 +115,7 @@
                             </li>
                         </ul>
                         <ul class="right">
-                            <li>
+                            <li ng-mouseenter="showOnlineContainer=true" ng-mouseleave="showOnlineContainer=false">
                                 Benutzer Online <strong>{{notify.length}}</strong>
                             </li>
                             <li>
@@ -132,6 +130,13 @@
                     </div>
                 </nav>
             </div> <!-- /navbar-fixed -->
+            
+            <div ng-show="showOnlineContainer" style="position: absolute; z-index:999999; border:1px solid red; background-color:white; padding:20px; margin:50px; right:10px;">
+                <ul>
+                    <li ng-repeat="row in notify">{{row.firstname}} {{row.lastname}} | {{row.email}} | is active: {{row.is_active}} | inactive since: {{row.inactive_since }} seconds</li>
+                </ul>
+            </div>
+            
 
             <!-- User dropdown, called by javascript -->
             <ul id="userMenu" class="dropdown-content">
