@@ -9,22 +9,15 @@ class Controller extends \luya\base\Controller
     public $layout = '@admin/views/layouts/main';
 
     public $useModuleViewPath = true;
-
-    public $adminUser = null;
-
+    
     public $disablePermissionCheck = false;
-
+    
     public function init()
     {
+        // provided the current module more assets from all admin assets
+        $this->module->assets = \yii\helpers\ArrayHelper::merge($this->module->assets, \luya\helpers\Param::get('adminAssets'));
+        // call the parent init which executes the inclusion of assets (luya\base\Controller)
         parent::init();
-        // @TODO: delete
-        $this->adminUser = \yii::$app->getModule('admin')->getAdminUser();
-
-        // get asset bundles which are defined in the module and register them into the view
-        foreach (\luya\helpers\Param::get('adminAssets') as $class) {
-            // autoload $class and register with current view
-            $class::register($this->view);
-        }
     }
 
     public function getRules()

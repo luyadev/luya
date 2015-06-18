@@ -1,10 +1,10 @@
 <?php
 
-namespace cmsadmin;
+namespace cmsadmin\assets;
 
-class Asset extends \yii\web\AssetBundle
+class Main extends \yii\web\AssetBundle
 {
-    public $sourcePath = '@cmsadmin/assets';
+    public $sourcePath = '@cmsadmin/resources';
 
     public $js = [
         'js/directives.js',
@@ -19,6 +19,6 @@ class Asset extends \yii\web\AssetBundle
     ];
 
     public $depends = [
-        'admin\AssetAdmin',
+        'admin\assets\Main',
     ];
 }

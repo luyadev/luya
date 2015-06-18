@@ -21,7 +21,7 @@ class Module extends \admin\base\Module
     ];
 
     public $assets = [
-        'cmsadmin\Asset',
+        'cmsadmin\assets\Main',
     ];
 
     public function getMenu()

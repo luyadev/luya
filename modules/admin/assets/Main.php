@@ -1,10 +1,10 @@
 <?php
 
-namespace admin;
+namespace admin\assets;
 
-class AssetAdmin extends \yii\web\AssetBundle
+class Main extends \luya\base\Asset
 {
-    public $sourcePath = '@admin/assets';
+    public $sourcePath = '@admin/resources';
 
     public $css = [
         'css/admin.css',
@@ -25,6 +25,7 @@ class AssetAdmin extends \yii\web\AssetBundle
     ];
 
     public $depends = [
-        'admin\AssetBower',
+        'admin\assets\Jquery',
+        'admin\assets\Bower',
     ];
 }

@@ -15,6 +15,21 @@ class Controller extends \yii\web\Controller
     public $useModuleViewPath = false;
 
     /**
+     * skips defined assets from the module base, you can not skip assets which are registered in the local asset variable. To Skip
+     * all the assets from the module ($this->module->assets) you can use skipAssets = ["*"];
+     * 
+     * @var array
+     */
+    public $skipModuleAssets = [];
+
+    /**
+     * controller specific asset class to register in the view
+     * 
+     * @var array The class name of the Asset (e.g. "\admin\asset\BowerAsset")
+     */
+    public $assets = [];
+    
+    /**
      * Yii initializer.
      */
     public function init()
@@ -23,7 +38,12 @@ class Controller extends \yii\web\Controller
         parent::init();
         // get asset bundles which are defined in the module and register them into the view
         foreach ($this->module->assets as $class) {
-            // autoload $class and register with current view
+            if (!in_array($class, $this->skipModuleAssets) && !in_array("*", $this->skipModuleAssets)) {
+                // autoload $class and register with current view
+                $class::register($this->view);
+            }
+        }
+        foreach ($this->assets as $class) {
             $class::register($this->view);
         }
     }

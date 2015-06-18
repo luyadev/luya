@@ -10,6 +10,10 @@ class LoginController extends \admin\base\Controller
 {
     public $layout = '@admin/views/layouts/nosession';
 
+    public $skipModuleAssets = ["*"];
+    
+    public $assets = ["\admin\assets\Login"];
+    
     public function getRules()
     {
         return [
@@ -24,9 +28,9 @@ class LoginController extends \admin\base\Controller
     public function actionIndex()
     {
         $url = YiiUrl::to(Url::to('admin'), true);
-        
+        $adminUser = \admin\Module::getAdminUser();
         // redirect logged in users
-        if (!$this->adminUser->isGuest) {
+        if (!$adminUser->isGuest) {
             return $this->redirect($url);
         }
 
@@ -36,14 +40,13 @@ class LoginController extends \admin\base\Controller
         if (isset($_POST['login'])) {
             $model->attributes = $_POST['login'];
             if (($userObject = $model->login()) !== false) {
-                if ($this->adminUser->login($userObject)) {
+                if ($adminUser->login($userObject)) {
                     return $this->redirect($url);
                 }
             }
         }
 
         $this->view->registerJs("$('#email').focus();");
-        
         return $this->render('index', ['model' => $model]);
     }
 }

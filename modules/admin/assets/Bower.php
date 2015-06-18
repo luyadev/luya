@@ -1,14 +1,12 @@
 <?php
 
-namespace admin;
+namespace admin\assets;
 
-class AssetBower extends \yii\web\AssetBundle
+class Bower extends \luya\base\Asset
 {
     public $sourcePath = '@bower';
 
     public $js = [
-        'jquery/dist/jquery.min.js',
-        'jquery-ui/jquery-ui.min.js',
         'angular/angular.min.js',
         'angular-i18n/angular-locale_de-ch.js',
         'angular-resource/angular-resource.min.js',

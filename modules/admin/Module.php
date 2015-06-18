@@ -21,10 +21,7 @@ class Module extends \admin\base\Module
     ];
 
     public $assets = [
-        'admin\AssetAdmin',
-        //'admin\AssetAngularLoadingBar',
-        //'admin\AssetAceUi',
-        //'admin\AssetAce',
+        'admin\assets\Main',
     ];
 
     public $storageFolder = '@webroot/storage';
@@ -33,10 +30,11 @@ class Module extends \admin\base\Module
 
     public function init()
     {
+        parent::init();
+        
         foreach (\luya\helpers\Param::get('apis') as $item) {
             $this->controllerMap[$item['alias']] = $item['class'];
         }
-        parent::init();
     }
 
     /**
