@@ -1,11 +1,13 @@
 #loading-bar {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
+	z-index: 10000;
 }
 
 #loading-bar .bar {
+	height: 4px;
 	background-color: #fff;
-	height: 3px;
+	transition: 0.25s ease width;
 }
