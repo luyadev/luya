@@ -1,5 +1,5 @@
 <div class="container">
-    <h5 style="margin-top:100px;">Luya Login</h5>
+    <h5 style="margin-top:100px;"><?= \Yii::$app->siteTitle; ?> Login</h5>
     <div class="card-panel">
         <?php echo \yii\helpers\Html::beginForm('', 'post'); ?>
             <div class="input-field col s12">

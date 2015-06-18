@@ -15,7 +15,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-        <title>LUYA // {{currentItem.alias}}</title>
+        <title><?= \Yii::$app->siteTitle; ?> // {{currentItem.alias}}</title>
 
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
