@@ -1,8 +1,10 @@
 .submenu__title {
-	font-size: 1rem;
-	margin-top: 20px;
-	color: color("blue", "base");
-	border-bottom: 1px solid color("blue", "base");
+	color: color("grey", "base");
+	font-size: 0.8rem;
+	margin-top: 30px;
+	padding-left: 13px;
+	text-transform: uppercase;
+	margin-bottom: 5px;
 }
 
 .submenu__item {

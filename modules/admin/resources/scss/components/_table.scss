@@ -3,6 +3,7 @@
 	font-size: 20px;
 	line-height: 1;
 	vertical-align: middle;
+	cursor: pointer;
 
 	&.active-orderby {
 		color: color("blue", "base");
