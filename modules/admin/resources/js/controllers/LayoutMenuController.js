@@ -3,7 +3,7 @@ zaa.controller("LayoutMenuController", function ($scope, $http, $state, $locatio
 	$scope.notify = null;
 	
 	(function tick(){
-		$http.get('admin/api-admin-timestamp', { ignoreLoadingBar: true }).success(function(response) {
+		$http.get('admin/api-admin-timestamp').success(function(response) {
 			$scope.notify = response;
 			$timeout(tick, 25000);
 		})

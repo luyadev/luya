@@ -9,7 +9,7 @@
         "bower-asset/angular-i18n" : "1.3.10@stable",
         "bower-asset/angular-resource": "1.3.10@stable",
         "bower-asset/angular-ui-router" : "0.2.*@stable",
-        "bower-asset/angular-loading-bar" : "0.*@stable",
+        "bower-asset/angular-loading-bar" : "0.7.1",
         "bower-asset/angular-dragdrop" : "1.*@stable",
         "bower-asset/twig.js" : "0.7.2@stable",
         "bower-asset/ng-flow" : "2.6.*@stable",
