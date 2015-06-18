@@ -119,7 +119,7 @@ class Boot
         $this->beforeRun();
         $this->setConfigValue(include(__DIR__.'/../config/'.self::SAPI_CLI.'.php'));
         require_once $this->yiiPath;
-        $application = new \yii\console\Application($this->getConfigValue(self::SAPI_CLI));
+        $application = new \luya\base\cli\Application($this->getConfigValue(self::SAPI_CLI));
         $exitCode = $application->run();
         exit($exitCode);
     }
@@ -132,7 +132,7 @@ class Boot
         $this->beforeRun();
         $this->setConfigValue(include(__DIR__.'/../config/'.self::SAPI_WEB.'.php'));
         require_once $this->yiiPath;
-        $yii = new \yii\web\Application($this->getConfigValue(self::SAPI_WEB));
+        $yii = new \luya\base\web\Application($this->getConfigValue(self::SAPI_WEB));
         $yii->run();
     }
 }
