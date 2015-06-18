@@ -3,6 +3,7 @@
 namespace admin\models;
 
 use \admin\models\UserLogin;
+use \admin\models\UserOnline;
 
 class LoginForm extends \yii\base\Model
 {
@@ -43,7 +44,7 @@ class LoginForm extends \yii\base\Model
                 "user_id" => $user->id, 
             ]);
             $login->insert();
-            
+            UserOnline::refreshUser($user->id);
             return $user;
         } else {
             return false;

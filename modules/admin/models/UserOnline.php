@@ -33,6 +33,14 @@ class UserOnline extends \yii\db\ActiveRecord
         }
     }
     
+    public static function removeUser($userId)
+    {
+        $model = UserOnline::find()->where(['user_id' => $userId])->one();
+        if ($model) {
+            $model->delete();
+        }
+    }
+    
     public static function clearList()
     {
         $time = time();

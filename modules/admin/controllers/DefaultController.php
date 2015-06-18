@@ -5,6 +5,7 @@ namespace admin\controllers;
 use Yii;
 use \luya\helpers\Url;
 use \yii\helpers\Url as YiiUrl;
+use \admin\models\UserOnline;
 
 class DefaultController extends \admin\base\Controller
 {
@@ -22,6 +23,7 @@ class DefaultController extends \admin\base\Controller
 
     public function actionLogout()
     {
+        UserOnline::removeUser($this->adminUser->getIdentity()->id);
         $this->adminUser->logout();
         $url = YiiUrl::to(Url::to('admin'), true);
         return $this->redirect($url);
