@@ -8,6 +8,7 @@ LUYA CHANGELOG
 - fixed `#64` wrong logout url.
 - fixed `#65` Unclear text field focus in login form
 - fixed `#66` set focus in login form
+- new asset handling `#b3684b6e3eec21385a53668ce01131c116b74c41`
 
 1.0.0-alpha5 (17. Jun 2015)
 -------------------------------
