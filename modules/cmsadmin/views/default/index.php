@@ -103,7 +103,9 @@
 <div class="luya-container__sidebar">
     <div class="row">
         <div class="col s12">
-        <button type="button" class="btn" ui-sref="custom.cmsadd" style="margin-top:20px;">Seite Hinzufügen</button>
+
+            <a class="create-button [ btn-floating btn-large ][ waves-effect waves-light ] teal" ui-sref="custom.cmsadd"><i class="mdi-content-add"></i></a>
+
             <div ng-controller="CmsMenuTreeController">
                 <div class="treeview" ng-repeat="catitem in menu">
                     <h5 class="treeview__title">{{catitem.name}}</h5>

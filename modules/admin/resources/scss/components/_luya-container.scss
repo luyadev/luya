@@ -6,7 +6,6 @@
 
 	// Display & Dimensions
 	display: inline-block;
-	min-height: 100%;
 
 }
 
@@ -20,6 +19,7 @@
 
 	// Dimensions
 	width: 100%;
+	min-height: 100%;
 
 	// Look & Feel
 	background-color: color("grey", "lighten-4");
