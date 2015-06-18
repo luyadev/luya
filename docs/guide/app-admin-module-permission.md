@@ -46,3 +46,22 @@ class MyTestController extends \admin\base\Controller
 	}
 }
 ```
+
+extend permission inside your Module.php
+
+```
+    public function extendPermissionApis()
+    {
+        return [
+            ['api' => 'api-cms-navitemplageblockitem', 'alias' => 'Blöcke Einfügen und Verschiebe'],
+        ];
+    }
+
+    public function extendPermissionRoutes()
+    {
+        return [
+            ['route' => 'cmsadmin/page/create', 'alias' => 'Seiten Erstellen'],
+            ['route' => 'cmsadmin/page/update', 'alias' => 'Seiten Bearbeiten'],
+        ];
+    }
+```
