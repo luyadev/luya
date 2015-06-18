@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\components;
+namespace luya\base\cli;
 
 use Yii;
 
@@ -9,7 +9,7 @@ use Yii;
  *
  * @author nadar
  */
-class BootstrapCli extends \luya\base\Bootstrap
+class Bootstrap extends \luya\base\Bootstrap
 {
     public function beforeRun()
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\components;
+namespace luya\base\web;
 
 use yii\helpers\ArrayHelper;
 use luya\helpers\Param;
@@ -10,7 +10,7 @@ use luya\helpers\Param;
  *
  * @author nadar
  */
-class BootstrapWeb extends \luya\base\Bootstrap
+class Bootstrap extends \luya\base\Bootstrap
 {
     private $_apis = [];
 

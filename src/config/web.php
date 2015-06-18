@@ -7,7 +7,7 @@ $config = [
         ],
         'twig' => '\luya\components\Twig',
         'errorHandler' => [
-            'class' => '\luya\components\ErrorHandlerWeb',
+            'class' => '\luya\base\web\ErrorHandler',
         ],
         'urlManager' => 'luya\components\UrlManager',
         'view' => ['class' => 'luya\components\View'],
@@ -30,7 +30,7 @@ $config = [
         'luya' => 'luya\components\LuyaComponents',
     ],
     'bootstrap' => [
-        'luya\components\BootstrapWeb',
+        'luya\base\web\Bootstrap',
     ],
     'timezone' => 'Europe/Berlin',
 ];
