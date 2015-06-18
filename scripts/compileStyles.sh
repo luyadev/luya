@@ -10,7 +10,7 @@ fi
 echo $SCRIPTS_PATH
 
 BASE_PATH="modules/"
-ASSETS_PATH="assets/"
+ASSETS_PATH="resources/"
 
 PATHS=( "admin/" "cmsadmin/" )
 
@@ -24,7 +24,7 @@ do
     then
         echo "Compass compile: $path"
         cd $MODULE_ASSET_PATH
-        compass watch
+        compass compile
     fi
 
     cd $SCRIPTS_PATH
