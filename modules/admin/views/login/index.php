@@ -4,13 +4,13 @@
         <?php echo \yii\helpers\Html::beginForm('', 'post'); ?>
             <div class="input-field col s12">
                 <i class="mdi-content-mail prefix"></i>
-                <input type="text" name="login[email]" />
-                <label>E-Mail-Adresse</label>
+                <input type="text" id="email" name="login[email]" />
+                <label for="email">E-Mail-Adresse</label>
             </div>
             <div class="input-field col s12">
                 <i class="mdi-communication-vpn-key prefix"></i>
-                <input type="password" name="login[password]" />
-                <label>Passwort</label>
+                <input type="password" id="password" name="login[password]" />
+                <label for="password">Passwort</label>
             </div>
             <? if (count($model->getErrors()) > 0): ?>
              <div class="card-panel red lighten-1 white-text">

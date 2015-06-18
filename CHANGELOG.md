@@ -6,6 +6,7 @@ LUYA CHANGELOG
 - added luya version constante to module `luya\Module::VERSION`.
 - added user online overview in admin panel.
 - fixed `#64` wrong logout url.
+- fixed `#65` Unclear text field focus in login form
 
 1.0.0-alpha5 (17. Jun 2015)
 -------------------------------
