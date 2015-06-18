@@ -1,7 +1,8 @@
 <?php
-    use \admin\Module as Admin;
-
-    $user = Admin::getAdminUserData();
+    use \admin\Module;
+    use \yii\helpers\Url;
+    
+    $user = Module::getAdminUserData();
     $gravatar = 'http://www.gravatar.com/avatar/'.md5(strtolower(trim($user->email))).'?d='.urlencode('http://www.zephir.ch/files/rocky_460px_bw.jpg').'&s=40';
 
     $this->beginPage()
@@ -18,7 +19,7 @@
 
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <base href="<?= Url::base(true); ?>/" 
         <?php $this->head() ?>
 
         <script>

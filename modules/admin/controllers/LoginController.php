@@ -28,9 +28,6 @@ class LoginController extends \admin\base\Controller
         // redirect logged in users
         if (!$this->adminUser->isGuest) {
             return $this->redirect($url);
-            //$url = \luya\helpers\Url::to('admin');
-            //return Yii::$app->getResponse()->redirect($url);
-            //return $this->redirect(Yii::$app->urlManager->createUrl(['admin']));
         }
 
         // get the login form model
@@ -41,8 +38,6 @@ class LoginController extends \admin\base\Controller
             if (($userObject = $model->login()) !== false) {
                 if ($this->adminUser->login($userObject)) {
                     return $this->redirect($url);
-                    //$url = \luya\helpers\Url::to('admin');
-                    //return Yii::$app->getResponse()->redirect($url);
                 }
             }
         }

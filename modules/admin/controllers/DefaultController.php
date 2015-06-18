@@ -25,9 +25,7 @@ class DefaultController extends \admin\base\Controller
     {
         UserOnline::removeUser($this->adminUser->getIdentity()->id);
         $this->adminUser->logout();
-        $url = YiiUrl::to(Url::to('admin'), true);
+        $url = YiiUrl::to(Url::to('admin/login/index'), true);
         return $this->redirect($url);
-        //$url = \luya\helpers\Url::to('admin/login/index');
-        //return Yii::$app->getResponse()->redirect($url);
     }
 }
