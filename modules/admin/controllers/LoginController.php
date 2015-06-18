@@ -42,6 +42,8 @@ class LoginController extends \admin\base\Controller
             }
         }
 
+        $this->view->registerJs("$('#email').focus();");
+        
         return $this->render('index', ['model' => $model]);
     }
 }
