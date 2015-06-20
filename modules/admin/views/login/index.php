@@ -4,7 +4,7 @@
         <?php echo \yii\helpers\Html::beginForm('', 'post'); ?>
             <div class="input-field col s12">
                 <i class="mdi-content-mail prefix"></i>
-                <input type="text" id="email" name="login[email]" />
+                <input type="text" id="email" name="login[email]" value="<?= $model->email; ?>" />
                 <label for="email">E-Mail-Adresse</label>
             </div>
             <div class="input-field col s12">
