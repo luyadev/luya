@@ -13,7 +13,7 @@ class ChangePassword extends \admin\ngrest\base\ActiveWindow
         ]);
     }
 
-    public function callbackChangeAsync($newpass, $newpasswd)
+    public function callbackSave($newpass, $newpasswd)
     {
         $model = new \admin\models\User();
         $user = $model->findOne($this->getItemId());
