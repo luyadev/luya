@@ -2,10 +2,10 @@
     <div class="card-panel" flow-init="{target: getActiveWindowCallbackUrl('upload') , testChunks:false}" flow-files-submitted="$flow.upload()" flow-complete="loadImages()">
         <h4>Hochladen</h4   >
         <div class="row">
-            <div class="s6">
+            <div class="col s6">
                 <input type="file" flow-btn/>
             </div>
-            <div class="s6">
+            <div class="col s6">
                 <div flow-drop flow-drag-enter="style={border:'4px solid green'}" flow-drag-leave="style={}">
                     Drag And Drop your file here
                 </div>
