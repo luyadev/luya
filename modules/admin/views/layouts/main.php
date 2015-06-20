@@ -79,7 +79,7 @@
         </script>
 
         <script type="text/ng-template" id="storageFileManager">
-        <div class="card-panel" flow-init="{target: uploadurl, testChunks:false, headers : { 'Authorization' : bearer }}" flow-name="uploader.flow" flow-files-submitted="startUpload()" flow-complete="getFiles(0)">
+        <div class="card-panel" flow-init="{target: uploadurl, testChunks:false, headers : { 'Authorization' : bearer }}" flow-name="uploader.flow" flow-files-submitted="startUpload()" flow-complete="complete()">
         
         <div class="row">
             <div class="col s6">

@@ -169,6 +169,10 @@ zaa.directive("storageFileManager", function() {
 				$scope.uploader.flow.upload()
 			}
 			
+			$scope.complete = function() {
+				$scope.getFiles($scope.currentFolderId);
+			}
+			
 			$scope.files = [];
 			$scope.folders = [];
 			$scope.breadcrumbs = [];
