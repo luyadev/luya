@@ -52,7 +52,7 @@ class Folder
 
     private function getRootArray()
     {
-        return ['id' => 0, 'name' => 'Root'];
+        return ['id' => 0, 'name' => 'Stammverzeichnis'];
     }
 
     private function getSubFolderOf($folderId)
