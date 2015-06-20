@@ -25,6 +25,29 @@ class StorageController extends \admin\base\RestController
 
         return $files;
     }
+    
+    public function actionFilesUploadFlow()
+    {
+        try {
+            $config = new \Flow\Config();
+            $config->setTempDir(\yii::getAlias('@webroot/assets'));
+            $request = new \Flow\Request();
+        
+            $fileName = \yii::getAlias('@webroot/assets').DIRECTORY_SEPARATOR.$request->getFileName();
+        
+            if (\Flow\Basic::save($fileName, $config, $request)) {
+                // file saved successfully and can be accessed at './final_file_destination'
+                $folderId = Yii::$app->request->post('folderId', 0);
+                $fileId = \yii::$app->luya->storage->file->create($fileName, $request->getFileName(), false, (int) $folderId);
+        
+                @unlink($fileName);
+        
+                return $fileId;
+            }
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
+    }
 
     public function actionImageUpload()
     {
@@ -32,8 +55,8 @@ class StorageController extends \admin\base\RestController
         $filterId = \yii::$app->request->post('filterId', null);
 
         $create = \yii::$app->luya->storage->image->create($fileId, $filterId);
-
-        return ['id' => $create, 'error' => (bool) !$create, 'message' => 'Error while uploading image and/or store to database.', 'image' => ((bool) $create) ? $this->actionImagePath($create) : false];
+        $msg = (!create) ? 'Error while uploading image and/or store to database.' : 'Upload successfull';
+        return ['id' => $create, 'error' => (bool) !$create, 'message' => $msg, 'image' => ((bool) $create) ? $this->actionImagePath($create) : false];
     }
 
     public function actionImagePath($imageId)

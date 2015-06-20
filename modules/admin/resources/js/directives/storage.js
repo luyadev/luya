@@ -153,16 +153,26 @@ zaa.directive("storageFileManager", function() {
 		transclude : false,
 		scope : {
 			ngModel : '=',
-			isHidden : '=',
 			allowSelection : '@selection'
 		},
 		transclude : false,
 		controller : function($scope, $http) {
+			
+			$scope.uploadurl = 'admin/api-admin-storage/files-upload-flow';
+			$scope.bearer = 'Bearer ' + authToken;
+			
+			$scope.uploader = {};
+			
+			
+			$scope.startUpload = function() {
+				$scope.uploader.flow.opts.query = { 'folderId' : $scope.currentFolderId };
+				$scope.uploader.flow.upload()
+			}
+			
 			$scope.files = [];
 			$scope.folders = [];
 			$scope.breadcrumbs = [];
 			$scope.currentFolderId = 0;
-			$scope.allowSelection = $scope.allowSelection || true; 
 			$scope.selectedFiles = [];
 			
 			$scope.hasSelection = function() {

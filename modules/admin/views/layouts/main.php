@@ -38,13 +38,22 @@
 
         <script type="text/ng-template" id="storageFileUpload">
         <div class="row">
+            <div class="col s12">
+                <button type="button" class="btn" ng-click="openModal()">Show File manager</button>
+                <modal is-modal-hidden="modal"><storage-file-manager selection="true" ng-model="$parent.$parent.ngModel"/></modal>
+            </div>
+        </div>
+        </script>
+        
+        <script type="text/ng-template" id="storageFileUpload-bkp">
+        <div class="row">
             <div class="input-field col s6">
                 <input type="file" file-model="myFile" />
                 <button ng-click="push()" type="button">Datei Hochladen</button>
             </div>
             <div class="input-field col s6">
                 <button type="button" ng-click="openModal()">Show File manager</button>
-                <modal is-modal-hidden="modal"><storage-file-manager ng-model="$parent.$parent.ngModel"/></modal>
+                <modal is-modal-hidden="modal"><storage-file-manager ng-model="$parent.$parent.ngModel" selection="true" /></modal>
             </div>
         </div>
         </script>
@@ -70,31 +79,55 @@
         </script>
 
         <script type="text/ng-template" id="storageFileManager">
+        <div class="card-panel" flow-init="{target: uploadurl, testChunks:false, headers : { 'Authorization' : bearer }}" flow-name="uploader.flow" flow-files-submitted="startUpload()" flow-complete="getFiles(0)">
+        
         <div class="row">
             <div class="col s6">
-                <button type="button" class="btn">Datei Hochladen</button>
+                <input type="file" flow-btn />
             </div>
             <div class="col s6">
-                <button ng-repeat="crumb in breadcrumbs" type="button" style="margin-right:10px;" class="btn" ng-click="loadFolder(crumb.id)">{{crumb.name}}</button>
+                <div flow-drop flow-drag-enter="style={border:'4px solid green'}" flow-drag-leave="style={}">
+                    Drag And Drop your file here
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <a ng-repeat="crumb in breadcrumbs" style="margin-right:10px; cursor:pointer;" ng-click="loadFolder(crumb.id)">/ {{crumb.name}}</a>
             </div>
             <div class="col s12">
-                <ul class="collection">
-                    <li ng-repeat="folder in folders" class="collection-item avatar  orange lighten-4">
-                        <i class="mdi-file-folder circle"></i>
-                        <span class="title"><strong>{{folder.name}}</strong></span>
-                        <button class="secondary-content btn" ng-click="loadFolder(folder.id)"><i class="mdi-action-open-in-new"></i></button>
-                    </li>
-                    <li ng-repeat="file in files" class="collection-item avatar" ng-click="toggleSelection(file)" ng-class="{'is-active' : inSelection(file)}">
-                        <i class="mdi-file-attachment circle"></i>
-                        <span class="title">{{file.name_original}}</span>
-                        <p><span ng-if="inSelection(file)">Ausgewählt</span></p>
-                        <button class="secondary-content btn" type="button" ng-if="allowSelection == true" ng-click="selectFile(file)"><i class="mdi-content-send"></i></button>
-                    </li>
-                    <li ng-if="files.length == 0"  class="collection-item">
-                        <span class="title"><strong>Ordner ist leer</strong></span>
-                        <p>Es wurden noch keine Dateien in diesen Ordner hochgeladen.</p>
-                    </li>
-                </ul>
+                <div class="row">
+                    <div class="input-field col s10">
+                        <input type="text" ng-model="newFolderName" id="foldername" />
+                        <label for="foldername">Verzeichnis name</label>
+                    </div>
+                    <div class="col s2">
+                        <button ng-click="createNewFolder(newFolderName)" type="button" class="btn">Erstellen</button>
+                    </div>
+                </div>
+                <table class="striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Aktionen</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="folder in folders" class="orange lighten-4">
+                        <td><i class="mdi-file-folder circle"></i></td>
+                        <td><strong>{{folder.name}}</strong></span></td>
+                        <td><button class="btn" ng-click="loadFolder(folder.id)"><i class="mdi-action-open-in-new"></i></button></td>
+                    </tr>
+                    <tr ng-repeat="file in files" class="collection-item avatar" ng-click="toggleSelection(file)" ng-class="{'is-active' : inSelection(file)}">
+                        <td><i class="mdi-file-attachment circle"></i></td>
+                        <td>{{file.name_original}}</td>
+                        <td><button class="btn" type="button" ng-show="allowSelection=='true'" ng-click="selectFile(file)"><i class="mdi-content-send"></i></button></td>
+                    </tr>
+                    <tr ng-if="files.length == 0"  class="collection-item">
+                        <td colspan="3"><strong>Ordner ist leer</strong></td>
+                    </tr>
+                </table>
             </div>
         </div>
         </script>

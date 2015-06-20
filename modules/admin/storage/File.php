@@ -54,7 +54,7 @@ class File
         return $this->error;
     }
 
-    public function create($sourceFile, $newFileName, $hidden = false)
+    public function create($sourceFile, $newFileName, $hidden = false, $folderId = 0)
     {
         if (empty($sourceFile) || empty($newFileName)) {
             return !$this->setError('empty source file or create file param. Invalid file uploaded!');
@@ -89,6 +89,7 @@ class File
                 'name_new_compound' => $fileName,
                 'mime_type' => $mimeType,
                 'extension' => $fileInfo->extension,
+                'folder_id' => (int) $folderId,
                 'hash_file' => $fileHash,
                 'hash_name' => $fileHashName,
                 'is_hidden' => $hidden,
