@@ -55,7 +55,7 @@ class StorageController extends \admin\base\RestController
         $filterId = \yii::$app->request->post('filterId', null);
 
         $create = \yii::$app->luya->storage->image->create($fileId, $filterId);
-        $msg = (!create) ? 'Error while uploading image and/or store to database.' : 'Upload successfull';
+        $msg = (!$create) ? 'Error while uploading image and/or store to database.' : 'Upload successfull';
         return ['id' => $create, 'error' => (bool) !$create, 'message' => $msg, 'image' => ((bool) $create) ? $this->actionImagePath($create) : false];
     }
 
