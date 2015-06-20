@@ -157,6 +157,7 @@ class ExecutableController extends \yii\console\Controller
         $pw = \Yii::$app->getSecurity()->generatePasswordHash($password.$salt);
 
         $this->insert('admin_user', [
+            'title' => 1,
             'firstname' => $firstname,
             'lastname' => $lastname,
             'email' => $email,
