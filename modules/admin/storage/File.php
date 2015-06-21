@@ -2,6 +2,9 @@
 
 namespace admin\storage;
 
+use Yii;
+use \admin\models\StorageFile;
+use \admin\models\StorageImage;
 class File
 {
     public $error = null;
@@ -82,7 +85,7 @@ class File
         }
 
         if ($copyFile) {
-            $model = new \admin\models\StorageFile();
+            $model = new StorageFile();
             $model->setAttributes([
                 'name_original' => $newFileName,
                 'name_new' => $baseName,
@@ -106,14 +109,22 @@ class File
 
     public function allFromFolder($folderId)
     {
-        $files = \admin\models\StorageFile::find()->select(['id', 'name_original', 'extension'])->where(['folder_id' => $folderId, 'is_hidden' => 0])->asArray()->all();
-
+        $files = StorageFile::find()->select(['id', 'name_original', 'extension'])->where(['folder_id' => $folderId, 'is_hidden' => 0])->asArray()->all();
+        foreach($files as $k => $v) {
+            if ($v['extension'] == "jpg" || $v['extension'] == "png") {
+                $imageId = Yii::$app->luya->storage->image->create($v['id'], 0);
+                $thumb = Yii::$app->luya->storage->image->filterApply($imageId, 'tiny-crop');
+            } else {
+                $thumb = false;
+            }
+            $files[$k]['thumbnail'] = $thumb;
+        }
         return $files;
     }
 
     public function get($fileId)
     {
-        $file = \admin\models\StorageFile::find()->where(['id' => $fileId])->one();
+        $file = StorageFile::find()->where(['id' => $fileId])->one();
 
         if (!$file) {
             return false;
@@ -128,7 +139,7 @@ class File
 
     public function getPath($fileId)
     {
-        $file = \admin\models\StorageFile::find()->where(['id' => $fileId])->one();
+        $file = StorageFile::find()->where(['id' => $fileId])->one();
         if ($file) {
             return \yii::$app->luya->storage->dir.$file->name_new_compound;
         }
@@ -138,7 +149,7 @@ class File
 
     public function getInfo($fileId)
     {
-        return \admin\models\StorageFile::find()->where(['id' => $fileId])->one();
+        return StorageFile::find()->where(['id' => $fileId])->one();
     }
 
     public function moveFileToFolder($fileId, $folderId)
