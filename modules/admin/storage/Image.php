@@ -2,13 +2,16 @@
 
 namespace admin\storage;
 
+use \admin\models\StorageImage;
+
 class Image
 {
-    /**
-     * @todo see if the image for this filterid does already exists.
-     */
     public function create($fileId, $filterId = 0)
     {
+        $img = StorageImage::find()->where(['file_id' => $fileId, 'filter_id' => $filterId])->asArray()->one();
+        if($img) {
+            return $img['id'];
+        }   
         $file = \yii::$app->luya->storage->file->getPath($fileId);
         $info = \yii::$app->luya->storage->file->getInfo($fileId);
         $imagine = new \Imagine\Gd\Imagine();
