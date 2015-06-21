@@ -115,9 +115,9 @@
                         </tr>
                     </thead>
                     <tr ng-repeat="folder in folders" class="orange lighten-4">
-                        <td><i class="mdi-file-folder circle"></i></td>
-                        <td><strong>{{folder.name}}</strong></span></td>
-                        <td><button class="btn" ng-click="loadFolder(folder.id)"><i class="mdi-action-open-in-new"></i></button></td>
+                        <td><i class="small mdi-file-folder circle"></i></td>
+                        <td><a ng-click="loadFolder(folder.id)">{{folder.name}}</a></td>
+                        <td></td>
                     </tr>
                     <tr ng-repeat="file in files" class="collection-item avatar" ng-click="toggleSelection(file)" ng-class="{'is-active' : inSelection(file)}">
                         <td><span ng-if="file.thumbnail"><img src="{{file.thumbnail.source}}" /></span><span ng-if="!file.thumbnail"><i class="small mdi-file-attachment circle"></i></span></td>
