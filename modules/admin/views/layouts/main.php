@@ -120,7 +120,7 @@
                         <td><button class="btn" ng-click="loadFolder(folder.id)"><i class="mdi-action-open-in-new"></i></button></td>
                     </tr>
                     <tr ng-repeat="file in files" class="collection-item avatar" ng-click="toggleSelection(file)" ng-class="{'is-active' : inSelection(file)}">
-                        <td><i class="mdi-file-attachment circle"></i></td>
+                        <td><span ng-if="file.thumbnail"><img src="{{file.thumbnail.source}}" /></span><span ng-if="!file.thumbnail"><i class="small mdi-file-attachment circle"></i></span></td>
                         <td>{{file.name_original}}</td>
                         <td><button class="btn" type="button" ng-show="allowSelection=='true'" ng-click="selectFile(file)"><i class="mdi-content-send"></i></button></td>
                     </tr>
