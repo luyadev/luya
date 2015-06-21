@@ -265,7 +265,7 @@ zaa.directive('zaaFileUpload', function($compile){
 			'grid' : '@grid'
 		},
 		template : function() {
-			return '<div class="col s{{grid}}"><storage-file-upload ng-model="model"></storage-file-upload><label>{{label}}</label></div>';
+			return '<div class="col s{{grid}}"><label>{{label}}</label><storage-file-upload ng-model="model"></storage-file-upload></div>';
 		}
 	}
 });
@@ -280,7 +280,7 @@ zaa.directive('zaaImageUpload', function($compile){
 			'grid' : '@grid'
 		},
 		template : function() {
-			return '<div class="col s12"><storage-image-upload ng-model="model" label="{{label}}"></storage-image-upload><div>';
+			return '<div class="col s{{grid}}"><label>{{label}}</label><storage-image-upload ng-model="model"></storage-file-upload></div>';
 		}
 	}
 });

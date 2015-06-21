@@ -1,4 +1,4 @@
-
+/*
 zaa.controller("UploadController", function($scope) {
 
 	$scope.bildId = 0;
@@ -9,7 +9,8 @@ zaa.controller("UploadController", function($scope) {
 	}
 	
 })
-
+*/
+/*
 zaa.directive('fileModel', ['$parse', function ($parse) {
     return {
         restrict: 'A',
@@ -25,60 +26,7 @@ zaa.directive('fileModel', ['$parse', function ($parse) {
         }
     };
 }]);
-
-zaa.directive('storageFileUpload', function() {
-	return {
-		restrict : 'E',
-		scope : {
-			ngModel : '='
-		},
-		link : function(scope) {
-			scope.modal = true;
-		},
-		controller : function($scope, $http) {
-			if ($scope.ngModel) {
-				$http.get('admin/api-admin-storage/file-path', { params: { fileId : $scope.ngModel } }).success(function(response) {
-					$scope.filesrc = response.source_http;
-				}).error(function(response) {
-					console.log('error', response);
-				})
-			}
-			
-			$scope.$watch(function() { return $scope.ngModel }, function(newValue, oldValue) {
-				if (newValue) {
-					$scope.modal = true;
-				}
-			});
-			
-			$scope.openModal = function() {
-				$scope.modal = !$scope.modal;
-			}
-			
-			$scope.push = function() {
-				var fd = new FormData();
-		        fd.append('file', $scope.myFile);
-		        $http.post('admin/api-admin-storage/files-upload', fd, {
-		            transformRequest: angular.identity,
-		            headers: {'Content-Type': undefined}
-		        })
-		        .success(function(r){
-		        	if (!r[$scope.myFile.name]['error']) {
-		        		$scope.ngModel = r[$scope.myFile.name]['id'];
-		        		$scope.filesrc = r[$scope.myFile.name]['file']['source_http'];
-		        	} else {
-		        		alert('ERROR WHILE FILE UPLOAD' + r[$scope.myFile.name]['message']);
-		        	}
-		        	
-		        })
-		        .error(function(r){
-		        	alert('ERROR WHILE FILE UPLOAD');
-		        	console.log(r);
-		        });
-			}
-		},
-		templateUrl : 'storageFileUpload'
-	}
-});
+*/
 
 /*
 zaa.directive('storageImageUrl', function() {
@@ -101,12 +49,52 @@ zaa.directive('storageImageUrl', function() {
 });
 */
 
+/*
+zaa.directive('storageFileUpload', function() {
+	return {
+		restrict : 'E',
+		scope : {
+			ngModel : '='
+		},
+		link : function(scope, element, attrs) {
+			scope.$watch(function() { return scope.ngModel }, function(n, o) {
+				if (n !== o) {
+					scope.ngModel = n;
+				}
+			})
+			scope.modal = true;
+		},
+		controller : function($scope, $http) {
+			if ($scope.ngModel) {
+				console.log('file_here', $scope.ngModel);
+				$http.get('admin/api-admin-storage/file-path', { params: { fileId : $scope.ngModel } }).success(function(response) {
+					$scope.filesrc = response.source_http;
+				}).error(function(response) {
+					console.log('error', response);
+				})
+			} else {
+				console.log('no_file_here!');
+			}
+			
+			$scope.$watch(function() { return $scope.ngModel }, function(newValue, oldValue) {
+				if (newValue) {
+					$scope.modal = true;
+				}
+			});
+			
+			$scope.openModal = function() {
+				$scope.modal = !$scope.modal;
+			}
+		},
+		templateUrl : 'storageFileUpload'
+	}
+});
+
 zaa.directive('storageImageUpload', function() {
 	return {
 		restrict : 'E',
 		scope : {
 			ngModel : '=',
-			label : '@'
 		},
 		controller : function($scope, $http, ApiAdminFilter) {
 			
@@ -146,13 +134,104 @@ zaa.directive('storageImageUpload', function() {
 		templateUrl : 'storageImageUpload'
 	}
 });
+*/
 
+zaa.directive('storageFileUpload', function($http) {
+	return {
+		restrict : 'E',
+		scope : {
+			ngModel : '='
+		},
+		link : function(scope) {
+			
+			scope.modal = true;
+			scope.fileinfo = null;
+			
+			scope.select = function(fileId) {
+				scope.toggleModal();
+				scope.ngModel = fileId;
+			}
+			
+			scope.toggleModal = function() {
+				scope.modal = !scope.modal;
+			}
+			
+			scope.$watch(function() { return scope.ngModel }, function(n, o) {
+				if (n !== o) {
+					if (n !== 0) {
+						$http.get('admin/api-admin-storage/file-path', { params: { fileId : n } }).success(function(response) {
+							scope.fileinfo = response;
+						}).error(function(response) {
+							console.log('error', response);
+						})
+					}
+				}
+			});
+		},
+		templateUrl : 'storageFileUpload'
+	}
+});
+
+zaa.directive('storageImageUpload', function($http, ApiAdminFilter) {
+	return {
+		restrict : 'E',
+		scope : {
+			ngModel : '=',
+		},
+		link : function(scope) {
+			
+			scope.fileId = 0;
+			scope.filterId = 0;
+			scope.imageinfo = null;
+			scope.filters = ApiAdminFilter.query();
+			
+			scope.filterApply = function() {
+				if (scope.fileId == 0) {
+					alert('Sie müssen zuerst eine Datei auswählen um den Filter anzuwenden.');
+					return;
+				}
+				$http.post('admin/api-admin-storage/image-upload', $.param({ fileId : scope.fileId, filterId : scope.filterId }), {
+		        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+		        }).success(function(success) {
+		        	if (!success) {
+		        		alert('Beim Anwenden des Filters auf die Datei ist ein Fehler Passiert');
+		        		console.log(success);
+		        	} else {
+		        		scope.ngModel = success.id;
+		        	}
+				}).error(function(error) {
+					alert('Beim Anwenden des Filters auf die Datei ist ein Fehler Passiert');
+	        		console.log(error);
+				});
+			}
+			
+			scope.$watch(function() { return scope.ngModel }, function(n, o) {
+				if (n !== o) {
+					if (n !== 0) {
+						$http.get('admin/api-admin-storage/image-path', { params: { imageId : n } }).success(function(response) {
+							scope.imageinfo = response;
+						}).error(function(response) {
+							console.log('error', response);
+						})
+					}
+				}
+			})
+		},
+		templateUrl : 'storageImageUpload'
+	}
+});
+
+
+
+
+/**
+ * FILE MANAGER DIR
+ */
 zaa.directive("storageFileManager", function() {
 	return {
 		restrict : 'E',
 		transclude : false,
 		scope : {
-			ngModel : '=',
 			allowSelection : '@selection'
 		},
 		transclude : false,
@@ -221,7 +300,7 @@ zaa.directive("storageFileManager", function() {
 			}
 			
 			$scope.selectFile = function(file) {
-				$scope.ngModel = file.id;
+				$scope.$parent.select(file.id);
 			}
 			
 			$scope.loadFolder = function(folderId) {

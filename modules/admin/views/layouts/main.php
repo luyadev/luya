@@ -27,24 +27,7 @@
 
     <body>
         <?php $this->beginBody() ?>
-
-        <!-- ANGULAR SCRIPTS -->
-
-        <script type="text/ng-template" id="modal">
-        <div class="modal" ng-show="!isModalHidden" style="z-index:999999">
-            <div class="modal-content" ng-transclude></div>
-        </div>
-        </script>
-
-        <script type="text/ng-template" id="storageFileUpload">
-        <div class="row">
-            <div class="col s12">
-                <button type="button" class="btn" ng-click="openModal()">Show File manager</button>
-                <modal is-modal-hidden="modal"><storage-file-manager selection="true" ng-model="$parent.$parent.ngModel"/></modal>
-            </div>
-        </div>
-        </script>
-        
+        <!-- 
         <script type="text/ng-template" id="storageFileUpload-bkp">
         <div class="row">
             <div class="input-field col s6">
@@ -57,9 +40,26 @@
             </div>
         </div>
         </script>
+         -->
+        <!-- ANGULAR SCRIPTS -->
 
+        <script type="text/ng-template" id="modal">
+        <div class="modal" ng-show="!isModalHidden" style="z-index:999999">
+            <div class="modal-content" ng-transclude></div>
+        </div>
+        </script>
+
+        <script type="text/ng-template" id="storageFileUpload">
+        <div class="row">
+            <div class="col s12">
+                <div>Selektierte Datei: {{fileinfo.source_http}}</div>
+                <button type="button" class="btn" ng-click="toggleModal()">Dateimanager öffnen</button>
+                <modal is-modal-hidden="modal"><storage-file-manager selection="true" /></modal>
+            </div>
+        </div>
+        </script>
+        
         <script type="text/ng-template" id="storageImageUpload">
-        <h5>{{label}}</h5>
         <div class="row">
             <div class="col s12">
                 <label>Filter Auswahl</label>
@@ -69,11 +69,10 @@
         <storage-file-upload ng-model="fileId"></storage-file-upload>
         <div class="row">
             <div class="col s6">
-                <button ng-click="push2()" type="button">Hochladen</button>
-            </div>
+                <button class="btn" ng-click="filterApply()" type="button">Filter auf Datei Anwenden</button>
+            </div> 
             <div class="col s6">
-                <div ng-show="imagesrc"><a href="{{imagesrc}}" target="_blank"><img ng-show="imagesrc" ng-src="{{imagesrc}}" height="100" /></a></div>
-                <div ng-show="!imagesrc"><p>Sie müssen zuerst einen Filter und eine Datei auswählen und danach auf <strong>Hochladen</strong> klicken um das Bild anzuzeigen.</div>
+                <img src="{{imageinfo.source}}" class="responsive-img" />
             </div>
         </div>
         </script>
