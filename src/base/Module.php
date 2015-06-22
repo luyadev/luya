@@ -149,6 +149,11 @@ class Module extends \yii\base\Module
         return $this->contextOptions;
     }
 
+    public function registerComponents()
+    {
+        return [];
+    }
+    
     /**
      * Returns the luya componenets config.
      *

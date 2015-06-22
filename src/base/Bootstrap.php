@@ -2,7 +2,7 @@
 
 namespace luya\base;
 
-use yii;
+use Yii;
 
 /**
  * create basic bootstraping which is allowed for console and web components.
@@ -34,6 +34,12 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
             if (method_exists($module, 'getLuyaComponents')) {
                 foreach ($module->getLuyaComponents() as $key => $value) {
                     \yii::$app->luya->$key = $value;
+                }
+            }
+            
+            if (method_exists($module, 'registerComponents')) {
+                foreach($module->registerComponents() as $id => $definition) {
+                    Yii::$app->set($id, $definition);
                 }
             }
         }
