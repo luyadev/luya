@@ -42,7 +42,7 @@ class Gallery extends \admin\ngrest\base\ActiveWindow
         $files = [];
         foreach($data as $k => $v) {
             $files[] = [
-                'source' => \yii::$app->luya->storage->image->filterApply($v['image_id'], 'small-crop')->source,
+                'source' => \yii::$app->storage->image->filterApply($v['image_id'], 'small-crop')->source,
                 'image_id' => $v['image_id'],
             ];
         }
@@ -62,9 +62,9 @@ class Gallery extends \admin\ngrest\base\ActiveWindow
             if (\Flow\Basic::save($fileName, $config, $request)) {
                 // file saved successfully and can be accessed at './final_file_destination'
 
-                $fileId = \yii::$app->luya->storage->file->create($fileName, $request->getFileName());
+                $fileId = \yii::$app->storage->file->create($fileName, $request->getFileName());
 
-                $imageId = \yii::$app->luya->storage->image->create($fileId);
+                $imageId = \yii::$app->storage->image->create($fileId);
 
                 @unlink($fileName);
 

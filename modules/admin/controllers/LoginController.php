@@ -27,7 +27,7 @@ class LoginController extends \admin\base\Controller
 
     public function actionIndex()
     {
-        $url = YiiUrl::to(Url::to('admin'), true);
+        $url = YiiUrl::to(Url::to('admin/default/dashboard'), true);
         $adminUser = \admin\Module::getAdminUser();
         // redirect logged in users
         if (!$adminUser->isGuest) {

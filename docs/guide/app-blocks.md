@@ -23,7 +23,7 @@ class ImageBlock extends \cmsadmin\base\Block
     public function extraVars()
     {
         return [
-            'image' => \yii::$app->luya->storage->image->get($this->getVarValue('imageId'))
+            'image' => \yii::$app->storage->image->get($this->getVarValue('imageId'))
         ];
     }
     

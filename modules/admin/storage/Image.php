@@ -12,8 +12,8 @@ class Image
         if($img) {
             return $img['id'];
         }   
-        $file = \yii::$app->luya->storage->file->getPath($fileId);
-        $info = \yii::$app->luya->storage->file->getInfo($fileId);
+        $file = \yii::$app->storage->file->getPath($fileId);
+        $info = \yii::$app->storage->file->getInfo($fileId);
         try {
             $imagine = new \Imagine\Gd\Imagine();
             $image = $imagine->open($file);
@@ -23,14 +23,14 @@ class Image
         $fileName = $filterId.'_'.$info->name_new_compound;
 
         if (empty($filterId)) {
-            $save = $image->save(\yii::$app->luya->storage->dir.$fileName);
+            $save = $image->save(\yii::$app->storage->dir.$fileName);
         } else {
             $model = \admin\models\StorageFilter::find()->where(['id' => $filterId])->one();
             if (!$model) {
                 throw new \Exception("could not find the provided filter id '$filterId'.");
             }
             $newimage = $model->applyFilter($image, $imagine);
-            $save = $newimage->save(\yii::$app->luya->storage->dir.$fileName);
+            $save = $newimage->save(\yii::$app->storage->dir.$fileName);
         }
 
         if ($save) {
@@ -95,7 +95,7 @@ class Image
             'image_id' => $data->id,
             'file_source' => $data->file->name_new_compound,
             'image_source' => $fileName,
-            'source' => \yii::$app->luya->storage->httpDir.$fileName,
+            'source' => \yii::$app->storage->httpDir.$fileName,
         ]);
     }
 }

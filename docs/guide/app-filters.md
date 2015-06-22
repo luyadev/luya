@@ -46,12 +46,12 @@ You can apply filters directly inside the view scripts to an image. In our examp
 
 The below example show you how to use the filter directly inside of a php view file:
 ```php
-<img src="<?= yii::$app->luya->storage->image->filterApply(139, 'my-filter')->source; ?>" border="0" />
+<img src="<?= yii::$app->storage->image->filterApply(139, 'my-filter')->source; ?>" border="0" />
 ```
 where 139 is the fileId. This data is usual provided from the database. If you have casted a field with image() in your ngrest model you can access directly this variable:
 ```php
 <? foreach($newsData as $item): ?>
-	<img src="<?= yii::$app->luya->storage->image->filterApply($item['imageId'], 'my-filter')->source; ?>" border="0" />
+	<img src="<?= yii::$app->storage->image->filterApply($item['imageId'], 'my-filter')->source; ?>" border="0" />
 <? endforeach; ?>
 ```
 

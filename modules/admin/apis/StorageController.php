@@ -18,9 +18,9 @@ class StorageController extends \admin\base\RestController
     {
         $files = [];
         foreach ($_FILES as $k => $file) {
-            $create = \yii::$app->luya->storage->file->create($file['tmp_name'], $file['name']);
+            $create = \yii::$app->storage->file->create($file['tmp_name'], $file['name']);
 
-            $files[$file['name']] = ['id' => $create, 'error' => (bool) !$create, 'message' => \yii::$app->luya->storage->file->getError(), 'file' => ((bool) $create) ? $this->actionFilePath($create) : false];
+            $files[$file['name']] = ['id' => $create, 'error' => (bool) !$create, 'message' => \yii::$app->storage->file->getError(), 'file' => ((bool) $create) ? $this->actionFilePath($create) : false];
         }
 
         return $files;
@@ -38,7 +38,7 @@ class StorageController extends \admin\base\RestController
             if (\Flow\Basic::save($fileName, $config, $request)) {
                 // file saved successfully and can be accessed at './final_file_destination'
                 $folderId = Yii::$app->request->post('folderId', 0);
-                $fileId = \yii::$app->luya->storage->file->create($fileName, $request->getFileName(), false, (int) $folderId);
+                $fileId = \yii::$app->storage->file->create($fileName, $request->getFileName(), false, (int) $folderId);
         
                 @unlink($fileName);
         
@@ -54,27 +54,27 @@ class StorageController extends \admin\base\RestController
         $fileId = \yii::$app->request->post('fileId', null);
         $filterId = \yii::$app->request->post('filterId', null);
 
-        $create = \yii::$app->luya->storage->image->create($fileId, $filterId);
+        $create = \yii::$app->storage->image->create($fileId, $filterId);
         $msg = (!$create) ? 'Error while uploading image and/or store to database.' : 'Upload successfull';
         return ['id' => $create, 'error' => (bool) !$create, 'message' => $msg, 'image' => ((bool) $create) ? $this->actionImagePath($create) : false];
     }
 
     public function actionImagePath($imageId)
     {
-        return \yii::$app->luya->storage->image->get($imageId);
+        return \yii::$app->storage->image->get($imageId);
     }
 
     public function actionFilePath($fileId)
     {
-        return \yii::$app->luya->storage->file->get($fileId);
+        return \yii::$app->storage->file->get($fileId);
     }
 
     public function actionFiles($folderId = 0)
     {
         return [
-            'breadcrumbs' => Yii::$app->luya->storage->folder->breadcrumbs($folderId),
-            'folders' => Yii::$app->luya->storage->folder->getSubFolders($folderId),
-            'files' => Yii::$app->luya->storage->file->allFromFolder($folderId),
+            'breadcrumbs' => Yii::$app->storage->folder->breadcrumbs($folderId),
+            'folders' => Yii::$app->storage->folder->getSubFolders($folderId),
+            'files' => Yii::$app->storage->file->allFromFolder($folderId),
         ];
     }
 
@@ -83,6 +83,6 @@ class StorageController extends \admin\base\RestController
         $folderName = Yii::$app->request->post('folderName', null);
         $parentFolderId = Yii::$app->request->post('parentFolderId', 0);
 
-        return Yii::$app->luya->storage->folder->createFolder($folderName, $parentFolderId);
+        return Yii::$app->storage->folder->createFolder($folderName, $parentFolderId);
     }
 }

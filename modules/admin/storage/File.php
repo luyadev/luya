@@ -69,7 +69,7 @@ class File
         $fileHash = $this->getFileHash($sourceFile);
         $mimeType = $this->getMimeType($sourceFile);
         $fileName = implode([$baseName.'_'.$fileHashName, $fileInfo->extension], '.');
-        $savePath = \yii::$app->luya->storage->dir.$fileName;
+        $savePath = \yii::$app->storage->dir.$fileName;
         if (is_uploaded_file($sourceFile)) {
             if (move_uploaded_file($sourceFile, $savePath)) {
                 $copyFile = true;
@@ -112,8 +112,8 @@ class File
         $files = StorageFile::find()->select(['id', 'name_original', 'extension'])->where(['folder_id' => $folderId, 'is_hidden' => 0])->asArray()->all();
         foreach($files as $k => $v) {
             if ($v['extension'] == "jpg" || $v['extension'] == "png") {
-                $imageId = Yii::$app->luya->storage->image->create($v['id'], 0);
-                $thumb = Yii::$app->luya->storage->image->filterApply($imageId, 'tiny-crop');
+                $imageId = Yii::$app->storage->image->create($v['id'], 0);
+                $thumb = Yii::$app->storage->image->filterApply($imageId, 'tiny-crop');
             } else {
                 $thumb = false;
             }
@@ -132,8 +132,8 @@ class File
 
         return [
             'file_id' => $file->id,
-            'source_http' => \yii::$app->luya->storage->httpDir.$file->name_new_compound,
-            'source' => \yii::$app->luya->storage->dir.$file->name_new_compound,
+            'source_http' => \yii::$app->storage->httpDir.$file->name_new_compound,
+            'source' => \yii::$app->storage->dir.$file->name_new_compound,
         ];
     }
 
@@ -141,7 +141,7 @@ class File
     {
         $file = StorageFile::find()->where(['id' => $fileId])->one();
         if ($file) {
-            return \yii::$app->luya->storage->dir.$file->name_new_compound;
+            return \yii::$app->storage->dir.$file->name_new_compound;
         }
 
         return false;

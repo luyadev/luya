@@ -34,10 +34,10 @@ class Twig extends \yii\base\Component
                 return \yii::$app->getAssetManager()->getBundle($name);
             },
             'filterApply' => function ($imageId, $filterIdentifier) {
-                return \yii::$app->luya->storage->image->filterApply($imageId, $filterIdentifier)->source;
+                return \yii::$app->storage->image->filterApply($imageId, $filterIdentifier)->source;
             },
             'image' => function($imageId) {
-                return \yii::$app->luya->storage->image->get($imageId);
+                return \yii::$app->storage->image->get($imageId);
             }
         ];
     }

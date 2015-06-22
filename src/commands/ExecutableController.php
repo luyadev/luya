@@ -101,7 +101,7 @@ class ExecutableController extends \yii\console\Controller
     }
     
     /**
-     * find all auth.php files, invoke them and return to \yii::$app->luya->auth->addRule.
+     * find all auth.php files, invoke them and return to \yii::$app->auth->addRule.
      *
      * before:
      * ```
@@ -117,13 +117,13 @@ class ExecutableController extends \yii\console\Controller
             $object = \yii::$app->getModule($id);
             if (method_exists($object, 'getAuthApis')) {
                 foreach ($object->getAuthApis() as $item) {
-                    \yii::$app->luya->auth->addApi($object->id, $item['api'], $item['alias']);
+                    \yii::$app->auth->addApi($object->id, $item['api'], $item['alias']);
                 }
             }
 
             if (method_exists($object, 'getAuthRoutes')) {
                 foreach ($object->getAuthRoutes() as $item) {
-                    \yii::$app->luya->auth->addRoute($object->id, $item['route'], $item['alias']);
+                    \yii::$app->auth->addRoute($object->id, $item['route'], $item['alias']);
                 }
             }
         }

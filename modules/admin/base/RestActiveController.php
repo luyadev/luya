@@ -33,7 +33,7 @@ class RestActiveController extends \yii\rest\ActiveController implements \luya\r
 
     public function checkAccess($action, $model = null, $params = [])
     {
-        if (!\yii::$app->luya->auth->matchApi($this->userAuthClass()->getIdentity()->id, $this->id)) {
+        if (!\yii::$app->auth->matchApi($this->userAuthClass()->getIdentity()->id, $this->id)) {
             throw new \yii\web\ForbiddenHttpException('you are unable to access this controller due to access restrictions.');
         }
     }

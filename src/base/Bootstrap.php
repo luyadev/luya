@@ -17,29 +17,21 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
     {
         $this->expand($app->getModules());
         $this->beforeRun();
-        $this->configLuyaComponents();
+        $this->registerComponents();
         $this->run($app);
     }
 
-    private function configLuyaComponents()
+    private function registerComponents()
     {
         foreach ($this->getModules() as $item) {
-            $module = yii::$app->getModule($item['id']);
-
-            // set the yii alias for each module
-            $id = $item['id'];
-            $path = $module->getBasePath();
-            \yii::setAlias("@$id", $path);
-
-            if (method_exists($module, 'getLuyaComponents')) {
-                foreach ($module->getLuyaComponents() as $key => $value) {
-                    \yii::$app->luya->$key = $value;
-                }
-            }
             
+            $module = Yii::$app->getModule($item['id']);
+
+            Yii::setAlias("@".$item['id'], $module->getBasePath());
+
             if (method_exists($module, 'registerComponents')) {
-                foreach($module->registerComponents() as $id => $definition) {
-                    Yii::$app->set($id, $definition);
+                foreach($module->registerComponents() as $componentId => $definition) {
+                    Yii::$app->set($componentId, $definition);
                 }
             }
         }

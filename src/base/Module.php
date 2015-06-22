@@ -149,25 +149,15 @@ class Module extends \yii\base\Module
         return $this->contextOptions;
     }
 
+    /**
+     * register a component to the application. id => definition. All components will be registered during bootstrap process.
+     * @return array:
+     */
     public function registerComponents()
     {
         return [];
     }
     
-    /**
-     * Returns the luya componenets config.
-     *
-     * ```
-     * return [
-     *     'storage' => new \admin\components\Storage();
-     * ];
-     * ```
-     */
-    public function getLuyaComponents()
-    {
-        return [];
-    }
-
     /**
      * The import method will be called from exec/import command.
      *

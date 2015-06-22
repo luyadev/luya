@@ -74,18 +74,16 @@ class Module extends \admin\base\Module
         return [
             'menu' => [
                 'class' => '\admin\components\Menu',
-            ]  
+            ],
+            'storage' => [
+                'class' => '\admin\components\Storage'
+            ],
+            'auth' => [
+                'class' => '\admin\components\Auth'
+            ]
         ];
     }
     
-    public function getLuyaComponents()
-    {
-        return [
-            'storage' => new \admin\components\Storage(),
-            'auth' => new \admin\components\Auth(),
-        ];
-    }
-
     public function import(\luya\commands\ExecutableController $exec)
     {
         $log = [
