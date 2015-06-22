@@ -20,7 +20,7 @@ class TitleBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'heading', 'label' => 'Titel', 'type' => 'zaa-text'],
+                ['var' => 'content', 'label' => 'Titel', 'type' => 'zaa-text'],
                 ['var' => 'headingType', 'label' => 'Grösse', 'type' => 'zaa-select', 'options' =>
                     [
                         ['value' => 'h1', 'label' => 'Gross'],
@@ -34,11 +34,11 @@ class TitleBlock extends \cmsadmin\base\Block
 
     public function twigFrontend()
     {
-        return '<{{ vars.headingType }}>{% if vars.heading is empty %}Überschrift{% else %}{{ vars.heading }}{% endif %}</{{ vars.headingType }}>';
+        return '<{{ vars.headingType }}>{% if vars.content is empty %}Überschrift{% else %}{{ vars.content }}{% endif %}</{{ vars.headingType }}>';
     }
 
     public function twigAdmin()
     {
-        return '<p class="block__tag block__tag--{{vars.headingType}}">{% if vars.heading is empty %}Überschrift{% else %}{{ vars.heading }}{% endif %}</p>';
+        return '<p class="block__tag block__tag--{{vars.headingType}}">{% if vars.content is empty %}Überschrift{% else %}{{ vars.content }}{% endif %}</p>';
     }
 }

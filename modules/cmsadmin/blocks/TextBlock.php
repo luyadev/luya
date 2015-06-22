@@ -1,0 +1,60 @@
+<?php
+
+namespace cmsadmin\blocks;
+
+use \cebe\markdown\GithubMarkdown;
+
+class TextBlock extends \cmsadmin\base\Block
+{
+    public $module = 'cmsadmin';
+
+    public function name()
+    {
+        return 'Text';
+    }
+
+    public function icon()
+    {
+        return "mdi-editor-format-align-left";
+    }
+
+    public function config()
+    {
+        return [
+            'vars' => [
+                ['var' => 'content', 'label' => 'Text', 'type' => 'zaa-textarea'],
+                ['var' => 'textType', 'label' => 'Texttyp', 'type' => 'zaa-select', 'options' =>
+                    [
+                        ['value' => '0', 'label' => 'Normaler Text'],
+                        ['value' => '1', 'label' => 'Markdown Text'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    public function extraVars()
+    {
+        $parser = new GithubMarkdown();
+
+        $text = $this->getVarValue("content", false);
+
+        if($this->getVarValue("textType")) {
+            $text = $parser->parse($text);
+        }
+
+        return [
+            "text" => $text,
+        ];
+    }
+
+    public function twigFrontend()
+    {
+        return '{% if vars.content is not empty %}<p>{{ extras.text }}</p>{% endif %}';
+    }
+
+    public function twigAdmin()
+    {
+        return '<p>{% if vars.content is empty %}Text{% else %}{{ extras.text }}{% endif %}</p>';
+    }
+}
