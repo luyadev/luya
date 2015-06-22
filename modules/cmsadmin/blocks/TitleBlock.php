@@ -34,7 +34,7 @@ class TitleBlock extends \cmsadmin\base\Block
 
     public function twigFrontend()
     {
-        return '<{{ vars.headingType }}>{% if vars.content is empty %}Überschrift{% else %}{{ vars.content }}{% endif %}</{{ vars.headingType }}>';
+        return '{% if vars.headingType is not empty %}<{{ vars.headingType }}>{% else %}<h3>{% endif %}{% if vars.content is not empty %}{{ vars.content }}{% endif %}{% if vars.headingType is not empty %}</h3>{{ vars.headingType }}>{% else %}</h3>{% endif %}';
     }
 
     public function twigAdmin()
