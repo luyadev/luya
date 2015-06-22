@@ -14,8 +14,12 @@ class Image
         }   
         $file = \yii::$app->luya->storage->file->getPath($fileId);
         $info = \yii::$app->luya->storage->file->getInfo($fileId);
-        $imagine = new \Imagine\Gd\Imagine();
-        $image = $imagine->open($file);
+        try {
+            $imagine = new \Imagine\Gd\Imagine();
+            $image = $imagine->open($file);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
         $fileName = $filterId.'_'.$info->name_new_compound;
 
         if (empty($filterId)) {
