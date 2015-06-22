@@ -177,6 +177,10 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
 		});
 	};
 	
+	$scope.safe = function(html) {
+		return $sce.trustAsHtml(html);
+	}
+	
 	$scope.onStop = function() {
 		$scope.$apply(function() {
 			AdminClassService.setClassSpace('onDragStart', '');

@@ -169,6 +169,8 @@ class NavItemController extends \admin\base\RestController
             $nav_item_page_block_item = [
                 'id' => $ipbid_value['t1_id'],
                 'name' => $blockObject->name(),
+                'icon' => $blockObject->icon(),
+                'full_name' => $blockObject->getFullName(),
                 'twig_admin' => $blockObject->twigAdmin(),
                 'vars' => $keys,
                 'cfgs' => $cfgs,

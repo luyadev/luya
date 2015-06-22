@@ -136,6 +136,6 @@ abstract class Block implements BlockInterface
     
     public function getFullName()
     {
-        return ($this->icon() === null) ? $this->name() : '<i class="'.$this->icon().'"></i> ' . $this->name();
+        return ($this->icon() === null) ? $this->name() : '<i class="left '.$this->icon().'"></i> ' . $this->name();
     }
 }

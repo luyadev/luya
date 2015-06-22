@@ -16,9 +16,7 @@
             <div class="block__toolbar">
                         <div class="left">
                     <i class="block__move mdi-action-open-with"></i>
-                    <div class="block__title">
-                                        <i class="mdi-editor-format-align-left"></i><p>{{block.name}}</p>
-                    </div>
+                    <div class="block__title"><p ng-click="toggleEdit()" ng-bind-html="safe(block.full_name)"></p></div>
                             </div>
                             <div class="right">
                                 <i class="mdi-editor-mode-edit [ waves-effect waves-blue ]" ng-click="toggleEdit()"></i>
