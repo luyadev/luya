@@ -26,6 +26,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         $this->on(self::EVENT_BEFORE_INSERT, [$this, 'eventBeforeInsert']);
         $this->on(self::EVENT_AFTER_INSERT, [$this, 'eventAfterInsert']);
         $this->on(self::EVENT_AFTER_UPDATE, [$this, 'eventAfterUpdate']);
+        $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'eventBeforeUpdate']);
     }
 
     public function rules()
@@ -62,6 +63,13 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         }
     }
 
+    public function eventBeforeUpdate()
+    {
+        $this->is_dirty = 1;
+        $this->update_user_id = \admin\Module::getAdminUserData()->id;;
+        $this->timestamp_update = time();
+    }
+    
     public function eventAfterUpdate()
     {
         $oldPlaceholderVar = $this->_olds['placeholder_var'];
@@ -79,6 +87,8 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
 
     public function eventBeforeInsert()
     {
+        $this->timestamp_create = time();
+        $this->create_user_id = \admin\Module::getAdminUserData()->id;;
         if (empty($this->json_config_cfg_values)) {
             $this->json_config_cfg_values = json_encode([], JSON_FORCE_OBJECT);
         }

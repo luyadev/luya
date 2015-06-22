@@ -19,6 +19,11 @@ class m150108_155009_cms_nav_item_page_block_item extends Migration
             'prev_id' => Schema::TYPE_INTEGER,
             'json_config_values' => Schema::TYPE_TEXT,
             'json_config_cfg_values' => Schema::TYPE_TEXT,
+            'is_dirty' => 'tinyint(1) default 0',
+            'create_user_id' => 'int(11) default 0',
+            'update_user_id' => 'int(11) default 0',
+            'timestamp_create' => 'int(11) default 0',
+            'timestamp_update' => 'int(11) default 0',
             'sort_index' => Schema::TYPE_INTEGER.' default 0',
         ]);
     }
