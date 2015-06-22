@@ -5,9 +5,10 @@ zaa.directive("createForm", function() {
 			data : '='
 		},
 		templateUrl : 'createform.html',
-		controller : function($scope, $http, AdminLangService, ApiCmsCat, MenuService) {
+		controller : function($scope, $http, AdminLangService, ApiCmsCat, MenuService, Slug) {
 			
 			$scope.error = [];
+			$scope.success = false;
 			
 			$scope.controller = $scope.$parent;
 			
@@ -37,11 +38,19 @@ zaa.directive("createForm", function() {
 						$scope.navitems = response;
 					});
 				}
-			})
+			});
+			
+			$scope.rewriteSuggestion = function() {
+				$scope.data.rewrite = Slug.slugify($scope.data.title);
+			}
 			
 			$scope.exec = function () {
 				$scope.controller.save().then(function(response) {
 					MenuService.refresh();
+					$scope.success = true;
+					$scope.error = [];
+					$scope.data.title = null;
+					$scope.data.rewrite = null;
 				}, function(reason) {
 					$scope.error = reason;
 				});

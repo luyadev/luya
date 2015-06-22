@@ -13,6 +13,7 @@ class Bower extends \luya\base\Asset
         'angular-ui-router/release/angular-ui-router.min.js',
         'angular-dragdrop/src/angular-dragdrop.min.js',
         'angular-loading-bar/build/loading-bar.min.js',
+        'angular-slugify/angular-slugify.js',
         'ng-flow/dist/ng-flow-standalone.min.js',
         'twig.js/twig.min.js',
         'ng-wig/dist/ng-wig.min.js',

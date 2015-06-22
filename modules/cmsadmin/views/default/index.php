@@ -18,7 +18,7 @@
         <h5>Neue Seite hinzufügen</h5>
         <div class="row">
             <div class="input-field col s6">
-                <input type="text" ng-model="data.title" />
+                <input type="text" ng-model="data.title" ng-change="rewriteSuggestion()" />
                 <label>Seiten Titel</label>
             </div>
             <div class="input-field col s6">
@@ -73,7 +73,7 @@
         </div>
 
         <!-- SUCCESS -->
-        <div ng-switch-when="true">
+        <div ng-show="success">
             <div class="alert alert--success">
                 <i class="mdi-navigation-check"></i>
                 <p>Diese Seite wurde erfolgreich erstellt!</p>

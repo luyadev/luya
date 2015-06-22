@@ -1,6 +1,6 @@
 /* zephir angular admin */
 
-var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ngDragDrop', 'angular-loading-bar', 'flow', 'ui.materialize', 'ngWig']);
+var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ngDragDrop', 'angular-loading-bar', 'flow', 'ui.materialize', 'ngWig', 'slugifier']);
 
 zaa.config(function ($httpProvider, $stateProvider, $controllerProvider) {
 	$httpProvider.interceptors.push('authInterceptor');

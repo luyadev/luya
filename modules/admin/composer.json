@@ -11,6 +11,7 @@
         "bower-asset/angular-ui-router" : "0.2.*@stable",
         "bower-asset/angular-loading-bar" : "0.7.1",
         "bower-asset/angular-dragdrop" : "1.*@stable",
+        "bower-asset/angular-slugify" : "1.0.*",
         "bower-asset/twig.js" : "0.7.2@stable",
         "bower-asset/ng-flow" : "2.6.*@stable",
         "bower-asset/ng-wig" : "1.1.9",
