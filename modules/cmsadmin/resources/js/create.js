@@ -1,6 +1,7 @@
 zaa.controller("CmsadminCreateController", function($scope, $q, $http) {
 	
 	$scope.data = {};
+	$scope.data.isInline = false;
 	
 	$scope.save = function() {
 		
@@ -32,6 +33,8 @@ zaa.controller("CmsadminCreateInlineController", function($scope, $q, $http) {
 	$scope.data = {
 		nav_id : $scope.$parent.NavController.id
 	};
+	
+	$scope.data.isInline = true;
 	
 	$scope.save = function() {
 	

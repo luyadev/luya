@@ -26,19 +26,19 @@
                 <label>Pfadsegment</label>
             </div>
         </div>
-        <div class="row" ng-show="!data.nav_id">
+        <div class="row" ng-show="!data.isInline">
             <div class="col s12">
                 <label>Kategorie</label>
                 <select class="browser-default" ng-model="data.cat_id" ng-options="item.id as item.name for item in cat" />
             </div>
         </div>
-        <div class="row">
+        <div class="row" ng-show="!data.isInline">
             <div class="col s12">
                 <label>Sprache</label>
                 <select class="browser-default" ng-model="data.lang_id" ng-options="item.id as item.name for item in lang" />
             </div>
         </div>
-        <div class="row">
+        <div class="row" ng-show="!data.isInline">
             <div class="col s12">
                 <label>Navigations Punkt von</label>
                 <select class="browser-default" ng-model="data.parent_nav_id">

@@ -145,7 +145,12 @@
                     <!-- PAGE -->
 
                     <div class="page" ng-if="item.length == 0">
-                        <p>Seite noch nicht übersetzt.</p>
+                        <div class="alert alert--info">
+                            Diese Seite wurde noch nicht in {{lang.name}} übersetzt.
+                        </div>
+                        <div ng-controller="CmsadminCreateInlineController">
+                            <create-form data="data"></create-form>
+                        </div>
                     </div>
                     <div class="page {{AdminClassService.getClassSpace('onDragStart')}}" ng-if="item.length != 0">
 
