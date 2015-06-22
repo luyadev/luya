@@ -84,3 +84,30 @@ Now you have to register the block to your database. Go into the administration 
 
 ***\app\blocks\Test***
 
+
+Extra Variables
+---------------
+
+If you want to access your own defined php variables in twig, you can use the function ```extraVars()```.
+
+### Example:
+
+You want to access the actual time and get the upper case version of your defined text content. However we could do this with native twig, but we'll define it via php vars and functions for the sake of an example.
+
+```
+public function extraVars()
+    {
+
+       return [
+            "mytime" => time(),
+            "newtext" => strtoupper($this->getVarValue("text")),
+        ];
+    }
+```
+
+Use the defined extraVars in Twig like this:
+
+```
+{{extras.mytime}} {{extras.newtext}}
+```
+
