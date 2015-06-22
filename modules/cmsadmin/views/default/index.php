@@ -117,20 +117,22 @@
 <!-- treeview item -->
 <script type="text/ng-template" id="reverse.html">
 
-    <div class="treeview__drop" ng-class="{ 'treeview__drop--visible': showDrag }" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}">
-    </div>
-
     <div data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{revert: false, handle : '.treeview__move', helper : 'clone'}" ng-model="data">
+
+        <div class="treeview__drop" ng-class="{ 'treeview__drop--visible': showDrag }" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}">
+        </div>
+
         <a class="treeview__link waves-effect waves-blue" ng-click="go(data.id)" ng-class="{'active' : isCurrentElement(data.id) }">
             <i ng-class="{ 'treeview__move--visible': showDrag }" class="mdi-action-open-with treeview__move left"></i>
             <div class="treeview__empty-circle"></div>
             {{data.title}}
         </a>
-    </div>
 
-    <ul class="treeview__list" role="menu" ng-show="data.nodes.length > 0">
-        <li class="treeview__item" role="menuitem" ng-repeat="data in data.nodes" ng-include="'reverse.html'"></li>
-    </ul>
+        <ul class="treeview__list" role="menu" ng-show="data.nodes.length > 0">
+            <li class="treeview__item" role="menuitem" ng-repeat="data in data.nodes" ng-include="'reverse.html'"></li>
+        </ul>
+
+    </div>
 
 </script>
 <!-- /treeview item -->
@@ -156,6 +158,7 @@
                 
                 <div class="treeview" ng-repeat="catitem in menu">
                     <h5 class="treeview__title">{{catitem.name}}</h5>
+
                     <ul class="treeview__list">
                         <li class="treeview__item" ng-repeat="data in catitem.__items" ng-include="'reverse.html'"></li>
                     </ul>
