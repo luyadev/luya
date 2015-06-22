@@ -118,6 +118,17 @@ abstract class Model extends \yii\db\ActiveRecord
         return static::find();
     }
     
+    public function genericSearch($searchQuery)
+    {
+        $query = self::find();
+        foreach($this->getTableSchema()->columns as $name => $object) {
+            if ($object->phpType == 'string') {
+                $query->orWhere(['like', $object->name, $searchQuery]);
+            }
+        }
+        return $query->all();
+    }
+    
     public function afterFind()
     {
         if ($this->_ngrestCall && $this->_ngrestCallType == 'list') {
