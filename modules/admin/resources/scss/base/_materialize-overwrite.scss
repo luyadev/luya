@@ -26,3 +26,10 @@ i.left {
 i.right {
 	margin-left: 10px;
 }
+
+/**
+ * Overwrite default table padding
+ */
+td, th {
+	padding: 8px 5px;
+}
