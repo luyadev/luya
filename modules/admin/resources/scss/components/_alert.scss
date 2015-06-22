@@ -1,0 +1,41 @@
+.alert {
+	margin: 25px 0 10px 0;
+	padding: 10px 0;
+}
+
+.alert--danger {
+	color: color("red", "base");
+}
+
+.alert--success {
+	color: color("green", "base");
+}
+
+.alert--warning {
+	color: color("yellow", "darken-3");
+}
+
+.alert__text {
+	display: inline-block;
+	vertical-align: middle;
+
+	p {
+		margin: 0;
+	}
+
+	ul {
+		margin: 0;
+		padding-left: 15px;
+	}
+	ul li {
+		list-style-type: disc;
+	}
+}
+
+.alert__icon {
+	font-size: 54px;
+	line-height: 54px;
+	margin-right: 25px;
+	display: inline-block;
+	vertical-align: middle;
+}
