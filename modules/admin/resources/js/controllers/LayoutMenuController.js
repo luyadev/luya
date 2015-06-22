@@ -29,6 +29,8 @@ zaa.controller("LayoutMenuController", function ($scope, $http, $state, $locatio
 						$scope.searchResponse = response;
 					})
 				}, 1000)
+			} else {
+				$scope.showSearchContainer = false;
 			}
 		}
 	});

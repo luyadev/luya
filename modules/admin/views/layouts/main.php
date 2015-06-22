@@ -167,6 +167,7 @@
             </div> <!-- /navbar-fixed -->
             
             <div ng-show="showSearchContainer" style="position: absolute; z-index:999999; border:1px solid red; background-color:white; padding:20px; margin:50px; right:10px;">
+                <button ng-click="showSearchContainer=false" class="btn">Close</button>
                 <div ng-repeat="item in searchResponse">
                     <h3>{{item.api.alias}}</h3>
                     <table>
