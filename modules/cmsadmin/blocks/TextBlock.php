@@ -8,6 +8,17 @@ class TextBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
 
+    public $_parser = null;
+
+    public function getParser()
+    {
+        if( $this->_parser === null) {
+            $this->_parser = new GithubMarkdown();
+        }
+
+        return $this->_parser;
+    }
+
     public function name()
     {
         return 'Text';
@@ -35,12 +46,10 @@ class TextBlock extends \cmsadmin\base\Block
 
     public function extraVars()
     {
-        $parser = new GithubMarkdown();
-
-        $text = $this->getVarValue("content", false);
+        $text = $this->getVarValue("content");
 
         if($this->getVarValue("textType")) {
-            $text = $parser->parse($text);
+            $text = $this->getParser()->parse($text);
         }
 
         return [
