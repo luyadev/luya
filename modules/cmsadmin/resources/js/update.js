@@ -169,7 +169,7 @@ zaa.controller("PagePlaceholderController", function($scope) {
  * @param $scope.block
  *            from ng-repeat
  */
-zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPageBlockItem, AdminClassService) {
+zaa.controller("PageBlockEditController", function($scope, $sce, $http, ApiCmsNavItemPageBlockItem, AdminClassService) {
 
 	$scope.onStart = function() {
 		$scope.$apply(function() {
@@ -234,6 +234,15 @@ zaa.controller("PageBlockEditController", function($scope, $sce, ApiCmsNavItemPa
 			Materialize.toast('<span> Block «'+$scope.block.name+'» wurde aktualisiert.</span>', 2000)
 			$scope.edit = false;
 			$scope.block.is_dirty = 1;
+			
+			$http({
+			    url: 'admin/api-cms-navitem/get-block', 
+			    method: "GET",
+			    params: { blockId : $scope.block.id }
+			}).success(function(rsp) {
+				$scope.block = rsp;
+			});
+			
 		});
 	}
 	

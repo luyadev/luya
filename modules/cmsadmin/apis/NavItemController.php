@@ -104,86 +104,101 @@ class NavItemController extends \admin\base\RestController
 
         return $return;
     }
+    
+    public function actionGetBlock($blockId)
+    {
+        return $this->getBlock($blockId);
+    }
 
     private function getSub($placeholderVar, $navItemPageId, $prevId)
-    {
+    {   
+        /*
         $nav_item_page_block_item_data = (new \yii\db\Query())->select([
                 't1_id' => 't1.id', 't1.is_dirty', 'block_id', 't1_nav_item_page_id' => 't1.nav_item_page_id', 't1_json_config_values' => 't1.json_config_values', 't1_json_config_cfg_values' => 't1.json_config_cfg_values', 't1_placeholder_var' => 't1.placeholder_var', 't1_prev_id' => 't1.prev_id',
                 //'t2_id' => 't2.id', 't2_name' => 't2.name', 't2_json_config' => 't2.json_config', 't2_twig_admin' => 't2.twig_admin',
         ])->from('cms_nav_item_page_block_item t1')->orderBy('t1.sort_index ASC')->where(['t1.prev_id' => $prevId, 't1.nav_item_page_id' => $navItemPageId, 't1.placeholder_var' => $placeholderVar])->all();
-
+        */
+        
+        $nav_item_page_block_item_data = (new \yii\db\Query())->select(['id'])->from('cms_nav_item_page_block_item')->orderBy('sort_index ASC')->where(['prev_id' => $prevId, 'nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar])->all();
+        
         $data = [];
 
-        foreach ($nav_item_page_block_item_data as $ipbid_key => $ipbid_value) {
-            $blockObject = \cmsadmin\models\Block::objectId($ipbid_value['block_id']);
-            if ($blockObject === false) {
-                continue;
-            }
-            $blockJsonConfig = json_decode($blockObject->jsonConfig(), true);
-
-            $ipbid_value['t1_json_config_values'] = json_decode($ipbid_value['t1_json_config_values'], true);
-            $ipbid_value['t1_json_config_cfg_values'] = json_decode($ipbid_value['t1_json_config_cfg_values'], true);
-
-            $blockValue = $ipbid_value['t1_json_config_values'];
-            $blockCfgValue = $ipbid_value['t1_json_config_cfg_values'];
-
-            $blockObject->setVarValues((empty($blockValue)) ? [] : $blockValue);
-            $blockObject->setCfgValues((empty($blockCfgValue)) ? [] : $blockCfgValue);
-
-            $placeholders = [];
-
-            if (isset($blockJsonConfig['placeholders'])) {
-                foreach ($blockJsonConfig['placeholders'] as $pk => $pv) {
-                    $pv['nav_item_page_id'] = $navItemPageId;
-                    $pv['prev_id'] = $ipbid_value['t1_id'];
-                    $placeholderVar = $pv['var'];
-
-                    $pv['__nav_item_page_block_items'] = $this->getSub($placeholderVar, $navItemPageId, $ipbid_value['t1_id']);
-
-                    $placeholder = $pv;
-
-                    $placeholders[] = $placeholder;
-                }
-            }
-
-            $keys = [];
-
-            if (isset($blockJsonConfig['vars'])) {
-                $keys = $blockJsonConfig['vars'];
-            }
-
-            $cfgs = [];
-
-            if (isset($blockJsonConfig['cfgs'])) {
-                $cfgs = $blockJsonConfig['cfgs'];
-            }
-
-            if (empty($ipbid_value['t1_json_config_values'])) {
-                $ipbid_value['t1_json_config_values'] = new \stdClass();
-            }
-
-            if (empty($ipbid_value['t1_json_config_cfg_values'])) {
-                $ipbid_value['t1_json_config_cfg_values'] = new \stdClass();
-            }
-
-            $nav_item_page_block_item = [
-                'is_dirty' => (int) $ipbid_value['is_dirty'],
-                'id' => $ipbid_value['t1_id'],
-                'name' => $blockObject->name(),
-                'icon' => $blockObject->icon(),
-                'full_name' => $blockObject->getFullName(),
-                'twig_admin' => $blockObject->twigAdmin(),
-                'vars' => $keys,
-                'cfgs' => $cfgs,
-                'extras' => $blockObject->extraVars(),
-                'values' => $ipbid_value['t1_json_config_values'],
-                'cfgvalues' => $ipbid_value['t1_json_config_cfg_values'], // add: t1_json_config_cfg_values
-                '__placeholders' => $placeholders,
-            ];
-
-            $data[] = $nav_item_page_block_item;
+        foreach ($nav_item_page_block_item_data as $blockItem) {
+            $data[] = $this->getBlock($blockItem['id']);
         }
 
         return $data;
+    }
+    
+    private function getBlock($blockId)
+    {
+        $blockItem = (new \yii\db\Query())->select("*")->from("cms_nav_item_page_block_item")->where(['id' => $blockId])->one();
+        
+        
+        $blockObject = \cmsadmin\models\Block::objectId($blockItem['block_id']);
+        if ($blockObject === false) {
+            continue;
+        }
+        $blockJsonConfig = json_decode($blockObject->jsonConfig(), true);
+        
+        $blockItem['json_config_values'] = json_decode($blockItem['json_config_values'], true);
+        $blockItem['json_config_cfg_values'] = json_decode($blockItem['json_config_cfg_values'], true);
+        
+        $blockValue = $blockItem['json_config_values'];
+        $blockCfgValue = $blockItem['json_config_cfg_values'];
+        
+        $blockObject->setVarValues((empty($blockValue)) ? [] : $blockValue);
+        $blockObject->setCfgValues((empty($blockCfgValue)) ? [] : $blockCfgValue);
+        
+        $placeholders = [];
+        
+        if (isset($blockJsonConfig['placeholders'])) {
+            foreach ($blockJsonConfig['placeholders'] as $pk => $pv) {
+                $pv['nav_item_page_id'] = $blockItem['nav_item_page_id'];
+                $pv['prev_id'] = $blockItem['id'];
+                $placeholderVar = $pv['var'];
+        
+                $pv['__nav_item_page_block_items'] = $this->getSub($placeholderVar, $blockItem['nav_item_page_id'], $blockItem['id']);
+        
+                $placeholder = $pv;
+        
+                $placeholders[] = $placeholder;
+            }
+        }
+        
+        $keys = [];
+        
+        if (isset($blockJsonConfig['vars'])) {
+            $keys = $blockJsonConfig['vars'];
+        }
+        
+        $cfgs = [];
+        
+        if (isset($blockJsonConfig['cfgs'])) {
+            $cfgs = $blockJsonConfig['cfgs'];
+        }
+        
+        if (empty($blockItem['json_config_values'])) {
+            $blockItem['json_config_values'] = new \stdClass();
+        }
+        
+        if (empty($blockItem['json_config_cfg_values'])) {
+            $blockItem['json_config_cfg_values'] = new \stdClass();
+        }
+        
+        return [
+            'is_dirty' => (int) $blockItem['is_dirty'],
+            'id' => $blockItem['id'],
+            'name' => $blockObject->name(),
+            'icon' => $blockObject->icon(),
+            'full_name' => $blockObject->getFullName(),
+            'twig_admin' => $blockObject->twigAdmin(),
+            'vars' => $keys,
+            'cfgs' => $cfgs,
+            'extras' => $blockObject->extraVars(),
+            'values' => $blockItem['json_config_values'],
+            'cfgvalues' => $blockItem['json_config_cfg_values'], // add: t1_json_config_cfg_values
+            '__placeholders' => $placeholders,
+        ];
     }
 }
