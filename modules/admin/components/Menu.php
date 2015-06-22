@@ -10,6 +10,12 @@ class Menu extends \yii\base\Component
     
     private $_menu = null;
     
+    private $_modules = null;
+    
+    private $_items = [];
+    
+    private $_nodes = [];
+    
     public $userId = 0;
     
     public function getUserId()
@@ -28,6 +34,9 @@ class Menu extends \yii\base\Component
     
     public function getNodeData($id)
     {
+        if (array_key_exists($id, $this->_nodes)) {
+            return $this->_nodes[$id];
+        }
         $i = 1;
         foreach ($this->getMenu() as $item) {
             $i++;
@@ -37,11 +46,16 @@ class Menu extends \yii\base\Component
             }
         }
     
+        $this->_nodes[$id] = $data;
+        
         return $data;
     }
     
     public function getModules()
     {
+        if ($this->_modules !== null) {
+            return $this->_modules;
+        }
         $responseData = [];
         $index = 1;
         foreach ($this->getMenu() as $item) {
@@ -105,11 +119,16 @@ class Menu extends \yii\base\Component
             ];
         }
         
+        $this->_modules = $responseData;
+        
         return $responseData;
     }
     
     public function getModuleItems($nodeId)
     {
+        if (array_key_exists($nodeId, $this->_items)) {
+            return $this->_items[$nodeId];
+        }
         $data = $this->getNodeData($nodeId);
         
         if (isset($data['groups'])) {
@@ -135,6 +154,24 @@ class Menu extends \yii\base\Component
             }
         }
         
+        $this->_items[$nodeId] = $data;
+        return $data;
+    }
+    
+    public function getItems()
+    {
+        $data = [];
+        foreach($this->getModules() as $key => $node) {
+            foreach($this->getModuleItems($node['id']) as $key => $value) {
+                if ($key == "groups") {
+                    foreach($value as $group => $groupValue) {
+                        foreach($groupValue['items'] as $array) {
+                            $data[] = $array;
+                        }
+                    }
+                }
+            }
+        }
         return $data;
     }
 }

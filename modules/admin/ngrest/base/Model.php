@@ -126,7 +126,7 @@ abstract class Model extends \yii\db\ActiveRecord
                 $query->orWhere(['like', $object->name, $searchQuery]);
             }
         }
-        return $query->all();
+        return $query->asArray()->all();
     }
     
     public function afterFind()
