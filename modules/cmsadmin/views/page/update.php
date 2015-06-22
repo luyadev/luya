@@ -159,7 +159,7 @@
                             <div class="row">
                                 <div class="col s12">
                                     <h4>
-                                        {{item.title}} <a ng-click="toggleSettings()"><i class="mdi-editor-mode-edit right [ waves-effect waves-blue ]"></i></a>
+                                        {{item.title}} <i ng-click="toggleSettings()" class="mdi-editor-mode-edit right [ waves-effect waves-blue ]"></i>
                                     </h4>
                                     <p>{{lang.name}}</p>
                                 </div>

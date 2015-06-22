@@ -1,18 +1,5 @@
 <!-- SCRIPT TEMPLATES -->
 
-<script type="text/ng-template" id="reverse.html">
-    <div  ng-show="showDrag" style="font-size:10px;" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'page__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}">
-        [DROP ITEM HERE] 
-    </div>
-
-    <div data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{revert: false, handle : '.block__move', helper : 'clone'}" ng-model="data">
-    <a class="treeview__button btn-flat [ waves-effect waves-blue ]" ng-click="go(data.id)" ng-class="{'active' : isCurrentElement(data.id) }"><i ng-show="showDrag"  class="block__move mdi-action-open-with"></i> {{data.title}}</a>
-    <ul class="treeview__list" role="menu">
-        <li class="treeview__item" role="menuitem" ng-repeat="data in data.nodes" ng-include="'reverse.html'"></li>
-    </ul>
-    </div>
-</script>
-
 <script type="text/ng-template" id="createform.html">
     <div ng-switch on="data.nav_item_type" class="card-panel">
         <h5>Neue Seite hinzufügen</h5>
@@ -127,6 +114,27 @@
 </script>
 <!-- /CREATE MODULE FORM -->
 
+<!-- treeview item -->
+<script type="text/ng-template" id="reverse.html">
+
+    <div class="treeview__drop" ng-class="{ 'treeview__drop--visible': showDrag }" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}">
+    </div>
+
+    <div data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{revert: false, handle : '.treeview__move', helper : 'clone'}" ng-model="data">
+        <a class="treeview__link waves-effect waves-blue" ng-click="go(data.id)" ng-class="{'active' : isCurrentElement(data.id) }">
+            <i ng-class="{ 'treeview__move--visible': showDrag }" class="mdi-action-open-with treeview__move left"></i>
+            <div class="treeview__empty-circle"></div>
+            {{data.title}}
+        </a>
+    </div>
+
+    <ul class="treeview__list" role="menu" ng-show="data.nodes.length > 0">
+        <li class="treeview__item" role="menuitem" ng-repeat="data in data.nodes" ng-include="'reverse.html'"></li>
+    </ul>
+
+</script>
+<!-- /treeview item -->
+
 <!-- /SCRIPT TEMPLATES -->
 
 <!-- SIDEBAR -->
@@ -137,8 +145,14 @@
             <a class="create-button [ btn-floating btn-large ][ waves-effect waves-light ] teal" ui-sref="custom.cmsadd"><i class="mdi-content-add"></i></a>
 
             <div ng-controller="CmsMenuTreeController">
-                
-                <a ng-click="toggleDrag()" class="btn">Sortieren</a>
+
+                <div class="treeview__switch switch">
+                    <label>
+                        Verschieben
+                        <input type="checkbox" ng-model="showDrag" ng-true-value="1" ng-false-value="0">
+                        <span class="lever"></span>
+                    </label>
+                </div>
                 
                 <div class="treeview" ng-repeat="catitem in menu">
                     <h5 class="treeview__title">{{catitem.name}}</h5>
