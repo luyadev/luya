@@ -56,7 +56,6 @@ zaa.factory('AdminLangService', function(ApiAdminLang, $http) {
 					service.toggleSelection(response);
 				}
 			});
-			console.log('AdminLangService loading data', service.data);
 		}
 	}
 	
