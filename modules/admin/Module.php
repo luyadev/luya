@@ -69,6 +69,15 @@ class Module extends \admin\base\Module
         ->menu();
     }
 
+    public function registerComponents()
+    {
+        return [
+            'menu' => [
+                'class' => '\admin\components\Menu',
+            ]  
+        ];
+    }
+    
     public function getLuyaComponents()
     {
         return [
