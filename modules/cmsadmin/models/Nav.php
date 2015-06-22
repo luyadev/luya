@@ -2,6 +2,7 @@
 
 namespace cmsadmin\models;
 
+use Yii;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -20,6 +21,9 @@ class Nav extends \yii\db\ActiveRecord
     {
         parent::init();
         $this->on(self::EVENT_BEFORE_INSERT, [$this, 'eventBeforeInsert']);
+        $this->on(self::EVENT_AFTER_INSERT, [$this, 'reindex']);
+        $this->on(self::EVENT_AFTER_UPDATE, [$this, 'reindex']);
+        $this->on(self::EVENT_AFTER_DELETE, [$this, 'reindex']);
     }
 
     public function rules()
@@ -42,32 +46,46 @@ class Nav extends \yii\db\ActiveRecord
     {
         $item = self::find()->where(['cat_id' => $this->cat_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index DESC')->limit(1)->one();
         if (!$item) {
-            $this->sort_index = 0;
+            $this->sort_index = 1;
         } else {
             $this->sort_index = $item->sort_index + 1;
         }
     }
 
-    public static function resort($navId, $newSortIndex)
+    public function reindex()
     {
-        /*
-        $item = self::find()->where(['id' => $navId])->one();
-        $newSortIndex = (int) $newSortIndex;
-        // find entrie on the current sort_index point
-        $higher = self::find()->where("sort_index >= :index", ['index' => $newSortIndex])->andWhere(['cat_id' => $item->cat_id, 'parent_nav_id' => $item->parent_nav_id])->all();
-
-        foreach($higher as $ritem) {
-            $ritem->sort_index = $ritem->sort_index + 1;
-            $ritem->update(false);
+        $i = 1;
+        foreach(self::find()->where(['cat_id' => $this->cat_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $model) {
+            Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $i], 'id=:id', ['id' => $model['id']])->execute();
+            $i++;
         }
-
-        $item->sort_index = $newSortIndex;
-        $item->update(false);
-
-        return true;
-        */
     }
-
+    
+    public static function moveTo($moveNavId, $toBeforeNavId)
+    {
+        $move = self::findOne($moveNavId);
+        $to = self::findOne($toBeforeNavId);
+        
+        $to->moveUpstairs();
+        
+        $move->cat_id = $to->cat_id;
+        $move->parent_nav_id = $to->parent_nav_id;
+        $move->sort_index = $to->sort_index;
+        $move->update();
+        
+        return true;
+    }
+    
+    public function moveUpstairs()
+    {
+        $startIndex = (int) $this->sort_index;
+        foreach(self::find()->where("sort_index >= :index", ['index' => $startIndex])->andWhere(['cat_id' => $this->cat_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $item) {
+            $startIndex++;
+            $up = Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id', ['id' => $item['id']])->execute();
+        }
+        
+    }
+    
     public function createPage($parentNavId, $catId, $langId, $title, $rewrite, $layoutId)
     {
         $_errors = [];

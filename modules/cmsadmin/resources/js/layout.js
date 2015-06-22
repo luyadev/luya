@@ -32,9 +32,30 @@ zaa.service('MenuService', function($http) {
 	return service;
 });
 
+zaa.controller("DropNavController", function($scope, $http, MenuService) {
+	
+	$scope.droppedNavItem = null;
+	
+    $scope.onDrop = function($event, $ui) {
+    	var itemid = $($event.target).data('itemid');
+		//console.log('dropped block beofre itemid: ' + itemid, 'theblock', $scope.droppedNavItem);
+		$http.get('admin/api-cms-navitem/move', { params : { moveItemId : $scope.droppedNavItem.id, droppedBeforeItemId : itemid }}).success(function(r) {
+			MenuService.refresh();
+		}).error(function(r) {
+			console.log('err', r)
+		})
+    }
+})
+
 zaa.controller("CmsMenuTreeController", function($scope, $state, MenuService, DroppableBlocksService) {
     
 	$scope.menu = [];
+	
+	$scope.showDrag = false;
+	
+	$scope.toggleDrag = function() {
+		$scope.showDrag = !$scope.showDrag;
+	}
 	
 	DroppableBlocksService.load();
 	
@@ -53,4 +74,14 @@ zaa.controller("CmsMenuTreeController", function($scope, $state, MenuService, Dr
     $scope.go = function(navId) {
     	$state.go('custom.cmsedit', { navId : navId });
     };
+    
+    /* drag & drop integration */
+    
+    $scope.onStart = function() {
+		//console.log('on_Start');
+	};
+	
+	$scope.onStop = function() {
+		//console.log('on_Stop');
+	};
 });

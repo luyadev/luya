@@ -14,7 +14,9 @@ class Cat extends \admin\ngrest\base\Model
         $_data = [];
         foreach (\cmsadmin\models\Nav::find()->all() as $item) {
             $x = $item->getNavItems()->where(['lang_id' => \admin\models\Lang::getDefault()->id])->one();
-            $_data[$x->nav_id] = $x->title;
+            if ($x) {
+                $_data[$x->nav_id] = $x->title;
+            }
         }
 
         return $_data;

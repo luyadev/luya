@@ -1,8 +1,14 @@
 <script type="text/ng-template" id="reverse.html">
-    <a class="treeview__button btn-flat [ waves-effect waves-blue ]" ng-click="go(data.id)" ng-class="{'active' : isCurrentElement(data.id) }">{{data.title}}</a>
+    <div  ng-show="showDrag" style="font-size:10px;" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'page__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}">
+        [DROP ITEM HERE] 
+    </div>
+
+    <div data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{revert: false, handle : '.block__move', helper : 'clone'}" ng-model="data">
+    <a class="treeview__button btn-flat [ waves-effect waves-blue ]" ng-click="go(data.id)" ng-class="{'active' : isCurrentElement(data.id) }"><i ng-show="showDrag"  class="block__move mdi-action-open-with"></i> {{data.title}}</a>
     <ul class="treeview__list" role="menu">
         <li class="treeview__item" role="menuitem" ng-repeat="data in data.nodes" ng-include="'reverse.html'"></li>
     </ul>
+    </div>
 </script>
 
 <script type="text/ng-template" id="createform.html">
@@ -107,6 +113,9 @@
             <a class="create-button [ btn-floating btn-large ][ waves-effect waves-light ] teal" ui-sref="custom.cmsadd"><i class="mdi-content-add"></i></a>
 
             <div ng-controller="CmsMenuTreeController">
+                
+                <a ng-click="toggleDrag()" class="btn">Sortieren</a>
+                
                 <div class="treeview" ng-repeat="catitem in menu">
                     <h5 class="treeview__title">{{catitem.name}}</h5>
                     <ul class="treeview__list">

@@ -2,6 +2,9 @@
 
 namespace cmsadmin\apis;
 
+use \cmsadmin\models\Nav;
+use \cmsadmin\models\NavItem;
+
 class NavItemController extends \admin\base\RestController
 {
     /**
@@ -63,9 +66,16 @@ class NavItemController extends \admin\base\RestController
         ];
     }
 
+    public function actionMove($moveItemId, $droppedBeforeItemId)
+    {
+        $moveNavId = NavItem::findOne($moveItemId)->nav_id; 
+        $toBeforeNavId = NavItem::findOne($droppedBeforeItemId)->nav_id;
+        
+        return ['success' => Nav::moveTo($moveNavId, $toBeforeNavId)];
+    }
+    
     /**
-
-     * RECUSRION *.
+     * RECUSRION
      */
     public function actionTree($navItemPageId)
     {
