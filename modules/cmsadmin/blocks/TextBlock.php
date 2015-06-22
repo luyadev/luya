@@ -53,7 +53,7 @@ class TextBlock extends \cmsadmin\base\Block
         }
 
         return [
-            "text" => $text,
+            "text" => $text
         ];
     }
 
