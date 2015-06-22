@@ -15,27 +15,18 @@
 	color: color("yellow", "darken-3");
 }
 
-.alert__text {
-	display: inline-block;
-	vertical-align: middle;
+.alert {
 
-	p {
+	i, ul, p, span {
+		display: inline-block;
+		vertical-align: middle;
 		margin: 0;
 	}
 
-	ul {
-		margin: 0;
-		padding-left: 15px;
+	i {
+		font-size: 54px;
+		line-height: 54px;
+		margin-right: 25px;
 	}
-	ul li {
-		list-style-type: disc;
-	}
-}
 
-.alert__icon {
-	font-size: 54px;
-	line-height: 54px;
-	margin-right: 25px;
-	display: inline-block;
-	vertical-align: middle;
 }

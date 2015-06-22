@@ -72,37 +72,21 @@
             </div>
         </div>
 
+        <!-- SUCCESS -->
         <div ng-switch-when="true">
-
-        </div>
-
-        <div class="alert alert--success">
-            <div class="row">
-                <div class="col s12">
-
-                    <i class="alert__icon mdi-navigation-check"></i>
-                    <div class="alert__text">
-                        <p>Diese Seite wurde erfolgreich erstellt!</p>
-                    </div>
-
-                </div>
+            <div class="alert alert--success">
+                <i class="mdi-navigation-check"></i>
+                <p>Diese Seite wurde erfolgreich erstellt!</p>
             </div>
         </div>
+        <!-- /SUCCESS -->
 
         <!-- ERROR -->
         <div class="alert alert--danger" ng-show="error.length != 0">
-            <div class="row">
-                <div class="col s12">
-
-                    <i class="alert__icon mdi-alert-error"></i>
-                    <div class="alert__text">
-                        <ul>
-                            <li ng-repeat="err in error">{{ err[0] }}</li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
+            <i class="mdi-alert-error"></i>
+            <ul>
+                <li ng-repeat="err in error">{{ err[0] }}</li>
+            </ul>
         </div>
         <!-- /ERROR -->
 
