@@ -11,6 +11,28 @@ zaa.controller("LayoutMenuController", function ($scope, $http, $state, $locatio
 		})
 	})();
 	
+	$scope.searchQuery = null;
+	
+	$scope.showSearchContainer = false;
+	
+	$scope.searchResponse = null;
+	
+	$scope.searchPromise = null;
+	
+	$scope.$watch(function() { return $scope.searchQuery}, function(n, o) {
+		if (n !== o) {
+			if (n.length > 2) {
+				$timeout.cancel($scope.searchPromise);
+				$scope.searchPromise = $timeout(function() {
+					$http.get('admin/api-admin-search', { params : { query : n}}).success(function(response) {
+						$scope.showSearchContainer = true;
+						$scope.searchResponse = response;
+					})
+				}, 1000)
+			}
+		}
+	});
+	
 	$scope.items = [];
 	
 	$scope.currentItem = {};

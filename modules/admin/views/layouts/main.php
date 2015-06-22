@@ -147,6 +147,9 @@
                             </li>
                         </ul>
                         <ul class="right">
+                            <li>
+                                <input type="text" ng-model="searchQuery" />
+                            </li>
                             <li ng-mouseenter="showOnlineContainer=true" ng-mouseleave="showOnlineContainer=false">
                                 Benutzer Online <strong>{{notify.length}}</strong>
                             </li>
@@ -162,6 +165,17 @@
                     </div>
                 </nav>
             </div> <!-- /navbar-fixed -->
+            
+            <div ng-show="showSearchContainer" style="position: absolute; z-index:999999; border:1px solid red; background-color:white; padding:20px; margin:50px; right:10px;">
+                <div ng-repeat="item in searchResponse">
+                    <h3>{{item.api.alias}}</h3>
+                    <table>
+                        <tr ng-repeat="row in item.data">
+                            <td ng-repeat="(k,v) in row">{{v}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
             
             <div ng-show="showOnlineContainer" style="position: absolute; z-index:999999; border:1px solid red; background-color:white; padding:20px; margin:50px; right:10px;">
                 <ul>

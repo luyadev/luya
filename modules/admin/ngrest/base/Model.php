@@ -118,15 +118,25 @@ abstract class Model extends \yii\db\ActiveRecord
         return static::find();
     }
     
+    public function genericSearchFields()
+    {
+        $fields = [];
+        foreach($this->getTableSchema()->columns as $name => $object) {
+            if ($object->phpType == 'string') {
+                $fields[] = $object->name;
+            }
+        }
+        return $fields;
+    }
+    
     public function genericSearch($searchQuery)
     {
         $query = self::find();
-        foreach($this->getTableSchema()->columns as $name => $object) {
-            if ($object->phpType == 'string') {
-                $query->orWhere(['like', $object->name, $searchQuery]);
-            }
+        $fields = $this->genericSearchFields();
+        foreach($fields as $field) {
+            $query->orWhere(['like', $field, $searchQuery]);
         }
-        return $query->asArray()->all();
+        return $query->select($fields)->asArray()->all();
     }
     
     public function afterFind()
