@@ -1,5 +1,5 @@
 .alert {
-	margin: 25px 0 10px 0;
+	margin: 25px 14px;
 	padding: 10px 0;
 }
 
@@ -13,6 +13,12 @@
 
 .alert--warning {
 	color: color("yellow", "darken-3");
+}
+
+.alert--info {
+	color: color("blue", "base");
+	background-color: color("light-blue", "lighten-5");
+	padding: 10px 20px;
 }
 
 .alert {
