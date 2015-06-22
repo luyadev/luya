@@ -12,16 +12,16 @@
     </div>
 
     <div ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController">
-        <div class="block" ng-class="{ 'block--edit' : edit , 'blue lighten-5' : !block.is_dirty }" data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{revert: false, handle : '.block__move', helper : 'clone'}" ng-model="block">
+        <div class="block" ng-class="{ 'block--edit' : edit , 'block--is-dirty' : !block.is_dirty }" data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{revert: false, handle : '.block__move', helper : 'clone'}" ng-model="block">
             <div class="block__toolbar">
                         <div class="left">
-                    <i class="block__move mdi-action-open-with"></i>
-                    <div class="block__title"><p ng-click="toggleEdit()" ng-bind-html="safe(block.full_name)"></p></div>
+                                <i class="block__move mdi-action-open-with"></i>
+                                <div class="block__title" ng-click="toggleEdit()" ng-bind-html="safe(block.full_name)"></div>
                             </div>
                             <div class="right">
-                                <i class="mdi-editor-mode-edit [ waves-effect waves-blue ]" ng-click="toggleEdit()"></i>
-                                <i class="mdi-action-delete [ waves-effect waves-blue ]" ng-click="removeBlock(block)"></i>
-                                <!--<i class="mdi-navigation-more-vert [ waves-effect waves-blue ]"></i>-->
+                                <i ng-show="!edit" class="mdi-editor-mode-edit [ waves-effect waves-blue ]" ng-click="toggleEdit()"></i>
+                                <i ng-show="!edit" class="mdi-action-delete [ waves-effect waves-blue ]" ng-click="removeBlock(block)"></i>
+                                <i ng-show="edit" class="mdi-navigation-close [ waves-effect waves-blue ]" ng-click="toggleEdit()"></i>
                             </div>
             </div>
             <div class="block__body" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
@@ -143,8 +143,12 @@
                     <!-- PAGE -->
 
                     <div class="page" ng-if="item.length == 0">
-                        <div class="alert alert--info">
-                            Diese Seite wurde noch nicht in {{lang.name}} übersetzt.
+                        <div class="row">
+                            <div class="col s12">
+                                <div class="alert alert--info">
+                                    Diese Seite wurde noch nicht in {{lang.name}} übersetzt.
+                                </div>
+                            </div>
                         </div>
                         <div ng-controller="CmsadminCreateInlineController">
                             <create-form data="data"></create-form>

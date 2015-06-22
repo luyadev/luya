@@ -3,12 +3,15 @@
  */
 .block {
 	background-color: $block--background;
-	padding: 10px;
+	padding: 38px 10px;
 	margin: 10px 0;
 	position: relative;
 	overflow: hidden;
-	transition: 0.5s ease padding-top;
-	border: 1px solid transparent;
+	transition: 0.5s ease padding-top, 0.25s ease border;
+	border-top: none;
+	border-left: 0 solid transparent;
+	border-bottom: 0 solid transparent;
+	border-right: 0 solid transparent;
 	min-height: 50px;
 
 	&:hover > .block__toolbar,
@@ -18,9 +21,15 @@
 	&:last-of-type {
 		margin-bottom: 0;
 	}
+	&.block--is-dirty:not(.block--edit) {
+		background-color: $block--background-is-dirty;
+	}
 	&.block--edit {
 		padding-top: $block__toolbar--height + 5px;
-		border-color: $block__toolbar--background;
+		background-color: $block--active-background;
+		border-left: 4px solid $block--toolbar--background;
+		border-bottom: 4px solid $block--toolbar--background;
+		border-right: 4px solid $block--toolbar--background;
 	}
 }
 
@@ -37,6 +46,9 @@
 
 	i {
 		font-size: 22px;
+		vertical-align: middle;
+	}
+	span {
 		vertical-align: middle;
 	}
 
