@@ -372,7 +372,7 @@ zaa.directive('zaaFileArrayUpload', function(){
                             '<button class="filearray__delete btn-floating [ red lighten-3 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)"><i class="mdi-action-delete"></i></button>' +
                             '<div class="col s6">' +
                                 '<div class="input-field">' +
-                                    '<input type="text" ng-model="image.caption" />' +
+                                    '<input type="text" ng-model="file.caption" />' +
                                     '<label>Beschreibung</label>' +
                                 '</div>' +
                             '</div>' +
