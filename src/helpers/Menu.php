@@ -13,7 +13,7 @@ class Menu
      * @param Links $linksCollection
      * @param int   $level           1 = first, 2 = second, 3 = third
      */
-    public static function parentNavIdByCurrentLink(\luya\collection\Links $linksCollection, $level)
+    public static function parentNavIdByCurrentLink(\cms\components\Links $linksCollection, $level)
     {
         if ($level == 1) {
             return 0;

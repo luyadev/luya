@@ -31,15 +31,12 @@ class DefaultController extends \luya\base\PageController
 
     private function links()
     {
-        $links = new \cms\collection\Links();
-        $links->setActiveLink($_GET['path']);
-        $links->start();
-        yii::$app->collection->links = $links;
+        $links = Yii::$app->links->setActiveLink($_GET['path']);
     }
 
     public function actionIndex()
     {
-        $linksObject = \Yii::$app->collection->links;
+        $linksObject = \Yii::$app->links;
         $urls = $linksObject->getAll();
         $fullUrl = $linksObject->getActiveLink();
 
@@ -49,7 +46,7 @@ class DefaultController extends \luya\base\PageController
             $navId = $this->findDefaultPage();
             $link = $linksObject->findOneByArguments(['id' => $navId]);
             $fullUrl = $link['url'];
-            yii::$app->collection->links->setActiveLink($fullUrl);
+            yii::$app->links->setActiveLink($fullUrl);
         }
         $parts = explode('/', $fullUrl);
 
@@ -63,7 +60,7 @@ class DefaultController extends \luya\base\PageController
             exit;
         }
 
-        yii::$app->collection->links->setActiveLink($activeUrl);
+        yii::$app->links->setActiveLink($activeUrl);
 
         $linkItem = $linksObject->getLink($activeUrl);
 

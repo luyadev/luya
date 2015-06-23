@@ -9,4 +9,13 @@ class Module extends \luya\base\Module
      * no module is provided. So the CMS url rewrites does only apply on default behavior.
      */
     public static $urlRules = [];
+    
+    public function registerComponents()
+    {
+        return [
+            'links' => [
+                'class' => 'cms\components\Links'
+            ]  
+        ];
+    }
 }

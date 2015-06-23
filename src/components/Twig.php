@@ -19,16 +19,16 @@ class Twig extends \yii\base\Component
     {
         return [
             'links' => function ($cat, $lang, $parent_nav_id) {
-                return \yii::$app->collection->links->findByArguments(['cat' => $cat, 'lang' => $lang, 'parent_nav_id' => (int) $parent_nav_id]);
+                return \yii::$app->links->findByArguments(['cat' => $cat, 'lang' => $lang, 'parent_nav_id' => (int) $parent_nav_id]);
             },
             'linksFindParent' => function($level) {
-                return \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->collection->links, $level);  
+                return \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, $level);  
             },
             'linkActive' => function() {
-                return \yii::$app->collection->links->getActiveLink();
+                return \yii::$app->links->getActiveLink();
             },
             'linkActivePart' => function($part) {
-                return \yii::$app->collection->links->getActiveLinkPart($part);
+                return \yii::$app->links->getActiveLinkPart($part);
             },
             'asset' => function ($name) {
                 return \yii::$app->getAssetManager()->getBundle($name);

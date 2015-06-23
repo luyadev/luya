@@ -2,7 +2,7 @@
 
 namespace cmsadmin\models;
 
-use yii;
+use Yii;
 
 class NavItemPage extends \cmsadmin\base\NavItemType
 {
@@ -30,7 +30,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
 
         return $twig->render($this->layout->view_file, [
             'placeholders' => $insertion,
-            'activeLink' => \yii::$app->collection->links->getActiveLink(),
+            'activeLink' => Yii::$app->links->getActiveLink(),
         ]);
     }
 

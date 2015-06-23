@@ -76,7 +76,7 @@ class UrlManager extends \yii\web\UrlManager
             return parent::createUrl($params);
         }
         $composition = Yii::$app->collection->composition->getFull();
-        $links = Yii::$app->collection->links;
+        $links = Yii::$app->links;
         
         $originalParams = $params;
 
