@@ -77,9 +77,6 @@
                     <img src="{{imageinfo.source}}" class="responsive-img" />
                 </div>
             </div>
-
-            <!-- todo: REMOVE THE BUTTON !!!!!!! -->
-            <button class="btn" ng-click="filterApply()" type="button">FaDA</button>
         </script>
 
         <script type="text/ng-template" id="storageFileManager">

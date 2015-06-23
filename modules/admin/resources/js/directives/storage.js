@@ -157,7 +157,8 @@ zaa.directive('storageFileUpload', function($http) {
 			}
 			
 			scope.$watch(function() { return scope.ngModel }, function(n, o) {
-				if (n != 0) {
+				if (n != 0 && n !== undefined) {
+					console.log('storage_file_uplad changed', n);
 					$http.get('admin/api-admin-storage/file-path', { params: { fileId : n } }).success(function(response) {
 						scope.fileinfo = response;
 					}).error(function(response) {
@@ -203,15 +204,26 @@ zaa.directive('storageImageUpload', function($http, ApiAdminFilter) {
 				});
 			}
 			
+			scope.$watch(function() { return scope.filterId }, function(n, o) {
+				if (n != 0 && n !== undefined && scope.fileId !== 0) {
+					scope.filterApply();
+				}
+			});
+			
+			scope.$watch(function() { return scope.fileId }, function(n, o) {
+				if (n != 0 && n !== undefined) {
+					scope.filterApply();
+				}
+			});
+			
 			scope.$watch(function() { return scope.ngModel }, function(n, o) {
-				if (n !== o) {
-					if (n !== 0) {
-						$http.get('admin/api-admin-storage/image-path', { params: { imageId : n } }).success(function(response) {
-							scope.imageinfo = response;
-						}).error(function(response) {
-							console.log('error', response);
-						})
-					}
+				if (n != 0 && n !== undefined) {
+					$http.get('admin/api-admin-storage/image-path', { params: { imageId : n } }).success(function(response) {
+						scope.imageinfo = response;
+						scope.fileId = response.file_id;
+					}).error(function(response) {
+						console.log('die datei wurde nicht gefunden', response);
+					})
 				}
 			})
 		},
