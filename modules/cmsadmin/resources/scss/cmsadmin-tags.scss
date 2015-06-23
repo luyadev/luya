@@ -1,0 +1,13 @@
+@import "base/variables";
+
+
+/**
+ * Prefix every module style with the module class
+ */
+.module-cmsadmin {
+
+	@import "tags/base";
+	@import "tags/titles";
+	@import "tags/text";
+
+}

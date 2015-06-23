@@ -1,0 +1,14 @@
+.block__tag--quote {
+	font-style: italic;
+
+	&:before {
+		display: inline-block;
+		content: "«";
+		margin-right: 5px;
+	}
+	&:after {
+		display: inline-block;
+		content: "»";
+		margin-left: 5px;
+	}
+}

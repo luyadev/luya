@@ -64,6 +64,6 @@ class TextBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return '<p>{% if vars.content is empty %}<strong>Es wurde noch kein Text eingegeben.</strong>{% elseif vars.content is not empty and vars.textType == 1 %}{{ extras.text }}{% elseif vars.content is not empty and vars.textType == 0 %}{{ extras.text|nl2br }}{% endif %}</p>';
+        return '<p class="block__tag block__tag--p">{% if vars.content is empty %}<span class="block__empty-text">Es wurde noch kein Text eingegeben.</span>{% elseif vars.content is not empty and vars.textType == 1 %}{{ extras.text }}{% elseif vars.content is not empty and vars.textType == 0 %}{{ extras.text|nl2br }}{% endif %}</p>';
     }
 }
