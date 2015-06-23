@@ -44,7 +44,7 @@ class ImageBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        $image = '<p>{% if extras.image.source %}<img src="{{extras.image.source}}" border="0" height="100" />{% else %}<strong>Es wurde noch kein Bild Hochgeladen.</strong>{% endif %}</p>';
+        $image = '{% if extras.image.source %}<p><img src="{{extras.image.source}}" border="0" height="100" /><p>{% else %}<span class="block__empty-text">Es wurde noch kein Bild Hochgeladen.</span>{% endif %}';
         $image.= '{% if vars.caption is not empty %}{{vars.caption}}{% endif %}';
 
         return $image;
