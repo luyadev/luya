@@ -15,7 +15,7 @@ class FileListBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return "mdi-file-file-download";
+        return 'mdi-file-file-download';
     }
 
     /**
@@ -46,7 +46,7 @@ class FileListBlock extends \cmsadmin\base\Block
         ];
     }
 
-    public function extraVars()
+    public function  getFiles()
     {
         $fileEntries = $this->getVarValue('files');
         $files = [];
@@ -54,10 +54,10 @@ class FileListBlock extends \cmsadmin\base\Block
         if(!empty($fileEntries)) {
             foreach($fileEntries as $fileEntry) {
 
-                if (array_key_exists("fileId", $fileEntry)) {
+                if (array_key_exists('fileId', $fileEntry)) {
                     $files[] = [
-                        "meta" => $fileEntry,
-                        "file" => Yii::$app->storage->file->get($fileEntry["fileId"])
+                        'meta' => $fileEntry,
+                        'file' => Yii::$app->storage->file->get($fileEntry['fileId']),
                     ];
                 }
 
@@ -72,9 +72,13 @@ class FileListBlock extends \cmsadmin\base\Block
          *
          */
 
+        return $files;
+    }
 
+    public function extraVars()
+    {
         return [
-            'fileList' => $files
+            'fileList' => $this->getFiles(),
         ];
     }
 
