@@ -114,8 +114,8 @@
                             <tr ng-repeat="folder in folders" class="filemanager__folder" ng-click="loadFolder(folder.id)">
                                 <td class="filemanager__icon-column"><i class="mdi-file-folder-open"></i></td>
                                 <td>{{folder.name}}</td>
-                                <td>[Roland Schaub]</td>
-                                <td>[23. Juni 2015]</td>
+                                <td style="color:#999;">Roland Schaub</td>
+                                <td style="color:#999;">23. Juni 2015</td>
                                 <td></td>
                             </tr>
                             <!-- /FOLDER -->
@@ -136,13 +136,11 @@
                             <!-- FILES -->
                             <tr ng-repeat="file in files" class="collection-item avatar" ng-click="toggleSelection(file)" ng-class="{'is-active' : inSelection(file)}">
                                 <td class="filemanager__icon-column">
-                                    <!--<span ng-if="file.thumbnail"><img src="{{file.thumbnail.source}}" /></span>
-                                    <span ng-if="!file.thumbnail"><i class="mdi-editor-attach-file"></i></span>-->
-                                    <i class="mdi-editor-attach-file"></i>
+                                <span ng-if="file.thumbnail"><img class="circle responsive-img" src="{{file.thumbnail.source}}" /></span><span ng-if="!file.thumbnail"><i class="mdi-editor-attach-file"></i></span>
                                 </td>
                                 <td>{{file.name_original}}</td>
-                                <td>[Roland Schaub]</td>
-                                <td>[23. Juni 2015]</td>
+                                <td style="color:#999;">Roland Schaub</td>
+                                <td style="color:#999;">23. Juni 2015</td>
                                 <td><button class="btn teal lighten-2 right" type="button" ng-show="allowSelection=='true'" ng-click="selectFile(file)"><i class="mdi-navigation-check"></i></button></td>
                             </tr>
                             <!-- /FILES -->
