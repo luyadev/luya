@@ -12,11 +12,11 @@ class HtmlBlock extends \cmsadmin\base\Block
     }
 
     /**
-     * @todo check correct materialized icon
+     * @todo check correct materialized icon (code)
      */
     public function icon()
     {
-        return "code";
+        return "mdi-action-settings-ethernet";
     }
 
     public function config()
@@ -35,6 +35,6 @@ class HtmlBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return '<pre>{{ vars.html | escape }}</pre>';
+        return '{% if vars.html is empty %}<strong>Es wurde noch kein HTML Code eingegeben.</strong>{% else %}<pre>{{ vars.html | escape }}</pre>{% endif %}';
     }
 }
