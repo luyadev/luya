@@ -33,13 +33,13 @@ class ListBlock extends \cmsadmin\base\Block
     public function extraVars()
     {
         return [
-            'listType' => $this->getVarValue('vars.listType', 'ul'),
+            'listType' => $this->getVarValue('listType', 'ul'),
         ];
     }
 
     public function twigFrontend()
     {
-        return '<{{ extras.listType }}>{% for row in vars.elements %}<li>{{ row.value }}</li>{% endfor %}</{{ extras.listType }}>';
+        return '{% if vars.elements is not empty %}<{{ extras.listType }}>{% for row in vars.elements %}<li>{{ row.value }}</li>{% endfor %}</{{ extras.listType }}>{% endif %}';
     }
 
     public function twigAdmin()
