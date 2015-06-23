@@ -50,13 +50,17 @@
         </script>
 
         <script type="text/ng-template" id="storageFileUpload">
-        <div class="row">
-            <div class="col s12">
-                <div>Selektierte Datei: {{fileinfo.source_http}}</div>
-                <button type="button" class="btn" ng-click="toggleModal()">Dateimanager öffnen</button>
+            <div class="fileupload">
+                <div class="fileupload__btn btn-flat [ grey lighten-4 ]" ng-click="toggleModal()">
+                    <i class="mdi-editor-attach-file left"></i>
+                    <span>
+                        Datei auswählen
+                    </span>
+                </div>
+                <input class="fileupload__path" type="text" ng-model="fileinfo.source_http" disabled />
+
                 <modal is-modal-hidden="modal"><storage-file-manager selection="true" /></modal>
             </div>
-        </div>
         </script>
         
         <script type="text/ng-template" id="storageImageUpload">

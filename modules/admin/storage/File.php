@@ -124,17 +124,17 @@ class File
 
     public function get($fileId)
     {
-        $file = StorageFile::find()->where(['id' => $fileId])->one();
+        $file = StorageFile::find()->where(['id' => $fileId])->asArray()->one();
 
         if (!$file) {
             return false;
         }
 
-        return [
-            'file_id' => $file->id,
-            'source_http' => \yii::$app->storage->httpDir.$file->name_new_compound,
-            'source' => \yii::$app->storage->dir.$file->name_new_compound,
-        ];
+        $file["file_id"] = $file["id"];
+        $file["source_http"] = Yii::$app->storage->httpDir . $file["name_new_compound"];
+        $file["source"] = Yii::$app->storage->dir . $file["name_new_compound"];
+
+        return $file;
     }
 
     public function getPath($fileId)
