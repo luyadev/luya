@@ -8,7 +8,12 @@ class TestBlock extends \cmsadmin\base\Block
     
     public function name()
     {
-        return '[DEV TEST BLOCk]';
+        return 'Entwicklung';
+    }
+
+    public function icon()
+    {
+        return 'mdi-hardware-desktop-windows';
     }
 
     public function config()
