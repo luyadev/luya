@@ -311,6 +311,10 @@ zaa.directive("storageFileManager", function() {
 			$scope.selectFile = function(file) {
 				$scope.$parent.select(file.id);
 			}
+
+            $scope.toggleModal = function() {
+                $scope.$parent.toggleModal();
+            }
 			
 			$scope.loadFolder = function(folderId) {
 				$scope.currentFolderId = folderId;
