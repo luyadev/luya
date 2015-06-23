@@ -1,0 +1,11 @@
+.filemanager__icon-column {
+	width: 30px;
+}
+
+.filemanager__folder {
+	cursor: pointer;
+
+	&:hover {
+		background-color: color("green", "lighten-4") !important;
+	}
+}

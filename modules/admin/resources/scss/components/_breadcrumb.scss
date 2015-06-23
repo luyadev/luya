@@ -1,0 +1,35 @@
+.breadcrumb {
+	width: 100%;
+	display: block;
+}
+
+.breadcrumb__item {
+	display: inline-block;
+	position: relative;
+}
+
+.breadcrumb__icon {
+	display: inline-block;
+	position: absolute;
+	top: 50%;
+	font-size: 1.8rem;
+	line-height: 0;
+	color: color("grey", "base");
+}
+
+.breadcrumb__btn {
+	display: inline-block;
+	padding: 0 1rem;
+	text-align: left;
+	background-color: transparent;
+	border: 1px solid color("grey", "lighten-2");
+	text-transform: none;
+	margin-left: 26px;
+
+	.breadcrumb__item:first-of-type & {
+		margin-left: 0;
+	}
+	&:hover, &:active {
+		background-color: color("grey", "lighten-2");
+	}
+}
