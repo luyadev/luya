@@ -13,7 +13,7 @@ class TitleBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return "mdi-editor-format-size";
+        return 'mdi-editor-format-size';
     }
 
     public function config()
@@ -34,10 +34,8 @@ class TitleBlock extends \cmsadmin\base\Block
 
     public function extraVars()
     {
-        $headingType = $this->getVarValue("content","h2");
-
         return [
-            "headingType" => $headingType
+            'headingType' => $this->getVarValue('content', 'h2'),
         ];
     }
 

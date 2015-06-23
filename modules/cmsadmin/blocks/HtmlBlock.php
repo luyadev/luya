@@ -16,7 +16,7 @@ class HtmlBlock extends \cmsadmin\base\Block
      */
     public function icon()
     {
-        return "mdi-action-settings-ethernet";
+        return 'mdi-action-settings-ethernet';
     }
 
     public function config()

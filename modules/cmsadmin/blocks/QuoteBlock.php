@@ -13,7 +13,7 @@ class QuoteBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return "mdi-editor-format-quote";
+        return 'mdi-editor-format-quote';
     }
 
     public function config()

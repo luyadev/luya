@@ -15,7 +15,7 @@ class ModuleBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return "mdi-social-share";
+        return 'mdi-social-share';
     }
 
     public function config()
