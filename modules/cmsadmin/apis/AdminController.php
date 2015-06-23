@@ -22,6 +22,9 @@ class AdminController extends \admin\base\RestController
             $blocks = [];
             foreach(Block::find()->where(['group_id' => $group['id']])->all() as $block) {
                 $obj = Block::objectId($block['id']);
+                if (!$obj) {
+                    continue;
+                }
                 $blocks[] = [
                     'id' => $block['id'],
                     'name' => $obj->getFullName(),
