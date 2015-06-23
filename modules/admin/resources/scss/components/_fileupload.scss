@@ -1,0 +1,24 @@
+.fileupload {
+	display: block;
+	position: relative;
+}
+
+.fileupload__btn,
+.fileupload__path {
+	display: inline-block;
+	position: relative;
+}
+
+.fileupload__btn {
+	width: 165px;
+	box-sizing: content-box;
+
+	// Width with padding : 225px
+}
+
+.fileupload__path {
+	width: calc(100% - 245px) !important; // 100% - (width + padding of fileupload__btn)
+	margin-left: 15px !important;
+	color: color("shades", "black") !important;
+	border-bottom: 1px dotted color("shades", "black") !important;
+}
