@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-alpha6 (in progress)
 --------------------------
+- removed `$app->collection->links` (search for `$app->collection->links` and replace with `$app->links`).
 - added luya version constante to module `luya\Module::VERSION`.
 - added user online overview in admin panel.
 - fixed `#64` wrong logout url.
