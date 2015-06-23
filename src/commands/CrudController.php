@@ -127,6 +127,10 @@ class CrudController extends \yii\console\Controller
                         $content.= '        ];' . PHP_EOL;
                         $content.= '    }' . PHP_EOL . PHP_EOL;
                         $content.= '    /* ngrest model properties */'. PHP_EOL . PHP_EOL;
+                        $content.= '    public function genericSearchFields()' . PHP_EOL;
+                        $content.= '    {' . PHP_EOL;
+                        $content.= '        return [\''.implode("', '", $names).'\'];' . PHP_EOL;
+                        $content.= '    }' . PHP_EOL . PHP_EOL;
                         $content.= '    public function ngRestApiEndpoint()' . PHP_EOL;
                         $content.= '    {' . PHP_EOL;
                         $content.= '        return \''.$apiEndpoint.'\';' . PHP_EOL;
