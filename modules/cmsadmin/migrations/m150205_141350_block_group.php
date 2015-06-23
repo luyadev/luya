@@ -14,12 +14,27 @@ class m150205_141350_block_group extends Migration
 
         $this->insert('cms_block_group', [
             'id' => 1,
-            'name' => 'Text Abschnitte',
+            'name' => 'Inhalts-Elemente',
         ]);
 
         $this->insert('cms_block_group', [
             'id' => 2,
-            'name' => 'Desgin Elemente',
+            'name' => 'Layout-Elemente',
+        ]);
+        
+        $this->insert('cms_block_group', [
+            'id' => 3,
+            'name' => 'Modul-Elemente',
+        ]);
+        
+        $this->insert('cms_block_group', [
+            'id' => 4,
+            'name' => 'Projekt-Elemente',
+        ]);
+        
+        $this->insert('cms_block_group', [
+            'id' => 5,
+            'name' => 'Entwicklung',
         ]);
     }
 
