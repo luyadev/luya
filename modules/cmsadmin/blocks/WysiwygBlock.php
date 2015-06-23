@@ -11,7 +11,7 @@ class WysiwygBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return "mdi-editor-format-color-text";
+        return 'mdi-editor-format-color-text';
     }
 
     public function config()

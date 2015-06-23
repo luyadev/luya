@@ -26,7 +26,7 @@ class TextBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return "mdi-editor-format-align-left";
+        return 'mdi-editor-format-align-left';
     }
 
     public function config()
@@ -44,16 +44,21 @@ class TextBlock extends \cmsadmin\base\Block
         ];
     }
 
-    public function extraVars()
+    public function getText()
     {
-        $text = $this->getVarValue("content");
+        $text = $this->getVarValue('content');
 
-        if($this->getVarValue("textType")) {
+        if($this->getVarValue('textType')) {
             $text = $this->getParser()->parse($text);
         }
 
+        return $text;
+    }
+
+    public function extraVars()
+    {
         return [
-            "text" => $text
+            'text' => $this->getText(),
         ];
     }
 

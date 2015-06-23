@@ -13,7 +13,7 @@ class ListBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return "mdi-editor-format-list-bulleted";
+        return 'mdi-editor-format-list-bulleted';
     }
 
     public function config()
@@ -32,10 +32,8 @@ class ListBlock extends \cmsadmin\base\Block
 
     public function extraVars()
     {
-        $listType = $this->getVarValue('vars.listType','ul');
-
         return [
-            'listType' => $listType
+            'listType' => $this->getVarValue('vars.listType', 'ul'),
         ];
     }
 
