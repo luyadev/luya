@@ -9,15 +9,6 @@ use Yii;
  */
 class SearchController extends \admin\base\RestController
 {
-    /**
-     * @todo: changing the auser auth method, add user component
-     */
-    public function init()
-    {
-        parent::init();
-        Yii::$app->menu->userId = $this->getUser()->id;
-    }
-
     public function actionIndex($query)
     {
         $search = [];

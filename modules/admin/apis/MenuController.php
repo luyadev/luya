@@ -11,15 +11,6 @@ use Yii;
  */
 class MenuController extends \admin\base\RestController
 {
-    /**
-     * @todo: changing the auser auth method, add user component
-     */
-    public function init()
-    {
-        parent::init();
-        Yii::$app->menu->userId = $this->getUser()->id;
-    }
-
     public function actionIndex()
     {
         return Yii::$app->menu->getModules();

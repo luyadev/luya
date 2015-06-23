@@ -16,11 +16,9 @@ class Menu extends \yii\base\Component
     
     private $_nodes = [];
     
-    public $userId = 0;
-    
     public function getUserId()
     {
-        return $this->userId;
+        return (new \admin\components\User())->getIdentity()->id;
     }
     
     public function getMenu()
