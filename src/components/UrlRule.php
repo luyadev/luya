@@ -42,18 +42,19 @@ class UrlRule extends \luya\base\UrlRule
 
         $luya = Yii::$app->getModule('luya');
         
-        $composition = new \luya\collection\PrefixComposition();
-        $composition->hideComposition = $luya->hideComposition;
+        Yii::$app->composition->hideComposition = $luya->hideComposition;
+        
+        //$composition = new \luya\collection\PrefixComposition();
+        //$composition->hideComposition = $luya->hideComposition;
         if (count($compositionKeys) == 0) {
             $compositionKeys = $luya->defaultComposition;
         }
-        $composition->set($compositionKeys);
-
-        yii::$app->collection->composition = $composition;
+        
+        Yii::$app->composition->set($compositionKeys);
 
         // set the yii app language param based on the composition fullUrl
-        $locale = $composition->getLocale();
-        yii::$app->language = $composition->getLanguage();
+        $locale = Yii::$app->composition->getLocale();
+        yii::$app->language = Yii::$app->composition->getLanguage();
         setlocale(LC_ALL, $locale, $locale . ".utf8");
         
         $parts = explode('/', $request->getPathInfo()); // can be deleted after reshuffle array

@@ -25,11 +25,14 @@ class UrlManager extends \yii\web\UrlManager
     {
         $route = parent::parseRequest($request);
 
-        if (!is_object(\yii::$app->collection->composition)) {
+        /**
+         * @todo previous `!is_object(\yii::$app->composition)`can remove?`how to handle?
+         */
+        if (!(Yii::$app->composition)) {
             return $route;
         }
 
-        $composition = \yii::$app->collection->composition->getFull();
+        $composition = \yii::$app->composition->getFull();
 
         $length = strlen($composition);
         if (substr($route[0], 0, $length) == $composition) {
@@ -72,10 +75,10 @@ class UrlManager extends \yii\web\UrlManager
 
     public function createUrl($params)
     {
-        if (!is_object(Yii::$app->collection->composition)) {
+        if (!(Yii::$app->composition)) {
             return parent::createUrl($params);
         }
-        $composition = Yii::$app->collection->composition->getFull();
+        $composition = Yii::$app->composition->getFull();
         $links = Yii::$app->links;
         
         $originalParams = $params;

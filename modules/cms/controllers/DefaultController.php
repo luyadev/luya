@@ -20,13 +20,13 @@ class DefaultController extends \luya\base\PageController
         $this->links();
         $this->_context = $this;
 
-        $shortCode = yii::$app->collection->composition->getKey('langShortCode');
+        $shortCode = yii::$app->composition->getKey('langShortCode');
 
         if (!$shortCode) {
-            yii::$app->collection->composition->setkey('langShortCode', $this->getDefaultLangShortCode());
+            yii::$app->composition->setkey('langShortCode', $this->getDefaultLangShortCode());
         }
 
-        $this->langId = $this->getLangIdByShortCode(yii::$app->collection->composition->getKey('langShortCode'));
+        $this->langId = $this->getLangIdByShortCode(yii::$app->composition->getKey('langShortCode'));
     }
 
     private function links()

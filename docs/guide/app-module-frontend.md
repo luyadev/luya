@@ -23,7 +23,7 @@ Each Module can have its own url Rules. Even its not access by module context, e
     ];
 ```
 
-You can also have composition url rules which will also match against the ***collection->composition->getFull()*** url, like this:
+You can also have composition url rules which will also match against the ***$app::composition->getFull()*** url, like this:
 
 ```php
 

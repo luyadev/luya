@@ -77,10 +77,13 @@ class Module extends \admin\base\Module
                 'class' => '\admin\components\Menu',
             ],
             'storage' => [
-                'class' => '\admin\components\Storage'
+                'class' => '\admin\components\Storage',
             ],
             'auth' => [
-                'class' => '\admin\components\Auth'
+                'class' => '\admin\components\Auth',
+            ],
+            'composition' => [
+                'class' => '\admin\components\Composition',
             ]
         ];
     }
