@@ -27,9 +27,9 @@ class Module extends \admin\base\Module
     public function getMenu()
     {
         return $this
-            ->nodeRoute('CMS Inhalte', 'mdi-social-public', 'cmsadmin-default-index', 'cmsadmin/default/index')
-            ->node('CMS Einstellungen', 'mdi-image-tune')
-                ->group('Verwalten')
+            ->nodeRoute('Seiteninhalte', 'mdi-social-public', 'cmsadmin-default-index', 'cmsadmin/default/index')
+            ->node('CMS-Einstellungen', 'mdi-image-tune')
+                ->group('Seitenvorlagen')
                     ->itemApi('Kategorien', 'cmsadmin-cat-index', 'mdi-action-settings-applications', 'api-cms-cat')
                     ->itemApi('Layout', 'cmsadmin-layout-index', 'mdi-image-style', 'api-cms-layout')
                 ->group('Blöcke')
@@ -41,7 +41,7 @@ class Module extends \admin\base\Module
     public function extendPermissionApis()
     {
         return [
-            ['api' => 'api-cms-navitempageblockitem', 'alias' => 'Blöcke Einfügen und Verschiebe'],
+            ['api' => 'api-cms-navitempageblockitem', 'alias' => 'Blöcke einfügen und verschieben'],
         ];
     }
 
