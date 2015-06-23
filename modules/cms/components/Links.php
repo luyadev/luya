@@ -2,21 +2,34 @@
 
 namespace cms\components;
 
+use Yii;
+use \cmsadmin\models\Nav;
+
 class Links extends \yii\base\Component
 {
     private $links = [];
+    
+    public $loadIsHidden = false;
+    
+    private $compositionPrefix = null;
     
     /* cms collection */
     
     public function init()
     {
-        $this->iteration(0, '', 0);
+        $this->compositionPrefix = Yii::$app->composition->getFull();
+        $this->loadData();
         foreach ($this->urls as $k => $args) {
             $this->addLink($k, $args);
         }
     }
     
     private $urls = [];
+    
+    public function loadData()
+    {
+        $this->iteration(0, '', 0);
+    }
     
     private function iteration($parentNavId, $urlPrefix, $depth)
     {
@@ -25,23 +38,27 @@ class Links extends \yii\base\Component
             if ($this->subNodeExists($item['id'])) {
                 $this->iteration($item['id'], $urlPrefix.$item['rewrite'].'/', ($depth + 1));
             }
-            $this->urls[$urlPrefix.$item['rewrite']] = [
-                'url' => $urlPrefix.$item['rewrite'],
-                'rewrite' => $item['rewrite'],
-                'id' => (int) $item['id'],
-                'parent_nav_id' => (int) $parentNavId,
-                'nav_item_id' => (int) $item['nav_item_id'],
-                'title' => $item['title'],
-                'lang' => $item['lang_short_code'],
-                'cat' => $item['cat_rewrite'],
-                'depth' => (int) $depth,
-            ];
+            if (!array_key_exists($urlPrefix.$item['rewrite'], $this->urls)) {
+                $rewrite = $urlPrefix.$item['rewrite'];
+                $this->urls[$rewrite] = [
+                    'full_url' => $this->compositionPrefix . $rewrite,
+                    'url' => $rewrite,
+                    'rewrite' => $item['rewrite'],
+                    'id' => (int) $item['id'],
+                    'parent_nav_id' => (int) $parentNavId,
+                    'nav_item_id' => (int) $item['nav_item_id'],
+                    'title' => $item['title'],
+                    'lang' => $item['lang_short_code'],
+                    'cat' => $item['cat_rewrite'],
+                    'depth' => (int) $depth,
+                ];
+            }
         }
     }
     
     private function getData($parentNavId)
     {
-        return \cmsadmin\models\Nav::getItemsData($parentNavId);
+        return Nav::getItemsData($parentNavId, $this->loadIsHidden);
     }
     
     private function subNodeExists($parentNavId)
@@ -66,7 +83,7 @@ class Links extends \yii\base\Component
                     unset($_index[$link]);
                 }
     
-                if (isset($args[$key]) && $args[$key] !== $value) {
+                if (isset($args[$key]) && $args[$key] != $value) {
                     unset($_index[$link]);
                 }
             }

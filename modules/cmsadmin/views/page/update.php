@@ -141,7 +141,6 @@
                 <div class="col s{{(12/AdminLangService.selection.length)}}" ng-repeat="lang in langs" ng-show="AdminLangService.isInSelection(lang)" ng-controller="NavItemController">
 
                     <!-- PAGE -->
-
                     <div class="page" ng-if="item.length == 0">
                         <div class="row">
                             <div class="col s12">
@@ -164,6 +163,7 @@
                                         {{item.title}} <i ng-click="toggleSettings()" class="mdi-editor-mode-edit right [ waves-effect waves-blue ]"></i>
                                     </h4>
                                     <p>{{lang.name}}</p>
+                                    <a class="btn" ng-href="{{item.preview_url.full_url}}" target="_blank">Vorschau</a>
                                 </div>
                             </div>
                         </div>

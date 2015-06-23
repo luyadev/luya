@@ -2,6 +2,8 @@
 
 namespace admin\components;
 
+use \luya\helpers\Url;
+
 class Composition extends \yii\base\Component
 {
     private $_composition = [];
@@ -35,7 +37,7 @@ class Composition extends \yii\base\Component
             return;
         }
     
-        return \luya\helpers\Url::trailing(implode('/', $this->_composition));
+        return Url::trailing(implode('/', $this->_composition));
     }
     
     public function getLocale()

@@ -2,22 +2,28 @@
 
 namespace cmsadmin\apis;
 
+use Yii;
 use \cmsadmin\models\Nav;
 use \cmsadmin\models\NavItem;
 
 class NavItemController extends \admin\base\RestController
 {
     /**
-     * http://example.com/admin/api-cms-navitem/nav-lang-items?access-token=XXX&navId=A&langId=B.
+     * http://example.com/admin/api-cms-navitem/nav-lang-item?access-token=XXX&navId=A&langId=B.
      *
      * @param unknown_type $navId
      * @param unknown_type $langId
      *
      * @return multitype:unknown
      */
-    public function actionNavLangItems($navId, $langId)
+    public function actionNavLangItem($navId, $langId)
     {
-        return \cmsadmin\models\NavItem::find()->where(['nav_id' => $navId, 'lang_id' => $langId])->all();
+        $item = NavItem::find()->where(['nav_id' => $navId, 'lang_id' => $langId])->asArray()->one();
+        if ($item) {
+            $item['preview_url'] = Yii::$app->links->findOneByArguments(['nav_item_id' => $item['id']]);
+        }
+        
+        return $item;
     }
 
     /**

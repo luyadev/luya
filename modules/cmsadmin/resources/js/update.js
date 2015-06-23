@@ -100,19 +100,13 @@ zaa.controller("NavItemController", function($scope, $http) {
 	
 	$scope.getItem = function(langId, navId) {
 		$http({
-		    url: 'admin/api-cms-navitem/nav-lang-items', 
+		    url: 'admin/api-cms-navitem/nav-lang-item', 
 		    method: "GET",
 		    params: { langId : langId, navId : navId }
-		}).success(function(rsp) {
-			if (rsp.length > 1) {
-				alert('FEHLER BEIM LADEN DER LANG. NAVID,LANGID Kombination kann nur 1 Datensatz erhalten.')
-			} else {
-				if (rsp.length == 0) {
-					// alert('THIS PAGE IS NOT YET TRANSLATED');
-				} else {
-					$scope.item = rsp[0];
-					$scope.reset();
-				}
+		}).success(function(response) {
+			if (response) {
+				$scope.item = response;
+				$scope.reset();
 			}
 		});
 	}
