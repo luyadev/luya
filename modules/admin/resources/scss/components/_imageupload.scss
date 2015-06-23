@@ -1,6 +1,6 @@
 .imageupload {
 	padding: 20px;
-	background-color: color("grey", "lighten-5");
+	@extend .z-depth-1;
 }
 
 .imageupload__filter,
