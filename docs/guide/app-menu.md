@@ -3,7 +3,7 @@ Show Navigation in the Frontend Layout
 
 27.2.2015: the $lang variable changed to $composition. The $composition->langShortCode variable will be $composition->langShortCode. compoition full provideds the full prefix compostion url path.
 
-To show the navigation tree you need to access the link collection provided by ```Yii::$app```. You have multiple possibilities by changing the arguments of
+To show the navigation tree you need to access the link component provided by ```Yii::$app```. You have multiple possibilities by changing the arguments of
 ```Yii::$app->links->findByArguments()```. Assuming a default category, a language variable set in ```$composition->langShortCode``` and the id of the parent cms page is 0 (= top level),
 you'll get the first hierarchy as an array by calling ```Yii::$app->links->findByArguments(['cat' => 'default', 'lang' => $composition->langShortCode, 'parent_nav_id' => 0])```
 

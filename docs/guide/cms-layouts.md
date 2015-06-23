@@ -21,10 +21,10 @@ JSON CONFIG
 }
 ```
 
-Links collection variable in Layout
+Links component variable in Layout
 -----------------------------------
 
-By default the link collection exists in the cmslayout files.
+By default the link component exists in the cmslayout files.
 
 The below example returns an array containing all links for ***cat => default***, ***language => de*** and ***parent_nav_id =>  0***:
 ```

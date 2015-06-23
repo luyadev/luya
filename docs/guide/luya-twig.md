@@ -6,7 +6,7 @@ the following twig functions are available in all twig ***frontend*** templates.
 
 links
 -----
-wrapper functions for the luya links collection findByArguments function. Will return an array of links for the defined method arguments:
+wrapper functions for the luya links component findByArguments function. Will return an array of links for the defined method arguments:
 ```
 {% for item in links('cat', 'lang', 'parent_nav_id') %}
 	{{ dump(item) }}
