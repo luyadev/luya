@@ -74,10 +74,10 @@ class NavItemController extends \admin\base\RestController
 
     public function actionMove($moveItemId, $droppedBeforeItemId)
     {
-        $moveNavId = NavItem::findOne($moveItemId)->nav_id; 
-        $toBeforeNavId = NavItem::findOne($droppedBeforeItemId)->nav_id;
+        //$moveNavId = NavItem::findOne($moveItemId)->nav_id; 
+        //$toBeforeNavId = NavItem::findOne($droppedBeforeItemId)->nav_id;
         
-        return ['success' => Nav::moveTo($moveNavId, $toBeforeNavId)];
+        return ['success' => Nav::moveTo($moveItemId, $droppedBeforeItemId)];
     }
     
     /**
