@@ -130,7 +130,10 @@ class NavItemController extends \admin\base\RestController
         $data = [];
 
         foreach ($nav_item_page_block_item_data as $blockItem) {
-            $data[] = $this->getBlock($blockItem['id']);
+            $block = $this->getBlock($blockItem['id']);
+            if ($block) {
+                $data[] = $block;
+            }
         }
 
         return $data;
@@ -143,7 +146,7 @@ class NavItemController extends \admin\base\RestController
         
         $blockObject = \cmsadmin\models\Block::objectId($blockItem['block_id']);
         if ($blockObject === false) {
-            continue;
+            return false;;
         }
         $blockJsonConfig = json_decode($blockObject->jsonConfig(), true);
         
