@@ -5,10 +5,18 @@ namespace cmsadmin\blocks;
 class HtmlBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
-    
+
     public function name()
     {
         return 'Html';
+    }
+
+    /**
+     * @todo check correct materialized icon
+     */
+    public function icon()
+    {
+        return "code";
     }
 
     public function config()
@@ -27,6 +35,6 @@ class HtmlBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return '<pre style="background-color:#666; padding:10px;">{{ vars.html | escape }}</pre>';
+        return '<pre>{{ vars.html | escape }}</pre>';
     }
 }
