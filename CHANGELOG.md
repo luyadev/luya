@@ -20,6 +20,8 @@ LUYA CHANGELOG
 - cms admin added slugable rewrite creation while typing.
 - added `is_dirty` block
 - fixed bug in get block where extra vars have not been reloaded.
+- added preview button
+- added `full_url` key in links array where the composition full url responses.
 
 1.0.0-alpha5 (17. Jun 2015)
 -------------------------------
