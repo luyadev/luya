@@ -158,7 +158,6 @@ zaa.directive('storageFileUpload', function($http) {
 			
 			scope.$watch(function() { return scope.ngModel }, function(n, o) {
 				if (n != 0 && n !== undefined) {
-					console.log('storage_file_uplad changed', n);
 					$http.get('admin/api-admin-storage/file-path', { params: { fileId : n } }).success(function(response) {
 						scope.fileinfo = response;
 					}).error(function(response) {
