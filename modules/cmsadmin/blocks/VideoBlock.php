@@ -35,25 +35,23 @@ class VideoBlock extends \cmsadmin\base\Block
 
     public function constructUrl()
     {
-        $scheme  = parse_url($this->getVarValue('url'), PHP_URL_SCHEME);
-        $host    = parse_url($this->getVarValue('url'), PHP_URL_HOST);
-        $path    = parse_url($this->getVarValue('url'), PHP_URL_PATH);
-        $query   = parse_url($this->getVarValue('url'), PHP_URL_QUERY);
+        $parseUrl = parse_url($this->getVarValue('url'));
+        $url = null;
+
+        if(empty($parseUrl['path'])) {
+            return $url;
+        }
 
         // youtube embed url constructing
 
-        if (($pos = strpos($query, "v=")) !== FALSE) {
-            $videoId = substr($query, $pos+2);
+        if (($pos = strpos($parseUrl['query'], "v=")) !== FALSE) {
+            $videoId = substr($parseUrl['query'], $pos+2);
 
-            $url = $scheme.'://'.$host.'/embed/'.$videoId;
+            $url = $parseUrl['scheme'].'://'.$parseUrl['host'].'/embed/'.$videoId;
 
             if($this->getCfgValue('controls') == 1) {
                 $url .= '?rel=0&amp;controls=0&amp;showinfo=0';
             }
-
-        } else {
-            // not supported yet
-            $url = "";
         }
 
         return $url;
