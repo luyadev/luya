@@ -7,7 +7,7 @@ zaa.factory('ApiCmsBlock', function($resource) {
 });
 
 zaa.factory('ApiCmsNavItemPageBlockItem', function($resource) {
-	return $resource('admin/api-cms-navitemplageblockitem/:id', { id : '@_id' }, {
+	return $resource('admin/api-cms-navitempageblockitem/:id', { id : '@_id' }, {
 		save : {
 			method : 'POST',
 			isArray : false,

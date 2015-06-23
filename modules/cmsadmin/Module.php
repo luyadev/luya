@@ -6,7 +6,7 @@ class Module extends \admin\base\Module
 {
     public static $apis = [
         'api-cms-admin' => 'cmsadmin\\apis\\AdminController',
-        'api-cms-navitemplageblockitem' => 'cmsadmin\\apis\\NavItemPageBlockItemController',
+        'api-cms-navitempageblockitem' => 'cmsadmin\\apis\\NavItemPageBlockItemController',
         'api-cms-defaults' => 'cmsadmin\apis\DefaultsController',
         'api-cms-nav' => 'cmsadmin\apis\NavController',
         'api-cms-navitem' => 'cmsadmin\\apis\\NavItemController',
@@ -41,7 +41,7 @@ class Module extends \admin\base\Module
     public function extendPermissionApis()
     {
         return [
-            ['api' => 'api-cms-navitemplageblockitem', 'alias' => 'Blöcke Einfügen und Verschiebe'],
+            ['api' => 'api-cms-navitempageblockitem', 'alias' => 'Blöcke Einfügen und Verschiebe'],
         ];
     }
 

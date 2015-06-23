@@ -53,7 +53,7 @@ extend permission inside your Module.php
     public function extendPermissionApis()
     {
         return [
-            ['api' => 'api-cms-navitemplageblockitem', 'alias' => 'Blöcke Einfügen und Verschiebe'],
+            ['api' => 'api-cms-navitempageblockitem', 'alias' => 'Blöcke Einfügen und Verschiebe'],
         ];
     }
 
