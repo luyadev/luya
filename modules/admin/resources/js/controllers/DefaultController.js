@@ -11,13 +11,15 @@ zaa.controller("DefaultController", function ($scope, $http, $state, $stateParam
 	$scope.dashboard = [];
 	
 	$scope.itemAdd = function (name, items) {
+		
 		$scope.items.push({name : name, items : items});
 		
-		items.forEach(function(data) {
+		for(var i in items) {
+			var data = items[i];
 			$scope.itemRoutes[data.route] = {
 				alias : data.alias, icon : data.icon
 			}
-		})
+		}
 	}
 	
 	$scope.getDashboard = function(nodeId) {
