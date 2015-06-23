@@ -146,8 +146,6 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 		
 		$scope.updateErrors = [];
 		
-		console.log($scope.data.update);
-		console.log(angular.toJson($scope.data.update));
 		$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true))
 		.success(function(data) {
 			$('#updateModal').closeModal();
