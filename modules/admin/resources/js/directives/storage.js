@@ -303,6 +303,7 @@ zaa.directive("storageFileManager", function() {
 		        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 		        }).success(function(transport) {
 		        	if (transport) {
+		        		$scope.newFolderName = '';
 		        		$scope.getFiles($scope.currentFolderId);
 		        	}
 		        });
