@@ -8,7 +8,6 @@ $config = [
         'command' => '\luya\commands\CommandController',
     ],
     'components' => [
-        'collection' => 'luya\components\Collection',
         'mail' => [
             'class' => '\luya\components\Mail',
         ],
