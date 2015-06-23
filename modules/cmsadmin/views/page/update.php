@@ -160,10 +160,13 @@
                             <div class="row">
                                 <div class="col s12">
                                     <h4>
-                                        {{item.title}} <i ng-click="toggleSettings()" class="mdi-editor-mode-edit right [ waves-effect waves-blue ]"></i>
+                                        {{item.title}}
+                                        <i ng-click="toggleSettings()" class="mdi-editor-mode-edit right [ waves-effect waves-blue ]"></i>
+                                        <a ng-href="{{item.preview_url.full_url}}" target="_blank" class="right">
+                                            <i class="mdi-action-open-in-browser [ waves-effect waves-blue ]"></i>
+                                        </a>
                                     </h4>
                                     <p>{{lang.name}}</p>
-                                    <a class="btn" ng-href="{{item.preview_url.full_url}}" target="_blank">Vorschau</a>
                                 </div>
                             </div>
                         </div>
