@@ -9,7 +9,6 @@ $config = [
     ],
     'components' => [
         'collection' => 'luya\components\Collection',
-        'luya' => 'luya\components\LuyaComponents',
         'mail' => [
             'class' => '\luya\components\Mail',
         ],

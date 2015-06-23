@@ -27,7 +27,6 @@ $config = [
             ],
         ],
         'collection' => 'luya\components\Collection',
-        'luya' => 'luya\components\LuyaComponents',
     ],
     'bootstrap' => [
         'luya\base\web\Bootstrap',
