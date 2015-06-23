@@ -1,0 +1,17 @@
+.filearray__item {
+	position: relative;
+}
+
+.filearray__delete {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+
+.filearray__upload {
+	margin-top: 15px;
+
+	.fileupload__path {
+		margin-bottom: 0 !important;
+	}
+}
