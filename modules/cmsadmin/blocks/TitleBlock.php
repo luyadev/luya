@@ -35,17 +35,17 @@ class TitleBlock extends \cmsadmin\base\Block
     public function extraVars()
     {
         return [
-            'headingType' => $this->getVarValue('content', 'h2'),
+            'headingType' => $this->getVarValue('headingType', 'h2'),
         ];
     }
 
     public function twigFrontend()
     {
-        return '{% if vars.content is not empty %}<{{ vars.headingType }}>{{ vars.content }}</{{ vars.headingType }}>{% endif %}';
+        return '{% if vars.content is not empty %}<{{ extras.headingType }}>{{ vars.content }}</{{ extras.headingType }}>{% endif %}';
     }
 
     public function twigAdmin()
     {
-        return '{% if vars.content is not empty %}<p class="block__tag block__tag--{{vars.headingType}}">{{ vars.content }}</p>{% else %}<span class="block__empty-text">Es wurde noch keine Überschrift eingegeben.</span>{% endif %}';
+        return '{% if vars.content is not empty %}<p class="block__tag block__tag--{{extras.headingType}}">{{ vars.content }}</p>{% else %}<span class="block__empty-text">Es wurde noch keine Überschrift eingegeben.</span>{% endif %}';
     }
 }
