@@ -10,7 +10,12 @@ class ModuleBlock extends \cmsadmin\base\Block
     
     public function name()
     {
-        return 'Module Integration';
+        return 'Modul';
+    }
+
+    public function icon()
+    {
+        return "mdi-social-share";
     }
 
     public function config()
@@ -36,7 +41,7 @@ class ModuleBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return '<p><i class="fa fa-terminal fa-2x"></i> Module Integration: <strong>{{ vars.moduleName }}</strong></p>';
+        return '{% if vars.moduleName is empty %}<span class="block__empty-text">Es wurde noch kein Modul ausgewählt.</span>{% else %}<p><i class="fa fa-terminal fa-2x"></i> Modulintegration: <strong>{{ vars.moduleName }}</strong></p>{% endif %}';
     }
 
     public function twigFrontend()
