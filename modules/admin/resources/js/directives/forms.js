@@ -283,7 +283,7 @@ zaa.directive('zaaImageUpload', function($compile){
 			'grid' : '@grid'
 		},
 		template : function() {
-			return '<div class="col s{{grid}}"><label>{{label}}</label><storage-image-upload ng-model="model"></storage-image-upload></div>';
+			return '<div class="col s{{grid}}"><storage-image-upload ng-model="model"></storage-image-upload></div>';
 		}
 	}
 });

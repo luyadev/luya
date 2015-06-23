@@ -1,0 +1,32 @@
+.imageupload {
+	padding: 20px;
+	background-color: color("grey", "lighten-5");
+}
+
+.imageupload__filter,
+.imageupload__preview {
+	display: block;
+	vertical-align: top;
+	margin-top: 10px;
+	width: 100%;
+
+	@media (min-width: 1500px) {
+		display: inline-block;
+	}
+}
+
+@media (min-width: 1500px) {
+	.imageupload__filter {
+		width: 50%;
+		padding-right: 5px;
+	}
+
+	.imageupload__preview {
+		width: 49%;
+		padding-left: 5px;
+
+		img {
+			margin-top: 25px;
+		}
+	}
+}
