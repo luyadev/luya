@@ -64,8 +64,11 @@ zaa.directive('zaaText', function(){
 			'label' : '@label',
 			'grid' : '@grid'
 		},
+        link : function(scope) {
+            scope.marc = 'ole';
+        },
 		template : function() {
-			return '<div class="input-field col s{{grid}}"><input ng-model="model" type="text" /><label>{{label}}</label></div>';
+			return '<div class="input-field col s{{grid}}"><input ng-model="model" type="text" /><label for="{{marc}}">{{label}}</label></div>';
 		}
 	}
 });
@@ -265,7 +268,7 @@ zaa.directive('zaaFileUpload', function($compile){
 			'grid' : '@grid'
 		},
 		template : function() {
-			return '<div class="col s{{grid}}"><label>{{label}}</label><storage-file-upload ng-model="model"></storage-file-upload></div>';
+			return '<div class="col s{{grid}}"><storage-file-upload ng-model="model"></storage-file-upload></div>';
 		}
 	}
 });
@@ -280,7 +283,7 @@ zaa.directive('zaaImageUpload', function($compile){
 			'grid' : '@grid'
 		},
 		template : function() {
-			return '<div class="col s{{grid}}"><label>{{label}}</label><storage-image-upload ng-model="model"></storage-file-upload></div>';
+			return '<div class="col s{{grid}}"><label>{{label}}</label><storage-image-upload ng-model="model"></storage-image-upload></div>';
 		}
 	}
 });
