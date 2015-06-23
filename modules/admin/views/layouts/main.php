@@ -64,21 +64,22 @@
         </script>
         
         <script type="text/ng-template" id="storageImageUpload">
-        <div class="row">
-            <div class="col s12">
-                <label>Filter Auswahl</label>
-                <select name="filterId" ng-model="filterId" class="browser-default"><option value="0">Kein Filter</option><option ng-repeat="item in filters" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
+            <div class="imageupload">
+                <b class="imageupload__title">Bild und Filter festlegen</b>
+
+                <storage-file-upload ng-model="fileId"></storage-file-upload>
+
+                <div class="imageupload__filter">
+                    <label>Filter Auswahl</label>
+                    <select name="filterId" ng-model="filterId" class="browser-default"><option value="0">Kein Filter</option><option ng-repeat="item in filters" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
+                </div>
+                <div class="imageupload__preview">
+                    <img src="{{imageinfo.source}}" class="responsive-img" />
+                </div>
             </div>
-        </div>
-        <storage-file-upload ng-model="fileId"></storage-file-upload>
-        <div class="row">
-            <div class="col s6">
-                <button class="btn" ng-click="filterApply()" type="button">Filter auf Datei Anwenden</button>
-            </div> 
-            <div class="col s6">
-                <img src="{{imageinfo.source}}" class="responsive-img" />
-            </div>
-        </div>
+
+            <!-- todo: REMOVE THE BUTTON !!!!!!! -->
+            <button class="btn" ng-click="filterApply()" type="button">FaDA</button>
         </script>
 
         <script type="text/ng-template" id="storageFileManager">
