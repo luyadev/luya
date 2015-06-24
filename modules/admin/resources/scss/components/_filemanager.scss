@@ -4,8 +4,9 @@
 
 .filemanager__folder {
 	cursor: pointer;
+}
 
-	&:hover {
-		background-color: color("green", "lighten-4") !important;
-	}
+.filemanager__lighten {
+	color: color("grey", "darken-1");
+	font-size: 0.9rem;
 }

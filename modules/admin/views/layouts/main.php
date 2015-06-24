@@ -100,7 +100,7 @@
 
             <div class="row">
                 <div class="col s12">
-                    <table class="striped">
+                    <table class="striped hoverable">
                         <thead>
                             <tr>
                                 <th class="filemanager__icon-column"></th>
@@ -115,8 +115,8 @@
                             <tr ng-repeat="folder in folders" class="filemanager__folder" ng-click="loadFolder(folder.id)">
                                 <td class="filemanager__icon-column"><i class="mdi-file-folder-open"></i></td>
                                 <td>{{folder.name}}</td>
-                                <td style="color:#999;">Roland Schaub</td>
-                                <td style="color:#999;">23. Juni 2015</td>
+                                <td class="filemanager__lighten">Rocky Schaub</td>
+                                <td class="filemanager__lighten">23. Juni 2015, 00:00 Uhr</td>
                                 <td></td>
                             </tr>
                             <!-- /FOLDER -->
@@ -140,8 +140,8 @@
                                 <span ng-if="file.thumbnail"><img class="circle responsive-img" src="{{file.thumbnail.source}}" /></span><span ng-if="!file.thumbnail"><i class="mdi-editor-attach-file"></i></span>
                                 </td>
                                 <td>{{file.name_original}}</td>
-                                <td style="color:#999;">{{file.firstname}} {{file.lastname}}</td>
-                                <td style="color:#999;">{{file.upload_timestamp}}</td>
+                                <td class="filemanager__lighten">{{file.firstname}} {{file.lastname}}</td>
+                                <td class="filemanager__lighten">{{file.upload_timestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
                                 <td><button class="btn teal lighten-2 right" type="button" ng-show="allowSelection=='true'" ng-click="selectFile(file)"><i class="mdi-navigation-check"></i></button></td>
                             </tr>
                             <!-- /FILES -->
