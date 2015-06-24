@@ -3,7 +3,6 @@
 namespace admin\components;
 
 use Yii;
-use \luya\helpers\Param;
 
 class Menu extends \yii\base\Component
 {

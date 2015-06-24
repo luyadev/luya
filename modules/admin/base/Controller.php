@@ -5,7 +5,6 @@ namespace admin\base;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
-use luya\helpers\Param;
 class Controller extends \luya\base\Controller
 {
     public $layout = '@admin/views/layouts/main';

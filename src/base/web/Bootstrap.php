@@ -4,7 +4,6 @@ namespace luya\base\web;
 
 use Yii;
 use yii\helpers\ArrayHelper;
-use luya\helpers\Param;
 
 /**
  * @todo rename to WebBootstrap and inherite the base Bootstrap class and add the web specific bootstrap stuff (like url manager)
