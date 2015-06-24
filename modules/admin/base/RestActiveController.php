@@ -2,6 +2,8 @@
 
 namespace admin\base;
 
+use Yii;
+
 /**
  * Wrapper for yii2 basic rest controller used with a model class. The wrapper is made to
  * change behaviours and overwrite the indexAction.
@@ -18,7 +20,7 @@ class RestActiveController extends \yii\rest\ActiveController implements \luya\r
 
     public function userAuthClass()
     {
-        return new \admin\components\User();
+        return Yii::$app->adminuser;
     }
 
     public function actions()

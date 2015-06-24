@@ -2,6 +2,8 @@
 
 namespace admin\base;
 
+use Yii;
+
 /*
  * provides the basic functionality to access and serialize this controller via rest
  * api. Does not define the method names!
@@ -22,7 +24,7 @@ class RestController extends \luya\rest\Controller implements \luya\rest\Behavio
 {
     public function userAuthClass()
     {
-        return new \admin\components\User();
+        return Yii::$app->adminuser;
     }
 
     public function getUser()

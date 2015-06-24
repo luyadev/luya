@@ -2,8 +2,10 @@
 
 namespace admin\base;
 
+use Yii;
 use yii\filters\AccessControl;
-
+use yii\helpers\ArrayHelper;
+use luya\helpers\Param;
 class Controller extends \luya\base\Controller
 {
     public $layout = '@admin/views/layouts/main';
@@ -15,7 +17,7 @@ class Controller extends \luya\base\Controller
     public function init()
     {
         // provided the current module more assets from all admin assets
-        $this->module->assets = \yii\helpers\ArrayHelper::merge($this->module->assets, \luya\helpers\Param::get('adminAssets'));
+        $this->module->assets = ArrayHelper::merge($this->module->assets, Param::get('adminAssets'));
         // call the parent init which executes the inclusion of assets (luya\base\Controller)
         parent::init();
     }
@@ -36,7 +38,7 @@ class Controller extends \luya\base\Controller
                     // get the route based on the current $action object
                     $route = implode('/', [$action->controller->module->id, $action->controller->id, $action->id]);
                     // check the access inside luya->auth->matchRoute and return true/false.
-                    return \yii::$app->auth->matchRoute((new \admin\components\User())->getIdentity()->id, $route);
+                    return Yii::$app->auth->matchRoute(Yii::$app->adminuser->getId(), $route);
                 },
             ],
         ];
@@ -47,7 +49,7 @@ class Controller extends \luya\base\Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'user' => '\admin\components\User',
+                'user' => Yii::$app->adminuser,
                 'rules' => $this->getRules(),
             ],
         ];

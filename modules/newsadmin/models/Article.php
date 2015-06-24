@@ -2,6 +2,8 @@
 
 namespace newsadmin\models;
 
+use Yii;
+
 class Article extends \admin\ngrest\base\Model
 {
     public static function tableName()
@@ -26,14 +28,14 @@ class Article extends \admin\ngrest\base\Model
 
     public function eventBeforeUpdate()
     {
-        $this->update_user_id = \admin\Module::getAdminUserData()->id;
+        $this->update_user_id = Yii::$app->adminuser->getId();
         $this->timestamp_update = time();
     }
 
     public function eventBeforeInsert()
     {
-        $this->create_user_id = \admin\Module::getAdminUserData()->id;
-        $this->update_user_id = \admin\Module::getAdminUserData()->id;
+        $this->create_user_id = Yii::$app->adminuser->getId();
+        $this->update_user_id = Yii::$app->adminuser->getId();
         $this->timestamp_create = time();
         $this->timestamp_update = time();
         $this->timestamp_display_from = time();

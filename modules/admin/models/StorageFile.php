@@ -2,6 +2,8 @@
 
 namespace admin\models;
 
+use Yii;
+
 class StorageFile extends \yii\db\ActiveRecord
 {
     public function init()
@@ -27,6 +29,6 @@ class StorageFile extends \yii\db\ActiveRecord
     public function onBeforeInsert()
     {
         $this->upload_timestamp = time();
-        $this->upload_user_id = \admin\Module::getAdminUserData()->id;
+        $this->upload_user_id = Yii::$app->adminuser->getId();
     }
 }

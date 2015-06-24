@@ -18,7 +18,7 @@ class Menu extends \yii\base\Component
     
     public function getUserId()
     {
-        return (new \admin\components\User())->getIdentity()->id;
+        return Yii::$app->adminuser->getId();
     }
     
     public function getMenu()

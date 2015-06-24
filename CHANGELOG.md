@@ -5,6 +5,7 @@ LUYA CHANGELOG
 --------------------------
 - removed `$app->collection->links` (search for `$app->collection->links` and replace with `$app->links`).
 - removed `$app->collection->composition` (search for `$app->collection->composition` and replace with `$app->collection`).
+- removed `admin\Module::getData()` added `$app->adminuser`
 - added luya version constante to module `luya\Module::VERSION`.
 - added user online overview in admin panel.
 - fixed `#64` wrong logout url.

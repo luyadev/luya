@@ -2,6 +2,8 @@
 
 namespace admin\base;
 
+use Yii;
+
 /**
  * Does allow the implementation of a yii2 rest controller based on the verbs inside the
  * url rules defintions. The allowed methods must base on the yii2 rest controller norm like.
@@ -18,7 +20,7 @@ class RestVerbController extends \yii\rest\Controller implements \luya\rest\Beha
 
     public function userAuthClass()
     {
-        return new \admin\components\User();
+        return Yii::$app->adminuser;
     }
 
     public function actionIndex()

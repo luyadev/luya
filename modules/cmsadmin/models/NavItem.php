@@ -87,8 +87,8 @@ class NavItem extends \yii\db\ActiveRecord
     {
         $this->timestamp_create = time();
         $this->timestamp_update = 0;
-        $this->create_user_id = \admin\Module::getAdminUserData()->id;
-        $this->update_user_id = \admin\Module::getAdminUserData()->id;
+        $this->create_user_id = Yii::$app->adminuser->getId();
+        $this->update_user_id = Yii::$app->adminuser->getId();
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace cmsadmin\models;
 
+use Yii;
+
 /**
  * sort_index numbers always starts from 0 and not from 1, like a default array behaviour. If a
  * negative sort_index is provided its always the last sort_index item (reason: we dont know the sort key of
@@ -66,7 +68,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     public function eventBeforeUpdate()
     {
         $this->is_dirty = 1;
-        $this->update_user_id = \admin\Module::getAdminUserData()->id;
+        $this->update_user_id = Yii::$app->adminuser->getId();
         $this->timestamp_update = time();
     }
     
@@ -88,7 +90,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     public function eventBeforeInsert()
     {
         $this->timestamp_create = time();
-        $this->create_user_id = \admin\Module::getAdminUserData()->id;;
+        $this->create_user_id = Yii::$app->adminuser->getId();
         if (empty($this->json_config_cfg_values)) {
             $this->json_config_cfg_values = json_encode([], JSON_FORCE_OBJECT);
         }

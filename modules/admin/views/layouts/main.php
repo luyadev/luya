@@ -2,7 +2,8 @@
     use \admin\Module;
     use \yii\helpers\Url;
     
-    $user = Module::getAdminUserData();
+    $user = Yii::$app->adminuser->getIdentity();
+    
     $gravatar = 'http://www.gravatar.com/avatar/'.md5(strtolower(trim($user->email))).'?d='.urlencode('http://www.zephir.ch/files/rocky_460px_bw.jpg').'&s=40';
 
     $this->beginPage()

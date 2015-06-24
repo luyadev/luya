@@ -10,7 +10,7 @@ interface BehaviorInterface
      *
      * return a user object:
      * ´´´
-     * return new \admin\components\User();
+     * return Yii::$app->adminuser;
      * ```
      *
      * return a class string will create a new object from this class string:

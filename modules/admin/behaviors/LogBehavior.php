@@ -32,7 +32,7 @@ class LogBehavior extends \yii\base\Behavior
     {
         if (Yii::$app instanceof Application) {
             Yii::$app->db->createCommand()->insert('admin_ngrest_log', [
-                'user_id' => (is_null(Module::getAdminUserData())) ? 0 : Module::getAdminUserData()->id,
+                'user_id' => (is_null(Yii::$app->adminuser->getIdentitiy())) ? 0 : Yii::$app->adminuser->getId(),
                 'timestamp_create' => time(),
                 'route' => $this->route,
                 'api' => $this->api,
@@ -47,7 +47,7 @@ class LogBehavior extends \yii\base\Behavior
     {
         if (Yii::$app instanceof Application) {
             Yii::$app->db->createCommand()->insert('admin_ngrest_log', [
-                'user_id' => (is_null(Module::getAdminUserData())) ? 0 : Module::getAdminUserData()->id,
+                'user_id' => (is_null(Yii::$app->adminuser->getIdentitiy())) ? 0 : Yii::$app->adminuser->getId(),
                 'timestamp_create' => time(),
                 'route' => $this->route,
                 'api' => $this->api,

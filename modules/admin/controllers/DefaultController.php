@@ -23,9 +23,7 @@ class DefaultController extends \admin\base\Controller
 
     public function actionLogout()
     {
-        $adminUser = \admin\Module::getAdminUser();
-        UserOnline::removeUser($adminUser->getIdentity()->id);
-        $adminUser->logout();
+        Yii::$app->adminuser->logout();
         $url = YiiUrl::to(Url::to('admin/login/index'), true);
         return $this->redirect($url);
     }

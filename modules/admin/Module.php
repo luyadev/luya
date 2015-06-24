@@ -2,6 +2,8 @@
 
 namespace admin;
 
+use Yii;
+
 class Module extends \admin\base\Module
 {
     public static $apis = [
@@ -38,22 +40,6 @@ class Module extends \admin\base\Module
         }
     }
 
-    /**
-     * @todo remove this method!
-     */
-    public static function getAdminUser()
-    {
-        return new \admin\components\User();
-    }
-
-    /**
-     * @todo remove this method!
-     */
-    public static function getAdminUserData()
-    {
-        return self::getAdminUser()->getIdentity();
-    }
-
     public function getMenu()
     {
         return $this
@@ -73,6 +59,9 @@ class Module extends \admin\base\Module
     public function registerComponents()
     {
         return [
+            'adminuser' => [
+                'class' => '\admin\components\AdminUser',  
+            ],
             'menu' => [
                 'class' => '\admin\components\Menu',
             ],

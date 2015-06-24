@@ -12,7 +12,6 @@ class TimestampController extends \admin\base\RestController
 {
     public function actionIndex()
     {
-        $user = Module::getAdminUserData();
         UserOnline::clearList();
         return UserOnline::getList();
     }
