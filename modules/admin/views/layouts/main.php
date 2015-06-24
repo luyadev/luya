@@ -140,8 +140,8 @@
                                 <span ng-if="file.thumbnail"><img class="circle responsive-img" src="{{file.thumbnail.source}}" /></span><span ng-if="!file.thumbnail"><i class="mdi-editor-attach-file"></i></span>
                                 </td>
                                 <td>{{file.name_original}}</td>
-                                <td style="color:#999;">Roland Schaub</td>
-                                <td style="color:#999;">23. Juni 2015</td>
+                                <td style="color:#999;">{{file.firstname}} {{file.lastname}}</td>
+                                <td style="color:#999;">{{file.upload_timestamp}}</td>
                                 <td><button class="btn teal lighten-2 right" type="button" ng-show="allowSelection=='true'" ng-click="selectFile(file)"><i class="mdi-navigation-check"></i></button></td>
                             </tr>
                             <!-- /FILES -->
