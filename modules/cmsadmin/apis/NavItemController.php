@@ -18,12 +18,7 @@ class NavItemController extends \admin\base\RestController
      */
     public function actionNavLangItem($navId, $langId)
     {
-        $item = NavItem::find()->where(['nav_id' => $navId, 'lang_id' => $langId])->asArray()->one();
-        if ($item) {
-            $item['preview_url'] = Yii::$app->links->findOneByArguments(['nav_item_id' => $item['id']]);
-        }
-        
-        return $item;
+        return NavItem::find()->where(['nav_id' => $navId, 'lang_id' => $langId])->asArray()->one();
     }
 
     /**

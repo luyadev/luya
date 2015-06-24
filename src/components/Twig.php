@@ -25,7 +25,7 @@ class Twig extends \yii\base\Component
                 return \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, $level);  
             },
             'linkActive' => function() {
-                return \yii::$app->links->getActiveLink();
+                return \yii::$app->links->activeLink;
             },
             'linkActivePart' => function($part) {
                 return \yii::$app->links->getActiveLinkPart($part);

@@ -3,145 +3,69 @@
 namespace cms\controllers;
 
 use Yii;
+use \cmsadmin\models\NavItem;
 
-class DefaultController extends \luya\base\PageController
+class DefaultController extends \cms\base\Controller
 {
-    public $useModuleViewPath = true;
-
-    public $pageTitle = 'default none!';
-
-    public $langId = 0;
-
-    private $_context = null;
-
+    private $_langId = null;
+    
     public function init()
     {
         parent::init();
-        $this->links();
-        $this->_context = $this;
-
-        $shortCode = yii::$app->composition->getKey('langShortCode');
-
-        if (!$shortCode) {
-            yii::$app->composition->setkey('langShortCode', $this->getDefaultLangShortCode());
-        }
-
-        $this->langId = $this->getLangIdByShortCode(yii::$app->composition->getKey('langShortCode'));
+        // set the current path to activeLink
+        Yii::$app->links->activeLink = (isset($_GET['path']) ? $_GET['path'] : null); // @todo should we use Yii::$app->request->get('path', null); instead?
     }
-
-    private function links()
+    
+    /**
+     * find the language id based on the composition. if no lang id found, find default values and set to composition.
+     */
+    protected function getLangId()
     {
-        $links = Yii::$app->links->setActiveLink($_GET['path']);
+        if ($this->_langId === null) {
+            $shortCode = Yii::$app->composition->getKey('langShortCode');
+            
+            if (!$shortCode) {
+                Yii::$app->composition->setkey('langShortCode', $this->getDefaultLangShortCode());
+            }
+            
+            $this->_langId = $this->getLangIdByShortCode(Yii::$app->composition->getKey('langShortCode'));
+        }
+        
+        return $this->_langId;
     }
 
     public function actionIndex()
     {
-        $linksObject = \Yii::$app->links;
-        $urls = $linksObject->getAll();
-        $fullUrl = $linksObject->getActiveLink();
-
-        /* above collection based */
-
-        if (empty($fullUrl)) {
-            $navId = $this->findDefaultPage();
-            $link = $linksObject->findOneByArguments(['id' => $navId]);
-            $fullUrl = $link['url'];
-            yii::$app->links->setActiveLink($fullUrl);
+        // get teh current active link. link component will resolve empty activeLink,
+        $activeLink = Yii::$app->links->getResolveActiveLink();
+        // no page found, empty default page value.
+        if (!$activeLink) {
+            throw new \yii\web\NotFoundHttpException("Could not find the requested page '$activeLink'.");
         }
-        $parts = explode('/', $fullUrl);
-
-        $parts[] = '__FIRST_REMOVAL'; // @todo remove
-
-        $activeUrl = $this->findActive($urls, $parts);
-
-        if (!$activeUrl) {
-            // URL NOT FOUND! REDIRECT TO HOME
-            echo "<h1>404<h1><h3>Url \"$fullUrl\" not found</h3>";
-            exit;
-        }
-
-        yii::$app->links->setActiveLink($activeUrl);
-
-        $linkItem = $linksObject->getLink($activeUrl);
-
-        $pageContent = $this->getPageContent($linkItem['id'], [
-            'restString' => substr($fullUrl, strlen($linkItem['url']) + 1),       // negativPath
-        ]);
-
+        
+        $suffix = Yii::$app->links->isolateLinkSuffix($activeLink);
+        $appendix = Yii::$app->links->isolateLinkAppendix($activeLink, $suffix);
+        $link = Yii::$app->links->getLink($suffix);
+        
+        // set the activeLink based on the suffix, cause the modul params are not part of the links component.
+        Yii::$app->links->activeLink = $suffix;
+        
         return $this->render('index', [
-            'pageContent' => $pageContent,
+            'pageContent' => $this->renderItem($link['nav_item_id'], $appendix),
         ]);
-    }
-
-    /* PRIVS */
-
-    private function getPageContent($navId, $options = [])
-    {
-        $itemType = \cmsadmin\models\NavItem::find()->where(['nav_id' => $navId, 'lang_id' => $this->langId])->one();
-
-        $this->pageTitle = $itemType->title;
-
-        $item = $itemType->getType();
-
-        $options['navItemId'] = $itemType->id;
-        $item->setOptions($options);
-
-        $content = $item->getContent();
-
-        foreach($item->getContextPropertysArray() as $prop => $value) {
-            if (!empty($value)) {
-                $this->$prop = $value;
-            }
-        }
-
-        return $content;
     }
     
-    /*
-    private function setContext($context)
-    {
-        if (empty($context)) {
-            return;
-        }
-        foreach ($context as $prop => $value) {
-            if (!empty($value)) {
-                $this->$prop = $value;
-            }
-        }
-    }
-
-    private function getContext()
-    {
-        return $this->_context;
-    }
-
-        */
-
-
-    private function findDefaultPage()
-    {
-        $cat = (new \yii\db\Query())->select(['id', 'default_nav_id'])->from('cms_cat')->where(['is_default' => 1])->one();
-
-        return (int) $cat['default_nav_id'];
-    }
-
-    private function findActive($urls, $parts)
-    {
-        while (array_pop($parts)) {
-            $match = implode('/', $parts);
-            if (array_key_exists($match, $urls)) {
-                return $match;
-            }
-        }
-
-        return false;
-    }
-
+    /**
+     * @todo should be static model methods inside Lang Model 
+     */
     private function getDefaultLangShortCode()
     {
         return \admin\models\Lang::find()->where(['is_default' => 1])->one()->short_code;
     }
 
+    /**
+     * @todo should be static model methods inside Lang Model
+     */
     private function getLangIdByShortCode($shortCode)
     {
         return \admin\models\Lang::find()->where(['short_code' => $shortCode])->one()->id;

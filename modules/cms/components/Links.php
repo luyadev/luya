@@ -4,6 +4,7 @@ namespace cms\components;
 
 use Yii;
 use \cmsadmin\models\Nav;
+use \cmsadmin\models\Cat;
 
 class Links extends \yii\base\Component
 {
@@ -49,6 +50,7 @@ class Links extends \yii\base\Component
                     'nav_item_id' => (int) $item['nav_item_id'],
                     'title' => $item['title'],
                     'lang' => $item['lang_short_code'],
+                    'lang_id' => $item['lang_id'],
                     'cat' => $item['cat_rewrite'],
                     'depth' => (int) $depth,
                 ];
@@ -61,6 +63,9 @@ class Links extends \yii\base\Component
         return Nav::getItemsData($parentNavId, $this->loadIsHidden);
     }
     
+    /**
+     * @todo create in model cms-nav
+     */
     private function subNodeExists($parentNavId)
     {
         return (new \yii\db\Query())->select('id')->from('cms_nav')->where(['parent_nav_id' => $parentNavId])->count();
@@ -171,21 +176,78 @@ class Links extends \yii\base\Component
         return $this->links[$link];
     }
     
+
+    /*
+    
     private $_activeLink;
     
     public function setActiveLink($activeLink)
     {
-        $this->_activeLink = $activeLink;
+    $this->_activeLink = $activeLink;
     }
     
     public function getActiveLink()
     {
-        return $this->_activeLink;
+    return $this->_activeLink;
     }
+    
+    */
     
     public function getActiveLinkPart($part)
     {
-        $parts = explode("/", $this->getActiveLink());
+        $parts = explode("/", $this->activeLink);
         return (array_key_exists($part, $parts)) ? $parts[$part] : null;
     }
+    
+    /* ------------------------------------------------------------------------- */
+    
+    public $activeLink = null;
+    
+    public function getResolveActiveLink()
+    {
+        if (empty($this->activeLink)) {
+            $this->activeLink = $this->getDefaultLink();
+        }
+        return $this->activeLink;
+    }
+    
+    /**
+     * if the current active link is `http://localhost/luya-project/public_html/de/asfasdfasdfasdf/moduel-iin-seite3/foo-modul-param` where `foo-modul-param` is a param this
+     * function will remove the module params and isolate the active link.
+     * 
+     * @param unknown $urls
+     * @param unknown $parts
+     * @return string|boolean
+     */
+    public function isolateLinkSuffix($link)
+    {
+        $parts = explode('/', $link);
+        $parts[] = '__FIRST_REMOVAL'; // @todo remove
+        
+        while (array_pop($parts)) {
+            $match = implode('/', $parts);
+            if (array_key_exists($match, $this->getAll())) {
+                return $match;
+            }
+        }
+    
+        return false;
+    }
+    
+    /**
+     * will return the opposite value of isolateLinkSuffix (module parameters e.g.)
+     * @param unknown $links
+     */
+    public function isolateLinkAppendix($fullUrl, $suffix)
+    {
+        return substr($fullUrl, strlen($suffix) + 1);
+    }
+    
+    public function getDefaultLink()
+    {
+        $cat = Cat::getDefault();  
+        $link = $this->findOneByArguments(['id' => $cat['default_nav_id']]);
+        return $link['url'];
+    }
+
 }

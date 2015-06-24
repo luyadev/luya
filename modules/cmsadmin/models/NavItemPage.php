@@ -30,7 +30,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
 
         return $twig->render($this->layout->view_file, [
             'placeholders' => $insertion,
-            'activeLink' => Yii::$app->links->getActiveLink(),
+            'activeLink' => Yii::$app->links->activeLink,
         ]);
     }
 
