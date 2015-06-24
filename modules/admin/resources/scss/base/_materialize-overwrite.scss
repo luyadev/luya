@@ -20,6 +20,9 @@ form .row {
 	}
 }
 
+/**
+ * Overwrite default floated icon margin
+ */
 i.left {
 	margin-right: 10px;
 }
@@ -32,4 +35,11 @@ i.right {
  */
 td, th {
 	padding: 8px 5px;
+}
+
+/**
+ * Overwrite default table hover
+ */
+table.hoverable tbody tr:hover {
+	background-color: color("blue", "lighten-5");
 }
