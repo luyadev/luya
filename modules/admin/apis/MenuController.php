@@ -55,9 +55,23 @@ class MenuController extends \admin\base\RestController
         $array = [];
         
         foreach($log as $day => $values) {
+            
+            $tmp = [];
+            
+            foreach($values as $k => $v) {
+                $tmp[$v['timestamp']] = $v;
+            }
+            
+            krsort($tmp, SORT_NUMERIC);
+            
+            $ngfix = [];
+            foreach($tmp as $ii) {
+                $ngfix[] = $ii;
+            }
+            
             $array[] = [
                 'day' => $day,
-                'items' => $values,
+                'items' => $ngfix,
             ];
         }
         
