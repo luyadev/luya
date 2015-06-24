@@ -1,0 +1,34 @@
+.search-box {
+	background-color: color("shades", "white");
+	position: fixed;
+	right: 355px;
+	top: 64px;
+	width: 600px;
+	z-index: 999999;
+	height: 0;
+	overflow: hidden;
+	transition: 0.25s ease height;
+
+	@extend .z-depth-1;
+
+	.search-box__shadow-overlay {
+		background-color: transparent;
+		display: block;
+		height: 10px;
+		position: fixed;
+		top: 56px;
+		width: 600px;
+		z-index: 9999999;
+		right: 355px;
+		transition: 0.25s 0.25s ease background-color;
+	}
+
+	&.search-box--open {
+		padding: 20px;
+		height: 100%;
+	}
+	&.search-box--open .search-box__shadow-overlay {
+		background-color: color("shades", "white");
+		transition: 0.25s ease background-color;
+	}
+}

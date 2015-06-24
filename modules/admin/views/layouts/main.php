@@ -192,9 +192,13 @@
                                 <a ng-click="click(item)" class="navbar__link"><i class="[ {{item.icon}} left ] navbar__icon"></i>{{item.alias}}</a>
                             </li>
                         </ul>
-                        <ul class="right">
+                        <ul class="right navbar__right">
                             <li>
-                                <input type="text" ng-model="searchQuery" />
+                                <div class="input-field navbar__search" ng-class="{ 'navbar__search--open' : searchInputOpen }">
+                                    <input id="global-search-input" ng-model="searchQuery" type="search" class="navbar__search-input">
+                                    <label for="global-search-input" class="navbar__search-label" ng-click="openSearchInput()"><i class="mdi-action-search"></i></label>
+                                    <i class="mdi-navigation-close navbar__search-icon" ng-click="closeSearchInput()"></i>
+                                </div>
                             </li>
                             <li ng-mouseenter="showOnlineContainer=true" ng-mouseleave="showOnlineContainer=false">
                                 Benutzer online <strong>{{notify.length}}</strong>
@@ -211,16 +215,42 @@
                     </div>
                 </nav>
             </div> <!-- /navbar-fixed -->
-            
-            <div ng-show="showSearchContainer" style="position: absolute; z-index:999999; border:1px solid red; background-color:white; padding:20px; margin:50px; right:10px;">
-                <button ng-click="showSearchContainer=false" class="btn">Close</button>
-                <div ng-repeat="item in searchResponse">
-                    <h3>{{item.api.alias}}</h3>
-                    <table>
-                        <tr ng-repeat="row in item.data">
-                            <td ng-repeat="(k,v) in row">{{v}}</td>
-                        </tr>
-                    </table>
+
+            <div ng-class="{ 'search-box--open' : searchQuery }" class="search-box">
+                <div class="search-box__shadow-overlay"></div>
+
+                <div class="center" ng-show="searchResponse==null && searchQuery.length <= 2 && searchQuery.length > 0">
+                    <br /><br /><br />
+                    <p>Bitte geben Sie einen Suchbegriff mit mindestens <b>drei Buchstaben</b> ein.</p>
+                </div>
+
+                <div class="center" ng-show="searchResponse==null && searchQuery.length > 2">
+                    <br /><br /><br />
+                    <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-blue-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div><div class="gap-patch">
+                                <div class="circle"></div>
+                            </div><div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" ng-repeat="item in searchResponse">
+                    <div class="col s12">
+                        <b>{{item.api.alias}}</b>
+                        <hr />
+                        <table class="responsive-table hoverable striped">
+                            <tr ng-repeat="row in item.data">
+                                <td ng-repeat="(k,v) in row">{{v}}</td>
+                                <td style="width: 20px;"><a href="" class="right"><i class="mdi-navigation-chevron-right"></i></a></td>
+                            </tr>
+                        </table>
+                        <br /><br /><br />
+                    </div>
                 </div>
             </div>
             
