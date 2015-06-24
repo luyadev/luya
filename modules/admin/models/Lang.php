@@ -13,7 +13,6 @@ class Lang extends \admin\ngrest\base\Model
     {
         $config->list->field('name', 'Name')->text()->required();
         $config->list->field('short_code', 'Kurz-Code')->text()->required();
-        $config->list->field('id', 'ID')->text();
 
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);
