@@ -44,11 +44,11 @@ class Nav extends \yii\db\ActiveRecord
      */
     public function eventBeforeInsert()
     {
-        $item = self::find()->where(['cat_id' => $this->cat_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index DESC')->limit(1)->one();
+        $item = self::find()->where(['cat_id' => $this->cat_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index DESC')->limit(1)->asArray()->one();
         if (!$item) {
             $this->sort_index = 1;
         } else {
-            $this->sort_index = $item->sort_index + 1;
+            $this->sort_index = $item['sort_index'] + 1;
         }
     }
 
