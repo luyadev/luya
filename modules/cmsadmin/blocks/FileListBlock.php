@@ -84,11 +84,11 @@ class FileListBlock extends \cmsadmin\base\Block
 
     public function twigFrontend()
     {
-        return '{% if extras.fileList is not empty %}<ul>{% for fileEntry in extras.fileList %}<li><a href="{{ fileEntry.file.source_http }}">{{ fileEntry.meta.caption }}{% if cfgs.showType %} ({{ fileEntry.file.extension }}){% endif %}</a></li>{% endfor %}</ul>{% endif %}';
+        return '{% if extras.fileList is not empty %}<ul>{% for fileEntry in extras.fileList %}<li><a target="_blank" href="{{ fileEntry.file.source_http }}">{{ fileEntry.meta.caption }}{% if cfgs.showType %} ({{ fileEntry.file.extension }}){% endif %}</a></li>{% endfor %}</ul>{% endif %}';
     }
 
     public function twigAdmin()
     {
-        return '{% if extras.fileList is empty %}<span class="block__empty-text">Es wurden noch keine Dateien angegeben.</span>{% else %}<ul>{% for fileEntry in extras.fileList %}<li><a href="{{ fileEntry.file.source_http }}">{{ fileEntry.meta.caption }}{% if cfgs.showType == 1 %} ({{ fileEntry.file.extension }}){% endif %}</a></li>{% endfor %}</ul>{% endif %}';
+        return '{% if extras.fileList is empty %}<span class="block__empty-text">Es wurden noch keine Dateien angegeben.</span>{% else %}<ul>{% for fileEntry in extras.fileList %}<li><a target="_blank" href="{{ fileEntry.file.source_http }}">{{ fileEntry.meta.caption }}{% if cfgs.showType == 1 %} ({{ fileEntry.file.extension }}){% endif %}</a></li>{% endfor %}</ul>{% endif %}';
     }
 }
