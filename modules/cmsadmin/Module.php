@@ -27,11 +27,11 @@ class Module extends \admin\base\Module
     public function getMenu()
     {
         return $this
-            ->nodeRoute('Seiteninhalte', 'mdi-social-public', 'cmsadmin-default-index', 'cmsadmin/default/index')
-            ->node('CMS-Einstellungen', 'mdi-image-tune')
+            ->nodeRoute('Seiteninhalte', 'mdi-content-content-copy', 'cmsadmin-default-index', 'cmsadmin/default/index')
+            ->node('CMS-Einstellungen', 'mdi-action-settings')
                 ->group('Seitenvorlagen')
-                    ->itemApi('Kategorien', 'cmsadmin-cat-index', 'mdi-action-settings-applications', 'api-cms-cat')
-                    ->itemApi('Layout', 'cmsadmin-layout-index', 'mdi-image-style', 'api-cms-layout')
+                    ->itemApi('Kategorien', 'cmsadmin-cat-index', 'mdi-device-storage', 'api-cms-cat')
+                    ->itemApi('Layout', 'cmsadmin-layout-index', 'mdi-action-aspect-ratio', 'api-cms-layout')
                 ->group('Blöcke')
                     ->itemApi('Gruppen', 'cmsadmin-blockgroup-index', 'mdi-content-content-copy', 'api-cms-blockgroup')
                     ->itemApi('Verwalten', 'cmsadmin-block-index', 'mdi-editor-format-align-left', 'api-cms-block')
