@@ -96,6 +96,7 @@ class File
                 'hash_file' => $fileHash,
                 'hash_name' => $fileHashName,
                 'is_hidden' => $hidden,
+                'file_size' => @filesize($savePath),
             ]);
             if ($model->validate()) {
                 if ($model->save()) {
