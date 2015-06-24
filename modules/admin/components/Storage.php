@@ -2,7 +2,8 @@
 
 namespace admin\components;
 
-use yii;
+use Yii;
+use \luya\helpers\Url;
 
 /**
  * @author nadar
@@ -19,39 +20,14 @@ class Storage extends \yii\base\Component
 
     private $_folder = null;
 
-    private $_dir = null;
-
-    private $_httpDir = null;
-
+    public $dir = '@webroot/storage';
+    
+    public $httpDir = 'storage';
+    
     public function init()
     {
-        $this->setDir(yii::getAlias(yii::$app->getModule('admin')->storageFolder));
-        $this->setHttpDir(yii::getAlias(yii::$app->getModule('admin')->storageFolderHttp));
-    }
-
-    /**
-     * @todo remove from file class, should be inside the storage class!
-     *
-     * @param unknown_type $path
-     */
-    public function setDir($path)
-    {
-        $this->_dir = $path;
-    }
-
-    public function getDir()
-    {
-        return \luya\helpers\url::trailing($this->_dir, DIRECTORY_SEPARATOR);
-    }
-
-    public function setHttpDir($httpDir)
-    {
-        $this->_httpDir = $httpDir;
-    }
-
-    public function getHttpDir()
-    {
-        return \luya\helpers\url::trailing($this->_httpDir, '/');
+        $this->dir = Url::trailing(Yii::getAlias($this->dir), DIRECTORY_SEPARATOR);
+        $this->httpDir = Url::trailing($this->httpDir, DIRECTORY_SEPARATOR);
     }
 
     public function getFile()
@@ -97,10 +73,5 @@ class Storage extends \yii\base\Component
         }
 
         return $this->_folder;
-    }
-
-    public function getHttpFolder()
-    {
-        return \yii::$app->getModule('admin')->storageFolder;
     }
 }

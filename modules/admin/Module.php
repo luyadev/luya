@@ -26,11 +26,7 @@ class Module extends \admin\base\Module
     public $assets = [
         'admin\assets\Main',
     ];
-
-    public $storageFolder = '@webroot/storage';
-
-    public $storageFolderHttp = 'storage';
-
+    
     public function init()
     {
         parent::init();

@@ -7,13 +7,6 @@ use \admin\models\UserOnline;
 class Auth extends \yii\base\Component
 {
     /**
-     * on luya component registration.
-     */
-    public function init()
-    {
-    }
-
-    /**
      * See if a User have rights to access this api.
      *
      * 1. get user groups
