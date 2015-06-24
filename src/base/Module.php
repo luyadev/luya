@@ -23,16 +23,22 @@ class Module extends \yii\base\Module
      *
      * @var array
      */
-    public static $apis = [];
+    public $apis = [];
 
+    //public $apis = [];
+    
     /**
      * Contains all urlRules for this module. Can't provided in key value pairing for pattern<=>route. must be array containing
      * class name or array with pattern, route informations.
      *
      * @var array
      */
-    public static $urlRules = [];
+    public $urlRules = [];
 
+    //public $urlRules = [];
+    
+    public $isAdmin = false;
+    
     /**
      * @var array
      */

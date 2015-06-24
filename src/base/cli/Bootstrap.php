@@ -11,13 +11,14 @@ use Yii;
  */
 class Bootstrap extends \luya\base\Bootstrap
 {
-    public function beforeRun()
+    public function beforeRun($app)
     {
-        Yii::setAlias('@web', yii::$app->basePath);
+        Yii::setAlias('@web', $app->basePath);
         Yii::setAlias('@webroot', dirname(getcwd()));
     }
 
     public function run($app)
     {
+        // empty
     }
 }

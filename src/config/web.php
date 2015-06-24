@@ -8,6 +8,7 @@ $config = [
         'twig' => '\luya\components\Twig',
         'errorHandler' => [
             'class' => '\luya\base\web\ErrorHandler',
+            'memoryReserveSize' => 0,
         ],
         'urlManager' => 'luya\components\UrlManager',
         'view' => ['class' => 'luya\components\View'],

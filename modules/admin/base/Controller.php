@@ -13,14 +13,6 @@ class Controller extends \luya\base\Controller
     public $useModuleViewPath = true;
     
     public $disablePermissionCheck = false;
-    
-    public function init()
-    {
-        // provided the current module more assets from all admin assets
-        $this->module->assets = ArrayHelper::merge($this->module->assets, Param::get('adminAssets'));
-        // call the parent init which executes the inclusion of assets (luya\base\Controller)
-        parent::init();
-    }
 
     public function getRules()
     {

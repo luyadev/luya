@@ -8,7 +8,7 @@ class Module extends \luya\base\Module
     
     public $slackToken = null;
     
-    public static $urlRules = [
+    public $urlRules = [
         ['pattern' => 'errorapi/create', 'route' => 'errorapi/default/create'],
         ['pattern' => 'errorapi/resolve', 'route' => 'errorapi/default/resolve'],
     ];

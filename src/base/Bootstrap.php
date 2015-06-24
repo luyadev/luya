@@ -11,32 +11,62 @@ use Yii;
  */
 abstract class Bootstrap implements \yii\base\BootstrapInterface
 {
-    private $_modules = [];
-
+    public $_modules = null;
+    
+    public $app = null;
+    
     public function bootstrap($app)
     {
-        $this->expand($app->getModules());
-        $this->beforeRun();
-        $this->registerComponents();
+        //$this->setModules($app->getModules());
+        //$this->expand($app->getModules());
+        $this->setModules($app);
+        $this->beforeRun($app);
+        $this->registerComponents($app);
         $this->run($app);
     }
-
-    private function registerComponents()
+    
+    public function hasModule($module)
     {
-        foreach ($this->getModules() as $item) {
-            
-            $module = Yii::$app->getModule($item['id']);
+        return array_key_exists($module, $this->_modules);
+    }
+    
+    public function setModules($app)
+    {
+        if ($this->_modules === null) {
+            foreach($app->getModules() as $id => $obj) {
+                $this->_modules[$id] = Yii::$app->getModule($id);
+            }
+        }
+    }
+    
+    public function getModules()
+    {
+        return $this->_modules;
+    }
 
-            Yii::setAlias("@".$item['id'], $module->getBasePath());
+    /*
+    private function setModules(array $modules)
+    {
+        foreach($modules as $id => $obj) {
+            $this->_modules[$id] = Yii::$app->getModule($id);
+        }
+    }
+    */
+    private function registerComponents($app)
+    {
+        foreach ($this->getModules() as $id => $module) {
+            
+            Yii::setAlias("@".$id, $module->getBasePath());
 
             if (method_exists($module, 'registerComponents')) {
                 foreach($module->registerComponents() as $componentId => $definition) {
-                    Yii::$app->set($componentId, $definition);
+                    $app->set($componentId, $definition);
                 }
             }
         }
     }
 
+    /*
     protected function getModule($key)
     {
         return (array_key_exists($key, $this->_modules)) ? $this->_modules[$key] : false;
@@ -71,10 +101,9 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
 
         return false;
     }
+    */
 
-    public function beforeRun()
-    {
-    }
+    abstract public function beforeRun($app);
 
     abstract public function run($app);
 }

@@ -29,7 +29,7 @@ class Reflection
         $this->module = $module;
         $this->_request = new \yii\web\Request();
         $this->_urlManager = new \luya\components\UrlManager();
-        $this->_urlManager->addRules($module::$urlRules, true);
+        $this->_urlManager->addRules($module->urlRules, true);
     }
     
     public function setModuleSuffix($suffix)

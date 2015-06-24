@@ -4,7 +4,7 @@ namespace galleryadmin;
 
 class Module extends \admin\base\Module
 {
-    public static $apis = [
+    public $apis = [
         'api-gallery-album' => '\\galleryadmin\\apis\\AlbumController',
         'api-gallery-cat' => 'galleryadmin\apis\CatController',
     ];

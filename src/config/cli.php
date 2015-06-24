@@ -13,6 +13,7 @@ $config = [
         ],
         'errorHandler' => [
             'class' => '\luya\base\cli\ErrorHandler',
+            'memoryReserveSize' => 0,
         ],
     ],
     'bootstrap' => [

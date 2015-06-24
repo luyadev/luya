@@ -4,7 +4,7 @@ namespace newsadmin;
 
 class Module extends \admin\base\Module
 {
-    public static $apis = [
+    public $apis = [
         'api-news-article' => 'newsadmin\apis\ArticleController',
         'api-news-tag' => 'newsadmin\apis\TagController',
         'api-news-cat' => 'newsadmin\apis\CatController',

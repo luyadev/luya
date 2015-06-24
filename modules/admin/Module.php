@@ -6,7 +6,7 @@ use Yii;
 
 class Module extends \admin\base\Module
 {
-    public static $apis = [
+    public $apis = [
         'api-admin-defaults' => 'admin\apis\DefaultsController',
         'api-admin-storage' => 'admin\apis\StorageController',
         'api-admin-menu' => 'admin\apis\MenuController',
@@ -19,23 +19,16 @@ class Module extends \admin\base\Module
         'api-admin-filter' => 'admin\apis\FilterController', // protected by auth()
     ];
 
-    public static $urlRules = [
+    public $urlRules = [
         ['class' => 'admin\components\UrlRule'],
     ];
 
     public $assets = [
         'admin\assets\Main',
     ];
-    
-    public function init()
-    {
-        parent::init();
-        
-        foreach (\luya\helpers\Param::get('apis') as $item) {
-            $this->controllerMap[$item['alias']] = $item['class'];
-        }
-    }
 
+    public $moduleMenus = [];
+    
     public function getMenu()
     {
         return $this

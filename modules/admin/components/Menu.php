@@ -24,7 +24,7 @@ class Menu extends \yii\base\Component
     public function getMenu()
     {
         if ($this->_menu === null) {
-            $this->_menu = Param::get('adminMenus');
+            $this->_menu = Yii::$app->getModule('admin')->moduleMenus;
         }
         
         return $this->_menu;

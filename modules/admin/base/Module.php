@@ -4,8 +4,8 @@ namespace admin\base;
 
 class Module extends \luya\base\Module
 {
-    public static $isAdmin = true;
-
+    public $isAdmin = true;
+    
     public $requiredComponents = ['db'];
 
     private $_menu = [];

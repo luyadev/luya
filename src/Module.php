@@ -53,7 +53,7 @@ class Module extends \luya\base\Module
      * 
      * @var array
      */
-    public static $urlRules = [
+    public $urlRules = [
         ['class' => 'luya\components\UrlRule'],
     ];
 }

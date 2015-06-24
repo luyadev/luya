@@ -8,8 +8,8 @@ class UrlRule extends \yii\rest\UrlRule
 {
     public function init()
     {
-        foreach (yii::$app->params['apis'] as $item) {
-            $class = sprintf('%s/%s', 'admin', $item['alias']);
+        foreach(Yii::$app->getModule('admin')->controllerMap as $alias => $className) {
+            $class = sprintf('%s/%s', 'admin', $alias);
             $this->controller[] = $class;
         }
         parent::init();
