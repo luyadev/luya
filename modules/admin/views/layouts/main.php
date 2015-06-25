@@ -193,8 +193,11 @@
                             </li>
                         </ul>
                         <ul class="right navbar__right">
-                            <li ng-mouseenter="showOnlineContainer=true" ng-mouseleave="showOnlineContainer=false">
-                                Benutzer online <strong>{{notify.length}}</strong>
+                            <li ng-click="showOnlineContainer=!showOnlineContainer">
+                                <div class="navbar__button">
+                                    <i class="[ mdi-social-group left ] navbar__icon"></i>
+                                    {{notify.length}}
+                                </div>
                             </li>
                             <li>
                                 <a class="dropdown-button" data-hover="true" dropdown data-activates="userMenu"><i class="mdi-action-account-circle right"></i><strong><?php echo $user->email; ?></strong></a>
@@ -217,10 +220,33 @@
                 </nav>
             </div> <!-- /navbar-fixed -->
             
-            <div ng-show="showOnlineContainer" style="position: absolute; z-index:999999; border:1px solid red; background-color:white; padding:20px; margin:50px; right:10px;">
-                <ul>
-                    <li ng-repeat="row in notify">{{row.firstname}} {{row.lastname}} | {{row.email}} | is active: {{row.is_active}} | inactive since: {{row.inactive_since }} seconds</li>
-                </ul>
+            <div ng-show="showOnlineContainer" class="useronline__modal">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>E-Mail</th>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in notify" ng-class="{ 'green lighten-3' : row.is_active, 'red lighten-3' : !row.is_active }">
+                            <td>
+                                <i ng-show="row.is_active" class="mdi-action-face-unlock small"></i>
+                                <i ng-show="!row.is_active" class="mdi-maps-hotel small"></i>
+                            </td>
+                            <td>{{row.firstname}} {{row.lastname}}</td>
+                            <td>{{row.email}}</td>
+                            <td>
+                                <small ng-hide="row.is_active">
+                                    <b>Inaktiv seit</b><br />
+                                    {{row.inactive_since}}
+                                </small>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div ng-class="{ 'search-box--open' : searchQuery }" class="search-box">
