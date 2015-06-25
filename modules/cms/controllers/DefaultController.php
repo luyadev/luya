@@ -4,6 +4,7 @@ namespace cms\controllers;
 
 use Yii;
 use \cmsadmin\models\NavItem;
+use \yii\web\NotFoundHttpException;
 
 class DefaultController extends \cms\base\Controller
 {
@@ -40,11 +41,16 @@ class DefaultController extends \cms\base\Controller
         $activeLink = Yii::$app->links->getResolveActiveLink();
         // no page found, empty default page value.
         if (!$activeLink) {
-            throw new \yii\web\NotFoundHttpException("Could not find the requested page '$activeLink'.");
+            throw new NotFoundHttpException("The requested page could not been resolved. Missing default page?");
         }
         
         $suffix = Yii::$app->links->isolateLinkSuffix($activeLink);
         $appendix = Yii::$app->links->isolateLinkAppendix($activeLink, $suffix);
+        
+        if (!Yii::$app->links->hasLink($suffix)) {
+            throw new NotFoundHttpException("The requested link '$suffix' does not exist in the Links list.");
+        }
+        
         $link = Yii::$app->links->getLink($suffix);
         
         // set the activeLink based on the suffix, cause the modul params are not part of the links component.

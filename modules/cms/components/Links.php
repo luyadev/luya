@@ -171,9 +171,14 @@ class Links extends \yii\base\Component
         $this->links[$link] = $args;
     }
     
+    public function hasLink($link)
+    {
+        return array_key_exists($link, $this->links);
+    }
+    
     public function getLink($link)
     {
-        return $this->links[$link];
+        return (array_key_exists($link, $this->links)) ? $this->links[$link] : false;
     }
     
 
