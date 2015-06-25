@@ -3,7 +3,8 @@ LUYA CHANGELOG
 
 1.0.0-alpha7 (in progress)
 --------------------------
-- fixed bug in UrlManager where components are not available
+- fixed bug in UrlManager where components are not available.
+- fixed bug where modules are loaded in the module integration block.
 
 1.0.0-alpha6 (25. Jun 2015)
 --------------------------

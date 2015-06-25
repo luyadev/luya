@@ -51,7 +51,10 @@ class ModuleBlock extends \cmsadmin\base\Block
     
     private function moduleContent($moduleName)
     {
-        if (empty($moduleName)) {
+        /**
+         * in the admin context (means env options are empty) we do not have to render the module!
+         */
+        if (empty($moduleName) || count($this->getEnvOptions()) === 0) {
             return null;
         }
         
@@ -63,7 +66,6 @@ class ModuleBlock extends \cmsadmin\base\Block
         $module = Yii::$app->getModule($moduleName);
         $module->setContext('cms');
         $module->setContextOptions($this->getEnvOptions());
-        
         // start module reflection
         $reflection = new \luya\module\Reflection($module);
         $reflection->setModuleSuffix($this->getEnvOption('restString'));
