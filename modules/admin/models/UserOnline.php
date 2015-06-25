@@ -67,7 +67,7 @@ class UserOnline extends \yii\db\ActiveRecord
                 'email' => $user->email,
                 'last_timestamp' => $item['last_timestamp'],
                 'is_active' => ($inactiveSince>=120) ? false : true,
-                'inactive_since' => $inactiveSince
+                'inactive_since' => round(($inactiveSince/60)) . ' min',
             ];
         }
         
