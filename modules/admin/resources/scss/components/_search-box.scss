@@ -1,34 +1,24 @@
 .search-box {
 	background-color: color("shades", "white");
 	position: fixed;
-	right: 355px;
-	top: 64px;
-	width: 600px;
-	z-index: 999999;
-	height: 0;
-	overflow: hidden;
+	top: 55px;
 	transition: 0.25s ease height;
+
+	width: $navbar__search--width-mobile;
+	@media (min-width: 600px) {
+		top: 64px;
+		width: $navbar__search--width;
+	}
+
+	z-index: 800;
+	overflow: auto;
+	height: 0;
+	#{$navbar__search--position}: 0;
 
 	@extend .z-depth-1;
 
-	.search-box__shadow-overlay {
-		background-color: transparent;
-		display: block;
-		height: 10px;
-		position: fixed;
-		top: 56px;
-		width: 600px;
-		z-index: 9999999;
-		right: 355px;
-		transition: 0.25s 0.25s ease background-color;
-	}
-
 	&.search-box--open {
-		padding: 20px;
-		height: 100%;
-	}
-	&.search-box--open .search-box__shadow-overlay {
-		background-color: color("shades", "white");
-		transition: 0.25s ease background-color;
+		padding: 10px;
+		height: calc(100% - 64px);
 	}
 }

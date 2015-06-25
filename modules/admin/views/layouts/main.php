@@ -193,13 +193,6 @@
                             </li>
                         </ul>
                         <ul class="right navbar__right">
-                            <li>
-                                <div class="input-field navbar__search" ng-class="{ 'navbar__search--open' : searchInputOpen }">
-                                    <input id="global-search-input" ng-model="searchQuery" type="search" class="navbar__search-input">
-                                    <label for="global-search-input" class="navbar__search-label" ng-click="openSearchInput()"><i class="mdi-action-search"></i></label>
-                                    <i class="mdi-navigation-close navbar__search-icon" ng-click="closeSearchInput()"></i>
-                                </div>
-                            </li>
                             <li ng-mouseenter="showOnlineContainer=true" ng-mouseleave="showOnlineContainer=false">
                                 Benutzer online <strong>{{notify.length}}</strong>
                             </li>
@@ -212,16 +205,34 @@
                                 <a ng-click="click(item)" class="navbar__link"><i class="[ {{item.icon}} left ] navbar__icon"></i>{{item.alias}}</a>
                             </li>
                         </ul>
+
+                        <div class="navbar__search-wrapper" ng-class="{ 'navbar__search-wrapper--wide' : searchInputOpen }">
+                            <div class="input-field navbar__search" ng-class="{ 'navbar__search--open' : searchInputOpen }">
+                                <input id="global-search-input" ng-model="searchQuery" type="search" class="navbar__search-input">
+                                <label for="global-search-input" class="navbar__search-label" ng-click="openSearchInput()"><i class="mdi-action-search"></i></label>
+                                <i class="mdi-navigation-close navbar__search-icon" ng-click="closeSearchInput()"></i>
+                            </div>
+                        </div>
                     </div>
                 </nav>
             </div> <!-- /navbar-fixed -->
+            
+            <div ng-show="showOnlineContainer" style="position: absolute; z-index:999999; border:1px solid red; background-color:white; padding:20px; margin:50px; right:10px;">
+                <ul>
+                    <li ng-repeat="row in notify">{{row.firstname}} {{row.lastname}} | {{row.email}} | is active: {{row.is_active}} | inactive since: {{row.inactive_since }} seconds</li>
+                </ul>
+            </div>
 
             <div ng-class="{ 'search-box--open' : searchQuery }" class="search-box">
-                <div class="search-box__shadow-overlay"></div>
 
                 <div class="center" ng-show="searchResponse==null && searchQuery.length <= 2 && searchQuery.length > 0">
                     <br /><br /><br />
                     <p>Bitte geben Sie einen Suchbegriff mit mindestens <b>drei Buchstaben</b> ein.</p>
+                </div>
+
+                <div class="center" ng-show="(searchResponse.length == 0 && searchResponse != null) && searchQuery.length > 2">
+                    <br /><br /><br />
+                    <p>Es wurden keine Ergebnise gefunden.</p>
                 </div>
 
                 <div class="center" ng-show="searchResponse==null && searchQuery.length > 2">
@@ -243,23 +254,20 @@
                     <div class="col s12">
                         <b>{{item.api.alias}}</b>
                         <hr />
-                        <table class="responsive-table hoverable striped">
+                        <table class="hoverable striped">
+                            <tr ng-repeat="row in item.data | limitTo:1">
+                                <th ng-repeat="(k,v) in row">{{k | uppercase}}</th>
+                                <th></th>
+                            </tr>
                             <tr ng-repeat="row in item.data">
                                 <td ng-repeat="(k,v) in row">{{v}}</td>
                                 <td style="width: 20px;"><a href="" class="right"><i class="mdi-navigation-chevron-right"></i></a></td>
                             </tr>
                         </table>
-                        <br /><br /><br />
+                        <br /><br />
                     </div>
                 </div>
             </div>
-            
-            <div ng-show="showOnlineContainer" style="position: absolute; z-index:999999; border:1px solid red; background-color:white; padding:20px; margin:50px; right:10px;">
-                <ul>
-                    <li ng-repeat="row in notify">{{row.firstname}} {{row.lastname}} | {{row.email}} | is active: {{row.is_active}} | inactive since: {{row.inactive_since }} seconds</li>
-                </ul>
-            </div>
-            
 
             <!-- User dropdown, called by javascript -->
             <ul id="userMenu" class="dropdown-content">
