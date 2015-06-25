@@ -28,7 +28,7 @@ class UrlManager extends \yii\web\UrlManager
         /**
          * @todo previous `!is_object(\yii::$app->composition)`can remove?`how to handle?
          */
-        if (!(Yii::$app->composition)) {
+        if (!(Yii::$app->has('composition'))) {
             return $route;
         }
 
@@ -75,11 +75,14 @@ class UrlManager extends \yii\web\UrlManager
 
     public function createUrl($params)
     {
-        if (!(Yii::$app->composition)) {
+        if (!Yii::$app->has('composition')) {
             return parent::createUrl($params);
         }
+        
+        
+        $links = Yii::$app->get('links', false);
+        
         $composition = Yii::$app->composition->getFull();
-        $links = Yii::$app->links;
         
         $originalParams = $params;
 
@@ -99,7 +102,7 @@ class UrlManager extends \yii\web\UrlManager
         $params = (array) $params;
         $moduleName = \luya\helpers\Url::fromRoute($params[0], 'module');
 
-        if ($this->getContextNavItemId()) {
+        if ($this->getContextNavItemId() && $links !== null) {
             $link = $links->findOneByArguments(['nav_item_id' => (int) $this->getContextNavItemId()]);
             $this->resetContext();
 

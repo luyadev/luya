@@ -1,7 +1,11 @@
 LUYA CHANGELOG
 ==============
 
-1.0.0-alpha6 (in progress)
+1.0.0-alpha7 (in progress)
+--------------------------
+- fixed bug in UrlManager where components are not available
+
+1.0.0-alpha6 (25. Jun 2015)
 --------------------------
 - removed `$app->collection->links` (search for `$app->collection->links` and replace with `$app->links`).
 - removed `$app->collection->composition` (search for `$app->collection->composition` and replace with `$app->collection`).
@@ -11,7 +15,7 @@ LUYA CHANGELOG
 - fixed `#64` wrong logout url.
 - fixed `#65` Unclear text field focus in login form.
 - fixed `#66` set focus in login form.
-- new asset handling `#b3684b6e3eec21385a53668ce01131c116b74c41`.
+- new asset handling.
 - disallow cms rewrite where a module with the same name exists.
 - fixed loading bar visibility bug.
 - updated sidebar / treeview title styles.
