@@ -1,17 +1,22 @@
 LUYA CHANGELOG
 ==============
 
-1.0.0-alpha7 (in progress)
+1.0.0-alpha8 (in progress)
+--------------------------
+- fixed bug in links component `getLink($link)` returns false.
+- added `hasLink($link)` to links component.
+
+1.0.0-alpha7 (25. Jun 2015)
 --------------------------
 - fixed bug in UrlManager where components are not available.
 - fixed bug where modules are loaded in the module integration block.
-- added auth cleanup routine when using exec/import
+- added auth cleanup routine when using exec/import.
 
-1.0.0-alpha6 (25. Jun 2015)
+1.0.0-alpha6 (24. Jun 2015)
 --------------------------
 - removed `$app->collection->links` (search for `$app->collection->links` and replace with `$app->links`).
 - removed `$app->collection->composition` (search for `$app->collection->composition` and replace with `$app->collection`).
-- removed `admin\Module::getData()` added `$app->adminuser`
+- removed `admin\Module::getData()` added `$app->adminuser`.
 - added luya version constante to module `luya\Module::VERSION`.
 - added user online overview in admin panel.
 - fixed `#64` wrong logout url.
@@ -25,9 +30,9 @@ LUYA CHANGELOG
 - cms admin create inline page (language page for existing page).
 - cms admin added sortable navigation tree.
 - cms admin added slugable rewrite creation while typing.
-- added `is_dirty` block
+- added `is_dirty` block.
 - fixed bug in get block where extra vars have not been reloaded.
-- added preview button
+- added preview button.
 - added `full_url` key in links array where the composition full url responses.
 
 1.0.0-alpha5 (17. Jun 2015)
