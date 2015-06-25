@@ -1,3 +1,7 @@
+.nav-wrapper {
+	padding-#{$navbar__search--position}: 60px;
+}
+
 /**
  * #NAVBAR__LINK
  */
@@ -20,23 +24,46 @@
 /**
  * #NAVBAR__SEARCH
  */
+.navbar__search-wrapper {
+	position: absolute;
+	#{$navbar__search--position}: 0;
+	width: 60px;
+	transition: 0.25s ease position, 0.25s ease width, 0.25s ease background-color;
+	height: 56px;
+	z-index: 800;
+
+	&.navbar__search-wrapper--wide {
+		position: absolute;
+		width: $navbar__search--width-mobile;
+		@media (min-width: 600px) {
+			width: $navbar__search--width;
+		}
+	}
+	&:hover {
+		background-color: color("blue", "darken-1");
+	}
+
+	@media (min-width: 600px) {
+		height: 63px;
+	}
+}
 
 .navbar__search {
-	width: auto;
+	width: 100%;
 	display: inline-block;
+	position: relative;
 }
 
 .navbar__search-input {
 	margin: 0 !important;
-	width: calc(0px - 4rem) !important;
-	transition: 0.4s 0.25s ease width, 0.4s 0.25s ease color, 0.4s 0.25s ease background-color !important;
+	width: calc(100% - 4rem) !important;
+	transition: 0.4s 0.25s ease color, 0.4s 0.25s ease background-color !important;
 
 	& + label i {
 		color: color("shades", "white") !important;
-	}
+}
 
 	.navbar__search--open & {
-		width: calc(600px - 4rem) !important;
 		background-color: color("shades", "white") !important;
 		border: 0 !important;
 		box-shadow: none !important;
@@ -46,7 +73,7 @@
 		& + label i,
 		& + label + i {
 			color: color("grey", "darken-3") !important;
-		}
+}
 	}
 
 	.navbar__search:not(.navbar__search--open) &:focus {
@@ -65,4 +92,12 @@
 .navbar__search-label {
 	z-index: 1;
 	cursor: pointer !important;
+	width: 100% !important;
+	left: 0 !important;
+	text-align: center;
+
+	.navbar__search--open & {
+		width: auto !important;
+		left: 1rem !important;
+	}
 }
