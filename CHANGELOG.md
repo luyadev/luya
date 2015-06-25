@@ -5,6 +5,7 @@ LUYA CHANGELOG
 --------------------------
 - fixed bug in UrlManager where components are not available.
 - fixed bug where modules are loaded in the module integration block.
+- added auth cleanup routine when using exec/import
 
 1.0.0-alpha6 (25. Jun 2015)
 --------------------------

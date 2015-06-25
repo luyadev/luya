@@ -2,6 +2,10 @@
 
 namespace admin\components;
 
+use Yii;
+use Exception;
+use \yii\db\Query;
+use \yii\helpers\ArrayHelper;
 use \admin\models\UserOnline;
 
 class Auth extends \yii\base\Component
@@ -21,9 +25,8 @@ class Auth extends \yii\base\Component
     public function matchApi($userId, $apiEndpoint)
     {
         UserOnline::refreshUser($userId, $apiEndpoint);
-        $db = \yii::$app->db;
         //$groups = \yii::$app->db->createCommand("SELECT * FROM admin_group_auth as t1 LEFT JOIN (admin_group as t2 LEFT JOIN (admin_user as t3) ON (t2.user_id=t3.id)) ON (t1.group_id=t2.id) WHERE t3.id=:user_id")->bindValue(':user_id', $userId)->queryAll();
-        $groups = $db->createCommand('SELECT * FROM admin_user_group AS t1 LEFT JOIN(admin_group_auth as t2 LEFT JOIN (admin_auth as t3) ON (t2.auth_id = t3.id)) ON (t1.group_id=t2.group_id) WHERE t1.user_id=:user_id AND t3.api=:api')
+        $groups = Yii::$app->db->createCommand('SELECT * FROM admin_user_group AS t1 LEFT JOIN(admin_group_auth as t2 LEFT JOIN (admin_auth as t3) ON (t2.auth_id = t3.id)) ON (t1.group_id=t2.group_id) WHERE t1.user_id=:user_id AND t3.api=:api')
         ->bindValue('user_id', $userId)
         ->bindValue('api', $apiEndpoint)
         ->queryAll();
@@ -55,9 +58,8 @@ class Auth extends \yii\base\Component
     public function matchRoute($userId, $route)
     {
         UserOnline::refreshUser($userId, $route);
-        $db = \yii::$app->db;
         //$groups = \yii::$app->db->createCommand("SELECT * FROM admin_group_auth as t1 LEFT JOIN (admin_group as t2 LEFT JOIN (admin_user as t3) ON (t2.user_id=t3.id)) ON (t1.group_id=t2.id) WHERE t3.id=:user_id")->bindValue(':user_id', $userId)->queryAll();
-        $groups = $db->createCommand('SELECT * FROM admin_user_group AS t1 LEFT JOIN(admin_group_auth as t2 LEFT JOIN (admin_auth as t3) ON (t2.auth_id = t3.id)) ON (t1.group_id=t2.group_id) WHERE t1.user_id=:user_id AND t3.route=:route')
+        $groups = Yii::$db->app->createCommand('SELECT * FROM admin_user_group AS t1 LEFT JOIN(admin_group_auth as t2 LEFT JOIN (admin_auth as t3) ON (t2.auth_id = t3.id)) ON (t1.group_id=t2.group_id) WHERE t1.user_id=:user_id AND t3.route=:route')
         ->bindValue('user_id', $userId)
         ->bindValue('route', $route)
         ->queryAll();
@@ -75,14 +77,14 @@ class Auth extends \yii\base\Component
 
     public function addRoute($moduleName, $route, $name)
     {
-        $handler = (new \yii\db\Query())->select('COUNT(*) AS count')->from('admin_auth')->where(['route' => $route])->one();
+        $handler = (new Query())->select('COUNT(*) AS count')->from('admin_auth')->where(['route' => $route])->one();
         if ($handler['count'] == 1) {
-            \yii::$app->db->createCommand()->update('admin_auth', [
+            Yii::$app->db->createCommand()->update('admin_auth', [
                 'alias_name' => $name,
                 'module_name' => $moduleName,
             ], ['route' => $route])->execute();
         } elseif ($handler['count'] == 0) {
-            \yii::$app->db->createCommand()->insert('admin_auth', [
+            Yii::$app->db->createCommand()->insert('admin_auth', [
                 'alias_name' => $name,
                 'module_name' => $moduleName,
                 'is_crud' => 0,
@@ -90,20 +92,20 @@ class Auth extends \yii\base\Component
                 'api' => 0,
             ])->execute();
         } else {
-            throw new \Exception('error while making admin_auth route insert/update, the key exists twice in the databse!');
+            throw new Exception("Error while inserting/updating auth ROUTE '$route' with name '$name' in module '$moduleName'.");
         }
     }
 
     public function addApi($moduleName, $apiEndpoint, $name)
     {
-        $handler = (new \yii\db\Query())->select('COUNT(*) AS count')->from('admin_auth')->where(['api' => $apiEndpoint])->one();
+        $handler = (new Query())->select('COUNT(*) AS count')->from('admin_auth')->where(['api' => $apiEndpoint])->one();
         if ($handler['count'] == 1) {
-            \yii::$app->db->createCommand()->update('admin_auth', [
+            Yii::$app->db->createCommand()->update('admin_auth', [
                 'alias_name' => $name,
                 'module_name' => $moduleName,
             ], ['api' => $apiEndpoint])->execute();
         } elseif ($handler['count'] == 0) {
-            \yii::$app->db->createCommand()->insert('admin_auth', [
+            Yii::$app->db->createCommand()->insert('admin_auth', [
                 'alias_name' => $name,
                 'module_name' => $moduleName,
                 'is_crud' => 1,
@@ -111,14 +113,47 @@ class Auth extends \yii\base\Component
                 'api' => $apiEndpoint,
             ])->execute();
         } else {
-            throw new \Exception('error while making admin_auth api insert/update, the key exists twice in the databse!');
+            throw new Exception("Error while inserting/updating auth API '$apiEndpoint' with name '$name' in module '$moduleName'.");
+        }
+    }
+    
+    public function prepareCleanup(array $data)
+    {
+        $toCleanup = [];
+        foreach($data as $type => $items) {
+            switch($type) {
+                case "apis":
+                    $q = (new Query())->select('*')->from('admin_auth')->where(['not in', 'api', $items])->andWhere(['is_crud' => 1])->all();
+                    $toCleanup = ArrayHelper::merge($q, $toCleanup);
+                    break;
+                case "routes":
+                    $q = (new Query())->select('*')->from('admin_auth')->where(['not in', 'route', $items])->andWhere(['is_crud' => 0])->all();
+                    $toCleanup = ArrayHelper::merge($q, $toCleanup);
+                    break;
+            }
+        }
+        return $toCleanup;
+    }
+    
+    public function executeCleanup(array $data)
+    {
+        foreach($data as $rule) {
+            Yii::$app->db->createCommand()->delete("admin_auth", 'id=:id', ['id' => $rule['id']])->execute();   
+            Yii::$app->db->createCommand()->delete("admin_group_auth", 'auth_id=:id', ['id' => $rule['id']])->execute();
         }
     }
 
+    /**
+     * @todo remove me
+     * @param array $apis
+     */
     public function addApis(array $apis)
     {
+        throw new \Exception('Deprecated method "addApis()".');
+        /*
         foreach ($apis as $key => $value) {
             $this->addApi($key, $value);
         }
+        */
     }
 }

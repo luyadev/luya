@@ -2,6 +2,9 @@
 
 namespace luya\commands;
 
+use Yii;
+use yii\helpers\Console;
+
 /**
  * Find all files inside all modules to the specific action type (example auth() = auth.php files), include them
  * and do something with the response array inside of the files.
@@ -18,8 +21,8 @@ class ExecutableController extends \yii\console\Controller
 
     public function init()
     {
-        foreach (\yii::$app->modules as $key => $item) {
-            $module = \Yii::$app->getModule($key);
+        foreach (Yii::$app->modules as $key => $item) {
+            $module = Yii::$app->getModule($key);
             foreach ($this->_scanFolders as $folderName) {
                 $folder = $module->getBasePath().DIRECTORY_SEPARATOR.$folderName;
                 if (file_exists($folder)) {
@@ -35,7 +38,7 @@ class ExecutableController extends \yii\console\Controller
         }
         // add scan to app folders
         foreach ($this->_scanFolders as $folderName) {
-            $path = \yii::getAlias("@app/$folderName");
+            $path = Yii::getAlias("@app/$folderName");
             if (file_exists($path)) {
                 $this->_dirs[$folderName][] = [
                     'ns' => '\\app\\'.$folderName,
@@ -112,19 +115,35 @@ class ExecutableController extends \yii\console\Controller
      */
     private function execAuth()
     {
-        $modules = \yii::$app->getModules();
+        $modules = Yii::$app->getModules();
+        $data = [
+            'apis' => [],
+            'routes' => [],
+        ];
         foreach ($modules as $id => $item) {
-            $object = \yii::$app->getModule($id);
+            $object = Yii::$app->getModule($id);
             if (method_exists($object, 'getAuthApis')) {
                 foreach ($object->getAuthApis() as $item) {
-                    \yii::$app->auth->addApi($object->id, $item['api'], $item['alias']);
+                    $data['apis'][] = $item['api'];
+                    Yii::$app->auth->addApi($object->id, $item['api'], $item['alias']);
                 }
             }
 
             if (method_exists($object, 'getAuthRoutes')) {
                 foreach ($object->getAuthRoutes() as $item) {
-                    \yii::$app->auth->addRoute($object->id, $item['route'], $item['alias']);
+                    $data['routes'][] = $item['route'];
+                    Yii::$app->auth->addRoute($object->id, $item['route'], $item['alias']);
                 }
+            }
+        }
+        
+        $toClean = Yii::$app->auth->prepareCleanup($data);
+        if (count($toClean) > 0) {
+            foreach($toClean as $rule) {
+                echo $this->ansiFormat('old auth rule: "' . $rule['alias_name'] . '" in module ' . $rule['module_name'], Console::FG_RED) . PHP_EOL;
+            }
+            if($this->confirm("Delete old permission rules?")) {
+                Yii::$app->auth->executeCleanup($toClean);
             }
         }
     }
@@ -153,8 +172,8 @@ class ExecutableController extends \yii\console\Controller
 
         $this->execAuth();
         
-        $salt = \Yii::$app->getSecurity()->generateRandomString();
-        $pw = \Yii::$app->getSecurity()->generatePasswordHash($password.$salt);
+        $salt = Yii::$app->getSecurity()->generateRandomString();
+        $pw = Yii::$app->getSecurity()->generatePasswordHash($password.$salt);
 
         $this->insert('admin_user', [
             'title' => 1,
