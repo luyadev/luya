@@ -2,6 +2,11 @@
 	padding-#{$navbar__search--position}: 60px;
 }
 
+.navbar__button {
+	padding: 0 15px;
+	cursor: pointer;
+}
+
 /**
  * #NAVBAR__LINK
  */
