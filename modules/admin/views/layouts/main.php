@@ -193,7 +193,7 @@
                             </li>
                         </ul>
                         <ul class="right navbar__right">
-                            <li ng-click="showOnlineContainer=!showOnlineContainer">
+                            <li ng-mouseenter="showOnlineContainer=1" ng-mouseleave="showOnlineContainer=0">
                                 <div class="navbar__button">
                                     <i class="[ mdi-social-group left ] navbar__icon"></i>
                                     {{notify.length}}
