@@ -28,7 +28,7 @@ class Controller extends \luya\base\Controller
                     }
                     // get the route based on the current $action object
                     $route = implode('/', [$action->controller->module->id, $action->controller->id, $action->id]);
-                    // check the access inside luya->auth->matchRoute and return true/false.
+                    // check the access inside auth->matchRoute and return true/false.
                     return Yii::$app->auth->matchRoute(Yii::$app->adminuser->getId(), $route);
                 },
             ],
