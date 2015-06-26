@@ -3,6 +3,7 @@
 namespace admin\apis;
 
 use Yii;
+use admin\models\SearchData;
 
 /**
  * @author nadar
@@ -25,6 +26,12 @@ class SearchController extends \admin\base\RestController
                 }
             }
         }
+        
+        $searchData = new SearchData();
+        $searchData->query = $query;
+        $searchData->num_rows = count($search);
+        $searchData->insert();
+        
         return $search;
     }
 }
