@@ -3,19 +3,21 @@
 }
 
 .log__day {
-	border-left: 1px solid color("shades", "black");
+	border-left: 1px solid color("grey", "base");
 	position: relative;
 	margin-top: 60px;
 
 	&:after {
 		display: block;
 		content: "";
-		height: 1px;
-		background-color: color("shades", "black");
-		width: 20px;
+		height: 10px;
+		background-color: color("shades", "white");
+		width: 10px;
 		position: absolute;
 		bottom: 0;
-		left: -10px;
+		left: -6px;
+		border-radius: 50%;
+		border: 2px solid color("grey", "base");
 	}
 }
 
@@ -23,9 +25,11 @@
 	width: 100%;
 	position: absolute;
 	left: -30px;
+	font-weight: bold;
 
 	i {
 		display: inline-block;
+		font-weight: normal;
 		width: 60px;
 		height: 60px;
 		background-color: color("shades", "white");
