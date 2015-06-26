@@ -18,19 +18,56 @@
         <div class="row">
             <div class="col s12" ui-view>
                 <div class="row">   
+
                     <div class="col s12">
-                        <div class="card-panel blue lighten-5" ng-repeat="item in dashboard">
-                            <h5>{{item.day * 1000 | date:"dd.MM.yyyy"}}</h5>
-                            <ul>
-                                <li ng-repeat="log in item.items">
-                                    <i class="{{log.icon}}"></i> 
-                                    {{ log.name }}</i> hat  am {{ log.timestamp * 1000 | date:"dd.MM.yyyy ' um ' HH:mm" }} Uhr einen Datensatz in <i>{{log.alias}}</i> 
-                                    <strong ng-if="log.is_update == 1">bearbeitet</strong>
-                                    <strong ng-if="log.is_insert == 1">hinzugefügt</strong>
-                                </li>
-                            </ul>
+
+                        <div class="log">
+
+                            <div class="log__day" ng-repeat="item in dashboard">
+
+                                <div class="log__day-header">
+                                    <i class="mdi-action-event"></i>
+                                    <span>{{item.day * 1000 | date:"EEEE, dd.MM.yyyy"}}</span>
+                                </div>
+
+                                <div class="log__entries">
+
+                                    <div class="log__entry" ng-repeat="(key, log) in item.items" ng-switch on="item.items[key - 1] == null || (item.items[key - 1] != null && item.items[key - 1].icon != log.icon)" ng-class="{ 'log__entry--first-of-group' : item.items[key - 1] == null || (item.items[key - 1] != null && item.items[key - 1].icon != log.icon) }">
+                                        <div class="log__entry-header" ng-switch-when="true">
+                                            <i class="{{log.icon}}"></i>
+                                        </div>
+                                        <div class="log__entry-body">
+                                            <small>
+                                                <i class="mdi-social-person"></i>
+                                                {{ log.name }}
+                                                <span style="width: 20px; display: inline-block;"></span>
+                                                <i class="mdi-image-timer"></i>
+                                                {{ log.timestamp * 1000 | date:"HH:mm" }} Uhr
+                                            </small>
+                                            <p>
+                                                «{{log.alias}}»
+                                                <strong ng-if="log.is_update == 1">bearbeitet.</strong>
+                                                <strong ng-if="log.is_insert == 1">hinzugefügt.</strong>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
                         </div>
+
+
+
+                            <!--<h5>{{item.day * 1000 | date:"dd.MM.yyyy"}}</h5>
+                            -->
                     </div>
+
+                    <div class="col s6">
+
+                    </div>
+
                 </div>
             </div>
         </div>

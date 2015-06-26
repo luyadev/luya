@@ -35,7 +35,7 @@ class Module extends \admin\base\Module
         ->nodeRoute('Dateimanager', 'mdi-file-folder-open', 'admin-storage-index', 'admin/storage/index')
         ->node('System', 'mdi-maps-layers')
             ->group('Zugriff')
-                ->itemApi('Benutzer', 'admin-user-index', 'mdi-action-account-circle', 'api-admin-user')
+                ->itemApi('Benutzer', 'admin-user-index', 'mdi-social-person', 'api-admin-user')
                 ->itemApi('Gruppen', 'admin-group-index', 'mdi-action-account-child', 'api-admin-group')
             ->group('System')
                 ->itemApi('Sprachen', 'admin-lang-index', 'mdi-action-language', 'api-admin-lang')
