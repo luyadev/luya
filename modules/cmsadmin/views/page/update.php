@@ -29,12 +29,24 @@
                 <div class="row" ng-repeat="field in block.vars">
                      <zaa-injector dir="field.type" options="field.options" label="{{field.label}}" grid="12" model="data[field.var]"></zaa-injector>
                 </div>
-                <div ng-show="block.cfgs.length" class="blue lighten-5" style="margin-top:20px; margin-bottom:20px;">
-                    <p class="flow-text" style="padding:10px; font-weight:bold;">Konfiguration</p>
-                    <div class="row" ng-repeat="cfgField in block.cfgs">
-                       <zaa-injector dir="cfgField.type" options="cfgField.options" label="{{cfgField.label}}" grid="12" model="cfgdata[cfgField.var]"></zaa-injector>
+
+                <div class="row">
+                    <div class="col s12">
+                        <ul class="collapsible" data-collapsible="accordion" ng-show="block.cfgs.length">
+                            <li>
+                                <div class="collapsible-header"><i class="mdi-action-settings"></i> Erweiterte Einstellungen</div>
+                                <div class="collapsible-body">
+                                    <br />
+                                    <div class="row" ng-repeat="cfgField in block.cfgs">
+                                        <zaa-injector dir="cfgField.type" options="cfgField.options" label="{{cfgField.label}}" grid="12" model="cfgdata[cfgField.var]"></zaa-injector>
+                                    </div>
+                                    <br /><br />
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col s12">
                         <div class="right">
