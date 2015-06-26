@@ -5,6 +5,7 @@ LUYA CHANGELOG
 --------------------------
 - fixed bug in links component `getLink($link)` returns false.
 - added `hasLink($link)` to links component.
+- added `#131` admin search data tracking.
 
 1.0.0-alpha7 (25. Jun 2015)
 --------------------------
