@@ -136,8 +136,13 @@
 
                             <!-- FILES -->
                             <tr ng-repeat="file in files" class="collection-item avatar" ng-click="toggleSelection(file)" ng-class="{'is-active' : inSelection(file)}">
-                                <td class="filemanager__icon-column">
-                                <span ng-if="file.thumbnail"><img class="circle responsive-img" src="{{file.thumbnail.source}}" /></span><span ng-if="!file.thumbnail"><i class="mdi-editor-attach-file"></i></span>
+                                <td class="filemanager__icon-column" ng-class="{ 'filemanager__icon-column--thumb' : file.thumbnail }">
+                                    <span ng-if="file.thumbnail">
+                                        <img class="responsive-img" src="{{file.thumbnail.source}}" />
+                                    </span>
+                                    <span ng-if="!file.thumbnail">
+                                        <i class="mdi-editor-attach-file"></i>
+                                    </span>
                                 </td>
                                 <td>{{file.name_original}}</td>
                                 <td class="filemanager__lighten">{{file.firstname}} {{file.lastname}}</td>
