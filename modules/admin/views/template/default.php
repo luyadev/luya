@@ -20,7 +20,6 @@
                 <div class="row">   
 
                     <div class="col s12">
-
                         <div class="log">
 
                             <div class="log__day" ng-repeat="item in dashboard">
@@ -57,11 +56,6 @@
                             </div>
 
                         </div>
-
-
-
-                            <!--<h5>{{item.day * 1000 | date:"dd.MM.yyyy"}}</h5>
-                            -->
                     </div>
 
                     <div class="col s6">
