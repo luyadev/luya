@@ -9,10 +9,11 @@ zaa.directive('zaaInjector', function($compile) {
 			"model" : '=',
 			"options" : '=',
 			"label" : "@label",
-			'grid' : '@grid'
+			'grid' : '@grid',
+			'placholder' : '@placeholder'
 		},
 		link : function($scope, $element, attr) {
-			var elmn = $compile(angular.element('<' + $scope.dir + ' options="options" model="model" label="{{label}}" grid="{{grid}}" />'))($scope);
+			var elmn = $compile(angular.element('<' + $scope.dir + ' options="options" placeholder="{{placeholder}}" model="model" label="{{label}}" grid="{{grid}}" />'))($scope);
 			$element.replaceWith(elmn);
 		},
 	}
@@ -40,7 +41,8 @@ zaa.directive('zaaNumber', function() {
 			'model' : '=',
 			'options' : '=',
 			'label' : '@label',
-			'grid' : '@grid'		
+			'grid' : '@grid',
+			'placholder' : '@placeholder'
 		}, link: function($scope) {
 			$scope.$watch(function() { return $scope.model }, function(n, o) {
 				if(angular.isNumber($scope.model)) {
@@ -50,7 +52,7 @@ zaa.directive('zaaNumber', function() {
 				}
 			})
 		}, template : function() {
-			return '<div class="input-field col s{{grid}}"><input ng-class="{\'invalid\' : !isValid }" type="number" ng-model="model" min="0" /><label>{{label}}</label></div>';
+			return '<div class="input-field col s{{grid}}"><input placeholder="{{placeholder}}" ng-class="{\'invalid\' : !isValid }" type="number" ng-model="model" min="0" /><label>{{label}}</label></div>';
 		}
 	}
 });
@@ -62,13 +64,14 @@ zaa.directive('zaaText', function(){
 			'model' : '=',
 			'options' : '=',
 			'label' : '@label',
-			'grid' : '@grid'
+			'grid' : '@grid',
+			'placholder' : '@placeholder'
 		},
         link : function(scope) {
             scope.marc = 'ole';
         },
 		template : function() {
-			return '<div class="input-field col s{{grid}}"><input ng-model="model" type="text" /><label for="{{marc}}">{{label}}</label></div>';
+			return '<div class="input-field col s{{grid}}"><input placeholder="{{placeholder}}" ng-model="model" type="text" /><label for="{{marc}}">{{label}}</label></div>';
 		}
 	}
 });
@@ -80,10 +83,11 @@ zaa.directive('zaaTextarea', function(){
 			'model' : '=',
 			'options' : '=',
 			'label' : '@label',
-			'grid' : '@grid'
+			'grid' : '@grid',
+			'placholder' : '@placeholder'
 		},
 		template : function() {
-			return '<div class="input-field col s{{grid}}"><textarea ng-model="model" class="materialize-textarea"></textarea><label>{{label}}</label></div>';
+			return '<div class="input-field col s{{grid}}"><textarea placeholder="{{placeholder}}" ng-model="model" class="materialize-textarea"></textarea><label>{{label}}</label></div>';
 		}
 	}
 });
