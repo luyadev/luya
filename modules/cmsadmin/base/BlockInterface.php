@@ -6,8 +6,6 @@ interface BlockInterface
 {
     public function extraVars();
 
-    public function jsonConfig();
-
     public function name();
 
     public function config();

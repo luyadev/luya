@@ -141,9 +141,8 @@ class NavItemController extends \admin\base\RestController
         
         $blockObject = \cmsadmin\models\Block::objectId($blockItem['block_id']);
         if ($blockObject === false) {
-            return false;;
+            return false;
         }
-        $blockJsonConfig = json_decode($blockObject->jsonConfig(), true);
         
         $blockItem['json_config_values'] = json_decode($blockItem['json_config_values'], true);
         $blockItem['json_config_cfg_values'] = json_decode($blockItem['json_config_cfg_values'], true);
@@ -156,8 +155,8 @@ class NavItemController extends \admin\base\RestController
         
         $placeholders = [];
         
-        if (isset($blockJsonConfig['placeholders'])) {
-            foreach ($blockJsonConfig['placeholders'] as $pk => $pv) {
+        //if (isset($blockJsonConfig['placeholders'])) {
+            foreach ($blockObject->getPlaceholders() as $pk => $pv) {
                 $pv['nav_item_page_id'] = $blockItem['nav_item_page_id'];
                 $pv['prev_id'] = $blockItem['id'];
                 $placeholderVar = $pv['var'];
@@ -168,19 +167,7 @@ class NavItemController extends \admin\base\RestController
         
                 $placeholders[] = $placeholder;
             }
-        }
-        
-        $keys = [];
-        
-        if (isset($blockJsonConfig['vars'])) {
-            $keys = $blockJsonConfig['vars'];
-        }
-        
-        $cfgs = [];
-        
-        if (isset($blockJsonConfig['cfgs'])) {
-            $cfgs = $blockJsonConfig['cfgs'];
-        }
+        //}
         
         if (empty($blockItem['json_config_values'])) {
             $blockItem['json_config_values'] = new \stdClass();
@@ -197,8 +184,8 @@ class NavItemController extends \admin\base\RestController
             'icon' => $blockObject->icon(),
             'full_name' => $blockObject->getFullName(),
             'twig_admin' => $blockObject->twigAdmin(),
-            'vars' => $keys,
-            'cfgs' => $cfgs,
+            'vars' => $blockObject->getVars(),
+            'cfgs' => $blockObject->getCfgs(),
             'extras' => $blockObject->extraVars(),
             'values' => $blockItem['json_config_values'],
             'cfgvalues' => $blockItem['json_config_cfg_values'], // add: t1_json_config_cfg_values

@@ -3,22 +3,25 @@
 namespace cmsadmin\base;
 
 use yii;
+use cmsadmin\base\BlockVar;
+use cmsadmin\base\BlockCfg;
 
 abstract class Block implements BlockInterface
 {
-    private $_jsonConfig = [];
-
     private $_varValues = [];
 
     private $_cfgValues = [];
 
     private $_envOptions = [];
 
+    private $_config = null;
+    
     public $module = 'app';
     
     public function __construct()
     {
         $this->init();
+        $this->_config = $this->config();
     }
 
     public function init()
@@ -123,7 +126,41 @@ abstract class Block implements BlockInterface
     {
         return [];
     }
-
+    
+    public function getVars()
+    {
+        if (!array_key_exists('vars', $this->_config)) {
+            return [];
+        }
+        $data = [];
+        foreach($this->_config['vars'] as $item) {
+            $data[] = (new BlockVar($item))->toArray();
+        }
+        
+        return $data;
+    }
+    
+    public function getPlaceholders()
+    {
+        return (array_key_exists('placeholders', $this->_config)) ? $this->_config['placeholders'] : [];
+    }
+    
+    public function getCfgs()
+    {
+        if (!array_key_exists('vars', $this->_config)) {
+            return [];
+        }
+        $data = [];
+        foreach($this->_config['vars'] as $item) {
+            $data[] = (new BlockCfg($item))->toArray();
+        }
+        
+        return $data;
+    }
+    
+    /**
+     * @todo remove me
+     */
     public function jsonConfig()
     {
         return json_encode($this->config());
