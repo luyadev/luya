@@ -15,6 +15,6 @@
       
 
     <div class="row">
-        <div style="margin-top:20px;" class="col s1" ng-repeat="image in images"><img src="{{image.source}}" class="responsive-img" border="0" /></div>
+        <div style="margin-top:20px;" class="col s1" ng-repeat="image in images"><img ng-src="{{image.source}}" class="responsive-img" border="0" /></div>
     </div>
 </div>
