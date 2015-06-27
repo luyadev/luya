@@ -75,7 +75,7 @@
                     <select name="filterId" ng-model="filterId" class="browser-default"><option value="0">Kein Filter</option><option ng-repeat="item in filters" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
                 </div>
                 <div class="imageupload__preview">
-                    <img src="{{imageinfo.source}}" class="responsive-img" />
+                    <img ng-src="{{imageinfo.source}}" class="responsive-img" />
                 </div>
             </div>
         </script>
@@ -138,7 +138,7 @@
                             <tr ng-repeat="file in files" class="collection-item avatar" ng-click="toggleSelection(file)" ng-class="{'is-active' : inSelection(file)}">
                                 <td class="filemanager__icon-column" ng-class="{ 'filemanager__icon-column--thumb' : file.thumbnail }">
                                     <span ng-if="file.thumbnail">
-                                        <img class="responsive-img" src="{{file.thumbnail.source}}" />
+                                        <img class="responsive-img" ng-src="{{file.thumbnail.source}}" />
                                     </span>
                                     <span ng-if="!file.thumbnail">
                                         <i class="mdi-editor-attach-file"></i>
