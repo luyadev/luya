@@ -121,11 +121,6 @@ zaa.directive('zaaSelect', function($compile){
 			'label' : '@label',
 			'grid' : '@grid'
 		},
-		link : function(scope) {
-			scope.$watch(function() { return scope.model }, function(n, o) {
-				console.log('select', n, o)
-			})
-		},
 		template : function() {
 			return '<div class="col s{{grid}}"><label>{{label}}</label><select class="browser-default" ng-model="model"><option value="">-</option><option ng-repeat="item in options" value="{{item.value}}">{{item.label}}</option></select></div>';
 			//return '<div class="col s{{grid}}"><label>{{label}}</label><select class="browser-default" ng-options="item.value as item.label for item in options" ng-model="model"></select></div>';
