@@ -1,23 +1,16 @@
 .log {
-	margin: 15px 20px;
+	margin: 0 20px 40px 40px;
 }
 
 .log__day {
 	border-left: 1px solid color("grey", "base");
 	position: relative;
 	margin-top: 60px;
+	min-height: 60px;
+	padding-bottom: 20px;
 
-	&:after {
-		display: block;
-		content: "";
-		height: 10px;
-		background-color: color("shades", "white");
-		width: 10px;
-		position: absolute;
-		bottom: 0;
-		left: -6px;
-		border-radius: 50%;
-		border: 2px solid color("grey", "base");
+	&:first-of-type {
+		margin-top: 20px;
 	}
 }
 
@@ -43,8 +36,33 @@
 	}
 }
 
+.log__day-toggler {
+	position: absolute;
+	bottom: -10px;
+	left: 40px;
+	width: 30px !important;
+	height: 30px !important;
+	line-height: 30px !important;
+	font-size: 20px !important;
+	cursor: pointer;
+	user-select: none;
+}
+
 .log__entries {
 	padding: 70px 0 0 53px;
+
+	&:after {
+		display: block;
+		content: "";
+		height: 10px;
+		background-color: color("shades", "white");
+		width: 10px;
+		position: absolute;
+		bottom: 0;
+		left: -6px;
+		border-radius: 50%;
+		border: 2px solid color("grey", "base");
+	}
 }
 
 .log__entry {
