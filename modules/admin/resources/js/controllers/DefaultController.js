@@ -20,19 +20,19 @@ zaa.controller("DefaultController", function ($scope, $http, $state, $stateParam
 				alias : data.alias, icon : data.icon
 			}
 		}
-	}
+	};
 	
 	$scope.getDashboard = function(nodeId) {
 		$http.get('admin/api-admin-menu/dashboard', { params : { 'nodeId' : nodeId }} )
 		.success(function(data) {
 			$scope.dashboard = data;
 		});
-	}
+	};
 	
 	$scope.init = function() {
 		$scope.get();
 		$scope.getDashboard($scope.moduleId);
-	}
+	};
 	
 	$scope.resolveCurrentItem = function() {
 		if (!$scope.currentItem) {
@@ -45,7 +45,7 @@ zaa.controller("DefaultController", function ($scope, $http, $state, $stateParam
 				}
 			}
 		}
-	}
+	};
 	
 	$scope.click = function(item) {
 		$scope.currentItem = item;
@@ -54,7 +54,7 @@ zaa.controller("DefaultController", function ($scope, $http, $state, $stateParam
 		
 		var res = id.split("-");
 		$state.go('default.route', { moduleRouteId : res[0], controllerId : res[1], actionId : res[2]});
-	}
+	};
 	
 	$scope.get = function () {
 		$http.get('admin/api-admin-menu/items', { params : { 'nodeId' : $scope.moduleId }} )
@@ -68,7 +68,11 @@ zaa.controller("DefaultController", function ($scope, $http, $state, $stateParam
 		.error(function(data) {
 			console.log('error', data);
 		});
-	}
+	};
 	
 	$scope.init();
+});
+
+zaa.controller("DashboardController", function ($scope) {
+    $scope.logItemOpen = false;
 });

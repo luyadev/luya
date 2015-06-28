@@ -22,14 +22,17 @@
                     <div class="col s12">
                         <div class="log">
 
-                            <div class="log__day" ng-repeat="item in dashboard">
+                            <div class="log__day" ng-repeat="item in dashboard" ng-controller="DashboardController" ng-init="logItemOpen = $first">
+
 
                                 <div class="log__day-header">
                                     <i class="mdi-action-event"></i>
+                                    <i class="log__day-toggler mdi-content-add" ng-hide="logItemOpen" ng-click="logItemOpen = true"></i>
+                                    <i class="log__day-toggler mdi-content-remove" ng-hide="!logItemOpen" ng-click="logItemOpen = false"></i>
                                     <span>{{item.day * 1000 | date:"EEEE, dd.MM.yyyy"}}</span>
                                 </div>
 
-                                <div class="log__entries">
+                                <div class="log__entries" ng-hide="!logItemOpen">
 
                                     <div class="log__entry" ng-repeat="(key, log) in item.items" ng-switch on="item.items[key - 1] == null || (item.items[key - 1] != null && item.items[key - 1].icon != log.icon)" ng-class="{ 'log__entry--first-of-group' : item.items[key - 1] == null || (item.items[key - 1] != null && item.items[key - 1].icon != log.icon) }">
                                         <div class="log__entry-header" ng-switch-when="true">
