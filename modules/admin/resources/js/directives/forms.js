@@ -10,7 +10,7 @@ zaa.directive('zaaInjector', function($compile) {
 			"options" : '=',
 			"label" : "@label",
 			'grid' : '@grid',
-			'placholder' : '@placeholder'
+			'placeholder' : '@placeholder'
 		},
 		link : function($scope, $element, attr) {
 			var elmn = $compile(angular.element('<' + $scope.dir + ' options="options" placeholder="{{placeholder}}" model="model" label="{{label}}" grid="{{grid}}" />'))($scope);
@@ -42,7 +42,7 @@ zaa.directive('zaaNumber', function() {
 			'options' : '=',
 			'label' : '@label',
 			'grid' : '@grid',
-			'placholder' : '@placeholder'
+			'placeholder' : '@placeholder'
 		}, link: function($scope) {
 			$scope.$watch(function() { return $scope.model }, function(n, o) {
 				if(angular.isNumber($scope.model)) {
@@ -65,13 +65,13 @@ zaa.directive('zaaText', function(){
 			'options' : '=',
 			'label' : '@label',
 			'grid' : '@grid',
-			'placholder' : '@placeholder'
+			'placeholder' : '@placeholder'
 		},
         link : function(scope) {
-            scope.marc = 'ole';
+        	scope.random = Math.random().toString(36).substring(7);
         },
 		template : function() {
-			return '<div class="input-field col s{{grid}}"><input placeholder="{{placeholder}}" ng-model="model" type="text" /><label for="{{marc}}">{{label}}</label></div>';
+			return '<div input-field class="col s{{grid}}"><input placeholder="{{placeholder}}" id="{{random}}" ng-model="model" type="text" /><label for="{{random}}">{{label}}</label></div>';
 		}
 	}
 });
@@ -84,10 +84,13 @@ zaa.directive('zaaTextarea', function(){
 			'options' : '=',
 			'label' : '@label',
 			'grid' : '@grid',
-			'placholder' : '@placeholder'
+			'placeholder' : '@placeholder'
 		},
+		link : function(scope) {
+        	scope.random = Math.random().toString(36).substring(7);
+        },
 		template : function() {
-			return '<div class="input-field col s{{grid}}"><textarea placeholder="{{placeholder}}" ng-model="model" class="materialize-textarea"></textarea><label>{{label}}</label></div>';
+			return '<div class="input-field col s{{grid}}"><textarea placeholder="{{placeholder}}" id="{{random}}" ng-model="model" class="materialize-textarea"></textarea><label for="{{random}}">{{label}}</label></div>';
 		}
 	}
 });
