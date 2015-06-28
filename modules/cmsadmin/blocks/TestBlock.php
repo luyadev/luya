@@ -20,8 +20,9 @@ class TestBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'text', 'label' => 'Text', 'type' => 'zaa-text'],
-                ['var' => 'textarea', 'label' => 'Textarea', 'type' => 'zaa-textarea'],
+                ['var' => 'text', 'label' => 'Text', 'type' => 'zaa-text', 'placeholder' => 'Ich bin ein Platzhalter'],
+                ['var' => 'textarea', 'label' => 'Textarea', 'type' => 'zaa-textarea', 'placeholder' => 'Ich bin ein im Text'],
+                ['var' => 'number', 'label' => 'Number', 'type' => 'zaa-number', 'placeholder' => '1986'],
                 ['var' => 'password', 'label' => 'Password', 'type' => 'zaa-password'],
                 ['var' => 'select', 'label' => 'Select', 'type' => 'zaa-select', 'options' => [ ['value' => 1, 'label' => 'Value 1'] ] ],
                 ['var' => 'testcheckbox', 'label' => 'Checkbox Label', 'type' => 'zaa-checkbox', 'options' => ['items' => [ ['id' => 1, 'label' => 'Label for Value 1'] ]]],
