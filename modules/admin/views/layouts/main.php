@@ -225,7 +225,7 @@
                 </nav>
             </div> <!-- /navbar-fixed -->
             
-            <div ng-show="showOnlineContainer" class="useronline__modal">
+            <div ng-show="showOnlineContainer" class="useronline__modal" >
                 <table>
                     <thead>
                         <tr>
@@ -254,7 +254,7 @@
                 </table>
             </div>
 
-            <div ng-class="{ 'search-box--open' : searchQuery }" class="search-box">
+            <div ng-class="{ 'search-box--open' : searchQuery }" class="search-box" zaa-esc="escapeSearchInput()">
 
                 <div class="center" ng-show="searchResponse==null && searchQuery.length <= 2 && searchQuery.length > 0">
                     <br /><br /><br />
@@ -283,17 +283,21 @@
 
                 <div class="row" ng-repeat="item in searchResponse">
                     <div class="col s12">
-                        <b>{{item.api.alias}}</b>
-                        <hr />
-                        <table class="hoverable striped">
-                            <tr ng-repeat="row in item.data | limitTo:1">
-                                <th ng-repeat="(k,v) in row">{{k | uppercase}}</th>
-                                <th></th>
-                            </tr>
-                            <tr ng-repeat="row in item.data">
-                                <td ng-repeat="(k,v) in row">{{v}}</td>
-                                <td style="width: 20px;"><a href="" class="right"><i class="mdi-navigation-chevron-right"></i></a></td>
-                            </tr>
+                        <b class="search-box__group-title">{{item.api.alias}}</b>
+
+                        <table class="hoverable">
+                            <thead>
+                                <tr ng-repeat="row in item.data | limitTo:1">
+                                    <th ng-repeat="(k,v) in row">{{k}}</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="row in item.data">
+                                    <td ng-repeat="(k,v) in row">{{v}}</td>
+                                    <td style="width: 20px;"><a href="" class="right"><i class="mdi-navigation-chevron-right"></i></a></td>
+                                </tr>
+                            </tbody>
                         </table>
                         <br /><br />
                     </div>
