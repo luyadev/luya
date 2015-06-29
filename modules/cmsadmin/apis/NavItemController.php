@@ -21,6 +21,11 @@ class NavItemController extends \admin\base\RestController
         return NavItem::find()->where(['nav_id' => $navId, 'lang_id' => $langId])->asArray()->one();
     }
 
+    public function actionReloadPlaceholder($navItemPageId, $prevId, $placeholderVar)
+    {
+        return $this->getSub($placeholderVar,  (int) $navItemPageId, (int) $prevId);
+    }
+    
     /**
      * admin/api-cms-navitem/update-item?navItemId=2.
      *
