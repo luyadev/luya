@@ -10,10 +10,11 @@ zaa.directive('zaaInjector', function($compile) {
 			"options" : '=',
 			"label" : "@label",
 			'grid' : '@grid',
-			'placeholder' : '@placeholder'
+			'placeholder' : '@placeholder',
+			'initvalue' : '@initvalue',
 		},
 		link : function($scope, $element, attr) {
-			var elmn = $compile(angular.element('<' + $scope.dir + ' options="options" placeholder="{{placeholder}}" model="model" label="{{label}}" grid="{{grid}}" />'))($scope);
+			var elmn = $compile(angular.element('<' + $scope.dir + ' options="options" initvalue="{{initvalue}}" placeholder="{{placeholder}}" model="model" label="{{label}}" grid="{{grid}}" />'))($scope);
 			$element.replaceWith(elmn);
 		},
 	}
@@ -119,10 +120,18 @@ zaa.directive('zaaSelect', function($compile){
 			'model' : '=',
 			'options' : '=',
 			'label' : '@label',
-			'grid' : '@grid'
+			'grid' : '@grid',
+			'initvalue' : '@initvalue'
+		},
+		link : function(scope) {
+			scope.$watch(function() { return scope.model }, function(n, o) {
+				if (n == undefined && o == undefined) {
+					scope.model = scope.initvalue;
+				}
+			})
 		},
 		template : function() {
-			return '<div class="col s{{grid}}"><label>{{label}}</label><select class="browser-default" ng-model="model"><option value="">-</option><option ng-repeat="item in options" value="{{item.value}}">{{item.label}}</option></select></div>';
+			return '<div class="col s{{grid}}"><label>{{label}}</label><select class="browser-default" ng-model="model"><option ng-repeat="item in options" value="{{item.value}}">{{item.label}}</option></select></div>';
 			//return '<div class="col s{{grid}}"><label>{{label}}</label><select class="browser-default" ng-options="item.value as item.label for item in options" ng-model="model"></select></div>';
 		}
 	}

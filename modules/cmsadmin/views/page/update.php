@@ -27,7 +27,7 @@
             <div class="block__body" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
             <div class="block__edit">
                 <div class="row" ng-repeat="field in block.vars">
-                     <zaa-injector dir="field.type" options="field.options" placeholder="{{field.placeholder}}" label="{{field.label}}" grid="12" model="data[field.var]"></zaa-injector>
+                     <zaa-injector dir="field.type" options="field.options" initvalue="{{field.initvalue}}" placeholder="{{field.placeholder}}" label="{{field.label}}" grid="12" model="data[field.var]"></zaa-injector>
                 </div>
 
                 <div class="row">
@@ -38,7 +38,7 @@
                                 <div class="collapsible-body">
                                     <br />
                                     <div class="row" ng-repeat="cfgField in block.cfgs">
-                                        <zaa-injector dir="cfgField.type" placeholder="{{cfgField.placeholder}}" options="cfgField.options" label="{{cfgField.label}}" grid="12" model="cfgdata[cfgField.var]"></zaa-injector>
+                                        <zaa-injector dir="cfgField.type" placeholder="{{cfgField.placeholder}}" initvalue="{{cfgField.initvalue}}" options="cfgField.options" label="{{cfgField.label}}" grid="12" model="cfgdata[cfgField.var]"></zaa-injector>
                                     </div>
                                     <br /><br />
                                 </div>

@@ -14,6 +14,7 @@ class BlockCfg extends \cmsadmin\base\BlockConfigElement
             'type' => $this->item['type'],
             'placeholder' => $this->get('placeholder'),
             'options' => $this->get('options'),
+            'initvalue' => $this->get('initvalue'),
         ];
     }    
 }

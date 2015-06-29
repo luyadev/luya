@@ -15,6 +15,8 @@ abstract class Select extends \admin\ngrest\base\Plugin
 {
     use \admin\ngrest\PluginTrait;
 
+    public $initValue = null;
+    
     public $data = [];
 
     public function renderList($doc)
@@ -35,6 +37,7 @@ abstract class Select extends \admin\ngrest\base\Plugin
         $elmn->setAttribute('options', $this->getServiceName('selectdata'));
         $elmn->setAttribute('label', $this->alias);
         $elmn->setAttribute('grid', $this->gridCols);
+        $elmn->setAttribute('initvalue', $this->initValue);
         $doc->appendChild($elmn);
 
         return $doc;
