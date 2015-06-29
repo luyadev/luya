@@ -13,7 +13,7 @@ zaa.directive("createForm", function() {
 			$scope.controller = $scope.$parent;
 			
 			$scope.AdminLangService = AdminLangService;
-			$scope.AdminLangService.load();
+			
 			$scope.lang = $scope.AdminLangService.data;
 			
 			$scope.cat = ApiCmsCat.query();

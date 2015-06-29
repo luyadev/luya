@@ -55,7 +55,6 @@ zaa.controller("NavController", function($scope, $stateParams, $http, AdminLangS
 	$scope.AdminLangService = AdminLangService;
 	
 	$scope.refresh = function() {
-		$scope.AdminLangService.load();
 		$scope.langs = $scope.AdminLangService.data;
 	}
 	

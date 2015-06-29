@@ -47,8 +47,12 @@ zaa.controller("DropNavController", function($scope, $http, MenuService) {
     }
 })
 
-zaa.controller("CmsMenuTreeController", function($scope, $state, MenuService, DroppableBlocksService) {
+zaa.controller("CmsMenuTreeController", function($scope, $state, MenuService, DroppableBlocksService, AdminLangService) {
     
+	$scope.AdminLangService = AdminLangService;
+	
+	$scope.AdminLangService.load(true);
+	
 	$scope.menu = [];
 	
 	$scope.showDrag = false;

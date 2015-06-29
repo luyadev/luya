@@ -48,8 +48,8 @@ zaa.factory('AdminLangService', function(ApiAdminLang, $http) {
 		return true;
 	}
 	
-	service.load = function() {
-		if (service.data.length == 0) {
+	service.load = function(forceReload) {
+		if (service.data.length == 0 || forceReload !== undefined) {
 			service.data = ApiAdminLang.query();
 			$http.get('admin/api-admin-defaults/lang').success(function(response) {
 				if (!service.isInSelection(response)) {
