@@ -6,7 +6,7 @@ use Yii;
 use admin\ngrest\base\EventBehavior;
 use admin\behaviors\LogBehavior;
 
-abstract class Model extends \yii\db\ActiveRecord
+abstract class Model extends \yii\db\ActiveRecord implements \admin\base\GenericSearchInterface
 {
     /*
     public $ngRestEndpoint = null;
