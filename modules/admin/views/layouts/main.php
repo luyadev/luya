@@ -283,7 +283,7 @@
 
                 <div class="row" ng-repeat="item in searchResponse">
                     <div class="col s12">
-                        <b class="search-box__group-title">{{item.menuItem.alias}}</b>
+                        <b class="search-box__group-title"><i class="left {{item.menuItem.icon}}"></i> {{item.menuItem.alias}}</b>
 
                         <table class="hoverable">
                             <thead>
