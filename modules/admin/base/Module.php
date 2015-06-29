@@ -2,6 +2,8 @@
 
 namespace admin\base;
 
+use yii\helpers\ArrayHelper;
+
 class Module extends \luya\base\Module
 {
     public $isAdmin = true;
@@ -32,12 +34,13 @@ class Module extends \luya\base\Module
             'icon' => $icon,
             'permissionRoute' => false,
             'permissionIsRoute' => false,
+            'searchModelClass' => false,
         ];
 
         return $this;
     }
 
-    protected function nodeRoute($name, $icon, $template, $route)
+    protected function nodeRoute($name, $icon, $template, $route, $searchModelClass = null)
     {
         $this->_pointers['node'] = $name;
         $this->_menu[$name] = [
@@ -48,6 +51,7 @@ class Module extends \luya\base\Module
             'icon' => $icon,
             'permissionRoute' => $route,
             'permissionIsRoute' => true,
+            'searchModelClass' => $searchModelClass,
         ];
 
         $this->_permissionRoutes[] = ['route' => $route, 'alias' => $name];
@@ -72,6 +76,7 @@ class Module extends \luya\base\Module
             'permssionApiEndpoint' => $apiEndpoint,
             'permissionIsRoute' => false,
             'permissionIsApi' => true,
+            'searchModelClass' => false,
         ];
 
         $this->_permissionApis[] = ['api' => $apiEndpoint, 'alias' => $name];
@@ -79,7 +84,7 @@ class Module extends \luya\base\Module
         return $this;
     }
 
-    protected function itemRoute($name, $route, $icon)
+    protected function itemRoute($name, $route, $icon, $searchModelClass = null)
     {
         $this->_menu[$this->_pointers['node']]['groups'][$this->_pointers['group']]['items'][] = [
             'alias' => $name,
@@ -88,6 +93,7 @@ class Module extends \luya\base\Module
             'permssionApiEndpoint' => null,
             'permissionIsRoute' => true,
             'permissionIsApi' => false,
+            'searchModelClass' => $searchModelClass,
         ];
 
         $this->_permissionRoutes[] = ['route' => $route, 'alias' => $name];
@@ -114,13 +120,13 @@ class Module extends \luya\base\Module
     {
         $this->getMenu();
 
-        return \yii\helpers\ArrayHelper::merge($this->extendPermissionApis(), $this->_permissionApis);
+        return ArrayHelper::merge($this->extendPermissionApis(), $this->_permissionApis);
     }
 
     public function getAuthRoutes()
     {
         $this->getMenu();
 
-        return \yii\helpers\ArrayHelper::merge($this->extendPermissionRoutes(), $this->_permissionRoutes);
+        return ArrayHelper::merge($this->extendPermissionRoutes(), $this->_permissionRoutes);
     }
 }

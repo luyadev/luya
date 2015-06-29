@@ -27,7 +27,7 @@ class Module extends \admin\base\Module
     public function getMenu()
     {
         return $this
-            ->nodeRoute('Seiteninhalte', 'mdi-content-content-copy', 'cmsadmin-default-index', 'cmsadmin/default/index')
+            ->nodeRoute('Seiteninhalte', 'mdi-content-content-copy', 'cmsadmin-default-index', 'cmsadmin/default/index', 'cmsadmin\models\NavItem')
             ->node('CMS-Einstellungen', 'mdi-action-settings')
                 ->group('Seitenvorlagen')
                     ->itemApi('Kategorien', 'cmsadmin-cat-index', 'mdi-device-storage', 'api-cms-cat')

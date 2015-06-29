@@ -113,6 +113,7 @@ class Menu extends \yii\base\Component
                 'routing' => $item['routing'],
                 'alias' => $item['alias'],
                 'icon' => $item['icon'],
+                'searchModelClass' => $item['searchModelClass'],
             ];
         }
         
