@@ -6,7 +6,7 @@
         <div class="row">
             <div class="input-field col s6">
                 <input type="text" ng-model="data.title" ng-change="rewriteSuggestion()" />
-                <label>Seiten Titel</label>
+                <label>Seitentitel</label>
             </div>
             <div class="input-field col s6">
                 <input type="text" ng-model="data.rewrite" />
@@ -15,7 +15,7 @@
         </div>
         <div class="row" ng-show="!data.isInline">
             <div class="col s12">
-                <label>Kategorie</label>
+                <label>Navigations-Kategorie</label>
                 <select class="browser-default" ng-model="data.cat_id" ng-options="item.id as item.name for item in cat" />
             </div>
         </div>
@@ -27,7 +27,7 @@
         </div>
         <div class="row" ng-show="!data.isInline">
             <div class="col s12">
-                <label>Navigations Punkt von</label>
+                <label>Übergeordnete Seite</label>
                 <select class="browser-default" ng-model="data.parent_nav_id">
                     <option value="0">[Root Level]</option>
                     <option ng-repeat="nav in navitems" value="{{nav.id}}">{{nav.title}}</option>
@@ -36,8 +36,9 @@
         </div>
         <div class="row">
             <div class="col s12">
+                <label>Seitentyp</label>
                 <p><input type="radio" ng-model="data.nav_item_type" value="1" id="t1"><label for="t1">Seite</label></p>
-                <p><input type="radio" ng-model="data.nav_item_type" value="2" id="t2"><label for="t2">Module</label></p>
+                <p><input type="radio" ng-model="data.nav_item_type" value="2" id="t2"><label for="t2">Modul</label></p>
                 <!--<p><input type="radio" ng-model="data.nav_item_type" value="3" id="t3"><label for="t3">Weiterleitung</label></p>-->
             </div>
         </div>
@@ -91,7 +92,7 @@
     <div class="row">
         <div class="col s12">
             <br />
-            <button type="button" class="btn" ng-click="save()">Neue Seite Speichern</button>
+            <button type="button" class="btn" ng-click="save()">Neue Seite speichern</button>
         </div>
     </div>
 </script>
@@ -108,7 +109,7 @@
     <div class="row">
         <div class="col s12">
             <br />
-            <button type="button" class="btn" ng-click="save()">Neue Seite Speichern</button>
+            <button type="button" class="btn" ng-click="save()">Neue Seite speichern</button>
         </div>
     </div>
 </script>
