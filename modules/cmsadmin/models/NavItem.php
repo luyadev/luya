@@ -9,7 +9,7 @@ use Yii;
  *
  * @author nadar
  */
-class NavItem extends \yii\db\ActiveRecord
+class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchInterface
 {
     const TYPE_PAGE = 1;
 
@@ -102,5 +102,22 @@ class NavItem extends \yii\db\ActiveRecord
     {
         return self::find()->all();
         //return self::find()->leftJoin('cms_nav_item_module', 'nav_item_type_id=cms_nav_item_module.id')->where(['nav_item_type' => 2, 'cms_nav_item_module.module_name' => $moduleName])->all();
+    }
+    
+    /* GenericSearchInterface */
+    
+    public function genericSearchFields()
+    {
+        return ['title', 'rewrite'];
+    }
+    
+    public function genericSearch($searchQuery)
+    {
+        $query = self::find();
+        $fields = $this->genericSearchFields();
+        foreach($fields as $field) {
+            $query->orWhere(['like', $field, $searchQuery]);
+        }
+        return $query->select($fields)->asArray()->all();
     }
 }
