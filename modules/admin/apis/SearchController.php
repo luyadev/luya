@@ -3,6 +3,7 @@
 namespace admin\apis;
 
 use Yii;
+use Exception;
 use admin\models\SearchData;
 
 /**
@@ -18,6 +19,9 @@ class SearchController extends \admin\base\RestController
         foreach(Yii::$app->menu->getModules() as $node) {
             if (isset($node['searchModelClass']) && !empty($node['searchModelClass'])) {
                 $model = Yii::createObject($node['searchModelClass']);
+                if (!$model instanceof \admin\base\GenericSearchInterface) {
+                    throw new Exception("The model must be an instance of GenericSearchInterface");
+                }
                 $data = $model->genericSearch($query);
                 if (count($data) > 0) {
                     $search[] = [
