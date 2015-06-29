@@ -117,61 +117,64 @@ class FormBlock extends \cmsadmin\base\Block
     public function twigFrontend()
     {
         return  '{% if vars.emailAddress is not empty %}{% if vars.headline is not empty %}<h3>{{ vars.headline }}</h3>{% endif %}'.
-        '{% if extras.name and extras.email and extras.message %}'.
-        '{% if extras.mailerResponse == "success" %}'.
-        '<div class="alert alert-success">{{ extras.sendSuccess }}</div>'.
-        '{% else %}'.
-        '<div class="alert alert-danger">{{ extras.sendError }}</div>'.
-        '{% endif %}'.
-        '{% endif %}'.
-        '<form class="form-horizontal" role="form" method="post" action="">'.
-        '<div class="form-group">'.
-        '<label for="name" class="col-sm-2 control-label">{{ extras.nameLabel }}</label>'.
-        '<div class="col-sm-10">'.
-        '<input type="text" class="form-control" id="name" name="name" placeholder="{{ extras.namePlaceholder }}" value="{% if extras.mailerResponse != "success" %}{{ extras.name }}{% endif %}">'.
-        '{% if not extras.name %}<p class="text-danger">{{ extras.nameError }}</p>{% endif %}'.
-        '</div>'.
-        '</div>'.
-        '<div class="form-group">'.
-        '<label for="email" class="col-sm-2 control-label">{{ extras.emailLabel }}</label>'.
-        '<div class="col-sm-10">'.
-        '<input type="email" class="form-control" id="email" name="email" placeholder="{{ extras.emailPlaceholder }}" value="{% if extras.mailerResponse != "success" %}{{ extras.email }}{% endif %}">'.
-        '{% if not extras.email %}<p class="text-danger">{{ extras.emailError }}</p>{% endif %}'.
-        '</div>'.
-        '</div>'.
-        '<div class="form-group">'.
-        '<label for="message" class="col-sm-2 control-label">{{ extras.messageLabel }}</label>'.
-        '<div class="col-sm-10">'.
-        '<textarea class="form-control" rows="4" name="message">{% if extras.mailerResponse != "success" %}{{ extras.message }}{% endif %}</textarea>'.
-        '{% if not extras.message %}<p class="text-danger">{{ extras.messageError }}</p>{% endif %}'.
-        '</div>'.
-        '</div>'.
-        '{{ sentLabel }}'.
-        '<div class="form-group">'.
-        '<div class="col-sm-10 col-sm-offset-2">'.
-        '<input id="submit" name="submit" type="submit" value="{{ extras.sendLabel }}" class="btn btn-primary">'.
-        '</div>'.
-        '</div>'.
-        '</form>{% endif %}';
+                    '{% if extras.name and extras.email and extras.message %}'.
+                        '{% if extras.mailerResponse == "success" %}'.
+                            '<div class="alert alert-success">{{ extras.sendSuccess }}</div>'.
+                         '{% else %}'.
+                            '<div class="alert alert-danger">{{ extras.sendError }}</div>'.
+                        '{% endif %}'.
+                    '{% endif %}'.
+                    '<form class="form-horizontal" role="form" method="post" action="">'.
+                        '<div class="form-group">'.
+                            '<label for="name" class="col-sm-2 control-label">{{ extras.nameLabel }}</label>'.
+                            '<div class="col-sm-10">'.
+                                '<input type="text" class="form-control" id="name" name="name" placeholder="{{ extras.namePlaceholder }}" value="{% if extras.mailerResponse != "success" %}{{ extras.name }}{% endif %}">'.
+                                '{% if not extras.name %}<p class="text-danger">{{ extras.nameError }}</p>{% endif %}'.
+                            '</div>'.
+                        '</div>'.
+                        '<div class="form-group">'.
+                            '<label for="email" class="col-sm-2 control-label">{{ extras.emailLabel }}</label>'.
+                            '<div class="col-sm-10">'.
+                                '<input type="email" class="form-control" id="email" name="email" placeholder="{{ extras.emailPlaceholder }}" value="{% if extras.mailerResponse != "success" %}{{ extras.email }}{% endif %}">'.
+                                '{% if not extras.email %}<p class="text-danger">{{ extras.emailError }}</p>{% endif %}'.
+                            '</div>'.
+                        '</div>'.
+                        '<div class="form-group">'.
+                            '<label for="message" class="col-sm-2 control-label">{{ extras.messageLabel }}</label>'.
+                            '<div class="col-sm-10">'.
+                                '<textarea class="form-control" rows="4" name="message">{% if extras.mailerResponse != "success" %}{{ extras.message }}{% endif %}</textarea>'.
+                                '{% if not extras.message %}<p class="text-danger">{{ extras.messageError }}</p>{% endif %}'.
+                            '</div>'.
+                        '</div>'.
+                        '{{ sentLabel }}'.
+                        '<div class="form-group">'.
+                            '<div class="col-sm-10 col-sm-offset-2">'.
+                                '<input id="submit" name="submit" type="submit" value="{{ extras.sendLabel }}" class="btn btn-primary">'.
+                            '</div>'.
+                        '</div>'.
+                    '</form>'.
+                    '{% endif %}';
     }
 
     public function twigAdmin()
     {
-        return  '{% if vars.emailAddress is not empty %}{% if vars.headline is not empty %}<h3>{{ vars.headline }}</h3>{% endif %}'.
-        '<form id="contact_form" action="#" method="POST" enctype="multipart/form-data">'.
-        '<div class="row">'.
-        '<label for="name">{{ extras.nameLabel }}</label><br />'.
-        '<input id="name" class="input" name="name" type="text" value="" size="30" /><br />'.
-        '</div>'.
-        '<div class="row">'.
-        '<label for="email">{{ extras.emailLabel }}</label><br />'.
-        '<input id="email" class="input" name="email" type="text" value="" size="30" /><br />'.
-        '</div>'.
-        '<div class="row">'.
-        '<label for="message">{{ extras.messageLabel }}</label><br />'.
-        '<textarea id="message" class="input" name="message" rows="7" cols="30"></textarea><br />'.
-        '</div>'.
-        '<input id="submit_button" type="submit" value="{{ extras.sentLabel }}" disabled/>'.
-        '</form>{% else %}<span class="block__empty-text">Es wurde noch keine Emailadresse angegeben.</span>{% endif %}';
+        return  '{% if vars.emailAddress is not empty %}'.
+                    '{% if vars.headline is not empty %}<h3>{{ vars.headline }}</h3>{% endif %}'.
+                    '<form id="contact_form" action="#" method="POST" enctype="multipart/form-data">'.
+                        '<div class="row">'.
+                            '<label for="name">{{ extras.nameLabel }}</label><br />'.
+                            '<input id="name" class="input" name="name" type="text" value="" size="30" /><br />'.
+                        '</div>'.
+                        '<div class="row">'.
+                            '<label for="email">{{ extras.emailLabel }}</label><br />'.
+                            '<input id="email" class="input" name="email" type="text" value="" size="30" /><br />'.
+                        '</div>'.
+                        '<div class="row">'.
+                            '<label for="message">{{ extras.messageLabel }}</label><br />'.
+                            '<textarea id="message" class="input" name="message" rows="7" cols="30"></textarea><br />'.
+                        '</div>'.
+                        '<input id="submit_button" type="submit" value="{{ extras.sentLabel }}" disabled/>'.
+                    '</form>{% else %}<span class="block__empty-text">Es wurde noch keine Emailadresse angegeben.</span>'.
+                '{% endif %}';
     }
 }
