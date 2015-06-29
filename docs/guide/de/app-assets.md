@@ -22,6 +22,7 @@ Asset Einbinden
 ---------------
 Wenn du ein Luya-Projekt mit einem CMS im Einsatz hast **musst** du alle Asset-Daten dem *cms*-Modul melden.
 > In der *luya-kickstater* Standard installation wird das CMS installiert und benutzt.
+
 Um ein asset zu melden gehst du in deine Konfigurations Datein und ergänzt den `modules` `cms` Eintrag um die `assets` Eigenschaft:
 ```php
 return [
