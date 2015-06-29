@@ -37,10 +37,11 @@ class MenuController extends \admin\base\RestController
         
         $log = [];
         foreach($accessList as $access) {
-            $data = (new \yii\db\Query())->select(['timestamp_create', 'admin_ngrest_log.id', 'is_update', 'is_insert', 'admin_user.firstname', 'admin_user.lastname'])->from('admin_ngrest_log')->leftJoin('admin_user', 'admin_ngrest_log.user_id = admin_user.id')->orderBy('timestamp_create DESC')->where('api=:api and user_id!=0', [':api' => $access['permssionApiEndpoint']])->all();
+            $data = (new \yii\db\Query())->select(['timestamp_create', 'user_id', 'admin_ngrest_log.id', 'is_update', 'is_insert', 'admin_user.firstname', 'admin_user.lastname'])->from('admin_ngrest_log')->leftJoin('admin_user', 'admin_ngrest_log.user_id = admin_user.id')->orderBy('timestamp_create DESC')->where('api=:api and user_id!=0', [':api' => $access['permssionApiEndpoint']])->all();
             foreach($data as $row) {
                 $date = mktime(0,0,0, date("n", $row['timestamp_create']), date("j", $row['timestamp_create']), date("Y", $row['timestamp_create']));
-                $log[$date][$row['id']] = [
+                $log[$date][$access['alias']][$row['user_id']]['user'] = $row['firstname'] . " " . $row['lastname'];
+                $log[$date][$access['alias']][$row['user_id']]['__items'][] = [
                     'name' => $row['firstname'] . " " . $row['lastname'],
                     'is_update' => $row['is_update'],
                     'is_insert' => $row['is_insert'],
@@ -54,24 +55,29 @@ class MenuController extends \admin\base\RestController
         
         $array = [];
         
+        krsort($log, SORT_NUMERIC);
+        
         foreach($log as $day => $values) {
             
+            /*
             $tmp = [];
             
-            foreach($values as $k => $v) {
-                $tmp[$v['timestamp']] = $v;
-            }
-            
-            krsort($tmp, SORT_NUMERIC);
+            krsort($values, SORT_NUMERIC);
             
             $ngfix = [];
-            foreach($tmp as $ii) {
+            foreach($values as $ii) {
                 $ngfix[] = $ii;
             }
             
             $array[] = [
                 'day' => $day,
                 'items' => $ngfix,
+            ];
+            */
+            
+            $array[] = [
+                'day' => $day,
+                'items' => $values,
             ];
         }
         
