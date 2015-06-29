@@ -41,6 +41,7 @@ LUYA (general luya infos)
 - luya-collaboration.md
 - luya-console.md
 - luya-mail.md
+- luya-twig.md
 
 NGREST (general ngrest infos)
 --
