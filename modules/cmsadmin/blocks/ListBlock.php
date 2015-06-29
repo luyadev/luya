@@ -21,7 +21,7 @@ class ListBlock extends \cmsadmin\base\Block
         return [
             'vars' => [
                 ['var' => 'elements', 'label' => 'Elemente', 'type' => 'zaa-list-array'],
-                ['var' => 'listType', 'label' => 'Type', 'type' => 'zaa-select', 'options' => [
+                ['var' => 'listType', 'label' => 'Type', 'initvalue' => 'ul', 'type' => 'zaa-select', 'options' => [
                         ['value' => 'ul', 'label' => 'Stichpunktliste'],
                         ['value' => 'ol', 'label' => 'Nummerierte Liste'],
                     ],

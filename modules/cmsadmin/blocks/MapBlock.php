@@ -23,7 +23,7 @@ class MapBlock extends \cmsadmin\base\Block
                 ['var' => 'address', 'label' => 'Adresse', 'type' => 'zaa-text'],
             ],
             'cfgs' => [
-                ['var' => 'zoom', 'label' => 'Zoom', 'type' => 'zaa-select', 'options' =>
+                ['var' => 'zoom', 'label' => 'Zoom', 'type' => 'zaa-select', 'initvalue' => '12', 'options' =>
                     [
                         ['value' => '0', 'label' => 'Komplett herausgezoomt'],
                         ['value' => '1', 'label' => '4000 km'],

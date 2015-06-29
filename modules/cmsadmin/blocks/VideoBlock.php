@@ -23,7 +23,7 @@ class VideoBlock extends \cmsadmin\base\Block
                 ['var' => 'url', 'label' => 'Video URL', 'type' => 'zaa-text'],
             ],
             'cfgs' => [
-                ['var' => 'controls', 'label' => 'Controls ausblenden?', 'type' => 'zaa-select', 'options' =>
+                ['var' => 'controls', 'label' => 'Controls ausblenden?', 'initvalue' => '1', 'type' => 'zaa-select', 'options' =>
                     [
                         ['value' => '0', 'label' => 'Nein'],
                         ['value' => '1', 'label' => 'Ja'],

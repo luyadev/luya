@@ -34,7 +34,7 @@ class TextBlock extends \cmsadmin\base\Block
         return [
             'vars' => [
                 ['var' => 'content', 'label' => 'Text', 'type' => 'zaa-textarea'],
-                ['var' => 'textType', 'label' => 'Texttyp', 'type' => 'zaa-select', 'options' =>
+                ['var' => 'textType', 'label' => 'Texttyp', 'initvalue' => 0, 'type' => 'zaa-select', 'options' =>
                     [
                         ['value' => '0', 'label' => 'Normaler Text'],
                         ['value' => '1', 'label' => 'Markdown Text'],

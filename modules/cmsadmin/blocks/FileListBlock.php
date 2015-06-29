@@ -28,7 +28,7 @@ class FileListBlock extends \cmsadmin\base\Block
                 ['var' => 'files', 'label' => 'Dateien', 'type' => 'zaa-file-array-upload'],
             ],
             'cfgs' => [
-                ['var' => 'showType', 'label' => 'Dateityp anzeigen?', 'type' => 'zaa-select', 'options' =>
+                ['var' => 'showType', 'label' => 'Dateityp anzeigen?', 'initvalue' => 0, 'type' => 'zaa-select', 'options' =>
                     [
                         ['value' => '1', 'label' => 'Ja'],
                         ['value' => '0', 'label' => 'Nein'],

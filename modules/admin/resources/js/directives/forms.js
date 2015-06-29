@@ -113,7 +113,7 @@ zaa.directive('zaaPassword', function(){
 
 
 
-zaa.directive('zaaSelect', function($compile){
+zaa.directive('zaaSelect', function($timeout){
 	return {
 		restrict : 'E',
 		scope : {
@@ -124,15 +124,16 @@ zaa.directive('zaaSelect', function($compile){
 			'initvalue' : '@initvalue'
 		},
 		link : function(scope) {
-			scope.$watch(function() { return scope.model }, function(n, o) {
-				if (n == undefined && o == undefined) {
-					scope.model = scope.initvalue;
-				}
-			})
+			$timeout(function(){
+				scope.$watch(function() { return scope.model }, function(n, o) {
+					if (n === undefined && o === undefined) {
+						scope.model = scope.initvalue;
+					}
+				})
+			});
 		},
 		template : function() {
-			return '<div class="col s{{grid}}"><label>{{label}}</label><select class="browser-default" ng-model="model"><option ng-repeat="item in options" value="{{item.value}}">{{item.label}}</option></select></div>';
-			//return '<div class="col s{{grid}}"><label>{{label}}</label><select class="browser-default" ng-options="item.value as item.label for item in options" ng-model="model"></select></div>';
+			return '<div class="col s{{grid}}"><label>{{label}}</label><select class="browser-default" ng-options="item.value as item.label for item in options" ng-model="model"></select></div>';
 		}
 	}
 });

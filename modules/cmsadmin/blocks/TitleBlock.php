@@ -21,7 +21,7 @@ class TitleBlock extends \cmsadmin\base\Block
         return [
             'vars' => [
                 ['var' => 'content', 'label' => 'Titel', 'type' => 'zaa-text'],
-                ['var' => 'headingType', 'label' => 'Grösse', 'type' => 'zaa-select', 'options' =>
+                ['var' => 'headingType', 'label' => 'Grösse', 'type' => 'zaa-select', 'initvalue' => 'h1', 'options' =>
                     [
                         ['value' => 'h1', 'label' => 'Gross'],
                         ['value' => 'h2', 'label' => 'Mittel'],
