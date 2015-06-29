@@ -7,18 +7,16 @@ create an asset class extend from yii\web\AssetBundle like below:
 ```php
 namespace app\assets;
 
-class LuyaioAsset extends \yii\web\AssetBundle
+class LuyaioAsset extends \luya\base\Asset
 {
     public $sourcePath = '@app/resources';
     
     public $css = [
         "css/style.css",
     ];
-    
-    public $publishOptions = ['forceCopy' => true];
 }
 ```
-the above example would register the asset folter @app/resources and copy the css file style.css (@app/resources/css/style.css) into the asset cache.
+the above example would register the asset folder @app/resources and copy the css file style.css (@app/resources/css/style.css) into the asset cache.
 
 register asset
 ---------------
