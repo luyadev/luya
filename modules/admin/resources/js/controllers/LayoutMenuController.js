@@ -15,6 +15,12 @@ zaa.controller("LayoutMenuController", function ($scope, $http, $state, $locatio
 
     $scope.searchInputOpen = false;
 
+    $scope.escapeSearchInput = function() {
+        if( $scope.searchInputOpen ) {
+            $scope.closeSearchInput();
+        }
+    };
+
     $scope.openSearchInput = function() {
         $scope.searchInputOpen = true;
     };
@@ -54,7 +60,7 @@ zaa.controller("LayoutMenuController", function ($scope, $http, $state, $locatio
 		} else {
 			$state.go('default', { 'moduleId' : menuItem.id});
 		}
-	}
+	};
 	
 	$scope.isActive = function(item) {
 		if (item.template) {

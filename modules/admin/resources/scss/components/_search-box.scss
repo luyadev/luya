@@ -22,3 +22,15 @@
 		height: calc(100% - 64px);
 	}
 }
+
+.search-box th:first-letter,
+.search-box td:first-letter {
+	text-transform: uppercase;
+}
+
+.search-box__group-title {
+	display: block;
+	margin: 20px 0 15px 5px;
+	color: color("grey", "base");
+	font-size: 0.8rem;
+}
