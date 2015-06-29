@@ -22,21 +22,29 @@ class Mail extends \yii\base\Component
     
     public $port = '587';
     
+    public function mailer()
+    {
+        if ($this->_phpmailer === null) {
+            $this->_phpmailer = new \PHPMailer();
+            $this->_phpmailer->do_debug = 0;
+            $this->_phpmailer->CharSet = 'UTF-8';
+        }
+        
+        return $this->_phpmailer;
+    }
+    
     public function create()
     {
-        $this->_phpmailer = new \PHPMailer();
-        $this->_phpmailer->do_debug = 0;
-        $this->_phpmailer->CharSet = 'UTF-8';
         if ($this->isSMTP) {
-            $this->_phpmailer->SMTPDebug = false;
-            $this->_phpmailer->isSMTP();
-            $this->_phpmailer->SMTPSecure = 'tls';
-            $this->_phpmailer->Host = $this->host;
-            $this->_phpmailer->SMTPAuth = true;
-            $this->_phpmailer->Username = $this->username;
-            $this->_phpmailer->Password = $this->password;
-            $this->_phpmailer->Port = $this->port;
-            $this->_phpmailer->SMTPOptions = array(
+            $this->mailer()->SMTPDebug = false;
+            $this->mailer()->isSMTP();
+            $this->mailer()->SMTPSecure = 'tls';
+            $this->mailer()->Host = $this->host;
+            $this->mailer()->SMTPAuth = true;
+            $this->mailer()->Username = $this->username;
+            $this->mailer()->Password = $this->password;
+            $this->mailer()->Port = $this->port;
+            $this->mailer()->SMTPOptions = array(
                 'ssl' => array(
                     'verify_peer' => false,
                     'verify_peer_name' => false,
@@ -44,36 +52,36 @@ class Mail extends \yii\base\Component
                 )
             );
         }
-        $this->_phpmailer->From = $this->from;
-        $this->_phpmailer->FromName = $this->fromName;
-        $this->_phpmailer->isHTML(true);
-        $this->_phpmailer->AltBody = $this->altBody;
+        $this->mailer()->From = $this->from;
+        $this->mailer()->FromName = $this->fromName;
+        $this->mailer()->isHTML(true);
+        $this->mailer()->AltBody = $this->altBody;
     }
 
     public function compose($subject, $body)
     {
         $this->cleanup();
         $this->create();
-        $this->_phpmailer->Subject = $subject;
-        $this->_phpmailer->Body = $body;
+        $this->mailer()->Subject = $subject;
+        $this->mailer()->Body = $body;
         return $this;
     }
 
     public function address($email, $name = null)
     {
-        $this->_phpmailer->addAddress($email, (empty($name)) ? $email : $name);
+        $this->mailer()->addAddress($email, (empty($name)) ? $email : $name);
 
         return $this;
     }
 
     public function send()
     {
-        return $this->_phpmailer->send();
+        return $this->mailer()->send();
     }
 
     public function error()
     {
-        return $this->_phpmailer->ErrorInfo;
+        return $this->mailer()->ErrorInfo;
     }
 
     public function cleanup()
