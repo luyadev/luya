@@ -58,7 +58,9 @@ class NavItemPage extends \cmsadmin\base\NavItemType
                 $cfgValues = [];
             }
 
-            $blockObject->setEnvOptions($this->getOptions());
+            foreach($this->getOptions() as $optKey => $optValue) {
+                $blockObject->setEnvOption($optKey, $optValue);
+            }
             $blockObject->setVarValues($configValues);
             $blockObject->setCfgValues($cfgValues);
 

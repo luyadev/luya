@@ -20,5 +20,5 @@ interface BlockInterface
 
     public function setCfgValues(array $values);
 
-    public function setEnvOptions(array $values);
+    public function setEnvOption($key, $value);
 }

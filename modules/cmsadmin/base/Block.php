@@ -31,9 +31,9 @@ abstract class Block implements BlockInterface
     
     /* getter & setter EnvOptions */
 
-    public function setEnvOptions(array $values)
+    public function setEnvOption($key, $value)
     {
-        $this->_envOptions = $values;
+        $this->_envOptions[$key] = $value;
     }
 
     public function getEnvOption($key, $default = false)
