@@ -71,10 +71,14 @@
 	background-color: color("shades", "white");
 	border-radius: 3px;
 	@extend .z-depth-1;
-	margin-bottom: 5px;
+	margin-top: 0;
 
 	&.log__entry--first-of-group {
 		margin-top: 25px;
+	}
+
+	p {
+		margin: 0;
 	}
 }
 
