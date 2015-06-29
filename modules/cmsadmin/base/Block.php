@@ -147,11 +147,11 @@ abstract class Block implements BlockInterface
     
     public function getCfgs()
     {
-        if (!array_key_exists('vars', $this->_config)) {
+        if (!array_key_exists('cfgs', $this->_config)) {
             return [];
         }
         $data = [];
-        foreach($this->_config['vars'] as $item) {
+        foreach($this->_config['cfgs'] as $item) {
             $data[] = (new BlockCfg($item))->toArray();
         }
         
