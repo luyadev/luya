@@ -12,7 +12,8 @@ class BlockVar extends \cmsadmin\base\BlockConfigElement
             'var' => $this->item['var'],
             'label' => $this->item['label'],
             'type' => $this->item['type'],
-            'placeholder' => ($this->has('placeholder')) ? $this->item['placeholder'] : null,
+            'placeholder' => $this->get('placeholder'),
+            'options' => $this->get('options'),
         ];
     }    
 }

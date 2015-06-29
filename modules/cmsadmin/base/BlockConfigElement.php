@@ -29,6 +29,15 @@ abstract class BlockConfigElement
         return true;
     }
     
+    protected function get($key, $default = null)
+    {
+        if (!$this->has($key)) {
+            return $default;
+        }
+        
+        return $this->item[$key];
+    }
+    
     abstract public function toArray();
     
 }

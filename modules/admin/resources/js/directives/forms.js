@@ -71,7 +71,7 @@ zaa.directive('zaaText', function(){
         	scope.random = Math.random().toString(36).substring(7);
         },
 		template : function() {
-			return '<div input-field class="col s{{grid}}"><input placeholder="{{placeholder}}" id="{{random}}" ng-model="model" type="text" /><label for="{{random}}">{{label}}</label></div>';
+			return '<div class="input-field col s{{grid}}"><input placeholder="{{placeholder}}" id="{{random}}" ng-model="model" type="text" /><label for="{{random}}">{{label}}</label></div>';
 		}
 	}
 });
