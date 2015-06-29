@@ -14,6 +14,7 @@ class m150323_125407_admin_auth extends Migration
             'is_crud' => Schema::TYPE_SMALLINT.'(1) default 0',
             'route' => Schema::TYPE_STRING.'(200)',
             'api' => Schema::TYPE_STRING.'(80)',
+            'search_model_class' => Schema::TYPE_STRING.'(120)',
         ]);
     }
 
