@@ -20,11 +20,9 @@
                 <div class="row">   
 
                     <div class="col s12">
+
                         <div class="log">
-
                             <div class="log__day" ng-repeat="item in dashboard" ng-controller="DashboardController" ng-init="logItemOpen = $first">
-
-
                                 <div class="log__day-header">
                                     <i class="mdi-action-event"></i>
                                     <i class="log__day-toggler mdi-content-add" ng-hide="logItemOpen" ng-click="logItemOpen = true"></i>
@@ -34,34 +32,37 @@
 
                                 <div class="log__entries" ng-hide="!logItemOpen">
 
-                                    <div class="log__entry" ng-repeat="(key, log) in item.items" ng-switch on="item.items[key - 1] == null || (item.items[key - 1] != null && item.items[key - 1].icon != log.icon)" ng-class="{ 'log__entry--first-of-group' : item.items[key - 1] == null || (item.items[key - 1] != null && item.items[key - 1].icon != log.icon) }">
-                                        <div class="log__entry-header" ng-switch-when="true">
-                                            <i class="{{log.icon}}"></i>
-                                        </div>
-                                        <div class="log__entry-body">
-                                            <small>
-                                                <i class="mdi-social-person"></i>
-                                                {{ log.name }}
-                                                <span style="width: 20px; display: inline-block;"></span>
-                                                <i class="mdi-image-timer"></i>
-                                                {{ log.timestamp * 1000 | date:"HH:mm" }} Uhr
-                                            </small>
-                                            <p>
-                                                «{{log.alias}}»
-                                                <strong ng-if="log.is_update == 1">bearbeitet.</strong>
-                                                <strong ng-if="log.is_insert == 1">hinzugefügt.</strong>
-                                            </p>
+                                    <div ng-repeat="(key, log) in item.items" ng-init="
+                                        userChanged = item.items[key - 1] == null || (item.items[key - 1] != null && item.items[key - 1].name != log.name);
+                                        iconChanged = item.items[key - 1] == null || (item.items[key - 1] != null && item.items[key - 1].icon != log.icon);
+                                    ">
+                                        <div class="log__entry" style="z-index: {{item.items.length - key}}" ng-class="{ 'log__entry--first-of-group' : userChanged || iconChanged }">
+
+                                            <!-- Show if user changed -->
+                                            <div class="log__entry-header" ng-show="userChanged || iconChanged">
+                                                <i class="{{log.icon}}"></i>
+                                            </div>
+
+                                            <div class="log__entry-body">
+                                                <small ng-show="userChanged || iconChanged">
+                                                    <i class="mdi-social-person"></i>
+                                                    {{ log.name }}
+                                                    <span style="width: 20px; display: inline-block;"></span>
+                                                </small>
+                                                <p>
+                                                    «{{log.alias}}»
+                                                    <strong ng-if="log.is_update == 1">bearbeitet.</strong>
+                                                    <strong ng-if="log.is_insert == 1">hinzugefügt.</strong>
+                                                    <span class="right">{{ log.timestamp * 1000 | date:"HH:mm" }} Uhr</span>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
 
                                 </div>
 
                             </div>
-
                         </div>
-                    </div>
-
-                    <div class="col s6">
 
                     </div>
 
