@@ -1,11 +1,8 @@
-.block__tag {
-	font-size: 1rem;
-	line-height: 1.5rem;
-}
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic);
 
-.block__empty-text {
-	font-weight: 300;
-	text-align: center;
-	width: 100%;
-	display: block;
+h1, h2, h3, h4, h5, h6,
+p, span,
+blockquote
+{
+	font-family: 'Lato', sans-serif;
 }

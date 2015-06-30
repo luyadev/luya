@@ -32,6 +32,6 @@ class QuoteBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return '{% if vars.content is not empty %}<p class="block__tag block__tag--quote">{{ vars.content }}</p>{% else %}<span class="block__empty-text">Es wurde noch kein Zitat eingegeben.</span>{% endif %}';
+        return '{% if vars.content is not empty %}<blockquote>{{ vars.content }}</p>{% else %}<span class="block__empty-text">Es wurde noch kein Zitat eingegeben.</blockquote>{% endif %}';
     }
 }

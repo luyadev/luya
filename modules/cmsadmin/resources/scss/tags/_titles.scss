@@ -1,14 +1,28 @@
-.block__tag--h1 {
+h1, h2, h3, h4, h5 {
+	margin: 0;
+}
+
+h1 {
+	font-size: 2rem;
+	line-height: 2.4rem;
+}
+
+h2 {
 	font-size: 1.8rem;
 	line-height: 2.2rem;
 }
 
-.block__tag--h2 {
+h3 {
 	font-size: 1.6rem;
 	line-height: 2rem;
 }
 
-.block__tag--h3 {
+h4 {
 	font-size: 1.4rem;
 	line-height: 1.8rem;
+}
+
+h5 {
+	font-size: 1.2rem;
+	line-height: 1.6rem;
 }

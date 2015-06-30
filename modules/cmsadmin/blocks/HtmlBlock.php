@@ -35,6 +35,6 @@ class HtmlBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return '{% if vars.html is empty %}<span class="block__empty-text">Es wurde noch kein HTML Code eingegeben.</span>{% else %}<pre>{{ vars.html | escape }}</pre>{% endif %}';
+        return '{% if vars.html is empty %}<span class="block__empty-text">Es wurde noch kein HTML Code eingegeben.</span>{% else %}{{ vars.html | raw }}{% endif %}';
     }
 }

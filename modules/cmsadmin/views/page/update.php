@@ -24,7 +24,7 @@
                                 <i ng-show="edit" class="mdi-navigation-close [ waves-effect waves-blue ]" ng-click="toggleEdit()"></i>
                             </div>
             </div>
-            <div class="block__body" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
+            <div class="block__body cmsadmin-tags" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
             <div class="block__edit">
                 <div class="row" ng-repeat="field in block.vars">
                      <zaa-injector dir="field.type" options="field.options" initvalue="{{field.initvalue}}" placeholder="{{field.placeholder}}" label="{{field.label}}" grid="12" model="data[field.var]"></zaa-injector>

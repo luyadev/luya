@@ -23,9 +23,11 @@ class TitleBlock extends \cmsadmin\base\Block
                 ['var' => 'content', 'label' => 'Titel', 'type' => 'zaa-text'],
                 ['var' => 'headingType', 'label' => 'Grösse', 'type' => 'zaa-select', 'initvalue' => 'h1', 'options' =>
                     [
-                        ['value' => 'h1', 'label' => 'Gross'],
-                        ['value' => 'h2', 'label' => 'Mittel'],
-                        ['value' => 'h3', 'label' => 'Klein'],
+                        ['value' => 'h1', 'label' => 'Überschrift 1'],
+                        ['value' => 'h2', 'label' => 'Überschrift 2'],
+                        ['value' => 'h3', 'label' => 'Überschrift 3'],
+                        ['value' => 'h4', 'label' => 'Überschrift 4'],
+                        ['value' => 'h5', 'label' => 'Überschrift 5']
                     ],
                 ],
             ],
@@ -46,6 +48,6 @@ class TitleBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return '{% if vars.content is not empty %}<p class="block__tag block__tag--{{extras.headingType}}">{{ vars.content }}</p>{% else %}<span class="block__empty-text">Es wurde noch keine Überschrift eingegeben.</span>{% endif %}';
+        return '{% if vars.content is not empty %}<{{extras.headingType}}>{{ vars.content }}</{{extras.headingType}}>{% else %}<span class="block__empty-text">Es wurde noch keine Überschrift eingegeben.</span>{% endif %}';
     }
 }
