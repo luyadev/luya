@@ -437,13 +437,13 @@ zaa.directive("zaaListArray", function() {
 		template : function() {
 			//return '<div class="col s12"><h5>{{label}}</h5><div ng-repeat="(key,row) in model" class="row"><div class="col input-field s10"><input type="text" ng-model="row.value" /></div><div class="col input-field s2"><button type="button" class="btn" ng-click="remove(key)">Entfernen</button></div></div><div class="row"><div class="col s12 field-input"><button ng-click="add()" class="btn" type="button">+ Hinzufügen</button></div></div></div>';
 			return '<div class="col s12 list">' +
-                        '<h5>Liste</h5>' +
+                        '<h5>Auflistung</h5>' +
                         '<div ng-repeat="(key,row) in model" class="list__item">' +
                             '<div class="list__left">' +
                                 '<input type="text" ng-model="row.value" />' +
                             '</div>' +
                             '<div class="list__right">' +
-                                '<button class="btn-floating left [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="mdi-action-delete"></i></button>' +
+                                '<button class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="mdi-content-remove"></i></button>' +
                             '</div>' +
                         '</div>' +
                         '<button ng-click="add()" type="button" class="btn-floating left [ teal ][ waves-effect waves-circle waves-light ] list__add-button"><i class="mdi-content-add"></i></button>' +
