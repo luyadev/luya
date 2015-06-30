@@ -1,5 +1,7 @@
 zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout) {
-	
+
+    $scope.userMenuOpen = false;
+
 	$scope.notify = null;
 	
 	$scope.showOnlineContainer = false;
