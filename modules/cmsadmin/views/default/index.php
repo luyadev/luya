@@ -5,7 +5,7 @@
         <h5>Neue Seite hinzufügen</h5>
         <div class="row">
             <div class="input-field col s6">
-                <input type="text" ng-model="data.title" ng-change="rewriteSuggestion()" />
+                <input type="text" ng-model="data.title" ng-change="rewriteSuggestion()" focus-me="true" />
                 <label>Seitentitel</label>
             </div>
             <div class="input-field col s6">
