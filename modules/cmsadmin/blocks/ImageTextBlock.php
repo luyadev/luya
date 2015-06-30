@@ -8,6 +8,11 @@ class ImageTextBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
 
+    private $defaultMargin = '20px';
+
+    private $_source = null;
+
+
     public function name()
     {
         return 'Text mit Bild';
@@ -22,39 +27,48 @@ class ImageTextBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'imageId', 'label' => 'Bild Upload', 'type' => 'zaa-image-upload'],
                 ['var' => 'text', 'label' => 'Text', 'type' => 'zaa-textarea'],
-                ['var' => 'textPosition', 'label' => 'Textposition', 'type' => 'zaa-select', 'initvalue' => 'left', 'options' => [
+                ['var' => 'imageId', 'label' => 'Bild Upload', 'type' => 'zaa-image-upload'],
+                ['var' => 'imagePosition', 'label' => 'Bildposition', 'type' => 'zaa-select', 'initvalue' => 'left', 'options' => [
                         ['value' => 'left', 'label' => 'Links'],
                         ['value' => 'right', 'label' => 'Rechts'],
                     ],
                 ],
             ],
             'cfgs' => [
-                    ['var' => 'floating', 'label' => 'Text umfliessend', 'type' => 'zaa-select', 'initvalue' => 1, 'options' => [
-                            ['value' => '1', 'label' => 'Ja'],
-                            ['value' => '0', 'label' => 'Nein'],
-                        ],
+                ['var' => 'margin', 'label' => 'Abstand des Bildes zum Text', 'type' => 'zaa-select', 'initvalue' => $this->defaultMargin, 'options' => [
+                            ['value' => '5px', 'label' => '0 Pixel'],
+                            ['value' => '10px', 'label' => '10 Pixel'],
+                            ['value' => '15px', 'label' => '20 Pixel'],
+                            ['value' => '15px', 'label' => '30 Pixel'],
+                            ['value' => '15px', 'label' => '40 Pixel'],
+                            ['value' => '15px', 'label' => '50 Pixel'],
                     ],
                 ],
+            ],
         ];
     }
 
     public function getImageSource()
     {
-        $img = Yii::$app->storage->image->get($this->getVarValue('imageId'), 0);
+        if ($this->_source === null) {
 
-        return $img ? $img->source : false;
+            $img = Yii::$app->storage->image->get($this->getVarValue('imageId'), 0);
+
+            $this->_source = $img ? $img->source : false;
+
+        }
+
+        return $this->_source;
     }
 
     public function extraVars()
     {
-        $imgSource = $this->getImageSource();
-
         return [
-            'imageSource' => $imgSource,
-            'textPosition' => $this->getVarValue('textPosition', 'left'),
-            'imageWidth' => $imgSource ? getimagesize($imgSource)[0] : 0
+            'imageSource' => $this->getImageSource(),
+            'imagePosition' => $this->getVarValue('imagePosition', 'left'),
+            'imageWidth' => $this->getImageSource() ? getimagesize($this->getImageSource())[0] : 0,
+            'margin' => $this->getCfgValue('margin',$this->defaultMargin),
         ];
     }
 
@@ -62,8 +76,8 @@ class ImageTextBlock extends \cmsadmin\base\Block
     {
         return  '{% if extras.imageSource and vars.text %}'.
                     '<div>'.
-                        '<img class="{% if extras.textPosition == "left" %}pull-right{% else %}pull-left{% endif %} img-responsive" src="{{ extras.imageSource }}" style="{% if not cfgs.floating %}display:inline-block;width:40%;max-width:{{ extras.imageWidth }}px{% endif %}">'.
-                        '<p class="{% if not cfgs.floating %}{% if extras.textPosition == "left"%}pull-left{% else %}pull-right{% endif %}{% endif %}" style="{% if not cfgs.floating %}display:inline-block;width:58%{% endif %}">{{ vars.text }}</p>'.
+                        '<img class="{% if extras.imagePosition == "left" %}pull-left{% else %}pull-right{% endif %} img-responsive" src="{{ extras.imageSource }}" style="{% if extras.imagePosition == "right" %}margin-left:{{ extras.margin }}{% else %}margin-right:{{ extras.margin }}{% endif %};margin-bottom:{{ extras.margin }}">'.
+                        '<p>{{ vars.text }}</p>'.
                     '</div>'.
                     '<br style="clear:both" />'.
                 '{% endif %}';
@@ -72,14 +86,14 @@ class ImageTextBlock extends \cmsadmin\base\Block
     public function twigAdmin()
     {
         return  '{% if not extras.imageSource %}'.
-                    '<span class="block__empty-text">Es wurde noch kein Bild Hochgeladen.</span>'.
+                    '<span class="block__empty-text">Es wurde noch kein Bild Hochgeladen. </span>'.
                 '{% endif %}'.
                 '{% if not vars.text %}'.
                     '<span class="block__empty-text">Es wurde noch kein Text angegeben.</span>'.
                 '{% endif %}'.
                 '{% if extras.imageSource and vars.text %}'.
-                    '<img src="{{ extras.imageSource }}" border=0 style="max-height:100px;{% if cfgs.floating == 0 %}display:inline-block;width:40%;{% endif %}max-width:{{ extras.imageWidth }}px;float:{% if extras.textPosition == "left" %}right{% else %}left{% endif %}">'.
-                    '<p style="{% if cfgs.floating == 0 %};display:inline-block;width:58%;float:{% if extras.textPosition == "left" %}left{% else %}right;{% endif %}{% else %}float:none;{% endif %}">{{ vars.text }}</p>'.
+                    '<img src="{{ extras.imageSource }}" border=0 style="{% if extras.imagePosition == "left" %}float:left;{% else %}float:right{% endif %};{% if extras.imagePosition == "right" %}margin-left:{{ extras.margin }}{% else %}margin-right:{{ extras.margin }}{% endif %};margin-bottom:{{ extras.margin }}"">'.
+                    '<p>{{ vars.text }}</p>'.
                 '{% endif %}';
     }
 }
