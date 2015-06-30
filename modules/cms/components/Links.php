@@ -173,12 +173,15 @@ class Links extends \yii\base\Component
     
     public function hasLink($link)
     {
+        if (empty($link)) {
+            return false;
+        }
         return array_key_exists($link, $this->links);
     }
     
     public function getLink($link)
     {
-        return (array_key_exists($link, $this->links)) ? $this->links[$link] : false;
+        return ($this->hasLink($link)) ? $this->links[$link] : false;
     }
     
 

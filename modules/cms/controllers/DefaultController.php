@@ -48,7 +48,7 @@ class DefaultController extends \cms\base\Controller
         $appendix = Yii::$app->links->isolateLinkAppendix($activeLink, $suffix);
         
         if (!Yii::$app->links->hasLink($suffix)) {
-            throw new NotFoundHttpException("The requested link '$suffix' does not exist in the Links list.");
+            throw new NotFoundHttpException("The requested link '$activeLink' does not exist.");
         }
         
         $link = Yii::$app->links->getLink($suffix);
