@@ -157,7 +157,7 @@
                     </label>
                 </div>
                 
-                <div class="treeview" ng-repeat="catitem in menu">
+                <div class="treeview" ng-repeat="catitem in menu" ng-class="{ 'treeview--drag-active' : showDrag }">
                     <h5 class="treeview__title">{{catitem.name}}</h5>
 
                     <ul class="treeview__list">
