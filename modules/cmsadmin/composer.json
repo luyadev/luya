@@ -4,7 +4,7 @@
 	"require" : {
 		"zephir/luya" : "*@dev",
 		"zephir/luya-module-admin" : "*@dev",
-		"cebe/markdown": "~1.0.0 | ~1.1.0",
+		"cebe/markdown": "~1.0.0 | ~1.1.0"
 	},
 	"autoload" : {
 		"psr-4" : {
