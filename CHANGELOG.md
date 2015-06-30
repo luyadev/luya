@@ -1,11 +1,29 @@
 LUYA CHANGELOG
 ==============
 
-1.0.0-alpha8 (in progress)
+1.0.0-alpha8 (30. Jun 2015)
 --------------------------
 - fixed bug in links component `getLink($link)` returns false.
 - added `hasLink($link)` to links component.
 - added `#131` admin search data tracking.
+- fixed `#165` Logout-Button Firefox issue.
+- fixed `#156` max field width..
+- fixed `#155` added ng-cloak.
+- fixed `#151` verify cmslayouts placeholders on import, compare placeholders.
+- fixed `#147` hide fields when creating page.
+- fixed `#143` added placeholder and initvalue.
+- fixed `#138` mail componentend extended.
+- fixed `#132` added cms pages to global search.
+- implemented `#131` track search querys.
+- fixed `#129` Plceholder in var types.
+- implemented `#126` Config block styling.
+- implemented `#123` Dashboard styling.
+- fixed `#121` Globlal search design.
+- fixed `#116` Bigger thumbnail images in file manager.
+- fixed `#115` Placeholders should not close on block insert.
+- implemented `#105` Language services.
+- implemented `#71` Useronline styling.
+- fixed `#46` Textarea height on focus.
 
 1.0.0-alpha7 (25. Jun 2015)
 --------------------------
