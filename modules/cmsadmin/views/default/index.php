@@ -13,13 +13,13 @@
                 <label>Pfadsegment</label>
             </div>
         </div>
-        <div class="row" ng-show="!data.isInline">
+        <div class="row" ng-hide="data.isInline || cat.length == 1">
             <div class="col s12">
                 <label>Navigations-Kategorie</label>
                 <select class="browser-default" ng-model="data.cat_id" ng-options="item.id as item.name for item in cat" />
             </div>
         </div>
-        <div class="row" ng-show="!data.isInline">
+        <div class="row" ng-hide="data.isInline || lang.length == 1">
             <div class="col s12">
                 <label>Sprache</label>
                 <select class="browser-default" ng-model="data.lang_id" ng-options="item.id as item.name for item in lang" />

@@ -22,7 +22,7 @@ zaa.directive("createForm", function() {
 			$scope.data.parent_nav_id = 0;
 			
 			$http.get('admin/api-cms-defaults/cat').success(function(response) {
-				$scope.data.cat_id = response.id;
+				$scope.data.cat_id = parseInt(response.id);
 			});
 			
 			$http.get('admin/api-admin-defaults/lang').success(function(response) {
