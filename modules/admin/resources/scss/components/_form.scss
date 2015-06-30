@@ -1,3 +1,20 @@
-input, select, textarea {
+select {
 	max-width: 700px;
+}
+
+textarea.materialize-textarea {
+	border-top: 1px solid #f0f0f0 !important;
+	border-right: 1px solid #f0f0f0 !important;
+	border-left: 1px solid #f0f0f0 !important;
+	padding: 10px !important;
+	margin-top: 10px !important;
+	width: calc(100% - 20px) !important; // Subtract the 20px padding from the default 100% width
+
+	& + label {
+		margin: 10px 0 0 10px;
+
+		&.active {
+			margin-top: 3px;
+		}
+	}
 }
