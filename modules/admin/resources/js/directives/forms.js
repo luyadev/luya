@@ -429,9 +429,13 @@ zaa.directive("zaaListArray", function() {
 				$scope.model.splice(key, 1);
 			};
 			
-			$scope.debug = function() {
-				console.log($scope.model);
-			}
+			$scope.refactor = function(key, row) {
+				if (key !== ($scope.model.length -1)) {
+					if (row['value'] == "") {
+						$scope.remove(key);
+					}
+				}
+			};
 
 		},
 		template : function() {
