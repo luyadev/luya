@@ -1,3 +1,7 @@
+.list {
+	margin-bottom: 20px;
+}
+
 .list__item {
 	display: block;
 	position: relative;
@@ -12,16 +16,21 @@
 }
 
 .list__left {
-	width: 40px;
-	margin-right: 10px;
-}
-
-.list__right {
 	width: calc(100% - 50px);
 
 	input {
 		width: 100%;
+		max-width: 100%;
 		margin-bottom: 0;
 		margin-top: -6px;
 	}
+}
+
+.list__right {
+	width: 40px;
+	margin-left: 10px;
+}
+
+.list__add-button {
+	margin-top: 5px;
 }
