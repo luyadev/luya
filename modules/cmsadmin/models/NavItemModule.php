@@ -34,6 +34,13 @@ class NavItemModule extends \cmsadmin\base\NavItemType
 
         return $this->_module;
     }
+    
+    public function attributeLabels()
+    {
+        return [
+            'module_name' => 'Modul Name',
+        ];
+    }
 
     /**
      * @todo: see if $pathAfterRoute could be available in the urlRules, otherwise display default

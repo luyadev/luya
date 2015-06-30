@@ -70,7 +70,15 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
             return false;
         }
     }
-
+    
+    public function attributeLabels()
+    {
+        return [
+            'title' => 'Seitentitel',
+            'rewrite' => 'Pfadsegment',
+        ];
+    }
+    
     public function validateRewrite()
     {
         $dirty = $this->getDirtyAttributes(['rewrite']);

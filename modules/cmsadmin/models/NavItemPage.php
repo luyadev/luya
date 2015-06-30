@@ -33,6 +33,13 @@ class NavItemPage extends \cmsadmin\base\NavItemType
             'activeLink' => Yii::$app->links->activeLink,
         ]);
     }
+    
+    public function attributeLabels()
+    {
+        return [
+            'layout_id' => 'Layout'  
+        ];
+    }
 
     public function renderPlaceholder($navItemPageId, $placeholderVar, $prevId)
     {

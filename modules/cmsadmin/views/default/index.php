@@ -103,7 +103,7 @@
     <div class="row">
         <div class="col s12 input-field">
             <input type="text" ng-model="data.module_name" />
-            <label>Module Name (Yii-ID)</label>
+            <label>Modul Name (Yii-ID)</label>
         </div>
     </div>
     <div class="row">
