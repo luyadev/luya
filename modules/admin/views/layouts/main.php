@@ -206,6 +206,7 @@
                                 <a ng-click="click(item)" class="navbar__link"><i class="[ {{item.icon}} left ] navbar__icon"></i>{{item.alias}}</a>
                             </li>
                         </ul>
+
                         <ul class="right navbar__right">
                             <li ng-mouseenter="showOnlineContainer=1" ng-mouseleave="showOnlineContainer=0">
                                 <div class="navbar__button">
@@ -214,9 +215,23 @@
                                 </div>
                             </li>
                             <li>
-                                <a class="dropdown-button" data-hover="true" dropdown data-activates="userMenu"><i class="mdi-action-account-circle right"></i><strong><?php echo $user->email; ?></strong></a>
+                                <div class="user-menu" ng-mouseenter="userMenuOpen = true" ng-mouseleave="userMenuOpen = false" ng-class="{ 'user-menu--show-user' : !userMenuOpen, 'user-menu--show-menu' : userMenuOpen }">
+
+                                    <div class="user-menu__user">
+                                        <i class="mdi-action-account-circle left"></i><strong><?php echo $user->firstname; ?></strong>
+                                    </div>
+
+                                    <div class="user-menu__menu">
+                                        <i class="mdi-action-settings user-menu__menu-icon"></i><!-- NO WHITESPACE
+                                        --><a href="<?= \Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="user-menu__menu-icon user-menu__menu-icon--logout">
+                                            <i class="mdi-action-exit-to-app"></i>
+                                        </a>
+                                    </div>
+
+                                </div>
                             </li>
                         </ul>
+
                         <ul class="side-nav" id="mobile-demo">
                             <li ng-repeat="item in items" ng-class="{'active' : isActive(item) }">
                                 <a ng-click="click(item)" class="navbar__link"><i class="[ {{item.icon}} left ] navbar__icon"></i>{{item.alias}}</a>
@@ -312,13 +327,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- User dropdown, called by javascript -->
-            <ul id="userMenu" class="dropdown-content">
-                <li><a href="<?= \Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>">Abmelden</a></li>
-                <li><a href="#!">Einstellungen</a></li>
-            </ul>
-            <!-- /User dropdown -->
 
             <!-- ANGULAR-VIEW -->
             <div class="luya-container__angular-placeholder module-{{currentItem.moduleId}}" ui-view></div>

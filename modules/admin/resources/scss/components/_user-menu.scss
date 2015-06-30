@@ -1,0 +1,50 @@
+.user-menu {
+	padding: 0 30px;
+	position: relative;
+}
+
+.user-menu__user {
+	display: block;
+	opacity: 1;
+	z-index: 10;
+	transition: 0.25s ease opacity;
+
+	.user-menu--show-menu & {
+		opacity: 0;
+		z-index: 1;
+	}
+}
+
+.user-menu__menu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	background-color: color("shades", "white");
+	transition: 0.25s ease opacity;
+
+	.user-menu--show-menu & {
+		display: block;
+		z-index: 10;
+		opacity: 1;
+	}
+}
+
+.user-menu__menu-icon {
+	display: inline-block !important;
+	width: 50%;
+	text-align: center;
+
+	color: color("shades", "black");
+
+	&:hover {
+		cursor: pointer;
+		color: color("blue", "base");
+	}
+}
+
+.user-menu__menu-icon--logout:hover {
+	color: color("red", "base");
+}
