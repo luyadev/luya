@@ -150,10 +150,9 @@
 
             <div class="row">
 
-                <div class="col s{{(12/AdminLangService.selection.length)}}" ng-repeat="lang in langs" ng-show="AdminLangService.isInSelection(lang)" ng-controller="NavItemController">
-
+                <div class="col s{{(12/AdminLangService.selection.length)}}" ng-repeat="lang in langs" ng-show="AdminLangService.isInSelection(lang) && showContainer" ng-controller="NavItemController">
                     <!-- PAGE -->
-                    <div class="page" ng-if="item.length == 0">
+                    <div class="page" ng-show="!isTranslated">
                         <div class="row">
                             <div class="col s12">
                                 <div class="alert alert--info">
@@ -165,7 +164,7 @@
                             <create-form data="data"></create-form>
                         </div>
                     </div>
-                    <div class="page {{AdminClassService.getClassSpace('onDragStart')}}" ng-if="item.length != 0">
+                    <div class="page {{AdminClassService.getClassSpace('onDragStart')}}" ng-show="isTranslated">
 
                         <!-- PAGE__HEADER -->
                         <div class="page__header">

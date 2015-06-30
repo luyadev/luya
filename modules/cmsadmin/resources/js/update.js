@@ -65,9 +65,13 @@ zaa.controller("NavController", function($scope, $stateParams, $http, AdminLangS
  * @param $scope.lang
  *            from ng-repeat
  */
-zaa.controller("NavItemController", function($scope, $http) {
+zaa.controller("NavItemController", function($scope, $http, $timeout) {
 	
 	$scope.NavController = $scope.$parent;
+	
+	$scope.showContainer = false;
+	
+	$scope.isTranslated = false;
 	
 	$scope.item = [];
 	
@@ -98,6 +102,7 @@ zaa.controller("NavItemController", function($scope, $http) {
 	};
 	
 	$scope.getItem = function(langId, navId) {
+		$scope.showContainer = false;
 		$http({
 		    url: 'admin/api-cms-navitem/nav-lang-item', 
 		    method: "GET",
@@ -105,8 +110,18 @@ zaa.controller("NavItemController", function($scope, $http) {
 		}).success(function(response) {
 			if (response) {
 				$scope.item = response;
-				$scope.reset();
+				$scope.isTranslated = true;
+				$timeout(function() {
+					$scope.showContainer = true;
+				}, 500);
+			} else {
+				$timeout(function() {
+					$scope.showContainer = true;
+				}, 500);
 			}
+			
+			$scope.reset();
+			
 		});
 	}
 	

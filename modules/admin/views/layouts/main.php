@@ -18,15 +18,24 @@
         <title><?= \Yii::$app->siteTitle; ?> // {{currentItem.alias}}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <base href="<?= Url::base(true); ?>/" 
+        <base href="<?= Url::base(true); ?>/admin" />
+        <style type="text/css">
+        [ng:cloak], 
+        [ng-cloak], 
+        [data-ng-cloak], 
+        [x-ng-cloak], 
+        .ng-cloak, 
+        .x-ng-cloak {
+          display: none !important;
+        }
+        </style>
         <?php $this->head() ?>
-
         <script>
             var authToken = '<?=$user->getAuthToken();?>';
         </script>
     </head>
 
-    <body>
+    <body ng-cloak>
         <?php $this->beginBody() ?>
         <!-- 
         <script type="text/ng-template" id="storageFileUpload-bkp">
