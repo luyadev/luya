@@ -124,15 +124,18 @@ class Module extends \admin\base\Module
                             break;
                     }
                 }
+                $_placeholders = ['placeholders' => $_placeholders];
                 if ($layoutItem) {
+                    
+                    $match = $this->comparePlaceholders($_placeholders, json_decode($layoutItem->json_config, true));
+                    if ($match) {
+                        continue;
+                    }
                     $layoutItem->scenario = 'restupdate';
                     $layoutItem->setAttributes([
                         'name' => ucfirst($file),
                         'view_file' => $file,
-                        'json_config' => json_encode(
-                                ['placeholders' => $_placeholders,
-                                ]
-                        ),
+                        'json_config' => json_encode($_placeholders),
                     ]);
                     $layoutItem->save();
 
@@ -144,10 +147,7 @@ class Module extends \admin\base\Module
                     $data->setAttributes([
                         'name' => ucfirst($file),
                         'view_file' => $file,
-                        'json_config' => json_encode(
-                                ['placeholders' => $_placeholders,
-                                ]
-                        ),
+                        'json_config' => json_encode($_placeholders),
                         ]);
                     $data->save();
                     $_log['layouts'][$file] = "new cmslayout $file found and inserted.";
@@ -156,5 +156,43 @@ class Module extends \admin\base\Module
         }
 
         return $_log;
+    }
+    
+    /**
+     * 
+     * @param array $array1
+     * @param array $array2
+     * @return boolean true if the same, false if not the same
+     */
+    private function comparePlaceholders($array1, $array2)
+    {
+        if (!array_key_exists('placeholders', $array1) || !array_key_exists('placeholders', $array2)) { 
+            return false;
+        }
+        
+        $a1 = $array1['placeholders'];
+        $a2 = $array2['placeholders'];
+        
+        if (count($a1) !== count($a2)) {
+            return false;
+        }
+        
+        foreach($a1 as $key => $holder) {
+            if (!array_key_exists($key, $a2)) {
+                return false;
+            }
+            
+            foreach($holder as $var => $value) {
+                if (!array_key_exists($var, $a2[$key])) {
+                    return false;
+                }
+                
+                if ($value != $a2[$key][$var]) {
+                    return false;
+                }
+            }
+        }
+        
+        return true;
     }
 }
