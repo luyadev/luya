@@ -44,18 +44,18 @@ Typen-Feld-Typen
 Natürlich benötigen wir mehr als nur Textfelder für die Typen-Einträge. Hier eine Übersicht aller möglichen Type und deren Rückgabe Wert und beschreibung.
 
 | Name | Rückgabewert | Beschreibung | Optionale Paramter
-| ---- | -------------| ------------ | --------------------
-| zaa-text | string | Erstellt ein Text `input type=text`. | -
-| zaa-password  | string | Erstellt ein Passwort Feld `input type=password`. | -
-| zaa-textarea | string | Erstellt ein mehrzeiliges Textfeld `textarea`. | -
-| zaa-number | string | Erstellt ein Feld wobei nur Zahl als valider input gelten. | -
-| zaa-wysiwyg | string | Erstellt einen WYSIWYG Editor mit verschiedene Formatierungs möglichkeiten. | -
+| ---- | ------------ | ------------ | --------------------
+| zaa-text | string | Erstellt ein Text `input type=text`. | 
+| zaa-password  | string | Erstellt ein Passwort Feld `input type=password`. | 
+| zaa-textarea | string | Erstellt ein mehrzeiliges Textfeld `textarea`. | 
+| zaa-number | string | Erstellt ein Feld wobei nur Zahl als valider input gelten. | 
+| zaa-wysiwyg | string | Erstellt einen WYSIWYG Editor mit verschiedene Formatierungs möglichkeiten. | 
 | zaa-select | array | Erstellt ein Select-Dropdown mit Optionen. | options: ein array wobei bei jedem eintrag *value* und *label* enthalten muss.
-| zaa-datetime | int | Erstellt eine Datums und Zeiteingabe. Die Rückgabe ist ein *Unix-Timestamp*. | -
-| zaa-date | int | Erstellt eine Datums eingabe. Die Rückt ist ein *Unix-Timestamp* | - 
+| zaa-datetime | int | Erstellt eine Datums und Zeiteingabe. Die Rückgabe ist ein *Unix-Timestamp*. | 
+| zaa-date | int | Erstellt eine Datums eingabe. Die Rückt ist ein *Unix-Timestamp* | 
 | zaa-checkbox | array | Erstellt ein Checkbox anahnd das options parameter. | @TODO
-| zaa-file-upload | int | Erstellt ein Fileupload Feld für eine Datei. Die Rückgabe ist eine *file_id* aus dem Storage-System.| - 
-| zaa-file-array-upload | array | Erstellt ein Fileupload für ein oder mehr Dateien. Die Rückgabe ist per Array *file_id* und *caption*. | - 
-| zaa-image-upload | int | Erstellt einen Bildupload Feld für eine Datei. Die Rückgabe ist eine *image_id* aus dem Storage-System. | -
-| zaa-image-array-upload | array | Erstellt ein Bildupload für ein oder mehr Bilder. Die Rückgabe ist per Array *image_id* und *caption*. | -
-| zaa-list-array | array | Erstellt einen Textinput für mehrer Eingaben. (zbsp. Listen). | -
+| zaa-file-upload | int | Erstellt ein Fileupload Feld für eine Datei. Die Rückgabe ist eine *file_id* aus dem Storage-System.| 
+| zaa-file-array-upload | array | Erstellt ein Fileupload für ein oder mehr Dateien. Die Rückgabe ist per Array *file_id* und *caption*. |
+| zaa-image-upload | int | Erstellt einen Bildupload Feld für eine Datei. Die Rückgabe ist eine *image_id* aus dem Storage-System. | 
+| zaa-image-array-upload | array | Erstellt ein Bildupload für ein oder mehr Bilder. Die Rückgabe ist per Array *image_id* und *caption*. | 
+| zaa-list-array | array | Erstellt einen Textinput für mehrer Eingaben. (zbsp. Listen). | 
