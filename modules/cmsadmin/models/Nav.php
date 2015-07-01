@@ -76,6 +76,18 @@ class Nav extends \yii\db\ActiveRecord
         return true;
     }
     
+    public static function moveToChild($moveNavId, $droppedOnItemId)
+    {
+        $move = self::findOne($moveNavId);
+        $on = self::findOne($droppedOnItemId);
+    
+        $move->cat_id = $on->cat_id;
+        $move->parent_nav_id = $on->id;
+        $move->update();
+    
+        return true;
+    }
+    
     public function moveUpstairs()
     {
         $startIndex = (int) $this->sort_index;

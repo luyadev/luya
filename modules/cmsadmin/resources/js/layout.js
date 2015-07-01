@@ -45,6 +45,16 @@ zaa.controller("DropNavController", function($scope, $http, MenuService) {
 			console.log('err', r)
 		})
     }
+    
+    $scope.onChildDrop = function($event, $ui) {
+    	var itemid = $($event.target).data('itemid');
+		//console.log('dropped block beofre itemid: ' + itemid, 'theblock', $scope.droppedNavItem);
+		$http.get('admin/api-cms-navitem/move-to-child', { params : { moveItemId : $scope.droppedNavItem.id, droppedOnItemId : itemid }}).success(function(r) {
+			MenuService.refresh();
+		}).error(function(r) {
+			console.log('err', r)
+		})
+    }
 })
 
 zaa.controller("CmsMenuTreeController", function($scope, $state, MenuService, DroppableBlocksService, AdminLangService) {

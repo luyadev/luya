@@ -80,6 +80,11 @@ class NavItemController extends \admin\base\RestController
         return ['success' => Nav::moveTo($moveItemId, $droppedBeforeItemId)];
     }
     
+    public function actionMoveToChild($moveItemId, $droppedOnItemId)
+    {
+        return ['success' => Nav::moveToChild($moveItemId, $droppedOnItemId)];
+    }
+    
     /**
      * RECUSRION
      */
