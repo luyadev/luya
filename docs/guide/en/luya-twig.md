@@ -13,6 +13,18 @@ wrapper functions for the luya links component findByArguments function. Will re
 {% endfor %}
 ```
 
+The below example returns an array containing all links for ***cat => default***, ***language => de*** and ***parent_nav_id =>  0***:
+```
+{{ dump(links('default', 'de', 0)) }}
+```
+
+To get the first sub navigation of current active page node just add the dynamic parent_nav_id
+```
+{{ dump(links('default', 'de', activeLink.id)) }}
+```
+The variable activeLink returns an array containing informations about the current active link.
+
+
 linksFindParent
 ---------------
 find the parent navigation id for the current active navigation link for a specific level:
