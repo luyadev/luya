@@ -2,21 +2,22 @@
 
 namespace cmsadmin\apis;
 
+use cmsadmin\models\Cat;
+
 class MenuController extends \admin\base\RestController
 {
     public function actionAll()
     {
         $data = [];
-        foreach (\cmsadmin\models\Cat::find()->all() as $cat) {
-            $data[] = [
-                'name' => $cat->name,
-                'rewrite' => $cat->rewrite,
-                'id' => $cat->id,
-                'default_nav_id' => $cat->default_nav_id,
-                '__items' => $this->actionGetByCatRewrite($cat->rewrite),
+        foreach (Cat::find()->asArray()->all() as $cat) {
+            $data[$cat['id']] = [
+                'name' => $cat['name'],
+                'rewrite' => $cat['rewrite'],
+                'id' => $cat['id'],
+                'default_nav_id' => $cat['default_nav_id'],
+                '__items' => $this->actionGetByCatRewrite($cat['rewrite']),
             ];
         }
-
         return $data;
     }
 

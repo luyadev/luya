@@ -21,7 +21,7 @@ zaa.service('MenuService', function($http) {
 		service.cats = [];
 		$http.get('admin/api-cms-menu/all').success(function(response) {
 			for (var i in response) {
-				service.cats.push({ name : response[i]['name'], id : response[i]['id']});
+				service.cats.push({ name : response[i]['name'], id : parseInt(response[i]['id'])});
 			}
 			service.menu = response;
 		});
@@ -57,8 +57,10 @@ zaa.controller("DropNavController", function($scope, $http, MenuService) {
     }
 })
 
-zaa.controller("CmsMenuTreeController", function($scope, $state, MenuService, DroppableBlocksService, AdminLangService) {
+zaa.controller("CmsMenuTreeController", function($scope, $state, MenuService, DroppableBlocksService, AdminLangService, CmsLayoutService) {
     
+	CmsLayoutService.load();
+	
 	$scope.AdminLangService = AdminLangService;
 	
 	$scope.AdminLangService.load(true);

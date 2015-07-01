@@ -6,6 +6,20 @@ zaa.factory('ApiCmsBlock', function($resource) {
 	return $resource('admin/api-cms-block/:id');
 });
 
+zaa.factory('CmsLayoutService', function($resource) {
+	var service = [];
+	
+	service.data = [];
+	
+	service.resource = $resource('admin/api-cms-layout/:id');
+	
+	service.load = function() {
+		service.data = service.resource.query();
+	}
+	
+	return service;
+});
+
 zaa.factory('ApiCmsNavItemPageBlockItem', function($resource) {
 	return $resource('admin/api-cms-navitempageblockitem/:id', { id : '@_id' }, {
 		save : {

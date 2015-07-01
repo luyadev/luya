@@ -5,7 +5,7 @@ zaa.directive("createForm", function() {
 			data : '='
 		},
 		templateUrl : 'createform.html',
-		controller : function($scope, $http, AdminLangService, ApiCmsCat, MenuService, Slug) {
+		controller : function($scope, $http, AdminLangService, MenuService, Slug) {
 			
 			$scope.error = [];
 			$scope.success = false;
@@ -14,9 +14,11 @@ zaa.directive("createForm", function() {
 			
 			$scope.AdminLangService = AdminLangService;
 			
+			$scope.MenuService = MenuService;
+			
 			$scope.lang = $scope.AdminLangService.data;
 			
-			$scope.cat = ApiCmsCat.query();
+			$scope.cat = $scope.MenuService.cats;
 			
 			$scope.data.nav_item_type = 1;
 			$scope.data.parent_nav_id = 0;
@@ -31,12 +33,10 @@ zaa.directive("createForm", function() {
 			
 			$scope.navitems = [];
 			
-			$scope.$watch(function() { return $scope.data.cat_id }, function(newValue) {
-				if (newValue !== undefined) {
-					$http.get('admin/api-cms-menu/get-by-cat-id/', { params: { 'catId' : newValue }}).success(function(response) {
-						$scope.data.parent_nav_id = 0;
-						$scope.navitems = response;
-					});
+			$scope.$watch(function() { return $scope.data.cat_id }, function(n, o) {
+				if (n !== undefined && n !== o) {
+					$scope.data.parent_nav_id = 0;
+					$scope.navitems = MenuService.menu[n];
 				}
 			});
 			
@@ -63,7 +63,7 @@ zaa.directive("createForm", function() {
 	}
 });
 
-zaa.directive("createFormPage", function() {
+zaa.directive("createFormPage", function(CmsLayoutService) {
 	return {
 		restrict : 'EA',
 		scope : {
@@ -71,9 +71,9 @@ zaa.directive("createFormPage", function() {
 		},
 		templateUrl : 'createformpage.html',
 		controller : function($scope, $resource) {
-			
-			$scope.layouts = $resource('admin/api-cms-layout/:id').query();
-			
+			CmsLayoutService.data.$promise.then(function(response) {
+				$scope.layouts = response;
+			});
 			$scope.save = function() {
 				
 				$scope.$parent.exec();
