@@ -32,7 +32,6 @@
 		text-align: center;
 		margin-right: 20px;
 		vertical-align: middle;
-		@extend .z-depth-1;
 	}
 }
 
@@ -67,10 +66,9 @@
 
 .log__entry {
 	position: relative;
-	padding: 10px 20px;
+	padding: 3px 20px;
 	background-color: color("shades", "white");
 	border-radius: 3px;
-	@extend .z-depth-1;
 	margin-top: 0;
 
 	&.log__entry--first-of-group {
@@ -95,17 +93,17 @@
 		border-radius: 50%;
 		text-align: center;
 		background-color: color("shades", "white");
-		@extend .z-depth-1;
 	}
 }
 
 .log__user {
 	display: block;
-	margin-bottom: 5px;
-	margin-left: 100px;
+	padding: 5px 0;
+	margin-left: 73px;
 }
 
 .log__time {
-	float: left;
-	width: 100px;
+	display: inline-block;
+	width: 70px;
+	vertical-align: middle;
 }
