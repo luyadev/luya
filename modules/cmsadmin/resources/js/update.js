@@ -65,7 +65,7 @@ zaa.controller("NavController", function($scope, $stateParams, $http, AdminLangS
  * @param $scope.lang
  *            from ng-repeat
  */
-zaa.controller("NavItemController", function($scope, $http, $timeout) {
+zaa.controller("NavItemController", function($scope, $http, $timeout, MenuService) {
 	
 	$scope.NavController = $scope.$parent;
 	
@@ -88,7 +88,8 @@ zaa.controller("NavItemController", function($scope, $http, $timeout) {
 		var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 		var navItemId = data.id;
 		$http.post('admin/api-cms-navitem/update-item?navItemId=' + navItemId, $.param({ title : data.title, rewrite : data.rewrite }), headers).success(function(response) {
-			Materialize.toast('<span> Die Seite «'+data.title+'» wurde aktualisiert.</span>', 2000)
+			Materialize.toast('<span> Die Seite «'+data.title+'» wurde aktualisiert.</span>', 2000);
+			MenuService.refresh();
 			$scope.refresh();
 			$scope.toggleSettings();
 		}).error(function(e) {
