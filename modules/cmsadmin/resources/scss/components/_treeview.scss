@@ -35,7 +35,7 @@ $treeview--active-color: $blue !default;
 		border: 1px dotted $treeview--active-color;
 	}
 	&.treeview__drop--hover {
-		background-color: rgba(66,165,245,0.5);
+		background-color: rgba($treeview--active-color ,0.5);
 	}
 }
 
@@ -56,6 +56,9 @@ $treeview--active-color: $blue !default;
 
 	&.active {
 		color: $treeview--active-color;
+	}
+	&.treeview__link--hover {
+		background-color: rgba($treeview--active-color, 0.5);
 	}
 }
 

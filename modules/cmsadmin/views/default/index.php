@@ -123,7 +123,7 @@
         <div class="treeview__drop" ng-class="{ 'treeview__drop--visible': showDrag }" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : false, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}">
         </div>
 
-        <a class="treeview__link waves-effect waves-blue" ng-click="go(data.id)" ng-class="{'active' : isCurrentElement(data.id) }" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : false, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onChildDrop()', multiple : true}">
+        <a class="treeview__link" ng-click="go(data.id)" ng-class="{'active' : isCurrentElement(data.id), 'waves-effect waves-blue' : !showDrag }" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : false, tolerance : 'pointer', hoverClass : 'treeview__link--hover' }" jqyoui-droppable="{onDrop: 'onChildDrop()', multiple : true}">
             <i ng-class="{ 'treeview__move--visible': showDrag }" class="mdi-action-open-with treeview__move left"></i>
             <div class="treeview__empty-circle"></div>
             {{data.title}}
