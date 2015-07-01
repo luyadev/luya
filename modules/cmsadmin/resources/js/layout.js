@@ -92,10 +92,8 @@ zaa.controller("CmsMenuTreeController", function($scope, $state, MenuService, Dr
     /* drag & drop integration */
     
     $scope.onStart = function() {
-		//console.log('on_Start');
 	};
 	
 	$scope.onStop = function() {
-		//console.log('on_Stop');
 	};
 });
