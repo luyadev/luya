@@ -13,13 +13,10 @@ APP (your luya project application)
 - app-assets.md
 - app-assets-bower.md
 - app-blocks.md
+- app-block-types.md
+- app-layouts.md
 - app-menu.md
 - app-translation.md
-
-CMS (general cms infos)
---
-- cms-blocks.md
-- cms-layouts.md
 
 ADMIN (general admin infos)
 --
