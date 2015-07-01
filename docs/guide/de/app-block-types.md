@@ -43,8 +43,8 @@ Typen-Feld-Typen
 ------------------
 Natürlich benötigen wir mehr als nur Textfelder für die Typen-Einträge. Hier eine Übersicht aller möglichen Type und deren Rückgabe Wert und beschreibung.
 
-| Name | Rückgabewert | Beschreibung | Optionale Paramter
-| ---- | ------------ | ------------ | --------------------
+| Name | Rückgabewert | Beschreibung | Optionale Paramter | 
+| ---- | ------------ | ------------ | -------------------- |
 | zaa-text | string | Erstellt ein Text `input type=text`. | 
 | zaa-password  | string | Erstellt ein Passwort Feld `input type=password`. | 
 | zaa-textarea | string | Erstellt ein mehrzeiliges Textfeld `textarea`. | 
