@@ -38,22 +38,21 @@
                                     ">
                                         <div class="log__entry" style="z-index: {{item.items.length - key}}" ng-class="{ 'log__entry--first-of-group' : userChanged || iconChanged }">
 
-                                            <!-- Show if user changed -->
+                                            <!-- Show if user or icon changed -->
                                             <div class="log__entry-header" ng-show="userChanged || iconChanged">
                                                 <i class="{{log.icon}}"></i>
                                             </div>
 
                                             <div class="log__entry-body">
-                                                <small ng-show="userChanged || iconChanged">
+                                                <small ng-show="userChanged || iconChanged" class="log__user">
                                                     <i class="mdi-social-person"></i>
                                                     {{ log.name }}
-                                                    <span style="width: 20px; display: inline-block;"></span>
                                                 </small>
                                                 <p>
                                                     «{{log.alias}}»
                                                     <strong ng-if="log.is_update == 1">bearbeitet.</strong>
                                                     <strong ng-if="log.is_insert == 1">hinzugefügt.</strong>
-                                                    <span class="right">{{ log.timestamp * 1000 | date:"HH:mm" }} Uhr</span>
+                                                    <span class="log__time"><i class="mdi-image-timer"></i> {{ log.timestamp * 1000 | date:"HH:mm" }} Uhr</span>
                                                 </p>
                                             </div>
                                         </div>
