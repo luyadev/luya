@@ -18,6 +18,21 @@ Du kannst nun in deiner neuen *2columns.twig* Datei ein Markup hinterlegen und d
 ```
 Dies wird dem Benutzer nun 2 Platzerhalter zur verfügung stellen an dem er Blöcke platzieren kann.
 
+Importiern und Benutzen
+-----------------------
+Um ein neus layout einzufügen oder ein bestehendes Layout zu aktualsierien öffnen Sie das Terminal und wechseln in de `public_html` Ordner. Dort führen Sie den `exec/import` befehl aus.
+```sh
+php index.php exec/import
+```
+Der Import Prozess wird zurück geben was gemacht wurde:
+```
+[layouts] => Array
+(
+    [main.twig] => existing cmslayout main.twig updated.
+    [2columns.twig] => existing cmslayout 2columns.twig updated.
+)
+```
+
 > Die Namen der Platzhalter (labels) können im Administrationbereich unter *CMS-EInstellunge->Layouts* angepasst werden.
 
 > Twig Funktionen funktionieren auf in einem CMS Layout.
