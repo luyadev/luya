@@ -62,6 +62,7 @@
 .navbar__search-input {
 	margin: 0 !important;
 	width: calc(100% - 4rem) !important;
+	max-width: 100%;
 	transition: 0.4s 0.25s ease color, 0.4s 0.25s ease background-color !important;
 
 	& + label i {
