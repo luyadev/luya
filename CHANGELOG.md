@@ -1,6 +1,10 @@
 LUYA CHANGELOG
 ==============
 
+1.0.0-alpha9 (in progress)
+--------------------------
+
+
 1.0.0-alpha8 (30. Jun 2015)
 --------------------------
 - fixed bug in links component `getLink($link)` returns false.
