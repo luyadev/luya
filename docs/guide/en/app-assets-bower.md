@@ -26,7 +26,7 @@ asset
 -----
 create php asset class based in your config above:
 ```php
-class AssetBower extends \yii\web\AssetBundle
+class JqueryAsset extends \luya\base\Asset
 {
 	public $sourcePath = '@bower';
 
@@ -35,5 +35,4 @@ class AssetBower extends \yii\web\AssetBundle
         'jquery-ui/jquery-ui.min.js',
     ];
 }
-
 ```
