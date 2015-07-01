@@ -42,7 +42,6 @@ class ImageBlock extends \cmsadmin\base\Block
         return 'Bild';
     }
 }
-
 ```
 
 To see all configuration possibilitys checkout the [Cms Block Guide](cms-blocks.md).
