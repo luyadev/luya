@@ -49,10 +49,12 @@
                                                     {{ log.name }}
                                                 </small>
                                                 <p>
-                                                    «{{log.alias}}»
-                                                    <strong ng-if="log.is_update == 1">bearbeitet.</strong>
-                                                    <strong ng-if="log.is_insert == 1">hinzugefügt.</strong>
-                                                    <span class="log__time"><i class="mdi-image-timer"></i> {{ log.timestamp * 1000 | date:"HH:mm" }} Uhr</span>
+                                                    <small class="log__time">{{ log.timestamp * 1000 | date:"HH:mm" }} Uhr</small>
+                                                    <span class="log__info">
+                                                        {{log.alias}}
+                                                        <span ng-if="log.is_update == 1">bearbeitet.</span>
+                                                        <span ng-if="log.is_insert == 1">hinzugefügt.</span>
+                                                    </span>
                                                 </p>
                                             </div>
                                         </div>
