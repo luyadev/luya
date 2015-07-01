@@ -98,3 +98,14 @@
 		@extend .z-depth-1;
 	}
 }
+
+.log__user {
+	display: block;
+	margin-bottom: 5px;
+	margin-left: 100px;
+}
+
+.log__time {
+	float: left;
+	width: 100px;
+}
