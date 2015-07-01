@@ -1,6 +1,6 @@
 <script type="text/ng-template" id="recursion.html">
-<div class="collapsible__header collapsible-header"><i class="mdi-navigation-unfold-more"></i> {{placeholder.label}}</div>
-<div class="collapsible__body collapsible-body">
+<div class="accordion__header" ng-click="placeholder.open = !placeholder.open"><i class="mdi-navigation-unfold-more"></i> {{placeholder.label}}</div>
+<div class="accordion__body">
     
     <div class="page__drop">
         <div class="page__drop-zone" ng-controller="DropBlockController" ng-model="droppedBlock" data-sortindex="0" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'page__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}">
@@ -217,8 +217,8 @@
                                 </div>
                                 <div class="col s12" ng-switch-when="1" ng-controller="NavItemTypePageController">
 
-                                    <ul class="collapsible" data-collapsible="expandable">
-                                        <li ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'"></li>
+                                    <ul class="accordion">
+                                        <li class="accordion__entry" ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" ng-class="{ 'accordion__entry--open' : placeholder.open }"></li>
                                     </ul>
 
                                 </div>

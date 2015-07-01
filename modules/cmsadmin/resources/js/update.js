@@ -156,8 +156,13 @@ zaa.controller("NavItemTypePageController", function($scope, $http) {
 					$scope.container.__placeholders[i]['__nav_item_page_block_items'] = new_ph[i]['__nav_item_page_block_items'];
 				}
 			}
+
+            for (var i in $scope.container.__placeholders) {
+                $scope.container.__placeholders[i]['open'] = false;
+                console.log($scope.container.__placeholders[i]);
+            }
 		});
-	}
+	};
 	
 	$scope.refreshNested = function(prevId, placeholderVar) {
 		
