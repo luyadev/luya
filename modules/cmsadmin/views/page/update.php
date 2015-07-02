@@ -55,8 +55,8 @@
                     </div>
                 </div>
             </div>
-            <ul ng-show="block.__placeholders.length" class="collapsible" data-collapsible="expandable">
-                <li ng-repeat="placeholder in block.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" ng-class="{ 'accordion__entry--open' : isOpen }"></li>
+            <ul ng-show="block.__placeholders.length" class="accordion" >
+                <li class="accordion__entry" ng-repeat="placeholder in block.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" ng-class="{ 'accordion__entry--open' : isOpen }"></li>
             </ul>
         </div>
 
