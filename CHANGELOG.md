@@ -9,17 +9,17 @@ LUYA CHANGELOG
 --------------------------
 - fixed bug in links component `getLink($link)` returns false.
 - added `hasLink($link)` to links component.
-- added `#131` admin search data tracking.
+- added `#131` Admin search data tracking.
 - fixed `#165` Logout-Button Firefox issue.
-- fixed `#156` max field width..
-- fixed `#155` added ng-cloak.
-- fixed `#151` verify cmslayouts placeholders on import, compare placeholders.
-- fixed `#147` hide fields when creating page.
-- fixed `#143` added placeholder and initvalue.
-- fixed `#138` mail componentend extended.
-- fixed `#132` added cms pages to global search.
-- implemented `#131` track search querys.
-- fixed `#129` Plceholder in var types.
+- fixed `#156` Max field width..
+- fixed `#155` Added ng-cloak.
+- fixed `#151` Verify cmslayouts placeholders on import, compare placeholders.
+- fixed `#147` Hide fields when creating page.
+- fixed `#143` Added placeholder and initvalue.
+- fixed `#138` Mail componentend extended.
+- fixed `#132` Added cms pages to global search.
+- implemented `#131` Track search querys.
+- fixed `#129` Placeholder in var types.
 - implemented `#126` Config block styling.
 - implemented `#123` Dashboard styling.
 - fixed `#121` Globlal search design.
