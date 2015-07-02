@@ -17,6 +17,7 @@ APP (your luya project application)
 - app-cmslayouts.md
 - app-menu.md
 - app-translation.md
+- app-module.md
 
 ADMIN (general admin infos)
 --
@@ -24,7 +25,6 @@ ADMIN (general admin infos)
 
 APP-MODULE (your luya project modules)
 --
-- app-module.md
 - app-module-frontend.md
 - app-module-assets.md
 
