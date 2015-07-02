@@ -19,7 +19,6 @@ class TestBlock extends \cmsadmin\base\Block
     public function config()
     {
         return [
-            /*
             'vars' => [
                 ['var' => 'text', 'label' => 'Text', 'type' => 'zaa-text', 'placeholder' => 'Ich bin ein Platzhalter'],
                 ['var' => 'textarea', 'label' => 'Textarea', 'type' => 'zaa-textarea', 'placeholder' => 'Ich bin ein im Text'],
@@ -33,8 +32,7 @@ class TestBlock extends \cmsadmin\base\Block
                 ['var' => 'imagearrayupload', 'label' => 'ImageArrayUpload', 'type' => 'zaa-image-array-upload'],
                 ['var' => 'filearrayupload', 'label' => 'FileArrayUpload', 'type' => 'zaa-file-array-upload'],
                 ['var' => 'listarray', 'label' => 'ListArray', 'type' => 'zaa-list-array'],
-            ]
-            */
+            ],
             "placeholders" => [
                 ['var' => 'links', 'label' => 'links'],
                 ['var' => 'rechts', 'label' => 'Rechts']
