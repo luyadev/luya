@@ -287,7 +287,7 @@
 
                 <div class="center" ng-show="(searchResponse.length == 0 && searchResponse != null) && searchQuery.length > 2">
                     <br /><br /><br />
-                    <p>Es wurden keine Ergebnise gefunden.</p>
+                    <p>Es wurden keine Ergebnisse gefunden.</p>
                 </div>
 
                 <div class="center" ng-show="searchResponse==null && searchQuery.length > 2">
