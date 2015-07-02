@@ -52,7 +52,7 @@ zaa.directive("createForm", function() {
 					$scope.data.title = null;
 					$scope.data.rewrite = null;
 					if ($scope.data.isInline) {
-						$scope.$parent.$parent.$parent.getItem($scope.data.lang_id, $scope.data.nav_id); /* getItem(nav_id, lang_id); */
+						$scope.$parent.$parent.getItem($scope.data.lang_id, $scope.data.nav_id); /* getItem(nav_id, lang_id); */
 					}
 					
 				}, function(reason) {
