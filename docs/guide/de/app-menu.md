@@ -8,11 +8,12 @@ Das Links Komponentenobjekt bietet die mächtige Funktion `findByArguemnts()`, w
 
 | Key | Beschreibung | 
 | --- | ------------ | 
+| full_url | Gesame URL inklusive der **aktuellen** sprache, nicht die Sprache der Seite
 | url | Gesamt URL mit unteren Pfadelementen
 | rewrite | Entspricht dem Pfadsegment im CMS Admin
-| id | numerische ID aus der Datenbank
+| nav_id | numerische ID aus der Datenbank der *nav* Tabelle
 | parent_nav_id | Die der vorher gehenden Seite
-| nav_item_id | Die Id welche eindeutig ist für den Key mit der Sprache
+| id | Die Id welche eindeutig ist für den Key mit der Sprache also die Tabelle *nav_item*
 | title | Den Seiten Titel
 | lang | Den Sprachen short_code (zbsp. de, en, etc.)
 | lang_id | Die Sprachen ID aus der Datenbank
