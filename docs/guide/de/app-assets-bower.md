@@ -24,7 +24,7 @@ Stellen Sie sicher das in Ihrer `composer.json` Datei auch das folgende Segement
 
 Bower im Asset verwenden
 ------------------------
-Die *Asset Datei* untersheide sich nicht gross von den üblichen (Projekt Assets)[app-assets.md]. Der massgebende unterschied liegt im `$sourcePath` welcher nun auf das Bower Verzeichnis zielen soll:
+Die *Asset Datei* untersheide sich nicht gross von den üblichen [Projekt Assets](app-assets.md). Der massgebende unterschied liegt im `$sourcePath` welcher nun auf das Bower Verzeichnis zielen soll:
 ```php
 class JqueryAsset extends \luya\base\Asset
 {

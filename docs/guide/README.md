@@ -43,7 +43,7 @@ LUYA (general luya infos)
 NGREST (general ngrest infos)
 --
 - ngrest.md
-- ngrest-plugins.md
 - ngrest-activewindow.md
+- ngrest-plugins.md
 - ngrest-plugin-checkboxrelation.md
 - ngrest-plugin-select.md
