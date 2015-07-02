@@ -1,8 +1,7 @@
 <div style="padding:50px; margin:50px; text-align:center; background-color:#F0F0F0;">
-	<h1>Herzlich Willkommen</h1>
+	<h1>Herzlich willkommen.</h1>
     <p>
-        Nutzen Sie die Hauptnavigation um zwischen Modulen zu wechseln.<br />
-        Mithilfe der Seitennavigation können Sie sich die Kategorien des Moduls ansehen.
+        Über die Hauptnavigation oben können Sie zwischen den Modulen wechseln. <br />
+        Die Seitennavigation links gibt Ihnen Zugriff auf die Funktionen des angewählten Moduls.
     </p>
-    <p>http://luya.io</p>
 </div>
