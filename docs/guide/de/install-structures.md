@@ -11,6 +11,7 @@ Deine *LUYA* installation sollte nach dem checkout des *luya-kickstarter* projek
 ├── filters
 ├── config
 ├── migrations
+├── messages
 ├── modules
 │   ├── <APP-MODULE>
 │   │   ├── assets
