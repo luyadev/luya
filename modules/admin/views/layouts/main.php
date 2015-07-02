@@ -103,7 +103,7 @@
 
                 </div>
                 <div class="col s1">
-                    <button class="btn-floating red lighten-2 right" ng-click="toggleModal()"><i class="mdi-navigation-close small right" ng-show="allowSelection=='true'"></i></button>
+                    <button class="btn-floating red lighten-2 right" ng-click="toggleModal()" ng-show="allowSelection=='true'"><i class="mdi-navigation-close small right"></i></button>
                 </div>
             </div>
 
