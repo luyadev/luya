@@ -11,7 +11,9 @@ zaa.controller("NavController", function($scope, $stateParams, $http, AdminLangS
 	$scope.placeholderState = $scope.PlaceholderService.status;
 	
 	$scope.$watch('placeholderState', function(n, o) {
-		$scope.PlaceholderService.delegate(n);
+		if (n !== o && n !== undefined) {
+			$scope.PlaceholderService.delegate(n);
+		}
 	});
 	
 	$scope.navData = {};
