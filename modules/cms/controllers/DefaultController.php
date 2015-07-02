@@ -51,13 +51,13 @@ class DefaultController extends \cms\base\Controller
             throw new NotFoundHttpException("The requested link '$activeLink' does not exist.");
         }
         
-        $link = Yii::$app->links->getLink($suffix);
+        $link = Yii::$app->links->findOneByArguments(['lang_id' => $this->getLangId(), 'url' => $activeLink]);
         
         // set the activeLink based on the suffix, cause the modul params are not part of the links component.
         Yii::$app->links->activeLink = $suffix;
         
         return $this->render('index', [
-            'pageContent' => $this->renderItem($link['nav_item_id'], $appendix),
+            'pageContent' => $this->renderItem($link['id'], $appendix),
         ]);
     }
     

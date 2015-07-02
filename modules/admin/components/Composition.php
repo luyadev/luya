@@ -37,7 +37,7 @@ class Composition extends \yii\base\Component
             return;
         }
     
-        return Url::trailing(implode('/', $this->_composition));
+        return Url::trailing(implode('/', $this->_composition)); // Remove trailing slash
     }
     
     public function getLocale()

@@ -8,22 +8,21 @@ use \cmsadmin\models\Cat;
 
 class Links extends \yii\base\Component
 {
-    private $_links = [];
+    private $links = [];
     
     public $loadIsHidden = false;
     
     private $compositionPrefix = null;
-    
-    private $_compositionLangShortCode = null;
     
     /* cms collection */
     
     public function init()
     {
         $this->compositionPrefix = Yii::$app->composition->getFull();
-        $this->_compositionLangShortCode = Yii::$app->composition->getKey('langShortCode');
         $this->loadData();
-        $this->_links = $this->urls;
+        foreach ($this->urls as $k => $args) {
+            $this->addLink($k, $args);
+        }
     }
     
     private $urls = [];
@@ -40,21 +39,22 @@ class Links extends \yii\base\Component
             if ($this->subNodeExists($item['id'])) {
                 $this->iteration($item['id'], $urlPrefix.$item['rewrite'].'/', ($depth + 1));
             }
+            if (!array_key_exists($urlPrefix.$item['rewrite'], $this->urls)) {
                 $rewrite = $urlPrefix.$item['rewrite'];
-                $this->urls[] = [
+                $this->urls[$rewrite] = [
                     'full_url' => $this->compositionPrefix . $rewrite,
                     'url' => $rewrite,
                     'rewrite' => $item['rewrite'],
-                    'nav_id' => (int) $item['id'],
+                    'id' => (int) $item['id'],
                     'parent_nav_id' => (int) $parentNavId,
-                    //'nav_item_id' => (int) $item['nav_item_id'],
-                    'id' => (int) $item['nav_item_id'],
+                    'nav_item_id' => (int) $item['nav_item_id'],
                     'title' => $item['title'],
                     'lang' => $item['lang_short_code'],
                     'lang_id' => $item['lang_id'],
                     'cat' => $item['cat_rewrite'],
                     'depth' => (int) $depth,
                 ];
+            }
         }
     }
     
@@ -73,21 +73,14 @@ class Links extends \yii\base\Component
     
     /* luya base collection */
     
-    /*
     public function getAll()
     {
-        return $this->_links;
-    }
-    */
-    
-    public function getLinks()
-    {
-        return $this->_links;
+        return $this->links;
     }
     
     public function findByArguments(array $argsArray)
     {
-        $_index = $this->getLinks();
+        $_index = $this->getAll();
     
         foreach ($argsArray as $key => $value) {
             foreach ($_index as $link => $args) {
@@ -110,6 +103,7 @@ class Links extends \yii\base\Component
         if (empty($links)) {
             return false;
         }
+    
         return array_values($links)[0];
     }
     
@@ -172,21 +166,22 @@ class Links extends \yii\base\Component
         return $this->findOneByArguments(['parent_nav_id' => $link['id']]);
     }
     
-    /*
     public function addLink($link, $args)
     {
         $this->links[$link] = $args;
     }
-    */
     
     public function hasLink($link)
     {
-        return ($this->findOneByArguments(['url' => $link])) ? true : false;
+        if (empty($link)) {
+            return false;
+        }
+        return array_key_exists($link, $this->links);
     }
     
     public function getLink($link)
     {
-        return $this->findOneByArguments(['url' => $link]);
+        return ($this->hasLink($link)) ? $this->links[$link] : false;
     }
     
 
@@ -196,12 +191,12 @@ class Links extends \yii\base\Component
     
     public function setActiveLink($activeLink)
     {
-        $this->_activeLink = $activeLink;
+    $this->_activeLink = $activeLink;
     }
     
     public function getActiveLink()
     {
-        return $this->_activeLink;
+    return $this->_activeLink;
     }
     
     */
@@ -239,7 +234,7 @@ class Links extends \yii\base\Component
         
         while (array_pop($parts)) {
             $match = implode('/', $parts);
-            if ($this->findOneByArguments(['url' => $match])) {
+            if (array_key_exists($match, $this->getAll())) {
                 return $match;
             }
         }
@@ -258,8 +253,8 @@ class Links extends \yii\base\Component
     
     public function getDefaultLink()
     {
-        $cat = Cat::getDefault();
-        $link = $this->findOneByArguments(['nav_id' => $cat['default_nav_id'], 'lang' => $this->_compositionLangShortCode]);
+        $cat = Cat::getDefault();  
+        $link = $this->findOneByArguments(['id' => $cat['default_nav_id']]);
         return $link['url'];
     }
 
