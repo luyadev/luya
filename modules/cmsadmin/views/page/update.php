@@ -93,8 +93,9 @@
                                     <div class="toolbar__group">
                                         <div class="switch">
                                             <label>
-                                                Platzhalter offen
-                                                <input type="checkbox">
+                                                <span ng-if="placeholderState">Alle Platzhalter einklappen</span>
+                                                <span ng-if="!placeholderState">Alle Platzhalter ausklappen</span>
+                                                <input type="checkbox" ng-model="placeholderState" ng-true-value="1" ng-false-value="0">
                                                 <span class="lever"></span>
                                             </label>
                                         </div>

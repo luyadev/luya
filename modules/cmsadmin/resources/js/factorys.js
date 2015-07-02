@@ -38,6 +38,18 @@ zaa.factory('ApiCmsNavItemPageBlockItem', function($resource) {
 	});
 });
 
+zaa.factory('PlaceholderService', function() {
+	var service = [];
+	
+	service.status = 0; /* 1 = showplaceholders; 0 = hide placeholders */
+	
+	service.delegate = function(status) {
+		service.status = status;
+	}
+	
+	return service;
+})
+
 zaa.factory('DroppableBlocksService', function($http) {
 	var service = [];
 	

@@ -1,10 +1,18 @@
-zaa.controller("NavController", function($scope, $stateParams, $http, AdminLangService, AdminClassService, MenuService) {
+zaa.controller("NavController", function($scope, $stateParams, $http, AdminLangService, AdminClassService, MenuService, PlaceholderService) {
 	
 	$scope.id = parseInt($stateParams.navId);
 	
 	$scope.isDeleted = false;
 	
 	$scope.menuCats = MenuService.cats;
+	
+	$scope.PlaceholderService = PlaceholderService;
+	
+	$scope.placeholderState = $scope.PlaceholderService.status;
+	
+	$scope.$watch('placeholderState', function(n, o) {
+		$scope.PlaceholderService.delegate(n);
+	});
 	
 	$scope.navData = {};
 
@@ -215,9 +223,19 @@ zaa.controller("NavItemTypePageController", function($scope, $http) {
  * @param $scope.placeholder
  *            from ng-repeat
  */
-zaa.controller("PagePlaceholderController", function($scope, AdminClassService) {
+zaa.controller("PagePlaceholderController", function($scope, AdminClassService, PlaceholderService) {
 	
 	$scope.NavItemTypePageController = $scope.$parent;
+	
+	$scope.PlaceholderService = PlaceholderService;
+	
+	$scope.$watch(function() { return $scope.PlaceholderService.status }, function(n,o) {
+		if (n) {
+			$scope.isOpen = true;
+		} else {
+			$scope.isOpen = false;
+		}
+	});
 	
 	$scope.isOpen = false;
 	
