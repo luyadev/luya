@@ -156,10 +156,12 @@ zaa.controller("NavItemTypePageController", function($scope, $http) {
 					$scope.container.__placeholders[i]['__nav_item_page_block_items'] = new_ph[i]['__nav_item_page_block_items'];
 				}
 			}
+			/*
 
             for (var i in $scope.container.__placeholders) {
                 $scope.container.__placeholders[i]['open'] = false;
             }
+            */
 		});
 	};
 	
@@ -217,10 +219,12 @@ zaa.controller("PagePlaceholderController", function($scope, AdminClassService) 
 	
 	$scope.NavItemTypePageController = $scope.$parent;
 	
+	$scope.isOpen = false;
+	
 	$scope.mouseEnter = function() {
 		var status = AdminClassService.getClassSpace('onDragStart');
-		if (status !== undefined && !$scope.placeholder.open) {
-			$scope.placeholder.open = true;
+		if (status !== undefined && !$scope.isOpen) {
+			$scope.isOpen = true;
 		}
 	};
 });

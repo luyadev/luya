@@ -1,5 +1,5 @@
 <script type="text/ng-template" id="recursion.html">
-<div class="accordion__header" ng-mouseenter="mouseEnter()" ng-click="placeholder.open = !placeholder.open"><i class="mdi-navigation-unfold-more"></i> {{placeholder.label}}</div>
+<div class="accordion__header" ng-mouseenter="mouseEnter()" ng-click="isOpen = !isOpen"><i class="mdi-navigation-unfold-more"></i> {{placeholder.label}}</div>
 <div class="accordion__body">
     
     <div class="page__drop">
@@ -56,7 +56,7 @@
                 </div>
             </div>
             <ul ng-show="block.__placeholders.length" class="collapsible" data-collapsible="expandable">
-                <li ng-repeat="placeholder in block.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'"></li>
+                <li ng-repeat="placeholder in block.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" ng-class="{ 'accordion__entry--open' : isOpen }"></li>
             </ul>
         </div>
 
@@ -218,7 +218,7 @@
                                 <div class="col s12" ng-switch-when="1" ng-controller="NavItemTypePageController">
 
                                     <ul class="accordion">
-                                        <li class="accordion__entry" ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" ng-class="{ 'accordion__entry--open' : placeholder.open }"></li>
+                                        <li class="accordion__entry" ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" ng-class="{ 'accordion__entry--open' : isOpen }"></li>
                                     </ul>
 
                                 </div>
