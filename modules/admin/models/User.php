@@ -107,10 +107,10 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
     public function changePassword($newpass, $newpasswd)
     {
         if (strlen($newpass) < 8) {
-            return $this->addError('newpass', 'Das neue Passwort muss mindistens 8 Zeichen lang sein');
+            return $this->addError('newpass', 'Das neue Passwort muss mindestens 8 Zeichen lang sein.');
         }
         if ($newpass !== $newpasswd) {
-            return $this->addError('newpasswd', 'Das neue Passwort muss mit der wiederholung überein stimmen.');
+            return $this->addError('newpasswd', 'Das neue Passwort muss mit der Wiederholung übereinstimmen.');
         }
 
         $this->password = $newpass;
@@ -119,11 +119,11 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
             if ($this->save()) {
                 return true;
             } else {
-                $this->addError('newpass', 'Error while storing new password, database error.');
+                $this->addError('newpass', 'Fehler beim Speichern des Passworts aufgetreten. (Datenbankfehler)');
             }
         }
 
-        return $this->addError('newpass', 'error while encoding password!');
+        return $this->addError('newpass', 'Fehler beim Verschlüsseln des Passworts aufgetreten!');
     }
 
     /*
@@ -153,7 +153,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
     public function encodePassword()
     {
         if (empty($this->password) || strlen($this->password) < 8) {
-            $this->addError('password', 'the password must be 8 chars');
+            $this->addError('password', 'Das neue Passwort muss mindestens 8 Zeichen lang sein.');
 
             return false;
         }
