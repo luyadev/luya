@@ -41,7 +41,7 @@
 	}
 }
 
-.accordion__entry--open .accordion__body {
+.accordion__entry--open > .accordion__body {
 	height: auto;
 	padding: 20px;
 }
