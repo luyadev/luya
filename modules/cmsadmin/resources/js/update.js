@@ -159,7 +159,6 @@ zaa.controller("NavItemTypePageController", function($scope, $http) {
 
             for (var i in $scope.container.__placeholders) {
                 $scope.container.__placeholders[i]['open'] = false;
-                console.log($scope.container.__placeholders[i]);
             }
 		});
 	};
@@ -252,10 +251,16 @@ zaa.controller("NavItemTypePageController", function($scope, $http) {
  * @param $scope.placeholder
  *            from ng-repeat
  */
-zaa.controller("PagePlaceholderController", function($scope) {
+zaa.controller("PagePlaceholderController", function($scope, AdminClassService) {
 	
 	$scope.NavItemTypePageController = $scope.$parent;
 	
+	$scope.mouseEnter = function() {
+		var status = AdminClassService.getClassSpace('onDragStart');
+		if (status !== undefined && !$scope.placeholder.open) {
+			$scope.placeholder.open = true;
+		}
+	};
 });
 
 
@@ -390,7 +395,7 @@ zaa.controller("DroppableBlocksController", function($scope, $http, AdminClassSe
 	
 	$scope.onStop = function() {
 		$scope.$apply(function() {
-			AdminClassService.setClassSpace('onDragStart', '');
+			AdminClassService.setClassSpace('onDragStart', undefined);
 		});
 	}
 	

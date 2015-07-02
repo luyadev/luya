@@ -1,9 +1,9 @@
 <script type="text/ng-template" id="recursion.html">
-<div class="accordion__header" ng-click="placeholder.open = !placeholder.open"><i class="mdi-navigation-unfold-more"></i> {{placeholder.label}}</div>
+<div class="accordion__header" ng-mouseenter="mouseEnter()" ng-click="placeholder.open = !placeholder.open"><i class="mdi-navigation-unfold-more"></i> {{placeholder.label}}</div>
 <div class="accordion__body">
     
     <div class="page__drop">
-        <div class="page__drop-zone" ng-controller="DropBlockController" ng-model="droppedBlock" data-sortindex="0" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'page__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}">
+        <div class="page__drop-zone" ng-controller="DropBlockController" ng-model="droppedBlock" data-sortindex="0" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'page__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}">
         </div>
     </div>
 
@@ -12,7 +12,7 @@
     </div>
 
     <div ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController">
-        <div class="block" ng-class="{ 'block--edit' : edit , 'block--is-dirty' : !block.is_dirty }" data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{revert: false, handle : '.block__move', helper : 'clone'}" ng-model="block">
+        <div class="block" ng-class="{ 'block--edit' : edit , 'block--is-dirty' : !block.is_dirty }" data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{snapTolerance : 40, cursor:'move', cursorAt: { top: 0, left: 0 }, revert:true }" ng-model="block">
             <div class="block__toolbar">
                         <div class="left">
                                 <i class="block__move mdi-action-open-with"></i>
@@ -61,7 +61,7 @@
         </div>
 
         <div class="page__drop">
-            <div class="page__drop-zone" ng-controller="DropBlockController" ng-model="droppedBlock" data-sortindex="{{key+1}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'touch', hoverClass : 'page__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}">
+            <div class="page__drop-zone" ng-controller="DropBlockController" ng-model="droppedBlock" data-sortindex="{{key+1}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'page__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()', multiple : true}">
             </div>
         </div>
 
@@ -238,7 +238,7 @@
                 <div class="col s12">
                     <div class="blockholder__group" ng-repeat="item in DroppableBlocksService.blocks">
                         <b class="blockholder__group-title">{{item.group.name}}</b>
-                        <div class="blockholder__block" ng-repeat="block in item.blocks" data-drag="true" jqyoui-draggable="{placeholder: 'keep', index : {{$index}}, onStart : 'onStart', onStop : 'onStop'}" ng-model="item.blocks" data-jqyoui-options="{revert: false, helper : 'clone'}">
+                        <div class="blockholder__block" ng-repeat="block in item.blocks" data-drag="true" jqyoui-draggable="{placeholder: 'keep', index : {{$index}}, onStart : 'onStart', onStop : 'onStop'}" ng-model="item.blocks" data-jqyoui-options="{revert: false, snapTolerance : 40, helper : 'clone', cursor:'move', cursorAt: { top: 0, left: 0 }}">
                             <span ng-bind-html="safe(block.name)"></span>
                         </div>
                     </div>
