@@ -76,7 +76,7 @@ class ImageTextBlock extends \cmsadmin\base\Block
     {
         return  '{% if extras.imageSource and vars.text %}'.
                     '<div>'.
-                        '<img class="{% if extras.imagePosition == "left" %}pull-left{% else %}pull-right{% endif %} img-responsive" src="{{ extras.imageSource }}" style="{% if extras.imagePosition == "right" %}margin-left:{{ extras.margin }}{% else %}margin-right:{{ extras.margin }}{% endif %};margin-bottom:{{ extras.margin }}">'.
+                        '<img class="{% if extras.imagePosition == "left" %}pull-left{% else %}pull-right{% endif %} img-responsive" src="{{ extras.imageSource }}" style="{% if extras.imagePosition == "right" %}margin-left:{{ extras.margin }}{% else %}margin-right:{{ extras.margin }}{% endif %};margin-bottom:{{ extras.margin }}; max-width: 50%;">'.
                         '<p>{{ vars.text }}</p>'.
                     '</div>'.
                     '<br style="clear:both" />'.
