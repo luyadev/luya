@@ -87,10 +87,6 @@ class ImageTextBlock extends \cmsadmin\base\Block
             $this->_source = $img ? $img->source : false;
         }
 
-        if ($this->_source != false && !file_exists($this->_source)) {
-            $this->_source = false;
-        }
-
         return $this->_source;
     }
 
@@ -99,7 +95,7 @@ class ImageTextBlock extends \cmsadmin\base\Block
         return [
             'imageSource' => $this->getImageSource(),
             'imagePosition' => $this->getVarValue('imagePosition', 'left'),
-            'imageWidth' => $this->getImageSource() ? getimagesize($this->getImageSource())[0] : 0,
+            'imageWidth' => $this->getImageSource() ? @getimagesize($this->getImageSource())[0] : 0,
             'margin' => $this->getCfgValue('margin',$this->defaultMargin),
             'text' => $this->getText()
         ];
