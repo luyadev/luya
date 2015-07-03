@@ -174,10 +174,11 @@ zaa.directive('storageImageUpload', function($http, ApiAdminFilter) {
 	return {
 		restrict : 'E',
 		scope : {
-			ngModel : '=',
+			ngModel : '='
 		},
 		link : function(scope) {
-			
+
+            scope.imageLoading = false;
 			scope.fileId = 0;
 			scope.filterId = 0;
 			scope.imageinfo = null;
@@ -188,6 +189,9 @@ zaa.directive('storageImageUpload', function($http, ApiAdminFilter) {
 					alert('Sie müssen zuerst eine Datei auswählen um den Filter anzuwenden.');
 					return;
 				}
+
+                scope.imageLoading = true;
+
 				$http.post('admin/api-admin-storage/image-upload', $.param({ fileId : scope.fileId, filterId : scope.filterId }), {
 		        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 		        }).success(function(success) {
@@ -197,11 +201,15 @@ zaa.directive('storageImageUpload', function($http, ApiAdminFilter) {
 		        	} else {
 		        		scope.ngModel = success.id;
 		        	}
+
+                    scope.imageLoading = false;
 				}).error(function(error) {
 					alert('Beim Anwenden des Filters auf die Datei ist ein Fehler Passiert');
 	        		console.log(error);
+
+                    scope.imageLoading = false;
 				});
-			}
+			};
 			
 			scope.$watch(function() { return scope.filterId }, function(n, o) {
 				if (n != 0 && n !== undefined && scope.fileId !== 0) {
