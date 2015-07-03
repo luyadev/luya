@@ -94,6 +94,9 @@ class ImageTextBlock extends \cmsadmin\base\Block
 
     public function extraVars()
     {
+        if($this->getImageSource() == false)
+            return false;
+
         return [
             'imageSource' => $this->getImageSource(),
             'imagePosition' => $this->getVarValue('imagePosition', 'left'),
