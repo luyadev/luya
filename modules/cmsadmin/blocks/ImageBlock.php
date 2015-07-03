@@ -37,14 +37,23 @@ class ImageBlock extends \cmsadmin\base\Block
 
     public function twigFrontend()
     {
-        $image = '{% if extras.image is not empty %}<div class="image"><figure><img class="img-responsive" src="{{extras.image.source}}" {% if vars.caption is not empty %}alt="{{vars.caption}}" title="{{vars.caption}}"{% endif %} border="0" />';
-        $image.= '{% if vars.caption is not empty %}<figcaption>{{vars.caption}}</figcaption>{% endif %}</figure></div>{% endif %}';
-        return $image;
+        return '
+            {% if extras.image is not empty %}
+                <div class="image">
+                    <figure>
+                        <img class="img-responsive" src="{{extras.image.source}}" {% if vars.caption is not empty %}alt="{{vars.caption}}" title="{{vars.caption}}"{% endif %} border="0" />
+                        {% if vars.caption is not empty %}
+                            <figcaption>{{vars.caption}}</figcaption>
+                        {% endif %}
+                    </figure>
+                </div>
+            {% endif %}
+        ';
     }
 
     public function twigAdmin()
     {
-        $image = '{% if extras.image.source %}<p><img src="{{extras.image.source}}" border="0" height="100" /><p>{% else %}<span class="block__empty-text">Es wurde noch kein Bild Hochgeladen.</span>{% endif %}';
+        $image = '{% if extras.image.source %}<p><img src="{{extras.image.source}}" border="0" style="max-width: 100%;" /><p>{% else %}<span class="block__empty-text">Es wurde noch kein Bild Hochgeladen.</span>{% endif %}';
         $image.= '{% if vars.caption is not empty %}{{vars.caption}}{% endif %}';
 
         return $image;

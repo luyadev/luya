@@ -415,14 +415,19 @@ zaa.directive("zaaListArray", function() {
 			'label' : '@label',
 			'grid' : '@grid'
 		},
-		controller : function($scope) {
+		controller : function($scope, $element) {
 
 			if ($scope.model == undefined) {
 				$scope.model = [];
 			}
+
+            if($scope.model.length == 0) {
+                $scope.model = [{ value: '' }];
+            }
 			
 			$scope.add = function() {
 				$scope.model.push({ value : '' });
+                $scope.setFocus();
 			};
 			
 			$scope.remove = function(key) {
@@ -437,6 +442,16 @@ zaa.directive("zaaListArray", function() {
 				}
 			};
 
+            $scope.setFocus = function() {
+                setTimeout(function() {
+                    var input = $element.children('.list').children('.list__item:last-of-type').children('.list__left').children('input');
+                    console.log(input);
+                    if(input.length == 1) {
+                        input[0].focus();
+                    }
+                }, 50);
+            }
+
 		},
 		template : function() {
 			//return '<div class="col s12"><h5>{{label}}</h5><div ng-repeat="(key,row) in model" class="row"><div class="col input-field s10"><input type="text" ng-model="row.value" /></div><div class="col input-field s2"><button type="button" class="btn" ng-click="remove(key)">Entfernen</button></div></div><div class="row"><div class="col s12 field-input"><button ng-click="add()" class="btn" type="button">+ Hinzufügen</button></div></div></div>';
@@ -444,7 +459,7 @@ zaa.directive("zaaListArray", function() {
                         '<h5>Auflistung</h5>' +
                         '<div ng-repeat="(key,row) in model" class="list__item">' +
                             '<div class="list__left">' +
-                                '<input type="text" ng-model="row.value" />' +
+                                '<input class="list__input" type="text" ng-model="row.value" />' +
                             '</div>' +
                             '<div class="list__right">' +
                                 '<button class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="mdi-content-remove"></i></button>' +

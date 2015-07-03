@@ -39,11 +39,11 @@ class ListBlock extends \cmsadmin\base\Block
 
     public function twigFrontend()
     {
-        return '{% if vars.elements is not empty %}<{{ extras.listType }}>{% for row in vars.elements %}<li>{{ row.value }}</li>{% endfor %}</{{ extras.listType }}>{% endif %}';
+        return '{% if vars.elements is not empty %}<{{ extras.listType }}>{% for row in vars.elements if row.value is not empty %}<li>{{ row.value }}</li>{% endfor %}</{{ extras.listType }}>{% endif %}';
     }
 
     public function twigAdmin()
     {
-        return '{% if vars.elements is empty%}<span class="block__empty-text">Es wurde noch keine Aufzählung eingegeben.</span>{% else %}<{{ extras.listType }}>{% for row in vars.elements %}<li>{{ row.value }}</li>{% endfor %} </{{ extras.listType }}>{% endif %}';
+        return '{% if vars.elements is empty%}<span class="block__empty-text">Es wurde noch keine Aufzählung eingegeben.</span>{% else %}<{{ extras.listType }}>{% for row in vars.elements if row.value is not empty %}<li>{{ row.value }}</li>{% else %}<span class="block__empty-text">Es wurde noch keine Aufzählung eingegeben.</span>{% endfor %}</{{ extras.listType }}>{% endif %}';
     }
 }
