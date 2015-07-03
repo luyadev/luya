@@ -67,4 +67,4 @@ Database table naming convention
 
 Examples:
 - for the modules __contact__ and __contactadmin__ the database prefix would be __contact__.
-- for the module __companyadmin__ (CRM) the database prefix would be __company__.
+- for the module __companyadmin__ (CRM) the database prefix would be __companyadmin__.

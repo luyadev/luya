@@ -1,4 +1,4 @@
-Zephir Yii Core Module
+LUYA
 ======================
 
 **Table of contents**
