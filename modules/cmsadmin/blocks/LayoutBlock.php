@@ -53,7 +53,7 @@ class LayoutBlock extends \cmsadmin\base\Block
 
     public function twigFrontend()
     {
-        return '<div class="row"><div class="col-md-{{ extras.leftWidth }}">{{ placeholders.left }}</div><div class="col-md-{{ extras.rightWidth }}">{{ placeholders.right }}</div>';
+        return '<div class="row"><div class="col-md-{{ extras.leftWidth }}">{{ placeholders.left }}</div><div class="col-md-{{ extras.rightWidth }}">{{ placeholders.right }}</div></div>';
     }
 
     public function twigAdmin()
