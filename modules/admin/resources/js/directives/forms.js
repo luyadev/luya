@@ -372,11 +372,11 @@ zaa.directive('zaaFileArrayUpload', function(){
 			}
 			$scope.add = function() {
 				$scope.model.push({ fileId : 0, caption : '' });
-			}
+			};
 			
 			$scope.remove = function(key) {
 				$scope.model.splice(key, 1);
-			}
+			};
 			
 			$scope.debug = function() {
 				console.log($scope.model);
@@ -445,7 +445,7 @@ zaa.directive("zaaListArray", function() {
             $scope.setFocus = function() {
                 setTimeout(function() {
                     var input = $element.children('.list').children('.list__item:last-of-type').children('.list__left').children('input');
-                    console.log(input);
+
                     if(input.length == 1) {
                         input[0].focus();
                     }
