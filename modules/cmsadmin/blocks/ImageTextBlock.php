@@ -82,11 +82,13 @@ class ImageTextBlock extends \cmsadmin\base\Block
     public function getImageSource()
     {
         if ($this->_source === null) {
-
             $img = Yii::$app->storage->image->get($this->getVarValue('imageId'), 0);
 
             $this->_source = $img ? $img->source : false;
+        }
 
+        if ($this->_source != false && !file_exists($this->_source)) {
+            $this->_source = false;
         }
 
         return $this->_source;
