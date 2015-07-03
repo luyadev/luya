@@ -64,6 +64,17 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'title' => 'Andrede',
+            'firstname' => 'Vorname',
+            'lastname' => 'Nachname',
+            'email' => 'E-Mail',
+            'password' => 'Passwort',
+        ];
+    }
+
     public function scenarios()
     {
         return [

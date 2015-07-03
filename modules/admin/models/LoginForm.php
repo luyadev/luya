@@ -20,6 +20,14 @@ class LoginForm extends \yii\base\Model
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'email' => 'E-Mail',
+            'password' => 'Passwort',
+        ];
+    }
+
     public function validatePassword($attribute)
     {
         if (!$this->hasErrors()) {
