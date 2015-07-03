@@ -4,6 +4,17 @@ Ein Projekt Modul kann viele Aufgaben übernehmen. Es kann Datenbank-Logik über
 + [Admin](app-admin-module.md) (Verwalten von Daten via Model)
 + [Frontend](app-module-frontend.md) (Rendern von views)
 
+Einbinden
+---------
+Um ein Modul einzubinden öffnen Sie die aktuelle Konfiguration (`prep.php` oder `prod.php`) und erweitern den `modules` Abschnitt um ihr Modul:
+```php
+$config = [
+    'modules' => [
+        'contact'=> 'app\modules\team\Module'
+    ]
+];
+``` 
+
 Beispiel Modul
 -------------
 Wir werden nun in unserem Beispiel ein *Team-Modul* erstellen mit einem *Frontend-Modul* und einem *Admin-Modul*. Alle *Admin-Module* hat per definition ein suffix **admin**. Die benennung würde in unserem Beispiel wie folgt aussehen:
