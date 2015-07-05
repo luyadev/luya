@@ -17,7 +17,7 @@ $urlRules
 Each Module can have its own url Rules. Even its not access by module context, example ulrRules
 
 ```php
-    public static $urlRules = [
+    public $urlRules = [
         ['pattern' => 'estore/testof/<id:\d+>', 'route' => 'estore/default/debug'],
         ['pattern' => 'estore/xyz', 'route' => 'estore/default/debug'],
     ];
@@ -27,7 +27,7 @@ You can also have composition url rules which will also match against the ***$ap
 
 ```php
 
-    public static $urlRules = [
+    public $urlRules = [
         ['pattern' => 'estore/warenkorb', 'route' => 'estore/default/basket', 'composition' => 
             [
                 'en' => 'estore/the-basket',
