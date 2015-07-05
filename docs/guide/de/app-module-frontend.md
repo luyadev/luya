@@ -114,7 +114,7 @@ Um einen Parameter anzugeben bei erstellen einer Url verwenden Sie das Arguments
 > Url Regel sollten immer den Modul prefix enthalten um innerhalb des CMS Context keine gleichnamigen URLS zu erhalten.
 
 ### Mehrspachige URLs
-Um eine URL regel für bestimmte [Compositions](app-menu.md#composition) pattern zu hinterlegen fügen Sie den `composition` key zur Regel hinzu, das array innerhalb der composition kann den *pattern* key für für die entsprechenden composition überschreiben. Wenn keine composition auf die aktuelle Situation zutrifft wird der default Wert in `pattern` verwendet. Ein Biespiel:
+Um eine URL regel für bestimmte [Compositions](app-menu.md) pattern zu hinterlegen fügen Sie den `composition` key zur Regel hinzu, das array innerhalb der composition kann den *pattern* key für für die entsprechenden composition überschreiben. Wenn keine composition auf die aktuelle Situation zutrifft wird der default Wert in `pattern` verwendet. Ein Biespiel:
 ```php
 public $urlRules = [
     ['pattern' => 'estore/warenkorb', 'route' => 'estore/basket/default', 'composition' => 
