@@ -52,6 +52,24 @@ und bei der Ausgabe ersetzen wir `{0}` durch einen Wert:
 echo Yii::t('app', 'datum', time()); // Gibt "Heute ist der <b>435829046</b> in Unixzeit" zurück.
 ```
 
+Mehrsprachige Urls
+------------------
+@TODO!
+
++ [Frontend Modul](app-module-frontend.md) Dokumentation
+
+```php
+
+    public $urlRules = [
+        ['pattern' => 'estore/warenkorb', 'route' => 'estore/default/basket', 'composition' => 
+            [
+                'en' => 'estore/the-basket',
+                'de' => 'estore/der-warenkorb'
+            ]
+        ],
+    ];
+```
+
 Links
 -----
 + [Mehr zum Thema Messages in der Yii Dokumentation](http://www.yiiframework.com/doc-2.0/guide-tutorial-i18n.html#message-translation)
