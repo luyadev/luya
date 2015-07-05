@@ -29,10 +29,13 @@ cp local.php.dist local.php
 ```
 
 Jede Konfiguration hat Ihren Zweck:
-- *server.php* Diese Datei ist auf .gitignore und includiert die aktuelle laufende Umgebung (prep, prod)
-- *prep.php* Steht für *Preproduction*, also dein Lokales System
-- *prod.php* Dies ist die Konfiguration auf dem Server wo das System Produktiv läuft.
-- *local.php* Dies sind deine Einstellungen von deiner Entwicklungsmaschine, welche mit der *prep.php* gmerged werden.
+
+| Name          | Beschreibung
+| --------      | -------------
+| server.php    | Diese Datei ist auf .gitignore und includiert die aktuelle laufende Umgebung (prep, prod)
+| prep.php      | Steht für *Preproduction*, also dein Lokales System
+| prod.php      | Dies ist die Konfiguration auf dem Server wo das System Produktiv läuft.
+| local.php     | Dies sind deine Einstellungen von deiner Entwicklungsmaschine, welche mit der *prep.php* gmerged werden.
 
 Datenbank
 ----------
