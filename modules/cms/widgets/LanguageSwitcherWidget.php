@@ -14,7 +14,7 @@ class LanguageSwitcherWidget extends \yii\base\Widget
     {
         $langData = Lang::find()->asArray()->all();
 
-        $navId = Yii::$app->links->findOneByArguments(['url' => Yii::$app->links->activeLink, 'lang' => Yii::$app->composition->getKey('langShortCode')])['id'];
+        $navId = Yii::$app->links->findOneByArguments(['url' => Yii::$app->links->activeUrl, 'lang' => Yii::$app->composition->getKey('langShortCode')])['id'];
 
         $html = '<ul>';
 

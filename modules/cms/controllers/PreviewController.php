@@ -14,7 +14,7 @@ class PreviewController extends \cms\base\Controller
         
         $link = Yii::$app->links->findOneByArguments(['id' => $itemId]);
         
-        Yii::$app->links->activeLink = $link['url'];
+        Yii::$app->links->activeUrl = $link['url'];
         
         Yii::$app->composition->setkey('langShortCode', $link['lang']);
         

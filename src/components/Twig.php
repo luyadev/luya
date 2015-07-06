@@ -25,10 +25,10 @@ class Twig extends \yii\base\Component
                 return \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, $level);  
             },
             'linkActive' => function() {
-                return \yii::$app->links->activeLink;
+                return \yii::$app->links->activeUrl;
             },
             'linkActivePart' => function($part) {
-                return \yii::$app->links->getActiveLinkPart($part);
+                return \yii::$app->links->getActiveUrlPart($part);
             },
             'asset' => function ($name) {
                 return \yii::$app->getAssetManager()->getBundle($name);

@@ -35,9 +35,9 @@ Sie können auch mehrere Argumente verbinden. Wenn wir nun alle Elemente auf dem
 $menu = $links->findByArguemnt(['parent_nav_id' => 0, 'lang' => 'de']);
 ```
 
-Wenn Sie den aktuellen **aktiven Link** ausgeben möchten verwenden Sie:
+Wenn Sie die aktuelle Url ausgeben möchten verwenden Sie:
 ```php
-echo Yii::$app->links->activeLink;
+echo Yii::$app->links->activeUrl;
 ```
 
 Sprachen (composition)

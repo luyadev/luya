@@ -20,9 +20,9 @@ The below example returns an array containing all links for ***cat => default***
 
 To get the first sub navigation of current active page node just add the dynamic parent_nav_id
 ```
-{{ dump(links('default', 'de', activeLink.id)) }}
+{{ dump(links('default', 'de', activeUrl.id)) }}
 ```
-The variable activeLink returns an array containing informations about the current active link.
+The variable activeUrl returns an array containing informations about the current active link.
 
 
 linksFindParent

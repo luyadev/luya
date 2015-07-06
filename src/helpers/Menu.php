@@ -19,7 +19,7 @@ class Menu
             return 0;
         }
 
-        $tree = $linksCollection->teardown($linksCollection->activeLink);
+        $tree = $linksCollection->teardown($linksCollection->activeUrl);
 
         $index = ($level - 2);
 

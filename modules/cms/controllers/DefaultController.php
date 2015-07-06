@@ -13,8 +13,8 @@ class DefaultController extends \cms\base\Controller
     public function init()
     {
         parent::init();
-        // set the current path to activeLink
-        Yii::$app->links->activeLink = (isset($_GET['path']) ? $_GET['path'] : null); // @todo should we use Yii::$app->request->get('path', null); instead?
+        // set the current path to activeUrl
+        Yii::$app->links->activeUrl = (isset($_GET['path']) ? $_GET['path'] : null); // @todo should we use Yii::$app->request->get('path', null); instead?
     }
     
     /**
@@ -37,24 +37,24 @@ class DefaultController extends \cms\base\Controller
 
     public function actionIndex()
     {
-        // get teh current active link. link component will resolve empty activeLink,
-        $activeLink = Yii::$app->links->getResolveActiveLink();
+        // get teh current active link. link component will resolve empty $activeUrl,
+        $activeUrl = Yii::$app->links->getResolveActiveUrl();
         // no page found, empty default page value.
-        if (!$activeLink) {
+        if (!$activeUrl) {
             throw new NotFoundHttpException("The requested page could not been resolved. Missing default page?");
         }
         
-        $suffix = Yii::$app->links->isolateLinkSuffix($activeLink);
-        $appendix = Yii::$app->links->isolateLinkAppendix($activeLink, $suffix);
+        $suffix = Yii::$app->links->isolateLinkSuffix($activeUrl);
+        $appendix = Yii::$app->links->isolateLinkAppendix($activeUrl, $suffix);
         
         if (!Yii::$app->links->hasLink($suffix)) {
-            throw new NotFoundHttpException("The requested link '$activeLink' does not exist.");
+            throw new NotFoundHttpException("The requested url '$activeUrl' does not exist.");
         }
         
-        $link = Yii::$app->links->findOneByArguments(['lang_id' => $this->getLangId(), 'url' => $activeLink]);
+        $link = Yii::$app->links->findOneByArguments(['lang_id' => $this->getLangId(), 'url' => $activeUrl]);
         
-        // set the activeLink based on the suffix, cause the modul params are not part of the links component.
-        Yii::$app->links->activeLink = $suffix;
+        // set the $activeUrl based on the suffix, cause the modul params are not part of the links component.
+        Yii::$app->links->activeUrl = $suffix;
         
         return $this->render('index', [
             'pageContent' => $this->renderItem($link['id'], $appendix),

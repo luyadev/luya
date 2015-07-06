@@ -189,39 +189,22 @@ class Links extends \yii\base\Component
         return $this->findOneByArguments(['url' => $link]);
     }
     
-
-    /*
-    
-    private $_activeLink;
-    
-    public function setActiveLink($activeLink)
+    public function getActiveUrlPart($part)
     {
-        $this->_activeLink = $activeLink;
-    }
-    
-    public function getActiveLink()
-    {
-        return $this->_activeLink;
-    }
-    
-    */
-    
-    public function getActiveLinkPart($part)
-    {
-        $parts = explode("/", $this->activeLink);
+        $parts = explode("/", $this->activeUrl);
         return (array_key_exists($part, $parts)) ? $parts[$part] : null;
     }
     
     /* ------------------------------------------------------------------------- */
     
-    public $activeLink = null;
+    public $activeUrl = null;
     
-    public function getResolveActiveLink()
+    public function getResolveActiveUrl()
     {
-        if (empty($this->activeLink)) {
-            $this->activeLink = $this->getDefaultLink();
+        if (empty($this->activeUrl)) {
+            $this->activeUrl = $this->getDefaultLink();
         }
-        return $this->activeLink;
+        return $this->activeUrl;
     }
     
     /**
