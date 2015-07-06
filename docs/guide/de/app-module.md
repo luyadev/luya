@@ -4,6 +4,8 @@ Ein Projekt Modul kann viele Aufgaben übernehmen. Es kann Datenbank-Logik über
 + [Admin](app-admin-module.md) (Verwalten von Daten via Model)
 + [Frontend](app-module-frontend.md) (Rendern von views)
 
+> Du kannst mit dem Terminalbefehl `php index.php module/create` schnell und einfach ein Modul erstellen.
+
 Einbinden
 ---------
 Um ein Modul einzubinden öffnen Sie die aktuelle Konfiguration (`prep.php` oder `prod.php`) und erweitern den `modules` Abschnitt um ihr Modul:

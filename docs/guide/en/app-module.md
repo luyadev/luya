@@ -24,6 +24,8 @@ class Module extends \luya\base\Module
 }
 ```
 
+> You can use `php index.php module/create` command to build a module quickly.
+
 Update Config
 -----------------------
 Add the Module to your configuration array (config/prep.php e.g.)
