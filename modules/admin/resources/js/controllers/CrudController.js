@@ -88,7 +88,13 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 		});
 	}
 	
-	$scope.toggleUpdate = function (id, $event) {
+	$scope.deleteItem = function(id, $event) {
+		$http.delete($scope.config.apiEndpoint + '/'+id).success(function(r) {
+			$scope.loadList();
+		})
+	};
+	
+	$scope.toggleUpdate = function(id, $event) {
 		/*
 		$scope.toggler.update = !$scope.toggler.update;
 		$scope.AdminService.bodyClass = 'main-blurred';

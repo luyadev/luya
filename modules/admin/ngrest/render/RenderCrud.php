@@ -32,6 +32,8 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\base
         ));
     }
 
+    private $_buttons = null;
+    
     /**
      * collection all the buttons in the crud list.
      *
@@ -47,25 +49,36 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\base
      */
     public function getButtons()
     {
-        $buttons = [];
-        // do we have an edit button
-        if (count($this->getFields('update')) > 0) {
-            $buttons[] = [
-                'ngClick' => 'toggleUpdate(item.'.$this->config->getRestPrimaryKey().', $event)',
-                'icon' => 'mdi-editor-mode-edit',
-                'label' => '',
-            ];
-        }
-        // get all activeWindows assign to the crud
-        foreach ($this->getActiveWindows() as $activeWindow) {
-            $buttons[] = [
-                'ngClick' => 'getActiveWindow(\''.$activeWindow['activeWindowHash'].'\', item.'.$this->config->getRestPrimaryKey().', $event)',
-                'icon' => '',
-                'label' => $activeWindow['alias'],
-            ];
+        if ($this->_buttons === null) {
+            $buttons = [];
+            // do we have an edit button
+            if (count($this->getFields('update')) > 0) {
+                $buttons[] = [
+                    'ngClick' => 'toggleUpdate(item.'.$this->config->getRestPrimaryKey().', $event)',
+                    'icon' => 'mdi-editor-mode-edit',
+                    'label' => '',
+                ];
+            }
+            // get all activeWindows assign to the crud
+            foreach ($this->getActiveWindows() as $activeWindow) {
+                $buttons[] = [
+                    'ngClick' => 'getActiveWindow(\''.$activeWindow['activeWindowHash'].'\', item.'.$this->config->getRestPrimaryKey().', $event)',
+                    'icon' => '',
+                    'label' => $activeWindow['alias'],
+                ];
+            }
+    
+            if ($this->config->isDeletable()) {
+                $buttons[] = [
+                    'ngClick' => 'deleteItem(item.'.$this->config->getRestPrimaryKey().', $event)',
+                    'icon' => '',
+                    'label' => 'Löschen'  
+                ];
+            }
+            $this->_buttons = $buttons;
         }
 
-        return $buttons;
+        return $this->_buttons;
     }
 
     public function apiQueryString($type)

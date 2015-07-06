@@ -37,7 +37,7 @@ The ng-rest config pointers describes the "scene" where the to configure fields 
 * ***create*** This pointer descibtes the "create new entry" form.
 * ***update*** This pointer describtes the "update existing entry" form.
 * ***aw*** This pointer describes the attached "buttons and actions" forms.
-* ***delete*** ***TBD***
+* ***delete*** Enable the delete button to the model coresponding `delete()` method.
 
 For example if you want to add the fields ***title*** and ***description*** into the list and create pointers just put:
 ```php
@@ -53,3 +53,7 @@ public function ngRestConfig($config)
 The fields title and description are now configure in the list and create actions. So you could now see the fields in the grid view and you could create new entrys for those two fields.
 
 If you want to see all configuration possibilitys after field, have a look at the [NGREST FIELDS CONFIGURATIOn GUIDE](start-ngrest-fields.md).
+
+Delete
+------
+If you set `$config->delete = true` the remove/delete button will be display. Be default the *ActiveRecord* Model will now execute the `delete()` [yii AR delete](http://www.yiiframework.com/doc-2.0/yii-db-activerecord.html#delete()-detail) from the model. If you only want to set an element to `is_hidden=1` you have to **override** the `delete()` method.
