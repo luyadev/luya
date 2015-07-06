@@ -55,6 +55,11 @@ class Config implements \admin\ngrest\base\ConfigInterface
         return array_key_exists($pointer, $this->config);
     }
 
+    public function isDeletable()
+    {
+        return ($this->getKey('delete') === true) ? true : false;   
+    }
+    
     public function __get($key)
     {
         // @TODO see if pointer exists in $this->$pointersMap

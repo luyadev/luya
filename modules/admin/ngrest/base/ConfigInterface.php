@@ -17,4 +17,6 @@ interface ConfigInterface
     public function getNgRestConfigHash();
 
     public function onFinish();
+    
+    public function isDeletable();
 }
