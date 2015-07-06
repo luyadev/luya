@@ -57,3 +57,5 @@ If you want to see all configuration possibilitys after field, have a look at th
 Delete
 ------
 If you set `$config->delete = true` the remove/delete button will be display. Be default the *ActiveRecord* Model will now execute the `delete()` [yii AR delete](http://www.yiiframework.com/doc-2.0/yii-db-activerecord.html#delete()-detail) from the model. If you only want to set an element to `is_hidden=1` you have to **override** the `delete()` method.
+
+Instead of override the `find()` and `delete()` method you can also use the `admin\traits\SoftDeleteTrait` trait. If you want to change the trait properites implement `public static SoftDeleteValues()` to your model and return the specific key values for the delete behavior. The find behavior will automatically be inverted from the delete values.
