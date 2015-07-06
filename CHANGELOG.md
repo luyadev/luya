@@ -6,7 +6,7 @@ LUYA CHANGELOG
 - `#196`: removed `$links->activeLink` and replaced with `$links->activeUrl`.
 - `#212`: renamed `config` folder into `configs` as default value.
 - `#183`: added ability to remove items in `NgRest`. Just add `$config->delete = true` inside your `NgRestConfig()` method.
-
+- `#222`: added `module/create` cli command.
 
 1.0.0-alpha8 (30. Jun 2015)
 --------------------------
