@@ -171,7 +171,7 @@ class CrudController extends \yii\console\Controller
         $mname = $this->ansiFormat($basePath . '/Module.php', Console::BOLD);
         $a = $this->ansiFormat('$apis', Console::BOLD);
         echo PHP_EOL . 'Modify the '.$a.' var in ' . $mname . ' like below:' . PHP_EOL . PHP_EOL;
-        echo $this->ansiFormat('public static $apis = [
+        echo $this->ansiFormat('public $apis = [
     \''.$apiEndpoint.'\' => \''.$data['api']['ns'].'\\' . $data['api']['class'].'\',
 ];', Console::FG_YELLOW);
         echo PHP_EOL . PHP_EOL . 'Update the getMenu() method like below:' . PHP_EOL . PHP_EOL;
