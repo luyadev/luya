@@ -18,8 +18,16 @@ zaa.controller("NavController", function($scope, $stateParams, $http, AdminLangS
 	
 	$scope.navData = {};
 
-    $scope.sidebar = true;
+    $scope.sidebar = false;
 	
+    $scope.enableSidebar = function() {
+    	$scope.sidebar = true;
+    }
+    
+    $scope.toggleSidebar = function() {
+        $scope.sidebar = !$scope.sidebar;
+    };
+    
 	$http.get('admin/api-cms-nav/detail', { params : { navId : $scope.id }}).success(function(response) {
 		$scope.navData = response;
 	});
@@ -54,10 +62,6 @@ zaa.controller("NavController", function($scope, $stateParams, $http, AdminLangS
     			$scope.isDeleted = true;
     		});
     	}
-    };
-
-    $scope.toggleSidebar = function() {
-        $scope.sidebar = !$scope.sidebar;
     };
 	
 	$scope.AdminClassService = AdminClassService;
@@ -144,7 +148,7 @@ zaa.controller("NavItemController", function($scope, $http, $timeout, MenuServic
 	
 });
 
-zaa.controller("NavItemTypePageController", function($scope, $http) {
+zaa.controller("NavItemTypePageController", function($scope, $http, $timeout) {
 	
 	$scope.NavItemController = $scope.$parent;
 	
@@ -166,6 +170,9 @@ zaa.controller("NavItemTypePageController", function($scope, $http) {
 					$scope.container.__placeholders[i]['__nav_item_page_block_items'] = new_ph[i]['__nav_item_page_block_items'];
 				}
 			}
+			$timeout(function() {
+				$scope.$parent.$parent.$parent.enableSidebar();
+			}, 100);
 			/*
 
             for (var i in $scope.container.__placeholders) {
