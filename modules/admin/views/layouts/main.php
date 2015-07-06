@@ -15,7 +15,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title><?= \Yii::$app->siteTitle; ?> // {{currentItem.alias}}</title>
+        <title><?= Yii::$app->siteTitle; ?> // {{currentItem.alias}}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <base href="<?= Url::base(true); ?>/admin" />
@@ -221,6 +221,7 @@
                         </ul>
 
                         <ul class="right navbar__right">
+                            <li><span style="font-size:10px; margin-right:20px;"><?= luya\Module::VERSION; ?></span></li>
                             <li ng-mouseenter="showOnlineContainer=1" ng-mouseleave="showOnlineContainer=0">
                                 <div class="navbar__button">
                                     <i class="[ mdi-social-group left ] navbar__icon"></i>

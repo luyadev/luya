@@ -10,7 +10,7 @@ $this->beginPage();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?= \Yii::$app->siteTitle; ?> // Login</title>
+    <title><?= \Yii::$app->siteTitle; ?> // Login // <?= luya\Module::VERSION; ?></title>
 
     <?php $this->head() ?>
 
