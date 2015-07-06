@@ -6,6 +6,7 @@ $config = [
         'migrate' => '\luya\commands\PresqlController',
         'exec' => '\luya\commands\ExecutableController',
         'crud' => '\luya\commands\CrudController',
+        'module' => '\luya\commands\ModuleController',
         'command' => '\luya\commands\CommandController',
     ],
     'components' => [
