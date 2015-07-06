@@ -3,7 +3,8 @@ LUYA CHANGELOG
 
 1.0.0-alpha9 (in progress)
 --------------------------
-- removed `$links->activeLink` and replaced with `$links->activeUrl` in `#196`.
+- `#196`: removed `$links->activeLink` and replaced with `$links->activeUrl`.
+- `#212`: renamed `config` folder into `configs` as default value.
 
 
 1.0.0-alpha8 (30. Jun 2015)

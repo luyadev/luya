@@ -26,7 +26,7 @@ class Boot
      *
      * @var string
      */
-    public $configPath = '../config/';
+    public $configPath = '../configs/';
 
     public $configName = 'server.php';
 
