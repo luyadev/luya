@@ -4,7 +4,8 @@ Ein Admin-Modul biete dir die Möglichkeit in kürze eine komplexe Administratio
 
 Eigene Views Rendern
 --------------------
-Erstellen Sie einen Controller unter `controllers` zbsp. `TestController.php`
+Erstellen Sie einen Controller unter `controllers` zbsp. `TestController.php`.
+
 ```php
 class StatsController extends \admin\base\Controller
 {
