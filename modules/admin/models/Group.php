@@ -11,6 +11,8 @@ namespace admin\models;
  */
 class Group extends \admin\ngrest\base\Model
 {
+    use \admin\traits\SoftDeleteTrait;
+    
     /**
      * @inheritdoc
      */
@@ -52,7 +54,7 @@ class Group extends \admin\ngrest\base\Model
         $this->setRelation($value, "admin_user_group", "group_id", "user_id");
     }
     */
-
+    
     // ngrest
 
     public $users = [];
@@ -66,6 +68,8 @@ class Group extends \admin\ngrest\base\Model
     {
         $config->aw->register(new \admin\aws\GroupAuth(), 'Berechtigungen');
 
+        $config->delete = true;
+        
         $config->list->field('name', 'Name')->text()->required();
         $config->list->field('text', 'Beschreibung')->textarea();
 

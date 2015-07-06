@@ -4,6 +4,8 @@ namespace cmsadmin\models;
 
 class Cat extends \admin\ngrest\base\Model
 {
+    use \admin\traits\SoftDeleteTrait;
+    
     public function ngRestApiEndpoint()
     {
         return 'api-cms-cat';
@@ -24,6 +26,8 @@ class Cat extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
+        $config->delete = true;
+        
         $config->list->field('name', 'Name')->text()->required();
         $config->list->field('default_nav_id', 'Default-Nav-Id')->selectArray($this->getNavData());
         $config->list->field('rewrite', 'Rewrite')->text()->required();
