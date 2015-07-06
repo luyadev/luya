@@ -36,24 +36,21 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
 
     abstract public function ngRestApiEndpoint();
 
-    public function behaviors()
-    {
-        return [
-            'EventBehavior' => [
-                'class' => EventBehavior::className(),
-                'ngRestConfig' => $this->getNgRestConfig(),
-            ],
-            'LogBehavior' => [
-                'class' => LogBehavior::className(),
-                'api' => $this->ngRestApiEndpoint(),
-            ],
-        ];
-    }
-
     public function init()
     {
         parent::init();
 
+        $this->attachBehaviors([
+            'EventBehavior' => [
+            	'class' => EventBehavior::className(),
+            	'ngRestConfig' => $this->getNgRestConfig(),
+        	],
+        	'LogBehavior' => [
+            	'class' => LogBehavior::className(),
+            	'api' => $this->ngRestApiEndpoint(),
+        	]
+        ]);
+        
         if (Yii::$app instanceof \yii\web\Application) {
             $this->_ngrestCall = Yii::$app->request->get('ngrestCall', false);
             $this->_ngrestCallType = Yii::$app->request->get('ngrestCallType', false);
