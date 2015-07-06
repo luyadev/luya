@@ -241,6 +241,10 @@ zaa.controller("PagePlaceholderController", function($scope, AdminClassService, 
 	
 	$scope.isOpen = false;
 	
+	$scope.toggleOpen = function() {
+		$scope.isOpen = !$scope.isOpen;
+	}
+	
 	$scope.mouseEnter = function() {
 		var status = AdminClassService.getClassSpace('onDragStart');
 		if (status !== undefined && !$scope.isOpen) {

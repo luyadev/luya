@@ -1,5 +1,5 @@
 <script type="text/ng-template" id="recursion.html">
-<div class="accordion__header" ng-mouseenter="mouseEnter()" ng-click="isOpen = !isOpen"><i class="mdi-navigation-unfold-more"></i> {{placeholder.label}}</div>
+<div class="accordion__header" ng-mouseenter="mouseEnter()" ng-click="toggleOpen()"><i class="mdi-navigation-unfold-more"></i> {{placeholder.label}}</div>
 <div class="accordion__body">
     
     <div class="page__drop">
