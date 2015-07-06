@@ -13,9 +13,9 @@ cd /var/www/_YOUR_PROJECT_/public_Html
 now you can execute all the console commands described below.
 
 
-presql
+migration
 --------
-
+(former alpha-10 *presql*)
 ***create***
 
 create a new migration script

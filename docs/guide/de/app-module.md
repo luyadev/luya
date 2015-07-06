@@ -4,7 +4,7 @@ Ein Projekt Modul kann viele Aufgaben übernehmen. Es kann Datenbank-Logik über
 + [Admin](app-admin-module.md) (Verwalten von Daten via Model)
 + [Frontend](app-module-frontend.md) (Rendern von views)
 
-> Du kannst mit dem Terminalbefehl `php index.php module/create` schnell und einfach ein Modul erstellen.
+> Du kannst mit dem [Konsolenbefehl](app-console.md) `module/create` schnell und einfach ein Modul erstellen.
 
 Einbinden
 ---------
@@ -44,6 +44,15 @@ class Module extends \admin\base\Module
 
 }
 ```
+
+
+Import Methode
+--------------
+TBD
+
+Komponenten Registrieren
+------------------------
+TBD
 
 Links
 ------
