@@ -12,6 +12,7 @@ class m141203_143052_cms_cat extends Migration
             'rewrite' => 'VARCHAR(80) NOT NULL',
             'default_nav_id' => 'INT(11) NOT NULL',
             'is_default' => 'TINYINT(1) NOT NULL DEFAULT 0',
+            'is_deleted' => 'TINYINT(1) NOT NULL default 0',
         ]);
         
         $this->insert('cms_cat', [

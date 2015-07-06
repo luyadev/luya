@@ -10,6 +10,7 @@ class m150205_141350_block_group extends Migration
         $this->createTable('cms_block_group', [
             'id' => 'pk',
             'name' => Schema::TYPE_STRING,
+            'is_deleted' => 'TINYINT(1) NOT NULL default 0',
         ]);
 
         $this->insert('cms_block_group', [

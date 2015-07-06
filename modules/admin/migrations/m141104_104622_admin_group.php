@@ -11,6 +11,7 @@ class m141104_104622_admin_group extends Migration
             'id' => 'pk',
             'name' => Schema::TYPE_STRING.' NOT NULL',
             'text' => Schema::TYPE_TEXT,
+            'is_deleted' => 'TINYINT(1) NOT NULL default 0',
         ]);
     }
 
