@@ -13,7 +13,9 @@ Eines der Kernbestandteile von *LUYA* liegt darin in kurzer Zeit eine mächtige 
 
 NgRest Api-Endpoint
 -----------------
-Öffnen Sie die `Module.php` in des Module sie die *NgRest* Oberfläch initialisieren möchte und fügen Sie die Eigenschaft `public $apis` ein. Tragen Sie nun einen **Api-Endpoint** für Ihre Schnittstelle ein wobei der key dem späteren Link zur Schnittele und value der ApiController Klasse enspricht.
+Öffnen Sie die `Module.php` in des Module sie die *NgRest* Oberfläch initialisieren möchte und fügen Sie die Eigenschaft `public $apis` ein. Tragen Sie nun einen **Api-Endpoint** für Ihre Schnittstelle ein wobei der key dem späteren Link zur Schnittele und value der ApiController Klasse enspricht.  
+
+W
 
 ```php
 <?php
