@@ -14,6 +14,7 @@ Eines der Kernbestandteile von *LUYA* liegt darin in kurzer Zeit eine mächtige 
 NgRest Api-Endpoint
 -----------------
 Öffnen Sie die `Module.php` in des Module sie die *NgRest* Oberfläch initialisieren möchte und fügen Sie die Eigenschaft `public $apis` ein. Tragen Sie nun einen **Api-Endpoint** für Ihre Schnittstelle ein wobei der key dem späteren Link zur Schnittele und value der ApiController Klasse enspricht.
+
 ```php
 <?php
 namespace teamadmin;
@@ -23,6 +24,7 @@ class Module extends \admin\base\Module
     public $apis = [
         'api-team-member' => 'teamadmin\\apis\\MemberController',
     ];
+}
 ```
 Ein Api-Endpoint besteht immer aus *api-{module}-{model}* wobei beim *module* immer das **Frontend-Module** gewählt wird.
 
