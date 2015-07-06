@@ -1,7 +1,6 @@
 Projekt Admin-Modul
 ==================
-Ein Admin-Modul biete dir die Möglichkeit in kürze eine komplexe Administrations oberfläch zu erstellen. Wenn es ein Fr
-
+Ein Admin-Modul biete dir die Möglichkeit in kürze eine komplexe Administrations oberfläch zu erstellen dazu benutzen Sie [NgRest Crud](app-admin-module-ngrest.md).
 
 Eigene Views Rendern
 --------------------
