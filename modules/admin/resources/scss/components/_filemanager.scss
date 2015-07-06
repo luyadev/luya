@@ -1,18 +1,140 @@
-.filemanager__icon-column {
-	width: 50px;
-	text-align: center;
+.filemanager__files td span,
+.filemanager__files td img,
+.filemanager__files td i,
+.filemanager__files td label{
+	vertical-align: middle;
+}
 
-	&.filemanager__icon-column--thumb img {
-		border-radius: 2px;
-		vertical-align: middle;
+.filemanager__tree,
+.filemanager__files {
+	display: inline-block;
+	vertical-align: top;
+}
+
+/**
+ * #TREE
+ */
+.filemanager__tree {
+	width: $filemanager__tree--width;
+}
+
+.filemanager__folders {
+	margin: 0;
+}
+
+.filemanager__toolbar {
+	display: block;
+	width: 100%;
+	margin-bottom: 15px;
+	@include clearfix;
+}
+
+.filemanager__main-folder {
+	word-break: break-word;
+	position: relative;
+	padding: 8px 0 8px 25px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+	display: block;
+
+	> i {
+		position: absolute;
+		left: 0;
+	}
+
+	& > .filemanager__folders {
+		margin-top: 8px;
+
+		& .filemanager__folder:first-of-type {
+			border-top: 1px solid rgba(0, 0, 0, 0.1);
+		}
 	}
 }
 
 .filemanager__folder {
+	word-break: break-word;
+	position: relative;
+	padding: 8px 0 8px 25px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 	cursor: pointer;
+	display: block;
+
+	&:hover > .filemanager__folder-icon,
+	&.active > .filemanager__folder-icon,
+	&:hover > span,
+	&.active > span {
+		color: color($filemanager--base-color, "base");
+	}
+
+	.filemanager__folder-icon {
+		position: absolute;
+		left: 0;
+	}
+
+	.filemanager__folder-icon--active {
+		display: none;
+	}
+	&:hover > .filemanager__folder-icon--active,
+	&.active > .filemanager__folder-icon--active {
+		display: block;
+	}
+	&:hover > .filemanager__folder-icon--default,
+	&.active > .filemanager__folder-icon--default {
+		display: none;
+	}
+
+	.filemanager__edit-icon {
+		position: absolute;
+		right: 0;
+		opacity: 0;
+		pointer-events: none;
+		transition: 0.25s ease opacity;
+	}
+	&:hover > .filemanager__edit-icon {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	&:last-of-type {
+		border-bottom: 0;
+	}
+
+	& > .filemanager__folders {
+		margin-top: 8px;
+
+		& .filemanager__folder:first-of-type {
+			border-top: 1px solid rgba(0, 0, 0, 0.1);
+		}
+	}
+
+	&.filemanager__folder--not-clickable {
+		cursor: default;
+	}
 }
 
-.filemanager__lighten {
-	color: color("grey", "darken-1");
-	font-size: 0.9rem;
+/**
+ * #FILES
+ */
+.filemanager__files {
+	padding-left: 20px;
+	width: calc(100% - #{$filemanager__tree--width});
+}
+
+.filemanager__checkox-column {
+	width: 50px;
+
+	& i {
+		font-size: 1.7rem;
+	}
+	& label {
+		margin-top: -4px;
+		margin-left: 3px;
+		padding-left: 22px;
+		height: 19px;
+	}
+}
+
+.filemanager__icon-column {
+	text-align: center;
+	width: 150px;
 }

@@ -114,7 +114,7 @@ class File
         foreach($files as $k => $v) {
             if ($v['extension'] == "jpg" || $v['extension'] == "png") {
                 $imageId = Yii::$app->storage->image->create($v['id'], 0);
-                $thumb = Yii::$app->storage->image->filterApply($imageId, 'tiny-crop');
+                $thumb = Yii::$app->storage->image->filterApply($imageId, 'small-landscape');
             } else {
                 $thumb = false;
             }
