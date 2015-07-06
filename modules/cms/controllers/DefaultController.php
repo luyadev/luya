@@ -53,6 +53,10 @@ class DefaultController extends \cms\base\Controller
         
         $link = Yii::$app->links->findOneByArguments(['lang_id' => $this->getLangId(), 'url' => $activeUrl]);
         
+        if (!$link) {
+            throw new NotFoundHttpException("The page '$activeUrl' does not exist in this language.");
+        }
+        
         // set the $activeUrl based on the suffix, cause the modul params are not part of the links component.
         Yii::$app->links->activeUrl = $suffix;
         
