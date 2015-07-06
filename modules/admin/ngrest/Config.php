@@ -116,10 +116,10 @@ class Config implements \admin\ngrest\base\ConfigInterface
         $this->i18n = $fields;
     }
 
-    public function field($name, $alias, $gridCols = 12)
+    public function field($name, $alias = null, $gridCols = 12)
     {
         $this->config[$this->pointer['key']][$name] = [
-            'name' => $name, 'gridCols' => $gridCols, 'alias' => $alias, 'plugins' => [], 'i18n' => false, 'extraField' => false,
+            'name' => $name, 'gridCols' => $gridCols, 'alias' => (is_null($alias)) ? $name : $alias, 'plugins' => [], 'i18n' => false, 'extraField' => false,
         ];
         $this->pointer['field'] = $name;
 
