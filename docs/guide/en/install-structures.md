@@ -11,7 +11,7 @@ Example Project Folder Hierarchy
 ├── assets
 ├── blocks
 ├── filters
-├── config
+├── configs
 ├── migrations
 ├── modules
 │   ├── <APP-MODULE>

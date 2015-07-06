@@ -62,7 +62,7 @@ All files are now in the right place.
 ### 4.1 Update config
 Copy local config template:
 ```
-cp config/local.php.dist config/local.php
+cp configs/local.php.dist config/local.php
 ```
 Edit local config and update db informations:
 ```
@@ -76,12 +76,12 @@ Edit local config and update db informations:
 
 Copy preproduction config:
 ```
-cp config/prep.php.dist config/prep.php
+cp configs/prep.php.dist configs/prep.php
 ```
 
 Copy server config:
 ```
-cp config/server.php.dist config/server.php
+cp configs/server.php.dist configs/server.php
 ```
 
 Per default, no other changes to the config are required.

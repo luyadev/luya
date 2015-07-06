@@ -15,14 +15,14 @@ composer create-project zephir/luya-kickstarter:dev-master
 This above command will create a folder (inside of your current folder where the `composer create-project` command was execute) named __luya-kickstarter__. After the command is finished (can take some time) you can move all the files where ever you want to have them.
 
 3.) Setup your config
-Go into your config folder inside your application and copy the dist template files to original php files:
+Go into your configs folder inside your application and copy the dist template files to original php files:
 ```
 	cp server.php.dist server.php
 	cp prep.php.dist prep.php
 	cp local.php.dist local.php
 ```
 
-Now change the database connection inside the `config/local.php` file to your custom config. You should open all config files once to change values and understand the behavior.
+Now change the database connection inside the `configs/local.php` file to your custom config. You should open all config files once to change values and understand the behavior.
 
 4.) Execute Database migration and Setup
 After successfully setting up your database connection, you have to reopen your Terminal and change into your project `public_html` directory:

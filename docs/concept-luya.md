@@ -43,7 +43,7 @@ require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
 
 use \luya\base\Boot;
 
-$config = include('../config/prep.php');
+$config = include('../configs/prep.php');
 
 $boot = new Boot();
 $boot->setConfig(Boot::SAPI_WEB, $config);

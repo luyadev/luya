@@ -16,7 +16,7 @@ dies wird dir ein Verzeichniss **luya-kickstarter** erstellen.
 
 Konfiguration
 -------------
-Als nächsten werden wir die Konfigurations Dateien für dein Luya Projekt erstellen. Dazu gehst du in deinen `luya-kickstarter/config` Ordner wo du due *.dist* Datei siehst.
+Als nächsten werden wir die Konfigurations Dateien für dein Luya Projekt erstellen. Dazu gehst du in deinen `luya-kickstarter/configs` Ordner wo du due *.dist* Datei siehst.
 Du kannst nun diese *.dist* Dateien umbennen und die *.dist* Endung entfernen.
 
 > Achtung: Du solltest die dist Datein nach wie vor im Ordner belassen. So können auch andere Leute mit denen du zusammenarbeitetst schnell die Konfigurations Dateien erstellen.

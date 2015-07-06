@@ -22,8 +22,6 @@ class Boot
     /**
      * The path where all the configuration files are located.
      *
-     * @todo us configs instead of config?
-     *
      * @var string
      */
     public $configPath = '../configs/';

@@ -9,7 +9,7 @@ Deine *LUYA* installation sollte nach dem checkout des *luya-kickstarter* projek
 ├── assets
 ├── blocks
 ├── filters
-├── config
+├── configs
 ├── migrations
 ├── messages
 ├── modules
