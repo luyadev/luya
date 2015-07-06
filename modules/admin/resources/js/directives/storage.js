@@ -227,6 +227,7 @@ zaa.directive('storageImageUpload', function($http, ApiAdminFilter) {
 				if (n != 0 && n != null && n !== undefined) {
 					$http.get('admin/api-admin-storage/image-path', { params: { imageId : n } }).success(function(response) {
 						scope.imageinfo = response;
+						scope.filterId = response.filter_id;
 						scope.fileId = response.file_id;
 					}).error(function(response) {
 						console.log('die datei wurde nicht gefunden', response);
