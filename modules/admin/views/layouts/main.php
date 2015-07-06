@@ -84,8 +84,8 @@
                     <select name="filterId" ng-model="filterId" class="browser-default"><option value="0">Kein Filter</option><option ng-repeat="item in filters" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
                 </div>
                 <div class="imageupload__preview">
+                    <img ng-src="{{imageinfo.source}}" class="responsive-img" />
                     <div class="imageupload__loading" ng-hide="!imageLoading">
-                        <img ng-src="{{imageinfo.source}}" class="responsive-img" />
                         <div class="preloader-wrapper big active">
                             <div class="spinner-layer spinner-green-only">
                                 <div class="circle-clipper left">
