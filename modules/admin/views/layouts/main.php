@@ -1,9 +1,9 @@
 <?php
     use \admin\Module;
     use \yii\helpers\Url;
-    
+
     $user = Yii::$app->adminuser->getIdentity();
-    
+
     $gravatar = 'http://www.gravatar.com/avatar/'.md5(strtolower(trim($user->email))).'?d='.urlencode('http://www.zephir.ch/files/rocky_460px_bw.jpg').'&s=40';
 
     $this->beginPage()
@@ -20,11 +20,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <base href="<?= Url::base(true); ?>/admin" />
         <style type="text/css">
-        [ng:cloak], 
-        [ng-cloak], 
-        [data-ng-cloak], 
-        [x-ng-cloak], 
-        .ng-cloak, 
+        [ng:cloak],
+        [ng-cloak],
+        [data-ng-cloak],
+        [x-ng-cloak],
+        .ng-cloak,
         .x-ng-cloak {
           display: none !important;
         }
@@ -37,7 +37,7 @@
 
     <body ng-cloak>
         <?php $this->beginBody() ?>
-        <!-- 
+        <!--
         <script type="text/ng-template" id="storageFileUpload-bkp">
         <div class="row">
             <div class="input-field col s6">
@@ -72,7 +72,7 @@
                 <modal is-modal-hidden="modal"><storage-file-manager selection="true" /></modal>
             </div>
         </script>
-        
+
         <script type="text/ng-template" id="storageImageUpload">
             <div class="imageupload">
                 <b class="imageupload__title">Bild und Filter festlegen</b>
@@ -102,7 +102,128 @@
             </div>
         </script>
 
+        <!-- FILEMANAGER -->
         <script type="text/ng-template" id="storageFileManager">
+
+            <div class="filemanager">
+
+                <!-- TREE -->
+                <div class="filemanager__tree">
+
+                    <div class="filemanager__toolbar">
+                        <a class="floating-button-label right">
+                            <span class="btn-floating">
+                                <i class="mdi-content-add"></i>
+                            </span>
+                            <span class="floating-button-label__label">Ordner hinzufügen</span>
+                        </a>
+                    </div>
+
+                    <!-- FOLDER LIST -->
+                    <ul class="filemanager__folders">
+                        <li class="filemanager__main-folder">
+                            <i class="mdi-file-folder-open"></i>
+                            <span>Stammverzeichnis</span>
+
+                            <!-- FOLDER LIST | Level 1 -->
+                            <ul class="filemanager__folders">
+                                <li class="filemanager__folder" ng-repeat="folder in folders" ng-click="loadFolder(folder.id)">
+                                    <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
+                                    <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
+                                    <i class="mdi-editor-mode-edit filemanager__edit-icon"></i>
+                                    
+                                    <span>{{folder.name}}</span>
+
+                                </li>
+                                <li class="filemanager__folder active">
+                                    <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
+                                    <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
+                                    <span>Ordner 3 - Ebene 1</span>
+
+                                    <!-- FOLDER LIST | Level 2 -->
+                                    <ul class="filemanager__folders">
+                                        <li class="filemanager__folder">
+                                            <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
+                                            <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
+                                            <span>Ordner 1 - Ebene 2</span>
+                                        </li>
+                                        <li class="filemanager__folder">
+                                            <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
+                                            <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
+                                            <span>Ordner 2 - Ebene 2</span>
+                                        </li>
+                                    </ul>
+                                    <!-- /FOLDER LIST -->
+                                </li>
+                            </ul>
+                            <!-- /FOLDER LIST -->
+
+                        </li>
+
+                    </ul>
+                    <!-- /FOLDER LIST -->
+
+                </div><!--
+                /TREE
+
+                FILES & FOLDERS
+             --><div class="filemanager__files">
+
+                    <div class="filemanager__toolbar">
+                        <a class="floating-button-label right">
+                            <span class="btn-floating">
+                                <i class="mdi-file-file-upload"></i>
+                            </span>
+                            <span class="floating-button-label__label">Datei hinzufügen</span>
+                        </a>
+                    </div>
+
+                    <table class="filemanager__table striped hoverable">
+                        <thead>
+                            <tr>
+                                <th class="filemanager__checkox-column"><!--<i class="mdi-action-done"></i>--></th>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Typ</th>
+                                <th>Eigentümer</th>
+                                <th>Erstellungsdatum</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <!-- FILES -->
+                            <tr ng-repeat="file in files" ng-click="toggleSelection(file)">
+                                <td class="filemanager__checkox-column">
+                                    <input type="checkbox" id="select-{{file.id}}" />
+                                    <label for="select-{{file.id}}"></label>
+                                </td>
+                                <td class="filemanager__icon-column" ng-class="{ 'filemanager__icon-column--thumb' : file.thumbnail }">
+                                        <span ng-if="file.thumbnail">
+                                            <img class="responsive-img" ng-src="{{file.thumbnail.source}}" />
+                                        </span>
+                                        <span ng-if="!file.thumbnail">
+                                            <i class="mdi-editor-attach-file"></i>
+                                        </span>
+                                </td>
+                                <td>{{file.name_original}}</td>
+                                <td class="filemanager__lighten">{{file.extension}}</td>
+                                <td class="filemanager__lighten">{{file.firstname}} {{file.lastname}}</td>
+                                <td class="filemanager__lighten">{{file.upload_timestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
+                            </tr>
+                            <!-- /FILES -->
+
+                        </tbody>
+                    </table>
+
+                </div>
+                <!-- FILES & FOLDERS -->
+
+            </div>
+
+        </script>
+        <!-- /FILEMANAGER -->
+
+        <!--<script type="text/ng-template" id="storageFileManager">
 
             <div class="row">
                 <div class="col s11">
@@ -133,7 +254,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- FOLDER -->
+                            <!-- FOLDER --
                             <tr ng-repeat="folder in folders" class="filemanager__folder" ng-click="loadFolder(folder.id)">
                                 <td class="filemanager__icon-column"><i class="mdi-file-folder-open"></i></td>
                                 <td>{{folder.name}}</td>
@@ -141,7 +262,7 @@
                                 <td class="filemanager__lighten">23. Juni 2015, 00:00 Uhr</td>
                                 <td></td>
                             </tr>
-                            <!-- /FOLDER -->
+                            <!-- /FOLDER --
 
                             <tr class="filemanager__folder-create">
                                 <td class="filemanager__icon-column"></td>
@@ -156,7 +277,7 @@
                                 </td>
                             </tr>
 
-                            <!-- FILES -->
+                            <!-- FILES --
                             <tr ng-repeat="file in files" class="collection-item avatar" ng-click="toggleSelection(file)" ng-class="{'is-active' : inSelection(file)}">
                                 <td class="filemanager__icon-column" ng-class="{ 'filemanager__icon-column--thumb' : file.thumbnail }">
                                     <span ng-if="file.thumbnail">
@@ -171,14 +292,14 @@
                                 <td class="filemanager__lighten">{{file.upload_timestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
                                 <td><button class="btn teal lighten-2 right" type="button" ng-show="allowSelection=='true'" ng-click="selectFile(file)"><i class="mdi-navigation-check"></i></button></td>
                             </tr>
-                            <!-- /FILES -->
+                            <!-- /FILES --
 
-                            <!-- EMPTY -->
+                            <!-- EMPTY --
                             <tr ng-if="files.length == 0"  class="collection-item">
                                 <td class="filemanager__icon-column"></td>
                                 <td colspan="4"><strong>Ordner ist leer</strong></td>
                             </tr>
-                            <!-- /EMPTY -->
+                            <!-- /EMPTY --
                         </tbody>
                     </table>
 
@@ -202,7 +323,7 @@
             </div>
 
 
-        </script>
+        </script>-->
 
         <!-- /ANGULAR SCRIPTS -->
 
@@ -262,7 +383,7 @@
                     </div>
                 </nav>
             </div> <!-- /navbar-fixed -->
-            
+
             <div ng-show="showOnlineContainer" class="useronline__modal" >
                 <table>
                     <thead>
@@ -350,7 +471,18 @@
 
         <?php $this->endBody() ?>
 
-        <script type="text/javascript">$(".button-collapse").sideNav();</script>
+        <script type="text/javascript">
+            // Mobile side navigation
+            $(".button-collapse").sideNav();
+
+            // Tooltips
+            setTimeout( function() {
+                $('.js-tooltip').tooltip({
+                    'delay': -10
+                });
+            }, 1500);
+
+        </script>
 
     </body>
 

@@ -1,0 +1,16 @@
+.floating-button-label {
+	cursor: pointer;
+
+	.btn-floating {
+		margin-right: 5px;
+		vertical-align: middle;
+	}
+	&:hover .btn-floating {
+		@extend .z-depth-1-half;
+	}
+
+	.floating-button-label__label {
+		color: color("teal", "base");
+		vertical-align: middle;
+	}
+}
