@@ -253,7 +253,7 @@ zaa.directive("storageFileManager", function(cfpLoadingBar) {
 			allowSelection : '@selection'
 		},
 		transclude : false,
-		controller : function($scope, $http, $timeout) {
+		controller : function($scope, $http) {
 			
 			$scope.uploadurl = 'admin/api-admin-storage/files-upload-flow';
 			$scope.bearer = 'Bearer ' + authToken;
@@ -270,9 +270,6 @@ zaa.directive("storageFileManager", function(cfpLoadingBar) {
 			}
 			
 			$scope.complete = function() {
-				$timeout(function() {
-					$scope.uploading = false;
-				}, 250);
 				cfpLoadingBar.complete()
 				$scope.getFiles($scope.currentFolderId);
 			}
@@ -343,6 +340,7 @@ zaa.directive("storageFileManager", function(cfpLoadingBar) {
 					$scope.folders = response.folders;
 					$scope.files = response.files;
 					$scope.breadcrumbs = response.breadcrumbs;
+					$scope.uploading = false;
 				});
 			}
 			
