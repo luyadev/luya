@@ -229,6 +229,38 @@ zaa.directive('zaaDate', function() {
 			'grid' : '@grid'
 		},
 		controller : function($scope) {
+			$scope.reform = function() {
+				var date = new Date($scope.year, ($scope.month-1), $scope.day);
+				var mil = date.getTime();
+				$scope.model = (mil/1000);
+			}
+			
+			$scope.$watch(function() { return $scope.model }, function(n, o) {
+				if (n !== undefined && n != o) {
+					var date = new Date(n*1000);
+					$scope.day = date.getDate(),
+					$scope.month = date.getMonth() + 1;
+					$scope.year = date.getFullYear();
+				}
+			})
+		},
+		template : function() {
+			return '<div class="col s{{grid}}">Datum: <input ng-blur="reform()" type="text" ng-model="day" style="width:34px;" />.<input ng-blur="reform()" type="text" ng-model="month" style="width:34px;" />.<input ng-blur="reform()" type="text" ng-model="year" style="width:50px;" /></div>';
+		}
+	}
+});
+
+/*
+zaa.directive('zaaDate', function() {
+	return {
+		restrict : 'E',
+		scope : {
+			'model' : '=',
+			'options' : '=',
+			'label' : '@label',
+			'grid' : '@grid'
+		},
+		controller : function($scope) {
 			$scope.month = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
 			$scope.monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
 			$scope.weekdaysFull = ['Sonntag', 'Monatg', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
@@ -237,21 +269,12 @@ zaa.directive('zaaDate', function() {
 			$scope.clear = 'Leeren';
 			$scope.close = 'Schliessen';
 		},
-		/*
-		link : function(scope) {
-			scope.$watch('model', function(n) {
-				if (n == undefined) {
-					scope.model = new Date();
-				}
-			})
-		},
-		*/
 		template: function(){
 			return '<div class="input-field col s{{grid}}"><label>{{label}}</label><input input-date months-full="{{ month }}" format="dd.mm.yyyy" date-format months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}" weekdays-letter="{{ weekdaysLetter }}" today="today"  clear="clear" close="close" type="text" class="datepicker" ng-model="model"></input></div>';
 		}
 	}
 });
-
+*/
 zaa.directive('dateFormat', function() {
 	return {
 	    require: 'ngModel',
