@@ -158,7 +158,57 @@ zaa.factory('FileListeService', function($http, $q) {
 	return service;
 });
 
-zaa.directive('storageFileUpload', function($http) {
+zaa.factory('FileIdService', function($http, $q) {
+	var service = [];
+	
+	service.data = [];
+	
+	service.get = function(fileId, forceReload) {
+		return $q(function(resolve, reject) {
+			if (fileId in service.data && forceReload !== true) {
+				//console.log('request existing fileId', fileId);
+				resolve(service.data[fileId]);
+			} else {
+				$http.get('admin/api-admin-storage/file-path', { params: { fileId : fileId } }).success(function(response) {
+					service.data[fileId] = response;
+					//console.log('request NOT EXISTING fileId', fileId);
+					resolve(response);
+				}).error(function(response) {
+					console.log('Error while loading fileID ' + fileId, response);
+				})
+			}
+		});
+	}
+	
+	return service;
+});
+
+zaa.factory('ImageIdService', function($http, $q) {
+	var service = [];
+	
+	service.data = [];
+	
+	service.get = function(imageId, forceReload) {
+		return $q(function(resolve, reject) {
+			if (imageId in service.data && forceReload !== true) {
+				//console.log('request existing imageId', imageId);
+				resolve(service.data[imageId]);
+			} else {
+				$http.get('admin/api-admin-storage/image-path', { params: { imageId : imageId } }).success(function(response) {
+					service.data[imageId] = response;
+					//console.log('request NOT EXISTING imageId', imageId);
+					resolve(response);
+				}).error(function(response) {
+					console.log('Error while loading imageId ' + imageId, response);
+				})
+			}
+		});
+	}
+	
+	return service;
+});
+
+zaa.directive('storageFileUpload', function($http, FileIdService) {
 	return {
 		restrict : 'E',
 		scope : {
@@ -180,11 +230,9 @@ zaa.directive('storageFileUpload', function($http) {
 			
 			scope.$watch(function() { return scope.ngModel }, function(n, o) {
 				if (n != 0 && n != null && n !== undefined) {
-					$http.get('admin/api-admin-storage/file-path', { params: { fileId : n } }).success(function(response) {
+					FileIdService.get(n).then(function(response) {
 						scope.fileinfo = response;
-					}).error(function(response) {
-						console.log('error', response);
-					})
+					});
 				}
 			});
 		},
@@ -192,7 +240,7 @@ zaa.directive('storageFileUpload', function($http) {
 	}
 });
 
-zaa.directive('storageImageUpload', function($http, ApiAdminFilter) {
+zaa.directive('storageImageUpload', function($http, ApiAdminFilter, ImageIdService) {
 	return {
 		restrict : 'E',
 		scope : {
@@ -247,13 +295,11 @@ zaa.directive('storageImageUpload', function($http, ApiAdminFilter) {
 			
 			scope.$watch(function() { return scope.ngModel }, function(n, o) {
 				if (n != 0 && n != null && n !== undefined) {
-					$http.get('admin/api-admin-storage/image-path', { params: { imageId : n } }).success(function(response) {
+					ImageIdService.get(n).then(function(response) {
 						scope.imageinfo = response;
 						scope.filterId = response.filter_id;
 						scope.fileId = response.file_id;
-					}).error(function(response) {
-						console.log('die datei wurde nicht gefunden', response);
-					})
+					});
 				}
 			})
 		},
@@ -289,6 +335,9 @@ zaa.directive("storageFileManager", function(cfpLoadingBar, FileListeService) {
 			$scope.uploader = {};
 			
 			$scope.uploading = false;
+			
+			$scope.serverProcessing = false;
+			
 			$scope.startUpload = function() {
 				$scope.uploading = true;
 				cfpLoadingBar.start();
@@ -298,6 +347,7 @@ zaa.directive("storageFileManager", function(cfpLoadingBar, FileListeService) {
 			}
 			
 			$scope.complete = function() {
+				$scope.serverProcessing = true;
 				cfpLoadingBar.complete()
 				$scope.getFiles($scope.currentFolderId, true);
 			}
@@ -370,6 +420,7 @@ zaa.directive("storageFileManager", function(cfpLoadingBar, FileListeService) {
 				FileListeService.get(folderId, forceReload).then(function(r) {
 					$scope.files = r;
 					$scope.uploading = false;
+					$scope.serverProcessing = false;
 				});
 			}
 			
