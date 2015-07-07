@@ -50,7 +50,7 @@ Natürlich benötigen wir mehr als nur Textfelder für die Typen-Einträge. Hier
 | zaa-textarea              | string        | Erstellt ein mehrzeiliges Textfeld `textarea`. 
 | zaa-number                | string        | Erstellt ein Feld wobei nur Zahl als valider input gelten.
 | zaa-wysiwyg               | string        | Erstellt einen WYSIWYG Editor mit verschiedene Formatierungs möglichkeiten. 
-| zaa-select                | array         | Erstellt ein Select-Dropdown mit Optionen. options: ein array wobei bei jedem eintrag *value* und *label* enthalten muss.
+| zaa-select                | array         | Erstellt ein Select-Dropdown mit Optionen. options: ein array wobei bei jedem Eintrag *value* und *label* enthalten muss. Der vorausgewählte Werte wird über *initvalue* angegeben.
 | zaa-datetime              | int           | Erstellt eine Datums und Zeiteingabe. Die Rückgabe ist ein *Unix-Timestamp*.
 | zaa-date                  | int           | Erstellt eine Datums eingabe. Die Rückt ist ein *Unix-Timestamp* 
 | zaa-checkbox              | array         | Erstellt ein Checkbox anahnd das options parameter. 
