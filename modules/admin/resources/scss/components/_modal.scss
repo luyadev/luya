@@ -1,5 +1,28 @@
 .modal {
 	width: 90%;
+	display: none;
+	
+	&.modal--active {
+		display: block;
+		z-index: 1010;		
+	}
+}
+
+.modal--bottom-sheet {
+  	top: auto;
+	bottom: 0;
+	margin: 0;
+	width: 100%;
+	border-radius: 0;
+	max-height: 45%;
+	will-change: transform;
+	overflow: auto;
+	transition: 0.25s ease transform;
+	transform: translateY(100%);
+	
+	&.modal--active {
+		transform: translateY(0%);
+	}
 }
 
 .modal__header {
@@ -37,4 +60,14 @@
 .modal__footer {
 	border-top: 1px solid color("grey", "lighten-2");
 	padding: 20px 0;
+}
+
+.modal__overlay {
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	  background-color: rgba(0,0,0,0.8);
+	  z-index: 1000;
 }
