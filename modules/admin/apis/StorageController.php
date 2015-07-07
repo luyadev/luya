@@ -80,6 +80,17 @@ class StorageController extends \admin\base\RestController
     }
     */
     
+    public function actionGetFiles($folderId)
+    {
+        return Yii::$app->storage->file->allFromFolder($folderId);
+    }
+    
+    public function actionGetFolders()
+    {
+        return Yii::$app->storage->folder->getFolderTree();
+    }
+    
+    /*
     public function actionFilemanager($folderId = 0)
     {
         return [
@@ -88,6 +99,7 @@ class StorageController extends \admin\base\RestController
             'files' => Yii::$app->storage->file->allFromFolder($folderId),
         ];
     }
+    */
 
     public function actionFolderCreate()
     {

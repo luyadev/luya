@@ -136,6 +136,28 @@ zaa.directive('storageImageUpload', function() {
 });
 */
 
+zaa.factory('FileListeService', function($http, $q) {
+	var service = [];
+	
+	service.data = [];
+	
+	service.get = function(folderId, forceReload) {
+		return $q(function(resolve, reject) {
+			if (folderId in service.data && forceReload !== true) {
+				resolve(service.data[folderId]);
+			} else {
+				$http.get('admin/api-admin-storage/get-files', { params : { folderId : folderId } }).success(function(response) {
+					service.data[folderId] = response;
+					resolve(response);
+				});
+			}
+		});
+		
+	}
+	
+	return service;
+});
+
 zaa.directive('storageFileUpload', function($http) {
 	return {
 		restrict : 'E',
@@ -245,7 +267,7 @@ zaa.directive('storageImageUpload', function($http, ApiAdminFilter) {
 /**
  * FILE MANAGER DIR
  */
-zaa.directive("storageFileManager", function(cfpLoadingBar) {
+zaa.directive("storageFileManager", function(cfpLoadingBar, FileListeService) {
 	return {
 		restrict : 'E',
 		transclude : false,
@@ -277,12 +299,12 @@ zaa.directive("storageFileManager", function(cfpLoadingBar) {
 			
 			$scope.complete = function() {
 				cfpLoadingBar.complete()
-				$scope.getFiles($scope.currentFolderId);
+				$scope.getFiles($scope.currentFolderId, true);
 			}
 			
 			$scope.files = [];
 			$scope.folders = [];
-			$scope.breadcrumbs = [];
+			
 			$scope.currentFolderId = 0;
 			$scope.selectedFiles = [];
 			
@@ -324,7 +346,9 @@ zaa.directive("storageFileManager", function(cfpLoadingBar) {
 		        	if (transport) {
 		        		$scope.showFolderForm = false;
 		        		$scope.newFolderName = '';
-		        		$scope.getFiles($scope.currentFolderId);
+		        		$http.get('admin/api-admin-storage/get-folders').success(function(response) {
+		        			$scope.folders = response;
+		        		});
 		        	}
 		        });
 			}
@@ -342,16 +366,18 @@ zaa.directive("storageFileManager", function(cfpLoadingBar) {
 				$scope.getFiles(folderId);
 			}
 			
-			$scope.getFiles = function(folderId) {
-				$http.get('admin/api-admin-storage/filemanager', { params : { folderId : folderId } }).success(function(response) {
-					$scope.folders = response.folders;
-					$scope.files = response.files;
-					$scope.breadcrumbs = response.breadcrumbs;
+			$scope.getFiles = function(folderId, forceReload) {
+				FileListeService.get(folderId, forceReload).then(function(r) {
+					$scope.files = r;
 					$scope.uploading = false;
 				});
 			}
 			
-			$scope.getFiles(0);
+			$http.get('admin/api-admin-storage/get-folders').success(function(response) {
+    			$scope.folders = response;
+    			$scope.getFiles(0);
+    		});
+			
 		},
 		templateUrl : 'storageFileManager'
 	}
