@@ -13,26 +13,12 @@ class Module extends \admin\base\Module
     public function getMenu()
     {
         return $this
-        ->node('Neuigkeiten', 'mdi-action-language')
+        ->node('News', 'mdi-action-language')
             ->group('Daten')
-                ->itemApi('Artikel', 'newsadmin-article-index', 'mdi-action-description', 'api-news-article')
-                ->itemApi('Tags', 'newsadmin-tag-index', 'mdi-social-share', 'api-news-tag')
-                ->itemApi('Katgorien', 'newsadmin-cat-index', 'mdi-action-group-work', 'api-news-cat')
+                ->itemApi('News Eintrag', 'newsadmin-article-index', 'mdi-content-content-paste', 'api-news-article')
+                ->itemApi('Kategorien', 'newsadmin-cat-index', 'mdi-action-view-headline', 'api-news-cat')
+                ->itemApi('Tags', 'newsadmin-tag-index', 'mdi-action-label-outline', 'api-news-tag')
         ->menu();
     }
 
-    /*
-    public function getMenu()
-    {
-        $node = $this->menu->createNode('newsadmin', 'News', 'fa-newspaper-o');
-        // create menu group
-        $this->menu->createGroup($node, 'Daten', [
-            // insert group items
-            $this->menu->createItem("article", "Artikel", "newsadmin-article-index", "fa-newspaper-o"),
-            $this->menu->createItem("tag", "Tags", "newsadmin-tag-index", "fa-tags"),
-        ]);
-
-        return $this->menu->get();
-    }
-    */
 }
