@@ -151,30 +151,85 @@
                 FILES & FOLDERS
              --><div class="filemanager__files">
 
-                    <div class="filemanager__toolbar" flow-init="{target: uploadurl, testChunks:false, headers : { 'Authorization' : bearer }}" flow-name="uploader.flow" flow-file-success="$file.msg = $message" flow-file-progress="$file.progress = $file" flow-files-submitted="startUpload()" flow-complete="complete()">
-                        <input id="file" name="file" type="file" flow-btn />
+                    <div class="filemanager__toolbar" flow-init="{target: uploadurl, testChunks:false, headers : { 'Authorization' : bearer }}" flow-name="uploader.flow" flow-file-success="$file.msg = $message" flow-file-progress="$file = $file" flow-files-submitted="startUpload()" flow-complete="complete()">
+                        <!-- Hidden upload field -->
+                        <input id="file" name="file" type="file" flow-btn class="hide" />
 
+                        <label class="floating-button-label right" for="file">
+                            <span class="btn-floating">
+                                <i class="mdi-file-file-upload"></i>
+                            </span>
+                            <span class="floating-button-label__label">Datei hinzufügen</span>
+                        </label>
+ 
+                        <div class="modal modal--bottom-sheet" ng-class="{ 'modal--active' : uploading && !serverProcessing }">
 
-                        <div ng-show="uploading">
-                                
-                                <table class="table table-striped">
-                                                <tr ng-repeat="file in $flow.files">
-                                                    <td>
-                                                        <!-- Aiwating upload -->
-                                                        <i ng-hide="file.isComplete() || file.isUploading()" class="fa fa-fw fa-clock-o"></i>
+                            <div class="row">
+                                <div class="col s12">
+                                    <ul class="collection">
+                                        <li class="collection-item file" ng-repeat="file in $flow.files" ng-class="{ 'file--completed' : file.isComplete() }">
+                                            <b>{{file.name}}</b>
+                                            <div class="file__progress progress">
+                                                <div class="determinate" style="width: {{file.progress() * 100}}%"></div>
+                                            </div>
+                                            <i class="file__icon mdi-navigation-check"></i>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
 
-                                                        <!-- Uploading... -->
-                                                        <i ng-show="file.isUploading()" class="fa fa-fw fa-refresh fa-spin"></i>
+                        </div>
 
-                                                        <!-- Completed -->
-                                                        <i ng-show="file.isComplete()" class="fa fa-fw fa-check" style="color: #45B29D;"></i>
-                                                    </td>
-                                                    <td>
-                                                        {{file.name}}
-                                                    </td>
-                                                </tr>
-                                            </table>
+                        <div class="filemanager__upload-overlay" ng-show="uploading || serverProcessing">
+                            <div class="filemanager__upload-content">
+                                <h3 class="filemanager__upload-title" ng-show="serverProcessing">
+                                    Der Server verarbeitet Ihre Daten. <br />
+                                    Bitte warten Sie einen Augenblick.
+                                </h3>
 
+                                <div class="filemanager__upload-loader preloader-wrapper big active" ng-show="serverProcessing">
+                                    <div class="spinner-layer spinner-blue">
+                                    <div class="circle-clipper left">
+                                      <div class="circle"></div>
+                                    </div><div class="gap-patch">
+                                      <div class="circle"></div>
+                                    </div><div class="circle-clipper right">
+                                      <div class="circle"></div>
+                                    </div>
+                                    </div>
+
+                                    <div class="spinner-layer spinner-red">
+                                    <div class="circle-clipper left">
+                                      <div class="circle"></div>
+                                    </div><div class="gap-patch">
+                                      <div class="circle"></div>
+                                    </div><div class="circle-clipper right">
+                                      <div class="circle"></div>
+                                    </div>
+                                    </div>
+
+                                    <div class="spinner-layer spinner-yellow">
+                                    <div class="circle-clipper left">
+                                      <div class="circle"></div>
+                                    </div><div class="gap-patch">
+                                      <div class="circle"></div>
+                                    </div><div class="circle-clipper right">
+                                      <div class="circle"></div>
+                                    </div>
+                                    </div>
+
+                                    <div class="spinner-layer spinner-green">
+                                    <div class="circle-clipper left">
+                                      <div class="circle"></div>
+                                    </div><div class="gap-patch">
+                                      <div class="circle"></div>
+                                    </div><div class="circle-clipper right">
+                                      <div class="circle"></div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+        
                         </div>
 
                     </div>
