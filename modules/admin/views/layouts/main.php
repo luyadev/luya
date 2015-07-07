@@ -121,7 +121,11 @@
                 <div class="filemanager__tree">
 
                     <div class="filemanager__toolbar">
-                        <a class="floating-button-label right">
+                        <div ng-show="showFolderForm">
+                        <input type="text" ng-model="newFolderName" id="foldername" />
+                        <button ng-click="createNewFolder(newFolderName)" type="button" class="btn">Erstellen</button>
+                        </div>
+                        <a class="floating-button-label right" ng-click="folderFormToggler()">
                             <span class="btn-floating">
                                 <i class="mdi-content-add"></i>
                             </span>
@@ -207,6 +211,7 @@
                                 <td class="filemanager__lighten">{{file.extension}}</td>
                                 <td class="filemanager__lighten">{{file.firstname}} {{file.lastname}}</td>
                                 <td class="filemanager__lighten">{{file.upload_timestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
+                                <td><span class="btn" ng-show="allowSelection=='true'" ng-click="selectFile(file)">SELECT FILE</span></td>
                             </tr>
                             <!-- /FILES -->
 

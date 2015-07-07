@@ -255,6 +255,12 @@ zaa.directive("storageFileManager", function(cfpLoadingBar) {
 		transclude : false,
 		controller : function($scope, $http) {
 			
+			$scope.showFolderForm = false;
+			
+			$scope.folderFormToggler = function() {
+				$scope.showFolderForm = !$scope.showFolderForm;
+			}
+			
 			$scope.uploadurl = 'admin/api-admin-storage/files-upload-flow';
 			$scope.bearer = 'Bearer ' + authToken;
 			
@@ -316,6 +322,7 @@ zaa.directive("storageFileManager", function(cfpLoadingBar) {
 		        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 		        }).success(function(transport) {
 		        	if (transport) {
+		        		$scope.showFolderForm = false;
 		        		$scope.newFolderName = '';
 		        		$scope.getFiles($scope.currentFolderId);
 		        	}
