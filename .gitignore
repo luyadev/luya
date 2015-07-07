@@ -31,3 +31,4 @@ composer.lock
 # PhpStorm
 .idea/
 scripts/.subsplit
+/.tern-project
