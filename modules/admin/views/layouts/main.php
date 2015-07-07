@@ -147,14 +147,34 @@
                 FILES & FOLDERS
              --><div class="filemanager__files">
 
-                    <div class="filemanager__toolbar">
-                        <a class="floating-button-label right">
-                            <span class="btn-floating">
-                                <i class="mdi-file-file-upload"></i>
-                            </span>
-                            <span class="floating-button-label__label">Datei hinzufügen</span>
-                        </a>
+                    <div class="filemanager__toolbar" flow-init="{target: uploadurl, testChunks:false, headers : { 'Authorization' : bearer }}" flow-name="uploader.flow" flow-file-success="$file.msg = $message" flow-file-progress="$file.progress = $file" flow-files-submitted="startUpload()" flow-complete="complete()">
+                        <input id="file" name="file" type="file" flow-btn />
+
+
+                        <div ng-show="uploading">
+                                
+                                <table class="table table-striped">
+                                                <tr ng-repeat="file in $flow.files">
+                                                    <td>
+                                                        <!-- Aiwating upload -->
+                                                        <i ng-hide="file.isComplete() || file.isUploading()" class="fa fa-fw fa-clock-o"></i>
+
+                                                        <!-- Uploading... -->
+                                                        <i ng-show="file.isUploading()" class="fa fa-fw fa-refresh fa-spin"></i>
+
+                                                        <!-- Completed -->
+                                                        <i ng-show="file.isComplete()" class="fa fa-fw fa-check" style="color: #45B29D;"></i>
+                                                    </td>
+                                                    <td>
+                                                        {{file.name}}
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                        </div>
+
                     </div>
+
 
                     <table class="filemanager__table striped hoverable">
                         <thead>
@@ -448,19 +468,6 @@
         </div> <!-- /.luya-container -->
 
         <?php $this->endBody() ?>
-
-        <script type="text/javascript">
-            // Mobile side navigation
-            $(".button-collapse").sideNav();
-
-            // Tooltips
-            setTimeout( function() {
-                $('.js-tooltip').tooltip({
-                    'delay': -10
-                });
-            }, 1500);
-
-        </script>
 
     </body>
 

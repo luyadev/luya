@@ -245,7 +245,7 @@ zaa.directive('storageImageUpload', function($http, ApiAdminFilter) {
 /**
  * FILE MANAGER DIR
  */
-zaa.directive("storageFileManager", function() {
+zaa.directive("storageFileManager", function(cfpLoadingBar) {
 	return {
 		restrict : 'E',
 		transclude : false,
@@ -253,20 +253,27 @@ zaa.directive("storageFileManager", function() {
 			allowSelection : '@selection'
 		},
 		transclude : false,
-		controller : function($scope, $http) {
+		controller : function($scope, $http, $timeout) {
 			
 			$scope.uploadurl = 'admin/api-admin-storage/files-upload-flow';
 			$scope.bearer = 'Bearer ' + authToken;
 			
 			$scope.uploader = {};
 			
-			
+			$scope.uploading = false;
 			$scope.startUpload = function() {
+				$scope.uploading = true;
+				cfpLoadingBar.start();
+				cfpLoadingBar.inc();
 				$scope.uploader.flow.opts.query = { 'folderId' : $scope.currentFolderId };
 				$scope.uploader.flow.upload()
 			}
 			
 			$scope.complete = function() {
+				$timeout(function() {
+					$scope.uploading = false;
+				}, 250);
+				cfpLoadingBar.complete()
 				$scope.getFiles($scope.currentFolderId);
 			}
 			
