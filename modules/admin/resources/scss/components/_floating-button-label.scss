@@ -1,4 +1,5 @@
 .floating-button-label {
+	font-size: inherit; // Overwrite smaller label styles
 	cursor: pointer;
 
 	.btn-floating {
@@ -12,5 +13,8 @@
 	.floating-button-label__label {
 		color: color("teal", "base");
 		vertical-align: middle;
+	}
+	&.floating-button-label--input-visible .floating-button-label__label {
+		display: none;
 	}
 }

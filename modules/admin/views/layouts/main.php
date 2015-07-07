@@ -103,11 +103,13 @@
         </script>
 
         <script type="text/ng-template" id="reverseFolders">
-                    <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
-                    <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
-                    <i class="mdi-editor-mode-edit filemanager__edit-icon"></i>
-                    <span ng-click="loadFolder(folder.data.id)">{{folder.data.name }}</span>
-                    <ul class="filemanager__folders">
+                    <div class="filemanager__folder-button" ng-click="loadFolder(folder.data.id)">
+                        <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
+                        <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
+                        <i class="mdi-editor-mode-edit filemanager__edit-icon"></i>
+                        <span>{{folder.data.name }}</span>
+                    </div>
+                    <ul class="filemanager__folders" ng-if="folder.__items.length > 0">
                         <li class="filemanager__folder"  ng-class="{'active' : currentFolderId == folder.data.id }" ng-repeat="folder in folder.__items"  ng-include="'reverseFolders'"></li>
                     </ul>
         </script>
@@ -121,24 +123,32 @@
                 <div class="filemanager__tree">
 
                     <div class="filemanager__toolbar">
-                        <div ng-show="showFolderForm">
-                        <input type="text" ng-model="newFolderName" id="foldername" />
+                        <!--<div ng-show="showFolderForm">
                         <button ng-click="createNewFolder(newFolderName)" type="button" class="btn">Erstellen</button>
-                        </div>
-                        <a class="floating-button-label right" ng-click="folderFormToggler()">
-                            <span class="btn-floating">
+                        </div>-->
+                        <div class="floating-button-label floating-button-label--with-form left" ng-class="{ 'floating-button-label--input-visible' : showFolderForm }">
+                            <div class="floating-button-label__form">
+                                <input class="floating-button-label__input" type="text" ng-model="newFolderName" id="foldername" />
+                            </div>
+                            <span class="floating-button-label__submit btn-floating right" ng-click="createNewFolder(newFolderName)">
+                                <i class="mdi-navigation-check"></i>
+                            </span>
+                            <span class="btn-floating" ng-click="folderFormToggler()" ng-class="{ 'right' : showFolderForm }">
                                 <i class="mdi-content-add"></i>
                             </span>
-                            <span class="floating-button-label__label">Ordner hinzufügen</span>
-                        </a>
+                            <span class="floating-button-label__label" ng-click="folderFormToggler()">Ordner hinzufügen</span>
+                        </div>
                     </div>
 
                     <!-- FOLDER LIST -->
                     <ul class="filemanager__folders">
-                        <li class="filemanager__main-folder" ng-class="{'active' : currentFolderId == 0 }">
-                            <i class="mdi-file-folder-open"></i>
-                            <span ng-click="loadFolder(0)">Stammverzeichnis</span>
-                            <ul class="filemanager__folders">
+                        <li class="filemanager__folder" ng-class="{'active' : currentFolderId == 0 }">
+                            <div class="filemanager__folder-button">
+                                <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
+                                <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
+                                <span ng-click="loadFolder(0)">Stammverzeichnis</span>
+                            </div>
+                            <ul class="filemanager__folders" ng-if="folders.length > 0">
                                 <li class="filemanager__folder" ng-class="{'active' : currentFolderId == folder.data.id }" ng-repeat="folder in folders" ng-include="'reverseFolders'"></li>
                             </ul>
                         </li>
@@ -155,7 +165,7 @@
                         <!-- Hidden upload field -->
                         <input id="file" name="file" type="file" flow-btn class="hide" />
 
-                        <label class="floating-button-label right" for="file">
+                        <label class="floating-button-label left" for="file">
                             <span class="btn-floating">
                                 <i class="mdi-file-file-upload"></i>
                             </span>

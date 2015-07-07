@@ -49,23 +49,46 @@
 			border-top: 1px solid rgba(0, 0, 0, 0.1);
 		}
 	}
-}
-
-.filemanager__folder {
-	word-break: break-word;
-	position: relative;
-	padding: 8px 0 8px 25px;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-	cursor: pointer;
-	display: block;
-
+	
 	&:hover > .filemanager__folder-icon,
 	&.active > .filemanager__folder-icon,
 	&:hover > span,
 	&.active > span {
 		color: color($filemanager--base-color, "base");
 	}
+}
 
+.filemanager__folder {
+	word-break: break-word;
+	position: relative;
+	padding: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	display: block;
+
+	&:last-of-type {
+		border-bottom: 0;
+	}
+
+	& > .filemanager__folders {
+		padding-left: 25px;
+		
+		& .filemanager__folder:first-of-type {
+			border-top: 1px solid rgba(0, 0, 0, 0.1);
+		}
+	}
+}
+
+.filemanager__folder-button {
+	padding: 8px 0 8px 25px;
+	cursor: pointer;
+	
+	&:hover > .filemanager__folder-icon,
+	.filemanager__folder.active > & > .filemanager__folder-icon,
+	&:hover >  span,
+	.filemanager__folder.active > & > span {
+		color: color($filemanager--base-color, "base");
+	}
+	
 	.filemanager__folder-icon {
 		position: absolute;
 		left: 0;
@@ -75,14 +98,14 @@
 		display: none;
 	}
 	&:hover > .filemanager__folder-icon--active,
-	&.active > .filemanager__folder-icon--active {
+	.filemanager__folder.active > & > .filemanager__folder-icon--active {
 		display: block;
 	}
 	&:hover > .filemanager__folder-icon--default,
-	&.active > .filemanager__folder-icon--default {
+	.filemanager__folder.active > & > .filemanager__folder-icon--default {
 		display: none;
 	}
-
+	
 	.filemanager__edit-icon {
 		position: absolute;
 		right: 0;
@@ -93,22 +116,6 @@
 	&:hover > .filemanager__edit-icon {
 		opacity: 1;
 		pointer-events: auto;
-	}
-
-	&:last-of-type {
-		border-bottom: 0;
-	}
-
-	& > .filemanager__folders {
-		margin-top: 8px;
-
-		& .filemanager__folder:first-of-type {
-			border-top: 1px solid rgba(0, 0, 0, 0.1);
-		}
-	}
-
-	&.filemanager__folder--not-clickable {
-		cursor: default;
 	}
 }
 
