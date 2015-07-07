@@ -6,6 +6,7 @@ use Yii;
 
 class Article extends \admin\ngrest\base\Model
 {
+
     public static function tableName()
     {
         return 'news_article';
@@ -22,7 +23,7 @@ class Article extends \admin\ngrest\base\Model
     {
         return [
            'restcreate' => ['title', 'text', 'cat_id', 'image_id', 'image_list', 'tags', 'timestamp_display_from', 'timestamp_display_until', 'file_list'],
-           'restupdate' => ['title', 'text', 'cat_id', 'image_id', 'image_list', 'tags', 'timestamp_display_from', 'timestamp_display_until', 'file_list'],
+           'restupdate' => ['title', 'text', 'cat_id', 'image_id', 'image_list', 'tags', 'timestamp_display_from', 'timestamp_display_until', 'timestamp_display_limit', 'file_list'],
        ];
     }
 
@@ -66,6 +67,11 @@ class Article extends \admin\ngrest\base\Model
         return \luya\helpers\Url::to('news/default/detail', ['id' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
     }
 
+    public static function getAvailableNews()
+    {
+        return Article::find()->where('timestamp_display_from <= '.time())->all();
+    }
+
     // ngrest
 
     public $tags = []; // cause of extra fields - will pe parsed trough the ngrest plugins.
@@ -90,8 +96,10 @@ class Article extends \admin\ngrest\base\Model
         $config->update->field('text', 'Text')->textarea()->required();
         $config->update->field('timestamp_create', 'News erstellt am:')->date();
         $config->update->field('timestamp_display_from', 'News anzeigen ab')->date();
+
+        $config->update->field('timestamp_display_limit', 'News Anzeige zeitlich einschränken:')->toggleStatus();
         $config->update->field('timestamp_display_until', 'News anzeigen bis')->date();
-        //$config->update->field('timestamp_display_until', 'News anzeigen bis')->date();
+
         $config->update->field('image_id', 'Bild')->image()->required();
         $config->update->field('image_list', 'Bild Liste')->imageArray();
         $config->update->field('file_list', 'Datei Liste')->fileArray();
