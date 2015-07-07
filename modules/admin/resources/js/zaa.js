@@ -132,10 +132,10 @@ zaa.directive('modal', function($timeout) {
 				scope.$watch('isModalHidden', function(n) {
 					if (n == false) {
 						$(element).openModal({
-					      dismissible: false, // Modal can be dismissed by clicking outside of the modal
+					      dismissible: true, // Modal can be dismissed by clicking outside of the modal
 					      opacity: .5, // Opacity of modal background
-					      in_duration: 300, // Transition in duration
-					      out_duration: 200, // Transition out duration
+					      in_duration: 150, // Transition in duration
+					      out_duration: 100, // Transition out duration
 					      ready: function() {  }, // Callback for Modal open
 					      complete: function() { 
 					    	  scope.$apply(function() {
