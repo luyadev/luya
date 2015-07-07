@@ -20,7 +20,7 @@ class MapBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'address', 'label' => 'Adresse', 'type' => 'zaa-text'],
+                ['var' => 'address', 'label' => 'Adresse', 'type' => 'zaa-text', 'placeholder'=>'Zephir Software Design AG, Tramstrasse 66, 4142 Münchenstein'],
             ],
             'cfgs' => [
                 ['var' => 'zoom', 'label' => 'Zoom', 'type' => 'zaa-select', 'initvalue' => '12', 'options' =>
