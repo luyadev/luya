@@ -69,11 +69,22 @@ class StorageController extends \admin\base\RestController
         return \yii::$app->storage->file->get($fileId);
     }
 
+    /*
     public function actionFiles($folderId = 0)
     {
         return [
             'breadcrumbs' => Yii::$app->storage->folder->breadcrumbs($folderId),
             'folders' => Yii::$app->storage->folder->getSubFolders($folderId),
+            'files' => Yii::$app->storage->file->allFromFolder($folderId),
+        ];
+    }
+    */
+    
+    public function actionFilemanager($folderId = 0)
+    {
+        return [
+            'breadcrumbs' => Yii::$app->storage->folder->breadcrumbs($folderId),
+            'folders' => Yii::$app->storage->folder->getFolderTree(),
             'files' => Yii::$app->storage->file->allFromFolder($folderId),
         ];
     }

@@ -102,6 +102,16 @@
             </div>
         </script>
 
+        <script type="text/ng-template" id="reverseFolders">
+                    <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
+                    <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
+                    <i class="mdi-editor-mode-edit filemanager__edit-icon"></i>
+                    <span ng-click="loadFolder(folder.data.id)">{{folder.data.name }}</span>
+                    <ul class="filemanager__folders">
+                        <li class="filemanager__folder"  ng-class="{'active' : currentFolderId == folder.data.id }" ng-repeat="folder in folder.__items"  ng-include="'reverseFolders'"></li>
+                    </ul>
+        </script>
+        
         <!-- FILEMANAGER -->
         <script type="text/ng-template" id="storageFileManager">
 
@@ -121,45 +131,13 @@
 
                     <!-- FOLDER LIST -->
                     <ul class="filemanager__folders">
-                        <li class="filemanager__main-folder">
+                        <li class="filemanager__main-folder" ng-class="{'active' : currentFolderId == 0 }">
                             <i class="mdi-file-folder-open"></i>
-                            <span>Stammverzeichnis</span>
-
-                            <!-- FOLDER LIST | Level 1 -->
+                            <span ng-click="loadFolder(0)">Stammverzeichnis</span>
                             <ul class="filemanager__folders">
-                                <li class="filemanager__folder" ng-repeat="folder in folders" ng-click="loadFolder(folder.id)">
-                                    <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
-                                    <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
-                                    <i class="mdi-editor-mode-edit filemanager__edit-icon"></i>
-                                    
-                                    <span>{{folder.name}}</span>
-
-                                </li>
-                                <li class="filemanager__folder active">
-                                    <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
-                                    <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
-                                    <span>Ordner 3 - Ebene 1</span>
-
-                                    <!-- FOLDER LIST | Level 2 -->
-                                    <ul class="filemanager__folders">
-                                        <li class="filemanager__folder">
-                                            <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
-                                            <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
-                                            <span>Ordner 1 - Ebene 2</span>
-                                        </li>
-                                        <li class="filemanager__folder">
-                                            <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
-                                            <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
-                                            <span>Ordner 2 - Ebene 2</span>
-                                        </li>
-                                    </ul>
-                                    <!-- /FOLDER LIST -->
-                                </li>
+                                <li class="filemanager__folder" ng-class="{'active' : currentFolderId == folder.data.id }" ng-repeat="folder in folders" ng-include="'reverseFolders'"></li>
                             </ul>
-                            <!-- /FOLDER LIST -->
-
                         </li>
-
                     </ul>
                     <!-- /FOLDER LIST -->
 

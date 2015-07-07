@@ -332,7 +332,7 @@ zaa.directive("storageFileManager", function() {
 			}
 			
 			$scope.getFiles = function(folderId) {
-				$http.get('admin/api-admin-storage/files', { params : { folderId : folderId } }).success(function(response) {
+				$http.get('admin/api-admin-storage/filemanager', { params : { folderId : folderId } }).success(function(response) {
 					$scope.folders = response.folders;
 					$scope.files = response.files;
 					$scope.breadcrumbs = response.breadcrumbs;

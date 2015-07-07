@@ -19,6 +19,23 @@ class Folder
         return \admin\models\StorageFolder::find()->where(['parent_id' => $parentFolderId])->asArray()->all();
     }
 
+    private function partialFolderTree($parentId)
+    {
+        $data = [];
+        foreach($this->getSubFolders($parentId) as $row) {
+            $data[] = [
+                'data' => $row,
+                '__items' => $this->partialFolderTree($row['id']),
+            ];
+        }
+        return $data;
+    }
+    
+    public function getFolderTree()
+    {
+        return $this->partialFolderTree(0);  
+    }
+    
     /**
      * get all sub folders for $folderId.
      *
