@@ -57,13 +57,16 @@ A uscase for the abovce example are project(app) layouts and blocks. The importe
 
 crud
 ----
-
-create full crud data within one command.
-
-***create****
-
+create ngrest crud components:
 ```
 php index.php crud/create
+```
+
+module
+------
+create admin/frontend module:
+```sh
+php index.php module/create
 ```
 
 Create your console command
