@@ -65,7 +65,7 @@ php index.php crud/create
 module
 ------
 create admin/frontend module:
-```sh
+```
 php index.php module/create
 ```
 
