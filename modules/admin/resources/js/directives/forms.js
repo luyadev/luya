@@ -214,7 +214,7 @@ zaa.directive('zaaDatetime', function() {
 			})
 		},
 		template : function() {
-			return '<div class="col s{{grid}}">Datum: <input ng-blur="reform()" type="text" ng-model="day" style="width:34px;" />.<input ng-blur="reform()" type="text" ng-model="month" style="width:34px;" />.<input ng-blur="reform()" type="text" ng-model="year" style="width:50px;" /> Zeit: <input ng-blur="reform()" type="text" ng-model="hour" style="width:34px;" />:<input ng-blur="reform()" type="text" ng-model="min" style="width:34px;" /></div>';
+			return '<div class="col s{{grid}}">{{label}}: <input ng-blur="reform()" type="text" ng-model="day" style="width:34px;" />.<input ng-blur="reform()" type="text" ng-model="month" style="width:34px;" />.<input ng-blur="reform()" type="text" ng-model="year" style="width:50px;" /> Zeit: <input ng-blur="reform()" type="text" ng-model="hour" style="width:34px;" />:<input ng-blur="reform()" type="text" ng-model="min" style="width:34px;" /></div>';
 		}
 	}
 });
@@ -245,7 +245,7 @@ zaa.directive('zaaDate', function() {
 			})
 		},
 		template : function() {
-			return '<div class="col s{{grid}}">Datum: <input ng-blur="reform()" type="text" ng-model="day" style="width:34px;" />.<input ng-blur="reform()" type="text" ng-model="month" style="width:34px;" />.<input ng-blur="reform()" type="text" ng-model="year" style="width:50px;" /></div>';
+			return '<div class="col s{{grid}}">{{label}}: <input ng-blur="reform()" type="text" ng-model="day" style="width:34px;" />.<input ng-blur="reform()" type="text" ng-model="month" style="width:34px;" />.<input ng-blur="reform()" type="text" ng-model="year" style="width:50px;" /></div>';
 		}
 	}
 });
