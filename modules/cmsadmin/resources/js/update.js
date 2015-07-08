@@ -279,7 +279,7 @@ zaa.controller("PageBlockEditController", function($scope, $sce, $http, ApiCmsNa
 	
 	$scope.onStop = function() {
 		$scope.$apply(function() {
-			AdminClassService.setClassSpace('onDragStart', '');
+			AdminClassService.setClassSpace('onDragStart', undefined);
 		});
 	};
 	
@@ -347,7 +347,7 @@ zaa.controller("PageBlockEditController", function($scope, $sce, $http, ApiCmsNa
 /**
  * @TODO HANDLING SORT INDEX OF EACH BLOCK
  */
-zaa.controller("DropBlockController", function($scope, ApiCmsNavItemPageBlockItem) {
+zaa.controller("DropBlockController", function($scope, ApiCmsNavItemPageBlockItem, AdminClassService) {
 	
 	$scope.PagePlaceholderController = $scope.$parent;
 	
@@ -356,11 +356,12 @@ zaa.controller("DropBlockController", function($scope, ApiCmsNavItemPageBlockIte
 	$scope.onDrop = function($event, $ui) {
 		var sortIndex = $($event.target).data('sortindex');
 		var moveBlock = $scope.droppedBlock['vars'] || false;
-		if (moveBlock == false) {
+		if (moveBlock === false) {
 			ApiCmsNavItemPageBlockItem.save($.param({ prev_id : $scope.placeholder.prev_id, sort_index : sortIndex, block_id : $scope.droppedBlock.id , placeholder_var : $scope.placeholder.var, nav_item_page_id : $scope.placeholder.nav_item_page_id }), function(rsp) {
 				//console.log(rsp, $scope.placeholder.prev_id);
 				$scope.PagePlaceholderController.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 				//$scope.PagePlaceholderController.NavItemTypePageController.refresh();
+				$scope.droppedBlock = {};
 			})
 		} else {
 			ApiCmsNavItemPageBlockItem.update({ id : $scope.droppedBlock.id }, $.param({
@@ -371,10 +372,10 @@ zaa.controller("DropBlockController", function($scope, ApiCmsNavItemPageBlockIte
 				$scope.PagePlaceholderController.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 				// console.log(rsp, $scope.placeholder.prev_id);
 				//$scope.PagePlaceholderController.NavItemTypePageController.refresh();
+				$scope.droppedBlock = {};
 			});
 		}
-		
-		
+		AdminClassService.setClassSpace('onDragStart', undefined);
 	}
 });
 
