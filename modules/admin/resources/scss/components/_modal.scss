@@ -20,8 +20,8 @@
 }
 
 .modal--bottom-sheet {
-  	top: auto;
-	bottom: 0;
+  	top: auto !important;
+	bottom: 0 !important;
 	margin: 0;
 	width: 100%;
 	border-radius: 0;
@@ -30,6 +30,8 @@
 	overflow: auto;
 	transition: 0.25s ease transform;
 	transform: translateY(100%);
+	left: 0 !important;
+	right: 0 !important;
 	
 	&.modal--active {
 		transform: translateY(0%);
