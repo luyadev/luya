@@ -1,11 +1,24 @@
 .modal {
 	width: 90%;
 	display: none;
+	overflow: auto;
+  	position: fixed;
+	left: 2.5%;
+	top: 2.5%;
+	right: 2.5%;
+	bottom: 2.5%;
+	max-height: 100%;
 	
 	&.modal--active {
 		display: block;
 		z-index: 1010;		
 	}
+}
+
+.modal__close {
+	position: absolute;
+	right: 5px;
+	top: 5px;
 }
 
 .modal--bottom-sheet {

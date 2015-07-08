@@ -54,9 +54,12 @@
         <!-- ANGULAR SCRIPTS -->
 
         <script type="text/ng-template" id="modal">
-        <div class="modal" ng-show="!isModalHidden" style="z-index:999999">
-            <div class="modal-content" ng-transclude></div>
-        </div>
+            <div class="modal" ng-show="!isModalHidden" style="z-index:999999">
+                <span class="modal__close btn-floating red" ng-show="!isModalHidden" ng-click="isModalHidden = true">
+                    <i class="mdi-navigation-close"></i>
+                </span>
+                <div class="modal-content" ng-transclude></div>
+            </div>
         </script>
 
         <script type="text/ng-template" id="storageFileUpload">
@@ -123,21 +126,18 @@
                 <div class="filemanager__tree">
 
                     <div class="filemanager__toolbar">
-                        <!--<div ng-show="showFolderForm">
-                        <button ng-click="createNewFolder(newFolderName)" type="button" class="btn">Erstellen</button>
-                        </div>-->
-                        <div class="floating-button-label floating-button-label--with-form left" ng-class="{ 'floating-button-label--input-visible' : showFolderForm }">
-                            <div class="floating-button-label__form">
-                                <input class="floating-button-label__input" type="text" ng-model="newFolderName" id="foldername" />
-                            </div>
-                            <span class="floating-button-label__submit btn-floating right" ng-click="createNewFolder(newFolderName)">
-                                <i class="mdi-navigation-check"></i>
-                            </span>
-                            <span class="btn-floating" ng-click="folderFormToggler()" ng-class="{ 'right' : showFolderForm }">
-                                <i class="mdi-content-add"></i>
-                            </span>
-                            <span class="floating-button-label__label" ng-click="folderFormToggler()">Ordner hinzufügen</span>
+                        
+                        <div class="floating-form left" ng-class="{ 'floating-form--active' : showFolderForm }">
+                            <div class="floating-form__form">
+                                <input class="floating-form__input" type="text" ng-model="newFolderName" id="foldername" />
+                            </div><!-- PREVENT WHITESPACE
+                         --><div class="floating-form__actions">
+                                <span class="[ floating-form__button floating-form__button--active ] btn-floating" ng-click="createNewFolder(newFolderName)"><i class="mdi-navigation-check"></i></span>
+                                <span class="floating-form__button floating-form__button--active-close btn-floating" ng-click="folderFormToggler()"><i class="mdi-content-add"></i></span>
+                            </div><!-- PREVENT WHITESPACE
+                         --><span class="floating-form__label" ng-click="folderFormToggler()">Ordner hinzufügen</span>
                         </div>
+
                     </div>
 
                     <!-- FOLDER LIST -->
@@ -254,6 +254,7 @@
                                 <th>Typ</th>
                                 <th>Eigentümer</th>
                                 <th>Erstellungsdatum</th>
+                                <th ng-show="allowSelection == 'true'"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -276,7 +277,9 @@
                                 <td class="filemanager__lighten">{{file.extension}}</td>
                                 <td class="filemanager__lighten">{{file.firstname}} {{file.lastname}}</td>
                                 <td class="filemanager__lighten">{{file.upload_timestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
-                                <td><span class="btn" ng-show="allowSelection=='true'" ng-click="selectFile(file)">SELECT FILE</span></td>
+                                <td ng-show="allowSelection == 'true'">
+                                    <small class="btn btn-flat waves-teal" ng-click="selectFile(file)" style="overflow: hidden; padding: 0 10px;">Datei verwenden</small>
+                                </td>
                             </tr>
                             <!-- /FILES -->
 

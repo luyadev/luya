@@ -3,7 +3,6 @@
 	cursor: pointer;
 
 	.btn-floating {
-		margin-right: 5px;
 		vertical-align: middle;
 	}
 	&:hover .btn-floating {
@@ -13,8 +12,7 @@
 	.floating-button-label__label {
 		color: color("teal", "base");
 		vertical-align: middle;
-	}
-	&.floating-button-label--input-visible .floating-button-label__label {
-		display: none;
+		padding-left: 5px;
+		display: inline-block;
 	}
 }
