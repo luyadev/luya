@@ -149,7 +149,7 @@ class NavItemController extends \admin\base\RestController
         $blockItem = (new \yii\db\Query())->select("*")->from("cms_nav_item_page_block_item")->where(['id' => $blockId])->one();
         
         
-        $blockObject = \cmsadmin\models\Block::objectId($blockItem['block_id']);
+        $blockObject = \cmsadmin\models\Block::objectId($blockItem['block_id'], 'admin');
         if ($blockObject === false) {
             return false;
         }

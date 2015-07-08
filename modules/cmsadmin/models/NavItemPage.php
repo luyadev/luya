@@ -50,7 +50,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
         $twig = Yii::$app->twig->env(new \Twig_Loader_String());
 
         foreach ($placeholders as $key => $placeholder) {
-            $blockObject = \cmsadmin\models\Block::objectId($placeholder['block_id']);
+            $blockObject = \cmsadmin\models\Block::objectId($placeholder['block_id'], 'frontend');
             if ($blockObject === false) {
                 continue;
             }

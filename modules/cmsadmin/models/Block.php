@@ -42,7 +42,7 @@ class Block extends \admin\ngrest\base\Model
         ];
     }
 
-    public static function objectId($id)
+    public static function objectId($id, $context)
     {
         $block = self::find()->where(['id' => $id])->one();
         if (!$block) {
@@ -55,6 +55,7 @@ class Block extends \admin\ngrest\base\Model
         }
         $object = new $class();
         $object->setEnvOption('blockId', $id);
+        $object->setEnvOption('context', $context);
         return $object;
     }
 }

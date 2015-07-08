@@ -29,6 +29,16 @@ abstract class Block implements BlockInterface
         // override
     }
     
+    protected function isAdminContext()
+    {
+        return ($this->getEnvOption('context', false) === 'admin') ? true : false;
+    }
+    
+    protected function isFrontendContext()
+    {
+        return ($this->getEnvOption('context', false) === 'frontend') ? true : false;
+    }
+    
     /* getter & setter EnvOptions */
 
     public function setEnvOption($key, $value)
