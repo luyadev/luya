@@ -51,6 +51,9 @@ class ModuleBlock extends \cmsadmin\base\Block
     
     private function moduleContent($moduleName)
     {
+        if ($this->isAdminContext()) {
+            return null;
+        }
         /**
          * in the admin context (means env options are empty) we do not have to render the module!
          */
