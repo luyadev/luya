@@ -54,9 +54,12 @@
         <!-- ANGULAR SCRIPTS -->
 
         <script type="text/ng-template" id="modal">
-        <div class="modal" ng-show="!isModalHidden" style="z-index:999999">
-            <div class="modal-content" ng-transclude></div>
-        </div>
+            <div class="modal" ng-show="!isModalHidden" style="z-index:999999">
+                <span class="modal__close btn-floating red" ng-show="!isModalHidden" ng-click="isModalHidden = true">
+                    <i class="mdi-navigation-close"></i>
+                </span>
+                <div class="modal-content" ng-transclude></div>
+            </div>
         </script>
 
         <script type="text/ng-template" id="storageFileUpload">
@@ -103,11 +106,13 @@
         </script>
 
         <script type="text/ng-template" id="reverseFolders">
-                    <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
-                    <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
-                    <i class="mdi-editor-mode-edit filemanager__edit-icon"></i>
-                    <span ng-click="loadFolder(folder.data.id)">{{folder.data.name }}</span>
-                    <ul class="filemanager__folders">
+                    <div class="filemanager__folder-button" ng-click="loadFolder(folder.data.id)">
+                        <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
+                        <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
+                        <i class="mdi-editor-mode-edit filemanager__edit-icon"></i>
+                        <span>{{folder.data.name }}</span>
+                    </div>
+                    <ul class="filemanager__folders" ng-if="folder.__items.length > 0">
                         <li class="filemanager__folder"  ng-class="{'active' : currentFolderId == folder.data.id }" ng-repeat="folder in folder.__items"  ng-include="'reverseFolders'"></li>
                     </ul>
         </script>
@@ -121,24 +126,29 @@
                 <div class="filemanager__tree">
 
                     <div class="filemanager__toolbar">
-                        <div ng-show="showFolderForm">
-                        <input type="text" ng-model="newFolderName" id="foldername" />
-                        <button ng-click="createNewFolder(newFolderName)" type="button" class="btn">Erstellen</button>
+                        
+                        <div class="floating-form left" ng-class="{ 'floating-form--active' : showFolderForm }">
+                            <div class="floating-form__form">
+                                <input class="floating-form__input" type="text" ng-model="newFolderName" id="foldername" />
+                            </div><!-- PREVENT WHITESPACE
+                         --><div class="floating-form__actions">
+                                <span class="[ floating-form__button floating-form__button--active ] btn-floating" ng-click="createNewFolder(newFolderName)"><i class="mdi-navigation-check"></i></span>
+                                <span class="floating-form__button floating-form__button--active-close btn-floating" ng-click="folderFormToggler()"><i class="mdi-content-add"></i></span>
+                            </div><!-- PREVENT WHITESPACE
+                         --><span class="floating-form__label" ng-click="folderFormToggler()">Ordner hinzufügen</span>
                         </div>
-                        <a class="floating-button-label right" ng-click="folderFormToggler()">
-                            <span class="btn-floating">
-                                <i class="mdi-content-add"></i>
-                            </span>
-                            <span class="floating-button-label__label">Ordner hinzufügen</span>
-                        </a>
+
                     </div>
 
                     <!-- FOLDER LIST -->
                     <ul class="filemanager__folders">
-                        <li class="filemanager__main-folder" ng-class="{'active' : currentFolderId == 0 }">
-                            <i class="mdi-file-folder-open"></i>
-                            <span ng-click="loadFolder(0)">Stammverzeichnis</span>
-                            <ul class="filemanager__folders">
+                        <li class="filemanager__folder" ng-class="{'active' : currentFolderId == 0 }">
+                            <div class="filemanager__folder-button">
+                                <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
+                                <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
+                                <span ng-click="loadFolder(0)">Stammverzeichnis</span>
+                            </div>
+                            <ul class="filemanager__folders" ng-if="folders.length > 0">
                                 <li class="filemanager__folder" ng-class="{'active' : currentFolderId == folder.data.id }" ng-repeat="folder in folders" ng-include="'reverseFolders'"></li>
                             </ul>
                         </li>
@@ -155,7 +165,7 @@
                         <!-- Hidden upload field -->
                         <input id="file" name="file" type="file" flow-btn class="hide" />
 
-                        <label class="floating-button-label right" for="file">
+                        <label class="floating-button-label left" for="file">
                             <span class="btn-floating">
                                 <i class="mdi-file-file-upload"></i>
                             </span>
@@ -244,6 +254,7 @@
                                 <th>Typ</th>
                                 <th>Eigentümer</th>
                                 <th>Erstellungsdatum</th>
+                                <th ng-show="allowSelection == 'true'"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -266,7 +277,9 @@
                                 <td class="filemanager__lighten">{{file.extension}}</td>
                                 <td class="filemanager__lighten">{{file.firstname}} {{file.lastname}}</td>
                                 <td class="filemanager__lighten">{{file.upload_timestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
-                                <td><span class="btn" ng-show="allowSelection=='true'" ng-click="selectFile(file)">SELECT FILE</span></td>
+                                <td ng-show="allowSelection == 'true'">
+                                    <small class="btn btn-flat waves-teal" ng-click="selectFile(file)" style="overflow: hidden; padding: 0 10px;">Datei verwenden</small>
+                                </td>
                             </tr>
                             <!-- /FILES -->
 
