@@ -11,6 +11,7 @@ des Moduls und fügen Sie eine neuen eigenschaft(property) `public $urlRules` mi
 ### Beispiel 
 
 Die `Module.php` Datei um die Regel erweitern:
+
 ```php
 <?php
 namespace app\modules\team;
@@ -22,11 +23,13 @@ class Module extends \luya\base\Module
     ];
 }
 ```
+
 Die Adresse `warenkorb` würde nun die Aktion `actionIndex` in `BasektController` innerhalb des Modules `estore` öffnen und zurück geben.
 
 Um die Lesbare Url innerhalb eines `views` zu erstellen verwenden Sie `luya\helpers\Url::to` wie folgt `\luya\helpers\Url::to('estore/basket/index');`.
 
 Sie können auch Parameter innerhalb der Regel definieren, ein Beispiel für einen Artikel innerhalb des Estores:
+
 ```php
 ['pattern' => 'artikel/<id:\d+>', 'route' => 'estore/article/index'],
 ```
@@ -37,6 +40,7 @@ Um einen Parameter anzugeben bei erstellen einer Url verwenden Sie das Arguments
 
 ### Mehrspachige URLs
 Um eine URL regel für bestimmte [Compositions](app-menu.md) pattern zu hinterlegen fügen Sie den `composition` key zur Regel hinzu, das array innerhalb der composition kann den *pattern* key für für die entsprechenden composition überschreiben. Wenn keine composition auf die aktuelle Situation zutrifft wird der default Wert in `pattern` verwendet. Ein Biespiel:
+
 ```php
 public $urlRules = [
     ['pattern' => 'estore/warenkorb', 'route' => 'estore/basket/default', 'composition' => 
@@ -47,4 +51,5 @@ public $urlRules = [
     ],
 ];
 ```
+
 Wenn nun `Yii::$app->composition->getFull()` dem Wert *fr* entsprich wird der Pattern Wert `estore/panier` anstelle von `estore/warenkorb` verwendet.

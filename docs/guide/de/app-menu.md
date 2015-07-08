@@ -21,6 +21,7 @@ Das Links Komponentenobjekt bietet die mächtige Funktion `findByArguemnts()`, w
 | depth | Den z-index der Seite (0 = höchster index)
 
 Sie können nun zum Beispiel alle Seiten auf dem Root Level ausgeben.
+
 ```php
 $links = Yii::$app->links;
 $menu = $links->findByArguemnts(['parent_nav_id' => 0]);
@@ -28,32 +29,41 @@ foreach($menu as $item) {
     var_dump($item);
 }
 ```
+
 > Die Ausgabe ist IMMER ein Array. Wenn Sie einen einzelnen Eintrag möchten, können Sie `FindOneByArguments()` verwenden.
 
 Sie können auch mehrere Argumente verbinden. Wenn wir nun alle Elemente auf dem Root Level für die Sprache 'de' wollen :
+
 ```php
 $menu = $links->findByArguemnt(['parent_nav_id' => 0, 'lang' => 'de']);
 ```
 
 Wenn Sie die aktuelle Url ausgeben möchten verwenden Sie:
+
 ```php
 echo Yii::$app->links->activeUrl;
 ```
 
+
 Sprachen (composition)
 ----------------------
 Zusätzlich zur Link-Komponente wird die `composition` Komponente gebraucht. Sie gibt Auskunft über die aktuellen Sprachen und den Umgebungszustand. Die Composition Pattern Komponente kann definiert werden (@TBD). Sie können mit `Yii::$app->composition` auf die Composition Komponente zugreifen. Um Daten auszulesen verwenden Sie die `getKey()` Methode. Um auf den aktuelle Sprachcode zuzugreifen verwenden Sie:
+
 ```php
 $langShortCode = Yii::$app->composition->getKey('langShortCode');
 ```
+
 Wenn Sie den aktuell ausgefüllten Composition Pattern erhalten möchten, können Sie dies mit `getFull()` tun:
+
 ```
 echo Yii::$app->composition->getFull();
 ```
+
 > Tipp: Erstellen sie eine `$composition` Variabel am Anfang ihres main.php Layouts um sich Wiederholung zu ersparen. `$composition = Yii::$app->composition;`
 
 Mehrteilige Navigation
 ----------------------
+
 ```php
 <ul>
 <? foreach(Yii::$app->links->findByArguments(['cat' => 'default', 'lang' => $composition->langShortCode, 'parent_nav_id' => 0]) as $item): ?>
@@ -75,6 +85,7 @@ Mehrteilige Navigation
 
 Geteilte Navigationen
 ---------------------
+
 ```php
 <!-- FIRST LEVEL -->
 <ul>

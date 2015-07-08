@@ -5,6 +5,7 @@ Hier versuchen wir die `config()` Methode mit deren Typen und Variable zu erklä
 Typen
 -----
 Die config methode gibt in jedemfalle ein Array zurück wobei die erstes Ebene die jeweilige Konfigurations Typen definiert:
+
 ```php
 return [
     'vars' => [],
@@ -12,6 +13,7 @@ return [
     'placeholders' => [],
 ];
 ```
+
 > Sie müssen nur die von ihnen gewünschten Type zurück geben. Wenn Sie also keine Platzhalter (placeholders) oder Konfiguration (cfgs) haben reicht ein return der vars `return ['vars' => []];`.
 
 | Name | Funktion

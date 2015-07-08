@@ -1,14 +1,17 @@
 Projekt Blöcke
 ==============
 Was sind Blöcke? Element die man im CMS-Modul in die *cmslayout*-Platzhalter hinein ziehen kann um neue Inhaltsabschnitte zu generieren. Bei der Installation von Luya lieferen wir eine vielzahl von benutzbaren Blöcke mit, wenn du aber speziel wünsche an dein Inhaltselement hast kannst du dies wiefolgt erstellen.
+
 > Blöcke können auch als Inhaltselemnte bezeichnet werden.
 
 Ein *Projekt-Block* muss in deinem Projekt-Ordner unter `blocks` hinzugefügt werden. Alle Block-Klassen sollten den Suffix `Block` haben. In unserem Beispiel erstellen wir einen TextTransform Block in diesem wir einen Eingabetext zu Grossbuchstaben umwandeln und in einem Paragraph Tag zurück gebe. Dieser Block würde also den Namen `TextTransformBlock` haben und im Verzeichniss `blocks` liegen.
+
 > Blöcke können nur verwendet werden wenn *LUYA* das CMS-Modul installiert hat, dies ist bei der `luya-kickstarter` installation der Fall.
 
 Beispiel Block
 --------------
 Ein einfacher Text-Block welcher die Eingabe in Uppercase und Original ausgibt:
+
 ```php
 <?php
 namespace app\blocks;
@@ -52,19 +55,23 @@ class TextTransformBlock extends \cmsadmin\base\Block
     }
 }
 ```
+
 > Anstelle eines Zusammengsetzten Strings für die Rückgabe der TwigFrontend-Datei kannst du auch die Methode `$this->render()` verwenden. Die Render funktione wird gemäss eine Konvention nach einem Twig File im views Ordner des modules suchen.
 
 Block registrieren
 ------------------
 Um einen Block welchen du erstellt hast zu registrieren gehen wir in das *Terminal* und wechseln in das `public_html` Verzeichnis deines Projekts. Dort geben wir den befehl ein:
+
 ```sh
 php index.php exec/import
 ```
+
 Dieser Befehl wird nun deinen neune Block in das System integrieren. Wenn ein Block nicht mehr existiert wird der `exec/import` ihn löschen. Wenn sich der Name der Klasse verändert hat wird das System ihn automatisch beim `exec/import` anpassen.
 
 Module Blöcke
 --------------
 Wenn du einen Block in einem *Modul* (@TODO->go to module) erstellts also zbsp. `mymodule/blocks/TestBlock` dann musst du deinem Block mitteilen wo er das render file suchen muss wenn du die `$this->render()` methoden aufrufst. Um deinem Block mitzuteilen wo er suche muss fügst die Klassen-Eigeschanft `public $module` ein oder überschreibst den Wert mit `public function getModule();`.
+
 ```php
 class TestBlock extends \cmsadmin\base\Block
 {

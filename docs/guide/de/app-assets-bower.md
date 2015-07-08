@@ -7,13 +7,16 @@ Wir machen nun ein Beispiel wie Sie *JQuery* via Bower und Composer installieren
 Composer.json
 -------------
 Durch das globale initailisieren des `fxp/composer-asset-plugin` plugins bei der installation von *LUYA* kann nun gemäss [Anleitung](https://github.com/francoispluchino/composer-asset-plugin/blob/master/Resources/doc/index.md) ein Packet wie *JQuery* wie folgt in der `composer.json` hinterlegt werden:
+
 ```json
 require : {
     "bower-asset/jquery" : "2.1.*@stable",
     "bower-asset/jquery-ui" : "1.*@stable"
 }
 ```
+
 Stellen Sie sicher das in Ihrer `composer.json` Datei auch das folgende Segement hinterlegt ist:
+
 ```json
 "extra": {
     "asset-installer-paths": {
@@ -25,6 +28,7 @@ Stellen Sie sicher das in Ihrer `composer.json` Datei auch das folgende Segement
 Bower im Asset verwenden
 ------------------------
 Die *Asset Datei* untersheide sich nicht gross von den üblichen [Projekt Assets](app-assets.md). Der massgebende unterschied liegt im `$sourcePath` welcher nun auf das Bower Verzeichnis zielen soll:
+
 ```php
 class JqueryAsset extends \luya\base\Asset
 {

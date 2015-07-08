@@ -26,6 +26,7 @@ class Module extends \admin\base\Module
     ];
 }
 ```
+
 Ein Api-Endpoint besteht immer aus *api-{module}-{model}* wobei beim *module* immer das **Frontend-Module** gewählt wird.
 
 > Api-Endpoints haben **nie** das admin prefix da es in diesem Context keinen Sinn ergäbe. Technisch gesehn kann man jedoch jeglich Text als Api-Endpoint hinterlegen.
@@ -35,6 +36,7 @@ Alle Apis werde **singular** ausgedrückt (wie Datenbank Tabellen), also **membe
 NgRest Model
 -----------------
 Nachdem Sie eine Datenbank Tabelle via [Migration](luya-console.md) erstellt habe können Sie ein *ActiveRecord* Model erstellen im Ordner `models` mit dem Namen der Tabelle:
+
 ```php
 <?php
 namespace teamadmin\models;
@@ -79,11 +81,13 @@ class Member extends \admin\ngrest\base\Model
     
 }
 ```
+
 Eine detailerte erkärung der `ngRestConfig() Methode finden Sie in der [NgRest Sektion](ng-rest.md).
 
 NgRest Controller
 -----------------
 Um die CRUD Logik anzuzeigen müssen wir einen Controller anlegen welcher auf das *Model* verweist:
+
 ```php
 <?php
 namespace teamadmin\controllers;
@@ -97,6 +101,7 @@ class MemberController extends \admin\ngrest\base\Controller
 NgRest Api
 ----------
 TBD: Warum NgRest Api?
+
 ```php
 <?php
 namespace news\apis;
@@ -112,6 +117,7 @@ NgRest Menu Eintrag
 --------------------
 Fügen Sie nun die `getMenu()` Funktion in Ihre `Module.php` ein um die Menu einträge zu erstellen und die 
 [Berechtigungen](app-admin-module-permission.md) zu setzen:
+
 ```php
 public function getMenu()
 {

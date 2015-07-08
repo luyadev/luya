@@ -5,6 +5,7 @@ Ein *Frontend* Modul kann direkt views rendern und daten aus modellen ausgeben. 
 View Render Einstellungen
 -------------------------
 Ein Modul kann via `$useAppLayoutPath` entscheiden ob alle views *isoliert* im Modul liegen sollen oder alle views im Views Ordner des Projekts liegen sollen also *shared*. Die isolierte Methode kann verwendet werden wenn ein Modul die komplette kontrolle und unabhängig eines Projekts verwendet werden soll. Alle Daten werden somit gelifert und der Benutzer muss keine Zeit in tempaltes mehr investieren. Dies kann zum Beispiel bei einer komplexen Kalender ansicht verwenden werden wobei das Look und Feel via CSS geregelt wird. Standardmässig wird die *shared* Methode verwendet (`$useAppLayoutPath = true`). Die `$useAppLayoutPath` können Sie in der `Module.php` Datei als Klassen eigeschanft definieren.
+
 ```php
 <?php
 namespace app\modules\team;

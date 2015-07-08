@@ -1,6 +1,7 @@
 Layouts
 -------
 Alle views welche mit `$this->render()` verarbeitet werden inkludieren das layout welches in `views/layouts/main.php` liegt. Wer nun aber inerhalb des Modules einen *Layout ähnlichen* view rendenr möchte kann dies mit `$this->renderLayout()` bezwecken. Warum nicht `$this->render` verwenden? 
+
 + `renderLayout()` verwendet einen klar definieren view namen welcher verwendet werden muss.
 + konsequents verhalten innerhalb eines Controllers.
 
@@ -8,6 +9,7 @@ Als Parameter für `renderLayout()` verwenden Sie ein array, wobei der key einer
 
 ### Beispiel
 Abstrakte Klasse `modules/estore/base/Controller.php`:
+
 ```php
 <?php
 namespace app\modules\estore\base;
@@ -25,6 +27,7 @@ abstract class EstoreController extends \luya\base\PageController
 ```
 
 Controller-Datei `modules/estore/controllers/DefaultController.php`:
+
 ```php
 <?php
 namespace app\modules\estore\controllers;

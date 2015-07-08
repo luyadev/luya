@@ -1,6 +1,7 @@
 Verzeichnis Struktur
 --------------------
 Deine *LUYA* installation sollte nach dem checkout des *luya-kickstarter* projekts folgende Struktur haben, wenn du keine *Projekt-Blöcke* oder *Filters* hast benötigst du diese Ordner natürlich nicht.
+
 ```
 .
 ├── public_html
@@ -30,6 +31,7 @@ Deine *LUYA* installation sollte nach dem checkout des *luya-kickstarter* projek
 Beispiel Konfiguration
 ----------------------
 So könnte eine folständige Konfiguration aussehen:
+
 ```php
 $config = [
     'id' => 'luya-website',

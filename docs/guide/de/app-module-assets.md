@@ -4,6 +4,7 @@ Ein Modul kann vordefinierte Assets mitliefern und einbetten. Das kann von Vorte
 
 ### Asset-Bundle Datei
 Ein Beispiel Asset Datei für *Javascript Kalender* Logik könnte wie folgt aussehen:
+
 ```php
 <?php
 

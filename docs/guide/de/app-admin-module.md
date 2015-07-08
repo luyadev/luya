@@ -15,4 +15,5 @@ class StatsController extends \admin\base\Controller
     }
 }
 ```
+
 Innerhalb der Administration welche via Angular und Rest geladen wird gibt es keine Layout Views innerhalb von AdminController, deshlab sollten Sie immer renderPartial verwenden.

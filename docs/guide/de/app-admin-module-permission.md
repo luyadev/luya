@@ -5,6 +5,7 @@ Um eine Berechtigung für eine *Api-Schnittstelle* oder eine manuel erstelle *Ro
 
 Custom Menu-Route
 -------------
+
 ```php
 public function getMenu()
 {
@@ -19,6 +20,7 @@ public function getMenu()
 
 Menu-Api
 -------
+
 ```php
 public function getMenu()
 {
