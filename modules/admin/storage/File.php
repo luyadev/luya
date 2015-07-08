@@ -91,7 +91,7 @@ class File
                 'name_new' => $baseName,
                 'name_new_compound' => $fileName,
                 'mime_type' => $mimeType,
-                'extension' => $fileInfo->extension,
+                'extension' => strtolower($fileInfo->extension),
                 'folder_id' => (int) $folderId,
                 'hash_file' => $fileHash,
                 'hash_name' => $fileHashName,
@@ -112,6 +112,7 @@ class File
     {
         $files = StorageFile::find()->select(['admin_storage_file.id', 'name_original', 'extension', 'file_size', 'upload_timestamp', 'firstname', 'lastname'])->leftJoin("admin_user", "admin_user.id=admin_storage_file.upload_user_id")->where(['folder_id' => $folderId, 'is_hidden' => 0])->asArray()->all();
         foreach($files as $k => $v) {
+            // @todo check fileHasImage sth
             if ($v['extension'] == "jpg" || $v['extension'] == "png") {
                 $imageId = Yii::$app->storage->image->create($v['id'], 0);
                 $thumb = Yii::$app->storage->image->filterApply($imageId, 'small-landscape');

@@ -161,26 +161,35 @@
                 FILES & FOLDERS
              --><div class="filemanager__files">
 
-                    <div class="filemanager__toolbar" flow-init="{target: uploadurl, testChunks:false, headers : { 'Authorization' : bearer }}" flow-name="uploader.flow" flow-file-success="$file.msg = $message" flow-file-progress="$file = $file" flow-files-submitted="startUpload()" flow-complete="complete()">
-                        <!-- Hidden upload field -->
-                        <input id="file" name="file" type="file" flow-btn class="hide" />
+                    <div class="filemanager__toolbar">
+                        
+                        <label class="floating-button-label left" ngf-select ngf-multiple="true" ng-model="uploadingfiles">
+                            <span class="btn-floating">
+                                <i class="mdi-file-file-upload"></i>
+                            </span>
+                            <span class="floating-button-label__label">Datei hinzufügen</span>
+                        </label>
 
+
+                        <!-- old Upload button - hide is not used anymore
+                        <input id="file" name="file" type="file" class="hide" />
                         <label class="floating-button-label left" for="file">
                             <span class="btn-floating">
                                 <i class="mdi-file-file-upload"></i>
                             </span>
                             <span class="floating-button-label__label">Datei hinzufügen</span>
                         </label>
+                        -->
  
                         <div class="modal modal--bottom-sheet" ng-class="{ 'modal--active' : uploading && !serverProcessing }">
 
                             <div class="row">
                                 <div class="col s12">
                                     <ul class="collection">
-                                        <li class="collection-item file" ng-repeat="file in $flow.files" ng-class="{ 'file--completed' : file.isComplete() }">
+                                        <li class="collection-item file" ng-repeat="file in uploadingfiles" ng-class="{ 'file--completed' : file.processed }">
                                             <b>{{file.name}}</b>
                                             <div class="file__progress progress">
-                                                <div class="determinate" style="width: {{file.progress() * 100}}%"></div>
+                                                <div class="determinate" style="width: {{file.progress}}%"></div>
                                             </div>
                                             <i class="file__icon mdi-navigation-check"></i>
                                         </li>

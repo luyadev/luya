@@ -313,7 +313,7 @@ zaa.directive('storageImageUpload', function($http, ApiAdminFilter, ImageIdServi
 /**
  * FILE MANAGER DIR
  */
-zaa.directive("storageFileManager", function(cfpLoadingBar, FileListeService) {
+zaa.directive("storageFileManager", function(FileListeService, Upload) {
 	return {
 		restrict : 'E',
 		transclude : false,
@@ -321,42 +321,70 @@ zaa.directive("storageFileManager", function(cfpLoadingBar, FileListeService) {
 			allowSelection : '@selection'
 		},
 		transclude : false,
-		controller : function($scope, $http) {
+		controller : function($scope, $http, $timeout) {
 			
 			$scope.showFolderForm = false;
 			
-			$scope.folderFormToggler = function() {
-				$scope.showFolderForm = !$scope.showFolderForm;
-			}
+			$scope.files = [];
 			
-			$scope.uploadurl = 'admin/api-admin-storage/files-upload-flow';
-			$scope.bearer = 'Bearer ' + authToken;
+			$scope.folders = [];
 			
-			$scope.uploader = {};
+			$scope.currentFolderId = 0;
+			
+			$scope.selectedFiles = [];
 			
 			$scope.uploading = false;
 			
 			$scope.serverProcessing = false;
 			
-			$scope.startUpload = function() {
-				$scope.uploading = true;
-				cfpLoadingBar.start();
-				cfpLoadingBar.inc();
-				$scope.uploader.flow.opts.query = { 'folderId' : $scope.currentFolderId };
-				$scope.uploader.flow.upload()
-			}
+			$scope.uploadResults = null;
 			
-			$scope.complete = function() {
-				$scope.serverProcessing = true;
-				cfpLoadingBar.complete()
-				$scope.getFiles($scope.currentFolderId, true);
-			}
+			$scope.$watch('uploadingfiles', function (uploadingfiles) {
+		        if (uploadingfiles != null) {
+					$scope.uploadResults = 0;
+					$scope.uploading = true;
+		            for (var i = 0; i < uploadingfiles.length; i++) {
+		                $scope.errorMsg = null;
+		                (function (uploadingfiles) {
+		                	$scope.uploadUsingUpload(uploadingfiles);
+		                })(uploadingfiles[i]);
+		            }
+		        }
+		    });
+
+			$scope.$watch('uploadResults', function(n, o) {
+				if ($scope.uploadingfiles != null) {
+					if (n == $scope.uploadingfiles.length) {
+						$scope.serverProcessing = true;
+						$scope.getFiles($scope.currentFolderId, true);
+					}
+				}
+			})
 			
-			$scope.files = [];
-			$scope.folders = [];
-			
-			$scope.currentFolderId = 0;
-			$scope.selectedFiles = [];
+			$scope.uploadUsingUpload = function(file) {
+		        file.upload = Upload.upload({
+		        	url: 'admin/api-admin-storage/files-upload',
+                    fields: {'folderId': $scope.currentFolderId},
+                    file: file
+		        });
+
+		        file.upload.then(function (response) {
+		            $timeout(function () {
+		            	$scope.uploadResults++;
+		            	file.processed = true;
+		                file.result = response.data;
+		            });
+		        }, function (response) {
+		            if (response.status > 0)
+		                $scope.errorMsg = response.status + ': ' + response.data;
+		        });
+
+		        file.upload.progress(function (evt) {
+		        	file.processed = false;
+		            // Math.min is to fix IE which reports 200% sometimes
+		            file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+		        });
+		    }
 			
 			$scope.hasSelection = function() {
 				if ($scope.selectedFiles.length > 0) {
@@ -401,6 +429,10 @@ zaa.directive("storageFileManager", function(cfpLoadingBar, FileListeService) {
 		        		});
 		        	}
 		        });
+			}
+			
+			$scope.folderFormToggler = function() {
+				$scope.showFolderForm = !$scope.showFolderForm;
 			}
 			
 			$scope.selectFile = function(file) {

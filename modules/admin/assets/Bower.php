@@ -14,9 +14,11 @@ class Bower extends \luya\base\Asset
         'angular-dragdrop/src/angular-dragdrop.min.js',
         'angular-loading-bar/build/loading-bar.min.js',
         'angular-slugify/angular-slugify.js',
-        'ng-flow/dist/ng-flow-standalone.min.js',
         'twig.js/twig.min.js',
         'ng-wig/dist/ng-wig.min.js',
+        
+        'ng-file-upload/ng-file-upload.min.js',
+        'ng-file-upload/ng-file-upload-shim.min.js',
         
         // ace
         // 'ace-builds/src-min-noconflict/ace.js', // "bower-asset/angular-ui-ace" : "0.*@stable",

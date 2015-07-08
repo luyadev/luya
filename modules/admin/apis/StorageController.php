@@ -9,8 +9,23 @@ use Yii;
  */
 class StorageController extends \admin\base\RestController
 {
+    private $_uploaderErrors = [
+        0 => 'There is no error, the file uploaded with success',
+        1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
+        2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
+        3 => 'The uploaded file was only partially uploaded',
+        4 => 'No file was uploaded',
+        6 => 'Missing a temporary folder',
+        7 => 'Failed to write file to disk.',
+        8 => 'A PHP extension stopped the file upload.',
+    ];
+    
     /**
      * <URL>/admin/api-admin-storage/files-upload.
+     *
+     * @todo change post_max_size = 20M
+     * @todo change upload_max_filesize = 20M
+     * @todo http://php.net/manual/en/features.file-upload.errors.php
      *
      * @return array|json Key represents the uploaded file name, value represents the id in the database.
      */
@@ -18,14 +33,21 @@ class StorageController extends \admin\base\RestController
     {
         $files = [];
         foreach ($_FILES as $k => $file) {
-            $create = \yii::$app->storage->file->create($file['tmp_name'], $file['name']);
-
-            $files[$file['name']] = ['id' => $create, 'error' => (bool) !$create, 'message' => \yii::$app->storage->file->getError(), 'file' => ((bool) $create) ? $this->actionFilePath($create) : false];
+            if ($file['error'] !== UPLOAD_ERR_OK) {
+                return ['upload' => false, 'message' => $this->_uploaderErrors[$file['error']]];
+            }
+            $create = Yii::$app->storage->file->create($file['tmp_name'], $file['name'], false, Yii::$app->request->post('folderId', 0));
+            if ($create) {
+            //$files[$file['name']] = ['id' => $create, 'error' => (bool) !$create, 'message' => \yii::$app->storage->file->getError(), 'file' => ((bool) $create) ? $this->actionFilePath($create) : false];
+            
+            return ['upload' => true, 'message' => 'file uploaded succesfully'];
+            }
         }
 
-        return $files;
+        return ['upload' => false, 'message' => 'no files selected'];
     }
     
+    /*
     public function actionFilesUploadFlow()
     {
         try {
@@ -48,6 +70,7 @@ class StorageController extends \admin\base\RestController
             echo $e->getMessage();
         }
     }
+    */
 
     public function actionImageUpload()
     {
