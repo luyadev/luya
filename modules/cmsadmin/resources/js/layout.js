@@ -36,10 +36,20 @@ zaa.controller("DropNavController", function($scope, $http, MenuService) {
 	
 	$scope.droppedNavItem = null;
 	
-    $scope.onDrop = function($event, $ui) {
+    $scope.onBeforeDrop = function($event, $ui) {
     	var itemid = $($event.target).data('itemid');
 		//console.log('dropped block beofre itemid: ' + itemid, 'theblock', $scope.droppedNavItem);
-		$http.get('admin/api-cms-navitem/move', { params : { moveItemId : $scope.droppedNavItem.id, droppedBeforeItemId : itemid }}).success(function(r) {
+		$http.get('admin/api-cms-navitem/move-before', { params : { moveItemId : $scope.droppedNavItem.id, droppedBeforeItemId : itemid }}).success(function(r) {
+			MenuService.refresh();
+		}).error(function(r) {
+			console.log('err', r)
+		})
+    }
+    
+    $scope.onAfterDrop = function($event, $ui) {
+    	var itemid = $($event.target).data('itemid');
+		//console.log('dropped block beofre itemid: ' + itemid, 'theblock', $scope.droppedNavItem);
+		$http.get('admin/api-cms-navitem/move-after', { params : { moveItemId : $scope.droppedNavItem.id, droppedAfterItemId : itemid }}).success(function(r) {
 			MenuService.refresh();
 		}).error(function(r) {
 			console.log('err', r)

@@ -72,12 +72,14 @@ class NavItemController extends \admin\base\RestController
         ];
     }
 
-    public function actionMove($moveItemId, $droppedBeforeItemId)
+    public function actionMoveBefore($moveItemId, $droppedBeforeItemId)
     {
-        //$moveNavId = NavItem::findOne($moveItemId)->nav_id; 
-        //$toBeforeNavId = NavItem::findOne($droppedBeforeItemId)->nav_id;
-        
-        return ['success' => Nav::moveTo($moveItemId, $droppedBeforeItemId)];
+        return ['success' => Nav::moveToBefore($moveItemId, $droppedBeforeItemId)];
+    }
+    
+    public function actionMoveAfter($moveItemId, $droppedAfterItemId)
+    {
+        return ['success' => Nav::moveToAfter($moveItemId, $droppedAfterItemId)];
     }
     
     public function actionMoveToChild($moveItemId, $droppedOnItemId)

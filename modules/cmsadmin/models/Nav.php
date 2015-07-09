@@ -61,7 +61,7 @@ class Nav extends \yii\db\ActiveRecord
         }
     }
     
-    public static function moveTo($moveNavId, $toBeforeNavId)
+    public static function moveToBefore($moveNavId, $toBeforeNavId)
     {
         $move = self::findOne($moveNavId);
         $to = self::findOne($toBeforeNavId);
@@ -73,6 +73,21 @@ class Nav extends \yii\db\ActiveRecord
         $move->sort_index = $to->sort_index;
         $move->update();
         
+        return true;
+    }
+    
+    public static function moveToAfter($moveNavId, $toAfterNavId)
+    {
+        $move = self::findOne($moveNavId);
+        $to = self::findOne($toAfterNavId);
+    
+        $to->moveDownstairs();
+    
+        $move->cat_id = $to->cat_id;
+        $move->parent_nav_id = $to->parent_nav_id;
+        $move->sort_index = $to->sort_index;
+        $move->update();
+    
         return true;
     }
     
@@ -96,6 +111,16 @@ class Nav extends \yii\db\ActiveRecord
             $up = Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id', ['id' => $item['id']])->execute();
         }
         
+    }
+    
+    public function moveDownstairs()
+    {
+        $startIndex = (int) $this->sort_index;
+        foreach(self::find()->where("sort_index >= :index", ['index' => $startIndex])->andWhere(['cat_id' => $this->cat_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $item) {
+            $startIndex--;
+            $up = Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id', ['id' => $item['id']])->execute();
+        }
+    
     }
     
     public function createPage($parentNavId, $catId, $langId, $title, $rewrite, $layoutId)
