@@ -30,6 +30,10 @@
 		border-bottom: 4px solid $block--toolbar--background;
 		border-right: 4px solid $block--toolbar--background;
 	}
+
+	.accordion {
+		margin: 0 10px 10px 10px;
+	}
 }
 
 .block__toolbar {
@@ -78,6 +82,7 @@
 	transition: 0.25s 0.25s ease opacity, 0.25s 0.25s ease height, 0.3s ease padding;
 	height: 100%;
 	padding: 38px 10px;
+	cursor: pointer;
 }
 .block--edit .block__body {
 	opacity: 0;
