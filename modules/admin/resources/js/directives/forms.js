@@ -299,6 +299,28 @@ zaa.directive('dateFormat', function() {
 	};
 });
 
+zaa.directive('zaaTable', function() {
+	return {
+		restrict : 'E',
+		scope : {
+			'model' : '=',
+			'options' : '=',
+			'label' : '@label',
+			'grid' : '@grid'
+		},
+		link : function(scope) {
+			/*
+			scope.$watch('model', function(n, o) {
+				console.log('model watcher', n);
+			})
+			*/
+		},
+		template : function() {
+			return '<div></div>';
+		}
+	}
+});
+
 zaa.directive('zaaFileUpload', function($compile){
 	return {
 		restrict : 'E',
