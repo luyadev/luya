@@ -14,17 +14,17 @@
     <div ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController">
         <div class="block" ng-class="{ 'block--edit' : edit , 'block--is-dirty' : !block.is_dirty }" data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{snapTolerance : 40, handle : '.block__move', delay: 200, cursor:'move', cursorAt: { top: 0, left: 0 }, revert:true }" ng-model="block">
             <div class="block__toolbar">
-                        <div class="left">
-                                <i class="block__move mdi-action-open-with"></i>
-                                <div class="block__title" ng-click="toggleEdit()" ng-bind-html="safe(block.full_name)"></div>
-                            </div>
-                            <div class="right">
-                                <i ng-show="!edit" class="mdi-editor-mode-edit [ waves-effect waves-blue ]" ng-click="toggleEdit()"></i>
-                                <i ng-show="!edit" class="mdi-action-delete [ waves-effect waves-blue ]" ng-click="removeBlock(block)"></i>
-                                <i ng-show="edit" class="mdi-navigation-close [ waves-effect waves-blue ]" ng-click="toggleEdit()"></i>
-                            </div>
+                <div class="left">
+                    <i class="block__move mdi-action-open-with"></i>
+                    <div class="block__title" ng-bind-html="safe(block.full_name)" ng-click="toggleEdit()"></div>
+                </div>
+                <div class="right">
+                    <i ng-show="!edit" class="mdi-editor-mode-edit [ waves-effect waves-blue ]" ng-click="toggleEdit()"></i>
+                    <i ng-show="!edit" class="mdi-action-delete [ waves-effect waves-blue ]" ng-click="removeBlock(block)"></i>
+                    <i ng-show="edit" class="mdi-navigation-close [ waves-effect waves-blue ]" ng-click="toggleEdit()"></i>
+                </div>
             </div>
-            <div class="block__body cmsadmin-tags" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
+            <div class="block__body cmsadmin-tags" ng-click="toggleEdit()" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
             <div class="block__edit">
                 <div class="row" ng-repeat="field in block.vars">
                      <zaa-injector dir="field.type" options="field.options" initvalue="{{field.initvalue}}" placeholder="{{field.placeholder}}" label="{{field.label}}" grid="12" model="data[field.var]"></zaa-injector>
