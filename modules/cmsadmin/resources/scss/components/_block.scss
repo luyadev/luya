@@ -3,7 +3,7 @@
  */
 .block {
 	background-color: $block--background;
-	padding: 38px 10px;
+	padding: 0;
 	margin: 10px 0;
 	position: relative;
 	overflow: hidden;
@@ -25,7 +25,6 @@
 		background-color: $block--background-is-dirty;
 	}
 	&.block--edit {
-		padding-top: $block__toolbar--height + 5px;
 		background-color: $block--active-background;
 		border-left: 4px solid $block--toolbar--background;
 		border-bottom: 4px solid $block--toolbar--background;
@@ -76,8 +75,9 @@
 
 .block__body {
 	opacity: 1;
-	transition: 0.25s 0.25s ease opacity, 0.25s 0.25s ease height;
+	transition: 0.25s 0.25s ease opacity, 0.25s 0.25s ease height, 0.3s ease padding;
 	height: 100%;
+	padding: 38px 10px;
 }
 .block--edit .block__body {
 	opacity: 0;
@@ -85,7 +85,7 @@
 	margin: 0;
 	height: 0;
 	overflow: hidden;
-	transition: 0.25s ease opacity, 0.25s ease height;
+	transition: 0.25s ease opacity, 0.25s ease height, 0.5s ease padding;
 }
 
 .block__edit {
@@ -94,7 +94,7 @@
 	margin: 0;
 	height: 0;
 	overflow: hidden;
-	transition: 0.25s ease opacity, 0.25s ease height;
+	transition: 0.25s ease opacity, 0.25s ease height, 0.3s ease padding;
 
 	.collapsible {
 		margin-top: 30px;
@@ -103,5 +103,6 @@
 .block--edit .block__edit {
 	opacity: 1;
 	height: 100%;
-	transition: 0.25s 0.25s ease opacity, 0.25s 0.25s ease height;
+	transition: 0.25s 0.25s ease opacity, 0.25s 0.25s ease height, 1s ease padding;
+	padding: ($block__toolbar--height + 5px) 10px 38px 10px;
 }
