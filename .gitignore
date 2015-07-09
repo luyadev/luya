@@ -32,3 +32,4 @@ composer.lock
 .idea/
 scripts/.subsplit
 /.tern-project
+.phpintel/
