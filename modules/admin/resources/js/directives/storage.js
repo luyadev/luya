@@ -208,6 +208,22 @@ zaa.factory('ImageIdService', function($http, $q) {
 	return service;
 });
 
+zaa.factory('FilemanagerFolderService', function() {
+	var service = [];
+	
+	service.folderId = 0;
+	
+	service.set = function(id) {
+		service.folderId = id;
+	}
+	
+	service.get = function() {
+		return service.folderId;
+	}
+	
+	return service;
+});
+
 zaa.directive('storageFileUpload', function($http, FileIdService) {
 	return {
 		restrict : 'E',
@@ -313,7 +329,7 @@ zaa.directive('storageImageUpload', function($http, ApiAdminFilter, ImageIdServi
 /**
  * FILE MANAGER DIR
  */
-zaa.directive("storageFileManager", function(FileListeService, Upload) {
+zaa.directive("storageFileManager", function(FileListeService, Upload, FilemanagerFolderService) {
 	return {
 		restrict : 'E',
 		transclude : false,
@@ -328,8 +344,6 @@ zaa.directive("storageFileManager", function(FileListeService, Upload) {
 			$scope.files = [];
 			
 			$scope.folders = [];
-			
-			$scope.currentFolderId = 0;
 			
 			$scope.selectedFiles = [];
 			
@@ -444,6 +458,7 @@ zaa.directive("storageFileManager", function(FileListeService, Upload) {
             }
 			
 			$scope.loadFolder = function(folderId) {
+				FilemanagerFolderService.set(folderId);
 				$scope.currentFolderId = folderId;
 				$scope.getFiles(folderId);
 			}
@@ -458,7 +473,8 @@ zaa.directive("storageFileManager", function(FileListeService, Upload) {
 			
 			$http.get('admin/api-admin-storage/get-folders').success(function(response) {
     			$scope.folders = response;
-    			$scope.getFiles(0);
+    			$scope.getFiles(FilemanagerFolderService.get());
+    			$scope.currentFolderId = FilemanagerFolderService.get();
     		});
 			
 		},
