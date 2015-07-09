@@ -1,6 +1,9 @@
 LUYA CHANGELOG
 ==============
 
+1.0.0-alpha11 (in progress)
+---------------------------
+
 1.0.0-alpha10 (9. Jul 2015)
 ---------------------------
 - `#222`: added `module/create` cli command.
