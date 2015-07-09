@@ -69,14 +69,15 @@ class Article extends \admin\ngrest\base\Model
 
     public static function getAvailableNews()
     {
-        $articles = Article::find()->where('timestamp_display_from <= '.time())->all();
-
+        $articles = Article::find()->where('timestamp_display_from <= :time',['time' => time()])->all();
+        
         // filter if display time is limited
-        foreach($articles as $key=>$article) {
-            if($article->is_display_limit)
-                if($article->timestamp_display_until <= time()) {
+        foreach($articles as $key => $article) {
+            if ($article->is_display_limit) {
+                if ($article->timestamp_display_until <= time()) {
                     unset($articles[$key]);
                 }
+            }
         }
 
         return $articles;
