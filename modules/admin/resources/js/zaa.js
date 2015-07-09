@@ -143,6 +143,7 @@ zaa.directive('modal', function($timeout) {
 					    	  });
 					      } // Callback for Modal close
 					    });
+						$(element).appendTo(document.body);
 					} else {
 						$(element).closeModal();
 					}
