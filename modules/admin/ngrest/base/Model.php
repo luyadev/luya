@@ -5,6 +5,7 @@ namespace admin\ngrest\base;
 use Yii;
 use admin\ngrest\base\EventBehavior;
 use admin\behaviors\LogBehavior;
+use admin\models\Lang;
 
 abstract class Model extends \yii\db\ActiveRecord implements \admin\base\GenericSearchInterface
 {
@@ -147,6 +148,8 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
 
     public function i18nAfterFind()
     {
+        $defaultLang = Lang::getDefault();
+        
         foreach ($this->getI18n() as $field) {
             $values = @json_decode($this->$field, true);
             // fall back for not transformed values
@@ -163,7 +166,7 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
             }
 
             if (!$this->_ngrestCall) {
-                $langShortCode = \admin\models\Lang::getDefault()->short_code;
+                $langShortCode = $defaultLang['short_code'];
 
                 // @todo first get data from collection, if not found get data from lang default
                 if (array_key_exists($langShortCode, $values)) {

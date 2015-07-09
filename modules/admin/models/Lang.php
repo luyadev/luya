@@ -53,6 +53,6 @@ class Lang extends \admin\ngrest\base\Model
 
     public static function getDefault()
     {
-        return self::find()->where(['is_default' => 1])->one();
+        return self::find()->where(['is_default' => 1])->asArray()->one();
     }
 }
