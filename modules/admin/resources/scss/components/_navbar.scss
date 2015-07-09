@@ -101,6 +101,8 @@
 	width: 100% !important;
 	left: 0 !important;
 	text-align: center;
+	transform: translateY(0) !important;
+	font-size: inherit !important;
 
 	.navbar__search--open & {
 		width: auto !important;
