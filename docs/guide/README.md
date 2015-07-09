@@ -47,3 +47,8 @@ NGREST (general ngrest infos)
 - ngrest-plugins.md
 - ngrest-plugin-checkboxrelation.md
 - ngrest-plugin-select.md
+
+Modules
+--
+- module-overview.md
+- module-news.md
