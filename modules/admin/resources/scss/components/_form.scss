@@ -1,3 +1,19 @@
+.input-field label {
+	font-size: 0.9rem !important;
+	transform: translateY(-140%);
+}
+
+.input-field textarea + label {
+	margin-top: 3px !important;
+}
+
+.input-field input[type="checkbox"] + label {
+	font-size: 1rem !important;
+	transform: translateY(0) !important;
+	left: 0 !important;
+	top: 0 !important;
+}
+
 select {
 	max-width: 700px;
 }
