@@ -70,7 +70,7 @@
                         Datei auswählen
                     </span>
                 </div>
-                <input class="fileupload__path" type="text" ng-model="fileinfo.source_http" disabled />
+                <input class="fileupload__path" type="text" ng-model="fileinfo.source_http" disabled placeholder="<- Wählen Sie eine Datei aus. Der Pfad wird hier dargestellt." />
 
                 <modal is-modal-hidden="modal"><storage-file-manager selection="true" /></modal>
             </div>
@@ -85,8 +85,8 @@
                 <div class="imageupload__filter">
                     <label>Filter Auswahl</label>
                     <select name="filterId" ng-model="filterId" class="browser-default"><option value="0">Kein Filter</option><option ng-repeat="item in filters" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
-                </div>
-                <div class="imageupload__preview">
+                </div><!--
+                --><div class="imageupload__preview">
                     <img ng-src="{{imageinfo.source}}" class="responsive-img" />
                     <div class="imageupload__loading" ng-hide="!imageLoading">
                         <div class="preloader-wrapper big active">

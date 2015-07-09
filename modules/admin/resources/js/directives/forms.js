@@ -386,19 +386,25 @@ zaa.directive('zaaImageArrayUpload', function(){
 			//return '<div class="col s12"><h5>{{label}}</h5><div ng-repeat="(key,image) in model" class="row card-panel"><div class="col s4"><input type="text" ng-model="image.caption" /></div><div class="col s6"><storage-image-upload ng-model="image.imageId"></storage-image-upload></div><div class="col s2"><button type="button" class="btn" ng-click="remove(key)">Entfernen</button></div></div><div class="row"><div class="col s12"><button ng-click="add()" type="button" class="btn">+ Element</button></div></div></div>';
             return '<div class="col s{{grid}} imagearray">' +
                         '<h5>Bilder</h5>' +
-                        '<div ng-repeat="(key,image) in model" class="row card-panel imagearray__item">' +
-                            '<button class="imagearray__delete btn-floating [ red lighten-3 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)"><i class="mdi-action-delete"></i></button>' +
-                            '<div class="col s4">' +
-                                '<div class="input-field">' +
+                        '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="teal-text">+</span> links unten ein.</p>' +
+                        '<div ng-repeat="(key,image) in model" class="row list__item">' +
+                        
+							'<div class="list__left row">' +
+								'<div class="col s8">' +
+                        			'<storage-image-upload ng-model="image.imageId"></storage-image-upload>' +
+		                    	'</div>' +
+		                        '<div class="input-field col s4">' +
                                     '<textarea ng-model="image.caption" class="materialize-textarea"></textarea>' +
                                     '<label>Beschreibung</label>' +
                                 '</div>' +
-                            '</div>' +
-                            '<div class="col s8">' +
-                                '<storage-image-upload ng-model="image.imageId"></storage-image-upload>' +
-                            '</div>' +
-                        '</div><br />' +
-                        '<button ng-click="add()" type="button" class="btn-floating right [ teal lighten-2 ][ waves-effect waves-circle waves-light ]"><i class="mdi-content-add"></i></button>' +
+		                    '</div>' +
+
+		                    '<div class="list__right">' +
+		                    	'<button class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="mdi-content-remove"></i></button>' +
+		                    '</div>' +
+
+                        '</div>' +
+                        '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ teal ][ waves-effect waves-circle waves-light ]"><i class="mdi-content-add"></i></button>' +
                     '</div>';
 		}
 	}
@@ -413,11 +419,12 @@ zaa.directive('zaaFileArrayUpload', function(){
 			'label' : '@label',
 			'grid' : '@grid'
 		},
-		controller : function($scope) {
+		controller : function($scope, $element, $timeout) {
 			
 			if ($scope.model == undefined) {
 				$scope.model = [];
 			}
+
 			$scope.add = function() {
 				$scope.model.push({ fileId : 0, caption : '' });
 			};
@@ -429,10 +436,35 @@ zaa.directive('zaaFileArrayUpload', function(){
 			$scope.debug = function() {
 				console.log($scope.model);
 			}
+
 		},
 		template : function() {
 			//return '<div class="col s12"><h5>{{label}}</h5><div ng-repeat="(key,file) in model" class="row card-panel"><div class="col s4"><input type="text" ng-model="file.caption" /></div><div class="col s6"><storage-file-upload ng-model="file.fileId"></storage-file-upload></div><div class="col s2"><button type="button" class="btn" ng-click="remove(key)">Entfernen</button></div></div><div class="row"><div class="col s12"><button ng-click="add()" type="button" class="btn">+ Element</button></div></div></div>';
-            return '<div class="col s{{grid}} filearray">' +
+            
+
+			return '<div class="col s{{grid}} filearray">' +
+		                '<h5>Dateien</h5>' +
+	                	'<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="teal-text">+</span> links unten ein.</p>' +
+		                '<div ng-repeat="(key,file) in model" class="row list__item">' +
+		                    
+		                    '<div class="list__left row">' +
+		                    	'<div class="filearray__upload col s8">' +
+		                        	'<storage-file-upload ng-model="file.fileId"></storage-file-upload>' +
+		                    	'</div>' +
+		                    	'<div class="input-field col s4">' +
+		                            '<input type="text" ng-model="file.caption" class="filearray__description-input" />' +
+		                            '<label>Beschreibung</label>' +
+		                        '</div>' +
+		                    '</div>' +
+
+		                    '<div class="list__right">' +
+		                    	'<button class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="mdi-content-remove"></i></button>' +
+		                    '</div>' +
+	                    '</div>' +
+		                '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ teal ][ waves-effect waves-circle waves-light ]"><i class="mdi-content-add"></i></button>' +
+		            '</div>';
+
+            /*return '<div class="col s{{grid}} filearray">' +
                         '<h5>Dateien</h5>' +
                         '<div ng-repeat="(key,file) in model" class="row card-panel filearray__item">' +
                             '<button class="filearray__delete btn-floating [ red lighten-3 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)"><i class="mdi-action-delete"></i></button>' +
@@ -447,9 +479,7 @@ zaa.directive('zaaFileArrayUpload', function(){
                             '</div>' +
                         '</div><br />' +
                         '<button ng-click="add()" type="button" class="btn-floating right [ teal lighten-2 ][ waves-effect waves-circle waves-light ]"><i class="mdi-content-add"></i></button>' +
-                    '</div>';
-
-
+                    '</div>';*/
 		}
 	}
 });
@@ -463,15 +493,11 @@ zaa.directive("zaaListArray", function() {
 			'label' : '@label',
 			'grid' : '@grid'
 		},
-		controller : function($scope, $element) {
+		controller : function($scope, $element, $timeout) {
 
 			if ($scope.model == undefined) {
 				$scope.model = [];
 			}
-
-            if($scope.model.length == 0) {
-                $scope.model = [{ value: '' }];
-            }
 			
 			$scope.add = function() {
 				$scope.model.push({ value : '' });
@@ -491,7 +517,7 @@ zaa.directive("zaaListArray", function() {
 			};
 
             $scope.setFocus = function() {
-                setTimeout(function() {
+                $timeout(function() {
                     var input = $element.children('.list').children('.list__item:last-of-type').children('.list__left').children('input');
 
                     if(input.length == 1) {
@@ -505,6 +531,7 @@ zaa.directive("zaaListArray", function() {
 			//return '<div class="col s12"><h5>{{label}}</h5><div ng-repeat="(key,row) in model" class="row"><div class="col input-field s10"><input type="text" ng-model="row.value" /></div><div class="col input-field s2"><button type="button" class="btn" ng-click="remove(key)">Entfernen</button></div></div><div class="row"><div class="col s12 field-input"><button ng-click="add()" class="btn" type="button">+ Hinzufügen</button></div></div></div>';
 			return '<div class="col s12 list">' +
                         '<h5>Auflistung</h5>' +
+                        '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="teal-text">+</span> links unten ein.</p>' +
                         '<div ng-repeat="(key,row) in model" class="list__item">' +
                             '<div class="list__left">' +
                                 '<input class="list__input" type="text" ng-model="row.value" />' +
@@ -513,7 +540,7 @@ zaa.directive("zaaListArray", function() {
                                 '<button class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="mdi-content-remove"></i></button>' +
                             '</div>' +
                         '</div>' +
-                        '<button ng-click="add()" type="button" class="btn-floating left [ teal ][ waves-effect waves-circle waves-light ] list__add-button"><i class="mdi-content-add"></i></button>' +
+                        '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ teal ][ waves-effect waves-circle waves-light ]"><i class="mdi-content-add"></i></button>' +
                     '</div>';
 		}
 	}
