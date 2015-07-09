@@ -72,3 +72,27 @@ public function extendPermissionRoutes()
     ];
 }
 ```
+
+Interne berechtigungs berechnung
+--------------------------------
+Es gibt 3 zustände für die Berechtiung welche wie folgt berechnet werden:
+
+| Name 			| Wert
+| ------		| ----
+| crud_create	| 1
+| crud_update	| 3
+| crud_delete	| 5
+
+Somit kommen beim addieren Dieser Werte folgende Zuständ zusammen
+
+| create	| update	| delete 	| Wert			| Beschreibung
+| ---		| ---		| ---		| ---			| ----
+| ☐			| ☐			| ☐			| 0				| Keine berechtigung
+| ☑			| ☐			| ☐			| 1				| erstellen
+| ☐			| ☑			| ☐			| 3				| bearbeiten
+| ☑			| ☑			| ☐			| 4				| erstellen, bearbeiten
+| ☐			| ☐			| ☑			| 5				| löschen
+| ☑			| ☐			| ☑			| 6				| erstellen, löschen
+| ☐			| ☑			| ☑			| 8				| bearbeiten, löschen
+| ☑			| ☑			| ☑			| 9				| erstellen, bearbeiten, löschen
+
