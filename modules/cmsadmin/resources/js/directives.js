@@ -36,7 +36,7 @@ zaa.directive("createForm", function() {
 			$scope.$watch(function() { return $scope.data.cat_id }, function(n, o) {
 				if (n !== undefined && n !== o) {
 					$scope.data.parent_nav_id = 0;
-					$scope.navitems = MenuService.menu[n];
+					$scope.navitems = MenuService.menu[n]['__items'];
 				}
 			});
 			
