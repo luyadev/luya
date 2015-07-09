@@ -2,6 +2,8 @@
 
 namespace cmsadmin\base;
 
+use Exception;
+
 abstract class BlockConfigElement
 {
     public $item = [];
