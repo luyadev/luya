@@ -311,15 +311,36 @@ zaa.directive('zaaTable', function() {
 			'label' : '@label',
 			'grid' : '@grid'
 		},
-		link : function(scope) {
-			/*
-			scope.$watch('model', function(n, o) {
-				console.log('model watcher', n);
-			})
-			*/
+		controller : function($scope) {
+			
+			if ($scope.model == undefined) {
+				$scope.model = [{}];
+			}
+			
+			$scope.addColumn = function(name) {
+				for(var i in $scope.model) {
+					 $scope.model[i][name] = '';
+				}
+			}
+			
+			$scope.addRow = function() {
+				var elmn = $scope.model[0];
+				console.log(elmn);
+				var ins = {};
+				for (var i in elmn) {
+					ins[i] = '';
+				}
+				
+				$scope.model.push(ins);
+			}
 		},
 		template : function() {
-			return '<div></div>';
+			return  '<div>' +
+						'<table border="1" style="border:1px solid red;">'+
+						'<thead><tr><td data-ng-repeat="(hk, hr) in model[0]"><strong>{{hk}}</strong></td><td><input type="text" ng-model="columnName" /><button ng-click="addColumn(columnName)" type="button">ADD</button></td></tr></thead>' +
+						'<tr data-ng-repeat="(key, row) in model"><td style="border:1px solid black;" data-ng-repeat="(field,value) in row"><input type="text" ng-model="model[key][field]" /></td></tr>'+
+						'</table><button ng-click="addRow()" type="button">Add Row</button>'+
+					'</div>';
 		}
 	}
 });
