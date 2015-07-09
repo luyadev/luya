@@ -2,6 +2,8 @@
 
 namespace admin\ngrest\render;
 
+use Yii;
+use admin\components\Auth;
 /**
  * @todo complet rewrite of this class - what is the best practive to acces data in the view? define all functiosn sindie here? re-create methods from config object?
  *  $this->config() $this....
@@ -20,12 +22,26 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\base
     {
         return $this->config->getKey($key);
     }
+    
+    private $_permissions = [];
+    
+    public function can($type)
+    {
+        if (!array_key_exists($type, $this->_permissions)) {
+            $this->_permissions[$type] = Yii::$app->auth->matchApi(Yii::$app->adminuser->getId(), $this->config->apiEndpoint, $type);
+        }
+        
+        return $this->_permissions[$type];
+    }
 
     public function render()
     {
         $view = new \yii\base\View();
 
         return $view->render('@admin/views/ngrest/render/crud.php', array(
+            'canCreate' => $this->can(Auth::CAN_CREATE),
+            'canUpdate' => $this->can(Auth::CAN_UPDATE),
+            'canDelete' => $this->can(Auth::CAN_DELETE),
             'crud' => $this,
             'config' => $this->config,
             'activeWindowCallbackUrl' => 'admin/ngrest/callback',
@@ -52,7 +68,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\base
         if ($this->_buttons === null) {
             $buttons = [];
             // do we have an edit button
-            if (count($this->getFields('update')) > 0) {
+            if (count($this->getFields('update')) > 0 && $this->can(Auth::CAN_UPDATE)) {
                 $buttons[] = [
                     'ngClick' => 'toggleUpdate(item.'.$this->config->getRestPrimaryKey().', $event)',
                     'icon' => 'mdi-editor-mode-edit',
@@ -68,7 +84,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\base
                 ];
             }
     
-            if ($this->config->isDeletable()) {
+            if ($this->config->isDeletable() && $this->can(Auth::CAN_DELETE)) {
                 $buttons[] = [
                     'ngClick' => 'deleteItem(item.'.$this->config->getRestPrimaryKey().', $event)',
                     'icon' => '',

@@ -3,7 +3,8 @@
 namespace admin\base;
 
 use Yii;
-
+use Exception;
+use admin\components\Auth;
 /**
  * Wrapper for yii2 basic rest controller used with a model class. The wrapper is made to
  * change behaviours and overwrite the indexAction.
@@ -35,7 +36,26 @@ class RestActiveController extends \yii\rest\ActiveController implements \luya\r
 
     public function checkAccess($action, $model = null, $params = [])
     {
-        if (!\yii::$app->auth->matchApi($this->userAuthClass()->getIdentity()->id, $this->id)) {
+        switch($action) {
+            case "index":
+            case "view":
+                $type = false;
+                break;
+            case "create":
+                $type = Auth::CAN_CREATE;
+                break;
+            case "update":
+                $type = Auth::CAN_UPDATE;
+                break;
+            case "delete":
+                $type = Auth::CAN_DELETE;
+                break;
+            default:
+                throw new Exception("Unable to access the REST api, invalid $action");
+                break;
+        }
+        
+        if (!Yii::$app->auth->matchApi($this->userAuthClass()->getIdentity()->id, $this->id, $type)) {
             throw new \yii\web\ForbiddenHttpException('you are unable to access this controller due to access restrictions.');
         }
     }

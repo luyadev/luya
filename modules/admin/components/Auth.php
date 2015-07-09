@@ -10,19 +10,51 @@ use \admin\models\UserOnline;
 
 class Auth extends \yii\base\Component
 {
+    const CAN_CREATE = 1;
+    
+    const CAN_UPDATE = 2;
+    
+    const CAN_DELETE = 3;
+    
+    private function permissionWeight($create, $update, $delete)
+    {
+        $create = $create ? 1 : 0;
+        $update = $update ? 3 : 0;
+        $delete = $delete ? 5 : 0;
+        
+        return ($create + $update + $delete);
+    }
+    
+    private function permissionVerify($type, $permissionWeight)
+    {
+        switch($type) {
+            case self::CAN_CREATE:
+                $numbers = [1, 4, 6, 9];
+                break;
+            case self::CAN_UPDATE:
+                $numbers = [3, 4, 8, 9];
+                break;
+            case self::CAN_DELETE:
+                $numbers = [5, 6, 8, 9];
+                break;
+        }
+        
+        return in_array($permissionWeight, $numbers);
+    }
+    
     /**
      * See if a User have rights to access this api.
      *
      * 1. get user groups
      * 2. see if user group auth ref entry exists
-     * 3. return the entrys crud information
-     * 4. get the most priority high crud type (create+update+delete = 3)
-     * 5. return
+     * 3. @TODO
+     * 4. @TODO
      *
      * @param int    $userId
      * @param string $apiEndpoint As defined in the Module.php like (api-admin-user) which is a unique identifiere
-     */
-    public function matchApi($userId, $apiEndpoint)
+     * @return boolena
+	 */
+    public function matchApi($userId, $apiEndpoint, $typeVerification = false)
     {
         UserOnline::refreshUser($userId, $apiEndpoint);
         //$groups = \yii::$app->db->createCommand("SELECT * FROM admin_group_auth as t1 LEFT JOIN (admin_group as t2 LEFT JOIN (admin_user as t3) ON (t2.user_id=t3.id)) ON (t1.group_id=t2.id) WHERE t3.id=:user_id")->bindValue(':user_id', $userId)->queryAll();
@@ -31,19 +63,20 @@ class Auth extends \yii\base\Component
         ->bindValue('api', $apiEndpoint)
         ->queryAll();
 
-        $lastPrio = 0;
-        $lastItem = 0;
-        foreach ($groups as $item) {
-            $prio = $item['crud_create'] + $item['crud_update'] + $item['crud_delete'];
-            if ($prio >= $lastPrio) {
-                $lastItem = $item;
+        if (!$typeVerification) {
+            if (count($groups) > 0) {
+                return true;
+            }
+            
+            return false;
+        }
+        
+        foreach($groups as $row) {
+            if ($this->permissionVerify($typeVerification, $this->permissionWeight($row['crud_create'], $row['crud_update'], $row['crud_delete']))) {
+                return true;
             }
         }
-
-        if (!empty($lastItem)) {
-            return true;
-        }
-
+        
         return false;
     }
     /**
@@ -52,7 +85,6 @@ class Auth extends \yii\base\Component
      * @param string $moduleName     Module Name
      * @param string $controllerName The name of the controller without suffix "Controller"
      * @param string $actionName     The name of the action without prefix "action";
-     *
      * @return bool
      */
     public function matchRoute($userId, $route)

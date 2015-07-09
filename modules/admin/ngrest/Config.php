@@ -35,8 +35,11 @@ class Config implements \admin\ngrest\base\ConfigInterface
 
     private $restUrlPrefix = 'admin/'; /* could be: http://www.yourdomain.com/admin/; */
 
+    public $apiEndpoint = null;
+    
     public function __construct($restUrl, $restPrimaryKey, $options = [])
     {
+        $this->apiEndpoint = $restUrl;
         $this->restUrl = $this->restUrlPrefix.$restUrl;
         $this->restPrimaryKey = $restPrimaryKey;
         $this->options = $options;

@@ -17,8 +17,9 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
 </script>
 
 <div ng-controller="<?=$config->getNgRestConfigHash(); ?>" ng-init="init()">
+<? if($canCreate): ?>
 <a ng-show="config.create.length" class="btn-floating btn-large waves-effect waves-light right red" style="margin:20px;" ng-click="openCreate()"><i class="mdi-content-add"></i></a>
-
+<? endif; ?>
 <div class="card-panel" ng-show="loading">
     <div class="preloader-wrapper big active">
         <div class="spinner-layer spinner-blue-only">
@@ -39,7 +40,6 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
             <label for="searchString">in der Tabelle <strong>{{currentMenuItem.alias}}</strong> suchen.</label>
         </div>
     </div>
-    
     <table class="striped hoverable responsive-table">
     <thead>
         <tr>
@@ -70,6 +70,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
     </table>
 </div>
 
+<? if($canCreate): ?>
 <!-- CREATE MODAL -->
 <div id="createModal" class="modal">
 
@@ -126,7 +127,9 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
     
 </div>
 <!-- /CREATE MODAL -->
+<? endif; ?>
 
+<? if($canUpdate): ?>
 <!-- UPDATE MODAL -->
 <div id="updateModal" class="modal">
 
@@ -182,7 +185,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
     
 </div>
 <!-- /UPDATE MODAL -->
-
+<? endif; ?>
 
 <!-- activeWindow MODAL -->
 <div id="activeWindowModal" class="modal">
