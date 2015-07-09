@@ -57,10 +57,18 @@ class ModuleController extends \luya\base\Command
         $content.= '    // add your custom Module properties here.' . PHP_EOL;
         $content.= '}';
         
-        if (file_put_contents($moduleDir . DIRECTORY_SEPARATOR . 'Module.php', $content)) {
-            
+        $modulephp = $moduleDir . DIRECTORY_SEPARATOR . 'Module.php';
+        if (file_put_contents($modulephp, $content)) {
+            $out = PHP_EOL."'modules' => [".PHP_EOL;
+            $out.= "    '$moduleName' => [".PHP_EOL;
+            $out.= "        'class' => '\\app\\modules\\$moduleName\\Module'".PHP_EOL;
+            $out.= "    ],".PHP_EOL;
+            $out.= "]".PHP_EOL.PHP_EOL;
+            echo $this->ansiFormat($out, Console::FG_GREEN);
+            exit(0);
         } else {
-            
+            echo $this->ansiFormat("Unable to write file: '".$modulephp."'", Console::FG_RED) . PHP_EOL;
+            exit(1);
         }
     }
 }
