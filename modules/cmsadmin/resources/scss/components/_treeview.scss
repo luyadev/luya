@@ -2,102 +2,112 @@ $treeview--color: $black !default;
 $treeview--active-color: $blue !default;
 
 .treeview {
-	margin-top: 70px;
+    margin-top: 70px;
 }
 
  /**
  * #TREEVIEW__LIST
  */
 .treeview__list {
-	margin: 0 0 0 8px;
+    margin: 0 0 0 8px;
 
-	& .treeview__list {
-		margin: 0 0 0 20px;
-	}
+    & .treeview__list {
+        margin: 0 0 0 20px;
+    }
 }
 
 .treeview__title {
-	color: #9e9e9e;
-	font-size: 0.8rem;
-	margin-top: 30px;
-	padding-left: 11px;
-	text-transform: uppercase;
-	margin-bottom: 5px;
+    color: #9e9e9e;
+    font-size: 0.8rem;
+    margin-top: 30px;
+    padding-left: 11px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
 }
 
 .treeview__drop {
-	height: 0;
-	border: 1px dotted transparent;
-	transition: 0.25s ease height, 0.25s ease border;
+    height: 0;
+    border: 1px dotted transparent;
+    opacity: 1;
+    transition: 0.25s ease height, 0.25s ease border, 0.25s ease opacity;
+    will-change: height, border, opacity;
 
-	&.treeview__drop--visible {
-		height: 10px;
-		border: 1px dotted $treeview--active-color;
-	}
-	&.treeview__drop--hover {
-		background-color: rgba($treeview--active-color ,0.5);
-	}
+    &.treeview__drop--visible {
+        height: 10px;
+        border: 1px dotted $treeview--active-color;
+    }
+    &.treeview__drop--hover {
+        background-color: rgba($treeview--active-color ,0.5);
+    }
+}
+
+.ui-draggable-dragging .treeview__drop {
+    opacity: 0.1;
 }
 
 /**
  * #TREEVIEW__ITEM
  */
 .treeview__item {
-	display: block;
+    display: block;
 }
 
 .treeview__link {
-	font-size: 1.1rem;
-	line-height: 1.2rem;
-	padding: 8px 5px;
-	display: block;
-	cursor: pointer;
-	color: $treeview--color;
+    font-size: 1.1rem;
+    line-height: 1.2rem;
+    padding: 8px 5px;
+    display: block;
+    cursor: pointer;
+    color: $treeview--color;
 
-	&.active {
-		color: $treeview--active-color;
-	}
-	&.treeview__link--hover {
-		background-color: rgba($treeview--active-color, 0.5);
-	}
+    &.active {
+        color: $treeview--active-color;
+    }
+    &.treeview__link--hover {
+        background-color: rgba($treeview--active-color, 0.5);
+    }
+    &.treeview__link--draggable {
+        color: $treeview--color;
+        cursor: move;
+    }
 }
 
 .treeview__move {
-	width: 0;
-	height: 0;
-	cursor: move;
-	transition: 0.25s ease width, 0.25s ease height, 0.25s ease margin-right;
-	overflow: hidden;
-	margin-right: 0;
+    width: 0;
+    height: 0;
+    cursor: move;
+    transition: 0.25s ease width, 0.25s ease height, 0.25s ease margin-right;
+    overflow: hidden;
+    margin-right: 0;
 
-	&.treeview__move--visible {
-		width: 16.5px;
-		height: 18px;
-		margin-right: 5px;
-	}
+    &.treeview__move--visible {
+        width: 16.5px;
+        height: 18px;
+        margin-right: 5px;
+    }
 }
 
 .treeview__empty-circle {
-	width: 12px;
-	height: 12px;
-	border-radius: 50%;
-	display: inline-block;
-	margin: 0 5px 0 2px;
-	border: 1px solid $treeview--color;
-	transition: 0.25s ease border, 0.25s ease width, 0.25s ease margin;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 5px 0 2px;
+    border: 1px solid $treeview--color;
+    transition: 0.25s ease border, 0.25s ease width, 0.25s ease margin;
 }
 .active .treeview__empty-circle {
-	border: 6px solid $treeview--active-color;
+    border: 6px solid $treeview--active-color;
 }
 
 .treeview--drag-active .treeview__empty-circle {
-	border: 0 solid transparent;
-	width: 0;
-	margin: 0;
+    border: 0 solid transparent;
+    width: 0;
+    margin: 0;
 }
 
 .treeview__switch {
-	margin-top: 38px;
-	margin-bottom: -38px;
-	margin-left: 12px;
+    margin-top: 38px;
+    margin-bottom: -38px;
+    margin-left: 12px;
 }
