@@ -41,7 +41,7 @@ zaa.factory('ApiCmsNavItemPageBlockItem', function($resource) {
 zaa.factory('PlaceholderService', function() {
 	var service = [];
 	
-	service.status = 0; /* 1 = showplaceholders; 0 = hide placeholders */
+	service.status = 1; /* 1 = showplaceholders; 0 = hide placeholders */
 	
 	service.delegate = function(status) {
 		service.status = status;
