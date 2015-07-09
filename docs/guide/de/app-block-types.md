@@ -64,3 +64,4 @@ Natürlich benötigen wir mehr als nur Textfelder für die Typen-Einträge. Hier
 | zaa-image-upload          | int           | Erstellt einen Bildupload Feld für eine Datei. Die Rückgabe ist eine *image_id* aus dem Storage-System. 
 | zaa-image-array-upload    | array         | Erstellt ein Bildupload für ein oder mehr Bilder. Die Rückgabe ist per Array *image_id* und *caption*. 
 | zaa-list-array            | array         | Erstellt einen Textinput für mehrer Eingaben. (zbsp. Listen).
+| zaa-table					| array			| Erstellt eine Tabelle anhand eines Json inputs. Der rückgabe Wert ist ein Array wobei der Key dem Spalten-Namen entspricht.
