@@ -11,6 +11,10 @@ LUYA CHANGELOG
 - `#212`: renamed `config` folder into `configs` as default value.
 - `#183`: added ability to remove items in `NgRest`. Just add `$config->delete = true` inside your `NgRestConfig()` method.
 - `#222`: added `module/create` cli command.
+- `#245`: fixed empty values in cms page creation.
+- `#235`: fixed bug where modal windows where to small.
+- `#228`: fixed bug where initvalue in select directives does not work for integer values.
+- `#220`: improved filemanager, removed ng-flow, added native angular-uploader.
 
 1.0.0-alpha8 (30. Jun 2015)
 --------------------------
