@@ -15,6 +15,7 @@ LUYA CHANGELOG
 - `#235`: fixed bug where modal windows where to small.
 - `#228`: fixed bug where initvalue in select directives does not work for integer values.
 - `#220`: improved filemanager, removed ng-flow, added native angular-uploader.
+- `#218`: improved NgRest Crud permission verifications (API Permissions).
 
 1.0.0-alpha8 (30. Jun 2015)
 --------------------------
