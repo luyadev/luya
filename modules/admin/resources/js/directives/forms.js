@@ -217,7 +217,14 @@ zaa.directive('zaaDatetime', function() {
 			})
 		},
 		template : function() {
-			return '<div class="col s{{grid}}">{{label}}: <input ng-blur="reform()" type="text" ng-model="day" style="width:34px;" />.<input ng-blur="reform()" type="text" ng-model="month" style="width:34px;" />.<input ng-blur="reform()" type="text" ng-model="year" style="width:50px;" /> Zeit: <input ng-blur="reform()" type="text" ng-model="hour" style="width:34px;" />:<input ng-blur="reform()" type="text" ng-model="min" style="width:34px;" /></div>';
+			return '<div class="col s{{grid}} form__datetimepicker">' +
+						'<label>{{label}}</label>' +
+						'<input ng-blur="reform()" type="text" ng-model="day" placeholder="Tag" />.' +
+						'<input ng-blur="reform()" type="text" ng-model="month" placeholder="Monat" />.' + 
+						'<input ng-blur="reform()" type="text" ng-model="year" placeholder="Jahr" /> - ' + 
+						'<input ng-blur="reform()" type="text" ng-model="hour" placeholder="Stunde" />:' +
+						'<input ng-blur="reform()" type="text" ng-model="min" placeholder="Minute" />' +
+					'</div>';
 		}
 	}
 });
@@ -248,7 +255,12 @@ zaa.directive('zaaDate', function() {
 			})
 		},
 		template : function() {
-			return '<div class="col s{{grid}}">{{label}}: <input ng-blur="reform()" type="text" ng-model="day" style="width:34px;" />.<input ng-blur="reform()" type="text" ng-model="month" style="width:34px;" />.<input ng-blur="reform()" type="text" ng-model="year" style="width:50px;" /></div>';
+			return '<div class="col s{{grid}} form__datepicker">' +
+						'<label>{{label}}</label>' +
+						'<input ng-blur="reform()" type="text" ng-model="day" placeholder="Tag" />.' +
+						'<input ng-blur="reform()" type="text" ng-model="month" placeholder="Monat" />.' +
+						'<input ng-blur="reform()" type="text" ng-model="year" placeholder="Jahr" />' + 
+					'</div>';
 		}
 	}
 });

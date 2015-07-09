@@ -34,3 +34,28 @@ textarea.materialize-textarea {
 		}
 	}
 }
+
+.form__datepicker {
+	margin: 15px 0;
+
+	label {
+		display: block;
+	}
+	input {
+		display: inline-block;
+		width: 80px;
+		margin: 0 10px 15px 10px;
+		text-align: center;
+
+		&:first-of-type {
+			margin-left: 0;
+		}
+		&:last-of-type {
+			margin-right: 0;
+		}
+	}
+}
+
+.form__datetimepicker {
+	@extend .form__datepicker;
+}
