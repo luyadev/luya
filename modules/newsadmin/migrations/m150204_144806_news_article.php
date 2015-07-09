@@ -21,6 +21,8 @@ class m150204_144806_news_article extends Migration
             'timestamp_update' => Schema::TYPE_INTEGER,
             'timestamp_display_from' => Schema::TYPE_INTEGER,
             'timestamp_display_until' => Schema::TYPE_INTEGER,
+            'is_deleted' => 'tinyint(1) NOT NULL DEFAULT 0',
+            'is_display_limit' => 'tinyint(1) NOT NULL DEFAULT 0',
         ]);
     }
 

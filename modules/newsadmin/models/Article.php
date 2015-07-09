@@ -23,7 +23,7 @@ class Article extends \admin\ngrest\base\Model
     {
         return [
            'restcreate' => ['title', 'text', 'cat_id', 'image_id', 'image_list', 'tags', 'timestamp_display_from', 'timestamp_display_until', 'file_list'],
-           'restupdate' => ['title', 'text', 'cat_id', 'image_id', 'image_list', 'tags', 'timestamp_display_from', 'timestamp_display_until', 'timestamp_display_limit', 'file_list'],
+           'restupdate' => ['title', 'text', 'cat_id', 'image_id', 'image_list', 'tags', 'timestamp_display_from', 'timestamp_display_until', 'is_display_limit', 'file_list'],
        ];
     }
 
@@ -69,7 +69,18 @@ class Article extends \admin\ngrest\base\Model
 
     public static function getAvailableNews()
     {
-        return Article::find()->where('timestamp_display_from <= '.time())->all();
+        $articles = Article::find()->where('timestamp_display_from <= :time',['time' => time()])->all();
+        
+        // filter if display time is limited
+        foreach($articles as $key => $article) {
+            if ($article->is_display_limit) {
+                if ($article->timestamp_display_until <= time()) {
+                    unset($articles[$key]);
+                }
+            }
+        }
+
+        return $articles;
     }
 
     // ngrest
@@ -85,6 +96,7 @@ class Article extends \admin\ngrest\base\Model
         return 'api-news-article';
     }
 
+
     public function ngRestConfig($config)
     {
         $config->list->field('cat_id', 'Kategorie')->selectClass('\newsadmin\models\Cat', 'id', 'title');
@@ -97,7 +109,7 @@ class Article extends \admin\ngrest\base\Model
         $config->update->field('timestamp_create', 'News erstellt am:')->date();
         $config->update->field('timestamp_display_from', 'News anzeigen ab')->date();
 
-        $config->update->field('timestamp_display_limit', 'News Anzeige zeitlich einschränken:')->toggleStatus();
+        $config->update->field('is_display_limit', 'News Anzeige zeitlich einschränken:')->toggleStatus();
         $config->update->field('timestamp_display_until', 'News anzeigen bis')->date();
 
         $config->update->field('image_id', 'Bild')->image()->required();
