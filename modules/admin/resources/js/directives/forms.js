@@ -127,6 +127,9 @@ zaa.directive('zaaSelect', function($timeout){
 			$timeout(function(){
 				scope.$watch(function() { return scope.model }, function(n, o) {
 					if (n === undefined && o === undefined) {
+						if (jQuery.isNumeric(scope.initvalue)) {
+							scope.initvalue = parseInt(scope.initvalue);
+						}
 						scope.model = scope.initvalue;
 					}
 				})
