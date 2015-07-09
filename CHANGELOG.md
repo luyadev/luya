@@ -1,21 +1,21 @@
 LUYA CHANGELOG
 ==============
 
-1.0.0-alpha10 (in progress)
+1.0.0-alpha10 (9. Jul 2015)
 ---------------------------
-
-
-1.0.0-alpha9 (8. Jul 2015)
---------------------------
-- `#196`: removed `$links->activeLink` and replaced with `$links->activeUrl`.
-- `#212`: renamed `config` folder into `configs` as default value.
-- `#183`: added ability to remove items in `NgRest`. Just add `$config->delete = true` inside your `NgRestConfig()` method.
 - `#222`: added `module/create` cli command.
 - `#245`: fixed empty values in cms page creation.
 - `#235`: fixed bug where modal windows where to small.
 - `#228`: fixed bug where initvalue in select directives does not work for integer values.
 - `#220`: improved filemanager, removed ng-flow, added native angular-uploader.
 - `#218`: improved NgRest Crud permission verifications (API Permissions).
+- Added News-Module fields
+
+1.0.0-alpha9 (8. Jul 2015)
+--------------------------
+- `#196`: removed `$links->activeLink` and replaced with `$links->activeUrl`.
+- `#212`: renamed `config` folder into `configs` as default value.
+- `#183`: added ability to remove items in `NgRest`. Just add `$config->delete = true` inside your `NgRestConfig()` method.
 
 1.0.0-alpha8 (30. Jun 2015)
 --------------------------
