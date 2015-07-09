@@ -95,6 +95,10 @@
 	height: 0;
 	overflow: hidden;
 	transition: 0.25s ease opacity, 0.25s ease height;
+
+	.collapsible {
+		margin-top: 30px;
+	}
 }
 .block--edit .block__edit {
 	opacity: 1;

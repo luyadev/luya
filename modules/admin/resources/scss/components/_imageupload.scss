@@ -17,8 +17,16 @@
 
 .imageupload__preview {
 	position: relative;
-	min-height: 80px;
 	font-size: 0;
+	min-height: 100px;
+	max-width: 100%;
+	text-align: center;
+
+	img {
+		max-width: 100%;
+		height: auto;
+		max-height: 250px;
+	}
 }
 
 .imageupload__loading {

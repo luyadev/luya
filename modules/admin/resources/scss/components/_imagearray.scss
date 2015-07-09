@@ -1,9 +1,11 @@
-.imagearray__item {
-	position: relative;
+.imagearray .imageupload {
+    margin-top: 26px;
 }
 
-.imagearray__delete {
-	position: absolute;
-	right: 10px;
-	top: 10px;
+.imagearray .col {
+    padding: 0;
+}
+
+.imagearray .input-field {
+    padding-left: 15px;
 }
