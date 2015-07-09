@@ -3,6 +3,7 @@
 namespace admin\storage;
 
 use Yii;
+use yii\helpers\Inflector;
 use \admin\models\StorageFile;
 use \admin\models\StorageImage;
 class File
@@ -64,7 +65,7 @@ class File
         }
         $copyFile = false;
         $fileInfo = $this->getFileInfo($newFileName);
-        $baseName = preg_replace("/[^a-zA-Z0-9\-\_\.]/", '', $fileInfo->name);
+        $baseName = Inflector::slug($fileInfo->name, '-');
         $fileHashName = $this->getNameHash($newFileName);
         $fileHash = $this->getFileHash($sourceFile);
         $mimeType = $this->getMimeType($sourceFile);
