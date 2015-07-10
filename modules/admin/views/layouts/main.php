@@ -78,7 +78,7 @@
 
         <script type="text/ng-template" id="storageImageUpload">
             <div class="imageupload">
-                <b class="imageupload__title">Bild und Filter festlegen</b>
+                <b class="imageupload__title">Bild auswählen</b>
 
                 <storage-file-upload ng-model="fileId"></storage-file-upload>
 
@@ -253,26 +253,26 @@
 
                     </div>
 
-
                     <table class="filemanager__table striped hoverable">
                         <thead>
                             <tr>
-                                <th class="filemanager__checkox-column"><!--<i class="mdi-action-done"></i>--></th>
+                                <th class="filemanager__checkox-column" ng-hide="allowSelection == 'true'">
+                                    <i class="mdi-action-done-all clickable" ng-click="toggleSelectionAll()"></i>
+                                </th>
                                 <th></th>
                                 <th>Name</th>
                                 <th>Typ</th>
                                 <th>Eigentümer</th>
                                 <th>Erstellungsdatum</th>
-                                <th ng-show="allowSelection == 'true'"></th>
                             </tr>
                         </thead>
                         <tbody>
 
                             <!-- FILES -->
-                            <tr ng-repeat="file in files" ng-click="toggleSelection(file)">
-                                <td class="filemanager__checkox-column">
-                                    <input type="checkbox" id="select-{{file.id}}" />
-                                    <label for="select-{{file.id}}"></label>
+                            <tr ng-repeat="file in files" ng-click="toggleSelection(file)" class="filemanager__file" ng-class="{ 'clickable selectable' : allowSelection == 'false' }">
+                                <td class="filemanager__checkox-column"  ng-hide="allowSelection == 'true'">
+                                    <input type="checkbox" id="{{file.id}}" ng-checked="inSelection(file)" />
+                                    <label for="checked-status-managed-by-angular-{{file.id}}"></label>
                                 </td>
                                 <td class="filemanager__icon-column" ng-class="{ 'filemanager__icon-column--thumb' : file.thumbnail }">
                                         <span ng-if="file.thumbnail">
@@ -286,9 +286,6 @@
                                 <td class="filemanager__lighten">{{file.extension}}</td>
                                 <td class="filemanager__lighten">{{file.firstname}} {{file.lastname}}</td>
                                 <td class="filemanager__lighten">{{file.upload_timestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
-                                <td ng-show="allowSelection == 'true'">
-                                    <small class="btn btn-flat waves-teal" ng-click="selectFile(file)" style="overflow: hidden; padding: 0 10px;">Datei verwenden</small>
-                                </td>
                             </tr>
                             <!-- /FILES -->
 

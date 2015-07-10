@@ -127,6 +127,10 @@
 	width: calc(100% - #{$filemanager__tree--width});
 }
 
+.filemanager__file {
+	cursor: pointer;
+}
+
 .filemanager__checkox-column {
 	width: 50px;
 

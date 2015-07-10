@@ -12,3 +12,12 @@ body {
 *, *:before, *:after {
 	box-sizing: border-box;
 }
+
+.clickable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.selectable {
+    user-select: initial;
+}
