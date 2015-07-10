@@ -71,7 +71,7 @@ $treeview--active-color: $blue !default;
         cursor: move;
     }
     &.treeview__link--is-hidden {
-        color: #9e9e9e;
+        color: #bdbdbd;
 
         &.treeview__link--active {
             color: $treeview--active-color;
@@ -94,6 +94,10 @@ $treeview--active-color: $blue !default;
         height: 18px;
         margin-right: 5px;
     }
+}
+
+.treeview__eye {
+    cursor: inherit;
 }
 
 .treeview__empty-circle {
