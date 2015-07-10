@@ -427,6 +427,10 @@ zaa.directive("storageFileManager", function(FileListeService, Upload, Filemanag
 
 			$scope.toggleSelectionAll = function() {
 				if($scope.allowSelection == 'false') {
+					if($scope.selectedFiles.length > 0 && $scope.selectedFiles.length != $scope.files.length) {
+						$scope.selectedFiles = [];
+					}
+
 					for (var i = $scope.files.length - 1; i >= 0; i--) {
 						$scope.toggleSelection($scope.files[i]);
 					};

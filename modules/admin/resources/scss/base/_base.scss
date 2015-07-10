@@ -15,4 +15,9 @@ body {
 
 .clickable {
     cursor: pointer;
+    user-select: none;
+}
+
+.selectable {
+    user-select: initial;
 }

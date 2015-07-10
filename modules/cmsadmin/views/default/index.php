@@ -1,4 +1,3 @@
-<!-- SCRIPT TEMPLATES -->
 
 <script type="text/ng-template" id="createform.html">
     <div ng-switch on="data.nav_item_type" class="card-panel">
@@ -123,7 +122,7 @@
         <div class="treeview__drop" ng-class="{ 'treeview__drop--visible': showDrag }" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : false, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onBeforeDrop()', multiple : true}">
         </div>
 
-        <a class="treeview__link" ng-click="!showDrag && go(data.id)" ng-class="{'active' : isCurrentElement(data.id), 'waves-effect waves-blue' : !showDrag, 'treeview__link--draggable' : showDrag }" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : false, tolerance : 'pointer', hoverClass : 'treeview__link--hover' }" jqyoui-droppable="{onDrop: 'onChildDrop()', multiple : true}">
+        <a class="treeview__link" ng-click="!showDrag && go(data.id)" ng-class="{'active' : isCurrentElement(data.id), 'waves-effect waves-blue' : !showDrag, 'treeview__link--draggable' : showDrag, 'treeview__link--is-hidden' : data.is_hidden }" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : false, tolerance : 'pointer', hoverClass : 'treeview__link--hover' }" jqyoui-droppable="{onDrop: 'onChildDrop()', multiple : true}">
             <i ng-class="{ 'treeview__move--visible': showDrag }" class="mdi-action-open-with treeview__move left"></i>
             <div class="treeview__empty-circle"></div>
             {{data.title}}
