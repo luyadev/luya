@@ -413,11 +413,23 @@ zaa.directive("storageFileManager", function(FileListeService, Upload, Filemanag
 			}
 			
 			$scope.toggleSelection = function(file) {
+				if($scope.allowSelection == 'true') {
+					$scope.selectFile(file);
+				}
+
 				var i = $scope.selectedFiles.indexOf(file.id);
 				if (i > -1) {
 					$scope.selectedFiles.splice(i, 1);
 				} else {
 					$scope.selectedFiles.push(file.id);
+				}
+			}
+
+			$scope.toggleSelectionAll = function() {
+				if($scope.allowSelection == 'false') {
+					for (var i = $scope.files.length - 1; i >= 0; i--) {
+						$scope.toggleSelection($scope.files[i]);
+					};
 				}
 			}
 			
