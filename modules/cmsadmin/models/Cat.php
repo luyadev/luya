@@ -2,6 +2,9 @@
 
 namespace cmsadmin\models;
 
+use admin\models\Lang;
+use cmsadmin\models\Nav;
+
 class Cat extends \admin\ngrest\base\Model
 {
     use \admin\traits\SoftDeleteTrait;
@@ -11,13 +14,25 @@ class Cat extends \admin\ngrest\base\Model
         return 'api-cms-cat';
     }
 
+    private $_langId = null;
+    
+    public function getLangId()
+    {
+        if ($this->_langId === null) {
+            $array = Lang::getDefault();
+            $this->_langId = $array['id'];
+        }
+    
+        return $this->_langShortCode;
+    }
+    
     private function getNavData()
     {
         $_data = [];
-        foreach (\cmsadmin\models\Nav::find()->all() as $item) {
-            $x = $item->getNavItems()->where(['lang_id' => \admin\models\Lang::getDefault()->id])->one();
+        foreach (Nav::find()->all() as $item) {
+            $x = $item->getNavItems()->where(['lang_id' => $this->getLangId()])->asArray()->one();
             if ($x) {
-                $_data[$x->nav_id] = $x->title;
+                $_data[$x['nav_id']] = $x['title'];
             }
         }
 

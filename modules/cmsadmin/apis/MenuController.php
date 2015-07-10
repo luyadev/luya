@@ -3,9 +3,22 @@
 namespace cmsadmin\apis;
 
 use cmsadmin\models\Cat;
+use admin\models\Lang;
 
 class MenuController extends \admin\base\RestController
 {
+    private $_langShortCode = null;
+    
+    public function getLangShortCode()
+    {
+        if ($this->_langShortCode === null) {
+            $array = Lang::getDefault();
+            $this->_langShortCode = $array['short_code'];
+        }
+        
+        return $this->_langShortCode;
+    }
+    
     public function actionAll()
     {
         $data = [];
@@ -25,7 +38,7 @@ class MenuController extends \admin\base\RestController
     {
         $menu = new \cmsadmin\components\Menu();
         $menu->setCatByRewrite($catRewrite);
-        $menu->setLangByShortCode(\admin\models\Lang::getDefault()->short_code);
+        $menu->setLangByShortCode($this->getLangShortCode());
 
         return $menu->childrenRecursive(0, 'nodes');
     }
@@ -34,7 +47,7 @@ class MenuController extends \admin\base\RestController
     {
         $menu = new \cmsadmin\components\Menu();
         $menu->setCatById($catId);
-        $menu->setLangByShortCode(\admin\models\Lang::getDefault()->short_code);
+        $menu->setLangByShortCode($this->getLangShortCode());
 
         return $menu->childrenRecursive(0, 'nodes');
     }
