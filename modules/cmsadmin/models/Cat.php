@@ -23,7 +23,7 @@ class Cat extends \admin\ngrest\base\Model
             $this->_langId = $array['id'];
         }
     
-        return $this->_langShortCode;
+        return $this->_langId;
     }
     
     private function getNavData()
