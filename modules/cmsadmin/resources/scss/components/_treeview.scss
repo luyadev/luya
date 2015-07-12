@@ -60,7 +60,7 @@ $treeview--active-color: $blue !default;
     cursor: pointer;
     color: $treeview--color;
 
-    &.active {
+    &.treeview__link--active {
         color: $treeview--active-color;
     }
     &.treeview__link--hover {
@@ -70,9 +70,17 @@ $treeview--active-color: $blue !default;
         color: $treeview--color;
         cursor: move;
     }
+    &.treeview__link--is-hidden {
+        color: #bdbdbd;
+
+        &.treeview__link--active {
+            color: $treeview--active-color;
+        }
+    }
 }
 
-.treeview__move {
+.treeview__move,
+.treeview__eye {
     width: 0;
     height: 0;
     cursor: move;
@@ -80,11 +88,16 @@ $treeview--active-color: $blue !default;
     overflow: hidden;
     margin-right: 0;
 
-    &.treeview__move--visible {
+    &.treeview__move--visible,
+    &.treeview__eye--visible {
         width: 16.5px;
         height: 18px;
         margin-right: 5px;
     }
+}
+
+.treeview__eye {
+    cursor: inherit;
 }
 
 .treeview__empty-circle {
@@ -96,11 +109,12 @@ $treeview--active-color: $blue !default;
     border: 1px solid $treeview--color;
     transition: 0.25s ease border, 0.25s ease width, 0.25s ease margin;
 }
-.active .treeview__empty-circle {
+.treeview__link--active .treeview__empty-circle {
     border: 6px solid $treeview--active-color;
 }
 
-.treeview--drag-active .treeview__empty-circle {
+.treeview--drag-active .treeview__empty-circle,
+.treeview__link--is-hidden .treeview__empty-circle {
     border: 0 solid transparent;
     width: 0;
     margin: 0;
