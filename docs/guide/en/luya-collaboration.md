@@ -7,14 +7,15 @@ How to collaborate with us and contribute to the LUYA Project.
 2. Recommended directory structure
 3. Clone luya fork
 4. Create luya-kickstarter project
-4.1. Update config
-4.2. Update composer.json
+4. a) Update config
+4. b) Update composer.json
 5. Define the upstream repo
 6. Work routine 
 7. Add changes to zephir/luya (Pull request)
 
 1. Fork Luya
 -------------
+
 Fork the Luya project on Github: [https://github.com/zephir/luya](https://github.com/zephir/luya).
 ![fork-luya](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/start-collaboration-fork.jpg "Fork Luya")
 
@@ -59,7 +60,7 @@ Do you want to remove the existing VCS (.git, .svn..) history? [Y,n]?
 
 All files are now in the right place.
 
-### 4.1 Update config
+### 4. a) Update config
 Copy local config template:
 ```
 cp configs/local.php.dist config/local.php
@@ -86,7 +87,7 @@ cp configs/server.php.dist configs/server.php
 
 Per default, no other changes to the config are required.
 
-### 4.2 Update composer
+### 4. b) Update composer
 To work on luya modules, we have to update the composer.json.
 Change it's content to the following:
 ```
