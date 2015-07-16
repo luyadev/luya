@@ -81,7 +81,7 @@ class Reflection
         $action = $controllerObject->runAction($controller[1], $request['args']);
         
         foreach($controllerObject->propertyMap as $prop) {
-            $this->context[$prop] = $controllerObject->$prop;
+            $this->_context[$prop] = $controllerObject->$prop;
         }
         
         return $action;
