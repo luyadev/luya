@@ -27,7 +27,7 @@ local.properties
 .texlipse
 
 /vendor/
-composer.lock
+/composer.lock
 # PhpStorm
 .idea/
 scripts/.subsplit

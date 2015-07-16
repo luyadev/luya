@@ -1,8 +1,38 @@
 <?php
 
-/**
- * server.php returns the currenct configuration instance and must be in the ignore section of your VCS.
- */
+defined('YII_DEBUG') or define('YII_DEBUG', true);
+defined('YII_ENV') or define('YII_ENV', 'dev');
 
-// in this case we return the pre production configs:
-return require 'prep.php';
+$config = [
+    'id' => 'testenv', // For best interoperability it is recommended that you use only alphanumeric characters when specifying an application ID
+    'siteTitle' => 'Test-Env', // The name of your site, will be display on the login screen
+    'basePath' => dirname(__DIR__),
+    'defaultRoute' => 'cms', // set the default module
+	'modules' => [
+        'luya' => 'luya\Module',
+        'cms' => [
+            'class' => 'cms\Module',
+            'assets' => [
+                'app\assets\ResourcesAsset'
+            ]
+        ],
+        'cmsadmin' => 'cmsadmin\Module',
+        'admin' => 'admin\Module'
+    ],
+    'components' => [
+    	'mail' => [
+    	],
+    	'errorHandler' => [
+            'transferException' => false,
+        ],
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=localhost;dbname=DB_NAME',
+            'username' => '',
+            'password' => '',
+            'charset' => 'utf8'
+        ]
+    ]
+];
+
+return $config;
