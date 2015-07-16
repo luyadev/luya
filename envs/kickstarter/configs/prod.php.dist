@@ -1,0 +1,5 @@
+<?php
+
+/**
+ * A single config array containing all informations on the production env.
+ */

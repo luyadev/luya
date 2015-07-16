@@ -1,0 +1,21 @@
+Options +FollowSymLinks
+IndexIgnore */*
+RewriteEngine on
+
+SetEnvIf Authorization .+ HTTP_AUTHORIZATION=$0
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php
+
+<IfModule mod_expires.c>
+	ExpiresActive on
+	ExpiresByType image/gif "access plus 1 months"
+	ExpiresByType image/png "access plus 1 months"
+	ExpiresByType image/jpg "access plus 1 months"
+	ExpiresByType image/jpeg "access plus 1 months"
+	ExpiresByType text/javascript "access plus 1 months"
+	ExpiresByType application/x-javascript "access plus 1 months"
+	ExpiresByType text/css "access plus 1 months"
+	ExpiresDefault "access plus 7 days"
+</IfModule>

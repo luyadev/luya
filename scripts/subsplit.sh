@@ -21,4 +21,5 @@ git subsplit publish "
 	modules/errorapi:$BASE/luya-module-errorapi.git
     modules/gallery:$BASE/luya-module-gallery.git
     modules/galleryadmin:$BASE/luya-module-galleryadmin.git
+    envs/kickstarter:$BASE/luya-kickstarter.git
 " --heads=master -q

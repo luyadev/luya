@@ -1,0 +1,67 @@
+* {
+	font-family: 'Open Sans', sans-serif;
+}
+
+#header {
+	background-color:#90caf9 ;
+}
+
+#header h1 {
+	padding:30px; color:white; margin:0px; font-weight:400;
+}
+
+#header h1 small {
+	font-weight:300; font-size:18px;
+}
+
+#header .git {
+	margin-top:20px;
+}
+
+#nav {
+	background-color:#e3f2fd;
+}
+
+#nav ul {
+	list-style-type:none; margin:0px; padding:0px;
+}
+
+#nav ul li {
+	display:inline-block;
+}
+
+#nav ul li a {
+	display:inline-block; padding:20px; color:#0d47a1;
+}
+
+#nav ul .active, #nav ul li a:hover {
+	background-color:#FFF; text-decoration:none; color:black;
+}
+
+#nav ul .active {
+	font-weight:600;
+}
+
+#content {
+	min-height:450px; margin-top:40px;
+}
+
+#content h1 {
+	font-weight:600; color:black;
+}
+
+#content h2 {
+	font-weight:400; color:#333;
+}
+
+#content p {
+	font-weight:300; font-size:19px;
+}
+
+#footer h4 {
+	font-weight:400; color:#333; margin-top:20px; font-size:15px; text-transform:uppercase;
+}
+
+#footer .divider {
+	border-top:1px solid #e3f2fd;
+}

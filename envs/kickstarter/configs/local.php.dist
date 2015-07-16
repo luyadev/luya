@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * your specific custom configurations.
+ */
+
+return [
+    'components' => [
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=localhost;dbname=DB_NAME',
+            'username' => '',
+            'password' => '',
+            'charset' => 'utf8'
+        ]
+    ]
+];
