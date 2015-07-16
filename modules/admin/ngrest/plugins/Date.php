@@ -17,6 +17,7 @@ class Date extends \admin\ngrest\base\Plugin
         $elmn->setIdAttribute('id', true);
         $elmn->setAttribute('model', $this->ngModel);
         $elmn->setAttribute('label', $this->alias);
+        $elmn->setAttribute('name', $this->name);
         $elmn->setAttribute('grid', $this->gridCols);
         $doc->appendChild($elmn);
 

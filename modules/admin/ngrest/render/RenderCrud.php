@@ -134,7 +134,9 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\base
                 // anzahl cols durch anzahl sprachen
                 $return[] = [
                     'id' => $id,
+                    'name' => $element['name'],
                     'label' => $element['alias'] . ' ' . $v->name,
+                    'ngModel' => $ngModel,
                     'html' => $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'] . ' ' . $v->name, $element['gridCols'])
                 ];
             }
@@ -152,6 +154,8 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\base
         return [
             [
                 'id' => $id,
+                'name' => $element['name'],
+                'ngModel' => $ngModel,
                 'label' => $element['alias'],
                 'html' => $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'], $element['gridCols']),
             ]

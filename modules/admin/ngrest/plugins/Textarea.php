@@ -27,6 +27,7 @@ class Textarea extends \admin\ngrest\base\Plugin
         $elmn->setAttribute('model', $this->ngModel);
         $elmn->setAttribute('label', $this->alias);
         $elmn->setAttribute('grid', $this->gridCols);
+        $elmn->setAttribute('name', $this->name);
         $elmn->setAttribute('placeholder', $this->placeholder);
         $doc->appendChild($elmn);
         return $doc;
