@@ -12,8 +12,60 @@ Forken
 ------
 Um unser *LUYA* repository zu forken klicken gehen Sie auf [zephir/luya](https://github.com/zephir/luya) und danach auf den **FORK** Knopf. Dies wird eine Kopie der aktuellen Daten von Luya in dein eigenes Github Profil erstellen welches du danach auf deinem Computer via `git clone https://github.com/deinuser/luya` auschecken kannst. 
 
+![fork-luya](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/start-collaboration-fork.jpg "Fork Luya")
+
 > Tipps zum Ungang mit [git clone](https://help.github.com/articles/importing-a-git-repository-using-the-command-line/)
 
 Arbeitsumgebung
 ---------------
 Sobald du das Repostiory auf deinem Localhost hast kannst du deine Umgebung im Ordner `envs/dev` finden.
+
+Die Arbeitsumgebung muss nun auf dein Konfiguration angepasst werden. Wechsle deshalb in das *configs* Verzeichniss unter `envs/dev/configs` und kopier die Datei `server.php.dist` nach `server.php` und passe deine gewünschten Parameter an.
+
+> Die `server.php` ist auf gitingore und kann somit beliebig angepasst werden.
+
+Als nächstes führen wir den `composer install` befehl aus innerhalb des dev env projekt ordners `envs/dev`. Dies wird dir alle nötigen Resourcen in den Vendor ORdner kopieren und ein PSR4 binding auf deine lokalen *LUYA* Daten.
+
+Nun werden die Terminal-befehle `exec/migrate` und `exec/setup` ausgeführt, dazu öffnen Sie das Terminal und wechseln in das `envs/dev/public_html` Verzeichnis und führen folgende Befehle aus:
+
+```sh
+php index.php migrate
+
+php index.php exec/setup
+```
+
+Die Datenbank-Tabellen sind nun erstellt und eine Benutzer und deren nötigen Daten wurden eingerichtet, testen Sie nun die Devs installation in dem Sie `envs/dev/public_html` im Browser öffnen.
+
+Rebase Master
+-------------
+Wenn du das erste mal das *rebasemaster* script ausführtst muss du die option *init* anhängen damit luya als upstream repo hinterlegt wird.
+
+```sh
+./scripts/rebasemaster.sh init
+```
+
+Ansonsten kannst du das rebasemaster script ohne argument asuführen
+```
+./scripts/rebasemaster.sh
+```
+
+> `rebasemaster.sh` wechselt in dein lokaler master branch, holt die neuen daten vom upstream (zephir/luya) und macht ein rebase der neune Infomrationen in deinen lokalen master.
+
+Branch erstellen
+----------------
+Erstelle nun eine neneun Branch anhand deines Master, das machen wir damit wir keine konflikte und Probleme habeb und branches einfacher einen Pull Request auslösen können.
+
+```sh
+git checkout -b deinbranche master
+```
+
+> Wobei `deinbranche` dein branch name ist den du vergeben kannst. zbsp. *fixing issue #123*.
+
+
+Commit, Push und Pull Request
+-----------------------------
+Du kannst nun deine änderungen in deinen neu erstellen branch *commiten* und den/die commit/s auf dein Remote (github.com/deinbenutzer/luya) *pushen* (`git push origin`).
+
+Nun ist dein neuer Branch auf der Github Platform. Wechslen nun im Browser auf dein *LUYA* fork innterhalb deines GitHub profils und klicken auf den **PULL REQUEST** Knopf.
+
+![pull-request](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/start-collaboration-pull-request.jpg "Pull request")
