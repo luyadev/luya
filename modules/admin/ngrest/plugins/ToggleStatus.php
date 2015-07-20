@@ -14,12 +14,8 @@ class ToggleStatus extends \admin\ngrest\base\Plugin
 
     public function renderCreate($doc)
     {
-        $elmn = $this->createBaseElement($doc, 'input');
-        $elmn->setAttribute('ng-true-value', '1');
-        $elmn->setAttribute('ng-false-value', '0');
-        $elmn->setAttribute('value', 1);
-        $elmn->setAttribute('class', 'form__input');
-        $elmn->setAttribute('type', 'checkbox');
+        $elmn = $this->createBaseElement($doc, 'zaa-checkbox');
+        $elmn->setAttribute('options', json_encode(['true-value' => 1, 'false-value' => 0]));
         // append to document
         $doc->appendChild($elmn);
         // return DomDocument

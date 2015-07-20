@@ -149,6 +149,30 @@ zaa.directive('zaaSelect', function($timeout){
 	}
 });
 
+/**
+ * options = {'true-value' : 1, 'false-value' : 0};
+ */
+zaa.directive('zaaCheckbox', function() {
+	return {
+		restrict : 'E',
+		scope : {
+			'model' : '=',
+			'options' : '=',
+			'grid' : '@grid',
+			'id' : '@fieldid',
+			'name' : '@fieldname',
+			'label' : '@label'
+		},
+		controller : function($scope) {
+			$scope.valueTrue = $scope.options['true-value'];
+			$scope.valueFalse = $scope.options['false-value'];
+		},
+		template : function() {
+			return '<div class="input-field col s{{grid}}"><input type="checkbox" id="{{id}}" name="{{name}}" ng-true-value="{{valueTrue}}" ng-false-value="{{valueFalse}}" ng-model="model" type="checkbox" /><label for="{{id}}">{{label}}</label></div>'; 
+		}
+	}
+});
+
 /** 
  * options arg object:
  * 
