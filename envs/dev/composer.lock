@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "24b4f6e50c5b6d733090f83ea442b718",
+    "hash": "afa8b5bd85c604332c0a9d3cd836a9b5",
     "packages": [
         {
             "name": "bower-asset/angular",
@@ -91,16 +91,16 @@
         },
         {
             "name": "bower-asset/angular-loading-bar",
-            "version": "0.7.1",
+            "version": "0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chieffancypants/angular-loading-bar.git",
-                "reference": "786bf74fdf1b55090262449574986b09bd5fb4fd"
+                "reference": "2582b44eca8c515635d1f667842a0e5b79fab405"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chieffancypants/angular-loading-bar/zipball/786bf74fdf1b55090262449574986b09bd5fb4fd",
-                "reference": "786bf74fdf1b55090262449574986b09bd5fb4fd",
+                "url": "https://api.github.com/repos/chieffancypants/angular-loading-bar/zipball/2582b44eca8c515635d1f667842a0e5b79fab405",
+                "reference": "2582b44eca8c515635d1f667842a0e5b79fab405",
                 "shasum": ""
             },
             "require": {
@@ -1125,6 +1125,7 @@
         "bower-asset/angular-i18n": 0,
         "bower-asset/angular-resource": 0,
         "bower-asset/angular-ui-router": 0,
+        "bower-asset/angular-loading-bar": 0,
         "bower-asset/angular-dragdrop": 0,
         "bower-asset/twig.js": 0,
         "phpmailer/phpmailer": 0
