@@ -1,141 +1,3 @@
-/*
-zaa.controller("UploadController", function($scope) {
-
-	$scope.bildId = 0;
-	
-	$scope.save = function()
-	{
-		console.log('save', $scope.bildId);
-	}
-	
-})
-*/
-/*
-zaa.directive('fileModel', ['$parse', function ($parse) {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-            var model = $parse(attrs.fileModel);
-            var modelSetter = model.assign;
-            
-            element.bind('change', function(){
-                scope.$apply(function(){
-                    modelSetter(scope, element[0].files[0]);
-                });
-            });
-        }
-    };
-}]);
-*/
-
-/*
-zaa.directive('storageImageUrl', function() {
-	return {
-		restrict : 'E',
-		scope : {
-			image : '@'
-		},
-		controller : function($scope, $http) {
-			$http.get('admin/api-admin-storage/image-path', { params: { imageId : $scope.image } }).success(function(response) {
-				$scope.imagesrc = response.source;
-				$scope.fileId = response.file_id;
-			}).error(function(response) {
-			})
-		},
-		template : function() {
-			return '<div>{{imagesrc}} {{fileId}} </div>';
-		}
-	}
-});
-*/
-
-/*
-zaa.directive('storageFileUpload', function() {
-	return {
-		restrict : 'E',
-		scope : {
-			ngModel : '='
-		},
-		link : function(scope, element, attrs) {
-			scope.$watch(function() { return scope.ngModel }, function(n, o) {
-				if (n !== o) {
-					scope.ngModel = n;
-				}
-			})
-			scope.modal = true;
-		},
-		controller : function($scope, $http) {
-			if ($scope.ngModel) {
-				console.log('file_here', $scope.ngModel);
-				$http.get('admin/api-admin-storage/file-path', { params: { fileId : $scope.ngModel } }).success(function(response) {
-					$scope.filesrc = response.source_http;
-				}).error(function(response) {
-					console.log('error', response);
-				})
-			} else {
-				console.log('no_file_here!');
-			}
-			
-			$scope.$watch(function() { return $scope.ngModel }, function(newValue, oldValue) {
-				if (newValue) {
-					$scope.modal = true;
-				}
-			});
-			
-			$scope.openModal = function() {
-				$scope.modal = !$scope.modal;
-			}
-		},
-		templateUrl : 'storageFileUpload'
-	}
-});
-
-zaa.directive('storageImageUpload', function() {
-	return {
-		restrict : 'E',
-		scope : {
-			ngModel : '=',
-		},
-		controller : function($scope, $http, ApiAdminFilter) {
-			
-			if ($scope.filterId == undefined) {
-				$scope.filterId = 0;
-			}
-			
-			if ($scope.ngModel) {
-				$http.get('admin/api-admin-storage/image-path', { params: { imageId : $scope.ngModel } }).success(function(response) {
-					$scope.imagesrc = response.source;
-					$scope.fileId = response.file_id;
-				}).error(function(response) {
-					console.log('error', response);
-				})
-			}
-			
-			$scope.filters = ApiAdminFilter.query();
-			
-			$scope.push2 = function() {
-				$http.post('admin/api-admin-storage/image-upload', $.param({ fileId : $scope.fileId, filterId : $scope.filterId }), {
-		        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-		        }).success(function(success) {
-		        	if (!success) {
-		        		alert('IMAGE UPLOAD ERROR!');
-		        	} else {
-		        		$scope.ngModel = success.id;
-		        		
-		        		$scope.imagesrc = success.image.source;
-		        		
-		        	}
-				}).error(function(error) {
-					console.log('err', error);
-				});
-			}
-			
-		},
-		templateUrl : 'storageImageUpload'
-	}
-});
-*/
-
 zaa.factory('FileListeService', function($http, $q) {
 	var service = [];
 	
@@ -219,6 +81,30 @@ zaa.factory('FilemanagerFolderService', function() {
 	
 	service.get = function() {
 		return service.folderId;
+	}
+	
+	return service;
+});
+
+zaa.factory('FilemanagerFolderListService', function($http, $q) {
+	var service = [];
+	
+	service.data = null;
+	
+	service.get = function(forceReload) {
+		return $q(function(resolve, reject) {
+			if (service.data === null || forceReload === true) {
+				$http.get('admin/api-admin-storage/get-folders').success(function(response) {
+					service.data = response;
+					resolve(response);
+				}).error(function(response) {
+					reject(response);
+				});
+			} else {
+				resolve(service.data);
+			}
+			
+		});
 	}
 	
 	return service;
@@ -329,7 +215,7 @@ zaa.directive('storageImageUpload', function($http, ApiAdminFilter, ImageIdServi
 /**
  * FILE MANAGER DIR
  */
-zaa.directive("storageFileManager", function(FileListeService, Upload, FilemanagerFolderService) {
+zaa.directive("storageFileManager", function(FileListeService, Upload, FilemanagerFolderService, FilemanagerFolderListService) {
 	return {
 		restrict : 'E',
 		transclude : false,
@@ -487,12 +373,13 @@ zaa.directive("storageFileManager", function(FileListeService, Upload, Filemanag
 				});
 			}
 			
-			$http.get('admin/api-admin-storage/get-folders').success(function(response) {
-    			$scope.folders = response;
-    			$scope.getFiles(FilemanagerFolderService.get());
-    			$scope.currentFolderId = FilemanagerFolderService.get();
-    		});
-			
+			$timeout(function() {
+				FilemanagerFolderListService.get().then(function(r) {
+					$scope.folders = r;
+	    			$scope.getFiles(FilemanagerFolderService.get());
+	    			$scope.currentFolderId = FilemanagerFolderService.get();
+				});
+			}, 100);
 		},
 		templateUrl : 'storageFileManager'
 	}
