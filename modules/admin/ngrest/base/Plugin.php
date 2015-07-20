@@ -25,6 +25,18 @@ abstract class Plugin
     {
         return $this->_model;
     }
+    
+    protected function createBaseElement($doc, $type)
+    {
+        $elmn = $doc->createElement($type);
+        $elmn->setAttribute('fieldid', $this->id);
+        $elmn->setAttribute('fieldname', $this->name);
+        $elmn->setAttribute('model', $this->ngModel);
+        $elmn->setAttribute('label', $this->alias);
+        $elmn->setAttribute('grid', $this->gridCols);
+        
+        return $elmn;
+    }
 
     public function setConfig($id, $name, $ngModel, $alias, $gridCols)
     {

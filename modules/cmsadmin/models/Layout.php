@@ -11,14 +11,14 @@ class Layout extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
-        $config->list->field('name', 'Name')->text()->required();
+        $config->list->field('name', 'Name')->text();
         $config->list->field('json_config', 'JSON Config')->ace();
-        $config->list->field('view_file', 'Twig Filename (*.twig)')->text()->required();
+        $config->list->field('view_file', 'Twig Filename (*.twig)')->text();
 
         $config->create->copyFrom('list', ['id']);
         
         $config->update->copyFrom('list', ['id']);
-        $config->update->field('json_config', 'JSON Konfiguration')->text()->required();
+        $config->update->field('json_config', 'JSON Konfiguration')->text();
 
         return $config;
     }

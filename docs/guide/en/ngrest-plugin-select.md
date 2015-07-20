@@ -15,7 +15,7 @@ Examples
 
 ```
 // create select fields based on a model clas
-$config->create->field("group_id", "Gruppe")->selectClass('\cmsadmin\models\BlockGroup', 'id', 'name')->required();
+$config->create->field("group_id", "Gruppe")->selectClass('\cmsadmin\models\BlockGroup', 'id', 'name');
 
 // create a select field based on an assoc array key value paringin
 $config->create->field("title", "Anrede")->selectArray(\admin\models\User::getTitles());

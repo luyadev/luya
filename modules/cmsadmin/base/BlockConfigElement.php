@@ -8,12 +8,15 @@ abstract class BlockConfigElement
 {
     public $item = [];
     
+    protected $id = null;
+    
     public function __construct($item)
     {
         $this->item = $item;
         if (!$this->has(['var', 'label', 'type'])) {
             throw new Exception("Required attributes in config var element is missing. var, label and type are required.");
         }
+        $this->id = md5($this->get('var') . uniqid());
     }
     
     protected function has($key)

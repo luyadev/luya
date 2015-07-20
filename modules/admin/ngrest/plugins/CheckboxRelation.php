@@ -57,15 +57,10 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
         foreach ($this->model->find()->all() as $item) {
             $items[] = ['id' => $item->id, 'label' => implode(' | ', $item->toArray())];
         }
-
-        $elmn = $doc->createElement('zaa-checkbox', '');
-        $elmn->setAttribute('id', $this->id);
-        $elmn->setIdAttribute('id', true);
-        $elmn->setAttribute('model', $this->ngModel);
-        //$elmn->setAttribute('options', json_encode(['items' => $items]));
+        
+        $elmn = $this->createBaseElement($doc, 'zaa-checkbox');
         $elmn->setAttribute('options', $this->getServiceName('relationdata'));
-        $elmn->setAttribute('label', $this->alias);
-        $elmn->setAttribute('grid', $this->gridCols);
+        
         $doc->appendChild($elmn);
 
         return $doc;

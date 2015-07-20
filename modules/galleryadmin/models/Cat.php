@@ -35,7 +35,7 @@ class Cat extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
-        $config->list->field('title', 'Name')->text()->required();
+        $config->list->field('title', 'Name')->text();
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);
         return $config;

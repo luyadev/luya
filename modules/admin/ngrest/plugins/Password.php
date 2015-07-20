@@ -14,15 +14,10 @@ class Password extends \admin\ngrest\base\Plugin
 
     public function renderCreate($doc)
     {
-        $elmn = $doc->createElement('zaa-password');
-        $elmn->setAttribute('id', $this->id);
-        $elmn->setIdAttribute('id', true);
-        $elmn->setAttribute('model', $this->ngModel);
-        $elmn->setAttribute('label', $this->alias);
-        $elmn->setAttribute('name', $this->name);
-        $elmn->setAttribute('grid', $this->gridCols);
+        $elmn = $this->createBaseElement($doc, 'zaa-password');
+        // append to document
         $doc->appendChild($elmn);
-
+        // return DomDocument
         return $doc;
     }
 

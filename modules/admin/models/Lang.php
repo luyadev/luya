@@ -11,8 +11,8 @@ class Lang extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
-        $config->list->field('name', 'Name')->text()->required();
-        $config->list->field('short_code', 'Kurz-Code')->text()->required();
+        $config->list->field('name', 'Name')->text();
+        $config->list->field('short_code', 'Kurz-Code')->text();
 
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);

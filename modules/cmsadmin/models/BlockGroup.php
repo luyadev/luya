@@ -20,7 +20,7 @@ class BlockGroup extends \admin\ngrest\base\Model
     {
         $config->delete = true;
         
-        $config->list->field('name', 'Name')->text()->required();
+        $config->list->field('name', 'Name')->text();
 
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);

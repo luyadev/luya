@@ -52,9 +52,9 @@ class News extends \admin\ngrest\base\Model
     
     public function ngRestConfig($config) 
     {
-        $config->list->field("name", "Name")->text()->required();
-        $config->list->field("title", "Titel")->text()->required();
-        $config->list->field("text", "Text")->textarea()->required();
+        $config->list->field("name", "Name")->text();
+        $config->list->field("title", "Titel")->text();
+        $config->list->field("text", "Text")->textarea();
         
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);

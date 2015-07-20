@@ -14,17 +14,15 @@ class ToggleStatus extends \admin\ngrest\base\Plugin
 
     public function renderCreate($doc)
     {
-        $elmn = $doc->createElement('input');
-        $elmn->setAttribute('id', $this->id);
-        $elmn->setIdAttribute('id', true);
-        $elmn->setAttribute('ng-model', $this->ngModel);
+        $elmn = $this->createBaseElement($doc, 'input');
         $elmn->setAttribute('ng-true-value', '1');
         $elmn->setAttribute('ng-false-value', '0');
         $elmn->setAttribute('value', 1);
         $elmn->setAttribute('class', 'form__input');
         $elmn->setAttribute('type', 'checkbox');
+        // append to document
         $doc->appendChild($elmn);
-
+        // return DomDocument
         return $doc;
     }
 

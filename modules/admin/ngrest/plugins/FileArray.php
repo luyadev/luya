@@ -17,14 +17,10 @@ class FileArray extends \admin\ngrest\base\Plugin
 
     public function renderCreate($doc)
     {
-        $elmn = $doc->createElement('zaa-file-array-upload');
-        $elmn->setAttribute('id', $this->id);
-        $elmn->setIdAttribute('id', true);
-        $elmn->setAttribute('model', $this->ngModel);
-        $elmn->setAttribute('label', $this->alias);
-        $elmn->setAttribute('grid', $this->gridCols);
+        $elmn = $this->createBaseElement($doc, 'zaa-file-array-upload');
+        // append to document
         $doc->appendChild($elmn);
-
+        // return DomDocument
         return $doc;
     }
 

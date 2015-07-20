@@ -18,10 +18,10 @@ class Album extends \admin\ngrest\base\Model
     {
         $config->aw->register(new \admin\aws\Gallery('gallery_album_image', 'image_id', 'album_id'), 'Bilder Hochladen &amp; Verwalten');
 
-        $config->list->field('cat_id', 'Kategorie')->selectClass('\galleryadmin\models\Cat', 'id', 'title')->required();
-        $config->list->field('title', 'Titel')->text()->required();
+        $config->list->field('cat_id', 'Kategorie')->selectClass('\galleryadmin\models\Cat', 'id', 'title');
+        $config->list->field('title', 'Titel')->text();
         $config->list->field('description', 'Beschreibung')->textarea();
-        $config->list->field('cover_image_id', 'Cover-Bild')->image()->required();
+        $config->list->field('cover_image_id', 'Cover-Bild')->image();
         
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);

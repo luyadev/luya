@@ -2,12 +2,16 @@
 
 namespace admin\ngrest\plugins;
 
+throw new \Exception("Required implicit plugin is not allowed anymore.");
+
 /**
  * @todo set requirements, based on a classname for the element, could also be not the main
  * @todo create an Implicit Plugin Abstract method which does automaticailly look up for the ID element and throw error if not found!
  *
  * @author nadar
  */
+
+/*
 class Required extends \admin\ngrest\base\Plugin
 {
     public function renderList($doc)
@@ -17,6 +21,10 @@ class Required extends \admin\ngrest\base\Plugin
 
     public function renderCreate($doc)
     {
+        $has = $doc->hasAttribute('fieldid');
+        var_dump($has);
+        exit;
+        var_dump($doc);exit;
         $elmn = $doc->getElementById($this->id);
         $elmn->setAttribute('required', 'required');
 
@@ -39,3 +47,4 @@ class Required extends \admin\ngrest\base\Plugin
         return $doc;
     }
 }
+*/

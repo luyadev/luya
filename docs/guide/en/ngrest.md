@@ -13,7 +13,7 @@ All the ngrest configurations are made directly in the Model class. Create a ngR
 public function ngRestConfig($config)
 {
     // here you can add, modify, delete your config
-    $config->list->field("title", "Title")->text->required();
+    $config->list->field("title", "Title")->text;
     
     // at the end just return the config variable back
     return $config;

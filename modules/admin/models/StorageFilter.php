@@ -87,8 +87,8 @@ class StorageFilter extends \admin\ngrest\base\Model
     {
         //$config->aw->register(new \admin\aws\FilterEffectChain(), 'Chain');
 
-        $config->list->field('name', 'Name')->text()->required();
-        $config->list->field('identifier', 'Identifier')->text()->required();
+        $config->list->field('name', 'Name')->text();
+        $config->list->field('identifier', 'Identifier')->text();
         $config->list->field('id', 'ID')->text();
 
         $config->create->copyFrom('list', ['id']);

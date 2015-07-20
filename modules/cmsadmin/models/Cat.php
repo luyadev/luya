@@ -43,9 +43,9 @@ class Cat extends \admin\ngrest\base\Model
     {
         $config->delete = true;
         
-        $config->list->field('name', 'Name')->text()->required();
+        $config->list->field('name', 'Name')->text();
         $config->list->field('default_nav_id', 'Default-Nav-Id')->selectArray($this->getNavData());
-        $config->list->field('rewrite', 'Rewrite')->text()->required();
+        $config->list->field('rewrite', 'Rewrite')->text();
         $config->list->field('is_default', 'Ist Starteintrag')->toggleStatus();
         $config->list->field('id', 'ID')->text();
 

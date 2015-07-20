@@ -11,8 +11,8 @@ Die *NgRest* Konfiguration wird in der Methode `ngRestConfig($config)` hinterleg
 ```php
 public function ngRestConfig($config)
 {
-    $config->list->field('name', 'Name')->text()->required();
-    $config->list->field('short_code', 'Kurz-Code')->text()->required();
+    $config->list->field('name', 'Name')->text();
+    $config->list->field('short_code', 'Kurz-Code')->text();
     
     $config->create->copyFrom('list', ['id']);
     

@@ -70,7 +70,7 @@ class Group extends \admin\ngrest\base\Model
 
         $config->delete = true;
         
-        $config->list->field('name', 'Name')->text()->required();
+        $config->list->field('name', 'Name')->text();
         $config->list->field('text', 'Beschreibung')->textarea();
 
         $config->create->copyFrom('list', ['id']);

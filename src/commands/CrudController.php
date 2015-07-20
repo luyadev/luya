@@ -138,10 +138,10 @@ class CrudController extends \yii\console\Controller
                         $content.= '    public function ngRestConfig($config)' . PHP_EOL;
                         $content.= '    {' . PHP_EOL;
                         foreach($ngrest['text'] as $n) {
-                        $content.= '        $config->list->field(\''.$n.'\', \''.ucfirst($n).'\')->text()->required();'. PHP_EOL;
+                        $content.= '        $config->list->field(\''.$n.'\', \''.ucfirst($n).'\')->text();'. PHP_EOL;
                         }
                         foreach($ngrest['textarea'] as $n) {
-                        $content.= '        $config->list->field(\''.$n.'\', \''.ucfirst($n).'\')->textarea()->required();'. PHP_EOL;
+                        $content.= '        $config->list->field(\''.$n.'\', \''.ucfirst($n).'\')->textarea();'. PHP_EOL;
                         }
                         $content.= '        $config->create->copyFrom(\'list\', [\'id\']);' . PHP_EOL;
                         $content.= '        $config->update->copyFrom(\'list\', [\'id\']);' . PHP_EOL;
