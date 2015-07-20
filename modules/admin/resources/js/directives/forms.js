@@ -164,8 +164,13 @@ zaa.directive('zaaCheckbox', function() {
 			'label' : '@label'
 		},
 		controller : function($scope) {
-			$scope.valueTrue = $scope.options['true-value'];
-			$scope.valueFalse = $scope.options['false-value'];
+			if ($scope.options === null) {
+				$scope.valueTrue = 1;
+				$scope.valueFalse = 0;
+			} else {
+				$scope.valueTrue = $scope.options['true-value'];
+				$scope.valueFalse = $scope.options['false-value'];	
+			}
 		},
 		template : function() {
 			return '<div class="input-field col s{{grid}}"><input type="checkbox" id="{{id}}" name="{{name}}" ng-true-value="{{valueTrue}}" ng-false-value="{{valueFalse}}" ng-model="model" type="checkbox" /><label for="{{id}}">{{label}}</label></div>'; 
