@@ -37,20 +37,6 @@
 
     <body ng-cloak>
         <?php $this->beginBody() ?>
-        <!--
-        <script type="text/ng-template" id="storageFileUpload-bkp">
-        <div class="row">
-            <div class="input-field col s6">
-                <input type="file" file-model="myFile" />
-                <button ng-click="push()" type="button">Datei Hochladen</button>
-            </div>
-            <div class="input-field col s6">
-                <button type="button" ng-click="openModal()">Show File manager</button>
-                <modal is-modal-hidden="modal"><storage-file-manager ng-model="$parent.$parent.ngModel" selection="true" /></modal>
-            </div>
-        </div>
-        </script>
-         -->
         <!-- ANGULAR SCRIPTS -->
 
         <script type="text/ng-template" id="modal">
@@ -299,108 +285,6 @@
 
         </script>
         <!-- /FILEMANAGER -->
-
-        <!--<script type="text/ng-template" id="storageFileManager">
-
-            <div class="row">
-                <div class="col s11">
-
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb__item" ng-repeat="crumb in breadcrumbs">
-                            <i ng-hide="$first" class="breadcrumb__icon mdi-navigation-chevron-right"></i>
-                            <button class="btn-flat breadcrumb__btn" ng-click="loadFolder(crumb.id)">{{crumb.name}}</button>
-                        </li>
-                    </ul>
-
-                </div>
-                <div class="col s1">
-                    <button class="btn-floating red lighten-2 right" ng-click="toggleModal()" ng-show="allowSelection=='true'"><i class="mdi-navigation-close small right"></i></button>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col s12">
-                    <table class="striped hoverable">
-                        <thead>
-                            <tr>
-                                <th class="filemanager__icon-column"></th>
-                                <th>Name</th>
-                                <th>Eigentümer</th>
-                                <th>Hochgeladen am</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- FOLDER --
-                            <tr ng-repeat="folder in folders" class="filemanager__folder" ng-click="loadFolder(folder.id)">
-                                <td class="filemanager__icon-column"><i class="mdi-file-folder-open"></i></td>
-                                <td>{{folder.name}}</td>
-                                <td class="filemanager__lighten">Rocky Schaub</td>
-                                <td class="filemanager__lighten">23. Juni 2015, 00:00 Uhr</td>
-                                <td></td>
-                            </tr>
-                            <!-- /FOLDER --
-
-                            <tr class="filemanager__folder-create">
-                                <td class="filemanager__icon-column"></td>
-                                <td colspan="3">
-                                    <div class="input-field">
-                                        <input type="text" ng-model="newFolderName" id="foldername" />
-                                        <label for="foldername">Neues Verzeichnis anlegen</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button ng-click="createNewFolder(newFolderName)" type="button" class="btn">Erstellen</button>
-                                </td>
-                            </tr>
-
-                            <!-- FILES --
-                            <tr ng-repeat="file in files" class="collection-item avatar" ng-click="toggleSelection(file)" ng-class="{'is-active' : inSelection(file)}">
-                                <td class="filemanager__icon-column" ng-class="{ 'filemanager__icon-column--thumb' : file.thumbnail }">
-                                    <span ng-if="file.thumbnail">
-                                        <img class="responsive-img" ng-src="{{file.thumbnail.source}}" />
-                                    </span>
-                                    <span ng-if="!file.thumbnail">
-                                        <i class="mdi-editor-attach-file"></i>
-                                    </span>
-                                </td>
-                                <td>{{file.name_original}}</td>
-                                <td class="filemanager__lighten">{{file.firstname}} {{file.lastname}}</td>
-                                <td class="filemanager__lighten">{{file.upload_timestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
-                                <td><button class="btn teal lighten-2 right" type="button" ng-show="allowSelection=='true'" ng-click="selectFile(file)"><i class="mdi-navigation-check"></i></button></td>
-                            </tr>
-                            <!-- /FILES --
-
-                            <!-- EMPTY --
-                            <tr ng-if="files.length == 0"  class="collection-item">
-                                <td class="filemanager__icon-column"></td>
-                                <td colspan="4"><strong>Ordner ist leer</strong></td>
-                            </tr>
-                            <!-- /EMPTY --
-                        </tbody>
-                    </table>
-
-                    <br />
-                    <label class="btn-floating right teal lighten-3" for="file"><i class="mdi-content-add"></i></label>
-                </div>
-            </div>
-
-            <div style="display: none;" class="card-panel" flow-init="{target: uploadurl, testChunks:false, headers : { 'Authorization' : bearer }}" flow-name="uploader.flow" flow-files-submitted="startUpload()" flow-complete="complete()">
-
-                <div class="row">
-                    <div class="col s6">
-                        <input id="file" name="file" type="file" flow-btn />
-                    </div>
-                    <div class="col s6">
-                        <div flow-drop flow-drag-enter="style={border:'4px solid green'}" flow-drag-leave="style={}">
-                            Drag And Drop your file here
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-        </script>-->
 
         <!-- /ANGULAR SCRIPTS -->
 
