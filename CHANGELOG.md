@@ -6,6 +6,8 @@ LUYA CHANGELOG
 - fixed bug where `$_context` variable was not written correctly in module reflection loader.
 - `#257`: filemanager rows are now selectable.
 - `#246`: display arrow when no blocks have been dropped yet.
+- `#271`: removed twig function `linkActive()` added global variable `activeUrl`.
+- `#244`: removed NgRest `required()` plugin.
 
 1.0.0-alpha10 (9. Jul 2015)
 ---------------------------
