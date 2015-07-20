@@ -87,7 +87,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
     </div>
     <!-- /MODAL HEADER -->
     
-    <form role="form" ng-submit="submitCreate()">
+    <form name="formCreate" role="form" ng-submit="submitCreate()">
     <!-- MODAL CONTENT -->
     <div class="modal__content">
         <?php foreach ($crud->create as $k => $item): ?>
@@ -146,7 +146,7 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
     </div>
     <!-- /MODAL HEADER -->
     
-    <form role="form" ng-submit="submitUpdate()">
+    <form name="formUpdate" role="form" ng-submit="submitUpdate()">
     <!-- MODAL CONTENT -->
     <div class="modal__content">
         <?php foreach ($crud->update as $k => $item): ?>
