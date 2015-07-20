@@ -35,6 +35,7 @@ zaa.controller("NavController", function($scope, $stateParams, $http, AdminLangS
 	$scope.$watch(function() { return $scope.navData.is_hidden }, function(n, o) {
 		if (o !== undefined) {
 			$http.get('admin/api-cms-nav/toggle-hidden', { params : { navId : $scope.navData.id , hiddenStatus : n }}).success(function(response) {
+				MenuService.refresh();
 				// send toast
 				if (n == 1) {
 					Materialize.toast('<span>Die Seite ist nun Unsichtbar.</span>', 2000)

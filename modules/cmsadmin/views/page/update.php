@@ -113,14 +113,6 @@
                                     </div>
                                     <!-- /NAVIGATION DROPDOWN -->
 
-                                    <!-- SITE PLACEMENET -->
-                                    <div class="toolbar__group">
-                                        <select class="browser-default">
-                                            <option value="" disabled selected>Seitenplatzierung</option>
-                                        </select>
-                                    </div>
-                                    <!-- /SITE PLACEMENET -->
-
                                     <!-- DELETE BUTTON -->
                                     <div class="toolbar__group">
                                         <a ng-click="trash()" class="[ waves-effect waves-blue ][ btn-flat btn--small ][ grey-text text-darken-2 ]"><i class="mdi-action-delete"></i></a>
