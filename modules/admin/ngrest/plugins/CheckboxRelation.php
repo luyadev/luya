@@ -58,7 +58,7 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
             $items[] = ['id' => $item->id, 'label' => implode(' | ', $item->toArray())];
         }
         
-        $elmn = $this->createBaseElement($doc, 'zaa-checkbox');
+        $elmn = $this->createBaseElement($doc, 'zaa-checkbox-array');
         $elmn->setAttribute('options', $this->getServiceName('relationdata'));
         
         $doc->appendChild($elmn);

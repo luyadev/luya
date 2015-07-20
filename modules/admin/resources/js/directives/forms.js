@@ -154,7 +154,7 @@ zaa.directive('zaaSelect', function($timeout){
  * 
  * options.items[] = { 'id' : 1, 'label' => 'Label for Value 1' }
  */
-zaa.directive('zaaCheckbox', function(){
+zaa.directive('zaaCheckboxArray', function(){
 	return {
 		restrict : 'E',
 		scope : {
