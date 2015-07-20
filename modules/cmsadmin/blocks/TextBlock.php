@@ -36,8 +36,8 @@ class TextBlock extends \cmsadmin\base\Block
                 ['var' => 'content', 'label' => 'Text', 'type' => 'zaa-textarea'],
                 ['var' => 'textType', 'label' => 'Texttyp', 'initvalue' => 0, 'type' => 'zaa-select', 'options' =>
                     [
-                        ['value' => '0', 'label' => 'Normaler Text'],
-                        ['value' => '1', 'label' => 'Markdown Text'],
+                        ['value' => 0, 'label' => 'Normaler Text'],
+                        ['value' => 1, 'label' => 'Markdown Text'],
                     ],
                 ],
             ],
@@ -48,7 +48,7 @@ class TextBlock extends \cmsadmin\base\Block
     {
         $text = $this->getVarValue('content');
 
-        if($this->getVarValue('textType')) {
+        if($this->getVarValue('textType') == 1) {
             $text = $this->getParser()->parse($text);
         }
 
