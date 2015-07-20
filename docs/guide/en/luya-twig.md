@@ -34,13 +34,6 @@ parent level 2 for active link: {{ linksFindParent(2) }}
 parent level 3 for active link: {{ linksFindParent(3) }}
 ```
 
-linkActive
------------
-get the current active link
-```
-{{ linkActive() }}
-```
-
 linkActivePart
 ---------------
 get the current active link part where 0 is the first menu part.

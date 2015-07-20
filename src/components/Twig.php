@@ -2,6 +2,8 @@
 
 namespace luya\components;
 
+use Yii;
+
 /**
  * from string:
  * $twig = Yii::$app->twig->env(new \Twig_Loader_String());
@@ -24,9 +26,6 @@ class Twig extends \yii\base\Component
             'linksFindParent' => function($level) {
                 return \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, $level);  
             },
-            'linkActive' => function() {
-                return \yii::$app->links->activeUrl;
-            },
             'linkActivePart' => function($part) {
                 return \yii::$app->links->getActiveUrlPart($part);
             },
@@ -44,9 +43,9 @@ class Twig extends \yii\base\Component
 
     public function env($loader)
     {
-        $twig = new \Twig_Environment($loader, ['autoescape' => false, 'debug' => true]);
+        $twig = new \Twig_Environment($loader, ['autoescape' => false, 'debug' => YII_DEBUG]);
         $twig->addExtension(new \Twig_Extension_Debug());
-
+        $twig->addGlobal('activeUrl', Yii::$app->links->activeUrl);
         foreach ($this->getFunctions() as $name => $lambda) {
             $twig->addFunction(new \Twig_SimpleFunction($name, $lambda));
         }

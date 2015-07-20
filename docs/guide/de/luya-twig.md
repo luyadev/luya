@@ -28,7 +28,7 @@ werden die Twig Templates mit der endung `*.twig` verwendeten views gerendet. Um
 
 | Variabel          | Ausgabe
 | ---               | ---
-| activeUrl         | Gibt ein array mit dem aktuellen Navigations eintrag zurück.
+| activeUrl         | Gibt die aktuelle aktive url zurück (siehe [Navigations & Links](app-menu.md))
 
 
 
