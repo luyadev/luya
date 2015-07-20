@@ -419,7 +419,7 @@
                         </ul>
 
                         <ul class="right navbar__right">
-                            <li><span style="font-size:10px; margin-right:20px;"><?= luya\Module::VERSION; ?></span></li>
+                            <li ng-mouseenter="showDebugContainer=1" ng-mouseleave="showDebugContainer=0"><span style="font-size:10px; margin-right:20px;"><?= luya\Module::VERSION; ?></span></li>
                             <li ng-mouseenter="showOnlineContainer=1" ng-mouseleave="showOnlineContainer=0">
                                 <div class="navbar__button">
                                     <i class="[ mdi-social-group left ] navbar__icon"></i>
@@ -461,6 +461,23 @@
                 </nav>
             </div> <!-- /navbar-fixed -->
 
+            <div ng-show="showDebugContainer" style=" padding:20px; background-color:white; position:absolute; z-index:99999999999; right:48px;">
+                <table class="bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Wert</th>
+                        </tr>
+                    </thead>
+                    <tr><td>Id:</td><td><?= Yii::$app->id ?></td></tr>
+                    <tr><td>YII_DEBUG:</td><td><?= var_dump(YII_DEBUG); ?></td></tr>
+                    <tr><td>YII_ENV:</td><td><?= YII_ENV; ?></td></tr>
+                    <tr><td>transferExceptions:</td><td><?= var_dump(Yii::$app->errorHandler->transferException); ?></td></tr>
+                    <tr><td>Yii Timezone:</td><td><?= Yii::$app->timeZone; ?></td></tr>
+                    <tr><td>PHP Timezone:</td><td><?= date_default_timezone_get(); ?></td></tr>
+                </table>
+            </div>
+            
             <div ng-show="showOnlineContainer" class="useronline__modal" >
                 <table>
                     <thead>
