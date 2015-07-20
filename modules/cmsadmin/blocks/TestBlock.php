@@ -25,7 +25,9 @@ class TestBlock extends \cmsadmin\base\Block
                 ['var' => 'number', 'label' => 'Number', 'type' => 'zaa-number', 'placeholder' => '1986'],
                 ['var' => 'password', 'label' => 'Password', 'type' => 'zaa-password'],
                 ['var' => 'select', 'label' => 'Select', 'type' => 'zaa-select', 'options' => [ ['value' => 1, 'label' => 'Value 1'] ] ],
-                ['var' => 'testcheckbox', 'label' => 'Checkbox Label', 'type' => 'zaa-checkbox-array', 'options' => ['items' => [ ['id' => 1, 'label' => 'Label for Value 1'] ]]],
+                ['var' => 'table', 'label' => 'Table', 'type' => 'zaa-table'],
+                ['var' => 'checkbox', 'label' => 'Checkbox', 'type' => 'zaa-checkbox'],
+                ['var' => 'checkboxarray', 'label' => 'Checkbox Array', 'type' => 'zaa-checkbox-array', 'options' => ['items' => [ ['id' => 1, 'label' => 'Label for Value 1'] ]]],
                 ['var' => 'date', 'label' => 'Date Picker', 'type' => 'zaa-date'],
                 ['var' => 'fileupload', 'label' => 'Fileupload', 'type' => 'zaa-file-upload'],
                 ['var' => 'imageupload', 'label' => 'Imageupload', 'type' => 'zaa-image-upload'],
@@ -42,10 +44,12 @@ class TestBlock extends \cmsadmin\base\Block
 
     public function twigFrontend()
     {
-        $str = '<div style="border:1px solid red; padding:10px; ">';
-        $str.= 'Text:<br /><pre>{{ dump(vars.text) }}</pre>Textarea:<br /><pre>{{ dump(vars.textarea) }}</pre>Passwort:<br /><pre>{{ dump(vars.password) }}</pre>Select:<br /><pre>{{ dump(vars.select) }}</pre>Textcheckbox:<br /><pre>{{ dump(vars.testcheckbox) }}</pre>Datepicker:<br /><pre>{{ dump(vars.datepicker) }}</pre>';
-        $str.= 'Fileupload:<pre>{{ dump(vars.fileupload) }}</pre>Imageupload:<br /><pre>{{ dump(vars.imageupload) }}</pre>ImageArrayUpload:<br /><pre>{{ dump(vars.imagearrayupload) }}</pre>FileArrayUpload:<br /><pre>{{ dump(vars.filearrayupload) }}</pre>ListArray:<br /><pre>{{ dump(vars.listarray) }}</pre><hr />';
-        $str.= '</div>';
+        $str = '<table style="width:100%;" class="table-bordered">';
+        $str.= '<thead><tr><th>Variabel</th><th>Dump</th></tr></thead>';
+        foreach($this->getVars() as $row) {
+            $str.='<tr><td style="padding:5px;">'.$row['label'].' ('.$row['var'].')</td><td style="padding:5px;"><pre>{{ dump(vars.'.$row['var'].') }}</pre></td></tr>';
+        }
+        $str.= '</table>';
         return $str;
     }
 
