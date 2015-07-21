@@ -8,6 +8,7 @@ LUYA CHANGELOG
 - `#246`: display arrow when no blocks have been dropped yet.
 - `#271`: removed twig function `linkActive()` added global variable `activeUrl`.
 - `#244`: removed NgRest `required()` plugin.
+- `#215`: removed `luya\base\PageController` and replace with basic `luya\base\Controller`. `$this->context->pageTitle` is now invalid.
 
 1.0.0-alpha10 (9. Jul 2015)
 ---------------------------

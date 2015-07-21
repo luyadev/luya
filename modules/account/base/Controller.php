@@ -2,7 +2,7 @@
 
 namespace account\base;
 
-class Controller extends \luya\base\PageController
+class Controller extends \luya\base\Controller
 {
     public function getRules()
     {

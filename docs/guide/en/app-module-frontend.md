@@ -26,10 +26,10 @@ By default it will now try to serach the layout in: __APP__/views/__MODULE__/lay
 public $useAppLayoutPath = false;
 ```
 
-page context
+page title
 ------------
 
-use $this->context->pageTitle
+use $this->title
 
 
 ```

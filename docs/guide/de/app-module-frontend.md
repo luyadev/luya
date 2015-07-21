@@ -20,8 +20,56 @@ class Module extends \luya\base\Module
 
 Controllers
 -----------
-Wenn Sie einen Controller im CMS Content verwenden möchten um zusätzliche Meta infos zu setzen, abstrahieren Sie von `luya\base\PageController` anstelle von `luya\base\Controller`.
+Alle Controller müssen von `luya\base\Controller` abstrahieren.
+
+> `luya\base\PageController` ist nicht mehr valid seit Version 1.0.0-alpha11.
 
 Context
 -------
 Die verwendung der `$context` variabel innerhalb eines views kann sehr effektiv sein bei *vielen controllern* und views. Wenn Sie eine *public* methode in einen Controller implenetieren, zbsp. `public function getBasketTotal()` kann diese Funktione innerhalb des views mit `$this->context->getBasketTotal()` aufgerufen werden. Wenn Sie nun eine `abstract` Controlle erstellen und diesen als `extends` benutzen so können Sie diese abstrahiert controller logik in allen views wieder verwenden.
+
+Titel und Meta-Tags
+-------------------
+In einer Action kann die Title property über den view definiert werden:
+
+```php
+public function actionIndex()
+{
+	// etwas passiert hier
+	
+	$this->view->title = 'Ich bin der Seiten Titel';
+	
+	return $this->render('index');
+}
+```
+
+Der Titel kann aber auch direkt im obenangange render file `index` gesetzt werden, also im PHP-Template:
+
+```php
+<? $this->title = 'Ich bin der Seiten Titel im Template'; ?>
+<h1>Hallo Welt</h1>
+<p>... Restliche ausgabe des Templates</p>
+```
+
++ [Titel-Tag Yii](http://www.yiiframework.com/doc-2.0/guide-structure-views.html#setting-page-titles)
+
+Das selbe gilt für Meta informationen, im controller:
+
+```php
+public function actionIndex()
+{
+	$this->view->registerMetaTag(['name' => 'keywords', 'content' => 'luya, yii, php']);
+	
+	return $this->render('index');
+}
+```
+
+oder direkt im view file
+
+```php
+<? $this->registerMetaTag(['name' => 'keywords', 'content' => 'luya, yii, php']); ?>
+<h1>Hallo Welt</h1>
+<p>... Restliche ausgabe des Templates</p>
+```
+
++ [Meta-Tags Yii Dokumentation](http://www.yiiframework.com/doc-2.0/guide-structure-views.html#registering-meta-tags)

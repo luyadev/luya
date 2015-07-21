@@ -5,7 +5,7 @@ namespace cms\base;
 use Yii;
 use \cmsadmin\models\NavItem;
 
-abstract class Controller extends \luya\base\PageController
+abstract class Controller extends \luya\base\Controller
 {
     /*
      * Use the view files inside the cms module and not within the user project code.
@@ -15,18 +15,19 @@ abstract class Controller extends \luya\base\PageController
     public function renderItem($navItemId, $appendix = null)
     {
         $model = NavItem::findOne($navItemId);
-        $this->pageTitle = $model->title;
+        
         $typeModel = $model->getType();
         $typeModel->setOptions([
             'navItemId' => $navItemId,
             'restString' => $appendix,
         ]);
+        
         $content = $typeModel->getContent();
-        foreach($typeModel->getContextPropertysArray() as $prop => $value) {
-            if (!empty($value)) {
-                $this->$prop = $value;
-            }
+        
+        if ($this->view->title === null) {
+            $this->view->title = $model->title;
         }
+        
         return $content;
     }
 }

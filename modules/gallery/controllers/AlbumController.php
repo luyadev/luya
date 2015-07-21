@@ -2,7 +2,7 @@
 
 namespace gallery\controllers;
 
-class AlbumController extends \luya\base\PageController
+class AlbumController extends \luya\base\Controller
 {
     public function actionIndex($albumId)
     {
@@ -13,8 +13,8 @@ class AlbumController extends \luya\base\PageController
             'content' => $model->description,
         ]);
     
-        $this->pageTitle = $model->title;
-    
+        $this->view->title = $model->title;
+        
         return $this->render('index', [
             'model' => $model,
         ]);

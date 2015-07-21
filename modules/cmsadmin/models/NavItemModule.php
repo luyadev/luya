@@ -18,8 +18,6 @@ class NavItemModule extends \cmsadmin\base\NavItemType
 
     private $_module = null;
 
-    private $_context = null;
-
     private function getModule()
     {
         if ($this->_module !== null) {
@@ -57,8 +55,6 @@ class NavItemModule extends \cmsadmin\base\NavItemType
         $reflection->setModuleSuffix($this->getOption('restString'));
         
         $response = $reflection->responseContent();
-        
-        $this->_context = $reflection->getContext();
         
         return $response;
     }
@@ -100,10 +96,5 @@ class NavItemModule extends \cmsadmin\base\NavItemType
     public function getHeaders()
     {
         return;
-    }
-
-    public function getContextPropertysArray()
-    {
-        return $this->_context;
     }
 }

@@ -14,7 +14,7 @@ Abstrakte Klasse `modules/estore/base/Controller.php`:
 <?php
 namespace app\modules\estore\base;
 
-abstract class EstoreController extends \luya\base\PageController
+abstract class EstoreController extends \luya\base\Controller
 {
     public function getBasketTotal()
     {

@@ -78,8 +78,6 @@ class ModuleBlock extends \cmsadmin\base\Block
         
         $response = $reflection->responseContent();
         
-        $context = $reflection->getContext();
-        
         return $response;
     }
 

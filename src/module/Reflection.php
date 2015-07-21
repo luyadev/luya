@@ -15,8 +15,6 @@ class Reflection
     
     private $_urlManager = null;
     
-    private $_context = [];
-    
     private $_suffix = null;
     
     private $_initRun = null;
@@ -63,11 +61,6 @@ class Reflection
         ];
     }
     
-    public function getContext()
-    {
-        return $this->_context;
-    }
-    
     public function responseContent()
     {
         $request = $this->getRequestResponse();
@@ -79,10 +72,6 @@ class Reflection
         $controllerObject = $controller[0];
         
         $action = $controllerObject->runAction($controller[1], $request['args']);
-        
-        foreach($controllerObject->propertyMap as $prop) {
-            $this->_context[$prop] = $controllerObject->$prop;
-        }
         
         return $action;
     }

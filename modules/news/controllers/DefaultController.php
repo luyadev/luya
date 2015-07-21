@@ -4,7 +4,7 @@ namespace news\controllers;
 
 use admin\base\actionIndex;
 
-class DefaultController extends \luya\base\PageController
+class DefaultController extends \luya\base\Controller
 {
     public function actionIndex()
     {
