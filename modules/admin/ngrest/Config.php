@@ -151,7 +151,7 @@ class Config implements \admin\ngrest\base\ConfigInterface
     public function fieldArgAppend($fieldName, $key, $value)
     {
         foreach ($this->pointersMap as $pointer) {
-            if ($this->pointerExists($pointer)) {
+            if ($this->pointerExists($pointer) && is_array($this->config[$pointer])) {
                 foreach ($this->config[$pointer] as $field => $args) {
                     if ($fieldName !== $field) {
                         continue;
