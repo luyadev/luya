@@ -17,7 +17,8 @@ $config = [
             ]
         ],
         'cmsadmin' => 'cmsadmin\Module',
-        'admin' => 'admin\Module'
+        'admin' => 'admin\Module',
+        'moduletest' => 'moduletest\Module',
     ],
     'components' => [
     	'mail' => [

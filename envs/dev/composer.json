@@ -37,7 +37,8 @@
             "account\\" : "../../modules/account",
             "errorapi\\" : "../../modules/errorapi",
             "gallery\\" : "../../modules/gallery",
-            "galleryadmin\\" : "../../modules/galleryadmin"
+            "galleryadmin\\" : "../../modules/galleryadmin",
+            "moduletest\\" : "modules/moduletest"
         }
     }
 }
