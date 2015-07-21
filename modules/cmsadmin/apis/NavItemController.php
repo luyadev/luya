@@ -26,6 +26,16 @@ class NavItemController extends \admin\base\RestController
         return $this->getSub($placeholderVar,  (int) $navItemPageId, (int) $prevId);
     }
     
+    public function actionTypeData($navItemId)
+    {
+        return NavItem::findOne($navItemId)->getType()->toArray();
+    }
+    
+    public function actionUpdateItemTypeData($navItemId)
+    {
+        return NavItem::findOne($navItemId)->updateType(Yii::$app->request->post());
+    }
+    
     /**
      * admin/api-cms-navitem/update-item?navItemId=2.
      *
@@ -35,7 +45,7 @@ class NavItemController extends \admin\base\RestController
      */
     public function actionUpdateItem($navItemId)
     {
-        $model = \cmsadmin\models\NavItem::find()->where(['id' => $navItemId])->one();
+        $model = NavItem::find()->where(['id' => $navItemId])->one();
 
         if (!$model) {
             throw new \Exception('could not find the model to validate');
@@ -58,7 +68,7 @@ class NavItemController extends \admin\base\RestController
      */
     public function actionTypePageContainer($navItemId)
     {
-        $navItem = \cmsadmin\models\NavItem::findOne($navItemId);
+        $navItem = NavItem::findOne($navItemId);
         $type = $navItem->getType();
         $layout = \cmsadmin\models\Layout::findOne($type->layout_id);
         if (!empty($layout)) {

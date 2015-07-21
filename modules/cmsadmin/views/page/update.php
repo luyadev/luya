@@ -182,21 +182,32 @@
                         <!-- /PAGE__HEADER -->
 
                         <!-- PAGE__CONTENT -->
-                        <div class="page__content" ng-show="settings">
+                        <div class="page__content" ng-show="settings" ng-switch on="item.nav_item_type">
                             <div class="row">
                                 <div class="input-field col s6">
-                                    <input ng-model="copy.title" type="text" class="validate">
+                                    <input ng-model="itemCopy.title" type="text" class="validate">
                                     <label>Seitenname</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input ng-model="copy.rewrite"  type="text" class="validate">
+                                    <input ng-model="itemCopy.rewrite"  type="text" class="validate">
                                     <label>Url</label>
                                 </div>
                             </div>
+                            
+                            <div ng-switch-when="1" class="row">
+                                <div class="input-field col s12">
+                                    <select class="browser-default" ng-model="typeDataCopy.layout_id" ng-options="lts.id as lts.name for lts in layouts"></select>
+                                    <label>Layout</label>
+                                </div>
+                            </div>
+                    
+                            <div ng-switch-when="2" class="row">
+                            </div>
+                            
                             <div class="row">
                                 <div class="col s12">
                                     <button class="btn waves-effect waves-light" type="button" ng-click="toggleSettings()">Abbrechen <i class="mdi-content-clear right"></i></button>
-                                    <button class="btn waves-effect waves-light" type="button" ng-click="save(copy)">Speichern <i class="mdi-content-send right"></i></button>
+                                    <button class="btn waves-effect waves-light" type="button" ng-click="save(itemCopy, typeDataCopy)">Speichern <i class="mdi-content-send right"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -209,8 +220,8 @@
                                     <p>Diese Seite ist als Module hinterlegt.
                                 </div>
                                 <div class="col s12" ng-switch-when="1" ng-controller="NavItemTypePageController">
-
-                                    <ul class="accordion">
+                                    <div class="alert alert--danger" ng-show="!container.nav_item_page.id">Das für die Seite definierte Layout wurde nicht (mehr) gefunden. Bitte bearbeiten Sie die Layout Einstellungen diese Seite.</div>
+                                    <ul class="accordion" ng-show="container.nav_item_page.id">
                                         <li class="accordion__entry" ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" ng-class="{ 'accordion__entry--open' : isOpen }"></li>
                                     </ul>
 

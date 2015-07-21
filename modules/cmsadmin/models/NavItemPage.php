@@ -18,6 +18,13 @@ class NavItemPage extends \cmsadmin\base\NavItemType
         ];
     }
 
+    public function scenarios()
+    {
+        return [
+            'updatetype' => ['layout_id']
+        ];
+    }
+    
     public function getContent()
     {
         $twig = Yii::$app->twig->env(new \Twig_Loader_Filesystem(\yii::getAlias('@app/views/cmslayouts/')));

@@ -16,6 +16,13 @@ class NavItemModule extends \cmsadmin\base\NavItemType
         ];
     }
 
+    public function scenarios()
+    {
+        return [
+            'updatetype' => ['module_name']
+        ];
+    }
+    
     private $_module = null;
 
     private function getModule()

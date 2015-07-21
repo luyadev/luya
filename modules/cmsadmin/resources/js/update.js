@@ -80,7 +80,7 @@ zaa.controller("NavController", function($scope, $stateParams, $http, AdminLangS
  * @param $scope.lang
  *            from ng-repeat
  */
-zaa.controller("NavItemController", function($scope, $http, $timeout, MenuService) {
+zaa.controller("NavItemController", function($scope, $http, $timeout, MenuService, CmsLayoutService) {
 	
 	$scope.NavController = $scope.$parent;
 	
@@ -90,23 +90,26 @@ zaa.controller("NavItemController", function($scope, $http, $timeout, MenuServic
 	
 	$scope.item = [];
 	
-	$scope.copy = [];
+	$scope.itemCopy = [];
 
 	$scope.settings = false;
 	
 	$scope.reset = function() {
-		$scope.copy = angular.copy($scope.item);
+		$scope.itemCopy = angular.copy($scope.item);
+		$scope.typeDataCopy = angular.copy($scope.typeData);
 	}
 	
-	$scope.save = function(data) {
-		
+	$scope.save = function(itemCopy, typeDataCopy) {
 		var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
-		var navItemId = data.id;
-		$http.post('admin/api-cms-navitem/update-item?navItemId=' + navItemId, $.param({ title : data.title, rewrite : data.rewrite }), headers).success(function(response) {
-			Materialize.toast('<span> Die Seite «'+data.title+'» wurde aktualisiert.</span>', 2000);
-			MenuService.refresh();
-			$scope.refresh();
-			$scope.toggleSettings();
+		var navItemId = itemCopy.id;
+		$http.post('admin/api-cms-navitem/update-item?navItemId=' + navItemId, $.param({ title : itemCopy.title, rewrite : itemCopy.rewrite }), headers).success(function(response) {
+			$http.post('admin/api-cms-navitem/update-item-type-data?navItemId=' + navItemId, $.param(typeDataCopy), headers).success(function(responseTypeData) {
+				Materialize.toast('<span> Die Seite «'+itemCopy.title+'» wurde aktualisiert.</span>', 2000);
+				MenuService.refresh();
+				$scope.refresh();
+				$scope.toggleSettings();
+				
+			});
 		}).error(function(e) {
 			console.log(e);
 		})
@@ -116,6 +119,15 @@ zaa.controller("NavItemController", function($scope, $http, $timeout, MenuServic
 		$scope.reset();
 		$scope.settings = !$scope.settings;
 	};
+
+	
+	CmsLayoutService.data.$promise.then(function(response) {
+		$scope.layouts = response;
+	})
+	
+	$scope.typeDataCopy = [];
+	
+	$scope.typeData = [];
 	
 	$scope.getItem = function(langId, navId) {
 		$scope.showContainer = false;
@@ -126,13 +138,25 @@ zaa.controller("NavItemController", function($scope, $http, $timeout, MenuServic
 		}).success(function(response) {
 			if (response) {
 				$scope.item = response;
+				
+				$http({
+					url : 'admin/api-cms-navitem/type-data',
+					method : 'get',
+					params : { navItemId : response.id }
+				}).success(function(r) {
+					$scope.typeData = r;
+				})
+				
 				$scope.isTranslated = true;
+				
 				$timeout(function() {
 					$scope.showContainer = true;
+					$scope.$broadcast('refreshItems');
 				}, 500);
 			} else {
 				$timeout(function() {
 					$scope.showContainer = true;
+					$scope.$broadcast('refreshItems');
 				}, 500);
 			}
 			
@@ -155,13 +179,17 @@ zaa.controller("NavItemTypePageController", function($scope, $http, $timeout) {
 	
 	$scope.container = [];
 	
-	$scope.refresh = function() {
+	$scope.$on('refreshItems', function(event) { 
+		$scope.refresh(true);
+	});
+	
+	$scope.refresh = function(forceReload) {
 		$http({
 			url : 'admin/api-cms-navitem/tree',
 			method : 'GET',
 			params : { navItemPageId : $scope.NavItemController.item.nav_item_type_id }
 		}).success(function(response) {
-			if ($scope.container.length == 0) {
+			if ($scope.container.length == 0 || forceReload === true) {
 				$scope.container = response;
 			} else {
 				// merge new content item to placeholder
@@ -224,8 +252,6 @@ zaa.controller("NavItemTypePageController", function($scope, $http, $timeout) {
 		}
 		return false;
 	}
-	
-	$scope.refresh();
 	
 });
 
