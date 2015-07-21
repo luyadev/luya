@@ -10,6 +10,7 @@ LUYA CHANGELOG
 - `#244`: removed NgRest `required()` plugin.
 - `#215`: removed `luya\base\PageController` and replace with basic `luya\base\Controller`. `$this->context->pageTitle` is now invalid.
 - `#221`: removed `presql` command and replaced with `migrate` command.
+- `#214`: removed fake behavior renderLayout, replaced with yii layout similar behvaior using `$content` and requred `$viewFile` param.
 
 1.0.0-alpha10 (9. Jul 2015)
 ---------------------------

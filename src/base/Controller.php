@@ -90,8 +90,9 @@ class Controller extends \yii\web\Controller
         return '@app/views/'.$this->module->id.'/';
     }
 
-    public function renderLayout($params = [])
+    public function renderLayout($view, $params = [])
     {
-        return $this->render($this->getModuleLayoutViewPath().$this->module->moduleLayout, $params);
+        $content = $this->view->renderFile($this->getViewPath() . '/' .$view . '.php' , $params);
+        return $this->render($this->getModuleLayoutViewPath().$this->module->moduleLayout, ['content' => $content]);
     }
 }

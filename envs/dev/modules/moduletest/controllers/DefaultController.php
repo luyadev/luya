@@ -8,8 +8,6 @@ class DefaultController extends \luya\base\Controller
     {
         $this->view->registerMetaTag(['name' => 'keywords', 'content' => 'luya, yii, php']);
         
-        return $this->render('index', [
-            'title' => 'hi'
-        ]);
+        return $this->renderLayout('index', ['foo' => 'bar']);
     }
 }

@@ -22,16 +22,12 @@ class DefaultController extends \app\modules\estore\base\EstoreController
     
     public function actionIndex()
     {
-        return $this->renderLayout([
-               "content" => $this->renderPartial('_index')  
-        ]);        
+        return $this->renderLayout('index');        
     }
     
     public function actionBasket()
     {   
-        return $this->renderLayout([
-            "content" => $this->renderPartial('_basket')        
-        ]);
+        return $this->renderLayout('basket');
     }
 }
 ```
