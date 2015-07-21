@@ -5,14 +5,14 @@ namespace luya\commands;
 /**
  * @see https://github.com/yiisoft/yii2/issues/384
  *
- * @use php yii presql/create foomigration
- * @use php yii presql/up
+ * @use php yii migrate/create foomigration
+ * @use php yii migrate/up
  *
  * @todo create command for module specified, like: php yii postsql/create news foomigration
  *
  * @author nadar
  */
-class PresqlController extends \yii\console\controllers\MigrateController
+class MigrateController extends \yii\console\controllers\MigrateController
 {
     public $migrationFileDirs = array();
 

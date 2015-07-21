@@ -45,7 +45,7 @@ cd luya-kickstarter/public_html
 ```
 Dort führen wir auf der index.php der Migrations Befehl aus:
 ```
-php index.php presql
+php index.php migrate
 ```
 Du musst nun allen Migrationsdaten zustimmen, diese werden ausgeführt un deine Datenbank ist startklar.
 

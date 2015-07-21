@@ -2,8 +2,8 @@
 
 $config = [
     'controllerMap' => [
-        'presql' => '\luya\commands\PresqlController', // remove in 1.0.0-alpha10
-        'migrate' => '\luya\commands\PresqlController',
+        //'presql' => '\luya\commands\PresqlController', // remove in 1.0.0-alpha10
+        'migrate' => '\luya\commands\MigrateController',
         'exec' => '\luya\commands\ExecutableController',
         'crud' => '\luya\commands\CrudController',
         'module' => '\luya\commands\ModuleController',

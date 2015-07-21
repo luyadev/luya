@@ -31,7 +31,7 @@ cd /path/to/your/project/public_html
 ```
 now execute the php command
 ```
-php index.php presql
+php index.php migrate
 ```
 It will ask for your permissions to execute the database migrations.
 

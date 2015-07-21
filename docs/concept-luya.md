@@ -111,7 +111,7 @@ Each module can have its own migration scripts, but by default of Yii2 the migra
 
 ### The Solution
 
-We changed the controllerNamespace in the console config to point into the "luya/commands" folder. There we have a Presql command which overwrites the Yii2 migrationController to support migrations for each modul.
+We changed the controllerNamespace in the console config to point into the "luya/commands" folder. There we have a migrate command which overwrites the Yii2 migrationController to support migrations for each modul.
 Now all modules can contain their own migrations scripts inside the module folder structure (ex. <ModuleName>/migrations).
 
 ### Run migrations
@@ -119,18 +119,18 @@ Now all modules can contain their own migrations scripts inside the module folde
 /*
  * will create a migration script into the application folder
  */
-php index.php presql/create fooMigration
+php index.php migrate/create fooMigration
 
 /*
  * will create a migration script into the module "news" 
  * (only for dev usage. Modules are loaded via composer into the vendor folder. It does not make sense to create a migration script into the vendor/zephir/<module>/migrations)
  */
-php index.php presql/create fooMigration news
+php index.php migrate/create fooMigration news
 
 /*
  * will run the all the migration scripts over all the assigned modules
  */
-php index.php presql/up
+php index.php migrate/up
 ```
 
 

@@ -20,7 +20,7 @@ migration
 
 create a new migration script
 ```
-php index.php presql/create TABLE_NAME MODULE_NAME
+php index.php migrate/create TABLE_NAME MODULE_NAME
 ```
 
 ***up***
@@ -28,7 +28,7 @@ php index.php presql/create TABLE_NAME MODULE_NAME
 execute all migrations for all modules
 
 ```
-php index.php presql
+php index.php migrate
 ```
 
 
