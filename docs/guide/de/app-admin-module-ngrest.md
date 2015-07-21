@@ -1,19 +1,19 @@
-Admin Modul NgRest Crud
+Admin Modul NgRest CRUD
 =======================
-Eines der Kernbestandteile von *LUYA* liegt darin in kurzer Zeit eine mächtige Administrations Oberfläche zu erstellen auch NgRest Crud genannt. Ein CRUD beinhaltet *create (erstellen)*, *read (lesen)*, *update (aktualisieren)* und *delete (löschen)* also alle nötigen Methoden um eine Datenbank Tabelle zu aktualisieren. Das wort NgRest besteht aus A**Ng**ular**Rest** (Representational State Transfer) weil die gesamt *LUYA* Adminoberfläch wie REST ansprechbar ist und durch das extrem starke Angular Javascript Framework angesprochen wird. Um einen NgRest Oberfläch zu erstellen benötigen wir folgendes:
+Eines der Kernbestandteile von *LUYA* liegt darin in kurzer Zeit eine mächtige Administrations Oberfläche zu erstellen auch NgRest CRUD genannt. Ein CRUD beinhaltet *create (erstellen)*, *read (lesen)*, *update (aktualisieren)* und *delete (löschen)* also alle nötigen Methoden, um eine Datenbank Tabelle zu aktualisieren. Das Wort NgRest besteht aus A**Ng**ular**Rest** (Representational State Transfer), weil die gesamt *LUYA* Adminoberfläch wie REST ansprechbar ist und durch das extrem starke Angular Javascript Framework angesprochen wird. Um einen NgRest Oberfläch zu erstellen benötigen wir folgendes:
 
 + [Migration Tabelle](luya-console.md#migration)
-+ Einen Api-Endpoint eintrag im Modul
++ Einen Api-Endpoint Eintrag im Modul
 + Ein Model
 + Einen Controller
 + Einen API-Controler
-+ Einen Menu eintrag im Modul
++ Einen Menu Eintrag im Modul
 
-> Sie können mit dem [Konsolenbefehl](luya-console.md) `crud/create` sämtliche Dateien generieren. Es empfiehlt sich jedoch die einzelen Punkte zu verstehen.
+> Sie können mit dem [Konsolenbefehl](luya-console.md) `crud/create` sämtliche Dateien generieren. Es empfiehlt sich jedoch die einzelnen Punkte zu verstehen.
 
 NgRest Api-Endpoint
 -----------------
-Öffnen Sie die `Module.php` in des Module sie die *NgRest* Oberfläch initialisieren möchte und fügen Sie die Eigenschaft `public $apis` ein. Tragen Sie nun einen **Api-Endpoint** für Ihre Schnittstelle ein wobei der key dem späteren Link zur Schnittele und value der ApiController Klasse enspricht.  
+Öffnen Sie die `Module.php` in dem Module, in dem sie die *NgRest* Oberfläche initialisieren möchten und fügen Sie die Eigenschaft `public $apis` ein. Tragen Sie nun einen **Api-Endpoint** für Ihre Schnittstelle ein wobei der Key dem späteren Link zur Schnittstelle und Value der ApiController Klasse enspricht.  
 
 ```php
 <?php
@@ -29,13 +29,13 @@ class Module extends \admin\base\Module
 
 Ein Api-Endpoint besteht immer aus *api-{module}-{model}* wobei beim *module* immer das **Frontend-Module** gewählt wird.
 
-> Api-Endpoints haben **nie** das admin prefix da es in diesem Context keinen Sinn ergäbe. Technisch gesehn kann man jedoch jeglich Text als Api-Endpoint hinterlegen.
+> Api-Endpoints haben **nie** das Admin Prefix, da es in diesem Kontext keinen Sinn ergäbe. Technisch gesehen kann man jedoch jeglich Text als Api-Endpoint hinterlegen.
 
-Alle Apis werde **singular** ausgedrückt (wie Datenbank Tabellen), also **member** und nicht  ~~members~~ .
+Alle Apis werden **singular** ausgedrückt (wie Datenbank Tabellen), also **member** und nicht  ~~members~~ .
 
 NgRest Model
 -----------------
-Nachdem Sie eine Datenbank Tabelle via [Migration](luya-console.md) erstellt habe können Sie ein *ActiveRecord* Model erstellen im Ordner `models` mit dem Namen der Tabelle:
+Nachdem Sie eine Datenbank Tabelle via [Migration](luya-console.md) erstellt haben, können Sie ein *ActiveRecord* Model erstellen im Ordner `models` mit dem Namen der Tabelle:
 
 ```php
 <?php
@@ -82,11 +82,11 @@ class Member extends \admin\ngrest\base\Model
 }
 ```
 
-Eine detailerte erkärung der `ngRestConfig() Methode finden Sie in der [NgRest Sektion](ng-rest.md).
+Eine detaillierte Erkärung der `ngRestConfig() Methode finden Sie in der [NgRest Sektion](ng-rest.md).
 
 NgRest Controller
 -----------------
-Um die CRUD Logik anzuzeigen müssen wir einen Controller anlegen welcher auf das *Model* verweist:
+Um die CRUD Logik anzuzeigen, müssen wir einen Controller anlegen, welcher auf das *Model* verweist:
 
 ```php
 <?php
@@ -115,7 +115,7 @@ class MemberController extends \admin\ngrest\base\Api
 
 NgRest Menu Eintrag
 --------------------
-Fügen Sie nun die `getMenu()` Funktion in Ihre `Module.php` ein um die Menu einträge zu erstellen und die 
+Fügen Sie nun die `getMenu()` Funktion in Ihre `Module.php` ein, um die Menu Einträge zu erstellen und die 
 [Berechtigungen](app-admin-module-permission.md) zu setzen:
 
 ```php
