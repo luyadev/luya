@@ -14,21 +14,6 @@ class Album extends \admin\ngrest\base\Model
         return 'api-gallery-album';
     }
 
-    public function ngRestConfig($config)
-    {
-        $config->aw->register(new \admin\aws\Gallery('gallery_album_image', 'image_id', 'album_id'), 'Bilder Hochladen &amp; Verwalten');
-
-        $config->list->field('cat_id', 'Kategorie')->selectClass('\galleryadmin\models\Cat', 'id', 'title');
-        $config->list->field('title', 'Titel')->text();
-        $config->list->field('description', 'Beschreibung')->textarea();
-        $config->list->field('cover_image_id', 'Cover-Bild')->image();
-        
-        $config->create->copyFrom('list', ['id']);
-        $config->update->copyFrom('list', ['id']);
-
-        return $config;
-    }
-
     public function scenarios()
     {
         return [
@@ -36,6 +21,27 @@ class Album extends \admin\ngrest\base\Model
             'restupdate' => ['title', 'description', 'cover_image_id', 'cat_id'],
         ];
     }
+
+    public function rules()
+    {
+        return [
+            ['cat_id', 'required', 'message' => 'Bitte wählen Sie eine Kategorie aus.'],
+            ['title', 'required', 'message' => 'Bitte geben Sie einen Titel ein.'],
+        ];
+    }
+
+    public function init()
+    {
+        parent::init();
+        $this->on(self::EVENT_BEFORE_DELETE, [$this, 'eventBeforeDelete']);
+    }
+
+    public function eventBeforeDelete()
+    {
+        // find all gallery_album_image references and delete them
+        (new \yii\db\Query())->createCommand()->delete('gallery_album_image', 'album_id = :albumId', [':albumId' => $this->id])->execute();
+    }
+
 
     public function getDetailUrl($contextNavItemId = null)
     {
@@ -50,4 +56,22 @@ class Album extends \admin\ngrest\base\Model
     {
         return (new \yii\db\Query())->from('gallery_album_image')->where(['album_id' => $this->id])->all();
     }
+
+    public function ngRestConfig($config)
+    {
+        $config->aw->register(new \admin\aws\Gallery('gallery_album_image', 'image_id', 'album_id'), 'Bilder Hochladen &amp; Verwalten');
+
+        $config->list->field('cat_id', 'Kategorie')->selectClass('\galleryadmin\models\Cat', 'id', 'title');
+        $config->list->field('title', 'Titel')->text();
+        $config->list->field('description', 'Beschreibung')->textarea();
+        $config->list->field('cover_image_id', 'Cover-Bild')->image();
+
+        $config->create->copyFrom('list', ['id']);
+        $config->update->copyFrom('list', ['id']);
+
+        $config->delete = true;
+
+        return $config;
+    }
+
 }
