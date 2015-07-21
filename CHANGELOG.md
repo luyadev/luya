@@ -1,7 +1,7 @@
 LUYA CHANGELOG
 ==============
 
-1.0.0-alpha11 (in progress)
+1.0.0-alpha11 (21. Jul 2015)
 ---------------------------
 - fixed bug where `$_context` variable was not written correctly in module reflection loader.
 - `#257`: filemanager rows are now selectable.
