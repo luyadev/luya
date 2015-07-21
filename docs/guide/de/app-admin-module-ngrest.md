@@ -82,7 +82,7 @@ class Member extends \admin\ngrest\base\Model
 }
 ```
 
-Eine detaillierte Erkärung der `ngRestConfig() Methode finden Sie in der [NgRest Sektion](ng-rest.md).
+Eine detaillierte Erkärung der `ngRestConfig() Methode finden Sie in der [NgRest Sektion](ngrest.md).
 
 NgRest Controller
 -----------------
