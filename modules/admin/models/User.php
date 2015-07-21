@@ -13,6 +13,8 @@ use yii\web\IdentityInterface;
  */
 class User extends \admin\ngrest\base\Model implements IdentityInterface
 {
+    use \admin\traits\SoftDeleteTrait;
+
     public function ngRestApiEndpoint()
     {
         return 'api-admin-user';
@@ -34,6 +36,8 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
         $config->list->field('firstname', 'Vorname')->text();
         $config->list->field('lastname', 'Nachname')->text();
         $config->update->copyFrom('create', ['password']);
+
+        $config->delete = true;
 
         return $config;
     }
