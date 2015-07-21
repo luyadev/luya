@@ -2,6 +2,12 @@
 
 namespace cmsadmin;
 
+use Yii;
+use yii\db\Query;
+use cmsadmin\models\Block;
+use cmsadmin\models\Layout;
+use luya\commands\ExecutableController;
+
 class Module extends \admin\base\Module
 {
     public $apis = [
@@ -57,19 +63,19 @@ class Module extends \admin\base\Module
      * @todo do not only import, also update changes in the template
      * @todo how do we send back values into the executblae controller for output purposes?
      */
-    public function import(\luya\commands\ExecutableController $exec)
+    public function import(ExecutableController $exec)
     {
         $_log = [
             'blocks' => [],
             'layouts' => [],
         ];
 
-        $allblocks = \cmsadmin\models\Block::find()->all();
+        $allblocks = Block::find()->all();
         $exists = [];
         foreach ($exec->getFilesNamespace('blocks') as $ns) {
-            $model = \cmsadmin\models\Block::find()->where(['class' => $ns])->asArray()->one();
+            $model = Block::find()->where(['class' => $ns])->asArray()->one();
             if (!$model) {
-                $block = new \cmsadmin\models\Block();
+                $block = new Block();
                 $block->scenario = 'commandinsert';
                 $block->setAttributes([
                     'group_id' => 1,
@@ -85,26 +91,20 @@ class Module extends \admin\base\Module
         }
         foreach ($allblocks as $block) {
             if (!in_array($block->id, $exists)) {
-                /*
-                $items = \cmsadmin\models\NavItemPageBlockItem::find()->where(['block_id' => $block->id])->all();
-                foreach($items as $it) {
-                    $it->delete();
-                }
-                */
                 $block->delete();
             }
         }
 
         /* import project specific layouts */
-        $cmslayouts = \yii::getAlias('@app/views/cmslayouts');
-
+        $cmslayouts = Yii::getAlias('@app/views/cmslayouts');
+        $layoutFiles = [];
         if (file_exists($cmslayouts)) {
             foreach (scandir($cmslayouts) as $file) {
                 if ($file == '.' || $file == '..') {
                     continue;
                 }
-
-                $layoutItem = \cmsadmin\models\Layout::find()->where(['view_file' => $file])->one();
+                $layoutFiles[] = $file;
+                $layoutItem = Layout::find()->where(['view_file' => $file])->one();
 
                 $content = file_get_contents($cmslayouts.DIRECTORY_SEPARATOR.$file);
                 // find all twig brackets
@@ -142,7 +142,7 @@ class Module extends \admin\base\Module
                     $_log['layouts'][$file] = "existing cmslayout $file updated.";
                 } else {
                     // add item into the database table
-                    $data = new \cmsadmin\models\Layout();
+                    $data = new Layout();
                     $data->scenario = 'restcreate';
                     $data->setAttributes([
                         'name' => ucfirst($file),
@@ -153,8 +153,12 @@ class Module extends \admin\base\Module
                     $_log['layouts'][$file] = "new cmslayout $file found and inserted.";
                 }
             }
+            
+            foreach(Layout::find()->where(['not in', 'view_file', $layoutFiles])->all() as $layoutItem) {
+                $layoutItem->delete();
+            }
         }
-
+        
         return $_log;
     }
     
