@@ -15,13 +15,6 @@ class NavItemModule extends \cmsadmin\base\NavItemType
             [['module_name'], 'required'],
         ];
     }
-
-    public function scenarios()
-    {
-        return [
-            'updatetype' => ['module_name']
-        ];
-    }
     
     private $_module = null;
 

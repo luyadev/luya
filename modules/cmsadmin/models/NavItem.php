@@ -61,7 +61,6 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     public function updateType($postData)
     {
         $model = $this->getType();
-        $model->scenario = 'updatetype';
         $model->attributes = $postData;
         return $model->update();
     }

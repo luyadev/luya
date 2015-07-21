@@ -17,13 +17,6 @@ class NavItemPage extends \cmsadmin\base\NavItemType
             [['layout_id'], 'required'],
         ];
     }
-
-    public function scenarios()
-    {
-        return [
-            'updatetype' => ['layout_id']
-        ];
-    }
     
     public function getContent()
     {
