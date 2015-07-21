@@ -26,6 +26,16 @@ class Tag extends \admin\ngrest\base\Model
         return $config;
     }
 
+    public function attributeLabel()
+    {
+        return ['title' => 'Tag-Name'];
+    }
+
+    public function rules()
+    {
+        return [['title', 'required', 'message' => 'Bitte geben Sie einen Tag-Namen ein.']];
+    }
+
     public function scenarios()
     {
         return [
