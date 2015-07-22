@@ -39,7 +39,7 @@ class Article extends \admin\ngrest\base\Model
         return [
           'cat_id' => 'Kategorie',
           'title' => 'Titel',
-          'text' => 'Text',
+          'text' => 'Beschreibung',
         ];
     }
 
@@ -105,7 +105,7 @@ class Article extends \admin\ngrest\base\Model
 
         $config->update->field('cat_id', 'Kategorie')->selectClass('\newsadmin\models\Cat', 'id', 'title');
         $config->update->field('title', 'Titel')->text();
-        $config->update->field('text', 'Text')->textarea();
+        $config->update->field('text', 'Beschreibung')->textarea();
         $config->update->field('timestamp_create', 'News erstellt am:')->date();
         $config->update->field('timestamp_display_from', 'News anzeigen ab')->date();
 
