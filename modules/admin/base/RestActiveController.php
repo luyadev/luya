@@ -29,11 +29,12 @@ class RestActiveController extends \yii\rest\ActiveController implements \luya\r
         $actions = parent::actions();
 
         // change index class
-        $actions['index']['class'] = '\luya\rest\IndexAction';
+        $actions['index']['class'] = '\admin\rest\IndexAction';
+        $actions['delete']['class'] = '\admin\rest\DeleteAction';
 
         return $actions;
     }
-
+    
     public function checkAccess($action, $model = null, $params = [])
     {
         switch($action) {
