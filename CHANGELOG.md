@@ -1,6 +1,9 @@
 LUYA CHANGELOG
 ==============
 
+1.0.0-alpha13 (in progress)
+--------------------------
+
 1.0.0-alpha12 (22. Jul 2015)
 ----------------------------
 - hotfix: Fixed bug where page create scenarion failed.
