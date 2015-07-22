@@ -7,6 +7,7 @@ use Yii;
 class Module extends \admin\base\Module
 {
     public $apis = [
+        'api-admin-remote' => 'admin\apis\RemoteController',
         'api-admin-defaults' => 'admin\apis\DefaultsController',
         'api-admin-storage' => 'admin\apis\StorageController',
         'api-admin-menu' => 'admin\apis\MenuController',
