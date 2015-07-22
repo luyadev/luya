@@ -23,6 +23,10 @@ class RemoteController extends \luya\rest\Controller
         return [
             'yii_version' => Yii::getVersion(),
             'luya_version' => Module::VERSION,
+            'app_title' => Yii::$app->siteTitle,
+            'app_debug' => (int) YII_DEBUG,
+            'app_env' => YII_ENV,
+            'app_transfer_exceptions' => (int) Yii::$app->errorHandler->transferException,
         ];
     }
 }
