@@ -17,6 +17,7 @@ class Block extends \admin\ngrest\base\Model
     public function ngRestConfig($config)
     {
         $config->list->field('class', 'Class')->text();
+        $config->list->field('group_id', 'Gruppe')->text();
 
         $config->create->field('class', 'Class')->text();
         $config->create->field('group_id', 'Gruppe')->selectClass('\cmsadmin\models\BlockGroup', 'id', 'name');
