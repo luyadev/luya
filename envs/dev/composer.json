@@ -1,8 +1,8 @@
 {
     "minimum-stability": "dev",
     "require": {
-        "yiisoft/yii2": "2.0.*@stable",
-        "yiisoft/yii2-debug" : "2.0.*@stable",
+        "yiisoft/yii2": "2.0.5",
+        "yiisoft/yii2-debug" : "2.0.4",
         "twig/twig" : "1.*@stable",
         "bower-asset/jquery" : "2.1.*@stable",
         "bower-asset/jquery-ui" : "1.*@stable",

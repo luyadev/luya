@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b8d60e1af537746c5b605a9233e78ec3",
+    "hash": "ba98ff75887a49cd804af33e76d80e4b",
     "packages": [
         {
             "name": "bower-asset/angular",
@@ -1116,8 +1116,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "yiisoft/yii2": 0,
-        "yiisoft/yii2-debug": 0,
         "twig/twig": 0,
         "bower-asset/jquery": 0,
         "bower-asset/jquery-ui": 0,
