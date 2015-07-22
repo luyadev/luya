@@ -326,6 +326,7 @@ zaa.directive('zaaTable', function() {
 			}
 			
 			$scope.addColumn = function(name) {
+				$scope.columnName = null;
 				for(var i in $scope.model) {
 					 $scope.model[i][name] = '';
 				}
@@ -344,10 +345,10 @@ zaa.directive('zaaTable', function() {
 		},
 		template : function() {
 			return  '<div>' +
-						'<table border="1" style="border:1px solid red;">'+
-						'<thead><tr><td data-ng-repeat="(hk, hr) in model[0]"><strong>{{hk}}</strong></td><td><input type="text" ng-model="columnName" /><button ng-click="addColumn(columnName)" type="button">ADD</button></td></tr></thead>' +
-						'<tr data-ng-repeat="(key, row) in model"><td style="border:1px solid black;" data-ng-repeat="(field,value) in row"><input type="text" ng-model="model[key][field]" /></td></tr>'+
-						'</table><button ng-click="addRow()" type="button">Add Row</button>'+
+						'<table class="bordered">'+
+						'<thead><tr><td width="90"><b>Spalten:</b></td><td data-ng-repeat="(hk, hr) in model[0]"><strong>{{hk}}</strong></td><td width="240"><input type="text" ng-model="columnName" style="width:140px;" /><button ng-click="addColumn(columnName)" type="button">Anfügen</button></td></tr></thead>' +
+						'<tr data-ng-repeat="(key, row) in model"><td>#{{key+1}}</td><td style="background-color:#e1e1e1;" data-ng-repeat="(field,value) in row"><input type="text" ng-model="model[key][field]" /></td></tr>'+
+						'</table><button ng-click="addRow()" type="button">Neue Zeile einfügen</button>'+
 					'</div>';
 		}
 	}
