@@ -35,6 +35,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
         $config->list->field('id', 'ID')->text();
         $config->list->field('firstname', 'Vorname')->text();
         $config->list->field('lastname', 'Nachname')->text();
+        $config->list->field('email', 'E-Mail')->text();
         $config->update->copyFrom('create', ['password']);
 
         $config->delete = true;
