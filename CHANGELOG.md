@@ -1,6 +1,10 @@
 LUYA CHANGELOG
 ==============
 
+1.0.0-alpha12 (22. Jul 2015)
+----------------------------
+- hotfix: Fixed bug where page create scenarion failed.
+
 1.0.0-alpha11 (21. Jul 2015)
 ---------------------------
 - fixed bug where `$_context` variable was not written correctly in module reflection loader.

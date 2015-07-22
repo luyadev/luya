@@ -10,7 +10,7 @@ class Module extends \luya\base\Module
      * @link https://github.com/zephir/luya/blob/master/CHANGELOG.md
      * @var string
      */
-    const VERSION = '1.0.0-alpha11';
+    const VERSION = '1.0.0-alpha12';
     
     /**
      * @todo rename to: compositionPattern, compisitionHidden, compositionDefault

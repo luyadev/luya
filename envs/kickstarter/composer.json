@@ -5,10 +5,10 @@
     "license":"MIT",
     "minimum-stability": "dev",
     "require": {
-        "zephir/luya" : "1.0.0-alpha11",
-        "zephir/luya-module-cms" : "1.0.0-alpha11",
-        "zephir/luya-module-cmsadmin" : "1.0.0-alpha11",
-        "zephir/luya-module-admin" : "1.0.0-alpha11"
+        "zephir/luya" : "1.0.0-alpha12",
+        "zephir/luya-module-cms" : "1.0.0-alpha12",
+        "zephir/luya-module-cmsadmin" : "1.0.0-alpha12",
+        "zephir/luya-module-admin" : "1.0.0-alpha12"
     },
     "scripts": {
         "post-create-project-cmd": [
