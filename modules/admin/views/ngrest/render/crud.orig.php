@@ -40,6 +40,13 @@ zaa.bootstrap.register('<?=$config->getNgRestConfigHash(); ?>', function($scope,
             <label for="searchString">in der Tabelle <strong>{{currentMenuItem.alias}}</strong> suchen.</label>
         </div>
     </div>
+    <div ng-show="deleteErrors.length">
+        <div class="alert alert--danger">
+            <ul>
+                <li ng-repeat="e in deleteErrors">{{e}}</li>
+            </ul>
+        </div>
+    </div>
     <table class="striped hoverable responsive-table">
     <thead>
         <tr>

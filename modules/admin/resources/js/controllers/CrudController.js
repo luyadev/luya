@@ -88,12 +88,21 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 		});
 	}
 	
+	$scope.deleteErrors = [];
+	
 	$scope.deleteItem = function(id, $event) {
 		var cfm = confirm("Möchten Sie diesen Eintrag wirklich entfernen? (Kann nicht rückgängig gemacht werden.)");
 		if (cfm == true) {
+			$scope.deleteErrors = [];
 			$http.delete($scope.config.apiEndpoint + '/'+id).success(function(r) {
 				$scope.loadList();
 				Materialize.toast('Der Datensatz wurde erfolgreich entfernt.', 3000);
+			}).error(function(r) {
+				for (var i in r) {
+					angular.forEach(r[i], function(v, k) {
+						$scope.deleteErrors.push(v);
+					})
+				}
 			})
 		}
 	};
