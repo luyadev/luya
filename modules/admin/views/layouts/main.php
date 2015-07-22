@@ -354,6 +354,8 @@
                         </tr>
                     </thead>
                     <tr><td>Id:</td><td><?= Yii::$app->id ?></td></tr>
+                    <tr><td>siteTitle:</td><td><?= Yii::$app->siteTitle ?></td></tr>
+                    <tr><td>remoteToken:</td><td><?= var_dump(Yii::$app->remoteToken); ?></td></tr>
                     <tr><td>YII_DEBUG:</td><td><?= var_dump(YII_DEBUG); ?></td></tr>
                     <tr><td>YII_ENV:</td><td><?= YII_ENV; ?></td></tr>
                     <tr><td>transferExceptions:</td><td><?= var_dump(Yii::$app->errorHandler->transferException); ?></td></tr>
