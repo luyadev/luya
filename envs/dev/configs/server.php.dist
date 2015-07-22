@@ -18,6 +18,8 @@ $config = [
         ],
         'cmsadmin' => 'cmsadmin\Module',
         'admin' => 'admin\Module',
+        'news' => 'news\Module',
+	    'newsadmin' => 'newsadmin\Module',
         'moduletest' => 'moduletest\Module',
     ],
     'components' => [
