@@ -89,9 +89,13 @@ zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 	}
 	
 	$scope.deleteItem = function(id, $event) {
-		$http.delete($scope.config.apiEndpoint + '/'+id).success(function(r) {
-			$scope.loadList();
-		})
+		var cfm = confirm("Möchten Sie diesen Eintrag wirklich entfernen? (Kann nicht rückgängig gemacht werden.)");
+		if (cfm == true) {
+			$http.delete($scope.config.apiEndpoint + '/'+id).success(function(r) {
+				$scope.loadList();
+				Materialize.toast('Der Datensatz wurde erfolgreich entfernt.', 3000);
+			})
+		}
 	};
 	
 	$scope.toggleUpdate = function(id, $event) {
