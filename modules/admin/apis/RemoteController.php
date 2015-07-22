@@ -5,6 +5,7 @@ namespace admin\apis;
 use Yii;
 use Exception;
 use Luya\Module;
+use admin\models\UserOnline;
 
 class RemoteController extends \luya\rest\Controller
 {
@@ -27,6 +28,7 @@ class RemoteController extends \luya\rest\Controller
             'app_debug' => (int) YII_DEBUG,
             'app_env' => YII_ENV,
             'app_transfer_exceptions' => (int) Yii::$app->errorHandler->transferException,
+            'admin_online_count' => UserOnline::getCount(),
         ];
     }
 }

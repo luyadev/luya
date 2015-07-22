@@ -72,6 +72,11 @@ class UserOnline extends \yii\db\ActiveRecord
         }
         
         return $return;
-        
+    }
+    
+    public static function getCount()
+    {
+        static::clearList();
+        return count(self::find()->asArray()->all());
     }
 }
