@@ -15,7 +15,7 @@ alben/index.php
 <table border="1">
 <? foreach($albenData as $item): ?>
 <tr>
-    <td><img src="<?= \yii::$app->storage->image->filterApply($item->cover_image_id, 'medium-thumbnail')->source; ?>" border="0" /></td>
+    <td><img src="<?= \yii::$app->storage->image->filterApply($item->cover_image_id, 'medium-thumbnail'); ?>" border="0" /></td>
     <td>
         <pre>
             <? print_r($item->toArray()); ?>
@@ -35,7 +35,7 @@ album/index.php
 <div class="well">
 <table border="1">
 <tr>
-    <td><img src="<?= \yii::$app->storage->image->filterApply($model->cover_image_id, 'medium-thumbnail')->source; ?>" border="0" /></td>
+    <td><img src="<?= \yii::$app->storage->image->filterApply($model->cover_image_id, 'medium-thumbnail'); ?>" border="0" /></td>
     <td>
         <h2><?= $model->title; ?></h2>
         <p><?= $model->description; ?></p>
@@ -45,7 +45,7 @@ album/index.php
         <div class="row">
             <? foreach($model->images() as $image): ?>
                 <div class="col-md-3">
-                    <img class="img-responsive" src="<?= \yii::$app->storage->image->filterApply($image['image_id'], 'medium-thumbnail')->source; ?>" border="0" />
+                    <img class="img-responsive" src="<?= \yii::$app->storage->image->filterApply($image['image_id'], 'medium-thumbnail'); ?>" border="0" />
                 </div>
             <? endforeach; ?>
         </div>

@@ -54,7 +54,7 @@ class Image
      * @param int    $imageId
      * @param string $filterIdentifier
      */
-    public function filterApply($imageId, $filterIdentifier)
+    public function filterApply($imageId, $filterIdentifier, $returnImageObject = false)
     {
         // resolve $filterIdentifier
         $filter = \admin\models\StorageFilter::find()->where(['identifier' => $filterIdentifier])->asArray()->one();
@@ -76,7 +76,12 @@ class Image
             $imageId = $this->create($image->file_id, $filterId);
         }
 
-        return $this->get($imageId);
+        $imageObject = $this->get($imageId);
+        if ($returnImageObject) {
+             return $imageObject;
+        }
+        
+        return $imageObject->source;
     }
 
     // @web/storage/the-originame_name_$filterId_$fileIdf.jpg

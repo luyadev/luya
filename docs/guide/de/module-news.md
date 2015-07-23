@@ -17,7 +17,7 @@ Hier ist eine Beispielimplementation des `Index` Views:
        </h2>
 	       <div class="row">
     	       <?php if($item->image_id): ?>
-               		<img src="<?= yii::$app->storage->image->filterApply($item->image_id, 'gallery-image-thumbnail')->source; ?>" class="news__image img-thumbnail">
+               		<img src="<?= yii::$app->storage->image->filterApply($item->image_id, 'gallery-image-thumbnail'); ?>" class="news__image img-thumbnail">
                <?php endif ?>
 	           </div>
                <p><?= $item->text ?></p>
@@ -44,8 +44,8 @@ Hier wieder ein Beispiel für die Implementation eines `Detail` Views:
 </div>
 
 <div class="row">
-	<a href="<?= \yii::$app->storage->image->filterApply($model->image_id, 'lightbox')->source; ?>">
-    	<img src="<?= \yii::$app->storage->image->filterApply($model->image_id, 'large-crop')->source; ?>" />
+	<a href="<?= \yii::$app->storage->image->filterApply($model->image_id, 'lightbox'); ?>">
+    	<img src="<?= \yii::$app->storage->image->filterApply($model->image_id, 'large-crop'); ?>" />
    </a>
 </div>
 <p>

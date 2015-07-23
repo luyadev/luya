@@ -48,14 +48,14 @@ Filter Anwenden
 Um diesen erstellen Filter in einem PHP-View oder Twig-File anzuwenden kannst du auf die `storage` component zugreifen. Hier ein bespiel in einem PHP View:
 
 ```php
-<img src="<?= yii::$app->storage->image->filterApply(139, 'my-filter')->source; ?>" border="0" />
+<img src="<?= yii::$app->storage->image->filterApply(139, 'my-filter'); ?>" border="0" />
 ```
 
 Wobei natürlich **139** die Bild-Id ist welche wahrscheinlich aus der Datenbank kommt (zbsp. News Bild). In einem *Foreach-Loop* könnte dies so aussehen:
 
 ```php
 <? foreach($newsData as $item): ?>
-    <img src="<?= yii::$app->storage->image->filterApply($item['imageId'], 'my-filter')->source; ?>" border="0" />
+    <img src="<?= yii::$app->storage->image->filterApply($item['imageId'], 'my-filter'); ?>" border="0" />
 <? endforeach; ?>
 ```
 

@@ -44,7 +44,7 @@ class Gallery extends \admin\ngrest\base\ActiveWindow
         $files = [];
         foreach($data as $k => $v) {
             $files[] = [
-                'source' => \yii::$app->storage->image->filterApply($v['image_id'], 'small-crop')->source,
+                'source' => \yii::$app->storage->image->filterApply($v['image_id'], 'small-crop'),
                 'image_id' => $v['image_id'],
             ];
         }
