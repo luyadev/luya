@@ -92,7 +92,7 @@ class Controller extends \yii\web\Controller
 
     public function renderLayout($view, $params = [])
     {
-        $content = $this->view->renderFile($this->getViewPath() . '/' .$view . '.php' , $params);
+        $content = $this->view->renderFile($this->getViewPath() . '/' .$view . '.php' , $params, $this);
         return $this->render($this->getModuleLayoutViewPath().$this->module->moduleLayout, ['content' => $content]);
     }
 }
