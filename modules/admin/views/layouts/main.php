@@ -155,17 +155,6 @@
                             </span>
                             <span class="floating-button-label__label">Datei hinzufügen</span>
                         </label>
-
-
-                        <!-- old Upload button - hide is not used anymore
-                        <input id="file" name="file" type="file" class="hide" />
-                        <label class="floating-button-label left" for="file">
-                            <span class="btn-floating">
-                                <i class="mdi-file-file-upload"></i>
-                            </span>
-                            <span class="floating-button-label__label">Datei hinzufügen</span>
-                        </label>
-                        -->
  
                         <div class="modal modal--bottom-sheet" ng-class="{ 'modal--active' : uploading && !serverProcessing }">
 
