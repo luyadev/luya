@@ -2,7 +2,6 @@ Dein Luya Projekt
 =================
 Mit diesen wenigen Schritten kannst du ganz einfach ein eigenes Luya Projekt erstellen. Um Luya installieren zu können, musst du `composer` auf deinem Mac, Linux oder Unix Computer installiert haben.
 
-<<<<<<< HEAD
 Damit wir bower Datein installieren können musst du als erstes das `composer-asset-plugin` global registrieren:
 
 ```sh
@@ -18,18 +17,20 @@ composer create-project zephir/luya-kickstarter:dev-master
 dies wird dir ein Verzeichniss **luya-kickstarter** erstellen.
 =======
 Damit wir die Bower Dateien installieren können, musst du als erstes das `composer-asset-plugin` global registrieren:
-```
+
+```sh
 composer global require "fxp/composer-asset-plugin:~1.0"
 ```
 
 Bitte beachte, ob du in deiner PHP-Konfiguration **short_open_tags** aktiviert hast ( ```<?``` statt ```<?php``` ), da diese in den *Views* verwendet werden.
 
 Als nächstes erstellen wir ein `Kickstarter` Projekte mit Hilfe des `composer create-project` Befehls. Dafür musst du lediglich dein *Terminal* öffnen und den folgenden Befehl eingeben:
-```
+
+```sh
 composer create-project zephir/luya-kickstarter:dev-master 
 ```
+
 Dies wird dir ein Verzeichniss **luya-kickstarter** erstellen.
->>>>>>> 96fca83c506bbbaf106d69386d18d95872333b49
 
 
 Konfiguration
