@@ -15,7 +15,7 @@ composer create-project zephir/luya-kickstarter:dev-master
 ```
 
 dies wird dir ein Verzeichniss **luya-kickstarter** erstellen.
-=======
+
 Damit wir die Bower Dateien installieren können, musst du als erstes das `composer-asset-plugin` global registrieren:
 
 ```sh
