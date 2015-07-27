@@ -3,6 +3,9 @@ LUYA CHANGELOG
 
 1.0.0-alpha13 (in progress)
 --------------------------
+- `#282`: display error messages from ActiveRecord via RestActiveController.
+- `#283`: display confirm message on delete.
+- added remote informations api
 
 1.0.0-alpha12 (22. Jul 2015)
 ----------------------------
