@@ -1,6 +1,6 @@
 News Modul
 ==========
-Das Frontend Modul News gilt als das Gegnstück zum News-Admin Modul. Der Aufbau ist denkbar einfach, es gibt nur ein Controller, den `DefaultController`. Dieser bietet zwei Methoden an, die `actionIndex()` und `actionDetail()`. Beide rufen den jeweils im Projekt implentierten *View* auf.
+Das Frontend Modul News gilt als das Gegenstück zum News-Admin Modul. Der Aufbau ist denkbar einfach, es gibt nur ein Controller, den `DefaultController`. Dieser bietet zwei Methoden an, die `actionIndex()` und `actionDetail()`. Beide rufen den jeweils im Projekt implementierten *View* auf. Die dazugehörigen View-Dateien (```index.php``` und ```detail.php```) müssen nach dem Standard-Yii Aufbau in ```view/news/default``` angelegt werden.
 
 Index View
 ----------
