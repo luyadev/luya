@@ -1,0 +1,12 @@
+{
+	"name" : "zephir/luya-module-crawler",
+	"description" : "Zephir Luya Crawler Module",
+	"require" : {
+		"zephir/luya" : "*"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"crawler\\" : ""
+		}
+	}
+}
