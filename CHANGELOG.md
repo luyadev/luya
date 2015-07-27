@@ -3,9 +3,10 @@ LUYA CHANGELOG
 
 1.0.0-alpha13 (in progress)
 --------------------------
+- `storage->image->filterApply` does not return the image object by default anymore. Default return value is the source of the image object, to force the image object response us `true` as 3rd param.
+- added remote informations api
 - `#282`: display error messages from ActiveRecord via RestActiveController.
 - `#283`: display confirm message on delete.
-- added remote informations api
 
 1.0.0-alpha12 (22. Jul 2015)
 ----------------------------
@@ -24,13 +25,13 @@ LUYA CHANGELOG
 
 1.0.0-alpha10 (9. Jul 2015)
 ---------------------------
+- Added News-Module fields
 - `#222`: added `module/create` cli command.
 - `#245`: fixed empty values in cms page creation.
 - `#235`: fixed bug where modal windows where to small.
 - `#228`: fixed bug where initvalue in select directives does not work for integer values.
 - `#220`: improved filemanager, removed ng-flow, added native angular-uploader.
 - `#218`: improved NgRest Crud permission verifications (API Permissions).
-- Added News-Module fields
 
 1.0.0-alpha9 (8. Jul 2015)
 --------------------------
