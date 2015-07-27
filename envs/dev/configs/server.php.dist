@@ -20,6 +20,11 @@ $config = [
         'admin' => 'admin\Module',
         'news' => 'news\Module',
 	    'newsadmin' => 'newsadmin\Module',
+	    'crawler' => [
+	        'class' => 'crawler\Module',
+	        'baseUrl' => 'http://luya.io',
+	    ],
+	    'crawleradmin' => 'crawleradmin\Module',
         'moduletest' => 'moduletest\Module',
     ],
     'components' => [
