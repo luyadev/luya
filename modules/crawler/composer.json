@@ -3,6 +3,7 @@
 	"description" : "Zephir Luya Crawler Module",
 	"require" : {
 		"zephir/luya" : "*",
+		"zephir/luya-module-crawleradmin",
 		"fabpot/goutte" : "3.1.*",
 		"jakeasmith/http_build_url" : "0.1.3"
 	},
