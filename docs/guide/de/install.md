@@ -22,7 +22,7 @@ Damit wir die Bower Dateien installieren können, musst du als erstes das `compo
 composer global require "fxp/composer-asset-plugin:~1.0"
 ```
 
-Bitte beachte, ob du in deiner PHP-Konfiguration **short_open_tags** aktiviert hast ( ```<?``` statt ```<?php``` ), da diese in den *Views* verwendet werden.
+Bitte beachte, ob du in deiner PHP-Konfiguration **short_open_tags** aktiviert hast ( `<?` statt `<?php` ), da diese in den *Views* verwendet werden.
 
 Als nächstes erstellen wir ein `Kickstarter` Projekte mit Hilfe des `composer create-project` Befehls. Dafür musst du lediglich dein *Terminal* öffnen und den folgenden Befehl eingeben:
 
