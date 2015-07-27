@@ -1,7 +1,8 @@
 Dein Luya Projekt
 =================
-Mit diesen wenigen Schritten kannst du ganz einfach ein eigenes Luya Projekt erstellen. Um Luya zu installiert musst du `composer` auf deinem Mac, Linux oder Unix Compuer installiert haben.
+Mit diesen wenigen Schritten kannst du ganz einfach ein eigenes Luya Projekt erstellen. Um Luya installieren zu können, musst du `composer` auf deinem Mac, Linux oder Unix Computer installiert haben.
 
+<<<<<<< HEAD
 Damit wir bower Datein installieren können musst du als erstes das `composer-asset-plugin` global registrieren:
 
 ```sh
@@ -15,14 +16,28 @@ composer create-project zephir/luya-kickstarter:dev-master
 ```
 
 dies wird dir ein Verzeichniss **luya-kickstarter** erstellen.
+=======
+Damit wir die Bower Dateien installieren können, musst du als erstes das `composer-asset-plugin` global registrieren:
+```
+composer global require "fxp/composer-asset-plugin:~1.0"
+```
+
+Bitte beachte, ob du in deiner PHP-Konfiguration **short_open_tags** aktiviert hast ( ```<?``` statt ```<?php``` ), da diese in den *Views* verwendet werden.
+
+Als nächstes erstellen wir ein `Kickstarter` Projekte mit Hilfe des `composer create-project` Befehls. Dafür musst du lediglich dein *Terminal* öffnen und den folgenden Befehl eingeben:
+```
+composer create-project zephir/luya-kickstarter:dev-master 
+```
+Dies wird dir ein Verzeichniss **luya-kickstarter** erstellen.
+>>>>>>> 96fca83c506bbbaf106d69386d18d95872333b49
 
 
 Konfiguration
 -------------
-Als nächsten werden wir die Konfigurations Dateien für dein Luya Projekt erstellen. Dazu gehst du in deinen `luya-kickstarter/configs` Ordner wo du due *.dist* Datei siehst.
-Du kannst nun diese *.dist* Dateien umbennen und die *.dist* Endung entfernen.
+Als nächsten werden wir die Konfigurations-Dateien für dein Luya Projekt erstellen. Dazu gehst du in deinen `luya-kickstarter/configs` Ordner wo, du die *.dist* Datei siehst.
+Du kannst nun die *.dist* Dateien umbennen und dabei die *.dist* Endung entfernen.
 
-> Achtung: Du solltest die dist Datein nach wie vor im Ordner belassen. So können auch andere Leute mit denen du zusammenarbeitetst schnell die Konfigurations Dateien erstellen.
+> Achtung: Du solltest die dist Datein nach wie vor im Ordner belassen. So können auch andere Leute mit denen du zusammen arbeitest schnell die Konfigurations Dateien erstellen.
 
 Im Terminal könntest du so die Daten kopieren:
 ```
@@ -35,10 +50,10 @@ Jede Konfiguration hat Ihren Zweck:
 
 | Name          | Beschreibung
 | --------      | -------------
-| server.php    | Diese Datei ist auf .gitignore und includiert die aktuelle laufende Umgebung (prep, prod)
+| server.php    | Diese Datei ist auf .gitignore und inkludiert die aktuelle laufende Umgebung (prep, prod)
 | prep.php      | Steht für *Preproduction*, also dein Lokales System
-| prod.php      | Dies ist die Konfiguration auf dem Server wo das System Produktiv läuft.
-| local.php     | Dies sind deine Einstellungen von deiner Entwicklungsmaschine, welche mit der *prep.php* gmerged werden.
+| prod.php      | Dies ist die Konfiguration auf dem Server auf dem das System produktiv läuft.
+| local.php     | Dies sind deine Einstellungen von deiner Entwicklungsmaschine, welche mit der *prep.php* gemerged werden.
 
 Datenbank
 ----------
@@ -58,8 +73,8 @@ Als nächstes führen wir den Setup-Befehl aus welcher einen Benutzer und Gruppe
 ```
 php index.php exec/setup
 ```
-Nach dem eingeben deiner Daten kannst du nun die Administration im Browser öffnen. Wenn du das Projekt in deinem `htdocs` Hauptverzeichniss erstellt hast könnte die Adresse zum Beispiel so aussehen `http://localhost/luya-kickstarter/admin`.
+Nach dem Eingeben deiner Daten kannst du nun die Administration im Browser öffnen. Wenn du das Projekt in deinem `htdocs` Hauptverzeichniss erstellt hast könnte die Adresse zum Beispiel so aussehen `http://localhost/luya-kickstarter/admin`.
 
-Wenn du dich eingeloggt hast kannst nun der *Administrator* Gruppe alle *Berechtigungen* erteilen.
+Wenn du dich eingeloggt hast, kannst nun der *Administrator* Gruppe alle *Berechtigungen* erteilen.
 
 Viel Spass!
