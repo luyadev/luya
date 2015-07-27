@@ -17,7 +17,12 @@ class CommandController extends \yii\console\Controller
             exit(0);
         }
         $moduleObject->controllerNamespace = $module .'\commands';
-        echo $moduleObject->runAction($route);
-        echo PHP_EOL;
+        $response = $moduleObject->runAction($route);
+        
+        if ($response === 0) {
+            exit(0);
+        }
+        
+        exit(1);
     }
 }
