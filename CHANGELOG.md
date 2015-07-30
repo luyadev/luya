@@ -3,6 +3,8 @@ LUYA CHANGELOG
 
 1.0.0-alpha14 (in progress)
 ---------------------------
+- added `cms\helpers\Url`.
+- added crawler moudle frontend controllers *DefaultController* and *RestController*
 
 1.0.0-alpha13 (30. Jul 2015)
 --------------------------
