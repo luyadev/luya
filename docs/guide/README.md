@@ -52,3 +52,10 @@ Modules
 --
 - module-overview.md
 - module-news.md
+- module-newsadmin.md
+- module-crawler.md
+- module-crawleradmin.md
+- module.errorapi.md
+- module-gallery.md
+- module-galleryadmin.md
+
