@@ -1,16 +1,18 @@
 <?php
 
-use \yii\helpers\Url;
+use yii\helpers\Url as YiiUrl;
+use cms\helpers\Url as CmsUrl;
 
 $composition = Yii::$app->composition;
 $links = Yii::$app->links;
+
 ?>
 <html>
     <head>
         <title>Luya &mdash; <?= $this->title; ?></title>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-        <base href="<?= Url::base(true); ?>/" />
+        <base href="<?= YiiUrl::base(true); ?>/" />
         <?php $this->head() ?>
     </head>
     <body>
@@ -18,8 +20,14 @@ $links = Yii::$app->links;
         <div id="header">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-8">
-                        <h1>Luya Website <small>on <?= Url::base(true); ?></small></h1>
+                    <div class="col-md-4">
+                        <h1>Luya Website <small>on <?= YiiUrl::base(true); ?></small></h1>
+                    </div>
+                    <div class="col-md-4">
+                        <form method="get" action="<?= CmsUrl::toModule('crawler'); ?>">
+                            <input type="text" name="query" />
+                            <input type="submit" value="Go" />
+                        </form>
                     </div>
                     <div class="col-md-4">
                         <div class="git pull-right">
