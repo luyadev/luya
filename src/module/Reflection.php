@@ -2,6 +2,7 @@
 
 namespace luya\module;
 
+use Yii;
 use luya\base\Module;
 
 /**
@@ -64,6 +65,10 @@ class Reflection
     public function responseContent()
     {
         $request = $this->getRequestResponse();
+        
+        if (count($request['args']) === 0) {
+            $request['args'] = Yii::$app->request->get(); // @todo should we find the action params and compare against get() request array?
+        }
         
         $request['route'] = $this->module->findControllerRoute($request['route']);
         
