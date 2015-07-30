@@ -1,6 +1,9 @@
 LUYA CHANGELOG
 ==============
 
+1.0.0-alpha14 (in progress)
+---------------------------
+
 1.0.0-alpha13 (30. Jul 2015)
 --------------------------
 - `storage->image->filterApply` does not return the image object by default anymore. Default return value is the source of the image object, to force the image object response us `true` as 3rd param.
