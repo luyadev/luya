@@ -15,6 +15,7 @@ APP (your luya project application)
 - app-blocks.md
 - app-block-types.md
 - app-cmslayouts.md
+- app-layout.md
 - app-menu.md
 - app-translation.md
 - app-module.md
