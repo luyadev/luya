@@ -83,6 +83,12 @@ class Article extends \admin\ngrest\base\Model
         return $articles;
     }
 
+    public function getCategoryName() {
+        $catModel = Cat::find()->where(['id' => $this->cat_id])->one();
+
+        return $catModel->title;
+    }
+
     // ngrest
 
     public $tags = []; // cause of extra fields - will pe parsed trough the ngrest plugins.
