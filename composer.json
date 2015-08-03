@@ -2,7 +2,7 @@
 	"name" : "zephir/luya",
 	"type" : "library",
 	"description" : "Zephir Luya Yii2 Cms",
-	"keywords" : ["php", "yii2", "cms", "admin", "modules"],
+	"keywords" : ["php", "yii2", "cms", "luya", "programmatic", "content", "angular"],
 	"homepage" : "https://github.com/zephir/luya",
 	"minimum-stability": "dev",
 	"authors" : [
@@ -30,6 +30,11 @@
 			"luya\\" : "src/"
 		}
 	},
+	"autoload-dev": {
+        "psr-4": {
+            "tests\\": "tests/"
+        }
+    },
 	"extra": {
     	"asset-installer-paths": {
             "bower-asset-library": "vendor/bower"

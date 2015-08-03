@@ -1,5 +1,6 @@
 *.bak
 .project
+phpunit.xml
 ### Eclipse ###
 *.pydevproject
 .metadata
