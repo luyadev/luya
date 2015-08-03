@@ -119,7 +119,7 @@ class UrlManager extends \yii\web\UrlManager
                     $context = true;
                     $options = $moduleObject->getContextOptions();
                     $link = $links->findOneByArguments(['id' => (int) $options['navItemId']]);
-                    $response = str_replace($moduleName, $composition.$link['url'], $response);
+                    $response = preg_replace("/$moduleName/", $composition.$link['url'], $response, 1);
                 }
             }
         }
