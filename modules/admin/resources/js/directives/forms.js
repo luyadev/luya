@@ -247,8 +247,15 @@ zaa.directive('zaaDatetime', function() {
 			}
 			
 			$scope.$watch(function() { return $scope.model }, function(n, o) {
-				if (n !== undefined && n != o) {
+				if (n !== undefined) {
 					var date = new Date(n*1000);
+					$scope.day = date.getDate(),
+					$scope.month = date.getMonth() + 1;
+					$scope.year = date.getFullYear();
+					$scope.min = date.getMinutes();
+					$scope.hour = date.getHours();
+				} else {
+					var date = new Date();
 					$scope.day = date.getDate(),
 					$scope.month = date.getMonth() + 1;
 					$scope.year = date.getFullYear();
@@ -289,8 +296,13 @@ zaa.directive('zaaDate', function() {
 			}
 			
 			$scope.$watch(function() { return $scope.model }, function(n, o) {
-				if (n !== undefined && n != o) {
+				if (n !== undefined) {
 					var date = new Date(n*1000);
+					$scope.day = date.getDate(),
+					$scope.month = date.getMonth() + 1;
+					$scope.year = date.getFullYear();
+				} else {
+					var date = new Date();
 					$scope.day = date.getDate(),
 					$scope.month = date.getMonth() + 1;
 					$scope.year = date.getFullYear();
