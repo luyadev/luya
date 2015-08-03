@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-alpha14 (in progress)
 ---------------------------
+- `#297`: added storage image component `getSource($imageId)` (`Yii::$app->storage->image->getSource(9)`).
 - added `cms\helpers\Url`.
 - added crawler moudle frontend controllers *DefaultController* and *RestController*.
 - fixed bug [a76eaf0](https://github.com/zephir/luya/commit/f89af2f4e3fe83de5cc154870ee9a48e636d32e6) where request get params are not bound to action when loading a module via `module/Reflection.php`.
