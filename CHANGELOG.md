@@ -1,7 +1,7 @@
 LUYA CHANGELOG
 ==============
 
-1.0.0-alpha14 (in progress)
+1.0.0-alpha14 (3. Aug 2015)
 ---------------------------
 - `#297`: added storage image component `getSource($imageId)` (`Yii::$app->storage->image->getSource(9)`).
 - added `cms\helpers\Url`.
