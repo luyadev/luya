@@ -108,6 +108,32 @@ class File
 
         return false;
     }
+    
+    private $_uploaderErrors = [
+        0 => 'There is no error, the file uploaded with success',
+        1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
+        2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
+        3 => 'The uploaded file was only partially uploaded',
+        4 => 'No file was uploaded',
+        6 => 'Missing a temporary folder',
+        7 => 'Failed to write file to disk.',
+        8 => 'A PHP extension stopped the file upload.',
+    ];
+    
+    public function uploadOneFromFiles(array $filesArray, $toFolder = 0)
+    {
+        $files = [];
+        foreach ($filesArray as $k => $file) {
+            if ($file['error'] !== UPLOAD_ERR_OK) {
+                return ['upload' => false, 'message' => $this->_uploaderErrors[$file['error']], 'file_id' => 0];
+            }
+            $create = $this->create($file['tmp_name'], $file['name'], false, $toFolder);
+            if ($create) {
+                return ['upload' => true, 'message' => 'file uploaded succesfully', 'file_id' => $create];
+            }
+        }
+        return ['upload' => false, 'message' => 'no files selected', 'file_id' => 0];
+    }
 
     public function allFromFolder($folderId)
     {
