@@ -83,9 +83,9 @@ class Article extends \admin\ngrest\base\Model
         return $articles;
     }
 
-    public function getCategoryName() {
+    public function getCategoryName() 
+    {
         $catModel = Cat::find()->where(['id' => $this->cat_id])->one();
-
         return $catModel->title;
     }
 
