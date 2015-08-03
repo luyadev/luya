@@ -6,6 +6,7 @@ LUYA CHANGELOG
 - added `cms\helpers\Url`.
 - added crawler moudle frontend controllers *DefaultController* and *RestController*.
 - fixed bug [a76eaf0](https://github.com/zephir/luya/commit/f89af2f4e3fe83de5cc154870ee9a48e636d32e6) where request get params are not bound to action when loading a module via `module/Reflection.php`.
+- fixed bug [a5d418c](https://github.com/zephir/luya/commit/2bd81a52a339527d8cfb0190de38a94ab004dfad) in link creation (createUrl), where url creation now replaces only the first occurrence.
 
 1.0.0-alpha13 (30. Jul 2015)
 --------------------------
