@@ -9,8 +9,6 @@ Mit diesen wenigen Schritten kannst du ganz einfach ein eigenes Luya Projekt ers
 composer global require "fxp/composer-asset-plugin:~1.0.1"
 ```
 
-Bitte beachte, ob du in deiner PHP-Konfiguration **short_open_tags** aktiviert hast ( `<?` statt `<?php` ), da diese in den *Views* verwendet werden.
-
 Als nächstes erstellen wir ein `Kickstarter` Projekte mit Hilfe des `composer create-project` Befehls. Dafür musst du lediglich dein *Terminal* öffnen und den folgenden Befehl eingeben:
 
 ```sh
@@ -66,3 +64,16 @@ Nach dem Eingeben deiner Daten kannst du nun die Administration im Browser öffn
 Wenn du dich eingeloggt hast, kannst nun der *Administrator* Gruppe alle *Berechtigungen* erteilen.
 
 Viel Spass!
+
+PHP Settings
+------------
+
+Bitte beachte, ob du in deiner PHP-Konfiguration **short_open_tags** aktiviert hast ( `<?` statt `<?php` ), da diese in den *Views* verwendet werden.
+
+|Konfiguration |Wert
+|--- |----
+|short_open_tags | 1
+|memory_limit |128
+|max_execution_time|60
+|post_max_size|16M
+|upload_max_filesize|16M
