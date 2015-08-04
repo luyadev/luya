@@ -370,10 +370,10 @@ zaa.directive('zaaTable', function() {
 			}
 		},
 		template : function() {
-			return  '<div>' +
+			return '<div>' +
 						'<button ng-click="addColumn()" type="button" style="float:right;">Spalte Rechts einfügen</button>'+
 						'<table>'+
-						'<thead><tr><td width="90"></td><td data-ng-repeat="(hk, hr) in model[0] track by hk"><strong>#{{hk+1}} <button type="button" ng-click="removeColumn(hk)" class="btn-floating"><i class="mdi-action-delete"></i></button></strong></td></tr></thead>' +
+						'<thead><tr><td width="90"></td><td data-ng-repeat="(hk, hr) in model[0] track by hk"><strong><button type="button" ng-click="removeColumn(hk)" class="btn-floating"><i class="mdi-action-delete"></i></button></strong></td></tr></thead>' +
 						'<tr data-ng-repeat="(key, row) in model track by key"><td>#{{key+1}} <button type="button" class="btn-floating" ng-click="removeRow(key)"><i class="mdi-action-delete"></i></button></td><td data-ng-repeat="(field,value) in row track by field"><input type="text" ng-model="model[key][field]" /></td></tr>'+
 						'</table><button ng-click="addRow()" type="button">Neue Zeile einfügen</button>'+
 					'</div>';
