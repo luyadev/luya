@@ -337,16 +337,19 @@ zaa.directive('zaaTable', function() {
 				$scope.model = [{}];
 			}
 			
-			$scope.addColumn = function(name) {
-				$scope.columnName = null;
+			$scope.addColumn = function() {
+				var len = 0;
+				for (var o in $scope.model[0]) {
+					len++;
+				}
+				
 				for(var i in $scope.model) {
-					 $scope.model[i][name] = '';
+					 $scope.model[i][len] = '';
 				}
 			}
 			
 			$scope.addRow = function() {
 				var elmn = $scope.model[0];
-				console.log(elmn);
 				var ins = {};
 				for (var i in elmn) {
 					ins[i] = '';
@@ -354,12 +357,24 @@ zaa.directive('zaaTable', function() {
 				
 				$scope.model.push(ins);
 			}
+			
+			$scope.removeColumn = function(key) {
+				for (var i in $scope.model) {
+					var item = $scope.model[i];
+					item.splice(key, 1);
+				}
+			}
+			
+			$scope.removeRow = function(key) {
+				$scope.model.splice(key, 1);
+			}
 		},
 		template : function() {
 			return  '<div>' +
-						'<table class="bordered">'+
-						'<thead><tr><td width="90"><b>Spalten:</b></td><td data-ng-repeat="(hk, hr) in model[0]"><strong>{{hk}}</strong></td><td width="240"><input type="text" ng-model="columnName" style="width:140px;" /><button ng-click="addColumn(columnName)" type="button">Anfügen</button></td></tr></thead>' +
-						'<tr data-ng-repeat="(key, row) in model"><td>#{{key+1}}</td><td style="background-color:#e1e1e1;" data-ng-repeat="(field,value) in row"><input type="text" ng-model="model[key][field]" /></td></tr>'+
+						'<button ng-click="addColumn()" type="button" style="float:right;">Spalte Rechts einfügen</button>'+
+						'<table>'+
+						'<thead><tr><td width="90"></td><td data-ng-repeat="(hk, hr) in model[0] track by hk"><strong>#{{hk+1}} <button type="button" ng-click="removeColumn(hk)" class="btn-floating"><i class="mdi-action-delete"></i></button></strong></td></tr></thead>' +
+						'<tr data-ng-repeat="(key, row) in model track by key"><td>#{{key+1}} <button type="button" class="btn-floating" ng-click="removeRow(key)"><i class="mdi-action-delete"></i></button></td><td data-ng-repeat="(field,value) in row track by field"><input type="text" ng-model="model[key][field]" /></td></tr>'+
 						'</table><button ng-click="addRow()" type="button">Neue Zeile einfügen</button>'+
 					'</div>';
 		}
