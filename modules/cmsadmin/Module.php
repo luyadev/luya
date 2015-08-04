@@ -37,10 +37,10 @@ class Module extends \admin\base\Module
             ->node('CMS-Einstellungen', 'mdi-action-settings')
                 ->group('Seitenvorlagen')
                     ->itemApi('Kategorien', 'cmsadmin-cat-index', 'mdi-device-storage', 'api-cms-cat')
-                    ->itemApi('Layout', 'cmsadmin-layout-index', 'mdi-action-aspect-ratio', 'api-cms-layout')
-                ->group('Blöcke')
-                    ->itemApi('Gruppen', 'cmsadmin-blockgroup-index', 'mdi-content-content-copy', 'api-cms-blockgroup')
-                    ->itemApi('Verwalten', 'cmsadmin-block-index', 'mdi-editor-format-align-left', 'api-cms-block')
+                    ->itemApi('Layouts', 'cmsadmin-layout-index', 'mdi-action-aspect-ratio', 'api-cms-layout')
+                ->group('Inhaltselemente')
+                    ->itemApi('Blockgruppen', 'cmsadmin-blockgroup-index', 'mdi-content-content-copy', 'api-cms-blockgroup')
+                    ->itemApi('Blöcke Verwalten', 'cmsadmin-block-index', 'mdi-editor-format-align-left', 'api-cms-block')
             ->menu();
     }
 
