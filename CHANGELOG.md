@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-alpha15 (in progress)
 ---------------------------
+- added new `zaaTable` and `TableBlock` class.
 
 1.0.0-alpha14 (3. Aug 2015)
 ---------------------------
