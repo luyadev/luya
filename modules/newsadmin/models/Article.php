@@ -55,7 +55,6 @@ class Article extends \admin\ngrest\base\Model
         $this->update_user_id = Yii::$app->adminuser->getId();
         $this->timestamp_create = time();
         $this->timestamp_update = time();
-        $this->timestamp_display_from = time();
     }
 
     public function getDetailUrl($contextNavItemId = null)
