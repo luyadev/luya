@@ -6,7 +6,7 @@ Dein Luya Projekt
 Mit diesen wenigen Schritten kannst du ganz einfach ein eigenes Luya Projekt erstellen. Um Luya installieren zu können, musst du `composer` auf deinem Mac, Linux oder Unix Computer installiert haben.
 
 ```sh
-composer global require "fxp/composer-asset-plugin:~1.0.1"
+composer global require "fxp/composer-asset-plugin:~1.0.3"
 ```
 
 Als nächstes erstellen wir ein `Kickstarter` Projekte mit Hilfe des `composer create-project` Befehls. Dafür musst du lediglich dein *Terminal* öffnen und den folgenden Befehl eingeben:
