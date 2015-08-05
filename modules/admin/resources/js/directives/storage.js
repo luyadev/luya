@@ -184,7 +184,7 @@ zaa.directive('storageImageUpload', function($http, ApiAdminFilter, ImageIdServi
 			};
 			
 			scope.$watch(function() { return scope.filterId }, function(n, o) {
-				if (n != 0 && n !== undefined && scope.fileId !== 0) {
+				if (n != null && n !== undefined && scope.fileId !== 0) {
 					scope.filterApply();
 				}
 			});
