@@ -8,8 +8,10 @@ class m150601_105400_gallery_cat extends Migration
     public function up()
     {
         $this->createTable('gallery_cat', [
-            "id" => "pk",
-            "title" => "VARCHAR(120) NOT NULL",
+            'id' => 'pk',
+            'title' => 'VARCHAR(120) NOT NULL',
+            'cover_image_id' => 'int(11) NOT NULL default 0',
+            'description' => 'text',
         ]);
     }
 
