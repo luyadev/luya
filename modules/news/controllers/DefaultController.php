@@ -17,7 +17,7 @@ class DefaultController extends \luya\base\Controller
 
     public function actionDetail($id, $title)
     {
-        $model = \newsadmin\models\Article::find($id)->one();
+        $model = \newsadmin\models\Article::findOne($id);
 
         return $this->render('detail', [
             'model' => $model,
