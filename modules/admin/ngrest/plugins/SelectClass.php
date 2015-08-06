@@ -17,10 +17,10 @@ class SelectClass extends \admin\ngrest\plugins\Select
 
         $this->initValue = $initValue;
         
-        foreach ($class::find()->asArray()->all() as $item) {
+        foreach ($class::find()->all() as $item) {
             $this->data[] = [
-                'value' => (int) $item[$valueField],
-                'label' => $item[$labelField],
+                'value' => (int) $item->$valueField,
+                'label' => $item->$labelField,
             ];
         }
     }
