@@ -11,6 +11,8 @@ class Main extends \luya\base\Asset
     ];
 
     public $js = [
+        'js/materialize.min.js', // original jquery
+        'js/ng-materialize.js', // angular wrapper
         'js/zaa.js',
         'js/factorys.js',
         'js/controllers/LayoutMenuController.js',
@@ -19,9 +21,6 @@ class Main extends \luya\base\Asset
         'js/controllers/CrudController.js',
         'js/directives/forms.js',
         'js/directives/storage.js',
-        
-        'js/materialize.min.js', // original jquery
-        'js/ng-materialize.js', // angular wrapper
     ];
 
     public $depends = [

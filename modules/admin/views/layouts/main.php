@@ -277,7 +277,7 @@
 
         <!-- /ANGULAR SCRIPTS -->
 
-        <div class="luya-container">
+        <div class="luya-container ng-cloak">
 
             <div class="navbar-fixed">
                 <nav>
@@ -353,7 +353,7 @@
                 </table>
             </div>
             
-            <div ng-show="showOnlineContainer" class="useronline__modal" >
+            <div ng-show="showOnlineContainer" class="useronline__modal">
                 <table>
                     <thead>
                         <tr>
