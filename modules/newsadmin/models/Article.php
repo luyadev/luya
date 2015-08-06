@@ -23,7 +23,7 @@ class Article extends \admin\ngrest\base\Model
     {
         return [
            'restcreate' => ['title', 'text', 'cat_id', 'image_id', 'image_list', 'tags', 'timestamp_display_from', 'timestamp_display_until', 'file_list'],
-           'restupdate' => ['title', 'text', 'cat_id', 'image_id', 'image_list', 'tags', 'timestamp_display_from', 'timestamp_display_until', 'is_display_limit', 'file_list'],
+           'restupdate' => ['title', 'text', 'cat_id', 'image_id', 'image_list', 'tags', 'timestamp_create', 'timestamp_display_from', 'timestamp_display_until', 'is_display_limit', 'file_list'],
        ];
     }
 
