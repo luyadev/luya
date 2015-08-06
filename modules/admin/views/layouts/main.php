@@ -130,10 +130,10 @@
                     <!-- FOLDER LIST -->
                     <ul class="filemanager__folders">
                         <li class="filemanager__folder" ng-class="{'active' : currentFolderId == 0 }">
-                            <div class="filemanager__folder-button">
+                            <div class="filemanager__folder-button" ng-click="loadFolder(0)">
                                 <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
                                 <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
-                                <span ng-click="loadFolder(0)">Stammverzeichnis</span>
+                                <span>Stammverzeichnis</span>
                             </div>
                             <ul class="filemanager__folders" ng-if="folders.length > 0">
                                 <li class="filemanager__folder" ng-class="{'active' : currentFolderId == folder.data.id }" ng-repeat="folder in folders" ng-include="'reverseFolders'"></li>
