@@ -113,22 +113,16 @@ class StorageController extends \admin\base\RestController
         return Yii::$app->storage->folder->getFolderTree();
     }
     
-    /*
-    public function actionFilemanager($folderId = 0)
-    {
-        return [
-            'breadcrumbs' => Yii::$app->storage->folder->breadcrumbs($folderId),
-            'folders' => Yii::$app->storage->folder->getFolderTree(),
-            'files' => Yii::$app->storage->file->allFromFolder($folderId),
-        ];
-    }
-    */
-
     public function actionFolderCreate()
     {
         $folderName = Yii::$app->request->post('folderName', null);
         $parentFolderId = Yii::$app->request->post('parentFolderId', 0);
 
         return Yii::$app->storage->folder->createFolder($folderName, $parentFolderId);
+    }
+    
+    public function actionFolderUpdate($folderId)
+    {
+        return Yii::$app->storage->folder->updateFolder($folderId, Yii::$app->request->post());
     }
 }

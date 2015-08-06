@@ -2,16 +2,29 @@
 
 namespace admin\storage;
 
+use admin\models\StorageFolder;
+use admin\models\admin\models;
+
 class Folder
 {
     public function createFolder($folderName, $parentFolderId = 0)
     {
-        $model = new \admin\models\StorageFolder();
+        $model = new StorageFolder();
         $model->name = $folderName;
         $model->parent_id = $parentFolderId;
         $model->timestamp_create = time();
 
         return $model->save();
+    }
+    
+    public function updateFolder($folderId, array $fields)
+    {
+        $model = StorageFolder::findOne($folderId);
+        if (!$model) {
+            return false;
+        }
+        $model->attributes = $fields;
+        return $model->update();
     }
 
     public function getSubFolders($parentFolderId)

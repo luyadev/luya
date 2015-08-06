@@ -95,8 +95,9 @@
                     <div class="filemanager__folder-button" ng-click="loadFolder(folder.data.id)">
                         <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
                         <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
-                        <i class="mdi-editor-mode-edit filemanager__edit-icon"></i>
-                        <span>{{folder.data.name }}</span>
+                        <i class="mdi-editor-mode-edit filemanager__edit-icon" ng-click="folder.edit=!folder.edit"></i>
+                        <span ng-show="!folder.edit">{{folder.data.name }}</span>
+                        <span ng-show="folder.edit"><input type="text" ng-model="folder.data.name" /><button type="button" ng-click="updateFolder(folder)">Speichern</button></span>
                     </div>
                     <ul class="filemanager__folders" ng-if="folder.__items.length > 0">
                         <li class="filemanager__folder"  ng-class="{'active' : currentFolderId == folder.data.id }" ng-repeat="folder in folder.__items"  ng-include="'reverseFolders'"></li>
