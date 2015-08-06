@@ -3,16 +3,18 @@ LUYA CHANGELOG
 
 1.0.0-alpha15 (in progress)
 ---------------------------
-- upgrade to yii version `2.0.6`.
-- added new `zaaTable` and `TableBlock` class.
+- [51fca3d](https://github.com/zephir/luya/commit/51fca3ddafb8c4e55d3f460b76b21e9f839a49b2) fixed bug in link creation (createUrl), where url creation now replaces only the first occurrence in context mode.
+- [08aded0](https://github.com/zephir/luya/commit/08aded018e0a42df190895bb4156cebffd4fef12) upgrade to yii version `2.0.6`.
+- [48d2b9d](https://github.com/zephir/luya/commit/48d2b9dac8851ef1bd3d8c0c564d5d49def36520) added new `zaaTable` and `TableBlock` class.
+
 
 1.0.0-alpha14 (3. Aug 2015)
 ---------------------------
 - `#297`: added storage image component `getSource($imageId)` (`Yii::$app->storage->image->getSource(9)`).
 - added `cms\helpers\Url`.
 - added crawler module frontend controllers *DefaultController* and *RestController*.
-- fixed bug [a76eaf0](https://github.com/zephir/luya/commit/f89af2f4e3fe83de5cc154870ee9a48e636d32e6) where request get params are not bound to action when loading a module via `module/Reflection.php`.
-- fixed bug [a5d418c](https://github.com/zephir/luya/commit/2bd81a52a339527d8cfb0190de38a94ab004dfad) in link creation (createUrl), where url creation now replaces only the first occurrence.
+- [a76eaf0](https://github.com/zephir/luya/commit/f89af2f4e3fe83de5cc154870ee9a48e636d32e6) fixed bug where request get params are not bound to action when loading a module via `module/Reflection.php`.
+- [a5d418c](https://github.com/zephir/luya/commit/2bd81a52a339527d8cfb0190de38a94ab004dfad) fixed bug in link creation (createUrl), where url creation now replaces only the first occurrence.
 
 1.0.0-alpha13 (30. Jul 2015)
 --------------------------
