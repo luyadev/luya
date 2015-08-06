@@ -14,15 +14,15 @@ class Cat extends \admin\ngrest\base\Model
     public function rules()
     {
         return [
-            [['title'], 'required'],
+            ['title', 'required', 'message' => 'Bitte geben Sie einen Titel an.'],
         ];
     }
 
     public function scenarios()
     {
         return [
-            'restcreate' => ['title'],
-            'restupdate' => ['title'],
+            'restcreate' => ['title', 'cover_image_id', 'description'],
+            'restupdate' => ['title', 'cover_image_id', 'description'],
         ];
     }
 
@@ -59,9 +59,14 @@ class Cat extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
+        //var_dump($config);
         $config->list->field('title', 'Kategoriename')->text();
+        $config->list->field('description', 'Beschreibung')->text();
+
+
         $config->create->copyFrom('list', ['id']);
-        $config->update->copyFrom('list', ['id']);
+        $config->create->field('cover_image_id', 'Cover-Bild')->image();
+        $config->update->copyFrom('create');
 
         $config->delete = true;
 
