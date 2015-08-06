@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-alpha15 (in progress)
 ---------------------------
+- `#315` added ngrest plugin `checkboxRelation` display array parameters and render template string.
 - [5eceab0](https://github.com/zephir/luya/commit/5eceab0efd7e23e0a66c1f84d8f2bdabc1d71d87) added ability to search for element blocks inside cms.
 - [51fca3d](https://github.com/zephir/luya/commit/51fca3ddafb8c4e55d3f460b76b21e9f839a49b2) fixed bug in link creation (createUrl), where url creation now replaces only the first occurrence in context mode.
 - [08aded0](https://github.com/zephir/luya/commit/08aded018e0a42df190895bb4156cebffd4fef12) upgrade to yii version `2.0.6`.
