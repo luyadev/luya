@@ -240,9 +240,10 @@
 
             <div class="blockholder" ng-controller="DroppableBlocksController">
                 <div class="col s12">
+                    <input type="text" ng-model="search" style="color:white;" />
                     <div class="blockholder__group" ng-repeat="item in DroppableBlocksService.blocks">
                         <b class="blockholder__group-title">{{item.group.name}}</b>
-                        <div class="blockholder__block" ng-repeat="block in item.blocks" data-drag="true" jqyoui-draggable="{placeholder: 'keep', index : {{$index}}, onStart : 'onStart', onStop : 'onStop'}" ng-model="item.blocks" data-jqyoui-options="{revert: false, snapTolerance : 40, helper : 'clone', cursor:'move', cursorAt: { top: 0, left: 0 }}">
+                        <div class="blockholder__block" ng-repeat="block in item.blocks | filter:search" data-drag="true" jqyoui-draggable="{placeholder: 'keep', index : {{$index}}, onStart : 'onStart', onStop : 'onStop'}" ng-model="item.blocks" data-jqyoui-options="{revert: false, snapTolerance : 40, helper : 'clone', cursor:'move', cursorAt: { top: 0, left: 0 }}">
                             <span ng-bind-html="safe(block.name)"></span>
                         </div>
                     </div>
