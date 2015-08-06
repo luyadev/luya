@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-alpha15 (in progress)
 ---------------------------
+- upgrade to yii version `2.0.6`.
 - added new `zaaTable` and `TableBlock` class.
 
 1.0.0-alpha14 (3. Aug 2015)
