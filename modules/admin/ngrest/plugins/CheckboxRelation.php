@@ -20,25 +20,37 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
     public $refModelPkId = null;
 
     public $refJoinPkId = null;
+    
+    public $displayFields = null;
+    
+    public $displayTemplate = null;
+    
     /**
      * @param unknown $model        \news\models\Tag::className()
      * @param unknown $refJoinTable news_article_tag
      * @param unknown $refModelPkId news_article_tag.arictle_id
      * @param unknown $refJoinPkId  news_article_tag.tag_id
      */
-    public function __construct($model, $refJoinTable, $refModelPkId, $refJoinPkId)
+    public function __construct($model, $refJoinTable, $refModelPkId, $refJoinPkId, array $displayFields, $displayTemplate = null)
     {
         $this->model = new $model();
         $this->refJoinTable = $refJoinTable;
         $this->refModelPkId = $refModelPkId;
         $this->refJoinPkId = $refJoinPkId;
+        $this->displayFields = $displayFields;
+        $this->displayTemplate = $displayTemplate;
     }
 
     private function getOptionsData()
     {
         $items = [];
-        foreach ($this->model->find()->all() as $item) {
-            $items[] = ['id' => $item->id, 'label' => implode(' | ', $item->toArray())];
+        foreach ($this->model->find()->select($this->displayFields)->all() as $item) {
+            if ($this->displayTemplate) {
+                $label = vsprintf($this->displayTemplate, $item->toArray());
+            } else {
+                $label = implode(', ', $item->toArray());
+            }
+            $items[] = ['id' => $item->id, 'label' => $label];
         }
         
         return ['items' => $items];
