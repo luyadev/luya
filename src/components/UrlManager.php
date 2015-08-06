@@ -105,8 +105,7 @@ class UrlManager extends \yii\web\UrlManager
         if ($this->getContextNavItemId() && $links !== null) {
             $link = $links->findOneByArguments(['id' => (int) $this->getContextNavItemId()]);
             $this->resetContext();
-
-            return str_replace($moduleName, $composition.$link['url'], $response);
+            return preg_replace("/$moduleName/", $composition.$link['url'], $response, 1);
         }
 
         $context = false;
