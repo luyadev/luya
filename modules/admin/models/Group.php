@@ -74,7 +74,7 @@ class Group extends \admin\ngrest\base\Model
         $config->list->field('text', 'Beschreibung')->textarea();
 
         $config->create->copyFrom('list', ['id']);
-        $config->create->extraField('users', 'Benutzer')->checkboxRelation(\admin\models\User::className(), 'admin_user_group', 'group_id', 'user_id');
+        $config->create->extraField('users', 'Benutzer')->checkboxRelation(\admin\models\User::className(), 'admin_user_group', 'group_id', 'user_id', ['firstname', 'lastname', 'email'], '%s %s (%s)');
 
         $config->update->copyFrom('create');
 
