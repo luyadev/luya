@@ -42,6 +42,17 @@ class Album extends \admin\ngrest\base\Model
         (new \yii\db\Query())->createCommand()->delete('gallery_album_image', 'album_id = :albumId', [':albumId' => $this->id])->execute();
     }
 
+    public function getCategoryUrl()
+    {
+        $category = Cat::findOne($this->cat_id);
+        return \luya\helpers\Url::to('gallery/alben/index', ['catId' => $category->id, 'title' => \yii\helpers\Inflector::slug($category->title)]);
+    }
+
+    public function getCategoryName()
+    {
+        $category = Cat::findOne($this->cat_id);
+        return $category->title;
+    }
 
     public function getDetailUrl($contextNavItemId = null)
     {
