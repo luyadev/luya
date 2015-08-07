@@ -101,7 +101,6 @@ class Article extends \admin\ngrest\base\Model
         return 'api-news-article';
     }
 
-
     public function ngRestConfig($config)
     {
         $config->list->field('cat_id', 'Kategorie')->selectClass('\newsadmin\models\Cat', 'id', 'title');
