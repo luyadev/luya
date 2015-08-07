@@ -31,13 +31,6 @@ class Cat extends \admin\ngrest\base\Model
         return ['title' => 'Kategoriename'];
     }
 
-    /* ngrest model properties */
-
-    public function ngRestApiEndpoint()
-    {
-        return 'api-gallery-cat';
-    }
-
     public function init()
     {
         parent::init();
@@ -55,6 +48,15 @@ class Cat extends \admin\ngrest\base\Model
         }
 
         $event->isValid = true;
+    }
+
+    // ngrest
+
+    public $i18n = ['title', 'description'];
+
+    public function ngRestApiEndpoint()
+    {
+        return 'api-gallery-cat';
     }
 
     public function ngRestConfig($config)

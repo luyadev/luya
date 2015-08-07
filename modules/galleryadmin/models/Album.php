@@ -9,11 +9,6 @@ class Album extends \admin\ngrest\base\Model
         return 'gallery_album';
     }
 
-    public function ngRestApiEndpoint()
-    {
-        return 'api-gallery-album';
-    }
-
     public function scenarios()
     {
         return [
@@ -55,6 +50,15 @@ class Album extends \admin\ngrest\base\Model
     public function images()
     {
         return (new \yii\db\Query())->from('gallery_album_image')->where(['album_id' => $this->id])->all();
+    }
+
+    // ngrest
+
+    public $i18n = ['title', 'description'];
+
+    public function ngRestApiEndpoint()
+    {
+        return 'api-gallery-album';
     }
 
     public function ngRestConfig($config)
