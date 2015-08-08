@@ -17,11 +17,6 @@ class Cat extends \admin\ngrest\base\Model
         ];
     }
 
-    public function ngRestApiEndpoint()
-    {
-        return 'api-news-cat';
-    }
-
     public function rules()
     {
         return [['title', 'required', 'message' => 'Bitte geben Sie einen Kategorienamen ein.']];
@@ -51,6 +46,14 @@ class Cat extends \admin\ngrest\base\Model
         $event->isValid = true;
     }
 
+    // ngrest
+
+    public $i18n = ['title'];
+
+    public function ngRestApiEndpoint()
+    {
+        return 'api-news-cat';
+    }
 
     public function ngRestConfig($config)
     {
