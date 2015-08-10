@@ -300,6 +300,15 @@ zaa.controller("PageBlockEditController", function($scope, $sce, $http, ApiCmsNa
 		});
 	};
 	
+	
+	$scope.isEditable = function() {
+		if ($scope.block.vars.length > 0 || $scope.block.cfgs.length > 0) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 	$scope.safe = function(html) {
 		return $sce.trustAsHtml(html);
 	}
@@ -321,11 +330,14 @@ zaa.controller("PageBlockEditController", function($scope, $sce, $http, ApiCmsNa
 	$scope.edit = false;
 	
 	$scope.toggleEdit = function() {
+		if (!$scope.isEditable()) {
+			return;
+		}
 		/* onclick="$(this).parents('.block').toggleClass('block--edit');" */
 		$scope.edit = !$scope.edit;
 	};
 	
-	$scope.renderTemplate = function(template, dataVars, cfgVars, block, extras) {		
+	$scope.renderTemplate = function(template, dataVars, cfgVars, block, extras) {
 		if (template == undefined) {
 			return '';
 		}
