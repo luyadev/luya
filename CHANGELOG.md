@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **Database upgrade 1.0.0-alpha15-upgrade.sql**
 
+- [#296](https://github.com/zephir/luya/issues/296) added ability to set no filter selection in image upload Plugin `image(false)` in `ngRestConfig()`.
 - [#327](https://github.com/zephir/luya/issues/327) fixed bug where i18n select model labels are _ngrestCall behavior appended, see if label is an array an return first occurrence.
 - [#323](https://github.com/zephir/luya/issues/323) fixed bug where checkboxReleation id have not been delivered.
 - [#309](https://github.com/zephir/luya/issues/309) added ability to remove and move files in filemanager.
