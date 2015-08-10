@@ -58,6 +58,15 @@ class StorageController extends \admin\base\RestController
         return true;
     }
     
+    public function actionFilesMove()
+    {
+        $toFolderId = Yii::$app->request->post('toFolderId', 0);
+        $fileIds = Yii::$app->request->post('fileIds', []);
+        
+        return Yii::$app->storage->file->moveFilesToFolder($fileIds, $toFolderId);
+    }
+    
+    
     /*
     public function actionFilesUploadFlow()
     {

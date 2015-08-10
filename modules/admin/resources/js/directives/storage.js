@@ -249,6 +249,8 @@ zaa.directive("storageFileManager", function(FileListeService, Upload, Filemanag
 			
 			$scope.uploading = false;
 			
+			$scope.showFoldersToMove = false;
+			
 			$scope.serverProcessing = false;
 			
 			$scope.uploadResults = null;
@@ -309,7 +311,18 @@ zaa.directive("storageFileManager", function(FileListeService, Upload, Filemanag
 			}
 			
 			$scope.moveFilesTo = function(folder) {
-				console.log(folder);
+				$http.post('admin/api-admin-storage/files-move', $.param({'fileIds' : $scope.selectedFiles, 'toFolderId' : folder.id}), {
+		        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+		        }).success(function(transport) {
+		        	$scope.showFoldersToMove = false;
+					$scope.clearSelection();
+					
+					$scope.getFiles($scope.currentFolderId, true);
+					
+					FileListeService.get(folder.id, true).then(function(r) {
+					});
+					
+		        });
 			}
 			
 			$scope.updateFolder = function(folder) {
@@ -400,6 +413,7 @@ zaa.directive("storageFileManager", function(FileListeService, Upload, Filemanag
             }
 			
 			$scope.loadFolder = function(folderId) {
+				$scope.showFoldersToMove = false;
 				$scope.clearSelection();
 				FilemanagerFolderService.set(folderId);
 				$scope.currentFolderId = folderId;

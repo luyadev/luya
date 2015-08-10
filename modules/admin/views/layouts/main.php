@@ -95,11 +95,13 @@
         </script>
 
         <script type="text/ng-template" id="reverseFolders">
-                    <div class="filemanager__folder-button" ng-click="loadFolder(folder.data.id)">
+                    <div class="filemanager__folder-button">
                         <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
                         <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
                         <i class="mdi-editor-mode-edit filemanager__edit-icon" ng-click="folder.edit=!folder.edit"></i>
-                        <span ng-show="!folder.edit">{{folder.data.name }}</span>
+                        <span ng-show="!folder.edit"><span ng-click="loadFolder(folder.data.id)">{{folder.data.name }}</span>
+                            <button ng-click="moveFilesTo(folder.data)" ng-show="showFoldersToMove && currentFolderId != folder.data.id" type="button">{{selectedFiles.length}} Dateien verschieben</button>
+                        </span>
                         <span ng-show="folder.edit"><input type="text" ng-model="folder.data.name" /><button type="button" ng-click="updateFolder(folder)">Speichern</button></span>
                     </div>
                     <ul class="filemanager__folders" ng-if="folder.__items.length > 0">
@@ -233,6 +235,7 @@
                     </div>
 
                     <button ng-show="selectedFiles.length > 0" ng-click="removeSelectedItems()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
+                    <button ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove">Verschieben nach</button>
 
                     <table class="filemanager__table striped hoverable">
                         <thead>
@@ -274,6 +277,7 @@
                     </table>
 
                     <button ng-show="selectedFiles.length > 0" ng-click="removeSelectedItems()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
+                    <button ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove">Verschieben nach</button>
 
                 </div>
                 <!-- FILES & FOLDERS -->

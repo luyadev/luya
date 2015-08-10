@@ -195,8 +195,17 @@ class File
         return StorageFile::find()->where(['id' => $fileId, 'is_deleted' => 0])->one();
     }
 
+    public function moveFilesToFolder($fileIds, $folderId)
+    {
+        foreach($fileIds as $fileId) {
+            $this->moveFileToFolder($fileId, $folderId);
+        }   
+    }
+    
     public function moveFileToFolder($fileId, $folderId)
     {
-        
+        $file = StorageFile::findOne($fileId);
+        $file->folder_id = $folderId;
+        return $file->update(false);
     }
 }
