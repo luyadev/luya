@@ -115,10 +115,10 @@ class Article extends \admin\ngrest\base\Model
 
         $config->update->field('is_display_limit', 'News Anzeige zeitlich einschränken:')->toggleStatus();
         $config->update->field('timestamp_display_until', 'News anzeigen bis')->date();
-
         $config->update->field('image_id', 'Bild')->image();
         $config->update->field('image_list', 'Bild Liste')->imageArray();
         $config->update->field('file_list', 'Datei Liste')->fileArray();
+        
         $config->update->extraField('tags', 'Tags')->checkboxRelation(\newsadmin\models\Tag::className(), 'news_article_tag', 'article_id', 'tag_id', ['title']);
 
         $config->delete = true;
