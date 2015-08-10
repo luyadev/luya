@@ -68,7 +68,10 @@
 
                 <storage-file-upload ng-model="fileId"></storage-file-upload>
 
-                <div class="imageupload__filter">
+                <div ng-show="originalFileIsRemoved">
+                    <div class="alert alert--danger">Die Originale Datei wurde entfernt. Sie können keine Filter anwenden ohne original Datei. Laden Sie eine neue Datei hoch und Filter anzuwenden.</div>
+                </div>
+                <div class="imageupload__filter" ng-show="!originalFileIsRemoved">
                     <label>Filter Auswahl</label>
                     <select name="filterId" ng-model="filterId" class="browser-default"><option value="0">Kein Filter</option><option ng-repeat="item in filters" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
                 </div><!--
@@ -229,6 +232,8 @@
 
                     </div>
 
+                    <button ng-show="selectedFiles.length > 0" ng-click="removeSelectedItems()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
+
                     <table class="filemanager__table striped hoverable">
                         <thead>
                             <tr>
@@ -267,6 +272,8 @@
 
                         </tbody>
                     </table>
+
+                    <button ng-show="selectedFiles.length > 0" ng-click="removeSelectedItems()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
 
                 </div>
                 <!-- FILES & FOLDERS -->

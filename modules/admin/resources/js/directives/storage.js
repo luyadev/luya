@@ -33,7 +33,6 @@ zaa.factory('FileIdService', function($http, $q) {
 			} else {
 				$http.get('admin/api-admin-storage/file-path', { params: { fileId : fileId } }).success(function(response) {
 					service.data[fileId] = response;
-					//console.log('request NOT EXISTING fileId', fileId);
 					resolve(response);
 				}).error(function(response) {
 					console.log('Error while loading fileID ' + fileId, response);
@@ -154,43 +153,58 @@ zaa.directive('storageImageUpload', function($http, ApiAdminFilter, ImageIdServi
 			scope.fileId = 0;
 			scope.filterId = 0;
 			scope.imageinfo = null;
+			
 			scope.filters = ApiAdminFilter.query();
+			scope.originalFileIsRemoved = false;
+			
+			scope.lastapplyFileId = 0;
+			scope.lastapplyFilterId = 0;
 			
 			scope.filterApply = function() {
+				
 				if (scope.fileId == 0) {
 					alert('Sie müssen zuerst eine Datei auswählen um den Filter anzuwenden.');
 					return;
 				}
-
+				
+				if (scope.lastapplyFileId == scope.fileId && scope.lastapplyFilterId == scope.filterId) {
+					return;
+				}
+				
+				scope.originalFileIsRemoved = false;
+				
                 scope.imageLoading = true;
 
+                scope.lastapplyFileId = scope.fileId;
+                scope.lastapplyFilterId = scope.filterId;
+                
 				$http.post('admin/api-admin-storage/image-upload', $.param({ fileId : scope.fileId, filterId : scope.filterId }), {
 		        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 		        }).success(function(success) {
 		        	if (!success) {
 		        		alert('Beim Anwenden des Filters auf die Datei ist ein Fehler Passiert');
-		        		console.log(success);
 		        	} else {
+		        		if (success.image.file_is_deleted == 1) {
+		        			scope.originalFileIsRemoved = true;
+		        		}
 		        		scope.ngModel = success.id;
 		        	}
 
                     scope.imageLoading = false;
 				}).error(function(error) {
 					alert('Beim Anwenden des Filters auf die Datei ist ein Fehler Passiert');
-	        		console.log(error);
-
                     scope.imageLoading = false;
 				});
 			};
 			
 			scope.$watch(function() { return scope.filterId }, function(n, o) {
-				if (n != null && n !== undefined && scope.fileId !== 0) {
+				if (n != null && n !== undefined && scope.fileId !== 0 && n !== o) {
 					scope.filterApply();
 				}
 			});
 			
 			scope.$watch(function() { return scope.fileId }, function(n, o) {
-				if (n != 0 && n !== undefined) {
+				if (n != 0 && n !== undefined && n !== o) {
 					scope.filterApply();
 				}
 			});
@@ -307,8 +321,9 @@ zaa.directive("storageFileManager", function(FileListeService, Upload, Filemanag
 			}
 			
 			$scope.toggleSelection = function(file) {
-				if($scope.allowSelection == 'true') {
+				if ($scope.allowSelection == 'true') {
 					$scope.selectFile(file);
+					return;
 				}
 
 				var i = $scope.selectedFiles.indexOf(file.id);
@@ -320,8 +335,8 @@ zaa.directive("storageFileManager", function(FileListeService, Upload, Filemanag
 			}
 
 			$scope.toggleSelectionAll = function() {
-				if($scope.allowSelection == 'false') {
-					if($scope.selectedFiles.length > 0 && $scope.selectedFiles.length != $scope.files.length) {
+				if ($scope.allowSelection == 'false') {
+					if ($scope.selectedFiles.length > 0 && $scope.selectedFiles.length != $scope.files.length) {
 						$scope.selectedFiles = [];
 					}
 
@@ -339,6 +354,19 @@ zaa.directive("storageFileManager", function(FileListeService, Upload, Filemanag
 				}
 				
 				return false;
+			}
+			
+			$scope.removeSelectedItems = function() {
+				cfm = confirm("Möchten Sie diese Datei wirklich entfernen?");
+				if (cfm) {
+					$http.post('admin/api-admin-storage/files-delete', $.param({'ids' : $scope.selectedFiles}), {
+			        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+			        }).success(function(transport) {
+			        	if (transport) {
+			        		$scope.getFiles(FilemanagerFolderService.get(), true);
+			        	}
+			        });
+				}
 			}
 			
 			$scope.createNewFolder = function(newFolderName) {

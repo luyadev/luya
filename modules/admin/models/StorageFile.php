@@ -26,6 +26,26 @@ class StorageFile extends \yii\db\ActiveRecord
         ];
     }
     
+    public function delete()
+    {
+        $file = Yii::$app->storage->file->get($this->id);
+        @unlink($file['source']);
+        $this->is_deleted = 1;
+        $this->update(false);
+        return true;
+    }
+    
+    /**
+     * We can not global set is_deleted=0 to the where condition cause in some parts of the storage we want
+     * to access the name_new_compound to rebuild old image paths
+     * 
+     * @return \yii\db\$this
+     */
+    public static function find()
+    {
+        return parent::find();
+    } 
+    
     public function onBeforeInsert()
     {
         $this->upload_timestamp = time();

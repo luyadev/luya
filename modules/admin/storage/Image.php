@@ -22,6 +22,11 @@ class Image
         }
            
         $file = Yii::$app->storage->file->getPath($fileId);
+        
+        if (!$file) {
+            return false;
+        }
+        
         $info = Yii::$app->storage->file->getInfo($fileId);
         
         try {
@@ -105,14 +110,16 @@ class Image
     {
         // get the real full image path to display this file.
         $data = StorageImage::find()->where(['id' => $imageId])->with('file')->one();
-        if (!$data) {
+        if (!$data || !isset($data->file)) {
             return false;
         }
+        
         $fileName = implode([$data->filter_id, $data->file->name_new_compound], '_');
 
         return ArrayHelper::toObject([
             'filter_id' => $data->filter_id,
             'file_id' => $data->file_id,
+            'file_is_deleted' => $data->file->is_deleted,
             'image_id' => $data->id,
             'file_source' => $data->file->name_new_compound,
             'image_source' => $fileName,

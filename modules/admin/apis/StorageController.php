@@ -47,6 +47,17 @@ class StorageController extends \admin\base\RestController
         return ['upload' => false, 'message' => 'no files selected'];
     }
     
+    public function actionFilesDelete()
+    {
+        foreach (Yii::$app->request->post('ids', []) as $id) {
+            if (!Yii::$app->storage->file->delete($id)) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
     /*
     public function actionFilesUploadFlow()
     {
@@ -74,34 +85,23 @@ class StorageController extends \admin\base\RestController
 
     public function actionImageUpload()
     {
-        $fileId = \yii::$app->request->post('fileId', null);
-        $filterId = \yii::$app->request->post('filterId', null);
+        $fileId = Yii::$app->request->post('fileId', null);
+        $filterId = Yii::$app->request->post('filterId', null);
 
-        $create = \yii::$app->storage->image->create($fileId, $filterId);
+        $create = Yii::$app->storage->image->create($fileId, $filterId);
         $msg = (!$create) ? 'Error while uploading image and/or store to database.' : 'Upload successfull';
         return ['id' => $create, 'error' => (bool) !$create, 'message' => $msg, 'image' => ((bool) $create) ? $this->actionImagePath($create) : false];
     }
 
     public function actionImagePath($imageId)
     {
-        return \yii::$app->storage->image->get($imageId);
+        return Yii::$app->storage->image->get($imageId);
     }
 
     public function actionFilePath($fileId)
     {
-        return \yii::$app->storage->file->get($fileId);
+        return Yii::$app->storage->file->get($fileId);
     }
-
-    /*
-    public function actionFiles($folderId = 0)
-    {
-        return [
-            'breadcrumbs' => Yii::$app->storage->folder->breadcrumbs($folderId),
-            'folders' => Yii::$app->storage->folder->getSubFolders($folderId),
-            'files' => Yii::$app->storage->file->allFromFolder($folderId),
-        ];
-    }
-    */
     
     public function actionGetFiles($folderId)
     {

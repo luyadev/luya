@@ -6,6 +6,7 @@ use Yii;
 use yii\helpers\Inflector;
 use \admin\models\StorageFile;
 use \admin\models\StorageImage;
+
 class File
 {
     public $error = null;
@@ -20,6 +21,15 @@ class File
         ];
     }
 
+    public function delete($fileId) {
+        $model = StorageFile::find()->where(['id' => $fileId, 'is_deleted' => 0])->one();
+        if ($model) {
+            return $model->delete(false);
+        }
+        
+        return true;
+    }
+    
     public function getMimeType($sourceFile)
     {
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -137,12 +147,16 @@ class File
 
     public function allFromFolder($folderId)
     {
-        $files = StorageFile::find()->select(['admin_storage_file.id', 'name_original', 'extension', 'file_size', 'upload_timestamp', 'firstname', 'lastname'])->leftJoin("admin_user", "admin_user.id=admin_storage_file.upload_user_id")->where(['folder_id' => $folderId, 'is_hidden' => 0])->asArray()->all();
+        $files = StorageFile::find()->select(['admin_storage_file.id', 'name_original', 'extension', 'file_size', 'upload_timestamp', 'firstname', 'lastname'])->leftJoin("admin_user", "admin_user.id=admin_storage_file.upload_user_id")->where(['folder_id' => $folderId, 'is_hidden' => 0, 'admin_storage_file.is_deleted' => 0])->asArray()->all();
         foreach($files as $k => $v) {
             // @todo check fileHasImage sth
             if ($v['extension'] == "jpg" || $v['extension'] == "png") {
                 $imageId = Yii::$app->storage->image->create($v['id'], 0);
-                $thumb = Yii::$app->storage->image->filterApply($imageId, 'small-landscape', true);
+                if ($imageId) {
+                    $thumb = Yii::$app->storage->image->filterApply($imageId, 'small-landscape', true);
+                } else {
+                    $thumb = false;
+                }
             } else {
                 $thumb = false;
             }
@@ -153,7 +167,7 @@ class File
 
     public function get($fileId)
     {
-        $file = StorageFile::find()->where(['id' => $fileId])->asArray()->one();
+        $file = StorageFile::find()->where(['id' => $fileId, 'is_deleted' => 0])->asArray()->one();
 
         if (!$file) {
             return false;
@@ -168,9 +182,9 @@ class File
 
     public function getPath($fileId)
     {
-        $file = StorageFile::find()->where(['id' => $fileId])->one();
+        $file = StorageFile::find()->where(['id' => $fileId, 'is_deleted' => 0])->one();
         if ($file) {
-            return \yii::$app->storage->dir.$file->name_new_compound;
+            return Yii::$app->storage->dir.$file->name_new_compound;
         }
 
         return false;
@@ -178,10 +192,11 @@ class File
 
     public function getInfo($fileId)
     {
-        return StorageFile::find()->where(['id' => $fileId])->one();
+        return StorageFile::find()->where(['id' => $fileId, 'is_deleted' => 0])->one();
     }
 
     public function moveFileToFolder($fileId, $folderId)
     {
+        
     }
 }
