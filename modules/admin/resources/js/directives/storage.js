@@ -320,6 +320,10 @@ zaa.directive("storageFileManager", function(FileListeService, Upload, Filemanag
 		        });
 			}
 			
+			$scope.clearSelection = function() {
+				$scope.selectedFiles = [];
+			}
+			
 			$scope.toggleSelection = function(file) {
 				if ($scope.allowSelection == 'true') {
 					$scope.selectFile(file);
@@ -396,6 +400,7 @@ zaa.directive("storageFileManager", function(FileListeService, Upload, Filemanag
             }
 			
 			$scope.loadFolder = function(folderId) {
+				$scope.clearSelection();
 				FilemanagerFolderService.set(folderId);
 				$scope.currentFolderId = folderId;
 				$scope.getFiles(folderId);
