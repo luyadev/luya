@@ -44,13 +44,24 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
     private function getOptionsData()
     {
         $items = [];
-        foreach ($this->model->find()->select($this->displayFields)->all() as $item) {
+        
+        $pk = $this->model->primaryKey();
+        $pkName = reset($pk);
+        
+        $select = $this->displayFields;
+        $select[] = $pkName;
+        
+        foreach ($this->model->find()->select($select)->all() as $item) {
+            
+            $array = $item->toArray();
+            unset($array[$pkName]);
             if ($this->displayTemplate) {
-                $label = vsprintf($this->displayTemplate, $item->toArray());
+                $label = vsprintf($this->displayTemplate, $array);
             } else {
-                $label = implode(', ', $item->toArray());
+                $label = implode(', ', $array);
             }
-            $items[] = ['id' => $item->id, 'label' => $label];
+            
+            $items[] = ['id' => $item[$pkName], 'label' => $label];
         }
         
         return ['items' => $items];
