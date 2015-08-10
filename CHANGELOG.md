@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **Database upgrade 1.0.0-alpha15-upgrade.sql**
 
+- [#323](https://github.com/zephir/luya/issues/323) fixed bug where checkboxReleation id have not been delivered.
 - [#309](https://github.com/zephir/luya/issues/309) added ability to remove files in filemanager.
 - [e931b01](https://github.com/zephir/luya/commit/e931b01df0954c1d9e404eda80864ee4f1e2e036) added ability to rename folders in filemanager.
 - [d22ddc7](https://github.com/zephir/luya/commit/d22ddc76e203a1200bf33bb3f9bc089eb74c5db4) changed NgRest `ToggleStatus()` plugin for CRUD list display from 0/1 to check mark/cross.
