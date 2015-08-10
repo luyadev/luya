@@ -145,10 +145,17 @@ zaa.directive('storageImageUpload', function($http, ApiAdminFilter, ImageIdServi
 	return {
 		restrict : 'E',
 		scope : {
-			ngModel : '='
+			ngModel : '=',
+			options : '=',
 		},
 		link : function(scope) {
 
+			scope.noFilters = function() {
+				if (scope.options) {
+					return scope.options.no_filter;
+				}
+			}
+			
             scope.imageLoading = false;
 			scope.fileId = 0;
 			scope.filterId = 0;

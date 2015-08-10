@@ -65,13 +65,12 @@
         <script type="text/ng-template" id="storageImageUpload">
             <div class="imageupload">
                 <b class="imageupload__title">Bild auswählen</b>
-
                 <storage-file-upload ng-model="fileId"></storage-file-upload>
 
                 <div ng-show="originalFileIsRemoved">
                     <div class="alert alert--danger">Die Originale Datei wurde entfernt. Sie können keine Filter anwenden ohne original Datei. Laden Sie eine neue Datei hoch und Filter anzuwenden.</div>
                 </div>
-                <div class="imageupload__filter" ng-show="!originalFileIsRemoved">
+                <div class="imageupload__filter" ng-show="!originalFileIsRemoved && !noFilters()">
                     <label>Filter Auswahl</label>
                     <select name="filterId" ng-model="filterId" class="browser-default"><option value="0">Kein Filter</option><option ng-repeat="item in filters" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
                 </div><!--
