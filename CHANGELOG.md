@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **Database upgrade 1.0.0-alpha15-upgrade.sql**
 
+- [#327](https://github.com/zephir/luya/issues/327) fixed bug where i18n select model labels are _ngrestCall behavior appended, see if label is an array an return first occurrence.
 - [#323](https://github.com/zephir/luya/issues/323) fixed bug where checkboxReleation id have not been delivered.
 - [#309](https://github.com/zephir/luya/issues/309) added ability to remove files in filemanager.
 - [e931b01](https://github.com/zephir/luya/commit/e931b01df0954c1d9e404eda80864ee4f1e2e036) added ability to rename folders in filemanager.
