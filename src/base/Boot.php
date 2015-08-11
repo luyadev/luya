@@ -36,7 +36,7 @@ class Boot
 
     private function beforeRun()
     {
-        $this->setConfigValue(require_once($this->getBaseConfig()));
+        $this->setConfigValue(require($this->getBaseConfig()));
         defined('YII_DEBUG') or define('YII_DEBUG', false);
         defined('YII_ENV') or define('YII_ENV', 'prod');
     }
