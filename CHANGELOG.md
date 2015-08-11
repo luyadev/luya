@@ -1,7 +1,7 @@
 LUYA CHANGELOG
 ==============
 
-1.0.0-alpha15 (in progress)
+1.0.0-alpha15 (11. Aug 2015)
 ---------------------------
 
 **Database upgrade 1.0.0-alpha15-upgrade.sql**
