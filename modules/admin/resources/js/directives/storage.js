@@ -388,6 +388,7 @@ zaa.directive("storageFileManager", function(FileListeService, Upload, Filemanag
 			        }).success(function(transport) {
 			        	if (transport) {
 			        		$scope.getFiles(FilemanagerFolderService.get(), true);
+			        		$scope.clearSelection();
 			        	}
 			        });
 				}
