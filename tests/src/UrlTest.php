@@ -9,6 +9,13 @@ class UrlTest extends \tests\BaseTest
 {
     public $urlRules = [
         ['pattern' => 'news/detail/<id:\d+>/<title:[a-zA-Z0-9\-]+>/', 'route' => 'news/default/detail'],
+        ['pattern' => 'news/global-test/<id:\d+>/', 'route' => 'news/test', 'composition' => 
+            [
+                'fr' => 'news/french-test/<id:\d+>/',
+                'en' => 'news/english-test/<id:\d+>/',
+                'de' => 'news/deutsch-test/<id:\d+>/',
+            ]   
+        ]
     ];
     
     public function setUp()
@@ -29,6 +36,29 @@ class UrlTest extends \tests\BaseTest
         Yii::$app->composition->hideComposition = false;
         $full = Yii::$app->composition->getFull();
         $this->assertEquals("de/", $full);
+    }
+    
+    public function testCompositionUrls()
+    {
+        Yii::$app->composition->hideComposition = false;
+        // fr
+        Yii::$app->composition->setKey('langShortCode', 'fr');
+        $this->assertEquals('fr/news/french-test/1', Url::to('news/test', ['id' => 1]));
+        // en
+        Yii::$app->composition->setKey('langShortCode', 'en');
+        $this->assertEquals('en/news/english-test/1', Url::to('news/test', ['id' => 1]));
+        // de
+        Yii::$app->composition->setKey('langShortCode', 'de');
+        $this->assertEquals('de/news/deutsch-test/1', Url::to('news/test', ['id' => 1]));
+        // ru (composition not set, use global default pattern)
+        Yii::$app->composition->setKey('langShortCode', 'ru');
+        $this->assertEquals('ru/news/global-test/1', Url::to('news/test', ['id' => 1]));
+        
+        // composition is hidden, so url rules automaticcaly retursn generic default global pattern
+        Yii::$app->composition->hideComposition = true;
+        // fr (will not work cause hideComposition)
+        Yii::$app->composition->setKey('langShortCode', 'fr');
+        $this->assertEquals('/news/global-test/1', Url::to('news/test', ['id' => 1]));
     }
     
     public function testBasicUrls()
