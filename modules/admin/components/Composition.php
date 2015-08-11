@@ -31,6 +31,11 @@ class Composition extends \yii\base\Component
         return (isset($this->_composition[$key])) ? $this->_composition[$key] : $defaultValue;
     }
     
+    public function get()
+    {
+        return $this->_composition;
+    }
+    
     public function getFull()
     {
         if ($this->hideComposition) {
