@@ -32,7 +32,19 @@
 	},
 	"autoload-dev": {
         "psr-4": {
-            "tests\\": "tests/"
+            "tests\\": "tests/",
+            "admin\\" : "modules/admin",
+            "cms\\" : "modules/cms",
+            "cmsadmin\\" : "modules/cmsadmin",
+            "newsadmin\\" : "modules/newsadmin",
+            "news\\" : "modules/news",
+            "account\\" : "modules/account",
+            "errorapi\\" : "modules/errorapi",
+            "gallery\\" : "modules/gallery",
+            "galleryadmin\\" : "modules/galleryadmin",
+            "crawler\\" : "modules/crawler",
+            "crawleradmin\\" : "modules/crawleradmin",
+            "moduletest\\" : "modules/moduletest"
         }
     },
 	"extra": {

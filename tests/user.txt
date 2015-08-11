@@ -1,0 +1,4 @@
+Benutzer E-Mail: test@luya.io
+Benutzer Passwort: testluyaio
+Vorname: Foo
+Nachname: Bar

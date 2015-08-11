@@ -8,12 +8,11 @@
 >
     <testsuites>
         <testsuite name="Package Test Suite">
-            <directory>./tests</directory>
+            <directory>./tests/src</directory>
         </testsuite>
     </testsuites>
     <php>
         <!--<const name="DB_NAME" value="" />-->
-        <!--<const name="DB_DSN" value="" />-->
         <!--<const name="DB_USER" value="" />-->
         <!--<const name="DB_PASS" value="" />-->
     </php>
