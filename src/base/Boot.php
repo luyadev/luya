@@ -29,6 +29,10 @@ class Boot
     public $configName = 'server.php';
 
     public $yiiPath = null;
+    
+    public $yii = null;
+    
+    public $mockOnly = false;
 
     private function beforeRun()
     {
@@ -112,25 +116,29 @@ class Boot
     /**
      * @return yii console application
      */
-    private function applicationCli()
+    public function applicationCli()
     {
         $this->beforeRun();
         $this->setConfigValue(include(__DIR__.'/../config/'.self::SAPI_CLI.'.php'));
         require_once $this->yiiPath;
-        $application = new \luya\base\cli\Application($this->getConfigValue(self::SAPI_CLI));
-        $exitCode = $application->run();
-        exit($exitCode);
+        $this->yii = new \luya\base\cli\Application($this->getConfigValue(self::SAPI_CLI));
+        if (!$this->mockOnly) {
+            $exitCode = $this->yii->run();
+            exit($exitCode);
+        }
     }
 
     /**
      * @return yii web application
      */
-    private function applicationWeb()
+    public function applicationWeb()
     {
         $this->beforeRun();
         $this->setConfigValue(include(__DIR__.'/../config/'.self::SAPI_WEB.'.php'));
         require_once $this->yiiPath;
-        $yii = new \luya\base\web\Application($this->getConfigValue(self::SAPI_WEB));
-        $yii->run();
+        $this->yii = new \luya\base\web\Application($this->getConfigValue(self::SAPI_WEB));
+        if (!$this->mockOnly) {
+            $this->yii->run();
+        }
     }
 }
