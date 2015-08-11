@@ -3,7 +3,6 @@
 namespace tests\src;
 
 use Yii;
-use luya\helpers\Url;
 
 /**
  * 

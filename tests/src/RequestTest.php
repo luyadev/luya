@@ -3,12 +3,10 @@
 namespace tests\src;
 
 use Yii;
-use luya\helpers\Url;
 
 /**
  * 
  * @author nadar
- *
  */
 class RequestTest extends \tests\BaseTest
 {
