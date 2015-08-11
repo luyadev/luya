@@ -31,14 +31,14 @@ class UrlManager extends \yii\web\UrlManager
         if (!(Yii::$app->has('composition'))) {
             return $route;
         }
-
-        $composition = \yii::$app->composition->getFull();
+        
+        $composition = Yii::$app->composition->getFull();
 
         $length = strlen($composition);
         if (substr($route[0], 0, $length) == $composition) {
             $route[0] = substr($route[0], $length);
         }
-
+        
         return $route;
     }
 
