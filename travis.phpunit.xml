@@ -12,7 +12,7 @@
         </testsuite>
     </testsuites>
     <php>
-        <const name="DB_NAME" value="webapp_test" />
+        <const name="DB_NAME" value="myapp_test" />
         <const name="DB_USER" value="root" />
         <const name="DB_PASS" value="" />
     </php>
