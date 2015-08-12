@@ -13,6 +13,10 @@ install:
   - travis_retry composer global require "fxp/composer-asset-plugin:~1.0.3"
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - travis_retry composer install --prefer-dist --no-interaction
-  
+
+before_script:
+  - mysql -e 'create database myapp_test;'  
+  - mysql -p myapp_test < tests/sql/1.0.0-alpha14.sql
+
 script:
   - vendor/bin/phpunit --verbose
