@@ -6,6 +6,8 @@ use Yii;
 
 class UrlRule extends \luya\base\UrlRule
 {
+    private $_defaultClassName = null;
+    
     public function init()
     {
         // override previous UrlRule initializer
@@ -16,8 +18,6 @@ class UrlRule extends \luya\base\UrlRule
         return false;
     }
 
-    private $_defaultClassName = null;
-    
     public function getDefaultClassName()
     {
         if ($this->_defaultClassName === null) {

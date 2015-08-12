@@ -9,9 +9,7 @@ class View extends \yii\web\View
 {
     /**
      * @todo verify there is already a yii-way solution
-     *
      * @param string $assetName
-     *
      * @return string
      */
     public function getAssetUrl($assetName)
@@ -24,7 +22,6 @@ class View extends \yii\web\View
      *
      * @param string $route
      * @param array  $params
-     *
      * @return string
      */
     public function url($route, array $params = [])
