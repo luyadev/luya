@@ -1,7 +1,7 @@
 Dein Luya Projekt
 =================
 
-> Bei Problemen mit `composer update` aktualisiere dein `fxp/composer-asset-plugin` auf die Version **1.0.1**. `composer global require "fxp/composer-asset-plugin:1.0.1"`
+> Bei Problemen mit `composer update`? aktualisiere dein `fxp/composer-asset-plugin` auf die Version **1.0.3**. `composer global require "fxp/composer-asset-plugin:1.0.3"`
 
 Mit diesen wenigen Schritten kannst du ganz einfach ein eigenes Luya Projekt erstellen. Um Luya installieren zu können, musst du `composer` auf deinem Mac, Linux oder Unix Computer installiert haben.
 
@@ -73,7 +73,7 @@ Bitte beachte, ob du in deiner PHP-Konfiguration **short_open_tags** aktiviert h
 |Konfiguration |Wert
 |--- |----
 |short_open_tags | 1
-|memory_limit |128
+|memory_limit |512
 |max_execution_time|60
 |post_max_size|16M
 |upload_max_filesize|16M
