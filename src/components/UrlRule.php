@@ -20,7 +20,7 @@ class UrlRule extends \luya\base\UrlRule
     {
         $parts = explode('/', $request->getPathInfo());
 
-        preg_match_all('/<(\w+):?([^>]+)?>/', yii::$app->getModule('luya')->urlPrefixComposition, $matches, PREG_SET_ORDER);
+        preg_match_all('/<(\w+):?([^>]+)?>/', Yii::$app->composition->pattern, $matches, PREG_SET_ORDER);
 
         $compositionKeys = [];
 
@@ -40,14 +40,8 @@ class UrlRule extends \luya\base\UrlRule
 
         $request->setPathInfo(implode('/', $parts));
 
-        $luya = Yii::$app->getModule('luya');
-        
-        Yii::$app->composition->hideComposition = $luya->hideComposition;
-        
-        //$composition = new \luya\collection\PrefixComposition();
-        //$composition->hideComposition = $luya->hideComposition;
         if (count($compositionKeys) == 0) {
-            $compositionKeys = $luya->defaultComposition;
+            $compositionKeys = Yii::$app->composition->default;
         }
         
         Yii::$app->composition->set($compositionKeys);

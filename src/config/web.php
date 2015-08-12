@@ -27,6 +27,9 @@ $config = [
                 'application/json' => 'yii\web\JsonParser',
             ],
         ],
+        'composition' => [
+            'class' => '\luya\components\Composition',
+        ]
     ],
     'bootstrap' => [
         'luya\base\web\Bootstrap',

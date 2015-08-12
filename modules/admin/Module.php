@@ -61,9 +61,6 @@ class Module extends \admin\base\Module
             'auth' => [
                 'class' => '\admin\components\Auth',
             ],
-            'composition' => [
-                'class' => '\admin\components\Composition',
-            ]
         ];
     }
     
