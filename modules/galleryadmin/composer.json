@@ -2,7 +2,7 @@
 	"name" : "zephir/luya-module-galleryadmin",
 	"description" : "Zephir Luya Gallery Admin-Module",
 	"type" : "luya-module",
-	"keywords" : ["php", "luya", "module", "gallery", "galleryadmin],
+	"keywords" : ["php", "luya", "module", "gallery", "galleryadmin"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
 	"minimum-stability": "dev",
