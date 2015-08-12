@@ -16,4 +16,4 @@ before_script:
   - mysql -u root myapp_test < tests/sql/1.0.0-alpha14.sql
 
 script:
-  - vendor/bin/phpunit --verbose --configuration tests/travisunit.xml
+  - vendor/bin/phpunit --verbose --configuration travis.phpunit.xml
