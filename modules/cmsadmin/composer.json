@@ -1,6 +1,21 @@
 {
 	"name" : "zephir/luya-module-cmsadmin",
-	"description" : "Zephir Luya Cmsadmin",
+	"description" : "Zephir Luya CMS Admin-Module",
+	"type" : "luya-module",
+	"keywords" : ["php", "luya", "module", "cms", "cmsadmin"],
+	"license": "MIT",
+	"homepage" : "http://luya.io",
+	"minimum-stability": "dev",
+	"authors" : [
+		{
+			"name" : "Basil",
+			"email" : "git@nadar.io",
+			"homepage" : "https://github.com/nadar"
+		}
+	],
+	"support" : {
+		"issues" : "https://github.com/zephir/luya/issues"
+	},
 	"require" : {
 		"zephir/luya" : "*@dev",
 		"zephir/luya-module-admin" : "*@dev",

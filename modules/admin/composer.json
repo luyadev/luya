@@ -1,6 +1,21 @@
 {
 	"name" : "zephir/luya-module-admin",
 	"description" : "Zephir Luya Admin",
+	"type" : "luya-module",
+	"keywords" : ["php", "luya", "module", "admin"],
+	"license": "MIT",
+	"homepage" : "http://luya.io",
+	"minimum-stability": "dev",
+	"authors" : [
+		{
+			"name" : "Basil",
+			"email" : "git@nadar.io",
+			"homepage" : "https://github.com/nadar"
+		}
+	],
+	"support" : {
+		"issues" : "https://github.com/zephir/luya/issues"
+	},
 	"require" : {
 		"zephir/luya" : "*",
         "bower-asset/jquery" : "2.1.*@stable",

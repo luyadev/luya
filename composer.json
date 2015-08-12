@@ -1,18 +1,21 @@
 {
 	"name" : "zephir/luya",
-	"type" : "library",
-	"description" : "Zephir Luya Yii2 Cms",
-	"keywords" : ["php", "yii2", "cms", "luya", "programmatic", "content", "angular"],
-	"homepage" : "https://github.com/zephir/luya",
+	"description" : "The programmatic CMS based on the Yii2 Framework. http://luya.io",
+	"type" : "project",
+	"keywords" : ["php", "yii2", "cms", "luya", "programmatic", "content", "angular", "modular"],
 	"license": "MIT",
+	"homepage" : "http://luya.io",
 	"minimum-stability": "dev",
 	"authors" : [
 		{
-			"name" : "nadar",
-			"homepage" : "https://github.com/nadar",
-			"role" : "Creator"
+			"name" : "Basil",
+			"email" : "git@nadar.io",
+			"homepage" : "https://github.com/nadar"
 		}
 	],
+	"support" : {
+		"issues" : "https://github.com/zephir/luya/issues"
+	},
 	"require" : {
 		"php": ">=5.4.0",
 		"yiisoft/yii2": "2.0.6",

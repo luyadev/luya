@@ -1,6 +1,21 @@
 {
 	"name" : "zephir/luya-module-news",
 	"description" : "Zephir Luya News",
+	"type" : "luya-module",
+	"keywords" : ["php", "luya", "module", "news"],
+	"license": "MIT",
+	"homepage" : "http://luya.io",
+	"minimum-stability": "dev",
+	"authors" : [
+		{
+			"name" : "Basil",
+			"email" : "git@nadar.io",
+			"homepage" : "https://github.com/nadar"
+		}
+	],
+	"support" : {
+		"issues" : "https://github.com/zephir/luya/issues"
+	},
 	"require" : {
 		"zephir/luya" : "*"
 	},
