@@ -4,6 +4,7 @@
 	"description" : "Zephir Luya Yii2 Cms",
 	"keywords" : ["php", "yii2", "cms", "luya", "programmatic", "content", "angular"],
 	"homepage" : "https://github.com/zephir/luya",
+	"license": "MIT",
 	"minimum-stability": "dev",
 	"authors" : [
 		{
