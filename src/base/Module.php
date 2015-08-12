@@ -8,7 +8,7 @@ use Exception;
 /**
  * @author nadar
  */
-class Module extends \yii\base\Module
+abstract class Module extends \yii\base\Module
 {
     /**
      * Contains the apis for each module to provided them in the admin module.

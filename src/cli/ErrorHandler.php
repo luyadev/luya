@@ -1,8 +1,8 @@
 <?php
 
-namespace luya\base\cli;
+namespace luya\cli;
 
 class ErrorHandler extends \yii\console\ErrorHandler
 {
-    use \luya\base\ErrorHandlerTrait;
+    use \luya\traits\ErrorHandler;
 }

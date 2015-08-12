@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\base\web;
+namespace luya\web;
 
 use Yii;
 use yii\helpers\ArrayHelper;

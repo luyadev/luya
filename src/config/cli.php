@@ -14,12 +14,12 @@ $config = [
             'class' => '\luya\components\Mail',
         ],
         'errorHandler' => [
-            'class' => '\luya\base\cli\ErrorHandler',
+            'class' => '\luya\cli\ErrorHandler',
             'memoryReserveSize' => 0,
         ],
     ],
     'bootstrap' => [
-        'luya\base\cli\Bootstrap',
+        'luya\cli\Bootstrap',
     ],
     'timezone' => 'Europe/Berlin',
 ];

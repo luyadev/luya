@@ -1,10 +1,10 @@
 <?php
 
-namespace luya\base;
+namespace luya\traits;
 
 use \yii\web\NotFoundHttpException;
 
-trait ErrorHandlerTrait {
+trait ErrorHandler {
     
     public $api = 'http://luya.io/errorapi';
     

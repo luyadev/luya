@@ -5,7 +5,7 @@ namespace luya\base;
 /**
  * @author nadar
  */
-class Controller extends \yii\web\Controller
+abstract class Controller extends \yii\web\Controller
 {
     /**
      * Use the default behaviour of Yii. This will result in loading the templates inside the Modules.

@@ -2,16 +2,12 @@
 
 namespace luya\base;
 
-if (!version_compare(PHP_VERSION, '5.4.0', '>=')) {
-    trigger_error('Some functions of luya need php version 5.4.0 or higher! You are currently using Version: '.PHP_VERSION, E_USER_ERROR);
-}
-
 /**
  * Wrapping class to set config informations and also load default configuration informations which belongs to the luya module.
  *
  * @author nadar
  */
-class Boot
+abstract class Boot
 {
     const SAPI_WEB = 'web';
 
@@ -121,7 +117,7 @@ class Boot
         $this->beforeRun();
         $this->setConfigValue(include(__DIR__.'/../config/'.self::SAPI_CLI.'.php'));
         require_once $this->yiiPath;
-        $this->yii = new \luya\base\cli\Application($this->getConfigValue(self::SAPI_CLI));
+        $this->yii = new \luya\cli\Application($this->getConfigValue(self::SAPI_CLI));
         if (!$this->mockOnly) {
             $exitCode = $this->yii->run();
             exit($exitCode);
@@ -136,7 +132,7 @@ class Boot
         $this->beforeRun();
         $this->setConfigValue(include(__DIR__.'/../config/'.self::SAPI_WEB.'.php'));
         require_once $this->yiiPath;
-        $this->yii = new \luya\base\web\Application($this->getConfigValue(self::SAPI_WEB));
+        $this->yii = new \luya\web\Application($this->getConfigValue(self::SAPI_WEB));
         if (!$this->mockOnly) {
             $this->yii->run();
         }

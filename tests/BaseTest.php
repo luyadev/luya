@@ -18,7 +18,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
     public function mockApp()
     {
         if ($this->app === null) {
-            $this->app = new \luya\base\Boot();
+            $this->app = new \luya\Boot();
             $this->app->configPath = 'tests';
             $this->app->configName = 'config.php';
             $this->app->mockOnly = true;

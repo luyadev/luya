@@ -1,8 +1,8 @@
 <?php
 
-namespace luya\base\cli;
+namespace luya\cli;
 
 class Application extends \yii\console\Application
 {
-    use \luya\base\ApplicationTrait;
+    use \luya\traits\Application;
 }

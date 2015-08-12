@@ -1,8 +1,8 @@
 <?php
 
-namespace luya\base;
+namespace luya\traits;
 
-trait ApplicationTrait
+trait Application
 {
     public $siteTitle = 'Luya';
     
