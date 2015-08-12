@@ -10,6 +10,6 @@ We have moved all __documentations__ and __installation instructions__ to our ne
 Questions and Problems
 ----------------------
 
-If you have any question or problem, don't hesitate to create a `New issue` on the project repository.
+If you have any question or problem, don't hesitate to create a [new issue](https://github.com/zephir/luya/issues/new) on the project repository.
 
 + [Questions & Issues](https://github.com/zephir/luya/issues)
