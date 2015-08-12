@@ -16,52 +16,40 @@ class UrlRule extends \luya\base\UrlRule
         return false;
     }
 
+    private $_defaultClassName = null;
+    
+    public function getDefaultClassName()
+    {
+        if ($this->_defaultClassName === null) {
+            $this->_defaultClassName = Yii::$app->defaultRoute.'\\components\\UrlRule';
+        }
+        
+        return $this->_defaultClassName;
+    }
+    
+    private function getUrlParts($request)
+    {
+        return explode('/', $request->getPathInfo());
+    }
+    
     public function parseRequest($manager, $request)
     {
-        $parts = explode('/', $request->getPathInfo());
-
-        preg_match_all('/<(\w+):?([^>]+)?>/', Yii::$app->composition->pattern, $matches, PREG_SET_ORDER);
-
-        $compositionKeys = [];
-
-        foreach ($matches as $index => $match) {
-            if (isset($parts[$index])) {
-                $urlValue = $parts[$index];
-                $rgx = $match[2];
-                $param = $match[1];
-                preg_match("/^$rgx$/", $urlValue, $res);
-
-                if (count($res) == 1) {
-                    $compositionKeys[$param] = $urlValue;
-                    unset($parts[$index]);
-                }
+        // extra data from request to composition, which changes the pathInfo of the Request-Object.
+        Yii::$app->composition->extractRequestData($request);
+        
+        // set user env variabls
+        Yii::$app->language = Yii::$app->composition->getLanguage();
+        setlocale(LC_ALL, Yii::$app->composition->getLocale(), Yii::$app->composition->getLocale().'.utf8');
+        
+        // get all parts from the current changed Request-Object.
+        $urlParts = $this->getUrlParts($request);
+        
+        // if there are url parts and its not a module, load the default route based UrlRule if the class exstists.
+        if (count($urlParts) > 0 && !array_key_exists($urlParts[0], Yii::$app->modules)) {
+            if (class_exists($this->getDefaultClassName())) {
+                $manager->addRules([['class' => $this->getDefaultClassName()]], false);
+                return $manager->parseRequest($request);
             }
-        }
-
-        $request->setPathInfo(implode('/', $parts));
-
-        if (count($compositionKeys) == 0) {
-            $compositionKeys = Yii::$app->composition->default;
-        }
-
-        Yii::$app->composition->set($compositionKeys);
-
-        // set the yii app language param based on the composition fullUrl
-        $locale = Yii::$app->composition->getLocale();
-        yii::$app->language = Yii::$app->composition->getLanguage();
-        setlocale(LC_ALL, $locale, $locale.'.utf8');
-
-        $parts = explode('/', $request->getPathInfo()); // can be deleted after reshuffle array
-
-        if (!empty($parts) && !array_key_exists($parts[0], yii::$app->modules)) {
-            $class = yii::$app->defaultRoute.'\components\UrlRule';
-
-            if (!class_exists($class)) {
-                return false;
-            }
-            $manager->addRules([['class' => $class]], false);
-
-            return $manager->parseRequest($request);
         }
 
         return false;

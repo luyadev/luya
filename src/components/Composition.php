@@ -2,6 +2,7 @@
 
 namespace luya\components;
 
+use Yii;
 use luya\helpers\Url;
 
 class Composition extends \yii\base\Component
@@ -45,6 +46,37 @@ class Composition extends \yii\base\Component
      */
     private $_composition = [];
 
+    public function extractRequestData(\yii\web\Request $request)
+    {
+        $parts = explode('/', $request->getPathInfo());
+        
+        preg_match_all('/<(\w+):?([^>]+)?>/', $this->pattern, $matches, PREG_SET_ORDER);
+        
+        $compositionKeys = [];
+        
+        foreach ($matches as $index => $match) {
+            if (isset($parts[$index])) {
+                $urlValue = $parts[$index];
+                $rgx = $match[2];
+                $param = $match[1];
+                preg_match("/^$rgx$/", $urlValue, $res);
+        
+                if (count($res) == 1) {
+                    $compositionKeys[$param] = $urlValue;
+                    unset($parts[$index]);
+                }
+            }
+        }
+        
+        $request->setPathInfo(implode('/', $parts));
+        
+        if (count($compositionKeys) == 0) {
+            $compositionKeys = $this->default;
+        }
+        
+        $this->set($compositionKeys);
+    }
+    
     public function setKey($key, $value)
     {
         $this->_composition[$key] = $value;
