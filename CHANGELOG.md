@@ -3,7 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-alpha16 (in progress)
 ---------------------------
-
+- [bb66c1](https://github.com/zephir/luya/commit/bb66c1641a5465c61e7731fbcef028bcecfbbfc1) moved composition into luya components.
 
 1.0.0-alpha15 (11. Aug 2015)
 ---------------------------
@@ -21,7 +21,6 @@ LUYA CHANGELOG
 - [51fca3d](https://github.com/zephir/luya/commit/51fca3ddafb8c4e55d3f460b76b21e9f839a49b2) fixed bug in link creation (createUrl), where url creation now replaces only the first occurrence in context mode.
 - [08aded0](https://github.com/zephir/luya/commit/08aded018e0a42df190895bb4156cebffd4fef12) upgrade to yii version `2.0.6`.
 - [48d2b9d](https://github.com/zephir/luya/commit/48d2b9dac8851ef1bd3d8c0c564d5d49def36520) added new `zaaTable` and `TableBlock` class.
-
 
 1.0.0-alpha14 (3. Aug 2015)
 ---------------------------
