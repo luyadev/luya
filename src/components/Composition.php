@@ -46,6 +46,10 @@ class Composition extends \yii\base\Component
      */
     private $_composition = [];
 
+    /**
+     * @todo should be rewritten soon.
+     * @param \yii\web\Request $request
+     */
     public function extractRequestData(\yii\web\Request $request)
     {
         $parts = explode('/', $request->getPathInfo());
