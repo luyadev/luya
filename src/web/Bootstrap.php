@@ -2,7 +2,6 @@
 
 namespace luya\web;
 
-use Yii;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -25,13 +24,12 @@ class Bootstrap extends \luya\base\Bootstrap
      */
     public function beforeRun($app)
     {
-        foreach($this->getModules() as $id => $module) {
-            
+        foreach ($this->getModules() as $id => $module) {
             foreach ($module->urlRules as $k => $v) {
                 $this->_urlRules[] = $v;
             }
-            
-            foreach($module->apis as $alias => $class) {
+
+            foreach ($module->apis as $alias => $class) {
                 $this->_apis[$alias] = $class;
             }
         }
@@ -46,14 +44,14 @@ class Bootstrap extends \luya\base\Bootstrap
                 $this->_adminMenus = ArrayHelper::merge($module->getMenu(), $this->_adminMenus);
             }
         }
-        
+
         if ($this->hasModule('admin')) {
             $app->getModule('admin')->controllerMap = $this->_apis;
             $app->getModule('admin')->assets = ArrayHelper::merge($this->_adminAssets, $app->getModule('admin')->assets);
             $app->getModule('admin')->controllerMap = $this->_apis;
             $app->getModule('admin')->moduleMenus = $this->_adminMenus;
         }
-        
+
         $app->getUrlManager()->addRules($this->_urlRules, false);
     }
 }

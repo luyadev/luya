@@ -43,14 +43,14 @@ class UrlRule extends \luya\base\UrlRule
         if (count($compositionKeys) == 0) {
             $compositionKeys = Yii::$app->composition->default;
         }
-        
+
         Yii::$app->composition->set($compositionKeys);
 
         // set the yii app language param based on the composition fullUrl
         $locale = Yii::$app->composition->getLocale();
         yii::$app->language = Yii::$app->composition->getLanguage();
-        setlocale(LC_ALL, $locale, $locale . ".utf8");
-        
+        setlocale(LC_ALL, $locale, $locale.'.utf8');
+
         $parts = explode('/', $request->getPathInfo()); // can be deleted after reshuffle array
 
         if (!empty($parts) && !array_key_exists($parts[0], yii::$app->modules)) {

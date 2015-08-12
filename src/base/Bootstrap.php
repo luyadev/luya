@@ -12,9 +12,9 @@ use Yii;
 abstract class Bootstrap implements \yii\base\BootstrapInterface
 {
     public $_modules = null;
-    
+
     public $app = null;
-    
+
     public function bootstrap($app)
     {
         $this->setModules($app);
@@ -22,21 +22,21 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
         $this->registerComponents($app);
         $this->run($app);
     }
-    
+
     public function hasModule($module)
     {
         return array_key_exists($module, $this->_modules);
     }
-    
+
     public function setModules($app)
     {
         if ($this->_modules === null) {
-            foreach($app->getModules() as $id => $obj) {
+            foreach ($app->getModules() as $id => $obj) {
                 $this->_modules[$id] = Yii::$app->getModule($id);
             }
         }
     }
-    
+
     public function getModules()
     {
         return $this->_modules;
@@ -45,11 +45,10 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
     private function registerComponents($app)
     {
         foreach ($this->getModules() as $id => $module) {
-            
-            Yii::setAlias("@".$id, $module->getBasePath());
+            Yii::setAlias('@'.$id, $module->getBasePath());
 
             if (method_exists($module, 'registerComponents')) {
-                foreach($module->registerComponents() as $componentId => $definition) {
+                foreach ($module->registerComponents() as $componentId => $definition) {
                     $app->set($componentId, $definition);
                 }
             }

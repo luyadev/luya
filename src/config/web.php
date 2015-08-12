@@ -29,7 +29,7 @@ $config = [
         ],
         'composition' => [
             'class' => '\luya\components\Composition',
-        ]
+        ],
     ],
     'bootstrap' => [
         'luya\web\Bootstrap',

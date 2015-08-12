@@ -23,10 +23,10 @@ class Twig extends \yii\base\Component
             'links' => function ($cat, $lang, $parent_nav_id) {
                 return \yii::$app->links->findByArguments(['cat' => $cat, 'lang' => $lang, 'parent_nav_id' => (int) $parent_nav_id]);
             },
-            'linksFindParent' => function($level) {
-                return \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, $level);  
+            'linksFindParent' => function ($level) {
+                return \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, $level);
             },
-            'linkActivePart' => function($part) {
+            'linkActivePart' => function ($part) {
                 return \yii::$app->links->getActiveUrlPart($part);
             },
             'asset' => function ($name) {
@@ -35,9 +35,9 @@ class Twig extends \yii\base\Component
             'filterApply' => function ($imageId, $filterIdentifier) {
                 return \yii::$app->storage->image->filterApply($imageId, $filterIdentifier);
             },
-            'image' => function($imageId) {
+            'image' => function ($imageId) {
                 return \yii::$app->storage->image->get($imageId);
-            }
+            },
         ];
     }
 

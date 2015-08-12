@@ -1,6 +1,7 @@
 <?php
 
 namespace luya\base;
+
 /* must be sbtarct
  *
  */

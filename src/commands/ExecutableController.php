@@ -100,9 +100,10 @@ class ExecutableController extends \yii\console\Controller
                 }
             }
         }
+
         return $response;
     }
-    
+
     /**
      * find all auth.php files, invoke them and return to \yii::$app->auth->addRule.
      *
@@ -136,13 +137,13 @@ class ExecutableController extends \yii\console\Controller
                 }
             }
         }
-        
+
         $toClean = Yii::$app->auth->prepareCleanup($data);
         if (count($toClean) > 0) {
-            foreach($toClean as $rule) {
-                echo $this->ansiFormat('old auth rule: "' . $rule['alias_name'] . '" in module ' . $rule['module_name'], Console::FG_RED) . PHP_EOL;
+            foreach ($toClean as $rule) {
+                echo $this->ansiFormat('old auth rule: "'.$rule['alias_name'].'" in module '.$rule['module_name'], Console::FG_RED).PHP_EOL;
             }
-            if($this->confirm("Delete old permission rules?")) {
+            if ($this->confirm('Delete old permission rules?')) {
                 Yii::$app->auth->executeCleanup($toClean);
             }
         }
@@ -171,7 +172,7 @@ class ExecutableController extends \yii\console\Controller
         }
 
         $this->execAuth();
-        
+
         $salt = Yii::$app->getSecurity()->generateRandomString();
         $pw = Yii::$app->getSecurity()->generatePasswordHash($password.$salt);
 
@@ -245,9 +246,8 @@ class ExecutableController extends \yii\console\Controller
             ]]),
         ]);
 
-        
         $this->execImport();
-        
+
         echo "You can now login with E-Mail: '$email' and password: '$password'";
         exit(0);
     }

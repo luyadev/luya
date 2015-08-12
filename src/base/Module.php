@@ -24,7 +24,7 @@ abstract class Module extends \yii\base\Module
      * @var array
      */
     public $apis = [];
-    
+
     /**
      * Contains all urlRules for this module. Can't provided in key value pairing for pattern<=>route. must be array containing
      * class name or array with pattern, route informations.
@@ -32,9 +32,9 @@ abstract class Module extends \yii\base\Module
      * @var array
      */
     public $urlRules = [];
-    
+
     public $isAdmin = false;
-    
+
     /**
      * @var array
      */
@@ -106,8 +106,9 @@ abstract class Module extends \yii\base\Module
 
     /**
      * @todo rename the resolveControllerRoute
-     * 
+     *
      * @param unknown $route
+     *
      * @return string
      */
     public function findControllerRoute($route)
@@ -153,13 +154,14 @@ abstract class Module extends \yii\base\Module
 
     /**
      * register a component to the application. id => definition. All components will be registered during bootstrap process.
+     *
      * @return array:
      */
     public function registerComponents()
     {
         return [];
     }
-    
+
     /**
      * The import method will be called from exec/import command.
      *

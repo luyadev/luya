@@ -31,14 +31,14 @@ class UrlManager extends \yii\web\UrlManager
         if (!(Yii::$app->has('composition'))) {
             return $route;
         }
-        
+
         $composition = Yii::$app->composition->getFull();
 
         $length = strlen($composition);
         if (substr($route[0], 0, $length) == $composition) {
             $route[0] = substr($route[0], $length);
         }
-        
+
         return $route;
     }
 
@@ -78,12 +78,11 @@ class UrlManager extends \yii\web\UrlManager
         if (!Yii::$app->has('composition')) {
             return parent::createUrl($params);
         }
-        
-        
+
         $links = Yii::$app->get('links', false);
-        
+
         $composition = Yii::$app->composition->getFull();
-        
+
         $originalParams = $params;
 
         $params[0] = $composition.$params[0];
@@ -105,11 +104,12 @@ class UrlManager extends \yii\web\UrlManager
         if ($this->getContextNavItemId() && $links !== null) {
             $link = $links->findOneByArguments(['id' => (int) $this->getContextNavItemId()]);
             $this->resetContext();
+
             return preg_replace("/$moduleName/", $composition.$link['url'], $response, 1);
         }
 
         $context = false;
-        
+
         if ($moduleName !== false) {
             $moduleObject = \yii::$app->getModule($moduleName);
 
@@ -126,11 +126,12 @@ class UrlManager extends \yii\web\UrlManager
             // because the urlCreation of yii returns a realtive url we have to manually add the composition getFull() path.
             $baseUrl = yii::$app->request->baseUrl;
             if (empty($baseUrl)) {
-                $response = Url::removeTrailing($composition) . $response;
+                $response = Url::removeTrailing($composition).$response;
             } else {
-                $response = str_replace($baseUrl, Url::trailing($baseUrl) . Url::removeTrailing($composition), $response);
+                $response = str_replace($baseUrl, Url::trailing($baseUrl).Url::removeTrailing($composition), $response);
             }
         }
+
         return $response;
     }
 }

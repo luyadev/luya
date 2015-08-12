@@ -25,9 +25,9 @@ abstract class Boot
     public $configName = 'server.php';
 
     public $yiiPath = null;
-    
+
     public $yii = null;
-    
+
     public $mockOnly = false;
 
     private function beforeRun()

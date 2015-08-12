@@ -9,7 +9,7 @@ abstract class BaseActiveController extends \yii\rest\ActiveController implement
     public $createScenario = 'restcreate';
 
     public $updateScenario = 'restupdate';
-    
+
     public function checkAccess($action, $model = null, $params = [])
     {
         // override

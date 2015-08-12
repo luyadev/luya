@@ -7,9 +7,9 @@ class Mail extends \yii\base\Component
     private $_phpmailer = null;
 
     public $from = 'php@zephir.ch';
-    
+
     public $fromName = 'php@zephir.ch';
-    
+
     public $host = 'mail.zephir.ch';
 
     public $username = 'php@zephir.ch';
@@ -19,9 +19,9 @@ class Mail extends \yii\base\Component
     public $isSMTP = true;
 
     public $altBody = 'Please use a HTML compatible E-Mail-Client to read this E-Mail.';
-    
+
     public $port = '587';
-    
+
     public function mailer()
     {
         if ($this->_phpmailer === null) {
@@ -29,10 +29,10 @@ class Mail extends \yii\base\Component
             $this->_phpmailer->do_debug = 0;
             $this->_phpmailer->CharSet = 'UTF-8';
         }
-        
+
         return $this->_phpmailer;
     }
-    
+
     public function create()
     {
         if ($this->isSMTP) {
@@ -48,8 +48,8 @@ class Mail extends \yii\base\Component
                 'ssl' => array(
                     'verify_peer' => false,
                     'verify_peer_name' => false,
-                    'allow_self_signed' => true
-                )
+                    'allow_self_signed' => true,
+                ),
             );
         }
         $this->mailer()->From = $this->from;
@@ -64,6 +64,7 @@ class Mail extends \yii\base\Component
         $this->create();
         $this->mailer()->Subject = $subject;
         $this->mailer()->Body = $body;
+
         return $this;
     }
 
