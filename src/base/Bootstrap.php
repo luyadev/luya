@@ -17,8 +17,6 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
     
     public function bootstrap($app)
     {
-        //$this->setModules($app->getModules());
-        //$this->expand($app->getModules());
         $this->setModules($app);
         $this->beforeRun($app);
         $this->registerComponents($app);
@@ -44,14 +42,6 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
         return $this->_modules;
     }
 
-    /*
-    private function setModules(array $modules)
-    {
-        foreach($modules as $id => $obj) {
-            $this->_modules[$id] = Yii::$app->getModule($id);
-        }
-    }
-    */
     private function registerComponents($app)
     {
         foreach ($this->getModules() as $id => $module) {
@@ -65,43 +55,6 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
             }
         }
     }
-
-    /*
-    protected function getModule($key)
-    {
-        return (array_key_exists($key, $this->_modules)) ? $this->_modules[$key] : false;
-    }
-
-    protected function getModules()
-    {
-        return $this->_modules;
-    }
-
-    private function expand($modules)
-    {
-        foreach ($modules as $id => $class) {
-            // avoid exception if the module defintions looks like this ['cms' => ['class' => 'path/to/class']]
-            if (is_array($class)) {
-                $class = $class['class'];
-            }
-
-            $this->_modules[] = [
-                'id' => $id,
-                'class' => $class,
-                'reflection' => new \ReflectionClass($class),
-            ];
-        }
-    }
-
-    protected function getReflectionPropertyValue($reflection, $property)
-    {
-        if ($reflection->hasProperty($property)) {
-            return $reflection->getProperty($property)->getValue();
-        }
-
-        return false;
-    }
-    */
 
     abstract public function beforeRun($app);
 

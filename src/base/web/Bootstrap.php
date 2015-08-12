@@ -33,34 +33,8 @@ class Bootstrap extends \luya\base\Bootstrap
             
             foreach($module->apis as $alias => $class) {
                 $this->_apis[$alias] = $class;
-                /*
-                    'moduleId' => $id,
-                    'class' => $class,
-                    'alias' => $alias,
-                ];
-                */
             }
         }
-        /*
-        foreach ($this->getModules() as $item) {
-            // get static urlRules array
-            if (($urlRules = $this->getReflectionPropertyValue($item['reflection'], 'urlRules')) !== false) {
-                foreach ($urlRules as $k => $v) {
-                    $this->_urlRules[] = $v;
-                }
-            }
-            // get static apis array
-            if (($apis = $this->getReflectionPropertyValue($item['reflection'], 'apis')) !== false) {
-                foreach ($apis as $alias => $class) {
-                    $this->_apis[] = [
-                        'moduleId' => $item['id'],
-                        'class' => $class,
-                        'alias' => $alias,
-                    ];
-                }
-            }
-        }
-        */
     }
 
     public function run($app)
@@ -81,8 +55,5 @@ class Bootstrap extends \luya\base\Bootstrap
         }
         
         $app->getUrlManager()->addRules($this->_urlRules, false);
-        // set params
-        //Param::set('adminAssets', $this->_adminAssets);
-        //Param::set('adminMenus', $this->_adminMenus);
     }
 }

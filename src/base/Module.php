@@ -24,8 +24,6 @@ class Module extends \yii\base\Module
      * @var array
      */
     public $apis = [];
-
-    //public $apis = [];
     
     /**
      * Contains all urlRules for this module. Can't provided in key value pairing for pattern<=>route. must be array containing
@@ -34,8 +32,6 @@ class Module extends \yii\base\Module
      * @var array
      */
     public $urlRules = [];
-
-    //public $urlRules = [];
     
     public $isAdmin = false;
     
