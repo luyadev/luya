@@ -33,6 +33,11 @@ abstract class Module extends \yii\base\Module
      */
     public $urlRules = [];
 
+    /**
+     * Determines if a Module is an admin Module or not. This way we can easely change the boot behavior for each Module.
+     * 
+     * @var booelan
+     */
     public $isAdmin = false;
 
     /**
