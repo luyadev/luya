@@ -8,5 +8,7 @@ interface Config
     
     public function getConfig();
     
+    public function getHash();
+    
     public function onFinish();
 }
