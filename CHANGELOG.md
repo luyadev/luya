@@ -4,7 +4,7 @@ LUYA CHANGELOG
 1.0.0-alpha16 (in progress)
 ---------------------------
 - [445ff99](https://github.com/zephir/luya/commit/445ff99e121feac2928aa121830ba53df987e249) Made base classes abstract, changed `luya\base\Boot` to `luya\Boot`, moved traits out of base folder.
-- [bb66c16](https://github.com/zephir/luya/commit/bb66c1641a5465c61e7731fbcef028bcecfbbfc1) moved composition into luya components.
+- [bb66c16](https://github.com/zephir/luya/commit/bb66c1641a5465c61e7731fbcef028bcecfbbfc1) moving composition into luya components.
 
 1.0.0-alpha15 (11. Aug 2015)
 ---------------------------
