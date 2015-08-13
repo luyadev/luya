@@ -4,7 +4,7 @@ namespace tests\src;
 
 use Yii;
 
-class NgRestPluginTest extends \tests\BaseTest
+class NgRestTest extends \tests\BaseTest
 {
     
     private function getConfig()

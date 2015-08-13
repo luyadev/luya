@@ -9,8 +9,6 @@ namespace admin\ngrest\plugins;
  */
 class CheckboxRelation extends \admin\ngrest\base\Plugin
 {
-    use \admin\ngrest\PluginTrait;
-
     public $model = null;
 
     public $modelTable = null;
@@ -30,6 +28,8 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
      * @param unknown $refJoinTable news_article_tag
      * @param unknown $refModelPkId news_article_tag.arictle_id
      * @param unknown $refJoinPkId  news_article_tag.tag_id
+     * @param array $displayFields
+     * @param string $displayTemplate
      */
     public function __construct($model, $refJoinTable, $refModelPkId, $refJoinPkId, array $displayFields, $displayTemplate = null)
     {
@@ -67,13 +67,11 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
         return ['items' => $items];
     }
     
-    /*
-    public $options = [
-        "model" => "",
-        "joinModel" => "",
-        ""
-    ];
-    */
+    public function renderList($doc)
+    {
+        return $doc;
+    }
+    
     public function renderCreate($doc)
     {
         $items = [];
@@ -88,18 +86,16 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
 
         return $doc;
     }
-    
-    public function serviceData()
-    {
-        return ['relationdata' => $this->getOptionsData()];
-    }
 
     public function renderUpdate($doc)
     {
         return $this->renderCreate($doc);
     }
 
-    //
+    public function serviceData()
+    {
+        return ['relationdata' => $this->getOptionsData()];
+    }
 
     public function onAfterFind($value)
     {

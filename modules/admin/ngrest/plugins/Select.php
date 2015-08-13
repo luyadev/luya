@@ -13,8 +13,6 @@ namespace admin\ngrest\plugins;
  */
 abstract class Select extends \admin\ngrest\base\Plugin
 {
-    use \admin\ngrest\PluginTrait;
-
     public $initValue = null;
     
     public $data = [];
@@ -38,16 +36,16 @@ abstract class Select extends \admin\ngrest\base\Plugin
         return $doc;
     }
     
-    public function serviceData()
-    {
-        return ['selectdata' => $this->data];
-    }
-
     public function renderUpdate($doc)
     {
         return $this->renderCreate($doc);
     }
     
+    public function serviceData()
+    {
+        return ['selectdata' => $this->data];
+    }
+
     public function onAfterNgRestList($fieldValue)
     {
         foreach($this->data as $item) {

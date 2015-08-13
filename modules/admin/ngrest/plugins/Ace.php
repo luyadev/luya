@@ -9,8 +9,6 @@ namespace admin\ngrest\plugins;
  */
 class Ace extends \admin\ngrest\base\Plugin
 {
-    use \admin\ngrest\PluginTrait;
-
     public $theme = null;
 
     public $mode = null;
@@ -19,6 +17,11 @@ class Ace extends \admin\ngrest\base\Plugin
     {
         $this->theme = $theme;
         $this->mode = $mode;
+    }
+    
+    public function renderList($doc)
+    {
+        return $doc;
     }
 
     public function renderCreate($doc)
