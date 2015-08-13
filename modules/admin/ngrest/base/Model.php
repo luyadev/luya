@@ -217,12 +217,21 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
     public function getNgRestConfig()
     {
         if ($this->_config == null) {
-            $config = new \admin\ngrest\Config($this->ngRestApiEndpoint(), $this->ngRestPrimaryKey());
+            $config = Yii::createObject(['class' => '\admin\ngrest\Config', 'apiEndpoint' => $this->ngRestApiEndpoint(), 'primaryKey' => $this->ngRestPrimaryKey()]);
             
-            $config->setExtraFields($this->extraFields());
-            $config->i18n($this->getI18n());
+            //$config->setExtraFields($this->extraFields());
+            //$config->i18n($this->getI18n());
             
-            $this->_config = $this->ngRestConfig($config);
+            $configBuilder = new \admin\ngrest\ConfigBuilder();
+            
+            $this->ngRestConfig($configBuilder);
+            
+            
+            $config->setConfig($configBuilder->getConfig());
+            foreach($this->getI18n() as $fieldName) {
+                $config->appendFieldOption($fieldName, 'i18n', true);
+            }
+            $this->_config = $config;
         }
         
         return $this->_config;

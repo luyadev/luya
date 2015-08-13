@@ -2,249 +2,201 @@
 
 namespace admin\ngrest;
 
+use Exception;
+use yii\helpers\ArrayHelper;
+
 /**
- * ['list' => [
+ * 
+ * Example config array to `setConfig($array)`:
+ * 
+ * ```php
+ * $array = [
+ *     'list' => [
  *         'firstname' => [
  *             'name' => 'firstname',
  *             'alias' => 'Vorname',
+ *             'gridCols' => 12,
+ *             'i18n' => false,
+ *             'extraField' => false,
  *             'plugins' => [
- *                 'class' => '\\luya\\ngrest\\plugins\\Dropdown',
+ *                 'class' => '\\admin\\ngrest\\plugins\\Text',
  *                 'args' => ['arg1' => 'arg1_value', 'arg2' => 'arg2_value']
  *             ]
  *         ]
+ *     ],
+ *     'create' => [
+ *         //...
  *     ]
- * ].
+ * ];
+ * ```
  *
  * @author nadar
+ * @todo re-implements \admin\ngrest\base\ConfigInterface 
  */
-class Config implements \admin\ngrest\base\ConfigInterface
+class Config extends \yii\base\Object
 {
-    private $config = [];
-
-    private $pointer = [];
-
-    private $pointersMap = ['list', 'create', 'update', 'delete', 'aw'];
-
-    private $options = [];
-
-    private $_plugins = [];
+    private $_config = [];
     
-    public $i18n = [];
-
-    public $extraFields = [];
-
-    private $restUrlPrefix = 'admin/'; /* could be: http://www.yourdomain.com/admin/; */
-
+    private $_plugins = null;
+    
+    private $_extraFields = null;
+    
+    private $_hash = null;
+    
     public $apiEndpoint = null;
     
-    public function __construct($restUrl, $restPrimaryKey, $options = [])
+    public $primaryKey = null; /* not sure yet if right place to impelment about config */
+    
+    public function setConfig($config)
     {
-        $this->apiEndpoint = $restUrl;
-        $this->restUrl = $this->restUrlPrefix.$restUrl;
-        $this->restPrimaryKey = $restPrimaryKey;
-        $this->options = $options;
-        $this->list->field($restPrimaryKey, 'ID')->text();
-    }
-
-    public function __set($key, $value)
-    {
-        if (!array_key_exists($key, $this->config)) {
-            $this->config[$key] = $value;
+        if (count($this->_config) > 0) {
+            throw new Excepiont("Cant set config if config is not empty");
         }
-    }
-
-    public function pointerExists($pointer)
-    {
-        return array_key_exists($pointer, $this->config);
-    }
-
-    public function isDeletable()
-    {
-        return ($this->getKey('delete') === true) ? true : false;   
+        
+        $this->_config = $config;
     }
     
-    public function __get($key)
+    public function getConfig()
     {
-        // @TODO see if pointer exists in $this->$pointersMap
-        if (!in_array($key, $this->pointersMap)) {
-            throw new \Exception("the requested pointer $key does not exists in the pointer map config");
-        }
-        $this->$key = [];
-        $this->pointer['key'] = $key;
-
-        return $this;
-    }
-
-    public function __call($name, $args)
-    {
-        $plugin = ['class' => '\\admin\\ngrest\\plugins\\'.ucfirst($name), 'args' => $args ];
-        $this->config[$this->pointer['key']][$this->pointer['field']]['plugins'][] = $plugin;
-        $this->addPlugin($this->pointer['field'], $plugin);
-        return $this;
+        return $this->_config;
     }
     
-    private function addPlugin($field, $plugin)
+    public function getHash()
     {
-        $class = $plugin['class'];
-        if (!isset($this->_plugins[$field])) { $this->_plugins[$field] = []; }
-        if (!array_key_exists(md5($class), $this->_plugins[$field])) {
-            $this->_plugins[$field][md5($class)] = $plugin;
+        if ($this->_hash === null) {
+            $this->_hash = md5($this->apiEndpoint);
         }
-    }
-
-    public function getPlugins()
-    {
-        return $this->_plugins;
+        
+        return $this->_hash;
     }
     
-    /**
-     * return the all plugins fore this type.
-     *
-     * @todo should we directly return the static class method from the plugin as lambda function?
-     */
-    public function getPluginsByType($type)
+    public function hasPointer($pointer)
     {
-        $events = [];
-        foreach ($this->getKey($type) as $item) {
-            foreach ($item['plugins'] as $plugin) {
-                $events[$item['name']][] = $plugin;
-            }
+        return array_key_exists($pointer, $this->_config);
+    }
+    
+    public function getPointer($pointer)
+    {
+        return ($this->hasPointer($pointer)) ? $this->_config[$pointer] : false;
+    }
+    
+    public function hasField($pointer, $field)
+    {
+        return ($this->getPointer($pointer)) ? array_key_exists($field, $this->_config[$pointer]) : false;
+    }
+    
+    public function getField($pointer, $field)
+    {
+        return ($this->hasField($pointer, $field)) ? $this->_config[$pointer][$field] : false;
+    }
+    
+    public function addField($pointer, $field, array $options = [])
+    {
+        if ($this->hasField($pointer, $field)) {
+            return false;
         }
-
-        return $events;
+        
+        $options = ArrayHelper::merge([
+            'name' => null,
+            'gridCols' => 12,
+            'alias' => null,
+            'plugins' => [],
+            'i18n' => false,
+            'extraField' => false,
+        ], $options);
+        
+        
+        $this->_config[$pointer][$field] = $options;
     }
-
-    /**
-     * testing purpose.
-     *
-     * @param array $fields
-     */
-    public function i18n(array $fields)
+    
+    public function appendFieldOption($fieldName, $optionKey, $optionValue)
     {
-        $this->i18n = $fields;
-    }
-
-    public function field($name, $alias = null, $gridCols = 12)
-    {
-        $this->config[$this->pointer['key']][$name] = [
-            'name' => $name, 'gridCols' => $gridCols, 'alias' => (is_null($alias)) ? $name : $alias, 'plugins' => [], 'i18n' => false, 'extraField' => false,
-        ];
-        $this->pointer['field'] = $name;
-
-        return $this;
-    }
-
-    public function extraField($name, $alias, $gridCols = 12)
-    {
-        if (!$this->extraFieldExists($name)) {
-            throw new \Exception('If you set extraFields, you have to define them first as a property inside your AR model.');
-        }
-
-        $this->config[$this->pointer['key']][$name] = [
-            'name' => $name, 'gridCols' => $gridCols, 'alias' => $alias, 'plugins' => [], 'i18n' => false, 'extraField' => true,
-        ];
-        $this->pointer['field'] = $name;
-
-        return $this;
-    }
-
-    public function fieldArgAppend($fieldName, $key, $value)
-    {
-        foreach ($this->pointersMap as $pointer) {
-            if ($this->pointerExists($pointer) && is_array($this->config[$pointer])) {
-                foreach ($this->config[$pointer] as $field => $args) {
-                    if ($fieldName !== $field) {
-                        continue;
+        foreach($this->getConfig() as $pointer => $fields) {
+            if (is_array($fields)) {
+                foreach($fields as $field) {
+                    if ($field['name'] == $fieldName) {
+                        $this->_config[$pointer][$field['name']][$optionKey] = $optionValue;
                     }
-                    $this->config[$pointer][$field][$key] = $value;
                 }
             }
         }
     }
-
-    public function copyFrom($key, $removeFields = [])
+    
+    public function isDeletable()
     {
-        $temp = $this->config[$key];
-        foreach ($removeFields as $name) {
-            if (!array_key_exists($name, $temp)) {
-                throw new \Exception("Unable to remove field '$name' from '$key' config. The field does not exists in the provided config.");
+        return ($this->getPointer('delete') === true) ? true : false;
+    }
+    
+    /**
+     * @todo: combine getPlugins and getExtraFields()
+     */
+    public function getPlugins()
+    {
+        if ($this->_plugins === null) {
+            $plugins = [];
+            foreach($this->getConfig() as $pointer => $fields) {
+                if (is_array($fields)) {
+                    foreach($fields as $field) {
+                        if (isset($field['plugins'])) {
+                            foreach($field['plugins'] as $plugin) {
+                                
+                                $fieldName = $field['name'];
+                                $hash = md5($plugin['class']);
+                                
+                                if (!array_key_exists($fieldName, $plugins)) {
+                                    $plugins[$fieldName] = [];
+                                }
+                                if (!array_key_exists($hash, $plugins[$fieldName])) {
+                                    $plugins[$fieldName][$hash] = $plugin;
+                                }
+                            }
+                        }
+                    }
+                }
             }
-            unset($temp[$name]);
+            $this->_plugins = $plugins;
         }
-        $this->config[$this->pointer['key']] = $temp;
+        
+        return $this->_plugins;
     }
-
-    public function register($activeWindowObject, $alias)
+    
+    /**
+     * @todo: combine getPlugins and getExtraFields()
+     */
+    public function getExtraFields()
     {
-        if ($this->pointer['key'] !== 'aw') {
-            throw new \Exception('register method can only be used in aw pointer context.');
-        }
-        $activeWindowClass = get_class($activeWindowObject);
-        $activeWindowHash = sha1($this->getNgRestConfigHash().$activeWindowClass);
-        $this->config[$this->pointer['key']][$activeWindowHash] = [
-            'object' => $activeWindowObject,
-            'activeWindowHash' => $activeWindowHash,
-            'class' => $activeWindowClass,
-            'alias' => $alias,
-            'on' => [], // remove fully
-        ];
-        $this->pointer['register'] = $activeWindowHash;
-
-        return $this;
+       if ($this->_extraFields === null) {
+           $extraFields = [];
+           foreach($this->getConfig() as $pointer => $fields) {
+               if (is_array($fields)) {
+                   foreach($fields as $field) {
+                       if (isset($field['extraField']) && $field['extraField']) {
+                           if (!array_key_exists($field['name'], $extraFields)) {
+                               $extraFields[] = $field['name'];
+                           }
+                       }
+                   }
+               }
+           }
+           $this->_extraFields = $extraFields;
+       }   
+       
+       return $this->_extraFields;
     }
-
-    public function get()
-    {
-        return $this->config;
-    }
-
-    public function getOption($key, $defaultValue = '')
-    {
-        return (isset($this->options[$key])) ? $this->options[$key] : $defaultValue;
-    }
-
-    public function getKey($key)
-    {
-        if (isset($this->config[$key])) {
-            return $this->config[$key];
-        }
-
-        return [];
-    }
-
-    public function getRestUrl()
-    {
-        return $this->config['restUrl'];
-    }
-
-    public function getRestPrimaryKey()
-    {
-        return $this->config['restPrimaryKey'];
-    }
-
-    public function getNgRestConfigHash()
-    {
-        return ucfirst(sha1($this->config['restUrl'].$this->config['restPrimaryKey']));
-    }
-
-    public function extraFieldExists($name)
-    {
-        if (in_array($name, $this->extraFields)) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public function setExtraFields(array $extraFields)
-    {
-        $this->extraFields = $extraFields;
-    }
-
+    
     public function onFinish()
     {
-        foreach ($this->i18n as $fieldName) {
-            $this->fieldArgAppend($fieldName, 'i18n', true);
+        if (!$this->hasField('list', $this->primaryKey)) {
+            $this->addField('list', $this->primaryKey, [
+                'name' => $this->primaryKey,
+                'alias' => 'ID',
+                'plugins' => [
+                    [
+                        'class' => '\admin\ngrest\plugins\Text',
+                        'args' => [],
+                    ]
+                ]
+            ]);
         }
     }
 }

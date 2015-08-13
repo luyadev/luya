@@ -44,7 +44,7 @@ class NgRest
     public static function findConfig($ngRestConfigHash)
     {
         // decode the session, find the hash, if yes return the
-        $session = yii::$app->session->get($ngRestConfigHash);
+        $session = Yii::$app->session->get($ngRestConfigHash);
         // valid session usnerialize and return
         if ($session) {
             return unserialize($session);
@@ -53,6 +53,6 @@ class NgRest
 
     public function __destruct()
     {
-        yii::$app->session->set($this->config->getNgRestConfigHash(), serialize($this->config));
+        yii::$app->session->set($this->config->hash, serialize($this->config));
     }
 }

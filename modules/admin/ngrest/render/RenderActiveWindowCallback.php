@@ -15,7 +15,7 @@ class RenderActiveWindowCallback extends \admin\ngrest\base\Render implements \a
 {
     public function render()
     {
-        $activeWindows = $this->config->getKey('aw');
+        $activeWindows = $this->config->getPointer('aw');
         $obj = $activeWindows[$_GET['activeWindowHash']]['object'];
 
         $function = 'callback'.ucfirst($_GET['activeWindowCallback']);

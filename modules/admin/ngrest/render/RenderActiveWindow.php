@@ -36,7 +36,7 @@ class RenderActiveWindow extends \admin\ngrest\base\Render implements \admin\ngr
 
     public function findActiveWindow($activeWindowHash)
     {
-        $activeWindows = $this->config->getKey('aw');
+        $activeWindows = $this->config->getPointer('aw');
         if (array_key_exists($activeWindowHash, $activeWindows)) {
             return $activeWindows[$activeWindowHash];
         }

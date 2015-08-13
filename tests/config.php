@@ -31,7 +31,12 @@ $config = [
             'username' => DB_USER,
             'password' => DB_PASS,
             'charset' => 'utf8'
-        ]
+        ],
+        'errorHandler' => [
+            'class' => '\luya\cli\ErrorHandler',
+            'memoryReserveSize' => 0,
+            'transferException' => false,
+        ],
     ]
 ];
 

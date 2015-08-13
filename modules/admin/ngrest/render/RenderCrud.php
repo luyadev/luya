@@ -18,12 +18,11 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\base
 
     const TYPE_UPDATE = 'update';
 
-    public function __get($key)
-    {
-        return $this->config->getKey($key);
-    }
+    public $viewFile = '@admin/views/ngrest/render/crud.php';
     
     private $_permissions = [];
+    
+    private $_buttons = null;
     
     public function can($type)
     {
@@ -38,17 +37,20 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\base
     {
         $view = new \yii\base\View();
 
-        return $view->render('@admin/views/ngrest/render/crud.php', array(
+        return $view->render($this->viewFile, array(
             'canCreate' => $this->can(Auth::CAN_CREATE),
             'canUpdate' => $this->can(Auth::CAN_UPDATE),
             'canDelete' => $this->can(Auth::CAN_DELETE),
-            'crud' => $this,
+            //'crud' => $this,
             'config' => $this->config,
             'activeWindowCallbackUrl' => 'admin/ngrest/callback',
-        ));
+        ), $this);
     }
 
-    private $_buttons = null;
+    public function getRestUrl()
+    {
+        return 'admin/' . $this->config->apiEndpoint;
+    }
     
     /**
      * collection all the buttons in the crud list.
@@ -70,7 +72,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\base
             // do we have an edit button
             if (count($this->getFields('update')) > 0 && $this->can(Auth::CAN_UPDATE)) {
                 $buttons[] = [
-                    'ngClick' => 'toggleUpdate(item.'.$this->config->getRestPrimaryKey().', $event)',
+                    'ngClick' => 'toggleUpdate(item.'.$this->config->primaryKey.', $event)',
                     'icon' => 'mdi-editor-mode-edit',
                     'label' => '',
                 ];
@@ -78,7 +80,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\base
             // get all activeWindows assign to the crud
             foreach ($this->getActiveWindows() as $activeWindow) {
                 $buttons[] = [
-                    'ngClick' => 'getActiveWindow(\''.$activeWindow['activeWindowHash'].'\', item.'.$this->config->getRestPrimaryKey().', $event)',
+                    'ngClick' => 'getActiveWindow(\''.$activeWindow['activeWindowHash'].'\', item.'.$this->config->primaryKey.', $event)',
                     'icon' => '',
                     'label' => $activeWindow['alias'],
                 ];
@@ -86,7 +88,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\base
     
             if ($this->config->isDeletable() && $this->can(Auth::CAN_DELETE)) {
                 $buttons[] = [
-                    'ngClick' => 'deleteItem(item.'.$this->config->getRestPrimaryKey().', $event)',
+                    'ngClick' => 'deleteItem(item.'.$this->config->primaryKey.', $event)',
                     'icon' => '',
                     'label' => 'Löschen'  
                 ];
@@ -104,10 +106,16 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\base
         return 'ngrestCall=true&ngrestCallType='.$type.'&fields='.implode(',', $this->getFields($type)).'&expand='.implode(',', $this->config->extraFields);
     }
 
+    /**
+     * wrapper of $config->getPointer to get only the fields
+     */
     public function getFields($type)
     {
+        if (!$this->config->hasPointer($type)) {
+            return [];
+        }
         $fields = [];
-        foreach ($this->config->getKey($type) as $item) {
+        foreach ($this->config->getPointer($type) as $item) {
             $fields[] = $item['name'];
         }
 
@@ -116,7 +124,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\base
 
     public function getActiveWindows()
     {
-        return ($activeWindows = $this->config->getKey('aw')) ? $activeWindows : [];
+        return ($activeWindows = $this->config->getPointer('aw')) ? $activeWindows : [];
     }
 
     /**
