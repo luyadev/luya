@@ -10,7 +10,7 @@ use admin\components\Auth;
  *
  * @author nadar
  */
-class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\base\RenderInterface
+class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\interfaces\Render
 {
     const TYPE_LIST = 'list';
 

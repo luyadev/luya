@@ -11,7 +11,7 @@ use Yii;
  *
  * @author nadar
  */
-class RenderActiveWindowCallback extends \admin\ngrest\base\Render implements \admin\ngrest\base\RenderInterface
+class RenderActiveWindowCallback extends \admin\ngrest\base\Render implements \admin\ngrest\interfaces\Render
 {
     public function render()
     {

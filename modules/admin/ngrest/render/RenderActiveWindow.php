@@ -8,7 +8,7 @@ namespace admin\ngrest\render;
  *
  * @author nadar
  */
-class RenderActiveWindow extends \admin\ngrest\base\Render implements \admin\ngrest\base\RenderInterface
+class RenderActiveWindow extends \admin\ngrest\base\Render implements \admin\ngrest\interfaces\Render
 {
     private $itemId = null;
 

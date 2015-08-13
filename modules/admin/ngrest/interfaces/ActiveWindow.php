@@ -1,8 +1,8 @@
 <?php
 
-namespace admin\ngrest\base;
+namespace admin\ngrest\interfaces;
 
-interface ActiveWindowInterface
+interface ActiveWindow
 {
     public function setItemId($id);
 

@@ -2,7 +2,7 @@
 
 namespace admin\ngrest\base;
 
-abstract class ActiveWindow implements \admin\ngrest\base\ActiveWindowInterface
+abstract class ActiveWindow implements \admin\ngrest\interfaces\ActiveWindow
 {
     public $config = false;
 

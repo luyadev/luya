@@ -47,7 +47,7 @@ class Config extends \yii\base\Object
     
     public $primaryKey = null; /* not sure yet if right place to impelment about config */
     
-    public function setConfig($config)
+    public function setConfig(array $config)
     {
         if (count($this->_config) > 0) {
             throw new Excepiont("Cant set config if config is not empty");

@@ -4,7 +4,7 @@ namespace admin\ngrest;
 
 use Exception;
 
-class ConfigBuilder
+class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
 {
     protected $pointer = null;
     
