@@ -15,7 +15,7 @@ class LuyaUrlRuleTest extends \tests\BaseTest
     {
         Yii::$app->composition->pattern = '<langShortCode:[a-z]{2}>/<foo:[0-9]{4}>/<bar:[a-z0-9]+>';
         
-        $request = new \yii\web\Request();
+        $request = new \luya\components\Request();
         $request->pathInfo = 'de/1234/luya09/my/website';
         
         $manager = new \luya\components\UrlManager();

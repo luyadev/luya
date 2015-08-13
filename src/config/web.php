@@ -21,6 +21,7 @@ $config = [
             'appendTimestamp' => !YII_DEBUG,
         ],
         'request' => [
+            'class' => 'luya\components\Request',
             'cookieValidationKey' => 'cookeivalidationkey',
             'enableCsrfValidation' => false,
             'parsers' => [

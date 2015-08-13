@@ -32,7 +32,7 @@ class RequestTest extends \tests\BaseTest
         $urlManager = new \luya\components\UrlManager();
         $urlManager->addRules($this->urlRules);
         
-        $request = new \yii\web\Request();
+        $request = new \luya\components\Request();
         $request->pathInfo = 'news/detail/1/foo-bar';
         
         $r = $urlManager->parseRequest($request);
@@ -54,7 +54,7 @@ class RequestTest extends \tests\BaseTest
         $urlManager = new \luya\components\UrlManager();
         $urlManager->addRules($this->urlRules);
         
-        $request = new \yii\web\Request();
+        $request = new \luya\components\Request();
         $request->pathInfo = 'news/english-test/1';
         
         $r = $urlManager->parseRequest($request);

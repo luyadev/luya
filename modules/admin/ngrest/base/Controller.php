@@ -2,6 +2,8 @@
 
 namespace admin\ngrest\base;
 
+use Yii;
+
 class Controller extends \admin\base\Controller
 {
     public $modelClass = null;
@@ -23,7 +25,7 @@ class Controller extends \admin\base\Controller
 
         $class = $this->getModelClass();
 
-        $this->_model = new $class();
+        $this->_model = Yii::createObject($class);
 
         return $this->_model;
     }

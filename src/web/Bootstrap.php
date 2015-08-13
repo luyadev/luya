@@ -45,13 +45,17 @@ class Bootstrap extends \luya\base\Bootstrap
             }
         }
 
-        if ($this->hasModule('admin')) {
-            $app->getModule('admin')->controllerMap = $this->_apis;
-            $app->getModule('admin')->assets = ArrayHelper::merge($this->_adminAssets, $app->getModule('admin')->assets);
-            $app->getModule('admin')->controllerMap = $this->_apis;
-            $app->getModule('admin')->moduleMenus = $this->_adminMenus;
+        if (!$app->request->getIsConsoleRequest()) {
+        
+            if ($this->hasModule('admin') && $app->request->isAdmin()) {
+                //$app->getModule('admin')->controllerMap = $this->_apis;
+                $app->getModule('admin')->assets = ArrayHelper::merge($this->_adminAssets, $app->getModule('admin')->assets);
+                $app->getModule('admin')->controllerMap = $this->_apis;
+                $app->getModule('admin')->moduleMenus = $this->_adminMenus;
+            }
+        
         }
-
+        
         $app->getUrlManager()->addRules($this->_urlRules, false);
     }
 }

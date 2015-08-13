@@ -25,17 +25,15 @@ $config = [
 	    'cmsadmin' => 'cmsadmin\Module',
     ],
     'components' => [
+        'request' => [
+            'class' => 'yii\console\Request',
+        ],
         'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=' . DB_NAME,
             'username' => DB_USER,
             'password' => DB_PASS,
             'charset' => 'utf8'
-        ],
-        'errorHandler' => [
-            'class' => '\luya\cli\ErrorHandler',
-            'memoryReserveSize' => 0,
-            'transferException' => false,
         ],
     ]
 ];
