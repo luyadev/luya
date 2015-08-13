@@ -15,7 +15,7 @@ class Api extends \admin\base\RestActiveController
     public function actionServices()
     {
         $class = $this->modelClass;
-        $obj = \Yii::createObject($class);
+        $obj = Yii::createObject($class);
         return $obj->getNgrestServices();
     }
     
