@@ -17,6 +17,11 @@ class View extends \yii\web\View
         return $this->assetBundles[$assetName]->baseUrl;
     }
 
+    public function compress($content)
+    {
+        return preg_replace(array('/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s'), array('>', '<', '\\1'), $content);
+    }
+    
     /**
      * Helper method for convenience.
      *

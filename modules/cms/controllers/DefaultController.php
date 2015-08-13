@@ -3,8 +3,9 @@
 namespace cms\controllers;
 
 use Yii;
-use \cmsadmin\models\NavItem;
-use \yii\web\NotFoundHttpException;
+use yii\web\View;
+use yii\web\NotFoundHttpException;
+use cmsadmin\models\NavItem;
 
 class DefaultController extends \cms\base\Controller
 {
@@ -15,6 +16,15 @@ class DefaultController extends \cms\base\Controller
         parent::init();
         // set the current path to activeUrl
         Yii::$app->links->activeUrl = (isset($_GET['path']) ? $_GET['path'] : null); // @todo should we use Yii::$app->request->get('path', null); instead?
+        
+        if (!YII_DEBUG && YII_ENV == 'prod') {
+            $this->view->on(View::EVENT_AFTER_RENDER, [$this, 'minify']);
+        }
+    }
+    
+    public function minify($e)
+    {
+        return $e->output = $this->view->compress($e->output);
     }
     
     /**
