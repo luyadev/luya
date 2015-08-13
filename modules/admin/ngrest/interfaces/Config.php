@@ -10,5 +10,9 @@ interface Config
     
     public function getHash();
     
+    public function getApiEndpoint();
+    
+    public function getPrimaryKey();
+    
     public function onFinish();
 }
