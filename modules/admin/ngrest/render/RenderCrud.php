@@ -3,7 +3,10 @@
 namespace admin\ngrest\render;
 
 use Yii;
+use DOMDocument;
+use yii\base\View;
 use admin\components\Auth;
+
 /**
  * @todo complet rewrite of this class - what is the best practive to acces data in the view? define all functiosn sindie here? re-create methods from config object?
  *  $this->config() $this....
@@ -24,6 +27,10 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
     
     private $_buttons = null;
     
+    private $_view = null;
+    
+    private $_fields = [];
+    
     public function can($type)
     {
         if (!array_key_exists($type, $this->_permissions)) {
@@ -33,11 +40,18 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
         return $this->_permissions[$type];
     }
 
+    public function getView()
+    {
+        if ($this->_view === null) {
+            $this->_view = new View();
+        }
+        
+        return $this->_view;
+    }
+    
     public function render()
     {
-        $view = new \yii\base\View();
-
-        return $view->render($this->viewFile, array(
+        return $this->getView()->render($this->viewFile, array(
             'canCreate' => $this->can(Auth::CAN_CREATE),
             'canUpdate' => $this->can(Auth::CAN_UPDATE),
             'canDelete' => $this->can(Auth::CAN_DELETE),
@@ -101,9 +115,18 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
 
     public function apiQueryString($type)
     {
-        // ngrestCall was previous ngrestExpandI18n
-        // ($scope.config.apiEndpoint + '?ngrestExpandI18n=true&fields=' + $scope.config.list.join()
-        return 'ngrestCall=true&ngrestCallType='.$type.'&fields='.implode(',', $this->getFields($type)).'&expand='.implode(',', $this->config->extraFields);
+        // basic query
+        $query = ['ngrestCall' => true, 'ngrestCallType' => $type];
+        // see if we have fields for this type
+        if (count($this->getFields($type)) > 0) {
+            $query['fields'] = implode(',', $this->getFields($type));
+        }
+        // doe we have extra fields to expand
+        if (count($this->config->extraFields) > 0) {
+            $query['expand'] = implode(',', $this->config->extraFields);
+        }
+        // return url decoed string from http_build_query
+        return urldecode(http_build_query($query));
     }
 
     /**
@@ -111,15 +134,23 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
      */
     public function getFields($type)
     {
-        if (!$this->config->hasPointer($type)) {
-            return [];
+        if (!array_key_exists($type, $this->_fields)) {
+            $fields = [];
+            if ($this->config->hasPointer($type)) {
+                foreach ($this->config->getPointer($type) as $item) {
+                    $fields[] = $item['name'];
+                }
+            }
+            
+            $this->_fields[$type] = $fields;
         }
-        $fields = [];
-        foreach ($this->config->getPointer($type) as $item) {
-            $fields[] = $item['name'];
-        }
-
-        return $fields;
+        
+        return $this->_fields[$type];
+    }
+    
+    public function getFieldsJson($type)
+    {
+        return json_encode($this->getFields($type));
     }
 
     public function getActiveWindows()
@@ -172,13 +203,13 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
 
     private function renderElementPlugins($configContext, $plugins, $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmnGridCols)
     {
-        $doc = new \DOMDocument('1.0');
+        $doc = new DOMDocument('1.0');
 
         foreach ($plugins as $key => $plugin) {
             $doc = $this->renderPlugin($doc, $configContext, $plugin['class'], $plugin['args'], $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmnGridCols);
         }
 
-        return $doc->saveHTML();
+        return trim($doc->saveHTML());
     }
 
     private function renderPlugin($DOMDocument, $configContext, $className, $classArgs, $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmnGridCols)

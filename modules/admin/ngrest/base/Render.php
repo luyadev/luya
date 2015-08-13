@@ -6,7 +6,7 @@ use admin\ngrest\Config;
 
 abstract class Render
 {
-    protected $config = [];
+    public $config = [];
 
     public function setConfig(Config $config)
     {

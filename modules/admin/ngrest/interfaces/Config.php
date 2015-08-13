@@ -14,5 +14,7 @@ interface Config
     
     public function getPrimaryKey();
     
+    public function getExtraFields();
+    
     public function onFinish();
 }

@@ -7,12 +7,12 @@ zaa.bootstrap.register('<?=$config->hash; ?>', function($scope, $controller) {
     /* local controller config */
     $scope.config.apiListQueryString = '<?= $this->context->apiQueryString('list'); ?>';
     $scope.config.apiUpdateQueryString = '<?= $this->context->apiQueryString('update'); ?>';
-    $scope.config.apiEndpoint = '<?= $this->context->getRestUrl();?>';
-    $scope.config.list = <?=json_encode($this->context->getFields('list'));?>;
-    $scope.config.create = <?=json_encode($this->context->getFields('create'));?>;
-    $scope.config.update = <?=json_encode($this->context->getFields('update'));?>;
+    $scope.config.apiEndpoint = '<?= $this->context->getRestUrl(); ?>';
+    $scope.config.list = <?= $this->context->getFieldsJson('list'); ?>;
+    $scope.config.create = <?= $this->context->getFieldsJson('create'); ?>;
+    $scope.config.update = <?= $this->context->getFieldsJson('update'); ?>;
     $scope.config.ngrestConfigHash = '<?= $config->hash; ?>';
-    $scope.config.activeWindowCallbackUrl = '<?= $activeWindowCallbackUrl;?>';
+    $scope.config.activeWindowCallbackUrl = '<?= $activeWindowCallbackUrl; ?>';
 });
 </script>
 
