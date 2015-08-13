@@ -6,7 +6,6 @@ use Exception;
 use yii\helpers\ArrayHelper;
 
 /**
- * 
  * Example config array to `setConfig($array)`:
  * 
  * ```php
@@ -31,9 +30,8 @@ use yii\helpers\ArrayHelper;
  * ```
  *
  * @author nadar
- * @todo re-implements \admin\ngrest\base\ConfigInterface 
  */
-class Config extends \yii\base\Object
+class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
 {
     private $_config = [];
     
