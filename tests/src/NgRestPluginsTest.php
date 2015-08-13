@@ -50,7 +50,8 @@ class NgRestPluginsTest extends \tests\BaseTest
     {
         foreach($this->getPlugins() as $class) {
             $obj = Yii::createObject($class['class'], $class['constructor']);
-            print_r($obj);
+            $obj->setConfig('id', 'name', 'ngModel', 'alias', 12);
+            $this->assertEquals('service.name.foo', $obj->getServiceName('foo'));
         }
     }
 }
