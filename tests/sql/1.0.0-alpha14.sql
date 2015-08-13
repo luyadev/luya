@@ -137,7 +137,8 @@ CREATE TABLE IF NOT EXISTS `admin_lang` (
 --
 
 INSERT INTO `admin_lang` (`id`, `name`, `short_code`, `is_default`) VALUES
-(1, 'Deutsch', 'de', 1);
+(1, 'Deutsch', 'de', 1),
+(2, 'English', 'en', 0);
 
 -- --------------------------------------------------------
 
