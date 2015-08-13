@@ -1,10 +1,10 @@
 <?php
 
-namespace tests\src;
+namespace tests\src\ngrest;
 
 use Yii;
 
-class NgRestPluginsTest extends \tests\BaseTest
+class PluginsTest extends \tests\BaseTest
 {
     public $constructors = [
         'CheckboxRelation' => ['\\tests\\data\\Model', 'a', 'b', 'c', [1,2,3], 'de'],

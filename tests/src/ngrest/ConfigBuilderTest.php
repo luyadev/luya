@@ -1,10 +1,10 @@
 <?php
 
-namespace tests\src;
+namespace tests\src\ngrest;
 
 use Yii;
 
-class NgRestTest extends \tests\BaseTest
+class ConfigBuilderTest extends \tests\BaseTest
 {
     
     private function getConfig()

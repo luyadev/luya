@@ -1,10 +1,10 @@
 <?php
 
-namespace tests\src;
+namespace tests\src\ngrest;
 
 use admin\ngrest\render\RenderCrud;
 
-class NgRestRenderCrudTest extends \tests\BaseTest
+class RenderCrudTest extends \tests\BaseTest
 {
     private function getConfig()
     {
