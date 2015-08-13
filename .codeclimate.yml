@@ -5,3 +5,7 @@ languages:
 exclude_paths:
 - "envs/kickstarter/resources/*"
 - "envs/dev/resources/*"
+- "tests/*"
+- "sql/*"
+- "scripts/*"
+- "docs/*
