@@ -20,12 +20,11 @@
 		"php": ">=5.4.0",
 		"yiisoft/yii2": "2.0.6",
 		"twig/twig" : "1.*@stable",
-		"ext-curl" : "*",
-        "curl/curl" : "1.2.0",
+        "curl/curl" : "1.2.@stable",
         "phpmailer/phpmailer": "5.2.*@stable"
 	},
 	"require-dev" : {
-		"yiisoft/yii2-debug" : "2.0.4",
+		"yiisoft/yii2-debug" : "2.0.5",
 		"phpunit/phpunit" : "@stable",
 		"fabpot/php-cs-fixer" : "@stable"
 	},
