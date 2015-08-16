@@ -35,7 +35,7 @@ class UrlRule extends \luya\base\UrlRule
     public function parseRequest($manager, $request)
     {
         // extra data from request to composition, which changes the pathInfo of the Request-Object.
-        Yii::$app->composition->extractRequestData($request);
+        $request->setPathInfo(Yii::$app->composition->getResolvedPathInfo($request));
         
         // set user env variabls
         Yii::$app->language = Yii::$app->composition->getLanguage();

@@ -50,14 +50,11 @@ class Composition extends \yii\base\Component
      * @todo should be rewritten soon.
      * @param \yii\web\Request $request
      */
-    public function extractRequestData(\yii\web\Request $request)
+    public function getResolvedPathInfo(\yii\web\Request $request)
     {
         $parts = explode('/', $request->getPathInfo());
-        
         preg_match_all('/<(\w+):?([^>]+)?>/', $this->pattern, $matches, PREG_SET_ORDER);
-        
         $compositionKeys = [];
-        
         foreach ($matches as $index => $match) {
             if (isset($parts[$index])) {
                 $urlValue = $parts[$index];
@@ -67,18 +64,26 @@ class Composition extends \yii\base\Component
         
                 if (count($res) == 1) {
                     $compositionKeys[$param] = $urlValue;
+                    $this->_resolvedValues[] = $parts[$index];
                     unset($parts[$index]);
                 }
             }
         }
-        
-        $request->setPathInfo(implode('/', $parts));
         
         if (count($compositionKeys) == 0) {
             $compositionKeys = $this->default;
         }
         
         $this->set($compositionKeys);
+        
+        return implode('/', $parts);
+    }
+    
+    private $_resolvedValues = [];
+    
+    public function getResolvedValues()
+    {
+        return $this->_resolvedValues;
     }
     
     public function setKey($key, $value)

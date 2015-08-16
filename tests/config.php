@@ -26,7 +26,7 @@ $config = [
     ],
     'components' => [
         'request' => [
-            'class' => 'yii\console\Request',
+            'forceWebRequest' => true,
         ],
         'db' => [
             'class' => 'yii\db\Connection',

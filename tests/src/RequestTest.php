@@ -68,4 +68,25 @@ class RequestTest extends \tests\BaseTest
         
         $this->assertEquals("1", $r[1]['id']);
     }
+    
+    public function testRequestComponent()
+    {
+        $request = new \luya\components\Request();
+        $this->assertEquals(false, $request->isAdmin());
+        
+        $request = new \luya\components\Request();
+        $request->forceWebRequest = true;
+        $request->pathInfo = 'admin';
+        $this->assertEquals(true, $request->isAdmin());
+        
+        $request = new \luya\components\Request();
+        $request->forceWebRequest = true;
+        $request->pathInfo = 'de/admin';
+        $this->assertEquals(true, $request->isAdmin());
+        
+        $request = new \luya\components\Request();
+        $request->forceWebRequest = true;
+        $request->pathInfo = 'de/foo/admin';
+        $this->assertEquals(false, $request->isAdmin());
+    }
 }

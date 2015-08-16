@@ -2,14 +2,21 @@
 
 namespace luya\components;
 
+use Yii;
+
 class Request extends \yii\web\Request
 {
+    public $forceWebRequest = false;
+    
     public function isAdmin()
     {
-        if ($this->getIsConsoleRequest()) {
+        if ($this->getIsConsoleRequest() && !$this->forceWebRequest) {
             return false;
         }
-        $parts = $this->getUrlParts();
+        
+        $pathInfo = Yii::$app->composition->getResolvedPathInfo($this);
+        
+        $parts = explode('/', $pathInfo);
         $first = reset($parts);
         
         if ($first == 'admin') {
