@@ -20,7 +20,7 @@
 		"php": ">=5.4.0",
 		"yiisoft/yii2": "2.0.6",
 		"twig/twig" : "1.*@stable",
-        "curl/curl" : "1.2.@stable",
+        "curl/curl" : "1.2.1",
         "phpmailer/phpmailer": "5.2.*@stable"
 	},
 	"require-dev" : {
