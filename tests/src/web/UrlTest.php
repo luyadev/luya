@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\src;
+namespace tests\src\web;
 
 use Yii;
 use luya\helpers\Url;

@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\src\ngrest;
+namespace tests\src\web\ngrest;
 
 use admin\ngrest\render\RenderCrud;
 

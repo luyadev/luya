@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\src;
+namespace tests\src\web;
 
 use tests\data\TestBlock;
 use tests\data\tests\data;

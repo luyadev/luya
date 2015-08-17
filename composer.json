@@ -26,7 +26,8 @@
 	"require-dev" : {
 		"yiisoft/yii2-debug" : "2.0.5",
 		"phpunit/phpunit" : "@stable",
-		"fabpot/php-cs-fixer" : "@stable"
+		"fabpot/php-cs-fixer" : "@stable",
+		"imagine/imagine": "0.6.2"
 	},
 	"autoload" : {
 		"psr-4" : {

@@ -6,7 +6,7 @@ use Yii;
 
 require(__DIR__ . '/../vendor/autoload.php');
 
-class BaseWebTest extends \PHPUnit_Framework_TestCase
+class BaseCliTest extends \PHPUnit_Framework_TestCase
 {
     public $app = null;
     
@@ -20,10 +20,10 @@ class BaseWebTest extends \PHPUnit_Framework_TestCase
         if ($this->app === null) {
             $this->app = new \luya\Boot();
             $this->app->configPath = 'tests';
-            $this->app->configName = 'src/web/config.php';
+            $this->app->configName = 'src/cli/config.php';
             $this->app->mockOnly = true;
             $this->app->setYiiPath(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
-            $this->app->applicationWeb();
+            $this->app->applicationCli();
         }
     }
     

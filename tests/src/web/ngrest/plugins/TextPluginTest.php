@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\src\ngrest\plugins;
+namespace tests\src\web\ngrest\plugins;
 
 class TextPluginTest extends BasePlugin
 {

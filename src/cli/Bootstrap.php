@@ -9,7 +9,7 @@ use Yii;
  *
  * @author nadar
  */
-class Bootstrap extends \luya\cli\Bootstrap
+class Bootstrap extends \luya\base\Bootstrap
 {
     public function beforeRun($app)
     {
