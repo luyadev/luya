@@ -18,13 +18,13 @@ We have a made an absolut easy to understand *STEP-BY-STEP* Guide to install Luy
 
 ### Questions and Problems
 
-If you have any question or problem, don't hesitate to create a [new issue](https://github.com/zephir/luya/issues/new) on the project repository.
+If you have any questions or problems, don't hesitate to create a [new issue](https://github.com/zephir/luya/issues/new) on the project repository.
 
 + [Questions & Issues](https://github.com/zephir/luya/issues)
 
 ### Contribution
 
-We are always looking for poeple who share their thoughts, code and problems with us. Below the links to the contribution guides:
+We are always looking for people who share their thoughts, code and problems with us. Below the links to the contribution guides:
 
 + ![Deutsch](https://raw.githubusercontent.com/savetheinternet/Tinyboard/master/static/flags/de.png) [Anleitung](https://luya.io/de/dokumentation/luya-collaboration)
 + ![English](https://raw.githubusercontent.com/savetheinternet/Tinyboard/master/static/flags/us.png) [Guide](https://luya.io/en/docs/luya-collaboration)
