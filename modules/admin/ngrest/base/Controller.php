@@ -19,14 +19,10 @@ class Controller extends \admin\base\Controller
 
     public function getModelObject()
     {
-        if ($this->_model !== null) {
-            return $this->_model;
+        if ($this->_model === null) {
+            $this->_model = Yii::createObject($this->getModelClass());
         }
-
-        $class = $this->getModelClass();
-
-        $this->_model = Yii::createObject($class);
-
+        
         return $this->_model;
     }
 
