@@ -9,7 +9,7 @@ class ModuleController extends \luya\base\Command
 {
     public function actionCreate()
     {
-        \yii\helpers\Console::clearScreenBeforeCursor();
+        Console::clearScreenBeforeCursor();
         $moduleType = $this->select('What kind of Module you want to create?', ['frontend' => 'Frontend Modules are mainly used to render views.', 'admin' => 'Admin Modules are mainly used when you Data-Managment should be done inside the Administration area.']);
         switch ($moduleType) {
             case 'admin':
