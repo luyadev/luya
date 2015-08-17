@@ -23,7 +23,7 @@ class CrudController extends \yii\console\Controller
 
         if (!$shema) {
             echo 'you have to create a migration script and execute the migration first. the table must exists!';
-            exit(0);
+            exit(1);
         }
 
         $yiiModule = Yii::$app->getModule($module);

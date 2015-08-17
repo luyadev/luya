@@ -25,9 +25,4 @@ class Request extends \yii\web\Request
         
         return false;
     }
-    
-    private function getUrlParts()
-    {
-        return explode('/', $this->getPathInfo());
-    }
 }

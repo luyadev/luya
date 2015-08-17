@@ -5,8 +5,6 @@ namespace luya\web;
 use yii\helpers\ArrayHelper;
 
 /**
- * @todo rename to WebBootstrap and inherite the base Bootstrap class and add the web specific bootstrap stuff (like url manager)
- *
  * @author nadar
  */
 class Bootstrap extends \luya\base\Bootstrap
@@ -46,14 +44,12 @@ class Bootstrap extends \luya\base\Bootstrap
         }
 
         if (!$app->request->getIsConsoleRequest()) {
-        
             if ($this->hasModule('admin') && $app->request->isAdmin()) {
                 //$app->getModule('admin')->controllerMap = $this->_apis;
                 $app->getModule('admin')->assets = ArrayHelper::merge($this->_adminAssets, $app->getModule('admin')->assets);
                 $app->getModule('admin')->controllerMap = $this->_apis;
                 $app->getModule('admin')->moduleMenus = $this->_adminMenus;
             }
-        
         }
         
         $app->getUrlManager()->addRules($this->_urlRules, false);

@@ -2,6 +2,8 @@
 
 namespace luya\commands;
 
+use Yii;
+
 /**
  * @see https://github.com/yiisoft/yii2/issues/384
  *
@@ -34,8 +36,8 @@ class MigrateController extends \yii\console\controllers\MigrateController
     private function initModuleMigrationDirectories()
     {
         // @todo: replace with \yii::$app->params['modules']
-        foreach (\Yii::$app->modules as $key => $item) {
-            $module = \Yii::$app->getModule($key);
+        foreach (Yii::$app->modules as $key => $item) {
+            $module = Yii::$app->getModule($key);
             $this->moduleMigrationDirectories[$key] = $module->getBasePath().DIRECTORY_SEPARATOR.'migrations';
         }
     }
@@ -77,7 +79,7 @@ class MigrateController extends \yii\console\controllers\MigrateController
         }
 
         if ($this->confirm("Create new migration '$file'?")) {
-            $content = $this->renderFile(\Yii::getAlias($this->templateFile), ['className' => $name]);
+            $content = $this->renderFile(Yii::getAlias($this->templateFile), ['className' => $name]);
             file_put_contents($file, $content);
             echo "New migration created successfully.\n";
         }

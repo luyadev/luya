@@ -47,6 +47,13 @@ class Url
         return $url.(substr($url, -1) == $slash ? '' : $slash);
     }
 
+    /**
+     * remove trailing slash from url
+     * 
+     * @param string $url http://www.luya.io/
+     * @param string $slash
+     * @return string
+     */
     public static function removeTrailing($url, $slash = '/')
     {
         return rtrim($url, $slash);
@@ -68,6 +75,14 @@ class Url
         return yii::$app->urlManager->createUrl($routeParams);
     }
 
+    /**
+     * create an url based on a context nav item informaiton inside the urlManager
+     * 
+     * @param integer $navItemId
+     * @param string $route
+     * @param array $params
+     * @return string
+     */
     public static function toModule($navItemId, $route, array $params = [])
     {
         Yii::$app->urlManager->setContextNavItemId($navItemId);

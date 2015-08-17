@@ -21,7 +21,7 @@ class Reflection
     private $_initRun = null;
 
     /**
-     * @todo use  \yii::$app->request or create new request object? (bugs?)
+     * @todo use  Yii::$app->request or create new request object? (bugs?)
      */
     public function __construct(Module $module)
     {

@@ -46,10 +46,10 @@ class UrlManager extends \yii\web\UrlManager
     {
         foreach ($rules as $key => $rule) {
             if (isset($rule['composition'])) {
-                foreach ($rule['composition'] as $comp => $pattern) {
+                foreach ($rule['composition'] as $composition => $pattern) {
                     $rules[] = [
                         'pattern' => $pattern,
-                        'route' => $comp.'/'.$rule['route'],
+                        'route' => $composition.'/'.$rule['route'],
                     ];
                 }
             }
