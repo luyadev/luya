@@ -5,6 +5,7 @@ defined('YII_ENV') or define('YII_ENV', 'dev');
 
 $config = [
     'id' => 'testenv',
+    'mute' => true,
     'siteTitle' => 'Luya Tests',
     'remoteToken' => 'testtoken',
     'basePath' => dirname(__DIR__),
