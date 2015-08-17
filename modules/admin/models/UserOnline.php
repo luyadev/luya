@@ -60,15 +60,17 @@ class UserOnline extends \yii\db\ActiveRecord
         $return = [];
         foreach(self::find()->asArray()->all() as $item) {
             $user = User::findOne($item['user_id']);
-            $inactiveSince = $time-$item['last_timestamp'];
-            $return[] = [
-                'firstname' => $user->firstname,
-                'lastname' => $user->lastname,
-                'email' => $user->email,
-                'last_timestamp' => $item['last_timestamp'],
-                'is_active' => ($inactiveSince>=120) ? false : true,
-                'inactive_since' => round(($inactiveSince/60)) . ' min',
-            ];
+            if ($user) {
+                $inactiveSince = $time-$item['last_timestamp'];
+                $return[] = [
+                    'firstname' => $user->firstname,
+                    'lastname' => $user->lastname,
+                    'email' => $user->email,
+                    'last_timestamp' => $item['last_timestamp'],
+                    'is_active' => ($inactiveSince>=120) ? false : true,
+                    'inactive_since' => round(($inactiveSince/60)) . ' min',
+                ];
+            }
         }
         
         return $return;
