@@ -116,7 +116,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
     public function apiQueryString($type)
     {
         // basic query
-        $query = ['ngrestCall' => true, 'ngrestCallType' => $type];
+        $query = ['ngrestCallType' => $type];
         // see if we have fields for this type
         if (count($this->getFields($type)) > 0) {
             $query['fields'] = implode(',', $this->getFields($type));

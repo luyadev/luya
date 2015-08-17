@@ -44,9 +44,9 @@ class RenderCrudTest extends \tests\BaseWebTest
         $this->assertEquals(2, count($crud->getFields('create')));
         $this->assertEquals(2, count($crud->getFields('update')));
         $this->assertEquals(0, count($crud->getButtons()));
-        $this->assertEquals('ngrestCall=1&ngrestCallType=list&fields=create_var_1,list_var_1,list_var_2&expand=create_extra_var_2', $crud->apiQueryString('list'));
-        $this->assertEquals('ngrestCall=1&ngrestCallType=create&fields=create_var_1,create_extra_var_2&expand=create_extra_var_2', $crud->apiQueryString('create'));
-        $this->assertEquals('ngrestCall=1&ngrestCallType=update&fields=create_var_1,list_var_1&expand=create_extra_var_2', $crud->apiQueryString('update'));
+        $this->assertEquals('ngrestCallType=list&fields=create_var_1,list_var_1,list_var_2&expand=create_extra_var_2', $crud->apiQueryString('list'));
+        $this->assertEquals('ngrestCallType=create&fields=create_var_1,create_extra_var_2&expand=create_extra_var_2', $crud->apiQueryString('create'));
+        $this->assertEquals('ngrestCallType=update&fields=create_var_1,list_var_1&expand=create_extra_var_2', $crud->apiQueryString('update'));
         
     }
     

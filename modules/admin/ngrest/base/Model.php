@@ -9,30 +9,36 @@ use admin\models\Lang;
 
 abstract class Model extends \yii\db\ActiveRecord implements \admin\base\GenericSearchInterface
 {
-    /*
-    public $ngRestEndpoint = null;
-
-    public $ngRestPrimaryKey = null;
-    */
-
     const EVENT_AFTER_NGREST_FIND = 'afterNgrestFind';
     
     const EVENT_SERVICE_NGREST = 'serviceNgrest';
     
+    private $_ngrestCallType = null;
+    
+    private $_ngRestPrimaryKey = null;
+    
+    private $_config = null;
+    
+    /**
+     * Containg the default language assoc array.
+     * 
+     * @var array
+     */
+    private $_lang = null;
+    
+    /**
+     * Containg all availabe languages from Lang Model.
+     * 
+     * @var array
+     */
+    private $_langs = null;
+    
     public $i18n = [];
-
-    //public $i18nExpandFields = false;
 
     public $extraFields = [];
 
     public $ngRestServiceArray = [];
-    
-    private $_ngrestCall = false;
-    
-    private $_ngrestCallType = false;
-    
-    private $_config = null;
-    
+        
     abstract public function ngRestConfig($config);
 
     abstract public function ngRestApiEndpoint();
@@ -52,47 +58,31 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
         	]
         ]);
         
-        if (Yii::$app instanceof \yii\web\Application) {
-            $this->_ngrestCall = Yii::$app->request->get('ngrestCall', false);
-            $this->_ngrestCallType = Yii::$app->request->get('ngrestCallType', false);
-        }
-        if (count($this->getI18n()) > 0) {
+        if (count($this->i18n) > 0) {
             $this->on(self::EVENT_BEFORE_INSERT, [$this, 'i18nBeforeUpdateAndCreate']);
             $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'i18nBeforeUpdateAndCreate']);
             $this->on(self::EVENT_AFTER_FIND, [$this, 'i18nAfterFind']);
-            // @todo is there a better to know we are runing the module from the RestActiveController instead of using a get param (ugly)?
-            //$this->i18nExpandFields = \yii::$app->request->get('ngrestCall', false);
         }
     }
-
-    /**
-     * @param unknown_type $value
-     * @param unknown_type $viaTableName   news_article_tag
-     * @param unknown_type $localTableId   article_id
-     * @param unknown_type $foreignTableId tag_id
-     */
-    protected function proccess($value, $viaTableName, $localTableId, $foreignTableId)
-    {
-        throw new \Exception('use setRelation() method instead of proccess() method!');
-    }
-
+    
     /**
      * @param string $value          The valued which is provided from the setter method
      * @param string $viaTableName   Example viaTable name: news_article_tag
      * @param string $localTableId   The name of the field inside the viaTable which represents the match against the local table, example: article_id
      * @param string $foreignTableId The name of the field inside the viaTable which represents the match against the foreign table, example: tag_id
      *
+     * @todo should be outside of model, move to checkboxrelation plugin ?
      * @return bool
      */
     public function setRelation($value, $viaTableName, $localTableId, $foreignTableId)
     {
-        $delete = \yii::$app->db->createCommand()->delete($viaTableName, [$localTableId => $this->id])->execute();
+        $delete = Yii::$app->db->createCommand()->delete($viaTableName, [$localTableId => $this->id])->execute();
         $batch = [];
         foreach ($value as $k => $v) {
             $batch[] = [$this->id, $v['id']];
         }
         if (!empty($batch)) {
-            $insert = \yii::$app->db->createCommand()->batchInsert($viaTableName, [$localTableId, $foreignTableId], $batch)->execute();
+            $insert = Yii::$app->db->createCommand()->batchInsert($viaTableName, [$localTableId, $foreignTableId], $batch)->execute();
         }
         // @todo check if an error happends wile the delete and/or update proccess.
         return true;
@@ -116,58 +106,55 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
         return static::find();
     }
     
-    public function genericSearchFields()
-    {
-        $fields = [];
-        foreach($this->getTableSchema()->columns as $name => $object) {
-            if ($object->phpType == 'string') {
-                $fields[] = $object->name;
-            }
-        }
-        return $fields;
-    }
-    
-    public function genericSearch($searchQuery)
-    {
-        $query = self::find();
-        $fields = $this->genericSearchFields();
-        foreach($fields as $field) {
-            $query->orWhere(['like', $field, $searchQuery]);
-        }
-        return $query->select($fields)->asArray()->all();
-    }
-    
     public function afterFind()
     {
-        if ($this->_ngrestCall && $this->_ngrestCallType == 'list') {
+        if ($this->getNgRestCallType() == 'list') {
             $this->trigger(self::EVENT_AFTER_NGREST_FIND);
         }   
         
         return parent::afterFind();
     }
 
+    private function getDefaultLang($field = false)
+    {
+        if ($this->_lang === null) {
+            $this->_lang = Lang::getDefault();
+        }
+        
+        if ($field) {
+            return $this->_lang[$field];
+        }
+        
+        return $this->_lang;
+    }
+    
+    private function getLanguages()
+    {
+        if ($this->_langs === null) {
+            $this->_langs = Lang::getQuery();
+        }
+        
+        return $this->_langs;
+    }
+    
     public function i18nAfterFind()
     {
-        $defaultLang = Lang::getDefault();
-        
-        foreach ($this->getI18n() as $field) {
+        foreach ($this->i18n as $field) {
             $values = @json_decode($this->$field, true);
             // fall back for not transformed values
             if (!is_array($values)) {
                 $values = (array) $values;
             }
-
-            $langs = \admin\models\Lang::find()->all();
-
-            foreach ($langs as $lang) {
-                if (!array_key_exists($lang->short_code, $values)) {
-                    $values[$lang->short_code] = '';
+            // creata all languages where doe not exists in the array
+            foreach ($this->getLanguages() as $lang) {
+                if (!array_key_exists($lang['short_code'], $values)) {
+                    $values[$lang['short_code']] = '';
                 }
             }
-
-            if (!$this->_ngrestCall) {
-                $langShortCode = $defaultLang['short_code'];
-
+            // if its not an grest call automaticaly load the default language
+            if (!$this->getNgRestCallType()) {
+                //$langShortCode = $defaultLang['short_code'];
+                $langShortCode = $this->getDefaultLang('short_code');
                 // @todo first get data from collection, if not found get data from lang default
                 if (array_key_exists($langShortCode, $values)) {
                     $values = $values[$langShortCode];
@@ -182,30 +169,55 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
 
     public function i18nBeforeUpdateAndCreate()
     {
-        foreach ($this->getI18n() as $field) {
+        foreach ($this->i18n as $field) {
             $this->$field = json_encode($this->$field);
         }
     }
-
-    public function getI18n()
+    
+    public function genericSearchFields()
     {
-        return $this->i18n;
-    }
-
-    /*
-    public function ngRestApiEndpoint()
-    {
-        if ($this->ngRestEndpoint === null) {
-            throw new \yii\base\InvalidConfigException('The "ngRestEndpoint" property must be set.');
+        $fields = [];
+        foreach($this->getTableSchema()->columns as $name => $object) {
+            if ($object->phpType == 'string') {
+                $fields[] = $object->name;
+            }
         }
-
-        return $this->ngRestEndpoint;
+        return $fields;
     }
-    */
-
-    public function ngRestPrimaryKey()
+    
+    /**
+     * @param string $searchQuery a search string
+     *
+     * @see \admin\base\GenericSearchInterface::genericSearch()
+     */
+    public function genericSearch($searchQuery)
     {
-        return $this->getTableSchema()->primaryKey[0];
+        // create active query object
+        $query = self::find();
+        // foreach all fields from genericSearchFields metod
+        foreach($this->genericSearchFields() as $field) {
+            $query->orWhere(['like', $field, $searchQuery]);
+        }
+        // return array based on orWhere statement
+        return $query->select($fields)->asArray()->all();
+    }
+    
+    public function getNgRestCallType()
+    {
+        if ($this->_ngrestCallType === null) {
+            $this->_ngrestCallType = (!Yii::$app instanceof \yii\web\Application) ? false : Yii::$app->request->get('ngrestCallType', false);
+        }
+    
+        return $this->_ngrestCallType;
+    }
+    
+    public function getNgRestPrimaryKey()
+    {
+        if ($this->_ngRestPrimaryKey === null) {
+            $this->_ngRestPrimaryKey = $this->getTableSchema()->primaryKey[0];    
+        }
+        
+        return $this->_ngRestPrimaryKey;
     }
 
     public function getNgrestServices()
@@ -217,18 +229,11 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
     public function getNgRestConfig()
     {
         if ($this->_config == null) {
-            $config = Yii::createObject(['class' => '\admin\ngrest\Config', 'apiEndpoint' => $this->ngRestApiEndpoint(), 'primaryKey' => $this->ngRestPrimaryKey()]);
-            
-            //$config->setExtraFields($this->extraFields());
-            //$config->i18n($this->getI18n());
-            
+            $config = Yii::createObject(['class' => '\admin\ngrest\Config', 'apiEndpoint' => $this->ngRestApiEndpoint(), 'primaryKey' => $this->getNgRestPrimaryKey()]);
             $configBuilder = new \admin\ngrest\ConfigBuilder();
-            
             $this->ngRestConfig($configBuilder);
-            
-            
             $config->setConfig($configBuilder->getConfig());
-            foreach($this->getI18n() as $fieldName) {
+            foreach($this->i18n as $fieldName) {
                 $config->appendFieldOption($fieldName, 'i18n', true);
             }
             $this->_config = $config;
