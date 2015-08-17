@@ -1,6 +1,16 @@
-languages:
-  JavaScript: true
-  PHP: true
+engines:
+# to turn on an engine, add it here and set enabled to `true`
+# to turn off an engine, set enabled to `false` or remove it
+  rubocop:
+    enabled: true
+  golint:
+    enabled: true
+  gofmt:
+    enabled: true
+  eslint:
+    enabled: true
+  csslint:
+    enabled: true
 
 exclude_paths:
 - "envs/kickstarter/resources/*"
