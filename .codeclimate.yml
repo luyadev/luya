@@ -18,4 +18,4 @@ exclude_paths:
 - "tests/*"
 - "sql/*"
 - "scripts/*"
-- "docs/*
+- "docs/*"
