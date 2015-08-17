@@ -5,7 +5,7 @@ namespace tests\src\ngrest\plugins;
 use Yii;
 use DOMDocument;
 
-class BasePlugin extends \tests\BaseTest
+class BasePlugin extends \tests\BaseWebTest
 {
     protected function renderListHtml($obj)
     {

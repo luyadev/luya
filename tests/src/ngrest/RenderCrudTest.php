@@ -4,7 +4,7 @@ namespace tests\src\ngrest;
 
 use admin\ngrest\render\RenderCrud;
 
-class RenderCrudTest extends \tests\BaseTest
+class RenderCrudTest extends \tests\BaseWebTest
 {
     private function getConfig()
     {

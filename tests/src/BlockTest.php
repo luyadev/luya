@@ -5,7 +5,7 @@ namespace tests\src;
 use tests\data\TestBlock;
 use tests\data\tests\data;
 
-class BlockTest extends \tests\BaseTest
+class BlockTest extends \tests\BaseWebTest
 {
     public function testBlockSetup()
     {

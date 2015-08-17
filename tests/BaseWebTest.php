@@ -6,7 +6,7 @@ use Yii;
 
 require(__DIR__ . '/../vendor/autoload.php');
 
-class BaseTest extends \PHPUnit_Framework_TestCase
+class BaseWebTest extends \PHPUnit_Framework_TestCase
 {
     public $app = null;
     

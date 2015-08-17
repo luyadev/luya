@@ -8,7 +8,7 @@ use Yii;
  * 
  * @author nadar
  */
-class RequestTest extends \tests\BaseTest
+class RequestTest extends \tests\BaseWebTest
 {
     public $urlRules = [
         ['pattern' => 'news/detail/<id:\d+>/<title:[a-zA-Z0-9\-]+>/', 'route' => 'news/default/detail'],

@@ -4,7 +4,7 @@ namespace tests\src\ngrest;
 
 use Yii;
 
-class ConfigBuilderTest extends \tests\BaseTest
+class ConfigBuilderTest extends \tests\BaseWebTest
 {
     
     private function getConfig()

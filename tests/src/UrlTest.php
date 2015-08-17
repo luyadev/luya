@@ -5,7 +5,7 @@ namespace tests\src;
 use Yii;
 use luya\helpers\Url;
 
-class UrlTest extends \tests\BaseTest
+class UrlTest extends \tests\BaseWebTest
 {
     public $urlRules = [
         ['pattern' => 'news/detail/<id:\d+>/<title:[a-zA-Z0-9\-]+>/', 'route' => 'news/default/detail'],

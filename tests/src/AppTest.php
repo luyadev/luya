@@ -4,7 +4,7 @@ namespace tests\src;
 
 use Yii;
 
-class AppTest extends \tests\BaseTest
+class AppTest extends \tests\BaseWebTest
 {
     public function testApp()
     {

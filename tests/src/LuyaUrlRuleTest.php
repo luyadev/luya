@@ -9,7 +9,7 @@ use Yii;
  * @author nadar
  *
  */
-class LuyaUrlRuleTest extends \tests\BaseTest
+class LuyaUrlRuleTest extends \tests\BaseWebTest
 {
     public function testParseRequest()
     {

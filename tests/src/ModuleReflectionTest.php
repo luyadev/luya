@@ -4,7 +4,7 @@ namespace tests\src;
 
 use Yii;
 
-class ModuleReflectionTests extends \tests\BaseTest
+class ModuleReflectionTests extends \tests\BaseWebTest
 {
     public function testShareObject()
     {
