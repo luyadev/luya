@@ -2,6 +2,9 @@
 
 namespace luya\base;
 
+use luya\helpers\Url;
+use yii\helpers\ArrayHelper;
+
 /**
  * Wrapping class to set config informations and also load default configuration informations which belongs to the luya module.
  *
@@ -72,7 +75,7 @@ abstract class Boot
 
     public function getBaseConfig()
     {
-        return \luya\helpers\Url::trailing($this->configPath).$this->configName;
+        return Url::trailing($this->configPath).$this->configName;
     }
 
     public function setYiiPath($yiiPath)
@@ -101,7 +104,7 @@ abstract class Boot
 
     public function setConfigValue(array $values = [])
     {
-        $this->configValue = \yii\helpers\ArrayHelper::merge($this->configValue, $values);
+        $this->configValue = ArrayHelper::merge($this->configValue, $values);
     }
 
     public function getConfigValue()
@@ -116,7 +119,7 @@ abstract class Boot
     {
         $this->beforeRun();
         $this->setConfigValue(include(__DIR__.'/../config/'.self::SAPI_CLI.'.php'));
-        require_once $this->yiiPath;
+        require_once($this->yiiPath);
         $this->yii = new \luya\cli\Application($this->getConfigValue(self::SAPI_CLI));
         if (!$this->mockOnly) {
             $exitCode = $this->yii->run();
@@ -131,7 +134,7 @@ abstract class Boot
     {
         $this->beforeRun();
         $this->setConfigValue(include(__DIR__.'/../config/'.self::SAPI_WEB.'.php'));
-        require_once $this->yiiPath;
+        require_once($this->yiiPath);
         $this->yii = new \luya\web\Application($this->getConfigValue(self::SAPI_WEB));
         if (!$this->mockOnly) {
             $this->yii->run();

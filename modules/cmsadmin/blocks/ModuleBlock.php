@@ -80,30 +80,4 @@ class ModuleBlock extends \cmsadmin\base\Block
         
         return $response;
     }
-
-    /*
-    private function moduleContent($moduleName)
-    {
-        if (empty($moduleName)) {
-            return;
-        }
-        $module = \yii::$app->getModule($moduleName);
-        $module->setContext('cms');
-        $module->setContextOptions($this->getEnvOptions());
-        $pathAfterRoute = $this->getEnvOption('restString');
-
-        \yii::$app->request->setPathInfo($module->id.'/'.$pathAfterRoute);
-
-        $mgr = new \luya\components\UrlManager();
-        $mgr->addRules($module::$urlRules, true);
-        $rq = $mgr->parseRequest(\yii::$app->request);
-        $args = $rq[1];
-        $r = $module->findControllerRoute($rq[0]);
-        $controller = $module->createController($r);
-
-        $action = $controller[0]->runAction($controller[1], $args);
-
-        return $action;
-    }
-    */
 }

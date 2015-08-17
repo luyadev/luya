@@ -23,6 +23,7 @@ $config = [
 	        ]
 	    ],
 	    'cmsadmin' => 'cmsadmin\Module',
+	    'moduletest' => 'moduletest\Module',
     ],
     'components' => [
         'request' => [

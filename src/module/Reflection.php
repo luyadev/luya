@@ -26,7 +26,7 @@ class Reflection
     public function __construct(Module $module)
     {
         $this->module = $module;
-        $this->_request = new \yii\web\Request();
+        $this->_request = new \luya\components\Request();
         $this->_urlManager = new \luya\components\UrlManager();
         $this->_urlManager->addRules($module->urlRules, true);
     }
@@ -46,7 +46,7 @@ class Reflection
         ];
     }
 
-    public function getRequestResponse()
+    private function getRequestResponse()
     {
         if ($this->_initRun !== null && empty($this->_suffix)) {
             return [

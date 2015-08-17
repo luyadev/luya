@@ -59,40 +59,6 @@ class NavItemModule extends \cmsadmin\base\NavItemType
         return $response;
     }
     
-    /*
-    
-    public function getContent()
-    {
-        // get the module name
-        $module = $this->getModule();
-        // class context restString (from outside)
-        $pathAfterRoute = $this->getOption('restString');
-        // fake the pathInfo based on the current request
-        \yii::$app->request->setPathInfo($this->module_name.'/'.$pathAfterRoute);
-        // create url manager
-        $mgr = new \luya\components\UrlManager();
-        // add all module urlRules
-        $mgr->addRules($module::$urlRules, true);
-        // parse request based on the fake pathInfo
-        $rq = $mgr->parseRequest(\yii::$app->request);
-        var_dump($rq);
-        
-        $args = $rq[1];
-        $r = $module->findControllerRoute($rq[0]);
-        
-        $controller = $module->createController($r);
-
-        $action = $controller[0]->runAction($controller[1], $args);
-
-        $this->_context = [];
-
-        foreach ($controller[0]->propertyMap as $prop) {
-            $this->_context[$prop] = $controller[0]->$prop;
-        }
-
-        return $action;
-    }
-    */
     public function getHeaders()
     {
         return;
