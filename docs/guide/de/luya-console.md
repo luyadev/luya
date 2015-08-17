@@ -34,15 +34,17 @@ class NotifyController extends \luya\base\Command
 {
     public function actionIndex()
     {
-        return 'hi world!';
+        return $this->outputSuccess('action successfully done');
     }
     
     public function actionBar()
     {
-        return 'hi foo!';
+        return $this->ouputError('Something failed inside this action');
     }
 }
 ```
+
+> Verwenden Sie immer `ouputError($message)` oder `outputSuccess($message)` um innerhalb der Commands outputs zu generieren. Somit kannst du deine Commands einfach mit PHPUnitTest versehen.
 
 Um die Action `actionIndex()` in diesem Controller `NotifyController` auszuführen Geben Sie nun 
 
