@@ -3,26 +3,29 @@
 namespace luya\commands;
 
 use Yii;
-
+use yii\helpers\Console;
 /**
  * @author nadar
  */
-class CommandController extends \yii\console\Controller
+class CommandController extends \luya\base\Command
 {
     public function actionIndex($module, $route = 'default')
     {
         $moduleObject = Yii::$app->getModule($module);
         if (!$moduleObject) {
-            echo "The module '$module' does not exist.";
-            exit(0);
+            return $this->outputError("Module '$module' does not exist in module list, add the Module to your configuration.");
         }
         $moduleObject->controllerNamespace = $module.'\commands';
         $response = $moduleObject->runAction($route);
 
-        if ($response === 0) {
+        if ($this->isMuted()) {
+            return $response;
+        }
+        
+        if ($response) {
             exit(0);
         }
-
+        
         exit(1);
     }
 }
