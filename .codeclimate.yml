@@ -10,6 +10,11 @@ engines:
   csslint:
     enabled: false
 
+ratings:
+    paths:
+    - src/**
+    - modules/**
+
 exclude_paths:
 - "envs/kickstarter/resources/**/*"
 - "envs/dev/resources/**/*"
