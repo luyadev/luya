@@ -1,19 +1,11 @@
 engines:
+  phpmd:
+    enabled: true
   phpcodesniffer:
     enabled: true
   fixme:
     enabled: true
-  rubocop:
-    enabled: false
-  golint:
-    enabled: false
-  gofmt:
-    enabled: false
-  eslint:
-    enabled: false
-  csslint:
-    enabled: false
-
+    
 ratings:
     paths:
     - "**.php"
