@@ -2,11 +2,11 @@
 
 namespace tests\src\web\models;
 
-class AdminModelStorageEffectTest extends BaseModel
+class AdminModelStorageFilterTest extends BaseModel
 {
     public function getModel()
     {
-        return new \admin\models\StorageEffect();
+        return new \admin\models\StorageFilter();
     }
     
     public function getParams()
@@ -14,8 +14,6 @@ class AdminModelStorageEffectTest extends BaseModel
         return [
             'name',
             'identifier',
-            'imagine_name',
-            'imagine_json_params'
         ];
     }
 }

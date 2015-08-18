@@ -1,0 +1,23 @@
+<?php
+
+namespace tests\src\web\models;
+
+class CmsadminModelNavTest.bkp extends BaseModel
+{
+    public $createScenario = 'default';
+    
+    public $udpateScenario = 'default';
+    
+    public function getModel()
+    {
+        return new \cmsadmin\models\Nav();
+    }
+    
+    public function getParams()
+    {
+        return [
+            'cat_id',
+            'parent_id',
+        ];
+    }
+}

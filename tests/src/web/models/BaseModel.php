@@ -5,6 +5,10 @@ namespace tests\src\web\models;
 
 abstract class BaseModel extends \tests\BaseWebTest
 {
+    public $createScenario = 'restcreate';
+   
+    public $updateScenario = 'restupdate';
+    
     abstract public function getParams();
     
     abstract public function getModel();
@@ -34,7 +38,7 @@ abstract class BaseModel extends \tests\BaseWebTest
     {
         $model = $this->getModel();
         
-        $model->scenario = 'restcreate';
+        $model->scenario = $this->createScenario;
         
         $model->attributes = $this->getInsert();
         $insert = $model->insert();
@@ -44,7 +48,7 @@ abstract class BaseModel extends \tests\BaseWebTest
         $pk = $model->getPrimaryKey();
         
         $update = $model::findOne($pk);
-        $update->scenario = 'restupdate';
+        $update->scenario = $this->updateScenario;
         $update->attributes = $this->getUpdate();
         
         $this->assertEquals(true, $update->update());
