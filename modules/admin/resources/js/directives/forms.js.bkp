@@ -1,55 +1,55 @@
 
-zaa.directive('zaaInjector', function($compile) {
+zaa.directive("zaaInjector", function($compile) {
 	return {
-		restrict : 'E',
-		replace : true,
-		transclude : false,
-		scope : {
-			"dir" : '=',
-			"model" : '=',
-			"options" : '=',
-			"label" : "@label",
-			'grid' : '@grid',
-			'fieldid' : '@fieldid',
-			'fieldname' : '@fieldname',
-			'placeholder' : '@placeholder',
-			'initvalue' : '@initvalue',
+		restrict: "E",
+		replace: true,
+		transclude: false,
+		scope: {
+			"dir": "=",
+			"model": "=",
+			"options": "=",
+			"label": "@label",
+			"grid": "@grid",
+			"fieldid": "@fieldid",
+			"fieldname": "@fieldname",
+			"placeholder": "@placeholder",
+			"initvalue": "@initvalue",
 		},
-		link : function($scope, $element, attr) {
+		link: function($scope, $element, attr) {
 			var elmn = $compile(angular.element('<' + $scope.dir + ' options="options" initvalue="{{initvalue}}" fieldid="{{fieldid}}" fieldname="{{fieldname}}" placeholder="{{placeholder}}" model="model" label="{{label}}" grid="{{grid}}" />'))($scope);
 			$element.replaceWith(elmn);
 		},
 	}
 });
 
-zaa.directive('zaaWysiwyg', function() {
+zaa.directive("zaaWysiwyg", function() {
 	return {
-		restrict : 'E',
-		scope : {
-			'model' : '=',
-			'options' : '=',
-			'label' : '@label',
-			'grid' : '@grid',
-			'id' : '@fieldid',
-			'name' : '@fieldname'
+		restrict: "E",
+		scope: {
+			"model": "=",
+			"options": "=",
+			"label": "@label",
+			"grid": "@grid",
+			"id": "@fieldid",
+			"name": "@fieldname"
 		},
-		template : function() {
+		template: function() {
 			return '<textarea ng-wig="model" name="{{name}}"></textarea>';
 		}
 	}
 });
 
-zaa.directive('zaaNumber', function() {
+zaa.directive("zaaNumber", function() {
 	return {
-		restrict : 'E',
-		scope : {
-			'model' : '=',
-			'options' : '=',
-			'label' : '@label',
-			'grid' : '@grid',
-			'id' : '@fieldid',
-			'name' : '@fieldname',
-			'placeholder' : '@placeholder'
+		restrict: "E",
+		scope: {
+			"model": "=",
+			"options": "=",
+			"label": "@label",
+			"grid": "@grid",
+			"id": "@fieldid",
+			"name": "@fieldname",
+			"placeholder": "@placeholder"
 		}, link: function($scope) {
 			$scope.$watch(function() { return $scope.model }, function(n, o) {
 				if(angular.isNumber($scope.model)) {
@@ -58,80 +58,78 @@ zaa.directive('zaaNumber', function() {
 					$scope.isValid = false;
 				}
 			})
-		}, template : function() {
+		}, template: function() {
 			return '<div class="input-field col s{{grid}}"><input placeholder="{{placeholder}}" name="{{name}}" id="{{id}}" ng-class="{\'invalid\' : !isValid }" type="number" ng-model="model" min="0" /><label for="{{id}}">{{label}}</label></div>';
 		}
 	}
 });
 
-zaa.directive('zaaText', function(){
+zaa.directive("zaaText", function(){
 	return {
-		restrict : 'E',
-		scope : {
-			'model' : '=',
-			'options' : '=',
-			'label' : '@label',
-			'grid' : '@grid',
-			'id' : '@fieldid',
-			'name' : '@fieldname',
-			'placeholder' : '@placeholder'
+		restrict: "E",
+		scope: {
+			"model": "=",
+			"options": "=",
+			"label": "@label",
+			"grid": "@grid",
+			"id": "@fieldid",
+			"name": "@fieldname",
+			"placeholder": "@placeholder"
 		},
-		template : function() {
+		template: function() {
 			return '<div class="input-field col s{{grid}}"><input placeholder="{{placeholder}}" id="{{id}}" name="{{name}}" ng-model="model" type="text" /><label for="{{id}}">{{label}}</label></div>';
 		}
 	}
 });
 
-zaa.directive('zaaTextarea', function(){
+zaa.directive("zaaTextarea", function(){
 	return {
-		restrict : 'E',
-		scope : {
-			'model' : '=',
-			'options' : '=',
-			'label' : '@label',
-			'grid' : '@grid',
-			'id' : '@fieldid',
-			'name' : '@fieldname',
-			'placeholder' : '@placeholder'
+		restrict: "E",
+		scope: {
+			"model": "=",
+			"options": "=",
+			"label": "@label",
+			"grid": "@grid",
+			"id": "@fieldid",
+			"name": "@fieldname",
+			"placeholder": "@placeholder"
 		},
-		template : function() {
+		template: function() {
 			return '<div class="input-field col s{{grid}}"><textarea placeholder="{{placeholder}}" id="{{id}}" name="{{name}}" ng-model="model" class="materialize-textarea"></textarea><label for="{{id}}">{{label}}</label></div>';
 		}
 	}
 });
 
-zaa.directive('zaaPassword', function(){
+zaa.directive("zaaPassword", function(){
 	return {
-		restrict : 'E',
-		scope : {
-			'model' : '=',
-			'options' : '=',
-			'label' : '@label',
-			'grid' : '@grid',
-			'id' : '@fieldid',
-			'name' : '@fieldname'
+		restrict: "E",
+		scope: {
+			"model": "=",
+			"options": "=",
+			"label": "@label",
+			"grid": "@grid",
+			"id": "@fieldid",
+			"name": "@fieldname"
 		},
-		template : function() {
+		template: function() {
 			return '<div class="input-field col s{{grid}}"><input type="password" name="{{name}}" id="{{id}}" ng-model="model" /><label for="{{id}}">{{label}}</label></div>';
 		}
 	}
 });
 
-
-
-zaa.directive('zaaSelect', function($timeout){
+zaa.directive("zaaSelect", function($timeout){
 	return {
-		restrict : 'E',
-		scope : {
-			'model' : '=',
-			'options' : '=',
-			'label' : '@label',
-			'grid' : '@grid',
-			'id' : '@fieldid',
-			'name' : '@fieldname',
-			'initvalue' : '@initvalue'
+		restrict: "E",
+		scope: {
+			"model": "=",
+			"options": "=",
+			"label": "@label",
+			"grid": "@grid",
+			"id": "@fieldid",
+			"name": "@fieldname",
+			"initvalue": "@initvalue"
 		},
-		link : function(scope) {
+		link: function(scope) {
 			$timeout(function(){
 				scope.$watch(function() { return scope.model }, function(n, o) {
 					if (n === undefined && o === undefined) {
@@ -143,7 +141,7 @@ zaa.directive('zaaSelect', function($timeout){
 				})
 			});
 		},
-		template : function() {
+		template: function() {
 			return '<div class="col s{{grid}}"><label for="{{id}}">{{label}}</label><select name="{{name}}" id="{{id}}" class="browser-default" ng-options="item.value as item.label for item in options" ng-model="model"></select></div>';
 		}
 	}
@@ -152,18 +150,18 @@ zaa.directive('zaaSelect', function($timeout){
 /**
  * options = {'true-value' : 1, 'false-value' : 0};
  */
-zaa.directive('zaaCheckbox', function() {
+zaa.directive("zaaCheckbox", function() {
 	return {
-		restrict : 'E',
-		scope : {
-			'model' : '=',
-			'options' : '=',
-			'grid' : '@grid',
-			'id' : '@fieldid',
-			'name' : '@fieldname',
-			'label' : '@label'
+		restrict: "E",
+		scope: {
+			"model": "=",
+			"options": "=",
+			"grid": "@grid",
+			"id": "@fieldid",
+			"name": "@fieldname",
+			"label": "@label"
 		},
-		controller : function($scope) {
+		controller: function($scope) {
 			if ($scope.options === null) {
 				$scope.valueTrue = 1;
 				$scope.valueFalse = 0;
@@ -172,7 +170,7 @@ zaa.directive('zaaCheckbox', function() {
 				$scope.valueFalse = $scope.options['false-value'];	
 			}
 		},
-		template : function() {
+		template: function() {
 			return '<div class="input-field col s{{grid}}"><input type="checkbox" id="{{id}}" name="{{name}}" ng-true-value="{{valueTrue}}" ng-false-value="{{valueFalse}}" ng-model="model" type="checkbox" /><label for="{{id}}">{{label}}</label></div>'; 
 		}
 	}
@@ -181,20 +179,20 @@ zaa.directive('zaaCheckbox', function() {
 /** 
  * options arg object:
  * 
- * options.items[] = { 'id' : 1, 'label' => 'Label for Value 1' }
+ * options.items[] = { "id" : 1, "label" => 'Label for Value 1' }
  */
-zaa.directive('zaaCheckboxArray', function(){
+zaa.directive("zaaCheckboxArray", function(){
 	return {
-		restrict : 'E',
-		scope : {
-			'model' : '=',
-			'options' : '=',
-			'grid' : '@grid',
-			'id' : '@fieldid',
-			'name' : '@fieldname',
-			'label' : '@label'
+		restrict: "E",
+		scope: {
+			"model": "=",
+			"options": "=",
+			"grid": "@grid",
+			"id": "@fieldid",
+			"name": "@fieldname",
+			"label": "@label"
 		},
-		controller : function($scope) {
+		controller: function($scope) {
 			
 			if ($scope.model == undefined) {
 				$scope.model = [];
@@ -202,7 +200,7 @@ zaa.directive('zaaCheckboxArray', function(){
 			
 			$scope.toggleSelection = function (value) {
 				for (var i in $scope.model) {
-					if ($scope.model[i]['id'] == value.id) {
+					if ($scope.model[i]["id"] == value.id) {
 						$scope.model.splice(i, 1);
 						return;
 					}
@@ -212,34 +210,34 @@ zaa.directive('zaaCheckboxArray', function(){
 			
 			$scope.isChecked = function(item) {
 				for (var i in $scope.model) {
-					if ($scope.model[i]['id'] == item.id) {
+					if ($scope.model[i]["id"] == item.id) {
 						return true;
 					}
 				}
 				return false;
 			}
 		},
-		link : function(scope) {
+		link: function(scope) {
 			scope.random = Math.random().toString(36).substring(7);
 		},
-		template : function() {
+		template: function() {
 			return '<div class="input-field col s{{grid}}"><h5>{{label}}</h5><p ng-repeat="(k, item) in options.items"><input type="checkbox" ng-checked="isChecked(item)" id="{{random}}_{{k}}" ng-click="toggleSelection(item)" /><label for="{{random}}_{{k}}">{{item.label}}</label></p></div>';
 		}
 	}
 });
 
-zaa.directive('zaaDatetime', function() {
+zaa.directive("zaaDatetime", function() {
 	return {
-		restrict : 'E',
-		scope : {
-			'model' : '=',
-			'options' : '=',
-			'label' : '@label',
-			'id' : '@fieldid',
-			'name' : '@fieldname',
-			'grid' : '@grid'
+		restrict: "E",
+		scope: {
+			"model": "=",
+			"options": "=",
+			"label": "@label",
+			"id": "@fieldid",
+			"name": "@fieldname",
+			"grid": "@grid"
 		},
-		controller : function($scope) {
+		controller: function($scope) {
 			$scope.reform = function() {
 				var date = new Date($scope.year, ($scope.month-1), $scope.day, $scope.hour, $scope.min);
 				var mil = date.getTime();
@@ -264,7 +262,7 @@ zaa.directive('zaaDatetime', function() {
 				}
 			})
 		},
-		template : function() {
+		template: function() {
 			return '<div class="col s{{grid}} form__datetimepicker">' +
 						'<label>{{label}}</label>' +
 						'<input ng-blur="reform()" type="text" ng-model="day" placeholder="Tag" />.' +
@@ -277,18 +275,18 @@ zaa.directive('zaaDatetime', function() {
 	}
 });
 
-zaa.directive('zaaDate', function() {
+zaa.directive("zaaDate", function() {
 	return {
-		restrict : 'E',
-		scope : {
-			'model' : '=',
-			'options' : '=',
-			'label' : '@label',
-			'id' : '@fieldid',
-			'name' : '@fieldname',
-			'grid' : '@grid'
+		restrict: "E",
+		scope: {
+			"model": "=",
+			"options": "=",
+			"label": "@label",
+			"id": "@fieldid",
+			"name": "@fieldname",
+			"grid": "@grid"
 		},
-		controller : function($scope) {
+		controller: function($scope) {
 			$scope.reform = function() {
 				var date = new Date($scope.year, ($scope.month-1), $scope.day);
 				var mil = date.getTime();
@@ -309,7 +307,7 @@ zaa.directive('zaaDate', function() {
 				}
 			})
 		},
-		template : function() {
+		template: function() {
 			return '<div class="col s{{grid}} form__datepicker">' +
 						'<label>{{label}}</label>' +
 						'<input ng-blur="reform()" type="text" ng-model="day" placeholder="Tag" />.' +
@@ -320,18 +318,18 @@ zaa.directive('zaaDate', function() {
 	}
 });
 
-zaa.directive('zaaTable', function() {
+zaa.directive("zaaTable", function() {
 	return {
-		restrict : 'E',
-		scope : {
-			'model' : '=',
-			'options' : '=',
-			'label' : '@label',
-			'grid' : '@grid',
-			'id' : '@fieldid',
-			'name' : '@fieldname'
+		restrict: "E",
+		scope: {
+			"model": "=",
+			"options": "=",
+			"label": "@label",
+			"grid": "@grid",
+			"id": "@fieldid",
+			"name": "@fieldname"
 		},
-		controller : function($scope) {
+		controller: function($scope) {
 			
 			if ($scope.model == undefined) {
 				$scope.model = [{}];
@@ -369,7 +367,7 @@ zaa.directive('zaaTable', function() {
 				$scope.model.splice(key, 1);
 			}
 		},
-		template : function() {
+		template: function() {
 			return '<div>' +
 						'<button ng-click="addColumn()" type="button" style="float:right;">Spalte Rechts einfügen</button>'+
 						'<table>'+
@@ -381,52 +379,52 @@ zaa.directive('zaaTable', function() {
 	}
 });
 
-zaa.directive('zaaFileUpload', function($compile){
+zaa.directive("zaaFileUpload", function($compile){
 	return {
-		restrict : 'E',
-		scope : {
-			'model' : '=',
-			'options' : '=',
-			'label' : '@label',
-			'grid' : '@grid',
-			'id' : '@fieldid',
-			'name' : '@fieldname'
+		restrict: "E",
+		scope: {
+			"model": "=",
+			"options": "=",
+			"label": "@label",
+			"grid": "@grid",
+			"id": "@fieldid",
+			"name": "@fieldname"
 		},
-		template : function() {
+		template: function() {
 			return '<div class="col s{{grid}}"><storage-file-upload ng-model="model"></storage-file-upload></div>';
 		}
 	}
 });
 
-zaa.directive('zaaImageUpload', function($compile){
+zaa.directive("zaaImageUpload", function($compile){
 	return {
-		restrict : 'E',
-		scope : {
-			'model' : '=',
-			'options' : '=',
-			'label' : '@label',
-			'grid' : '@grid',
-			'id' : '@fieldid',
-			'name' : '@fieldname'
+		restrict: "E",
+		scope: {
+			"model": "=",
+			"options": "=",
+			"label": "@label",
+			"grid": "@grid",
+			"id": "@fieldid",
+			"name": "@fieldname"
 		},
-		template : function() {
+		template: function() {
 			return '<div class="col s{{grid}}"><storage-image-upload options="options" ng-model="model"></storage-image-upload></div>';
 		}
 	}
 });
 
-zaa.directive('zaaImageArrayUpload', function(){
+zaa.directive("zaaImageArrayUpload", function(){
 	return {
-		restrict : 'E',
-		scope : {
-			'model' : '=',
-			'options' : '=',
-			'label' : '@label',
-			'grid' : '@grid',
-			'id' : '@fieldid',
-			'name' : '@fieldname'
+		restrict: "E",
+		scope: {
+			"model": "=",
+			"options": "=",
+			"label": "@label",
+			"grid": "@grid",
+			"id": "@fieldid",
+			"name": "@fieldname"
 		},
-		controller : function($scope) {
+		controller: function($scope) {
 			
 			if ($scope.model == undefined) {
 				$scope.model = [];
@@ -445,9 +443,8 @@ zaa.directive('zaaImageArrayUpload', function(){
 			}
 			
 		},
-		template : function() {
-			//return '<div class="col s12"><h5>{{label}}</h5><div ng-repeat="(key,image) in model" class="row card-panel"><div class="col s4"><input type="text" ng-model="image.caption" /></div><div class="col s6"><storage-image-upload ng-model="image.imageId"></storage-image-upload></div><div class="col s2"><button type="button" class="btn" ng-click="remove(key)">Entfernen</button></div></div><div class="row"><div class="col s12"><button ng-click="add()" type="button" class="btn">+ Element</button></div></div></div>';
-            return '<div class="col s{{grid}} imagearray">' +
+		template: function() {
+			return '<div class="col s{{grid}} imagearray">' +
                         '<h5>Bilder</h5>' +
                         '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="teal-text">+</span> links unten ein.</p>' +
                         '<div ng-repeat="(key,image) in model" class="row list__item">' +
@@ -473,18 +470,18 @@ zaa.directive('zaaImageArrayUpload', function(){
 	}
 });
 
-zaa.directive('zaaFileArrayUpload', function(){
+zaa.directive("zaaFileArrayUpload", function(){
 	return {
-		restrict : 'E',
-		scope : {
-			'model' : '=',
-			'options' : '=',
-			'label' : '@label',
-			'grid' : '@grid',
-			'id' : '@fieldid',
-			'name' : '@fieldname'
+		restrict: "E",
+		scope: {
+			"model": "=",
+			"options": "=",
+			"label": "@label",
+			"grid": "@grid",
+			"id": "@fieldid",
+			"name": "@fieldname"
 		},
-		controller : function($scope, $element, $timeout) {
+		controller: function($scope, $element, $timeout) {
 			
 			if ($scope.model == undefined) {
 				$scope.model = [];
@@ -503,10 +500,7 @@ zaa.directive('zaaFileArrayUpload', function(){
 			}
 
 		},
-		template : function() {
-			//return '<div class="col s12"><h5>{{label}}</h5><div ng-repeat="(key,file) in model" class="row card-panel"><div class="col s4"><input type="text" ng-model="file.caption" /></div><div class="col s6"><storage-file-upload ng-model="file.fileId"></storage-file-upload></div><div class="col s2"><button type="button" class="btn" ng-click="remove(key)">Entfernen</button></div></div><div class="row"><div class="col s12"><button ng-click="add()" type="button" class="btn">+ Element</button></div></div></div>';
-            
-
+		template: function() {
 			return '<div class="col s{{grid}} filearray">' +
 		                '<h5>Dateien</h5>' +
 	                	'<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="teal-text">+</span> links unten ein.</p>' +
@@ -528,39 +522,22 @@ zaa.directive('zaaFileArrayUpload', function(){
 	                    '</div>' +
 		                '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ teal ][ waves-effect waves-circle waves-light ]"><i class="mdi-content-add"></i></button>' +
 		            '</div>';
-
-            /*return '<div class="col s{{grid}} filearray">' +
-                        '<h5>Dateien</h5>' +
-                        '<div ng-repeat="(key,file) in model" class="row card-panel filearray__item">' +
-                            '<button class="filearray__delete btn-floating [ red lighten-3 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)"><i class="mdi-action-delete"></i></button>' +
-                            '<div class="col s6">' +
-                                '<div class="input-field">' +
-                                    '<input type="text" ng-model="file.caption" />' +
-                                    '<label>Beschreibung</label>' +
-                                '</div>' +
-                            '</div>' +
-                            '<div class="col s6 filearray__upload">' +
-                                '<storage-file-upload ng-model="file.fileId"></storage-file-upload>' +
-                            '</div>' +
-                        '</div><br />' +
-                        '<button ng-click="add()" type="button" class="btn-floating right [ teal lighten-2 ][ waves-effect waves-circle waves-light ]"><i class="mdi-content-add"></i></button>' +
-                    '</div>';*/
 		}
 	}
 });
 
 zaa.directive("zaaListArray", function() {
 	return {
-		restrict : 'E',
-		scope : {
-			'model' : '=',
-			'options' : '=',
-			'label' : '@label',
-			'grid' : '@grid',
-			'id' : '@fieldid',
-			'name' : '@fieldname'
+		restrict: "E",
+		scope: {
+			"model": "=",
+			"options": "=",
+			"label": "@label",
+			"grid": "@grid",
+			"id": "@fieldid",
+			"name": "@fieldname"
 		},
-		controller : function($scope, $element, $timeout) {
+		controller: function($scope, $element, $timeout) {
 
 			if ($scope.model == undefined) {
 				$scope.model = [];
@@ -594,8 +571,7 @@ zaa.directive("zaaListArray", function() {
             }
 
 		},
-		template : function() {
-			//return '<div class="col s12"><h5>{{label}}</h5><div ng-repeat="(key,row) in model" class="row"><div class="col input-field s10"><input type="text" ng-model="row.value" /></div><div class="col input-field s2"><button type="button" class="btn" ng-click="remove(key)">Entfernen</button></div></div><div class="row"><div class="col s12 field-input"><button ng-click="add()" class="btn" type="button">+ Hinzufügen</button></div></div></div>';
+		template: function() {
 			return '<div class="col s12 list">' +
                         '<h5>Auflistung</h5>' +
                         '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="teal-text">+</span> links unten ein.</p>' +
