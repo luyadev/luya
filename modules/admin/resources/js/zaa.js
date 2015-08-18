@@ -1,37 +1,37 @@
-var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ngDragDrop', 'angular-loading-bar', 'ngFileUpload', 'ui.materialize', 'ngWig', 'slugifier']);
+var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angular-loading-bar", "ngFileUpload", "ui.materialize", "ngWig", "slugifier"]);
 
 /* zephir angular admin */
 (function() {
 	"use strict";
 	
 	zaa.config(function ($httpProvider, $stateProvider, $controllerProvider) {
-		$httpProvider.interceptors.push('authInterceptor');
+		$httpProvider.interceptors.push("authInterceptor");
 		
 		zaa.bootstrap = $controllerProvider;
 		
 		$stateProvider
 			.state("default", {
-				url : "/default/:moduleId",
-				templateUrl : function($stateParams) {
+				url: "/default/:moduleId",
+				templateUrl: function($stateParams) {
 					return "admin/template/default";
 				}
 			})
 			.state("default.route", {
-				url : '/:moduleRouteId/:controllerId/:actionId',
+				url: "/:moduleRouteId/:controllerId/:actionId",
 				templateUrl: function ($stateParams) {
-	                return $stateParams.moduleRouteId + '/' + $stateParams.controllerId  + '/' + $stateParams.actionId;
+	                return $stateParams.moduleRouteId + "/" + $stateParams.controllerId  + "/" + $stateParams.actionId;
 	            }
 			})
 			.state("custom", {
-				url : "/template/:templateId",
-				templateUrl : function($stateParams) {
+				url: "/template/:templateId",
+				templateUrl: function($stateParams) {
 					var res = $stateParams.templateId.split("-");
-					return res[0] + '/' + res[1] + '/' + res[2];
+					return res[0] + "/" + res[1] + "/" + res[2];
 				}
 			})
 			.state("home", {
-				url : '',
-				templateUrl : 'admin/default/dashboard'
+				url: "",
+				templateUrl: "admin/default/dashboard"
 			});
 	});
 	
@@ -41,7 +41,7 @@ var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ngDragDrop', 'angul
 			link: function(scope, element, attr) {
 				var parsed = $parse(attr.ngBindHtml);
 	  
-				scope.$watch(function() { return (parsed(scope) || '').toString(); }, function() {
+				scope.$watch(function() { return (parsed(scope) || "").toString(); }, function() {
 			        $compile(element, null, -9999)(scope);  //The -9999 makes it skip directives so that we do not recompile ourselves
 		        });
 		    }
@@ -76,7 +76,7 @@ var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ngDragDrop', 'angul
 	
 	zaa.directive("focusMe", function($timeout) {
 		return {
-			scope: { trigger : '=focusMe' },
+			scope: { trigger: "=focusMe" },
 			link: function(scope, element) {
 				scope.$watch("trigger", function(value) {
 					if (value === true) {
@@ -109,14 +109,14 @@ var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ngDragDrop', 'angul
 	
 	zaa.directive("modal", function($timeout) {
 		return {
-			restrict: 'E',
+			restrict: "E",
 			scope: {
-				isModalHidden : '='
+				isModalHidden: "="
 			},
 			replace: true,
 			transclude: true,
 			templateUrl: "modal",
-			link : function(scope, element, attrs) {
+			link: function(scope, element, attrs) {
 				$timeout(function() {
 					scope.$watch("isModalHidden", function(n) {
 						if (n == false) {
@@ -167,11 +167,11 @@ var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ngDragDrop', 'angul
 	});
 	
 	zaa.factory("ApiAdminLang", function($resource) {
-		return $resource("admin/api-admin-lang/:id", { id: '@_id' }, {
+		return $resource("admin/api-admin-lang/:id", { id: "@_id" }, {
 			save: {
 				method: "POST",
 				isArray: false,
-				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+				headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
 			}
 		});
 	});
@@ -232,34 +232,34 @@ var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ngDragDrop', 'angul
 var activeWindowRegisterForm = function(form, callback, cb) {
 	$(form).submit(function(event) {
 	  event.preventDefault();
-      var activeWindowHash = $('[ng-controller="'+ngrestConfigHash+'"]').scope().data.aw.id;
+      var activeWindowHash = $("[ng-controller=\""+ngrestConfigHash+"\"]").scope().data.aw.id;
 	  $.ajax({
-		  url: activeWindowCallbackUrl + '?activeWindowCallback=' + callback + '&ngrestConfigHash=' + ngrestConfigHash + '&activeWindowHash=' + activeWindowHash, 
+		  url: activeWindowCallbackUrl + "?activeWindowCallback=" + callback + "&ngrestConfigHash=" + ngrestConfigHash + "&activeWindowHash=" + activeWindowHash, 
 		  data: $(form).serialize(),
-		  type : 'POST',
-		  dataType : 'json',
+		  type: "POST",
+		  dataType: "json",
 		  success: function(transport) {
 			  cb.call(this, transport);
 		  },
-		  error : function(transport) {
-			  alert('we have an async error');
+		  error: function(transport) {
+			  alert("we have an async error");
 		  }
 		});
 	});
 }
 
 var activeWindowAsyncGet = function(callback, params, cb) {
-	var activeWindowHash = $('[ng-controller="'+ngrestConfigHash+'"]').scope().data.activeWindow.id;
+	var activeWindowHash = $("[ng-controller=\""+ngrestConfigHash+"\"]").scope().data.activeWindow.id;
 	$.ajax({
-		url: activeWindowCallbackUrl + '?activeWindowCallback=' + callback + '&ngrestConfigHash=' + ngrestConfigHash + '&activeWindowHash=' + activeWindowHash,
-		data : params,
-		type : 'GET',
-		dataType : 'json',
+		url: activeWindowCallbackUrl + "?activeWindowCallback=" + callback + "&ngrestConfigHash=" + ngrestConfigHash + "&activeWindowHash=" + activeWindowHash,
+		data: params,
+		type: "GET",
+		dataType: "json",
 		success: function(transport) {
 			  cb.call(this, transport);
 		  },
-		  error : function(transport) {
-			  alert('we have an async error');
+		  error: function(transport) {
+			  alert("we have an async error");
 		  }
 	});
 };
