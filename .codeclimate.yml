@@ -1,6 +1,8 @@
 engines:
   phpcodesniffer:
     enabled: true
+  fixme:
+    enabled: true
   rubocop:
     enabled: false
   golint:
@@ -14,12 +16,10 @@ engines:
 
 ratings:
     paths:
-    - src/**
-    - modules/**
+    - "**.php"
 
 exclude_paths:
-- "envs/kickstarter/resources/**/*"
-- "envs/dev/resources/**/*"
+- "envs/**/*"
 - "tests/**/*"
 - "sql/**/*"
 - "scripts/**/*"
