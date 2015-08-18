@@ -839,7 +839,6 @@
 			scope : {
 				allowSelection : '@selection'
 			},
-			transclude : false,
 			controller : function($scope, $http, $timeout) {
 				
 				$scope.showFolderForm = false;
