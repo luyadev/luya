@@ -24,6 +24,9 @@ $config = [
 	    ],
 	    'cmsadmin' => 'cmsadmin\Module',
 	    'moduletest' => 'moduletest\Module',
+        'unitmodule' => [
+            'class' => '\tests\src\moduleapp\module\Module'
+        ],
     ],
     'components' => [
         'request' => [
