@@ -30,24 +30,4 @@ class AdminUser extends \yii\web\User
     {
         UserOnline::removeUser($this->getId());
     }
-    
-    public function getFirstname()
-    {
-        
-    }
-    
-    public function getLastname()
-    {
-        
-    }
-    
-    public function getFullname()
-    {
-        
-    }
-    
-    public function getMail()
-    {
-        
-    }
 }
