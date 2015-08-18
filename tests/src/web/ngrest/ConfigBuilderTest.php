@@ -135,6 +135,8 @@ class ConfigBuilderTest extends \tests\BaseWebTest
         //$ngRestConfig = new \admin\ngrest\Config('api-admin-test', 'id');
         $ngRestConfig->setConfig($configData);
         
+        $this->assertEquals('2082601d161230ac7b3092fa7f58a05d', $ngRestConfig->getHash());
+        $this->assertEquals('2082601d161230ac7b3092fa7f58a05d', $ngRestConfig->hash);
         $this->assertEquals(true, $ngRestConfig->hasPointer('list'));
         $this->assertEquals(true, $ngRestConfig->hasPointer('create'));
         $this->assertEquals(true, $ngRestConfig->hasPointer('update'));
@@ -157,5 +159,16 @@ class ConfigBuilderTest extends \tests\BaseWebTest
             ]
         ]);
         $this->assertEquals(true, $ngRestConfig->hasField('list', 'foo'));
+    }
+    
+    public function testOnFinish()
+    {
+        $configData = $this->getConfig();
+        $ngRestConfig = Yii::createObject(['class' => '\admin\ngrest\Config', 'apiEndpoint' => 'api-admin-test', 'primaryKey' => 'id']);
+        //$ngRestConfig = new \admin\ngrest\Config('api-admin-test', 'id');
+        $this->assertEquals(false, $ngRestConfig->hasField('list', 'id'));
+        $ngRestConfig->setConfig($configData);
+        $ngRestConfig->onFinish();
+        $this->assertEquals(true, $ngRestConfig->hasField('list', 'id'));
     }
 }   
