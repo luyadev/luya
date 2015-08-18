@@ -49,6 +49,8 @@ class StorageFile extends \yii\db\ActiveRecord
     public function onBeforeInsert()
     {
         $this->upload_timestamp = time();
-        $this->upload_user_id = Yii::$app->adminuser->getId();
+        if (empty($this->upload_user_id)) {
+            $this->upload_user_id = Yii::$app->adminuser->getId();
+        }        
     }
 }
