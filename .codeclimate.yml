@@ -1,12 +1,14 @@
 engines:
+  phpcodesniffer:
+    enabled: true
   rubocop:
-    enabled: true
+    enabled: false
   golint:
-    enabled: true
+    enabled: false
   gofmt:
-    enabled: true
+    enabled: false
   eslint:
-    enabled: true
+    enabled: false
   csslint:
     enabled: false
 
