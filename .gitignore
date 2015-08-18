@@ -34,3 +34,4 @@ local.properties
 scripts/.subsplit
 /.tern-project
 .phpintel/
+/build/
