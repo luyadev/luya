@@ -8,6 +8,8 @@ engines:
     
 ratings:
     paths:
+    - src/**
+    - modules/**
     - "**.php"
 
 exclude_paths:
