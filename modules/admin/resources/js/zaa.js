@@ -32,12 +32,12 @@ var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ngDragDrop', 'angul
 			.state("home", {
 				url : '',
 				templateUrl : 'admin/default/dashboard'
-			})
+			});
 	});
 	
-	zaa.directive('compileHtml', function($compile, $parse) {
+	zaa.directive("compileHtml", function($compile, $parse) {
 		return {
-			restrict: 'A',
+			restrict: "A",
 			link: function(scope, element, attr) {
 				var parsed = $parse(attr.ngBindHtml);
 	  
@@ -48,12 +48,12 @@ var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ngDragDrop', 'angul
 		};
 	});
 	
-	zaa.directive('ngConfirmClick', function() {
+	zaa.directive("ngConfirmClick", function() {
 	     return {
 	         link: function (scope, element, attr) {
 	             var msg = attr.ngConfirmClick || "Are you sure?";
 	             var clickAction = attr.confirmedClick;
-	             element.bind('click',function (event) {
+	             element.bind("click",function (event) {
 	                 if ( window.confirm(msg) ) {
 	                     scope.$eval(clickAction)
 	                 }
@@ -62,9 +62,9 @@ var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ngDragDrop', 'angul
 	     };
 	});
 	
-	zaa.directive('zaaEsc', function() {
+	zaa.directive("zaaEsc", function() {
 		return function(scope, element, attrs) {
-			$(document).on('keyup', function(e) {
+			$(document).on("keyup", function(e) {
 				if (e.keyCode == 27) {
 					scope.$apply(function() {
 						scope.$eval(attrs.zaaEsc);
@@ -74,11 +74,11 @@ var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ngDragDrop', 'angul
 		};
 	});
 	
-	zaa.directive('focusMe', function($timeout) {
+	zaa.directive("focusMe", function($timeout) {
 		return {
-			scope : { trigger : '=focusMe' },
-			link : function(scope, element) {
-				scope.$watch('trigger', function(value) {
+			scope: { trigger : '=focusMe' },
+			link: function(scope, element) {
+				scope.$watch("trigger", function(value) {
 					if (value === true) {
 						element[0].focus();
 						scope.trigger = false;
@@ -87,21 +87,8 @@ var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ngDragDrop', 'angul
 			}
 		}
 	});
-	/*
-	zaa.factory('AdminService', function() {
-		var service = [];
-		
-		service.bodyClass = '';
-		
-		service.addBodyClass = function(className) {
-			service.bodyClass = className;
-		}
-		
-		return service;
-	});
-	*/
 	
-	zaa.factory('AdminClassService', function() {
+	zaa.factory("AdminClassService", function() {
 		
 		var service = [];
 		
@@ -120,18 +107,18 @@ var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ngDragDrop', 'angul
 		return service;
 	});
 	
-	zaa.directive('modal', function($timeout) {
+	zaa.directive("modal", function($timeout) {
 		return {
-			restrict : 'E',
-			scope : {
+			restrict: 'E',
+			scope: {
 				isModalHidden : '='
 			},
-			replace : true,
-			transclude : true,
-			templateUrl : 'modal',
+			replace: true,
+			transclude: true,
+			templateUrl: "modal",
 			link : function(scope, element, attrs) {
 				$timeout(function() {
-					scope.$watch('isModalHidden', function(n) {
+					scope.$watch("isModalHidden", function(n) {
 						if (n == false) {
 							$(element).openModal({
 						      dismissible: true, // Modal can be dismissed by clicking outside of the modal
@@ -156,149 +143,40 @@ var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ngDragDrop', 'angul
 		}
 	});
 	
-	/*
-	zaa.factory('AdminModalService', function() {
-		
-		var service = [];
-		
-		service.modalsActive = {};
-		
-		service.modalsHidden =  {};
-		
-		service.add = function(name, title, content) {
-			service.modalsHidden[name] = {name : name, title : title, content : content};
-		}
-		
-		service.show = function(name) {
-			if (!service.exists(name)) {
-				alert('the modal' + name + ' does not exists!');
-				return;
-			}
-			
-			if (service.isHidden(name) && !service.isActive(name)) {
-				var data = service.modalsHidden[name];
-				delete service.modalsHidden[name];
-				service.modalsActive[name] = data;
-			}
-		}
-		
-		service.hide = function(name) {
-			if (!service.exists(name)) {
-				alert('the modal' + name + ' does not exists!');
-				return;
-			}
-			
-			if (!service.isHidden(name) && service.isActive(name)) {
-				var data = service.modalsActive[name];
-				delete service.modalsActive[name];
-				service.modalsHidden[name] = data;
-			}
-		}
-		
-		service.exists = function(name) {
-			if (service.isHidden(name) || service.isActive(name)) {
-				return true;
-			}
-			
-			return false;
-		}
-		
-		service.isHidden = function(name) {
-			return service.modalsHidden.hasOwnProperty(name);
-		}
-		
-		service.isActive = function(name) {
-			return service.modalsActive.hasOwnProperty(name);
-		}
-		
-		service.get = function() {
-			return service.modalsActive;
-		}
-		
-		return service;
-		
-	});
-	*/
-	
 	zaa.controller("DashboardController", function($scope) {
 		
 		$scope.date = null;
 		
-	})
-	
-	/*
-	zaa.controller("HtmlController", function($scope, AdminService) {
-		
-		$scope.AdminService = AdminService;
-		
 	});
-	*/
-	
-	/*
-	zaa.directive('onFinish', function ($timeout) {
-		return {
-		    restrict: 'A',
-		    link: function (scope, element, attr) {
-		        if (scope.$last === true) {
-		            $timeout(function () {
-		            	dispatchEvent(attr.onFinish);
-		            });
-		        }
-		    }
-		}
-	});
-	*/
-	
-	/**
-	 * event dispatcher
-	 */
-	/*
-	var dispatchEvent = function(eventName) {
-		var event = new Event(eventName);
-		document.dispatchEvent(event);
-	};
-	*/
-	/**
-	 * names:
-	 * onMenuFinish
-	 * onSubMenuFinish
-	 */
-	/*
-	var registerEvent = function(name, cb) {
-		document.addEventListener(name, cb, false);
-	}
-	*/
-	
-	
 	
 	// factory.js
-	zaa.factory('authInterceptor', function($rootScope, $q) {
+	zaa.factory("authInterceptor", function($rootScope, $q) {
 		return {
-			request : function (config) {
+			request: function (config) {
 				config.headers = config.headers || {};
-				config.headers.Authorization = 'Bearer ' + authToken;
+				config.headers.Authorization = "Bearer " + authToken;
 				return config;
 			},
-			responseError : function(data) {
+			responseError: function(data) {
 				if (data.status == 401) {
-					window.location = 'admin/default/logout';
+					window.location = "admin/default/logout";
 				}
 				return $q.reject(data);
 			}
 		};
 	});
 	
-	zaa.factory('ApiAdminLang', function($resource) {
-		return $resource('admin/api-admin-lang/:id', { id: '@_id' }, {
-			save : {
-				method : 'POST',
-				isArray : false,
+	zaa.factory("ApiAdminLang", function($resource) {
+		return $resource("admin/api-admin-lang/:id", { id: '@_id' }, {
+			save: {
+				method: "POST",
+				isArray: false,
 				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 			}
 		});
 	});
 	
-	zaa.factory('AdminLangService', function(ApiAdminLang, $http) {
+	zaa.factory("AdminLangService", function(ApiAdminLang, $http) {
 		var service = [];
 		
 		service.data = [];
@@ -312,7 +190,7 @@ var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ngDragDrop', 'angul
 			} else {
 				service.selection.splice(exists, 1);
 			}
-		}
+		};
 		
 		service.isInSelection = function(lang) {
 			var exists = service.selection.indexOf(lang.short_code);
@@ -320,28 +198,28 @@ var zaa = angular.module("zaa", ['ui.router', 'ngResource', 'ngDragDrop', 'angul
 				return false;
 			}
 			return true;
-		}
+		};
 		
 		service.load = function(forceReload) {
 			if (service.data.length == 0 || forceReload !== undefined) {
 				service.data = ApiAdminLang.query();
-				$http.get('admin/api-admin-defaults/lang').success(function(response) {
+				$http.get("admin/api-admin-defaults/lang").success(function(response) {
 					if (!service.isInSelection(response)) {
 						service.toggleSelection(response);
 					}
 				});
 			}
-		}
+		};
 		
 		return service;
 	});
 	
-	zaa.factory('ApiAdminFilter', function($resource) {
-		return $resource('admin/api-admin-filter/:id', { id: '@_id' }, {
-			save : {
-				method : 'POST',
-				isArray : false,
-				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+	zaa.factory("ApiAdminFilter", function($resource) {
+		return $resource("admin/api-admin-filter/:id", { id: "@_id" }, {
+			save: {
+				method: "POST",
+				isArray: false,
+				headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
 			}
 		});
 	});
@@ -372,7 +250,6 @@ var activeWindowRegisterForm = function(form, callback, cb) {
 
 var activeWindowAsyncGet = function(callback, params, cb) {
 	var activeWindowHash = $('[ng-controller="'+ngrestConfigHash+'"]').scope().data.activeWindow.id;
-	
 	$.ajax({
 		url: activeWindowCallbackUrl + '?activeWindowCallback=' + callback + '&ngrestConfigHash=' + ngrestConfigHash + '&activeWindowHash=' + activeWindowHash,
 		data : params,

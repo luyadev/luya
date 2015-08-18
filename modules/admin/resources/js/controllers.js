@@ -8,9 +8,7 @@
 		
 		$scope.parentController = $scope.$parent;
 		
-		//$scope.AdminService = AdminService;
-		
-		$scope.orderBy = '+id';
+		$scope.orderBy = "+id";
 		
 		$scope.showCrudList = true;
 		
@@ -25,7 +23,7 @@
 			$scope.$watch(function() { return $scope.parentController.currentItem }, function(newValue) {
 				$scope.currentMenuItem = newValue;
 			});
-		}
+		};
 		
 		$scope.isOrderBy = function(field) {
 			if (field == $scope.orderBy) {
@@ -33,11 +31,11 @@
 			}
 			
 			return false;
-		}
+		};
 		
 		$scope.changeOrder = function(field, sort) {
 			$scope.orderBy = sort + field;
-		}
+		};
 		
 		$scope.closeDialogs = function() {
 			/*
@@ -47,12 +45,12 @@
 			//$scope.AdminService.bodyClass = '';
 			$scope.search = '';
 			*/
-		}
+		};
 		
 		$scope.debug = function() {
 			console.log('config', $scope.config);
 			console.log('data', $scope.data);
-		}
+		};
 		
 		$scope.getActiveWindow = function (activeWindowId, id, $event) {
 			$http.post('admin/ngrest/render', $.param({ itemId : id, activeWindowHash : activeWindowId , ngrestConfigHash : $scope.config.ngrestConfigHash }), {
@@ -68,11 +66,11 @@
 				$scope.data.aw.content = $sce.trustAsHtml(data);
 				//dispatchEvent('onCrudActiveWindowLoad');
 			})
-		}
+		};
 	
 		$scope.getActiveWindowCallbackUrl = function(callback) {
 			return $scope.data.aw.configCallbackUrl + '?activeWindowCallback=' + callback + '&ngrestConfigHash=' + $scope.data.aw.configHash + '&activeWindowHash=' + $scope.data.aw.hash;
-		}
+		};
 		
 		/**
 		 * new returns a promise promise.hten(function(answer) {
@@ -90,7 +88,7 @@
 			return $http.post($scope.getActiveWindowCallbackUrl(callback), $.param(data), {
 				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 			});
-		}
+		};
 		
 		$scope.deleteErrors = [];
 		
@@ -129,24 +127,24 @@
 			.error(function(data) {
 				alert('ERROR LOADING UPDATE DATA');
 			})
-		}
+		};
 		
 		$scope.closeUpdate = function () {
 			$('#updateModal').closeModal();
 	        //$scope.AdminService.bodyClass = '';
-	    }
+	    };
 		
 		$scope.closeCreate = function() {
 			$('#createModal').closeModal();
-		}
+		};
 		
 		$scope.openActiveWindow = function() {
 			$('#activeWindowModal').openModal();
-		}
+		};
 		
 		$scope.closeActiveWindow = function() {
 			$('#activeWindowModal').closeModal();
-		}
+		};
 		
 		$scope.openCreate = function () {
 			$('#createModal').openModal({
@@ -163,7 +161,7 @@
 				dispatchEvent('onCrudCreate');
 			}
 			*/
-		}
+		};
 	    
 		$scope.submitUpdate = function () {
 			
@@ -178,7 +176,7 @@
 			.error(function(data) {
 				$scope.updateErrors = data;
 			})
-		}
+		};
 		
 		$scope.submitCreate = function() {
 			
@@ -194,7 +192,7 @@
 			.error(function(data) {
 				$scope.createErrors = data;
 			})
-		}
+		};
 	
 		$scope.loadList = function() {
 			$http.get($scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString)
@@ -206,7 +204,7 @@
 			$http.get($scope.config.apiEndpoint + '/services').success(function(rsp) {
 				$scope.service = rsp;
 			})
-		}
+		};
 		
 		$scope.service = [];
 		
@@ -262,7 +260,7 @@
 					$scope.loadImages();
 				}
 			}
-		})
+		});
 		
 		$scope.uploadUsingUpload = function(file) {
 	        file.upload = Upload.upload({
@@ -286,8 +284,7 @@
 	            // Math.min is to fix IE which reports 200% sometimes
 	            file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
 	        });
-	    }
-		/* \UPLOAD */
+	    };
 		
 		$scope.images = [];
 		
@@ -295,7 +292,7 @@
 			$http.get($scope.crud.getActiveWindowCallbackUrl('images')).success(function(response) {
 				$scope.images = response;
 			})
-		}
+		};
 		
 		$scope.$watch(function() { return $scope.data.aw.itemId }, function(n, o) {
 			$scope.loadImages();
@@ -313,11 +310,11 @@
 			$scope.transport = [];
 			$scope.newpass = null;
 			$scope.newpasswd = null;
-		}
+		};
 		
 		$scope.$watch(function() { return $scope.crud.data.aw.itemId }, function(n, o) {
 			$scope.init();
-		})
+		});
 		
 		$scope.submit = function() {
 			$scope.crud.sendActiveWindowCallback('save', {'newpass' : $scope.newpass, 'newpasswd' : $scope.newpasswd}).then(function(response) {
@@ -325,7 +322,7 @@
 				$scope.error = response.data.error;
 				$scope.transport = response.data.transport;
 			})
-		}
+		};
 	});
 	
 	// DefaultController.js.
@@ -489,14 +486,14 @@
 					return true;
 				}
 			}
-		}
+		};
 		
 		$scope.get = function () {
 			$http.get('admin/api-admin-menu')
 			.success(function(data) {
 				$scope.items = data;
 			});
-		}
+		};
 		
 		$scope.get();
 	});
