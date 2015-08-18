@@ -1,6 +1,9 @@
 LUYA CHANGELOG
 ==============
 
+1.0.0-alpha17 (in progress)
+---------------------------
+
 1.0.0-alpha16 (18. Aug 2015)
 ---------------------------
 - Faster frontend loading, faster ngRest Module, ngRestConfig update.
