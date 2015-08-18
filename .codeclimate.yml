@@ -7,11 +7,6 @@ engines:
     enabled: true
   eslint:
     enabled: true
-    checks:
-      no-trailing-spaces:
-        enabled: false
-      no-undef:
-        enabled: false
   csslint:
     enabled: false
 
