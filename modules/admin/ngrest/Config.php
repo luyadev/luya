@@ -112,8 +112,10 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
         foreach($this->getConfig() as $pointer => $fields) {
             if (is_array($fields)) {
                 foreach($fields as $field) {
-                    if ($field['name'] == $fieldName) {
-                        $this->_config[$pointer][$field['name']][$optionKey] = $optionValue;
+                    if (isset($field['name'])) {
+                        if ($field['name'] == $fieldName) {
+                            $this->_config[$pointer][$field['name']][$optionKey] = $optionValue;
+                        }
                     }
                 }
             }
