@@ -192,10 +192,11 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
      */
     public function genericSearch($searchQuery)
     {
+        $fields = $this->genericSearchFields();
         // create active query object
         $query = self::find();
         // foreach all fields from genericSearchFields metod
-        foreach($this->genericSearchFields() as $field) {
+        foreach($fields as $field) {
             $query->orWhere(['like', $field, $searchQuery]);
         }
         // return array based on orWhere statement
