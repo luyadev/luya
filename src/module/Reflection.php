@@ -3,6 +3,7 @@
 namespace luya\module;
 
 use Yii;
+use Exception;
 use luya\base\Module;
 
 /**
@@ -74,8 +75,12 @@ class Reflection
 
         $controller = $this->module->createController($request['route']);
 
-        $controllerObject = $controller[0];
+        if (!isset($controller[0]) && !is_object($controller[0])) {
+            throw new Exception("Controller not found. The requested module reflection route '".$request['route']."' could not be found.");
+        }
 
+        $controllerObject = $controller[0];
+        
         $action = $controllerObject->runAction($controller[1], $request['args']);
 
         return $action;
