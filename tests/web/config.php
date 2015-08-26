@@ -26,6 +26,9 @@ $config = [
         'unitmodule' => [
             'class' => '\tests\data\modules\unitmodule\Module'
         ],
+	    'urlmodule' => [
+	        'class' => '\tests\data\modules\urlmodule\Module'
+	    ],
     ],
     'components' => [
         'request' => [
