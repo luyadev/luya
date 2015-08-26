@@ -38,7 +38,7 @@ abstract class ActiveWindow implements \admin\ngrest\interfaces\ActiveWindow
         return $this->_itemId;
     }
 
-    public function setConfig($activeWindowConfig)
+    public function setConfig(array $activeWindowConfig)
     {
         $this->config = $activeWindowConfig;
     }

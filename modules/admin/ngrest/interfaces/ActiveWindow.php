@@ -10,5 +10,5 @@ interface ActiveWindow
 
     public function index();
 
-    public function setConfig($activeWindowConfig);
+    public function setConfig(array $activeWindowConfig);
 }
