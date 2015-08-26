@@ -3,13 +3,14 @@
 namespace luya\traits;
 
 use yii\web\NotFoundHttpException;
+use luya\helpers\Url;
 
 trait ErrorHandler
 {
     public $api = 'http://luya.io/errorapi';
 
     public $transferException = false;
-
+    
     public function renderException($exception)
     {
         if ($exception instanceof NotFoundHttpException || !$this->transferException) {
@@ -19,7 +20,7 @@ trait ErrorHandler
         $data = json_encode($this->getExceptionArray($exception));
 
         $curl = new \Curl\Curl();
-        $rsp = $curl->post(\luya\helpers\Url::trailing($this->api).'create', [
+        $rsp = $curl->post(Url::trailing($this->api).'create', [
             'error_json' => $data,
         ]);
 
