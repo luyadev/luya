@@ -10,6 +10,8 @@ class Module extends \luya\base\Module
      */
     public $urlRules = [];
     
+    public $enableCompression = true;
+    
     public function registerComponents()
     {
         return [
