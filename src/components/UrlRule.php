@@ -27,9 +27,13 @@ class UrlRule extends \luya\base\UrlRule
         return $this->_defaultClassName;
     }
     
-    private function getUrlParts($request)
+    public function getUrlParts($request)
     {
-        return explode('/', $request->getPathInfo());
+        $pathInfo = $request->getPathInfo();
+        if (empty($pathInfo)) {
+            return [];
+        }
+        return explode('/', rtrim($pathInfo, '/'));
     }
     
     public function parseRequest($manager, $request)
