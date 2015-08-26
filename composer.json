@@ -48,8 +48,7 @@
             "gallery\\" : "modules/gallery",
             "galleryadmin\\" : "modules/galleryadmin",
             "crawler\\" : "modules/crawler",
-            "crawleradmin\\" : "modules/crawleradmin",
-            "moduletest\\" : "envs/dev/modules/moduletest"
+            "crawleradmin\\" : "modules/crawleradmin"
         }
     },
 	"extra": {

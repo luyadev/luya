@@ -8,7 +8,7 @@
 >
     <testsuites>
         <testsuite name="Package Test Suite">
-            <directory>./tests/src</directory>
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
     <php>
