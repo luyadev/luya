@@ -15,7 +15,11 @@ class CommandController extends \luya\base\Command
         if (!$moduleObject) {
             return $this->outputError("Module '$module' does not exist in module list, add the Module to your configuration.");
         }
-        $moduleObject->controllerNamespace = $module.'\commands';
+        
+        $ns = $moduleObject->getNamespace();
+        
+        $moduleObject->controllerNamespace = $ns.'\commands';
+        
         $response = $moduleObject->runAction($route);
 
         if ($this->isMuted()) {
