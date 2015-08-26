@@ -2,6 +2,8 @@
 
 namespace admin\ngrest\base;
 
+use Exception;
+
 class View extends \yii\base\View
 {
     public $module = null;
@@ -11,10 +13,10 @@ class View extends \yii\base\View
     public function render($view, $params = [], $context = null)
     {
         if ($this->id === null) {
-            throw new \Exception("The ActiveWindow View 'id' can't be empty!");
+            throw new Exception("The ActiveWindow View 'id' can't be empty!");
         }
         if ($this->module === null) {
-            throw new \Exception("The ActiveWindow View 'module' can't be empty!");
+            throw new Exception("The ActiveWindow View 'module' can't be empty!");
         }
         
         if ($context === null) {
