@@ -3,6 +3,10 @@ LUYA CHANGELOG
 
 1.0.0-alpha17 (in progress)
 ---------------------------
+- fixed bug where modules without namespace of the module are not able to load. fixed by using getNamespace() method for each module.
+- twig update to `1.21.0`
+- added ability to disable compression of cms content output with `$enableCompression = false`. 
+- rewritten testing structure.
 
 1.0.0-alpha16 (18. Aug 2015)
 ---------------------------
