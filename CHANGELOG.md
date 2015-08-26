@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-alpha17 (in progress)
 ---------------------------
+- changed reflection class handling. Move getRequestResponse out of responseContent method.
 - fixed bug where modules without namespace of the module are not able to load. fixed by using getNamespace() method for each module.
 - twig update to `1.21.0`
 - added ability to disable compression of cms content output with `$enableCompression = false`. 
