@@ -4,6 +4,7 @@ namespace admin\ngrest;
 
 use Exception;
 use yii\helpers\ArrayHelper;
+use yii\db\yii\db;
 
 /**
  * Example config array to `setConfig($array)`:
@@ -48,7 +49,7 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
     public function setConfig(array $config)
     {
         if (count($this->_config) > 0) {
-            throw new Excepiont("Cant set config if config is not empty");
+            throw new Exception("Cant set config if config is not empty");
         }
         
         $this->_config = $config;
@@ -105,6 +106,8 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
         
         
         $this->_config[$pointer][$field] = $options;
+        
+        return true;
     }
     
     public function appendFieldOption($fieldName, $optionKey, $optionValue)
