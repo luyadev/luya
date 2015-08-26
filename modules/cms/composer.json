@@ -17,8 +17,8 @@
 		"issues" : "https://github.com/zephir/luya/issues"
 	},
 	"require" : {
-		"zephir/luya" : "*@dev",
-		"zephir/luya-module-admin" : "*@dev"
+		"zephir/luya" : "*",
+		"zephir/luya-module-cmsadmin" : "*"
 	},
 	"autoload" : {
 		"psr-4" : {

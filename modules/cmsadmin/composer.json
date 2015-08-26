@@ -17,8 +17,8 @@
 		"issues" : "https://github.com/zephir/luya/issues"
 	},
 	"require" : {
-		"zephir/luya" : "*@dev",
-		"zephir/luya-module-admin" : "*@dev",
+		"zephir/luya" : "*",
+		"zephir/luya-module-admin" : "*",
 		"cebe/markdown": "~1.0.0 | ~1.1.0"
 	},
 	"autoload" : {
