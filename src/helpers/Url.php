@@ -2,7 +2,7 @@
 
 namespace luya\helpers;
 
-use yii;
+use Yii;
 
 class Url
 {
@@ -106,6 +106,6 @@ class Url
             $params = null;
         }
 
-        return self::trailing(yii::$app->urlManager->baseUrl).$route.$params;
+        return self::trailing(Yii::$app->urlManager->baseUrl).$route.$params;
     }
 }
