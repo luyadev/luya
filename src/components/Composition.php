@@ -20,12 +20,11 @@ class Composition extends \yii\base\Component
      * as the cms needs this informations too). After proccessing this informations, they will be removed
      * from the url for further proccessing.
      *
-     * The fullqualified composer key will be stored in $request->get('urlPrefixCompositionKey').
+     * The fullqualified composer key will be stored in `$request->get('urlPrefixCompositionKey')`.
      *
      * Examples of how to use urlPrefixComposition
      * ```
      * $urlPrefixComposition = '<langShortCode:[a-z]{2}>/<countryShortCode:[a-z]{2}>'; // de/ch; fr/ch
-     * $urlPrefixComposition = '<countryShortCode:[a-z]{2}>-<langShortCode:[a-z]{2}>'; // ch-de; ch-fr
      * ```
      *
      * @var string
