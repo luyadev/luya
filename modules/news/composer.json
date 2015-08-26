@@ -18,7 +18,7 @@
 	},
 	"require" : {
 		"zephir/luya" : "*",
-		"zephir/luya-module-newsadmin" : "*",
+		"zephir/luya-module-newsadmin" : "*"
 	},
 	"autoload" : {
 		"psr-4" : {
