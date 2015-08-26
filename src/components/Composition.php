@@ -45,6 +45,8 @@ class Composition extends \yii\base\Component
      */
     private $_composition = [];
 
+    private $_resolvedValues = [];
+    
     /**
      * @todo should be rewritten soon.
      * @param \yii\web\Request $request
@@ -77,8 +79,6 @@ class Composition extends \yii\base\Component
         
         return implode('/', $parts);
     }
-    
-    private $_resolvedValues = [];
     
     public function getResolvedValues()
     {
