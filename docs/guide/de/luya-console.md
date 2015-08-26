@@ -3,10 +3,10 @@ Konsolenbefehle
 Um einen *Konsolenbefehl* auszuführen öffnest du ein *Terminal* und gehst in in dein Projekt Verzeichniss (`cd /dein/projekt/`). Damit du **nich**t extra eine Konsolen ausführbare Datei erstellen musst um Konsolenbefehle anzusprechen übernimmt das *LUYA* für dich in der `index.php` Datei. Um einen der untenstehende befehle auszuführen gibt das also folgendes in deiner Konsole ein:
 
 ```sh
-php index.php COMMAND
+php index.php <befehl>
 ```
 
-Wobei *COMMAND* natürlich einem befehl aus der folgenden liste entsprechen sollte.
+Wobei *<befehl>* einem befehl aus der folgenden Liste entsprechen muss:
 
 Befehlsübersicht
 ----------------
@@ -21,9 +21,11 @@ Befehlsübersicht
 |module/create     |-                             |`module/create`           |Erstellt ein [Frontend/Admin Module](app-module.md) mit einem Assistenten.
 |command           |$moduleName, $route           |`command teammodule controller/action` |Ausführen eines eigenens Konsolenbefehls.
 
+
 Einen Command erstellen
 ------------------------
 Eigene Konsolenbehle (auch commands gennant) werden innerhalb eines Modules im Ordner `commands` hinterlegt. Der wesentliche Unterschied zu normalen Controllern liegt darin das Sie keinen Return Output haben. So könnte ein Beispiel befehl aussehen:
+
 
 ```php
 <?php
@@ -34,15 +36,16 @@ class NotifyController extends \luya\base\Command
 {
     public function actionIndex()
     {
-        return $this->outputSuccess('action successfully done');
+    	return $this->outputSuccess('action successfully done');
     }
-    
-    public function actionBar()
-    {
-        return $this->ouputError('Something failed inside this action');
-    }
+
+	public function actionBar()
+	{
+		return $this->ouputError('Something failed inside this action');
+	}
 }
 ```
+
 
 > Verwenden Sie immer `ouputError($message)` oder `outputSuccess($message)` um innerhalb der Commands outputs zu generieren. Somit kannst du deine Commands einfach mit PHPUnitTest versehen.
 
