@@ -2,7 +2,7 @@
 
 namespace tests\web\admin\ngrest\plugins;
 
-class AcePluginTest extends \tests\web\BasePlugin
+class AceTest extends \tests\web\BasePlugin
 {
     public function testPlugin()
     {

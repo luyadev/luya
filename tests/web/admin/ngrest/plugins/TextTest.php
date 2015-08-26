@@ -2,7 +2,7 @@
 
 namespace tests\web\admin\ngrest\plugins;
 
-class TextPluginTest extends \tests\web\BasePlugin
+class TextTest extends \tests\web\BasePlugin
 {
     public function testPlugin()
     {
