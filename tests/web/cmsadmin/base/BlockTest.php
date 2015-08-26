@@ -3,6 +3,7 @@
 namespace tests\web\cmsadmin\base;
 
 use tests\data\blocks\TestBlock;
+use tests\data\blocks\FailureBlock;
 
 class BlockTest extends \tests\web\Base
 {
@@ -52,8 +53,13 @@ class BlockTest extends \tests\web\Base
         $this->assertEquals("content var 2", $block->twigAdmin()[1]);
     }
     
+    /**
+     * @expectedException Exception
+     */
     public function testBlockConfigException()
     {
-        
+        $block = new FailureBlock();
+        // will throw Exception:  Required attributes in config var element is missing. var, label and type are required.
+        $block->getVars();
     }
 }
