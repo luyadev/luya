@@ -8,7 +8,7 @@ class UserOnlineTest extends \tests\web\Base
 {
     public function testAddUser()
     {
-        UserOnline::removeUser(1);
+        UserOnline::clearList(0);
         $this->assertEquals(0, UserOnline::getCount());
         UserOnline::refreshUser(1, 'my/test'); // create
         UserOnline::refreshUser(1, 'my/test'); // refresh
