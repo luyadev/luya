@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\data;
+namespace tests\data\blocks;
 
 class TestBlock extends \cmsadmin\base\Block
 {

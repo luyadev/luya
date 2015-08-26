@@ -1,8 +1,8 @@
 <?php
 
-namespace tests\data;
+namespace tests\data\aws;
 
-class ActiveWIndowExample extends \admin\ngrest\base\ActiveWindow
+class ActiveWindowExample extends \admin\ngrest\base\ActiveWindow
 {
     public $module = 'unitmodule';
     

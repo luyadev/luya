@@ -3,7 +3,7 @@
 namespace tests\web\admin\ngrest\base;
 
 use Yii;
-use tests\data\DummyTableModel;
+use tests\data\models\DummyTableModel;
 
 class ModelTest extends \tests\web\Base
 {

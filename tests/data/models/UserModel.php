@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\data;
+namespace tests\data\models;
 
 class UserModel extends \admin\ngrest\base\Model
 {

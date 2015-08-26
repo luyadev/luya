@@ -2,7 +2,7 @@
 
 namespace tests\web\cmsadmin\base;
 
-use tests\data\TestBlock;
+use tests\data\blocks\TestBlock;
 
 class BlockTest extends \tests\web\Base
 {
@@ -50,5 +50,10 @@ class BlockTest extends \tests\web\Base
         
         $this->assertEquals("content var 1", $block->twigAdmin()[0]);
         $this->assertEquals("content var 2", $block->twigAdmin()[1]);
+    }
+    
+    public function testBlockConfigException()
+    {
+        
     }
 }

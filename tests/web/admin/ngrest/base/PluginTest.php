@@ -7,9 +7,9 @@ use Yii;
 class PluginTest extends \tests\web\Base
 {
     public $constructors = [
-        'CheckboxRelation' => ['\\tests\\data\\UserModel', 'a', 'b', 'c', [1,2,3], 'de'],
+        'CheckboxRelation' => ['\\tests\\data\\models\\UserModel', 'a', 'b', 'c', [1,2,3], 'de'],
         'SelectArray' => [['foo' => 'bar', 'baz' => 'foo'], 'baz'],
-        'SelectClass' => ['\\tests\\data\\UserModel', 'id', 'firstname'],
+        'SelectClass' => ['\\tests\\data\\models\\UserModel', 'id', 'firstname'],
     ];
 
     public $skip = [

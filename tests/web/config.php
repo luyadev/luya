@@ -24,7 +24,7 @@ $config = [
 	    ],
 	    'cmsadmin' => 'cmsadmin\Module',
         'unitmodule' => [
-            'class' => '\tests\data\unitmodule\Module'
+            'class' => '\tests\data\modules\unitmodule\Module'
         ],
     ],
     'components' => [

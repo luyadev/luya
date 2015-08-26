@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\data\unitmodule\controllers;
+namespace tests\data\modules\unitmodule\controllers;
 
 class TestController extends \luya\base\Controller
 {

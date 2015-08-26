@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\data\unitmodule;
+namespace tests\data\modules\unitmodule;
 
 class Module extends \luya\base\Module
 {

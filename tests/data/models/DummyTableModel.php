@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\data;
+namespace tests\data\models;
 
 class DummyTableModel extends \admin\ngrest\base\Model
 {

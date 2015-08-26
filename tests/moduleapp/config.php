@@ -11,7 +11,7 @@ $config = [
     'defaultRoute' => 'unitmodule',
 	'modules' => [
 	    'unitmodule' => [
-	        'class' => 'tests\data\unitmodule\Module'
+	        'class' => 'tests\data\modules\unitmodule\Module'
 	    ],
     ],
 ];
