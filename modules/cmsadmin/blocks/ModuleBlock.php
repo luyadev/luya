@@ -76,7 +76,8 @@ class ModuleBlock extends \cmsadmin\base\Block
             $reflection->setInitRun($ctrl, $action, $actionArgs);
         }
         
-        $response = $reflection->responseContent();
+        $reflectionRequest = $reflection->getRequestResponse();
+        $response = $reflection->$reflectionRequest();
         
         return $response;
     }

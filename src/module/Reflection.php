@@ -22,7 +22,7 @@ class Reflection
     private $_initRun = null;
 
     /**
-     * @todo use  Yii::$app->request or create new request object? (bugs?)
+     * @todo provied request and urlmanager as parameter instead of creating empy url manager?
      */
     public function __construct(Module $module)
     {
@@ -47,7 +47,7 @@ class Reflection
         ];
     }
 
-    private function getRequestResponse()
+    public function getRequestResponse()
     {
         if ($this->_initRun !== null && empty($this->_suffix)) {
             return [
@@ -56,17 +56,19 @@ class Reflection
             ];
         }
         $array = $this->_urlManager->parseRequest($this->_request);
-
+        
         return [
             'route' => $array[0],
             'args' => $array[1],
         ];
     }
 
-    public function responseContent()
+    public function responseContent(array $request)
     {
-        $request = $this->getRequestResponse();
-
+        if (!isset($request['route']) || !isset($request['args'])) {
+            throw new Exception("The proviede request array does not containt route or args key.");
+        }
+        
         if (count($request['args']) === 0) {
             $request['args'] = Yii::$app->request->get(); // @todo should we find the action params and compare against get() request array?
         }

@@ -54,7 +54,8 @@ class NavItemModule extends \cmsadmin\base\NavItemType
         $reflection = new \luya\module\Reflection($module);
         $reflection->setModuleSuffix($this->getOption('restString'));
         
-        $response = $reflection->responseContent();
+        $reflectionRequest = $reflection->getRequestResponse();
+        $response = $reflection->responseContent($reflectionRequest);
         
         return $response;
     }
