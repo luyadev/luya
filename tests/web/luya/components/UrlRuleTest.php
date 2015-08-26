@@ -41,4 +41,40 @@ class UrlRuleTest extends \tests\web\Base
         $this->assertEquals("1234", $parts['foo']);
         $this->assertEquals("luya09", $parts['bar']);
     }
+    
+    public function testNotExistingUrlRule()
+    {
+        $request = new \luya\components\Request();
+        $request->pathInfo = '/news';
+        
+        $manager = new \luya\components\UrlManager();
+        $rule = new \luya\components\UrlRule();
+        
+        
+        // first part and not a module. equals false;
+        $this->assertEquals(false, $rule->parseRequest($manager, $request));
+    }
+    
+    public function testUrlParts()
+    {
+        $request = new \luya\components\Request();
+        $request->pathInfo = '';
+        
+        $rule = new \luya\components\UrlRule();
+        
+        $this->assertEquals(true, is_array($rule->getUrlParts($request)));
+        $this->assertEquals(0, count($rule->getUrlParts($request)));
+        
+        $request = new \luya\components\Request();
+        $request->pathInfo = '/news';
+        
+        $this->assertEquals(true, is_array($rule->getUrlParts($request)));
+        $this->assertEquals(1, count($rule->getUrlParts($request)));
+        
+        $request = new \luya\components\Request();
+        $request->pathInfo = '/news/';
+        
+        $this->assertEquals(true, is_array($rule->getUrlParts($request)));
+        $this->assertEquals(1, count($rule->getUrlParts($request)));
+    }
 }
