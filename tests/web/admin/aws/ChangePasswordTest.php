@@ -28,7 +28,7 @@ class ChangePasswordTest extends \tests\web\Base
     public function testSuccessCallback()
     {
         $this->aws->setItemId(1);
-        $response = $this->aws->callbackSave('newpassword', 'newpassword');
+        $response = $this->aws->callbackSave('testluyaio', 'testluyaio');
         $this->assertEquals(2, count($response));
         $this->assertEquals(0, $response['error']);
     }
