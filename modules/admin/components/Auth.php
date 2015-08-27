@@ -4,9 +4,9 @@ namespace admin\components;
 
 use Yii;
 use Exception;
-use \yii\db\Query;
-use \yii\helpers\ArrayHelper;
-use \admin\models\UserOnline;
+use yii\db\Query;
+use yii\helpers\ArrayHelper;
+use admin\models\UserOnline;
 
 class Auth extends \yii\base\Component
 {
@@ -111,12 +111,12 @@ class Auth extends \yii\base\Component
     {
         $handler = (new Query())->select('COUNT(*) AS count')->from('admin_auth')->where(['route' => $route])->one();
         if ($handler['count'] == 1) {
-            Yii::$app->db->createCommand()->update('admin_auth', [
+            return Yii::$app->db->createCommand()->update('admin_auth', [
                 'alias_name' => $name,
                 'module_name' => $moduleName,
             ], ['route' => $route])->execute();
         } elseif ($handler['count'] == 0) {
-            Yii::$app->db->createCommand()->insert('admin_auth', [
+            return Yii::$app->db->createCommand()->insert('admin_auth', [
                 'alias_name' => $name,
                 'module_name' => $moduleName,
                 'is_crud' => 0,
@@ -132,12 +132,12 @@ class Auth extends \yii\base\Component
     {
         $handler = (new Query())->select('COUNT(*) AS count')->from('admin_auth')->where(['api' => $apiEndpoint])->one();
         if ($handler['count'] == 1) {
-            Yii::$app->db->createCommand()->update('admin_auth', [
+            return Yii::$app->db->createCommand()->update('admin_auth', [
                 'alias_name' => $name,
                 'module_name' => $moduleName,
             ], ['api' => $apiEndpoint])->execute();
         } elseif ($handler['count'] == 0) {
-            Yii::$app->db->createCommand()->insert('admin_auth', [
+            return Yii::$app->db->createCommand()->insert('admin_auth', [
                 'alias_name' => $name,
                 'module_name' => $moduleName,
                 'is_crud' => 1,
@@ -149,6 +149,47 @@ class Auth extends \yii\base\Component
         }
     }
     
+    /**
+     * Returns the current available auth rules inside the admin_auth table splied into routes and apis
+     * 
+     * @return array
+     */
+    public function getDatabaseAuths()
+    {
+        // define response structure of array
+        $data = [
+            'routes' => [],
+            'apis' => [],
+        ];
+        // get all auth data
+        foreach((new Query())->select('*')->from('admin_auth')->all() as $item) {
+            // allocate if its an api or route. More differences?
+            if (empty($item['api'])) {
+                $data['routes'][] = $item;
+            } else {
+                $data['apis'][] = $item;
+            }
+        }
+        
+        return $data;
+    }
+    
+    /**
+     * The method returns all rows which are not provided in $array. If an api/route is in the $data array its a valid rule and will not be
+     * prepared to find for deletion. Negativ array behavior.
+     * 
+     * ```php
+     * $data = [
+     *     'apis' => ['api-admin-test', 'api-admin-foo'],
+     *     'routes' => ['route-to-sth', 'foo-bar-bar'],
+     * ];
+     * ```
+     * 
+     * The above provided data are valid rules.
+     * 
+     * @param array $data array with key apis and routes
+     * @return array
+     */
     public function prepareCleanup(array $data)
     {
         $toCleanup = [];
@@ -167,25 +208,19 @@ class Auth extends \yii\base\Component
         return $toCleanup;
     }
     
+    /**
+     * Execute the data to delete based on an array containing a key 'id' with the corresponding value from the Database.
+     * 
+     * @param array $data
+     * @return boolean
+     */
     public function executeCleanup(array $data)
     {
         foreach($data as $rule) {
             Yii::$app->db->createCommand()->delete("admin_auth", 'id=:id', ['id' => $rule['id']])->execute();   
             Yii::$app->db->createCommand()->delete("admin_group_auth", 'auth_id=:id', ['id' => $rule['id']])->execute();
         }
-    }
-
-    /**
-     * @todo remove me
-     * @param array $apis
-     */
-    public function addApis(array $apis)
-    {
-        throw new \Exception('Deprecated method "addApis()".');
-        /*
-        foreach ($apis as $key => $value) {
-            $this->addApi($key, $value);
-        }
-        */
+        
+        return true;
     }
 }
