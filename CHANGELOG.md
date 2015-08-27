@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-alpha17 (in progress)
 ---------------------------
+- [07a2372](https://github.com/zephir/luya/commit/07a2372191cf36e8f4a16ac99ac4ecf4cdb5fdf0) *[BC BREAK]* removed commands `exec/import` and `exec/setup` replace with `import` and `setup` (without exec). Fully rewritten importer process.
 - changed reflection class handling. Move getRequestResponse out of responseContent method.
 - fixed bug where modules without namespace of the module are not able to load. fixed by using getNamespace() method for each module.
 - twig update to `1.21.0`
