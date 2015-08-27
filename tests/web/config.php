@@ -29,6 +29,9 @@ $config = [
 	    'urlmodule' => [
 	        'class' => '\tests\data\modules\urlmodule\Module'
 	    ],
+	    'viewmodule' => [
+	        'class' => '\tests\data\modules\viewmodule\Module',
+	    ]
     ],
     'components' => [
         'request' => [
