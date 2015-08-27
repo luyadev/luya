@@ -15,16 +15,19 @@ class Api extends \admin\base\RestActiveController
     public function actionServices()
     {
         $model = Yii::createObject($this->modelClass);
+
         return $model->getNgrestServices();
     }
-    
+
     public function actionSearch($query)
     {
         if (strlen($query) <= 2) {
             Yii::$app->response->setStatusCode(422, 'Data Validation Failed.');
+
             return ['query' => 'The query string must be at least 3 chars'];
         }
         $model = Yii::createObject($this->modelClass);
+
         return $model->genericSearch($query);
     }
 }

@@ -11,23 +11,23 @@ use admin\models\UserOnline;
 class Auth extends \yii\base\Component
 {
     const CAN_CREATE = 1;
-    
+
     const CAN_UPDATE = 2;
-    
+
     const CAN_DELETE = 3;
-    
+
     public function permissionWeight($create, $update, $delete)
     {
         $create = $create ? 1 : 0;
         $update = $update ? 3 : 0;
         $delete = $delete ? 5 : 0;
-        
+
         return ($create + $update + $delete);
     }
-    
+
     public function permissionVerify($type, $permissionWeight)
     {
-        switch($type) {
+        switch ($type) {
             case self::CAN_CREATE:
                 $numbers = [1, 4, 6, 9];
                 break;
@@ -38,18 +38,19 @@ class Auth extends \yii\base\Component
                 $numbers = [5, 6, 8, 9];
                 break;
         }
-        
+
         return in_array($permissionWeight, $numbers);
     }
-    
+
     /**
      * See if a User have rights to access this api.
      *
-     * @param integer $userId
-     * @param string $apiEndpoint As defined in the Module.php like (api-admin-user) which is a unique identifiere
-     * @param integer $typeVerification The CONST number provided from CAN_*
-     * @return boolean
-	 */
+     * @param int    $userId
+     * @param string $apiEndpoint      As defined in the Module.php like (api-admin-user) which is a unique identifiere
+     * @param int    $typeVerification The CONST number provided from CAN_*
+     *
+     * @return bool
+     */
     public function matchApi($userId, $apiEndpoint, $typeVerification = false)
     {
         UserOnline::refreshUser($userId, $apiEndpoint);
@@ -61,13 +62,13 @@ class Auth extends \yii\base\Component
         if (!$typeVerification) {
             return (count($groups) > 0) ? true : false;
         }
-        
-        foreach($groups as $row) {
+
+        foreach ($groups as $row) {
             if ($this->permissionVerify($typeVerification, $this->permissionWeight($row['crud_create'], $row['crud_update'], $row['crud_delete']))) {
                 return true;
             }
         }
-        
+
         return false;
     }
     /**
@@ -76,6 +77,7 @@ class Auth extends \yii\base\Component
      * @param string $moduleName     Module Name
      * @param string $controllerName The name of the controller without suffix "Controller"
      * @param string $actionName     The name of the action without prefix "action";
+     *
      * @return bool
      */
     public function matchRoute($userId, $route)
@@ -134,9 +136,9 @@ class Auth extends \yii\base\Component
             throw new Exception("Error while inserting/updating auth API '$apiEndpoint' with name '$name' in module '$moduleName'.");
         }
     }
-    
+
     /**
-     * Returns the current available auth rules inside the admin_auth table splied into routes and apis
+     * Returns the current available auth rules inside the admin_auth table splied into routes and apis.
      * 
      * @return array
      */
@@ -148,7 +150,7 @@ class Auth extends \yii\base\Component
             'apis' => [],
         ];
         // get all auth data
-        foreach((new Query())->select('*')->from('admin_auth')->all() as $item) {
+        foreach ((new Query())->select('*')->from('admin_auth')->all() as $item) {
             // allocate if its an api or route. More differences?
             if (empty($item['api'])) {
                 $data['routes'][] = $item;
@@ -156,10 +158,10 @@ class Auth extends \yii\base\Component
                 $data['apis'][] = $item;
             }
         }
-        
+
         return $data;
     }
-    
+
     /**
      * The method returns all rows which are not provided in $array. If an api/route is in the $data array its a valid rule and will not be
      * prepared to find for deletion. Negativ array behavior.
@@ -174,39 +176,42 @@ class Auth extends \yii\base\Component
      * The above provided data are valid rules.
      * 
      * @param array $data array with key apis and routes
+     *
      * @return array
      */
     public function prepareCleanup(array $data)
     {
         $toCleanup = [];
-        foreach($data as $type => $items) {
-            switch($type) {
-                case "apis":
+        foreach ($data as $type => $items) {
+            switch ($type) {
+                case 'apis':
                     $q = (new Query())->select('*')->from('admin_auth')->where(['not in', 'api', $items])->andWhere(['is_crud' => 1])->all();
                     $toCleanup = ArrayHelper::merge($q, $toCleanup);
                     break;
-                case "routes":
+                case 'routes':
                     $q = (new Query())->select('*')->from('admin_auth')->where(['not in', 'route', $items])->andWhere(['is_crud' => 0])->all();
                     $toCleanup = ArrayHelper::merge($q, $toCleanup);
                     break;
             }
         }
+
         return $toCleanup;
     }
-    
+
     /**
      * Execute the data to delete based on an array containing a key 'id' with the corresponding value from the Database.
      * 
      * @param array $data
-     * @return boolean
+     *
+     * @return bool
      */
     public function executeCleanup(array $data)
     {
-        foreach($data as $rule) {
-            Yii::$app->db->createCommand()->delete("admin_auth", 'id=:id', ['id' => $rule['id']])->execute();   
-            Yii::$app->db->createCommand()->delete("admin_group_auth", 'auth_id=:id', ['id' => $rule['id']])->execute();
+        foreach ($data as $rule) {
+            Yii::$app->db->createCommand()->delete('admin_auth', 'id=:id', ['id' => $rule['id']])->execute();
+            Yii::$app->db->createCommand()->delete('admin_group_auth', 'auth_id=:id', ['id' => $rule['id']])->execute();
         }
-        
+
         return true;
     }
 }

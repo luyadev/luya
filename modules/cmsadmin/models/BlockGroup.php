@@ -5,7 +5,7 @@ namespace cmsadmin\models;
 class BlockGroup extends \admin\ngrest\base\Model
 {
     use \admin\traits\SoftDeleteTrait;
-    
+
     public function ngRestApiEndpoint()
     {
         return 'api-cms-blockgroup';
@@ -19,7 +19,7 @@ class BlockGroup extends \admin\ngrest\base\Model
     public function ngRestConfig($config)
     {
         $config->delete = true;
-        
+
         $config->list->field('name', 'Name')->text();
 
         $config->create->copyFrom('list', ['id']);

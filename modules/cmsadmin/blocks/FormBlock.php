@@ -2,7 +2,7 @@
 
 namespace cmsadmin\blocks;
 
-use \Yii;
+use Yii;
 
 class FormBlock extends \cmsadmin\base\Block
 {
@@ -59,7 +59,7 @@ class FormBlock extends \cmsadmin\base\Block
                 ['var' => 'messageError', 'label' => 'Fehlermeldung für Feld "Nachricht"', 'type' => 'zaa-text', 'placeholder' => $this->defaultMessageError],
                 ['var' => 'sendSuccess', 'label' => 'Bestätigungstext nach Absenden des Formulars', 'type' => 'zaa-text', 'placeholder' => $this->defaultSendSuccess],
                 ['var' => 'sendError', 'label' => 'Fehlertext nach fehlgeschlagenem Sendeversuch des Formulars', 'type' => 'zaa-text', 'placeholder' => $this->defaultSendError],
-            ]
+            ],
         ];
     }
 
@@ -88,15 +88,15 @@ class FormBlock extends \cmsadmin\base\Block
     public function sendMail($message, $email, $name)
     {
         $mail = Yii::$app->mail;
-        $mail->compose($this->getVarValue('subjectText',$this->defaultMailSubject), $message);
+        $mail->compose($this->getVarValue('subjectText', $this->defaultMailSubject), $message);
         $mail->address($this->getVarValue('emailAddress'), $name);
         $mail->mailer()->From = $email;
         $mail->mailer()->FromName = $name;
 
         if (!$mail->send()) {
-            return "Error: " . $mail->error();
+            return 'Error: '.$mail->error();
         } else {
-            return "success";
+            return 'success';
         }
     }
 
@@ -104,10 +104,8 @@ class FormBlock extends \cmsadmin\base\Block
     {
         $request = Yii::$app->request;
 
-        if($request->post('message') && $request->post('email') && $request->post('name')) {
-
-            return $this->sendMail($request->post('message'),$request->post('email'),$request->post('name'));
-
+        if ($request->post('message') && $request->post('email') && $request->post('name')) {
+            return $this->sendMail($request->post('message'), $request->post('email'), $request->post('name'));
         }
     }
 

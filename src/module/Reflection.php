@@ -56,7 +56,7 @@ class Reflection
             ];
         }
         $array = $this->_urlManager->parseRequest($this->_request);
-        
+
         return [
             'route' => $array[0],
             'args' => $array[1],
@@ -66,9 +66,9 @@ class Reflection
     public function responseContent(array $request)
     {
         if (!isset($request['route']) || !isset($request['args'])) {
-            throw new Exception("The proviede request array does not containt route or args key.");
+            throw new Exception('The proviede request array does not containt route or args key.');
         }
-        
+
         if (count($request['args']) === 0) {
             $request['args'] = Yii::$app->request->get(); // @todo should we find the action params and compare against get() request array?
         }
@@ -82,7 +82,7 @@ class Reflection
         }
 
         $controllerObject = $controller[0];
-        
+
         $action = $controllerObject->runAction($controller[1], $request['args']);
 
         return $action;

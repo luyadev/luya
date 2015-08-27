@@ -22,7 +22,7 @@ class Controller extends \admin\base\Controller
         if ($this->_model === null) {
             $this->_model = Yii::createObject($this->getModelClass());
         }
-        
+
         return $this->_model;
     }
 

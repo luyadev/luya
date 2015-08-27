@@ -26,7 +26,7 @@ class TableBlock extends \cmsadmin\base\Block
                 ['var' => 'header', 'label' => 'Erste Zeile als Tabellenkopf verwenden', 'type' => 'zaa-checkbox'],
                 ['var' => 'stripe', 'label' => 'Jede Zeile abwechselnd hervorheben (Zebramuster)', 'type' => 'zaa-checkbox'],
                 ['var' => 'border', 'label' => 'Rand zu jeder Seite der Tabelle hinzufügen', 'type' => 'zaa-checkbox'],
-            ]
+            ],
         ];
     }
 
@@ -34,23 +34,23 @@ class TableBlock extends \cmsadmin\base\Block
     {
         $table = [];
         $i = 0;
-        foreach($this->getVarValue('table', []) as $key => $row) {
-            $i++;
-            
+        foreach ($this->getVarValue('table', []) as $key => $row) {
+            ++$i;
+
             if ($this->getCfgValue('header', 0) == 1 && $i == 1) {
                 continue;
             }
-            
+
             $table[] = $row;
         }
-        
+
         return $table;
     }
 
     public function getHeaderRow()
     {
         $data = $this->getVarValue('table', []);
-        
+
         return (count($data) > 0) ? array_values($data)[0] : [];
     }
 

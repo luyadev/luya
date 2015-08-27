@@ -21,40 +21,41 @@ class BuilderIndex extends \admin\ngrest\base\Model
     }
 
     /* custom functions */
-    
+
     public static function isIndexed($url)
     {
         $model = self::findOne(['url' => $url]);
-        
+
         if ($model) {
             if ($model->crawled == 1) {
                 return true;
             }
         }
-        
+
         return false;
     }
-    
+
     public static function findUrl($url)
     {
         return self::findOne(['url' => $url]);
     }
-    
+
     public static function addToIndex($url, $title = null)
     {
         $model = self::findOne(['url' => $url]);
-        
+
         if ($model) {
             return false;
         }
-        
-        $model = new self;
+
+        $model = new self();
         $model->url = $url;
         $model->title = $title;
         $model->crawled = 0;
+
         return $model->insert();
     }
-    
+
     /* ngrest model properties */
 
     public function genericSearchFields()
@@ -76,6 +77,7 @@ class BuilderIndex extends \admin\ngrest\base\Model
         $config->list->field('arguments_json', 'Arguments_json')->textarea();
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);
+
         return $config;
     }
 }

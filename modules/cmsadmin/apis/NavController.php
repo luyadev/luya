@@ -32,25 +32,25 @@ class NavController extends \admin\base\RestController
 
         return false;
     }
-    
+
     public function actionUpdateCat($navId, $catId)
     {
         $item = \cmsadmin\models\Nav::findOne($navId);
-    
+
         if ($item) {
             $item->cat_id = $catId;
             $item->update(false);
-    
+
             return true;
         }
-    
+
         return false;
     }
-    
+
     public function actionDetail($navId)
     {
         return \cmsadmin\models\Nav::findOne($navId);
-    }   
+    }
 
     public function actionDelete($navId)
     {
@@ -83,6 +83,7 @@ class NavController extends \admin\base\RestController
         if ($create !== true) {
             Yii::$app->response->statusCode = 422;
         }
+
         return $create;
     }
 
@@ -96,6 +97,7 @@ class NavController extends \admin\base\RestController
         if ($create !== true) {
             Yii::$app->response->statusCode = 422;
         }
+
         return $create;
     }
 
@@ -106,6 +108,7 @@ class NavController extends \admin\base\RestController
         if ($create !== true) {
             Yii::$app->response->statusCode = 422;
         }
+
         return $create;
     }
 
@@ -116,6 +119,7 @@ class NavController extends \admin\base\RestController
         if ($create !== true) {
             Yii::$app->response->statusCode = 422;
         }
+
         return $create;
     }
 }

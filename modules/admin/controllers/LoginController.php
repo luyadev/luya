@@ -3,17 +3,17 @@
 namespace admin\controllers;
 
 use Yii;
-use \luya\helpers\Url;
-use \yii\helpers\Url as YiiUrl;
+use luya\helpers\Url;
+use yii\helpers\Url as YiiUrl;
 
 class LoginController extends \admin\base\Controller
 {
     public $layout = '@admin/views/layouts/nosession';
 
-    public $skipModuleAssets = ["*"];
-    
+    public $skipModuleAssets = ['*'];
+
     public $assets = ["\admin\assets\Login"];
-    
+
     public function getRules()
     {
         return [
@@ -28,7 +28,7 @@ class LoginController extends \admin\base\Controller
     public function actionIndex()
     {
         $url = YiiUrl::to(Url::to('admin'), true);
-        
+
         // redirect logged in users
         if (!Yii::$app->adminuser->isGuest) {
             return $this->redirect($url);
@@ -47,6 +47,7 @@ class LoginController extends \admin\base\Controller
         }
 
         $this->view->registerJs("$('#email').focus();");
+
         return $this->render('index', ['model' => $model]);
     }
 }

@@ -51,7 +51,7 @@ class Bootstrap extends \luya\base\Bootstrap
                 $app->getModule('admin')->moduleMenus = $this->_adminMenus;
             }
         }
-        
+
         $app->getUrlManager()->addRules($this->_urlRules, false);
     }
 }

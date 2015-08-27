@@ -2,8 +2,6 @@
 
 namespace cmsadmin\base;
 
-use Exception;
-
 class BlockVar extends \cmsadmin\base\BlockConfigElement
 {
     public function toArray()
@@ -17,5 +15,5 @@ class BlockVar extends \cmsadmin\base\BlockConfigElement
             'options' => $this->get('options'),
             'initvalue' => $this->get('initvalue'),
         ];
-    }    
+    }
 }

@@ -2,7 +2,7 @@
 
 namespace admin\models;
 
-use \admin\models\User;
+use admin\models\User;
 
 class UserOnline extends \yii\db\ActiveRecord
 {
@@ -10,22 +10,22 @@ class UserOnline extends \yii\db\ActiveRecord
     {
         return 'admin_user_online';
     }
-    
+
     public function rules()
     {
         return [
-            [['user_id'], 'required']
+            [['user_id'], 'required'],
         ];
     }
-    
+
     public static function refreshUser($userId, $route)
     {
         $time = time();
-        $model = UserOnline::find()->where(['user_id' => $userId])->one();
+        $model = self::find()->where(['user_id' => $userId])->one();
         // exists $this->user_id in table?
         if (!$model) {
             // insert
-            $model = new UserOnline();
+            $model = new self();
             $model->last_timestamp = $time;
             $model->user_id = $userId;
             $model->invoken_route = $route;
@@ -36,53 +36,53 @@ class UserOnline extends \yii\db\ActiveRecord
             $model->update();
         }
     }
-    
+
     public static function removeUser($userId)
     {
-        $model = UserOnline::find()->where(['user_id' => $userId])->one();
+        $model = self::find()->where(['user_id' => $userId])->one();
         if ($model) {
             $model->delete();
         }
     }
-    
+
     /**
-     * 
-     * @param integer $maxIdleTime Default value in seconds is a half hour (30 * 60) = 1800
+     * @param int $maxIdleTime Default value in seconds is a half hour (30 * 60) = 1800
      */
     public static function clearList($maxIdleTime = 1800)
     {
         $time = time();
-        $items = UserOnline::find()->where(['<=', 'last_timestamp', $time-$maxIdleTime])->all();
-        foreach($items as $model) {
+        $items = self::find()->where(['<=', 'last_timestamp', $time - $maxIdleTime])->all();
+        foreach ($items as $model) {
             $model->delete();
         }
     }
-    
+
     public static function getList()
     {
         $time = time();
         $return = [];
-        foreach(self::find()->asArray()->all() as $item) {
+        foreach (self::find()->asArray()->all() as $item) {
             $user = User::findOne($item['user_id']);
             if ($user) {
-                $inactiveSince = $time-$item['last_timestamp'];
+                $inactiveSince = $time - $item['last_timestamp'];
                 $return[] = [
                     'firstname' => $user->firstname,
                     'lastname' => $user->lastname,
                     'email' => $user->email,
                     'last_timestamp' => $item['last_timestamp'],
-                    'is_active' => ($inactiveSince>=120) ? false : true,
-                    'inactive_since' => round(($inactiveSince/60)) . ' min',
+                    'is_active' => ($inactiveSince >= 120) ? false : true,
+                    'inactive_since' => round(($inactiveSince / 60)).' min',
                 ];
             }
         }
-        
+
         return $return;
     }
-    
+
     public static function getCount()
     {
         static::clearList();
+
         return count(self::find()->asArray()->all());
     }
 }

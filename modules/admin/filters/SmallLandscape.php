@@ -20,7 +20,7 @@ class SmallLandscape extends \admin\base\Filter
             [self::EFFECT_THUMBNAIL, [
                 'width' => 150,
                 'height' => 150,
-                'type' => \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND
+                'type' => \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND,
             ]],
             [self::EFFECT_CROP, [
                 'width' => 150,

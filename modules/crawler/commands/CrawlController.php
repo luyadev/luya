@@ -5,11 +5,12 @@ namespace crawler\commands;
 use Goutte\Client;
 use crawler\classes\CrawlContainer;
 use crawler\classes\CrawlPage;
+
 /**
  * Run:
- * php index.php command crawler crawl
- * @author nadar
+ * php index.php command crawler crawl.
  *
+ * @author nadar
  */
 class CrawlController extends \luya\base\Command
 {

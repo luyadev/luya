@@ -6,29 +6,28 @@ use Yii;
 
 class Menu extends \yii\base\Component
 {
-    
     private $_menu = null;
-    
+
     private $_modules = null;
-    
+
     private $_items = [];
-    
+
     private $_nodes = [];
-    
+
     public function getUserId()
     {
         return Yii::$app->adminuser->getId();
     }
-    
+
     public function getMenu()
     {
         if ($this->_menu === null) {
             $this->_menu = Yii::$app->getModule('admin')->moduleMenus;
         }
-        
+
         return $this->_menu;
     }
-    
+
     public function getNodeData($id)
     {
         if (array_key_exists($id, $this->_nodes)) {
@@ -36,18 +35,18 @@ class Menu extends \yii\base\Component
         }
         $i = 1;
         foreach ($this->getMenu() as $item) {
-            $i++;
+            ++$i;
             if ($id == $i) {
                 $data = $item;
                 break;
             }
         }
-    
+
         $this->_nodes[$id] = $data;
-        
+
         return $data;
     }
-    
+
     public function getModules()
     {
         if ($this->_modules !== null) {
@@ -56,7 +55,7 @@ class Menu extends \yii\base\Component
         $responseData = [];
         $index = 1;
         foreach ($this->getMenu() as $item) {
-            $index++;
+            ++$index;
             // check if this is an entrie with a permission
             if ($item['permissionIsRoute']) {
                 // verify if the permission is provided for this user:
@@ -66,18 +65,18 @@ class Menu extends \yii\base\Component
                     continue;
                 }
             }
-        
+
             // this item does have groups
             if (isset($item['groups'])) {
                 $permissionGranted = false;
-        
+
                 // see if the groups has items
                 foreach ($item['groups'] as $groupName => $groupItem) {
                     if (count($groupItem['items'])  > 0) {
                         if ($permissionGranted) {
                             continue;
                         }
-        
+
                         foreach ($groupItem['items'] as $groupItemEntry) {
                             // a previous entry already has solved the question if the permission is granted
                             if ($permissionGranted) {
@@ -99,12 +98,12 @@ class Menu extends \yii\base\Component
                         }
                     }
                 }
-        
+
                 if (!$permissionGranted) {
                     continue;
                 }
             }
-        
+
             // ok we have passed all the tests, lets make an entry
             $responseData[] = [
                 'moduleId' => $item['moduleId'],
@@ -116,19 +115,19 @@ class Menu extends \yii\base\Component
                 'searchModelClass' => $item['searchModelClass'],
             ];
         }
-        
+
         $this->_modules = $responseData;
-        
+
         return $responseData;
     }
-    
+
     public function getModuleItems($nodeId)
     {
         if (array_key_exists($nodeId, $this->_items)) {
             return $this->_items[$nodeId];
         }
         $data = $this->getNodeData($nodeId);
-        
+
         if (isset($data['groups'])) {
             foreach ($data['groups'] as $groupName => $groupItem) {
                 foreach ($groupItem['items'] as $groupItemKey => $groupItemEntry) {
@@ -138,7 +137,7 @@ class Menu extends \yii\base\Component
                             unset($data['groups'][$groupName]['items'][$groupItemKey]);
                         } else {
                             /* fixed bug #51 */
-                            $data['groups'][$groupName]['items'][$groupItemKey]['route'] = str_replace("/", "-", $data['groups'][$groupName]['items'][$groupItemKey]['route']);
+                            $data['groups'][$groupName]['items'][$groupItemKey]['route'] = str_replace('/', '-', $data['groups'][$groupName]['items'][$groupItemKey]['route']);
                         }
                     } elseif ($groupItemEntry['permissionIsApi']) {
                         // when true, set permissionGranted to true
@@ -151,25 +150,27 @@ class Menu extends \yii\base\Component
                 }
             }
         }
-        
+
         $this->_items[$nodeId] = $data;
+
         return $data;
     }
-    
+
     public function getItems()
     {
         $data = [];
-        foreach($this->getModules() as $key => $node) {
-            foreach($this->getModuleItems($node['id']) as $key => $value) {
-                if ($key == "groups") {
-                    foreach($value as $group => $groupValue) {
-                        foreach($groupValue['items'] as $array) {
+        foreach ($this->getModules() as $key => $node) {
+            foreach ($this->getModuleItems($node['id']) as $key => $value) {
+                if ($key == 'groups') {
+                    foreach ($value as $group => $groupValue) {
+                        foreach ($groupValue['items'] as $array) {
                             $data[] = $array;
                         }
                     }
                 }
             }
         }
+
         return $data;
     }
 }

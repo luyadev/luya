@@ -58,7 +58,7 @@ class Menu
             if (isset($this->menu[$v['id']])) {
                 $data[$i][$subName] = $this->childrenRecursive($v['id'], $subName);
             }
-            $i++;
+            ++$i;
         }
 
         return $data;

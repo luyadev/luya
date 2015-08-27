@@ -54,7 +54,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
         $this->on(self::EVENT_BEFORE_INSERT, [$this, 'beforeCreate']);
         $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'eventBeforeValidate']);
     }
-    
+
     public function genericSearchFields()
     {
         return ['firstname', 'lastname', 'email'];

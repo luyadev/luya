@@ -4,8 +4,7 @@ namespace admin\storage;
 
 use Yii;
 use yii\helpers\Inflector;
-use \admin\models\StorageFile;
-use \admin\models\StorageImage;
+use admin\models\StorageFile;
 
 class File
 {
@@ -21,15 +20,16 @@ class File
         ];
     }
 
-    public function delete($fileId) {
+    public function delete($fileId)
+    {
         $model = StorageFile::find()->where(['id' => $fileId, 'is_deleted' => 0])->one();
         if ($model) {
             return $model->delete(false);
         }
-        
+
         return true;
     }
-    
+
     public function getMimeType($sourceFile)
     {
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -118,7 +118,7 @@ class File
 
         return false;
     }
-    
+
     private $_uploaderErrors = [
         0 => 'There is no error, the file uploaded with success',
         1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
@@ -129,7 +129,7 @@ class File
         7 => 'Failed to write file to disk.',
         8 => 'A PHP extension stopped the file upload.',
     ];
-    
+
     public function uploadOneFromFiles(array $filesArray, $toFolder = 0)
     {
         $files = [];
@@ -142,15 +142,16 @@ class File
                 return ['upload' => true, 'message' => 'file uploaded succesfully', 'file_id' => $create];
             }
         }
+
         return ['upload' => false, 'message' => 'no files selected', 'file_id' => 0];
     }
 
     public function allFromFolder($folderId)
     {
-        $files = StorageFile::find()->select(['admin_storage_file.id', 'name_original', 'extension', 'file_size', 'upload_timestamp', 'firstname', 'lastname'])->leftJoin("admin_user", "admin_user.id=admin_storage_file.upload_user_id")->where(['folder_id' => $folderId, 'is_hidden' => 0, 'admin_storage_file.is_deleted' => 0])->asArray()->all();
-        foreach($files as $k => $v) {
+        $files = StorageFile::find()->select(['admin_storage_file.id', 'name_original', 'extension', 'file_size', 'upload_timestamp', 'firstname', 'lastname'])->leftJoin('admin_user', 'admin_user.id=admin_storage_file.upload_user_id')->where(['folder_id' => $folderId, 'is_hidden' => 0, 'admin_storage_file.is_deleted' => 0])->asArray()->all();
+        foreach ($files as $k => $v) {
             // @todo check fileHasImage sth
-            if ($v['extension'] == "jpg" || $v['extension'] == "png") {
+            if ($v['extension'] == 'jpg' || $v['extension'] == 'png') {
                 $imageId = Yii::$app->storage->image->create($v['id'], 0);
                 if ($imageId) {
                     $thumb = Yii::$app->storage->image->filterApply($imageId, 'small-landscape', true);
@@ -162,6 +163,7 @@ class File
             }
             $files[$k]['thumbnail'] = $thumb;
         }
+
         return $files;
     }
 
@@ -173,9 +175,9 @@ class File
             return false;
         }
 
-        $file["file_id"] = $file["id"];
-        $file["source_http"] = Yii::$app->storage->httpDir . $file["name_new_compound"];
-        $file["source"] = Yii::$app->storage->dir . $file["name_new_compound"];
+        $file['file_id'] = $file['id'];
+        $file['source_http'] = Yii::$app->storage->httpDir.$file['name_new_compound'];
+        $file['source'] = Yii::$app->storage->dir.$file['name_new_compound'];
 
         return $file;
     }
@@ -197,15 +199,16 @@ class File
 
     public function moveFilesToFolder($fileIds, $folderId)
     {
-        foreach($fileIds as $fileId) {
+        foreach ($fileIds as $fileId) {
             $this->moveFileToFolder($fileId, $folderId);
-        }   
+        }
     }
-    
+
     public function moveFileToFolder($fileId, $folderId)
     {
         $file = StorageFile::findOne($fileId);
         $file->folder_id = $folderId;
+
         return $file->update(false);
     }
 }

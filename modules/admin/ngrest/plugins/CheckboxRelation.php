@@ -18,18 +18,18 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
     public $refModelPkId = null;
 
     public $refJoinPkId = null;
-    
+
     public $displayFields = null;
-    
+
     public $displayTemplate = null;
-    
+
     /**
-     * @param unknown $model        \news\models\Tag::className()
-     * @param unknown $refJoinTable news_article_tag
-     * @param unknown $refModelPkId news_article_tag.arictle_id
-     * @param unknown $refJoinPkId  news_article_tag.tag_id
-     * @param array $displayFields
-     * @param string $displayTemplate
+     * @param unknown $model           \news\models\Tag::className()
+     * @param unknown $refJoinTable    news_article_tag
+     * @param unknown $refModelPkId    news_article_tag.arictle_id
+     * @param unknown $refJoinPkId     news_article_tag.tag_id
+     * @param array   $displayFields
+     * @param string  $displayTemplate
      */
     public function __construct($model, $refJoinTable, $refModelPkId, $refJoinPkId, array $displayFields, $displayTemplate = null)
     {
@@ -44,15 +44,14 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
     private function getOptionsData()
     {
         $items = [];
-        
+
         $pk = $this->model->primaryKey();
         $pkName = reset($pk);
-        
+
         $select = $this->displayFields;
         $select[] = $pkName;
-        
+
         foreach ($this->model->find()->select($select)->all() as $item) {
-            
             $array = $item->toArray();
             unset($array[$pkName]);
             if ($this->displayTemplate) {
@@ -60,28 +59,28 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
             } else {
                 $label = implode(', ', $array);
             }
-            
+
             $items[] = ['id' => $item[$pkName], 'label' => $label];
         }
-        
+
         return ['items' => $items];
     }
-    
+
     public function renderList($doc)
     {
         return $doc;
     }
-    
+
     public function renderCreate($doc)
     {
         $items = [];
         foreach ($this->model->find()->all() as $item) {
             $items[] = ['id' => $item->id, 'label' => implode(' | ', $item->toArray())];
         }
-        
+
         $elmn = $this->createBaseElement($doc, 'zaa-checkbox-array');
         $elmn->setAttribute('options', $this->getServiceName('relationdata'));
-        
+
         $doc->appendChild($elmn);
 
         return $doc;

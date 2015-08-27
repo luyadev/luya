@@ -11,7 +11,7 @@ class RestController extends \luya\rest\Controller
     {
         return false;
     }
-    
+
     public function actionIndex($query = null)
     {
         return [

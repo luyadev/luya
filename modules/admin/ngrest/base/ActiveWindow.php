@@ -9,9 +9,9 @@ abstract class ActiveWindow implements \admin\ngrest\interfaces\ActiveWindow
     public $module = null;
 
     private $_itemId = false;
-    
+
     private $_view = null;
-    
+
     public function getView()
     {
         if ($this->_view === null) {
@@ -27,7 +27,7 @@ abstract class ActiveWindow implements \admin\ngrest\interfaces\ActiveWindow
     {
         return $this->getView()->render($name, $params);
     }
-    
+
     public function setItemId($itemId)
     {
         $this->_itemId = $itemId;

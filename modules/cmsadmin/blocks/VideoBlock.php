@@ -23,37 +23,35 @@ class VideoBlock extends \cmsadmin\base\Block
                 ['var' => 'url', 'label' => 'Video URL', 'type' => 'zaa-text'],
             ],
             'cfgs' => [
-                ['var' => 'controls', 'label' => 'Controls ausblenden?', 'initvalue' => '1', 'type' => 'zaa-select', 'options' =>
-                    [
+                ['var' => 'controls', 'label' => 'Controls ausblenden?', 'initvalue' => '1', 'type' => 'zaa-select', 'options' => [
                         ['value' => '0', 'label' => 'Nein'],
                         ['value' => '1', 'label' => 'Ja'],
                     ],
                 ],
-            ]
+            ],
         ];
     }
 
     public function constructUrl()
     {
-        $scheme  = parse_url($this->getVarValue('url'), PHP_URL_SCHEME);
-        $host    = parse_url($this->getVarValue('url'), PHP_URL_HOST);
-        $path    = parse_url($this->getVarValue('url'), PHP_URL_PATH);
-        $query   = parse_url($this->getVarValue('url'), PHP_URL_QUERY);
+        $scheme = parse_url($this->getVarValue('url'), PHP_URL_SCHEME);
+        $host = parse_url($this->getVarValue('url'), PHP_URL_HOST);
+        $path = parse_url($this->getVarValue('url'), PHP_URL_PATH);
+        $query = parse_url($this->getVarValue('url'), PHP_URL_QUERY);
 
         // youtube embed url constructing
 
-        if (($pos = strpos($query, "v=")) !== FALSE) {
-            $videoId = substr($query, $pos+2);
+        if (($pos = strpos($query, 'v=')) !== false) {
+            $videoId = substr($query, $pos + 2);
 
             $url = $scheme.'://'.$host.'/embed/'.$videoId;
 
-            if($this->getCfgValue('controls') == 1) {
+            if ($this->getCfgValue('controls') == 1) {
                 $url .= '?rel=0&amp;controls=0&amp;showinfo=0';
             }
-
         } else {
             // not supported yet
-            $url = "";
+            $url = '';
         }
 
         return $url;

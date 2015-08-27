@@ -40,12 +40,14 @@ class Album extends \admin\ngrest\base\Model
     public function getCategoryUrl()
     {
         $category = Cat::findOne($this->cat_id);
+
         return \luya\helpers\Url::to('gallery/alben/index', ['catId' => $category->id, 'title' => \yii\helpers\Inflector::slug($category->title)]);
     }
 
     public function getCategoryName()
     {
         $category = Cat::findOne($this->cat_id);
+
         return $category->title;
     }
 
@@ -88,5 +90,4 @@ class Album extends \admin\ngrest\base\Model
 
         return $config;
     }
-
 }

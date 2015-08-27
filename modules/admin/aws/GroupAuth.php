@@ -5,7 +5,7 @@ namespace admin\aws;
 class GroupAuth extends \admin\ngrest\base\ActiveWindow
 {
     public $module = 'admin';
-    
+
     public function index()
     {
         $query = (new \yii\db\Query())->select('*')->from('admin_group_auth')->where(['group_id' => $this->getItemId()])->all();

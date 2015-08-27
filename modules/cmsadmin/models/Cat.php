@@ -3,29 +3,28 @@
 namespace cmsadmin\models;
 
 use admin\models\Lang;
-use cmsadmin\models\Nav;
 
 class Cat extends \admin\ngrest\base\Model
 {
     use \admin\traits\SoftDeleteTrait;
-    
+
     public function ngRestApiEndpoint()
     {
         return 'api-cms-cat';
     }
 
     private $_langId = null;
-    
+
     public function getLangId()
     {
         if ($this->_langId === null) {
             $array = Lang::getDefault();
             $this->_langId = $array['id'];
         }
-    
+
         return $this->_langId;
     }
-    
+
     private function getNavData()
     {
         $_data = [];
@@ -42,7 +41,7 @@ class Cat extends \admin\ngrest\base\Model
     public function ngRestConfig($config)
     {
         $config->delete = true;
-        
+
         $config->list->field('name', 'Name')->text();
         $config->list->field('default_nav_id', 'Default-Nav-Id')->selectArray($this->getNavData());
         $config->list->field('rewrite', 'Rewrite')->text();

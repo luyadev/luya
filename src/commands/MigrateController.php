@@ -4,6 +4,7 @@ namespace luya\commands;
 
 use Yii;
 use yii\helpers\Console;
+
 /**
  * @see https://github.com/yiisoft/yii2/issues/384
  *
@@ -72,6 +73,7 @@ class MigrateController extends \yii\console\controllers\MigrateController
         } else {
             if (($folder = $this->getModuleMigrationDirectorie($module)) === false) {
                 $this->stdout("\nModule '$module' does not exist.\n", Console::FG_RED);
+
                 return self::EXIT_CODE_ERROR;
             }
             $file = $folder.DIRECTORY_SEPARATOR.$name.'.php';
@@ -81,6 +83,7 @@ class MigrateController extends \yii\console\controllers\MigrateController
             $content = $this->renderFile(Yii::getAlias($this->templateFile), ['className' => $name]);
             file_put_contents($file, $content);
             $this->stdout("\nMigration created successfully.\n", Console::FG_GREEN);
+
             return self::EXIT_CODE_NORMAL;
         }
     }

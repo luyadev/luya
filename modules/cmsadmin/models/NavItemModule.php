@@ -15,7 +15,7 @@ class NavItemModule extends \cmsadmin\base\NavItemType
             [['module_name'], 'required'],
         ];
     }
-    
+
     private $_module = null;
 
     private function getModule()
@@ -32,7 +32,7 @@ class NavItemModule extends \cmsadmin\base\NavItemType
 
         return $this->_module;
     }
-    
+
     public function attributeLabels()
     {
         return [
@@ -46,20 +46,19 @@ class NavItemModule extends \cmsadmin\base\NavItemType
      *
      * @see cmsadmin\base.NavItemType::getContent()
      */
-    
     public function getContent()
     {
         $module = $this->getModule();
-        
+
         $reflection = new \luya\module\Reflection($module);
         $reflection->setModuleSuffix($this->getOption('restString'));
-        
+
         $reflectionRequest = $reflection->getRequestResponse();
         $response = $reflection->responseContent($reflectionRequest);
-        
+
         return $response;
     }
-    
+
     public function getHeaders()
     {
         return;

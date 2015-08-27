@@ -4,13 +4,13 @@ namespace admin\base;
 
 use Yii;
 use yii\filters\AccessControl;
-use yii\helpers\ArrayHelper;
+
 class Controller extends \luya\base\Controller
 {
     public $layout = '@admin/views/layouts/main';
 
     public $useModuleViewPath = true;
-    
+
     public $disablePermissionCheck = false;
 
     public function getRules()

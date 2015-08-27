@@ -16,15 +16,14 @@ class SelectClass extends \admin\ngrest\plugins\Select
         }
 
         $this->initValue = $initValue;
-        
+
         foreach ($class::find()->all() as $item) {
-            
             $label = $item->$labelField;
-            
+
             if (is_array($label)) {
                 $label = reset($label);
             }
-            
+
             $this->data[] = [
                 'value' => (int) $item->$valueField,
                 'label' => $label,

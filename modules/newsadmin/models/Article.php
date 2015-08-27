@@ -6,7 +6,6 @@ use Yii;
 
 class Article extends \admin\ngrest\base\Model
 {
-
     public static function tableName()
     {
         return 'news_article';
@@ -30,7 +29,7 @@ class Article extends \admin\ngrest\base\Model
     public function rules()
     {
         return [
-            [['cat_id', 'title', 'text' ], 'required'],
+            [['cat_id', 'title', 'text'], 'required'],
         ];
     }
 
@@ -69,10 +68,10 @@ class Article extends \admin\ngrest\base\Model
 
     public static function getAvailableNews()
     {
-        $articles = Article::find()->where('timestamp_display_from <= :time',['time' => time()])->all();
-        
+        $articles = self::find()->where('timestamp_display_from <= :time', ['time' => time()])->all();
+
         // filter if display time is limited
-        foreach($articles as $key => $article) {
+        foreach ($articles as $key => $article) {
             if ($article->is_display_limit) {
                 if ($article->timestamp_display_until <= time()) {
                     unset($articles[$key]);
@@ -83,9 +82,10 @@ class Article extends \admin\ngrest\base\Model
         return $articles;
     }
 
-    public function getCategoryName() 
+    public function getCategoryName()
     {
         $catModel = Cat::find()->where(['id' => $this->cat_id])->one();
+
         return $catModel->title;
     }
 
@@ -119,13 +119,12 @@ class Article extends \admin\ngrest\base\Model
         $config->update->field('image_id', 'Bild')->image();
         $config->update->field('image_list', 'Bild Liste')->imageArray();
         $config->update->field('file_list', 'Datei Liste')->fileArray();
-        
+
         $config->update->extraField('tags', 'Tags')->checkboxRelation(\newsadmin\models\Tag::className(), 'news_article_tag', 'article_id', 'tag_id', ['title']);
 
         $config->delete = true;
 
-        $config->create->copyFrom('update', ["timestamp_display_until"]);
-
+        $config->create->copyFrom('update', ['timestamp_display_until']);
 
         return $config;
     }

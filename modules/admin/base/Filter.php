@@ -25,6 +25,7 @@ abstract class Filter
             $data->scenario = 'restupdate';
             $data->name = $this->name();
             $data->update();
+
             return $data->id;
         } else {
             // insert new filter

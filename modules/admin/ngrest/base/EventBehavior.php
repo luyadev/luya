@@ -3,7 +3,7 @@
 namespace admin\ngrest\base;
 
 use yii\db\ActiveRecord;
-use \admin\ngrest\base\Model;
+use admin\ngrest\base\Model;
 
 class EventBehavior extends \yii\base\Behavior
 {
@@ -42,7 +42,7 @@ class EventBehavior extends \yii\base\Behavior
     public function eventServiceNgrest($event)
     {
         $events = $this->ngRestConfig->getPlugins(); // ngCrud is create not insert
-        
+
         $service = [];
         foreach ($events as $field => $plugins) {
             foreach ($plugins as $plugin) {
@@ -53,10 +53,10 @@ class EventBehavior extends \yii\base\Behavior
                 }
             }
         }
-        
+
         $event->sender->ngRestServiceArray = $service;
     }
-    
+
     public function eventAfterInsert($event)
     {
         $events = $this->ngRestConfig->getPlugins(); // ngCrud is create not insert
@@ -115,7 +115,7 @@ class EventBehavior extends \yii\base\Behavior
             }
         }
     }
-    
+
     public function eventAfterNgrestFind($event)
     {
         $events = $this->ngRestConfig->getPlugins(); // ngCrud ist list not find

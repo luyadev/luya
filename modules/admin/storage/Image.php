@@ -4,7 +4,7 @@ namespace admin\storage;
 
 use Yii;
 use Exception;
-use \Imagine\Gd\Imagine;
+use Imagine\Gd\Imagine;
 use admin\models\StorageImage;
 use admin\models\StorageFilter;
 use luya\helpers\ArrayHelper;
@@ -15,27 +15,27 @@ class Image
     {
         // find image for file_id and filter_id
         $img = StorageImage::find()->where(['file_id' => $fileId, 'filter_id' => $filterId])->asArray()->one();
-        
+
         // the image exists already, we return the already created image id
         if ($img) {
             return $img['id'];
         }
-           
+
         $file = Yii::$app->storage->file->getPath($fileId);
-        
+
         if (!$file) {
             return false;
         }
-        
+
         $info = Yii::$app->storage->file->getInfo($fileId);
-        
+
         try {
             $imagine = new Imagine();
             $image = $imagine->open($file);
         } catch (Exception $e) {
             return $e->getMessage();
         }
-        
+
         $fileName = $filterId.'_'.$info->name_new_compound;
 
         if (empty($filterId)) {
@@ -94,12 +94,12 @@ class Image
 
         $imageObject = $this->get($imageId);
         if ($returnImageObject) {
-             return $imageObject;
+            return $imageObject;
         }
-        
+
         return $imageObject->source;
     }
-    
+
     public function getSource($imageId)
     {
         return ($image = $this->get($imageId)) ? $image->source : '';
@@ -113,7 +113,7 @@ class Image
         if (!$data || !isset($data->file)) {
             return false;
         }
-        
+
         $fileName = implode([$data->filter_id, $data->file->name_new_compound], '_');
 
         return ArrayHelper::toObject([

@@ -2,7 +2,7 @@
 
 namespace cmsadmin\blocks;
 
-use \cebe\markdown\GithubMarkdown;
+use cebe\markdown\GithubMarkdown;
 
 class TextBlock extends \cmsadmin\base\Block
 {
@@ -12,7 +12,7 @@ class TextBlock extends \cmsadmin\base\Block
 
     public function getParser()
     {
-        if( $this->_parser === null) {
+        if ($this->_parser === null) {
             $this->_parser = new GithubMarkdown();
         }
 
@@ -34,8 +34,7 @@ class TextBlock extends \cmsadmin\base\Block
         return [
             'vars' => [
                 ['var' => 'content', 'label' => 'Text', 'type' => 'zaa-textarea'],
-                ['var' => 'textType', 'label' => 'Texttyp', 'initvalue' => 0, 'type' => 'zaa-select', 'options' =>
-                    [
+                ['var' => 'textType', 'label' => 'Texttyp', 'initvalue' => 0, 'type' => 'zaa-select', 'options' => [
                         ['value' => 0, 'label' => 'Normaler Text'],
                         ['value' => 1, 'label' => 'Markdown Text'],
                     ],
@@ -48,7 +47,7 @@ class TextBlock extends \cmsadmin\base\Block
     {
         $text = $this->getVarValue('content');
 
-        if($this->getVarValue('textType') == 1) {
+        if ($this->getVarValue('textType') == 1) {
             $text = $this->getParser()->parse($text);
         }
 

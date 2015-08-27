@@ -5,7 +5,7 @@ namespace newsadmin\blocks;
 class LatestNews extends \cmsadmin\base\Block
 {
     public $module = 'news';
-    
+
     private $_dropdown = [];
 
     public function init()

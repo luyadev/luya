@@ -18,8 +18,8 @@ class WysiwygBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'content', 'label' => 'Inhalt', 'type' => 'zaa-wysiwyg']
-            ]
+                ['var' => 'content', 'label' => 'Inhalt', 'type' => 'zaa-wysiwyg'],
+            ],
         ];
     }
 

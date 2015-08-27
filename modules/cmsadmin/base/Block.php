@@ -3,8 +3,6 @@
 namespace cmsadmin\base;
 
 use yii;
-use cmsadmin\base\BlockVar;
-use cmsadmin\base\BlockCfg;
 
 abstract class Block implements BlockInterface
 {
@@ -15,9 +13,9 @@ abstract class Block implements BlockInterface
     private $_envOptions = [];
 
     private $_config = null;
-    
+
     public $module = 'app';
-    
+
     public function __construct()
     {
         $this->init();
@@ -28,17 +26,17 @@ abstract class Block implements BlockInterface
     {
         // override
     }
-    
+
     public function isAdminContext()
     {
         return ($this->getEnvOption('context', false) === 'admin') ? true : false;
     }
-    
+
     public function isFrontendContext()
     {
         return ($this->getEnvOption('context', false) === 'frontend') ? true : false;
     }
-    
+
     /* getter & setter EnvOptions */
 
     public function setEnvOption($key, $value)
@@ -57,19 +55,19 @@ abstract class Block implements BlockInterface
     }
 
     /* getter & setter VarValue */
-    
+
     public function getVarValue($key, $default = false)
     {
         return (array_key_exists($key, $this->_varValues)) ? $this->_varValues[$key] : $default;
     }
-    
+
     public function setVarValues(array $values)
     {
         $this->_varValues = $values;
     }
-    
+
     /* getter & setter CfgValue */
-    
+
     public function getCfgValue($key, $default = false)
     {
         return (array_key_exists($key, $this->_cfgValues)) ? $this->_cfgValues[$key] : $default;
@@ -79,18 +77,19 @@ abstract class Block implements BlockInterface
     {
         $this->_cfgValues = $values;
     }
-    
+
     /* render methods */
 
     /**
      * @todo does first char alread contain '@'
+     *
      * @return string
      */
     private function getModule()
     {
-        return '@' . $this->module;
+        return '@'.$this->module;
     }
-    
+
     public function getRenderFileName()
     {
         $classname = get_class($this);
@@ -98,15 +97,15 @@ abstract class Block implements BlockInterface
         if (preg_match('/\\\\([\w]+)$/', $classname, $matches)) {
             $classname = $matches[1];
         }
-    
-        return $classname . '.twig';
+
+        return $classname.'.twig';
     }
 
     protected function getTwigRenderFile($app)
     {
-        return yii::getAlias($app . '/views/blocks/' . $this->getRenderFileName());
+        return yii::getAlias($app.'/views/blocks/'.$this->getRenderFileName());
     }
-    
+
     protected function render()
     {
         return $this->baseRender($this->getModule());
@@ -118,56 +117,58 @@ abstract class Block implements BlockInterface
         if (!file_exists($twigFile)) {
             throw new \Exception("Twig file '$twigFile' does not exists!");
         }
+
         return file_get_contents($twigFile);
     }
-    
+
     public function getTwigFrontendContent()
     {
         $twigFile = $this->getTwigRenderFile('@app');
         if (file_exists($twigFile)) {
             return $this->baseRender('@app');
         }
+
         return $this->twigFrontend();
     }
-    
+
     // access from outside
 
     public function extraVars()
     {
         return [];
     }
-    
+
     public function getVars()
     {
         if (!array_key_exists('vars', $this->_config)) {
             return [];
         }
         $data = [];
-        foreach($this->_config['vars'] as $item) {
+        foreach ($this->_config['vars'] as $item) {
             $data[] = (new BlockVar($item))->toArray();
         }
-        
+
         return $data;
     }
-    
+
     public function getPlaceholders()
     {
         return (array_key_exists('placeholders', $this->_config)) ? $this->_config['placeholders'] : [];
     }
-    
+
     public function getCfgs()
     {
         if (!array_key_exists('cfgs', $this->_config)) {
             return [];
         }
         $data = [];
-        foreach($this->_config['cfgs'] as $item) {
+        foreach ($this->_config['cfgs'] as $item) {
             $data[] = (new BlockCfg($item))->toArray();
         }
-        
+
         return $data;
     }
-    
+
     /**
      * @todo remove me
      */
@@ -175,14 +176,14 @@ abstract class Block implements BlockInterface
     {
         return json_encode($this->config());
     }
-    
+
     public function icon()
     {
-        return null;   
+        return;
     }
-    
+
     public function getFullName()
     {
-        return ($this->icon() === null) ? $this->name() : '<i class="left '.$this->icon().'"></i> <span>' . $this->name() . '</span>';
+        return ($this->icon() === null) ? $this->name() : '<i class="left '.$this->icon().'"></i> <span>'.$this->name().'</span>';
     }
 }

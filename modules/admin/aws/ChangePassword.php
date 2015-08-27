@@ -5,11 +5,11 @@ namespace admin\aws;
 class ChangePassword extends \admin\ngrest\base\ActiveWindow
 {
     public $module = 'admin';
-    
+
     public function index()
     {
         return $this->render('index', [
-            'itemId' => $this->getItemId()
+            'itemId' => $this->getItemId(),
         ]);
     }
 

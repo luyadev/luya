@@ -9,7 +9,9 @@ class View extends \yii\web\View
 {
     /**
      * @todo verify there is already a yii-way solution
+     *
      * @param string $assetName
+     *
      * @return string
      */
     public function getAssetUrl($assetName)
@@ -21,12 +23,13 @@ class View extends \yii\web\View
     {
         return preg_replace(array('/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s'), array('>', '<', '\\1'), $content);
     }
-    
+
     /**
      * Helper method for convenience.
      *
      * @param string $route
      * @param array  $params
+     *
      * @return string
      */
     public function url($route, array $params = [])

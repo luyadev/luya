@@ -3,7 +3,6 @@
 namespace crawleradmin\models;
 
 use yii\helpers\Html;
-use yii\helpers\StringHelper;
 
 class Index extends \admin\ngrest\base\Model
 {
@@ -22,38 +21,39 @@ class Index extends \admin\ngrest\base\Model
             'restupdate' => ['url', 'content', 'title', 'arguments_json', 'language_info'],
         ];
     }
-    
+
     /* custom methods */
-    
+
     public static function searchByQuery($query)
     {
         return self::find()->where(['like', 'content', Html::encode($query)])->all();
     }
-    
+
     public function preview($word, $cutAmount = 150)
     {
         return $this->highlight($word, $this->cut($word, $this->content, $cutAmount));
     }
-    
-    public function cut($word, $context, $truncateAmount = 150) {
-		$pos = strpos($context, $word);
-		$originalContext = $context;
-		// cut lef
-		if ($pos > $truncateAmount) {
-			$context = "..." . substr($context, (($pos-1)-$truncateAmount));
-		}
-		// cut right
-		if ((strlen($originalContext) - $pos) > $truncateAmount) {
-			$context = substr($context, 0, -(strlen($originalContext)-($pos+strlen($word)) - $truncateAmount)) . "...";
-		}
-		
-		return $context;
-	}
-	
-	public function highlight($word, $text, $sheme = "<span style='background-color:#FFEBD1; color:black;'>%s</span>")
-	{
-		return preg_replace("/$word/i", sprintf($sheme, $word), $text);
-	}
+
+    public function cut($word, $context, $truncateAmount = 150)
+    {
+        $pos = strpos($context, $word);
+        $originalContext = $context;
+        // cut lef
+        if ($pos > $truncateAmount) {
+            $context = '...'.substr($context, (($pos - 1) - $truncateAmount));
+        }
+        // cut right
+        if ((strlen($originalContext) - $pos) > $truncateAmount) {
+            $context = substr($context, 0, -(strlen($originalContext) - ($pos + strlen($word)) - $truncateAmount)).'...';
+        }
+
+        return $context;
+    }
+
+    public function highlight($word, $text, $sheme = "<span style='background-color:#FFEBD1; color:black;'>%s</span>")
+    {
+        return preg_replace("/$word/i", sprintf($sheme, $word), $text);
+    }
 
     /* ngrest model properties */
 
@@ -76,6 +76,7 @@ class Index extends \admin\ngrest\base\Model
         $config->list->field('arguments_json', 'Arguments_json')->textarea();
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);
+
         return $config;
     }
 }

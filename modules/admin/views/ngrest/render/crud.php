@@ -17,9 +17,9 @@ zaa.bootstrap.register('<?=$config->hash; ?>', function($scope, $controller) {
 </script>
 
 <div ng-controller="<?=$config->hash; ?>" ng-init="init()">
-<? if($canCreate): ?>
+<?php if ($canCreate): ?>
 <a ng-show="config.create.length" class="btn-floating btn-large waves-effect waves-light right red" style="margin:20px;" ng-click="openCreate()"><i class="mdi-content-add"></i></a>
-<? endif; ?>
+<?php endif; ?>
 <div class="card-panel" ng-show="loading">
     <div class="preloader-wrapper big active">
         <div class="spinner-layer spinner-blue-only">
@@ -61,9 +61,9 @@ zaa.bootstrap.register('<?=$config->hash; ?>', function($scope, $controller) {
     <tbody>
         <tr ng-repeat="item in data.list |  filter:searchString | orderBy:orderBy" >
             <?php foreach ($config->getPointer('list') as $item): ?>
-                <? foreach($this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_LIST) as $element): ?>
+                <?php foreach ($this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_LIST) as $element): ?>
                     <td><?= $element['html']; ?></td>
-                <? endforeach; ?>
+                <?php endforeach; ?>
             <?php endforeach; ?>
             <?php if (count($this->context->getButtons()) > 0): ?>
             <td style="text-align:right;">
@@ -77,7 +77,7 @@ zaa.bootstrap.register('<?=$config->hash; ?>', function($scope, $controller) {
     </table>
 </div>
 
-<? if($canCreate && $config->getPointer('create')): ?>
+<?php if ($canCreate && $config->getPointer('create')): ?>
 <!-- CREATE MODAL -->
 <div id="createModal" class="modal">
 
@@ -99,11 +99,11 @@ zaa.bootstrap.register('<?=$config->hash; ?>', function($scope, $controller) {
     <div class="modal__content">
         <?php foreach ($config->getPointer('create') as $k => $item): ?>
             <div class="row">
-                <? foreach($this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_CREATE) as $element): ?>
+                <?php foreach ($this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_CREATE) as $element): ?>
                     <?= $element['html']; ?>
-                <? endforeach; ?>
+                <?php endforeach; ?>
             </div>
-        <? endforeach; ?>
+        <?php endforeach; ?>
         
         <div class="red lighten-2" style="color:white;" ng-show="createErrors.length">
             <ul>
@@ -134,9 +134,9 @@ zaa.bootstrap.register('<?=$config->hash; ?>', function($scope, $controller) {
     
 </div>
 <!-- /CREATE MODAL -->
-<? endif; ?>
+<?php endif; ?>
 
-<? if($canUpdate && $config->getPointer('update')): ?>
+<?php if ($canUpdate && $config->getPointer('update')): ?>
 <!-- UPDATE MODAL -->
 <div id="updateModal" class="modal">
 
@@ -158,11 +158,11 @@ zaa.bootstrap.register('<?=$config->hash; ?>', function($scope, $controller) {
     <div class="modal__content">
         <?php foreach ($config->getPointer('update') as $k => $item): ?>
             <div class="row">
-                <? foreach($this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_UPDATE) as $element): ?>
+                <?php foreach ($this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_UPDATE) as $element): ?>
                     <?= $element['html']; ?>
-                <? endforeach; ?>
+                <?php endforeach; ?>
             </div>
-        <? endforeach; ?>
+        <?php endforeach; ?>
         
         <div class="red lighten-2" style="color:white;" ng-show="updateErrors.length">
             <ul>
@@ -192,7 +192,7 @@ zaa.bootstrap.register('<?=$config->hash; ?>', function($scope, $controller) {
     
 </div>
 <!-- /UPDATE MODAL -->
-<? endif; ?>
+<?php endif; ?>
 
 <!-- activeWindow MODAL -->
 <div id="activeWindowModal" class="modal">

@@ -5,7 +5,6 @@ namespace cms\widgets;
 use Yii;
 use admin\models\Lang;
 
-
 class LanguageSwitcherWidget extends \yii\base\Widget
 {
     public $message = null;
@@ -18,8 +17,7 @@ class LanguageSwitcherWidget extends \yii\base\Widget
 
         $html = '<ul>';
 
-        foreach($langData as $lang) {
-
+        foreach ($langData as $lang) {
             $html .= '<li style="display:inline;margin-right:5px"><a href="'.$lang['short_code'].'/'.Yii::$app->links->findOneByArguments(['id' => $navId, 'lang_id' => $lang['id']])['url'].'">'.$lang['short_code'].'</a></li>';
         }
 

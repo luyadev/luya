@@ -71,7 +71,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         $this->update_user_id = Yii::$app->adminuser->getId();
         $this->timestamp_update = time();
     }
-    
+
     public function eventAfterUpdate()
     {
         $oldPlaceholderVar = $this->_olds['placeholder_var'];
@@ -106,7 +106,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         $datas = self::find()->andWhere(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId])->orderBy('sort_index ASC')->all();
         foreach ($datas as $item) {
             \yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $index], ['id' => $item->id])->execute();
-            $index++;
+            ++$index;
         }
     }
 

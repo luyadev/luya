@@ -50,18 +50,18 @@ class Lang extends \admin\ngrest\base\Model
     {
         $this->is_default = 0;
     }
-    
+
     private static $_langInstanceQuery = null;
-    
+
     public static function getQuery()
     {
         if (self::$_langInstanceQuery === null) {
-            self::$_langInstanceQuery = Lang::find()->asArray()->all();
+            self::$_langInstanceQuery = self::find()->asArray()->all();
         }
-        
+
         return self::$_langInstanceQuery;
     }
-    
+
     private static $_langInstance = null;
 
     public static function getDefault()
@@ -69,7 +69,7 @@ class Lang extends \admin\ngrest\base\Model
         if (self::$_langInstance === null) {
             self::$_langInstance = self::find()->where(['is_default' => 1])->asArray()->one();
         }
-        
+
         return self::$_langInstance;
     }
 }

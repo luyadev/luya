@@ -10,12 +10,12 @@ namespace admin\ngrest\plugins;
 class Image extends \admin\ngrest\base\Plugin
 {
     public $noFilters = false;
-    
+
     public function __construct($noFilters = false)
     {
         $this->noFilters = $noFilters;
     }
-    
+
     public function renderList($doc)
     {
         $elmn = $doc->createElement('span', '{{item.'.$this->name.'}}');
@@ -27,7 +27,7 @@ class Image extends \admin\ngrest\base\Plugin
     public function renderCreate($doc)
     {
         $elmn = $this->createBaseElement($doc, 'zaa-image-upload');
-        $elmn->setAttribute('options', json_encode(['no_filter' => $this->noFilters ]));
+        $elmn->setAttribute('options', json_encode(['no_filter' => $this->noFilters]));
         // append to document
         $doc->appendChild($elmn);
         // return DomDocument

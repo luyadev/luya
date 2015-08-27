@@ -2,8 +2,8 @@
 
 namespace admin\models;
 
-use \admin\models\UserLogin;
-use \admin\models\UserOnline;
+use admin\models\UserLogin;
+use admin\models\UserOnline;
 
 class LoginForm extends \yii\base\Model
 {
@@ -45,14 +45,15 @@ class LoginForm extends \yii\base\Model
             $user->scenario = 'login';
             $user->auth_token = \yii::$app->security->hashData(\yii::$app->security->generateRandomString(), $user->password_salt);
             $user->save();
-            
+
             $login = new UserLogin();
             $login->setAttributes([
-                "auth_token" => $user->auth_token,
-                "user_id" => $user->id, 
+                'auth_token' => $user->auth_token,
+                'user_id' => $user->id,
             ]);
             $login->insert();
             UserOnline::refreshUser($user->id, 'login');
+
             return $user;
         } else {
             return false;

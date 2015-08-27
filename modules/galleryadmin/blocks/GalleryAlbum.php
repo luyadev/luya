@@ -5,7 +5,7 @@ namespace galleryadmin\blocks;
 class GalleryAlbum extends \cmsadmin\base\Block
 {
     public $module = 'gallery';
-    
+
     private $_dropdown = [];
 
     private $_alben = [];

@@ -7,13 +7,14 @@ class ToggleStatus extends \admin\ngrest\base\Plugin
     public function renderList($doc)
     {
         $activatedElement = $doc->createElement('span');
-        $activatedElement->setAttribute("ng-class", "{'mdi-navigation-check' : item.".$this->name."}");
+        $activatedElement->setAttribute('ng-class', "{'mdi-navigation-check' : item.".$this->name.'}');
 
         $disabledElement = $doc->createElement('span');
-        $disabledElement->setAttribute("ng-class", "{'mdi-navigation-close' : !item.".$this->name."}");
+        $disabledElement->setAttribute('ng-class', "{'mdi-navigation-close' : !item.".$this->name.'}');
 
         $doc->appendChild($activatedElement);
         $doc->appendChild($disabledElement);
+
         return $doc;
     }
 

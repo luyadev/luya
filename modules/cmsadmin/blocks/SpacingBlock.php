@@ -49,6 +49,5 @@ class SpacingBlock extends \cmsadmin\base\Block
     public function twigAdmin()
     {
         return '<span class="block__empty-text">{{ extras.spacingLabel }}</span>';
-
     }
 }

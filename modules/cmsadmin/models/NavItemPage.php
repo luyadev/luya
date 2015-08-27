@@ -17,7 +17,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
             [['layout_id'], 'required'],
         ];
     }
-    
+
     public function getContent()
     {
         $twig = Yii::$app->twig->env(new \Twig_Loader_Filesystem(\yii::getAlias('@app/views/cmslayouts/')));
@@ -33,11 +33,11 @@ class NavItemPage extends \cmsadmin\base\NavItemType
             'activeUrl' => Yii::$app->links->activeUrl,
         ]);
     }
-    
+
     public function attributeLabels()
     {
         return [
-            'layout_id' => 'Layout'  
+            'layout_id' => 'Layout',
         ];
     }
 
@@ -65,7 +65,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
                 $cfgValues = [];
             }
 
-            foreach($this->getOptions() as $optKey => $optValue) {
+            foreach ($this->getOptions() as $optKey => $optValue) {
                 $blockObject->setEnvOption($optKey, $optValue);
             }
             $blockObject->setVarValues($configValues);

@@ -1,10 +1,10 @@
 <?php
+
 namespace cmsadmin\blocks;
 
 class DevBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
-
 
     public function name()
     {
@@ -18,20 +18,17 @@ class DevBlock extends \cmsadmin\base\Block
 
     public function config()
     {
-        return [ ''
+        return ['',
         ];
     }
 
     public function twigFrontend()
     {
         return $this->render();
-
     }
 
     public function twigAdmin()
     {
         return '';
     }
-
-
 }

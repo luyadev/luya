@@ -3,42 +3,41 @@
 namespace admin\ngrest\base;
 
 use Yii;
-use admin\ngrest\base\EventBehavior;
 use admin\behaviors\LogBehavior;
 use admin\models\Lang;
 
 abstract class Model extends \yii\db\ActiveRecord implements \admin\base\GenericSearchInterface
 {
     const EVENT_AFTER_NGREST_FIND = 'afterNgrestFind';
-    
+
     const EVENT_SERVICE_NGREST = 'serviceNgrest';
-    
+
     private $_ngrestCallType = null;
-    
+
     private $_ngRestPrimaryKey = null;
-    
+
     private $_config = null;
-    
+
     /**
      * Containg the default language assoc array.
      * 
      * @var array
      */
     private $_lang = null;
-    
+
     /**
      * Containg all availabe languages from Lang Model.
      * 
      * @var array
      */
     private $_langs = null;
-    
+
     public $i18n = [];
 
     public $extraFields = [];
 
     public $ngRestServiceArray = [];
-        
+
     abstract public function ngRestConfig($config);
 
     abstract public function ngRestApiEndpoint();
@@ -49,22 +48,22 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
 
         $this->attachBehaviors([
             'EventBehavior' => [
-            	'class' => EventBehavior::className(),
-            	'ngRestConfig' => $this->getNgRestConfig(),
-        	],
-        	'LogBehavior' => [
-            	'class' => LogBehavior::className(),
-            	'api' => $this->ngRestApiEndpoint(),
-        	]
+                'class' => EventBehavior::className(),
+                'ngRestConfig' => $this->getNgRestConfig(),
+            ],
+            'LogBehavior' => [
+                'class' => LogBehavior::className(),
+                'api' => $this->ngRestApiEndpoint(),
+            ],
         ]);
-        
+
         if (count($this->i18n) > 0) {
             $this->on(self::EVENT_BEFORE_INSERT, [$this, 'i18nBeforeUpdateAndCreate']);
             $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'i18nBeforeUpdateAndCreate']);
             $this->on(self::EVENT_AFTER_FIND, [$this, 'i18nAfterFind']);
         }
     }
-    
+
     /**
      * @param string $value          The valued which is provided from the setter method
      * @param string $viaTableName   Example viaTable name: news_article_tag
@@ -72,6 +71,7 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
      * @param string $foreignTableId The name of the field inside the viaTable which represents the match against the foreign table, example: tag_id
      *
      * @todo should be outside of model, move to checkboxrelation plugin ?
+     *
      * @return bool
      */
     public function setRelation($value, $viaTableName, $localTableId, $foreignTableId)
@@ -105,13 +105,13 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
     {
         return static::find();
     }
-    
+
     public function afterFind()
     {
         if ($this->getNgRestCallType() == 'list') {
             $this->trigger(self::EVENT_AFTER_NGREST_FIND);
-        }   
-        
+        }
+
         return parent::afterFind();
     }
 
@@ -120,23 +120,23 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
         if ($this->_lang === null) {
             $this->_lang = Lang::getDefault();
         }
-        
+
         if ($field) {
             return $this->_lang[$field];
         }
-        
+
         return $this->_lang;
     }
-    
+
     private function getLanguages()
     {
         if ($this->_langs === null) {
             $this->_langs = Lang::getQuery();
         }
-        
+
         return $this->_langs;
     }
-    
+
     public function i18nAfterFind()
     {
         foreach ($this->i18n as $field) {
@@ -173,18 +173,19 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
             $this->$field = json_encode($this->$field);
         }
     }
-    
+
     public function genericSearchFields()
     {
         $fields = [];
-        foreach($this->getTableSchema()->columns as $name => $object) {
+        foreach ($this->getTableSchema()->columns as $name => $object) {
             if ($object->phpType == 'string') {
                 $fields[] = $object->name;
             }
         }
+
         return $fields;
     }
-    
+
     /**
      * @param string $searchQuery a search string
      *
@@ -196,37 +197,38 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
         // create active query object
         $query = self::find();
         // foreach all fields from genericSearchFields metod
-        foreach($fields as $field) {
+        foreach ($fields as $field) {
             $query->orWhere(['like', $field, $searchQuery]);
         }
         // return array based on orWhere statement
         return $query->select($fields)->asArray()->all();
     }
-    
+
     public function getNgRestCallType()
     {
         if ($this->_ngrestCallType === null) {
             $this->_ngrestCallType = (!Yii::$app instanceof \yii\web\Application) ? false : Yii::$app->request->get('ngrestCallType', false);
         }
-    
+
         return $this->_ngrestCallType;
     }
-    
+
     public function getNgRestPrimaryKey()
     {
         if ($this->_ngRestPrimaryKey === null) {
-            $this->_ngRestPrimaryKey = $this->getTableSchema()->primaryKey[0];    
+            $this->_ngRestPrimaryKey = $this->getTableSchema()->primaryKey[0];
         }
-        
+
         return $this->_ngRestPrimaryKey;
     }
 
     public function getNgrestServices()
     {
         $this->trigger(self::EVENT_SERVICE_NGREST);
+
         return $this->ngRestServiceArray;
     }
-    
+
     public function getNgRestConfig()
     {
         if ($this->_config == null) {
@@ -234,12 +236,12 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
             $configBuilder = new \admin\ngrest\ConfigBuilder();
             $this->ngRestConfig($configBuilder);
             $config->setConfig($configBuilder->getConfig());
-            foreach($this->i18n as $fieldName) {
+            foreach ($this->i18n as $fieldName) {
                 $config->appendFieldOption($fieldName, 'i18n', true);
             }
             $this->_config = $config;
         }
-        
+
         return $this->_config;
     }
 }

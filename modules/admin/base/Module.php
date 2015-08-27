@@ -7,7 +7,7 @@ use yii\helpers\ArrayHelper;
 class Module extends \luya\base\Module
 {
     public $isAdmin = true;
-    
+
     public $requiredComponents = ['db'];
 
     private $_menu = [];

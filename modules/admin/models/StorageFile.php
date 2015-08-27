@@ -11,13 +11,12 @@ class StorageFile extends \yii\db\ActiveRecord
         parent::init();
         $this->on(self::EVENT_BEFORE_INSERT, [$this, 'onBeforeInsert']);
     }
-    
+
     public static function tableName()
     {
         return 'admin_storage_file';
     }
 
-    
     public function rules()
     {
         return [
@@ -25,32 +24,33 @@ class StorageFile extends \yii\db\ActiveRecord
             [['folder_id', 'upload_timestamp', 'file_size', 'upload_user_id', 'upload_timestamp'], 'safe'],
         ];
     }
-    
+
     public function delete()
     {
         $file = Yii::$app->storage->file->get($this->id);
         @unlink($file['source']);
         $this->is_deleted = 1;
         $this->update(false);
+
         return true;
     }
-    
+
     /**
      * We can not global set is_deleted=0 to the where condition cause in some parts of the storage we want
-     * to access the name_new_compound to rebuild old image paths
+     * to access the name_new_compound to rebuild old image paths.
      * 
      * @return \yii\db\$this
      */
     public static function find()
     {
         return parent::find();
-    } 
-    
+    }
+
     public function onBeforeInsert()
     {
         $this->upload_timestamp = time();
         if (empty($this->upload_user_id)) {
             $this->upload_user_id = Yii::$app->adminuser->getId();
-        }        
+        }
     }
 }

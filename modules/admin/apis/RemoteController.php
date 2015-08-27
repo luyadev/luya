@@ -13,14 +13,14 @@ class RemoteController extends \luya\rest\Controller
     {
         return false;
     }
-    
+
     public function actionIndex($token)
     {
         if (!Yii::$app->remoteToken || sha1(Yii::$app->remoteToken) !== $token) {
-            throw new Exception("Wrong token");
+            throw new Exception('Wrong token');
             exit;
         }
-        
+
         return [
             'yii_version' => Yii::getVersion(),
             'luya_version' => Module::VERSION,

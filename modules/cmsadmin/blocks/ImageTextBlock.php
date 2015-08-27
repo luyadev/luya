@@ -3,8 +3,7 @@
 namespace cmsadmin\blocks;
 
 use Yii;
-
-use \cebe\markdown\GithubMarkdown;
+use cebe\markdown\GithubMarkdown;
 
 class ImageTextBlock extends \cmsadmin\base\Block
 {
@@ -18,7 +17,7 @@ class ImageTextBlock extends \cmsadmin\base\Block
 
     public function getParser()
     {
-        if( $this->_parser === null) {
+        if ($this->_parser === null) {
             $this->_parser = new GithubMarkdown();
         }
 
@@ -45,11 +44,10 @@ class ImageTextBlock extends \cmsadmin\base\Block
                         ['value' => 'left', 'label' => 'Links'],
                         ['value' => 'right', 'label' => 'Rechts'],
                     ],
-                ]
+                ],
             ],
             'cfgs' => [
-                ['var' => 'margin', 'label' => 'Abstand des Bildes zum Text', 'type' => 'zaa-select', 'initvalue' => $this->defaultMargin, 'options' =>
-                    [
+                ['var' => 'margin', 'label' => 'Abstand des Bildes zum Text', 'type' => 'zaa-select', 'initvalue' => $this->defaultMargin, 'options' => [
                             ['value' => '5px', 'label' => '0 Pixel'],
                             ['value' => '10px', 'label' => '10 Pixel'],
                             ['value' => '15px', 'label' => '20 Pixel'],
@@ -58,8 +56,7 @@ class ImageTextBlock extends \cmsadmin\base\Block
                             ['value' => '15px', 'label' => '50 Pixel'],
                     ],
                 ],
-                ['var' => 'textType', 'label' => 'Texttyp', 'initvalue' => 1, 'type' => 'zaa-select', 'options' =>
-                    [
+                ['var' => 'textType', 'label' => 'Texttyp', 'initvalue' => 1, 'type' => 'zaa-select', 'options' => [
                         ['value' => '0', 'label' => 'Normaler Text'],
                         ['value' => '1', 'label' => 'Markdown Text'],
                     ],
@@ -72,7 +69,7 @@ class ImageTextBlock extends \cmsadmin\base\Block
     {
         $text = $this->getVarValue('text');
 
-        if($this->getCfgValue('textType')) {
+        if ($this->getCfgValue('textType')) {
             $text = $this->getParser()->parse($text);
         }
 
@@ -96,8 +93,8 @@ class ImageTextBlock extends \cmsadmin\base\Block
             'imageSource' => $this->getImageSource(),
             'imagePosition' => $this->getVarValue('imagePosition', 'left'),
             'imageWidth' => $this->getImageSource() ? @getimagesize($this->getImageSource())[0] : 0,
-            'margin' => $this->getCfgValue('margin',$this->defaultMargin),
-            'text' => $this->getText()
+            'margin' => $this->getCfgValue('margin', $this->defaultMargin),
+            'text' => $this->getText(),
         ];
     }
 

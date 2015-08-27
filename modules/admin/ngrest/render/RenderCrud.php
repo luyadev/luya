@@ -22,21 +22,21 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
     const TYPE_UPDATE = 'update';
 
     public $viewFile = '@admin/views/ngrest/render/crud.php';
-    
+
     private $_permissions = [];
-    
+
     private $_buttons = null;
-    
+
     private $_view = null;
-    
+
     private $_fields = [];
-    
+
     public function can($type)
     {
         if (!array_key_exists($type, $this->_permissions)) {
             $this->_permissions[$type] = Yii::$app->auth->matchApi(Yii::$app->adminuser->getId(), $this->config->apiEndpoint, $type);
         }
-        
+
         return $this->_permissions[$type];
     }
 
@@ -45,10 +45,10 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
         if ($this->_view === null) {
             $this->_view = new View();
         }
-        
+
         return $this->_view;
     }
-    
+
     public function render()
     {
         return $this->getView()->render($this->viewFile, array(
@@ -63,9 +63,9 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
 
     public function getRestUrl()
     {
-        return 'admin/' . $this->config->apiEndpoint;
+        return 'admin/'.$this->config->apiEndpoint;
     }
-    
+
     /**
      * collection all the buttons in the crud list.
      *
@@ -99,12 +99,12 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
                     'label' => $activeWindow['alias'],
                 ];
             }
-    
+
             if ($this->config->isDeletable() && $this->can(Auth::CAN_DELETE)) {
                 $buttons[] = [
                     'ngClick' => 'deleteItem(item.'.$this->config->primaryKey.', $event)',
                     'icon' => '',
-                    'label' => 'Löschen'  
+                    'label' => 'Löschen',
                 ];
             }
             $this->_buttons = $buttons;
@@ -130,7 +130,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
     }
 
     /**
-     * wrapper of $config->getPointer to get only the fields
+     * wrapper of $config->getPointer to get only the fields.
      */
     public function getFields($type)
     {
@@ -141,13 +141,13 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
                     $fields[] = $item['name'];
                 }
             }
-            
+
             $this->_fields[$type] = $fields;
         }
-        
+
         return $this->_fields[$type];
     }
-    
+
     public function getFieldsJson($type)
     {
         return json_encode($this->getFields($type));
@@ -160,6 +160,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
 
     /**
      * @todo do not return the specofic type content, but return an array contain more infos also about is multi linguage and foreach in view file! 
+     *
      * @param unknown_type $element
      * @param string       $configContext list,create,update
      */
@@ -174,9 +175,9 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
                 $return[] = [
                     'id' => $id,
                     'name' => $element['name'],
-                    'label' => $element['alias'] . ' ' . $v->name,
+                    'label' => $element['alias'].' '.$v->name,
                     'ngModel' => $ngModel,
-                    'html' => $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'] . ' ' . $v->name, $element['gridCols'])
+                    'html' => $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'].' '.$v->name, $element['gridCols']),
                 ];
             }
 
@@ -197,7 +198,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
                 'ngModel' => $ngModel,
                 'label' => $element['alias'],
                 'html' => $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'], $element['gridCols']),
-            ]
+            ],
         ];
     }
 

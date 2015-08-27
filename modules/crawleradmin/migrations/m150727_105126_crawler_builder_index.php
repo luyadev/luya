@@ -1,6 +1,5 @@
 <?php
 
-use yii\db\Schema;
 use yii\db\Migration;
 
 class m150727_105126_crawler_builder_index extends Migration
@@ -18,7 +17,7 @@ class m150727_105126_crawler_builder_index extends Migration
             'crawled' => 'tinyint(1) default 0',
             'status_code' => 'tinyint(4) default 0',
         ]);
-        
+
         $this->createIndex('uniqueurl', 'crawler_builder_index', 'url', true);
     }
 
@@ -28,7 +27,7 @@ class m150727_105126_crawler_builder_index extends Migration
 
         return false;
     }
-    
+
     /*
     // Use safeUp/safeDown to run migration code within a transaction
     public function safeUp()

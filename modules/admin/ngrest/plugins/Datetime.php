@@ -7,6 +7,7 @@ class Datetime extends \admin\ngrest\base\Plugin
     public function renderList($doc)
     {
         $doc->appendChild($doc->createElement('span', '{{item.'.$this->name.'*1000 | date : "dd.MM.yyyy - HH:mm"}}'));
+
         return $doc;
     }
 
@@ -23,5 +24,4 @@ class Datetime extends \admin\ngrest\base\Plugin
     {
         return $this->renderCreate($doc);
     }
-
 }

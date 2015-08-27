@@ -14,7 +14,7 @@ class m141203_143052_cms_cat extends Migration
             'is_default' => 'TINYINT(1) NOT NULL DEFAULT 0',
             'is_deleted' => 'TINYINT(1) NOT NULL default 0',
         ]);
-        
+
         $this->insert('cms_cat', [
             'name' => 'Hauptnavigation',
             'rewrite' => 'default',

@@ -19,7 +19,7 @@ class StorageController extends \admin\base\RestController
         7 => 'Failed to write file to disk.',
         8 => 'A PHP extension stopped the file upload.',
     ];
-    
+
     /**
      * <URL>/admin/api-admin-storage/files-upload.
      *
@@ -38,15 +38,15 @@ class StorageController extends \admin\base\RestController
             }
             $create = Yii::$app->storage->file->create($file['tmp_name'], $file['name'], false, Yii::$app->request->post('folderId', 0));
             if ($create) {
-            //$files[$file['name']] = ['id' => $create, 'error' => (bool) !$create, 'message' => \yii::$app->storage->file->getError(), 'file' => ((bool) $create) ? $this->actionFilePath($create) : false];
-            
+                //$files[$file['name']] = ['id' => $create, 'error' => (bool) !$create, 'message' => \yii::$app->storage->file->getError(), 'file' => ((bool) $create) ? $this->actionFilePath($create) : false];
+
             return ['upload' => true, 'message' => 'file uploaded succesfully'];
             }
         }
 
         return ['upload' => false, 'message' => 'no files selected'];
     }
-    
+
     public function actionFilesDelete()
     {
         foreach (Yii::$app->request->post('ids', []) as $id) {
@@ -54,19 +54,18 @@ class StorageController extends \admin\base\RestController
                 return false;
             }
         }
-        
+
         return true;
     }
-    
+
     public function actionFilesMove()
     {
         $toFolderId = Yii::$app->request->post('toFolderId', 0);
         $fileIds = Yii::$app->request->post('fileIds', []);
-        
+
         return Yii::$app->storage->file->moveFilesToFolder($fileIds, $toFolderId);
     }
-    
-    
+
     /*
     public function actionFilesUploadFlow()
     {
@@ -99,6 +98,7 @@ class StorageController extends \admin\base\RestController
 
         $create = Yii::$app->storage->image->create($fileId, $filterId);
         $msg = (!$create) ? 'Error while uploading image and/or store to database.' : 'Upload successfull';
+
         return ['id' => $create, 'error' => (bool) !$create, 'message' => $msg, 'image' => ((bool) $create) ? $this->actionImagePath($create) : false];
     }
 
@@ -111,17 +111,17 @@ class StorageController extends \admin\base\RestController
     {
         return Yii::$app->storage->file->get($fileId);
     }
-    
+
     public function actionGetFiles($folderId)
     {
         return Yii::$app->storage->file->allFromFolder($folderId);
     }
-    
+
     public function actionGetFolders()
     {
         return Yii::$app->storage->folder->getFolderTree();
     }
-    
+
     public function actionFolderCreate()
     {
         $folderName = Yii::$app->request->post('folderName', null);
@@ -129,7 +129,7 @@ class StorageController extends \admin\base\RestController
 
         return Yii::$app->storage->folder->createFolder($folderName, $parentFolderId);
     }
-    
+
     public function actionFolderUpdate($folderId)
     {
         return Yii::$app->storage->folder->updateFolder($folderId, Yii::$app->request->post());

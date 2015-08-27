@@ -1,6 +1,5 @@
 <?php
 
-use yii\db\Schema;
 use yii\db\Migration;
 
 class m150727_104346_crawler_index extends Migration
@@ -17,7 +16,7 @@ class m150727_104346_crawler_index extends Migration
             'arguments_json' => 'text NOT NULL',
             'language_info' => 'varchar(80)',
         ]);
-        
+
         $this->createIndex('uniqueurl', 'crawler_index', 'url', true);
     }
 
@@ -27,7 +26,7 @@ class m150727_104346_crawler_index extends Migration
 
         return false;
     }
-    
+
     /*
     // Use safeUp/safeDown to run migration code within a transaction
     public function safeUp()

@@ -48,10 +48,11 @@ class Url
     }
 
     /**
-     * remove trailing slash from url
+     * remove trailing slash from url.
      * 
-     * @param string $url http://www.luya.io/
+     * @param string $url   http://www.luya.io/
      * @param string $slash
+     *
      * @return string
      */
     public static function removeTrailing($url, $slash = '/')
@@ -76,11 +77,12 @@ class Url
     }
 
     /**
-     * create an url based on a context nav item informaiton inside the urlManager
+     * create an url based on a context nav item informaiton inside the urlManager.
      * 
-     * @param integer $navItemId
+     * @param int    $navItemId
      * @param string $route
-     * @param array $params
+     * @param array  $params
+     *
      * @return string
      */
     public static function toModule($navItemId, $route, array $params = [])

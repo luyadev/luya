@@ -2,7 +2,6 @@
 
 namespace luya\components;
 
-use Yii;
 use luya\helpers\Url;
 
 class Composition extends \yii\base\Component
@@ -46,9 +45,10 @@ class Composition extends \yii\base\Component
     private $_composition = [];
 
     private $_resolvedValues = [];
-    
+
     /**
      * @todo should be rewritten soon.
+     *
      * @param \yii\web\Request $request
      */
     public function getResolvedPathInfo(\yii\web\Request $request)
@@ -62,7 +62,7 @@ class Composition extends \yii\base\Component
                 $rgx = $match[2];
                 $param = $match[1];
                 preg_match("/^$rgx$/", $urlValue, $res);
-        
+
                 if (count($res) == 1) {
                     $compositionKeys[$param] = $urlValue;
                     $this->_resolvedValues[] = $parts[$index];
@@ -70,21 +70,21 @@ class Composition extends \yii\base\Component
                 }
             }
         }
-        
+
         if (count($compositionKeys) == 0) {
             $compositionKeys = $this->default;
         }
-        
+
         $this->set($compositionKeys);
-        
+
         return implode('/', $parts);
     }
-    
+
     public function getResolvedValues()
     {
         return $this->_resolvedValues;
     }
-    
+
     public function setKey($key, $value)
     {
         $this->_composition[$key] = $value;

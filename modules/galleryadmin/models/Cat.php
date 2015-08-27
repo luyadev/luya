@@ -44,6 +44,7 @@ class Cat extends \admin\ngrest\base\Model
         if (count($items) > 0) {
             $this->addError('Diese Kategorie wird noch von einem oder mehreren Alben benutzt und kann nicht gelöscht werden.');
             $event->isValid = false;
+
             return;
         }
 
@@ -64,7 +65,6 @@ class Cat extends \admin\ngrest\base\Model
         //var_dump($config);
         $config->list->field('title', 'Kategoriename')->text();
         $config->list->field('description', 'Beschreibung')->text();
-
 
         $config->create->copyFrom('list', ['id']);
         $config->create->field('cover_image_id', 'Cover-Bild')->image();

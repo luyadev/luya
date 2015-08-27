@@ -26,9 +26,9 @@ class Storage extends \yii\base\Component
     private $_folder = null;
 
     public $dir = '@webroot/storage';
-    
+
     public $httpDir = 'storage';
-    
+
     public function init()
     {
         parent::init();

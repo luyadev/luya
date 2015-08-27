@@ -12,15 +12,15 @@
                 <input type="password" id="password" name="login[password]" />
                 <label for="password">Passwort</label>
             </div>
-            <? if (count($model->getErrors()) > 0): ?>
+            <?php if (count($model->getErrors()) > 0): ?>
              <div class="card-panel red lighten-1 white-text">
                 <ul>
-                    <? foreach($model->getErrors() as $item): ?>
-                        <li><? echo $item[0]; ?></li>
-                    <? endforeach; ?>
+                    <?php foreach ($model->getErrors() as $item): ?>
+                        <li><?php echo $item[0]; ?></li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
-        <? endif; ?>
+        <?php endif; ?>
     </div>
     <input class="btn" type="submit" value="Einloggen">
     <?= \yii\helpers\Html::endForm(); ?>

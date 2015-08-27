@@ -14,17 +14,17 @@ namespace admin\ngrest\plugins;
 abstract class Select extends \admin\ngrest\base\Plugin
 {
     public $initValue = null;
-    
+
     public $data = [];
 
     public function renderList($doc)
     {
         $elmn = $doc->createElement('span', '{{item.'.$this->name.'}}');
         $doc->appendChild($elmn);
-        
+
         return $doc;
     }
-    
+
     public function renderCreate($doc)
     {
         $elmn = $this->createBaseElement($doc, 'zaa-select');
@@ -35,12 +35,12 @@ abstract class Select extends \admin\ngrest\base\Plugin
         // return DomDocument
         return $doc;
     }
-    
+
     public function renderUpdate($doc)
     {
         return $this->renderCreate($doc);
     }
-    
+
     public function serviceData()
     {
         return ['selectdata' => $this->data];
@@ -48,12 +48,12 @@ abstract class Select extends \admin\ngrest\base\Plugin
 
     public function onAfterNgRestList($fieldValue)
     {
-        foreach($this->data as $item) {
+        foreach ($this->data as $item) {
             if ($item['value'] == $fieldValue) {
                 return $item['label'];
             }
         }
-        
+
         return $fieldValue;
     }
 }

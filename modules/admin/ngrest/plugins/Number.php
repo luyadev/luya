@@ -5,15 +5,16 @@ namespace admin\ngrest\plugins;
 class Number extends \admin\ngrest\base\Plugin
 {
     public $placeholder = null;
-    
+
     public function __construct($placeholder = null)
     {
         $this->placeholder = $placeholder;
     }
-    
+
     public function renderList($doc)
     {
         $doc->appendChild($doc->createElement('span', '{{item.'.$this->name.'}}'));
+
         return $doc;
     }
 

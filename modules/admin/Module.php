@@ -2,8 +2,6 @@
 
 namespace admin;
 
-use Yii;
-
 class Module extends \admin\base\Module
 {
     public $apis = [
@@ -29,7 +27,7 @@ class Module extends \admin\base\Module
     ];
 
     public $moduleMenus = [];
-    
+
     public function getMenu()
     {
         return $this
@@ -50,7 +48,7 @@ class Module extends \admin\base\Module
     {
         return [
             'adminuser' => [
-                'class' => '\admin\components\AdminUser',  
+                'class' => '\admin\components\AdminUser',
             ],
             'menu' => [
                 'class' => '\admin\components\Menu',
@@ -63,7 +61,7 @@ class Module extends \admin\base\Module
             ],
         ];
     }
-    
+
     public function import(\luya\commands\ExecutableController $exec)
     {
         $log = [

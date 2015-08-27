@@ -5,14 +5,13 @@ namespace admin\behaviors;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\Application;
-use admin\Module;
 
 class LogBehavior extends \yii\base\Behavior
 {
     public $route = '';
 
     public $api = '';
-    
+
     public function events()
     {
         return [

@@ -40,6 +40,7 @@ class Cat extends \admin\ngrest\base\Model
         if (count($items) > 0) {
             $this->addError('id', 'Diese Kategorie wird noch von einem oder mehreren Terminen benutzt und kann nicht gelöscht werden.');
             $event->isValid = false;
+
             return;
         }
 

@@ -119,7 +119,7 @@ abstract class Boot
     {
         $this->beforeRun();
         $this->setConfigValue(include(__DIR__.'/../config/'.self::SAPI_CLI.'.php'));
-        require_once($this->yiiPath);
+        require_once $this->yiiPath;
         $this->yii = new \luya\cli\Application($this->getConfigValue(self::SAPI_CLI));
         if (!$this->mockOnly) {
             $exitCode = $this->yii->run();
@@ -134,7 +134,7 @@ abstract class Boot
     {
         $this->beforeRun();
         $this->setConfigValue(include(__DIR__.'/../config/'.self::SAPI_WEB.'.php'));
-        require_once($this->yiiPath);
+        require_once $this->yiiPath;
         $this->yii = new \luya\web\Application($this->getConfigValue(self::SAPI_WEB));
         if (!$this->mockOnly) {
             $this->yii->run();

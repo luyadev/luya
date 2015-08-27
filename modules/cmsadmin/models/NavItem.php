@@ -57,11 +57,12 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
                 break;
         }
     }
-    
+
     public function updateType($postData)
     {
         $model = $this->getType();
         $model->attributes = $postData;
+
         return $model->update();
     }
 
@@ -69,15 +70,17 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     {
         if (Yii::$app->hasModule($rewrite)) {
             $this->addError('rewrite', 'Die URL darf nicht verwendet werden da es ein Modul mit dem gleichen Namen gibt.');
+
             return false;
         }
-        
+
         if ($this->find()->where(['rewrite' => $rewrite, 'lang_id' => $langId])->one()) {
             $this->addError('rewrite', 'Diese URL existiert bereits und ist deshalb ungültig');
+
             return false;
         }
     }
-    
+
     public function attributeLabels()
     {
         return [
@@ -85,14 +88,14 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
             'rewrite' => 'Pfadsegment',
         ];
     }
-    
+
     public function validateRewrite()
     {
         $dirty = $this->getDirtyAttributes(['rewrite']);
         if (!isset($dirty['rewrite'])) {
             return true;
         }
-        
+
         if (!$this->verifyRewrite($this->rewrite, $this->lang_id)) {
             return false;
         }
@@ -111,6 +114,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
      * display all nav items tempo.
      * 
      * @todo fix me above!
+     *
      * @param unknown $moduleName
      */
     public static function fromModule($moduleName)
@@ -118,21 +122,22 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
         return self::find()->all();
         //return self::find()->leftJoin('cms_nav_item_module', 'nav_item_type_id=cms_nav_item_module.id')->where(['nav_item_type' => 2, 'cms_nav_item_module.module_name' => $moduleName])->all();
     }
-    
+
     /* GenericSearchInterface */
-    
+
     public function genericSearchFields()
     {
         return ['title', 'rewrite'];
     }
-    
+
     public function genericSearch($searchQuery)
     {
         $query = self::find();
         $fields = $this->genericSearchFields();
-        foreach($fields as $field) {
+        foreach ($fields as $field) {
             $query->orWhere(['like', $field, $searchQuery]);
         }
+
         return $query->select($fields)->asArray()->all();
     }
 }

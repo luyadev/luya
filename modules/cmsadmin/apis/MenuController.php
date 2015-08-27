@@ -8,17 +8,17 @@ use admin\models\Lang;
 class MenuController extends \admin\base\RestController
 {
     private $_langShortCode = null;
-    
+
     public function getLangShortCode()
     {
         if ($this->_langShortCode === null) {
             $array = Lang::getDefault();
             $this->_langShortCode = $array['short_code'];
         }
-        
+
         return $this->_langShortCode;
     }
-    
+
     public function actionAll()
     {
         $data = [];
@@ -31,6 +31,7 @@ class MenuController extends \admin\base\RestController
                 '__items' => $this->actionGetByCatRewrite($cat['rewrite']),
             ];
         }
+
         return $data;
     }
 

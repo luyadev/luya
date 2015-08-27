@@ -9,15 +9,14 @@ class UrlRule extends \yii\rest\UrlRule
     public function init()
     {
         $map = Yii::$app->getModule('admin')->controllerMap;
-        
+
         if (count($map) > 0) {
-            
-            foreach($map as $alias => $className) {
+            foreach ($map as $alias => $className) {
                 $class = sprintf('%s/%s', 'admin', $alias);
                 $this->controller[] = $class;
             }
-            
-            parent::init();     
+
+            parent::init();
         } else {
             $this->controller = [];
         }

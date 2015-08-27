@@ -55,74 +55,72 @@ class Nav extends \yii\db\ActiveRecord
     public function reindex()
     {
         $i = 1;
-        foreach(self::find()->where(['cat_id' => $this->cat_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $model) {
+        foreach (self::find()->where(['cat_id' => $this->cat_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $model) {
             Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $i], 'id=:id', ['id' => $model['id']])->execute();
-            $i++;
+            ++$i;
         }
     }
-    
+
     public static function moveToBefore($moveNavId, $toBeforeNavId)
     {
         $move = self::findOne($moveNavId);
         $to = self::findOne($toBeforeNavId);
-        
+
         $to->moveUpstairs();
-        
+
         $move->cat_id = $to->cat_id;
         $move->parent_nav_id = $to->parent_nav_id;
         $move->sort_index = $to->sort_index;
         $move->update();
-        
+
         return true;
     }
-    
+
     public static function moveToAfter($moveNavId, $toAfterNavId)
     {
         $move = self::findOne($moveNavId);
         $to = self::findOne($toAfterNavId);
-    
+
         $to->moveDownstairs();
-    
+
         $move->cat_id = $to->cat_id;
         $move->parent_nav_id = $to->parent_nav_id;
         $move->sort_index = $to->sort_index;
         $move->update();
-    
+
         return true;
     }
-    
+
     public static function moveToChild($moveNavId, $droppedOnItemId)
     {
         $move = self::findOne($moveNavId);
         $on = self::findOne($droppedOnItemId);
-    
+
         $move->cat_id = $on->cat_id;
         $move->parent_nav_id = $on->id;
         $move->update();
-    
+
         return true;
     }
-    
+
     public function moveUpstairs()
     {
         $startIndex = (int) $this->sort_index;
-        foreach(self::find()->where("sort_index >= :index", ['index' => $startIndex])->andWhere(['cat_id' => $this->cat_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $item) {
-            $startIndex++;
+        foreach (self::find()->where('sort_index >= :index', ['index' => $startIndex])->andWhere(['cat_id' => $this->cat_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $item) {
+            ++$startIndex;
             $up = Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id', ['id' => $item['id']])->execute();
         }
-        
     }
-    
+
     public function moveDownstairs()
     {
         $startIndex = (int) $this->sort_index;
-        foreach(self::find()->where("sort_index >= :index", ['index' => $startIndex])->andWhere(['cat_id' => $this->cat_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $item) {
-            $startIndex--;
+        foreach (self::find()->where('sort_index >= :index', ['index' => $startIndex])->andWhere(['cat_id' => $this->cat_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $item) {
+            --$startIndex;
             $up = Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id', ['id' => $item['id']])->execute();
         }
-    
     }
-    
+
     public function createPage($parentNavId, $catId, $langId, $title, $rewrite, $layoutId)
     {
         $_errors = [];
@@ -256,7 +254,7 @@ class Nav extends \yii\db\ActiveRecord
     public static function getItemsData($navId, $displayHidden = false)
     {
         return \yii::$app->db->createCommand('SELECT t1.id, t1.parent_nav_id, t2.id as nav_item_id, t2.title, t2.rewrite, t3.rewrite AS cat_rewrite, t4.name AS lang_name, t4.id AS lang_id, t4.short_code AS lang_short_code FROM cms_nav as t1 LEFT JOIN (cms_nav_item as t2 LEFT JOIN (admin_lang as t4) ON (t2.lang_id=t4.id), cms_cat as t3) ON (t1.id=t2.nav_id AND t1.cat_id=t3.id) WHERE t1.parent_nav_id=:id AND t1.is_hidden=:hidden AND t1.is_deleted=0 ORDER by sort_index ASC')->bindValues([
-            ':id' => $navId, ':hidden' => (int) $displayHidden
+            ':id' => $navId, ':hidden' => (int) $displayHidden,
         ])->queryAll();
     }
 }

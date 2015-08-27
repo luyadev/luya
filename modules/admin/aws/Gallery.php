@@ -11,7 +11,7 @@ class Gallery extends \admin\ngrest\base\ActiveWindow
     public $imageIdFieldName = null;
 
     public $refFieldName = null;
-    
+
     public $module = 'admin';
 
     /**
@@ -42,16 +42,16 @@ class Gallery extends \admin\ngrest\base\ActiveWindow
     {
         $data = (new \yii\db\Query())->select(['image_id' => $this->imageIdFieldName])->where([$this->refFieldName => $this->getItemId()])->from($this->refTableName)->all();
         $files = [];
-        foreach($data as $k => $v) {
+        foreach ($data as $k => $v) {
             $files[] = [
                 'source' => \yii::$app->storage->image->filterApply($v['image_id'], 'small-crop'),
                 'image_id' => $v['image_id'],
             ];
         }
-        
+
         return $files;
     }
-    
+
     private $_uploaderErrors = [
         0 => 'There is no error, the file uploaded with success',
         1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
@@ -62,7 +62,7 @@ class Gallery extends \admin\ngrest\base\ActiveWindow
         7 => 'Failed to write file to disk.',
         8 => 'A PHP extension stopped the file upload.',
     ];
-    
+
     /**
      * <URL>/admin/api-admin-storage/files-upload.
      *
@@ -71,7 +71,7 @@ class Gallery extends \admin\ngrest\base\ActiveWindow
      * @todo http://php.net/manual/en/features.file-upload.errors.php
      *
      * @return array|json Key represents the uploaded file name, value represents the id in the database.
-    */
+     */
     public function callbackUpload()
     {
         $files = [];
@@ -81,16 +81,16 @@ class Gallery extends \admin\ngrest\base\ActiveWindow
             }
             $fileId = Yii::$app->storage->file->create($file['tmp_name'], $file['name'], false, Yii::$app->request->post('folderId', 0));
             $imageId = \yii::$app->storage->image->create($fileId);
-            
+
             if ($imageId) {
                 $in = \yii::$app->db->createCommand()->insert($this->refTableName, [
                     $this->imageIdFieldName => (int) $imageId,
                     $this->refFieldName => (int) $this->getItemId(),
                 ])->execute();
+
                 return ['upload' => true, 'message' => 'file uploaded succesfully'];
             }
         }
-    
     }
     /*
     public function callbackUpload()

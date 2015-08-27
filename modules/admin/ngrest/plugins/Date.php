@@ -7,6 +7,7 @@ class Date extends \admin\ngrest\base\Plugin
     public function renderList($doc)
     {
         $doc->appendChild($doc->createElement('span', '{{item.'.$this->name.'*1000 | date : \'dd.MM.yyyy\'}}'));
+
         return $doc;
     }
 

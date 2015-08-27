@@ -57,6 +57,7 @@ class Block extends \admin\ngrest\base\Model
         $object = new $class();
         $object->setEnvOption('blockId', $id);
         $object->setEnvOption('context', $context);
+
         return $object;
     }
 }

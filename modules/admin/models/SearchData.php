@@ -15,14 +15,14 @@ class SearchData extends \yii\db\ActiveRecord
     {
         return 'admin_search_data';
     }
-    
+
     public function rules()
     {
         return [
             [['query', 'num_rows', 'user_id'], 'required'],
         ];
     }
-    
+
     public function onBeforeValidate()
     {
         $this->timestamp_create = time();

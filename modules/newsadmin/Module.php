@@ -20,5 +20,4 @@ class Module extends \admin\base\Module
                 ->itemApi('Tags', 'newsadmin-tag-index', 'mdi-action-label-outline', 'api-news-tag')
         ->menu();
     }
-
 }

@@ -3,7 +3,6 @@
 namespace cmsadmin;
 
 use Yii;
-use yii\db\Query;
 use cmsadmin\models\Block;
 use cmsadmin\models\Layout;
 use luya\commands\ExecutableController;
@@ -126,7 +125,6 @@ class Module extends \admin\base\Module
                 }
                 $_placeholders = ['placeholders' => $_placeholders];
                 if ($layoutItem) {
-                    
                     $match = $this->comparePlaceholders($_placeholders, json_decode($layoutItem->json_config, true));
                     if ($match) {
                         continue;
@@ -153,50 +151,50 @@ class Module extends \admin\base\Module
                     $_log['layouts'][$file] = "new cmslayout $file found and inserted.";
                 }
             }
-            
-            foreach(Layout::find()->where(['not in', 'view_file', $layoutFiles])->all() as $layoutItem) {
+
+            foreach (Layout::find()->where(['not in', 'view_file', $layoutFiles])->all() as $layoutItem) {
                 $layoutItem->delete();
             }
         }
-        
+
         return $_log;
     }
-    
+
     /**
-     * 
      * @param array $array1
      * @param array $array2
-     * @return boolean true if the same, false if not the same
+     *
+     * @return bool true if the same, false if not the same
      */
     private function comparePlaceholders($array1, $array2)
     {
-        if (!array_key_exists('placeholders', $array1) || !array_key_exists('placeholders', $array2)) { 
+        if (!array_key_exists('placeholders', $array1) || !array_key_exists('placeholders', $array2)) {
             return false;
         }
-        
+
         $a1 = $array1['placeholders'];
         $a2 = $array2['placeholders'];
-        
+
         if (count($a1) !== count($a2)) {
             return false;
         }
-        
-        foreach($a1 as $key => $holder) {
+
+        foreach ($a1 as $key => $holder) {
             if (!array_key_exists($key, $a2)) {
                 return false;
             }
-            
-            foreach($holder as $var => $value) {
+
+            foreach ($holder as $var => $value) {
                 if (!array_key_exists($var, $a2[$key])) {
                     return false;
                 }
-                
+
                 if ($value != $a2[$key][$var]) {
                     return false;
                 }
             }
         }
-        
+
         return true;
     }
 }

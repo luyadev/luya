@@ -7,7 +7,7 @@ use Yii;
 class ModuleBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
-    
+
     public function name()
     {
         return 'Modul';
@@ -28,7 +28,7 @@ class ModuleBlock extends \cmsadmin\base\Block
                 ['var' => 'moduleController', 'label' => 'Controller Name (ohne Controller suffix)', 'type' => 'zaa-text'],
                 ['var' => 'moduleAction', 'label' => 'Action Name (ohne action prefix)', 'type' => 'zaa-text'],
                 ['var' => 'moduleActionArgs', 'label' => 'Action Arguments (json: {"var":"value"})', 'type' => 'zaa-text'],
-            ]
+            ],
         ];
     }
 
@@ -48,23 +48,23 @@ class ModuleBlock extends \cmsadmin\base\Block
     {
         return '{{extras.moduleContent}}';
     }
-    
+
     private function moduleContent($moduleName)
     {
         if ($this->isAdminContext()) {
-            return null;
+            return;
         }
-        /**
+        /*
          * in the admin context (means env options are empty) we do not have to render the module!
          */
         if (empty($moduleName) || count($this->getEnvOptions()) === 0) {
-            return null;
+            return;
         }
-        
+
         $ctrl = $this->getCfgValue('moduleController');
         $action = $this->getCfgValue('moduleAction');
         $actionArgs = json_decode($this->getCfgValue('moduleActionArgs'), true);
-        
+
         // get module
         $module = Yii::$app->getModule($moduleName);
         $module->setContext('cms');
@@ -75,10 +75,10 @@ class ModuleBlock extends \cmsadmin\base\Block
         if ($ctrl && $action) {
             $reflection->setInitRun($ctrl, $action, $actionArgs);
         }
-        
+
         $reflectionRequest = $reflection->getRequestResponse();
         $response = $reflection->$reflectionRequest();
-        
+
         return $response;
     }
 }

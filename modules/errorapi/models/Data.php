@@ -7,7 +7,7 @@ class Data extends \yii\db\ActiveRecord
     public $msg = null;
 
     public $serverName = null;
-    
+
     public static function tableName()
     {
         return 'error_data';
@@ -26,8 +26,6 @@ class Data extends \yii\db\ActiveRecord
 
         $this->on(self::EVENT_BEFORE_INSERT, [$this, 'eventBeforeCreate']);
     }
-    
-    
 
     public function eventBeforeCreate()
     {
@@ -44,7 +42,7 @@ class Data extends \yii\db\ActiveRecord
         $this->timestamp_create = time();
         $this->identifier = $this->hash($this->msg, 'luya');
     }
-    
+
     private function hash($msg)
     {
         return sprintf('%s', hash('crc32b', $msg));

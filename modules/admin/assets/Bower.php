@@ -16,17 +16,17 @@ class Bower extends \luya\base\Asset
         'angular-slugify/angular-slugify.js',
         'twig.js/twig.min.js',
         'ng-wig/dist/ng-wig.min.js',
-        
+
         'ng-file-upload/ng-file-upload.min.js',
         'ng-file-upload/ng-file-upload-shim.min.js',
-        
+
         // ace
         // 'ace-builds/src-min-noconflict/ace.js', // "bower-asset/angular-ui-ace" : "0.*@stable",
         // 'angular-ui-ace/ui-ace.js', // "bower-asset/ace-builds" : "1.1.8@stable",
     ];
-    
+
     public $css = [
         'angular-loading-bar/build/loading-bar.min.css',
-        'ng-wig/dist/css/ng-wig.css'
+        'ng-wig/dist/css/ng-wig.css',
     ];
 }

@@ -1,6 +1,5 @@
 <?php
 
-use yii\db\Schema;
 use yii\db\Migration;
 
 class m150615_094744_admin_user_login extends Migration
@@ -8,11 +7,11 @@ class m150615_094744_admin_user_login extends Migration
     public function up()
     {
         $this->createTable('admin_user_login', [
-            "id" => "pk",
-            "user_id" => "int(11) NOT NULL",
-            "timestamp_create" => "int(11) NOT NULL",
-            "auth_token" => "varchar(120) NOT NULL",
-            "ip" => "varchar(15) NOT NULL",
+            'id' => 'pk',
+            'user_id' => 'int(11) NOT NULL',
+            'timestamp_create' => 'int(11) NOT NULL',
+            'auth_token' => 'varchar(120) NOT NULL',
+            'ip' => 'varchar(15) NOT NULL',
         ]);
     }
 
@@ -22,7 +21,7 @@ class m150615_094744_admin_user_login extends Migration
 
         return false;
     }
-    
+
     /*
     // Use safeUp/safeDown to run migration code within a transaction
     public function safeUp()

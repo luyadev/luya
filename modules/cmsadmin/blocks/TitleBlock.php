@@ -21,13 +21,12 @@ class TitleBlock extends \cmsadmin\base\Block
         return [
             'vars' => [
                 ['var' => 'content', 'label' => 'Titel', 'type' => 'zaa-text'],
-                ['var' => 'headingType', 'label' => 'Grösse', 'type' => 'zaa-select', 'initvalue' => 'h1', 'options' =>
-                    [
+                ['var' => 'headingType', 'label' => 'Grösse', 'type' => 'zaa-select', 'initvalue' => 'h1', 'options' => [
                         ['value' => 'h1', 'label' => 'Überschrift 1'],
                         ['value' => 'h2', 'label' => 'Überschrift 2'],
                         ['value' => 'h3', 'label' => 'Überschrift 3'],
                         ['value' => 'h4', 'label' => 'Überschrift 4'],
-                        ['value' => 'h5', 'label' => 'Überschrift 5']
+                        ['value' => 'h5', 'label' => 'Überschrift 5'],
                     ],
                 ],
             ],

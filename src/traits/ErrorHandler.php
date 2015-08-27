@@ -10,7 +10,7 @@ trait ErrorHandler
     public $api = 'http://luya.io/errorapi';
 
     public $transferException = false;
-    
+
     public function renderException($exception)
     {
         if ($exception instanceof NotFoundHttpException || !$this->transferException) {

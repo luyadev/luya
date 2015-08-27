@@ -2,7 +2,6 @@
 
 namespace admin\apis;
 
-use admin\Module;
 use admin\models\UserOnline;
 
 /**
@@ -13,6 +12,7 @@ class TimestampController extends \admin\base\RestController
     public function actionIndex()
     {
         UserOnline::clearList();
+
         return UserOnline::getList();
     }
 }

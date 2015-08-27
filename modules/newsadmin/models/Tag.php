@@ -45,5 +45,4 @@ class Tag extends \admin\ngrest\base\Model
 
         return $config;
     }
-
 }

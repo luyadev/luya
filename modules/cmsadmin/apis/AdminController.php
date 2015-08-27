@@ -18,9 +18,8 @@ class AdminController extends \admin\base\RestController
     {
         $groups = [];
         foreach (BlockGroup::find()->asArray()->all() as $group) {
-            
             $blocks = [];
-            foreach(Block::find()->where(['group_id' => $group['id']])->all() as $block) {
+            foreach (Block::find()->where(['group_id' => $group['id']])->all() as $block) {
                 $obj = Block::objectId($block['id'], 'admin');
                 if (!$obj) {
                     continue;
@@ -30,15 +29,16 @@ class AdminController extends \admin\base\RestController
                     'name' => $obj->getFullName(),
                 ];
             }
-            
+
             $groups[] = [
                 'group' => $group,
                 'blocks' => $blocks,
             ];
         }
+
         return $groups;
     }
-    
+
     /*
     public function actionGetAllBlocks()
     {

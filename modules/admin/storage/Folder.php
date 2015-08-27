@@ -3,7 +3,6 @@
 namespace admin\storage;
 
 use admin\models\StorageFolder;
-use admin\models\admin\models;
 
 class Folder
 {
@@ -16,7 +15,7 @@ class Folder
 
         return $model->save();
     }
-    
+
     public function updateFolder($folderId, array $fields)
     {
         $model = StorageFolder::findOne($folderId);
@@ -24,6 +23,7 @@ class Folder
             return false;
         }
         $model->attributes = $fields;
+
         return $model->update();
     }
 
@@ -35,20 +35,21 @@ class Folder
     private function partialFolderTree($parentId)
     {
         $data = [];
-        foreach($this->getSubFolders($parentId) as $row) {
+        foreach ($this->getSubFolders($parentId) as $row) {
             $data[] = [
                 'data' => $row,
                 '__items' => $this->partialFolderTree($row['id']),
             ];
         }
+
         return $data;
     }
-    
+
     public function getFolderTree()
     {
-        return $this->partialFolderTree(0);  
+        return $this->partialFolderTree(0);
     }
-    
+
     /**
      * get all sub folders for $folderId.
      *

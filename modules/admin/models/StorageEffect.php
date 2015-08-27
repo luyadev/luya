@@ -5,14 +5,14 @@ namespace admin\models;
 /**
  * This is the model class for table "admin_group".
  *
- * @property integer $group_id
+ * @property int $group_id
  * @property string $name
  * @property string $text
  */
 class StorageEffect extends \admin\ngrest\base\Model
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -20,7 +20,7 @@ class StorageEffect extends \admin\ngrest\base\Model
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {

@@ -18,7 +18,7 @@ class Ace extends \admin\ngrest\base\Plugin
         $this->theme = $theme;
         $this->mode = $mode;
     }
-    
+
     public function renderList($doc)
     {
         return $doc;

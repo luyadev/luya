@@ -28,8 +28,7 @@ class FileListBlock extends \cmsadmin\base\Block
                 ['var' => 'files', 'label' => 'Dateien', 'type' => 'zaa-file-array-upload'],
             ],
             'cfgs' => [
-                ['var' => 'showType', 'label' => 'Dateityp anzeigen?', 'initvalue' => 0, 'type' => 'zaa-select', 'options' =>
-                    [
+                ['var' => 'showType', 'label' => 'Dateityp anzeigen?', 'initvalue' => 0, 'type' => 'zaa-select', 'options' => [
                         ['value' => '1', 'label' => 'Ja'],
                         ['value' => '0', 'label' => 'Nein'],
                     ],
@@ -46,21 +45,19 @@ class FileListBlock extends \cmsadmin\base\Block
         ];
     }
 
-    public function  getFiles()
+    public function getFiles()
     {
         $fileEntries = $this->getVarValue('files');
         $files = [];
 
-        if(!empty($fileEntries)) {
-            foreach($fileEntries as $fileEntry) {
-
+        if (!empty($fileEntries)) {
+            foreach ($fileEntries as $fileEntry) {
                 if (array_key_exists('fileId', $fileEntry)) {
                     $files[] = [
                         'meta' => $fileEntry,
                         'file' => Yii::$app->storage->file->get($fileEntry['fileId']),
                     ];
                 }
-
             }
         }
 

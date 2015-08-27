@@ -20,11 +20,10 @@ class MapBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'address', 'label' => 'Adresse', 'type' => 'zaa-text', 'placeholder'=>'Zephir Software Design AG, Tramstrasse 66, 4142 Münchenstein'],
+                ['var' => 'address', 'label' => 'Adresse', 'type' => 'zaa-text', 'placeholder' => 'Zephir Software Design AG, Tramstrasse 66, 4142 Münchenstein'],
             ],
             'cfgs' => [
-                ['var' => 'zoom', 'label' => 'Zoom', 'type' => 'zaa-select', 'initvalue' => '12', 'options' =>
-                    [
+                ['var' => 'zoom', 'label' => 'Zoom', 'type' => 'zaa-select', 'initvalue' => '12', 'options' => [
                         ['value' => '0', 'label' => 'Komplett herausgezoomt'],
                         ['value' => '1', 'label' => '4000 km'],
                         ['value' => '2', 'label' => '2000 km (Welt)'],
@@ -49,8 +48,7 @@ class MapBlock extends \cmsadmin\base\Block
                         ['value' => '21', 'label' => '2.5 m'],
                     ],
                 ],
-                ['var' => 'maptype', 'label' => 'Katentyp', 'type' => 'zaa-select', 'options' =>
-                    [
+                ['var' => 'maptype', 'label' => 'Katentyp', 'type' => 'zaa-select', 'options' => [
                         ['value' => 'm', 'label' => 'Strassenkarte'],
                         ['value' => 'k', 'label' => 'Satellitenkarte'],
                         ['value' => 'h', 'label' => 'Satellitenkarte mit Strassennamen'],
@@ -71,7 +69,6 @@ class MapBlock extends \cmsadmin\base\Block
 
     public function twigFrontend()
     {
-
         return '{% if vars.address is not empty %}<div class="embed-responsive embed-responsive-16by9"><iframe src="http://maps.google.com/maps?f=q&source=s_q&hl=de&geocode=&q={{ extras.address }}&z={{ extras.zoom }}&t={{ extras.maptype }}&output=embed" width="600" height="450" frameborder="0" style="border:0"></iframe></div>{% endif %}';
     }
 

@@ -13,7 +13,7 @@ abstract class Plugin
     protected $ngModel = null;
 
     protected $gridCols = null;
-    
+
     private $_model = null;
 
     public function setModel($model)
@@ -25,7 +25,7 @@ abstract class Plugin
     {
         return $this->_model;
     }
-    
+
     protected function createBaseElement($doc, $type)
     {
         $elmn = $doc->createElement($type);
@@ -34,7 +34,7 @@ abstract class Plugin
         $elmn->setAttribute('model', $this->ngModel);
         $elmn->setAttribute('label', $this->alias);
         $elmn->setAttribute('grid', $this->gridCols);
-        
+
         return $elmn;
     }
 
@@ -51,12 +51,12 @@ abstract class Plugin
     {
         return 'service.'.$this->name.'.'.$name;
     }
-    
+
     public function serviceData()
     {
         return false;
     }
-    
+
     public function onBeforeCreate($fieldValue)
     {
         return false;
@@ -76,7 +76,7 @@ abstract class Plugin
     {
         return false;
     }
-    
+
     public function onAfterNgRestList($fieldValue)
     {
         return false;
