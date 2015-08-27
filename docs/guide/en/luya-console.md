@@ -40,7 +40,7 @@ exec
 if you are creating a new project you can use the setup proccess to prefill your database (after pressql (migration) command).
 
 ```
-php index.php exec/setup
+php index.php setup
 ```
 
 the above command will ask for an email adress and password.
@@ -50,9 +50,8 @@ the above command will ask for an email adress and password.
 The import command will call the import() method inside of your Module class.
 
 ```
-php index.php exec/import
+php index.php import
 ```
-
 A uscase for the abovce example are project(app) layouts and blocks. The importer detect layouts and blocks defined in the project and inserts those into your local database.
 
 crud

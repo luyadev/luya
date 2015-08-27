@@ -68,7 +68,7 @@ Setup
 Als nächstes führen wir den Setup-Befehl aus welcher einen Benutzer und Gruppe erstellt. Dazu gehen wir wieder ins Terminal:
 
 ```
-php index.php exec/setup
+php index.php setup
 ```
 
 Nach dem Eingeben deiner Daten kannst du nun die Administration im Browser öffnen. Wenn du das Projekt in deinem `htdocs` Hauptverzeichniss erstellt hast könnte die Adresse zum Beispiel so aussehen `http://localhost/luya-kickstarter/admin`.

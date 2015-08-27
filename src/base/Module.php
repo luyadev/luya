@@ -172,7 +172,7 @@ abstract class Module extends \yii\base\Module
      *
      * @return void|string
      */
-    public function import(\luya\commands\ExecutableController $exec)
+    public function import(\luya\commands\ImportController $exec)
     {
         return false;
     }

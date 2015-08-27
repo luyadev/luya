@@ -1,6 +1,6 @@
 Projekt Filter
 =============
-Mit einem Projekt Filter kannst du *Bilder* nach deinen Projekt spezifischen bedürfnissen verarbeiten (Zuscheiden, Verkleinern, Thumbnail). Wenn du einen neuen Projekt-Filter erstellst kann dieser mit dem cli command `exec/import` eingelesen werden.
+Mit einem Projekt Filter kannst du *Bilder* nach deinen Projekt spezifischen bedürfnissen verarbeiten (Zuscheiden, Verkleinern, Thumbnail). Wenn du einen neuen Projekt-Filter erstellst kann dieser mit dem cli command `exec` eingelesen werden.
 
 > Die idee hinter den Klassen für die Filter liegt darin alle Daten via Version-Kontroller zu tracken. Somit verfügst du und dein Projekt-Kameraden immer über die selben Einstellungen.
 
@@ -37,10 +37,10 @@ class MyFilter extends \admin\base\Filter
 }
 ```
 
-In der `chain()` methode kannst du mehrer verschieden Effekt hintereinander reihen, eine Übersicht aller effekt findest du unter **Admin->Effects**. Den so eben erstellten `MyFilter` kannst du nun mit dem `exec/import` befehl importieren. Öffne dafür das *Terminal* und wechsle in das `public_html` Verzeichnis wo deine index.php Datei liegt. 
+In der `chain()` methode kannst du mehrer verschieden Effekt hintereinander reihen, eine Übersicht aller effekt findest du unter **Admin->Effects**. Den so eben erstellten `MyFilter` kannst du nun mit dem `exec` befehl importieren. Öffne dafür das *Terminal* und wechsle in das `public_html` Verzeichnis wo deine index.php Datei liegt. 
 
 ```
-php index.php exec/import
+php index.php exec
 ```
 
 Filter Anwenden

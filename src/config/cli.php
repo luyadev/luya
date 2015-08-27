@@ -3,10 +3,12 @@
 $config = [
     'controllerMap' => [
         'migrate' => '\luya\commands\MigrateController',
-        'exec' => '\luya\commands\ExecutableController',
+        //'exec' => '\luya\commands\ExecutableController',
         'crud' => '\luya\commands\CrudController',
         'module' => '\luya\commands\ModuleController',
         'command' => '\luya\commands\CommandController',
+        'import' => '\luya\commands\ImportController',
+        'setup' => '\luya\commands\SetupController',
     ],
     'components' => [
         'mail' => [

@@ -1,4 +1,4 @@
-The `exec/crud` command will guide you trough the described steps below.
+The `crud` command will guide you trough the described steps below.
 
 1. Create Model and NG Rest Config
 2. Create API Controller

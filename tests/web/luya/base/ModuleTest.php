@@ -10,9 +10,8 @@ class ModuleTest extends \tests\web\Base
     {
         $module = Yii::$app->getModule('admin');
         
-        $exec = new \luya\commands\ExecutableController('id', $module);
+        $exec = new \luya\commands\ImportController('id', $module);
         $e = $module->import($exec);
         
-        $this->assertArrayHasKey('filters', $e);
     }
 }

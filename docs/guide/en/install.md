@@ -40,7 +40,7 @@ It will ask for your permissions to execute the database migrations.
 now execute the php command:
 
 ```
-php index.php exec/setup
+php index.php setup
 ```
 
 The setup proccess will ask you for an email and password to store your personal login data inside the database (of course the password will be encrypted).

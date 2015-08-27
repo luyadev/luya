@@ -4,7 +4,7 @@ FILTERS
 Create new Filter
 -----------------
 
-Create your custom filters which will be imported during exec/import
+Create your custom filters which will be imported during import
 
 ```php
 <?php

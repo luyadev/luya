@@ -62,20 +62,11 @@ class Module extends \admin\base\Module
         ];
     }
 
-    public function import(\luya\commands\ExecutableController $exec)
+    public function import(\luya\commands\ImportController $import)
     {
-        $log = [
-            'filters' => [],
+        return [
+            '\\admin\\importers\\AuthImporter',
+            '\\admin\\importers\\FilterImporter',  
         ];
-
-        foreach ($exec->getFilesNamespace('filters') as $filterClassName) {
-            if (!class_exists($filterClassName)) {
-                continue;
-            }
-            $object = new $filterClassName();
-            $log['filters'][$filterClassName] = $object->save();
-        }
-
-        return $log;
     }
 }

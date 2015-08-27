@@ -75,9 +75,11 @@ class ExecutableController extends \yii\console\Controller
         $this->stdout("the following exec commands are avialable:\n- exec/auth\n\n- exec/import\n");
     }
 
+    
     public function actionImport()
     {
         $this->execAuth();
+        /*
         $import = $this->execImport();
         if (count($import) == 0) {
             echo 'No response from the exec/import.';
@@ -85,8 +87,10 @@ class ExecutableController extends \yii\console\Controller
         }
         print_r($import);
         exit(0);
+        */
     }
 
+    /*
     private function execImport()
     {
         $response = [];
@@ -103,6 +107,8 @@ class ExecutableController extends \yii\console\Controller
 
         return $response;
     }
+    
+    */
 
     /**
      * find all auth.php files, invoke them and return to \yii::$app->auth->addRule.

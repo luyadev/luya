@@ -26,12 +26,12 @@ Die Arbeitsumgebung muss nun auf dein Konfiguration angepasst werden. Wechsle de
 
 Als nächstes führen wir den `composer install` befehl aus innerhalb des dev env projekt ordners `envs/dev`. Dies wird dir alle nötigen Resourcen in den Vendor ORdner kopieren und ein PSR4 binding auf deine lokalen *LUYA* Daten.
 
-Nun werden die Terminal-befehle `exec/migrate` und `exec/setup` ausgeführt, dazu öffnen Sie das Terminal und wechseln in das `envs/dev/public_html` Verzeichnis und führen folgende Befehle aus:
+Nun werden die Terminal-befehle `migrate` und `setup` ausgeführt, dazu öffnen Sie das Terminal und wechseln in das `envs/dev/public_html` Verzeichnis und führen folgende Befehle aus:
 
 ```sh
 php index.php migrate
 
-php index.php exec/setup
+php index.php setup
 ```
 
 Die Datenbank-Tabellen sind nun erstellt und eine Benutzer und deren nötigen Daten wurden eingerichtet, testen Sie nun die Devs installation in dem Sie `envs/dev/public_html` im Browser öffnen.
