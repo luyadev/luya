@@ -4,7 +4,7 @@ namespace luya\commands;
 
 use Yii;
 
-class ImportController extends \luya\base\Command
+class ImportController extends \luya\base\Command implements \luya\interfaces\ImportCommand
 {
     private $_dirs = [];
     
