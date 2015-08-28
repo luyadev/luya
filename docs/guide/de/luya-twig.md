@@ -23,6 +23,7 @@ werden die Twig Templates mit der endung `*.twig` verwendeten views gerendet. Um
 | asset             | `asset('\\my\\project\\Asset')` | Gibt das Klassen Objekt für eine Asset Klasse zurück. `false` falls nicht gefunden.
 | image             | `image(123)` | Gibt das aktuelle Bild objekt für die angebgeben ID zurück. `false` falls nicht gefunden.
 | filterApply       | `filterApply(123, 'my-filter-to-apply')` | Wendet einen Filter auf ein Bild an (falls dieser noch nicht angwendet wurde) und gibt den aboslute Bildpfad zurück des neue generierteen Bildes.
+|element |`element('button','arg1','arg2')` |Ruf das Html Element `button` auf mit den Paramteren `arg1` und `arg2`.
 
 ### Variabeln
 

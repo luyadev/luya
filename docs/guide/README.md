@@ -19,6 +19,7 @@ APP (your luya project application)
 - app-menu.md
 - app-translation.md
 - app-module.md
+- app-elements.md
 
 ADMIN (general admin infos)
 --
