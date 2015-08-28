@@ -31,6 +31,9 @@ $config = [
         'composition' => [
             'class' => '\luya\components\Composition',
         ],
+        'element' => [
+            'class' => '\luya\components\Element',
+        ]
     ],
     'bootstrap' => [
         'luya\web\Bootstrap',

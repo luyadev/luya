@@ -11,7 +11,7 @@ use Yii;
  *
  * from file:
  * $twig = Yii::$app->twig->env(new \Twig_Loader_Filesystem(\yii::getAlias('@app/views/cmslayouts/')));
- * $html = $twig->render(['foo' => 'var']);
+ * $html = $twig->render('xyz.twig', ['foo' => 'var']);
  *
  * @author nadar
  */
@@ -21,23 +21,29 @@ class Twig extends \yii\base\Component
     {
         return [
             'links' => function ($cat, $lang, $parent_nav_id) {
-                return \yii::$app->links->findByArguments(['cat' => $cat, 'lang' => $lang, 'parent_nav_id' => (int) $parent_nav_id]);
+                return Yii::$app->links->findByArguments(['cat' => $cat, 'lang' => $lang, 'parent_nav_id' => (int) $parent_nav_id]);
             },
             'linksFindParent' => function ($level) {
-                return \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, $level);
+                return \luya\helpers\Menu::parentNavIdByCurrentLink(Yii::$app->links, $level);
             },
             'linkActivePart' => function ($part) {
-                return \yii::$app->links->getActiveUrlPart($part);
+                return Yii::$app->links->getActiveUrlPart($part);
             },
             'asset' => function ($name) {
-                return \yii::$app->getAssetManager()->getBundle($name);
+                return Yii::$app->getAssetManager()->getBundle($name);
             },
             'filterApply' => function ($imageId, $filterIdentifier) {
-                return \yii::$app->storage->image->filterApply($imageId, $filterIdentifier);
+                return Yii::$app->storage->image->filterApply($imageId, $filterIdentifier);
             },
             'image' => function ($imageId) {
-                return \yii::$app->storage->image->get($imageId);
+                return Yii::$app->storage->image->get($imageId);
             },
+            'element' => function () {
+                $args = func_get_args();
+                $method = $args[0];
+                unset($args[0]);
+                return Yii::$app->element->run($method, $args);
+            }
         ];
     }
 
