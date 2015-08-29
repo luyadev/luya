@@ -1,5 +1,5 @@
 
-[![Luya Logo](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/luya.png) 
+.center[![Luya Logo](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/luya.png)]
 
 [![Latest Stable Version](https://poser.pugx.org/zephir/luya/v/stable)](https://packagist.org/packages/zephir/luya) 
 [![Total Downloads](https://poser.pugx.org/zephir/luya/downloads)](https://packagist.org/packages/zephir/luya) 
