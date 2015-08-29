@@ -1,12 +1,11 @@
 
-.center[![Luya Logo](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/luya.png)]
+![Luya Logo](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/luya.png)
 
-[![Latest Stable Version](https://poser.pugx.org/zephir/luya/v/stable)](https://packagist.org/packages/zephir/luya) 
-[![Total Downloads](https://poser.pugx.org/zephir/luya/downloads)](https://packagist.org/packages/zephir/luya) 
 [![License](https://poser.pugx.org/zephir/luya-module-admin/license)](https://packagist.org/packages/zephir/luya-module-admin)
 [![Build Status](https://travis-ci.org/zephir/luya.svg)](https://travis-ci.org/zephir/luya)
 [![Code Climate](https://codeclimate.com/github/zephir/luya/badges/gpa.svg)](https://codeclimate.com/github/zephir/luya)
 [![Dependency Status](https://www.versioneye.com/user/projects/55d0ce4315ff9b0014000166/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55d0ce4315ff9b0014000166)
+[![Total Downloads](https://poser.pugx.org/zephir/luya/downloads)](https://packagist.org/packages/zephir/luya) 
 
 What is **LUYA**? We have build a *fast*, *modular* and *beautiful* looking system to create content based on blocks or database tables. *LUYA* is based on the [Yii2 Framework](https://github.com/yiisoft/yii2), [Angular](https://angularjs.org) and [Materialize CSS](materializecss.com).
 
