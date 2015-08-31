@@ -85,6 +85,11 @@ class Element extends \yii\base\Component
         return $list;
     }
     
+    public function getAll()
+    {
+        return $this->_elements;
+    }
+    
     public function __call($name, $params)
     {
         return $this->run($name, $params);
