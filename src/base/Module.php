@@ -41,11 +41,19 @@ abstract class Module extends \yii\base\Module
     public $isAdmin = false;
 
     /**
+     * An array containing all components which should be registered for the current module. If the component does not exists
+     * an Exception will be thrown.
+     * 
      * @var array
      */
     public $requiredComponents = [];
 
     /**
+     * Enable or Disable where the PATH to the layout file should be inside the @app namespace or inside your module.
+     * 
+     * + true = looking for layout file in `@app/views/<ID>/layouts`.
+     * + false = looking for layout file in @module/views/layouts/`.
+     * 
      * This variable is only available if your not in a context call. A context call would be if the cms renders the module.
      *
      * @var bool
