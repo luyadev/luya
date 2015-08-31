@@ -23,5 +23,6 @@ git subsplit publish "
     modules/galleryadmin:$BASE/luya-module-galleryadmin.git
     modules/crawler:$BASE/luya-module-crawler.git
     modules/crawleradmin:$BASE/luya-module-crawleradmin.git
+    modules/styleguide:$BASE/luya-module-styleguide.git
     envs/kickstarter:$BASE/luya-kickstarter.git
 " --heads=master -q

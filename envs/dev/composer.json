@@ -42,7 +42,8 @@
             "galleryadmin\\" : "../../modules/galleryadmin",
             "crawler\\" : "../../modules/crawler",
             "crawleradmin\\" : "../../modules/crawleradmin",
-            "moduletest\\" : "modules/moduletest"
+            "moduletest\\" : "modules/moduletest",
+            "styleguide\\" : "../../modules/styleguide"
         }
     }
 }

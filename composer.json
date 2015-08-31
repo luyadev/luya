@@ -48,7 +48,8 @@
             "gallery\\" : "modules/gallery",
             "galleryadmin\\" : "modules/galleryadmin",
             "crawler\\" : "modules/crawler",
-            "crawleradmin\\" : "modules/crawleradmin"
+            "crawleradmin\\" : "modules/crawleradmin",
+            "styleguide\\" : "modules/styleguide"
         }
     },
 	"extra": {

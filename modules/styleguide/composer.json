@@ -1,0 +1,27 @@
+{
+	"name" : "zephir/luya-module-styleguide",
+	"description" : "Zephir Luya Styleguide",
+	"type" : "luya-module",
+	"keywords" : ["php", "luya", "module", "styleguide"],
+	"license": "MIT",
+	"homepage" : "http://luya.io",
+	"minimum-stability": "dev",
+	"authors" : [
+		{
+			"name" : "Basil",
+			"email" : "git@nadar.io",
+			"homepage" : "https://github.com/nadar"
+		}
+	],
+	"support" : {
+		"issues" : "https://github.com/zephir/luya/issues"
+	},
+	"require" : {
+		"zephir/luya" : "*"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"styleguide\\" : ""
+		}
+	}
+}
