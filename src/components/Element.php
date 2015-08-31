@@ -70,6 +70,21 @@ class Element extends \yii\base\Component
         $this->_elements[$name] = $closure;
     }
     
+    /**
+     * returns all element names to use with run without their closre function (would not work in
+     * the context returned from getNames()).
+     * 
+     * @return array
+     */
+    public function getNames()
+    {
+        $list = [];
+        foreach($this->_elements as $name => $closure) {
+            $list[] = $name;
+        }
+        return $list;
+    }
+    
     public function __call($name, $params)
     {
         return $this->run($name, $params);
