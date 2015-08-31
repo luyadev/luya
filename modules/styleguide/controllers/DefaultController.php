@@ -17,12 +17,49 @@ class DefaultController extends \luya\base\Controller
     
     public function actionIndex()
     {
-        $this->view->title = 'Styleguide';
+        if (!$this->hasAccess()) {
+            return $this->redirect(['login']);
+        }
+        $containers = [];
         
-        $elements = Yii::$app->element->getNames();
+        foreach(Yii::$app->element->getAll() as $name => $closure) {
+            $reflection = new \ReflectionFunction($closure);
+            $args = $reflection->getParameters();
+            $params = [];
+            foreach($args as $k => $v) {
+                $params[] = '$'.$v->name;
+            }
+            
+            $containers[] = [
+                'name' => $name,
+                'args' => $params,
+                'html' => Yii::$app->element->run($name, $params),
+            ];
+        }
         
         return $this->render('index', [
-            'elementNames' => $elements
+            'containers' => $containers,
         ]);
+    }
+    
+    public function actionLogin()
+    {
+        $password = Yii::$app->request->post('pass', false);
+        $e = false;
+        if ($password === $this->module->password) {
+            Yii::$app->session->set('__styleguide_pass', $password);
+            if ($this->hasAccess()) {
+                $this->redirect(['index']);
+            }
+        } elseif ($password !== false) {
+            $e = true;
+        }
+        
+        return $this->render('login', ['e' => $e]);
+    }
+    
+    private function hasAccess()
+    {
+        return $this->module->password == Yii::$app->session->get('__styleguide_pass', false);
     }
 }

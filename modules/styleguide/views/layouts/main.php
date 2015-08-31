@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Luya &mdash; <?= $this->title; ?></title>
+        <title>Styleguide</title>
         <?php $this->head() ?>
     </head>
     <body>

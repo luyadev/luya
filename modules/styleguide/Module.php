@@ -8,5 +8,5 @@ class Module extends \luya\base\Module
     
     public $controllerUseModuleViewPath = true;
     
-    public $password = null;
+    public $password = false;
 }
