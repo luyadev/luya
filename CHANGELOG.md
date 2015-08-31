@@ -5,7 +5,7 @@ LUYA CHANGELOG
 ---------------------------
 - [39a6aaf](https://github.com/zephir/luya/commit/39a6aaf24ba9a6cc6e33615b085d0f4c409b7286) added *Element Component* to build structured html element data.
 - [07a2372](https://github.com/zephir/luya/commit/07a2372191cf36e8f4a16ac99ac4ecf4cdb5fdf0) *[BC BREAK]* removed commands `exec/import` and `exec/setup` replace with `import` and `setup` (without exec). Fully rewritten importer process.
-- changed reflection class handling. Move getRequestResponse out of responseContent method.
+- [30c1af3](https://github.com/zephir/luya/commit/30c1af35cc9f900145e1e5f9abb5e5cca1eeee57) changed reflection class handling. Move getRequestResponse out of responseContent method.
 - fixed bug where modules without namespace of the module are not able to load. fixed by using getNamespace() method for each module.
 - twig update to `1.21.0`
 - added ability to disable compression of cms content output with `$enableCompression = false`. 
