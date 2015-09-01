@@ -205,6 +205,29 @@
 		});
 	});
 	
+	zaa.service("NewMenuService", function($http, $q) {
+		var service = [];
+		service.data = null;
+		service.cats = [];
+		service.get = function(forceReload){
+			return $q(function(resolve, reject){
+				if (service.data === null || forceReload === true){
+					$http.get('admin/api-cms-menu/all').success(function(response) {
+						for (var i in response) {
+							service.cats.push({ name : response[i]['name'], id : parseInt(response[i]['id'])});
+						}
+						service.data = response;
+						resolve(response);
+					});
+					
+				} else {
+					resolve(service.data);
+				}
+			});
+		}
+		return service;
+	});
+	
 	zaa.service('MenuService', function($http) {
 		var service = [];
 		

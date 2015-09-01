@@ -592,6 +592,30 @@
 		}
 	});
 	
+	zaa.directive("zaaCmsPage", function(NewMenuService, $timeout){
+		return {
+			restrict: "E",
+			scope: {
+				"model": "=",
+				"options": "=",
+				"label": "@label",
+				"grid": "@grid",
+				"id": "@fieldid",
+				"name": "@fieldname"
+			},
+			controller: function($scope){
+				$timeout(function() {
+					NewMenuService.get().then(function(response) {
+						 $scope.data = response;
+					})
+				});
+			},
+			template: function(){
+				return '<div>CMSPAG {{ data | json }}</div>';
+			}
+		}
+	});
+	
 	// storage.js
 	
 	zaa.factory('FileListeService', function($http, $q) {
