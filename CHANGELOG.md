@@ -1,5 +1,9 @@
 LUYA CHANGELOG
 ==============
+
+1.0.0-alpha19 (in progress)
+---------------------------
+
 1.0.0-alpha18 (2. Sept 2015)
 ---------------------------
 - [eb8ac28b1eb9587af00a990fd80ac5879f07ec51](https://github.com/zephir/luya/commit/eb8ac28b1eb9587af00a990fd80ac5879f07ec51) *[HOTFIX]* Bug in reflection Module block fixed.
