@@ -77,7 +77,7 @@ class ModuleBlock extends \cmsadmin\base\Block
         }
 
         $reflectionRequest = $reflection->getRequestResponse();
-        $response = $reflection->$reflectionRequest();
+        $response = $reflection->responseContent($reflectionRequest);
 
         return $response;
     }
