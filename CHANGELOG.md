@@ -1,7 +1,7 @@
 LUYA CHANGELOG
 ==============
 
-1.0.0-alpha17 (in progress)
+1.0.0-alpha17 (2. Sept 2015)
 ---------------------------
 - [39a6aaf](https://github.com/zephir/luya/commit/39a6aaf24ba9a6cc6e33615b085d0f4c409b7286) added *Element Component* to build structured html element data.
 - [07a2372](https://github.com/zephir/luya/commit/07a2372191cf36e8f4a16ac99ac4ecf4cdb5fdf0) *[BC BREAK]* removed commands `exec/import` and `exec/setup` replace with `import` and `setup` (without exec). Fully rewritten importer process.
