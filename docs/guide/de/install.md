@@ -19,6 +19,8 @@ Als nächstes erstellen wir ein `Kickstarter` Projekte mit Hilfe des `composer c
 composer create-project zephir/luya-kickstarter:dev-master 
 ```
 
+> Die Frage `Do you want to remove the existing VCS (.git, .svn..) history? [Y,n]?` Kannst du mit Ja `Y` beantworten da du das kickstarter repo nicht für dein Luya Projekt bruachst.
+
 Dies wird dir ein Verzeichniss **luya-kickstarter** erstellen.
 
 
