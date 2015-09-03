@@ -611,7 +611,7 @@
 				});
 			},
 			template: function(){
-				return '<div>CMSPAG {{ data | json }}</div>';
+				return '<div ng-repeat="cat in data"><h6>{{cat.name}}</h6><p ng-repeat="item in cat.__items"><input type="radio" name="nav_id" value="{{item.id}}" id="{{id}}_{{item.id}}" /> <label for="{{id}}_{{item.id}}">{{item.title}}</label></p></div>';
 			}
 		}
 	});

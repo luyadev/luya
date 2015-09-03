@@ -9,15 +9,18 @@ class ModelTest extends \tests\web\Base
 {
     public function testNgRest()
     {
+        $time = time();
+        
         $model = new DummyTableModel();
         $model->attributes = [
             'i18n_text' => ['de' => 'foo-de', 'en' => 'foo-en'],
             'i18n_textarea' => ['de' => 'foo-de', 'en' => 'foo-en'],
-            'date' => time(),
-            'datetime' => time(),
+            'date' => $time,
+            'datetime' => $time,
             'file_array' => [['fileId' => 1, 'caption' => 'foo bar 1'], ['fileId' => 2, 'caption' => 'foo bar 2']],
             'image_array' => [['imageId' => 1, 'caption' => 'foo bar 1'], ['imageId' => 2, 'caption' => 'foo bar 2']],
             'select' => 1,
+            'cms_page' => 1,
         ];
         $insert = $model->insert(false);
 
@@ -31,6 +34,9 @@ class ModelTest extends \tests\web\Base
         $this->assertEquals('foo-de', $find->i18n_textarea);
         $this->assertEquals(true, is_array($find->file_array));
         $this->assertEquals(true, is_array($find->image_array));
+        $this->assertEquals($time, $find->date);
+        $this->assertEquals($time, $find->datetime);
+        $this->assertEquals('', $find->cms_page);
 
         Yii::$app->request->setQueryParams([
             'ngrestCallType' => 'list',

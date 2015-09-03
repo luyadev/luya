@@ -74,7 +74,8 @@ CREATE TABLE IF NOT EXISTS `dummy_table` (
   `datetime` int(11) NOT NULL,
   `file_array` text NOT NULL,
   `image_array` text NOT NULL,
-  `select` int(11) NOT NULL
+  `select` int(11) NOT NULL,
+  `cms_page` int(11) NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

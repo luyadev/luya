@@ -57,6 +57,11 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
                 break;
         }
     }
+    
+    public function getContent()
+    {
+        return $this->getType()->getContent();
+    }
 
     public function updateType($postData)
     {

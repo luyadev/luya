@@ -12,7 +12,7 @@ class DummyTableModel extends \admin\ngrest\base\Model
     public function rules()
     {
         return [
-            [['i18n_text', 'i18n_textarea', 'date', 'datetime', 'file_array', 'image_array', 'select'], 'safe'],
+            [['i18n_text', 'i18n_textarea', 'date', 'datetime', 'file_array', 'image_array', 'select', 'cms_page'], 'safe'],
         ];
     }
 
@@ -27,7 +27,8 @@ class DummyTableModel extends \admin\ngrest\base\Model
         $config->list->field('file_array')->fileArray();
         $config->list->field('image_array')->imageArray();
         $config->list->field('select')->selectArray([1 => 'foo', 2 => 'bar']);
-
+        $config->list->field('cms_page')->cmsPage();
+        
         $config->update->copyFrom('list');
         $config->create->copyFrom('list');
     }
