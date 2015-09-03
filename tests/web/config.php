@@ -31,6 +31,9 @@ $config = [
 	    ],
 	    'viewmodule' => [
 	        'class' => '\tests\data\modules\viewmodule\Module',
+	    ],
+	    'ctrlmodule' => [
+	        'class' => '\tests\data\modules\ctrlmodule\Module',
 	    ]
     ],
     'components' => [

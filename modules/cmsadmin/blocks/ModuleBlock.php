@@ -64,6 +64,9 @@ class ModuleBlock extends \cmsadmin\base\Block
         $ctrl = $this->getCfgValue('moduleController');
         $action = $this->getCfgValue('moduleAction');
         $actionArgs = json_decode($this->getCfgValue('moduleActionArgs'), true);
+        if (empty($actionArgs)) {
+            $actionArgs = [];
+        }
 
         // get module
         $module = Yii::$app->getModule($moduleName);
