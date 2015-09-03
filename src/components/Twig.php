@@ -42,8 +42,9 @@ class Twig extends \yii\base\Component
                 $args = func_get_args();
                 $method = $args[0];
                 unset($args[0]);
+
                 return Yii::$app->element->run($method, $args);
-            }
+            },
         ];
     }
 

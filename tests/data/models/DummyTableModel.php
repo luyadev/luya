@@ -8,16 +8,16 @@ class DummyTableModel extends \admin\ngrest\base\Model
     {
         return 'dummy_table';
     }
-    
+
     public function rules()
     {
         return [
             [['i18n_text', 'i18n_textarea', 'date', 'datetime', 'file_array', 'image_array', 'select'], 'safe'],
         ];
     }
-    
+
     public $i18n = ['i18n_text', 'i18n_textarea'];
-    
+
     public function ngRestConfig($config)
     {
         $config->list->field('i18n_text')->text();
@@ -27,11 +27,11 @@ class DummyTableModel extends \admin\ngrest\base\Model
         $config->list->field('file_array')->fileArray();
         $config->list->field('image_array')->imageArray();
         $config->list->field('select')->selectArray([1 => 'foo', 2 => 'bar']);
-        
+
         $config->update->copyFrom('list');
         $config->create->copyFrom('list');
     }
-    
+
     public function ngRestApiEndpoint()
     {
         return 'api-tests-model';

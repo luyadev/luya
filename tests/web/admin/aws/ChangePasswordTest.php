@@ -5,18 +5,18 @@ namespace tests\web\admin\aws;
 class ChangePasswordTest extends \tests\web\Base
 {
     public $aws = null;
-    
+
     public function setUp()
     {
         parent::setUp();
         $this->aws = new \admin\aws\ChangePassword();
     }
-    
+
     public function testIndex()
     {
         $this->assertNotEmpty($this->aws->index());
     }
-    
+
     public function testErrorCallback()
     {
         $this->aws->setItemId(1);
@@ -24,7 +24,7 @@ class ChangePasswordTest extends \tests\web\Base
         $this->assertEquals(2, count($response));
         $this->assertEquals(1, $response['error']);
     }
-    
+
     public function testSuccessCallback()
     {
         $this->aws->setItemId(1);

@@ -7,10 +7,10 @@ class FileArrayTest extends \tests\web\BasePlugin
     public function testPlugin()
     {
         $text = new \admin\ngrest\plugins\FileArray();
-        $this->assertEquals("<span>[Datei-Liste]</span>", $this->renderListHtml($text));
+        $this->assertEquals('<span>[Datei-Liste]</span>', $this->renderListHtml($text));
         $this->assertEquals('<zaa-file-array-upload fieldid="" fieldname="" model="" label="" grid=""></zaa-file-array-upload>', $this->renderCreateHtml($text));
         $this->assertEquals('<zaa-file-array-upload fieldid="" fieldname="" model="" label="" grid=""></zaa-file-array-upload>', $this->renderUpdateHtml($text));
-        
+
         /* @todo: test against real config values 
         $text->setConfig('id', 'foo', 'bar', 'baz', 12);
         $this->assertEquals("<span>{{item.}}</span>", $this->renderListHtml($text));

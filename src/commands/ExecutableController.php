@@ -75,7 +75,6 @@ class ExecutableController extends \yii\console\Controller
         $this->stdout("the following exec commands are avialable:\n- exec/auth\n\n- exec/import\n");
     }
 
-    
     public function actionImport()
     {
         $this->execAuth();

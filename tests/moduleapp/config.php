@@ -9,10 +9,10 @@ $config = [
     'remoteToken' => 'testtoken',
     'basePath' => dirname(__DIR__),
     'defaultRoute' => 'unitmodule',
-	'modules' => [
-	    'unitmodule' => [
-	        'class' => 'tests\data\modules\unitmodule\Module'
-	    ],
+    'modules' => [
+        'unitmodule' => [
+            'class' => 'tests\data\modules\unitmodule\Module',
+        ],
     ],
 ];
 

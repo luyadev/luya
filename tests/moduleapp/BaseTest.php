@@ -4,7 +4,6 @@ namespace tests\src\moduleapp;
 
 use Yii;
 
-
 class BaseTest extends \tests\moduleapp\Base
 {
     public function testApp()
@@ -26,5 +25,5 @@ class BaseTest extends \tests\moduleapp\Base
         $this->assertEquals('index', Yii::$app->runAction('unitmodule/other/index/', []));
         $this->assertEquals('baz', Yii::$app->runAction('unitmodule/other/baz', []));
         $this->assertEquals('baz', Yii::$app->runAction('unitmodule/other/baz/', []));
-    }   
+    }
 }

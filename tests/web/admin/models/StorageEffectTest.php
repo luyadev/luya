@@ -8,14 +8,14 @@ class StorageEffectTest extends \tests\web\BaseModel
     {
         return new \admin\models\StorageEffect();
     }
-    
+
     public function getParams()
     {
         return [
             'name',
             'identifier',
             'imagine_name',
-            'imagine_json_params'
+            'imagine_json_params',
         ];
     }
 }

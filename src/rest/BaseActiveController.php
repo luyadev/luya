@@ -12,7 +12,7 @@ abstract class BaseActiveController extends \yii\rest\ActiveController implement
 
     /**
      * If a user should not get access to the rest api, an ForbittendHttpException
-     * must be thrown:
+     * must be thrown:.
      * 
      * ```php
      * throw new \yii\web\ForbiddenHttpException

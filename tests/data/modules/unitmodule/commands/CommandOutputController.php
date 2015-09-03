@@ -8,7 +8,7 @@ class CommandOutputController extends \luya\base\Command
     {
         return $this->outputSuccess('Successfull output!');
     }
-    
+
     public function actionError()
     {
         return $this->outputError('Failing output!');

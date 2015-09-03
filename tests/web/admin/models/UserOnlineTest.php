@@ -18,7 +18,7 @@ class UserOnlineTest extends \tests\web\Base
         UserOnline::clearList(0);
         $this->assertEquals(true, is_array(UserOnline::getList()));
         $this->assertEquals(0, count(UserOnline::getList()));
-        
+
         UserOnline::refreshUser(1, 'my/test'); // create
         UserOnline::removeUser(1);
     }

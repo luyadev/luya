@@ -8,7 +8,7 @@ class SetupController extends \luya\base\Command
     {
         return \yii::$app->db->createCommand()->insert($table, $fields)->execute();
     }
-    
+
     /**
      * @todo use options instead, override options()
      * @todo see if admin is availoable
@@ -25,10 +25,10 @@ class SetupController extends \luya\base\Command
         if (!$this->confirm("Create a new user ($email) with password '$password'?")) {
             exit(1);
         }
-    
+
         $salt = Yii::$app->getSecurity()->generateRandomString();
         $pw = Yii::$app->getSecurity()->generatePasswordHash($password.$salt);
-    
+
         $this->insert('admin_user', [
             'title' => 1,
             'firstname' => $firstname,
@@ -38,20 +38,20 @@ class SetupController extends \luya\base\Command
             'password_salt' => $salt,
             'is_deleted' => 0,
         ]);
-    
+
         $this->insert('admin_group', [
             'name' => 'Adminstrator',
             'text' => 'Administrator Accounts',
         ]);
-    
+
         $this->insert('admin_user_group', [
             'user_id' => 1,
             'group_id' => 1,
         ]);
-    
+
         // get the api-admin-user and api-admin-group auth rights
         $data = \yii::$app->db->createCommand("SELECT * FROM admin_auth WHERE api='api-admin-user' OR api='api-admin-group'")->queryAll();
-    
+
         foreach ($data as $item) {
             $this->insert('admin_group_auth', [
                 'group_id' => 1,
@@ -61,13 +61,13 @@ class SetupController extends \luya\base\Command
                 'crud_delete' => 1,
             ]);
         }
-    
+
         $this->insert('admin_lang', [
             'name' => 'Deutsch',
             'short_code' => 'de',
             'is_default' => 1,
         ]);
-    
+
         $this->insert('admin_storage_effect', [
             'name' => 'Thumbnail',
             'identifier' => 'thumbnail',
@@ -78,7 +78,7 @@ class SetupController extends \luya\base\Command
                 ['var' => 'height', 'label' => 'Hoehe in Pixel'],
             ]]),
         ]);
-    
+
         $this->insert('admin_storage_effect', [
             'name' => 'Zuschneiden',
             'identifier' => 'resize',
@@ -88,7 +88,7 @@ class SetupController extends \luya\base\Command
                 ['var' => 'height', 'label' => 'Hoehe in Pixel'],
             ]]),
         ]);
-    
+
         $this->insert('admin_storage_effect', [
             'name' => 'Crop',
             'identifier' => 'crop',
@@ -98,7 +98,7 @@ class SetupController extends \luya\base\Command
                 ['var' => 'height', 'label' => 'Hoehe in Pixel'],
             ]]),
         ]);
-    
+
         echo "You can now login with E-Mail: '$email' and password: '$password'";
         exit(0);
     }

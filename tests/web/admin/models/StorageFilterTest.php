@@ -8,7 +8,7 @@ class StorageFilterTest extends \tests\web\BaseModel
     {
         return new \admin\models\StorageFilter();
     }
-    
+
     public function getParams()
     {
         return [

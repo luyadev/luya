@@ -33,7 +33,7 @@ $config = [
         ],
         'element' => [
             'class' => '\luya\components\Element',
-        ]
+        ],
     ],
     'bootstrap' => [
         'luya\web\Bootstrap',

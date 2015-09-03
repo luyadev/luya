@@ -8,7 +8,7 @@ class OtherController extends \luya\base\Controller
     {
         return 'index';
     }
-    
+
     public function actionBaz()
     {
         return 'baz';

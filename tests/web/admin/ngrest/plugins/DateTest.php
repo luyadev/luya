@@ -10,7 +10,7 @@ class DateTest extends \tests\web\BasePlugin
         $this->assertEquals("<span>{{item.*1000 | date : 'dd.MM.yyyy'}}</span>", $this->renderListHtml($text));
         $this->assertEquals('<zaa-date fieldid="" fieldname="" model="" label="" grid=""></zaa-date>', $this->renderCreateHtml($text));
         $this->assertEquals('<zaa-date fieldid="" fieldname="" model="" label="" grid=""></zaa-date>', $this->renderUpdateHtml($text));
-        
+
         /* @todo: test against real config values 
         $text->setConfig('id', 'foo', 'bar', 'baz', 12);
         $this->assertEquals("<span>{{item.}}</span>", $this->renderListHtml($text));

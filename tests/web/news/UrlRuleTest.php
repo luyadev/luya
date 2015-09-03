@@ -9,15 +9,14 @@ class UrlRuleTest extends \tests\web\Base
 {
     public $urlRules = [
         ['pattern' => 'news/detail/<id:\d+>/<title:[a-zA-Z0-9\-]+>/', 'route' => 'news/default/detail'],
-        ['pattern' => 'news/global-test/<id:\d+>/', 'route' => 'news/test', 'composition' => 
-            [
+        ['pattern' => 'news/global-test/<id:\d+>/', 'route' => 'news/test', 'composition' => [
                 'fr' => 'news/french-test/<id:\d+>/',
                 'en' => 'news/english-test/<id:\d+>/',
                 'de' => 'news/deutsch-test/<id:\d+>/',
-            ]   
-        ]
+            ],
+        ],
     ];
-    
+
     public function setUp()
     {
         parent::setUp();
@@ -26,18 +25,18 @@ class UrlRuleTest extends \tests\web\Base
         Yii::$app->urlManager->addRules($this->urlRules);
         Yii::$app->composition->setKey('langShortCode', 'de');
     }
-    
+
     public function testComposition()
     {
         Yii::$app->composition->hidden = true;
         $full = Yii::$app->composition->getFull();
-        $this->assertEquals("", $full);
-        
+        $this->assertEquals('', $full);
+
         Yii::$app->composition->hidden = false;
         $full = Yii::$app->composition->getFull();
-        $this->assertEquals("de/", $full);
+        $this->assertEquals('de/', $full);
     }
-    
+
     public function testCompositionUrls()
     {
         Yii::$app->composition->hidden = false;
@@ -53,60 +52,60 @@ class UrlRuleTest extends \tests\web\Base
         // ru (composition not set, use global default pattern)
         Yii::$app->composition->setKey('langShortCode', 'ru');
         $this->assertEquals('ru/news/global-test/1', Url::to('news/test', ['id' => 1]));
-        
+
         // composition is hidden, so url rules automaticcaly retursn generic default global pattern
         Yii::$app->composition->hidden = true;
         // fr (will not work cause hidden)
         Yii::$app->composition->setKey('langShortCode', 'fr');
         $this->assertEquals('/news/global-test/1', Url::to('news/test', ['id' => 1]));
     }
-    
+
     public function testBasicUrls()
     {
         Yii::$app->composition->hidden = true;
         $url = Url::to('news/default/detail', ['id' => 1, 'title' => 'foo-bar']);
-        $this->assertEquals("/news/1/foo-bar", $url);
-        
+        $this->assertEquals('/news/1/foo-bar', $url);
+
         Yii::$app->composition->hidden = false;
         $url = Url::to('news/default/detail', ['id' => 1, 'title' => 'foo-bar']);
-        $this->assertEquals("de/news/1/foo-bar", $url);
-        
+        $this->assertEquals('de/news/1/foo-bar', $url);
+
         Yii::$app->composition->hidden = true;
         $url = Url::to('news/default/detail', ['id' => 1, 'title' => 'foo-bar', 'pa' => 'ram']);
-        $this->assertEquals("/news/1/foo-bar?pa=ram", $url);
-        
+        $this->assertEquals('/news/1/foo-bar?pa=ram', $url);
+
         Yii::$app->composition->hidden = false;
         $url = Url::to('news/default/detail', ['id' => 1, 'title' => 'foo-bar', 'pa' => 'ram']);
-        $this->assertEquals("de/news/1/foo-bar?pa=ram", $url);
+        $this->assertEquals('de/news/1/foo-bar?pa=ram', $url);
     }
-    
+
     public function testModuleContextUrls()
     {
         Yii::$app->urlManager->setContextNavItemId(1);
         Yii::$app->composition->hidden = false;
-        
+
         $url = Url::to('news/default/detail', ['id' => 1, 'title' => 'foo-bar']);
-        $this->assertEquals("/de/page-1/1/foo-bar", $url);
-        
+        $this->assertEquals('/de/page-1/1/foo-bar', $url);
+
         Yii::$app->urlManager->setContextNavItemId(2);
         Yii::$app->composition->hidden = true;
-        
+
         $url = Url::to('news/default/detail', ['id' => 1, 'title' => 'foo-bar']);
-        $this->assertEquals("/page-2/1/foo-bar", $url);
-        
+        $this->assertEquals('/page-2/1/foo-bar', $url);
+
         Yii::$app->urlManager->setContextNavItemId(2);
         Yii::$app->composition->hidden = true;
-        
+
         $url = Url::to('news/default/detail', ['id' => 1, 'title' => 'foo-bar', 'pa' => 'ram']);
-        $this->assertEquals("/page-2/1/foo-bar?pa=ram", $url);
-        
+        $this->assertEquals('/page-2/1/foo-bar?pa=ram', $url);
+
         Yii::$app->urlManager->setContextNavItemId(1);
         Yii::$app->composition->hidden = true;
-        
+
         $url = Url::to('news/default/detail', ['id' => 1, 'title' => 'page-2-news-title', 'news' => 'page']);
-        $this->assertEquals("/page-1/1/page-2-news-title?news=page", $url);
+        $this->assertEquals('/page-1/1/page-2-news-title?news=page', $url);
     }
-    
+
     public function testModuleUrls()
     {
         Yii::$app->urlManager->resetContext();
@@ -114,6 +113,6 @@ class UrlRuleTest extends \tests\web\Base
         Yii::$app->getModule('news')->setContext('cms');
         Yii::$app->getModule('news')->setContextOptions(['navItemId' => 1]);
         $url = Url::to('news/default/detail', ['id' => 1, 'title' => 'foo-bar']);
-        $this->assertEquals("/de/page-1/1/foo-bar", $url);
+        $this->assertEquals('/de/page-1/1/foo-bar', $url);
     }
 }

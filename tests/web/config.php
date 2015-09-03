@@ -9,32 +9,32 @@ $config = [
     'remoteToken' => 'testtoken',
     'basePath' => dirname(__DIR__),
     'defaultRoute' => 'cms',
-	'modules' => [
+    'modules' => [
         'luya' => 'luya\Module',
-	    'admin' => [
-	        'class' => 'admin\Module',
-	    ],
-	    'news' => 'news\Module',
-	    'newsadmin' => 'newsadmin\Module',
-	    'cms' => [
-	        'class' => 'cms\Module',
-	        'assets' => [
-	            'app\assets\ResourcesAsset'
-	        ]
-	    ],
-	    'cmsadmin' => 'cmsadmin\Module',
-        'unitmodule' => [
-            'class' => '\tests\data\modules\unitmodule\Module'
+        'admin' => [
+            'class' => 'admin\Module',
         ],
-	    'urlmodule' => [
-	        'class' => '\tests\data\modules\urlmodule\Module'
-	    ],
-	    'viewmodule' => [
-	        'class' => '\tests\data\modules\viewmodule\Module',
-	    ],
-	    'ctrlmodule' => [
-	        'class' => '\tests\data\modules\ctrlmodule\Module',
-	    ]
+        'news' => 'news\Module',
+        'newsadmin' => 'newsadmin\Module',
+        'cms' => [
+            'class' => 'cms\Module',
+            'assets' => [
+                'app\assets\ResourcesAsset',
+            ],
+        ],
+        'cmsadmin' => 'cmsadmin\Module',
+        'unitmodule' => [
+            'class' => '\tests\data\modules\unitmodule\Module',
+        ],
+        'urlmodule' => [
+            'class' => '\tests\data\modules\urlmodule\Module',
+        ],
+        'viewmodule' => [
+            'class' => '\tests\data\modules\viewmodule\Module',
+        ],
+        'ctrlmodule' => [
+            'class' => '\tests\data\modules\ctrlmodule\Module',
+        ],
     ],
     'components' => [
         'request' => [
@@ -42,12 +42,12 @@ $config = [
         ],
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=' . DB_NAME,
+            'dsn' => 'mysql:host=localhost;dbname='.DB_NAME,
             'username' => DB_USER,
             'password' => DB_PASS,
-            'charset' => 'utf8'
+            'charset' => 'utf8',
         ],
-    ]
+    ],
 ];
 
 return $config;

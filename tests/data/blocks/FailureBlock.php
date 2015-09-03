@@ -5,7 +5,7 @@ namespace tests\data\blocks;
 class FailureBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
-    
+
     public function name()
     {
         return 'Failure Test';
@@ -13,7 +13,7 @@ class FailureBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return null;
+        return;
     }
 
     public function config()
@@ -27,11 +27,11 @@ class FailureBlock extends \cmsadmin\base\Block
 
     public function twigFrontend()
     {
-        return null;
+        return;
     }
 
     public function twigAdmin()
     {
-        return null;
+        return;
     }
 }

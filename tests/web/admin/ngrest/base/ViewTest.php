@@ -15,7 +15,7 @@ class ViewTest extends \tests\web\Base
         // exception: The ActiveWindow View 'id' can't be empty!
         $view->render('file.php');
     }
-    
+
     /**
      * @expectedException Exception
      */

@@ -5,7 +5,7 @@ namespace tests\data\blocks;
 class TestBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
-    
+
     public function name()
     {
         return 'Test';
@@ -24,7 +24,7 @@ class TestBlock extends \cmsadmin\base\Block
                 ['var' => 'var2', 'label' => 'VAR 2', 'type' => 'zaa-text'],
             ],
             'cfgs' => [
-                ['var' => 'cfg1', 'label' => 'CFG 1', 'type' => 'zaa-text'],  
+                ['var' => 'cfg1', 'label' => 'CFG 1', 'type' => 'zaa-text'],
             ],
         ];
     }

@@ -8,7 +8,7 @@ class LangTest extends \tests\web\BaseModel
     {
         return new \admin\models\Lang();
     }
-    
+
     public function getParams()
     {
         return [

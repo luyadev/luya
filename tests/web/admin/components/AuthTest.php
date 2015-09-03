@@ -7,48 +7,47 @@ use admin\components\Auth;
 class AuthTest extends \tests\web\Base
 {
     public $auth;
-    
+
     public function setUp()
     {
         parent::setUp();
 
         $this->auth = new Auth();
-        
     }
-    
+
     public function testAddRoute()
     {
         $beforeData = $this->auth->getDatabaseAuths();
-        
+
         $response = $this->auth->addRoute('foo', 'routename', 'baz');
-        
+
         $this->assertEquals(1, $response);
-        
+
         $response = $this->auth->addRoute('foo2', 'routename', 'baz2');
-        
+
         $this->assertEquals(1, $response);
-        
+
         $addApi = $this->auth->addApi('foo', 'apiname', 'baz');
         $addApi = $this->auth->addApi('foo3', 'apiname', 'baz3');
-        
+
         $response = $this->auth->prepareCleanup($beforeData);
-        
+
         $this->assertEquals(2, count($response));
-        
+
         $this->assertEquals('baz3', $response[0]['alias_name']);
         $this->assertEquals('baz2', $response[1]['alias_name']);
-        
+
         $exec = $this->auth->executeCleanup($response);
-        
+
         $this->assertEquals(true, $exec);
     }
-    
+
     public function testMatches()
     {
         $this->assertEquals(false, $this->auth->matchApi(1, 'foo'));
         $this->assertEquals(false, $this->auth->matchRoute(1, 'foo'));
     }
-    
+
     public function testPermissionWeight()
     {
         $this->assertEquals(0, $this->auth->permissionWeight(false, false, false));
@@ -60,7 +59,7 @@ class AuthTest extends \tests\web\Base
         $this->assertEquals(8, $this->auth->permissionWeight(false, true, true));
         $this->assertEquals(9, $this->auth->permissionWeight(true, true, true));
     }
-    
+
     public function testPermissionVerify()
     {
         // CAN CREATE
@@ -72,7 +71,7 @@ class AuthTest extends \tests\web\Base
         $this->assertEquals(true, $this->auth->permissionVerify(Auth::CAN_CREATE, 6));
         $this->assertEquals(false, $this->auth->permissionVerify(Auth::CAN_CREATE, 8));
         $this->assertEquals(true, $this->auth->permissionVerify(Auth::CAN_CREATE, 9));
-        
+
         // CAN UPDATE
         $this->assertEquals(false, $this->auth->permissionVerify(Auth::CAN_UPDATE, 0));
         $this->assertEquals(false, $this->auth->permissionVerify(Auth::CAN_UPDATE, 1));
@@ -82,7 +81,7 @@ class AuthTest extends \tests\web\Base
         $this->assertEquals(false, $this->auth->permissionVerify(Auth::CAN_UPDATE, 6));
         $this->assertEquals(true, $this->auth->permissionVerify(Auth::CAN_UPDATE, 8));
         $this->assertEquals(true, $this->auth->permissionVerify(Auth::CAN_UPDATE, 9));
-        
+
         // CAN DELETE
         $this->assertEquals(false, $this->auth->permissionVerify(Auth::CAN_DELETE, 0));
         $this->assertEquals(false, $this->auth->permissionVerify(Auth::CAN_DELETE, 1));

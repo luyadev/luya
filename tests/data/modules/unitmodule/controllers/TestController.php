@@ -8,7 +8,7 @@ class TestController extends \luya\base\Controller
     {
         return 'foo';
     }
-    
+
     public function actionBar()
     {
         return 'bar';
