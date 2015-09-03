@@ -1000,7 +1000,7 @@
 				}
 				
 				$scope.removeSelectedItems = function() {
-					cfm = confirm("Möchten Sie diese Datei wirklich entfernen?");
+					var cfm = confirm("Möchten Sie diese Datei wirklich entfernen?");
 					if (cfm) {
 						$http.post('admin/api-admin-storage/files-delete', $.param({'ids' : $scope.selectedFiles}), {
 				        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
