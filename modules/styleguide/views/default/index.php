@@ -25,13 +25,13 @@
         <a href="#">Link Element</a>
     </div>
 
-<? foreach($containers as $item): ?>
+<?php foreach ($containers as $item): ?>
 
 <div style="padding:20px; background-color:#F0F0F0;">
-<span style="font-size:18px;"><?= $item['name']; ?></span> <i>(<?= implode(", ", $item['args']); ?>)</i>
+<span style="font-size:18px;"><?= $item['name']; ?></span> <i>(<?= implode(', ', $item['args']); ?>)</i>
 </div>
 <div style="padding:10px; border:5px solid #F0F0F0; margin-bottom:20px;">
         <?= $item['html']; ?>
 </div>
-<? endforeach; ?>
+<?php endforeach; ?>
 </div>

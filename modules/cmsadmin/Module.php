@@ -2,10 +2,6 @@
 
 namespace cmsadmin;
 
-use Yii;
-
-
-
 class Module extends \admin\base\Module
 {
     public $apis = [

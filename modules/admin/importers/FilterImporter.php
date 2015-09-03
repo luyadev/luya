@@ -11,7 +11,7 @@ class FilterImporter extends \luya\base\Importer
             $filterClassName = $file['ns'];
             if (class_exists($filterClassName)) {
                 $object = new $filterClassName();
-                $this->getImporter()->addLog('filters', implode(", ", $object->save()));
+                $this->getImporter()->addLog('filters', implode(', ', $object->save()));
             }
         }
     }

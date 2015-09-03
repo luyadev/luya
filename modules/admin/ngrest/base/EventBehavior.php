@@ -3,7 +3,6 @@
 namespace admin\ngrest\base;
 
 use yii\db\ActiveRecord;
-use admin\ngrest\base\Model;
 
 class EventBehavior extends \yii\base\Behavior
 {

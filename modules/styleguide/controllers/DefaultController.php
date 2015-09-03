@@ -14,34 +14,34 @@ use Yii;
 class DefaultController extends \luya\base\Controller
 {
     public $layout = 'main.php';
-    
+
     public function actionIndex()
     {
         if (!$this->hasAccess()) {
             return $this->redirect(['login']);
         }
         $containers = [];
-        
-        foreach(Yii::$app->element->getAll() as $name => $closure) {
+
+        foreach (Yii::$app->element->getAll() as $name => $closure) {
             $reflection = new \ReflectionFunction($closure);
             $args = $reflection->getParameters();
             $params = [];
-            foreach($args as $k => $v) {
+            foreach ($args as $k => $v) {
                 $params[] = '$'.$v->name;
             }
-            
+
             $containers[] = [
                 'name' => $name,
                 'args' => $params,
                 'html' => Yii::$app->element->run($name, $params),
             ];
         }
-        
+
         return $this->render('index', [
             'containers' => $containers,
         ]);
     }
-    
+
     public function actionLogin()
     {
         $password = Yii::$app->request->post('pass', false);
@@ -54,10 +54,10 @@ class DefaultController extends \luya\base\Controller
         } elseif ($password !== false) {
             $e = true;
         }
-        
+
         return $this->render('login', ['e' => $e]);
     }
-    
+
     private function hasAccess()
     {
         return $this->module->password == Yii::$app->session->get('__styleguide_pass', false);

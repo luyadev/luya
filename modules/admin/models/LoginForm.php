@@ -2,9 +2,6 @@
 
 namespace admin\models;
 
-use admin\models\UserLogin;
-use admin\models\UserOnline;
-
 class LoginForm extends \yii\base\Model
 {
     private $_user = false;

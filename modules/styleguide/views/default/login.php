@@ -1,7 +1,7 @@
 <div style="padding:20px; text-align:center;">
-    <? if($e): ?>
+    <?php if ($e): ?>
     <p style="color:red;">Es wurde ein falsches Passwort eingegeben</p>
-    <? endif; ?>
+    <?php endif; ?>
     <form method="post">
         Styleguide Password:
         <input type="password" name="pass" />

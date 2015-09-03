@@ -2,8 +2,6 @@
 
 namespace admin\models;
 
-use admin\models\User;
-
 class UserOnline extends \yii\db\ActiveRecord
 {
     public static function tableName()

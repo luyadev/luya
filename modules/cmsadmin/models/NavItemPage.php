@@ -4,12 +4,11 @@ namespace cmsadmin\models;
 
 use Yii;
 use yii\db\Query;
-use cmsadmin\models\Block;
 
 class NavItemPage extends \cmsadmin\base\NavItemType
 {
     private $_twig = null;
-    
+
     public static function tableName()
     {
         return 'cms_nav_item_page';
@@ -28,7 +27,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
             'layout_id' => 'Layout',
         ];
     }
-    
+
     private function getPlaceholders($navItemPageId, $placeholderVar, $prevId)
     {
         return (new Query())
@@ -38,23 +37,23 @@ class NavItemPage extends \cmsadmin\base\NavItemType
         ->orderBy('sort_index ASC')
         ->all();
     }
-    
+
     private function getTwig()
     {
         if ($this->_twig === null) {
             $this->_twig = Yii::$app->twig->env(new \Twig_Loader_String());
         }
-    
+
         return $this->_twig;
     }
-    
+
     private function jsonToArray($json)
     {
         $response = json_decode($json, true);
-    
+
         return (empty($response)) ? [] : $response;
     }
-    
+
     public function getContent()
     {
         $twig = Yii::$app->twig->env(new \Twig_Loader_Filesystem(Yii::getAlias('@app/views/cmslayouts/')));
@@ -70,7 +69,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
             'activeUrl' => Yii::$app->links->activeUrl, /* @todo remove: activeUrl already set via twig component ? */
         ]);
     }
-    
+
     public function renderPlaceholder($navItemPageId, $placeholderVar, $prevId)
     {
         $string = '';
@@ -100,14 +99,15 @@ class NavItemPage extends \cmsadmin\base\NavItemType
 
         return $string;
     }
-    
+
     /**
      * @todo
+     *
      * @see \cmsadmin\base\NavItemType::getHeaders()
      */
     public function getHeaders()
     {
-        return null;
+        return;
     }
 
     public function getLayout()
