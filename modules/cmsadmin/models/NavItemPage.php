@@ -3,9 +3,13 @@
 namespace cmsadmin\models;
 
 use Yii;
+use yii\db\Query;
+use cmsadmin\models\Block;
 
 class NavItemPage extends \cmsadmin\base\NavItemType
 {
+    private $_twig = null;
+    
     public static function tableName()
     {
         return 'cms_nav_item_page';
@@ -18,9 +22,42 @@ class NavItemPage extends \cmsadmin\base\NavItemType
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'layout_id' => 'Layout',
+        ];
+    }
+    
+    private function getPlaceholders($navItemPageId, $placeholderVar, $prevId)
+    {
+        return (new Query())
+        ->from('cms_nav_item_page_block_item t1')
+        ->select('t1.*')
+        ->where(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId])
+        ->orderBy('sort_index ASC')
+        ->all();
+    }
+    
+    private function getTwig()
+    {
+        if ($this->_twig === null) {
+            $this->_twig = Yii::$app->twig->env(new \Twig_Loader_String());
+        }
+    
+        return $this->_twig;
+    }
+    
+    private function jsonToArray($json)
+    {
+        $response = json_decode($json, true);
+    
+        return (empty($response)) ? [] : $response;
+    }
+    
     public function getContent()
     {
-        $twig = Yii::$app->twig->env(new \Twig_Loader_Filesystem(\yii::getAlias('@app/views/cmslayouts/')));
+        $twig = Yii::$app->twig->env(new \Twig_Loader_Filesystem(Yii::getAlias('@app/views/cmslayouts/')));
 
         $insertion = [];
 
@@ -30,69 +67,47 @@ class NavItemPage extends \cmsadmin\base\NavItemType
 
         return $twig->render($this->layout->view_file, [
             'placeholders' => $insertion,
-            'activeUrl' => Yii::$app->links->activeUrl,
+            'activeUrl' => Yii::$app->links->activeUrl, /* @todo remove: activeUrl already set via twig component ? */
         ]);
     }
-
-    public function attributeLabels()
-    {
-        return [
-            'layout_id' => 'Layout',
-        ];
-    }
-
+    
     public function renderPlaceholder($navItemPageId, $placeholderVar, $prevId)
     {
         $string = '';
 
-        $placeholders = (new \yii\db\Query())->from('cms_nav_item_page_block_item t1')->select('t1.*')->where(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId])->orderBy('sort_index ASC')->all();
-
-        $twig = Yii::$app->twig->env(new \Twig_Loader_String());
-
-        foreach ($placeholders as $key => $placeholder) {
-            $blockObject = \cmsadmin\models\Block::objectId($placeholder['block_id'], 'frontend');
-            if ($blockObject === false) {
-                continue;
-            }
-            $configValues = json_decode($placeholder['json_config_values'], true);
-            $cfgValues = json_decode($placeholder['json_config_cfg_values'], true);
-
-            if (empty($configValues)) {
-                $configValues = [];
-            }
-
-            if (empty($cfgValues)) {
-                $cfgValues = [];
-            }
-
-            foreach ($this->getOptions() as $optKey => $optValue) {
-                $blockObject->setEnvOption($optKey, $optValue);
-            }
-            $blockObject->setVarValues($configValues);
-            $blockObject->setCfgValues($cfgValues);
-
-            $jsonConfig = json_decode($blockObject->jsonConfig(), true);
-
-            $insertedHolders = [];
-
-            if (isset($jsonConfig['placeholders'])) {
-                foreach ($jsonConfig['placeholders'] as $item) {
+        foreach ($this->getPlaceholders($navItemPageId, $placeholderVar, $prevId) as $key => $placeholder) {
+            // create block object
+            $blockObject = Block::objectId($placeholder['block_id'], 'frontend');
+            // see if its a valid block object
+            if ($blockObject) {
+                // insert var and cfg values from database
+                $blockObject->setVarValues($this->jsonToArray($placeholder['json_config_values']));
+                $blockObject->setCfgValues($this->jsonToArray($placeholder['json_config_cfg_values']));
+                // set env options from current object environment
+                foreach ($this->getOptions() as $optKey => $optValue) {
+                    $blockObject->setEnvOption($optKey, $optValue);
+                }
+                // render sub placeholders and set into object
+                $insertedHolders = [];
+                foreach ($blockObject->getPlaceholders() as $item) {
                     $insertedHolders[$item['var']] = $this->renderPlaceholder($navItemPageId, $item['var'], $placeholder['id']);
                 }
+                $blockObject->setPlaceholderValues($insertedHolders);
+                // output buffer the rendered frontend string based on the current twig env
+                $string .= $blockObject->renderFrontend($this->getTwig());
             }
-            $string .= $twig->render($blockObject->getTwigFrontendContent(), [
-                'vars' => $configValues,
-                'cfgs' => $cfgValues,
-                'placeholders' => $insertedHolders,
-                'extras' => $blockObject->extraVars(),
-            ]);
         }
 
         return $string;
     }
+    
+    /**
+     * @todo
+     * @see \cmsadmin\base\NavItemType::getHeaders()
+     */
     public function getHeaders()
     {
-        return 'HEADERS!';
+        return null;
     }
 
     public function getLayout()

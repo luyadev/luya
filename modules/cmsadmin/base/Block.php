@@ -10,6 +10,8 @@ abstract class Block implements BlockInterface
 
     private $_cfgValues = [];
 
+    private $_placeholderValues = [];
+    
     private $_envOptions = [];
 
     private $_config = null;
@@ -54,6 +56,13 @@ abstract class Block implements BlockInterface
         return $this->_envOptions;
     }
 
+    /* setter for placeholder */
+    
+    public function setPlaceholderValues(array $placeholders)
+    {
+        $this->_placeholderValues = $placeholders;
+    }
+    
     /* getter & setter VarValue */
 
     public function getVarValue($key, $default = false)
@@ -185,5 +194,15 @@ abstract class Block implements BlockInterface
     public function getFullName()
     {
         return ($this->icon() === null) ? $this->name() : '<i class="left '.$this->icon().'"></i> <span>'.$this->name().'</span>';
+    }
+    
+    public function renderFrontend(\Twig_Environment $twig)
+    {
+        return $twig->render($this->getTwigFrontendContent(), [
+            'vars' => $this->_varValues,
+            'cfgs' => $this->_cfgValues,
+            'placeholders' => $this->_placeholderValues,
+            'extras' => $this->extraVars(),
+        ]);
     }
 }
