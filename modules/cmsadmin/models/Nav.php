@@ -4,6 +4,8 @@ namespace cmsadmin\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
+use admin\models\Lang;
+use cmsadmin\models\NavItem;
 
 /**
  * @todo what happens when resort items if an items is deleted?
@@ -32,6 +34,15 @@ class Nav extends \yii\db\ActiveRecord
             [['cat_id', 'parent_nav_id'], 'required'],
             [['is_hidden', 'sort_index', 'is_deleted'], 'safe'],
         ];
+    }
+    
+    public static function findContent($navId)
+    {
+        $lang = Yii::$app->composition->getKey('langShortCode');
+        $langId = Lang::getLangIdByShortCode($lang);
+        $item = NavItem::find()->where(['lang_id' => $langId, 'nav_id' => $navId])->one();
+        
+        return ($item) ? $item->getContent() : false;
     }
 
     public function getNavItems()

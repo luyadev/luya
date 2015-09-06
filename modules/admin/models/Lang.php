@@ -50,6 +50,13 @@ class Lang extends \admin\ngrest\base\Model
     {
         $this->is_default = 0;
     }
+    
+    public static function getLangIdByShortCode($shortCode)
+    {
+        $item = self::find()->select(['id'])->where(['short_code' => $shortCode])->one();
+        
+        return ($item) ? $item->id : false;
+    }
 
     private static $_langInstanceQuery = null;
 
