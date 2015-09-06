@@ -3,6 +3,7 @@
 namespace admin\ngrest\plugins;
 
 use Yii;
+use cmsadmin\models\Nav;
 
 class CmsPage extends \admin\ngrest\base\Plugin
 {
@@ -27,14 +28,6 @@ class CmsPage extends \admin\ngrest\base\Plugin
     
     public function onAfterFind($fieldValue)
     {
-        if (!empty($fieldValue)) {
-            $lang = Yii::$app->composition->getKey('langShortCode');
-            $langId = \admin\models\Lang::find()->where(['short_code' => $lang])->one()->id;
-            $item = \cmsadmin\models\NavItem::find()->where(['lang_id' => $langId, 'nav_id' => $fieldValue])->one();
-            if ($item) {
-                $fieldValue = $item->getContent();
-            }
-        }
-        return $fieldValue;
+        return (!empty($fieldValue)) ? Nav::findContent($fieldValue) : $fieldValue;
     }
 }
