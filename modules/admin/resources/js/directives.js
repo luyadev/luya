@@ -609,9 +609,13 @@
 						 $scope.data = response;
 					})
 				});
+				
+				$scope.set = function(navId) {
+					$scope.model = navId;
+				}
 			},
 			template: function(){
-				return '<div ng-repeat="cat in data"><h6>{{cat.name}}</h6><p ng-repeat="item in cat.__items"><input type="radio" name="nav_id" value="{{item.id}}" id="{{id}}_{{item.id}}" /> <label for="{{id}}_{{item.id}}">{{item.title}}</label></p></div>';
+				return '<div ng-repeat="cat in data"><h6>{{cat.name}}</h6><p ng-repeat="item in cat.__items"><input type="radio" ng-click="set(item.id)" name="cmsPageNavId" value="{{item.id}}" id="{{id}}_{{item.id}}" /> <label for="{{id}}_{{item.id}}">{{item.title}}</label></p></div>';
 			}
 		}
 	});
