@@ -2,6 +2,8 @@
 
 namespace luya\commands;
 
+use Yii;
+
 class SetupController extends \luya\base\Command
 {
     private function insert($table, $fields)
