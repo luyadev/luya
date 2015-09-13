@@ -196,6 +196,9 @@ zaa.bootstrap.register('<?=$config->hash; ?>', function($scope, $controller) {
 
 <!-- activeWindow MODAL -->
 <div id="activeWindowModal" class="modal">
+    <button class="btn waves-effect waves-light" type="button" ng-click="closeActiveWindow()">
+        <i class="mdi-navigation-cancel"></i> Abbrechen
+    </button>
     <div class="modal-content" compile-html ng-bind-html="data.aw.content"></div>
 </div>
 </div>

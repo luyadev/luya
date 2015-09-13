@@ -2,6 +2,8 @@
 
 namespace admin\aws;
 
+use Yii;
+
 class GroupAuth extends \admin\ngrest\base\ActiveWindow
 {
     public $module = 'admin';
@@ -30,7 +32,7 @@ class GroupAuth extends \admin\ngrest\base\ActiveWindow
 
     public function callbackUpdateSubscription()
     {
-        $rights = \yii::$app->request->post('rights', []);
+        $rights = Yii::$app->request->post('rights', []);
 
         $safeCopy = [];
         foreach ($rights as $authId => $options) {
@@ -41,10 +43,10 @@ class GroupAuth extends \admin\ngrest\base\ActiveWindow
         }
 
         // remove all group auth
-        \yii::$app->db->createCommand()->delete('admin_group_auth', ['group_id' => $this->getItemId()])->execute();
+        Yii::$app->db->createCommand()->delete('admin_group_auth', ['group_id' => $this->getItemId()])->execute();
 
         foreach ($safeCopy as $authId => $options) {
-            \yii::$app->db->createCommand()->insert('admin_group_auth', [
+            Yii::$app->db->createCommand()->insert('admin_group_auth', [
                 'group_id' => $this->getItemId(),
                 'auth_id' => $authId,
                 'crud_create' => (isset($options['create'])) ? 1 : 0,
