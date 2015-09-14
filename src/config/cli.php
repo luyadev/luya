@@ -9,6 +9,7 @@ $config = [
         'command' => '\luya\commands\CommandController',
         'import' => '\luya\commands\ImportController',
         'setup' => '\luya\commands\SetupController',
+        'health' => '\luya\commands\HealthController',
     ],
     'components' => [
         'mail' => [
