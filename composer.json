@@ -56,5 +56,6 @@
     	"asset-installer-paths": {
             "bower-asset-library": "vendor/bower"
         }
-    }
+    },
+    "bin" : ["src/bin/luya"]
 }
