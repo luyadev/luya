@@ -1,37 +1,28 @@
-*.bak
-.project
-phpunit.xml
-### Eclipse ###
-*.pydevproject
-.metadata
-.gradle
-bin/
-tmp/
+### TEMP FILES
 *.tmp
 *.bak
 *.swp
 *~.nib
-local.properties
+*.launch
+
+### ECLIPSE
+.metadata
+.project
+.buildpath
 .settings/
 .loadpath
-# External tool builders
 .externalToolBuilders/
-# Locally stored "Eclipse launch configurations"
-*.launch
-# CDT-specific
-.cproject
-# PDT-specific
-.buildpath
-# sbteclipse plugin
 .target
-# TeXlipse plugin
 .texlipse
 
-/vendor/
-/composer.lock
-# PhpStorm
+### PHPSTORM
 .idea/
-scripts/.subsplit
 /.tern-project
 .phpintel/
 /build/
+
+### LUYA
+phpunit.xml
+vendor/
+composer.lock
+scripts/.subsplit
