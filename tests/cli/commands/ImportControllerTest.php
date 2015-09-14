@@ -26,6 +26,6 @@ class ImportControllerTest extends \tests\cli\Base
 
         $resp = Yii::$app->run();
 
-        $this->assertEquals(1, $resp);
+        $this->assertEquals(0, $resp);
     }
 }
