@@ -1,0 +1,31 @@
+#!/usr/bin/env php
+<?php
+
+
+// use the luya boot wrapping class
+
+$loaders = [
+	__DIR__ . '/../vendor/autoload.php',
+	__DIR__ . '/../../vendor/autoload.php',
+];
+
+
+foreach($loaders as $file) {
+	if (file_exists($file)) {
+		require($file);
+		$vendor = pathinfo($file, PATHINFO_DIRNAME);
+	}
+}
+
+$opts = getopt("", ['config:']);
+
+if (!isset($opts['config'])) {
+	echo "config arg must be passed. '--config=\"path/to/configs/\"'" . PHP_EOL;
+	exit(1);
+}
+
+
+$boot = new \luya\Boot();
+$boot->setYiiPath($vendor . '/yiisoft/yii2/Yii.php');
+$boot->configPath = $opts['config'];
+$boot->applicationCli();
