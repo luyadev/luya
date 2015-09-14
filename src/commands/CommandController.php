@@ -26,11 +26,7 @@ class CommandController extends \luya\base\Command
             return $response;
         }
 
-        if ($response) {
-            exit(0);
-        }
-
-        exit(1);
+        return $response;
     }
     
     public function actionHelp()
@@ -41,6 +37,8 @@ class CommandController extends \luya\base\Command
         $this->output("- setup");
         $this->output("- crud/create");
         $this->output("- module/create");
-        exit(0);
+        $this->output("- health");
+        
+        return 0;
     }
 }

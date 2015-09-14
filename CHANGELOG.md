@@ -3,6 +3,12 @@ LUYA CHANGELOG
 
 1.0.0-alpha19 (in progress)
 ---------------------------
+- added health command
+- fixed exit code return output in console commands.
+- basic ngrest config class integration
+- remote token security fix
+- added aws close buttons (unstyled)
+- added luya bin file `./vendor/bin/luya` to execute console commands. Will remove ability to execute console commands against index.php
 
 1.0.0-alpha18 (2. Sept 2015)
 ---------------------------

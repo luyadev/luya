@@ -23,13 +23,13 @@ abstract class Command extends \yii\console\Controller
     {
         $this->output($message, Console::FG_RED);
 
-        return false;
+        return 1;
     }
 
     public function outputSuccess($message)
     {
         $this->output($message, Console::FG_GREEN);
 
-        return true;
+        return 0;
     }
 }
