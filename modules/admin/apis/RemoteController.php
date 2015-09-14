@@ -16,7 +16,7 @@ class RemoteController extends \luya\rest\Controller
 
     public function actionIndex($token)
     {
-        if (!Yii::$app->remoteToken || sha1(Yii::$app->remoteToken) !== $token) {
+        if (empty(Yii::$app->remoteToken) || sha1(Yii::$app->remoteToken) !== $token) {
             throw new Exception('Wrong token');
             exit;
         }
