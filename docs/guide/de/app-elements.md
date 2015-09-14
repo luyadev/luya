@@ -97,6 +97,23 @@ Das obenzeigte Template setzt natürlich voraus das alle Variabeln `title`, `des
 
 Styleguide
 ==========
+Um einen Styleguide output aufzurufen muss in der `composer.json` Datei `require : { "zephir/luya-module-styleguide" : "dev-master" }` hinterlegt werden und via composer update installiert werden.
 
-@TBD
+Danach muss das Module in der Config hinzugefügt werden:
 
+```php
+return [
+	// ...
+	'modules' => [
+		// ...
+		'styleguide' => [
+			'class' => 'styleguide/Module',
+			'password' => 'myguide',
+		]
+	]
+]
+```
+
+> Die `password` eigenschaft dient dazu den Styleguide mit einem Passwort zu schützen damit dieser nicht von jederman aufgerufen werden kann.
+
+Um den Styleguide aufzurufen besuche nun die Url `http://deinwebsite.com/styleguide`.
