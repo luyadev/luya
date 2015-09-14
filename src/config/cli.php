@@ -1,9 +1,9 @@
 <?php
 
 $config = [
+    'defaultRoute' => 'command/help',
     'controllerMap' => [
         'migrate' => '\luya\commands\MigrateController',
-        //'exec' => '\luya\commands\ExecutableController',
         'crud' => '\luya\commands\CrudController',
         'module' => '\luya\commands\ModuleController',
         'command' => '\luya\commands\CommandController',
