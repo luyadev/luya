@@ -18,15 +18,6 @@ foreach($loaders as $file) {
 	}
 }
 
-/*
-$opts = getopt("", ['config:']);
-
-if (!isset($opts['config'])) {
-	echo "config arg must be passed. '--config=\"path/to/configs/\"'" . PHP_EOL;
-	exit(1);
-}
-*/
-
 $boot = new \luya\Boot();
 $boot->setConfigPath('configs/');
 $boot->setYiiPath($vendor . '/yiisoft/yii2/Yii.php');
