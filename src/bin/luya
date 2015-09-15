@@ -1,16 +1,13 @@
 #!/usr/bin/env php
 <?php
 
-
-// use the luya boot wrapping class
-
+// loaders array
 $loaders = [
 	'vendor/autoload.php',
 	__DIR__ . '/../vendor/autoload.php',
 	__DIR__ . '/../../vendor/autoload.php',
 ];
-
-
+// find vendor if exists
 foreach($loaders as $file) {
 	if (file_exists($file)) {
 		require($file);
