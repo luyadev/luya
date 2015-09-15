@@ -28,7 +28,8 @@
 		"phpunit/phpunit" : "@stable",
 		"fabpot/php-cs-fixer" : "@stable",
 		"imagine/imagine": "0.6.2",
-		"codeclimate/php-test-reporter": "dev-master"
+		"codeclimate/php-test-reporter": "dev-master",
+		"phpunit/php-token-stream": "1.4.6"
 	},
 	"autoload" : {
 		"psr-4" : {
