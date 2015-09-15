@@ -3,6 +3,7 @@
 namespace luya\commands;
 
 use Yii;
+use admin\models\Config;
 
 class SetupController extends \luya\base\Command
 {
@@ -20,12 +21,17 @@ class SetupController extends \luya\base\Command
      */
     public function actionIndex()
     {
+        if (Config::has('setup_command_timestamp')) {
+            echo "Setup wurde bereits ausgeführt am " . date("d.m.Y H:i", Config::get('setup_command_timestamp'));
+            return 1;
+        }
+        
         $email = $this->prompt('Benutzer E-Mail:');
         $password = $this->prompt('Benutzer Passwort:');
         $firstname = $this->prompt('Vorname:');
         $lastname = $this->prompt('Nachname:');
         if (!$this->confirm("Create a new user ($email) with password '$password'?")) {
-            exit(1);
+            return 1;
         }
 
         $salt = Yii::$app->getSecurity()->generateRandomString();
@@ -101,7 +107,9 @@ class SetupController extends \luya\base\Command
             ]]),
         ]);
 
+        Config::set('setup_command_timestamp', time());
+        
         echo "You can now login with E-Mail: '$email' and password: '$password'";
-        exit(0);
+        return 0;
     }
 }
