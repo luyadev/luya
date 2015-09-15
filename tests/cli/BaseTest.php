@@ -19,7 +19,6 @@ class BaseTest extends \tests\cli\Base
 {
     public function testApp()
     {
-        //$this->assertEquals(true, Yii::$app instanceof \luya\cli\Application);
-        // $this->assertInstanceOf('luya\cli\Application', Yii::$app);
+        $this->assertInstanceOf('luya\cli\Application', Yii::$app);
     }
 }
