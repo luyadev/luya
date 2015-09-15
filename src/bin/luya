@@ -5,6 +5,7 @@
 // use the luya boot wrapping class
 
 $loaders = [
+	'vendor/autoload.php',
 	__DIR__ . '/../vendor/autoload.php',
 	__DIR__ . '/../../vendor/autoload.php',
 ];
