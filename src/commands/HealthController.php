@@ -7,10 +7,10 @@ use yii\helpers\FileHelper;
 class HealthController extends \luya\base\Command
 {
     public $folders = [
-        'public_html/assets',
-        'public_html/storage',
-        'migrations',
-        'vendor',
+        'public_html/assets' => true,
+        'public_html/storage' => true,
+        'migrations' => false,
+        'vendor' => false,
     ];
 
     public $files = [
@@ -22,7 +22,7 @@ class HealthController extends \luya\base\Command
     {
         $error = false;
 
-        foreach ($this->folders as $folder) {
+        foreach ($this->folders as $folder => $writable) {
             if (!file_exists($folder)) {
                 if (FileHelper::createDirectory($folder)) {
                     $this->outputSuccess("$folder: successfully created directory");
@@ -32,6 +32,13 @@ class HealthController extends \luya\base\Command
                 }
             } else {
                 $this->outputSuccess("$folder: directory exists");
+            }
+            
+            if ($writable) {
+                if (!is_writable($folder)) {
+                    $error = true;
+                    $this->outputError("$folder: is not writable.");
+                }
             }
         }
 
