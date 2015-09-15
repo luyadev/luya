@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-alpha19 (in progress)
 ---------------------------
+- added admin_config to set get values.
 - added health command
 - fixed exit code return output in console commands.
 - basic ngrest config class integration
