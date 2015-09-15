@@ -15,9 +15,9 @@ class FilterImporter extends \luya\base\Importer
             $model->attributes = $fields;
             $model->update(false);
         } else {
-            $fields['identifier'] = $identifier;
             $this->getImporter()->addLog('filters', 'effect "'.$identifier.'" added');
             $insert = new StorageEffect();
+            $insert->identifier = $identifier;
             $insert->attributes = $fields;
             $insert->insert(false);
         }
