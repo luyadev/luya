@@ -112,7 +112,7 @@ class ImportController extends \luya\base\Command implements \luya\interfaces\Im
         }
 
         \admin\models\Config::set('last_import_timestamp', time());
-        
+
         return $this->outputSuccess(print_r($this->_log, true));
     }
 }

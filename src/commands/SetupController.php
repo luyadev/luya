@@ -22,10 +22,11 @@ class SetupController extends \luya\base\Command
     public function actionIndex()
     {
         if (Config::has('setup_command_timestamp')) {
-            echo "Setup wurde bereits ausgeführt am " . date("d.m.Y H:i", Config::get('setup_command_timestamp'));
+            echo 'Setup wurde bereits ausgeführt am '.date('d.m.Y H:i', Config::get('setup_command_timestamp'));
+
             return 1;
         }
-        
+
         $email = $this->prompt('Benutzer E-Mail:');
         $password = $this->prompt('Benutzer Passwort:');
         $firstname = $this->prompt('Vorname:');
@@ -108,8 +109,9 @@ class SetupController extends \luya\base\Command
         ]);
 
         Config::set('setup_command_timestamp', time());
-        
+
         echo "You can now login with E-Mail: '$email' and password: '$password'";
+
         return 0;
     }
 }

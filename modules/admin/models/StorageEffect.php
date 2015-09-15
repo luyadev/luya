@@ -50,6 +50,7 @@ class StorageEffect extends \admin\ngrest\base\Model
         $config->list->field('identifier', 'Identifier')->text();
         $config->list->field('imagine_name', 'Imagine Effekt')->text();
         $config->list->field('imagine_json_params', 'Imagine Argumente')->textarea();
+
         return $config;
     }
 }

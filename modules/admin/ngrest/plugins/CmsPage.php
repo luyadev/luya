@@ -2,7 +2,6 @@
 
 namespace admin\ngrest\plugins;
 
-use Yii;
 use cmsadmin\models\Nav;
 
 class CmsPage extends \admin\ngrest\base\Plugin
@@ -25,7 +24,7 @@ class CmsPage extends \admin\ngrest\base\Plugin
     {
         return $this->renderCreate($doc);
     }
-    
+
     public function onAfterFind($fieldValue)
     {
         return (!empty($fieldValue)) ? Nav::findContent($fieldValue) : $fieldValue;

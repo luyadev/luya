@@ -6,7 +6,7 @@ use yii\helpers\ArrayHelper;
 
 /**
  * define in module settings the ngrestConfigLinker property of each Module to override the local
- * use ngRestConfig
+ * use ngRestConfig.
  * 
  * ```php
  * [
@@ -18,6 +18,7 @@ use yii\helpers\ArrayHelper;
  * ```
  * 
  * @todo move node(), nodeRoute(), group(), itemApi(), itemRoute() into a seperate class.
+ *
  * @author nadar
  */
 class Module extends \luya\base\Module
@@ -35,12 +36,12 @@ class Module extends \luya\base\Module
     private $_permissionRoutes = [];
 
     public $ngrestConfigLinker = [];
-    
+
     public function getLinkedNgRestConfig($apiEndpoint)
     {
         return array_key_exists($apiEndpoint, $this->ngrestConfigLinker) ? $this->ngrestConfigLinker[$apiEndpoint] : false;
     }
-    
+
     public function getMenu()
     {
         return [];

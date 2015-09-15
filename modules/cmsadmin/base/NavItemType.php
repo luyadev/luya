@@ -12,7 +12,7 @@ abstract class NavItemType extends \yii\db\ActiveRecord
     {
         return []; // override
     }
-    
+
     public $options = [];
 
     public function setOptions($options)

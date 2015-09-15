@@ -1,6 +1,5 @@
 <?php
 
-use yii\db\Schema;
 use yii\db\Migration;
 
 class m150915_081559_admin_config extends Migration
@@ -9,7 +8,7 @@ class m150915_081559_admin_config extends Migration
     {
         $this->createTable('admin_config', [
             'name' => 'VARCHAR(80) NOT NULL UNIQUE PRIMARY KEY',
-            'value' => 'VARCHAR(255) NOT NULL', 
+            'value' => 'VARCHAR(255) NOT NULL',
         ]);
     }
 
