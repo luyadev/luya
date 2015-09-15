@@ -21,9 +21,13 @@ class SetupController extends \luya\base\Command
      */
     public function actionIndex()
     {
+        if (!Config::has('last_import_timestamp')) {
+            echo 'Zuerst musst du den Import-Befehl ausführen damit das Setup funktioniert.';
+            return 1;
+        }
+        
         if (Config::has('setup_command_timestamp')) {
             echo 'Setup wurde bereits ausgeführt am '.date('d.m.Y H:i', Config::get('setup_command_timestamp'));
-
             return 1;
         }
 
