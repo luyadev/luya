@@ -12,13 +12,13 @@ class FilterImporter extends \luya\base\Importer
         $model = StorageEffect::find()->where(['identifier' => $identifier])->one();
         if ($model) {
             $this->getImporter()->addLog('filters', 'effect "'.$identifier.'" updated');
-            $model->attributes = $fields;
+            $model->setAttributes($fields, false);
             $model->update(false);
         } else {
             $this->getImporter()->addLog('filters', 'effect "'.$identifier.'" added');
             $insert = new StorageEffect();
             $insert->identifier = $identifier;
-            $insert->attributes = $fields;
+            $insert->setAttributes($fields, false);
             $insert->insert(false);
         }
     }
