@@ -62,6 +62,23 @@ INSERT INTO `admin_auth` (`id`, `alias_name`, `module_name`, `is_crud`, `route`,
 
 -- --------------------------------------------------------
 
+
+
+CREATE TABLE IF NOT EXISTS `admin_config` (
+  `name` varchar(80) NOT NULL,
+  `value` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin_config`
+--
+ALTER TABLE `admin_config`
+ ADD PRIMARY KEY (`name`), ADD UNIQUE KEY `name` (`name`);
+
 --
 -- Table structure for table `dummy_table`
 --
