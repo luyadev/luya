@@ -24,7 +24,8 @@ class HealthController extends \luya\base\Command
 
         foreach ($this->folders as $folder => $writable) {
             if (!file_exists($folder)) {
-                if (FileHelper::createDirectory($folder)) {
+                $mode = ($writable) ? 0777 : 0775;
+                if (FileHelper::createDirectory($folder, $mode)) {
                     $this->outputSuccess("$folder: successfully created directory");
                 } else {
                     $error = true;
