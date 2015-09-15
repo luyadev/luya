@@ -7,15 +7,16 @@ use admin\models\admin\models;
 
 class FilterImporter extends \luya\base\Importer
 {
-    private function refresh($identfier, $fields)
+    private function refresh($identifier, $fields)
     {
-        $model = StorageEffect::find()->where(['identifier' => $identfier])->one();
+        $model = StorageEffect::find()->where(['identifier' => $identifier])->one();
         if ($model) {
-            $this->getImporter()->addLog('filters', 'effect "'.$identfier.'" updated');
+            $this->getImporter()->addLog('filters', 'effect "'.$identifier.'" updated');
             $model->attributes = $fields;
             $model->update(false);
         } else {
-            $this->getImporter()->addLog('filters', 'effect "'.$identfier.'" added');
+            $fields['identifier'] = $identifier;
+            $this->getImporter()->addLog('filters', 'effect "'.$identifier.'" added');
             $insert = new StorageEffect();
             $insert->attributes = $fields;
             $insert->insert(false);
