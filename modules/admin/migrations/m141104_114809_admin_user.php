@@ -12,7 +12,7 @@ class m141104_114809_admin_user extends Migration
             'firstname' => Schema::TYPE_STRING,
             'lastname' => Schema::TYPE_STRING,
             'title' => Schema::TYPE_SMALLINT,
-            'email' => Schema::TYPE_STRING,
+            'email' => "VARCHAR(120) NOT NULL UNIQUE",
             'password' => Schema::TYPE_STRING,
             'password_salt' => Schema::TYPE_STRING,
             'auth_token' => Schema::TYPE_STRING,
