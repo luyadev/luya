@@ -22,3 +22,4 @@ Plugin Übersicht
 |[checkboxRelation](ngrest-plugin-checkboxrelation.md) |Eine Checkbox auswahl basierend auf einer *junction table*. |
 |date                                          |Erstellt ein *Datum* Selektor Feld und gibt einen Unix Timestamp zurück.|
 |datetime                                          |Erstellt ein *Datum und Zeit* Selektor und gibt einen Unix Timestamp zurück.|
+|cmsPage    |Eine CMS Seite kann ausgewählt werden welche danach an dieser erstellt gerendert und angezeigt wird. Feld muss interger sein|
