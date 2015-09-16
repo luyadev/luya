@@ -22,12 +22,12 @@ class SetupController extends \luya\base\Command
     public function actionIndex()
     {
         if (!Config::has('last_import_timestamp')) {
-            echo 'Zuerst musst du den Import-Befehl ausführen damit das Setup funktioniert.';
+            echo PHP_EOL . 'Info: You have to run the "import" process first. run in terminal: ./vendor/bin/luya import' . PHP_EOL . PHP_EOL;
             return 1;
         }
         
         if (Config::has('setup_command_timestamp')) {
-            echo 'Setup wurde bereits ausgeführt am '.date('d.m.Y H:i', Config::get('setup_command_timestamp'));
+            echo PHP_EOL . 'Error: The setup process already have been started on the '.date('d.m.Y H:i', Config::get('setup_command_timestamp')) . '. If you want to reinstall your luya project. Drop all tables from your Database, run the migrate command, run the import command and then re-run the setup command.' . PHP_EOL . PHP_EOL;
             return 1;
         }
 
