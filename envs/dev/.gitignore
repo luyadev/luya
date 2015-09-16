@@ -27,3 +27,4 @@ composer.phar
 .project
 .settings
 
+/runtime/

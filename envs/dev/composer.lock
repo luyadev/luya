@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bcc4ef06f554876becb7ac158e82040d",
+    "hash": "c44bbd0f903108a60772cbb6b9d450da",
     "packages": [
         {
             "name": "bower-asset/angular",
@@ -28,25 +28,26 @@
         },
         {
             "name": "bower-asset/angular-dragdrop",
-            "version": "v1.0.11",
+            "version": "v1.0.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codef0rmer/angular-dragdrop.git",
-                "reference": "59e5889ce3af27d3c236c3b0bc107ac5ae9fdd9d"
+                "reference": "d5d60610ea2dd4ca1bc202030c33b1bf43b8f4ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codef0rmer/angular-dragdrop/zipball/59e5889ce3af27d3c236c3b0bc107ac5ae9fdd9d",
-                "reference": "59e5889ce3af27d3c236c3b0bc107ac5ae9fdd9d",
+                "url": "https://api.github.com/repos/codef0rmer/angular-dragdrop/zipball/d5d60610ea2dd4ca1bc202030c33b1bf43b8f4ac",
+                "reference": "d5d60610ea2dd4ca1bc202030c33b1bf43b8f4ac",
                 "shasum": ""
             },
             "require": {
-                "bower-asset/angular": "~1.0",
+                "bower-asset/angular": "dev-default|*",
                 "bower-asset/jquery-ui": "dev-default|*"
             },
             "require-dev": {
-                "bower-asset/angular-mocks": "~1.0",
-                "bower-asset/angular-ui-bootstrap-bower": "~0.12.0"
+                "bower-asset/angular-animate": "dev-default|*",
+                "bower-asset/angular-mocks": "dev-default|*",
+                "bower-asset/angular-ui-bootstrap-bower": "dev-default|*"
             },
             "type": "bower-asset-library",
             "extra": {
@@ -516,6 +517,33 @@
             ]
         },
         {
+            "name": "bower-asset/typeahead.js",
+            "version": "v0.11.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twitter/typeahead.js.git",
+                "reference": "588440f66559714280628a4f9799f0c4eb880a4a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twitter/typeahead.js/zipball/588440f66559714280628a4f9799f0c4eb880a4a",
+                "reference": "588440f66559714280628a4f9799f0c4eb880a4a",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.7"
+            },
+            "require-dev": {
+                "bower-asset/jasmine-ajax": "~1.3.1",
+                "bower-asset/jasmine-jquery": "~1.5.2",
+                "bower-asset/jquery": "~1.7"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "dist/typeahead.bundle.js"
+            }
+        },
+        {
             "name": "bower-asset/yii2-pjax",
             "version": "dev-master",
             "source": {
@@ -765,12 +793,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "33af93ab4b5e76df7a4c774910590f814a3e576c"
+                "reference": "ef728b658fe6836823aa9e7d673cb08dab216b7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/33af93ab4b5e76df7a4c774910590f814a3e576c",
-                "reference": "33af93ab4b5e76df7a4c774910590f814a3e576c",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/ef728b658fe6836823aa9e7d673cb08dab216b7d",
+                "reference": "ef728b658fe6836823aa9e7d673cb08dab216b7d",
                 "shasum": ""
             },
             "require": {
@@ -786,7 +814,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.0-dev"
+                    "dev-master": "6.1-dev"
                 }
             },
             "autoload": {
@@ -819,7 +847,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2015-09-01 23:14:13"
+            "time": "2015-09-08 20:05:33"
         },
         {
             "name": "guzzlehttp/promises",
@@ -1025,16 +1053,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v5.2.12",
+            "version": "v5.2.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "5dd754112d07ab7480824c2916689ce06f83a842"
+                "reference": "45df3a88f7f46071e10d0b600f228d19f95911b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/5dd754112d07ab7480824c2916689ce06f83a842",
-                "reference": "5dd754112d07ab7480824c2916689ce06f83a842",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/45df3a88f7f46071e10d0b600f228d19f95911b3",
+                "reference": "45df3a88f7f46071e10d0b600f228d19f95911b3",
                 "shasum": ""
             },
             "require": {
@@ -1042,7 +1070,7 @@
             },
             "require-dev": {
                 "phpdocumentor/phpdocumentor": "*",
-                "phpunit/phpunit": "4.3.*"
+                "phpunit/phpunit": "4.7.*"
             },
             "suggest": {
                 "league/oauth2-client": "Needed for Gmail's XOAUTH2 authentication system"
@@ -1052,7 +1080,7 @@
                 "classmap": [
                     "class.phpmailer.php",
                     "class.phpmaileroauth.php",
-                    "class.oauth.php",
+                    "class.phpmaileroauthgoogle.php",
                     "class.smtp.php",
                     "class.pop3.php",
                     "extras/EasyPeasyICS.php",
@@ -1081,7 +1109,41 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2015-09-02 10:40:37"
+            "time": "2015-09-14 09:18:12"
+        },
+        {
+            "name": "phpspec/php-diff",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpspec/php-diff.git",
+                "reference": "30e103d19519fe678ae64a60d77884ef3d71b28a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpspec/php-diff/zipball/30e103d19519fe678ae64a60d77884ef3d71b28a",
+                "reference": "30e103d19519fe678ae64a60d77884ef3d71b28a",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Diff": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Boulton",
+                    "homepage": "http://github.com/chrisboulton",
+                    "role": "Original developer"
+                }
+            ],
+            "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
+            "time": "2013-11-01 13:02:21"
         },
         {
             "name": "psr/http-message",
@@ -1138,12 +1200,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/BrowserKit.git",
-                "reference": "4f297d7e00c375b6ab03732e076f65799a73937d"
+                "reference": "4dbd336331f5e7ba7a6f9e4f9f608b89093f49b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/4f297d7e00c375b6ab03732e076f65799a73937d",
-                "reference": "4f297d7e00c375b6ab03732e076f65799a73937d",
+                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/4dbd336331f5e7ba7a6f9e4f9f608b89093f49b3",
+                "reference": "4dbd336331f5e7ba7a6f9e4f9f608b89093f49b3",
                 "shasum": ""
             },
             "require": {
@@ -1185,7 +1247,7 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
-            "time": "2015-07-09 16:11:14"
+            "time": "2015-09-06 08:37:06"
         },
         {
             "name": "symfony/css-selector",
@@ -1246,12 +1308,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/DomCrawler.git",
-                "reference": "be577b3a5d4a06d8ce03db57222bd06b5a6509de"
+                "reference": "5c9bcc11fc56ccf968fb34fe8dda3b16481b4221"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/be577b3a5d4a06d8ce03db57222bd06b5a6509de",
-                "reference": "be577b3a5d4a06d8ce03db57222bd06b5a6509de",
+                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/5c9bcc11fc56ccf968fb34fe8dda3b16481b4221",
+                "reference": "5c9bcc11fc56ccf968fb34fe8dda3b16481b4221",
                 "shasum": ""
             },
             "require": {
@@ -1291,20 +1353,20 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2015-08-27 06:53:13"
+            "time": "2015-09-14 14:15:17"
         },
         {
             "name": "twig/twig",
-            "version": "v1.21.1",
+            "version": "v1.21.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "ca8d3aa90b6a01c82e07909fe815d6b443e75a23"
+                "reference": "ddce1136beb8db29b9cd7dffa8ab518b978c9db3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ca8d3aa90b6a01c82e07909fe815d6b443e75a23",
-                "reference": "ca8d3aa90b6a01c82e07909fe815d6b443e75a23",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ddce1136beb8db29b9cd7dffa8ab518b978c9db3",
+                "reference": "ddce1136beb8db29b9cd7dffa8ab518b978c9db3",
                 "shasum": ""
             },
             "require": {
@@ -1352,7 +1414,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-08-26 08:58:31"
+            "time": "2015-09-09 05:28:51"
         },
         {
             "name": "yiisoft/yii2",
@@ -1585,13 +1647,65 @@
                 "yii2"
             ],
             "time": "2015-08-06 16:14:06"
+        },
+        {
+            "name": "yiisoft/yii2-gii",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-gii.git",
+                "reference": "6519954dc8dd16050d886d1266d6248cbae2d14f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/6519954dc8dd16050d886d1266d6248cbae2d14f",
+                "reference": "6519954dc8dd16050d886d1266d6248cbae2d14f",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/typeahead.js": "0.10.* | ~0.11.0",
+                "phpspec/php-diff": ">=1.0.2",
+                "yiisoft/yii2": ">=2.0.4",
+                "yiisoft/yii2-bootstrap": "~2.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                },
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\gii\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com"
+                }
+            ],
+            "description": "The Gii extension for the Yii framework",
+            "keywords": [
+                "code generator",
+                "gii",
+                "yii2"
+            ],
+            "time": "2015-08-31 23:04:33"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "twig/twig": 0,
         "bower-asset/jquery": 0,
         "bower-asset/jquery-ui": 0,
         "bower-asset/angular": 0,
