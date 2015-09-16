@@ -2,6 +2,7 @@
 
 namespace luya\commands;
 
+use Yii;
 use yii\helpers\FileHelper;
 
 class HealthController extends \luya\base\Command
@@ -11,6 +12,7 @@ class HealthController extends \luya\base\Command
         'public_html/storage' => true,
         'migrations' => false,
         'vendor' => false,
+        'runtime' => true,
     ];
 
     public $files = [
@@ -22,6 +24,8 @@ class HealthController extends \luya\base\Command
     {
         $error = false;
 
+        @chdir(Yii::getAlias('@app'));
+        
         foreach ($this->folders as $folder => $writable) {
             if (!file_exists($folder)) {
                 $mode = ($writable) ? 0777 : 0775;
@@ -38,7 +42,7 @@ class HealthController extends \luya\base\Command
             if ($writable) {
                 if (!is_writable($folder)) {
                     $error = true;
-                    $this->outputError("$folder: is not writable.");
+                    $this->outputError("$folder: is not writable, please change permissions.");
                 }
             }
         }
