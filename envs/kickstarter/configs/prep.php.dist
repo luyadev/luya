@@ -29,7 +29,13 @@ $config = [
     		'fromName' => null,
     	],
     	'errorHandler' => [
-            'transferException' => true,
+    		/*
+    		 * ATTENTION:
+    		 * To help us improve our Software you can enable this property to send all Exceptions directly to the luya developer team. The follwing informations will be transfered:
+    		 * - $_GET, $_POST, $_SESSION & $_SERVER
+    		 * - Exception Object (inlcuding stack trace, line, linenr, message, file)
+    		 */
+            'transferException' => false,
         ]
     ]
 ];
