@@ -32,7 +32,12 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
     {
         if ($this->_modules === null) {
             foreach ($app->getModules() as $id => $obj) {
-                $this->_modules[$id] = Yii::$app->getModule($id);
+                // create module object
+                $moduleObject = Yii::$app->getModule($id);
+                // see if the module is a luya base module, otherwise ignore
+                if ($moduleObject instanceof \luya\base\Module) {
+                    $this->_modules[$id] = $moduleObject;
+                }
             }
         }
     }
