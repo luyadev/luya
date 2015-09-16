@@ -51,29 +51,45 @@ Jede Konfigurationsdatei hat eine Funktion:
 
 Datenbank
 ----------
-Du kannst nun in der *local.php* (welche du aus dem dist file kopiert hast) deine Datenbank Verbindung hinterlegen. Danach gehen wir wieder in das *Terminal* und begeben uns in das `public_html` Verzeichniss.
+Du kannst nun in der *local.php* (welche du aus dem dist file kopiert hast) deine Datenbank Verbindung festlegen. Luya verfügt über eine *bin* Datei welche im Verzeichniss `vendor/bin/` liegt. Auf diese Bind Datei kannst du alle [Konsolen Befehl](luya-console.md) ausführen. So auch der Migration command.
+
+Nun führen wir den Migration befehl aus:
 
 ```sh
-cd luya-kickstarter/public_html
-```
-
-Dort führen wir auf der index.php der Migrations Befehl aus:
-
-```sh
-php index.php migrate
+./vendor/bin/luya migrate
 ```
 
 Du musst nun allen Migrationsdaten zustimmen, diese werden ausgeführt un deine Datenbank ist startklar.
 
+Import
+------
+Nun importieren wir alle Projekt Daten in die Datenbank mit dem `import` befehl:
+
+```sh
+./vendor/bin/luya import
+```
+
 Setup
 -----
-Als nächstes führen wir den Setup-Befehl aus welcher einen Benutzer und Gruppe erstellt. Dazu gehen wir wieder ins Terminal:
+Nun können wir einmalig den Setup befehl ausführen welcher Benutzer und Gruppen erstellt.
+
+```sh
+./vendor/bin/luya setup
+```
+
+Health Check
+------------
+Um Ordner und Datein und dere Zustand zu prüfen führen wir nun noch den `health` command aus:
+
+```sh
+./vendor/bin/luya health
+```
+
+Nach dem Eingeben deiner Daten kannst du nun die Administration im Browser öffnen. Wenn du das Projekt in deinem `htdocs` Hauptverzeichniss erstellt hast könnte die Adresse zum Beispiel so ausehen:
 
 ```
-php index.php setup
+http://localhost/luya-kickstarter/admin
 ```
-
-Nach dem Eingeben deiner Daten kannst du nun die Administration im Browser öffnen. Wenn du das Projekt in deinem `htdocs` Hauptverzeichniss erstellt hast könnte die Adresse zum Beispiel so aussehen `http://localhost/luya-kickstarter/admin`.
 
 Wenn du dich eingeloggt hast, kannst nun der *Administrator* Gruppe alle *Berechtigungen* erteilen.
 
