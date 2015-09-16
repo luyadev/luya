@@ -1,6 +1,9 @@
 LUYA CHANGELOG
 ==============
 
+1.0.0-alpha20 (in progress)
+---------------------------
+
 1.0.0-alpha19 (16. Sept 2015)
 ---------------------------
 - change ngRestAfterFind behavior.
