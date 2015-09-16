@@ -22,8 +22,8 @@ composer.phar
 
 /config/local.php
 /config/server.php
+
 # eclipse
 .buildpath
 .project
 .settings
-
