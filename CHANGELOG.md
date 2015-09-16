@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-alpha19 (in progress)
 ---------------------------
+- change ngRestAfterFind behavior.
 - removed effect creation on setup process, moved to filter importer.
 - added admin_config to set get values.
 - added health command
