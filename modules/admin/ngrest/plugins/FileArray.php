@@ -31,9 +31,14 @@ class FileArray extends \admin\ngrest\base\Plugin
 
     //
 
-    public function onAfterFind($value)
+    public function onAfterNgRestFind($fieldValue)
     {
-        return json_decode($value, true);
+        return json_decode($fieldValue, true);
+    }
+    
+    public function onAfterFind($fieldValue)
+    {
+        return json_decode($fieldValue, true);
     }
 
     public function onBeforeCreate($value)

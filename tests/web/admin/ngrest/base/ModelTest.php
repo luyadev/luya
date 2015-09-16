@@ -38,6 +38,8 @@ class ModelTest extends \tests\web\Base
         $this->assertEquals($time, $find->datetime);
         $this->assertEquals('', $find->cms_page);
 
+        // cause ngrestCallType changed to not beeing part of afterFind, plain json output
+        
         Yii::$app->request->setQueryParams([
             'ngrestCallType' => 'list',
         ]);
@@ -47,15 +49,7 @@ class ModelTest extends \tests\web\Base
 
         $find = DummyTableModel::findOne($id);
 
-        $this->assertEquals(true, is_array($find->i18n_text));
-        $this->assertEquals(true, is_array($find->i18n_textarea));
-        $this->arrayHasKey('de', $find->i18n_text);
-        $this->arrayHasKey('en', $find->i18n_text);
-        $this->arrayHasKey('de', $find->i18n_textarea);
-        $this->arrayHasKey('en', $find->i18n_textarea);
-        $this->assertEquals('foo-de', $find->i18n_text['de']);
-        $this->assertEquals('foo-en', $find->i18n_text['en']);
-        $this->assertEquals('foo-de', $find->i18n_textarea['de']);
-        $this->assertEquals('foo-en', $find->i18n_textarea['en']);
+        $this->assertEquals(false, is_array($find->i18n_text));
+        $this->assertEquals(false, is_array($find->i18n_textarea));
     }
 }

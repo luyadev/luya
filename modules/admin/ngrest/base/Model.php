@@ -106,6 +106,7 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
         return static::find();
     }
 
+    /*
     public function afterFind()
     {
         if ($this->getNgRestCallType() == 'list') {
@@ -113,6 +114,16 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
         }
 
         return parent::afterFind();
+    }
+    */
+    
+    public function afterFind()
+    {
+        if ($this->getNgRestCallType()) {
+            $this->trigger(self::EVENT_AFTER_NGREST_FIND);
+        } else {
+            return parent::afterFind();
+        }
     }
 
     private function getDefaultLang($field = false)

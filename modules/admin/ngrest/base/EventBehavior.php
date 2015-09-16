@@ -40,7 +40,7 @@ class EventBehavior extends \yii\base\Behavior
 
     public function eventServiceNgrest($event)
     {
-        $events = $this->ngRestConfig->getPlugins(); // ngCrud is create not insert
+        $events = $this->ngRestConfig->getPlugins();
 
         $service = [];
         foreach ($events as $field => $plugins) {
@@ -121,7 +121,7 @@ class EventBehavior extends \yii\base\Behavior
         foreach ($events as $field => $plugins) {
             foreach ($plugins as $plugin) {
                 $obj = $this->createPluginObject($plugin, $event->sender);
-                $response = $obj->onAfterNgRestList($event->sender->$field);
+                $response = $obj->onAfterNgRestFind($event->sender->$field);
                 if ($response !== false) {
                     $event->sender->$field = $response;
                 }

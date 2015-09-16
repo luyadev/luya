@@ -76,8 +76,8 @@ abstract class Plugin
     {
         return false;
     }
-
-    public function onAfterNgRestList($fieldValue)
+    
+    public function onAfterNgRestFind($fieldValue)
     {
         return false;
     }

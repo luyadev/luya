@@ -46,14 +46,16 @@ abstract class Select extends \admin\ngrest\base\Plugin
         return ['selectdata' => $this->data];
     }
 
-    public function onAfterNgRestList($fieldValue)
+    public function onAfterNgRestFind($fieldValue)
     {
-        foreach ($this->data as $item) {
-            if ($item['value'] == $fieldValue) {
-                return $item['label'];
+        if ($this->getModel()->getNgRestCallType() == 'list') {
+            foreach ($this->data as $item) {
+                if ($item['value'] == $fieldValue) {
+                    return $item['label'];
+                }
             }
         }
-
+        
         return $fieldValue;
     }
 }
