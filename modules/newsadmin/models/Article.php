@@ -66,9 +66,13 @@ class Article extends \admin\ngrest\base\Model
         return \luya\helpers\Url::to('news/default/detail', ['id' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
     }
 
-    public static function getAvailableNews()
+    public static function getAvailableNews($limit = false)
     {
-        $articles = self::find()->where('timestamp_display_from <= :time', ['time' => time()])->all();
+        $q = self::find()->where('timestamp_display_from <= :time', ['time' => time()])->orderBy("timestamp_display_from DESC");
+        if ($limit) {
+            $q->limit($limit);
+        }
+        $articles = $q->all();
 
         // filter if display time is limited
         foreach ($articles as $key => $article) {

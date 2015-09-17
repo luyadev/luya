@@ -33,7 +33,7 @@ class LatestNews extends \cmsadmin\base\Block
     public function extraVars()
     {
         return [
-            'items' => \newsadmin\models\Article::find()->limit($this->getCfgValue('limit', 10))->all(),
+            'items' => \newsadmin\models\Article::getAvailableNews($this->getCfgValue('limit', 10)),
         ];
     }
 
