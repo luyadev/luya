@@ -61,6 +61,7 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
             $this->on(self::EVENT_BEFORE_INSERT, [$this, 'i18nBeforeUpdateAndCreate']);
             $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'i18nBeforeUpdateAndCreate']);
             $this->on(self::EVENT_AFTER_FIND, [$this, 'i18nAfterFind']);
+            $this->on(self::EVENT_AFTER_NGREST_FIND, [$this, 'i18nAfterFind']);
         }
     }
 
