@@ -6,7 +6,7 @@ Mit einem Projekt Filter kannst du *Bilder* nach deinen Projekt spezifischen bed
 
 Beispiel Filter
 ---------------
-Um einen Filter zu erstellen gehst du in deinem Projekt (app) in den Ordner filters, falls dieser nicht existiert kannst du ihn erstellen. Erstelle nun eine PHP Datei mit suffix *Filter*, zum Beispiel `MyFilter`. Der Inhalt dieser Datei könnte wie folgt aussehen:
+Um einen Filter zu erstellen gehst du in deinem Projekt (app) in den Ordner `filters`, falls dieser nicht existiert kannst du ihn erstellen. Erstelle nun eine PHP Datei mit suffix *Filter*, zum Beispiel `MyFilter`. Der Inhalt dieser Datei könnte wie folgt aussehen:
 
 ```php
 <?php
@@ -37,11 +37,7 @@ class MyFilter extends \admin\base\Filter
 }
 ```
 
-In der `chain()` methode kannst du mehrer verschieden Effekt hintereinander reihen, eine Übersicht aller effekt findest du unter **Admin->Effects**. Den so eben erstellten `MyFilter` kannst du nun mit dem `exec` befehl importieren. Öffne dafür das *Terminal* und wechsle in das `public_html` Verzeichnis wo deine index.php Datei liegt. 
-
-```
-php index.php exec
-```
+In der `chain()` methode kannst du mehrer verschieden Effekt hintereinander reihen, eine Übersicht aller effekt findest du unter **Admin->Effects**. Den soeben erstellten `MyFilter` kannst du nun mit dem `import`-Befehl ([Konsolenbefehle](luya-console.md)) importieren.
 
 Filter Anwenden
 ----------------
