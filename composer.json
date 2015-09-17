@@ -19,7 +19,7 @@
 	"require" : {
 		"php": ">=5.4.0",
 		"yiisoft/yii2": "2.0.6",
-		"twig/twig" : "1.21.2",
+		"twig/twig" : "1.*",
         "curl/curl" : "1.2.1",
         "phpmailer/phpmailer": "5.2.*@stable"
 	},
@@ -28,8 +28,7 @@
 		"phpunit/phpunit" : "@stable",
 		"fabpot/php-cs-fixer" : "@stable",
 		"imagine/imagine": "0.6.2",
-		"codeclimate/php-test-reporter": "dev-master",
-		"phpunit/php-token-stream": "1.4.6"
+		"codeclimate/php-test-reporter": "dev-master"
 	},
 	"autoload" : {
 		"psr-4" : {
