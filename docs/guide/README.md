@@ -5,6 +5,7 @@ Installation
 --
 - install.md
 - install-mac.md
+- install-windows.md
 - install-structure.md
 
 APP (your luya project application)
