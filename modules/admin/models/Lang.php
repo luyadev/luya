@@ -63,7 +63,7 @@ class Lang extends \admin\ngrest\base\Model
     public static function getQuery()
     {
         if (self::$_langInstanceQuery === null) {
-            self::$_langInstanceQuery = self::find()->asArray()->all();
+            self::$_langInstanceQuery = self::find()->asArray()->indexBy('short_code')->all();
         }
 
         return self::$_langInstanceQuery;

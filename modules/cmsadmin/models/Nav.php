@@ -260,6 +260,8 @@ class Nav extends \yii\db\ActiveRecord
 
         return $navItemId;
     }
+    
+    /*
 
     public static function getItemsData($navId, $displayHidden = false)
     {
@@ -267,4 +269,6 @@ class Nav extends \yii\db\ActiveRecord
             ':id' => $navId, ':hidden' => (int) $displayHidden,
         ])->queryAll();
     }
+    
+    */
 }

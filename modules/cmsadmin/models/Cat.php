@@ -74,8 +74,22 @@ class Cat extends \admin\ngrest\base\Model
         ];
     }
 
+    /** 
+     * @todo should be en static instance variable isntead of line 16
+     */
     public static function getDefault()
     {
         return self::find()->where(['is_default' => 1])->asArray()->one();
+    }
+    
+    private static $_queryInstance = null;
+    
+    public static function getQuery()
+    {
+        if (self::$_queryInstance === null) {
+            self::$_queryInstance = self::find()->asArray()->indexBy('id')->all();
+        }
+    
+        return self::$_queryInstance;
     }
 }

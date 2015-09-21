@@ -3,91 +3,175 @@
 namespace cms\components;
 
 use Yii;
+use Exception;
 use cmsadmin\models\Nav;
 use cmsadmin\models\Cat;
+use admin\models\Lang;
 
+/**
+ * Links component array base:
+ * 
+ * ```php
+ * [
+ *  '1' => [ // 1 = de
+ *      ['full_url' => '...'', 'url' => '...', 'id' => '', 'nav_id' => ''],
+ *      // ...
+ *  ],
+ *  '2' => [ // 2 = en
+ *  
+ *  ],
+ * ]
+ * ```
+ * 
+ */
 class Links extends \yii\base\Component
-{
+{   
+    private $_cats = null;
+    
+    private $_langs = null;
+    
+    private $_prefix = null;
+    
     private $_links = [];
-
-    public $loadIsHidden = false;
-
-    private $compositionPrefix = null;
-
-    private $_compositionLangShortCode = null;
-
-    /* cms collection */
-
+    
+    public $activeUrl = null;
+    
     public function init()
     {
-        $this->compositionPrefix = Yii::$app->composition->getFull();
-        $this->_compositionLangShortCode = Yii::$app->composition->getKey('langShortCode');
-        $this->loadData();
-        $this->_links = $this->urls;
-    }
-
-    private $urls = [];
-
-    public function loadData()
-    {
-        $this->iteration(0, '', 0);
-    }
-
-    private function iteration($parentNavId, $urlPrefix, $depth)
-    {
-        $tree = $this->getData($parentNavId);
-        foreach ($tree as $index => $item) {
-            if ($this->subNodeExists($item['id'])) {
-                $this->iteration($item['id'], $urlPrefix.$item['rewrite'].'/', ($depth + 1));
-            }
-            $rewrite = $urlPrefix.$item['rewrite'];
-            $this->urls[] = [
-                    'full_url' => $this->compositionPrefix.$rewrite,
-                    'url' => $rewrite,
-                    'rewrite' => $item['rewrite'],
-                    'nav_id' => (int) $item['id'],
-                    'parent_nav_id' => (int) $parentNavId,
-                    //'nav_item_id' => (int) $item['nav_item_id'],
-                    'id' => (int) $item['nav_item_id'],
-                    'title' => $item['title'],
-                    'lang' => $item['lang_short_code'],
-                    'lang_id' => $item['lang_id'],
-                    'cat' => $item['cat_rewrite'],
-                    'depth' => (int) $depth,
-                ];
+        foreach($this->getLangs() as $lang) {
+            $this->_links[$lang['id']] = [];
+            $this->recursiveFindChildren($lang, 0, '', 0);
         }
     }
 
-    private function getData($parentNavId)
+    public function getPrefix()
     {
-        return Nav::getItemsData($parentNavId, $this->loadIsHidden);
+        if ($this->_prefix === null) {
+            $this->_prefix = Yii::$app->composition->getFull();
+        }
+        
+        return $this->_prefix;
     }
-
+    
+    public function getLangs()
+    {
+        if ($this->_langs === null) {
+            $this->_langs = Lang::getQuery();
+        }
+        
+        return $this->_langs;
+    }
+    
+    public function getLangId($shortCode)
+    {
+        $langs = $this->getLangs();
+       
+        if (array_key_exists($shortCode, $langs)) {
+            return $langs[$shortCode]['id'];
+        }
+        
+        throw new Exception("the requested langauge $shortCode does not exists in language array.");
+    }
+    
+    public function getCats()
+    {
+        if ($this->_cats === null) {
+            $this->_cats = Cat::getQuery();
+        }
+        
+        return $this->_cats;
+    }
+    
+    public function getCatRewrite($id)
+    {
+        $cats = $this->getCats($id);
+        
+        return $cats[$id]['rewrite'];
+    }
+    
+    private function recursiveFindChildren($lang, $parentNavId, $urlPrefix, $depth)
+    {
+        foreach($this->getChildren($lang['id'], $parentNavId) as $index => $item) {
+            
+            $rewrite = $urlPrefix.$item['rewrite'];
+            
+            $this->_links[$lang['id']][] = [
+                'full_url' => $this->getPrefix() . $rewrite,
+                'url' => $rewrite,
+                'rewrite' => $item['rewrite'],
+                'nav_id' => $item['nav_id'],
+                'nav_item_id' => $item['nav_item_id'], // alias of id
+                'id' => $item['nav_item_id'], // alias of nav_item_id
+                'parent_nav_id' => $item['parent_nav_id'],
+                'title' => $item['title'],
+                'lang' => $lang['short_code'],
+                'lang_id' => $lang['id'],
+                'cat' => $this->getCatRewrite($item['cat_id']),
+                'depth' => (int) $depth,
+            ];
+            
+            if ($this->hasChildren($lang['id'], $item['nav_id'])) {
+                $this->recursiveFindChildren($lang, $item['nav_id'], $rewrite . '/', $depth+1);
+            }
+        }
+    }
+    
+    private function hasChildren($langId, $parentNavId)
+    {
+        $query = Yii::$app->db->createCommand("SELECT COUNT(*) as count FROM cms_nav_item as i LEFT JOIN (cms_nav as n) ON (n.id=i.nav_id) WHERE n.parent_nav_id=:parent_nav_id AND i.lang_id=:lang_id AND n.is_deleted=0 AND n.is_hidden=0")->bindValues([
+            ':parent_nav_id' => $parentNavId, ':lang_id' => $langId,
+        ])->queryOne();
+        
+        return $query['count'];
+    }
+    
+    private function getChildren($langId, $parentNavId)
+    {
+        return Yii::$app->db->createCommand("SELECT n.id as nav_id, n.cat_id, n.parent_nav_id, n.is_hidden, i.id as nav_item_id, i.lang_id, i.title, i.rewrite, i.lang_id FROM cms_nav_item as i LEFT JOIN (cms_nav as n) ON (n.id=i.nav_id) WHERE i.lang_id=:lang_id AND n.parent_nav_id=:parent_nav_id AND n.is_deleted=0 AND n.is_hidden=0 ORDER by n.sort_index ASC")->bindValues([
+            ':parent_nav_id' => $parentNavId, ':lang_id' => $langId,
+        ])->queryAll();
+    }
+    
     /**
-     * @todo create in model cms-nav
+     * 
+     * @param numeric|string $langShortCode Could be `1` or `de`
+     * @return array
      */
-    private function subNodeExists($parentNavId)
+    public function getLinksLanguageContainer($langShortCode)
     {
-        return (new \yii\db\Query())->select('id')->from('cms_nav')->where(['parent_nav_id' => $parentNavId])->count();
-    }
-
-    /* luya base collection */
-
-    /*
-    public function getAll()
-    {
-        return $this->_links;
-    }
-    */
-
-    public function getLinks()
-    {
-        return $this->_links;
+        if (!is_numeric($langShortCode)) {
+            if (!$langShortCode) {
+                $langShortCode = Yii::$app->composition->getKey('langShortCode');
+            }
+            
+            if (!$langShortCode) {
+                $assoc = Lang::getDefault();
+                $langShortCode = $assoc['short_code'];
+            }
+            
+            $langId = $this->getLangId($langShortCode);
+        } else {
+            $langId = $langShortCode;
+        }
+        
+        return array_key_exists($langId, $this->_links) ? $this->_links[$langId] : [];
     }
 
     public function findByArguments(array $argsArray)
     {
-        $_index = $this->getLinks();
+        $lang = false;
+        
+        if (isset($argsArray['lang'])) {
+            $lang = $argsArray['lang'];
+            unset($argsArray['lang']);
+        }
+        
+        if (isset($args['lang_id'])) {
+            $lang = $argsArray['lang_id'];
+            unset($argsArray['lang_id']);
+        }
+        
+        $_index = $this->getLinksLanguageContainer($lang);
 
         foreach ($argsArray as $key => $value) {
             foreach ($_index as $link => $args) {
@@ -173,13 +257,6 @@ class Links extends \yii\base\Component
         return $this->findOneByArguments(['parent_nav_id' => $link['id']]);
     }
 
-    /*
-    public function addLink($link, $args)
-    {
-        $this->links[$link] = $args;
-    }
-    */
-
     public function hasLink($link)
     {
         return ($this->findOneByArguments(['url' => $link])) ? true : false;
@@ -197,10 +274,6 @@ class Links extends \yii\base\Component
         return (array_key_exists($part, $parts)) ? $parts[$part] : null;
     }
 
-    /* ------------------------------------------------------------------------- */
-
-    public $activeUrl = null;
-
     public function getResolveActiveUrl()
     {
         if (empty($this->activeUrl)) {
@@ -214,7 +287,7 @@ class Links extends \yii\base\Component
      * if the current active link is `http://localhost/luya-project/public_html/de/asfasdfasdfasdf/moduel-iin-seite3/foo-modul-param` where `foo-modul-param` is a param this
      * function will remove the module params and isolate the active link.
      * 
-     * @param unknown $urls
+     * @param unknown $link
      * @param unknown $parts
      *
      * @return string|bool
@@ -247,7 +320,7 @@ class Links extends \yii\base\Component
     public function getDefaultLink()
     {
         $cat = Cat::getDefault();
-        $link = $this->findOneByArguments(['nav_id' => $cat['default_nav_id'], 'lang' => $this->_compositionLangShortCode]);
+        $link = $this->findOneByArguments(['nav_id' => $cat['default_nav_id'], 'lang' => Yii::$app->composition->getKey('langShortCode')]);
 
         return $link['url'];
     }

@@ -35,7 +35,7 @@ foreach($menu as $item) {
 Sie können auch mehrere Argumente verbinden. Wenn wir nun alle Elemente auf dem Root Level für die Sprache 'de' wollen :
 
 ```php
-$menu = $links->findByArguemnt(['parent_nav_id' => 0, 'lang' => 'de']);
+$menu = $links->findByArguemnt(['parent_nav_id' => 0, 'cat' => 'default']);
 ```
 
 Wenn Sie die aktuelle Url ausgeben möchten verwenden Sie:
@@ -44,6 +44,7 @@ Wenn Sie die aktuelle Url ausgeben möchten verwenden Sie:
 echo Yii::$app->links->activeUrl;
 ```
 
+> Seit 1.0.0-alpha20 setzt findByArguments immer die akuell aktive sprache. Somit muss dieses Argument nicht angegeben werden um sich in der aktuellen Sprache zu bewegen.
 
 Sprachen (composition)
 ----------------------
@@ -66,13 +67,13 @@ Mehrteilige Navigation
 
 ```php
 <ul>
-<? foreach(Yii::$app->links->findByArguments(['cat' => 'default', 'lang' => $composition->langShortCode, 'parent_nav_id' => 0]) as $item): ?>
+<? foreach(Yii::$app->links->findByArguments(['cat' => 'default', 'parent_nav_id' => 0]) as $item): ?>
         <li><a href="<?= $composition->getFull() . $item['url'];?>"><?= $item['title']; ?></a>
             <ul>
-                <? foreach(Yii::$app->links->findByArguments(['lang' => $composition->langShortCode, 'parent_nav_id' => $item['id']]) as $subItem): ?>
+                <? foreach(Yii::$app->links->findByArguments(['parent_nav_id' => $item['nav_id']]) as $subItem): ?>
                 <li><a href="<?= $composition->getFull() . $subItem['url'];?>"><?= $subItem['title']?></a>
                 <ul>
-                    <? foreach(Yii::$app->links->findByArguments(['lang' => $composition->langShortCode, 'parent_nav_id' => $subItem['id']]) as $subSubItem): ?>
+                    <? foreach(Yii::$app->links->findByArguments(['parent_nav_id' => $subItem['nav_id']]) as $subSubItem): ?>
                     <li><a href="<?= $composition->getFull() . $subSubItem['url'];?>"><?= $subSubItem['title']?></a>
                     <? endforeach; ?>
                 </ul>
@@ -89,21 +90,21 @@ Geteilte Navigationen
 ```php
 <!-- FIRST LEVEL -->
 <ul>
-    <? foreach(Yii::$app->links->findByArguments(['cat' => 'default', 'lang' => $composition->langShortCode, 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, 1)]) as $item): ?>
+    <? foreach(Yii::$app->links->findByArguments(['cat' => 'default', 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, 1)]) as $item): ?>
         <li><a href="<?= $composition->getFull() . $item['url'];?>"><?= $item['title']; ?></a></li>
     <? endforeach; ?>
 </ul>
 
 <!-- SECOND LEVEL -->
 <ul>
-    <? foreach(Yii::$app->links->findByArguments(['cat' => 'default', 'lang' => $composition->langShortCode, 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, 2)]) as $item): ?>
+    <? foreach(Yii::$app->links->findByArguments(['cat' => 'default', 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, 2)]) as $item): ?>
         <li><a href="<?= $composition->getFull() . $item['url'];?>"><?= $item['title']; ?></a></li>
     <? endforeach; ?>
 </ul>
 
 <!-- THIRD LEVEL -->
  <ul>
-    <? foreach(Yii::$app->links->findByArguments(['cat' => 'default', 'lang' => $composition->langShortCode, 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, 3)]) as $item): ?>
+    <? foreach(Yii::$app->links->findByArguments(['cat' => 'default', 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, 3)]) as $item): ?>
         <li><a href="<?= $composition->getFull() . $item['url'];?>"><?= $item['title']; ?></a></li>
     <? endforeach; ?>
 </ul>
