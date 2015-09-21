@@ -3,6 +3,8 @@ LUYA CHANGELOG
 
 1.0.0-alpha20 (in progress)
 ---------------------------
+- important bug fix where language composition prefix does not find default page in other languages.
+- rewritten links component to fix bug with mutli lingual navigations.
 
 1.0.0-alpha19 (16. Sept 2015)
 ---------------------------
