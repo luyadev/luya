@@ -10,9 +10,11 @@ class CompositionTest extends \tests\web\Base
         $request->pathInfo = 'de/hello/world';
 
         $composition = new \luya\components\Composition();
-        $resolve = $composition->getResolvedPathInfo($request);
-        $resolved = $composition->getResolvedValues();
-
+        
+        $resolver = $composition->getResolvedPathInfo($request);
+        $resolve = $resolver['route'];
+        $resolved = $resolver['resolvedValues'];
+        
         $this->assertEquals('hello/world', $resolve);
         $this->assertEquals(true, is_array($resolved));
         $this->assertEquals(1, count($resolved));
@@ -28,9 +30,10 @@ class CompositionTest extends \tests\web\Base
         $composition = new \luya\components\Composition();
         $composition->pattern = '<countryShortCode:[a-z]{2}>/<langShortCode:[a-z]{2}>';
 
-        $resolve = $composition->getResolvedPathInfo($request);
-        $resolved = $composition->getResolvedValues();
-
+        $resolver = $composition->getResolvedPathInfo($request);
+        $resolve = $resolver['route'];
+        $resolved = $resolver['resolvedValues'];
+        
         $this->assertEquals('hello/world', $resolve);
         $this->assertEquals(true, is_array($resolved));
         $this->assertEquals(2, count($resolved));

@@ -40,7 +40,9 @@ class UrlRule extends \luya\base\UrlRule
     public function parseRequest($manager, $request)
     {
         // extra data from request to composition, which changes the pathInfo of the Request-Object.
-        $request->setPathInfo(Yii::$app->composition->getResolvedPathInfo($request));
+        $resolver = Yii::$app->composition->getResolvedPathInfo($request);
+        
+        $request->setPathInfo($resolver['route']);
 
         // set user env variabls
         Yii::$app->language = Yii::$app->composition->getLanguage();
@@ -49,6 +51,11 @@ class UrlRule extends \luya\base\UrlRule
         // get all parts from the current changed Request-Object.
         $urlParts = $this->getUrlParts($request);
 
+        // fixed issue where "/en" does not find default cms route anymore.
+        foreach($resolver['resolvedValues'] as $value) {
+            $urlParts[] = $value;
+        }
+        
         // if there are url parts and its not a module, load the default route based UrlRule if the class exstists.
         if (count($urlParts) > 0 && !array_key_exists($urlParts[0], Yii::$app->modules)) {
             if (class_exists($this->getDefaultClassName())) {

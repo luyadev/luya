@@ -74,4 +74,35 @@ class UrlRuleTest extends \tests\web\Base
         $this->assertEquals(true, is_array($rule->getUrlParts($request)));
         $this->assertEquals(1, count($rule->getUrlParts($request)));
     }
+    
+    public function testReslvedWithLeadingCompositionPrefix()
+    {
+        $en = $this->callUrl('/en');
+        $de = $this->callUrl('/de');
+        $sw = $this->callUrl('/sw');
+        $fbar = $this->callUrl('/de/foobar');
+        $none = $this->callUrl('/');
+
+        $this->assertEquals("cms/default/index", $en[0]);
+        $this->assertEquals("cms/default/index", $de[0]);
+        $this->assertEquals("cms/default/index", $sw[0]);
+        $this->assertEquals("cms/default/index", $fbar[0]);
+        $this->assertEquals(false, $none);
+        
+        $this->assertEquals("", $en[1]['path']);
+        $this->assertEquals("", $de[1]['path']);
+        $this->assertEquals("", $sw[1]['path']);
+        $this->assertEquals("foobar", $fbar[1]['path']);
+    }
+    
+    private function callUrl($url) 
+    {
+        $request = new \luya\components\Request();
+        $request->pathInfo = $url;
+        
+        $manager = new \luya\components\UrlManager();
+        $rule = new \luya\components\UrlRule();
+        
+        return $rule->parseRequest($manager, $request);
+    }
 }
