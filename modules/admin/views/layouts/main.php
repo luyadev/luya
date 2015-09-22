@@ -1,15 +1,11 @@
 <?php
-    use \admin\Module;
+use \admin\Module;
 use \yii\helpers\Url;
 
 $user = Yii::$app->adminuser->getIdentity();
 
-    $gravatar = 'http://www.gravatar.com/avatar/'.md5(strtolower(trim($user->email))).'?d='.urlencode('http://www.zephir.ch/files/rocky_460px_bw.jpg').'&s=40';
-
-    $this->beginPage()
-?>
-
-<!DOCTYPE html>
+$this->beginPage()
+?><!DOCTYPE html>
 <html ng-app="zaa" ng-controller="LayoutMenuController">
 
     <head>
@@ -448,11 +444,7 @@ $user = Yii::$app->adminuser->getIdentity();
             <!-- /ANGULAR-VIEW -->
 
         </div> <!-- /.luya-container -->
-
         <?php $this->endBody() ?>
-
     </body>
-
 </html>
-
 <?php $this->endPage() ?>
