@@ -60,7 +60,7 @@ class DefaultController extends \cms\base\Controller
             throw new NotFoundHttpException("The requested url '$activeUrl' does not exist.");
         }
 
-        $link = Yii::$app->links->findOneByArguments(['lang_id' => $this->getLangId(), 'url' => $suffix]);
+        $link = Yii::$app->links->findOneByArguments(['lang_id' => $this->getLangId(), 'show_hidden' => true, 'url' => $suffix]);
 
         if (!$link) {
             throw new NotFoundHttpException("The page '$activeUrl' does not exist in this language.");
