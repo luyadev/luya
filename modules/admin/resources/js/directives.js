@@ -603,19 +603,13 @@
 				"id": "@fieldid",
 				"name": "@fieldname"
 			},
-			controller: function($scope){
-				$timeout(function() {
-					NewMenuService.get().then(function(response) {
-						 $scope.data = response;
-					})
-				});
-				
+			controller: function($scope) {
 				$scope.click = function(value) {
 					$scope.model = parseInt(value);
 				};
 			},
 			template: function(){
-				return '<div class="col s{{grid}}"><div ng-repeat="cat in data"><h6>{{cat.name}}</h6><p ng-repeat="item in cat.__items"><input type="radio" ng-model="model" ng-click="click(item.id)" name="cmsPageNavId" value="{{item.id}}" id="{{id}}_{{item.id}}" /> <label for="{{id}}_{{item.id}}">{{item.title}}</label></p></div></div>';
+				return '<div class="col s{{grid}}"><h3>{{label}}</h3><p ng-repeat="(key, title) in options"><input type="radio" ng-model="model" ng-click="click(key)" name="cmsPageNavId" value="{{key}}" id="{{id}}_{{key}}" /> <label for="{{id}}_{{key}}">{{title}}</label></p></div>';
 			}
 		}
 	});
