@@ -16,8 +16,10 @@ class ImportController extends \luya\base\Command implements \luya\interfaces\Im
     {
         // foreach scanFolders of all modules
         foreach (Yii::$app->modules as $id => $module) {
-            foreach ($this->_scanFolders as $folderName) {
-                $this->addToDirectory($module->getBasePath().DIRECTORY_SEPARATOR.$folderName, $folderName, '\\'.$module->getNamespace().'\\'.$folderName, $module->id);
+            if ($module instanceof \luya\base\Module) {
+                foreach ($this->_scanFolders as $folderName) {
+                    $this->addToDirectory($module->getBasePath().DIRECTORY_SEPARATOR.$folderName, $folderName, '\\'.$module->getNamespace().'\\'.$folderName, $module->id);
+                }
             }
         }
         // foreach scanFolder inside the app namespace
