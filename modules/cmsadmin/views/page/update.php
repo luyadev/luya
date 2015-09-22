@@ -130,6 +130,18 @@
                                         </div>
                                     </div>
                                     <!-- /VISIBILITY SWITCH -->
+                                    
+                                    <!-- OFFLINE SWITCH -->
+                                    <div class="toolbar__group">
+                                        <div class="switch">
+                                            <label>
+                                                Online
+                                                <input type="checkbox" ng-model="navData.is_offline" ng-true-value="0" ng-false-value="1">
+                                                <span class="lever"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- /OFFLINE SWITCH -->
 
                                 </div>
                                 <!-- /RIGHT TOOLBAR -->

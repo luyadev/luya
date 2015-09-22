@@ -446,6 +446,20 @@
 			}
 		});
 		
+		$scope.$watch(function() { return $scope.navData.is_offline }, function(n, o) {
+			if (o !== undefined) {
+				$http.get('admin/api-cms-nav/toggle-offline', { params : { navId : $scope.navData.id , offlineStatus : n }}).success(function(response) {
+					MenuService.refresh();
+					// send toast
+					if (n == 1) {
+						Materialize.toast('<span>Die Seite ist nun <span style="color:red;">Offline</span>.</span>', 2000)
+					} else {
+						Materialize.toast('<span>Die Seite ist nun <span style="color:green;">Online</span>.</span>', 2000)
+					}
+				});
+			}
+		});
+		
 		$scope.$watch(function() { return $scope.navData.cat_id }, function(n, o) {
 			if (o != undefined && o != null && n != o) {
 				$http.get('admin/api-cms-nav/update-cat', { params : { navId : $scope.navData.id , catId : n }}).success(function(response) {

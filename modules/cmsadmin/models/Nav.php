@@ -31,7 +31,7 @@ class Nav extends \yii\db\ActiveRecord
     {
         return [
             [['cat_id', 'parent_nav_id'], 'required'],
-            [['is_hidden', 'sort_index', 'is_deleted'], 'safe'],
+            [['is_hidden', 'is_offline', 'sort_index', 'is_deleted'], 'safe'],
         ];
     }
 
@@ -139,7 +139,7 @@ class Nav extends \yii\db\ActiveRecord
         $navItem = new \cmsadmin\models\NavItem();
         $navItemPage = new \cmsadmin\models\NavItemPage();
 
-        $nav->attributes = ['parent_nav_id' => $parentNavId, 'cat_id' => $catId, 'is_hidden' => 1];
+        $nav->attributes = ['parent_nav_id' => $parentNavId, 'cat_id' => $catId, 'is_hidden' => 1, 'is_offline' => 1];
         $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'rewrite' => $rewrite, 'nav_item_type' => 1];
         $navItemPage->attributes = ['layout_id' => $layoutId];
 
@@ -204,7 +204,7 @@ class Nav extends \yii\db\ActiveRecord
         $navItem = new \cmsadmin\models\NavItem();
         $navItemModule = new \cmsadmin\models\NavItemModule();
 
-        $nav->attributes = ['parent_nav_id' => $parentNavId, 'cat_id' => $catId, 'is_hidden' => 1];
+        $nav->attributes = ['parent_nav_id' => $parentNavId, 'cat_id' => $catId, 'is_hidden' => 1, 'is_offline' => 1];
         $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'rewrite' => $rewrite, 'nav_item_type' => 2];
         $navItemModule->attributes = ['module_name' => $moduleName];
 

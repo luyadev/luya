@@ -32,6 +32,20 @@ class NavController extends \admin\base\RestController
 
         return false;
     }
+    
+    public function actionToggleOffline($navId, $offlineStatus)
+    {
+        $item = \cmsadmin\models\Nav::find()->where(['id' => $navId])->one();
+    
+        if ($item) {
+            $item->is_offline = $offlineStatus;
+            $item->update(false);
+    
+            return true;
+        }
+    
+        return false;
+    }
 
     public function actionUpdateCat($navId, $catId)
     {
