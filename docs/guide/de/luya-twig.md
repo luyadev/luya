@@ -35,7 +35,7 @@ werden die Twig Templates mit der endung `*.twig` verwendeten views gerendet. Um
 
 Links Komponente für Navigationen
 ----------------------------------
-Die `Yii::$app->links->findByArguemnts()` methode kann durch die twig funktion `links` verwendent werden wobei 3 Paremeter `cat`, `lang` und `parent_nav_id` entsprechen, in dieser Reienfolge.
+Die `Yii::$app->links->findByArguments()` methode kann durch die twig funktion `links` verwendent werden wobei 3 Paremeter `cat`, `lang` und `parent_nav_id` entsprechen, in dieser Reienfolge.
 
 ```twig
 {% for item in links('cat', 'lang', 'parent_nav_id') %}

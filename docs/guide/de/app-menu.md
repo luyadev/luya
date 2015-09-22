@@ -4,7 +4,7 @@ Um eine Navigation oder Subnavigation innerhalb eines Layouts (oder cmsLayouts) 
 
 > Tipp: Die Links Component wird meistens am Start der `main.php` als Variable `$links` hinterlegt `$links = Yii::$app->links;`.
 
-Das Links Komponentenobjekt bietet die mächtige Funktion `findByArguemnts()`, wobei die Argumente der Methode einem Array entsprechen müssen. Vergleichsoperatoren für die `findByArguments` Methode stehen folgende Keys zur Verfügung:
+Das Links Komponentenobjekt bietet die mächtige Funktion `findByArguments()`, wobei die Argumente der Methode einem Array entsprechen müssen. Vergleichsoperatoren für die `findByArguments` Methode stehen folgende Keys zur Verfügung:
 
 | Key | Beschreibung | 
 | --- | ------------ | 
@@ -24,7 +24,7 @@ Sie können nun zum Beispiel alle Seiten auf dem Root Level ausgeben.
 
 ```php
 $links = Yii::$app->links;
-$menu = $links->findByArguemnts(['parent_nav_id' => 0]);
+$menu = $links->findByArguments(['parent_nav_id' => 0]);
 foreach($menu as $item) {
     var_dump($item);
 }
