@@ -108,6 +108,7 @@ class Links extends \yii\base\Component
                 'lang_id' => $lang['id'],
                 'cat' => $this->getCatRewrite($item['cat_id']),
                 'depth' => (int) $depth,
+                'is_hidden' => $item['is_hidden'],
             ];
             
             if ($this->hasChildren($lang['id'], $item['nav_id'])) {
@@ -118,7 +119,7 @@ class Links extends \yii\base\Component
     
     private function hasChildren($langId, $parentNavId)
     {
-        $query = Yii::$app->db->createCommand("SELECT COUNT(*) as count FROM cms_nav_item as i LEFT JOIN (cms_nav as n) ON (n.id=i.nav_id) WHERE n.parent_nav_id=:parent_nav_id AND i.lang_id=:lang_id AND n.is_deleted=0 AND n.is_hidden=0")->bindValues([
+        $query = Yii::$app->db->createCommand("SELECT COUNT(*) as count FROM cms_nav_item as i LEFT JOIN (cms_nav as n) ON (n.id=i.nav_id) WHERE n.parent_nav_id=:parent_nav_id AND i.lang_id=:lang_id AND n.is_deleted=0")->bindValues([
             ':parent_nav_id' => $parentNavId, ':lang_id' => $langId,
         ])->queryOne();
         
@@ -127,7 +128,7 @@ class Links extends \yii\base\Component
     
     private function getChildren($langId, $parentNavId)
     {
-        return Yii::$app->db->createCommand("SELECT n.id as nav_id, n.cat_id, n.parent_nav_id, n.is_hidden, i.id as nav_item_id, i.lang_id, i.title, i.rewrite, i.lang_id FROM cms_nav_item as i LEFT JOIN (cms_nav as n) ON (n.id=i.nav_id) WHERE i.lang_id=:lang_id AND n.parent_nav_id=:parent_nav_id AND n.is_deleted=0 AND n.is_hidden=0 ORDER by n.sort_index ASC")->bindValues([
+        return Yii::$app->db->createCommand("SELECT n.id as nav_id, n.is_hidden, n.cat_id, n.parent_nav_id, n.is_hidden, i.id as nav_item_id, i.lang_id, i.title, i.rewrite, i.lang_id FROM cms_nav_item as i LEFT JOIN (cms_nav as n) ON (n.id=i.nav_id) WHERE i.lang_id=:lang_id AND n.parent_nav_id=:parent_nav_id AND n.is_deleted=0 ORDER by n.sort_index ASC")->bindValues([
             ':parent_nav_id' => $parentNavId, ':lang_id' => $langId,
         ])->queryAll();
     }
@@ -157,9 +158,17 @@ class Links extends \yii\base\Component
         return array_key_exists($langId, $this->_links) ? $this->_links[$langId] : [];
     }
 
-    public function findByArguments(array $argsArray)
+    public function findByArguments(array $argsArray = [])
     {
         $lang = false;
+
+        if (!isset($argsArray['show_hidden'])) {
+            if (!isset($argsArray['is_hidden'])) {
+                $argsArray['is_hidden'] = 0;
+            }       
+        } else {
+            unset($argsArray['show_hidden']);
+        }
         
         if (isset($argsArray['lang'])) {
             $lang = $argsArray['lang'];
@@ -172,7 +181,7 @@ class Links extends \yii\base\Component
         }
         
         $_index = $this->getLinksLanguageContainer($lang);
-
+        
         foreach ($argsArray as $key => $value) {
             foreach ($_index as $link => $args) {
                 if (!isset($args[$key])) {
