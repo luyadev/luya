@@ -145,4 +145,16 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
 
         return $query->select($fields)->asArray()->all();
     }
+    
+    public static function findNavItem($moduleName)
+    {
+        // current active lang:
+        $default = \admin\models\Lang::findActive();
+        
+        $query = Yii::$app->db->createCommand("SELECT i.* FROM cms_nav_item as i LEFT JOIN (cms_nav_item_module as m) ON (i.nav_item_type_id=m.id) WHERE i.nav_item_type=2 AND lang_id=:lang_id AND m.module_name=:module")->bindValues([
+            ':module' => $moduleName, ':lang_id' => $default['id'],
+        ])->queryOne();
+        
+        return $query;
+    }
 }

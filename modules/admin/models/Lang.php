@@ -2,6 +2,8 @@
 
 namespace admin\models;
 
+use Yii;
+
 class Lang extends \admin\ngrest\base\Model
 {
     public function ngRestApiEndpoint()
@@ -78,5 +80,16 @@ class Lang extends \admin\ngrest\base\Model
         }
 
         return self::$_langInstance;
+    }
+    
+    public static function findActive()
+    {
+        $langShortCode = Yii::$app->composition->getKey('langShortCode');
+        
+        if (!$langShortCode) {
+            return self::getDefault();
+        }
+        
+        return self::find()->where(['short_code' => $langShortCode])->asArray()->one();
     }
 }
