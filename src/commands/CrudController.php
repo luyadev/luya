@@ -141,8 +141,8 @@ class CrudController extends \yii\console\Controller
                         foreach ($ngrest['textarea'] as $n) {
                             $content .= '        $config->list->field(\''.$n.'\', \''.ucfirst($n).'\')->textarea();'.PHP_EOL;
                         }
-                        $content .= '        $config->create->copyFrom(\'list\', [\'id\']);'.PHP_EOL;
-                        $content .= '        $config->update->copyFrom(\'list\', [\'id\']);'.PHP_EOL;
+                        $content .= '        $config->create->copyFrom(\'list\');'.PHP_EOL;
+                        $content .= '        $config->update->copyFrom(\'list\');'.PHP_EOL;
                         $content .= '        return $config;'.PHP_EOL;
                         $content .= '    }'.PHP_EOL;
                         $content .= '}';
