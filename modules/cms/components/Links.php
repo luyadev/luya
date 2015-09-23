@@ -212,7 +212,10 @@ class Links extends \yii\base\Component
         $currentPage = Yii::$app->links->findOneByArguments(['url' => Yii::$app->links->activeUrl]);
         
         foreach(Lang::find()->asArray()->all() as $lang) {
-            $data[] = Yii::$app->links->findOneByArguments(['nav_id' => $currentPage['nav_id'], 'lang_id' => $lang['id']]);
+            $data[] = [
+                'link' => Yii::$app->links->findOneByArguments(['nav_id' => $currentPage['nav_id'], 'lang_id' => $lang['id']]), 
+                'lang' => $lang,
+            ];
         }
         
         return $data;
