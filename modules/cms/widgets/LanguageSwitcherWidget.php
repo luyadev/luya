@@ -12,10 +12,14 @@ class LanguageSwitcherWidget extends \yii\base\Widget
     {
         $langData = Yii::$app->links->getActiveLanguages();
         
-        $html = '<ul>';
+        $html = '<ul id="languageSwitcher">';
 
         foreach ($langData as $lang) {
-            $html .= '<li style="display:inline;margin-right:5px"><a href="'.$lang['lang'] . '/' .$lang['url'].'">'.$lang['lang'].'</a></li>';
+            if (!$lang['link']) {
+                $html .= '<li><a href="'.$lang['lang']['short_code'] .'">'.$lang['lang']['short_code'].'</a></li>';
+            } else {
+                $html .= '<li><a href="'.$lang['lang']['short_code'] . '/' .$lang['link']['url'].'">'.$lang['lang']['short_code'].'</a></li>';
+            }
         }
 
         $html .= '</ul>';
