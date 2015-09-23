@@ -130,7 +130,7 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
     private function getDefaultLang($field = false)
     {
         if ($this->_lang === null) {
-            $this->_lang = Lang::getDefault();
+            $this->_lang = Lang::findActive();
         }
 
         if ($field) {
