@@ -1,5 +1,5 @@
-
-![Luya Logo](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/luya.png)
+LUYA
+----
 
 [![License](https://poser.pugx.org/zephir/luya-module-admin/license)](https://packagist.org/packages/zephir/luya-module-admin)
 [![Build Status](https://travis-ci.org/zephir/luya.svg)](https://travis-ci.org/zephir/luya)
