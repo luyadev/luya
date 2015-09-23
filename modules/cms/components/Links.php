@@ -184,7 +184,7 @@ class Links extends \yii\base\Component
             unset($argsArray['lang']);
         }
         
-        if (isset($args['lang_id'])) {
+        if (isset($argsArray['lang_id'])) {
             $lang = $argsArray['lang_id'];
             unset($argsArray['lang_id']);
         }
@@ -204,6 +204,18 @@ class Links extends \yii\base\Component
         }
 
         return $_index;
+    }
+    
+    public function getActiveLanguages()
+    {
+        $data = [];
+        $currentPage = Yii::$app->links->findOneByArguments(['url' => Yii::$app->links->activeUrl]);
+        
+        foreach(Lang::find()->asArray()->all() as $lang) {
+            $data[] = Yii::$app->links->findOneByArguments(['nav_id' => $currentPage['nav_id'], 'lang_id' => $lang['id']]);
+        }
+        
+        return $data;
     }
 
     public function findOneByArguments(array $argsArray)
