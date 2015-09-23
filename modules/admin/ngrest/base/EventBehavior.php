@@ -20,21 +20,13 @@ class EventBehavior extends \yii\base\Behavior
         ];
     }
 
-    private $_instances = [];
-
     private function createPluginObject(array $plugin, $model)
     {
         $class = $plugin['class'];
         $args = $plugin['args'];
-        if (array_key_exists($class, $this->_instances)) {
-            return $this->_instances[$class];
-        }
-
         $obj = new \ReflectionClass($class);
         $instance = $obj->newInstanceArgs($args);
-        $this->_instances[$class] = $instance;
         $instance->setModel($model);
-
         return $instance;
     }
 
