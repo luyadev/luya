@@ -93,6 +93,11 @@ class Image
         }
 
         $imageObject = $this->get($imageId);
+        
+        if (!$imageObject) {
+            throw new Exception("Image '$imageId' does not exist in database or storage system.");
+        }
+        
         if ($returnImageObject) {
             return $imageObject;
         }
@@ -123,7 +128,7 @@ class Image
             'image_id' => $data->id,
             'file_source' => $data->file->name_new_compound,
             'image_source' => $fileName,
-            'source' => \yii::$app->storage->httpDir.$fileName,
+            'source' => Yii::$app->storage->httpDir.$fileName,
         ]);
     }
 }
