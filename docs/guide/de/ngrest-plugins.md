@@ -19,6 +19,7 @@ Plugin Übersicht
 |image                                                 |Erstellt ein Bild Uploader welche einen integer wert mit der Bild Id zurück gibt.| `mage(false)` stellt die filter selektion aus.
 |imageArray                                            |Erstellt ein Bild und Text(Label) Mehrfach selektor.|
 |file                                                  |Erstellt ein Datei Uploader welche einen integer wert mit der Datei Id zurück gibt.|
+|fileArray											   |Erstellt ein mehrfach upload von Dateien und gibt ein Array mit der jeweiligen FileId und Caption zurück|
 |[checkboxRelation](ngrest-plugin-checkboxrelation.md) |Eine Checkbox auswahl basierend auf einer *junction table*. |
 |date                                          |Erstellt ein *Datum* Selektor Feld und gibt einen Unix Timestamp zurück.|
 |datetime                                          |Erstellt ein *Datum und Zeit* Selektor und gibt einen Unix Timestamp zurück.|
