@@ -2,6 +2,8 @@
 
 namespace admin\ngrest\plugins;
 
+use Yii;
+
 /**
  * @todo check if the plugin is opened by an extraField, cause its not working on casual fields
  *
@@ -33,7 +35,7 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
      */
     public function __construct($model, $refJoinTable, $refModelPkId, $refJoinPkId, array $displayFields, $displayTemplate = null)
     {
-        $this->model = new $model();
+        $this->model = Yii::createObject(['class' => $model]);
         $this->refJoinTable = $refJoinTable;
         $this->refModelPkId = $refModelPkId;
         $this->refJoinPkId = $refJoinPkId;
@@ -50,16 +52,14 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
 
         $select = $this->displayFields;
         $select[] = $pkName;
-
         foreach ($this->model->find()->select($select)->all() as $item) {
-            $array = $item->toArray();
+            $array = $item->getAttributes($select);
             unset($array[$pkName]);
             if ($this->displayTemplate) {
                 $label = vsprintf($this->displayTemplate, $array);
             } else {
                 $label = implode(', ', $array);
             }
-
             $items[] = ['id' => $item[$pkName], 'label' => $label];
         }
 
@@ -73,11 +73,6 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
 
     public function renderCreate($doc)
     {
-        $items = [];
-        foreach ($this->model->find()->all() as $item) {
-            $items[] = ['id' => $item->id, 'label' => implode(' | ', $item->toArray())];
-        }
-
         $elmn = $this->createBaseElement($doc, 'zaa-checkbox-array');
         $elmn->setAttribute('options', $this->getServiceName('relationdata'));
 
