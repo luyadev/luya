@@ -55,7 +55,10 @@ abstract class Property extends \yii\base\Object
                 'option_json' => json_encode($this->options()),
                 'default_value' => $this->defaultValue(),
             ]);
-            return $model->insert(false);
+            $insert = $model->insert(false);
+            if ($insert) {
+                return $model->id;
+            }
         }
     }
 }

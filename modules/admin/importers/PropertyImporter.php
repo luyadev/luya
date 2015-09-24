@@ -16,13 +16,15 @@ class PropertyImporter extends \luya\base\Importer
             
             if (class_exists($className)) {
                 $object = Yii::createObject(['class' => $className, 'moduleName' => $file['module']]);
-                $ids[] = $object->install();
-                $this->getImporter()->addLog('properties', 'Property ' . $object->varName() . ' is installed and up to date.');
+                if ($object) {
+                    $ids[] = $object->install();
+                    $this->getImporter()->addLog('properties', 'Property ' . $object->varName() . ' is installed and up to date.');
+                }
             }
         }
         
         foreach(Property::find()->where(['not in', 'id', $ids])->all() as $model) {
-            $this->getImporter()->addLog('properties', 'Removing property '. $model->varName());
+            $this->getImporter()->addLog('properties', 'Removing property '. $model->var_name);
             $model->delete();
         }
     }
