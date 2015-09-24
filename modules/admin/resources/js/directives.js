@@ -371,7 +371,7 @@
 				}
 			},
 			template: function() {
-				return '<div>' +
+				return '<div><h5>{{label}}</h5>' +
 							'<button ng-click="addColumn()" type="button" style="float:right;">Spalte Rechts einfügen</button>'+
 							'<table>'+
 							'<thead><tr><td width="90"></td><td data-ng-repeat="(hk, hr) in model[0] track by hk"><strong><button type="button" ng-click="removeColumn(hk)" class="btn-floating"><i class="mdi-action-delete"></i></button></strong></td></tr></thead>' +
@@ -394,7 +394,7 @@
 				"name": "@fieldname"
 			},
 			template: function() {
-				return '<div class="col s{{grid}}"><storage-file-upload ng-model="model"></storage-file-upload></div>';
+				return '<div class="col s{{grid}}"><h5>{{label}}</h5><storage-file-upload ng-model="model"></storage-file-upload></div>';
 			}
 		}
 	});
@@ -411,7 +411,7 @@
 				"name": "@fieldname"
 			},
 			template: function() {
-				return '<div class="col s{{grid}}"><storage-image-upload options="options" ng-model="model"></storage-image-upload></div>';
+				return '<div class="col s{{grid}}"><h5>{{label}}</h5><storage-image-upload options="options" ng-model="model"></storage-image-upload></div>';
 			}
 		}
 	});
@@ -448,7 +448,7 @@
 			},
 			template: function() {
 				return '<div class="col s{{grid}} imagearray">' +
-	                        '<h5>Bilder</h5>' +
+	                        '<h5>{{label}}</h5>' +
 	                        '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="teal-text">+</span> links unten ein.</p>' +
 	                        '<div ng-repeat="(key,image) in model" class="row list__item">' +
 	                        
@@ -505,7 +505,7 @@
 			},
 			template: function() {
 				return '<div class="col s{{grid}} filearray">' +
-			                '<h5>Dateien</h5>' +
+			                '<h5>{{label}}</h5>' +
 		                	'<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="teal-text">+</span> links unten ein.</p>' +
 			                '<div ng-repeat="(key,file) in model" class="row list__item">' +
 			                    
