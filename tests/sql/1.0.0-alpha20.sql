@@ -22,6 +22,68 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_property`
+--
+
+CREATE TABLE IF NOT EXISTS `admin_property` (
+`id` int(11) NOT NULL,
+  `module_name` varchar(120) DEFAULT NULL,
+  `var_name` varchar(80) NOT NULL,
+  `type` varchar(40) NOT NULL,
+  `label` varchar(120) NOT NULL,
+  `option_json` varchar(255) DEFAULT NULL,
+  `default_value` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_nav_property`
+--
+
+CREATE TABLE IF NOT EXISTS `cms_nav_property` (
+`id` int(11) NOT NULL,
+  `admin_prop_id` int(11) NOT NULL DEFAULT '0',
+  `value` varchar(255) NOT NULL,
+  `nav_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='latin1_swedish_ci';
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin_property`
+--
+ALTER TABLE `admin_property`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_nav_property`
+--
+ALTER TABLE `cms_nav_property`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admin_property`
+--
+ALTER TABLE `admin_property`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `cms_nav_property`
+--
+ALTER TABLE `cms_nav_property`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+
 --
 -- Table structure for table `admin_auth`
 --
