@@ -307,6 +307,13 @@ class Links extends \yii\base\Component
         return (array_key_exists($part, $parts)) ? $parts[$part] : null;
     }
 
+    public function getCurrentLink()
+    {
+        $url = $this->getResolveActiveUrl();
+        
+        return $this->findOneByArguments(['show_hidden' => true, 'url' => $url]);
+    }
+    
     public function getResolveActiveUrl()
     {
         if (empty($this->activeUrl)) {
