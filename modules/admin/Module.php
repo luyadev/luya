@@ -67,6 +67,7 @@ class Module extends \admin\base\Module
         return [
             '\\admin\\importers\\AuthImporter',
             '\\admin\\importers\\FilterImporter',
+            '\\admin\\importers\\PropertyImporter',
         ];
     }
 }

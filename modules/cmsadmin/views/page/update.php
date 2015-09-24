@@ -82,7 +82,7 @@
 
                                 <!-- LEFT TOOLBAR -->
                                 <div class="left">
-
+                                    <button type="button" ng-click="togglePropMask()">Eigenschaften</button>
                                     <!-- LANGUAGE SWITCH -->
                                     <div class="toolbar__group">
                                         <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'[ grey lighten-2 ]' : AdminLangService.isInSelection(lang)}" class="[ waves-effect waves-blue ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ]">{{lang.name}}</a>
@@ -153,6 +153,19 @@
                 </div>
             </div>
 
+            <div class="row" ng-show="showPropForm">
+                <div class="col s12">
+                    <div class="card-panel">
+                        <table>
+                            <tr ng-repeat="prop in properties">
+                                <td><zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{prop.label}}" grid="12" model="propValues[prop.id]"></zaa-injector></td>
+                            </tr>
+                        </table>
+                        <button type="button" ng-click="storePropValues()">Speichern</button>
+                    </div>
+                </div>
+            </div>
+            
             <div class="row">
 
                 <div class="col s{{(12/AdminLangService.selection.length)}}" ng-repeat="lang in langs" ng-show="AdminLangService.isInSelection(lang) && showContainer" ng-controller="NavItemController">

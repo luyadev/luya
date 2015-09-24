@@ -10,7 +10,7 @@ class ImportController extends \luya\base\Command implements \luya\interfaces\Im
 
     private $_log = [];
 
-    private $_scanFolders = ['blocks', 'filters'];
+    private $_scanFolders = ['blocks', 'filters', 'properties'];
 
     public function init()
     {
@@ -28,13 +28,14 @@ class ImportController extends \luya\base\Command implements \luya\interfaces\Im
         }
     }
 
-    private function scanDirectoryFiles($path, $ns)
+    private function scanDirectoryFiles($path, $ns, $module)
     {
         $files = [];
         foreach (scandir($path) as $file) {
-            if (substr($file, 1) !== '.') {
+            if (substr($file, 0, 1) !== '.') {
                 $files[] = [
                     'file' => $file,
+                    'module' => $module,
                     'ns' => $ns.'\\'.pathinfo($file, PATHINFO_FILENAME),
                 ];
             }
@@ -50,7 +51,7 @@ class ImportController extends \luya\base\Command implements \luya\interfaces\Im
                 'ns' => $ns,
                 'module' => $module,
                 'folderPath' => $path.DIRECTORY_SEPARATOR,
-                'files' => $this->scanDirectoryFiles($path, $ns),
+                'files' => $this->scanDirectoryFiles($path, $ns, $module),
             ];
         }
     }
@@ -113,6 +114,7 @@ class ImportController extends \luya\base\Command implements \luya\interfaces\Im
             }
         }
 
+        // @TODO: should not be related to admin module!
         \admin\models\Config::set('last_import_timestamp', time());
 
         return $this->outputSuccess(print_r($this->_log, true));

@@ -191,6 +191,27 @@
 		return service;
 	});
 	
+	zaa.factory('PropertiesService', function($http, $q) {
+		var service = []
+		service.data = null;
+		service.get = function(forceReload) {
+			return $q(function(resolve, reject) {
+				if (service.data === null || forceReload === true) {
+					$http({url: 'admin/api-admin-defaults/properties'}).success(function(response) {
+						service.data = response;
+						resolve(response);
+					}).error(function(response) {
+						reject(response);
+					});
+				} else {
+					resolve(service.data);
+				}
+				
+			});
+		}
+		return service;
+	});
+	
 	// layout.js
 	
 	zaa.config(function($stateProvider) {
@@ -398,7 +419,7 @@
 	
 	// update.js
 	
-	zaa.controller("NavController", function($scope, $stateParams, $http, AdminLangService, AdminClassService, MenuService, PlaceholderService) {
+	zaa.controller("NavController", function($scope, $stateParams, $http, AdminLangService, AdminClassService, MenuService, PlaceholderService, PropertiesService) {
 		
 		$scope.id = parseInt($stateParams.navId);
 		
@@ -431,6 +452,36 @@
 		$http.get('admin/api-cms-nav/detail', { params : { navId : $scope.id }}).success(function(response) {
 			$scope.navData = response;
 		});
+		
+		/* <!-- properties */
+		
+		PropertiesService.get().then(function(r) {
+			$scope.properties = r;
+		});
+		
+		$scope.propValues = {};
+		
+		$http.get('admin/api-cms-nav/get-properties', { params: {navId: $scope.id}}).success(function(response) {
+			for(var i in response) {
+				var d = response[i];
+				$scope.propValues[d.admin_prop_id] = d.value;
+			}
+		});
+		
+		$scope.togglePropMask = function() {
+			$scope.showPropForm = !$scope.showPropForm;
+		}
+		
+		$scope.showPropForm = false;
+		
+		$scope.storePropValues = function() {
+			var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
+			$http.post('admin/api-cms-nav/save-properties?navId='+$scope.id, $.param($scope.propValues), headers).success(function(response) {
+				console.log('neue_props_stored');
+			});
+		}
+		
+		/* properties --> */
 		
 		$scope.$watch(function() { return $scope.navData.is_hidden }, function(n, o) {
 			if (o !== undefined) {

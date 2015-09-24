@@ -16,7 +16,43 @@ class NavController extends \admin\base\RestController
 {
     private function postArg($name)
     {
-        return \yii::$app->request->post($name, null);
+        return Yii::$app->request->post($name, null);
+    }
+    
+    public function actionGetProperties($navId)
+    {
+        return \cmsadmin\models\Property::find()->select(['admin_prop_id', 'value'])->where(['nav_id' => $navId])->all();
+    }
+    
+    public function actionSaveProperties($navId)
+    {
+        $rows = [];
+        foreach(Yii::$app->request->post() as $id => $value) {
+            $rows[] = [
+                'nav_id' => $navId,
+                'admin_prop_id' => $id,
+                'value' => $value,  
+            ];
+        }
+        
+        foreach($rows as $atrs) {
+            $model = \cmsadmin\models\Property::find()->where(['admin_prop_id' => $atrs['admin_prop_id'], 'nav_id' => $navId])->one();
+            
+            if ($model) {
+                
+                if (empty($atrs['value'])) {
+                    $model->delete();
+                } else {
+                    // update
+                    $model->value = $atrs['value'];
+                    $model->update(false);
+                }
+            } else {
+                $model = new \cmsadmin\models\Property();
+                $model->attributes = $atrs;
+                $model->insert(false);
+            }
+        }
     }
 
     public function actionToggleHidden($navId, $hiddenStatus)
