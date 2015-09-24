@@ -47,6 +47,8 @@ Um nun auf diese Übersetzunge zuzugreifen benutzer wir
 echo Yii::t('app', 'title_top'); // Gibt "Hallo ich bin die Übersetzung Oben" zurück
 ```
 
+> Die Wrapper funktion im Twig `t('app', 'title_top')`.
+
 Um eine Nachricht mit einem Paramter (also ein Dynamischer Wert welcher bei der ÜBersetzung nicht bekannt ist) zu erstellen, függen wir in der *Message-Source* Datei einen Platzhalter `{0}` ein. Wobei die Nummerierung der Anzahl Platzhalter entspricht.
 
 ```php
