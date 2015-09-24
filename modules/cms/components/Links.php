@@ -209,11 +209,11 @@ class Links extends \yii\base\Component
     public function getActiveLanguages()
     {
         $data = [];
-        $currentPage = Yii::$app->links->findOneByArguments(['url' => Yii::$app->links->activeUrl]);
+        $currentPage = Yii::$app->links->findOneByArguments(['url' => Yii::$app->links->activeUrl, 'show_hidden' => true]);
         
         foreach(Lang::find()->asArray()->all() as $lang) {
             $data[] = [
-                'link' => Yii::$app->links->findOneByArguments(['nav_id' => $currentPage['nav_id'], 'lang_id' => $lang['id']]), 
+                'link' => Yii::$app->links->findOneByArguments(['nav_id' => $currentPage['nav_id'], 'show_hidden' => true, 'lang_id' => $lang['id']]), 
                 'lang' => $lang,
             ];
         }
