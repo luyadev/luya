@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-alpha20 (in progress)
 ---------------------------
+- added basic implementation of admin and cms page properties.
 - changed behavior of the links component: is_hidden pages are accessable but hidden in navigation; is_offline pages are not accessable by both.
 - added is_offline property to cms_nav
 - important bug fix where language composition prefix does not find default page in other languages.
