@@ -15,7 +15,7 @@ Plugin Übersicht
 |textarea                                              |Textarea (mehrzeilige eingabe text). |
 |password                                              |Passwort Feld|
 |[select](ngrest-plugin-select.md)                	|Select Dropdown Menu|
-|togglestatus                                          |Checkbox mit `0` und `1` werte.|
+|toggleStatus                                          |Checkbox mit `0` und `1` werte.|
 |image                                                 |Erstellt ein Bild Uploader welche einen integer wert mit der Bild Id zurück gibt.| `mage(false)` stellt die filter selektion aus.
 |imageArray                                            |Erstellt ein Bild und Text(Label) Mehrfach selektor.|
 |file                                                  |Erstellt ein Datei Uploader welche einen integer wert mit der Datei Id zurück gibt.|
