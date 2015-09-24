@@ -3,6 +3,10 @@
 namespace cmsadmin\models;
 
 use Yii;
+use cmsadmin\models\Nav;
+use cmsadmin\models\NavItemPage;
+use cmsadmin\models\NavItemModule;
+use admin\models\Lang;
 
 /**
  * Each creation of a navigation block requires the nav_item_type_id which need to be created first with NavItemType Model.
@@ -50,14 +54,21 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     {
         switch ($this->nav_item_type) {
             case self::TYPE_PAGE:
-                return \cmsadmin\models\NavItemPage::findOne($this->nav_item_type_id);
+                $object = NavItemPage::findOne($this->nav_item_type_id);
                 break;
             case self::TYPE_MODULE:
-                return \cmsadmin\models\NavItemModule::findOne($this->nav_item_type_id);
+                $object = NavItemModule::findOne($this->nav_item_type_id);
                 break;
         }
+        $object->setNavItem($this);
+        return $object;
     }
 
+    public function getNav()
+    {
+        return Nav::find()->where(['id' => $this->nav_id])->one();
+    }
+    
     public function getContent()
     {
         return $this->getType()->getContent();
@@ -149,7 +160,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     public static function findNavItem($moduleName)
     {
         // current active lang:
-        $default = \admin\models\Lang::findActive();
+        $default = Lang::findActive();
         
         $query = Yii::$app->db->createCommand("SELECT i.* FROM cms_nav_item as i LEFT JOIN (cms_nav_item_module as m) ON (i.nav_item_type_id=m.id) WHERE i.nav_item_type=2 AND lang_id=:lang_id AND m.module_name=:module")->bindValues([
             ':module' => $moduleName, ':lang_id' => $default['id'],

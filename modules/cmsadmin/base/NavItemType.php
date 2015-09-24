@@ -4,16 +4,28 @@ namespace cmsadmin\base;
 
 abstract class NavItemType extends \yii\db\ActiveRecord
 {
+    public $options = [];
+
+    private $_navItem = null;
+    
     abstract public function getContent();
 
     abstract public function getHeaders();
 
+    public function setNavItem($navItem)
+    {
+        $this->_navItem = $navItem;
+    }
+    
+    public function getNavItem()
+    {
+        return $this->_navItem;
+    }
+    
     public function getContextPropertysArray()
     {
         return []; // override
     }
-
-    public $options = [];
 
     public function setOptions($options)
     {

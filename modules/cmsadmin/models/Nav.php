@@ -5,6 +5,10 @@ namespace cmsadmin\models;
 use Yii;
 use yii\helpers\ArrayHelper;
 use admin\models\Lang;
+use admin\models\Property as AdminProperty;
+use cmsadmin\models\Property as CmsProperty;
+use cmsadmin\models\NavItem;
+use admin\ngrest\plugins\CmsPage;
 
 /**
  * @todo what happens when resort items if an items is deleted?
@@ -46,9 +50,24 @@ class Nav extends \yii\db\ActiveRecord
 
     public function getNavItems()
     {
-        return $this->hasMany(\cmsadmin\models\NavItem::className(), ['nav_id' => 'id']);
+        return $this->hasMany(NavItem::className(), ['nav_id' => 'id']);
     }
 
+    public function getProperties()
+    {
+        return CmsProperty::find()->where(['nav_id' => $this->id])->leftJoin('admin_property', 'admin_prop_id=admin_property.id')->select(['cms_nav_property.*', 'admin_property.module_name', 'admin_property.var_name', 'admin_property.type', 'admin_property.default_value'])->asArray()->all();
+    }
+    
+    public function getProperty($varName)
+    {
+        $value = CmsProperty::find()->where(['nav_id' => $this->id])->leftJoin('admin_property', 'admin_prop_id=admin_property.id')->select(['cms_nav_property.value'])->where(['admin_property.var_name' => $varName])->asArray()->one();
+        if ($value) {
+            return $value['value'];
+        } else {
+            return false;
+        }
+    }
+    
     /**
      * find the latest sort index cms_nav item for the current cat_id and parent_nav_id and set internal index count plus one.
      */
@@ -136,7 +155,7 @@ class Nav extends \yii\db\ActiveRecord
         $_errors = [];
 
         $nav = $this;
-        $navItem = new \cmsadmin\models\NavItem();
+        $navItem = new NavItem();
         $navItemPage = new \cmsadmin\models\NavItemPage();
 
         $nav->attributes = ['parent_nav_id' => $parentNavId, 'cat_id' => $catId, 'is_hidden' => 1, 'is_offline' => 1];
@@ -171,7 +190,7 @@ class Nav extends \yii\db\ActiveRecord
     {
         $_errors = [];
 
-        $navItem = new \cmsadmin\models\NavItem();
+        $navItem = new NavItem();
         $navItemPage = new \cmsadmin\models\NavItemPage();
 
         $navItem->attributes = ['nav_id' => $navId, 'lang_id' => $langId, 'title' => $title, 'rewrite' => $rewrite, 'nav_item_type' => 1];
@@ -201,7 +220,7 @@ class Nav extends \yii\db\ActiveRecord
         $_errors = [];
 
         $nav = $this;
-        $navItem = new \cmsadmin\models\NavItem();
+        $navItem = new NavItem();
         $navItemModule = new \cmsadmin\models\NavItemModule();
 
         $nav->attributes = ['parent_nav_id' => $parentNavId, 'cat_id' => $catId, 'is_hidden' => 1, 'is_offline' => 1];
@@ -236,7 +255,7 @@ class Nav extends \yii\db\ActiveRecord
     {
         $_errors = [];
 
-        $navItem = new \cmsadmin\models\NavItem();
+        $navItem = new NavItem();
         $navItemModule = new \cmsadmin\models\NavItemModule();
 
         $navItem->attributes = ['nav_id' => $navId, 'lang_id' => $langId, 'title' => $title, 'rewrite' => $rewrite, 'nav_item_type' => 2];

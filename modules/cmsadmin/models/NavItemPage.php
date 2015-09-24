@@ -76,7 +76,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
 
         foreach ($this->getPlaceholders($navItemPageId, $placeholderVar, $prevId) as $key => $placeholder) {
             // create block object
-            $blockObject = Block::objectId($placeholder['block_id'], 'frontend');
+            $blockObject = Block::objectId($placeholder['block_id'], 'frontend', $this->getNavItem());
             // see if its a valid block object
             if ($blockObject) {
                 // insert var and cfg values from database

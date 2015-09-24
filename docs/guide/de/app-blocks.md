@@ -91,3 +91,35 @@ Diese Übersicht erklärt die Methoden/Funktionen welche implenetiert werden mü
 | extraVars | array | Wenn du zusätzliche Variablen benötigst welche durch den Benutzer input verabteitet werden oder gar nicht als eingabe variable zur verfügung stehen sollte kannst du dieser hier definiere und in the Twig-Views unter `extras.VARIABEL´ abgreifen.
 | twigFrontend | string | Dieser Twig-View wird im Frontend gerendert und somit für den Endbenutzer ersichtlich. [Twig Syntaxe](http://twig.sensiolabs.org/)
 | twigAdmin | string | Dieser Twig.js-View wird im Administrationbereich des CMS gerendet, also für die Benutzer der Block-Elemente Oberfläche [Twig.js Syntaxe](https://github.com/justjohn/twig.js/wiki)
+
+Env Optionen
+------------
+Ein Block wird in einer bestimmten Umgebung (*Environemnt* kurz *Env*) aufgerufen. Diese Umgebungs-Inhalt stehe dir via
+
+```php
+$this->getEnvOption($key, $defaultValue);
+```
+
+zur Verfügung. Es stehen dir folgende Env keys zur Verfügung
+
++ *blockId* => enthält die Id des Blocks in der Datenbank
++ *context* => sagt dir ob der Block im *frontend* oder *backend* aktiv ist
++ *pageObject* => Gibt ein `cmsadmin\models\NavItem` Object zurück (nav_item), dies wiederum verfügt über die methode `getNav()` welches das `cmsadmin\models\Nav` Object zurück gibt.
+
+Weitere viel genutze methoden:
+
+Alle properties anzeigen welche für diese Seite gesetzt wurden.
+
+```php
+$this->getEnvOption('pageObject')->getNav()->getProperties();
+```
+
+Eine bestimmten Eigenschaft (property) abfragen:
+
+```php
+$this->getEnvOption('pageObject')->getNav()->getProperty('myCustomProperty');
+```
+
+> Wenn die Property nicht gefunden wurde gibt die Funktion `false` zurück.
+
+
