@@ -224,7 +224,7 @@
 				scope.random = Math.random().toString(36).substring(7);
 			},
 			template: function() {
-				return '<div class="input-field col s{{grid}}"><h5>{{label}}</h5><p ng-repeat="(k, item) in options.items"><input type="checkbox" ng-checked="isChecked(item)" id="{{random}}_{{k}}" ng-click="toggleSelection(item)" /><label for="{{random}}_{{k}}">{{item.label}}</label></p></div>';
+				return '<div class="input-field col s{{grid}}"><h5>{{label}}</h5><p ng-repeat="(k, item) in options.items track by k"><input type="checkbox" ng-checked="isChecked(item)" id="{{random}}_{{k}}" ng-click="toggleSelection(item)" /><label for="{{random}}_{{k}}">{{item.label}}</label></p></div>';
 			}
 		}
 	});
@@ -450,7 +450,7 @@
 				return '<div class="col s{{grid}} imagearray">' +
 	                        '<h5>{{label}}</h5>' +
 	                        '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="teal-text">+</span> links unten ein.</p>' +
-	                        '<div ng-repeat="(key,image) in model" class="row list__item">' +
+	                        '<div ng-repeat="(key,image) in model track by key" class="row list__item">' +
 	                        
 								'<div class="list__left row">' +
 									'<div class="col s8">' +
@@ -507,7 +507,7 @@
 				return '<div class="col s{{grid}} filearray">' +
 			                '<h5>{{label}}</h5>' +
 		                	'<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="teal-text">+</span> links unten ein.</p>' +
-			                '<div ng-repeat="(key,file) in model" class="row list__item">' +
+			                '<div ng-repeat="(key,file) in model track by key" class="row list__item">' +
 			                    
 			                    '<div class="list__left row">' +
 			                    	'<div class="filearray__upload col s8">' +
@@ -578,7 +578,7 @@
 				return '<div class="col s12 list">' +
 	                        '<h5>Auflistung</h5>' +
 	                        '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="teal-text">+</span> links unten ein.</p>' +
-	                        '<div ng-repeat="(key,row) in model" class="list__item">' +
+	                        '<div ng-repeat="(key,row) in model track by key" class="list__item">' +
 	                            '<div class="list__left">' +
 	                                '<input class="list__input" type="text" ng-model="row.value" />' +
 	                            '</div>' +
@@ -609,7 +609,7 @@
 				};
 			},
 			template: function(){
-				return '<div class="col s{{grid}}"><h3>{{label}}</h3><p ng-repeat="(key, title) in options"><input type="radio" ng-model="model" ng-click="click(key)" name="cmsPageNavId" value="{{key}}" id="{{id}}_{{key}}" /> <label for="{{id}}_{{key}}">{{title}}</label></p></div>';
+				return '<div class="col s{{grid}}"><h3>{{label}}</h3><p ng-repeat="(key, title) in options track by key"><input type="radio" ng-model="model" ng-click="click(key)" name="cmsPageNavId" value="{{key}}" id="{{id}}_{{key}}" /> <label for="{{id}}_{{key}}">{{title}}</label></p></div>';
 			}
 		}
 	});
