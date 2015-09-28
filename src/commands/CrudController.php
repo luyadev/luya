@@ -4,8 +4,9 @@ namespace luya\commands;
 
 use Yii;
 use yii\helpers\Console;
+use yii\helpers\Inflector;
 
-class CrudController extends \yii\console\Controller
+class CrudController extends \luya\base\Command
 {
     public function actionCreate()
     {
@@ -13,17 +14,17 @@ class CrudController extends \yii\console\Controller
         $modulePre = $new_str = preg_replace('/admin$/', '', $module);
         $modelName = $this->prompt('Model Name (e.g. Album)');
         $apiEndpoint = $this->prompt('Api Endpoint (e.g. api-'.$modulePre.'-'.strtolower($modelName).')');
-        $sqlTable = $this->prompt('Database Table name (e.g. '.strtolower($modulePre).'_'.strtolower($modelName).')');
+        
+        $sqlTable = $this->prompt('Database Table name (e.g. '.strtolower($modulePre).'_'.Inflector::underscore($modelName).')');
 
         if (!$this->confirm("Create '$modelName' controller, api & model based on sql table '$sqlTable' in module '$module' for api endpoint '$apiEndpoint'?")) {
-            exit(1);
+            return $this->outputError("Crud creation aborted.");
         }
 
         $shema = Yii::$app->db->getTableSchema($sqlTable);
 
         if (!$shema) {
-            echo 'you have to create a migration script and execute the migration first. the table must exists!';
-            exit(1);
+            return $this->outputError("Could not read informations from database table '$sqlTable', table does not exist.");
         }
 
         $yiiModule = Yii::$app->getModule($module);
@@ -33,21 +34,22 @@ class CrudController extends \yii\console\Controller
         $ns = $yiiModule->getNamespace();
 
         $modelName = ucfirst($modelName);
+        $fileName = ucfirst(strtolower($modelName));
 
         $modelNs = '\\'.$ns.'\\models\\'.$modelName;
         $data = [
             'api' => [
                 'folder' => 'apis',
                 'ns' => $ns.'\\apis',
-                'file' => $modelName.'Controller.php',
-                'class' => $modelName.'Controller',
+                'file' => $fileName.'Controller.php',
+                'class' => $fileName.'Controller',
                 'route' => strtolower($module).'-'.strtolower($modelName).'-index',
             ],
             'controller' => [
                 'folder' => 'controllers',
                 'ns' => $ns.'\\controllers',
-                'file' => $modelName.'Controller.php',
-                'class' => $modelName.'Controller',
+                'file' => $fileName.'Controller.php',
+                'class' => $fileName.'Controller',
             ],
             'model' => [
                 'folder' => 'models',
@@ -159,9 +161,9 @@ class CrudController extends \yii\console\Controller
 
         $getMenu = 'public function getMenu()
 {
-    return $this->node(\''.ucfirst($modelName).'\', \'http://materializecss.com/icons.html\')
+    return $this->node(\''.Inflector::humanize($modelName).'\', \'http://materializecss.com/icons.html\')
         ->group(\'GROUP\')
-            ->itemApi(\'YOUR NAME\', \''.$data['api']['route'].'\', \'http://materializecss.com/icons.html\', \''.$apiEndpoint.'\')
+            ->itemApi(\''.Inflector::humanize($modelName).'\', \''.$data['api']['route'].'\', \'http://materializecss.com/icons.html\', \''.$apiEndpoint.'\')
     ->menu();
 }
             ';
