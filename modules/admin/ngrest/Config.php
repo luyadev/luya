@@ -3,7 +3,7 @@
 namespace admin\ngrest;
 
 use Exception;
-use yii\helpers\ArrayHelper;
+use luya\helpers\ArrayHelper;
 
 /**
  * Example config array to `setConfig($array)`:.
@@ -103,8 +103,13 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
             'extraField' => false,
         ], $options);
 
-        $this->_config[$pointer][$field] = $options;
-
+        // can not unshift non array value, create array for this pointer.
+        if (empty($this->_config[$pointer])) {
+            $this->_config[$pointer] = [];
+        }
+        
+        $this->_config[$pointer] = ArrayHelper::arrayUnshiftAssoc($this->_config[$pointer], $field, $options);
+        
         return true;
     }
 
