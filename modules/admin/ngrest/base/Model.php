@@ -213,7 +213,7 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
             $query->orWhere(['like', $field, $searchQuery]);
         }
         // return array based on orWhere statement
-        return $query->select($fields)->asArray()->all();
+        return $query->select($fields)->all();
     }
 
     public function getNgRestCallType()
