@@ -3,6 +3,7 @@
 namespace admin\ngrest;
 
 use Exception;
+use luya\helpers\ArrayHelper;
 
 class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
 {
@@ -114,12 +115,12 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
     {
         $temp = $this->config[$key];
         foreach ($removeFields as $name) {
-            if (!array_key_exists($name, $temp)) {
-                //throw new \Exception("Unable to remove field '$name' from '$key' config. The field does not exists in the provided config.");
+            if (array_key_exists($name, $temp)) {
+                unset($temp[$name]);
             }
-            unset($temp[$name]);
         }
-        $this->config[$this->pointer] = $temp;
+        
+        $this->config[$this->pointer] = ArrayHelper::merge($this->config[$this->pointer], $temp);
     }
 
     public function getConfig()
