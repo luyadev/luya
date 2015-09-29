@@ -76,10 +76,70 @@ class CrawlPage extends \yii\base\Object
         return false;
     }
 
+    private function tempGetContent($url)
+    {
+        $curl = new \Curl\Curl();
+        $curl->get($url);
+        $content = $curl->response;
+        
+        
+        $dom = new \DOMDocument('1.0', 'utf-8');
+        
+        
+        libxml_use_internal_errors(true);
+        $dom->loadHTML($content);
+        libxml_clear_errors();
+        
+        $dom->preserveWhiteSpace = false; // remove redundant white spaces
+        
+        $body = $dom->getElementsByTagName("body");
+        
+        $bodyContent = null;
+        
+        if ($body && $body->length > 0) {
+            // remove scripts
+            while (($r = $dom->getElementsByTagName("script")) && $r->length) {
+                $r->item(0)->parentNode->removeChild($r->item(0));
+            }
+            	
+            $domBody = $body->item(0);
+            	
+            $bodyContent = $dom->saveXML($domBody);
+            //$bodyContent = $this->dom->saveHTML($this->domBody); // argument not allowed on 5.3.5 or less, see: http://www.php.net/manual/de/domdocument.savehtml.php
+            	
+        }
+        
+        return $bodyContent;
+    }
+    
     public function getContent()
     {
-        $content = trim($this->getCrawler()->filter('body')->text());
-
-        return preg_replace('/\s+/', ' ', $content);
+        $bodyContent = $this->tempGetContent($this->pageUrl);
+        
+        // find crawl full ignore
+        preg_match("/\[CRAWL_FULL_IGNORE\]/s", $bodyContent, $output);
+        if (isset($output[0])) {
+            if ($output[0] == "[CRAWL_FULL_IGNORE]") {
+                return '';
+            }
+        }
+        
+        $content = preg_replace('/\s+/', ' ', $bodyContent);
+        
+        // remove crawl ignore tags
+        preg_match_all("/\[CRAWL_IGNORE\](.*?)\[\/CRAWL_IGNORE\]/s", $content, $output);
+        if (isset($output[0]) && count($output[0]) > 0) {
+            $content = str_replace($output[0], '', $content);
+        }
+        
+        // strip tags and stuff
+        $content = strip_tags($content);
+        
+        // remove whitespaces and stuff
+        $content = trim(str_replace(array("\n", "\r", "\t", "\n\r", "\r\n"), "", $content));
+        
+        $content = htmlentities($content, ENT_QUOTES | ENT_IGNORE, 'UTF-8');
+        
+        return $content;
     }
 }
