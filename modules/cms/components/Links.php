@@ -84,9 +84,13 @@ class Links extends \yii\base\Component
     
     public function getCatRewrite($id)
     {
-        $cats = $this->getCats($id);
+        $cats = $this->getCats();
         
-        return $cats[$id]['rewrite'];
+        if (array_key_exists($id, $cats)) {
+            return $cats[$id]['rewrite'];
+        }
+        
+        return false;
     }
     
     private function recursiveFindChildren($lang, $parentNavId, $urlPrefix, $depth)
