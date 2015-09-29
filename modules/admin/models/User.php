@@ -26,13 +26,12 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
 
         //$config->activeWindow->register(new \admin\aws\Delete(), 'Löschen');
 
-        $config->create->field('title', 'Anrede')->selectArray(\admin\models\User::getTitles(), 0);
+        $config->create->field('title', 'Anrede')->selectArray(static::getTitles(), 0);
         $config->create->field('firstname', 'Vorname')->text();
         $config->create->field('lastname', 'Nachname')->text();
         $config->create->field('email', 'E-Mail-Adresse')->text();
         $config->create->field('password', 'Passwort')->password();
 
-        $config->list->field('id', 'ID')->text();
         $config->list->field('firstname', 'Vorname')->text();
         $config->list->field('lastname', 'Nachname')->text();
         $config->list->field('email', 'E-Mail')->text();

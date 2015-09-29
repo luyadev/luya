@@ -46,10 +46,9 @@ class Cat extends \admin\ngrest\base\Model
         $config->list->field('default_nav_id', 'Default-Nav-Id')->selectArray($this->getNavData());
         $config->list->field('rewrite', 'Rewrite')->text();
         $config->list->field('is_default', 'Ist Starteintrag')->toggleStatus();
-        $config->list->field('id', 'ID')->text();
 
-        $config->create->copyFrom('list', ['id']);
-        $config->update->copyFrom('list', ['id']);
+        $config->create->copyFrom('list');
+        $config->update->copyFrom('list');
 
         return $config;
     }

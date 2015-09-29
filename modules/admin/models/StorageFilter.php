@@ -89,10 +89,9 @@ class StorageFilter extends \admin\ngrest\base\Model
 
         $config->list->field('name', 'Name')->text();
         $config->list->field('identifier', 'Identifier')->text();
-        $config->list->field('id', 'ID')->text();
 
-        $config->create->copyFrom('list', ['id']);
-        $config->update->copyFrom('list', ['id']);
+        $config->create->copyFrom('list');
+        $config->update->copyFrom('list');
 
         return $config;
     }
