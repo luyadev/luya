@@ -140,10 +140,10 @@ class CrudController extends \luya\base\Command
                         $content .= '    public function ngRestConfig($config)'.PHP_EOL;
                         $content .= '    {'.PHP_EOL;
                         foreach ($ngrest['text'] as $n) {
-                            $content .= '        $config->list->field(\''.$n.'\', \''.ucfirst($n).'\')->text();'.PHP_EOL;
+                            $content .= '        $config->list->field(\''.$n.'\', \''.Inflector::humanize($n).'\')->text();'.PHP_EOL;
                         }
                         foreach ($ngrest['textarea'] as $n) {
-                            $content .= '        $config->list->field(\''.$n.'\', \''.ucfirst($n).'\')->textarea();'.PHP_EOL;
+                            $content .= '        $config->list->field(\''.$n.'\', \''.Inflector::humanize($n).'\')->textarea();'.PHP_EOL;
                         }
                         $content .= '        $config->create->copyFrom(\'list\');'.PHP_EOL;
                         $content .= '        $config->update->copyFrom(\'list\');'.PHP_EOL;
