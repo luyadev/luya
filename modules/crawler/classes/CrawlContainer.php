@@ -17,6 +17,8 @@ class CrawlContainer extends \yii\base\Object
 
     public $pageCrawler = null;
 
+    public $report = [];
+    
     private $_crawlers = [];
 
     protected function getCrawler($url)
@@ -56,6 +58,11 @@ class CrawlContainer extends \yii\base\Object
         }
     }
 
+    public function getReport()
+    {
+        return $this->report;
+    }
+    
     public function finish()
     {
         $builder = BuilderIndex::find()->indexBy('url')->asArray()->all();
@@ -70,6 +77,7 @@ class CrawlContainer extends \yii\base\Object
             'new' => [],
             'update' => [],
             'delete' => [],
+            'delete_issue' => [],
             'unchanged' => [],
         ];
 
@@ -97,14 +105,18 @@ class CrawlContainer extends \yii\base\Object
 
         // delete not unseted urls from index
         foreach ($index as $deleteUrl => $deletePage) {
+            $compare['delete'][] = $page->url;
             $model = Index::findOne($deletePage['id']);
             $model->delete(false);
         }
 
         // delete empty content empty title
         foreach(Index::find()->where(['=', 'content', ''])->orWhere(['=', 'title', ''])->all() as $page) {
+            $compare['delete_issue'][] = $page->url;
             $page->delete(false);
         }
+        
+        $this->report = $compare;
     }
 
     public function matchBaseUrl($url)
@@ -132,7 +144,8 @@ class CrawlContainer extends \yii\base\Object
             $model->crawled = 1;
             $model->status_code = 1;
             $model->last_indexed = time();
-            $model->save();
+            $model->language_info = $this->getCrawler($url)->getLanguageInfo();
+            $model->save(false);
 
             // add the pages links to the index
             foreach ($this->getCrawler($url)->getLinks() as $link) {
@@ -146,7 +159,8 @@ class CrawlContainer extends \yii\base\Object
                 $model->crawled = 1;
                 $model->status_code = 1;
                 $model->last_indexed = time();
-                $model->save();
+                $model->language_info = $this->getCrawler($url)->getLanguageInfo();
+                $model->save(false);
 
                 foreach ($this->getCrawler($url)->getLinks() as $link) {
                     if ($this->matchBaseUrl($link[1])) {

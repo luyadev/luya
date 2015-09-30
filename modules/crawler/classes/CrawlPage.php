@@ -64,6 +64,11 @@ class CrawlPage extends \yii\base\Object
         return $links;
     }
     
+    public function getLanguageInfo()
+    {
+        return $this->getCrawler()->filterXPath('//html')->attr('lang');
+    }
+    
     public function getTitle()
     {
         return $this->getCrawler()->filterXPath('//title')->text();
