@@ -24,9 +24,11 @@ ASYNC
 
 Für Async Searchs kann der Restcontroller verwendet werden, hier ein Jquery beispiel:
 
+> Achtung die Url Composition prefix muss gegen sein für mehrsprachige Urls.
+
 ```javascript
 
-var url = 'http://luya.io/crawler/rest/;
+var url = 'http://luya.io/en/crawler/rest/;
 
 $.ajax({
 	url : url 
