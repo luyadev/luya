@@ -5,7 +5,7 @@ use \yii\helpers\Url;
 $composition = Yii::$app->composition;
 $links = Yii::$app->links;
 ?>
-<html>
+<html lang="<?= $composition->getKey('langShortCode'); ?>">
     <head>
         <title>Luya &mdash; <?= $this->title; ?></title>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
