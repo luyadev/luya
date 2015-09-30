@@ -43,7 +43,7 @@ class CrawlPage extends \yii\base\Object
 
     public function getLinks()
     {
-        $links = $this->getCrawler()->filter('a')->each(function ($node, $i) {
+        $links = $this->getCrawler()->filterXPath('//a')->each(function ($node, $i) {
             return $node->extract(array('_text', 'href'))[0];
         });
 
@@ -76,7 +76,7 @@ class CrawlPage extends \yii\base\Object
 
     public function getBaseUrl()
     {
-        $base = $this->getCrawler()->filter('base');
+        $base = $this->getCrawler()->filterXPath('//base');
         $data = $base->extract(array('href'));
 
         if (isset($data[0])) {
