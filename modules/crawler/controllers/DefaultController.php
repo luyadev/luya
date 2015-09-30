@@ -2,6 +2,7 @@
 
 namespace crawler\controllers;
 
+use Yii;
 use crawleradmin\models\Index;
 use yii\helpers\Html;
 
@@ -11,7 +12,7 @@ class DefaultController extends \luya\base\Controller
     {
         return $this->render('index', [
             'query' => Html::encode($query),
-            'results' => Index::searchByQuery($query),
+            'results' => Index::searchByQuery($query, Yii::$app->composition->getKey('langShortCode')),
         ]);
     }
 }

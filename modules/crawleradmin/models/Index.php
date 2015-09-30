@@ -24,9 +24,9 @@ class Index extends \admin\ngrest\base\Model
 
     /* custom methods */
 
-    public static function searchByQuery($query)
+    public static function searchByQuery($query, $languageInfo)
     {
-        return self::find()->where(['like', 'content', Html::encode($query)])->all();
+        return self::find()->where(['like', 'content', Html::encode($query)])->andWhere(['language_info' => $languageInfo])->all();
     }
 
     public function preview($word, $cutAmount = 150)
