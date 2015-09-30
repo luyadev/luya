@@ -4,6 +4,8 @@ namespace errorapi;
 
 class Module extends \luya\base\Module
 {
+    public $isCoreModule = true;
+    
     public $recipient = null;
 
     public $slackToken = null;

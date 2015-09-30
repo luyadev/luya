@@ -12,6 +12,8 @@ class Module extends \luya\base\Module
 
     public $enableCompression = true;
 
+    public $isCoreModule = true;
+    
     public function registerComponents()
     {
         return [

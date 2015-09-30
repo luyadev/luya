@@ -95,6 +95,16 @@ abstract class Module extends \yii\base\Module
     public $moduleLayout = 'layout';
 
     /**
+     * If this property is enabled, the module will be hidden in selections where use can choose a module, example
+     * in wizzard commands where they can create classes inside the modules. (e.g block/create, crud/create).
+     * 
+     * In the method `Yii::$app->getLuyaModules()` the modules will not be listed.
+     * 
+     * @var boolean
+     */
+    public $isCoreModule = true;
+    
+    /**
      * @throws Exception
      */
     public function init()

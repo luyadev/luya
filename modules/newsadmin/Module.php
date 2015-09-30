@@ -4,6 +4,8 @@ namespace newsadmin;
 
 class Module extends \admin\base\Module
 {
+    public $isCoreModule = true;
+    
     public $apis = [
         'api-news-article' => 'newsadmin\apis\ArticleController',
         'api-news-tag' => 'newsadmin\apis\TagController',

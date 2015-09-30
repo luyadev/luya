@@ -4,6 +4,8 @@ namespace admin;
 
 class Module extends \admin\base\Module
 {
+    public $isCoreModule = true;
+    
     public $apis = [
         'api-admin-remote' => 'admin\apis\RemoteController',
         'api-admin-defaults' => 'admin\apis\DefaultsController',
