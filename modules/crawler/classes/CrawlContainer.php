@@ -101,7 +101,10 @@ class CrawlContainer extends \yii\base\Object
             $model->delete(false);
         }
 
-        print_r($compare);
+        // delete empty content empty title
+        foreach(Index::find()->where(['=', 'content', ''])->orWhere(['=', 'title', ''])->all() as $page) {
+            $page->delete(false);
+        }
     }
 
     public function matchBaseUrl($url)
@@ -121,7 +124,7 @@ class CrawlContainer extends \yii\base\Object
         if (!$model) {
 
             // add the url to the index
-            BuilderIndex::addToIndex($url);
+            BuilderIndex::addToIndex($url, $this->getCrawler($url)->getTitle());
 
             // update the urls content
             $model = BuilderIndex::findUrl($url);

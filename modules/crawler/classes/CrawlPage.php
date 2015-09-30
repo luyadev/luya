@@ -63,6 +63,11 @@ class CrawlPage extends \yii\base\Object
 
         return $links;
     }
+    
+    public function getTitle()
+    {
+        return $this->getCrawler()->filterXPath('//title')->text();
+    }
 
     public function getBaseUrl()
     {
