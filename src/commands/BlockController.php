@@ -189,7 +189,7 @@ class BlockController extends \luya\base\Command
         
         // method extraVars
         $content .= '    /**'.PHP_EOL;
-        $content .= '     Return an array containg all extra vars. Those variables you can access in the Twig Templates via {{extras.*}}.'.PHP_EOL;
+        $content .= '     * Return an array containg all extra vars. Those variables you can access in the Twig Templates via {{extras.*}}.'.PHP_EOL;
         $content .= '     */'.PHP_EOL;
         $content .= '    public function extraVars()'.PHP_EOL;
         $content .= '    {'.PHP_EOL;
