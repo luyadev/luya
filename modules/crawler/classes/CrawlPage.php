@@ -120,7 +120,7 @@ class CrawlPage extends \yii\base\Object
         preg_match("/\[CRAWL_FULL_IGNORE\]/s", $bodyContent, $output);
         if (isset($output[0])) {
             if ($output[0] == "[CRAWL_FULL_IGNORE]") {
-                return '';
+                return null;
             }
         }
         
