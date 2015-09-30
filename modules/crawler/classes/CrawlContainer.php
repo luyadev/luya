@@ -105,7 +105,7 @@ class CrawlContainer extends \yii\base\Object
 
         // delete not unseted urls from index
         foreach ($index as $deleteUrl => $deletePage) {
-            $compare['delete'][] = $page->url;
+            $compare['delete'][] = $deleteUrl;
             $model = Index::findOne($deletePage['id']);
             $model->delete(false);
         }
