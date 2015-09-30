@@ -6,8 +6,7 @@ Seiten Crawler
 Crawler via Composer-Require beindung hinzufügen:
 
 ```
-"zephir/luya-module-crawler" : "dev-master",
-"zephir/luya-module-crawleradmin" : "dev-master",
+"zephir/luya-module-crawler" : "dev-master"
 ```
 
 Um das Cralwer Module einzufügen gibts du folgende konfiguration an:
