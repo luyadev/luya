@@ -10,6 +10,7 @@ $config = [
         'import' => '\luya\commands\ImportController',
         'setup' => '\luya\commands\SetupController',
         'health' => '\luya\commands\HealthController',
+        'block' => '\luya\commands\BlockController',
     ],
     'components' => [
         'mail' => [

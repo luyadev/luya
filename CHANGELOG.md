@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-alpha20 (in progress)
 ---------------------------
+- added module property `public $isCoreModule` to hide modules for user selections.
 - fixed several small bugs with ngrest configs and i18n fields.
 - added basic implementation of admin and cms page properties.
 - changed behavior of the links component: is_hidden pages are accessable but hidden in navigation; is_offline pages are not accessable by both.
