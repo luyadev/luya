@@ -20,6 +20,9 @@ $config = [
             'class' => '\luya\cli\ErrorHandler',
             'memoryReserveSize' => 0,
         ],
+        'composition' => [
+            'class' => '\luya\components\Composition',
+        ],
     ],
     'bootstrap' => [
         'luya\cli\Bootstrap',
