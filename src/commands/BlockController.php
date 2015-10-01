@@ -5,6 +5,7 @@ namespace luya\commands;
 use Yii;
 use yii\helpers\Inflector;
 use yii\helpers\FileHelper;
+use yii\helpers\Console;
 
 class BlockController extends \luya\base\Command
 {
@@ -42,8 +43,8 @@ class BlockController extends \luya\base\Command
     private function getVariableTypesOptions()
     {
         return [
-            'select' => "[['value' => 1, 'label' => 'Value 1']]", // 'options' => [['value' => 1, 'label' => 'Value 1']]
-            'checkbox-array' => "['items' => [['id' => 1, 'label' => 'Label for Value 1']]]", // 'options' => ['items' => [['id' => 1, 'label' => 'Label for Value 1']]]
+            'select' => "[['value' => 1, 'label' => 'Label for Value 1']]",
+            'checkbox-array' => "['items' => [['id' => 1, 'label' => 'Label for Value 1']]]",
         ];
     }
     
@@ -67,11 +68,9 @@ class BlockController extends \luya\base\Command
         
         $module = false;
         
-        /*
         if ($type == 'module' && count($this->getModuleProposal()) === 0) {
             return $this->outputError("Your project does not have Project-Modules registered!");
         }
-        */
         
         if ($type == 'module') {
             $module = $this->select("Choose a module to create the block inside:", $this->getModuleProposal());
@@ -89,40 +88,40 @@ class BlockController extends \luya\base\Command
         
         // vars
         
-        $knowsTheVars = $this->confirm("Do you know the vars you want to create?", false);
-        $varsAmount = 0;
-        $vars = [];
+        $config = [
+            'vars' => [], 'cfgs' => [], 'placeholders' => [],
+        ];
         
-        if ($knowsTheVars) {
-            $varsAmount = $this->prompt("How many User-Input-Variables (vars) do you need?", [
-                'required' => true,
-                'pattern' => '/\d/',
-            ]);
-        }
+        $doConfigure = $this->confirm("Would you like to configure this Block? (vars, cfgs, placeholders)", false);
         
-        for($i = 1; $i <= $varsAmount; $i++) {
-            $v = $this->varCreator($i);
-            $phpdoc[] = '{{vars.'.$v['var'].'}}';
-            $vars[] = $v;
-        }
-        
-        // cfgs
-
-        $knowsTheCfgs = $this->confirm("Do you know the cfgs you want to create?", false);
-        $cfgsAmount = 0;
-        $cfgs = [];
-        
-        if ($knowsTheCfgs) {
-            $cfgsAmount = $this->prompt("How many User-Input-Configs (cfgs) do you need?", [
-                'required' => true,
-                'pattern' => '/\d/',
-            ]);
-        }
-
-        for($i = 1; $i <= $cfgsAmount; $i++) {
-            $v = $this->varCreator($i);
-            $phpdoc[] = '{{cfgs.'.$v['var'].'}}';
-            $cfgs[] = $v;
+        if ($doConfigure) {
+            $doVars = $this->confirm('Add new Variable (vars)?', false);
+            $i=1;
+            while($doVars) {
+                $item = $this->varCreator('Variabel (vars) #'.$i);
+                $phpdoc[] = '{{vars.'.$item['var'].'}}';
+                $config['vars'][] = $item;
+                $doVars = $this->confirm('Add one more?', false);
+                $i++;
+            }
+            $doCfgs = $this->confirm('Add new Configuration (cgfs)?', false);
+            $i=1;
+            while($doCfgs) {
+                $item = $this->varCreator('Configration (cfgs) #'.$i);
+                $phpdoc[] = '{{cfgs.'.$item['var'].'}}';
+                $config['cfgs'][] = $item;
+                $doCfgs = $this->confirm('Add one more?', false);
+                $i++;
+            }
+            $doPlaceholders = $this->confirm('Add new Placeholder (placeholders)?', false);
+            $i=1;
+            while($doPlaceholders) {
+                $item = $this->placeholderCreator('Placeholder (placeholders) #'.$i);
+                $phpdoc[] = '{{placeholders.'.$item['var'].'}}';
+                $config['placeholders'][] = $item;
+                $doPlaceholders = $this->confirm('Add one more?', false);
+                $i++;
+            }
         }
         
         if ($module) {
@@ -138,6 +137,9 @@ class BlockController extends \luya\base\Command
         
         $content = '<?php'.PHP_EOL.PHP_EOL;
         $content .= 'namespace '.$ns.';'.PHP_EOL.PHP_EOL;
+        $content .= '/**'.PHP_EOL;
+        $content .= ' * Block created with Luya Block Creator Version ' . \luya\Module::VERSION.' at ' . date("d.m.Y H:i"). PHP_EOL;
+        $content .= ' */'.PHP_EOL;
         $content .= 'class '.$blockName.' extends \cmsadmin\base\Block'.PHP_EOL;
         $content .= '{'.PHP_EOL;
         
@@ -161,9 +163,9 @@ class BlockController extends \luya\base\Command
         $content .= '    {'.PHP_EOL;
         $content .= '        return ['.PHP_EOL;
         // get vars
-        if (count($vars)) {
+        if (count($config['vars'])) {
         $content .= '           \'vars\' => ['.PHP_EOL;
-            foreach($vars as $k => $v) {
+            foreach($config['vars'] as $k => $v) {
         $content .= '               [\'var\' => \''.$v['var'].'\', \'label\' => \''.$v['label'].'\', \'type\' => \''.$v['type'].'\'';
             if (isset($v['options'])) {
                 $content.=', \'options\' => '.$v['options'];
@@ -173,14 +175,22 @@ class BlockController extends \luya\base\Command
         $content .= '           ],'.PHP_EOL;
         }
         // get cfgs
-        if (count($cfgs)) {
+        if (count($config['cfgs'])) {
             $content .= '           \'cfgs\' => ['.PHP_EOL;
-            foreach($cfgs as $k => $v) {
+            foreach($config['cfgs'] as $k => $v) {
                 $content .= '               [\'var\' => \''.$v['var'].'\', \'label\' => \''.$v['label'].'\', \'type\' => \''.$v['type'].'\'';
                 if (isset($v['options'])) {
                     $content.=', \'options\' => '.$v['options'];
                 }
                 $content .= '],'.PHP_EOL;
+            }
+            $content .= '           ],'.PHP_EOL;
+        }
+        // get placeholders
+        if (count($config['placeholders'])) {
+            $content .= '           \'placeholders\' => ['.PHP_EOL;
+            foreach($config['placeholders'] as $k => $v) {
+                $content .= '               [\'var\' => \''.$v['var'].'\', \'label\' => \''.$v['label'].'\'],'.PHP_EOL;
             }
             $content .= '           ],'.PHP_EOL;
         }
@@ -243,11 +253,28 @@ class BlockController extends \luya\base\Command
         }
     }
     
-    private function varCreator($i)
+    private function placeholderCreator($prefix)
     {
-        $name = $this->prompt("#$i: Name of the Variable?", ['required' => true]);
-        $label = $this->prompt("#$i: Label for the End-User?", ['required' => true]);
-        $type = $this->select("#$i: Type of the Variable?", $this->getVariableTypes());
+        $this->output(PHP_EOL . '-> Create new ' . $prefix, Console::FG_YELLOW);
+        $name = $this->prompt("Variable Name:", ['required' => true]);
+        $label = $this->prompt("End-User Label:", ['required' => true]);
+        
+        $v = [
+            'var' => Inflector::variablize($name),
+            'label' => $label,
+        ];
+        
+        $this->output('Added ' . $prefix . PHP_EOL, Console::FG_GREEN);
+        
+        return $v;
+    }
+    
+    private function varCreator($prefix)
+    {
+        $this->output(PHP_EOL . '-> Create new ' . $prefix, Console::FG_YELLOW);
+        $name = $this->prompt("Variable Name:", ['required' => true]);
+        $label = $this->prompt("End-User Label:", ['required' => true]);
+        $type = $this->select("Variable Type:", $this->getVariableTypes());
         
         $v = [
             'var' => Inflector::variablize($name),
@@ -258,6 +285,8 @@ class BlockController extends \luya\base\Command
         if ($this->hasVariableTypeOption($type)) {
             $v['options'] = $this->getVariableTypeOption($type);
         }
+        
+        $this->output('Added ' . $prefix . PHP_EOL, Console::FG_GREEN);
         
         return $v;
     }

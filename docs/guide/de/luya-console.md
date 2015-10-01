@@ -21,6 +21,7 @@ Befehlsübersicht
 |crud/create       |-                             |`crud/create`             |Erstellt alle nötigen Daten für ein [NgRest Crud](app-admin-module-ngrest.md) mit einem Assistenten.
 |module/create     |-                             |`module/create`           |Erstellt ein [Frontend/Admin Module](app-module.md) mit einem Assistenten.
 |command           |$moduleName, $route           |`command teammodule controller/action` |Ausführen eines eigenen Konsolenbefehls.
+|block/create		|-								|`block/create`	|Wizzard für das erstellen von neuen Cms [Inhalts Blöcken](app-blocks.md).
 
 
 Einen Command erstellen

@@ -32,15 +32,14 @@ class CommandController extends \luya\base\Command
     public function actionHelp()
     {
         $this->output('Luya Help Guide');
-        $this->output('- migrate');
-        $this->output('- migrate/create');
         $this->output('- import');
         $this->output('- setup');
+        $this->output('- migrate');
+        $this->output('- migrate/create');
         $this->output('- crud/create');
         $this->output('- module/create');
-        $this->output('- health');
         $this->output('- block/create');
-
+        $this->output('- health');
         return 0;
     }
 }
