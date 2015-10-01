@@ -3,7 +3,7 @@
 namespace cmsadmin\apis;
 
 use Yii;
-
+use cmsadmin\models\Property;
 /**
  * example.com/admin/api-cms-nav/create-page
  * example.com/admin/api-cms-nav/create-item-page
@@ -21,7 +21,14 @@ class NavController extends \admin\base\RestController
     
     public function actionGetProperties($navId)
     {
-        return \cmsadmin\models\Property::find()->select(['admin_prop_id', 'value'])->where(['nav_id' => $navId])->all();
+        $data = [];
+        foreach(Property::find()->select(['admin_prop_id', 'value'])->where(['nav_id' => $navId])->asArray()->all() as $row) {
+            if (is_numeric($row['value'])) {
+                $row['value'] = (int) $row['value'];
+            }
+            $data[] = $row;
+        }
+        return $data;
     }
     
     public function actionSaveProperties($navId)
