@@ -59,8 +59,7 @@ class TestProperty extends \admin\base\Property
 
 Um diese erstellte `TestProperty` Klasse in das System einzuspielen, muss (wie bereits oben erklärt) dere [Import Konsolenbefehl](luya-console.md) ausgeführt werden. Jede änderung der Klasse (zbsp. Text Korrektur im Label) muss durch den Import-Prozess aktualisert werden.
 
-Methoden erklärung
---------------------------
+### Die Klassen-Methoden
 
 |methode	|Optional	|Erklärung
 |---		|---		|---
@@ -69,4 +68,22 @@ Methoden erklärung
 |type		|nein		|Definiert den Input-Type der Variable. Alle [Block-Typen](app-block-types.md) stehen dir zur Verfügung.
 |options	|ja			|Sepzifische Typen wie *select* oder *checkbox-array* benötigen zusätlich Optionen, diese werden über diese Methode definiert.
 |defaultValue|ja		|Gewissen Typen haben einen *initvalue* diese Methode entspricht diesem Wert. Standard ist `false`.
+
+Auf Eigenschaften Zugreifen
+---------------------------
+
+Aktuell gibt es nur einen Anwendungs Zweck für das Zugreifen der *Eigenschaft* (*property*), innerhalb eines [Blocks](app-blocks.md). Um innerhalb eines Block auf die oben Erstellte Variable `foobar` innerhalb des Property Klasse `TestProperty` zuzugreifen kannst du innerhalb der Block methoden auf das Seiten-Object (*pageObject*) zugreifen mit der methode `getEnvOption('pageObject')`. Eigenschaften werden einem *Nav* eintrag hinterlegt, das Seiten-Object ist jedoch der *NavItem* Eintrag. Aus diesem Grunde muss innerhalb des *NavItem* Objecs (welches pageObject entspricht) auf die Methode `getNav()` zugefriffen werden welches über die nötigen Methoden zum ausgeben und anzeigen der Eigenschaften verfügt. Hier ein Beispiel aufruf der `foobar` Variable aus unserer `TestProperty` Klasse:
+
+```php
+$this->getEnvOption('pageObject')->getNav()->getProperty('foobar');
+```
+
+> Wenn die Eigenschaft nicht für diese Seite hinterlegt wurde (also keine Wert für für die Eigenschaft hinterlegt) gibt die Funktion immer `false` zurück.
+
+um alle Eigenschaften für diese Seite (in der der Block abglegt wurde) anzuziegen verwenden Sie die `getProperties()` Methode:
+
+```php
+$this->getEnvOption('pageObject')->getNav(9->getProperties();
+```
+
 
