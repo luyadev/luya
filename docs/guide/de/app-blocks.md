@@ -8,6 +8,8 @@ Ein *Projekt-Block* muss in deinem Projekt-Ordner unter `blocks` hinzugefügt we
 
 > Blöcke können nur verwendet werden wenn *LUYA* das CMS-Modul installiert hat, dies ist bei der `luya-kickstarter` installation der Fall.
 
+Wenn du das Prinzip und den Aufbau eines Blockes verstanden hast, kannst du bequem im Terminal mit dem [Konsolenbefehl](luya-console.md) `block/create` über einem Wizzard, Blöcke in dein Module oder Projekt erstellen.
+
 Beispiel Block
 --------------
 Ein einfacher Text-Block welcher die Eingabe in Uppercase und Original ausgibt:
