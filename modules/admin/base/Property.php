@@ -5,6 +5,12 @@ namespace admin\base;
 use Exception;
 use admin\models\Property as PropertyModel;
 
+/**
+ * Abstract Page Property Class
+ * 
+ * @todo remove defaultValue change to initvalue like in blocks!
+ * @author nadar
+ */
 abstract class Property extends \yii\base\Object
 {
     public $moduleName = null;
