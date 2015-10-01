@@ -82,7 +82,7 @@
 
                                 <!-- LEFT TOOLBAR -->
                                 <div class="left">
-                                    <button type="button" ng-click="togglePropMask()">Eigenschaften</button>
+                                    <button type="button" class="btn" ng-click="togglePropMask()" style="margin-right:10px;" ng-show="properties.length">Eigenschaften</button>
                                     <!-- LANGUAGE SWITCH -->
                                     <div class="toolbar__group">
                                         <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'[ grey lighten-2 ]' : AdminLangService.isInSelection(lang)}" class="[ waves-effect waves-blue ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ]">{{lang.name}}</a>
@@ -156,12 +156,14 @@
             <div class="row" ng-show="showPropForm">
                 <div class="col s12">
                     <div class="card-panel">
-                        <table>
-                            <tr ng-repeat="prop in properties">
-                                <td><zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{prop.label}}" grid="12" model="propValues[prop.id]"></zaa-injector></td>
-                            </tr>
-                        </table>
-                        <button type="button" ng-click="storePropValues()">Speichern</button>
+                        <div class="row" ng-repeat="prop in properties">
+                            <zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{prop.label}}" grid="12" model="propValues[prop.id]"></zaa-injector>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <button type="button" ng-click="storePropValues()" class="btn">Speichern</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -183,7 +185,6 @@
                         </div>
                     </div>
                     <div class="page {{AdminClassService.getClassSpace('onDragStart')}}" ng-show="isTranslated">
-
                         <!-- PAGE__HEADER -->
                         <div class="page__header">
                             <div class="row">
