@@ -11,11 +11,10 @@ class Module extends \admin\base\Module
 
     public function getMenu()
     {
-        return $this->node('Crawler', 'http://materializecss.com/icons.html')
-        ->group('Daten')
-        ->itemApi('Builder Index', 'crawleradmin-builderindex-index', 'http://materializecss.com/icons.html', 'api-crawler-builderindex')
-        ->itemApi('Index', 'crawleradmin-index-index', 'http://materializecss.com/icons.html', 'api-crawler-index')
-
+        return $this->node('Crawler', 'mdi-action-pageview')
+            ->group('Indexierungen')
+                ->itemApi('Seiten Index', 'crawleradmin-index-index', 'mdi-action-visibility', 'api-crawler-index')
+                ->itemApi('Zwischenspeicher', 'crawleradmin-builderindex-index', 'mdi-action-visibility-off', 'api-crawler-builderindex')
         ->menu();
     }
 }
