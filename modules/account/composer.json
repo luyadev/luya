@@ -18,7 +18,7 @@
 	},
 	"require" : {
 		"zephir/luya" : "*",
-		"zephir/luya-modules-admin" : "*"
+		"zephir/luya-module-admin" : "*"
 	},
 	"autoload" : {
 		"psr-4" : {

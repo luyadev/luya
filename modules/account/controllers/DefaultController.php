@@ -2,6 +2,10 @@
 
 namespace account\controllers;
 
+use Yii;
+use account\models\LoginForm;
+use luya\helpers\Url;
+
 class DefaultController extends \account\base\Controller
 {
     public function getRules()
@@ -13,7 +17,7 @@ class DefaultController extends \account\base\Controller
                 'roles' => ['?', '@'],
             ], [
                 'allow' => true,
-                'actions' => ['lostpoass'],
+                'actions' => ['lostpass'],
                 'roles' => ['?'],
             ],
         ];
@@ -26,18 +30,18 @@ class DefaultController extends \account\base\Controller
     public function actionIndex()
     {
         if (!$this->module->getUserIdentity()->isGuest) {
-            return $this->redirect(\luya\helpers\Url::to('account/settings/index'));
+            return $this->redirect(Url::to('account/settings/index'));
         }
 
-        $model = new \account\models\LoginForm();
+        $model = new LoginForm();
         // see if values are sent via post
         if (isset($_POST['LoginForm'])) {
             $model->attributes = $_POST['LoginForm'];
             if (($userObject = $model->login()) !== false) {
                 if ($this->module->getUserIdentity()->login($userObject)) {
-                    $redirect = \yii::$app->request->get('redirect', false);
+                    $redirect = Yii::$app->request->get('redirect', false);
                     if (!$redirect) {
-                        $redirect = \luya\helpers\Url::to('account/settings/index');
+                        $redirect = Url::to('account/settings/index');
                     }
 
                     return $this->redirect($redirect);
