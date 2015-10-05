@@ -2,6 +2,8 @@
 
 namespace account;
 
+use Yii;
+
 class Module extends \luya\base\Module
 {
     public $urlRules = [
@@ -16,8 +18,6 @@ class Module extends \luya\base\Module
 
     public function getUserIdentity()
     {
-        $class = $this->userIdentity;
-
-        return new $class();
+        return Yii::createObject(['class' => $this->userIdentity]);
     }
 }
