@@ -8,7 +8,7 @@ use crawler\classes\CrawlPage;
 
 /**
  * Run:
- * php index.php command crawler crawl.
+ * ./vendor/bin/luya command crawler crawl.
  *
  * @author nadar
  */

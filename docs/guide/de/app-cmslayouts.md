@@ -23,10 +23,10 @@ Dies wird dem Benutzer nun 2 Platzerhalter zur verfügung stellen an dem er Blö
 
 Importiern und Benutzen
 -----------------------
-Um ein neus layout einzufügen oder ein bestehendes Layout zu aktualsierien öffnen Sie das Terminal und wechseln in de `public_html` Ordner. Dort führen Sie den `import` befehl aus.
+Um ein neus layout einzufügen oder ein bestehendes Layout zu aktualsierien öffnen Sie das Terminal und wechseln das Projekt Verzeichniss. Dort führen Sie den `import` befehl aus.
 
 ```sh
-php index.php import
+./vendor/bin/luya import
 ```
 
 Der Import Prozess wird zurück geben was gemacht wurde:

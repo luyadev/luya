@@ -62,10 +62,10 @@ class TextTransformBlock extends \cmsadmin\base\Block
 
 Block registrieren
 ------------------
-Um einen Block welchen du erstellt hast zu registrieren gehen wir in das *Terminal* und wechseln in das `public_html` Verzeichnis deines Projekts. Dort geben wir den befehl ein:
+Um einen Block welchen du erstellt hast zu registrieren gehen wir in das *Terminal* und wechseln in das Projekt Verzeichniss. Dort geben wir den befehl ein:
 
 ```sh
-php index.php import
+./vendor/bin/luya import
 ```
 
 Dieser Befehl wird nun deinen neune Block in das System integrieren. Wenn ein Block nicht mehr existiert wird der `import` ihn löschen. Wenn sich der Name der Klasse verändert hat wird das System ihn automatisch beim `import` anpassen.

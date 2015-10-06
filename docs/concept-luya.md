@@ -119,18 +119,18 @@ Now all modules can contain their own migrations scripts inside the module folde
 /*
  * will create a migration script into the application folder
  */
-php index.php migrate/create fooMigration
+./vendor/bin/luya migrate/create fooMigration
 
 /*
  * will create a migration script into the module "news" 
  * (only for dev usage. Modules are loaded via composer into the vendor folder. It does not make sense to create a migration script into the vendor/zephir/<module>/migrations)
  */
-php index.php migrate/create fooMigration news
+./vendor/bin/luya migrate/create fooMigration news
 
 /*
  * will run the all the migration scripts over all the assigned modules
  */
-php index.php migrate/up
+./vendor/bin/luya migrate/up
 ```
 
 

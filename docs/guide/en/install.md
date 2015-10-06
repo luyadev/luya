@@ -23,16 +23,22 @@ cp prep.php.dist prep.php
 cp local.php.dist local.php
 ```
 
-Now change the database connection inside the `configs/local.php` file to your custom config. You should open all config files once to change values and understand the behavior. After successfully setting up your database connection, you have to reopen your Terminal and change into your project `public_html` directory:
+Now change the database connection inside the `configs/local.php` file to your custom config. You should open all config files once to change values and understand the behavior. After successfully setting up your database connection, you have to reopen your Terminal and change into your project project directory:
 
 ```
-cd /path/to/your/project/public_html
+cd /path/to/your/project
 ```
 
 now execute the php command
 
 ```
-php index.php migrate
+./vendor/bin/luya migrate
+```
+
+Import data from files into database:
+
+```
+./vendor/bin/luya import
 ```
 
 It will ask for your permissions to execute the database migrations.
@@ -40,10 +46,12 @@ It will ask for your permissions to execute the database migrations.
 now execute the php command:
 
 ```
-php index.php setup
+./vendor/bin/luya setup
 ```
 
 The setup proccess will ask you for an email and password to store your personal login data inside the database (of course the password will be encrypted).
+
+> `./vendor/bin/luya health` will make a small check if several directorys are readable.
 
 You can now log in into your administration interface http://localhost/project/__admin__. When you have successfull logged into the administration area, navigate to __Administration -> Gruppen__ click on `Berechtigung` in the first group. A modal dialog will display all rights, select all and save. Now you have the ability to administrate all sections. enjoy! 
 

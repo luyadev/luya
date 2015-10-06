@@ -4,10 +4,10 @@ CONSOLE
 How to exec console commands?
 -----------------------------
 
-Open your terminal window (mac or linux) and navigate into the public_html diretory. All the terminal commands for your project will go trough your index.php file, like the web requests as well.
+Open your terminal window (mac or linux) and navigate into the project diretory. All the terminal commands for your project will go trough a bin file in your vendor directory, called *luya*.
 
 ```
-cd /var/www/_YOUR_PROJECT_/public_Html
+cd /var/www/project_directory
 ```
 
 now you can execute all the console commands described below.
@@ -20,7 +20,7 @@ migration
 
 create a new migration script
 ```
-php index.php migrate/create TABLE_NAME MODULE_NAME
+./vendor/bin/luya migrate/create TABLE_NAME MODULE_NAME
 ```
 
 ***up***
@@ -28,7 +28,7 @@ php index.php migrate/create TABLE_NAME MODULE_NAME
 execute all migrations for all modules
 
 ```
-php index.php migrate
+./vendor/bin/luya migrate
 ```
 
 
@@ -40,7 +40,7 @@ exec
 if you are creating a new project you can use the setup proccess to prefill your database (after pressql (migration) command).
 
 ```
-php index.php setup
+./vendor/bin/luya setup
 ```
 
 the above command will ask for an email adress and password.
@@ -50,7 +50,7 @@ the above command will ask for an email adress and password.
 The import command will call the import() method inside of your Module class.
 
 ```
-php index.php import
+./vendor/bin/luya import
 ```
 A uscase for the abovce example are project(app) layouts and blocks. The importer detect layouts and blocks defined in the project and inserts those into your local database.
 
@@ -58,14 +58,14 @@ crud
 ----
 create ngrest crud components:
 ```
-php index.php crud/create
+./vendor/bin/luya crud/create
 ```
 
 module
 ------
 create admin/frontend module:
 ```
-php index.php module/create
+./vendor/bin/luya module/create
 ```
 
 Create your console command
@@ -78,7 +78,7 @@ To add a module console command just create a file inside `@module/commands` lik
 namespace yourmodule\commands;
 
 /**
- * php index.php command yourmodule notify
+ * ./vendor/bin/luya command yourmodule notify
  */
 class NotifyController extends \luya\base\Command
 {
@@ -96,10 +96,10 @@ class NotifyController extends \luya\base\Command
 
 execute the command in your terminal:
 ```
-php index.php command yourmodule notify
+./vendor/bin/luya command yourmodule notify
 ```
 
 to execute the bar action you have the execute the command like this:
 ```
-php index.php command yourmodule notify/bar
+./vendor/bin/luya command yourmodule notify/bar
 ```

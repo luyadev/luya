@@ -27,7 +27,7 @@ Ausführen
 Damit deine suche gestartet wird erstellst du am besten einen *Cron-job* der jede Nacht läuft mit dem auszuführenden COmmand:
 
 ```sh
-php index.php command crawler crawl
+./vendor/bin/luya command crawler crawl
 ```
 
 Ausgabe
