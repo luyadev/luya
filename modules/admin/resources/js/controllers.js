@@ -4,6 +4,23 @@
 	// CrudController.js
 	zaa.controller("CrudController", function($scope, $http, $sce, $state) {
 		
+		/*
+		 * 6.10.2015: remove dialogs, add variable toggler to display. added ngSwitch
+		 */
+		
+		/**
+		 * 0 = list
+		 * 1 = add
+		 * 2 = edit
+		 */
+		$scope.crudSwitchType = 0;
+		
+		$scope.switchTo = function(type) {
+			$scope.crudSwitchType = type;
+		};
+		
+		/* old definitions */
+		
 		$scope.loading = true;
 		
 		$scope.parentController = $scope.$parent;
@@ -35,16 +52,6 @@
 		
 		$scope.changeOrder = function(field, sort) {
 			$scope.orderBy = sort + field;
-		};
-		
-		$scope.closeDialogs = function() {
-			/*
-			$scope.toggler.update = false;
-			$scope.toggler.strap = false;
-			$scope.toggler.create = false;
-			//$scope.AdminService.bodyClass = '';
-			$scope.search = '';
-			*/
 		};
 		
 		$scope.debug = function() {
@@ -105,38 +112,28 @@
 							$scope.deleteErrors.push(v);
 						})
 					}
-				})
+				});
 			}
 		};
 		
 		$scope.toggleUpdate = function(id, $event) {
-			/*
-			$scope.toggler.update = !$scope.toggler.update;
-			$scope.AdminService.bodyClass = 'main-blurred';
-			*/
 			$scope.data.updateId = id;
-			$http.get($scope.config.apiEndpoint + '/'+id+'?' + $scope.config.apiUpdateQueryString)
-			.success(function(data) {
+			$http.get($scope.config.apiEndpoint + '/'+id+'?' + $scope.config.apiUpdateQueryString).success(function(data) {
 				$scope.data.update = data;
-	            //dispatchEvent('onCrudUpdate');
-	            $('#updateModal').openModal({
-	            	dismissible: false
-	            });
-				
-			})
-			.error(function(data) {
+				$scope.switchTo(2);
+			}).error(function(data) {
 				alert('ERROR LOADING UPDATE DATA');
-			})
+			});
 		};
 		
 		$scope.closeUpdate = function () {
-			$('#updateModal').closeModal();
-	        //$scope.AdminService.bodyClass = '';
+			$scope.switchTo(0);
 	    };
 		
 		$scope.closeCreate = function() {
-			$('#createModal').closeModal();
+			$scope.switchTo(0);
 		};
+		
 		
 		$scope.openActiveWindow = function() {
 			$('#activeWindowModal').openModal();
@@ -146,64 +143,53 @@
 			$('#activeWindowModal').closeModal();
 		};
 		
+		/*
 		$scope.openCreate = function () {
 			$('#createModal').openModal({
 				dismissible: false
 			});
-			/*
-			$scope.toggler.create = !$scope.toggler.create;
-			if ($scope.toggler.create) {
-				$scope.AdminService.bodyClass = 'main-blurred';
-			} else {
-				$scope.AdminService.bodyClass = '';
-			}
-			if ($scope.toggler.create) {
-				dispatchEvent('onCrudCreate');
-			}
-			*/
 		};
+		*/
 	    
 		$scope.submitUpdate = function () {
 			
 			$scope.updateErrors = [];
 			
-			$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true))
-			.success(function(data) {
+			$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true)).success(function(data) {
 				$('#updateModal').closeModal();
 				$scope.loadList();
 				Materialize.toast('Der Datensatz wurde erfolgreich aktualsiert.', 3000);
-			})
-			.error(function(data) {
+				$scope.switchTo(0);
+			}).error(function(data) {
 				$scope.updateErrors = data;
-			})
+			});
 		};
 		
 		$scope.submitCreate = function() {
 			
 			$scope.createErrors = [];
 			
-			$http.post($scope.config.apiEndpoint, angular.toJson($scope.data.create, true))
-			.success(function(data) {
+			$http.post($scope.config.apiEndpoint, angular.toJson($scope.data.create, true)).success(function(data) {
 				$('#createModal').closeModal();
 				$scope.loadList();
 				$scope.data.create = {};
 				Materialize.toast('Der neue Datensatz wurde erfolgreich erstellt.', 3000);
-			})
-			.error(function(data) {
+				$scope.switchTo(0);
+			}).error(function(data) {
 				$scope.createErrors = data;
-			})
+			});
 		};
 	
 		$scope.loadList = function() {
-			$http.get($scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString)
-			.success(function(data) {
+			$scope.loading = true;
+			$http.get($scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString).success(function(data) {
 				$scope.loading = false;
 				$scope.data.list = data;
-			})
+			});
 			
 			$http.get($scope.config.apiEndpoint + '/services').success(function(rsp) {
 				$scope.service = rsp;
-			})
+			});
 		};
 		
 		$scope.service = [];
