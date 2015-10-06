@@ -114,18 +114,18 @@
 		pointer-events: none;
 		transition: 0.25s ease opacity;
         font-size: 22px;
-        line-height:28px;
+        line-height: 28px;
         vertical-align: middle;
-        margin:-5px;
+        margin: -5px;
 	}
 
     .filemanager__delete-icon {
-        transform:rotate(45deg);
+        transform: rotate(45deg);
         font-size: 32px;
     }
 
     .filemanager__edit-icon {
-        right:40px;
+        right: 40px;
         font-size: 18px;
     }
 
