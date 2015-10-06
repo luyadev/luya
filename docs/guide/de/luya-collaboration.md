@@ -69,3 +69,39 @@ Du kannst nun deine änderungen in deinen neu erstellen branch *commiten* und de
 Nun ist dein neuer Branch auf der Github Platform. Wechslen nun im Browser auf dein *LUYA* fork innterhalb deines GitHub profils und klicken auf den **PULL REQUEST** Knopf.
 
 ![pull-request](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/start-collaboration-pull-request.jpg "Pull request")
+
+Admin Design Kompilierung
+-------------------------
+Damit alle styles kompiliert werden, benötigen Sie folgende Programme / Plugins:
+
+* [Compass](http://compass-style.org/install/) (gem install compass)
+* [Autoprefixer-rails](autoprefixer-rails) (gem install autoprefixer-rails)
+
+*Bei Berechtigungsfehlern kannst du die oben genannten Befehle mit "sudo" ausführen, oder die Berechtigung im Installationsverzeichniss von ruby anpassen.*
+
+Wenn die oben genannten Befehle erfolgreich ausgeführt wurden, kannst du nun in das gewünschte Modul (Unterordner ressources/) wechseln und folgenden Befehl ausführen:
+``
+    compass watch
+``
+oder
+``
+compass compile
+``
+
+*Der "compile" Befehl kompiliert alle styles einmalig und muss bei Änderungen erneut ausgeführt werden. Der "watch" Befehl kompiliert automatisch sobald eine Datei geändert wurde.*
+
+*Jedes Modul hat eine eigene Compass Konfiguration (config.rb). Daher muss auch der oben genannte Befehl in jedem Modul (Unterordner ressources/) einzeln ausgeführt werden.*
+
+Admin Design Aufteilung
+-----------------------
+Alle CMS relevanten Styles werden im SCSS Format erfasst. Dabei muss man sich an die Richtlinien der [cssguidelines](http://cssguidelin.es) halten.
+
+Je nach Element werden die Styles aus anderen Modulen geladen. Aktuell unterscheidet man zwischen **admin** und **cmsadmin**.
+
+**admin**
+
+Liefert die styles für Navigation, CRUD, Benutzerinformationen und weiteres. Ausserdem definiert es die Erscheinung von wiederverwendeten Elementen (z.B. Formularelemente).
+
+**cmsadmin**
+
+Liefert alle styles für die Inhaltsverwaltung im CMS. z.B. Treeview, Seiten, Placeholders, Blöcke etc.
