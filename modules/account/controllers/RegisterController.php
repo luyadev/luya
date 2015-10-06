@@ -2,6 +2,9 @@
 
 namespace account\controllers;
 
+use Yii;
+use account\models\User;
+
 class RegisterController extends \account\base\Controller
 {
     public function getRules()
@@ -17,13 +20,16 @@ class RegisterController extends \account\base\Controller
 
     public function actionIndex()
     {
-        $model = new \account\models\User();
+        $model = new User();
         $model->scenario = 'register';
         if (isset($_POST['Register'])) {
             $model->attributes = $_POST['Register'];
             if ($model->validate()) {
                 $model->encodePassword();
                 $save = $model->save();
+                if ($save) {
+                    Yii::$app->mail->compose('Registrierung', 'Sie haben sich erfolgreich registriert.<br />E-Mail: '.$model->email.'<br />Passwort: '.$model->plainPassword.'<br /><br />Sie können Sich nun einloggen.')->address($model->email)->send();
+                }
             }
         }
 

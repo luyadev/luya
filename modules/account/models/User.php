@@ -2,10 +2,14 @@
 
 namespace account\models;
 
+use Yii;
+
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     public $password_confirm = null;
 
+    public $plainPassword = null;
+    
     public static function tableName()
     {
         return 'account_user';
@@ -55,15 +59,17 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public function verifyPassword($password)
     {
-        return \yii::$app->security->validatePassword($password.$this->password_salt, $this->password);
+        return Yii::$app->security->validatePassword($password.$this->password_salt, $this->password);
     }
 
     public function encodePassword()
     {
+        $this->plainPassword = $this->password;
+        
         // create random string for password salting
-        $this->password_salt = \yii::$app->getSecurity()->generateRandomString();
+        $this->password_salt = Yii::$app->getSecurity()->generateRandomString();
         // store the password
-        $this->password = \yii::$app->getSecurity()->generatePasswordHash($this->password.$this->password_salt);
+        $this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password.$this->password_salt);
         $this->password_confirm = $this->password;
     }
 
