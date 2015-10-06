@@ -16,6 +16,17 @@ class Folder
         return $model->save();
     }
 
+    public function deleteFolder($folderId)
+    {
+        $model = StorageFolder::findOne($folderId);
+        if (!$model) {
+            return false;
+        }
+        $model->is_deleted = true;
+
+        return $model->update();
+    }
+
     public function updateFolder($folderId, array $fields)
     {
         $model = StorageFolder::findOne($folderId);
@@ -29,7 +40,7 @@ class Folder
 
     public function getSubFolders($parentFolderId)
     {
-        return \admin\models\StorageFolder::find()->where(['parent_id' => $parentFolderId])->asArray()->all();
+        return \admin\models\StorageFolder::find()->where(['parent_id' => $parentFolderId, 'is_deleted' => 0])->asArray()->all();
     }
 
     private function partialFolderTree($parentId)
