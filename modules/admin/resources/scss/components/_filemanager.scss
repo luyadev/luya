@@ -106,14 +106,31 @@
 		display: none;
 	}
 	
-	.filemanager__edit-icon {
+	.filemanager__edit-icon,
+    .filemanager__delete-icon {
 		position: absolute;
 		right: 0;
 		opacity: 0;
 		pointer-events: none;
 		transition: 0.25s ease opacity;
+        font-size: 22px;
+        line-height:28px;
+        vertical-align: middle;
+        margin:-5px;
 	}
-	&:hover > .filemanager__edit-icon {
+
+    .filemanager__delete-icon {
+        transform:rotate(45deg);
+        font-size: 32px;
+    }
+
+    .filemanager__edit-icon {
+        right:40px;
+        font-size: 18px;
+    }
+
+	&:hover > .filemanager__edit-icon,
+    &:hover > .filemanager__delete-icon {
 		opacity: 1;
 		pointer-events: auto;
 	}

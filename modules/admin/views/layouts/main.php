@@ -94,10 +94,14 @@ $this->beginPage()
                         <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
                         <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
                         <i class="mdi-editor-mode-edit filemanager__edit-icon" ng-click="folder.edit=!folder.edit"></i>
+                        <i class="mdi-content-add filemanager__delete-icon" ng-click="folder.remove=!folder.remove"></i>
                         <span ng-show="!folder.edit"><span ng-click="loadFolder(folder.data.id)">{{folder.data.name }}</span>
                             <button ng-click="moveFilesTo(folder.data)" ng-show="showFoldersToMove && currentFolderId != folder.data.id" type="button">{{selectedFiles.length}} Dateien verschieben</button>
                         </span>
                         <span ng-show="folder.edit"><input type="text" ng-model="folder.data.name" /><button type="button" ng-click="updateFolder(folder)">Speichern</button></span>
+                        <span ng-show="folder.remove"><button type="button" ng-click="deleteFolder(folder)">Löschen</button></span>
+
+                        <!-- mdi-mdi-action-highlight-remove -->
                     </div>
                     <ul class="filemanager__folders" ng-if="folder.__items.length > 0">
                         <li class="filemanager__folder"  ng-class="{'active' : currentFolderId == folder.data.id }" ng-repeat="folder in folder.__items"  ng-include="'reverseFolders'"></li>

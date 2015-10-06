@@ -948,6 +948,18 @@
 						
 			        });
 				}
+
+                $scope.deleteFolder = function(folder) {
+                    $http.post('admin/api-admin-storage/folder-delete?folderId=' + folder.data.id, $.param({ name : folder.data.name }), {
+                        headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+                    }).success(function(transport) {
+                        folder.remove = false;
+                        FilemanagerFolderListService.get(true).then(function(r) {
+                            $scope.folders = r;
+                        });
+
+                    });
+                }
 				
 				$scope.updateFolder = function(folder) {
 					$http.post('admin/api-admin-storage/folder-update?folderId=' + folder.data.id, $.param({ name : folder.data.name }), {
