@@ -62,7 +62,8 @@
 					}
 				})
 			}, template: function() {
-				return '<div class="input-field col s{{grid}}"><input placeholder="{{placeholder}}" name="{{name}}" id="{{id}}" ng-class="{\'invalid\' : !isValid }" type="number" ng-model="model" min="0" /><label for="{{id}}">{{label}}</label></div>';
+				//return '<div class="input-field col s{{grid}}"><input placeholder="{{placeholder}}" name="{{name}}" id="{{id}}" ng-class="{\'invalid\' : !isValid }" type="number" ng-model="model" min="0" /><label for="{{id}}">{{label}}</label></div>';
+                return '<div class="input input--text"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" name="{{name}}" ng-model="model" type="number" min="0" class="input__field" ng-class="{\'invalid\' : !isValid }" placeholder="{{placeholder}}" /><div class="input__active"></div></div></div>';
 			}
 		}
 	});
@@ -80,7 +81,8 @@
 				"placeholder": "@placeholder"
 			},
 			template: function() {
-				return '<div class="input-field col s{{grid}}"><input placeholder="{{placeholder}}" id="{{id}}" name="{{name}}" ng-model="model" type="text" /><label for="{{id}}">{{label}}</label></div>';
+                //return '<div class="input-field col s{{grid}}"><input placeholder="{{placeholder}}" id="{{id}}" name="{{name}}" ng-model="model" type="text" /><label for="{{id}}">{{label}}</label></div>';
+                return '<div class="input input--text"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /><div class="input__active"></div></div></div>';
 			}
 		}
 	});
@@ -98,7 +100,8 @@
 				"placeholder": "@placeholder"
 			},
 			template: function() {
-				return '<div class="input-field col s{{grid}}"><textarea placeholder="{{placeholder}}" id="{{id}}" name="{{name}}" ng-model="model" class="materialize-textarea"></textarea><label for="{{id}}">{{label}}</label></div>';
+				//return '<div class="input-field col s{{grid}}"><textarea placeholder="{{placeholder}}" id="{{id}}" name="{{name}}" ng-model="model" class="materialize-textarea"></textarea><label for="{{id}}">{{label}}</label></div>';
+                return '<div class="input input--textarea"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><textarea id="{{id}}" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}"></textarea><div class="input__active"></div></div></div>';
 			}
 		}
 	});
@@ -115,7 +118,7 @@
 				"name": "@fieldname"
 			},
 			template: function() {
-				return '<div class="input-field col s{{grid}}"><input type="password" name="{{name}}" id="{{id}}" ng-model="model" /><label for="{{id}}">{{label}}</label></div>';
+                return '<div class="input input--text"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" name="{{name}}" ng-model="model" type="password" class="input__field" placeholder="{{placeholder}}" /><div class="input__active"></div></div></div>';
 			}
 		}
 	});
@@ -145,7 +148,8 @@
 				});
 			},
 			template: function() {
-				return '<div class="col s{{grid}}"><label for="{{id}}">{{label}}</label><select name="{{name}}" id="{{id}}" class="browser-default" ng-options="item.value as item.label for item in options" ng-model="model"></select></div>';
+				// return '<div class="col s{{grid}}"><label for="{{id}}">{{label}}</label><select name="{{name}}" id="{{id}}" class="browser-default" ng-options="item.value as item.label for item in options" ng-model="model"></select></div>';
+                return '<div class="input input--select"><label class="input__label" for="{{id}}">{{label}}</label><select name="{{name}}" id="{{id}}" class="input__field browser-default" ng-options="item.value as item.label for item in options" ng-model="model"></select></div>';
 			}
 		}
 	});

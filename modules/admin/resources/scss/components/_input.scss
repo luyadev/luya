@@ -1,0 +1,75 @@
+
+$input-font-size:			1rem;
+$input__label-font-size: 	$input-font-size;
+$input__input-font-size: 	$input-font-size;
+
+.input {
+	font-size: 0;
+	line-height: 0;
+}
+
+.input__label {
+	display: inline-block;
+	width: 250px;
+	color: color("shades", "black");
+	font-size: $input__label-font-size;
+	line-height: $input__label-font-size + 0.1;
+	cursor: pointer;
+	vertical-align: middle;
+	word-wrap: break-word;
+	padding-right: 10px;
+}
+
+.input__field-wrapper {
+	position: relative;
+	display: inline-block;
+	width: calc(100% - 250px);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.input__active {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 0;
+	transition: 0.25s ease width, 0.25s ease background;
+	background-color: transparent;
+	z-index: 2;
+
+	.input__field:focus + & {
+		background-color: rgba(0, 0, 0, 0.1);
+		width: 100%;
+	}
+
+	.input--textarea & {
+		width: 100%;
+	}
+}
+
+.input .input__field {
+	position: relative;
+	z-index: 10;
+	margin: 0;
+	height: auto;
+	font-size: $input__input-font-size;
+	line-height: $input__input-font-size + 0.1;
+	padding: 10px;
+	outline: none;
+	vertical-align: middle;
+
+	// Overwrite materialize
+	border: none !important;
+	box-shadow: none !important;
+}
+
+.input--select .input__field {
+	display: inline-block;
+	width: calc(100% - 250px);
+	border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.input--textarea .input__field {
+	resize: vertical;
+	padding: 15px 10px;
+}
