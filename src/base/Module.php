@@ -11,101 +11,84 @@ use Exception;
 abstract class Module extends \yii\base\Module
 {
     /**
-     * Contains the apis for each module to provided them in the admin module.
-     * They represents the name of the api and the value represents the class.
-     *
+     * @var array Contains the apis for each module to provided them in the admin module. They represents the name of the api and the value represents the class. Example value:
+     * 
      * ```php
      * [
      *     'api-admin-user' => 'admin\apis\UserController',
      *     'api-cms-cat' => 'admin\apis\CatController'
      * ]
      * ```
-     *
-     * @var array
      */
     public $apis = [];
 
     /**
-     * Contains all urlRules for this module. Can't provided in key value pairing for pattern<=>route. must be array containing
-     * class name or array with pattern, route informations.
-     *
-     * @var array
+     * @var array Contains all urlRules for this module. Can't provided in key value pairing for pattern<=>route. must be array containing class name or array with pattern, route informations.
      */
     public $urlRules = [];
 
     /**
-     * Determines if a Module is an admin Module or not. This way we can easely change the boot behavior for each Module.
-     * 
-     * @var booelan
+     * @var boolean Determines if a Module is an admin Module or not. This way we can easely change the boot behavior for each Module.
      */
     public $isAdmin = false;
 
     /**
-     * An array containing all components which should be registered for the current module. If the component does not exists
-     * an Exception will be thrown.
-     * 
-     * @var array
+     * @var array An array containing all components which should be registered for the current module. If the component does not exists an Exception will be thrown.
      */
     public $requiredComponents = [];
 
     /**
-     * Enable or Disable where the PATH to the layout file should be inside the @app namespace or inside your module.
+     * @var boolean Enable or Disable where the PATH to the layout file should be inside the @app namespace or inside your module.
      * 
      * + true = looking for layout file in `@app/views/<ID>/layouts`.
      * + false = looking for layout file in @module/views/layouts/`.
      * 
      * This variable is only available if your not in a context call. A context call would be if the cms renders the module.
-     *
-     * @var bool
      */
     public $useAppLayoutPath = true;
 
     /**
-     * This variable can enable the view path defintion for all controllers inside this module.
-     *
-     * @var bool true = the view path inside this module will be used, false = the view path of the projects app view will be used.
+     * @var boolean This variable can enable the view path defintion for all controllers inside this module.
+     * 
+     * + true = the view path inside this module will be used
+     * + false = the view path of the projects app view will be used.
      */
     public $controllerUseModuleViewPath = null;
 
     /**
-     * each module can have assets, all module controllers will register those assets in the view.
-     *
-     * @var array Valid class name to the asset e.g. \app\assets\TestAsset
+     * @var array  each module can have assets, all module controllers will register those assets in the view.. Valid class name to the asset e.g. 
+     * 
+     * ```php
+     * public $assets = ['\app\assets\TestAsset'];
+     * ```
      */
     public $assets = [];
 
     /**
-     * if this/the module is included via another module (parent module), the parent module will write its name inside the child modules
-     * $context variable. For example the cms includes the news module, the context variable of news would have the value "cms".
-     *
-     * @var string
+     * @var string if this/the module is included via another module (parent module), the parent module will write its name inside the child modules $context variable. For example the cms includes the news module, the context variable of news would have the value "cms".
      */
     public $context = null;
 
     /**
-     * If a module is set via context it can store context options inside the child modules via an array.
-     *
-     * @var array
+     * @var array If a module is set via context it can store context options inside the child modules via an array.
      */
     public $contextOptions = [];
 
     /**
-     * @var unknown_type
+     * @var string The default name of the moduleLayout
      */
     public $moduleLayout = 'layout';
 
     /**
-     * If this property is enabled, the module will be hidden in selections where use can choose a module, example
-     * in wizzard commands where they can create classes inside the modules. (e.g block/create, crud/create).
-     * 
-     * In the method `Yii::$app->getLuyaModules()` the modules will not be listed.
-     * 
-     * @var boolean
+     * @var boolean If this property is enabled, the module will be hidden in selections where use can choose a module, example in wizzard commands where they can create classes inside the modules. (e.g block/create, crud/create). In the method `Yii::$app->getLuyaModules()` the modules will not be listed.
      */
     public $isCoreModule = true;
     
     /**
-     * @throws Exception
+     * The Luya-Module initializer is looking for defined requiredComponents.
+     * 
+     * @throws \Exception
+     * @see \yii\base\Module::init()
      */
     public function init()
     {
@@ -118,6 +101,12 @@ abstract class Module extends \yii\base\Module
         }
     }
 
+    /**
+     * Override the default implementation of Yii's getLayoutPath(). If the property `$useAppLayoutPath` is true, the *@app* namespace views will be looked up for view files
+     * 
+     * @return string;
+     * @see \yii\base\Module::getLayoutPath()
+     */
     public function getLayoutPath()
     {
         if ($this->useAppLayoutPath) {
@@ -128,10 +117,10 @@ abstract class Module extends \yii\base\Module
     }
 
     /**
+     * Extract informations from an existing route.
+     * 
      * @todo rename the resolveControllerRoute
-     *
-     * @param unknown $route
-     *
+     * @param string $route
      * @return string
      */
     public function findControllerRoute($route)
@@ -153,23 +142,32 @@ abstract class Module extends \yii\base\Module
         return implode('/', $xp);
     }
 
+    /**
+     * Set module context information if the module is implemented in contextual situations like cms.
+     * 
+     * @param string $name
+     * @return void
+     */
     public function setContext($name)
     {
         $this->context = $name;
     }
-
-    /*
-    public function getContext()
-    {
-        return $this->context;
-    }
-    */
-
+    
+    /**
+     * Add a context property.
+     * 
+     * @param array $options
+     */
     public function setContextOptions(array $options)
     {
         $this->contextOptions = $options;
     }
 
+    /**
+     * get all context propertys
+     * 
+     * @return array:
+     */
     public function getContextOptions()
     {
         return $this->contextOptions;

@@ -10,7 +10,7 @@ class Composition extends \yii\base\Component
      * Enable or disable the $composition->getFull() prefix. If disabled the response of getFull() would be empty, otherwhise it
      * returns the full prefix composition pattern based url.
      *
-     * @var bool
+     * @var boolean
      */
     public $hidden = false;
 
