@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "hash": "c44bbd0f903108a60772cbb6b9d450da",
+    "content-hash": "7690f01003403744581f44ebc3e11bb4",
     "packages": [
         {
             "name": "bower-asset/angular",
@@ -793,12 +794,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "768b4c0e3e0712a53eb35eaf3ba0d96910225389"
+                "reference": "6d6c3a68fbea09c50b251553d59b9209b475e272"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/768b4c0e3e0712a53eb35eaf3ba0d96910225389",
-                "reference": "768b4c0e3e0712a53eb35eaf3ba0d96910225389",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/6d6c3a68fbea09c50b251553d59b9209b475e272",
+                "reference": "6d6c3a68fbea09c50b251553d59b9209b475e272",
                 "shasum": ""
             },
             "require": {
@@ -847,7 +848,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2015-09-16 17:16:54"
+            "time": "2015-10-05 21:30:32"
         },
         {
             "name": "guzzlehttp/promises",
@@ -1199,13 +1200,13 @@
             "version": "2.8.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/BrowserKit.git",
-                "reference": "4dbd336331f5e7ba7a6f9e4f9f608b89093f49b3"
+                "url": "https://github.com/symfony/browser-kit.git",
+                "reference": "5157a879fcc45835059aef7d1c7223289b89a7db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/4dbd336331f5e7ba7a6f9e4f9f608b89093f49b3",
-                "reference": "4dbd336331f5e7ba7a6f9e4f9f608b89093f49b3",
+                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/5157a879fcc45835059aef7d1c7223289b89a7db",
+                "reference": "5157a879fcc45835059aef7d1c7223289b89a7db",
                 "shasum": ""
             },
             "require": {
@@ -1247,20 +1248,20 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
-            "time": "2015-09-06 08:37:06"
+            "time": "2015-09-29 12:32:55"
         },
         {
             "name": "symfony/css-selector",
             "version": "2.8.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/CssSelector.git",
-                "reference": "6470dad1d5c3a926906b5660a7046bbd61bd7806"
+                "url": "https://github.com/symfony/css-selector.git",
+                "reference": "643c13a4443f313d50eac4d408f07d2ffb90f4b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/CssSelector/zipball/6470dad1d5c3a926906b5660a7046bbd61bd7806",
-                "reference": "6470dad1d5c3a926906b5660a7046bbd61bd7806",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/643c13a4443f313d50eac4d408f07d2ffb90f4b0",
+                "reference": "643c13a4443f313d50eac4d408f07d2ffb90f4b0",
                 "shasum": ""
             },
             "require": {
@@ -1300,27 +1301,27 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2015-08-24 07:18:02"
+            "time": "2015-10-01 17:39:35"
         },
         {
             "name": "symfony/dom-crawler",
             "version": "2.8.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/DomCrawler.git",
-                "reference": "5c9bcc11fc56ccf968fb34fe8dda3b16481b4221"
+                "url": "https://github.com/symfony/dom-crawler.git",
+                "reference": "83d41f25ddd80a75b125ca5de1994b28740b4405"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/5c9bcc11fc56ccf968fb34fe8dda3b16481b4221",
-                "reference": "5c9bcc11fc56ccf968fb34fe8dda3b16481b4221",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/83d41f25ddd80a75b125ca5de1994b28740b4405",
+                "reference": "83d41f25ddd80a75b125ca5de1994b28740b4405",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.9"
             },
             "require-dev": {
-                "symfony/css-selector": "~2.3|~3.0.0",
+                "symfony/css-selector": "~2.8|~3.0.0",
                 "symfony/phpunit-bridge": "~2.7|~3.0.0"
             },
             "suggest": {
@@ -1353,7 +1354,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2015-09-14 14:15:17"
+            "time": "2015-10-04 13:52:56"
         },
         {
             "name": "twig/twig",
@@ -1510,12 +1511,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-bootstrap.git",
-                "reference": "c25dc1e23d188954b546f6bd95def1027d91113b"
+                "reference": "49c2d45951dd2e98c6217aa071f655016c706846"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/c25dc1e23d188954b546f6bd95def1027d91113b",
-                "reference": "c25dc1e23d188954b546f6bd95def1027d91113b",
+                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/49c2d45951dd2e98c6217aa071f655016c706846",
+                "reference": "49c2d45951dd2e98c6217aa071f655016c706846",
                 "shasum": ""
             },
             "require": {
@@ -1552,7 +1553,7 @@
                 "bootstrap",
                 "yii2"
             ],
-            "time": "2015-09-17 13:11:22"
+            "time": "2015-09-29 10:36:47"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -1560,12 +1561,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-composer.git",
-                "reference": "6b2a2b3bb83d4b3dd791f76e64c48973ce01bac6"
+                "reference": "87cd1f2e0dd454a837607de612b1057840effe8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/6b2a2b3bb83d4b3dd791f76e64c48973ce01bac6",
-                "reference": "6b2a2b3bb83d4b3dd791f76e64c48973ce01bac6",
+                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/87cd1f2e0dd454a837607de612b1057840effe8b",
+                "reference": "87cd1f2e0dd454a837607de612b1057840effe8b",
                 "shasum": ""
             },
             "require": {
@@ -1599,7 +1600,7 @@
                 "extension installer",
                 "yii2"
             ],
-            "time": "2015-06-11 19:55:58"
+            "time": "2015-09-25 10:48:24"
         },
         {
             "name": "yiisoft/yii2-debug",
@@ -1654,12 +1655,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-gii.git",
-                "reference": "6519954dc8dd16050d886d1266d6248cbae2d14f"
+                "reference": "011faf740a0a4e558a306b069e6fd50f8e36eb66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/6519954dc8dd16050d886d1266d6248cbae2d14f",
-                "reference": "6519954dc8dd16050d886d1266d6248cbae2d14f",
+                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/011faf740a0a4e558a306b069e6fd50f8e36eb66",
+                "reference": "011faf740a0a4e558a306b069e6fd50f8e36eb66",
                 "shasum": ""
             },
             "require": {
@@ -1699,7 +1700,7 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2015-08-31 23:04:33"
+            "time": "2015-10-05 20:17:56"
         }
     ],
     "packages-dev": [],
