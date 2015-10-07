@@ -3,6 +3,8 @@
 namespace luya\base;
 
 /**
+ * Base class for all controllers in luya application Modules.
+ * 
  * @author nadar
  */
 abstract class Controller extends \yii\web\Controller

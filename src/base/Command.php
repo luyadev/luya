@@ -13,7 +13,8 @@ use yii\helpers\Console;
 abstract class Command extends \yii\console\Controller
 {
     /**
-     * Helper method to see if the current Application is muted or not. If the Application is muted, no output will displayed.
+     * Helper method to see if the current Application is muted or not. If the Application is muted, no output
+     * will displayed.
      * 
      * @return boolean
      */
@@ -29,10 +30,14 @@ abstract class Command extends \yii\console\Controller
      * @param string $color A color from \yii\helpers\Console::FG_GREEN;
      * @param return void
      */
-    protected function output($message, $color = false)
+    protected function output($message, $color = null)
     {
+        $format = [];
         if (!$this->isMuted()) {
-            echo $this->ansiFormat("\r".$message."\n", $color);
+            if ($color !== null) {
+                $format[] = $color;
+            }
+            echo $this->ansiFormat("\r".$message."\n", $format);
         }
     }
 
