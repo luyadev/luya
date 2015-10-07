@@ -2,6 +2,8 @@
 
 namespace cms\helpers;
 
+use Yii;
+
 /**
  * 
  * Hello link:123123
@@ -30,18 +32,26 @@ class Parser
         preg_match_all(static::REGEX, $content, $results, PREG_SET_ORDER);
         
         foreach($results as $row) {
+            
+            // fixed issue when ussing link[] cause value is empty
+            if (empty($row['value'])) {
+                continue;
+            }
+            
             switch($row['function']) {
                 case "link":
                     $replace = static::functionLink($row);
                     break;
                     
                 case "file":
-                    $replace = '';
+                    continue;
                     break;
+                    
                 default:
                     continue;
                     break;
             }
+            
             $content = preg_replace('/'.preg_quote($row[0]).'/mi', $replace, $content, 1);
         }
         
@@ -50,17 +60,34 @@ class Parser
     
     public static function functionLink($result)
     {
+        $alias = false;
         if (is_numeric($result['value'])) {
-            $href = "## WIRD DURCH LINKS COMPONENT ERSETZT##";
+            $link = Yii::$app->links->findone(['nav_id' => $result['value']]);
+            if ($link) {
+                $href = $link['full_url'];
+                $alias = $link['title'];
+            } else {
+                $href = '#link_not_found';
+            }
         } else {
             $href = $result['value'];
+            
+            if (preg_match("#https?://#", $href) === 0) {
+                $href = 'http://'.$href;
+            }
         }
         
         if (isset($result['sub'])) {
             $label = $result['sub'];
         } else {
-            $label = $result['value'];
+            if ($alias) {
+                $label = $alias;
+            } else {
+                $label = $result['value'];
+            }
+            
         }
+        
         return '<a href="'.$href.'">'.$label.'</a>';
     }
     
