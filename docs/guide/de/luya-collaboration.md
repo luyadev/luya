@@ -79,14 +79,17 @@ Damit alle styles kompiliert werden, benötigen Sie folgende Programme / Plugins
 
 *Bei Berechtigungsfehlern kannst du die oben genannten Befehle mit "sudo" ausführen, oder die Berechtigung im Installationsverzeichniss von ruby anpassen.*
 
-Wenn die oben genannten Befehle erfolgreich ausgeführt wurden, kannst du nun in das gewünschte Modul (Unterordner ressources/) wechseln und folgenden Befehl ausführen:
-``
+Wenn die oben genannten Befehle erfolgreich ausgeführt wurden, kannst du nun in das gewünschte Modul (Unterordner ressources/) wechseln und folgenden Befehl ausführen
+
+```
     compass watch
-``
+```
+
 oder
-``
+
+```
 compass compile
-``
+```
 
 *Der "compile" Befehl kompiliert alle styles einmalig und muss bei Änderungen erneut ausgeführt werden. Der "watch" Befehl kompiliert automatisch sobald eine Datei geändert wurde.*
 
