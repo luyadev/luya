@@ -2,6 +2,7 @@
 
 namespace cms\base;
 
+use cms\helpers\Parser;
 use cmsadmin\models\NavItem;
 
 abstract class Controller extends \luya\base\Controller
@@ -27,6 +28,10 @@ abstract class Controller extends \luya\base\Controller
             $this->view->title = $model->title;
         }
 
+        if ($this->module->enableTagParsing) {
+            $content = Parser::encode($content);
+        }
+        
         return $content;
     }
 }
