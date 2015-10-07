@@ -18,11 +18,6 @@
 
 <div ng-controller="<?=$config->hash; ?>" ng-init="init()">
 
-    <?php if ($canCreate): ?>
-        <a ng-show="config.create.length" class="btn-floating btn-large waves-effect waves-light right red" style="margin:20px;" ng-click="switchTo(1)"><i class="mdi-content-add"></i></a>
-        <a class="btn btn-large right green" ng-click="switchTo(0)" style="margin:20px;">Auflisten</a>
-    <?php endif; ?>
-
     <div class="card-panel" ng-show="loading">
         <div class="preloader-wrapper big active">
             <div class="spinner-layer spinner-blue-only">
@@ -32,11 +27,26 @@
             </div>
         </div>
     </div>
+   
 
     <div ng-switch="crudSwitchType" ng-show="!loading">
+
+        <?php if ($canCreate): ?>
+            <div class="tabs" style="">
+                <ul style="">
+                    <li class="tab__item tab__item--active" style="">
+                        <a class="tab__anchor" style="" ng-click="switchTo(0)">Zeige alle</a>
+                    </li>
+                    <li class="tab__item" style="">
+                        <a class="tab__anchor" style="" ng-click="switchTo(1)">Hinzufügen</a>
+                    </li>
+                </ul>
+            </div>
+        <?php endif; ?>
+
         <!-- LIST -->
         <div class="card-panel" ng-switch-default>
-
+            
             <div class="row">
                 <div class="input-field col s6">
                     <i class="mdi-action-search prefix"></i>
@@ -92,6 +102,19 @@
 
                     <!-- MODAL CONTENT -->
                     <div class="modal__content">
+
+                        <div class="langswitch">
+                            <a class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ] ng-binding ng-scope grey lighten-2">
+                                Deutsch
+                            </a>
+                            <a class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ] ng-binding ng-scope grey lighten-2">
+                                Esperanza
+                            </a>
+                            <a class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ] ng-binding ng-scope grey lighten-2">
+                                Englisch
+                            </a>
+                        </div>
+
                         <?php foreach ($config->getPointer('create') as $k => $item): ?>
                             <div class="row">
                                 <?php foreach ($this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_CREATE) as $element): ?>
@@ -163,6 +186,7 @@
         </div>
 
     </div>
+
 
     <!-- activeWindow MODAL -->
     <div id="activeWindowModal" class="modal">
