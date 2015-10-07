@@ -6,12 +6,15 @@ use yii;
 use Exception;
 
 /**
+ * All Luya modules must extend on this base module class.
+ * 
  * @author nadar
  */
 abstract class Module extends \yii\base\Module
 {
     /**
-     * @var array Contains the apis for each module to provided them in the admin module. They represents the name of the api and the value represents the class. Example value:
+     * @var array Contains the apis for each module to provided them in the admin module. They represents 
+     * the name of the api and the value represents the class. Example value:
      * 
      * ```php
      * [
@@ -23,7 +26,8 @@ abstract class Module extends \yii\base\Module
     public $apis = [];
 
     /**
-     * @var array Contains all urlRules for this module. Can't provided in key value pairing for pattern<=>route. must be array containing class name or array with pattern, route informations.
+     * @var array Contains all urlRules for this module. Can't provided in key value pairing for pattern<=>route
+     * must be array containing class name or array with pattern, route informations.
      */
     public $urlRules = [];
 
@@ -33,7 +37,8 @@ abstract class Module extends \yii\base\Module
     public $isAdmin = false;
 
     /**
-     * @var array An array containing all components which should be registered for the current module. If the component does not exists an Exception will be thrown.
+     * @var array An array containing all components which should be registered for the current module. If 
+     * the component does not exists an Exception will be thrown.
      */
     public $requiredComponents = [];
 
@@ -56,7 +61,7 @@ abstract class Module extends \yii\base\Module
     public $controllerUseModuleViewPath = null;
 
     /**
-     * @var array  each module can have assets, all module controllers will register those assets in the view.. Valid class name to the asset e.g. 
+     * @var array Each module can have assets, all module controllers will register those assets in the view.. Valid class name to the asset e.g. 
      * 
      * ```php
      * public $assets = ['\app\assets\TestAsset'];
@@ -65,7 +70,9 @@ abstract class Module extends \yii\base\Module
     public $assets = [];
 
     /**
-     * @var string if this/the module is included via another module (parent module), the parent module will write its name inside the child modules $context variable. For example the cms includes the news module, the context variable of news would have the value "cms".
+     * @var string if this/the module is included via another module (parent module), the parent module will write its 
+     * name inside the child modules $context variable. For example the cms includes the news module, the context variable
+     * of news would have the value "cms".
      */
     public $context = null;
 
@@ -80,7 +87,9 @@ abstract class Module extends \yii\base\Module
     public $moduleLayout = 'layout';
 
     /**
-     * @var boolean If this property is enabled, the module will be hidden in selections where use can choose a module, example in wizzard commands where they can create classes inside the modules. (e.g block/create, crud/create). In the method `Yii::$app->getLuyaModules()` the modules will not be listed.
+     * @var boolean If this property is enabled, the module will be hidden in selections where use can choose a module,
+     * example in wizzard commands where they can create classes inside the modules. (e.g block/create, crud/create).
+     * In the method `Yii::$app->getLuyaModules()` the modules will not be listed.
      */
     public $isCoreModule = true;
     
@@ -102,7 +111,8 @@ abstract class Module extends \yii\base\Module
     }
 
     /**
-     * Override the default implementation of Yii's getLayoutPath(). If the property `$useAppLayoutPath` is true, the *@app* namespace views will be looked up for view files
+     * Override the default implementation of Yii's getLayoutPath(). If the property `$useAppLayoutPath` is true, 
+     * the *@app* namespace views will be looked up for view files
      * 
      * @return string;
      * @see \yii\base\Module::getLayoutPath()
@@ -117,29 +127,24 @@ abstract class Module extends \yii\base\Module
     }
 
     /**
-     * Extract informations from an existing route.
+     * Extract the current module from the route and return the new resolved route.
      * 
-     * @todo rename the resolveControllerRoute
-     * @param string $route
+     * @param string $route Route to resolve, e.g. `admin/default/index`
      * @return string
      */
-    public function findControllerRoute($route)
+    public function resolveRoute($route)
     {
-        $xp = explode('/', $route);
-        foreach ($xp as $k => $v) {
-            if ($k == 0 && $v == $this->id) {
-                unset($xp[$k]);
-            }
-            if (empty($v)) {
-                unset($xp[$k]);
+        $routeParts = explode('/', $route);
+        foreach ($routeParts as $k => $v) {
+            if (($k == 0 && $v == $this->id) || (empty($v))) {
+                unset($routeParts[$k]);
             }
         }
-
-        if (empty($xp)) {
-            $xp[] = $this->defaultRoute;
+        if (count($routeParts) == 0) {
+            return $this->defaultRoute;
         }
-
-        return implode('/', $xp);
+        
+        return implode('/', $routeParts);
     }
 
     /**

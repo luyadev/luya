@@ -73,7 +73,7 @@ class Reflection
             $request['args'] = Yii::$app->request->get(); // @todo should we find the action params and compare against get() request array?
         }
 
-        $request['route'] = $this->module->findControllerRoute($request['route']);
+        $request['route'] = $this->module->resolveRoute($request['route']);
 
         $controller = $this->module->createController($request['route']);
 
