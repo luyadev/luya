@@ -44,7 +44,7 @@ class Gallery extends \admin\ngrest\base\ActiveWindow
         $files = [];
         foreach ($data as $k => $v) {
             $files[] = [
-                'source' => \yii::$app->storage->image->filterApply($v['image_id'], 'small-crop'),
+                'source' => Yii::$app->storage->image->filterApply($v['image_id'], 'small-crop'),
                 'image_id' => $v['image_id'],
             ];
         }
@@ -80,10 +80,10 @@ class Gallery extends \admin\ngrest\base\ActiveWindow
                 return ['upload' => false, 'message' => $this->_uploaderErrors[$file['error']]];
             }
             $fileId = Yii::$app->storage->file->create($file['tmp_name'], $file['name'], false, Yii::$app->request->post('folderId', 0));
-            $imageId = \yii::$app->storage->image->create($fileId);
+            $imageId = Yii::$app->storage->image->create($fileId);
 
             if ($imageId) {
-                $in = \yii::$app->db->createCommand()->insert($this->refTableName, [
+                $in = Yii::$app->db->createCommand()->insert($this->refTableName, [
                     $this->imageIdFieldName => (int) $imageId,
                     $this->refFieldName => (int) $this->getItemId(),
                 ])->execute();

@@ -111,7 +111,7 @@ class UrlManager extends \yii\web\UrlManager
         $context = false;
 
         if ($moduleName !== false) {
-            $moduleObject = \yii::$app->getModule($moduleName);
+            $moduleObject = Yii::$app->getModule($moduleName);
 
             if (method_exists($moduleObject, 'setContext') && !empty($moduleObject->context)) {
                 if ($links !== null) {

@@ -2,7 +2,7 @@
 
 namespace admin\models;
 
-use yii;
+use Yii;
 use yii\web\IdentityInterface;
 
 /**
@@ -112,8 +112,8 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
 
     public function debugPass($pass)
     {
-        $salt = \Yii::$app->getSecurity()->generateRandomString();
-        $password = \Yii::$app->getSecurity()->generatePasswordHash($pass.$salt);
+        $salt = Yii::$app->getSecurity()->generateRandomString();
+        $password = Yii::$app->getSecurity()->generatePasswordHash($pass.$salt);
 
         echo "salt: $salt\n\n<br />";
         echo "pass: $password";
