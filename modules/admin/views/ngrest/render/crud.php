@@ -33,15 +33,14 @@
 
         <div class="tabs">
             <ul>
-                <li class="tab__item" ng-class="{'tab__item--active' : crudSwitchType==0}">
-                    <a class="tab__anchor [ waves-effect waves-blue ]" ng-click="switchTo(0)">Auflisten</a>
+                <li class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==0}">
+                    <a class="tabs__anchor" ng-click="switchTo(0)">Auflisten</a>
                 </li>
-                 <?php if ($canCreate): ?>
-                <li class="tab__item" ng-class="{'tab__item--active' : crudSwitchType==1}">
-                    <a class="tab__anchor [ waves-effect waves-blue ]" style="" ng-click="switchTo(1)"><i class="mdi-content-add-box"></i>   Hinzufügen
-                    </a>
 
-                </li>
+                <?php if ($canCreate): ?>
+                    <li class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==1}">
+                        <a class="tabs__anchor" style="" ng-click="switchTo(1)"><i class="mdi-content-add-box"></i> Hinzufügen</a>
+                    </li>
                 <?php endif; ?>
             </ul>
         </div>
@@ -120,6 +119,7 @@
                             <div class="row">
                                 <?php foreach ($this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_CREATE) as $element): ?>
                                     <?= $element['html']; ?>
+                                    <? print_r($element); ?>
                                 <?php endforeach; ?>
                             </div>
                         <?php endforeach; ?>
