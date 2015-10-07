@@ -38,9 +38,9 @@ class StorageController extends \admin\base\RestController
             }
             $create = Yii::$app->storage->file->create($file['tmp_name'], $file['name'], false, Yii::$app->request->post('folderId', 0));
             if ($create) {
-                //$files[$file['name']] = ['id' => $create, 'error' => (bool) !$create, 'message' => \yii::$app->storage->file->getError(), 'file' => ((bool) $create) ? $this->actionFilePath($create) : false];
-
-            return ['upload' => true, 'message' => 'file uploaded succesfully'];
+                return ['upload' => true, 'message' => 'file uploaded succesfully'];
+            } else {
+                return ['upload' => false, 'message' => Yii::$app->storage->file->getError() ];
             }
         }
 

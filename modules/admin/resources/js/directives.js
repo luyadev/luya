@@ -914,13 +914,18 @@
 	
 			        file.upload.then(function (response) {
 			            $timeout(function () {
-			            	$scope.uploadResults++;
+		            		$scope.uploadResults++;
 			            	file.processed = true;
 			                file.result = response.data;
+			                
+			                if (file.result.upload == false) {
+			                	$scope.errorMsg = file.result.message;
+			                }
 			            });
 			        }, function (response) {
-			            if (response.status > 0)
+			        	if (response.status > 0) {
 			                $scope.errorMsg = response.status + ': ' + response.data;
+			            }
 			        });
 	
 			        file.upload.progress(function (evt) {

@@ -8,7 +8,7 @@ use admin\models\StorageFile;
 
 class File
 {
-    public $error = null;
+    private $_error = null;
 
     public function getFileInfo($sourceFile)
     {
@@ -58,14 +58,14 @@ class File
 
     public function setError($message)
     {
-        $this->error = $message;
+        $this->_error = $message;
 
         return true;
     }
 
     public function getError()
     {
-        return $this->error;
+        return $this->_error;
     }
 
     public function create($sourceFile, $newFileName, $hidden = false, $folderId = 0)
@@ -82,7 +82,7 @@ class File
         $fileName = implode([$baseName.'_'.$fileHashName, $fileInfo->extension], '.');
         $savePath = \yii::$app->storage->dir.$fileName;
         if (is_uploaded_file($sourceFile)) {
-            if (move_uploaded_file($sourceFile, $savePath)) {
+            if (@move_uploaded_file($sourceFile, $savePath)) {
                 $copyFile = true;
             } else {
                 $this->setError("error while moving uploaded file from $sourceFile to $savePath");

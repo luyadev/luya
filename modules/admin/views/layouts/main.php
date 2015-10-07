@@ -160,6 +160,8 @@ $this->beginPage()
                             </span>
                             <span class="floating-button-label__label">Datei hinzufügen</span>
                         </label>
+
+                        <div class="alert alert--danger" ng-show="errorMsg" style="clear:both;">Fehler beim Hochladen der Datei: {{errorMsg}}</div>
  
                         <div class="modal modal--bottom-sheet" ng-class="{ 'modal--active' : uploading && !serverProcessing }">
 
