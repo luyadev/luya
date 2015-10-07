@@ -331,7 +331,10 @@ CREATE TABLE IF NOT EXISTS `admin_storage_file` (
   `upload_timestamp` int(11) NOT NULL DEFAULT '0',
   `file_size` int(11) NOT NULL DEFAULT '0',
   `upload_user_id` int(11) NOT NULL DEFAULT '0',
-  `is_deleted` tinyint(1) NOT NULL DEFAULT '0'
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `passthrough_file` tinyint(1) DEFAULT '0',
+  `passthrough_file_password` varchar(40) NOT NULL,
+  `passthrough_file_stats` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
