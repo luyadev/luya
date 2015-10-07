@@ -162,6 +162,16 @@ class Links extends \yii\base\Component
         
         return array_key_exists($langId, $this->_links) ? $this->_links[$langId] : [];
     }
+    
+    /**
+     * alias class for findByArguemnts
+     * 
+     * @param array $argsArray
+     */
+    public function findAll(array $argsArray)
+    {
+       return $this->findByArguments($argsArray); 
+    }
 
     public function findByArguments(array $argsArray = [])
     {
@@ -210,21 +220,14 @@ class Links extends \yii\base\Component
         return $_index;
     }
     
-    public function getActiveLanguages()
+    /**
+	 * alias class for findOnyByArguments
+	 */
+    public function findOne(array $argsArray)
     {
-        $data = [];
-        $currentPage = Yii::$app->links->findOneByArguments(['url' => Yii::$app->links->activeUrl, 'show_hidden' => true]);
-        
-        foreach(Lang::find()->asArray()->all() as $lang) {
-            $data[] = [
-                'link' => Yii::$app->links->findOneByArguments(['nav_id' => $currentPage['nav_id'], 'show_hidden' => true, 'lang_id' => $lang['id']]), 
-                'lang' => $lang,
-            ];
-        }
-        
-        return $data;
+        return $this->findOneByArguments($argsArray);
     }
-
+    
     public function findOneByArguments(array $argsArray)
     {
         $links = $this->findByArguments($argsArray);
@@ -235,6 +238,21 @@ class Links extends \yii\base\Component
         return array_values($links)[0];
     }
 
+    public function getActiveLanguages()
+    {
+        $data = [];
+        $currentPage = Yii::$app->links->findOneByArguments(['url' => Yii::$app->links->activeUrl, 'show_hidden' => true]);
+    
+        foreach(Lang::find()->asArray()->all() as $lang) {
+            $data[] = [
+                'link' => Yii::$app->links->findOneByArguments(['nav_id' => $currentPage['nav_id'], 'show_hidden' => true, 'lang_id' => $lang['id']]),
+                'lang' => $lang,
+            ];
+        }
+    
+        return $data;
+    }
+    
     public function teardown($link)
     {
         $parent = $this->getParent($link);
