@@ -31,14 +31,16 @@
 
     <div ng-switch="crudSwitchType" ng-show="!loading">
 
-        <div class="tabs" style="">
-            <ul style="">
+        <div class="tabs">
+            <ul>
                 <li class="tab__item" ng-class="{'tab__item--active' : crudSwitchType==0}">
-                    <a class="tab__anchor" style="" ng-click="switchTo(0)">Auflisten</a>
+                    <a class="tab__anchor [ waves-effect waves-blue ]" ng-click="switchTo(0)">Auflisten</a>
                 </li>
                  <?php if ($canCreate): ?>
                 <li class="tab__item" ng-class="{'tab__item--active' : crudSwitchType==1}">
-                    <a class="tab__anchor" style="" ng-click="switchTo(1)">Hinzufügen</a>
+                    <a class="tab__anchor [ waves-effect waves-blue ]" style="" ng-click="switchTo(1)"><i class="mdi-content-add-box"></i>   Hinzufügen
+                    </a>
+
                 </li>
                 <?php endif; ?>
             </ul>
@@ -95,7 +97,6 @@
         <!-- /LIST -->
     
         <div class="card-panel" ng-switch-when="1">
-            <h1>Hinzufügen</h1>
 
             <?php if ($canCreate && $config->getPointer('create')): ?>
                 <form name="formCreate" role="form" ng-submit="submitCreate()">
