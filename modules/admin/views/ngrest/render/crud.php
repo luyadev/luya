@@ -31,19 +31,19 @@
 
     <div ng-switch="crudSwitchType" ng-show="!loading">
 
-        <?php if ($canCreate): ?>
-            <div class="tabs" style="">
-                <ul style="">
-                    <li class="tab__item tab__item--active" style="">
-                        <a class="tab__anchor" style="" ng-click="switchTo(0)">Zeige alle</a>
-                    </li>
-                    <li class="tab__item" style="">
-                        <a class="tab__anchor" style="" ng-click="switchTo(1)">Hinzufügen</a>
-                    </li>
-                </ul>
-            </div>
-        <?php endif; ?>
-
+        <div class="tabs" style="">
+            <ul style="">
+                <li class="tab__item" ng-class="{'tab__item--active' : crudSwitchType==0}">
+                    <a class="tab__anchor" style="" ng-click="switchTo(0)">Auflisten</a>
+                </li>
+                 <?php if ($canCreate): ?>
+                <li class="tab__item" ng-class="{'tab__item--active' : crudSwitchType==1}">
+                    <a class="tab__anchor" style="" ng-click="switchTo(1)">Hinzufügen</a>
+                </li>
+                <?php endif; ?>
+            </ul>
+        </div>
+        
         <!-- LIST -->
         <div class="card-panel" ng-switch-default>
             
