@@ -119,7 +119,6 @@
                             <div class="row">
                                 <?php foreach ($this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_CREATE) as $element): ?>
                                     <?= $element['html']; ?>
-                                    <? print_r($element); ?>
                                 <?php endforeach; ?>
                             </div>
                         <?php endforeach; ?>
