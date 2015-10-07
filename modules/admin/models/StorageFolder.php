@@ -13,7 +13,7 @@ class StorageFolder extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['parent_id', 'timestamp_create'], 'safe'],
+            [['parent_id', 'timestamp_create', 'is_deleted'], 'safe'],
         ];
     }
 }
