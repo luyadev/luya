@@ -19,7 +19,7 @@
 				"initvalue": "@initvalue"
 			},
 			link: function($scope, $element) {
-				var elmn = $compile(angular.element('<' + $scope.dir + ' options="options" initvalue="{{initvalue}}" fieldid="{{fieldid}}" fieldname="{{fieldname}}" placeholder="{{placeholder}}" model="model" label="{{label}}" grid="{{grid}}" />'))($scope);
+				var elmn = $compile(angular.element('<' + $scope.dir + ' options="options" initvalue="{{initvalue}}" fieldid="{{fieldid}}" fieldname="{{fieldname}}" placeholder="{{placeholder}}" model="model" label="{{label}}" i18n="{{grid}}" />'))($scope);
 				$element.replaceWith(elmn);
 			},
 		}
@@ -32,7 +32,7 @@
 				"model": "=",
 				"options": "=",
 				"label": "@label",
-				"grid": "@grid",
+				"i18n": "@i18n",
 				"id": "@fieldid",
 				"name": "@fieldname"
 			},
@@ -49,7 +49,7 @@
 				"model": "=",
 				"options": "=",
 				"label": "@label",
-				"grid": "@grid",
+				"i18n": "@i18n",
 				"id": "@fieldid",
 				"name": "@fieldname",
 				"placeholder": "@placeholder"
@@ -75,14 +75,17 @@
 				"model": "=",
 				"options": "=",
 				"label": "@label",
-				"grid": "@grid",
+				"i18n": "@i18n",
 				"id": "@fieldid",
 				"name": "@fieldname",
 				"placeholder": "@placeholder"
 			},
+            link : function(scope) {
+                console.log(scope);
+            },
 			template: function() {
                 //return '<div class="input-field col s{{grid}}"><input placeholder="{{placeholder}}" id="{{id}}" name="{{name}}" ng-model="model" type="text" /><label for="{{id}}">{{label}}</label></div>';
-                return '<div class="input input--text"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /><div class="input__active"></div></div></div>';
+                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /><div class="input__active"></div></div></div>';
 			}
 		}
 	});
@@ -94,7 +97,7 @@
 				"model": "=",
 				"options": "=",
 				"label": "@label",
-				"grid": "@grid",
+				"i18n": "@i18n",
 				"id": "@fieldid",
 				"name": "@fieldname",
 				"placeholder": "@placeholder"
@@ -113,7 +116,7 @@
 				"model": "=",
 				"options": "=",
 				"label": "@label",
-				"grid": "@grid",
+				"i18n": "@i18n",
 				"id": "@fieldid",
 				"name": "@fieldname"
 			},
@@ -130,7 +133,7 @@
 				"model": "=",
 				"options": "=",
 				"label": "@label",
-				"grid": "@grid",
+				"i18n": "@i18n",
 				"id": "@fieldid",
 				"name": "@fieldname",
 				"initvalue": "@initvalue"
@@ -163,7 +166,7 @@
 			scope: {
 				"model": "=",
 				"options": "=",
-				"grid": "@grid",
+				"i18n": "@i18n",
 				"id": "@fieldid",
 				"name": "@fieldname",
 				"label": "@label"
@@ -197,7 +200,7 @@
 			scope: {
 				"model": "=",
 				"options": "=",
-				"grid": "@grid",
+				"i18n": "@i18n",
 				"id": "@fieldid",
 				"name": "@fieldname",
 				"label": "@label"
@@ -252,7 +255,7 @@
 				"label": "@label",
 				"id": "@fieldid",
 				"name": "@fieldname",
-				"grid": "@grid"
+				"i18n": "@i18n"
 			},
 			controller: function($scope) {
 				$scope.reform = function() {
@@ -301,7 +304,7 @@
 				"label": "@label",
 				"id": "@fieldid",
 				"name": "@fieldname",
-				"grid": "@grid"
+				"i18n": "@i18n"
 			},
 			controller: function($scope) {
 				$scope.reform = function() {
@@ -344,7 +347,7 @@
 				"model": "=",
 				"options": "=",
 				"label": "@label",
-				"grid": "@grid",
+				"i18n": "@i18n",
 				"id": "@fieldid",
 				"name": "@fieldname"
 			},
@@ -405,7 +408,7 @@
 				"model": "=",
 				"options": "=",
 				"label": "@label",
-				"grid": "@grid",
+				"i18n": "@i18n",
 				"id": "@fieldid",
 				"name": "@fieldname"
 			},
@@ -427,7 +430,7 @@
 				"model": "=",
 				"options": "=",
 				"label": "@label",
-				"grid": "@grid",
+				"i18n": "@i18n",
 				"id": "@fieldid",
 				"name": "@fieldname"
 			},
@@ -449,7 +452,7 @@
 				"model": "=",
 				"options": "=",
 				"label": "@label",
-				"grid": "@grid",
+				"i18n": "@i18n",
 				"id": "@fieldid",
 				"name": "@fieldname"
 			},
@@ -508,7 +511,7 @@
 				"model": "=",
 				"options": "=",
 				"label": "@label",
-				"grid": "@grid",
+				"i18n": "@i18n",
 				"id": "@fieldid",
 				"name": "@fieldname"
 			},
@@ -566,7 +569,7 @@
 				"model": "=",
 				"options": "=",
 				"label": "@label",
-				"grid": "@grid",
+				"i18n": "@i18n",
 				"id": "@fieldid",
 				"name": "@fieldname"
 			},
@@ -631,7 +634,7 @@
 				"model": "=",
 				"options": "=",
 				"label": "@label",
-				"grid": "@grid",
+				"i18n": "@i18n",
 				"id": "@fieldid",
 				"name": "@fieldname"
 			},

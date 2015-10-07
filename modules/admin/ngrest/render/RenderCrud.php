@@ -177,7 +177,8 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
                     'name' => $element['name'],
                     'label' => $element['alias'].' '.$v->name,
                     'ngModel' => $ngModel,
-                    'html' => $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'].' '.$v->name, $element['gridCols']),
+                    'i18n' => true,
+                    'html' => $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'].' '.$v->name, true),
                 ];
             }
 
@@ -197,7 +198,8 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
                 'name' => $element['name'],
                 'ngModel' => $ngModel,
                 'label' => $element['alias'],
-                'html' => $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'], $element['gridCols']),
+                'i18n' => false,
+                'html' => $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'], false),
             ],
         ];
     }
