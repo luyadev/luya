@@ -164,16 +164,6 @@
 
     </div>
 
-    <div>
-        <div class="input input--text">
-            <label class="input__label" for="title">Titel Deutsch</label>
-            <div class="input__field-wrapper">
-                <input id="title" name="title" type="text" class="input__field" />
-                <div class="input__active"></div>
-            </div>
-        </div>
-    </div>
-
     <!-- activeWindow MODAL -->
     <div id="activeWindowModal" class="modal">
         <button class="btn waves-effect waves-light" type="button" ng-click="closeActiveWindow()">
