@@ -37,7 +37,7 @@ abstract class Command extends \yii\console\Controller
             if ($color !== null) {
                 $format[] = $color;
             }
-            echo $this->ansiFormat("\r".$message."\n", $format);
+            echo Console::ansiFormat("\r".$message."\n", $format);
         }
     }
 
