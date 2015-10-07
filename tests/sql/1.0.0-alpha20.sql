@@ -405,7 +405,8 @@ CREATE TABLE IF NOT EXISTS `admin_storage_folder` (
 `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `parent_id` int(11) DEFAULT NULL,
-  `timestamp_create` int(11) DEFAULT NULL
+  `timestamp_create` int(11) DEFAULT NULL,
+  `is_deleted` tinyint(1) DEFAULT 0 NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
