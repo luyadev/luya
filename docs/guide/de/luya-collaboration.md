@@ -108,3 +108,53 @@ Liefert die styles für Navigation, CRUD, Benutzerinformationen und weiteres. Au
 **cmsadmin**
 
 Liefert alle styles für die Inhaltsverwaltung im CMS. z.B. Treeview, Seiten, Placeholders, Blöcke etc.
+
+Step-by-Step Beschreibung Luya-Branching/Forking
+------------------------------------------------
+Sobald du mit deinen Veränderungen fertig bist, empfiehlt es sich als erstes mit git status eine Übersicht über alle getätigten Veränderungen zu verschaffen. Ungewollte Veränderungen kannst du mit 
+```
+git checkout /Pfad/zur/Datei.xyz 
+```
+verwerfen.
+
+**1. Rebase**
+
+Im Luya-Projekt-Verzeichnis, im dem Unterordner /scripts findest du ein shell-Skript das dir diesen Schritt erleichtert. Um dieses auszuführen wechselst du in der Console in das besagte Verzeichnis und führst das rebasemaster-Skript aus(./rebasemaster).
+
+**2. Einen neuen Branch erstellen**
+
+Um einen neuen Branch mit deinen Veränderungen zu erstellen tippe: 
+```
+git checkout -b dein-persoenlicher-branch-mit-veraenderungen
+```
+(WICHTIG: Der Branch-Namen darf keine Leerzeichen enthalten!)
+
+**3. Änderungen hinzufügen**
+
+Um deine Änderungen dem Stage-Verzeichnis hinzuzufügen musst du dich im Root-Verzeichnis befinden und kannst mit dem gewohnten Befehl
+```
+git add * oder /Pfad/zur/Datei.xyz 
+```
+hinzufügen.
+Nun wird natürlich noch der commit erwartet um die Änderungen dem Lokalen-Repository hinzuzufügen mittels des
+```
+git commit -m "Meine Commit Message" 
+```
+Befehls.
+
+**4. Branch verwerfen**
+
+Hierfür verwendest du fast den selben Befehl wie bei der erstellung, lediglich ohne das -b.
+```
+git checkout dein-persoenlicher-branch-mit-veraenderungen
+```
+
+**5. Push!**
+
+Natürlich musst du noch "pushen", hierfür verwendest du den Befehl: 
+```
+git push origin dein-persoenlicher-branch-mit-veraenderungen
+```
+
+Abschliessend begibst du dich auf dein GitHub-Profil zu dem Luya-Fork und betätigst den "Compare and pull request"-Button und bestätigst dies mittels des "Create pull-request" Buttons.
+Fertig!
