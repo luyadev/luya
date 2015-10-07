@@ -178,7 +178,10 @@
 				}
 			},
 			template: function() {
-				return '<div class="input-field col s{{grid}}"><input type="checkbox" id="{{id}}" name="{{name}}" ng-true-value="{{valueTrue}}" ng-false-value="{{valueFalse}}" ng-model="model" type="checkbox" /><label for="{{id}}">{{label}}</label></div>'; 
+				return '<div class="input input--single-checkbox">' +
+                            '<input type="checkbox" id="{{id}}" name="{{name}}" ng-true-value="{{valueTrue}}" ng-false-value="{{valueFalse}}" ng-model="model" type="checkbox" />' +
+                            '<label for="{{id}}" class="input__label">{{label}}</label>' +
+                        '</div>';
 			}
 		}
 	});
@@ -228,7 +231,14 @@
 				scope.random = Math.random().toString(36).substring(7);
 			},
 			template: function() {
-				return '<div class="input-field col s{{grid}}"><h5>{{label}}</h5><p ng-repeat="(k, item) in options.items track by k"><input type="checkbox" ng-checked="isChecked(item)" id="{{random}}_{{k}}" ng-click="toggleSelection(item)" /><label for="{{random}}_{{k}}">{{item.label}}</label></p></div>';
+				return '<div class="input input--multiple-checkboxes">' +
+                    '<label class="input__label">{{label}}</label>' +
+                    '<div class="input__field-wrapper">' +
+                        '<div ng-repeat="(k, item) in options.items track by k">' +
+                            '<input type="checkbox" ng-checked="isChecked(item)" id="{{random}}_{{k}}" ng-click="toggleSelection(item)" />' +
+                            '<label for="{{random}}_{{k}}">{{item.label}}</label>' +
+                        '</div>' +
+                    '</div>';
 			}
 		}
 	});
@@ -315,11 +325,13 @@
 				})
 			},
 			template: function() {
-				return '<div class="col s{{grid}} form__datepicker">' +
-							'<label>{{label}}</label>' +
-							'<input ng-blur="reform()" type="text" ng-model="day" placeholder="Tag" />.' +
-							'<input ng-blur="reform()" type="text" ng-model="month" placeholder="Monat" />.' +
-							'<input ng-blur="reform()" type="text" ng-model="year" placeholder="Jahr" />' + 
+				return '<div class="input input--date">' +
+							'<label class="input__label">{{label}}</label>' +
+                            '<div class="input__field-wrapper">' +
+                                '<input ng-blur="reform()" type="text" ng-model="day" placeholder="Tag" class="input__field" /><span class="input__divider">.</span>' +
+                                '<input ng-blur="reform()" type="text" ng-model="month" placeholder="Monat" class="input__field" /><span class="input__divider">.</span>' +
+                                '<input ng-blur="reform()" type="text" ng-model="year" placeholder="Jahr" class="input__field" />' +
+                            '</div>'
 						'</div>';
 			}
 		}
@@ -398,7 +410,12 @@
 				"name": "@fieldname"
 			},
 			template: function() {
-				return '<div class="col s{{grid}}"><h5>{{label}}</h5><storage-file-upload ng-model="model"></storage-file-upload></div>';
+				return '<div class="input input--file-upload">' +
+                            '<label class="input__label">{{label}}</label>' +
+                            '<div class="input__field-wrapper">' +
+                                '<storage-file-upload ng-model="model"></storage-file-upload>' +
+                            '</div>' +
+                        '</div>';
 			}
 		}
 	});
@@ -415,7 +432,12 @@
 				"name": "@fieldname"
 			},
 			template: function() {
-				return '<div class="col s{{grid}}"><h5>{{label}}</h5><storage-image-upload options="options" ng-model="model"></storage-image-upload></div>';
+				return '<div class="input input--image-upload">' +
+                            '<label class="input__label">{{label}}</label>' +
+                            '<div class="input__field-wrapper">' +
+                                '<storage-image-upload options="options" ng-model="model"></storage-image-upload>' +
+                            '</div>' +
+                        '</div>';
 			}
 		}
 	});
@@ -451,27 +473,29 @@
 				
 			},
 			template: function() {
-				return '<div class="col s{{grid}} imagearray">' +
-	                        '<h5>{{label}}</h5>' +
-	                        '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="teal-text">+</span> links unten ein.</p>' +
-	                        '<div ng-repeat="(key,image) in model track by key" class="row list__item">' +
-	                        
-								'<div class="list__left row">' +
-									'<div class="col s8">' +
-	                        			'<storage-image-upload ng-model="image.imageId"></storage-image-upload>' +
-			                    	'</div>' +
-			                        '<div class="input-field col s4">' +
-	                                    '<textarea ng-model="image.caption" class="materialize-textarea"></textarea>' +
-	                                    '<label>Beschreibung</label>' +
-	                                '</div>' +
-			                    '</div>' +
-	
-			                    '<div class="list__right">' +
-			                    	'<button class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="mdi-content-remove"></i></button>' +
-			                    '</div>' +
-	
-	                        '</div>' +
-	                        '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ teal ][ waves-effect waves-circle waves-light ]"><i class="mdi-content-add"></i></button>' +
+				return '<div class="input input--image-array imagearray">' +
+	                        '<label class="input__label">{{label}}</label>' +
+                            '<div class="input__field-wrapper">' +
+                                '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="teal-text">+</span> links unten ein.</p>' +
+                                '<div ng-repeat="(key,image) in model track by key" class="row list__item">' +
+
+                                    '<div class="list__left row">' +
+                                        '<div class="col s8">' +
+                                            '<storage-image-upload ng-model="image.imageId"></storage-image-upload>' +
+                                        '</div>' +
+                                        '<div class="input-field col s4">' +
+                                            '<textarea ng-model="image.caption" class="materialize-textarea"></textarea>' +
+                                            '<label>Beschreibung</label>' +
+                                        '</div>' +
+                                    '</div>' +
+
+                                    '<div class="list__right">' +
+                                        '<button class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="mdi-content-remove"></i></button>' +
+                                    '</div>' +
+
+                                '</div>' +
+                                '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ teal ][ waves-effect waves-circle waves-light ]"><i class="mdi-content-add"></i></button>' +
+                            '</div>' +
 	                    '</div>';
 			}
 		}
@@ -508,26 +532,28 @@
 	
 			},
 			template: function() {
-				return '<div class="col s{{grid}} filearray">' +
-			                '<h5>{{label}}</h5>' +
-		                	'<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="teal-text">+</span> links unten ein.</p>' +
-			                '<div ng-repeat="(key,file) in model track by key" class="row list__item">' +
-			                    
-			                    '<div class="list__left row">' +
-			                    	'<div class="filearray__upload col s8">' +
-			                        	'<storage-file-upload ng-model="file.fileId"></storage-file-upload>' +
-			                    	'</div>' +
-			                    	'<div class="input-field col s4">' +
-			                            '<input type="text" ng-model="file.caption" class="filearray__description-input" />' +
-			                            '<label>Beschreibung</label>' +
-			                        '</div>' +
-			                    '</div>' +
-	
-			                    '<div class="list__right">' +
-			                    	'<button class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="mdi-content-remove"></i></button>' +
-			                    '</div>' +
-		                    '</div>' +
-			                '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ teal ][ waves-effect waves-circle waves-light ]"><i class="mdi-content-add"></i></button>' +
+				return '<div class="input input--file-array filearray">' +
+			                '<label class="input__label">{{label}}</label>' +
+                            '<div class="input__field-wrapper">' +
+                                '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="teal-text">+</span> links unten ein.</p>' +
+                                '<div ng-repeat="(key,file) in model track by key" class="row list__item">' +
+
+                                    '<div class="list__left row">' +
+                                        '<div class="filearray__upload col s8">' +
+                                            '<storage-file-upload ng-model="file.fileId"></storage-file-upload>' +
+                                        '</div>' +
+                                        '<div class="input-field col s4">' +
+                                            '<input type="text" ng-model="file.caption" class="filearray__description-input" />' +
+                                            '<label>Beschreibung</label>' +
+                                        '</div>' +
+                                    '</div>' +
+
+                                    '<div class="list__right">' +
+                                        '<button class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="mdi-content-remove"></i></button>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ teal ][ waves-effect waves-circle waves-light ]"><i class="mdi-content-add"></i></button>' +
+                            '</div>' +
 			            '</div>';
 			}
 		}
@@ -579,18 +605,20 @@
 	
 			},
 			template: function() {
-				return '<div class="col s12 list">' +
-	                        '<h5>Auflistung</h5>' +
-	                        '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="teal-text">+</span> links unten ein.</p>' +
-	                        '<div ng-repeat="(key,row) in model track by key" class="list__item">' +
-	                            '<div class="list__left">' +
-	                                '<input class="list__input" type="text" ng-model="row.value" />' +
-	                            '</div>' +
-	                            '<div class="list__right">' +
-	                                '<button class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="mdi-content-remove"></i></button>' +
-	                            '</div>' +
-	                        '</div>' +
-	                        '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ teal ][ waves-effect waves-circle waves-light ]"><i class="mdi-content-add"></i></button>' +
+				return '<div class="input input--list list">' +
+	                        '<label class="input__label">Auflistung</label>' +
+                            '<div class="input__field-wrapper">' +
+                                '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="teal-text">+</span> links unten ein.</p>' +
+                                '<div ng-repeat="(key,row) in model track by key" class="list__item">' +
+                                    '<div class="list__left">' +
+                                        '<input class="list__input" type="text" ng-model="row.value" />' +
+                                    '</div>' +
+                                    '<div class="list__right">' +
+                                        '<button class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="mdi-content-remove"></i></button>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ teal ][ waves-effect waves-circle waves-light ]"><i class="mdi-content-add"></i></button>' +
+                            '</div>' +
 	                    '</div>';
 			}
 		}

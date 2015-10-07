@@ -197,4 +197,8 @@
         <div class="modal-content" compile-html ng-bind-html="data.aw.content"></div>
     </div>
 
+    <div class="langswitch">
+
+    </div>
+
 </div>

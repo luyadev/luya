@@ -60,7 +60,6 @@ $this->beginPage()
 
         <script type="text/ng-template" id="storageImageUpload">
             <div class="imageupload">
-                <b class="imageupload__title">Bild auswählen</b>
                 <storage-file-upload ng-model="fileId"></storage-file-upload>
 
                 <div ng-show="originalFileIsRemoved">
