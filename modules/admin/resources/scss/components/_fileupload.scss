@@ -12,12 +12,17 @@
 .fileupload__btn {
 	width: 165px;
 	box-sizing: content-box;
+	vertical-align: top;
 
 	// Width with padding : 225px
 }
 
 .fileupload__path {
+
+	// Overwrite default materializecss styles
+
 	width: calc(100% - 245px) !important; // 100% - (width + padding of fileupload__btn)
+	height: 36px !important;
 	margin-left: 15px !important;
 	color: color("shades", "black") !important;
 	border-bottom: 1px dotted color("shades", "black") !important;
