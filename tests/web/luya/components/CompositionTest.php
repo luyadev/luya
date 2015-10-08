@@ -18,8 +18,8 @@ class CompositionTest extends \tests\web\Base
         $this->assertEquals('hello/world', $resolve);
         $this->assertEquals(true, is_array($resolved));
         $this->assertEquals(1, count($resolved));
-        $this->assertArrayHasKey(0, $resolved);
-        $this->assertEquals('de', $resolved[0]);
+        $this->assertArrayHasKey('langShortCode', $resolved);
+        $this->assertEquals('de', $resolved['langShortCode']);
     }
 
     public function testMultipleResolvedPaths()
@@ -37,9 +37,63 @@ class CompositionTest extends \tests\web\Base
         $this->assertEquals('hello/world', $resolve);
         $this->assertEquals(true, is_array($resolved));
         $this->assertEquals(2, count($resolved));
-        $this->assertArrayHasKey(0, $resolved);
-        $this->assertEquals('ch', $resolved[0]);
-        $this->assertArrayHasKey(1, $resolved);
-        $this->assertEquals('de', $resolved[1]);
+        $this->assertArrayHasKey('countryShortCode', $resolved);
+        $this->assertEquals('ch', $resolved['countryShortCode']);
+        $this->assertArrayHasKey('langShortCode', $resolved);
+        $this->assertEquals('de', $resolved['langShortCode']);
+    }
+    
+    private function resolveHelper($url, $compUrl)
+    {
+        $request = new \luya\components\Request();
+        $request->pathInfo = $url;
+        
+        $composition = new \luya\components\Composition();
+        $composition->pattern = $compUrl;
+        
+        return $composition->getResolvedPathInfo($request);
+    }
+    
+    public function testGetResolvedPathInfo()
+    {
+        $comp = '<countryShortCode:[a-z]{2}>';
+        
+        $resolve = $this->resolveHelper('ch/de/hello/world', $comp);
+        $this->assertEquals('de/hello/world', $resolve['route']);
+        $this->assertEquals('ch', $resolve['resolvedValues']['countryShortCode']);
+        
+        $resolve = $this->resolveHelper('ch/de/hello', $comp);
+        $this->assertEquals('de/hello', $resolve['route']);
+        $this->assertEquals('ch', $resolve['resolvedValues']['countryShortCode']);
+        
+        $resolve = $this->resolveHelper('ch/de', $comp);
+        $this->assertEquals('de', $resolve['route']);
+        $this->assertEquals('ch', $resolve['resolvedValues']['countryShortCode']);
+        
+        $resolve = $this->resolveHelper('ch/', $comp);
+        $this->assertEquals('', $resolve['route']);
+        $this->assertEquals('ch', $resolve['resolvedValues']['countryShortCode']);
+        
+        $comp = '<countryShortCode:[a-z]{2}>/<do:[a-z]{2}>';
+        
+        $resolve = $this->resolveHelper('ch/de/hello/world', $comp);
+        $this->assertEquals('hello/world', $resolve['route']);
+        $this->assertEquals('ch', $resolve['resolvedValues']['countryShortCode']);
+        $this->assertEquals('de', $resolve['resolvedValues']['do']);
+        
+        $resolve = $this->resolveHelper('ch/de/hello', $comp);
+        $this->assertEquals('hello', $resolve['route']);
+        $this->assertEquals('ch', $resolve['resolvedValues']['countryShortCode']);
+        $this->assertEquals('de', $resolve['resolvedValues']['do']);
+        
+        $resolve = $this->resolveHelper('ch/de', $comp);
+        $this->assertEquals('', $resolve['route']);
+        $this->assertEquals('ch', $resolve['resolvedValues']['countryShortCode']);
+        $this->assertEquals('de', $resolve['resolvedValues']['do']);
+        
+        $resolve = $this->resolveHelper('ch/', $comp);
+        
+        $this->assertEquals('', $resolve['route']);
+        $this->assertEquals('ch', $resolve['resolvedValues']['countryShortCode']);
     }
 }
