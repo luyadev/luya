@@ -8,8 +8,8 @@ class PasswordTest extends \tests\web\BasePlugin
     {
         $text = new \admin\ngrest\plugins\Password();
         $this->assertEquals('<span>{{item.}}</span>', $this->renderListHtml($text));
-        $this->assertEquals('<zaa-password fieldid="" fieldname="" model="" label="" grid=""></zaa-password>', $this->renderCreateHtml($text));
-        $this->assertEquals('<zaa-password fieldid="" fieldname="" model="" label="" grid=""></zaa-password>', $this->renderUpdateHtml($text));
+        $this->assertEquals('<zaa-password fieldid="" fieldname="" model="" label="" i18n=""></zaa-password>', $this->renderCreateHtml($text));
+        $this->assertEquals('<zaa-password fieldid="" fieldname="" model="" label="" i18n=""></zaa-password>', $this->renderUpdateHtml($text));
 
         /* @todo: test against real config values 
         $text->setConfig('id', 'foo', 'bar', 'baz', 12);
