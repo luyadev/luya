@@ -1,6 +1,9 @@
 LUYA CHANGELOG
 ==============
 
+1.0.0-beta1 (in progress)
+-------------------------
+
 1.0.0-alpha20 (8. Okt 2015)
 ---------------------------
 - changed form table styles
