@@ -133,7 +133,7 @@
                                     <? if($i - 1 == count($elements)): ?>
                                         </div>
                                     <? endif; ?>
-                                    
+
                                 <?php $i++; endforeach; ?>
 
                             </div>
