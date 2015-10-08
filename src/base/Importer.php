@@ -21,7 +21,7 @@ namespace luya\base;
  * 
  * @author nadar
  */
-abstract class Importer
+abstract class Importer extends \yii\base\Object
 {
     /**
      * @var mixed|array Read only property contains the importer object.
@@ -46,6 +46,21 @@ abstract class Importer
     public function getImporter()
     {
         return $this->_importer;
+    }
+    
+    /**
+     * Add something to the output. Wrapper method from importer
+     * 
+     * ```php
+     * $this->addLog('block', 'new block <ID> have been found and added to database');
+     * ```
+     * 
+     * @param string $section
+     * @param string $value
+     */
+    public function addLog($section, $value)
+    {
+        $this->importer->addLog($section, $value);
     }
 
     /**
