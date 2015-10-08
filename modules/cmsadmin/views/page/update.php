@@ -27,7 +27,7 @@
             <div class="block__body cmsadmin-tags" ng-show="isEditable()" ng-click="toggleEdit()" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
             <div class="block__edit">
                 <div class="row" ng-repeat="field in block.vars">
-                     <zaa-injector dir="field.type" options="field.options" fieldid="{{field.id}}" fieldname="{{field.var}}" initvalue="{{field.initvalue}}" placeholder="{{field.placeholder}}" label="{{field.label}}" grid="12" model="data[field.var]"></zaa-injector>
+                     <zaa-injector dir="field.type" options="field.options" fieldid="{{field.id}}" fieldname="{{field.var}}" initvalue="{{field.initvalue}}" placeholder="{{field.placeholder}}" label="{{field.label}}" model="data[field.var]"></zaa-injector>
                 </div>
 
                 <div class="row">
@@ -38,7 +38,7 @@
                                 <div class="collapsible-body">
                                     <br />
                                     <div class="row" ng-repeat="cfgField in block.cfgs">
-                                        <zaa-injector dir="cfgField.type" placeholder="{{cfgField.placeholder}}" fieldid="{{cfgField.id}}" fieldname="{{cfgField.var}}" initvalue="{{cfgField.initvalue}}" options="cfgField.options" label="{{cfgField.label}}" grid="12" model="cfgdata[cfgField.var]"></zaa-injector>
+                                        <zaa-injector dir="cfgField.type" placeholder="{{cfgField.placeholder}}" fieldid="{{cfgField.id}}" fieldname="{{cfgField.var}}" initvalue="{{cfgField.initvalue}}" options="cfgField.options" label="{{cfgField.label}}"  model="cfgdata[cfgField.var]"></zaa-injector>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -157,7 +157,7 @@
                 <div class="col s12">
                     <div class="card-panel">
                         <div class="row" ng-repeat="prop in properties">
-                            <zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{prop.label}}" grid="12" model="propValues[prop.id]"></zaa-injector>
+                            <zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{prop.label}}" model="propValues[prop.id]"></zaa-injector>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
