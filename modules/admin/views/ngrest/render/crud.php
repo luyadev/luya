@@ -53,10 +53,12 @@
         <div class="card-panel" ng-switch-default>
             
             <div class="row">
-                <div class="input-field col s6">
+                <div class="col s8">
+                    <!-- <p>{{currentMenuItem.alias}}</p> -->
+                </div>
+                <div class="input-field col s4 right">
                     <i class="mdi-action-search prefix"></i>
                     <input id="searchString" ng-model="searchString" type="text">
-                    <label for="searchString">in der Tabelle <strong>{{currentMenuItem.alias}}</strong> suchen.</label>
                 </div>
             </div>
 
@@ -80,7 +82,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in data.list |  filter:searchString | orderBy:orderBy" >
+                    <tr ng-repeat="item in data.list | filter:searchString | orderBy:orderBy" >
                         <?php foreach ($config->getPointer('list') as $item): ?>
                             <?php foreach ($this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_LIST) as $element): ?>
                                 <td><?= $element['html']; ?></td>
