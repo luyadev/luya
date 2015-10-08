@@ -2,11 +2,15 @@
 	"use strict";
 
 	// CrudController.js
-	zaa.controller("CrudController", function($scope, $http, $sce, $state) {
+	zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminLangService) {
 		
 		/*
 		 * 6.10.2015: remove dialogs, add variable toggler to display. added ngSwitch
 		 */
+		
+		$scope.AdminLangService = AdminLangService;
+		
+		$scope.AdminLangService.load();
 		
 		/**
 		 * 0 = list

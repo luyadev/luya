@@ -6,6 +6,7 @@ use Yii;
 use DOMDocument;
 use yii\base\View;
 use admin\components\Auth;
+use admin\models\Lang;
 
 /**
  * @todo complet rewrite of this class - what is the best practive to acces data in the view? define all functiosn sindie here? re-create methods from config object?
@@ -31,6 +32,8 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
 
     private $_fields = [];
 
+    private $_langs = null;
+    
     public function can($type)
     {
         if (!array_key_exists($type, $this->_permissions)) {
@@ -157,6 +160,27 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
     {
         return ($activeWindows = $this->config->getPointer('aw')) ? $activeWindows : [];
     }
+    
+    public function getLangs()
+    {
+        if ($this->_langs === null) {
+            $this->_langs = Lang::getQuery();
+        }
+        
+        return $this->_langs;
+    }
+    
+    private $_defaultLangShortCode = null;
+    
+    public function getDefaultLangShortCode()
+    {
+        if ($this->_defaultLangShortCode === null) {
+            $lang = Lang::getDefault();
+            $this->_defaultLangShortCode = $lang['short_code'];
+        }
+        
+        return $this->_defaultLangShortCode;
+    }
 
     /**
      * @todo do not return the specofic type content, but return an array contain more infos also about is multi linguage and foreach in view file! 
@@ -166,35 +190,29 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
      */
     public function createElements($element, $configContext)
     {
-        $lang = \admin\models\Lang::find()->all();
-        $langCount = count($lang);
-
-        $i18n = false;
-        if($langCount > 1) {
-            $i18n = true;
-        }
-
         if ($element['i18n'] && $configContext !== self::TYPE_LIST) {
-            $return = [];
-            foreach (\admin\models\Lang::find()->all() as $l => $v) {
-                $ngModel = $this->i18nNgModelString($configContext, $element['name'], $v->short_code);
-                $id = 'id-'.md5($ngModel.$v->short_code);
+            $i = 0;
+            foreach ($this->getLangs() as $lang) {
+                if ($i == 0) {
+                    $return[] = [
+                        'html' => '<label class="i18n__label">'.$element['alias'].'</label><div class="i18n__fields">'
+                    ];
+                }
+                $ngModel = $this->i18nNgModelString($configContext, $element['name'], $lang['short_code']);
+                $id = 'id-'.md5($ngModel.$lang['short_code']);
                 // anzahl cols durch anzahl sprachen
                 $return[] = [
-                    'id' => $id,
-                    'name' => $element['name'],
-                    'label' => $element['alias'].' '.$v->name,
-                    'ngModel' => $ngModel,
-                    'i18n' => $i18n,
-                    'html' => $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'].' '.$v->name, $i18n),
+                    'html' => '<div class="col s'.(12/count($this->getLangs())).'">'.$this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'], true) . '</div>',
                 ];
+                
+                $i++;
             }
-
+            $return[] = ['html' => '</div>'];
             return $return;
         }
 
         if ($element['i18n'] && $configContext == self::TYPE_LIST) {
-            $element['name'] = $element['name'].'.de'; // @todo get default language!
+            $element['name'] = $element['name'].'.'.$this->getDefaultLangShortCode();
         }
 
         $ngModel = $this->ngModelString($configContext, $element['name']);
@@ -202,11 +220,6 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
 
         return [
             [
-                'id' => $id,
-                'name' => $element['name'],
-                'ngModel' => $ngModel,
-                'label' => $element['alias'],
-                'i18n' => false,
                 'html' => $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'], false),
             ],
         ];

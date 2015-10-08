@@ -111,30 +111,9 @@
 
                         <?php foreach ($config->getPointer('create') as $k => $item): ?>
                             <div class="row">
-
-                                <?
-                                    $lang = \admin\models\Lang::find()->all();
-                                    $langCount = count($lang);
-                                    $elements = $this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_CREATE);
-                                    $i = 1;
-                                ?>
-
-                                <?php foreach ($elements as $element): ?>
-
-                                    <? if($element['i18n'] && $i == 1 && $langCount > 1): ?>
-                                        <label class="i18n__label"><?= $element['label']; ?></label>
-                                        <div class="i18n__fields">
-                                    <? endif; ?>
-
-                                    <div class="col s<?= 12 / count($elements); ?>">
-                                        <?= $element['html']; ?>
-                                    </div>
-
-                                    <? if($i - 1 == count($elements)): ?>
-                                        </div>
-                                    <? endif; ?>
-
-                                <?php $i++; endforeach; ?>
+                                <?php foreach ($this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_CREATE) as $element): ?>
+                                    <?= $element['html']; ?>
+                                <?php endforeach; ?>
 
                             </div>
                         <?php endforeach; ?>

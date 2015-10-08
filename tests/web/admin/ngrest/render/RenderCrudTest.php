@@ -63,18 +63,20 @@ class RenderCrudTest extends \tests\web\Base
         $multi = $crud->createElements($p['create_extra_var_2'], 'create');
 
         $this->assertEquals(1, count($single));
-        $this->assertEquals(2, count($multi));
+        $this->assertEquals(4, count($multi));
 
-        $this->assertEquals('id-b7d30cdb9fb07806eba16560e8f1886a', $single[0]['id']);
-        $this->assertEquals('data.create.create_var_1', $single[0]['ngModel']);
+        //$this->assertEquals('id-b7d30cdb9fb07806eba16560e8f1886a', $single[0]['html']);
+        //$this->assertEquals('data.create.create_var_1', $single[0]['ngModel']);
         $this->assertEquals('<zaa-text fieldid="id-b7d30cdb9fb07806eba16560e8f1886a" fieldname="create_var_1" model="data.create.create_var_1" label="testlabel" i18n="" placeholder=""></zaa-text>', $single[0]['html']);
 
-        $this->assertEquals('id-8c4eef840c2154c03371710f803dee51', $multi[0]['id']);
-        $this->assertEquals("data.create.create_extra_var_2['de']", $multi[0]['ngModel']);
-        $this->assertEquals('<zaa-text fieldid="id-8c4eef840c2154c03371710f803dee51" fieldname="create_extra_var_2" model="data.create.create_extra_var_2[\'de\']" label="extratestlabel Deutsch" i18n="1" placeholder=""></zaa-text>', $multi[0]['html']);
+        $this->assertEquals('<label class="i18n__label">extratestlabel</label><div class="i18n__fields">', $multi[0]['html']);
+        
+        //$this->assertEquals('id-8c4eef840c2154c03371710f803dee51', $multi[0]['id']);
+        //$this->assertEquals("data.create.create_extra_var_2['de']", $multi[0]['ngModel']);
+        $this->assertEquals('<div class="col s6"><zaa-text fieldid="id-8c4eef840c2154c03371710f803dee51" fieldname="create_extra_var_2" model="data.create.create_extra_var_2[\'de\']" label="extratestlabel" i18n="1" placeholder=""></zaa-text></div>', $multi[1]['html']);
 
-        $this->assertEquals('id-ee7d7b56d54cd3af4b7f9a4b4bfddf36', $multi[1]['id']);
-        $this->assertEquals("data.create.create_extra_var_2['en']", $multi[1]['ngModel']);
-        $this->assertEquals('<zaa-text fieldid="id-ee7d7b56d54cd3af4b7f9a4b4bfddf36" fieldname="create_extra_var_2" model="data.create.create_extra_var_2[\'en\']" label="extratestlabel English" i18n="1" placeholder=""></zaa-text>', $multi[1]['html']);
+        //$this->assertEquals('id-ee7d7b56d54cd3af4b7f9a4b4bfddf36', $multi[1]['id']);
+        //$this->assertEquals("data.create.create_extra_var_2['en']", $multi[1]['ngModel']);
+        $this->assertEquals('<div class="col s6"><zaa-text fieldid="id-ee7d7b56d54cd3af4b7f9a4b4bfddf36" fieldname="create_extra_var_2" model="data.create.create_extra_var_2[\'en\']" label="extratestlabel" i18n="1" placeholder=""></zaa-text></div>', $multi[2]['html']);
     }
 }

@@ -80,9 +80,6 @@
 				"name": "@fieldname",
 				"placeholder": "@placeholder"
 			},
-            link : function(scope) {
-                console.log(scope);
-            },
 			template: function() {
                 //return '<div class="input-field col s{{grid}}"><input placeholder="{{placeholder}}" id="{{id}}" name="{{name}}" ng-model="model" type="text" /><label for="{{id}}">{{label}}</label></div>';
                 return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /><div class="input__active"></div></div></div>';
