@@ -34,7 +34,7 @@
         <div class="tabs">
             <ul>
                 <li class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==0}">
-                    <a class="tabs__anchor" ng-click="switchTo(0)">Auflisten</a>
+                    <a class="tabs__anchor" ng-click="switchTo(0)"><i class="mdi-navigation-menu"></i> Auflisten</a>
                 </li>
 
                 <?php if ($canCreate): ?>
@@ -42,6 +42,10 @@
                         <a class="tabs__anchor" style="" ng-click="switchTo(1)"><i class="mdi-content-add-box"></i> Hinzufügen</a>
                     </li>
                 <?php endif; ?>
+                
+                <li ng-show="crudSwitchType==2" class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==2}">
+                    <a class="tabs__anchor" ng-click="switchTo(0)"><i class="mdi-navigation-cancel"></i> Bearbeiten</a>
+                </li>
             </ul>
         </div>
         
