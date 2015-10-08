@@ -64,6 +64,7 @@ class Module extends \admin\base\Module
         return [
             '\\cmsadmin\\importers\\BlockImporter',
             '\\cmsadmin\\importers\\CmslayoutImporter',
+            '\\cmsadmin\\importers\\PropertyConsistencyImporter',
         ];
     }
 }
