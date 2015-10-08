@@ -3,6 +3,9 @@ LUYA CHANGELOG
 
 1.0.0-alpha20 (in progress)
 ---------------------------
+- changed form table styles
+- removed ngrest crud modal dialogs, added tabs
+- added property events binding
 - added module property `public $isCoreModule` to hide modules for user selections.
 - fixed several small bugs with ngrest configs and i18n fields.
 - added basic implementation of admin and cms page properties.
