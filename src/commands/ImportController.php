@@ -91,6 +91,7 @@ class ImportController extends \luya\base\Command implements \luya\interfaces\Im
      * 
      * ```php
      * $this->addLog('block', 'new block <ID> have been found and added to database');
+     * ```
      * 
      * @param string $section
      * @param string $value

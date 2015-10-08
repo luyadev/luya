@@ -19,12 +19,12 @@ class TestProperty extends \admin\base\Property
     
     public function varName()
     {
-        return 'foobar';
+        return 'test';
     }    
     
     public function label()
     {
-        return 'Foo Bar Label';
+        return 'Test Property Label';
     }
     
     public function type()
