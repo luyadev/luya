@@ -1,5 +1,10 @@
 Layout Menu
 ===========
+
+> Seit 1.0.0-alpha20 setzt findByArguments immer die akuell aktive sprache. Somit muss dieses Argument nicht angegeben werden um sich in der aktuellen Sprache zu bewegen.
+
+> Seit 1.0.0-alpha20 gibts es `findAll` für `findByArguments` und `findOne` für `findOneByArguments`.
+
 Um eine Navigation oder Subnavigation innerhalb eines Layouts (oder cmsLayouts) zu erstellen benötigen Sie die `$app->links` Komponente, welche vom CMS-Modul zur Verfügung gestellt wird.
 
 > Tipp: Die Links Component wird meistens am Start der `main.php` als Variable `$links` hinterlegt `$links = Yii::$app->links;`.
@@ -44,7 +49,7 @@ Wenn Sie die aktuelle Url ausgeben möchten verwenden Sie:
 echo Yii::$app->links->activeUrl;
 ```
 
-> Seit 1.0.0-alpha20 setzt findByArguments immer die akuell aktive sprache. Somit muss dieses Argument nicht angegeben werden um sich in der aktuellen Sprache zu bewegen.
+
 
 Sprachen (composition)
 ----------------------
