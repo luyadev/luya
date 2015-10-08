@@ -33,7 +33,7 @@ abstract class Plugin
         $elmn->setAttribute('fieldname', $this->name);
         $elmn->setAttribute('model', $this->ngModel);
         $elmn->setAttribute('label', $this->alias);
-        $elmn->setAttribute('grid', $this->gridCols);
+        $elmn->setAttribute('i18n', $this->gridCols);
 
         return $elmn;
     }

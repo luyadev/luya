@@ -166,6 +166,14 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
      */
     public function createElements($element, $configContext)
     {
+        $lang = \admin\models\Lang::find()->all();
+        $langCount = count($lang);
+
+        $i18n = false;
+        if($langCount > 1) {
+            $i18n = true;
+        }
+
         if ($element['i18n'] && $configContext !== self::TYPE_LIST) {
             $return = [];
             foreach (\admin\models\Lang::find()->all() as $l => $v) {
@@ -177,7 +185,8 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
                     'name' => $element['name'],
                     'label' => $element['alias'].' '.$v->name,
                     'ngModel' => $ngModel,
-                    'html' => $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'].' '.$v->name, $element['gridCols']),
+                    'i18n' => $i18n,
+                    'html' => $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'].' '.$v->name, $i18n),
                 ];
             }
 
@@ -197,7 +206,8 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
                 'name' => $element['name'],
                 'ngModel' => $ngModel,
                 'label' => $element['alias'],
-                'html' => $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'], $element['gridCols']),
+                'i18n' => false,
+                'html' => $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'], false),
             ],
         ];
     }

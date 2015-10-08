@@ -8,8 +8,8 @@ class DateTest extends \tests\web\BasePlugin
     {
         $text = new \admin\ngrest\plugins\Date();
         $this->assertEquals("<span>{{item.*1000 | date : 'dd.MM.yyyy'}}</span>", $this->renderListHtml($text));
-        $this->assertEquals('<zaa-date fieldid="" fieldname="" model="" label="" grid=""></zaa-date>', $this->renderCreateHtml($text));
-        $this->assertEquals('<zaa-date fieldid="" fieldname="" model="" label="" grid=""></zaa-date>', $this->renderUpdateHtml($text));
+        $this->assertEquals('<zaa-date fieldid="" fieldname="" model="" label="" i18n=""></zaa-date>', $this->renderCreateHtml($text));
+        $this->assertEquals('<zaa-date fieldid="" fieldname="" model="" label="" i18n=""></zaa-date>', $this->renderUpdateHtml($text));
 
         /* @todo: test against real config values 
         $text->setConfig('id', 'foo', 'bar', 'baz', 12);

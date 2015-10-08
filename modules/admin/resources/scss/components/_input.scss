@@ -40,6 +40,10 @@ $input--date-width:			50px;
 		}
 	}
 
+	.input--hide-label & {
+		display: none;
+	}
+
 	.input--multiple-checkboxes &,
 	.input--image-upload &,
 	.input--image-array &,
@@ -63,6 +67,10 @@ input[type="checkbox"]:checked + .input__label:before {
 	vertical-align: middle;
 	font-size: $input-font-size;
 	line-height: $input-font-size;
+
+	.input--hide-label & {
+		width: 100%;
+	}
 
 	// Remove border for custom inputs
 	.input--date &,
@@ -116,6 +124,11 @@ input[type="checkbox"]:checked + .input__label:before {
 	color: color("shades", "black");
 	vertical-align: bottom;
 	margin: 0 10px;
+}
+
+// Custom styling for inputs without label
+.input--hide-label .input__field {
+	width: 100%;
 }
 
 // Custom date styling

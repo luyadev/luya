@@ -104,22 +104,38 @@
                     <div class="modal__content">
 
                         <div class="langswitch">
-                            <a class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ] ng-binding ng-scope grey lighten-2">
-                                Deutsch
-                            </a>
-                            <a class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ] ng-binding ng-scope grey lighten-2">
-                                Esperanza
-                            </a>
-                            <a class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ] ng-binding ng-scope grey lighten-2">
-                                Englisch
+                            <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'[ grey lighten-2 ]' : AdminLangService.isInSelection(lang)}" class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ] ng-binding ng-scope grey lighten-2">
+                                {{lang.name}}
                             </a>
                         </div>
 
                         <?php foreach ($config->getPointer('create') as $k => $item): ?>
                             <div class="row">
-                                <?php foreach ($this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_CREATE) as $element): ?>
-                                    <?= $element['html']; ?>
-                                <?php endforeach; ?>
+
+                                <?
+                                    $lang = \admin\models\Lang::find()->all();
+                                    $langCount = count($lang);
+                                    $elements = $this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_CREATE);
+                                    $i = 1;
+                                ?>
+
+                                <?php foreach ($elements as $element): ?>
+
+                                    <? if($element['i18n'] && $i == 1 && $langCount > 1): ?>
+                                        <label class="i18n__label"><?= $element['label']; ?></label>
+                                        <div class="i18n__fields">
+                                    <? endif; ?>
+
+                                    <div class="col s<?= 12 / count($elements); ?>">
+                                        <?= $element['html']; ?>
+                                    </div>
+
+                                    <? if($i - 1 == count($elements)): ?>
+                                        </div>
+                                    <? endif; ?>
+
+                                <?php $i++; endforeach; ?>
+
                             </div>
                         <?php endforeach; ?>
 
