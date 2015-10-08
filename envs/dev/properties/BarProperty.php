@@ -2,8 +2,10 @@
 
 namespace app\properties;
 
+use Yii;
+
 class BarProperty extends \admin\base\Property
-{
+{   
     public function varName()
     {
         return 'yolor';
