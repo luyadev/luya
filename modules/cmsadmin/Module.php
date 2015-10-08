@@ -5,7 +5,7 @@ namespace cmsadmin;
 class Module extends \admin\base\Module
 {
     public $isCoreModule = true;
-    
+
     public $apis = [
         'api-cms-admin' => 'cmsadmin\\apis\\AdminController',
         'api-cms-navitempageblockitem' => 'cmsadmin\\apis\\NavItemPageBlockItemController',

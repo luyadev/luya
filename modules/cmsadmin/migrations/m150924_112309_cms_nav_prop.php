@@ -1,6 +1,5 @@
 <?php
 
-use yii\db\Schema;
 use yii\db\Migration;
 
 class m150924_112309_cms_nav_prop extends Migration
@@ -11,7 +10,7 @@ class m150924_112309_cms_nav_prop extends Migration
             'id' => 'pk',
             'nav_id' => 'int(11) not null',
             'admin_prop_id' => 'int(11) not null',
-            'value' => 'varchar(255) not null',    
+            'value' => 'varchar(255) not null',
         ]);
     }
 

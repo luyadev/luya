@@ -117,7 +117,7 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
         return parent::afterFind();
     }
     */
-    
+
     public function afterFind()
     {
         if ($this->getNgRestCallType()) {

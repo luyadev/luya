@@ -27,6 +27,7 @@ class EventBehavior extends \yii\base\Behavior
         $obj = new \ReflectionClass($class);
         $instance = $obj->newInstanceArgs($args);
         $instance->setModel($model);
+
         return $instance;
     }
 

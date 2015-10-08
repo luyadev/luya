@@ -6,7 +6,7 @@
 <button type="button" class="btn" onclick="toggleSelector('update', true)">Alle nur Bearbeiten</button>
 <button type="button" class="btn" onclick="toggleSelector('delete', true)">Alle nur Löschen</button>
 <table class="bordered hoverable">
-<?php $last = null; foreach($auth as $item):?>
+<?php $last = null; foreach ($auth as $item):?>
 <?php if ($last !== $item['module_name']): ?>
     <thead>
         <tr><th colspan="4"><?= ucfirst($item['module_name']); ?> <button class="btn-flat" type="button" onclick="toggleSelector('<?= $item['module_name']; ?>', true)">+</button><button class="btn-flat" type="button" onclick="toggleSelector('<?= $item['module_name']; ?>', false)">-</button></th></tr>

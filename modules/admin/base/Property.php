@@ -2,22 +2,22 @@
 
 namespace admin\base;
 
-use Yii;
 use Exception;
 use admin\models\Property as PropertyModel;
 
 /**
- * Abstract Page Property Class
+ * Abstract Page Property Class.
  * 
  * @todo remove defaultValue change to initvalue like in blocks!
+ *
  * @author nadar
  */
 abstract class Property extends \yii\base\Component
 {
     public $moduleName = null;
-    
+
     public $value = null;
-    
+
     /*
     public function init()
     {
@@ -26,25 +26,25 @@ abstract class Property extends \yii\base\Component
         }
     }
     */
-    
+
     const EVENT_BEFORE_RENDER = 'EVENT_BEFORE_RENDER';
-    
+
     abstract public function varName();
-    
+
     abstract public function label();
-    
+
     abstract public function type();
-    
+
     public function options()
     {
         return [];
     }
-    
+
     public function defaultValue()
     {
         return false;
     }
-    
+
     public function install()
     {
         $model = PropertyModel::find()->where(['var_name' => $this->varName()])->one();
@@ -58,6 +58,7 @@ abstract class Property extends \yii\base\Component
                 'class_name' => static::className(),
             ]);
             $model->update(false);
+
             return $model->id;
         } else {
             $model = new PropertyModel();

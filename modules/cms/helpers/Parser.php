@@ -5,8 +5,7 @@ namespace cms\helpers;
 use Yii;
 
 /**
- * 
- * Hello link:123123
+ * Hello link:123123.
  * 
  * link[123]
  * link[123](Href Label)
@@ -20,44 +19,45 @@ use Yii;
 class Parser
 {
     const REGEX = '/(?<function>link|file)\[(?<value>.*?)\](\((?<sub>.*?)\))?/mi';
-    
+
     /**
-     * Regex Tester
+     * Regex Tester.
      * 
      * @see https://regex101.com/r/tI7pK1/3
+     *
      * @param string $content
      */
     public static function encode($content)
     {
         preg_match_all(static::REGEX, $content, $results, PREG_SET_ORDER);
-        
-        foreach($results as $row) {
-            
+
+        foreach ($results as $row) {
+
             // fixed issue when ussing link[] cause value is empty
             if (empty($row['value'])) {
                 continue;
             }
-            
-            switch($row['function']) {
-                case "link":
+
+            switch ($row['function']) {
+                case 'link':
                     $replace = static::functionLink($row);
                     break;
-                    
-                case "file":
+
+                case 'file':
                     continue;
                     break;
-                    
+
                 default:
                     continue;
                     break;
             }
-            
+
             $content = preg_replace('/'.preg_quote($row[0]).'/mi', $replace, $content, 1);
         }
-        
+
         return $content;
     }
-    
+
     public static function functionLink($result)
     {
         $alias = false;
@@ -71,12 +71,12 @@ class Parser
             }
         } else {
             $href = $result['value'];
-            
-            if (preg_match("#https?://#", $href) === 0) {
+
+            if (preg_match('#https?://#', $href) === 0) {
                 $href = 'http://'.$href;
             }
         }
-        
+
         if (isset($result['sub'])) {
             $label = $result['sub'];
         } else {
@@ -85,12 +85,11 @@ class Parser
             } else {
                 $label = $result['value'];
             }
-            
         }
-        
+
         return '<a href="'.$href.'">'.$label.'</a>';
     }
-    
+
     public static function functionFile($result)
     {
         return;

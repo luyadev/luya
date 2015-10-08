@@ -3,7 +3,6 @@
 namespace admin\importers;
 
 use admin\models\StorageEffect;
-use admin\models\admin\models;
 
 class FilterImporter extends \luya\base\Importer
 {
@@ -22,7 +21,7 @@ class FilterImporter extends \luya\base\Importer
             $insert->insert(false);
         }
     }
-    
+
     public function run()
     {
         $this->refresh('thumbnail', [
@@ -34,7 +33,7 @@ class FilterImporter extends \luya\base\Importer
                 ['var' => 'height', 'label' => 'Hoehe in Pixel'],
             ]]),
         ]);
-        
+
         $this->refresh('resize', [
             'name' => 'Zuschneiden',
             'imagine_name' => 'resize',
@@ -43,7 +42,7 @@ class FilterImporter extends \luya\base\Importer
                 ['var' => 'height', 'label' => 'Hoehe in Pixel'],
             ]]),
         ]);
-        
+
         $this->refresh('crop', [
             'name' => 'Crop',
             'imagine_name' => 'crop',
@@ -52,9 +51,9 @@ class FilterImporter extends \luya\base\Importer
                 ['var' => 'height', 'label' => 'Hoehe in Pixel'],
             ]]),
         ]);
-        
+
         $this->getImporter()->addLog('filters', 'starting filter import:');
-        
+
         foreach ($this->getImporter()->getDirectoryFiles('filters') as $file) {
             $filterClassName = $file['ns'];
             if (class_exists($filterClassName)) {

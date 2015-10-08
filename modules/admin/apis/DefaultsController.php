@@ -17,7 +17,7 @@ class DefaultsController extends \admin\base\RestController
     {
         return Lang::getDefault();
     }
-    
+
     public function actionProperties()
     {
         return Property::find()->all();

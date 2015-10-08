@@ -142,7 +142,7 @@
                     </button>
 
                 </form>
-            <? endif; ?>
+            <?php endif; ?>
         </div>
     
         <div class="card-panel" ng-switch-when="2">
@@ -185,7 +185,7 @@
                     </div>
                     <!-- /MODAL FOOTER -->
                 </form>
-            <? endif; ?>
+            <?php endif; ?>
         </div>
 
     </div>

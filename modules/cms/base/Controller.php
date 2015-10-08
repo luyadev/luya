@@ -18,15 +18,15 @@ abstract class Controller extends \luya\base\Controller
         $model = NavItem::findOne($navItemId);
 
         $event = new \cms\events\CmsEvent();
-        
-        foreach($model->getNav()->getProperties() as $property) {
+
+        foreach ($model->getNav()->getProperties() as $property) {
             $object = $model->getNav()->getPropertyObject($property['var_name']);
             $object->trigger($object::EVENT_BEFORE_RENDER, $event);
             if (!$event->isValid) {
                 Yii::$app->end();
             }
         }
-        
+
         $typeModel = $model->getType();
         $typeModel->setOptions([
             'navItemId' => $navItemId,
@@ -42,7 +42,7 @@ abstract class Controller extends \luya\base\Controller
         if ($this->module->enableTagParsing) {
             $content = Parser::encode($content);
         }
-        
+
         return $content;
     }
 }

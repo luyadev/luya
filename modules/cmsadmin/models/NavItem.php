@@ -3,9 +3,6 @@
 namespace cmsadmin\models;
 
 use Yii;
-use cmsadmin\models\Nav;
-use cmsadmin\models\NavItemPage;
-use cmsadmin\models\NavItemModule;
 use admin\models\Lang;
 
 /**
@@ -61,6 +58,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
                 break;
         }
         $object->setNavItem($this);
+
         return $object;
     }
 
@@ -68,7 +66,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     {
         return Nav::find()->where(['id' => $this->nav_id])->one();
     }
-    
+
     public function getContent()
     {
         return $this->getType()->getContent();
@@ -156,16 +154,16 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
 
         return $query->select($fields)->asArray()->all();
     }
-    
+
     public static function findNavItem($moduleName)
     {
         // current active lang:
         $default = Lang::findActive();
-        
-        $query = Yii::$app->db->createCommand("SELECT i.* FROM cms_nav_item as i LEFT JOIN (cms_nav_item_module as m) ON (i.nav_item_type_id=m.id) WHERE i.nav_item_type=2 AND lang_id=:lang_id AND m.module_name=:module")->bindValues([
+
+        $query = Yii::$app->db->createCommand('SELECT i.* FROM cms_nav_item as i LEFT JOIN (cms_nav_item_module as m) ON (i.nav_item_type_id=m.id) WHERE i.nav_item_type=2 AND lang_id=:lang_id AND m.module_name=:module')->bindValues([
             ':module' => $moduleName, ':lang_id' => $default['id'],
         ])->queryOne();
-        
+
         return $query;
     }
 }

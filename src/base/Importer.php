@@ -47,9 +47,9 @@ abstract class Importer extends \yii\base\Object
     {
         return $this->_importer;
     }
-    
+
     /**
-     * Add something to the output. Wrapper method from importer
+     * Add something to the output. Wrapper method from importer.
      * 
      * ```php
      * $this->addLog('block', 'new block <ID> have been found and added to database');
@@ -65,8 +65,6 @@ abstract class Importer extends \yii\base\Object
 
     /**
      * Each Importer Class must contain a run method.
-     * 
-     * @return void
      */
     abstract public function run();
 }

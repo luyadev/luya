@@ -19,9 +19,9 @@ class CrawlController extends \luya\base\Command
         $client = new Client();
         $pageCrawler = new CrawlPage(['client' => $client]);
         $container = new CrawlContainer(['baseUrl' => $this->module->baseUrl, 'pageCrawler' => $pageCrawler]);
-        
+
         $this->output(print_r($container->getReport(), true));
-        
-        return $this->outputSuccess("Index Crawler finished");
+
+        return $this->outputSuccess('Index Crawler finished');
     }
 }

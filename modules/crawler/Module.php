@@ -11,6 +11,6 @@ namespace crawler;
 class Module extends \luya\base\Module
 {
     public $isCoreModule = true;
-    
+
     public $baseUrl = null;
 }

@@ -33,7 +33,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
     private $_fields = [];
 
     private $_langs = null;
-    
+
     public function can($type)
     {
         if (!array_key_exists($type, $this->_permissions)) {
@@ -160,25 +160,25 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
     {
         return ($activeWindows = $this->config->getPointer('aw')) ? $activeWindows : [];
     }
-    
+
     public function getLangs()
     {
         if ($this->_langs === null) {
             $this->_langs = Lang::getQuery();
         }
-        
+
         return $this->_langs;
     }
-    
+
     private $_defaultLangShortCode = null;
-    
+
     public function getDefaultLangShortCode()
     {
         if ($this->_defaultLangShortCode === null) {
             $lang = Lang::getDefault();
             $this->_defaultLangShortCode = $lang['short_code'];
         }
-        
+
         return $this->_defaultLangShortCode;
     }
 
@@ -195,19 +195,20 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
             foreach ($this->getLangs() as $lang) {
                 if ($i == 0) {
                     $return[] = [
-                        'html' => '<label class="i18n__label">'.$element['alias'].'</label><div class="i18n__fields">'
+                        'html' => '<label class="i18n__label">'.$element['alias'].'</label><div class="i18n__fields">',
                     ];
                 }
                 $ngModel = $this->i18nNgModelString($configContext, $element['name'], $lang['short_code']);
                 $id = 'id-'.md5($ngModel.$lang['short_code']);
                 // anzahl cols durch anzahl sprachen
                 $return[] = [
-                    'html' => '<div class="col s'.(12/count($this->getLangs())).'">'.$this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'], true) . '</div>',
+                    'html' => '<div class="col s'.(12 / count($this->getLangs())).'">'.$this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'], true).'</div>',
                 ];
-                
-                $i++;
+
+                ++$i;
             }
             $return[] = ['html' => '</div>'];
+
             return $return;
         }
 

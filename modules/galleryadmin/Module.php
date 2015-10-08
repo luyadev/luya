@@ -5,7 +5,7 @@ namespace galleryadmin;
 class Module extends \admin\base\Module
 {
     public $isCoreModule = true;
-    
+
     public $apis = [
         'api-gallery-album' => '\\galleryadmin\\apis\\AlbumController',
         'api-gallery-cat' => 'galleryadmin\apis\CatController',

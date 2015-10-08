@@ -119,7 +119,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
                 unset($temp[$name]);
             }
         }
-        
+
         $this->config[$this->pointer] = ArrayHelper::merge($this->config[$this->pointer], $temp);
     }
 

@@ -68,7 +68,7 @@ class Article extends \admin\ngrest\base\Model
 
     public static function getAvailableNews($limit = false)
     {
-        $q = self::find()->where('timestamp_display_from <= :time', ['time' => time()])->orderBy("timestamp_display_from DESC");
+        $q = self::find()->where('timestamp_display_from <= :time', ['time' => time()])->orderBy('timestamp_display_from DESC');
         if ($limit) {
             $q->limit($limit);
         }

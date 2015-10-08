@@ -1,8 +1,8 @@
-<? if($save): ?>
+<?php if ($save): ?>
 <p><strong>Vielen Dank</strong>, Sie haben sich erfolgreich registiert. <a href="<?= \luya\helpers\Url::to('account/default/index'); ?>">Hier gehts zum Login</a></p>
-<? else: ?>
+<?php else: ?>
     <h1>Einen neuen Account anelgen</h1>
-    <?php if(!empty($errors)): ?>
+    <?php if (!empty($errors)): ?>
         <ul>
         <?php foreach ($errors as $field => $msgs): ?>
             <li><?= $field; ?>: <?php print_r($msgs); ?></li>
@@ -18,4 +18,4 @@
         <button type="submit">Register</button>
     </form>
 
-<? endif; ?>
+<?php endif; ?>

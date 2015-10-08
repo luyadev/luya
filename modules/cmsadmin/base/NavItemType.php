@@ -7,7 +7,7 @@ abstract class NavItemType extends \yii\db\ActiveRecord
     public $options = [];
 
     private $_navItem = null;
-    
+
     abstract public function getContent();
 
     abstract public function getHeaders();
@@ -16,12 +16,12 @@ abstract class NavItemType extends \yii\db\ActiveRecord
     {
         $this->_navItem = $navItem;
     }
-    
+
     public function getNavItem()
     {
         return $this->_navItem;
     }
-    
+
     public function getContextPropertysArray()
     {
         return []; // override

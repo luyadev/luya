@@ -15,7 +15,7 @@ class Request extends \yii\web\Request
         }
 
         $resolver = Yii::$app->composition->getResolvedPathInfo($this);
-        
+
         $pathInfo = $resolver['route'];
 
         $parts = explode('/', $pathInfo);

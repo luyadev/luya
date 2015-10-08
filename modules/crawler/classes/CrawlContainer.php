@@ -18,7 +18,7 @@ class CrawlContainer extends \yii\base\Object
     public $pageCrawler = null;
 
     public $report = [];
-    
+
     private $_crawlers = [];
 
     protected function getCrawler($url)
@@ -62,7 +62,7 @@ class CrawlContainer extends \yii\base\Object
     {
         return $this->report;
     }
-    
+
     public function finish()
     {
         $builder = BuilderIndex::find()->indexBy('url')->asArray()->all();
@@ -111,11 +111,11 @@ class CrawlContainer extends \yii\base\Object
         }
 
         // delete empty content empty title
-        foreach(Index::find()->where(['=', 'content', ''])->orWhere(['=', 'title', ''])->all() as $page) {
+        foreach (Index::find()->where(['=', 'content', ''])->orWhere(['=', 'title', ''])->all() as $page) {
             $compare['delete_issue'][] = $page->url;
             $page->delete(false);
         }
-        
+
         $this->report = $compare;
     }
 

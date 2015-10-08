@@ -22,8 +22,8 @@ class DefaultController extends \account\base\Controller
             ], [
                 'allow' => true,
                 'actions' => ['logout'],
-                'roles' => ['@'],   
-            ]
+                'roles' => ['@'],
+            ],
         ];
     }
 
@@ -55,10 +55,11 @@ class DefaultController extends \account\base\Controller
 
         return $this->render('index', ['model' => $model]);
     }
-    
+
     public function actionLogout()
     {
         $this->module->getUserIdentity()->logout();
+
         return $this->goHome();
     }
 

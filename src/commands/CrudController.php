@@ -14,11 +14,11 @@ class CrudController extends \luya\base\Command
         $modulePre = $new_str = preg_replace('/admin$/', '', $module);
         $modelName = $this->prompt('Model Name (e.g. Album)');
         $apiEndpoint = $this->prompt('Api Endpoint (e.g. api-'.$modulePre.'-'.strtolower($modelName).')');
-        
+
         $sqlTable = $this->prompt('Database Table name (e.g. '.strtolower($modulePre).'_'.Inflector::underscore($modelName).')');
 
         if (!$this->confirm("Create '$modelName' controller, api & model based on sql table '$sqlTable' in module '$module' for api endpoint '$apiEndpoint'?")) {
-            return $this->outputError("Crud creation aborted.");
+            return $this->outputError('Crud creation aborted.');
         }
 
         $shema = Yii::$app->db->getTableSchema($sqlTable);

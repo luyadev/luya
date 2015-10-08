@@ -11,7 +11,7 @@ class IsProtectedAreaProperty extends \admin\base\Property
     {
         $this->on(self::EVENT_BEFORE_RENDER, [$this, 'eventBeforeRender']);
     }
-    
+
     public function eventBeforeRender($event)
     {
         if (Yii::$app->getModule('account')->getUserIdentity()->isGuest) {
@@ -19,22 +19,22 @@ class IsProtectedAreaProperty extends \admin\base\Property
             Yii::$app->response->redirect(Url::to('account/default/index'));
         }
     }
-    
+
     public function varName()
     {
         return 'isProtectedArea';
     }
-    
+
     public function label()
     {
         return 'Diese Seite schützen';
     }
-    
+
     public function type()
     {
         return 'zaa-select';
     }
-    
+
     public function options()
     {
         return [

@@ -80,15 +80,15 @@ class Cat extends \admin\ngrest\base\Model
     {
         return self::find()->where(['is_default' => 1])->asArray()->one();
     }
-    
+
     private static $_queryInstance = null;
-    
+
     public static function getQuery()
     {
         if (self::$_queryInstance === null) {
             self::$_queryInstance = self::find()->asArray()->indexBy('id')->all();
         }
-    
+
         return self::$_queryInstance;
     }
 }

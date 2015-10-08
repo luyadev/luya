@@ -107,9 +107,9 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
         if (empty($this->_config[$pointer])) {
             $this->_config[$pointer] = [];
         }
-        
+
         $this->_config[$pointer] = ArrayHelper::arrayUnshiftAssoc($this->_config[$pointer], $field, $options);
-        
+
         return true;
     }
 

@@ -8,11 +8,11 @@ class Property extends \yii\db\ActiveRecord
     {
         return 'cms_nav_property';
     }
-    
+
     public function rules()
     {
         return [
-            [['nav_id', 'admin_prop_id', 'value'], 'required'],  
+            [['nav_id', 'admin_prop_id', 'value'], 'required'],
         ];
     }
 }

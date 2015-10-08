@@ -45,10 +45,11 @@ class Twig extends \yii\base\Component
 
                 return Yii::$app->element->run($method, $args);
             },
-            't' => function() {
+            't' => function () {
                 $args = func_get_args();
+
                 return call_user_func_array(['Yii', 't'], $args);
-            }
+            },
         ];
     }
 

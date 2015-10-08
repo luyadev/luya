@@ -40,7 +40,7 @@ class StorageController extends \admin\base\RestController
             if ($create) {
                 return ['upload' => true, 'message' => 'file uploaded succesfully'];
             } else {
-                return ['upload' => false, 'message' => Yii::$app->storage->file->getError() ];
+                return ['upload' => false, 'message' => Yii::$app->storage->file->getError()];
             }
         }
 

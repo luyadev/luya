@@ -14,7 +14,7 @@ abstract class Module extends \yii\base\Module
 {
     /**
      * @var array Contains the apis for each module to provided them in the admin module. They represents 
-     * the name of the api and the value represents the class. Example value:
+     *            the name of the api and the value represents the class. Example value:
      * 
      * ```php
      * [
@@ -27,23 +27,23 @@ abstract class Module extends \yii\base\Module
 
     /**
      * @var array Contains all urlRules for this module. Can't provided in key value pairing for pattern<=>route
-     * must be array containing class name or array with pattern, route informations.
+     *            must be array containing class name or array with pattern, route informations.
      */
     public $urlRules = [];
 
     /**
-     * @var boolean Determines if a Module is an admin Module or not. This way we can easely change the boot behavior for each Module.
+     * @var bool Determines if a Module is an admin Module or not. This way we can easely change the boot behavior for each Module.
      */
     public $isAdmin = false;
 
     /**
      * @var array An array containing all components which should be registered for the current module. If 
-     * the component does not exists an Exception will be thrown.
+     *            the component does not exists an Exception will be thrown.
      */
     public $requiredComponents = [];
 
     /**
-     * @var boolean Enable or Disable where the PATH to the layout file should be inside the @app namespace or inside your module.
+     * @var bool Enable or Disable where the PATH to the layout file should be inside the @app namespace or inside your module.
      * 
      * + true = looking for layout file in `@app/views/<ID>/layouts`.
      * + false = looking for layout file in @module/views/layouts/`.
@@ -53,7 +53,7 @@ abstract class Module extends \yii\base\Module
     public $useAppLayoutPath = true;
 
     /**
-     * @var boolean This variable can enable the view path defintion for all controllers inside this module.
+     * @var bool This variable can enable the view path defintion for all controllers inside this module.
      * 
      * + true = the view path inside this module will be used
      * + false = the view path of the projects app view will be used.
@@ -71,8 +71,8 @@ abstract class Module extends \yii\base\Module
 
     /**
      * @var string if this/the module is included via another module (parent module), the parent module will write its 
-     * name inside the child modules $context variable. For example the cms includes the news module, the context variable
-     * of news would have the value "cms".
+     *             name inside the child modules $context variable. For example the cms includes the news module, the context variable
+     *             of news would have the value "cms".
      */
     public $context = null;
 
@@ -87,16 +87,17 @@ abstract class Module extends \yii\base\Module
     public $moduleLayout = 'layout';
 
     /**
-     * @var boolean If this property is enabled, the module will be hidden in selections where use can choose a module,
-     * example in wizzard commands where they can create classes inside the modules. (e.g block/create, crud/create).
-     * In the method `Yii::$app->getLuyaModules()` the modules will not be listed.
+     * @var bool If this property is enabled, the module will be hidden in selections where use can choose a module,
+     *           example in wizzard commands where they can create classes inside the modules. (e.g block/create, crud/create).
+     *           In the method `Yii::$app->getLuyaModules()` the modules will not be listed.
      */
     public $isCoreModule = true;
-    
+
     /**
      * The Luya-Module initializer is looking for defined requiredComponents.
      * 
      * @throws \Exception
+     *
      * @see \yii\base\Module::init()
      */
     public function init()
@@ -111,10 +112,12 @@ abstract class Module extends \yii\base\Module
     }
 
     /**
-     * Override the default implementation of Yii's getLayoutPath(). If the property `$useAppLayoutPath` is true, 
+     * Override the default implementation of Yii's getLayoutPath(). If the property `$useAppLayoutPath` is true,.
+     *
      * the *@app* namespace views will be looked up for view files
      * 
      * @return string;
+     *
      * @see \yii\base\Module::getLayoutPath()
      */
     public function getLayoutPath()
@@ -130,6 +133,7 @@ abstract class Module extends \yii\base\Module
      * Extract the current module from the route and return the new resolved route.
      * 
      * @param string $route Route to resolve, e.g. `admin/default/index`
+     *
      * @return string
      */
     public function resolveRoute($route)
@@ -143,7 +147,7 @@ abstract class Module extends \yii\base\Module
         if (count($routeParts) == 0) {
             return $this->defaultRoute;
         }
-        
+
         return implode('/', $routeParts);
     }
 
@@ -151,13 +155,12 @@ abstract class Module extends \yii\base\Module
      * Set module context information if the module is implemented in contextual situations like cms.
      * 
      * @param string $name
-     * @return void
      */
     public function setContext($name)
     {
         $this->context = $name;
     }
-    
+
     /**
      * Add a context property.
      * 
@@ -169,7 +172,7 @@ abstract class Module extends \yii\base\Module
     }
 
     /**
-     * get all context propertys
+     * get all context propertys.
      * 
      * @return array:
      */

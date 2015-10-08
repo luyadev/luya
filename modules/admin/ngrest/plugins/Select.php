@@ -55,7 +55,7 @@ abstract class Select extends \admin\ngrest\base\Plugin
                 }
             }
         }
-        
+
         return $fieldValue;
     }
 }

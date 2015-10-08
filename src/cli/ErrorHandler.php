@@ -3,7 +3,7 @@
 namespace luya\cli;
 
 /**
- * Luya CLI ErrorHandler
+ * Luya CLI ErrorHandler.
  * 
  * @author nadar
  */

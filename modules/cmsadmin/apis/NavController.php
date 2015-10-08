@@ -4,6 +4,7 @@ namespace cmsadmin\apis;
 
 use Yii;
 use cmsadmin\models\Property;
+
 /**
  * example.com/admin/api-cms-nav/create-page
  * example.com/admin/api-cms-nav/create-item-page
@@ -18,35 +19,35 @@ class NavController extends \admin\base\RestController
     {
         return Yii::$app->request->post($name, null);
     }
-    
+
     public function actionGetProperties($navId)
     {
         $data = [];
-        foreach(Property::find()->select(['admin_prop_id', 'value'])->where(['nav_id' => $navId])->asArray()->all() as $row) {
+        foreach (Property::find()->select(['admin_prop_id', 'value'])->where(['nav_id' => $navId])->asArray()->all() as $row) {
             if (is_numeric($row['value'])) {
                 $row['value'] = (int) $row['value'];
             }
             $data[] = $row;
         }
+
         return $data;
     }
-    
+
     public function actionSaveProperties($navId)
     {
         $rows = [];
-        foreach(Yii::$app->request->post() as $id => $value) {
+        foreach (Yii::$app->request->post() as $id => $value) {
             $rows[] = [
                 'nav_id' => $navId,
                 'admin_prop_id' => $id,
-                'value' => $value,  
+                'value' => $value,
             ];
         }
-        
-        foreach($rows as $atrs) {
+
+        foreach ($rows as $atrs) {
             $model = \cmsadmin\models\Property::find()->where(['admin_prop_id' => $atrs['admin_prop_id'], 'nav_id' => $navId])->one();
-            
+
             if ($model) {
-                
                 if (empty($atrs['value'])) {
                     $model->delete();
                 } else {
@@ -75,18 +76,18 @@ class NavController extends \admin\base\RestController
 
         return false;
     }
-    
+
     public function actionToggleOffline($navId, $offlineStatus)
     {
         $item = \cmsadmin\models\Nav::find()->where(['id' => $navId])->one();
-    
+
         if ($item) {
             $item->is_offline = $offlineStatus;
             $item->update(false);
-    
+
             return true;
         }
-    
+
         return false;
     }
 

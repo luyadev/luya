@@ -26,7 +26,7 @@ interface BehaviorInterface
      * return false;
      * ```
      *
-     * @return boolean|string|object user object, class name, false to disabled the authentication.
+     * @return bool|string|object user object, class name, false to disabled the authentication.
      */
     public function userAuthClass();
 }

@@ -9,7 +9,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public $password_confirm = null;
 
     public $plainPassword = null;
-    
+
     public static function tableName()
     {
         return 'account_user';
@@ -65,7 +65,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function encodePassword()
     {
         $this->plainPassword = $this->password;
-        
+
         // create random string for password salting
         $this->password_salt = Yii::$app->getSecurity()->generateRandomString();
         // store the password

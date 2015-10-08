@@ -10,13 +10,13 @@ namespace luya\base;
 abstract class Controller extends \yii\web\Controller
 {
     /**
-     * @var boolean Use the default behaviour of Yii. This will result in loading the templates inside the Modules.
+     * @var bool Use the default behaviour of Yii. This will result in loading the templates inside the Modules.
      */
     public $useModuleViewPath = false;
 
     /**
      * @var array skips defined assets from the module base, you can not skip assets which are registered in the local asset variable. To Skip
-     * all the assets from the module ($this->module->assets) you can use skipAssets = ["*"];.
+     *            all the assets from the module ($this->module->assets) you can use skipAssets = ["*"];.
      */
     public $skipModuleAssets = [];
 
@@ -27,8 +27,6 @@ abstract class Controller extends \yii\web\Controller
 
     /**
      * Yii initializer. Find assets to register, and add them into the view if they are not ignore by $skipModuleAssets.
-     * 
-     * @return void
      */
     public function init()
     {
@@ -71,8 +69,9 @@ abstract class Controller extends \yii\web\Controller
     /**
      * If we are acting in the module context and the layout is empty we only should renderPartial the content.
      *
-     * @param string $view The name of the view file (e.g. index)
-     * @param array $params The params to assign into the value for key is the variable and value the content.
+     * @param string $view   The name of the view file (e.g. index)
+     * @param array  $params The params to assign into the value for key is the variable and value the content.
+     *
      * @return string
      */
     public function render($view, $params = [])
@@ -85,7 +84,7 @@ abstract class Controller extends \yii\web\Controller
     }
 
     /**
-     * Returns the path for layout files when using `renderLayout()` method. Those module layouts are located in @app/views
+     * Returns the path for layout files when using `renderLayout()` method. Those module layouts are located in @app/views.
      * 
      * @return string The path to the layout for the current Module.
      */
@@ -97,7 +96,7 @@ abstract class Controller extends \yii\web\Controller
     /**
      * Luya implementation of layouts for controllers. The method will return a view file wrapped by a custom module layout. 
      * For example you have a e-store module with a header which returns the basket you can use the module layout in all the actions
-     * to retrieve the same header. Example e-store controller class:
+     * to retrieve the same header. Example e-store controller class:.
      * 
      * ```php
      * class EstoreController extends \luya\base\Controller
@@ -126,8 +125,9 @@ abstract class Controller extends \yii\web\Controller
      * </div>
      * ```
      * 
-     * @param string $view The name of the view file
-     * @param array $params The params to assign into the view file.
+     * @param string $view   The name of the view file
+     * @param array  $params The params to assign into the view file.
+     *
      * @return string Rendered template wrapped by the module layout file.
      */
     public function renderLayout($view, $params = [])

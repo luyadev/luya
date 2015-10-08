@@ -7,8 +7,7 @@ use yii\helpers\ArrayHelper;
 use admin\models\Lang;
 use admin\models\Property as AdminProperty;
 use cmsadmin\models\Property as CmsProperty;
-use cmsadmin\models\NavItem;
-use admin\ngrest\plugins\CmsPage;
+
 
 /**
  * @todo what happens when resort items if an items is deleted?
@@ -57,7 +56,7 @@ class Nav extends \yii\db\ActiveRecord
     {
         return CmsProperty::find()->where(['nav_id' => $this->id])->leftJoin('admin_property', 'admin_prop_id=admin_property.id')->select(['cms_nav_property.*', 'admin_property.module_name', 'admin_property.var_name', 'admin_property.type', 'admin_property.default_value'])->asArray()->all();
     }
-    
+
     public function getProperty($varName)
     {
         $value = CmsProperty::find()->where(['nav_id' => $this->id])->leftJoin('admin_property', 'admin_prop_id=admin_property.id')->select(['cms_nav_property.value'])->where(['admin_property.var_name' => $varName])->asArray()->one();
@@ -67,7 +66,7 @@ class Nav extends \yii\db\ActiveRecord
             return false;
         }
     }
-    
+
     public function getPropertyObject($varName)
     {
         $value = CmsProperty::find()->where(['nav_id' => $this->id])->leftJoin('admin_property', 'admin_prop_id=admin_property.id')->select(['cms_nav_property.value', 'admin_property.class_name'])->where(['admin_property.var_name' => $varName])->asArray()->one();
@@ -75,10 +74,10 @@ class Nav extends \yii\db\ActiveRecord
         if ($value) {
             return AdminProperty::getObject($value['class_name'], $value['value']);
         }
-        
+
         return false;
     }
-    
+
     /**
      * find the latest sort index cms_nav item for the current cat_id and parent_nav_id and set internal index count plus one.
      */
@@ -290,7 +289,7 @@ class Nav extends \yii\db\ActiveRecord
 
         return $navItemId;
     }
-    
+
     /*
 
     public static function getItemsData($navId, $displayHidden = false)

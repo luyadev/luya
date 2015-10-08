@@ -4,12 +4,11 @@ namespace cms\components;
 
 use Yii;
 use Exception;
-use cmsadmin\models\Nav;
 use cmsadmin\models\Cat;
 use admin\models\Lang;
 
 /**
- * Links component array base:
+ * Links component array base:.
  * 
  * ```php
  * [
@@ -22,23 +21,22 @@ use admin\models\Lang;
  *  ],
  * ]
  * ```
- * 
  */
 class Links extends \yii\base\Component
-{   
+{
     private $_cats = null;
-    
+
     private $_langs = null;
-    
+
     private $_prefix = null;
-    
+
     private $_links = [];
-    
+
     public $activeUrl = null;
-    
+
     public function init()
     {
-        foreach($this->getLangs() as $lang) {
+        foreach ($this->getLangs() as $lang) {
             $this->_links[$lang['id']] = [];
             $this->recursiveFindChildren($lang, 0, '', 0);
         }
@@ -49,58 +47,57 @@ class Links extends \yii\base\Component
         if ($this->_prefix === null) {
             $this->_prefix = Yii::$app->composition->getFull();
         }
-        
+
         return $this->_prefix;
     }
-    
+
     public function getLangs()
     {
         if ($this->_langs === null) {
             $this->_langs = Lang::getQuery();
         }
-        
+
         return $this->_langs;
     }
-    
+
     public function getLangId($shortCode)
     {
         $langs = $this->getLangs();
-       
+
         if (array_key_exists($shortCode, $langs)) {
             return $langs[$shortCode]['id'];
         }
-        
+
         throw new Exception("the requested langauge $shortCode does not exists in language array.");
     }
-    
+
     public function getCats()
     {
         if ($this->_cats === null) {
             $this->_cats = Cat::getQuery();
         }
-        
+
         return $this->_cats;
     }
-    
+
     public function getCatRewrite($id)
     {
         $cats = $this->getCats();
-        
+
         if (array_key_exists($id, $cats)) {
             return $cats[$id]['rewrite'];
         }
-        
+
         return false;
     }
-    
+
     private function recursiveFindChildren($lang, $parentNavId, $urlPrefix, $depth)
     {
-        foreach($this->getChildren($lang['id'], $parentNavId) as $index => $item) {
-            
+        foreach ($this->getChildren($lang['id'], $parentNavId) as $index => $item) {
             $rewrite = $urlPrefix.$item['rewrite'];
-            
+
             $this->_links[$lang['id']][] = [
-                'full_url' => $this->getPrefix() . $rewrite,
+                'full_url' => $this->getPrefix().$rewrite,
                 'url' => $rewrite,
                 'rewrite' => $item['rewrite'],
                 'nav_id' => $item['nav_id'],
@@ -115,32 +112,32 @@ class Links extends \yii\base\Component
                 'is_hidden' => $item['is_hidden'],
                 'is_offline' => $item['is_offline'],
             ];
-            
+
             if ($this->hasChildren($lang['id'], $item['nav_id'])) {
-                $this->recursiveFindChildren($lang, $item['nav_id'], $rewrite . '/', $depth+1);
+                $this->recursiveFindChildren($lang, $item['nav_id'], $rewrite.'/', $depth + 1);
             }
         }
     }
-    
+
     private function hasChildren($langId, $parentNavId)
     {
-        $query = Yii::$app->db->createCommand("SELECT COUNT(*) as count FROM cms_nav_item as i LEFT JOIN (cms_nav as n) ON (n.id=i.nav_id) WHERE n.parent_nav_id=:parent_nav_id AND i.lang_id=:lang_id AND n.is_deleted=0")->bindValues([
+        $query = Yii::$app->db->createCommand('SELECT COUNT(*) as count FROM cms_nav_item as i LEFT JOIN (cms_nav as n) ON (n.id=i.nav_id) WHERE n.parent_nav_id=:parent_nav_id AND i.lang_id=:lang_id AND n.is_deleted=0')->bindValues([
             ':parent_nav_id' => $parentNavId, ':lang_id' => $langId,
         ])->queryOne();
-        
+
         return $query['count'];
     }
-    
+
     private function getChildren($langId, $parentNavId)
     {
-        return Yii::$app->db->createCommand("SELECT n.id as nav_id, n.is_hidden, n.cat_id, n.parent_nav_id, n.is_offline, i.id as nav_item_id, i.lang_id, i.title, i.rewrite, i.lang_id FROM cms_nav_item as i LEFT JOIN (cms_nav as n) ON (n.id=i.nav_id) WHERE i.lang_id=:lang_id AND n.parent_nav_id=:parent_nav_id AND n.is_deleted=0 ORDER by n.sort_index ASC")->bindValues([
+        return Yii::$app->db->createCommand('SELECT n.id as nav_id, n.is_hidden, n.cat_id, n.parent_nav_id, n.is_offline, i.id as nav_item_id, i.lang_id, i.title, i.rewrite, i.lang_id FROM cms_nav_item as i LEFT JOIN (cms_nav as n) ON (n.id=i.nav_id) WHERE i.lang_id=:lang_id AND n.parent_nav_id=:parent_nav_id AND n.is_deleted=0 ORDER by n.sort_index ASC')->bindValues([
             ':parent_nav_id' => $parentNavId, ':lang_id' => $langId,
         ])->queryAll();
     }
-    
+
     /**
-     * 
      * @param numeric|string $langShortCode Could be `1` or `de`
+     *
      * @return array
      */
     public function getLinksLanguageContainer($langShortCode)
@@ -149,28 +146,28 @@ class Links extends \yii\base\Component
             if (!$langShortCode) {
                 $langShortCode = Yii::$app->composition->getKey('langShortCode');
             }
-            
+
             if (!$langShortCode) {
                 $assoc = Lang::getDefault();
                 $langShortCode = $assoc['short_code'];
             }
-            
+
             $langId = $this->getLangId($langShortCode);
         } else {
             $langId = $langShortCode;
         }
-        
+
         return array_key_exists($langId, $this->_links) ? $this->_links[$langId] : [];
     }
-    
+
     /**
-     * alias class for findByArguemnts
+     * alias class for findByArguemnts.
      * 
      * @param array $argsArray
      */
     public function findAll(array $argsArray)
     {
-       return $this->findByArguments($argsArray); 
+        return $this->findByArguments($argsArray);
     }
 
     public function findByArguments(array $argsArray = [])
@@ -184,7 +181,7 @@ class Links extends \yii\base\Component
         } else {
             unset($argsArray['show_hidden']);
         }
-        
+
         if (!isset($argsArray['show_offline'])) {
             if (!isset($argsArray['is_offline'])) {
                 $argsArray['is_offline'] = 0;
@@ -192,19 +189,19 @@ class Links extends \yii\base\Component
         } else {
             unset($argsArray['is_offline']);
         }
-        
+
         if (isset($argsArray['lang'])) {
             $lang = $argsArray['lang'];
             unset($argsArray['lang']);
         }
-        
+
         if (isset($argsArray['lang_id'])) {
             $lang = $argsArray['lang_id'];
             unset($argsArray['lang_id']);
         }
-        
+
         $_index = $this->getLinksLanguageContainer($lang);
-        
+
         foreach ($argsArray as $key => $value) {
             foreach ($_index as $link => $args) {
                 if (!isset($args[$key])) {
@@ -219,15 +216,15 @@ class Links extends \yii\base\Component
 
         return $_index;
     }
-    
+
     /**
-	 * alias class for findOnyByArguments
-	 */
+     * alias class for findOnyByArguments.
+     */
     public function findOne(array $argsArray)
     {
         return $this->findOneByArguments($argsArray);
     }
-    
+
     public function findOneByArguments(array $argsArray)
     {
         $links = $this->findByArguments($argsArray);
@@ -242,17 +239,17 @@ class Links extends \yii\base\Component
     {
         $data = [];
         $currentPage = Yii::$app->links->findOneByArguments(['url' => Yii::$app->links->activeUrl, 'show_hidden' => true]);
-    
-        foreach(Lang::find()->asArray()->all() as $lang) {
+
+        foreach (Lang::find()->asArray()->all() as $lang) {
             $data[] = [
                 'link' => Yii::$app->links->findOneByArguments(['nav_id' => $currentPage['nav_id'], 'show_hidden' => true, 'lang_id' => $lang['id']]),
                 'lang' => $lang,
             ];
         }
-    
+
         return $data;
     }
-    
+
     public function teardown($link)
     {
         $parent = $this->getParent($link);
@@ -332,10 +329,10 @@ class Links extends \yii\base\Component
     public function getCurrentLink()
     {
         $url = $this->getResolveActiveUrl();
-        
+
         return $this->findOneByArguments(['show_hidden' => true, 'url' => $url]);
     }
-    
+
     public function getResolveActiveUrl()
     {
         if (empty($this->activeUrl)) {

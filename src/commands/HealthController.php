@@ -25,7 +25,7 @@ class HealthController extends \luya\base\Command
         $error = false;
 
         @chdir(Yii::getAlias('@app'));
-        
+
         foreach ($this->folders as $folder => $writable) {
             if (!file_exists($folder)) {
                 $mode = ($writable) ? 0777 : 0775;
@@ -38,7 +38,7 @@ class HealthController extends \luya\base\Command
             } else {
                 $this->outputSuccess("$folder: directory exists");
             }
-            
+
             if ($writable) {
                 if (!is_writable($folder)) {
                     $error = true;

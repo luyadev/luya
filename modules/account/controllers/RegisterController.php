@@ -34,8 +34,8 @@ class RegisterController extends \account\base\Controller
         }
 
         return $this->render('index', [
-            'model' => $model, 
-            'errors' => $model->getErrors(), 
+            'model' => $model,
+            'errors' => $model->getErrors(),
             'save' => (isset($save)) ? $save : false,
         ]);
     }
