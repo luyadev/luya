@@ -68,6 +68,17 @@ class Nav extends \yii\db\ActiveRecord
         }
     }
     
+    public function getPropertyObject($varName)
+    {
+        $value = CmsProperty::find()->where(['nav_id' => $this->id])->leftJoin('admin_property', 'admin_prop_id=admin_property.id')->select(['cms_nav_property.value', 'admin_property.class_name'])->where(['admin_property.var_name' => $varName])->asArray()->one();
+
+        if ($value) {
+            return AdminProperty::getObject($value['class_name'], $value['value']);
+        }
+        
+        return false;
+    }
+    
     /**
      * find the latest sort index cms_nav item for the current cat_id and parent_nav_id and set internal index count plus one.
      */

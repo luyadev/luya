@@ -2,6 +2,7 @@
 
 namespace admin\base;
 
+use Yii;
 use Exception;
 use admin\models\Property as PropertyModel;
 
@@ -11,16 +12,22 @@ use admin\models\Property as PropertyModel;
  * @todo remove defaultValue change to initvalue like in blocks!
  * @author nadar
  */
-abstract class Property extends \yii\base\Object
+abstract class Property extends \yii\base\Component
 {
     public $moduleName = null;
     
+    public $value = null;
+    
+    /*
     public function init()
     {
         if ($this->moduleName === null) {
             throw new Exception("moduleName property can not be empty when creating property Object.");
         }
     }
+    */
+    
+    const EVENT_BEFORE_RENDER = 'EVENT_BEFORE_RENDER';
     
     abstract public function varName();
     
@@ -48,6 +55,7 @@ abstract class Property extends \yii\base\Object
                 'label' => $this->label(),
                 'option_json' => json_encode($this->options()),
                 'default_value' => $this->defaultValue(),
+                'class_name' => static::className(),
             ]);
             $model->update(false);
             return $model->id;
@@ -60,6 +68,7 @@ abstract class Property extends \yii\base\Object
                 'label' => $this->label(),
                 'option_json' => json_encode($this->options()),
                 'default_value' => $this->defaultValue(),
+                'class_name' => static::className(),
             ]);
             $insert = $model->insert(false);
             if ($insert) {

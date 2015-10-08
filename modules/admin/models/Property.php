@@ -2,6 +2,8 @@
 
 namespace admin\models;
 
+use Yii;
+
 class Property extends \yii\db\ActiveRecord
 {
     public function init()
@@ -19,12 +21,17 @@ class Property extends \yii\db\ActiveRecord
     {
         return [
             [['module_name', 'var_name', 'type', 'label'], 'required'],
-            [['option_json', 'default_value'], 'safe'],
+            [['option_json', 'default_value', 'class_name'], 'safe'],
         ];
     }
     
     public function unserialize()
     {
         $this->option_json = json_decode($this->option_json, true);
+    }
+    
+    public static function getObject($className, $value)
+    {
+        return Yii::createObject(['class' => $className, 'value' => $value]);
     }
 }

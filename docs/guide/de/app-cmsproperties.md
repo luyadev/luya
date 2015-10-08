@@ -86,4 +86,32 @@ um alle Eigenschaften für diese Seite (in der der Block abglegt wurde) anzuzieg
 $this->getEnvOption('pageObject')->getNav(9->getProperties();
 ```
 
+Events
+------
+
+Eine Eigenschaft welche einer CMS Seite hinzugefügt wurde, kann auch auf Events reagieren. Folgenden Events stehe zur Verfügung:
+
+| Event Name | Beschreibung |
+| ---		 | ---			|
+| EVENT_BEFORE_RENDER | Event vor der Ausgabe des CMS inhalts ausführen. Wenn die Eingeschahft `$event->isValid` auf `false` gestellt wird, wird die Ausgabe abgebrochen.|
+
+Beispiel für einen Event der die Ausgabe abbricht
+
+```php
+public function init()
+{
+    $this->on(self::EVENT_BEFORE_RENDER, [$this, 'beforeIndex']);
+}
+
+public function beforeIndex($event)
+{
+	if ($this->thisMethodReturnsFalseWhyEver()) {
+		Yii::$app->response->redirect('https://luya.io');
+    	$event->isValid = false;
+	}
+}
+```
+
+
+
 
