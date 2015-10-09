@@ -37,6 +37,8 @@ class Parser
             if (empty($row['value'])) {
                 continue;
             }
+            
+            $replace = null;
 
             switch ($row['function']) {
                 case 'link':
@@ -51,8 +53,10 @@ class Parser
                     continue;
                     break;
             }
-
-            $content = preg_replace('/'.preg_quote($row[0]).'/mi', $replace, $content, 1);
+            
+            if ($replace !== null) {
+                $content = preg_replace('/'.preg_quote($row[0]).'/mi', $replace, $content, 1);
+            }
         }
 
         return $content;
