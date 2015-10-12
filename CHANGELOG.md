@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-beta1 (in progress)
 -------------------------
+- added new cms\helpers\url method toModuleRoute which combines url creation from a module which is implemented via cms.
 
 1.0.0-alpha20 (8. Okt 2015)
 ---------------------------
