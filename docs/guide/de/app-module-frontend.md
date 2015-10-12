@@ -24,13 +24,25 @@ Alle Controller müssen von `luya\base\Controller` abstrahieren.
 
 > `luya\base\PageController` ist nicht mehr valid seit Version 1.0.0-alpha11.
 
+Standard Route
+--------------
+Per Yii defintioni wird als standard controller und index der `DefaultController` und die `indexAction` ausgeführt. Um diese zu ändern kanns du im Module die Property `$defaultRoute` auf deine standrd *<controller>/<action>* route anpassen, ein paar Beispiele:
+
+```php
+public $defaultRoute = 'cat'; // neue standard route: cat/index
+
+public $defaultRoute = 'detail/index'; // neue standard route: detail/index
+
+public $defaultROute = 'detail'; // neue standard route: detail/index
+```
+
 Context
 -------
 Die verwendung der `$context` variabel innerhalb eines views kann sehr effektiv sein bei *vielen controllern* und views. Wenn Sie eine *public* methode in einen Controller implenetieren, zbsp. `public function getBasketTotal()` kann diese Funktione innerhalb des views mit `$this->context->getBasketTotal()` aufgerufen werden. Wenn Sie nun eine `abstract` Controlle erstellen und diesen als `extends` benutzen so können Sie diese abstrahiert controller logik in allen views wieder verwenden.
 
 Titel und Meta-Tags
 -------------------
-In einer Action kann die Title property über den view definiert werden:
+In einer Action kann die Titel Tag (title tag) Eigenschaft über den view definiert werden:
 
 ```php
 public function actionIndex()

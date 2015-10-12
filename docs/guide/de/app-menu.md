@@ -114,3 +114,40 @@ Geteilte Navigationen
     <? endforeach; ?>
 </ul>
 ``` 
+
+Links zu Seiten im CMS
+---------------------
+
+Um innerhalb des CMS oder eines Modules einen Link zu einer internen Seite zu machen verwenden Sie die folgenden Markdown-ähnlichen einweisungen:
+
+```html
+link[3](Alternativer Link Name)
+
+<!-- Output: <a href="url/to/3">Alternativer Link Name</a> -->
+```
+
+wobei *3* die Nummer der Seite ist. Wenn kein alternativer link name angegeben wird, wird autoamtisch der Seiten Titel aus dem CMS eingefügt.
+
+```html
+link[3]
+
+<!-- Output: <a href="url/to/3">Name of 3</a> -->
+```
+
+Man kann auch statische Links erzeugen
+
+```html
+link[www.luya.io]
+
+<!-- Output: <a href="http://www.luya.io">luya.io</a> -->
+```
+
+> Ein fehlendes http:// wird automatisch angefügt.
+
+Mit Alternativen Label
+
+```html
+link[luya.io](Hier gehts zur Doku)
+
+<!-- Output: <a href="http://luya.io">Hier gehts zur Doku</a> -->
+```
