@@ -90,15 +90,15 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
     {
         return ['relationdata' => $this->getOptionsData()];
     }
-
+    
     public function onAfterFind($fieldValue)
     {
-        return $this->model->find()->leftJoin($this->refJoinTable, [$this->model->tableName().'.id' => $this->refJoinTable.'.'.$this->refJoinPkId])->where([$this->refJoinTable.'.'.$this->refModelPkId => $this->getModel()->id])->all();
+        return $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $this->getModel()->id])->all();
     }
 
     public function onAfterNgRestFind($fieldValue)
     {
-        return $this->model->find()->leftJoin($this->refJoinTable, [$this->model->tableName().'.id' => $this->refJoinTable.'.'.$this->refJoinPkId])->where([$this->refJoinTable.'.'.$this->refModelPkId => $this->getModel()->id])->all();
+        return $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $this->getModel()->id])->all();
     }
 
     public function onBeforeUpdate($value, $oldValue)
