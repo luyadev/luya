@@ -104,7 +104,7 @@ class UrlManager extends \yii\web\UrlManager
         $moduleName = \luya\helpers\Url::fromRoute($params[0], 'module');
 
         if ($this->getContextNavItemId() && $links !== null) {
-            $link = $links->findOneByArguments(['id' => (int) $this->getContextNavItemId()]);
+            $link = $links->findOne(['id' => $this->getContextNavItemId(), 'show_hidden' => true]);
             $this->resetContext();
 
             return preg_replace("/$moduleName/", $composition.$link['url'], $response, 1);
@@ -119,7 +119,7 @@ class UrlManager extends \yii\web\UrlManager
                 if ($links !== null) {
                     $context = true;
                     $options = $moduleObject->getContextOptions();
-                    $link = $links->findOneByArguments(['id' => (int) $options['navItemId']]);
+                    $link = $links->findOne(['id' => $options['navItemId'], 'show_hidden' => true]);
                     $response = preg_replace("/$moduleName/", $composition.$link['url'], $response, 1);
                 }
             }
