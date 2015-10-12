@@ -16,6 +16,10 @@
 			<directory>./vendor</directory>
 			<directory>./tests</directory>
 		</blacklist>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+            <directory suffix=".php">./modules</directory>
+        </whitelist>
 	</filter>
     <php>
         <const name="DB_NAME" value="myapp_test" />
