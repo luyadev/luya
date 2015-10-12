@@ -75,9 +75,11 @@ class UrlManager extends \yii\web\UrlManager
 
     public function createUrl($params)
     {
+        /*
         if (!Yii::$app->has('composition')) {
             return parent::createUrl($params);
         }
+        */
 
         $links = Yii::$app->get('links', false);
 

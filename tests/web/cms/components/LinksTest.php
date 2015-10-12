@@ -84,17 +84,17 @@ class LinksTest extends \tests\web\Base
         $links = Yii::$app->links->getLinksLanguageContainer('1');
         
         $this->assertEquals(true, is_array($links));
-        $this->assertEquals(3, count($links));
+        $this->assertEquals(4, count($links));
         
         $links = Yii::$app->links->getLinksLanguageContainer(1);
         
         $this->assertEquals(true, is_array($links));
-        $this->assertEquals(3, count($links));
+        $this->assertEquals(4, count($links));
         
         $links = Yii::$app->links->getLinksLanguageContainer('de');
         
         $this->assertEquals(true, is_array($links));
-        $this->assertEquals(3, count($links));
+        $this->assertEquals(4, count($links));
         
         $links = Yii::$app->links->getLinksLanguageContainer('en');
         
@@ -129,10 +129,35 @@ class LinksTest extends \tests\web\Base
         
         $finder = $links->findByArguments([]);
         
-        $this->assertEquals(3, count($finder));
+        $this->assertEquals(4, count($finder));
 
         $finder = $links->findByArguments(['lang_id' => 2]);
         
         $this->assertEquals(0, count($finder));
+    }
+    
+    public function testFindAllOneWrapper()
+    {
+        $links = Yii::$app->links;
+        
+        // all
+        
+        $finder = $links->findByArguments(['url' => 'page-1']);
+        
+        $this->assertEquals(1, count($finder));
+        
+        $finder = $links->findAll(['url' => 'page-1']);
+        
+        $this->assertEquals(1, count($finder));
+        
+        // one
+        
+        $finder = $links->findOneByArguments(['url' => 'page-1']);
+        
+        $this->assertEquals('de/page-1', $finder['full_url']);
+        
+        $finder = $links->findOne(['url' => 'page-1']);
+        
+        $this->assertEquals('de/page-1', $finder['full_url']);
     }
 }

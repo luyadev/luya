@@ -622,7 +622,8 @@ CREATE TABLE IF NOT EXISTS `cms_nav` (
 INSERT INTO `cms_nav` (`id`, `cat_id`, `parent_nav_id`, `sort_index`, `is_deleted`, `is_hidden`) VALUES
 (1, 1, 0, 1, 0, 0),
 (2, 1, 0, 2, 0, 0),
-(3, 1, 0, 3, 0, 0);
+(3, 1, 0, 3, 0, 0),
+(4, 1, 0, 4, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -651,7 +652,8 @@ CREATE TABLE IF NOT EXISTS `cms_nav_item` (
 INSERT INTO `cms_nav_item` (`id`, `nav_id`, `lang_id`, `nav_item_type`, `nav_item_type_id`, `create_user_id`, `update_user_id`, `timestamp_create`, `timestamp_update`, `title`, `rewrite`) VALUES
 (1, 1, 1, 1, 1, 1, 1, 1439281771, 0, 'Page 1', 'page-1'),
 (2, 2, 1, 1, 2, 1, 1, 1439281801, 0, 'Page 2', 'page-2'),
-(3, 3, 1, 2, 1, 1, 1, 1439282169, 0, 'My News Page', 'my-news-page');
+(3, 3, 1, 2, 1, 1, 1, 1439282169, 0, 'My News Page', 'my-news-page'),
+(4, 4, 1, 2, 2, 1, 1, 1439282169, 0, 'News Module', 'news-module-page');
 
 -- --------------------------------------------------------
 
@@ -669,7 +671,8 @@ CREATE TABLE IF NOT EXISTS `cms_nav_item_module` (
 --
 
 INSERT INTO `cms_nav_item_module` (`id`, `module_name`) VALUES
-(1, 'gallery');
+(1, 'gallery'),
+(2, 'news');
 
 -- --------------------------------------------------------
 
