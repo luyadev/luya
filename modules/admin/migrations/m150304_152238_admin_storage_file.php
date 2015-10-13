@@ -19,8 +19,8 @@ class m150304_152238_admin_storage_file extends Migration
             'hash_file' => Schema::TYPE_STRING,
             'hash_name' => Schema::TYPE_STRING,
             'upload_timestamp' => 'int(11) NOT NULL default 0',
-            'file_size' => 'int(11) NOT NULL default 0', // in bytes
-            'upload_user_id' => 'int(11) NOT NULL default 0',
+            'file_size' => 'int(11) default 0', // in bytes
+            'upload_user_id' => 'int(11) default 0',
             'is_deleted' => 'tinyint(1) NOT NULL default 0',
         ]);
     }
