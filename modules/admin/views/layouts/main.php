@@ -304,7 +304,7 @@ $this->beginPage()
                         </ul>
 
                         <ul class="right navbar__right">
-                            <li ng-mouseenter="showDebugContainer=1" ng-mouseleave="showDebugContainer=0"><span style="font-size:10px; margin-right:20px;"><?= luya\Module::VERSION; ?></span></li>
+                            <li ng-mouseenter="showDebugContainer=1" ng-mouseleave="showDebugContainer=0"><span style="font-size:10px; margin:0 15px;"><?= luya\Module::VERSION; ?></span></li>
                             <li ng-mouseenter="showOnlineContainer=1" ng-mouseleave="showOnlineContainer=0">
                                 <div class="navbar__button">
                                     <i class="[ mdi-social-group left ] navbar__icon"></i>
