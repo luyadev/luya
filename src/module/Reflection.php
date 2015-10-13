@@ -66,7 +66,7 @@ class Reflection
     public function responseContent(array $request)
     {
         if (!isset($request['route']) || !isset($request['args'])) {
-            throw new Exception('The proviede request array does not containt route or args key.');
+            throw new Exception('The provide request array does not contain route or arg keys.');
         }
 
         if (count($request['args']) === 0) {

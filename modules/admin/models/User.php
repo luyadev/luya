@@ -65,6 +65,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
             [['title', 'firstname', 'lastname', 'email', 'password'], 'required', 'on' => 'restcreate'],
             [['title', 'firstname', 'lastname', 'email'], 'required', 'on' => 'restupdate'],
             [['email', 'password'], 'required', 'on' => 'login'],
+            [['title', 'firstname', 'lastname', 'email', 'password'], 'required', 'on' => 'default'],
         ];
     }
 
@@ -86,6 +87,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
             'restupdate' => ['title', 'firstname', 'lastname', 'email'],
             'changepassword' => ['password', 'password_salt'],
             'login' => ['email', 'password'],
+            'default' => ['title', 'firstname', 'lastname', 'email', 'password'],
         ];
     }
 
