@@ -3,6 +3,7 @@
 namespace cmsadmin\models;
 
 use Yii;
+use cmsadmin\models\Log;
 
 /**
  * sort_index numbers always starts from 0 and not from 1, like a default array behaviour. If a
@@ -29,6 +30,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         $this->on(self::EVENT_AFTER_INSERT, [$this, 'eventAfterInsert']);
         $this->on(self::EVENT_AFTER_UPDATE, [$this, 'eventAfterUpdate']);
         $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'eventBeforeUpdate']);
+        $this->on(self::EVENT_BEFORE_DELETE, [$this, 'eventBeforeDelete']);
     }
 
     public function rules()
@@ -60,7 +62,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
 
             foreach ($higher as $item) {
                 $newSortIndex = $item->sort_index + 1;
-                \yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $newSortIndex], ['id' => $item->id])->execute();
+                Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $newSortIndex], ['id' => $item->id])->execute();
             }
         }
     }
@@ -80,11 +82,18 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
             $this->reindex($this->nav_item_page_id, $oldPlaceholderVar, $oldPrevId);
         }
         $this->reindex($this->nav_item_page_id, $this->placeholder_var, $this->prev_id);
+        Log::add(2, "block.update '".$this->block->class."', cms_nav_item_page_block_item.id '".$this->id."'");
+    }
+    
+    public function eventBeforeDelete()
+    {
+        Log::add(3, "block.delete '".$this->block->class."', cms_nav_item_page_block_item.id '".$this->id."'");
     }
 
     public function eventAfterInsert()
     {
         $this->reindex($this->nav_item_page_id, $this->placeholder_var, $this->prev_id);
+        Log::add(1, "block.insert '".$this->block->class."', cms_nav_item_page_block_item.id '".$this->id."'");
     }
 
     public function eventBeforeInsert()
@@ -105,7 +114,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         $index = 0;
         $datas = self::find()->andWhere(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId])->orderBy('sort_index ASC')->all();
         foreach ($datas as $item) {
-            \yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $index], ['id' => $item->id])->execute();
+            Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $index], ['id' => $item->id])->execute();
             ++$index;
         }
     }

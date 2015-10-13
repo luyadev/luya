@@ -23,8 +23,27 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
         parent::init();
         $this->on(self::EVENT_BEFORE_INSERT, [$this, 'beforeCreate']);
         $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'validateRewrite']);
+        
+        $this->on(self::EVENT_AFTER_INSERT, [$this, 'logEvent']);
+        $this->on(self::EVENT_AFTER_UPDATE, [$this, 'logEvent']);
+        $this->on(self::EVENT_BEFORE_DELETE, [$this, 'logEvent']);
     }
 
+    public function logEvent($e)
+    {
+        switch($e->name) {
+            case "afterInsert":
+                Log::add(1, "nav_item.insert '".$this->title."', cms_nav_item.id '".$this->id."'", $this->toArray());
+                break;
+            case "afterUpdate":
+                Log::add(2, "nav_item.update '".$this->title."', cms_nav_item.id '".$this->id."'", $this->toArray());
+                break;
+            case "afterDelete":
+                Log::add(3, "nav_item.delete '".$this->title."', cms_nav_item.id '".$this->id."'", $this->toArray());
+                break;
+        }
+    }
+    
     public static function tableName()
     {
         return 'cms_nav_item';

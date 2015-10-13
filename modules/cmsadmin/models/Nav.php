@@ -91,12 +91,24 @@ class Nav extends \yii\db\ActiveRecord
         }
     }
 
-    public function reindex()
+    public function reindex($e)
     {
         $i = 1;
         foreach (self::find()->where(['cat_id' => $this->cat_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $model) {
             Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $i], 'id=:id', ['id' => $model['id']])->execute();
             ++$i;
+        }
+        
+        switch($e->name) {
+            case "afterInsert":
+                Log::add(1, "nav.insert, cms_nav.id '".$this->id."'", $this->toArray());
+            break;
+            case "afterUpdate":
+                Log::add(2, "nav.update, cms_nav.id '".$this->id."'", $this->toArray());
+                break;
+            case "afterDelete":
+                Log::add(3, "nav.delete, cms_nav.id '".$this->id."'", $this->toArray());
+                break;
         }
     }
 

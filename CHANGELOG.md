@@ -3,7 +3,9 @@ LUYA CHANGELOG
 
 1.0.0-beta1 (in progress)
 -------------------------
-- added new cms\helpers\url method toModuleRoute which combines url creation from a module which is implemented via cms.
+- added cms logging table to track all events (insert,update,delete) on nav, nav_item and blocks.
+- added new cms\helpers\Url method toModuleRoute which combines url creation from a module which is implemented via cms.
+- added file helper \luya\helpers\FileHelper humanReadableFilesize method.
 
 1.0.0-alpha20 (8. Okt 2015)
 ---------------------------
