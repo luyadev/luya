@@ -280,6 +280,7 @@
 				})
 			},
 			template: function() {
+				/*
 				return '<div class="col s{{grid}} form__datetimepicker">' +
 							'<label>{{label}}</label>' +
 							'<input ng-blur="reform()" type="text" ng-model="day" placeholder="Tag" />.' +
@@ -288,6 +289,17 @@
 							'<input ng-blur="reform()" type="text" ng-model="hour" placeholder="Stunde" />:' +
 							'<input ng-blur="reform()" type="text" ng-model="min" placeholder="Minute" />' +
 						'</div>';
+				*/
+				return '<div class="input input--date">' +
+						'<label class="input__label">{{label}}</label>' +
+		                '<div class="input__field-wrapper">' +
+			                    '<input ng-blur="reform()" type="text" ng-model="day" placeholder="Tag" class="input__field" /><span class="input__divider">.</span>' +
+			                    '<input ng-blur="reform()" type="text" ng-model="month" placeholder="Monat" class="input__field" /><span class="input__divider">.</span>' +
+			                    '<input ng-blur="reform()" type="text" ng-model="year" placeholder="Jahr" class="input__field" /><span class="input__divider">-</span>' +
+			                    '<input ng-blur="reform()" type="text" ng-model="hour" placeholder="Stunde" class="input__field" /><span class="input__divider">:</span>' +
+			                    '<input ng-blur="reform()" type="text" ng-model="min" placeholder="Minute" class="input__field" />' +
+		                    '</div>'
+		               '</div>';
 			}
 		}
 	});
@@ -490,7 +502,7 @@
                                     '</div>' +
 
                                     '<div class="list__right">' +
-                                        '<button class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="mdi-content-remove"></i></button>' +
+                                        '<button type="button" class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="mdi-content-remove"></i></button>' +
                                     '</div>' +
 
                                 '</div>' +

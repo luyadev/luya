@@ -29,6 +29,7 @@ class TestBlock extends \cmsadmin\base\Block
                 ['var' => 'checkbox', 'label' => 'Checkbox', 'type' => 'zaa-checkbox'],
                 ['var' => 'checkboxarray', 'label' => 'Checkbox Array', 'type' => 'zaa-checkbox-array', 'options' => ['items' => [['id' => 1, 'label' => 'Label for Value 1']]]],
                 ['var' => 'date', 'label' => 'Date Picker', 'type' => 'zaa-date'],
+                ['var' => 'datetime', 'label' => 'Date Time Picker', 'type' => 'zaa-datetime'],
                 ['var' => 'fileupload', 'label' => 'Fileupload', 'type' => 'zaa-file-upload'],
                 ['var' => 'imageupload', 'label' => 'Imageupload', 'type' => 'zaa-image-upload'],
                 ['var' => 'imagearrayupload', 'label' => 'ImageArrayUpload', 'type' => 'zaa-image-array-upload'],
