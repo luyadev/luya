@@ -18,4 +18,14 @@ class FileHelper extends \yii\helpers\BaseFileHelper
         }
         return round($size, 2) . ' ' . $units[$i];
     }
+    
+    public static function appendExtensionToString($file, $extension)
+    {
+        $info = pathinfo($file);
+        if (!isset($info['extension'])) {
+            $file = $info['filename'].'.'.$extension;
+        }
+        
+        return $file;
+    }
 }
