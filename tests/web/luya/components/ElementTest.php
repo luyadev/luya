@@ -57,4 +57,18 @@ class ElementTest extends \tests\web\Base
         // throws: The requested element 'foobar' does not exists in the element list. You may register the element first with `addElement(name, closure)`.
         $element->foobar();
     }
+    
+    public function testGetNames()
+    {
+        $element = new \luya\components\Element();
+        $element->addElement('name', function() use ($element) {
+            
+        });
+        
+        $names = $element->getNames();
+        
+        $this->assertEquals(1, count($names));
+        $this->assertEquals('name', $names[0]);
+        
+    }
 }

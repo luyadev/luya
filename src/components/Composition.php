@@ -49,9 +49,8 @@ class Composition extends \yii\base\Component
 
     /**
      * Resolve the current url request and retun an array contain resolved route and the resolved values.
-     * 
-     * @param \yii\web\Request $request
      *
+     * @param \yii\web\Request $request
      * @return array An array containing the route and the resolvedValues. Example array output when request path is `de/hello/world`:
      * 
      * ```php
@@ -100,7 +99,7 @@ class Composition extends \yii\base\Component
     /**
      * Set a new composition key and value in composition array. If the key already exists, it will
      * be overwritten.
-     * 
+     *
      * @param string $key   The key in the array, e.g. langShortCode
      * @param string $value The value coresponding to the key e.g. de
      */
@@ -113,10 +112,9 @@ class Composition extends \yii\base\Component
      * Get value from the composition array for the provided key, if the key does not existing the default value
      * will be return. The standard value of the defaultValue is false, so if nothing defined and the could not
      * be found, the return value is `false`.
-     * 
+     *
      * @param string $key          The key to find in the composition array e.g. langShortCode
      * @param string $defaultValue The default value if they could not be found
-     *
      * @return string|bool
      */
     public function getKey($key, $defaultValue = false)
@@ -126,7 +124,7 @@ class Composition extends \yii\base\Component
 
     /**
      * Return the whole composition array.
-     * 
+     *
      * @return array
      */
     public function get()
@@ -136,7 +134,7 @@ class Composition extends \yii\base\Component
 
     /**
      * Override all composition values and strictly set new array.
-     * 
+     *
      * @param array $array An array containg key value parings.
      */
     public function set(array $array)
@@ -146,7 +144,7 @@ class Composition extends \yii\base\Component
 
     /**
      * Return a path like string with all composition with trailing slash e.g. us/e.
-     * 
+     *
      * @return void|string
      */
     public function getFull()
@@ -156,7 +154,7 @@ class Composition extends \yii\base\Component
 
     /**
      * Transform the langShortCode into a locale sign to set php env settings.
-     * 
+     *
      * @return string
      */
     public function getLocale()
@@ -179,7 +177,7 @@ class Composition extends \yii\base\Component
 
     /**
      * Wrapper for `getKey('langShortCode')` to load language to set php env settings.
-     * 
+     *
      * @return string|bool
      */
     public function getLanguage()

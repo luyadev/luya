@@ -22,7 +22,7 @@ class DefaultController extends \luya\base\Controller
         }
         $containers = [];
 
-        foreach (Yii::$app->element->getAll() as $name => $closure) {
+        foreach (Yii::$app->element->getElements() as $name => $closure) {
             $reflection = new \ReflectionFunction($closure);
             $args = $reflection->getParameters();
             $params = [];
