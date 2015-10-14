@@ -68,7 +68,16 @@ class ElementTest extends \tests\web\Base
         $names = $element->getNames();
         
         $this->assertEquals(1, count($names));
-        $this->assertEquals('name', $names[0]);
+        $this->assertEquals('name', $names[0]);   
+    }
+    
+    public function testGetElements()
+    {
+        $element = new \luya\components\Element();
         
+        $lmns = $element->getElements();
+        
+        $this->assertEquals(0, count($lmns));
+        $this->assertEquals(true, is_array($lmns));
     }
 }
