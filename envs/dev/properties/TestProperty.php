@@ -13,8 +13,7 @@ class TestProperty extends \admin\base\Property
     
     public function beforeIndex($event)
     {
-        Yii::$app->response->redirect('https://luya.io');
-        $event->isValid = false;
+        $event->isValid = true;
     }
     
     public function varName()
