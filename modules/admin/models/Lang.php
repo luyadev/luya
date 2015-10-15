@@ -6,6 +6,10 @@ use Yii;
 
 class Lang extends \admin\ngrest\base\Model
 {
+    private static $_langInstance = null;
+    
+    private static $_langInstanceQuery = null;
+    
     public function ngRestApiEndpoint()
     {
         return 'api-admin-lang';
@@ -55,12 +59,10 @@ class Lang extends \admin\ngrest\base\Model
 
     public static function getLangIdByShortCode($shortCode)
     {
-        $item = self::find()->select(['id'])->where(['short_code' => $shortCode])->one();
+        $item = self::find()->select(['id'])->where(['short_code' => $shortCode])->asArray()->one();
 
-        return ($item) ? $item->id : false;
+        return ($item) ? $item['id'] : false;
     }
-
-    private static $_langInstanceQuery = null;
 
     public static function getQuery()
     {
@@ -70,8 +72,6 @@ class Lang extends \admin\ngrest\base\Model
 
         return self::$_langInstanceQuery;
     }
-
-    private static $_langInstance = null;
 
     public static function getDefault()
     {
