@@ -2,6 +2,10 @@
 
 namespace luya\components;
 
+use Exception;
+use PHPMailer;
+use SMTP;
+
 class Mail extends \yii\base\Component
 {
     private $_phpmailer = null;
@@ -25,7 +29,7 @@ class Mail extends \yii\base\Component
     public function mailer()
     {
         if ($this->_phpmailer === null) {
-            $this->_phpmailer = new \PHPMailer();
+            $this->_phpmailer = new PHPMailer();
             $this->_phpmailer->do_debug = 0;
             $this->_phpmailer->CharSet = 'UTF-8';
         }
@@ -88,5 +92,40 @@ class Mail extends \yii\base\Component
     public function cleanup()
     {
         $this->_phpmailer = null;
+    }
+    
+    /**
+     * @see https://github.com/PHPMailer/PHPMailer/blob/master/examples/smtp_check.phps
+     * @throws Exception
+     */
+    public function smtpTest()
+    {
+        //Create a new SMTP instance
+        $smtp = new SMTP;
+        
+        //Enable connection-level debug output
+        //$smtp->do_debug = SMTP::DEBUG_CONNECTION;
+        
+        try {
+            //Connect to an SMTP server
+            if ($smtp->connect($this->host, $this->port)) {
+                //Say hello
+                if ($smtp->hello('localhost')) { //Put your host name in here
+                    //Authenticate
+                    if ($smtp->authenticate($this->username, $this->password)) {
+                        return true;
+                    } else {
+                        throw new Exception('Authentication failed: ' . $smtp->getLastReply());
+                    }
+                } else {
+                    throw new Exception('HELO failed: '. $smtp->getLastReply());
+                }
+            } else {
+                throw new Exception('Connect failed');
+            }
+        } catch (Exception $e) {
+            $smtp->quit(true);
+            throw new \yii\base\Exception($e->getMessage());
+        }
     }
 }
