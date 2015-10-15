@@ -346,7 +346,7 @@ $this->beginPage()
                 </nav>
             </div> <!-- /navbar-fixed -->
 
-            <div ng-show="showDebugContainer" style=" padding:20px; background-color:white; position:absolute; z-index:99999999999; right:48px;">
+            <div ng-show="showDebugContainer" class="useronline__modal">
                 <table class="bordered">
                     <thead>
                         <tr>
