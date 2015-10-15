@@ -4,7 +4,7 @@ namespace admin;
 
 class Module extends \admin\base\Module
 {
-    public $secureLogin = true;
+    public $secureLogin = false;
     
     public $isCoreModule = true;
 
