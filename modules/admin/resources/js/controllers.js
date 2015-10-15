@@ -389,11 +389,15 @@
 			});
 		};
 		
+		$scope.$on('topMenuClick', function(e) {
+			$scope.currentItem = null;
+		});
+		
 		$scope.init();
 	});
 	
 	zaa.controller("DashboardController", function ($scope) {
-	    $scope.logItemOpen = false;
+		$scope.logItemOpen = false;
 	});
 	
 	// LayoutMenuController.js
@@ -457,6 +461,7 @@
 		$scope.currentItem = {};
 		
 		$scope.click = function(menuItem) {
+			$scope.$broadcast('topMenuClick', { menuItem : menuItem });
 			if (menuItem.template) {
 				$state.go('custom', { 'templateId' : menuItem.template });
 			} else {
