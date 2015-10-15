@@ -19,7 +19,6 @@ Go into your configs folder inside your application and copy the dist template f
 
 ```
 cp server.php.dist server.php
-cp prep.php.dist prep.php
 cp local.php.dist local.php
 ```
 

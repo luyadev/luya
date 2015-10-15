@@ -35,7 +35,6 @@ Im Terminal kannst du die *dist* Datein wie folgt kopieren:
 
 ```sh
 cp server.php.dist server.php
-cp prep.php.dist prep.php
 cp local.php.dist local.php
 ```
 
@@ -45,7 +44,7 @@ Jede Konfigurationsdatei hat eine Funktion:
 |--------      |-------------
 |server.php    |Diese Datei ist auf .gitignore und inkludiert die aktuelle laufende Umgebung (prep, prod)
 |prep.php      |Steht für *Preproduction*, also dein Lokales System
-|prod.php      |Dies ist die Konfiguration auf dem Server auf dem das System produktiv läuft.
+|prod.php      |Dies ist die Konfiguration auf dem Server (*Production*) auf dem das System produktiv läuft.
 |local.php     |Dies sind deine Einstellungen von deiner Entwicklungsmaschine enthalten, welche mit der *prep.php* gemerged werden.
 
 

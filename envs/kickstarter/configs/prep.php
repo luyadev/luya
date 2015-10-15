@@ -15,10 +15,14 @@ $config = [
             'class' => 'cms\Module',
             'assets' => [
                 'app\assets\ResourcesAsset'
-            ]
+            ],
+            'enableCompression' => true, // compressing the cms output (removing white spaces and newlines)
         ],
         'cmsadmin' => 'cmsadmin\Module',
-        'admin' => 'admin\Module'
+        'admin' => [
+            'class' => 'admin\Module',
+            'secureLogin' => false, // when enabling secure login, the mail component must be proper configured otherwise the auth token mail will not send.
+        ]
     ],
     'components' => [
     	'mail' => [
@@ -45,11 +49,10 @@ $config = [
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'dev');
 
+// if you want to use the debug and gii modules of yii, add them to your composer.json in the require section:
+// "yiisoft/yii2-gii" : "*"
+// "yiisoft/yii2-debug" : "*"
 if (YII_DEBUG) {
-	// if you want to use the debug and gii modules of yii, add them to your composer.json in the require section:
-	// "yiisoft/yii2-gii" : "*"
-    // "yiisoft/yii2-debug" : "*"
-
 	/*
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = 'yii\debug\Module';
