@@ -8,7 +8,7 @@ class Module extends \admin\base\Module
      * @var boolean Enables a two-way factor auth system before logging into the admin
      * panel. If the system is not able to send mails (No configuration or missconfiguration)
      * then you are not able to login anymore. You should test the mail system before enabling
-     * secureLogin.
+     * secureLogin. To test your smtp connection you can use `./vendor/bin/luya health/mailer`
      */
     public $secureLogin = false;
     
