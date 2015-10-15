@@ -83,8 +83,31 @@ $this->getEnvOption('pageObject')->getNav()->getProperty('foobar');
 um alle Eigenschaften für diese Seite (in der der Block abglegt wurde) anzuziegen verwenden Sie die `getProperties()` Methode:
 
 ```php
-$this->getEnvOption('pageObject')->getNav(9->getProperties();
+$this->getEnvOption('pageObject')->getNav()->getProperties();
 ```
+
+```php
+$this->getEnvOption('pageObject)->nav->properties; // getter kurz form
+```
+
+### in Layouts
+
+Um auf property eigenschaften in layouts zu zugreifen kannst du auf die 
+
+```php
+Yii::$app->page
+```
+
+Komponenten zugreifen, diese steht dir aber nur im CMS context zu verfügung. Wenn du in einem nicht Modul context auf diese Komponent zugreifst wirt es einen *Fatal Error* erzeugen.
+
+```php
+Yii::$app->page->properties; // erzeugt ein array
+```
+
+```php
+Yii::$app->page->getProperty('my-prop'); // gibt den property defaultValue zurück wenn die Eigenschaft nicht gefunden wird.
+```
+
 
 Events
 ------

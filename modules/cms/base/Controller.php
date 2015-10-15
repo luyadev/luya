@@ -17,6 +17,11 @@ abstract class Controller extends \luya\base\Controller
     {
         $model = NavItem::findOne($navItemId);
 
+        Yii::$app->set('page', [
+            'class' => 'cms\components\Page',
+            'model' => $model,
+        ]);
+        
         $event = new \cms\events\CmsEvent();
 
         foreach ($model->getNav()->getProperties() as $property) {
