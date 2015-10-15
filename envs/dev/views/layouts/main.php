@@ -6,8 +6,6 @@ use cms\helpers\Url as CmsUrl;
 $composition = Yii::$app->composition;
 $links = Yii::$app->links;
 
-print_r(Yii::$app->page->properties);
-
 ?>
 <html>
     <head>
