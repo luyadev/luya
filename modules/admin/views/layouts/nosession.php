@@ -1,6 +1,5 @@
 <?php
 use \yii\helpers\Html;
-
 $this->beginPage();
 ?>
 
@@ -11,8 +10,16 @@ $this->beginPage();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?= \Yii::$app->siteTitle; ?> // Login // <?= luya\Module::VERSION; ?></title>
-
+    <title><?= Yii::$app->siteTitle; ?> // Login // <?= luya\Module::VERSION; ?></title>
+    <style>
+        body {
+            background: url('<?= $this->getAssetUrl('admin\assets\Login'); ?>/img/login-splash-beta1.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;              
+        }
+    </style>
     <?php $this->head() ?>
 
     <?= Html::csrfMetaTags() ?>

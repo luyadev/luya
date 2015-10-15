@@ -65,6 +65,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
             [['title', 'firstname', 'lastname', 'email', 'password'], 'required', 'on' => 'restcreate'],
             [['title', 'firstname', 'lastname', 'email'], 'required', 'on' => 'restupdate'],
             [['email', 'password'], 'required', 'on' => 'login'],
+            [['secure_token'], 'required', 'on' => 'securelayer'],
         ];
     }
 
@@ -86,6 +87,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
             'restupdate' => ['title', 'firstname', 'lastname', 'email'],
             'changepassword' => ['password', 'password_salt'],
             'login' => ['email', 'password'],
+            'securelayer' => ['secure_token'],
         ];
     }
 
@@ -102,6 +104,15 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
         }
     }
 
+    public function getAndStoreToken()
+    {
+        $token = Yii::$app->security->generateRandomString(4);
+        $this->setAttribute('secure_token', sha1($token));
+        $this->setAttribute('secure_token_timestamp', time());
+        $this->update(false);
+        return $token;
+    }
+    
     /**
      * override default scope find().
      */

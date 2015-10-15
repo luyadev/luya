@@ -12,6 +12,7 @@ class Login extends \luya\base\Asset
 
     public $js = [
         'js/materialize.min.js',
+        'js/login.js',
     ];
 
     public $depends = [
