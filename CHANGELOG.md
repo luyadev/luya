@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-beta1 (in progress)
 -------------------------
+- added smtp test cli `health/mailer` to test SMTP connection.
 - added two-way factor auth via E-Mail when enabling `$secureLogin` in admin module.
 - added cli user creation command `setup/user`.
 - added cms logging table to track all events (insert,update,delete) on nav, nav_item and blocks.

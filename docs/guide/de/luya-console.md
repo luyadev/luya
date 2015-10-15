@@ -19,6 +19,7 @@ Befehlsübersicht
 |setup/user         |-                            |`setup/user`         | Einen neneun Luya Benutzer erstellen.
 |import            |-                             |`import`             |1. Erneuert die Berechtiung. 2. Importierter Cms Blöck. 3. Aktualisiert Cms Layouts 4. Aktualisiert Admin Filters Sie können auch [eigene importers](app-module.md#import-methode) anhängen.
 |health            |-                             |`health`             |Kontrolliert die Verzeichnisse und erstellt Sie, falls nicht vorhanden.
+|health/mailer     |-                             |`health/mailer`      |Prüft ob eine Verbindung zum SMTP Server durchgeführt werden kann.
 |crud/create       |-                             |`crud/create`             |Erstellt alle nötigen Daten für ein [NgRest Crud](app-admin-module-ngrest.md) mit einem Assistenten.
 |module/create     |-                             |`module/create`           |Erstellt ein [Frontend/Admin Module](app-module.md) mit einem Assistenten.
 |command           |$moduleName, $route           |`command teammodule controller/action` |Ausführen eines eigenen Konsolenbefehls.
