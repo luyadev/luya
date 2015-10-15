@@ -17,7 +17,7 @@ class SetupController extends \luya\base\Command
     /**
      * @todo don't write directly in db table (admin_user_group)
      * @todo reuse encode password function from user model
-     * @todo finde better solution for while(true)/break loop
+     * @todo find better solution for while(true)/break loop
      * @todo find better solution for title array/selection
      * @todo error handling (validate, can't save models)
      *
@@ -29,10 +29,8 @@ class SetupController extends \luya\base\Command
      */
     public function actionUser()
     {
-
         while(true){
             $email = $this->prompt('Benutzer E-Mail:');
-
             if(!empty(User::findByEmail($email))) {
                 $this->outputError('Email existiert bereits!');
             } else {
@@ -42,15 +40,15 @@ class SetupController extends \luya\base\Command
 
         $titleArray = ['Herr' => 1, 'Frau' => 2];
         $title = $this->select("Anrede:", [
-                'Herr' => '1', 'Frau' => '2'
-            ]);
+            'Herr' => '1', 'Frau' => '2'
+        ]);
 
         $firstname = $this->prompt('Vorname:');
         $lastname = $this->prompt('Nachname:');
         $password = $this->prompt('Benutzer Passwort:');
 
         if (!$this->confirm("Einen neuen Benutzer '$title $firstname $lastname, Email $email' mit dem Passwort '$password' anlegen?")) {
-            return 1;
+            return $this->outputError("Abort user creation process.");
         }
 
         $user = new User();
@@ -64,8 +62,7 @@ class SetupController extends \luya\base\Command
         $user->save();
         $userId = $user->id;
 
-        $groupModel = new Group();
-        $groupEntries = $groupModel->find()->all();
+        $groupEntries = Group::find()->all();
         $groupSelect = [];
 
         $this->output('');
@@ -76,11 +73,11 @@ class SetupController extends \luya\base\Command
         $groupId = $this->select("Benutzergruppe:", $groupSelect);
 
         $this->insert('admin_user_group', [
-                'user_id' => $userId,
-                'group_id' => $groupId,
+            'user_id' => $userId,
+            'group_id' => $groupId,
         ]);
 
-        $this->outputSuccess("Neuer Nutzer erfolgreich angelegt!");
+        return $this->outputSuccess("Der Benutzer $firstname $lastname wurde erfolgreich angelegt.");
     }
 
     /**

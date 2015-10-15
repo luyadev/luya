@@ -16,6 +16,7 @@ Befehlsübersicht
 |migrate           |-                             |`migrate`                 |Alle Migrations-Scripte in *allen Modulen* werden ausgeführt und die Datenbank-Struktur gemäss Scripte angepasst.
 |migrate/create    |$tableName [, $moduleName ]   |`migrate/create team_members teammodule` |Erstellt eine neue Migrationsdatei mit dem Tabellen Name `team_members` innerhalb des modules `teammodule`.
 |setup             |-                             |`setup`              |Führ das Luya Setup aus (= Erstellt einen Benutzer, Grupppe und die nötigen Berechtiungen).
+|setup/user         |-                            |`setup/user`         | Einen neneun Luya Benutzer erstellen.
 |import            |-                             |`import`             |1. Erneuert die Berechtiung. 2. Importierter Cms Blöck. 3. Aktualisiert Cms Layouts 4. Aktualisiert Admin Filters Sie können auch [eigene importers](app-module.md#import-methode) anhängen.
 |health            |-                             |`health`             |Kontrolliert die Verzeichnisse und erstellt Sie, falls nicht vorhanden.
 |crud/create       |-                             |`crud/create`             |Erstellt alle nötigen Daten für ein [NgRest Crud](app-admin-module-ngrest.md) mit einem Assistenten.
