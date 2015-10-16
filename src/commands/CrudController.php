@@ -177,5 +177,7 @@ class CrudController extends \luya\base\Command
         echo PHP_EOL.PHP_EOL.'Update the getMenu() method like below:'.PHP_EOL.PHP_EOL;
         echo $this->ansiFormat($getMenu, Console::FG_YELLOW);
         echo PHP_EOL;
+        
+        return 0;
     }
 }

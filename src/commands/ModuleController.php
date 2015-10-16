@@ -25,12 +25,11 @@ class ModuleController extends \luya\base\Command
         $moduleName = $this->prompt($text);
 
         if ($isAdmin && substr($moduleName, -5) !== 'admin') {
-            echo $this->ansiFormat("The provided Modulename ($moduleName) must have the suffix 'admin' as it is an Admin-Module!", Console::FG_RED).PHP_EOL;
-            exit(1);
+            return $this->outputError("The provided Modulename ($moduleName) must have the suffix 'admin' as it is an Admin-Module!");
         }
 
         if (!$this->confirm('Are you sure you want to create the '.(($isAdmin) ? 'Admin' : 'Frontend')." Module '".$moduleName."' now?")) {
-            exit(1);
+            return $this->outputError("abort by user.");
         }
 
         $basePath = Yii::$app->basePath;
@@ -46,8 +45,7 @@ class ModuleController extends \luya\base\Command
         if (!file_exists($moduleDir)) {
             mkdir($moduleDir);
         } else {
-            echo $this->ansiFormat("The Module '$moduleName' folder already exists!", Console::FG_RED).PHP_EOL;
-            exit(1);
+            return $this->outputError("The Module '$moduleName' folder already exists!");
         }
 
         $content = '<?php'.PHP_EOL;
@@ -58,17 +56,16 @@ class ModuleController extends \luya\base\Command
         $content .= '}';
 
         $modulephp = $moduleDir.DIRECTORY_SEPARATOR.'Module.php';
+        
         if (file_put_contents($modulephp, $content)) {
             $out = PHP_EOL."'modules' => [".PHP_EOL;
             $out .= "    '$moduleName' => [".PHP_EOL;
             $out .= "        'class' => '\\app\\modules\\$moduleName\\Module'".PHP_EOL;
             $out .= '    ],'.PHP_EOL;
             $out .= ']'.PHP_EOL.PHP_EOL;
-            echo $this->ansiFormat($out, Console::FG_GREEN);
-            exit(0);
-        } else {
-            echo $this->ansiFormat("Unable to write file: '".$modulephp."'", Console::FG_RED).PHP_EOL;
-            exit(1);
+            return $this->outputSuccess($out);
         }
+
+        return $this->outputError("Unable to write module file '$modulephp'.");
     }
 }

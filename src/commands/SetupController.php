@@ -90,15 +90,11 @@ class SetupController extends \luya\base\Command
     public function actionIndex()
     {
         if (!Config::has('last_import_timestamp')) {
-            echo PHP_EOL.'Info: You have to run the "import" process first. run in terminal: ./vendor/bin/luya import'.PHP_EOL.PHP_EOL;
-
-            return 1;
+            return $this->outputError("You have to run the 'import' process first. run in terminal: ./vendor/bin/luya import");
         }
 
         if (Config::has('setup_command_timestamp')) {
-            echo PHP_EOL.'Error: The setup process already have been started on the '.date('d.m.Y H:i', Config::get('setup_command_timestamp')).'. If you want to reinstall your luya project. Drop all tables from your Database, run the migrate command, run the import command and then re-run the setup command.'.PHP_EOL.PHP_EOL;
-
-            return 1;
+            return $this->outputError('The setup process already have been started on the '.date('d.m.Y H:i', Config::get('setup_command_timestamp')).'. If you want to reinstall your luya project. Drop all tables from your Database, run the migrate command, run the import command and then re-run the setup command');
         }
 
         $email = $this->prompt('Benutzer E-Mail:');
@@ -106,7 +102,7 @@ class SetupController extends \luya\base\Command
         $firstname = $this->prompt('Vorname:');
         $lastname = $this->prompt('Nachname:');
         if (!$this->confirm("Create a new user ($email) with password '$password'?")) {
-            return 1;
+            return $this->outputError('Abort by user.');
         }
 
         $salt = Yii::$app->getSecurity()->generateRandomString();
@@ -153,8 +149,6 @@ class SetupController extends \luya\base\Command
 
         Config::set('setup_command_timestamp', time());
 
-        echo "You can now login with E-Mail: '$email' and password: '$password'";
-
-        return 0;
+        return $this->outputSuccess("You can now login with the Email '$email' and password '$password'.");
     }
 }

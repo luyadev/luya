@@ -248,10 +248,10 @@ class BlockController extends \luya\base\Command
         $creation = file_put_contents($file, $content);
 
         if ($creation) {
-            $this->outputSuccess("File '$file' created");
-        } else {
-            $this->outputError("Error while creating file '$file'");
+            return $this->outputSuccess("File '$file' created");
         }
+        
+        return $this->outputError("Error while creating file '$file'");
     }
 
     private function placeholderCreator($prefix)
