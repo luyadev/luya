@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-beta1 (in progress)
 -------------------------
+- added ability to set queue list position index for importer classes.
 - added smtp test cli `health/mailer` to test SMTP connection.
 - added two-way factor auth via E-Mail when enabling `$secureLogin` in admin module.
 - added cli user creation command `setup/user`.
