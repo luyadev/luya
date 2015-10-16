@@ -461,12 +461,20 @@
 		
 		$scope.propValues = {};
 		
-		$http.get('admin/api-cms-nav/get-properties', { params: {navId: $scope.id}}).success(function(response) {
-			for(var i in response) {
-				var d = response[i];
-				$scope.propValues[d.admin_prop_id] = d.value;
-			}
-		});
+		$scope.hasValues = false;
+		
+		$scope.loadNavProperties = function() {
+			$http.get('admin/api-cms-nav/get-properties', { params: {navId: $scope.id}}).success(function(response) {
+				for(var i in response) {
+					var d = response[i];
+					$scope.propValues[d.admin_prop_id] = d.value;
+					$scope.hasValues = true;
+				}
+			});
+		};
+		
+		$scope.loadNavProperties();
+		
 		
 		$scope.togglePropMask = function() {
 			$scope.showPropForm = !$scope.showPropForm;
@@ -477,7 +485,8 @@
 		$scope.storePropValues = function() {
 			var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 			$http.post('admin/api-cms-nav/save-properties?navId='+$scope.id, $.param($scope.propValues), headers).success(function(response) {
-				console.log('neue_props_stored');
+				Materialize.toast('<span>Die Eigenschaften wurden aktualisiert.</span>', 2000);
+				$scope.loadNavProperties();
 			});
 		}
 		

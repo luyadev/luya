@@ -156,12 +156,15 @@
             <div class="row" ng-show="showPropForm">
                 <div class="col s12">
                     <div class="card-panel">
+                    <h5>Seiten Eigenschaften</h5>
+                    <div ng-show="!hasValues" class="alert alert--info">Es wurden noch keine Eigenschaften gespeichert.</div>
                         <div class="row" ng-repeat="prop in properties">
                             <zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{prop.label}}" model="propValues[prop.id]"></zaa-injector>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <button type="button" ng-click="storePropValues()" class="btn">Speichern</button>
+                                <button type="button" ng-click="storePropValues()" class="btn" ng-show="hasValues">Werte aktualisieren</button>
+                                <button type="button" ng-click="storePropValues()" class="btn" ng-show="!hasValues">Speichern</button>
                             </div>
                         </div>
                     </div>
