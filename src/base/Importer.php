@@ -23,6 +23,19 @@ namespace luya\base;
  */
 abstract class Importer extends \yii\base\Object
 {
+    CONST QUEUE_POSITION_FIRST = 0;
+    
+    CONST QUEUE_POSITION_MIDDLE = 50;
+    
+    CONST QUEUE_POSITION_LAST = 100;
+    
+    /**
+     * @var integer The priority between 0 and 100 where to Import command should be queued.
+     * + 0 = First
+     * + 100 = Last
+     */
+    public $queueListPosition = self::QUEUE_POSITION_MIDDLE;
+    
     /**
      * @var mixed|array Read only property contains the importer object.
      */

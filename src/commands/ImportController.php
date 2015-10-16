@@ -103,16 +103,31 @@ class ImportController extends \luya\base\Command implements \luya\interfaces\Im
 
     public function actionIndex()
     {
+        $queue = [];
+        
         foreach (Yii::$app->getModules() as $id => $module) {
             if ($module instanceof \luya\base\Module) {
                 $response = $module->import($this);
                 if (is_array($response)) { // importer returns an array with class names
                     foreach ($response as $class) {
                         $obj = new $class($this);
-                        $obj->run();
+                        $prio = $obj->queueListPosition;
+                        while(true) {
+                            if (!array_key_exists($prio, $queue)) {
+                                break;
+                            }
+                            $prio++;
+                        }
+                        $queue[$prio] = $obj;
                     }
                 }
             }
+        }
+        
+        ksort($queue);
+        
+        foreach($queue as $pos => $object) {
+            $object->run();
         }
 
         // @TODO: should not be related to admin module!

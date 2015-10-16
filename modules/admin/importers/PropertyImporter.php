@@ -7,6 +7,8 @@ use admin\models\Property;
 
 class PropertyImporter extends \luya\base\Importer
 {
+    public $queueListPosition = self::QUEUE_POSITION_FIRST;
+    
     public function run()
     {
         $ids = [];
@@ -24,7 +26,7 @@ class PropertyImporter extends \luya\base\Importer
         }
 
         foreach (Property::find()->where(['not in', 'id', $ids])->all() as $model) {
-            $this->getImporter()->addLog('properties', 'Removing property '.$model->var_name);
+            $this->getImporter()->addLog('properties', 'Removing property (id:'.$model->id.') '.$model->var_name);
             $model->delete();
         }
     }
