@@ -14,20 +14,11 @@ use admin\models\Property as PropertyModel;
  */
 abstract class Property extends \yii\base\Component
 {
+    const EVENT_BEFORE_RENDER = 'EVENT_BEFORE_RENDER';
+    
     public $moduleName = null;
 
     public $value = null;
-
-    /*
-    public function init()
-    {
-        if ($this->moduleName === null) {
-            throw new Exception("moduleName property can not be empty when creating property Object.");
-        }
-    }
-    */
-
-    const EVENT_BEFORE_RENDER = 'EVENT_BEFORE_RENDER';
 
     abstract public function varName();
 
