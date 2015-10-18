@@ -5,14 +5,41 @@ namespace admin\base;
 use Yii;
 use yii\filters\AccessControl;
 
+/**
+ * Base controller for all Admin-Module controllers.
+ *
+ * @author nadar
+ */
 class Controller extends \luya\base\Controller
 {
+    /**
+     * @var string Path to the admin layout
+     */
     public $layout = '@admin/views/layouts/main';
 
+    /**
+     * @var boolena Use the view folder inside the module
+     * @see \luya\base\Module
+     */
     public $useModuleViewPath = true;
 
+    /**
+     * @var boolean When enabling `$disablePermissionCheck` all actions are not secured by access controller but
+     * are do require an authtenticated user (logged in user).
+     */
     public $disablePermissionCheck = false;
 
+    /**
+     * Returns the default behavior for the AccessControl filter:
+     * + Must be logged in.
+     * + apply to all actions.
+     * + ignore if disabledPermissionCheck is enabled.
+     * + Check permission with `\admin\components\Auth::matchRoute()`.
+     * + By default not logged in users 
+     *
+     * @return array Rule-Definitions
+     * @see yii\filters\AccessControl
+     */
     public function getRules()
     {
         return [
@@ -22,7 +49,6 @@ class Controller extends \luya\base\Controller
                 'roles' => ['@'],
                 'matchCallback' => function ($rule, $action) {
                     // see if a controller property has been defined to disabled the permission checks
-                    // @todo but we should check for logged in admin?
                     if ($action->controller->disablePermissionCheck) {
                         return true;
                     }
@@ -35,6 +61,11 @@ class Controller extends \luya\base\Controller
         ];
     }
 
+    /**
+     * Attach the AccessControl filter behavior for the controler.
+     *
+     * @return array
+     */
     public function behaviors()
     {
         return [
