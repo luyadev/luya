@@ -2,12 +2,30 @@
 
 namespace admin\base;
 
-abstract class Filter
+use Exception;
+use admin\models\StorageFilter;
+use admin\models\StorageEffect;
+use admin\models\StorageFilterChain;
+
+/**
+ * Base class for all Filters
+ * @author nadar
+ */
+abstract class Filter extends \yii\base\Object
 {
+    /**
+     * @var string Resize-Effect
+     */
     const EFFECT_RESIZE = 'resize';
 
+    /**
+     * @var string Thumbnail-Effect
+     */
     const EFFECT_THUMBNAIL = 'thumbnail';
 
+    /**
+     * @var string Crop-Effect
+     */
     const EFFECT_CROP = 'crop';
 
     abstract public function identifier();
@@ -16,51 +34,89 @@ abstract class Filter
 
     abstract public function chain();
 
+    /**
+     * @var array An array containing all log messages
+     */
     public $log = [];
-
-    public function getFilterId()
+    
+    /**
+     * Add message to log array
+     *
+     * @param string $message The message to log
+     * @return void
+     */
+    public function addLog($message)
     {
-        $data = \admin\models\StorageFilter::find()->where(['identifier' => $this->identifier()])->one();
-        if ($data) {
-            $data->scenario = 'restupdate';
-            $data->name = $this->name();
-            $data->update();
-
-            return $data->id;
-        } else {
-            // insert new filter
-            $model = new \admin\models\StorageFilter();
-            $model->scenario = 'restcreate';
-            $model->attributes = [
+        $this->log[] = $message;
+    }
+    
+    /**
+     * Return the log array
+     *
+     * @return array Array with log messages.
+     */
+    public function getLog()
+    {
+        return $this->log;
+    }
+    
+    /**
+     * Find the model based on the identifier. If the identifier does not exists in the database, create
+     * new record in the database.
+     * 
+     * @return \admin\models\StorageFilter
+     */
+    public function findModel()
+    {
+        // find filter model based on the identifier
+        $model = StorageFilter::find()->where(['identifier' => $this->identifier()])->one();
+        // if no model exists, create new record
+        if (!$model) {
+            $model = new StorageFilter();
+            $model->setAttributes([
                 'name' => $this->name(),
                 'identifier' => $this->identifier(),
-            ];
-            if ($model->save()) {
-                $this->log[] = "created a new filter '".$this->identifier()."'.";
-
-                return $model->id;
-            }
+            ]);
+            $model->save(false);
+            $this->addLog("added new filter '".$this->identifier()."' to database.");
         }
+        
+        return $model;
     }
-
-    private function resolveEffect($effectIdentifier)
+    
+    /**
+     * Find the effect model based on the effect identifier. If the effect could not found an exception will
+     * be thrown.
+     * 
+     * @param string $effectIdentifier The name of effect, used EFFECT prefixed constants like
+     * + EFFECT_RESIZE
+     * + EFFECT_THUMBNAIL
+     * + EFFECT_CROP
+     * @return array Contain an array with the effect properties.
+     * @throws Exception 
+     */
+    public function findEffect($effectIdentifier)
     {
-        $model = \admin\models\StorageEffect::find()->where(['identifier' => $effectIdentifier])->asArray()->one();
-        if ($model) {
-            return $model;
+        // find effect model based on the effectIdentifier
+        $model = StorageEffect::find()->where(['identifier' => $effectIdentifier])->asArray()->one();
+        // if the effect model could not found, throw Exception.
+        if (!$model) {
+            throw new Exception("The requested effect '$effectIdentifier' does not exist.");
         }
-
-        throw new \Exception("the provieded effect '$effectIdentifier' identifier does not exists in database.");
+        // array
+        return $model;
     }
-
+    
     /**
      * create the output for the exec import script like you would insert the data from the admin view. (json response, find effect_id from the effect identifier).
+     * 
+     * @todo cleanup & doc
      */
     public function getChain()
     {
         $data = [];
         foreach ($this->chain() as $row) {
-            $effect = $this->resolveEffect($row[0]);
+            $effect = $this->findEffect($row[0]);
 
             $params = json_decode($effect['imagine_json_params'], true);
 
@@ -74,7 +130,7 @@ abstract class Filter
             }
 
             if ($notfound) {
-                throw new \Exception("the effect argument '$key' with value '$value' does not exists in the vars list of the effect '{$effect['name']}'");
+                throw new Exception("the effect argument '$key' with value '$value' does not exists in the vars list of the effect '{$effect['name']}'");
             }
 
             $data[] = ['effect_id' => $effect['id'], 'effect_json_values' => json_encode($row[1])];
@@ -83,14 +139,26 @@ abstract class Filter
         return $data;
     }
 
+    /**
+     * @todo cleanup & doc
+     */
     public function save()
     {
-        $filterId = $this->getFilterId();
+        $model = $this->findModel();
+        
+        // update the name of the filter if changed
+        if ($model->name !== $this->name()) {
+            $model->setAttribute('name', $this->name());
+            $model->update(false);
+            $this->addLog("Filter name '".$this->name()."' have been updated for identifier '".$this->identifier()."'.");
+        }
+        
+        $filterId = $model->id;
 
         $processed = [];
 
         foreach ($this->getChain() as $chain) {
-            $model = \admin\models\StorageFilterChain::find()->where(['filter_id' => $filterId, 'effect_id' => $chain['effect_id']])->one();
+            $model = StorageFilterChain::find()->where(['filter_id' => $filterId, 'effect_id' => $chain['effect_id']])->one();
             if ($model) {
                 $model->effect_json_values = $chain['effect_json_values'];
                 if ($model->save()) {
@@ -98,7 +166,7 @@ abstract class Filter
                     $processed[] = $model->id;
                 }
             } else {
-                $insert = new \admin\models\StorageFilterChain();
+                $insert = new StorageFilterChain();
                 $insert->attributes = [
                     'filter_id' => $filterId, 'effect_id' => $chain['effect_id'], 'effect_json_values' => $chain['effect_json_values'],
                 ];
@@ -115,7 +183,8 @@ abstract class Filter
         }
 
         // find old effects
-        $data = \admin\models\StorageFilterChain::find()->where('('.implode(' AND ', $where).') AND filter_id='.$filterId)->all();
+        // @todo use where("not in", "id", $where)
+        $data = StorageFilterChain::find()->where('('.implode(' AND ', $where).') AND filter_id='.$filterId)->all();
         foreach ($data as $deletion) {
             $this->log[] = "deleted old chain value {$deletion->id}.";
             $deletion->delete();
