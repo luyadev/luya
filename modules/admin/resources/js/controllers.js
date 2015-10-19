@@ -315,6 +315,42 @@
 		};
 	});
 	
+	zaa.controller("ActiveWindowGroupAuth", function($scope, $http, CacheReloadService) {
+		
+		$scope.crud = $scope.$parent; // {{ data.aw.itemId }}
+		
+		$scope.reload = function() {
+			CacheReloadService.reload();
+		}
+		
+		$scope.rights = [];
+		
+		$scope.auths = [];
+		
+		$scope.save = function(data) {
+			$scope.crud.sendActiveWindowCallback('saveRights', {'data' : data }).then(function(response) {
+				$scope.getRights();
+				$scope.reload();
+			});
+		};
+		
+		$scope.toggleAll = function() {
+			console.log('toggle_all');
+		};
+		
+		$scope.getRights = function() {
+			$http.get($scope.crud.getActiveWindowCallbackUrl('getRights')).success(function(response) {
+				$scope.rights = response.rights;
+				$scope.auths = response.auths;
+			})
+		}
+		
+		$scope.$watch(function() { return $scope.data.aw.itemId }, function(n, o) {
+			$scope.getRights();
+		});
+		
+	});
+	
 	// DefaultController.js.
 	
 	zaa.controller("DefaultController", function ($scope, $http, $state, $stateParams) {
