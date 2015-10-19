@@ -239,6 +239,13 @@
                                     <button class="btn waves-effect waves-light" type="button" ng-click="save(itemCopy, typeDataCopy)">Speichern <i class="mdi-content-send right"></i></button>
                                 </div>
                             </div>
+                            
+                            <div class="alert alert--danger" ng-show="errors.length">
+                                <ul>
+                                    <li ng-repeat="err in errors">{{err.message}}</li>
+                                </ul>
+                            </div>
+                            
                         </div>
                         <!-- /PAGE__CONTENT -->
 

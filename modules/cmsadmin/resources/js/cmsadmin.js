@@ -573,7 +573,10 @@
 			$scope.typeDataCopy = angular.copy($scope.typeData);
 		}
 		
+		$scope.errors = [];
+		
 		$scope.save = function(itemCopy, typeDataCopy) {
+			$scope.errors = [];
 			var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 			var navItemId = itemCopy.id;
 			$http.post('admin/api-cms-navitem/update-item?navItemId=' + navItemId, $.param({ title : itemCopy.title, rewrite : itemCopy.rewrite }), headers).success(function(response) {
@@ -582,10 +585,9 @@
 					MenuService.refresh();
 					$scope.refresh();
 					$scope.toggleSettings();
-					
 				});
 			}).error(function(e) {
-				console.log(e);
+				$scope.errors = e;
 			})
 		};
 		
