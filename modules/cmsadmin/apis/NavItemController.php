@@ -3,6 +3,7 @@
 namespace cmsadmin\apis;
 
 use Yii;
+use Exception;
 use cmsadmin\models\Nav;
 use cmsadmin\models\NavItem;
 
@@ -48,7 +49,7 @@ class NavItemController extends \admin\base\RestController
         $model = NavItem::find()->where(['id' => $navItemId])->one();
 
         if (!$model) {
-            throw new \Exception('could not find the model to validate');
+            throw new Exception('Unable to find item id ' . $navItemId);
         }
 
         $model->scenario = 'meta';
@@ -60,7 +61,7 @@ class NavItemController extends \admin\base\RestController
             }
         }
 
-        return $model->getErrors();
+        return $this->sendModelError($model);
     }
 
     /**
