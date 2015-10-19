@@ -58,7 +58,11 @@ class FilterImporter extends \luya\base\Importer
             $filterClassName = $file['ns'];
             if (class_exists($filterClassName)) {
                 $object = new $filterClassName();
-                $this->getImporter()->addLog('filters', implode(' | ', $object->save()));
+                $object->save();
+                $log = $object->getLog();
+                if (count($log) > 0) {
+                    $this->getImporter()->addLog('filters', implode(", ", $log));
+                }
             }
         }
     }
