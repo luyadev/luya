@@ -5,6 +5,7 @@ namespace admin\base;
 use Yii;
 use Exception;
 use admin\components\Auth;
+use admin\ngrest\base\Model;
 
 /**
  * Wrapper for yii2 basic rest controller used with a model class. The wrapper is made to
@@ -16,9 +17,9 @@ class RestActiveController extends \yii\rest\ActiveController implements \luya\r
 {
     use \luya\rest\BehaviorTrait;
 
-    public $createScenario = 'restcreate';
+    public $createScenario = Model::SCENARIO_RESTCREATE;
 
-    public $updateScenario = 'restupdate';
+    public $updateScenario = Model::SCENARIO_RESTUPDATE;
 
     public function userAuthClass()
     {
