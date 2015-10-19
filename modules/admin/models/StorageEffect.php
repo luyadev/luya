@@ -32,6 +32,7 @@ class StorageEffect extends \admin\ngrest\base\Model
     public function scenarios()
     {
         return [
+            'default' => ['name', 'identifier', 'imagine_name', 'imagine_json_params'],
             'restcreate' => ['name', 'identifier', 'imagine_name', 'imagine_json_params'],
             'restupdate' => ['name', 'identifier', 'imagine_name', 'imagine_json_params'],
         ];

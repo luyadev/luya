@@ -32,6 +32,7 @@ class StorageFilter extends \admin\ngrest\base\Model
     public function scenarios()
     {
         return [
+            'default' => ['name', 'identifier'],
             'restcreate' => ['name', 'identifier'],
             'restupdate' => ['name', 'identifier'],
         ];
