@@ -15,17 +15,17 @@ use yii\helpers\Json;
 abstract class Filter extends \yii\base\Object
 {
     /**
-     * @var string Resize-Effect
+     * Resize-Effect
      */
     const EFFECT_RESIZE = 'resize';
 
     /**
-     * @var string Thumbnail-Effect
+     * Thumbnail-Effect
      */
     const EFFECT_THUMBNAIL = 'thumbnail';
 
     /**
-     * @var string Crop-Effect
+     * Crop-Effect
      */
     const EFFECT_CROP = 'crop';
 
@@ -47,7 +47,7 @@ abstract class Filter extends \yii\base\Object
      * An array with represents the chain effects and the value of the defined effects.
      *
      * @return array Example response for chain() method:
-     * 
+     *
      * ```php
      * return [
      *     [self::EFFECT_THUMBNAIL, [
@@ -94,7 +94,7 @@ abstract class Filter extends \yii\base\Object
      * Find the model based on the identifier. If the identifier does not exists in the database, create
      * new record in the database.
      *
-     * @return \admin\models\StorageFilter
+     * @return object \admin\models\StorageFilter
      */
     public function findModel()
     {
@@ -139,20 +139,20 @@ abstract class Filter extends \yii\base\Object
     
     /**
      * Get an array with all the effect param options, based on the effect params defintion.
-     * 
+     *
      * @param array $effectParamsDefintion
      * @throws Exception When the vars key does not exists in the effect definition.
      * @return array
      */
-    public function getEffectParamsList($effectParamsDefintion)
+    public function getEffectParamsList($effectParams)
     {
         if ($this->_effectParamsList === null) {
             // see if the the effect defintion contains a vars key
-            if (!array_key_exists('vars', $effectParamsDefintion)) {
+            if (!array_key_exists('vars', $effectParams)) {
                 throw new Exception("Required 'vars' key not found in effect definition array.");
             }
             
-            foreach($effectParamsDefintion['vars'] as $item) {
+            foreach ($effectParams['vars'] as $item) {
                 $this->_effectParamsList[] = $item['var'];
             }
         }
@@ -170,7 +170,7 @@ abstract class Filter extends \yii\base\Object
     public function getChain()
     {
         $data = [];
-        // get the chain from the effect, must be an array 
+        // get the chain from the effect, must be an array
         foreach ($this->chain() as $chainRow) {
             // set variables from chain array
             $effectIdentifier = $chainRow[0];
@@ -214,7 +214,7 @@ abstract class Filter extends \yii\base\Object
             if ($model) {
                 if (Json::decode($chain['effect_json_values']) != $model->effect_json_values) {
                     $model->effect_json_values = $chain['effect_json_values'];
-                    if($model->update(false)) {
+                    if ($model->update(false)) {
                         $this->addLog("Effect chain option have been updated for '{$filterModel->name}'.");
                     }
                 }
