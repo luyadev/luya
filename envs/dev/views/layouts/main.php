@@ -41,8 +41,15 @@ $links = Yii::$app->links;
             <div class="container">
                 <ul>
                     <?php foreach ($links->findByArguments(['cat' => 'default', 'lang' => $composition->getKey('langShortCode'), 'parent_nav_id' => 0]) as $item): ?>
-                        <li class="<?= ($links->activeUrl == $item['url']) ? "active" : ""; ?>"><a href="<?= $composition->getFull() . $item['url'];?>"><?= $item['title']; ?></a></li>
+                        <li class="<?= ($links->activeUrl == $item['url']) ? "active" : ""; ?>"><a href="<?= $item['full_url'];?>"><?= $item['title']; ?></a></li>
                     <?php endforeach; ?>
+                </ul>
+            </div>
+            <div class="container" style="background-color: red;">
+                <ul>
+                    <? foreach(Yii::$app->links->findByArguments(['cat' => 'default', 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(Yii::$app->links, 2)]) as $item): ?>
+                        <li><a href="<?= $item['full_url'];?>"><?= $item['title']; ?></a></li>
+                    <? endforeach; ?>
                 </ul>
             </div>
         </div>
