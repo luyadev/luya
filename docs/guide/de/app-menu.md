@@ -1,15 +1,15 @@
 Layout Menu
 ===========
 
-> Seit 1.0.0-alpha20 setzt findByArguments immer die akuell aktive sprache. Somit muss dieses Argument nicht angegeben werden um sich in der aktuellen Sprache zu bewegen.
+> Seit 1.0.0-alpha20 setzt findAll immer die akuell aktive sprache. Somit muss dieses Argument nicht angegeben werden um sich in der aktuellen Sprache zu bewegen.
 
-> Seit 1.0.0-alpha20 gibts es `findAll` für `findByArguments` und `findOne` für `findOneByArguments`.
+> Seit 1.0.0-alpha20 gibts es `findAll` für `findAll` und `findOne` für `findOneByArguments`.
 
 Um eine Navigation oder Subnavigation innerhalb eines Layouts (oder cmsLayouts) zu erstellen benötigen Sie die `$app->links` Komponente, welche vom CMS-Modul zur Verfügung gestellt wird.
 
 > Tipp: Die Links Component wird meistens am Start der `main.php` als Variable `$links` hinterlegt `$links = Yii::$app->links;`.
 
-Das Links Komponentenobjekt bietet die mächtige Funktion `findByArguments()`, wobei die Argumente der Methode einem Array entsprechen müssen. Vergleichsoperatoren für die `findByArguments` Methode stehen folgende Keys zur Verfügung:
+Das Links Komponentenobjekt bietet die mächtige Funktion `findAll()`, wobei die Argumente der Methode einem Array entsprechen müssen. Vergleichsoperatoren für die `findAll` Methode stehen folgende Keys zur Verfügung:
 
 | Key | Beschreibung | 
 | --- | ------------ | 
@@ -29,13 +29,13 @@ Sie können nun zum Beispiel alle Seiten auf dem Root Level ausgeben.
 
 ```php
 $links = Yii::$app->links;
-$menu = $links->findByArguments(['parent_nav_id' => 0]);
+$menu = $links->findAll(['parent_nav_id' => 0]);
 foreach($menu as $item) {
     var_dump($item);
 }
 ```
 
-> Die Ausgabe ist IMMER ein Array. Wenn Sie einen einzelnen Eintrag möchten, können Sie `FindOneByArguments()` verwenden.
+> Die Ausgabe ist IMMER ein Array. Wenn Sie einen einzelnen Eintrag möchten, können Sie `findOne()` verwenden.
 
 Sie können auch mehrere Argumente verbinden. Wenn wir nun alle Elemente auf dem Root Level für die Sprache 'de' wollen :
 
@@ -72,14 +72,14 @@ Mehrteilige Navigation
 
 ```php
 <ul>
-<? foreach(Yii::$app->links->findByArguments(['cat' => 'default', 'parent_nav_id' => 0]) as $item): ?>
-        <li><a href="<?= $composition->getFull() . $item['url'];?>"><?= $item['title']; ?></a>
+<? foreach(Yii::$app->links->findAll(['cat' => 'default', 'parent_nav_id' => 0]) as $item): ?>
+        <li><a href="<?= $item['full_url'];?>"><?= $item['title']; ?></a>
             <ul>
-                <? foreach(Yii::$app->links->findByArguments(['parent_nav_id' => $item['nav_id']]) as $subItem): ?>
-                <li><a href="<?= $composition->getFull() . $subItem['url'];?>"><?= $subItem['title']?></a>
+                <? foreach(Yii::$app->links->findAll(['parent_nav_id' => $item['nav_id']]) as $subItem): ?>
+                <li><a href="<?= $subItem['full_url'];?>"><?= $subItem['title']?></a>
                 <ul>
-                    <? foreach(Yii::$app->links->findByArguments(['parent_nav_id' => $subItem['nav_id']]) as $subSubItem): ?>
-                    <li><a href="<?= $composition->getFull() . $subSubItem['url'];?>"><?= $subSubItem['title']?></a>
+                    <? foreach(Yii::$app->links->findAll(['parent_nav_id' => $subItem['nav_id']]) as $subSubItem): ?>
+                    <li><a href="<?= $subSubItem['full_url'];?>"><?= $subSubItem['title']?></a>
                     <? endforeach; ?>
                 </ul>
                 <? endforeach; ?>
@@ -95,22 +95,22 @@ Geteilte Navigationen
 ```php
 <!-- FIRST LEVEL -->
 <ul>
-    <? foreach(Yii::$app->links->findByArguments(['cat' => 'default', 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, 1)]) as $item): ?>
-        <li><a href="<?= $composition->getFull() . $item['url'];?>"><?= $item['title']; ?></a></li>
+    <? foreach(Yii::$app->links->findAll(['cat' => 'default', 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, 1)]) as $item): ?>
+        <li><a href="<?= $item['full_url'];?>"><?= $item['title']; ?></a></li>
     <? endforeach; ?>
 </ul>
 
 <!-- SECOND LEVEL -->
 <ul>
-    <? foreach(Yii::$app->links->findByArguments(['cat' => 'default', 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, 2)]) as $item): ?>
-        <li><a href="<?= $composition->getFull() . $item['url'];?>"><?= $item['title']; ?></a></li>
+    <? foreach(Yii::$app->links->findAll(['cat' => 'default', 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, 2)]) as $item): ?>
+        <li><a href="<?= $item['full_url'];?>"><?= $item['title']; ?></a></li>
     <? endforeach; ?>
 </ul>
 
 <!-- THIRD LEVEL -->
  <ul>
-    <? foreach(Yii::$app->links->findByArguments(['cat' => 'default', 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, 3)]) as $item): ?>
-        <li><a href="<?= $composition->getFull() . $item['url'];?>"><?= $item['title']; ?></a></li>
+    <? foreach(Yii::$app->links->findAll(['cat' => 'default', 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, 3)]) as $item): ?>
+        <li><a href="<?= $item['full_url'];?>"><?= $item['title']; ?></a></li>
     <? endforeach; ?>
 </ul>
 ``` 
