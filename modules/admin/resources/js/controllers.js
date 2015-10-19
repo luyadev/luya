@@ -402,8 +402,12 @@
 	
 	// LayoutMenuController.js
 	
-	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout) {
+	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, CacheReloadService) {
 	
+		$scope.reload = function() {
+			CacheReloadService.reload();
+		}
+		
 	    $scope.userMenuOpen = false;
 	
 		$scope.notify = null;

@@ -88,6 +88,20 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 		}
 	});
 	
+	zaa.factory('CacheReloadService', function($http, $window) {
+		
+		var service = [];
+		
+		service.reload = function() {
+			$http.get("admin/api-admin-defaults/cache").success(function(response) {
+				$window.location.reload();
+			});
+		}
+		
+		return service;
+		
+	});
+	
 	zaa.factory("AdminClassService", function() {
 		
 		var service = [];

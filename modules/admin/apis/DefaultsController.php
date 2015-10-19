@@ -2,6 +2,7 @@
 
 namespace admin\apis;
 
+use Yii;
 use admin\models\Lang;
 use admin\models\Property;
 
@@ -21,5 +22,14 @@ class DefaultsController extends \admin\base\RestController
     public function actionProperties()
     {
         return Property::find()->all();
+    }
+    
+    public function actionCache()
+    {
+        if (Yii::$app->has('cache')) {
+            Yii::$app->cache->flush();
+        }
+        
+        return true;
     }
 }
