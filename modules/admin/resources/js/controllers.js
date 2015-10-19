@@ -335,8 +335,16 @@
 		};
 		
 		$scope.toggleAll = function() {
-			console.log('toggle_all');
+			angular.forEach($scope.auths,function(value, key) {
+				$scope.rights[value.id] = {base: 1, create: 1, update: 1, 'delete': 1 };
+			})
 		};
+		
+		$scope.untoggleAll = function() {
+			angular.forEach($scope.auths,function(value, key) {
+				$scope.rights[value.id] = {base: 0, create: 0, update: 0, 'delete': 0 };
+			})
+		}
 		
 		$scope.getRights = function() {
 			$http.get($scope.crud.getActiveWindowCallbackUrl('getRights')).success(function(response) {

@@ -10,11 +10,7 @@ class GroupAuth extends \admin\ngrest\base\ActiveWindow
 
     public function index()
     {
-        return $this->render('index', [
-            'groupId' => $this->getItemId(),
-            'auth' => $this->getAuthData(),
-            'subs' => $this->getRightsData(),
-        ]);
+        return $this->render('index');
     }
     
     public function callbackSaveRights()
@@ -54,7 +50,14 @@ class GroupAuth extends \admin\ngrest\base\ActiveWindow
     
     private function getAuthData()
     {
-        return (new \yii\db\Query())->select('*')->from('admin_auth')->orderBy('module_name, alias_name ASC')->all();
+        $data = (new \yii\db\Query())->select('*')->from('admin_auth')->orderBy('module_name, alias_name ASC')->all();
+        $last = false;
+        foreach($data as $k => $v) {
+            $data[$k]['is_head'] = ($last !== $v['module_name']) ? 1 : 0;
+            $data[$k]['group_alias'] = ucfirst($v['module_name']);
+            $last = $v['module_name'];
+        }
+        return $data;
     }
     
     private function getRightsData()
@@ -74,34 +77,4 @@ class GroupAuth extends \admin\ngrest\base\ActiveWindow
     
         return $subs;
     }
-
-    /*
-    public function callbackUpdateSubscription()
-    {
-        $rights = Yii::$app->request->post('rights', []);
-
-        $safeCopy = [];
-        foreach ($rights as $authId => $options) {
-            if (!isset($options['base'])) {
-                return $this->response(false, ['message' => 'you have to select at least the ANZEIGEN value.']);
-            }
-            $safeCopy[$authId] = $options;
-        }
-
-        // remove all group auth
-        Yii::$app->db->createCommand()->delete('admin_group_auth', ['group_id' => $this->getItemId()])->execute();
-
-        foreach ($safeCopy as $authId => $options) {
-            Yii::$app->db->createCommand()->insert('admin_group_auth', [
-                'group_id' => $this->getItemId(),
-                'auth_id' => $authId,
-                'crud_create' => (isset($options['create'])) ? 1 : 0,
-                'crud_update' => (isset($options['update'])) ? 1 : 0,
-                'crud_delete' => (isset($options['delete'])) ? 1 : 0,
-            ])->execute();
-        }
-
-        return $this->response(true, ['message' => 'well done']);
-    }
-    */
 }
