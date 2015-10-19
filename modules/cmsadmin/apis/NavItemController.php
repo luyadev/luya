@@ -51,8 +51,7 @@ class NavItemController extends \admin\base\RestController
         if (!$model) {
             throw new Exception('Unable to find item id ' . $navItemId);
         }
-
-        $model->scenario = 'meta';
+        $model->setParentFromModel();
         $model->attributes = $_POST;
         $v = $model->validate();
         if ($model->validate()) {

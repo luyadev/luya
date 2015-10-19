@@ -178,6 +178,7 @@ class Nav extends \yii\db\ActiveRecord
 
         $nav = $this;
         $navItem = new NavItem();
+        $navItem->parent_nav_id = $parentNavId;
         $navItemPage = new \cmsadmin\models\NavItemPage();
 
         $nav->attributes = ['parent_nav_id' => $parentNavId, 'cat_id' => $catId, 'is_hidden' => 1, 'is_offline' => 1];
@@ -213,6 +214,7 @@ class Nav extends \yii\db\ActiveRecord
         $_errors = [];
 
         $navItem = new NavItem();
+        $navItem->parent_nav_id = $parentNavId;
         $navItemPage = new \cmsadmin\models\NavItemPage();
 
         $navItem->attributes = ['nav_id' => $navId, 'lang_id' => $langId, 'title' => $title, 'rewrite' => $rewrite, 'nav_item_type' => 1];
@@ -243,6 +245,7 @@ class Nav extends \yii\db\ActiveRecord
 
         $nav = $this;
         $navItem = new NavItem();
+        $navItem->parent_nav_id = $parentNavId;
         $navItemModule = new \cmsadmin\models\NavItemModule();
 
         $nav->attributes = ['parent_nav_id' => $parentNavId, 'cat_id' => $catId, 'is_hidden' => 1, 'is_offline' => 1];
@@ -278,6 +281,7 @@ class Nav extends \yii\db\ActiveRecord
         $_errors = [];
 
         $navItem = new NavItem();
+        $navItem->parent_nav_id = $parentNavId;
         $navItemModule = new \cmsadmin\models\NavItemModule();
 
         $navItem->attributes = ['nav_id' => $navId, 'lang_id' => $langId, 'title' => $title, 'rewrite' => $rewrite, 'nav_item_type' => 2];

@@ -18,6 +18,8 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
 
     const TYPE_REDIRECT = 3;
 
+    public $parent_nav_id = null;
+    
     public function init()
     {
         parent::init();
@@ -53,7 +55,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     {
         return [
             [['lang_id', 'title', 'rewrite', 'nav_item_type'], 'required'],
-            [['rewrite'], 'validateRewrite', 'on' => ['meta']],
+            //[['rewrite'], 'validateRewrite', 'on' => ['meta']],
             [['nav_id'], 'safe'],
         ];
     }
@@ -62,7 +64,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     {
         return [
             'default' => ['title', 'rewrite', 'nav_item_type', 'nav_id', 'lang_id'],
-            'meta' => ['title', 'rewrite'],
+            //'meta' => ['title', 'rewrite'],
         ];
     }
 
@@ -98,17 +100,25 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
 
         return $model->update();
     }
-
+    
+    public function setParentFromModel()
+    {
+        $this->parent_nav_id = $this->nav->parent_nav_id;
+    }
+    
     public function verifyRewrite($rewrite, $langId)
     {
         if (Yii::$app->hasModule($rewrite)) {
             $this->addError('rewrite', 'Die URL darf nicht verwendet werden da es ein Modul mit dem gleichen Namen gibt.');
-
             return false;
         }
 
-        if ($this->find()->where(['rewrite' => $rewrite, 'lang_id' => $langId])->one()) {
-            $this->addError('rewrite', 'Diese URL existiert bereits und ist deshalb ungültig');
+        if ($this->parent_nav_id === null) {
+            $this->addError('parent_nav_id', 'parent_nav_id can not be null to verify the rewrite validation process.');
+        }
+        
+        if ($this->find()->where(['rewrite' => $rewrite, 'lang_id' => $langId])->leftJoin('cms_nav', 'cms_nav_item.nav_id=cms_nav.id')->andWhere(['=', 'cms_nav.parent_nav_id', $this->parent_nav_id])->one()) {
+            $this->addError('rewrite', 'Diese URL existiert bereits und ist deshalb ungültig.');
 
             return false;
         }
