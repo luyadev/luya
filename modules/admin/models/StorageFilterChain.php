@@ -2,6 +2,8 @@
 
 namespace admin\models;
 
+use yii\helpers\Json;
+
 class StorageFilterChain extends \yii\db\ActiveRecord
 {
     public static function tableName()
@@ -27,13 +29,13 @@ class StorageFilterChain extends \yii\db\ActiveRecord
     public function eventBeforeValidate()
     {
         if (is_array($this->effect_json_values)) {
-            $this->effect_json_values = json_encode($this->effect_json_values);
+            $this->effect_json_values = Json::encode($this->effect_json_values);
         }
     }
 
     public function eventAfterFind()
     {
-        $this->effect_json_values = json_decode($this->effect_json_values, false);
+        $this->effect_json_values = Json::decode($this->effect_json_values);
     }
 
     public function getEffect()
