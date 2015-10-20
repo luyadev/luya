@@ -44,7 +44,8 @@
             "crawler\\" : "../../modules/crawler",
             "crawleradmin\\" : "../../modules/crawleradmin",
             "moduletest\\" : "modules/moduletest",
-            "styleguide\\" : "../../modules/styleguide"
+            "styleguide\\" : "../../modules/styleguide",
+            "exporter\\" : "../../modules/exporter"
         }
     }
 }
