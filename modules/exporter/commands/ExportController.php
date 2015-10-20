@@ -5,14 +5,23 @@ namespace exporter\commands;
 use Yii;
 use luya\helpers\Zip;
 use luya\helpers\FileHelper;
+use Ifsnop\Mysqldump;
 
 class ExportController extends \luya\base\Command
 {
     public function actionIndex()
     {
-        $folder = Yii::getAlias('@web/public_html/storage');
-        FileHelper::createDirectory(Yii::getAlias('@runtime/exporter/'));
+        $hash = time();
+        $cacheFolder = Yii::getAlias('@runtime/exporter/' . $hash);
+        
+        FileHelper::createDirectory($cacheFolder);
+        
+        $dump = new Mysqldump\Mysqldump(Yii::$app->db->dsn, Yii::$app->db->username, Yii::$app->db->password);
+        $dump->start($cacheFolder . '/mysql.sql');
+        
+        FileHelper::copyDirectory(Yii::getAlias('@web/public_html/storage'), $cacheFolder.'/storage');
+        
         $save = Yii::getAlias($this->module->downloadFile);
-        Zip::dir($folder, $save);
+        Zip::dir($cacheFolder, $save);
     }
 }
