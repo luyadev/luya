@@ -24,8 +24,6 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
     {
         $config->aw->register(new \admin\aws\ChangePassword(), 'Passwort ändern');
 
-        //$config->activeWindow->register(new \admin\aws\Delete(), 'Löschen');
-
         $config->create->field('title', 'Anrede')->selectArray(static::getTitles(), 0);
         $config->create->field('firstname', 'Vorname')->text();
         $config->create->field('lastname', 'Nachname')->text();
@@ -87,9 +85,9 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
             'restcreate' => ['title', 'firstname', 'lastname', 'email', 'password'],
             'restupdate' => ['title', 'firstname', 'lastname', 'email'],
             'changepassword' => ['password', 'password_salt'],
-            'login' => ['email', 'password'],
+            'login' => ['email', 'password', 'force_reload'],
             'securelayer' => ['secure_token'],
-            'default' => ['title', 'firstname', 'lastname', 'email', 'password'],
+            'default' => ['title', 'firstname', 'lastname', 'email', 'password', 'force_reload'],
         ];
     }
 

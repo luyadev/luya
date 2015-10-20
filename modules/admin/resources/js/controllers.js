@@ -456,11 +456,20 @@
 	
 		$scope.notify = null;
 		
+		$scope.forceReload = 0;
+		
 		$scope.showOnlineContainer = false;
 		
 		(function tick(){
 			$http.get('admin/api-admin-timestamp', { ignoreLoadingBar: true }).success(function(response) {
-				$scope.notify = response;
+				$scope.forceReload = response.forceReload;
+				if ($scope.forceReload) {
+					var reload = confirm("Das System wurde aktualisiert un muss neu geladen werden, bitte speichern Sie das aktuelle Formular. (Wenn Sie auf 'Abbrechen' klicken wird dieser Dialog in 30 Sekunden wieder erscheinen.)");
+					if (reload) {
+						$scope.reload();
+					}
+				}
+				$scope.notify = response.useronline;
 				$timeout(tick, 25000);
 			})
 		})();

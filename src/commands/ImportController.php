@@ -3,6 +3,7 @@
 namespace luya\commands;
 
 use Yii;
+use admin\models\Config;
 
 class ImportController extends \luya\base\Command implements \luya\interfaces\ImportCommand
 {
@@ -130,9 +131,10 @@ class ImportController extends \luya\base\Command implements \luya\interfaces\Im
             $object->run();
         }
 
-        // @TODO: should not be related to admin module!
-        \admin\models\Config::set('last_import_timestamp', time());
-
+        if (Yii::$app->hasModule('admin')) {
+            Config::set('last_import_timestamp', time());
+            Yii::$app->db->createCommand()->update("admin_user", ['force_reload' => 1])->execute();
+        }
         return $this->outputSuccess(print_r($this->_log, true));
     }
 }

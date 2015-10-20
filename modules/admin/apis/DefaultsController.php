@@ -30,6 +30,10 @@ class DefaultsController extends \admin\base\RestController
             Yii::$app->cache->flush();
         }
         
+        $user = Yii::$app->adminuser->identity;
+        $user->force_reload = 0;
+        $user->save(false);
+        
         return true;
     }
 }

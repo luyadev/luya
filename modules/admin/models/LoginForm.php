@@ -65,6 +65,7 @@ class LoginForm extends \yii\base\Model
         if ($this->validate()) {
             $user = $this->getUser();
             $user->scenario = 'login';
+            $user->force_reload = 0;
             $user->auth_token = Yii::$app->security->hashData(Yii::$app->security->generateRandomString(), $user->password_salt);
             $user->save();
 
