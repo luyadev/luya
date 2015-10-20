@@ -5,20 +5,9 @@ namespace admin\base;
 use yii\helpers\ArrayHelper;
 
 /**
- * define in module settings the ngrestConfigLinker property of each Module to override the local
- * use ngRestConfig.
- * 
- * ```php
- * [
- *  'class' => 'path\to\Module',
- *  'ngrestConfigLinker' => [
- *      'api-admin-user' => \new\path\to\Config::className(),
- *  ]
- * ]  
- * ```
+ * Admin-Module class
  * 
  * @todo move node(), nodeRoute(), group(), itemApi(), itemRoute() into a seperate class.
- *
  * @author nadar
  */
 class Module extends \luya\base\Module
@@ -27,6 +16,38 @@ class Module extends \luya\base\Module
 
     public $requiredComponents = ['db'];
 
+    /**
+     * @var array The config linker property can specific the configuration class for ngRest model where the key
+     * is the `api` and the value is the class to the config. An array could look like this:
+     * 
+     * ```php
+     * [
+     *     'api-admin-user' => \path\to\Config::className(),
+     *     'api-admin-group' => '\\path\\to\\config\\GroupConfig',
+     * ]
+     * ```
+     * 
+     * The ngrestConfigLinker property is build to add the ability to override the base ngrest config inside
+     * a project via the module configuration inside your prep/prod config. Example for override a default ngrest
+     * config inside a project config:
+     * 
+     * ```
+     * return [
+     *     // ...
+     *     'modules' => [
+     *         'admin' => [
+     *             'class' => 'admin\Module',
+     *             'ngrestConfigLinkter' => [
+     *                 'api-admin-user' => \app\configs\ngrest\User::className(),
+     *             ],
+     *         ]
+     *     ]
+     * ];
+     * ```
+     * The above example will override the api-admin-user ngrest config with your project specific config.
+     */
+    public $ngrestConfigLinker = [];
+    
     private $_menu = [];
 
     private $_pointers = [];
@@ -35,8 +56,12 @@ class Module extends \luya\base\Module
 
     private $_permissionRoutes = [];
 
-    public $ngrestConfigLinker = [];
-
+    /**
+     * Checks if a config exist in the linked property based on the provided `$apiEndpoint`.
+     *
+     * @param string $apiEndpoint The identifier of an apiEndpoint. ApiEndpoints are listed in the module class.
+     * @return boolean|string If apiEndpoint exists in the linker property returns className, otherwhise false.
+     */
     public function getLinkedNgRestConfig($apiEndpoint)
     {
         return array_key_exists($apiEndpoint, $this->ngrestConfigLinker) ? $this->ngrestConfigLinker[$apiEndpoint] : false;
