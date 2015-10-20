@@ -9,7 +9,7 @@ class PreviewController extends \cms\base\Controller
     public function actionIndex($itemId)
     {
         if (Yii::$app->adminuser->isGuest) {
-            throw new \yii\web\ForbiddenHttpException('You are not allowed to view this page.');
+            throw new \yii\web\ForbiddenHttpException('Unable to view the preview page, session expired or not logged in.');
         }
 
         $link = Yii::$app->links->findOneByArguments(['id' => $itemId]);
