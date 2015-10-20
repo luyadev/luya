@@ -48,27 +48,29 @@ class StorageFilter extends \admin\ngrest\base\Model
             switch ($item->effect->imagine_name) {
                 case 'resize':
                     if (is_null($newimage)) {
-                        $newimage = $image->resize(new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height));
+                        $newimage = $image->resize(new \Imagine\Image\Box($item->effect_json_values['width'], $item->effect_json_values['height']));
                     } else {
-                        $newimage = $newimage->resize(new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height));
+                        $newimage = $newimage->resize(new \Imagine\Image\Box($item->effect_json_values['width'], $item->effect_json_values['height']));
                     }
                     break;
                 case 'thumbnail':
                     if (is_null($newimage)) {
                         // THUMBNAIL_OUTBOUND & THUMBNAIL_INSET
-                        if (!isset($item->effect_json_values->type)) {
-                            $item->effect_json_values->type = \Imagine\Image\ImageInterface::THUMBNAIL_INSET;
+                        $type = \Imagine\Image\ImageInterface::THUMBNAIL_INSET;
+                        
+                        if (isset($item->effect_json_values['type']) && !empty($item->effect_json_values['type'])) {
+                            $type = $item->effect_json_values['type'];
                         }
-                        $newimage = $image->thumbnail(new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height), $item->effect_json_values->type);
+                        $newimage = $image->thumbnail(new \Imagine\Image\Box($item->effect_json_values['width'], $item->effect_json_values['height']), $type);
                     } else {
-                        $newimage = $newimage->thumbnail(new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height), $item->effect_json_values->type);
+                        $newimage = $newimage->thumbnail(new \Imagine\Image\Box($item->effect_json_values['width'], $item->effect_json_values['height']), $type);
                     }
                     break;
                 case 'crop':
                     if (is_null($newimage)) {
-                        $newimage = $image->crop(new \Imagine\Image\Point(0, 0), new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height));
+                        $newimage = $image->crop(new \Imagine\Image\Point(0, 0), new \Imagine\Image\Box($item->effect_json_values['width'], $item->effect_json_values['height']));
                     } else {
-                        $newimage = $newimage->crop(new \Imagine\Image\Point(0, 0), new \Imagine\Image\Box($item->effect_json_values->width, $item->effect_json_values->height));
+                        $newimage = $newimage->crop(new \Imagine\Image\Point(0, 0), new \Imagine\Image\Box($item->effect_json_values['width'], $item->effect_json_values['height']));
                     }
                     break;
             }
