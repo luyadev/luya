@@ -22,6 +22,9 @@ class ExportController extends \luya\base\Command
         FileHelper::copyDirectory(Yii::getAlias('@web/public_html/storage'), $cacheFolder.'/storage');
         
         $save = Yii::getAlias($this->module->downloadFile);
-        Zip::dir($cacheFolder, $save);
+        
+        @unlink($save);
+        
+        Zip::dir($cacheFolder . "/", $save);
     }
 }
