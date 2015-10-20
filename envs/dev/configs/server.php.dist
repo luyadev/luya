@@ -25,6 +25,7 @@ $config = [
 	        'baseUrl' => 'http://luya.io',
 	    ],
 	    'crawleradmin' => 'crawleradmin\Module',
+	    'exporter' => 'exporter\Module',
     ],
     'components' => [
     	'mail' => [
