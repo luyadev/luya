@@ -22,7 +22,8 @@
         "imagine/imagine": "0.6.@stable",
         "phpmailer/phpmailer": "5.2.*@stable",
         "fabpot/goutte" : "3.1.*",
-        "jakeasmith/http_build_url" : "1.0.0"
+        "jakeasmith/http_build_url" : "1.0.0",
+        "ifsnop/mysqldump-php":"2.*"
     },
     "extra": {
         "asset-installer-paths": {
