@@ -2,8 +2,47 @@
 
 namespace tests\web\cmsadmin\base;
 
+use cmsadmin\base\Block as BaseBlock;
 use tests\data\blocks\TestBlock;
 use tests\data\blocks\FailureBlock;
+
+class GetterSetter extends BaseBlock
+{
+    public function extraVars()
+    {
+        return [];
+    }
+    
+    public function name()
+    {
+        return 'name';
+    }
+    
+    public function config()
+    {
+        return [
+            'vars' => [
+                ['type' => 'zaa-text', 'var' => 'blabla', 'label' => 'yolo'],
+            ]
+        ];
+    }
+    
+    public function twigFrontend()
+    {
+        return '';
+    }
+    
+    public function twigAdmin()
+    {
+        return '';
+    }
+    
+    public function callbackDerTest()
+    {
+        return 'bar';
+    }
+    
+}
 
 class BlockTest extends \tests\web\Base
 {
@@ -61,5 +100,28 @@ class BlockTest extends \tests\web\Base
         $block = new FailureBlock();
         // will throw Exception:  Required attributes in config var element is missing. var, label and type are required.
         $block->getVars();
+    }
+    
+    public function testGetterSetter()
+    {
+        $gs = new GetterSetter();
+        
+        $a = $gs->config();
+        $b = $gs->name();
+        $c = $gs->extraVars();
+        $d = $gs->twigAdmin();
+        $e = $gs->twigFrontend();
+        
+        $gs->setPlaceholderValues(['blabl' => 'yolo']);
+        
+    }
+    
+    public function testAjaxCreation()
+    {
+        $gs = new GetterSetter();
+        
+        $this->assertNotEquals(false, $gs->createAjaxLink('DerTest'));
+        
+        $this->assertEquals('bar', $gs->call('der-test'));
     }
 }

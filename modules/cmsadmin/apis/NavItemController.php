@@ -176,7 +176,6 @@ class NavItemController extends \admin\base\RestController
 
         $placeholders = [];
 
-        //if (isset($blockJsonConfig['placeholders'])) {
             foreach ($blockObject->getPlaceholders() as $pk => $pv) {
                 $pv['nav_item_page_id'] = $blockItem['nav_item_page_id'];
                 $pv['prev_id'] = $blockItem['id'];
@@ -188,7 +187,6 @@ class NavItemController extends \admin\base\RestController
 
                 $placeholders[] = $placeholder;
             }
-        //}
 
         if (empty($blockItem['json_config_values'])) {
             $blockItem['json_config_values'] = new \stdClass();

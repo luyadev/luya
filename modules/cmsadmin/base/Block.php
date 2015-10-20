@@ -2,9 +2,16 @@
 
 namespace cmsadmin\base;
 
-use yii;
+use Yii;
+use yii\helpers\Inflector;
+use luya\helpers\Url;
 
-abstract class Block implements BlockInterface
+/**
+ * Base class for all CMS Blocks
+ *
+ * @author nadar
+ */
+abstract class Block extends \yii\base\Object implements BlockInterface
 {
     private $_varValues = [];
 
@@ -14,21 +21,32 @@ abstract class Block implements BlockInterface
 
     private $_envOptions = [];
 
-    private $_config = null;
-
+    /**
+     * @var string Containing the name of the environment (used to find the view files to render). The
+     * module(Name) can be started with the Yii::getAlias() prefix `@`, otherwhise the `@` will be 
+     * added automatically.
+     */
     public $module = 'app';
 
-    public function __construct()
+    public function call($callbackName, array $args = [])
     {
-        $this->init();
-        $this->_config = $this->config();
+        $action = 'callback'.Inflector::id2camel($callbackName);
+        
+        return call_user_func_array([$this, $action], $args);
     }
-
-    public function init()
+    
+    public function createAjaxLink($callbackName, array $params = [])
     {
-        // override
+        $params['callback'] = Inflector::camel2id($callbackName);
+        $params['blockId'] = $this->getEnvOption('blockId', 0);
+        return Url::toAjax('cms/block/default', $params);   
     }
-
+    
+    public function icon()
+    {
+        return;
+    }
+    
     public function isAdminContext()
     {
         return ($this->getEnvOption('context', false) === 'admin') ? true : false;
@@ -38,8 +56,6 @@ abstract class Block implements BlockInterface
     {
         return ($this->getEnvOption('context', false) === 'frontend') ? true : false;
     }
-
-    /* getter & setter EnvOptions */
 
     public function setEnvOption($key, $value)
     {
@@ -51,20 +67,32 @@ abstract class Block implements BlockInterface
         return (array_key_exists($key, $this->_envOptions)) ? $this->_envOptions[$key] : $default;
     }
 
+    /**
+     * Returns all environment/context informations where the block have been placed. Example Data
+     *
+     * + blockId
+     * + context
+     * + pageObject
+     *
+     * @return array Returns an array with key value parings.
+     */
     public function getEnvOptions()
     {
         return $this->_envOptions;
     }
-
-    /* setter for placeholder */
-
+    
     public function setPlaceholderValues(array $placeholders)
     {
         $this->_placeholderValues = $placeholders;
     }
 
-    /* getter & setter VarValue */
-
+    /**
+     * User method to get the values inside the class
+     * 
+     * @param unknown $key
+     * @param string $default
+     * @return Ambigous <string, multitype:>
+     */
     public function getVarValue($key, $default = false)
     {
         return (array_key_exists($key, $this->_varValues)) ? $this->_varValues[$key] : $default;
@@ -75,8 +103,13 @@ abstract class Block implements BlockInterface
         $this->_varValues = $values;
     }
 
-    /* getter & setter CfgValue */
-
+    /**
+     * User method to get the cfgs inside the block
+     * 
+     * @param unknown $key
+     * @param string $default
+     * @return Ambigous <string, multitype:>
+     */
     public function getCfgValue($key, $default = false)
     {
         return (array_key_exists($key, $this->_cfgValues)) ? $this->_cfgValues[$key] : $default;
@@ -85,18 +118,6 @@ abstract class Block implements BlockInterface
     public function setCfgValues(array $values)
     {
         $this->_cfgValues = $values;
-    }
-
-    /* render methods */
-
-    /**
-     * @todo does first char alread contain '@'
-     *
-     * @return string
-     */
-    private function getModule()
-    {
-        return '@'.$this->module;
     }
 
     public function getRenderFileName()
@@ -108,26 +129,6 @@ abstract class Block implements BlockInterface
         }
 
         return $classname.'.twig';
-    }
-
-    protected function getTwigRenderFile($app)
-    {
-        return yii::getAlias($app.'/views/blocks/'.$this->getRenderFileName());
-    }
-
-    protected function render()
-    {
-        return $this->baseRender($this->getModule());
-    }
-
-    private function baseRender($module)
-    {
-        $twigFile = $this->getTwigRenderFile($module);
-        if (!file_exists($twigFile)) {
-            throw new \Exception("Twig file '$twigFile' does not exists!");
-        }
-
-        return file_get_contents($twigFile);
     }
 
     public function getTwigFrontendContent()
@@ -149,11 +150,12 @@ abstract class Block implements BlockInterface
 
     public function getVars()
     {
-        if (!array_key_exists('vars', $this->_config)) {
+        $config = $this->config();
+        if (!array_key_exists('vars', $config)) {
             return [];
         }
         $data = [];
-        foreach ($this->_config['vars'] as $item) {
+        foreach ($config['vars'] as $item) {
             $data[] = (new BlockVar($item))->toArray();
         }
 
@@ -162,33 +164,21 @@ abstract class Block implements BlockInterface
 
     public function getPlaceholders()
     {
-        return (array_key_exists('placeholders', $this->_config)) ? $this->_config['placeholders'] : [];
+        return (array_key_exists('placeholders', $this->config())) ? $this->config()['placeholders'] : [];
     }
 
     public function getCfgs()
     {
-        if (!array_key_exists('cfgs', $this->_config)) {
+        $config = $this->config();
+        if (!array_key_exists('cfgs', $config)) {
             return [];
         }
         $data = [];
-        foreach ($this->_config['cfgs'] as $item) {
+        foreach ($config['cfgs'] as $item) {
             $data[] = (new BlockCfg($item))->toArray();
         }
 
         return $data;
-    }
-
-    /**
-     * @todo remove me
-     */
-    public function jsonConfig()
-    {
-        return json_encode($this->config());
-    }
-
-    public function icon()
-    {
-        return;
     }
 
     public function getFullName()
@@ -204,5 +194,31 @@ abstract class Block implements BlockInterface
             'placeholders' => $this->_placeholderValues,
             'extras' => $this->extraVars(),
         ]);
+    }
+    
+    /* protected and privates */
+    
+    protected function getTwigRenderFile($app)
+    {
+        return Yii::getAlias($app.'/views/blocks/'.$this->getRenderFileName());
+    }
+    
+    protected function render()
+    {
+        $moduleName = $this->module;
+        if (substr($moduleName, 0, 1) !== '@') {
+            $moduleName = '@'.$moduleName;
+        }
+        return $this->baseRender($moduleName);
+    }
+    
+    private function baseRender($module)
+    {
+        $twigFile = $this->getTwigRenderFile($module);
+        if (!file_exists($twigFile)) {
+            throw new \Exception("Twig file '$twigFile' does not exists!");
+        }
+    
+        return file_get_contents($twigFile);
     }
 }

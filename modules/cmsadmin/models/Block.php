@@ -2,6 +2,8 @@
 
 namespace cmsadmin\models;
 
+use Yii;
+
 class Block extends \admin\ngrest\base\Model
 {
     public function ngRestApiEndpoint()
@@ -54,11 +56,15 @@ class Block extends \admin\ngrest\base\Model
         if (!class_exists($class)) {
             return false;
         }
-        $object = new $class();
+        
+        $object = Yii::createObject([
+            'class' => $class,
+        ]);
+        
         $object->setEnvOption('blockId', $id);
         $object->setEnvOption('context', $context);
         $object->setEnvOption('pageObject', $pageObject);
-
+        
         return $object;
     }
 }

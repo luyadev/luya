@@ -4,6 +4,8 @@ namespace cmsadmin\base;
 
 interface BlockInterface
 {
+    // user base input/config methods
+    
     public function extraVars();
 
     public function name();
@@ -14,6 +16,8 @@ interface BlockInterface
 
     public function twigAdmin();
 
+    // luya based methods to access
+    
     public function getTwigFrontendContent();
 
     public function setVarValues(array $values);
