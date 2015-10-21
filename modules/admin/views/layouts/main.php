@@ -253,7 +253,7 @@ $this->beginPage()
                         <tbody>
 
                             <!-- FILES -->
-                            <tr ng-repeat="file in files" ng-click="toggleSelection(file)" class="filemanager__file" ng-class="{ 'clickable selectable' : allowSelection == 'false' }">
+                            <tr ng-repeat="file in files" ng-hide="verifyFileHidden(file)" ng-click="toggleSelection(file)" class="filemanager__file" ng-class="{ 'clickable selectable' : allowSelection == 'false' }">
                                 <td class="filemanager__checkox-column"  ng-hide="allowSelection == 'true'">
                                     <input type="checkbox" id="{{file.id}}" ng-checked="inSelection(file)" />
                                     <label for="checked-status-managed-by-angular-{{file.id}}"></label>

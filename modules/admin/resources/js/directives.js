@@ -903,7 +903,8 @@
 			restrict : 'E',
 			transclude : false,
 			scope : {
-				allowSelection : '@selection'
+				allowSelection : '@selection',
+				onlyImages : '@onlyImages'
 			},
 			controller : function($scope, $http, $timeout) {
 				
@@ -1084,6 +1085,15 @@
 			        		});
 			        	}
 			        });
+				}
+				
+				$scope.verifyFileHidden = function(file) {
+					if ($scope.onlyImages) {
+						if (!file.is_image) {
+							return true;
+						}
+					}
+					return false;
 				}
 				
 				$scope.folderFormToggler = function() {
