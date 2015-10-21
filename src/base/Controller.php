@@ -36,12 +36,24 @@ abstract class Controller extends \yii\web\Controller
         foreach ($this->module->assets as $class) {
             if (!in_array($class, $this->skipModuleAssets) && !in_array('*', $this->skipModuleAssets)) {
                 // autoload $class and register with current view
-                $class::register($this->view);
+                $this->registerAsset($class);
             }
         }
+        // get controller based assets
         foreach ($this->assets as $class) {
-            $class::register($this->view);
+            $this->registerAsset($class);
         }
+    }
+    
+    /**
+     * Helper method for registring an asset into the view
+     *
+     * @param string $className The asset class to register, example `app\asset\MyTestAsset`.
+     * @return void
+     */
+    public function registerAsset($className)
+    {
+        $className::register($this->view);
     }
 
     /**
