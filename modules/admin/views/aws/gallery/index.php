@@ -1,16 +1,17 @@
 <div ng-controller="ActiveWindowGalleryController">
-    <div class="card-panel">
-        <div>
-        <label class="floating-button-label left" ngf-select ngf-multiple="true" ng-model="uploadingfiles">
-            <span class="btn-floating">
-                <i class="mdi-file-file-upload"></i>
-            </span>
-            <span class="floating-button-label__label">Datei hinzufügen</span>
-        </label>
+    <div class="col s4" style="background-color:#F0F0F0;">
+        <div style="padding:10px;">
+            <h5>Album Bilder</h5>
+            <div ng-show="isEmptyObject(files)">
+                <p>Sie haben noch keine Bilder für diese Album ausgewählt. Klicken Sie im Dateimanager (rechts) die gewünschte Bilder an welche Sie in das Album hinzufügen möchten.</p>
+            </div>
+            <div class="col s3" ng-repeat="file in files">
+                <button type="button" ng-click="remove(file)" class="btn btn-flat"><i class="mdi-action-delete"></i></button>
+                <img ng-src="{{file.source}}" height="150" class="responsive-img" />
+            </div>
         </div>
     </div>
-
-    <div class="row">
-        <div style="margin-top:20px;" class="col s1" ng-repeat="image in images"><img ng-src="{{image.source}}" class="responsive-img" border="0" /></div>
+    <div class="col s8">
+         <storage-file-manager selection="true" only-images="true" />
     </div>
 </div>

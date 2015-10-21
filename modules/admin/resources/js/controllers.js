@@ -223,70 +223,42 @@
 		
 		$scope.crud = $scope.$parent; // {{ data.aw.itemId }}
 		
-		/* UPLOAD */
-		$scope.uploading = false;
+		/* NEW FILEMANAGER BASED SELECTION */
 		
-		$scope.serverProcessing = false;
+		$scope.files = {};
 		
-		$scope.uploadResults = null;
+		$scope.isEmptyObject = function(files) {
+			return angular.equals({}, files);
+		};
 		
-		$scope.$watch('uploadingfiles', function (uploadingfiles) {
-	        if (uploadingfiles != null) {
-				$scope.uploadResults = 0;
-				$scope.uploading = true;
-	            for (var i = 0; i < uploadingfiles.length; i++) {
-	                $scope.errorMsg = null;
-	                (function (uploadingfiles) {
-	                	$scope.uploadUsingUpload(uploadingfiles);
-	                })(uploadingfiles[i]);
-	            }
-	        }
-	    });
-	
-		$scope.$watch('uploadResults', function(n, o) {
-			if ($scope.uploadingfiles != null) {
-				if (n == $scope.uploadingfiles.length) {
-					$scope.serverProcessing = true;
-					$scope.loadImages();
-				}
+		$scope.select = function(id) {
+			if (!(id in $scope.files)) {
+				$scope.crud.sendActiveWindowCallback('AddImageToIndex', {'fileId' : id }).then(function(response) {
+					var data = response.data;
+					$scope.files[data.file_id] = data;
+				});
 			}
-		});
-		
-		$scope.uploadUsingUpload = function(file) {
-	        file.upload = Upload.upload({
-	        	url: $scope.crud.getActiveWindowCallbackUrl('upload'),
-	            file: file
-	        });
-	
-	        file.upload.then(function (response) {
-	            $timeout(function () {
-	            	$scope.uploadResults++;
-	            	file.processed = true;
-	                file.result = response.data;
-	            });
-	        }, function (response) {
-	            if (response.status > 0)
-	                $scope.errorMsg = response.status + ': ' + response.data;
-	        });
-	
-	        file.upload.progress(function (evt) {
-	        	file.processed = false;
-	            // Math.min is to fix IE which reports 200% sometimes
-	            file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-	        });
-	    };
-		
-		$scope.images = [];
+		};
 		
 		$scope.loadImages = function() {
-			$http.get($scope.crud.getActiveWindowCallbackUrl('images')).success(function(response) {
-				$scope.images = response;
+			$http.get($scope.crud.getActiveWindowCallbackUrl('loadAllImages')).success(function(response) {
+				$scope.files = {}
+				response.forEach(function(value, key) {
+					$scope.files[value.file_id] = value;
+				});
 			})
+		};
+		
+		$scope.remove = function(file) {
+			$scope.crud.sendActiveWindowCallback('RemoveFromIndex', {'imageId' : file.iimage_id }).then(function(response) {
+				delete $scope.files[file.file_id];
+			});
 		};
 		
 		$scope.$watch(function() { return $scope.data.aw.itemId }, function(n, o) {
 			$scope.loadImages();
 		});
+		
 		
 	});
 	
@@ -356,7 +328,6 @@
 		$scope.$watch(function() { return $scope.data.aw.itemId }, function(n, o) {
 			$scope.getRights();
 		});
-		
 	});
 	
 	// DefaultController.js.

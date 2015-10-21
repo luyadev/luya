@@ -38,91 +38,32 @@ class Gallery extends \admin\ngrest\base\ActiveWindow
         return $this->render('index');
     }
 
-    public function callbackImages()
+    public function callbackLoadAllImages()
     {
-        $data = (new \yii\db\Query())->select(['image_id' => $this->imageIdFieldName])->where([$this->refFieldName => $this->getItemId()])->from($this->refTableName)->all();
-        $files = [];
-        foreach ($data as $k => $v) {
-            $files[] = [
-                'source' => Yii::$app->storage->image->filterApply($v['image_id'], 'small-crop'),
-                'image_id' => $v['image_id'],
-            ];
+        $images = [];
+        foreach((new \yii\db\Query())->select(['image_id' => $this->imageIdFieldName])->where([$this->refFieldName => $this->getItemId()])->from($this->refTableName)->all() as $image) {
+            $images[] = Yii::$app->storage->image->get($image['image_id']);
         }
-
-        return $files;
+        return $images;
     }
 
-    private $_uploaderErrors = [
-        0 => 'There is no error, the file uploaded with success',
-        1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
-        2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
-        3 => 'The uploaded file was only partially uploaded',
-        4 => 'No file was uploaded',
-        6 => 'Missing a temporary folder',
-        7 => 'Failed to write file to disk.',
-        8 => 'A PHP extension stopped the file upload.',
-    ];
-
-    /**
-     * <URL>/admin/api-admin-storage/files-upload.
-     *
-     * @todo change post_max_size = 20M
-     * @todo change upload_max_filesize = 20M
-     * @todo http://php.net/manual/en/features.file-upload.errors.php
-     *
-     * @return array|json Key represents the uploaded file name, value represents the id in the database.
-     */
-    public function callbackUpload()
+    public function callbackRemoveFromIndex($imageId)
     {
-        $files = [];
-        foreach ($_FILES as $k => $file) {
-            if ($file['error'] !== UPLOAD_ERR_OK) {
-                return ['upload' => false, 'message' => $this->_uploaderErrors[$file['error']]];
-            }
-            $fileId = Yii::$app->storage->file->create($file['tmp_name'], $file['name'], false, Yii::$app->request->post('folderId', 0));
-            $imageId = Yii::$app->storage->image->create($fileId);
-
-            if ($imageId) {
-                $in = Yii::$app->db->createCommand()->insert($this->refTableName, [
-                    $this->imageIdFieldName => (int) $imageId,
-                    $this->refFieldName => (int) $this->getItemId(),
-                ])->execute();
-
-                return ['upload' => true, 'message' => 'file uploaded succesfully'];
-            }
-        }
+        return Yii::$app->db->createCommand()->delete($this->refTableName, [
+            $this->imageIdFieldName => (int) $imageId,
+            $this->refFieldName => (int) $this->getItemId(),
+        ])->execute();
     }
-    /*
-    public function callbackUpload()
+    
+    public function callbackAddImageToIndex($fileId)
     {
-        try {
-            $config = new \Flow\Config();
-            $config->setTempDir(\yii::getAlias('@webroot/assets'));
-            $request = new \Flow\Request();
-
-            $fileName = \yii::getAlias('@webroot/assets').DIRECTORY_SEPARATOR.$request->getFileName();
-
-            if (\Flow\Basic::save($fileName, $config, $request)) {
-                // file saved successfully and can be accessed at './final_file_destination'
-
-                $fileId = \yii::$app->storage->file->create($fileName, $request->getFileName());
-
-                $imageId = \yii::$app->storage->image->create($fileId);
-
-                @unlink($fileName);
-
-                $in = \yii::$app->db->createCommand()->insert($this->refTableName, [
-                    $this->imageIdFieldName => (int) $imageId,
-                    $this->refFieldName => (int) $this->getItemId(),
-                ])->execute();
-
-                if ($in) {
-                    return $imageId;
-                }
-            }
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-        }
+        $imageId = Yii::$app->storage->image->create($fileId);
+        
+        Yii::$app->db->createCommand()->insert($this->refTableName, [
+            $this->imageIdFieldName => (int) $imageId,
+            $this->refFieldName => (int) $this->getItemId(),
+        ])->execute();
+        
+        return Yii::$app->storage->image->get($imageId);
     }
-    */
 }
