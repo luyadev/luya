@@ -34,6 +34,7 @@ abstract class Controller extends \luya\base\Controller
 
         $typeModel = $model->getType();
         $typeModel->setOptions([
+            'cmsControllerObject' => $this,
             'navItemId' => $navItemId,
             'restString' => $appendix,
         ]);

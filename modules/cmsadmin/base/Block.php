@@ -28,18 +28,55 @@ abstract class Block extends \yii\base\Object implements BlockInterface
      */
     public $module = 'app';
 
-    public function call($callbackName, array $args = [])
-    {
-        $action = 'callback'.Inflector::id2camel($callbackName);
-        
-        return call_user_func_array([$this, $action], $args);
-    }
+    /**
+     * @var array Define a list of assets to be insert in the frontend context. The assets will be ignored in
+     * admin context. Example usage of assets property:
+     * 
+     * ```php
+     * public $assets = [
+     *     'app\assets\MyAjaxBlockAsset',
+     * ];
+     * ```
+     */
+    public $assets = [];
     
+    /**
+     * Return link for usage in ajax request, the link will call the defined callback inside
+     * this block. All callback methods must start with `callback`. An example for a callback method:
+     * 
+     * ```php
+     * public function callbackTestAjax($arg1)
+     * {
+     *     return 'hello callback test ajax with argument: arg1 ' . $arg1;
+     * }
+     * ```
+     * 
+     * The above defined callback link can be created with the follow code:
+     * 
+     * ```php
+     * $this->createAjaxLink('TestAjax', ['arg1' => 'My Value for Arg1']);
+     * ```
+     * 
+     * The most convient way to assign the variable is via extraVars
+     * 
+     * ```php
+     * public function extraVars()
+     * {
+     *     return [
+     *         'ajaxLinkToTestAjax' => $this->createAjaxLink('TestAjax', ['arg1' => 'Value for Arg1']),
+     *     ];
+     * }
+     * ```
+     * 
+     * @param string $callbackName The callback name in uppercamelcase to call. The method must exists in the block class.
+     * @param array $params A list of parameters who have to match the argument list in the method.
+     * @return string
+     */
     public function createAjaxLink($callbackName, array $params = [])
     {
         $params['callback'] = Inflector::camel2id($callbackName);
-        $params['blockId'] = $this->getEnvOption('blockId', 0);
-        return Url::toAjax('cms/block/default', $params);   
+        $params['id'] = $this->getEnvOption('id', 0);
+        return Url::toAjax('cms/block/index', $params);   
     }
     
     public function icon()
@@ -70,7 +107,8 @@ abstract class Block extends \yii\base\Object implements BlockInterface
     /**
      * Returns all environment/context informations where the block have been placed. Example Data
      *
-     * + blockId
+     * + id (unique identifier for the block in cms context)
+     * + blockId (id in the block list database, which is not unique)
      * + context
      * + pageObject
      *

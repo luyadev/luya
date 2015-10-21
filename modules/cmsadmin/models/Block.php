@@ -45,9 +45,9 @@ class Block extends \admin\ngrest\base\Model
         ];
     }
 
-    public static function objectId($id, $context, $pageObject = null)
+    public static function objectId($blockId, $id, $context, $pageObject = null)
     {
-        $block = self::find()->where(['id' => $id])->one();
+        $block = self::find()->where(['id' => $blockId])->one();
         if (!$block) {
             return false;
         }
@@ -61,7 +61,8 @@ class Block extends \admin\ngrest\base\Model
             'class' => $class,
         ]);
         
-        $object->setEnvOption('blockId', $id);
+        $object->setEnvOption('id', $id);
+        $object->setEnvOption('blockId', $blockId);
         $object->setEnvOption('context', $context);
         $object->setEnvOption('pageObject', $pageObject);
         

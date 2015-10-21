@@ -76,9 +76,18 @@ class NavItemPage extends \cmsadmin\base\NavItemType
 
         foreach ($this->getPlaceholders($navItemPageId, $placeholderVar, $prevId) as $key => $placeholder) {
             // create block object
-            $blockObject = Block::objectId($placeholder['block_id'], 'frontend', $this->getNavItem());
+            $blockObject = Block::objectId($placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
             // see if its a valid block object
             if ($blockObject) {
+                
+                if (count($blockObject->assets) > 0) {
+                    $controllerObject = $this->getOption('cmsControllerObject');
+                    if ($controllerObject) {
+                        foreach($blockObject->assets as $assetClassName) {
+                            $controllerObject->registerAsset($assetClassName);
+                        }
+                    }
+                }
                 // insert var and cfg values from database
                 $blockObject->setVarValues($this->jsonToArray($placeholder['json_config_values']));
                 $blockObject->setCfgValues($this->jsonToArray($placeholder['json_config_cfg_values']));

@@ -121,7 +121,5 @@ class BlockTest extends \tests\web\Base
         $gs = new GetterSetter();
         
         $this->assertNotEquals(false, $gs->createAjaxLink('DerTest'));
-        
-        $this->assertEquals('bar', $gs->call('der-test'));
     }
 }
