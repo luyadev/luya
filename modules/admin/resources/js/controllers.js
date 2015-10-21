@@ -217,13 +217,19 @@
 		
 	});
 	
-	// activeWindowController.js
+// activeWindowController.js
 	
-	zaa.controller("ActiveWindowGalleryController", function($scope, $http, Upload, $timeout) {
+	/**
+	 * ActiveWindow GalleryController
+	 * 
+	 * Ability to upload images, removed images from index, add new images via selecting from
+	 * filemanager.
+	 * 
+	 * Changes content when parent crud controller changes value for active aw.itemId.
+	 */
+	zaa.controller("ActiveWindowGalleryController", function($scope, $http) {
 		
 		$scope.crud = $scope.$parent; // {{ data.aw.itemId }}
-		
-		/* NEW FILEMANAGER BASED SELECTION */
 		
 		$scope.files = {};
 		
@@ -258,7 +264,6 @@
 		$scope.$watch(function() { return $scope.data.aw.itemId }, function(n, o) {
 			$scope.loadImages();
 		});
-		
 		
 	});
 	
@@ -330,7 +335,7 @@
 		});
 	});
 	
-	// DefaultController.js.
+// DefaultController.js.
 	
 	zaa.controller("DefaultController", function ($scope, $http, $state, $stateParams) {
 		
