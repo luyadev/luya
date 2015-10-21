@@ -7,6 +7,10 @@ namespace app\blocks;
  */
 class AjaxBlock extends \cmsadmin\base\Block
 {
+    public $assets = [
+        'app\blocks\AjaxBlockAsset',
+    ];
+    
     public function name()
     {
         return 'AjaxBlock';
@@ -23,9 +27,9 @@ class AjaxBlock extends \cmsadmin\base\Block
         ];
     }
 
-    public function callbackHallAjax()
+    public function callbackHalloAjax($foo)
     {
-        var_dump('hoi!');
+        return 'foo' . $foo;
     }
     
     /**
@@ -43,7 +47,7 @@ class AjaxBlock extends \cmsadmin\base\Block
      */
     public function twigFrontend()
     {
-        return '{{ extras.ajaxUrl }}';
+        return '<button onclick="clickAjax(\'{{ extras.ajaxUrl }}\');">Click</button>';
     }
 
     /**
