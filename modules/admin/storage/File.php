@@ -152,6 +152,7 @@ class File
         foreach ($files as $k => $v) {
             // @todo check fileHasImage sth
             if ($v['extension'] == 'jpg' || $v['extension'] == 'png') {
+                $isImage = true;
                 $imageId = Yii::$app->storage->image->create($v['id'], 0);
                 if ($imageId) {
                     $thumb = Yii::$app->storage->image->filterApply($imageId, 'small-landscape', true);
@@ -159,8 +160,10 @@ class File
                     $thumb = false;
                 }
             } else {
+                $isImage = false;
                 $thumb = false;
             }
+            $files[$k]['is_image'] = $isImage;
             $files[$k]['thumbnail'] = $thumb;
         }
 
