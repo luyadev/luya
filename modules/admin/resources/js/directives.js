@@ -261,6 +261,20 @@
 					$scope.model = (mil/1000);
 				}
 				
+				$scope.onInit = function() {
+					if ($scope.model === undefined) {
+						var date = new Date();
+						$scope.day = date.getDate(),
+						$scope.month = date.getMonth() + 1;
+						$scope.year = date.getFullYear();
+						$scope.min = date.getMinutes();
+						$scope.hour = date.getHours();
+						$scope.reform();
+					}
+				}
+				
+				$scope.onInit();
+				
 				$scope.$watch(function() { return $scope.model }, function(n, o) {
 					if (n !== undefined) {
 						var date = new Date(n*1000);
@@ -321,6 +335,18 @@
 					var mil = date.getTime();
 					$scope.model = (mil/1000);
 				}
+				
+				$scope.onInit = function() {
+					if ($scope.model === undefined) {
+						var date = new Date();
+						$scope.day = date.getDate(),
+						$scope.month = date.getMonth() + 1;
+						$scope.year = date.getFullYear();
+						$scope.reform();
+					}
+				}
+				
+				$scope.onInit();
 				
 				$scope.$watch(function() { return $scope.model }, function(n, o) {
 					if (n !== undefined) {
