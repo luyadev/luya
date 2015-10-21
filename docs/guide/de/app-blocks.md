@@ -104,9 +104,10 @@ $this->getEnvOption($key, $defaultValue);
 
 zur Verfügung. Es stehen dir folgende Env keys zur Verfügung
 
-+ *blockId* => enthält die Id des Blocks in der Datenbank
-+ *context* => sagt dir ob der Block im *frontend* oder *backend* aktiv ist
-+ *pageObject* => Gibt ein `cmsadmin\models\NavItem` Object zurück (nav_item), dies wiederum verfügt über die methode `getNav()` welches das `cmsadmin\models\Nav` Object zurück gibt.
++ *id* Ist der unique-identifier innerhalb des cms context
++ *blockId* Enthält die Id des Blocks in der Datenbank
++ *context* Sagt dir ob der Block im *frontend* oder *backend* aktiv ist
++ *pageObject* Gibt ein `cmsadmin\models\NavItem` Object zurück (nav_item), dies wiederum verfügt über die methode `getNav()` welches das `cmsadmin\models\Nav` Object zurück gibt.
 
 Weitere viel genutze methoden:
 
@@ -124,4 +125,52 @@ $this->getEnvOption('pageObject')->getNav()->getProperty('myCustomProperty');
 
 > Wenn die Property nicht gefunden wurde gibt die Funktion `false` zurück.
 
+Assets registrieren
+-------------------
 
+> since *1.0.0-beta1*
+
+Blöcke können neu [Assets (CSS&JS)](app-assets.md) registerien. Dazu musst du lediglich die `public $assets = []` probiert mit deiner gewünschten asset klasse überschreiben. Ein Beispiel innerhalb deines könnten wie folgt aussehen:
+
+```php
+class TestBlock extends \cmsadmin\base\Block
+{
+    public $assets = [
+        'apps\assets\TestBlockAsset',
+        'apps\assets\TestBlockZweitesAsset',
+    ];
+}
+```
+
+Die [Assets](app-assets.md) werden nur im *frontend* context geladen, heisst wenn der Block im Cms eingebunden ist und auf Seite angezeigt wird und funktioniert **nicht im admin** bereich.
+
+Ajax in Blöcken
+---------------
+
+> since *1.0.0-beta1*
+
+Damit blöcke via Ajax sich selber aufrufen können und methoden ausführen gibt es folgendes konzept
+
++ `createAjaxLink()`: Erstellt einen Link welcher im twigFrontend verwendet werden kann und zu einem *callback* führt.
++ `callback...()`: Methoden die mit *callback* prefixed sind können von öffentlich (ajax) aufgerufen werden.
+
+Zuerst definiern wir eine methode (callback) welche durch den Ajax aufruf daten zurück gibt (kann json, oder den direkten html response sein). Alle callback methoden **müssen** mit `callback` beginen und danach mit (Upper)CamelCase fortfahren.
+
+```php
+public function callbackHelloWorld($zeit)
+{
+    return 'hallo world ' . $zeit;
+}
+```
+
+Dieser oben genannte callback mit dem Parameter `$zeit` muss nun von einem Javascript ajax aufrufen (welcher in der asset datei liegen sollte) aufgerufen werden. Den Link zu diesem callback wird mit der Funktion `createAjaxLink` erzeugt. Das erzeugen des Links für den `callbackHelloWorld` würde wie folgt aussehen.
+
+```php
+$this->createAjaxLink('HellWorld', ['zeit' => time()]);
+```
+
+Der erzeugte Link sollte direkt im `extraVars()` eingbunden werden und kann danach an die funktione assigned werden welche den ajax aufruft macht.
+
+### Parameter im Callback
+
+Ein wichtiges thema sind die Paramter inerhalb dieser Callbacks. Wenn ein callback erforderliche paramter erzwingt (wie zbsp. im obige Beispiel `$zeit`), müssen diese auch im createLink zur verfügung gestellt werden. Ansonsten wird eine Exception den ajax call abbrechen. Wenn Sie zusätlich Daten via ajax übermitteln wollen, sollten Sie diese via POST methode senden und im callback via `Yii::$app->request->post()` abrufen.

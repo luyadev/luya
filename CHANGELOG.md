@@ -3,6 +3,8 @@ LUYA CHANGELOG
 
 1.0.0-beta1 (in progress)
 -------------------------
+- added ability to register asset class inside a block
+- added ability to create block ajax requests with callbacks.
 - added ability to add rewrite if not existing in same navigation level.
 - added clear cache and reload button
 - added ability to set queue list position index for importer classes.
