@@ -31,7 +31,7 @@ class ImageTextBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return 'mdi-av-recent-actors';
+        return 'recent_actors';
     }
 
     public function config()

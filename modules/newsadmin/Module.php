@@ -15,11 +15,11 @@ class Module extends \admin\base\Module
     public function getMenu()
     {
         return $this
-        ->node('News', 'mdi-action-language')
+        ->node('News', 'local_library')
             ->group('Daten')
-                ->itemApi('News Eintrag', 'newsadmin-article-index', 'mdi-content-content-paste', 'api-news-article')
-                ->itemApi('Kategorien', 'newsadmin-cat-index', 'mdi-action-view-headline', 'api-news-cat')
-                ->itemApi('Tags', 'newsadmin-tag-index', 'mdi-action-label-outline', 'api-news-tag')
+                ->itemApi('News Eintrag', 'newsadmin-article-index', 'edit', 'api-news-article')
+                ->itemApi('Kategorien', 'newsadmin-cat-index', 'label_outline', 'api-news-cat')
+                ->itemApi('Tags', 'newsadmin-tag-index', 'label_outline', 'api-news-tag')
         ->menu();
     }
 }

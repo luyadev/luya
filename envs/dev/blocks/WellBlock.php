@@ -12,6 +12,16 @@ class WellBlock extends \cmsadmin\base\Block
         ];
     }
 
+    public function name()
+    {
+        return 'Hinweis (well)';
+    }
+
+    public function icon()
+    {
+        return 'info_outline';
+    }
+
     public function twigFrontend()
     {
         return '<div class="well">{{placeholders.content}}</div>';
@@ -20,15 +30,5 @@ class WellBlock extends \cmsadmin\base\Block
     public function twigAdmin()
     {
         return '<div style="padding:4px; background-color:#F0F0F0;">{{placeholders.content}}</div>';
-    }
-
-    public function name()
-    {
-        return 'Hinweis (well)';
-    }
-    
-    public function icon()
-    {
-        return 'mdi-action-assignment';   
     }
 }

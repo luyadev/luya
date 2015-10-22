@@ -13,7 +13,7 @@ class VideoBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return 'mdi-av-videocam';
+        return 'videocam';
     }
 
     public function config()

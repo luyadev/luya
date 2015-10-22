@@ -13,7 +13,7 @@ class TitleBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return 'mdi-editor-format-size';
+        return 'format_size';
     }
 
     public function config()
