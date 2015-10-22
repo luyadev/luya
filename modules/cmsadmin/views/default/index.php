@@ -161,8 +161,8 @@
         </div>
 
         <a class="treeview__link" ng-click="!showDrag && go(data.id)" title="id={{data.id}}" alt="id={{data.id}}" ng-class="{'treeview__link--active' : isCurrentElement(data.id), 'waves-effect waves-blue' : !showDrag, 'treeview__link--draggable' : showDrag, 'treeview__link--is-hidden' : data.is_hidden == '1' }" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : false, tolerance : 'pointer', hoverClass : 'treeview__link--hover' }" jqyoui-droppable="{onDrop: 'onChildDrop()', multiple : true}">
-            <i ng-class="{ 'treeview__move--visible': showDrag }" class="mdi-action-open-with treeview__move left"></i>
-            <i ng-class="{ 'treeview__eye--visible': data.is_hidden == '1' && !showDrag }" class="mdi-action-visibility-off treeview__eye left"></i>
+            <i ng-class="{ 'treeview__move--visible': showDrag }" class="material-icons treeview__move left">open_with</i>
+            <i ng-class="{ 'treeview__eye--visible': data.is_hidden == '1' && !showDrag }" class="material-icons treeview__eye left">visibility_off</i>
             <div class="treeview__empty-circle"></div>
             {{data.title}}
         </a>
