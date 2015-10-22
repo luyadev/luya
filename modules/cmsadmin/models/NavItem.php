@@ -78,10 +78,13 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
         switch ($this->nav_item_type) {
             case self::TYPE_PAGE:
                 $object = NavItemPage::findOne($this->nav_item_type_id);
+                break;
             case self::TYPE_MODULE:
                 $object = NavItemModule::findOne($this->nav_item_type_id);
+                break;
             case self::TYPE_REDIRECT:
                 $object = NavItemRedirect::findOne($this->nav_item_type_id);
+                break;
         }
         // assign the current context for an item type object.
         $object->setNavItem($this);
