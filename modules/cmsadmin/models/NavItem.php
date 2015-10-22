@@ -23,12 +23,11 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     public function init()
     {
         parent::init();
-        $this->on(self::EVENT_BEFORE_INSERT, [$this, 'beforeCreate']);
         $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'validateRewrite']);
-        
+        $this->on(self::EVENT_BEFORE_INSERT, [$this, 'beforeCreate']);
+        $this->on(self::EVENT_BEFORE_DELETE, [$this, 'logEvent']);
         $this->on(self::EVENT_AFTER_INSERT, [$this, 'logEvent']);
         $this->on(self::EVENT_AFTER_UPDATE, [$this, 'logEvent']);
-        $this->on(self::EVENT_BEFORE_DELETE, [$this, 'logEvent']);
     }
 
     public function logEvent($e)
@@ -55,8 +54,15 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     {
         return [
             [['lang_id', 'title', 'rewrite', 'nav_item_type'], 'required'],
-            //[['rewrite'], 'validateRewrite', 'on' => ['meta']],
             [['nav_id'], 'safe'],
+        ];
+    }
+    
+    public function attributeLabels()
+    {
+        return [
+            'title' => 'Seitentitel',
+            'rewrite' => 'Pfadsegment',
         ];
     }
 
@@ -64,7 +70,6 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     {
         return [
             'default' => ['title', 'rewrite', 'nav_item_type', 'nav_id', 'lang_id'],
-            //'meta' => ['title', 'rewrite'],
         ];
     }
 
@@ -73,11 +78,12 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
         switch ($this->nav_item_type) {
             case self::TYPE_PAGE:
                 $object = NavItemPage::findOne($this->nav_item_type_id);
-                break;
             case self::TYPE_MODULE:
                 $object = NavItemModule::findOne($this->nav_item_type_id);
-                break;
+            case self::TYPE_REDIRECT:
+                $object = NavItemRedirect::findOne($this->nav_item_type_id);
         }
+        // assign the current context for an item type object.
         $object->setNavItem($this);
 
         return $object;
@@ -124,14 +130,6 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
         }
     }
 
-    public function attributeLabels()
-    {
-        return [
-            'title' => 'Seitentitel',
-            'rewrite' => 'Pfadsegment',
-        ];
-    }
-
     public function validateRewrite()
     {
         $dirty = $this->getDirtyAttributes(['rewrite']);
@@ -157,7 +155,6 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
      * display all nav items tempo.
      * 
      * @todo fix me above!
-     *
      * @param unknown $moduleName
      */
     public static function fromModule($moduleName)

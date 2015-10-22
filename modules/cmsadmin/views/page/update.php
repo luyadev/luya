@@ -231,6 +231,11 @@
                             </div>
                     
                             <div ng-switch-when="2" class="row">
+                                <p>Module Settings.</p>
+                            </div>
+                            
+                            <div ng-switch-when="3" class="row">
+                                <p>Redirect Settings</p>
                             </div>
                             
                             <div class="row">
@@ -252,14 +257,17 @@
                         <!-- PAGE__CONTENT--SETTINGS -->
                         <div class="page__content page__content--settings" ng-show="!settings" ng-switch on="item.nav_item_type">
                             <div class="row">
-                                <div class="col s12" ng-switch-when="2">
-                                    <p>Diese Seite ist als Module hinterlegt.
-                                </div>
                                 <div class="col s12" ng-switch-when="1" ng-controller="NavItemTypePageController">
                                     <div class="alert alert--danger" ng-show="!container.nav_item_page.id">Das für die Seite definierte Layout wurde nicht (mehr) gefunden. Bitte bearbeiten Sie die Layout Einstellungen diese Seite.</div>
                                     <ul class="accordion" ng-show="container.nav_item_page.id">
                                         <li class="accordion__entry" ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" ng-class="{ 'accordion__entry--open' : isOpen }"></li>
                                     </ul>
+                                </div>
+                                <div class="col s12" ng-switch-when="2">
+                                    <p>Diese Seite ist als <b>Module</b> hinterlegt.</p>
+                                </div>
+                                <div class="col s12" ng-switch-when="3">
+                                    <p>Diese Seite ist ein <b>Redirect</b>.</p>
                                 </div>
                             </div>
                         </div>

@@ -278,7 +278,39 @@ class Nav extends \yii\db\ActiveRecord
     
     public function createRedirect($parentNavId, $catId, $langId, $title, $rewrite, $redirectType, $redirectTypeValue)
     {
+        $_errors = [];
         
+        $nav = $this;
+        $navItem = new NavItem();
+        $navItem->parent_nav_id = $parentNavId;
+        $navItemRedirect = new \cmsadmin\models\NavItemRedirect();
+        
+        $nav->attributes = ['parent_nav_id' => $parentNavId, 'cat_id' => $catId, 'is_hidden' => 1, 'is_offline' => 1];
+        $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'rewrite' => $rewrite, 'nav_item_type' => 3];
+        $navItemRedirect->attributes = ['type' => $redirectType, 'value' => $redirectTypeValue];
+        
+        if (!$nav->validate()) {
+            $_errors = ArrayHelper::merge($nav->getErrors(), $_errors);
+        }
+        if (!$navItem->validate()) {
+            $_errors = ArrayHelper::merge($navItem->getErrors(), $_errors);
+        }
+        if (!$navItemRedirect->validate()) {
+            $_errors = ArrayHelper::merge($navItemRedirect->getErrors(), $_errors);
+        }
+        
+        if (!empty($_errors)) {
+            return $_errors;
+        }
+        
+        $navItemRedirect->save();
+        $nav->save();
+        
+        $navItem->nav_item_type_id = $navItemRedirect->id;
+        $navItem->nav_id = $nav->id;
+        $navItemId = $navItem->save();
+        
+        return $navItemId;
     }
 
     public function createModuleItem($navId, $langId, $title, $rewrite, $moduleName)
@@ -308,6 +340,36 @@ class Nav extends \yii\db\ActiveRecord
         $navItem->nav_item_type_id = $navItemModule->id;
         $navItemId = $navItem->save();
 
+        return $navItemId;
+    }
+    
+    public function createRewriteItem($navId, $langId, $title, $rewrite, $moduleName, $redirectType, $redirectTypeValue)
+    {
+        $_errors = [];
+    
+        $navItem = new NavItem();
+        $navItem->parent_nav_id = $parentNavId;
+        $navItemRedirect = new \cmsadmin\models\NavItemRedirect();
+    
+        $navItem->attributes = ['nav_id' => $navId, 'lang_id' => $langId, 'title' => $title, 'rewrite' => $rewrite, 'nav_item_type' => 3];
+        $navItemRedirect->attributes = ['type' => $redirectType, 'value' => $redirectTypeValue];
+    
+        if (!$navItem->validate()) {
+            $_errors = ArrayHelper::merge($navItem->getErrors(), $_errors);
+        }
+        if (!$navItemRedirect->validate()) {
+            $_errors = ArrayHelper::merge($navItemRedirect->getErrors(), $_errors);
+        }
+    
+        if (!empty($_errors)) {
+            return $_errors;
+        }
+    
+        $navItemRedirect->save();
+    
+        $navItem->nav_item_type_id = $navItemRedirect->id;
+        $navItemId = $navItem->save();
+    
         return $navItemId;
     }
 
