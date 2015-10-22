@@ -13,7 +13,7 @@ class MapBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return 'mdi-maps-place';
+        return 'map';
     }
 
     public function config()

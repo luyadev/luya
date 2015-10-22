@@ -13,7 +13,7 @@ class ListBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return 'mdi-editor-format-list-bulleted';
+        return 'view_list';
     }
 
     public function config()

@@ -62,7 +62,7 @@
         <!-- SUCCESS -->
         <div ng-show="success">
             <div class="alert alert--success">
-                <i class="mdi-navigation-check"></i>
+                <i class="material-icons">check</i>
                 <p>Diese Seite wurde erfolgreich erstellt!</p>
             </div>
         </div>
@@ -70,7 +70,7 @@
 
         <!-- ERROR -->
         <div class="alert alert--danger" ng-show="error.length != 0">
-            <i class="mdi-alert-error"></i>
+            <i class="material-icons">error</i>
             <ul>
                 <li ng-repeat="err in error">{{ err[0] }}</li>
             </ul>
@@ -149,7 +149,7 @@
     <div class="row">
         <div class="col s12">
 
-            <a class="create-button [ btn-floating btn-large ][ waves-effect waves-light ] teal" ui-sref="custom.cmsadd"><i class="mdi-content-add"></i></a>
+            <a class="create-button [ btn-floating btn-large ][ waves-effect waves-light ] teal" ui-sref="custom.cmsadd"><i class="material-icons">add</i></a>
 
             <div ng-controller="CmsMenuTreeController">
 

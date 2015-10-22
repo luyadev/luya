@@ -29,6 +29,8 @@ $this->beginPage()
         <script>
             var authToken = '<?=$user->getAuthToken();?>';
         </script>
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
 
     <body ng-cloak>
@@ -38,7 +40,7 @@ $this->beginPage()
         <script type="text/ng-template" id="modal">
             <div class="modal" ng-show="!isModalHidden" style="z-index:999999">
                 <span class="modal__close btn-floating red" ng-show="!isModalHidden" ng-click="isModalHidden = true">
-                    <i class="mdi-navigation-close"></i>
+                    <i class="material-icons">close</i>
                 </span>
                 <div class="modal-content" ng-transclude></div>
             </div>
@@ -47,7 +49,7 @@ $this->beginPage()
         <script type="text/ng-template" id="storageFileUpload">
             <div class="fileupload">
                 <div class="fileupload__btn btn-flat [ grey lighten-4 ]" ng-click="toggleModal()">
-                    <i class="mdi-editor-attach-file left"></i>
+                    <i class="material-icons left">attach_file</i>
                     <span>
                         Datei auswählen
                     </span>
@@ -90,10 +92,10 @@ $this->beginPage()
 
         <script type="text/ng-template" id="reverseFolders">
                     <div class="filemanager__folder-button">
-                        <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
-                        <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
-                        <i class="mdi-editor-mode-edit filemanager__edit-icon" ng-click="folder.edit=!folder.edit"></i>
-                        <i class="mdi-content-add filemanager__delete-icon" ng-click="folder.remove=!folder.remove"></i>
+                        <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default">folder_open</i>
+                        <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active">folder</i>
+                        <i class="material-icons filemanager__edit-icon" ng-click="folder.edit=!folder.edit">mode_edit</i>
+                        <i class="material-icons filemanager__delete-icon" ng-click="folder.remove=!folder.remove">add</i>
                         <span ng-show="!folder.edit"><span ng-click="loadFolder(folder.data.id)">{{folder.data.name }}</span>
                             <button ng-click="moveFilesTo(folder.data)" ng-show="showFoldersToMove && currentFolderId != folder.data.id" type="button">{{selectedFiles.length}} Dateien verschieben</button>
                         </span>
@@ -122,8 +124,8 @@ $this->beginPage()
                                 <input class="floating-form__input" type="text" ng-model="newFolderName" id="foldername" />
                             </div><!-- PREVENT WHITESPACE
                          --><div class="floating-form__actions">
-                                <span class="[ floating-form__button floating-form__button--active ] btn-floating" ng-click="createNewFolder(newFolderName)"><i class="mdi-navigation-check"></i></span>
-                                <span class="floating-form__button floating-form__button--active-close btn-floating" ng-click="folderFormToggler()"><i class="mdi-content-add"></i></span>
+                                <span class="[ floating-form__button floating-form__button--active ] btn-floating" ng-click="createNewFolder(newFolderName)"><i class="material-icons">check</i></span>
+                                <span class="floating-form__button floating-form__button--active-close btn-floating" ng-click="folderFormToggler()"><i class="material-icons">add</i></span>
                             </div><!-- PREVENT WHITESPACE
                          --><span class="floating-form__label" ng-click="folderFormToggler()">Ordner hinzufügen</span>
                         </div>
@@ -134,8 +136,8 @@ $this->beginPage()
                     <ul class="filemanager__folders">
                         <li class="filemanager__folder" ng-class="{'active' : currentFolderId == 0 }">
                             <div class="filemanager__folder-button" ng-click="loadFolder(0)">
-                                <i class="mdi-file-folder-open filemanager__folder-icon filemanager__folder-icon--default"></i>
-                                <i class="mdi-file-folder filemanager__folder-icon filemanager__folder-icon--active"></i>
+                                <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default">folder_open</i>
+                                <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active">folder</i>
                                 <span>Stammverzeichnis</span>
                             </div>
                             <ul class="filemanager__folders" ng-if="folders.length > 0">
@@ -155,7 +157,7 @@ $this->beginPage()
                         
                         <label class="floating-button-label left" ngf-select ngf-multiple="true" ng-model="uploadingfiles">
                             <span class="btn-floating">
-                                <i class="mdi-file-file-upload"></i>
+                                <i class="material-icons">file_upload</i>
                             </span>
                             <span class="floating-button-label__label">Datei hinzufügen</span>
                         </label>
@@ -172,7 +174,7 @@ $this->beginPage()
                                             <div class="file__progress progress">
                                                 <div class="determinate" style="width: {{file.progress}}%"></div>
                                             </div>
-                                            <i class="file__icon mdi-navigation-check"></i>
+                                            <i class="file__icon material-icons">check</i>
                                         </li>
                                     </ul>
                                 </div>
@@ -241,7 +243,7 @@ $this->beginPage()
                         <thead>
                             <tr>
                                 <th class="filemanager__checkox-column" ng-hide="allowSelection == 'true'">
-                                    <i class="mdi-action-done-all clickable" ng-click="toggleSelectionAll()"></i>
+                                    <i class="material-icons clickable" ng-click="toggleSelectionAll()">done_all</i>
                                 </th>
                                 <th></th>
                                 <th>Name</th>
@@ -263,7 +265,7 @@ $this->beginPage()
                                             <img class="responsive-img" ng-src="{{file.thumbnail.source}}" />
                                         </span>
                                         <span ng-if="!file.thumbnail">
-                                            <i class="mdi-editor-attach-file"></i>
+                                            <i class="material-icons">attach_file</i>
                                         </span>
                                 </td>
                                 <td>{{file.name_original}}</td>
@@ -295,23 +297,27 @@ $this->beginPage()
                 <nav>
                     <div class="nav-wrapper blue">
 
-                        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+                        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 
                         <ul class="left hide-on-med-and-down">
                             <li ng-repeat="item in items" ng-class="{'active' : isActive(item) }">
-                                <a ng-click="click(item)" class="navbar__link"><i class="[ {{item.icon}} left ] navbar__icon"></i>{{item.alias}}</a>
+                                <a ng-click="click(item)" class="navbar__link"><i class="material-icons left navbar__icon">{{item.icon}}</i>{{item.alias}}</a>
                             </li>
                         </ul>
 
                         <ul class="right navbar__right">
-                            <li ng-click="reload()" style="cursor: pointer;"><i class="mdi-av-replay"></i></li>
+                            <li ng-click="reload()" style="cursor: pointer;"><i class="material-icons">replay</i></li>
                             <li ng-mouseenter="showDebugContainer=1" ng-mouseleave="showDebugContainer=0">
                                 <i class="mdi-notification-sms-failed" style="text-align:center; margin: 0 15px;"></i>
-                                
                             </li>
+                            <li ng-click="reload()" style="cursor: pointer;"><i class="material-icons">replay</i></li>
+                            <li ng-mouseenter="showDebugContainer=1" ng-mouseleave="showDebugContainer=0">
+                                <i class="material-icons">sms_failed</i>
+                            </li>
+
                             <li ng-mouseenter="showOnlineContainer=1" ng-mouseleave="showOnlineContainer=0">
                                 <div class="navbar__button">
-                                    <i class="[ mdi-social-group left ] navbar__icon"></i>
+                                    <i class="[ material-icons left ] navbar__icon">group</i>
                                     {{notify.length}}
                                 </div>
                             </li>
@@ -319,13 +325,13 @@ $this->beginPage()
                                 <div class="user-menu" ng-mouseenter="userMenuOpen = true" ng-mouseleave="userMenuOpen = false" ng-class="{ 'user-menu--show-user' : !userMenuOpen, 'user-menu--show-menu' : userMenuOpen }">
 
                                     <div class="user-menu__user">
-                                        <i class="mdi-action-account-circle left"></i><strong><?php echo $user->firstname; ?></strong>
+                                        <i class="material-icons left">account_circle</i><strong><?php echo $user->firstname; ?></strong>
                                     </div>
 
                                     <div class="user-menu__menu">
-                                        <i class="mdi-action-settings user-menu__menu-icon"></i><!-- NO WHITESPACE
+                                        <i class="material-icons user-menu__menu-icon">settings</i><!-- NO WHITESPACE
                                         --><a href="<?= \Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="user-menu__menu-icon user-menu__menu-icon--logout">
-                                            <i class="mdi-action-exit-to-app"></i>
+                                            <i class="material-icons">exit_to_app</i>
                                         </a>
                                     </div>
 
@@ -335,15 +341,15 @@ $this->beginPage()
 
                         <ul class="side-nav" id="mobile-demo">
                             <li ng-repeat="item in items" ng-class="{'active' : isActive(item) }">
-                                <a ng-click="click(item)" class="navbar__link"><i class="[ {{item.icon}} left ] navbar__icon"></i>{{item.alias}}</a>
+                                <a ng-click="click(item)" class="navbar__link"><i class="[ material-icons left ] navbar__icon">{{item.icon}}</i>{{item.alias}}</a>
                             </li>
                         </ul>
 
                         <div class="navbar__search-wrapper" ng-class="{ 'navbar__search-wrapper--wide' : searchInputOpen }">
                             <div class="input-field navbar__search" ng-class="{ 'navbar__search--open' : searchInputOpen }">
                                 <input id="global-search-input" ng-model="searchQuery" type="search" class="navbar__search-input">
-                                <label for="global-search-input" class="navbar__search-label" ng-click="openSearchInput()"><i class="mdi-action-search"></i></label>
-                                <i class="mdi-navigation-close navbar__search-icon" ng-click="closeSearchInput()"></i>
+                                <label for="global-search-input" class="navbar__search-label" ng-click="openSearchInput()"><i class="material-icons">search</i></label>
+                                <i class="material-icons navbar__search-icon" ng-click="closeSearchInput()">close</i>
                             </div>
                         </div>
                     </div>
@@ -428,7 +434,7 @@ $this->beginPage()
 
                 <div class="row" ng-repeat="item in searchResponse">
                     <div class="col s12">
-                        <b class="search-box__group-title"><i class="left {{item.menuItem.icon}}"></i> {{item.menuItem.alias}}</b>
+                        <b class="search-box__group-title"><i class="left material-icons">{{item.menuItem.icon}}</i> {{item.menuItem.alias}}</b>
 
                         <table class="hoverable">
                             <thead>
@@ -440,7 +446,7 @@ $this->beginPage()
                             <tbody>
                                 <tr ng-repeat="row in item.data">
                                     <td ng-repeat="(k,v) in row">{{v}}</td>
-                                    <td style="width: 20px;"><a href="" class="right"><i class="mdi-navigation-chevron-right"></i></a></td>
+                                    <td style="width: 20px;"><a href="" class="right"><i class="material-icons">chevron_right</i></a></td>
                                 </tr>
                             </tbody>
                         </table>

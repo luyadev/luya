@@ -29,14 +29,14 @@ class Module extends \admin\base\Module
     public function getMenu()
     {
         return $this
-            ->nodeRoute('Seiteninhalte', 'mdi-content-content-copy', 'cmsadmin-default-index', 'cmsadmin/default/index', 'cmsadmin\models\NavItem')
-            ->node('CMS-Einstellungen', 'mdi-action-settings')
+            ->nodeRoute('Seiteninhalte', 'content_copy', 'cmsadmin-default-index', 'cmsadmin/default/index', 'cmsadmin\models\NavItem')
+            ->node('CMS-Einstellungen', 'settings')
                 ->group('Seitenvorlagen')
-                    ->itemApi('Kategorien', 'cmsadmin-cat-index', 'mdi-device-storage', 'api-cms-cat')
-                    ->itemApi('Layouts', 'cmsadmin-layout-index', 'mdi-action-aspect-ratio', 'api-cms-layout')
+                    ->itemApi('Kategorien', 'cmsadmin-cat-index', 'label_outline', 'api-cms-cat')
+                    ->itemApi('Layouts', 'cmsadmin-layout-index', 'view_quilt', 'api-cms-layout')
                 ->group('Inhaltselemente')
-                    ->itemApi('Blockgruppen', 'cmsadmin-blockgroup-index', 'mdi-content-content-copy', 'api-cms-blockgroup')
-                    ->itemApi('Blöcke Verwalten', 'cmsadmin-block-index', 'mdi-editor-format-align-left', 'api-cms-block')
+                    ->itemApi('Blockgruppen', 'cmsadmin-blockgroup-index', 'view_module', 'api-cms-blockgroup')
+                    ->itemApi('Blöcke Verwalten', 'cmsadmin-block-index', 'format_align_left', 'api-cms-block')
             ->menu();
     }
 

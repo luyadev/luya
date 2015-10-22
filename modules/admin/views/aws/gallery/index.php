@@ -6,7 +6,7 @@
                 <p>Sie haben noch keine Bilder für diese Album ausgewählt. Klicken Sie im Dateimanager (rechts) die gewünschte Bilder an welche Sie in das Album hinzufügen möchten.</p>
             </div>
             <div class="col s3" ng-repeat="file in files">
-                <button type="button" ng-click="remove(file)" class="btn btn-flat"><i class="mdi-action-delete"></i></button>
+                <button type="button" ng-click="remove(file)" class="btn btn-flat"><i class="material-icons">delete</i></button>
                 <img ng-src="{{file.source}}" height="150" class="responsive-img" />
             </div>
         </div>

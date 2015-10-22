@@ -13,7 +13,7 @@ class TableBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return 'mdi-action-view-quilt';
+        return 'border_all';
     }
 
     public function config()

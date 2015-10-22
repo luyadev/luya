@@ -13,7 +13,7 @@ class LayoutBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return 'mdi-editor-border-all';
+        return 'view_column';
     }
 
     public function config()
