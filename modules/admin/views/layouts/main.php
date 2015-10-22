@@ -29,8 +29,6 @@ $this->beginPage()
         <script>
             var authToken = '<?=$user->getAuthToken();?>';
         </script>
-
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
 
     <body ng-cloak>
@@ -306,13 +304,15 @@ $this->beginPage()
                         </ul>
 
                         <ul class="right navbar__right">
-                            <li ng-click="reload()" style="cursor: pointer;"><i class="material-icons">replay</i></li>
-                            <li ng-mouseenter="showDebugContainer=1" ng-mouseleave="showDebugContainer=0">
-                                <i class="mdi-notification-sms-failed" style="text-align:center; margin: 0 15px;"></i>
+                            <li ng-click="reload()" style="cursor: pointer;">
+                                <div class="navbar__button">
+                                    <i class="material-icons">replay</i>
+                                </div>
                             </li>
-                            <li ng-click="reload()" style="cursor: pointer;"><i class="material-icons">replay</i></li>
                             <li ng-mouseenter="showDebugContainer=1" ng-mouseleave="showDebugContainer=0">
-                                <i class="material-icons">sms_failed</i>
+                                <div class="navbar__button">
+                                    <i class="material-icons">sms_failed</i>
+                                </div>
                             </li>
 
                             <li ng-mouseenter="showOnlineContainer=1" ng-mouseleave="showOnlineContainer=0">
@@ -389,8 +389,8 @@ $this->beginPage()
                     <tbody>
                         <tr ng-repeat="row in notify" ng-class="{ 'green lighten-3' : row.is_active, 'red lighten-3' : !row.is_active }">
                             <td>
-                                <i ng-show="row.is_active" class="mdi-action-face-unlock small"></i>
-                                <i ng-show="!row.is_active" class="mdi-maps-hotel small"></i>
+                                <i ng-show="row.is_active" class="material-icons">tag_faces</i>
+                                <i ng-show="!row.is_active" class="material-icons">help_outline</i>
                             </td>
                             <td>{{row.firstname}} {{row.lastname}}</td>
                             <td>{{row.email}}</td>
