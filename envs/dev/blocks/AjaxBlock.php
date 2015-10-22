@@ -8,7 +8,7 @@ namespace app\blocks;
 class AjaxBlock extends \cmsadmin\base\Block
 {
     public $assets = [
-        'app\blocks\AjaxBlockAsset',
+        'app\assets\AjaxBlockAsset',
     ];
     
     public function name()
