@@ -416,7 +416,11 @@
 				$scope.removeColumn = function(key) {
 					for (var i in $scope.model) {
 						var item = $scope.model[i];
-						item.splice(key, 1);
+                        if(item instanceof Array) {
+                            item.splice(key, 1);
+                        } else {
+                            delete item[key];
+                        }
 					}
 				}
 				
