@@ -38,7 +38,7 @@
                 <label>Seitentyp</label>
                 <p><input type="radio" ng-model="data.nav_item_type" value="1" id="t1"><label for="t1">Seite</label></p>
                 <p><input type="radio" ng-model="data.nav_item_type" value="2" id="t2"><label for="t2">Modul</label></p>
-                <!--<p><input type="radio" ng-model="data.nav_item_type" value="3" id="t3"><label for="t3">Weiterleitung</label></p>-->
+                <p><input type="radio" ng-model="data.nav_item_type" value="3" id="t3"><label for="t3">Weiterleitung</label></p>
             </div>
         </div>
 
@@ -51,12 +51,7 @@
         </div>
 
         <div ng-switch-when="3">
-            <div class="row">
-                <div class="col s12">
-                    <br />
-                    Weiterleitung
-                </div>
-            </div>
+            <create-form-redirect data="data"></create-form-redirect>
         </div>
 
         <!-- SUCCESS -->
@@ -113,6 +108,49 @@
     </div>
 </script>
 <!-- /CREATE MODULE FORM -->
+
+<!-- CREATE MODULE FORM -->
+<script type="text/ng-template" id="createformredirect.html">
+    <div class="row">
+        <div class="col s12">
+            <label>Art der Weiterleitung</label>
+            <p><input type="radio" ng-model="data.redirect_type" value="1" id="r_t1"><label for="r_t1">Interne-Seite</label></p>
+            <p><input type="radio" ng-model="data.redirect_type" value="2" id="r_t2"><label for="r_t2">Link-Extern</label></p>
+            <p><input type="radio" ng-model="data.redirect_type" value="3" id="r_t3"><label for="r_t3">Datei</label></p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12" ng-show="data.redirect_type==1">
+            <p>Auf welche Interne-Seite wollen Sie weiterleiten?</p>
+            <menu-dropdown style="border:1px solid:#F0F0F0; padding:10px;" nav-id="data.redirect_type_value" />
+        </div>
+        <div class="col s12" ng-show="data.redirect_type==2">
+            <p>Urls müssen ein Http davor haben.</p>
+            <input type="text" ng-mode="data.redirect_type_value" />
+        </div>
+        <div class="col s12" ng-show="data.redirect_type==3">
+            <p>TODO</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+            <br />
+            <button type="button" class="btn" ng-click="save()">Neue Seite speichern</button>
+        </div>
+    </div>
+</script>
+<!-- /CREATE MODULE FORM -->
+
+<script type="text/ng-template" id="menuDropdownReverse.html">
+<span ng-show="data.id == navId">[x]</span>
+<span ng-show="data.id != navId">[ ]</span>
+{{ data.title }} <button type="button" ng-click="changeModel(data)" class="btn btn-flat">Verwenden</button>
+<ul style="padding-left:10px;">
+    <li ng-repeat="data in data.nodes" ng-include="'menuDropdownReverse.html'"></li>
+</ul>
+</script>
 
 <!-- treeview item -->
 <script type="text/ng-template" id="reverse.html">

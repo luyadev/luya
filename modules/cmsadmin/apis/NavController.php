@@ -180,4 +180,17 @@ class NavController extends \admin\base\RestController
 
         return $create;
     }
+    
+    /* redirect */
+    
+    public function actionCreateRedirect()
+    {
+        $model = new \cmsadmin\models\Nav();
+        $create = $model->createRedirect($this->postArg('parent_nav_id'), $this->postArg('cat_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('rewrite'), $this->postArg('redirect_type'), $this->postArg('redirect_type_value'));
+        if ($create !== true) {
+            Yii::$app->response->statusCode = 422;
+        }
+
+        return $create;
+    }
 }

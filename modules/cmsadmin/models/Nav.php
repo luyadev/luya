@@ -275,6 +275,11 @@ class Nav extends \yii\db\ActiveRecord
 
         return $navItemId;
     }
+    
+    public function createRedirect($parentNavId, $catId, $langId, $title, $rewrite, $redirectType, $redirectTypeValue)
+    {
+        
+    }
 
     public function createModuleItem($navId, $langId, $title, $rewrite, $moduleName)
     {

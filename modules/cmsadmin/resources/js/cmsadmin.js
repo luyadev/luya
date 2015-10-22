@@ -2,6 +2,27 @@
 	"use strict";
 	
 	// directive.js
+	
+	zaa.directive("menuDropdown", function(MenuService) {
+		return {
+			restrict : 'E',
+			scope : {
+				navId : '='
+			},
+			link : function(scope) {
+				scope.menu = MenuService.menu;
+			},
+			controller : function($scope) {
+				$scope.changeModel = function(data) {
+					$scope.navId = data.id;
+				}
+			},
+			template : function() {
+				return '<div ng-repeat="cat in menu"><h5>{{cat.name}}</h5><ul><li ng-repeat="data in cat.__items" ng-include="\'menuDropdownReverse.html\'"></li></ul></div>';
+			}
+		}
+	});
+	
 	zaa.directive("createForm", function() {
 		return {
 			restrict : 'EA',
@@ -113,6 +134,22 @@
 						$scope.$parent.exec();
 					});
 					*/
+				}
+			}
+		}
+	});
+	
+	zaa.directive("createFormRedirect", function() {
+		return {
+			restrict : 'EA',
+			scope : {
+				data : '='
+			},
+			templateUrl : 'createformredirect.html',
+			controller : function($scope) {
+				
+				$scope.save = function() {
+					$scope.$parent.exec();
 				}
 			}
 		}
@@ -377,6 +414,14 @@
 						reject(response);
 					});
 				}
+				
+				if ($scope.data.nav_item_type == 3) {
+					$http.post('admin/api-cms-nav/create-redirect', $.param($scope.data), headers).success(function(response) {
+						resolve(response);
+					}).error(function(response) {
+						reject(response);
+					});
+				}
 			});
 		}
 	});
@@ -407,6 +452,14 @@
 				
 				if ($scope.data.nav_item_type == 2) {
 					$http.post('admin/api-cms-nav/create-module-item', $.param($scope.data), headers).success(function(response) {
+						resolve(response);
+					}).error(function(response) {
+						reject(response);
+					});
+				}
+				
+				if ($scope.data.nav_item_type == 3) {
+					$http.post('admin/api-cms-nav/create-redirect-item', $.param($scope.data), headers).success(function(response) {
 						resolve(response);
 					}).error(function(response) {
 						reject(response);
