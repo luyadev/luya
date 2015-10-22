@@ -26,6 +26,7 @@ class TableBlock extends \cmsadmin\base\Block
                 ['var' => 'header', 'label' => 'Erste Zeile als Tabellenkopf verwenden', 'type' => 'zaa-checkbox'],
                 ['var' => 'stripe', 'label' => 'Jede Zeile abwechselnd hervorheben (Zebramuster)', 'type' => 'zaa-checkbox'],
                 ['var' => 'border', 'label' => 'Rand zu jeder Seite der Tabelle hinzufügen', 'type' => 'zaa-checkbox'],
+                ['var' => 'equaldistance', 'label' => 'Spaltenabstände gleich gross', 'type' => 'zaa-checkbox'],
             ],
         ];
     }
@@ -78,7 +79,7 @@ class TableBlock extends \cmsadmin\base\Block
                         '{% for row in extras.table %}'.
                         '<tr>'.
                             '{% for column in row %}'.
-                            '<td>{{ column }}</td>'.
+                            '<td {% if cfgs.equaldistance %}class="col-md-{{ (12/(row|length))|round }}"{% endif %}>{{ column }}</td>'.
                             '{% endfor %}'.
                         '</tr>'.
                         '{% endfor %}'.
@@ -103,7 +104,7 @@ class TableBlock extends \cmsadmin\base\Block
                         '{% for row in extras.table %}'.
                         '<tr>'.
                             '{% for column in row %}'.
-                            '<td>{{ column }}</td>'.
+                            '<td {% if cfgs.equaldistance %}class="col s{{ (12/(row|length))|round }}"{% endif %}>{{ column }}</td>'.
                             '{% endfor %}'.
                         '</tr>'.
                         '{% endfor %}'.
