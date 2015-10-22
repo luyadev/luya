@@ -21,7 +21,7 @@ class Twig extends \yii\base\Component
     {
         return [
             'links' => function ($cat, $lang, $parent_nav_id) {
-                return Yii::$app->links->findByArguments(['cat' => $cat, 'lang' => $lang, 'parent_nav_id' => (int) $parent_nav_id]);
+                return Yii::$app->links->findAll(['cat' => $cat, 'lang' => $lang, 'parent_nav_id' => (int) $parent_nav_id]);
             },
             'linksFindParent' => function ($level) {
                 return \luya\helpers\Menu::parentNavIdByCurrentLink(Yii::$app->links, $level);
