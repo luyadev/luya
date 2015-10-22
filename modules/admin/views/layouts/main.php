@@ -29,6 +29,8 @@ $this->beginPage()
         <script>
             var authToken = '<?=$user->getAuthToken();?>';
         </script>
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
 
     <body ng-cloak>
@@ -314,7 +316,6 @@ $this->beginPage()
                                     <i class="material-icons">sms_failed</i>
                                 </div>
                             </li>
-
                             <li ng-mouseenter="showOnlineContainer=1" ng-mouseleave="showOnlineContainer=0">
                                 <div class="navbar__button">
                                     <i class="[ material-icons left ] navbar__icon">group</i>
