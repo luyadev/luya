@@ -79,7 +79,7 @@ class TableBlock extends \cmsadmin\base\Block
                         '{% for row in extras.table %}'.
                         '<tr>'.
                             '{% for column in row %}'.
-                            '<td {% if cfgs.equaldistance %}class="col-md-{{ 12/(row|length) }}"{% endif %}>{{ column }}</td>'.
+                            '<td {% if cfgs.equaldistance %}class="col-md-{{ (12/(row|length))|round }}"{% endif %}>{{ column }}</td>'.
                             '{% endfor %}'.
                         '</tr>'.
                         '{% endfor %}'.
@@ -104,7 +104,7 @@ class TableBlock extends \cmsadmin\base\Block
                         '{% for row in extras.table %}'.
                         '<tr>'.
                             '{% for column in row %}'.
-                            '<td {% if cfgs.equaldistance %}class="col-md-{{ 12/(row|length) }}"{% endif %}>{{ column }}</td>'.
+                            '<td {% if cfgs.equaldistance %}class="col s{{ (12/(row|length))|round }}"{% endif %}>{{ column }}</td>'.
                             '{% endfor %}'.
                         '</tr>'.
                         '{% endfor %}'.
