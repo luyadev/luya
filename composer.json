@@ -26,6 +26,7 @@
 	"require-dev" : {
 		"yiisoft/yii2-debug" : "2.0.5",
 		"phpunit/phpunit" : "@stable",
+        "phpunit/php-code-coverage" : "@stable",
 		"fabpot/php-cs-fixer" : "@stable",
 		"imagine/imagine": "0.6.3",
 		"codeclimate/php-test-reporter": "dev-master"
