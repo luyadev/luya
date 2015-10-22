@@ -305,7 +305,10 @@ $this->beginPage()
 
                         <ul class="right navbar__right">
                             <li ng-click="reload()" style="cursor: pointer;"><i class="mdi-av-replay"></i></li>
-                            <li ng-mouseenter="showDebugContainer=1" ng-mouseleave="showDebugContainer=0"><span style="font-size:10px; margin:0 15px;"><?= luya\Module::VERSION; ?></span></li>
+                            <li ng-mouseenter="showDebugContainer=1" ng-mouseleave="showDebugContainer=0">
+                                <i class="mdi-notification-sms-failed" style="text-align:center; margin: 0 15px;"></i>
+                                
+                            </li>
                             <li ng-mouseenter="showOnlineContainer=1" ng-mouseleave="showOnlineContainer=0">
                                 <div class="navbar__button">
                                     <i class="[ mdi-social-group left ] navbar__icon"></i>
@@ -347,7 +350,7 @@ $this->beginPage()
                 </nav>
             </div> <!-- /navbar-fixed -->
 
-            <div ng-show="showDebugContainer" class="useronline__modal">
+            <div ng-show="showDebugContainer" class="debug-container">
                 <table class="bordered">
                     <thead>
                         <tr>
@@ -355,12 +358,13 @@ $this->beginPage()
                             <th>Wert</th>
                         </tr>
                     </thead>
+                    <tr><td>Luya Version</td><td><?= luya\Module::VERSION; ?></td></tr>
                     <tr><td>Id:</td><td><?= Yii::$app->id ?></td></tr>
-                    <tr><td>siteTitle:</td><td><?= Yii::$app->siteTitle ?></td></tr>
-                    <tr><td>remoteToken:</td><td><?= var_dump(Yii::$app->remoteToken); ?></td></tr>
+                    <tr><td>Site Title:</td><td><?= Yii::$app->siteTitle ?></td></tr>
+                    <tr><td>Remote Token:</td><td><?= var_dump(Yii::$app->remoteToken); ?></td></tr>
                     <tr><td>YII_DEBUG:</td><td><?= var_dump(YII_DEBUG); ?></td></tr>
                     <tr><td>YII_ENV:</td><td><?= YII_ENV; ?></td></tr>
-                    <tr><td>transferExceptions:</td><td><?= var_dump(Yii::$app->errorHandler->transferException); ?></td></tr>
+                    <tr><td>Transfer Exceptions:</td><td><?= var_dump(Yii::$app->errorHandler->transferException); ?></td></tr>
                     <tr><td>Yii Timezone:</td><td><?= Yii::$app->timeZone; ?></td></tr>
                     <tr><td>PHP Timezone:</td><td><?= date_default_timezone_get(); ?></td></tr>
                 </table>
