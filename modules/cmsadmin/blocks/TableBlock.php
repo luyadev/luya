@@ -104,7 +104,7 @@ class TableBlock extends \cmsadmin\base\Block
                         '{% for row in extras.table %}'.
                         '<tr>'.
                             '{% for column in row %}'.
-                            '<td>{{ column }}</td>'.
+                            '<td {% if cfgs.equaldistance %}class="col-md-{{ 12/(row|length) }}"{% endif %}>{{ column }}</td>'.
                             '{% endfor %}'.
                         '</tr>'.
                         '{% endfor %}'.
