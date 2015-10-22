@@ -285,7 +285,7 @@
                 <div class="col s12">
                     <div class="blockholder__search">
                         <input type="text" ng-model="search"/>
-                        <i class="mdi-action-search" ></i>
+                        <i class="material-icons">search</i>
                     </div>
                     <div class="blockholder__group" ng-repeat="item in DroppableBlocksService.blocks">
                         <b class="blockholder__group-title">{{item.group.name}}</b>
