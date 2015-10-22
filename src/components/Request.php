@@ -30,7 +30,9 @@ class Request extends \yii\web\Request
 
         $resolver = Yii::$app->composition->getResolvedPathInfo($this);
 
-        $first = reset(explode('/', $resolver['route']));
+        $pathInfo = $resolver['route'];
+        $parts = explode('/', $pathInfo);
+        $first = reset($parts);
 
         if ($first == 'admin') {
             return true;
