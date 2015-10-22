@@ -90,9 +90,10 @@ $treeview--active-color: $blue !default;
 
     &.treeview__move--visible,
     &.treeview__eye--visible {
-        width: 16.5px;
-        height: 18px;
-        margin-right: 5px;
+		width: 20px;
+		height: 20px;
+		margin-right: 5px;
+		font-size: 20px;
     }
 }
 

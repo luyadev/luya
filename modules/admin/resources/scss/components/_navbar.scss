@@ -11,7 +11,12 @@
  * #NAVBAR__LINK
  */
 .navbar__link {
+	font-size: 0.9rem;
 	cursor: pointer;
+
+	.navbar__icon.left {
+		font-size: 1.3rem;
+	}
 }
 
 /**

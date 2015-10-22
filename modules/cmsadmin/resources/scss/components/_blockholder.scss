@@ -19,6 +19,21 @@
 		margin-top: 0;
 	}
 }
+.blockholder__search {
+	color: white;
+	i {
+		position: absolute;
+		top: 25px;
+		font-size: 24px;
+		
+	}
+	input {
+		padding-left: 30px;
+	}
+	.active {
+		color: #26a69a;
+	}
+}
 
 .blockholder__block {
 	background-color: #4E4E4E;

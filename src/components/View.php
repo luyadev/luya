@@ -19,6 +19,12 @@ class View extends \yii\web\View
         return $this->assetBundles[$assetName]->baseUrl;
     }
 
+    /**
+     * Removes redundant whitespaces (>1) and new lines (>1)
+     * 
+     * @param string $content input string
+     * @return string compressed string
+     */
     public function compress($content)
     {
         return preg_replace(array('/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s'), array('>', '<', '\\1'), $content);
