@@ -13,7 +13,7 @@ class TestBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return 'mdi-hardware-desktop-windows';
+        return 'developer_mode';
     }
 
     public function config()

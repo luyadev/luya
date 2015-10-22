@@ -13,7 +13,7 @@ class DevBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return 'mdi-maps-local-florist';
+        return 'developer_mode';
     }
 
     public function config()

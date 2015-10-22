@@ -4,16 +4,16 @@
         
         <form method="post" id="loginForm">
             <div class="input-field col s12">
-                <i class="mdi-content-mail prefix"></i>
+                <i class="material-icons prefix">mail</i>
                 <input type="text" id="email" name="login[email]" value="<?= $model->email; ?>" />
                 <label for="email">E-Mail-Adresse</label>
             </div>
             <div class="input-field col s12">
-                <i class="mdi-communication-vpn-key prefix"></i>
+                <i class="material-icons prefix">vpn_key</i>
                 <input type="password" id="password" name="login[password]" />
                 <label for="password">Passwort</label>
             </div>
-            <button class="waves-effect waves-light btn right" type="submit">Einloggen <i class="mdi-content-send"></i></button>
+            <button class="waves-effect waves-light btn right" type="submit">Einloggen <i class="material-icons">send</i></button>
             <div style="clear:both;"></div>
         </form>
         
@@ -22,12 +22,12 @@
             <p style="padding-bottom:20px;">Geben Sie den Sicherheitscode ein, der Ihnen per E-Mail geschickt wurde.</p>
             
             <div class="input-field col s12">
-                <i class="mdi-action-lock-outline prefix"></i>
+                <i class="material-icons prefix">lock_outline</i>
                 <input type="text" name="secure_token" id="secure_token" />
                 <label for="secure_token">Sicherheitscode</label>
             </div>
             
-            <button class="waves-effect waves-light btn right" type="submit">Einloggen <i class="mdi-content-send"></i></button>
+            <button class="waves-effect waves-light btn right" type="submit">Einloggen <i class="material-icons">send</i></button>
             <button class="waves-effect waves-teal btn-flat right" type="button" id="abortToken">Abbrechen</button>
             
             <div style="clear:both;"></div>

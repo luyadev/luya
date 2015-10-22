@@ -35,7 +35,7 @@ class FormBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return 'mdi-communication-email';
+        return 'email';
     }
 
     public function config()

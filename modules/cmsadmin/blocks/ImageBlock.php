@@ -15,7 +15,7 @@ class ImageBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return 'mdi-image-crop-original';
+        return 'crop';
     }
 
     public function config()

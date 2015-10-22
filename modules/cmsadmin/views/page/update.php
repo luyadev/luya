@@ -1,5 +1,5 @@
 <script type="text/ng-template" id="recursion.html">
-<div class="accordion__header" ng-mouseenter="mouseEnter()" ng-click="toggleOpen()"><i class="mdi-navigation-unfold-more"></i> {{placeholder.label}}</div>
+<div class="accordion__header" ng-mouseenter="mouseEnter()" ng-click="toggleOpen()"><i class="material-icons">expand_more</i> {{placeholder.label}}</div>
 <div class="accordion__body" ng-class="{ 'accordion__body--empty' : !placeholder.__nav_item_page_block_items.length }">
     
     <div class="page__drop">
@@ -15,7 +15,7 @@
         <div class="block" ng-class="{ 'block--edit' : edit , 'block--is-dirty' : !block.is_dirty && isEditable() }" data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{snapTolerance : 40, handle : '.block__move', delay: 200, cursor:'move', cursorAt: { top: 0, left: 0 }, revert:true }" ng-model="block">
             <div class="block__toolbar">
                 <div class="left">
-                    <i class="block__move mdi-action-open-with"></i>
+                    <i class="block__move material-icons">open_with</i>
                     <div class="block__title" ng-bind-html="safe(block.full_name)" ng-click="toggleEdit()"></div>
                 </div>
                 <div class="right">
@@ -34,7 +34,7 @@
                     <div class="col s12">
                         <ul class="collapsible" data-collapsible="accordion" ng-show="block.cfgs.length">
                             <li>
-                                <div class="collapsible-header"><i class="mdi-action-settings"></i> Erweiterte Einstellungen</div>
+                                <div class="collapsible-header"><i class="material-icons">settings</i> Erweiterte Einstellungen</div>
                                 <div class="collapsible-body">
                                     <br />
                                     <div class="row" ng-repeat="cfgField in block.cfgs">
@@ -50,7 +50,7 @@
                 <div class="row">
                     <div class="col s12">
                         <div class="right">
-                            <button class="[ waves-effect waves-light ] btn btn--small teal" ng-click="save()"><i class="mdi-action-done left"></i> Speichern</button>
+                            <button class="[ waves-effect waves-light ] btn btn--small teal" ng-click="save()"><i class="material-icons left">done</i> Speichern</button>
                         </div>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
 
                                     <!-- DELETE BUTTON -->
                                     <div class="toolbar__group">
-                                        <a ng-click="trash()" class="[ waves-effect waves-blue ][ btn-flat btn--small ][ grey-text text-darken-2 ]"><i class="mdi-action-delete"></i></a>
+                                        <a ng-click="trash()" class="[ waves-effect waves-blue ][ btn-flat btn--small ][ grey-text text-darken-2 ]"><i class="material-icons">delete</i></a>
                                     </div>
                                     <!-- /DELETE BUTTON -->
 
@@ -197,7 +197,7 @@
                                         <span ng-hide="settings">
                                             <i ng-click="toggleSettings()" class="mdi-editor-mode-edit right [ waves-effect waves-blue ]"></i>
                                             <a ng-href="cms/preview/?itemId={{item.id}}" target="_blank" class="right">
-                                                <i class="mdi-action-open-in-browser [ waves-effect waves-blue ]"></i>
+                                                <i class="material-icons [ waves-effect waves-blue ]">open_in_new</i>
                                             </a>
                                         </span>
                                         <span ng-hide="!settings">
@@ -235,8 +235,8 @@
                             
                             <div class="row">
                                 <div class="col s12">
-                                    <button class="btn waves-effect waves-light" type="button" ng-click="toggleSettings()">Abbrechen <i class="mdi-content-clear right"></i></button>
-                                    <button class="btn waves-effect waves-light" type="button" ng-click="save(itemCopy, typeDataCopy)">Speichern <i class="mdi-content-send right"></i></button>
+                                    <button class="btn waves-effect waves-light" type="button" ng-click="toggleSettings()">Abbrechen <i class="material-icons right">clear</i></button>
+                                    <button class="btn waves-effect waves-light" type="button" ng-click="save(itemCopy, typeDataCopy)">Speichern <i class="material-icons right">send</i></button>
                                 </div>
                             </div>
                             
@@ -260,7 +260,6 @@
                                     <ul class="accordion" ng-show="container.nav_item_page.id">
                                         <li class="accordion__entry" ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" ng-class="{ 'accordion__entry--open' : isOpen }"></li>
                                     </ul>
-
                                 </div>
                             </div>
                         </div>
@@ -287,8 +286,8 @@
             </div>
 
             <div class="cms__sidebar-toggler" ng-click="toggleSidebar()">
-                <i class="mdi-hardware-keyboard-arrow-right" ng-show="sidebar"></i>
-                <i class="mdi-hardware-keyboard-arrow-left" ng-show="!sidebar"></i>
+                <i class="material-icons" ng-show="sidebar">keyboard_arrow_right</i>
+                <i class="material-icons" ng-show="!sidebar">keyboard_arrow_left</i>
             </div>
         </div>
     </div>

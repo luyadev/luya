@@ -21,7 +21,7 @@ class SpacingBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return 'mdi-action-aspect-ratio';
+        return 'format_line_spacing';
     }
 
     public function config()

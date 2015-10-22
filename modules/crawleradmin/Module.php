@@ -11,10 +11,10 @@ class Module extends \admin\base\Module
 
     public function getMenu()
     {
-        return $this->node('Crawler', 'mdi-action-pageview')
+        return $this->node('Crawler', 'pageview')
             ->group('Indexierungen')
-                ->itemApi('Seiten Index', 'crawleradmin-index-index', 'mdi-action-visibility', 'api-crawler-index')
-                ->itemApi('Zwischenspeicher', 'crawleradmin-builderindex-index', 'mdi-action-visibility-off', 'api-crawler-builderindex')
+                ->itemApi('Seiten Index', 'crawleradmin-index-index', 'visibility', 'api-crawler-index')
+                ->itemApi('Zwischenspeicher', 'crawleradmin-builderindex-index', 'visibility_off', 'api-crawler-builderindex')
         ->menu();
     }
 }

@@ -26,7 +26,7 @@ class TextBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return 'mdi-editor-format-align-left';
+        return 'format_align_left';
     }
 
     public function config()

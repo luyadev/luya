@@ -15,7 +15,7 @@ class FileListBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return 'mdi-file-file-download';
+        return 'attachment';
     }
 
     /**

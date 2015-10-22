@@ -8,6 +8,11 @@ class LatestNews extends \cmsadmin\base\Block
 
     private $_dropdown = [];
 
+    public function icon()
+    {
+        return 'view_headline';
+    }
+
     public function init()
     {
         foreach (\cmsadmin\models\NavItem::fromModule('news') as $item) {

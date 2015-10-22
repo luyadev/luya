@@ -34,17 +34,17 @@
         <div class="tabs">
             <ul>
                 <li class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==0}">
-                    <a class="tabs__anchor" ng-click="switchTo(0)"><i class="mdi-navigation-menu"></i> Auflisten</a>
+                    <a class="tabs__anchor" ng-click="switchTo(0)"><i class="material-icons">menu</i> Auflisten</a>
                 </li>
 
                 <?php if ($canCreate): ?>
                     <li class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==1}">
-                        <a class="tabs__anchor" style="" ng-click="switchTo(1)"><i class="mdi-content-add-box"></i> Hinzufügen</a>
+                        <a class="tabs__anchor" style="" ng-click="switchTo(1)"><i class="material-icons">add_box</i> Hinzufügen</a>
                     </li>
                 <?php endif; ?>
                 
                 <li ng-show="crudSwitchType==2" class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==2}">
-                    <a class="tabs__anchor" ng-click="switchTo(0)"><i class="mdi-navigation-cancel"></i> Bearbeiten</a>
+                    <a class="tabs__anchor" ng-click="switchTo(0)"><i class="material-icons">cancel</i> Bearbeiten</a>
                 </li>
             </ul>
         </div>
@@ -57,7 +57,7 @@
                     <!-- <p>{{currentMenuItem.alias}}</p> -->
                 </div>
                 <div class="input-field col s4 right">
-                    <i class="mdi-action-search prefix"></i>
+                    <i class="material-icons prefix">search</i>
                     <input id="searchString" ng-model="searchString" type="text">
                 </div>
             </div>
@@ -135,10 +135,10 @@
                     </div>
 
                     <button class="btn waves-effect waves-light" type="submit" ng-disabled="createForm.$invalid">
-                        <i class="mdi-content-send"></i> Erstellen
+                        <i class="material-icons">send</i> Erstellen
                     </button>
                     <button class="btn waves-effect waves-light" type="button" ng-click="closeCreate()">
-                        <i class="mdi-navigation-cancel"></i> Abbrechen
+                        <i class="material-icons">cancel</i> Abbrechen
                     </button>
 
                 </form>
@@ -174,10 +174,10 @@
                             <div class="col s12">
                                 <div class="right">
                                     <button class="btn waves-effect waves-light" type="submit" ng-disabled="updateForm.$invalid">
-                                        <i class="mdi-content-send"></i> Speichern
+                                        <i class="material-icons">send</i> Speichern
                                     </button>
                                     <button class="btn waves-effect waves-light" type="button" ng-click="closeUpdate()">
-                                        <i class="mdi-navigation-cancel"></i> Cancel
+                                        <i class="material-icons">cancel</i> Cancel
                                     </button>
                                 </div>
                             </div>
@@ -194,7 +194,7 @@
     <!-- activeWindow MODAL -->
     <div id="activeWindowModal" class="modal">
         <button class="btn waves-effect waves-light" type="button" ng-click="closeActiveWindow()">
-            <i class="mdi-navigation-cancel"></i> Abbrechen
+            <i class="material-icons">cancel</i> Abbrechen
         </button>
         <div class="modal-content" compile-html ng-bind-html="data.aw.content"></div>
     </div>

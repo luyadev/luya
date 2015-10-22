@@ -41,16 +41,16 @@ class Module extends \admin\base\Module
     public function getMenu()
     {
         return $this
-        ->nodeRoute('Dateimanager', 'mdi-file-folder-open', 'admin-storage-index', 'admin/storage/index')
-        ->node('System', 'mdi-maps-layers')
+        ->nodeRoute('Dateimanager', 'folder_open', 'admin-storage-index', 'admin/storage/index')
+        ->node('System', 'layers')
             ->group('Zugriff')
-                ->itemApi('Benutzer', 'admin-user-index', 'mdi-social-person', 'api-admin-user')
-                ->itemApi('Gruppen', 'admin-group-index', 'mdi-action-account-child', 'api-admin-group')
+                ->itemApi('Benutzer', 'admin-user-index', 'person', 'api-admin-user')
+                ->itemApi('Gruppen', 'admin-group-index', 'group', 'api-admin-group')
             ->group('System')
-                ->itemApi('Sprachen', 'admin-lang-index', 'mdi-action-language', 'api-admin-lang')
+                ->itemApi('Sprachen', 'admin-lang-index', 'language', 'api-admin-lang')
             ->group('Bilder')
-                ->itemApi('Effekte', 'admin-effect-index', 'mdi-image-blur-linear', 'api-admin-effect')
-                ->itemApi('Filter', 'admin-filter-index', 'mdi-image-adjust', 'api-admin-filter')
+                ->itemApi('Effekte', 'admin-effect-index', 'blur_circular', 'api-admin-effect')
+                ->itemApi('Filter', 'admin-filter-index', 'adjust', 'api-admin-filter')
         ->menu();
     }
 
