@@ -60,7 +60,7 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
             } else {
                 $label = implode(', ', $array);
             }
-            $items[] = ['id' => $item[$pkName], 'label' => $label];
+            $items[] = ['value' => $item[$pkName], 'label' => $label];
         }
 
         return ['items' => $items];

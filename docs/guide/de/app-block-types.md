@@ -59,7 +59,7 @@ Natürlich benötigen wir mehr als nur Textfelder für die Typen-Einträge. Hier
 | zaa-datetime              | int           | Erstellt eine Datums und Zeiteingabe. Die Rückgabe ist ein *Unix-Timestamp*.
 | zaa-date                  | int           | Erstellt eine Datums eingabe. Die Rückt ist ein *Unix-Timestamp* 
 | zaa-checkbox				| int			| Erstellt eine Checkbox und gibt 0 oder 1 zurück. Options: `zaa-checkox options="{'true-value':1, 'false-value':0}"`.
-| zaa-checkbox-array        | array         | Erstellt ein Checkbox anahnd das options parameter. 
+| zaa-checkbox-array        | array         | Erstellt eine mehrfach auswahl von checkbox mit dem options paramter `{ "value" : 1, "label" => 'Label for Value 1' }`.
 | zaa-file-upload           | int           | Erstellt ein Fileupload Feld für eine Datei. Die Rückgabe ist eine *file_id* aus dem Storage-System.
 | zaa-file-array-upload     | array         | Erstellt ein Fileupload für ein oder mehr Dateien. Die Rückgabe ist per Array *file_id* und *caption*.
 | zaa-image-upload          | int           | Erstellt einen Bildupload Feld für eine Datei. Die Rückgabe ist eine *image_id* aus dem Storage-System. Options: `options="{no_filter:true}"` blendet die Filter auswahl aus.

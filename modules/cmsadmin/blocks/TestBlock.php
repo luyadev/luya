@@ -27,7 +27,7 @@ class TestBlock extends \cmsadmin\base\Block
                 ['var' => 'select', 'label' => 'Select', 'type' => 'zaa-select', 'options' => [['value' => 1, 'label' => 'Value 1']]],
                 ['var' => 'table', 'label' => 'Table', 'type' => 'zaa-table'],
                 ['var' => 'checkbox', 'label' => 'Checkbox', 'type' => 'zaa-checkbox'],
-                ['var' => 'checkboxarray', 'label' => 'Checkbox Array', 'type' => 'zaa-checkbox-array', 'options' => ['items' => [['id' => 1, 'label' => 'Label for Value 1']]]],
+                ['var' => 'checkboxarray', 'label' => 'Checkbox Array', 'type' => 'zaa-checkbox-array', 'options' => ['items' => [['value' => 1, 'label' => 'Label for Value 1']]]],
                 ['var' => 'date', 'label' => 'Date Picker', 'type' => 'zaa-date'],
                 ['var' => 'datetime', 'label' => 'Date Time Picker', 'type' => 'zaa-datetime'],
                 ['var' => 'fileupload', 'label' => 'Fileupload', 'type' => 'zaa-file-upload'],
