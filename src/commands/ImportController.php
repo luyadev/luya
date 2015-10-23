@@ -58,9 +58,9 @@ class ImportController extends \luya\base\Command implements \luya\interfaces\Im
     }
 
     /**
-     * Get all files from a directory (direcotry must be in _scanFolders map). An array will be returnd with the keys
-     * - file => the Filename
-     * - ns => the absolut namepsace to this file.
+     * Get all files from a directory (directory must be in _scanFolders map). An array will be returned with the keys
+     * - file => the filename
+     * - ns => the absolute namespace to this file.
      * 
      * ```php
      * $this->getDirectoryFiles('blocks');
