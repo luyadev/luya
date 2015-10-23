@@ -91,7 +91,7 @@
                         <?php if (count($this->context->getButtons()) > 0): ?>
                         <td style="text-align:right;">
                             <?php foreach ($this->context->getButtons() as $item): ?>
-                            <a class="waves-effect waves-light btn-flat" ng-click="<?= $item['ngClick']; ?>"><i class="<?=$item['icon']; ?>"></i><?=$item['label']; ?></a>
+                            <a class="waves-effect waves-light btn-flat" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons"><?=$item['icon']; ?></i><?=$item['label']; ?></a>
                             <?php endforeach; ?>
                         </td>
                         <?php endif; ?>

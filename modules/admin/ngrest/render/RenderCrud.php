@@ -90,7 +90,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
             if (count($this->getFields('update')) > 0 && $this->can(Auth::CAN_UPDATE)) {
                 $buttons[] = [
                     'ngClick' => 'toggleUpdate(item.'.$this->config->primaryKey.', $event)',
-                    'icon' => 'mdi-editor-mode-edit',
+                    'icon' => 'mode edit',
                     'label' => '',
                 ];
             }
@@ -106,8 +106,8 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
             if ($this->config->isDeletable() && $this->can(Auth::CAN_DELETE)) {
                 $buttons[] = [
                     'ngClick' => 'deleteItem(item.'.$this->config->primaryKey.', $event)',
-                    'icon' => '',
-                    'label' => 'Löschen',
+                    'icon' => 'delete',
+                    'label' => '',
                 ];
             }
             $this->_buttons = $buttons;
