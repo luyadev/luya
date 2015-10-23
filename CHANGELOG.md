@@ -15,6 +15,7 @@ LUYA CHANGELOG
 - added cms logging table to track all events (insert,update,delete) on nav, nav_item and blocks.
 - added new cms\helpers\Url method toModuleRoute which combines url creation from a module which is implemented via cms.
 - added file helper \luya\helpers\FileHelper humanReadableFilesize method.
+- added consistency check and removal of faulty remains to BlockImporter for deleted blocks in folder 'blocks'
 
 1.0.0-alpha20 (8. Okt 2015)
 ---------------------------
