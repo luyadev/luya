@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "eca4ef12874059c1e8040ba5ba240b3a",
-    "content-hash": "d903670d93c1f18ed123b7c1d897a59c",
+    "hash": "9ac298b1eb6adb8678b8207f7261d3d1",
+    "content-hash": "5ae525e8fa1bc9550cab55e3495eb3d6",
     "packages": [
         {
             "name": "bower-asset/angular",
-            "version": "v1.3.10",
+            "version": "v1.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/angular/bower-angular.git",
-                "reference": "ecf0435da949836c63ebf048ea8b7710542e33ce"
+                "reference": "0e8a4e9b36704cacad159b99dd06bbcacef94975"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/angular/bower-angular/zipball/ecf0435da949836c63ebf048ea8b7710542e33ce",
-                "reference": "ecf0435da949836c63ebf048ea8b7710542e33ce",
+                "url": "https://api.github.com/repos/angular/bower-angular/zipball/0e8a4e9b36704cacad159b99dd06bbcacef94975",
+                "reference": "0e8a4e9b36704cacad159b99dd06bbcacef94975",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -70,16 +70,16 @@
         },
         {
             "name": "bower-asset/angular-i18n",
-            "version": "v1.3.10",
+            "version": "v1.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/angular/bower-angular-i18n.git",
-                "reference": "d15f1f3ae425bdc7d31fcedcffa50519f3f21b15"
+                "reference": "1b82200999bfb3f6c18293f07011ceeddeae1d08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/angular/bower-angular-i18n/zipball/d15f1f3ae425bdc7d31fcedcffa50519f3f21b15",
-                "reference": "d15f1f3ae425bdc7d31fcedcffa50519f3f21b15",
+                "url": "https://api.github.com/repos/angular/bower-angular-i18n/zipball/1b82200999bfb3f6c18293f07011ceeddeae1d08",
+                "reference": "1b82200999bfb3f6c18293f07011ceeddeae1d08",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -87,7 +87,8 @@
                 "bower-asset-ignore": [
                     "**/.*",
                     "node_modules",
-                    "components"
+                    "components",
+                    "precommit.sh"
                 ]
             }
         },
@@ -133,20 +134,20 @@
         },
         {
             "name": "bower-asset/angular-resource",
-            "version": "v1.3.10",
+            "version": "v1.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/angular/bower-angular-resource.git",
-                "reference": "6364e8feb985d5fb0016c7eafa5bbfa5e722fb9a"
+                "reference": "6fccc96ce601c60709a35c102a83239312062e6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/angular/bower-angular-resource/zipball/6364e8feb985d5fb0016c7eafa5bbfa5e722fb9a",
-                "reference": "6364e8feb985d5fb0016c7eafa5bbfa5e722fb9a",
+                "url": "https://api.github.com/repos/angular/bower-angular-resource/zipball/6fccc96ce601c60709a35c102a83239312062e6f",
+                "reference": "6fccc96ce601c60709a35c102a83239312062e6f",
                 "shasum": ""
             },
             "require": {
-                "bower-asset/angular": "1.3.10"
+                "bower-asset/angular": "1.4.6"
             },
             "type": "bower-asset-library",
             "extra": {
@@ -961,16 +962,16 @@
         },
         {
             "name": "ifsnop/mysqldump-php",
-            "version": "v2.0",
+            "version": "v2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ifsnop/mysqldump-php.git",
-                "reference": "2f850d6c3ea6d55ca2cb7b37bb568264264f728e"
+                "reference": "701024dd160f15796bed8130c3bdeb26c634785a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ifsnop/mysqldump-php/zipball/2f850d6c3ea6d55ca2cb7b37bb568264264f728e",
-                "reference": "2f850d6c3ea6d55ca2cb7b37bb568264264f728e",
+                "url": "https://api.github.com/repos/ifsnop/mysqldump-php/zipball/701024dd160f15796bed8130c3bdeb26c634785a",
+                "reference": "701024dd160f15796bed8130c3bdeb26c634785a",
                 "shasum": ""
             },
             "require": {
@@ -1009,7 +1010,7 @@
                 "pdo",
                 "sqlite"
             ],
-            "time": "2015-09-10 19:58:38"
+            "time": "2015-10-19 15:58:11"
         },
         {
             "name": "imagine/imagine",
@@ -1253,12 +1254,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
-                "reference": "35bde11fc81eecb2409eb60c5f7920659ad7e00a"
+                "reference": "3cd50e89af7f8c7c5b57c2ac95938576bfe39bb5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/35bde11fc81eecb2409eb60c5f7920659ad7e00a",
-                "reference": "35bde11fc81eecb2409eb60c5f7920659ad7e00a",
+                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/3cd50e89af7f8c7c5b57c2ac95938576bfe39bb5",
+                "reference": "3cd50e89af7f8c7c5b57c2ac95938576bfe39bb5",
                 "shasum": ""
             },
             "require": {
@@ -1267,7 +1268,7 @@
             },
             "require-dev": {
                 "symfony/css-selector": "~2.0,>=2.0.5|~3.0.0",
-                "symfony/process": "~2.0,>=2.0.5|~3.0.0"
+                "symfony/process": "~2.3.34|~2.7,>=2.7.6|~3.0.0"
             },
             "suggest": {
                 "symfony/process": ""
@@ -1299,7 +1300,7 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
-            "time": "2015-10-11 08:29:26"
+            "time": "2015-10-23 14:52:08"
         },
         {
             "name": "symfony/css-selector",
