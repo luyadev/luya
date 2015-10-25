@@ -27,4 +27,14 @@ class DefaultController extends \admin\base\Controller
 
         return $this->redirect($url);
     }
+    
+    public function colorizeValue($value, $displayValue = false)
+    {
+        $text = ($displayValue) ? $value : 'AN';
+        if ($value) {
+            return '<span style="color:green;">' . $text . '</span>';
+        }
+        
+        return '<span style="color:red;">Aus</span>';
+    }
 }
