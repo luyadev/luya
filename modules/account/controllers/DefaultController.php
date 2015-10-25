@@ -39,8 +39,8 @@ class DefaultController extends \account\base\Controller
 
         $model = new LoginForm();
         // see if values are sent via post
-        if (isset($_POST['LoginForm'])) {
-            $model->attributes = $_POST['LoginForm'];
+        if (isset(Yii::$app->request->post('LoginForm'))) {
+            $model->attributes = Yii::$app->request->post('LoginForm');
             if (($userObject = $model->login()) !== false) {
                 if ($this->module->getUserIdentity()->login($userObject)) {
                     $redirect = Yii::$app->request->get('redirect', false);

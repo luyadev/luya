@@ -2,6 +2,7 @@
 
 namespace admin\controllers;
 
+use Yii;
 use admin\ngrest\NgRest;
 use yii\web\Response;
 
@@ -26,12 +27,12 @@ class NgrestController extends \admin\base\Controller
 
     public function actionRender()
     {
-        $config = NgRest::findConfig($_POST['ngrestConfigHash']);
+        $config = NgRest::findConfig(Yii::$app->request->post('ngrestConfigHash', false));
 
         $render = new \admin\ngrest\render\RenderActiveWindow();
 
-        $render->setItemId($_POST['itemId']);
-        $render->setActiveWindowHash($_POST['activeWindowHash']);
+        $render->setItemId(Yii::$app->request->post('itemId', false));
+        $render->setActiveWindowHash(Yii::$app->request->post('activeWindowHash', false));
 
         $ngrest = new NgRest($config);
 

@@ -2,6 +2,7 @@
 
 namespace luya\traits;
 
+use Yii;
 use yii\web\NotFoundHttpException;
 use luya\helpers\Url;
 
@@ -59,8 +60,8 @@ trait ErrorHandler
             'file' => $exception->getFile(),
             'trace' => $_trace,
             'ip' => (isset($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : null,
-            'get' => $_GET,
-            'post' => $_POST,
+            'get' => Yii::$app->request->get(),
+            'post' => Yii::$app->request->post(),
             'server' => $_SERVER,
             'session' => (isset($_SESSION)) ? $_SESSION : null,
         ];

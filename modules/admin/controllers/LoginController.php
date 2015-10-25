@@ -31,7 +31,7 @@ class LoginController extends \admin\base\Controller
         
         $model = new \admin\models\LoginForm();
         // see if values are sent via post
-        if (isset($_POST['secure_token'])) {
+        if (Yii::$app->request->post('secure_token', false)) {
             
             $user = $model->validateSecureToken(Yii::$app->request->post('secure_token'), Yii::$app->session->get('secureId'));
             
@@ -57,7 +57,7 @@ class LoginController extends \admin\base\Controller
         $model = new \admin\models\LoginForm();
         Yii::$app->session->remove('secureId');
         // see if values are sent via post
-        if (isset($_POST['login'])) {
+        if (Yii::$app->request->post('login')) {
             $model->attributes = Yii::$app->request->post('login');
             if (($userObject = $model->login()) !== false) {
                 
@@ -93,7 +93,7 @@ class LoginController extends \admin\base\Controller
         // get the login form model
         $model = new \admin\models\LoginForm();
         // see if values are sent via post
-        if (isset($_POST['login'])) {
+        if (Yii::$app->request->post('login')) {
             $model->attributes = Yii::$app->request->post('login');
             if (($userObject = $model->login()) !== false) {
                 if (Yii::$app->adminuser->login($userObject)) {

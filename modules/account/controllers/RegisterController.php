@@ -22,8 +22,8 @@ class RegisterController extends \account\base\Controller
     {
         $model = new User();
         $model->scenario = 'register';
-        if (isset($_POST['Register'])) {
-            $model->attributes = $_POST['Register'];
+        if (isset(Yii::$app->request->post('Register'))) {
+            $model->attributes = Yii::$app->request->post('Register');
             if ($model->validate()) {
                 $model->encodePassword();
                 $save = $model->save();

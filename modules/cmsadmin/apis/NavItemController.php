@@ -52,7 +52,7 @@ class NavItemController extends \admin\base\RestController
             throw new Exception('Unable to find item id ' . $navItemId);
         }
         $model->setParentFromModel();
-        $model->attributes = $_POST;
+        $model->attributes = Yii::$app->request->post();;
         $v = $model->validate();
         if ($model->validate()) {
             if ($model->save()) {
