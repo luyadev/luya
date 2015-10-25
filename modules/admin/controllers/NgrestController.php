@@ -41,7 +41,7 @@ class NgrestController extends \admin\base\Controller
 
     public function actionCallback()
     {
-        $config = NgRest::findConfig($_GET['ngrestConfigHash']);
+        $config = NgRest::findConfig(Yii::$app->request->get('ngrestConfigHash', false));
 
         $render = new \admin\ngrest\render\RenderActiveWindowCallback();
 

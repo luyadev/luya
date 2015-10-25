@@ -14,7 +14,7 @@ class DefaultController extends \cms\base\Controller
     {
         parent::init();
         // set the current path to activeUrl
-        Yii::$app->links->activeUrl = (isset($_GET['path']) ? $_GET['path'] : null); // @todo should we use Yii::$app->request->get('path', null); instead?
+        Yii::$app->links->activeUrl = Yii::$app->request->get('path', null);
 
         if (!YII_DEBUG && YII_ENV == 'prod' && $this->module->enableCompression) {
             $this->view->on(View::EVENT_AFTER_RENDER, [$this, 'minify']);

@@ -16,10 +16,13 @@ class RenderActiveWindowCallback extends \admin\ngrest\base\Render implements \a
 {
     public function render()
     {
+        $activeWindowHash = Yii::$app->request->get('activeWindowHash');
+        $activeWindowCallback = Yii::$app->request->get('activeWindowCallback');
+        
         $activeWindows = $this->config->getPointer('aw');
-        $obj = $activeWindows[$_GET['activeWindowHash']]['object'];
+        $obj = $activeWindows[$activeWindowHash]['object'];
 
-        $function = 'callback'.ucfirst($_GET['activeWindowCallback']);
+        $function = 'callback'.ucfirst($activeWindowCallback);
 
         $args = Yii::$app->request->post();
 
