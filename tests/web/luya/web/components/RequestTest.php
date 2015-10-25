@@ -1,9 +1,9 @@
 <?php
 
-namespace tests\web\luya\components;
+namespace tests\web\luya\web\components;
 
 use Yii;
-use luya\components\Request;
+use luya\web\components\Request;
 
 class RequestTest extends \tests\web\Base
 {

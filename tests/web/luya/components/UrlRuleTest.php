@@ -3,7 +3,8 @@
 namespace tests\web\luya\components;
 
 use Yii;
-
+use luya\web\components\Request;
+use luya\web\components\UrlManager;
 /**
  * @author nadar
  */
@@ -13,10 +14,10 @@ class UrlRuleTest extends \tests\web\Base
     {
         Yii::$app->composition->pattern = '<langShortCode:[a-z]{2}>/<foo:[0-9]{4}>/<bar:[a-z0-9]+>';
 
-        $request = new \luya\components\Request();
+        $request = new Request();
         $request->pathInfo = 'de/1234/luya09/my/website';
 
-        $manager = new \luya\components\UrlManager();
+        $manager = new UrlManager();
         $rule = new \luya\components\UrlRule();
 
         $response = $rule->parseRequest($manager, $request);
@@ -42,10 +43,10 @@ class UrlRuleTest extends \tests\web\Base
 
     public function testNotExistingUrlRule()
     {
-        $request = new \luya\components\Request();
+        $request = new Request();
         $request->pathInfo = '/news';
 
-        $manager = new \luya\components\UrlManager();
+        $manager = new UrlManager();
         $rule = new \luya\components\UrlRule();
 
         // first part and not a module. equals false;
@@ -54,7 +55,7 @@ class UrlRuleTest extends \tests\web\Base
 
     public function testUrlParts()
     {
-        $request = new \luya\components\Request();
+        $request = new Request();
         $request->pathInfo = '';
 
         $rule = new \luya\components\UrlRule();
@@ -62,13 +63,13 @@ class UrlRuleTest extends \tests\web\Base
         $this->assertEquals(true, is_array($rule->getUrlParts($request)));
         $this->assertEquals(0, count($rule->getUrlParts($request)));
 
-        $request = new \luya\components\Request();
+        $request = new Request();
         $request->pathInfo = '/news';
 
         $this->assertEquals(true, is_array($rule->getUrlParts($request)));
         $this->assertEquals(1, count($rule->getUrlParts($request)));
 
-        $request = new \luya\components\Request();
+        $request = new Request();
         $request->pathInfo = '/news/';
 
         $this->assertEquals(true, is_array($rule->getUrlParts($request)));
@@ -97,10 +98,10 @@ class UrlRuleTest extends \tests\web\Base
     
     private function callUrl($url) 
     {
-        $request = new \luya\components\Request();
+        $request = new Request();
         $request->pathInfo = $url;
         
-        $manager = new \luya\components\UrlManager();
+        $manager = new UrlManager();
         $rule = new \luya\components\UrlRule();
         
         return $rule->parseRequest($manager, $request);

@@ -1,7 +1,9 @@
 <?php
 
 $config = [
+    
     'defaultRoute' => 'command/help',
+    /*
     'controllerMap' => [
         'migrate' => '\luya\commands\MigrateController',
         'crud' => '\luya\commands\CrudController',
@@ -12,6 +14,8 @@ $config = [
         'health' => '\luya\commands\HealthController',
         'block' => '\luya\commands\BlockController',
     ],
+    */
+    /*
     'components' => [
         'mail' => [
             'class' => '\luya\components\Mail',
@@ -24,10 +28,11 @@ $config = [
             'class' => '\luya\components\Composition',
         ],
     ],
+    */
     'bootstrap' => [
         'luya\cli\Bootstrap',
     ],
-    'timezone' => 'Europe/Berlin',
+    //'timezone' => 'Europe/Berlin',
 ];
 
 return $config;

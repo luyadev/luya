@@ -2,11 +2,13 @@
 
 namespace tests\web\luya\components;
 
+use luya\web\components\Request;
+
 class CompositionTest extends \tests\web\Base
 {
     public function testResolvedPaths()
     {
-        $request = new \luya\components\Request();
+        $request = new Request();
         $request->pathInfo = 'de/hello/world';
 
         $composition = new \luya\components\Composition();
@@ -24,7 +26,7 @@ class CompositionTest extends \tests\web\Base
 
     public function testMultipleResolvedPaths()
     {
-        $request = new \luya\components\Request();
+        $request = new Request();
         $request->pathInfo = 'ch/de/hello/world';
 
         $composition = new \luya\components\Composition();
@@ -45,7 +47,7 @@ class CompositionTest extends \tests\web\Base
     
     private function resolveHelper($url, $compUrl)
     {
-        $request = new \luya\components\Request();
+        $request = new Request();
         $request->pathInfo = $url;
         
         $composition = new \luya\components\Composition();

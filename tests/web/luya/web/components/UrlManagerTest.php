@@ -1,8 +1,10 @@
 <?php
 
-namespace tests\web\luya\components;
+namespace tests\web\luya\web\components;
 
 use Yii;
+use luya\web\components\UrlManager;
+use luya\web\components\Request;
 
 /**
  * @author nadar
@@ -27,10 +29,10 @@ class UrlManagerTest extends \tests\web\Base
 
     public function testBasicRequest()
     {
-        $urlManager = new \luya\components\UrlManager();
+        $urlManager = new UrlManager();
         $urlManager->addRules($this->urlRules);
 
-        $request = new \luya\components\Request();
+        $request = new Request();
         $request->pathInfo = 'news/detail/1/foo-bar';
 
         $r = $urlManager->parseRequest($request);
@@ -49,10 +51,10 @@ class UrlManagerTest extends \tests\web\Base
 
     public function testCompositionRequest()
     {
-        $urlManager = new \luya\components\UrlManager();
+        $urlManager = new UrlManager();
         $urlManager->addRules($this->urlRules);
 
-        $request = new \luya\components\Request();
+        $request = new Request();
         $request->pathInfo = 'news/english-test/1';
 
         $r = $urlManager->parseRequest($request);
@@ -69,20 +71,20 @@ class UrlManagerTest extends \tests\web\Base
 
     public function testRequestComponent()
     {
-        $request = new \luya\components\Request();
+        $request = new Request();
         $this->assertEquals(false, $request->isAdmin());
 
-        $request = new \luya\components\Request();
+        $request = new Request();
         $request->forceWebRequest = true;
         $request->pathInfo = 'admin';
         $this->assertEquals(true, $request->isAdmin());
 
-        $request = new \luya\components\Request();
+        $request = new Request();
         $request->forceWebRequest = true;
         $request->pathInfo = 'de/admin';
         $this->assertEquals(true, $request->isAdmin());
 
-        $request = new \luya\components\Request();
+        $request = new Request();
         $request->forceWebRequest = true;
         $request->pathInfo = 'de/foo/admin';
         $this->assertEquals(false, $request->isAdmin());

@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\components;
+namespace luya\web\components;
 
 use Yii;
 use luya\helpers\Url;

@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\components;
+namespace luya\web\components;
 
 use Yii;
 
@@ -16,6 +16,14 @@ class Request extends \yii\web\Request
      */
     public $forceWebRequest = false;
 
+    public $cookieValidationKey = 'cookeivalidationkey';
+    
+    public $enableCsrfValidation = false;
+    
+    public $parsers = [
+        'application/json' => 'yii\web\JsonParser'
+    ];
+    
     /**
      * Resolve the current url request and check if admin context.
      *

@@ -1,9 +1,9 @@
 <?php
 
-namespace tests\web\luya\components;
+namespace tests\web\luya\web\components;
 
 use Yii;
-use luya\components\View;
+use luya\web\components\View;
 
 class ViewTest extends \tests\web\Base
 {

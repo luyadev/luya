@@ -20,4 +20,25 @@ class Application extends \yii\console\Application
      *           to this property.
      */
     public $mute = false;
+    
+    public $controllerMap = [
+        'migrate' => '\luya\commands\MigrateController',
+        'crud' => '\luya\commands\CrudController',
+        'module' => '\luya\commands\ModuleController',
+        'command' => '\luya\commands\CommandController',
+        'import' => '\luya\commands\ImportController',
+        'setup' => '\luya\commands\SetupController',
+        'health' => '\luya\commands\HealthController',
+        'block' => '\luya\commands\BlockController',
+    ];
+    
+    /**
+     * @inheritdoc
+     */
+    public function coreComponents()
+    {
+        return array_merge($this->luyaCoreComponents(), [
+            'errorHandler' => ['class' => 'luya\cli\components\ErrorHandler'],
+        ]);
+    }
 }

@@ -27,8 +27,8 @@ class Reflection
     public function __construct(Module $module)
     {
         $this->module = $module;
-        $this->_request = new \luya\components\Request();
-        $this->_urlManager = new \luya\components\UrlManager();
+        $this->_request = new \luya\web\components\Request();
+        $this->_urlManager = new \luya\web\components\UrlManager();
         $this->_urlManager->addRules($module->urlRules, true);
     }
 
