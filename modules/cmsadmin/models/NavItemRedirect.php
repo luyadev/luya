@@ -24,8 +24,8 @@ class NavItemRedirect extends \cmsadmin\base\NavItemType
             [['type', 'value'], 'required'],
         ];
     }
-
-    public function transformValue()
+    
+    public function resolveValue()
     {
         switch($this->type) {
             case self::TYPE_INTERNAL_PAGE:
@@ -37,7 +37,7 @@ class NavItemRedirect extends \cmsadmin\base\NavItemType
     
     public function getContent()
     {
-        Yii::$app->getResponse()->redirect(Url::trailing(Yii::$app->urlManager->baseUrl) . $this->transformValue());
+        Yii::$app->getResponse()->redirect(Url::trailing(Yii::$app->urlManager->baseUrl) . $this->resolveValue());
         Yii::$app->end();
         return;
     }

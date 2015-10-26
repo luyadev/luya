@@ -6,6 +6,7 @@ use Yii;
 use Exception;
 use cmsadmin\models\Cat;
 use admin\models\Lang;
+use cmsadmin\models\NavItemRedirect;
 
 /**
  * Links component array base:.
@@ -39,6 +40,7 @@ class Links extends \yii\base\Component
         foreach ($this->getLangs() as $lang) {
             $this->_links[$lang['id']] = [];
             $this->recursiveFindChildren($lang, 0, '', 0);
+            $this->resolveRedirect($lang['id']);
         }
     }
 
@@ -90,12 +92,30 @@ class Links extends \yii\base\Component
 
         return false;
     }
+    
+    private function resolveRedirect($langId)
+    {
+        foreach($this->findAll(['redirect_resolve' => true, 'lang_id' => $langId]) as $index => $link) {
+            $redirect = NavItemRedirect::findOne($link['redirect_resolve_value']);
+            switch($redirect->type) {
+                case NavItemRedirect::TYPE_INTERNAL_PAGE:
+                    // $redirect->value is nav_id
+                    $findLink = $this->findOne(['lang_id' => $langId, 'nav_id' => $redirect->value]);
+                    $this->editLink($langId, $index, ['url' => $findLink['url'], 'full_url' => $findLink['full_url']]);
+                    break;
+            }
+        }
+    }
+
+    private function editLink($langId, $index, array $args)
+    {
+        $this->_links[$langId][$index] = array_merge($this->_links[$langId][$index], $args);
+    }
 
     private function recursiveFindChildren($lang, $parentNavId, $urlPrefix, $depth)
     {
         foreach ($this->getChildren($lang['id'], $parentNavId) as $index => $item) {
             $rewrite = $urlPrefix.$item['rewrite'];
-
             $this->_links[$lang['id']][] = [
                 'full_url' => $this->getPrefix().$rewrite,
                 'url' => $rewrite,
@@ -111,6 +131,8 @@ class Links extends \yii\base\Component
                 'depth' => (int) $depth,
                 'is_hidden' => $item['is_hidden'],
                 'is_offline' => $item['is_offline'],
+                'redirect_resolve' => ($item['nav_item_type'] == 3) ? true : false,
+                'redirect_resolve_value' => ($item['nav_item_type'] == 3) ? $item['nav_item_type_id'] : false,
             ];
 
             if ($this->hasChildren($lang['id'], $item['nav_id'])) {
@@ -130,11 +152,11 @@ class Links extends \yii\base\Component
 
     private function getChildren($langId, $parentNavId)
     {
-        return Yii::$app->db->createCommand('SELECT n.id as nav_id, n.is_hidden, n.cat_id, n.parent_nav_id, n.is_offline, i.id as nav_item_id, i.lang_id, i.title, i.rewrite, i.lang_id FROM cms_nav_item as i LEFT JOIN (cms_nav as n) ON (n.id=i.nav_id) WHERE i.lang_id=:lang_id AND n.parent_nav_id=:parent_nav_id AND n.is_deleted=0 ORDER by n.sort_index ASC')->bindValues([
+        return Yii::$app->db->createCommand('SELECT n.id as nav_id, n.is_hidden, n.cat_id, n.parent_nav_id, n.is_offline, i.id as nav_item_id, i.lang_id, i.title, i.rewrite, i.lang_id, i.nav_item_type, i.nav_item_type_id FROM cms_nav_item as i LEFT JOIN (cms_nav as n) ON (n.id=i.nav_id) WHERE i.lang_id=:lang_id AND n.parent_nav_id=:parent_nav_id AND n.is_deleted=0 ORDER by n.sort_index ASC')->bindValues([
             ':parent_nav_id' => $parentNavId, ':lang_id' => $langId,
         ])->queryAll();
     }
-
+    
     /**
      * @param numeric|string $langShortCode Could be `1` or `de`
      *
@@ -203,13 +225,13 @@ class Links extends \yii\base\Component
         $_index = $this->getLinksLanguageContainer($lang);
 
         foreach ($argsArray as $key => $value) {
-            foreach ($_index as $link => $args) {
+            foreach ($_index as $linkIndexId => $args) {
                 if (!isset($args[$key])) {
-                    unset($_index[$link]);
+                    unset($_index[$linkIndexId]);
                 }
 
                 if (isset($args[$key]) && $args[$key] != $value) {
-                    unset($_index[$link]);
+                    unset($_index[$linkIndexId]);
                 }
             }
         }
