@@ -66,7 +66,7 @@ class Parser
     {
         $alias = false;
         if (is_numeric($result['value'])) {
-            $link = Yii::$app->links->findone(['nav_id' => $result['value']]);
+            $link = Yii::$app->links->findOne(['nav_id' => $result['value'], 'show_hidden' => true]);
             if ($link) {
                 $href = $link['full_url'];
                 $alias = $link['title'];
