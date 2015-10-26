@@ -19,9 +19,9 @@
                     <div class="block__title" ng-bind-html="safe(block.full_name)" ng-click="toggleEdit()"></div>
                 </div>
                 <div class="right">
-                    <i ng-show="!edit && isEditable()" class="mdi-editor-mode-edit [ waves-effect waves-blue ]" ng-click="toggleEdit()"></i>
-                    <i ng-show="!edit" class="mdi-action-delete [ waves-effect waves-blue ]" ng-click="removeBlock(block)"></i>
-                    <i ng-show="edit" class="mdi-navigation-close [ waves-effect waves-blue ]" ng-click="toggleEdit()"></i>
+                    <i ng-show="!edit && isEditable()" class="material-icons [ waves-effect waves-blue ]" ng-click="toggleEdit()">edit</i>
+                    <i ng-show="!edit" class="material-icons [ waves-effect waves-blue ]" ng-click="removeBlock(block)">delete</i>
+                    <i ng-show="edit" class="material-icons [ waves-effect waves-blue ]" ng-click="toggleEdit()">close</i>
                 </div>
             </div>
             <div class="block__body cmsadmin-tags" ng-click="toggleEdit()" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
