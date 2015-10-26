@@ -195,7 +195,7 @@
                                     <h4>
                                         {{item.title}}
                                         <span ng-hide="settings">
-                                            <i ng-click="toggleSettings()" class="mdi-editor-mode-edit right [ waves-effect waves-blue ]"></i>
+                                            <i ng-click="toggleSettings()" class="material-icons right [ waves-effect waves-blue ]">mode_edit</i>
                                             <a ng-href="cms/preview/?itemId={{item.id}}" target="_blank" class="right">
                                                 <i class="material-icons [ waves-effect waves-blue ]">open_in_new</i>
                                             </a>

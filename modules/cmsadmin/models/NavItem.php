@@ -117,7 +117,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     
     public function verifyRewrite($rewrite, $langId)
     {
-        if (Yii::$app->hasModule($rewrite)) {
+        if (Yii::$app->hasModule($rewrite) && $this->parent_nav_id == 0) {
             $this->addError('rewrite', 'Die URL darf nicht verwendet werden da es ein Modul mit dem gleichen Namen gibt.');
             return false;
         }
