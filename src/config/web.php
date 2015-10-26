@@ -47,9 +47,11 @@ $config = [
         ],
         */
     ],
+    /*
     'bootstrap' => [
         'luya\web\Bootstrap',
     ],
+    */
     //'timezone' => 'Europe/Berlin',
 ];
 
