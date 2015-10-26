@@ -26,6 +26,7 @@ class Module extends \admin\base\Module
         'api-admin-lang' => 'admin\apis\LangController', // protected by auth()
         'api-admin-effect' => 'admin\apis\EffectController', // protected by auth()
         'api-admin-filter' => 'admin\apis\FilterController', // protected by auth()
+        'api-admin-tag' => 'admin\apis\TagController',
     ];
 
     public $urlRules = [
@@ -48,6 +49,7 @@ class Module extends \admin\base\Module
                 ->itemApi('Gruppen', 'admin-group-index', 'group', 'api-admin-group')
             ->group('System')
                 ->itemApi('Sprachen', 'admin-lang-index', 'language', 'api-admin-lang')
+                ->itemApi('Tags', 'admin-tag-index', 'label', 'api-admin-tag')
             ->group('Bilder')
                 ->itemApi('Effekte', 'admin-effect-index', 'blur_circular', 'api-admin-effect')
                 ->itemApi('Filter', 'admin-filter-index', 'adjust', 'api-admin-filter')

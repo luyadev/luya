@@ -219,6 +219,47 @@
 	
 // activeWindowController.js
 	
+	zaa.controller("ActiveWindowTagController", function($scope, $http) {
+
+		$scope.crud = $scope.$parent; // {{ data.aw.itemId }}
+		
+		$scope.tags = [];
+		
+		$scope.relation = {};
+		
+		$scope.loadTags = function() {
+			$http.get($scope.crud.getActiveWindowCallbackUrl('LoadTags')).success(function(transport) {
+				$scope.tags = transport;
+			});
+		};
+		
+		$scope.loadRelations = function() {
+			$http.get($scope.crud.getActiveWindowCallbackUrl('LoadRelations')).success(function(transport) {
+				$scope.relation = {};
+				transport.forEach(function(value, key) {
+					$scope.relation[value.tag_id] = 1;
+				});
+			});
+		};
+		
+		$scope.saveRelation = function(tag, value) {
+			$scope.crud.sendActiveWindowCallback('SaveRelation', {'tagId': tag.id, 'value': value}).then(function(response) {
+				console.log(response);
+			});
+		};
+		
+		$scope.$watch(function() { return $scope.relation }, function(n, o) {
+			console.log(n);
+		});
+		
+		$scope.$watch(function() { return $scope.data.aw.itemId }, function(n, o) {
+			$scope.loadRelations();
+		});
+		
+		$scope.loadTags();
+		
+	});
+	
 	/**
 	 * ActiveWindow GalleryController
 	 * 
