@@ -22,6 +22,12 @@ abstract class Block extends \yii\base\Object implements BlockInterface
     private $_envOptions = [];
 
     /**
+     * @var boolean Choose whether block is a layout/container/segmnet/section block or not, Container elements will be optically displayed
+     * in a different way for a better user experience. Container block will not display isDirty colorizing.
+     */
+    public $isContainer = false;
+    
+    /**
      * @var string Containing the name of the environment (used to find the view files to render). The
      * module(Name) can be started with the Yii::getAlias() prefix `@`, otherwhise the `@` will be 
      * added automatically.

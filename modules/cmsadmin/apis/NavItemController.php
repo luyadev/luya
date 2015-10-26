@@ -198,6 +198,7 @@ class NavItemController extends \admin\base\RestController
 
         return [
             'is_dirty' => (int) $blockItem['is_dirty'],
+            'is_container' => (int) $blockObject->isContainer,
             'id' => $blockItem['id'],
             'name' => $blockObject->name(),
             'icon' => $blockObject->icon(),
