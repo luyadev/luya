@@ -58,9 +58,4 @@ class NavItemModule extends \cmsadmin\base\NavItemType
 
         return $response;
     }
-
-    public function getHeaders()
-    {
-        return;
-    }
 }

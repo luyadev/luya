@@ -109,16 +109,6 @@ class NavItemPage extends \cmsadmin\base\NavItemType
         return $string;
     }
 
-    /**
-     * @todo
-     *
-     * @see \cmsadmin\base\NavItemType::getHeaders()
-     */
-    public function getHeaders()
-    {
-        return;
-    }
-
     public function getLayout()
     {
         return $this->hasOne(\cmsadmin\models\Layout::className(), ['id' => 'layout_id']);
