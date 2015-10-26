@@ -1,6 +1,6 @@
 <?php
 
-namespace app\blocks;
+namespace app\assets;
 
 class AjaxBlockAsset extends \luya\base\Asset
 {
