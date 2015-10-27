@@ -5,7 +5,87 @@
 .navbar__button {
 	padding: 0 15px;
 	cursor: pointer;
+	max-height: 64px;
+	transition: 0.25s ease background-color;
+	//MY
+	&.navbar__button__circle {
+		min-height: 64px;
+		transition: 0.25s ease color;
+
+		.icon__spawn-text {
+			top:-15px;
+		}
+	}
+	&.navbar__button--redhighlight {
+		// max-height: 64px;
+		
+		// i, .icon__spawn-text{
+		// 	transition: 0.25s ease color;
+		// }
+		
+		&:hover {
+			
+			i, .icon__spawn-text{
+				color: color("red", "base");
+			}
+		}
+	}
+	//MY END
+	&:hover {
+		background-color: color("grey", "lighten-3");
+		
+
+		.icon__spawn-text{
+			opacity: 1;
+		}
+		.navbar__button__circle-icon{
+			border-color: color("blue", "base");
+		}
+
+    	i, strong, .icon__spawn-text,
+    	.navbar__button__circle-usercount{
+			color: color("blue", "base");
+
+		}
+	}	
 }
+
+//MY
+.navbar__button__anchor {
+	padding: 0;
+}
+.navbar__right {
+	li {
+		max-height: 64px;
+	}
+}
+.navbar__button__circle-icon {
+	display: block;
+	position: relative;
+	border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    top: 16px;
+    border: 3px solid;
+    border-color: #fff;
+	// transition: 0.25s ease border-color;
+    margin: 0 auto;
+}
+.navbar__button__circle-usercount {
+	text-align: center;
+    margin-top: -18px;
+}
+.icon__spawn-text {
+   	height: 0;
+   	opacity: 0;
+   	
+   	transition: 0.25s ease opacity color;
+    position: relative;
+    top: -48px;
+    font-size: 8px;
+    text-align: center;
+}
+//MY END
 
 /**
  * #NAVBAR__LINK

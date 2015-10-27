@@ -309,33 +309,35 @@ $this->beginPage()
                             <li ng-click="reload()" style="cursor: pointer;">
                                 <div class="navbar__button">
                                     <i class="material-icons">replay</i>
+                                    <p class="icon__spawn-text">Reload</p>
                                 </div>
                             </li>
                             <li ng-mouseenter="showDebugContainer=1" ng-mouseleave="showDebugContainer=0">
                                 <div class="navbar__button">
-                                    <i class="material-icons">sms_failed</i>
+                                    <i class="material-icons">developer_board</i>
+                                    <p class="icon__spawn-text">Version</p>
                                 </div>
                             </li>
                             <li ng-mouseenter="showOnlineContainer=1" ng-mouseleave="showOnlineContainer=0">
-                                <div class="navbar__button">
-                                    <i class="[ material-icons left ] navbar__icon">group</i>
-                                    {{notify.length}}
+                                <div class="navbar__button navbar__button__circle">
+                                    <div class="navbar__button__circle-icon">
+                                        <p class="navbar__button__circle-usercount">{{notify.length}}</p>
+                                    </div>
+                                    <p class="icon__spawn-text">Online User</p>
+                                </div>
+                            </li>  
+                            <li>
+                                <div class="navbar__button navbar__button--redhighlight">
+                                    <a href="<?= \Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="navbar__button__anchor">
+                                        <i class="material-icons">exit_to_app</i>
+                                        <p class="icon__spawn-text">Logout</p>
+                                    </a>
                                 </div>
                             </li>
-                            <li>
-                                <div class="user-menu" ng-mouseenter="userMenuOpen = true" ng-mouseleave="userMenuOpen = false" ng-class="{ 'user-menu--show-user' : !userMenuOpen, 'user-menu--show-menu' : userMenuOpen }">
-
-                                    <div class="user-menu__user">
-                                        <i class="material-icons left">account_circle</i><strong><?php echo $user->firstname; ?></strong>
-                                    </div>
-
-                                    <div class="user-menu__menu">
-                                        <i class="material-icons user-menu__menu-icon">settings</i><!-- NO WHITESPACE
-                                        --><a href="<?= \Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="user-menu__menu-icon user-menu__menu-icon--logout">
-                                            <i class="material-icons">exit_to_app</i>
-                                        </a>
-                                    </div>
-
+                            <li>                         
+                                <div class="navbar__button">                                    
+                                    <i class="material-icons left">account_circle</i><strong><?php echo $user->firstname; ?></strong><!-- NO WHITESPACE
+                                    --><p class="icon__spawn-text">Profil</p>                                    
                                 </div>
                             </li>
                         </ul>
