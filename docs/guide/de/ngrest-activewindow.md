@@ -57,7 +57,26 @@ After pushing the ***Call the Callback*** button, the activeWindowCallbackRespon
 
 In NgRest einbinden
 --------------------
+Um ein ActiveWindow einzubinden registerien Sie die Klasse im `aw` pointer mit der Funktion `register` innerhalb ihres ngrest config abschnittes.
 
 ```php
-$config->aw->register(new \admin\aws\TestActiveWindow(), 'Mein Test Window');
+public function ngRestConfig($config)
+{
+    // ...
+    $config->aw->register(new \admin\aws\TestActiveWindow(), 'Mein Test Window');
+    // ...
+    
+    return $config;
+}
 ```
+
+Das erste Argument der register Klasse definiert die *ActiveWindow Klasse*. Es wird also ein Object erzeugt. Die ActiveWindows können initial Paremter verlangen welche im Konstruktor der ActiveWindows definiert werden.
+
+Vordefinierte Active Windows
+----------------------------
+Gewisse Active Windows kannst du in deinem Projekte wieder verwenden und müssen nicht zusätzlich entwickelt werden. Hier eine Liste von ActiveWindows die du verwendest kannst und mit der Installtion der Admin ebene automatisch mit geliefert werden.
+
+|name   |Klasse |Parameter
+|--     |--     |--
+|Tag    |`admin\aws\TagActiveWindow` |`($tableName)` 
+|Gallery|`admin\aws\Gallery` |`($refTableName, $imageIdFieldName, $refFieldName)`
