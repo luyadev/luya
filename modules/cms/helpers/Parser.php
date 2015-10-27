@@ -55,7 +55,7 @@ class Parser
             }
             
             if ($replace !== null) {
-                $content = preg_replace('/'.preg_quote($row[0]).'/mi', $replace, $content, 1);
+                $content = preg_replace('['.preg_quote($row[0]).']mi', $replace, $content, 1);
             }
         }
 

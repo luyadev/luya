@@ -26,12 +26,13 @@ class ParserTest extends \tests\web\Base
         $this->assertEquals('<a href="/page-1">label</a>', Parser::encode($content));
     }
     
-    public function staticLinksParser()
+    public function testStaticLinksParser()
     {
         $this->assertEquals('<a href="http://luya.io">luya.io</a>', Parser::encode('link[http://luya.io](luya.io)'));
         $this->assertEquals('<a href="http://luya.io">Hello Whitespace</a>', Parser::encode('link[http://luya.io](Hello Whitespace)'));
         $this->assertEquals('<a href="http://luya.io">http://luya.io</a>', Parser::encode('link[http://luya.io]'));
         $this->assertEquals('<a href="http://luya.io">luya.io</a>', Parser::encode('link[luya.io]'));
         $this->assertEquals('<a href="http://luya.io">Hello Whitespace</a>', Parser::encode('link[luya.io](Hello Whitespace)'));
+        $this->assertEquals('<a href="http://luya.io">Hello /\#~[] Chars</a>', Parser::encode('link[luya.io](Hello /\#~[] Chars)'));
     }
 }
