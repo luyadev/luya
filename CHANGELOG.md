@@ -4,6 +4,9 @@ LUYA CHANGELOG
 1.0.0-beta1 (in progress)
 -------------------------
 - **[BC BREAK]** `#344` zaa-checkbox-array value describer `id` is replaced by `value` to be consistent
+- added luya admin tag active window `$config->aw->register(new \admin\aws\TagActiveWindow(static::tableName()), 'Tags');`.
+- added ngrest list color plugin.
+- added cmsadmin ability to redirect to internal pages.
 - added ability to register asset class inside a block
 - added ability to create block ajax requests with callbacks.
 - added ability to add rewrite if not existing in same navigation level.
