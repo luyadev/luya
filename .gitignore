@@ -24,5 +24,4 @@
 ### LUYA
 phpunit.xml
 vendor/
-composer.lock
 scripts/.subsplit
