@@ -227,6 +227,8 @@
 		
 		$scope.relation = {};
 		
+		$scope.newTagName = null;
+		
 		$scope.loadTags = function() {
 			$http.get($scope.crud.getActiveWindowCallbackUrl('LoadTags')).success(function(transport) {
 				$scope.tags = transport;
@@ -242,15 +244,25 @@
 			});
 		};
 		
-		$scope.saveRelation = function(tag, value) {
-			$scope.crud.sendActiveWindowCallback('SaveRelation', {'tagId': tag.id, 'value': value}).then(function(response) {
-				console.log(response);
+		$scope.saveTag = function() {
+			var tagName = $scope.newTagName;
+			
+			$scope.crud.sendActiveWindowCallback('SaveTag', {'tagName': tagName}).then(function(response) {
+				if (response.data) {
+					$scope.tags.push({id: response.data, name: tagName});
+					Materialize.toast('Das Tag ' + tagName + ' wurde gespeichert.', 500);
+				} else {
+					Materialize.toast('Das Tag ' + tagName + ' existiert bereits und wurde deshalb nicht gespeichert.', 2000);
+				}
+				$scope.newTagName = null;
 			});
 		};
 		
-		$scope.$watch(function() { return $scope.relation }, function(n, o) {
-			console.log(n);
-		});
+		$scope.saveRelation = function(tag, value) {
+			$scope.crud.sendActiveWindowCallback('SaveRelation', {'tagId': tag.id, 'value': value}).then(function(response) {
+				Materialize.toast('Tag information wurde gespeichert.', 500);
+			});
+		};
 		
 		$scope.$watch(function() { return $scope.data.aw.itemId }, function(n, o) {
 			$scope.loadRelations();

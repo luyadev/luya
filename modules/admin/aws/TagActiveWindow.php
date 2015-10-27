@@ -50,4 +50,19 @@ class TagActiveWindow extends \admin\ngrest\base\ActiveWindow
         
         return true;
     }
+    
+    public function callbackSaveTag($tagName)
+    {
+        $model = Tag::find()->where(['name' => $tagName])->one();
+        
+        if ($model) {
+            return false;
+        }
+        
+        $model = new Tag();
+        $model->scenario = 'restcreate';
+        $model->setAttributes(['name' => $tagName]);
+        $model->save(false);
+        return $model->id;
+    }
 }
