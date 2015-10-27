@@ -40,6 +40,10 @@
         margin: 0;
         padding: 0;
     }
+	.accordion__empty-message {
+		text-align: center;
+		margin: 10px 0;
+	}
 }
 
 .accordion__entry--open > .accordion__body--empty:after {
@@ -61,5 +65,5 @@
 
 .accordion__entry--open > .accordion__body {
     height: auto;
-    padding: 20px;
+    padding: 0 10px;
 }
