@@ -60,6 +60,8 @@ class TextTransformBlock extends \cmsadmin\base\Block
 
 > Anstelle eines Zusammengsetzten Strings für die Rückgabe der TwigFrontend-Datei kannst du auch die Methode `$this->render()` verwenden. Die Render funktione wird gemäss eine Konvention nach einem Twig File im views Ordner des modules suchen.
 
+> Pro Tipp: Wenn du einen Block hast welcher als Platzhalter agiert, und keine Admin View representation benötgit solltest du `public $isContainer = true` anschalten, um eine Optische hervorhebung zu erhalten.
+
 Block registrieren
 ------------------
 Um einen Block welchen du erstellt hast zu registrieren gehen wir in das *Terminal* und wechseln in das Projekt Verzeichniss. Dort geben wir den befehl ein:
