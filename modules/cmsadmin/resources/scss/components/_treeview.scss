@@ -53,12 +53,13 @@ $treeview--active-color: $blue !default;
 }
 
 .treeview__link {
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 1.2rem;
-    padding: 8px 5px;
+    padding: 5px;
     display: block;
     cursor: pointer;
     color: $treeview--color;
+	border-radius: 2px;
 
     &.treeview__link--active {
         color: $treeview--active-color;
@@ -90,10 +91,11 @@ $treeview--active-color: $blue !default;
 
     &.treeview__move--visible,
     &.treeview__eye--visible {
-		width: 20px;
-		height: 20px;
+		width: 1rem;
+		height: 1rem;
+		margin-top: 1px;
 		margin-right: 5px;
-		font-size: 20px;
+		font-size: 1rem;
     }
 }
 
@@ -102,16 +104,16 @@ $treeview--active-color: $blue !default;
 }
 
 .treeview__empty-circle {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     display: inline-block;
-    margin: 0 5px 0 2px;
+    margin: 0 6px 0 4px;
     border: 1px solid $treeview--color;
     transition: 0.25s ease border, 0.25s ease width, 0.25s ease margin;
 }
 .treeview__link--active .treeview__empty-circle {
-    border: 6px solid $treeview--active-color;
+    border: 5px solid $treeview--active-color;
 }
 
 .treeview--drag-active .treeview__empty-circle,
