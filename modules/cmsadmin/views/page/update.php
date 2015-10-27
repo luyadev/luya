@@ -284,12 +284,12 @@
             <div class="blockholder" ng-controller="DroppableBlocksController">
                 <div class="col s12">
                     <div class="blockholder__search">
-                        <input type="text" ng-model="search"/>
+                        <input type="text" ng-model="searchQuery" value="" />
                         <i class="material-icons">search</i>
                     </div>
                     <div class="blockholder__group" ng-repeat="item in DroppableBlocksService.blocks">
                         <b class="blockholder__group-title">{{item.group.name}}</b>
-                        <div class="blockholder__block" ng-repeat="block in item.blocks | orderBy:'name' | filter:{name:search}" data-drag="true" jqyoui-draggable="{placeholder: 'keep', onStart : 'onStart', onStop : 'onStop'}" ng-model="block" data-jqyoui-options="{revert: false, refreshPositions : true, snapTolerance : 40, helper : 'clone', cursor:'move', cursorAt: { top: 0, left: 0 }}">
+                        <div class="blockholder__block" ng-repeat="block in item.blocks | orderBy:'name' | filter:{name:searchQuery}" data-drag="true" jqyoui-draggable="{placeholder: 'keep', onStart : 'onStart', onStop : 'onStop'}" ng-model="block" data-jqyoui-options="{revert: false, refreshPositions : true, snapTolerance : 40, helper : 'clone', cursor:'move', cursorAt: { top: 0, left: 0 }}">
                             <span ng-bind-html="safe(block.full_name)"></span>
                         </div>
                     </div>

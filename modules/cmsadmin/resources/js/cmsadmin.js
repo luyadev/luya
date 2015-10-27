@@ -949,6 +949,8 @@
 	
 	zaa.controller("DroppableBlocksController", function($scope, $http, AdminClassService, DroppableBlocksService, $sce) {
 	
+		$scope.searchQuery = '';
+		
 		$scope.onStart = function() {
 			$scope.$apply(function() {
 				AdminClassService.setClassSpace('onDragStart', 'page--drag-active');
