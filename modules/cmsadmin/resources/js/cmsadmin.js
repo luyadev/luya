@@ -347,6 +347,26 @@
 	    
 		CmsLayoutService.load();
 		
+		$scope.hiddenCats = {};
+		
+		$scope.toggleCat = function(catId) {
+			if (catId in $scope.hiddenCats) {
+				$scope.hiddenCats[catId] = !$scope.hiddenCats[catId];
+			} else {
+				$scope.hiddenCats[catId] = 1;
+			}
+		};
+		
+		$scope.toggleIsHidden = function(catId) {
+			if (catId in $scope.hiddenCats) {
+				if ($scope.hiddenCats[catId] == 1) {
+					return true;
+				}
+			}
+			
+			return false;
+		}
+		
 		$scope.AdminLangService = AdminLangService;
 		
 		$scope.AdminLangService.load(true);

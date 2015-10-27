@@ -190,7 +190,6 @@
             <a class="create-button [ btn-floating btn-large ][ waves-effect waves-light ] teal" ui-sref="custom.cmsadd"><i class="material-icons">add</i></a>
 
             <div ng-controller="CmsMenuTreeController">
-
                 <div class="treeview__switch switch">
                     <label>
                         Verschieben
@@ -200,9 +199,9 @@
                 </div>
                 
                 <div class="treeview" ng-repeat="catitem in menu" ng-class="{ 'treeview--drag-active' : showDrag }">
-                    <h5 class="treeview__title">{{catitem.name}}</h5>
+                    <h5 class="treeview__title" ng-click="toggleCat(catitem.id)"><i class="material-icons" ng-if="toggleIsHidden(catitem.id)">keyboard_arrow_up</i><i class="material-icons" ng-if="!toggleIsHidden(catitem.id)">keyboard_arrow_down</i> {{catitem.name}}</h5>
 
-                    <ul class="treeview__list">
+                    <ul class="treeview__list" ng-hide="toggleIsHidden(catitem.id)">
                         <li class="treeview__item" ng-repeat="data in catitem.__items" ng-include="'reverse.html'"></li>
                     </ul>
                 </div>
