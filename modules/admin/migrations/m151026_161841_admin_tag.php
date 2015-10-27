@@ -9,7 +9,7 @@ class m151026_161841_admin_tag extends Migration
     {
         $this->createTable('admin_tag', [
             'id' => 'pk',
-            'name' => 'varchar(120)',
+            'name' => 'varchar(120) NOT NULL UNIQUE',
         ]);
         
         $this->createTable('admin_tag_relation', [
