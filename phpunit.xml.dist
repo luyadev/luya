@@ -18,7 +18,7 @@
 		</blacklist>
 	</filter>
     <php>
-        <!--<const name="DB_NAME" value="" />-->
+        <!--<const name="DB_DSN" value="mysql:host=localhost;dbname=luya_phpunit" />-->
         <!--<const name="DB_USER" value="" />-->
         <!--<const name="DB_PASS" value="" />-->
     </php>

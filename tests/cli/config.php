@@ -22,7 +22,7 @@ $config = [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname='.DB_NAME,
+            'dsn' => DB_DSN,
             'username' => DB_USER,
             'password' => DB_PASS,
             'charset' => 'utf8',
