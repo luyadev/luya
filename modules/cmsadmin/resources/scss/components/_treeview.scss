@@ -2,7 +2,7 @@ $treeview--color: $black !default;
 $treeview--active-color: $blue !default;
 
 .treeview {
-    margin-top: 70px;
+	margin-top: 30px;
 }
 
  /**
@@ -20,9 +20,24 @@ $treeview--active-color: $blue !default;
     color: #9e9e9e;
     font-size: 0.8rem;
     margin-top: 30px;
-    padding-left: 11px;
+    padding-left: 37px;
     text-transform: uppercase;
     margin-bottom: 5px;
+	position: relative;
+	cursor: pointer;
+	user-select: none;
+}
+
+.treeview__title-icon {
+	font-size: 1.5rem;
+	position: absolute;
+	left: 13px;
+	top: -6px;
+	transition: 0.25s ease transform;
+
+	&.treeview__title-icon--closed {
+		transform: rotate(180deg);
+	}
 }
 
 .treeview__drop {
@@ -50,6 +65,13 @@ $treeview--active-color: $blue !default;
  */
 .treeview__item {
     display: block;
+}
+
+.treeview__empty-message {
+	font-size: 0.8rem;
+	font-style: italic;
+	margin-left: 37px;
+	color: #9e9e9e;
 }
 
 .treeview__link {
@@ -112,6 +134,7 @@ $treeview--active-color: $blue !default;
     border: 1px solid $treeview--color;
     transition: 0.25s ease border, 0.25s ease width, 0.25s ease margin;
 }
+
 .treeview__link--active .treeview__empty-circle {
     border: 5px solid $treeview--active-color;
 }
@@ -124,7 +147,5 @@ $treeview--active-color: $blue !default;
 }
 
 .treeview__switch {
-    margin-top: 38px;
-    margin-bottom: -38px;
-    margin-left: 12px;
+    margin: 38px 0 38px 12px;
 }

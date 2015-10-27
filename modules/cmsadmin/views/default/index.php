@@ -199,9 +199,9 @@
                 </div>
                 
                 <div class="treeview" ng-repeat="catitem in menu" ng-class="{ 'treeview--drag-active' : showDrag }">
-                    <h5 class="treeview__title" ng-click="toggleCat(catitem.id)"><i class="material-icons" ng-if="toggleIsHidden(catitem.id)">keyboard_arrow_up</i><i class="material-icons" ng-if="!toggleIsHidden(catitem.id)">keyboard_arrow_down</i> {{catitem.name}}</h5>
+                    <h5 class="treeview__title" ng-click="toggleCat(catitem.id)"><i class="material-icons treeview__title-icon" ng-class="{'treeview__title-icon--closed': toggleIsHidden(catitem.id)}">arrow_drop_down</i> {{catitem.name}}</h5>
 
-                    <p ng-show="catitem.__items.length == 0"><em>Keine Seiten</em></p>
+                    <p class="treeview__empty-message" ng-show="catitem.__items.length == 0 && !toggleIsHidden(catitem.id)">Noch keine Seiten hinterlegt</p>
                     <ul class="treeview__list" ng-hide="toggleIsHidden(catitem.id)">
                         <li class="treeview__item" ng-repeat="data in catitem.__items" ng-include="'reverse.html'"></li>
                     </ul>
