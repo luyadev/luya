@@ -35,6 +35,7 @@ APP-ADMIN-MODULE (your luya project admin modules)
 --
 - app-admin-module.md
 - app-admin-module-permission.md
+- app-admin-module-assets.md
 
 LUYA (general luya infos)
 --
