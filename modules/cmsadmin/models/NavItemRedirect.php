@@ -30,14 +30,19 @@ class NavItemRedirect extends \cmsadmin\base\NavItemType
         switch($this->type) {
             case self::TYPE_INTERNAL_PAGE:
                 $link = Yii::$app->links->findOne(['nav_id' => $this->value]);
-                return $link['full_url'];
+                $url = Url::trailing(Yii::$app->urlManager->baseUrl) . $link['full_url'];
+                break;
+            case self::TYPE_EXTERNAL_URL:
+                $url = $this->value;
                 break;
         }
+        
+        return $url;
     }
     
     public function getContent()
     {
-        Yii::$app->getResponse()->redirect(Url::trailing(Yii::$app->urlManager->baseUrl) . $this->resolveValue());
+        Yii::$app->getResponse()->redirect($this->resolveValue());
         Yii::$app->end();
         return;
     }

@@ -116,7 +116,7 @@
             <label>Art der Weiterleitung</label>
             <p><input type="radio" ng-model="data.redirect_type" value="1" id="r_t1"><label for="r_t1">Interne-Seite</label></p>
             <p><input type="radio" ng-model="data.redirect_type" value="2" id="r_t2"><label for="r_t2">Link-Extern</label></p>
-            <p><input type="radio" ng-model="data.redirect_type" value="3" id="r_t3"><label for="r_t3">Datei</label></p>
+            <!--<p><input type="radio" ng-model="data.redirect_type" value="3" id="r_t3"><label for="r_t3">Datei</label></p>-->
         </div>
     </div>
 
@@ -126,8 +126,9 @@
             <menu-dropdown style="border:1px solid:#F0F0F0; padding:10px;" nav-id="data.redirect_type_value" />
         </div>
         <div class="col s12" ng-show="data.redirect_type==2">
-            <p>Urls müssen ein Http davor haben.</p>
-            <input type="text" ng-mode="data.redirect_type_value" />
+            <label>Externen Link</label>
+            <input type="text" ng-model="data.redirect_type_value" placeholder="http://" />
+            <p><em>Externe Links müssen mit http:// beginnen</em></p>        
         </div>
         <div class="col s12" ng-show="data.redirect_type==3">
             <p>TODO</p>
