@@ -24,7 +24,15 @@
  */
 .page__content {
 	background-color: $page--background;
-	padding: 10px 0;
+	padding: 0;
+}
+
+.page__no-padding {
+	padding: 0;
+}
+
+.page__list {
+	margin: 0;
 }
 
 /**
@@ -39,25 +47,32 @@
 	position: relative;
 }
 
+.accordion__body > .page__drop:first-of-type .page__drop-zone {
+	margin-top: 1px;
+}
+.accordion__body > div:last-of-type .page__drop-zone {
+	margin-top: -14px;
+}
+
 .page__drop-zone {
 	position: absolute;
 	width: 100%;
-	height: 25px;
-	margin-top: -12.5px;
+	height: 15px;
+	margin-top: -7.5px;
 	background-color: transparent;
-	border: 2px dashed transparent;
-	z-index: 100;
 	pointer-events: none;
-	transition: 0.25s ease background-color, 0.5s ease border-color;
+	transition: 0.25s ease background-color, 0.5s ease border-color, 0.25s ease height, 0.25s ease margin-top;
+	border: none;
+	z-index: 5;
 }
 
 .page--drag-active .page__drop-zone {
-	border-color: #2196f3;
-	background-color: rgba(#42a5f5, 0.5);
+	background-color: rgba($page__drop-zone--background, 0.8);
 	pointer-events: auto;
 
 	&.page__drop--hover {
-		background-color: rgba(#26a69a, 0.5);
-		border-color: #009688;
+		background-color: rgba(darken($page__drop-zone--background, 10), 0.8);
+		height: 20px;
+		margin-top: -10px;
 	}
 }

@@ -8,11 +8,11 @@
     </div>
 
     <div ng-show="!placeholder.__nav_item_page_block_items.length">
-        <p>Inhaltsblöcke hier platzieren</p>
+        <p class="accordion__empty-message">Inhaltsblöcke hier platzieren</p>
     </div>
 
     <div ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController">
-        <div class="block" ng-class="{ 'block--edit' : edit , 'block--is-dirty' : !block.is_dirty && isEditable() && !block.is_container }" data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{snapTolerance : 40, handle : '.block__move', delay: 200, cursor:'move', cursorAt: { top: 0, left: 0 }, revert:true }" ng-model="block">
+        <div class="block" ng-class="{ 'block--edit' : edit , 'block--is-dirty' : !block.is_dirty && isEditable() && !block.is_container, 'block--is-container': block.is_container }" data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{snapTolerance : 40, handle : '.block__move', delay: 200, cursor:'move', cursorAt: { top: 0, left: 0 }, revert:true }" ng-model="block">
             <div class="block__toolbar">
                 <div class="left">
                     <i class="block__move material-icons">open_with</i>
@@ -257,10 +257,10 @@
                         <!-- PAGE__CONTENT--SETTINGS -->
                         <div class="page__content page__content--settings" ng-show="!settings" ng-switch on="item.nav_item_type">
                             <div class="row">
-                                <div class="col s12" ng-switch-when="1" ng-controller="NavItemTypePageController">
+                                <div class="col s12 page__no-padding" ng-switch-when="1" ng-controller="NavItemTypePageController">
                                     <div class="alert alert--danger" ng-show="!container.nav_item_page.id">Das für die Seite definierte Layout wurde nicht (mehr) gefunden. Bitte bearbeiten Sie die Layout Einstellungen diese Seite.</div>
-                                    <ul class="accordion" ng-show="container.nav_item_page.id">
-                                        <li class="accordion__entry" ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" ng-class="{ 'accordion__entry--open' : isOpen }"></li>
+                                    <ul class="page__list" ng-show="container.nav_item_page.id">
+                                        <li class="page__placeholder" ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" ng-class="{ 'accordion__entry--open' : isOpen }"></li>
                                     </ul>
                                 </div>
                                 <div class="col s12" ng-switch-when="2">

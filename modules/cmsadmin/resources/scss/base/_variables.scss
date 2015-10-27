@@ -5,31 +5,41 @@
 $white: #fff;
 $black: #000;
 $grey: #f5f5f5;
+$grey--darken: darken($grey, 10);
 
 $blue: #2196F3;
 $teal: #009688;
 
+$purple--lighten-2: #ba68c8;
+$pink--accent-3:	#f50057;
+$pink--accent-4:	#c51162;
+
+$green--accent-4:	#00c853;
+
 /**
  * Page settings
  */
-$page--background: 					$white;
-$page__header--background:			$grey;
-$page__header--color:				$black;
+$page--background: 							$white;
+$page__header--background:					$grey;
+$page__header--color:						$black;
 
 /**
  * Collapsible
  */
-$collapsible__header--background:	$white;
-$collapsible__header--color:		$black;
-$collapsible--background:			$grey;
+$collapsible__header--background:			$white;
+$collapsible__header--color:				$black;
+$collapsible--background:					$grey;
 
 /**
  * Blocks
  */
-$block--background:					$white;
-$block--active-background:			$white;
-$block--background-is-dirty:		#b3e5fc;
+$block--background:							$white;
+$block--active-background:					$white;
+$block--background-is-dirty:				#b3e5fc;
 
-$block__toolbar--height:			37px;
-$block__toolbar--background:		$blue;
-$block__toolbar--color:				$white;
+$block__toolbar--height:					37px;
+$block__toolbar--background:				$blue;
+$block--is-container__toolbar--background: 	$purple--lighten-2;
+$block__toolbar--color:						$white;
+
+$page__drop-zone--background:				$green--accent-4;

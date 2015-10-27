@@ -6,6 +6,8 @@ class LayoutBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
 
+    public $isContainer = true;
+
     public function name()
     {
         return 'Layout';
