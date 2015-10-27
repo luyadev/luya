@@ -1,6 +1,6 @@
 Frontend Modul Assets
 =========================
-Ein Modul kann vordefinierte Assets mitliefern und einbetten. Das kann von Vorteil sein wenn Sie zbsp. komplexe Javascript Logik für ein Modul (wie zbsp. Kalender) mitliefern möchten. Auch Stylsheets oder Bild daten können als *Module Asset* mitgeliefert werden. Um eine solche Daten einzubinden erstellen Sie eine neues [Asset Bundle](app-assets.md) innerhalb des `assets` Ordner ihres Moduls.
+Ein Modul kann vordefinierte Assets mitliefern und einbetten. Das kann von Vorteil sein wenn man z.B. komplexe Javascript Logik für ein Modul (wie z.B. Kalender) mitliefern möchte. Auch Stylesheets oder Bilddaten können als *Module Asset* mitgeliefert werden. Um solche externen Ressourcen einzubinden, erstellt man ein neues [Asset Bundle](app-assets.md) innerhalb des `assets` Ordner des entsprechenden Moduls, bzw. der Applikation.
 
 ### Asset-Bundle Datei
 Ein Beispiel Asset Datei für *Javascript Kalender* Logik könnte wie folgt aussehen:
@@ -8,7 +8,7 @@ Ein Beispiel Asset Datei für *Javascript Kalender* Logik könnte wie folgt auss
 ```php
 <?php
 
-namespace app\modules\calendar;
+namespace app\assets;
 
 class JavascriptAsset extends \luya\base\Asset
 {
