@@ -30,3 +30,13 @@ We are always looking for people who share their thoughts, code and problems wit
 
 + ![Deutsch](https://raw.githubusercontent.com/savetheinternet/Tinyboard/master/static/flags/de.png) [Anleitung](https://luya.io/de/dokumentation/luya-collaboration)
 + ![English](https://raw.githubusercontent.com/savetheinternet/Tinyboard/master/static/flags/us.png) [Guide](https://luya.io/en/docs/luya-collaboration)
+
+
+### Unit Tests
+
+1. Create Database (example luya_phpunit)
+2. Insert Database dump from `tests/sql/__CURRENT_VERSION__.sql`
+3. Rename phpunit.xml.dist to phpunit.xml
+4. Change dsn, username and passwort in phpunit.xml
+5. Ensure you have installed current composer packages `composer install`.
+6. Execute the phpunit bin file `./vendor/bin/phpunit`.
