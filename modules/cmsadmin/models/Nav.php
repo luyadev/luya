@@ -34,7 +34,7 @@ class Nav extends \yii\db\ActiveRecord
     {
         return [
             [['cat_id', 'parent_nav_id'], 'required'],
-            [['is_hidden', 'is_offline', 'sort_index', 'is_deleted'], 'safe'],
+            [['is_hidden', 'is_offline', 'sort_index', 'is_deleted', 'is_home'], 'safe'],
         ];
     }
 

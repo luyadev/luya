@@ -43,9 +43,7 @@ class Cat extends \admin\ngrest\base\Model
         $config->delete = true;
 
         $config->list->field('name', 'Name')->text();
-        $config->list->field('default_nav_id', 'Default-Nav-Id')->selectArray($this->getNavData());
         $config->list->field('rewrite', 'Rewrite')->text();
-        $config->list->field('is_default', 'Ist Starteintrag')->toggleStatus();
 
         $config->create->copyFrom('list');
         $config->update->copyFrom('list');
@@ -61,24 +59,16 @@ class Cat extends \admin\ngrest\base\Model
     public function rules()
     {
         return [
-            [['name', 'rewrite', 'default_nav_id'], 'required'],
+            [['name', 'rewrite'], 'required'],
         ];
     }
 
     public function scenarios()
     {
         return [
-            'restcreate' => ['name', 'rewrite', 'default_nav_id', 'is_default'],
-            'restupdate' => ['name', 'rewrite', 'default_nav_id', 'is_default'],
+            'restcreate' => ['name', 'rewrite'],
+            'restupdate' => ['name', 'rewrite'],
         ];
-    }
-
-    /** 
-     * @todo should be en static instance variable isntead of line 16
-     */
-    public static function getDefault()
-    {
-        return self::find()->where(['is_default' => 1])->asArray()->one();
     }
 
     private static $_queryInstance = null;

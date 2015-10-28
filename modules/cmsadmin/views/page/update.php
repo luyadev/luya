@@ -119,6 +119,18 @@
                                     </div>
                                     <!-- /DELETE BUTTON -->
 
+                                    <!-- IS_HOME SWITCH -->
+                                    <div class="toolbar__group">
+                                        <div class="switch">
+                                            <label>
+                                                ist Startseite
+                                                <input type="checkbox" ng-model="navData.is_home" ng-true-value="1" ng-false-value="0">
+                                                <span class="lever"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- /IS_HOME SWITCH -->
+                                    
                                     <!-- VISIBILITY SWITCH -->
                                     <div class="toolbar__group">
                                         <div class="switch">

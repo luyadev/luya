@@ -48,9 +48,7 @@
 				$scope.data.nav_item_type = 1;
 				$scope.data.parent_nav_id = 0;
 				
-				$http.get('admin/api-cms-defaults/cat').success(function(response) {
-					$scope.data.cat_id = parseInt(response.id);
-				});
+				$scope.data.cat_id = 1;
 				
 				$http.get('admin/api-admin-defaults/lang').success(function(response) {
 					$scope.data.lang_id = response.id;
@@ -564,6 +562,14 @@
 		}
 		
 		/* properties --> */
+		
+		$scope.$watch(function() { return $scope.navData.is_home }, function(n, o) {
+			if (o !== undefined) {
+				$http.get('admin/api-cms-nav/toggle-home', { params : { navId : $scope.navData.id , homeState : n }}).success(function(response) {
+					Materialize.toast('<span>Startseite wurde angepasst.</span>', 2000)
+				});
+			}
+		});
 		
 		$scope.$watch(function() { return $scope.navData.is_hidden }, function(n, o) {
 			if (o !== undefined) {

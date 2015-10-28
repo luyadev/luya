@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-beta1 (in progress)
 -------------------------
+- **[BC Break]** `#391` removed home site resolving through cms_cat, replaced with is_home state in cms_nav.
 - **[BC BREAK]** `#219` old mdi-* icons are not working anymore, updated to new materialize icon font.
 - **[BC BREAK]** `#344` zaa-checkbox-array value describer `id` is replaced by `value` to be consistent
 - added luya admin tag active window `$config->aw->register(new \admin\aws\TagActiveWindow(static::tableName()), 'Tags');`.

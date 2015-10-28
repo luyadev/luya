@@ -4,6 +4,7 @@ namespace cmsadmin\apis;
 
 use Yii;
 use cmsadmin\models\Property;
+use cmsadmin\models\Nav;
 
 /**
  * example.com/admin/api-cms-nav/create-page
@@ -65,7 +66,7 @@ class NavController extends \admin\base\RestController
 
     public function actionToggleHidden($navId, $hiddenStatus)
     {
-        $item = \cmsadmin\models\Nav::find()->where(['id' => $navId])->one();
+        $item = Nav::find()->where(['id' => $navId])->one();
 
         if ($item) {
             $item->is_hidden = $hiddenStatus;
@@ -76,10 +77,27 @@ class NavController extends \admin\base\RestController
 
         return false;
     }
+    
+    public function actionToggleHome($navId, $homeState)
+    {
+        $item = Nav::find()->where(['id' => $navId])->one();
+        
+        if ($homeState == 1) {
+            Nav::updateAll(['is_home' => 0]);
+            $item->setAttributes([
+                'is_home' => 1,
+            ]);
+        } else {
+            $item->setAttributes([
+                'is_home' => 0,
+            ]);
+        }
+        return $item->update(false);
+    }
 
     public function actionToggleOffline($navId, $offlineStatus)
     {
-        $item = \cmsadmin\models\Nav::find()->where(['id' => $navId])->one();
+        $item = Nav::find()->where(['id' => $navId])->one();
 
         if ($item) {
             $item->is_offline = $offlineStatus;

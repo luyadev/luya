@@ -9,7 +9,6 @@ class Module extends \admin\base\Module
     public $apis = [
         'api-cms-admin' => 'cmsadmin\\apis\\AdminController',
         'api-cms-navitempageblockitem' => 'cmsadmin\\apis\\NavItemPageBlockItemController',
-        'api-cms-defaults' => 'cmsadmin\apis\DefaultsController',
         'api-cms-nav' => 'cmsadmin\apis\NavController',
         'api-cms-navitem' => 'cmsadmin\\apis\\NavItemController',
         'api-cms-menu' => 'cmsadmin\apis\MenuController', // should put into api-cms-admin
@@ -19,7 +18,6 @@ class Module extends \admin\base\Module
         'api-cms-block' => 'cmsadmin\\apis\\BlockController',
         'api-cms-blockgroup' => 'cmsadmin\\apis\\BlockgroupController',
         'api-cms-cat' => 'cmsadmin\apis\CatController',
-
     ];
 
     public $assets = [

@@ -27,7 +27,6 @@ class MenuController extends \admin\base\RestController
                 'name' => $cat['name'],
                 'rewrite' => $cat['rewrite'],
                 'id' => $cat['id'],
-                'default_nav_id' => $cat['default_nav_id'],
                 '__items' => $this->actionGetByCatRewrite($cat['rewrite']),
             ];
         }

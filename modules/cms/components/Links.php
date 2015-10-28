@@ -122,7 +122,8 @@ class Links extends \yii\base\Component
         foreach ($this->getChildren($lang['id'], $parentNavId) as $index => $item) {
             $rewrite = $urlPrefix.$item['rewrite'];
             $this->_links[$lang['id']][] = [
-                'full_url' => $this->getPrefix().$rewrite,
+                'is_home' => $item['is_home'],
+                'full_url' => ($item['is_home']) ? '' : $this->getPrefix().$rewrite,
                 'url' => $rewrite,
                 'rewrite' => $item['rewrite'],
                 'nav_id' => $item['nav_id'],
@@ -157,7 +158,7 @@ class Links extends \yii\base\Component
 
     private function getChildren($langId, $parentNavId)
     {
-        return Yii::$app->db->createCommand('SELECT n.id as nav_id, n.is_hidden, n.cat_id, n.parent_nav_id, n.is_offline, i.id as nav_item_id, i.lang_id, i.title, i.rewrite, i.lang_id, i.nav_item_type, i.nav_item_type_id FROM cms_nav_item as i LEFT JOIN (cms_nav as n) ON (n.id=i.nav_id) WHERE i.lang_id=:lang_id AND n.parent_nav_id=:parent_nav_id AND n.is_deleted=0 ORDER by n.sort_index ASC')->bindValues([
+        return Yii::$app->db->createCommand('SELECT n.id as nav_id, n.is_hidden, n.is_home, n.cat_id, n.parent_nav_id, n.is_offline, i.id as nav_item_id, i.lang_id, i.title, i.rewrite, i.lang_id, i.nav_item_type, i.nav_item_type_id FROM cms_nav_item as i LEFT JOIN (cms_nav as n) ON (n.id=i.nav_id) WHERE i.lang_id=:lang_id AND n.parent_nav_id=:parent_nav_id AND n.is_deleted=0 ORDER by n.sort_index ASC')->bindValues([
             ':parent_nav_id' => $parentNavId, ':lang_id' => $langId,
         ])->queryAll();
     }
@@ -405,9 +406,11 @@ class Links extends \yii\base\Component
 
     public function getDefaultLink()
     {
+        $link = $this->findOne(['is_home' => 1, 'show_hidden' => true]);
+        /*
         $cat = Cat::getDefault();
         $link = $this->findOneByArguments(['nav_id' => $cat['default_nav_id'], 'show_hidden' => true, 'lang' => Yii::$app->composition->getKey('langShortCode')]);
-
+        */
         return $link['url'];
     }
 }
