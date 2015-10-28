@@ -282,7 +282,7 @@ class Links extends \yii\base\Component
     {
         $parent = $this->getParent($link);
 
-        $tears[] = $this->getLink($link);
+        $tears[] = $this->findOneByArguments(['url' => $link, 'show_hidden' => true, 'is_home' => 0]);
         while ($parent) {
             $tears[] = $parent;
             $link = $parent['url'];
@@ -314,7 +314,7 @@ class Links extends \yii\base\Component
     {
         $link = $this->getLink($link);
 
-        return $this->findOneByArguments(['id' => $link['parent_nav_id']]);
+        return $this->findOne(['nav_id' => $link['parent_nav_id'], 'show_hidden' => true]);
     }
 
     public function getChilds($link)
@@ -334,7 +334,7 @@ class Links extends \yii\base\Component
     {
         $link = $this->getLink($link);
 
-        return $this->findOneByArguments(['parent_nav_id' => $link['id']]);
+        return $this->findOneByArguments(['parent_nav_id' => $link['nav_id'], 'show_hidden' => true]);
     }
 
     public function hasLink($link)
