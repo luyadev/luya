@@ -25,3 +25,4 @@
 phpunit.xml
 vendor/
 scripts/.subsplit
+/composer.lock
