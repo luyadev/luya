@@ -7,9 +7,9 @@
 	overflow: auto;
 	position: fixed;
 	left: 2.5%;
-	top: 10% !important;
+	top: 5% !important;
 	right: 2.5%;
-	max-height: 95%;
+	max-height: 90%;
 	width: 90%;
 	z-index: 1010;
 }
@@ -46,7 +46,7 @@
 	
 	&.modal--active {
 		transform: translateY(0%);
-	}	 
+	}
 }
 
 .modal__header {
