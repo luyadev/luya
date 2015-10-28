@@ -34,7 +34,7 @@ $config = [
         'luya\cli\Bootstrap',
     ],
     */
-    //'timezone' => 'Europe/Berlin',
+    'timezone' => 'Europe/Berlin',
 ];
 
 return $config;

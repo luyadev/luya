@@ -5,8 +5,6 @@ namespace luya\traits;
 trait Application
 {
     public $siteTitle = 'Luya';
-
-    public $timezone = 'Europe/Berlin';
     
     public $remoteToken = false;
 

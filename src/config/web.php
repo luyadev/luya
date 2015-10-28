@@ -52,7 +52,7 @@ $config = [
         'luya\web\Bootstrap',
     ],
     */
-    //'timezone' => 'Europe/Berlin',
+    'timezone' => 'Europe/Berlin',
 ];
 
 return $config;
