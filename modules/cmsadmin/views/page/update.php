@@ -272,7 +272,7 @@
                                 <div class="col s12 page__no-padding" ng-switch-when="1" ng-controller="NavItemTypePageController">
                                     <div class="alert alert--danger" ng-show="!container.nav_item_page.id">Das für die Seite definierte Layout wurde nicht (mehr) gefunden. Bitte bearbeiten Sie die Layout Einstellungen diese Seite.</div>
                                     <ul class="page__list" ng-show="container.nav_item_page.id">
-                                        <li class="page__placeholder" ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" ng-class="{ 'accordion__entry--open' : isOpen }"></li>
+                                        <li class="page__placeholder accordion__entry--open" ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'"></li>
                                     </ul>
                                 </div>
                                 <div class="col s12" ng-switch-when="2">
