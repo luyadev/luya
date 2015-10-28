@@ -70,7 +70,7 @@
                 </div>
             </div>
 
-            <table class="striped hoverable responsive-table">
+            <table class="striped responsive-table">
                 <thead>
                     <tr>
                         <?php foreach ($config->getPointer('list') as $item): ?>

@@ -242,7 +242,7 @@ $this->beginPage()
                     <button ng-show="selectedFiles.length > 0" ng-click="removeSelectedItems()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
                     <button ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove">Verschieben nach</button>
 
-                    <table class="filemanager__table striped hoverable">
+                    <table class="filemanager__table striped">
                         <thead>
                             <tr>
                                 <th class="filemanager__checkox-column" ng-hide="allowSelection == 'true'">
@@ -443,7 +443,7 @@ $this->beginPage()
                     <div class="col s12">
                         <b class="search-box__group-title"><i class="left material-icons">{{item.menuItem.icon}}</i> {{item.menuItem.alias}}</b>
 
-                        <table class="hoverable">
+                        <table>
                             <thead>
                                 <tr ng-repeat="row in item.data | limitTo:1">
                                     <th ng-repeat="(k,v) in row">{{k}}</th>
