@@ -102,7 +102,7 @@ class Links extends \yii\base\Component
                     case NavItemRedirect::TYPE_INTERNAL_PAGE:
                         // $redirect->value is nav_id
                         $findLink = $this->findOne(['lang_id' => $langId, 'nav_id' => $redirect->value]);
-                        $this->editLink($langId, $index, ['url' => $findLink['url'], 'full_url' => $findLink['full_url']]);
+                        $this->editLink($langId, $index, ['full_url' => $findLink['full_url']]);
                         break;
                     case NavItemRedirect::TYPE_EXTERNAL_URL:
                         $this->editLink($langId, $index, ['url' => $redirect->value, 'full_url' => $redirect->value]);
