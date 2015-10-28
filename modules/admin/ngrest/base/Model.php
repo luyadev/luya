@@ -84,7 +84,9 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
         $delete = Yii::$app->db->createCommand()->delete($viaTableName, [$localTableId => $this->id])->execute();
         $batch = [];
         foreach ($value as $k => $v) {
-            $batch[] = [$this->id, $v['value']];
+            // $this->id: the value of the current database model, example when relation ins on user model id would be user id
+            // $v['id'] extra field values foreached from the join table, so id will represent the joined table pk.
+            $batch[] = [$this->id, $v['id']];
         }
         if (!empty($batch)) {
             $insert = Yii::$app->db->createCommand()->batchInsert($viaTableName, [$localTableId, $foreignTableId], $batch)->execute();

@@ -214,7 +214,7 @@
 				
 				$scope.toggleSelection = function (value) {
 					for (var i in $scope.model) {
-						if ($scope.model[i]["value"] == value.id) {
+						if ($scope.model[i]["id"] == value.value) {
 							$scope.model.splice(i, 1);
 							return;
 						}
@@ -224,7 +224,7 @@
 				
 				$scope.isChecked = function(item) {
 					for (var i in $scope.model) {
-						if ($scope.model[i]["value"] == item.id) {
+						if ($scope.model[i]["id"] == item.value) {
 							return true;
 						}
 					}
