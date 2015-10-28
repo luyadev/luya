@@ -1,14 +1,12 @@
 <?php
 
-namespace cmsadmin\blocks;
+namespace app\blocks;
 
 class TestBlock extends \cmsadmin\base\Block
 {
-    public $module = 'cmsadmin';
-
     public function name()
     {
-        return 'Entwicklung';
+        return 'Dev/Env Test Block';
     }
 
     public function icon()
@@ -26,8 +24,8 @@ class TestBlock extends \cmsadmin\base\Block
                 ['var' => 'password', 'label' => 'Password', 'type' => 'zaa-password'],
                 ['var' => 'select', 'label' => 'Select', 'type' => 'zaa-select', 'options' => [['value' => 1, 'label' => 'Value 1']]],
                 ['var' => 'table', 'label' => 'Table', 'type' => 'zaa-table'],
-                ['var' => 'checkbox', 'label' => 'Checkbox', 'type' => 'zaa-checkbox'],
-                ['var' => 'checkboxarray', 'label' => 'Checkbox Array', 'type' => 'zaa-checkbox-array', 'options' => ['items' => [['value' => 1, 'label' => 'Label for Value 1']]]],
+                ['var' => 'checkbox', 'label' => 'Basic Checkbox', 'type' => 'zaa-checkbox'],
+                ['var' => 'checkboxarray', 'label' => 'Checkbox Array', 'type' => 'zaa-checkbox-array', 'options' => ['items' => [['value' => 1, 'label' => 'Label for Value 1'], ['value' => '2', 'label' => 'Label for Value 2'], ['value' => 3, 'label' => 'Label for Value 3']]]],
                 ['var' => 'date', 'label' => 'Date Picker', 'type' => 'zaa-date'],
                 ['var' => 'datetime', 'label' => 'Date Time Picker', 'type' => 'zaa-datetime'],
                 ['var' => 'fileupload', 'label' => 'Fileupload', 'type' => 'zaa-file-upload'],
