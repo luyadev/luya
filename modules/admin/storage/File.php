@@ -185,6 +185,15 @@ class File
         return $file;
     }
 
+    public function getHttpSource($fileId)
+    {
+        $file = $this->get($fileId);
+        
+        if ($file) {
+            return $file['source_http'];
+        }
+    }
+    
     public function getPath($fileId)
     {
         $file = StorageFile::find()->where(['id' => $fileId, 'is_deleted' => 0])->one();
