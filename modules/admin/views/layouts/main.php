@@ -38,11 +38,14 @@ $this->beginPage()
         <!-- ANGULAR SCRIPTS -->
 
         <script type="text/ng-template" id="modal">
-            <div class="modal" ng-show="!isModalHidden" style="z-index:999999">
-                <span class="modal__close btn-floating red" ng-show="!isModalHidden" ng-click="isModalHidden = true">
-                    <i class="material-icons">close</i>
-                </span>
-                <div class="modal-content" ng-transclude></div>
+            <div class="modal__wrapper" ng-show="!isModalHidden">
+                <div class="modal">
+                    <button class="btn waves-effect waves-light modal__close btn-floating red" ng-click="isModalHidden = true">
+                        <i class="material-icons">close</i>
+                    </button>
+                    <div class="modal-content" ng-transclude></div>
+                </div>
+                <div class="modal__background"></div>
             </div>
         </script>
 

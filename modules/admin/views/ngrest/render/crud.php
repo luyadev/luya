@@ -192,11 +192,14 @@
 
 
     <!-- activeWindow MODAL -->
-    <div id="activeWindowModal" class="modal">
-        <button class="btn waves-effect waves-light" type="button" ng-click="closeActiveWindow()">
-            <i class="material-icons">cancel</i> Abbrechen
-        </button>
-        <div class="modal-content" compile-html ng-bind-html="data.aw.content"></div>
+    <div id="activeWindowModal" class="modal__wrapper">
+        <div class="modal">
+            <button class="btn waves-effect waves-light modal__close btn-floating red" type="button" ng-click="closeActiveWindow()">
+                <i class="material-icons">close</i>
+            </button>
+            <div class="modal-content" compile-html ng-bind-html="data.aw.content"></div>
+        </div>
+        <div class="modal__background"></div>
     </div>
 
 </div>

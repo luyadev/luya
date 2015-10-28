@@ -1,16 +1,27 @@
+.modal__wrapper {
+	display: none;
+}
+
 .modal {
+	display: block;
 	overflow: auto;
 	position: fixed;
 	left: 2.5%;
-	top: 2.5% !important;
+	top: 10% !important;
 	right: 2.5%;
 	max-height: 95%;
 	width: 90%;
-	
-	&.modal--active {
-		display: block;
-		z-index: 1010;		
-	}
+	z-index: 1010;
+}
+
+.modal__background {
+	background-color: rgba(#000, 0.5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1000;
 }
 
 .modal__close {

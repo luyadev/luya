@@ -1,0 +1,51 @@
+.user-menu {
+	padding: 0 50px;
+}
+
+.user-menu__user {
+	display: block;
+	opacity: 1;
+	z-index: 10;
+	transition: 0.25s ease opacity;
+
+	.user-menu--show-menu & {
+		opacity: 0;
+		z-index: 1;
+	}
+}
+
+.user-menu__menu {
+	position: absolute;
+	top: 0;
+	right: 0;
+	opacity: 0;;
+	height: 100%;
+	width: 0;
+	background-color: color("shades", "white");
+	transition: 0.25s ease opacity, 0.25s ease width;
+
+	.user-menu--show-menu & {
+		display: block;
+		z-index: 10;
+		opacity: 1;
+		width: auto;
+	}
+}
+
+.user-menu__menu-icon {
+	display: inline-block !important;
+	width: 150px;
+	text-align: center;
+
+	color: color("shades", "black");
+
+	&:hover {
+		cursor: pointer;
+		color: color("blue", "base");
+		background-color: color("grey", "lighten-3");
+	}
+}
+
+.user-menu__menu-icon--logout:hover {
+	color: color("red", "base");
+}
