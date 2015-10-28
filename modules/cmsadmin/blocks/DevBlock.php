@@ -8,7 +8,7 @@ class DevBlock extends \cmsadmin\base\Block
 
     public function name()
     {
-        return 'Frontend Übersicht';
+        return 'Lorem Ipsum';
     }
 
     public function icon()
