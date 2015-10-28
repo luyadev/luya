@@ -219,7 +219,7 @@
 							return;
 						}
 					}
-					$scope.model.push(value);
+					$scope.model.push({ id: value.value});
 				}
 				
 				$scope.isChecked = function(item) {
