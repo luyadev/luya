@@ -185,7 +185,7 @@ class File
         return $file;
     }
 
-    public function getHttpSource($fileId)
+    public function httpSource($fileId)
     {
         $file = $this->get($fileId);
         
