@@ -43,7 +43,7 @@ class LinksTest extends \tests\web\Base
         $link = Yii::$app->links->findOneByArguments(['url' => 'page-1']);
         
         $this->assertArrayHasKey('full_url', $link);
-        $this->assertEquals('de/page-1', $link['full_url']);
+        $this->assertEquals('', $link['full_url']);
         
         $this->assertArrayHasKey('url', $link);
         $this->assertEquals('page-1', $link['url']);
@@ -75,8 +75,45 @@ class LinksTest extends \tests\web\Base
         $this->assertArrayHasKey('depth', $link);
         $this->assertEquals('0', $link['depth']);
         
-        
-        $this->assertEquals('de/page-1', $link['full_url']);
+    }
+    
+    public function testLink2Properties()
+    {
+        $link = Yii::$app->links->findOneByArguments(['url' => 'page-2']);
+    
+        $this->assertArrayHasKey('full_url', $link);
+        $this->assertEquals('de/page-2', $link['full_url']);
+    
+        $this->assertArrayHasKey('url', $link);
+        $this->assertEquals('page-2', $link['url']);
+    
+        $this->assertArrayHasKey('rewrite', $link);
+        $this->assertEquals('page-2', $link['rewrite']);
+    
+        $this->assertArrayHasKey('nav_id', $link);
+        $this->assertEquals('2', $link['nav_id']);
+    
+        $this->assertArrayHasKey('parent_nav_id', $link);
+        $this->assertEquals('0', $link['parent_nav_id']);
+    
+        $this->assertArrayHasKey('id', $link);
+        $this->assertEquals('2', $link['id']);
+    
+        $this->assertArrayHasKey('title', $link);
+        $this->assertEquals('Page 2', $link['title']);
+    
+        $this->assertArrayHasKey('lang', $link);
+        $this->assertEquals('de', $link['lang']);
+    
+        $this->assertArrayHasKey('lang_id', $link);
+        $this->assertEquals('1', $link['lang_id']);
+    
+        $this->assertArrayHasKey('cat', $link);
+        $this->assertEquals('default', $link['cat']);
+    
+        $this->assertArrayHasKey('depth', $link);
+        $this->assertEquals('0', $link['depth']);
+    
     }
     
     public function testLanguageContainers()
@@ -154,10 +191,10 @@ class LinksTest extends \tests\web\Base
         
         $finder = $links->findOneByArguments(['url' => 'page-1']);
         
-        $this->assertEquals('de/page-1', $finder['full_url']);
+        $this->assertEquals('', $finder['full_url']);
         
         $finder = $links->findOne(['url' => 'page-1']);
         
-        $this->assertEquals('de/page-1', $finder['full_url']);
+        $this->assertEquals('', $finder['full_url']);
     }
 }

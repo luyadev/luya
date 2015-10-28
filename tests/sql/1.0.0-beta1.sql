@@ -568,8 +568,6 @@ CREATE TABLE IF NOT EXISTS `cms_cat` (
 `id` int(11) NOT NULL,
   `name` varchar(180) NOT NULL,
   `rewrite` varchar(80) NOT NULL,
-  `default_nav_id` int(11) NOT NULL,
-  `is_default` tinyint(1) NOT NULL DEFAULT '0',
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
@@ -577,8 +575,8 @@ CREATE TABLE IF NOT EXISTS `cms_cat` (
 -- Dumping data for table `cms_cat`
 --
 
-INSERT INTO `cms_cat` (`id`, `name`, `rewrite`, `default_nav_id`, `is_default`, `is_deleted`) VALUES
-(1, 'Hauptnavigation', 'default', 1, 1, 0);
+INSERT INTO `cms_cat` (`id`, `name`, `rewrite`, `is_deleted`) VALUES
+(1, 'Hauptnavigation', 'default', 0);
 
 -- --------------------------------------------------------
 
@@ -613,18 +611,19 @@ CREATE TABLE IF NOT EXISTS `cms_nav` (
   `sort_index` int(11) NOT NULL DEFAULT '0',
   `is_deleted` tinyint(1) DEFAULT '0',
   `is_hidden` tinyint(1) DEFAULT '0',
-  `is_offline` tinyint(1) DEFAULT '0'
+  `is_offline` tinyint(1) DEFAULT '0',
+  `is_home` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `cms_nav`
 --
 
-INSERT INTO `cms_nav` (`id`, `cat_id`, `parent_nav_id`, `sort_index`, `is_deleted`, `is_hidden`) VALUES
-(1, 1, 0, 1, 0, 0),
-(2, 1, 0, 2, 0, 0),
-(3, 1, 0, 3, 0, 0),
-(4, 1, 0, 4, 0, 0);
+INSERT INTO `cms_nav` (`id`, `cat_id`, `parent_nav_id`, `sort_index`, `is_deleted`, `is_hidden`, `is_home`) VALUES
+(1, 1, 0, 1, 0, 0, 1),
+(2, 1, 0, 2, 0, 0, 0),
+(3, 1, 0, 3, 0, 0, 0),
+(4, 1, 0, 4, 0, 0, 0);
 
 -- --------------------------------------------------------
 
