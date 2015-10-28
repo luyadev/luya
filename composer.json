@@ -17,7 +17,7 @@
 		"issues" : "https://github.com/zephir/luya/issues"
 	},
 	"require" : {
-		"php": ">=5.4.0",
+		"php": ">=5.6.0",
 		"yiisoft/yii2": "2.0.6",
 		"twig/twig" : "1.*",
         "curl/curl" : "1.2.1",
@@ -25,11 +25,11 @@
 	},
 	"require-dev" : {
 		"yiisoft/yii2-debug" : "2.0.5",
-		"phpunit/phpunit" : "~4.8",
-        "phpunit/php-code-coverage" : "~2.1",
-		"fabpot/php-cs-fixer" : "~1.10",
+		"phpunit/phpunit" : "@stable",
+        "phpunit/php-code-coverage" : "@stable",
+		"fabpot/php-cs-fixer" : "@stable",
 		"imagine/imagine": "0.6.3",
-		"codeclimate/php-test-reporter": "dev-master"
+		"codeclimate/php-test-reporter": "@stable"
 	},
 	"autoload" : {
 		"psr-4" : {
