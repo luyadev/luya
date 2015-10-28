@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9ac298b1eb6adb8678b8207f7261d3d1",
-    "content-hash": "5ae525e8fa1bc9550cab55e3495eb3d6",
+    "hash": "dbfb71ab0b87386adbb49559953c1eaf",
+    "content-hash": "3cebc8c7dbe1b4a6265c7887a2096f2b",
     "packages": [
         {
             "name": "bower-asset/angular",
@@ -414,20 +414,20 @@
         },
         {
             "name": "bower-asset/ng-wig",
-            "version": "v1.1.9",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stevermeister/ngWig.git",
-                "reference": "722972243b65e9d8ee18fcf4230944340c3a9ddd"
+                "reference": "540d12eb2e99ea09861c92fcf5410917948daabd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stevermeister/ngWig/zipball/722972243b65e9d8ee18fcf4230944340c3a9ddd",
-                "reference": "722972243b65e9d8ee18fcf4230944340c3a9ddd",
+                "url": "https://api.github.com/repos/stevermeister/ngWig/zipball/540d12eb2e99ea09861c92fcf5410917948daabd",
+                "reference": "540d12eb2e99ea09861c92fcf5410917948daabd",
                 "shasum": ""
             },
             "require-dev": {
-                "bower-asset/angular": "~1.2.16"
+                "bower-asset/angular": "1.4.5"
             },
             "type": "bower-asset-library",
             "extra": {
@@ -795,12 +795,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "90d7d39a97295a932ce597f12d6b65da7be8bad3"
+                "reference": "4f11935f709ef5e279af9da062507e72bd356e1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/90d7d39a97295a932ce597f12d6b65da7be8bad3",
-                "reference": "90d7d39a97295a932ce597f12d6b65da7be8bad3",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/4f11935f709ef5e279af9da062507e72bd356e1a",
+                "reference": "4f11935f709ef5e279af9da062507e72bd356e1a",
                 "shasum": ""
             },
             "require": {
@@ -849,7 +849,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2015-10-15 06:47:57"
+            "time": "2015-10-27 04:12:26"
         },
         {
             "name": "guzzlehttp/promises",
@@ -1014,16 +1014,16 @@
         },
         {
             "name": "imagine/imagine",
-            "version": "v0.6.0",
+            "version": "v0.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche123/Imagine.git",
-                "reference": "ff1550c270fe6116cfed778607024125e754899a"
+                "reference": "149041d2a1b517107bfe270ca2b1a17aa341715d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/ff1550c270fe6116cfed778607024125e754899a",
-                "reference": "ff1550c270fe6116cfed778607024125e754899a",
+                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/149041d2a1b517107bfe270ca2b1a17aa341715d",
+                "reference": "149041d2a1b517107bfe270ca2b1a17aa341715d",
                 "shasum": ""
             },
             "require": {
@@ -1040,7 +1040,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "0.6-dev"
+                    "dev-develop": "0.7-dev"
                 }
             },
             "autoload": {
@@ -1067,7 +1067,7 @@
                 "image manipulation",
                 "image processing"
             ],
-            "time": "2014-06-13 10:56:49"
+            "time": "2015-09-19 16:54:05"
         },
         {
             "name": "jakeasmith/http_build_url",
@@ -1358,16 +1358,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "93bfc2cc94cdfc16c728c663658117a25acd1aa5"
+                "reference": "0aa83d9bd840c2e3d02b3ad3a440ce9f7c1cb917"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/93bfc2cc94cdfc16c728c663658117a25acd1aa5",
-                "reference": "93bfc2cc94cdfc16c728c663658117a25acd1aa5",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/0aa83d9bd840c2e3d02b3ad3a440ce9f7c1cb917",
+                "reference": "0aa83d9bd840c2e3d02b3ad3a440ce9f7c1cb917",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9"
+                "php": ">=5.3.9",
+                "symfony/polyfill-mbstring": "~1.0"
             },
             "require-dev": {
                 "symfony/css-selector": "~2.8|~3.0.0"
@@ -1402,7 +1403,63 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2015-10-11 08:29:26"
+            "time": "2015-10-28 02:15:07"
+        },
+        {
+            "name": "symfony/polyfill-mbstring",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-mbstring.git",
+                "reference": "82159e61debcd09790b20154b350b1c083029aa6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/82159e61debcd09790b20154b350b1c083029aa6",
+                "reference": "82159e61debcd09790b20154b350b1c083029aa6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for the Mbstring extension",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "mbstring",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2015-10-27 22:54:43"
         },
         {
             "name": "twig/twig",
@@ -1559,12 +1616,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-bootstrap.git",
-                "reference": "7c6b244d9cfd58a5a10cad9853edc090ffd479b1"
+                "reference": "09a5bfe72c0141ad26281848f1ae9c3f42541f20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/7c6b244d9cfd58a5a10cad9853edc090ffd479b1",
-                "reference": "7c6b244d9cfd58a5a10cad9853edc090ffd479b1",
+                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/09a5bfe72c0141ad26281848f1ae9c3f42541f20",
+                "reference": "09a5bfe72c0141ad26281848f1ae9c3f42541f20",
                 "shasum": ""
             },
             "require": {
@@ -1601,7 +1658,7 @@
                 "bootstrap",
                 "yii2"
             ],
-            "time": "2015-10-15 16:22:38"
+            "time": "2015-10-25 21:18:48"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -1764,7 +1821,6 @@
         "bower-asset/angular-loading-bar": 0,
         "bower-asset/angular-dragdrop": 0,
         "bower-asset/twig.js": 0,
-        "imagine/imagine": 0,
         "phpmailer/phpmailer": 0
     },
     "prefer-stable": false,
