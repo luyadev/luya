@@ -25,13 +25,10 @@ class UrlManager extends \yii\web\UrlManager
     {
         $route = parent::parseRequest($request);
 
-        /**
-         * @todo previous `!is_object(\yii::$app->composition)`can remove?`how to handle?
-         */
-        if (!(Yii::$app->has('composition'))) {
+        if (Yii::$app->composition->hidden) {
             return $route;
         }
-
+        
         $composition = Yii::$app->composition->getFull();
 
         $length = strlen($composition);
@@ -125,10 +122,14 @@ class UrlManager extends \yii\web\UrlManager
             }
         }
         if (!$context) {
-            // because the urlCreation of yii returns a realtive url we have to manually add the composition getFull() path.
+            // because the urlCreation of yii returns a realtive url we have to manualy add the composition getFull() path.
             $baseUrl = yii::$app->request->baseUrl;
             if (empty($baseUrl)) {
+                // verify: If base url is empty, we have to add a base trailing slash (29.10.2015)
                 $response = Url::removeTrailing($composition).$response;
+                if (substr($response, 0, 1) !== "/") { 
+                    $response = "/".$response;
+                }
             } else {
                 $response = str_replace($baseUrl, Url::trailing($baseUrl).Url::removeTrailing($composition), $response);
             }
