@@ -6,11 +6,11 @@
 	padding: 0 15px;
 	cursor: pointer;
 	max-height: 64px;
-	transition: 0.25s ease background-color;
+	// transition: 0.25s ease background-color;
 
 	&.navbar__button__circle {
 		min-height: 64px;
-		transition: 0.25s ease color;
+		// transition: 0.25s ease color;
 
 		.icon__spawn-text {
 			top:-15px;
@@ -73,7 +73,7 @@
    	height: 0;
    	opacity: 0;
    	
-   	transition: 0.25s ease opacity color;
+   	// transition: 0.25s ease opacity;
     position: relative;
     top: -48px;
     font-size: 8px;

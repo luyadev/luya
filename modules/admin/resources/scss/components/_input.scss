@@ -90,7 +90,7 @@ input[type="checkbox"]:checked + .input__label:before {
 	top: 0;
 	bottom: 0;
 	width: 0;
-	transition: 0.25s ease width, 0.25s ease background;
+	transition: 0.25s ease background; // 0.25s ease width
 	background-color: transparent;
 	z-index: 2;
 

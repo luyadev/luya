@@ -13,7 +13,7 @@ $cms__pages--width-full: 100%;
 
 .cms__pages {
 	width: $cms__pages--width;
-	transition: 0.25s ease width;
+	// transition: 0.25s ease width;
 }
 .cms--sidebar-hidden .cms__pages {
 	width: $cms__pages--width-full;
@@ -26,7 +26,7 @@ $cms__pages--width-full: 100%;
 	right: 0;
 	top: $mainnav-height;
 	bottom: 0;
-	transition: 0.25s ease right;
+	// transition: 0.25s ease right;
 }
 .cms--sidebar-hidden .cms__sidebar {
 	right: -$cms__sidebar--width;

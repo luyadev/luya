@@ -44,7 +44,7 @@ $treeview--active-color: $blue !default;
     height: 0;
     border: 1px dotted transparent;
     opacity: 1;
-    transition: 0.25s ease height, 0.25s ease border, 0.25s ease opacity;
+    // transition: 0.25s ease height, 0.25s ease border, 0.25s ease opacity;
     will-change: height, border, opacity;
 
     &.treeview__drop--visible {
@@ -107,7 +107,7 @@ $treeview--active-color: $blue !default;
     width: 0;
     height: 0;
     cursor: move;
-    transition: 0.25s ease width, 0.25s ease height, 0.25s ease margin-right;
+    // transition: 0.25s ease width, 0.25s ease height, 0.25s ease margin-right;
     overflow: hidden;
     margin-right: 0;
 
@@ -132,7 +132,7 @@ $treeview--active-color: $blue !default;
     display: inline-block;
     margin: 0 6px 0 4px;
     border: 1px solid $treeview--color;
-    transition: 0.25s ease border, 0.25s ease width, 0.25s ease margin;
+    // transition: 0.25s ease border, 0.25s ease width, 0.25s ease margin;
 }
 
 .treeview__link--active .treeview__empty-circle {
