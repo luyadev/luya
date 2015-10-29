@@ -17,11 +17,7 @@
 		}
 	}
 	&.navbar__button--redhighlight {
-		// max-height: 64px;
-		
-		// i, .icon__spawn-text{
-		// 	transition: 0.25s ease color;
-		// }
+
 		
 		&:hover {
 			
@@ -30,7 +26,6 @@
 			}
 		}
 	}
-	//MY END
 	&:hover {
 		background-color: color("grey", "lighten-3");
 		
@@ -50,7 +45,6 @@
 	}	
 }
 
-//MY
 .navbar__button__anchor {
 	padding: 0;
 }
