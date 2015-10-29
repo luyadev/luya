@@ -89,4 +89,48 @@ class UrlManagerTest extends \tests\web\Base
         $request->pathInfo = 'de/foo/admin';
         $this->assertEquals(false, $request->isAdmin());
     }
+    
+    public function testHiddenDefaultComposition()
+    {
+        Yii::$app->composition->hidden = true;
+
+        $urlManager = new UrlManager();
+        $request = new Request();
+        $request->pathInfo = '';
+        
+        $r = $urlManager->parseRequest($request);
+        
+        $this->assertSame("", $r[0]);
+        $this->assertEquals(0, count($r[1]));
+        
+        
+        // not hidden
+        
+        Yii::$app->composition->hidden = false;
+        
+        $urlManager = new UrlManager();
+        $request = new Request();
+        $request->pathInfo = '';
+        
+        $r = $urlManager->parseRequest($request);
+        
+        $this->assertSame("", $r[0]);
+        $this->assertEquals(0, count($r[1]));
+    }
+    
+    public function testHiddenUrlCreation()
+    {
+        Yii::$app->composition->hidden = false;
+        Yii::$app->request->baseUrl = '';
+        Yii::$app->request->scriptUrl = '';
+        $urlManager = Yii::$app->urlManager;
+        
+        $this->assertSame('/en/urlmodule', $urlManager->createUrl(['urlmodule/default/index']));
+        
+        Yii::$app->composition->hidden = true;
+        Yii::$app->request->baseUrl = '';
+        Yii::$app->request->scriptUrl = '';
+        $this->assertSame('/urlmodule', $urlManager->createUrl(['urlmodule/default/index']));
+        
+    }
 }
