@@ -1,6 +1,7 @@
 var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angular-loading-bar", "ngFileUpload", "ui.materialize", "ngWig", "slugifier"]);
 
 /* zephir angular admin */
+/* resolve controller: https://github.com/angular-ui/ui-router/wiki#resolve */
 (function() {
 	"use strict";
 	
@@ -20,7 +21,7 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 				url: "/:moduleRouteId/:controllerId/:actionId",
 				templateUrl: function ($stateParams) {
 	                return $stateParams.moduleRouteId + "/" + $stateParams.controllerId  + "/" + $stateParams.actionId;
-	            }
+	            },
 			})
 			.state("custom", {
 				url: "/template/:templateId",

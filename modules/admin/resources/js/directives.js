@@ -694,10 +694,43 @@
 	
 	// storage.js
 	
+	zaa.factory('FilterService', function(ApiAdminFilter, $q) {
+		var service = [];
+		
+		service.data = null;
+		
+		service.get = function(forceReload) {
+			return $q(function(resolve, reject) {
+				if (service.data === null || forceReload === true) {
+					ApiAdminFilter.query(function(response) {
+						service.data = response;
+						resolve(response);
+					})
+				} else {
+					resolve(service.data);
+				}
+				
+			});
+		}
+		
+		return service;
+	});
+	
 	zaa.factory('FileListeService', function($http, $q) {
 		var service = [];
 		
 		service.data = [];
+		
+		service.init = function() {
+			return $q(function(resolve, reject) {
+				$http.get('admin/api-admin-storage/all-folder-files').success(function(response) {
+					response.forEach(function(value, key) {
+						service.data[value.folder.id] = value.items;
+					});
+					resolve(response);
+				})
+			});
+		};
 		
 		service.get = function(folderId, forceReload) {
 			return $q(function(resolve, reject) {
@@ -705,13 +738,13 @@
 					resolve(service.data[folderId]);
 				} else {
 					$http.get('admin/api-admin-storage/get-files', { params : { folderId : folderId } }).success(function(response) {
+						console.log(response);
 						service.data[folderId] = response;
 						resolve(response);
 					});
 				}
 			});
-			
-		}
+		};
 		
 		return service;
 	});
@@ -720,6 +753,17 @@
 		var service = [];
 		
 		service.data = [];
+		
+		service.init = function() {
+			return $q(function(resolve, reject) {
+				$http.get('admin/api-admin-storage/all-file-paths').success(function(response) {
+					response.forEach(function(value, key) {
+						service.data[value.id] = value;
+					});
+					resolve(response);
+				})
+			});
+		},
 		
 		service.get = function(fileId, forceReload) {
 			return $q(function(resolve, reject) {
@@ -744,6 +788,17 @@
 		var service = [];
 		
 		service.data = [];
+		
+		service.init = function() {
+			return $q(function(resolve, reject) {
+				$http.get('admin/api-admin-storage/all-image-paths').success(function(response) {
+					response.forEach(function(value, key) {
+						service.data[value.image_id] = value;
+					});
+					resolve(response);
+				})
+			});
+		}
 		
 		service.get = function(imageId, forceReload) {
 			return $q(function(resolve, reject) {
@@ -837,7 +892,7 @@
 		}
 	});
 	
-	zaa.directive('storageImageUpload', function($http, ApiAdminFilter, ImageIdService) {
+	zaa.directive('storageImageUpload', function($http, FilterService, ImageIdService) {
 		return {
 			restrict : 'E',
 			scope : {
@@ -857,7 +912,10 @@
 				scope.filterId = 0;
 				scope.imageinfo = null;
 				
-				scope.filters = ApiAdminFilter.query();
+				FilterService.get(function(r) {
+					scope.filters = r;
+				});
+				//scope.filters = ApiAdminFilter.query();
 				scope.originalFileIsRemoved = false;
 				
 				scope.lastapplyFileId = 0;
@@ -901,13 +959,13 @@
 				};
 				
 				scope.$watch(function() { return scope.filterId }, function(n, o) {
-					if (n != null && n !== undefined && scope.fileId !== 0 && n !== o) {
+					if (n != null && n !== undefined && scope.fileId !== 0 && n !== o && n != o) {
 						scope.filterApply();
 					}
 				});
 				
 				scope.$watch(function() { return scope.fileId }, function(n, o) {
-					if (n != 0 && n !== undefined && n !== o) {
+					if (n != 0 && n !== undefined && n !== o  && n != o) {
 						scope.filterApply();
 					}
 				});
@@ -1158,13 +1216,11 @@
 					});
 				}
 				
-				$timeout(function() {
-					FilemanagerFolderListService.get().then(function(r) {
-						$scope.folders = r;
-		    			$scope.getFiles(FilemanagerFolderService.get());
-		    			$scope.currentFolderId = FilemanagerFolderService.get();
-					});
-				}, 100);
+				FilemanagerFolderListService.get().then(function(r) {
+					$scope.folders = r;
+	    			$scope.getFiles(FilemanagerFolderService.get());
+	    			$scope.currentFolderId = FilemanagerFolderService.get();
+				});
 			},
 			templateUrl : 'storageFileManager'
 		}

@@ -110,6 +110,18 @@ class Image
         return ($image = $this->get($imageId)) ? $image->source : '';
     }
 
+    public function all()
+    {
+        $images = [];
+        foreach(StorageImage::find()->asArray()->all() as $imageRow) {
+            $img = $this->get($imageRow['id']);
+            if ($img) {
+                $images[] = $img;
+            }
+        }
+        return $images;
+    }
+    
     // @web/storage/the-originame_name_$filterId_$fileIdf.jpg
     public function get($imageId)
     {

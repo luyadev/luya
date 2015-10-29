@@ -60,6 +60,11 @@ class Folder
     {
         return $this->partialFolderTree(0);
     }
+    
+    public function all()
+    {
+        return StorageFolder::find()->select(['id', 'name', 'parent_id'])->where(['is_deleted' => 0])->asArray()->all();
+    }
 
     /**
      * get all sub folders for $folderId.
@@ -86,7 +91,7 @@ class Folder
                 $breadcrumbs[] = $this->getRootArray();
                 continue;
             }
-            $breadcrumbs[] = \admin\models\StorageFolder::find()->where(['id' => $folderId])->asArray()->one();
+            $breadcrumbs[] = StorageFolder::find()->where(['id' => $folderId])->asArray()->one();
         }
 
         return array_reverse($breadcrumbs);
@@ -99,7 +104,7 @@ class Folder
 
     private function getSubFolderOf($folderId)
     {
-        $folder = \admin\models\StorageFolder::find()->select(['id', 'name', 'parent_id'])->where(['id' => $folderId])->asArray()->one();
+        $folder = StorageFolder::find()->select(['id', 'name', 'parent_id'])->where(['id' => $folderId])->asArray()->one();
 
         if ($folder['parent_id'] == 0) {
             return false;

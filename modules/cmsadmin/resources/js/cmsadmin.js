@@ -253,7 +253,21 @@
 		$stateProvider
 		.state("custom.cmsedit", {
 			url : "/update/:navId",
-			templateUrl : 'cmsadmin/page/update'
+			templateUrl : 'cmsadmin/page/update',
+			resolve : {
+				services : function(FilemanagerFolderListService, FileIdService, FileListeService, ImageIdService) {
+					return FilemanagerFolderListService.get(true).then(function(data) {
+						return FileIdService.init().then(function(response) {
+							return FileListeService.init().then(function(resp) {
+								return ImageIdService.init();
+							});
+						});
+            		});
+            	},
+            	filters : function(FilterService) {
+            		return FilterService.get(true);
+            	},
+            }
 		})
 		.state("custom.cmsadd", {
 			url : "/create",

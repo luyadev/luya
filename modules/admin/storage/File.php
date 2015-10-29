@@ -170,6 +170,30 @@ class File
         return $files;
     }
 
+    public function all()
+    {
+        $files = StorageFile::find()->select(['admin_storage_file.id', 'name_original', 'extension', 'file_size', 'upload_timestamp', 'firstname', 'lastname'])->leftJoin('admin_user', 'admin_user.id=admin_storage_file.upload_user_id')->where(['is_hidden' => 0, 'admin_storage_file.is_deleted' => 0])->asArray()->all();
+        foreach ($files as $k => $v) {
+            // @todo check fileHasImage sth
+            if ($v['extension'] == 'jpg' || $v['extension'] == 'png') {
+                $isImage = true;
+                $imageId = Yii::$app->storage->image->create($v['id'], 0);
+                if ($imageId) {
+                    $thumb = Yii::$app->storage->image->filterApply($imageId, 'small-landscape', true);
+                } else {
+                    $thumb = false;
+                }
+            } else {
+                $isImage = false;
+                $thumb = false;
+            }
+            $files[$k]['is_image'] = $isImage;
+            $files[$k]['thumbnail'] = $thumb;
+        }
+        
+        return $files;
+    }
+    
     public function get($fileId)
     {
         $file = StorageFile::find()->where(['id' => $fileId, 'is_deleted' => 0])->asArray()->one();

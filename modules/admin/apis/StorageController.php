@@ -101,10 +101,20 @@ class StorageController extends \admin\base\RestController
 
         return ['id' => $create, 'error' => (bool) !$create, 'message' => $msg, 'image' => ((bool) $create) ? $this->actionImagePath($create) : false];
     }
+    
+    public function actionAllImagePaths()
+    {
+        return Yii::$app->storage->image->all();
+    }
 
     public function actionImagePath($imageId)
     {
         return Yii::$app->storage->image->get($imageId);
+    }
+    
+    public function actionAllFilePaths()
+    {
+        return Yii::$app->storage->file->all();
     }
 
     public function actionFilePath($fileId)
@@ -112,6 +122,16 @@ class StorageController extends \admin\base\RestController
         return Yii::$app->storage->file->get($fileId);
     }
 
+    public function actionAllFolderFiles()
+    {
+        $data = [];
+        $data[] = ['folder' => ['id' => 0], 'items' => Yii::$app->storage->file->allFromFolder(0)];
+        foreach(Yii::$app->storage->folder->all() as $folder) {
+            $data[] = ['folder' => $folder, 'items' => Yii::$app->storage->file->allFromFolder($folder['id'])];
+        }
+        return $data;
+    }
+    
     public function actionGetFiles($folderId)
     {
         return Yii::$app->storage->file->allFromFolder($folderId);
