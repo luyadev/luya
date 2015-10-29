@@ -45,8 +45,8 @@ class UrlRule extends \luya\base\UrlRule
         $request->setPathInfo($resolver['route']);
 
         // set user env variabls
-        Yii::$app->language = Yii::$app->composition->getLanguage();
-        setlocale(LC_ALL, Yii::$app->composition->getLocale(), Yii::$app->composition->getLocale().'.utf8');
+        Yii::$app->language = Yii::$app->composition->language;
+        setlocale(LC_ALL, Yii::$app->composition->locale, Yii::$app->composition->locale.'.utf8');
 
         // get all parts from the current changed Request-Object.
         $urlParts = $this->getUrlParts($request);
