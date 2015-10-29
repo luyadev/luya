@@ -13,7 +13,7 @@ class AdminUser extends \yii\web\User
 {
     public $identityClass = '\admin\models\User';
 
-    public $loginUrl = ['admin/login'];
+    public $loginUrl = 'admin/login';
 
     public $identityCookie = ['name' => '_adminIdentity', 'httpOnly' => true];
 

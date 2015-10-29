@@ -83,7 +83,7 @@ class LoginController extends \admin\base\Controller
     
     public function actionIndex()
     {
-        $url = YiiUrl::to(Url::to('admin'), true);
+        $url = YiiUrl::base(true) . '/admin';
 
         // redirect logged in users
         if (!Yii::$app->adminuser->isGuest) {
