@@ -20,15 +20,19 @@
 	}
 }
 .blockholder__search {
+	position: relative;
 	color: white;
+
 	i {
 		position: absolute;
-		top: 25px;
+		top: 2px;
+		left: 0;
 		font-size: 24px;
 		
 	}
 	input {
-		padding-left: 30px;
+		height: 2rem;
+		text-indent: 28px;
 	}
 	.active {
 		color: #26a69a;
