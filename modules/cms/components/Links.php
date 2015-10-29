@@ -282,7 +282,12 @@ class Links extends \yii\base\Component
     {
         $parent = $this->getParent($link);
 
-        $tears[] = $this->findOneByArguments(['url' => $link, 'show_hidden' => true, 'is_home' => 0]);
+        $tears = [];
+        
+        $home = $this->findOneByArguments(['url' => $link, 'show_hidden' => true, 'is_home' => 0]);
+        if ($home) {
+            $tears[] = $home;
+        }
         while ($parent) {
             $tears[] = $parent;
             $link = $parent['url'];
