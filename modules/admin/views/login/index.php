@@ -1,23 +1,21 @@
-<div class="container" style="margin-top:150px;">
-    <h5><?= Yii::$app->siteTitle; ?> Login</h5>
-    <div class="card-panel" style="padding:60px;">
-        
-        <form method="post" id="loginForm">
+<div class="container" style="margin-top:150px; width:500px;">
+    
+    <div class="card hoverable" style="padding:20px;">
+    <span class="card-title black-text"><?= Yii::$app->siteTitle; ?></span>
+        <form method="post" id="loginForm" style="padding-top:20px;">
             <div class="input-field col s12">
-                <i class="material-icons prefix">mail</i>
                 <input type="text" id="email" name="login[email]" value="<?= $model->email; ?>" />
                 <label for="email">E-Mail-Adresse</label>
             </div>
             <div class="input-field col s12">
-                <i class="material-icons prefix">vpn_key</i>
                 <input type="password" id="password" name="login[password]" />
                 <label for="password">Passwort</label>
             </div>
-            <button class="waves-effect waves-light btn right" type="submit">Einloggen <i class="material-icons">send</i></button>
+            <button class="btn right" type="submit">Abschicken <i class="material-icons">send</i></button>
             <div style="clear:both;"></div>
         </form>
         
-        <form method="post" id="secureForm" style="display:none;">
+        <form method="post" id="secureForm" style="display:none; padding-top:20px;">
             
             <p style="padding-bottom:20px;">Geben Sie den Sicherheitscode ein, der Ihnen per E-Mail geschickt wurde.</p>
             
