@@ -107,7 +107,9 @@
 	.filemanager__folder.active > & > .filemanager__folder-icon--default {
 		display: none;		
 	}
-	
+	.filmanager__thumb {
+		max-width: 80px;
+	}
 	.filemanager__edit-icon,
     .filemanager__delete-icon {
 		position: absolute;
@@ -132,16 +134,7 @@
 			margin-right: 20px;
 			color: color("shades", "black");
 		}
-		// i {
-		// 	position: relative;
-		// 	top: -5px;
-		// 	&:first-child {
-				
-		// 	}
-		// 	&:last-child {
-				
-		// 	}
-		// }
+
 		
 	}
 	.filemanager__file-dialog__input {
@@ -165,10 +158,6 @@
         color: color("red", "base");
 
     }
-   // .filemanager__delete-icon {
-   //      transform: rotate(45deg);
-   //      font-size: 32px;
-   //  }
 
     .filemanager__edit-icon {
         right: 40px;
