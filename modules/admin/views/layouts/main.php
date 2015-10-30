@@ -94,16 +94,31 @@ $this->beginPage()
         </script>
 
         <script type="text/ng-template" id="reverseFolders">
-                    <div class="filemanager__folder-button">
+                    <div class="filemanager__folder-button" ng-click="loadFolder(folder.data.id)">
                         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default">folder_open</i>
                         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active">folder</i>
                         <i class="material-icons filemanager__edit-icon" ng-click="folder.edit=!folder.edit">mode_edit</i>
-                        <i class="material-icons filemanager__delete-icon" ng-click="folder.remove=!folder.remove">add</i>
+                       
+                        <i class="material-icons filemanager__delete-icon" ng-click="folder.remove=!folder.remove">delete</i>
                         <span ng-show="!folder.edit"><span ng-click="loadFolder(folder.data.id)">{{folder.data.name }}</span>
                             <button ng-click="moveFilesTo(folder.data)" ng-show="showFoldersToMove && currentFolderId != folder.data.id" type="button">{{selectedFiles.length}} Dateien verschieben</button>
                         </span>
-                        <span ng-show="folder.edit"><input type="text" ng-model="folder.data.name" /><button type="button" ng-click="updateFolder(folder)">Speichern</button></span>
-                        <span ng-show="folder.remove"><button type="button" ng-click="deleteFolder(folder)">Löschen</button></span>
+                        <span ng-show="folder.edit">
+                            <input type="text" ng-model="folder.data.name" class="filemanager__file-dialog__input"/>
+                            <div class="filemanager__file-dialog">
+                                <span>Speichern?</span>
+                                <i class="material-icons filemanager__file-dialog__icon" ng-click="updateFolder(folder)">check</i>
+                                <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="folder.edit=!folder.edit">add</i>
+                            </div>
+                        </span>
+
+                        <span ng-show="folder.remove">
+                            <div class="filemanager__file-dialog">
+                                <span>Verzeichniss löschen?</span>
+                                <i class="material-icons filemanager__file-dialog__icon" ng-click="deleteFolder(folder)">check</i>
+                                <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="folder.remove=!folder.remove">add</i>
+                            </div>
+                        </span>
 
                         <!-- mdi-mdi-action-highlight-remove -->
                     </div>
@@ -143,7 +158,7 @@ $this->beginPage()
                                 <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active">folder</i>
                                 <span>Stammverzeichnis</span>
                             </div>
-                            <ul class="filemanager__folders" ng-if="folders.length > 0">
+                            <ul class="filemanager__folders" ng-if="folders.length > 0" >
                                 <li class="filemanager__folder" ng-class="{'active' : currentFolderId == folder.data.id }" ng-repeat="folder in folders" ng-include="'reverseFolders'"></li>
                             </ul>
                         </li>

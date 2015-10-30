@@ -92,10 +92,12 @@
 	.filemanager__folder-icon {
 		position: absolute;
 		left: 0;
+		top: 6px;
 	}
 
 	.filemanager__folder-icon--active {
 		display: none;
+		// margin-top: -2px;
 	}
 	&:hover > .filemanager__folder-icon--active,
 	.filemanager__folder.active > & > .filemanager__folder-icon--active {
@@ -103,7 +105,7 @@
 	}
 	&:hover > .filemanager__folder-icon--default,
 	.filemanager__folder.active > & > .filemanager__folder-icon--default {
-		display: none;
+		display: none;		
 	}
 	
 	.filemanager__edit-icon,
@@ -118,11 +120,55 @@
         vertical-align: middle;
         margin: -5px;
 	}
+	.filemanager__cancel-btn {
+		background-color: color("red", "base");
+	}
+	.filemanager__file-dialog {
+		position: relative;
+	    border-top: 1px solid #9e9e9e;
+	    padding-top: 8px;
+		span {
+			vertical-align: top;
+			margin-right: 20px;
+			color: color("shades", "black");
+		}
+		// i {
+		// 	position: relative;
+		// 	top: -5px;
+		// 	&:first-child {
+				
+		// 	}
+		// 	&:last-child {
+				
+		// 	}
+		// }
+		
+	}
+	.filemanager__file-dialog__input {
+		margin: -15px 0 0 0;		
+	    border-bottom: none;
 
-    .filemanager__delete-icon {
+	    &:focus:not([readonly]) {
+	    	border-bottom: none;
+    	    box-shadow: none;
+	    }
+	}
+	.filemanager__file-dialog__icon {
+		position: relative;
+		top: -10px;
+		color: color("teal", "lighten-1");
+	}
+    .filemanager__cancel-icon {
+    	top: -5px;
         transform: rotate(45deg);
         font-size: 32px;
+        color: color("red", "base");
+
     }
+   // .filemanager__delete-icon {
+   //      transform: rotate(45deg);
+   //      font-size: 32px;
+   //  }
 
     .filemanager__edit-icon {
         right: 40px;
