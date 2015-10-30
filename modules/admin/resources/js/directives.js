@@ -433,12 +433,38 @@
 				}
 			},
 			template: function() {
-				return '<div><h5>{{label}}</h5>' +
-							'<button ng-click="addColumn()" type="button" style="float:right;">Spalte Rechts einfügen</button>'+
-							'<table>'+
-							'<thead><tr><td width="90"></td><td data-ng-repeat="(hk, hr) in model[0] track by hk"><strong><button type="button" ng-click="removeColumn(hk)" class="btn-floating"><i class="material-icons">delete</i></button></strong></td></tr></thead>' +
-							'<tr data-ng-repeat="(key, row) in model track by key"><td>#{{key+1}} <button type="button" class="btn-floating" ng-click="removeRow(key)"><i class="material-icons">delete</i></button></td><td data-ng-repeat="(field,value) in row track by field"><input type="text" ng-model="model[key][field]" /></td></tr>'+
-							'</table><button ng-click="addRow()" type="button">Neue Zeile einfügen</button>'+
+				return '<div>'+
+							'<h5>{{label}}</h5>' +
+							
+							'<table class="zaa-table">'+
+								'<thead>'+
+									'<tr>'+
+										'<td width="90">Zeile</td>'+
+										'<td data-ng-repeat="(hk, hr) in model[0] track by hk">'+
+											'Spalte {{hk}}'+
+											'<strong>'+
+												'<button type="button" ng-click="removeColumn(hk)" class="btn-floating zaa-table__btn--del">'+
+													'<i class="material-icons">delete</i>'+
+												'</button>'+ 
+											'</strong>'+											
+										'</td>'+
+									'</tr>'+
+								'</thead>' +
+								'<tr data-ng-repeat="(key, row) in model track by key">'+
+									'<td>'+
+										'#{{key+1}}'+ 
+										'<button type="button" class="btn-floating zaa-table__btn--del" ng-click="removeRow(key)">'+
+											'<i class="material-icons">delete</i>'+
+										'</button>'+
+									'</td>'+
+									'<td data-ng-repeat="(field,value) in row track by field">'+
+										'<input type="text" ng-model="model[key][field]"class="zaa-table__input"/>'+
+									'</td>'+
+								'</tr>'+
+							'</table>'+
+							'<button ng-click="addRow()" type="button" class="zaa-table__btn [ waves-effect waves-light ] btn btn--small teal">Zeile hinzufügen</button>'+
+
+							'<button ng-click="addColumn()" type="button" style="float:right;" class="zaa-table__btn[ waves-effect waves-light ] btn btn--small teal">Spalte Rechts einfügen</button>'+
 						'</div>';
 			}
 		}
