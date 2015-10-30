@@ -42,9 +42,6 @@
 	&.block--is-container {
 		padding-top: 32px;
 		// transition: 0.25s ease border-color;
-		border-left: 4px solid $block--is-container__toolbar--background;
-		border-bottom: 4px solid $block--is-container__toolbar--background;
-		border-right: 4px solid $block--is-container__toolbar--background;
 	}
 }
 
@@ -53,7 +50,6 @@
 }
 
 .block__toolbar {
-	background-color: $block__toolbar--background;
 	color: $block__toolbar--color;
 	font-size: 18px;
 	padding: 2px 10px;
@@ -76,10 +72,6 @@
 }
 .page--drag-active .block:not(.block--is-container) .block__toolbar {
 	display: none;
-}
-.block--is-container > .block__toolbar {
-	background-color: $block--is-container__toolbar--background;
-	// transition: 0.25s ease background-color;
 }
 .page--drag-active .block--is-container > .block__toolbar {
 	background-color: $grey--darken;
@@ -136,3 +128,43 @@
 	// transition: 0.25s 0.25s ease opacity, 0.25s 0.25s ease height, 1s ease padding;
 	padding: ($block__toolbar--height + 5px) 10px 38px 10px;
 }
+
+
+@each $depth, $color in $container-block--colors {
+	$selector: "";
+	@while $depth > 0 {
+		$selector: $selector + ".block--is-container ";
+		$depth: $depth - 1;
+	}
+
+	#{$selector} {
+		border-left: 4px solid #{$color};
+		border-bottom: 4px solid #{$color};
+		border-right: 4px solid #{$color};
+
+
+		> .block__toolbar {
+			background-color: #{$color};
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

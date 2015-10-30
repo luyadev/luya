@@ -42,4 +42,14 @@ $block__toolbar--background:				$blue;
 $block--is-container__toolbar--background: 	$purple--lighten-2;
 $block__toolbar--color:						$white;
 
+/**
+ * Container Blocks colors
+ */
+$container-block--colors: (
+    1: "#0D47A1",
+    2: "#1976D2",
+    3: "#2196F3",
+    4: "#64B5F6"    
+);
+
 $page__drop-zone--background:				$green--accent-4;
