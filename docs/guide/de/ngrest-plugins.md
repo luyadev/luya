@@ -24,3 +24,4 @@ Plugin Übersicht
 |date                                          |Erstellt ein *Datum* Selektor Feld und gibt einen Unix Timestamp zurück.|
 |datetime                                          |Erstellt ein *Datum und Zeit* Selektor und gibt einen Unix Timestamp zurück.|
 |cmsPage    |Eine CMS Seite kann ausgewählt werden welche danach an dieser erstellt gerendert und angezeigt wird. Feld muss interger sein|
+|color                                                  |Stellt den RGB Wert in Hexadezimalangabe (z.B. `FF0000`) als Farbe dar (funktioniert nur im *List*-View).|
