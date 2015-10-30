@@ -159,7 +159,7 @@ $this->beginPage()
                                 <span>Stammverzeichnis</span>
                             </div>
                             <ul class="filemanager__folders" ng-if="folders.length > 0" >
-                                <li class="filemanager__folder" ng-class="{'active' : currentFolderId == folder.data.id }" ng-repeat="folder in folders" ng-include="'reverseFolders'">"{{ folder.data.id }}"</li>
+                                <li class="filemanager__folder" ng-class="{'active' : currentFolderId == folder.data.id }" ng-repeat="folder in folders" ng-include="'reverseFolders'"></li>
                             </ul>
                         </li>
                     </ul>
