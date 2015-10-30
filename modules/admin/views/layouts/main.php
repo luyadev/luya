@@ -280,7 +280,7 @@ $this->beginPage()
                                 </td>
                                 <td class="filemanager__icon-column" ng-class="{ 'filemanager__icon-column--thumb' : file.thumbnail }">
                                         <span ng-if="file.thumbnail">
-                                            <img class="responsive-img" ng-src="{{file.thumbnail.source}}" />
+                                            <img class="responsive-img filmanager__thumb" ng-src="{{file.thumbnail.source}}" />
                                         </span>
                                         <span ng-if="!file.thumbnail">
                                             <i class="material-icons">attach_file</i>
