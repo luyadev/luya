@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dbfb71ab0b87386adbb49559953c1eaf",
-    "content-hash": "3cebc8c7dbe1b4a6265c7887a2096f2b",
+    "hash": "30e2edc209c4f08bbe3bed2a209b3a48",
+    "content-hash": "ea97f265ea8e356f0a572c094764b2a7",
     "packages": [
         {
             "name": "bower-asset/angular",
@@ -644,16 +644,16 @@
         },
         {
             "name": "curl/curl",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-mod/curl.git",
-                "reference": "abf20039c84291b5399502c9ecff77a1cda3848e"
+                "reference": "67f7c490060751fbf24a02bc1ff3b32073aeb5e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-mod/curl/zipball/abf20039c84291b5399502c9ecff77a1cda3848e",
-                "reference": "abf20039c84291b5399502c9ecff77a1cda3848e",
+                "url": "https://api.github.com/repos/php-mod/curl/zipball/67f7c490060751fbf24a02bc1ff3b32073aeb5e0",
+                "reference": "67f7c490060751fbf24a02bc1ff3b32073aeb5e0",
                 "shasum": ""
             },
             "require": {
@@ -661,7 +661,8 @@
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "3.7.*"
+                "phpunit/phpunit": "3.7.*",
+                "squizlabs/php_codesniffer": "~2.1"
             },
             "type": "library",
             "autoload": {
@@ -694,7 +695,7 @@
                 "curl",
                 "dot"
             ],
-            "time": "2014-12-11 16:11:01"
+            "time": "2015-04-09 16:29:25"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -1107,16 +1108,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v5.2.13",
+            "version": "v5.2.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "45df3a88f7f46071e10d0b600f228d19f95911b3"
+                "reference": "e774bc9152de85547336e22b8926189e582ece95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/45df3a88f7f46071e10d0b600f228d19f95911b3",
-                "reference": "45df3a88f7f46071e10d0b600f228d19f95911b3",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/e774bc9152de85547336e22b8926189e582ece95",
+                "reference": "e774bc9152de85547336e22b8926189e582ece95",
                 "shasum": ""
             },
             "require": {
@@ -1127,7 +1128,8 @@
                 "phpunit/phpunit": "4.7.*"
             },
             "suggest": {
-                "league/oauth2-client": "Needed for Gmail's XOAUTH2 authentication system"
+                "league/oauth2-client": "Needed for XOAUTH2 authentication",
+                "league/oauth2-google": "Needed for Gmail XOAUTH2"
             },
             "type": "library",
             "autoload": {
@@ -1163,7 +1165,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2015-09-14 09:18:12"
+            "time": "2015-11-01 10:15:28"
         },
         {
             "name": "phpspec/php-diff",
@@ -1254,12 +1256,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
-                "reference": "3cd50e89af7f8c7c5b57c2ac95938576bfe39bb5"
+                "reference": "ad89a88b9124aa0fdf42ef2784f90e95112a7818"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/3cd50e89af7f8c7c5b57c2ac95938576bfe39bb5",
-                "reference": "3cd50e89af7f8c7c5b57c2ac95938576bfe39bb5",
+                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/ad89a88b9124aa0fdf42ef2784f90e95112a7818",
+                "reference": "ad89a88b9124aa0fdf42ef2784f90e95112a7818",
                 "shasum": ""
             },
             "require": {
@@ -1282,7 +1284,10 @@
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\BrowserKit\\": ""
-                }
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1300,7 +1305,7 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
-            "time": "2015-10-23 14:52:08"
+            "time": "2015-10-30 20:15:42"
         },
         {
             "name": "symfony/css-selector",
@@ -1308,12 +1313,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "01e341a68e06e540e0322017506b58b0e072c626"
+                "reference": "b600fec37c0efca08046d481d79e7eabc07108ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/01e341a68e06e540e0322017506b58b0e072c626",
-                "reference": "01e341a68e06e540e0322017506b58b0e072c626",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/b600fec37c0efca08046d481d79e7eabc07108ff",
+                "reference": "b600fec37c0efca08046d481d79e7eabc07108ff",
                 "shasum": ""
             },
             "require": {
@@ -1328,7 +1333,10 @@
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\CssSelector\\": ""
-                }
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1350,7 +1358,7 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2015-10-11 08:29:26"
+            "time": "2015-10-30 20:15:42"
         },
         {
             "name": "symfony/dom-crawler",
@@ -1358,12 +1366,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "0aa83d9bd840c2e3d02b3ad3a440ce9f7c1cb917"
+                "reference": "13042dc9b6515f069f49e0ad487fd3bc45b2ebc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/0aa83d9bd840c2e3d02b3ad3a440ce9f7c1cb917",
-                "reference": "0aa83d9bd840c2e3d02b3ad3a440ce9f7c1cb917",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/13042dc9b6515f069f49e0ad487fd3bc45b2ebc1",
+                "reference": "13042dc9b6515f069f49e0ad487fd3bc45b2ebc1",
                 "shasum": ""
             },
             "require": {
@@ -1385,7 +1393,10 @@
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\DomCrawler\\": ""
-                }
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1403,7 +1414,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2015-10-28 02:15:07"
+            "time": "2015-10-30 20:15:42"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1463,16 +1474,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.21.2",
+            "version": "v1.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "ddce1136beb8db29b9cd7dffa8ab518b978c9db3"
+                "reference": "5868cd822fd6cf626d5f805439575f9c323cee2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ddce1136beb8db29b9cd7dffa8ab518b978c9db3",
-                "reference": "ddce1136beb8db29b9cd7dffa8ab518b978c9db3",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/5868cd822fd6cf626d5f805439575f9c323cee2a",
+                "reference": "5868cd822fd6cf626d5f805439575f9c323cee2a",
                 "shasum": ""
             },
             "require": {
@@ -1485,7 +1496,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.21-dev"
+                    "dev-master": "1.23-dev"
                 }
             },
             "autoload": {
@@ -1520,7 +1531,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-09-09 05:28:51"
+            "time": "2015-10-29 23:29:01"
         },
         {
             "name": "yiisoft/yii2",
