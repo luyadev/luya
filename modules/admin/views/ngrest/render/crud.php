@@ -146,8 +146,6 @@
         </div>
     
         <div class="card-panel" ng-switch-when="2">
-            <h1>Bearbeiten</h1>
-
             <?php if ($canUpdate && $config->getPointer('update')): ?>
                 <form name="formUpdate" role="form" ng-submit="submitUpdate()">
                     <!-- MODAL CONTENT -->
