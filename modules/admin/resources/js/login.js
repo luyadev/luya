@@ -1,14 +1,14 @@
 var observeLogin = function(form, url, secureUrl) {
 	$(form).submit(function(e) {
-		$('#errorsContainer').hide();
-		$('#spinner').show();
+        $('#errorsContainer').hide();
+		$('.spinner').show(); $('.submit-icon').hide();
 		e.preventDefault();
 		$.ajax({
 			type: "POST",
 			url: url,
 			data: $(this).serialize(),
 			success : function(response) {
-				$('#spinner').hide();
+                $('.spinner').hide(); $('.submit-icon').show();
 				var refresh = response['refresh'];
 				var errors = response['errors'];
 				var enterSecureToken = response['enterSecureToken'];
@@ -31,8 +31,12 @@ var observeLogin = function(form, url, secureUrl) {
 				}
 				
 				if (refresh) {
-					$('#success').show();
-					location.reload();
+                    $('#secureForm').hide();
+                    $('#loginForm').hide();
+                    $('#success').show();
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1500);
 				}
 			},
 			dataType: "json"
@@ -41,14 +45,14 @@ var observeLogin = function(form, url, secureUrl) {
 	
 	$('#secureForm').submit(function(e) {
 		$('#errorsContainer').hide();
-		$('#spinner').show();
+        $('.spinner').show(); $('.submit-icon').hide();
 		e.preventDefault();
 		$.ajax({
 			type: "POST",
 			url: secureUrl,
 			data: $(this).serialize(),
 			success : function(response) {
-				$('#spinner').hide();
+                $('.spinner').hide(); $('.submit-icon').show();
 				var refresh = response['refresh'];
 				
 				if (response['errors']) {
@@ -57,16 +61,20 @@ var observeLogin = function(form, url, secureUrl) {
 				}
 				
 				if (refresh) {
+                    $('#secureForm').hide();
+                    $('#loginForm').hide();
 					$('#success').show();
-					location.reload();
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1500);
 				}
 			},
 			dataType: "json"
 		})
-	})
+	});
 	
 	$('#abortToken').click(function(e) {
-		$('#spinner').hide();
+        $('.spinner').hide(); $('.submit-icon').show();
 		$('#errorsContainer').hide();
 		$('#secureForm').hide();
 		$('#loginForm').show();

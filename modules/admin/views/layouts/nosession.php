@@ -1,6 +1,9 @@
 <?php
 use \yii\helpers\Html;
 $this->beginPage();
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +16,7 @@ $this->beginPage();
     <title><?= Yii::$app->siteTitle; ?> // Login // <?= luya\Module::VERSION; ?></title>
     <style>
         body {
-            background: url('<?= $this->getAssetUrl('admin\assets\Login'); ?>/img/login-splash-beta1.jpg') no-repeat center center fixed;
+            background: url('<?= $this->getAssetUrl('admin\assets\Login'); ?>/img/login-splash/<?= rand(1, 13) ?>.jpg') no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
