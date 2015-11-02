@@ -2,8 +2,10 @@
 
 namespace cms\components;
 
+use Exception;
 use Yii;
 use yii\db\Query;
+use cms\components\MenuQuery;
 
 /**
  * Concept:
@@ -16,12 +18,12 @@ use yii\db\Query;
  * }
  * ```
  * 
- * ### Add Filters
+ * ### Add Query
  * 
- * ability to add multiple filters as "AND" chain. like below: parent_nav_id = 0 AND parent_nav_id = 1
+ * ability to add multiple querys as "AND" chain. like below: parent_nav_id = 0 AND parent_nav_id = 1
  * 
  * ```php
- * foreach(Yii::$app->menu->filter(['parent_nav_id' => 0, 'parent_nav_id' => 1])->all() as $item) {
+ * foreach(Yii::$app->menu->where(['parent_nav_id' => 0, 'parent_nav_id' => 1])->all() as $item) {
  *     
  * }
  * ```
@@ -29,7 +31,7 @@ use yii\db\Query;
  * Find one item:
  * 
  * ```php
- * $item = Yii::$app->menu->filter(['id'])->one();
+ * $item = Yii::$app->menu->where(['id'])->one();
  * ```
  * 
  * 
@@ -38,8 +40,8 @@ use yii\db\Query;
  * ```php
  * $item->getTitle(); //
  * $item->getLink(); // /link/to/somewhere
- * $item->getChildren(); // returns a specific filter on the current item
- * $item->getParents(); // returns a speicific filter on the current item
+ * $item->getChildren(); // returns a specific query on the current item
+ * $item->getParent(); // return specific
  * $item->teardown();
  * ```
  * 
@@ -47,6 +49,12 @@ use yii\db\Query;
  * 
  * ```php
  * $item = Yii::$app->menu->getCurrent();
+ * ```
+ * 
+ * Get home item
+ * 
+ * ```php
+ * $item = Yii::$app->menu->getHome();
  * ```
  * 
  * Example to get Breadcrumbs:
@@ -61,21 +69,130 @@ use yii\db\Query;
  */
 class Menu extends \yii\base\Component
 {
-    /*
-    public function init()
+    public $cacheKey = 'luyaMenuComponent';
+    
+    public $cacheExpire = 3600;
+    
+    public $composition = null;
+    
+    public $request = null;
+    
+    private $_containerData = null;
+    
+    /**
+     * Class constructor uses yii di container
+     * 
+     * @param \yii\web\Request $request
+     * @param \luya\components\Composition $composition
+     * @param array $config
+     */
+    public function __construct(\yii\web\Request $request, \luya\components\Composition $composition, array $config = [])
     {
-        $this->load();
+        $this->request = $request;
+        $this->composition = $composition;
+        parent::__construct($config);
     }
     
-    private function load()
+    public function getContainerData()
     {
-        $data = (new Query())->from(['cms_nav_item item'])
-        ->select(['item.id', 'item.nav_id', 'item.title', 'item.rewrite', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'nav.is_offline', 'cat.name AS cat_name', 'cat.rewrite AS cat_rewrite'])
-        ->leftJoin('cms_nav nav', 'nav.id=item.nav_id')
-        ->leftJoin('cms_cat cat', 'cat.id=nav.cat_id')
-        ->orderBy(['nav.sort_index' => 'ASC'])
-        ->indexBy('id')
-        ->all();
+        if ($this->_containerData === null) {
+            if (Yii::$app->has('cache')) {
+                Yii::info('Menu component has cache component detected.');
+                $data = Yii::$app->cache->get($this->cacheKey);
+                if ($data === false) {
+                    Yii::info('Menu component stores information into cache.');
+                    $data = $this->loadContainerData();
+                    Yii::$app->cache->set($this->cacheKey, $data, $this->cacheExpire);
+                } else {
+                    Yii::info('Menu component restored informations from cache.');
+                }
+                $this->_containerData = $data;
+            } else {
+                Yii::info('Menu component loaded from database.');
+                $this->_containerData = $this->loadContainerData();
+            }
+        }
+        
+        return $this->_containerData;
     }
-    */
+    
+    private function loadContainerData()
+    {
+        $container = [];
+        
+        $redirectMap = (new Query())->select(['id', 'type', 'value'])->from('cms_nav_item_redirect')->indexBy('id')->all();
+        
+        foreach ((new Query())->select(['short_code', 'id'])->from('admin_lang')->all() as $lang) {
+            
+            $data = (new Query())->from(['cms_nav_item item'])
+            ->select(['item.id', 'item.nav_id', 'item.title', 'item.rewrite', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'nav.is_offline', 'item.nav_item_type', 'item.nav_item_type_id', 'cat.rewrite AS cat_rewrite'])
+            ->leftJoin('cms_nav nav', 'nav.id=item.nav_id')
+            ->leftJoin('cms_cat cat', 'cat.id=nav.cat_id')
+            ->where(['nav.is_deleted' => 0, 'item.lang_id' => $lang['id']])
+            ->orderBy(['cat_rewrite' => 'ASC', 'parent_nav_id' => 'ASC', 'nav.sort_index' => 'ASC'])
+            ->indexBy('id')
+            ->all();
+            
+            $index = [];
+            
+            foreach ($data as $item) {
+                if (!array_key_exists($item['nav_id'], $index)) {
+                    if ($item['parent_nav_id'] > 0) {
+                        $rewrite = $index[$item['parent_nav_id']] . '/' . $item['rewrite'];
+                    } else {
+                        $rewrite = $item['rewrite'];
+                    }
+                    $index[$item['nav_id']] = $rewrite;
+                }
+            }
+            
+            array_walk($data, function(&$item, $key) use ($index, $redirectMap) {
+                // concate rewrite link from parent nav ids
+                if ($item['parent_nav_id'] > 0) {
+                    $rewrite = $index[$item['parent_nav_id']] . '/' . $item['rewrite'];
+                } else {
+                    $rewrite = $item['rewrite'];
+                }
+                // add link key
+                $item['link'] = $rewrite;
+                // add redirect info if item_type 3
+                if ($item['nav_item_type'] == 3) {
+                    $item['redirect'] = $redirectMap[$item['nav_item_type_id']];
+                } else {
+                    $item['redirect'] = 0;
+                }
+                // remove unused keys
+                unset($item['nav_item_type'], $item['nav_item_type_id']);
+            });
+            
+            $container[$lang['short_code']] = $data;   
+        }
+        
+        return $container;
+    }
+    
+    public function getCurrent()
+    {
+        $id = 1; // resolve id from request object
+        return (new MenuQuery(['id' => $id]))->one();
+    }
+    
+    public function getHome()
+    {
+        return (new MenuQuery(['is_home' => 1]))->one();   
+    }
+    
+    public function where(array $args)
+    {
+        /**
+         * MenuFilter::one();
+         * MenuFilter::all();
+         */
+        return (new MenuQuery(['menu' => $this]))->where($args);
+    }
+    
+    public function all()
+    {
+        return (new MenuQuery($this))->all();
+    }
 }
