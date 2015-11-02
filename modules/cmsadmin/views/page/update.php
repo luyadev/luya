@@ -295,9 +295,9 @@
 
             <div class="blockholder" ng-controller="DroppableBlocksController">
                 <div class="col s12">
-                    <div class="blockholder__search">
-                        <input type="text" ng-model="searchQuery" value="" />
-                        <i class="material-icons">search</i>
+                    <div class="blockholder__search" ng-class="{'blockholder__search--active': searchQuery}">
+                        <input class="blockholder__input" type="text" ng-model="searchQuery" value="" id="blockholderSearch" />
+                        <label class="blockholder__search-icon" for="blockholderSearch"><i class="material-icons">search</i></label>
                     </div>
                     <div class="blockholder__group" ng-repeat="item in DroppableBlocksService.blocks">
                         <b class="blockholder__group-title">{{item.group.name}}</b>

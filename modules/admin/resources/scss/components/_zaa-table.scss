@@ -32,15 +32,17 @@
                 input {
                     border-bottom: none;
                     margin: 0;
-
                     padding: 0 4px;
                     box-sizing: border-box;
+					width: 100%;
+					height: 100%;
+					outline: none;
+					border: 0;
+					box-shadow: none;
+					transition: 0.25s ease box-shadow;
 
                     &:focus:not([readonly]) {
-                        border-bottom: none; 
-                        -moz-box-shadow:    inset 0 0 5px color("blue", "lighten-1");
-                        -webkit-box-shadow: inset 0 0 5px color("blue", "lighten-1");
-                        box-shadow:         inset 0 0 5px color("blue", "lighten-1");
+						box-shadow: inset 0 0 5px 2px rgba(color("green", "base"), 0.5);
                     }
                 }
             }   

@@ -132,29 +132,36 @@
 		position: relative;
 	    border-top: 1px solid #9e9e9e;
 	    padding-top: 8px;
+		margin-top: -1px;
+
 		span {
 			vertical-align: top;
 			margin-right: 20px;
 			color: color("shades", "black");
 		}
-
-		
 	}
 	.filemanager__file-dialog__input {
-		margin: -15px 0 0 0;
-		padding-left: 10px;		
-	    border-bottom: none;
+		padding-left: 9px;
+	    border: none;
+		width: calc(100% - 60px);
+		outline: none;
+
+		border-left: 1px solid #9e9e9e;
+		border-top: 1px solid #9e9e9e;
+		border-right: 1px solid #9e9e9e;
 
 	    &:focus:not([readonly]) {
 	    	border-bottom: none;
     	    box-shadow: none;
 	    }
 	}
+
 	.filemanager__file-dialog__icon {
 		position: relative;
 		top: -10px;
 		color: color("teal", "lighten-1");
 	}
+
     .filemanager__cancel-icon {
     	top: -5px;
         transform: rotate(45deg);

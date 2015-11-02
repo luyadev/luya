@@ -139,7 +139,7 @@ $this->beginPage()
                         
                         <div class="floating-form left" ng-class="{ 'floating-form--active' : showFolderForm }">
                             <div class="floating-form__form">
-                                <input class="floating-form__input" type="text" ng-model="newFolderName" id="foldername" />
+                                <input class="floating-form__input" type="text" ng-model="newFolderName" id="foldername" placeholder="Ordner" />
                             </div><!-- PREVENT WHITESPACE
                          --><div class="floating-form__actions">
                                 <span class="[ floating-form__button floating-form__button--active ] btn-floating" ng-click="createNewFolder(newFolderName)"><i class="material-icons">check</i></span>

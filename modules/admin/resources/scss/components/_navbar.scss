@@ -129,6 +129,7 @@
 	&.navbar__search-wrapper--wide {
 		position: absolute;
 		width: $navbar__search--width-mobile;
+
 		@media (min-width: 600px) {
 			width: $navbar__search--width;
 		}
@@ -138,25 +139,31 @@
 	}
 
 	@media (min-width: 600px) {
-		height: 63px;
+		height: 64px;
 	}
 }
 
 .navbar__search {
+	height: 100%;
 	width: 100%;
 	display: inline-block;
 	position: relative;
 }
 
 .navbar__search-input {
+	box-sizing: border-box !important;
 	margin: 0 !important;
-	width: calc(100% - 4rem) !important;
+	height: 100%;
+	width: 100% !important;
 	max-width: 100%;
+	padding: 0 !important;
 	transition: 0.4s 0.25s ease color, 0.4s 0.25s ease background-color !important;
+	outline: none;
+	background-color: transparent;
 
 	& + label i {
 		color: color("shades", "white") !important;
-}
+	}
 
 	.navbar__search--open & {
 		background-color: color("shades", "white") !important;
@@ -164,6 +171,7 @@
 		box-shadow: none !important;
 		color: color("grey", "darken-3") !important;
 		transition: 0.25s ease width, 0.25s ease color, 0.25s ease background-color !important;
+		padding: 0 60px !important;
 
 		& + label i,
 		& + label + i {
@@ -185,6 +193,7 @@
 }
 
 .navbar__search-label {
+	position: absolute;
 	z-index: 1;
 	cursor: pointer !important;
 	width: 100% !important;
@@ -196,5 +205,18 @@
 	.navbar__search--open & {
 		width: auto !important;
 		left: 1rem !important;
+	}
+}
+
+.navbar__search-icon {
+	position: absolute;
+	right: 15px;
+	top: 0;
+	opacity: 0;
+	transition: 0.25s 0.25s ease opacity;
+
+	.navbar__search--open & {
+		opacity: 1;
+		cursor: pointer;
 	}
 }

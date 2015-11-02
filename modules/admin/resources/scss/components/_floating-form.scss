@@ -25,7 +25,12 @@ $floating-form__form--margin-right: 25px !default;
 
 .floating-form__input {
 	margin-bottom: 0 !important;
-	height: 2.8rem !important;
+	height: 2.6rem !important;
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid color("green", "base");
+	outline: none;
+	padding: 0 5px;
 }
 
 .floating-form__actions {

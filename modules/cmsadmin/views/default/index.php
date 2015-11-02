@@ -1,44 +1,58 @@
 
 <script type="text/ng-template" id="createform.html">
-    <div ng-switch on="data.nav_item_type" class="card-panel">
+    <form ng-switch on="data.nav_item_type" class="card-panel">
         <h5>Neue Seite hinzufügen</h5>
         <div class="row">
-            <div class="input-field col s6">
-                <input type="text" ng-model="data.title" ng-change="rewriteSuggestion()" focus-me="true" />
-                <label>Seitentitel</label>
+            <div class="input input--text col s12">
+                <label class="input__label">Seitentitel</label>
+                <div class="input__field-wrapper">
+                    <input name="text" type="text" class="input__field" ng-model="data.title" ng-change="rewriteSuggestion()" focus-me="true" />
+                </div>
             </div>
-            <div class="input-field col s6">
-                <input type="text" ng-model="data.rewrite" />
-                <label>Pfadsegment</label>
+        </div>
+        <div class="row">
+            <div class="input input--text col s12">
+                <label class="input__label">Pfadsegment</label>
+                <div class="input__field-wrapper">
+                    <input name="text" type="text" class="input__field" ng-model="data.rewrite" />
+                </div>
             </div>
         </div>
         <div class="row" ng-hide="data.isInline || cat.length == 1">
-            <div class="col s12">
-                <label>Navigations-Kategorie</label>
-                <select class="browser-default" ng-model="data.cat_id" ng-options="item.id as item.name for item in cat" />
+            <div class="input input--select col s12">
+                <label class="input__label">Navigations-Kategorie</label>
+                <div class="input__field-wrapper">
+                    <select class="input__field browser-default" ng-model="data.cat_id" ng-options="item.id as item.name for item in cat"></select>
+                </div>
             </div>
         </div>
         <div class="row" ng-hide="data.isInline || lang.length == 1">
-            <div class="col s12">
-                <label>Sprache</label>
-                <select class="browser-default" ng-model="data.lang_id" ng-options="item.id as item.name for item in lang" />
+            <div class="input input--select col s12">
+                <label class="input__label">Sprache</label>
+                <div class="input__field-wrapper">
+                    <select class="input__field browser-default" ng-model="data.cat_id" ng-options="item.id as item.name for item in lang"></select>
+                </div>
             </div>
         </div>
         <div class="row" ng-show="!data.isInline">
-            <div class="col s12">
-                <label>Übergeordnete Seite</label>
-                <select class="browser-default" ng-model="data.parent_nav_id">
-                    <option value="0">[Root Level]</option>
-                    <option ng-repeat="nav in navitems" value="{{nav.id}}">{{nav.title}}</option>
-                </select>
+            <div class="input input--select col s12">
+                <label class="input__label">Übergeordnete Seite</label>
+                <div class="input__field-wrapper">
+                    <select class="input__field browser-default" ng-model="data.parent_nav_id">
+                        <option value="0">[Root Level]</option>
+                        <option ng-repeat="nav in navitems" value="{{nav.id}}">{{nav.title}}</option>
+                    </select>
+                </div>
             </div>
         </div>
         <div class="row">
-            <div class="col s12">
-                <label>Seitentyp</label>
-                <p><input type="radio" ng-model="data.nav_item_type" value="1" id="t1"><label for="t1">Seite</label></p>
-                <p><input type="radio" ng-model="data.nav_item_type" value="2" id="t2"><label for="t2">Modul</label></p>
-                <p><input type="radio" ng-model="data.nav_item_type" value="3" id="t3"><label for="t3">Weiterleitung</label></p>
+            <div class="input input--radios col s12">
+                <label class="input__label">Seitentyp</label>
+                <div class="input__field-wrapper">
+                    <input type="radio" ng-model="data.nav_item_type" value="1" id="t1"><label for="t1">Seite</label> <br />
+                    <input type="radio" ng-model="data.nav_item_type" value="2" id="t2"><label for="t2">Modul</label> <br />
+                    <input type="radio" ng-model="data.nav_item_type" value="3" id="t3"><label for="t3">Weiterleitung</label>
+                </div>
             </div>
         </div>
 
@@ -72,15 +86,20 @@
         </div>
         <!-- /ERROR -->
 
-    </div>
+    </form>
 </script>
 
 <!-- CREATE PAGE FORM -->
 <script type="text/ng-template" id="createformpage.html">
     <div class="row">
-        <div class="col s12">
-            <label>Layout</label>
-            <select class="browser-default" ng-model="data.layout_id" ng-options="lts.id as lts.name for lts in layouts"></select>
+        <div class="input input--select col s12">
+            <label class="input__label">Layout</label>
+            <div class="input__field-wrapper">
+                <select class="input__field browser-default" ng-model="data.layout_id" ng-options="lts.id as lts.name for lts in layouts">
+                    <option value="0">[Root Level]</option>
+                    <option ng-repeat="nav in navitems" value="{{nav.id}}">{{nav.title}}</option>
+                </select>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -95,9 +114,11 @@
 <!-- CREATE MODULE FORM -->
 <script type="text/ng-template" id="createformmodule.html">
     <div class="row">
-        <div class="col s12 input-field">
-            <input type="text" ng-model="data.module_name" />
-            <label>Modul Name (Yii-ID)</label>
+        <div class="input input--text col s12">
+            <label class="input__label">Modul Name (Yii-ID)</label>
+            <div class="input__field-wrapper">
+                <input name="text" type="text" class="input__field" ng-model="data.module_name" />
+            </div>
         </div>
     </div>
     <div class="row">
@@ -112,11 +133,13 @@
 <!-- CREATE MODULE FORM -->
 <script type="text/ng-template" id="createformredirect.html">
     <div class="row">
-        <div class="col s12">
-            <label>Art der Weiterleitung</label>
-            <p><input type="radio" ng-model="data.redirect_type" value="1" id="r_t1"><label for="r_t1">Interne-Seite</label></p>
-            <p><input type="radio" ng-model="data.redirect_type" value="2" id="r_t2"><label for="r_t2">Link-Extern</label></p>
-            <!--<p><input type="radio" ng-model="data.redirect_type" value="3" id="r_t3"><label for="r_t3">Datei</label></p>-->
+        <div class="input input--radios col s12">
+            <label class="input__label">Art der Weiterleitung</label>
+            <div class="input__field-wrapper">
+                <input type="radio" ng-model="data.redirect_type" value="1" id="r_t1"><label for="r_t1">Interne-Seite</label> <br />
+                <input type="radio" ng-model="data.redirect_type" value="2" id="r_t2"><label for="r_t2">Link-Extern</label>
+                <!--<input type="radio" ng-model="data.redirect_type" value="3" id="r_t3"><label for="r_t3">Datei</label>-->
+            </div>
         </div>
     </div>
 
@@ -125,14 +148,22 @@
             <p>Auf welche Interne-Seite wollen Sie weiterleiten?</p>
             <menu-dropdown style="border:1px solid:#F0F0F0; padding:10px;" nav-id="data.redirect_type_value" />
         </div>
+
         <div class="col s12" ng-show="data.redirect_type==2">
-            <label>Externen Link</label>
-            <input type="text" ng-model="data.redirect_type_value" placeholder="http://" />
-            <p><em>Externe Links müssen mit http:// beginnen</em></p>        
+
+            <div class="input input--text col s12">
+                <label class="input__label">Externer Link</label>
+                <div class="input__field-wrapper">
+                    <input name="text" type="text" class="input__field" ng-model="data.redirect_type_value" placeholder="http://" />
+                    <small>Externe Links beginnen mit http:// oder https://</small>
+                </div>
+            </div>
         </div>
+
         <div class="col s12" ng-show="data.redirect_type==3">
-            <p>TODO</p>
+            <p>todo</p> <!-- todo -->
         </div>
+
     </div>
 
     <div class="row">
@@ -198,7 +229,7 @@
                         <span class="lever"></span>
                     </label>
                 </div>
-                
+
                 <div class="treeview" ng-repeat="catitem in menu" ng-class="{ 'treeview--drag-active' : showDrag }">
                     <h5 class="treeview__title" ng-click="toggleCat(catitem.id)"><i class="material-icons treeview__title-icon" ng-class="{'treeview__title-icon--closed': toggleIsHidden(catitem.id)}">arrow_drop_down</i> {{catitem.name}}</h5>
 

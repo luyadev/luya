@@ -4,6 +4,7 @@
 *.swp
 *~.nib
 *.launch
+.DS_Store
 
 ### ECLIPSE
 .metadata
