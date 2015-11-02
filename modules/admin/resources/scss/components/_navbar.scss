@@ -44,6 +44,16 @@
 		}
 	}	
 }
+.navbar__item {
+	// background-color: color("grey", "lighten-3");
+	&.active {
+		color: color("blue", "base");
+		background-color: color("grey", "lighten-3");
+		.navbar__link {
+			color: color("blue", "base");
+		}
+	}
+}
 
 .navbar__button__anchor {
 	padding: 0;
