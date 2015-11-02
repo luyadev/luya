@@ -55,7 +55,7 @@ class BlockTest extends \tests\web\Base
 
         $this->assertEquals('TestBlock.twig', $block->getRenderFileName());
         $this->assertEquals('twig-frontend', $block->getTwigFrontendContent());
-        $this->assertEquals('<i class="left material-icons">test-icon</i> <span>Test</span>', $block->getFullName());
+        $this->assertEquals('<i class="material-icons">test-icon</i> <span>Test</span>', $block->getFullName());
 
         foreach ($block->getVars() as $var) {
             $this->assertArrayHasKey('id', $var);
