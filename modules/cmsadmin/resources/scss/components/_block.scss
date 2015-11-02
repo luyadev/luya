@@ -58,13 +58,16 @@
 	top: 0;
 	left: 0;
 	right: 0;
+	user-select: none;
 
 	i {
 		font-size: 22px;
 		vertical-align: middle;
+		cursor: pointer;
 	}
 	span {
 		vertical-align: middle;
+		cursor: pointer;
 	}
 
 	// Hover animation

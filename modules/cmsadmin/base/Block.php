@@ -227,7 +227,7 @@ abstract class Block extends \yii\base\Object implements BlockInterface
 
     public function getFullName()
     {
-        return ($this->icon() === null) ? $this->name() : '<i class="left material-icons">'.$this->icon().'</i> <span>'.$this->name().'</span>';
+        return ($this->icon() === null) ? $this->name() : '<i class="material-icons">'.$this->icon().'</i> <span>'.$this->name().'</span>';
     }
 
     public function renderFrontend(\Twig_Environment $twig)

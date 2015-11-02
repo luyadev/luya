@@ -73,6 +73,16 @@
 	text-align: left;
 	margin-bottom: 10px;
 
+	i {
+		float: left !important;
+		margin-right: 5px !important;
+	}
+
+	span {
+		margin-top: 1px;
+		display: inline-block;
+	}
+
 	&:hover {
 		box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
 	}
