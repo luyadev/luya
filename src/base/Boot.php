@@ -2,142 +2,148 @@
 
 namespace luya\base;
 
-use luya\helpers\Url;
-use yii\helpers\ArrayHelper;
+use Exception;
+use luya\web\Application as WebApplication;
+use luya\cli\Application as CliApplication;
 
 /**
- * Wrapping class to set config informations and also load default configuration informations which belongs to the luya module.
+ * Luya Boot Wrapper.
+ * 
+ * Run the Luya/Yii Application based on the current enviroment which is determined trough get_sapi_name(). To run an application
+ * a config file with custom Luya/Yii configuration must be provided via `$configFile` property. By default luya will try to find
+ * the default config `../configs/server.php`.
  *
  * @author nadar
  */
 abstract class Boot
 {
-    const SAPI_WEB = 'web';
-
-    const SAPI_CLI = 'cli';
-
-    public $configValue = [];
+    /**
+     * @var string The path to the config file, which returns an array containing you configuration.
+     */
+    public $configFile = '../configs/server.php';
 
     /**
-     * The path where all the configuration files are located.
-     *
-     * @var string
+     * @var luya\web\Application|luya\cli\Application The application object.
      */
-    public $configPath = '../configs/';
+    public $app = null;
 
-    public $configName = 'server.php';
-
-    public $yiiPath = null;
-
-    public $yii = null;
-
+    /**
+     * @var bool When enabled the boot process will not return/echo something, but the variabled will contain
+     *           the Application object.
+     */
     public $mockOnly = false;
 
-    private function beforeRun()
+    /**
+     * @var string Path to the Yii.php file.    
+     */
+    private $_baseYiiFile = null;
+
+    /**
+     * Setter method for the base Yii file.
+     *
+     * @todo rename to setYiiBaseFile, bc break.
+     *
+     * @param string $baseYiiFile The path to the Yii.php file.
+     */
+    public function setYiiPath($baseYiiFile)
     {
-        $this->setConfigValue(require($this->getBaseConfig()));
-        defined('YII_DEBUG') or define('YII_DEBUG', false);
-        defined('YII_ENV') or define('YII_ENV', 'prod');
+        $this->_baseYiiFile = $baseYiiFile;
     }
 
     /**
-     * Run the mode specific (cli/web) application.
+     * Returns the current sapi name in lower case.
+     *
+     * @return string e.g. cli or web
+     */
+    public function getSapiName()
+    {
+        return strtolower(php_sapi_name());
+    }
+
+    /**
+     * Get the config array from the configFile path with the predefined values.
+     *
+     * @throws Exception Throws exception if the config file does not exists.
+     *
+     * @return array The array which will be injected into the Application Constructor.
+     */
+    public function getConfigArray()
+    {
+        if (!file_exists($this->configFile)) {
+            throw new Exception("Unable to load the config file '".$this->configFile."'.");
+        }
+
+        $config = require $this->configFile;
+
+        if (!is_array($config)) {
+            throw new Exception("config file '".$this->configFile."' found but no array returning.");
+        }
+
+        // adding default configuration timezone if not set
+        if (!array_key_exists('timezone', $config)) {
+            $config['timezone'] = 'Europe/Berlin';
+        }
+
+        return $config;
+    }
+
+    /**
+     * Run the application based on the Sapi Name.
+     *
+     * @return luya\web\Application|luya\cli\Application Application objected based on the sapi name.
      */
     public function run()
     {
-        switch ($this->getSapiType()) {
-            case self::SAPI_CLI:
-                $this->applicationCli();
-                break;
-            case self::SAPI_WEB:
-                $this->applicationWeb();
-                break;
-            default:
-                throw new \Exception('This sapi type is not allowed');
-                break;
-        }
-    }
-
-    /**
-     * finds the defined config in the configPath an includes the configuration file.
-     *
-     * @param string $name The config file name, default server.php
-     */
-    public function setConfigName($name)
-    {
-        $this->configName = $name;
-    }
-
-    public function setConfigPath($path)
-    {
-        $this->configPath = $path;
-    }
-
-    public function getBaseConfig()
-    {
-        return Url::trailing($this->configPath).$this->configName;
-    }
-
-    public function setYiiPath($yiiPath)
-    {
-        $this->yiiPath = $yiiPath;
-    }
-
-    public function getYiiPath()
-    {
-        return $this->yiiPath;
-    }
-
-    /**
-     * Get the Sapi Type (interface between webserver and PHP).
-     *
-     * @todo use $_SERVER['argv'] instead of cli, cause this could trouble on diff environments
-     */
-    public function getSapiType()
-    {
-        if (strtolower(php_sapi_name()) == self::SAPI_CLI) {
-            return self::SAPI_CLI;
+        if ($this->getSapiName() === 'cli') {
+            return $this->applicationCli();
         }
 
-        return self::SAPI_WEB;
-    }
-
-    public function setConfigValue(array $values = [])
-    {
-        $this->configValue = ArrayHelper::merge($this->configValue, $values);
-    }
-
-    public function getConfigValue()
-    {
-        return $this->configValue;
+        return $this->applicationWeb();
     }
 
     /**
-     * @return yii console application
+     * Run Cli-Application based on the provided config file.
      */
     public function applicationCli()
     {
-        $this->beforeRun();
-        $this->setConfigValue(include(__DIR__.'/../config/'.self::SAPI_CLI.'.php'));
-        require_once $this->yiiPath;
-        $this->yii = new \luya\cli\Application($this->getConfigValue(self::SAPI_CLI));
+        $config = $this->getConfigArray();
+        $config['defaultRoute'] = 'help'; // override defaultRoute for chli
+        $this->includeYii();
+        $this->app = new CliApplication($config);
         if (!$this->mockOnly) {
-            $exitCode = $this->yii->run();
-            exit($exitCode);
+            exit($this->app->run());
         }
     }
 
     /**
-     * @return yii web application
+     * Run Web-Application based on the provided config file.
+     * 
+     * @return string|void Returns the Yii Application run() method if mock is disabled. Otherwise returns void
      */
     public function applicationWeb()
     {
-        $this->beforeRun();
-        $this->setConfigValue(include(__DIR__.'/../config/'.self::SAPI_WEB.'.php'));
-        require_once $this->yiiPath;
-        $this->yii = new \luya\web\Application($this->getConfigValue(self::SAPI_WEB));
+        $config = $this->getConfigArray();
+        $this->includeYii();
+        $this->app = new WebApplication($config);
         if (!$this->mockOnly) {
-            $this->yii->run();
+            return $this->app->run();
         }
+    }
+
+    /**
+     * Helper method to check whether the provided Yii Base file exists, if yes include and
+     * return the file.
+     * 
+     * @return bool Return value based on require_once command.
+     *
+     * @throws Exception Throws Exception if the YiiBase file does not exists.
+     */
+    private function includeYii()
+    {
+        if (file_exists($this->_baseYiiFile)) {
+            return require_once $this->_baseYiiFile;
+        }
+
+        throw new Exception("YiiBase file does not exits '".$this->_baseYiiFile."'.");
     }
 }
