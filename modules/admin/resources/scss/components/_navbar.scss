@@ -46,7 +46,7 @@
 }
 .navbar__item {
 	// background-color: color("grey", "lighten-3");
-	&.active {
+	&.navbar__item--active {
 		color: color("blue", "base");
 		background-color: color("grey", "lighten-3");
 		.navbar__link {

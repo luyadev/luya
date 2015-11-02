@@ -100,8 +100,8 @@ $this->beginPage()
                         <i class="material-icons filemanager__edit-icon" ng-click="folder.edit=!folder.edit">mode_edit</i>
                        
                         <i class="material-icons filemanager__delete-icon" ng-click="folder.remove=!folder.remove">delete</i>
-                        <span ng-show="!folder.edit"><span ng-click="loadFolder(folder.data.id)">{{folder.data.name }}</span>
-                            <button ng-click="moveFilesTo(folder.data)" ng-show="showFoldersToMove && currentFolderId != folder.data.id" type="button">{{selectedFiles.length}} Dateien verschieben</button>
+                        <span class="filemanager__folder-name" ng-show="!folder.edit"><span ng-click="loadFolder(folder.data.id)">{{folder.data.name }}</span>
+                            <button  ng-click="moveFilesTo(folder.data)" ng-show="showFoldersToMove && currentFolderId != folder.data.id" type="button">{{selectedFiles.length}} Dateien verschieben</button>
                         </span>
                         <span ng-show="folder.edit">
                             <input type="text" ng-model="folder.data.name" class="filemanager__file-dialog__input"/>
@@ -318,7 +318,7 @@ $this->beginPage()
                         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 
                         <ul class="left hide-on-med-and-down">
-                            <li class="navbar__item" ng-repeat="item in items" ng-class="{'active' : isActive(item) }">
+                            <li class="navbar__item" ng-repeat="item in items" ng-class="{'navbar__item--active' : isActive(item) }">
                                 <a ng-click="click(item)" class="navbar__link"><i class="material-icons left navbar__icon">{{item.icon}}</i>{{item.alias}}</a>
                             </li>
                         </ul>
