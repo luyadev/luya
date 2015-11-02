@@ -12,8 +12,8 @@ class Main extends \luya\base\Asset
     ];
 
     public $js = [
-        'js/materialize.min.js', // original jquery
-        'js/ng-materialize.js', // angular wrapper
+        // 'js/materialize.min.js', // original jquery
+        // 'js/ng-materialize.js', // angular wrapper
         'js/zaa.js',
         'js/directives.js',
         'js/controllers.js',

@@ -63,43 +63,11 @@ input[type="checkbox"]:checked + .input__label:before {
 	position: relative;
 	display: inline-block;
 	width: calc(100% - #{$input__label-width});
-	border: 1px solid $input--border-color;
 	vertical-align: middle;
 	font-size: $input-font-size;
 	line-height: $input-font-size;
 
 	.input--hide-label & {
-		width: 100%;
-	}
-
-	// Remove border for custom inputs
-	.input--date &,
-	.input--multiple-checkboxes &,
-	.input--image-upload &,
-	.input--image-array &,
-	.input--file-upload &,
-	.input--file-array &,
-	.input--list & {
-		border: none;
-	}
-}
-
-.input__active {
-	position: absolute;
-	left: 0;
-	top: 0;
-	bottom: 0;
-	width: 0;
-	transition: 0.25s ease background; // 0.25s ease width
-	background-color: transparent;
-	z-index: 2;
-
-	.input__field:focus + & {
-		background-color: $input--border-color;
-		width: 100%;
-	}
-
-	.input--textarea & {
 		width: 100%;
 	}
 }
@@ -114,10 +82,14 @@ input[type="checkbox"]:checked + .input__label:before {
 	padding: 10px;
 	outline: none;
 	vertical-align: middle;
+	width: 100%;
+	background-color: #fff;
+	transition: 0.25s ease background-color;
+	border: 1px solid $input--border-color;
 
-	// Overwrite materialize
-	border: none !important;
-	box-shadow: none !important;
+	&:focus {
+		background-color: $input--border-color;
+	}
 }
 
 .input__divider {

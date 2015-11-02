@@ -1,4 +1,4 @@
-var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angular-loading-bar", "ngFileUpload", "ui.materialize", "ngWig", "slugifier"]);
+var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angular-loading-bar", "ngFileUpload", "ngWig", "slugifier"]);
 
 /* zephir angular admin */
 /* resolve controller: https://github.com/angular-ui/ui-router/wiki#resolve */

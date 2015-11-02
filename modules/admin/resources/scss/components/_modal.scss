@@ -6,12 +6,14 @@
 	display: block;
 	overflow: auto;
 	position: fixed;
-	left: 2.5%;
+	left: 5%;
 	top: 5% !important;
-	right: 2.5%;
+	right: 5%;
 	max-height: 90%;
 	width: 90%;
 	z-index: 1010;
+	padding: 20px;
+	background-color: #fff;
 }
 
 .modal__background {
