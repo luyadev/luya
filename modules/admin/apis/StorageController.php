@@ -159,4 +159,9 @@ class StorageController extends \admin\base\RestController
     {
         return Yii::$app->storage->folder->deleteFolder($folderId);
     }
+
+    public function actionIsFolderEmpty($folderId)
+    {
+        return Yii::$app->storage->folder->isEmptyFolder($folderId);
+    }
 }
