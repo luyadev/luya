@@ -155,7 +155,7 @@ class File
                 $isImage = true;
                 $imageId = Yii::$app->storage->image->create($v['id'], 0);
                 if ($imageId) {
-                    $thumb = Yii::$app->storage->image->filterApply($imageId, 'tiny-thumbnails', true);
+                    $thumb = Yii::$app->storage->image->filterApply($imageId, 'tiny-thumbnail', true);
                 } else {
                     $thumb = false;
                 }
@@ -179,7 +179,7 @@ class File
                 $isImage = true;
                 $imageId = Yii::$app->storage->image->create($v['id'], 0);
                 if ($imageId) {
-                    $thumb = Yii::$app->storage->image->filterApply($imageId, 'tiny-thumbnails', true);
+                    $thumb = Yii::$app->storage->image->filterApply($imageId, 'tiny-thumbnail', true);
                 } else {
                     $thumb = false;
                 }
