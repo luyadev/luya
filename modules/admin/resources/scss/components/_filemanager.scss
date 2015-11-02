@@ -77,6 +77,9 @@
 		}
 	}
 }
+.filemanager__folder-name {
+	padding-left: 10px,
+}
 
 .filemanager__folder-button {
 	padding: 8px 0 8px 25px;
@@ -138,7 +141,8 @@
 		
 	}
 	.filemanager__file-dialog__input {
-		margin: -15px 0 0 0;		
+		margin: -15px 0 0 0;
+		padding-left: 10px;		
 	    border-bottom: none;
 
 	    &:focus:not([readonly]) {
