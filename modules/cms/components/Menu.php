@@ -8,16 +8,19 @@ use yii\db\Query;
 /**
  * Concept:
  * 
- * Return all:
+ * Return all for the current language (if not spefied)
  * ```php
  * foreach(Yii::$app->menu->all() as $item) {
  * 
  * }
  * ```
  * 
- * Add Filters:
+ * ### Add Filters
+ * 
+ * ability to add multiple filters as "AND" chain. like below: parent_nav_id = 0 AND parent_nav_id = 1
+ * 
  * ```php
- * foreach(Yii::$app->menu->filter(['nav_id' => 1, 'nav_id' => 2])->all() as $item) {
+ * foreach(Yii::$app->menu->filter(['parent_nav_id' => 0, 'parent_nav_id' => 1])->all() as $item) {
  *     
  * }
  * ```
