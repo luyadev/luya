@@ -8,7 +8,7 @@ $loaders = [
 	__DIR__ . '/../../vendor/autoload.php',
 ];
 // find vendor if exists
-foreach($loaders as $file) {
+foreach ($loaders as $file) {
 	if (file_exists($file)) {
 		require($file);
 		$vendor = pathinfo($file, PATHINFO_DIRNAME);
