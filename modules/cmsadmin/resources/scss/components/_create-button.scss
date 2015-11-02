@@ -2,7 +2,12 @@
 	position: absolute;
 	top: 20px;
 	right: 20px;
-
+    width: 37px;
+    height: 37px;
+    line-height: 37px;
+    i {
+    	line-height: 37px;
+    }
 	&:focus i {
 		animation: animation 2500ms linear both;
 	}
