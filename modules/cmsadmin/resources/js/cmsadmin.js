@@ -570,7 +570,7 @@
 		$scope.storePropValues = function() {
 			var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 			$http.post('admin/api-cms-nav/save-properties?navId='+$scope.id, $.param($scope.propValues), headers).success(function(response) {
-				Materialize.toast('<span>Die Eigenschaften wurden aktualisiert.</span>', 2000);
+				//Materialize.toast('<span>Die Eigenschaften wurden aktualisiert.</span>', 2000);
 				$scope.loadNavProperties();
 			});
 		}
@@ -580,7 +580,7 @@
 		$scope.$watch(function() { return $scope.navData.is_home }, function(n, o) {
 			if (o !== undefined) {
 				$http.get('admin/api-cms-nav/toggle-home', { params : { navId : $scope.navData.id , homeState : n }}).success(function(response) {
-					Materialize.toast('<span>Startseite wurde angepasst.</span>', 2000)
+					//Materialize.toast('<span>Startseite wurde angepasst.</span>', 2000)
 				});
 			}
 		});
@@ -591,9 +591,9 @@
 					MenuService.refresh();
 					// send toast
 					if (n == 1) {
-						Materialize.toast('<span>Die Seite ist nun Unsichtbar.</span>', 2000)
+						//Materialize.toast('<span>Die Seite ist nun Unsichtbar.</span>', 2000)
 					} else {
-						Materialize.toast('<span>Die Seite ist nun Sichtbar.</span>', 2000)
+						//Materialize.toast('<span>Die Seite ist nun Sichtbar.</span>', 2000)
 					}
 				});
 			}
@@ -605,9 +605,9 @@
 					MenuService.refresh();
 					// send toast
 					if (n == 1) {
-						Materialize.toast('<span>Die Seite ist nun <span style="color:red;">Offline</span>.</span>', 2000)
+						//Materialize.toast('<span>Die Seite ist nun <span style="color:red;">Offline</span>.</span>', 2000)
 					} else {
-						Materialize.toast('<span>Die Seite ist nun <span style="color:green;">Online</span>.</span>', 2000)
+						//Materialize.toast('<span>Die Seite ist nun <span style="color:green;">Online</span>.</span>', 2000)
 					}
 				});
 			}
@@ -617,7 +617,7 @@
 			if (o != undefined && o != null && n != o) {
 				$http.get('admin/api-cms-nav/update-cat', { params : { navId : $scope.navData.id , catId : n }}).success(function(response) {
 					MenuService.refresh();
-					Materialize.toast('<span>Die Seite wurde der Navigation ' + n + ' zugewiesen.</span>', 2000)
+					//Materialize.toast('<span>Die Seite wurde der Navigation ' + n + ' zugewiesen.</span>', 2000)
 				});
 				
 			}
@@ -674,7 +674,7 @@
 			var navItemId = itemCopy.id;
 			$http.post('admin/api-cms-navitem/update-item?navItemId=' + navItemId, $.param({ title : itemCopy.title, rewrite : itemCopy.rewrite }), headers).success(function(response) {
 				$http.post('admin/api-cms-navitem/update-item-type-data?navItemId=' + navItemId, $.param(typeDataCopy), headers).success(function(responseTypeData) {
-					Materialize.toast('<span> Die Seite «'+itemCopy.title+'» wurde aktualisiert.</span>', 2000);
+					//Materialize.toast('<span> Die Seite «'+itemCopy.title+'» wurde aktualisiert.</span>', 2000);
 					MenuService.refresh();
 					$scope.refresh();
 					$scope.toggleSettings();
@@ -928,14 +928,14 @@
 	        if (confirm('Block «' + block.name + '» wirklich löschen?')) {
 	            ApiCmsNavItemPageBlockItem.delete({id: block.id}, function (rsp) {
 	                $scope.PagePlaceholderController.NavItemTypePageController.refresh();
-	                Materialize.toast('Block «' + block.name + '» wurde entfernt!', 3000);
+	                //Materialize.toast('Block «' + block.name + '» wurde entfernt!', 3000);
 	            });
 	        }
 		};
 		
 		$scope.save = function () {
 			ApiCmsNavItemPageBlockItem.update({ id : $scope.block.id }, $.param({json_config_values : JSON.stringify($scope.data), json_config_cfg_values : JSON.stringify($scope.cfgdata) }), function(rsp) {
-				Materialize.toast('<span> Block «'+$scope.block.name+'» wurde aktualisiert.</span>', 2000)
+				//Materialize.toast('<span> Block «'+$scope.block.name+'» wurde aktualisiert.</span>', 2000)
 				$scope.edit = false;
 				$scope.block.is_dirty = 1;
 				

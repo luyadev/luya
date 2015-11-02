@@ -109,7 +109,7 @@
 				$scope.deleteErrors = [];
 				$http.delete($scope.config.apiEndpoint + '/'+id).success(function(r) {
 					$scope.loadList();
-					Materialize.toast('Der Datensatz wurde erfolgreich entfernt.', 3000);
+					////Materialize.toast('Der Datensatz wurde erfolgreich entfernt.', 3000);
 				}).error(function(r) {
 					for (var i in r) {
 						angular.forEach(r[i], function(v, k) {
@@ -155,7 +155,7 @@
 			
 			$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true)).success(function(data) {
 				$scope.loadList();
-				Materialize.toast('Der Datensatz wurde erfolgreich aktualsiert.', 3000);
+				////Materialize.toast('Der Datensatz wurde erfolgreich aktualsiert.', 3000);
 				$scope.switchTo(0);
 			}).error(function(data) {
 				$scope.updateErrors = data;
@@ -169,7 +169,7 @@
 			$http.post($scope.config.apiEndpoint, angular.toJson($scope.data.create, true)).success(function(data) {
 				$scope.loadList();
 				$scope.data.create = {};
-				Materialize.toast('Der neue Datensatz wurde erfolgreich erstellt.', 3000);
+				//Materialize.toast('Der neue Datensatz wurde erfolgreich erstellt.', 3000);
 				$scope.switchTo(0);
 			}).error(function(data) {
 				$scope.createErrors = data;
@@ -242,9 +242,9 @@
 			$scope.crud.sendActiveWindowCallback('SaveTag', {'tagName': tagName}).then(function(response) {
 				if (response.data) {
 					$scope.tags.push({id: response.data, name: tagName});
-					Materialize.toast('Das Tag ' + tagName + ' wurde gespeichert.', 500);
+					//Materialize.toast('Das Tag ' + tagName + ' wurde gespeichert.', 500);
 				} else {
-					Materialize.toast('Das Tag ' + tagName + ' existiert bereits und wurde deshalb nicht gespeichert.', 2000);
+					//Materialize.toast('Das Tag ' + tagName + ' existiert bereits und wurde deshalb nicht gespeichert.', 2000);
 				}
 				$scope.newTagName = null;
 			});
@@ -252,7 +252,7 @@
 		
 		$scope.saveRelation = function(tag, value) {
 			$scope.crud.sendActiveWindowCallback('SaveRelation', {'tagId': tag.id, 'value': value}).then(function(response) {
-				Materialize.toast('Tag information wurde gespeichert.', 500);
+				//Materialize.toast('Tag information wurde gespeichert.', 500);
 			});
 		};
 		
