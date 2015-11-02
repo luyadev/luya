@@ -8,7 +8,8 @@ use yii\db\Query;
 /**
  * Concept:
  * 
- * Return all for the current language (if not spefied)
+ * Return all for the current language (if not specific)
+ * 
  * ```php
  * foreach(Yii::$app->menu->all() as $item) {
  * 
@@ -26,12 +27,14 @@ use yii\db\Query;
  * ```
  * 
  * Find one item:
+ * 
  * ```php
  * $item = Yii::$app->menu->filter(['id'])->one();
  * ```
  * 
  * 
  * declaration of $item:
+ * 
  * ```php
  * $item->getTitle(); //
  * $item->getLink(); // /link/to/somewhere
@@ -41,6 +44,7 @@ use yii\db\Query;
  * ```
  * 
  * Get current active Item
+ * 
  * ```php
  * $item = Yii::$app->menu->getCurrent();
  * ```
