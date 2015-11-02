@@ -27,6 +27,13 @@ $input--date-width:			50px;
 	padding-right: $input__label-padding;
 	text-align: right;
 
+	.input--vertical & {
+		display: block;
+		width: 100%;
+		text-align: left;
+		margin-bottom: 5px;
+	}
+
 	.input--single-checkbox & {
 		padding: 0 ($input__label-padding + 20px) 0 0;
 		width: $input__label-width + 20px;
@@ -66,6 +73,12 @@ input[type="checkbox"]:checked + .input__label:before {
 	vertical-align: middle;
 	font-size: $input-font-size;
 	line-height: $input-font-size;
+
+	.input--vertical & {
+		display: block;
+		width: 100%;
+		text-align: left;
+	}
 
 	.input--hide-label & {
 		width: 100%;
