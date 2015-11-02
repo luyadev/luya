@@ -115,8 +115,16 @@ $this->beginPage()
                         <span ng-show="folder.remove">
                             <div class="filemanager__file-dialog">
                                 <span>Verzeichnis löschen?</span>
-                                <i class="material-icons filemanager__file-dialog__icon" ng-click="deleteFolder(folder)">check</i>
+                                <i class="material-icons filemanager__file-dialog__icon" ng-click="checkEmptyFolder(folder)">check</i>
                                 <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="folder.remove=!folder.remove">add</i>
+                            </div>
+                        </span>
+
+                        <span ng-show="folder.notempty">
+                            <div class="filemanager__file-dialog">
+                                <span>Das Verzeichnis ist nicht leer - trotzdem löschen?</span>
+                                <i class="material-icons filemanager__file-dialog__icon" ng-click="deleteFolder(folder)">check</i>
+                                <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="folder.notempty=!folder.notempty">add</i>
                             </div>
                         </span>
 

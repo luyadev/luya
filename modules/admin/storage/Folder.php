@@ -3,6 +3,7 @@
 namespace admin\storage;
 
 use admin\models\StorageFolder;
+use Yii;
 
 class Folder
 {
@@ -25,6 +26,18 @@ class Folder
         $model->is_deleted = true;
 
         return $model->update();
+    }
+
+    public function isEmptyFolder($folderId) {
+        if (!empty($this->getSubFolders($folderId))) {
+            return false;
+        } else {
+            if (empty(Yii::$app->storage->file->allFromFolder($folderId))) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     public function updateFolder($folderId, array $fields)
