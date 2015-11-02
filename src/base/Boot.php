@@ -5,6 +5,7 @@ namespace luya\base;
 use Exception;
 use luya\web\Application as WebApplication;
 use luya\cli\Application as CliApplication;
+use luya\helpers\ArrayHelper;
 
 /**
  * Luya Boot Wrapper.
@@ -107,9 +108,9 @@ abstract class Boot
     public function applicationCli()
     {
         $config = $this->getConfigArray();
-        $config['defaultRoute'] = 'help'; // override defaultRoute for chli
+        $config['defaultRoute'] = 'help';
         $this->includeYii();
-        $this->app = new CliApplication($config);
+        $this->app = new CliApplication(ArrayHelper::merge(['bootstrap' => ['luya\cli\Bootstrap']], $config));
         if (!$this->mockOnly) {
             exit($this->app->run());
         }
@@ -124,7 +125,7 @@ abstract class Boot
     {
         $config = $this->getConfigArray();
         $this->includeYii();
-        $this->app = new WebApplication($config);
+        $this->app = new WebApplication(ArrayHelper::merge(['bootstrap' => ['luya\web\Bootstrap']], $config));
         if (!$this->mockOnly) {
             return $this->app->run();
         }

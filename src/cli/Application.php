@@ -14,10 +14,6 @@ class Application extends \yii\console\Application
      */
     use \luya\traits\Application;
 
-    public $bootstrap = [
-        'luya\cli\Bootstrap',
-    ];
-    
     /**
      * @var bool Mute the Applications ouput, this is used to make application
      *           cli tests with no output. The `luya\base\Command` output/print methods are listening

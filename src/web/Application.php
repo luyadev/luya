@@ -5,10 +5,6 @@ namespace luya\web;
 class Application extends \yii\web\Application
 {
     use \luya\traits\Application;
-
-    public $bootstrap = [
-        'luya\web\Bootstrap',
-    ];
     
     /**
      * @inheritdoc
