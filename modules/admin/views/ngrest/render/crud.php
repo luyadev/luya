@@ -34,17 +34,17 @@
         <div class="tabs">
             <ul>
                 <li class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==0}">
-                    <a class="tabs__anchor" ng-click="switchTo(0)"><i class="material-icons">menu</i> Auflisten</a>
+                    <a class="tabs__anchor" ng-click="switchTo(0)"><i class="material-icons tabs__icon">menu</i> Auflisten</a>
                 </li>
 
                 <?php if ($canCreate): ?>
                     <li class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==1}">
-                        <a class="tabs__anchor" style="" ng-click="switchTo(1)"><i class="material-icons">add_box</i> Hinzufügen</a>
+                        <a class="tabs__anchor" style="" ng-click="switchTo(1)"><i class="material-icons tabs__icon">add_box</i> Hinzufügen</a>
                     </li>
                 <?php endif; ?>
                 
                 <li ng-show="crudSwitchType==2" class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==2}">
-                    <a class="tabs__anchor" ng-click="switchTo(0)"><i class="material-icons">cancel</i> Bearbeiten</a>
+                    <a class="tabs__anchor" ng-click="switchTo(0)"><i class="material-icons tabs__icon">cancel</i> Bearbeiten</a>
                 </li>
             </ul>
         </div>
@@ -146,7 +146,7 @@
         </div>
     
         <div class="card-panel" ng-switch-when="2">
-            <h1>Bearbeiten</h1>
+            <h2>Bearbeiten</h2>
 
             <?php if ($canUpdate && $config->getPointer('update')): ?>
                 <form name="formUpdate" role="form" ng-submit="submitUpdate()">
