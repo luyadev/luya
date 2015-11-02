@@ -16,6 +16,5 @@ foreach($loaders as $file) {
 }
 
 $boot = new \luya\Boot();
-$boot->setConfigPath('configs/');
 $boot->setYiiPath($vendor . '/yiisoft/yii2/Yii.php');
 $boot->applicationCli();
