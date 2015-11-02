@@ -764,7 +764,6 @@
 					resolve(service.data[folderId]);
 				} else {
 					$http.get('admin/api-admin-storage/get-files', { params : { folderId : folderId } }).success(function(response) {
-						console.log(response);
 						service.data[folderId] = response;
 						resolve(response);
 					});

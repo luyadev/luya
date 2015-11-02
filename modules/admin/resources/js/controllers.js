@@ -139,28 +139,21 @@
 		};
 		
 		
+		$scope.activeWindowModal = false;
+		
 		$scope.openActiveWindow = function() {
-			$('#activeWindowModal').openModal();
+			$scope.activeWindowModal = true;
 		};
 		
 		$scope.closeActiveWindow = function() {
-			$('#activeWindowModal').closeModal();
+			$scope.activeWindowModal = false;
 		};
 		
-		/*
-		$scope.openCreate = function () {
-			$('#createModal').openModal({
-				dismissible: false
-			});
-		};
-		*/
-	    
 		$scope.submitUpdate = function () {
 			
 			$scope.updateErrors = [];
 			
 			$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true)).success(function(data) {
-				$('#updateModal').closeModal();
 				$scope.loadList();
 				Materialize.toast('Der Datensatz wurde erfolgreich aktualsiert.', 3000);
 				$scope.switchTo(0);
@@ -174,7 +167,6 @@
 			$scope.createErrors = [];
 			
 			$http.post($scope.config.apiEndpoint, angular.toJson($scope.data.create, true)).success(function(data) {
-				$('#createModal').closeModal();
 				$scope.loadList();
 				$scope.data.create = {};
 				Materialize.toast('Der neue Datensatz wurde erfolgreich erstellt.', 3000);
