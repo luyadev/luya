@@ -97,9 +97,9 @@ $this->beginPage()
                     <div class="filemanager__folder-button" ng-click="loadFolder(folder.data.id)">
                         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default">folder_open</i>
                         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active">folder</i>
-                        <i class="material-icons filemanager__edit-icon" ng-click="folder.edit=!folder.edit">mode_edit</i>
+                        <i class="material-icons filemanager__edit-icon" ng-click="editMode(folder, 'edit')">mode_edit</i>
                        
-                        <i class="material-icons filemanager__delete-icon" ng-click="folder.remove=!folder.remove">delete</i>
+                        <i class="material-icons filemanager__delete-icon" ng-click="editMode(folder, 'remove')">delete</i>
                         <span class="filemanager__folder-name" ng-show="!folder.edit"><span ng-click="loadFolder(folder.data.id)">{{folder.data.name }}</span>
                             <button  ng-click="moveFilesTo(folder.data)" ng-show="showFoldersToMove && currentFolderId != folder.data.id" type="button">{{selectedFiles.length}} Dateien verschieben</button>
                         </span>
@@ -114,7 +114,7 @@ $this->beginPage()
 
                         <span ng-show="folder.remove">
                             <div class="filemanager__file-dialog">
-                                <span>Verzeichniss löschen?</span>
+                                <span>Verzeichnis löschen?</span>
                                 <i class="material-icons filemanager__file-dialog__icon" ng-click="deleteFolder(folder)">check</i>
                                 <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="folder.remove=!folder.remove">add</i>
                             </div>
