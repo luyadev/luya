@@ -1041,6 +1041,29 @@
 				$scope.serverProcessing = false;
 				
 				$scope.uploadResults = null;
+
+                $scope.editFolder = null;
+
+                $scope.activateEditMode = function(folder, mode) {
+                    $scope.editFolder = folder;
+                    switch(mode) {
+                        case 'edit': folder.edit = true;
+                            break;
+                        case 'remove': folder.remove = true;
+                            break;
+                    }
+                }
+
+                $scope.editMode = function(folder, mode) {
+                    if (!$scope.editFolder) {
+                        $scope.activateEditMode(folder, mode);
+                    } else {
+                        $scope.editFolder.remove = false;
+                        $scope.editFolder.edit = false;
+                        $scope.activateEditMode(folder, mode);
+                        $scope.editFolder = folder;
+                    }
+                }
 				
 				$scope.$watch('uploadingfiles', function (uploadingfiles) {
 			        if (uploadingfiles != null) {
