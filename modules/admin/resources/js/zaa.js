@@ -130,31 +130,7 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 			},
 			replace: true,
 			transclude: true,
-			templateUrl: "modal",
-			link: function(scope, element, attrs) {
-				$timeout(function() {
-					scope.$watch("isModalHidden", function(n) {
-						if (n == false) {
-							$(element).openModal({
-						      dismissible: true, // Modal can be dismissed by clicking outside of the modal
-						      opacity: .5, // Opacity of modal background
-						      in_duration: 150, // Transition in duration
-						      out_duration: 100, // Transition out duration
-						      ready: function() {  }, // Callback for Modal open
-						      complete: function() { 
-						    	  scope.$apply(function() {
-						    		  scope.isModalHidden = true;
-						    	  });
-						      } // Callback for Modal close
-						    });
-							$(element).appendTo(document.body);
-						} else {
-							$(element).closeModal();
-						}
-					})
-				})
-				
-			}
+			templateUrl: "modal"
 		}
 	});
 	
