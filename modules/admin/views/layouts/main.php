@@ -103,16 +103,16 @@ $this->beginPage()
                         </span>
 
                         <i class="material-icons filemanager__edit-icon" ng-click="editMode(folder, 'edit')">mode_edit</i>                       
-                        <i class="material-icons filemanager__delete-icon" nng-click="editMode(folder, 'remove')">delete</i>
+                        <i class="material-icons filemanager__delete-icon" ng-click="editMode(folder, 'remove')">delete</i>
                         
                         <span ng-show="folder.edit">
                             <input type="text" ng-model="folder.data.name" class="filemanager__file-dialog__input"/>
                             <div class="filemanager__file-dialog">
                                 <span>Speichern?</span>
-                                <span class="btn-floating">
+                                <span class="btn-floating white">
                                     <i class="material-icons filemanager__file-dialog__icon" ng-click="updateFolder(folder)">check</i>
                                 </span>
-                                <span class="btn-floating">
+                                <span class="btn-floating white">
                                     <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="folder.edit=!folder.edit">add</i>
                                 </span>
                             </div>
@@ -122,13 +122,13 @@ $this->beginPage()
                             <div class="filemanager__file-dialog">
 
                                 <span>Verzeichniss löschen?</span>
-                                <span class="btn-floating">
+                                <span class="btn-floating white">
                                     <i class="material-icons filemanager__file-dialog__icon" ng-click="deleteFolder(folder)">check</i>
                                 </span>
-                                <span class="btn-floating">
+                                <span class="btn-floating white">
                                     <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="folder.remove=!folder.remove">add</i>
                                 </span>
-                                
+
                             </div>
                         </span>
 
