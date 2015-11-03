@@ -4,8 +4,8 @@ namespace cms\components;
 
 use Exception;
 use Yii;
-use yii\db\Query;
-use cms\components\MenuQuery;
+use yii\db\Query as DbQuery;
+use cms\menu\Query as MenuQuery;
 
 /**
  * Concept:
@@ -65,6 +65,7 @@ use cms\components\MenuQuery;
  * }
  * ```
  * 
+ * @since 1.0.0-beta1
  * @author nadar
  */
 class Menu extends \yii\base\Component
@@ -116,15 +117,24 @@ class Menu extends \yii\base\Component
         return $this->_containerData;
     }
     
+    public function languageContainerData($langShortCode)
+    {
+        if (array_key_exists($langShortCode, $this->containerData)) {
+            return $this->containerData[$langShortCode];
+        }
+        
+        throw new Exception("Unable to find the requested language '$langShortCode'.");
+    }
+    
     private function loadContainerData()
     {
         $container = [];
         
-        $redirectMap = (new Query())->select(['id', 'type', 'value'])->from('cms_nav_item_redirect')->indexBy('id')->all();
+        $redirectMap = (new DbQuery())->select(['id', 'type', 'value'])->from('cms_nav_item_redirect')->indexBy('id')->all();
         
-        foreach ((new Query())->select(['short_code', 'id'])->from('admin_lang')->all() as $lang) {
+        foreach ((new DbQuery())->select(['short_code', 'id'])->from('admin_lang')->all() as $lang) {
             
-            $data = (new Query())->from(['cms_nav_item item'])
+            $data = (new DbQuery())->from(['cms_nav_item item'])
             ->select(['item.id', 'item.nav_id', 'item.title', 'item.rewrite', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'nav.is_offline', 'item.nav_item_type', 'item.nav_item_type_id', 'cat.rewrite AS cat_rewrite'])
             ->leftJoin('cms_nav nav', 'nav.id=item.nav_id')
             ->leftJoin('cms_cat cat', 'cat.id=nav.cat_id')
@@ -174,12 +184,12 @@ class Menu extends \yii\base\Component
     public function getCurrent()
     {
         $id = 1; // resolve id from request object
-        return (new MenuQuery(['id' => $id]))->one();
+        return (new MenuQuery($this))->one();
     }
     
     public function getHome()
     {
-        return (new MenuQuery(['is_home' => 1]))->one();   
+        return (new MenuQuery($this))->one();   
     }
     
     public function where(array $args)
@@ -189,10 +199,5 @@ class Menu extends \yii\base\Component
          * MenuFilter::all();
          */
         return (new MenuQuery(['menu' => $this]))->where($args);
-    }
-    
-    public function all()
-    {
-        return (new MenuQuery($this))->all();
     }
 }
