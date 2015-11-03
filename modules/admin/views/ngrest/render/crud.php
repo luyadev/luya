@@ -48,6 +48,12 @@
                 </li>
             </ul>
         </div>
+
+        <div class="langswitch crud__langswitch">
+            <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'[ lighten-3 ]' : !AdminLangService.isInSelection(lang)}" class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ][ white-text green ] ng-binding ng-scope">
+                {{lang.name}}
+            </a>
+        </div>
         
         <!-- LIST -->
         <div class="card-panel" ng-switch-default>
@@ -108,14 +114,6 @@
 
                     <!-- MODAL CONTENT -->
                     <div class="modal__content">
-
-                        <!-- 
-                        <div class="langswitch">
-                            <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'[ grey lighten-2 ]' : AdminLangService.isInSelection(lang)}" class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ] ng-binding ng-scope grey lighten-2">
-                                {{lang.name}}
-                            </a>
-                        </div>
-                        -->
                         
                         <?php foreach ($config->getPointer('create') as $k => $item): ?>
                             <div class="row">

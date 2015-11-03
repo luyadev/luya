@@ -84,8 +84,8 @@
                                 <div class="left">
                                     <button type="button" class="btn" ng-click="togglePropMask()" style="margin-right:10px;" ng-show="properties.length">Eigenschaften</button>
                                     <!-- LANGUAGE SWITCH -->
-                                    <div class="toolbar__group">
-                                        <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'[ grey lighten-2 ]' : AdminLangService.isInSelection(lang)}" class="[ waves-effect waves-blue ][ btn-flat btn--small btn--bold ][ teal-text text-darken-2 ]">{{lang.name}}</a>
+                                    <div class="toolbar__group langswitch">
+                                        <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'[ lighten-3 ]' : !AdminLangService.isInSelection(lang)}" class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ][ white-text green ]">{{lang.name}}</a>
                                     </div>
                                     <!-- /LANGUAGE SWITCH -->
 
