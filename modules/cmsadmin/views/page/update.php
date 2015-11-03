@@ -32,7 +32,7 @@
 
                 <div class="block__configs" ng-class="{'block__configs--open': configIsOpen}">
 
-                    <div class="block__configs-toggler btn btn--small grey lighten-3 black-text z-depth-0"><i class="material-icons">settings</i> Einstellungen <span class="block__configs-closetext">schliessen</span></div>
+                    <div class="block__configs-toggler btn btn--small grey lighten-3 black-text z-depth-0" ng-click="configIsOpen = !configIsOpen"><i class="material-icons">settings</i> Einstellungen <span class="block__configs-closetext">schliessen</span></div>
 
                     <div class="block__configs-body">
                         <div class="row" ng-repeat="cfgField in block.cfgs">
