@@ -51,3 +51,11 @@ $cms__pages--width-full: 100%;
 		line-height: 32px;
 	}
 }
+
+.cms__prop-toggle {
+
+
+	&:active {
+		animation: rotate90 1s forwards;
+	}
+}

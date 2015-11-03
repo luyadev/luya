@@ -80,23 +80,26 @@
                                 <!-- LEFT TOOLBAR -->
                                 <div class="left">
 
-                                    <button type="button" class="btn" ng-class="{'red': showPropForm}" ng-click="togglePropMask()" style="margin-right:10px;" ng-show="properties.length">
-                                        <i class="material-icons" ng-hide="showPropForm">settings</i>
-                                        <i class="material-icons" ng-show="showPropForm">close</i>
-                                    </button>
-
-                                    <!-- LANGUAGE SWITCH -->
-                                    <div class="toolbar__group langswitch">
-                                        <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'[ lighten-3 ]' : !AdminLangService.isInSelection(lang)}" class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ][ white-text green ]">{{lang.name}}</a>
+                                    <!-- CONFIG BUTTON -->
+                                    <div class="toolbar__group">
+                                        <a class="[ btn-flat btn--small ][ grey-text text-darken-2 ]" ng-click="togglePropMask()" ng-show="properties.length">
+                                            <i class="material-icons cms__prop-toggle">settings</i>
+                                        </a>
                                     </div>
-                                    <!-- /LANGUAGE SWITCH -->
+                                    <!-- /CONFIG BUTTON -->
+
+                                    <!-- DELETE BUTTON -->
+                                    <div class="toolbar__group">
+                                        <a ng-click="trash()" class="[ waves-effect waves-blue ][ btn-flat btn--small ][ grey-text text-darken-2 ]"><i class="material-icons">delete</i></a>
+                                    </div>
+                                    <!-- /DELETE BUTTON -->
 
                                     <!-- PLACEHOLDER TOGGLE -->
                                     <div class="toolbar__group">
                                         <div class="switch">
                                             <label>
-                                                <span ng-if="placeholderState">Alle Platzhalter einklappen</span>
-                                                <span ng-if="!placeholderState">Alle Platzhalter ausklappen</span>
+                                                <span ng-if="placeholderState">Platzhalter einklappen</span>
+                                                <span ng-if="!placeholderState">Platzhalter ausklappen</span>
                                                 <input type="checkbox" ng-model="placeholderState" ng-true-value="1" ng-false-value="0">
                                                 <span class="lever"></span>
                                             </label>
@@ -115,17 +118,11 @@
                                     </div>
                                     <!-- /NAVIGATION DROPDOWN -->
 
-                                    <!-- DELETE BUTTON -->
-                                    <div class="toolbar__group">
-                                        <a ng-click="trash()" class="[ waves-effect waves-blue ][ btn-flat btn--small ][ grey-text text-darken-2 ]"><i class="material-icons">delete</i></a>
-                                    </div>
-                                    <!-- /DELETE BUTTON -->
-
                                     <!-- IS_HOME SWITCH -->
                                     <div class="toolbar__group">
                                         <div class="switch">
-                                            <label>
-                                                ist Startseite
+                                            <label title="Setzt diese Seite als Startseite.">
+                                                Startseite
                                                 <input type="checkbox" ng-model="navData.is_home" ng-true-value="1" ng-false-value="0">
                                                 <span class="lever"></span>
                                             </label>
@@ -135,11 +132,12 @@
                                     
                                     <!-- VISIBILITY SWITCH -->
                                     <div class="toolbar__group">
-                                        <div class="switch">
-                                            <label>
-                                                Sichtbar
+                                        <div class="switch switch--with-icons">
+                                            <label title="Schaltet die Seite Sichtbar / Unsichtbar. Beeinflusst die Navigation.">
+                                                <i class="switch__icon material-icons" ng-show="!navData.is_hidden">visibility</i>
+                                                <i class="switch__icon material-icons" ng-show="navData.is_hidden">visibility_off</i>
                                                 <input type="checkbox" ng-model="navData.is_hidden" ng-true-value="0" ng-false-value="1">
-                                                <span class="lever"></span>
+                                                <span class="lever switch__lever"></span>
                                             </label>
                                         </div>
                                     </div>
@@ -147,15 +145,22 @@
                                     
                                     <!-- OFFLINE SWITCH -->
                                     <div class="toolbar__group">
-                                        <div class="switch">
-                                            <label>
-                                                Online
+                                        <div class="switch switch--with-icons">
+                                            <label title="Schaltet die Seite online / offline. Eine Seite die offline ist, kann nicht aufgerufen werden.">
+                                                <i class="switch__icon material-icons green-text" ng-show="!navData.is_offline">cloud_queue</i>
+                                                <i class="switch__icon material-icons red-text" ng-show="navData.is_offline">cloud_off</i>
                                                 <input type="checkbox" ng-model="navData.is_offline" ng-true-value="0" ng-false-value="1">
-                                                <span class="lever"></span>
+                                                <span class="lever switch__lever"></span>
                                             </label>
                                         </div>
                                     </div>
                                     <!-- /OFFLINE SWITCH -->
+
+                                    <!-- LANGUAGE SWITCH -->
+                                    <div class="toolbar__group langswitch">
+                                        <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'[ lighten-3 ]' : !AdminLangService.isInSelection(lang)}" class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ][ white-text green ]">{{lang.name}}</a>
+                                    </div>
+                                    <!-- /LANGUAGE SWITCH -->
 
                                 </div>
                                 <!-- /RIGHT TOOLBAR -->
@@ -181,7 +186,8 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <div class="right">
-                                        <button type="button" ng-click="storePropValues()" class="btn" ng-show="hasValues">Werte aktualisieren <i class="material-icons right">check</i></button>
+                                        <button type="button" ng-click="togglePropMask()" class="btn red">Abbrechen <i class="material-icons left">cancel</i></button>
+                                        <button type="button" ng-click="storePropValues()" class="btn" ng-show="hasValues">Aktualisieren <i class="material-icons right">check</i></button>
                                         <button type="button" ng-click="storePropValues()" class="btn" ng-show="!hasValues">Speichern <i class="material-icons right">check</i></button>
                                     </div>
                                 </div>

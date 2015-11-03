@@ -130,7 +130,7 @@
 	opacity: 1;
 	height: 100%;
 	// transition: 0.25s 0.25s ease opacity, 0.25s 0.25s ease height, 1s ease padding;
-	padding: ($block__toolbar--height + 5px) 10px 38px 10px;
+	padding: ($block__toolbar--height + 5px) 10px 0 10px;
 }
 
 .block__configs {

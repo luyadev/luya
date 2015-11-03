@@ -15,12 +15,16 @@
 	display: inline-block;
 	padding-right: 15px;
 	margin-right: 15px;
-	margin-bottom: -15px;
 	border-right: 1px solid color('grey', 'lighten-2');
+	vertical-align: middle;
 
 	&:last-of-type {
 		border-right: 0;
 		padding-right: 0;
 		margin-right: 0;
 	}
+}
+
+.toolbar__switch-icon {
+	margin-top: 5px;
 }
