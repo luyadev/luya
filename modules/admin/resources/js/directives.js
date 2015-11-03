@@ -1053,12 +1053,17 @@
                     }
                 }
 
+				$scope.deactivateEditMode = function() {
+					$scope.editFolder.remove = false;
+					$scope.editFolder.edit = false;
+					$scope.editFolder.notempty = false;
+				}
+
                 $scope.editMode = function(folder, mode) {
                     if (!$scope.editFolder) {
                         $scope.activateEditMode(folder, mode);
                     } else {
-                        $scope.editFolder.remove = false;
-                        $scope.editFolder.edit = false;
+						$scope.deactivateEditMode();
                         $scope.activateEditMode(folder, mode);
                         $scope.editFolder = folder;
                     }
@@ -1264,6 +1269,12 @@
 	            }
 				
 				$scope.loadFolder = function(folderId) {
+					if ($scope.editFolder) {
+						if ($scope.editFolder.data.id != folderId) {
+							$scope.deactivateEditMode();
+							$scope.editFolder = null;
+						}
+					}
 					$scope.showFoldersToMove = false;
 					$scope.clearSelection();
 					FilemanagerFolderService.set(folderId);
