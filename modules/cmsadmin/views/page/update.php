@@ -278,7 +278,7 @@
                                 <div class="row">
                                     <div class="col s12">
                                         <div class="right">
-                                            <button class="btn waves-effect waves-light red" type="button" ng-click="toggleSettings()">Abbrechen <i class="material-icons left">clear</i></button>
+                                            <button class="btn waves-effect waves-light red" type="button" ng-click="toggleSettings()">Abbrechen <i class="material-icons left">cancel</i></button>
                                             <button class="btn waves-effect waves-light" type="button" ng-click="save(itemCopy, typeDataCopy)">Speichern <i class="material-icons right">check</i></button>
                                         </div>
                                     </div>

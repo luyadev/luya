@@ -44,7 +44,7 @@
                 <?php endif; ?>
                 
                 <li ng-show="crudSwitchType==2" class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==2}">
-                    <a class="tabs__anchor" ng-click="switchTo(0)"><i class="material-icons tabs__icon">cancel</i> Bearbeiten</a>
+                    <a class="tabs__anchor" ng-click="switchTo(0)"><i class="material-icons tabs__icon">cancel</i> Schliessen</a>
                 </li>
             </ul>
         </div>
@@ -139,7 +139,7 @@
                                     <button class="btn waves-effect waves-light" type="submit" ng-disabled="createForm.$invalid">
                                         Erstellen <i class="material-icons right">check</i>
                                     </button>
-                                    <button class="btn waves-effect waves-light" type="button" ng-click="closeCreate()">
+                                    <button class="btn waves-effect waves-light red" type="button" ng-click="closeCreate()">
                                         <i class="material-icons left">cancel</i> Abbrechen
                                     </button>
                                 </div>
@@ -180,7 +180,7 @@
                                     <button class="btn waves-effect waves-light" type="submit" ng-disabled="updateForm.$invalid">
                                         Speichern <i class="material-icons right">check</i>
                                     </button>
-                                    <button class="btn waves-effect waves-light" type="button" ng-click="closeUpdate()">
+                                    <button class="btn waves-effect waves-light red" type="button" ng-click="closeUpdate()">
                                         <i class="material-icons left">cancel</i> Abbrechen
                                     </button>
                                 </div>
