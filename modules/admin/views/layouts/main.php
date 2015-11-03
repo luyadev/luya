@@ -94,7 +94,7 @@ $this->beginPage()
 </script>
 
 <script type="text/ng-template" id="reverseFolders">
-    <div class="filemanager__folder-button" ng-click="loadFolder(folder.data.id)">
+    <div ng-class="{'filemanager__folder-button--has-subfolders': folder.__items.length > 0 }" class="filemanager__folder-button" ng-click="loadFolder(folder.data.id)">
         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default">folder_open</i>
         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active">folder</i>
 
