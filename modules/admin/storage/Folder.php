@@ -28,15 +28,18 @@ class Folder
         return $model->update();
     }
 
-    public function isEmptyFolder($folderId) {
+    /**
+     * check if a folder is empty (without subfolders and/or files)
+     *
+     * @param int $folderId
+     * @return bool
+     */
+    public function isEmptyFolder($folderId)
+    {
         if (!empty($this->getSubFolders($folderId))) {
             return false;
         } else {
-            if (empty(Yii::$app->storage->file->allFromFolder($folderId))) {
-                return true;
-            } else {
-                return false;
-            }
+            return empty(Yii::$app->storage->file->allFromFolder($folderId));
         }
     }
 

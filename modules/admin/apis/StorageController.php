@@ -160,6 +160,12 @@ class StorageController extends \admin\base\RestController
         return Yii::$app->storage->folder->deleteFolder($folderId);
     }
 
+    /**
+     * check if a folder is empty (no subfolders/no files)
+     *
+     * @param int $folderId
+     * @return bool
+     */
     public function actionIsFolderEmpty($folderId)
     {
         return Yii::$app->storage->folder->isEmptyFolder($folderId);
