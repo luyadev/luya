@@ -39,6 +39,20 @@ $treeview--active-color: $blue !default;
 		transform: rotate(180deg);
 	}
 }
+.treeview__site-state {
+    padding-right:5px; 
+    position:absolute;
+    font-size: 18px;
+    font-size: 18px;
+    top: 4px;
+    right: 0;
+    &.treeview__site-state--online {
+        color: #4CAF56 ;
+    }
+    &.treeview__site-state--offline {
+        color: #F44336;
+    }
+}
 
 .treeview__drop {
     height: 0;
@@ -77,11 +91,12 @@ $treeview--active-color: $blue !default;
 .treeview__link {
     font-size: 1rem;
     line-height: 1.2rem;
-    padding: 3px 5px;
+    padding: 3px 5px 3px 25px;
     display: block;
     cursor: pointer;
     color: $treeview--color;
 	border-radius: 2px;
+    position: relative;
 
     &.treeview__link--active {
         color: $treeview--active-color;
