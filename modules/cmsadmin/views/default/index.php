@@ -194,6 +194,8 @@
             <i ng-class="{ 'treeview__eye--visible': data.is_hidden == '1' && !showDrag }" class="material-icons treeview__eye left">visibility_off</i>
             <div class="treeview__empty-circle"></div>
             {{data.title}}
+            <i ng-show="data.is_offline == '1'" class="material-icons treeview__site-state treeview__site-state--offline" title="Status: Offline">cloud_off</i>
+            <i ng-show="data.is_offline == '0'" class="material-icons treeview__site-state treeview__site-state--online" title="Status: Online">cloud_queue</i>
         </a>
 
         <ul class="treeview__list" role="menu" ng-show="data.nodes.length > 0">
