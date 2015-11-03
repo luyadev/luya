@@ -7,10 +7,16 @@
 	// Overwrite default color
 	background-color: color("green", "base");
 	color: color("shades", "white");
+	transition: 0.25s ease background-color, 0.1s ease color;
 
 	&:hover {
 		background-color: color("green", "darken-2");
 	}
+}
+
+.btn.red:hover,
+.btn-floating.red:hover {
+	background-color: color("red", "darken-2") !important;
 }
 
 /**
