@@ -33,7 +33,7 @@ $collapsible--background:					$grey;
 /**
  * Blocks
  */
-$block--background:							$white;
+$block--background:							lighten($grey, 2.5);
 $block--active-background:					$white;
 $block--background-is-dirty:				#b3e5fc;
 
