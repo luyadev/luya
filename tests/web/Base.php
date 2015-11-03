@@ -5,6 +5,7 @@ namespace tests\web;
 use Yii;
 
 require __DIR__.'/../../vendor/autoload.php';
+require __DIR__.'/../env.php';
 
 class Base extends \PHPUnit_Framework_TestCase
 {

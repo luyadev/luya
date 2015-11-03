@@ -4,6 +4,25 @@ namespace tests\web\luya\components;
 
 use luya\web\components\Request;
 
+/**
+ * removed tests to implemented here (if not already)
+ * 
+ * 
+        $parts = Yii::$app->composition->get();
+
+        $this->assertArrayHasKey('langShortCode', $parts);
+        $this->assertArrayHasKey('foo', $parts);
+        $this->assertArrayHasKey('bar', $parts);
+
+        $this->assertEquals('de', $parts['langShortCode']);
+        $this->assertEquals('de', Yii::$app->composition->getLanguage());
+        $this->assertEquals('1234', $parts['foo']);
+        $this->assertEquals('luya09', $parts['bar']);
+        
+ * 
+ * @author nadar
+ *
+ */
 class CompositionTest extends \tests\web\Base
 {
     public function testResolvedPaths()
@@ -11,7 +30,7 @@ class CompositionTest extends \tests\web\Base
         $request = new Request();
         $request->pathInfo = 'de/hello/world';
 
-        $composition = new \luya\components\Composition();
+        $composition = new \luya\components\Composition($request);
         
         $resolver = $composition->getResolvedPathInfo($request);
         $resolve = $resolver['route'];
@@ -29,7 +48,7 @@ class CompositionTest extends \tests\web\Base
         $request = new Request();
         $request->pathInfo = 'ch/de/hello/world';
 
-        $composition = new \luya\components\Composition();
+        $composition = new \luya\components\Composition($request);
         $composition->pattern = '<countryShortCode:[a-z]{2}>/<langShortCode:[a-z]{2}>';
 
         $resolver = $composition->getResolvedPathInfo($request);
@@ -50,7 +69,7 @@ class CompositionTest extends \tests\web\Base
         $request = new Request();
         $request->pathInfo = $url;
         
-        $composition = new \luya\components\Composition();
+        $composition = new \luya\components\Composition($request);
         $composition->pattern = $compUrl;
         
         return $composition->getResolvedPathInfo($request);

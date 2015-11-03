@@ -12,11 +12,14 @@ class UrlRuleTest extends \tests\web\Base
 {
     public function testParseRequest()
     {
-        Yii::$app->composition->pattern = '<langShortCode:[a-z]{2}>/<foo:[0-9]{4}>/<bar:[a-z0-9]+>';
 
         $request = new Request();
         $request->pathInfo = 'de/1234/luya09/my/website';
 
+        Yii::$app->composition->request = $request;
+        Yii::$app->composition->pattern = '<langShortCode:[a-z]{2}>/<foo:[0-9]{4}>/<bar:[a-z0-9]+>';
+        
+        
         $manager = new UrlManager();
         $rule = new \luya\components\UrlRule();
 
@@ -28,17 +31,6 @@ class UrlRuleTest extends \tests\web\Base
 
         $this->assertEquals('cms/default/index', $response[0]);
         $this->assertEquals('my/website', $response[1]['path']);
-
-        $parts = Yii::$app->composition->get();
-
-        $this->assertArrayHasKey('langShortCode', $parts);
-        $this->assertArrayHasKey('foo', $parts);
-        $this->assertArrayHasKey('bar', $parts);
-
-        $this->assertEquals('de', $parts['langShortCode']);
-        $this->assertEquals('de', Yii::$app->composition->getLanguage());
-        $this->assertEquals('1234', $parts['foo']);
-        $this->assertEquals('luya09', $parts['bar']);
     }
 
     public function testNotExistingUrlRule()

@@ -2,20 +2,27 @@
 
 namespace luya\components;
 
+use Exception;
 use luya\helpers\Url;
 
 /**
  * Luya Composition Component to provide i18n/language handling.
  * 
+ * @since 1.0.0-beta1 Implementation of ArrayAccess.
  * @author nadar
  */
-class Composition extends \yii\base\Component
+class Composition extends \yii\base\Component implements \ArrayAccess
 {
     /**
      * @var string The Regular-Expression matching the var finder inside the url parts
      */
     const VAR_MATCH_REGEX = '/<(\w+):?([^>]+)?>/';
 
+    /**
+     * @var \yii\web\Request Request-Object container from DI
+     */
+    public $request = null;
+    
     /**
      * @var bool Enable or disable the->getFull() prefix. If disabled the response of getFull() would be empty, otherwhise it
      *           returns the full prefix composition pattern based url.
@@ -47,6 +54,27 @@ class Composition extends \yii\base\Component
      */
     private $_composition = [];
 
+    /**    
+     * Class constructor, to get data from DiContainer
+     * 
+     * @param \luya\web\components\Request $request
+     * @param array $config
+     */
+    public function __construct(\luya\web\components\Request $request, array $config = [])
+    {
+        $this->request = $request;
+        parent::__construct($config);
+    }
+    
+    /**
+     * Resolve the the composition on init
+     */
+    public function init()
+    {
+        $resolve = $this->getResolvedPathInfo($this->request);
+        $this->set($resolve['compositionKeys']);
+    }
+    
     /**
      * Resolve the current url request and retun an array contain resolved route and the resolved values.
      *
@@ -90,10 +118,8 @@ class Composition extends \yii\base\Component
         } else {
             $keys = $resolvedValues;
         }
-        // set all keys into the composition component
-        $this->set($keys);
         // return array with route and resolvedValues
-        return ['route' => implode('/', $requestUrlParts), 'resolvedValues' => $resolvedValues];
+        return ['route' => implode('/', $requestUrlParts), 'resolvedValues' => $resolvedValues, 'compositionKeys' => $keys];
     }
 
     /**
@@ -183,5 +209,31 @@ class Composition extends \yii\base\Component
     public function getLanguage()
     {
         return $this->getKey('langShortCode');
+    }
+    
+    // ArrayAccess implentation
+    
+    public function offsetExists($offset)
+    {
+        return isset($this->_composition[$offset]);
+    }
+    
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            throw new Exception("Unable to set array value without key. Empty keys not allowed.");
+        }
+        
+        $this->_composition[$offset] = $value;
+    }
+    
+    public function offsetGet($offset)
+    {
+        $this->getKey($offset, null);
+    }
+    
+    public function offsetUnset($offset)
+    {
+        throw new Exception("Deleting keys in Composition is not allowed.");
     }
 }
