@@ -135,11 +135,11 @@ class Menu extends \yii\base\Component
         foreach ((new DbQuery())->select(['short_code', 'id'])->from('admin_lang')->all() as $lang) {
             
             $data = (new DbQuery())->from(['cms_nav_item item'])
-            ->select(['item.id', 'item.nav_id', 'item.title', 'item.rewrite', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'nav.is_offline', 'item.nav_item_type', 'item.nav_item_type_id', 'cat.rewrite AS cat_rewrite'])
+            ->select(['item.id', 'item.nav_id', 'item.title', 'item.rewrite', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'nav.is_offline', 'item.nav_item_type', 'item.nav_item_type_id', 'cat.rewrite AS cat'])
             ->leftJoin('cms_nav nav', 'nav.id=item.nav_id')
             ->leftJoin('cms_cat cat', 'cat.id=nav.cat_id')
             ->where(['nav.is_deleted' => 0, 'item.lang_id' => $lang['id']])
-            ->orderBy(['cat_rewrite' => 'ASC', 'parent_nav_id' => 'ASC', 'nav.sort_index' => 'ASC'])
+            ->orderBy(['cat' => 'ASC', 'parent_nav_id' => 'ASC', 'nav.sort_index' => 'ASC'])
             ->indexBy('id')
             ->all();
             
@@ -184,12 +184,12 @@ class Menu extends \yii\base\Component
     public function getCurrent()
     {
         $id = 1; // resolve id from request object
-        return (new MenuQuery($this))->one();
+        return (new MenuQuery())->one();
     }
     
     public function getHome()
     {
-        return (new MenuQuery($this))->one();   
+        return (new MenuQuery())->where(['is_home' => '1'])->one();   
     }
     
     public function where(array $args)
