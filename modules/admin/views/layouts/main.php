@@ -281,7 +281,7 @@ $this->beginPage()
             <button ng-show="selectedFiles.length > 0" ng-click="removeSelectedItems()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
             <button ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove">Verschieben nach</button>
 
-            <table class="filemanager__table striped">
+            <table class="filemanager__table hoverable striped">
                 <thead>
                 <tr>
                     <th class="filemanager__checkox-column" ng-hide="allowSelection == 'true'">

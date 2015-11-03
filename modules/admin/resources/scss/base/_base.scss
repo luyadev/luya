@@ -9,6 +9,11 @@ body {
 	width: 100%;
 }
 
+::selection {
+	background: color("blue", "base");
+	color: color("shades", "white");
+}
+
 *, *:before, *:after {
 	box-sizing: border-box;
 }

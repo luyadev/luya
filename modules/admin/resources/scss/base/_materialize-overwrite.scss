@@ -10,7 +10,7 @@
 }
 
 /**
- * In forms, row shoul have 10px margin-bottom, except the last one
+ * In forms, row should have 5px margin-bottom, except the last one
  */
 form .row {
 	margin-bottom: 5px;
@@ -41,6 +41,13 @@ td, th {
 /**
  * Overwrite default table hover
  */
+table.hoverable {
+	box-shadow: none;
+
+	&:hover {
+		box-shadow: none;
+	}
+}
 table.hoverable tbody tr:hover {
 	background-color: color("blue", "lighten-4");
 }
