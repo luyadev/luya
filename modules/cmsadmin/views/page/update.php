@@ -25,25 +25,19 @@
                 </div>
             </div>
             <div class="block__body cmsadmin-tags" ng-click="toggleEdit()" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
-            <div class="block__edit">
+            <form class="block__edit">
                 <div class="row" ng-repeat="field in block.vars">
                      <zaa-injector dir="field.type" options="field.options" fieldid="{{field.id}}" fieldname="{{field.var}}" initvalue="{{field.initvalue}}" placeholder="{{field.placeholder}}" label="{{field.label}}" model="data[field.var]"></zaa-injector>
                 </div>
 
-                <div class="row">
-                    <div class="col s12">
-                        <ul class="collapsible" data-collapsible="accordion" ng-show="block.cfgs.length">
-                            <li>
-                                <div class="collapsible-header"><i class="material-icons">settings</i> Erweiterte Einstellungen</div>
-                                <div class="collapsible-body">
-                                    <br />
-                                    <div class="row" ng-repeat="cfgField in block.cfgs">
-                                        <zaa-injector dir="cfgField.type" placeholder="{{cfgField.placeholder}}" fieldid="{{cfgField.id}}" fieldname="{{cfgField.var}}" initvalue="{{cfgField.initvalue}}" options="cfgField.options" label="{{cfgField.label}}"  model="cfgdata[cfgField.var]"></zaa-injector>
-                                    </div>
-                                    <br /><br />
-                                </div>
-                            </li>
-                        </ul>
+                <div class="block__configs" ng-class="{'block__configs--open': configIsOpen}">
+
+                    <div class="block__configs-toggler btn btn--small grey lighten-3 black-text z-depth-0"><i class="material-icons">settings</i> Einstellungen <span class="block__configs-closetext">schliessen</span></div>
+
+                    <div class="block__configs-body">
+                        <div class="row" ng-repeat="cfgField in block.cfgs">
+                            <zaa-injector dir="cfgField.type" placeholder="{{cfgField.placeholder}}" fieldid="{{cfgField.id}}" fieldname="{{cfgField.var}}" initvalue="{{cfgField.initvalue}}" options="cfgField.options" label="{{cfgField.label}}"  model="cfgdata[cfgField.var]"></zaa-injector>
+                        </div>
                     </div>
                 </div>
 
@@ -57,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
             <ul ng-show="block.__placeholders.length" class="accordion" >
                 <li class="accordion__entry" ng-repeat="placeholder in block.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" ng-class="{ 'accordion__entry--open' : isOpen }"></li>
             </ul>

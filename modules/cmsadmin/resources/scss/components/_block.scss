@@ -133,6 +133,35 @@
 	padding: ($block__toolbar--height + 5px) 10px 38px 10px;
 }
 
+.block__configs {
+	margin-top: 25px;
+}
+
+.block__configs-toggler {
+	width: 100%;
+	border-radius: 2px;
+}
+.block__configs--open .block__configs-toggler {
+	border-radius: 2px 2px 0 0;
+}
+
+.block__configs-closetext {
+	display: none;
+}
+.block__configs--open .block__configs-closetext {
+	display: inline-block;
+}
+
+.block__configs-body {
+	display: none;
+	padding: 10px;
+	border: 2px solid #eee;
+	border-radius: 0 0 2px 2px;
+}
+.block__configs--open .block__configs-body {
+	display: block;
+}
+
 
 @each $depth, $color in $container-block--colors {
 	$selector: "";
