@@ -47,10 +47,13 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col s12">
-                        <div class="right">
-                            <button class="[ waves-effect waves-light ] btn btn--small teal" ng-click="save()"><i class="material-icons left">done</i> Speichern</button>
+                <br />
+                <div class="modal__footer">
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="right">
+                                <button class="[ waves-effect waves-light ] btn btn--small" ng-click="save()"><i class="material-icons left">done</i> Speichern</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,7 +85,12 @@
 
                                 <!-- LEFT TOOLBAR -->
                                 <div class="left">
-                                    <button type="button" class="btn" ng-click="togglePropMask()" style="margin-right:10px;" ng-show="properties.length">Eigenschaften</button>
+
+                                    <button type="button" class="btn" ng-class="{'red': showPropForm}" ng-click="togglePropMask()" style="margin-right:10px;" ng-show="properties.length">
+                                        <i class="material-icons" ng-hide="showPropForm">settings</i>
+                                        <i class="material-icons" ng-show="showPropForm">close</i>
+                                    </button>
+
                                     <!-- LANGUAGE SWITCH -->
                                     <div class="toolbar__group langswitch">
                                         <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'[ lighten-3 ]' : !AdminLangService.isInSelection(lang)}" class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ][ white-text green ]">{{lang.name}}</a>
@@ -173,10 +181,16 @@
                         <div class="row" ng-repeat="prop in properties">
                             <zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{prop.label}}" model="propValues[prop.id]"></zaa-injector>
                         </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <button type="button" ng-click="storePropValues()" class="btn" ng-show="hasValues">Werte aktualisieren</button>
-                                <button type="button" ng-click="storePropValues()" class="btn" ng-show="!hasValues">Speichern</button>
+
+                        <br />
+                        <div class="modal__footer">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <div class="right">
+                                        <button type="button" ng-click="storePropValues()" class="btn" ng-show="hasValues">Werte aktualisieren <i class="material-icons right">check</i></button>
+                                        <button type="button" ng-click="storePropValues()" class="btn" ng-show="!hasValues">Speichern <i class="material-icons right">check</i></button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -222,23 +236,32 @@
                         </div>
                         <!-- /PAGE__HEADER -->
 
-                        <!-- PAGE__CONTENT -->
-                        <div class="page__content" ng-show="settings" ng-switch on="item.nav_item_type">
+                        <!-- PAGE__CONTENT--SETTINGS -->
+                        <form class="page__content page__content--settings" ng-show="settings" ng-switch on="item.nav_item_type">
+
                             <div class="row">
-                                <div class="input-field col s6">
-                                    <input ng-model="itemCopy.title" type="text" class="validate">
-                                    <label>Seitenname</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <input ng-model="itemCopy.rewrite"  type="text" class="validate">
-                                    <label>Url</label>
+                                <div class="input input--text col s12">
+                                    <label class="input__label">Seitentitel</label>
+                                    <div class="input__field-wrapper">
+                                        <input name="text" type="text" class="input__field validate" ng-model="itemCopy.title" />
+                                    </div>
                                 </div>
                             </div>
-                            
-                            <div ng-switch-when="1" class="row">
-                                <div class="input-field col s12">
-                                    <select class="browser-default" ng-model="typeDataCopy.layout_id" ng-options="lts.id as lts.name for lts in layouts"></select>
-                                    <label>Layout</label>
+                            <div class="row">
+                                <div class="input input--text col s12">
+                                    <label class="input__label">Pfadsegment</label>
+                                    <div class="input__field-wrapper">
+                                        <input name="text" type="text" class="input__field validate" ng-model="itemCopy.rewrite" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input input--select col s12">
+                                    <label class="input__label">Layout</label>
+                                    <div class="input__field-wrapper">
+                                        <select class="input__field browser-default" ng-model="typeDataCopy.layout_id" ng-options="lts.id as lts.name for lts in layouts"></select>
+                                    </div>
                                 </div>
                             </div>
                     
@@ -249,11 +272,16 @@
                             <div ng-switch-when="3" class="row">
                                 <p>Redirect Settings</p>
                             </div>
-                            
-                            <div class="row">
-                                <div class="col s12">
-                                    <button class="btn waves-effect waves-light" type="button" ng-click="toggleSettings()">Abbrechen <i class="material-icons right">clear</i></button>
-                                    <button class="btn waves-effect waves-light" type="button" ng-click="save(itemCopy, typeDataCopy)">Speichern <i class="material-icons right">send</i></button>
+
+                            <br />
+                            <div class="modal__footer">
+                                <div class="row">
+                                    <div class="col s12">
+                                        <div class="right">
+                                            <button class="btn waves-effect waves-light red" type="button" ng-click="toggleSettings()">Abbrechen <i class="material-icons left">clear</i></button>
+                                            <button class="btn waves-effect waves-light" type="button" ng-click="save(itemCopy, typeDataCopy)">Speichern <i class="material-icons right">check</i></button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -263,11 +291,11 @@
                                 </ul>
                             </div>
                             
-                        </div>
-                        <!-- /PAGE__CONTENT -->
+                        </form>
+                        <!-- /PAGE__CONTENT--SETTINGS -->
 
-                        <!-- PAGE__CONTENT--SETTINGS -->
-                        <div class="page__content page__content--settings" ng-show="!settings" ng-switch on="item.nav_item_type">
+                        <!-- PAGE__CONTENT -->
+                        <div class="page__content" ng-show="!settings" ng-switch on="item.nav_item_type">
                             <div class="row">
                                 <div class="col s12 page__no-padding" ng-switch-when="1" ng-controller="NavItemTypePageController">
                                     <div class="alert alert--danger" ng-show="!container.nav_item_page.id">Das für die Seite definierte Layout wurde nicht (mehr) gefunden. Bitte bearbeiten Sie die Layout Einstellungen diese Seite.</div>
@@ -283,7 +311,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /PAGE__CONTENT--SETTINGS -->
+                        <!-- /PAGE__CONTENT -->
                     </div>
                     <!-- /PAGE -->
                 </div>

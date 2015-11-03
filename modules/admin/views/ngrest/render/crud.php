@@ -132,12 +132,20 @@
 
                     </div>
 
-                    <button class="btn waves-effect waves-light" type="submit" ng-disabled="createForm.$invalid">
-                        <i class="material-icons">send</i> Erstellen
-                    </button>
-                    <button class="btn waves-effect waves-light" type="button" ng-click="closeCreate()">
-                        <i class="material-icons">cancel</i> Abbrechen
-                    </button>
+                    <div class="modal__footer">
+                        <div class="row">
+                            <div class="col s12">
+                                <div class="right">
+                                    <button class="btn waves-effect waves-light" type="submit" ng-disabled="createForm.$invalid">
+                                        Erstellen <i class="material-icons right">check</i>
+                                    </button>
+                                    <button class="btn waves-effect waves-light" type="button" ng-click="closeCreate()">
+                                        <i class="material-icons left">cancel</i> Abbrechen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </form>
             <?php endif; ?>
@@ -170,10 +178,10 @@
                             <div class="col s12">
                                 <div class="right">
                                     <button class="btn waves-effect waves-light" type="submit" ng-disabled="updateForm.$invalid">
-                                        <i class="material-icons">send</i> Speichern
+                                        Speichern <i class="material-icons right">check</i>
                                     </button>
                                     <button class="btn waves-effect waves-light" type="button" ng-click="closeUpdate()">
-                                        <i class="material-icons">cancel</i> Cancel
+                                        <i class="material-icons left">cancel</i> Abbrechen
                                     </button>
                                 </div>
                             </div>

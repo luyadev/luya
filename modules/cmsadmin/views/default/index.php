@@ -95,10 +95,7 @@
         <div class="input input--select col s12">
             <label class="input__label">Layout</label>
             <div class="input__field-wrapper">
-                <select class="input__field browser-default" ng-model="data.layout_id" ng-options="lts.id as lts.name for lts in layouts">
-                    <option value="0">[Root Level]</option>
-                    <option ng-repeat="nav in navitems" value="{{nav.id}}">{{nav.title}}</option>
-                </select>
+                <select class="input__field browser-default" ng-model="data.layout_id" ng-options="lts.id as lts.name for lts in layouts"></select>
             </div>
         </div>
     </div>

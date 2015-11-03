@@ -462,9 +462,9 @@
 									'</td>'+
 								'</tr>'+
 							'</table>'+
-							'<button ng-click="addRow()" type="button" class="zaa-table__btn [ waves-effect waves-light ] btn btn--small teal">Zeile hinzufügen</button>'+
+							'<button ng-click="addRow()" type="button" class="zaa-table__btn [ waves-effect waves-light ] btn btn--small">Zeile hinzufügen <i class="material-icons right">add</i></button>'+
 
-							'<button ng-click="addColumn()" type="button" style="float:right;" class="zaa-table__btn[ waves-effect waves-light ] btn btn--small teal">Spalte Rechts einfügen</button>'+
+							'<button ng-click="addColumn()" type="button" style="float:right;" class="zaa-table__btn[ waves-effect waves-light ] btn btn--small">Spalte einfügen <i class="material-icons right">add</i></button>'+
 						'</div>';
 			}
 		}
@@ -548,7 +548,7 @@
 				return '<div class="input input--image-array imagearray">' +
 	                        '<label class="input__label">{{label}}</label>' +
                             '<div class="input__field-wrapper">' +
-                                '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="teal-text">+</span> links unten ein.</p>' +
+                                '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="green-text">+</span> links unten ein.</p>' +
                                 '<div ng-repeat="(key,image) in model track by key" class="row list__item">' +
 
                                     '<div class="list__left row">' +
@@ -566,7 +566,7 @@
                                     '</div>' +
 
                                 '</div>' +
-                                '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ teal ][ waves-effect waves-circle waves-light ]"><i class="material-icons">add</i></button>' +
+                                '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ waves-effect waves-circle waves-light ]"><i class="material-icons">add</i></button>' +
                             '</div>' +
 	                    '</div>';
 			}
@@ -607,7 +607,7 @@
 				return '<div class="input input--file-array filearray">' +
 			                '<label class="input__label">{{label}}</label>' +
                             '<div class="input__field-wrapper">' +
-                                '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="teal-text">+</span> links unten ein.</p>' +
+                                '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="green-text">+</span> links unten ein.</p>' +
                                 '<div ng-repeat="(key,file) in model track by key" class="row list__item">' +
 
                                     '<div class="list__left row">' +
@@ -624,7 +624,7 @@
                                         '<button class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
                                     '</div>' +
                                 '</div>' +
-                                '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ teal ][ waves-effect waves-circle waves-light ]"><i class="material-icons">add</i></button>' +
+                                '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ waves-effect waves-circle waves-light ]"><i class="material-icons">add</i></button>' +
                             '</div>' +
 			            '</div>';
 			}
@@ -680,7 +680,7 @@
 				return '<div class="input input--list list">' +
 	                        '<label class="input__label">Auflistung</label>' +
                             '<div class="input__field-wrapper">' +
-                                '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="teal-text">+</span> links unten ein.</p>' +
+                                '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="green-text">+</span> links unten ein.</p>' +
                                 '<div ng-repeat="(key,row) in model track by key" class="list__item">' +
                                     '<div class="list__left">' +
                                         '<input class="list__input" type="text" ng-model="row.value" />' +
@@ -689,7 +689,7 @@
                                         '<button class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
                                     '</div>' +
                                 '</div>' +
-                                '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ teal ][ waves-effect waves-circle waves-light ]"><i class="material-icons">add</i></button>' +
+                                '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ waves-effect waves-circle waves-light ]"><i class="material-icons">add</i></button>' +
                             '</div>' +
 	                    '</div>';
 			}
