@@ -229,7 +229,7 @@ class Composition extends \yii\base\Component implements \ArrayAccess
     
     public function offsetGet($offset)
     {
-        $this->getKey($offset, null);
+        return $this->getKey($offset, null);
     }
     
     public function offsetUnset($offset)
