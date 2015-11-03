@@ -47,10 +47,10 @@ $treeview--active-color: $blue !default;
     top: 4px;
     right: 0;
     &.treeview__site-state--online {
-        color: green;
+        color: #4CAF56 ;
     }
     &.treeview__site-state--offline {
-        color: red;
+        color: #F44336;
     }
 }
 
