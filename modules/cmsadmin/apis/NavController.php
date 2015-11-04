@@ -5,6 +5,7 @@ namespace cmsadmin\apis;
 use Yii;
 use cmsadmin\models\Property;
 use cmsadmin\models\Nav;
+use cmsadmin\models\NavItem;
 
 /**
  * example.com/admin/api-cms-nav/create-page
@@ -134,6 +135,11 @@ class NavController extends \admin\base\RestController
         if ($model) {
             $model->is_deleted = 1;
 
+            foreach (NavItem::find()->where(['nav_id' => $navId])->all() as $navItem) {
+                $navItem->setAttribute('rewrite', date("Y-m-d-H-i") . "-" . $navItem->rewrite);
+                $navItem->update(false);
+            }
+            
             return $model->update(false);
         }
     }
