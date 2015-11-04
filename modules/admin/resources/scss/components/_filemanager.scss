@@ -16,24 +16,8 @@
  */
 .filemanager__tree {
 	width: $filemanager__tree--width;
-	// &:first-child .filemanager__folders{
-		border-right: 1px solid rgba(0, 0, 0, 0.1);
-		padding-right: 5px;
-	// }
-}
-
-.filemanager__folders {
-	margin: 0;
-    position: relative;
- //    &:first-of-type {
-	// 	border-right: 1px solid rgba(0, 0, 0, 0.1);
-	// 	padding-right: 5px;
-	// }
-}
-.active > .filemanager__folder-button {
-	color: color("shades", "white");
-    border-radius: 2px;
-	background-color: color($filemanager--base-color, "base");
+	border-right: 1px solid rgba(0, 0, 0, 0.1);
+	padding-right: 20px;
 }
 .filemanager__toolbar {
 	display: block;
@@ -41,12 +25,25 @@
 	margin-bottom: 15px;
 	@include clearfix;
 }
-
+.filemanager__folders {
+	margin: 0;
+	display: block;
+    position: relative;
+}
+.folder-root {
+	.filemanager__folder-name {
+		max-width: 200px !important;
+	}
+}
+.filemanager__folder--active > .filemanager__folder-button {
+	color: color("shades", "white");
+    border-radius: 2px;
+	background-color: color($filemanager--base-color, "darken-2");
+}
 .filemanager__main-folder {
 	word-break: break-all;
 	position: relative;
 	padding: 8px 0 8px 25px;
-	// border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 	cursor: pointer;
 	display: block;
 
@@ -57,26 +54,39 @@
 
 	& > .filemanager__folders {
 		margin-top: 8px;
-
-		& .filemanager__folder:first-of-type {
-			// border-top: 1px solid rgba(0, 0, 0, 0.1);
-		}
-	}
-	
-	&:hover > .filemanager__folder-icon,
-	&.active > .filemanager__folder-icon,
-	&:hover > span,
-	&.active > span {
-		color: color($filemanager--base-color, "base");
 	}
 }
-
 .filemanager__folder {
 	word-break: break-all;
 	position: relative;
-	padding: 0;
-	// border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 	display: block;
+
+	.filemanager__folders .filemanager__folders & {
+		&:before {
+			content: "";
+			position: absolute;
+			top: -5px;
+			left: -12px;
+			background-color: color($filemanager--base-color, "darken-2");
+			height: 100%;
+			width: 1px;
+			z-index: 1;
+		}
+		&:after {
+			content: "";
+			position: absolute;
+			top: 15px;
+			left: -12px;
+			background-color: color($filemanager--base-color, "darken-2");
+			width: 16px;
+			height: 1px;
+			z-index: 1;
+		}
+
+		&:last-of-type:before {
+			height: 20px;
+		}
+	}
 
 	&:last-of-type {
 		border-bottom: 0;
@@ -84,84 +94,71 @@
 
 	& > .filemanager__folders {
 		padding-left: 25px;
-		
-		& .filemanager__folder:first-of-type {
-			// border-top: 1px solid rgba(0, 0, 0, 0.1);
-		}
 	}
 }
-.filemanager__folder-name {
-	padding-left: 10px,
-}
-
 .filemanager__folder-button {
-	// margin: 4px 0;
-	padding: 6px 0 6px 25px;
+	padding: 0px 0 0px 2px;
 	cursor: pointer;
-	
-	&:hover > .filemanager__folder-icon,	
-	&:hover >  span {		
-		color: color($filemanager--base-color, "base");
+	position: relative;
+	.filemanager__folder-name {
+	    max-width: 115px;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    display: inline-block;
+	    margin-bottom: -4px;
 	}
-	.filemanager__folder.active > & > .filemanager__folder-icon,
-	.filemanager__folder.active > & > span {
+	//Font-color for the hovering folder-names
+	&:hover >  span {		
+		color: color($filemanager--base-color, "darken-2");		
+	}
+	//Font-color of the active selected folder-name
+	.filemanager__folder.filemanager__folder--active > & > span {
 		color: color("shades", "white");
 	}
+	//Default-state all folder-icons
 	.filemanager__folder-icon {
 		position: relative;
 		left: 0;
-		top: 4px;
+		top: 3px;
+		color: color($filemanager--base-color, "darken-2");		
 	}
-
+	//Hiding the active-folder-icon at default-state
 	.filemanager__folder-icon--active {
 		display: none;
-		// margin-top: -2px;
 	}
-	&:hover > .filemanager__folder-icon--active,
-	.filemanager__folder.active > & > .filemanager__folder-icon--active {
+	//Hover to display the active-folder-icon
+	&:hover > .filemanager__folder-icon--active {
 		display: inline;
-		color: color("light-blue", "accent-1");
+		z-index: 5;
+		color: color($filemanager--base-color, "darken-2");
+	}
+
+	.filemanager__folder.filemanager__folder--active > & > .filemanager__folder-icon--active {
+		display: inline;
+		z-index: 5;
+		color: color("shades", "white");
 	}
 	&:hover > .filemanager__folder-icon--default,
-	.filemanager__folder.active > & > .filemanager__folder-icon--default {
+	.filemanager__folder.filemanager__folder--active > & > .filemanager__folder-icon--default {
 		display: none;		
 	}
 	.filmanager__thumb {
 		max-width: 80px;
 	}
-	.filemanager__edit-icon,
-    .filemanager__delete-icon {
-	    float: right;
-	    padding: 0 8px;
-    	top: 6px;
-		position: relative;
-		right: 0;
-		opacity: 0;
-		pointer-events: none;
-		transition: 0.25s ease opacity;
-        font-size: 22px;
-        // line-height: 28px;
-        vertical-align: middle;
-        // margin: -5px;
-	}
+	
 	.filemanager__cancel-btn {
 		background-color: color("red", "base");
 	}
 	.filemanager__file-dialog {
 		position: relative;
-	    // border-top: 1px solid #9e9e9e;
 	    padding-top: 8px;
-		// margin-top: -1px;
-
 		span {
-			// vertical-align: top;
 			margin-right: 4px;
 			color: color("shades", "white");
 		}
 		.btn-floating {
 			background-color: color("light-blue", "accent-1");
 		}
-
 	}
 	.filemanager__file-dialog__input {
 		padding-left: 9px;
@@ -170,9 +167,6 @@
 		outline: none;
 		padding-top: 4px;
 		color: color("shades", "black");
-		// border-left: 1px solid #9e9e9e;
-		// border-top: 1px solid #9e9e9e;
-		// border-right: 1px solid #9e9e9e;
 
 	    &:focus:not([readonly]) {
 	    	border-bottom: none;
@@ -182,30 +176,54 @@
 
 	.filemanager__file-dialog__icon {
 		position: relative;
-		// top: -10px;
 		color: color("green", "darken-1");
 	}
 
     .filemanager__cancel-icon {
-    	// top: -5px;
         transform: rotate(45deg);
         font-size: 32px;
         color: color("red", "base");
-
     }
-
-    .filemanager__edit-icon {
-        // right: 40px;
-        // font-size: 18px;
-    }
-
 	&:hover > .filemanager__edit-icon,
     &:hover > .filemanager__delete-icon {
 		opacity: 1;
 		pointer-events: auto;
 	}
 }
+.filemanager__edit-icon,
+.filemanager__delete-icon {
+    float: right;
+    padding: 0 8px;
+	top: 4px;
+	position: relative;
+	right: 0;
+	opacity: 0;
+	pointer-events: none;
+	transition: 0.25s ease opacity;
+    font-size: 22px;
+    vertical-align: middle;
+}
 
+.modal-content {
+	.filemanager__folder-name {
+		margin-bottom: 0px;
+		max-width: 200px;
+	}
+	.filemanager__edit-icon,
+	.filemanager__delete-icon {
+		display: none;
+	}
+	.filemanager__folder-icon {
+		top:1px;
+		font-size: 23px;
+	}
+	.filemanager__folders .filemanager__folders .filemanager__folder:after {
+		top: 12px;
+	}
+	.filemanager__folders .filemanager__folders .filemanager__folder:last-of-type:before {
+		height: 18px;
+	}
+}
 /**
  * #FILES
  */
