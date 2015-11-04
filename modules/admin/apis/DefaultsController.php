@@ -5,6 +5,7 @@ namespace admin\apis;
 use Yii;
 use admin\models\Lang;
 use admin\models\Property;
+use yii\helpers\Json;
 
 /**
  * Delivers default values for the specifing table. It means it does not return a key numeric array,
@@ -21,7 +22,20 @@ class DefaultsController extends \admin\base\RestController
 
     public function actionProperties()
     {
-        return Property::find()->all();
+        $data = [];
+        foreach (Property::find()->all() as $item) {
+            $object = Property::getObject($item->class_name);
+            $data[] = [
+                'id' => $item->id,
+                'var_name' => $object->varName(),
+                'option_json' => $object->options(),
+                'label' => $object->label(),
+                'type' => $object->type(),
+                'default_value' => $object->defaultValue(),
+            ];
+        }
+        
+        return $data;
     }
     
     public function actionCache()

@@ -10,10 +10,10 @@ class m150924_120914_admin_prop extends Migration
             'id' => 'pk',
             'module_name' => 'varchar(120)',
             'var_name' => 'varchar(80) not null UNIQUE',
-            'type' => 'varchar(40) not null',
-            'label' => 'varchar(120) not null',
-            'option_json' => 'varchar(255)',
-            'default_value' => 'varchar(255)',
+            'type' => 'varchar(40) not null', // remove in remove_property_fields
+            'label' => 'varchar(120) not null', // remove in remove_property_fields
+            'option_json' => 'varchar(255)', // remove in remove_property_fields
+            'default_value' => 'varchar(255)', // remove in remove_property_fields
         ]);
     }
 

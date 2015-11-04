@@ -42,10 +42,10 @@ abstract class Property extends \yii\base\Component
         if ($model) {
             $model->setAttributes([
                 'module_name' => $this->moduleName,
-                'type' => $this->type(),
-                'label' => $this->label(),
-                'option_json' => json_encode($this->options()),
-                'default_value' => $this->defaultValue(),
+                //'type' => $this->type(),
+                //'label' => $this->label(),
+                //'option_json' => json_encode($this->options()),
+                //'default_value' => $this->defaultValue(),
                 'class_name' => static::className(),
             ]);
             $model->update(false);
@@ -56,10 +56,10 @@ abstract class Property extends \yii\base\Component
             $model->setAttributes([
                 'var_name' => $this->varName(),
                 'module_name' => $this->moduleName,
-                'type' => $this->type(),
-                'label' => $this->label(),
-                'option_json' => json_encode($this->options()),
-                'default_value' => $this->defaultValue(),
+                //'type' => $this->type(),
+                //'label' => $this->label(),
+                //'option_json' => json_encode($this->options()),
+                //'default_value' => $this->defaultValue(),
                 'class_name' => static::className(),
             ]);
             $insert = $model->insert(false);
