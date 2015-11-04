@@ -51,12 +51,17 @@ class Item extends \yii\base\Object
     
     public function getChildren()
     {
-        return (new QUery())->where(['parent_nav_id' => $this->navId])->all();   
+        return (new Query())->where(['parent_nav_id' => $this->navId])->all();   
+    }
+    
+    public function getDepth()
+    {
+        return $this->itemArray['depth'];
     }
     
     public function getParent()
     {
-        
+        return (new Query())->where(['nav_id' => $this->parentNavId])->one();
     }
     
     public function teardown()

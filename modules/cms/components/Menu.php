@@ -180,6 +180,7 @@ class Menu extends \yii\base\Component
                 // add link key
                 $item['alias'] = $rewrite;
                 $item['link'] = $this->composition->full . $rewrite;
+                $item['depth'] = count(explode("/", $rewrite));
                 // add redirect info if item_type 3
                 if ($item['nav_item_type'] == 3) {
                     $item['redirect'] = $redirectMap[$item['nav_item_type_id']];

@@ -3,10 +3,17 @@
 namespace cms\menu;
 
 use cms\menu\Query;
+use Iterator;
+use Countable;
 
-class Iterator extends \yii\base\Object implements \Iterator
+class QueryIterator extends \yii\base\Object implements Iterator, Countable
 {
     public $data = [];
+    
+    public function count()
+    {
+        return count($this->data);
+    }
     
     public function current()
     {

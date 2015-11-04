@@ -4,7 +4,7 @@ namespace cms\menu;
 
 use Yii;
 use Exception;
-use cms\menu\Iterator;
+use cms\menu\QueryIterator;
 
 /**
  * Menu Query Builder
@@ -205,7 +205,7 @@ class Query extends \yii\base\Object
     
     public static function createArrayIterator($data)
     {
-       return Yii::createObject(['class' => Iterator::className(), 'data' => $data]);
+       return Yii::createObject(['class' => QueryIterator::className(), 'data' => $data]);
     }
     
     public static function createItemObject(array $itemArray)
