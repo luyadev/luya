@@ -2,6 +2,11 @@
 
 namespace luya\web;
 
+/**
+ * @property \luya\web\components\Composition $composition Composition property
+ * @author nadar
+ *
+ */
 class Application extends \yii\web\Application
 {
     use \luya\traits\Application;
