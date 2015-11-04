@@ -5,6 +5,10 @@ namespace tests\web\luya\components;
 use Yii;
 use luya\components\Twig;
 
+/**
+ * @todo readd links (new menu) component and tests
+ * @author nadar
+ */
 class TwigTest extends \tests\web\Base
 {
     private function getEnv()
@@ -27,9 +31,9 @@ class TwigTest extends \tests\web\Base
         $functionList = $twig->getFunctions();
 
         $this->assertEquals(true, is_array($functionList));
-        $this->assertArrayHasKey('links',$functionList);
-        $this->assertArrayHasKey('linksFindParent',$functionList);
-        $this->assertArrayHasKey('linkActivePart',$functionList);
+        //$this->assertArrayHasKey('links',$functionList);
+        //$this->assertArrayHasKey('linksFindParent',$functionList);
+        //$this->assertArrayHasKey('linkActivePart',$functionList);
         $this->assertArrayHasKey('asset',$functionList);
         $this->assertArrayHasKey('filterApply',$functionList);
         $this->assertArrayHasKey('image',$functionList);

@@ -32,7 +32,7 @@ class UrlTest extends \tests\web\Base
         Yii::$app->request->baseUrl = '';
         Yii::$app->request->scriptUrl = '';
         $url = Url::toModule(1, 'news/default/detail', ['id' => 1, 'title' => 'foo-bar']);
-        $this->assertEquals('/de/page-1/1/foo-bar', $url);
+        $this->assertEquals('/1/foo-bar', $url);
     }
 
     public function testToAjax()

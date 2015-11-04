@@ -218,7 +218,7 @@ class Menu extends \yii\base\Component
         }
         
         if (!$item) {
-            throw new Exception("Unable to determine the current menu item.");
+            return $this->home;
         }
         
         $this->_currentAppendix = substr($requestPath, strlen($item->alias) + 1);

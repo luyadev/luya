@@ -82,28 +82,24 @@ class UrlRuleTest extends \tests\web\Base
     public function testModuleContextUrls()
     {
         Yii::$app->urlManager->setContextNavItemId(1);
-        Yii::$app->composition->hidden = false;
 
         $url = Url::to('news/default/detail', ['id' => 1, 'title' => 'foo-bar']);
-        $this->assertEquals('/de/page-1/1/foo-bar', $url);
+        $this->assertEquals('/1/foo-bar', $url);
 
         Yii::$app->urlManager->setContextNavItemId(2);
-        Yii::$app->composition->hidden = true;
 
         $url = Url::to('news/default/detail', ['id' => 1, 'title' => 'foo-bar']);
-        $this->assertEquals('/page-2/1/foo-bar', $url);
+        $this->assertEquals('/de/page-2/1/foo-bar', $url);
 
         Yii::$app->urlManager->setContextNavItemId(2);
-        Yii::$app->composition->hidden = true;
 
         $url = Url::to('news/default/detail', ['id' => 1, 'title' => 'foo-bar', 'pa' => 'ram']);
-        $this->assertEquals('/page-2/1/foo-bar?pa=ram', $url);
+        $this->assertEquals('/de/page-2/1/foo-bar?pa=ram', $url);
 
         Yii::$app->urlManager->setContextNavItemId(1);
-        Yii::$app->composition->hidden = true;
 
         $url = Url::to('news/default/detail', ['id' => 1, 'title' => 'page-2-news-title', 'news' => 'page']);
-        $this->assertEquals('/page-1/1/page-2-news-title?news=page', $url);
+        $this->assertEquals('/1/page-2-news-title?news=page', $url);
     }
 
     public function testModuleUrls()
@@ -113,6 +109,6 @@ class UrlRuleTest extends \tests\web\Base
         Yii::$app->getModule('news')->setContext('cms');
         Yii::$app->getModule('news')->setContextOptions(['navItemId' => 1]);
         $url = Url::to('news/default/detail', ['id' => 1, 'title' => 'foo-bar']);
-        $this->assertEquals('/de/page-1/1/foo-bar', $url);
+        $this->assertEquals('/1/foo-bar', $url);
     }
 }

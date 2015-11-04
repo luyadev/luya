@@ -72,13 +72,6 @@ class UrlManager extends \yii\web\UrlManager
 
     public function createUrl($params)
     {
-        /*
-        if (!Yii::$app->has('composition')) {
-            return parent::createUrl($params);
-        }
-        */
-
-        //$links = Yii::$app->get('links', false);
         $menu = Yii::$app->get('menu', false);
         
         $composition = Yii::$app->composition->getFull();
@@ -103,41 +96,26 @@ class UrlManager extends \yii\web\UrlManager
 
         if ($this->getContextNavItemId() && $menu) {
             $menuItem = $menu->find()->where(['id' => $this->getContextNavItemId()])->one();
-            
-            //$link = $links->findOne(['id' => $this->getContextNavItemId(), 'show_hidden' => true]);
             $this->resetContext();
-
-            return preg_replace("/$moduleName/", $menuItem->link, $response, 1);
+            return Url::startTrailing(preg_replace("/$moduleName/", $menuItem->link, $response, 1));
         }
-
-        $context = false;
 
         if ($moduleName !== false) {
             $moduleObject = Yii::$app->getModule($moduleName);
-
-            if (method_exists($moduleObject, 'setContext') && !empty($moduleObject->context)) {
-                if (!empty($menu)) {
-                    $context = true;
-                    $options = $moduleObject->getContextOptions();
-                    $menuItem = $menu->find()->where(['id' => $options['navItemId']])->one();
-                    $response = preg_replace("/$moduleName/", $menuItem->link, $response, 1);
-                }
+            if (method_exists($moduleObject, 'setContext') && !empty($moduleObject->context) && $menu) {
+                $options = $moduleObject->getContextOptions();
+                $menuItem = $menu->find()->where(['id' => $options['navItemId']])->one();
+                return Url::startTrailing(preg_replace("/$moduleName/", $menuItem->link, $response, 1));
             }
         }
-        if (!$context) {
-            // because the urlCreation of yii returns a realtive url we have to manualy add the composition getFull() path.
-            $baseUrl = yii::$app->request->baseUrl;
-            if (empty($baseUrl)) {
-                // verify: If base url is empty, we have to add a base trailing slash (29.10.2015)
-                $response = Url::removeTrailing($composition).$response;
-                if (substr($response, 0, 1) !== "/") { 
-                    $response = "/".$response;
-                }
-            } else {
-                $response = str_replace($baseUrl, Url::trailing($baseUrl).Url::removeTrailing($composition), $response);
-            }
+        
+        // because the urlCreation of yii returns a realtive url we have to manualy add the composition getFull() path.
+        $baseUrl = Yii::$app->request->baseUrl;
+        
+        if (empty($baseUrl)) {
+            return Url::startTrailing(Url::removeTrailing($composition) . $response);
         }
-
-        return $response;
+        
+        return str_replace($baseUrl, Url::trailing($baseUrl).Url::removeTrailing($composition), $response);
     }
 }

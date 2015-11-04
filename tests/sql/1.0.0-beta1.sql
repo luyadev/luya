@@ -657,6 +657,13 @@ INSERT INTO `cms_nav_item` (`id`, `nav_id`, `lang_id`, `nav_item_type`, `nav_ite
 
 -- --------------------------------------------------------
 
+CREATE TABLE IF NOT EXISTS `cms_nav_item_redirect` (
+  `id` int(11) NOT NULL,
+  `type` int(11) NOT NULL,
+  `value` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COMMENT='latin1_swedish_ci';
+
+
 --
 -- Table structure for table `cms_nav_item_module`
 --

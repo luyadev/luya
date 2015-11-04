@@ -18,7 +18,7 @@ use yii\helpers\Url;
                         <h1>Luya Website</h1>
                         <h2><?= Url::base(true); ?></h2>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="git pull-right">
                             <a href="https://github.com/zephir/luya" target="_blank" alt="Luya on GitHub" title="Luya on GitHub"><i class="fa fa-github fa-4x"></i></a>
                         </div>

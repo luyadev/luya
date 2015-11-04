@@ -36,6 +36,11 @@ class Url
         return $parts;
     }
 
+    public static function startTrailing($url)
+    {
+        return "/" . ltrim($url, '/');
+    }
+    
     /**
      * add a trailing slash to an url if there is no trailing slash at the end of the url.
      *
@@ -82,7 +87,7 @@ class Url
      * @param int    $navItemId
      * @param string $route
      * @param array  $params
-     *
+     * @todo move into cms\helpers
      * @return string
      */
     public static function toModule($navItemId, $route, array $params = [])

@@ -35,7 +35,7 @@ class Item extends \yii\base\Object
     
     public function getLink()
     {
-        return $this->itemArray['link'];
+        return ($this->itemArray['is_home']) ? '' : $this->itemArray['link'];
     }
     
     public function getIsActive()
