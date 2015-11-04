@@ -54,7 +54,7 @@ class Nav extends \yii\db\ActiveRecord
 
     public function getProperties()
     {
-        return CmsProperty::find()->where(['nav_id' => $this->id])->leftJoin('admin_property', 'admin_prop_id=admin_property.id')->select(['cms_nav_property.*', 'admin_property.module_name', 'admin_property.var_name', 'admin_property.type', 'admin_property.default_value'])->asArray()->all();
+        return CmsProperty::find()->where(['nav_id' => $this->id])->leftJoin('admin_property', 'admin_prop_id=admin_property.id')->select(['cms_nav_property.*', 'admin_property.module_name', 'admin_property.class_name'])->asArray()->all();
     }
 
     public function getProperty($varName)
