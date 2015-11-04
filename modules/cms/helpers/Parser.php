@@ -66,7 +66,7 @@ class Parser
     {
         $alias = false;
         if (is_numeric($result['value'])) {
-            $menuItem = Yii::$app->menu->find()->where(['nav_id' => $result['value'], 'show_hidden' => true])->one();
+            $menuItem = Yii::$app->menu->find()->where(['nav_id' => $result['value']])->includeHidden()->one();
             if ($menuItem) {
                 $href = $menuItem->link;
                 $alias = $menuItem->title;

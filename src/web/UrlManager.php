@@ -95,7 +95,7 @@ class UrlManager extends \yii\web\UrlManager
         $moduleName = \luya\helpers\Url::fromRoute($params[0], 'module');
 
         if ($this->getContextNavItemId() && $menu) {
-            $menuItem = $menu->find()->where(['id' => $this->getContextNavItemId()])->one();
+            $menuItem = $menu->find()->where(['id' => $this->getContextNavItemId()])->includeHidden()->one();
             $this->resetContext();
             return Url::startTrailing(preg_replace("/$moduleName/", $menuItem->link, $response, 1));
         }
@@ -104,7 +104,7 @@ class UrlManager extends \yii\web\UrlManager
             $moduleObject = Yii::$app->getModule($moduleName);
             if (method_exists($moduleObject, 'setContext') && !empty($moduleObject->context) && $menu) {
                 $options = $moduleObject->getContextOptions();
-                $menuItem = $menu->find()->where(['id' => $options['navItemId']])->one();
+                $menuItem = $menu->find()->where(['id' => $options['navItemId']])->includeHidden()->one();
                 return Url::startTrailing(preg_replace("/$moduleName/", $menuItem->link, $response, 1));
             }
         }
