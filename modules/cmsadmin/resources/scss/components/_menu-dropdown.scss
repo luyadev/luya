@@ -21,7 +21,7 @@ menu-dropdown,
 			content: "";
 			position: absolute;
 			background-color: $grey--darken;
-			height: 25px;
+			height: 100%;
 			width: 2px;
 			left: 11px;
 			top: -5px;
@@ -35,10 +35,10 @@ menu-dropdown,
 			left: 11px;
 			top: 11px;
 		}
-	}
 
-	.menu-dropdown__list > .menu-dropdown__item:last-of-type:before {
-		height: 17px;
+		&:last-of-type:before {
+			height: 17px;
+		}
 	}
 }
 
