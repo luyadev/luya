@@ -141,6 +141,7 @@ input[type="checkbox"]:checked + .input__label:before {
 .input--textarea .input__field {
 	resize: vertical;
 	padding: 15px 10px;
+	height: 100px;
 }
 
 [type="checkbox"] + label,

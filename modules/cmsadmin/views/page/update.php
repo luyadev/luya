@@ -158,7 +158,11 @@
 
                                     <!-- LANGUAGE SWITCH -->
                                     <div class="toolbar__group langswitch">
-                                        <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'[ lighten-3 ]' : !AdminLangService.isInSelection(lang.short_code)}" class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ][ white-text green ]">{{lang.name}}</a>
+                                        <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'langswitch__item--active' : AdminLangService.isInSelection(lang.short_code)}" class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ] ng-binding ng-scope">
+                                            <span class="flag flag--{{lang.short_code}}">
+                                                <span class="flag__fallback">{{lang.name}}</span>
+                                            </span>
+                                        </a>
                                     </div>
                                     <!-- /LANGUAGE SWITCH -->
 

@@ -7,6 +7,14 @@
     float: left;
     border-radius: 0;
 
+	color: color("shades", "black");
+	background-color: color("blue", "lighten-4");
+
+	&.langswitch__item--active,
+	&:hover {
+		background-color: color("blue", "lighten-1");
+	}
+
     &:first-child {   
         border-radius: 4px 0 0 4px;
     }

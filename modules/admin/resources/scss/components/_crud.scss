@@ -4,3 +4,30 @@
 	margin-top: 17px;
 	float: right;
 }
+
+.crud__i18n-col {
+	position: relative;
+	float: left;
+	width: 100%;
+	padding-left: 15px;
+
+	.input--text .input__field,
+	.input--textarea .input__field {
+		padding-right: 38px;
+	}
+
+	@for $i from 1 through 12 {
+		&.crud__i18n-col--#{$i} {
+			width: (100% / 12) * $i;
+		}
+	}
+}
+
+.crud__flag {
+	position: absolute;
+	top: 50%;
+	right: 11px;
+	z-index: 50;
+	line-height: 1em;
+	margin-top: -0.5em;
+}
