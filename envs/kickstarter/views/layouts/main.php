@@ -31,7 +31,16 @@ use yii\helpers\Url;
                 <div class="col-md-3"  id="nav">
                     <ul>
                     <?php foreach (Yii::$app->menu->find()->where(['parent_nav_id' => 0, 'cat' => 'default'])->all() as $item): ?>
-                        <li<? if($item->isActive): ?> class="active"<?endif;?>><a href="<?= $item->link; ?>"><?= $item->title; ?></a></li>
+                        <li>
+                            <a <? if($item->isActive): ?> class="active"<?endif;?> href="<?= $item->link; ?>"><?= $item->title; ?></a>
+                            <? if($item->hasChildren()): ?>
+                            <ul>
+                                <? foreach($item->children as $child): ?>
+                                    <li><a href="<?= $child->link; ?>">&raquo; <?= $child->title; ?></a>
+                                <? endforeach; ?>
+                            </ul>
+                            <? endif; ?>
+                        </li>
                     <?php endforeach; ?>
                     </ul>
                 </ul>
