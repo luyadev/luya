@@ -7,7 +7,11 @@
 }
 
 #header h1 {
-	padding:30px; color:white; margin:0px; font-weight:400;
+	padding:10px 0px; color:white; margin:0px; font-weight:400;
+}
+
+#header h2 {
+    padding:10px 0px; color:white; margin:0px; font-weight:200; font-size:18px;
 }
 
 #header h1 small {
@@ -19,19 +23,15 @@
 }
 
 #nav {
-	background-color:#e3f2fd;
+	background-color:#e3f2fd; padding:10px;
 }
 
 #nav ul {
 	list-style-type:none; margin:0px; padding:0px;
 }
 
-#nav ul li {
-	display:inline-block;
-}
-
 #nav ul li a {
-	display:inline-block; padding:20px; color:#0d47a1;
+	display:block; padding:10px; color:#0d47a1;
 }
 
 #nav ul .active, #nav ul li a:hover {
@@ -43,7 +43,7 @@
 }
 
 #content {
-	min-height:450px; margin-top:40px;
+	min-height:450px; margin-top:20px;
 }
 
 #content h1 {
@@ -56,6 +56,10 @@
 
 #content p {
 	font-weight:300; font-size:19px;
+}
+
+#footer {
+	margin-top:20px;
 }
 
 #footer h4 {

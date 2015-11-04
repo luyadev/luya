@@ -66,10 +66,10 @@ class Parser
     {
         $alias = false;
         if (is_numeric($result['value'])) {
-            $link = Yii::$app->links->findOne(['nav_id' => $result['value'], 'show_hidden' => true]);
-            if ($link) {
-                $href = $link['full_url'];
-                $alias = $link['title'];
+            $menuItem = Yii::$app->menu->find()->where(['nav_id' => $result['value'], 'show_hidden' => true])->one();
+            if ($menuItem) {
+                $href = $menuItem->link;
+                $alias = $menuItem->title;
             } else {
                 $href = '#link_not_found';
             }

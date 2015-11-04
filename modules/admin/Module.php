@@ -62,8 +62,8 @@ class Module extends \admin\base\Module
             'adminuser' => [
                 'class' => '\admin\components\AdminUser',
             ],
-            'menu' => [
-                'class' => '\admin\components\Menu',
+            'adminmenu' => [
+                'class' => '\admin\components\AdminMenu',
             ],
             'storage' => [
                 'class' => '\admin\components\Storage',

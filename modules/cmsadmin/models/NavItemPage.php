@@ -66,7 +66,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
 
         return $twig->render($this->layout->view_file, [
             'placeholders' => $insertion,
-            'activeUrl' => Yii::$app->links->activeUrl, /* @todo remove: activeUrl already set via twig component ? */
+            'activeUrl' => Yii::$app->menu->current->link, /* @todo remove: activeUrl already set via twig component ? */
         ]);
     }
 

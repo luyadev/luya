@@ -2,18 +2,45 @@
 
 namespace cms\menu;
 
+use Yii;
+
 class Item extends \yii\base\Object
 {
     public $itemArray = [];
+    
+    public function getId()
+    {
+        return $this->itemArray['id'];
+    }
+    
+    public function getNavId()
+    {
+        return $this->itemArray['nav_id'];
+    }
+    
+    public function getParentNavId()
+    {
+        return $this->itemArray['parent_nav_id'];
+    }
     
     public function getTitle()
     {
         return $this->itemArray['title'];
     }
     
+    public function getAlias()
+    {
+        return $this->itemArray['alias'];
+    }
+    
     public function getLink()
     {
         return $this->itemArray['link'];
+    }
+    
+    public function getIsActive()
+    {
+        return (Yii::$app->menu->current->link == $this->link);
     }
     
     public function getChildren()

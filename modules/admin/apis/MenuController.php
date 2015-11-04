@@ -13,17 +13,17 @@ class MenuController extends \admin\base\RestController
 {
     public function actionIndex()
     {
-        return Yii::$app->menu->getModules();
+        return Yii::$app->adminmenu->getModules();
     }
 
     public function actionItems($nodeId)
     {
-        return Yii::$app->menu->getModuleItems($nodeId);
+        return Yii::$app->adminmenu->getModuleItems($nodeId);
     }
 
     public function actionDashboard($nodeId)
     {
-        $data = Yii::$app->menu->getNodeData($nodeId);
+        $data = Yii::$app->adminmenu->getNodeData($nodeId);
         $accessList = [];
 
         foreach ($data['groups'] as $groupkey => $groupvalue) {

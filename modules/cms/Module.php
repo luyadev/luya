@@ -37,7 +37,7 @@ class Module extends \luya\base\Module
             'links' => [
                 'class' => 'cms\components\Links',
             ],
-            'newmenu' => [
+            'menu' => [
                 'class' => 'cms\components\Menu',
             ]
         ];

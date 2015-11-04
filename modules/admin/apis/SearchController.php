@@ -16,7 +16,7 @@ class SearchController extends \admin\base\RestController
         $search = [];
         $module = Yii::$app->getModule('admin');
 
-        foreach (Yii::$app->menu->getModules() as $node) {
+        foreach (Yii::$app->adminmenu->getModules() as $node) {
             if (isset($node['searchModelClass']) && !empty($node['searchModelClass'])) {
                 $model = Yii::createObject($node['searchModelClass']);
                 if (!$model instanceof \admin\base\GenericSearchInterface) {
@@ -32,7 +32,7 @@ class SearchController extends \admin\base\RestController
             }
         }
 
-        foreach (Yii::$app->menu->getItems() as $api) {
+        foreach (Yii::$app->adminmenu->getItems() as $api) {
             if ($api['permissionIsApi']) {
                 $ctrl = $module->createController($api['permssionApiEndpoint']);
                 $data = $ctrl[0]->runAction('search', ['query' => $query]);

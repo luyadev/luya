@@ -1,18 +1,12 @@
 <?php
-
-use yii\helpers\Url as YiiUrl;
-use cms\helpers\Url as CmsUrl;
-
-$composition = Yii::$app->composition;
-$links = Yii::$app->links;
-
+use yii\helpers\Url;
 ?>
 <html>
     <head>
         <title>Luya &mdash; <?= $this->title; ?></title>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-        <base href="<?= YiiUrl::base(true); ?>/" />
+        <base href="<?= Url::base(true); ?>/" />
         <?php $this->head() ?>
     </head>
     <body>
@@ -20,14 +14,9 @@ $links = Yii::$app->links;
         <div id="header">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4">
-                        <h1>Luya Website <small>on <?= YiiUrl::base(true); ?></small></h1>
-                    </div>
-                    <div class="col-md-4">
-                        <form method="get" action="<?= CmsUrl::toModule('crawler'); ?>">
-                            <input type="text" name="query" />
-                            <input type="submit" value="Go" />
-                        </form>
+                    <div class="col-md-6">
+                        <h1>Luya Website</h1>
+                        <h2><?= Url::base(true); ?></h2>
                     </div>
                     <div class="col-md-4">
                         <div class="git pull-right">
@@ -37,24 +26,20 @@ $links = Yii::$app->links;
                 </div>
             </div>
         </div>
-        <div id="nav">
-            <div class="container">
-                <ul>
-                    <?php foreach ($links->findByArguments(['cat' => 'default', 'lang' => $composition->getKey('langShortCode'), 'parent_nav_id' => 0]) as $item): ?>
-                        <li class="<?= ($links->activeUrl == $item['url']) ? "active" : ""; ?>"><a href="<?= $item['full_url'];?>"><?= $item['title']; ?></a></li>
+        <div class="container" id="content">
+            <div class="row">
+                <div class="col-md-3"  id="nav">
+                    <ul>
+                    <?php foreach (Yii::$app->menu->find()->where(['parent_nav_id' => 0, 'cat' => 'default'])->all() as $item): ?>
+                        <li<? if($item->isActive): ?> class="active"<?endif;?>><a href="<?= $item->link; ?>"><?= $item->title; ?></a></li>
                     <?php endforeach; ?>
+                    </ul>
                 </ul>
+                </div>
+                <div class="col-md-9">
+                    <?= $content; ?>
+                </div>
             </div>
-            <div class="container" style="background-color: red;">
-                <ul>
-                    <? foreach(Yii::$app->links->findByArguments(['cat' => 'default', 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(Yii::$app->links, 2)]) as $item): ?>
-                        <li><a href="<?= $item['full_url'];?>"><?= $item['title']; ?></a></li>
-                    <? endforeach; ?>
-                </ul>
-            </div>
-        </div>
-        <div id="content">
-            <?= $content; ?>
         </div>
         <div id="footer">
             <div class="container divider">

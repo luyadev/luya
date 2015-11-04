@@ -45,7 +45,7 @@ class Query extends \yii\base\Object
     public function getMenu()
     {
         if ($this->_menu === null) {
-            $this->_menu = Yii::$app->get('newmenu'); // @todo rename to menu on release
+            $this->_menu = Yii::$app->get('menu');
         }
         
         return $this->_menu;
@@ -54,24 +54,24 @@ class Query extends \yii\base\Object
     /**
      * Query where similar behavior of filtering items
      * 
-     * ### Operator Filtering
+     * **Operator Filtering**
      * 
      * ```php
      * where(['operator', 'field', 'value']);
      * ```
      * 
      * Allowed operators
-     * + < *expression where field is smaller then value*
-     * + > *expression where field is bigger then value*
-     * + = *expression where field is equal value*
-     * + <= *expression where field is small or equal then value*
-     * + >= *expression where field is bigger or equal then value*
-     * + == *expression where field is equal to the value and even the type must be equal*
+     * + **<** expression where field is smaller then value.
+     * + **>** expression where field is bigger then value.
+     * + **=** expression where field is equal value.
+     * + **<=** expression where field is small or equal then value.
+     * + **>=** expression where field is bigger or equal then value.
+     * + **==** expression where field is equal to the value and even the type must be equal.
      * 
      * Only one operator speific argument can be provided, to chain another expression
      * use the `andWhere()` method.
      * 
-     * ### Multi Dimension Filtering
+     * **Multi Dimension Filtering**
      * 
      * The most common case for filtering items is the equal expression combined with
      * add statements.
@@ -94,9 +94,9 @@ class Query extends \yii\base\Object
     public function where(array $args)
     {
         foreach($args as $key => $value) {
-            if (in_array($value, $this->_whereOperators)) {
+            if (in_array($value, $this->_whereOperators, true)) {
                 if (count($args) !== 3) {
-                    throw new Exception("Wrong where expression, see http://luya.io/api/cms-menu-query.html#where()-detail");
+                    throw new Exception(sprintf("Wrong where(['%s']) condition, see http://luya.io/api/cms-menu-query.html#where()-detail for all available conditions.", implode("', '", $args)));
                 }
                 $this->_where[] = ['op' => $args[0], 'field' => $args[1], 'value' => $args[2]];
                 break;
@@ -176,7 +176,7 @@ class Query extends \yii\base\Object
         $data = $this->filter($this->_where, $this->menu->languageContainerData($this->lang));
         
         if (count($data) == 0) {
-            throw new Exception("Could not find an element for this where conditions.");
+            return false;
         }
         
         return static::createItemObject(array_values($data)[0]);

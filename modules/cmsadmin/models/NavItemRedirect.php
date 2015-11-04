@@ -29,8 +29,8 @@ class NavItemRedirect extends \cmsadmin\base\NavItemType
     {
         switch($this->type) {
             case self::TYPE_INTERNAL_PAGE:
-                $link = Yii::$app->links->findOne(['nav_id' => $this->value]);
-                $url = Url::trailing(Yii::$app->urlManager->baseUrl) . $link['full_url'];
+                $menuItem = Yii::$app->menu->find()->where(['nav_id' => $this->value])->one();
+                $url = Url::trailing(Yii::$app->urlManager->baseUrl) . $menuItem->link;
                 break;
             case self::TYPE_EXTERNAL_URL:
                 $url = $this->value;

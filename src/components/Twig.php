@@ -20,6 +20,7 @@ class Twig extends \yii\base\Component
     public function getFunctions()
     {
         return [
+            /*
             'links' => function ($cat, $lang, $parent_nav_id) {
                 return Yii::$app->links->findAll(['cat' => $cat, 'lang' => $lang, 'parent_nav_id' => (int) $parent_nav_id]);
             },
@@ -29,6 +30,7 @@ class Twig extends \yii\base\Component
             'linkActivePart' => function ($part) {
                 return Yii::$app->links->getActiveUrlPart($part);
             },
+            */
             'asset' => function ($name) {
                 return Yii::$app->getAssetManager()->getBundle($name);
             },
@@ -57,7 +59,7 @@ class Twig extends \yii\base\Component
     {
         $twig = new \Twig_Environment($loader, ['autoescape' => false, 'debug' => YII_DEBUG]);
         $twig->addExtension(new \Twig_Extension_Debug());
-        $twig->addGlobal('activeUrl', Yii::$app->links->activeUrl);
+        //$twig->addGlobal('activeUrl', Yii::$app->links->activeUrl);
         foreach ($this->getFunctions() as $name => $lambda) {
             $twig->addFunction(new \Twig_SimpleFunction($name, $lambda));
         }

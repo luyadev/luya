@@ -21,9 +21,9 @@ class Url
         $model = NavItem::findNavItem($moduleName);
         
         if ($model) {
-            $link = Yii::$app->links->findOneByArguments(['id' => $model['id']]);
-            if ($link) {
-                return $link['full_url'];
+            $menuItem = Yii::$app->menu->find()->where(['id' => $model['id']])->one();
+            if ($menuItem) {
+                return $menuItem->link;
             }
         }
 

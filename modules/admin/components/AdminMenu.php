@@ -4,7 +4,7 @@ namespace admin\components;
 
 use Yii;
 
-class Menu extends \yii\base\Component
+class AdminMenu extends \yii\base\Component
 {
     private $_menu = null;
 

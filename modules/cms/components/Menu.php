@@ -8,41 +8,45 @@ use yii\db\Query as DbQuery;
 use cms\menu\Query as MenuQuery;
 
 /**
- * Concept:
+ * Menu Component
  * 
- * Return all for the current language (if not specific)
- * 
- * ```php
- * foreach(Yii::$app->menu->all() as $item) {
- * 
- * }
- * ```
- * 
- * ### Add Query
+ * **Query menu data**
  * 
  * ability to add multiple querys as "AND" chain. like below: parent_nav_id = 0 AND parent_nav_id = 1
  * 
  * ```php
- * foreach(Yii::$app->menu->where(['parent_nav_id' => 0, 'parent_nav_id' => 1])->all() as $item) {
- *     
+ * foreach(Yii::$app->menu->find()->where(['parent_nav_id' => 0, 'parent_nav_id' => 1])->all() as $item) {
+ *     echo $item->title;
  * }
  * ```
  * 
  * Find one item:
  * 
  * ```php
- * $item = Yii::$app->menu->where(['id'])->one();
+ * $item = Yii::$app->menu->find()->where(['id' => 1])->one();
  * ```
  * 
+ * If the element coult nod be found, one will return *false*.
  * 
- * declaration of $item:
+ * **Getter methods of an item**
  * 
  * ```php
- * $item->getTitle(); //
- * $item->getLink(); // /link/to/somewhere
- * $item->getChildren(); // returns a specific query on the current item
- * $item->getParent(); // return specific
+ * $item->getTitle();
+ * $item->getLink();
+ * $item->getAlias();
+ * $item->getChildren();
+ * $item->getParent();
  * $item->teardown();
+ * ```
+ * 
+ * All getter methods can be access like
+ * 
+ * ```php
+ * $item->title;
+ * $item->link;
+ * $item->alias;
+ * $item->childeren;
+ * $item->parent;
  * ```
  * 
  * Get current active Item
@@ -59,12 +63,9 @@ use cms\menu\Query as MenuQuery;
  * 
  * Example to get Breadcrumbs:
  * 
- * ```php
- * foreach(Yii::$app->menu->current->teardown() as $item) {
- *     echo "<a href='" . $item->link . "'>" . item->title . "</a>"; // getter methodes can be accessed as property name as of yii object definitons
- * }
- * ```
+ * @TBD
  * 
+ * @todo add menu method to get breadcrumbs
  * @since 1.0.0-beta1
  * @author nadar
  */
@@ -74,9 +75,13 @@ class Menu extends \yii\base\Component
     
     public $cacheExpire = 3600;
     
-    public $composition = null;
-    
     public $request = null;
+    
+    private $_composition = null;
+    
+    private $_current = null;
+    
+    private $_currentAppendix = null;
     
     private $_containerData = null;
     
@@ -87,11 +92,19 @@ class Menu extends \yii\base\Component
      * @param \luya\components\Composition $composition
      * @param array $config
      */
-    public function __construct(\yii\web\Request $request, \luya\components\Composition $composition, array $config = [])
+    public function __construct(\yii\web\Request $request, array $config = [])
     {
         $this->request = $request;
-        $this->composition = $composition;
         parent::__construct($config);
+    }
+    
+    public function getComposition()
+    {
+        if ($this->_composition === null) {
+            $this->_composition = Yii::$app->get('composition');
+        }
+        
+        return $this->_composition;
     }
     
     public function getContainerData()
@@ -135,10 +148,10 @@ class Menu extends \yii\base\Component
         foreach ((new DbQuery())->select(['short_code', 'id'])->from('admin_lang')->all() as $lang) {
             
             $data = (new DbQuery())->from(['cms_nav_item item'])
-            ->select(['item.id', 'item.nav_id', 'item.title', 'item.rewrite', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'nav.is_offline', 'item.nav_item_type', 'item.nav_item_type_id', 'cat.rewrite AS cat'])
+            ->select(['item.id', 'item.nav_id', 'item.title', 'item.rewrite', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'cat.rewrite AS cat'])
             ->leftJoin('cms_nav nav', 'nav.id=item.nav_id')
             ->leftJoin('cms_cat cat', 'cat.id=nav.cat_id')
-            ->where(['nav.is_deleted' => 0, 'item.lang_id' => $lang['id']])
+            ->where(['nav.is_deleted' => 0, 'item.lang_id' => $lang['id'], 'nav.is_offline' => 0])
             ->orderBy(['cat' => 'ASC', 'parent_nav_id' => 'ASC', 'nav.sort_index' => 'ASC'])
             ->indexBy('id')
             ->all();
@@ -163,8 +176,10 @@ class Menu extends \yii\base\Component
                 } else {
                     $rewrite = $item['rewrite'];
                 }
+                
                 // add link key
-                $item['link'] = $rewrite;
+                $item['alias'] = $rewrite;
+                $item['link'] = $this->composition->full . $rewrite;
                 // add redirect info if item_type 3
                 if ($item['nav_item_type'] == 3) {
                     $item['redirect'] = $redirectMap[$item['nav_item_type_id']];
@@ -181,23 +196,66 @@ class Menu extends \yii\base\Component
         return $container;
     }
     
+    public function resolveCurrent()
+    {
+        $requestPath = $this->request->get('path', null);
+        
+        if (empty($requestPath)) {
+            $requestPath = $this->home->alias;
+        }
+        
+        $urlParts = explode("/", $requestPath);
+        
+        
+        $item = $this->aliasMatch($urlParts);
+        
+        if (!$item) {
+            while (array_pop($urlParts)) {
+                if (($item = $this->aliasMatch($urlParts)) !== false) {
+                    break;
+                }
+            }
+        }
+        
+        if (!$item) {
+            throw new Exception("Unable to determine the current menu item.");
+        }
+        
+        $this->_currentAppendix = substr($requestPath, strlen($item->alias) + 1);
+        
+        return $item;
+    }
+    
+    private function aliasMatch(array $urlParts)
+    {
+        return (new MenuQuery(['menu' => $this]))->where(['alias' => implode('/', $urlParts)])->one();
+    }
+    
+    public function getCurrentAppendix()
+    {
+        if ($this->_current === null) {
+            $this->_current = $this->resolveCurrent();
+        }
+        
+        return $this->_currentAppendix;
+    }
+    
     public function getCurrent()
     {
-        $id = 1; // resolve id from request object
-        return (new MenuQuery())->one();
+        if ($this->_current === null) {
+            $this->_current = $this->resolveCurrent();
+        }
+        
+        return $this->_current;
     }
     
     public function getHome()
     {
-        return (new MenuQuery())->where(['is_home' => '1'])->one();   
+        return (new MenuQuery(['menu' => $this]))->where(['is_home' => '1'])->one();   
     }
     
-    public function where(array $args)
+    public function find()
     {
-        /**
-         * MenuFilter::one();
-         * MenuFilter::all();
-         */
-        return (new MenuQuery(['menu' => $this]))->where($args);
-    }
+        return (new MenuQuery(['menu' => $this]));
+    }    
 }

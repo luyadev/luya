@@ -8,6 +8,8 @@ use cmsadmin\models\Cat;
 use admin\models\Lang;
 use cmsadmin\models\NavItemRedirect;
 
+trigger_error("The Links component is deprecated, use Menu component instead", E_USER_DEPRECATED);
+
 /**
  * Links component array base:.
  * 

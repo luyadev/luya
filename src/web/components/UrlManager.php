@@ -78,8 +78,9 @@ class UrlManager extends \yii\web\UrlManager
         }
         */
 
-        $links = Yii::$app->get('links', false);
-
+        //$links = Yii::$app->get('links', false);
+        $menu = Yii::$app->get('menu', false);
+        
         $composition = Yii::$app->composition->getFull();
 
         $originalParams = $params;
@@ -100,11 +101,13 @@ class UrlManager extends \yii\web\UrlManager
         $params = (array) $params;
         $moduleName = \luya\helpers\Url::fromRoute($params[0], 'module');
 
-        if ($this->getContextNavItemId() && $links !== null) {
-            $link = $links->findOne(['id' => $this->getContextNavItemId(), 'show_hidden' => true]);
+        if ($this->getContextNavItemId() && $menu) {
+            $menuItem = $menu->find()->where(['id' => $this->getContextNavItemId()])->one();
+            
+            //$link = $links->findOne(['id' => $this->getContextNavItemId(), 'show_hidden' => true]);
             $this->resetContext();
 
-            return preg_replace("/$moduleName/", $composition.$link['url'], $response, 1);
+            return preg_replace("/$moduleName/", $menuItem->link, $response, 1);
         }
 
         $context = false;
@@ -113,11 +116,11 @@ class UrlManager extends \yii\web\UrlManager
             $moduleObject = Yii::$app->getModule($moduleName);
 
             if (method_exists($moduleObject, 'setContext') && !empty($moduleObject->context)) {
-                if ($links !== null) {
+                if (!empty($menu)) {
                     $context = true;
                     $options = $moduleObject->getContextOptions();
-                    $link = $links->findOne(['id' => $options['navItemId'], 'show_hidden' => true]);
-                    $response = preg_replace("/$moduleName/", $composition.$link['url'], $response, 1);
+                    $menuItem = $menu->find()->where(['id' => $options['navItemId']])->one();
+                    $response = preg_replace("/$moduleName/", $menuItem->link, $response, 1);
                 }
             }
         }
