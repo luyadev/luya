@@ -34,9 +34,7 @@ var observeLogin = function(form, url, secureUrl) {
                     $('#secureForm').hide();
                     $('#loginForm').hide();
                     $('#success').show();
-                    setTimeout(function() {
-                        location.reload();
-                    }, 1500);
+                    location.reload();
 				}
 			},
 			dataType: "json"
@@ -64,9 +62,7 @@ var observeLogin = function(form, url, secureUrl) {
                     $('#secureForm').hide();
                     $('#loginForm').hide();
 					$('#success').show();
-                    setTimeout(function() {
-                        location.reload();
-                    }, 1500);
+                    location.reload();
 				}
 			},
 			dataType: "json"
