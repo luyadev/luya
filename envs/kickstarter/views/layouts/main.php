@@ -1,11 +1,7 @@
 <?php
-
-use \yii\helpers\Url;
-
-$composition = Yii::$app->composition;
-$links = Yii::$app->links;
+use yii\helpers\Url;
 ?>
-<html lang="<?= $composition->getKey('langShortCode'); ?>">
+<html>
     <head>
         <title>Luya &mdash; <?= $this->title; ?></title>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
@@ -18,10 +14,11 @@ $links = Yii::$app->links;
         <div id="header">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-8">
-                        <h1>Luya Website <small>on <?= Url::base(true); ?></small></h1>
+                    <div class="col-md-6">
+                        <h1>Luya Website</h1>
+                        <h2><?= Url::base(true); ?></h2>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="git pull-right">
                             <a href="https://github.com/zephir/luya" target="_blank" alt="Luya on GitHub" title="Luya on GitHub"><i class="fa fa-github fa-4x"></i></a>
                         </div>
@@ -29,17 +26,20 @@ $links = Yii::$app->links;
                 </div>
             </div>
         </div>
-        <div id="nav">
-            <div class="container">
-                <ul>
-                    <?php foreach ($links->findByArguments(['cat' => 'default', 'lang' => $composition->getKey('langShortCode'), 'parent_nav_id' => 0]) as $item): ?>
-                        <li class="<?= ($links->activeUrl == $item['url']) ? "active" : ""; ?>"><a href="<?= $composition->getFull() . $item['url'];?>"><?= $item['title']; ?></a></li>
+        <div class="container" id="content">
+            <div class="row">
+                <div class="col-md-3"  id="nav">
+                    <ul>
+                    <?php foreach (Yii::$app->menu->find()->where(['parent_nav_id' => 0, 'cat' => 'default'])->all() as $item): ?>
+                        <li<? if($item->isActive): ?> class="active"<?endif;?>><a href="<?= $item->link; ?>"><?= $item->title; ?></a></li>
                     <?php endforeach; ?>
+                    </ul>
                 </ul>
+                </div>
+                <div class="col-md-9">
+                    <?= $content; ?>
+                </div>
             </div>
-        </div>
-        <div id="content">
-            <?= $content; ?>
         </div>
         <div id="footer">
             <div class="container divider">
