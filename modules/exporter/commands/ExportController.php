@@ -7,7 +7,7 @@ use luya\helpers\Zip;
 use luya\helpers\FileHelper;
 use Ifsnop\Mysqldump;
 
-class ExportController extends \luya\base\Command
+class ExportController extends \luya\console\Command
 {
     public function actionIndex()
     {

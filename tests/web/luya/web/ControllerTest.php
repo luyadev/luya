@@ -4,7 +4,7 @@ namespace tests\web\luya\base;
 
 use Yii;
 
-class StubController extends \luya\base\Controller
+class StubController extends \luya\web\Controller
 {
 }
 

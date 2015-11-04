@@ -57,7 +57,7 @@ class Composition extends \yii\base\Component implements \ArrayAccess
     /**    
      * Class constructor, to get data from DiContainer
      * 
-     * @param \luya\web\components\Request $request
+     * @param \luya\web\Request $request
      * @param array $config
      */
     public function __construct(\luya\web\Request $request, array $config = [])

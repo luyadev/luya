@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\cli;
+namespace tests\console;
 
 use Yii;
 
@@ -19,10 +19,10 @@ class Base extends \PHPUnit_Framework_TestCase
     {
         if ($this->app === null) {
             $this->app = new \luya\Boot();
-            $this->app->configFile = 'tests/cli/config.php';
+            $this->app->configFile = 'tests/console/config.php';
             $this->app->mockOnly = true;
             $this->app->setYiiPath(__DIR__.'/../../vendor/yiisoft/yii2/Yii.php');
-            $this->app->applicationCli();
+            $this->app->applicationConsole();
         }
     }
 

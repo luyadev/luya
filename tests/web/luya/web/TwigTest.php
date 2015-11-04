@@ -3,7 +3,7 @@
 namespace tests\web\luya\components;
 
 use Yii;
-use luya\components\Twig;
+use luya\web\Twig;
 
 /**
  * @todo readd links (new menu) component and tests

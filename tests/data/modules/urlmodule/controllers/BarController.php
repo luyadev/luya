@@ -2,7 +2,7 @@
 
 namespace tests\data\modules\urlmodule\controllers;
 
-class BarController extends \luya\base\Controller
+class BarController extends \luya\web\Controller
 {
     public function actionIndex()
     {

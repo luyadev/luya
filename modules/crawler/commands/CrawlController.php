@@ -12,7 +12,7 @@ use crawler\classes\CrawlPage;
  *
  * @author nadar
  */
-class CrawlController extends \luya\base\Command
+class CrawlController extends \luya\console\Command
 {
     public function actionIndex()
     {

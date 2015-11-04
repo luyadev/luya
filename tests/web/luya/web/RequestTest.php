@@ -3,7 +3,7 @@
 namespace tests\web\luya\web\components;
 
 use Yii;
-use luya\web\components\Request;
+use luya\web\Request;
 
 class RequestTest extends \tests\web\Base
 {

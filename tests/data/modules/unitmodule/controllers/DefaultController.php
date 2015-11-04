@@ -2,7 +2,7 @@
 
 namespace tests\data\modules\unitmodule\controllers;
 
-class DefaultController extends \luya\base\Controller
+class DefaultController extends \luya\web\Controller
 {
     public function actionIndex()
     {

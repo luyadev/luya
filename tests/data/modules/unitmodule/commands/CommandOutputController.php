@@ -2,7 +2,7 @@
 
 namespace tests\data\modules\unitmodule\commands;
 
-class CommandOutputController extends \luya\base\Command
+class CommandOutputController extends \luya\console\Command
 {
     public function actionSuccess()
     {

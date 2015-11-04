@@ -1,11 +1,11 @@
 <?php
 
-namespace luya\console\controllers;
+namespace luya\console\commands;
 
 use Yii;
 use yii\helpers\Console;
 
-class ModuleController extends \luya\console\Controller
+class ModuleController extends \luya\console\Command
 {
     public function actionCreate()
     {

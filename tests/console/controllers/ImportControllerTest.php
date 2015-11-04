@@ -1,10 +1,10 @@
 <?php
 
-namespace tests\cli\commands;
+namespace tests\console\controllers;
 
 use Yii;
 
-class ImportControllerTest extends \tests\cli\Base
+class ImportControllerTest extends \tests\console\Base
 {
     /*
     public function testCustomCommandSuccess()

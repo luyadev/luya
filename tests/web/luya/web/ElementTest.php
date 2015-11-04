@@ -8,7 +8,7 @@ class ElementTest extends \tests\web\Base
 {
     public function testElement()
     {
-        $element = new \luya\components\Element();
+        $element = new \luya\web\Element();
 
         $element->addElement('bar', function () {
             return 'baz';
@@ -20,7 +20,7 @@ class ElementTest extends \tests\web\Base
 
     public function testRenderElement()
     {
-        $element = new \luya\components\Element();
+        $element = new \luya\web\Element();
 
         $element->addElement('rnd', function ($param) use ($element) {
             return $element->render('rnd', ['pa' => $param, 'bar' => 'baz']);
@@ -53,14 +53,14 @@ class ElementTest extends \tests\web\Base
      */
     public function testNotExistingElement()
     {
-        $element = new \luya\components\Element();
+        $element = new \luya\web\Element();
         // throws: The requested element 'foobar' does not exists in the element list. You may register the element first with `addElement(name, closure)`.
         $element->foobar();
     }
     
     public function testGetNames()
     {
-        $element = new \luya\components\Element();
+        $element = new \luya\web\Element();
         $element->addElement('name', function() use ($element) {
             
         });
@@ -73,7 +73,7 @@ class ElementTest extends \tests\web\Base
     
     public function testGetElements()
     {
-        $element = new \luya\components\Element();
+        $element = new \luya\web\Element();
         
         $lmns = $element->getElements();
         

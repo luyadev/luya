@@ -1,8 +1,8 @@
 <?php
 
-namespace tests\web\luya\components;
+namespace tests\web\luya\web;
 
-use luya\web\components\Request;
+use luya\web\Request;
 
 /**
  * removed tests to implemented here (if not already)
@@ -30,7 +30,7 @@ class CompositionTest extends \tests\web\Base
         $request = new Request();
         $request->pathInfo = 'de/hello/world';
 
-        $composition = new \luya\components\Composition($request);
+        $composition = new \luya\web\Composition($request);
         
         $resolver = $composition->getResolvedPathInfo($request);
         $resolve = $resolver['route'];
@@ -48,7 +48,7 @@ class CompositionTest extends \tests\web\Base
         $request = new Request();
         $request->pathInfo = 'ch/de/hello/world';
 
-        $composition = new \luya\components\Composition($request);
+        $composition = new \luya\web\Composition($request);
         $composition->pattern = '<countryShortCode:[a-z]{2}>/<langShortCode:[a-z]{2}>';
 
         $resolver = $composition->getResolvedPathInfo($request);
@@ -69,7 +69,7 @@ class CompositionTest extends \tests\web\Base
         $request = new Request();
         $request->pathInfo = $url;
         
-        $composition = new \luya\components\Composition($request);
+        $composition = new \luya\web\Composition($request);
         $composition->pattern = $compUrl;
         
         return $composition->getResolvedPathInfo($request);

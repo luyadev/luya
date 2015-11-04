@@ -36,7 +36,7 @@ Eigene Konsolenbehle (auch commands gennant) werden innerhalb eines Modules im O
 
 namespace yourmodule\commands;
 
-class NotifyController extends \luya\base\Command
+class NotifyController extends \luya\console\Command
 {
     public function actionIndex()
     {

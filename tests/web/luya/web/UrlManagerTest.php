@@ -3,8 +3,8 @@
 namespace tests\web\luya\web\components;
 
 use Yii;
-use luya\web\components\UrlManager;
-use luya\web\components\Request;
+use luya\web\UrlManager;
+use luya\web\Request;
 
 /**
  * @author nadar

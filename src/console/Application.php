@@ -16,20 +16,20 @@ class Application extends \yii\console\Application
 
     /**
      * @var bool Mute the Applications ouput, this is used to make application
-     *           cli tests with no output. The `luya\base\Command` output/print methods are listening
+     *           cli tests with no output. The `luya\console\Controller` output/print methods are listening
      *           to this property.
      */
     public $mute = false;
     
     public $controllerMap = [
-        'migrate' => '\luya\console\controllers\MigrateController',
-        'crud' => '\luya\console\controllers\CrudController',
-        'module' => '\luya\console\controllers\ModuleController',
-        'command' => '\luya\console\controllers\CommandController',
-        'import' => '\luya\console\controllers\ImportController',
-        'setup' => '\luya\console\controllers\SetupController',
-        'health' => '\luya\console\controllers\HealthController',
-        'block' => '\luya\console\controllers\BlockController',
+        'migrate' => '\luya\console\commands\MigrateController',
+        'crud' => '\luya\console\commands\CrudController',
+        'module' => '\luya\console\commands\ModuleController',
+        'command' => '\luya\console\commands\CommandController',
+        'import' => '\luya\console\commands\ImportController',
+        'setup' => '\luya\console\commands\SetupController',
+        'health' => '\luya\console\commands\HealthController',
+        'block' => '\luya\console\commands\BlockController',
     ];
     
     /**

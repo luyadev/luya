@@ -80,7 +80,7 @@ namespace yourmodule\commands;
 /**
  * ./vendor/bin/luya command yourmodule notify
  */
-class NotifyController extends \luya\base\Command
+class NotifyController extends \luya\console\Command
 {
     public function actionIndex()
     {

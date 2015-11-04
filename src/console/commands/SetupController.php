@@ -1,13 +1,13 @@
 <?php
 
-namespace luya\console\controllers;
+namespace luya\console\commands;
 
 use Yii;
 use admin\models\Config;
 use admin\models\User;
 use admin\models\Group;
 
-class SetupController extends \luya\console\Controller
+class SetupController extends \luya\console\Command
 {
     private function insert($table, $fields)
     {

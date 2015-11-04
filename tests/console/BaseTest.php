@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\cli;
+namespace tests\console;
 
 use Yii;
 
@@ -15,10 +15,10 @@ use Yii;
  * @author nadar
  *
  */
-class BaseTest extends \tests\cli\Base
+class BaseTest extends \tests\console\Base
 {
     public function testApp()
     {
-        $this->assertInstanceOf('luya\cli\Application', Yii::$app);
+        $this->assertInstanceOf('luya\console\Application', Yii::$app);
     }
 }

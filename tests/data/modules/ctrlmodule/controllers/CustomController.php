@@ -2,7 +2,7 @@
 
 namespace tests\data\modules\ctrlmodule\controllers;
 
-class CustomController extends \luya\base\Controller
+class CustomController extends \luya\web\Controller
 {
     public function actionBar()
     {

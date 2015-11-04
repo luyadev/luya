@@ -1,11 +1,11 @@
 <?php
 
-namespace luya\console\controllers;
+namespace luya\console\commands;
 
 use Yii;
 use admin\models\Config;
 
-class ImportController extends \luya\console\Controller implements \luya\console\interfaces\ImportController
+class ImportController extends \luya\console\Command implements \luya\console\interfaces\ImportController
 {
     private $_dirs = [];
 
