@@ -37,6 +37,12 @@ class Query extends \yii\base\Object
     
     private $_whereOperators = ['<', '<=', '>', '>=', '=', '=='];
     
+    /**
+     * @var boolean Choose whetever hidden elements should be skipped in the where filtering
+     * process or not. Use `includeHidden()` to set $skipHidden to false;
+     */
+    public $skipHidden = true;
+    
     public function setMenu(\cms\components\Menu $menu)
     {
         $this->_menu = $menu;
@@ -127,6 +133,12 @@ class Query extends \yii\base\Object
         return $this;
     }
     
+    public function includeHidden()
+    {
+        $this->skipHidden = false;
+        return $this;
+    }
+    
     public function getLang()
     {
         if ($this->_lang === null) {
@@ -138,6 +150,10 @@ class Query extends \yii\base\Object
     
     public function arrayFilter($value, $field)
     {
+        if ($field == 'is_hidden' && $this->skipHidden === true && $value == 1) {
+            return false;
+        }
+        
         foreach($this->_where as $expression) {
             if ($expression['field'] == $field) {
                 switch($expression['op']) {
