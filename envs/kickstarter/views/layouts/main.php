@@ -32,11 +32,11 @@ use yii\helpers\Url;
                     <ul>
                     <?php foreach (Yii::$app->menu->find()->where(['parent_nav_id' => 0, 'cat' => 'default'])->all() as $item): ?>
                         <li>
-                            <a <? if($item->isActive): ?> class="active"<?endif;?> href="<?= $item->link; ?>"><?= $item->title; ?></a>
+                            <a<? if($item->isActive): ?> class="active"<?endif;?> href="<?= $item->link; ?>"><?= $item->title; ?></a>
                             <? if($item->hasChildren()): ?>
                             <ul>
                                 <? foreach($item->children as $child): ?>
-                                    <li><a href="<?= $child->link; ?>">&raquo; <?= $child->title; ?></a>
+                                    <li><a<? if($child->isActive): ?> class="active"<?endif;?> href="<?= $child->link; ?>">&raquo; <?= $child->title; ?></a>
                                 <? endforeach; ?>
                             </ul>
                             <? endif; ?>
