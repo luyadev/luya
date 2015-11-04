@@ -95,7 +95,7 @@ class Image
         $imageObject = $this->get($imageId);
 
         if (!$imageObject) {
-            throw new Exception("Image '$imageId' does not exist in database or storage system.");
+            return false;
         }
 
         if ($returnImageObject) {
