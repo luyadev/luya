@@ -3,6 +3,7 @@
 namespace cms\menu;
 
 use Yii;
+use cms\menu\Query;
 
 class Item extends \yii\base\Object
 {
@@ -43,9 +44,14 @@ class Item extends \yii\base\Object
         return (Yii::$app->menu->current->link == $this->link);
     }
     
+    public function hasChildren()
+    {
+        return ((new Query())->where(['parent_nav_id' => $this->navId])->one()) ? true : false;
+    }
+    
     public function getChildren()
     {
-        
+        return (new QUery())->where(['parent_nav_id' => $this->navId])->all();   
     }
     
     public function getParent()
