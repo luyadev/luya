@@ -143,7 +143,7 @@
     <div class="row">
         <div class="col s12" ng-show="data.redirect_type==1">
             <p>Auf welche Interne-Seite wollen Sie weiterleiten?</p>
-            <menu-dropdown style="border:1px solid:#F0F0F0; padding:10px;" nav-id="data.redirect_type_value" />
+            <menu-dropdown class="menu-dropdown" nav-id="data.redirect_type_value" />
         </div>
 
         <div class="col s12" ng-show="data.redirect_type==2">
@@ -173,12 +173,17 @@
 <!-- /CREATE MODULE FORM -->
 
 <script type="text/ng-template" id="menuDropdownReverse.html">
-<span ng-show="data.id == navId">[x]</span>
-<span ng-show="data.id != navId">[ ]</span>
-{{ data.title }} <button type="button" ng-click="changeModel(data)" class="btn btn-flat">Verwenden</button>
-<ul style="padding-left:10px;">
-    <li ng-repeat="data in data.nodes" ng-include="'menuDropdownReverse.html'"></li>
-</ul>
+
+    <div class="input">
+        <input type="radio" ng-checked="data.id == navId" />
+        <label ng-click="changeModel(data)">
+            <span class="menu-dropdown__label">{{ data.title }}</span>
+        </label>
+    </div>
+
+    <ul class="menu-dropdown__list">
+        <li class="menu-dropdown__item" ng-repeat="data in data.nodes" ng-include="'menuDropdownReverse.html'"></li>
+    </ul>
 </script>
 
 <!-- treeview item -->

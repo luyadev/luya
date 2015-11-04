@@ -142,3 +142,8 @@ input[type="checkbox"]:checked + .input__label:before {
 	resize: vertical;
 	padding: 15px 10px;
 }
+
+[type="checkbox"] + label,
+[type="radio"] + label {
+	padding-left: 30px !important;
+}

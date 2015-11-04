@@ -18,7 +18,12 @@
 				}
 			},
 			template : function() {
-				return '<div ng-repeat="cat in menu"><h5>{{cat.name}}</h5><ul><li ng-repeat="data in cat.__items" ng-include="\'menuDropdownReverse.html\'"></li></ul></div>';
+				return '<div class="menu-dropdown__category" ng-repeat="cat in menu">' +
+                            '<b class="menu-dropdown__title">{{cat.name}}</b>' +
+                            '<ul class="menu-dropdown__list">' +
+                                '<li class="menu-dropdown__item" ng-repeat="data in cat.__items" ng-include="\'menuDropdownReverse.html\'"></li>' +
+                            '</ul>' +
+                        '</div>';
 			}
 		}
 	});
