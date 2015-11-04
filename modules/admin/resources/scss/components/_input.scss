@@ -52,12 +52,18 @@ $input--date-width:			50px;
 	}
 
 	.input--multiple-checkboxes &,
+	.input--radios &,
 	.input--image-upload &,
 	.input--image-array &,
 	.input--file-upload &,
 	.input--file-array &,
 	.input--list & {
 		vertical-align: top;
+	}
+
+	.input--multiple-checkboxes &,
+	.input--radios & {
+		margin-top: 5px;
 	}
 }
 

@@ -63,7 +63,7 @@
 				})
 			}, template: function() {
 				//return '<div class="input-field col s{{grid}}"><input placeholder="{{placeholder}}" name="{{name}}" id="{{id}}" ng-class="{\'invalid\' : !isValid }" type="number" ng-model="model" min="0" /><label for="{{id}}">{{label}}</label></div>';
-                return '<div class="input input--text"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" name="{{name}}" ng-model="model" type="number" min="0" class="input__field" ng-class="{\'invalid\' : !isValid }" placeholder="{{placeholder}}" /><div class="input__active"></div></div></div>';
+                return '<div class="input input--text"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" name="{{name}}" ng-model="model" type="number" min="0" class="input__field" ng-class="{\'invalid\' : !isValid }" placeholder="{{placeholder}}" /></div></div>';
 			}
 		}
 	});
@@ -82,7 +82,7 @@
 			},
 			template: function() {
                 //return '<div class="input-field col s{{grid}}"><input placeholder="{{placeholder}}" id="{{id}}" name="{{name}}" ng-model="model" type="text" /><label for="{{id}}">{{label}}</label></div>';
-                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /><div class="input__active"></div></div></div>';
+                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /></div></div>';
 			}
 		}
 	});
@@ -101,7 +101,7 @@
 			},
 			template: function() {
 				//return '<div class="input-field col s{{grid}}"><textarea placeholder="{{placeholder}}" id="{{id}}" name="{{name}}" ng-model="model" class="materialize-textarea"></textarea><label for="{{id}}">{{label}}</label></div>';
-                return '<div class="input input--textarea" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><textarea id="{{id}}" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}"></textarea><div class="input__active"></div></div></div>';
+                return '<div class="input input--textarea" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><textarea id="{{id}}" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}"></textarea></div></div>';
 			}
 		}
 	});
@@ -118,7 +118,7 @@
 				"name": "@fieldname"
 			},
 			template: function() {
-                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" name="{{name}}" ng-model="model" type="password" class="input__field" placeholder="{{placeholder}}" /><div class="input__active"></div></div></div>';
+                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" name="{{name}}" ng-model="model" type="password" class="input__field" placeholder="{{placeholder}}" /></div></div>';
 			}
 		}
 	});
@@ -157,7 +157,7 @@
 	/**
 	 * options = {'true-value' : 1, 'false-value' : 0};
 	 */
-	zaa.directive("zaaCheckbox", function() {
+	zaa.directive("zaaq", function() {
 		return {
 			restrict: "E",
 			scope: {
@@ -179,7 +179,7 @@
 			},
 			template: function() {
 				return '<div class="input input--single-checkbox">' +
-                            '<input type="checkbox" id="{{id}}" name="{{name}}" ng-true-value="{{valueTrue}}" ng-false-value="{{valueFalse}}" ng-model="model" type="checkbox" />' +
+                            '<input id="{{id}}" name="{{name}}" ng-true-value="{{valueTrue}}" ng-false-value="{{valueFalse}}" ng-model="model" type="checkbox" />' +
                             '<label for="{{id}}" class="input__label">{{label}}</label>' +
                         '</div>';
 			}
@@ -236,13 +236,14 @@
 			},
 			template: function() {
 				return '<div class="input input--multiple-checkboxes">' +
-                    '<label class="input__label">{{label}}</label>' +
-                    '<div class="input__field-wrapper">' +
-                        '<div ng-repeat="(k, item) in options.items track by k">' +
-                            '<input type="checkbox" ng-checked="isChecked(item)" id="{{random}}_{{k}}" ng-click="toggleSelection(item)" />' +
-                            '<label for="{{random}}_{{k}}">{{item.label}}</label>' +
-                        '</div>' +
-                    '</div>';
+                    		'<label class="input__label">{{label}}</label>' +
+                    		'<div class="input__field-wrapper">' +
+                        		'<div ng-repeat="(k, item) in options.items track by k">' +
+                            		'<input type="checkbox" ng-checked="isChecked(item)" id="{{random}}_{{k}}" ng-click="toggleSelection(item)" />' +
+                            		'<label for="{{random}}_{{k}}">{{item.label}}</label>' +
+                        		'</div>' +
+                    		'</div>' +
+                		'</div>';
 			}
 		}
 	});
