@@ -6,6 +6,8 @@ use Exception;
 use Yii;
 use yii\db\Query as DbQuery;
 use cms\menu\Query as MenuQuery;
+use cms\menu\cms\menu;
+use cms\menu\cms\menu;
 
 /**
  * Menu Component
@@ -258,4 +260,14 @@ class Menu extends \yii\base\Component
     {
         return (new MenuQuery(['menu' => $this]));
     }    
+    
+    public function findAll(array $whereArguments)
+    {
+        return (new MenuQuery())->where($whereArguments)->all();
+    }
+    
+    public function findOne(array $whereArguments)
+    {
+        return (new MenuQuery())->where($whereArguments)->one();
+    }
 }
