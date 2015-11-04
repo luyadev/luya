@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\cli;
+namespace luya\console;
 
 /**
  * Luya CLI Application.
@@ -22,14 +22,14 @@ class Application extends \yii\console\Application
     public $mute = false;
     
     public $controllerMap = [
-        'migrate' => '\luya\commands\MigrateController',
-        'crud' => '\luya\commands\CrudController',
-        'module' => '\luya\commands\ModuleController',
-        'command' => '\luya\commands\CommandController',
-        'import' => '\luya\commands\ImportController',
-        'setup' => '\luya\commands\SetupController',
-        'health' => '\luya\commands\HealthController',
-        'block' => '\luya\commands\BlockController',
+        'migrate' => '\luya\console\controllers\MigrateController',
+        'crud' => '\luya\console\controllers\CrudController',
+        'module' => '\luya\console\controllers\ModuleController',
+        'command' => '\luya\console\controllers\CommandController',
+        'import' => '\luya\console\controllers\ImportController',
+        'setup' => '\luya\console\controllers\SetupController',
+        'health' => '\luya\console\controllers\HealthController',
+        'block' => '\luya\console\controllers\BlockController',
     ];
     
     /**
@@ -38,7 +38,7 @@ class Application extends \yii\console\Application
     public function coreComponents()
     {
         return array_merge($this->luyaCoreComponents(), [
-            'errorHandler' => ['class' => 'luya\cli\components\ErrorHandler'],
+            'errorHandler' => ['class' => 'luya\console\ErrorHandler'],
         ]);
     }
 }

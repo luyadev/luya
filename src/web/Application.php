@@ -17,12 +17,15 @@ class Application extends \yii\web\Application
     public function coreComponents()
     {
         return array_merge($this->luyaCoreComponents(), [
-            'request' => ['class' => 'luya\web\components\Request'],
-            'errorHandler' => ['class' => 'luya\web\components\ErrorHandler'],
-            'urlManager' => ['class' => 'luya\web\components\UrlManager'],
-            'view' => ['class' => 'luya\web\components\View'],
+            'request' => ['class' => 'luya\web\Request'],
+            'errorHandler' => ['class' => 'luya\web\ErrorHandler'],
+            'urlManager' => ['class' => 'luya\web\UrlManager'],
+            'view' => ['class' => 'luya\web\View'],
+            'element' => ['class' => 'luya\web\Element'],
+            'twig' => ['class' => 'luya\web\Twig'],
+            'composition' => ['class' => 'luya\web\Composition'],
             'assetManager' => [
-                'class' => 'luya\web\components\AssetManager',
+                'class' => 'luya\web\AssetManager',
                 'forceCopy' => YII_DEBUG,
                 'appendTimestamp' => !YII_DEBUG
             ],

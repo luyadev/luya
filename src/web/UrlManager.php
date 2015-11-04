@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\web\components;
+namespace luya\web;
 
 use Yii;
 use luya\helpers\Url;
@@ -17,7 +17,7 @@ class UrlManager extends \yii\web\UrlManager
 
     public $showScriptName = false;
 
-    public $ruleConfig = ['class' => '\luya\base\UrlRule'];
+    public $ruleConfig = ['class' => '\luya\web\UrlRule'];
 
     private $_contextNavItemId = false;
 

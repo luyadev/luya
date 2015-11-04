@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\base;
+namespace luya\web;
 
 /**
  * Base urlRule class used as ruleConfig in UrlManager Componenet.
@@ -9,7 +9,7 @@ namespace luya\base;
  * is a behavior of the UrlManger where is set like this:.
  * 
  * ```php
- * public $ruleConfig = ['class' => '\luya\base\UrlRule'];
+ * public $ruleConfig = ['class' => '\luya\web\UrlRule'];
  * ```
  * 
  * @author nadar

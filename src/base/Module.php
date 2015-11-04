@@ -196,7 +196,7 @@ abstract class Module extends \yii\base\Module
      *
      * @return void|string
      */
-    public function import(\luya\commands\ImportController $exec)
+    public function import(\luya\console\interfaces\ImportController $exec)
     {
         return false;
     }

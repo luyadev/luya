@@ -2,7 +2,7 @@
 
 namespace gallery\controllers;
 
-class CatController extends \luya\base\Controller
+class CatController extends \luya\web\Controller
 {
     public function actionIndex()
     {

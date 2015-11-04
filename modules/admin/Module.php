@@ -74,7 +74,7 @@ class Module extends \admin\base\Module
         ];
     }
 
-    public function import(\luya\commands\ImportController $import)
+    public function import(\luya\console\interfaces\ImportController $import)
     {
         return [
             '\\admin\\importers\\AuthImporter',

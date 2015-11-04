@@ -2,7 +2,7 @@
 
 namespace cms\components;
 
-class UrlRule extends \luya\base\UrlRule
+class UrlRule extends \luya\web\UrlRule
 {
     public function init()
     {

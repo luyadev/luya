@@ -30,7 +30,7 @@ Bower im Asset verwenden
 Die *Asset Datei* untersheide sich nicht gross von den üblichen [Projekt Assets](app-assets.md). Der massgebende unterschied liegt im `$sourcePath` welcher nun auf das Bower Verzeichnis zielen soll:
 
 ```php
-class JqueryAsset extends \luya\base\Asset
+class JqueryAsset extends \luya\web\Asset
 {
 	public $sourcePath = '@bower';
 

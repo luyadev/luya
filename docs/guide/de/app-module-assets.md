@@ -10,7 +10,7 @@ Ein Beispiel Asset Datei für *Javascript Kalender* Logik könnte wie folgt auss
 
 namespace app\assets;
 
-class JavascriptAsset extends \luya\base\Asset
+class JavascriptAsset extends \luya\web\Asset
 {
     public $sourcePath = '@meinmodule/resources/';
     

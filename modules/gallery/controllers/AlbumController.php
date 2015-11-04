@@ -2,7 +2,7 @@
 
 namespace gallery\controllers;
 
-class AlbumController extends \luya\base\Controller
+class AlbumController extends \luya\web\Controller
 {
     public function actionIndex($albumId)
     {

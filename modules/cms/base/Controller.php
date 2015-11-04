@@ -6,7 +6,7 @@ use Yii;
 use cms\helpers\Parser;
 use cmsadmin\models\NavItem;
 
-abstract class Controller extends \luya\base\Controller
+abstract class Controller extends \luya\web\Controller
 {
     /*
      * Use the view files inside the cms module and not within the user project code.

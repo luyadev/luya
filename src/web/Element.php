@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\components;
+namespace luya\web;
 
 use Yii;
 use Exception;

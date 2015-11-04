@@ -9,7 +9,7 @@ Um eine *Asset*-Klasse anzulegen erstellen wir im Projekt den Ordner `assets`. D
 ```php
 namespace app\assets;
 
-class LuyaioAsset extends \luya\base\Asset
+class LuyaioAsset extends \luya\web\Asset
 {
     public $sourcePath = '@app/resources';
     

@@ -6,7 +6,7 @@ use Yii;
 use crawleradmin\models\Index;
 use yii\helpers\Html;
 
-class DefaultController extends \luya\base\Controller
+class DefaultController extends \luya\web\Controller
 {
     public function actionIndex($query = null)
     {

@@ -2,7 +2,7 @@
 
 namespace admin\assets;
 
-class Jquery extends \luya\base\Asset
+class Jquery extends \luya\web\Asset
 {
     public $sourcePath = '@bower';
 

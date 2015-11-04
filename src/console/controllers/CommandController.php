@@ -1,13 +1,13 @@
 <?php
 
-namespace luya\commands;
+namespace luya\console\controllers;
 
 use Yii;
 
 /**
  * @author nadar
  */
-class CommandController extends \luya\base\Command
+class CommandController extends \luya\console\Controller
 {
     public function actionIndex($module, $route = 'default')
     {

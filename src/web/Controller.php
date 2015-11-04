@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\base;
+namespace luya\web;
 
 /**
  * Base class for all controllers in luya application Modules.

@@ -5,7 +5,7 @@ namespace gallery\controllers;
 use galleryadmin\models\Album;
 use galleryadmin\models\Cat;
 
-class AlbenController extends \luya\base\Controller
+class AlbenController extends \luya\web\Controller
 {
     public function actionIndex($catId)
     {

@@ -8,6 +8,8 @@ use luya\base\Module;
 
 /**
  * @author nadar
+ * @todo rebuild to DI contianer
+ * @todo add yii\base\Object
  */
 class Reflection
 {
@@ -27,8 +29,8 @@ class Reflection
     public function __construct(Module $module)
     {
         $this->module = $module;
-        $this->_request = new \luya\web\components\Request();
-        $this->_urlManager = new \luya\web\components\UrlManager();
+        $this->_request = new \luya\web\Request();
+        $this->_urlManager = new \luya\web\UrlManager();
         $this->_urlManager->addRules($module->urlRules, true);
     }
 

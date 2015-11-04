@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\base;
+namespace luya\console;
 
 use Yii;
 use yii\helpers\Console;
@@ -10,7 +10,7 @@ use yii\helpers\Console;
  *
  * @author nadar
  */
-abstract class Command extends \yii\console\Controller
+abstract class Controller extends \yii\console\Controller
 {
     /**
      * Helper method to see if the current Application is muted or not. If the Application is muted, no output

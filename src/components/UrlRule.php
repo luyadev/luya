@@ -4,7 +4,7 @@ namespace luya\components;
 
 use Yii;
 
-class UrlRule extends \luya\base\UrlRule
+class UrlRule extends \luya\web\UrlRule
 {
     private $_defaultClassName = null;
 

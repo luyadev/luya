@@ -10,7 +10,7 @@ use yii\filters\AccessControl;
  *
  * @author nadar
  */
-class Controller extends \luya\base\Controller
+class Controller extends \luya\web\Controller
 {
     /**
      * @var string Path to the admin layout

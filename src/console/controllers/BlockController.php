@@ -1,13 +1,13 @@
 <?php
 
-namespace luya\commands;
+namespace luya\console\controllers;
 
 use Yii;
 use yii\helpers\Inflector;
 use yii\helpers\FileHelper;
 use yii\helpers\Console;
 
-class BlockController extends \luya\base\Command
+class BlockController extends \luya\console\Controller
 {
     private function getModuleProposal()
     {

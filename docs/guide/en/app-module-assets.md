@@ -22,7 +22,7 @@ You have to create an EstoreAsset.php file inside of your Module Root path which
 
 namespace app\modules\estore;
 
-class EstoreAsset extends \luya\base\Asset
+class EstoreAsset extends \luya\web\Asset
 {
     public $sourcePath = '@estore/assets/';
     

@@ -46,9 +46,10 @@ abstract class Importer extends \yii\base\Object
      * 
      * @param \luya\commands\ImportController $importer Import Object `\luya\commands\ImportController`.
      */
-    public function __construct(\luya\commands\ImportController $importer)
+    public function __construct(\luya\console\interfaces\ImportController $importer, $config = [])
     {
         $this->_importer = $importer;
+        parent::__construct($config);
     }
 
     /**

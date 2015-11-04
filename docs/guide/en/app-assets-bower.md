@@ -26,7 +26,7 @@ asset
 -----
 create php asset class based in your config above:
 ```php
-class JqueryAsset extends \luya\base\Asset
+class JqueryAsset extends \luya\web\Asset
 {
 	public $sourcePath = '@bower';
 

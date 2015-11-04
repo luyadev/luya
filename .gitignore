@@ -20,9 +20,9 @@
 .idea/
 /.tern-project
 .phpintel/
-/build/
 
 ### LUYA
 phpunit.xml
 vendor/
 scripts/.subsplit
+/build/

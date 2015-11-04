@@ -1,11 +1,11 @@
 <?php
 
-namespace luya\commands;
+namespace luya\console\controllers;
 
 use Yii;
 use yii\helpers\FileHelper;
 
-class HealthController extends \luya\base\Command
+class HealthController extends \luya\console\Controller
 {
     public $folders = [
         'public_html/assets' => true,

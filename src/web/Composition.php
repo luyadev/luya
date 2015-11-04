@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\components;
+namespace luya\web;
 
 use Exception;
 use luya\helpers\Url;
@@ -60,7 +60,7 @@ class Composition extends \yii\base\Component implements \ArrayAccess
      * @param \luya\web\components\Request $request
      * @param array $config
      */
-    public function __construct(\luya\web\components\Request $request, array $config = [])
+    public function __construct(\luya\web\Request $request, array $config = [])
     {
         $this->request = $request;
         parent::__construct($config);

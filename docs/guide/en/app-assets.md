@@ -7,7 +7,7 @@ create an asset class extend from yii\web\AssetBundle like below:
 ```php
 namespace app\assets;
 
-class LuyaioAsset extends \luya\base\Asset
+class LuyaioAsset extends \luya\web\Asset
 {
     public $sourcePath = '@app/resources';
     

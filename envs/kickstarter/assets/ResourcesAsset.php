@@ -2,7 +2,7 @@
 
 namespace app\assets;
 
-class ResourcesAsset extends \luya\base\Asset
+class ResourcesAsset extends \luya\web\Asset
 {
     public $sourcePath = '@app/resources';
     

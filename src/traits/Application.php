@@ -10,9 +10,6 @@ trait Application
 
     public $luyaCoreComponents = [
         'mail' => ['class' => 'luya\components\Mail'],
-        'element' => ['class' => 'luya\components\Element'],
-        'twig' => ['class' => 'luya\components\Twig'],
-        'composition' => ['class' => 'luya\components\Composition'],  
     ];
     
     public function luyaCoreComponents()

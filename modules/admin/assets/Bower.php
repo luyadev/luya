@@ -2,7 +2,7 @@
 
 namespace admin\assets;
 
-class Bower extends \luya\base\Asset
+class Bower extends \luya\web\Asset
 {
     public $sourcePath = '@bower';
 

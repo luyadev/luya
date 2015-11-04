@@ -2,7 +2,7 @@
 
 namespace admin\assets;
 
-class Login extends \luya\base\Asset
+class Login extends \luya\web\Asset
 {
     public $sourcePath = '@admin/resources';
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\web\components;
+namespace luya\web;
 
 class ErrorHandler extends \yii\web\ErrorHandler
 {

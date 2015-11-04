@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\web\components;
+namespace luya\web;
 
 class AssetManager extends \yii\web\AssetManager
 {

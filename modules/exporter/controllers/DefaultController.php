@@ -5,7 +5,7 @@ namespace exporter\controllers;
 use Yii;
 use Exception;
 
-class DefaultController extends \luya\base\Controller
+class DefaultController extends \luya\web\Controller
 {
     public function actionIndex($p = null)
     {

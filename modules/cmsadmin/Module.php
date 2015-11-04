@@ -57,7 +57,7 @@ class Module extends \admin\base\Module
      * @todo do not only import, also update changes in the template
      * @todo how do we send back values into the executblae controller for output purposes?
      */
-    public function import(\luya\commands\ImportController $import)
+    public function import(\luya\console\interfaces\ImportController $import)
     {
         return [
             '\\cmsadmin\\importers\\BlockImporter',

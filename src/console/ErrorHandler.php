@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\cli\components;
+namespace luya\console;
 
 /**
  * Luya CLI ErrorHandler.

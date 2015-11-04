@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\commands;
+namespace luya\console\controllers;
 
 use Yii;
 use yii\helpers\Console;

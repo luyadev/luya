@@ -1,12 +1,12 @@
 <?php
 
-namespace luya\commands;
+namespace luya\console\controllers;
 
 use Yii;
 use yii\helpers\Console;
 use yii\helpers\Inflector;
 
-class CrudController extends \luya\base\Command
+class CrudController extends \luya\console\Controller
 {
     public function actionCreate()
     {

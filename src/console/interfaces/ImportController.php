@@ -1,8 +1,8 @@
 <?php
 
-namespace luya\interfaces;
+namespace luya\console\interfaces;
 
-interface ImportCommand
+interface ImportController
 {
     public function getDirectoryFiles($folderName);
 

@@ -4,7 +4,7 @@ namespace luya\base;
 
 use Exception;
 use luya\web\Application as WebApplication;
-use luya\cli\Application as CliApplication;
+use luya\console\Application as ConsoleApplication;
 use luya\helpers\ArrayHelper;
 
 /**
@@ -96,7 +96,7 @@ abstract class Boot
     public function run()
     {
         if ($this->getSapiName() === 'cli') {
-            return $this->applicationCli();
+            return $this->applicationConsole();
         }
 
         return $this->applicationWeb();
@@ -105,12 +105,17 @@ abstract class Boot
     /**
      * Run Cli-Application based on the provided config file.
      */
-    public function applicationCli()
+    public function applicationConsole()
     {
         $config = $this->getConfigArray();
         $config['defaultRoute'] = 'help';
+        if (isset($config['components'])) {
+            if (isset($config['components']['composition'])) {
+                unset($config['components']['composition']);
+            }
+        }
         $this->includeYii();
-        $this->app = new CliApplication(ArrayHelper::merge(['bootstrap' => ['luya\cli\Bootstrap']], $config));
+        $this->app = new ConsoleApplication(ArrayHelper::merge(['bootstrap' => ['luya\console\Bootstrap']], $config));
         if (!$this->mockOnly) {
             exit($this->app->run());
         }

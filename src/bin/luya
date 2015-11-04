@@ -18,4 +18,4 @@ foreach ($loaders as $file) {
 $boot = new \luya\Boot();
 $boot->configFile = 'configs/server.php';
 $boot->setYiiPath($vendor . '/yiisoft/yii2/Yii.php');
-$boot->applicationCli();
+$boot->applicationConsole();

@@ -2,7 +2,7 @@
 
 namespace app\assets;
 
-class AjaxBlockAsset extends \luya\base\Asset
+class AjaxBlockAsset extends \luya\web\Asset
 {
     public $sourcePath = '@app/resources';
     

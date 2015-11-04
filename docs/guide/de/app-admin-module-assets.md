@@ -12,7 +12,7 @@ Als Beispiel wird ein Javascript Asset eingebunden:
 
 namespace app\assets;
 
-class CalendarAsset extends \luya\base\Asset
+class CalendarAsset extends \luya\web\Asset
 {
     public $sourcePath = '@app/resources';
 

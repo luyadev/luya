@@ -205,7 +205,7 @@ Module with templates in @web directory
 ```php
 namespace cms\controllers;
 
-class DefaultController extends \luya\base\Controller
+class DefaultController extends \luya\web\Controller
 {
     public function actionIndex()
     {
@@ -219,7 +219,7 @@ Module with templates inside the modules (default Yii solution)
 ```php
 namespace capsulated\controllers;
 
-class DefaultController extends \luya\base\Controller
+class DefaultController extends \luya\web\Controller
 {
 	public $useModuleViewPath = true;
 
