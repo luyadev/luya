@@ -122,7 +122,7 @@
 		top: 3px;
 		color: color($filemanager--base-color, "darken-2");		
 	}
-	//Hiding the active-folder-icon at default-state
+	//Hide the active-folder-icon at default-state
 	.filemanager__folder-icon--active {
 		display: none;
 	}
