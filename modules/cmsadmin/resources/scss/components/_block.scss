@@ -46,7 +46,7 @@
 }
 
 .page--drag-active .block--is-container {
-	border-color: $grey--darken;
+	border-color: $grey--darken !important;
 }
 
 .block__toolbar {
