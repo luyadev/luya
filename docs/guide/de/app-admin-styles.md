@@ -12,6 +12,7 @@ Ein Beispiel:
 
 ##### Einfacher Input
 ![input--text](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/input--text.jpg "Einfaches Inputfeld")
+
 ```
 <div class="input input--text">
     <label class="input__label" for="[input-id]">[input-label]</label>
@@ -23,6 +24,7 @@ Ein Beispiel:
 
 ##### Textarea
 ![input--textarea](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/input--textarea.jpg "Einfaches Textfeld")
+
 ```
 <div class="input input--textarea">
     <label class="input__label" for="[textarea-id]">[textarea-label]</label>
@@ -34,6 +36,7 @@ Ein Beispiel:
 
 ##### Select
 ![input--select](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/input--select.jpg "Select dropdown")
+
 ```
 <div class="input input--select">
     <label class="input__label" for="[input-id]">[input-label]</label>
@@ -46,6 +49,7 @@ Ein Beispiel:
 
 ##### Radio buttons
 ![input--radios](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/input--radios.jpg "Radio group")
+
 ```
 <div class="input input--radios">
     <label class="input__label">[input-label]</label>
@@ -59,6 +63,7 @@ Ein Beispiel:
 
 ##### Single Checkbox
 ![input--single-checkbox](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/input--single-checkbox.jpg "Alleinstehende Checkbox - Gut für Einstellungen (On / Off)")
+
 ```
 <div class="input input--single-checkbox">
     <input id="[checkbox-id]" name="[checkbox-name]" type="checkbox" />
@@ -68,6 +73,7 @@ Ein Beispiel:
 
 ##### Checkboxes
 ![input--multiple-checkboxes](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/input--multiple-checkboxes.jpg "Checkbox Gruppe")
+
 ```
 <div class="input input--multiple-checkboxes">
     <label class="input__label">[input-label]</label>
@@ -88,19 +94,19 @@ Es können alle Icons des Material-Designs von Google verwendet werden.
 [https://www.google.com/design/icons/](https://www.google.com/design/icons/)
 
 ##### Standard Icons
-| Zweck (Verknüpfte Aktion) | Icon                                                                          |
-| ------------------------- | ----------------------------------------------------------------------------- |
-| Speichern                 | [check](https://www.google.com/design/icons/#ic_check)                        |
-| Bearbeiten                | [create](https://www.google.com/design/icons/#ic_create)                      |
-| Löschen                   | [remove](https://www.google.com/design/icons/#ic_remove)                      |
-| Abbrechen                 | [cancel](https://www.google.com/design/icons/#ic_cancel)                      |
-| Einstellungen             | [settings](https://www.google.com/design/icons/#ic_settings)                  |
-| Hinzufügen (in Listen)    | [add](https://www.google.com/design/icons/#ic_add)                            |
-| Entfernen (in Listen)     | [remove](https://www.google.com/design/icons/#ic_remove)                      |
-| Online                    | [cloud_queue](https://www.google.com/design/icons/#ic_cloud_queue)            |
-| Offline                   | [cloud_off](https://www.google.com/design/icons/#ic_cloud_off)                |
-| Sichtbar                  | [visibility](https://www.google.com/design/icons/#ic_visibility)              |
-| Unsichtbar                | [visibility_off](https://www.google.com/design/icons/#ic_visibility_off)      |
+| Zweck (Verknüpfte Aktion) | Icon                                                                          | Beispiel                                          |
+| ------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------- |
+| Speichern                 | [check](https://www.google.com/design/icons/#ic_check)                        | `<i class="material-icons">check</i>`             |
+| Bearbeiten                | [create](https://www.google.com/design/icons/#ic_create)                      | `<i class="material-icons">create</i>`            |
+| Löschen                   | [remove](https://www.google.com/design/icons/#ic_remove)                      | `<i class="material-icons">remove</i>`            |
+| Abbrechen                 | [cancel](https://www.google.com/design/icons/#ic_cancel)                      | `<i class="material-icons">cancel</i>`            |
+| Einstellungen             | [settings](https://www.google.com/design/icons/#ic_settings)                  | `<i class="material-icons">settings</i>`          |
+| Hinzufügen (in Listen)    | [add](https://www.google.com/design/icons/#ic_add)                            | `<i class="material-icons">add</i>`               |
+| Entfernen (in Listen)     | [remove](https://www.google.com/design/icons/#ic_remove)                      | `<i class="material-icons">remove</i>`            |
+| Online                    | [cloud_queue](https://www.google.com/design/icons/#ic_cloud_queue)            | `<i class="material-icons">cloud_queue</i>`       |
+| Offline                   | [cloud_off](https://www.google.com/design/icons/#ic_cloud_off)                | `<i class="material-icons">cloud_off</i>`         |
+| Sichtbar                  | [visibility](https://www.google.com/design/icons/#ic_visibility)              | `<i class="material-icons">visibility</i>`        |
+| Unsichtbar                | [visibility_off](https://www.google.com/design/icons/#ic_visibility_off)      | `<i class="material-icons">visibility_off</i>`    |
 
 Buttons
 -------
