@@ -1,119 +1,88 @@
 Layout Menu
 ===========
 
-> Seit 1.0.0-alpha20 setzt findAll immer die akuell aktive sprache. Somit muss dieses Argument nicht angegeben werden um sich in der aktuellen Sprache zu bewegen.
+> `links` ist seit 1.0.0-beta1 deprecated, anstelle wird `menu` verwendet.
 
-> Seit 1.0.0-alpha20 gibts es `findAll` für `findAll` und `findOne` für `findOneByArguments`.
+Menu Component
 
-Um eine Navigation oder Subnavigation innerhalb eines Layouts (oder cmsLayouts) zu erstellen benötigen Sie die `$app->links` Komponente, welche vom CMS-Modul zur Verfügung gestellt wird.
+**Query menu data**
 
-> Tipp: Die Links Component wird meistens am Start der `main.php` als Variable `$links` hinterlegt `$links = Yii::$app->links;`.
-
-Das Links Komponentenobjekt bietet die mächtige Funktion `findAll()`, wobei die Argumente der Methode einem Array entsprechen müssen. Vergleichsoperatoren für die `findAll` Methode stehen folgende Keys zur Verfügung:
-
-| Key | Beschreibung | 
-| --- | ------------ | 
-| full_url | Gesame URL inklusive der **aktuellen** sprache, nicht die Sprache der Seite
-| url | Gesamt URL mit unteren Pfadelementen
-| rewrite | Entspricht dem Pfadsegment im CMS Admin
-| nav_id | numerische ID aus der Datenbank der *nav* Tabelle
-| parent_nav_id | Die der vorher gehenden Seite
-| id | Die Id welche eindeutig ist für den Key mit der Sprache also die Tabelle *nav_item*
-| title | Den Seiten Titel
-| lang | Den Sprachen short_code (zbsp. de, en, etc.)
-| lang_id | Die Sprachen ID aus der Datenbank
-| cat | Die Categorie rewrite (z.B. default)
-| depth | Den z-index der Seite (0 = höchster index)
-
-Sie können nun zum Beispiel alle Seiten auf dem Root Level ausgeben.
+ability to add multiple querys as "AND" chain. like below: parent_nav_id = 0 AND parent_nav_id = 1
 
 ```php
-$links = Yii::$app->links;
-$menu = $links->findAll(['parent_nav_id' => 0]);
-foreach($menu as $item) {
-    var_dump($item);
+foreach(Yii::$app->menu->find()->where(['parent_nav_id' => 0, 'parent_nav_id' => 1])->all() as $item) {
+    echo $item->title;
 }
 ```
 
-> Die Ausgabe ist IMMER ein Array. Wenn Sie einen einzelnen Eintrag möchten, können Sie `findOne()` verwenden.
-
-Sie können auch mehrere Argumente verbinden. Wenn wir nun alle Elemente auf dem Root Level für die Sprache 'de' wollen :
+Find one item:
 
 ```php
-$menu = $links->findByArguemnt(['parent_nav_id' => 0, 'cat' => 'default']);
+$item = Yii::$app->menu->find()->where(['id' => 1])->one();
 ```
 
-Wenn Sie die aktuelle Url ausgeben möchten verwenden Sie:
+If the element coult nod be found, one will return *false*.
+
+**Getter methods of an item**
 
 ```php
-echo Yii::$app->links->activeUrl;
+$item->getTitle();
+$item->getLink();
+$item->getAlias();
+$item->getChildren();
+$item->getParent();
+$item->teardown();
 ```
 
+All getter methods can be access like
 
+```php
+$item->title;
+$item->link;
+$item->alias;
+$item->childeren;
+$item->parent;
+```
+
+Get current active Item
+
+```php
+$item = Yii::$app->menu->getCurrent();
+```
+
+as of getter
+
+```php
+$item = Yii::$app->menu->current;
+```
+
+Get home item
+
+```php
+$item = Yii::$app->menu->getHome();
+```
+
+as of getter
+
+```php
+$item = Yii::$app->menu->home;
+```
 
 Sprachen (composition)
 ----------------------
 Zusätzlich zur Link-Komponente wird die `composition` Komponente gebraucht. Sie gibt Auskunft über die aktuellen Sprachen und den Umgebungszustand. Die Composition Pattern Komponente kann definiert werden (@TBD). Sie können mit `Yii::$app->composition` auf die Composition Komponente zugreifen. Um Daten auszulesen verwenden Sie die `getKey()` Methode. Um auf den aktuelle Sprachcode zuzugreifen verwenden Sie:
 
+> seite 1.0.0-beta1 verfügt die composition component ein array access und daten können anstellevon `$composition->geyKey('keyName')` via `$compositon['keyName']` aufgerufen werden.
+
 ```php
-$langShortCode = Yii::$app->composition->getKey('langShortCode');
+$langShortCode = Yii::$app->composition['langShortCode'];
 ```
 
 Wenn Sie den aktuell ausgefüllten Composition Pattern erhalten möchten, können Sie dies mit `getFull()` tun:
 
 ```
-echo Yii::$app->composition->getFull();
+echo Yii::$app->composition->full;
 ```
-
-> Tipp: Erstellen sie eine `$composition` Variabel am Anfang ihres main.php Layouts um sich Wiederholung zu ersparen. `$composition = Yii::$app->composition;`
-
-Mehrteilige Navigation
-----------------------
-
-```php
-<ul>
-<? foreach(Yii::$app->links->findAll(['cat' => 'default', 'parent_nav_id' => 0]) as $item): ?>
-        <li><a href="<?= $item['full_url'];?>"><?= $item['title']; ?></a>
-            <ul>
-                <? foreach(Yii::$app->links->findAll(['parent_nav_id' => $item['nav_id']]) as $subItem): ?>
-                <li><a href="<?= $subItem['full_url'];?>"><?= $subItem['title']?></a>
-                <ul>
-                    <? foreach(Yii::$app->links->findAll(['parent_nav_id' => $subItem['nav_id']]) as $subSubItem): ?>
-                    <li><a href="<?= $subSubItem['full_url'];?>"><?= $subSubItem['title']?></a>
-                    <? endforeach; ?>
-                </ul>
-                <? endforeach; ?>
-            </ul>
-        </li>
-    <? endforeach; ?>
-</ul>
-```
-
-Geteilte Navigationen
----------------------
-
-```php
-<!-- FIRST LEVEL -->
-<ul>
-    <? foreach(Yii::$app->links->findAll(['cat' => 'default', 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, 1)]) as $item): ?>
-        <li><a href="<?= $item['full_url'];?>"><?= $item['title']; ?></a></li>
-    <? endforeach; ?>
-</ul>
-
-<!-- SECOND LEVEL -->
-<ul>
-    <? foreach(Yii::$app->links->findAll(['cat' => 'default', 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, 2)]) as $item): ?>
-        <li><a href="<?= $item['full_url'];?>"><?= $item['title']; ?></a></li>
-    <? endforeach; ?>
-</ul>
-
-<!-- THIRD LEVEL -->
- <ul>
-    <? foreach(Yii::$app->links->findAll(['cat' => 'default', 'parent_nav_id' => \luya\helpers\Menu::parentNavIdByCurrentLink(\yii::$app->links, 3)]) as $item): ?>
-        <li><a href="<?= $item['full_url'];?>"><?= $item['title']; ?></a></li>
-    <? endforeach; ?>
-</ul>
-``` 
 
 Links zu Seiten im CMS
 ---------------------
