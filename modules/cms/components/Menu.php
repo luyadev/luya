@@ -6,8 +6,6 @@ use Exception;
 use Yii;
 use yii\db\Query as DbQuery;
 use cms\menu\Query as MenuQuery;
-use cms\menu\cms\menu;
-use cms\menu\cms\menu;
 
 /**
  * Menu Component
