@@ -7,10 +7,10 @@ Input Felder
 ------------
 Standardmässig wird das Label links vom Inputfeld dargestellt. Möchte man aus dieser Darstellung ausbrechen und das Label über das Input Feld setzen, muss man lediglich dem `.input` div die Klasse `.input--vertical` hinzufügen.  
   
-Ein Beispiel:
+Ein Beispiel:  
 ![input--text--vertical](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/input--text--vertical.jpg "Einfaches Inputfeld, Label darüber")
 
-#### Einfacher Input
+##### Einfacher Input
 ![input--text](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/input--text.jpg "Einfaches Inputfeld")
 ```
 <div class="input input--text">
@@ -21,7 +21,7 @@ Ein Beispiel:
 </div>
 ```
 
-### Textarea
+##### Textarea
 ![input--textarea](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/input--textarea.jpg "Einfaches Textfeld")
 ```
 <div class="input input--textarea">
@@ -32,7 +32,7 @@ Ein Beispiel:
 </div>
 ```
 
-### Select
+##### Select
 ![input--select](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/input--select.jpg "Select dropdown")
 ```
 <div class="input input--select">
@@ -44,8 +44,7 @@ Ein Beispiel:
 </div>
 ```
 
-
-### Radio buttons
+##### Radio buttons
 ![input--radios](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/input--radios.jpg "Radio group")
 ```
 <div class="input input--radios">
@@ -58,7 +57,7 @@ Ein Beispiel:
 </div>
 ```
 
-### Single Checkbox
+##### Single Checkbox
 ![input--single-checkbox](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/input--single-checkbox.jpg "Alleinstehende Checkbox - Gut für Einstellungen (On / Off)")
 ```
 <div class="input input--single-checkbox">
@@ -67,7 +66,7 @@ Ein Beispiel:
 </div>
 ```
 
-### Checkboxes
+##### Checkboxes
 ![input--multiple-checkboxes](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/input--multiple-checkboxes.jpg "Checkbox Gruppe")
 ```
 <div class="input input--multiple-checkboxes">
@@ -82,3 +81,36 @@ Ein Beispiel:
     </div>
 </div>
 ```
+
+Icons
+-----
+Es können alle Icons des Material-Designs von Google verwendet werden.  
+[https://www.google.com/design/icons/](https://www.google.com/design/icons/)
+
+##### Standard Icons
+| Zweck (Verknüpfte Aktion) | Icon                                                                          |
+| ------------------------- | ----------------------------------------------------------------------------- |
+| Speichern                 | [check](https://www.google.com/design/icons/#ic_check)                        |
+| Bearbeiten                | [create](https://www.google.com/design/icons/#ic_create)                      |
+| Löschen                   | [remove](https://www.google.com/design/icons/#ic_remove)                      |
+| Abbrechen                 | [cancel](https://www.google.com/design/icons/#ic_cancel)                      |
+| Einstellungen             | [settings](https://www.google.com/design/icons/#ic_settings)                  |
+| Hinzufügen (in Listen)    | [add](https://www.google.com/design/icons/#ic_add)                            |
+| Entfernen (in Listen)     | [remove](https://www.google.com/design/icons/#ic_remove)                      |
+| Online                    | [cloud_queue](https://www.google.com/design/icons/#ic_cloud_queue)            |
+| Offline                   | [cloud_off](https://www.google.com/design/icons/#ic_cloud_off)                |
+| Sichtbar                  | [visibility](https://www.google.com/design/icons/#ic_visibility)              |
+| Unsichtbar                | [visibility_off](https://www.google.com/design/icons/#ic_visibility_off)      |
+
+Buttons
+-------
+In Arbeit.
+
+Tabellen
+--------
+In Arbeit.
+
+Farben
+------
+In Arbeit.
+
