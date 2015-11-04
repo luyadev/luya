@@ -49,8 +49,8 @@
             </ul>
         </div>
 
-        <div class="langswitch crud__langswitch">
-            <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'[ lighten-3 ]' : !AdminLangService.isInSelection(lang)}" class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ][ white-text green ] ng-binding ng-scope">
+        <div class="langswitch crud__langswitch" ng-if="crudSwitchType!==0">
+            <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'[ lighten-3 ]' : !AdminLangService.isInSelection(lang.short_code)}" class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ][ white-text green ] ng-binding ng-scope">
                 {{lang.name}}
             </a>
         </div>

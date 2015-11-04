@@ -202,7 +202,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
                 $id = 'id-'.md5($ngModel.$lang['short_code']);
                 // anzahl cols durch anzahl sprachen
                 $return[] = [
-                    'html' => '<div class="col s'.(12 / count($this->getLangs())).'">'.$this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'], true).'</div>',
+                    'html' => '<div class="col s'.(12 / count($this->getLangs())).'" ng-show="AdminLangService.isInSelection(\''.$lang['short_code'].'\')">'.$this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'], true).'</div>',
                 ];
 
                 ++$i;

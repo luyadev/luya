@@ -183,8 +183,8 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 			}
 		};
 		
-		service.isInSelection = function(lang) {
-			var exists = service.selection.indexOf(lang.short_code);
+		service.isInSelection = function(langShortCode) {
+			var exists = service.selection.indexOf(langShortCode);
 			if (exists == -1) {
 				return false;
 			}
@@ -195,7 +195,7 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 			if (service.data.length == 0 || forceReload !== undefined) {
 				service.data = ApiAdminLang.query();
 				$http.get("admin/api-admin-defaults/lang").success(function(response) {
-					if (!service.isInSelection(response)) {
+					if (!service.isInSelection(response.short_code)) {
 						service.toggleSelection(response);
 					}
 				});
