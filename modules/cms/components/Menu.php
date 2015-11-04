@@ -228,7 +228,7 @@ class Menu extends \yii\base\Component
     
     private function aliasMatch(array $urlParts)
     {
-        return (new MenuQuery(['menu' => $this]))->where(['alias' => implode('/', $urlParts)])->one();
+        return (new MenuQuery(['menu' => $this]))->where(['alias' => implode('/', $urlParts)])->includeHidden()->one();
     }
     
     public function getCurrentAppendix()
@@ -251,7 +251,7 @@ class Menu extends \yii\base\Component
     
     public function getHome()
     {
-        return (new MenuQuery(['menu' => $this]))->where(['is_home' => '1'])->one();   
+        return (new MenuQuery(['menu' => $this]))->where(['is_home' => '1'])->includeHidden()->one();   
     }
     
     public function find()
