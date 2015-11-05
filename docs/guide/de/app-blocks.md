@@ -111,12 +111,18 @@ zur Verfügung. Es stehen dir folgende Env keys zur Verfügung
 + *context* Sagt dir ob der Block im *frontend* oder *backend* aktiv ist
 + *pageObject* Gibt ein `cmsadmin\models\NavItem` Object zurück (nav_item), dies wiederum verfügt über die methode `getNav()` welches das `cmsadmin\models\Nav` Object zurück gibt.
 
-Weitere viel genutze methoden:
+#### Property / Eigenschaft
 
 Eine bestimmten Eigenschaft (property) abfragen:
 
 ```php
-$this->getEnvOption('pageObject')->getNav()->getProperty('myCustomProperty');
+$propObject = $this->getEnvOption('pageObject')->getNav()->getProperty('myCustomProperty');
+```
+
+Wenn die Eigenschaft gefunden wurde erhälts du ein Objekt, um auf den Benutzer eingabe/auswahl Wert zuzugereiffen kannst du die eigenschaft `$value` ausgeben.
+
+```php
+echo $propObject->value;
 ```
 
 > Wenn die Property nicht gefunden wurde gibt die Funktion `false` zurück.

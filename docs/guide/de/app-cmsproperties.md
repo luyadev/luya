@@ -139,7 +139,7 @@ public function init()
     $this->on(self::EVENT_BEFORE_FIND, [$this, 'beforeFind']);
 }
 
-public function beforeFind($)
+public function beforeFind()
 {
     $this->value = strtoupper($this->value);
 }
