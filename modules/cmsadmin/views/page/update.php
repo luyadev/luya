@@ -29,18 +29,25 @@
                 <div class="row" ng-repeat="field in block.vars">
                      <zaa-injector dir="field.type" options="field.options" fieldid="{{field.id}}" fieldname="{{field.var}}" initvalue="{{field.initvalue}}" placeholder="{{field.placeholder}}" label="{{field.label}}" model="data[field.var]"></zaa-injector>
                 </div>
+                <div class="input">
+                    <div class="block__configs" ng-class="{'block__configs--open': configIsOpen}">
 
-                <div class="block__configs" ng-class="{'block__configs--open': configIsOpen}">
+                        <label class="input__label"><i class="material-icons">settings</i></label>
+                        <div class="input__field-wrapper">
+                            <div class="block__configs-toggler btn btn--small grey lighten-4 black-text z-depth-0" ng-click="configIsOpen = !configIsOpen">
+                                <i class="material-icons" ng-show="configIsOpen">keyboard_arrow_down</i>
+                                <i class="material-icons" ng-hide="configIsOpen">keyboard_arrow_right</i>
+                                Einstellungen 
+                                </div>
+                        </div>
 
-                    <div class="block__configs-toggler btn btn--small grey lighten-3 black-text z-depth-0" ng-click="configIsOpen = !configIsOpen"><i class="material-icons">settings</i> Einstellungen <span class="block__configs-closetext">schliessen</span></div>
-
-                    <div class="block__configs-body">
-                        <div class="row" ng-repeat="cfgField in block.cfgs">
-                            <zaa-injector dir="cfgField.type" placeholder="{{cfgField.placeholder}}" fieldid="{{cfgField.id}}" fieldname="{{cfgField.var}}" initvalue="{{cfgField.initvalue}}" options="cfgField.options" label="{{cfgField.label}}"  model="cfgdata[cfgField.var]"></zaa-injector>
+                        <div class="block__configs-body">
+                            <div class="row" ng-repeat="cfgField in block.cfgs">
+                                <zaa-injector dir="cfgField.type" placeholder="{{cfgField.placeholder}}" fieldid="{{cfgField.id}}" fieldname="{{cfgField.var}}" initvalue="{{cfgField.initvalue}}" options="cfgField.options" label="{{cfgField.label}}"  model="cfgdata[cfgField.var]"></zaa-injector>
+                            </div>
                         </div>
                     </div>
                 </div>
-
                 <br />
                 <div class="modal__footer">
                     <div class="row">
