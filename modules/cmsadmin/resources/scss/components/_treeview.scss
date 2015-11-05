@@ -41,16 +41,23 @@ $treeview--active-color: $blue !default;
 }
 .treeview__site-state {
     padding-right:5px; 
-    position:absolute;
+    position:relative;
+    float: right;
     font-size: 18px;
-    top: 4px;
-    right: 0;
-
+    margin-right: 10px !important;
+    right: -20px;
+    cursor: pointer;
     &.treeview__site-state--online {
         color: #4CAF56 ;
     }
     &.treeview__site-state--offline {
         color: #F44336;
+    }
+    &.treeview__site-state--visible {
+        color: #000;
+    }
+    &.treeview__site-state--invisible {
+        color: #bdbdbd;
     }
 }
 
@@ -122,7 +129,7 @@ $treeview--active-color: $blue !default;
 }
 
 .treeview__move,
-.treeview__eye {
+.treeview__site-state {
     width: 0;
     height: 0;
     cursor: move;
@@ -131,7 +138,7 @@ $treeview--active-color: $blue !default;
     margin-right: 0;
 
     &.treeview__move--visible,
-    &.treeview__eye--visible {
+    &.treeview__site-state {
 		width: 1rem;
 		height: 1rem;
 		margin-top: 1px;
@@ -140,9 +147,9 @@ $treeview--active-color: $blue !default;
     }
 }
 
-.treeview__eye {
-    cursor: inherit;
-}
+// .treeview__eye {
+//     cursor: inherit;
+// }
 
 .treeview__empty-circle {
     width: 10px;
@@ -158,12 +165,12 @@ $treeview--active-color: $blue !default;
     border: 5px solid $treeview--active-color;
 }
 
-.treeview--drag-active .treeview__empty-circle,
-.treeview__link--is-hidden .treeview__empty-circle {
-    border: 0 solid transparent;
-    width: 0;
-    margin: 0;
-}
+// .treeview--drag-active .treeview__empty-circle,
+// .treeview__link--is-hidden .treeview__empty-circle {
+//     border: 0 solid transparent;
+//     width: 0;
+//     margin: 0;
+// }
 
 .treeview__switch {
     margin: 38px 0 38px 12px;
