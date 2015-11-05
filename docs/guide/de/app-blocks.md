@@ -113,12 +113,6 @@ zur Verfügung. Es stehen dir folgende Env keys zur Verfügung
 
 Weitere viel genutze methoden:
 
-Alle properties anzeigen welche für diese Seite gesetzt wurden.
-
-```php
-$this->getEnvOption('pageObject')->getNav()->getProperties();
-```
-
 Eine bestimmten Eigenschaft (property) abfragen:
 
 ```php

@@ -80,11 +80,6 @@ $this->getEnvOption('pageObject')->getNav()->getProperty('foobar');
 
 > Wenn die Eigenschaft nicht für diese Seite hinterlegt wurde (also keine Wert für für die Eigenschaft hinterlegt) gibt die Funktion immer `false` zurück.
 
-um alle Eigenschaften für diese Seite (in der der Block abglegt wurde) anzuziegen verwenden Sie die `getProperties()` Methode:
-
-```php
-$this->getEnvOption('pageObject')->getNav()->getProperties();
-```
 
 ```php
 $this->getEnvOption('pageObject)->nav->properties; // getter kurz form
