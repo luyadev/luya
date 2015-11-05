@@ -214,7 +214,7 @@ class Nav extends \yii\db\ActiveRecord
         $_errors = [];
 
         $navItem = new NavItem();
-        $navItem->parent_nav_id = $parentNavId;
+        $navItem->parent_nav_id = self::findOne($navId)->parent_nav_id;
         $navItemPage = new \cmsadmin\models\NavItemPage();
 
         $navItem->attributes = ['nav_id' => $navId, 'lang_id' => $langId, 'title' => $title, 'rewrite' => $rewrite, 'nav_item_type' => 1];
@@ -318,7 +318,7 @@ class Nav extends \yii\db\ActiveRecord
         $_errors = [];
 
         $navItem = new NavItem();
-        $navItem->parent_nav_id = $parentNavId;
+        $navItem->parent_nav_id = self::findOne($navId)->parent_nav_id;
         $navItemModule = new \cmsadmin\models\NavItemModule();
 
         $navItem->attributes = ['nav_id' => $navId, 'lang_id' => $langId, 'title' => $title, 'rewrite' => $rewrite, 'nav_item_type' => 2];
@@ -343,12 +343,12 @@ class Nav extends \yii\db\ActiveRecord
         return $navItemId;
     }
     
-    public function createRewriteItem($navId, $langId, $title, $rewrite, $moduleName, $redirectType, $redirectTypeValue)
+    public function createRedirectItem($navId, $langId, $title, $rewrite, $moduleName, $redirectType, $redirectTypeValue)
     {
         $_errors = [];
     
         $navItem = new NavItem();
-        $navItem->parent_nav_id = $parentNavId;
+        $navItem->parent_nav_id = self::findOne($navId)->parent_nav_id;
         $navItemRedirect = new \cmsadmin\models\NavItemRedirect();
     
         $navItem->attributes = ['nav_id' => $navId, 'lang_id' => $langId, 'title' => $title, 'rewrite' => $rewrite, 'nav_item_type' => 3];
