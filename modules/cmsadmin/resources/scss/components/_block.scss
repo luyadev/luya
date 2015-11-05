@@ -146,18 +146,12 @@
 	border-radius: 2px 2px 0 0;
 }
 
-.block__configs-closetext {
-	display: none;
-}
-.block__configs--open .block__configs-closetext {
-	display: inline-block;
-}
-
 .block__configs-body {
 	display: none;
 	padding: 10px;
 	border: 2px solid #eee;
 	border-radius: 0 0 2px 2px;
+	background-color: #fafafa;
 }
 .block__configs--open .block__configs-body {
 	display: block;
