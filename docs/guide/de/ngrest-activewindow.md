@@ -72,6 +72,14 @@ public function ngRestConfig($config)
 
 Das erste Argument der register Klasse definiert die *ActiveWindow Klasse*. Es wird also ein Object erzeugt. Die ActiveWindows können initial Paremter verlangen welche im Konstruktor der ActiveWindows definiert werden.
 
+Wenn anstelle eines Textes ein Icon oder beides dargestellt werden soll, musst du den zweiten paremetner von register mit einem array blegen welches den key `ìcon` oder `alias` hat.
+
+Ein beispiel für ein icon anstelle des Texts:
+
+```php
+$config->aw->register(new \admin\aws\ChangePassword(), ['icon' => 'vpn_key']);
+```
+
 Vordefinierte Active Windows
 ----------------------------
 Gewisse Active Windows kannst du in deinem Projekte wieder verwenden und müssen nicht zusätzlich entwickelt werden. Hier eine Liste von ActiveWindows die du verwendest kannst und mit der Installtion der Admin ebene automatisch mit geliefert werden.

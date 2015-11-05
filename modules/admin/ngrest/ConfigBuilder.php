@@ -77,10 +77,18 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
         return $this;
     }
 
-    public function register($activeWindowObject, $alias)
+    public function register($activeWindowObject, $aliasConfig)
     {
         if ($this->pointer !== 'aw') {
             throw new Exception('register method can only be used in aw pointer context.');
+        }
+        
+        if (is_array($aliasConfig)) {
+            $alias = (isset($aliasConfig['alias'])) ? $aliasConfig['alias'] : false;
+            $icon = (isset($aliasConfig['icon'])) ? $aliasConfig['icon'] : false;
+        } else {
+            $alias = $aliasConfig;
+            $icon = false;
         }
 
         $activeWindowClass = get_class($activeWindowObject);
@@ -90,6 +98,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
             'activeWindowHash' => $activeWindowHash,
             'class' => $activeWindowClass,
             'alias' => $alias,
+            'icon' => $icon,
         ];
 
         return $this;

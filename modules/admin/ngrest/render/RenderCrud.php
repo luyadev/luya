@@ -90,7 +90,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
             if (count($this->getFields('update')) > 0 && $this->can(Auth::CAN_UPDATE)) {
                 $buttons[] = [
                     'ngClick' => 'toggleUpdate(item.'.$this->config->primaryKey.', $event)',
-                    'icon' => 'mode edit',
+                    'icon' => 'mode_edit',
                     'label' => '',
                 ];
             }
@@ -98,7 +98,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
             foreach ($this->getActiveWindows() as $activeWindow) {
                 $buttons[] = [
                     'ngClick' => 'getActiveWindow(\''.$activeWindow['activeWindowHash'].'\', item.'.$this->config->primaryKey.', $event)',
-                    'icon' => '',
+                    'icon' => $activeWindow['icon'],
                     'label' => $activeWindow['alias'],
                 ];
             }
