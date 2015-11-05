@@ -100,12 +100,11 @@ $this->beginPage()
         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active">folder</i>
 
                         <span class="filemanager__folder-name" ng-show="!folder.edit" ng-click="loadFolder(folder.data.id)">
-                            {{folder.data.name }}
-                            <button  ng-click="moveFilesTo(folder.data)" ng-show="showFoldersToMove && currentFolderId != folder.data.id" type="button">{{selectedFiles.length}} Dateien verschieben</button>
+                            {{folder.data.name }}                                            
                         </span>
 
-        <i class="material-icons filemanager__edit-icon" ng-click="editMode(folder, 'edit')">mode_edit</i>
-        <i class="material-icons filemanager__delete-icon" ng-click="editMode(folder, 'remove')">delete</i>
+        <i class="material-icons filemanager__edit-icon" ng-hide="showFoldersToMove" ng-click="editMode(folder, 'edit')">mode_edit</i>
+        <i class="material-icons filemanager__delete-icon" ng-hide="showFoldersToMove" ng-click="editMode(folder, 'remove')">delete</i>
                         
                         <span ng-show="folder.edit">
                             <input type="text" ng-model="folder.data.name" class="filemanager__file-dialog__input"/>
@@ -119,7 +118,7 @@ $this->beginPage()
                                 </span>
                             </div>
                         </span>
-
+                        <i class="material-icons filemanager__file-move-icon" ng-click="moveFilesTo(folder.data)" ng-show="showFoldersToMove && currentFolderId != folder.data.id">keyboard_return</i>
                         <span ng-show="folder.remove">
                             <div class="filemanager__file-dialog">
 
