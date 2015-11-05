@@ -2,6 +2,7 @@
 
 namespace admin\storage;
 
+use admin\models\StorageFile;
 use admin\models\StorageFolder;
 use Yii;
 
@@ -17,8 +18,31 @@ class Folder
         return $model->save();
     }
 
+    /**
+     * delete folder, all subfolders and all included files
+     *
+     * 1. search another folders with matching parentIds and call deleteFolder on them
+     * 2. get all included files and delete them
+     * 3. delete folder
+     *
+     * @param int $folderId
+     * @return bool
+     */
     public function deleteFolder($folderId)
     {
+        // find all subfolders
+        $matchingChildFolders = StorageFolder::find()->where(['parent_id' => $folderId])->asArray()->all();
+        foreach ($matchingChildFolders as $matchingChildFolder) {
+            Yii::$app->storage->folder->deleteFolder($matchingChildFolder['id']);
+        }
+
+        // find all attached files and delete them
+        $folderFiles = StorageFile::find()->where(['folder_id' => $folderId])->all();
+        foreach ($folderFiles as $folderFile) {
+            $folderFile->delete();
+        }
+
+        // delete folder
         $model = StorageFolder::findOne($folderId);
         if (!$model) {
             return false;

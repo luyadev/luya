@@ -905,16 +905,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "4ef919b0cf3b1989523138b60163bbcb7ba1ff7e"
+                "reference": "4d0bdbe1206df7440219ce14c972aa57cc5e4982"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/4ef919b0cf3b1989523138b60163bbcb7ba1ff7e",
-                "reference": "4ef919b0cf3b1989523138b60163bbcb7ba1ff7e",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/4d0bdbe1206df7440219ce14c972aa57cc5e4982",
+                "reference": "4d0bdbe1206df7440219ce14c972aa57cc5e4982",
                 "shasum": ""
             },
             "require": {
@@ -959,7 +959,7 @@
                 "stream",
                 "uri"
             ],
-            "time": "2015-08-15 19:32:36"
+            "time": "2015-11-03 01:34:55"
         },
         {
             "name": "ifsnop/mysqldump-php",
@@ -1256,12 +1256,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
-                "reference": "ad89a88b9124aa0fdf42ef2784f90e95112a7818"
+                "reference": "589f32fe4f43155ea303d505171634c45f15e876"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/ad89a88b9124aa0fdf42ef2784f90e95112a7818",
-                "reference": "ad89a88b9124aa0fdf42ef2784f90e95112a7818",
+                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/589f32fe4f43155ea303d505171634c45f15e876",
+                "reference": "589f32fe4f43155ea303d505171634c45f15e876",
                 "shasum": ""
             },
             "require": {
@@ -1305,7 +1305,7 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
-            "time": "2015-10-30 20:15:42"
+            "time": "2015-11-02 20:29:24"
         },
         {
             "name": "symfony/css-selector",
@@ -1366,12 +1366,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "13042dc9b6515f069f49e0ad487fd3bc45b2ebc1"
+                "reference": "740c98235f5b6e2b0b13df2fb97c7a1c7d1a18fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/13042dc9b6515f069f49e0ad487fd3bc45b2ebc1",
-                "reference": "13042dc9b6515f069f49e0ad487fd3bc45b2ebc1",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/740c98235f5b6e2b0b13df2fb97c7a1c7d1a18fc",
+                "reference": "740c98235f5b6e2b0b13df2fb97c7a1c7d1a18fc",
                 "shasum": ""
             },
             "require": {
@@ -1414,7 +1414,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2015-10-30 20:15:42"
+            "time": "2015-11-02 20:29:39"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1422,12 +1422,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "82159e61debcd09790b20154b350b1c083029aa6"
+                "reference": "0b6a8940385311a24e060ec1fe35680e17c74497"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/82159e61debcd09790b20154b350b1c083029aa6",
-                "reference": "82159e61debcd09790b20154b350b1c083029aa6",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/0b6a8940385311a24e060ec1fe35680e17c74497",
+                "reference": "0b6a8940385311a24e060ec1fe35680e17c74497",
                 "shasum": ""
             },
             "require": {
@@ -1470,7 +1470,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2015-10-27 22:54:43"
+            "time": "2015-11-04 20:28:58"
         },
         {
             "name": "twig/twig",
@@ -1771,12 +1771,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-gii.git",
-                "reference": "3946123b429ef6aa95618a4159f3c0360054ddec"
+                "reference": "741ef183702cb8ba8f7d790040ff2c38124cc8c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/3946123b429ef6aa95618a4159f3c0360054ddec",
-                "reference": "3946123b429ef6aa95618a4159f3c0360054ddec",
+                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/741ef183702cb8ba8f7d790040ff2c38124cc8c2",
+                "reference": "741ef183702cb8ba8f7d790040ff2c38124cc8c2",
                 "shasum": ""
             },
             "require": {
@@ -1816,7 +1816,7 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2015-10-07 14:54:57"
+            "time": "2015-11-03 09:49:52"
         }
     ],
     "packages-dev": [],
