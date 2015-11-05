@@ -51,7 +51,7 @@ class ModuleReflection extends \yii\base\Object
 
     public function getRequestRoute()
     {
-        if ($this->_defaultRoute !== null && empty($this->suffix)) {
+        if ($this->_defaultRoute !== null && empty($this->getSuffix())) {
             $array = $this->_defaultRoute;
         } else {
             // parse request against urlManager
