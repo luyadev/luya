@@ -64,6 +64,11 @@ class Item extends \yii\base\Object
         return (new Query())->where(['nav_id' => $this->parentNavId])->one();
     }
     
+    public function getParentIncludeHidden()
+    {
+        return (new Query())->where(['nav_id' => $this->parentNavId])->includeHidden()->one();
+    }
+    
     public function teardown()
     {
         
