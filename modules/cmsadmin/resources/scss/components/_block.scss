@@ -47,6 +47,7 @@
 
 .page--drag-active .block--is-container {
 	border-color: $grey--darken !important;
+	// border-color: red !important;
 }
 
 .block__toolbar {
@@ -77,8 +78,9 @@
 .page--drag-active .block:not(.block--is-container) .block__toolbar {
 	display: none;
 }
-.page--drag-active .block--is-container > .block__toolbar {
-	background-color: $grey--darken;
+.page--drag-active .block--is-container .block__toolbar {
+	background-color: $grey--darken !important;
+	z-index: 1;
 }
 
 .block__move {
