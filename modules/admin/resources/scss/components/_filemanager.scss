@@ -40,6 +40,15 @@
     border-radius: 2px;
 	background-color: color($filemanager--base-color, "darken-2");
 }
+.filemanager__file-move-icon {
+	vertical-align: text-bottom;
+   	margin-left: 10px;
+	&:hover {
+	 	background-color: color("green", "base");
+		color: color("shades", "white");
+		border-radius: 2px;
+	}
+}
 .filemanager__main-folder {
 	word-break: break-all;
 	position: relative;
