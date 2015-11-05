@@ -73,15 +73,14 @@ class ModuleBlock extends \cmsadmin\base\Block
         $module->setContext('cms');
         $module->setContextOptions($this->getEnvOptions());
         // start module reflection
-        $reflection = new \luya\module\Reflection($module);
-        $reflection->setModuleSuffix($this->getEnvOption('restString'));
+        
+        $reflection = \luya\helpers\ModuleHelper::reflectionObject($module);
+        $reflection->suffix = $this->getEnvOption('restString');
+        
         if ($ctrl && $action) {
-            $reflection->setInitRun($ctrl, $action, $actionArgs);
+            $reflection->defaultRoute($ctrl, $action, $actionArgs);
         }
 
-        $reflectionRequest = $reflection->getRequestResponse();
-        $response = $reflection->responseContent($reflectionRequest);
-
-        return $response;
+        return $reflection->run();
     }
 }

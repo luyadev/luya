@@ -3,7 +3,7 @@
 namespace exporter\commands;
 
 use Yii;
-use luya\helpers\Zip;
+use luya\helpers\ZipHelper;
 use luya\helpers\FileHelper;
 use Ifsnop\Mysqldump;
 
@@ -25,6 +25,6 @@ class ExportController extends \luya\console\Command
         
         @unlink($save);
         
-        Zip::dir($cacheFolder . "/", $save);
+        ZipHelper::dir($cacheFolder . "/", $save);
     }
 }

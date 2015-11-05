@@ -4,7 +4,7 @@ namespace luya\helpers;
 
 use ZipArchive;
 
-class Zip
+class ZipHelper
 {
     /**
      * Add files and sub-directories in a folder to zip file.
