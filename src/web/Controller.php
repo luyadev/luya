@@ -44,12 +44,11 @@ abstract class Controller extends \yii\web\Controller
             $this->registerAsset($class);
         }
     }
-    
+
     /**
-     * Helper method for registring an asset into the view
+     * Helper method for registring an asset into the view.
      *
      * @param string $className The asset class to register, example `app\asset\MyTestAsset`.
-     * @return void
      */
     public function registerAsset($className)
     {

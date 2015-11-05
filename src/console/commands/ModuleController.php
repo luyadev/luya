@@ -29,7 +29,7 @@ class ModuleController extends \luya\console\Command
         }
 
         if (!$this->confirm('Are you sure you want to create the '.(($isAdmin) ? 'Admin' : 'Frontend')." Module '".$moduleName."' now?")) {
-            return $this->outputError("abort by user.");
+            return $this->outputError('abort by user.');
         }
 
         $basePath = Yii::$app->basePath;
@@ -56,13 +56,14 @@ class ModuleController extends \luya\console\Command
         $content .= '}';
 
         $modulephp = $moduleDir.DIRECTORY_SEPARATOR.'Module.php';
-        
+
         if (file_put_contents($modulephp, $content)) {
             $out = PHP_EOL."'modules' => [".PHP_EOL;
             $out .= "    '$moduleName' => [".PHP_EOL;
             $out .= "        'class' => '\\app\\modules\\$moduleName\\Module'".PHP_EOL;
             $out .= '    ],'.PHP_EOL;
             $out .= ']'.PHP_EOL.PHP_EOL;
+
             return $this->outputSuccess($out);
         }
 

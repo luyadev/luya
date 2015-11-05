@@ -2,7 +2,6 @@
 
 namespace luya\base;
 
-use Yii;
 use Exception;
 
 /**
@@ -15,11 +14,11 @@ class ModuleReflection extends \yii\base\Object
     public $module = null;
 
     public $request = null;
-    
+
     public $urlManager = null;
-    
+
     private $_defaultRoute = null;
-    
+
     private $_suffix = null;
 
     public function __construct(\luya\web\Request $request, \luya\web\UrlManager $urlManager, array $config = [])
@@ -29,11 +28,11 @@ class ModuleReflection extends \yii\base\Object
         // parent object 
         parent::__construct($config);
     }
-    
+
     public function init()
     {
         if ($this->module === null) {
-            throw new Exception("Error, no module object has been provided.");
+            throw new Exception('Error, no module object has been provided.');
         }
         // add the module specific url rules to the url manager
         $this->urlManager->addRules($this->module->urlRules, true);
@@ -44,12 +43,12 @@ class ModuleReflection extends \yii\base\Object
         $this->_suffix = $suffix;
         $this->request->setPathInfo(implode('/', [$this->module->id, $suffix]));
     }
-    
+
     public function getSuffix()
     {
         return $this->_suffix;
     }
-    
+
     public function getRequestRoute()
     {
         if ($this->_defaultRoute !== null && empty($this->suffix)) {
@@ -69,9 +68,10 @@ class ModuleReflection extends \yii\base\Object
         if (count($array['args']) === 0) {
             $array['args'] = $this->request->get();
         }
+
         return $array;
     }
-    
+
     public function defaultRoute($controller, $action = 'index', array $args = [])
     {
         $this->_defaultRoute = [
@@ -79,7 +79,7 @@ class ModuleReflection extends \yii\base\Object
             'args' => $args,
         ];
     }
-    
+
     public function run()
     {
         // request route

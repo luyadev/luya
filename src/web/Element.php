@@ -4,8 +4,8 @@ namespace luya\web;
 
 use Yii;
 use Exception;
-use \luya\helpers\FileHelper;
-use \Twig_Loader_Filesystem;
+use luya\helpers\FileHelper;
+use Twig_Loader_Filesystem;
 
 /**
  * Ability to register small html elements via closure function and run those
@@ -59,7 +59,7 @@ class Element extends \yii\base\Component
      * @var string The path to the folder where the view files to render can be found.
      */
     public $viewsFolder = '@app/views/elements/';
-    
+
     /**
      * @var array Contains all registered elements.
      */
@@ -83,17 +83,17 @@ class Element extends \yii\base\Component
             }
         }
     }
-    
+
     /**
-     * Magic method to run an closre directly from the Element-Object, for convincience. Example use
+     * Magic method to run an closre directly from the Element-Object, for convincience. Example use.
      * 
      * ```php
      * $element = new Element();
      * $element->name($param1);
      * ```
      * 
-     * @param string $name access method name
-     * @param array $params access method params
+     * @param string $name   access method name
+     * @param array  $params access method params
      */
     public function __call($name, $params)
     {
@@ -103,7 +103,7 @@ class Element extends \yii\base\Component
     /**
      * Add an element with a closure to the elements array.
      * 
-     * @param string $name The identifier of the element where the close is binde to.
+     * @param string   $name    The identifier of the element where the close is binde to.
      * @param callable $closure The closure function to registered, for instance:
      * 
      * ```php
@@ -111,7 +111,6 @@ class Element extends \yii\base\Component
      *     return 'foobar';
      * }
      * ```
-     * @return void
      */
     public function addElement($name, $closure)
     {
@@ -141,9 +140,11 @@ class Element extends \yii\base\Component
     /**
      * Run an element and return the closures return value.
      * 
-     * @param string $name The name of the elemente to execute.
-     * @param array $params The params to pass to the closure methode.
+     * @param string $name   The name of the elemente to execute.
+     * @param array  $params The params to pass to the closure methode.
+     *
      * @return mixed The return value of the executed closure function.
+     *
      * @throws Exception
      */
     public function run($name, array $params = [])
@@ -175,7 +176,8 @@ class Element extends \yii\base\Component
      * on where the closure was registered. Otherwhise the use of the element variable must be provided.
      * 
      * @param string $file The name of the file to render.
-     * @param array $args The parameters to pass in the render file.
+     * @param array  $args The parameters to pass in the render file.
+     *
      * @return string The render value of the view file.
      */
     public function render($file, array $args = [])

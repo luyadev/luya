@@ -2,11 +2,11 @@
 
 namespace tests\web\luya\components;
 
-use Yii;
 use luya\web\Twig;
 
 /**
  * @todo readd links (new menu) component and tests
+ *
  * @author nadar
  */
 class TwigTest extends \tests\web\Base
@@ -15,6 +15,7 @@ class TwigTest extends \tests\web\Base
     {
         $twig = new Twig();
         $twig->env(new \Twig_Loader_String());
+
         return $twig;
     }
 
@@ -34,11 +35,10 @@ class TwigTest extends \tests\web\Base
         //$this->assertArrayHasKey('links',$functionList);
         //$this->assertArrayHasKey('linksFindParent',$functionList);
         //$this->assertArrayHasKey('linkActivePart',$functionList);
-        $this->assertArrayHasKey('asset',$functionList);
-        $this->assertArrayHasKey('filterApply',$functionList);
-        $this->assertArrayHasKey('image',$functionList);
-        $this->assertArrayHasKey('element',$functionList);
-        $this->assertArrayHasKey('t',$functionList);
+        $this->assertArrayHasKey('asset', $functionList);
+        $this->assertArrayHasKey('filterApply', $functionList);
+        $this->assertArrayHasKey('image', $functionList);
+        $this->assertArrayHasKey('element', $functionList);
+        $this->assertArrayHasKey('t', $functionList);
     }
-
 }

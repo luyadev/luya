@@ -9,6 +9,7 @@ use luya\helpers\Url;
  * Luya Composition Component to provide i18n/language handling.
  * 
  * @since 1.0.0-beta1 Implementation of ArrayAccess.
+ *
  * @author nadar
  */
 class Composition extends \yii\base\Component implements \ArrayAccess
@@ -22,7 +23,7 @@ class Composition extends \yii\base\Component implements \ArrayAccess
      * @var \yii\web\Request Request-Object container from DI
      */
     public $request = null;
-    
+
     /**
      * @var bool Enable or disable the->getFull() prefix. If disabled the response of getFull() would be empty, otherwhise it
      *           returns the full prefix composition pattern based url.
@@ -55,30 +56,31 @@ class Composition extends \yii\base\Component implements \ArrayAccess
     private $_composition = [];
 
     /**    
-     * Class constructor, to get data from DiContainer
+     * Class constructor, to get data from DiContainer.
      * 
      * @param \luya\web\Request $request
-     * @param array $config
+     * @param array             $config
      */
     public function __construct(\luya\web\Request $request, array $config = [])
     {
         $this->request = $request;
         parent::__construct($config);
     }
-    
+
     /**
-     * Resolve the the composition on init
+     * Resolve the the composition on init.
      */
     public function init()
     {
         $resolve = $this->getResolvedPathInfo($this->request);
         $this->set($resolve['compositionKeys']);
     }
-    
+
     /**
      * Resolve the current url request and retun an array contain resolved route and the resolved values.
      *
      * @param \yii\web\Request $request
+     *
      * @return array An array containing the route and the resolvedValues. Example array output when request path is `de/hello/world`:
      * 
      * ```php
@@ -141,6 +143,7 @@ class Composition extends \yii\base\Component implements \ArrayAccess
      *
      * @param string $key          The key to find in the composition array e.g. langShortCode
      * @param string $defaultValue The default value if they could not be found
+     *
      * @return string|bool
      */
     public function getKey($key, $defaultValue = false)
@@ -210,30 +213,30 @@ class Composition extends \yii\base\Component implements \ArrayAccess
     {
         return $this->getKey('langShortCode');
     }
-    
+
     // ArrayAccess implentation
-    
+
     public function offsetExists($offset)
     {
         return isset($this->_composition[$offset]);
     }
-    
+
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
-            throw new Exception("Unable to set array value without key. Empty keys not allowed.");
+            throw new Exception('Unable to set array value without key. Empty keys not allowed.');
         }
-        
+
         $this->_composition[$offset] = $value;
     }
-    
+
     public function offsetGet($offset)
     {
         return $this->getKey($offset, null);
     }
-    
+
     public function offsetUnset($offset)
     {
-        throw new Exception("Deleting keys in Composition is not allowed.");
+        throw new Exception('Deleting keys in Composition is not allowed.');
     }
 }

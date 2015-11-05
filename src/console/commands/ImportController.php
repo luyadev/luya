@@ -105,7 +105,7 @@ class ImportController extends \luya\console\Command implements \luya\console\in
     public function actionIndex()
     {
         $queue = [];
-        
+
         foreach (Yii::$app->getModules() as $id => $module) {
             if ($module instanceof \luya\base\Module) {
                 $response = $module->import($this);
@@ -113,28 +113,29 @@ class ImportController extends \luya\console\Command implements \luya\console\in
                     foreach ($response as $class) {
                         $obj = new $class($this);
                         $prio = $obj->queueListPosition;
-                        while(true) {
+                        while (true) {
                             if (!array_key_exists($prio, $queue)) {
                                 break;
                             }
-                            $prio++;
+                            ++$prio;
                         }
                         $queue[$prio] = $obj;
                     }
                 }
             }
         }
-        
+
         ksort($queue);
-        
-        foreach($queue as $pos => $object) {
+
+        foreach ($queue as $pos => $object) {
             $object->run();
         }
 
         if (Yii::$app->hasModule('admin')) {
             Config::set('last_import_timestamp', time());
-            Yii::$app->db->createCommand()->update("admin_user", ['force_reload' => 1])->execute();
+            Yii::$app->db->createCommand()->update('admin_user', ['force_reload' => 1])->execute();
         }
+
         return $this->outputSuccess(print_r($this->_log, true));
     }
 }

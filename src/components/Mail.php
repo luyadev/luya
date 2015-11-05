@@ -93,19 +93,20 @@ class Mail extends \yii\base\Component
     {
         $this->_phpmailer = null;
     }
-    
+
     /**
      * @see https://github.com/PHPMailer/PHPMailer/blob/master/examples/smtp_check.phps
+     *
      * @throws Exception
      */
     public function smtpTest()
     {
         //Create a new SMTP instance
-        $smtp = new SMTP;
-        
+        $smtp = new SMTP();
+
         //Enable connection-level debug output
         //$smtp->do_debug = SMTP::DEBUG_CONNECTION;
-        
+
         try {
             //Connect to an SMTP server
             if ($smtp->connect($this->host, $this->port)) {
@@ -115,10 +116,10 @@ class Mail extends \yii\base\Component
                     if ($smtp->authenticate($this->username, $this->password)) {
                         return true;
                     } else {
-                        throw new Exception('Authentication failed: ' . $smtp->getLastReply());
+                        throw new Exception('Authentication failed: '.$smtp->getLastReply());
                     }
                 } else {
-                    throw new Exception('HELO failed: '. $smtp->getLastReply());
+                    throw new Exception('HELO failed: '.$smtp->getLastReply());
                 }
             } else {
                 throw new Exception('Connect failed');

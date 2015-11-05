@@ -8,9 +8,10 @@ class ZipHelper
 {
     /**
      * Add files and sub-directories in a folder to zip file.
-     * @param string $folder
+     *
+     * @param string     $folder
      * @param ZipArchive $zipFile
-     * @param int $exclusiveLength Number of text to be exclusived from the file path.
+     * @param int        $exclusiveLength Number of text to be exclusived from the file path.
      */
     private static function folderToZip($folder, &$zipFile, $exclusiveLength)
     {
@@ -31,11 +32,11 @@ class ZipHelper
         }
         closedir($handle);
     }
-    
+
     /**
      * Zip a folder (include itself).
      * Usage:
-     *   luya\helper\Zip::zipDir('/path/to/sourceDir', '/path/to/out.zip');
+     *   luya\helper\Zip::zipDir('/path/to/sourceDir', '/path/to/out.zip');.
      *
      * @param string $sourcePath Path of directory to be zip.
      * @param string $outZipPath Path of output zip file.
@@ -45,7 +46,7 @@ class ZipHelper
         $pathInfo = pathInfo($sourcePath);
         $parentPath = $pathInfo['dirname'];
         $dirName = $pathInfo['basename'];
-    
+
         $z = new ZipArchive();
         $z->open($outZipPath, ZIPARCHIVE::CREATE);
         $z->addEmptyDir($dirName);

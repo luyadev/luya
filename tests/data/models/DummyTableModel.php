@@ -28,7 +28,7 @@ class DummyTableModel extends \admin\ngrest\base\Model
         $config->list->field('image_array')->imageArray();
         $config->list->field('select')->selectArray([1 => 'foo', 2 => 'bar']);
         $config->list->field('cms_page')->cmsPage();
-        
+
         $config->update->copyFrom('list');
         $config->create->copyFrom('list');
     }

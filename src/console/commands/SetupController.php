@@ -29,9 +29,9 @@ class SetupController extends \luya\console\Command
      */
     public function actionUser()
     {
-        while(true){
+        while (true) {
             $email = $this->prompt('Benutzer E-Mail:');
-            if(!empty(User::findByEmail($email))) {
+            if (!empty(User::findByEmail($email))) {
                 $this->outputError('Email existiert bereits!');
             } else {
                 break;
@@ -39,8 +39,8 @@ class SetupController extends \luya\console\Command
         }
 
         $titleArray = ['Herr' => 1, 'Frau' => 2];
-        $title = $this->select("Anrede:", [
-            'Herr' => '1', 'Frau' => '2'
+        $title = $this->select('Anrede:', [
+            'Herr' => '1', 'Frau' => '2',
         ]);
 
         $firstname = $this->prompt('Vorname:');
@@ -48,7 +48,7 @@ class SetupController extends \luya\console\Command
         $password = $this->prompt('Benutzer Passwort:');
 
         if (!$this->confirm("Einen neuen Benutzer '$title $firstname $lastname, Email $email' mit dem Passwort '$password' anlegen?")) {
-            return $this->outputError("Abort user creation process.");
+            return $this->outputError('Abort user creation process.');
         }
 
         $user = new User();
@@ -66,11 +66,11 @@ class SetupController extends \luya\console\Command
         $groupSelect = [];
 
         $this->output('');
-        foreach($groupEntries as $entry) {
-            $groupSelect[$entry->id] = $entry->name . ' (' . $entry->text. ')';
-            $this->output($entry->id . ' - ' . $groupSelect[$entry->id]);
+        foreach ($groupEntries as $entry) {
+            $groupSelect[$entry->id] = $entry->name.' ('.$entry->text.')';
+            $this->output($entry->id.' - '.$groupSelect[$entry->id]);
         }
-        $groupId = $this->select("Benutzergruppe:", $groupSelect);
+        $groupId = $this->select('Benutzergruppe:', $groupSelect);
 
         $this->insert('admin_user_group', [
             'user_id' => $userId,

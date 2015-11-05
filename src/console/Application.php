@@ -20,7 +20,7 @@ class Application extends \yii\console\Application
      *           to this property.
      */
     public $mute = false;
-    
+
     public $controllerMap = [
         'migrate' => '\luya\console\commands\MigrateController',
         'crud' => '\luya\console\commands\CrudController',
@@ -31,9 +31,9 @@ class Application extends \yii\console\Application
         'health' => '\luya\console\commands\HealthController',
         'block' => '\luya\console\commands\BlockController',
     ];
-    
+
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function coreComponents()
     {

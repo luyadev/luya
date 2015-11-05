@@ -4,15 +4,15 @@ namespace luya\web;
 
 /**
  * @property \luya\web\components\Composition $composition Composition property
- * @author nadar
  *
+ * @author nadar
  */
 class Application extends \yii\web\Application
 {
     use \luya\traits\Application;
-    
+
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function coreComponents()
     {
@@ -27,7 +27,7 @@ class Application extends \yii\web\Application
             'assetManager' => [
                 'class' => 'luya\web\AssetManager',
                 'forceCopy' => YII_DEBUG,
-                'appendTimestamp' => !YII_DEBUG
+                'appendTimestamp' => !YII_DEBUG,
             ],
         ]);
     }

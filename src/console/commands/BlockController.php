@@ -250,7 +250,7 @@ class BlockController extends \luya\console\Command
         if ($creation) {
             return $this->outputSuccess("File '$file' created");
         }
-        
+
         return $this->outputError("Error while creating file '$file'");
     }
 

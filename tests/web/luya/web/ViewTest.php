@@ -2,7 +2,6 @@
 
 namespace tests\web\luya\web\components;
 
-use Yii;
 use luya\web\View;
 
 class ViewTest extends \tests\web\Base

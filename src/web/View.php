@@ -20,9 +20,10 @@ class View extends \yii\web\View
     }
 
     /**
-     * Removes redundant whitespaces (>1) and new lines (>1)
+     * Removes redundant whitespaces (>1) and new lines (>1).
      * 
      * @param string $content input string
+     *
      * @return string compressed string
      */
     public function compress($content)

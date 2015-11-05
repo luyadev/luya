@@ -5,6 +5,7 @@ namespace tests\web\luya\components;
 use Yii;
 use luya\web\Request;
 use luya\web\UrlManager;
+
 /**
  * @author nadar
  */
@@ -12,14 +13,12 @@ class UrlRuleTest extends \tests\web\Base
 {
     public function testParseRequest()
     {
-
         $request = new Request();
         $request->pathInfo = 'de/1234/luya09/my/website';
 
         Yii::$app->composition->request = $request;
         Yii::$app->composition->pattern = '<langShortCode:[a-z]{2}>/<foo:[0-9]{4}>/<bar:[a-z0-9]+>';
-        
-        
+
         $manager = new UrlManager();
         $rule = new \luya\components\UrlRule();
 
@@ -67,7 +66,7 @@ class UrlRuleTest extends \tests\web\Base
         $this->assertEquals(true, is_array($rule->getUrlParts($request)));
         $this->assertEquals(1, count($rule->getUrlParts($request)));
     }
-    
+
     public function testReslvedWithLeadingCompositionPrefix()
     {
         $en = $this->callUrl('/en');
@@ -76,26 +75,26 @@ class UrlRuleTest extends \tests\web\Base
         $fbar = $this->callUrl('/de/foobar');
         $none = $this->callUrl('/');
 
-        $this->assertEquals("cms/default/index", $en[0]);
-        $this->assertEquals("cms/default/index", $de[0]);
-        $this->assertEquals("cms/default/index", $sw[0]);
-        $this->assertEquals("cms/default/index", $fbar[0]);
+        $this->assertEquals('cms/default/index', $en[0]);
+        $this->assertEquals('cms/default/index', $de[0]);
+        $this->assertEquals('cms/default/index', $sw[0]);
+        $this->assertEquals('cms/default/index', $fbar[0]);
         $this->assertEquals(false, $none);
-        
-        $this->assertEquals("", $en[1]['path']);
-        $this->assertEquals("", $de[1]['path']);
-        $this->assertEquals("", $sw[1]['path']);
-        $this->assertEquals("foobar", $fbar[1]['path']);
+
+        $this->assertEquals('', $en[1]['path']);
+        $this->assertEquals('', $de[1]['path']);
+        $this->assertEquals('', $sw[1]['path']);
+        $this->assertEquals('foobar', $fbar[1]['path']);
     }
-    
-    private function callUrl($url) 
+
+    private function callUrl($url)
     {
         $request = new Request();
         $request->pathInfo = $url;
-        
+
         $manager = new UrlManager();
         $rule = new \luya\components\UrlRule();
-        
+
         return $rule->parseRequest($manager, $request);
     }
 }

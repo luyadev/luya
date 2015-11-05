@@ -5,18 +5,18 @@ namespace luya\traits;
 trait Application
 {
     public $siteTitle = 'Luya';
-    
+
     public $remoteToken = false;
 
     public $luyaCoreComponents = [
         'mail' => ['class' => 'luya\components\Mail'],
     ];
-    
+
     public function luyaCoreComponents()
     {
         return array_merge(parent::coreComponents(), $this->luyaCoreComponents);
     }
-    
+
     public function getApplicationModules()
     {
         $modules = [];

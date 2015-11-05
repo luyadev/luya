@@ -12,36 +12,35 @@ class GetterSetter extends BaseBlock
     {
         return [];
     }
-    
+
     public function name()
     {
         return 'name';
     }
-    
+
     public function config()
     {
         return [
             'vars' => [
                 ['type' => 'zaa-text', 'var' => 'blabla', 'label' => 'yolo'],
-            ]
+            ],
         ];
     }
-    
+
     public function twigFrontend()
     {
         return '';
     }
-    
+
     public function twigAdmin()
     {
         return '';
     }
-    
+
     public function callbackDerTest()
     {
         return 'bar';
     }
-    
 }
 
 class BlockTest extends \tests\web\Base
@@ -101,25 +100,24 @@ class BlockTest extends \tests\web\Base
         // will throw Exception:  Required attributes in config var element is missing. var, label and type are required.
         $block->getVars();
     }
-    
+
     public function testGetterSetter()
     {
         $gs = new GetterSetter();
-        
+
         $a = $gs->config();
         $b = $gs->name();
         $c = $gs->extraVars();
         $d = $gs->twigAdmin();
         $e = $gs->twigFrontend();
-        
+
         $gs->setPlaceholderValues(['blabl' => 'Gandalf ist mein Vorbild']);
-        
     }
-    
+
     public function testAjaxCreation()
     {
         $gs = new GetterSetter();
-        
+
         $this->assertNotEquals(false, $gs->createAjaxLink('DerTest'));
     }
 }

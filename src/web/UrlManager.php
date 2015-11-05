@@ -28,7 +28,7 @@ class UrlManager extends \yii\web\UrlManager
         if (Yii::$app->composition->hidden) {
             return $route;
         }
-        
+
         $composition = Yii::$app->composition->getFull();
 
         $length = strlen($composition);
@@ -73,7 +73,7 @@ class UrlManager extends \yii\web\UrlManager
     public function createUrl($params)
     {
         $menu = Yii::$app->get('menu', false);
-        
+
         $composition = Yii::$app->composition->getFull();
 
         $originalParams = $params;
@@ -97,6 +97,7 @@ class UrlManager extends \yii\web\UrlManager
         if ($this->getContextNavItemId() && $menu) {
             $menuItem = $menu->find()->where(['id' => $this->getContextNavItemId()])->includeHidden()->one();
             $this->resetContext();
+
             return Url::startTrailing(preg_replace("/$moduleName/", $menuItem->link, $response, 1));
         }
 
@@ -105,17 +106,18 @@ class UrlManager extends \yii\web\UrlManager
             if (method_exists($moduleObject, 'setContext') && !empty($moduleObject->context) && $menu) {
                 $options = $moduleObject->getContextOptions();
                 $menuItem = $menu->find()->where(['id' => $options['navItemId']])->includeHidden()->one();
+
                 return Url::startTrailing(preg_replace("/$moduleName/", $menuItem->link, $response, 1));
             }
         }
-        
+
         // because the urlCreation of yii returns a realtive url we have to manualy add the composition getFull() path.
         $baseUrl = Yii::$app->request->baseUrl;
-        
+
         if (empty($baseUrl)) {
-            return Url::startTrailing(Url::removeTrailing($composition) . $response);
+            return Url::startTrailing(Url::removeTrailing($composition).$response);
         }
-        
+
         return str_replace($baseUrl, Url::trailing($baseUrl).Url::removeTrailing($composition), $response);
     }
 }

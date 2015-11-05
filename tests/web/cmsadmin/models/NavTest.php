@@ -2,7 +2,7 @@
 
 namespace tests\web\cmsadmin\models;
 
-use \cmsadmin\models\Nav;
+use cmsadmin\models\Nav;
 
 class NavTest extends \tests\web\Base
 {
@@ -11,7 +11,7 @@ class NavTest extends \tests\web\Base
         $this->assertEquals(false, Nav::findContent(0));
         $this->assertEquals(null, Nav::findContent(1));
     }
-    
+
     /*
     public function testCreatePage()
     {

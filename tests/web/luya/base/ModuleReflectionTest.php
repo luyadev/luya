@@ -3,9 +3,7 @@
 namespace tests\web\luya\module;
 
 use Yii;
-
 use luya\base\ModuleReflection;
-use luya\base\luya\base;
 
 class ModuleReflectionTest extends \tests\web\Base
 {
@@ -13,7 +11,7 @@ class ModuleReflectionTest extends \tests\web\Base
     {
         return new ModuleReflection(new \luya\web\Request(), new \luya\web\UrlManager(), ['module' => $module]);
     }
-    
+
     public function testShareObject()
     {
         //$ref = new ModuleReflection(Yii::$app->getModule('unitmodule'));

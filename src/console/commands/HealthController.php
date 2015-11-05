@@ -58,12 +58,12 @@ class HealthController extends \luya\console\Command
 
         return ($error) ? $this->outputError('Health check found errors!') : $this->outputSuccess('O.K.');
     }
-    
+
     public function actionMailer()
     {
         try {
             if (Yii::$app->mail->smtpTest()) {
-                return $this->outputSuccess("successfull connected to SMTP Server '" . Yii::$app->mail->host . "'");
+                return $this->outputSuccess("successfull connected to SMTP Server '".Yii::$app->mail->host."'");
             }
         } catch (\Exception $e) {
             return $this->outputError($e->getMessage());

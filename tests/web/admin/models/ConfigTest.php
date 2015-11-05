@@ -15,7 +15,7 @@ class ConfigTest extends \tests\web\Base
         $this->assertEquals('bar', Config::get('foo'));
         $this->assertEquals(true, Config::remove('foo'));
     }
-    
+
     public function testUpdate()
     {
         $this->assertEquals(true, Config::set('foo2', 'baz'));

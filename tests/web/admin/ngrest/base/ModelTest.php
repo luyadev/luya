@@ -10,7 +10,7 @@ class ModelTest extends \tests\web\Base
     public function testNgRest()
     {
         $time = time();
-        
+
         $model = new DummyTableModel();
         $model->attributes = [
             'i18n_text' => ['de' => 'foo-de', 'en' => 'foo-en'],
