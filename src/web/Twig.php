@@ -20,17 +20,15 @@ class Twig extends \yii\base\Component
     public function getFunctions()
     {
         return [
-            /*
-            'links' => function ($cat, $lang, $parent_nav_id) {
-                return Yii::$app->links->findAll(['cat' => $cat, 'lang' => $lang, 'parent_nav_id' => (int) $parent_nav_id]);
+            'menuFindAll' => function (array $where) {
+                return Yii::$app->menu->findAll($where);
             },
-            'linksFindParent' => function ($level) {
-                return \luya\helpers\Menu::parentNavIdByCurrentLink(Yii::$app->links, $level);
+            'menuFindOne' => function (array $where) {
+                return Yii::$app->menu->findOne($where);
             },
-            'linkActivePart' => function ($part) {
-                return Yii::$app->links->getActiveUrlPart($part);
+            'menuCurrent' => function () {
+                return Yii::$app->menu->current;
             },
-            */
             'asset' => function ($name) {
                 return Yii::$app->getAssetManager()->getBundle($name);
             },
