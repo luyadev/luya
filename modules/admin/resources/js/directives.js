@@ -938,9 +938,10 @@
 				scope.filterId = 0;
 				scope.imageinfo = null;
 				
-				FilterService.get(function(r) {
+				FilterService.get().then(function(r) {
 					scope.filters = r;
 				});
+				
 				//scope.filters = ApiAdminFilter.query();
 				scope.originalFileIsRemoved = false;
 				
