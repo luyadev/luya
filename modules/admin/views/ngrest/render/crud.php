@@ -60,15 +60,15 @@
         <!-- LIST -->
         <div class="card-panel" ng-switch-default>
             
-            <div class="row">
-                <div class="col s8">
-                    <!-- <p>{{currentMenuItem.alias}}</p> -->
-                </div>
-                <div class="input-field col s4 right" style="display:none">
-                    <i class="material-icons prefix">search</i>
-                    <input id="searchString" ng-model="searchString" type="text">
+            
+            <div style="margin-bottom:30px;">
+                <div class="input input--vertical input--text">
+                    <div class="input__field-wrapper">
+                        <input class="input__field" id="searchString" ng-model="searchString" type="text" placeholder="Suchbegriff eingeben..." />
+                    </div>
                 </div>
             </div>
+            
 
             <div ng-show="deleteErrors.length">
                 <div class="alert alert--danger">
@@ -77,7 +77,6 @@
                     </ul>
                 </div>
             </div>
-
             <table class="striped responsive-table hoverable">
                 <thead>
                     <tr>
@@ -90,7 +89,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in data.list  |  orderBy:orderBy" >
+                    <tr ng-repeat="(key, item) in data.list | orderBy:orderBy | srcbox:searchString">
                         <?php foreach ($config->getPointer('list') as $item): ?>
                             <?php foreach ($this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_LIST) as $element): ?>
                                 <td><?= $element['html']; ?></td>

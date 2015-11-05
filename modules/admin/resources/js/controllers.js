@@ -1,6 +1,24 @@
 (function() {
 	"use strict";
 
+	zaa.filter('srcbox', function() {
+		return function(input, search) {
+			if (!input) return input;
+			if (!search) return input;
+			var expected = ('' + search).toLowerCase();
+			var result = {};
+			angular.forEach(input, function(value, key) {
+				angular.forEach(value, function(kv, kk) {
+					var actual = ('' + kv).toLowerCase();
+					if (actual.indexOf(expected) !== -1) {
+						result[key] = value;
+					}
+				});
+		    });
+		    return result;
+	    }
+	});
+	
 	// CrudController.js
 	zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminLangService) {
 		
@@ -32,6 +50,8 @@
 		$scope.orderBy = "+id";
 		
 		$scope.showCrudList = true;
+		
+		$scope.searchString = null;
 		
 		$scope.currentMenuItem = null;
 		
