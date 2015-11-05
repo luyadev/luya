@@ -3,21 +3,29 @@
 namespace cms\controllers;
 
 use Yii;
+use yii\web\ForbiddenHttpException;
+use yii\web\NotFoundHttpException;
+use cmsadmin\models\NavItem;
+use yii\web\yii\web;
 
 class PreviewController extends \cms\base\Controller
 {
     public function actionIndex($itemId)
     {
         if (Yii::$app->adminuser->isGuest) {
-            throw new \yii\web\ForbiddenHttpException('Unable to view the preview page, session expired or not logged in.');
+            throw new ForbiddenHttpException('Unable to see the preview page, session expired or not logged in.');
         }
 
-        $link = Yii::$app->links->findOneByArguments(['id' => $itemId]);
+        $langShortCode = NavItem::findOne($itemId)->lang->short_code;
+        
+        Yii::$app->composition['langShortCode'] = $langShortCode;
+        
+        $item = Yii::$app->menu->find()->where(['id' => $itemId])->includeHidden()->lang($langShortCode)->one();
 
-        Yii::$app->links->activeUrl = $link['url'];
-
-        Yii::$app->composition->setkey('langShortCode', $link['lang']);
-
+        if (!$item) {
+            throw new NotFoundHttpException("Unable to find item id $itemId");
+        }
+        
         return $this->render('index', [
             'pageContent' => $this->renderItem($itemId),
         ]);
