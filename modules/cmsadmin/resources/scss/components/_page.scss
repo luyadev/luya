@@ -48,7 +48,7 @@
 }
 
 .accordion__body > .page__drop:first-of-type .page__drop-zone {
-	margin-top: 1px;
+	margin-top: 0px;
 }
 .accordion__body > div:last-of-type .page__drop-zone {
 	margin-top: -14px;
@@ -74,5 +74,6 @@
 		background-color: rgba(darken($page__drop-zone--background, 10), 0.8);
 		height: 20px;
 		margin-top: -10px;
+		z-index: 10;
 	}
 }

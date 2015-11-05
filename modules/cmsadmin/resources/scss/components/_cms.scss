@@ -26,6 +26,7 @@ $cms__pages--width-full: 100%;
 	right: 0;
 	top: $mainnav-height;
 	bottom: 0;
+	z-index: 10;
 	// transition: 0.25s ease right;
 }
 .cms--sidebar-hidden .cms__sidebar {
