@@ -1169,6 +1169,7 @@
                         FilemanagerFolderListService.get(true).then(function(r) {
                             $scope.folders = r;
                             $scope.currentFolderId = 0;
+							$scope.getFiles(0,false);
                         });
                     });
                 }

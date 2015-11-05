@@ -155,6 +155,12 @@ class StorageController extends \admin\base\RestController
         return Yii::$app->storage->folder->updateFolder($folderId, Yii::$app->request->post());
     }
 
+    /**
+     * delete folder, all subfolders and all files included
+     *
+     * @param int $folderId
+     * @return bool
+     */
     public function actionFolderDelete($folderId)
     {
         return Yii::$app->storage->folder->deleteFolder($folderId);
