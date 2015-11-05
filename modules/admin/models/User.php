@@ -22,7 +22,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
 
     public function ngRestConfig($config)
     {
-        $config->aw->register(new \admin\aws\ChangePassword(), 'Passwort ändern');
+        $config->aw->register(new \admin\aws\ChangePassword(), ['icon' => 'vpn_key']);
         
         $config->create->field('title', 'Anrede')->selectArray(static::getTitles(), 0);
         $config->create->field('firstname', 'Vorname')->text();
