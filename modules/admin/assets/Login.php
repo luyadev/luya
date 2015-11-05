@@ -13,7 +13,7 @@ class Login extends \luya\web\Asset
     ];
 
     public $js = [
-        'js/materialize.min.js',
+        //'js/materialize.min.js',
         'js/login.js',
     ];
 

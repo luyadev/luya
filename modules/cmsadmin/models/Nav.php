@@ -52,11 +52,13 @@ class Nav extends \yii\db\ActiveRecord
         return $this->hasMany(NavItem::className(), ['nav_id' => 'id']);
     }
 
+    
     public function getProperties()
     {
         return CmsProperty::find()->where(['nav_id' => $this->id])->leftJoin('admin_property', 'admin_prop_id=admin_property.id')->select(['cms_nav_property.*', 'admin_property.module_name', 'admin_property.class_name', 'admin_property.var_name'])->asArray()->all();
     }
 
+    /*
     public function getProperty($varName)
     {
         $value = CmsProperty::find()->where(['nav_id' => $this->id])->leftJoin('admin_property', 'admin_prop_id=admin_property.id')->select(['cms_nav_property.value'])->andWhere(['admin_property.var_name' => $varName])->asArray()->one();
@@ -66,8 +68,8 @@ class Nav extends \yii\db\ActiveRecord
             return false;
         }
     }
-
-    public function getPropertyObject($varName)
+    */
+    public function getProperty($varName)
     {
         $value = CmsProperty::find()->where(['nav_id' => $this->id])->leftJoin('admin_property', 'admin_prop_id=admin_property.id')->select(['cms_nav_property.value', 'admin_property.class_name'])->andWhere(['admin_property.var_name' => $varName])->asArray()->one();
 

@@ -10,11 +10,6 @@ class Page extends \yii\base\Component
     
     public function getProperty($name)
     {
-        return $this->model->nav->getProperty($name);
-    }
-    
-    public function getProperties()
-    {
-        return $this->model->nav->getProperties();
+        return $this->model->nav->getProperty($name)->value;
     }
 }

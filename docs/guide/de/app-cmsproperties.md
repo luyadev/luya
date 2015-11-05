@@ -114,19 +114,20 @@ Events
 
 Eine Eigenschaft welche einer CMS Seite hinzugefügt wurde, kann auch auf Events reagieren. Folgenden Events stehe zur Verfügung:
 
-| Event Name | Beschreibung |
-| ---		 | ---			|
-| EVENT_BEFORE_RENDER | Event vor der Ausgabe des CMS inhalts ausführen. Wenn die Eingeschahft `$event->isValid` auf `false` gestellt wird, wird die Ausgabe abgebrochen.|
+|Event Name | Beschreibung |
+|---		 | ---			|
+|EVENT_BEFORE_RENDER    |Event vor der Ausgabe des CMS inhalts ausführen. Wenn die Eingeschahft `$event->isValid` auf `false` gestellt wird, wird die Ausgabe abgebrochen.|
+|EVENT_BEFORE_FIND      |Event vor dem return der value property (welche durch die User-Auswahl selektiert wird 
 
-Beispiel für einen Event der die Ausgabe abbricht
+#### EVENT_BEFORE_RENDER
 
 ```php
 public function init()
 {
-    $this->on(self::EVENT_BEFORE_RENDER, [$this, 'beforeIndex']);
+    $this->on(self::EVENT_BEFORE_RENDER, [$this, 'beforeRender']);
 }
 
-public function beforeIndex($event)
+public function beforeRender($event)
 {
 	if ($this->thisMethodReturnsFalseWhyEver()) {
 		Yii::$app->response->redirect('https://luya.io');
@@ -134,6 +135,22 @@ public function beforeIndex($event)
 	}
 }
 ```
+
+#### EVENT_BEFORE_FIND
+
+```php
+public function init()
+{
+    $this->on(self::EVENT_BEFORE_FIND, [$this, 'beforeFind']);
+}
+
+public function beforeFind($)
+{
+    $this->value = strtoupper($this->value);
+}
+```
+
+Würde nun den vom user ausgewählte auswahl oder eingabe (abhängig vom type) via der PHP funktion strtoupper alles gross schreiben beim Output.
 
 
 

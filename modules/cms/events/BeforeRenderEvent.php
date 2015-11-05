@@ -2,7 +2,7 @@
 
 namespace cms\events;
 
-class CmsEvent extends \yii\base\Event
+class BeforeRenderEvent extends \yii\base\Event
 {
     public $isValid = true;
 }
