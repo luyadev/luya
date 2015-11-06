@@ -95,7 +95,8 @@ class NavItemController extends \admin\base\RestController
      * @param $model
      * @param string $attribute
      */
-    public function setPostAttribute($model, $attribute) {
+    public function setPostAttribute($model, $attribute)
+    {
         if ($attributeValue = Yii::$app->request->post($attribute, null)) {
             $model->setAttribute($attribute, $attributeValue);
         }
