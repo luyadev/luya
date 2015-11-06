@@ -122,8 +122,8 @@ class NavItemController extends \admin\base\RestController
         // save old id
         $oldNavItemType = $model->nav_item_type;
         $oldNavItemTypeId = $model->nav_item_type_id;
-        $oldTitle = $title;
-        $oldRewrite = $rewrite;
+        $oldTitle = $model->$title;
+        $oldRewrite = $model->$rewrite;
 
         $model->nav_item_type = $navItemType;
         $model->title = $title;
