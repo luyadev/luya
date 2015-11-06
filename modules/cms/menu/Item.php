@@ -75,11 +75,11 @@ class Item extends \yii\base\Object
      */
     public function getParents()
     {
-        $parent = $this->getParent();
+        $parent = $this->getParentIncludeHidden();
         $data = [];
         while ($parent) {
             $data[] = $parent;
-            $parent = $parent->getParent();
+            $parent = $parent->getParentIncludeHidden();
         }
         
         return array_reverse($data);
