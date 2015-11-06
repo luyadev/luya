@@ -36,7 +36,16 @@ use yii\helpers\Url;
                             <? if($item->hasChildren()): ?>
                             <ul>
                                 <? foreach($item->children as $child): ?>
-                                    <li><a<? if($child->isActive): ?> class="active"<?endif;?> href="<?= $child->link; ?>">&raquo; <?= $child->title; ?></a>
+                                    <li><a<? if($child->isActive): ?> class="active"<?endif;?> href="<?= $child->link; ?>">&raquo; <?= $child->title; ?></a></li>
+                                    
+                                    <? if($child->hasChildren()): ?>
+                                    <ul>
+                                        <? foreach($child->children as $grandChild): ?>
+                                            <li><a<? if($grandChild->isActive): ?> class="active"<?endif;?> href="<?= $grandChild->link; ?>">&raquo; <?= $grandChild->title; ?></a>
+                                        <? endforeach; ?>
+                                    </ul>
+                                    <? endif; ?>
+                                    
                                 <? endforeach; ?>
                             </ul>
                             <? endif; ?>
