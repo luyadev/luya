@@ -65,6 +65,71 @@
     </div>
 </div>
 </script>
+
+<!-- UPDATE PAGE FORM -->
+<script type="text/ng-template" id="updateformpage.html">
+    <div class="row">
+        <div class="input input--select col s12">
+            <label class="input__label">Layout</label>
+            <div class="input__field-wrapper">
+                <select class="input__field browser-default" ng-model="data.layout_id" ng-options="lts.id as lts.name for lts in layouts"></select>
+            </div>
+        </div>
+    </div>
+</script>
+<!-- /UPDATE PAGE FORM -->
+
+<!-- UPDATE MODULE FORM -->
+<script type="text/ng-template" id="updateformmodule.html">
+    <div class="row">
+        <div class="input input--text col s12">
+            <label class="input__label">Modul Name (Yii-ID)</label>
+            <div class="input__field-wrapper">
+                <input name="text" type="text" class="input__field" ng-model="data.module_name" />
+            </div>
+        </div>
+    </div>
+</script>
+<!-- /UPDATE MODULE FORM -->
+
+<!-- UPDATE REDIRECT FORM -->
+<script type="text/ng-template" id="updateformredirect.html">
+    <div class="row">
+        <div class="input input--radios col s12">
+            <label class="input__label">Art der Weiterleitung</label>
+            <div class="input__field-wrapper">
+                <input type="radio" ng-model="data.type" value="1" id="r_t1"><label for="r_t1">Interne-Seite</label> <br />
+                <input type="radio" ng-model="data.type" value="2" id="r_t2"><label for="r_t2">Link-Extern</label>
+                <!--<input type="radio" ng-model="data.redirect_type" value="3" id="r_t3"><label for="r_t3">Datei</label>-->
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12" ng-show="data.type==1">
+            <p>Auf welche Interne-Seite wollen Sie weiterleiten?</p>
+            <menu-dropdown class="menu-dropdown" nav-id="data.value" />
+        </div>
+
+        <div class="col s12" ng-show="data.type==2">
+
+            <div class="input input--text col s12">
+                <label class="input__label">Externer Link</label>
+                <div class="input__field-wrapper">
+                    <input name="text" type="text" class="input__field" ng-model="data.value" placeholder="http://" />
+                    <small>Externe Links beginnen mit http:// oder https://</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12" ng-show="data.type==3">
+            <p>todo</p> <!-- todo -->
+        </div>
+
+    </div>
+</script>
+<!-- /UPDATE REDIRECT FORM -->
+
 <div ng-controller="NavController" ng-show="!isDeleted">
 
     <div class="cms" ng-class="{'cms--sidebar-hidden' : !sidebar}">
@@ -241,7 +306,7 @@
                         <!-- /PAGE__HEADER -->
 
                         <!-- PAGE__CONTENT--SETTINGS -->
-                        <form class="page__content page__content--settings" ng-show="settings" ng-switch on="item.nav_item_type">
+                        <form class="page__content page__content--settings" ng-show="settings" ng-switch on="itemCopy.nav_item_type">
 
                             <div class="row">
                                 <div class="input input--text col s12">
@@ -261,20 +326,26 @@
                             </div>
 
                             <div class="row">
-                                <div class="input input--select col s12">
-                                    <label class="input__label">Layout</label>
+                                <div class="input input--radios col s12">
+                                    <label class="input__label">Seitentyp</label>
                                     <div class="input__field-wrapper">
-                                        <select class="input__field browser-default" ng-model="typeDataCopy.layout_id" ng-options="lts.id as lts.name for lts in layouts"></select>
+                                        <input type="radio" ng-model="itemCopy.nav_item_type" value="1" id="update-switch-1"><label for="update-switch-1">Seite</label> <br />
+                                        <input type="radio" ng-model="itemCopy.nav_item_type" value="2" id="update-switch-2"><label for="update-switch-2">Modul</label> <br />
+                                        <input type="radio" ng-model="itemCopy.nav_item_type" value="3" id="update-switch-3"><label for="update-switch-3">Weiterleitung</label>
                                     </div>
                                 </div>
                             </div>
-                    
-                            <div ng-switch-when="2" class="row">
-                                <p>Module Settings.</p>
+
+                            <div ng-switch-when="1">
+                                <update-form-page data="typeDataCopy"></update-form-page>
                             </div>
-                            
-                            <div ng-switch-when="3" class="row">
-                                <p>Redirect Settings</p>
+
+                            <div ng-switch-when="2">
+                                <update-form-module data="typeDataCopy"></update-form-module>
+                            </div>
+
+                            <div ng-switch-when="3">
+                                <update-form-redirect data="typeDataCopy"></update-form-redirect>
                             </div>
 
                             <br />
@@ -288,7 +359,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="alert alert--danger" ng-show="errors.length">
                                 <ul>
                                     <li ng-repeat="err in errors">{{err.message}}</li>

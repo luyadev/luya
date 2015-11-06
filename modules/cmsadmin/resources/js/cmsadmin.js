@@ -27,7 +27,47 @@
 			}
 		}
 	});
-	
+
+    zaa.directive("updateFormPage", function(CmsLayoutService) {
+        return {
+            restrict : 'EA',
+            scope : {
+                data : '='
+            },
+            templateUrl : 'updateformpage.html',
+            controller : function($scope, $resource) {
+                CmsLayoutService.data.$promise.then(function(response) {
+                    $scope.layouts = response;
+                });
+            }
+        }
+    });
+
+	zaa.directive("updateFormModule", function() {
+		return {
+			restrict : 'EA',
+			scope : {
+				data : '='
+			},
+			templateUrl : 'updateformmodule.html',
+			controller : function($scope) {
+			}
+		}
+	});
+
+	zaa.directive("updateFormRedirect", function() {
+		return {
+			restrict : 'EA',
+			scope : {
+				data : '='
+			},
+			templateUrl : 'updateformredirect.html',
+			controller : function($scope) {
+			}
+		}
+	});
+
+
 	zaa.directive("createForm", function() {
 		return {
 			restrict : 'EA',
@@ -117,7 +157,7 @@
 			}
 		}
 	});
-	
+
 	zaa.directive("createFormModule", function() {
 		return {
 			restrict : 'EA',
@@ -672,21 +712,24 @@
 		}
 		
 		$scope.errors = [];
-		
+
 		$scope.save = function(itemCopy, typeDataCopy) {
 			$scope.errors = [];
 			var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 			var navItemId = itemCopy.id;
-			$http.post('admin/api-cms-navitem/update-item?navItemId=' + navItemId, $.param({ title : itemCopy.title, rewrite : itemCopy.rewrite }), headers).success(function(response) {
-				$http.post('admin/api-cms-navitem/update-item-type-data?navItemId=' + navItemId, $.param(typeDataCopy), headers).success(function(responseTypeData) {
-					//Materialize.toast('<span> Die Seite «'+itemCopy.title+'» wurde aktualisiert.</span>', 2000);
-					MenuService.refresh();
-					$scope.refresh();
-					$scope.toggleSettings();
-				});
-			}).error(function(e) {
-				$scope.errors = e;
-			})
+
+			$http.post(
+					'admin/api-cms-navitem/update-page-item?navItemId=' + navItemId + '&navItemType=' + itemCopy.nav_item_type + '&navItemTypeId=' + itemCopy.nav_item_type_id + '&title=' + itemCopy.title + '&rewrite=' + itemCopy.rewrite,
+					$.param(typeDataCopy),
+					headers
+			).then(function successCallback(response) {
+				//Materialize.toast('<span> Die Seite «'+itemCopy.title+'» wurde aktualisiert.</span>', 2000);
+				MenuService.refresh();
+				$scope.refresh();
+				$scope.toggleSettings();
+			}, function errorCallback(response) {
+				$scope.errors = response.data;
+			});
 		};
 		
 		$scope.toggleSettings = function() {
@@ -719,6 +762,7 @@
 						params : { navItemId : response.id }
 					}).success(function(r) {
 						$scope.typeData = r;
+
 					})
 					
 					$scope.isTranslated = true;
