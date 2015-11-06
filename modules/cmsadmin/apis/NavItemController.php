@@ -73,6 +73,7 @@ class NavItemController extends \admin\base\RestController
      */
     public function deleteItem($navItemType, $navItemTypeId)
     {
+        $model = null;
         switch($navItemType) {
             case 1:
                 $model = NavItemPage::find()->where(['id' => $navItemTypeId])->one();
@@ -133,6 +134,7 @@ class NavItemController extends \admin\base\RestController
             return $this->sendModelError($model);
         }
 
+        $itemModel = null;
         if ($oldNavItemType == $model->nav_item_type) {
             switch($navItemType) {
                 case 1:
