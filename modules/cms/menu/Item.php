@@ -69,8 +69,19 @@ class Item extends \yii\base\Object
         return (new Query())->where(['nav_id' => $this->parentNavId])->includeHidden()->one();
     }
     
-    public function teardown()
+    /**
+     * Return all parent elements (breadcrumb behavior) without the current item.
+     * @return array 
+     */
+    public function getParents()
     {
+        $parent = $this->getParent();
+        $data = [];
+        while ($parent) {
+            $data[] = $parent;
+            $parent = $parent->getParent();
+        }
         
+        return array_reverse($data);
     }
 }
