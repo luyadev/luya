@@ -20,7 +20,7 @@ class PreviewController extends \cms\base\Controller
         
         Yii::$app->composition['langShortCode'] = $langShortCode;
         
-        $item = Yii::$app->menu->find()->where(['id' => $itemId])->includeHidden()->lang($langShortCode)->one();
+        $item = Yii::$app->menu->find()->where(['id' => $itemId])->with('hidden')->lang($langShortCode)->one();
 
         if (!$item) {
             throw new NotFoundHttpException("Unable to find item id $itemId");

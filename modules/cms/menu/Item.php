@@ -9,6 +9,8 @@ class Item extends \yii\base\Object
 {
     public $itemArray = [];
     
+    private $_with = [];
+    
     public function getId()
     {
         return $this->itemArray['id'];
@@ -44,16 +46,6 @@ class Item extends \yii\base\Object
         return (Yii::$app->menu->current->link == $this->link);
     }
     
-    public function hasChildren()
-    {
-        return ((new Query())->where(['parent_nav_id' => $this->navId])->one()) ? true : false;
-    }
-    
-    public function getChildren()
-    {
-        return (new Query())->where(['parent_nav_id' => $this->navId])->all();   
-    }
-    
     public function getDepth()
     {
         return $this->itemArray['depth'];
@@ -61,27 +53,42 @@ class Item extends \yii\base\Object
     
     public function getParent()
     {
-        return (new Query())->where(['nav_id' => $this->parentNavId])->one();
-    }
-    
-    public function getParentIncludeHidden()
-    {
-        return (new Query())->where(['nav_id' => $this->parentNavId])->includeHidden()->one();
+        return (new Query())->where(['nav_id' => $this->parentNavId])->with($this->_with)->one();
     }
     
     /**
      * Return all parent elements (breadcrumb behavior) without the current item.
-     * @return array 
+     * @return array
      */
     public function getParents()
     {
-        $parent = $this->getParentIncludeHidden();
+        $parent = $this->getParent();
         $data = [];
         while ($parent) {
             $data[] = $parent;
-            $parent = $parent->getParentIncludeHidden();
+            $parent = $parent->getParent();
         }
-        
+    
         return array_reverse($data);
+    }
+    
+    public function getChildren()
+    {
+        return (new Query())->where(['parent_nav_id' => $this->navId])->with($this->_with)->all();   
+    }
+    
+    public function hasChildren()
+    {
+        return ((new Query())->where(['parent_nav_id' => $this->navId])->with($this->_with)->one()) ? true : false;
+    }
+    
+    
+    /**
+     * @see \cms\menu\Query::with()
+     */
+    public function with($with)
+    {
+        $this->_with = (array) $with;
+        return $this;
     }
 }

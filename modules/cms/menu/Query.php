@@ -39,9 +39,9 @@ class Query extends \yii\base\Object
     
     /**
      * @var boolean Choose whetever hidden elements should be skipped in the where filtering
-     * process or not. Use `includeHidden()` to set $skipHidden to false;
+     * process or not. Use `with('hidden')` to set $skipHidden to false;
      */
-    public $skipHidden = true;
+    public $withHidden = false;
     
     public function setMenu(\cms\components\Menu $menu)
     {
@@ -133,9 +133,21 @@ class Query extends \yii\base\Object
         return $this;
     }
     
-    public function includeHidden()
+    /**
+     * @param string|array $with can be a string  containg "hidden" or an array with multiple patters
+     * for example `['hidden']`. Further with statements upcoming.
+     */
+    public function with($types)
     {
-        $this->skipHidden = false;
+        $types = (array) $types;
+        foreach($types as $type) {
+            switch ($type) {
+                case "hidden":
+                    $this->withHidden = true;
+                    break;
+            }
+        }
+        
         return $this;
     }
     
@@ -150,7 +162,7 @@ class Query extends \yii\base\Object
     
     public function arrayFilter($value, $field)
     {
-        if ($field == 'is_hidden' && $this->skipHidden === true && $value == 1) {
+        if ($field == 'is_hidden' && $this->withHidden === false && $value == 1) {
             return false;
         }
         
