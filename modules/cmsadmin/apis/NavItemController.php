@@ -191,7 +191,7 @@ class NavItemController extends \admin\base\RestController
 
         // save new type id
         $model->nav_item_type_id = $itemModel->id;
-        $model->save();
+        $model->update(false);
 
         return true;
     }
