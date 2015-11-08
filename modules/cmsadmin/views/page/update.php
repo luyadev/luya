@@ -139,7 +139,7 @@
 
 <div ng-controller="NavController" ng-show="!isDeleted">
 
-    <div class="cms" ng-class="{'cms--sidebar-hidden' : !sidebar}">
+    <div class="cms">
         <div class="cms__pages">
 
             <div class="row">
@@ -380,7 +380,6 @@
                         <div class="page__content" ng-show="!settings" ng-switch on="item.nav_item_type">
                             <div class="row">
                                 <div class="col s12 page__no-padding" ng-switch-when="1" ng-controller="NavItemTypePageController">
-                                    <div class="alert alert--danger" ng-show="!container.nav_item_page.id">Das für die Seite definierte Layout wurde nicht (mehr) gefunden. Bitte bearbeiten Sie die Layout Einstellungen diese Seite.</div>
                                     <ul class="page__list" ng-show="container.nav_item_page.id">
                                         <li class="page__placeholder accordion__entry--open" ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'"></li>
                                     </ul>
