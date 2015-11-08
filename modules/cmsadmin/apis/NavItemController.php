@@ -2,6 +2,9 @@
 
 namespace cmsadmin\apis;
 
+use cmsadmin\models\NavItemModule;
+use cmsadmin\models\NavItemPage;
+use cmsadmin\models\NavItemRedirect;
 use Yii;
 use Exception;
 use cmsadmin\models\Nav;
@@ -60,6 +63,137 @@ class NavItemController extends \admin\base\RestController
         }
 
         return $this->sendModelError($model);
+    }
+
+    /**
+     * delete specific nav item info (page/module/redirect)
+     *
+     * @param $navItemType
+     * @param $navItemTypeId
+     */
+    public function deleteItem($navItemType, $navItemTypeId)
+    {
+        $model = null;
+        switch($navItemType) {
+            case 1:
+                $model = NavItemPage::find()->where(['id' => $navItemTypeId])->one();
+                break;
+            case 2:
+                $model = NavItemModule::find()->where(['id' => $navItemTypeId])->one();
+                break;
+            case 3:
+                $model = NavItemRedirect::find()->where(['id' => $navItemTypeId])->one();
+                break;
+        }
+        if($model) {
+            $model->delete();
+        }
+    }
+
+    /**
+     * extract a post var and set to model attribute with the same name
+     *
+     * @param $model
+     * @param string $attribute
+     */
+    public function setPostAttribute($model, $attribute)
+    {
+        if ($attributeValue = Yii::$app->request->post($attribute, null)) {
+            $model->setAttribute($attribute, $attributeValue);
+        }
+    }
+
+    /**
+     * check old entries - delete if obsolete (changed type) and add new entry to the appropriate cms_nav_item_(page/module/redirect)
+     *
+     * @param $navItemId
+     * @param $navItemType
+     * @param $navItemTypeId
+     * @param $title
+     * @param $rewrite
+     * @return array|bool
+     */
+    public function actionUpdatePageItem($navItemId, $navItemType, $navItemTypeId, $title, $rewrite)
+    {
+        $model = NavItem::find()->where(['id' => $navItemId])->one();
+        if (!$model) {
+            throw new Exception('Unable to find item id ' . $navItemId);
+        }
+        $model->setParentFromModel();
+        // save old id
+        $oldNavItemType = $model->nav_item_type;
+        $oldNavItemTypeId = $model->nav_item_type_id;
+        $oldTitle = $model->title;
+        $oldRewrite = $model->rewrite;
+
+        $model->nav_item_type = $navItemType;
+        $model->title = $title;
+        $model->rewrite = $rewrite;
+
+        if ((!$model->validate()) || (!$model->save())) {
+            return $this->sendModelError($model);
+        }
+
+        $itemModel = null;
+        if ($oldNavItemType == $model->nav_item_type) {
+            switch($navItemType) {
+                case 1:
+                    $itemModel = NavItemPage::find()->where(['id' => $navItemTypeId])->one();
+                    break;
+                case 2:
+                    $itemModel = NavItemModule::find()->where(['id' => $navItemTypeId])->one();
+                    break;
+                case 3:
+                    $itemModel = NavItemRedirect::find()->where(['id' => $navItemTypeId])->one();
+                    break;
+            }
+        } else {
+            switch($navItemType) {
+                case 1:
+                    $itemModel = new NavItemPage();
+                    break;
+                case 2:
+                    $itemModel = new NavItemModule();
+                    break;
+                case 3:
+                    $itemModel = new NavItemRedirect();
+                    break;
+            }
+        }
+
+        switch($navItemType) {
+            case 1:
+                $this->setPostAttribute($itemModel, 'layout_id');
+                break;
+            case 2:
+                $this->setPostAttribute($itemModel, 'module_name');
+                break;
+            case 3:
+                $this->setPostAttribute($itemModel, 'type');
+                $this->setPostAttribute($itemModel, 'value');
+                break;
+        }
+
+        if ((!$itemModel->validate()) || (!$itemModel->save())) {
+            // error: reverse changes in nav item
+            $model->nav_item_type = $oldNavItemType;
+            $model->nav_item_type_id = $oldNavItemTypeId;
+            $model->rewrite = $oldRewrite;
+            $model->title = $oldTitle;
+            $model->update(false);
+
+            return $this->sendModelError($itemModel);
+        }
+
+        if ($oldNavItemType != $model->nav_item_type) {
+            $this->deleteItem($oldNavItemType, $oldNavItemTypeId);
+        }
+
+        // save new type id
+        $model->nav_item_type_id = $itemModel->id;
+        $model->save();
+
+        return true;
     }
 
     /**
