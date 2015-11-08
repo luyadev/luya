@@ -27,7 +27,7 @@ class NavItemController extends \admin\base\RestController
 
     public function actionReloadPlaceholder($navItemPageId, $prevId, $placeholderVar)
     {
-        return $this->getSub($placeholderVar,  (int) $navItemPageId, (int) $prevId);
+        return $this->getSub($placeholderVar, (int) $navItemPageId, (int) $prevId);
     }
 
     public function actionTypeData($navItemId)
@@ -74,7 +74,7 @@ class NavItemController extends \admin\base\RestController
     public function deleteItem($navItemType, $navItemTypeId)
     {
         $model = null;
-        switch($navItemType) {
+        switch ($navItemType) {
             case 1:
                 $model = NavItemPage::find()->where(['id' => $navItemTypeId])->one();
                 break;
@@ -85,7 +85,7 @@ class NavItemController extends \admin\base\RestController
                 $model = NavItemRedirect::find()->where(['id' => $navItemTypeId])->one();
                 break;
         }
-        if($model) {
+        if ($model) {
             $model->delete();
         }
     }
@@ -136,7 +136,7 @@ class NavItemController extends \admin\base\RestController
 
         $itemModel = null;
         if ($oldNavItemType == $model->nav_item_type) {
-            switch($navItemType) {
+            switch ($navItemType) {
                 case 1:
                     $itemModel = NavItemPage::find()->where(['id' => $navItemTypeId])->one();
                     break;
@@ -148,7 +148,7 @@ class NavItemController extends \admin\base\RestController
                     break;
             }
         } else {
-            switch($navItemType) {
+            switch ($navItemType) {
                 case 1:
                     $itemModel = new NavItemPage();
                     break;
@@ -161,7 +161,7 @@ class NavItemController extends \admin\base\RestController
             }
         }
 
-        switch($navItemType) {
+        switch ($navItemType) {
             case 1:
                 $this->setPostAttribute($itemModel, 'layout_id');
                 break;
@@ -191,7 +191,7 @@ class NavItemController extends \admin\base\RestController
 
         // save new type id
         $model->nav_item_type_id = $itemModel->id;
-        $model->save();
+        $model->update(false);
 
         return true;
     }
