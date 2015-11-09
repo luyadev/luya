@@ -225,6 +225,7 @@ class Menu extends \yii\base\Component
         }
         
         if (!$item) {
+            $this->_currentAppendix = $requestPath;
             return $this->home;
         }
         
@@ -277,12 +278,12 @@ class Menu extends \yii\base\Component
     
     public function getHome()
     {
-        return (new MenuQuery(['menu' => $this]))->where(['is_home' => '1'])->with('hidden')->one();   
+        return (new MenuQuery())->where(['is_home' => '1'])->with('hidden')->one();   
     }
     
     public function find()
     {
-        return (new MenuQuery(['menu' => $this]));
+        return (new MenuQuery());
     }    
     
     public function findAll(array $whereArguments)
