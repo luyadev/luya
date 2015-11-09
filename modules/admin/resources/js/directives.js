@@ -157,7 +157,7 @@
 	/**
 	 * options = {'true-value' : 1, 'false-value' : 0};
 	 */
-	zaa.directive("zaaq", function() {
+	zaa.directive("zaaCheckbox", function() {
 		return {
 			restrict: "E",
 			scope: {
