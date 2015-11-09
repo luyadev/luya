@@ -20,14 +20,17 @@ class Twig extends \yii\base\Component
     public function getFunctions()
     {
         return [
-            'menuFindAll' => function (array $where) {
-                return Yii::$app->menu->findAll($where);
+            'menuFindAll' => function ($cat, $parentNavId) {
+                return Yii::$app->menu->findAll(['cat' => $cat, 'parent_nav_id' => $parentNavId]);
             },
-            'menuFindOne' => function (array $where) {
-                return Yii::$app->menu->findOne($where);
+            'menuFindOne' => function ($id) {
+                return Yii::$app->menu->findOne(['id' => $id]);
             },
             'menuCurrent' => function () {
                 return Yii::$app->menu->current;
+            },
+            'menuCurrentLevel' => function($level) {
+                return Yii::$app->menu->currentLevel($level);  
             },
             'asset' => function ($name) {
                 return Yii::$app->getAssetManager()->getBundle($name);

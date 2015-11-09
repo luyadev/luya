@@ -256,6 +256,25 @@ class Menu extends \yii\base\Component
         return $this->_current;
     }
     
+    /**
+     * Get the current item for the provided level depth
+     * 
+     * @param integer $level Level menu starts with 1
+     */
+    public function currentLevel($level)
+    {
+        $i = 1;
+        $parents = $this->current->with('hidden')->teardown;
+        foreach ($parents as $item) {
+            if ($i == $level) {
+                return $item;
+            }
+            $i++;
+        }
+        
+        return false;
+    }
+    
     public function getHome()
     {
         return (new MenuQuery(['menu' => $this]))->where(['is_home' => '1'])->with('hidden')->one();   

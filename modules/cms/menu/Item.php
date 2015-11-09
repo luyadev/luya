@@ -38,7 +38,7 @@ class Item extends \yii\base\Object
     
     public function getLink()
     {
-        return ($this->itemArray['is_home']) ? '' : $this->itemArray['link'];
+        return ($this->itemArray['is_home']) ? Yii::$app->urlManager->baseUrl : $this->itemArray['link'];
     }
     
     public function getIsActive()
@@ -72,6 +72,21 @@ class Item extends \yii\base\Object
         return array_reverse($data);
     }
     
+    /**
+     * same as getParents but includes the current node too.
+     */
+    public function getTeardown()
+    {
+        $parent = $this->getParent();
+        $data[] = $this;
+        while ($parent) {
+            $data[] = $parent;
+            $parent = $parent->getParent();
+        }
+        
+        return array_reverse($data);
+    }
+    
     public function getChildren()
     {
         return (new Query())->where(['parent_nav_id' => $this->navId])->with($this->_with)->all();   
@@ -81,7 +96,6 @@ class Item extends \yii\base\Object
     {
         return ((new Query())->where(['parent_nav_id' => $this->navId])->with($this->_with)->one()) ? true : false;
     }
-    
     
     /**
      * @see \cms\menu\Query::with()
