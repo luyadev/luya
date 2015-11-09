@@ -33,5 +33,5 @@ All the luya module urlRules does have to "prefix" theyr pattern with the curren
 createUrlDepneding on Rules
 ---------------------------
 ```php
-<?= \luya\helpers\Url::to('estore/default/article', ['articleId' => 123]); ?>
+<?= \luya\helpers\Url::toManager('estore/default/article', ['articleId' => 123]); ?>
 ```

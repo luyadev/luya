@@ -1,5 +1,5 @@
 <?php if ($save): ?>
-<p><strong>Vielen Dank</strong>, Sie haben sich erfolgreich registiert. <a href="<?= \luya\helpers\Url::to('account/default/index'); ?>">Hier gehts zum Login</a></p>
+<p><strong>Vielen Dank</strong>, Sie haben sich erfolgreich registiert. <a href="<?= \luya\helpers\Url::toManager('account/default/index'); ?>">Hier gehts zum Login</a></p>
 <?php else: ?>
     <h1>Einen neuen Account anelgen</h1>
     <?php if (!empty($errors)): ?>

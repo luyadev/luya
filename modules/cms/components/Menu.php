@@ -4,6 +4,7 @@ namespace cms\components;
 
 use Exception;
 use Yii;
+use yii\helpers\Url;
 use yii\db\Query as DbQuery;
 use cms\menu\Query as MenuQuery;
 
@@ -137,6 +138,12 @@ class Menu extends \yii\base\Component
         }
         
         throw new Exception("Unable to find the requested language '$langShortCode'.");
+    }
+    
+    private function buildItemLink($rewrite)
+    {
+        $base = Url::base();
+        $composition = $this->composition->full;
     }
     
     private function loadContainerData()

@@ -12,6 +12,6 @@
 <?php \yii\widgets\ActiveForm::end();?>
 
 <ul>
-    <li><a href="<?= \luya\helpers\Url::to('account/default/lostpass'); ?>">Passwort vergessen Formular</a></li>
-    <li><a href="<?= \luya\helpers\Url::to('account/register/index'); ?>">Noch keinen Account? Jetzt registrieren.</a></li>
+    <li><a href="<?= \luya\helpers\Url::toManager('account/default/lostpass'); ?>">Passwort vergessen Formular</a></li>
+    <li><a href="<?= \luya\helpers\Url::toManager('account/register/index'); ?>">Noch keinen Account? Jetzt registrieren.</a></li>
 </ul>

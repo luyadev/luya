@@ -26,7 +26,7 @@ class Module extends \luya\base\Module
 
 Die Adresse `warenkorb` würde nun die Aktion `actionIndex` in `BasektController` innerhalb des Modules `estore` öffnen und zurück geben.
 
-Um die Lesbare Url innerhalb eines `views` zu erstellen verwenden Sie `luya\helpers\Url::to` wie folgt `\luya\helpers\Url::to('estore/basket/index');`.
+Um die Lesbare Url innerhalb eines `views` zu erstellen verwenden Sie `luya\helpers\Url::toManager` wie folgt `\luya\helpers\Url::toManager('estore/basket/index');`.
 
 Sie können auch Parameter innerhalb der Regel definieren, ein Beispiel für einen Artikel innerhalb des Estores:
 
@@ -34,7 +34,7 @@ Sie können auch Parameter innerhalb der Regel definieren, ein Beispiel für ein
 ['pattern' => 'artikel/<id:\d+>', 'route' => 'estore/article/index'],
 ```
 
-Um einen Parameter anzugeben bei erstellen einer Url verwenden Sie das Arguments Array der Url::to helper funktion `\luya\helpers\Url::to('estore/article/index', ['id' => 7]);`.
+Um einen Parameter anzugeben bei erstellen einer Url verwenden Sie das Arguments Array der Url::toManager helper funktion `\luya\helpers\Url::toManager('estore/article/index', ['id' => 7]);`.
 
 > Url Regel sollten immer den Modul prefix enthalten um innerhalb des CMS Context keine gleichnamigen URLS zu erhalten.
 

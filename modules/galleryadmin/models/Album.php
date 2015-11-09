@@ -41,7 +41,7 @@ class Album extends \admin\ngrest\base\Model
     {
         $category = Cat::findOne($this->cat_id);
 
-        return \luya\helpers\Url::to('gallery/alben/index', ['catId' => $category->id, 'title' => \yii\helpers\Inflector::slug($category->title)]);
+        return \luya\helpers\Url::toManager('gallery/alben/index', ['catId' => $category->id, 'title' => \yii\helpers\Inflector::slug($category->title)]);
     }
 
     public function getCategoryName()
@@ -57,7 +57,7 @@ class Album extends \admin\ngrest\base\Model
             return \luya\helpers\Url::toModule($contextNavItemId, 'gallery/album/index', ['albumId' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
         }
 
-        return \luya\helpers\Url::to('gallery/album/index', ['albumId' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
+        return \luya\helpers\Url::toManager('gallery/album/index', ['albumId' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
     }
 
     public function images()

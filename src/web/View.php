@@ -41,6 +41,6 @@ class View extends \yii\web\View
      */
     public function url($route, array $params = [])
     {
-        return Url::to($route, $params);
+        return Url::toManager($route, $params);
     }
 }

@@ -42,4 +42,19 @@ class UrlTest extends \tests\web\Base
         $url = Url::toAjax('news/default/index', ['id' => 1, 'title' => 'foo-bar']);
         $this->assertEquals('/news/default/index?id=1&title=foo-bar', $url);
     }
+    
+    public function testBaseHelper()
+    {
+        $a = Url::toManager('urlmodule/bar/index');
+        $this->assertEquals($a, Url::to(['/urlmodule/bar/index']));
+        $this->assertEquals($a, Url::toRoute('/urlmodule/bar/index'));
+        
+        $b = Url::toManager('urlmodule/default/index');
+        $this->assertEquals($b, Url::to(['/urlmodule/default/index']));
+        $this->assertEquals($b, Url::toRoute('/urlmodule/default/index'));
+        
+        $c = Url::toManager('news/default/detail', ['id' => 1, 'title' => 'foo-bar']);
+        $this->assertEquals($c, Url::to(['/news/default/detail', 'id' => 1, 'title' => 'foo-bar']));
+        $this->assertEquals($c, Url::toRoute(['/news/default/detail', 'id' => 1, 'title' => 'foo-bar']));
+    }
 }

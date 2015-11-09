@@ -17,7 +17,7 @@ class IsProtectedAreaProperty extends \admin\base\Property
         if ($this->value === 1) {
             if (Yii::$app->getModule('account')->getUserIdentity()->isGuest) {
                 $event->isValid = false;
-                Yii::$app->response->redirect(Url::to('account/default/index'));
+                Yii::$app->response->redirect(Url::toManager('account/default/index'));
             }
         }
     }

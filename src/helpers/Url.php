@@ -4,7 +4,7 @@ namespace luya\helpers;
 
 use Yii;
 
-class Url
+class Url extends \yii\helpers\Url
 {
     /**
      * get an array from the route which returns the module controller and action.
@@ -66,12 +66,14 @@ class Url
     }
 
     /**
+     * Only stil exists to avoid bc break, fromer known as `to()` us `Url::toRoute(['/module/controller/action', 'arg1' => 'arg1value']);` instead.
      * Wrapper functions for the createUrl function of the url manager.
+     * 
      *
      * @param string $route
      * @param array  $params
      */
-    public static function to($route, array $params = [])
+    public static function toManager($route, array $params = [])
     {
         $routeParams = [$route];
         foreach ($params as $key => $value) {
@@ -96,7 +98,7 @@ class Url
     {
         Yii::$app->urlManager->setContextNavItemId($navItemId);
 
-        return static::to($route, $params);
+        return static::toManager($route, $params);
     }
 
     /**

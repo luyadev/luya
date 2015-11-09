@@ -63,7 +63,7 @@ class Article extends \admin\ngrest\base\Model
             return \luya\helpers\Url::toModule($contextNavItemId, 'news/default/detail', ['id' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
         }
 
-        return \luya\helpers\Url::to('news/default/detail', ['id' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
+        return \luya\helpers\Url::toManager('news/default/detail', ['id' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
     }
 
     public static function getAvailableNews($limit = false)

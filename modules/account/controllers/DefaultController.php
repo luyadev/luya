@@ -34,7 +34,7 @@ class DefaultController extends \account\base\Controller
     public function actionIndex()
     {
         if (!$this->module->getUserIdentity()->isGuest) {
-            return $this->redirect(Url::to('account/settings/index'));
+            return $this->redirect(Url::toManager('account/settings/index'));
         }
 
         $model = new LoginForm();
@@ -45,7 +45,7 @@ class DefaultController extends \account\base\Controller
                 if ($this->module->getUserIdentity()->login($userObject)) {
                     $redirect = Yii::$app->request->get('redirect', false);
                     if (!$redirect) {
-                        $redirect = Url::to('account/settings/index');
+                        $redirect = Url::toManager('account/settings/index');
                     }
 
                     return $this->redirect($redirect);

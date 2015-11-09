@@ -4,7 +4,6 @@ namespace admin\controllers;
 
 use Yii;
 use luya\helpers\Url;
-use yii\helpers\Url as YiiUrl;
 
 class LoginController extends \admin\base\Controller
 {
@@ -83,7 +82,7 @@ class LoginController extends \admin\base\Controller
     
     public function actionIndex()
     {
-        $url = YiiUrl::base(true) . '/admin';
+        $url = Url::base(true) . '/admin';
 
         // redirect logged in users
         if (!Yii::$app->adminuser->isGuest) {
