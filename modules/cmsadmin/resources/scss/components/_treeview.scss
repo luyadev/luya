@@ -9,10 +9,10 @@ $treeview--active-color: $blue !default;
  * #TREEVIEW__LIST
  */
 .treeview__list {
-    margin: 0 0 0 8px;
+    margin: 0 0 0 0px;
 
     & .treeview__list {
-        margin: 0 0 0 20px;
+        margin: 0 0 0 15px;
     }
 }
 
@@ -102,7 +102,7 @@ $treeview--active-color: $blue !default;
 .treeview__link {
     font-size: 1rem;
     line-height: 1.2rem;
-    padding: 3px 30px 3px 25px;
+    padding: 3px 30px 3px 0px;
     display: block;
     cursor: pointer;
     color: $treeview--color;
