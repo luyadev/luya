@@ -51,7 +51,7 @@
 		
 		$scope.showCrudList = true;
 		
-		$scope.searchString = null;
+		$scope.searchString = "";
 		
 		$scope.currentMenuItem = null;
 		
