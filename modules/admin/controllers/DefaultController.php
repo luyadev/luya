@@ -4,7 +4,6 @@ namespace admin\controllers;
 
 use Yii;
 use luya\helpers\Url;
-use yii\helpers\Url as YiiUrl;
 
 class DefaultController extends \admin\base\Controller
 {
@@ -23,7 +22,7 @@ class DefaultController extends \admin\base\Controller
     public function actionLogout()
     {
         Yii::$app->adminuser->logout();
-        return $this->redirect(YiiUrl::base(true) . '/admin/login');
+        return $this->redirect(Url::base(true) . '/admin/login');
     }
     
     public function colorizeValue($value, $displayValue = false)
