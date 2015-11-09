@@ -1,12 +1,8 @@
-<?php
-use yii\helpers\Url;
-?>
 <html>
     <head>
         <title>Luya &mdash; <?= $this->title; ?></title>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-        <base href="<?= Url::base(true); ?>/" />
         <?php $this->head() ?>
     </head>
     <body>
@@ -16,7 +12,6 @@ use yii\helpers\Url;
                 <div class="row">
                     <div class="col-md-6">
                         <h1>Luya Website</h1>
-                        <h2><?= Url::base(true); ?></h2>
                     </div>
                     <div class="col-md-6">
                         <div class="git pull-right">

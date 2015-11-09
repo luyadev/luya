@@ -4,7 +4,7 @@ namespace cms\components;
 
 use Exception;
 use Yii;
-use yii\helpers\Url;
+use luya\helpers\Url;
 use yii\db\Query as DbQuery;
 use cms\menu\Query as MenuQuery;
 
@@ -142,8 +142,7 @@ class Menu extends \yii\base\Component
     
     private function buildItemLink($rewrite)
     {
-        $base = Url::base();
-        $composition = $this->composition->full;
+        return Yii::$app->getUrlManager()->prependBaseUrl($this->composition->prependTo($rewrite));
     }
     
     private function loadContainerData()
@@ -186,7 +185,7 @@ class Menu extends \yii\base\Component
                 
                 // add link key
                 $item['alias'] = $rewrite;
-                $item['link'] = $this->composition->full . $rewrite;
+                $item['link'] = $this->buildItemLink($rewrite);
                 $item['depth'] = count(explode("/", $rewrite));
                 // add redirect info if item_type 3
                 if ($item['nav_item_type'] == 3) {

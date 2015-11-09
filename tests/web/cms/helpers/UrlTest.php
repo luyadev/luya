@@ -9,7 +9,10 @@ class UrlTest extends \tests\web\Base
 {
     public function testToModule()
     {
-        $this->assertEquals('de/my-news-page', Url::toModule('gallery'));
+        Yii::$app->request->baseUrl = '';
+        Yii::$app->request->scriptUrl = '';
+        
+        $this->assertEquals('/de/my-news-page', Url::toModule('gallery'));
         $this->assertEquals('notexists', Url::toModule('notexists'));
     }
 

@@ -54,7 +54,7 @@ class Album extends \admin\ngrest\base\Model
     public function getDetailUrl($contextNavItemId = null)
     {
         if ($contextNavItemId) {
-            return \luya\helpers\Url::toModule($contextNavItemId, 'gallery/album/index', ['albumId' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
+            return \cms\helpers\Url::toMenuItem($contextNavItemId, 'gallery/album/index', ['albumId' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
         }
 
         return \luya\helpers\Url::toManager('gallery/album/index', ['albumId' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);

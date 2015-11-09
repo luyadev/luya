@@ -7,13 +7,6 @@ use luya\helpers\Url;
 
 class UrlTest extends \tests\web\Base
 {
-    public function testFromRoute()
-    {
-        $return = Url::fromRoute('module/controller/action');
-        $this->assertEquals(true, is_array($return));
-        $return = Url::fromRoute('module/controller');
-        $this->assertEquals(false, $return);
-    }
 
     public function testTrailing()
     {
@@ -31,7 +24,7 @@ class UrlTest extends \tests\web\Base
     {
         Yii::$app->request->baseUrl = '';
         Yii::$app->request->scriptUrl = '';
-        $url = Url::toModule(1, 'news/default/detail', ['id' => 1, 'title' => 'foo-bar']);
+        $url = \cms\helpers\Url::toMenuItem(1, 'news/default/detail', ['id' => 1, 'title' => 'foo-bar']);
         $this->assertEquals('/1/foo-bar', $url);
     }
 

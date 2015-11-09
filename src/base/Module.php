@@ -79,7 +79,7 @@ abstract class Module extends \yii\base\Module
     /**
      * @var array If a module is set via context it can store context options inside the child modules via an array.
      */
-    public $contextOptions = [];
+    //public $contextOptions = [];
 
     /**
      * @var string The default name of the moduleLayout
@@ -156,30 +156,36 @@ abstract class Module extends \yii\base\Module
      * 
      * @param string $name
      */
+    /*
     public function setContext($name)
     {
         $this->context = $name;
     }
+    */
 
     /**
      * Add a context property.
      * 
      * @param array $options
      */
+    /*
     public function setContextOptions(array $options)
     {
         $this->contextOptions = $options;
     }
+    */
 
     /**
      * get all context propertys.
      * 
      * @return array:
      */
+    /*
     public function getContextOptions()
     {
         return $this->contextOptions;
     }
+    */
 
     /**
      * register a component to the application. id => definition. All components will be registered during bootstrap process.

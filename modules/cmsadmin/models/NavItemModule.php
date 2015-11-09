@@ -2,6 +2,8 @@
 
 namespace cmsadmin\models;
 
+use Yii;
+
 class NavItemModule extends \cmsadmin\base\NavItemType
 {
     public static function tableName()
@@ -26,10 +28,12 @@ class NavItemModule extends \cmsadmin\base\NavItemType
 
         $module = $this->module_name;
 
-        $this->_module = \yii::$app->getModule($module);
+        $this->_module = Yii::$app->getModule($module);
+        $this->_module->context = 'cms';
+        /*
         $this->_module->setContext('cms');
         $this->_module->setContextOptions($this->getOptions());
-
+        */
         return $this->_module;
     }
 

@@ -34,7 +34,7 @@ class UrlRuleTest extends \tests\web\Base
 
         Yii::$app->composition->hidden = false;
         $full = Yii::$app->composition->getFull();
-        $this->assertEquals('de/', $full);
+        $this->assertEquals('de', $full);
     }
 
     public function testCompositionUrls()
@@ -100,15 +100,5 @@ class UrlRuleTest extends \tests\web\Base
 
         $url = Url::toManager('news/default/detail', ['id' => 1, 'title' => 'page-2-news-title', 'news' => 'page']);
         $this->assertEquals('/1/page-2-news-title?news=page', $url);
-    }
-
-    public function testModuleUrls()
-    {
-        Yii::$app->urlManager->resetContext();
-        Yii::$app->composition->hidden = false;
-        Yii::$app->getModule('news')->setContext('cms');
-        Yii::$app->getModule('news')->setContextOptions(['navItemId' => 1]);
-        $url = Url::toManager('news/default/detail', ['id' => 1, 'title' => 'foo-bar']);
-        $this->assertEquals('/1/foo-bar', $url);
     }
 }

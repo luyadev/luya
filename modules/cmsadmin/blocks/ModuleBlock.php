@@ -70,8 +70,8 @@ class ModuleBlock extends \cmsadmin\base\Block
 
         // get module
         $module = Yii::$app->getModule($moduleName);
-        $module->setContext('cms');
-        $module->setContextOptions($this->getEnvOptions());
+        $module->context = 'cms';
+        //$module->setContextOptions($this->getEnvOptions());
         // start module reflection
         
         $reflection = \luya\helpers\ModuleHelper::reflectionObject($module);

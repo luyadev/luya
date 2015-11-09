@@ -21,7 +21,7 @@ class Url
         $model = NavItem::findNavItem($moduleName);
         
         if ($model) {
-            $menuItem = Yii::$app->menu->find()->where(['id' => $model['id']])->one();
+            $menuItem = Yii::$app->menu->find()->where(['id' => $model['id']])->with('hidden')->one();
             if ($menuItem) {
                 return $menuItem->link;
             }
@@ -44,9 +44,28 @@ class Url
     {
         $model = NavItem::findNavItem($moduleName);
         if ($model) {
-            return \luya\helpers\Url::toModule($model['id'], $route, $params);
+            return static::toMenuItem($model['id'], $route, $params);
         }
         
         throw new Exception("Unable to find the Module '$moduleName' for url creation.");
+    }
+    
+    /**
+     * create an url based on a context nav item informaiton inside the urlManager.
+     *
+     * @param int    $navItemId
+     * @param string $route
+     * @param array  $params
+     *
+     * @return string
+     */
+    public static function toMenuItem($navItemId, $route, array $params = [])
+    {
+        $routeParams = [$route];
+        foreach ($params as $key => $value) {
+            $routeParams[$key] = $value;
+        }
+    
+        return Yii::$app->urlManager->createMenuItemUrl($routeParams, $navItemId);
     }
 }

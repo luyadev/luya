@@ -21,6 +21,10 @@ class UrlManager extends \yii\web\UrlManager
 
     private $_contextNavItemId = false;
 
+    private $_menu = null;
+
+    private $_composition = null;
+    
     public function parseRequest($request)
     {
         $route = parent::parseRequest($request);
@@ -70,6 +74,110 @@ class UrlManager extends \yii\web\UrlManager
         $this->_contextNavItemId = false;
     }
 
+    public function getMenu()
+    {
+        if ($this->_menu === null) {
+            $menu = Yii::$app->get('menu', false);
+            if ($menu) {
+                $this->_menu = $menu;
+            } else {
+                $this->_menu = false;
+            }
+        }
+        
+        return $this->_menu;
+    }
+    
+    public function getComposition()
+    {
+        if ($this->_composition === null) {
+            $this->_composition = Yii::$app->get('composition');
+        }
+        
+        return $this->_composition;
+    }
+    
+    private function removeBaseUrl($route)
+    {
+        $baseUrl = preg_quote($this->baseUrl);
+        
+        return preg_replace("#$baseUrl#", "", $route, 1);
+    }
+    
+    public function prependBaseUrl($route)
+    {
+        return rtrim($this->baseUrl, '/') . '/' . ltrim($route, '/');
+    }
+    
+    private function findModuleInRoute($route)
+    {
+        $parts = array_values(array_filter(explode("/", $route)));
+        
+        if (isset($parts[0])) {
+            if (array_key_exists($parts[0], Yii::$app->getApplicationModules())) {
+                return $parts[0];
+            }
+        }
+        
+        return false;
+    }
+    
+    public function createMenuItemUrl($params, $navItemId)
+    {
+        $url = $this->createUrl($params);
+        
+        if (!$this->menu) {
+            return $url;
+        }
+        
+        return $this->urlReplaceModule($url, $navItemId);
+    }
+    
+    private function urlReplaceModule($url, $navItemId)
+    {
+        $route = $this->removeBaseUrl($url);
+        $route = $this->composition->removeFrom($route);
+        $module = $this->findModuleInRoute($route);
+        
+        if (!$module) {
+            return $url;
+        }
+        
+        $item = $this->menu->find()->where(['id' => $navItemId])->with('hidden')->one();
+        
+        
+        $replaceRoute = preg_replace("/$module/", $item->link, ltrim($route, "/"), 1);
+        
+        return $replaceRoute;
+    }
+    
+    public function createUrl($params)
+    {
+        $originalParams = $params;
+        // creata parameter where route contains a composition
+        $params[0] = $this->composition->prependTo($params[0]);
+        
+        $response = parent::createUrl($params);
+
+        // check if the parsed route is the same as before, if
+        if (strpos($response, $params[0]) !== false) {
+            // we got back the same url from the createUrl, no match against composition route.
+            $response = parent::createUrl($originalParams);
+        }
+        
+        $response = $this->removeBaseUrl($response);
+        $response = $this->composition->prependTo($response);
+        $response = $this->prependBaseUrl($response);
+        
+        if ($this->contextNavItemId) {
+            return $this->urlReplaceModule($response, $this->contextNavItemId);
+        }
+        
+        return $response;
+    }
+    
+    /*
+     * old createUrl function
     public function createUrl($params)
     {
         $menu = Yii::$app->get('menu', false);
@@ -120,4 +228,5 @@ class UrlManager extends \yii\web\UrlManager
 
         return str_replace($baseUrl, Url::trailing($baseUrl).Url::removeTrailing($composition), $response);
     }
+    */
 }

@@ -64,7 +64,7 @@ class UrlManagerTest extends \tests\web\Base
 
         $this->assertArrayHasKey('id', $r[1]);
 
-        $this->assertEquals('news/test', $r[0]);
+        $this->assertEquals('/news/test', $r[0]);
 
         $this->assertEquals('1', $r[1]['id']);
     }

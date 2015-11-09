@@ -11,6 +11,7 @@ class Url extends \yii\helpers\Url
      *
      * @param string $route
      */
+    /*
     public static function fromRoute($route, $returnPart = false)
     {
         $parts = explode('/', $route);
@@ -35,11 +36,13 @@ class Url extends \yii\helpers\Url
 
         return $parts;
     }
+    
 
     public static function startTrailing($url)
     {
         return '/'.ltrim($url, '/');
     }
+    */
 
     /**
      * add a trailing slash to an url if there is no trailing slash at the end of the url.
@@ -64,7 +67,7 @@ class Url extends \yii\helpers\Url
     {
         return rtrim($url, $slash);
     }
-
+    
     /**
      * Only stil exists to avoid bc break, fromer known as `to()` us `Url::toRoute(['/module/controller/action', 'arg1' => 'arg1value']);` instead.
      * Wrapper functions for the createUrl function of the url manager.
@@ -81,24 +84,6 @@ class Url extends \yii\helpers\Url
         }
 
         return yii::$app->urlManager->createUrl($routeParams);
-    }
-
-    /**
-     * create an url based on a context nav item informaiton inside the urlManager.
-     * 
-     * @param int    $navItemId
-     * @param string $route
-     * @param array  $params
-     *
-     * @todo move into cms\helpers
-     *
-     * @return string
-     */
-    public static function toModule($navItemId, $route, array $params = [])
-    {
-        Yii::$app->urlManager->setContextNavItemId($navItemId);
-
-        return static::toManager($route, $params);
     }
 
     /**
