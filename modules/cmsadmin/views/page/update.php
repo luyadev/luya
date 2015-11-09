@@ -32,7 +32,7 @@
                 <div class="input">
                     <div class="block__configs" ng-class="{'block__configs--open': configIsOpen}">
 
-                        <label class="input__label"><i class="material-icons">settings</i></label>
+                        <label class="input__label" ng-click="configIsOpen = !configIsOpen"><i class="material-icons">settings</i></label>
                         <div class="input__field-wrapper">
                             <div class="block__configs-toggler btn btn--small grey lighten-4 black-text z-depth-0" ng-click="configIsOpen = !configIsOpen">
                                 <i class="material-icons" ng-show="configIsOpen">keyboard_arrow_down</i>
