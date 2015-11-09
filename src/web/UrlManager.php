@@ -97,16 +97,16 @@ class UrlManager extends \yii\web\UrlManager
         return $this->_composition;
     }
 
+    public function prependBaseUrl($route)
+    {
+        return rtrim($this->baseUrl, '/').'/'.ltrim($route, '/');
+    }
+
     private function removeBaseUrl($route)
     {
         $baseUrl = preg_quote($this->baseUrl);
 
         return preg_replace("#$baseUrl#", '', $route, 1);
-    }
-
-    public function prependBaseUrl($route)
-    {
-        return rtrim($this->baseUrl, '/').'/'.ltrim($route, '/');
     }
 
     private function findModuleInRoute($route)
@@ -124,7 +124,7 @@ class UrlManager extends \yii\web\UrlManager
 
     public function createMenuItemUrl($params, $navItemId)
     {
-        $url = $this->createUrl($params);
+        $url = $this->internalCreateUrl($params);
 
         if (!$this->menu) {
             return $url;
@@ -150,7 +150,7 @@ class UrlManager extends \yii\web\UrlManager
         return $replaceRoute;
     }
 
-    public function createUrl($params)
+    private function internalCreateUrl($params)
     {
         $originalParams = $params;
         // creata parameter where route contains a composition
@@ -166,7 +166,13 @@ class UrlManager extends \yii\web\UrlManager
 
         $response = $this->removeBaseUrl($response);
         $response = $this->composition->prependTo($response);
-        $response = $this->prependBaseUrl($response);
+
+        return $this->prependBaseUrl($response);
+    }
+
+    public function createUrl($params)
+    {
+        $response = $this->internalCreateUrl($params);
 
         if ($this->contextNavItemId) {
             return $this->urlReplaceModule($response, $this->contextNavItemId);
