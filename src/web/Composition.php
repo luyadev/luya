@@ -182,33 +182,36 @@ class Composition extends \yii\base\Component implements \ArrayAccess
     }
 
     /**
-     * Prepend to current composition to a given route
+     * Prepend to current composition to a given route.
+     *
      * @param unknown $route
+     *
      * @return unknown|string
      */
     public function prependTo($route)
     {
         $prefix = $this->getFull();
-        
+
         if (empty($prefix)) {
             return $route;
         }
-        
+
         $prepend = '';
-        
-        if (substr($route, 0, 1) == "/") {
+
+        if (substr($route, 0, 1) == '/') {
             $prepend = '/';
         }
-        
-        return $prepend . $prefix . '/' . ltrim($route, '/');
+
+        return $prepend.$prefix.'/'.ltrim($route, '/');
     }
-    
+
     public function removeFrom($route)
     {
-        $pattern = preg_quote($this->getFull() . "/");
-        return preg_replace("#$pattern#", "", $route, 1);
+        $pattern = preg_quote($this->getFull().'/');
+
+        return preg_replace("#$pattern#", '', $route, 1);
     }
-    
+
     /**
      * Transform the langShortCode into a locale sign to set php env settings.
      *
