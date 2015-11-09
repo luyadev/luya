@@ -14,8 +14,9 @@ class BlockController extends \cms\base\Controller
     {
         $model = NavItemPageBlockItem::findOne($id);
         $block = Block::objectId($model->block_id, $model->id, 'callback');
-        
+
         $method = 'callback'.Inflector::id2camel($callback);
+
         return ObjectHelper::callMethodSanitizeArguments($block, $method, Yii::$app->request->get());
     }
 }

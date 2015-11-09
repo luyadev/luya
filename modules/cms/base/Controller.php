@@ -19,16 +19,16 @@ abstract class Controller extends \luya\web\Controller
         $model = NavItem::findOne($navItemId);
 
         if (!$model) {
-            throw new NotFoundHttpException("The requested nav item could not found.");
+            throw new NotFoundHttpException('The requested nav item could not found.');
         }
-        
+
         Yii::$app->urlManager->contextNavItemId = $navItemId;
-        
+
         Yii::$app->set('page', [
             'class' => 'cms\components\Page',
             'model' => $model,
         ]);
-        
+
         $event = new \cms\events\BeforeRenderEvent();
 
         foreach ($model->getNav()->getProperties() as $property) {

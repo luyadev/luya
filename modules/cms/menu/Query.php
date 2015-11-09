@@ -4,10 +4,9 @@ namespace cms\menu;
 
 use Yii;
 use Exception;
-use cms\menu\QueryIterator;
 
 /**
- * Menu Query Builder
+ * Menu Query Builder.
  * 
  * Ability to create menu querys to find your specifc menu items.
  * 
@@ -25,40 +24,41 @@ use cms\menu\QueryIterator;
  * ```
  * 
  * @since 1.0.0-beta1
+ *
  * @author nadar
  */
 class Query extends \yii\base\Object
 {
     private $_where = [];
-    
+
     private $_lang = null;
-    
+
     private $_menu = null;
-    
+
     private $_whereOperators = ['<', '<=', '>', '>=', '=', '=='];
-    
+
     /**
-     * @var boolean Choose whetever hidden elements should be skipped in the where filtering
-     * process or not. Use `with('hidden')` to set $skipHidden to false;
+     * @var bool Choose whetever hidden elements should be skipped in the where filtering
+     *           process or not. Use `with('hidden')` to set $skipHidden to false;
      */
     public $withHidden = false;
-    
+
     public function setMenu(\cms\components\Menu $menu)
     {
         $this->_menu = $menu;
     }
-    
+
     public function getMenu()
     {
         if ($this->_menu === null) {
             $this->_menu = Yii::$app->get('menu');
         }
-        
+
         return $this->_menu;
     }
-    
+
     /**
-     * Query where similar behavior of filtering items
+     * Query where similar behavior of filtering items.
      * 
      * **Operator Filtering**
      * 
@@ -95,11 +95,12 @@ class Query extends \yii\base\Object
      * ```
      * 
      * @param array $args
+     *
      * @return \cms\menu\Query
      */
     public function where(array $args)
     {
-        foreach($args as $key => $value) {
+        foreach ($args as $key => $value) {
             if (in_array($value, $this->_whereOperators, true)) {
                 if (count($args) !== 3) {
                     throw new Exception(sprintf("Wrong where(['%s']) condition, see http://luya.io/api/cms-menu-query.html#where()-detail for all available conditions.", implode("', '", $args)));
@@ -110,116 +111,120 @@ class Query extends \yii\base\Object
                 $this->_where[] = ['op' => '=', 'field' => $key, 'value' => $value];
             }
         }
-        
+
         return $this;
     }
-    
+
     public function andWhere(array $args)
     {
         return $this->where($args);
     }
-    
+
     /**
      * Changeing the container in where the data should be collection, by default the composition
      * `langShortCode` is the default language code. This represents the current active language,
      * or the default language if no information is presented.
      * 
      * @param string $langShortCode Language Short Code e.g. de or en
+     *
      * @return \cms\menu\Query
      */
     public function lang($langShortCode)
     {
         $this->_lang = $langShortCode;
+
         return $this;
     }
-    
+
     /**
      * @param string|array $with can be a string  containg "hidden" or an array with multiple patters
-     * for example `['hidden']`. Further with statements upcoming.
+     *                           for example `['hidden']`. Further with statements upcoming.
      */
     public function with($types)
     {
         $types = (array) $types;
-        foreach($types as $type) {
+        foreach ($types as $type) {
             switch ($type) {
-                case "hidden":
+                case 'hidden':
                     $this->withHidden = true;
                     break;
             }
         }
-        
+
         return $this;
     }
-    
+
     public function getLang()
     {
         if ($this->_lang === null) {
             $this->_lang = $this->menu->composition['langShortCode'];
         }
-        
+
         return $this->_lang;
     }
-    
+
     public function arrayFilter($value, $field)
     {
         if ($field == 'is_hidden' && $this->withHidden === false && $value == 1) {
             return false;
         }
-        
-        foreach($this->_where as $expression) {
+
+        foreach ($this->_where as $expression) {
             if ($expression['field'] == $field) {
-                switch($expression['op']) {
-                    case "=":
+                switch ($expression['op']) {
+                    case '=':
                         return ($value == $expression['value']);
-                    case "==":
+                    case '==':
                         return ($value === $expression['value']);
-                    case ">":
+                    case '>':
                         return ($value > $expression['value']);
-                    case ">=":
+                    case '>=':
                         return ($value >= $expression['value']);
-                    case "<":
+                    case '<':
                         return ($value < $expression['value']);
-                    case "<=":
+                    case '<=':
                         return ($value <= $expression['value']);
                 }
             }
         }
+
         return true;
     }
-    
+
     public function filter(array $whereExpression, $containerData)
     {
-        return array_filter($containerData, function($item) {
-            foreach($item as $field => $value) {
+        return array_filter($containerData, function ($item) {
+            foreach ($item as $field => $value) {
                 if (!$this->arrayFilter($value, $field)) {
                     return false;
                 }
             }
+
             return true;
-        });   
+        });
     }
-    
+
     public function one()
     {
         $data = $this->filter($this->_where, $this->menu->languageContainerData($this->lang));
-        
+
         if (count($data) == 0) {
             return false;
         }
-        
+
         return static::createItemObject(array_values($data)[0]);
     }
-    
+
     public function all()
     {
         return static::createArrayIterator($this->filter($this->_where, $this->menu->languageContainerData($this->lang)));
     }
-    
+
     public static function createArrayIterator($data)
     {
-       return Yii::createObject(['class' => QueryIterator::className(), 'data' => $data]);
+        return Yii::createObject(['class' => QueryIterator::className(), 'data' => $data]);
     }
-    
+
     public static function createItemObject(array $itemArray)
     {
         return Yii::createObject(['class' => Item::className(), 'itemArray' => $itemArray]);

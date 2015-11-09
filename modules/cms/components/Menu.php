@@ -4,12 +4,11 @@ namespace cms\components;
 
 use Exception;
 use Yii;
-use luya\helpers\Url;
 use yii\db\Query as DbQuery;
 use cms\menu\Query as MenuQuery;
 
 /**
- * Menu Component
+ * Menu Component.
  * 
  * **Query menu data**
  * 
@@ -67,92 +66,75 @@ use cms\menu\Query as MenuQuery;
  * @TBD
  * 
  * @todo add menu method to get breadcrumbs
+ *
  * @since 1.0.0-beta1
+ *
  * @author nadar
  */
 class Menu extends \yii\base\Component
 {
-    public $cacheKey = 'luyaMenuComponent';
-    
-    public $cacheExpire = 3600;
-    
     public $request = null;
-    
+
     private $_composition = null;
-    
+
     private $_current = null;
-    
+
     private $_currentAppendix = null;
-    
+
     private $_containerData = null;
-    
+
     /**
-     * Class constructor uses yii di container
+     * Class constructor uses yii di container.
      * 
-     * @param \yii\web\Request $request
+     * @param \yii\web\Request             $request
      * @param \luya\components\Composition $composition
-     * @param array $config
+     * @param array                        $config
      */
     public function __construct(\yii\web\Request $request, array $config = [])
     {
         $this->request = $request;
         parent::__construct($config);
     }
-    
+
     public function getComposition()
     {
         if ($this->_composition === null) {
             $this->_composition = Yii::$app->get('composition');
         }
-        
+
         return $this->_composition;
     }
-    
+
     public function getContainerData()
     {
         if ($this->_containerData === null) {
-            if (Yii::$app->has('cache')) {
-                Yii::info('Menu component has cache component detected.');
-                $data = Yii::$app->cache->get($this->cacheKey);
-                if ($data === false) {
-                    Yii::info('Menu component stores information into cache.');
-                    $data = $this->loadContainerData();
-                    Yii::$app->cache->set($this->cacheKey, $data, $this->cacheExpire);
-                } else {
-                    Yii::info('Menu component restored informations from cache.');
-                }
-                $this->_containerData = $data;
-            } else {
-                Yii::info('Menu component loaded from database.');
-                $this->_containerData = $this->loadContainerData();
-            }
+            $this->_containerData = $data = $this->loadContainerData();
         }
-        
+
         return $this->_containerData;
     }
-    
+
     public function languageContainerData($langShortCode)
     {
         if (array_key_exists($langShortCode, $this->containerData)) {
             return $this->containerData[$langShortCode];
         }
-        
+
         throw new Exception("Unable to find the requested language '$langShortCode'.");
     }
-    
+
     private function buildItemLink($rewrite)
     {
         return Yii::$app->getUrlManager()->prependBaseUrl($this->composition->prependTo($rewrite));
     }
-    
+
     private function loadContainerData()
     {
         $container = [];
-        
+
         $redirectMap = (new DbQuery())->select(['id', 'type', 'value'])->from('cms_nav_item_redirect')->indexBy('id')->all();
-        
+
         foreach ((new DbQuery())->select(['short_code', 'id'])->from('admin_lang')->all() as $lang) {
-            
             $data = (new DbQuery())->from(['cms_nav_item item'])
             ->select(['item.id', 'item.nav_id', 'item.title', 'item.rewrite', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'cat.rewrite AS cat'])
             ->leftJoin('cms_nav nav', 'nav.id=item.nav_id')
@@ -161,32 +143,33 @@ class Menu extends \yii\base\Component
             ->orderBy(['cat' => 'ASC', 'parent_nav_id' => 'ASC', 'nav.sort_index' => 'ASC'])
             ->indexBy('id')
             ->all();
-            
+
             $index = [];
-            
+
             foreach ($data as $item) {
                 if (!array_key_exists($item['nav_id'], $index)) {
                     if ($item['parent_nav_id'] > 0) {
-                        $rewrite = $index[$item['parent_nav_id']] . '/' . $item['rewrite'];
+                        $rewrite = $index[$item['parent_nav_id']].'/'.$item['rewrite'];
                     } else {
                         $rewrite = $item['rewrite'];
                     }
                     $index[$item['nav_id']] = $rewrite;
                 }
             }
-            
-            array_walk($data, function(&$item, $key) use ($index, $redirectMap) {
+
+            array_walk($data, function (&$item, $key) use ($index, $redirectMap, $lang) {
                 // concate rewrite link from parent nav ids
                 if ($item['parent_nav_id'] > 0) {
-                    $rewrite = $index[$item['parent_nav_id']] . '/' . $item['rewrite'];
+                    $rewrite = $index[$item['parent_nav_id']].'/'.$item['rewrite'];
                 } else {
                     $rewrite = $item['rewrite'];
                 }
-                
+
                 // add link key
+                $item['lang'] = $lang['short_code'];
                 $item['alias'] = $rewrite;
                 $item['link'] = $this->buildItemLink($rewrite);
-                $item['depth'] = count(explode("/", $rewrite));
+                $item['depth'] = count(explode('/', $rewrite));
                 // add redirect info if item_type 3
                 if ($item['nav_item_type'] == 3) {
                     $item['redirect'] = $redirectMap[$item['nav_item_type_id']];
@@ -196,26 +179,25 @@ class Menu extends \yii\base\Component
                 // remove unused keys
                 unset($item['nav_item_type'], $item['nav_item_type_id']);
             });
-            
-            $container[$lang['short_code']] = $data;   
+
+            $container[$lang['short_code']] = $data;
         }
-        
+
         return $container;
     }
-    
+
     public function resolveCurrent()
     {
         $requestPath = $this->request->get('path', null);
-        
+
         if (empty($requestPath)) {
             $requestPath = $this->home->alias;
         }
-        
-        $urlParts = explode("/", $requestPath);
-        
-        
+
+        $urlParts = explode('/', $requestPath);
+
         $item = $this->aliasMatch($urlParts);
-        
+
         if (!$item) {
             while (array_pop($urlParts)) {
                 if (($item = $this->aliasMatch($urlParts)) !== false) {
@@ -223,44 +205,45 @@ class Menu extends \yii\base\Component
                 }
             }
         }
-        
+
         if (!$item) {
             $this->_currentAppendix = $requestPath;
+
             return $this->home;
         }
-        
+
         $this->_currentAppendix = substr($requestPath, strlen($item->alias) + 1);
-        
+
         return $item;
     }
-    
+
     private function aliasMatch(array $urlParts)
     {
         return (new MenuQuery(['menu' => $this]))->where(['alias' => implode('/', $urlParts)])->with('hidden')->one();
     }
-    
+
     public function getCurrentAppendix()
     {
         if ($this->_current === null) {
             $this->_current = $this->resolveCurrent();
         }
-        
+
         return $this->_currentAppendix;
     }
-    
+
     public function getCurrent()
     {
         if ($this->_current === null) {
             $this->_current = $this->resolveCurrent();
         }
-        
+
         return $this->_current;
     }
-    
+
     /**
-     * Get the current item for the provided level depth
+     * Get the current item for the provided level depth.
      * 
-     * @param integer $level Level menu starts with 1
+     * @param int $level Level menu starts with 1
      */
     public function currentLevel($level)
     {
@@ -270,27 +253,27 @@ class Menu extends \yii\base\Component
             if ($i == $level) {
                 return $item;
             }
-            $i++;
+            ++$i;
         }
-        
+
         return false;
     }
-    
+
     public function getHome()
     {
-        return (new MenuQuery())->where(['is_home' => '1'])->with('hidden')->one();   
+        return (new MenuQuery())->where(['is_home' => '1'])->with('hidden')->one();
     }
-    
+
     public function find()
     {
         return (new MenuQuery());
-    }    
-    
+    }
+
     public function findAll(array $whereArguments)
     {
         return (new MenuQuery())->where($whereArguments)->all();
     }
-    
+
     public function findOne(array $whereArguments)
     {
         return (new MenuQuery())->where($whereArguments)->one();

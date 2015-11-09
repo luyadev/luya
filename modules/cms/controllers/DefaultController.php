@@ -5,7 +5,6 @@ namespace cms\controllers;
 use Yii;
 use yii\web\View;
 use yii\web\NotFoundHttpException;
-use yii\web\yii\web;
 
 class DefaultController extends \cms\base\Controller
 {
@@ -53,7 +52,7 @@ class DefaultController extends \cms\base\Controller
         } catch (Exception $e) {
             throw new NotFoundHttpException($e->getMessage());
         }
-        
+
         /*
         // get teh current active link. link component will resolve empty $activeUrl,
         $activeUrl = Yii::$app->links->getResolveActiveUrl();
@@ -78,14 +77,13 @@ class DefaultController extends \cms\base\Controller
         // set the $activeUrl based on the suffix, cause the modul params are not part of the links component.
         Yii::$app->links->activeUrl = $suffix;
         */
-        
-        
+
         return $this->render('index', [
             'pageContent' => $this->renderItem($current->id, Yii::$app->menu->currentAppendix),
         ]);
     }
 
-    /**
+    /*
      * @todo should be static model methods inside Lang Model 
      */
     /*

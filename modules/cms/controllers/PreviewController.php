@@ -6,7 +6,6 @@ use Yii;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use cmsadmin\models\NavItem;
-use yii\web\yii\web;
 
 class PreviewController extends \cms\base\Controller
 {
@@ -17,15 +16,15 @@ class PreviewController extends \cms\base\Controller
         }
 
         $langShortCode = NavItem::findOne($itemId)->lang->short_code;
-        
+
         Yii::$app->composition['langShortCode'] = $langShortCode;
-        
+
         $item = Yii::$app->menu->find()->where(['id' => $itemId])->with('hidden')->lang($langShortCode)->one();
 
         if (!$item) {
             throw new NotFoundHttpException("Unable to find item id $itemId");
         }
-        
+
         return $this->render('index', [
             'pageContent' => $this->renderItem($itemId),
         ]);

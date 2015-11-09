@@ -37,7 +37,7 @@ class Parser
             if (empty($row['value'])) {
                 continue;
             }
-            
+
             $replace = null;
 
             switch ($row['function']) {
@@ -53,7 +53,7 @@ class Parser
                     continue;
                     break;
             }
-            
+
             if ($replace !== null) {
                 $content = preg_replace('['.preg_quote($row[0]).']mi', $replace, $content, 1);
             }

@@ -66,6 +66,11 @@ class Composition extends \yii\base\Component implements \ArrayAccess
         $this->request = $request;
         parent::__construct($config);
     }
+    
+    public function getDefaultLangShortCode()
+    {
+        return $this->default['langShortCode'];
+    }
 
     /**
      * Resolve the the composition on init.
