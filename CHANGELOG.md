@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-beta1 (in progress)
 -------------------------
+- **[BC BREAK]** removed `luya\helpers\Url::toModule()` replace with `cms\helpers\Url::toMenuItem()`.
 - **[BC BREAK]** removed `Url::to()` an replaced with `Url::toManager()`, extended url helper from yii helper to provide native functionality.
 - **[BC BREAK]** removed the `links`component and replace with the `menu` component.
 - **[BC BREAK]** `#391` removed home site resolving through cms_cat, replaced with is_home state in cms_nav.

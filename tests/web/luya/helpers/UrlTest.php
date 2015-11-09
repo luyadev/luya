@@ -14,12 +14,6 @@ class UrlTest extends \tests\web\Base
         $this->assertEquals('foo/', Url::trailing('foo'));
     }
 
-    public function testRemoveTrailing()
-    {
-        Yii::$app->composition->hidden = true;
-        $this->assertEquals('foo', Url::removeTrailing('foo//'));
-    }
-
     public function testToModule()
     {
         Yii::$app->request->baseUrl = '';

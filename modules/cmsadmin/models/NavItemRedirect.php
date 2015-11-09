@@ -3,7 +3,7 @@
 namespace cmsadmin\models;
 
 use Yii;
-use luya\helpers\Url;
+use Exception;
 
 class NavItemRedirect extends \cmsadmin\base\NavItemType
 {
@@ -29,9 +29,11 @@ class NavItemRedirect extends \cmsadmin\base\NavItemType
     {
         switch($this->type) {
             case self::TYPE_INTERNAL_PAGE:
-                $menuItem = Yii::$app->menu->find()->where(['nav_id' => $this->value])->with('hidden')->one();
-                return Url::trailing(Yii::$app->urlManager->baseUrl) . $menuItem->link;
-                
+                $item = Yii::$app->menu->find()->where(['nav_id' => $this->value])->with('hidden')->one();
+                if (!$item) {
+                    throw new Exception("Unable to find item " . $this->value);
+                }
+                return $item->link;
             case self::TYPE_EXTERNAL_URL:
                 return $this->value;
         }
