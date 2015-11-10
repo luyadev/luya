@@ -42,7 +42,7 @@ class Item extends \yii\base\Object
 
     public function getIsActive()
     {
-        return (Yii::$app->menu->current->link == $this->link);
+        return array_key_exists($this->id, Yii::$app->menu->current->teardown);
     }
 
     public function getDepth()
@@ -78,13 +78,14 @@ class Item extends \yii\base\Object
     public function getTeardown()
     {
         $parent = $this->getParent();
-        $data[] = $this;
+        $current = $this;
+        $data[$current->id] = $current;
         while ($parent) {
-            $data[] = $parent;
+            $data[$parent->id] = $parent;
             $parent = $parent->getParent();
         }
 
-        return array_reverse($data);
+        return array_reverse($data, true);
     }
 
     public function getChildren()
