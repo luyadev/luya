@@ -11,7 +11,7 @@ class Module extends \luya\base\Module
 {
     /**
      * @var array We have no urlRules in cms Module. the UrlRoute file will only be used when
-     *            no module is provided. So the CMS url rewrites does only apply on default behavior.
+     *            no module is provided. So the CMS url alias does only apply on default behavior.
      */
     public $urlRules = [];
 

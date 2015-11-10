@@ -320,7 +320,7 @@
                                 <div class="input input--text col s12">
                                     <label class="input__label">Pfadsegment</label>
                                     <div class="input__field-wrapper">
-                                        <input name="text" type="text" class="input__field validate" ng-model="itemCopy.rewrite" />
+                                        <input name="text" type="text" class="input__field validate" ng-model="itemCopy.alias" />
                                     </div>
                                 </div>
                             </div>

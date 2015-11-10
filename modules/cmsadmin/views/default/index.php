@@ -6,7 +6,7 @@
             <div class="input input--text col s12">
                 <label class="input__label">Seitentitel</label>
                 <div class="input__field-wrapper">
-                    <input name="text" type="text" class="input__field" ng-model="data.title" ng-change="rewriteSuggestion()" focus-me="true" />
+                    <input name="text" type="text" class="input__field" ng-model="data.title" ng-change="aliasSuggestion()" focus-me="true" />
                 </div>
             </div>
         </div>
@@ -14,7 +14,7 @@
             <div class="input input--text col s12">
                 <label class="input__label">Pfadsegment</label>
                 <div class="input__field-wrapper">
-                    <input name="text" type="text" class="input__field" ng-model="data.rewrite" />
+                    <input name="text" type="text" class="input__field" ng-model="data.alias" />
                 </div>
             </div>
         </div>

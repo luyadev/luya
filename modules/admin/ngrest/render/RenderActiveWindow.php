@@ -3,9 +3,6 @@
 namespace admin\ngrest\render;
 
 /**
- * @todo complet rewrite of this class - what is the best practive to acces data in the view? define all functiosn sindie here? re-create methods from config object?
- *  $this->config() $this....
- *
  * @author nadar
  */
 class RenderActiveWindow extends \admin\ngrest\base\Render implements \admin\ngrest\interfaces\Render

@@ -23,7 +23,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     public function init()
     {
         parent::init();
-        $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'validateRewrite']);
+        $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'validateAlias']);
         $this->on(self::EVENT_BEFORE_INSERT, [$this, 'beforeCreate']);
         $this->on(self::EVENT_BEFORE_DELETE, [$this, 'logEvent']);
         $this->on(self::EVENT_AFTER_INSERT, [$this, 'logEvent']);
@@ -53,7 +53,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     public function rules()
     {
         return [
-            [['lang_id', 'title', 'rewrite', 'nav_item_type'], 'required'],
+            [['lang_id', 'title', 'alias', 'nav_item_type'], 'required'],
             [['nav_id'], 'safe'],
         ];
     }
@@ -62,14 +62,14 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     {
         return [
             'title' => 'Seitentitel',
-            'rewrite' => 'Pfadsegment',
+            'alias' => 'Pfadsegment',
         ];
     }
 
     public function scenarios()
     {
         return [
-            'default' => ['title', 'rewrite', 'nav_item_type', 'nav_id', 'lang_id'],
+            'default' => ['title', 'alias', 'nav_item_type', 'nav_id', 'lang_id'],
         ];
     }
 
@@ -115,33 +115,33 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
         $this->parent_nav_id = $this->nav->parent_nav_id;
     }
 
-    public function verifyRewrite($rewrite, $langId)
+    public function verifyAlias($alias, $langId)
     {
-        if (Yii::$app->hasModule($rewrite) && $this->parent_nav_id == 0) {
-            $this->addError('rewrite', 'Die URL darf nicht verwendet werden da es ein Modul mit dem gleichen Namen gibt.');
+        if (Yii::$app->hasModule($alias) && $this->parent_nav_id == 0) {
+            $this->addError('alias', 'Die URL darf nicht verwendet werden da es ein Modul mit dem gleichen Namen gibt.');
 
             return false;
         }
 
         if ($this->parent_nav_id === null) {
-            $this->addError('parent_nav_id', 'parent_nav_id can not be null to verify the rewrite validation process.');
+            $this->addError('parent_nav_id', 'parent_nav_id can not be null to verify the alias validation process.');
         }
 
-        if ($this->find()->where(['rewrite' => $rewrite, 'lang_id' => $langId])->leftJoin('cms_nav', 'cms_nav_item.nav_id=cms_nav.id')->andWhere(['=', 'cms_nav.parent_nav_id', $this->parent_nav_id])->one()) {
-            $this->addError('rewrite', 'Diese URL existiert bereits und ist deshalb ungültig.');
+        if ($this->find()->where(['alias' => $alias, 'lang_id' => $langId])->leftJoin('cms_nav', 'cms_nav_item.nav_id=cms_nav.id')->andWhere(['=', 'cms_nav.parent_nav_id', $this->parent_nav_id])->one()) {
+            $this->addError('alias', 'Diese URL existiert bereits und ist deshalb ungültig.');
 
             return false;
         }
     }
 
-    public function validateRewrite()
+    public function validateAlias()
     {
-        $dirty = $this->getDirtyAttributes(['rewrite']);
-        if (!isset($dirty['rewrite'])) {
+        $dirty = $this->getDirtyAttributes(['alias']);
+        if (!isset($dirty['alias'])) {
             return true;
         }
 
-        if (!$this->verifyRewrite($this->rewrite, $this->lang_id)) {
+        if (!$this->verifyAlias($this->alias, $this->lang_id)) {
             return false;
         }
     }
@@ -172,7 +172,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
 
     public function genericSearchFields()
     {
-        return ['title', 'rewrite'];
+        return ['title', 'alias'];
     }
 
     public function genericSearch($searchQuery)

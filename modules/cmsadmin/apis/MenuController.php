@@ -25,19 +25,19 @@ class MenuController extends \admin\base\RestController
         foreach (Cat::find()->asArray()->all() as $cat) {
             $data[$cat['id']] = [
                 'name' => $cat['name'],
-                'rewrite' => $cat['rewrite'],
+                'alias' => $cat['alias'],
                 'id' => $cat['id'],
-                '__items' => $this->actionGetByCatRewrite($cat['rewrite']),
+                '__items' => $this->actionGetByCatAlias($cat['alias']),
             ];
         }
 
         return $data;
     }
 
-    public function actionGetByCatRewrite($catRewrite)
+    public function actionGetByCatAlias($catAlias)
     {
         $menu = new \cmsadmin\components\Menu();
-        $menu->setCatByRewrite($catRewrite);
+        $menu->setCatByAlias($catAlias);
         $menu->setLangByShortCode($this->getLangShortCode());
 
         return $menu->childrenRecursive(0, 'nodes');

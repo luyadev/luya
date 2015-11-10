@@ -123,9 +123,9 @@ class Menu extends \yii\base\Component
         throw new Exception("Unable to find the requested language '$langShortCode'.");
     }
 
-    private function buildItemLink($rewrite)
+    private function buildItemLink($alias)
     {
-        return Yii::$app->getUrlManager()->prependBaseUrl($this->composition->prependTo($rewrite));
+        return Yii::$app->getUrlManager()->prependBaseUrl($this->composition->prependTo($alias));
     }
 
     private function loadContainerData()
@@ -136,7 +136,7 @@ class Menu extends \yii\base\Component
 
         foreach ((new DbQuery())->select(['short_code', 'id'])->from('admin_lang')->all() as $lang) {
             $data = (new DbQuery())->from(['cms_nav_item item'])
-            ->select(['item.id', 'item.nav_id', 'item.title', 'item.rewrite', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'cat.rewrite AS cat'])
+            ->select(['item.id', 'item.nav_id', 'item.title', 'item.alias', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'cat.alias AS cat'])
             ->leftJoin('cms_nav nav', 'nav.id=item.nav_id')
             ->leftJoin('cms_cat cat', 'cat.id=nav.cat_id')
             ->where(['nav.is_deleted' => 0, 'item.lang_id' => $lang['id'], 'nav.is_offline' => 0])
@@ -149,27 +149,27 @@ class Menu extends \yii\base\Component
             foreach ($data as $item) {
                 if (!array_key_exists($item['nav_id'], $index)) {
                     if ($item['parent_nav_id'] > 0) {
-                        $rewrite = $index[$item['parent_nav_id']].'/'.$item['rewrite'];
+                        $alias = $index[$item['parent_nav_id']].'/'.$item['alias'];
                     } else {
-                        $rewrite = $item['rewrite'];
+                        $alias = $item['alias'];
                     }
-                    $index[$item['nav_id']] = $rewrite;
+                    $index[$item['nav_id']] = $alias;
                 }
             }
 
             array_walk($data, function (&$item, $key) use ($index, $redirectMap, $lang) {
-                // concate rewrite link from parent nav ids
+                // concate alias link from parent nav ids
                 if ($item['parent_nav_id'] > 0) {
-                    $rewrite = $index[$item['parent_nav_id']].'/'.$item['rewrite'];
+                    $alias = $index[$item['parent_nav_id']].'/'.$item['alias'];
                 } else {
-                    $rewrite = $item['rewrite'];
+                    $alias = $item['alias'];
                 }
 
                 // add link key
                 $item['lang'] = $lang['short_code'];
-                $item['alias'] = $rewrite;
-                $item['link'] = $this->buildItemLink($rewrite);
-                $item['depth'] = count(explode('/', $rewrite));
+                $item['alias'] = $alias;
+                $item['link'] = $this->buildItemLink($alias);
+                $item['depth'] = count(explode('/', $alias));
                 // add redirect info if item_type 3
                 if ($item['nav_item_type'] == 3) {
                     $item['redirect'] = $redirectMap[$item['nav_item_type_id']];

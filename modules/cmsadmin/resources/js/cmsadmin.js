@@ -108,8 +108,8 @@
 					}
 				});
 				
-				$scope.rewriteSuggestion = function() {
-					$scope.data.rewrite = Slug.slugify($scope.data.title);
+				$scope.aliasSuggestion = function() {
+					$scope.data.alias = Slug.slugify($scope.data.title);
 				}
 				
 				$scope.exec = function () {
@@ -118,7 +118,7 @@
 						$scope.success = true;
 						$scope.error = [];
 						$scope.data.title = null;
-						$scope.data.rewrite = null;
+						$scope.data.alias = null;
 						if ($scope.data.isInline) {
 							$scope.$parent.$parent.getItem($scope.data.lang_id, $scope.data.nav_id); /* getItem(nav_id, lang_id); */
 						}
@@ -719,7 +719,7 @@
 			var navItemId = itemCopy.id;
 
 			$http.post(
-					'admin/api-cms-navitem/update-page-item?navItemId=' + navItemId + '&navItemType=' + itemCopy.nav_item_type + '&navItemTypeId=' + itemCopy.nav_item_type_id + '&title=' + itemCopy.title + '&rewrite=' + itemCopy.rewrite,
+					'admin/api-cms-navitem/update-page-item?navItemId=' + navItemId + '&navItemType=' + itemCopy.nav_item_type + '&navItemTypeId=' + itemCopy.nav_item_type_id + '&title=' + itemCopy.title + '&alias=' + itemCopy.alias,
 					$.param(typeDataCopy),
 					headers
 			).then(function successCallback(response) {

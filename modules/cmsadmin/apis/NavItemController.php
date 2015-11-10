@@ -110,11 +110,11 @@ class NavItemController extends \admin\base\RestController
      * @param $navItemType
      * @param $navItemTypeId
      * @param $title
-     * @param $rewrite
+     * @param $alias
      *
      * @return array|bool
      */
-    public function actionUpdatePageItem($navItemId, $navItemType, $navItemTypeId, $title, $rewrite)
+    public function actionUpdatePageItem($navItemId, $navItemType, $navItemTypeId, $title, $alias)
     {
         $model = NavItem::find()->where(['id' => $navItemId])->one();
         if (!$model) {
@@ -125,11 +125,11 @@ class NavItemController extends \admin\base\RestController
         $oldNavItemType = $model->nav_item_type;
         $oldNavItemTypeId = $model->nav_item_type_id;
         $oldTitle = $model->title;
-        $oldRewrite = $model->rewrite;
+        $oldAlias = $model->alias;
 
         $model->nav_item_type = $navItemType;
         $model->title = $title;
-        $model->rewrite = $rewrite;
+        $model->alias = $alias;
 
         if ((!$model->validate()) || (!$model->save())) {
             return $this->sendModelError($model);
@@ -179,7 +179,7 @@ class NavItemController extends \admin\base\RestController
             // error: reverse changes in nav item
             $model->nav_item_type = $oldNavItemType;
             $model->nav_item_type_id = $oldNavItemTypeId;
-            $model->rewrite = $oldRewrite;
+            $model->alias = $oldAlias;
             $model->title = $oldTitle;
             $model->update(false);
 

@@ -19,7 +19,7 @@ class m141203_143111_cms_nav_item extends Migration
             'timestamp_create' => 'INT(11) NULL',
             'timestamp_update' => 'INT(11) NULL',
             'title' => 'VARCHAR(180) NOT NULL',
-            'rewrite' => 'VARCHAR(80) NOT NULL',
+            'rewrite' => 'VARCHAR(80) NOT NULL', // renamed to alias
         ]);
     }
 

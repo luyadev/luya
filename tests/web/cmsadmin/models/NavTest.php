@@ -12,13 +12,4 @@ class NavTest extends \tests\web\Base
         $this->assertEquals(null, Nav::findContent(1));
     }
 
-    /*
-    public function testCreatePage()
-    {
-        $model = new Nav();
-        $response = $model->createPage(0, 1, 1, 'foo-title', 'foo-rewrite', 1);
-        
-        var_dump($response);
-    }
-    */
 }

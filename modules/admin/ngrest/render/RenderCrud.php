@@ -9,9 +9,6 @@ use admin\components\Auth;
 use admin\models\Lang;
 
 /**
- * @todo complet rewrite of this class - what is the best practive to acces data in the view? define all functiosn sindie here? re-create methods from config object?
- *  $this->config() $this....
- *
  * @author nadar
  */
 class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\interfaces\Render

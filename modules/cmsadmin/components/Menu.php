@@ -17,9 +17,9 @@ class Menu
     {
     }
 
-    public function setCatByRewrite($catRewrite)
+    public function setCatByAlias($catAlias)
     {
-        $this->cat = (new \yii\db\Query())->select(['id'])->from('cms_cat')->where(['rewrite' => $catRewrite])->one();
+        $this->cat = (new \yii\db\Query())->select(['id'])->from('cms_cat')->where(['alias' => $catAlias])->one();
     }
 
     public function setCatById($catId)
@@ -119,7 +119,7 @@ class Menu
     private function getData($parentNavId)
     {
         return (new \yii\db\Query())
-            ->select('cms_nav.id, cms_nav.sort_index, cms_nav.parent_nav_id, cms_nav_item.title, cms_nav_item.rewrite, cms_nav.is_hidden, cms_nav.is_offline')
+            ->select('cms_nav.id, cms_nav.sort_index, cms_nav.parent_nav_id, cms_nav_item.title, cms_nav_item.alias, cms_nav.is_hidden, cms_nav.is_offline')
             ->from('cms_nav')
             ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')
             ->orderBy('cms_nav.sort_index ASC')

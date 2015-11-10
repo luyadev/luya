@@ -43,7 +43,7 @@ class Cat extends \admin\ngrest\base\Model
         $config->delete = true;
 
         $config->list->field('name', 'Name')->text();
-        $config->list->field('rewrite', 'Rewrite')->text();
+        $config->list->field('alias', 'Alias')->text();
 
         $config->create->copyFrom('list');
         $config->update->copyFrom('list');
@@ -59,15 +59,15 @@ class Cat extends \admin\ngrest\base\Model
     public function rules()
     {
         return [
-            [['name', 'rewrite'], 'required'],
+            [['name', 'alias'], 'required'],
         ];
     }
 
     public function scenarios()
     {
         return [
-            'restcreate' => ['name', 'rewrite'],
-            'restupdate' => ['name', 'rewrite'],
+            'restcreate' => ['name', 'alias'],
+            'restupdate' => ['name', 'alias'],
         ];
     }
 
