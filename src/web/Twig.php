@@ -20,8 +20,8 @@ class Twig extends \yii\base\Component
     public function getFunctions()
     {
         return [
-            'menuFindAll' => function ($cat, $parentNavId) {
-                return Yii::$app->menu->findAll(['cat' => $cat, 'parent_nav_id' => $parentNavId]);
+            'menuFindAll' => function ($container, $parentNavId) {
+                return Yii::$app->menu->findAll(['container' => $container, 'parent_nav_id' => $parentNavId]);
             },
             'menuFindOne' => function ($id) {
                 return Yii::$app->menu->findOne(['id' => $id]);

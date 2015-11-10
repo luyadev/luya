@@ -2,7 +2,7 @@
 
 namespace cmsadmin\apis;
 
-use cmsadmin\models\Cat;
+use cmsadmin\models\NavContainer;
 use admin\models\Lang;
 
 class MenuController extends \admin\base\RestController
@@ -22,31 +22,31 @@ class MenuController extends \admin\base\RestController
     public function actionAll()
     {
         $data = [];
-        foreach (Cat::find()->asArray()->all() as $cat) {
-            $data[$cat['id']] = [
-                'name' => $cat['name'],
-                'alias' => $cat['alias'],
-                'id' => $cat['id'],
-                '__items' => $this->actionGetByCatAlias($cat['alias']),
+        foreach (NavContainer::find()->asArray()->all() as $container) {
+            $data[$container['id']] = [
+                'name' => $container['name'],
+                'alias' => $container['alias'],
+                'id' => $container['id'],
+                '__items' => $this->actionGetByContainerAlias($container['alias']),
             ];
         }
 
         return $data;
     }
 
-    public function actionGetByCatAlias($catAlias)
+    public function actionGetByContainerAlias($containerAlias)
     {
         $menu = new \cmsadmin\components\Menu();
-        $menu->setCatByAlias($catAlias);
+        $menu->setContainerByAlias($containerAlias);
         $menu->setLangByShortCode($this->getLangShortCode());
 
         return $menu->childrenRecursive(0, 'nodes');
     }
 
-    public function actionGetByCatId($catId)
+    public function actionGetByContainerId($containerId)
     {
         $menu = new \cmsadmin\components\Menu();
-        $menu->setCatById($catId);
+        $menu->setContainerById($containerId);
         $menu->setLangByShortCode($this->getLangShortCode());
 
         return $menu->childrenRecursive(0, 'nodes');

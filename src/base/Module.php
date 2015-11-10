@@ -19,7 +19,7 @@ abstract class Module extends \yii\base\Module
      * ```php
      * [
      *     'api-admin-user' => 'admin\apis\UserController',
-     *     'api-cms-cat' => 'admin\apis\CatController'
+     *     'api-cms-navcontainer' => 'admin\apis\NavContainerController'
      * ]
      * ```
      */

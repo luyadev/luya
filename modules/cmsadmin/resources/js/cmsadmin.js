@@ -3,14 +3,16 @@
 	
 	// directive.js
 	
-	zaa.directive("menuDropdown", function(MenuService) {
+	zaa.directive("menuDropdown", function(NewMenuService) {
 		return {
 			restrict : 'E',
 			scope : {
 				navId : '='
 			},
 			link : function(scope) {
-				scope.menu = MenuService.menu;
+				NewMenuService.get().then(function(response) {
+					scope.menu = response;
+				});
 			},
 			controller : function($scope) {
 				$scope.changeModel = function(data) {
@@ -18,10 +20,10 @@
 				}
 			},
 			template : function() {
-				return '<div class="menu-dropdown__category" ng-repeat="cat in menu">' +
-                            '<b class="menu-dropdown__title">{{cat.name}}</b>' +
+				return '<div class="menu-dropdown__category" ng-repeat="container in menu">' +
+                            '<b class="menu-dropdown__title">{{container.name}}</b>' +
                             '<ul class="menu-dropdown__list">' +
-                                '<li class="menu-dropdown__item" ng-repeat="data in cat.__items" ng-include="\'menuDropdownReverse.html\'"></li>' +
+                                '<li class="menu-dropdown__item" ng-repeat="data in container.__items" ng-include="\'menuDropdownReverse.html\'"></li>' +
                             '</ul>' +
                         '</div>';
 			}
@@ -75,7 +77,7 @@
 				data : '='
 			},
 			templateUrl : 'createform.html',
-			controller : function($scope, $http, AdminLangService, MenuService, Slug) {
+			controller : function($scope, $http, AdminLangService, NewMenuService, Slug) {
 				
 				$scope.error = [];
 				$scope.success = false;
@@ -84,16 +86,21 @@
 				
 				$scope.AdminLangService = AdminLangService;
 				
-				$scope.MenuService = MenuService;
+				//$scope.MenuService = MenuService;
 				
 				$scope.lang = $scope.AdminLangService.data;
 				
-				$scope.cat = $scope.MenuService.cats;
+				//$scope.navcontainers = $scope.MenuService.navcontainers;
+				
+				NewMenuService.get().then(function(response) {
+					$scope.menu = response;
+					$scope.navcontainers = NewMenuService.navcontainers;
+				});
 				
 				$scope.data.nav_item_type = 1;
 				$scope.data.parent_nav_id = 0;
 				
-				$scope.data.cat_id = 1;
+				$scope.data.nav_container_id = 1;
 				
 				$http.get('admin/api-admin-defaults/lang').success(function(response) {
 					$scope.data.lang_id = response.id;
@@ -101,10 +108,10 @@
 				
 				$scope.navitems = [];
 				
-				$scope.$watch(function() { return $scope.data.cat_id }, function(n, o) {
+				$scope.$watch(function() { return $scope.data.nav_container_id }, function(n, o) {
 					if (n !== undefined && n !== o) {
 						$scope.data.parent_nav_id = 0;
-						$scope.navitems = MenuService.menu[n]['__items'];
+						$scope.navitems = $scope.menu[n]['__items'];
 					}
 				});
 				
@@ -114,7 +121,9 @@
 				
 				$scope.exec = function () {
 					$scope.controller.save().then(function(response) {
-						MenuService.refresh();
+						NewMenuService.get(true).then(function(response) {
+							$scope.menu = response;
+						});
 						$scope.success = true;
 						$scope.error = [];
 						$scope.data.title = null;
@@ -200,8 +209,8 @@
 	
 	// factory.js
 	
-	zaa.factory('ApiCmsCat', function($resource) {
-		return $resource('admin/api-cms-cat/:id');
+	zaa.factory('ApiCmsNavContainer', function($resource) {
+		return $resource('admin/api-cms-navcontainer/:id');
 	});
 	
 	zaa.factory('ApiCmsBlock', function($resource) {
@@ -310,26 +319,35 @@
             		});
             	},
             	filters : function(FilterService) {
-            		return FilterService.get(true);
+            		return FilterService.get();
             	},
+            	menu : function(NewMenuService) {
+            		return NewMenuService.get(true);
+            	}
             }
 		})
 		.state("custom.cmsadd", {
 			url : "/create",
-			templateUrl : 'cmsadmin/page/create'
+			templateUrl : 'cmsadmin/page/create',
+			resolve : {
+				menu : function(NewMenuService) {
+            		return NewMenuService.get(true);
+            	}
+			}
 		});
 	});
 	
 	zaa.service("NewMenuService", function($http, $q) {
 		var service = [];
 		service.data = null;
-		service.cats = [];
+		service.navcontainers = [];
 		service.get = function(forceReload){
 			return $q(function(resolve, reject){
 				if (service.data === null || forceReload === true){
 					$http.get('admin/api-cms-menu/all').success(function(response) {
+						service.navcontainers = [];
 						for (var i in response) {
-							service.cats.push({ name : response[i]['name'], id : parseInt(response[i]['id'])});
+							service.navcontainers.push({ name : response[i]['name'], id : parseInt(response[i]['id'])});
 						}
 						service.data = response;
 						resolve(response);
@@ -343,18 +361,20 @@
 		return service;
 	});
 	
+	/*
 	zaa.service('MenuService', function($http) {
 		var service = [];
 		
 		service.menu = [];
 		
-		service.cats = [];
+		service.navcontainers = [];
 		
 		service.refresh = function() {
-			service.cats = [];
+			service.navcontainers = [];
 			$http.get('admin/api-cms-menu/all').success(function(response) {
+				console.log('old menu service', response);
 				for (var i in response) {
-					service.cats.push({ name : response[i]['name'], id : parseInt(response[i]['id'])});
+					service.navcontainers.push({ name : response[i]['name'], id : parseInt(response[i]['id'])});
 				}
 				service.menu = response;
 			});
@@ -364,8 +384,9 @@
 		
 		return service;
 	});
+	*/
 	
-	zaa.controller("DropNavController", function($scope, $http, MenuService) {
+	zaa.controller("DropNavController", function($scope, $http, NewMenuService) {
 		
 		$scope.droppedNavItem = null;
 		
@@ -373,7 +394,7 @@
 	    	var itemid = $($event.target).data('itemid');
 			//console.log('dropped block beofre itemid: ' + itemid, 'theblock', $scope.droppedNavItem);
 			$http.get('admin/api-cms-navitem/move-before', { params : { moveItemId : $scope.droppedNavItem.id, droppedBeforeItemId : itemid }}).success(function(r) {
-				MenuService.refresh();
+				NewMenuService.get(true);
 			}).error(function(r) {
 				console.log('err', r)
 			})
@@ -383,7 +404,7 @@
 	    	var itemid = $($event.target).data('itemid');
 			//console.log('dropped block beofre itemid: ' + itemid, 'theblock', $scope.droppedNavItem);
 			$http.get('admin/api-cms-navitem/move-after', { params : { moveItemId : $scope.droppedNavItem.id, droppedAfterItemId : itemid }}).success(function(r) {
-				MenuService.refresh();
+				NewMenuService.get(true);
 			}).error(function(r) {
 				console.log('err', r)
 			})
@@ -393,14 +414,14 @@
 	    	var itemid = $($event.target).data('itemid');
 			//console.log('dropped block beofre itemid: ' + itemid, 'theblock', $scope.droppedNavItem);
 			$http.get('admin/api-cms-navitem/move-to-child', { params : { moveItemId : $scope.droppedNavItem.id, droppedOnItemId : itemid }}).success(function(r) {
-				MenuService.refresh();
+				NewMenuService.get(true);
 			}).error(function(r) {
 				console.log('err', r)
 			})
 	    }
 	})
 	
-	zaa.controller("CmsMenuTreeController", function($scope, $state, MenuService, DroppableBlocksService, AdminLangService, CmsLayoutService) {
+	zaa.controller("CmsMenuTreeController", function($scope, $state, NewMenuService, DroppableBlocksService, AdminLangService, CmsLayoutService) {
 	    
 		CmsLayoutService.load();
 		
@@ -426,9 +447,14 @@
 		
 		$scope.AdminLangService = AdminLangService;
 		
+		/**
+		 * @todo: make promise and add to resolve list
+		 */
 		$scope.AdminLangService.load(true);
 		
-		$scope.menu = [];
+		$scope.$watch(function() { return NewMenuService.data; }, function(n) {
+			$scope.menu = n;
+		});
 		
 		$scope.showDrag = false;
 		
@@ -438,10 +464,6 @@
 		
 		DroppableBlocksService.load();
 		
-	    $scope.$watch(function() { return MenuService.menu }, function(newValue) {
-	    	$scope.menu = newValue;
-	    });
-	    
 	    $scope.isCurrentElement = function(navId) {
 	    	if ($state.params.navId == navId) {
 	    		return true;
@@ -549,13 +571,15 @@
 	
 	// update.js
 	
-	zaa.controller("NavController", function($scope, $stateParams, $http, AdminLangService, AdminClassService, MenuService, PlaceholderService, PropertiesService) {
+	zaa.controller("NavController", function($scope, $stateParams, $http, AdminLangService, AdminClassService, NewMenuService, PlaceholderService, PropertiesService) {
 		
 		$scope.id = parseInt($stateParams.navId);
 		
 		$scope.isDeleted = false;
 		
-		$scope.menuCats = MenuService.cats;
+		/*
+		$scope.menuNavContainers = MenuService.navcontainers;
+		*/
 		
 		$scope.PlaceholderService = PlaceholderService;
 		
@@ -633,7 +657,7 @@
 		$scope.$watch(function() { return $scope.navData.is_hidden }, function(n, o) {
 			if (o !== undefined) {
 				$http.get('admin/api-cms-nav/toggle-hidden', { params : { navId : $scope.navData.id , hiddenStatus : n }}).success(function(response) {
-					MenuService.refresh();
+					NewMenuService.get(true);
 					// send toast
 					if (n == 1) {
 						//Materialize.toast('<span>Die Seite ist nun Unsichtbar.</span>', 2000)
@@ -647,7 +671,7 @@
 		$scope.$watch(function() { return $scope.navData.is_offline }, function(n, o) {
 			if (o !== undefined) {
 				$http.get('admin/api-cms-nav/toggle-offline', { params : { navId : $scope.navData.id , offlineStatus : n }}).success(function(response) {
-					MenuService.refresh();
+					NewMenuService.get(true);
 					// send toast
 					if (n == 1) {
 						//Materialize.toast('<span>Die Seite ist nun <span style="color:red;">Offline</span>.</span>', 2000)
@@ -658,20 +682,10 @@
 			}
 		});
 		
-		$scope.$watch(function() { return $scope.navData.cat_id }, function(n, o) {
-			if (o != undefined && o != null && n != o) {
-				$http.get('admin/api-cms-nav/update-cat', { params : { navId : $scope.navData.id , catId : n }}).success(function(response) {
-					MenuService.refresh();
-					//Materialize.toast('<span>Die Seite wurde der Navigation ' + n + ' zugewiesen.</span>', 2000)
-				});
-				
-			}
-		});
-		
 	    $scope.trash = function() {
 	    	if (confirm('your are sure you want to delete this page?')) {
 	    		$http.get('admin/api-cms-nav/delete', { params : { navId : $scope.navData.id }}).success(function(response) {
-	    			MenuService.refresh();
+	    			NewMenuService.get(true);
 	    			$scope.isDeleted = true;
 	    		});
 	    	}
@@ -692,7 +706,7 @@
 	 * @param $scope.lang
 	 *            from ng-repeat
 	 */
-	zaa.controller("NavItemController", function($scope, $http, $timeout, MenuService, CmsLayoutService) {
+	zaa.controller("NavItemController", function($scope, $http, $timeout, NewMenuService, CmsLayoutService) {
 		
 		$scope.NavController = $scope.$parent;
 		
@@ -724,7 +738,7 @@
 					headers
 			).then(function successCallback(response) {
 				//Materialize.toast('<span> Die Seite «'+itemCopy.title+'» wurde aktualisiert.</span>', 2000);
-				MenuService.refresh();
+				NewMenuService.get(true);
 				$scope.refresh();
 				$scope.toggleSettings();
 			}, function errorCallback(response) {

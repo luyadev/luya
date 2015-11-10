@@ -177,12 +177,6 @@
                                 <!-- RIGHT TOOLBAR -->
                                 <div class="right">
 
-                                    <!-- NAVIGATION DROPDOWN -->
-                                    <div class="toolbar__group">
-                                        <select class="browser-default" ng-model="navData.cat_id" ng-options="item.id as item.name for item in menuCats" />
-                                    </div>
-                                    <!-- /NAVIGATION DROPDOWN -->
-
                                     <!-- IS_HOME SWITCH -->
                                     <div class="toolbar__group">
                                         <div class="switch">

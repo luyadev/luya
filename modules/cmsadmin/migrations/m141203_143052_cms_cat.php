@@ -6,7 +6,7 @@ class m141203_143052_cms_cat extends Migration
 {
     public function up()
     {
-        $this->createTable('cms_cat', [
+        $this->createTable('cms_cat', [ // renameed to cms_nav_container
             'id' => 'pk',
             'name' => 'VARCHAR(180) NOT NULL',
             'rewrite' => 'VARCHAR(80) NOT NULL', // renamed to alias
@@ -15,7 +15,7 @@ class m141203_143052_cms_cat extends Migration
             'is_deleted' => 'TINYINT(1) NOT NULL default 0',
         ]);
 
-        $this->insert('cms_cat', [
+        $this->insert('cms_cat', [ // renamed to cms_nav_container
             'name' => 'Hauptnavigation',
             'rewrite' => 'default', // renmaed to alias
             //'default_nav_id' => 1,

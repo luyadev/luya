@@ -32,7 +32,7 @@ class Nav extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cat_id', 'parent_nav_id'], 'required'],
+            [['nav_container_id', 'parent_nav_id'], 'required'],
             [['is_hidden', 'is_offline', 'sort_index', 'is_deleted', 'is_home'], 'safe'],
         ];
     }
@@ -79,11 +79,11 @@ class Nav extends \yii\db\ActiveRecord
     }
 
     /**
-     * find the latest sort index cms_nav item for the current cat_id and parent_nav_id and set internal index count plus one.
+     * find the latest sort index cms_nav item for the current nav_container_id and parent_nav_id and set internal index count plus one.
      */
     public function eventBeforeInsert()
     {
-        $item = self::find()->where(['cat_id' => $this->cat_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index DESC')->limit(1)->asArray()->one();
+        $item = self::find()->where(['nav_container_id' => $this->nav_container_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index DESC')->limit(1)->asArray()->one();
         if (!$item) {
             $this->sort_index = 1;
         } else {
@@ -94,7 +94,7 @@ class Nav extends \yii\db\ActiveRecord
     public function reindex($e)
     {
         $i = 1;
-        foreach (self::find()->where(['cat_id' => $this->cat_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $model) {
+        foreach (self::find()->where(['nav_container_id' => $this->nav_container_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $model) {
             Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $i], 'id=:id', ['id' => $model['id']])->execute();
             ++$i;
         }
@@ -119,7 +119,7 @@ class Nav extends \yii\db\ActiveRecord
 
         $to->moveUpstairs();
 
-        $move->cat_id = $to->cat_id;
+        $move->nav_container_id = $to->nav_container_id;
         $move->parent_nav_id = $to->parent_nav_id;
         $move->sort_index = $to->sort_index;
         $move->update();
@@ -134,7 +134,7 @@ class Nav extends \yii\db\ActiveRecord
 
         $to->moveDownstairs();
 
-        $move->cat_id = $to->cat_id;
+        $move->nav_container_id = $to->nav_container_id;
         $move->parent_nav_id = $to->parent_nav_id;
         $move->sort_index = $to->sort_index;
         $move->update();
@@ -147,7 +147,7 @@ class Nav extends \yii\db\ActiveRecord
         $move = self::findOne($moveNavId);
         $on = self::findOne($droppedOnItemId);
 
-        $move->cat_id = $on->cat_id;
+        $move->nav_container_id = $on->nav_container_id;
         $move->parent_nav_id = $on->id;
         $move->update();
 
@@ -157,7 +157,7 @@ class Nav extends \yii\db\ActiveRecord
     public function moveUpstairs()
     {
         $startIndex = (int) $this->sort_index;
-        foreach (self::find()->where('sort_index >= :index', ['index' => $startIndex])->andWhere(['cat_id' => $this->cat_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $item) {
+        foreach (self::find()->where('sort_index >= :index', ['index' => $startIndex])->andWhere(['nav_container_id' => $this->nav_container_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $item) {
             ++$startIndex;
             $up = Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id', ['id' => $item['id']])->execute();
         }
@@ -166,13 +166,13 @@ class Nav extends \yii\db\ActiveRecord
     public function moveDownstairs()
     {
         $startIndex = (int) $this->sort_index;
-        foreach (self::find()->where('sort_index >= :index', ['index' => $startIndex])->andWhere(['cat_id' => $this->cat_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $item) {
+        foreach (self::find()->where('sort_index >= :index', ['index' => $startIndex])->andWhere(['nav_container_id' => $this->nav_container_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $item) {
             --$startIndex;
             $up = Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id', ['id' => $item['id']])->execute();
         }
     }
 
-    public function createPage($parentNavId, $catId, $langId, $title, $alias, $layoutId)
+    public function createPage($parentNavId, $navContainerId, $langId, $title, $alias, $layoutId)
     {
         $_errors = [];
 
@@ -181,7 +181,7 @@ class Nav extends \yii\db\ActiveRecord
         $navItem->parent_nav_id = $parentNavId;
         $navItemPage = new \cmsadmin\models\NavItemPage();
 
-        $nav->attributes = ['parent_nav_id' => $parentNavId, 'cat_id' => $catId, 'is_hidden' => 1, 'is_offline' => 1];
+        $nav->attributes = ['parent_nav_id' => $parentNavId, 'nav_container_id' => $navContainerId, 'is_hidden' => 1, 'is_offline' => 1];
         $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'nav_item_type' => 1];
         $navItemPage->attributes = ['layout_id' => $layoutId];
 
@@ -239,7 +239,7 @@ class Nav extends \yii\db\ActiveRecord
         return $navItemId;
     }
 
-    public function createModule($parentNavId, $catId, $langId, $title, $alias, $moduleName)
+    public function createModule($parentNavId, $navContainerId, $langId, $title, $alias, $moduleName)
     {
         $_errors = [];
 
@@ -248,7 +248,7 @@ class Nav extends \yii\db\ActiveRecord
         $navItem->parent_nav_id = $parentNavId;
         $navItemModule = new \cmsadmin\models\NavItemModule();
 
-        $nav->attributes = ['parent_nav_id' => $parentNavId, 'cat_id' => $catId, 'is_hidden' => 1, 'is_offline' => 1];
+        $nav->attributes = ['parent_nav_id' => $parentNavId, 'nav_container_id' => $navContainerId, 'is_hidden' => 1, 'is_offline' => 1];
         $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'nav_item_type' => 2];
         $navItemModule->attributes = ['module_name' => $moduleName];
 
@@ -276,7 +276,7 @@ class Nav extends \yii\db\ActiveRecord
         return $navItemId;
     }
 
-    public function createRedirect($parentNavId, $catId, $langId, $title, $alias, $redirectType, $redirectTypeValue)
+    public function createRedirect($parentNavId, $navContainerId, $langId, $title, $alias, $redirectType, $redirectTypeValue)
     {
         $_errors = [];
 
@@ -285,7 +285,7 @@ class Nav extends \yii\db\ActiveRecord
         $navItem->parent_nav_id = $parentNavId;
         $navItemRedirect = new \cmsadmin\models\NavItemRedirect();
 
-        $nav->attributes = ['parent_nav_id' => $parentNavId, 'cat_id' => $catId, 'is_hidden' => 1, 'is_offline' => 1];
+        $nav->attributes = ['parent_nav_id' => $parentNavId, 'nav_container_id' => $navContainerId, 'is_hidden' => 1, 'is_offline' => 1];
         $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'nav_item_type' => 3];
         $navItemRedirect->attributes = ['type' => $redirectType, 'value' => $redirectTypeValue];
 

@@ -136,11 +136,11 @@ class Menu extends \yii\base\Component
 
         foreach ((new DbQuery())->select(['short_code', 'id'])->from('admin_lang')->all() as $lang) {
             $data = (new DbQuery())->from(['cms_nav_item item'])
-            ->select(['item.id', 'item.nav_id', 'item.title', 'item.alias', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'cat.alias AS cat'])
+            ->select(['item.id', 'item.nav_id', 'item.title', 'item.alias', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'nav_container.alias AS container'])
             ->leftJoin('cms_nav nav', 'nav.id=item.nav_id')
-            ->leftJoin('cms_cat cat', 'cat.id=nav.cat_id')
+            ->leftJoin('cms_nav_container nav_container', 'nav_container.id=nav.nav_container_id')
             ->where(['nav.is_deleted' => 0, 'item.lang_id' => $lang['id'], 'nav.is_offline' => 0])
-            ->orderBy(['cat' => 'ASC', 'parent_nav_id' => 'ASC', 'nav.sort_index' => 'ASC'])
+            ->orderBy(['container' => 'ASC', 'parent_nav_id' => 'ASC', 'nav.sort_index' => 'ASC'])
             ->indexBy('id')
             ->all();
 

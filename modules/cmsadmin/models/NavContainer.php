@@ -4,13 +4,13 @@ namespace cmsadmin\models;
 
 use admin\models\Lang;
 
-class Cat extends \admin\ngrest\base\Model
+class NavContainer extends \admin\ngrest\base\Model
 {
     use \admin\traits\SoftDeleteTrait;
 
     public function ngRestApiEndpoint()
     {
-        return 'api-cms-cat';
+        return 'api-cms-navcontainer';
     }
 
     private $_langId = null;
@@ -53,7 +53,7 @@ class Cat extends \admin\ngrest\base\Model
 
     public static function tableName()
     {
-        return 'cms_cat';
+        return 'cms_nav_container';
     }
 
     public function rules()

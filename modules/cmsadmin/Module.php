@@ -17,7 +17,7 @@ class Module extends \admin\base\Module
         'api-cms-layout' => 'cmsadmin\\apis\\LayoutController',
         'api-cms-block' => 'cmsadmin\\apis\\BlockController',
         'api-cms-blockgroup' => 'cmsadmin\\apis\\BlockgroupController',
-        'api-cms-cat' => 'cmsadmin\apis\CatController',
+        'api-cms-navcontainer' => 'cmsadmin\apis\NavContainerController',
     ];
 
     public $assets = [
@@ -30,7 +30,7 @@ class Module extends \admin\base\Module
             ->nodeRoute('Seiteninhalte', 'content_copy', 'cmsadmin-default-index', 'cmsadmin/default/index', 'cmsadmin\models\NavItem')
             ->node('CMS-Einstellungen', 'settings')
                 ->group('Seitenvorlagen')
-                    ->itemApi('Kategorien', 'cmsadmin-cat-index', 'label_outline', 'api-cms-cat')
+                    ->itemApi('Container', 'cmsadmin-navcontainer-index', 'label_outline', 'api-cms-navcontainer')
                     ->itemApi('Layouts', 'cmsadmin-layout-index', 'view_quilt', 'api-cms-layout')
                 ->group('Inhaltselemente')
                     ->itemApi('Blockgruppen', 'cmsadmin-blockgroup-index', 'view_module', 'api-cms-blockgroup')

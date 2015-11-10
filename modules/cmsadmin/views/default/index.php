@@ -18,11 +18,11 @@
                 </div>
             </div>
         </div>
-        <div class="row" ng-hide="data.isInline || cat.length == 1">
+        <div class="row" ng-hide="data.isInline || navcontainer.length == 1">
             <div class="input input--select col s12">
-                <label class="input__label">Navigations-Kategorie</label>
+                <label class="input__label">Navigations-Container</label>
                 <div class="input__field-wrapper">
-                    <select class="input__field browser-default" ng-model="data.cat_id" ng-options="item.id as item.name for item in cat"></select>
+                    <select class="input__field browser-default" ng-model="data.nav_container_id" ng-options="item.id as item.name for item in navcontainers"></select>
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
             <div class="input input--select col s12">
                 <label class="input__label">Sprache</label>
                 <div class="input__field-wrapper">
-                    <select class="input__field browser-default" ng-model="data.cat_id" ng-options="item.id as item.name for item in lang"></select>
+                    <select class="input__field browser-default" ng-model="data.lang_id" ng-options="item.id as item.name for item in lang"></select>
                 </div>
             </div>
         </div>

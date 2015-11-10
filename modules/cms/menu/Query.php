@@ -85,13 +85,13 @@ class Query extends \yii\base\Object
      * For example the following expression
      * 
      * ```php
-     * where(['=', 'parent_nav_id', 0])->andWhere(['=', 'cat', 'footer']);
+     * where(['=', 'parent_nav_id', 0])->andWhere(['=', 'container', 'footer']);
      * ```
      * 
      * is equal to the short form multi deimnsion filtering expression
      * 
      * ```php
-     * where(['parent_nav_id' => 0, 'cat' => 'footer']);
+     * where(['parent_nav_id' => 0, 'container' => 'footer']);
      * ```
      * 
      * @param array $args

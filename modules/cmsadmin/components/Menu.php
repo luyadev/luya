@@ -10,21 +10,21 @@ namespace cmsadmin\components;
 class Menu
 {
     private $menu = [];
-    private $cat = [];
+    private $container = [];
     private $lang = [];
 
     public function __construct()
     {
     }
 
-    public function setCatByAlias($catAlias)
+    public function setContainerByAlias($containerAlias)
     {
-        $this->cat = (new \yii\db\Query())->select(['id'])->from('cms_cat')->where(['alias' => $catAlias])->one();
+        $this->container = (new \yii\db\Query())->select(['id'])->from('cms_nav_container')->where(['alias' => $containerAlias])->one();
     }
 
-    public function setCatById($catId)
+    public function setContainerById($containerId)
     {
-        $this->cat = (new \yii\db\Query())->select(['id'])->from('cms_cat')->where(['id' => $catId])->one();
+        $this->container = (new \yii\db\Query())->select(['id'])->from('cms_nav_container')->where(['id' => $containerId])->one();
     }
 
     public function setLangByShortCode($langShortCode)
@@ -123,7 +123,7 @@ class Menu
             ->from('cms_nav')
             ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')
             ->orderBy('cms_nav.sort_index ASC')
-            ->where(['parent_nav_id' => $parentNavId, 'cat_id' => $this->cat['id'], 'cms_nav_item.lang_id' => $this->lang['id'], 'cms_nav.is_deleted' => 0])
+            ->where(['parent_nav_id' => $parentNavId, 'nav_container_id' => $this->container['id'], 'cms_nav_item.lang_id' => $this->lang['id'], 'cms_nav.is_deleted' => 0])
             ->all();
     }
 }

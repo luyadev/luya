@@ -17,7 +17,7 @@ werden die Twig Templates mit der endung `*.twig` verwendeten views gerendet. Um
 
 | Funktion        | Beispiel        |  Beschreibung      
 | --------        | ------------    | ------------
-| links           | `links('cat', 'lang', 'parent_nav_id')` | Eine Wrapper funktione für `Yii::$app->links->findByArgument mit `['cat' => '%cat', 'lang' => '%lang', 'parent_nav_id' => '%parent_nav_id']`.
+| links           | `links('container', 'lang', 'parent_nav_id')` | Eine Wrapper funktione für `Yii::$app->links->findByArgument mit `['cat' => '%cat', 'lang' => '%lang', 'parent_nav_id' => '%parent_nav_id']`.
 | linksFindParent | `linksFindParent(1)` | Gib den parent eitnrag ein für das aktuelle level `1`.
 | linkActivePart    | `linkActivePart(1)` | Gibt die den aktuellen Link für das Menu Level aus `1`.
 | asset             | `asset('\\my\\project\\Asset')` | Gibt das Klassen Objekt für eine Asset Klasse zurück. `false` falls nicht gefunden.

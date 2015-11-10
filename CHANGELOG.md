@@ -9,6 +9,7 @@ LUYA CHANGELOG
 - **[BC BREAK]** `#391` removed home site resolving through cms_cat, replaced with is_home state in cms_nav.
 - **[BC BREAK]** `#219` old mdi-* icons are not working anymore, updated to new materialize icon font.
 - **[BC BREAK]** `#344` zaa-checkbox-array value describer `id` is replaced by `value` to be consistent
+- renamed `cms_cat` table into `cms_nav_container`.
 - removed `rewrite` fields in cms_nav_item and cms_cat and replaced with `alias` field.
 - added luya admin tag active window `$config->aw->register(new \admin\aws\TagActiveWindow(static::tableName()), 'Tags');`.
 - added ngrest list color plugin.
