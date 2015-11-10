@@ -261,35 +261,26 @@
 			},
 			controller: function($scope) {
 				$scope.reform = function() {
-					var date = new Date($scope.year, ($scope.month-1), $scope.day, $scope.hour, $scope.min);
-					var mil = date.getTime();
-					$scope.model = (mil/1000);
-				}
-				
-				$scope.onInit = function() {
-					if ($scope.model === undefined) {
-						var date = new Date();
-						$scope.day = date.getDate(),
-						$scope.month = date.getMonth() + 1;
-						$scope.year = date.getFullYear();
-						$scope.min = date.getMinutes();
-						$scope.hour = date.getHours();
-						$scope.reform();
+					if ($scope.year != null && $scope.month != null && $scope.day != null && $scope.hour != null && $scope.min != null) {
+						var date = new Date($scope.year, ($scope.month-1), $scope.day, $scope.hour, $scope.min);
+						var mil = date.getTime();
+						$scope.model = (mil/1000);
 					}
 				}
 				
-				$scope.onInit();
+				$scope.now = function() {
+					var date = new Date();
+					$scope.day = date.getDate(),
+					$scope.month = date.getMonth() + 1;
+					$scope.year = date.getFullYear();
+					$scope.min = date.getMinutes();
+					$scope.hour = date.getHours();
+					$scope.reform();
+				}
 				
 				$scope.$watch(function() { return $scope.model }, function(n, o) {
-					if (n !== undefined) {
+					if (n !== undefined && n != null) {
 						var date = new Date(n*1000);
-						$scope.day = date.getDate(),
-						$scope.month = date.getMonth() + 1;
-						$scope.year = date.getFullYear();
-						$scope.min = date.getMinutes();
-						$scope.hour = date.getHours();
-					} else {
-						var date = new Date();
 						$scope.day = date.getDate(),
 						$scope.month = date.getMonth() + 1;
 						$scope.year = date.getFullYear();
@@ -299,24 +290,15 @@
 				})
 			},
 			template: function() {
-				/*
-				return '<div class="col s{{grid}} form__datetimepicker">' +
-							'<label>{{label}}</label>' +
-							'<input ng-blur="reform()" type="text" ng-model="day" placeholder="Tag" />.' +
-							'<input ng-blur="reform()" type="text" ng-model="month" placeholder="Monat" />.' + 
-							'<input ng-blur="reform()" type="text" ng-model="year" placeholder="Jahr" /> - ' + 
-							'<input ng-blur="reform()" type="text" ng-model="hour" placeholder="Stunde" />:' +
-							'<input ng-blur="reform()" type="text" ng-model="min" placeholder="Minute" />' +
-						'</div>';
-				*/
 				return '<div class="input input--date">' +
 						'<label class="input__label">{{label}}</label>' +
 		                '<div class="input__field-wrapper">' +
 			                    '<input ng-blur="reform()" type="text" ng-model="day" placeholder="Tag" class="input__field" /><span class="input__divider">.</span>' +
 			                    '<input ng-blur="reform()" type="text" ng-model="month" placeholder="Monat" class="input__field" /><span class="input__divider">.</span>' +
-			                    '<input ng-blur="reform()" type="text" ng-model="year" placeholder="Jahr" class="input__field" /><span class="input__divider">-</span>' +
+			                    '<input ng-blur="reform()" type="text" ng-model="year" placeholder="Jahr" class="input__field" style="width:100px;" /><span class="input__divider"><i class="material-icons">access_time</i></span>' +
 			                    '<input ng-blur="reform()" type="text" ng-model="hour" placeholder="Stunde" class="input__field" /><span class="input__divider">:</span>' +
 			                    '<input ng-blur="reform()" type="text" ng-model="min" placeholder="Minute" class="input__field" />' +
+			                    '&nbsp;<button class="btn btn-flat" type="button" ng-click="now()">Jetzt</button>' +
 		                    '</div>'
 		               '</div>';
 			}
@@ -335,32 +317,26 @@
 				"i18n": "@i18n"
 			},
 			controller: function($scope) {
-				$scope.reform = function() {
-					var date = new Date($scope.year, ($scope.month-1), $scope.day);
-					var mil = date.getTime();
-					$scope.model = (mil/1000);
-				}
 				
-				$scope.onInit = function() {
-					if ($scope.model === undefined) {
-						var date = new Date();
-						$scope.day = date.getDate(),
-						$scope.month = date.getMonth() + 1;
-						$scope.year = date.getFullYear();
-						$scope.reform();
+				$scope.reform = function() {
+					if ($scope.year != null && $scope.month != null && $scope.day != null) {
+						var date = new Date($scope.year, ($scope.month-1), $scope.day);
+						var mil = date.getTime();
+						$scope.model = (mil/1000);
 					}
 				}
 				
-				$scope.onInit();
+				$scope.today = function() {
+					var date = new Date();
+					$scope.day = date.getDate(),
+					$scope.month = date.getMonth() + 1;
+					$scope.year = date.getFullYear();
+					$scope.reform();
+				}
 				
 				$scope.$watch(function() { return $scope.model }, function(n, o) {
-					if (n !== undefined) {
+					if (n !== undefined && n != null) {
 						var date = new Date(n*1000);
-						$scope.day = date.getDate(),
-						$scope.month = date.getMonth() + 1;
-						$scope.year = date.getFullYear();
-					} else {
-						var date = new Date();
 						$scope.day = date.getDate(),
 						$scope.month = date.getMonth() + 1;
 						$scope.year = date.getFullYear();
@@ -373,7 +349,8 @@
                             '<div class="input__field-wrapper">' +
                                 '<input ng-blur="reform()" type="text" ng-model="day" placeholder="Tag" class="input__field" /><span class="input__divider">.</span>' +
                                 '<input ng-blur="reform()" type="text" ng-model="month" placeholder="Monat" class="input__field" /><span class="input__divider">.</span>' +
-                                '<input ng-blur="reform()" type="text" ng-model="year" placeholder="Jahr" class="input__field" />' +
+                                '<input ng-blur="reform()" type="text" ng-model="year" placeholder="Jahr" class="input__field" style="width:100px;" />' +
+                                '&nbsp;<button class="btn btn-flat" type="button" ng-click="today()">Heute</button>' +
                             '</div>'
 						'</div>';
 			}
