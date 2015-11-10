@@ -42,6 +42,10 @@ class UrlManager extends \yii\web\UrlManager
             $route[0] = substr($route[0], $length);
         }
 
+        if ($route[0] === false || $route[0] == '/') {
+            $route[0] = '';
+        }
+        
         return $route;
     }
 
