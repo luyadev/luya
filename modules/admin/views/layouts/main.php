@@ -69,12 +69,8 @@ $this->beginPage()
 
         <div ng-show="originalFileIsRemoved">
             <div class="alert alert--danger">Die Originale Datei wurde entfernt. Sie können keine Filter anwenden ohne original Datei. Laden Sie eine neue Datei hoch und Filter anzuwenden.</div>
-        </div>
-        <div class="imageupload__filter" ng-show="!originalFileIsRemoved && !noFilters()">
-            <label>Filter Auswahl</label>
-            <select name="filterId" ng-model="filterId" class="browser-default"><option value="0">Kein Filter</option><option ng-repeat="item in filters" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
         </div><!--
-                --><div class="imageupload__preview">
+        --><div class="imageupload__preview">
             <img ng-src="{{imageinfo.source}}" class="responsive-img" />
             <div class="imageupload__loading" ng-hide="!imageLoading">
                 <div class="preloader-wrapper big active">
@@ -90,6 +86,11 @@ $this->beginPage()
                 </div>
             </div>
         </div>
+        <div class="imageupload__filter" ng-show="!originalFileIsRemoved && !noFilters()">
+            <label>Filter Auswahl</label>
+            <select name="filterId" ng-model="filterId" class="browser-default"><option value="0">Kein Filter</option><option ng-repeat="item in filters" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
+        </div>
+        
     </div>
 </script>
 
