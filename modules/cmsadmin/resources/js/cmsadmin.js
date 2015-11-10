@@ -986,7 +986,7 @@
 			$scope.blockIsOpen = true;
 		};
 		$scope.toggleConfig = function() {
-			if (!$scope.isConfigable()) {
+			if (!$scope.isEditable()) {
 				return;
 			}
 			$scope.configable = !$scope.configable;

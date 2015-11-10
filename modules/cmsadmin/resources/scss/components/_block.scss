@@ -142,8 +142,6 @@
 	}
 }
 
-
-
 .block--config .block__body {
 	opacity: 0;
 	padding: 0;
@@ -167,20 +165,6 @@
 	display: none;
 }
 
-
-
-
-
-
-// .block__configs {
-// 	margin-top: 25px;
-// 	user-select: none;
-// }
-
-// .block__configs-toggler {
-// 	width: 210px;
-// 	border-radius: 2px;
-// }
 .block__config__text {
 	font-size: 1rem;
 	font-weight: bold;
@@ -189,20 +173,6 @@
     text-transform: uppercase;
     vertical-align: middle;
 }
-// .block__configs--open .block__configs-toggler {
-// 	border-radius: 2px 2px 0 0;
-// }
-
-// .block__configs-body {
-// 	display: none;
-// 	padding: 10px;
-// 	border: 2px solid #eee;
-// 	border-radius: 0 0 2px 2px;
-// 	background-color: #fafafa;
-// }
-// .block__configs--open .block__configs-body {
-// 	display: block;
-// }
 
 
 @each $depth, $color in $container-block--colors {
