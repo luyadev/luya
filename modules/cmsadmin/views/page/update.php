@@ -21,7 +21,7 @@
                 <div class="right">
                     <i ng-show="!edit && isEditable()" class="material-icons [ waves-effect waves-blue ]" ng-click="toggleEdit()">edit</i>
                     <i ng-show="!edit" class="material-icons [ waves-effect waves-blue ]" ng-click="removeBlock(block)">delete</i>
-                    <i ng-show="edit" ng-click="configIsOpen = !configIsOpen" class="material-icons">settings</i>
+                    <i ng-show="block.cfgs.length && edit" ng-click="configIsOpen = !configIsOpen" class="material-icons">settings</i>
                     <i ng-show="edit" class="material-icons [ waves-effect waves-blue ]" ng-click="toggleEdit()">close</i>
                 </div>
             </div>
