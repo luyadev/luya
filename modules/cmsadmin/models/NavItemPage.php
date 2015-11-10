@@ -79,11 +79,10 @@ class NavItemPage extends \cmsadmin\base\NavItemType
             $blockObject = Block::objectId($placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
             // see if its a valid block object
             if ($blockObject) {
-                
                 if (count($blockObject->assets) > 0) {
                     $controllerObject = $this->getOption('cmsControllerObject');
                     if ($controllerObject) {
-                        foreach($blockObject->assets as $assetClassName) {
+                        foreach ($blockObject->assets as $assetClassName) {
                             $controllerObject->registerAsset($assetClassName);
                         }
                     }

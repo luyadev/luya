@@ -52,7 +52,7 @@ class NavItemController extends \admin\base\RestController
         $model = NavItem::find()->where(['id' => $navItemId])->one();
 
         if (!$model) {
-            throw new Exception('Unable to find item id ' . $navItemId);
+            throw new Exception('Unable to find item id '.$navItemId);
         }
         $model->setParentFromModel();
         $model->attributes = Yii::$app->request->post();
@@ -66,7 +66,7 @@ class NavItemController extends \admin\base\RestController
     }
 
     /**
-     * delete specific nav item info (page/module/redirect)
+     * delete specific nav item info (page/module/redirect).
      *
      * @param $navItemType
      * @param $navItemTypeId
@@ -91,7 +91,7 @@ class NavItemController extends \admin\base\RestController
     }
 
     /**
-     * extract a post var and set to model attribute with the same name
+     * extract a post var and set to model attribute with the same name.
      *
      * @param $model
      * @param string $attribute
@@ -104,20 +104,21 @@ class NavItemController extends \admin\base\RestController
     }
 
     /**
-     * check old entries - delete if obsolete (changed type) and add new entry to the appropriate cms_nav_item_(page/module/redirect)
+     * check old entries - delete if obsolete (changed type) and add new entry to the appropriate cms_nav_item_(page/module/redirect).
      *
      * @param $navItemId
      * @param $navItemType
      * @param $navItemTypeId
      * @param $title
      * @param $rewrite
+     *
      * @return array|bool
      */
     public function actionUpdatePageItem($navItemId, $navItemType, $navItemTypeId, $title, $rewrite)
     {
         $model = NavItem::find()->where(['id' => $navItemId])->one();
         if (!$model) {
-            throw new Exception('Unable to find item id ' . $navItemId);
+            throw new Exception('Unable to find item id '.$navItemId);
         }
         $model->setParentFromModel();
         // save old id
@@ -309,17 +310,17 @@ class NavItemController extends \admin\base\RestController
 
         $placeholders = [];
 
-            foreach ($blockObject->getPlaceholders() as $pk => $pv) {
-                $pv['nav_item_page_id'] = $blockItem['nav_item_page_id'];
-                $pv['prev_id'] = $blockItem['id'];
-                $placeholderVar = $pv['var'];
+        foreach ($blockObject->getPlaceholders() as $pk => $pv) {
+            $pv['nav_item_page_id'] = $blockItem['nav_item_page_id'];
+            $pv['prev_id'] = $blockItem['id'];
+            $placeholderVar = $pv['var'];
 
-                $pv['__nav_item_page_block_items'] = $this->getSub($placeholderVar, $blockItem['nav_item_page_id'], $blockItem['id']);
+            $pv['__nav_item_page_block_items'] = $this->getSub($placeholderVar, $blockItem['nav_item_page_id'], $blockItem['id']);
 
-                $placeholder = $pv;
+            $placeholder = $pv;
 
-                $placeholders[] = $placeholder;
-            }
+            $placeholders[] = $placeholder;
+        }
 
         if (empty($blockItem['json_config_values'])) {
             $blockItem['json_config_values'] = new \stdClass();

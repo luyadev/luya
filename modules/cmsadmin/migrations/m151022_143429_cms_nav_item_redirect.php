@@ -1,6 +1,5 @@
 <?php
 
-use yii\db\Schema;
 use yii\db\Migration;
 
 class m151022_143429_cms_nav_item_redirect extends Migration

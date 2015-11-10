@@ -7,7 +7,7 @@ use yii\helpers\Inflector;
 use luya\helpers\Url;
 
 /**
- * Base class for all CMS Blocks
+ * Base class for all CMS Blocks.
  *
  * @author nadar
  */
@@ -22,21 +22,21 @@ abstract class Block extends \yii\base\Object implements BlockInterface
     private $_envOptions = [];
 
     /**
-     * @var boolean Choose whether block is a layout/container/segmnet/section block or not, Container elements will be optically displayed
-     * in a different way for a better user experience. Container block will not display isDirty colorizing.
+     * @var bool Choose whether block is a layout/container/segmnet/section block or not, Container elements will be optically displayed
+     *           in a different way for a better user experience. Container block will not display isDirty colorizing.
      */
     public $isContainer = false;
-    
+
     /**
      * @var string Containing the name of the environment (used to find the view files to render). The
-     * module(Name) can be started with the Yii::getAlias() prefix `@`, otherwhise the `@` will be 
-     * added automatically.
+     *             module(Name) can be started with the Yii::getAlias() prefix `@`, otherwhise the `@` will be 
+     *             added automatically.
      */
     public $module = 'app';
 
     /**
      * @var array Define a list of assets to be insert in the frontend context. The assets will be ignored in
-     * admin context. Example usage of assets property:
+     *            admin context. Example usage of assets property:
      * 
      * ```php
      * public $assets = [
@@ -45,10 +45,10 @@ abstract class Block extends \yii\base\Object implements BlockInterface
      * ```
      */
     public $assets = [];
-    
+
     /**
      * Return link for usage in ajax request, the link will call the defined callback inside
-     * this block. All callback methods must start with `callback`. An example for a callback method:
+     * this block. All callback methods must start with `callback`. An example for a callback method:.
      * 
      * ```php
      * public function callbackTestAjax($arg1)
@@ -75,21 +75,23 @@ abstract class Block extends \yii\base\Object implements BlockInterface
      * ```
      * 
      * @param string $callbackName The callback name in uppercamelcase to call. The method must exists in the block class.
-     * @param array $params A list of parameters who have to match the argument list in the method.
+     * @param array  $params       A list of parameters who have to match the argument list in the method.
+     *
      * @return string
      */
     public function createAjaxLink($callbackName, array $params = [])
     {
         $params['callback'] = Inflector::camel2id($callbackName);
         $params['id'] = $this->getEnvOption('id', 0);
-        return Url::toAjax('cms/block/index', $params);   
+
+        return Url::toAjax('cms/block/index', $params);
     }
-    
+
     public function icon()
     {
         return;
     }
-    
+
     public function isAdminContext()
     {
         return ($this->getEnvOption('context', false) === 'admin') ? true : false;
@@ -111,7 +113,7 @@ abstract class Block extends \yii\base\Object implements BlockInterface
     }
 
     /**
-     * Returns all environment/context informations where the block have been placed. Example Data
+     * Returns all environment/context informations where the block have been placed. Example Data.
      *
      * + id (unique identifier for the block in cms context)
      * + blockId (id in the block list database, which is not unique)
@@ -124,17 +126,18 @@ abstract class Block extends \yii\base\Object implements BlockInterface
     {
         return $this->_envOptions;
     }
-    
+
     public function setPlaceholderValues(array $placeholders)
     {
         $this->_placeholderValues = $placeholders;
     }
 
     /**
-     * User method to get the values inside the class
+     * User method to get the values inside the class.
      * 
      * @param unknown $key
-     * @param string $default
+     * @param string  $default
+     *
      * @return Ambigous <string, multitype:>
      */
     public function getVarValue($key, $default = false)
@@ -148,10 +151,11 @@ abstract class Block extends \yii\base\Object implements BlockInterface
     }
 
     /**
-     * User method to get the cfgs inside the block
+     * User method to get the cfgs inside the block.
      * 
      * @param unknown $key
-     * @param string $default
+     * @param string  $default
+     *
      * @return Ambigous <string, multitype:>
      */
     public function getCfgValue($key, $default = false)
@@ -239,30 +243,31 @@ abstract class Block extends \yii\base\Object implements BlockInterface
             'extras' => $this->extraVars(),
         ]);
     }
-    
+
     /* protected and privates */
-    
+
     protected function getTwigRenderFile($app)
     {
         return Yii::getAlias($app.'/views/blocks/'.$this->getRenderFileName());
     }
-    
+
     protected function render()
     {
         $moduleName = $this->module;
         if (substr($moduleName, 0, 1) !== '@') {
             $moduleName = '@'.$moduleName;
         }
+
         return $this->baseRender($moduleName);
     }
-    
+
     private function baseRender($module)
     {
         $twigFile = $this->getTwigRenderFile($module);
         if (!file_exists($twigFile)) {
             throw new \Exception("Twig file '$twigFile' does not exists!");
         }
-    
+
         return file_get_contents($twigFile);
     }
 }

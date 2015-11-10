@@ -19,7 +19,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     const TYPE_REDIRECT = 3;
 
     public $parent_nav_id = null;
-    
+
     public function init()
     {
         parent::init();
@@ -32,19 +32,19 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
 
     public function logEvent($e)
     {
-        switch($e->name) {
-            case "afterInsert":
+        switch ($e->name) {
+            case 'afterInsert':
                 Log::add(1, "nav_item.insert '".$this->title."', cms_nav_item.id '".$this->id."'", $this->toArray());
                 break;
-            case "afterUpdate":
+            case 'afterUpdate':
                 Log::add(2, "nav_item.update '".$this->title."', cms_nav_item.id '".$this->id."'", $this->toArray());
                 break;
-            case "afterDelete":
+            case 'afterDelete':
                 Log::add(3, "nav_item.delete '".$this->title."', cms_nav_item.id '".$this->id."'", $this->toArray());
                 break;
         }
     }
-    
+
     public static function tableName()
     {
         return 'cms_nav_item';
@@ -57,7 +57,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
             [['nav_id'], 'safe'],
         ];
     }
-    
+
     public function attributeLabels()
     {
         return [
@@ -109,23 +109,24 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
 
         return $model->update();
     }
-    
+
     public function setParentFromModel()
     {
         $this->parent_nav_id = $this->nav->parent_nav_id;
     }
-    
+
     public function verifyRewrite($rewrite, $langId)
     {
         if (Yii::$app->hasModule($rewrite) && $this->parent_nav_id == 0) {
             $this->addError('rewrite', 'Die URL darf nicht verwendet werden da es ein Modul mit dem gleichen Namen gibt.');
+
             return false;
         }
 
         if ($this->parent_nav_id === null) {
             $this->addError('parent_nav_id', 'parent_nav_id can not be null to verify the rewrite validation process.');
         }
-        
+
         if ($this->find()->where(['rewrite' => $rewrite, 'lang_id' => $langId])->leftJoin('cms_nav', 'cms_nav_item.nav_id=cms_nav.id')->andWhere(['=', 'cms_nav.parent_nav_id', $this->parent_nav_id])->one()) {
             $this->addError('rewrite', 'Diese URL existiert bereits und ist deshalb ungültig.');
 
@@ -158,6 +159,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
      * display all nav items tempo.
      * 
      * @todo fix me above!
+     *
      * @param unknown $moduleName
      */
     public static function fromModule($moduleName)
@@ -186,7 +188,9 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
 
     /**
      * @todo use AR or queryCommand? NavItem::find()->leftJoin('cms_nav_item_module', 'nav_item_type_id=cms_nav_item_module.id')->where(['nav_item_type' => 2, 'cms_nav_item_module.module_name' => $moduleName])->asArray()->one()
+     *
      * @param unknown $moduleName
+     *
      * @return unknown
      */
     public static function findNavItem($moduleName)
@@ -200,7 +204,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
 
         return $query;
     }
-    
+
     public function getLang()
     {
         return $this->hasOne(\admin\models\Lang::className(), ['id' => 'lang_id']);

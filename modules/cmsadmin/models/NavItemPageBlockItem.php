@@ -3,7 +3,6 @@
 namespace cmsadmin\models;
 
 use Yii;
-use cmsadmin\models\Log;
 
 /**
  * sort_index numbers always starts from 0 and not from 1, like a default array behaviour. If a
@@ -84,7 +83,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         $this->reindex($this->nav_item_page_id, $this->placeholder_var, $this->prev_id);
         Log::add(2, "block.update '".$this->block->class."', cms_nav_item_page_block_item.id '".$this->id."'");
     }
-    
+
     public function eventBeforeDelete()
     {
         Log::add(3, "block.delete '".$this->block->class."', cms_nav_item_page_block_item.id '".$this->id."'");

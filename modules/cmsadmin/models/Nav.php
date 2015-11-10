@@ -8,13 +8,12 @@ use admin\models\Lang;
 use admin\models\Property as AdminProperty;
 use cmsadmin\models\Property as CmsProperty;
 
-
 /**
  * @todo what happens when resort items if an items is deleted?
  *
  * @author nadar
  */
-class Nav extends \yii\db\ActiveRecord 
+class Nav extends \yii\db\ActiveRecord
 {
     public static function tableName()
     {
@@ -52,7 +51,6 @@ class Nav extends \yii\db\ActiveRecord
         return $this->hasMany(NavItem::className(), ['nav_id' => 'id']);
     }
 
-    
     public function getProperties()
     {
         return CmsProperty::find()->where(['nav_id' => $this->id])->leftJoin('admin_property', 'admin_prop_id=admin_property.id')->select(['cms_nav_property.*', 'admin_property.module_name', 'admin_property.class_name', 'admin_property.var_name'])->asArray()->all();
@@ -100,15 +98,15 @@ class Nav extends \yii\db\ActiveRecord
             Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $i], 'id=:id', ['id' => $model['id']])->execute();
             ++$i;
         }
-        
-        switch($e->name) {
-            case "afterInsert":
+
+        switch ($e->name) {
+            case 'afterInsert':
                 Log::add(1, "nav.insert, cms_nav.id '".$this->id."'", $this->toArray());
             break;
-            case "afterUpdate":
+            case 'afterUpdate':
                 Log::add(2, "nav.update, cms_nav.id '".$this->id."'", $this->toArray());
                 break;
-            case "afterDelete":
+            case 'afterDelete':
                 Log::add(3, "nav.delete, cms_nav.id '".$this->id."'", $this->toArray());
                 break;
         }
@@ -277,20 +275,20 @@ class Nav extends \yii\db\ActiveRecord
 
         return $navItemId;
     }
-    
+
     public function createRedirect($parentNavId, $catId, $langId, $title, $rewrite, $redirectType, $redirectTypeValue)
     {
         $_errors = [];
-        
+
         $nav = $this;
         $navItem = new NavItem();
         $navItem->parent_nav_id = $parentNavId;
         $navItemRedirect = new \cmsadmin\models\NavItemRedirect();
-        
+
         $nav->attributes = ['parent_nav_id' => $parentNavId, 'cat_id' => $catId, 'is_hidden' => 1, 'is_offline' => 1];
         $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'rewrite' => $rewrite, 'nav_item_type' => 3];
         $navItemRedirect->attributes = ['type' => $redirectType, 'value' => $redirectTypeValue];
-        
+
         if (!$nav->validate()) {
             $_errors = ArrayHelper::merge($nav->getErrors(), $_errors);
         }
@@ -300,18 +298,18 @@ class Nav extends \yii\db\ActiveRecord
         if (!$navItemRedirect->validate()) {
             $_errors = ArrayHelper::merge($navItemRedirect->getErrors(), $_errors);
         }
-        
+
         if (!empty($_errors)) {
             return $_errors;
         }
-        
+
         $navItemRedirect->save();
         $nav->save();
-        
+
         $navItem->nav_item_type_id = $navItemRedirect->id;
         $navItem->nav_id = $nav->id;
         $navItemId = $navItem->save();
-        
+
         return $navItemId;
     }
 
@@ -344,34 +342,34 @@ class Nav extends \yii\db\ActiveRecord
 
         return $navItemId;
     }
-    
+
     public function createRedirectItem($navId, $langId, $title, $rewrite, $moduleName, $redirectType, $redirectTypeValue)
     {
         $_errors = [];
-    
+
         $navItem = new NavItem();
         $navItem->parent_nav_id = self::findOne($navId)->parent_nav_id;
         $navItemRedirect = new \cmsadmin\models\NavItemRedirect();
-    
+
         $navItem->attributes = ['nav_id' => $navId, 'lang_id' => $langId, 'title' => $title, 'rewrite' => $rewrite, 'nav_item_type' => 3];
         $navItemRedirect->attributes = ['type' => $redirectType, 'value' => $redirectTypeValue];
-    
+
         if (!$navItem->validate()) {
             $_errors = ArrayHelper::merge($navItem->getErrors(), $_errors);
         }
         if (!$navItemRedirect->validate()) {
             $_errors = ArrayHelper::merge($navItemRedirect->getErrors(), $_errors);
         }
-    
+
         if (!empty($_errors)) {
             return $_errors;
         }
-    
+
         $navItemRedirect->save();
-    
+
         $navItem->nav_item_type_id = $navItemRedirect->id;
         $navItemId = $navItem->save();
-    
+
         return $navItemId;
     }
 

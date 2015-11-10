@@ -11,33 +11,33 @@ class Log extends \yii\db\ActiveRecord
         parent::init();
         $this->on(self::EVENT_BEFORE_INSERT, [$this, 'onBeforeInsert']);
     }
-    
+
     public function onBeforeInsert()
     {
         $this->timestamp = time();
         $this->user_id = Yii::$app->adminuser->getId();
         $this->data_json = json_encode($this->data_json);
     }
-    
+
     public static function tableName()
     {
         return 'cms_log';
     }
-    
+
     public function rules()
     {
         return [
             [['is_insertion', 'is_deletion', 'is_update', 'message', 'data_json'], 'safe'],
         ];
     }
-    
+
     /**
-     * add new log entry
+     * add new log entry.
      * 
-     * @param integer $type The type of add
-     * + 1 = insertion
-     * + 2 = update
-     * + 3 = deletion
+     * @param int    $type    The type of add
+     *                        + 1 = insertion
+     *                        + 2 = update
+     *                        + 3 = deletion
      * @param string $message
      */
     public static function add($type, $message, array $additionalData = [])
@@ -49,9 +49,10 @@ class Log extends \yii\db\ActiveRecord
             'message' => $message,
             'data_json' => $additionalData,
         ];
-        
-        $model = new self;
+
+        $model = new self();
         $model->setAttributes($attrs);
+
         return $model->insert(false);
     }
 }

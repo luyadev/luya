@@ -56,16 +56,16 @@ class Block extends \admin\ngrest\base\Model
         if (!class_exists($class)) {
             return false;
         }
-        
+
         $object = Yii::createObject([
             'class' => $class,
         ]);
-        
+
         $object->setEnvOption('id', $id);
         $object->setEnvOption('blockId', $blockId);
         $object->setEnvOption('context', $context);
         $object->setEnvOption('pageObject', $pageObject);
-        
+
         return $object;
     }
 }

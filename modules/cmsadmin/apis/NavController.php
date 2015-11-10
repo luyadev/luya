@@ -78,11 +78,11 @@ class NavController extends \admin\base\RestController
 
         return false;
     }
-    
+
     public function actionToggleHome($navId, $homeState)
     {
         $item = Nav::find()->where(['id' => $navId])->one();
-        
+
         if ($homeState == 1) {
             Nav::updateAll(['is_home' => 0]);
             $item->setAttributes([
@@ -93,6 +93,7 @@ class NavController extends \admin\base\RestController
                 'is_home' => 0,
             ]);
         }
+
         return $item->update(false);
     }
 
@@ -136,10 +137,10 @@ class NavController extends \admin\base\RestController
             $model->is_deleted = 1;
 
             foreach (NavItem::find()->where(['nav_id' => $navId])->all() as $navItem) {
-                $navItem->setAttribute('rewrite', date("Y-m-d-H-i") . "-" . $navItem->rewrite);
+                $navItem->setAttribute('rewrite', date('Y-m-d-H-i').'-'.$navItem->rewrite);
                 $navItem->update(false);
             }
-            
+
             return $model->update(false);
         }
     }
@@ -204,9 +205,9 @@ class NavController extends \admin\base\RestController
 
         return $create;
     }
-    
+
     /* redirect */
-    
+
     public function actionCreateRedirect()
     {
         $model = new \cmsadmin\models\Nav();

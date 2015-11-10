@@ -7,7 +7,7 @@ use Yii;
 class PropertyConsistencyImporter extends \luya\base\Importer
 {
     public $queueListPosition = self::QUEUE_POSITION_LAST;
-    
+
     public function run()
     {
         $query = Yii::$app->db->createCommand('SELECT * FROM cms_nav_property')->queryAll();
