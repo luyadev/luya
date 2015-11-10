@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-md-3"  id="nav">
                     <ul>
-                    <?php foreach (Yii::$app->menu->find()->where(['parent_nav_id' => 0, 'cat' => 'default'])->all() as $item): ?>
+                    <?php foreach (Yii::$app->menu->find()->where(['parent_nav_id' => 0, 'container' => 'default'])->all() as $item): ?>
                         <li>
                             <a<? if($item->isActive): ?> class="active"<?endif;?> href="<?= $item->link; ?>"><?= $item->title; ?></a>
                             <? if($item->hasChildren()): ?>
