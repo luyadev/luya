@@ -21,8 +21,8 @@ class TagRelation extends \yii\db\ActiveRecord
         return self::find()->where(['table_name' => $tableName, 'pk_id' => $pkId])->asArray()->all();
     }
 
-    public static function getDataForTable($tableName)
+    public static function getDistinctDataForTable($tableName)
     {
-        return self::find()->where(['table_name' => $tableName])->asArray()->all();
+        return self::find()->select('tag_id')->where(['table_name' => $tableName])->distinct()->asArray()->all();
     }
 }
