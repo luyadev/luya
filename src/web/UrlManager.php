@@ -19,6 +19,8 @@ class UrlManager extends \yii\web\UrlManager
 
     public $ruleConfig = ['class' => '\luya\web\UrlRule'];
 
+    public $contextNavItemId = null;
+
     private $_contextNavItemId = false;
 
     private $_menu = null;
@@ -29,11 +31,11 @@ class UrlManager extends \yii\web\UrlManager
     {
         $route = parent::parseRequest($request);
 
-        if (Yii::$app->composition->hidden) {
+        if ($this->composition->hidden) {
             return $route;
         }
 
-        $composition = Yii::$app->composition->getFull();
+        $composition = $this->composition->full;
 
         $length = strlen($composition);
         if (substr($route[0], 0, $length) == $composition) {
@@ -57,21 +59,6 @@ class UrlManager extends \yii\web\UrlManager
         }
 
         return parent::addRules($rules, $append);
-    }
-
-    public function setContextNavItemId($navItemId)
-    {
-        $this->_contextNavItemId = $navItemId;
-    }
-
-    public function getContextNavItemId()
-    {
-        return $this->_contextNavItemId;
-    }
-
-    public function resetContext()
-    {
-        $this->_contextNavItemId = false;
     }
 
     public function getMenu()
@@ -102,11 +89,31 @@ class UrlManager extends \yii\web\UrlManager
         return rtrim($this->baseUrl, '/').'/'.ltrim($route, '/');
     }
 
-    private function removeBaseUrl($route)
+    public function removeBaseUrl($route)
     {
-        $baseUrl = preg_quote($this->baseUrl);
+        return preg_replace('#'.preg_quote($this->baseUrl).'#', '', $route, 1);
+    }
 
-        return preg_replace("#$baseUrl#", '', $route, 1);
+    public function createUrl($params)
+    {
+        $response = $this->internalCreateUrl($params);
+
+        if ($this->contextNavItemId) {
+            return $this->urlReplaceModule($response, $this->contextNavItemId);
+        }
+
+        return $response;
+    }
+
+    public function createMenuItemUrl($params, $navItemId)
+    {
+        $url = $this->internalCreateUrl($params);
+
+        if (!$this->menu) {
+            return $url;
+        }
+
+        return $this->urlReplaceModule($url, $navItemId);
     }
 
     private function findModuleInRoute($route)
@@ -120,17 +127,6 @@ class UrlManager extends \yii\web\UrlManager
         }
 
         return false;
-    }
-
-    public function createMenuItemUrl($params, $navItemId)
-    {
-        $url = $this->internalCreateUrl($params);
-
-        if (!$this->menu) {
-            return $url;
-        }
-
-        return $this->urlReplaceModule($url, $navItemId);
     }
 
     private function urlReplaceModule($url, $navItemId)
@@ -168,16 +164,5 @@ class UrlManager extends \yii\web\UrlManager
         $response = $this->composition->prependTo($response);
 
         return $this->prependBaseUrl($response);
-    }
-
-    public function createUrl($params)
-    {
-        $response = $this->internalCreateUrl($params);
-
-        if ($this->contextNavItemId) {
-            return $this->urlReplaceModule($response, $this->contextNavItemId);
-        }
-
-        return $response;
     }
 }

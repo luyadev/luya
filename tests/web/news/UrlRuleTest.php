@@ -81,22 +81,22 @@ class UrlRuleTest extends \tests\web\Base
 
     public function testModuleContextUrls()
     {
-        Yii::$app->urlManager->setContextNavItemId(1);
+        Yii::$app->urlManager->contextNavItemId = 1;
 
         $url = Url::toManager('news/default/detail', ['id' => 1, 'title' => 'foo-bar']);
         $this->assertEquals('/1/foo-bar', $url);
 
-        Yii::$app->urlManager->setContextNavItemId(2);
+        Yii::$app->urlManager->contextNavItemId = 2;
 
         $url = Url::toManager('news/default/detail', ['id' => 1, 'title' => 'foo-bar']);
         $this->assertEquals('/de/page-2/1/foo-bar', $url);
 
-        Yii::$app->urlManager->setContextNavItemId(2);
+        Yii::$app->urlManager->contextNavItemId = 2;
 
         $url = Url::toManager('news/default/detail', ['id' => 1, 'title' => 'foo-bar', 'pa' => 'ram']);
         $this->assertEquals('/de/page-2/1/foo-bar?pa=ram', $url);
 
-        Yii::$app->urlManager->setContextNavItemId(1);
+        Yii::$app->urlManager->contextNavItemId = 1;
 
         $url = Url::toManager('news/default/detail', ['id' => 1, 'title' => 'page-2-news-title', 'news' => 'page']);
         $this->assertEquals('/1/page-2-news-title?news=page', $url);
