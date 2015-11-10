@@ -561,21 +561,21 @@ INSERT INTO `cms_block_group` (`id`, `name`, `is_deleted`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cms_cat`
+-- Table structure for table `cms_nav_container`
 --
 
-CREATE TABLE IF NOT EXISTS `cms_cat` (
+CREATE TABLE IF NOT EXISTS `cms_nav_container` (
 `id` int(11) NOT NULL,
   `name` varchar(180) NOT NULL,
-  `rewrite` varchar(80) NOT NULL,
+  `alias` varchar(80) NOT NULL,
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `cms_cat`
+-- Dumping data for table `cms_nav_container`
 --
 
-INSERT INTO `cms_cat` (`id`, `name`, `rewrite`, `is_deleted`) VALUES
+INSERT INTO `cms_nav_container` (`id`, `name`, `alias`, `is_deleted`) VALUES
 (1, 'Hauptnavigation', 'default', 0);
 
 -- --------------------------------------------------------
@@ -606,7 +606,7 @@ INSERT INTO `cms_layout` (`id`, `name`, `json_config`, `view_file`) VALUES
 
 CREATE TABLE IF NOT EXISTS `cms_nav` (
 `id` int(11) NOT NULL,
-  `cat_id` int(11) NOT NULL DEFAULT '0',
+  `nav_container_id` int(11) NOT NULL DEFAULT '0',
   `parent_nav_id` int(11) NOT NULL DEFAULT '0',
   `sort_index` int(11) NOT NULL DEFAULT '0',
   `is_deleted` tinyint(1) DEFAULT '0',
@@ -619,7 +619,7 @@ CREATE TABLE IF NOT EXISTS `cms_nav` (
 -- Dumping data for table `cms_nav`
 --
 
-INSERT INTO `cms_nav` (`id`, `cat_id`, `parent_nav_id`, `sort_index`, `is_deleted`, `is_hidden`, `is_home`) VALUES
+INSERT INTO `cms_nav` (`id`, `nav_container_id`, `parent_nav_id`, `sort_index`, `is_deleted`, `is_hidden`, `is_home`) VALUES
 (1, 1, 0, 1, 0, 0, 1),
 (2, 1, 0, 2, 0, 0, 0),
 (3, 1, 0, 3, 0, 0, 0),
@@ -642,14 +642,14 @@ CREATE TABLE IF NOT EXISTS `cms_nav_item` (
   `timestamp_create` int(11) DEFAULT NULL,
   `timestamp_update` int(11) DEFAULT NULL,
   `title` varchar(180) NOT NULL,
-  `rewrite` varchar(80) NOT NULL
+  `alias` varchar(80) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `cms_nav_item`
 --
 
-INSERT INTO `cms_nav_item` (`id`, `nav_id`, `lang_id`, `nav_item_type`, `nav_item_type_id`, `create_user_id`, `update_user_id`, `timestamp_create`, `timestamp_update`, `title`, `rewrite`) VALUES
+INSERT INTO `cms_nav_item` (`id`, `nav_id`, `lang_id`, `nav_item_type`, `nav_item_type_id`, `create_user_id`, `update_user_id`, `timestamp_create`, `timestamp_update`, `title`, `alias`) VALUES
 (1, 1, 1, 1, 1, 1, 1, 1439281771, 0, 'Page 1', 'page-1'),
 (2, 2, 1, 1, 2, 1, 1, 1439281801, 0, 'Page 2', 'page-2'),
 (3, 3, 1, 2, 1, 1, 1, 1439282169, 0, 'My News Page', 'my-news-page'),
@@ -971,9 +971,9 @@ ALTER TABLE `cms_block_group`
  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `cms_cat`
+-- Indexes for table `cms_nav_container`
 --
-ALTER TABLE `cms_cat`
+ALTER TABLE `cms_nav_container`
  ADD PRIMARY KEY (`id`);
 
 --
@@ -1144,9 +1144,9 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 ALTER TABLE `cms_block_group`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT for table `cms_cat`
+-- AUTO_INCREMENT for table `cms_nav_container`
 --
-ALTER TABLE `cms_cat`
+ALTER TABLE `cms_nav_container`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `cms_layout`
