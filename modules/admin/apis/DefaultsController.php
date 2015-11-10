@@ -5,7 +5,6 @@ namespace admin\apis;
 use Yii;
 use admin\models\Lang;
 use admin\models\Property;
-use yii\helpers\Json;
 
 /**
  * Delivers default values for the specifing table. It means it does not return a key numeric array,
@@ -34,20 +33,20 @@ class DefaultsController extends \admin\base\RestController
                 'default_value' => $object->defaultValue(),
             ];
         }
-        
+
         return $data;
     }
-    
+
     public function actionCache()
     {
         if (Yii::$app->has('cache')) {
             Yii::$app->cache->flush();
         }
-        
+
         $user = Yii::$app->adminuser->identity;
         $user->force_reload = 0;
         $user->save(false);
-        
+
         return true;
     }
 }

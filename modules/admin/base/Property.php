@@ -2,7 +2,6 @@
 
 namespace admin\base;
 
-use Exception;
 use admin\models\Property as PropertyModel;
 
 /**
@@ -15,19 +14,18 @@ use admin\models\Property as PropertyModel;
 abstract class Property extends \yii\base\Component
 {
     const EVENT_BEFORE_RENDER = 'EVENT_BEFORE_RENDER';
-    
+
     const EVENT_BEFORE_FIND = 'EVENT_BEFORE_FIND';
-    
+
     public $moduleName = null;
 
     public $value = null;
 
-    
     public function find()
     {
         $this->trigger(self::EVENT_BEFORE_FIND);
     }
-    
+
     abstract public function varName();
 
     abstract public function label();

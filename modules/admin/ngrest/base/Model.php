@@ -13,9 +13,9 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
     const EVENT_SERVICE_NGREST = 'serviceNgrest';
 
     const SCENARIO_RESTCREATE = 'restcreate';
-    
+
     const SCENARIO_RESTUPDATE = 'restupdate';
-    
+
     private $_ngrestCallType = null;
 
     private $_ngRestPrimaryKey = null;

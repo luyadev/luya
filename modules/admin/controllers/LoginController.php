@@ -23,20 +23,20 @@ class LoginController extends \admin\base\Controller
             ],
         ];
     }
-    
+
     public function actionAsyncToken()
     {
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        
+
         $model = new \admin\models\LoginForm();
         // see if values are sent via post
         if (Yii::$app->request->post('secure_token', false)) {
-            
             $user = $model->validateSecureToken(Yii::$app->request->post('secure_token'), Yii::$app->session->get('secureId'));
-            
+
             if ($user) {
                 if (Yii::$app->adminuser->login($user)) {
                     Yii::$app->session->remove('secureId');
+
                     return ['refresh' => true, 'message' => 'top!'];
                 } else {
                     // misc error while login ?!
@@ -45,7 +45,7 @@ class LoginController extends \admin\base\Controller
                 return ['errors' => 'Der eingegeben Sicherheitscode ist falsch.', 'refresh' => false];
             }
         }
-        
+
         return ['errors' => 'Ein Globaler-Fehler ist enstanden. Bitte kontaktieren Sie Ihren Seitenbetreiber.', 'refresh' => false];
     }
 
@@ -59,10 +59,10 @@ class LoginController extends \admin\base\Controller
         if (Yii::$app->request->post('login')) {
             $model->attributes = Yii::$app->request->post('login');
             if (($userObject = $model->login()) !== false) {
-                
                 if ($this->module->secureLogin) {
-                    if($model->sendSecureLogin()) {
+                    if ($model->sendSecureLogin()) {
                         Yii::$app->session->set('secureId', $model->getUser()->id);
+
                         return ['refresh' => false, 'errors' => false, 'enterSecureToken' => true];
                     } else {
                         // misc error while secure token sent ?!
@@ -76,13 +76,13 @@ class LoginController extends \admin\base\Controller
                 }
             }
         }
-        
+
         return ['refresh' => false, 'errors' => $model->getErrors(), 'enterSecureToken' => false];
     }
-    
+
     public function actionIndex()
     {
-        $url = Url::base(true) . '/admin';
+        $url = Url::base(true).'/admin';
 
         // redirect logged in users
         if (!Yii::$app->adminuser->isGuest) {

@@ -8,7 +8,7 @@ use admin\models\Property;
 class PropertyImporter extends \luya\base\Importer
 {
     public $queueListPosition = self::QUEUE_POSITION_FIRST;
-    
+
     public function run()
     {
         $ids = [];

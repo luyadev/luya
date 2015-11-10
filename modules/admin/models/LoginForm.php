@@ -3,7 +3,7 @@
 namespace admin\models;
 
 use Yii;
-use yii\helpers\Url; 
+use yii\helpers\Url;
 
 class LoginForm extends \yii\base\Model
 {
@@ -43,12 +43,12 @@ class LoginForm extends \yii\base\Model
         $token = $this->getUser()->getAndStoreToken();
 
         $txt = '<h1>Luya Sicherheitscode</h1><p>Verwenden Sie den folgenden Sicherheitscode für den Zugriff auf die Administration der Website '.Url::base(true).':</p><p><strong>'.$token.'</strong></p>';
-        
+
         Yii::$app->mail->compose('Luya Sicherheitscode', $txt)->address($this->getUser()->email)->send();
-        
+
         return true;
     }
-    
+
     public function validateSecureToken($token, $userId)
     {
         $user = \admin\models\User::findOne($userId);
@@ -56,10 +56,10 @@ class LoginForm extends \yii\base\Model
         if ($user->secure_token == sha1($token)) {
             return $user;
         }
-        
+
         return false;
     }
-    
+
     public function login()
     {
         if ($this->validate()) {

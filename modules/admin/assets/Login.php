@@ -9,7 +9,7 @@ class Login extends \luya\web\Asset
     public $css = [
         '//fonts.googleapis.com/icon?family=Material+Icons',
         'css/admin.css',
-        'css/login.css'
+        'css/login.css',
     ];
 
     public $js = [

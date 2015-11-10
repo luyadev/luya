@@ -8,10 +8,10 @@ class Date extends \admin\ngrest\base\Plugin
     {
         $activatedElement = $doc->createElement('span', '{{item.'.$this->name.'*1000 | date : \'dd.MM.yyyy\'}}');
         $activatedElement->setAttribute('ng-if', 'item.'.$this->name);
-        
+
         $disabledElement = $doc->createElement('span', '-');
         $disabledElement->setAttribute('ng-if', '!item.'.$this->name);
-        
+
         $doc->appendChild($activatedElement);
         $doc->appendChild($disabledElement);
 

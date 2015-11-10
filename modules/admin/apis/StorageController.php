@@ -101,7 +101,7 @@ class StorageController extends \admin\base\RestController
 
         return ['id' => $create, 'error' => (bool) !$create, 'message' => $msg, 'image' => ((bool) $create) ? $this->actionImagePath($create) : false];
     }
-    
+
     public function actionAllImagePaths()
     {
         return Yii::$app->storage->image->all();
@@ -111,7 +111,7 @@ class StorageController extends \admin\base\RestController
     {
         return Yii::$app->storage->image->get($imageId);
     }
-    
+
     public function actionAllFilePaths()
     {
         return Yii::$app->storage->file->all();
@@ -126,12 +126,13 @@ class StorageController extends \admin\base\RestController
     {
         $data = [];
         $data[] = ['folder' => ['id' => 0], 'items' => Yii::$app->storage->file->allFromFolder(0)];
-        foreach(Yii::$app->storage->folder->all() as $folder) {
+        foreach (Yii::$app->storage->folder->all() as $folder) {
             $data[] = ['folder' => $folder, 'items' => Yii::$app->storage->file->allFromFolder($folder['id'])];
         }
+
         return $data;
     }
-    
+
     public function actionGetFiles($folderId)
     {
         return Yii::$app->storage->file->allFromFolder($folderId);
@@ -156,9 +157,10 @@ class StorageController extends \admin\base\RestController
     }
 
     /**
-     * delete folder, all subfolders and all files included
+     * delete folder, all subfolders and all files included.
      *
      * @param int $folderId
+     *
      * @return bool
      */
     public function actionFolderDelete($folderId)
@@ -167,9 +169,10 @@ class StorageController extends \admin\base\RestController
     }
 
     /**
-     * check if a folder is empty (no subfolders/no files)
+     * check if a folder is empty (no subfolders/no files).
      *
      * @param int $folderId
+     *
      * @return bool
      */
     public function actionIsFolderEmpty($folderId)

@@ -6,7 +6,7 @@ class Color extends \admin\ngrest\base\Plugin
 {
     public function renderList($doc)
     {
-        $element = $doc->createElement('span','&nbsp;');
+        $element = $doc->createElement('span', '&nbsp;');
         $element->setAttribute('style', 'font-size:14.5px; padding-left:30px; background-color : #{{item.'.$this->name.'}}');
         $doc->appendChild($element);
 

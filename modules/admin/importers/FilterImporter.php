@@ -61,7 +61,7 @@ class FilterImporter extends \luya\base\Importer
                 $object->save();
                 $log = $object->getLog();
                 if (count($log) > 0) {
-                    $this->getImporter()->addLog('filters', implode(", ", $log));
+                    $this->getImporter()->addLog('filters', implode(', ', $log));
                 }
             }
         }

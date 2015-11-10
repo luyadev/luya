@@ -5,9 +5,10 @@ namespace admin\base;
 use yii\helpers\ArrayHelper;
 
 /**
- * Admin-Module class
+ * Admin-Module class.
  * 
  * @todo move node(), nodeRoute(), group(), itemApi(), itemRoute() into a seperate class.
+ *
  * @author nadar
  */
 class Module extends \luya\base\Module
@@ -18,7 +19,7 @@ class Module extends \luya\base\Module
 
     /**
      * @var array The config linker property can specific the configuration class for ngRest model where the key
-     * is the `api` and the value is the class to the config. An array could look like this:
+     *            is the `api` and the value is the class to the config. An array could look like this:
      * 
      * ```php
      * [
@@ -47,7 +48,7 @@ class Module extends \luya\base\Module
      * The above example will override the api-admin-user ngrest config with your project specific config.
      */
     public $ngrestConfigLinker = [];
-    
+
     private $_menu = [];
 
     private $_pointers = [];
@@ -60,7 +61,8 @@ class Module extends \luya\base\Module
      * Checks if a config exist in the linked property based on the provided `$apiEndpoint`.
      *
      * @param string $apiEndpoint The identifier of an apiEndpoint. ApiEndpoints are listed in the module class.
-     * @return boolean|string If apiEndpoint exists in the linker property returns className, otherwhise false.
+     *
+     * @return bool|string If apiEndpoint exists in the linker property returns className, otherwhise false.
      */
     public function getLinkedNgRestConfig($apiEndpoint)
     {

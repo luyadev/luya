@@ -19,13 +19,14 @@ class Folder
     }
 
     /**
-     * delete folder, all subfolders and all included files
+     * delete folder, all subfolders and all included files.
      *
      * 1. search another folders with matching parentIds and call deleteFolder on them
      * 2. get all included files and delete them
      * 3. delete folder
      *
      * @param int $folderId
+     *
      * @return bool
      */
     public function deleteFolder($folderId)
@@ -53,9 +54,10 @@ class Folder
     }
 
     /**
-     * check if a folder is empty (without subfolders and/or files)
+     * check if a folder is empty (without subfolders and/or files).
      *
      * @param int $folderId
+     *
      * @return bool
      */
     public function isEmptyFolder($folderId)
@@ -100,7 +102,7 @@ class Folder
     {
         return $this->partialFolderTree(0);
     }
-    
+
     public function all()
     {
         return StorageFolder::find()->select(['id', 'name', 'parent_id'])->where(['is_deleted' => 0])->asArray()->all();

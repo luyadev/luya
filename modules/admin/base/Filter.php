@@ -9,23 +9,24 @@ use admin\models\StorageFilterChain;
 use yii\helpers\Json;
 
 /**
- * Base class for all Filters
+ * Base class for all Filters.
+ *
  * @author nadar
  */
 abstract class Filter extends \yii\base\Object
 {
     /**
-     * Resize-Effect
+     * Resize-Effect.
      */
     const EFFECT_RESIZE = 'resize';
 
     /**
-     * Thumbnail-Effect
+     * Thumbnail-Effect.
      */
     const EFFECT_THUMBNAIL = 'thumbnail';
 
     /**
-     * Crop-Effect
+     * Crop-Effect.
      */
     const EFFECT_CROP = 'crop';
 
@@ -63,25 +64,24 @@ abstract class Filter extends \yii\base\Object
      * @var array An array containing all log messages
      */
     public $log = [];
-    
+
     /**
      * @var mixed|array Private property to store the effect params list
      */
     private $_effectParamsList = null;
-    
+
     /**
-     * Add message to log array
+     * Add message to log array.
      *
      * @param string $message The message to log
-     * @return void
      */
     public function addLog($message)
     {
         $this->log[] = $message;
     }
-    
+
     /**
-     * Return the log array
+     * Return the log array.
      *
      * @return array Array with log messages.
      */
@@ -89,7 +89,7 @@ abstract class Filter extends \yii\base\Object
     {
         return $this->log;
     }
-    
+
     /**
      * Find the model based on the identifier. If the identifier does not exists in the database, create
      * new record in the database.
@@ -110,19 +110,21 @@ abstract class Filter extends \yii\base\Object
             $model->insert(false);
             $this->addLog("added new filter '".$this->identifier()."' to database.");
         }
-        
+
         return $model;
     }
-    
+
     /**
      * Find the effect model based on the effect identifier. If the effect could not found an exception will
      * be thrown.
      *
      * @param string $effectIdentifier The name of effect, used EFFECT prefixed constants like
-     * + EFFECT_RESIZE
-     * + EFFECT_THUMBNAIL
-     * + EFFECT_CROP
+     *                                 + EFFECT_RESIZE
+     *                                 + EFFECT_THUMBNAIL
+     *                                 + EFFECT_CROP
+     *
      * @return array Contain an array with the effect properties.
+     *
      * @throws Exception
      */
     public function findEffect($effectIdentifier)
@@ -136,12 +138,14 @@ abstract class Filter extends \yii\base\Object
         // array
         return $model;
     }
-    
+
     /**
      * Get an array with all the effect param options, based on the effect params defintion.
      *
      * @param array $effectParamsDefintion
+     *
      * @throws Exception When the vars key does not exists in the effect definition.
+     *
      * @return array
      */
     public function getEffectParamsList($effectParams)
@@ -151,20 +155,21 @@ abstract class Filter extends \yii\base\Object
             if (!array_key_exists('vars', $effectParams)) {
                 throw new Exception("Required 'vars' key not found in effect definition array.");
             }
-            
+
             foreach ($effectParams['vars'] as $item) {
                 $this->_effectParamsList[] = $item['var'];
             }
         }
-        
+
         return $this->_effectParamsList;
     }
-    
+
     /**
      * Returns a parsed effect chain for the current Filter. The method verifys if the provieded effect
      * parameters are available in the effect defintions of luya.
      *
      * @return array Each row of the array must have "effect_id" and "effect_json_values" key.
+     *
      * @throws Exception When effect option could be found in the effect defintions.
      */
     public function getChain()
@@ -193,7 +198,7 @@ abstract class Filter extends \yii\base\Object
     /**
      * Update and save filter corresponding to the model, refresh chain values.
      *
-     * @return boolean
+     * @return bool
      */
     public function save()
     {
@@ -232,7 +237,7 @@ abstract class Filter extends \yii\base\Object
             $this->addLog("Effect chain option have been removed for '{$filterModel->name}'");
             $deletion->delete();
         }
-        
+
         return true;
     }
 }

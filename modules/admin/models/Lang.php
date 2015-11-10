@@ -7,9 +7,9 @@ use Yii;
 class Lang extends \admin\ngrest\base\Model
 {
     private static $_langInstance = null;
-    
+
     private static $_langInstanceQuery = null;
-    
+
     public function ngRestApiEndpoint()
     {
         return 'api-admin-lang';

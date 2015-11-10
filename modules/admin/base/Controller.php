@@ -19,13 +19,14 @@ class Controller extends \luya\web\Controller
 
     /**
      * @var boolena Use the view folder inside the module
+     *
      * @see \luya\base\Module
      */
     public $useModuleViewPath = true;
 
     /**
-     * @var boolean When enabling `$disablePermissionCheck` all actions are not secured by access controller but
-     * are do require an authtenticated user (logged in user).
+     * @var bool When enabling `$disablePermissionCheck` all actions are not secured by access controller but
+     *           are do require an authtenticated user (logged in user).
      */
     public $disablePermissionCheck = false;
 
@@ -35,9 +36,10 @@ class Controller extends \luya\web\Controller
      * + apply to all actions.
      * + ignore if disabledPermissionCheck is enabled.
      * + Check permission with `\admin\components\Auth::matchRoute()`.
-     * + By default not logged in users 
+     * + By default not logged in users.
      *
      * @return array Rule-Definitions
+     *
      * @see yii\filters\AccessControl
      */
     public function getRules()

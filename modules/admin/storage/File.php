@@ -190,10 +190,10 @@ class File
             $files[$k]['is_image'] = $isImage;
             $files[$k]['thumbnail'] = $thumb;
         }
-        
+
         return $files;
     }
-    
+
     public function get($fileId)
     {
         $file = StorageFile::find()->where(['id' => $fileId, 'is_deleted' => 0])->asArray()->one();
@@ -212,12 +212,12 @@ class File
     public function httpSource($fileId)
     {
         $file = $this->get($fileId);
-        
+
         if ($file) {
             return $file['source_http'];
         }
     }
-    
+
     public function getPath($fileId)
     {
         $file = StorageFile::find()->where(['id' => $fileId, 'is_deleted' => 0])->one();

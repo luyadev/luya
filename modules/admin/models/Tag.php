@@ -43,6 +43,7 @@ class Tag extends \admin\ngrest\base\Model
         $config->list->field('name', 'Name')->text();
         $config->create->copyFrom('list');
         $config->update->copyFrom('list');
+
         return $config;
     }
 }

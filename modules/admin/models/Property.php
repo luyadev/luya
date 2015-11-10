@@ -23,6 +23,7 @@ class Property extends \yii\db\ActiveRecord
     {
         $object = Yii::createObject(['class' => $className, 'value' => $value]);
         $object->trigger($object::EVENT_BEFORE_FIND);
+
         return $object;
     }
 }

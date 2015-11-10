@@ -202,7 +202,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
                 $id = 'id-'.md5($ngModel.$lang['short_code']);
                 // anzahl cols durch anzahl sprachen
                 $return[] = [
-                    'html' => '<div class="crud__i18n-col crud__i18n-col--{{(12/AdminLangService.selection.length)}}" ng-show="AdminLangService.isInSelection(\''.$lang['short_code'].'\')">'.$this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'], true).'<div class="crud__flag"><span class="flag flag--' . $lang['short_code'] . '"><span class="flag__fallback flag__fallback--colorized">' . $lang['short_code'] . '</span></span></div></div>',
+                    'html' => '<div class="crud__i18n-col crud__i18n-col--{{(12/AdminLangService.selection.length)}}" ng-show="AdminLangService.isInSelection(\''.$lang['short_code'].'\')">'.$this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'], true).'<div class="crud__flag"><span class="flag flag--'.$lang['short_code'].'"><span class="flag__fallback flag__fallback--colorized">'.$lang['short_code'].'</span></span></div></div>',
                 ];
 
                 ++$i;

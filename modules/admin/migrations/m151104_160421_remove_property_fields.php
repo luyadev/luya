@@ -1,16 +1,15 @@
 <?php
 
-use yii\db\Schema;
 use yii\db\Migration;
 
 class m151104_160421_remove_property_fields extends Migration
 {
     public function up()
     {
-        $this->dropColumn("admin_property", "type");
-        $this->dropColumn("admin_property", "label");
-        $this->dropColumn("admin_property", "option_json");
-        $this->dropColumn("admin_property", "default_value");
+        $this->dropColumn('admin_property', 'type');
+        $this->dropColumn('admin_property', 'label');
+        $this->dropColumn('admin_property', 'option_json');
+        $this->dropColumn('admin_property', 'default_value');
     }
 
     public function down()

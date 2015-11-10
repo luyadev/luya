@@ -57,7 +57,7 @@ class StorageFilter extends \admin\ngrest\base\Model
                     if (is_null($newimage)) {
                         // THUMBNAIL_OUTBOUND & THUMBNAIL_INSET
                         $type = \Imagine\Image\ImageInterface::THUMBNAIL_INSET;
-                        
+
                         if (isset($item->effect_json_values['type']) && !empty($item->effect_json_values['type'])) {
                             $type = $item->effect_json_values['type'];
                         }

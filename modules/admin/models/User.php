@@ -23,7 +23,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
     public function ngRestConfig($config)
     {
         $config->aw->register(new \admin\aws\ChangePassword(), ['icon' => 'vpn_key']);
-        
+
         $config->create->field('title', 'Anrede')->selectArray(static::getTitles(), 0);
         $config->create->field('firstname', 'Vorname')->text();
         $config->create->field('lastname', 'Nachname')->text();
@@ -110,9 +110,10 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
         $this->setAttribute('secure_token', sha1($token));
         $this->setAttribute('secure_token_timestamp', time());
         $this->update(false);
+
         return $token;
     }
-    
+
     /**
      * override default scope find().
      */

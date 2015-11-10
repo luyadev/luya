@@ -1,8 +1,7 @@
 <?php
 use \yii\helpers\Html;
+
 $this->beginPage();
-
-
 
 ?>
 

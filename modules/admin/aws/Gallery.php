@@ -41,9 +41,10 @@ class Gallery extends \admin\ngrest\base\ActiveWindow
     public function callbackLoadAllImages()
     {
         $images = [];
-        foreach((new \yii\db\Query())->select(['image_id' => $this->imageIdFieldName])->where([$this->refFieldName => $this->getItemId()])->from($this->refTableName)->all() as $image) {
+        foreach ((new \yii\db\Query())->select(['image_id' => $this->imageIdFieldName])->where([$this->refFieldName => $this->getItemId()])->from($this->refTableName)->all() as $image) {
             $images[] = Yii::$app->storage->image->get($image['image_id']);
         }
+
         return $images;
     }
 
@@ -54,16 +55,16 @@ class Gallery extends \admin\ngrest\base\ActiveWindow
             $this->refFieldName => (int) $this->getItemId(),
         ])->execute();
     }
-    
+
     public function callbackAddImageToIndex($fileId)
     {
         $imageId = Yii::$app->storage->image->create($fileId);
-        
+
         Yii::$app->db->createCommand()->insert($this->refTableName, [
             $this->imageIdFieldName => (int) $imageId,
             $this->refFieldName => (int) $this->getItemId(),
         ])->execute();
-        
+
         return Yii::$app->storage->image->get($imageId);
     }
 }
