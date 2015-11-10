@@ -12,7 +12,7 @@
     </div>
 
     <div ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController">
-        <div class="block" ng-class="{ 'block--edit' : edit , 'block--is-dirty' : !block.is_dirty && isEditable() && !block.is_container, 'block--is-container': block.is_container }" data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{snapTolerance : 40, handle : '.block__move', delay: 200, cursor:'move', cursorAt: { top: 0, left: 0 }, revert:true }" ng-model="block">
+        <div class="block" ng-class="{ 'block--edit' : edit , 'block--config' : configable ,'block--is-dirty' : !block.is_dirty && isEditable() && !block.is_container, 'block--is-container': block.is_container }" data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{snapTolerance : 40, handle : '.block__move', delay: 200, cursor:'move', cursorAt: { top: 0, left: 0 }, revert:true }" ng-model="block">
             <div class="block__toolbar">
                 <div class="left">
                     <i class="block__move material-icons">open_with</i>
@@ -20,25 +20,23 @@
                 </div>
                 <div class="right">
                     <i ng-show="!edit && isEditable()" class="material-icons [ waves-effect waves-blue ]" ng-click="toggleEdit()">edit</i>
-                    <i ng-show="!edit" class="material-icons [ waves-effect waves-blue ]" ng-click="removeBlock(block)">delete</i>
-                    <i ng-show="block.cfgs.length && edit" ng-click="configIsOpen = !configIsOpen" class="material-icons">settings</i>
-                    <i ng-show="edit" class="material-icons [ waves-effect waves-blue ]" ng-click="toggleEdit()">close</i>
+                    <i ng-show="!edit && !configable" class="material-icons [ waves-effect waves-blue ]" ng-click="removeBlock(block)">delete</i>
+                    <i ng-show="!configable && isEditable()" ng-click="toggleConfig()" class="material-icons">settings</i>
+                    <i ng-show="edit || configable" class="material-icons [ waves-effect waves-blue ]" ng-click="toggleBlockSettings()">close</i>
                 </div>
             </div>
             <div class="block__body cmsadmin-tags" ng-click="toggleEdit()" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
             <form class="block__edit">
-                <div class="row" ng-repeat="field in block.vars">
-                     <zaa-injector dir="field.type" options="field.options" fieldid="{{field.id}}" fieldname="{{field.var}}" initvalue="{{field.initvalue}}" placeholder="{{field.placeholder}}" label="{{field.label}}" model="data[field.var]"></zaa-injector>
+                <div class="block__edit-content">
+                    <p class="block__config__text">Block-Inhalte</p>
+                    <div class="row" ng-repeat="field in block.vars">
+                         <zaa-injector dir="field.type" options="field.options" fieldid="{{field.id}}" fieldname="{{field.var}}" initvalue="{{field.initvalue}}" placeholder="{{field.placeholder}}" label="{{field.label}}" model="data[field.var]"></zaa-injector>
+                    </div>
                 </div>
-                <div class="input">
-                    <div class="block__configs" ng-class="{'block__configs--open': configIsOpen}">
-                 
-                        <div class="block__configs-body">
-                            <p class="block__config__text">Einstellungen:</p>
-                            <div class="row" ng-repeat="cfgField in block.cfgs">
-                                <zaa-injector dir="cfgField.type" placeholder="{{cfgField.placeholder}}" fieldid="{{cfgField.id}}" fieldname="{{cfgField.var}}" initvalue="{{cfgField.initvalue}}" options="cfgField.options" label="{{cfgField.label}}"  model="cfgdata[cfgField.var]"></zaa-injector>
-                            </div>
-                        </div>
+                <div class="block__config-content">
+                    <p class="block__config__text">Einstellungen</p>
+                    <div class="row" ng-repeat="cfgField in block.cfgs">
+                        <zaa-injector dir="cfgField.type" placeholder="{{cfgField.placeholder}}" fieldid="{{cfgField.id}}" fieldname="{{cfgField.var}}" initvalue="{{cfgField.initvalue}}" options="cfgField.options" label="{{cfgField.label}}"  model="cfgdata[cfgField.var]"></zaa-injector>
                     </div>
                 </div>
                 <br />

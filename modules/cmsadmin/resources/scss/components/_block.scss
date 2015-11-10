@@ -16,6 +16,7 @@
 
 	&:hover > .block__toolbar,
 	&.block--edit .block__toolbar,
+	&.block--config .block__toolbar,
 	&.block--is-container > .block__toolbar {
 		transform: translateY(0%);
 	}
@@ -25,7 +26,7 @@
 	&.block--is-dirty:not(.block--edit) {
 		background-color: $block--background-is-dirty;
 	}
-	&.block--edit {
+	&.block--edit, &.block--config {
 		background-color: $block--active-background;
 		border-left: 4px solid $block--toolbar--background;
 		border-bottom: 4px solid $block--toolbar--background;
@@ -128,44 +129,80 @@
 		margin-top: 30px;
 	}
 }
+.block__edit-content {
+	display: none;
+}
 .block--edit .block__edit {
 	opacity: 1;
 	height: 100%;
 	// transition: 0.25s 0.25s ease opacity, 0.25s 0.25s ease height, 1s ease padding;
 	padding: ($block__toolbar--height + 5px) 10px 0 10px;
+	.block__edit-content {
+		display: block;
+	}
 }
 
-.block__configs {
-	margin-top: 25px;
-	user-select: none;
+
+
+.block--config .block__body {
+	opacity: 0;
+	padding: 0;
+	margin: 0;
+	height: 0;
+	overflow: hidden;
+	.collapsible {
+		margin-top: 30px;
+	}
+}
+.block--config .block__edit {
+	opacity: 1;
+	height: 100%;
+	// transition: 0.25s 0.25s ease opacity, 0.25s 0.25s ease height, 1s ease padding;
+	padding: ($block__toolbar--height + 5px) 10px 0 10px;
+	.block__config-content {
+		display: block;
+	}
+}
+.block__config-content {
+	display: none;
 }
 
-.block__configs-toggler {
-	width: 210px;
-	border-radius: 2px;
-}
+
+
+
+
+
+// .block__configs {
+// 	margin-top: 25px;
+// 	user-select: none;
+// }
+
+// .block__configs-toggler {
+// 	width: 210px;
+// 	border-radius: 2px;
+// }
 .block__config__text {
 	font-size: 1rem;
 	font-weight: bold;
     line-height: 36px;
-    text-align: center;
+    text-align: left;
     text-transform: uppercase;
     vertical-align: middle;
 }
-.block__configs--open .block__configs-toggler {
-	border-radius: 2px 2px 0 0;
-}
+// .block__configs--open .block__configs-toggler {
+// 	border-radius: 2px 2px 0 0;
+// }
 
-.block__configs-body {
-	display: none;
-	padding: 10px;
-	border: 2px solid #eee;
-	border-radius: 0 0 2px 2px;
-	background-color: #fafafa;
-}
-.block__configs--open .block__configs-body {
-	display: block;
-}
+// .block__configs-body {
+// 	display: none;
+// 	padding: 10px;
+// 	border: 2px solid #eee;
+// 	border-radius: 0 0 2px 2px;
+// 	background-color: #fafafa;
+// }
+// .block__configs--open .block__configs-body {
+// 	display: block;
+// }
 
 
 @each $depth, $color in $container-block--colors {
