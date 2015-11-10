@@ -934,25 +934,18 @@
 			});
 		};
 		
-		
-		$scope.isEditable = function() {
-			if ($scope.block.vars.length > 0 || $scope.block.cfgs.length > 0) {
-				return true;
-			}
-			
-			return false;
-		}
-		$scope.isConfigable = function() {
-			if ($scope.block.vars.length > 0 || $scope.block.cfgs.length > 0) {
-				return true;
-			}
-			
-			return false;
-		}
+
+        $scope.isEditable = function() {
+            return typeof $scope.block.vars != "undefined" && $scope.block.vars.length > 0;
+        };
+
+        $scope.isConfigable = function() {
+            return typeof $scope.block.cfgs != "undefined" && $scope.block.cfgs.length > 0;
+        };
 		
 		$scope.safe = function(html) {
 			return $sce.trustAsHtml(html);
-		}
+		};
 		
 		$scope.onStop = function() {
 			$scope.$apply(function() {
@@ -969,29 +962,30 @@
 		$scope.PagePlaceholderController = $scope.$parent;
 		
 		$scope.edit = false;
-		$scope.configable = false;
+		$scope.config = false;
 
 		$scope.toggleBlockSettings = function() {
 			/* onclick="$(this).parents('.block').toggleClass('block--edit');" */
 			$scope.edit = false;
-			$scope.configable = false;
+			$scope.config = false;
 		};
+
 		$scope.toggleEdit = function() {
 			if (!$scope.isEditable()) {
 				return;
 			}
 			/* onclick="$(this).parents('.block').toggleClass('block--edit');" */
 			$scope.edit = !$scope.edit;
-			$scope.configable = false;
-			$scope.blockIsOpen = true;
+			$scope.config = false;
 		};
+
 		$scope.toggleConfig = function() {
-			if (!$scope.isEditable()) {
+			if (!$scope.isConfigable()) {
 				return;
 			}
-			$scope.configable = !$scope.configable;
+
+			$scope.config = !$scope.config;
 			$scope.edit = false;
-			$scope.blockIsOpen = true;
 		};
 		
 		$scope.renderTemplate = function(template, dataVars, cfgVars, block, extras) {

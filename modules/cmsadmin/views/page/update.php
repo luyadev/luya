@@ -12,7 +12,7 @@
     </div>
 
     <div ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController">
-        <div class="block" ng-class="{ 'block--edit' : edit , 'block--config' : configable ,'block--is-dirty' : !block.is_dirty && isEditable() && !block.is_container, 'block--is-container': block.is_container }" data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{snapTolerance : 40, handle : '.block__move', delay: 200, cursor:'move', cursorAt: { top: 0, left: 0 }, revert:true }" ng-model="block">
+        <div class="block" ng-class="{ 'block--edit' : edit , 'block--config' : config ,'block--is-dirty' : !block.is_dirty && isEditable() && !block.is_container, 'block--is-container': block.is_container }" data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{snapTolerance : 40, handle : '.block__move', delay: 200, cursor:'move', cursorAt: { top: 0, left: 0 }, revert:true }" ng-model="block">
             <div class="block__toolbar">
                 <div class="left">
                     <i class="block__move material-icons">open_with</i>
@@ -20,9 +20,9 @@
                 </div>
                 <div class="right">
                     <i ng-show="!edit && isEditable()" class="material-icons [ waves-effect waves-blue ]" ng-click="toggleEdit()">edit</i>
-                    <i ng-show="!edit && !configable" class="material-icons [ waves-effect waves-blue ]" ng-click="removeBlock(block)">delete</i>
-                    <i ng-show="!configable && isEditable()" ng-click="toggleConfig()" class="material-icons">settings</i>
-                    <i ng-show="edit || configable" class="material-icons [ waves-effect waves-blue ]" ng-click="toggleBlockSettings()">close</i>
+                    <i ng-show="!config && isConfigable()" ng-click="toggleConfig()" class="material-icons">settings</i>
+                    <i ng-show="!edit && !config" class="material-icons [ waves-effect waves-blue ]" ng-click="removeBlock(block)">delete</i>
+                    <i ng-show="edit || config" class="material-icons [ waves-effect waves-blue ]" ng-click="toggleBlockSettings()">close</i>
                 </div>
             </div>
             <div class="block__body cmsadmin-tags" ng-click="toggleEdit()" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
