@@ -322,7 +322,7 @@
             		return FilterService.get();
             	},
             	menu : function(NewMenuService) {
-            		return NewMenuService.get(true);
+            		return NewMenuService.get();
             	}
             }
 		})
@@ -451,6 +451,8 @@
 		 * @todo: make promise and add to resolve list
 		 */
 		$scope.AdminLangService.load(true);
+		
+		NewMenuService.get();
 		
 		$scope.$watch(function() { return NewMenuService.data; }, function(n) {
 			$scope.menu = n;
