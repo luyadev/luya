@@ -49,9 +49,9 @@
             <div class="input input--radios col s12">
                 <label class="input__label">Seitentyp</label>
                 <div class="input__field-wrapper">
-                    <input type="radio" ng-model="data.nav_item_type" value="1" id="t1"><label for="t1">Seite</label> <br />
-                    <input type="radio" ng-model="data.nav_item_type" value="2" id="t2"><label for="t2">Modul</label> <br />
-                    <input type="radio" ng-model="data.nav_item_type" value="3" id="t3"><label for="t3">Weiterleitung</label>
+                    <input type="radio" ng-checked="data.nav_item_type == 1"><label ng-click="data.nav_item_type=1">Seite</label><br />
+                    <input type="radio" ng-checked="data.nav_item_type == 2"><label ng-click="data.nav_item_type=2">Module</label><br />
+                    <input type="radio" ng-checked="data.nav_item_type == 3"><label ng-click="data.nav_item_type=3">Weiterleitung</label><br />
                 </div>
             </div>
         </div>
