@@ -18,6 +18,6 @@ class TagRelation extends \yii\db\ActiveRecord
 
     public static function getData($tableName, $pkId)
     {
-        return TagRelation::find()->where(['table_name' => $tableName, 'pk_id' => $pkId])->asArray()->all();
+        return self::find()->where(['table_name' => $tableName, 'pk_id' => $pkId])->asArray()->all();
     }
 }
