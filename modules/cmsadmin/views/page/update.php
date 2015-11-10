@@ -21,6 +21,7 @@
                 <div class="right">
                     <i ng-show="!edit && isEditable()" class="material-icons [ waves-effect waves-blue ]" ng-click="toggleEdit()">edit</i>
                     <i ng-show="!edit" class="material-icons [ waves-effect waves-blue ]" ng-click="removeBlock(block)">delete</i>
+                    <i ng-show="edit" ng-click="configIsOpen = !configIsOpen" class="material-icons">settings</i>
                     <i ng-show="edit" class="material-icons [ waves-effect waves-blue ]" ng-click="toggleEdit()">close</i>
                 </div>
             </div>
@@ -31,17 +32,9 @@
                 </div>
                 <div class="input">
                     <div class="block__configs" ng-class="{'block__configs--open': configIsOpen}">
-
-                        <label class="input__label" ng-click="configIsOpen = !configIsOpen"><i class="material-icons">settings</i></label>
-                        <div class="input__field-wrapper">
-                            <div class="block__configs-toggler btn btn--small grey lighten-4 black-text z-depth-0" ng-click="configIsOpen = !configIsOpen">
-                                <i class="material-icons" ng-show="configIsOpen">keyboard_arrow_down</i>
-                                <i class="material-icons" ng-hide="configIsOpen">keyboard_arrow_right</i>
-                                Einstellungen 
-                                </div>
-                        </div>
-
+                 
                         <div class="block__configs-body">
+                            <p class="block__config__text">Einstellungen:</p>
                             <div class="row" ng-repeat="cfgField in block.cfgs">
                                 <zaa-injector dir="cfgField.type" placeholder="{{cfgField.placeholder}}" fieldid="{{cfgField.id}}" fieldname="{{cfgField.var}}" initvalue="{{cfgField.initvalue}}" options="cfgField.options" label="{{cfgField.label}}"  model="cfgdata[cfgField.var]"></zaa-injector>
                             </div>

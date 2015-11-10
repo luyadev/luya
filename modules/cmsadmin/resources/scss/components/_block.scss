@@ -141,8 +141,16 @@
 }
 
 .block__configs-toggler {
-	width: 100%;
+	width: 210px;
 	border-radius: 2px;
+}
+.block__config__text {
+	font-size: 1rem;
+	font-weight: bold;
+    line-height: 36px;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
 }
 .block__configs--open .block__configs-toggler {
 	border-radius: 2px 2px 0 0;
