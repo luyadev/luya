@@ -260,46 +260,57 @@
 				"i18n": "@i18n"
 			},
 			controller: function($scope) {
+                var date = new Date();
+                $scope.placeholders = {
+                    "day": date.getDate(),
+                    "month": date.getMonth() + 1,
+                    "year": date.getFullYear(),
+                    "hour": date.getHours(),
+                    "minute": date.getMinutes()
+                };
+
 				$scope.reform = function() {
 					if ($scope.year != null && $scope.month != null && $scope.day != null && $scope.hour != null && $scope.min != null) {
 						var date = new Date($scope.year, ($scope.month-1), $scope.day, $scope.hour, $scope.min);
 						var mil = date.getTime();
 						$scope.model = (mil/1000);
 					}
-				}
-				
+				};
+
 				$scope.now = function() {
 					var date = new Date();
-					$scope.day = date.getDate(),
+					$scope.day = date.getDate();
 					$scope.month = date.getMonth() + 1;
 					$scope.year = date.getFullYear();
 					$scope.min = date.getMinutes();
 					$scope.hour = date.getHours();
 					$scope.reform();
-				}
+				};
 				
 				$scope.$watch(function() { return $scope.model }, function(n, o) {
 					if (n !== undefined && n != null) {
 						var date = new Date(n*1000);
-						$scope.day = date.getDate(),
+						$scope.day = date.getDate();
 						$scope.month = date.getMonth() + 1;
 						$scope.year = date.getFullYear();
 						$scope.min = date.getMinutes();
 						$scope.hour = date.getHours();
 					}
-				})
+				});
 			},
 			template: function() {
 				return '<div class="input input--date">' +
 						'<label class="input__label">{{label}}</label>' +
 		                '<div class="input__field-wrapper">' +
-			                    '<input ng-blur="reform()" type="text" ng-model="day" placeholder="Tag" class="input__field" /><span class="input__divider">.</span>' +
-			                    '<input ng-blur="reform()" type="text" ng-model="month" placeholder="Monat" class="input__field" /><span class="input__divider">.</span>' +
-			                    '<input ng-blur="reform()" type="text" ng-model="year" placeholder="Jahr" class="input__field" style="width:100px;" /><span class="input__divider"><i class="material-icons">access_time</i></span>' +
-			                    '<input ng-blur="reform()" type="text" ng-model="hour" placeholder="Stunde" class="input__field" /><span class="input__divider">:</span>' +
-			                    '<input ng-blur="reform()" type="text" ng-model="min" placeholder="Minute" class="input__field" />' +
-			                    '&nbsp;<button class="btn btn-flat" type="button" ng-click="now()">Jetzt</button>' +
-		                    '</div>'
+			                    '<input ng-blur="reform()" type="text" ng-model="day" placeholder="{{placeholders.day}}" class="input__field" /><span class="input__divider">.</span>' +
+			                    '<input ng-blur="reform()" type="text" ng-model="month" placeholder="{{placeholders.month}}" class="input__field" /><span class="input__divider">.</span>' +
+			                    '<input ng-blur="reform()" type="text" ng-model="year" placeholder="{{placeholders.year}}" class="input__field" style="width:100px;" /><span class="input__divider input__divider--centered input__divider--icon"><i class="material-icons">access_time</i></span>' +
+			                    '<input ng-blur="reform()" type="text" ng-model="hour" placeholder="{{placeholders.hour}}" class="input__field" /><span class="input__divider input__divider--centered">:</span>' +
+			                    '<input ng-blur="reform()" type="text" ng-model="min" placeholder="{{placeholders.minute}}" class="input__field" />' +
+			                    '<button class="input__button btn btn--small grey darken-3" type="button" ng-click="now()">' +
+                                    '<i class="material-icons">today</i>' +
+                                '</button>' +
+		                    '</div>' +
 		               '</div>';
 			}
 		}
@@ -317,6 +328,12 @@
 				"i18n": "@i18n"
 			},
 			controller: function($scope) {
+                var date = new Date();
+                $scope.placeholders = {
+                    "day": date.getDate(),
+                    "month": date.getMonth() + 1,
+                    "year": date.getFullYear()
+                };
 				
 				$scope.reform = function() {
 					if ($scope.year != null && $scope.month != null && $scope.day != null) {
@@ -324,7 +341,7 @@
 						var mil = date.getTime();
 						$scope.model = (mil/1000);
 					}
-				}
+				};
 				
 				$scope.today = function() {
 					var date = new Date();
@@ -332,7 +349,7 @@
 					$scope.month = date.getMonth() + 1;
 					$scope.year = date.getFullYear();
 					$scope.reform();
-				}
+				};
 				
 				$scope.$watch(function() { return $scope.model }, function(n, o) {
 					if (n !== undefined && n != null) {
@@ -341,16 +358,18 @@
 						$scope.month = date.getMonth() + 1;
 						$scope.year = date.getFullYear();
 					}
-				})
+				});
 			},
 			template: function() {
 				return '<div class="input input--date">' +
 							'<label class="input__label">{{label}}</label>' +
                             '<div class="input__field-wrapper">' +
-                                '<input ng-blur="reform()" type="text" ng-model="day" placeholder="Tag" class="input__field" /><span class="input__divider">.</span>' +
-                                '<input ng-blur="reform()" type="text" ng-model="month" placeholder="Monat" class="input__field" /><span class="input__divider">.</span>' +
-                                '<input ng-blur="reform()" type="text" ng-model="year" placeholder="Jahr" class="input__field" style="width:100px;" />' +
-                                '&nbsp;<button class="btn btn-flat" type="button" ng-click="today()">Heute</button>' +
+                                '<input ng-blur="reform()" type="text" ng-model="day" placeholder="{{placeholders.day}}" class="input__field" /><span class="input__divider">.</span>' +
+                                '<input ng-blur="reform()" type="text" ng-model="month" placeholder="{{placeholders.month}}" class="input__field" /><span class="input__divider">.</span>' +
+                                '<input ng-blur="reform()" type="text" ng-model="year" placeholder="{{placeholders.year}}" class="input__field" style="width:100px;" />' +
+                                '<button class="input__button btn btn--small grey darken-3" type="button" ng-click="today()">' +
+                                    '<i class="material-icons">today</i>' +
+                                '</button>' +
                             '</div>'
 						'</div>';
 			}

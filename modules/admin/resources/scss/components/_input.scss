@@ -98,7 +98,7 @@ input[type="checkbox"]:checked + .input__label:before {
 	height: auto;
 	font-size: $input__input-font-size;
 	line-height: $input__input-font-size + 0.1;
-	padding: 10px;
+	padding: 10px 10px 7px 10px;
 	outline: none;
 	vertical-align: middle;
 	width: 100%;
@@ -112,9 +112,18 @@ input[type="checkbox"]:checked + .input__label:before {
 }
 
 .input__divider {
+	display: inline-block;
 	color: color("shades", "black");
 	vertical-align: bottom;
 	margin: 0 10px;
+
+	&.input__divider--centered {
+		vertical-align: middle;
+	}
+
+	&.input__divider--icon {
+		margin-bottom: -4px;
+	}
 }
 
 // Custom styling for inputs without label
@@ -147,4 +156,8 @@ input[type="checkbox"]:checked + .input__label:before {
 [type="checkbox"] + label,
 [type="radio"] + label {
 	padding-left: 30px !important;
+}
+
+.input__button {
+	margin-left: 15px;
 }
