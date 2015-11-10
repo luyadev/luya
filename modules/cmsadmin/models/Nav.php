@@ -343,7 +343,7 @@ class Nav extends \yii\db\ActiveRecord
         return $navItemId;
     }
 
-    public function createRedirectItem($navId, $langId, $title, $rewrite, $moduleName, $redirectType, $redirectTypeValue)
+    public function createRedirectItem($navId, $langId, $title, $rewrite, $redirectType, $redirectTypeValue)
     {
         $_errors = [];
 
