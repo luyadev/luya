@@ -260,18 +260,24 @@
 				"i18n": "@i18n"
 			},
 			controller: function($scope) {
+				
                 var date = new Date();
+                
+                $scope.slicer = function(value) {
+					return ('0' + value).slice(-2);
+				};
+                
                 $scope.placeholders = {
-                    "day": date.getDate(),
-                    "month": date.getMonth() + 1,
+                    "day": $scope.slicer(date.getDate()),
+                    "month": $scope.slicer(date.getMonth() + 1),
                     "year": date.getFullYear(),
-                    "hour": date.getHours(),
-                    "minute": date.getMinutes()
+                    "hour": $scope.slicer(date.getHours()),
+                    "minute": $scope.slicer(date.getMinutes())
                 };
 
-				$scope.reform = function() {
+                $scope.reform = function() {
 					if ($scope.year != null && $scope.month != null && $scope.day != null && $scope.hour != null && $scope.min != null) {
-						var date = new Date($scope.year, ($scope.month-1), $scope.day, $scope.hour, $scope.min);
+						var date = new Date(parseInt($scope.year, 10), parseInt(($scope.month-1), 10), parseInt($scope.day, 10), parseInt($scope.hour, 10), parseInt($scope.min, 10));
 						var mil = date.getTime();
 						$scope.model = (mil/1000);
 					}
@@ -279,22 +285,22 @@
 
 				$scope.now = function() {
 					var date = new Date();
-					$scope.day = date.getDate();
-					$scope.month = date.getMonth() + 1;
+					$scope.day = $scope.slicer(date.getDate());
+					$scope.month = $scope.slicer(date.getMonth() + 1);
 					$scope.year = date.getFullYear();
-					$scope.min = date.getMinutes();
-					$scope.hour = date.getHours();
+					$scope.min = $scope.slicer(date.getMinutes());
+					$scope.hour = $scope.slicer(date.getHours());
 					$scope.reform();
 				};
 				
 				$scope.$watch(function() { return $scope.model }, function(n, o) {
 					if (n !== undefined && n != null) {
 						var date = new Date(n*1000);
-						$scope.day = date.getDate();
-						$scope.month = date.getMonth() + 1;
+						$scope.day = $scope.slicer(date.getDate());
+						$scope.month = $scope.slicer(date.getMonth() + 1);
 						$scope.year = date.getFullYear();
-						$scope.min = date.getMinutes();
-						$scope.hour = date.getHours();
+						$scope.min = $scope.slicer(date.getMinutes());
+						$scope.hour = $scope.slicer(date.getHours());
 					}
 				});
 			},
@@ -307,8 +313,8 @@
 			                    '<input ng-blur="reform()" type="text" ng-model="year" placeholder="{{placeholders.year}}" class="input__field" style="width:100px;" /><span class="input__divider input__divider--centered input__divider--icon"><i class="material-icons">access_time</i></span>' +
 			                    '<input ng-blur="reform()" type="text" ng-model="hour" placeholder="{{placeholders.hour}}" class="input__field" /><span class="input__divider input__divider--centered">:</span>' +
 			                    '<input ng-blur="reform()" type="text" ng-model="min" placeholder="{{placeholders.minute}}" class="input__field" />' +
-			                    '<button class="input__button btn btn--small grey darken-3" type="button" ng-click="now()">' +
-                                    '<i class="material-icons">today</i>' +
+			                    '<button class="input__button btn btn--small grey darken-1" type="button" ng-click="now()">' +
+                                    'Aktuelles Datum setzen' +
                                 '</button>' +
 		                    '</div>' +
 		               '</div>';
@@ -328,16 +334,22 @@
 				"i18n": "@i18n"
 			},
 			controller: function($scope) {
-                var date = new Date();
+                
+				var date = new Date();
+                
+                $scope.slicer = function(value) {
+					return ('0' + value).slice(-2);
+				};
+                
                 $scope.placeholders = {
-                    "day": date.getDate(),
-                    "month": date.getMonth() + 1,
+                    "day": $scope.slicer(date.getDate()),
+                    "month": $scope.slicer(date.getMonth() + 1),
                     "year": date.getFullYear()
                 };
 				
 				$scope.reform = function() {
 					if ($scope.year != null && $scope.month != null && $scope.day != null) {
-						var date = new Date($scope.year, ($scope.month-1), $scope.day);
+						var date = new Date(parseInt($scope.year, 10), parseInt(($scope.month-1), 10), parseInt($scope.day, 10));
 						var mil = date.getTime();
 						$scope.model = (mil/1000);
 					}
@@ -345,8 +357,8 @@
 				
 				$scope.today = function() {
 					var date = new Date();
-					$scope.day = date.getDate(),
-					$scope.month = date.getMonth() + 1;
+					$scope.day = $scope.slicer(date.getDate()),
+					$scope.month = $scope.slicer(date.getMonth() + 1);
 					$scope.year = date.getFullYear();
 					$scope.reform();
 				};
@@ -354,8 +366,8 @@
 				$scope.$watch(function() { return $scope.model }, function(n, o) {
 					if (n !== undefined && n != null) {
 						var date = new Date(n*1000);
-						$scope.day = date.getDate(),
-						$scope.month = date.getMonth() + 1;
+						$scope.day = $scope.slicer(date.getDate()),
+						$scope.month = $scope.slicer(date.getMonth() + 1);
 						$scope.year = date.getFullYear();
 					}
 				});
@@ -367,8 +379,8 @@
                                 '<input ng-blur="reform()" type="text" ng-model="day" placeholder="{{placeholders.day}}" class="input__field" /><span class="input__divider">.</span>' +
                                 '<input ng-blur="reform()" type="text" ng-model="month" placeholder="{{placeholders.month}}" class="input__field" /><span class="input__divider">.</span>' +
                                 '<input ng-blur="reform()" type="text" ng-model="year" placeholder="{{placeholders.year}}" class="input__field" style="width:100px;" />' +
-                                '<button class="input__button btn btn--small grey darken-3" type="button" ng-click="today()">' +
-                                    '<i class="material-icons">today</i>' +
+                                '<button class="input__button btn btn--small grey darken-1" type="button" ng-click="today()">' +
+                                    'Aktuelles Datum setzen' +
                                 '</button>' +
                             '</div>'
 						'</div>';
