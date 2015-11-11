@@ -92,6 +92,10 @@ class CrawlPage extends \yii\base\Object
         $curl->get($url);
         $content = $curl->response;
 
+        if (empty($content)) {
+            return '';
+        }
+        
         $dom = new \DOMDocument('1.0', 'utf-8');
 
         libxml_use_internal_errors(true);
