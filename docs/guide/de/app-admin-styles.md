@@ -113,39 +113,46 @@ Buttons
 Luya kann alle [Material-Design Buttons von Google](http://materializecss.com/buttons.html) verwenden.  
 Bisher sind vier Variationen davon ausgehend definiert:
 
-#####Default Button 
+#####Default Buttons 
 ![Default button](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/btn.png "Default Button")  
 Eigenschaften:
 - Die Default-Hintergrundfarbe wurde mit einem Grünton überschrieben (siehe Farben) und der Schriftfarbe weiss.
 - Der Default-hover-Effekt wurde mit einem dunkleren Farbton überschrieben.
+
 ```
 <button class="btn">
     Button default
 </button>
 ```
-#####Kleine Button
+
+#####Kleine Buttons
 ![Small button](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/btn--small.png "Kleine Button")  
 Eigenschaften:
 - Halbiertes Padding (1 satt 2rem).
+
 ```
 <button class="btn btn--small">
     Button small
 </button>
 ```
-#####Button-Fett
+
+#####Fette-Buttons
 ![Bold button](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/btn--bold.png "Fett Button")  
 Eigenschaften:
 - Font-weight ist hier bold(500).
+
 ```
 <button class="btn btn--bold">
     Button bold
 </button>
 ```
-#####Runde Button
+
+#####Runde Buttons
 ![Round button with icon](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/btn-floating.png "Runde Button mit Icon")  
 Eigenschaften:  
 -Überschreibungen wie der Default-Button.  
 Achtung: Kann nicht mit der btn--small Klasse kombiniert werden!
+
 ```
 <button class="btn btn-floating">
     <i class="material-icons">done</i>
@@ -156,7 +163,7 @@ Tabellen
 --------
 Es können alle [Tabellen des Material-Designs von Google](http://materializecss.com/table.html) verwendet werden.
 
-````
+```
 <table class="striped responsive-table hoverable">
   <thead>
     <tr>
