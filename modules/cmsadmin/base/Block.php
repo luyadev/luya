@@ -92,21 +92,45 @@ abstract class Block extends \yii\base\Object implements BlockInterface
         return;
     }
 
+    /**
+     * Returns true if block is active in backend.
+     *
+     * @return bool
+     */
     public function isAdminContext()
     {
         return ($this->getEnvOption('context', false) === 'admin') ? true : false;
     }
 
+    /**
+     * Returns true if block is active in frontend.
+     *
+     * @return bool
+     */
     public function isFrontendContext()
     {
         return ($this->getEnvOption('context', false) === 'frontend') ? true : false;
     }
 
+    /**
+     * Sets a key => value pair in env options.
+     *
+     * @param string $key   The string to be set as key
+     * @param mixed  $value The value that will be stored associated with the given key
+     */
     public function setEnvOption($key, $value)
     {
         $this->_envOptions[$key] = $value;
     }
 
+    /**
+     * Get a env option by $key. If $key does not exist it will return given $default or false.
+     *
+     * @param $key
+     * @param mixed $default
+     *
+     * @return mixed
+     */
     public function getEnvOption($key, $default = false)
     {
         return (array_key_exists($key, $this->_envOptions)) ? $this->_envOptions[$key] : $default;
@@ -127,6 +151,11 @@ abstract class Block extends \yii\base\Object implements BlockInterface
         return $this->_envOptions;
     }
 
+    /**
+     * Sets placeholder values.
+     *
+     * @param array $placeholders The array to be set as placeholder values
+     */
     public function setPlaceholderValues(array $placeholders)
     {
         $this->_placeholderValues = $placeholders;
@@ -134,17 +163,22 @@ abstract class Block extends \yii\base\Object implements BlockInterface
 
     /**
      * User method to get the values inside the class.
-     * 
-     * @param unknown $key
-     * @param string  $default
      *
-     * @return Ambigous <string, multitype:>
+     * @param string $key     The name of the key you want to retrieve
+     * @param mixed  $default A default value that will be returned if the key isn't found
+     *
+     * @return mixed
      */
     public function getVarValue($key, $default = false)
     {
         return (array_key_exists($key, $this->_varValues)) ? $this->_varValues[$key] : $default;
     }
 
+    /**
+     * Sets var values.
+     *
+     * @param array $values The array to be set as var values
+     */
     public function setVarValues(array $values)
     {
         $this->_varValues = $values;
@@ -153,21 +187,31 @@ abstract class Block extends \yii\base\Object implements BlockInterface
     /**
      * User method to get the cfgs inside the block.
      * 
-     * @param unknown $key
-     * @param string  $default
+     * @param string $key
+     * @param mixed  $default
      *
-     * @return Ambigous <string, multitype:>
+     * @return mixed
      */
     public function getCfgValue($key, $default = false)
     {
         return (array_key_exists($key, $this->_cfgValues)) ? $this->_cfgValues[$key] : $default;
     }
 
+    /**
+     * Sets the config values.
+     *
+     * @param array $values The array to be set as config values
+     */
     public function setCfgValues(array $values)
     {
         $this->_cfgValues = $values;
     }
 
+    /**
+     * Returns the name of the twig file to be rendered.
+     *
+     * @return string The name of the twig file (example.twig)
+     */
     public function getRenderFileName()
     {
         $classname = get_class($this);
@@ -179,6 +223,13 @@ abstract class Block extends \yii\base\Object implements BlockInterface
         return $classname.'.twig';
     }
 
+    /**
+     * Returns the content of the frontend twig file.
+     *
+     * @return string Twig frontend file content
+     *
+     * @throws \Exception If the twig file doesn't exist
+     */
     public function getTwigFrontendContent()
     {
         $twigFile = $this->getTwigRenderFile('@app');
@@ -191,11 +242,17 @@ abstract class Block extends \yii\base\Object implements BlockInterface
 
     // access from outside
 
+    /**
+     * @return array
+     */
     public function extraVars()
     {
         return [];
     }
 
+    /**
+     * @return array
+     */
     public function getVars()
     {
         $config = $this->config();
@@ -210,11 +267,17 @@ abstract class Block extends \yii\base\Object implements BlockInterface
         return $data;
     }
 
+    /**
+     * @return array
+     */
     public function getPlaceholders()
     {
         return (array_key_exists('placeholders', $this->config())) ? $this->config()['placeholders'] : [];
     }
 
+    /**
+     * @return array
+     */
     public function getCfgs()
     {
         $config = $this->config();
@@ -229,11 +292,19 @@ abstract class Block extends \yii\base\Object implements BlockInterface
         return $data;
     }
 
+    /**
+     * @return string
+     */
     public function getFullName()
     {
         return ($this->icon() === null) ? $this->name() : '<i class="material-icons">'.$this->icon().'</i> <span>'.$this->name().'</span>';
     }
 
+    /**
+     * @param \Twig_Environment $twig
+     *
+     * @return string
+     */
     public function renderFrontend(\Twig_Environment $twig)
     {
         return $twig->render($this->getTwigFrontendContent(), [
@@ -246,11 +317,21 @@ abstract class Block extends \yii\base\Object implements BlockInterface
 
     /* protected and privates */
 
+    /**
+     * @param $app
+     *
+     * @return bool|string
+     */
     protected function getTwigRenderFile($app)
     {
         return Yii::getAlias($app.'/views/blocks/'.$this->getRenderFileName());
     }
 
+    /**
+     * @return string
+     *
+     * @throws \Exception
+     */
     protected function render()
     {
         $moduleName = $this->module;
@@ -261,6 +342,13 @@ abstract class Block extends \yii\base\Object implements BlockInterface
         return $this->baseRender($moduleName);
     }
 
+    /**
+     * @param $module
+     *
+     * @return string
+     *
+     * @throws \Exception
+     */
     private function baseRender($module)
     {
         $twigFile = $this->getTwigRenderFile($module);
