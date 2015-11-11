@@ -1,7 +1,7 @@
 LUYA CHANGELOG
 ==============
 
-1.0.0-beta1 (in progress)
+1.0.0-beta1 (11. Nov 2015)
 -------------------------
 - **[BC BREAK]** removed `luya\helpers\Url::toModule()` replace with `cms\helpers\Url::toMenuItem()`.
 - **[BC BREAK]** removed `Url::to()` an replaced with `Url::toManager()`, extended url helper from yii helper to provide native functionality.
