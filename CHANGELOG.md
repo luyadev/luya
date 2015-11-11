@@ -1,6 +1,9 @@
 LUYA CHANGELOG
 ==============
 
+1.0.0-beta2 (in progress)
+-------------------------
+
 1.0.0-beta1 (11. Nov 2015)
 -------------------------
 - **[BC BREAK]** removed `luya\helpers\Url::toModule()` replace with `cms\helpers\Url::toMenuItem()`.
