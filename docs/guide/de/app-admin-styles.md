@@ -110,13 +110,95 @@ Es können alle Icons des Material-Designs von Google verwendet werden.
 
 Buttons
 -------
-In Arbeit.
+Luya kann alle [Material-Design Buttons von Google](http://materializecss.com/buttons.html) verwenden.  
+Bisher sind vier Variationen davon ausgehend definiert:
+
+#####Default Button 
+![Default button](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/btn.png "Default Button")  
+Eigenschaften:
+- Die Default-Hintergrundfarbe wurde mit einem Grünton überschrieben (siehe Farben) und der Schriftfarbe weiss.
+- Der Default-hover-Effekt wurde mit einem dunkleren Farbton überschrieben.
+```
+<button class="btn">
+    Button default
+</button>
+```
+#####Kleine Button
+![Small button](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/btn--small.png "Kleine Button")  
+Eigenschaften:
+- Halbiertes Padding (1 satt 2rem).
+```
+<button class="btn btn--small">
+    Button small
+</button>
+```
+#####Button-Fett
+![Bold button](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/btn--bold.png "Fett Button")  
+Eigenschaften:
+- Font-weight ist hier bold(500).
+```
+<button class="btn btn--bold">
+    Button bold
+</button>
+```
+#####Runde Button
+![Round button with icon](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/btn-floating.png "Runde Button mit Icon")  
+Eigenschaften:  
+-Überschreibungen wie der Default-Button.  
+Achtung: Kann nicht mit der btn--small Klasse kombiniert werden!
+```
+<button class="btn btn-floating">
+    <i class="material-icons">done</i>
+</button>
+```
 
 Tabellen
 --------
-In Arbeit.
+Es können alle [Tabellen des Material-Designs von Google](http://materializecss.com/table.html) verwendet werden.
+
+````
+<table class="striped responsive-table hoverable">
+  <thead>
+    <tr>
+      <th>Table head 1 </th>
+      <th>Table head 2 </th>
+      <th>Table head 3 </th>
+      <th>Table head 4 </th>
+      <th>Table head 5 </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Table cell 1</td>
+      <td>Table cell 2</td>
+      <td>Table cell 3</td>
+      <td>Table cell 4</td>
+      <td>Table cell 5</td>
+    </tr>
+  </tbody>
+</table>
+```
 
 Farben
 ------
-In Arbeit.
+Luya verwendet die [Farben vom Material-Design von Google](https://www.google.com/design/spec/style/color.html#).  
+Farbschema:  
+
+#####Bestätigungsfarbe Grün
+Colorcode: #4CAF50  
+Bzw. Farbe für die Meldung von gültigen Werten sowie für Schaltflächen mit empfohlenen Aktionen. 
+
+#####Warnungsfarbe Rot:  
+Colorcode: #EF5350  
+Farbe für die Kennzeichnung eines Abbruchs oder zum Beispiel eines Fehlers
+
+#####Luya Grundfarbe Blau:  
+Colorcode: #2196F3  
+Generelle Gestalltungsfarbe der Admin GUI  
+
+- Hellblau-Variation:   
+  Colorcode: #b3e5fc  
+  Bearbeitetbare Elemente die sich noch im Initalzustand befinden
+
+
 
