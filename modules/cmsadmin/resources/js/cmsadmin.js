@@ -58,7 +58,6 @@
             },
             templateUrl : 'updateformpage.html',
             controller : function($scope, $resource) {
-				$scope.path = "test";
                 CmsLayoutService.data.$promise.then(function(response) {
                     $scope.layouts = response;
                 });
