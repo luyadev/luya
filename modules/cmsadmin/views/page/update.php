@@ -103,13 +103,13 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col s12" ng-show="data.type==1">
+    <div class="row" ng-switch on="data.type">
+        <div class="col s12" ng-switch-when="1">
             <p>Auf welche Interne-Seite wollen Sie weiterleiten?</p>
             <menu-dropdown class="menu-dropdown" nav-id="data.value" />
         </div>
 
-        <div class="col s12" ng-show="data.type==2">
+        <div class="col s12" ng-switch-when="2">
 
             <div class="input input--text col s12">
                 <label class="input__label">Externer Link</label>
@@ -120,7 +120,7 @@
             </div>
         </div>
 
-        <div class="col s12" ng-show="data.type==3">
+        <div class="col s12" ng-switch-when="3">
             <p>todo</p> <!-- todo -->
         </div>
 
@@ -373,7 +373,14 @@
                                     <p>Diese Seite ist als <b>Module</b> hinterlegt.</p>
                                 </div>
                                 <div class="col s12" ng-switch-when="3">
-                                    <p>Diese Seite ist ein <b>Redirect</b>.</p>
+                                    <div ng-switch on="typeData.type">
+                                        <div ng-switch-when="1">
+                                            <p>Diese Seite ist ein <b>interner Redirect</b> auf <show-internal-redirection nav-id="typeData.value" />.</p>
+                                        </div>
+                                        <div ng-switch-when="2">
+                                            <p>Diese Seite ist ein <b>externer Redirect</b> auf <a href="{{typeData.value}}">{{typeData.value}}</a>.</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

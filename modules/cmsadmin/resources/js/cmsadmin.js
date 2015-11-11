@@ -30,6 +30,28 @@
 		}
 	});
 
+	zaa.directive("showInternalRedirection", function(NewMenuService) {
+		return {
+			restrict : 'E',
+			scope : {
+				navId : '='
+			},
+			link : function(scope) {
+				NewMenuService.get().then(function(response) {
+					scope.menu = response;
+				});
+			},
+			controller : function($scope) {
+				$scope.changeModel = function(data) {
+					$scope.navId = data.id;
+				}
+			},
+			template : function() {
+				return '<div ng-repeat="container in menu">"{{(container.__items | filter : {id: navId})[0].title }}" (in {{container.name}})</div>';
+			}
+		}
+	});
+
     zaa.directive("updateFormPage", function(CmsLayoutService) {
         return {
             restrict : 'EA',
