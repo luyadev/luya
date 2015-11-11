@@ -121,12 +121,19 @@ class CrawlContainer extends \yii\base\Object
 
     public function matchBaseUrl($url)
     {
+        if (strpos($url, $this->baseUrl) === false) {
+            return false;
+        }
+        
+        return true;
+        /*
         $host = parse_url($url, PHP_URL_HOST);
         if ($host == $this->baseHost) {
             return true;
         }
 
         return false;
+        */
     }
 
     public function urlStatus($url)

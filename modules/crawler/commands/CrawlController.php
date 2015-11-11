@@ -17,7 +17,7 @@ class CrawlController extends \luya\console\Command
     public function actionIndex()
     {
         $client = new Client();
-        $pageCrawler = new CrawlPage(['client' => $client]);
+        $pageCrawler = new CrawlPage(['client' => $client, 'baseUrl' => $this->module->baseUrl]);
         $container = new CrawlContainer(['baseUrl' => $this->module->baseUrl, 'pageCrawler' => $pageCrawler]);
 
         $this->output(print_r($container->getReport(), true));

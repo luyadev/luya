@@ -12,6 +12,10 @@ class CrawlPage extends \yii\base\Object
 
     public $client = null;
 
+    public $baseUrl = null;
+    
+    public $baseHost = null;
+    
     private $_crawler = null;
 
     public function __clone()
@@ -21,9 +25,13 @@ class CrawlPage extends \yii\base\Object
 
     public function init()
     {
-        if ($this->client === null) {
-            throw new InvalidConfigException('client properties can not be null.');
+        if ($this->client === null && $this->baseUrl === null) {
+            throw new InvalidConfigException('client or baseHost properties can not be null.');
         }
+        
+        $info = parse_url($this->baseUrl);
+        
+        $this->baseHost = $info['scheme'] . '://' . $info['host'];
     }
 
     public function flush()
@@ -46,21 +54,30 @@ class CrawlPage extends \yii\base\Object
         $links = $this->getCrawler()->filterXPath('//a')->each(function ($node, $i) {
             return $node->extract(array('_text', 'href'))[0];
         });
-
         foreach ($links as $key => $item) {
+            
             $url = parse_url($item[1]);
 
-            if (!isset($url['host'])) {
-                $host = $this->getBaseUrl();
+            if (!isset($url['host']) || !isset($url['scheme'])) {
+                $base = $this->baseHost;
             } else {
-                $host = $url['host'];
+                $base = $url['scheme'] . '//' . $url['host'];
             }
+            
+            $path = null;
+            
+            if (isset($url['path'])) {
+                $path = $url['path'];
+            }
+            
+            $url = rtrim($base, "/") . "/" . ltrim($path, "/");
+            
 
-            $links[$key][1] = http_build_url(Url::trailing($host).ltrim(isset($url['path']) ? $url['path'] : '', '/'), [
+            $links[$key][1] = http_build_url($url, [
                 'query' => (isset($host['query'])) ? $host['query'] : [],
             ], HTTP_URL_JOIN_QUERY | HTTP_URL_STRIP_FRAGMENT);
+            
         }
-
         return $links;
     }
 
@@ -74,6 +91,7 @@ class CrawlPage extends \yii\base\Object
         return $this->getCrawler()->filterXPath('//title')->text();
     }
 
+    /*
     public function getBaseUrl()
     {
         $base = $this->getCrawler()->filterXPath('//base');
@@ -85,6 +103,7 @@ class CrawlPage extends \yii\base\Object
 
         return false;
     }
+    */
 
     private function tempGetContent($url)
     {
