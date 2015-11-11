@@ -103,6 +103,25 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 		
 	});
 	
+	
+	zaa.filter('srcbox', function() {
+		return function(input, search) {
+			if (!input) return input;
+			if (!search) return input;
+			var expected = ('' + search).toLowerCase();
+			var result = {};
+			angular.forEach(input, function(value, key) {
+				angular.forEach(value, function(kv, kk) {
+					var actual = ('' + kv).toLowerCase();
+					if (actual.indexOf(expected) !== -1) {
+						result[key] = value;
+					}
+				});
+		    });
+		    return result;
+	    }
+	});
+	
 	zaa.factory("AdminClassService", function() {
 		
 		var service = [];

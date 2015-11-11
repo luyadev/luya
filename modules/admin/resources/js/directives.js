@@ -206,10 +206,18 @@
 				"name": "@fieldname",
 				"label": "@label"
 			},
-			controller: function($scope) {
+			controller: function($scope, $filter) {
 				
 				if ($scope.model == undefined) {
 					$scope.model = [];
+				}
+				
+				$scope.searchString = '';
+				
+				$scope.optionitems = $scope.options.items;
+				
+				$scope.filtering = function() {
+					$scope.optionitems = $filter('filter')($scope.options.items, $scope.searchString);
 				}
 				
 				$scope.toggleSelection = function (value) {
@@ -238,7 +246,8 @@
 				return '<div class="input input--multiple-checkboxes">' +
                     		'<label class="input__label">{{label}}</label>' +
                     		'<div class="input__field-wrapper">' +
-                        		'<div ng-repeat="(k, item) in options.items track by k">' +
+                    			'<input type="text" ng-change="filtering()" ng-model="searchString" placeholder="Suchen" /> {{optionitems.length}} von {{options.items.length}}'+
+                        		'<div ng-repeat="(k, item) in optionitems track by k">' +
                             		'<input type="checkbox" ng-checked="isChecked(item)" id="{{random}}_{{k}}" ng-click="toggleSelection(item)" />' +
                             		'<label for="{{random}}_{{k}}">{{item.label}}</label>' +
                         		'</div>' +
