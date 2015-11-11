@@ -16,8 +16,10 @@ composer global require "fxp/composer-asset-plugin:~1.1.0"
 Als nächstes erstellen wir ein `Kickstarter` Projekte mit Hilfe des `composer create-project` Befehls. Dafür musst du lediglich dein *Terminal* öffnen und den folgenden Befehl eingeben:
 
 ```sh
-composer create-project zephir/luya-kickstarter:dev-master 
+composer create-project zephir/luya-kickstarter:1.0.0-beta1
 ```
+
+> Die installation und all ihrere abhängigkeiten welche noch nicht im cache sind kann durchaus mehrere Minuten dauern.
 
 > Die Frage `Do you want to remove the existing VCS (.git, .svn..) history? [Y,n]?` Kannst du mit Ja `Y` beantworten da du das kickstarter repo nicht für dein Luya Projekt bruachst.
 
