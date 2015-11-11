@@ -30,24 +30,22 @@
 		}
 	});
 
-	zaa.directive("showInternalRedirection", function(NewMenuService) {
+	zaa.directive("showInternalRedirection", function() {
 		return {
 			restrict : 'E',
 			scope : {
 				navId : '='
 			},
-			link : function(scope) {
-				NewMenuService.get().then(function(response) {
-					scope.menu = response;
+			controller : function($scope, $http) {
+				$http.get('admin/api-cms-navitem/get-nav-item-path', { params : { navId : $scope.navId }}).success(function(response) {
+					$scope.path = response;
+				});
+				$http.get('admin/api-cms-navitem/get-nav-container-name', { params : { navId : $scope.navId }}).success(function(response) {
+					$scope.container = response;
 				});
 			},
-			controller : function($scope) {
-				$scope.changeModel = function(data) {
-					$scope.navId = data.id;
-				}
-			},
 			template : function() {
-				return '<div ng-repeat="container in menu">"{{(container.__items | filter : {id: navId})[0].title }}" (in {{container.name}})</div>';
+				return '"{{path}}" in {{container}}';
 			}
 		}
 	});

@@ -2,6 +2,7 @@
 
 namespace cmsadmin\apis;
 
+use cmsadmin\models\NavContainer;
 use cmsadmin\models\NavItemModule;
 use cmsadmin\models\NavItemPage;
 use cmsadmin\models\NavItemRedirect;
@@ -345,5 +346,49 @@ class NavItemController extends \admin\base\RestController
             'cfgvalues' => $blockItem['json_config_cfg_values'], // add: t1_json_config_cfg_values
             '__placeholders' => $placeholders,
         ];
+    }
+
+    /**
+     * Get full constructed of a nav item.
+     *
+     * @param $navId
+     * @return string Path
+     */
+    public function actionGetNavItemPath($navId)
+    {
+        $data = "";
+        $node = NavItem::find()->where(['nav_id' => $navId])->one();
+        if ($node) {
+            $data .= $node->title;
+            $parentNavId = $navId;
+            while ($parentNavId != 0) {
+                $parentNavId = Nav::findOne($parentNavId)->parent_nav_id;
+                if ($parentNavId != 0) {
+                    $node = NavItem::find()->where(['nav_id' => $parentNavId])->one();
+                    if ($parentNavId) {
+                        $data = $node->title . '/' . $data;
+                    }
+                }
+            }
+        }
+        return $data;
+    }
+
+    /**
+     * Get Container name for a nav item.
+     *
+     * @param $navId
+     * @return string Container name
+     */
+    public function actionGetNavContainerName($navId)
+    {
+        $nav = Nav::findOne($navId);
+        if ($nav) {
+            $navCoontainer = NavContainer::findOne($nav->nav_container_id);
+            if ($navCoontainer) {
+                return $navCoontainer->name;
+            }
+        }
+        return "";
     }
 }
