@@ -1,6 +1,6 @@
 <?php
 
-namespace cms\components;
+namespace cms\menu;
 
 use Exception;
 use Yii;
@@ -71,7 +71,7 @@ use cms\menu\Query as MenuQuery;
  *
  * @author nadar
  */
-class Menu extends \yii\base\Component
+class Container extends \yii\base\Component
 {
     public $request = null;
 

@@ -43,7 +43,7 @@ class Query extends \yii\base\Object
      */
     public $withHidden = false;
 
-    public function setMenu(\cms\components\Menu $menu)
+    public function setMenu(\cms\menu\Container $menu)
     {
         $this->_menu = $menu;
     }
