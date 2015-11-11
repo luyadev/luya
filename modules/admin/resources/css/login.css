@@ -31,3 +31,7 @@
 .login__success-icon {
     font-size: 14rem;
 }
+
+form .row {
+    margin-bottom: 20px;
+}

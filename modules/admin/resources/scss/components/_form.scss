@@ -82,11 +82,7 @@ textarea.materialize-textarea {
 	line-height: 25px;
 	font-size: 1rem;
 	@include transition(.28s ease);
-
-	-webkit-user-select: none; /* webkit (safari, chrome) browsers */
-	-moz-user-select: none; /* mozilla browsers */
-	-khtml-user-select: none; /* webkit (konqueror) browsers */
-	-ms-user-select: none; /* IE10+ */
+	user-select: none;
 }
 
 [type="radio"] + label:before,
@@ -204,10 +200,7 @@ form p:last-child {
 		line-height: 25px;
 		font-size: 1rem;
 
-		-webkit-user-select: none; /* webkit (safari, chrome) browsers */
-		-moz-user-select: none; /* mozilla browsers */
-		-khtml-user-select: none; /* webkit (konqueror) browsers */
-		-ms-user-select: none; /* IE10+ */
+		user-select: none; /* IE10+ */
 	}
 
 	/* checkbox aspect */
