@@ -148,7 +148,7 @@ class Menu extends \yii\base\Component
 
             foreach ($data as $item) {
                 if (!array_key_exists($item['nav_id'], $index)) {
-                    if ($item['parent_nav_id'] > 0) {
+                    if ($item['parent_nav_id'] > 0 && array_key_exists($item['parent_nav_id'], $index)) {
                         $alias = $index[$item['parent_nav_id']].'/'.$item['alias'];
                     } else {
                         $alias = $item['alias'];
@@ -159,7 +159,7 @@ class Menu extends \yii\base\Component
 
             array_walk($data, function (&$item, $key) use ($index, $redirectMap, $lang) {
                 // concate alias link from parent nav ids
-                if ($item['parent_nav_id'] > 0) {
+                if ($item['parent_nav_id'] > 0 && array_key_exists($item['parent_nav_id'], $index)) {
                     $alias = $index[$item['parent_nav_id']].'/'.$item['alias'];
                 } else {
                     $alias = $item['alias'];
