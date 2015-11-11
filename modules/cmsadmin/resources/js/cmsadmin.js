@@ -47,7 +47,7 @@
 				}
 			},
 			template : function() {
-				return '<div ng-repeat="container in menu">"{{(container.__items | filter : {id: navId})[0].title }}" (in {{container.name}})</div>';
+				return '<div ng-repeat="container in menu"><div ng-repeat="data in container.__items" ng-show="data.id==navId">"{{data.title}}" (in {{container.name}})</div></div>';
 			}
 		}
 	});
