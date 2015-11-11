@@ -52,7 +52,11 @@ Jede Konfigurationsdatei hat eine Funktion:
 
 Datenbank
 ----------
+
 Du kannst nun in der *local.php* (welche du aus dem dist file kopiert hast) deine Datenbank Verbindung festlegen. Luya verfügt über eine *bin* Datei welche im Verzeichniss `vendor/bin/` liegt. Auf diese Bind Datei kannst du alle [Konsolen Befehl](luya-console.md) ausführen. So auch der Migration command.
+
+
+> Wichtig die Datenbank muss vor dem migrate erstellt sein und Mac-User sollten noch den [UNIX-Socket sowie den Datenbanknamen](install-mac.md) setzen.  
 
 Nun führen wir den Migration befehl aus:
 
