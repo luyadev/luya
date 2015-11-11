@@ -27,15 +27,23 @@ class Storage extends \yii\base\Component
 
     public $dir = '@webroot/storage';
 
-    public $httpDir = 'storage';
+    private $_httpDir = null;
 
     public function init()
     {
         parent::init();
         $this->dir = Url::trailing(Yii::getAlias($this->dir), DIRECTORY_SEPARATOR);
-        $this->httpDir = Url::trailing($this->httpDir, DIRECTORY_SEPARATOR);
     }
 
+    public function getHttpDir()
+    {
+        if ($this->_httpDir === null) {
+            $this->_httpDir = Yii::$app->request->baseUrl . '/storage/';
+        }
+        
+        return $this->_httpDir;
+    }
+    
     public function getFile()
     {
         return ($this->_file === null) ? $this->_file = new File() : $this->_file;

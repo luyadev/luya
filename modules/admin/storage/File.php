@@ -80,7 +80,7 @@ class File
         $fileHash = $this->getFileHash($sourceFile);
         $mimeType = $this->getMimeType($sourceFile);
         $fileName = implode([$baseName.'_'.$fileHashName, $fileInfo->extension], '.');
-        $savePath = \yii::$app->storage->dir.$fileName;
+        $savePath = Yii::$app->storage->dir.$fileName;
         if (is_uploaded_file($sourceFile)) {
             if (@move_uploaded_file($sourceFile, $savePath)) {
                 $copyFile = true;
