@@ -1260,9 +1260,7 @@
 			        	if (transport) {
 			        		$scope.showFolderForm = false;
 			        		$scope.newFolderName = '';
-			        		$http.get('admin/api-admin-storage/get-folders').success(function(response) {
-			        			$scope.folders = response;
-			        		});
+			        		$scope.reloader();
 			        	}
 			        });
 				}
@@ -1326,11 +1324,15 @@
 					});
 				}
 				
-				FilemanagerFolderListService.get().then(function(r) {
-					$scope.folders = r;
-	    			$scope.getFiles(FilemanagerFolderService.get());
-	    			$scope.currentFolderId = FilemanagerFolderService.get();
-				});
+				$scope.reloader = function() {
+					FilemanagerFolderListService.get(true).then(function(r) {
+						$scope.folders = r;
+		    			$scope.getFiles(FilemanagerFolderService.get());
+		    			$scope.currentFolderId = FilemanagerFolderService.get();
+					});
+				};
+	
+				$scope.reloader();
 			},
 			templateUrl : 'storageFileManager'
 		}
