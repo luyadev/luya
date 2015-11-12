@@ -45,8 +45,8 @@ abstract class Module extends \yii\base\Module
     /**
      * @var bool Enable or Disable where the PATH to the layout file should be inside the @app namespace or inside your module.
      * 
-     * + true = looking for layout file in `@app/views/<ID>/layouts`.
-     * + false = looking for layout file in @module/views/layouts/`.
+     * - true = looking for layout file in `@app/views/<ID>/layouts`.
+     * - false = looking for layout file in @module/views/layouts/`.
      * 
      * This variable is only available if your not in a context call. A context call would be if the cms renders the module.
      */
@@ -55,8 +55,8 @@ abstract class Module extends \yii\base\Module
     /**
      * @var bool This variable can enable the view path defintion for all controllers inside this module.
      * 
-     * + true = the view path inside this module will be used
-     * + false = the view path of the projects app view will be used.
+     * - true = the view path inside this module will be used
+     * - false = the view path of the projects app view will be used.
      */
     public $controllerUseModuleViewPath = null;
 
@@ -165,7 +165,7 @@ abstract class Module extends \yii\base\Module
     {
         return false;
     }
-
+    
     /**
      * returns "luya\base" for example.
      *
