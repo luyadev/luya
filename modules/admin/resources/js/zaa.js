@@ -195,10 +195,14 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 		
 		service.toggleSelection = function(lang) {
 			var exists = service.selection.indexOf(lang.short_code);
+			
 			if (exists == -1) {
 				service.selection.push(lang.short_code);
 			} else {
-				service.selection.splice(exists, 1);
+				/* #531: unable to deselect language, as at least 1 langauge must be activated. */
+				if (service.selection.length > 1) {
+					service.selection.splice(exists, 1);
+				}
 			}
 		};
 		
