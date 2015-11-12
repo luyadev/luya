@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-beta2 (in progress)
 -------------------------
+- `#507` added new twig functions to luya guide.
 - `#538` fixed issue where new directories are not displayed in overlay mode.
 - `#537` added ability to preview and download the file/image inside the filemanager.
 - `#531` unable to deselect language, as at least 1 langauge must be active.

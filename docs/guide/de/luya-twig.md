@@ -15,47 +15,47 @@ werden die Twig Templates mit der endung `*.twig` verwendeten views gerendet. Um
 
 ### Funktionen
 
-| Funktion        | Beispiel        |  Beschreibung      
-| --------        | ------------    | ------------
-| links           | `links('container', 'lang', 'parent_nav_id')` | Eine Wrapper funktione für `Yii::$app->links->findByArgument mit `['cat' => '%cat', 'lang' => '%lang', 'parent_nav_id' => '%parent_nav_id']`.
-| linksFindParent | `linksFindParent(1)` | Gib den parent eitnrag ein für das aktuelle level `1`.
-| linkActivePart    | `linkActivePart(1)` | Gibt die den aktuellen Link für das Menu Level aus `1`.
-| asset             | `asset('\\my\\project\\Asset')` | Gibt das Klassen Objekt für eine Asset Klasse zurück. `false` falls nicht gefunden.
-| image             | `image(123)` | Gibt das aktuelle Bild objekt für die angebgeben ID zurück. `false` falls nicht gefunden.
-| filterApply       | `filterApply(123, 'my-filter-to-apply')` | Wendet einen Filter auf ein Bild an (falls dieser noch nicht angwendet wurde) und gibt den aboslute Bildpfad zurück des neue generierteen Bildes.
-|element |`element('button','arg1','arg2')` |Ruf das Html Element `button` auf mit den Paramteren `arg1` und `arg2`.
-|t		|`t('app', 'bar')`|Twig wrapper für `Yii::t('app', 'bar')` in [Übersetzungen](app-translation.md).
+|Funktion           |Beispiel        |Beschreibung      
+|--------           |------------    |------------
+|menuFindOne        |`menuFindOne(1)` |Findet einen Menu eintrag für die angegeben Nav-Item-id (kurz id).
+|menuCurrent        |`menuCurrent()`    |Gibt das aktuelle menue element zurück. Dies beinhaltet ein [Item-Object](https://luya.io/api/cms-menu-item.html).
+|menuCurrentLevel   |`menuCurrentLevel(1)`  |Gibt das aktuelle menu item zurück für das angegeben level, die Level Angaben starten bei 1.
+|menuFindAll        |`menuFindAll('container-alias', 0)` |Gibt alle menu element für den definieren Menu Container und die angegeben parent_nav_id (hier 0) an.
+|asset              |`asset('\\my\\project\\Asset')` |Gibt das Klassen Objekt für eine Asset Klasse zurück. `false` falls nicht gefunden.
+|image              |`image(123)` |Gibt das aktuelle Bild objekt für die angebgeben ID zurück. `false` falls nicht gefunden.
+|filterApply        |`filterApply(123, 'my-filter-to-apply')` |Wendet einen Filter auf ein Bild an (falls dieser noch nicht angwendet wurde) und gibt den aboslute Bildpfad zurück des neue generierteen Bildes.
+|element            |`element('button','arg1','arg2')` |Ruf das Html Element `button` auf mit den Paramteren `arg1` und `arg2`.
+|t		            |`t('app', 'bar')`  |Twig wrapper für `Yii::t('app', 'bar')` in [Übersetzungen](app-translation.md).
 
 ### Variabeln
 
-| Variabel          | Ausgabe
-| ---               | ---
-| activeUrl         | Gibt die aktuelle aktive url zurück (siehe [Navigations & Links](app-menu.md))
+|Variabel          |Ausgabe
+|---               |---
+|publicHtml        |Gibt den aktuellen Pfad für dateien und Bilder zurück [getPublicHtml()](https://luya.io/api/luya-web-view.html#getPublicHtml()-detail)
 
 
 
 Links Komponente für Navigationen
 ----------------------------------
-Die `Yii::$app->links->findByArguments()` methode kann durch die twig funktion `links` verwendent werden wobei 3 Paremeter `cat`, `lang` und `parent_nav_id` entsprechen, in dieser Reienfolge.
+Die `Yii::$app->menu->findAll(['container' => $container, 'parent_nav_id' => $parentNavId])->all();` methode kann durch die twig funktion `menuFindAll` verwendent werden wobei Paremeter 1 für `$container` und Paremeter 2 für `$parentNavId` stehen.
 
 ```twig
-{% for item in links('cat', 'lang', 'parent_nav_id') %}
+{% for item in menuFindAll($container, $parentNavId) %}
     {{ dump(item) }}
 {% endfor %}
 ```
 
-Hier ein beispiel mit *Navigations Container* = `default`, *Sprache* = `de` und *Parent Navigations Id* = `0`:
+Hier ein Beispiel mit *Navigations Container* = `default` und *Parent Navigation Id* = `0`:
 
 ```
-{{ dump(links('default', 'de', 0)) }}
+{{ dump(links('default', 0)) }}
 ```
 
 Erster *Sub-Navigation* eintrag für die aktuelle aktive Seite:
 
 ```
-{{ dump(links('default', 'de', activeUrl.id)) }}
+{{ dump(links('default', menuCurrent.navId )) }}
 ```
-
 
 Assets
 -------
