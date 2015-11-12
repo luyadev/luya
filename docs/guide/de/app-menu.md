@@ -100,6 +100,6 @@ Um innerhalb des CMS oder eines Modules einen Link zu einer internen Seite zu ma
 
 > Beispiele mit der Zahl 3: Die Zahl 3 entspricht der Seiten-Id welche erscheint wenn man mit dem Maus-Cursor über dem Seitenbaum einer besteimmten Seite fährt.
 
-![Seiten ID](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/cms-nav-page-id.jpg "Seiten ID")
+![Seiten ID](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/cms-nav-page-id.jpg "Seiten ID")
 
 > Ein fehlendes http:// wird bei statischen links automatisch angefügt.
