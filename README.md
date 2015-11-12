@@ -10,7 +10,7 @@ LUYA
 
 What is **LUYA**? We have build a *fast*, *modular* and *beautiful* looking system to create content based on blocks or database tables. *LUYA* is based on the [Yii2 Framework](https://github.com/yiisoft/yii2), [Angular](https://angularjs.org) and [Materialize CSS](materializecss.com).
 
-![Luya Admin](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/luya-admin.png)
+![Luya Admin](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/luya-beta1.png)
 
 ### Installation
 
