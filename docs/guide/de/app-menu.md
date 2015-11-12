@@ -89,39 +89,17 @@ Links zu Seiten im CMS
 
 Um innerhalb des CMS oder eines Modules einen Link zu einer internen Seite zu machen verwenden Sie die folgenden Markdown-ähnlichen einweisungen:
 
-`link [3] (Alternativer Link Name)`
+|Link Syntax        |Html Ausgabe
+|----               |----
+|`link [3] (Alternativer Link Name)`  |`<a href="url/to/3">Alternativer Link Name</a>`
+|`link [3]`                           |`<a href="url/to/3">Name of 3</a>`
+|`link [www.luya.io]`                 |`<a href="http://www.luya.io">luya.io</a>`
+|`link [luya.io] (Hier gehts zur Doku)` |`<a href="http://luya.io">Hier gehts zur Doku</a>`
 
-`link[3](Alternativer Link Name)`
+**ACHTUNG:** Die oben genannten *Link Syntax* müssen **ohne** space zwischen den einzelen gruppierungen sein damit die link syntaxe funktionieren.
 
-```
-link [3] (Alternativer Link Name)
+> Beispiele mit der Zahl 3: Die Zahl 3 entspricht der Seiten-Id welche erscheint wenn man mit dem Maus-Cursor über dem Seitenbaum einer besteimmten Seite fährt.
 
-<!-- Output: <a href="url/to/3">Alternativer Link Name</a> -->
-```
+![Seiten ID](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/cms-nav-page-id.jpg "Seiten ID")
 
-wobei *3* die Nummer der Seite ist. Wenn kein alternativer link name angegeben wird, wird autoamtisch der Seiten Titel aus dem CMS eingefügt.
-
-```
-link [3]
-
-<!-- Output: <a href="url/to/3">Name of 3</a> -->
-```
-
-Man kann auch statische Links erzeugen
-
-```
-link [www.luya.io]
-
-<!-- Output: <a href="http://www.luya.io">luya.io</a> -->
-```
-
-> Ein fehlendes http:// wird automatisch angefügt.
-
-Mit Alternativen Label
-
-```
-
-link [luya.io] (Hier gehts zur Doku)
-
-<!-- Output: <a href="http://luya.io">Hier gehts zur Doku</a> -->
-```
+> Ein fehlendes http:// wird bei statischen links automatisch angefügt.
