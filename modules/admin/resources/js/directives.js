@@ -63,7 +63,7 @@
 				})
 			}, template: function() {
 				//return '<div class="input-field col s{{grid}}"><input placeholder="{{placeholder}}" name="{{name}}" id="{{id}}" ng-class="{\'invalid\' : !isValid }" type="number" ng-model="model" min="0" /><label for="{{id}}">{{label}}</label></div>';
-                return '<div class="input input--text"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" name="{{name}}" ng-model="model" type="number" min="0" class="input__field" ng-class="{\'invalid\' : !isValid }" placeholder="{{placeholder}}" /></div></div>';
+                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" name="{{name}}" ng-model="model" type="number" min="0" class="input__field" ng-class="{\'invalid\' : !isValid }" placeholder="{{placeholder}}" /></div></div>';
 			}
 		}
 	});
@@ -149,7 +149,7 @@
 			},
 			template: function() {
 				// return '<div class="col s{{grid}}"><label for="{{id}}">{{label}}</label><select name="{{name}}" id="{{id}}" class="browser-default" ng-options="item.value as item.label for item in options" ng-model="model"></select></div>';
-                return '<div class="input input--select"><label class="input__label" for="{{id}}">{{label}}</label><select name="{{name}}" id="{{id}}" class="input__field browser-default" ng-options="item.value as item.label for item in options" ng-model="model"></select></div>';
+                return '<div class="input input--select" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><select name="{{name}}" id="{{id}}" class="input__field browser-default" ng-options="item.value as item.label for item in options" ng-model="model"></select></div>';
 			}
 		}
 	});
@@ -243,7 +243,7 @@
 				scope.random = Math.random().toString(36).substring(7);
 			},
 			template: function() {
-				return '<div class="input input--multiple-checkboxes">' +
+				return '<div class="input input--multiple-checkboxes"  ng-class="{\'input--hide-label\': i18n}">' +
                     		'<label class="input__label">{{label}}</label>' +
                     		'<div class="input__field-wrapper">' +
                     			'<input type="text" ng-change="filtering()" ng-model="searchString" placeholder="Suchen" /> {{optionitems.length}} von {{options.items.length}}'+
@@ -314,7 +314,7 @@
 				});
 			},
 			template: function() {
-				return '<div class="input input--date">' +
+				return '<div class="input input--date"  ng-class="{\'input--hide-label\': i18n}">' +
 						'<label class="input__label">{{label}}</label>' +
 		                '<div class="input__field-wrapper">' +
 			                    '<input ng-blur="reform()" type="text" ng-model="day" placeholder="{{placeholders.day}}" class="input__field" /><span class="input__divider">.</span>' +
@@ -382,7 +382,7 @@
 				});
 			},
 			template: function() {
-				return '<div class="input input--date">' +
+				return '<div class="input input--date" ng-class="{\'input--hide-label\': i18n}">' +
 							'<label class="input__label">{{label}}</label>' +
                             '<div class="input__field-wrapper">' +
                                 '<input ng-blur="reform()" type="text" ng-model="day" placeholder="{{placeholders.day}}" class="input__field" /><span class="input__divider">.</span>' +
@@ -500,7 +500,7 @@
 				"name": "@fieldname"
 			},
 			template: function() {
-				return '<div class="input input--file-upload">' +
+				return '<div class="input input--file-upload" ng-class="{\'input--hide-label\': i18n}">' +
                             '<label class="input__label">{{label}}</label>' +
                             '<div class="input__field-wrapper">' +
                                 '<storage-file-upload ng-model="model"></storage-file-upload>' +
@@ -522,7 +522,7 @@
 				"name": "@fieldname"
 			},
 			template: function() {
-				return '<div class="input input--image-upload">' +
+				return '<div class="input input--image-upload" ng-class="{\'input--hide-label\': i18n}">' +
                             '<label class="input__label">{{label}}</label>' +
                             '<div class="input__field-wrapper">' +
                                 '<storage-image-upload options="options" ng-model="model"></storage-image-upload>' +
@@ -563,7 +563,7 @@
 				
 			},
 			template: function() {
-				return '<div class="input input--image-array imagearray">' +
+				return '<div class="input input--image-array imagearray" ng-class="{\'input--hide-label\': i18n}">' +
 	                        '<label class="input__label">{{label}}</label>' +
                             '<div class="input__field-wrapper">' +
                                 '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="green-text">+</span> links unten ein.</p>' +
@@ -622,7 +622,7 @@
 	
 			},
 			template: function() {
-				return '<div class="input input--file-array filearray">' +
+				return '<div class="input input--file-array filearray" ng-class="{\'input--hide-label\': i18n}">' +
 			                '<label class="input__label">{{label}}</label>' +
                             '<div class="input__field-wrapper">' +
                                 '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="green-text">+</span> links unten ein.</p>' +
@@ -695,7 +695,7 @@
 	
 			},
 			template: function() {
-				return '<div class="input input--list list">' +
+				return '<div class="input input--list list" ng-class="{\'input--hide-label\': i18n}">' +
 	                        '<label class="input__label">Auflistung</label>' +
                             '<div class="input__field-wrapper">' +
                                 '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="green-text">+</span> links unten ein.</p>' +
