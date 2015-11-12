@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-beta2 (in progress)
 -------------------------
+- `#528` sorting filemanager folders by name.
 - `#412` fixed bug where ObjectHelper::callMethodSanitizeArguments does not handle optional arguments.
 - `#526` added publicHtml getter and twig variable publicHtml.
 

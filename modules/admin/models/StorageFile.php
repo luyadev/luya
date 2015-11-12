@@ -24,7 +24,7 @@ class StorageFile extends \yii\db\ActiveRecord
             [['folder_id', 'upload_timestamp', 'file_size', 'upload_user_id', 'upload_timestamp'], 'safe'],
         ];
     }
-
+    
     public function delete()
     {
         $file = Yii::$app->storage->file->get($this->id);
@@ -43,7 +43,7 @@ class StorageFile extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return parent::find();
+        return parent::find()->orderBy(['name_original' => 'ASC']);
     }
 
     public function onBeforeInsert()

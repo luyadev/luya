@@ -8,6 +8,11 @@ class StorageFolder extends \yii\db\ActiveRecord
     {
         return 'admin_storage_folder';
     }
+    
+    public static function find()
+    {
+        return parent::find()->orderBy(['name' => 'ASC']);
+    }
 
     public function rules()
     {
