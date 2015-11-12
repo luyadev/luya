@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-beta2 (in progress)
 -------------------------
+- `#526` added publicHtml getter and twig variable publicHtml.
 
 1.0.0-beta1 (11. Nov 2015)
 -------------------------

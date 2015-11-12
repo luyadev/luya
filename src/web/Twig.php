@@ -3,6 +3,9 @@
 namespace luya\web;
 
 use Yii;
+use Twig_Environment;
+use Twig_SimpleFunction;
+use Twig_Extension_Debug;
 
 /**
  * from string:
@@ -58,11 +61,12 @@ class Twig extends \yii\base\Component
 
     public function env($loader)
     {
-        $twig = new \Twig_Environment($loader, ['autoescape' => false, 'debug' => YII_DEBUG]);
-        $twig->addExtension(new \Twig_Extension_Debug());
+        $twig = new Twig_Environment($loader, ['autoescape' => false, 'debug' => YII_DEBUG]);
+        $twig->addExtension(new Twig_Extension_Debug());
         //$twig->addGlobal('activeUrl', Yii::$app->links->activeUrl);
+        $twig->addGlobal('publicHtml', Yii::$app->request->baseUrl);
         foreach ($this->getFunctions() as $name => $lambda) {
-            $twig->addFunction(new \Twig_SimpleFunction($name, $lambda));
+            $twig->addFunction(new Twig_SimpleFunction($name, $lambda));
         }
 
         return $twig;

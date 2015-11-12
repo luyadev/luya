@@ -7,6 +7,8 @@ use luya\helpers\Url;
 
 class View extends \yii\web\View
 {
+    private $_publicHtml = null;
+    
     /**
      * @todo verify there is already a yii-way solution
      *
@@ -42,5 +44,33 @@ class View extends \yii\web\View
     public function url($route, array $params = [])
     {
         return Url::toManager($route, $params);
+    }
+    
+    /**
+     * Return the relativ path to your public_html folder.
+     *
+     * This wrapper function is commonly used to get the path for images or other files inside your
+     * public_html directory. For instance you have put some images in our public folder `public_html/img/luya.png`
+     * then you can access the image file inside your view files with:
+     *
+     * ```
+     * <img src="<?= $this->publicHtml; ?>/img/luya.png" />
+     * ```
+     *
+     * There is also a twig variable providing the same value:
+     *
+     * ```
+     * <img src="{{ publicHtml }}/img/luya.png" />
+     * ```
+     *
+     * @return string The relative baseUrl to your public_html folder.
+     */
+    public function getPublicHtml()
+    {
+        if ($this->_publicHtml === null) {
+            $this->_publicHtml = Yii::$app->request->baseUrl;
+        }
+        
+        return $this->_publicHtml;
     }
 }
