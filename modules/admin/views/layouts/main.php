@@ -57,7 +57,7 @@ $this->beginPage()
                         Datei auswählen
                     </span>
         </div>
-        <input class="fileupload__path" type="text" ng-model="fileinfo.source_http" disabled placeholder="<- Wählen Sie eine Datei aus. Der Pfad wird hier dargestellt." />
+        <span class="fileupload__path" ng-bind="fileinfo.name_original"></span>
 
         <modal is-modal-hidden="modal"><storage-file-manager selection="true" /></modal>
     </div>
