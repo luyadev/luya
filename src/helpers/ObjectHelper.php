@@ -15,7 +15,11 @@ class ObjectHelper
     /**
      * Call a class method with arguments and verify the arguments if they are in the list of
      * method arguments or not.
-     * 
+     *
+     * ```
+     * $response = ObjectHelper::callMethodSanitizeArguments((new MyClass()), 'methodToGet', ['paramName' => 'paramValue']);
+     * ```
+     *
      * @param object $object        The class object where the method must be found.
      * @param string $method        The class method to call inside the object
      * @param array  $argumentsList A massiv assigned list of array items, where the key is bind
@@ -27,20 +31,22 @@ class ObjectHelper
      */
     public static function callMethodSanitizeArguments($object, $method, array $argumentsList = [])
     {
-        // get class refelction object
+        // get class reflection object
         $reflection = new ReflectionMethod($object, $method);
         // array where the sanitized arguemnts will be stored
         $methodArgs = [];
-        // get all parematers of the $method
-        if ($reflection->getNumberOfRequiredParameters() > 0) {
-            foreach ($reflection->getParameters() as $param) {
-                if (!array_key_exists($param->name, $argumentsList)) {
-                    throw new Exception("The provided argument '".$param->name."' does not exist in argument list for method '$method'.");
-                }
+
+        foreach ($reflection->getParameters() as $param) {
+            // add the argument into the method list when existing
+            if (array_key_exists($param->name, $argumentsList)) {
                 $methodArgs[] = $argumentsList[$param->name];
             }
+            // check if the provided arguemnt is optional or not
+            if (!$param->isOptional() && !array_key_exists($param->name, $argumentsList)) {
+                throw new Exception(sprintf("The argument '%s' is required for method '%s' in class '%s'.", $param->name, $method, get_class($object)));
+            }
         }
-        // call the object with method and arguments.
+
         return call_user_func_array([$object, $method], $methodArgs);
     }
 }
