@@ -149,6 +149,12 @@ class File
     public function allFromFolder($folderId)
     {
         $files = StorageFile::find()->select(['admin_storage_file.id', 'name_original', 'extension', 'file_size', 'upload_timestamp', 'firstname', 'lastname'])->leftJoin('admin_user', 'admin_user.id=admin_storage_file.upload_user_id')->where(['folder_id' => $folderId, 'is_hidden' => 0, 'admin_storage_file.is_deleted' => 0])->asArray()->all();
+
+        return $this->internalListData($files);
+    }
+
+    private function internalListData($files)
+    {
         foreach ($files as $k => $v) {
             // @todo check fileHasImage sth
             if ($v['extension'] == 'jpg' || $v['extension'] == 'png') {
@@ -156,15 +162,20 @@ class File
                 $imageId = Yii::$app->storage->image->create($v['id'], 0);
                 if ($imageId) {
                     $thumb = Yii::$app->storage->image->filterApply($imageId, 'tiny-thumbnail', true);
+                    $originalImage = Yii::$app->storage->image->get($imageId);
                 } else {
                     $thumb = false;
+                    $originalImage = false;
                 }
             } else {
                 $isImage = false;
                 $thumb = false;
+                $originalImage = false;
             }
             $files[$k]['is_image'] = $isImage;
             $files[$k]['thumbnail'] = $thumb;
+            $files[$k]['original_image'] = $originalImage;
+            $files[$k]['file_data'] = $this->get($v['id']);
         }
 
         return $files;
@@ -173,25 +184,8 @@ class File
     public function all()
     {
         $files = StorageFile::find()->select(['admin_storage_file.id', 'name_original', 'extension', 'file_size', 'upload_timestamp', 'firstname', 'lastname'])->leftJoin('admin_user', 'admin_user.id=admin_storage_file.upload_user_id')->where(['is_hidden' => 0, 'admin_storage_file.is_deleted' => 0])->asArray()->all();
-        foreach ($files as $k => $v) {
-            // @todo check fileHasImage sth
-            if ($v['extension'] == 'jpg' || $v['extension'] == 'png') {
-                $isImage = true;
-                $imageId = Yii::$app->storage->image->create($v['id'], 0);
-                if ($imageId) {
-                    $thumb = Yii::$app->storage->image->filterApply($imageId, 'tiny-thumbnail', true);
-                } else {
-                    $thumb = false;
-                }
-            } else {
-                $isImage = false;
-                $thumb = false;
-            }
-            $files[$k]['is_image'] = $isImage;
-            $files[$k]['thumbnail'] = $thumb;
-        }
 
-        return $files;
+        return $this->internalListData($files);
     }
 
     public function get($fileId)

@@ -1287,6 +1287,22 @@
 	            $scope.toggleModal = function() {
 	                $scope.$parent.toggleModal();
 	            }
+	            
+	            $scope.isDetailOpen = false;
+	            
+	            $scope.isDetailFile = null;
+	            
+	            $scope.detailFile = null;
+	            
+	            $scope.toggleDetail = function(file) {
+	            	if (file.id == $scope.isDetailFile && $scope.isDetailOpen == true) {
+	            		$scope.isDetailOpen = false;
+	            	} else {
+	            		$scope.isDetailOpen = true;
+	            	}
+	            	$scope.isDetailFile = file.id;
+	            	$scope.detailFile = file;
+	            };
 				
 				$scope.loadFolder = function(folderId) {
 					if ($scope.editFolder) {

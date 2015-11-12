@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-beta2 (in progress)
 -------------------------
+- `#537` added ability to preview and download the file/image inside the filemanager.
 - `#531` unable to deselect language, as at least 1 langauge must be active.
 - `#528` sorting filemanager folders by name.
 - `#412` fixed bug where ObjectHelper::callMethodSanitizeArguments does not handle optional arguments.

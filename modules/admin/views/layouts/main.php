@@ -279,6 +279,10 @@ $this->beginPage()
 
             </div>
 
+            <div class="row">
+
+            <div class="col" ng-class="{'s8' : isDetailOpen, 's12' : !isDetailOpen }">
+
             <button ng-show="selectedFiles.length > 0" ng-click="removeSelectedItems()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
             <button ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove">Verschieben nach</button>
 
@@ -298,12 +302,12 @@ $this->beginPage()
                 <tbody>
 
                 <!-- FILES -->
-                <tr ng-repeat="file in files" ng-hide="verifyFileHidden(file)" ng-click="toggleSelection(file)" class="filemanager__file" ng-class="{ 'clickable selectable' : allowSelection == 'false' }">
-                    <td class="filemanager__checkox-column"  ng-hide="allowSelection == 'true'">
+                <tr ng-repeat="file in files" ng-hide="verifyFileHidden(file)" class="filemanager__file" ng-class="{ 'clickable selectable' : allowSelection == 'false' }">
+                    <td ng-click="toggleSelection(file)" class="filemanager__checkox-column"  ng-hide="allowSelection == 'true'">
                         <input type="checkbox" id="{{file.id}}" ng-checked="inSelection(file)" />
                         <label for="checked-status-managed-by-angular-{{file.id}}"></label>
                     </td>
-                    <td class="filemanager__icon-column" ng-class="{ 'filemanager__icon-column--thumb' : file.thumbnail }">
+                    <td ng-click="toggleSelection(file)" class="filemanager__icon-column" ng-class="{ 'filemanager__icon-column--thumb' : file.thumbnail }">
                                         <span ng-if="file.thumbnail">
                                             <img class="responsive-img filmanager__thumb" ng-src="{{file.thumbnail.source}}" />
                                         </span>
@@ -311,10 +315,11 @@ $this->beginPage()
                                             <i class="material-icons">attach_file</i>
                                         </span>
                     </td>
-                    <td>{{file.name_original}}</td>
+                    <td ng-click="toggleSelection(file)">{{file.name_original}}</td>
                     <td class="filemanager__lighten">{{file.extension}}</td>
                     <td class="filemanager__lighten">{{file.firstname}} {{file.lastname}}</td>
                     <td class="filemanager__lighten">{{file.upload_timestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
+                    <td class="filemanager__lighten" ng-click="toggleDetail(file)"><i class="material-icons">zoom_in</i></td>
                 </tr>
                 <!-- /FILES -->
 
@@ -323,7 +328,38 @@ $this->beginPage()
 
             <button ng-show="selectedFiles.length > 0" ng-click="removeSelectedItems()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
             <button ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove">Verschieben nach</button>
-
+            
+            </div>
+            <div class="col s4" ng-show="isDetailOpen">
+                <table class="filemanager__table striped">
+                    <thead>
+                        <tr>
+                            <th colspan="2" style="text-align:right;"><a class="btn btn-floating" ng-click="isDetailOpen=!isDetailOpen"><i class="material-icons">zoom_out</i></a></th>
+                        </tr>
+                    </htead>
+                    <tbody>
+                    <tr>
+                        <td><i>Dateiname</i></td><td>{{ detailFile.name_original }}</td>
+                    </tr>
+                    <tr>
+                        <td><i>Eigentürmer</i></td><td>{{ detailFile.firstname }} {{ detailFile.lastname }}</td>
+                    </tr>
+                    <tr>
+                        <td><i>Erstellungsdatum</i></td><td>{{detailFile.upload_timestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
+                    </tr>
+                    <tr>
+                        <td><i>Datei Typ</i></td><td>{{ detailFile.extension }}</td>
+                    </tr>
+                    <tr>
+                        <td><i>Download</i></td><td><a ng-href="{{detailFile.file_data.source_http}}" target="_blank" class="btn btn-floating"><i class="material-icons">cloud_download</i></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <span ng-if="detailFile.thumbnail">
+                    <img class="responsive-img filmanager__thumb" ng-src="{{detailFile.original_image.source}}" />
+                </span>
+                </p>
+            </div>
         </div>
         <!-- FILES & FOLDERS -->
 
