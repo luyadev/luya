@@ -48,13 +48,13 @@ Die `Yii::$app->menu->findAll(['container' => $container, 'parent_nav_id' => $pa
 Hier ein Beispiel mit *Navigations Container* = `default` und *Parent Navigation Id* = `0`:
 
 ```
-{{ dump(links('default', 0)) }}
+{{ dump(menuFindAll('default', 0)) }}
 ```
 
 Erster *Sub-Navigation* eintrag für die aktuelle aktive Seite:
 
 ```
-{{ dump(links('default', menuCurrent.navId )) }}
+{{ dump(menuFindAll('default', menuCurrent.navId )) }}
 ```
 
 Assets
