@@ -66,6 +66,15 @@ $input--date-width:			50px;
 		margin-top: 5px;
 	}
 }
+.input__searchfield {
+    border: 1px solid #FAFAFA;
+    background-color: #fff;
+    transition: 0.25s ease background-color;
+    &:focus {
+    	outline: none;
+    	background-color: rgba(0,0,0,0.1);
+    }
+}
 
 input[type="checkbox"]:checked + .input__label:before {
 	top: 50%;

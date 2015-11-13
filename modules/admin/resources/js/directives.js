@@ -246,7 +246,7 @@
 				return '<div class="input input--multiple-checkboxes"  ng-class="{\'input--hide-label\': i18n}">' +
                     		'<label class="input__label">{{label}}</label>' +
                     		'<div class="input__field-wrapper">' +
-                    			'<input type="text" ng-change="filtering()" ng-model="searchString" placeholder="Suchen" /> {{optionitems.length}} von {{options.items.length}}'+
+                    			'<input class="input__searchfield" type="text" ng-change="filtering()" ng-model="searchString" placeholder="Suchen" /> {{optionitems.length}} von {{options.items.length}}'+
                         		'<div ng-repeat="(k, item) in optionitems track by k">' +
                             		'<input type="checkbox" ng-checked="isChecked(item)" id="{{random}}_{{k}}" ng-click="toggleSelection(item)" />' +
                             		'<label for="{{random}}_{{k}}">{{item.label}}</label>' +
