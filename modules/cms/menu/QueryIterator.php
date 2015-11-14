@@ -5,6 +5,10 @@ namespace cms\menu;
 use Iterator;
 use Countable;
 
+/**
+ * @since 1.0.0-beta1
+ * @author nadar
+ */
 class QueryIterator extends \yii\base\Object implements Iterator, Countable
 {
     public $data = [];

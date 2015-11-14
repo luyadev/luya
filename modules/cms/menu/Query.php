@@ -206,7 +206,7 @@ class Query extends \yii\base\Object
 
     public function one()
     {
-        $data = $this->filter($this->_where, $this->menu->languageContainerData($this->lang));
+        $data = $this->filter($this->_where, $this->menu[$this->lang]);
 
         if (count($data) == 0) {
             return false;
@@ -217,7 +217,7 @@ class Query extends \yii\base\Object
 
     public function all()
     {
-        return static::createArrayIterator($this->filter($this->_where, $this->menu->languageContainerData($this->lang)));
+        return static::createArrayIterator($this->filter($this->_where, $this->menu[$this->lang]));
     }
 
     public static function createArrayIterator($data)
