@@ -3,6 +3,7 @@
 namespace cms\menu;
 
 use Yii;
+use Exception;
 
 /**
  * Menu item Object.
@@ -22,13 +23,27 @@ class Item extends \yii\base\Object
      *            value parinings. This property will be assigned when creating the
      *            Item-Object.
      */
-    public $itemArray = [];
+    public $itemArray = null;
 
     /**
      * @var array Privat property containing with informations for the
      *            Query Object.
      */
     private $_with = [];
+
+    /**
+     * Item-Object initiliazer, verify if the itemArray property is empty.
+     *
+     * @throws Exception
+     */
+    public function init()
+    {
+        if ($this->itemArray === null) {
+            throw new Exception('The itemArray property can not be null.');
+        }
+        // call parent object initializer
+        parent::init();
+    }
 
     /**
      * Get the Id of the Item, the Id is an unique identifiere an represents the
