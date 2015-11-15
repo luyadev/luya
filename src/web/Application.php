@@ -3,8 +3,11 @@
 namespace luya\web;
 
 /**
- * @property \luya\web\components\Composition $composition Composition property
+ * Luya Web Application.
  *
+ * @property object $composition Composition property
+ * @property object $twig The twig component
+ * @property object $element The element component
  * @author nadar
  */
 class Application extends \yii\web\Application
