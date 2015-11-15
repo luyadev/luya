@@ -12,7 +12,7 @@ use cms\menu\Query as MenuQuery;
  * Menu container component by language.
  * 
  * The menu container component returns an array with all menu items for a specific language, the class
- * is deisgned to run in "singleton" mode. The menu component provides also basic find methods like findAll,
+ * is designed to run in "singleton" mode. The menu component provides also basic find methods like findAll,
  * findOne to return specific data via the Query class. The menu components resolves also the current item
  * based on the current request object.
  * 
@@ -53,6 +53,7 @@ use cms\menu\Query as MenuQuery;
  * $currentItem = Yii::$app->menu->getCurrent();
  * // is equal to:
  * $currentItem = Yii::$app->menu->current;
+ * ```
  * 
  * ### currentAppendix
  * 

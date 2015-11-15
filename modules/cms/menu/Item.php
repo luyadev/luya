@@ -8,8 +8,8 @@ use Exception;
 /**
  * Menu item Object.
  * 
- * Each menu itarition will return in an Item-Object. The Item-Object contains several methods like
- * returning title, url and ids or retrieve depending item irations like parents or childs. As the
+ * Each menu itaration will return in an Item-Object. The Item-Object contains several methods like
+ * returning title, url and ids or retrieve depending item iterations like parents or childs. As the
  * Item Object extends the yii\base\Object all getter methods can be access as property.
  *
  * @author nadar

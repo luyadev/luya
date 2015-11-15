@@ -8,23 +8,36 @@ use Exception;
 /**
  * Menu Query Builder.
  * 
- * Ability to create menu querys to find your specifc menu items.
+ * Ability to create menu query condition similar behavior, changing the language container and define with
+ * specification to fit your needs.
  * 
- * Basic where conditions:
+ * Basic example of making a menu selection:
  * 
  * ```php
- * $data = (new \cms\menu\Query())->where(['parent_nav_id' => 0])->all();
+ * $items = (new \cms\menu\Query())->where(['parent_nav_id' => 0])->all();
  * ```
  * 
  * By default the Menu Query will get the default language, or the current active language. To force
  * a specific language use the `lang()` method in your query chain:
  * 
  * ```php
- * $data = (new \cms\menu\Query())->where(['parent_nav_id' => 0])->lang('en')->all();
+ * $items = (new \cms\menu\Query())->where(['parent_nav_id' => 0])->lang('en')->all();
  * ```
  * 
+ * You can also find one element instead of all
+ * 
+ * ```php
+ * $item = (new \cms\menu\Query())->where(['id' => 1])->one();
+ * ```
+ * 
+ * To include hidden pages to your selection use with:
+ * 
+ * ```php
+ * $items = (new \cms\menu\Query())->where(['parent_nav_id' => 0])->with(['hidden'])->all();
+ * ```
+ * 
+ * @property object $menu Contains menu Object.
  * @since 1.0.0-beta1
- *
  * @author nadar
  */
 class Query extends \yii\base\Object
@@ -36,18 +49,14 @@ class Query extends \yii\base\Object
     private $_menu = null;
 
     private $_whereOperators = ['<', '<=', '>', '>=', '=', '=='];
-
+    
+    private $_with = ['hidden' => false];
+    
     /**
-     * @var bool Choose whetever hidden elements should be skipped in the where filtering
-     *           process or not. Use `with('hidden')` to set $skipHidden to false;
+     * Getter method to return menu component
+     * 
+     * @return \cms\menu\Container Menu Container object
      */
-    public $withHidden = false;
-
-    public function setMenu(\cms\menu\Container $menu)
-    {
-        $this->_menu = $menu;
-    }
-
     public function getMenu()
     {
         if ($this->_menu === null) {
@@ -115,6 +124,10 @@ class Query extends \yii\base\Object
         return $this;
     }
 
+    /**
+     * 
+     * @param array $args
+     */
     public function andWhere(array $args)
     {
         return $this->where($args);
@@ -138,19 +151,17 @@ class Query extends \yii\base\Object
 
     /**
      * @param string|array $with can be a string  containg "hidden" or an array with multiple patters
-     *                           for example `['hidden']`. Further with statements upcoming.
+     * for example `['hidden']`. Further with statements upcoming.
      */
     public function with($types)
     {
         $types = (array) $types;
         foreach ($types as $type) {
-            switch ($type) {
-                case 'hidden':
-                    $this->withHidden = true;
-                    break;
+            if (array_key_exists($type, $this->_with)) {
+                $this->_with[$type] = true;
             }
         }
-
+ 
         return $this;
     }
 
@@ -165,7 +176,7 @@ class Query extends \yii\base\Object
 
     public function arrayFilter($value, $field)
     {
-        if ($field == 'is_hidden' && $this->withHidden === false && $value == 1) {
+        if ($field == 'is_hidden' && $this->_with['hidden'] === false && $value == 1) {
             return false;
         }
 
