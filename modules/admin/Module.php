@@ -2,13 +2,15 @@
 
 namespace admin;
 
+use luya\components\UrlRule;
+
 class Module extends \admin\base\Module
 {
     /**
      * @var bool Enables a two-way factor auth system before logging into the admin
-     *           panel. If the system is not able to send mails (No configuration or missconfiguration)
-     *           then you are not able to login anymore. You should test the mail system before enabling
-     *           secureLogin. To test your smtp connection you can use `./vendor/bin/luya health/mailer`
+     * panel. If the system is not able to send mails (No configuration or missconfiguration)
+     * then you are not able to login anymore. You should test the mail system before enabling
+     * secureLogin. To test your smtp connection you can use `./vendor/bin/luya health/mailer`
      */
     public $secureLogin = false;
 
@@ -31,6 +33,7 @@ class Module extends \admin\base\Module
 
     public $urlRules = [
         ['class' => 'admin\components\UrlRule'],
+        ['pattern' => 'file|datei/<id:\d+>/<hash:\w+>/<fileName:[a-zA-Z0-9\-\_\-\.\s]+>', 'route' => 'admin/file/download', 'position' => UrlRule::POSITION_BEFORE_LUYA],
     ];
 
     public $assets = [
