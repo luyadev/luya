@@ -2,6 +2,8 @@
 
 namespace luya;
 
+use luya\components\UrlRule;
+
 class Module extends \luya\base\Module
 {
     /**
@@ -19,6 +21,6 @@ class Module extends \luya\base\Module
      * @var array
      */
     public $urlRules = [
-        ['class' => 'luya\components\UrlRule'],
+        ['class' => 'luya\components\UrlRule', 'position' => UrlRule::POSITION_LUYA],
     ];
 }
