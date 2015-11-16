@@ -3,7 +3,6 @@
 namespace luya\web;
 
 use yii\helpers\ArrayHelper;
-use luya\components\UrlRule;
 
 /**
  * @author nadar
@@ -29,7 +28,7 @@ class Bootstrap extends \luya\base\Bootstrap
                 if (isset($v['position'])) {
                     $pos = $v['position'];
                 } else {
-                    $pos = UrlRule::POSITION_AFTER_LUYA;
+                    $pos = \luya\components\UrlRule::POSITION_AFTER_LUYA;
                 }
                 
                 $this->_urlRules[$pos][] = $v;
