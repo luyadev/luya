@@ -3,6 +3,7 @@
 namespace luya\web;
 
 use yii\helpers\ArrayHelper;
+use luya\components\UrlRule;
 
 /**
  * @author nadar
@@ -24,7 +25,14 @@ class Bootstrap extends \luya\base\Bootstrap
     {
         foreach ($this->getModules() as $id => $module) {
             foreach ($module->urlRules as $k => $v) {
-                $this->_urlRules[] = $v;
+                
+                if (isset($v['position'])) {
+                    $pos = $v['position'];
+                } else {
+                    $pos = UrlRule::POSITION_AFTER_LUYA;
+                }
+                
+                $this->_urlRules[$pos][] = $v;
             }
 
             foreach ($module->apis as $alias => $class) {
@@ -51,7 +59,11 @@ class Bootstrap extends \luya\base\Bootstrap
                 $app->getModule('admin')->moduleMenus = $this->_adminMenus;
             }
         }
-
-        $app->getUrlManager()->addRules($this->_urlRules, false);
+        
+        ksort($this->_urlRules);
+        
+        foreach($this->_urlRules as $position => $rules) {
+            $app->getUrlManager()->addRules($rules);
+        }
     }
 }
