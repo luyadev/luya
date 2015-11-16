@@ -29,4 +29,19 @@ class FileHelper extends \yii\helpers\BaseFileHelper
 
         return $file;
     }
+    
+    public static function getFileInfo($sourceFile)
+    {
+        $path = pathinfo($sourceFile);
+    
+        return (object) [
+            'extension' => $path['extension'],
+            'name' => $path['filename'],
+        ];
+    }
+    
+    public static function getFileHash($sourceFile)
+    {
+        return hash_file('md5', $sourceFile);
+    }
 }

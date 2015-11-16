@@ -17,10 +17,6 @@ class Storage extends \yii\base\Component
 {
     private $_file = null;
 
-    private $_filter = null;
-
-    private $_effect = null;
-
     private $_image = null;
 
     private $_folder = null;
@@ -47,16 +43,6 @@ class Storage extends \yii\base\Component
     public function getFile()
     {
         return ($this->_file === null) ? $this->_file = new File() : $this->_file;
-    }
-
-    public function getFilter()
-    {
-        return ($this->_filter === null) ? $this->_filter = new Filter() : $this->_filter;
-    }
-
-    public function getEffect()
-    {
-        return ($this->_effect === null) ? $this->_effect = new Effect() : $this->_effect;
     }
 
     public function getImage()

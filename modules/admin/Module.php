@@ -74,6 +74,9 @@ class Module extends \admin\base\Module
             'auth' => [
                 'class' => '\admin\components\Auth',
             ],
+            'storagecontainer' => [
+                'class' => \admin\components\StorageContainer::className(),
+            ]
         ];
     }
 
