@@ -38,4 +38,14 @@ class ImageQueryObject extends \yii\base\Object
     {
         return ($filterItem = Yii::$app->storagecontainer->getFiltersArrayItem($filterName)) ? Yii::$app->storagecontainer->addImage($this->getFileId(), $filterItem['id']) : false;
     }
+    
+    public function toArray()
+    {
+        return [
+            'id' => $this->getId(),
+            'fileId' => $this->getFileId(),
+            'filterId' => $this->getFilterId(),
+            'source' => $this->getSource(),
+        ];
+    }
 }

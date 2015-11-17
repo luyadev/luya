@@ -218,7 +218,10 @@ class StorageController extends \admin\base\RestController
                     
                     if ($image) {
                         $thumb = $image->applyFilter('tiny-thumbnail');
-                        $originalImage = $image->source;
+                        if ($thumb) {
+                            $thumb->toArray();
+                        }
+                        $originalImage = $image->toArray();
                     } else {
                         $thumb = false;
                         $originalImage = false;

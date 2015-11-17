@@ -57,4 +57,17 @@ class FileQueryObject extends \yii\base\Object
     {
         return Yii::$app->storagecontainer->serverPath . '/' . $this->itemArray['name_new_compound'];
     }
+    
+    public function toArray()
+    {
+        return [
+            'id' => $this->getId(),
+            'folderId' => $this->getFolderId(),
+            'name' => $this->getName(),
+            'systemFileName' => $this->getSystemFileName(),
+            'source' => $this->getSource(),
+            'httpSource' => $this->getHttpSource(),
+            'serverSource' => $this->getServerSource(),
+        ];
+    }
 }

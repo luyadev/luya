@@ -33,4 +33,13 @@ class FolderQueryObject extends \yii\base\Object
     {
         return (!empty($this->getParentId())) ? (new FolderQuery())->findOne($this->getParentId()) : false;
     }
+    
+    public function toArray()
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'parentId' => $this->getParentId(),
+        ];
+    }
 }
