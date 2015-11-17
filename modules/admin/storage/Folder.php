@@ -6,6 +6,8 @@ use admin\models\StorageFile;
 use admin\models\StorageFolder;
 use Yii;
 
+trigger_error("storage is deprectead", E_USER_NOTICE);
+
 class Folder
 {
     public function createFolder($folderName, $parentFolderId = 0)

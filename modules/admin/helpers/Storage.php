@@ -3,6 +3,7 @@
 namespace admin\helpers;
 
 use Exception;
+use admin\models\StorageFile;
 
 class Storage
 {
@@ -17,6 +18,18 @@ class Storage
     {
         return sprintf('%s', hash('crc32b', uniqid($fileName, true)));
     }
+    
+    
+    public static function removeFile($fileId)
+    {
+        $model = StorageFile::find()->where(['id' => $fileId, 'is_deleted' => 0])->one();
+        if ($model) {
+            return $model->delete();
+        }
+    
+        return true;
+    }
+    
     
     /**
      * 
@@ -41,5 +54,20 @@ class Storage
             'width' => $width,
             'height' => $height,
         ];
+    }
+    
+    public static function moveFilesToFolder($fileIds, $folderId)
+    {
+        foreach ($fileIds as $fileId) {
+            static::moveFileToFolder($fileId, $folderId);
+        }
+    }
+    
+    public static function moveFileToFolder($fileId, $folderId)
+    {
+        $file = StorageFile::findOne($fileId);
+        $file->folder_id = $folderId;
+    
+        return $file->update(false);
     }
 }

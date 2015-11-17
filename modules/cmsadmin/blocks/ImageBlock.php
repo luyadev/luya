@@ -31,7 +31,7 @@ class ImageBlock extends \cmsadmin\base\Block
     public function extraVars()
     {
         return [
-            'image' => Yii::$app->storage->image->get($this->getVarValue('imageId'), 0),
+            'image' => Yii::$app->storagecontainer->getImage($this->getVarValue('imageId'), 0),
         ];
     }
 

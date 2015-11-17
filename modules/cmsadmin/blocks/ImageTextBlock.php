@@ -79,7 +79,7 @@ class ImageTextBlock extends \cmsadmin\base\Block
     public function getImageSource()
     {
         if ($this->_source === null) {
-            $img = Yii::$app->storage->image->get($this->getVarValue('imageId'), 0);
+            $img = Yii::$app->storagecontainer->getImage($this->getVarValue('imageId'), 0);
 
             $this->_source = $img ? $img->source : false;
         }

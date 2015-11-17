@@ -4,11 +4,12 @@ namespace tests\web\admin\components;
 
 use Yii;
 
+/*
 class StorageTest extends \tests\web\Base
 {
     public function testGetFile()
     {
-        $this->assertEquals(true, is_object(Yii::$app->storage->file));
+        $this->assertEquals(true, is_object(Yii::$app->->file));
     }
 
     public function testGetFilter()
@@ -31,3 +32,4 @@ class StorageTest extends \tests\web\Base
         $this->assertEquals(true, is_object(Yii::$app->storage->folder));
     }
 }
+*/

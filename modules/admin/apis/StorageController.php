@@ -3,6 +3,11 @@
 namespace admin\apis;
 
 use Yii;
+use Exception;
+use admin\helpers\Storage;
+use admin\models\StorageImage;
+use admin\models\StorageFile;
+use admin\models\StorageFolder;
 
 /**
  * @author nadar
@@ -36,11 +41,11 @@ class StorageController extends \admin\base\RestController
             if ($file['error'] !== UPLOAD_ERR_OK) {
                 return ['upload' => false, 'message' => $this->_uploaderErrors[$file['error']]];
             }
-            $create = Yii::$app->storage->file->create($file['tmp_name'], $file['name'], false, Yii::$app->request->post('folderId', 0));
-            if ($create) {
+            try {
+                $create = Yii::$app->storagecontainer->addFile($file['tmp_name'], $file['name'], Yii::$app->request->post('folderId', 0));
                 return ['upload' => true, 'message' => 'file uploaded succesfully'];
-            } else {
-                return ['upload' => false, 'message' => Yii::$app->storage->file->getError()];
+            } catch(Exception $err) {
+                return ['upload' => false, 'message' => $err->getMessage()];
             }
         }
 
@@ -50,7 +55,7 @@ class StorageController extends \admin\base\RestController
     public function actionFilesDelete()
     {
         foreach (Yii::$app->request->post('ids', []) as $id) {
-            if (!Yii::$app->storage->file->delete($id)) {
+            if (!Storage::removeFile($id)) {
                 return false;
             }
         }
@@ -63,71 +68,62 @@ class StorageController extends \admin\base\RestController
         $toFolderId = Yii::$app->request->post('toFolderId', 0);
         $fileIds = Yii::$app->request->post('fileIds', []);
 
-        return Yii::$app->storage->file->moveFilesToFolder($fileIds, $toFolderId);
+        return Storage::moveFilesToFolder($fileIds, $toFolderId);
     }
-
-    /*
-    public function actionFilesUploadFlow()
-    {
-        try {
-            $config = new \Flow\Config();
-            $config->setTempDir(\yii::getAlias('@webroot/assets'));
-            $request = new \Flow\Request();
-        
-            $fileName = \yii::getAlias('@webroot/assets').DIRECTORY_SEPARATOR.$request->getFileName();
-        
-            if (\Flow\Basic::save($fileName, $config, $request)) {
-                // file saved successfully and can be accessed at './final_file_destination'
-                $folderId = Yii::$app->request->post('folderId', 0);
-                $fileId = \yii::$app->storage->file->create($fileName, $request->getFileName(), false, (int) $folderId);
-        
-                @unlink($fileName);
-        
-                return $fileId;
-            }
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-        }
-    }
-    */
 
     public function actionImageUpload()
     {
         $fileId = Yii::$app->request->post('fileId', null);
         $filterId = Yii::$app->request->post('filterId', null);
 
-        $create = Yii::$app->storage->image->create($fileId, $filterId);
-        $msg = (!$create) ? 'Error while uploading image and/or store to database.' : 'Upload successfull';
-
-        return ['id' => $create, 'error' => (bool) !$create, 'message' => $msg, 'image' => ((bool) $create) ? $this->actionImagePath($create) : false];
+        try {
+            $create = Yii::$app->storagecontainer->addImage($fileId, $filterId);
+            
+        } catch (Exception $err) {
+            return ['id' => 0, 'error' => true, 'message' => 'error while creating image: ' . $err->getMessage(), 'image' => null];
+        }
+        
+        return ['id' => $create->id, 'error' => false, 'message' => 'upload ok', 'image' => $create->source];
     }
+    
+    // until here new storage
 
     public function actionAllImagePaths()
     {
-        return Yii::$app->storage->image->all();
+        $images = [];
+        foreach (StorageImage::find()->asArray()->all() as $imageRow) {
+            $img = $this->get($imageRow['id']);
+            if ($img) {
+                $images[] = $img;
+            }
+        }
+
+        return $images;
     }
 
     public function actionImagePath($imageId)
     {
-        return Yii::$app->storage->image->get($imageId);
+        return Yii::$app->storagecontainer->getImage($imageId)->source;
     }
 
     public function actionAllFilePaths()
     {
-        return Yii::$app->storage->file->all();
+        return $this->filesAll();
     }
 
     public function actionFilePath($fileId)
     {
-        return Yii::$app->storage->file->get($fileId);
+        return Yii::$app->storagecontainer->getFile($fileId)->source;
     }
 
     public function actionAllFolderFiles()
     {
         $data = [];
-        $data[] = ['folder' => ['id' => 0], 'items' => Yii::$app->storage->file->allFromFolder(0)];
-        foreach (Yii::$app->storage->folder->all() as $folder) {
-            $data[] = ['folder' => $folder, 'items' => Yii::$app->storage->file->allFromFolder($folder['id'])];
+        
+        $data[] = ['folder' => ['id' => 0], 'items' => $this->filesAllFromFolder(0)];
+        
+        foreach ($this->filesAll() as $folder) {
+            $data[] = ['folder' => $folder, 'items' => $this->filesAllFromFolder($folder['id'])];
         }
 
         return $data;
@@ -135,12 +131,12 @@ class StorageController extends \admin\base\RestController
 
     public function actionGetFiles($folderId)
     {
-        return Yii::$app->storage->file->allFromFolder($folderId);
+        return $this->filesAllFromFolder($folderId);
     }
 
     public function actionGetFolders()
     {
-        return Yii::$app->storage->folder->getFolderTree();
+        return $this->helperGetFolderTree();
     }
 
     public function actionFolderCreate()
@@ -148,12 +144,26 @@ class StorageController extends \admin\base\RestController
         $folderName = Yii::$app->request->post('folderName', null);
         $parentFolderId = Yii::$app->request->post('parentFolderId', 0);
 
-        return Yii::$app->storage->folder->createFolder($folderName, $parentFolderId);
+        $model = new StorageFolder();
+        $model->name = $folderName;
+        $model->parent_id = $parentFolderId;
+        $model->timestamp_create = time();
+        
+        return $model->save();
+        
     }
 
+    // here
+    
     public function actionFolderUpdate($folderId)
     {
-        return Yii::$app->storage->folder->updateFolder($folderId, Yii::$app->request->post());
+        $model = StorageFolder::findOne($folderId);
+        if (!$model) {
+            return false;
+        }
+        $model->attributes = Yii::$app->request->post();
+        
+        return $model->update();
     }
 
     /**
@@ -165,7 +175,7 @@ class StorageController extends \admin\base\RestController
      */
     public function actionFolderDelete($folderId)
     {
-        return Yii::$app->storage->folder->deleteFolder($folderId);
+        return $this->helperDeleteFolder($folderId);
     }
 
     /**
@@ -177,6 +187,134 @@ class StorageController extends \admin\base\RestController
      */
     public function actionIsFolderEmpty($folderId)
     {
-        return Yii::$app->storage->folder->isEmptyFolder($folderId);
+        return $this->helperIsEmptyFolder($folderId);
     }
+    
+    // helpers as of removment
+    
+    private function filesAllFromFolder($folderId)
+    {
+        $files = StorageFile::find()->select(['admin_storage_file.id', 'name_original', 'extension', 'file_size', 'upload_timestamp', 'firstname', 'lastname'])->leftJoin('admin_user', 'admin_user.id=admin_storage_file.upload_user_id')->where(['folder_id' => $folderId, 'is_hidden' => 0, 'admin_storage_file.is_deleted' => 0])->asArray()->all();
+    
+        return $this->internalListData($files);
+    }
+
+    private function filesAll()
+    {
+        $files = StorageFile::find()->select(['admin_storage_file.id', 'name_original', 'extension', 'file_size', 'upload_timestamp', 'firstname', 'lastname'])->leftJoin('admin_user', 'admin_user.id=admin_storage_file.upload_user_id')->where(['is_hidden' => 0, 'admin_storage_file.is_deleted' => 0])->asArray()->all();
+    
+        return $this->internalListData($files);
+    }
+    
+    private function internalListData($files)
+    {
+        foreach ($files as $k => $v) {
+            // @todo check fileHasImage sth
+            if ($v['extension'] == 'jpg' || $v['extension'] == 'png') {
+                $isImage = true;
+                
+                try {
+                    $image = Yii::$app->storagecontainer->addImage($v['id'], 0);
+                    
+                    if ($image) {
+                        $thumb = $image->applyFilter('tiny-thumbnail');
+                        $originalImage = $image->source;
+                    } else {
+                        $thumb = false;
+                        $originalImage = false;
+                    }
+                } catch(Exception $e) {
+                    $thumb = false;
+                    $originalImage = false;
+                }
+            } else {
+                $isImage = false;
+                $thumb = false;
+                $originalImage = false;
+            }
+            $files[$k]['is_image'] = $isImage;
+            $files[$k]['thumbnail'] = $thumb;
+            $files[$k]['original_image'] = $originalImage;
+            $files[$k]['file_data'] = Yii::$app->storagecontainer->getFile($v['id']);
+        }
+    
+        return $files;
+    }
+    
+    // folder helper
+    
+    private function helperFolderPartialFolderTree($parentId)
+    {
+        $data = [];
+        foreach ($this->helperGetSubFolders($parentId) as $row) {
+            $data[] = [
+                'data' => $row,
+                '__items' => $this->helperFolderPartialFolderTree($row['id']),
+            ];
+        }
+    
+        return $data;
+    }
+    
+    public function helperGetFolderTree()
+    {
+        return $this->helperFolderPartialFolderTree(0);
+    }
+    
+    public function helperGetSubFolders($parentFolderId)
+    {
+        return \admin\models\StorageFolder::find()->where(['parent_id' => $parentFolderId, 'is_deleted' => 0])->asArray()->all();
+    }
+    
+    /**
+     * delete folder, all subfolders and all included files.
+     *
+     * 1. search another folders with matching parentIds and call deleteFolder on them
+     * 2. get all included files and delete them
+     * 3. delete folder
+     *
+     * @param int $folderId
+     *
+     * @return bool
+     */
+    private function helperDeleteFolder($folderId)
+    {
+        // find all subfolders
+        $matchingChildFolders = StorageFolder::find()->where(['parent_id' => $folderId])->asArray()->all();
+        foreach ($matchingChildFolders as $matchingChildFolder) {
+            $this->helperDeleteFolder($matchingChildFolder['id']);
+        }
+    
+        // find all attached files and delete them
+        $folderFiles = StorageFile::find()->where(['folder_id' => $folderId])->all();
+        foreach ($folderFiles as $folderFile) {
+            $folderFile->delete();
+        }
+    
+        // delete folder
+        $model = StorageFolder::findOne($folderId);
+        if (!$model) {
+            return false;
+        }
+        $model->is_deleted = true;
+    
+        return $model->update();
+    }
+    
+    /**
+     * check if a folder is empty (without subfolders and/or files).
+     *
+     * @param int $folderId
+     *
+     * @return bool
+     */
+    private function helperIsEmptyFolder($folderId)
+    {
+        if (!empty($this->getSubFolders($folderId))) {
+            return false;
+        } else {
+            return empty($this->filesAllFromFolder($folderId));
+        }
+    }
+    
 }

@@ -27,11 +27,10 @@ class StorageFile extends \yii\db\ActiveRecord
     
     public function delete()
     {
-        $file = Yii::$app->storage->file->get($this->id);
-        @unlink($file['source']);
+        $file = Yii::$app->storagecontainer->getFile($this->id);
+        @unlink($file->serverSource);
         $this->is_deleted = 1;
         $this->update(false);
-
         return true;
     }
 

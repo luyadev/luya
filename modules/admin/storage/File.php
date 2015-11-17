@@ -6,6 +6,8 @@ use Yii;
 use yii\helpers\Inflector;
 use admin\models\StorageFile;
 
+trigger_error("storage is deprectead", E_USER_NOTICE);
+
 class File
 {
     private $_error = null;

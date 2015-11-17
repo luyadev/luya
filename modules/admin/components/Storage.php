@@ -10,6 +10,8 @@ use admin\storage\Effect;
 use admin\storage\Image;
 use admin\storage\Folder;
 
+trigger_error("storage is deprectead", E_USER_NOTICE);
+
 /**
  * @author nadar
  */

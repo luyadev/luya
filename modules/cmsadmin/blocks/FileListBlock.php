@@ -55,7 +55,7 @@ class FileListBlock extends \cmsadmin\base\Block
                 if (array_key_exists('fileId', $fileEntry)) {
                     $files[] = [
                         'meta' => $fileEntry,
-                        'file' => Yii::$app->storage->file->get($fileEntry['fileId']),
+                        'file' => Yii::$app->storagecontainer->getFile($fileEntry['fileId']),
                     ];
                 }
             }

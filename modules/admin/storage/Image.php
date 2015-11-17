@@ -9,6 +9,8 @@ use admin\models\StorageImage;
 use admin\models\StorageFilter;
 use luya\helpers\ArrayHelper;
 
+trigger_error("storage is deprectead", E_USER_NOTICE);
+
 class Image
 {
     public function create($fileId, $filterId = 0)
