@@ -218,58 +218,66 @@ class StorageContainer extends \yii\base\Component
      * @param unknown $fileId
      * @param unknown $filterId
      */
-    public function addImage($fileId, $filterId = 0)
+    public function addImage($fileId, $filterId = 0, $throwException = false)
     {
-        $query = (new ImageQuery())->where(['file_id' => $fileId, 'filter_id' => $filterId])->one();
-        
-        if ($query) {
-            return $query;
-        }
-        
-        $fileQuery = $this->getFile($fileId);
-        
-        if (!$fileQuery) {
-            throw new Exception("unable to create image, cause the base file does not eixsts.");
-        }
-        
-        
-        $imagine = new Imagine();
-        $image = $imagine->open($fileQuery->serverSource);
-        
-        $fileName = $filterId.'_'.$fileQuery->systemFileName;
-        $fileSavePath = $this->serverPath . '/' . $fileName;
-        if (empty($filterId)) {
-            $save = $image->save($fileSavePath);
-        } else {
-            $model = StorageFilter::find()->where(['id' => $filterId])->one();
-            if (!$model) {
-                throw new Exception("Could not find the provided filter id '$filterId'.");
+        try {
+            $query = (new ImageQuery())->where(['file_id' => $fileId, 'filter_id' => $filterId])->one();
+            
+            if ($query) {
+                return $query;
             }
-            $newimage = $model->applyFilter($image, $imagine);
-            $save = $newimage->save($fileSavePath);
+            
+            $fileQuery = $this->getFile($fileId);
+            
+            if (!$fileQuery) {
+                throw new Exception("unable to create image, cause the base file does not eixsts.");
+            }
+            
+            
+            $imagine = new Imagine();
+            $image = $imagine->open($fileQuery->serverSource);
+            
+            $fileName = $filterId.'_'.$fileQuery->systemFileName;
+            $fileSavePath = $this->serverPath . '/' . $fileName;
+            if (empty($filterId)) {
+                $save = $image->save($fileSavePath);
+            } else {
+                $model = StorageFilter::find()->where(['id' => $filterId])->one();
+                if (!$model) {
+                    throw new Exception("Could not find the provided filter id '$filterId'.");
+                }
+                $newimage = $model->applyFilter($image, $imagine);
+                $save = $newimage->save($fileSavePath);
+            }
+            
+            if (!$save) {
+                throw new Exception("unable to store file $fileSavePath");
+            }
+            
+            $resolution = Storage::getImageResolution($fileSavePath);
+            
+            $model = new StorageImage();
+            $model->setAttributes([
+                'file_id' => $fileId,
+                'filter_id' => $filterId,
+                'resolution_width' => $resolution['width'],
+                'resolution_height' => $resolution['height'],
+            ]);
+            
+            if (!$model->save()) {
+                throw new Exception("unable to save storage image, fata db exception.");
+            }
+            
+            $this->_imagesArray[$model->id] = $model->toArray();
+            
+            return $this->getImage($model->id);
+        } catch(Exception $err) {
+            if ($throwException) {
+                throw new Exception($err->getMessage(), $err->getCode(), $err);
+            }
         }
         
-        if (!$save) {
-            throw new Exception("unable to store file $fileSavePath");
-        }
-        
-        $resolution = Storage::getImageResolution($fileSavePath);
-        
-        $model = new StorageImage();
-        $model->setAttributes([
-            'file_id' => $fileId,
-            'filter_id' => $filterId,
-            'resolution_width' => $resolution['width'],
-            'resolution_height' => $resolution['height'],
-        ]);
-        
-        if (!$model->save()) {
-            throw new Exception("unable to save storage image, fata db exception.");
-        }
-        
-        $this->_imagesArray[$model->id] = $model->toArray();
-        
-        return $this->getImage($model->id);
+        return false;
     }
     
     public function getFoldersArray()

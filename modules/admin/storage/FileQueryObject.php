@@ -10,6 +10,8 @@ class FileQueryObject extends \yii\base\Object
 {
     use \admin\storage\ObjectTrait;
     
+    private $_imageMimeTypes = ['image/gif', 'image/jpeg', 'image/png'];
+    
     public function getId()
     {
         return $this->itemArray['id'];
@@ -33,6 +35,31 @@ class FileQueryObject extends \yii\base\Object
     public function getSystemFileName()
     {
         return $this->itemArray['name_new_compound'];
+    }
+    
+    public function getMimeType()
+    {
+        return $this->itemArray['mime_type'];
+    }
+    
+    public function getExtension()
+    {
+        return $this->itemArray['extension'];
+    }
+    
+    public function getUploadTimestamp()
+    {
+        return $this->itemArray['upload_timestamp'];
+    }
+    
+    public function getIsImage()
+    {
+        return in_array($this->getMimeType(), $this->_imageMimeTypes);
+    }
+    
+    public function getNoFilterImage()
+    {
+        return ($this->getIsImage()) ? (new ImageQuery())->where(['file_id' => $this->getId(), 'filter_id' => 0])->one() : false;
     }
     
     /**
@@ -68,6 +95,10 @@ class FileQueryObject extends \yii\base\Object
             'source' => $this->getSource(),
             'httpSource' => $this->getHttpSource(),
             'serverSource' => $this->getServerSource(),
+            'isImage' => $this->getIsImage(),
+            'mimeType' => $this->getMimeType(),
+            'extension' => $this->getExtension(),
+            'uploadTimestamp' => $this->getUploadTimestamp(),
         ];
     }
 }

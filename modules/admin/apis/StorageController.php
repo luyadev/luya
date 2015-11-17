@@ -92,9 +92,9 @@ class StorageController extends \admin\base\RestController
     {
         $images = [];
         foreach (StorageImage::find()->asArray()->all() as $imageRow) {
-            $img = $this->get($imageRow['id']);
+            $img = Yii::$app->storage->getImage($imageRow['id']);
             if ($img) {
-                $images[] = $img;
+                $images[] = $img->toArray();
             }
         }
 
@@ -120,10 +120,10 @@ class StorageController extends \admin\base\RestController
     {
         $data = [];
         
-        $data[] = ['folder' => ['id' => 0], 'items' => $this->filesAllFromFolder(0)];
+        $data[] = ['folder' => ['id' => 0], 'items' => $this->actionGetFiles(0)];
         
         foreach ($this->filesAll() as $folder) {
-            $data[] = ['folder' => $folder, 'items' => $this->filesAllFromFolder($folder['id'])];
+            $data[] = ['folder' => $folder, 'items' => $this->actionGetFiles($folder['id'])];
         }
 
         return $data;
@@ -131,7 +131,31 @@ class StorageController extends \admin\base\RestController
 
     public function actionGetFiles($folderId)
     {
-        return $this->filesAllFromFolder($folderId);
+        $files = [];
+        foreach(Yii::$app->storage->findFiles(['folder_id' => $folderId]) as $file) {
+            $imageData = false;
+            $thumbnail = false;
+            $error = false;
+            
+            if ($file->isImage) {
+                $image = $file->noFilterImage;
+                $imageData = $image->toArray();
+                if ($image) {
+                    $thumbImage = $image->applyFilter('tiny-thumbnail');
+                    if ($thumbImage) {
+                        $thumbnail = $thumbImage->toArray();
+                    }
+                }
+            }
+            
+            
+            $files[] = [
+                'file_data' => $file->toArray(),
+                'image_data' => $imageData,
+                'thumbnail_data' => $thumbnail,
+            ];
+        }
+        return $files;
     }
 
     public function actionGetFolders()
