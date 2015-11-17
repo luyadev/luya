@@ -16,14 +16,26 @@
  */
 .filemanager__tree {
 	width: $filemanager__tree--width;
-	border-right: 1px solid rgba(0, 0, 0, 0.1);
+	
 	padding-right: 20px;
 }
 .filemanager__toolbar {
 	display: block;
 	width: 100%;
-	margin-bottom: 15px;
+	
+	button {
+		margin-left: 5px;
+	}
+	&.filemanager__toolbar--top {
+		margin-bottom: 15px;
+	}
+	&.filemanager__toolbar--bottom {
+		margin-top: 15px;
+	}
 	@include clearfix;
+}
+.filemanager__files {
+	border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
 .filemanager__folders {
 	margin: 0;
@@ -48,6 +60,14 @@
 	 	background-color: color("green", "base");
 		color: color("shades", "white");
 		border-radius: 2px;
+	}
+}
+.filemanager__detail-wrapper {
+	position: relative;
+	padding-top: 48px;
+
+	tbody {
+		border-top: 1px solid #d0d0d0;
 	}
 }
 .filemanager__main-folder {

@@ -196,7 +196,7 @@ $this->beginPage()
                 FILES & FOLDERS
              --><div class="filemanager__files">
 
-            <div class="filemanager__toolbar">
+            <div class="filemanager__toolbar filemanager__toolbar--top">
 
                 <label class="floating-button-label left" ngf-select ngf-multiple="true" ng-model="uploadingfiles">
                             <span class="btn-floating">
@@ -204,6 +204,9 @@ $this->beginPage()
                             </span>
                     <span class="floating-button-label__label">Datei hinzufügen</span>
                 </label>
+
+                <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeSelectedItems()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
+                <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove">Verschieben nach</button>
 
                 <div class="alert alert--danger" ng-show="errorMsg" style="clear:both;">Fehler beim Hochladen der Datei: {{errorMsg}}</div>
 
@@ -282,10 +285,6 @@ $this->beginPage()
             <div class="row">
 
             <div class="col" ng-class="{'s8' : isDetailOpen, 's12' : !isDetailOpen }">
-
-            <button class="btn btn--small" ng-show="selectedFiles.length > 0" ng-click="removeSelectedItems()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
-            <button class="btn btn--small" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove">Verschieben nach</button>
-
             <table class="filemanager__table hoverable striped">
                 <thead>
                 <tr>
@@ -295,7 +294,6 @@ $this->beginPage()
                     <th></th>
                     <th>Name</th>
                     <th>Typ</th>
-                    <th>Eigentümer</th>
                     <th>Erstellungsdatum</th>
                 </tr>
                 </thead>
@@ -317,7 +315,6 @@ $this->beginPage()
                     </td>
                     <td ng-click="toggleSelection(file)">{{file.name_original}}</td>
                     <td class="filemanager__lighten">{{file.extension}}</td>
-                    <td class="filemanager__lighten">{{file.firstname}} {{file.lastname}}</td>
                     <td class="filemanager__lighten">{{file.upload_timestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
                     <td class="filemanager__lighten" ng-click="toggleDetail(file)"><i class="material-icons">zoom_in</i></td>
                 </tr>
@@ -326,42 +323,71 @@ $this->beginPage()
                 </tbody>
             </table>
 
-            <button class="btn btn--small" ng-show="selectedFiles.length > 0" ng-click="removeSelectedItems()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
-            <button class="btn btn--small" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove">Verschieben nach</button>
             
             </div>
             <div class="col s4" ng-show="isDetailOpen">
-                <table class="filemanager__table striped">
-                    <thead>
+                <div class="filemanager__detail-wrapper">
+                    <table class="filemanager__table striped">
+                       
+                        <tbody>
                         <tr>
-                            <th colspan="2" style="text-align:right;"><a class="btn btn-floating" ng-click="isDetailOpen=!isDetailOpen"><i class="material-icons">zoom_out</i></a></th>
+                            <td><i>Dateiname</i></td><td>{{ detailFile.name_original }}</td>
                         </tr>
-                    </htead>
-                    <tbody>
-                    <tr>
-                        <td><i>Dateiname</i></td><td>{{ detailFile.name_original }}</td>
-                    </tr>
-                    <tr>
-                        <td><i>Eigentürmer</i></td><td>{{ detailFile.firstname }} {{ detailFile.lastname }}</td>
-                    </tr>
-                    <tr>
-                        <td><i>Erstellungsdatum</i></td><td>{{detailFile.upload_timestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
-                    </tr>
-                    <tr>
-                        <td><i>Datei Typ</i></td><td>{{ detailFile.extension }}</td>
-                    </tr>
-                    <tr>
-                        <td><i>Download</i></td><td><a ng-href="{{detailFile.file_data.source_http}}" target="_blank" class="btn btn-floating"><i class="material-icons">cloud_download</i></a></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <span ng-if="detailFile.thumbnail">
-                    <img class="responsive-img filmanager__thumb" ng-src="{{detailFile.original_image.source}}" />
-                </span>
-                </p>
+                        <tr>
+                            <td><i>Eigentürmer</i></td><td>{{ detailFile.firstname }} {{ detailFile.lastname }}</td>
+                        </tr>
+                        <tr>
+                            <td><i>Erstellungsdatum</i></td><td>{{detailFile.upload_timestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
+                        </tr>
+                        <tr>
+                            <td><i>Datei Typ</i></td><td>{{ detailFile.extension }}</td>
+                        </tr>
+                        <tr>
+                            <td><i>Download</i></td><td><a ng-href="{{detailFile.file_data.source_http}}" target="_blank" class="btn btn-floating"><i class="material-icons">cloud_download</i></a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <span ng-if="detailFile.thumbnail">
+                        <img class="responsive-img" ng-src="{{detailFile.original_image.source}}" />
+                    </span>
+                    </p>
+                    <a class="btn btn--small right" ng-click="isDetailOpen=!isDetailOpen"><i class="material-icons">zoom_out</i></a>
+                </div> <!-- detail-wrapper END -->
             </div>
         </div>
         <!-- FILES & FOLDERS -->
+
+            <div class="filemanager__toolbar filemanager__toolbar--bottom">
+
+                <label class="floating-button-label left" ngf-select ngf-multiple="true" ng-model="uploadingfiles">
+                            <span class="btn-floating">
+                                <i class="material-icons">file_upload</i>
+                            </span>
+                    <span class="floating-button-label__label">Datei hinzufügen</span>
+                </label>
+
+                <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeSelectedItems()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
+                <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove">Verschieben nach</button>
+
+                <div class="alert alert--danger" ng-show="errorMsg" style="clear:both;">Fehler beim Hochladen der Datei: {{errorMsg}}</div>
+
+                <div class="modal modal--bottom-sheet" ng-class="{ 'modal--active' : uploading && !serverProcessing }">
+
+                    <div class="row">
+                        <div class="col s12">
+                            <ul class="collection">
+                                <li class="collection-item file" ng-repeat="file in uploadingfiles" ng-class="{ 'file--completed' : file.processed }">
+                                    <b>{{file.name}}</b>
+                                    <div class="file__progress progress">
+                                        <div class="determinate" style="width: {{file.progress}}%"></div>
+                                    </div>
+                                    <i class="file__icon material-icons">check</i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
 
     </div>
 
