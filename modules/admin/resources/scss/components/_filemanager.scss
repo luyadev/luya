@@ -18,6 +18,7 @@
 	width: $filemanager__tree--width;
 	border-right: 1px solid rgba(0, 0, 0, 0.1);
 	padding-right: 20px;
+	overflow: hidden;
 }
 .filemanager__toolbar {
 	display: block;
@@ -112,13 +113,15 @@
 	.filemanager__folder-name {
 	    max-width: 115px;
 	    white-space: nowrap;
-	    overflow: hidden;
 	    display: inline-block;
 	    margin-bottom: -4px;
 	}
 	//Font-color for the hovering folder-names
 	&:hover >  span {		
 		color: color($filemanager--base-color, "darken-2");		
+	}
+	&:hover > .filemanager__folder-name {
+		overflow: hidden;
 	}
 	//Font-color of the active selected folder-name
 	.filemanager__folder.filemanager__folder--active > & > span {
