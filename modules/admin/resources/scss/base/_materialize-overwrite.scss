@@ -37,6 +37,11 @@ td, th {
 	padding: 8px 5px;
 	border-radius: 0;
 }
+tr {
+	td {
+	    word-break: break-all;
+	}
+}
 
 /**
  * Overwrite default table hover
