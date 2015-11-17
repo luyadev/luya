@@ -44,8 +44,8 @@ class Storage
         $height = 0;
         
         if (isset($dimensions[0]) && isset($dimensions[1])) {
-            $width = $dimensions[0];
-            $height = $dimensions[1];
+            $width = (int)$dimensions[0];
+            $height = (int)$dimensions[1];
         } elseif ($throwException) {
             throw new Exception("Unable to determine the resoltuions of the file $filePath.");
         }
