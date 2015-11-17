@@ -3,6 +3,8 @@ LUYA CHANGELOG
 
 1.0.0-beta2 (in progress)
 -------------------------
+- `#527` directory-names in filemanager full displayed.
+- `#536` switched color for inactive state langauge-button.
 - `#522` added styles for checkbox filtering.
 - `#507` added new twig functions to luya guide.
 - `#538` fixed issue where new directories are not displayed in overlay mode.
