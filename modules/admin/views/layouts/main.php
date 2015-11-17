@@ -283,8 +283,8 @@ $this->beginPage()
 
             <div class="col" ng-class="{'s8' : isDetailOpen, 's12' : !isDetailOpen }">
 
-            <button ng-show="selectedFiles.length > 0" ng-click="removeSelectedItems()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
-            <button ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove">Verschieben nach</button>
+            <button class="btn btn--small" ng-show="selectedFiles.length > 0" ng-click="removeSelectedItems()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
+            <button class="btn btn--small" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove">Verschieben nach</button>
 
             <table class="filemanager__table hoverable striped">
                 <thead>
@@ -326,8 +326,8 @@ $this->beginPage()
                 </tbody>
             </table>
 
-            <button ng-show="selectedFiles.length > 0" ng-click="removeSelectedItems()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
-            <button ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove">Verschieben nach</button>
+            <button class="btn btn--small" ng-show="selectedFiles.length > 0" ng-click="removeSelectedItems()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
+            <button class="btn btn--small" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove">Verschieben nach</button>
             
             </div>
             <div class="col s4" ng-show="isDetailOpen">
