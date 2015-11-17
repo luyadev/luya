@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-beta2 (in progress)
 -------------------------
+- `#535` Filemanager: Move-buttons use now default-button-style.
 - `#527` directory-names in filemanager full displayed.
 - `#536` switched color for inactive state langauge-button.
 - `#522` added styles for checkbox filtering.
