@@ -50,7 +50,9 @@ class StorageFile extends \yii\db\ActiveRecord
     {
         $this->upload_timestamp = time();
         if (empty($this->upload_user_id)) {
-            $this->upload_user_id = Yii::$app->adminuser->getId();
+            if (!Yii::$app->adminuser->isGuest) {
+                $this->upload_user_id = Yii::$app->adminuser->getId();
+            }
         }
     }
 }

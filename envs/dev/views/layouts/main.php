@@ -1,3 +1,10 @@
+<?php
+    $i = (new \admin\storage\ImageQuery())->all();
+    
+    foreach($i as $m) {
+        echo $m->source . PHP_EOL;
+    }
+?>
 <html>
     <head>
         <title>Luya &mdash; <?= $this->title; ?></title>

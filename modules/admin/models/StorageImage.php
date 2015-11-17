@@ -1,6 +1,7 @@
 <?php
 
 namespace admin\models;
+use admin\models\StorageFile;
 
 class StorageImage extends \yii\db\ActiveRecord
 {
@@ -13,12 +14,12 @@ class StorageImage extends \yii\db\ActiveRecord
     {
         return [
             [['file_id'], 'required'],
-            [['filter_id'], 'safe'],
+            [['filter_id', 'resolution_width', 'resolution_height'], 'safe'],
         ];
     }
 
     public function getFile()
     {
-        return $this->hasOne(\admin\models\StorageFile::className(), ['id' => 'file_id']);
+        return $this->hasOne(StorageFile::className(), ['id' => 'file_id']);
     }
 }
