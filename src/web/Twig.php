@@ -39,10 +39,10 @@ class Twig extends \yii\base\Component
                 return Yii::$app->getAssetManager()->getBundle($name);
             },
             'filterApply' => function ($imageId, $filterIdentifier) {
-                return Yii::$app->storagecontainer->getImage($imageId)->applyFilter($filterIdentifier);
+                return Yii::$app->storage->getImage($imageId)->applyFilter($filterIdentifier);
             },
             'image' => function ($imageId) {
-                return Yii::$app->storagecontainer->getImage($imageId);
+                return Yii::$app->storage->getImage($imageId);
             },
             'element' => function () {
                 $args = func_get_args();

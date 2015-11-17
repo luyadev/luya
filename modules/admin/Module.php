@@ -63,20 +63,18 @@ class Module extends \admin\base\Module
     {
         return [
             'adminuser' => [
-                'class' => '\admin\components\AdminUser',
+                'class' => \admin\components\AdminUser::className(),
             ],
             'adminmenu' => [
-                'class' => '\admin\components\AdminMenu',
+                'class' => \admin\components\AdminMenu::className(),
             ],
-            /*
             'storage' => [
-                'class' => '\admin\components\Storage',
+                'class' => \admin\components\StorageContainer::className(),
             ],
-            */
             'auth' => [
-                'class' => '\admin\components\Auth',
+                'class' => \admin\components\Auth::className(),
             ],
-            'storagecontainer' => [
+            'storagecontainer' => [ // @todo remove alias
                 'class' => \admin\components\StorageContainer::className(),
             ]
         ];

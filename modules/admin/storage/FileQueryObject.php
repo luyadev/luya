@@ -42,7 +42,7 @@ class FileQueryObject extends \yii\base\Object
      */
     public function getSource()
     {
-        return Yii::$app->storagecontainer->httpPath . '/' . $this->itemArray['name_new_compound'];
+        return Yii::$app->storage->httpPath . '/' . $this->itemArray['name_new_compound'];
     }
     
     /**
@@ -50,12 +50,12 @@ class FileQueryObject extends \yii\base\Object
      */
     public function getHttpSource()
     {
-        return Yii::$app->storagecontainer->httpPath . '/' . $this->itemArray['name_new_compound'];
+        return Yii::$app->storage->httpPath . '/' . $this->itemArray['name_new_compound'];
     }
     
     public function getServerSource()
     {
-        return Yii::$app->storagecontainer->serverPath . '/' . $this->itemArray['name_new_compound'];
+        return Yii::$app->storage->serverPath . '/' . $this->itemArray['name_new_compound'];
     }
     
     public function toArray()

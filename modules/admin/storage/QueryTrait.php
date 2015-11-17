@@ -13,7 +13,7 @@ trait QueryTrait
     public function getStorage()
     {
         if ($this->_storage === null) {
-            $this->_storage = Yii::$app->storagecontainer;
+            $this->_storage = Yii::$app->storage;
         }
         
         return $this->_storage;

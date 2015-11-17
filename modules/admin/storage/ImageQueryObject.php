@@ -26,7 +26,7 @@ class ImageQueryObject extends \yii\base\Object
     
     public function getSource()
     {
-        return ($this->getFile()) ? Yii::$app->storagecontainer->httpPath . '/' . $this->getFilterId() . '_' . $this->getFile()->getSystemFileName() : false;
+        return ($this->getFile()) ? Yii::$app->storage->httpPath . '/' . $this->getFilterId() . '_' . $this->getFile()->getSystemFileName() : false;
     }
     
     public function getFile()
@@ -36,7 +36,7 @@ class ImageQueryObject extends \yii\base\Object
     
     public function applyFilter($filterName)
     {
-        return ($filterItem = Yii::$app->storagecontainer->getFiltersArrayItem($filterName)) ? Yii::$app->storagecontainer->addImage($this->getFileId(), $filterItem['id']) : false;
+        return ($filterItem = Yii::$app->storage->getFiltersArrayItem($filterName)) ? Yii::$app->storage->addImage($this->getFileId(), $filterItem['id']) : false;
     }
     
     public function toArray()

@@ -42,7 +42,7 @@ class StorageController extends \admin\base\RestController
                 return ['upload' => false, 'message' => $this->_uploaderErrors[$file['error']]];
             }
             try {
-                $create = Yii::$app->storagecontainer->addFile($file['tmp_name'], $file['name'], Yii::$app->request->post('folderId', 0));
+                $create = Yii::$app->storage->addFile($file['tmp_name'], $file['name'], Yii::$app->request->post('folderId', 0));
                 return ['upload' => true, 'message' => 'file uploaded succesfully'];
             } catch(Exception $err) {
                 return ['upload' => false, 'message' => $err->getMessage()];
@@ -77,7 +77,7 @@ class StorageController extends \admin\base\RestController
         $filterId = Yii::$app->request->post('filterId', null);
 
         try {
-            $create = Yii::$app->storagecontainer->addImage($fileId, $filterId);
+            $create = Yii::$app->storage->addImage($fileId, $filterId);
             
         } catch (Exception $err) {
             return ['id' => 0, 'error' => true, 'message' => 'error while creating image: ' . $err->getMessage(), 'image' => null];
@@ -103,7 +103,7 @@ class StorageController extends \admin\base\RestController
 
     public function actionImagePath($imageId)
     {
-        return Yii::$app->storagecontainer->getImage($imageId)->source;
+        return Yii::$app->storage->getImage($imageId)->source;
     }
 
     public function actionAllFilePaths()
@@ -113,7 +113,7 @@ class StorageController extends \admin\base\RestController
 
     public function actionFilePath($fileId)
     {
-        return Yii::$app->storagecontainer->getFile($fileId)->source;
+        return Yii::$app->storage->getFile($fileId)->source;
     }
 
     public function actionAllFolderFiles()
@@ -214,7 +214,7 @@ class StorageController extends \admin\base\RestController
                 $isImage = true;
                 
                 try {
-                    $image = Yii::$app->storagecontainer->addImage($v['id'], 0);
+                    $image = Yii::$app->storage->addImage($v['id'], 0);
                     
                     if ($image) {
                         $thumb = $image->applyFilter('tiny-thumbnail');
@@ -238,7 +238,7 @@ class StorageController extends \admin\base\RestController
             $files[$k]['is_image'] = $isImage;
             $files[$k]['thumbnail'] = $thumb;
             $files[$k]['original_image'] = $originalImage;
-            $files[$k]['file_data'] = Yii::$app->storagecontainer->getFile($v['id']);
+            $files[$k]['file_data'] = Yii::$app->storage->getFile($v['id']);
         }
     
         return $files;
