@@ -4,10 +4,11 @@ namespace admin\storage;
 
 use Yii;
 use luya\helpers\Url;
+use admin\storage\FolderQuery;
 
 class FileQueryObject extends \yii\base\Object
 {
-    public $itemArray = null;
+    use \admin\storage\ObjectTrait;
     
     public function getId()
     {
@@ -17,6 +18,11 @@ class FileQueryObject extends \yii\base\Object
     public function getFolderId()
     {
         return $this->itemArray['folder_id'];
+    }
+    
+    public function getFolder()
+    {
+        return (new FolderQuery())->findOne($this->getFolderId());
     }
     
     public function getName()

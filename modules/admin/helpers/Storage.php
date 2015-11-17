@@ -2,6 +2,8 @@
 
 namespace admin\helpers;
 
+use Exception;
+
 class Storage
 {
     /**
@@ -14,5 +16,30 @@ class Storage
     public static function createFileHash($fileName)
     {
         return sprintf('%s', hash('crc32b', uniqid($fileName, true)));
+    }
+    
+    /**
+     * 
+     * @param string $filePath
+     * @return array
+     */
+    public static function getImageResolution($filePath, $throwException = false)
+    {
+        $dimensions = @getimagesize($filePath);
+        
+        $width = 0;
+        $height = 0;
+        
+        if (isset($dimensions[0]) && isset($dimensions[1])) {
+            $width = $dimensions[0];
+            $height = $dimensions[1];
+        } elseif ($throwException) {
+            throw new Exception("Unable to determine the resoltuions of the file $filePath.");
+        }
+        
+        return [
+            'width' => $width,
+            'height' => $height,
+        ];
     }
 }

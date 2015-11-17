@@ -3,6 +3,7 @@
 namespace admin\storage;
 
 use Yii;
+use Exception;
 
 /**
  * @property object $storage The storage container object
@@ -11,49 +12,25 @@ use Yii;
  */
 class FileQuery extends \yii\base\Object
 {
-    private $_storage = null;
+    use \admin\storage\QueryTrait;
     
-    private $_where = [];
-    
-    public function getStorage()
+    public function getDataProvider()
     {
-        if ($this->_storage === null) {
-            $this->_storage = Yii::$app->get('storagecontainer');
-        }
-        
-        return $this->_storage;
+        return $this->storage->filesArray;
     }
     
-    public function where(array $args)
+    public function getItemDataProvider($id)
     {
-        $this->_where = $args;
-        
-        return $this;
+        return $this->storage->getFilesArrayItem($id);
     }
     
-    protected function whereFilter($item)
+    public function createObject(array $itemArray)
     {
-        foreach ($this->_where as $whereKey => $whereValue) {
-            if ($item[$whereKey] != $whereValue) {
-                return false;
-            }
-        }
-        
-        return true;
+        return FileQueryObject::create($itemArray);
     }
     
-    public function all()
+    public function createIteratorObject(array $data)
     {
-        return Yii::createObject(['class' => FileQueryIterator::className(), 'data' => array_filter($this->storage->filesArray, [$this, 'whereFilter'])]);
-    }
-    
-    public function findOne($id)
-    {
-        return static::createFileQueryObject($this->storage->getFilesArrayItem($id));
-    }
-    
-    public static function createFileQueryObject(array $itemArray)
-    {
-        return Yii::createObject(['class' => FileQueryObject::className(), 'itemArray' => $itemArray]);
+        return Yii::createObject(['class' => FileQueryIterator::className(), 'data' => $data]);
     }
 }

@@ -7,7 +7,7 @@ use admin\storage\FileQuery;
 
 class ImageQueryObject extends \yii\base\Object
 {
-    public $itemArray = [];
+    use \admin\storage\ObjectTrait;
     
     public function getId()
     {
@@ -26,11 +26,16 @@ class ImageQueryObject extends \yii\base\Object
     
     public function getSource()
     {
-        return Yii::$app->storagecontainer->httpPath . '/' . $this->getFilterId() . '_' . $this->getFile()->getSystemFileName();
+        return ($this->getFile()) ? Yii::$app->storagecontainer->httpPath . '/' . $this->getFilterId() . '_' . $this->getFile()->getSystemFileName() : false;
     }
     
     public function getFile()
     {
         return (new FileQuery())->findOne($this->getFileId());
+    }
+    
+    public function applyFilter($filterName)
+    {
+        return ($filterItem = Yii::$app->storagecontainer->getFiltersArrayItem($filterName)) ? Yii::$app->storagecontainer->addImage($this->getFileId(), $filterItem['id']) : false;
     }
 }

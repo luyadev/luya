@@ -4,7 +4,7 @@ namespace admin\storage;
 
 use Iterator;
 use Countable;
-use admin\storage\FileQueryObject;
+use admin\storage\FolderQueryObject;
 
 /**
  * Iterator class for file items.
@@ -13,7 +13,7 @@ use admin\storage\FileQueryObject;
  *
  * @author nadar
  */
-class FileQueryIterator extends \yii\base\Object implements Iterator, Countable
+class FolderQueryIterator extends \yii\base\Object implements Iterator, Countable
 {
     /**
      * @var array An array containing the data to iterate.
@@ -37,7 +37,7 @@ class FileQueryIterator extends \yii\base\Object implements Iterator, Countable
      */
     public function current()
     {
-        return FileQueryObject::create(current($this->data));
+        return FolderQueryObject::create(current($this->data));
     }
 
     /**

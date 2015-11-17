@@ -5,11 +5,16 @@ namespace admin\components;
 use Yii;
 use Exception;
 use yii\db\Query;
-use admin\storage\FileQuery;
-use luya\helpers\FileHelper;
 use yii\helpers\Inflector;
+use luya\helpers\FileHelper;
 use admin\helpers\Storage;
+use admin\storage\FileQuery;
+use admin\storage\ImageQuery;
 use admin\models\StorageFile;
+use admin\models\StorageImage;
+use admin\models\StorageFilter;
+use admin\models\StorageFolder;
+use Imagine\Gd\Imagine;
 
 /**
  * Create images, files, manipulate, foreach and get details. The storage container 
@@ -29,10 +34,9 @@ use admin\models\StorageFile;
  * 
  * to add a new file into the storage system use setFile
  * 
+ * use Yii::$app->storage->addFile() to add a new file
  * 
- * 
- * 
- * ### getFile
+ * get a single file an return file object
  * 
  * ```php
  * Yii::$app->storage->getFile(5);
@@ -44,16 +48,25 @@ use admin\models\StorageFile;
  * (new admin\file\Query())->where(['id' => 10])->one();
  * ```
  * 
+ * ### images
+ * 
+ * ### filters
+ * 
+ * ### folders
+ * 
+ * @todo when the old storage composition is removed, rename the queryobject classes
+ * 
  * @property string $httpPath Get the http path to the storage folder.
  * @property string $serverPath Get the server path (for php) to the storage folder.
  * @property array $filesArray An array containing all files
  * @property array $imagesArray An array containg all images
  * @property array $foldersArray An array containing all folders
+ * @property array $filtersArray An array with all filters
  * 
  * @author nadar
  */
-class StorageContainer extends \yii\base\Component {
-    
+class StorageContainer extends \yii\base\Component
+{
     public $request = null;
     
     private $_httpPath = null;
@@ -65,6 +78,8 @@ class StorageContainer extends \yii\base\Component {
     private $_imagesArray = null;
     
     private $_foldersArray = null;
+    
+    private $_filtersArray = null;
     
     public function __construct(\luya\web\Request $request, array $config = [])
     {
@@ -107,7 +122,7 @@ class StorageContainer extends \yii\base\Component {
     public function getImagesArray()
     {
         if ($this->_imagesArray === null) {
-            $this->_imagesArray = (new Query())->from('admin_storage_image')->indexBy('id')->all();
+            $this->_imagesArray = (new Query())->from('admin_storage_image')->select(['id', 'file_id', 'filter_id', 'resolution_width', 'resolution_height'])->indexBy('id')->all();
         }
         
         return $this->_imagesArray;
@@ -116,20 +131,6 @@ class StorageContainer extends \yii\base\Component {
     public function getImagesArrayItem($imageId)
     {
         return (isset($this->imagesArray[$imageId])) ? $this->imagesArray[$imageId] : false;
-    }
-    
-    public function getFoldersArray()
-    {
-        if ($this->_foldersArray === null) {
-            $this->_foldersArray = (new Query())->from('admin_storage_folder')->indexBy('id')->all();
-        }
-        
-        return $this->_foldersArray;
-    }
-    
-    public function getFoldersArrayItem($folderId)
-    {
-        return (isset($this->foldersArray[$folderId])) ? $this->foldersArray[$folderId] : false;
     }
     
     public function findFiles(array $args)
@@ -202,16 +203,109 @@ class StorageContainer extends \yii\base\Component {
         return false;
     }
     
-    public function findImage()
+    public function findImage(array $args)
     {
-        
+        return (new ImageQuery())->where($args)->all();
     }
     
-    public function getImage($imageId) {} // new admin\image\Item();
+    public function getImage($imageId)
+    {
+        return (new ImageQuery())->findOne($imageId);
+    }
     
-    public function addImage($fileId, $filterId) {}
+    /**
+     * @todo this is a copy of the old code, clean up!
+     * @param unknown $fileId
+     * @param unknown $filterId
+     */
+    public function addImage($fileId, $filterId = 0)
+    {
+        $query = (new ImageQuery())->where(['file_id' => $fileId, 'filter_id' => $filterId])->one();
+        
+        if ($query) {
+            return $query;
+        }
+        
+        $fileQuery = $this->getFile($fileId);
+        
+        if (!$fileQuery) {
+            throw new Exception("unable to create image, cause the base file does not eixsts.");
+        }
+        
+        
+        $imagine = new Imagine();
+        $image = $imagine->open($fileQuery->serverSource);
+        
+        $fileName = $filterId.'_'.$fileQuery->systemFileName;
+        $fileSavePath = $this->serverPath . '/' . $fileName;
+        if (empty($filterId)) {
+            $save = $image->save($fileSavePath);
+        } else {
+            $model = StorageFilter::find()->where(['id' => $filterId])->one();
+            if (!$model) {
+                throw new Exception("Could not find the provided filter id '$filterId'.");
+            }
+            $newimage = $model->applyFilter($image, $imagine);
+            $save = $newimage->save($fileSavePath);
+        }
+        
+        if (!$save) {
+            throw new Exception("unable to store file $fileSavePath");
+        }
+        
+        $resolution = Storage::getImageResolution($fileSavePath);
+        
+        $model = new StorageImage();
+        $model->setAttributes([
+            'file_id' => $fileId,
+            'filter_id' => $filterId,
+            'resolution_width' => $resolution['width'],
+            'resolution_height' => $resolution['height'],
+        ]);
+        
+        if (!$model->save()) {
+            throw new Exception("unable to save storage image, fata db exception.");
+        }
+        
+        $this->_imagesArray[$model->id] = $model->toArray();
+        
+        return $this->getImage($model->id);
+    }
     
-    public function getFolders() {} // new admin\folder\Query();
+    public function getFoldersArray()
+    {
+        if ($this->_foldersArray === null) {
+            $this->_foldersArray = (new Query())->from('admin_storage_folder')->select(['id', 'name', 'parent_id', 'timestamp_create', 'is_deleted'])->indexBy('id')->all();
+        }
+        
+        return $this->_foldersArray;
+    }
     
-    public function addFolder($folderName, $parentFolderId) {}
+    public function getFoldersArrayItem($folderId)
+    {
+        return (isset($this->foldersArray[$folderId])) ? $this->foldersArray[$folderId] : false;
+    }
+    
+    public function addFolder($folderName, $parentFolderId = 0)
+    {
+        $model = new StorageFolder();
+        $model->name = $folderName;
+        $model->parent_id = $parentFolderId;
+        $model->timestamp_create = time();
+        return $model->save(false);
+    }
+    
+    public function getFiltersArray()
+    {
+        if ($this->_filtersArray === null) {
+            $this->_filtersArray = (new Query())->from('admin_storage_filter')->select(['id', 'identifier', 'name'])->indexBy('identifier')->all();
+        }
+        
+        return $this->_filtersArray;
+    }
+    
+    public function getFiltersArrayItem($filterIdentifier)
+    {
+        return (isset($this->filtersArray[$filterIdentifier])) ? $this->filtersArray[$filterIdentifier] : false;
+    }
 }

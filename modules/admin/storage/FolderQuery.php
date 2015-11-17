@@ -9,27 +9,27 @@ use Yii;
  * 
  * @author nadar
  */
-class ImageQuery extends \yii\base\Object
+class FolderQuery extends \yii\base\Object
 {
     use \admin\storage\QueryTrait;
     
     public function getDataProvider()
     {
-        return $this->storage->imagesArray;
+        return $this->storage->foldersArray;
     }
     
     public function getItemDataProvider($id)
     {
-        return $this->storage->getImagesArrayItem($id);
+        return $this->storage->getFoldersArrayItem($id);
     }
     
     public function createObject(array $itemArray)
     {
-        return ImageQueryObject::create($itemArray);
+        return FolderQueryObject::create($itemArray);
     }
     
     public function createIteratorObject(array $data)
     {
-        return Yii::createObject(['class' => ImageQueryIterator::className(), 'data' => $data]);
+        return Yii::createObject(['class' => FolderQueryIterator::className(), 'data' => $data]);
     }
 }

@@ -4,7 +4,7 @@ namespace admin\storage;
 
 use Iterator;
 use Countable;
-use admin\storage\ImageQuery;
+use admin\storage\ImageQueryObject;
 
 /**
  * Iterator class for file items.
@@ -37,7 +37,7 @@ class ImageQueryIterator extends \yii\base\Object implements Iterator, Countable
      */
     public function current()
     {
-        return ImageQuery::createImageQueryObject(current($this->data));
+        return ImageQueryObject::create(current($this->data));
     }
 
     /**
