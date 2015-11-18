@@ -24,7 +24,7 @@
 	width: calc(100% - 245px) !important; // 100% - (width + padding of fileupload__btn)
 	height: 36px !important;
 	margin-left: 15px !important;
-	color: color("shades", "black") !important;
+	color: color("grey", "lighten-1") !important;
 	border: none;
-	border-bottom: 1px dotted color("shades", "black") !important;
+	padding-top: 10px;
 }
