@@ -144,8 +144,8 @@
                                 <div class="left">
 
                                     <!-- CONFIG BUTTON -->
-                                    <div class="toolbar__group">
-                                        <a class="[ btn-flat btn--small ][ grey-text text-darken-2 ]" ng-click="togglePropMask()" ng-show="properties.length">
+                                    <div class="toolbar__group" ng-show="properties.length">
+                                        <a class="[ btn-flat btn--small ][ grey-text text-darken-2 ]" ng-click="togglePropMask()">
                                             <i class="material-icons cms__prop-toggle">settings</i>
                                         </a>
                                     </div>

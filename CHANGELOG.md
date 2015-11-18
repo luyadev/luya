@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-beta2 (in progress)
 -------------------------
+- `#546` Page-property-icon: Removed empty space of the button if the page has no property.
 - `#535` Filemanager: Move-buttons use now default-button-style.
 - `#527` directory-names in filemanager full displayed.
 - `#536` switched color for inactive state langauge-button.
