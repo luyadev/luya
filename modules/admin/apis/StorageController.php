@@ -78,12 +78,10 @@ class StorageController extends \admin\base\RestController
 
         try {
             $create = Yii::$app->storage->addImage($fileId, $filterId);
-            
+            return ['id' => $create->id, 'error' => false, 'message' => 'upload ok', 'image' => $create->source];
         } catch (Exception $err) {
             return ['id' => 0, 'error' => true, 'message' => 'error while creating image: ' . $err->getMessage(), 'image' => null];
         }
-        
-        return ['id' => $create->id, 'error' => false, 'message' => 'upload ok', 'image' => $create->source];
     }
     
     // until here new storage
@@ -103,7 +101,7 @@ class StorageController extends \admin\base\RestController
 
     public function actionImagePath($imageId)
     {
-        return Yii::$app->storage->getImage($imageId)->source;
+        return Yii::$app->storage->getImage($imageId)->toArray();
     }
 
     public function actionAllFilePaths()
@@ -113,7 +111,7 @@ class StorageController extends \admin\base\RestController
 
     public function actionFilePath($fileId)
     {
-        return Yii::$app->storage->getFile($fileId)->source;
+        return Yii::$app->storage->getFile($fileId)->toArray();
     }
 
     public function actionAllFolderFiles()

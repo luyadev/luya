@@ -551,16 +551,11 @@
 				
 				$scope.add = function() {
 					$scope.model.push({ imageId : 0, caption : '' });
-				}
+				};
 				
 				$scope.remove = function(key) {
 					$scope.model.splice(key, 1);
-				}
-				
-				$scope.debug = function() {
-					console.log($scope.model);
-				}
-				
+				};
 			},
 			template: function() {
 				return '<div class="input input--image-array imagearray" ng-class="{\'input--hide-label\': i18n}">' +
@@ -615,10 +610,6 @@
 				$scope.remove = function(key) {
 					$scope.model.splice(key, 1);
 				};
-				
-				$scope.debug = function() {
-					console.log($scope.model);
-				}
 	
 			},
 			template: function() {
@@ -811,7 +802,6 @@
 		service.get = function(fileId, forceReload) {
 			return $q(function(resolve, reject) {
 				if (fileId in service.data && forceReload !== true) {
-					//console.log('request existing fileId', fileId);
 					resolve(service.data[fileId]);
 				} else {
 					$http.get('admin/api-admin-storage/file-path', { params: { fileId : fileId } }).success(function(response) {
@@ -846,7 +836,6 @@
 		service.get = function(imageId, forceReload) {
 			return $q(function(resolve, reject) {
 				if (imageId in service.data && forceReload !== true) {
-					//console.log('request existing imageId', imageId);
 					resolve(service.data[imageId]);
 				} else {
 					$http.get('admin/api-admin-storage/image-path', { params: { imageId : imageId } }).success(function(response) {
@@ -983,7 +972,7 @@
 	                scope.lastapplyFileId = scope.fileId;
 	                scope.lastapplyFilterId = scope.filterId;
 	                
-					$http.post('admin/api-admin-storage/image-upload', $.param({ fileId : scope.fileId, filterId : scope.filterId }), {
+	                $http.post('admin/api-admin-storage/image-upload', $.param({ fileId : scope.fileId, filterId : scope.filterId }), {
 			        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 			        }).success(function(success) {
 			        	if (!success) {
@@ -1018,8 +1007,8 @@
 					if (n != 0 && n != null && n !== undefined) {
 						ImageIdService.get(n).then(function(response) {
 							scope.imageinfo = response;
-							scope.filterId = response.filter_id;
-							scope.fileId = response.file_id;
+							scope.filterId = response.filterId;
+							scope.fileId = response.fileId;
 						});
 					}
 				})
@@ -1209,11 +1198,11 @@
 						return;
 					}
 	
-					var i = $scope.selectedFiles.indexOf(file.id);
+					var i = $scope.selectedFiles.indexOf(file.file_data.id);
 					if (i > -1) {
 						$scope.selectedFiles.splice(i, 1);
 					} else {
-						$scope.selectedFiles.push(file.id);
+						$scope.selectedFiles.push(file.file_data.id);
 					}
 				}
 	
@@ -1230,7 +1219,7 @@
 				}
 				
 				$scope.inSelection = function(file) {
-					var response = $scope.selectedFiles.indexOf(file.id);
+					var response = $scope.selectedFiles.indexOf(file.file_data.id);
 					
 					if (response != -1) {
 						return true;
@@ -1279,7 +1268,7 @@
 				}
 				
 				$scope.selectFile = function(file) {
-					$scope.$parent.select(file.id);
+					$scope.$parent.select(file.file_data.id);
 				}
 	
 	            $scope.toggleModal = function() {
@@ -1293,7 +1282,7 @@
 	            $scope.detailFile = null;
 	            
 	            $scope.toggleDetail = function(file) {
-	            	if (file.id == $scope.isDetailFile && $scope.isDetailOpen == true) {
+	            	if (file.file_data.id == $scope.isDetailFile && $scope.isDetailOpen == true) {
 	            		$scope.isDetailOpen = false;
 	            	} else {
 	            		$scope.isDetailOpen = true;
