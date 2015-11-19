@@ -4,6 +4,7 @@ namespace admin\storage;
 
 use Yii;
 use luya\helpers\Url;
+use luya\helpers\FileHelper;
 use admin\storage\FolderQuery;
 
 class FileQueryObject extends \yii\base\Object
@@ -45,6 +46,16 @@ class FileQueryObject extends \yii\base\Object
     public function getExtension()
     {
         return $this->itemArray['extension'];
+    }
+    
+    public function getSize()
+    {
+        return $this->itemArray['file_size'];
+    }
+    
+    public function getSizeReadable()
+    {
+        return FileHelper::humanReadableFilesize($this->getSize());
     }
     
     public function getUploadTimestamp()
@@ -94,6 +105,8 @@ class FileQueryObject extends \yii\base\Object
             'mimeType' => $this->getMimeType(),
             'extension' => $this->getExtension(),
             'uploadTimestamp' => $this->getUploadTimestamp(),
+            'size' => $this->getSize(),
+            'sizeReadable' => $this->getSizeReadable(),
         ];
     }
 }

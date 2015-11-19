@@ -333,6 +333,9 @@ $this->beginPage()
                             <td><i>Datei Typ</i></td><td>{{ fileDetail.extension }}</td>
                         </tr>
                         <tr>
+                            <td><i>Grösse</i></td><td>{{ fileDetail.sizeReadable }}</td>
+                        </tr>
+                        <tr>
                             <td><i>Download</i></td><td><a ng-href="{{fileDetail.source}}" target="_blank" class="btn btn-floating"><i class="material-icons">cloud_download</i></a></td>
                         </tr>
                         </tbody>

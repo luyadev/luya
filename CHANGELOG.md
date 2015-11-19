@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-beta2 (in progress)
 -------------------------
+- `#542` added file size to filemanager.
 - `#546` Page-property-icon: Removed empty space of the button if the page has no property.
 - `#535` Filemanager: Move-buttons use now default-button-style.
 - `#527` directory-names in filemanager full displayed.
