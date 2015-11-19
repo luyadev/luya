@@ -395,7 +395,7 @@ $this->beginPage()
         <nav>
             <div class="nav-wrapper blue">
 
-                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse" ng-click="mobileOpen = !mobileOpen"><i class="material-icons">menu</i></a>
 
                 <ul class="left hide-on-med-and-down">
                     <li class="navbar__item" ng-repeat="item in items" ng-class="{'navbar__item--active' : isActive(item) }">
@@ -440,7 +440,7 @@ $this->beginPage()
                     </li>
                 </ul>
 
-                <ul class="side-nav" id="mobile-demo">
+                <ul class="side-nav" id="mobile-demo" ng-class="{ 'side-nav--open' : mobileOpen }">
                     <li ng-repeat="item in items" ng-class="{'active' : isActive(item) }">
                         <a ng-click="click(item)" class="navbar__link"><i class="[ material-icons left ] navbar__icon">{{item.icon}}</i>{{item.alias}}</a>
                     </li>

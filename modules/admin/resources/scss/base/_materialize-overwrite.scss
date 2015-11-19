@@ -56,3 +56,15 @@ table.hoverable {
 table.hoverable tbody tr:hover {
 	background-color: color("blue", "lighten-4");
 }
+
+/**
+ * Overwrite default sidebar behavior
+ */
+.side-nav {
+	
+    top: 64px;
+	transition: 0.25s ease left;
+    &.side-nav--open {
+    	left: 0%;
+    }
+}
