@@ -3,6 +3,8 @@
 namespace cmsadmin\blocks;
 
 use Yii;
+use admin\storage\ImageQuery;
+use admin\storage\admin\storage;
 
 class ImageBlock extends \cmsadmin\base\Block
 {
@@ -31,7 +33,8 @@ class ImageBlock extends \cmsadmin\base\Block
     public function extraVars()
     {
         return [
-            'image' => Yii::$app->storage->getImage($this->getVarValue('imageId'), 0),
+            'image' => ($image = (new ImageQuery())->findOne($this->getVarValue('imageId'))) ? $image->toArray() : false,
+            //'image' => Yii::$app->storage->getImage($this->getVarValue('imageId')),
         ];
     }
 
