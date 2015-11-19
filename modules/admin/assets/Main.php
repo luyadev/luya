@@ -15,6 +15,7 @@ class Main extends \luya\web\Asset
         // 'js/materialize.min.js', // original jquery
         // 'js/ng-materialize.js', // angular wrapper
         'js/zaa.js',
+        'js/services.js',
         'js/directives.js',
         'js/controllers.js',
         /*

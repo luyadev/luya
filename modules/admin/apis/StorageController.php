@@ -9,11 +9,76 @@ use admin\models\StorageImage;
 use admin\models\StorageFile;
 use admin\models\StorageFolder;
 
+use admin\storage\FolderQuery;
+use admin\storage\ImageQuery;
+use admin\storage\FileQuery;
+
 /**
  * @author nadar
  */
 class StorageController extends \admin\base\RestController
 {
+    // new beta2 controller meethods
+    
+    public function actionDataFolders()
+    {
+        $folders = [];
+        foreach((new FolderQuery())->all() as $folder) {
+            $folders[] = $folder->toArray();
+        }
+        
+        return $folders;
+    }
+    
+    public function actionDataFiles()
+    {
+        $files = [];
+        foreach((new FileQuery())->where(['is_hidden' => 0, 'is_deleted' => 0])->all() as $file) {
+            
+            $data = $file->toArray();
+            if ($file->isImage) {
+                $filter = Yii::$app->storage->getFiltersArrayItem('tiny-thumbnail');
+                if ($filter) {
+                    $thumbnail = Yii::$app->storage->addImage($file->id, $filter['id']);
+                    if ($thumbnail) {
+                        $data['thumbnail'] = $thumbnail->toArray();
+                    }
+                }
+            }
+            $files[] = $data;
+            
+        }
+        
+        return $files;
+    }
+    
+    public function actionDataImages()
+    {
+        $images = [];
+        foreach((new ImageQuery())->all() as $image) {
+            $images[] = $image->toArray();
+        }   
+        
+        return $images;
+    }
+    
+    public function actionImageUpload()
+    {
+        try {
+            $create = Yii::$app->storage->addImage(Yii::$app->request->post('fileId', null), Yii::$app->request->post('filterId', null), true);
+            if ($create) {
+                return ['error' => false, 'id' => $create->id];
+            }
+        } catch (Exception $err) {
+            return ['error' => true, 'message' => 'error while creating image: ' . $err->getMessage()];
+        }
+    }
+    
+    public function actionDataFilters()
+    {
+        return Yii::$app->storage->filtersArray;   
+    }
+    
     private $_uploaderErrors = [
         0 => 'There is no error, the file uploaded with success',
         1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
@@ -24,7 +89,7 @@ class StorageController extends \admin\base\RestController
         7 => 'Failed to write file to disk.',
         8 => 'A PHP extension stopped the file upload.',
     ];
-
+    
     /**
      * <URL>/admin/api-admin-storage/files-upload.
      *
@@ -33,7 +98,7 @@ class StorageController extends \admin\base\RestController
      * @todo http://php.net/manual/en/features.file-upload.errors.php
      *
      * @return array|json Key represents the uploaded file name, value represents the id in the database.
-     */
+    */
     public function actionFilesUpload()
     {
         $files = [];
@@ -48,21 +113,34 @@ class StorageController extends \admin\base\RestController
                 return ['upload' => false, 'message' => $err->getMessage()];
             }
         }
-
+    
         return ['upload' => false, 'message' => 'no files selected'];
     }
-
-    public function actionFilesDelete()
+    
+    public function actionFilemanagerMoveFiles()
+    {
+        $toFolderId = Yii::$app->request->post('toFolderId', 0);
+        $fileIds = Yii::$app->request->post('fileIds', []);
+        
+        return Storage::moveFilesToFolder($fileIds, $toFolderId);
+    }
+    
+    public function actionFilemanagerRemoveFiles()
     {
         foreach (Yii::$app->request->post('ids', []) as $id) {
             if (!Storage::removeFile($id)) {
                 return false;
             }
         }
-
+    
         return true;
     }
+    
+    // old controller methods
 
+    
+
+    /*
     public function actionFilesMove()
     {
         $toFolderId = Yii::$app->request->post('toFolderId', 0);
@@ -70,7 +148,9 @@ class StorageController extends \admin\base\RestController
 
         return Storage::moveFilesToFolder($fileIds, $toFolderId);
     }
+    */
 
+    /*
     public function actionImageUpload()
     {
         $fileId = Yii::$app->request->post('fileId', null);
@@ -83,6 +163,7 @@ class StorageController extends \admin\base\RestController
             return ['id' => 0, 'error' => true, 'message' => 'error while creating image: ' . $err->getMessage(), 'image' => null];
         }
     }
+    */
     
     // until here new storage
 

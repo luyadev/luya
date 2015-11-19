@@ -329,22 +329,8 @@
 			url : "/update/:navId",
 			templateUrl : 'cmsadmin/page/update',
 			resolve : {
-				services : function(FilemanagerFolderListService, FileIdService, FileListeService, ImageIdService) {
-					return FilemanagerFolderListService.get(true).then(function(data) {
-						return FileIdService.init().then(function(response) {
-							return FileListeService.init().then(function(resp) {
-								return ImageIdService.init();
-							});
-						});
-            		});
-            	},
-            	filters : function(FilterService) {
-            		return FilterService.get();
-            	},
-            	menu : function(NewMenuService) {
-            		return NewMenuService.get();
-            	}
-            }
+				adminServiceResolver: adminServiceResolver
+			}
 		})
 		.state("custom.cmsadd", {
 			url : "/create",

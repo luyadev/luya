@@ -57,11 +57,6 @@ class FileQueryObject extends \yii\base\Object
         return in_array($this->getMimeType(), $this->_imageMimeTypes);
     }
     
-    public function getNoFilterImage()
-    {
-        return ($this->getIsImage()) ? (new ImageQuery())->where(['file_id' => $this->getId(), 'filter_id' => 0])->one() : false;
-    }
-    
     /**
      * Delivers the url for nice urls /file/id/hash/hello-world.jpg
      * 

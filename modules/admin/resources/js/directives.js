@@ -751,6 +751,8 @@
 		return service;
 	});
 	
+	/*
+	
 	zaa.factory('FileListeService', function($http, $q) {
 		var service = [];
 		
@@ -759,6 +761,7 @@
 		service.init = function() {
 			return $q(function(resolve, reject) {
 				$http.get('admin/api-admin-storage/all-folder-files').success(function(response) {
+					console.log('FileListeService: init', response);
 					response.forEach(function(value, key) {
 						service.data[value.folder.id] = value.items;
 					});
@@ -773,6 +776,7 @@
 					resolve(service.data[folderId]);
 				} else {
 					$http.get('admin/api-admin-storage/get-files', { params : { folderId : folderId } }).success(function(response) {
+						console.log('FileListeService: get', response);
 						service.data[folderId] = response;
 						resolve(response);
 					});
@@ -791,6 +795,7 @@
 		service.init = function() {
 			return $q(function(resolve, reject) {
 				$http.get('admin/api-admin-storage/all-file-paths').success(function(response) {
+					console.log('FileIdService: init', response);
 					response.forEach(function(value, key) {
 						service.data[value.id] = value;
 					});
@@ -805,6 +810,7 @@
 					resolve(service.data[fileId]);
 				} else {
 					$http.get('admin/api-admin-storage/file-path', { params: { fileId : fileId } }).success(function(response) {
+						console.log('FileIdService: get', response);
 						service.data[fileId] = response;
 						resolve(response);
 					}).error(function(response) {
@@ -852,6 +858,7 @@
 		return service;
 	});
 	
+	
 	zaa.factory('FilemanagerFolderService', function() {
 		var service = [];
 		
@@ -891,14 +898,25 @@
 		
 		return service;
 	});
+	*/
 	
-	zaa.directive('storageFileUpload', function($http, FileIdService) {
+	zaa.directive('storageFileUpload', function($http, ServiceFilesData, $filter) {
 		return {
 			restrict : 'E',
 			scope : {
 				ngModel : '='
 			},
 			link : function(scope) {
+				
+				// ServiceFilesData inhertiance
+				
+				scope.filesData = ServiceFilesData.data;
+				
+				scope.$on('service:FilesData', function(event, data) {
+					scope.filesData = data;
+				});
+				
+				// controller logic
 				
 				scope.modal = true;
 				scope.fileinfo = null;
@@ -914,9 +932,10 @@
 				
 				scope.$watch(function() { return scope.ngModel }, function(n, o) {
 					if (n != 0 && n != null && n !== undefined) {
-						FileIdService.get(n).then(function(response) {
-							scope.fileinfo = response;
-						});
+						var filtering = $filter('filter')(scope.filesData, {id: n}, true);
+						if (filtering && filtering.length == 1) {
+							scope.fileinfo = filtering[0];
+						}
 					}
 				});
 			},
@@ -924,7 +943,7 @@
 		}
 	});
 	
-	zaa.directive('storageImageUpload', function($http, FilterService, ImageIdService) {
+	zaa.directive('storageImageUpload', function($http, $filter, ServiceFiltersData, ServiceImagesData) {
 		return {
 			restrict : 'E',
 			scope : {
@@ -933,6 +952,28 @@
 			},
 			link : function(scope) {
 	
+				// ServiceImagesData inheritance
+				
+				scope.imagesData = ServiceImagesData.data;
+				
+				scope.$on('service:ImagesData', function(event, data) {
+					scope.imagesData = data;
+				});
+				
+				scope.imagesDataReload = function() {
+					return ServiceImagesData.load(true);
+				}
+				
+				// ServiceFiltesrData inheritance
+				
+				scope.filtersData = ServiceFiltersData.data;
+				
+				scope.$on('service:FiltersData', function(event, data) {
+					scope.filtersData = data;
+				});
+				
+				// controller logic
+				
 				scope.noFilters = function() {
 					if (scope.options) {
 						return scope.options.no_filter;
@@ -940,55 +981,34 @@
 				}
 				
 	            scope.imageLoading = false;
+	            
 				scope.fileId = 0;
+				
 				scope.filterId = 0;
+				
 				scope.imageinfo = null;
 				
-				FilterService.get().then(function(r) {
-					scope.filters = r;
-				});
-				
-				//scope.filters = ApiAdminFilter.query();
-				scope.originalFileIsRemoved = false;
-				
-				scope.lastapplyFileId = 0;
-				scope.lastapplyFilterId = 0;
-				
 				scope.filterApply = function() {
-					
-					if (scope.fileId == 0) {
-						alert('Sie müssen zuerst eine Datei auswählen um den Filter anzuwenden.');
-						return;
+					var items = $filter('filter')(scope.imagesData, {fileId: scope.fileId, filterId: scope.filterId}, true);
+					if (items && items.length == 0) {
+						scope.imageLoading = true;
+						// image does not exists make request.
+						$http.post('admin/api-admin-storage/image-upload', $.param({ fileId : scope.fileId, filterId : scope.filterId }), {
+				        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+				        }).success(function(success) {
+				        	if (!success.error) {
+					        	scope.imagesDataReload().then(function(r) {
+					        		scope.ngModel = success.id;
+					        		scope.imageLoading = false;
+					        	});
+				        	}
+						}).error(function(error) {
+							alert('Beim Anwenden des Filters auf die Datei ist ein Fehler Passiert');
+		                    scope.imageLoading = false;
+						});
+					} else {
+						scope.imageinfo = items[0];
 					}
-					
-					if (scope.lastapplyFileId == scope.fileId && scope.lastapplyFilterId == scope.filterId) {
-						return;
-					}
-					
-					scope.originalFileIsRemoved = false;
-					
-	                scope.imageLoading = true;
-	
-	                scope.lastapplyFileId = scope.fileId;
-	                scope.lastapplyFilterId = scope.filterId;
-	                
-	                $http.post('admin/api-admin-storage/image-upload', $.param({ fileId : scope.fileId, filterId : scope.filterId }), {
-			        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-			        }).success(function(success) {
-			        	if (!success) {
-			        		alert('Beim Anwenden des Filters auf die Datei ist ein Fehler Passiert');
-			        	} else {
-			        		if (success.image.file_is_deleted == 1) {
-			        			scope.originalFileIsRemoved = true;
-			        		}
-			        		scope.ngModel = success.id;
-			        	}
-	
-	                    scope.imageLoading = false;
-					}).error(function(error) {
-						alert('Beim Anwenden des Filters auf die Datei ist ein Fehler Passiert');
-	                    scope.imageLoading = false;
-					});
 				};
 				
 				scope.$watch(function() { return scope.filterId }, function(n, o) {
@@ -1005,11 +1025,14 @@
 				
 				scope.$watch(function() { return scope.ngModel }, function(n, o) {
 					if (n != 0 && n != null && n !== undefined) {
-						ImageIdService.get(n).then(function(response) {
-							scope.imageinfo = response;
-							scope.filterId = response.filterId;
-							scope.fileId = response.fileId;
-						});
+						
+						
+						var filtering = $filter('imageuploaditemfilter')(scope.imagesData, n, true);
+						if (filtering) {
+							scope.imageinfo = filtering;
+							scope.filterId = filtering.filterId;
+							scope.fileId = filtering.fileId;
+						}
 					}
 				})
 			},
@@ -1018,12 +1041,46 @@
 	});
 	
 	
+	zaa.filter("imageuploaditemfilter", function() {
+		return function(input, id) {
+			
+			var result = false;
+			
+			angular.forEach(input, function(value, key) {
+				if (value.id == id) {
+					result = value;
+				}
+			});
+			
+			return result;
+		}
+	});
 	
+	zaa.filter("filemanagerfilesfilter", function() {
+		return function(input, folderId, onlyImages) {
+			
+			var result = [];
+			
+			angular.forEach(input, function(data) {
+				if (onlyImages) {
+					if (data.folderId == folderId && data.isImage == true) {
+						result.push(data);
+					}
+				} else {
+					if (data.folderId == folderId) {
+						result.push(data);
+					}
+				}
+			});
+			
+			return result;
+		};
+	});
 	
 	/**
 	 * FILE MANAGER DIR
 	 */
-	zaa.directive("storageFileManager", function(FileListeService, Upload, FilemanagerFolderService, FilemanagerFolderListService) {
+	zaa.directive("storageFileManager", function(Upload, ServiceFoldersData, ServiceFilesData) {
 		return {
 			restrict : 'E',
 			transclude : false,
@@ -1031,51 +1088,33 @@
 				allowSelection : '@selection',
 				onlyImages : '@onlyImages'
 			},
-			controller : function($scope, $http, $timeout) {
+			controller : function($scope, $http, $filter, $timeout) {
 				
-				$scope.showFolderForm = false;
+				// ServiceFoldersData inheritance
 				
-				$scope.files = [];
+				$scope.foldersData = ServiceFoldersData.data;
 				
-				$scope.folders = [];
+				$scope.$on('service:FoldersData', function(event, data) {
+					$scope.foldersData = data;
+				});
 				
-				$scope.selectedFiles = [];
-				
-				$scope.uploading = false;
-				
-				$scope.showFoldersToMove = false;
-				
-				$scope.serverProcessing = false;
-				
-				$scope.uploadResults = null;
-
-                $scope.editFolder = null;
-
-                $scope.activateEditMode = function(folder, mode) {
-                    $scope.editFolder = folder;
-                    switch(mode) {
-                        case 'edit': folder.edit = true;
-                            break;
-                        case 'remove': folder.remove = true;
-                            break;
-                    }
-                }
-
-				$scope.deactivateEditMode = function() {
-					$scope.editFolder.remove = false;
-					$scope.editFolder.edit = false;
-					$scope.editFolder.notempty = false;
+				$scope.foldersDataReload = function() {
+					return ServiceFoldersData.load(true);
 				}
-
-                $scope.editMode = function(folder, mode) {
-                    if (!$scope.editFolder) {
-                        $scope.activateEditMode(folder, mode);
-                    } else {
-						$scope.deactivateEditMode();
-                        $scope.activateEditMode(folder, mode);
-                        $scope.editFolder = folder;
-                    }
-                }
+				
+				// ServiceFilesData inheritance
+				
+				$scope.filesData = ServiceFilesData.data;
+				
+				$scope.$on('service:FilesData', function(event, data) {
+					$scope.filesData = data;
+				});
+				
+				$scope.filesDataReload = function() {
+					return ServiceFilesData.load(true);
+				}
+				
+				// upload logic
 				
 				$scope.$watch('uploadingfiles', function (uploadingfiles) {
 			        if (uploadingfiles != null) {
@@ -1094,7 +1133,10 @@
 					if ($scope.uploadingfiles != null) {
 						if (n == $scope.uploadingfiles.length) {
 							$scope.serverProcessing = true;
-							$scope.getFiles($scope.currentFolderId, true);
+							$scope.filesDataReload().then(function() {
+								$scope.serverProcessing = false;
+								$scope.uploading = false;
+							});
 						}
 					}
 				})
@@ -1129,199 +1171,79 @@
 			        });
 			    }
 				
-				$scope.hasSelection = function() {
-					if ($scope.selectedFiles.length > 0) {
-						return true;
-					}
-					
-					return false;
-				}
+				// selector logic
 				
-				$scope.moveFilesTo = function(folder) {
-					$http.post('admin/api-admin-storage/files-move', $.param({'fileIds' : $scope.selectedFiles, 'toFolderId' : folder.id}), {
-			        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-			        }).success(function(transport) {
-			        	$scope.showFoldersToMove = false;
-						$scope.clearSelection();
-						
-						$scope.getFiles($scope.currentFolderId, true);
-						
-						FileListeService.get(folder.id, true).then(function(r) {
-						});
-						
-			        });
-				}
-                $scope.checkEmptyFolder = function(folder) {
-                    $http.post('admin/api-admin-storage/is-folder-empty?folderId=' + folder.data.id, $.param({ name : folder.data.name }), {
-                        headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                    }).success(function(transport) {
-                        if (transport == false) {
-                            // not empty
-                            folder.remove = false;
-                            folder.notempty = true;
-                        } else {
-                            // empty
-                            $scope.deleteFolder(folder);
-                        }
-                    });
-                }
-
-                $scope.deleteFolder = function(folder) {
-                    // check if folder is empty
-                    $http.post('admin/api-admin-storage/folder-delete?folderId=' + folder.data.id, $.param({ name : folder.data.name }), {
-                        headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-                    }).success(function(transport) {
-                        folder.remove = false;
-                        FilemanagerFolderListService.get(true).then(function(r) {
-                            $scope.folders = r;
-                            $scope.currentFolderId = 0;
-							$scope.getFiles(0,false);
-                        });
-                    });
-                }
-				
-				$scope.updateFolder = function(folder) {
-					$http.post('admin/api-admin-storage/folder-update?folderId=' + folder.data.id, $.param({ name : folder.data.name }), {
-			        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-			        }).success(function(transport) {
-			        	folder.edit = false;
-			        });
-				}
-				
-				$scope.clearSelection = function() {
-					$scope.selectedFiles = [];
-				}
+				$scope.selectedFiles = [];
 				
 				$scope.toggleSelection = function(file) {
 					if ($scope.allowSelection == 'true') {
-						$scope.selectFile(file);
+						// parent inject 
+						$scope.$parent.select(file.id);
 						return;
 					}
 	
-					var i = $scope.selectedFiles.indexOf(file.file_data.id);
+					var i = $scope.selectedFiles.indexOf(file.id);
 					if (i > -1) {
 						$scope.selectedFiles.splice(i, 1);
 					} else {
-						$scope.selectedFiles.push(file.file_data.id);
+						$scope.selectedFiles.push(file.id);
 					}
-				}
+				};
 	
-				$scope.toggleSelectionAll = function() {
-					if ($scope.allowSelection == 'false') {
-						if ($scope.selectedFiles.length > 0 && $scope.selectedFiles.length != $scope.files.length) {
-							$scope.selectedFiles = [];
-						}
-	
-						for (var i = $scope.files.length - 1; i >= 0; i--) {
-							$scope.toggleSelection($scope.files[i]);
-						};
-					}
-				}
-				
 				$scope.inSelection = function(file) {
-					var response = $scope.selectedFiles.indexOf(file.file_data.id);
+					var response = $scope.selectedFiles.indexOf(file.id);
 					
 					if (response != -1) {
 						return true;
 					}
 					
 					return false;
-				}
+				};
 				
-				$scope.removeSelectedItems = function() {
+				// controller logic 
+				
+				$scope.currentFolderId = 0;
+				
+				$scope.changeCurrentFolderId = function(folderId) {
+					$scope.currentFolderId = folderId;
+				};
+				
+				$scope.fileDetail = false;
+				
+				$scope.showFoldersToMove = false;
+				
+				$scope.openFileDetail = function(file) {
+					$scope.fileDetail = file;
+				};
+				
+				$scope.closeFileDetail = function() {
+					$scope.fileDetail = false;
+				};
+				
+				$scope.moveFilesTo = function(folderId) {
+					$http.post('admin/api-admin-storage/filemanager-move-files', $.param({'fileIds' : $scope.selectedFiles, 'toFolderId' : folderId}), {
+			        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+			        }).success(function(transport) {
+			        	$scope.filesDataReload().then(function() {
+			        		$scope.selectedFiles = [];
+			        		$scope.showFoldersToMove = false;
+			        	});
+			        });
+				};
+				
+				$scope.removeFiles = function() {
 					var cfm = confirm("Möchten Sie diese Datei wirklich entfernen?");
 					if (cfm) {
-						$http.post('admin/api-admin-storage/files-delete', $.param({'ids' : $scope.selectedFiles}), {
+						$http.post('admin/api-admin-storage/filemanager-remove-files', $.param({'ids' : $scope.selectedFiles}), {
 				        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 				        }).success(function(transport) {
-				        	if (transport) {
-				        		$scope.getFiles(FilemanagerFolderService.get(), true);
-				        		$scope.clearSelection();
-				        	}
+				        	$scope.filesDataReload().then(function() {
+				        		$scope.selectedFiles = [];
+				        	});
 				        });
 					}
 				}
 				
-				$scope.createNewFolder = function(newFolderName) {
-					$http.post('admin/api-admin-storage/folder-create', $.param({ folderName : newFolderName , parentFolderId : $scope.currentFolderId }), {
-			        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-			        }).success(function(transport) {
-			        	if (transport) {
-			        		$scope.showFolderForm = false;
-			        		$scope.newFolderName = '';
-			        		$scope.reloader();
-			        	}
-			        });
-				}
-				
-				$scope.verifyFileHidden = function(file) {
-					if ($scope.onlyImages) {
-						if (!file.is_image) {
-							return true;
-						}
-					}
-					return false;
-				}
-				
-				$scope.folderFormToggler = function() {
-					$scope.showFolderForm = !$scope.showFolderForm;
-				}
-				
-				$scope.selectFile = function(file) {
-					$scope.$parent.select(file.file_data.id);
-				}
-	
-	            $scope.toggleModal = function() {
-	                $scope.$parent.toggleModal();
-	            }
-	            
-	            $scope.isDetailOpen = false;
-	            
-	            $scope.isDetailFile = null;
-	            
-	            $scope.detailFile = null;
-	            
-	            $scope.toggleDetail = function(file) {
-	            	if (file.file_data.id == $scope.isDetailFile && $scope.isDetailOpen == true) {
-	            		$scope.isDetailOpen = false;
-	            	} else {
-	            		$scope.isDetailOpen = true;
-	            	}
-	            	$scope.isDetailFile = file.id;
-	            	$scope.detailFile = file;
-	            };
-				
-				$scope.loadFolder = function(folderId) {
-					if ($scope.editFolder) {
-						if ($scope.editFolder.data.id != folderId) {
-							$scope.deactivateEditMode();
-							$scope.editFolder = null;
-						}
-					}
-					$scope.showFoldersToMove = false;
-					$scope.clearSelection();
-					FilemanagerFolderService.set(folderId);
-					$scope.currentFolderId = folderId;
-					$scope.getFiles(folderId);
-				}
-				
-				$scope.getFiles = function(folderId, forceReload) {
-					FileListeService.get(folderId, forceReload).then(function(r) {
-						$scope.files = r;
-						$scope.uploading = false;
-						$scope.serverProcessing = false;
-					});
-				}
-				
-				$scope.reloader = function() {
-					FilemanagerFolderListService.get(true).then(function(r) {
-						$scope.folders = r;
-		    			$scope.getFiles(FilemanagerFolderService.get());
-		    			$scope.currentFolderId = FilemanagerFolderService.get();
-					});
-				};
-	
-				$scope.reloader();
 			},
 			templateUrl : 'storageFileManager'
 		}

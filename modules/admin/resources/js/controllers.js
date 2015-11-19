@@ -60,11 +60,6 @@
 			$scope.orderBy = sort + field;
 		};
 		
-		$scope.debug = function() {
-			console.log('config', $scope.config);
-			console.log('data', $scope.data);
-		};
-		
 		$scope.getActiveWindow = function (activeWindowId, id, $event) {
 			$http.post('admin/ngrest/render', $.param({ itemId : id, activeWindowHash : activeWindowId , ngrestConfigHash : $scope.config.ngrestConfigHash }), {
 				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
@@ -493,7 +488,7 @@
 					}
 				}
 				$scope.notify = response.useronline;
-				$timeout(tick, 25000);
+				$timeout(tick, 240000);
 			})
 		})();
 		

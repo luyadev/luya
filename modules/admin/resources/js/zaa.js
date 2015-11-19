@@ -22,12 +22,18 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 				templateUrl: function ($stateParams) {
 	                return $stateParams.moduleRouteId + "/" + $stateParams.controllerId  + "/" + $stateParams.actionId;
 	            },
+	            resolve : {
+	            	adminServiceResolver: adminServiceResolver
+				}
 			})
 			.state("custom", {
 				url: "/template/:templateId",
 				templateUrl: function($stateParams) {
 					var res = $stateParams.templateId.split("-");
 					return res[0] + "/" + res[1] + "/" + res[2];
+				},
+				resolve : {
+					adminServiceResolver: adminServiceResolver
 				}
 			})
 			.state("home", {
@@ -35,6 +41,8 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 				templateUrl: "admin/default/dashboard"
 			});
 	});
+	
+	
 	
 	zaa.directive("compileHtml", function($compile, $parse) {
 		return {

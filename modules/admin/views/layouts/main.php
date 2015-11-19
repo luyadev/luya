@@ -86,9 +86,9 @@ $this->beginPage()
                 </div>
             </div>
         </div>
-        <div class="imageupload__filter" ng-show="!originalFileIsRemoved && !noFilters()">
+        <div class="imageupload__filter" ng-show="!noFilters()">
             <label>Filter Auswahl</label>
-            <select name="filterId" ng-model="filterId" class="browser-default"><option value="0">Kein Filter</option><option ng-repeat="item in filters" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
+            <select name="filterId" ng-model="filterId"><option value="0">Kein Filter</option><option ng-repeat="item in filtersData" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
         </div>
         
     </div>
@@ -96,19 +96,19 @@ $this->beginPage()
 
 <script type="text/ng-template" id="reverseFolders">
 
-    <div class="filemanager__folder-button" ng-click="loadFolder(folder.data.id)">
+    <div class="filemanager__folder-button" ng-click="changeCurrentFolderId(folder.id)">
         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default">folder_open</i>
         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active">folder</i>
 
-                        <span class="filemanager__folder-name" ng-show="!folder.edit" ng-click="loadFolder(folder.data.id)">
-                            {{folder.data.name }}                                            
+                        <span class="filemanager__folder-name" ng-show="!folder.edit" ng-click="loadFolder(folder.id)">
+                            {{folder.name }}                                            
                         </span>
 
-        <i class="material-icons filemanager__edit-icon" ng-hide="showFoldersToMove" ng-click="editMode(folder, 'edit')">mode_edit</i>
-        <i class="material-icons filemanager__delete-icon" ng-hide="showFoldersToMove" ng-click="editMode(folder, 'remove')">delete</i>
+        <i class="material-icons filemanager__edit-icon" ng-hide="showFoldersToMove" style="display:none;" ng-click="editMode(folder, 'edit')">mode_edit</i>
+        <i class="material-icons filemanager__delete-icon" ng-hide="showFoldersToMove" style="display:none;" ng-click="editMode(folder, 'remove')">delete</i>
                         
                         <span ng-show="folder.edit">
-                            <input type="text" ng-model="folder.data.name" class="filemanager__file-dialog__input"/>
+                            <input type="text" ng-model="folder.name" class="filemanager__file-dialog__input"/>
                             <div class="filemanager__file-dialog">
                                 <span>Speichern?</span>
                                 <span class="btn-floating white">
@@ -119,7 +119,7 @@ $this->beginPage()
                                 </span>
                             </div>
                         </span>
-                        <i class="material-icons filemanager__file-move-icon" ng-click="moveFilesTo(folder.data)" ng-show="showFoldersToMove && currentFolderId != folder.data.id">keyboard_return</i>
+                        <i class="material-icons filemanager__file-move-icon" ng-click="moveFilesTo(folder.id)" ng-show="showFoldersToMove && currentFolderId != folder.id">keyboard_return</i>
                         <span ng-show="folder.remove">
                             <div class="filemanager__file-dialog">
 
@@ -149,7 +149,7 @@ $this->beginPage()
         <!-- mdi-mdi-action-highlight-remove -->
     </div>
     <ul class="filemanager__folders" ng-if="folder.__items.length > 0">
-        <li class="filemanager__folder"  ng-class="{'filemanager__folder--active' : currentFolderId == folder.data.id, 'filemanager__folder--has-subfolders': folder.__items.length > 0}" ng-repeat="folder in folder.__items"  ng-include="'reverseFolders'"></li>
+        <li class="filemanager__folder"  ng-class="{'filemanager__folder--active' : currentFolderId == folder.id, 'filemanager__folder--has-subfolders': folder.__items.length > 0}" ng-repeat="folder in folder.__items"  ng-include="'reverseFolders'"></li>
     </ul>
 </script>
 
@@ -179,13 +179,13 @@ $this->beginPage()
             <!-- FOLDER LIST -->
             <ul class="filemanager__folders">
                 <li class="filemanager__folder" ng-class="{'filemanager__folder--active' : currentFolderId == 0 }">
-                    <div class="filemanager__folder-button folder-root" ng-click="loadFolder(0)">
+                    <div class="filemanager__folder-button folder-root" ng-click="changeCurrentFolderId(0)">
                         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default">folder_open</i>
                         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active">folder</i>
                         <span class="filemanager__folder-name">Stammverzeichnis</span>
                     </div>
-                    <ul class="filemanager__folders" ng-if="folders.length > 0" >
-                        <li class="filemanager__folder" ng-class="{'filemanager__folder--active' : currentFolderId == folder.data.id}" ng-repeat="folder in folders" ng-include="'reverseFolders'"></li>
+                    <ul class="filemanager__folders">
+                        <li class="filemanager__folder" ng-class="{'filemanager__folder--active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData" ng-include="'reverseFolders'"></li>
                     </ul>
                 </li>
             </ul>
@@ -205,7 +205,7 @@ $this->beginPage()
                     <span class="floating-button-label__label">Datei hinzufügen</span>
                 </label>
 
-                <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeSelectedItems()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
+                <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
                 <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove">Verschieben nach</button>
 
                 <div class="alert alert--danger" ng-show="errorMsg" style="clear:both;">Fehler beim Hochladen der Datei: {{errorMsg}}</div>
@@ -284,7 +284,7 @@ $this->beginPage()
 
             <div class="row">
 
-            <div class="col" ng-class="{'s8' : isDetailOpen, 's12' : !isDetailOpen }">
+            <div class="col" ng-class="{'s8' : fileDetail, 's12' : !fileDetail }">
             <table class="filemanager__table hoverable striped">
                 <thead>
                 <tr>
@@ -300,59 +300,48 @@ $this->beginPage()
                 <tbody>
 
                 <!-- FILES -->
-                <tr ng-repeat="file in files" ng-hide="verifyFileHidden(file)" class="filemanager__file" ng-class="{ 'clickable selectable' : allowSelection == 'false' }">
-                    <td ng-click="toggleSelection(file)" class="filemanager__checkox-column"  ng-hide="allowSelection == 'true'">
-                        <input type="checkbox" id="{{file.file_data.id}}" ng-checked="inSelection(file)" />
-                        <label for="checked-status-managed-by-angular-{{file.file_data.id}}"></label>
+                <tr ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages" class="filemanager__file" ng-class="{ 'clickable selectable' : allowSelection == 'false' }">
+                    <td ng-click="toggleSelection(file)" class="filemanager__checkox-column" ng-hide="allowSelection == 'true'">
+                        <input type="checkbox" ng-checked="inSelection(file)" id="{{file.id}}" />
+                        <label for="checked-status-managed-by-angular-{{file.id}}"></label>
                     </td>
-                    <td ng-click="toggleSelection(file)" class="filemanager__icon-column" ng-class="{ 'filemanager__icon-column--thumb' : file.thumbnail_data }">
-                                        <span ng-if="file.thumbnail_data">
-                                            <img class="responsive-img filmanager__thumb" ng-src="{{file.thumbnail_data.source}}" />
-                                        </span>
-                                        <span ng-if="!file.thumbnail_data">
-                                            <i class="material-icons">attach_file</i>
-                                        </span>
+                    <td ng-click="toggleSelection(file)" class="filemanager__icon-column" ng-class="{ 'filemanager__icon-column--thumb' : file.isImage }">
+                        <span ng-if="file.isImage"><img class="responsive-img filmanager__thumb" ng-src="{{file.thumbnail.source}}" /></span>
+                        <span ng-if="!file.isImage"><i class="material-icons">attach_file</i></span>
                     </td>
-                    <td ng-click="toggleSelection(file)">{{file.file_data.name}}</td>
-                    <td class="filemanager__lighten">{{file.file_data.extension}}</td>
-                    <td class="filemanager__lighten">{{file.file_data.uploadTimestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
-                    <td class="filemanager__lighten" ng-click="toggleDetail(file)"><i class="material-icons">zoom_in</i></td>
+                    <td ng-click="toggleSelection(file)">{{file.name}}</td>
+                    <td class="filemanager__lighten">{{file.extension}}</td>
+                    <td class="filemanager__lighten">{{file.uploadTimestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
+                    <td class="filemanager__lighten" ng-click="openFileDetail(file)"><i class="material-icons">zoom_in</i></td>
                 </tr>
                 <!-- /FILES -->
 
                 </tbody>
-            </table>
-
-            
+            </table>            
             </div>
-            <div class="col s4" ng-show="isDetailOpen">
+            <div class="col s4" ng-show="fileDetail">
                 <div class="filemanager__detail-wrapper">
                     <table class="filemanager__table striped">
-                       
                         <tbody>
                         <tr>
-                            <td><i>Dateiname</i></td><td>{{ detailFile.file_data.name }}</td>
+                            <td><i>Dateiname</i></td><td>{{ fileDetail.name }}</td>
                         </tr>
                         <tr>
-                            <td><i>Eigentürmer</i></td><td>{{ detailFile.firstname }} {{ detailFile.lastname }}</td>
+                            <td><i>Erstellungsdatum</i></td><td>{{fileDetail.uploadTimestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
                         </tr>
                         <tr>
-                            <td><i>Erstellungsdatum</i></td><td>{{detailFile.thumbnail_data.uploadTimesamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
+                            <td><i>Datei Typ</i></td><td>{{ fileDetail.extension }}</td>
                         </tr>
                         <tr>
-                            <td><i>Datei Typ</i></td><td>{{ detailFile.file_data.extension }}</td>
-                        </tr>
-                        <tr>
-                            <td><i>Download</i></td><td><a ng-href="{{detailFile.file_data.source}}" target="_blank" class="btn btn-floating"><i class="material-icons">cloud_download</i></a></td>
+                            <td><i>Download</i></td><td><a ng-href="{{fileDetail.source}}" target="_blank" class="btn btn-floating"><i class="material-icons">cloud_download</i></a></td>
                         </tr>
                         </tbody>
                     </table>
-                    <span ng-if="detailFile.image_data">
-                        <img class="responsive-img" ng-src="{{detailFile.image_data.source}}" />
-                        <p>{{detailFile.image_data.resolutionWidth}}x{{detailFile.image_data.resolutionHeight}}</p>
+                    <span ng-if="fileDetail.isImage">
+                        <img class="responsive-img" ng-src="{{fileDetail.source}}" />
                     </span>
                     </p>
-                    <a class="btn btn--small right" ng-click="isDetailOpen=!isDetailOpen"><i class="material-icons">zoom_out</i></a>
+                    <a class="btn btn--small right" ng-click="closeFileDetail()"><i class="material-icons">zoom_out</i></a>
                 </div> <!-- detail-wrapper END -->
             </div>
         </div>
@@ -367,7 +356,7 @@ $this->beginPage()
                     <span class="floating-button-label__label">Datei hinzufügen</span>
                 </label>
 
-                <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeSelectedItems()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
+                <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
                 <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove">Verschieben nach</button>
 
                 <div class="alert alert--danger" ng-show="errorMsg" style="clear:both;">Fehler beim Hochladen der Datei: {{errorMsg}}</div>
@@ -434,7 +423,7 @@ $this->beginPage()
                     </li>
                     <li>
                         <div class="navbar__button navbar__button--redhighlight">
-                            <a href="<?= \Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="navbar__button__anchor">
+                            <a href="<?= Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="navbar__button__anchor">
                                 <i class="material-icons">exit_to_app</i>
                                 <p class="icon__spawn-text">Logout</p>
                             </a>
