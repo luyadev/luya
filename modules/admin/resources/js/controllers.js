@@ -536,6 +536,7 @@
 		$scope.currentItem = {};
 		
 		$scope.click = function(menuItem) {
+			$scope.mobileOpen = false;
 			$scope.$broadcast('topMenuClick', { menuItem : menuItem });
 			if (menuItem.template) {
 				$state.go('custom', { 'templateId' : menuItem.template });
