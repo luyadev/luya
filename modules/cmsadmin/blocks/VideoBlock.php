@@ -55,9 +55,7 @@ class VideoBlock extends \cmsadmin\base\Block
         $path = trim($path, '/');
         $url = '';
         if (is_numeric($path)) {
-            $url = 'https://player.vimeo.com/video/' . $path;
-
-            $url .= '?color=0c88dd&title=0&byline=0&portrait=0&badge=0';
+            $url = 'https://player.vimeo.com/video/' . $path . '?color=0c88dd&title=0&byline=0&portrait=0&badge=0';
         }
         return $url;
     }
