@@ -1200,6 +1200,24 @@
 					return false;
 				};
 				
+				// folder add
+				
+				$scope.showFolderForm = false;
+				
+				$scope.createNewFolder = function(newFolderName) {
+					$http.post('admin/api-admin-storage/folder-create', $.param({ folderName : newFolderName , parentFolderId : $scope.currentFolderId }), {
+			        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+			        }).success(function(transport) {
+						$scope.foldersDataReload().then(function() {
+							$scope.folderFormToggler();
+						})
+			        });
+				};
+				
+				$scope.folderFormToggler = function() {
+					$scope.showFolderForm = !$scope.showFolderForm;
+				};
+				
 				// controller logic 
 				
 				$scope.currentFolderId = 0;
