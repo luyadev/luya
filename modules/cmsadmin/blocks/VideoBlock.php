@@ -34,6 +34,7 @@ class VideoBlock extends \cmsadmin\base\Block
 
     public function constructYoutubeUrl($scheme, $host, $path, $query)
     {
+        $url = '';
         if (($pos = strpos($query, 'v=')) !== false) {
             $videoId = substr($query, $pos + 2);
 
@@ -44,8 +45,6 @@ class VideoBlock extends \cmsadmin\base\Block
             } else {
                 $url .= '?' . $this->getCfgValue('controls');
             }
-        } else {
-            $url = '';
         }
         return $url;
     }
@@ -62,17 +61,14 @@ class VideoBlock extends \cmsadmin\base\Block
 
     public function constructUrl()
     {
-        $scheme = parse_url($this->getVarValue('url'), PHP_URL_SCHEME);
-        $host = parse_url($this->getVarValue('url'), PHP_URL_HOST);
-        $path = parse_url($this->getVarValue('url'), PHP_URL_PATH);
-        $query = parse_url($this->getVarValue('url'), PHP_URL_QUERY);
+        $urlComponents = parse_url($this->getVarValue('url'));
 
-        if ($host == 'www.youtube.com') {
-            return $this->constructYoutubeUrl($scheme, $host, $path, $query);
-        } elseif (($host == 'www.vimeo.com') || (($host == 'vimeo.com'))) {
-            return $this->constructVimeoUrl($scheme, $host, $path, $query);
-        } else {
-            return '';
+        if (($urlComponents['host'] == 'www.youtube.com') || ($urlComponents['host'] == 'youtube.com')) {
+            return $this->constructYoutubeUrl($urlComponents['scheme'], $urlComponents['host'], $urlComponents['path'],
+                $urlComponents['query']);
+        } elseif (($urlComponents['host'] == 'www.vimeo.com') || ($urlComponents['host'] == 'vimeo.com')) {
+            return $this->constructVimeoUrl($urlComponents['scheme'], $urlComponents['host'], $urlComponents['path'],
+                $urlComponents['query']);
         }
     }
 
