@@ -79,7 +79,7 @@ class VideoBlock extends \cmsadmin\base\Block
     public function extraVars()
     {
         return [
-            'url' => $this->constructUrl()
+            'url' => $this->constructUrl(),
         ];
     }
 
