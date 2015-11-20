@@ -11,7 +11,7 @@ Mac OSX Lion und aufwärts
 
 Windows 7 und aufwärts
 -------------------
-+Internet Explorer 9
++Internet Explorer 10
 +Firefox 42
 +Chrome
 +Opera
