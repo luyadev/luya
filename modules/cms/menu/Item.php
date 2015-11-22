@@ -117,7 +117,7 @@ class Item extends \yii\base\Object
      */
     public function getLink()
     {
-        return ($this->itemArray['is_home'] && Yii::$app->composition->defaultLangShortCode == $this->itemArray['lang']) ? Yii::$app->urlManager->baseUrl : $this->itemArray['link'];
+        return ($this->itemArray['is_home'] && Yii::$app->composition->defaultLangShortCode == $this->itemArray['lang']) ? Yii::$app->urlManager->prependBaseUrl('') : $this->itemArray['link'];
     }
 
     /**

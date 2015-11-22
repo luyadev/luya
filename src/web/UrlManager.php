@@ -145,7 +145,7 @@ class UrlManager extends \yii\web\UrlManager
 
         $item = $this->menu->find()->where(['id' => $navItemId])->with('hidden')->one();
 
-        $replaceRoute = preg_replace("/$module/", $item->link, ltrim($route, '/'), 1);
+        $replaceRoute = preg_replace("/$module/", rtrim($item->link, '/'), ltrim($route, '/'), 1);
 
         return $replaceRoute;
     }
