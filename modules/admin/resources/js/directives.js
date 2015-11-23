@@ -37,7 +37,7 @@
 				"name": "@fieldname"
 			},
 			template: function() {
-				return '<textarea ng-wig="model" name="{{name}}"></textarea>';
+				return '<textarea ng-wig="model" buttons="bold, italic, link, list1, list2" name="{{name}}"></textarea>';
 			}
 		}
 	});
