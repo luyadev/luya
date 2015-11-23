@@ -34,12 +34,18 @@ class FolderQueryObject extends \yii\base\Object
         return (!empty($this->getParentId())) ? (new FolderQuery())->findOne($this->getParentId()) : false;
     }
     
+    public function getFilesCount()
+    {
+        return (new FileQuery())->where(['is_hidden' => 0, 'is_deleted' => 0, 'folder_id' => $this->getId()])->count();
+    }
+    
     public function toArray()
     {
         return [
             'id' => $this->getId(),
             'name' => $this->getName(),
             'parentId' => $this->getParentId(),
+            'filesCount' => $this->getFilesCount(),
         ];
     }
 }

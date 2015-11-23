@@ -1226,6 +1226,76 @@
 					$scope.currentFolderId = folderId;
 				};
 				
+				$scope.folderUpdateForm = false;
+				
+				$scope.folderDeleteForm = false;
+				
+				$scope.folderDeleteConfirmForm = false;
+				
+				$scope.toggleFolderMode = function(mode) {
+					if (mode == 'edit') {
+						$scope.folderUpdateForm = true;
+						$scope.folderDeleteForm = false;
+						$scope.folderDeleteConfirmForm = false;
+					} else if (mode == 'remove') {
+						$scope.folderUpdateForm = false;
+						$scope.folderDeleteForm = true;
+						$scope.folderDeleteConfirmForm = false;
+					} else if (mode == 'removeconfirm') {
+						$scope.folderUpdateForm = false;
+						$scope.folderDeleteForm = false;
+						$scope.folderDeleteConfirmForm = true;
+					} else {
+						$scope.folderUpdateForm = false;
+						$scope.folderDeleteForm = false;
+						$scope.folderDeleteConfirmForm = false;
+					}
+				};
+				
+				$scope.updateFolder = function(folder) {
+					$http.post('admin/api-admin-storage/folder-update?folderId=' + folder.id, $.param({ name : folder.name }), {
+			        	headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+			        }).success(function(transport) {
+		        		$scope.toggleFolderMode(false);
+			        });
+				}
+				
+				$scope.checkEmptyFolder = function(folder) {
+                    $http.post('admin/api-admin-storage/is-folder-empty?folderId=' + folder.id, $.param({ name : folder.name }), {
+                        headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+                    }).success(function(transport) {
+                    	if (transport == true) {
+                    		$scope.deleteFolder(folder);
+                    	} else {
+                    		$scope.toggleFolderMode('removeconfirm');
+                    	}
+                    	/*
+                        if (transport == false) {
+                            // not empty
+                            folder.remove = false;
+                            folder.notempty = true;
+                        } else {
+                            // empty
+                            $scope.deleteFolder(folder);
+                        }
+                        */
+                    });
+                }
+
+                $scope.deleteFolder = function(folder) {
+                    // check if folder is empty
+                    $http.post('admin/api-admin-storage/folder-delete?folderId=' + folder.id, $.param({ name : folder.name }), {
+                        headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+                    }).success(function(transport) {
+                        $scope.foldersDataReload().then(function() {
+                        	$scope.filesDataReload().then(function() {
+                        		$scope.toggleFolderMode(false);
+                        		$scope.currentFolderId = 0;
+                        	});
+                        });
+                    });
+                }
+				
 				$scope.fileDetail = false;
 				
 				$scope.showFoldersToMove = false;

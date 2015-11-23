@@ -10,6 +10,7 @@ use luya\helpers\FileHelper;
 use admin\helpers\Storage;
 use admin\storage\FileQuery;
 use admin\storage\ImageQuery;
+use admin\storage\FolderQuery;
 use admin\models\StorageFile;
 use admin\models\StorageImage;
 use admin\models\StorageFilter;
@@ -108,7 +109,7 @@ class StorageContainer extends \yii\base\Component
     public function getFilesArray()
     {
         if ($this->_filesArray === null) {
-            $this->_filesArray = (new Query())->from('admin_storage_file')->indexBy('id')->all();
+            $this->_filesArray = (new Query())->from('admin_storage_file')->select(['id', 'is_hidden', 'is_deleted', 'folder_id', 'name_original', 'name_new', 'name_new_compound', 'mime_type', 'extension', 'hash_name', 'upload_timestamp', 'file_size', 'upload_user_id'])->indexBy('id')->all();
         }
         
         return $this->_filesArray;
@@ -283,7 +284,7 @@ class StorageContainer extends \yii\base\Component
     public function getFoldersArray()
     {
         if ($this->_foldersArray === null) {
-            $this->_foldersArray = (new Query())->from('admin_storage_folder')->select(['id', 'name', 'parent_id', 'timestamp_create', 'is_deleted'])->indexBy('id')->all();
+            $this->_foldersArray = (new Query())->from('admin_storage_folder')->select(['id', 'name', 'parent_id', 'timestamp_create'])->where(['is_deleted' => 0])->orderBy(['name' => 'ASC'])->indexBy('id')->all();
         }
         
         return $this->_foldersArray;
@@ -292,6 +293,11 @@ class StorageContainer extends \yii\base\Component
     public function getFoldersArrayItem($folderId)
     {
         return (isset($this->foldersArray[$folderId])) ? $this->foldersArray[$folderId] : false;
+    }
+    
+    public function getFolder($folderId)
+    {
+        return (new FolderQuery())->where(['id' => $folderId])->one();
     }
     
     public function addFolder($folderName, $parentFolderId = 0)

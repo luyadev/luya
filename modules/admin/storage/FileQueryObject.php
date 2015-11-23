@@ -75,7 +75,7 @@ class FileQueryObject extends \yii\base\Object
      */
     public function getSource()
     {
-        return Yii::$app->storage->httpPath . '/' . $this->itemArray['name_new_compound'];
+        return Url::toManager('admin/file/download', ['id' => $this->getId(), 'hash' => $this->itemArray['hash_name'], 'fileName' => $this->getName()]);
     }
     
     /**

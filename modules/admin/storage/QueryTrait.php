@@ -42,6 +42,11 @@ trait QueryTrait
         return $this->createIteratorObject(array_filter($this->getDataProvider(), [$this, 'whereFilter']));
     }
     
+    public function count()
+    {
+        return count(array_filter($this->getDataProvider(), [$this, 'whereFilter']));
+    }
+    
     public function one()
     {
         $data = array_filter($this->getDataProvider(), [$this, 'whereFilter']);

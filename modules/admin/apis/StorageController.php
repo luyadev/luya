@@ -136,6 +136,58 @@ class StorageController extends \admin\base\RestController
         return true;
     }
     
+    /**
+     * check if a folder is empty (no subfolders/no files).
+     *
+     * @param int $folderId
+     *
+     * @return bool
+     */
+    public function actionIsFolderEmpty($folderId)
+    {
+        $count = Yii::$app->storage->getFolder($folderId)->getFilesCount();
+        if ($count > 0) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    /**
+     * delete folder, all subfolders and all included files.
+     *
+     * 1. search another folders with matching parentIds and call deleteFolder on them
+     * 2. get all included files and delete them
+     * 3. delete folder
+     *
+     * @param int $folderId
+     * @todo move to storage helpers?
+     * @return bool
+     */
+    private function helperDeleteFolder($folderId)
+    {
+        // find all subfolders
+        $matchingChildFolders = StorageFolder::find()->where(['parent_id' => $folderId])->asArray()->all();
+        foreach ($matchingChildFolders as $matchingChildFolder) {
+            $this->helperDeleteFolder($matchingChildFolder['id']);
+        }
+    
+        // find all attached files and delete them
+        $folderFiles = StorageFile::find()->where(['folder_id' => $folderId])->all();
+        foreach ($folderFiles as $folderFile) {
+            $folderFile->delete();
+        }
+    
+        // delete folder
+        $model = StorageFolder::findOne($folderId);
+        if (!$model) {
+            return false;
+        }
+        $model->is_deleted = true;
+    
+        return $model->update();
+    }
+    
     // old controller methods
 
     
@@ -281,17 +333,7 @@ class StorageController extends \admin\base\RestController
         return $this->helperDeleteFolder($folderId);
     }
 
-    /**
-     * check if a folder is empty (no subfolders/no files).
-     *
-     * @param int $folderId
-     *
-     * @return bool
-     */
-    public function actionIsFolderEmpty($folderId)
-    {
-        return $this->helperIsEmptyFolder($folderId);
-    }
+   
     
     // helpers as of removment
     
@@ -372,55 +414,5 @@ class StorageController extends \admin\base\RestController
         return \admin\models\StorageFolder::find()->where(['parent_id' => $parentFolderId, 'is_deleted' => 0])->asArray()->all();
     }
     
-    /**
-     * delete folder, all subfolders and all included files.
-     *
-     * 1. search another folders with matching parentIds and call deleteFolder on them
-     * 2. get all included files and delete them
-     * 3. delete folder
-     *
-     * @param int $folderId
-     *
-     * @return bool
-     */
-    private function helperDeleteFolder($folderId)
-    {
-        // find all subfolders
-        $matchingChildFolders = StorageFolder::find()->where(['parent_id' => $folderId])->asArray()->all();
-        foreach ($matchingChildFolders as $matchingChildFolder) {
-            $this->helperDeleteFolder($matchingChildFolder['id']);
-        }
-    
-        // find all attached files and delete them
-        $folderFiles = StorageFile::find()->where(['folder_id' => $folderId])->all();
-        foreach ($folderFiles as $folderFile) {
-            $folderFile->delete();
-        }
-    
-        // delete folder
-        $model = StorageFolder::findOne($folderId);
-        if (!$model) {
-            return false;
-        }
-        $model->is_deleted = true;
-    
-        return $model->update();
-    }
-    
-    /**
-     * check if a folder is empty (without subfolders and/or files).
-     *
-     * @param int $folderId
-     *
-     * @return bool
-     */
-    private function helperIsEmptyFolder($folderId)
-    {
-        if (!empty($this->getSubFolders($folderId))) {
-            return false;
-        } else {
-            return empty($this->filesAllFromFolder($folderId));
-        }
-    }
     
 }

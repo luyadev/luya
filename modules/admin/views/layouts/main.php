@@ -100,14 +100,14 @@ $this->beginPage()
         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default">folder_open</i>
         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active">folder</i>
 
-                        <span class="filemanager__folder-name" ng-show="!folder.edit" ng-click="loadFolder(folder.id)">
+                        <span class="filemanager__folder-name">
                             {{folder.name }}                                            
                         </span>
 
-        <i class="material-icons filemanager__edit-icon" ng-hide="showFoldersToMove" style="display:none;" ng-click="editMode(folder, 'edit')">mode_edit</i>
-        <i class="material-icons filemanager__delete-icon" ng-hide="showFoldersToMove" style="display:none;" ng-click="editMode(folder, 'remove')">delete</i>
+        <i class="material-icons filemanager__edit-icon" ng-show="currentFolderId==folder.id" ng-click="toggleFolderMode('edit')">mode_edit</i>
+        <i class="material-icons filemanager__delete-icon" ng-show="currentFolderId==folder.id" ng-click="toggleFolderMode('remove')">delete</i>
                         
-                        <span ng-show="folder.edit">
+                        <span ng-show="folderUpdateForm && currentFolderId==folder.id">
                             <input type="text" ng-model="folder.name" class="filemanager__file-dialog__input"/>
                             <div class="filemanager__file-dialog">
                                 <span>Speichern?</span>
@@ -115,12 +115,12 @@ $this->beginPage()
                                     <i class="material-icons filemanager__file-dialog__icon" ng-click="updateFolder(folder)">check</i>
                                 </span>
                                 <span class="btn-floating white">
-                                    <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="folder.edit=!folder.edit">add</i>
+                                    <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="toggleFolderMode(false)">add</i>
                                 </span>
                             </div>
                         </span>
                         <i class="material-icons filemanager__file-move-icon" ng-click="moveFilesTo(folder.id)" ng-show="showFoldersToMove && currentFolderId != folder.id">keyboard_return</i>
-                        <span ng-show="folder.remove">
+                        <span ng-show="folderDeleteForm && currentFolderId==folder.id">
                             <div class="filemanager__file-dialog">
 
                                 <span>Verzeichniss löschen?</span>
@@ -128,20 +128,20 @@ $this->beginPage()
                                     <i class="material-icons filemanager__file-dialog__icon" ng-click="checkEmptyFolder(folder)">check</i>
                                 </span>
                                 <span class="btn-floating white">
-                                    <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="folder.remove=!folder.remove">add</i>
+                                    <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="toggleFolderMode(false)">add</i>
                                 </span>
 
                             </div>
                         </span>
 
-                        <span ng-show="folder.notempty">
+                        <span ng-show="folderDeleteConfirmForm && currentFolderId==folder.id">
                             <div class="filemanager__file-dialog">
                                 <span>Das Verzeichnis ist nicht leer - trotzdem löschen?</span>
                                 <span class="btn-floating white">
                                     <i class="material-icons filemanager__file-dialog__icon" ng-click="deleteFolder(folder)">check</i>
                                 </span>
                                 <span class="btn-floating white">
-                                    <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="folder.notempty=!folder.notempty">add</i>
+                                    <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="toggleFolderMode(false)">add</i>
                                 </span>
                             </div>
                         </span>
@@ -323,6 +323,9 @@ $this->beginPage()
                 <div class="filemanager__detail-wrapper">
                     <table class="filemanager__table striped">
                         <tbody>
+                        <tr>
+                            <td><i>Interne ID</i></td><td> {{ fileDetail.id }}</td>
+                        </tr>
                         <tr>
                             <td><i>Dateiname</i></td><td>{{ fileDetail.name }}</td>
                         </tr>
