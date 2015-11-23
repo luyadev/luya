@@ -119,7 +119,7 @@ class Menu
     private function getData($parentNavId)
     {
         return (new \yii\db\Query())
-            ->select('cms_nav.id, cms_nav.sort_index, cms_nav.parent_nav_id, cms_nav_item.title, cms_nav_item.alias, cms_nav.is_hidden, cms_nav.is_offline')
+            ->select('cms_nav.id, cms_nav.sort_index, cms_nav.parent_nav_id, cms_nav_item.title, cms_nav_item.alias, cms_nav.is_hidden, cms_nav.is_offline, cms_nav.is_home')
             ->from('cms_nav')
             ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')
             ->orderBy('cms_nav.sort_index ASC')

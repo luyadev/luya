@@ -654,6 +654,7 @@
 		$scope.$watch(function() { return $scope.navData.is_home }, function(n, o) {
 			if (o !== undefined) {
 				$http.get('admin/api-cms-nav/toggle-home', { params : { navId : $scope.navData.id , homeState : n }}).success(function(response) {
+					NewMenuService.get(true);
 					//Materialize.toast('<span>Startseite wurde angepasst.</span>', 2000)
 				});
 			}
