@@ -64,11 +64,11 @@ Nun führen wir den Migration befehl aus:
 ./vendor/bin/luya migrate
 ```
 
-Du musst nun allen Migrationsdaten zustimmen, diese werden ausgeführt un deine Datenbank ist startklar.
+Du musst nun allen Migrationsdaten zustimmen, diese werden ausgeführt und deine Datenbank ist startklar.
 
 Import
 ------
-Nun importieren wir alle Projekt Daten in die Datenbank mit dem `import` befehl:
+Nun importieren wir alle Projekt Daten in die Datenbank mit dem `import` Befehl:
 
 ```sh
 ./vendor/bin/luya import
@@ -76,7 +76,7 @@ Nun importieren wir alle Projekt Daten in die Datenbank mit dem `import` befehl:
 
 Setup
 -----
-Nun können wir einmalig den Setup befehl ausführen welcher Benutzer und Gruppen erstellt.
+Nun können wir einmalig den Setup Befehl ausführen welcher Benutzer und Gruppen erstellt.
 
 ```sh
 ./vendor/bin/luya setup
@@ -84,7 +84,7 @@ Nun können wir einmalig den Setup befehl ausführen welcher Benutzer und Gruppe
 
 Health Check
 ------------
-Um Ordner und Datein und dere Zustand zu prüfen führen wir nun noch den `health` command aus:
+Um Ordner und Datein und dere Zustand zu prüfen führen wir nun noch den `health` Command aus:
 
 ```sh
 ./vendor/bin/luya health

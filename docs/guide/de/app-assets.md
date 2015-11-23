@@ -1,10 +1,10 @@
 Projekt Assets
 ===============
-Was sind Assets? *Assets* sind Dateien welche zu deinem Projekt gehören. Dies können *Javascripts*, *Stylesheets* oder *Bilder* sein.
+Was sind Assets? *assets* sind Dateien welche zu deinem Projekt gehören. Dies können *Javascripts*, *Stylesheets* oder *Bilder* sein.
 
-> Asset Dateien werden in der regel in einem *resources*-Ordner hinterlegt um die *Asset*-Klassen im `assets`-Ordner zu speichern.
+> Asset Dateien werden in der Regel in einem *resources*-Ordner hinterlegt um die *asset*-Klassen im `assets`-Ordner zu speichern.
 
-Um eine *Asset*-Klasse anzulegen erstellen wir im Projekt den Ordner `assets`. Darin erstellen wir eine Datei (in unsere Beispiel LuyaioAsset) welche den Suffix *Asset* haben muss.
+Um eine *Asset*-Klasse anzulegen erstellen wir im Projekt den Ordner `assets`. Darin erstellen wir eine Datei (in unsere Beispiel LuyaioAsset) welche den Suffix *asset* haben muss.
 
 ```php
 namespace app\assets;
@@ -27,7 +27,7 @@ Wenn du ein Luya-Projekt mit einem CMS im Einsatz hast **musst** du alle Asset-D
 
 > In der *luya-kickstater* Standard installation wird das CMS installiert und benutzt.
 
-Um ein asset zu melden gehst du in deine Konfigurations Datein und ergänzt den `modules` `cms` Eintrag um die `assets` Eigenschaft:
+Um ein Asset zu melden gehst du in deine Konfigurations Datein und ergänzt den `modules` `cms` Eintrag um die `assets` Eigenschaft:
 
 ```php
 return [
@@ -53,7 +53,7 @@ $luyaio = \app\assets\LuyaioAsset::register($this);
 
 Asset Verwenden
 ---------------
-Wenn du ein Bild-Datei in einem Asset Ornder hinterlegtst und den von Yii generierten Pfad zur Datei möchtest kannst wie folgt die URL deines assets erhalten:
+Wenn du ein Bild-Datei in einem Asset Ornder hinterlegst und den von Yii generierten Pfad zur Datei möchtest kannst wie folgt die URL deines Assets erhalten:
 
 ```php
 $luyaio = $this->assetManager->getBundle('\\app\\assets\\LuyaioAsset');
@@ -77,4 +77,4 @@ Assets Fehler
 -------------
 Assets werden einmalig in den ordern `assets` im `public_html` Ornder kopiert. Es empfiehlt sich also diesen Ordner zu löschen wenn ein Problem existiert.
 
-> Wenn `YII_DEBUG` auf `true` gesetzt ist in der *config*, werden die Assets automatisch bei jedem aufruf **neu erstellt**, dies verlangsamt das System, verhindert jedoch Problem beim entwickeln.
+> Wenn `YII_DEBUG` in der *config* auf `true` gesetzt ist, werden die Assets automatisch bei jedem Aufruf **neu erstellt**, dies verlangsamt das System, verhindert jedoch Problem beim entwickeln.

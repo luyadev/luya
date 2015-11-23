@@ -1,10 +1,10 @@
-Cms Seiten Eigenschaften
+Cms Seiteneigenschaften
 ========================
 
-Was ist eine Seiten Eigenschaft?
+Was ist eine Seiteneigenschaft?
 --------------------------------
 
-Ein Beispiel für eine *Seiten Eigenschaft* könnten zbsp. die Farbe sein. Jede von deinen Seiten soll über eine bestimmte Farbe verfügen. Diese Farbe verändert danach im Frontend oder im Block das aussehen der Seite. Anstelle diese Konfigurations-Option in jedem Block mühsam zu implenetieren erstellen wir eine sogenan **property** auf diese du danach im Block oder auf der Seite zugreifen kannst.
+Ein Beispiel für eine *Seiteneigenschaft* könnten zbsp. die Farbe sein. Jede von deinen Seiten soll über eine bestimmte Farbe verfügen. Diese Farbe verändert danach im Frontend oder im Block das Aussehen der Seite. Anstelle diese Konfigurations-Option in jedem Block mühsam zu implenetieren erstellen wir eine sogenannte **property** auf diese du danach im Block oder auf der Seite zugreifen kannst.
 
 Weitere Anwendungsbereiche:
 
@@ -16,7 +16,7 @@ Weitere Anwendungsbereiche:
 Hinzufügen einer Eigenschaft
 ----------------------------
 
-Das Luya system versucht alle Informationen, Plugins und Addons als Dateien zu hinterlegen und danach ins System zu [importieren](luya-console.md), das fordert eine gewissen Anspruch an den Integrator, Daten können dafür zuverlässig via VCS-Systeme kontrolliert werden. Dies gilt auch für *Eigenschaften* (*properties*).
+Das Luya-System versucht alle Informationen, Plugins und Addons als Dateien zu hinterlegen und danach ins System zu [importieren](luya-console.md), das fordert eine gewissen Anspruch an den Integrator, Daten können dafür zuverlässig via VCS-Systeme kontrolliert werden. Dies gilt auch für *Eigenschaften* (*properties*).
 
 Um eine neue Eigenschaft anzulegen gehst du in deine *Projekt* (*app*) oder *Modul* (*module*) Ordner und erstellst einen Ordner **properties**. Alle *properties* Klassen müssen den suffx *Property* besitzen. Hier eine Beispiel Klasse namens `TestProperty` im Projekt (app) Namespace:
 
@@ -57,14 +57,14 @@ class TestProperty extends \admin\base\Property
 }
 ```
 
-Um diese erstellte `TestProperty` Klasse in das System einzuspielen, muss (wie bereits oben erklärt) dere [Import Konsolenbefehl](luya-console.md) ausgeführt werden. Jede änderung der Klasse (zbsp. Text Korrektur im Label) muss durch den Import-Prozess aktualisert werden.
+Um diese erstellte `TestProperty` Klasse in das System einzuspielen, muss (wie bereits oben erklärt) der [Import Konsolenbefehl](luya-console.md) ausgeführt werden. Jede änderung der Klasse (zbsp. Text Korrektur im Label) muss durch den Import-Prozess aktualisiert werden.
 
 ### Die Klassen-Methoden
 
 |methode	|Optional	|Erklärung
 |---		|---		|---
 |varName	|nein		|Der Name der Variabel mit welcher du deine Werte assozierst. Wenn du auf die Daten zugreifen willst wirst du diesen Namen wieder benötigen.
-|label		|nein		|Die erklärung deiner Variable, diese wird dem End-Benutzer des Administrations-Systems angezeigt.
+|label		|nein		|Die Erklärung deiner Variable, diese wird dem End-Benutzer des Administrations-Systems angezeigt.
 |type		|nein		|Definiert den Input-Type der Variable. Alle [Block-Typen](app-block-types.md) stehen dir zur Verfügung.
 |options	|ja			|Sepzifische Typen wie *select* oder *checkbox-array* benötigen zusätlich Optionen, diese werden über diese Methode definiert.
 |defaultValue|ja		|Gewissen Typen haben einen *initvalue* diese Methode entspricht diesem Wert. Standard ist `false`.
@@ -72,7 +72,7 @@ Um diese erstellte `TestProperty` Klasse in das System einzuspielen, muss (wie b
 Auf Eigenschaften Zugreifen
 ---------------------------
 
-Aktuell gibt es nur einen Anwendungs Zweck für das Zugreifen der *Eigenschaft* (*property*), innerhalb eines [Blocks](app-blocks.md). Um innerhalb eines Block auf die oben Erstellte Variable `foobar` innerhalb des Property Klasse `TestProperty` zuzugreifen kannst du innerhalb der Block methoden auf das Seiten-Object (*pageObject*) zugreifen mit der methode `getEnvOption('pageObject')`. Eigenschaften werden einem *Nav* eintrag hinterlegt, das Seiten-Object ist jedoch der *NavItem* Eintrag. Aus diesem Grunde muss innerhalb des *NavItem* Objecs (welches pageObject entspricht) auf die Methode `getNav()` zugefriffen werden welches über die nötigen Methoden zum ausgeben und anzeigen der Eigenschaften verfügt. Hier ein Beispiel aufruf der `foobar` Variable aus unserer `TestProperty` Klasse:
+Aktuell gibt es nur einen Anwendungs Zweck für das Zugreifen der *Eigenschaft* (*property*), innerhalb eines [Blocks](app-blocks.md). Um innerhalb eines Block auf die oben erstellte Variable `foobar` innerhalb des Property Klasse `TestProperty` zuzugreifen kannst du innerhalb der Block Methoden auf das Seiten-Object (*pageObject*) zugreifen mit der Methode `getEnvOption('pageObject')`. Eigenschaften werden einem *Nav* eintrag hinterlegt, das Seiten-Object ist jedoch der *NavItem* Eintrag. Aus diesem Grunde muss innerhalb des *NavItem* Objects (welches pageObject entspricht) auf die Methode `getNav()` zugegriffen werden welches über die nötigen Methoden zum ausgeben und anzeigen der Eigenschaften verfügt. Hier ein Beispielaufruf der `foobar` Variable aus unserer `TestProperty` Klasse:
 
 ```php
 $this->getEnvOption('pageObject')->getNav()->getProperty('foobar');
@@ -87,13 +87,13 @@ $this->getEnvOption('pageObject)->nav->properties; // getter kurz form
 
 ### in Layouts
 
-Um auf property eigenschaften in layouts zu zugreifen kannst du auf die 
+Um auf property Eigenschaften in Layouts zu zugreifen kannst du auf die 
 
 ```php
 Yii::$app->page
 ```
 
-Komponenten zugreifen, diese steht dir aber nur im CMS context zu verfügung. Wenn du in einem nicht Modul context auf diese Komponent zugreifst wirt es einen *Fatal Error* erzeugen.
+Komponenten zugreifen, diese steht dir aber nur im CMS Kontext zu verfügung. Wenn du in einem nicht Modul Kontext auf diese Komponent zugreifst wirt es einen *Fatal Error* erzeugen.
 
 ```php
 Yii::$app->page->properties; // erzeugt ein array
@@ -107,7 +107,7 @@ Yii::$app->page->getProperty('my-prop'); // gibt den property defaultValue zurü
 Events
 ------
 
-Eine Eigenschaft welche einer CMS Seite hinzugefügt wurde, kann auch auf Events reagieren. Folgenden Events stehe zur Verfügung:
+Eine Eigenschaft welche einer CMS Seite hinzugefügt wurde, kann auch auf Events reagieren. Folgende Events stehe zur Verfügung:
 
 |Event Name | Beschreibung |
 |---		 | ---			|
@@ -145,7 +145,7 @@ public function beforeFind()
 }
 ```
 
-Würde nun den vom user ausgewählte auswahl oder eingabe (abhängig vom type) via der PHP funktion strtoupper alles gross schreiben beim Output.
+Würde nun den vom Benutzer ausgewählte Auswahl oder Eingabe (abhängig vom Type) via der PHP funktion strtoupper alles gross schreiben beim Output.
 
 
 

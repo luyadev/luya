@@ -1,17 +1,17 @@
 Max OSX und MAMP
 ================
-Um *LUYA* auf einem Mac OSX mit dem Webserver *MAMP* zu installieren werden folgende Arbeitsschritte nötig.
+Um *LUYA* auf einem Mac OSX mit dem Webserver *MAMP* zu installieren sind folgende Arbeitsschritte nötig.
 
 Datenbank DSN
 -------------
-Bei der Datenbank verbindung in der *local.php* Konfigurations-Datei muss beim DSN den `unix_socket` gesetzt werden.
+Bei der Datenbankverbindung in der *local.php* Konfigurations-Datei muss beim DSN den `unix_socket` gesetzt werden.
 ```
 'dsn' => 'mysql:host=localhost;dbname=luyaweb;unix_socket=/Applications/MAMP/tmp/mysql/mysql.sock',
 ```
 
 PHP CLI VERSION
 ---------------
-Das Mac OSX Betriebsystem verfügbt über eine sehr alte PHP Version welche vorinstalliert ist. Mit folgendem Befehl kannst du sehen ob dein MAMP die Kontroller für *cli* commands hat oder die Vorinstalliert MAC OSX Version:
+Das Mac OSX Betriebsystem verfügt über eine sehr alte PHP Version welche vorinstalliert ist. Mit folgendem Befehl kannst du sehen ob dein MAMP die Kontroller für *cli* commands hat oder die Vorinstalliert MAC OSX Version:
 ```
 which php
 ```
