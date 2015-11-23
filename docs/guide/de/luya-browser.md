@@ -4,17 +4,17 @@ Browser Support
 
 Mac OSX Lion und aufwärts
 ----------------
-+Safari 5.1
-+Firefox 42
-+Chrome 46
-+Opera 25
++ Safari 5.1
++ Firefox 42
++ Chrome 46
++ Opera 25
 
 Windows 7 und aufwärts
 -------------------
-+Internet Explorer 10
-+Firefox 42
-+Chrome
-+Opera
++ Internet Explorer 10
++ Firefox 42
++ Chrome
++ Opera
 
 Mobile Browser
 -------------------
