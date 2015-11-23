@@ -3,10 +3,21 @@
 namespace cmsadmin\importers;
 
 use Yii;
+use Exception;
 use cmsadmin\models\Layout;
+use yii\db\yii\db;
 
 class CmslayoutImporter extends \luya\base\Importer
 {
+    private function verifyVariable($chars)
+    {
+        if (preg_match('/[^a-zA-Z0-9]+/', $chars, $matches)) {
+            return false;
+        }
+        
+        return true;
+    }
+    
     public function run()
     {
         $cmslayouts = Yii::getAlias('@app/views/cmslayouts');
@@ -24,16 +35,17 @@ class CmslayoutImporter extends \luya\base\Importer
                 preg_match_all("/\{\{(.*?)\}\}/", $content, $results);
                 // local vars
                 $_placeholders = [];
-                $_vars = [];
                 // explode the specific vars for each type
                 foreach ($results[1] as $match) {
                     $parts = explode('.', trim($match));
                     switch ($parts[0]) {
                         case 'placeholders':
+                            
+                            if (!$this->verifyVariable($parts[1])) {
+                                throw new Exception("Wrong variable name detected '".$parts[1]."'. Special chars are not allowed in placeholder variables, allowed chars are a-zA-Z0-9");
+                            }
+                            
                             $_placeholders[] = ['label' => $parts[1], 'var' => $parts[1]];
-                            break;
-                        case 'vars':
-                            $_vars = $parts[1];
                             break;
                     }
                 }

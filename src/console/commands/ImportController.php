@@ -3,6 +3,7 @@
 namespace luya\console\commands;
 
 use Yii;
+use Exception;
 use admin\models\Config;
 
 class ImportController extends \luya\console\Command implements \luya\console\interfaces\ImportController
@@ -104,38 +105,42 @@ class ImportController extends \luya\console\Command implements \luya\console\in
 
     public function actionIndex()
     {
-        $queue = [];
-
-        foreach (Yii::$app->getModules() as $id => $module) {
-            if ($module instanceof \luya\base\Module) {
-                $response = $module->import($this);
-                if (is_array($response)) { // importer returns an array with class names
-                    foreach ($response as $class) {
-                        $obj = new $class($this);
-                        $prio = $obj->queueListPosition;
-                        while (true) {
-                            if (!array_key_exists($prio, $queue)) {
-                                break;
+        try {
+            $queue = [];
+    
+            foreach (Yii::$app->getModules() as $id => $module) {
+                if ($module instanceof \luya\base\Module) {
+                    $response = $module->import($this);
+                    if (is_array($response)) { // importer returns an array with class names
+                        foreach ($response as $class) {
+                            $obj = new $class($this);
+                            $prio = $obj->queueListPosition;
+                            while (true) {
+                                if (!array_key_exists($prio, $queue)) {
+                                    break;
+                                }
+                                ++$prio;
                             }
-                            ++$prio;
+                            $queue[$prio] = $obj;
                         }
-                        $queue[$prio] = $obj;
                     }
                 }
             }
+    
+            ksort($queue);
+    
+            foreach ($queue as $pos => $object) {
+                $object->run();
+            }
+    
+            if (Yii::$app->hasModule('admin')) {
+                Config::set('last_import_timestamp', time());
+                Yii::$app->db->createCommand()->update('admin_user', ['force_reload' => 1])->execute();
+            }
+    
+            return $this->outputSuccess(print_r($this->_log, true));
+        } catch (Exception $err) {
+            return $this->outputError("Import Error: " . $err->getMessage());
         }
-
-        ksort($queue);
-
-        foreach ($queue as $pos => $object) {
-            $object->run();
-        }
-
-        if (Yii::$app->hasModule('admin')) {
-            Config::set('last_import_timestamp', time());
-            Yii::$app->db->createCommand()->update('admin_user', ['force_reload' => 1])->execute();
-        }
-
-        return $this->outputSuccess(print_r($this->_log, true));
     }
 }
