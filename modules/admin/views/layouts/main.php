@@ -7,7 +7,6 @@ $user = Yii::$app->adminuser->getIdentity();
 $this->beginPage()
 ?><!DOCTYPE html>
 <html ng-app="zaa" ng-controller="LayoutMenuController">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -29,10 +28,7 @@ $this->beginPage()
     <script>
         var authToken = '<?=$user->getAuthToken();?>';
     </script>
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-
 <body ng-cloak>
 <?php $this->beginBody() ?>
 <!-- ANGULAR SCRIPTS -->
