@@ -3,6 +3,9 @@ LUYA CHANGELOG
 
 1.0.0-beta2 (in progress)
 -------------------------
+
+- **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide. 
+
 - `#570` menu component home link contains relative slash to make valid links.
 - `#542` added file size to filemanager.
 - `#546` Page-property-icon: Removed empty space of the button if the page has no property.
@@ -13,10 +16,10 @@ LUYA CHANGELOG
 - `#507` added new twig functions to luya guide.
 - `#538` fixed issue where new directories are not displayed in overlay mode.
 - `#537` added ability to preview and download the file/image inside the filemanager.
-- `#531` unable to deselect language, as at least 1 langauge must be active.
+- `#531` unable to deselect language, as at least 1 langauge must be active in admin module.
 - `#528` sorting filemanager folders by name.
 - `#412` fixed bug where ObjectHelper::callMethodSanitizeArguments does not handle optional arguments.
-- `#526` added publicHtml getter and twig variable publicHtml.
+- `#526` added publicHtml getter to web controller and twig variable publicHtml.
 
 1.0.0-beta1 (11. Nov 2015)
 -------------------------
