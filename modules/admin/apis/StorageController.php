@@ -188,6 +188,17 @@ class StorageController extends \admin\base\RestController
         return $model->update();
     }
     
+    public function actionFolderUpdate($folderId)
+    {
+        $model = StorageFolder::findOne($folderId);
+        if (!$model) {
+            return false;
+        }
+        $model->attributes = Yii::$app->request->post();
+    
+        return $model->update();
+    }
+    
     // old controller methods
 
     /*
@@ -310,16 +321,7 @@ class StorageController extends \admin\base\RestController
 
     // here
     
-    public function actionFolderUpdate($folderId)
-    {
-        $model = StorageFolder::findOne($folderId);
-        if (!$model) {
-            return false;
-        }
-        $model->attributes = Yii::$app->request->post();
-        
-        return $model->update();
-    }
+    
 
     
 

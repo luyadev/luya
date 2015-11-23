@@ -68,6 +68,11 @@ class FileQueryObject extends \yii\base\Object
         return in_array($this->getMimeType(), $this->_imageMimeTypes);
     }
     
+    public function getHashName()
+    {
+        return $this->itemArray['hash_name'];
+    }
+    
     /**
      * Delivers the url for nice urls /file/id/hash/hello-world.jpg
      * 
@@ -75,7 +80,7 @@ class FileQueryObject extends \yii\base\Object
      */
     public function getSource()
     {
-        return Url::toManager('admin/file/download', ['id' => $this->getId(), 'hash' => $this->itemArray['hash_name'], 'fileName' => $this->getName()]);
+        return Url::toManager('admin/file/download', ['id' => $this->getId(), 'hash' => $this->getHashName(), 'fileName' => $this->getName()]);
     }
     
     /**

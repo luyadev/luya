@@ -324,9 +324,6 @@ $this->beginPage()
                     <table class="filemanager__table striped">
                         <tbody>
                         <tr>
-                            <td><i>Interne ID</i></td><td> {{ fileDetail.id }}</td>
-                        </tr>
-                        <tr>
                             <td><i>Dateiname</i></td><td>{{ fileDetail.name }}</td>
                         </tr>
                         <tr>
@@ -339,12 +336,15 @@ $this->beginPage()
                             <td><i>Grösse</i></td><td>{{ fileDetail.sizeReadable }}</td>
                         </tr>
                         <tr>
+                            <td><i>Interne ID</i></td><td> {{ fileDetail.id }}</td>
+                        </tr>
+                        <tr>
                             <td><i>Download</i></td><td><a ng-href="{{fileDetail.source}}" target="_blank" class="btn btn-floating"><i class="material-icons">cloud_download</i></a></td>
                         </tr>
                         </tbody>
                     </table>
                     <span ng-if="fileDetail.isImage">
-                        <img class="responsive-img" ng-src="{{fileDetail.source}}" />
+                        <img class="responsive-img" ng-src="{{fileDetail.httpSource}}" />
                     </span>
                     </p>
                     <a class="btn btn--small right" ng-click="closeFileDetail()"><i class="material-icons">zoom_out</i></a>
