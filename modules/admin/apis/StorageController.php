@@ -164,33 +164,31 @@ class StorageController extends \admin\base\RestController
      * @todo move to storage helpers?
      * @return bool
      */
-    private function helperDeleteFolder($folderId)
+    public function actionFolderDelete($folderId)
     {
         // find all subfolders
         $matchingChildFolders = StorageFolder::find()->where(['parent_id' => $folderId])->asArray()->all();
         foreach ($matchingChildFolders as $matchingChildFolder) {
-            $this->helperDeleteFolder($matchingChildFolder['id']);
+            $this->actionFolderDelete($matchingChildFolder['id']);
         }
-    
+        
         // find all attached files and delete them
         $folderFiles = StorageFile::find()->where(['folder_id' => $folderId])->all();
         foreach ($folderFiles as $folderFile) {
             $folderFile->delete();
         }
-    
+        
         // delete folder
         $model = StorageFolder::findOne($folderId);
         if (!$model) {
             return false;
         }
         $model->is_deleted = true;
-    
+        
         return $model->update();
     }
     
     // old controller methods
-
-    
 
     /*
     public function actionFilesMove()
@@ -219,6 +217,8 @@ class StorageController extends \admin\base\RestController
     
     // until here new storage
 
+    /*
+    
     public function actionAllImagePaths()
     {
         $images = [];
@@ -321,22 +321,13 @@ class StorageController extends \admin\base\RestController
         return $model->update();
     }
 
-    /**
-     * delete folder, all subfolders and all files included.
-     *
-     * @param int $folderId
-     *
-     * @return bool
-     */
-    public function actionFolderDelete($folderId)
-    {
-        return $this->helperDeleteFolder($folderId);
-    }
+    
 
-   
+    */
     
     // helpers as of removment
     
+    /*
     private function filesAllFromFolder($folderId)
     {
         $files = StorageFile::find()->select(['admin_storage_file.id', 'name_original', 'extension', 'file_size', 'upload_timestamp', 'firstname', 'lastname'])->leftJoin('admin_user', 'admin_user.id=admin_storage_file.upload_user_id')->where(['folder_id' => $folderId, 'is_hidden' => 0, 'admin_storage_file.is_deleted' => 0])->asArray()->all();
@@ -388,9 +379,10 @@ class StorageController extends \admin\base\RestController
     
         return $files;
     }
-    
+    */
     // folder helper
     
+    /*
     private function helperFolderPartialFolderTree($parentId)
     {
         $data = [];
@@ -413,6 +405,5 @@ class StorageController extends \admin\base\RestController
     {
         return \admin\models\StorageFolder::find()->where(['parent_id' => $parentFolderId, 'is_deleted' => 0])->asArray()->all();
     }
-    
-    
+    */
 }
