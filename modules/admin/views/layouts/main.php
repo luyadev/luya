@@ -472,6 +472,10 @@ $this->beginPage()
             <tr><td>Transfer Exceptions:</td><td><?= $this->context->colorizeValue(Yii::$app->errorHandler->transferException); ?></td></tr>
             <tr><td>Yii Timezone:</td><td><?= Yii::$app->timeZone; ?></td></tr>
             <tr><td>PHP Timezone:</td><td><?= date_default_timezone_get(); ?></td></tr>
+            <tr><td>PHP memory_limit</td><td><?= ini_get('memory_limit'); ?></td></tr>
+            <tr><td>PHP max_execution_time</td><td><?= ini_get('max_execution_time'); ?></td></tr>
+            <tr><td>PHP post_max_size</td><td><?= ini_get('post_max_size'); ?></td></tr>
+            <tr><td>PHP upload_max_filesize</td><td><?= ini_get('upload_max_filesize'); ?></td></tr>
         </table>
     </div>
 
