@@ -4,7 +4,7 @@ Create a new Luya Project
 First of all you have to install the `fxp/composer-asset-plugin` plugin, which is required by Yii to install bower packages via composer:
 
 ```
-composer global require "fxp/composer-asset-plugin:1.0.3"
+composer global require "fxp/composer-asset-plugin:1.1.1"
 ```
 
 Open your Terminal and execute the `create-project` to checkout the kickstarter/example project. 

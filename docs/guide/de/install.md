@@ -10,7 +10,7 @@ Composer
 Als erstes registrieren wir das `fxp/composer-asset-plugin` global für deine gesamte Arbeitsumgebung. Luya benötigt dies um [BOWER](http://bower.io) Pakete (zbsp. Jquery, Angular, etc.) in deinem Vendor Ordner zu speichern.
 
 ```sh
-composer global require "fxp/composer-asset-plugin:~1.1.0"
+composer global require "fxp/composer-asset-plugin:~1.1.1"
 ```
 
 Als nächstes erstellen wir ein `Kickstarter` Projekte mit Hilfe des `composer create-project` Befehls. Dafür musst du lediglich dein *Terminal* öffnen und den folgenden Befehl eingeben:
