@@ -304,7 +304,7 @@
                                 <div class="input input--text col s12">
                                     <label class="input__label">Seitentitel</label>
                                     <div class="input__field-wrapper">
-                                        <input name="text" type="text" class="input__field validate" ng-model="itemCopy.title" />
+                                        <input type="text" class="input__field validate" ng-model="itemCopy.title" />
                                     </div>
                                 </div>
                             </div>
@@ -312,11 +312,18 @@
                                 <div class="input input--text col s12">
                                     <label class="input__label">Pfadsegment</label>
                                     <div class="input__field-wrapper">
-                                        <input name="text" type="text" class="input__field validate" ng-model="itemCopy.alias" />
+                                        <input type="text" class="input__field validate" ng-model="itemCopy.alias" />
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="row">
+                                <div class="input input--text col s12">
+                                    <label class="input__label">Beschreibung</label>
+                                    <div class="input__field-wrapper">
+                                        <textarea class="input__field validate" ng-model="itemCopy.description"></textarea>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="input input--radios col s12">
                                     <label class="input__label">Seitentyp</label>

@@ -740,10 +740,13 @@
 			var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 			var navItemId = itemCopy.id;
 
+			typeDataCopy.title = itemCopy.title;
+			typeDataCopy.alias = itemCopy.alias;
+			typeDataCopy.description = itemCopy.description;
 			$http.post(
-					'admin/api-cms-navitem/update-page-item?navItemId=' + navItemId + '&navItemType=' + itemCopy.nav_item_type + '&navItemTypeId=' + itemCopy.nav_item_type_id + '&title=' + itemCopy.title + '&alias=' + itemCopy.alias,
-					$.param(typeDataCopy),
-					headers
+				'admin/api-cms-navitem/update-page-item?navItemId=' + navItemId + '&navItemType=' + itemCopy.nav_item_type + '&navItemTypeId=' + itemCopy.nav_item_type_id,
+				$.param(typeDataCopy),
+				headers
 			).then(function successCallback(response) {
 				//Materialize.toast('<span> Die Seite «'+itemCopy.title+'» wurde aktualisiert.</span>', 2000);
 				NewMenuService.get(true);
@@ -759,7 +762,6 @@
 			$scope.settings = !$scope.settings;
 		};
 	
-		
 		CmsLayoutService.data.$promise.then(function(response) {
 			$scope.layouts = response;
 		})

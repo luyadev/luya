@@ -51,7 +51,14 @@ abstract class Controller extends \luya\web\Controller
         if ($this->view->title === null) {
             $this->view->title = $model->title;
         }
-
+        
+        $this->view->registerMetaTag(['name' => 'og:title', 'content' => $this->view->title], 'fbTitle');
+        
+        if (!empty($model->description)) {
+            $this->view->registerMetaTag(['name' => 'description', 'content' => $model->description], 'metaDescription');
+            $this->view->registerMetaTag(['name' => 'og:description', 'content' => $model->description], 'fbDescription');
+        }
+        
         if ($this->module->enableTagParsing) {
             $content = Parser::encode($content);
         }

@@ -406,7 +406,7 @@ class Container extends \yii\base\Component implements ArrayAccess
     private function getNavData($langId)
     {
         return (new DbQuery())->from(['cms_nav_item item'])
-        ->select(['item.id', 'item.nav_id', 'item.title', 'item.alias', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'nav_container.alias AS container'])
+        ->select(['item.id', 'item.nav_id', 'item.title', 'item.description', 'item.alias', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'nav_container.alias AS container'])
         ->leftJoin('cms_nav nav', 'nav.id=item.nav_id')
         ->leftJoin('cms_nav_container nav_container', 'nav_container.id=nav.nav_container_id')
         ->where(['nav.is_deleted' => 0, 'item.lang_id' => $langId, 'nav.is_offline' => 0])
@@ -487,6 +487,7 @@ class Container extends \yii\base\Component implements ArrayAccess
                 'link' => $this->buildItemLink($alias),
                 'title' => $item['title'],
                 'alias' => $alias,
+                'description' => $item['description'],
                 'is_home' => $item['is_home'],
                 'parent_nav_id' => $item['parent_nav_id'],
                 'sort_index' => $item['sort_index'],

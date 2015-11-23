@@ -172,7 +172,7 @@ class Nav extends \yii\db\ActiveRecord
         }
     }
 
-    public function createPage($parentNavId, $navContainerId, $langId, $title, $alias, $layoutId)
+    public function createPage($parentNavId, $navContainerId, $langId, $title, $alias, $layoutId, $description)
     {
         $_errors = [];
 
@@ -182,7 +182,7 @@ class Nav extends \yii\db\ActiveRecord
         $navItemPage = new \cmsadmin\models\NavItemPage();
 
         $nav->attributes = ['parent_nav_id' => $parentNavId, 'nav_container_id' => $navContainerId, 'is_hidden' => 1, 'is_offline' => 1];
-        $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'nav_item_type' => 1];
+        $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'description' => $description, 'nav_item_type' => 1];
         $navItemPage->attributes = ['layout_id' => $layoutId];
 
         if (!$nav->validate()) {
@@ -209,7 +209,7 @@ class Nav extends \yii\db\ActiveRecord
         return $navItemId;
     }
 
-    public function createPageItem($navId, $langId, $title, $alias, $layoutId)
+    public function createPageItem($navId, $langId, $title, $alias, $layoutId, $description)
     {
         $_errors = [];
 
@@ -217,7 +217,7 @@ class Nav extends \yii\db\ActiveRecord
         $navItem->parent_nav_id = self::findOne($navId)->parent_nav_id;
         $navItemPage = new \cmsadmin\models\NavItemPage();
 
-        $navItem->attributes = ['nav_id' => $navId, 'lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'nav_item_type' => 1];
+        $navItem->attributes = ['nav_id' => $navId, 'lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'description' => $description, 'nav_item_type' => 1];
         $navItemPage->attributes = ['layout_id' => $layoutId];
 
         if (!$navItem->validate()) {
@@ -239,7 +239,7 @@ class Nav extends \yii\db\ActiveRecord
         return $navItemId;
     }
 
-    public function createModule($parentNavId, $navContainerId, $langId, $title, $alias, $moduleName)
+    public function createModule($parentNavId, $navContainerId, $langId, $title, $alias, $moduleName, $description)
     {
         $_errors = [];
 
@@ -249,7 +249,7 @@ class Nav extends \yii\db\ActiveRecord
         $navItemModule = new \cmsadmin\models\NavItemModule();
 
         $nav->attributes = ['parent_nav_id' => $parentNavId, 'nav_container_id' => $navContainerId, 'is_hidden' => 1, 'is_offline' => 1];
-        $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'nav_item_type' => 2];
+        $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'description' => $description, 'nav_item_type' => 2];
         $navItemModule->attributes = ['module_name' => $moduleName];
 
         if (!$nav->validate()) {
@@ -276,7 +276,7 @@ class Nav extends \yii\db\ActiveRecord
         return $navItemId;
     }
 
-    public function createRedirect($parentNavId, $navContainerId, $langId, $title, $alias, $redirectType, $redirectTypeValue)
+    public function createRedirect($parentNavId, $navContainerId, $langId, $title, $alias, $redirectType, $redirectTypeValue, $description)
     {
         $_errors = [];
 
@@ -286,7 +286,7 @@ class Nav extends \yii\db\ActiveRecord
         $navItemRedirect = new \cmsadmin\models\NavItemRedirect();
 
         $nav->attributes = ['parent_nav_id' => $parentNavId, 'nav_container_id' => $navContainerId, 'is_hidden' => 1, 'is_offline' => 1];
-        $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'nav_item_type' => 3];
+        $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'description' => $description, 'nav_item_type' => 3];
         $navItemRedirect->attributes = ['type' => $redirectType, 'value' => $redirectTypeValue];
 
         if (!$nav->validate()) {
@@ -313,7 +313,7 @@ class Nav extends \yii\db\ActiveRecord
         return $navItemId;
     }
 
-    public function createModuleItem($navId, $langId, $title, $alias, $moduleName)
+    public function createModuleItem($navId, $langId, $title, $alias, $moduleName, $description)
     {
         $_errors = [];
 
@@ -321,7 +321,7 @@ class Nav extends \yii\db\ActiveRecord
         $navItem->parent_nav_id = self::findOne($navId)->parent_nav_id;
         $navItemModule = new \cmsadmin\models\NavItemModule();
 
-        $navItem->attributes = ['nav_id' => $navId, 'lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'nav_item_type' => 2];
+        $navItem->attributes = ['nav_id' => $navId, 'lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'description' => $description, 'nav_item_type' => 2];
         $navItemModule->attributes = ['module_name' => $moduleName];
 
         if (!$navItem->validate()) {
@@ -343,7 +343,7 @@ class Nav extends \yii\db\ActiveRecord
         return $navItemId;
     }
 
-    public function createRedirectItem($navId, $langId, $title, $alias, $redirectType, $redirectTypeValue)
+    public function createRedirectItem($navId, $langId, $title, $alias, $redirectType, $redirectTypeValue, $description)
     {
         $_errors = [];
 
@@ -351,7 +351,7 @@ class Nav extends \yii\db\ActiveRecord
         $navItem->parent_nav_id = self::findOne($navId)->parent_nav_id;
         $navItemRedirect = new \cmsadmin\models\NavItemRedirect();
 
-        $navItem->attributes = ['nav_id' => $navId, 'lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'nav_item_type' => 3];
+        $navItem->attributes = ['nav_id' => $navId, 'lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'description' => $description, 'nav_item_type' => 3];
         $navItemRedirect->attributes = ['type' => $redirectType, 'value' => $redirectTypeValue];
 
         if (!$navItem->validate()) {

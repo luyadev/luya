@@ -97,6 +97,16 @@ class Item extends \yii\base\Object
     {
         return $this->itemArray['title'];
     }
+    
+    /**
+     * Returns the description provided by the cms admin, if any.
+     * 
+     * @return string The description string for this page.
+     */
+    public function getDescription()
+    {
+        return $this->itemArray['description'];
+    }
 
     /**
      * Returns the current alias name of the item (identifier for the url)

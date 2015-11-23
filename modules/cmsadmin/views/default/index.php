@@ -18,6 +18,14 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="input input--text col s12">
+                <label class="input__label">Beschreibung (Meta Description für Google)</label>
+                <div class="input__field-wrapper">
+                    <textarea class="input__field validate" ng-model="data.description"></textarea>
+                </div>
+            </div>
+        </div>
         <div class="row" ng-hide="data.isInline || navcontainer.length == 1">
             <div class="input input--select col s12">
                 <label class="input__label">Navigations-Container</label>

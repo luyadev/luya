@@ -84,4 +84,10 @@ oder direkt im view file
 <p>... Restliche ausgabe des Templates</p>
 ```
 
+Um die meta description des CMS zu überschreiben benutze **registerMetaTags** mit dem keyword **metaDescription** wie folgt:
+
+```
+$this->view->registerMetaTag(['name' => 'description', 'content' => $model->description], 'metaDescription');
+```
+
 + [Meta-Tags Yii Dokumentation](http://www.yiiframework.com/doc-2.0/guide-structure-views.html#registering-meta-tags)

@@ -147,7 +147,7 @@ class NavController extends \admin\base\RestController
     public function actionCreatePage()
     {
         $model = new \cmsadmin\models\Nav();
-        $create = $model->createPage($this->postArg('parent_nav_id'), $this->postArg('nav_container_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('layout_id'));
+        $create = $model->createPage($this->postArg('parent_nav_id'), $this->postArg('nav_container_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('layout_id'), $this->postArg('description'));
 
         if ($create !== true) {
             Yii::$app->response->statusCode = 422;
@@ -162,7 +162,7 @@ class NavController extends \admin\base\RestController
     public function actionCreatePageItem()
     {
         $model = new \cmsadmin\models\Nav();
-        $create = $model->createPageItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('layout_id'));
+        $create = $model->createPageItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('layout_id'), $this->postArg('description'));
         if ($create !== true) {
             Yii::$app->response->statusCode = 422;
         }
@@ -173,7 +173,7 @@ class NavController extends \admin\base\RestController
     public function actionCreateModule()
     {
         $model = new \cmsadmin\models\Nav();
-        $create = $model->createModule($this->postArg('parent_nav_id'), $this->postArg('nav_container_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('module_name'));
+        $create = $model->createModule($this->postArg('parent_nav_id'), $this->postArg('nav_container_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('module_name'), $this->postArg('description'));
         if ($create !== true) {
             Yii::$app->response->statusCode = 422;
         }
@@ -184,7 +184,7 @@ class NavController extends \admin\base\RestController
     public function actionCreateModuleItem()
     {
         $model = new \cmsadmin\models\Nav();
-        $create = $model->createModuleItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('module_name'));
+        $create = $model->createModuleItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('module_name'), $this->postArg('description'));
         if ($create !== true) {
             Yii::$app->response->statusCode = 422;
         }
@@ -197,7 +197,7 @@ class NavController extends \admin\base\RestController
     public function actionCreateRedirect()
     {
         $model = new \cmsadmin\models\Nav();
-        $create = $model->createRedirect($this->postArg('parent_nav_id'), $this->postArg('nav_container_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('redirect_type'), $this->postArg('redirect_type_value'));
+        $create = $model->createRedirect($this->postArg('parent_nav_id'), $this->postArg('nav_container_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('redirect_type'), $this->postArg('redirect_type_value'), $this->postArg('description'));
         if ($create !== true) {
             Yii::$app->response->statusCode = 422;
         }
@@ -208,7 +208,7 @@ class NavController extends \admin\base\RestController
     public function actionCreateRedirectItem()
     {
         $model = new \cmsadmin\models\Nav();
-        $create = $model->createRedirectItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('redirect_type'), $this->postArg('redirect_type_value'));
+        $create = $model->createRedirectItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('redirect_type'), $this->postArg('redirect_type_value'), $this->postArg('description'));
         if ($create !== true) {
             Yii::$app->response->statusCode = 422;
         }

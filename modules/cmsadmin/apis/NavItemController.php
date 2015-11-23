@@ -115,7 +115,7 @@ class NavItemController extends \admin\base\RestController
      *
      * @return array|bool
      */
-    public function actionUpdatePageItem($navItemId, $navItemType, $navItemTypeId, $title, $alias)
+    public function actionUpdatePageItem($navItemId, $navItemType, $navItemTypeId)
     {
         $model = NavItem::find()->where(['id' => $navItemId])->one();
         if (!$model) {
@@ -129,8 +129,9 @@ class NavItemController extends \admin\base\RestController
         $oldAlias = $model->alias;
 
         $model->nav_item_type = $navItemType;
-        $model->title = $title;
-        $model->alias = $alias;
+        $model->title = Yii::$app->request->post('title', false);
+        $model->alias = Yii::$app->request->post('alias', false);
+        $model->description = Yii::$app->request->post('description', null);
 
         if ((!$model->validate()) || (!$model->save())) {
             return $this->sendModelError($model);
