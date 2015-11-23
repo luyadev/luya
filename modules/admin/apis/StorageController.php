@@ -199,6 +199,20 @@ class StorageController extends \admin\base\RestController
         return $model->update();
     }
     
+    public function actionFolderCreate()
+    {
+        $folderName = Yii::$app->request->post('folderName', null);
+        $parentFolderId = Yii::$app->request->post('parentFolderId', 0);
+    
+        $model = new StorageFolder();
+        $model->name = $folderName;
+        $model->parent_id = $parentFolderId;
+        $model->timestamp_create = time();
+    
+        return $model->save();
+    
+    }
+    
     // old controller methods
 
     /*

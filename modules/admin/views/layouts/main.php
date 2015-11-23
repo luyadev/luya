@@ -122,7 +122,6 @@ $this->beginPage()
                         <i class="material-icons filemanager__file-move-icon" ng-click="moveFilesTo(folder.id)" ng-show="showFoldersToMove && currentFolderId != folder.id">keyboard_return</i>
                         <span ng-show="folderDeleteForm && currentFolderId==folder.id">
                             <div class="filemanager__file-dialog">
-
                                 <span>Verzeichniss löschen?</span>
                                 <span class="btn-floating white">
                                     <i class="material-icons filemanager__file-dialog__icon" ng-click="checkEmptyFolder(folder)">check</i>
@@ -148,8 +147,8 @@ $this->beginPage()
 
         <!-- mdi-mdi-action-highlight-remove -->
     </div>
-    <ul class="filemanager__folders" ng-if="folder.__items.length > 0">
-        <li class="filemanager__folder"  ng-class="{'filemanager__folder--active' : currentFolderId == folder.id, 'filemanager__folder--has-subfolders': folder.__items.length > 0}" ng-repeat="folder in folder.__items"  ng-include="'reverseFolders'"></li>
+    <ul class="filemanager__folders" >
+        <li class="filemanager__folder"  ng-class="{'filemanager__folder--active' : currentFolderId == folder.id, 'filemanager__folder--has-subfolders': folder.__items.length > 0}" ng-repeat="folder in foldersData | filemanagerdirsfilter:folder.id"  ng-include="'reverseFolders'"></li>
     </ul>
 </script>
 
@@ -185,7 +184,7 @@ $this->beginPage()
                         <span class="filemanager__folder-name">Stammverzeichnis</span>
                     </div>
                     <ul class="filemanager__folders">
-                        <li class="filemanager__folder" ng-class="{'filemanager__folder--active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData" ng-include="'reverseFolders'"></li>
+                        <li class="filemanager__folder" ng-class="{'filemanager__folder--active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData | filemanagerdirsfilter:0" ng-include="'reverseFolders'"></li>
                     </ul>
                 </li>
             </ul>

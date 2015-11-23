@@ -1040,6 +1040,18 @@
 		}
 	});
 	
+	zaa.filter("filemanagerdirsfilter", function() {
+		return function(input, parentFolderId, x) {
+			var result = [];
+			angular.forEach(input, function(value, key) {
+				if (value.parentId == parentFolderId) {
+					result.push(value);
+				}
+			});
+			
+			return result;
+		};
+	});
 	
 	zaa.filter("imageuploaditemfilter", function() {
 		return function(input, id) {
