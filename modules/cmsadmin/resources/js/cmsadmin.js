@@ -328,9 +328,6 @@
 		.state("custom.cmsedit", {
 			url : "/update/:navId",
 			templateUrl : 'cmsadmin/page/update',
-			resolve : {
-				adminServiceResolver: adminServiceResolver
-			}
 		})
 		.state("custom.cmsadd", {
 			url : "/create",
