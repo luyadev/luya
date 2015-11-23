@@ -25,6 +25,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
         parent::init();
         $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'validateAlias']);
         $this->on(self::EVENT_BEFORE_INSERT, [$this, 'beforeCreate']);
+        $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'eventBeforeUpdate']);
         $this->on(self::EVENT_BEFORE_DELETE, [$this, 'logEvent']);
         $this->on(self::EVENT_AFTER_INSERT, [$this, 'logEvent']);
         $this->on(self::EVENT_AFTER_UPDATE, [$this, 'logEvent']);
@@ -151,6 +152,12 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
         $this->timestamp_create = time();
         $this->timestamp_update = 0;
         $this->create_user_id = Yii::$app->adminuser->getId();
+        $this->update_user_id = Yii::$app->adminuser->getId();
+    }
+    
+    public function eventBeforeUpdate()
+    {
+        $this->timestamp_update = time();
         $this->update_user_id = Yii::$app->adminuser->getId();
     }
 

@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide. 
 
+- `#567` added menu informations about update and insert timestamp and user. added: getDateCreated(), getDateUpdated(), getUserCreated(), getUserUpdated() to menu item object.
 - `#566` added description field for the cms admin and getDescription() on menu item. Is automatically registering meta description and og:description.
 - `#534` added support for the original file names, introduced with new storage system.
 - `#477` added singleton storage component to reduce the number of sql request for large sites.

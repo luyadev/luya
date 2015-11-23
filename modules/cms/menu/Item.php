@@ -4,6 +4,7 @@ namespace cms\menu;
 
 use Yii;
 use Exception;
+use admin\models\User;
 
 /**
  * Menu item Object.
@@ -117,6 +118,48 @@ class Item extends \yii\base\Object
     public function getAlias()
     {
         return $this->itemArray['alias'];
+    }
+    
+    /**
+     * Returns an unix timestamp when the page was created.
+     *
+     * @return int Unix timestamp
+     */
+    public function getDateCreated()
+    {
+        return $this->itemArray['timestamp_create'];   
+    }
+    
+    /**
+     * Returns an unix timestamp when the page was last time updated.
+     *
+     * @return int Unix timestamp
+     */
+    public function getDateUpdated()
+    {
+        return $this->itemArray['timestamp_update'];
+    }
+    
+    /**
+     * Returns an active record object for the admin user who created this page.
+     * 
+     * @return \admin\models\User|boolean Returns an ActiceRecord for the admin user who created the page, if not
+     * found the return value is false.
+     */
+    public function getUserCreated()
+    {
+        return User::findOne($this->itemArray['create_user_id']);
+    }
+    
+    /**
+     * Returns an active record object for the admin user who last time updated this page.
+     *
+     * @return \admin\models\User|boolean Returns an ActiceRecord for the admin user who last time updated this page, if not
+     * found the return value is false.
+     */
+    public function getUserUpdated()
+    {
+        return User::findOne($this->itemArray['update_user_id']);
     }
 
     /**
