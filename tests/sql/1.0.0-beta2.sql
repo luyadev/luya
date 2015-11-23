@@ -644,7 +644,8 @@ CREATE TABLE IF NOT EXISTS `cms_nav_item` (
   `timestamp_create` int(11) DEFAULT NULL,
   `timestamp_update` int(11) DEFAULT NULL,
   `title` varchar(180) NOT NULL,
-  `alias` varchar(80) NOT NULL
+  `alias` varchar(80) NOT NULL,
+  `description` text
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
