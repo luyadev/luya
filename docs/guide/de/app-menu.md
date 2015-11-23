@@ -70,15 +70,15 @@ $item = Yii::$app->menu->home;
 
 Sprachen (composition)
 ----------------------
-Zusätzlich zur Link-Komponente wird die `composition` Komponente gebraucht. Sie gibt Auskunft über die aktuellen Sprachen und den Umgebungszustand. Die Composition Pattern Komponente kann definiert werden (@TBD). Sie können mit `Yii::$app->composition` auf die Composition Komponente zugreifen. Um Daten auszulesen verwenden Sie die `getKey()` Methode. Um auf den aktuelle Sprachcode zuzugreifen verwenden Sie:
+Zusätzlich zur Link-Komponente wird die `composition` Komponente gebraucht. Sie gibt Auskunft über die aktuellen Sprachen und den Umgebungszustand. Die Composition Pattern Komponente kann definiert werden (@TBD). Du kannst mit `Yii::$app->composition` auf die Composition Komponente zugreifen. Um Daten auszulesen verwendest du die `getKey()` Methode. Um auf den aktuelle Sprachcode zuzugreifen verwenden Sie:
 
-> seite 1.0.0-beta1 verfügt die composition component ein array access und daten können anstellevon `$composition->geyKey('keyName')` via `$compositon['keyName']` aufgerufen werden.
+> seite 1.0.0-beta1 verfügt die composition component ein array access und daten können anstelle von `$composition->geyKey('keyName')` via `$compositon['keyName']` aufgerufen werden.
 
 ```php
 $langShortCode = Yii::$app->composition['langShortCode'];
 ```
 
-Wenn Sie den aktuell ausgefüllten Composition Pattern erhalten möchten, können Sie dies mit `getFull()` tun:
+Wenn du den aktuell ausgefüllten Composition Pattern erhalten möchtest, kannst du dies mit `getFull()` tun:
 
 ```
 echo Yii::$app->composition->full;
@@ -87,7 +87,7 @@ echo Yii::$app->composition->full;
 Links zu Seiten im CMS
 ---------------------
 
-Um innerhalb des CMS oder eines Modules einen Link zu einer internen Seite zu machen verwenden Sie die folgenden Markdown-ähnlichen einweisungen:
+Um innerhalb des CMS oder eines Modules einen Link zu einer internen Seite zu machen verwendest du die folgenden, Markdown-ähnlichen Einweisungen:
 
 |Link Syntax        |Html Ausgabe
 |----               |----
@@ -96,7 +96,7 @@ Um innerhalb des CMS oder eines Modules einen Link zu einer internen Seite zu ma
 |`link [www.luya.io]`                 |`<a href="http://www.luya.io">luya.io</a>`
 |`link [luya.io] (Hier gehts zur Doku)` |`<a href="http://luya.io">Hier gehts zur Doku</a>`
 
-**ACHTUNG:** Die oben genannten *Link Syntax* müssen **ohne** space zwischen den einzelen gruppierungen sein damit die link syntaxe funktionieren.
+**ACHTUNG:** Die oben genannten *Link Syntax* müssen **ohne** Leerzeichen zwischen den einzelnen Gruppierungen sein damit die link syntaxe funktionieren.
 
 > Beispiele mit der Zahl 3: Die Zahl 3 entspricht der Seiten-Id welche erscheint wenn man mit dem Maus-Cursor über dem Seitenbaum einer besteimmten Seite fährt.
 

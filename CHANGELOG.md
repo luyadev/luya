@@ -5,7 +5,7 @@ LUYA CHANGELOG
 -------------------------
 
 **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide. 
-
+- `#533` file- and image-array directive removed margin-top for better alignment to the labels 
 - `#568` added menu query component `offset()`, `limit()` and `count()` methods to slice or count the data.
 - `#565` added icon when page is the default home page in cms admin side tree.
 - `#567` added menu informations about update and insert timestamp and user. added: getDateCreated(), getDateUpdated(), getUserCreated(), getUserUpdated() to menu item object.
