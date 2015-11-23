@@ -4,8 +4,10 @@ LUYA CHANGELOG
 1.0.0-beta2 (in progress)
 -------------------------
 
-- **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide. 
+**[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide. 
 
+- `#534` added support for the original file names, introduced with new storage system.
+- `#477` added singleton storage component to reduce the number of sql request for large sites.
 - `#570` menu component home link contains relative slash to make valid links.
 - `#542` added file size to filemanager.
 - `#546` Page-property-icon: Removed empty space of the button if the page has no property.
