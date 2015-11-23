@@ -52,6 +52,10 @@ class Query extends \yii\base\Object
     
     private $_with = ['hidden' => false];
     
+    private $_offset = null;
+    
+    private $_limit = null;
+    
     /**
      * Getter method to return menu component
      * 
@@ -202,9 +206,27 @@ class Query extends \yii\base\Object
         return true;
     }
 
+    public function limit($count)
+    {
+        if (is_numeric($count)) {
+            $this->_limit = $count;
+        }
+        
+        return $this;
+    }
+    
+    public function offset($count)
+    {
+        if (is_numeric($count)) {
+            $this->_offset = $count;
+        }
+        
+        return $this;
+    }
+    
     public function filter(array $whereExpression, $containerData)
     {
-        return array_filter($containerData, function ($item) {
+        $data = array_filter($containerData, function ($item) {
             foreach ($item as $field => $value) {
                 if (!$this->arrayFilter($value, $field)) {
                     return false;
@@ -213,6 +235,16 @@ class Query extends \yii\base\Object
 
             return true;
         });
+        
+        if ($this->_offset !== null) {
+            $data = array_slice($data, $this->_offset, null, true);
+        }
+        
+        if ($this->_limit !== null) {
+            $data = array_slice($data, 0, $this->_limit, true);
+        }
+        
+        return $data;
     }
 
     public function one()
@@ -229,6 +261,11 @@ class Query extends \yii\base\Object
     public function all()
     {
         return static::createArrayIterator($this->filter($this->_where, $this->menu[$this->lang]));
+    }
+    
+    public function count()
+    {
+        return count($this->filter($this->_where, $this->menu[$this->lang]));
     }
 
     public static function createArrayIterator($data)

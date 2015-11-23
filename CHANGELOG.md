@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide. 
 
+- `#568` added menu query component `offset()`, `limit()` and `count()` methods to slice or count the data.
 - `#565` added icon when page is the default home page in cms admin side tree.
 - `#567` added menu informations about update and insert timestamp and user. added: getDateCreated(), getDateUpdated(), getUserCreated(), getUserUpdated() to menu item object.
 - `#566` added description field for the cms admin and getDescription() on menu item. Is automatically registering meta description and og:description.
