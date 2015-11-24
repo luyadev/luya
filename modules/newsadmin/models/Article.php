@@ -111,7 +111,8 @@ class Article extends \admin\ngrest\base\Model
         $config->list->field('cat_id', 'Kategorie')->selectClass('\newsadmin\models\Cat', 'id', 'title');
         $config->list->field('title', 'Titel')->text();
         $config->list->field('timestamp_create', 'Datum')->date();
-
+        $config->list->field('image_id', 'Bild')->image();
+        
         $config->update->field('cat_id', 'Kategorie')->selectClass('\newsadmin\models\Cat', 'id', 'title');
         $config->update->field('title', 'Titel')->text();
         $config->update->field('text', 'Beschreibung')->textarea();

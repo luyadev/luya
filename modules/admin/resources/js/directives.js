@@ -943,6 +943,51 @@
 		}
 	});
 	
+	zaa.directive('storageImageThumbnailDisplay', function(ServiceImagesData, ServiceFilesData) {
+		return {
+			restrict: 'E',
+			scope: {
+				imageId: '@imageId'
+			},
+			controller: function($scope, $filter) {
+				
+				// ServiceFilesData inheritance
+				
+				$scope.filesData = ServiceFilesData.data;
+				
+				$scope.$on('service:FilesData', function(event, data) {
+					$scope.filesData = data;
+				});
+				
+				// ServiceImagesData inheritance
+				
+				$scope.imagesData = ServiceImagesData.data;
+				
+				$scope.$on('service:ImagesData', function(event, data) {
+					$scope.imagesData = data;
+				});
+				
+				// controller logic
+				
+				$scope.$watch(function() { return $scope.imageId }, function(n, o) {
+					if (n != 0 && n !== undefined) {
+						
+						var filtering = $filter('findidfilter')($scope.imagesData, n, true);
+						
+						var file = $filter('findidfilter')($scope.filesData, filtering.fileId, true);
+						
+						$scope.imageSrc = file.thumbnail.source;
+					}
+				});
+				
+				$scope.imageSrc = false;
+			},
+			template: function() {
+				return '<div ng-show="imageSrc!==false"><img ng-src="{{imageSrc}}" /></div>';
+			}
+		}
+	});
+	
 	zaa.directive('storageImageUpload', function($http, $filter, ServiceFiltersData, ServiceImagesData) {
 		return {
 			restrict : 'E',
@@ -1027,7 +1072,7 @@
 					if (n != 0 && n != null && n !== undefined) {
 						
 						
-						var filtering = $filter('imageuploaditemfilter')(scope.imagesData, n, true);
+						var filtering = $filter('findidfilter')(scope.imagesData, n, true);
 						if (filtering) {
 							scope.imageinfo = filtering;
 							scope.filterId = filtering.filterId;
@@ -1053,7 +1098,7 @@
 		};
 	});
 	
-	zaa.filter("imageuploaditemfilter", function() {
+	zaa.filter("findidfilter", function() {
 		return function(input, id) {
 			
 			var result = false;

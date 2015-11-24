@@ -18,7 +18,8 @@ class Image extends \admin\ngrest\base\Plugin
 
     public function renderList($doc)
     {
-        $elmn = $doc->createElement('span', '{{item.'.$this->name.'}}');
+        $elmn = $doc->createElement('storage-image-thumbnail-display');
+        $elmn->setAttribute('image-id', '{{item.'.$this->name.'}}');
         $doc->appendChild($elmn);
 
         return $doc;

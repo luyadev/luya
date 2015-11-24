@@ -5,6 +5,8 @@ LUYA CHANGELOG
 -------------------------
 
 **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide. 
+
+- `#558` added image thumbnail in list view for image plugin, therefore added storageImageThumbnailDisplay directive.
 - `#533` file- and image-array directive removed margin-top for better alignment to the labels 
 - `#568` added menu query component `offset()`, `limit()` and `count()` methods to slice or count the data.
 - `#565` added icon when page is the default home page in cms admin side tree.
