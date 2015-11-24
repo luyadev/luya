@@ -112,6 +112,16 @@ class Nav extends \yii\db\ActiveRecord
         }
     }
 
+    public static function moveToContainer($moveNavId, $toCatId)
+    {
+        $move = self::findOne($moveNavId);
+        
+        $move->nav_container_id = $toCatId;
+        $move->update();
+        
+        return true;
+    }
+    
     public static function moveToBefore($moveNavId, $toBeforeNavId)
     {
         $move = self::findOne($moveNavId);

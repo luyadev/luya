@@ -218,6 +218,11 @@ class NavItemController extends \admin\base\RestController
         ];
     }
 
+    public function actionMoveToContainer($moveItemId, $droppedOnCatId)
+    {
+        return ['success' => Nav::moveToContainer($moveItemId, $droppedOnCatId)];
+    }
+    
     public function actionMoveBefore($moveItemId, $droppedBeforeItemId)
     {
         return ['success' => Nav::moveToBefore($moveItemId, $droppedBeforeItemId)];

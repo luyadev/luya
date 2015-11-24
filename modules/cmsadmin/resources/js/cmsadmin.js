@@ -422,6 +422,15 @@
 				console.log('err', r)
 			})
 	    }
+	    
+	    $scope.onEmptyDrop = function($event, $ui) {
+	    	var itemid = $($event.target).data('itemid');
+	    	$http.get('admin/api-cms-navitem/move-to-container', { params : { moveItemId : $scope.droppedNavItem.id, droppedOnCatId : itemid }}).success(function(r) {
+				NewMenuService.get(true);
+			}).error(function(r) {
+				console.log('err', r)
+			})
+	    }
 	})
 	
 	zaa.controller("CmsMenuTreeController", function($scope, $state, NewMenuService, DroppableBlocksService, AdminLangService, CmsLayoutService) {

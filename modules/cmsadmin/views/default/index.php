@@ -251,7 +251,10 @@
                 <div class="treeview" ng-repeat="catitem in menu" ng-class="{ 'treeview--drag-active' : showDrag }">
                     <h5 class="treeview__title" ng-click="toggleCat(catitem.id)"><i class="material-icons treeview__title-icon" ng-class="{'treeview__title-icon--closed': toggleIsHidden(catitem.id)}">arrow_drop_down</i> {{catitem.name}}</h5>
 
-                    <p class="treeview__empty-message" ng-show="catitem.__items.length == 0 && !toggleIsHidden(catitem.id)">Noch keine Seiten hinterlegt</p>
+                    <p class="treeview__empty-message" ng-show="catitem.__items.length == 0 && !toggleIsHidden(catitem.id) && !showDrag">Noch keine Seiten hinterlegt</p>
+                    
+                    <div class="treeview__drop" ng-show="catitem.__items.length == 0 && !toggleIsHidden(catitem.id)" ng-class="{ 'treeview__drop--visible': showDrag }" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{catitem.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onEmptyDrop()', multiple : true}"></div>
+                    
                     <ul class="treeview__list" ng-hide="toggleIsHidden(catitem.id)">
                         <li class="treeview__item" ng-repeat="data in catitem.__items" ng-include="'reverse.html'"></li>
                     </ul>

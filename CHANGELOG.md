@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide. 
 
+- `#489` added the ability to drop pages on empty navigation containers.
 - `#509` improved video block (added Vimeo and make responsive work).
 - `#574` added strftime twig filter to get date formats based on the current localisation settings.
 - `#558` added image thumbnail in list view for image plugin, therefore added storageImageThumbnailDisplay directive.
