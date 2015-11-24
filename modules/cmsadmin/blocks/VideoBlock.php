@@ -6,6 +6,8 @@ class VideoBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
 
+    public $cacheEnabled = true;
+    
     public function name()
     {
         return 'Video';

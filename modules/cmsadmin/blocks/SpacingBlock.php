@@ -5,6 +5,8 @@ namespace cmsadmin\blocks;
 class SpacingBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
+    
+    public $cacheEnabled = true;
 
     public $spacingProperties = [
         ['value' => 1, 'label' => 'Kleiner Abstand'],

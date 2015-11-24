@@ -5,6 +5,8 @@ namespace cmsadmin\blocks;
 class MapBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
+    
+    public $cacheEnabled = true;
 
     public function name()
     {

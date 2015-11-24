@@ -7,6 +7,8 @@ use cebe\markdown\GithubMarkdown;
 class TextBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
+    
+    public $cacheEnabled = true;
 
     public $_parser = null;
 

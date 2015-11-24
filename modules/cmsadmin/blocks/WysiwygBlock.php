@@ -4,6 +4,8 @@ namespace cmsadmin\blocks;
 
 class WysiwygBlock extends \cmsadmin\base\Block
 {
+    public $cacheEnabled = true;
+    
     public function name()
     {
         return 'Texteditor';

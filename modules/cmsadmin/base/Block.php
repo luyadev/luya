@@ -22,6 +22,16 @@ abstract class Block extends \yii\base\Object implements BlockInterface
     private $_envOptions = [];
 
     /**
+     * @var bool Enable or disable the block caching
+     */
+    public $cacheEnabled = false;
+    
+    /**
+     * @var int The cache lifetime for this block in seconds (3600 = 1 hour), only affects when cacheEnabled is true
+     */
+    public $cacheExpiration = 3600;
+    
+    /**
      * @var bool Choose whether block is a layout/container/segmnet/section block or not, Container elements will be optically displayed
      *           in a different way for a better user experience. Container block will not display isDirty colorizing.
      */

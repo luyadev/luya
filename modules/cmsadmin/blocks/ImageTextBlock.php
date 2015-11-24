@@ -11,6 +11,8 @@ class ImageTextBlock extends \cmsadmin\base\Block
 
     public $_parser = null;
 
+    public $cacheEnabled = true;
+    
     private $defaultMargin = '20px';
 
     private $_source = null;
