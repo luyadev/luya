@@ -5,6 +5,7 @@ namespace luya\web;
 use Yii;
 use Twig_Environment;
 use Twig_SimpleFunction;
+use Twig_SimpleFilter;
 use Twig_Extension_Debug;
 
 /**
@@ -68,6 +69,14 @@ class Twig extends \yii\base\Component
         foreach ($this->getFunctions() as $name => $lambda) {
             $twig->addFunction(new Twig_SimpleFunction($name, $lambda));
         }
+        
+        $twig->addFilter(new Twig_SimpleFilter('strftime', function($timestamp, $format) {
+            if (is_numeric($timestamp)) {
+                return strftime($format, $timestamp);
+            }
+            
+            return $timestamp;
+        }));
 
         return $twig;
     }
