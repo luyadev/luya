@@ -96,6 +96,30 @@ Diese Übersicht erklärt die Methoden/Funktionen welche implenetiert werden mü
 | twigFrontend | string | Dieser Twig-View wird im Frontend gerendert und somit für den Endbenutzer ersichtlich. [Twig Syntaxe](http://twig.sensiolabs.org/)
 | twigAdmin | string | Dieser Twig.js-View wird im Administrationbereich des CMS gerendet, also für die Benutzer der Block-Elemente Oberfläche [Twig.js Syntaxe](https://github.com/justjohn/twig.js/wiki)
 
+Caching
+-------
+
+> seit 1.0.0-beta2
+
+Blöcke können im Frontend Context gecached werden und somit die ausführzeit drastisch verkürzern. Damit das caching funktioniert muss in der konfigurations datei eine cache [komponente hinterlegt](http://www.yiiframework.com/doc-2.0/guide-caching-data.html#cache-components) werden.
+
+Wenn du einen neune block erstellst ist das caching standardmässig *ausgeschaltet* um es zu aktivieren stelle die eigenschaft `cacheEnabled` auf true:
+
+```php
+class MyTestBlock extends \cmsadmin\base\Block
+{
+    public $cacheEnabled = true;
+}
+```
+
+standard mässig beträgt die cache zeit für einen block eine Stunde. Um die caching Zeit zu verstellen kannst du die eigenschaft `cacheExpiration` auf einen bliebeigen integer Wert umstellen. Die Zeitangabe ist in Sekunden, also 3600 entspricht einer Stunde und 60 einer Minute.
+
+```php
+public $cacheExpiration = 60;
+```
+
+> Der standard wert von $cacheExpiration beträgt 3600
+
 Env Optionen
 ------------
 Ein Block wird in einer bestimmten Umgebung (*Environemnt* kurz *Env*) aufgerufen. Diese Umgebungs-Inhalt stehe dir via
