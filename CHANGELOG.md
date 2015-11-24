@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide. 
 
+- `#509` improved video block (added Vimeo and make responsive work).
 - `#574` added strftime twig filter to get date formats based on the current localisation settings.
 - `#558` added image thumbnail in list view for image plugin, therefore added storageImageThumbnailDisplay directive.
 - `#533` file- and image-array directive removed margin-top for better alignment to the labels 
