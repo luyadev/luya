@@ -30,12 +30,14 @@
                 <div class="block__edit-content">
                     <p class="block__config__text">Block-Inhalte</p>
                     <div class="row" ng-repeat="field in block.vars">
+                         <span ng-show="hasInfo(field.var)"><div class="alert alert--info" ng-bind="getInfo(field.var)"></div></span>
                          <zaa-injector dir="field.type" options="field.options" fieldid="{{field.id}}" fieldname="{{field.var}}" initvalue="{{field.initvalue}}" placeholder="{{field.placeholder}}" label="{{field.label}}" model="data[field.var]"></zaa-injector>
                     </div>
                 </div>
                 <div class="block__config-content">
                     <p class="block__config__text">Einstellungen</p>
                     <div class="row" ng-repeat="cfgField in block.cfgs">
+                        <span ng-show="hasInfo(cfgField.var)"><div class="alert alert--info" ng-bind="getInfo(cfgField.var)"></div></span>
                         <zaa-injector dir="cfgField.type" placeholder="{{cfgField.placeholder}}" fieldid="{{cfgField.id}}" fieldname="{{cfgField.var}}" initvalue="{{cfgField.initvalue}}" options="cfgField.options" label="{{cfgField.label}}"  model="cfgdata[cfgField.var]"></zaa-injector>
                     </div>
                 </div>

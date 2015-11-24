@@ -950,6 +950,18 @@
 		};
 		
 
+		$scope.hasInfo = function(varFieldName) {
+			if (varFieldName in $scope.block.field_help) {
+				return true;
+			}
+			
+			return false;
+		}
+		
+		$scope.getInfo = function(varFieldName) {
+			return $scope.block.field_help[varFieldName];
+		}
+		
         $scope.isEditable = function() {
             return typeof $scope.block.vars != "undefined" && $scope.block.vars.length > 0;
         };

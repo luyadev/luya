@@ -249,6 +249,16 @@ abstract class Block extends \yii\base\Object implements BlockInterface
     {
         return [];
     }
+    
+    /**
+     * Returns an array with additional help informations for specific field (var or cfg).
+     *
+     * @return array An array where the key is the cfg/var field var name and the value the helper text.
+     */
+    public function getFieldHelp()
+    {
+        return [];
+    }
 
     /**
      * @return array

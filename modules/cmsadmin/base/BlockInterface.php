@@ -19,6 +19,8 @@ interface BlockInterface
     // luya based methods to access
 
     public function getTwigFrontendContent();
+    
+    public function getFieldHelp();
 
     public function setVarValues(array $values);
 

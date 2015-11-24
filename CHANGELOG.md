@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide. 
 
+- `#559` added new block method `getFieldHelp()` to return additional helper data for a var or cfg field.
 - `#489` added the ability to drop pages on empty navigation containers.
 - `#509` improved video block (added Vimeo and make responsive work).
 - `#574` added strftime twig filter to get date formats based on the current localisation settings.
