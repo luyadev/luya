@@ -70,7 +70,7 @@ class Twig extends \yii\base\Component
             $twig->addFunction(new Twig_SimpleFunction($name, $lambda));
         }
         
-        $twig->addFilter(new Twig_SimpleFilter('strftime', function($timestamp, $format) {
+        $twig->addFilter(new Twig_SimpleFilter('strftime', function ($timestamp, $format) {
             if (is_numeric($timestamp)) {
                 return strftime($format, $timestamp);
             }

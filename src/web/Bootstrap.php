@@ -24,7 +24,6 @@ class Bootstrap extends \luya\base\Bootstrap
     {
         foreach ($this->getModules() as $id => $module) {
             foreach ($module->urlRules as $k => $v) {
-                
                 if (isset($v['position'])) {
                     $pos = $v['position'];
                 } else {
@@ -61,7 +60,7 @@ class Bootstrap extends \luya\base\Bootstrap
         
         ksort($this->_urlRules);
         
-        foreach($this->_urlRules as $position => $rules) {
+        foreach ($this->_urlRules as $position => $rules) {
             $app->getUrlManager()->addRules($rules);
         }
     }
