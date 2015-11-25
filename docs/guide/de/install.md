@@ -1,7 +1,7 @@
 Luya installieren
 =================
 
-> Bei Problemen mit `composer update`, aktualisiere Dein `fxp/composer-asset-plugin` auf die Version **1.1.0** mit dem Befehl: `composer global require "fxp/composer-asset-plugin:1.1.0"`.
+> Bei Problemen mit `composer update`, aktualisiere Dein `fxp/composer-asset-plugin` auf die Version **1.1.0** mit dem Befehl: `composer global require "fxp/composer-asset-plugin:~1.1.1"`.
 
 Mit diesen wenigen Schritten kannst Du ganz einfach ein eigenes Luya-Projekt erstellen. Um Luya installieren zu können, musst du [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) auf deinem Mac-, Linux- oder Windows- Computer installiert haben. Natürlich musst Du über eine Webserver-Umgebung mit [PHP](http://php.net) (ab Version 5.4) verfügen (zbsp. [MAMP](https://www.mamp.info/de/) oder [XAMPP](https://www.apachefriends.org/index.html)).
 
