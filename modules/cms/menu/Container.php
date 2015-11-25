@@ -5,6 +5,7 @@ namespace cms\menu;
 use Yii;
 use Exception;
 use ArrayAccess;
+use yii\web\NotFoundHttpException;
 use yii\db\Query as DbQuery;
 use cms\menu\Query as MenuQuery;
 
@@ -375,15 +376,12 @@ class Container extends \yii\base\Component implements ArrayAccess
             }
         }
 
-        if (!$item) {
-            $this->_currentAppendix = $requestPath;
-
-            return $this->home;
+        if ($item) {
+            $this->_currentAppendix = substr($requestPath, strlen($item->alias) + 1);
+            return $item;
         }
 
-        $this->_currentAppendix = substr($requestPath, strlen($item->alias) + 1);
-
-        return $item;
+        throw new NotFoundHttpException("Unable to resolve requested path '".$requestPath."'.");
     }
 
     /**
