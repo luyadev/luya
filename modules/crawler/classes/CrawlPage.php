@@ -55,7 +55,6 @@ class CrawlPage extends \yii\base\Object
             return $node->extract(array('_text', 'href'))[0];
         });
         foreach ($links as $key => $item) {
-            
             $url = parse_url($item[1]);
 
             if (!isset($url['host']) || !isset($url['scheme'])) {
@@ -76,7 +75,6 @@ class CrawlPage extends \yii\base\Object
             $links[$key][1] = http_build_url($url, [
                 'query' => (isset($host['query'])) ? $host['query'] : [],
             ], HTTP_URL_JOIN_QUERY | HTTP_URL_STRIP_FRAGMENT);
-            
         }
         return $links;
     }

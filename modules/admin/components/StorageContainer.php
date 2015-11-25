@@ -272,7 +272,7 @@ class StorageContainer extends \yii\base\Component
             $this->_imagesArray[$model->id] = $model->toArray();
             
             return $this->getImage($model->id);
-        } catch(Exception $err) {
+        } catch (Exception $err) {
             if ($throwException) {
                 throw new Exception($err->getMessage(), $err->getCode(), $err);
             }

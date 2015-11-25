@@ -105,7 +105,6 @@ class NavItemPage extends \cmsadmin\base\NavItemType
         $string = '';
 
         foreach ($this->getPlaceholders($navItemPageId, $placeholderVar, $prevId) as $key => $placeholder) {
-            
             $cacheKey = $this->createHashKey($placeholder['block_id'], $placeholder['id'], $prevId);
             
             $blockResponse = $this->getHasCache($cacheKey);
@@ -138,7 +137,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
                     }
                     $blockObject->setPlaceholderValues($insertedHolders);
                     // output buffer the rendered frontend string based on the current twig env
-                    
+
                     $blockResponse = $blockObject->renderFrontend($this->getTwig());
                     
                     if ($blockObject->cacheEnabled) {

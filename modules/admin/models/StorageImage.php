@@ -1,6 +1,7 @@
 <?php
 
 namespace admin\models;
+
 use admin\models\StorageFile;
 
 class StorageImage extends \yii\db\ActiveRecord

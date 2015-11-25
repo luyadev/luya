@@ -13,5 +13,5 @@ trait ObjectTrait
         return Yii::createObject(['class' => self::className(), 'itemArray' => $itemArray]);
     }
     
-    public abstract function toArray();
+    abstract public function toArray();
 }

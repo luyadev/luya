@@ -8,7 +8,6 @@ use admin\helpers\Storage;
 use admin\models\StorageImage;
 use admin\models\StorageFile;
 use admin\models\StorageFolder;
-
 use admin\storage\FolderQuery;
 use admin\storage\ImageQuery;
 use admin\storage\FileQuery;
@@ -19,11 +18,11 @@ use admin\storage\FileQuery;
 class StorageController extends \admin\base\RestController
 {
     // new beta2 controller meethods
-    
+
     public function actionDataFolders()
     {
         $folders = [];
-        foreach((new FolderQuery())->all() as $folder) {
+        foreach ((new FolderQuery())->all() as $folder) {
             $folders[] = $folder->toArray();
         }
         
@@ -33,8 +32,7 @@ class StorageController extends \admin\base\RestController
     public function actionDataFiles()
     {
         $files = [];
-        foreach((new FileQuery())->where(['is_hidden' => 0, 'is_deleted' => 0])->all() as $file) {
-            
+        foreach ((new FileQuery())->where(['is_hidden' => 0, 'is_deleted' => 0])->all() as $file) {
             $data = $file->toArray();
             if ($file->isImage) {
                 $filter = Yii::$app->storage->getFiltersArrayItem('tiny-thumbnail');
@@ -46,7 +44,6 @@ class StorageController extends \admin\base\RestController
                 }
             }
             $files[] = $data;
-            
         }
         
         return $files;
@@ -55,9 +52,9 @@ class StorageController extends \admin\base\RestController
     public function actionDataImages()
     {
         $images = [];
-        foreach((new ImageQuery())->all() as $image) {
+        foreach ((new ImageQuery())->all() as $image) {
             $images[] = $image->toArray();
-        }   
+        }
         
         return $images;
     }
@@ -76,7 +73,7 @@ class StorageController extends \admin\base\RestController
     
     public function actionDataFilters()
     {
-        return Yii::$app->storage->filtersArray;   
+        return Yii::$app->storage->filtersArray;
     }
     
     private $_uploaderErrors = [
@@ -109,7 +106,7 @@ class StorageController extends \admin\base\RestController
             try {
                 $create = Yii::$app->storage->addFile($file['tmp_name'], $file['name'], Yii::$app->request->post('folderId', 0));
                 return ['upload' => true, 'message' => 'file uploaded succesfully'];
-            } catch(Exception $err) {
+            } catch (Exception $err) {
                 return ['upload' => false, 'message' => $err->getMessage()];
             }
         }
@@ -210,7 +207,6 @@ class StorageController extends \admin\base\RestController
         $model->timestamp_create = time();
     
         return $model->save();
-    
     }
     
     // old controller methods
@@ -342,7 +338,7 @@ class StorageController extends \admin\base\RestController
     */
     
     // helpers as of removment
-    
+
     /*
     private function filesAllFromFolder($folderId)
     {
@@ -397,7 +393,7 @@ class StorageController extends \admin\base\RestController
     }
     */
     // folder helper
-    
+
     /*
     private function helperFolderPartialFolderTree($parentId)
     {
