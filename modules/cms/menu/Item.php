@@ -100,6 +100,20 @@ class Item extends \yii\base\Object
     }
     
     /**
+     * Return the current nav item type by number.
+     *
+     * + 1 = Page with blocks
+     * + 2 = Module
+     * + 3 = Redirect
+     * 
+     * @return int The type number
+     */
+    public function getType()
+    {
+        return (int) $this->itemArray['type'];
+    }
+    
+    /**
      * Returns the description provided by the cms admin, if any.
      * 
      * @return string The description string for this page.
