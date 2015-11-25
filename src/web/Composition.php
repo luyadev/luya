@@ -54,6 +54,8 @@ class Composition extends \yii\base\Component implements \ArrayAccess
      * @var array Read-Only property, contains all composition key value paringins
      */
     private $_composition = [];
+    
+    private $_compositionKeys = [];
 
     /**    
      * Class constructor, to get data from DiContainer.
@@ -79,6 +81,7 @@ class Composition extends \yii\base\Component implements \ArrayAccess
     {
         $resolve = $this->getResolvedPathInfo($this->request);
         $this->set($resolve['compositionKeys']);
+        $this->_compositionKeys = $resolve['keys'];
     }
 
     /**
@@ -101,12 +104,14 @@ class Composition extends \yii\base\Component implements \ArrayAccess
     {
         // contains all resolved values
         $resolvedValues = [];
+        $foundKeys = [];
         // array with all url parts, seperated by slash
         $requestUrlParts = explode('/', $request->pathInfo);
         // catch all results matching the var match regular expression
         preg_match_all(static::VAR_MATCH_REGEX, $this->pattern, $matches, PREG_SET_ORDER);
         // get all matches
         foreach ($matches as $index => $match) {
+            $foundKeys[] = $match[1];
             // check if the index of the match is existing in the requestUrlParts array as the match always
             // starts from the begin of a string.
             if (isset($requestUrlParts[$index])) {
@@ -126,7 +131,7 @@ class Composition extends \yii\base\Component implements \ArrayAccess
             $keys = $resolvedValues;
         }
         // return array with route and resolvedValues
-        return ['route' => implode('/', $requestUrlParts), 'resolvedValues' => $resolvedValues, 'compositionKeys' => $keys];
+        return ['route' => implode('/', $requestUrlParts), 'resolvedValues' => $resolvedValues, 'compositionKeys' => $keys, 'keys' => $foundKeys];
     }
 
     /**
@@ -183,20 +188,53 @@ class Composition extends \yii\base\Component implements \ArrayAccess
      */
     public function getFull()
     {
-        return ($this->hidden) ? '' : implode('/', $this->_composition);
+        return $this->createRouteEnsure();
+    }
+    
+    /**
+     * create a route but ensures if composition is hidden anywho.
+     * 
+     * @param array $overrideKeys
+     * @return string
+     */
+    public function createRouteEnsure(array $overrideKeys = [])
+    {
+        return ($this->hidden) ? '' : $this->createRoute($overrideKeys);
+    }
+    
+    /**
+     * Create compositon route based on the provided keys (to override), if no keys provided
+     * all the default values will be used.
+     * 
+     * @param array $overrideKeys
+     * @return string
+     */
+    public function createRoute(array $overrideKeys = [])
+    {
+        $composition = $this->_composition;
+        
+        foreach ($overrideKeys as $key => $value) {
+            if (in_array($key, $this->_compositionKeys)) {
+                $composition[$key] = $value;
+            }
+        }
+        
+        return implode('/', $composition);
     }
 
     /**
-     * Prepend to current composition to a given route.
+     * Prepend to current composition (or to provided composition prefix-route) to a given route.
      *
-     * @param unknown $route
-     *
-     * @return unknown|string
+     * @param string $route The route where the composition prefix should be prepended.
+     * @param null|string $prefix Define the value you want to prepend to the route or not.
+     * @return string
      */
-    public function prependTo($route)
+    public function prependTo($route, $prefix = null)
     {
-        $prefix = $this->getFull();
-
+        if ($prefix === null) {
+            $prefix = $this->getFull();
+        }
+        
         if (empty($prefix)) {
             return $route;
         }

@@ -393,9 +393,9 @@ class Container extends \yii\base\Component implements ArrayAccess
      *
      * @return string
      */
-    private function buildItemLink($alias)
+    private function buildItemLink($alias, $langShortCode)
     {
-        return Yii::$app->getUrlManager()->prependBaseUrl($this->composition->prependTo($alias));
+        return Yii::$app->getUrlManager()->prependBaseUrl($this->composition->prependTo($alias, $this->composition->createRoute(['langShortCode' => $langShortCode])));
     }
 
     /**
@@ -484,7 +484,7 @@ class Container extends \yii\base\Component implements ArrayAccess
                 'id' => $item['id'],
                 'nav_id' => $item['nav_id'],
                 'lang' => $lang['short_code'],
-                'link' => $this->buildItemLink($alias),
+                'link' => $this->buildItemLink($alias, $langShortCode),
                 'title' => $item['title'],
                 'alias' => $alias,
                 'description' => $item['description'],

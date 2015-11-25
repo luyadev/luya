@@ -127,7 +127,7 @@ class Item extends \yii\base\Object
      */
     public function getDateCreated()
     {
-        return $this->itemArray['timestamp_create'];   
+        return $this->itemArray['timestamp_create'];
     }
     
     /**
