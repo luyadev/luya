@@ -23,10 +23,65 @@ class Index extends \admin\ngrest\base\Model
     }
 
     /* custom methods */
+    
+    public static function indexer($item, &$index)
+    {
+        if (empty($index)) {
+            $index = $item;
+        } else {
+            foreach($index as $k => $v) {
+                if (!array_key_exists($k, $item)) {
+                    unset($index[$k]);
+                }
+            }
+        }
+    }
 
     public static function searchByQuery($query, $languageInfo)
     {
-        return self::find()->where(['like', 'content', Html::encode($query)])->andWhere(['language_info' => $languageInfo])->all();
+        
+        $query = trim(Html::encode($query));
+        
+        if (strlen($query) < 1) {
+            return false;
+        }
+        
+        $parts = explode(" ", $query);
+        
+        $index = [];
+        
+        foreach ($parts as $word) {
+           $q = self::find()->select(['id', 'content'])->where(['like', 'content', $word]);
+           if (!empty($languageInfo)) {
+               $q->andWhere(['language_info' => $languageInfo]);
+           }
+           $data = $q->asArray()->indexBy('id')->all();
+           static::indexer($data, $index);
+        }
+        
+        $ids = [];
+        foreach($index as $item) {
+            $ids[] = $item['id'];
+        }
+        
+        
+        return self::find()->where(['in', 'id', $ids])->all();
+    }
+    
+    public static function flatSearchByQuery($query, $languageInfo)
+    {
+        $query = trim(Html::encode($query));
+        
+        if (strlen($query) < 1) {
+            return false;
+        }
+        
+        $q = self::find()->where(['like', 'content', $query]);
+        if (!empty($languageInfo)) {
+            $q->andWhere(['language_info' => $languageInfo]);
+        }
+        
+        return $q->all();
     }
 
     public function preview($word, $cutAmount = 150)
