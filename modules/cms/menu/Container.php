@@ -364,8 +364,10 @@ class Container extends \yii\base\Component implements ArrayAccess
             $requestPath = $home->alias;
         }
 
+        $requestPath = rtrim($requestPath, '/');
+        
         $urlParts = explode('/', $requestPath);
-
+        
         $item = $this->aliasMatch($urlParts);
 
         if (!$item) {
