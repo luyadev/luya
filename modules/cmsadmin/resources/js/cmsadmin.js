@@ -49,7 +49,7 @@
 				}
 			},
 			template : function() {
-				return '<button ng-click="goTo(navId)">{{path}}</button> in {{container}}';
+				return '<div class="btn" ng-click="goTo(navId)">{{path}}</div> in {{container}}';
 			}
 		}
 	});
