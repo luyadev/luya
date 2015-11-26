@@ -29,4 +29,17 @@ trait Application
 
         return $modules;
     }
+
+    public function getFrontendModules()
+    {
+        $modules = [];
+
+        foreach ($this->getModules() as $id => $obj) {
+            if ($obj instanceof \luya\base\Module && !$obj->isAdmin && strcmp($id, 'luya') != 0 && strcmp($id, 'cms') != 0) {
+                $modules[$id] = $obj;
+            }
+        }
+
+        return $modules;
+    }
 }
