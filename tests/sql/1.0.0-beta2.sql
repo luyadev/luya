@@ -614,7 +614,8 @@ CREATE TABLE IF NOT EXISTS `cms_nav` (
   `is_deleted` tinyint(1) DEFAULT '0',
   `is_hidden` tinyint(1) DEFAULT '0',
   `is_offline` tinyint(1) DEFAULT '0',
-  `is_home` tinyint(1) DEFAULT '0'
+  `is_home` tinyint(1) DEFAULT '0',
+   `is_draft` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
