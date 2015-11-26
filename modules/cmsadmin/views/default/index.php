@@ -275,7 +275,7 @@
     <div class="row">
         <div class="col s12">
 
-            <a ui-sref="custom.cmsdraft">Vorlagen</a>
+            <a ui-sref="custom.cmsdraft" class="btn btn-default">Vorlagen</a>
         
             <a class="create-button [ btn-floating btn-large ][ waves-effect waves-light ] teal" ui-sref="custom.cmsadd"><i class="material-icons">add</i></a>
 

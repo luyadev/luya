@@ -415,7 +415,7 @@ class Container extends \yii\base\Component implements ArrayAccess
         ->select(['item.id', 'item.nav_id', 'item.title', 'item.description', 'item.alias', 'item.timestamp_create', 'item.timestamp_update', 'item.create_user_id', 'item.update_user_id', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'nav_container.alias AS container'])
         ->leftJoin('cms_nav nav', 'nav.id=item.nav_id')
         ->leftJoin('cms_nav_container nav_container', 'nav_container.id=nav.nav_container_id')
-        ->where(['nav.is_deleted' => 0, 'item.lang_id' => $langId, 'nav.is_offline' => 0])
+        ->where(['nav.is_deleted' => 0, 'item.lang_id' => $langId, 'nav.is_offline' => 0, 'nav.is_draft' => 0])
         ->orderBy(['container' => 'ASC', 'parent_nav_id' => 'ASC', 'nav.sort_index' => 'ASC'])
         ->indexBy('id')
         ->all();

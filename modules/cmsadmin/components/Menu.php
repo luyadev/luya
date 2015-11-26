@@ -123,7 +123,7 @@ class Menu
             ->from('cms_nav')
             ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')
             ->orderBy('cms_nav.sort_index ASC')
-            ->where(['parent_nav_id' => $parentNavId, 'nav_container_id' => $this->container['id'], 'cms_nav_item.lang_id' => $this->lang['id'], 'cms_nav.is_deleted' => 0])
+            ->where(['parent_nav_id' => $parentNavId, 'nav_container_id' => $this->container['id'], 'cms_nav_item.lang_id' => $this->lang['id'], 'cms_nav.is_deleted' => 0, 'cms_nav.is_draft' => 0])
             ->all();
     }
 }
