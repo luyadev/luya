@@ -36,16 +36,20 @@
 			scope : {
 				navId : '='
 			},
-			controller : function($scope, $http) {
+			controller : function($scope, $http, $state) {
 				$http.get('admin/api-cms-navitem/get-nav-item-path', { params : { navId : $scope.navId }}).success(function(response) {
 					$scope.path = response;
 				});
 				$http.get('admin/api-cms-navitem/get-nav-container-name', { params : { navId : $scope.navId }}).success(function(response) {
 					$scope.container = response;
 				});
+
+				$scope.goTo = function(navId) {
+					$state.go('custom.cmsedit', { navId : navId });
+				}
 			},
 			template : function() {
-				return '"{{path}}" in {{container}}';
+				return '<button ng-click="goTo(navId)">{{path}}</button> in {{container}}';
 			}
 		}
 	});
