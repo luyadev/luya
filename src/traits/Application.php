@@ -29,4 +29,22 @@ trait Application
 
         return $modules;
     }
+
+    /**
+     * Return a list with all registrated frontend modules except 'luya' and 'cms'. This is needed in the module block.
+     *
+     * @return array
+     */
+    public function getFrontendModules()
+    {
+        $modules = [];
+
+        foreach ($this->getModules() as $id => $obj) {
+            if ($obj instanceof \luya\base\Module && !$obj->isAdmin && $id !== 'luya' && $id !== 'cms') {
+                $modules[$id] = $obj;
+            }
+        }
+
+        return $modules;
+    }
 }
