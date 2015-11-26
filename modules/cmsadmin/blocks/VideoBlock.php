@@ -7,7 +7,7 @@ class VideoBlock extends \cmsadmin\base\Block
     public $module = 'cmsadmin';
 
     public $cacheEnabled = true;
-    
+
     public function name()
     {
         return 'Video';
@@ -22,19 +22,27 @@ class VideoBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'url', 'label' => 'Video URL (Vimeo oder Youtube)', 'type' => 'zaa-text'],
+                ['var' => 'url', 'label' => 'Video URL', 'type' => 'zaa-text'],
             ],
             'cfgs' => [
                 [
                     'var' => 'controls',
-                    'label' => 'Controls ausblenden? (Wird nicht von allen Playern unterstützt)',
+                    'label' => 'Controls ausblenden?',
                     'type' => 'zaa-checkbox',
                 ],
             ],
         ];
     }
 
-    public function constructYoutubeUrl($scheme, $host, $path, $query)
+    public function getFieldHelp()
+    {
+        return [
+            'url' => 'Es werden Vimeo oder Youtube URLs unterstützt.',
+            'controls' => 'Diese Option wird momentan nur von Youtube unterstützt.',
+        ];
+    }
+
+    public function constructYoutubeUrl($scheme, $host, $query)
     {
         $url = '';
         if (($pos = strpos($query, 'v=')) !== false) {
@@ -51,7 +59,7 @@ class VideoBlock extends \cmsadmin\base\Block
         return $url;
     }
 
-    public function constructVimeoUrl($scheme, $host, $path, $query)
+    public function constructVimeoUrl($path)
     {
         $path = trim($path, '/');
         $url = '';
@@ -64,14 +72,18 @@ class VideoBlock extends \cmsadmin\base\Block
     public function constructUrl()
     {
         $urlComponents = parse_url($this->getVarValue('url'));
+        $correctUrl = isset($urlComponents['scheme']) && isset($urlComponents['host']);
 
-        if (($urlComponents['host'] == 'www.youtube.com') || ($urlComponents['host'] == 'youtube.com')) {
-            return $this->constructYoutubeUrl($urlComponents['scheme'], $urlComponents['host'], $urlComponents['path'],
-                $urlComponents['query']);
-        } elseif (($urlComponents['host'] == 'www.vimeo.com') || ($urlComponents['host'] == 'vimeo.com')) {
-            return $this->constructVimeoUrl($urlComponents['scheme'], $urlComponents['host'], $urlComponents['path'],
-                $urlComponents['query']);
+        if (($this->getVarValue('url', null) === null) || !$correctUrl) {
+            return null;
         }
+
+        if (($urlComponents['host'] == 'www.youtube.com') || ($urlComponents['host'] == 'youtube.com') || (isset($urlComponents['query']))) {
+            return $this->constructYoutubeUrl($urlComponents['scheme'], $urlComponents['host'], $urlComponents['query']);
+        } elseif (($urlComponents['host'] == 'www.vimeo.com') || ($urlComponents['host'] == 'vimeo.com') || (isset($urlComponents['path']))) {
+            return $this->constructVimeoUrl($urlComponents['path']);
+        }
+        return null;
     }
 
     public function extraVars()
@@ -88,6 +100,6 @@ class VideoBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return '{% if vars.url is not empty %}<div class="video-container" style="margin:100px"><iframe width="640" height="480" src="{{ extras.url }}" frameborder="0" allowfullscreen></iframe></div>{% else %}<span class="block__empty-text">Es wurde noch keine Video URL angegeben.</span>{% endif %}';
+        return '{% if extras.url is not empty %}<div class="video-container" style="margin:100px"><iframe width="640" height="480" src="{{ extras.url }}" frameborder="0" allowfullscreen></iframe></div>{% else %}<span class="block__empty-text">Es wurde noch keine gültige Video URL angegeben.</span>{% endif %}';
     }
 }

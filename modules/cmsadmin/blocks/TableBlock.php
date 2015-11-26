@@ -33,6 +33,13 @@ class TableBlock extends \cmsadmin\base\Block
         ];
     }
 
+    public function getFieldHelp()
+    {
+        return [
+            'table' => 'Es muss zuerst eine Zeile und Spalte hinzugefügt werden, bevor Inhalte eingetragen werden können.'
+        ];
+    }
+
     public function getTableData()
     {
         $table = [];
