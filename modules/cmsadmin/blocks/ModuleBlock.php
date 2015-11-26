@@ -22,13 +22,29 @@ class ModuleBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'moduleName', 'label' => 'Module Name', 'type' => 'zaa-text'],
+                ['var' => 'moduleName', 'label' => 'Module Name', 'type' => 'zaa-select', 'options' => $this->getModuleNames()],
             ],
             'cfgs' => [
                 ['var' => 'moduleController', 'label' => 'Controller Name (ohne Controller suffix)', 'type' => 'zaa-text'],
                 ['var' => 'moduleAction', 'label' => 'Action Name (ohne action prefix)', 'type' => 'zaa-text'],
                 ['var' => 'moduleActionArgs', 'label' => 'Action Arguments (json: {"var":"value"})', 'type' => 'zaa-text'],
             ],
+        ];
+    }
+
+    public function getModuleNames()
+    {
+        $data = [];
+        foreach(Yii::$app->getFrontendModules() as $k => $f ) {
+            $data[] = ['value' => $k, 'label' => $k];
+        }
+        return $data;
+    }
+
+    public function getFieldHelp()
+    {
+        return [
+            'moduleName' => 'Es erscheinen alle Frontend Modulnamen, die in der Config hinterlegt sind.'
         ];
     }
 

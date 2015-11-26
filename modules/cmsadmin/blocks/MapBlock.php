@@ -76,6 +76,6 @@ class MapBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return '{% if vars.address is not empty %}<div class="video-container"><iframe src="http://maps.google.com/maps?f=q&source=s_q&hl=de&geocode=&q={{ extras.address }}&z={{ extras.zoom }}&t={{ extras.maptype }}&output=embed" width="600" height="450" frameborder="0" style="border:0"></iframe></div>{% else %}<span class="block__empty-text">Es wurde noch keine Adresse angegeben.</span>{% endif %}';
+        return '{% if vars.address is not empty %}<div class="video-container" style="margin:100px;"><iframe src="http://maps.google.com/maps?f=q&source=s_q&hl=de&geocode=&q={{ extras.address }}&z={{ extras.zoom }}&t={{ extras.maptype }}&output=embed" width="600" height="450" frameborder="0" style="border:0"></iframe></div>{% else %}<span class="block__empty-text">Es wurde noch keine Adresse angegeben.</span>{% endif %}';
     }
 }

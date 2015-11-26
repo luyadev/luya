@@ -25,6 +25,13 @@ class WysiwygBlock extends \cmsadmin\base\Block
         ];
     }
 
+    public function getFieldHelp()
+    {
+        return [
+            'content' => 'Klicken Sie in die erste Zeile um mit der Eingabe zu beginnen.',
+        ];
+    }
+
     public function twigFrontend()
     {
         return '{% if vars.content is not empty %}{{ vars.content }}{% endif %}';
