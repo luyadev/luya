@@ -237,21 +237,25 @@
 
     <div data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{revert: true, delay: 200, scroll : false, handle : '.treeview__link--draggable'}" ng-model="data">
 
-        <div class="treeview__drop" ng-class="{ 'treeview__drop--visible': showDrag }" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onBeforeDrop()', multiple : true}">
+        <div class="treeview__drop" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onBeforeDrop()', multiple : true}">
         </div>
 
-        <a class="treeview__link" ng-click="!showDrag && go(data.id)" title="id={{data.id}}" alt="id={{data.id}}" ng-class="{'treeview__link--active' : isCurrentElement(data.id), 'waves-effect waves-blue' : !showDrag, 'treeview__link--draggable' : showDrag, 'treeview__link--is-hidden' : data.is_hidden == '1' }" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__link--hover' }" jqyoui-droppable="{onDrop: 'onChildDrop()', multiple : true}">
-            <i ng-class="{ 'treeview__move--visible': showDrag }" class="material-icons treeview__move left">open_with</i>
-           
-            <i ng-show="data.is_home==1" class="material-icons left">home</i>
-            <i ng-show="data.is_home==0" class="material-icons left">fiber_manual_record</i>
-            {{data.title}}
+        <a class="treeview__button treeview__link" ng-click="!showDrag && go(data.id)" title="id={{data.id}}" alt="id={{data.id}}" ng-class="{'treeview__link--active' : isCurrentElement(data.id), 'treeview__link--is-online' : data.is_offline == '0', 'treeview__link--is-hidden' : data.is_hidden == '1', 'treeview__link--draggable' : showDrag}" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__link--hover' }" jqyoui-droppable="{onDrop: 'onChildDrop()', multiple : true}">
+            <div class="treeview__icon-holder">
+                <!-- show if drag is active -->
+                <i ng-show="showDrag" class="material-icons treeview__icon treeview__icon--move">open_with</i>
 
-            <i ng-show="data.is_offline == '1'" class="material-icons treeview__site-state treeview__site-state--offline" title="Seiten Status: Offline">cloud_off</i>
-            <i ng-show="data.is_offline == '0'" class="material-icons treeview__site-state treeview__site-state--online" title="Seiten Status: Online">cloud_queue</i>
+                <!-- show if drag is not active-->
+                <i ng-show="!showDrag && data.is_hidden == '0'" class="material-icons treeview__icon treeview__icon--visible" title="Sichtbarkeit: Sichtbar">visibility</i>
+                <i ng-show="!showDrag && data.is_hidden == '1'" class="material-icons treeview__icon treeview__icon--invisible" title="Sichtbarkeit: Unsichtbar">visibility_off</i>
+            </div>
 
-            <i ng-show="data.is_hidden == '0'" class="material-icons treeview__site-state treeview__site-state--visible" title="Seiten Sichtbarkeit: Sichtbar">visibility</i>
-            <i ng-show="data.is_hidden == '1'" class="material-icons treeview__site-state treeview__site-state--invisible" title="Seiten Sichtbarkeit: Unsichtbar">visibility_off</i>
+            <span>
+                {{data.title}} <i ng-show="data.is_home==1" class="material-icons treeview__text-icon">home</i>
+            </span>
+
+            <!--<i ng-show="data.is_offline == '1'" class="material-icons treeview__site-state treeview__site-state--offline" title="Seiten Status: Offline">cloud_off</i>
+            <i ng-show="data.is_offline == '0'" class="material-icons treeview__site-state treeview__site-state--online" title="Seiten Status: Online">cloud_queue</i>-->
             
         </a>
 
@@ -260,7 +264,7 @@
         </ul>
 
 
-        <div class="treeview__drop" ng-show="$last" ng-class="{ 'treeview__drop--visible': showDrag }" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onAfterDrop()', multiple : true}">
+        <div class="treeview__drop" ng-show="$last" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onAfterDrop()', multiple : true}">
         </div>
 
     </div>
@@ -272,34 +276,40 @@
 
 <!-- SIDEBAR -->
 <div class="luya-container__sidebar">
-    <div class="row">
-        <div class="col s12">
+    <div ng-controller="CmsMenuTreeController">
 
-            <a ui-sref="custom.cmsdraft" class="btn btn-default">Vorlagen</a>
-        
-            <a class="create-button [ btn-floating btn-large ][ waves-effect waves-light ] teal" ui-sref="custom.cmsadd"><i class="material-icons">add</i></a>
-
-            <div ng-controller="CmsMenuTreeController">
-                <div class="treeview__switch switch">
-                    <label>
-                        Verschieben
-                        <input type="checkbox" ng-model="showDrag" ng-true-value="1" ng-false-value="0">
-                        <span class="lever"></span>
-                    </label>
-                </div>
-
-                <div class="treeview" ng-repeat="catitem in menu" ng-class="{ 'treeview--drag-active' : showDrag }">
-                    <h5 class="treeview__title" ng-click="toggleCat(catitem.id)"><i class="material-icons treeview__title-icon" ng-class="{'treeview__title-icon--closed': toggleIsHidden(catitem.id)}">arrow_drop_down</i> {{catitem.name}}</h5>
-
-                    <p class="treeview__empty-message" ng-show="catitem.__items.length == 0 && !toggleIsHidden(catitem.id) && !showDrag">Noch keine Seiten hinterlegt</p>
-                    
-                    <div class="treeview__drop" ng-show="catitem.__items.length == 0 && !toggleIsHidden(catitem.id)" ng-class="{ 'treeview__drop--visible': showDrag }" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{catitem.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onEmptyDrop()', multiple : true}"></div>
-                    
-                    <ul class="treeview__list" ng-hide="toggleIsHidden(catitem.id)">
-                        <li class="treeview__item" ng-repeat="data in catitem.__items" ng-include="'reverse.html'"></li>
-                    </ul>
-                </div>
+        <a class="treeview__button treeview__button--draft [ waves-effect waves-light ]"ui-sref="custom.cmsdraft">
+            <div class="treeview__icon-holder">
+                <i class="material-icons">receipt</i>
             </div>
+            <span>Vorlagen</span>
+        </a>
+
+        <a class="treeview__button treeview__button--create [ waves-effect waves-light ]" ui-sref="custom.cmsadd">
+            <div class="treeview__icon-holder">
+                <i class="material-icons">add</i>
+            </div>
+            <span>Neue Seite erstellen</span>
+        </a>
+
+        <div class="treeview__button treeview__button--switch switch" ng-class="{ 'treeview__button--switch-active': showDrag }">
+            <label>
+                <input type="checkbox" ng-model="showDrag" ng-true-value="1" ng-false-value="0">
+                <span class="lever"></span>
+                Verschieben
+            </label>
+        </div>
+
+        <div class="treeview" ng-repeat="catitem in menu" ng-class="{ 'treeview--drag-active' : showDrag }">
+            <h5 class="treeview__title" ng-click="toggleCat(catitem.id)"><i class="material-icons treeview__title-icon" ng-class="{'treeview__title-icon--closed': toggleIsHidden(catitem.id)}">arrow_drop_down</i> <span>{{catitem.name}}</span></h5>
+
+            <p class="treeview__empty-message" ng-show="catitem.__items.length == 0 && !toggleIsHidden(catitem.id) && !showDrag">Noch keine Seiten hinterlegt</p>
+
+            <div class="treeview__drop" ng-show="catitem.__items.length == 0 && !toggleIsHidden(catitem.id)" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{catitem.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onEmptyDrop()', multiple : true}"></div>
+
+            <ul class="treeview__list" ng-hide="toggleIsHidden(catitem.id)">
+                <li class="treeview__item" ng-repeat="data in catitem.__items" ng-include="'reverse.html'"></li>
+            </ul>
         </div>
     </div>
 </div>
