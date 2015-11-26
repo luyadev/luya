@@ -5,10 +5,14 @@ $treeview--padding: 5px;
 	background-color: $grey;
 	color: $black;
 	width: 100%;
-	padding: 5px $treeview--padding;
+	padding: 2px $treeview--padding;
 	vertical-align: middle;
 	text-align: left;
 	transition: 0.25s ease background-color;
+
+	i {
+		font-size: 16px;
+	}
 
 	span,
 	i {
@@ -32,7 +36,12 @@ $treeview--padding: 5px;
 
 .treeview__icon-holder {
 	display: inline-block;
-	padding: 0 8px;
+	padding: 0 4px 0 8px;
+}
+
+.treeview__button--create,
+.treeview__button--draft {
+	padding: 10px $treeview--padding;
 }
 
 .treeview__button--create {
@@ -59,7 +68,7 @@ $treeview--padding: 5px;
 	}
 
 	.lever {
-		margin: 0 ($treeview--padding + 11px);
+		margin: -4px ($treeview--padding + 7px) 0 ($treeview--padding + 7px);
 	}
 }
 
