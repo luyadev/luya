@@ -31,7 +31,23 @@ class MenuController extends \admin\base\RestController
             ];
         }
 
+        
+        // get draft data
+        
+        $data['drafts'] = $this->getDraftData(Lang::getDefault()['id']);
+        
         return $data;
+    }
+    
+    private function getDraftData($langId)
+    {
+        return (new \yii\db\Query())
+        ->select('cms_nav.id, cms_nav.sort_index, cms_nav.parent_nav_id, cms_nav_item.title, cms_nav_item.alias, cms_nav.is_hidden, cms_nav.is_offline, cms_nav.is_home')
+        ->from('cms_nav')
+        ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')
+        ->orderBy('cms_nav.sort_index ASC')
+        ->where(['cms_nav_item.lang_id' => $langId, 'cms_nav.is_deleted' => 0, 'cms_nav.is_draft' => 1])
+        ->all();
     }
 
     public function actionGetByContainerAlias($containerAlias)

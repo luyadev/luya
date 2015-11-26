@@ -144,9 +144,8 @@
 
                                 <!-- LEFT TOOLBAR -->
                                 <div class="left">
-
                                     <!-- CONFIG BUTTON -->
-                                    <div class="toolbar__group" ng-show="properties.length">
+                                    <div class="toolbar__group" ng-show="properties.length && navData.is_draft == 0">
                                         <a class="[ btn-flat btn--small ][ grey-text text-darken-2 ]" ng-click="togglePropMask()">
                                             <i class="material-icons cms__prop-toggle">settings</i>
                                         </a>
@@ -177,8 +176,18 @@
                                 <!-- RIGHT TOOLBAR -->
                                 <div class="right">
 
+                                
+                                    <div class="toolbar__group" ng-show="navData.is_draft == 1">
+                                        <div class="toolbar__group">
+                                        <div class="switch">
+                                            <label>
+                                                    <span><b>Sie sind im Seiten-Vorlage Modus.</b></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <!-- IS_HOME SWITCH -->
-                                    <div class="toolbar__group">
+                                    <div class="toolbar__group" ng-show="navData.is_draft == 0">
                                         <div class="switch">
                                             <label title="Setzt diese Seite als Startseite.">
                                                 Startseite
@@ -190,7 +199,7 @@
                                     <!-- /IS_HOME SWITCH -->
                                     
                                     <!-- VISIBILITY SWITCH -->
-                                    <div class="toolbar__group">
+                                    <div class="toolbar__group" ng-show="navData.is_draft == 0">
                                         <div class="switch switch--with-icons">
                                             <label title="Schaltet die Seite Sichtbar / Unsichtbar. Beeinflusst die Navigation.">
                                                 <i class="switch__icon material-icons" ng-show="!navData.is_hidden">visibility</i>
@@ -203,7 +212,7 @@
                                     <!-- /VISIBILITY SWITCH -->
                                     
                                     <!-- OFFLINE SWITCH -->
-                                    <div class="toolbar__group">
+                                    <div class="toolbar__group" ng-show="navData.is_draft == 0">
                                         <div class="switch switch--with-icons">
                                             <label title="Schaltet die Seite online / offline. Eine Seite die offline ist, kann nicht aufgerufen werden.">
                                                 <i class="switch__icon material-icons green-text" ng-show="!navData.is_offline">cloud_queue</i>
@@ -216,7 +225,7 @@
                                     <!-- /OFFLINE SWITCH -->
 
                                     <!-- LANGUAGE SWITCH -->
-                                    <div class="toolbar__group langswitch">
+                                    <div class="toolbar__group langswitch" ng-show="navData.is_draft == 0">
                                         <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'langswitch__item--active' : AdminLangService.isInSelection(lang.short_code)}" class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ] ng-binding ng-scope">
                                             <span class="flag flag--{{lang.short_code}}">
                                                 <span class="flag__fallback">{{lang.name}}</span>
@@ -264,7 +273,12 @@
 
                 <div class="col s{{(12/AdminLangService.selection.length)}}" ng-repeat="lang in langs" ng-show="AdminLangService.isInSelection(lang.short_code) && showContainer" ng-controller="NavItemController">
                     <!-- PAGE -->
-                    <div class="page" ng-show="!isTranslated">
+                    
+                    <div class="page" ng-show="!isTranslated && navData.is_draft == 1">
+                        <div class="alert alert--info">Vorlagen haben keine Sprach spezifikation.</div>
+                    </div>
+                    
+                    <div class="page" ng-show="!isTranslated && navData.is_draft == 0">
                         <div class="row">
                             <div class="col s12">
                                 <div class="alert alert--info">

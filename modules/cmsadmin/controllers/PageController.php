@@ -13,4 +13,9 @@ class PageController extends \admin\base\Controller
     {
         return $this->renderPartial('update');
     }
+    
+    public function actionDrafts()
+    {
+        return $this->renderPartial('drafts');
+    }
 }

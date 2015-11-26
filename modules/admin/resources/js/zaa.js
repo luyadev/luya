@@ -222,6 +222,13 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 			return true;
 		};
 		
+		service.resetDefault = function() {
+			$http.get("admin/api-admin-defaults/lang").success(function(response) {
+				service.selection = [];
+				service.toggleSelection(response);
+			});
+		}
+		
 		service.load = function(forceReload) {
 			if (service.data.length == 0 || forceReload !== undefined) {
 				service.data = ApiAdminLang.query();

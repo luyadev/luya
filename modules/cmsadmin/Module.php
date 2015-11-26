@@ -50,6 +50,7 @@ class Module extends \admin\base\Module
         return [
             ['route' => 'cmsadmin/page/create', 'alias' => 'Seiten Erstellen'],
             ['route' => 'cmsadmin/page/update', 'alias' => 'Seiten Bearbeiten'],
+            ['route' => 'cmsadmin/page/drafts', 'alias' => 'Vorlagen Bearbeiten'],
         ];
     }
 

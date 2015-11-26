@@ -146,16 +146,22 @@ class NavController extends \admin\base\RestController
      */
     public function actionCreatePage()
     {
+        $fromDraft = $this->postArg('from_draft_id');
         $model = new \cmsadmin\models\Nav();
-        $create = $model->createPage($this->postArg('parent_nav_id'), $this->postArg('nav_container_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('layout_id'), $this->postArg('description'));
-
+        
+        if (!empty($fromDraft)) {
+            $create = $model->createPageFromDraft($this->postArg('parent_nav_id'), $this->postArg('nav_container_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'),$this->postArg('description'), $fromDraft, $this->postArg('is_draft'));
+        } else {
+            $create = $model->createPage($this->postArg('parent_nav_id'), $this->postArg('nav_container_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('layout_id'), $this->postArg('description'), $this->postArg('is_draft'));
+        }
+        
         if ($create !== true) {
             Yii::$app->response->statusCode = 422;
         }
 
         return $create;
     }
-
+    
     /**
      * creates a new nav_item entry for the type page (it means nav_id will be delivered).
      */

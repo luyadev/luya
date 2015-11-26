@@ -88,8 +88,7 @@
 			}
 		}
 	});
-
-
+	
 	zaa.directive("createForm", function() {
 		return {
 			restrict : 'EA',
@@ -97,18 +96,18 @@
 				data : '='
 			},
 			templateUrl : 'createform.html',
-			controller : function($scope, $http, AdminLangService, NewMenuService, Slug) {
+			controller : function($scope, $http, NewMenuService, Slug) {
 				
 				$scope.error = [];
 				$scope.success = false;
 				
 				$scope.controller = $scope.$parent;
 				
-				$scope.AdminLangService = AdminLangService;
+				//$scope.AdminLangService = AdminLangService;
 				
 				//$scope.MenuService = MenuService;
 				
-				$scope.lang = $scope.AdminLangService.data;
+				//$scope.lang = $scope.AdminLangService.data;
 				
 				//$scope.navcontainers = $scope.MenuService.navcontainers;
 				
@@ -119,11 +118,12 @@
 				
 				$scope.data.nav_item_type = 1;
 				$scope.data.parent_nav_id = 0;
+				$scope.data.is_draft = 0;
 				
 				$scope.data.nav_container_id = 1;
 				
 				$http.get('admin/api-admin-defaults/lang').success(function(response) {
-					$scope.data.lang_id = response.id;
+					$scope.data.lang_id = parseInt(response.id);
 				});
 				
 				$scope.navitems = [];
@@ -160,7 +160,7 @@
 		}
 	});
 	
-	zaa.directive("createFormPage", function(CmsLayoutService) {
+	zaa.directive("createFormPage", function(CmsLayoutService, NewMenuService) {
 		return {
 			restrict : 'EA',
 			scope : {
@@ -168,9 +168,17 @@
 			},
 			templateUrl : 'createformpage.html',
 			controller : function($scope, $resource) {
+				
+				$scope.data.use_draft = 0;
+				
 				CmsLayoutService.data.$promise.then(function(response) {
 					$scope.layouts = response;
 				});
+				
+				NewMenuService.get().then(function(r) {
+				 	$scope.drafts = r.drafts;
+				});
+				
 				$scope.save = function() {
 					
 					$scope.$parent.exec();
@@ -334,8 +342,17 @@
 			templateUrl : 'cmsadmin/page/create',
 			resolve : {
 				menu : function(NewMenuService) {
-            		return NewMenuService.get(true);
+            		return NewMenuService.get();
             	}
+			}
+		})
+		.state("custom.cmsdraft", {
+			url: '/drafts',
+			templateUrl: 'cmsadmin/page/drafts',
+			resolve: {
+				menu: function(NewMenuService) {
+					return NewMenuService.get();
+				}
 			}
 		});
 	});
@@ -388,6 +405,16 @@
 		return service;
 	});
 	*/
+	
+	zaa.controller("DraftsController", function($scope, $state, NewMenuService) {
+		
+		$scope.menuData = NewMenuService.data;
+		
+		$scope.go = function(navId) {
+			$state.go('custom.cmsedit', { navId : navId });
+		};
+		
+	});
 	
 	zaa.controller("DropNavController", function($scope, $http, NewMenuService) {
 		
@@ -606,6 +633,12 @@
 		});
 		
 		$scope.navData = {};
+		
+		$scope.$watch(function() { return $scope.navData.is_draft }, function(n, o) {
+			if (n == 1) {
+				AdminLangService.resetDefault();
+			}
+		});
 	
 	    $scope.sidebar = false;
 		

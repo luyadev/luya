@@ -128,6 +128,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         return [
             'restcreate' => ['block_id', 'placeholder_var', 'nav_item_page_id', 'json_config_values', 'json_config_cfg_values', 'prev_id', 'sort_index'],
             'restupdate' => ['block_id', 'placeholder_var', 'nav_item_page_id', 'json_config_values', 'json_config_cfg_values', 'prev_id', 'sort_index'],
+            'default' => ['block_id', 'placeholder_var', 'nav_item_page_id', 'json_config_values', 'json_config_cfg_values', 'prev_id', 'sort_index'],
         ];
     }
 

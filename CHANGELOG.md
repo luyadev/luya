@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide. 
 
+- `#583` added ability to make cms page drafts and re-use them when creating a new page.
 - `#586` added additional help info to blocks where it appeared relevant
 - `#585` replacing text field with a select in ModuleBlock (only show frontend modules except 'luya' and 'cms')
 - `#576` modified crawler search proccess to process word by word searches instead of full text searches.

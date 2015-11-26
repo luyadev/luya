@@ -2,6 +2,31 @@
 <script type="text/ng-template" id="createform.html">
     <form ng-switch on="data.nav_item_type" class="card-panel">
         <h5>Neue Seite hinzufügen</h5>
+
+        <div class="row">
+            <div class="input input--radios col s12">
+                <label class="input__label">Seitentyp</label>
+                <div class="input__field-wrapper">
+                    <input type="radio" ng-checked="data.nav_item_type == 1"><label ng-click="data.nav_item_type=1">Seite</label><br />
+                    <input type="radio" ng-checked="data.nav_item_type == 2"><label ng-click="data.nav_item_type=2;data.is_draft=0">Module</label><br />
+                    <input type="radio" ng-checked="data.nav_item_type == 3"><label ng-click="data.nav_item_type=3;data.is_draft=0">Weiterleitung</label><br />
+                </div>
+            </div>
+        </div>
+
+<hr style="margin:50px 0px; background-color:#F0F0F0; color:#F0F0F0; height:1px; border:0px;" />
+
+        <div class="row" ng-show="data.nav_item_type == 1 && !data.isInline">
+            <div class="input input--text col s12">
+                <label class="input__label">Als Vorlage</label>
+                <div class="input__field-wrapper">
+                    Möchtest du diese neue Seite als Vorlage hinterlegen?<br />
+                    <input type="radio" ng-checked="data.is_draft == 0"><label ng-click="data.is_draft=0">Nein</label><br />
+                    <input type="radio" ng-checked="data.is_draft == 1"><label ng-click="data.is_draft=1">Ja</label><br />
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="input input--text col s12">
                 <label class="input__label">Seitentitel</label>
@@ -9,8 +34,8 @@
                     <input name="text" type="text" class="input__field" ng-model="data.title" ng-change="aliasSuggestion()" focus-me="true" />
                 </div>
             </div>
-        </div>
         <div class="row">
+        </div>    
             <div class="input input--text col s12">
                 <label class="input__label">Pfadsegment</label>
                 <div class="input__field-wrapper">
@@ -18,7 +43,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" ng-show="data.is_draft==0">
             <div class="input input--text col s12">
                 <label class="input__label">Beschreibung (Meta Description für Google)</label>
                 <div class="input__field-wrapper">
@@ -26,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" ng-hide="data.isInline || navcontainer.length == 1">
+        <div class="row" ng-show="data.is_draft==0" ng-hide="data.isInline || navcontainer.length == 1">
             <div class="input input--select col s12">
                 <label class="input__label">Navigations-Container</label>
                 <div class="input__field-wrapper">
@@ -34,15 +59,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" ng-hide="data.isInline || lang.length == 1">
-            <div class="input input--select col s12">
-                <label class="input__label">Sprache</label>
-                <div class="input__field-wrapper">
-                    <select class="input__field browser-default" ng-model="data.lang_id" ng-options="item.id as item.name for item in lang"></select>
-                </div>
-            </div>
-        </div>
-        <div class="row" ng-show="!data.isInline">
+        <div class="row" ng-show="data.is_draft==0 && !data.isInline">
             <div class="input input--select col s12">
                 <label class="input__label">Übergeordnete Seite</label>
                 <div class="input__field-wrapper">
@@ -53,16 +70,8 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="input input--radios col s12">
-                <label class="input__label">Seitentyp</label>
-                <div class="input__field-wrapper">
-                    <input type="radio" ng-checked="data.nav_item_type == 1"><label ng-click="data.nav_item_type=1">Seite</label><br />
-                    <input type="radio" ng-checked="data.nav_item_type == 2"><label ng-click="data.nav_item_type=2">Module</label><br />
-                    <input type="radio" ng-checked="data.nav_item_type == 3"><label ng-click="data.nav_item_type=3">Weiterleitung</label><br />
-                </div>
-            </div>
-        </div>
+        
+<hr style="margin:50px 0px; background-color:#F0F0F0; color:#F0F0F0; height:1px; border:0px;" />
 
         <div ng-switch-when="1">
             <create-form-page data="data"></create-form-page>
@@ -99,8 +108,26 @@
 
 <!-- CREATE PAGE FORM -->
 <script type="text/ng-template" id="createformpage.html">
-    <div class="row">
+        <div class="row" ng-show="!data.isInline">
+            <div class="input input--text col s12">
+                <label class="input__label">Eine Vorlage verwenden?</label>
+                <div class="input__field-wrapper">
+<input type="radio" ng-checked="data.use_draft == 0"><label ng-click="data.use_draft=0;data.from_draft_id=0">Nein</label><br />
+<input type="radio" ng-checked="data.use_draft == 1"><label ng-click="data.use_draft=1;data.layout_id=0">Ja</label><br />
+                </div>
+            </div>
+        </div>
+
+    <div class="row"ng-show="data.use_draft==1">
         <div class="input input--select col s12">
+            <label class="input__label">Möchtest du aus einer Vorlage auswählen?</label>
+            <div class="input__field-wrapper">
+                <select class="input__field browser-default" ng-model="data.from_draft_id" ng-options="draft.id as draft.title for draft in drafts"></select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input input--select col s12"  ng-show="data.use_draft==0">
             <label class="input__label">Layout</label>
             <div class="input__field-wrapper">
                 <select class="input__field browser-default" ng-model="data.layout_id" ng-options="lts.id as lts.name for lts in layouts"></select>
@@ -180,6 +207,17 @@
 </script>
 <!-- /CREATE MODULE FORM -->
 
+<!-- CREATE DRAFT FORM -->
+<script type="text/ng-template" id="createformdraft.html">
+    <div class="row">
+        <div class="col s12">
+            <br />
+            <button type="button" class="btn" ng-click="save()">Neue Seite speichern</button>
+        </div>
+    </div>
+</script>
+<!-- /CREATE DRAF FORM -->
+
 <script type="text/ng-template" id="menuDropdownReverse.html">
 
     <div class="input">
@@ -237,6 +275,8 @@
     <div class="row">
         <div class="col s12">
 
+            <a ui-sref="custom.cmsdraft">Vorlagen</a>
+        
             <a class="create-button [ btn-floating btn-large ][ waves-effect waves-light ] teal" ui-sref="custom.cmsadd"><i class="material-icons">add</i></a>
 
             <div ng-controller="CmsMenuTreeController">

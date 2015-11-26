@@ -7,6 +7,8 @@ use yii\helpers\ArrayHelper;
 use admin\models\Lang;
 use admin\models\Property as AdminProperty;
 use cmsadmin\models\Property as CmsProperty;
+use cmsadmin\models\NavItem;
+use cmsadmin\models\NavItemPageBlockItem;
 
 /**
  * @todo what happens when resort items if an items is deleted?
@@ -33,7 +35,7 @@ class Nav extends \yii\db\ActiveRecord
     {
         return [
             [['nav_container_id', 'parent_nav_id'], 'required'],
-            [['is_hidden', 'is_offline', 'sort_index', 'is_deleted', 'is_home'], 'safe'],
+            [['is_hidden', 'is_offline', 'sort_index', 'is_deleted', 'is_home', 'is_draft'], 'safe'],
         ];
     }
 
@@ -182,7 +184,88 @@ class Nav extends \yii\db\ActiveRecord
         }
     }
 
-    public function createPage($parentNavId, $navContainerId, $langId, $title, $alias, $layoutId, $description)
+    public function createDraft($title, $langId)
+    {
+        $_errors = [];
+        
+        // nav
+        $nav = $this;
+        $nav->attributes = ['parent_nav_id' => 0, 'nav_container_id' => 0, 'sort_index' => 0, 'is_draft' => 1, 'is_hidden' => 1, 'is_offline' => 1];
+        // nav item
+        $navItem = new NavItem();
+        $navItem->parent_nav_id = 0;
+        $navItem->attributes = ['lang_id' => $langId, 'nav_item_type' => 4, 'nav_item_type_id' => 0, 'title' => $title, 'alias' => time()];
+        
+        if (!$nav->validate()) {
+            $_errors = ArrayHelper::merge($nav->getErrors(), $_errors);
+        }
+        
+        if (!$navItem->validate()) {
+            $_errors = ArrayHelper::merge($navItem->getErrors(), $_errors);
+        }
+        
+        if (!empty($_errors)) {
+            return $_errors;
+        }
+        
+        $nav->save();
+        $navItem->nav_id = $nav->id;
+        return $navItem->save();
+    }
+    
+    public function createPageFromDraft($parentNavId, $navContainerId, $langId, $title, $alias, $description, $fromDraftNavId, $isDraft = false)
+    {
+        if (!$isDraft && empty($isDraft) && !is_numeric($isDraft)) {
+            $isDraft = 0;
+        }
+        
+        $errors = [];
+        // nav
+        $nav = $this;
+        $nav->attributes = ['parent_nav_id' => $parentNavId, 'nav_container_id' => $navContainerId, 'is_hidden' => 1, 'is_offline' => 1, 'is_draft' => $isDraft];
+        // nav item
+        $navItem = new NavItem();
+        $navItem->parent_nav_id = $parentNavId;
+        $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'description' => $description, 'nav_item_type' => 1];
+        
+        if (!$nav->validate()) {
+            $errors = ArrayHelper::merge($nav->getErrors(), $errors);
+        }
+        if (!$navItem->validate()) {
+            $errors = ArrayHelper::merge($navItem->getErrors(), $errors);
+        }
+        
+        if (!empty($_errors)) {
+            return $_errors;
+        }
+        
+        // get draft nav item data
+        $draftNavItem = NavItem::findOne(['nav_id' => $fromDraftNavId]);
+        
+        $typeId = $draftNavItem->nav_item_type_id;
+        $navItemPageId = $draftNavItem->type->id;
+        $layoutId = $draftNavItem->type->layout_id;
+        $pageBlocks = NavItemPageBlockItem::findAll(['nav_item_page_id' => $navItemPageId]);
+        
+        // proceed save process
+        $nav->save();
+        $navItemPage = new NavItemPage();
+        $navItemPage->layout_id = $layoutId;
+        $navItemPage->save();
+        foreach($pageBlocks as $block) {
+            $i = new NavItemPageBlockItem();
+            $i->attributes = $block->toArray();
+            $i->nav_item_page_id = $navItemPage->id;
+            $i->insert();
+        }
+        
+        $navItem->nav_id = $nav->id;
+        $navItem->nav_item_type_id = $navItemPage->id;
+        
+        return $navItem->save();
+    }
+    
+    public function createPage($parentNavId, $navContainerId, $langId, $title, $alias, $layoutId, $description, $isDraft = false)
     {
         $_errors = [];
 
@@ -191,7 +274,11 @@ class Nav extends \yii\db\ActiveRecord
         $navItem->parent_nav_id = $parentNavId;
         $navItemPage = new \cmsadmin\models\NavItemPage();
 
-        $nav->attributes = ['parent_nav_id' => $parentNavId, 'nav_container_id' => $navContainerId, 'is_hidden' => 1, 'is_offline' => 1];
+        if (!$isDraft && empty($isDraft) && !is_numeric($isDraft)) {
+            $isDraft = 0;
+        }
+        
+        $nav->attributes = ['parent_nav_id' => $parentNavId, 'nav_container_id' => $navContainerId, 'is_hidden' => 1, 'is_offline' => 1, 'is_draft' => $isDraft];
         $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'description' => $description, 'nav_item_type' => 1];
         $navItemPage->attributes = ['layout_id' => $layoutId];
 
