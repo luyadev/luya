@@ -6,12 +6,13 @@ LUYA CHANGELOG
 
 **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide. 
 
+- `#585` replacing text field with a select in ModuleBlock (only show frontend modules except 'luya' and 'cms')
 - `#576` modified crawler search proccess to process word by word searches instead of full text searches.
 - `#580` added ability to create composition routes, fixes the prepend language issue for menu component.
 - `#575` added the ability to cache cms blocks.
 - `#559` added new block method `getFieldHelp()` to return additional helper data for a var or cfg field.
 - `#489` added the ability to drop pages on empty navigation containers.
-- `#509` improved video block (added Vimeo and make responsive work).
+- `#509` improved video block (added Vimeo).
 - `#574` added strftime twig filter to get date formats based on the current localisation settings.
 - `#558` added image thumbnail in list view for image plugin, therefore added storageImageThumbnailDisplay directive.
 - `#533` file- and image-array directive removed margin-top for better alignment to the labels 
