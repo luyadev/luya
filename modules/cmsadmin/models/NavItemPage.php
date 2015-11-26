@@ -2,6 +2,7 @@
 
 namespace cmsadmin\models;
 
+use Exception;
 use Yii;
 use yii\db\Query;
 
@@ -56,24 +57,25 @@ class NavItemPage extends \cmsadmin\base\NavItemType
 
     public function getContent()
     {
-        Yii::beginProfile('cmsContentBenchmark');
-        
         $twig = Yii::$app->twig->env(new \Twig_Loader_Filesystem(Yii::getAlias('@app/views/cmslayouts/')));
 
         $insertion = [];
 
-        foreach ($this->layout->getJsonConfig('placeholders') as $item) {
-            $insertion[$item['var']] = $this->renderPlaceholder($this->id, $item['var'], 0);
+        $layout = $this->layout;
+        
+        if ($layout) {
+            foreach ($layout->getJsonConfig('placeholders') as $item) {
+                $insertion[$item['var']] = $this->renderPlaceholder($this->id, $item['var'], 0);
+            }
+            
+            $data = $twig->render($this->layout->view_file, [
+                'placeholders' => $insertion,
+            ]);
+
+            return $data;
         }
 
-        $data = $twig->render($this->layout->view_file, [
-            'placeholders' => $insertion,
-            'activeUrl' => Yii::$app->menu->current->link, /* @todo remove: activeUrl already set via twig component ? */
-        ]);
-        
-        Yii::endProfile('cmsContentBenchmark');
-        
-        return $data;
+        throw new Exception("Could not find the requested cms layout id '".$this->layout_id."' for nav item page id '". $this->id . "'. Make sure your page does not have an old inactive/deleted cms layout selected.");
     }
     
     private function createHashKey($navItemPageId, $placeholderVar, $prevId)
