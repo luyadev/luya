@@ -51,7 +51,7 @@ class Url
             return static::toMenuItem($model['id'], $route, $params);
         }
 
-        throw new Exception("Unable to find the Module '$moduleName' for url creation.");
+        throw new Exception("The module route creation could not find the module '$moduleName', have you created a page with this module in this langauge context?");
     }
 
     /**
