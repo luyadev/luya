@@ -5,7 +5,7 @@ $treeview--padding: 5px;
 	background-color: $grey;
 	color: $black;
 	width: 100%;
-	padding: 10px $treeview--padding;
+	padding: 5px $treeview--padding;
 	vertical-align: middle;
 	text-align: left;
 	transition: 0.25s ease background-color;
@@ -59,7 +59,7 @@ $treeview--padding: 5px;
 	}
 
 	.lever {
-		margin: 0 ($treeview--padding + 3px);
+		margin: 0 ($treeview--padding + 11px);
 	}
 }
 
@@ -99,7 +99,7 @@ $treeview--padding: 5px;
 .treeview__item {
 
 	& + .treeview__item {
-		margin-top: 2px;
+		margin-top: 5px;
 	}
 }
 
