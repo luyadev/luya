@@ -13,7 +13,7 @@ class SelectClass extends \admin\ngrest\plugins\Select
     {
         $this->data[] = [
             'value' => NULL,
-            'label' => ""
+            'label' => "",
         ];
 
         if (is_object($class)) {
