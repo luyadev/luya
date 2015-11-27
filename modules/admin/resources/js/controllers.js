@@ -235,16 +235,18 @@
 		
 		$scope.saveTag = function() {
 			var tagName = $scope.newTagName;
-			
-			$scope.crud.sendActiveWindowCallback('SaveTag', {'tagName': tagName}).then(function(response) {
-				if (response.data) {
-					$scope.tags.push({id: response.data, name: tagName});
-					//Materialize.toast('Das Tag ' + tagName + ' wurde gespeichert.', 500);
-				} else {
-					//Materialize.toast('Das Tag ' + tagName + ' existiert bereits und wurde deshalb nicht gespeichert.', 2000);
-				}
-				$scope.newTagName = null;
-			});
+
+			if (tagName !== "") {
+				$scope.crud.sendActiveWindowCallback('SaveTag', {'tagName': tagName}).then(function(response) {
+					if (response.data) {
+						$scope.tags.push({id: response.data, name: tagName});
+						//Materialize.toast('Das Tag ' + tagName + ' wurde gespeichert.', 500);
+					} else {
+						//Materialize.toast('Das Tag ' + tagName + ' existiert bereits und wurde deshalb nicht gespeichert.', 2000);
+					}
+					$scope.newTagName = null;
+				});
+			}
 		};
 		
 		$scope.saveRelation = function(tag, value) {

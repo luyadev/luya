@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide. 
 
+- `#540` fixed bug where you could create empty tags
 - `#508` show target path for redirected pages in admin.
 - `#583` added ability to make cms page drafts and re-use them when creating a new page.
 - `#586` added additional help info to blocks where it appeared relevant.
