@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide. 
 
+- `#487` added URL duplication check (alias) on page move.
 - `#540` fixed bug where you could create empty tags
 - `#508` show target path for redirected pages in admin.
 - `#583` added ability to make cms page drafts and re-use them when creating a new page.

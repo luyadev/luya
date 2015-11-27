@@ -55,7 +55,13 @@ class Nav extends \yii\db\ActiveRecord
 
     public function getProperties()
     {
-        return CmsProperty::find()->where(['nav_id' => $this->id])->leftJoin('admin_property', 'admin_prop_id=admin_property.id')->select(['cms_nav_property.*', 'admin_property.module_name', 'admin_property.class_name', 'admin_property.var_name'])->asArray()->all();
+        return CmsProperty::find()->where(['nav_id' => $this->id])->leftJoin('admin_property',
+            'admin_prop_id=admin_property.id')->select([
+            'cms_nav_property.*',
+            'admin_property.module_name',
+            'admin_property.class_name',
+            'admin_property.var_name'
+        ])->asArray()->all();
     }
 
     /*
@@ -71,7 +77,11 @@ class Nav extends \yii\db\ActiveRecord
     */
     public function getProperty($varName)
     {
-        $value = CmsProperty::find()->where(['nav_id' => $this->id])->leftJoin('admin_property', 'admin_prop_id=admin_property.id')->select(['cms_nav_property.value', 'admin_property.class_name'])->andWhere(['admin_property.var_name' => $varName])->asArray()->one();
+        $value = CmsProperty::find()->where(['nav_id' => $this->id])->leftJoin('admin_property',
+            'admin_prop_id=admin_property.id')->select([
+            'cms_nav_property.value',
+            'admin_property.class_name'
+        ])->andWhere(['admin_property.var_name' => $varName])->asArray()->one();
 
         if ($value) {
             return AdminProperty::getObject($value['class_name'], $value['value']);
@@ -85,7 +95,10 @@ class Nav extends \yii\db\ActiveRecord
      */
     public function eventBeforeInsert()
     {
-        $item = self::find()->where(['nav_container_id' => $this->nav_container_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index DESC')->limit(1)->asArray()->one();
+        $item = self::find()->where([
+            'nav_container_id' => $this->nav_container_id,
+            'parent_nav_id' => $this->parent_nav_id
+        ])->orderBy('sort_index DESC')->limit(1)->asArray()->one();
         if (!$item) {
             $this->sort_index = 1;
         } else {
@@ -96,20 +109,24 @@ class Nav extends \yii\db\ActiveRecord
     public function reindex($e)
     {
         $i = 1;
-        foreach (self::find()->where(['nav_container_id' => $this->nav_container_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $model) {
-            Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $i], 'id=:id', ['id' => $model['id']])->execute();
+        foreach (self::find()->where([
+            'nav_container_id' => $this->nav_container_id,
+            'parent_nav_id' => $this->parent_nav_id
+        ])->orderBy('sort_index ASC')->asArray()->all() as $model) {
+            Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $i], 'id=:id',
+                ['id' => $model['id']])->execute();
             ++$i;
         }
 
         switch ($e->name) {
             case 'afterInsert':
-                Log::add(1, "nav.insert, cms_nav.id '".$this->id."'", $this->toArray());
-            break;
+                Log::add(1, "nav.insert, cms_nav.id '" . $this->id . "'", $this->toArray());
+                break;
             case 'afterUpdate':
-                Log::add(2, "nav.update, cms_nav.id '".$this->id."'", $this->toArray());
+                Log::add(2, "nav.update, cms_nav.id '" . $this->id . "'", $this->toArray());
                 break;
             case 'afterDelete':
-                Log::add(3, "nav.delete, cms_nav.id '".$this->id."'", $this->toArray());
+                Log::add(3, "nav.delete, cms_nav.id '" . $this->id . "'", $this->toArray());
                 break;
         }
     }
@@ -117,17 +134,41 @@ class Nav extends \yii\db\ActiveRecord
     public static function moveToContainer($moveNavId, $toCatId)
     {
         $move = self::findOne($moveNavId);
-        
+
         $move->nav_container_id = $toCatId;
+        $move->parent_nav_id = 0;
         $move->update();
-        
+
         return true;
     }
-    
+
+    /**
+     * check for duplicate alias in same parent_nav_id context of targetNav, comparing with currentNav item
+     *
+     * @param $currentNavId
+     * @param $targetNav
+     * @return bool true when duplicate found
+     */
+    public static function checkDuplicateAlias($currentNavId, $parentNavId)
+    {
+        $navItem = NavItem::findOne(['nav_id' => $currentNavId]);
+        foreach (self::find()->where(['parent_nav_id' => $parentNavId])->andWhere(['<>', 'id', $currentNavId])->asArray()->all() as $item) {
+            $itemNavItem = NavItem::findOne(['nav_id' => $item['id']]);
+            if ($navItem->alias == $itemNavItem->alias) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static function moveToBefore($moveNavId, $toBeforeNavId)
     {
         $move = self::findOne($moveNavId);
         $to = self::findOne($toBeforeNavId);
+
+        if (!self::checkDuplicateAlias($move->id, $to->parent_nav_id)) {
+            return false;
+        }
 
         $to->moveUpstairs();
 
@@ -144,6 +185,10 @@ class Nav extends \yii\db\ActiveRecord
         $move = self::findOne($moveNavId);
         $to = self::findOne($toAfterNavId);
 
+        if (!self::checkDuplicateAlias($move->id, $to->parent_nav_id)) {
+            return false;
+        }
+
         $to->moveDownstairs();
 
         $move->nav_container_id = $to->nav_container_id;
@@ -159,6 +204,10 @@ class Nav extends \yii\db\ActiveRecord
         $move = self::findOne($moveNavId);
         $on = self::findOne($droppedOnItemId);
 
+        if (!self::checkDuplicateAlias($move->id, $on->id)) {
+            return false;
+        }
+
         $move->nav_container_id = $on->nav_container_id;
         $move->parent_nav_id = $on->id;
         $move->update();
@@ -168,105 +217,148 @@ class Nav extends \yii\db\ActiveRecord
 
     public function moveUpstairs()
     {
-        $startIndex = (int) $this->sort_index;
+        $startIndex = (int)$this->sort_index;
         foreach (self::find()->where('sort_index >= :index', ['index' => $startIndex])->andWhere(['nav_container_id' => $this->nav_container_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $item) {
             ++$startIndex;
-            $up = Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id', ['id' => $item['id']])->execute();
+            $up = Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id',
+                ['id' => $item['id']])->execute();
         }
     }
 
     public function moveDownstairs()
     {
-        $startIndex = (int) $this->sort_index;
+        $startIndex = (int)$this->sort_index;
         foreach (self::find()->where('sort_index >= :index', ['index' => $startIndex])->andWhere(['nav_container_id' => $this->nav_container_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $item) {
             --$startIndex;
-            $up = Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id', ['id' => $item['id']])->execute();
+            $up = Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id',
+                ['id' => $item['id']])->execute();
         }
     }
 
     public function createDraft($title, $langId)
     {
         $_errors = [];
-        
+
         // nav
         $nav = $this;
-        $nav->attributes = ['parent_nav_id' => 0, 'nav_container_id' => 0, 'sort_index' => 0, 'is_draft' => 1, 'is_hidden' => 1, 'is_offline' => 1];
+        $nav->attributes = [
+            'parent_nav_id' => 0,
+            'nav_container_id' => 0,
+            'sort_index' => 0,
+            'is_draft' => 1,
+            'is_hidden' => 1,
+            'is_offline' => 1
+        ];
         // nav item
         $navItem = new NavItem();
         $navItem->parent_nav_id = 0;
-        $navItem->attributes = ['lang_id' => $langId, 'nav_item_type' => 4, 'nav_item_type_id' => 0, 'title' => $title, 'alias' => time()];
-        
+        $navItem->attributes = [
+            'lang_id' => $langId,
+            'nav_item_type' => 4,
+            'nav_item_type_id' => 0,
+            'title' => $title,
+            'alias' => time()
+        ];
+
         if (!$nav->validate()) {
             $_errors = ArrayHelper::merge($nav->getErrors(), $_errors);
         }
-        
+
         if (!$navItem->validate()) {
             $_errors = ArrayHelper::merge($navItem->getErrors(), $_errors);
         }
-        
+
         if (!empty($_errors)) {
             return $_errors;
         }
-        
+
         $nav->save();
         $navItem->nav_id = $nav->id;
         return $navItem->save();
     }
-    
-    public function createPageFromDraft($parentNavId, $navContainerId, $langId, $title, $alias, $description, $fromDraftNavId, $isDraft = false)
-    {
+
+    public function createPageFromDraft(
+        $parentNavId,
+        $navContainerId,
+        $langId,
+        $title,
+        $alias,
+        $description,
+        $fromDraftNavId,
+        $isDraft = false
+    ) {
         if (!$isDraft && empty($isDraft) && !is_numeric($isDraft)) {
             $isDraft = 0;
         }
-        
+
         $errors = [];
         // nav
         $nav = $this;
-        $nav->attributes = ['parent_nav_id' => $parentNavId, 'nav_container_id' => $navContainerId, 'is_hidden' => 1, 'is_offline' => 1, 'is_draft' => $isDraft];
+        $nav->attributes = [
+            'parent_nav_id' => $parentNavId,
+            'nav_container_id' => $navContainerId,
+            'is_hidden' => 1,
+            'is_offline' => 1,
+            'is_draft' => $isDraft
+        ];
         // nav item
         $navItem = new NavItem();
         $navItem->parent_nav_id = $parentNavId;
-        $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'description' => $description, 'nav_item_type' => 1];
-        
+        $navItem->attributes = [
+            'lang_id' => $langId,
+            'title' => $title,
+            'alias' => $alias,
+            'description' => $description,
+            'nav_item_type' => 1
+        ];
+
         if (!$nav->validate()) {
             $errors = ArrayHelper::merge($nav->getErrors(), $errors);
         }
         if (!$navItem->validate()) {
             $errors = ArrayHelper::merge($navItem->getErrors(), $errors);
         }
-        
+
         if (!empty($_errors)) {
             return $_errors;
         }
-        
+
         // get draft nav item data
         $draftNavItem = NavItem::findOne(['nav_id' => $fromDraftNavId]);
-        
+
         $typeId = $draftNavItem->nav_item_type_id;
         $navItemPageId = $draftNavItem->type->id;
         $layoutId = $draftNavItem->type->layout_id;
         $pageBlocks = NavItemPageBlockItem::findAll(['nav_item_page_id' => $navItemPageId]);
-        
+
         // proceed save process
         $nav->save();
         $navItemPage = new NavItemPage();
         $navItemPage->layout_id = $layoutId;
         $navItemPage->save();
-        foreach($pageBlocks as $block) {
+        foreach ($pageBlocks as $block) {
             $i = new NavItemPageBlockItem();
             $i->attributes = $block->toArray();
             $i->nav_item_page_id = $navItemPage->id;
             $i->insert();
         }
-        
+
         $navItem->nav_id = $nav->id;
         $navItem->nav_item_type_id = $navItemPage->id;
-        
+
         return $navItem->save();
     }
-    
-    public function createPage($parentNavId, $navContainerId, $langId, $title, $alias, $layoutId, $description, $isDraft = false)
-    {
+
+    public function createPage(
+        $parentNavId,
+        $navContainerId,
+        $langId,
+        $title,
+        $alias,
+        $layoutId,
+        $description,
+        $isDraft = false
+    ) {
         $_errors = [];
 
         $nav = $this;
@@ -277,9 +369,21 @@ class Nav extends \yii\db\ActiveRecord
         if (!$isDraft && empty($isDraft) && !is_numeric($isDraft)) {
             $isDraft = 0;
         }
-        
-        $nav->attributes = ['parent_nav_id' => $parentNavId, 'nav_container_id' => $navContainerId, 'is_hidden' => 1, 'is_offline' => 1, 'is_draft' => $isDraft];
-        $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'description' => $description, 'nav_item_type' => 1];
+
+        $nav->attributes = [
+            'parent_nav_id' => $parentNavId,
+            'nav_container_id' => $navContainerId,
+            'is_hidden' => 1,
+            'is_offline' => 1,
+            'is_draft' => $isDraft
+        ];
+        $navItem->attributes = [
+            'lang_id' => $langId,
+            'title' => $title,
+            'alias' => $alias,
+            'description' => $description,
+            'nav_item_type' => 1
+        ];
         $navItemPage->attributes = ['layout_id' => $layoutId];
 
         if (!$nav->validate()) {
@@ -314,7 +418,14 @@ class Nav extends \yii\db\ActiveRecord
         $navItem->parent_nav_id = self::findOne($navId)->parent_nav_id;
         $navItemPage = new \cmsadmin\models\NavItemPage();
 
-        $navItem->attributes = ['nav_id' => $navId, 'lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'description' => $description, 'nav_item_type' => 1];
+        $navItem->attributes = [
+            'nav_id' => $navId,
+            'lang_id' => $langId,
+            'title' => $title,
+            'alias' => $alias,
+            'description' => $description,
+            'nav_item_type' => 1
+        ];
         $navItemPage->attributes = ['layout_id' => $layoutId];
 
         if (!$navItem->validate()) {
@@ -345,8 +456,19 @@ class Nav extends \yii\db\ActiveRecord
         $navItem->parent_nav_id = $parentNavId;
         $navItemModule = new \cmsadmin\models\NavItemModule();
 
-        $nav->attributes = ['parent_nav_id' => $parentNavId, 'nav_container_id' => $navContainerId, 'is_hidden' => 1, 'is_offline' => 1];
-        $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'description' => $description, 'nav_item_type' => 2];
+        $nav->attributes = [
+            'parent_nav_id' => $parentNavId,
+            'nav_container_id' => $navContainerId,
+            'is_hidden' => 1,
+            'is_offline' => 1
+        ];
+        $navItem->attributes = [
+            'lang_id' => $langId,
+            'title' => $title,
+            'alias' => $alias,
+            'description' => $description,
+            'nav_item_type' => 2
+        ];
         $navItemModule->attributes = ['module_name' => $moduleName];
 
         if (!$nav->validate()) {
@@ -373,8 +495,16 @@ class Nav extends \yii\db\ActiveRecord
         return $navItemId;
     }
 
-    public function createRedirect($parentNavId, $navContainerId, $langId, $title, $alias, $redirectType, $redirectTypeValue, $description)
-    {
+    public function createRedirect(
+        $parentNavId,
+        $navContainerId,
+        $langId,
+        $title,
+        $alias,
+        $redirectType,
+        $redirectTypeValue,
+        $description
+    ) {
         $_errors = [];
 
         $nav = $this;
@@ -382,8 +512,19 @@ class Nav extends \yii\db\ActiveRecord
         $navItem->parent_nav_id = $parentNavId;
         $navItemRedirect = new \cmsadmin\models\NavItemRedirect();
 
-        $nav->attributes = ['parent_nav_id' => $parentNavId, 'nav_container_id' => $navContainerId, 'is_hidden' => 1, 'is_offline' => 1];
-        $navItem->attributes = ['lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'description' => $description, 'nav_item_type' => 3];
+        $nav->attributes = [
+            'parent_nav_id' => $parentNavId,
+            'nav_container_id' => $navContainerId,
+            'is_hidden' => 1,
+            'is_offline' => 1
+        ];
+        $navItem->attributes = [
+            'lang_id' => $langId,
+            'title' => $title,
+            'alias' => $alias,
+            'description' => $description,
+            'nav_item_type' => 3
+        ];
         $navItemRedirect->attributes = ['type' => $redirectType, 'value' => $redirectTypeValue];
 
         if (!$nav->validate()) {
@@ -418,7 +559,14 @@ class Nav extends \yii\db\ActiveRecord
         $navItem->parent_nav_id = self::findOne($navId)->parent_nav_id;
         $navItemModule = new \cmsadmin\models\NavItemModule();
 
-        $navItem->attributes = ['nav_id' => $navId, 'lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'description' => $description, 'nav_item_type' => 2];
+        $navItem->attributes = [
+            'nav_id' => $navId,
+            'lang_id' => $langId,
+            'title' => $title,
+            'alias' => $alias,
+            'description' => $description,
+            'nav_item_type' => 2
+        ];
         $navItemModule->attributes = ['module_name' => $moduleName];
 
         if (!$navItem->validate()) {
@@ -448,7 +596,14 @@ class Nav extends \yii\db\ActiveRecord
         $navItem->parent_nav_id = self::findOne($navId)->parent_nav_id;
         $navItemRedirect = new \cmsadmin\models\NavItemRedirect();
 
-        $navItem->attributes = ['nav_id' => $navId, 'lang_id' => $langId, 'title' => $title, 'alias' => $alias, 'description' => $description, 'nav_item_type' => 3];
+        $navItem->attributes = [
+            'nav_id' => $navId,
+            'lang_id' => $langId,
+            'title' => $title,
+            'alias' => $alias,
+            'description' => $description,
+            'nav_item_type' => 3
+        ];
         $navItemRedirect->attributes = ['type' => $redirectType, 'value' => $redirectTypeValue];
 
         if (!$navItem->validate()) {
