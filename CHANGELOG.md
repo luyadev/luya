@@ -41,6 +41,8 @@ LUYA CHANGELOG
 - `#412` fixed bug where ObjectHelper::callMethodSanitizeArguments does not handle optional arguments.
 - `#526` added publicHtml getter to web controller and twig variable publicHtml.
 - `#562` added exception when cms layout variable is not a valid name (a-zA-Z0-9) on import process.
+- '#589' Updated treeview styling
+- `#594` Updated ngrest plugin SelectClass to enable the possibility to choose 'nothing'
 
 1.0.0-beta1 (11. Nov 2015)
 -------------------------
