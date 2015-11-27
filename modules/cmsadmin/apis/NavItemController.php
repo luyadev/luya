@@ -222,20 +222,29 @@ class NavItemController extends \admin\base\RestController
     {
         return ['success' => Nav::moveToContainer($moveItemId, $droppedOnCatId)];
     }
-    
+
     public function actionMoveBefore($moveItemId, $droppedBeforeItemId)
     {
-        return ['success' => Nav::moveToBefore($moveItemId, $droppedBeforeItemId)];
+        if (!$result = Nav::moveToBefore($moveItemId, $droppedBeforeItemId)) {
+            Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in target parent nav id.');
+        }
+        return ['success' => $result];
     }
 
     public function actionMoveAfter($moveItemId, $droppedAfterItemId)
     {
-        return ['success' => Nav::moveToAfter($moveItemId, $droppedAfterItemId)];
+        if (!$result = Nav::moveToAfter($moveItemId, $droppedAfterItemId)) {
+            Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in target parent nav id.');
+        }
+        return ['success' => $result];
     }
 
     public function actionMoveToChild($moveItemId, $droppedOnItemId)
     {
-        return ['success' => Nav::moveToChild($moveItemId, $droppedOnItemId)];
+        if (!$result = Nav::moveToChild($moveItemId, $droppedOnItemId)) {
+            Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in target parent nav id.');
+        }
+        return ['success' => $result];
     }
 
     /**

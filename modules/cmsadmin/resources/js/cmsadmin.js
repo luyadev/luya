@@ -423,43 +423,51 @@
 	zaa.controller("DropNavController", function($scope, $http, NewMenuService) {
 		
 		$scope.droppedNavItem = null;
+
+		$scope.errorMessageOnDuplicateAlias = function() {
+			//Materialize.toast('<span class="error">In dieser Ebene existiert bereits eine Seite mit dieser URL.</span>', 5000);
+		}
 		
 	    $scope.onBeforeDrop = function($event, $ui) {
 	    	var itemid = $($event.target).data('itemid');
-			//console.log('dropped block beofre itemid: ' + itemid, 'theblock', $scope.droppedNavItem);
+			//console.log('onBeforeDrop itemid: ' + itemid, 'theblock', $scope.droppedNavItem);
 			$http.get('admin/api-cms-navitem/move-before', { params : { moveItemId : $scope.droppedNavItem.id, droppedBeforeItemId : itemid }}).success(function(r) {
 				NewMenuService.get(true);
 			}).error(function(r) {
-				console.log('err', r)
+				$scope.errorMessageOnDuplicateAlias();
+				NewMenuService.get(true);
 			})
 	    }
 	    
 	    $scope.onAfterDrop = function($event, $ui) {
 	    	var itemid = $($event.target).data('itemid');
-			//console.log('dropped block beofre itemid: ' + itemid, 'theblock', $scope.droppedNavItem);
+			//console.log('onAfterDrop itemid: ' + itemid, 'theblock', $scope.droppedNavItem);
 			$http.get('admin/api-cms-navitem/move-after', { params : { moveItemId : $scope.droppedNavItem.id, droppedAfterItemId : itemid }}).success(function(r) {
 				NewMenuService.get(true);
 			}).error(function(r) {
-				console.log('err', r)
+				$scope.errorMessageOnDuplicateAlias();
+				NewMenuService.get(true);
 			})
 	    }
 	    
 	    $scope.onChildDrop = function($event, $ui) {
 	    	var itemid = $($event.target).data('itemid');
-			//console.log('dropped block beofre itemid: ' + itemid, 'theblock', $scope.droppedNavItem);
+			//console.log('onChildDrop itemid: ' + itemid, 'theblock', $scope.droppedNavItem);
 			$http.get('admin/api-cms-navitem/move-to-child', { params : { moveItemId : $scope.droppedNavItem.id, droppedOnItemId : itemid }}).success(function(r) {
 				NewMenuService.get(true);
 			}).error(function(r) {
-				console.log('err', r)
+				$scope.errorMessageOnDuplicateAlias();
+				NewMenuService.get(true);
 			})
 	    }
 	    
 	    $scope.onEmptyDrop = function($event, $ui) {
 	    	var itemid = $($event.target).data('itemid');
+			//console.log('onEmptyDrop itemid: ' + itemid, 'theblock', $scope.droppedNavItem);
 	    	$http.get('admin/api-cms-navitem/move-to-container', { params : { moveItemId : $scope.droppedNavItem.id, droppedOnCatId : itemid }}).success(function(r) {
 				NewMenuService.get(true);
 			}).error(function(r) {
-				console.log('err', r)
+				//console.log('err' + r);
 			})
 	    }
 	})
