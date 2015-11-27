@@ -143,7 +143,8 @@ class Nav extends \yii\db\ActiveRecord
     }
 
     /**
-     * check for duplicate alias in same parent_nav_id context of targetNav, comparing with currentNav item
+     * Check for duplicate alias in same parent_nav_id context of targetNav, comparing with currentNav item.
+     * Additional this checks for matching language contexts when comparing aliases.
      *
      * @param $currentNavId
      * @param $targetNav
@@ -151,11 +152,13 @@ class Nav extends \yii\db\ActiveRecord
      */
     public static function checkDuplicateAlias($currentNavId, $parentNavId)
     {
-        $navItem = NavItem::findOne(['nav_id' => $currentNavId]);
+        $currentNavItems = NavItem::find()->where(['nav_id' => $currentNavId])->asArray()->all();
         foreach (self::find()->where(['parent_nav_id' => $parentNavId])->andWhere(['<>', 'id', $currentNavId])->asArray()->all() as $item) {
-            $itemNavItem = NavItem::findOne(['nav_id' => $item['id']]);
-            if ($navItem->alias == $itemNavItem->alias) {
-                return false;
+            foreach ($currentNavItems as $currentNavItem) {
+                $itemNavItem = NavItem::findOne(['nav_id' => $item['id'], 'lang_id' => $currentNavItem['lang_id']]);
+                if ($itemNavItem && $currentNavItem['alias'] == $itemNavItem->alias) {
+                    return false;
+                }
             }
         }
         return true;
