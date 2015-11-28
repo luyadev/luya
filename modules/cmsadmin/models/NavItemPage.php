@@ -3,6 +3,7 @@
 namespace cmsadmin\models;
 
 use Exception;
+use cmsadmin\models\NavItemPageBlockItem;
 use Yii;
 use yii\db\Query;
 
@@ -78,11 +79,6 @@ class NavItemPage extends \cmsadmin\base\NavItemType
         throw new Exception("Could not find the requested cms layout id '".$this->layout_id."' for nav item page id '". $this->id . "'. Make sure your page does not have an old inactive/deleted cms layout selected.");
     }
     
-    private function createHashKey($navItemPageId, $placeholderVar, $prevId)
-    {
-        return "$navItemPageId-$placeholderVar-$prevId";
-    }
-    
     private function setHasCache($key, $value, $expirationTime)
     {
         if (Yii::$app->has('cache')) {
@@ -107,7 +103,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
         $string = '';
 
         foreach ($this->getPlaceholders($navItemPageId, $placeholderVar, $prevId) as $key => $placeholder) {
-            $cacheKey = $this->createHashKey($placeholder['block_id'], $placeholder['id'], $prevId);
+            $cacheKey = NavItemPageBlockItem::cacheName($placeholder['id']);
             
             $blockResponse = $this->getHasCache($cacheKey);
             

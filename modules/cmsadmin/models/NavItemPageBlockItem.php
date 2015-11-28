@@ -39,6 +39,11 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
             [['sort_index'], 'resortIndex', 'on' => ['restupdate']],
         ];
     }
+    
+    public static function cacheName($blockId)
+    {
+        return 'cmsBlockCache'.$blockId;
+    }
 
     /**
      * resort the sort_index numbers for all items on the same: naav_item_page_id and prev_id and placholder_var.
@@ -82,6 +87,10 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         }
         $this->reindex($this->nav_item_page_id, $this->placeholder_var, $this->prev_id);
         Log::add(2, "block.update '".$this->block->class."', cms_nav_item_page_block_item.id '".$this->id."'");
+        
+        if (Yii::$app->has('cache')) {
+            Yii::$app->cache->delete(static::cacheName($this->id));
+        }
     }
 
     public function eventBeforeDelete()

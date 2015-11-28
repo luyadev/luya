@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide. 
 
+- `#588` delete the block cache (for the specific block) after updating them via cms admin.
 - `#487` added URL duplication check (alias) on page move.
 - `#540` fixed bug where you could create empty tags
 - `#508` show target path for redirected pages in admin.
