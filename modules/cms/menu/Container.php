@@ -383,8 +383,8 @@ class Container extends \yii\base\Component implements ArrayAccess
             return $item;
         }
 
-        // no item could have been resolved, but the home side type is module, which can have links
-        if (!$item && !$this->home->type !== 2) {
+        // no item could have been resolved, but the home side type is module, which can have links.
+        if (!$item && $this->home->type == 2) {
             $this->_currentAppendix = $requestPath;
             return $this->getHome();
         }
