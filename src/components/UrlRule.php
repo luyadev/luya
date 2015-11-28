@@ -37,12 +37,18 @@ class UrlRule extends \luya\web\UrlRule
         return explode('/', rtrim($pathInfo, '/'));
     }
 
+    /**
+     * @todo verify the $urlParts variable, foreach resolvedValues when $urlParts not empty?
+     * @param luya\web\UrlManager $manager
+     * @param luya\web\Request $request
+     * @return boolean
+     */
     public function parseRequest($manager, $request)
     {
         // extra data from request to composition, which changes the pathInfo of the Request-Object.
         $resolver = Yii::$app->composition->getResolvedPathInfo($request);
 
-        $request->setPathInfo($resolver['route']);
+        //$request->setPathInfo($resolver['route']);
 
         // set user env variabls
         Yii::$app->language = Yii::$app->composition->language;
@@ -60,7 +66,6 @@ class UrlRule extends \luya\web\UrlRule
         if (count($urlParts) > 0 && !array_key_exists($urlParts[0], Yii::$app->modules)) {
             if (class_exists($this->getDefaultClassName())) {
                 $manager->addRules([['class' => $this->getDefaultClassName()]], false);
-
                 return $manager->parseRequest($request);
             }
         }

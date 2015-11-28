@@ -29,6 +29,11 @@ class UrlManager extends \yii\web\UrlManager
 
     public function parseRequest($request)
     {
+        // extra data from request to composition, which changes the pathInfo of the Request-Object.
+        $resolver = Yii::$app->composition->getResolvedPathInfo($request);
+        
+        $request->setPathInfo($resolver['route']);
+        
         $route = parent::parseRequest($request);
 
         if ($this->composition->hidden) {
