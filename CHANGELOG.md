@@ -4,8 +4,8 @@ LUYA CHANGELOG
 1.0.0-beta2 (in progress)
 -------------------------
 
-**[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide.
-**[BC BREAK]** removed luya\web\Composition::set method.
+- **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide.
+- **[BC BREAK]** removed luya\web\Composition::set method.
 
 - `#584` fixed bug where preview link does not handle language correct. Moved language handler into composition component and added new event class.
 - `#582` fixed issue where file downlaod links does not work on multi lingual pages, moved route resolver into urlManager instead of luya urlRule.
