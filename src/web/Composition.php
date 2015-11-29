@@ -2,8 +2,10 @@
 
 namespace luya\web;
 
+use Yii;
 use Exception;
 use luya\helpers\Url;
+use luya\web\CompositionAfterSetEvent;
 
 /**
  * Luya Composition Component to provide i18n/language handling.
@@ -14,6 +16,8 @@ use luya\helpers\Url;
  */
 class Composition extends \yii\base\Component implements \ArrayAccess
 {
+    const EVENT_AFTER_SET = 'EVENT_AFTER_SET';
+    
     /**
      * @var string The Regular-Expression matching the var finder inside the url parts
      */
@@ -69,6 +73,9 @@ class Composition extends \yii\base\Component implements \ArrayAccess
         parent::__construct($config);
     }
 
+    /**
+     * 
+     */
     public function getDefaultLangShortCode()
     {
         return $this->default['langShortCode'];
@@ -79,11 +86,36 @@ class Composition extends \yii\base\Component implements \ArrayAccess
      */
     public function init()
     {
+        // check if the required key langShortCode exist in the default array.
+        if (!array_key_exists('langShortCode', $this->default)) {
+            throw new Exception("The composition default rule must contain a langShortCode.");
+        }
+        // atach event to component
+        $this->on(self::EVENT_AFTER_SET, [$this, 'eventAfterSet']);
+        // resolved data
         $resolve = $this->getResolvedPathInfo($this->request);
-        $this->set($resolve['compositionKeys']);
+        // set initializer comosition 
+        foreach($resolve['compositionKeys'] as $key => $value) {
+            $this->setKey($key, $value);
+        }
         $this->_compositionKeys = $resolve['keys'];
     }
 
+    /**
+     * This event will method will triggere after setKey method is proccessed. The
+     * main purpose of this function to change the localisation based on the required
+     * key 'langShortCode'.
+     * 
+     * @param luya\web\CompositionAfterSetEvent $event
+     */
+    public function eventAfterSet($event)
+    {
+        if ($event->key == 'langShortCode') {
+            Yii::$app->language = $event->value;
+            setlocale(LC_ALL, $this->locale, $this->locale.'.utf8');
+        }
+    }
+    
     /**
      * Resolve the current url request and retun an array contain resolved route and the resolved values.
      *
@@ -136,14 +168,20 @@ class Composition extends \yii\base\Component implements \ArrayAccess
 
     /**
      * Set a new composition key and value in composition array. If the key already exists, it will
-     * be overwritten.
+     * be overwritten. The setKey method triggers the CompositionAfterSetEvent class.
      *
      * @param string $key   The key in the array, e.g. langShortCode
      * @param string $value The value coresponding to the key e.g. de
      */
     public function setKey($key, $value)
     {
+        // set and override composition
         $this->_composition[$key] = $value;
+        // trigger event
+        $event = new CompositionAfterSetEvent();
+        $event->key = $key;
+        $event->value = $value;
+        $this->trigger(self::EVENT_AFTER_SET, $event);
     }
 
     /**
@@ -169,16 +207,6 @@ class Composition extends \yii\base\Component implements \ArrayAccess
     public function get()
     {
         return $this->_composition;
-    }
-
-    /**
-     * Override all composition values and strictly set new array.
-     *
-     * @param array $array An array containg key value parings.
-     */
-    public function set(array $array)
-    {
-        $this->_composition = $array;
     }
 
     /**
@@ -300,8 +328,7 @@ class Composition extends \yii\base\Component implements \ArrayAccess
         if (is_null($offset)) {
             throw new Exception('Unable to set array value without key. Empty keys not allowed.');
         }
-
-        $this->_composition[$offset] = $value;
+        $this->setKey($offset, $value);
     }
 
     public function offsetGet($offset)
