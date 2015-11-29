@@ -95,7 +95,7 @@ class Composition extends \yii\base\Component implements \ArrayAccess
         // resolved data
         $resolve = $this->getResolvedPathInfo($this->request);
         // set initializer comosition 
-        foreach($resolve['compositionKeys'] as $key => $value) {
+        foreach ($resolve['compositionKeys'] as $key => $value) {
             $this->setKey($key, $value);
         }
         $this->_compositionKeys = $resolve['keys'];
