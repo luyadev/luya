@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 - **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide.
 - **[BC BREAK]** removed luya\web\Composition::set method.
+- `#599` added basic styling for help boxes. Simple question mark icon that shows belonging text on hover. 
 - `#539` added possiblity to delete tags under `cmsadmin/system/tags`.
 - `#370` added block importer consistency check and delete all remaining block references.
 - `#572` removed font-awesome from ng-wig css. Replaced them with material-icons.

@@ -253,10 +253,6 @@
             <span>
                 {{data.title}} <i ng-show="data.is_home==1" class="material-icons treeview__text-icon">home</i>
             </span>
-
-            <!--<i ng-show="data.is_offline == '1'" class="material-icons treeview__site-state treeview__site-state--offline" title="Seiten Status: Offline">cloud_off</i>
-            <i ng-show="data.is_offline == '0'" class="material-icons treeview__site-state treeview__site-state--online" title="Seiten Status: Online">cloud_queue</i>-->
-            
         </a>
 
         <ul class="treeview__list" role="menu" ng-show="data.nodes.length > 0">
@@ -275,24 +271,24 @@
 <!-- /SCRIPT TEMPLATES -->
 
 <!-- SIDEBAR -->
-<div class="luya-container__sidebar">
+<div class="luya-container__sidebar sidebar">
     <div ng-controller="CmsMenuTreeController">
 
-        <a class="treeview__button treeview__button--create [ waves-effect waves-light ]" ui-sref="custom.cmsadd">
-            <div class="treeview__icon-holder">
-                <i class="material-icons">add</i>
+        <a class="sidebar__button sidebar__button--positive" ui-sref="custom.cmsadd">
+            <div class="sidebar__icon-holder">
+                <i class="sidebar__icon material-icons">add</i>
             </div>
-            <span>Neue Seite erstellen</span>
+            <span class="sidebar__text">Neue Seite erstellen</span>
         </a>
 
-        <a class="treeview__button treeview__button--draft [ waves-effect waves-light ]"ui-sref="custom.cmsdraft">
-            <div class="treeview__icon-holder">
-                <i class="material-icons">receipt</i>
+        <a class="sidebar__button sidebar__button--grey" ui-sref="custom.cmsdraft">
+            <div class="sidebar__icon-holder">
+                <i class="sidebar__icon material-icons">receipt</i>
             </div>
-            <span>Vorlagen</span>
+            <span class="sidebar__text">Vorlagen</span>
         </a>
 
-        <div class="treeview__button treeview__button--switch switch" ng-class="{ 'treeview__button--switch-active': showDrag }">
+        <div class="sidebar__button sidebar__button--grey sidebar__button--switch switch" ng-class="{ 'sidebar__button--active': showDrag }">
             <label>
                 <input type="checkbox" ng-model="showDrag" ng-true-value="1" ng-false-value="0">
                 <span class="lever"></span>
@@ -301,7 +297,10 @@
         </div>
 
         <div class="treeview" ng-repeat="catitem in menu" ng-class="{ 'treeview--drag-active' : showDrag }">
-            <h5 class="treeview__title" ng-click="toggleCat(catitem.id)"><i class="material-icons treeview__title-icon" ng-class="{'treeview__title-icon--closed': toggleIsHidden(catitem.id)}">arrow_drop_down</i> <span>{{catitem.name}}</span></h5>
+            <h5 class="sidebar__group-title sidebar__group-title--clickable" ng-click="toggleCat(catitem.id)">
+                <i class="material-icons sidebar__group-title-icon sidebar__group-title-icon--rotated" ng-class="{'sidebar__group-title-icon--not-rotated': toggleIsHidden(catitem.id)}">arrow_drop_down</i>
+                <span>{{catitem.name}}</span>
+            </h5>
 
             <p class="treeview__empty-message" ng-show="catitem.__items.length == 0 && !toggleIsHidden(catitem.id) && !showDrag">Noch keine Seiten hinterlegt</p>
 

@@ -23,10 +23,10 @@
 	&:last-of-type {
 		margin-bottom: 0;
 	}
-	&.block--is-dirty:not(.block--edit) {
+	&.block--is-dirty:not(.block--edit):not(.block--config) {
 		background-color: $block--background-is-dirty;
 	}
-	&:not(.block--edit).block--is-hidden {
+	&:not(.block--edit):not(.block--config).block--is-hidden {
 		opacity: 0.5;
 	}
 	&.block--edit, &.block--config {
@@ -80,7 +80,7 @@
 	// Hover animation
 	transform: translateY(-100%);
 }
-.block--is-hidden:not(.block--is-container):not(.block--edit) .block__toolbar {
+.block--is-hidden:not(.block--is-container):not(.block--edit):not(.block--config) .block__toolbar {
 	background-color: $block--hidden__toolbar-background;
 	color: $black;
 }
@@ -182,6 +182,10 @@
     vertical-align: middle;
 }
 
+.block__help {
+	position: absolute;
+	right: 10px;
+}
 
 @each $depth, $color in $container-block--colors {
 	$selector: "";
