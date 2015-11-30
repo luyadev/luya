@@ -723,7 +723,8 @@ CREATE TABLE IF NOT EXISTS `cms_nav_item_page_block_item` (
   `update_user_id` int(11) DEFAULT '0',
   `timestamp_create` int(11) DEFAULT '0',
   `timestamp_update` int(11) DEFAULT '0',
-  `sort_index` int(11) DEFAULT '0'
+  `sort_index` int(11) DEFAULT '0',
+  `is_hidden` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

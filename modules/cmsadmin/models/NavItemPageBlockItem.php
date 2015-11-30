@@ -80,16 +80,18 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
 
     public function eventAfterUpdate()
     {
-        $oldPlaceholderVar = $this->_olds['placeholder_var'];
-        $oldPrevId = (int) $this->_olds['prev_id'];
-        if ($oldPlaceholderVar != $this->placeholder_var || $oldPrevId != $this->prev_id) {
-            $this->reindex($this->nav_item_page_id, $oldPlaceholderVar, $oldPrevId);
-        }
-        $this->reindex($this->nav_item_page_id, $this->placeholder_var, $this->prev_id);
-        Log::add(2, "block.update '".$this->block->class."', cms_nav_item_page_block_item.id '".$this->id."'");
-        
-        if (Yii::$app->has('cache')) {
-            Yii::$app->cache->delete(static::cacheName($this->id));
+        if (!empty($this->_olds)) {
+            $oldPlaceholderVar = $this->_olds['placeholder_var'];
+            $oldPrevId = (int) $this->_olds['prev_id'];
+            if ($oldPlaceholderVar != $this->placeholder_var || $oldPrevId != $this->prev_id) {
+                $this->reindex($this->nav_item_page_id, $oldPlaceholderVar, $oldPrevId);
+            }
+            $this->reindex($this->nav_item_page_id, $this->placeholder_var, $this->prev_id);
+            Log::add(2, "block.update '".$this->block->class."', cms_nav_item_page_block_item.id '".$this->id."'");
+            
+            if (Yii::$app->has('cache')) {
+                Yii::$app->cache->delete(static::cacheName($this->id));
+            }
         }
     }
 
@@ -135,9 +137,9 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     public function scenarios()
     {
         return [
-            'restcreate' => ['block_id', 'placeholder_var', 'nav_item_page_id', 'json_config_values', 'json_config_cfg_values', 'prev_id', 'sort_index'],
-            'restupdate' => ['block_id', 'placeholder_var', 'nav_item_page_id', 'json_config_values', 'json_config_cfg_values', 'prev_id', 'sort_index'],
-            'default' => ['block_id', 'placeholder_var', 'nav_item_page_id', 'json_config_values', 'json_config_cfg_values', 'prev_id', 'sort_index'],
+            'restcreate' => ['block_id', 'placeholder_var', 'nav_item_page_id', 'json_config_values', 'json_config_cfg_values', 'prev_id', 'sort_index', 'is_hidden'],
+            'restupdate' => ['block_id', 'placeholder_var', 'nav_item_page_id', 'json_config_values', 'json_config_cfg_values', 'prev_id', 'sort_index', 'is_hidden'],
+            'default' => ['block_id', 'placeholder_var', 'nav_item_page_id', 'json_config_values', 'json_config_cfg_values', 'prev_id', 'sort_index', 'is_hidden'],
         ];
     }
 

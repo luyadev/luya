@@ -10,6 +10,7 @@ use Yii;
 use Exception;
 use cmsadmin\models\Nav;
 use cmsadmin\models\NavItem;
+use cmsadmin\models\NavItemPageBlockItem;
 
 class NavItemController extends \admin\base\RestController
 {
@@ -350,6 +351,7 @@ class NavItemController extends \admin\base\RestController
             'is_dirty' => (int) $blockItem['is_dirty'],
             'is_container' => (int) $blockObject->isContainer,
             'id' => $blockItem['id'],
+            'is_hidden' => $blockItem['is_hidden'],
             'name' => $blockObject->name(),
             'icon' => $blockObject->icon(),
             'full_name' => $blockObject->getFullName(),
@@ -362,6 +364,17 @@ class NavItemController extends \admin\base\RestController
             'cfgvalues' => $blockItem['json_config_cfg_values'], // add: t1_json_config_cfg_values
             '__placeholders' => $placeholders,
         ];
+    }
+    
+    public function actionToggleBlockHidden($blockId, $hiddenState)
+    {
+        $block = NavItemPageBlockItem::findOne($blockId);
+        if ($block) {
+            $block->is_hidden = $hiddenState;
+            return $block->update(false);
+        }
+        
+        return false;
     }
 
     /**

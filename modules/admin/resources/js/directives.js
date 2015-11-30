@@ -705,7 +705,7 @@
 		}
 	});
 	
-	zaa.directive("zaaCmsPage", function(NewMenuService, $timeout){
+	zaa.directive("zaaCmsPage", function($timeout){
 		return {
 			restrict: "E",
 			scope: {

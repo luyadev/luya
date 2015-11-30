@@ -35,7 +35,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
         return (new Query())
         ->from('cms_nav_item_page_block_item t1')
         ->select('t1.*')
-        ->where(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId])
+        ->where(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId, 'is_hidden' => 0])
         ->orderBy('sort_index ASC')
         ->all();
     }

@@ -994,6 +994,21 @@
 			});
 		};
 		
+		$scope.toggleHidden = function() {
+			if ($scope.block.is_hidden == 0) {
+				$scope.block.is_hidden = 1;
+			} else {
+				$scope.block.is_hidden = 0;
+			}
+			
+			$http({
+			    url: 'admin/api-cms-navitem/toggle-block-hidden', 
+			    method: "GET",
+			    params: { blockId : $scope.block.id, hiddenState: $scope.block.is_hidden }
+			}).success(function(response) {
+				// successfull toggle hidden state of block
+			});
+		}
 
 		$scope.hasInfo = function(varFieldName) {
 			if (varFieldName in $scope.block.field_help) {
