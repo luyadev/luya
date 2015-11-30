@@ -26,7 +26,6 @@ class Bower extends \luya\web\Asset
     ];
 
     public $css = [
-        'angular-loading-bar/build/loading-bar.min.css',
-        'ng-wig/dist/css/ng-wig.css',
+        'angular-loading-bar/build/loading-bar.min.css'
     ];
 }
