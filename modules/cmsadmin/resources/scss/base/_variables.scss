@@ -38,10 +38,12 @@ $collapsible--background:					$grey;
  */
 $block--background:							lighten($grey, 2.5);
 $block--active-background:					$white;
+$block--hidden-background:					$white;
 $block--background-is-dirty:				#b3e5fc;
 
 $block__toolbar--height:					37px;
 $block__toolbar--background:				$teal;
+$block--hidden__toolbar-background:			$grey;
 $block__toolbar--color:						$white;
 
 $block__configs--background:				$grey;

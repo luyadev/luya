@@ -21,10 +21,10 @@
                 <div class="right">
                     <i ng-click="toggleHidden()" class="material-icons" ng-show="block.is_hidden==0">visibility</i>
                     <i ng-click="toggleHidden()" class="material-icons" ng-show="block.is_hidden==1">visibility_off</i>
-                    <i ng-show="!edit && isEditable()" class="material-icons [ waves-effect waves-blue ]" ng-click="toggleEdit()">edit</i>
+                    <i ng-show="!edit && isEditable()" class="material-icons" ng-click="toggleEdit()">edit</i>
                     <i ng-show="!config && isConfigable()" ng-click="toggleConfig()" class="material-icons">settings</i>
-                    <i ng-show="!edit && !config" class="material-icons [ waves-effect waves-blue ]" ng-click="removeBlock(block)">delete</i>
-                    <i ng-show="edit || config" class="material-icons [ waves-effect waves-blue ]" ng-click="toggleBlockSettings()">close</i>
+                    <i ng-show="!edit && !config" class="material-icons" ng-click="removeBlock(block)">delete</i>
+                    <i ng-show="edit || config" class="material-icons" ng-click="toggleBlockSettings()">close</i>
                 </div>
             </div>
             <div class="block__body cmsadmin-tags" ng-click="toggleEdit()" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
