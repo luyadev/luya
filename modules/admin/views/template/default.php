@@ -1,14 +1,15 @@
 <div class="luya-container__angular-placeholder" ng-controller="DefaultController">
-    <div class="luya-container__sidebar">
-        <div class="row">
-            <div class="col s12 submenu">
-                <div ng-repeat="item in items" class="submenu__group">
-                    <h5 class="submenu__title">{{item.name}}</h5>
-                    <div class="submenu__item" ng-repeat="sub in item.items">
-                        <a ng-click="click(sub)" ng-class="{'active' : sub.route == currentItem.route }" class="submenu__link [ waves-effect waves-blue ] btn-flat">
-                            <i class="material-icons left">{{sub.icon}}</i> {{sub.alias}}
-                        </a>
+    <div class="luya-container__sidebar sidebar">
+        <div class="submenu">
+            <div ng-repeat="item in items" class="submenu__group">
+                <h5 class="sidebar__group-title">{{item.name}}</h5>
+                <div class="submenu__item sidebar__button" ng-repeat="sub in item.items" ng-class="{'sidebar__button--active' : sub.route == currentItem.route }" ng-click="click(sub)">
+                    <div class="sidebar__icon-holder">
+                        <i class="material-icons sidebar__icon">{{sub.icon}}</i>
                     </div>
+                    <a class="sidebar__text">
+                        {{sub.alias}}
+                    </a>
                 </div>
             </div>
         </div>
