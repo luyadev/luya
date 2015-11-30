@@ -15,7 +15,7 @@ class Log extends \yii\db\ActiveRecord
     public function onBeforeInsert()
     {
         $this->timestamp = time();
-        $this->user_id = Yii::$app->adminuser->getId();
+        $this->user_id = (Yii::$app instanceof \luya\web\Application) ? Yii::$app->adminuser->getId() : 0;
         $this->data_json = json_encode($this->data_json);
     }
 

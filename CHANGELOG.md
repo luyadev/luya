@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 - **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide.
 - **[BC BREAK]** removed luya\web\Composition::set method.
+- `#370` added block importer consistency check and delete all remaining block references.
 - `#572` removed font-awesome from ng-wig css. Replaced them with material-icons.
 - `#491` added the ability to toggle the visibility of a cms block (is_hidden).
 - `#584` fixed bug where preview link does not handle language correct. Moved language handler into composition component and added new event class.
