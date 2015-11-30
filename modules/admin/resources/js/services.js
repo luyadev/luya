@@ -1,9 +1,11 @@
 // service resolver
-function adminServiceResolver(ServiceFoldersData, ServiceImagesData, ServiceFilesData, ServiceFiltersData) {
+function adminServiceResolver(ServiceFoldersData, ServiceImagesData, ServiceFilesData, ServiceFiltersData, ServiceLanguagesData, ServicePropertiesData) {
 	ServiceFoldersData.load();
 	ServiceImagesData.load();
 	ServiceFilesData.load();
 	ServiceFiltersData.load();
+	ServiceLanguagesData.load();
+	ServicePropertiesData.load();
 };
 
 /**
@@ -175,6 +177,75 @@ zaa.factory("ServiceFiltersData", function($http, $q, $rootScope) {
 	return service;
 });
 
+/*
+
+$scope.languagesData = ServiceLanguagesData.data;
+				
+$scope.$on('service:LanguagesData', function(event, data) {
+	$scope.languagesData = data;
+});
+
+$scope.languagesDataReload = function() {
+	return ServiceLanguagesData.load(true);
+}
+				
+*/
+zaa.factory("ServiceLanguagesData", function($http, $q, $rootScope) {
+	var service = [];
+	
+	service.data = [];
+	
+	service.load = function(forceReload) {
+		return $q(function(resolve, reject) {
+			if (service.data.length > 0 && forceReload !== true) {
+				resolve(service.data);
+			} else {
+				$http.get("admin/api-admin-common/data-languages").success(function(response) {
+					service.data = response;
+					$rootScope.$broadcast('service:LanguagesData', service.data);
+					resolve(service.data);
+				})
+			}
+		});
+	};
+	
+	return service;
+});
+
+/*
+
+$scope.propertiesData = ServicePropertiesData.data;
+				
+$scope.$on('service:PropertiesData', function(event, data) {
+	$scope.propertiesData = data;
+});
+
+$scope.propertiesDataReload = function() {
+	return ServicePropertiesData.load(true);
+}
+				
+*/
+zaa.factory("ServicePropertiesData", function($http, $q, $rootScope) {
+	var service = [];
+	
+	service.data = [];
+	
+	service.load = function(forceReload) {
+		return $q(function(resolve, reject) {
+			if (service.data.length > 0 && forceReload !== true) {
+				resolve(service.data);
+			} else {
+				$http.get("admin/api-admin-common/data-properties").success(function(response) {
+					service.data = response;
+					$rootScope.$broadcast('service:PropertiesData', service.data);
+					resolve(service.data);
+				})
+			}
+		});
+	};
+	
+	return service;
+});
 
 // end of use strict
 })();

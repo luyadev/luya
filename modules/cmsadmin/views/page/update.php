@@ -147,7 +147,7 @@
                                 <!-- LEFT TOOLBAR -->
                                 <div class="left">
                                     <!-- CONFIG BUTTON -->
-                                    <div class="toolbar__group" ng-show="properties.length && navData.is_draft == 0">
+                                    <div class="toolbar__group" ng-show="propertiesData.length && navData.is_draft == 0">
                                         <a class="[ btn-flat btn--small ][ grey-text text-darken-2 ]" ng-click="togglePropMask()">
                                             <i class="material-icons cms__prop-toggle">settings</i>
                                         </a>
@@ -251,7 +251,7 @@
                     <div class="card-panel">
                     <h5>Seiten Eigenschaften</h5>
                     <div ng-show="!hasValues" class="alert alert--info">Es wurden noch keine Eigenschaften gespeichert.</div>
-                        <div class="row" ng-repeat="prop in properties">
+                        <div class="row" ng-repeat="prop in propertiesData">
                             <zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{prop.label}}" model="propValues[prop.id]"></zaa-injector>
                         </div>
 
@@ -273,7 +273,7 @@
             
             <div class="row">
 
-                <div class="col s{{(12/AdminLangService.selection.length)}}" ng-repeat="lang in langs" ng-show="AdminLangService.isInSelection(lang.short_code) && showContainer" ng-controller="NavItemController">
+                <div class="col s{{(12/AdminLangService.selection.length)}}" ng-repeat="lang in languagesData" ng-show="AdminLangService.isInSelection(lang.short_code) && showContainer" ng-controller="NavItemController">
                     <!-- PAGE -->
                     
                     <div class="page" ng-show="!isTranslated && navData.is_draft == 1">
@@ -425,7 +425,7 @@
                         <input class="blockholder__input" type="text" ng-model="searchQuery" value="" id="blockholderSearch" />
                         <label class="blockholder__search-icon" for="blockholderSearch"><i class="material-icons">search</i></label>
                     </div>
-                    <div class="blockholder__group" ng-repeat="item in DroppableBlocksService.blocks">
+                    <div class="blockholder__group" ng-repeat="item in blocksData">
                         <b class="blockholder__group-title">{{item.group.name}}</b>
                         <div class="blockholder__block" ng-repeat="block in item.blocks | orderBy:'name' | filter:{name:searchQuery}" data-drag="true" jqyoui-draggable="{placeholder: 'keep', onStart : 'onStart', onStop : 'onStop'}" ng-model="block" data-jqyoui-options="{revert: false, refreshPositions : true, snapTolerance : 40, helper : 'clone', cursor:'move', cursorAt: { top: 0, left: 0 }}">
                             <span ng-bind-html="safe(block.full_name)"></span>

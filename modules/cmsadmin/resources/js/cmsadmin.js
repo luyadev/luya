@@ -100,7 +100,7 @@
 				data : '='
 			},
 			templateUrl : 'createform.html',
-			controller : function($scope, $http, NewMenuService, Slug) {
+			controller : function($scope, $http, $filter, NewMenuService, Slug, ServiceLanguagesData) {
 				
 				$scope.error = [];
 				$scope.success = false;
@@ -126,9 +126,15 @@
 				
 				$scope.data.nav_container_id = 1;
 				
-				$http.get('admin/api-admin-defaults/lang').success(function(response) {
-					$scope.data.lang_id = parseInt(response.id);
+				
+				$scope.languagesData = ServiceLanguagesData.data;
+				
+				$scope.$on('service:LanguagesData', function(event, data) {
+					$scope.languagesData = data;
 				});
+				
+				
+				$scope.data.lang_id = parseInt($filter('filter')($scope.languagesData, {'is_default': '1'}, true)[0].id);
 				
 				$scope.navitems = [];
 				
@@ -160,6 +166,7 @@
 						$scope.error = reason;
 					});
 				}
+				
 			}
 		}
 	});
@@ -293,13 +300,14 @@
 		return service;
 	})
 	
+	/*
 	zaa.factory('DroppableBlocksService', function($http) {
 		var service = [];
 		
 		service.blocks = [];
 		
 		service.load = function() {
-			if (service.blocks.length == 0) { /* do not reload block data if there is already. what about force reload? */
+			if (service.blocks.length == 0) {
 				$http({
 					url : 'admin/api-cms-admin/get-all-blocks',
 					method : 'GET'
@@ -311,7 +319,9 @@
 		
 		return service;
 	});
+	*/
 	
+	/*
 	zaa.factory('PropertiesService', function($http, $q) {
 		var service = []
 		service.data = null;
@@ -332,6 +342,7 @@
 		}
 		return service;
 	});
+	*/
 	
 	// layout.js
 	
@@ -340,27 +351,29 @@
 		.state("custom.cmsedit", {
 			url : "/update/:navId",
 			templateUrl : 'cmsadmin/page/update',
+			resolve : {
+				cmsadminServiceResolver: cmsadminServiceResolver,
+			}
 		})
 		.state("custom.cmsadd", {
 			url : "/create",
 			templateUrl : 'cmsadmin/page/create',
 			resolve : {
-				menu : function(NewMenuService) {
-            		return NewMenuService.get();
-            	}
+				cmsadminServiceResolver: cmsadminServiceResolver,
 			}
 		})
 		.state("custom.cmsdraft", {
 			url: '/drafts',
 			templateUrl: 'cmsadmin/page/drafts',
 			resolve: {
-				menu: function(NewMenuService) {
-					return NewMenuService.get();
-				}
+				cmsadminServiceResolver: cmsadminServiceResolver,
 			}
 		});
 	});
 	
+	/*
+	 * @todo: delete
+	 */
 	zaa.service("NewMenuService", function($http, $q) {
 		var service = [];
 		service.data = null;
@@ -420,7 +433,7 @@
 		
 	});
 	
-	zaa.controller("DropNavController", function($scope, $http, NewMenuService) {
+	zaa.controller("DropNavController", function($scope, $http, ServiceMenuData) {
 		
 		$scope.droppedNavItem = null;
 
@@ -432,49 +445,85 @@
 	    	var itemid = $($event.target).data('itemid');
 			//console.log('onBeforeDrop itemid: ' + itemid, 'theblock', $scope.droppedNavItem);
 			$http.get('admin/api-cms-navitem/move-before', { params : { moveItemId : $scope.droppedNavItem.id, droppedBeforeItemId : itemid }}).success(function(r) {
-				NewMenuService.get(true);
+				ServiceMenuData.load(true);
 			}).error(function(r) {
 				$scope.errorMessageOnDuplicateAlias();
-				NewMenuService.get(true);
-			})
+			});
 	    }
 	    
 	    $scope.onAfterDrop = function($event, $ui) {
 	    	var itemid = $($event.target).data('itemid');
 			//console.log('onAfterDrop itemid: ' + itemid, 'theblock', $scope.droppedNavItem);
 			$http.get('admin/api-cms-navitem/move-after', { params : { moveItemId : $scope.droppedNavItem.id, droppedAfterItemId : itemid }}).success(function(r) {
-				NewMenuService.get(true);
+				ServiceMenuData.load(true);
 			}).error(function(r) {
 				$scope.errorMessageOnDuplicateAlias();
-				NewMenuService.get(true);
-			})
+				ServiceMenuData.load(true);
+			});
 	    }
 	    
 	    $scope.onChildDrop = function($event, $ui) {
 	    	var itemid = $($event.target).data('itemid');
 			//console.log('onChildDrop itemid: ' + itemid, 'theblock', $scope.droppedNavItem);
 			$http.get('admin/api-cms-navitem/move-to-child', { params : { moveItemId : $scope.droppedNavItem.id, droppedOnItemId : itemid }}).success(function(r) {
-				NewMenuService.get(true);
+				ServiceMenuData.load(true);
 			}).error(function(r) {
 				$scope.errorMessageOnDuplicateAlias();
-				NewMenuService.get(true);
-			})
+				ServiceMenuData.load(true);
+			});
 	    }
 	    
 	    $scope.onEmptyDrop = function($event, $ui) {
 	    	var itemid = $($event.target).data('itemid');
 			//console.log('onEmptyDrop itemid: ' + itemid, 'theblock', $scope.droppedNavItem);
 	    	$http.get('admin/api-cms-navitem/move-to-container', { params : { moveItemId : $scope.droppedNavItem.id, droppedOnCatId : itemid }}).success(function(r) {
-				NewMenuService.get(true);
+	    		ServiceMenuData.load(true);
 			}).error(function(r) {
-				//console.log('err' + r);
-			})
+				$scope.errorMessageOnDuplicateAlias();
+				ServiceMenuData.load(true);
+			});
 	    }
 	})
 	
-	zaa.controller("CmsMenuTreeController", function($scope, $state, NewMenuService, DroppableBlocksService, AdminLangService, CmsLayoutService) {
+	zaa.filter("menuparentfilter", function() {
+		return function(input, containerId, parentNavId) {
+			var result = [];
+			angular.forEach(input, function(value, key) {
+				
+				if (value.parent_nav_id == parentNavId && value.nav_container_id == containerId) {
+					result.push(value);
+				}
+			});
+			return result;
+		};
+	});
+	
+	zaa.controller("CmsMenuTreeController", function($scope, $state, ServiceMenuData) {
 	    
-		CmsLayoutService.load();
+		// new 
+		
+		$scope.menuData = ServiceMenuData.data;
+		
+		$scope.$on('service:MenuData', function(event, data) {
+			$scope.menuData = data;
+		});
+
+		$scope.menuDataReload = function() {
+			return ServiceMenuData.load(true);
+		}
+		
+		$scope.go = function(navId) {
+	    	$state.go('custom.cmsedit', { navId : navId });
+	    };
+		
+	    $scope.showDrag = 0;
+	    
+		//$scope.containers = $scope.menuData.containers;
+		
+		// old
+		
+		/*
+		CmsLayoutService.load(); // remove or put into resolver
 		
 		$scope.hiddenCats = {};
 		
@@ -498,9 +547,6 @@
 		
 		$scope.AdminLangService = AdminLangService;
 		
-		/**
-		 * @todo: make promise and add to resolve list
-		 */
 		$scope.AdminLangService.load(true);
 		
 		NewMenuService.get();
@@ -529,13 +575,14 @@
 	    	$state.go('custom.cmsedit', { navId : navId });
 	    };
 	    
-	    /* drag & drop integration */
 	    
 	    $scope.onStart = function() {
 		};
 		
 		$scope.onStop = function() {
 		};
+		
+		*/
 	});
 	
 	// create.js
@@ -624,15 +671,37 @@
 	
 	// update.js
 	
-	zaa.controller("NavController", function($scope, $stateParams, $http, AdminLangService, AdminClassService, NewMenuService, PlaceholderService, PropertiesService) {
+	zaa.controller("NavController", function($scope, $filter, $stateParams, $http, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, AdminClassService /*AdminLangService, AdminClassService, NewMenuService, , PropertiesService*/) {
 		
-		$scope.id = parseInt($stateParams.navId);
+		/* service AdminPropertyService inheritance */
 		
-		$scope.isDeleted = false;
+		$scope.propertiesData = ServicePropertiesData.data;
 		
-		/*
-		$scope.menuNavContainers = MenuService.navcontainers;
-		*/
+		$scope.$on('service:PropertiesData', function(event, data) {
+			$scope.propertiesData = data;
+		});
+		
+		/* service ServiceMenuData inheritance */
+		
+		$scope.menuData = ServiceMenuData.data;
+		
+		$scope.$on('service:MenuData', function(event, data) {
+			$scope.menuData = data;
+		});
+
+		$scope.menuDataReload = function() {
+			return ServiceMenuData.load(true);
+		}
+		
+		/* service ServiceLangaugesData inheritance */
+		
+		$scope.languagesData = ServiceLanguagesData.data;
+		
+		$scope.$on('service:LanguagesData', function(event, data) {
+			$scope.languagesData = data;
+		});
+		
+		/* placeholders toggler service */
 		
 		$scope.PlaceholderService = PlaceholderService;
 		
@@ -643,16 +712,10 @@
 				$scope.PlaceholderService.delegate(n);
 			}
 		});
+
+		/* sidebar logic */
 		
-		$scope.navData = {};
-		
-		$scope.$watch(function() { return $scope.navData.is_draft }, function(n, o) {
-			if (n == 1) {
-				AdminLangService.resetDefault();
-			}
-		});
-	
-	    $scope.sidebar = false;
+		$scope.sidebar = false;
 		
 	    $scope.enableSidebar = function() {
 	    	$scope.sidebar = true;
@@ -661,16 +724,52 @@
 	    $scope.toggleSidebar = function() {
 	        $scope.sidebar = !$scope.sidebar;
 	    };
+		
+		/* app logic */
+		
+		$scope.id = parseInt($stateParams.navId);
+		
+		$scope.isDeleted = false;
+		
+		$scope.AdminClassService = AdminClassService;
+		
+		function initializer() {
+			$scope.navData = $filter('filter')($scope.menuData.items, {id: $scope.id.toString()}, true)[0];
+			$scope.loadNavProperties();
+			console.log($scope.navData);
+		}
+		
+		
+		
+		
+		/*
+		
+		$scope.$watch(function() { return $scope.navData.is_draft }, function(n, o) {
+			if (n == 1) {
+				AdminLangService.resetDefault();
+			}
+		});
+		
+		*/
+	
 	    
+	    
+	    /*
 		$http.get('admin/api-cms-nav/detail', { params : { navId : $scope.id }}).success(function(response) {
 			$scope.navData = response;
 		});
 		
+		*/
+		
 		/* <!-- properties */
+		
+		/*
 		
 		PropertiesService.get().then(function(r) {
 			$scope.properties = r;
 		});
+		
+		*/
 		
 		$scope.propValues = {};
 		
@@ -685,9 +784,6 @@
 				}
 			});
 		};
-		
-		$scope.loadNavProperties();
-		
 		
 		$scope.togglePropMask = function() {
 			$scope.showPropForm = !$scope.showPropForm;
@@ -705,19 +801,19 @@
 		
 		/* properties --> */
 		
+		/*
 		$scope.$watch(function() { return $scope.navData.is_home }, function(n, o) {
 			if (o !== undefined) {
 				$http.get('admin/api-cms-nav/toggle-home', { params : { navId : $scope.navData.id , homeState : n }}).success(function(response) {
-					NewMenuService.get(true);
-					//Materialize.toast('<span>Startseite wurde angepasst.</span>', 2000)
 				});
 			}
 		});
 		
 		$scope.$watch(function() { return $scope.navData.is_hidden }, function(n, o) {
+			console.log(n, o);
 			if (o !== undefined) {
 				$http.get('admin/api-cms-nav/toggle-hidden', { params : { navId : $scope.navData.id , hiddenStatus : n }}).success(function(response) {
-					NewMenuService.get(true);
+					//NewMenuService.get(true);
 					// send toast
 					if (n == 1) {
 						//Materialize.toast('<span>Die Seite ist nun Unsichtbar.</span>', 2000)
@@ -731,7 +827,7 @@
 		$scope.$watch(function() { return $scope.navData.is_offline }, function(n, o) {
 			if (o !== undefined) {
 				$http.get('admin/api-cms-nav/toggle-offline', { params : { navId : $scope.navData.id , offlineStatus : n }}).success(function(response) {
-					NewMenuService.get(true);
+					//NewMenuService.get(true);
 					// send toast
 					if (n == 1) {
 						//Materialize.toast('<span>Die Seite ist nun <span style="color:red;">Offline</span>.</span>', 2000)
@@ -745,12 +841,14 @@
 	    $scope.trash = function() {
 	    	if (confirm('your are sure you want to delete this page?')) {
 	    		$http.get('admin/api-cms-nav/delete', { params : { navId : $scope.navData.id }}).success(function(response) {
-	    			NewMenuService.get(true);
+	    			//NewMenuService.get(true);
 	    			$scope.isDeleted = true;
 	    		});
 	    	}
 	    };
+		*/
 		
+	    /*
 		$scope.AdminClassService = AdminClassService;
 		
 		$scope.AdminLangService = AdminLangService;
@@ -760,6 +858,9 @@
 		}
 		
 		$scope.refresh();
+		*/
+		
+		initializer();
 	});
 	
 	/**
@@ -1156,8 +1257,22 @@
 		}
 	});
 	
-	zaa.controller("DroppableBlocksController", function($scope, $http, AdminClassService, DroppableBlocksService, $sce) {
+	zaa.controller("DroppableBlocksController", function($scope, $http, AdminClassService, ServiceBlocksData, $sce) {
 	
+		// service ServiceBlocksData inheritance
+		
+		$scope.blocksData = ServiceBlocksData.data;
+		
+		$scope.$on('service:BlocksData', function(event, data) {
+			$scope.blocksData = data;
+		});
+
+		$scope.blocksDataReload = function() {
+			return ServiceBlocksData.load(true);
+		}
+		
+		// controller logic
+		
 		$scope.searchQuery = '';
 		
 		$scope.onStart = function() {
@@ -1175,8 +1290,6 @@
 				AdminClassService.setClassSpace('onDragStart', undefined);
 			});
 		}
-		
-		$scope.DroppableBlocksService = DroppableBlocksService;
 	});
 	
 })();

@@ -2,11 +2,25 @@
 
 namespace cmsadmin\apis;
 
+use yii\db\Query;
+
 use cmsadmin\models\NavContainer;
 use admin\models\Lang;
 
 class MenuController extends \admin\base\RestController
 {
+    public function actionDataMenu()
+    {
+        return [
+            'items' => (new Query())->select(['cms_nav.id', 'nav_container_id', 'parent_nav_id', 'is_hidden', 'is_offline', 'is_draft', 'is_home', 'cms_nav_item.title'])->from('cms_nav')
+                        ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')->orderBy('cms_nav.sort_index ASC')
+                        ->where(['cms_nav_item.lang_id' => Lang::getDefault()['id'], 'cms_nav.is_deleted' => 0, 'cms_nav.is_draft' => 0])->all(),
+            'containers' => (new Query())->select(['id', 'name'])->from('cms_nav_container')->where(['is_deleted' => 0])->orderBy(['cms_nav_container.id' => 'ASC'])->all(),
+        ];
+    }
+    
+    /* old methods */
+    
     private $_langShortCode = null;
 
     public function getLangShortCode()

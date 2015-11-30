@@ -14,7 +14,7 @@ use cmsadmin\models\BlockGroup;
  */
 class AdminController extends \admin\base\RestController
 {
-    public function actionGetAllBlocks()
+    public function actionDataBlocks()
     {
         $groups = [];
         foreach (BlockGroup::find()->asArray()->all() as $group) {

@@ -10,6 +10,7 @@ use admin\models\Property;
  * Delivers default values for the specifing table. It means it does not return a key numeric array,
  * it does only return 1 assoc array wich reperents the default row.
  *
+ * @todo replace this controller with common api
  * @author nadar
  */
 class DefaultsController extends \admin\base\RestController
@@ -19,6 +20,7 @@ class DefaultsController extends \admin\base\RestController
         return Lang::getDefault();
     }
 
+    /*
     public function actionProperties()
     {
         $data = [];
@@ -36,7 +38,8 @@ class DefaultsController extends \admin\base\RestController
 
         return $data;
     }
-
+    */
+    
     public function actionCache()
     {
         if (Yii::$app->has('cache')) {

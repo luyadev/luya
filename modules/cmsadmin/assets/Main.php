@@ -8,6 +8,7 @@ class Main extends \yii\web\AssetBundle
 
     public $js = [
         'js/cmsadmin.js',
+        'js/services.js',
         /*
         'js/directives.js',
         'js/layout.js',

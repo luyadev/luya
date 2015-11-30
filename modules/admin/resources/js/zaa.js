@@ -184,6 +184,7 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 		};
 	});
 	
+	/*
 	zaa.factory("ApiAdminLang", function($resource) {
 		return $resource("admin/api-admin-lang/:id", { id: "@_id" }, {
 			save: {
@@ -193,8 +194,10 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 			}
 		});
 	});
+	*/
 	
-	zaa.factory("AdminLangService", function(ApiAdminLang, $http) {
+	zaa.factory("AdminLangService", function(ServiceLanguagesData) {
+		
 		var service = [];
 		
 		service.data = [];
@@ -223,12 +226,27 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 		};
 		
 		service.resetDefault = function() {
-			$http.get("admin/api-admin-defaults/lang").success(function(response) {
-				service.selection = [];
-				service.toggleSelection(response);
-			});
+			service.selection = [];
+			angular.forEach(ServiceLanguagesData.data, function(value, key) {
+				if (value.is_default == 1) {
+					if (!service.isInSelection(value.short_code)) {
+						service.toggleSelection(value);
+					}
+				}
+			})
 		}
 		
+		service.load = function() {
+			service.data = ServiceLanguagesData.data;
+			angular.forEach(ServiceLanguagesData.data, function(value) {
+				if (value.is_default == 1) {
+					if (!service.isInSelection(value.short_code)) {
+						service.toggleSelection(value);
+					}
+				}
+			})
+		}
+		/*
 		service.load = function(forceReload) {
 			if (service.data.length == 0 || forceReload !== undefined) {
 				service.data = ApiAdminLang.query();
@@ -239,6 +257,7 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 				});
 			}
 		};
+		*/
 		
 		return service;
 	});

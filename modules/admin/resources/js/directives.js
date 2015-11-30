@@ -1086,7 +1086,7 @@
 	});
 	
 	zaa.filter("filemanagerdirsfilter", function() {
-		return function(input, parentFolderId, x) {
+		return function(input, parentFolderId) {
 			var result = [];
 			angular.forEach(input, function(value, key) {
 				if (value.parentId == parentFolderId) {

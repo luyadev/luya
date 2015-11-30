@@ -235,11 +235,10 @@
 <!-- treeview item -->
 <script type="text/ng-template" id="reverse.html">
 
-    <div data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{revert: true, delay: 200, scroll : false, handle : '.treeview__link--draggable'}" ng-model="data">
+    <div data-drag="true"  jqyoui-draggable data-jqyoui-options="{revert: true, delay: 200, scroll : false, handle : '.treeview__link--draggable'}" ng-model="data">
 
         <div class="treeview__drop" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onBeforeDrop()', multiple : true}">
         </div>
-
         <a class="treeview__button treeview__link" ng-click="!showDrag && go(data.id)" title="id={{data.id}}" alt="id={{data.id}}" ng-class="{'treeview__link--active' : isCurrentElement(data.id), 'treeview__link--is-online' : data.is_offline == '0', 'treeview__link--is-hidden' : data.is_hidden == '1', 'treeview__link--draggable' : showDrag}" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__link--hover' }" jqyoui-droppable="{onDrop: 'onChildDrop()', multiple : true}">
             <div class="treeview__icon-holder">
                 <!-- show if drag is active -->
@@ -253,14 +252,11 @@
             <span>
                 {{data.title}} <i ng-show="data.is_home==1" class="material-icons treeview__text-icon">home</i>
             </span>
-
-            <!--<i ng-show="data.is_offline == '1'" class="material-icons treeview__site-state treeview__site-state--offline" title="Seiten Status: Offline">cloud_off</i>
-            <i ng-show="data.is_offline == '0'" class="material-icons treeview__site-state treeview__site-state--online" title="Seiten Status: Online">cloud_queue</i>-->
             
         </a>
 
-        <ul class="treeview__list" role="menu" ng-show="data.nodes.length > 0">
-            <li class="treeview__item" role="menuitem" ng-repeat="data in data.nodes" ng-include="'reverse.html'"></li>
+        <ul class="treeview__list" role="menu">
+            <li class="treeview__item" role="menuitem" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:data.id" ng-include="'reverse.html'"></li>
         </ul>
 
 
@@ -300,15 +296,13 @@
             </label>
         </div>
 
-        <div class="treeview" ng-repeat="catitem in menu" ng-class="{ 'treeview--drag-active' : showDrag }">
+        <div class="treeview" ng-repeat="catitem in menuData.containers" ng-class="{ 'treeview--drag-active' : showDrag }">
             <h5 class="treeview__title" ng-click="toggleCat(catitem.id)"><i class="material-icons treeview__title-icon" ng-class="{'treeview__title-icon--closed': toggleIsHidden(catitem.id)}">arrow_drop_down</i> <span>{{catitem.name}}</span></h5>
-
-            <p class="treeview__empty-message" ng-show="catitem.__items.length == 0 && !toggleIsHidden(catitem.id) && !showDrag">Noch keine Seiten hinterlegt</p>
-
+            <!-- 
             <div class="treeview__drop" ng-show="catitem.__items.length == 0 && !toggleIsHidden(catitem.id)" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{catitem.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onEmptyDrop()', multiple : true}"></div>
-
-            <ul class="treeview__list" ng-hide="toggleIsHidden(catitem.id)">
-                <li class="treeview__item" ng-repeat="data in catitem.__items" ng-include="'reverse.html'"></li>
+             -->
+            <ul class="treeview__list">
+                <li class="treeview__item" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:0" ng-include="'reverse.html'"></li>
             </ul>
         </div>
     </div>
