@@ -278,18 +278,18 @@
 <div class="luya-container__sidebar">
     <div ng-controller="CmsMenuTreeController">
 
-        <a class="treeview__button treeview__button--draft [ waves-effect waves-light ]"ui-sref="custom.cmsdraft">
-            <div class="treeview__icon-holder">
-                <i class="material-icons">receipt</i>
-            </div>
-            <span>Vorlagen</span>
-        </a>
-
         <a class="treeview__button treeview__button--create [ waves-effect waves-light ]" ui-sref="custom.cmsadd">
             <div class="treeview__icon-holder">
                 <i class="material-icons">add</i>
             </div>
             <span>Neue Seite erstellen</span>
+        </a>
+
+        <a class="treeview__button treeview__button--draft [ waves-effect waves-light ]"ui-sref="custom.cmsdraft">
+            <div class="treeview__icon-holder">
+                <i class="material-icons">receipt</i>
+            </div>
+            <span>Vorlagen</span>
         </a>
 
         <div class="treeview__button treeview__button--switch switch" ng-class="{ 'treeview__button--switch-active': showDrag }">

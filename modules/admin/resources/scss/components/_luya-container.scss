@@ -44,6 +44,8 @@
 	background-color: color('shades', 'white');
 	overflow: auto;
 
+	@extend .z-depth-1;
+
 	@media #{$small-and-down} {
 		top: $navbar-height-mobile;
 	}

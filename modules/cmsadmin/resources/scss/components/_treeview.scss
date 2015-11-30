@@ -2,7 +2,7 @@ $treeview--padding: 5px;
 
 .treeview__button {
 	display: block;
-	background-color: $grey;
+	background-color: $white;
 	color: $black;
 	width: 100%;
 	padding: 2px $treeview--padding;
@@ -26,7 +26,7 @@ $treeview--padding: 5px;
 	}
 
 	&:hover {
-		background-color: $grey--darken;
+		background-color: $grey;
 	}
 
 	& + .treeview__button {
@@ -101,18 +101,16 @@ $treeview--padding: 5px;
 }
 
 .treeview__list .treeview__list {
-	margin-top: 5px;
-	margin-left: 10px;
+	margin-top: 2px;
+	margin-left: 15px;
 }
 
-.treeview__item {
-
-	& + .treeview__item {
-		margin-top: 5px;
-	}
+.treeview__item + .treeview__item {
+	margin-top: 2px;
 }
 
 .treeview__link {
+	background-color: $grey;
 	position: relative;
 	cursor: pointer;
 	user-select: none;
