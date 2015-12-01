@@ -7,9 +7,9 @@
             <div class="input input--radios col s12">
                 <label class="input__label">Seitentyp</label>
                 <div class="input__field-wrapper">
-                    <input type="radio" ng-checked="data.nav_item_type == 1"><label ng-click="data.nav_item_type=1">Seite</label><br />
-                    <input type="radio" ng-checked="data.nav_item_type == 2"><label ng-click="data.nav_item_type=2;data.is_draft=0">Module</label><br />
-                    <input type="radio" ng-checked="data.nav_item_type == 3"><label ng-click="data.nav_item_type=3;data.is_draft=0">Weiterleitung</label><br />
+                    <input type="radio" ng-checked="data.nav_item_type == 1"><label ng-click="data.nav_item_type = 1">Seite</label><br />
+                    <input type="radio" ng-checked="data.nav_item_type == 2"><label ng-click="data.nav_item_type = 2; data.is_draft = 0">Modul</label><br />
+                    <input type="radio" ng-checked="data.nav_item_type == 3"><label ng-click="data.nav_item_type = 3; data.is_draft = 0">Weiterleitung</label><br />
                 </div>
             </div>
         </div>
@@ -21,8 +21,8 @@
                 <label class="input__label">Als Vorlage</label>
                 <div class="input__field-wrapper">
                     Möchtest du diese neue Seite als Vorlage hinterlegen?<br />
-                    <input type="radio" ng-checked="data.is_draft == 0"><label ng-click="data.is_draft=0">Nein</label><br />
-                    <input type="radio" ng-checked="data.is_draft == 1"><label ng-click="data.is_draft=1">Ja</label><br />
+                    <input type="radio" ng-checked="data.is_draft == 0"><label ng-click="data.is_draft = 0">Nein</label><br />
+                    <input type="radio" ng-checked="data.is_draft == 1"><label ng-click="data.is_draft = 1">Ja</label><br />
                 </div>
             </div>
         </div>
@@ -112,8 +112,8 @@
             <div class="input input--text col s12">
                 <label class="input__label">Eine Vorlage verwenden?</label>
                 <div class="input__field-wrapper">
-<input type="radio" ng-checked="data.use_draft == 0"><label ng-click="data.use_draft=0;data.from_draft_id=0">Nein</label><br />
-<input type="radio" ng-checked="data.use_draft == 1"><label ng-click="data.use_draft=1;data.layout_id=0">Ja</label><br />
+                    <input type="radio" ng-checked="data.use_draft == 0"><label ng-click="data.use_draft = 0; data.from_draft_id = 0">Nein</label><br />
+                    <input type="radio" ng-checked="data.use_draft == 1"><label ng-click="data.use_draft = 1; data.layout_id = 0">Ja</label><br />
                 </div>
             </div>
         </div>
@@ -168,9 +168,9 @@
         <div class="input input--radios col s12">
             <label class="input__label">Art der Weiterleitung</label>
             <div class="input__field-wrapper">
-                <input type="radio" ng-model="data.redirect_type" value="1" id="r_t1"><label for="r_t1">Interne-Seite</label> <br />
-                <input type="radio" ng-model="data.redirect_type" value="2" id="r_t2"><label for="r_t2">Link-Extern</label>
-                <!--<input type="radio" ng-model="data.redirect_type" value="3" id="r_t3"><label for="r_t3">Datei</label>-->
+                <input type="radio" ng-model="data.redirect_type" value="1"><label ng-click="data.redirect_type = 1">Interne-Seite</label> <br />
+                <input type="radio" ng-model="data.redirect_type" value="2"><label ng-click="data.redirect_type = 2">Link-Extern</label>
+                <!--<input type="radio" ng-model="data.redirect_type" value="3"><label ng-click="data.redirect_type = 3">Datei</label>-->
             </div>
         </div>
     </div>

@@ -6,6 +6,8 @@ LUYA CHANGELOG
 
 - **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide.
 - **[BC BREAK]** removed luya\web\Composition::set method.
+- `#600` generalized filemanger loading overlay to .loading-overlay. This overlay can now be used context-independent.
+- `#501` removed for / id assignment and resolved issue with ng-click=""
 - `#599` added basic styling for help boxes. Simple question mark icon that shows belonging text on hover. 
 - `#539` added possiblity to delete tags under `cmsadmin/system/tags`.
 - `#370` added block importer consistency check and delete all remaining block references.

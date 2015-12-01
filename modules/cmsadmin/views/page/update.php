@@ -112,7 +112,7 @@
             <div class="input__field-wrapper">
                 <input type="radio" ng-model="data.type" value="1"><label ng-click="data.type = 1">Interne-Seite</label> <br />
                 <input type="radio" ng-model="data.type" value="2"><label ng-click="data.type = 2">Link-Extern</label>
-                <!--<input type="radio" ng-model="data.redirect_type" value="3" id="r_t3"><label for="r_t3">Datei</label>-->
+                <!--<input type="radio" ng-model="data.redirect_type" value="3"><label ng-click="data.type = 3">Datei</label>-->
             </div>
         </div>
     </div>
@@ -325,7 +325,7 @@
                         </div>
                         <!-- /PAGE__HEADER -->
 
-                        <!-- PAGE__CONTENT--SETTINGS -->
+                         PAGE__CONTENT--SETTINGS
                         <form class="page__content page__content--settings" ng-show="settings" ng-switch on="itemCopy.nav_item_type">
 
                             <div class="row">
