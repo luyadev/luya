@@ -16,4 +16,27 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
 
         return array_reverse($arr, true);
     }
+    
+    /**
+     * cast an array into their respectiv types 
+     * 
+     * @param unknown $array
+     * @return multitype:number unknown multitype:number NULL unknown
+     */
+    public static function typeCast($array)
+    {
+        $return = [];
+        
+        foreach($array as $k => $v) {
+            if (is_numeric($v)) {
+                $return[$k] = (int)$v;
+            } elseif (is_array($v)) {
+                $return[$k] = self::typeCast($v);
+            } else {
+                $return[$k] = $v;
+            }
+        }
+        
+        return $return;
+    }
 }
