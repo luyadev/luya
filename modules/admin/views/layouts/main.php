@@ -41,7 +41,7 @@ $this->beginPage()
         </h3>
 
         <div class="loading-overlay__loader">
-            <div class="spinner">
+            <div class="loading-indicator">
                 <div class="rect1"></div><!--
                 --><div class="rect2"></div><!--
                 --><div class="rect3"></div><!--
