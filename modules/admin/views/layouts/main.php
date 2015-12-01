@@ -315,7 +315,7 @@ $this->beginPage()
 
         </div>
 
-        <div class="modal modal--bottom-sheet modal--full-width" ng-class="{ 'modal--active' : uploading && !serverProcessing }">
+        <div class="filemanager__upload-modal modal modal--bottom-sheet modal--full-width" ng-class="{ 'modal--active' : uploading && !serverProcessing }">
 
             <div class="row">
                 <div class="col s12">

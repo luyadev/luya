@@ -1,3 +1,8 @@
+.filemanager {
+	display: block;
+	position: relative;
+}
+
 .filemanager__files td span,
 .filemanager__files td img,
 .filemanager__files td i,
@@ -336,4 +341,12 @@
 		margin-top: -4px;
 		margin-right: 5px;
 	}
+}
+
+.filemanager .filemanager__upload-modal {
+	position: absolute !important;
+	top: -20px !important;
+	left: -20px !important;
+	min-height: calc(100% + 40px) !important;
+	min-width: calc(100% + 40px) !important;
 }
