@@ -24,6 +24,8 @@ class MenuController extends \admin\base\RestController
     
     /* old methods */
     
+    /*
+    
     private $_langShortCode = null;
 
     public function getLangShortCode()
@@ -84,4 +86,6 @@ class MenuController extends \admin\base\RestController
 
         return $menu->childrenRecursive(0, 'nodes');
     }
+    
+    */
 }

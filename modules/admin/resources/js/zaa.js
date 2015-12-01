@@ -129,7 +129,7 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 		var service = [];
 		
 		service.reload = function() {
-			$http.get("admin/api-admin-defaults/cache").success(function(response) {
+			$http.get("admin/api-admin-common/cache").success(function(response) {
 				$window.location.reload();
 			});
 		}

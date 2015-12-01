@@ -512,6 +512,35 @@
 		
 	    $scope.showDrag = 0;
 	    
+	    $scope.isCurrentElement = function(navId) {
+	    	if ($state.params.navId == navId) {
+	    		return true;
+	    	}
+	    	
+	    	return false;
+	    }
+	    
+    	$scope.hiddenCats = {};
+		
+		$scope.toggleCat = function(catId) {
+			console.log(catId);
+			if (catId in $scope.hiddenCats) {
+				$scope.hiddenCats[catId] = !$scope.hiddenCats[catId];
+			} else {
+				$scope.hiddenCats[catId] = 1;
+			}
+		};
+		
+		$scope.toggleIsHidden = function(catId) {
+			if (catId in $scope.hiddenCats) {
+				if ($scope.hiddenCats[catId] == 1) {
+					return true;
+				}
+			}
+			
+			return false;
+		}
+	    
 		//$scope.containers = $scope.menuData.containers;
 		
 		// old

@@ -46,22 +46,4 @@ class AdminController extends \admin\base\RestController
     {
         return ArrayHelper::typeCast(Layout::find()->asArray()->all());
     }
-    
-    /*
-    public function actionGetAllBlocks()
-    {
-        $data = [];
-        foreach (\cmsadmin\models\Block::find()->all() as $item) {
-            $object = \cmsadmin\models\Block::objectId($item['id']);
-            if ($object) {
-                $data[] = [
-                    'id' => $item['id'],
-                    'name' => $object->name(),
-                ];
-            }
-        }
-
-        return $data;
-    }
-    */
 }
