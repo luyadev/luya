@@ -346,28 +346,19 @@
 	
 	// layout.js
 	
-	zaa.config(function($stateProvider) {
+	zaa.config(function($stateProvider, resolverProvider) {
 		$stateProvider
 		.state("custom.cmsedit", {
 			url : "/update/:navId",
-			templateUrl : 'cmsadmin/page/update',
-			resolve : {
-				cmsadminServiceResolver: cmsadminServiceResolver,
-			}
+			templateUrl : 'cmsadmin/page/update'
 		})
 		.state("custom.cmsadd", {
 			url : "/create",
-			templateUrl : 'cmsadmin/page/create',
-			resolve : {
-				cmsadminServiceResolver: cmsadminServiceResolver,
-			}
+			templateUrl : 'cmsadmin/page/create'
 		})
 		.state("custom.cmsdraft", {
 			url: '/drafts',
-			templateUrl: 'cmsadmin/page/drafts',
-			resolve: {
-				cmsadminServiceResolver: cmsadminServiceResolver,
-			}
+			templateUrl: 'cmsadmin/page/drafts'
 		});
 	});
 	
@@ -375,6 +366,7 @@
 	 * @todo: delete
 	 */
 	zaa.service("NewMenuService", function($http, $q) {
+		/*
 		var service = [];
 		service.data = null;
 		service.navcontainers = [];
@@ -396,6 +388,7 @@
 			});
 		}
 		return service;
+		*/
 	});
 	
 	/*

@@ -1,9 +1,3 @@
-// service resolver
-function cmsadminServiceResolver(ServiceMenuData, ServiceBlocksData) {
-	ServiceMenuData.load();
-	ServiceBlocksData.load();
-};
-
 /**
  * all global admin services
  * 
@@ -32,6 +26,13 @@ function cmsadminServiceResolver(ServiceMenuData, ServiceBlocksData) {
 (function() {
 	"use strict";
 	
+zaa.config(function(resolverProvider) {
+	resolverProvider.addCallback(function(ServiceMenuData, ServiceBlocksData) {
+		ServiceMenuData.load();
+		ServiceBlocksData.load();
+	});
+});
+
 /*
 
 $scope.menuData = ServiceMenuData.data;

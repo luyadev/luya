@@ -33,7 +33,10 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 					return res[0] + "/" + res[1] + "/" + res[2];
 				},
 				resolve : {
-					adminServiceResolver: adminServiceResolver
+					adminServiceResolver: adminServiceResolver,
+					resolver : function(resolver) {
+						return resolver.then;
+					},
 				}
 			})
 			.state("home", {
@@ -42,14 +45,38 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 			});
 	});
 	
-	
+	/**
+	 * attach custom callback function to the custom state resolve. Use the resolverProvider in
+	 * your configuration part:
+	 * 
+	 * zaa.config(function(resolverProvider) {
+	 *		resolverProvider.addCallback(function(ServiceMenuData, ServiceBlocksData) {
+	 *			ServiceMenuData.load();
+	 *			ServiceBlocksData.load();
+	 *		});
+	 * });
+	 */
+	zaa.provider("resolver", function() {
+		var list = [];
+		
+		this.addCallback = function(callback) {
+			list.push(callback);
+		}
+		
+		this.$get = function($injector, $q, $state) {
+			return $q(function(resolve, reject) {
+				for(var i in list) {
+					$injector.invoke(list[i]);
+				}
+			})
+		}
+	})
 	
 	zaa.directive("compileHtml", function($compile, $parse) {
 		return {
 			restrict: "A",
 			link: function(scope, element, attr) {
 				var parsed = $parse(attr.ngBindHtml);
-	  
 				scope.$watch(function() { return (parsed(scope) || "").toString(); }, function() {
 			        $compile(element, null, -9999)(scope);  //The -9999 makes it skip directives so that we do not recompile ourselves
 		        });
