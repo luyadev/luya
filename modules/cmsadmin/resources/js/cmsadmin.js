@@ -840,6 +840,32 @@
 		
 		/* properties --> */
 		
+	    $scope.$watch(function() { return $scope.navData.is_offline }, function(n, o) {
+	    	if (n !== o && n !== undefined) {
+	    		$http.get('admin/api-cms-nav/toggle-offline', { params : { navId : $scope.navData.id , offlineStatus : n }}).success(function(response) {
+	    			// toast status changed!
+	    		});
+	    	}
+	    });
+	    
+	    $scope.$watch(function() { return $scope.navData.is_hidden }, function(n, o) {
+			if (n !== o && n !== undefined) {
+				$http.get('admin/api-cms-nav/toggle-hidden', { params : { navId : $scope.navData.id , hiddenStatus : n }}).success(function(response) {
+					// toast status changed!
+				});
+			}
+		});
+	    
+	    $scope.$watch(function() { return $scope.navData.is_home }, function(n, o) {
+	    	if (n !== o && n !== undefined) {
+				$http.get('admin/api-cms-nav/toggle-home', { params : { navId : $scope.navData.id , homeState : n }}).success(function(response) {
+					$scope.menuDataReload().then(function() {
+	    				// toast status changed!
+	    			});
+				});
+			}
+		});
+	    
 		/*
 		$scope.$watch(function() { return $scope.navData.is_home }, function(n, o) {
 			if (o !== undefined) {
