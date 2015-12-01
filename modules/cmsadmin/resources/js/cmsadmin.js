@@ -523,7 +523,6 @@
     	$scope.hiddenCats = {};
 		
 		$scope.toggleCat = function(catId) {
-			console.log(catId);
 			if (catId in $scope.hiddenCats) {
 				$scope.hiddenCats[catId] = !$scope.hiddenCats[catId];
 			} else {
