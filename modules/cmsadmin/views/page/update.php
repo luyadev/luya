@@ -110,8 +110,8 @@
         <div class="input input--radios col s12">
             <label class="input__label">Art der Weiterleitung</label>
             <div class="input__field-wrapper">
-                <input type="radio" ng-model="data.type" value="1" id="r_t1"><label for="r_t1">Interne-Seite</label> <br />
-                <input type="radio" ng-model="data.type" value="2" id="r_t2"><label for="r_t2">Link-Extern</label>
+                <input type="radio" ng-model="data.type" value="1"><label ng-click="data.type = 1">Interne-Seite</label> <br />
+                <input type="radio" ng-model="data.type" value="2"><label ng-click="data.type = 2">Link-Extern</label>
                 <!--<input type="radio" ng-model="data.redirect_type" value="3" id="r_t3"><label for="r_t3">Datei</label>-->
             </div>
         </div>
@@ -356,9 +356,9 @@
                                 <div class="input input--radios col s12">
                                     <label class="input__label">Seitentyp</label>
                                     <div class="input__field-wrapper">
-                                        <input type="radio" ng-model="itemCopy.nav_item_type" value="1" id="update-switch-1"><label for="update-switch-1">Seite</label> <br />
-                                        <input type="radio" ng-model="itemCopy.nav_item_type" value="2" id="update-switch-2"><label for="update-switch-2">Modul</label> <br />
-                                        <input type="radio" ng-model="itemCopy.nav_item_type" value="3" id="update-switch-3"><label for="update-switch-3">Weiterleitung</label>
+                                        <input type="radio" ng-model="itemCopy.nav_item_type" value="1"><label ng-click="itemCopy.nav_item_type = 1">Seite</label> <br />
+                                        <input type="radio" ng-model="itemCopy.nav_item_type" value="2"><label ng-click="itemCopy.nav_item_type = 2">Modul</label> <br />
+                                        <input type="radio" ng-model="itemCopy.nav_item_type" value="3"><label ng-click="itemCopy.nav_item_type = 3">Weiterleitung</label>
                                     </div>
                                 </div>
                             </div>
