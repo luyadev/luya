@@ -228,7 +228,7 @@
     </div>
 
     <ul class="menu-dropdown__list">
-        <li class="menu-dropdown__item" ng-repeat="data in data.nodes" ng-include="'menuDropdownReverse.html'"></li>
+        <li class="menu-dropdown__item" ng-repeat="data in menuData.items | menuparentfilter:container.id:data.id" ng-include="'menuDropdownReverse.html'"></li>
     </ul>
 </script>
 

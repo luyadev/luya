@@ -3,13 +3,22 @@
 	
 	// directive.js
 	
-	zaa.directive("menuDropdown", function() {
+	zaa.directive("menuDropdown", function(ServiceMenuData) {
 		return {
 			restrict : 'E',
 			scope : {
 				navId : '='
 			},
 			link : function(scope) {
+				
+				/* service ServiceMenuData inheritance */
+				
+				scope.menuData = ServiceMenuData.data;
+				
+				scope.$on('service:MenuData', function(event, data) {
+					scope.menuData = data;
+				});
+				
 				/*
 				 * todo: replace with ServiceMenusData
 				NewMenuService.get().then(function(response) {
@@ -23,10 +32,10 @@
 				}
 			},
 			template : function() {
-				return '<div class="menu-dropdown__category" ng-repeat="container in menu">' +
+				return '<div class="menu-dropdown__category" ng-repeat="container in menuData.containers">' +
                             '<b class="menu-dropdown__title">{{container.name}}</b>' +
                             '<ul class="menu-dropdown__list">' +
-                                '<li class="menu-dropdown__item" ng-repeat="data in container.__items" ng-include="\'menuDropdownReverse.html\'"></li>' +
+                                '<li class="menu-dropdown__item" ng-repeat="data in menuData.items | menuparentfilter:container.id:0" ng-include="\'menuDropdownReverse.html\'"></li>' +
                             '</ul>' +
                         '</div>';
 			}
