@@ -10,8 +10,6 @@
 		
 		$scope.AdminLangService = AdminLangService;
 		
-		$scope.AdminLangService.load();
-		
 		/**
 		 * 0 = list
 		 * 1 = add

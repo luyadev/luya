@@ -17,6 +17,7 @@ class Module extends \admin\base\Module
     public $isCoreModule = true;
 
     public $apis = [
+        'api-admin-common' => 'admin\apis\CommonController',
         'api-admin-remote' => 'admin\apis\RemoteController',
         'api-admin-defaults' => 'admin\apis\DefaultsController',
         'api-admin-storage' => 'admin\apis\StorageController',

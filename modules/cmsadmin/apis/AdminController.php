@@ -2,8 +2,10 @@
 
 namespace cmsadmin\apis;
 
+use cmsadmin\models\Layout;
 use cmsadmin\models\Block;
 use cmsadmin\models\BlockGroup;
+use luya\helpers\ArrayHelper;
 
 /**
  * api-cms-admin.
@@ -14,7 +16,7 @@ use cmsadmin\models\BlockGroup;
  */
 class AdminController extends \admin\base\RestController
 {
-    public function actionGetAllBlocks()
+    public function actionDataBlocks()
     {
         $groups = [];
         foreach (BlockGroup::find()->asArray()->all() as $group) {
@@ -40,6 +42,11 @@ class AdminController extends \admin\base\RestController
         return $groups;
     }
 
+    public function actionDataLayouts()
+    {
+        return ArrayHelper::typeCast(Layout::find()->asArray()->all());
+    }
+    
     /*
     public function actionGetAllBlocks()
     {

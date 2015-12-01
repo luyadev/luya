@@ -33,7 +33,10 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 					return res[0] + "/" + res[1] + "/" + res[2];
 				},
 				resolve : {
-					adminServiceResolver: adminServiceResolver
+					adminServiceResolver: adminServiceResolver,
+					resolver : function(resolver) {
+						return resolver.then;
+					},
 				}
 			})
 			.state("home", {
@@ -42,14 +45,38 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 			});
 	});
 	
-	
+	/**
+	 * attach custom callback function to the custom state resolve. Use the resolverProvider in
+	 * your configuration part:
+	 * 
+	 * zaa.config(function(resolverProvider) {
+	 *		resolverProvider.addCallback(function(ServiceMenuData, ServiceBlocksData) {
+	 *			ServiceMenuData.load();
+	 *			ServiceBlocksData.load();
+	 *		});
+	 * });
+	 */
+	zaa.provider("resolver", function() {
+		var list = [];
+		
+		this.addCallback = function(callback) {
+			list.push(callback);
+		}
+		
+		this.$get = function($injector, $q, $state) {
+			return $q(function(resolve, reject) {
+				for(var i in list) {
+					$injector.invoke(list[i]);
+				}
+			})
+		}
+	})
 	
 	zaa.directive("compileHtml", function($compile, $parse) {
 		return {
 			restrict: "A",
 			link: function(scope, element, attr) {
 				var parsed = $parse(attr.ngBindHtml);
-	  
 				scope.$watch(function() { return (parsed(scope) || "").toString(); }, function() {
 			        $compile(element, null, -9999)(scope);  //The -9999 makes it skip directives so that we do not recompile ourselves
 		        });
@@ -184,6 +211,7 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 		};
 	});
 	
+	/*
 	zaa.factory("ApiAdminLang", function($resource) {
 		return $resource("admin/api-admin-lang/:id", { id: "@_id" }, {
 			save: {
@@ -193,55 +221,9 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 			}
 		});
 	});
+	*/
 	
-	zaa.factory("AdminLangService", function(ApiAdminLang, $http) {
-		var service = [];
-		
-		service.data = [];
-		
-		service.selection = [];
-		
-		service.toggleSelection = function(lang) {
-			var exists = service.selection.indexOf(lang.short_code);
-			
-			if (exists == -1) {
-				service.selection.push(lang.short_code);
-			} else {
-				/* #531: unable to deselect language, as at least 1 langauge must be activated. */
-				if (service.selection.length > 1) {
-					service.selection.splice(exists, 1);
-				}
-			}
-		};
-		
-		service.isInSelection = function(langShortCode) {
-			var exists = service.selection.indexOf(langShortCode);
-			if (exists == -1) {
-				return false;
-			}
-			return true;
-		};
-		
-		service.resetDefault = function() {
-			$http.get("admin/api-admin-defaults/lang").success(function(response) {
-				service.selection = [];
-				service.toggleSelection(response);
-			});
-		}
-		
-		service.load = function(forceReload) {
-			if (service.data.length == 0 || forceReload !== undefined) {
-				service.data = ApiAdminLang.query();
-				$http.get("admin/api-admin-defaults/lang").success(function(response) {
-					if (!service.isInSelection(response.short_code)) {
-						service.toggleSelection(response);
-					}
-				});
-			}
-		};
-		
-		return service;
-	});
+	
 	
 	zaa.factory("ApiAdminFilter", function($resource) {
 		return $resource("admin/api-admin-filter/:id", { id: "@_id" }, {
