@@ -6,6 +6,15 @@ use Exception;
 use PHPMailer;
 use SMTP;
 
+/**
+ * smtp debug
+ * 
+ * ```
+ * swaks -s HOST -p 587 -ehlo localhost -au AUTH_USER -to TO_ADRESSE -tls
+ * ```
+ * 
+ * @author nadar
+ */
 class Mail extends \yii\base\Component
 {
     private $_phpmailer = null;
@@ -24,13 +33,20 @@ class Mail extends \yii\base\Component
 
     public $altBody = 'Please use a HTML compatible E-Mail-Client to read this E-Mail.';
 
-    public $port = '587';
+    public $port = 587;
 
+    public $doDebug = 0;
+    
+    /**
+     * @var string Posible values are `tls` or `ssl`
+     */
+    public $smtpSecure = 'tls';
+    
     public function mailer()
     {
         if ($this->_phpmailer === null) {
             $this->_phpmailer = new PHPMailer();
-            $this->_phpmailer->do_debug = 0;
+            $this->_phpmailer->do_debug = $this->doDebug;
             $this->_phpmailer->CharSet = 'UTF-8';
         }
 
@@ -42,7 +58,7 @@ class Mail extends \yii\base\Component
         if ($this->isSMTP) {
             $this->mailer()->SMTPDebug = false;
             $this->mailer()->isSMTP();
-            $this->mailer()->SMTPSecure = 'tls';
+            $this->mailer()->SMTPSecure = $this->smtpSecure;
             $this->mailer()->Host = $this->host;
             $this->mailer()->SMTPAuth = true;
             $this->mailer()->Username = $this->username;
@@ -99,14 +115,16 @@ class Mail extends \yii\base\Component
      *
      * @throws Exception
      */
-    public function smtpTest()
-    {
+    public function smtpTest($verbose)
+    {   
         //Create a new SMTP instance
         $smtp = new SMTP();
-
-        //Enable connection-level debug output
-        //$smtp->do_debug = SMTP::DEBUG_CONNECTION;
-
+        
+        if ($verbose) {
+            // Enable connection-level debug output
+            $smtp->do_debug = 3;
+        }
+        
         try {
             //Connect to an SMTP server
             if ($smtp->connect($this->host, $this->port)) {
@@ -116,7 +134,8 @@ class Mail extends \yii\base\Component
                     if ($smtp->authenticate($this->username, $this->password)) {
                         return true;
                     } else {
-                        throw new Exception('Authentication failed: '.$smtp->getLastReply());
+                        $data = [$this->host, $this->port, $this->smtpSecure, $this->username];
+                        throw new Exception('Authentication failed ('.implode(',', $data).'): '.$smtp->getLastReply() . PHP_EOL . print_r($smtp->getError(), true));
                     }
                 } else {
                     throw new Exception('HELO failed: '.$smtp->getLastReply());
