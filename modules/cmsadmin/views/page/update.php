@@ -270,12 +270,9 @@
                     </div>
                 </div>
             </div>
-            
             <div class="row">
-
                 <div class="col s{{(12/AdminLangService.selection.length)}}" ng-repeat="lang in languagesData" ng-show="AdminLangService.isInSelection(lang.short_code) && showContainer" ng-controller="NavItemController">
                     <!-- PAGE -->
-                    
                     <div class="page" ng-show="!isTranslated && navData.is_draft == 1">
                         <div class="alert alert--info">Vorlagen haben keine Sprach spezifikation.</div>
                     </div>

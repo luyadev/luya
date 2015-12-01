@@ -27,9 +27,10 @@
 	"use strict";
 	
 zaa.config(function(resolverProvider) {
-	resolverProvider.addCallback(function(ServiceMenuData, ServiceBlocksData) {
+	resolverProvider.addCallback(function(ServiceMenuData, ServiceBlocksData, ServiceLayoutsData) {
 		ServiceMenuData.load();
 		ServiceBlocksData.load();
+		ServiceLayoutsData.load();
 	});
 });
 
@@ -95,6 +96,42 @@ zaa.factory("ServiceBlocksData", function($http, $q, $rootScope) {
 				$http.get("admin/api-cms-admin/data-blocks").success(function(response) {
 					service.data = response;
 					$rootScope.$broadcast('service:BlocksData', service.data);
+					resolve(service.data);
+				});
+			}
+		});
+	};
+	
+	return service;
+});
+
+
+/*
+
+$scope.layoutsData = ServiceLayoutsData.data;
+				
+$scope.$on('service:BlocksData', function(event, data) {
+	$scope.layoutsData = data;
+});
+
+$scope.layoutsDataReload = function() {
+	return ServiceLayoutsData.load(true);
+}
+				
+*/
+zaa.factory("ServiceLayoutsData", function($http, $q, $rootScope) {
+	var service = [];
+	
+	service.data = [];
+	
+	service.load = function(forceReload) {
+		return $q(function(resolve, reject) {
+			if (service.data.length > 0 && forceReload !== true) {
+				resolve(service.data);
+			} else {
+				$http.get("admin/api-cms-admin/data-layouts").success(function(response) {
+					service.data = response;
+					$rootScope.$broadcast('service:LayoutsData', service.data);
 					resolve(service.data);
 				});
 			}

@@ -1,11 +1,12 @@
 // service resolver
-function adminServiceResolver(ServiceFoldersData, ServiceImagesData, ServiceFilesData, ServiceFiltersData, ServiceLanguagesData, ServicePropertiesData) {
+function adminServiceResolver(ServiceFoldersData, ServiceImagesData, ServiceFilesData, ServiceFiltersData, ServiceLanguagesData, ServicePropertiesData, AdminLangService) {
 	ServiceFoldersData.load();
 	ServiceImagesData.load();
 	ServiceFilesData.load();
 	ServiceFiltersData.load();
 	ServiceLanguagesData.load();
 	ServicePropertiesData.load();
+	AdminLangService.load();
 };
 
 /**
@@ -243,6 +244,85 @@ zaa.factory("ServicePropertiesData", function($http, $q, $rootScope) {
 			}
 		});
 	};
+	
+	return service;
+});
+
+zaa.factory("AdminLangService", function(ServiceLanguagesData) {
+	
+	var service = [];
+	
+	service.data = [];
+	
+	service.selection = [];
+	
+	service.toggleSelection = function(lang) {
+		var exists = service.selection.indexOf(lang.short_code);
+		
+		if (exists == -1) {
+			service.selection.push(lang.short_code);
+		} else {
+			/* #531: unable to deselect language, as at least 1 langauge must be activated. */
+			if (service.selection.length > 1) {
+				service.selection.splice(exists, 1);
+			}
+		}
+	};
+	
+	service.isInSelection = function(langShortCode) {
+		var exists = service.selection.indexOf(langShortCode);
+		if (exists == -1) {
+			return false;
+		}
+		return true;
+	};
+	
+	service.resetDefault = function() {
+		service.selection = [];
+		angular.forEach(ServiceLanguagesData.data, function(value, key) {
+			if (value.is_default == 1) {
+				if (!service.isInSelection(value.short_code)) {
+					service.toggleSelection(value);
+				}
+			}
+		})
+	}
+	service.load = function() {
+		ServiceLanguagesData.load().then(function(data) {
+			service.data = data;
+			
+			angular.forEach(data, function(value) {
+				if (value.is_default == 1) {
+					if (!service.isInSelection(value.short_code)) {
+						service.toggleSelection(value);
+					}
+				}
+			})
+			
+		});
+		/*
+		service.data = data;
+		angular.forEach(data, function(value) {
+			if (value.is_default == 1) {
+				if (!service.isInSelection(value.short_code)) {
+					service.toggleSelection(value);
+				}
+			}
+		})
+		*/
+	}
+	/*
+	service.load = function(forceReload) {
+		if (service.data.length == 0 || forceReload !== undefined) {
+			service.data = ApiAdminLang.query();
+			$http.get("admin/api-admin-defaults/lang").success(function(response) {
+				if (!service.isInSelection(response.short_code)) {
+					service.toggleSelection(response);
+				}
+			});
+		}
+	};
+	*/
 	
 	return service;
 });

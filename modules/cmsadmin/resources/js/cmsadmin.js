@@ -3,16 +3,19 @@
 	
 	// directive.js
 	
-	zaa.directive("menuDropdown", function(NewMenuService) {
+	zaa.directive("menuDropdown", function() {
 		return {
 			restrict : 'E',
 			scope : {
 				navId : '='
 			},
 			link : function(scope) {
+				/*
+				 * todo: replace with ServiceMenusData
 				NewMenuService.get().then(function(response) {
 					scope.menu = response;
 				});
+				*/
 			},
 			controller : function($scope) {
 				$scope.changeModel = function(data) {
@@ -54,7 +57,7 @@
 		}
 	});
 
-    zaa.directive("updateFormPage", function(CmsLayoutService) {
+    zaa.directive("updateFormPage", function(ServiceLayoutsData) {
         return {
             restrict : 'EA',
             scope : {
@@ -62,9 +65,18 @@
             },
             templateUrl : 'updateformpage.html',
             controller : function($scope, $resource) {
-                CmsLayoutService.data.$promise.then(function(response) {
-                    $scope.layouts = response;
-                });
+            	
+            	$scope.layoutsData = ServiceLayoutsData.data;
+				
+            	$scope.$on('service:BlocksData', function(event, data) {
+            		$scope.layoutsData = data;
+            	});
+            	
+            	function initializer() {
+            		$scope.layouts = $scope.layoutsData;
+            	}
+            	
+            	initializer();
             }
         }
     });
@@ -100,7 +112,7 @@
 				data : '='
 			},
 			templateUrl : 'createform.html',
-			controller : function($scope, $http, $filter, NewMenuService, Slug, ServiceLanguagesData) {
+			controller : function($scope, $http, $filter, ServiceMenuData, Slug, ServiceLanguagesData) {
 				
 				$scope.error = [];
 				$scope.success = false;
@@ -115,10 +127,24 @@
 				
 				//$scope.navcontainers = $scope.MenuService.navcontainers;
 				
-				NewMenuService.get().then(function(response) {
-					$scope.menu = response;
-					$scope.navcontainers = NewMenuService.navcontainers;
+				
+				$scope.menuData = ServiceMenuData.data;
+				
+				$scope.$on('service:MenuData', function(event, data) {
+					$scope.menuData = data;
 				});
+
+				$scope.menuDataReload = function() {
+					return ServiceMenuData.load(true);
+				}
+				
+				function initializer() {
+					$scope.menu = $scope.menuData.items;
+					$scope.navcontainers = $scope.menuData.containers;
+				}
+				
+				initializer();
+				
 				
 				$scope.data.nav_item_type = 1;
 				$scope.data.parent_nav_id = 0;
@@ -151,9 +177,7 @@
 				
 				$scope.exec = function () {
 					$scope.controller.save().then(function(response) {
-						NewMenuService.get(true).then(function(response) {
-							$scope.menu = response;
-						});
+						$scope.menuDataReload();
 						$scope.success = true;
 						$scope.error = [];
 						$scope.data.title = null;
@@ -171,7 +195,7 @@
 		}
 	});
 	
-	zaa.directive("createFormPage", function(CmsLayoutService, NewMenuService) {
+	zaa.directive("createFormPage", function(ServiceLayoutsData, ServiceMenuData) {
 		return {
 			restrict : 'EA',
 			scope : {
@@ -182,14 +206,29 @@
 				
 				$scope.data.use_draft = 0;
 				
-				CmsLayoutService.data.$promise.then(function(response) {
-					$scope.layouts = response;
-				});
+				// layoutsData
 				
-				NewMenuService.get().then(function(r) {
-				 	$scope.drafts = r.drafts;
-				});
+				$scope.layoutsData = ServiceLayoutsData.data;
 				
+            	$scope.$on('service:BlocksData', function(event, data) {
+            		$scope.layoutsData = data;
+            	});
+            	
+            	// menuData
+            	
+    			$scope.menuData = ServiceMenuData.data;
+				
+				$scope.$on('service:MenuData', function(event, data) {
+					$scope.menuData = data;
+				});
+            	
+            	function init() {
+            		$scope.drafts = $scope.menuData.drafts;
+            		$scope.layouts = $scope.layoutsData;
+            	}
+				
+            	init();
+            	
 				$scope.save = function() {
 					
 					$scope.$parent.exec();
@@ -256,19 +295,6 @@
 		return $resource('admin/api-cms-block/:id');
 	});
 	
-	zaa.factory('CmsLayoutService', function($resource) {
-		var service = [];
-		
-		service.data = [];
-		
-		service.resource = $resource('admin/api-cms-layout/:id');
-		
-		service.load = function() {
-			service.data = service.resource.query();
-		}
-		
-		return service;
-	});
 	
 	zaa.factory('ApiCmsNavItemPageBlockItem', function($resource) {
 		return $resource('admin/api-cms-navitempageblockitem/:id', { id : '@_id' }, {
@@ -363,35 +389,6 @@
 	});
 	
 	/*
-	 * @todo: delete
-	 */
-	zaa.service("NewMenuService", function($http, $q) {
-		/*
-		var service = [];
-		service.data = null;
-		service.navcontainers = [];
-		service.get = function(forceReload){
-			return $q(function(resolve, reject){
-				if (service.data === null || forceReload === true){
-					$http.get('admin/api-cms-menu/all').success(function(response) {
-						service.navcontainers = [];
-						for (var i in response) {
-							service.navcontainers.push({ name : response[i]['name'], id : parseInt(response[i]['id'])});
-						}
-						service.data = response;
-						resolve(response);
-					});
-					
-				} else {
-					resolve(service.data);
-				}
-			});
-		}
-		return service;
-		*/
-	});
-	
-	/*
 	zaa.service('MenuService', function($http) {
 		var service = [];
 		
@@ -416,9 +413,13 @@
 	});
 	*/
 	
-	zaa.controller("DraftsController", function($scope, $state, NewMenuService) {
+	zaa.controller("DraftsController", function($scope, $state, ServiceMenuData) {
 		
-		$scope.menuData = NewMenuService.data;
+		$scope.menuData = ServiceMenuData.data;
+		
+		$scope.$on('service:MenuData', function(event, data) {
+			$scope.menuData = data;
+		});
 		
 		$scope.go = function(navId) {
 			$state.go('custom.cmsedit', { navId : navId });
@@ -516,7 +517,6 @@
 		// old
 		
 		/*
-		CmsLayoutService.load(); // remove or put into resolver
 		
 		$scope.hiddenCats = {};
 		
@@ -664,7 +664,9 @@
 	
 	// update.js
 	
-	zaa.controller("NavController", function($scope, $filter, $stateParams, $http, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, AdminClassService /*AdminLangService, AdminClassService, NewMenuService, , PropertiesService*/) {
+	zaa.controller("NavController", function($scope, $filter, $stateParams, $http, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, AdminClassService, AdminLangService) {
+		
+		$scope.AdminLangService = AdminLangService;
 		
 		/* service AdminPropertyService inheritance */
 		
@@ -727,12 +729,9 @@
 		$scope.AdminClassService = AdminClassService;
 		
 		function initializer() {
-			$scope.navData = $filter('filter')($scope.menuData.items, {id: $scope.id.toString()}, true)[0];
+			$scope.navData = $filter('filter')($scope.menuData.items, {id: $scope.id}, true)[0];
 			$scope.loadNavProperties();
-			console.log($scope.navData);
 		}
-		
-		
 		
 		
 		/*
@@ -860,9 +859,17 @@
 	 * @param $scope.lang
 	 *            from ng-repeat
 	 */
-	zaa.controller("NavItemController", function($scope, $http, $timeout, NewMenuService, CmsLayoutService) {
+	zaa.controller("NavItemController", function($scope, $http, $timeout, ServiceMenuData) {
 		
 		$scope.NavController = $scope.$parent;
+		
+		// serviceMenuData inheritance
+		
+		$scope.menuDataReload = function() {
+			return ServiceMenuData.load(true);
+		}
+		
+		// app
 		
 		$scope.showContainer = false;
 		
@@ -895,7 +902,7 @@
 				headers
 			).then(function successCallback(response) {
 				//Materialize.toast('<span> Die Seite «'+itemCopy.title+'» wurde aktualisiert.</span>', 2000);
-				NewMenuService.get(true);
+				$scope.menuDataReload();
 				$scope.refresh();
 				$scope.toggleSettings();
 			}, function errorCallback(response) {
@@ -908,10 +915,6 @@
 			$scope.settings = !$scope.settings;
 		};
 	
-		CmsLayoutService.data.$promise.then(function(response) {
-			$scope.layouts = response;
-		})
-		
 		$scope.typeDataCopy = [];
 		
 		$scope.typeData = [];
