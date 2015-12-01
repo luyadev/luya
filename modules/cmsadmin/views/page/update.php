@@ -325,7 +325,7 @@
                         </div>
                         <!-- /PAGE__HEADER -->
 
-                         PAGE__CONTENT--SETTINGS
+                        <!-- PAGE__CONTENT--SETTINGS-->
                         <form class="page__content page__content--settings" ng-show="settings" ng-switch on="itemCopy.nav_item_type">
 
                             <div class="row">
