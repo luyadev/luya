@@ -828,6 +828,16 @@
 			});
 		}
 		
+		$scope.trash = function() {
+	    	if (confirm('Are you sure you want to delete this page?')) {
+	    		$http.get('admin/api-cms-nav/delete', { params : { navId : $scope.navData.id }}).success(function(response) {
+	    			//NewMenuService.get(true);
+	    			$scope.isDeleted = true;
+	    			$scope.menuDataReload();
+	    		});
+	    	}
+	    };
+		
 		/* properties --> */
 		
 		/*
