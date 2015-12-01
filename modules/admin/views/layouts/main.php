@@ -33,6 +33,27 @@ $this->beginPage()
 <?php $this->beginBody() ?>
 <!-- ANGULAR SCRIPTS -->
 
+<div class="loading-overlay" ng-show="luyaIsLoading">
+    <div class="loading-overlay__content">
+        <h3 class="loading-overlay__title">
+            Der Server verarbeitet Ihre Daten. <br />
+            Bitte warten Sie einen Augenblick.
+        </h3>
+
+        <div class="loading-overlay__loader">
+            <div class="spinner">
+                <div class="rect1"></div><!--
+                --><div class="rect2"></div><!--
+                --><div class="rect3"></div><!--
+                --><div class="rect4"></div><!--
+                --><div class="rect5"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
 <script type="text/ng-template" id="modal">
     <div class="modal__wrapper" ng-show="!isModalHidden">
         <div class="modal">
@@ -205,76 +226,6 @@ $this->beginPage()
 
                 <div class="alert alert--danger" ng-show="errorMsg" style="clear:both;">Fehler beim Hochladen der Datei: {{errorMsg}}</div>
 
-                <div class="modal modal--bottom-sheet" ng-class="{ 'modal--active' : uploading && !serverProcessing }">
-
-                    <div class="row">
-                        <div class="col s12">
-                            <ul class="collection">
-                                <li class="collection-item file" ng-repeat="file in uploadingfiles" ng-class="{ 'file--completed' : file.processed }">
-                                    <b>{{file.name}}</b>
-                                    <div class="file__progress progress">
-                                        <div class="determinate" style="width: {{file.progress}}%"></div>
-                                    </div>
-                                    <i class="file__icon material-icons">check</i>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="filemanager__upload-overlay" ng-show="uploading || serverProcessing">
-                    <div class="filemanager__upload-content">
-                        <h3 class="filemanager__upload-title" ng-show="serverProcessing">
-                            Der Server verarbeitet Ihre Daten. <br />
-                            Bitte warten Sie einen Augenblick.
-                        </h3>
-
-                        <div class="filemanager__upload-loader preloader-wrapper big active" ng-show="serverProcessing">
-                            <div class="spinner-layer spinner-blue">
-                                <div class="circle-clipper left">
-                                    <div class="circle"></div>
-                                </div><div class="gap-patch">
-                                    <div class="circle"></div>
-                                </div><div class="circle-clipper right">
-                                    <div class="circle"></div>
-                                </div>
-                            </div>
-
-                            <div class="spinner-layer spinner-red">
-                                <div class="circle-clipper left">
-                                    <div class="circle"></div>
-                                </div><div class="gap-patch">
-                                    <div class="circle"></div>
-                                </div><div class="circle-clipper right">
-                                    <div class="circle"></div>
-                                </div>
-                            </div>
-
-                            <div class="spinner-layer spinner-yellow">
-                                <div class="circle-clipper left">
-                                    <div class="circle"></div>
-                                </div><div class="gap-patch">
-                                    <div class="circle"></div>
-                                </div><div class="circle-clipper right">
-                                    <div class="circle"></div>
-                                </div>
-                            </div>
-
-                            <div class="spinner-layer spinner-green">
-                                <div class="circle-clipper left">
-                                    <div class="circle"></div>
-                                </div><div class="gap-patch">
-                                    <div class="circle"></div>
-                                </div><div class="circle-clipper right">
-                                    <div class="circle"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
             </div>
 
             <div class="row">
@@ -348,37 +299,39 @@ $this->beginPage()
         </div>
         <!-- FILES & FOLDERS -->
 
-            <div class="filemanager__toolbar filemanager__toolbar--bottom">
+        <div class="filemanager__toolbar filemanager__toolbar--bottom">
 
-                <label class="floating-button-label left" ngf-select ngf-multiple="true" ng-model="uploadingfiles">
-                            <span class="btn-floating">
-                                <i class="material-icons">file_upload</i>
-                            </span>
-                    <span class="floating-button-label__label">Datei hinzufügen</span>
-                </label>
+            <label class="floating-button-label left" ngf-select ngf-multiple="true" ng-model="uploadingfiles">
+                        <span class="btn-floating">
+                            <i class="material-icons">file_upload</i>
+                        </span>
+                <span class="floating-button-label__label">Datei hinzufügen</span>
+            </label>
 
-                <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
-                <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove">Verschieben nach</button>
+            <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> markierte Dateien löschen</button>
+            <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove">Verschieben nach</button>
 
-                <div class="alert alert--danger" ng-show="errorMsg" style="clear:both;">Fehler beim Hochladen der Datei: {{errorMsg}}</div>
+            <div class="alert alert--danger" ng-show="errorMsg" style="clear:both;">Fehler beim Hochladen der Datei: {{errorMsg}}</div>
 
-                <div class="modal modal--bottom-sheet" ng-class="{ 'modal--active' : uploading && !serverProcessing }">
+        </div>
 
-                    <div class="row">
-                        <div class="col s12">
-                            <ul class="collection">
-                                <li class="collection-item file" ng-repeat="file in uploadingfiles" ng-class="{ 'file--completed' : file.processed }">
-                                    <b>{{file.name}}</b>
-                                    <div class="file__progress progress">
-                                        <div class="determinate" style="width: {{file.progress}}%"></div>
-                                    </div>
-                                    <i class="file__icon material-icons">check</i>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+        <div class="modal modal--bottom-sheet modal--full-width" ng-class="{ 'modal--active' : uploading && !serverProcessing }">
 
+            <div class="row">
+                <div class="col s12">
+                    <ul class="collection">
+                        <li class="collection-item file" ng-repeat="file in uploadingfiles" ng-class="{ 'file--completed' : file.processed }">
+                            <b>{{file.name}}</b>
+                            <div class="file__progress progress">
+                                <div class="determinate" style="width: {{file.progress}}%"></div>
+                            </div>
+                            <i class="file__icon material-icons">check</i>
+                        </li>
+                    </ul>
                 </div>
+            </div>
+
+        </div>
 
     </div>
 
