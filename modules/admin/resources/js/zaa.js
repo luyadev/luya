@@ -175,7 +175,7 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 				
 				timeoutPromise = $timeout(function() {
 					state = true;
-				}, 650);
+				}, 2000);
 			},
 			stop : function() {
 				$timeout.cancel(timeoutPromise);
