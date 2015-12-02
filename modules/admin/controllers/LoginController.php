@@ -101,8 +101,7 @@ class LoginController extends \admin\base\Controller
             }
         }
 
-        $this->view->registerJs("$('#email').focus();");
-        $this->view->registerJs("observeLogin('#loginForm', '".Url::toAjax('admin/login/async')."', '".Url::toAjax('admin/login/async-token')."');");
+        $this->view->registerJs("$(function(){ $('#email').focus(); observeLogin('#loginForm', '".Url::toAjax('admin/login/async')."', '".Url::toAjax('admin/login/async-token')."'); });", \luya\web\View::POS_END);
 
         return $this->render('index', ['model' => $model]);
     }
