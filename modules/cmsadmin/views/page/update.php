@@ -431,6 +431,7 @@
                     <div class="blockholder__search" ng-class="{'blockholder__search--active': searchQuery}">
                         <input class="blockholder__input" type="text" ng-model="searchQuery" value="" id="blockholderSearch" />
                         <label class="blockholder__search-icon" for="blockholderSearch"><i class="material-icons">search</i></label>
+                        <div ng-show="searchQuery.length > 0" ng-click="searchQuery=''" style="position: absolute; display:inline-block;"><i class="material-icons">close</i></div>
                     </div>
                     <div class="blockholder__group" ng-repeat="item in blocksData">
                         <b class="blockholder__group-title">{{item.group.name}}</b>
