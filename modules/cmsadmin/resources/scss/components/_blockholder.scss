@@ -33,7 +33,7 @@
 	width: 100%;
 	background-color: transparent;
 	border: 1px solid #fff;
-	padding: 6px 10px 5px 30px;
+	padding: 6px 15px 5px 30px;
 	outline: none;
 }
 
@@ -43,18 +43,30 @@
 	background-color: #fff;
 }
 
-.blockholder__search-icon {
-	position: absolute;
-	top: 0;
-	left: 0;
-	padding-top: 4px;
-	height: 100%;
-	padding-left: 4px;
-	cursor: pointer;
+ .blockholder__icon {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    cursor: pointer;
+
+    &.blockholder__icon--search {
+        left: 0;
+        padding-top: 4px;
+        padding-left: 4px;
+    }
+    &.blockholder__icon--cancel {
+        right: 0;
+        color: black;
+        padding-top: 2px;
+        padding-right: 2px;
+        i {
+        	font-size: 16px;
+        }
+    }
 }
 
-.blockholder__input:focus + .blockholder__search-icon,
-.blockholder__search--active .blockholder__search-icon {
+.blockholder__input:focus + .blockholder__icon--search,
+.blockholder__search--active .blockholder__icon--search {
 	color: #000;
 }
 

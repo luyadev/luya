@@ -4,6 +4,7 @@ LUYA CHANGELOG
 1.0.0-beta2 (in progress)
 -------------------------
 
+- `#601`Added cancel/clear option to the block search field
 - **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide.
 - **[BC BREAK]** removed luya\web\Composition::set method.
 - `#600` added LuyaLoading service to start and stop loading overlay.
