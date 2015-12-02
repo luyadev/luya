@@ -1,4 +1,4 @@
-{% if extras.imageSource and vars.text %}'.
+{% if extras.imageSource and vars.text %}
     <div>
         <img class="{% if extras.imagePosition == "left" %}pull-left{% else %}pull-right{% endif %} img-responsive" src="{{ extras.imageSource }}" style="{% if extras.imagePosition == "right" %}margin-left:{{ extras.margin }}{% else %}margin-right:{{ extras.margin }}{% endif %};margin-bottom:{{ extras.margin }}; max-width: 50%;">
         <div>
