@@ -34,7 +34,7 @@ class Twig extends \yii\base\Component
                 return Yii::$app->menu->current;
             },
             'menuCurrentLevel' => function ($level) {
-                return Yii::$app->menu->currentLevel($level);
+                return Yii::$app->menu->getLevelCurrent($level);
             },
             'asset' => function ($name) {
                 return Yii::$app->getAssetManager()->getBundle($name);
