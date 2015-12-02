@@ -4,6 +4,9 @@ LUYA CHANGELOG
 1.0.0-beta2 (in progress)
 -------------------------
 
+- `#607`Added new audio-block for soundcloud embeded player
+- `#609`Added new link-button-block
+- `#608`Added new block for a simple horizontal line
 - `#601`Added cancel/clear option to the block search field
 - **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide.
 - **[BC BREAK]** removed luya\web\Composition::set method.
