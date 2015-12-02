@@ -49,6 +49,15 @@ class ImageTextBlock extends \cmsadmin\base\Block
                 ],
             ],
             'cfgs' => [
+                ['var' => 'heading', 'label' => 'Überschrift', 'type' => 'zaa-text'],
+                ['var' => 'headingType', 'label' => 'Grösse', 'type' => 'zaa-select', 'initvalue' => 'h3', 'options' => [
+                        ['value' => 'h1', 'label' => 'Überschrift 1'],
+                        ['value' => 'h2', 'label' => 'Überschrift 2'],
+                        ['value' => 'h3', 'label' => 'Überschrift 3'],
+                        ['value' => 'h4', 'label' => 'Überschrift 4'],
+                        ['value' => 'h5', 'label' => 'Überschrift 5'],
+                    ],
+                ],
                 ['var' => 'margin', 'label' => 'Abstand des Bildes zum Text', 'type' => 'zaa-select', 'initvalue' => $this->defaultMargin, 'options' => [
                             ['value' => '5px', 'label' => '0 Pixel'],
                             ['value' => '10px', 'label' => '10 Pixel'],
@@ -63,7 +72,17 @@ class ImageTextBlock extends \cmsadmin\base\Block
                         ['value' => '1', 'label' => 'Markdown Text'],
                     ],
                 ],
+                ['var' => 'btnLabel', 'label' => 'Button Label', 'type' => 'zaa-text'],
+                ['var' => 'btnHref', 'label' => 'Button Link Adresse', 'type' => 'zaa-text'],
+                ['var' => 'targetBlank', 'label' => 'Link in einem neuen Fenster öffnen', 'type' => 'zaa-checkbox'],
             ],
+        ];
+    }
+
+    public function getFieldHelp()
+    {
+        return [
+            'textType' => 'Texttyp bezieht sich aus­schließ­lich auf den Text und nicht auf die Überschrift.',            
         ];
     }
 
@@ -102,13 +121,7 @@ class ImageTextBlock extends \cmsadmin\base\Block
 
     public function twigFrontend()
     {
-        return  '{% if extras.imageSource and vars.text %}'.
-                    '<div>'.
-                        '<img class="{% if extras.imagePosition == "left" %}pull-left{% else %}pull-right{% endif %} img-responsive" src="{{ extras.imageSource }}" style="{% if extras.imagePosition == "right" %}margin-left:{{ extras.margin }}{% else %}margin-right:{{ extras.margin }}{% endif %};margin-bottom:{{ extras.margin }}; max-width: 50%;">'.
-                        '<div>{% if cfgs.textType == 1 %}{{ extras.text }}{% else %}<p>{{ extras.text|nl2br }}</p>{% endif %}</div>'.
-                    '</div>'.
-                    '<br style="clear:both" />'.
-                '{% endif %}';
+        return  $this->render();
     }
 
     public function twigAdmin()

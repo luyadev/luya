@@ -32,7 +32,7 @@ class AudioBlock extends \cmsadmin\base\Block
     public function getFieldHelp()
     {
         return [
-            'soundUrl' => 'Bisher wird nur SoundCloud Embeded Code unterstützt.',            
+            'soundUrl' => 'Fügen Sie hier den Embed Code von soundcloud.com ein.',            
         ];
     }
 
