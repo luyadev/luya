@@ -110,6 +110,11 @@ class CmslayoutImporter extends \luya\base\Importer
             }
 
             foreach ($holder as $var => $value) {
+                
+                if ($var == "label") {
+                    continue;
+                }
+                
                 if (!array_key_exists($var, $a2[$key])) {
                     return false;
                 }
