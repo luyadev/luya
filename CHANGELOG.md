@@ -4,6 +4,7 @@ LUYA CHANGELOG
 1.0.0-beta2 (in progress)
 -------------------------
 
+- `#612`Added headline and link-button to imagetextblock cfgs
 - `#607`Added new audio-block for soundcloud embeded player
 - `#609`Added new link-button-block
 - `#608`Added new block for a simple horizontal line
