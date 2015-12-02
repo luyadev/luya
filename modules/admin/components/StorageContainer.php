@@ -172,11 +172,11 @@ class StorageContainer extends \yii\base\Component
         
         if (is_uploaded_file($fileSource)) {
             if (!@move_uploaded_file($fileSource, $savePath)) {
-                throw new Exception("error while moving uploaded file from $sourceFile to $savePath");
+                throw new Exception("error while moving uploaded file from $fileSource to $savePath");
             }
         } else {
             if (!@copy($fileSource, $savePath)) {
-                throw new Exception("error while copy file from $sourceFile to $savePath.");
+                throw new Exception("error while copy file from $fileSource to $savePath.");
             }
         }
         
