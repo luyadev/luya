@@ -1,3 +1,4 @@
+<? $this->beginPage(); ?>
 <html>
     <head>
         <title>Luya &mdash; <?= $this->title; ?></title>
