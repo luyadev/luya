@@ -239,19 +239,22 @@
 
         <div class="treeview__drop" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onBeforeDrop()', multiple : true}">
         </div>
-        <a class="treeview__button treeview__link" ng-click="!showDrag && go(data.id)" title="id={{data.id}}" alt="id={{data.id}}" ng-class="{'treeview__link--active' : isCurrentElement(data.id), 'treeview__link--is-online' : data.is_offline == '0', 'treeview__link--is-hidden' : data.is_hidden == '1', 'treeview__link--draggable' : showDrag}" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__link--hover' }" jqyoui-droppable="{onDrop: 'onChildDrop()', multiple : true}">
+        <a class="treeview__button treeview__link" ng-click="!showDrag && go(data.id)" title="id={{data.id}}" alt="id={{data.id}}" ng-class="{'treeview__link--active' : isCurrentElement(data.id), 'treeview__link--is-online' : data.is_offline == '0', 'treeview__link--is-hidden' : data.is_hidden == '1', 'treeview__link--draggable' : showDrag, 'treeview__link--hidden' : data.is_hidden == '1'}" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__link--hover' }" jqyoui-droppable="{onDrop: 'onChildDrop()', multiple : true}">
             <div class="treeview__icon-holder">
                 <!-- show if drag is active -->
-                <i ng-show="showDrag" class="material-icons treeview__icon treeview__icon--move">open_with</i>
+                <!--<i ng-show="showDrag" class="material-icons treeview__icon treeview__icon--move">open_with</i>-->
 
-                <!-- show if drag is not active-->
-                <i ng-show="!showDrag && data.is_hidden == '0'" class="material-icons treeview__icon treeview__icon--visible" title="Sichtbarkeit: Sichtbar">visibility</i>
-                <i ng-show="!showDrag && data.is_hidden == '1'" class="material-icons treeview__icon treeview__icon--invisible" title="Sichtbarkeit: Unsichtbar">visibility_off</i>
+                <i class="material-icons treeview__toggler treeview__toggler--subnav-closed">keyboard_arrow_down</i>
+
             </div>
 
             <span>
-                {{data.title}} <i ng-show="data.is_home==1" class="material-icons treeview__text-icon">home</i>
+                {{data.title}}
             </span>
+
+            <div class="treeview__info-icons">
+                <i ng-show="data.is_home==1" class="material-icons treeview__text-icon">home</i>
+            </div>
         </a>
 
         <ul class="treeview__list" role="menu">

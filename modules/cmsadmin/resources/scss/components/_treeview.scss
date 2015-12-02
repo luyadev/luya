@@ -21,8 +21,9 @@ $treeview--padding: 5px;
 	}
 
 	span {
-		display: inline-block;
+		word-break: break-word;
 		margin-top: 2px;
+		width: calc(100% - 50px);
 	}
 
 	&:hover {
@@ -37,6 +38,7 @@ $treeview--padding: 5px;
 .treeview__icon-holder {
 	display: inline-block;
 	padding: 0 4px 0 8px;
+	width: 28px;
 }
 
 .treeview__button--create,
@@ -114,6 +116,11 @@ $treeview--padding: 5px;
 	position: relative;
 	cursor: pointer;
 	user-select: none;
+	padding-right: 10px;
+
+	&.treeview__link--hidden {
+		opacity: 0.5;
+	}
 
 	&.treeview__link--active {
 		background-color: $grey--darken;
@@ -123,7 +130,7 @@ $treeview--padding: 5px;
 		content: "";
 		display: block;
 		position: absolute;
-		left: 0;
+		right: 0;
 		top: 0;
 		bottom: 0;
 		width: 5px;
@@ -140,6 +147,13 @@ $treeview--padding: 5px;
 	}
 }
 
+.treeview__info-icons {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
 .treeview--drag-active .treeview__link {
 	cursor: move;
 }
@@ -153,5 +167,14 @@ $treeview--padding: 5px;
 
 	&.treeview__drop--hover {
 		background-color: $green--accent-4;
+	}
+}
+
+.treeview__toggler {
+	transform: rotate(0deg);
+	transition: 0.25s ease transform;
+
+	&.treeview__toggler--subnav-closed {
+		transform: rotate(-90deg);
 	}
 }
