@@ -157,6 +157,39 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 	    }
 	});
 	
+	zaa.factory("LuyaLoading", function($timeout) {
+	
+		var state = false;
+		var stateMessage = null;
+		var timeoutPromise = null;
+		
+		return {
+			start : function(myMessage) {
+				if (myMessage == undefined) {
+					stateMessage = 'Der Server verarbeitet Ihre Daten. Bitte warten Sie einen Augenblick.';
+				} else {
+					stateMessage = myMessage;
+				}
+				// rm previous timeouts
+				$timeout.cancel(timeoutPromise);
+				
+				timeoutPromise = $timeout(function() {
+					state = true;
+				}, 650);
+			},
+			stop : function() {
+				$timeout.cancel(timeoutPromise);
+				state = false;
+			},
+			getStateMessage : function() {
+				return stateMessage;
+			},
+			getState : function() {
+				return state;
+			}
+		}
+	});
+	
 	zaa.factory("AdminClassService", function() {
 		
 		var service = [];

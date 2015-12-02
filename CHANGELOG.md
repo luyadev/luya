@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 - **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide.
 - **[BC BREAK]** removed luya\web\Composition::set method.
+- `#600` added LuyaLoading service to start and stop loading overlay.
 - `#605` fixed issue where cms layout labels have been overriden on every import process.
 - `#600` generalized filemanger loading overlay to .loading-overlay. This overlay can now be used context-independent.
 - `#501` removed for / id assignment and resolved issue with ng-click=""

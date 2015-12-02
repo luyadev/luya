@@ -2,7 +2,9 @@
 	"use strict";
 	
 	// CrudController.js
-	zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminLangService) {
+	zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminLangService, LuyaLoading) {
+		
+		LuyaLoading.start();
 		
 		/*
 		 * 6.10.2015: remove dialogs, add variable toggler to display. added ngSwitch
@@ -22,8 +24,6 @@
 		};
 		
 		/* old definitions */
-		
-		$scope.loading = true;
 		
 		$scope.parentController = $scope.$parent;
 		
@@ -172,9 +172,9 @@
 		};
 	
 		$scope.loadList = function() {
-			$scope.loading = true;
+			LuyaLoading.start();
 			$http.get($scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString).success(function(data) {
-				$scope.loading = false;
+				LuyaLoading.stop();
 				$scope.data.list = data;
 			});
 			
@@ -464,8 +464,10 @@
 	
 	// LayoutMenuController.js
 	
-	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, CacheReloadService) {
+	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, CacheReloadService, LuyaLoading) {
 	
+		$scope.LuyaLoading = LuyaLoading;
+		
 		$scope.reload = function() {
 			CacheReloadService.reload();
 		}

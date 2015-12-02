@@ -18,18 +18,7 @@
 
 <div ng-controller="<?=$config->hash; ?>" ng-init="init()">
 
-    <div class="card-panel" ng-show="loading">
-        <div class="preloader-wrapper big active">
-            <div class="spinner-layer spinner-blue-only">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-   
-
-    <div ng-switch="crudSwitchType" ng-show="!loading">
+    <div ng-switch="crudSwitchType">
 
         <div class="tabs">
             <ul>

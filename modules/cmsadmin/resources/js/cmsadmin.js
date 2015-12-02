@@ -701,7 +701,9 @@
 	
 	// update.js
 	
-	zaa.controller("NavController", function($scope, $filter, $stateParams, $http, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, AdminClassService, AdminLangService) {
+	zaa.controller("NavController", function($scope, $filter, $stateParams, $http, LuyaLoading, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, AdminClassService, AdminLangService) {
+		
+		LuyaLoading.start()
 		
 		$scope.AdminLangService = AdminLangService;
 		
@@ -1037,7 +1039,7 @@
 		
 	});
 	
-	zaa.controller("NavItemTypePageController", function($scope, $http, $timeout) {
+	zaa.controller("NavItemTypePageController", function($scope, $http, $timeout, LuyaLoading) {
 		
 		$scope.NavItemController = $scope.$parent;
 		
@@ -1063,6 +1065,7 @@
 						$scope.container.__placeholders[i]['__nav_item_page_block_items'] = new_ph[i]['__nav_item_page_block_items'];
 					}
 				}
+				LuyaLoading.stop();
 				$timeout(function() {
 					$scope.$parent.$parent.$parent.enableSidebar();
 				}, 100);

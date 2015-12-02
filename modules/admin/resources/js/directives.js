@@ -1137,7 +1137,7 @@
 	/**
 	 * FILE MANAGER DIR
 	 */
-	zaa.directive("storageFileManager", function(Upload, ServiceFoldersData, ServiceFilesData) {
+	zaa.directive("storageFileManager", function(Upload, ServiceFoldersData, ServiceFilesData, LuyaLoading) {
 		return {
 			restrict : 'E',
 			transclude : false,
@@ -1176,8 +1176,8 @@
 				$scope.$watch('uploadingfiles', function (uploadingfiles) {
 			        if (uploadingfiles != null) {
 						$scope.uploadResults = 0;
-						$scope.uploading = true;
-			            for (var i = 0; i < uploadingfiles.length; i++) {
+						LuyaLoading.start('Ihr Daten werden hochgeladen und verarbeitet. Dies kann einige Minuten dauern.');
+						for (var i = 0; i < uploadingfiles.length; i++) {
 			                $scope.errorMsg = null;
 			                (function (uploadingfiles) {
 			                	$scope.uploadUsingUpload(uploadingfiles);
@@ -1189,10 +1189,8 @@
 				$scope.$watch('uploadResults', function(n, o) {
 					if ($scope.uploadingfiles != null) {
 						if (n == $scope.uploadingfiles.length) {
-							$scope.serverProcessing = true;
 							$scope.filesDataReload().then(function() {
-								$scope.serverProcessing = false;
-								$scope.uploading = false;
+								LuyaLoading.stop();
 							});
 						}
 					}

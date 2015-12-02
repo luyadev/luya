@@ -27,10 +27,13 @@
 	"use strict";
 	
 zaa.config(function(resolverProvider) {
-	resolverProvider.addCallback(function(ServiceMenuData, ServiceBlocksData, ServiceLayoutsData) {
-		ServiceMenuData.load();
+	resolverProvider.addCallback(function(ServiceMenuData, ServiceBlocksData, ServiceLayoutsData, LuyaLoading) {
+		LuyaLoading.start();
 		ServiceBlocksData.load();
 		ServiceLayoutsData.load();
+		ServiceMenuData.load().then(function(r) {
+			LuyaLoading.stop();
+		});
 	});
 });
 

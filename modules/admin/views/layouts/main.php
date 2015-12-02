@@ -24,20 +24,19 @@ $this->beginPage()
             display: none !important;
         }
     </style>
-    <?php $this->head() ?>
+    <?php $this->head(); ?>
     <script>
         var authToken = '<?=$user->getAuthToken();?>';
     </script>
 </head>
 <body ng-cloak>
-<?php $this->beginBody() ?>
+<?php $this->beginBody(); ?>
 <!-- ANGULAR SCRIPTS -->
 
-<div class="loading-overlay" ng-show="luyaIsLoading">
+<div class="loading-overlay" ng-show="LuyaLoading.getState()">
     <div class="loading-overlay__content">
         <h3 class="loading-overlay__title">
-            Der Server verarbeitet Ihre Daten. <br />
-            Bitte warten Sie einen Augenblick.
+            {{LuyaLoading.getStateMessage()}}
         </h3>
 
         <div class="loading-overlay__loader">
@@ -314,25 +313,6 @@ $this->beginPage()
             <div class="alert alert--danger" ng-show="errorMsg" style="clear:both;">Fehler beim Hochladen der Datei: {{errorMsg}}</div>
 
         </div>
-
-        <div class="filemanager__upload-modal modal modal--bottom-sheet modal--full-width" ng-class="{ 'modal--active' : uploading && !serverProcessing }">
-
-            <div class="row">
-                <div class="col s12">
-                    <ul class="collection">
-                        <li class="collection-item file" ng-repeat="file in uploadingfiles" ng-class="{ 'file--completed' : file.processed }">
-                            <b>{{file.name}}</b>
-                            <div class="file__progress progress">
-                                <div class="determinate" style="width: {{file.progress}}%"></div>
-                            </div>
-                            <i class="file__icon material-icons">check</i>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-
     </div>
 
 </script>
@@ -510,7 +490,7 @@ $this->beginPage()
             </div>
         </div>
     </div>
-
+    
     <!-- ANGULAR-VIEW -->
     <div class="luya-container__angular-placeholder module-{{currentItem.moduleId}}" ui-view></div>
     <!-- /ANGULAR-VIEW -->
