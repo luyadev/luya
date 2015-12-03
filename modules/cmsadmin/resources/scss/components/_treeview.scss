@@ -112,7 +112,7 @@ $treeview--padding: 5px;
 }
 
 .treeview__link {
-	background-color: $grey;
+	background-color: darken($grey, 10);
 	position: relative;
 	cursor: pointer;
 	user-select: none;
@@ -122,8 +122,9 @@ $treeview--padding: 5px;
 		opacity: 0.5;
 	}
 
-	&.treeview__link--active {
-		background-color: $grey--darken;
+	&.treeview__link--active,
+	&:hover {
+		background-color: #b3e5fc;
 	}
 
 	&:after {
