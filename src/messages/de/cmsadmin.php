@@ -204,6 +204,7 @@ return [
     // view_update
     
     'view_update_drop_blocks' => 'Inhaltsblöcke hier platzieren',
+    'view_update_blockcontent' => 'Block content',
     'view_update_settings' => 'Einstellungen',
     'view_update_btn_save' => 'Speichern',
     'view_update_btn_cancel' => 'Abbrechen',

@@ -204,6 +204,7 @@ return [
     // view_update
     
     'view_update_drop_blocks' => 'Drop the Content blocks here',
+    'view_update_blockcontent' => 'Blockinhalte',
     'view_update_settings' => 'Settings',
     'view_update_btn_save' => 'Save',
     'view_update_btn_cancel' => 'Abort',
