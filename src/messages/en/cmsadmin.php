@@ -157,9 +157,9 @@ return [
     // VideoBlock
     'block_video_name' => 'Video',
     'block_video_url_label' => 'Video URL',
-    'block_video_controls_label' => 'Hide vide controlls?',
+    'block_video_controls_label' => 'Hide video controls?',
     'block_video_help_url' => 'YouTube and Vimeo Url are supported.',
-    'block_video_help_controls' => 'Diese option is supported only by YouTube Videos.',
+    'block_video_help_controls' => 'This option is supported only by YouTube Videos.',
     'block_video_no_video' => 'No valid Video URL has been provided yet.',
 
     // WysiwygBlock
@@ -205,6 +205,7 @@ return [
     
     'view_update_drop_blocks' => 'Drop the Content blocks here',
     'view_update_blockcontent' => 'Blockinhalte',
+    'view_update_config' => 'Optional Configurations',
     'view_update_settings' => 'Settings',
     'view_update_btn_save' => 'Save',
     'view_update_btn_cancel' => 'Abort',
