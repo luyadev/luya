@@ -131,7 +131,7 @@ class ImageTextBlock extends \cmsadmin\base\Block
         return  '{% if not extras.imageSource %}'.
                     '<span class="block__empty-text">Es wurde noch kein Bild Hochgeladen. </span>'.
                 '{% endif %}'.
-                '{% if not vars.text|nl2br %}'.
+                '{% if not vars.text %}'.
                     '<span class="block__empty-text">Es wurde noch kein Text angegeben.</span>'.
                 '{% endif %}'.
                 '{% if extras.imageSource and vars.text %}'.
