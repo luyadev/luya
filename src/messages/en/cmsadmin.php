@@ -5,42 +5,42 @@ return [
 
     // AudioBlock
     'block_audio_name' => 'Audio',
-    'block_audio_help_soundurl' => 'Fügen Sie hier den Embed Code von soundcloud.com ein.',
+    'block_audio_help_soundurl' => 'Paste your embed code from soundcloud.com here.',
 
     // DevBlock
     'block_dev_name' => 'Design-Tester',
 
     // FileListBlock
-    'block_file_list_name' => 'Dateiliste',
-    'block_file_list_files_label' => 'Dateien',
-    'block_file_list_files_showtype_label' => 'Dateityp anzeigen?',
-    'block_file_list_showtype_yes' => "Ja",
-    'block_file_list_showtype_no' => "Nein",
+    'block_file_list_name' => 'Fileslist',
+    'block_file_list_files_label' => 'Files',
+    'block_file_list_files_showtype_label' => 'Display filetype?',
+    'block_file_list_showtype_yes' => "Yes",
+    'block_file_list_showtype_no' => "No",
 
     // FormBlock
-    'block_form_name' => 'Formular',
+    'block_form_name' => 'Form',
     'block_form_default_name_label' => 'Name',
-    'block_form_default_name_placeholder' => 'Vor- und Nachname',
-    'block_form_default_name_error' => 'Bitte geben Sie einen Namen ein',
+    'block_form_default_name_placeholder' => 'First and Lastname',
+    'block_form_default_name_error' => 'Please enter your name here',
     'block_form_default_email_label' => 'Email',
-    'block_form_default_email_placeholder' => 'beispiel@beispiel.ch',
-    'block_form_default_email_error' => 'Bitte geben Sie eine Emailadresse ein',
-    'block_form_default_message_label' => 'Nachricht',
-    'block_form_default_message_error' => 'Bitte geben Sie eine Nachricht ein',
-    'block_form_default_send_label' => 'Absenden',
-    'block_form_default_send_error' => 'Leider ist ein Fehler beim Senden der Nachricht aufgetreten.',
-    'block_form_default_send_success' => 'Vielen Dank! Wir werden uns mit Ihnen in Verbindung setzen.',
-    'block_form_default_mail_subject' => 'Kontaktanfrage',
+    'block_form_default_email_placeholder' => 'example@example.com',
+    'block_form_default_email_error' => 'Please enter a valid Email adress',
+    'block_form_default_message_label' => 'Message',
+    'block_form_default_message_error' => 'Please enter a messag',
+    'block_form_default_send_label' => 'Submit',
+    'block_form_default_send_error' => 'Sorry we have exprience an error while sending your message.',
+    'block_form_default_send_success' => 'Thanks for your request.',
+    'block_form_default_mail_subject' => 'Contact request',
 
     // HtmlBlock
-    'block_html_html_label' => 'HTML-Inhalt',
-    'block_html_no_content' => 'Es wurde noch kein HTML Code eingegeben.',
+    'block_html_html_label' => 'HTML code',
+    'block_html_no_content' => 'No HTML code have been added yet.',
 
     // ImageBlock
-    'block_image_name' => 'Bild',
-    'block_image_imageid_label' => 'Bild Upload',
-    'block_image_caption_label' => 'Bildunterschrift',
-    'block_image_no_image' => 'Es wurde noch kein Bild Hochgeladen.',
+    'block_image_name' => 'Image',
+    'block_image_imageid_label' => 'Image upload',
+    'block_image_caption_label' => 'Image caption',
+    'block_image_no_image' => 'No images have been uploaded so far.',
 
     // ImageTextBlock
     'block_image_text_name' => 'Text mit Bild',
