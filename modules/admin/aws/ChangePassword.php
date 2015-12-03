@@ -2,6 +2,8 @@
 
 namespace admin\aws;
 
+use admin\Module;
+
 class ChangePassword extends \admin\ngrest\base\ActiveWindow
 {
     public $module = 'admin';
@@ -19,7 +21,7 @@ class ChangePassword extends \admin\ngrest\base\ActiveWindow
         $user = $model->findOne($this->getItemId());
         $user->scenario = 'changepassword';
         if ($user->changePassword($newpass, $newpasswd)) {
-            return $this->response(true, ['message' => 'we have successfully changed your password!']);
+            return $this->response(true, ['message' => Module::t('aws_changepassword_succes')]);
         } else {
             return $this->response(false, $user->getFirstErrors());
         }

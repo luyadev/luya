@@ -107,4 +107,16 @@ return [
     'ngrest_crud_search_text' => 'Suchbegriff eingeben...',
     'ngrest_crud_rows_count' => 'Einträge',
     'ngrest_crud_btn_create' => 'Erstellen',
+    
+    // apis
+    'api_storage_image_upload_error' => 'Beim hochladen des Bildes ist folgender Fehler passiert \'{error}\'.',
+    'api_storage_file_upload_success' => 'file uploaded succesfully',
+    'api_sotrage_file_upload_error' => 'Beim hochladen der Datei ist folgender Fehler passiert \'{error}\'.',
+    'api_sotrage_file_upload_empty_error' => 'Es wurden keine Dateine zum hochladen gefunden. Keine daten gewählt.',
+    
+    // aws/changepassword
+    'aws_changepassword_info' => 'Geben Sie ein neues Passwort für den Benutzer ein. Das neue Passwort muss mindestens <strong>6 Zeichen</strong> lang sein.',
+    'aws_changepassword_succes' => 'Dein neues Passwort wurde erfolgreich verschlüsselt und angepasst.',
+    'aws_changepassword_new_pass' => 'Neues Passwort',
+    'aws_changepassword_new_pass_retry' => 'Neues Passwort wiederholen',
 ];

@@ -1,17 +1,17 @@
 <div ng-controller="ActiveWindowChangePassword">
-    <p>Geben Sie ein neues Passwort für den Benutzer ein. Das neue Passwort muss mindestens <strong>6 Zeichen</strong> lang sein.</p>
+    <p><?= \admin\Module::t('aws_changepassword_info'); ?></p>
     <div class="row">
         <div class="col s12">
             
             <div class="row">
                 <div class="input-field col s6">
                     <input id="newpass" type="password" ng-model="newpass" class="validate">
-                    <label for="newpass">Neues Passwort</label>
+                    <label for="newpass"><?= \admin\Module::t('aws_changepassword_new_pass'); ?></label>
                 </div>
                 
                 <div class="input-field col s6">
                     <input id="newpasswd" type="password" ng-model="newpasswd" class="validate">
-                    <label for="newpasswd">Passwort wiederholen</label>
+                    <label for="newpasswd"><?= \admin\Module::t('aws_changepassword_new_pass_retry'); ?></label>
                 </div>
             </div>
             
@@ -21,11 +21,11 @@
                 </ul>
             </div>
             
-            <button class="btn" ng-click="submit()" type="button">Speichern</button>
+            <button class="btn" ng-click="submit()" type="button"><?= \admin\Module::t('button_save'); ?></button>
             
         </div>
     </div>
     <div class="row">
-        <div class="alert alert--success" ng-show="submitted && !error">Das neue Passwort wurde erfolgreich gesetzt.</div>
+        <div class="alert alert--success" ng-show="submitted && !error">{{ transport.message }}</div>
     </div>
 </div>

@@ -11,6 +11,7 @@ use admin\models\StorageFolder;
 use admin\storage\FolderQuery;
 use admin\storage\ImageQuery;
 use admin\storage\FileQuery;
+use admin\Module;
 
 /**
  * @author nadar
@@ -67,7 +68,7 @@ class StorageController extends \admin\base\RestController
                 return ['error' => false, 'id' => $create->id];
             }
         } catch (Exception $err) {
-            return ['error' => true, 'message' => 'error while creating image: ' . $err->getMessage()];
+            return ['error' => true, 'message' => Module::t('api_storage_image_upload_error', ['error' => $err->getMessage()])];
         }
     }
     
@@ -105,13 +106,13 @@ class StorageController extends \admin\base\RestController
             }
             try {
                 $create = Yii::$app->storage->addFile($file['tmp_name'], $file['name'], Yii::$app->request->post('folderId', 0));
-                return ['upload' => true, 'message' => 'file uploaded succesfully'];
+                return ['upload' => true, 'message' => Module::t('api_storage_file_upload_succes')];
             } catch (Exception $err) {
-                return ['upload' => false, 'message' => $err->getMessage()];
+                return ['upload' => false, 'message' => Module::t('api_sotrage_file_upload_error', ['error' => $err->getMessage()])];
             }
         }
     
-        return ['upload' => false, 'message' => 'no files selected'];
+        return ['upload' => false, 'message' => Module::t('api_sotrage_file_upload_empty_error')];
     }
     
     public function actionFilemanagerMoveFiles()
