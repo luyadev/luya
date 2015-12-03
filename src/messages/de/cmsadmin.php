@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     // Blocks
 
     // AudioBlock
@@ -31,7 +30,6 @@ return [
     'block_form_default_send_label' => 'Absenden',
     'block_form_default_send_error' => 'Leider ist ein Fehler beim Senden der Nachricht aufgetreten.',
     'block_form_default_send_success' => 'Vielen Dank! Wir werden uns mit Ihnen in Verbindung setzen.',
-
     'block_form_default_mail_subject' => 'Kontaktanfrage',
 
     // HtmlBlock
@@ -119,7 +117,7 @@ return [
     'block_module_modulecontroller_label' => 'Controller Name (ohne Controller suffix)',
     'block_module_moduleaction_label' => 'Action Name (ohne action prefix)',
     'block_module_moduleactionargs_label' => 'Action Argumente (json: {"var":"value"})',
-    'block_module_no_module' => 'Es wurde nich kein Modul angegeben.',
+    'block_module_no_module' => 'Es wurde noch kein Modul angegeben.',
     'block_module_integration' => 'Modulintegration',
 
     // QuoteBlock
