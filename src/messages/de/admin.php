@@ -80,7 +80,6 @@ return [
     'layout_debug_php_ini_upload_max_file' => 'PHP upload_max_filesize', // no translation
     'layout_search_min_letters' => 'Bitte geben Sie einen Suchbegriff mit mindestens <b>drei Buchstaben</b> ein.',
     'layout_search_no_results' => 'Es wurden keine Ergebnisse gefunden.',
-    
     'layout_filemanager_upload_files' => 'Datei hinzufügen',
     'layout_filemanager_folder' => 'Ordner',
     'layout_filemanager_add_folder' => 'Ordner hinzufügen',

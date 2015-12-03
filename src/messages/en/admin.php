@@ -80,7 +80,11 @@ return [
     'layout_debug_php_ini_upload_max_file' => 'PHP upload_max_filesize', // no translation
     'layout_search_min_letters' => 'Please enter a search term with at least <b>three letters</b>.',
     'layout_search_no_results' => 'No entries where found.',
-
+    'layout_filemanager_upload_files' => 'Add file',
+    'layout_filemanager_folder' => 'Folder',
+    'layout_filemanager_add_folder' => 'Add folder',
+    'layout_filemanager_root_dir' => 'Root directory',
+    
     // aws/groupauth
     'aws_groupauth_select_all' => 'Mark all',
     'aws_groupauth_deselect_all' => 'Unmark all',
