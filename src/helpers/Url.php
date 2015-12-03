@@ -17,6 +17,11 @@ class Url extends \yii\helpers\Url
         return $url.(substr($url, -1) == $slash ? '' : $slash);
     }
 
+    public static function toInternal(array $routeParams)
+    {
+        return Yii::$app->getUrlManager()->internalCreateUrl($routeParams);
+    }
+    
     /**
      * Only stil exists to avoid bc break, fromer known as `to()` us `Url::toRoute(['/module/controller/action', 'arg1' => 'arg1value']);` instead.
      * Wrapper functions for the createUrl function of the url manager.
@@ -32,7 +37,7 @@ class Url extends \yii\helpers\Url
             $routeParams[$key] = $value;
         }
 
-        return yii::$app->urlManager->createUrl($routeParams);
+        return Yii::$app->getUrlManager()->createUrl($routeParams);
     }
 
     /**
@@ -51,6 +56,6 @@ class Url extends \yii\helpers\Url
             $params = null;
         }
 
-        return self::trailing(Yii::$app->urlManager->baseUrl).$route.$params;
+        return self::trailing(Yii::$app->getUrlManager()->baseUrl).$route.$params;
     }
 }

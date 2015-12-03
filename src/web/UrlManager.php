@@ -155,7 +155,7 @@ class UrlManager extends \yii\web\UrlManager
         return $replaceRoute;
     }
 
-    private function internalCreateUrl($params)
+    public function internalCreateUrl($params)
     {
         $originalParams = $params;
         // creata parameter where route contains a composition
