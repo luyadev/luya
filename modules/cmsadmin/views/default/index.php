@@ -5,11 +5,11 @@
 
         <div class="row">
             <div class="input input--radios col s12">
-                <label class="input__label">Seitentyp</label>
+                <label class="input__label"><?= \cmsadmin\Module::t('view_index_add_type'); ?></label>
                 <div class="input__field-wrapper">
-                    <input type="radio" ng-checked="data.nav_item_type == 1"><label ng-click="data.nav_item_type = 1">Seite</label><br />
-                    <input type="radio" ng-checked="data.nav_item_type == 2"><label ng-click="data.nav_item_type = 2; data.is_draft = 0">Modul</label><br />
-                    <input type="radio" ng-checked="data.nav_item_type == 3"><label ng-click="data.nav_item_type = 3; data.is_draft = 0">Weiterleitung</label><br />
+                    <input type="radio" ng-checked="data.nav_item_type == 1"><label ng-click="data.nav_item_type = 1"><?= \cmsadmin\Module::t('view_index_type_page'); ?></label><br />
+                    <input type="radio" ng-checked="data.nav_item_type == 2"><label ng-click="data.nav_item_type = 2; data.is_draft = 0"><?= \cmsadmin\Module::t('view_index_type_module'); ?></label><br />
+                    <input type="radio" ng-checked="data.nav_item_type == 3"><label ng-click="data.nav_item_type = 3; data.is_draft = 0"><?= \cmsadmin\Module::t('view_index_type_redirect'); ?></label><br />
                 </div>
             </div>
         </div>
@@ -18,18 +18,18 @@
 
         <div class="row" ng-show="data.nav_item_type == 1 && !data.isInline">
             <div class="input input--text col s12">
-                <label class="input__label">Als Vorlage</label>
+                <label class="input__label"><?= \cmsadmin\Module::t('view_index_as_draft'); ?></label>
                 <div class="input__field-wrapper">
-                    Möchtest du diese neue Seite als Vorlage hinterlegen?<br />
-                    <input type="radio" ng-checked="data.is_draft == 0"><label ng-click="data.is_draft = 0">Nein</label><br />
-                    <input type="radio" ng-checked="data.is_draft == 1"><label ng-click="data.is_draft = 1">Ja</label><br />
+                    <?= \cmsadmin\Module::t('view_index_as_draft_help'); ?><br />
+                    <input type="radio" ng-checked="data.is_draft == 0"><label ng-click="data.is_draft = 0"><?= \cmsadmin\Module::t('view_index_no'); ?></label><br />
+                    <input type="radio" ng-checked="data.is_draft == 1"><label ng-click="data.is_draft = 1"><?= \cmsadmin\Module::t('view_index_yes'); ?></label><br />
                 </div>
             </div>
         </div>
 
         <div class="row">
             <div class="input input--text col s12">
-                <label class="input__label">Seitentitel</label>
+                <label class="input__label"><?= \cmsadmin\Module::t('view_index_page_title'); ?></label>
                 <div class="input__field-wrapper">
                     <input name="text" type="text" class="input__field" ng-model="data.title" ng-change="aliasSuggestion()" focus-me="true" />
                 </div>
@@ -37,7 +37,7 @@
         <div class="row">
         </div>    
             <div class="input input--text col s12">
-                <label class="input__label">Pfadsegment</label>
+                <label class="input__label"><?= \cmsadmin\Module::t('view_index_page_alias'); ?></label>
                 <div class="input__field-wrapper">
                     <input name="text" type="text" class="input__field" ng-model="data.alias" />
                 </div>
@@ -45,7 +45,7 @@
         </div>
         <div class="row" ng-show="data.is_draft==0">
             <div class="input input--text col s12">
-                <label class="input__label">Beschreibung (Meta Description für Google)</label>
+                <label class="input__label"><?= \cmsadmin\Module::t('view_index_page_meta_description'); ?></label>
                 <div class="input__field-wrapper">
                     <textarea class="input__field validate" ng-model="data.description"></textarea>
                 </div>
@@ -53,7 +53,7 @@
         </div>
         <div class="row" ng-show="data.is_draft==0" ng-hide="data.isInline || navcontainer.length == 1">
             <div class="input input--select col s12">
-                <label class="input__label">Navigations-Container</label>
+                <label class="input__label"><?= \cmsadmin\Module::t('view_index_page_nav_container'); ?></label>
                 <div class="input__field-wrapper">
                     <select class="input__field browser-default" ng-model="data.nav_container_id" ng-options="item.id as item.name for item in navcontainers"></select>
                 </div>
@@ -61,10 +61,10 @@
         </div>
         <div class="row" ng-show="data.is_draft==0 && !data.isInline">
             <div class="input input--select col s12">
-                <label class="input__label">Übergeordnete Seite</label>
+                <label class="input__label"><?= \cmsadmin\Module::t('view_index_page_parent_page'); ?></label>
                 <div class="input__field-wrapper">
                     <select class="input__field browser-default" ng-model="data.parent_nav_id">
-                        <option value="0">[Root Level]</option>
+                        <option value="0"><?= \cmsadmin\Module::t('view_index_page_parent_root'); ?></option>
                         <option ng-repeat="nav in navitems" value="{{nav.id}}">{{nav.title}}</option>
                     </select>
                 </div>
@@ -89,7 +89,7 @@
         <div ng-show="success">
             <div class="alert alert--success">
                 <i class="material-icons">check</i>
-                <p>Diese Seite wurde erfolgreich erstellt!</p>
+                <p><?= \cmsadmin\Module::t('view_index_page_success'); ?></p>
             </div>
         </div>
         <!-- /SUCCESS -->
@@ -110,17 +110,17 @@
 <script type="text/ng-template" id="createformpage.html">
         <div class="row" ng-show="!data.isInline">
             <div class="input input--text col s12">
-                <label class="input__label">Eine Vorlage verwenden?</label>
+                <label class="input__label"><?= \cmsadmin\Module::t('view_index_page_use_draft'); ?></label>
                 <div class="input__field-wrapper">
-                    <input type="radio" ng-checked="data.use_draft == 0"><label ng-click="data.use_draft = 0; data.from_draft_id = 0">Nein</label><br />
-                    <input type="radio" ng-checked="data.use_draft == 1"><label ng-click="data.use_draft = 1; data.layout_id = 0">Ja</label><br />
+                    <input type="radio" ng-checked="data.use_draft == 0"><label ng-click="data.use_draft = 0; data.from_draft_id = 0"><?= \cmsadmin\Module::t('view_index_no'); ?></label><br />
+                    <input type="radio" ng-checked="data.use_draft == 1"><label ng-click="data.use_draft = 1; data.layout_id = 0"><?= \cmsadmin\Module::t('view_index_yes'); ?></label><br />
                 </div>
             </div>
         </div>
 
     <div class="row"ng-show="data.use_draft==1">
         <div class="input input--select col s12">
-            <label class="input__label">Möchtest du aus einer Vorlage auswählen?</label>
+            <label class="input__label"><?= \cmsadmin\Module::t('view_index_page_select_draft'); ?></label>
             <div class="input__field-wrapper">
                 <select class="input__field browser-default" ng-model="data.from_draft_id" ng-options="draft.id as draft.title for draft in drafts"></select>
             </div>
@@ -128,7 +128,7 @@
     </div>
     <div class="row">
         <div class="input input--select col s12"  ng-show="data.use_draft==0">
-            <label class="input__label">Layout</label>
+            <label class="input__label"><?= \cmsadmin\Module::t('view_index_page_layout'); ?></label>
             <div class="input__field-wrapper">
                 <select class="input__field browser-default" ng-model="data.layout_id" ng-options="lts.id as lts.name for lts in layouts"></select>
             </div>
@@ -137,7 +137,7 @@
     <div class="row">
         <div class="col s12">
             <br />
-            <button type="button" class="btn" ng-click="save()">Neue Seite speichern</button>
+            <button type="button" class="btn" ng-click="save()"><?= \cmsadmin\Module::t('view_index_page_btn_save'); ?></button>
         </div>
     </div>
 </script>
@@ -147,7 +147,7 @@
 <script type="text/ng-template" id="createformmodule.html">
     <div class="row">
         <div class="input input--text col s12">
-            <label class="input__label">Modul Name (Yii-ID)</label>
+            <label class="input__label"><?= \cmsadmin\Module::t('view_index_module_select'); ?></label>
             <div class="input__field-wrapper">
                 <input name="text" type="text" class="input__field" ng-model="data.module_name" />
             </div>
@@ -156,7 +156,7 @@
     <div class="row">
         <div class="col s12">
             <br />
-            <button type="button" class="btn" ng-click="save()">Neue Seite speichern</button>
+            <button type="button" class="btn" ng-click="save()"><?= \cmsadmin\Module::t('view_index_page_btn_save'); ?></button>
         </div>
     </div>
 </script>
@@ -166,42 +166,36 @@
 <script type="text/ng-template" id="createformredirect.html">
     <div class="row">
         <div class="input input--radios col s12">
-            <label class="input__label">Art der Weiterleitung</label>
+            <label class="input__label"><?= \cmsadmin\Module::t('view_index_redirect_type'); ?></label>
             <div class="input__field-wrapper">
-                <input type="radio" ng-model="data.redirect_type" value="1"><label ng-click="data.redirect_type = 1">Interne-Seite</label> <br />
-                <input type="radio" ng-model="data.redirect_type" value="2"><label ng-click="data.redirect_type = 2">Link-Extern</label>
-                <!--<input type="radio" ng-model="data.redirect_type" value="3"><label ng-click="data.redirect_type = 3">Datei</label>-->
+                <input type="radio" ng-model="data.redirect_type" value="1"><label ng-click="data.redirect_type = 1"><?= \cmsadmin\Module::t('view_index_redirect_internal'); ?></label> <br />
+                <input type="radio" ng-model="data.redirect_type" value="2"><label ng-click="data.redirect_type = 2"><?= \cmsadmin\Module::t('view_index_redirect_external'); ?></label>
             </div>
         </div>
     </div>
 
     <div class="row">
         <div class="col s12" ng-show="data.redirect_type==1">
-            <p>Auf welche Interne-Seite wollen Sie weiterleiten?</p>
+            <p><?= \cmsadmin\Module::t('view_index_redirect_internal_select'); ?></p>
             <menu-dropdown class="menu-dropdown" nav-id="data.redirect_type_value" />
         </div>
 
         <div class="col s12" ng-show="data.redirect_type==2">
 
             <div class="input input--text col s12">
-                <label class="input__label">Externer Link</label>
+                <label class="input__label"><?= \cmsadmin\Module::t('view_index_redirect_external_link'); ?></label>
                 <div class="input__field-wrapper">
                     <input name="text" type="text" class="input__field" ng-model="data.redirect_type_value" placeholder="http://" />
-                    <small>Externe Links beginnen mit http:// oder https://</small>
+                    <small><?= \cmsadmin\Module::t('view_index_redirect_external_link_help'); ?></small>
                 </div>
             </div>
         </div>
-
-        <div class="col s12" ng-show="data.redirect_type==3">
-            <p>todo</p> <!-- todo -->
-        </div>
-
     </div>
 
     <div class="row">
         <div class="col s12">
             <br />
-            <button type="button" class="btn" ng-click="save()">Neue Seite speichern</button>
+            <button type="button" class="btn" ng-click="save()"><?= \cmsadmin\Module::t('view_index_page_btn_save'); ?></button>
         </div>
     </div>
 </script>
@@ -212,7 +206,7 @@
     <div class="row">
         <div class="col s12">
             <br />
-            <button type="button" class="btn" ng-click="save()">Neue Seite speichern</button>
+            <button type="button" class="btn" ng-click="save()"><?= \cmsadmin\Module::t('view_index_page_btn_save'); ?></button>
         </div>
     </div>
 </script>
@@ -280,21 +274,21 @@
             <div class="sidebar__icon-holder">
                 <i class="sidebar__icon material-icons">add</i>
             </div>
-            <span class="sidebar__text">Neue Seite erstellen</span>
+            <span class="sidebar__text"><?= \cmsadmin\Module::t('view_index_sidebar_new_page'); ?></span>
         </a>
 
         <a class="sidebar__button sidebar__button--grey" ui-sref="custom.cmsdraft">
             <div class="sidebar__icon-holder">
                 <i class="sidebar__icon material-icons">receipt</i>
             </div>
-            <span class="sidebar__text">Vorlagen</span>
+            <span class="sidebar__text"><?= \cmsadmin\Module::t('view_index_sidebar_drafts'); ?></span>
         </a>
 
         <div class="sidebar__button sidebar__button--grey sidebar__button--switch switch" ng-class="{ 'sidebar__button--active': showDrag }">
             <label>
                 <input type="checkbox" ng-model="showDrag" ng-true-value="1" ng-false-value="0">
                 <span class="lever"></span>
-                Verschieben
+                <?= \cmsadmin\Module::t('view_index_sidebar_move'); ?>
             </label>
         </div>
 
