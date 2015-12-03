@@ -703,8 +703,6 @@
 	
 	zaa.controller("NavController", function($scope, $filter, $stateParams, $http, LuyaLoading, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, AdminClassService, AdminLangService) {
 		
-		LuyaLoading.start()
-		
 		$scope.AdminLangService = AdminLangService;
 		
 		/* service AdminPropertyService inheritance */
@@ -1065,7 +1063,6 @@
 						$scope.container.__placeholders[i]['__nav_item_page_block_items'] = new_ph[i]['__nav_item_page_block_items'];
 					}
 				}
-				LuyaLoading.stop();
 				$timeout(function() {
 					$scope.$parent.$parent.$parent.enableSidebar();
 				}, 100);
