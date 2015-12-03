@@ -2,6 +2,7 @@
 
 namespace admin;
 
+use luya\Module as Luya;
 use luya\components\UrlRule;
 
 class Module extends \admin\base\Module
@@ -46,17 +47,17 @@ class Module extends \admin\base\Module
     public function getMenu()
     {
         return $this
-        ->nodeRoute('Dateimanager', 'folder_open', 'admin-storage-index', 'admin/storage/index')
-        ->node('System', 'layers')
-            ->group('Zugriff')
-                ->itemApi('Benutzer', 'admin-user-index', 'person', 'api-admin-user')
-                ->itemApi('Gruppen', 'admin-group-index', 'group', 'api-admin-group')
-            ->group('System')
-                ->itemApi('Sprachen', 'admin-lang-index', 'language', 'api-admin-lang')
-                ->itemApi('Tags', 'admin-tag-index', 'label', 'api-admin-tag')
-            ->group('Bilder')
-                ->itemApi('Effekte', 'admin-effect-index', 'blur_circular', 'api-admin-effect')
-                ->itemApi('Filter', 'admin-filter-index', 'adjust', 'api-admin-filter')
+        ->nodeRoute(Luya::t('admin', 'menu_node_filemanager'), 'folder_open', 'admin-storage-index', 'admin/storage/index')
+        ->node(Luya::t('admin', 'menu_node_system'), 'layers')
+            ->group(Luya::t('admin', 'menu_group_access'))
+                ->itemApi(Luya::t('admin', 'menu_access_item_user'), 'admin-user-index', 'person', 'api-admin-user')
+                ->itemApi(Luya::t('admin', 'menu_access_item_group'), 'admin-group-index', 'group', 'api-admin-group')
+            ->group(Luya::t('admin', 'menu_group_system'))
+                ->itemApi(Luya::t('admin', 'menu_system_item_language'), 'admin-lang-index', 'language', 'api-admin-lang')
+                ->itemApi(Luya::t('admin', 'menu_system_item_tags'), 'admin-tag-index', 'label', 'api-admin-tag')
+            ->group(Luya::t('admin', 'menu_group_images'))
+                ->itemApi(Luya::t('admin', 'menu_images_item_effects'), 'admin-effect-index', 'blur_circular', 'api-admin-effect')
+                ->itemApi(Luya::t('admin', 'menu_images_item_filters'), 'admin-filter-index', 'adjust', 'api-admin-filter')
         ->menu();
     }
 

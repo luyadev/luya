@@ -391,7 +391,7 @@ $this->beginPage()
         <table class="bordered">
             <thead>
             <tr>
-                <th>Name</th>
+                <th><?= luya\Module::t('admin', 'language_name'); ?></th>
                 <th>Wert</th>
             </tr>
             </thead>
@@ -399,10 +399,12 @@ $this->beginPage()
             <tr><td>Id:</td><td><?= Yii::$app->id ?></td></tr>
             <tr><td>Site Title:</td><td><?= Yii::$app->siteTitle ?></td></tr>
             <tr><td>Remote Token:</td><td><?= $this->context->colorizeValue(Yii::$app->remoteToken, true); ?></td></tr>
-            <tr><td>YII_DEBUG:</td><td><?= $this->context->colorizeValue(YII_DEBUG); ?></td></tr>
-            <tr><td>YII_ENV:</td><td><?= YII_ENV; ?></td></tr>
             <tr><td>AssetManager forceCopy</td><td><?= $this->context->colorizeValue(Yii::$app->assetManager->forceCopy); ?></td></tr>
             <tr><td>Transfer Exceptions:</td><td><?= $this->context->colorizeValue(Yii::$app->errorHandler->transferException); ?></td></tr>
+            <tr><td>YII_DEBUG:</td><td><?= $this->context->colorizeValue(YII_DEBUG); ?></td></tr>
+            <tr><td>YII_ENV:</td><td><?= YII_ENV; ?></td></tr>
+            <tr><td>Yii->app->language</td><td><?= Yii::$app->language; ?></td></tr>
+            <tr><td>Luya langauge</td><td><?= Yii::$app->luyaLanguage; ?></td></tr>
             <tr><td>Yii Timezone:</td><td><?= Yii::$app->timeZone; ?></td></tr>
             <tr><td>PHP Timezone:</td><td><?= date_default_timezone_get(); ?></td></tr>
             <tr><td>PHP memory_limit</td><td><?= ini_get('memory_limit'); ?></td></tr>

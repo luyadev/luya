@@ -3,10 +3,13 @@ LUYA CHANGELOG
 
 1.0.0-beta2 (in progress)
 -------------------------
-
 - **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide.
 - **[BC BREAK]** removed luya\web\Composition::set method.
-- `#615` added ability to make luya internal luya translations.
+- `#614` updated treeview styling to improve ux
+- `#612` added headline and link-button to imagetextblock cfgs
+- `#607` added new audio-block for soundcloud embeded player
+- `#609` added new link-button-block
+- `#608` added new block for a simple horizontal line
 - `#601` added cancel/clear option to the block search field
 - `#600` added LuyaLoading service to start and stop loading overlay.
 - `#605` fixed issue where cms layout labels have been overriden on every import process.
