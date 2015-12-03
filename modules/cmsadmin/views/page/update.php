@@ -401,10 +401,10 @@
                                 <div class="col s12" ng-switch-when="3">
                                     <div ng-switch on="typeData.type">
                                         <div ng-switch-when="1">
-                                            <p><?= \cmsadmin\Module::t('view_update_is_redirect_internal'); ?></p>
+                                            <p><?= \cmsadmin\Module::t('view_update_is_redirect_internal'); ?> <show-internal-redirection nav-id="typeData.value" />.</p>
                                         </div>
                                         <div ng-switch-when="2">
-                                            <p><?= \cmsadmin\Module::t('view_update_is_redirect_external'); ?>.</p>
+                                            <p><?= \cmsadmin\Module::t('view_update_is_redirect_external'); ?> <a href="{{typeData.value}}">{{typeData.value}}</a>.</p>
                                         </div>
                                     </div>
                                 </div>
