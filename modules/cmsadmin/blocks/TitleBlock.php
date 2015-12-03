@@ -2,6 +2,8 @@
 
 namespace cmsadmin\blocks;
 
+use cmsadmin\Module;
+
 class TitleBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
@@ -10,7 +12,7 @@ class TitleBlock extends \cmsadmin\base\Block
 
     public function name()
     {
-        return 'Überschrift';
+        return Module::t('block_title_name');
     }
 
     public function icon()
@@ -22,13 +24,13 @@ class TitleBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'content', 'label' => 'Titel', 'type' => 'zaa-text'],
-                ['var' => 'headingType', 'label' => 'Grösse', 'type' => 'zaa-select', 'initvalue' => 'h1', 'options' => [
-                        ['value' => 'h1', 'label' => 'Überschrift 1'],
-                        ['value' => 'h2', 'label' => 'Überschrift 2'],
-                        ['value' => 'h3', 'label' => 'Überschrift 3'],
-                        ['value' => 'h4', 'label' => 'Überschrift 4'],
-                        ['value' => 'h5', 'label' => 'Überschrift 5'],
+                ['var' => 'content', 'label' => Module::t('block_title_content_label'), 'type' => 'zaa-text'],
+                ['var' => 'headingType', 'label' => Module::t('block_title_headingtype_label'), 'type' => 'zaa-select', 'initvalue' => 'h1', 'options' => [
+                        ['value' => 'h1', 'label' => Module::t('block_title_headingtype_heading') . ' 1'],
+                        ['value' => 'h2', 'label' => Module::t('block_title_headingtype_heading') . ' 2'],
+                        ['value' => 'h3', 'label' => Module::t('block_title_headingtype_heading') . ' 3'],
+                        ['value' => 'h4', 'label' => Module::t('block_title_headingtype_heading') . ' 4'],
+                        ['value' => 'h5', 'label' => Module::t('block_title_headingtype_heading') . ' 5'],
                     ],
                 ],
             ],
@@ -49,6 +51,6 @@ class TitleBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return '{% if vars.content is not empty %}<{{extras.headingType}}>{{ vars.content }}</{{extras.headingType}}>{% else %}<span class="block__empty-text">Es wurde noch keine Überschrift eingegeben.</span>{% endif %}';
+        return '{% if vars.content is not empty %}<{{extras.headingType}}>{{ vars.content }}</{{extras.headingType}}>{% else %}<span class="block__empty-text">' . Module::t('block_title_no_content') . '</span>{% endif %}';
     }
 }

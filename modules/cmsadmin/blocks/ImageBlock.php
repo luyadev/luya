@@ -3,6 +3,7 @@
 namespace cmsadmin\blocks;
 
 use Yii;
+use cmsadmin\Module;
 use admin\storage\ImageQuery;
 use admin\storage\admin\storage;
 
@@ -14,7 +15,7 @@ class ImageBlock extends \cmsadmin\base\Block
     
     public function name()
     {
-        return 'Bild';
+        return Module::t('block_image_name');
     }
 
     public function icon()
@@ -26,8 +27,8 @@ class ImageBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'imageId', 'label' => 'Bild Upload', 'type' => 'zaa-image-upload'],
-                ['var' => 'caption', 'label' => 'Bildunterschrift', 'type' => 'zaa-text'],
+                ['var' => 'imageId', 'label' => Module::t('block_image_imageid_label'), 'type' => 'zaa-image-upload'],
+                ['var' => 'caption', 'label' => Module::t('block_image_caption_label'), 'type' => 'zaa-text'],
             ],
         ];
     }
@@ -58,7 +59,7 @@ class ImageBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        $image = '{% if extras.image.source %}<p><img src="{{extras.image.source}}" border="0" style="max-width: 100%;" /><p>{% else %}<span class="block__empty-text">Es wurde noch kein Bild Hochgeladen.</span>{% endif %}';
+        $image = '{% if extras.image.source %}<p><img src="{{extras.image.source}}" border="0" style="max-width: 100%;" /><p>{% else %}<span class="block__empty-text">' . Module::t('block_image_no_image') . '</span>{% endif %}';
         $image .= '{% if vars.caption is not empty %}{{vars.caption}}{% endif %}';
 
         return $image;

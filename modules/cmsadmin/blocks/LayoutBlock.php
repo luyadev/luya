@@ -2,6 +2,8 @@
 
 namespace cmsadmin\blocks;
 
+use cmsadmin\Module;
+
 class LayoutBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
@@ -10,7 +12,7 @@ class LayoutBlock extends \cmsadmin\base\Block
 
     public function name()
     {
-        return 'Layout';
+        return Module::t('block_layout_name');
     }
 
     public function icon()
@@ -22,7 +24,7 @@ class LayoutBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'width', 'label' => 'Breite der ersten Spalte (maximal 12 Einheiten)', 'initvalue' => 6, 'type' => 'zaa-select', 'options' => [
+                ['var' => 'width', 'label' => Module::t('block_layout_width_label'), 'initvalue' => 6, 'type' => 'zaa-select', 'options' => [
                         ['value' => 1, 'label' => '1'],
                         ['value' => 2, 'label' => '2'],
                         ['value' => 3, 'label' => '3'],
@@ -38,8 +40,8 @@ class LayoutBlock extends \cmsadmin\base\Block
                 ],
             ],
             'placeholders' => [
-                ['var' => 'left', 'label' => 'Links'],
-                ['var' => 'right', 'label' => 'Rechts'],
+                ['var' => 'left', 'label' => Module::t('block_layout_placeholders_left')],
+                ['var' => 'right', 'label' => Module::t('block_layout_placeholders_right')],
             ],
         ];
     }

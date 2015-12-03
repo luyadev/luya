@@ -2,6 +2,8 @@
 
 namespace cmsadmin\blocks;
 
+use cmsadmin\Module;
+
 class TableBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
@@ -10,7 +12,7 @@ class TableBlock extends \cmsadmin\base\Block
 
     public function name()
     {
-        return 'Tabelle';
+        return Module::t('block_table_name');
     }
 
     public function icon()
@@ -22,13 +24,13 @@ class TableBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'table', 'label' => 'Text', 'type' => 'zaa-table'],
+                ['var' => 'table', 'label' => Module::t('block_table_table_label'), 'type' => 'zaa-table'],
             ],
             'cfgs' => [
-                ['var' => 'header', 'label' => 'Erste Zeile als Tabellenkopf verwenden', 'type' => 'zaa-checkbox'],
-                ['var' => 'stripe', 'label' => 'Jede Zeile abwechselnd hervorheben (Zebramuster)', 'type' => 'zaa-checkbox'],
-                ['var' => 'border', 'label' => 'Rand zu jeder Seite der Tabelle hinzufügen', 'type' => 'zaa-checkbox'],
-                ['var' => 'equaldistance', 'label' => 'Spaltenabstände gleich gross', 'type' => 'zaa-checkbox'],
+                ['var' => 'header', 'label' => Module::t('block_table_header_label'), 'type' => 'zaa-checkbox'],
+                ['var' => 'stripe', 'label' => Module::t('block_table_stripe_label'), 'type' => 'zaa-checkbox'],
+                ['var' => 'border', 'label' => Module::t('block_table_border_label'), 'type' => 'zaa-checkbox'],
+                ['var' => 'equaldistance', 'label' => Module::t('block_table_equaldistance_label'), 'type' => 'zaa-checkbox'],
             ],
         ];
     }
@@ -36,7 +38,7 @@ class TableBlock extends \cmsadmin\base\Block
     public function getFieldHelp()
     {
         return [
-            'table' => 'Es muss zuerst eine Zeile und Spalte hinzugefügt werden, bevor Inhalte eingetragen werden können.'
+            'table' => Module::t('block_table_help_table')
         ];
     }
 
@@ -99,7 +101,7 @@ class TableBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return  '<p>{% if extras.table is empty %}<span class="block__empty-text">Es wurde noch keine Tabelle angelegt.</span>{% else %}'.
+        return  '<p>{% if extras.table is empty %}<span class="block__empty-text">' . Module::t('block_table_no_table') . '</span>{% else %}'.
                 '<table>'.
                     '{% if cfgs.header %}'.
                     '<thead>'.

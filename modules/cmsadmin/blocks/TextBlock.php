@@ -3,6 +3,7 @@
 namespace cmsadmin\blocks;
 
 use cebe\markdown\GithubMarkdown;
+use cmsadmin\Module;
 
 class TextBlock extends \cmsadmin\base\Block
 {
@@ -23,7 +24,7 @@ class TextBlock extends \cmsadmin\base\Block
 
     public function name()
     {
-        return 'Text';
+        return Module::t('block_text_name');
     }
 
     public function icon()
@@ -35,10 +36,10 @@ class TextBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'content', 'label' => 'Text', 'type' => 'zaa-textarea'],
-                ['var' => 'textType', 'label' => 'Texttyp', 'initvalue' => 0, 'type' => 'zaa-select', 'options' => [
-                        ['value' => 0, 'label' => 'Normaler Text'],
-                        ['value' => 1, 'label' => 'Markdown Text'],
+                ['var' => 'content', 'label' => Module::t('block_text_content_label'), 'type' => 'zaa-textarea'],
+                ['var' => 'textType', 'label' => Module::t('block_text_texttype_label'), 'initvalue' => 0, 'type' => 'zaa-select', 'options' => [
+                        ['value' => 0, 'label' => Module::t('block_text_texttype_normal')],
+                        ['value' => 1, 'label' => Module::t('block_text_texttype_markdown')],
                     ],
                 ],
             ],
@@ -70,7 +71,7 @@ class TextBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return '<p>{% if vars.content is empty %}<span class="block__empty-text">Es wurde noch kein Text eingegeben.</span>'.
+        return '<p>{% if vars.content is empty %}<span class="block__empty-text">' . Module::t('block_text_no_content') . '</span>'.
         '{% elseif vars.content is not empty and vars.textType == 1 %}{{ extras.text }}{% elseif vars.content is not empty %}{{ extras.text|nl2br }}{% endif %}</p>';
     }
 }

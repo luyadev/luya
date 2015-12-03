@@ -2,13 +2,15 @@
 
 namespace cmsadmin\blocks;
 
+use cmsadmin\Module;
+
 class WysiwygBlock extends \cmsadmin\base\Block
 {
     public $cacheEnabled = true;
     
     public function name()
     {
-        return 'Texteditor';
+        return Module::t('block_wysiwyg_name');
     }
 
     public function icon()
@@ -20,7 +22,7 @@ class WysiwygBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'content', 'label' => 'Inhalt', 'type' => 'zaa-wysiwyg'],
+                ['var' => 'content', 'label' => Module::t('block_wysiwyg_content_label'), 'type' => 'zaa-wysiwyg'],
             ],
         ];
     }
@@ -28,7 +30,7 @@ class WysiwygBlock extends \cmsadmin\base\Block
     public function getFieldHelp()
     {
         return [
-            'content' => 'Klicken Sie in die erste Zeile um mit der Eingabe zu beginnen.',
+            'content' => Module::t('block_wysiwyg_help_content'),
         ];
     }
 
@@ -39,6 +41,6 @@ class WysiwygBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return '{% if vars.content is empty %}<span class="block__empty-text">Es wurde noch kein Text eingegeben.</span>{% else %}{{ vars.content }}{% endif %}';
+        return '{% if vars.content is empty %}<span class="block__empty-text">' . Module::t('block_wysiwyg_no_content') . '</span>{% else %}{{ vars.content }}{% endif %}';
     }
 }

@@ -2,6 +2,8 @@
 
 namespace cmsadmin\blocks;
 
+use cmsadmin\Module;
+
 class HtmlBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
@@ -10,7 +12,7 @@ class HtmlBlock extends \cmsadmin\base\Block
     
     public function name()
     {
-        return 'Html';
+        return 'HTML';
     }
 
     /**
@@ -25,7 +27,7 @@ class HtmlBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'html', 'label' => 'HTML-Inhalt', 'type' => 'zaa-textarea'],
+                ['var' => 'html', 'label' => Module::t('block_html_html_label'), 'type' => 'zaa-textarea'],
             ],
         ];
     }
@@ -37,6 +39,6 @@ class HtmlBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return '{% if vars.html is empty %}<span class="block__empty-text">Es wurde noch kein HTML Code eingegeben.</span>{% else %}{{ vars.html | raw }}{% endif %}';
+        return '{% if vars.html is empty %}<span class="block__empty-text">' . Module::t('block_html_no_content') . '</span>{% else %}{{ vars.html | raw }}{% endif %}';
     }
 }

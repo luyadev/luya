@@ -3,6 +3,7 @@
 namespace cmsadmin\blocks;
 
 use Yii;
+use cmsadmin\Module;
 
 class ModuleBlock extends \cmsadmin\base\Block
 {
@@ -10,7 +11,7 @@ class ModuleBlock extends \cmsadmin\base\Block
 
     public function name()
     {
-        return 'Modul';
+        return Module::t('block_module_name');
     }
 
     public function icon()
@@ -22,12 +23,12 @@ class ModuleBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'moduleName', 'label' => 'Module Name', 'type' => 'zaa-select', 'options' => $this->getModuleNames()],
+                ['var' => 'moduleName', 'label' => Module::t('block_module_modulename_label'), 'type' => 'zaa-select', 'options' => $this->getModuleNames()],
             ],
             'cfgs' => [
-                ['var' => 'moduleController', 'label' => 'Controller Name (ohne Controller suffix)', 'type' => 'zaa-text'],
-                ['var' => 'moduleAction', 'label' => 'Action Name (ohne action prefix)', 'type' => 'zaa-text'],
-                ['var' => 'moduleActionArgs', 'label' => 'Action Arguments (json: {"var":"value"})', 'type' => 'zaa-text'],
+                ['var' => 'moduleController', 'label' => Module::t('block_module_modulecontroller_label'), 'type' => 'zaa-text'],
+                ['var' => 'moduleAction', 'label' => Module::t('block_module_moduleaction_label'), 'type' => 'zaa-text'],
+                ['var' => 'moduleActionArgs', 'label' => Module::t('block_module_moduleactionargs_label'), 'type' => 'zaa-text'],
             ],
         ];
     }
@@ -57,7 +58,7 @@ class ModuleBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return '{% if vars.moduleName is empty %}<span class="block__empty-text">Es wurde noch kein Modul ausgewählt.</span>{% else %}<p><i class="material-icons">developer_board</i> Modulintegration: <strong>{{ vars.moduleName }}</strong></p>{% endif %}';
+        return '{% if vars.moduleName is empty %}<span class="block__empty-text">' . Module::t('block_module_no_module') . '</span>{% else %}<p><i class="material-icons">developer_board</i> ' . Module::t('block_module_integration') . ': <strong>{{ vars.moduleName }}</strong></p>{% endif %}';
     }
 
     public function twigFrontend()

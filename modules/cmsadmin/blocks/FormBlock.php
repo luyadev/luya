@@ -2,6 +2,7 @@
 
 namespace cmsadmin\blocks;
 
+use cmsadmin\Module;
 use Yii;
 
 class FormBlock extends \cmsadmin\base\Block
@@ -30,7 +31,7 @@ class FormBlock extends \cmsadmin\base\Block
 
     public function name()
     {
-        return 'Formular';
+        return Module::t("block_form_name");
     }
 
     public function icon()

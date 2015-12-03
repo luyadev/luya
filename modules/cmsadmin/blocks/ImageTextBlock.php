@@ -3,6 +3,7 @@
 namespace cmsadmin\blocks;
 
 use Yii;
+use cmsadmin\Module;
 use cebe\markdown\GithubMarkdown;
 
 class ImageTextBlock extends \cmsadmin\base\Block
@@ -28,7 +29,7 @@ class ImageTextBlock extends \cmsadmin\base\Block
 
     public function name()
     {
-        return 'Text mit Bild';
+        return Module::t('block_image_text_name');
     }
 
     public function icon()
@@ -40,41 +41,41 @@ class ImageTextBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'text', 'label' => 'Text', 'type' => 'zaa-textarea'],
-                ['var' => 'imageId', 'label' => 'Bild Upload', 'type' => 'zaa-image-upload'],
-                ['var' => 'imagePosition', 'label' => 'Bildposition', 'type' => 'zaa-select', 'initvalue' => 'left', 'options' => [
-                        ['value' => 'left', 'label' => 'Links'],
-                        ['value' => 'right', 'label' => 'Rechts'],
+                ['var' => 'text', 'label' => Module::t('block_image_text_text_label'), 'type' => 'zaa-textarea'],
+                ['var' => 'imageId', 'label' => Module::t('block_image_text_imageid_label'), 'type' => 'zaa-image-upload'],
+                ['var' => 'imagePosition', 'label' => Module::t('block_image_text_imageposition_label'), 'type' => 'zaa-select', 'initvalue' => 'left', 'options' => [
+                        ['value' => 'left', 'label' => Module::t('block_image_text_imageposition_left')],
+                        ['value' => 'right', 'label' => Module::t('block_image_text_imageposition_right')],
                     ],
                 ],
             ],
             'cfgs' => [
-                ['var' => 'heading', 'label' => 'Überschrift', 'type' => 'zaa-text'],
-                ['var' => 'headingType', 'label' => 'Grösse', 'type' => 'zaa-select', 'initvalue' => 'h3', 'options' => [
-                        ['value' => 'h1', 'label' => 'Überschrift 1'],
-                        ['value' => 'h2', 'label' => 'Überschrift 2'],
-                        ['value' => 'h3', 'label' => 'Überschrift 3'],
-                        ['value' => 'h4', 'label' => 'Überschrift 4'],
-                        ['value' => 'h5', 'label' => 'Überschrift 5'],
+                ['var' => 'heading', 'label' => Module::t('block_image_text_heading_label'), 'type' => 'zaa-text'],
+                ['var' => 'headingType', 'label' => Module::t('block_image_text_headingtype_label'), 'type' => 'zaa-select', 'initvalue' => 'h3', 'options' => [
+                        ['value' => 'h1', 'label' => Module::t('block_image_text_heading_label') . ' 1'],
+                        ['value' => 'h2', 'label' => Module::t('block_image_text_heading_label') . ' 2'],
+                        ['value' => 'h3', 'label' => Module::t('block_image_text_heading_label') . ' 3'],
+                        ['value' => 'h4', 'label' => Module::t('block_image_text_heading_label') . ' 4'],
+                        ['value' => 'h5', 'label' => Module::t('block_image_text_heading_label') . ' 5'],
                     ],
                 ],
-                ['var' => 'margin', 'label' => 'Abstand des Bildes zum Text', 'type' => 'zaa-select', 'initvalue' => $this->defaultMargin, 'options' => [
-                            ['value' => '5px', 'label' => '0 Pixel'],
-                            ['value' => '10px', 'label' => '10 Pixel'],
-                            ['value' => '15px', 'label' => '20 Pixel'],
-                            ['value' => '15px', 'label' => '30 Pixel'],
-                            ['value' => '15px', 'label' => '40 Pixel'],
-                            ['value' => '15px', 'label' => '50 Pixel'],
+                ['var' => 'margin', 'label' => Module::t('block_image_text_margin_label'), 'type' => 'zaa-select', 'initvalue' => $this->defaultMargin, 'options' => [
+                            ['value' => '5px', 'label' => '0 ' . Module::t('block_image_text_margin_pixel')],
+                            ['value' => '10px', 'label' => '10 ' . Module::t('block_image_text_margin_pixel')],
+                            ['value' => '15px', 'label' => '20 ' . Module::t('block_image_text_margin_pixel')],
+                            ['value' => '15px', 'label' => '30 ' . Module::t('block_image_text_margin_pixel')],
+                            ['value' => '15px', 'label' => '40 ' . Module::t('block_image_text_margin_pixel')],
+                            ['value' => '15px', 'label' => '50 ' . Module::t('block_image_text_margin_pixel')],
                     ],
                 ],
-                ['var' => 'textType', 'label' => 'Texttyp', 'initvalue' => 1, 'type' => 'zaa-select', 'options' => [
-                        ['value' => '0', 'label' => 'Normaler Text'],
-                        ['value' => '1', 'label' => 'Markdown Text'],
+                ['var' => 'textType', 'label' => Module::t('block_image_text_texttype_label'), 'initvalue' => 1, 'type' => 'zaa-select', 'options' => [
+                        ['value' => '0', 'label' => Module::t('block_image_text_texttype_normal')],
+                        ['value' => '1', 'label' => Module::t('block_image_text_texttype_markdown')],
                     ],
                 ],
-                ['var' => 'btnLabel', 'label' => 'Button Label', 'type' => 'zaa-text'],
-                ['var' => 'btnHref', 'label' => 'Button Link Adresse', 'type' => 'zaa-text'],
-                ['var' => 'targetBlank', 'label' => 'Link in einem neuen Fenster öffnen', 'type' => 'zaa-checkbox'],
+                ['var' => 'btnLabel', 'label' => Module::t('block_image_text_btnlabel_label'), 'type' => 'zaa-text'],
+                ['var' => 'btnHref', 'label' => Module::t('block_image_text_btnhref_label'), 'type' => 'zaa-text'],
+                ['var' => 'targetBlank', 'label' => Module::t('block_image_text_targetblank_label'), 'type' => 'zaa-checkbox'],
             ],
         ];
     }
@@ -82,7 +83,7 @@ class ImageTextBlock extends \cmsadmin\base\Block
     public function getFieldHelp()
     {
         return [
-            'textType' => 'Texttyp bezieht sich aus­schließ­lich auf den Text und nicht auf die Überschrift.',            
+            'textType' => Module::t('block_image_text_help_texttype'),
         ];
     }
 
@@ -127,10 +128,10 @@ class ImageTextBlock extends \cmsadmin\base\Block
     public function twigAdmin()
     {
         return  '{% if not extras.imageSource %}'.
-                    '<span class="block__empty-text">Es wurde noch kein Bild Hochgeladen. </span>'.
+                    '<span class="block__empty-text">' . Module::t('block_image_text_no_image') . '</span>'.
                 '{% endif %}'.
                 '{% if not vars.text %}'.
-                    '<span class="block__empty-text">Es wurde noch kein Text angegeben.</span>'.
+                    '<span class="block__empty-text">' . Module::t('block_image_text_no_text') . '</span>'.
                 '{% endif %}'.
                 '{% if extras.imageSource and vars.text %}'.
                     '<img src="{{ extras.imageSource }}" border=0 style="{% if extras.imagePosition == "left" %}float:left;{% else %}float:right{% endif %};{% if extras.imagePosition == "right" %}margin-left:{{ extras.margin }}{% else %}margin-right:{{ extras.margin }}{% endif %};margin-bottom:{{ extras.margin }}; max-width: 50%;"">'.

@@ -2,13 +2,15 @@
 
 namespace cmsadmin\blocks;
 
+use cmsadmin\Module;
+
 class DevBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
 
     public function name()
     {
-        return 'Lorem Ipsum';
+        return Module::t('block_dev_name');
     }
 
     public function icon()

@@ -2,6 +2,8 @@
 
 namespace cmsadmin\blocks;
 
+use cmsadmin\Module;
+
 /**
  * Simple button element with a link function
  */
@@ -11,7 +13,7 @@ class LinkButtonBlock extends \cmsadmin\base\Block
 
     public function name()
     {
-        return 'Link Button';
+        return Module::t('block_link_button_name');
     }
 
     public function icon()
@@ -23,11 +25,11 @@ class LinkButtonBlock extends \cmsadmin\base\Block
     {
         return [
            'vars' => [
-               ['var' => 'btnLabel', 'label' => 'Button Label', 'type' => 'zaa-text'],
-               ['var' => 'btnHref', 'label' => 'Link Adresse', 'type' => 'zaa-text'],
+               ['var' => 'btnLabel', 'label' => Module::t('block_link_button_btnlabel_label'), 'type' => 'zaa-text'],
+               ['var' => 'btnHref', 'label' => Module::t('block_link_button_btnhref_label'), 'type' => 'zaa-text'],
            ],
            'cfgs' => [
-                ['var' => 'targetBlank', 'label' => 'Link in einem neuen Fenster öffnen', 'type' => 'zaa-checkbox'],
+                ['var' => 'targetBlank', 'label' => Module::t('block_link_button_targetblank_label'), 'type' => 'zaa-checkbox'],
            ],
         ];
     }
@@ -65,6 +67,6 @@ class LinkButtonBlock extends \cmsadmin\base\Block
      */
     public function twigAdmin()
     {
-        return '<p>Link Button</p>';
+        return '<p>' . Module::t('block_link_button_name') . '</p>';
     }
 }

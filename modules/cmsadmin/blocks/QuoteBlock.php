@@ -2,6 +2,8 @@
 
 namespace cmsadmin\blocks;
 
+use cmsadmin\Module;
+
 class QuoteBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
@@ -10,7 +12,7 @@ class QuoteBlock extends \cmsadmin\base\Block
     
     public function name()
     {
-        return 'Zitat';
+        return Module::t('block_quote_name');
     }
 
     public function icon()
@@ -22,7 +24,7 @@ class QuoteBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'content', 'label' => 'Text', 'type' => 'zaa-text'],
+                ['var' => 'content', 'label' => Module::t('block_quote_content_label'), 'type' => 'zaa-text'],
             ],
         ];
     }
@@ -34,6 +36,6 @@ class QuoteBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return '{% if vars.content is not empty %}<blockquote>{{ vars.content }}</blockquote>{% else %}<span class="block__empty-text">Es wurde noch kein Zitat eingegeben.</span>{% endif %}';
+        return '{% if vars.content is not empty %}<blockquote>{{ vars.content }}</blockquote>{% else %}<span class="block__empty-text">' . Module::t('block_quote_no_content') . '</span>{% endif %}';
     }
 }

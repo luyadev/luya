@@ -2,6 +2,8 @@
 
 namespace cmsadmin\blocks;
 
+use cmsadmin\Module;
+
 class SpacingBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
@@ -18,7 +20,7 @@ class SpacingBlock extends \cmsadmin\base\Block
 
     public function name()
     {
-        return 'Abstand';
+        return Module::t('block_spacing_name');
     }
 
     public function icon()
@@ -30,7 +32,7 @@ class SpacingBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'spacing', 'label' => 'Abstand', 'initvalue' => 1, 'type' => 'zaa-select', 'options' => $this->spacingProperties],
+                ['var' => 'spacing', 'label' => Module::t('block_spacing_spacing_label'), 'initvalue' => 1, 'type' => 'zaa-select', 'options' => $this->spacingProperties],
             ],
         ];
     }

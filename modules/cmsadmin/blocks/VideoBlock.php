@@ -2,6 +2,8 @@
 
 namespace cmsadmin\blocks;
 
+use cmsadmin\Module;
+
 class VideoBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
@@ -10,7 +12,7 @@ class VideoBlock extends \cmsadmin\base\Block
 
     public function name()
     {
-        return 'Video';
+        return Module::t('block_video_name');
     }
 
     public function icon()
@@ -22,14 +24,10 @@ class VideoBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'url', 'label' => 'Video URL', 'type' => 'zaa-text'],
+                ['var' => 'url', 'label' => Module::t('block_video_url_label'), 'type' => 'zaa-text'],
             ],
             'cfgs' => [
-                [
-                    'var' => 'controls',
-                    'label' => 'Controls ausblenden?',
-                    'type' => 'zaa-checkbox',
-                ],
+                ['var' => 'controls', 'label' => Module::t('block_video_controls_label'), 'type' => 'zaa-checkbox'],
             ],
         ];
     }
@@ -37,8 +35,8 @@ class VideoBlock extends \cmsadmin\base\Block
     public function getFieldHelp()
     {
         return [
-            'url' => 'Es werden Vimeo oder Youtube URLs unterstützt.',
-            'controls' => 'Diese Option wird momentan nur von Youtube unterstützt.',
+            'url' => Module::t('block_video_help_url'),
+            'controls' => Module::t('block_video_help_controls'),
         ];
     }
 
@@ -100,6 +98,6 @@ class VideoBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return '{% if extras.url is not empty %}<div class="video-container" style="margin:100px"><iframe width="640" height="480" src="{{ extras.url }}" frameborder="0" allowfullscreen></iframe></div>{% else %}<span class="block__empty-text">Es wurde noch keine gültige Video URL angegeben.</span>{% endif %}';
+        return '{% if extras.url is not empty %}<div class="video-container" style="margin:100px"><iframe width="640" height="480" src="{{ extras.url }}" frameborder="0" allowfullscreen></iframe></div>{% else %}<span class="block__empty-text">' . Module::t('block_video_no_video') . '</span>{% endif %}';
     }
 }

@@ -2,6 +2,8 @@
 
 namespace cmsadmin\blocks;
 
+use cmsadmin\Module;
+
 class ListBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
@@ -10,7 +12,7 @@ class ListBlock extends \cmsadmin\base\Block
     
     public function name()
     {
-        return 'Auflistung';
+        return Module::t('block_list_name');
     }
 
     public function icon()
@@ -22,10 +24,10 @@ class ListBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'elements', 'label' => 'Elemente', 'type' => 'zaa-list-array'],
-                ['var' => 'listType', 'label' => 'Type', 'initvalue' => 'ul', 'type' => 'zaa-select', 'options' => [
-                        ['value' => 'ul', 'label' => 'Stichpunktliste'],
-                        ['value' => 'ol', 'label' => 'Nummerierte Liste'],
+                ['var' => 'elements', 'label' => Module::t('block_list_elements_label'), 'type' => 'zaa-list-array'],
+                ['var' => 'listType', 'label' => Module::t('block_list_listtype_label'), 'initvalue' => 'ul', 'type' => 'zaa-select', 'options' => [
+                        ['value' => 'ul', 'label' => Module::t('block_list_listtype_ul')],
+                        ['value' => 'ol', 'label' => Module::t('block_list_listtype_ol')],
                     ],
                 ],
             ],
@@ -46,6 +48,6 @@ class ListBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return '{% if vars.elements is empty%}<span class="block__empty-text">Es wurde noch keine Aufzählung eingegeben.</span>{% else %}<{{ extras.listType }}>{% for row in vars.elements if row.value is not empty %}<li>{{ row.value }}</li>{% else %}<span class="block__empty-text">Es wurde noch keine Aufzählung eingegeben.</span>{% endfor %}</{{ extras.listType }}>{% endif %}';
+        return '{% if vars.elements is empty%}<span class="block__empty-text">' . Module::t('block_list_no_content') . '</span>{% else %}<{{ extras.listType }}>{% for row in vars.elements if row.value is not empty %}<li>{{ row.value }}</li>{% endfor %}</{{ extras.listType }}>{% endif %}';
     }
 }

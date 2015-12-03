@@ -3,6 +3,7 @@
 namespace cmsadmin\blocks;
 
 use Yii;
+use cmsadmin\Module;
 
 class FileListBlock extends \cmsadmin\base\Block
 {
@@ -12,7 +13,7 @@ class FileListBlock extends \cmsadmin\base\Block
     
     public function name()
     {
-        return 'Dateien';
+        return Module::t('block_file_list_name');
     }
 
     public function icon()
@@ -27,12 +28,12 @@ class FileListBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'files', 'label' => 'Dateien', 'type' => 'zaa-file-array-upload'],
+                ['var' => 'files', 'label' => Module::t("block_file_list_files_label"), 'type' => 'zaa-file-array-upload'],
             ],
             'cfgs' => [
-                ['var' => 'showType', 'label' => 'Dateityp anzeigen?', 'initvalue' => 0, 'type' => 'zaa-select', 'options' => [
-                        ['value' => '1', 'label' => 'Ja'],
-                        ['value' => '0', 'label' => 'Nein'],
+                ['var' => 'showType', 'label' => Module::t("block_file_list_files_showtype_label"), 'initvalue' => 0, 'type' => 'zaa-select', 'options' => [
+                        ['value' => '1', 'label' => Module::t("block_file_list_files_showtype_yes")],
+                        ['value' => '0', 'label' => Module::t("block_file_list_files_showtype_no")],
                     ],
                 ],
                 /*
