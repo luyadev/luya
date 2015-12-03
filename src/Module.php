@@ -43,6 +43,7 @@ class Module extends \luya\base\Module
             'class' => 'yii\i18n\PhpMessageSource',
             'basePath' => '@luya/messages',
             'fileMap' => [
+                'luya/luya' => 'luya.php',
                 'luya/admin' => 'admin.php',
                 'luya/cmsadmin' => 'cmsadmin.php',
             ],
