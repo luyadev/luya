@@ -27,9 +27,9 @@ return [
     'view_index_page_btn_save' => 'Neue Seite speichern',
     'view_index_module_select' => 'Modul Name (Yii-ID)',
     'view_index_redirect_type' => 'Art der Weiterleitung',
-    'view_index_redirect_internal' => 'auf Interne-Seite',
-    'view_index_redirect_external' => 'Externe ULR',
-    'view_index_redirect_internal_select' => 'Auf welche Interne-Seite wollen Sie weiterleiten?',
+    'view_index_redirect_internal' => 'Interne-Seite',
+    'view_index_redirect_external' => 'Externe URL',
+    'view_index_redirect_internal_select' => 'Wählen Sie die interne Seite, auf die weitergeleitet werden soll.',
     'view_index_redirect_external_link' => 'Externer Link',
     'view_index_redirect_external_link_help' => 'Externe Links beginnen mit http:// oder https://',
     
