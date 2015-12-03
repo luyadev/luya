@@ -23,16 +23,12 @@ return [
     'block_form_default_name_label' => 'Name',
     'block_form_default_name_placeholder' => 'Vor- und Nachname',
     'block_form_default_name_error' => 'Bitte geben Sie einen Namen ein',
-
     'block_form_default_email_label' => 'Email',
     'block_form_default_email_placeholder' => 'beispiel@beispiel.ch',
     'block_form_default_email_error' => 'Bitte geben Sie eine Emailadresse ein',
-
     'block_form_default_message_label' => 'Nachricht',
     'block_form_default_message_error' => 'Bitte geben Sie eine Nachricht ein',
-
     'block_form_default_send_label' => 'Absenden',
-
     'block_form_default_send_error' => 'Leider ist ein Fehler beim Senden der Nachricht aufgetreten.',
     'block_form_default_send_success' => 'Vielen Dank! Wir werden uns mit Ihnen in Verbindung setzen.',
 
@@ -217,7 +213,7 @@ return [
     'view_update_holder_state_off' => 'Platzhalter ausklappen',
     'view_update_is_draft_mode' => 'Sie sind im Seiten-Vorlage Modus.',
     'view_update_is_homepage' => 'Startseite',
-    'view_update_no_properties_exists' => 'Es wurden noch keine Eigenschaften gespeichert.',
+    'view_update_no_properties_exists' => 'Es wurden noch keine Eigenschaften für diese Seite gespeichert.',
     'view_update_draft_no_lang_error' => 'Vorlagen haben keine Sprach spezifikation.',
     'view_update_no_translations' => 'Diese Seite wurde noch nicht übersetzt.',
     'view_update_page_is_module' => 'Diese Seite ist als <b>Module</b> hinterlegt.',
