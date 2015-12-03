@@ -1284,6 +1284,7 @@
 			ApiCmsNavItemPageBlockItem.update({ id : $scope.block.id }, $.param({json_config_values : JSON.stringify($scope.data), json_config_cfg_values : JSON.stringify($scope.cfgdata) }), function(rsp) {
 				//Materialize.toast('<span> Block «'+$scope.block.name+'» wurde aktualisiert.</span>', 2000)
 				$scope.edit = false;
+				$scope.config = false;
 				$scope.block.is_dirty = 1;
 				
 				$http({
