@@ -17,7 +17,7 @@
         "issues" : "https://github.com/zephir/luya/issues"
     },
     "require" : {
-        "zephir/luya" : "*",
+        "zephir/luya" : "1.0.0-beta2",
         "ifsnop/mysqldump-php":"2.*"
     },
     "autoload" : {
