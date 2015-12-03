@@ -5,6 +5,7 @@ LUYA CHANGELOG
 -------------------------
 - **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide.
 - **[BC BREAK]** removed luya\web\Composition::set method.
+- `#616` create default page on setup command.
 - `#615` added ability to make luya internal luya translations.
 - `#614` updated treeview styling to improve ux
 - `#612` added headline and link-button to imagetextblock cfgs
