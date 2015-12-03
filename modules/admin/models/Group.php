@@ -2,6 +2,8 @@
 
 namespace admin\models;
 
+use admin\Module;
+
 /**
  * This is the model class for table "admin_group".
  *
@@ -42,19 +44,7 @@ class Group extends \admin\ngrest\base\Model
     }
 
     public $extraFields = ['users'];
-
-    /*
-    public function getUsers()
-    {
-        return $this->hasMany(\admin\models\User::className(), ['id' => 'user_id'])->viaTable("admin_user_group", ['group_id' => 'id']);
-    }
-
-    public function setUsers($value)
-    {
-        $this->setRelation($value, "admin_user_group", "group_id", "user_id");
-    }
-    */
-
+    
     // ngrest
 
     public $users = [];
@@ -66,15 +56,15 @@ class Group extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
-        $config->aw->register(new \admin\aws\GroupAuth(), 'Berechtigungen');
+        $config->aw->register(new \admin\aws\GroupAuth(), Module::t('model_group_btn_aws_groupauth'));
 
         $config->delete = true;
 
-        $config->list->field('name', 'Name')->text();
-        $config->list->field('text', 'Beschreibung')->textarea();
+        $config->list->field('name', Module::t('model_group_name'))->text();
+        $config->list->field('text', Module::t('model_group_description'))->textarea();
 
         $config->create->copyFrom('list', ['id']);
-        $config->create->extraField('users', 'Benutzer')->checkboxRelation(\admin\models\User::className(), 'admin_user_group', 'group_id', 'user_id', ['firstname', 'lastname', 'email'], '%s %s (%s)');
+        $config->create->extraField('users', Module::t('model_group_user_buttons'))->checkboxRelation(\admin\models\User::className(), 'admin_user_group', 'group_id', 'user_id', ['firstname', 'lastname', 'email'], '%s %s (%s)');
 
         $config->update->copyFrom('create');
 

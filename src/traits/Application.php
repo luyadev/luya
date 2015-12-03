@@ -12,6 +12,7 @@ trait Application
     /**
      * @var string The internal used language to translate luya message, this is also used for all luya
      * core modules. Currently available languages
+     *
      * + en
      * + de
      *

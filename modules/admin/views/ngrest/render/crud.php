@@ -23,17 +23,17 @@
         <div class="tabs">
             <ul>
                 <li class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==0}">
-                    <a class="tabs__anchor" ng-click="switchTo(0)"><i class="material-icons tabs__icon">menu</i> Auflisten</a>
+                    <a class="tabs__anchor" ng-click="switchTo(0)"><i class="material-icons tabs__icon">menu</i> <?= \admin\Module::t('ngrest_crud_btn_list'); ?></a>
                 </li>
 
                 <?php if ($canCreate): ?>
                     <li class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==1}">
-                        <a class="tabs__anchor" style="" ng-click="switchTo(1)"><i class="material-icons tabs__icon">add_box</i> Hinzufügen</a>
+                        <a class="tabs__anchor" style="" ng-click="switchTo(1)"><i class="material-icons tabs__icon">add_box</i> <?= \admin\Module::t('ngrest_crud_btn_add'); ?></a>
                     </li>
                 <?php endif; ?>
                 
                 <li ng-show="crudSwitchType==2" class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==2}">
-                    <a class="tabs__anchor" ng-click="switchTo(0)"><i class="material-icons tabs__icon">cancel</i> Schliessen</a>
+                    <a class="tabs__anchor" ng-click="switchTo(0)"><i class="material-icons tabs__icon">cancel</i> <?= \admin\Module::t('ngrest_crud_btn_close'); ?></a>
                 </li>
             </ul>
         </div>
@@ -53,7 +53,7 @@
             <div style="margin-bottom:30px;">
                 <div class="input input--vertical input--text">
                     <div class="input__field-wrapper">
-                        <input class="input__field" id="searchString" ng-model="searchString" type="text" placeholder="Suchbegriff eingeben..." />
+                        <input class="input__field" id="searchString" ng-model="searchString" type="text" placeholder="<?= \admin\Module::t('ngrest_crud_search_text'); ?>" />
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                             <th><?= $item['alias']; ?> <i ng-click="changeOrder('<?= $item['name']; ?>', '+')" ng-class="{'active-orderby' : isOrderBy('+<?= $item['name']; ?>') }" class="mdi-hardware-keyboard-arrow-up grid-sort-btn"></i> <i ng-click="changeOrder('<?= $item['name']; ?>', '-')" ng-class="{'active-orderby' : isOrderBy('-<?= $item['name']; ?>') }" class="mdi-hardware-keyboard-arrow-down grid-sort-btn"></i></th>
                         <?php endforeach; ?>
                         <?php if (count($this->context->getButtons()) > 0): ?>
-                            <th style="text-align:right;"><span class="grid-data-length">{{data.list.length}} Einträge</span></th>
+                            <th style="text-align:right;"><span class="grid-data-length">{{data.list.length}} <?= \admin\Module::t('ngrest_crud_rows_count'); ?></span></th>
                         <?php endif; ?>
                     </tr>
                 </thead>
@@ -127,10 +127,10 @@
                             <div class="col s12">
                                 <div class="right">
                                     <button class="btn waves-effect waves-light" type="submit" ng-disabled="createForm.$invalid">
-                                        Erstellen <i class="material-icons right">check</i>
+                                        <?= \admin\Module::t('ngrest_crud_btn_create'); ?> <i class="material-icons right">check</i>
                                     </button>
                                     <button class="btn waves-effect waves-light red" type="button" ng-click="closeCreate()">
-                                        <i class="material-icons left">cancel</i> Abbrechen
+                                        <i class="material-icons left">cancel</i> <?= \admin\Module::t('button_abort'); ?>
                                     </button>
                                 </div>
                             </div>
@@ -168,10 +168,10 @@
                             <div class="col s12">
                                 <div class="right">
                                     <button class="btn waves-effect waves-light" type="submit" ng-disabled="updateForm.$invalid">
-                                        Speichern <i class="material-icons right">check</i>
+                                        <?= \admin\Module::t('button_save'); ?> <i class="material-icons right">check</i>
                                     </button>
                                     <button class="btn waves-effect waves-light red" type="button" ng-click="closeUpdate()">
-                                        <i class="material-icons left">cancel</i> Abbrechen
+                                        <i class="material-icons left">cancel</i> <?= \admin\Module::t('button_abort'); ?>
                                     </button>
                                 </div>
                             </div>

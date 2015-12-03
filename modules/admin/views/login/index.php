@@ -5,25 +5,20 @@
             <div class="card hidden" id="success">
                 <div class="login__success">
                     <i class="material-icons login__success-icon green-text">check_circle</i>
-                    <!--<br />
-                    <br />
-                    <small>Sollten Sie nicht automatisch weitergeleitet werden, <a href="/admin">klicken Sie bitte hier.</a></small>
-                    <br />
-                    <br />-->
                 </div>
             </div>
 
             <!-- Normal login -->
             <form class="card" method="post" id="loginForm">
                 <div class="card-content clearfix">
-                    <span class="card-title black-text">Anmeldung <?= Yii::$app->siteTitle; ?></span>
+                    <span class="card-title black-text"><?= \admin\Module::t('login_pre_title', ['title' => Yii::$app->siteTitle]); ?></span>
 
                     <br />
                     <br />
 
                     <div class="row">
                         <div class="input input--text input--vertical col s12">
-                            <label class="input__label" for="email">E-Mail</label>
+                            <label class="input__label" for="email"><?= \admin\Module::t('login_mail'); ?></label>
                             <div class="input__field-wrapper">
                                 <input class="input__field" id="email" name="login[email]" value="<?= $model->email; ?>" type="email" />
                             </div>
@@ -32,7 +27,7 @@
 
                     <div class="row">
                         <div class="input input--text input--vertical col s12">
-                            <label class="input__label" for="password">Passwort</label>
+                            <label class="input__label" for="password"><?= \admin\Module::t('login_password'); ?></label>
                             <div class="input__field-wrapper">
                                 <input class="input__field" id="password" name="login[password]" value="<?= $model->email; ?>" type="password" />
                             </div>
@@ -45,7 +40,7 @@
 
                 <div class="card-action">
                     <button class="btn right color green white-text" type="submit">
-                        Anmelden <i class="material-icons right submit-icon">keyboard_arrow_right</i>
+                        <?= \admin\Module::t('login_btn_login'); ?> <i class="material-icons right submit-icon">keyboard_arrow_right</i>
                         <div class="preloader-wrapper login__spinner right small active hidden spinner"><div class="spinner-layer"><div class="circle-clipper left"><div class="circle"></div></div></div></div>
                     </button>
                     <div class="clearfix"></div>
@@ -56,17 +51,17 @@
             <!-- Token -->
             <form class="card hidden" method="post" id="secureForm">
                 <div class="card-content clearfix">
-                    <span class="card-title black-text">Anmeldung <?= Yii::$app->siteTitle; ?></span>
+                    <span class="card-title black-text"><?= \admin\Module::t('login_pre_title', ['title' => Yii::$app->siteTitle]); ?><</span>
 
                     <br />
                     <br />
 
                     <div class="row">
                         <div class="input input--text input--vertical col s12">
-                            <label class="input__label" for="secure_token">Sicherheitscode</label>
+                            <label class="input__label" for="secure_token"><?= \admin\Module::t('login_securetoken'); ?></label>
                             <div class="input__field-wrapper">
                                 <input class="input__field" name="secure_token" id="secure_token" value="<?= $model->email; ?>" type="text" />
-                                <small>Geben Sie den Sicherheitscode ein, der Ihnen per E-Mail geschickt wurde.</small>
+                                <small><?= \admin\Module::t('login_securetoken_info'); ?></small>
                             </div>
                         </div>
                     </div>
@@ -77,10 +72,10 @@
 
                 <div class="card-action">
                     <button class="btn right green white-text" type="submit">
-                        Anmelden <i class="material-icons right submit-icon">keyboard_arrow_right</i>
+                        <?= \admin\Module::t('button_send'); ?> <i class="material-icons right submit-icon">keyboard_arrow_right</i>
                         <div class="preloader-wrapper login__spinner right small active hidden spinner"><div class="spinner-layer"><div class="circle-clipper left"><div class="circle"></div></div></div></div>
                     </button>
-                    <button class="btn left red white-text" type="button" id="abortToken"><i class="material-icons left">cancel</i> Abbrechen</button>
+                    <button class="btn left red white-text" type="button" id="abortToken"><i class="material-icons left">cancel</i> <?= \admin\Module::t('button_abort'); ?></button>
                     <div class="clearfix"></div>
                 </div>
             </form>

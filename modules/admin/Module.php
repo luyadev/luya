@@ -90,4 +90,9 @@ class Module extends \admin\base\Module
             '\\admin\\importers\\PropertyImporter',
         ];
     }
+    
+    public static function t($message, array $params = [])
+    {
+        return \luya\Module::t('admin', $message, $params);
+    }
 }
