@@ -11,7 +11,12 @@ return [
             'dsn' => 'mysql:host=localhost;dbname=DB_NAME',
             'username' => '',
             'password' => '',
-            'charset' => 'utf8'
+            'charset' => 'utf8',
+            
+            // in productive enviroments you can enable the schema caching
+            // 'enableSchemaCache' => true,
+            // 'schemaCacheDuration' => 36000, // Duration of schema cache.
+            // 'schemaCache' => 'cache', // Name of the cache component used to store schema information
         ]
     ]
 ];
