@@ -4,8 +4,21 @@ namespace luya\traits;
 
 trait Application
 {
+    /**
+     * @var string Title for the appliation used in differnt sections like Login screen
+     */
     public $siteTitle = 'Luya';
 
+    /**
+     * @var string The internal used language to translate luya message, this is also used for all luya
+     * core modules. Currently available languages
+     * + en
+     * + de
+     *
+     * @since 1.0.0-beta2
+     */
+    public $luyaLanguage = 'en';
+    
     public $remoteToken = false;
 
     public $luyaCoreComponents = [
