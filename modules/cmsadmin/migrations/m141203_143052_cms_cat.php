@@ -16,7 +16,7 @@ class m141203_143052_cms_cat extends Migration
         ]);
 
         $this->insert('cms_cat', [ // renamed to cms_nav_container
-            'name' => 'Hauptnavigation',
+            'name' => 'Default Container',
             'rewrite' => 'default', // renmaed to alias
             //'default_nav_id' => 1,
             //'is_default' => 1,

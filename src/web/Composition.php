@@ -52,7 +52,7 @@ class Composition extends \yii\base\Component implements \ArrayAccess
     /**
      * @var array Default value if there is no composition provided in the url. The default value must match the url.
      */
-    public $default = ['langShortCode' => 'de'];
+    public $default = ['langShortCode' => 'en'];
 
     /**
      * @var array Read-Only property, contains all composition key value paringins
