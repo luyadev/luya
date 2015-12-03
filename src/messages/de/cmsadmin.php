@@ -53,6 +53,19 @@ return [
     'view_update_page_is_redirect_internal' => 'Diese Seite ist ein <b>interner Redirect</b> auf <show-internal-redirection nav-id="typeData.value" />.',
     'view_update_page_is_redirect_external' => 'Diese Seite ist ein <b>externer Redirect</b> auf <a ng-href="{{typeData.value}}">{{typeData.value}}</a>',
     
+    // menu
+    
+    'menu_node_cms' => 'Seiteninhalte',
+    'menu_node_cmssettings' => 'CMS-Einstellungen',
+    'menu_group_env' => 'Umgebung',
+    'menu_group_item_env_container' => 'Container',
+    'menu_group_item_env_layouts' => 'Layouts',
+    'menu_group_elements' => 'Inhaltselemente',
+    'menu_group_item_elements_blocks' => 'Verwalten',
+    'menu_group_item_elements_group' => 'Gruppen',
+   
+    // global
+    
     'btn_abort' => 'Abbrechen',
     'btn_refresh' => 'Aktualisieren',
     'btn_save' => 'Speichern',
