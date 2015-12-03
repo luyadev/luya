@@ -25,14 +25,14 @@
         
         
         <!-- You can delete this line in your template! as this is only a luya information. -->
-        <div style="background: #9ccc65; margin-top:20px;" class="container" id="yes">
+        
+        <div style="padding:20px; background-color:#9ccc65; margin-top:20px;" class="container">
             <div>
-                <p style="padding:10px 10px; margin:0px;"><?= \luya\Module::t('luya', 'kickstarter_success'); ?></p>
-            </div>
-            <div>
-                <p style="padding:10px 10px; margin:0px; font-weight:bold;"><?= \luya\Module::t('luya', 'kickstarter_admin_link', ['link' => \luya\helpers\Url::toInternal(['admin/default/index']), true]); ?></p>
+                <?= \luya\Module::t('luya', 'kickstarter_success'); ?>
+                <?= \luya\Module::t('luya', 'kickstarter_admin_link', ['link' => \luya\helpers\Url::toInternal(['admin/default/index']), true]); ?>
             </div>
         </div>
+        
         <div class="container" id="content">
             <div class="row">
                 <ol class="breadcrumb">
