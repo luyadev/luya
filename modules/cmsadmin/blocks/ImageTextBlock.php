@@ -68,7 +68,7 @@ class ImageTextBlock extends \cmsadmin\base\Block
                             ['value' => '15px', 'label' => '50 ' . Module::t('block_image_text_margin_pixel')],
                     ],
                 ],
-                ['var' => 'textType', 'label' => Module::t('block_image_text_texttype_label'), 'initvalue' => 1, 'type' => 'zaa-select', 'options' => [
+                ['var' => 'textType', 'label' => Module::t('block_image_text_texttype_label'), 'initvalue' => 0, 'type' => 'zaa-select', 'options' => [
                         ['value' => '0', 'label' => Module::t('block_image_text_texttype_normal')],
                         ['value' => '1', 'label' => Module::t('block_image_text_texttype_markdown')],
                     ],
@@ -92,6 +92,8 @@ class ImageTextBlock extends \cmsadmin\base\Block
         $text = $this->getVarValue('text');
 
         if ($this->getCfgValue('textType')) {
+            // convert line breaks into two spaces
+            $text = str_replace("\n", "\r\r ", $text);
             $text = $this->getParser()->parse($text);
         }
 
