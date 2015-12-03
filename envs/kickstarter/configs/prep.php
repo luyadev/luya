@@ -8,6 +8,7 @@ $config = [
     'id' => 'myproject', // For best interoperability it is recommended that you use only alphanumeric characters when specifying an application ID
     'siteTitle' => 'My Project', // The name of your site, will be display on the login screen
     'basePath' => dirname(__DIR__),
+    'luyaLanguage' => 'en', // set the administration area language (currently available en, de)
     'defaultRoute' => 'cms', // set the default module
 	'modules' => [
         'luya' => 'luya\Module',
