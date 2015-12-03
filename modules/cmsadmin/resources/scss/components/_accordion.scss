@@ -1,7 +1,4 @@
 .accordion {
-    border-top: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-    border-left: 1px solid #ddd;
     margin: 0.5rem 0 1rem 0;
 
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
@@ -10,13 +7,13 @@
 
 .accordion__header {
     background-color: $accordion__header-bg;
-    color: #000;
+    color: $white;
     display: block;
     cursor: pointer;
     height: 3rem;
     line-height: 3rem;
     padding: 0 1rem;
-    border-bottom: 1px solid #ddd;
+    border-bottom: none;
 	user-select: none;
 
     i {
@@ -33,6 +30,9 @@
 
 .accordion__body {
     background-color: $collapsible--background;
+    border-bottom: 1px solid $black;
+    border-right: 1px solid $black;
+    border-left: 1px solid $black;
     height: 0;
     padding: 0;
     overflow: hidden;

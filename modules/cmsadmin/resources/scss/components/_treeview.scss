@@ -18,9 +18,11 @@ $treeview--padding: 5px;
 	i {
 		position: relative;
 		vertical-align: middle;
+		cursor: pointer;
 	}
 
 	span {
+		display: inline-block;
 		word-break: break-word;
 		margin-top: 2px;
 		width: calc(100% - 50px);
@@ -112,9 +114,8 @@ $treeview--padding: 5px;
 }
 
 .treeview__link {
-	background-color: darken($grey, 10);
+	background-color: $grey;
 	position: relative;
-	cursor: pointer;
 	user-select: none;
 	padding-right: 10px;
 
@@ -157,6 +158,10 @@ $treeview--padding: 5px;
 
 .treeview--drag-active .treeview__link {
 	cursor: move;
+
+	span, i {
+		cursor: move;
+	}
 }
 
 .treeview--drag-active .treeview__drop {

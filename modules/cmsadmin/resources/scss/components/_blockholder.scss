@@ -54,6 +54,7 @@
         padding-top: 4px;
         padding-left: 4px;
     }
+
     &.blockholder__icon--cancel {
         right: 0;
         color: black;
@@ -72,32 +73,41 @@
 
 .blockholder__block {
 	background-color: #4E4E4E;
-	font-size: 14px;
+	font-size: 13px;
 	line-height: 20px;
 	cursor: move;
 	display: inline-block;
 	color: rgba($white, 0.5);
-	padding: 4px 10px;
-	border: 2px dotted rgba($white, 0.5);
+	padding: 4px 5px;
+	border: 1px dashed rgba($white, 0.5);
 	margin-right: 10px;
-	transition: 0.25s ease box-shadow;
+	transition: 0.2s ease background-color, 0.2s ease color, 0.2s ease border-color, 0.2s ease box-shadow;
 	user-select: none;
 	width: 100%;
 	text-align: left;
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 	z-index: 10 !important;
+
 	i {
-		float: left !important;
-		margin-right: 5px !important;
+		margin: 0 !important;
+		font-size: 16px;
+		vertical-align: middle;
+		width: 20px;
 	}
 
 	span {
 		margin-top: 1px;
 		display: inline-block;
+		vertical-align: middle;
+		width: calc(100% - 30px);
 	}
 
-	&:hover {
+	&:hover,
+	&.ui-draggable-dragging {
 		box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+		background-color: $white;
+		color: $black;
+		border-color: $black;
 	}
 
 	&.ui-draggable-dragging {
