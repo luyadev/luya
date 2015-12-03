@@ -2,6 +2,7 @@
 
 namespace cmsadmin\apis;
 
+use cmsadmin\models\NavItemRedirect;
 use Yii;
 use cmsadmin\models\Property;
 use cmsadmin\models\Nav;
@@ -120,6 +121,19 @@ class NavController extends \admin\base\RestController
     {
         $model = \cmsadmin\models\Nav::find()->where(['id' => $navId])->one();
         if ($model) {
+            // check for internal redirects
+            $redirectResult = false;
+            $redirects = NavItemRedirect::find()->where(['value' => $navId])->asArray()->all();
+            foreach($redirects as $redirect) {
+                $navItem = NavItem::find()->where(['nav_item_type' => 3, 'nav_item_type_id' => $redirect['id']])->one();
+                $redirectResult = empty(Nav::find()->where(['id' => $navItem->nav_id, 'is_deleted' => 0])->one()) ? $redirectResult : true;
+            }
+
+            if ($redirectResult) {
+                Yii::$app->response->statusCode = 417;
+                return;
+            }
+
             $model->is_deleted = 1;
 
             foreach (NavItem::find()->where(['nav_id' => $navId])->all() as $navItem) {

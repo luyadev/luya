@@ -842,7 +842,9 @@
 	    			//NewMenuService.get(true);
 	    			$scope.isDeleted = true;
 	    			$scope.menuDataReload();
-	    		});
+	    		}).error(function(response) {
+					// toast error page could'nt be delete because there are redirects linking to this page
+				});;
 	    	}
 	    };
 		
