@@ -6,10 +6,19 @@ $white: #fff;
 $black: #000;
 $grey: #f5f5f5;
 $grey--darken: darken($grey, 10);
-$red: #f44336;
 
-$blue: #2196F3;
-$teal: #009688;
+$bluegrey--lighten-2:       #CFD8DC;
+$bluegrey--lighten-3:       #B0BEC5;
+
+$red:               #f44336;
+
+$deeporange:        #FF5722;
+
+$blue:              #2196F3;
+$teal:              #009688;
+$teal--lighten-2:   #B2DFDB;
+
+$lime:              #CDDC39;
 
 $purple--lighten-2: #ba68c8;
 $pink--accent-3:	#f50057;
@@ -25,6 +34,11 @@ $green--darken-3:	#2e7d32;
 $page--background: 							$white;
 $page__header--background:					$grey;
 $page__header--color:						$black;
+
+/**
+ * Accordion
+ */
+$accordion__header-bg:                      $deeporange;
 
 /**
  * Collapsible
@@ -45,6 +59,10 @@ $block__toolbar--height:					37px;
 $block__toolbar--background:				$teal;
 $block--hidden__toolbar-background:			$grey;
 $block__toolbar--color:						$white;
+
+$block__toolbar__icon:                      $white;
+$block__toolbar__icon--hover:               $lime;
+$block__toolbar__icon--active:              $lime;
 
 $block__configs--background:				$grey;
 

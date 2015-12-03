@@ -9,7 +9,7 @@
 }
 
 .accordion__header {
-    background-color: #fff;
+    background-color: $accordion__header-bg;
     color: #000;
     display: block;
     cursor: pointer;

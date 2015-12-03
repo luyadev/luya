@@ -80,6 +80,19 @@
 	// Hover animation
 	transform: translateY(-100%);
 }
+
+.block__toolbar__icon {
+    // color: $block__toolbar__icon;
+    transition: 0.2s ease color;
+
+    &:hover {
+        color: $block__toolbar__icon--hover;
+    }
+    &.block__toolbar__icon--active {
+        color: $block__toolbar__icon--active;
+    }
+}
+
 .block--is-hidden:not(.block--is-container):not(.block--edit):not(.block--config) .block__toolbar {
 	background-color: $block--hidden__toolbar-background;
 	color: $black;
@@ -174,12 +187,15 @@
 }
 
 .block__config__text {
-	font-size: 1rem;
-	font-weight: bold;
+    font-size: 1rem;
+    font-weight: bold;
     line-height: 36px;
     text-align: left;
     text-transform: uppercase;
     vertical-align: middle;
+}
+.block__config__text-section {
+    color: $lime;
 }
 
 .block__help {

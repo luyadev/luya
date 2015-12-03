@@ -3,6 +3,9 @@ LUYA CHANGELOG
 
 1.0.0-beta2 (in progress)
 -------------------------
+
+- `#619` Blocktoolbar displaying now always all possible icons
+- `#620` Switched background-color of the layout-labels from white to deeporagne
 - **[BC BREAK]** removed $app->storage component and replaced with new storage $app->component see api guide.
 - **[BC BREAK]** removed luya\web\Composition::set method.
 - `#616` create default page on setup command.
