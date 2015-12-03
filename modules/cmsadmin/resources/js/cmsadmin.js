@@ -515,13 +515,16 @@
 			return ServiceMenuData.load(true);
 		}
 		
-		$scope.go = function(data) {
+		$scope.toggleItem = function(data) {
 			if (data.toggle_open == undefined) {
 				data['toggle_open'] = 1;
 			} else {
 				data['toggle_open'] = !data.toggle_open;
 			}
-	    	$state.go('custom.cmsedit', { navId : data.id });
+		};
+		
+		$scope.go = function(data) {
+			$state.go('custom.cmsedit', { navId : data.id });
 	    };
 		
 	    $scope.showDrag = 0;
