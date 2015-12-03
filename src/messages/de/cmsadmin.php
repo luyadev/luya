@@ -36,4 +36,24 @@ return [
     'view_index_sidebar_new_page' => 'Neue Seite erstellen',
     'view_index_sidebar_drafts' => 'Vorlagen',
     'view_index_sidebar_move' => 'Verschieben',
+    
+    // view_update
+    
+    'view_update_drop_blocks' => 'Inhaltsblöcke hier platzieren',
+    'view_update_settings' => 'Einstellungen',
+    'view_update_btn_save' => 'Speichern',
+    'view_update_holder_state_on' => 'Platzhalter einklappen',
+    'view_update_holder_state_off' => 'Platzhalter ausklappen',
+    'view_update_is_draft_mode' => 'Sie sind im Seiten-Vorlage Modus.',
+    'view_update_is_homepage' => 'Startseite',
+    'view_update_no_properties_exists' => 'Es wurden noch keine Eigenschaften gespeichert.',
+    'view_update_draft_no_lang_error' => 'Vorlagen haben keine Sprach spezifikation.',
+    'view_update_no_translations' => 'Diese Seite wurde noch nicht übersetzt.',
+    'view_update_page_is_module' => 'Diese Seite ist als <b>Module</b> hinterlegt.',
+    'view_update_page_is_redirect_internal' => 'Diese Seite ist ein <b>interner Redirect</b> auf <show-internal-redirection nav-id="typeData.value" />.',
+    'view_update_page_is_redirect_external' => 'Diese Seite ist ein <b>externer Redirect</b> auf <a ng-href="{{typeData.value}}">{{typeData.value}}</a>',
+    
+    'btn_abort' => 'Abbrechen',
+    'btn_refresh' => 'Aktualisieren',
+    'btn_save' => 'Speichern',
 ];
