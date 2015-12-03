@@ -107,4 +107,16 @@ return [
     'ngrest_crud_search_text' => 'Enter search term...',
     'ngrest_crud_rows_count' => 'Entires',
     'ngrest_crud_btn_create' => 'Create',
+
+    // apis
+    'api_storage_image_upload_error' => 'The following error occured while uploading an image \'{error}\'.',
+    'api_storage_file_upload_success' => 'Files have been uploaded successfully.',
+    'api_sotrage_file_upload_error' => 'The following error occured while upload a file \'{error}\'.',
+    'api_sotrage_file_upload_empty_error' => 'No files to upload found, have you selected any files?',
+    
+    // aws/changepassword
+    'aws_changepassword_info' => 'Please enter a new passwort for this user. The passwort must have a length of at least 6 chars.',
+    'aws_changepassword_succes' => 'The password have been encrypted and stored successful.',
+    'aws_changepassword_new_pass' => 'New password',
+    'aws_changepassword_new_pass_retry' => 'New passwort repeat',
 ];

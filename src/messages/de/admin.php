@@ -110,7 +110,7 @@ return [
     
     // apis
     'api_storage_image_upload_error' => 'Beim hochladen des Bildes ist folgender Fehler passiert \'{error}\'.',
-    'api_storage_file_upload_success' => 'file uploaded succesfully',
+    'api_storage_file_upload_success' => 'Datei wurde erfolgreich hochgeladen.',
     'api_sotrage_file_upload_error' => 'Beim hochladen der Datei ist folgender Fehler passiert \'{error}\'.',
     'api_sotrage_file_upload_empty_error' => 'Es wurden keine Dateine zum hochladen gefunden. Keine daten gewählt.',
     
