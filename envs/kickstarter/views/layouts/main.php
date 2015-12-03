@@ -23,9 +23,7 @@
             </div>
         </div>
         
-        
         <!-- You can delete this line in your template! as this is only a luya information. -->
-        
         <div style="padding:20px; background-color:#9ccc65; margin-top:20px;" class="container">
             <div>
                 <?= \luya\Module::t('luya', 'kickstarter_success'); ?>
@@ -43,7 +41,7 @@
             </div>
         
             <div class="row">
-                <div class="col-md-3"  id="nav">
+                <div class="col-md-3" id="nav" style="min-height:500px;">
                     <ul>
                     <?php foreach (Yii::$app->menu->find()->where(['parent_nav_id' => 0, 'container' => 'default'])->all() as $item): ?>
                         <li>

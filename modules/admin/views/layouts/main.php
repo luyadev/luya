@@ -181,13 +181,13 @@ $this->beginPage()
 
                 <div class="floating-form left" ng-class="{ 'floating-form--active' : showFolderForm }">
                     <div class="floating-form__form">
-                        <input class="floating-form__input" type="text" ng-model="newFolderName" id="foldername" placeholder="Ordner" />
+                        <input class="floating-form__input" type="text" ng-model="newFolderName" id="foldername" placeholder="<?= Luya::t('admin', 'layout_filemanager_folder'); ?>" />
                     </div><!-- PREVENT WHITESPACE
                          --><div class="floating-form__actions">
                         <span class="[ floating-form__button floating-form__button--active ] btn-floating" ng-click="createNewFolder(newFolderName)"><i class="material-icons">check</i></span>
                         <span class="floating-form__button floating-form__button--active-close btn-floating" ng-click="folderFormToggler()"><i class="material-icons">add</i></span>
                     </div><!-- PREVENT WHITESPACE
-                         --><span class="floating-form__label" ng-click="folderFormToggler()">Ordner hinzufügen</span>
+                         --><span class="floating-form__label" ng-click="folderFormToggler()"><?= Luya::t('admin', 'layout_filemanager_add_folder'); ?></span>
                 </div>
 
             </div>
@@ -198,7 +198,7 @@ $this->beginPage()
                     <div class="filemanager__folder-button folder-root" ng-click="changeCurrentFolderId(0)">
                         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default">folder_open</i>
                         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active">folder</i>
-                        <span class="filemanager__folder-name">Stammverzeichnis</span>
+                        <span class="filemanager__folder-name"><?= Luya::t('admin', 'layout_filemanager_root_dir'); ?></span>
                     </div>
                     <ul class="filemanager__folders">
                         <li class="filemanager__folder" ng-class="{'filemanager__folder--active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData | filemanagerdirsfilter:0" ng-include="'reverseFolders'"></li>
@@ -218,7 +218,7 @@ $this->beginPage()
                             <span class="btn-floating">
                                 <i class="material-icons">file_upload</i>
                             </span>
-                    <span class="floating-button-label__label">Datei hinzufügen</span>
+                    <span class="floating-button-label__label"><?= Luya::t('admin', 'layout_filemanager_upload_files'); ?></span>
                 </label>
 
                 <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?= Luya::t('admin', 'layout_filemanager_remove_selected_files'); ?></button>
@@ -305,7 +305,7 @@ $this->beginPage()
                         <span class="btn-floating">
                             <i class="material-icons">file_upload</i>
                         </span>
-                <span class="floating-button-label__label">Datei hinzufügen</span>
+                <span class="floating-button-label__label"><?= Luya::t('admin', 'layout_filemanager_upload_files'); ?></span>
             </label>
 
             <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?= Luya::t('admin', 'layout_filemanager_remove_selected_files'); ?><</button>

@@ -81,6 +81,11 @@ return [
     'layout_search_min_letters' => 'Bitte geben Sie einen Suchbegriff mit mindestens <b>drei Buchstaben</b> ein.',
     'layout_search_no_results' => 'Es wurden keine Ergebnisse gefunden.',
     
+    'layout_filemanager_upload_files' => 'Datei hinzufügen',
+    'layout_filemanager_folder' => 'Ordner',
+    'layout_filemanager_add_folder' => 'Ordner hinzufügen',
+    'layout_filemanager_root_dir' => 'Stammverzeichnis',
+    
     // aws/groupauth
     'aws_groupauth_select_all' => 'Alle markieren',
     'aws_groupauth_deselect_all' => 'Alle aufheben',
