@@ -2,6 +2,8 @@
 
 namespace cmsadmin\blocks;
 
+use cmsadmin\Module;
+
 /**
  * Audio block for SoundCloud-Sources
  */
@@ -11,7 +13,7 @@ class AudioBlock extends \cmsadmin\base\Block
     
     public function name()
     {
-        return 'Audio';
+        return Module::t('block_audio_name');
     }
 
     public function icon()
@@ -25,24 +27,13 @@ class AudioBlock extends \cmsadmin\base\Block
            'vars' => [
                 ['var' => 'soundUrl', 'label' => 'Embeded Code', 'type' => 'zaa-text'],
            ],
-           'cfgs' => [],
         ];
     }
 
     public function getFieldHelp()
     {
         return [
-            'soundUrl' => 'Fügen Sie hier den Embed Code von soundcloud.com ein.',            
-        ];
-    }
-
-    /**
-     * Return an array containg all extra vars. Those variables you can access in the Twig Templates via {{extras.*}}.
-     */
-    public function extraVars()
-    {
-        return [
-            // add your custom extra vars here
+            'soundUrl' => Module::t('block_audio_help_soundurl'),            
         ];
     }
 
@@ -52,9 +43,7 @@ class AudioBlock extends \cmsadmin\base\Block
      */
     public function twigFrontend()
     {
-        return '<div>
-                    {% if vars.soundUrl is not empty %}{{ vars.soundUrl }}{% else %}Keine Audioquelle angegeben{% endif %}
-                </div>';
+        return '<div>{% if vars.soundUrl is not empty %}{{ vars.soundUrl }}{% else %}Keine Audioquelle angegeben{% endif %}</div>';
     }
 
     /**

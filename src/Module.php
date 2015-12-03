@@ -44,6 +44,7 @@ class Module extends \luya\base\Module
             'basePath' => '@luya/messages',
             'fileMap' => [
                 'luya/admin' => 'admin.php',
+                'luya/cmsadmin' => 'cmsadmin.php',
             ],
         ];
     }

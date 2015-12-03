@@ -66,4 +66,9 @@ class Module extends \admin\base\Module
             '\\cmsadmin\\importers\\PropertyConsistencyImporter',
         ];
     }
+    
+    public static function t($message, array $params = [])
+    {
+        return \luya\Module::t('cmsadmin', $message, $params);
+    }
 }
