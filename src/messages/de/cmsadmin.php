@@ -211,6 +211,7 @@ return [
     'view_update_holder_state_off' => 'Platzhalter ausklappen',
     'view_update_is_draft_mode' => 'Sie sind im Seiten-Vorlage Modus.',
     'view_update_is_homepage' => 'Startseite',
+    'view_update_properties_title' => 'Seiten Eigenschaften',
     'view_update_no_properties_exists' => 'Es wurden noch keine Eigenschaften für diese Seite gespeichert.',
     'view_update_draft_no_lang_error' => 'Vorlagen haben keine Sprach spezifikation.',
     'view_update_no_translations' => 'Diese Seite wurde noch nicht übersetzt.',

@@ -253,7 +253,7 @@
             <div class="row" ng-show="showPropForm">
                 <div class="col s12">
                     <div class="card-panel">
-                    <h5>Seiten Eigenschaften</h5>
+                    <h5><?= \cmsadmin\Module::t('view_update_properties_title'); ?></h5>
                     <div ng-show="!hasValues" class="alert alert--info"><?= \cmsadmin\Module::t('view_update_no_properties_exists'); ?></div>
                         <div class="row" ng-repeat="prop in propertiesData">
                             <zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{prop.label}}" model="propValues[prop.id]"></zaa-injector>
@@ -345,7 +345,7 @@
                             </div>
                             <div class="row">
                                 <div class="input input--radios col s12">
-                                    <label class="input__label"><?= \cmsadmin\Module::t('view_update_'); ?>Seitentyp</label>
+                                    <label class="input__label"><?= \cmsadmin\Module::t('view_index_add_type'); ?></label>
                                     <div class="input__field-wrapper">
                                         <input type="radio" ng-model="itemCopy.nav_item_type" value="1"><label ng-click="itemCopy.nav_item_type = 1"><?= \cmsadmin\Module::t('view_index_type_page'); ?></label> <br />
                                         <input type="radio" ng-model="itemCopy.nav_item_type" value="2"><label ng-click="itemCopy.nav_item_type = 2"><?= \cmsadmin\Module::t('view_index_type_module'); ?></label> <br />
@@ -401,10 +401,10 @@
                                 <div class="col s12" ng-switch-when="3">
                                     <div ng-switch on="typeData.type">
                                         <div ng-switch-when="1">
-                                            <p><?= \cmsadmin\Module::t('view_update_is_redirect_internal'); ?></p>
+                                            <p><?= \cmsadmin\Module::t('view_update_page_is_redirect_internal'); ?></p>
                                         </div>
                                         <div ng-switch-when="2">
-                                            <p><?= \cmsadmin\Module::t('view_update_is_redirect_external'); ?>.</p>
+                                            <p><?= \cmsadmin\Module::t('view_update_page_is_redirect_external'); ?>.</p>
                                         </div>
                                     </div>
                                 </div>

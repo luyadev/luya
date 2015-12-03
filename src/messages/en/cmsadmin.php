@@ -211,6 +211,7 @@ return [
     'view_update_holder_state_off' => 'Unfold placeholders',
     'view_update_is_draft_mode' => 'Editing in draft mode.',
     'view_update_is_homepage' => 'Homepage',
+    'view_update_properties_title' => 'Page properties',
     'view_update_no_properties_exists' => 'No properties have been stored yet for this page.',
     'view_update_draft_no_lang_error' => 'Drafts does not have language specifications.',
     'view_update_no_translations' => 'This page have not been translated yet.',
