@@ -205,7 +205,7 @@ return [
     
     'view_update_drop_blocks' => 'Drop the Content blocks here',
     'view_update_blockcontent' => 'Block content',
-    'view_update_config' => 'Optional Configurations',
+    'view_update_configs' => 'Optional Configurations',
     'view_update_settings' => 'Settings',
     'view_update_btn_save' => 'Save',
     'view_update_btn_cancel' => 'Abort',
