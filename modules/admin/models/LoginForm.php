@@ -23,8 +23,8 @@ class LoginForm extends \yii\base\Model
     public function attributeLabels()
     {
         return [
-            'email' => 'E-Mail',
-            'password' => 'Passwort',
+            'email' => \admin\Module::t('model_loginform_email_label'),
+            'password' => \admin\Module::t('model_loginform_password_label'),
         ];
     }
 
@@ -33,7 +33,7 @@ class LoginForm extends \yii\base\Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Falscher Benutzer oder Passwort.');
+                $this->addError($attribute, \admin\Module::t('model_loginform_wrong_user_or_password'));
             }
         }
     }
