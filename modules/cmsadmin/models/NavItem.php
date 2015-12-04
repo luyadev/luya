@@ -62,8 +62,8 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     public function attributeLabels()
     {
         return [
-            'title' => 'Seitentitel',
-            'alias' => 'Pfadsegment',
+            'title' => \cmsadmin\Module::t('model_navitem_title_label'),
+            'alias' => \cmsadmin\Module::t('model_navitem_alias_label'),
         ];
     }
 
