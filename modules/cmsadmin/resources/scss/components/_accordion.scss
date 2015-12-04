@@ -27,12 +27,16 @@
     }
 }
 
+.accordion__body .accordion__header {
+    background-color: $accordion__header-bg--lighten;
+}
+
 
 .accordion__body {
     background-color: $collapsible--background;
-    border-bottom: 1px solid #4E4E4E;
-    border-right: 1px solid #4E4E4E;
-    border-left: 1px solid #4E4E4E;
+    border-bottom: 1px solid $accordion__header-bg;
+    border-right: 1px solid $accordion__header-bg;
+    border-left: 1px solid $accordion__header-bg;
     height: 0;
     padding: 0;
     overflow: hidden;
@@ -46,6 +50,12 @@
 		text-align: center;
 		margin: 10px 0;
 	}
+}
+
+.accordion__body .accordion__body {
+    border-bottom: 1px solid $accordion__header-bg--lighten;
+    border-right: 1px solid $accordion__header-bg--lighten;
+    border-left: 1px solid $accordion__header-bg--lighten;
 }
 
 .accordion__entry--open > .accordion__body--empty:after {

@@ -120,6 +120,7 @@ $treeview--padding: 5px;
 	padding-right: 10px;
 
 	&.treeview__link--hidden {
+		background-color: #E0E0E0;
 		opacity: 0.5;
 	}
 
