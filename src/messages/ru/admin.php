@@ -8,7 +8,7 @@ return [
     'button_send' => 'Отправить',
 
     // login
-    'login_pre_title' => 'Login for {title}',
+    'login_pre_title' => 'Авторизоваться как {title}',
     'login_mail' => 'Email',
     'login_password' => 'Пароль',
     'login_btn_login' => 'Логин',
