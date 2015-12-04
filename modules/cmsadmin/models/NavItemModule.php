@@ -40,7 +40,7 @@ class NavItemModule extends \cmsadmin\base\NavItemType
     public function attributeLabels()
     {
         return [
-            'module_name' => 'Modul Name',
+            'module_name' => \cmsadmin\Module::t('model_navitemmodule_module_name_label'),
         ];
     }
 

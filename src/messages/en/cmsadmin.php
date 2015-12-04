@@ -1,6 +1,22 @@
 <?php
 
 return [
+    // Model
+
+    // NavItemModule
+    'model_navitemmodule_module_name_label' => 'Module name',
+
+    // NavItem
+    'model_navitem_title_label' => 'Page title',
+    'model_navitem_alias_label' => 'URL Path segment',
+
+    // NavItemPage
+    'model_navitempage_layout_label' => 'Layout',
+
+    // NavItemRedirect
+    'model_navitemredirect_type_label' => 'Type of redirect',
+    'model_navitemredirect_value_label' => 'Target of redirect',
+
     // Blocks
 
     // AudioBlock
@@ -179,7 +195,7 @@ return [
     'view_index_no' => 'No',
     'view_index_yes' => 'Yes',
     'view_index_page_title' => 'Page Title',
-    'view_index_page_alias' => 'Path segment',
+    'view_index_page_alias' => 'URL Path segment',
     'view_index_page_meta_description' => 'Description (Meta Description for Google)',
     'view_index_page_nav_container' => 'Navigation-Container',
     'view_index_page_parent_page' => 'Parent Page',

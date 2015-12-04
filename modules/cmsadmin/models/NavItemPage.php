@@ -26,7 +26,7 @@ class NavItemPage extends \cmsadmin\base\NavItemType
     public function attributeLabels()
     {
         return [
-            'layout_id' => 'Layout',
+            'layout_id' => \cmsadmin\Module::t('model_navitempage_layout_label'),
         ];
     }
 

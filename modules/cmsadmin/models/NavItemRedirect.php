@@ -25,6 +25,14 @@ class NavItemRedirect extends \cmsadmin\base\NavItemType
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'value' => \cmsadmin\Module::t('model_navitemredirect_value_label'),
+            'type' => \cmsadmin\Module::t('model_navitemredirect_type_label'),
+        ];
+    }
+
     public function resolveValue()
     {
         switch ($this->type) {
