@@ -470,7 +470,7 @@ class Container extends \yii\base\Component implements ArrayAccess
         $lang = $this->getLanguage($langShortCode);
 
         if (!$lang) {
-            throw new Exception('the requested language does not exist.');
+            throw new Exception(sprintf("The requested language '%s' does not exist in language table", $langShortCode));
         }
 
         $data = $this->getNavData($lang['id']);
