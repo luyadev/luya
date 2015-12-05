@@ -359,7 +359,7 @@ class Container extends \yii\base\Component implements ArrayAccess
         if (empty($requestPath)) {
             $home = $this->getHome();
             if (!$home) {
-                throw new Exception('Home item could not be found, have you forget to set a default page?');
+                throw new NotFoundHttpException('Home item could not be found, have you forget to set a default page?');
             }
             $requestPath = $home->alias;
         }
@@ -470,7 +470,7 @@ class Container extends \yii\base\Component implements ArrayAccess
         $lang = $this->getLanguage($langShortCode);
 
         if (!$lang) {
-            throw new Exception(sprintf("The requested language '%s' does not exist in language table", $langShortCode));
+            throw new NotFoundHttpException(sprintf("The requested language '%s' does not exist in language table", $langShortCode));
         }
 
         $data = $this->getNavData($lang['id']);
