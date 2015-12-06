@@ -26,29 +26,19 @@ class Module extends \luya\base\Module
     ];
     
     /**
-     * initializ luya messages
+     * @var array Register all luya core component language messages.
      */
-    public function init()
-    {
-        parent::init();
-        $this->registerTranslations();
-    }
-    
-    /**
-     * register the translation service for luya
-     */
-    public function registerTranslations()
-    {
-        Yii::$app->i18n->translations['luya*'] = [
-            'class' => 'yii\i18n\PhpMessageSource',
+    public $translations = [
+        [
+            'prefix' => 'luya*',
             'basePath' => '@luya/messages',
             'fileMap' => [
                 'luya/luya' => 'luya.php',
                 'luya/admin' => 'admin.php',
                 'luya/cmsadmin' => 'cmsadmin.php',
             ],
-        ];
-    }
+        ],
+    ];
     
     /**
      * Get translations for a speficif section

@@ -87,6 +87,25 @@ abstract class Module extends \yii\base\Module
      *           In the method `Yii::$app->getLuyaModules()` the modules will not be listed.
      */
     public $isCoreModule = true;
+    
+    /**
+     * @var array Add translations for your module, all translation array must have the keys "prefix", "basePath" and "fileMap"
+     * For example:
+     * 
+     * ```php
+     * $this->translations = [
+     *     ['prefix' => 'luya*', 'basePath' => '@luya/messages', 'fileMap' => ['luya/admin' => 'admin.php']],
+     * ],
+     * ```
+     * 
+     * To use this translation run or createa a static helper method in your module.php
+     * 
+     * ```php
+     * Yii::t('luya/admin', 'MyVariableInAdminPhp');
+     * ```
+     * @since 1.0.0-beta3
+     */
+    public $translations = [];
 
     /**
      * The Luya-Module initializer is looking for defined requiredComponents.
@@ -103,6 +122,21 @@ abstract class Module extends \yii\base\Module
             if (!Yii::$app->has($component)) {
                 throw new Exception(sprintf('The required component "%s" is not registered in the configuration file', $component));
             }
+        }
+        $this->registerTranslations();
+    }
+    
+    /**
+     * register the translation service for luya
+     */
+    private function registerTranslations()
+    {
+        foreach($this->translations as $translation) {
+            Yii::$app->i18n->translations[$translation['prefix']] = [
+                'class' => 'yii\i18n\PhpMessageSource',
+                'basePath' => $translation['basePath'],
+                'fileMap' => $translation['fileMap'],
+            ];
         }
     }
 

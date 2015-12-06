@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-beta3 (in progress)
 -------------------------
+- `#633` added the ability to register new translations/message quickly in the Module.php via $translation property.
 
 1.0.0-beta2 (3.12.2015)
 -------------------------
