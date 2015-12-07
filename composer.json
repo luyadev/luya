@@ -57,6 +57,9 @@
 	"extra": {
     	"asset-installer-paths": {
             "bower-asset-library": "vendor/bower"
+        },
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
         }
     },
     "bin" : ["src/bin/luya"]
