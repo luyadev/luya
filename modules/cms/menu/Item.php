@@ -58,6 +58,16 @@ class Item extends \yii\base\Object
     }
 
     /**
+     * Return the current container name of this item.
+     *
+     * @return string Return alias name of the container
+     */
+    public function getContainer()
+    {
+        return $this->itemArray['container'];
+    }
+    
+    /**
      * Get the Nav-id of the Item, the Nav-Id is not unique but in case of the language
      * container the nav id is unique. The Nav-Id identifier repersents the id coluumn
      * of the cms_nav table.

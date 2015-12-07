@@ -279,6 +279,23 @@ class Container extends \yii\base\Component implements ArrayAccess
     }
 
     /**
+     * get current items for the same level as the current item for this level.
+     * 
+     * @param int $level Level menu starts with 1
+     * @return \cms\menu\QueryIterator
+     */
+    public function getLevelCurrentItems($level)
+    {
+        $item = $this->getLevelCurrent($level);
+        
+        if (!$item) {
+            return [];
+        }
+        
+        return $this->findAll(['parent_nav_id' => $item->navId, 'container' => $item->container]);
+    }
+    
+    /**
      * currentLevel() is deprecated, use getLevelCurrent().
      * 
      * @param int $level
