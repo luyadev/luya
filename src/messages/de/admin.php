@@ -26,7 +26,7 @@ return [
     
     // menu items
     'menu_access_item_user' => 'Benutzer',
-    'menu_access_item_group' => 'Group',
+    'menu_access_item_group' => 'Benutzergruppen',
     'menu_system_item_language' => 'Sprachen',
     'menu_system_item_tags' => 'Tags',
     'menu_images_item_effects' => 'Effekte',
