@@ -23,7 +23,7 @@
         "bower-asset/angular" : "1.4.7@stable",
         "bower-asset/angular-i18n" : "1.4.7@stable",
         "bower-asset/angular-resource": "1.4.7@stable",
-        "bower-asset/angular-ui-router" : "0.2.*@stable",y
+        "bower-asset/angular-ui-router" : "0.2.*@stable",
         "bower-asset/angular-loading-bar" : "0.8.*@stable",
         "bower-asset/angular-dragdrop" : "1.*@stable",
         "bower-asset/angular-slugify" : "1.0.*",
