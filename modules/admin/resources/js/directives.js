@@ -445,6 +445,34 @@
                         }
 					}
 				}
+
+				$scope.moveLeft = function(index) {
+					for (var i in $scope.model) {
+						var oldValue = $scope.model[i][index];
+						$scope.model[i][index] = $scope.model[i][index-1];
+						$scope.model[i][index-1] = oldValue;
+					}
+				}
+
+				$scope.moveRight = function(index) {
+					for (var i in $scope.model) {
+						var oldValue = $scope.model[i][index];
+						$scope.model[i][index] = $scope.model[i][index+1];
+						$scope.model[i][index+1] = oldValue;
+					}
+				}
+
+				$scope.moveUp = function(index) {
+					var oldRow = $scope.model[index];
+					$scope.model[index] = $scope.model[index-1];
+					$scope.model[index-1] = oldRow;
+				}
+
+				$scope.moveDown = function(index) {
+					var oldRow = $scope.model[index];
+					$scope.model[index] = $scope.model[index+1];
+					$scope.model[index+1] = oldRow;
+				}
 				
 				$scope.removeRow = function(key) {
 					$scope.model.splice(key, 1);
@@ -453,7 +481,6 @@
 			template: function() {
 				return '<div>'+
 							'<h5>{{label}}</h5>' +
-							
 							'<table class="zaa-table">'+
 								'<thead>'+
 									'<tr>'+
@@ -461,15 +488,19 @@
 										'<td data-ng-repeat="(hk, hr) in model[0] track by hk">'+
 											'Spalte {{hk}}'+
 											'<strong>'+
-												'<button type="button" ng-click="removeColumn(hk)" class="btn-floating zaa-table__btn--del">'+
+												'<button ng-show="{{hk > 0}}" ng-click="moveLeft(hk)" style="float:left"><i class="material-icons" style="transform: rotate(180deg);">play_arrow</i></button>' +
+												'<button type="button" ng-click="removeColumn(hk)" class="btn-floating zaa-table__btn--del" data-drag="true">'+
 													'<i class="material-icons">delete</i>'+
-												'</button>'+ 
+												'</button>'+
+												'<button ng-click="moveRight(hk)" ng-show="{{hk < model[0].length-1}}" style="float:right"><i class="material-icons">play_arrow</i></button>' +
 											'</strong>'+											
 										'</td>'+
 									'</tr>'+
 								'</thead>' +
 								'<tr data-ng-repeat="(key, row) in model track by key">'+
 									'<td>'+
+										'<button ng-show="{{key > 0}}" ng-click="moveUp(key)" style="margin-top: 10px"><i class="material-icons" style="transform: rotate(270deg);">play_arrow</i></button>' +
+										'<button ng-show="{{key < model.length-1}}" ng-click="moveDown(key)"><i class="material-icons" style="transform: rotate(90deg);">play_arrow</i></button><br/>' +
 										'#{{key+1}}'+ 
 										'<button type="button" class="btn-floating zaa-table__btn--del" ng-click="removeRow(key)">'+
 											'<i class="material-icons">delete</i>'+
@@ -481,7 +512,6 @@
 								'</tr>'+
 							'</table>'+
 							'<button ng-click="addRow()" type="button" class="zaa-table__btn [ waves-effect waves-light ] btn btn--small">Zeile hinzufügen <i class="material-icons right">add</i></button>'+
-
 							'<button ng-click="addColumn()" type="button" style="float:right;" class="zaa-table__btn[ waves-effect waves-light ] btn btn--small">Spalte einfügen <i class="material-icons right">add</i></button>'+
 						'</div>';
 			}
