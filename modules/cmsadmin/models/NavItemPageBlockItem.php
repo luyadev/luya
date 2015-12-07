@@ -97,7 +97,10 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
 
     public function eventBeforeDelete()
     {
-        Log::add(3, "block.delete '".$this->block->class."', cms_nav_item_page_block_item.id '".$this->id."'");
+        // verify if the block exists or not
+        $class = ($this->block) ? $this->block->class : 'class_does_not_exists';
+        // log event
+        Log::add(3, "block.delete '".$class."', cms_nav_item_page_block_item.id '".$this->id."'");
     }
 
     public function eventAfterInsert()
