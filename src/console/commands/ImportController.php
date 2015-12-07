@@ -140,7 +140,7 @@ class ImportController extends \luya\console\Command implements \luya\console\in
     
             return $this->outputSuccess(print_r($this->_log, true));
         } catch (Exception $err) {
-            return $this->outputError("Import Error: " . $err->getMessage());
+            return $this->outputError(sprintf("Exception while importing: '%s' in file '%s' on line '%s'.", $err->getMessage(), $err->getFile(), $err->getLine()));
         }
     }
 }
