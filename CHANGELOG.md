@@ -4,6 +4,7 @@ LUYA CHANGELOG
 1.0.0-beta3 (in progress)
 -------------------------
 
+- `#638` fixed issue where menu component does not use `createRouteEnsure`.
 - `#634` added getContainer and getLevelCurrentItems for menu component.
 - `#633` added the ability to register new translations/message quickly in the Module.php via $translation property.
 

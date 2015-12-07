@@ -418,7 +418,7 @@ class Container extends \yii\base\Component implements ArrayAccess
      */
     private function buildItemLink($alias, $langShortCode)
     {
-        return Yii::$app->getUrlManager()->prependBaseUrl($this->composition->prependTo($alias, $this->composition->createRoute(['langShortCode' => $langShortCode])));
+        return Yii::$app->getUrlManager()->prependBaseUrl($this->composition->prependTo($alias, $this->composition->createRouteEnsure(['langShortCode' => $langShortCode])));
     }
 
     /**
