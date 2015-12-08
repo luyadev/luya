@@ -237,4 +237,7 @@ return [
     'btn_abort' => 'Отмена',
     'btn_refresh' => 'Обновить',
     'btn_save' => 'Сохранить',
+    
+// added translation in 1.0.0-beta3:
+    
 ];

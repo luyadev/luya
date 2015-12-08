@@ -119,4 +119,6 @@ return [
     'aws_changepassword_succes' => 'Пароль успешно изменен.',
     'aws_changepassword_new_pass' => 'Новый пароль',
     'aws_changepassword_new_pass_retry' => 'Повторите пароль',
+    
+// added translation in 1.0.0-beta3:
 ];

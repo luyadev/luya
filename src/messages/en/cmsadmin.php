@@ -86,7 +86,7 @@ return [
     'block_link_button_btnhref_label' => 'Link adress',
 
     // ListBlock
-    'block_list_name' => 'Listing',
+    'block_list_name' => 'List',
     'block_list_elements_label' => 'Elements',
     'block_list_listtype_label' => 'Type',
     'block_list_listtype_ul' => 'Listing',
@@ -238,7 +238,7 @@ return [
     'btn_refresh' => 'Refresh',
     'btn_save' => 'Save',
 
-    // added translation in 1.0.0-beta2:
+// added translation in 1.0.0-beta3:
 
     // NavItemModule
     'model_navitemmodule_module_name_label' => 'Module name',

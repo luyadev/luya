@@ -120,7 +120,7 @@ return [
     'aws_changepassword_new_pass' => 'New password',
     'aws_changepassword_new_pass_retry' => 'New passwort repeat',
 
-    // added translation in 1.0.0-beta2:
+// added translation in 1.0.0-beta3:
 
     // models/LoginForm
     'model_loginform_email_label' => 'Email',

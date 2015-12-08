@@ -239,7 +239,7 @@ return [
     'btn_refresh' => 'Aktualisieren',
     'btn_save' => 'Speichern',
 
-    // added translation in 1.0.0-beta2:
+// added translation in 1.0.0-beta3:
 
     // NavItemModule
     'model_navitemmodule_module_name_label' => 'Modul Name',

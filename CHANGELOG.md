@@ -10,6 +10,8 @@ LUYA CHANGELOG
 - `#643` added ability to get cms menu item siblings.
 - `#644` added ability to get all menu items for a specific level `getLevelContainer` in menu component.
 - `#639` added missing translations for divider line block.
+- `#158` added ability to sort the items in list block.
+- `#425` added ability to move columnds and rows up/down in table block.
 
 1.0.0-beta2 (3.12.2015)
 -------------------------
