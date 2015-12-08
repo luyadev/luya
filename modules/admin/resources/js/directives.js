@@ -447,6 +447,7 @@
 				}
 
 				$scope.moveLeft = function(index) {
+					index = parseInt(index);
 					for (var i in $scope.model) {
 						var oldValue = $scope.model[i][index];
 						$scope.model[i][index] = $scope.model[i][index-1];
@@ -455,6 +456,7 @@
 				}
 
 				$scope.moveRight = function(index) {
+					index = parseInt(index);
 					for (var i in $scope.model) {
 						var oldValue = $scope.model[i][index];
 						$scope.model[i][index] = $scope.model[i][index+1];
@@ -463,12 +465,14 @@
 				}
 
 				$scope.moveUp = function(index) {
+					index = parseInt(index);
 					var oldRow = $scope.model[index];
 					$scope.model[index] = $scope.model[index-1];
 					$scope.model[index-1] = oldRow;
 				}
 
 				$scope.moveDown = function(index) {
+					index = parseInt(index);
 					var oldRow = $scope.model[index];
 					$scope.model[index] = $scope.model[index+1];
 					$scope.model[index+1] = oldRow;
@@ -476,6 +480,19 @@
 				
 				$scope.removeRow = function(key) {
 					$scope.model.splice(key, 1);
+				}
+
+				$scope.showRightButton = function(index) {
+					if (parseInt(index) < Object.keys($scope.model[0]).length - 1) {
+						return true;
+					}
+					return false;
+				}
+				$scope.showDownButton = function(index) {
+					if (parseInt(index) < Object.keys($scope.model).length - 1) {
+						return true;
+					}
+					return false;
 				}
 			},
 			template: function() {
@@ -492,7 +509,7 @@
 												'<button type="button" ng-click="removeColumn(hk)" class="btn-floating zaa-table__btn--del" data-drag="true">'+
 													'<i class="material-icons">delete</i>'+
 												'</button>'+
-												'<button ng-click="moveRight(hk)" ng-show="{{hk < model[0].length-1}}" style="float:right"><i class="material-icons">play_arrow</i></button>' +
+												'<button ng-click="moveRight(hk)" ng-show="showRightButton(hk)" style="float:right"><i class="material-icons">play_arrow</i></button>' +
 											'</strong>'+											
 										'</td>'+
 									'</tr>'+
@@ -500,7 +517,7 @@
 								'<tr data-ng-repeat="(key, row) in model track by key">'+
 									'<td>'+
 										'<button ng-show="{{key > 0}}" ng-click="moveUp(key)" style="margin-top: 10px"><i class="material-icons" style="transform: rotate(270deg);">play_arrow</i></button>' +
-										'<button ng-show="{{key < model.length-1}}" ng-click="moveDown(key)"><i class="material-icons" style="transform: rotate(90deg);">play_arrow</i></button><br/>' +
+										'<button ng-show="showDownButton(key)" ng-click="moveDown(key)"><i class="material-icons" style="transform: rotate(90deg);">play_arrow</i></button><br/>' +
 										'#{{key+1}}'+ 
 										'<button type="button" class="btn-floating zaa-table__btn--del" ng-click="removeRow(key)">'+
 											'<i class="material-icons">delete</i>'+
