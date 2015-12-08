@@ -730,6 +730,27 @@
 	                    }
 	                }, 50);
 	            }
+
+				$scope.moveUp = function(index) {
+					index = parseInt(index);
+					var oldRow = $scope.model[index];
+					$scope.model[index] = $scope.model[index-1];
+					$scope.model[index-1] = oldRow;
+				}
+
+				$scope.moveDown = function(index) {
+					index = parseInt(index);
+					var oldRow = $scope.model[index];
+					$scope.model[index] = $scope.model[index+1];
+					$scope.model[index+1] = oldRow;
+				}
+
+				$scope.showDownButton = function(index) {
+					if (parseInt(index) < Object.keys($scope.model).length - 1) {
+						return true;
+					}
+					return false;
+				}
 	
 			},
 			template: function() {
@@ -738,11 +759,13 @@
                             '<div class="input__field-wrapper">' +
                                 '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="green-text">+</span> links unten ein.</p>' +
                                 '<div ng-repeat="(key,row) in model track by key" class="list__item">' +
-                                    '<div class="list__left">' +
+                                    '<div class="list__left" style="width:calc(100% - 140px)">' +
                                         '<input class="list__input" type="text" ng-model="row.value" />' +
                                     '</div>' +
-                                    '<div class="list__right">' +
-                                        '<button class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
+                                    '<div class="list__right" style="width:130px">' +
+										'<button ng-show="{{key > 0}}" ng-click="moveUp(key)" style="margin-top: 10px"><i class="material-icons" style="transform: rotate(270deg);">play_arrow</i></button>' +
+										'<button ng-show="showDownButton(key)" ng-click="moveDown(key)"><i class="material-icons" style="transform: rotate(90deg);">play_arrow</i></button>' +
+                                        '<button class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" style="margin-right:10px" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
                                     '</div>' +
                                 '</div>' +
                                 '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ waves-effect waves-circle waves-light ]"><i class="material-icons">add</i></button>' +
