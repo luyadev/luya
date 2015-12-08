@@ -1122,7 +1122,9 @@
 		                    scope.imageLoading = false;
 						});
 					} else {
-						scope.imageinfo = items[0];
+						var item = items[0];
+						scope.ngModel = item.id
+						scope.imageinfo = item;
 					}
 				};
 				
