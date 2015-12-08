@@ -9,6 +9,7 @@ LUYA CHANGELOG
 - `#633` added the ability to register new translations/message quickly in the Module.php via $translation property.
 - `#643` added ability to get cms menu item siblings.
 - `#644` added ability to get all menu items for a specific level `getLevelContainer` in menu component.
+- `#639` added missing translations for divider line block.
 
 1.0.0-beta2 (3.12.2015)
 -------------------------

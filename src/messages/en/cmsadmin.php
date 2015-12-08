@@ -71,14 +71,14 @@ return [
 
     // LineBlock
     'block_line_name' => 'Dividing line',
-    'block_line_linespace_label' => 'Line spacing',
+    'block_line_linespace_label' => 'Spacing',
     'block_line_linespace_space' => 'Spacing(top/bottom)',
-    'block_line_linestyle_label' => 'Line style',
+    'block_line_linestyle_label' => 'Style',
     'block_line_linestyle_dotted' => 'Dotted',
     'block_line_linestyle_dashed' => 'Dashed',
     'block_line_linestyle_solid' => 'Continuous',
-    'block_line_linewidth_label' => 'Line width',
-    'block_line_linecolor_label' => 'Line color',
+    'block_line_linewidth_label' => 'Thickness',
+    'block_line_linecolor_label' => 'Color',
 
     // LinkButtonBlock
     'block_link_button_name' => 'Link button',
@@ -253,5 +253,9 @@ return [
     // NavItemRedirect
     'model_navitemredirect_type_label' => 'Type of redirect',
     'model_navitemredirect_value_label' => 'Target of redirect',
+    
+    // missing from LineBlock
+    'block_line_linecolor_grey' => 'Grey',
+    'block_line_linecolor_black' => 'Black',
 ];
 

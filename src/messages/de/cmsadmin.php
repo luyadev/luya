@@ -254,5 +254,9 @@ return [
     // NavItemRedirect
     'model_navitemredirect_type_label' => 'Art der Weiterleitung',
     'model_navitemredirect_value_label' => 'Ziel der Weiterleitung',
+    
+    // missing from LineBlock
+    'block_line_linecolor_grey' => 'Grau',
+    'block_line_linecolor_black' => 'Schwarz',
 ];
 
