@@ -138,7 +138,6 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 		
 	});
 	
-	
 	zaa.filter('srcbox', function() {
 		return function(input, search) {
 			if (!input) return input;
@@ -244,29 +243,6 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 		};
 	});
 	
-	/*
-	zaa.factory("ApiAdminLang", function($resource) {
-		return $resource("admin/api-admin-lang/:id", { id: "@_id" }, {
-			save: {
-				method: "POST",
-				isArray: false,
-				headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
-			}
-		});
-	});
-	*/
-	
-	
-	
-	zaa.factory("ApiAdminFilter", function($resource) {
-		return $resource("admin/api-admin-filter/:id", { id: "@_id" }, {
-			save: {
-				method: "POST",
-				isArray: false,
-				headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
-			}
-		});
-	});
 
 })();
 

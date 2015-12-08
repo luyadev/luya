@@ -300,29 +300,7 @@ zaa.factory("AdminLangService", function(ServiceLanguagesData) {
 			})
 			
 		});
-		/*
-		service.data = data;
-		angular.forEach(data, function(value) {
-			if (value.is_default == 1) {
-				if (!service.isInSelection(value.short_code)) {
-					service.toggleSelection(value);
-				}
-			}
-		})
-		*/
 	}
-	/*
-	service.load = function(forceReload) {
-		if (service.data.length == 0 || forceReload !== undefined) {
-			service.data = ApiAdminLang.query();
-			$http.get("admin/api-admin-defaults/lang").success(function(response) {
-				if (!service.isInSelection(response.short_code)) {
-					service.toggleSelection(response);
-				}
-			});
-		}
-	};
-	*/
 	
 	return service;
 });
