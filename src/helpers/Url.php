@@ -60,6 +60,6 @@ class Url extends \yii\helpers\Url
             $params = null;
         }
 
-        return self::trailing(Yii::$app->getUrlManager()->baseUrl).$route.$params;
+        return Yii::$app->urlManager->prependBaseUrl(Yii::$app->composition->prependTo($route).$params);
     }
 }
