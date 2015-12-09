@@ -2,6 +2,7 @@
 
 namespace admin\models;
 
+use Yii;
 use admin\models\StorageFile;
 
 class StorageImage extends \yii\db\ActiveRecord
@@ -22,5 +23,17 @@ class StorageImage extends \yii\db\ActiveRecord
     public function getFile()
     {
         return $this->hasOne(StorageFile::className(), ['id' => 'file_id']);
+    }
+    
+    public function beforeDelete()
+    {
+        if (parent::beforeDelete()) {
+            $image = Yii::$app->storage->getImage($this->id);
+            @unlink($image->serverSource);
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }

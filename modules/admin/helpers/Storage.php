@@ -5,9 +5,24 @@ namespace admin\helpers;
 use Exception;
 use Yii;
 use admin\models\StorageFile;
+use admin\models\StorageImage;
 
 class Storage
 {
+    /**
+     * @var array All errors from the files array.
+     */
+    private static $uploaderErrors = [
+        0 => 'There is no error, the file uploaded with success',
+        1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
+        2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
+        3 => 'The uploaded file was only partially uploaded',
+        4 => 'No file was uploaded',
+        6 => 'Missing a temporary folder',
+        7 => 'Failed to write file to disk.',
+        8 => 'A PHP extension stopped the file upload.',
+    ];
+    
     /**
      * Warning
      * Because PHP's integer type is signed many crc32 checksums will result in negative integers on 32bit platforms. On 64bit installations all crc32() results will be positive integers though.
@@ -20,17 +35,56 @@ class Storage
         return sprintf('%s', hash('crc32b', uniqid($fileName, true)));
     }
     
-    
-    public static function removeFile($fileId)
+    /**
+     * 
+     * @param integer $fileId The file id to delete
+     * @param boolean $cleanup If cleanup is enabled, also all images will be deleted, this is by default turned off because
+     * casual you want to remove the large source file but not the images where used in several tables and situations.
+     * @return boolean
+     */
+    public static function removeFile($fileId, $cleanup = false)
     {
         $model = StorageFile::find()->where(['id' => $fileId, 'is_deleted' => 0])->one();
         if ($model) {
+            if ($cleanup) {
+                foreach(Yii::$app->storage->findImage(['file_id' => $fileId]) as $imageItem) {
+                    StorageImage::findOne($imageItem->id)->delete();
+                }
+            }
+            
             return $model->delete();
         }
     
         return true;
     }
     
+    /**
+     * 
+     * @param integer $imageId
+     * @param boolean $cleanup If cleanup is enabled, all other images will be deleted, the source file will be deleted to
+     * if clean is disabled, only the provided $imageId will be removed.
+     * @since 1.0.0-beta3
+     */
+    public static function removeImage($imageId, $cleanup = true)
+    {
+        if (!$cleanup) {
+            return StorageImage::findOne($imageId)->delete();
+        }
+        
+        $image = Yii::$app->storage->getImage($imageId);
+        
+        if ($image) {
+            $fileId = $image->fileId;
+            
+            foreach(Yii::$app->storage->findImage(['file_id' => $fileId]) as $imageItem) {
+                StorageImage::findOne($imageItem->id)->delete();
+            }
+            
+            return static::removeFile($fileId);
+        }
+        
+        return false;
+    }
     
     /**
      * 
@@ -72,18 +126,7 @@ class Storage
         return $file->update(false);
     }
     
-    private static $uploaderErrors = [
-        0 => 'There is no error, the file uploaded with success',
-        1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
-        2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
-        3 => 'The uploaded file was only partially uploaded',
-        4 => 'No file was uploaded',
-        6 => 'Missing a temporary folder',
-        7 => 'Failed to write file to disk.',
-        8 => 'A PHP extension stopped the file upload.',
-    ];
-    
-    public static function uploadFromFiles(array $filesArray, $toFolder = 0)
+    public static function uploadFromFiles(array $filesArray, $toFolder = 0, $isHidden = false)
     {
         $files = [];
         foreach ($filesArray as $k => $file) {
@@ -91,7 +134,7 @@ class Storage
                 return ['upload' => false, 'message' => static::$uploaderErrors[$file['error']], 'file_id' => 0];
             }
             try {
-                $file = Yii::$app->storage->addFile($file['tmp_name'], $file['name'], $toFolder);
+                $file = Yii::$app->storage->addFile($file['tmp_name'], $file['name'], $toFolder, $isHidden);
                 if ($file) {
                     return ['upload' => true, 'message' => 'file uploaded succesfully', 'file_id' => $file->id];
                 }

@@ -13,6 +13,7 @@ LUYA CHANGELOG
 - `#639` added missing translations for divider line block.
 - `#158` added ability to sort the items in list block.
 - `#425` added ability to move columnds and rows up/down in table block.
+- `#647` added image delete helpers to admin storage helper.
 
 1.0.0-beta2 (3.12.2015)
 -------------------------
