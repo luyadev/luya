@@ -464,9 +464,11 @@
 	
 	// LayoutMenuController.js
 	
-	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, CacheReloadService, LuyaLoading) {
+	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, CacheReloadService, LuyaLoading, AdminToastService) {
 	
 		$scope.LuyaLoading = LuyaLoading;
+		
+		$scope.toastQueue = AdminToastService.queue;
 		
 		$scope.reload = function() {
 			CacheReloadService.reload();

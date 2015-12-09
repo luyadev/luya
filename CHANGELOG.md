@@ -15,6 +15,8 @@ LUYA CHANGELOG
 - `#158` added ability to sort the items in list block.
 - `#425` added ability to move columnds and rows up/down in table block.
 - `#647` added image delete helpers to admin storage helper.
+- `#449` added toast service with confirmations.
+- `#484` added toast service with error and success messages.
 
 1.0.0-beta2 (3.12.2015)
 -------------------------

@@ -320,6 +320,11 @@ $this->beginPage()
 <!-- /ANGULAR SCRIPTS -->
 
 <div class="luya-container ng-cloak">
+    <div ng-repeat="item in toastQueue" class="alert" ng-class="{'alert--success': item.type == 'success', 'alert--danger': item.type == 'error'}" style="position:absolute; z-index:999999; top:0px; padding:20px; margin:0px; background-color:white;">
+        <p>{{item.message}}</p>
+        <button ng-show="item.type == 'confirm'" class="btn btn--small red" ng-click="item.close()">Nein</button>
+        <button ng-show="item.type == 'confirm'" class="btn btn--small" ng-click="item.click()">Ja</button>
+    </div>
 
     <div class="navbar-fixed">
         <nav>
@@ -491,7 +496,7 @@ $this->beginPage()
             </div>
         </div>
     </div>
-    
+        
     <!-- ANGULAR-VIEW -->
     <div class="luya-container__angular-placeholder module-{{currentItem.moduleId}}" ui-view></div>
     <!-- /ANGULAR-VIEW -->

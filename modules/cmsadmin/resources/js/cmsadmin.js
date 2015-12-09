@@ -709,7 +709,7 @@
 	
 	// update.js
 	
-	zaa.controller("NavController", function($scope, $filter, $stateParams, $http, LuyaLoading, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, AdminClassService, AdminLangService) {
+	zaa.controller("NavController", function($scope, $filter, $stateParams, $http, LuyaLoading, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, AdminToastService, AdminClassService, AdminLangService) {
 		
 		$scope.AdminLangService = AdminLangService;
 		
@@ -831,13 +831,27 @@
 		$scope.storePropValues = function() {
 			var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 			$http.post('admin/api-cms-nav/save-properties?navId='+$scope.id, $.param($scope.propValues), headers).success(function(response) {
-				//Materialize.toast('<span>Die Eigenschaften wurden aktualisiert.</span>', 2000);
+				AdminToastService.success('Die Eigenschaften wurden aktualisiert.', 2000);
 				$scope.loadNavProperties();
 			});
 		}
 		
 		$scope.trash = function() {
-	    	if (confirm('Are you sure you want to delete this page?')) {
+	    	
+			AdminToastService.confirm('Möchten Sie diese Seite wirklich löschen?', function($timeout, $toast) {
+				
+				$http.get('admin/api-cms-nav/delete', { params : { navId : $scope.navData.id }}).success(function(response) {
+	    			$scope.isDeleted = true;
+	    			$scope.menuDataReload().then(function() {
+	    				$toast.close();
+	    			});
+	    		}).error(function(response) {
+					// toast error page could'nt be delete because there are redirects linking to this page
+				});
+			})
+			
+			/*
+			if (confirm('Are you sure you want to delete this page?')) {
 	    		$http.get('admin/api-cms-nav/delete', { params : { navId : $scope.navData.id }}).success(function(response) {
 	    			//NewMenuService.get(true);
 	    			$scope.isDeleted = true;
@@ -846,6 +860,7 @@
 					// toast error page could'nt be delete because there are redirects linking to this page
 				});;
 	    	}
+	    	*/
 	    };
 		
 		/* properties --> */

@@ -248,6 +248,11 @@ zaa.factory("ServicePropertiesData", function($http, $q, $rootScope) {
 	return service;
 });
 
+/*
+ 
+ language service with selections
+ 
+*/
 zaa.factory("AdminLangService", function(ServiceLanguagesData) {
 	
 	var service = [];
@@ -286,7 +291,8 @@ zaa.factory("AdminLangService", function(ServiceLanguagesData) {
 				}
 			}
 		})
-	}
+	};
+	
 	service.load = function() {
 		ServiceLanguagesData.load().then(function(data) {
 			service.data = data;
@@ -300,10 +306,94 @@ zaa.factory("AdminLangService", function(ServiceLanguagesData) {
 			})
 			
 		});
-	}
+	};
 	
 	return service;
 });
+
+
+
+/*
+
+$scope.filesData = ServiceFilesData.data;
+				
+$scope.$on('service:AdminToast', function(event, data) {
+	$scope.filesData = data;
+});
+
+Examples
+
+AdminToastService.notify('Hello i am Message and will be dismissed in 2 Seconds', 2000');
+
+AdminToastService.confirm('Hello i am a callback and wait for your', function($q, $http) {
+	// do some ajax call
+	$http.get().success(function() {
+		promise.resolve();
+	}).error(function() {
+		promise.reject();
+	});
+});
+
+you can also close this dialog by sourself in the callback
+
+AdminToastService.confi('Message', function() {
+	// do something
+	this.close();
+});
+
+instead of this you can also invoke $toast
+
+function($toast) {
+	$toast.close();
+}
+
+*/
+zaa.factory("AdminToastService", function($q, $timeout, $injector) {
+	var service = [];
+	
+	service.notify = function(message, timeout, type) {
+		
+		var uuid = guid();
+		
+		service.queue[uuid] = {message: message, timeout: timeout, uuid: uuid, type: type};
+		
+		$timeout(function() {
+			delete service.queue[uuid];
+		}, timeout);
+	};
+	
+	service.success = function(message, timeout) {
+		service.notify(message, timeout, 'success');
+	}
+	
+	service.error = function(message, timeout) {
+		service.notify(message, timeout, 'error');
+	}
+	
+	service.confirm = function(message, callback) {
+		var uuid = guid();
+		service.queue[uuid] = {message: message, click: function() {
+			var queue = this;
+			var response = $injector.invoke(this.callback, this, { $toast : this });
+			if (response !== undefined) {
+				response.then(function(r) {
+						queue.close();
+					}, function(r) {
+						queue.close();
+					}, function(r) {
+						// call loader later?
+					});
+			}
+		}, uuid: uuid, callback: callback, type: 'confirm', close: function() {
+			delete service.queue[this.uuid];
+		}}
+	};
+	
+	service.queue = {};
+	
+	return service;
+});
+
 
 // end of use strict
 })();
