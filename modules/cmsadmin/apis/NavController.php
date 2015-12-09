@@ -51,7 +51,7 @@ class NavController extends \admin\base\RestController
             $model = \cmsadmin\models\Property::find()->where(['admin_prop_id' => $atrs['admin_prop_id'], 'nav_id' => $navId])->one();
 
             if ($model) {
-                if (empty($atrs['value'])) {
+                if (empty($atrs['value']) && $atrs['value'] != 0) {
                     $model->delete();
                 } else {
                     // update
