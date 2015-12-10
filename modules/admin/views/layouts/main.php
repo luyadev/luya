@@ -290,7 +290,7 @@ $this->beginPage()
                         </tbody>
                     </table>
                     <span ng-if="fileDetail.isImage">
-                        <img class="responsive-img" ng-src="{{fileDetail.httpSource}}" />
+                        <img class="responsive-img" ng-src="{{fileDetail.thumbnailMedium.source}}" />
                     </span>
                     </p>
                     <a class="btn btn--small right" ng-click="closeFileDetail()"><i class="material-icons">zoom_out</i></a>
