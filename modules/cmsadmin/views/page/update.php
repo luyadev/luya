@@ -280,7 +280,10 @@
                     <div class="page" ng-show="!isTranslated && navData.is_draft == 1">
                         <div class="alert alert--info"><?= \cmsadmin\Module::t('view_update_draft_no_lang_error'); ?></div>
                     </div>
-                    <div class="page" ng-show="!isTranslated && navData.is_draft == 0">
+                    <div class="alert alert--info" ng-show="!loaded">
+                        <p>Daten der Seite werden geladen.</p>
+                    </div>
+                    <div class="page" ng-show="!isTranslated && navData.is_draft == 0 && loaded">
                         <div class="row">
                             <div class="col s12">
                                 <div class="alert alert--info">
@@ -292,7 +295,7 @@
                             <create-form data="data"></create-form>
                         </div>
                     </div>
-                    <div class="page {{AdminClassService.getClassSpace('onDragStart')}}" ng-show="isTranslated">
+                    <div class="page {{AdminClassService.getClassSpace('onDragStart')}}" ng-show="isTranslated && loaded">
                         <!-- PAGE__HEADER -->
                         <div class="page__header">
                             <div class="row">

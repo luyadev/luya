@@ -957,7 +957,9 @@
 	 * @param $scope.lang
 	 *            from ng-repeat
 	 */
-	zaa.controller("NavItemController", function($scope, $http, $timeout, ServiceMenuData) {
+	zaa.controller("NavItemController", function($scope, $http, $timeout, ServiceMenuData, AdminLangService) {
+		
+		$scope.loaded = false;
 		
 		$scope.NavController = $scope.$parent;
 		
@@ -967,8 +969,11 @@
 			return ServiceMenuData.load(true);
 		}
 		
-		// app
+		$scope.$on('service:LoadLanguage', function(event, data) {
+			$scope.refresh();
+		});
 		
+		// app
 		
 		$scope.isTranslated = false;
 		
@@ -1034,6 +1039,7 @@
 						if ($scope.item.nav_item_type == 1) {
 							$scope.container = response['tree'];
 						}
+						
 					}
 					
 					/*
@@ -1063,12 +1069,13 @@
 				
 				*/
 				}
-				
+				$scope.loaded = true
 			});
 		}
-		
 		$scope.refresh = function() {
-			$scope.getItem($scope.lang.id, $scope.NavController.id);
+			if (AdminLangService.isInSelection($scope.lang.short_code)) {
+				$scope.getItem($scope.lang.id, $scope.NavController.id);
+			}
 		}
 		
 		

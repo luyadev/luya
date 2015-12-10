@@ -25,7 +25,6 @@ class NavItemController extends \admin\base\RestController
     public function actionNavLangItem($navId, $langId)
     {
         $item = NavItem::find()->where(['nav_id' => $navId, 'lang_id' => $langId])->one();
-        
         if ($item) {
             return [
                 'error' => false,

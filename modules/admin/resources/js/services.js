@@ -253,7 +253,7 @@ zaa.factory("ServicePropertiesData", function($http, $q, $rootScope) {
  language service with selections
  
 */
-zaa.factory("AdminLangService", function(ServiceLanguagesData) {
+zaa.factory("AdminLangService", function(ServiceLanguagesData, $rootScope) {
 	
 	var service = [];
 	
@@ -266,6 +266,7 @@ zaa.factory("AdminLangService", function(ServiceLanguagesData) {
 		
 		if (exists == -1) {
 			service.selection.push(lang.short_code);
+			$rootScope.$broadcast('service:LoadLanguage', lang);
 		} else {
 			/* #531: unable to deselect language, as at least 1 langauge must be activated. */
 			if (service.selection.length > 1) {
