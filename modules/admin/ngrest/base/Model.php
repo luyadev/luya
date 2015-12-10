@@ -5,6 +5,7 @@ namespace admin\ngrest\base;
 use Yii;
 use admin\behaviors\LogBehavior;
 use admin\models\Lang;
+use yii\helpers\Json;
 
 abstract class Model extends \yii\db\ActiveRecord implements \admin\base\GenericSearchInterface
 {
@@ -158,7 +159,13 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
     public function i18nAfterFind()
     {
         foreach ($this->i18n as $field) {
-            $values = @json_decode($this->$field, true);
+            // if its not already unserialized, decode it
+            if (!is_array($this->$field)) {
+                $values = Json::decode($this->$field);
+            } else {
+                $values = $this->$field;
+            }
+            //$values = @json_decode($this->$field, true);
             // fall back for not transformed values
             if (!is_array($values)) {
                 $values = (array) $values;
@@ -188,7 +195,10 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
     public function i18nBeforeUpdateAndCreate()
     {
         foreach ($this->i18n as $field) {
-            $this->$field = json_encode($this->$field);
+            // if it is notyet serialize, encode
+            if (is_array($this->$field)) {
+                $this->$field = Json::encode($this->$field);
+            }
         }
     }
 
