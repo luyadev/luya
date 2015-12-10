@@ -159,12 +159,14 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
     public function i18nAfterFind()
     {
         foreach ($this->i18n as $field) {
+            
+            $values = $this->$field;
+            
             // if its not already unserialized, decode it
-            if (!is_array($this->$field)) {
+            if (!is_array($this->$field) && !empty($this->$field)) {
                 $values = Json::decode($this->$field);
-            } else {
-                $values = $this->$field;
             }
+            
             //$values = @json_decode($this->$field, true);
             // fall back for not transformed values
             if (!is_array($values)) {
