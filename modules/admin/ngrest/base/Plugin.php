@@ -12,7 +12,7 @@ abstract class Plugin
 
     protected $ngModel = null;
 
-    protected $gridCols = null;
+    protected $i18n = null;
 
     private $_model = null;
 
@@ -33,18 +33,18 @@ abstract class Plugin
         $elmn->setAttribute('fieldname', $this->name);
         $elmn->setAttribute('model', $this->ngModel);
         $elmn->setAttribute('label', $this->alias);
-        $elmn->setAttribute('i18n', $this->gridCols);
+        $elmn->setAttribute('i18n', $this->i18n);
 
         return $elmn;
     }
 
-    public function setConfig($id, $name, $ngModel, $alias, $gridCols)
+    public function setConfig($id, $name, $ngModel, $alias, $i18n)
     {
         $this->id = $id;
         $this->name = $name;
         $this->ngModel = $ngModel;
         $this->alias = $alias;
-        $this->gridCols = $gridCols;
+        $this->i18n = $i18n;
     }
 
     public function getServiceName($name)

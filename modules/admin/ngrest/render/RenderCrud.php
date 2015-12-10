@@ -223,22 +223,22 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
         ];
     }
 
-    private function renderElementPlugins($configContext, $plugins, $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmnGridCols)
+    private function renderElementPlugins($configContext, $plugins, $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmni18n)
     {
         $doc = new DOMDocument('1.0');
 
         foreach ($plugins as $key => $plugin) {
-            $doc = $this->renderPlugin($doc, $configContext, $plugin['class'], $plugin['args'], $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmnGridCols);
+            $doc = $this->renderPlugin($doc, $configContext, $plugin['class'], $plugin['args'], $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmni18n);
         }
 
         return trim($doc->saveHTML());
     }
 
-    private function renderPlugin($DOMDocument, $configContext, $className, $classArgs, $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmnGridCols)
+    private function renderPlugin($DOMDocument, $configContext, $className, $classArgs, $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmni18n)
     {
         $ref = new \ReflectionClass($className);
         $obj = $ref->newInstanceArgs($classArgs);
-        $obj->setConfig($elmnId, $elmnName, $elmnModel, $elmnAlias, $elmnGridCols);
+        $obj->setConfig($elmnId, $elmnName, $elmnModel, $elmnAlias, $elmni18n);
         $method = 'render'.ucfirst($configContext);
 
         return $obj->$method($DOMDocument);

@@ -61,11 +61,11 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
         return $this;
     }
 
-    public function field($name, $alias = null, $gridCols = 12)
+    public function field($name, $alias = null, $i18n = false)
     {
         $this->config[$this->pointer][$name] = [
             'name' => $name,
-            'gridCols' => $gridCols,
+            'i18n' => $i18n,
             'alias' => (is_null($alias)) ? $name : $alias,
             'plugins' => [],
             'i18n' => false,
@@ -104,7 +104,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
         return $this;
     }
 
-    public function extraField($name, $alias, $gridCols = 12)
+    public function extraField($name, $alias, $i18n = false)
     {
         /*
         if (!$this->extraFieldExists($name)) {
@@ -113,7 +113,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
         */
 
         $this->config[$this->pointer][$name] = [
-            'name' => $name, 'gridCols' => $gridCols, 'alias' => $alias, 'plugins' => [], 'i18n' => false, 'extraField' => true,
+            'name' => $name, 'i18n' => $i18n, 'alias' => $alias, 'plugins' => [], 'i18n' => false, 'extraField' => true,
         ];
         $this->field = $name;
 
