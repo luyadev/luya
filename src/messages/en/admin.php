@@ -48,7 +48,7 @@ return [
     'layout_filemenager_remove_selected_files' => 'Delete marked files',
     'layout_filemanager_move_selected_files' => 'Move to',
     'layout_filemanager_upload_error' => 'Error while uploading file.',
-    'layout_filemenager_col_name' => 'Name',
+    'layout_filemanager_col_name' => 'Name',
     'layout_filemanager_col_type' => 'Type',
     'layout_filemanager_col_date' => 'Creation Date',
     'layout_filemanager_detail_name' => 'Filename',

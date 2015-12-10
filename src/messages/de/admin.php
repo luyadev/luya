@@ -48,7 +48,7 @@ return [
     'layout_filemenager_remove_selected_files' => 'markierte Dateien löschen',
     'layout_filemanager_move_selected_files' => 'Verschieben nach',
     'layout_filemanager_upload_error' => 'Fehler beim Hochladen der Datei',
-    'layout_filemenager_col_name' => 'Name',
+    'layout_filemanager_col_name' => 'Name',
     'layout_filemanager_col_type' => 'Typ',
     'layout_filemanager_col_date' => 'Erstellungsdatum',
     'layout_filemanager_detail_name' => 'Dateiname',
