@@ -275,12 +275,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col s{{(12/AdminLangService.selection.length)}}" ng-repeat="lang in languagesData" ng-show="AdminLangService.isInSelection(lang.short_code) && showContainer" ng-controller="NavItemController">
+                <div class="col s{{(12/AdminLangService.selection.length)}}" ng-repeat="lang in languagesData" ng-show="AdminLangService.isInSelection(lang.short_code)" ng-controller="NavItemController">
                     <!-- PAGE -->
                     <div class="page" ng-show="!isTranslated && navData.is_draft == 1">
                         <div class="alert alert--info"><?= \cmsadmin\Module::t('view_update_draft_no_lang_error'); ?></div>
                     </div>
-                    
                     <div class="page" ng-show="!isTranslated && navData.is_draft == 0">
                         <div class="row">
                             <div class="col s12">
@@ -390,7 +389,7 @@
                         <!-- PAGE__CONTENT -->
                         <div class="page__content" ng-show="!settings" ng-switch on="item.nav_item_type">
                             <div class="row">
-                                <div class="col s12 page__no-padding" ng-switch-when="1" ng-controller="NavItemTypePageController">
+                                <div class="col s12 page__no-padding" ng-switch-when="1">
                                     <ul class="page__list" ng-show="container.nav_item_page.id">
                                         <li class="page__placeholder accordion__entry--open" ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'"></li>
                                     </ul>
