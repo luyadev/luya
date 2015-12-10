@@ -27,7 +27,7 @@
                     <i ng-show="edit || config" class="material-icons block__toolbar__icon" ng-click="toggleBlockSettings()">close</i>
                 </div>
             </div>
-            <div class="block__body cmsadmin-tags" ng-click="toggleEdit()" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
+            <div class="block__body cmsadmin-tags" ng-click="toggleEdit()" compile-html ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
             <form class="block__edit">
                 <div class="block__edit-content">
                     <p class="block__config__text"><?= \cmsadmin\Module::t('view_update_blockcontent'); ?><span class="block__config__text-section"> - <?= \cmsadmin\Module::t('view_update_settings'); ?> - </span></p>
