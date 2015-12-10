@@ -40,7 +40,7 @@ class ConfigBuilderTest extends \tests\web\Base
         $testvar = $list['list_var_1'];
 
         $this->assertArrayHasKey('name', $testvar);
-        $this->assertArrayHasKey('gridCols', $testvar);
+        $this->assertArrayHasKey('i18n', $testvar);
         $this->assertArrayHasKey('alias', $testvar);
         $this->assertArrayHasKey('plugins', $testvar);
         $this->assertArrayHasKey('i18n', $testvar);
