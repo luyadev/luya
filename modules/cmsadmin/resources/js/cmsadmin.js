@@ -970,7 +970,9 @@
 		}
 		
 		$scope.$on('service:LoadLanguage', function(event, data) {
-			$scope.refresh();
+			if (!$scope.loaded) {
+				$scope.refresh();
+			}
 		});
 		
 		// app
