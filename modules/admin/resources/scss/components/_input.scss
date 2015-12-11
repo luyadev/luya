@@ -81,7 +81,14 @@ input[type="checkbox"]:checked + .input__label:before {
 	margin-top: -13px;
 }
 
+.filearray > .input__field-wrapper,
+.imagearray > .input__field-wrapper {
+	border: 1px solid $input--border-color;
+	border-radius: 3px;
+}	
+
 .input__field-wrapper {
+	padding: 5px;
 	position: relative;
 	display: inline-block;
 	width: calc(100% - #{$input__label-width});
@@ -150,8 +157,9 @@ input[type="checkbox"]:checked + .input__label:before {
 
 // Custom behavior for select boxes
 .input--select .input__field {
+    margin-left: 5px;
 	display: inline-block;
-	width: calc(100% - #{$input__label-width});
+	width: calc(100% - (#{$input__label-width} + 5px));
 	border: 1px solid $input--border-color !important;
 }
 

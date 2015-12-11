@@ -4,6 +4,7 @@ LUYA CHANGELOG
 1.0.0-beta3 (in progress)
 -------------------------
 
+- `#654` Added border to file- and image-array, added fix break between text and button at the ImageTextBlock, added additional configuration on LinkButtonBlock and some missing translations.
 - `#648` fixed bug where ajax block callback have no composition prefix.
 - `#637` fixed issue where image upload does not change ng-model when image already exists in image data list.
 - `#638` fixed issue where menu component does not use `createRouteEnsure`.

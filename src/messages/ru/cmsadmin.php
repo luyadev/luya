@@ -84,6 +84,8 @@ return [
     'block_link_button_name' => 'Кнопка-ссылка',
     'block_link_button_btnlabel_label' => 'Название кнопки',
     'block_link_button_btnhref_label' => 'Ссылка',
+    'block_link_button_targetblank_label' => 'Opens the linked document in a new window or tab',
+    'block_link_button_simpleLink_label' => 'Use a simple link',
 
     // ListBlock
     'block_list_name' => 'Список',
