@@ -247,6 +247,17 @@ class Item extends \yii\base\Object
     }
 
     /**
+     * Get all sibilings for the current item
+     * 
+     * @return array An array with all item-object siblings
+     * @since 1.0.0-beta3
+     */
+    public function getSiblings()
+    {
+        return (new Query())->where(['parent_nav_id' => $this->getParentNavId()])->with($this->_with)->all();
+    }
+    
+    /**
      * Return all parent elemtns **with** the current item.
      * 
      * @return array An array with Item-Objects.

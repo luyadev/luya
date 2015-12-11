@@ -29,6 +29,11 @@ class ImageQueryObject extends \yii\base\Object
         return ($this->getFile()) ? Yii::$app->storage->httpPath . '/' . $this->getFilterId() . '_' . $this->getFile()->getSystemFileName() : false;
     }
     
+    public function getServerSource()
+    {
+        return ($this->getFile()) ? Yii::$app->storage->serverPath . '/' . $this->getFilterId() . '_' . $this->getFile()->getSystemFileName() : false;
+    }
+    
     public function getResolutionWidth()
     {
         return $this->itemArray['resolution_width'];
@@ -56,6 +61,7 @@ class ImageQueryObject extends \yii\base\Object
             'fileId' => $this->getFileId(),
             'filterId' => $this->getFilterId(),
             'source' => $this->getSource(),
+            'serverSource' => $this->getServerSource(),
             'resolutionWidth' => $this->getResolutionWidth(),
             'resolutionHeight' => $this->getResolutionHeight(),
         ];

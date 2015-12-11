@@ -27,11 +27,11 @@ class CalendarAsset extends \luya\web\Asset
 }
 ```
 
-> Asset Daten sollten wie auch im Frontendkontext immer im Ordner `resources` hinterlegt werden.
+> Asset Daten sollten, wie auch im Frontendkontext, immer im Ordner `resources` hinterlegt werden.
 
 Dieses Asset wird nun die Datei `calendar.js` im Ordner `@app/resources/` suchen.
 
-### Einbinden des Assets
+### Einbinden der Assets in Module.php
 Um die oben erstellte `Calendar` *Admin Modul Asset* Datei einzubinden, wird die `Module.php` der Applikation bzw. des Moduls im `$assets` Array um einen Eintrag erweitert.
 
 ```php
@@ -46,3 +46,32 @@ class Module extends \admin\base\Module
 
 }
 ```
+
+### Assets in einem Modul einbinden
+
+Ähnlich zu der Einbindung im Applikationskontext, wird das Verzeichnis `assets` unter dem entsprechenden Modul angelegt und die Asset-Klasse abgeleitet:
+
+ ```
+ <?php
+
+ namespace app\modules\examplemodule\assets;
+
+ class MyAsset extends \luya\web\Asset
+ {
+     public $sourcePath = '@examplemodule/resources';
+
+     public $js = [
+         'js/myscript.js',
+     ];
+
+     public $css = [
+         'css/mycss.css',
+     ];
+
+     public $depends = [
+         'admin\assets\Main',
+     ];
+ }
+ ```
+
+Die Einbindung in `Module.php` im jeweiligen Modul erfolgt analog dem oberen Beispiel unter `Einbinden der Assets in Module.php`.

@@ -36,11 +36,20 @@ class StorageController extends \admin\base\RestController
         foreach ((new FileQuery())->where(['is_hidden' => 0, 'is_deleted' => 0])->all() as $file) {
             $data = $file->toArray();
             if ($file->isImage) {
+                // add tiny thumbnail
                 $filter = Yii::$app->storage->getFiltersArrayItem('tiny-thumbnail');
                 if ($filter) {
                     $thumbnail = Yii::$app->storage->addImage($file->id, $filter['id']);
                     if ($thumbnail) {
                         $data['thumbnail'] = $thumbnail->toArray();
+                    }
+                }
+                // add meidum thumbnail
+                $filter = Yii::$app->storage->getFiltersArrayItem('medium-thumbnail');
+                if ($filter) {
+                    $thumbnail = Yii::$app->storage->addImage($file->id, $filter['id']);
+                    if ($thumbnail) {
+                        $data['thumbnailMedium'] = $thumbnail->toArray();
                     }
                 }
             }

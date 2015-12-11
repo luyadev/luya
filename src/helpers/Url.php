@@ -17,6 +17,10 @@ class Url extends \yii\helpers\Url
         return $url.(substr($url, -1) == $slash ? '' : $slash);
     }
 
+    /**
+     * This helper method will not concern any context informations
+     * @param array $routeParams Example array to route `['module/controller/action']`.
+     */
     public static function toInternal(array $routeParams)
     {
         return Yii::$app->getUrlManager()->internalCreateUrl($routeParams);
@@ -56,6 +60,6 @@ class Url extends \yii\helpers\Url
             $params = null;
         }
 
-        return self::trailing(Yii::$app->getUrlManager()->baseUrl).$route.$params;
+        return Yii::$app->urlManager->prependBaseUrl(Yii::$app->composition->prependTo($route).$params);
     }
 }

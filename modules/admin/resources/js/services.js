@@ -248,7 +248,12 @@ zaa.factory("ServicePropertiesData", function($http, $q, $rootScope) {
 	return service;
 });
 
-zaa.factory("AdminLangService", function(ServiceLanguagesData) {
+/*
+ 
+ language service with selections
+ 
+*/
+zaa.factory("AdminLangService", function(ServiceLanguagesData, $rootScope) {
 	
 	var service = [];
 	
@@ -261,6 +266,7 @@ zaa.factory("AdminLangService", function(ServiceLanguagesData) {
 		
 		if (exists == -1) {
 			service.selection.push(lang.short_code);
+			$rootScope.$broadcast('service:LoadLanguage', lang);
 		} else {
 			/* #531: unable to deselect language, as at least 1 langauge must be activated. */
 			if (service.selection.length > 1) {
@@ -286,7 +292,8 @@ zaa.factory("AdminLangService", function(ServiceLanguagesData) {
 				}
 			}
 		})
-	}
+	};
+	
 	service.load = function() {
 		ServiceLanguagesData.load().then(function(data) {
 			service.data = data;
@@ -300,32 +307,94 @@ zaa.factory("AdminLangService", function(ServiceLanguagesData) {
 			})
 			
 		});
-		/*
-		service.data = data;
-		angular.forEach(data, function(value) {
-			if (value.is_default == 1) {
-				if (!service.isInSelection(value.short_code)) {
-					service.toggleSelection(value);
-				}
-			}
-		})
-		*/
-	}
-	/*
-	service.load = function(forceReload) {
-		if (service.data.length == 0 || forceReload !== undefined) {
-			service.data = ApiAdminLang.query();
-			$http.get("admin/api-admin-defaults/lang").success(function(response) {
-				if (!service.isInSelection(response.short_code)) {
-					service.toggleSelection(response);
-				}
-			});
-		}
 	};
-	*/
 	
 	return service;
 });
+
+
+
+/*
+
+$scope.filesData = ServiceFilesData.data;
+				
+$scope.$on('service:AdminToast', function(event, data) {
+	$scope.filesData = data;
+});
+
+Examples
+
+AdminToastService.notify('Hello i am Message and will be dismissed in 2 Seconds', 2000');
+
+AdminToastService.confirm('Hello i am a callback and wait for your', function($q, $http) {
+	// do some ajax call
+	$http.get().success(function() {
+		promise.resolve();
+	}).error(function() {
+		promise.reject();
+	});
+});
+
+you can also close this dialog by sourself in the callback
+
+AdminToastService.confi('Message', function() {
+	// do something
+	this.close();
+});
+
+instead of this you can also invoke $toast
+
+function($toast) {
+	$toast.close();
+}
+
+*/
+zaa.factory("AdminToastService", function($q, $timeout, $injector) {
+	var service = [];
+	
+	service.notify = function(message, timeout, type) {
+		
+		var uuid = guid();
+		
+		service.queue[uuid] = {message: message, timeout: timeout, uuid: uuid, type: type};
+		
+		$timeout(function() {
+			delete service.queue[uuid];
+		}, timeout);
+	};
+	
+	service.success = function(message, timeout) {
+		service.notify(message, timeout, 'success');
+	}
+	
+	service.error = function(message, timeout) {
+		service.notify(message, timeout, 'error');
+	}
+	
+	service.confirm = function(message, callback) {
+		var uuid = guid();
+		service.queue[uuid] = {message: message, click: function() {
+			var queue = this;
+			var response = $injector.invoke(this.callback, this, { $toast : this });
+			if (response !== undefined) {
+				response.then(function(r) {
+						queue.close();
+					}, function(r) {
+						queue.close();
+					}, function(r) {
+						// call loader later?
+					});
+			}
+		}, uuid: uuid, callback: callback, type: 'confirm', close: function() {
+			delete service.queue[this.uuid];
+		}}
+	};
+	
+	service.queue = {};
+	
+	return service;
+});
+
 
 // end of use strict
 })();

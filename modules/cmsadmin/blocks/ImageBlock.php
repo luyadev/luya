@@ -37,7 +37,7 @@ class ImageBlock extends \cmsadmin\base\Block
     {
         return [
             'image' => ($image = (new ImageQuery())->findOne($this->getVarValue('imageId'))) ? $image->toArray() : false,
-            //'image' => Yii::$app->storage->getImage($this->getVarValue('imageId')),
+            'imageAdmin' => ($image = (new ImageQuery())->findOne($this->getVarValue('imageId'))) ? $image->applyFilter('medium-thumbnail')->toArray() : false,
         ];
     }
 
@@ -59,8 +59,8 @@ class ImageBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        $image = '{% if extras.image.source %}<p><img src="{{extras.image.source}}" border="0" style="max-width: 100%;" /><p>{% else %}<span class="block__empty-text">' . Module::t('block_image_no_image') . '</span>{% endif %}';
-        $image .= '{% if vars.caption is not empty %}{{vars.caption}}{% endif %}';
+        $image = '{% if extras.imageAdmin.source %}<p><img src="{{extras.imageAdmin.source}}" border="0" style="max-width: 100%;" /><p>{% else %}<span class="block__empty-text">' . Module::t('block_image_no_image') . '</span>{% endif %}';
+        $image.= '{% if vars.caption is not empty %}{{vars.caption}}{% endif %}';
 
         return $image;
     }

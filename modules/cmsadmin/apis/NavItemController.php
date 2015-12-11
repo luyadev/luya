@@ -24,7 +24,17 @@ class NavItemController extends \admin\base\RestController
      */
     public function actionNavLangItem($navId, $langId)
     {
-        return NavItem::find()->where(['nav_id' => $navId, 'lang_id' => $langId])->asArray()->one();
+        $item = NavItem::find()->where(['nav_id' => $navId, 'lang_id' => $langId])->one();
+        if ($item) {
+            return [
+                'error' => false,
+                'item' => $item->toArray(),
+                'typeData' => $item->getType()->toArray(),
+                'tree' => ($item->nav_item_type == 1) ? $this->actionTree($item->getType()->id) : false,
+            ];
+        }
+        
+        return ['error' => true];
     }
 
     public function actionReloadPlaceholder($navItemPageId, $prevId, $placeholderVar)
@@ -32,10 +42,12 @@ class NavItemController extends \admin\base\RestController
         return $this->getSub($placeholderVar, (int) $navItemPageId, (int) $prevId);
     }
 
+    /*
     public function actionTypeData($navItemId)
     {
         return NavItem::findOne($navItemId)->getType()->toArray();
     }
+    */
 
     public function actionUpdateItemTypeData($navItemId)
     {

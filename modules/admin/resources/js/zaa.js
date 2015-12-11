@@ -1,4 +1,16 @@
-var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angular-loading-bar", "ngFileUpload", "ngWig", "slugifier"]);
+var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angular-loading-bar", "ngFileUpload", "ngWig", "slugifier", "afkl.lazyImage"]);
+
+
+/**
+ * guid creator
+ * @returns {String}
+ */
+function guid() {
+	function s4() {
+		return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+	}
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
 
 /* zephir angular admin */
 /* resolve controller: https://github.com/angular-ui/ui-router/wiki#resolve */
@@ -138,7 +150,6 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 		
 	});
 	
-	
 	zaa.filter('srcbox', function() {
 		return function(input, search) {
 			if (!input) return input;
@@ -244,29 +255,6 @@ var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angul
 		};
 	});
 	
-	/*
-	zaa.factory("ApiAdminLang", function($resource) {
-		return $resource("admin/api-admin-lang/:id", { id: "@_id" }, {
-			save: {
-				method: "POST",
-				isArray: false,
-				headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
-			}
-		});
-	});
-	*/
-	
-	
-	
-	zaa.factory("ApiAdminFilter", function($resource) {
-		return $resource("admin/api-admin-filter/:id", { id: "@_id" }, {
-			save: {
-				method: "POST",
-				isArray: false,
-				headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
-			}
-		});
-	});
 
 })();
 

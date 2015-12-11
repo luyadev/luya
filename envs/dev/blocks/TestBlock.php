@@ -2,6 +2,8 @@
 
 namespace app\blocks;
 
+use Yii;
+
 class TestBlock extends \cmsadmin\base\Block
 {
     public function name()
@@ -41,6 +43,19 @@ class TestBlock extends \cmsadmin\base\Block
         ];
     }
 
+    public function extraVars()
+    {
+        $image = Yii::$app->storage->getImage($this->getVarValue('imageupload'));
+
+        if ($image) {
+            $image = $image->applyFilter("large-thumbnail")->source;
+        }
+
+        return [
+            'image' => $image
+        ];
+    }
+
     public function twigFrontend()
     {
         $str = '<table style="width:100%;" class="table-bordered">';
@@ -55,6 +70,11 @@ class TestBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return '<p>[DEV TEST BLOCK]</p>';
+        return '
+                <p>[DEV TEST BLOCK]</p><br /><br />
+                {% if extras.image %}
+                    <div afkl-lazy-image="{{ extras.image }}" class="afkl-lazy-wrapper afkl-img-ratio-1-1 own-classname"></div>
+                {% endif %}
+            ';
     }
 }

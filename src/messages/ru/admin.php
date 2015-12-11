@@ -51,7 +51,7 @@ return [
     'layout_filemenager_col_name' => 'Название',
     'layout_filemanager_col_type' => 'Тип',
     'layout_filemanager_col_date' => 'Дата создания',
-    'layout_filemanager_detail_name' => 'Название файла',
+    'layout_filemanager_col_name' => 'Название файла',
     'layout_filemanager_detail_date' => 'Дата создания',
     'layout_filemanager_detail_filetype' => 'Тип файла',
     'layout_filemanager_detail_size' => 'Размер',
@@ -119,4 +119,6 @@ return [
     'aws_changepassword_succes' => 'Пароль успешно изменен.',
     'aws_changepassword_new_pass' => 'Новый пароль',
     'aws_changepassword_new_pass_retry' => 'Повторите пароль',
+    
+// added translation in 1.0.0-beta3:
 ];

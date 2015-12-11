@@ -239,7 +239,7 @@ return [
     'btn_refresh' => 'Aktualisieren',
     'btn_save' => 'Speichern',
 
-    // added translation in 1.0.0-beta2:
+// added translation in 1.0.0-beta3:
 
     // NavItemModule
     'model_navitemmodule_module_name_label' => 'Modul Name',
@@ -254,5 +254,9 @@ return [
     // NavItemRedirect
     'model_navitemredirect_type_label' => 'Art der Weiterleitung',
     'model_navitemredirect_value_label' => 'Ziel der Weiterleitung',
+    
+    // missing from LineBlock
+    'block_line_linecolor_grey' => 'Grau',
+    'block_line_linecolor_black' => 'Schwarz',
 ];
 

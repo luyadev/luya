@@ -4,9 +4,21 @@ LUYA CHANGELOG
 1.0.0-beta3 (in progress)
 -------------------------
 
+- `#648` fixed bug where ajax block callback have no composition prefix.
+- `#637` fixed issue where image upload does not change ng-model when image already exists in image data list.
 - `#638` fixed issue where menu component does not use `createRouteEnsure`.
 - `#634` added getContainer and getLevelCurrentItems for menu component.
 - `#633` added the ability to register new translations/message quickly in the Module.php via $translation property.
+- `#643` added ability to get cms menu item siblings.
+- `#644` added ability to get all menu items for a specific level `getLevelContainer` in menu component.
+- `#639` added missing translations for divider line block.
+- `#158` added ability to sort the items in list block.
+- `#425` added ability to move columnds and rows up/down in table block.
+- `#647` added image delete helpers to admin storage helper.
+- `#449` added toast service with confirmations.
+- `#484` added toast service with error and success messages.
+- `#649` added maxlength for text input fields of 255 chars (on zaa-text).
+- `#651` fixed issue where image and file list array where unable to be i18n casted.
 
 1.0.0-beta2 (3.12.2015)
 -------------------------

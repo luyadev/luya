@@ -5,6 +5,7 @@ namespace cmsadmin\blocks;
 use Yii;
 use cmsadmin\Module;
 use cebe\markdown\GithubMarkdown;
+use admin\storage\ImageQuery;
 
 class ImageTextBlock extends \cmsadmin\base\Block
 {
@@ -115,6 +116,7 @@ class ImageTextBlock extends \cmsadmin\base\Block
     {
         return [
             'imageSource' => $this->getImageSource(),
+            'imageAdmin' => ($image = (new ImageQuery())->findOne($this->getVarValue('imageId'))) ? $image->applyFilter('medium-thumbnail')->toArray() : false,
             'imagePosition' => $this->getVarValue('imagePosition', 'left'),
             'imageWidth' => $this->getImageSource() ? @getimagesize($this->getImageSource())[0] : 0,
             'margin' => $this->getCfgValue('margin', $this->defaultMargin),
@@ -129,14 +131,14 @@ class ImageTextBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return  '{% if not extras.imageSource %}'.
+        return  '{% if not extras.imageAdmin.source %}'.
                     '<span class="block__empty-text">' . Module::t('block_image_text_no_image') . '</span>'.
                 '{% endif %}'.
                 '{% if not vars.text %}'.
                     '<span class="block__empty-text">' . Module::t('block_image_text_no_text') . '</span>'.
                 '{% endif %}'.
-                '{% if extras.imageSource and vars.text %}'.
-                    '<img src="{{ extras.imageSource }}" border=0 style="{% if extras.imagePosition == "left" %}float:left;{% else %}float:right{% endif %};{% if extras.imagePosition == "right" %}margin-left:{{ extras.margin }}{% else %}margin-right:{{ extras.margin }}{% endif %};margin-bottom:{{ extras.margin }}; max-width: 50%;"">'.
+                '{% if extras.imageAdmin.source and vars.text %}'.
+                    '<img src="{{ extras.imageAdmin.source }}" border=0 style="{% if extras.imagePosition == "left" %}float:left;{% else %}float:right{% endif %};{% if extras.imagePosition == "right" %}margin-left:{{ extras.margin }}{% else %}margin-right:{{ extras.margin }}{% endif %};margin-bottom:{{ extras.margin }}; max-width: 50%;"">'.
                     '<p>{% if cfgs.textType == 1 %}{{ extras.text }}{% else %}{{ extras.text|nl2br }}{% endif %}</p>'.
                 '{% endif %}';
     }

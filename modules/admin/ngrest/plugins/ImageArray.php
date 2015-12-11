@@ -2,6 +2,8 @@
 
 namespace admin\ngrest\plugins;
 
+use yii\helpers\Json;
+
 /**
  * @author nadar
  */
@@ -29,32 +31,23 @@ class ImageArray extends \admin\ngrest\base\Plugin
         return $this->renderCreate($doc);
     }
 
-    //
-
     public function onAfterNgRestFind($fieldValue)
     {
-        return json_decode($fieldValue, true);
+        return Json::decode($fieldValue);
     }
 
     public function onAfterFind($fieldValue)
     {
-        return json_decode($fieldValue, true);
+        return Json::decode($fieldValue);
     }
 
     public function onBeforeCreate($value)
     {
         if (empty($value) || !is_array($value)) {
-            return json_encode([]);
+            $value = [];
         }
-        $data = [];
-        foreach ($value as $key => $item) {
-            $data[$key] = [
-                'imageId' => $item['imageId'],
-                'caption' => $item['caption'],
-            ];
-        }
-
-        return json_encode($data);
+        
+        return Json::encode($value);
     }
 
     public function onBeforeUpdate($value, $oldValue)

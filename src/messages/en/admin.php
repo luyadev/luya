@@ -48,7 +48,7 @@ return [
     'layout_filemenager_remove_selected_files' => 'Delete marked files',
     'layout_filemanager_move_selected_files' => 'Move to',
     'layout_filemanager_upload_error' => 'Error while uploading file.',
-    'layout_filemenager_col_name' => 'Name',
+    'layout_filemanager_col_name' => 'Name',
     'layout_filemanager_col_type' => 'Type',
     'layout_filemanager_col_date' => 'Creation Date',
     'layout_filemanager_detail_name' => 'Filename',
@@ -120,7 +120,7 @@ return [
     'aws_changepassword_new_pass' => 'New password',
     'aws_changepassword_new_pass_retry' => 'New passwort repeat',
 
-    // added translation in 1.0.0-beta2:
+// added translation in 1.0.0-beta3:
 
     // models/LoginForm
     'model_loginform_email_label' => 'Email',

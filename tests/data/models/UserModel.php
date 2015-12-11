@@ -9,7 +9,7 @@ class UserModel extends \admin\ngrest\base\Model
         return 'admin_user';
     }
 
-    public $i18n = ['firstname', 'lastname'];
+    //public $i18n = ['firstname', 'lastname'];
 
     public function ngRestConfig($config)
     {

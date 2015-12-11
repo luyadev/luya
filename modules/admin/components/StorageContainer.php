@@ -150,7 +150,7 @@ class StorageContainer extends \yii\base\Component
      * @param string $fileName
      * @param int $folderId
      */
-    public function addFile($fileSource, $fileName, $folderId = 0)
+    public function addFile($fileSource, $fileName, $folderId = 0, $isHidden = false)
     {
         if (empty($fileSource) || empty($fileName)) {
             throw new Exception("Unable to create file where file source and/or file name is empty.");
@@ -190,7 +190,7 @@ class StorageContainer extends \yii\base\Component
             'folder_id' => (int) $folderId,
             'hash_file' => $fileHash,
             'hash_name' => $fileHashName,
-            'is_hidden' => 0,
+            'is_hidden' => ($isHidden) ? 1 : 0,
             'file_size' => @filesize($savePath),
         ]);
         
@@ -231,7 +231,7 @@ class StorageContainer extends \yii\base\Component
             $fileQuery = $this->getFile($fileId);
             
             if (!$fileQuery) {
-                throw new Exception("unable to create image, cause the base file does not eixsts.");
+                throw new Exception("Unable to create image, cause the base file does not exist.");
             }
             
             
@@ -266,7 +266,7 @@ class StorageContainer extends \yii\base\Component
             ]);
             
             if (!$model->save()) {
-                throw new Exception("unable to save storage image, fata db exception.");
+                throw new Exception("Unable to save storage image, fatal database exception.");
             }
             
             $this->_imagesArray[$model->id] = $model->toArray();

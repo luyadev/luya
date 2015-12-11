@@ -71,14 +71,14 @@ return [
 
     // LineBlock
     'block_line_name' => 'Dividing line',
-    'block_line_linespace_label' => 'Line spacing',
+    'block_line_linespace_label' => 'Spacing',
     'block_line_linespace_space' => 'Spacing(top/bottom)',
-    'block_line_linestyle_label' => 'Line style',
+    'block_line_linestyle_label' => 'Style',
     'block_line_linestyle_dotted' => 'Dotted',
     'block_line_linestyle_dashed' => 'Dashed',
     'block_line_linestyle_solid' => 'Continuous',
-    'block_line_linewidth_label' => 'Line width',
-    'block_line_linecolor_label' => 'Line color',
+    'block_line_linewidth_label' => 'Thickness',
+    'block_line_linecolor_label' => 'Color',
 
     // LinkButtonBlock
     'block_link_button_name' => 'Link button',
@@ -86,7 +86,7 @@ return [
     'block_link_button_btnhref_label' => 'Link adress',
 
     // ListBlock
-    'block_list_name' => 'Listing',
+    'block_list_name' => 'List',
     'block_list_elements_label' => 'Elements',
     'block_list_listtype_label' => 'Type',
     'block_list_listtype_ul' => 'Listing',
@@ -238,7 +238,7 @@ return [
     'btn_refresh' => 'Refresh',
     'btn_save' => 'Save',
 
-    // added translation in 1.0.0-beta2:
+// added translation in 1.0.0-beta3:
 
     // NavItemModule
     'model_navitemmodule_module_name_label' => 'Module name',
@@ -253,5 +253,9 @@ return [
     // NavItemRedirect
     'model_navitemredirect_type_label' => 'Type of redirect',
     'model_navitemredirect_value_label' => 'Target of redirect',
+    
+    // missing from LineBlock
+    'block_line_linecolor_grey' => 'Grey',
+    'block_line_linecolor_black' => 'Black',
 ];
 

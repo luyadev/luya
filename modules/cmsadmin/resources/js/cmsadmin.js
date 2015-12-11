@@ -709,7 +709,7 @@
 	
 	// update.js
 	
-	zaa.controller("NavController", function($scope, $filter, $stateParams, $http, LuyaLoading, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, AdminClassService, AdminLangService) {
+	zaa.controller("NavController", function($scope, $filter, $stateParams, $http, LuyaLoading, PlaceholderService, ServicePropertiesData, ServiceMenuData, ServiceLanguagesData, AdminToastService, AdminClassService, AdminLangService) {
 		
 		$scope.AdminLangService = AdminLangService;
 		
@@ -831,13 +831,27 @@
 		$scope.storePropValues = function() {
 			var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 			$http.post('admin/api-cms-nav/save-properties?navId='+$scope.id, $.param($scope.propValues), headers).success(function(response) {
-				//Materialize.toast('<span>Die Eigenschaften wurden aktualisiert.</span>', 2000);
+				AdminToastService.success('Die Eigenschaften wurden aktualisiert.', 2000);
 				$scope.loadNavProperties();
 			});
 		}
 		
 		$scope.trash = function() {
-	    	if (confirm('Are you sure you want to delete this page?')) {
+	    	
+			AdminToastService.confirm('Möchten Sie diese Seite wirklich löschen?', function($timeout, $toast) {
+				
+				$http.get('admin/api-cms-nav/delete', { params : { navId : $scope.navData.id }}).success(function(response) {
+	    			$scope.isDeleted = true;
+	    			$scope.menuDataReload().then(function() {
+	    				$toast.close();
+	    			});
+	    		}).error(function(response) {
+					// toast error page could'nt be delete because there are redirects linking to this page
+				});
+			})
+			
+			/*
+			if (confirm('Are you sure you want to delete this page?')) {
 	    		$http.get('admin/api-cms-nav/delete', { params : { navId : $scope.navData.id }}).success(function(response) {
 	    			//NewMenuService.get(true);
 	    			$scope.isDeleted = true;
@@ -846,6 +860,7 @@
 					// toast error page could'nt be delete because there are redirects linking to this page
 				});;
 	    	}
+	    	*/
 	    };
 		
 		/* properties --> */
@@ -942,7 +957,9 @@
 	 * @param $scope.lang
 	 *            from ng-repeat
 	 */
-	zaa.controller("NavItemController", function($scope, $http, $timeout, ServiceMenuData) {
+	zaa.controller("NavItemController", function($scope, $http, $timeout, ServiceMenuData, AdminLangService) {
+		
+		$scope.loaded = false;
 		
 		$scope.NavController = $scope.$parent;
 		
@@ -952,9 +969,13 @@
 			return ServiceMenuData.load(true);
 		}
 		
-		// app
+		$scope.$on('service:LoadLanguage', function(event, data) {
+			if (!$scope.loaded) {
+				$scope.refresh();
+			}
+		});
 		
-		$scope.showContainer = false;
+		// app
 		
 		$scope.isTranslated = false;
 		
@@ -1002,15 +1023,29 @@
 		
 		$scope.typeData = [];
 		
+		$scope.container = [];
+		
 		$scope.getItem = function(langId, navId) {
-			$scope.showContainer = false;
 			$http({
 			    url: 'admin/api-cms-navitem/nav-lang-item', 
 			    method: "GET",
 			    params: { langId : langId, navId : navId }
 			}).success(function(response) {
 				if (response) {
-					$scope.item = response;
+					if (!response.error) {
+						$scope.item = response['item'];
+						$scope.typeData = response['typeData'];
+						$scope.isTranslated = true;
+						$scope.reset();
+						
+						if ($scope.item.nav_item_type == 1) {
+							$scope.container = response['tree'];
+						}
+						
+					}
+					
+					/*
+					$scope.item = response['item'];
 					
 					$http({
 						url : 'admin/api-cms-navitem/type-data',
@@ -1021,7 +1056,7 @@
 
 					})
 					
-					$scope.isTranslated = true;
+					
 					
 					$timeout(function() {
 						$scope.showContainer = true;
@@ -1034,26 +1069,79 @@
 					}, 500);
 				}
 				
-				$scope.reset();
+				*/
+				}
+				$scope.loaded = true
+			});
+		}
+		$scope.refresh = function() {
+			if (AdminLangService.isInSelection($scope.lang.short_code)) {
+				$scope.getItem($scope.lang.id, $scope.NavController.id);
+			}
+		}
+		
+		
+		// <!-- NavItemTypePageController CODE
+		
+		$scope.refreshNested = function(prevId, placeholderVar) {
+			$http({
+				url : 'admin/api-cms-navitem/reload-placeholder',
+				method : 'GET',
+				params : { navItemPageId : $scope.item.nav_item_type_id, prevId : prevId, placeholderVar : placeholderVar}
+			}).success(function(response) {
+				for (var i in $scope.container.__placeholders) {
+					var out = $scope.revPlaceholders($scope.container.__placeholders[i], prevId, placeholderVar, response);
+					if (out !== false ) {
+						return;
+					}
+				}
 				
 			});
 		}
-		
-		$scope.refresh = function() {
-			$scope.getItem($scope.lang.id, $scope.NavController.id);
+		$scope.revPlaceholders = function(placeholder, prevId, placeholderVar, replaceContent) {
+			var tmp = placeholder['prev_id'];
+			if (parseInt(prevId) == parseInt(tmp) && placeholderVar == placeholder['var']) {
+				placeholder['__nav_item_page_block_items'] = replaceContent;
+				return true;
+			}
+			
+			var find = $scope.revFind(placeholder, prevId, placeholderVar, replaceContent)
+			if (find !== false) {
+				return find;
+			}
+			return false;
 		}
 		
-		$scope.refresh();
+		$scope.revFind = function(placeholder, prevId, placeholderVar, replaceContent) {
+			for (var i in placeholder['__nav_item_page_block_items']) {
+				for (var holder in placeholder['__nav_item_page_block_items'][i]['__placeholders']) {
+					var rsp = $scope.revPlaceholders(placeholder['__nav_item_page_block_items'][i]['__placeholders'][holder], prevId, placeholderVar, replaceContent);
+					if (rsp !== false) {
+						return rsp;
+					}
+				}
+			}
+			return false;
+		}
 		
+		// NavItemTypePageController -->
+		
+		function init() {
+			$scope.refresh();
+		}
+		
+		
+		init();
 	});
 	
+	/*
 	zaa.controller("NavItemTypePageController", function($scope, $http, $timeout, LuyaLoading) {
 		
 		$scope.NavItemController = $scope.$parent;
 		
 		$scope.container = [];
 		
-		$scope.$on('refreshItems', function(event) { 
+		$scope.$on('refreshItems', function(event) {
 			$scope.refresh(true);
 		});
 		
@@ -1076,12 +1164,6 @@
 				$timeout(function() {
 					$scope.$parent.$parent.$parent.enableSidebar();
 				}, 100);
-				/*
-	
-	            for (var i in $scope.container.__placeholders) {
-	                $scope.container.__placeholders[i]['open'] = false;
-	            }
-	            */
 			});
 		};
 		
@@ -1128,6 +1210,7 @@
 		}
 		
 	});
+	*/
 	
 	/**
 	 * @param $scope.placeholder

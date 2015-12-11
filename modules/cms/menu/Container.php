@@ -256,9 +256,38 @@ class Container extends \yii\base\Component implements ArrayAccess
 
         return $this->_current;
     }
+    
+    /**
+     * Get all items for a specific level.
+     *
+     * @param integer $level levels starts with 1
+     * @return boolean|array QueryIterator with data
+     */
+    public function getLevelContainer($level)
+    {
+        // define if the requested level is the root line (level 1) or not
+        $rootLine = ($level === 1) ? true : false;
+        // countdown the level (as we need the parent of the element to get the children
+        $level--;
+        // foreach counter
+        $i = 1;
+        // foreach 
+        foreach ($this->getCurrent()->with('hidden')->getTeardown() as $item) {
+            // if its the root line an match level 1 get all siblings
+            if ($rootLine && $i == 1) {
+                return $item->siblings;
+            } elseif ($i == $level) {
+                return $item->children;
+            }
+            ++$i;
+        }
+        // no no container found for the defined level
+        return false;
+    }
 
     /**
-     * Get the current item for specified level/depth. Menus always start on level/depth 1.
+     * Get the current item for specified level/depth. Menus always start on level/depth 1. This works
+     * only i reversed order, to get the parent level from a child!
      * 
      * @param int $level Level menu starts with 1
      *
@@ -267,8 +296,7 @@ class Container extends \yii\base\Component implements ArrayAccess
     public function getLevelCurrent($level)
     {
         $i = 1;
-        $parents = $this->getCurrent()->with('hidden')->teardown;
-        foreach ($parents as $item) {
+        foreach ($this->getCurrent()->with('hidden')->getTeardown() as $item) {
             if ($i == $level) {
                 return $item;
             }
@@ -276,23 +304,6 @@ class Container extends \yii\base\Component implements ArrayAccess
         }
 
         return false;
-    }
-
-    /**
-     * get current items for the same level as the current item for this level.
-     * 
-     * @param int $level Level menu starts with 1
-     * @return \cms\menu\QueryIterator
-     */
-    public function getLevelCurrentItems($level)
-    {
-        $item = $this->getLevelCurrent($level);
-        
-        if (!$item) {
-            return [];
-        }
-        
-        return $this->findAll(['parent_nav_id' => $item->navId, 'container' => $item->container]);
     }
     
     /**

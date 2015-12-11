@@ -82,7 +82,7 @@
 			},
 			template: function() {
                 //return '<div class="input-field col s{{grid}}"><input placeholder="{{placeholder}}" id="{{id}}" name="{{name}}" ng-model="model" type="text" /><label for="{{id}}">{{label}}</label></div>';
-                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /></div></div>';
+                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" maxlength="255" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /></div></div>';
 			}
 		}
 	});
@@ -447,6 +447,7 @@
 				}
 
 				$scope.moveLeft = function(index) {
+					index = parseInt(index);
 					for (var i in $scope.model) {
 						var oldValue = $scope.model[i][index];
 						$scope.model[i][index] = $scope.model[i][index-1];
@@ -455,6 +456,7 @@
 				}
 
 				$scope.moveRight = function(index) {
+					index = parseInt(index);
 					for (var i in $scope.model) {
 						var oldValue = $scope.model[i][index];
 						$scope.model[i][index] = $scope.model[i][index+1];
@@ -463,12 +465,14 @@
 				}
 
 				$scope.moveUp = function(index) {
+					index = parseInt(index);
 					var oldRow = $scope.model[index];
 					$scope.model[index] = $scope.model[index-1];
 					$scope.model[index-1] = oldRow;
 				}
 
 				$scope.moveDown = function(index) {
+					index = parseInt(index);
 					var oldRow = $scope.model[index];
 					$scope.model[index] = $scope.model[index+1];
 					$scope.model[index+1] = oldRow;
@@ -476,6 +480,19 @@
 				
 				$scope.removeRow = function(key) {
 					$scope.model.splice(key, 1);
+				}
+
+				$scope.showRightButton = function(index) {
+					if (parseInt(index) < Object.keys($scope.model[0]).length - 1) {
+						return true;
+					}
+					return false;
+				}
+				$scope.showDownButton = function(index) {
+					if (parseInt(index) < Object.keys($scope.model).length - 1) {
+						return true;
+					}
+					return false;
 				}
 			},
 			template: function() {
@@ -492,7 +509,7 @@
 												'<button type="button" ng-click="removeColumn(hk)" class="btn-floating zaa-table__btn--del" data-drag="true">'+
 													'<i class="material-icons">delete</i>'+
 												'</button>'+
-												'<button ng-click="moveRight(hk)" ng-show="{{hk < model[0].length-1}}" style="float:right"><i class="material-icons">play_arrow</i></button>' +
+												'<button ng-click="moveRight(hk)" ng-show="showRightButton(hk)" style="float:right"><i class="material-icons">play_arrow</i></button>' +
 											'</strong>'+											
 										'</td>'+
 									'</tr>'+
@@ -500,7 +517,7 @@
 								'<tr data-ng-repeat="(key, row) in model track by key">'+
 									'<td>'+
 										'<button ng-show="{{key > 0}}" ng-click="moveUp(key)" style="margin-top: 10px"><i class="material-icons" style="transform: rotate(270deg);">play_arrow</i></button>' +
-										'<button ng-show="{{key < model.length-1}}" ng-click="moveDown(key)"><i class="material-icons" style="transform: rotate(90deg);">play_arrow</i></button><br/>' +
+										'<button ng-show="showDownButton(key)" ng-click="moveDown(key)"><i class="material-icons" style="transform: rotate(90deg);">play_arrow</i></button><br/>' +
 										'#{{key+1}}'+ 
 										'<button type="button" class="btn-floating zaa-table__btn--del" ng-click="removeRow(key)">'+
 											'<i class="material-icons">delete</i>'+
@@ -713,6 +730,27 @@
 	                    }
 	                }, 50);
 	            }
+
+				$scope.moveUp = function(index) {
+					index = parseInt(index);
+					var oldRow = $scope.model[index];
+					$scope.model[index] = $scope.model[index-1];
+					$scope.model[index-1] = oldRow;
+				}
+
+				$scope.moveDown = function(index) {
+					index = parseInt(index);
+					var oldRow = $scope.model[index];
+					$scope.model[index] = $scope.model[index+1];
+					$scope.model[index+1] = oldRow;
+				}
+
+				$scope.showDownButton = function(index) {
+					if (parseInt(index) < Object.keys($scope.model).length - 1) {
+						return true;
+					}
+					return false;
+				}
 	
 			},
 			template: function() {
@@ -721,11 +759,13 @@
                             '<div class="input__field-wrapper">' +
                                 '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="green-text">+</span> links unten ein.</p>' +
                                 '<div ng-repeat="(key,row) in model track by key" class="list__item">' +
-                                    '<div class="list__left">' +
+                                    '<div class="list__left" style="width:calc(100% - 140px)">' +
                                         '<input class="list__input" type="text" ng-model="row.value" />' +
                                     '</div>' +
-                                    '<div class="list__right">' +
-                                        '<button class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
+                                    '<div class="list__right" style="width:130px">' +
+										'<button ng-show="{{key > 0}}" ng-click="moveUp(key)" style="margin-top: 10px"><i class="material-icons" style="transform: rotate(270deg);">play_arrow</i></button>' +
+										'<button ng-show="showDownButton(key)" ng-click="moveDown(key)"><i class="material-icons" style="transform: rotate(90deg);">play_arrow</i></button>' +
+                                        '<button class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" style="margin-right:10px" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
                                     '</div>' +
                                 '</div>' +
                                 '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ waves-effect waves-circle waves-light ]"><i class="material-icons">add</i></button>' +
@@ -758,177 +798,6 @@
 	});
 	
 	// storage.js
-	
-	zaa.factory('FilterService', function(ApiAdminFilter, $q) {
-		var service = [];
-		
-		service.data = null;
-		
-		service.get = function(forceReload) {
-			return $q(function(resolve, reject) {
-				if (service.data === null || forceReload === true) {
-					ApiAdminFilter.query(function(response) {
-						service.data = response;
-						resolve(response);
-					})
-				} else {
-					resolve(service.data);
-				}
-				
-			});
-		}
-		
-		return service;
-	});
-	
-	/*
-	
-	zaa.factory('FileListeService', function($http, $q) {
-		var service = [];
-		
-		service.data = [];
-		
-		service.init = function() {
-			return $q(function(resolve, reject) {
-				$http.get('admin/api-admin-storage/all-folder-files').success(function(response) {
-					console.log('FileListeService: init', response);
-					response.forEach(function(value, key) {
-						service.data[value.folder.id] = value.items;
-					});
-					resolve(response);
-				})
-			});
-		};
-		
-		service.get = function(folderId, forceReload) {
-			return $q(function(resolve, reject) {
-				if (folderId in service.data && forceReload !== true) {
-					resolve(service.data[folderId]);
-				} else {
-					$http.get('admin/api-admin-storage/get-files', { params : { folderId : folderId } }).success(function(response) {
-						console.log('FileListeService: get', response);
-						service.data[folderId] = response;
-						resolve(response);
-					});
-				}
-			});
-		};
-		
-		return service;
-	});
-	
-	zaa.factory('FileIdService', function($http, $q) {
-		var service = [];
-		
-		service.data = [];
-		
-		service.init = function() {
-			return $q(function(resolve, reject) {
-				$http.get('admin/api-admin-storage/all-file-paths').success(function(response) {
-					console.log('FileIdService: init', response);
-					response.forEach(function(value, key) {
-						service.data[value.id] = value;
-					});
-					resolve(response);
-				})
-			});
-		},
-		
-		service.get = function(fileId, forceReload) {
-			return $q(function(resolve, reject) {
-				if (fileId in service.data && forceReload !== true) {
-					resolve(service.data[fileId]);
-				} else {
-					$http.get('admin/api-admin-storage/file-path', { params: { fileId : fileId } }).success(function(response) {
-						console.log('FileIdService: get', response);
-						service.data[fileId] = response;
-						resolve(response);
-					}).error(function(response) {
-						console.log('Error while loading fileID ' + fileId, response);
-					})
-				}
-			});
-		}
-		
-		return service;
-	});
-	
-	zaa.factory('ImageIdService', function($http, $q) {
-		var service = [];
-		
-		service.data = [];
-		
-		service.init = function() {
-			return $q(function(resolve, reject) {
-				$http.get('admin/api-admin-storage/all-image-paths').success(function(response) {
-					response.forEach(function(value, key) {
-						service.data[value.image_id] = value;
-					});
-					resolve(response);
-				})
-			});
-		}
-		
-		service.get = function(imageId, forceReload) {
-			return $q(function(resolve, reject) {
-				if (imageId in service.data && forceReload !== true) {
-					resolve(service.data[imageId]);
-				} else {
-					$http.get('admin/api-admin-storage/image-path', { params: { imageId : imageId } }).success(function(response) {
-						service.data[imageId] = response;
-						//console.log('request NOT EXISTING imageId', imageId);
-						resolve(response);
-					}).error(function(response) {
-						console.log('Error while loading imageId ' + imageId, response);
-					})
-				}
-			});
-		}
-		
-		return service;
-	});
-	
-	
-	zaa.factory('FilemanagerFolderService', function() {
-		var service = [];
-		
-		service.folderId = 0;
-		
-		service.set = function(id) {
-			service.folderId = id;
-		}
-		
-		service.get = function() {
-			return service.folderId;
-		}
-		
-		return service;
-	});
-	
-	zaa.factory('FilemanagerFolderListService', function($http, $q) {
-		var service = [];
-		
-		service.data = null;
-		
-		service.get = function(forceReload) {
-			return $q(function(resolve, reject) {
-				if (service.data === null || forceReload === true) {
-					$http.get('admin/api-admin-storage/get-folders').success(function(response) {
-						service.data = response;
-						resolve(response);
-					}).error(function(response) {
-						reject(response);
-					});
-				} else {
-					resolve(service.data);
-				}
-				
-			});
-		}
-		
-		return service;
-	});
-	*/
 	
 	zaa.directive('storageFileUpload', function($http, ServiceFilesData, $filter) {
 		return {
@@ -1082,7 +951,9 @@
 		                    scope.imageLoading = false;
 						});
 					} else {
-						scope.imageinfo = items[0];
+						var item = items[0];
+						scope.ngModel = item.id
+						scope.imageinfo = item;
 					}
 				};
 				

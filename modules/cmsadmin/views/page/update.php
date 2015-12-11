@@ -27,7 +27,7 @@
                     <i ng-show="edit || config" class="material-icons block__toolbar__icon" ng-click="toggleBlockSettings()">close</i>
                 </div>
             </div>
-            <div class="block__body cmsadmin-tags" ng-click="toggleEdit()" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
+            <div class="block__body cmsadmin-tags" ng-click="toggleEdit()" compile-html ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
             <form class="block__edit">
                 <div class="block__edit-content">
                     <p class="block__config__text"><?= \cmsadmin\Module::t('view_update_blockcontent'); ?><span class="block__config__text-section"> - <?= \cmsadmin\Module::t('view_update_settings'); ?> - </span></p>
@@ -275,13 +275,15 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col s{{(12/AdminLangService.selection.length)}}" ng-repeat="lang in languagesData" ng-show="AdminLangService.isInSelection(lang.short_code) && showContainer" ng-controller="NavItemController">
+                <div class="col s{{(12/AdminLangService.selection.length)}}" ng-repeat="lang in languagesData" ng-show="AdminLangService.isInSelection(lang.short_code)" ng-controller="NavItemController">
                     <!-- PAGE -->
                     <div class="page" ng-show="!isTranslated && navData.is_draft == 1">
                         <div class="alert alert--info"><?= \cmsadmin\Module::t('view_update_draft_no_lang_error'); ?></div>
                     </div>
-                    
-                    <div class="page" ng-show="!isTranslated && navData.is_draft == 0">
+                    <div class="alert alert--info" ng-show="!loaded">
+                        <p>Daten der Seite werden geladen.</p>
+                    </div>
+                    <div class="page" ng-show="!isTranslated && navData.is_draft == 0 && loaded">
                         <div class="row">
                             <div class="col s12">
                                 <div class="alert alert--info">
@@ -293,7 +295,7 @@
                             <create-form data="data"></create-form>
                         </div>
                     </div>
-                    <div class="page {{AdminClassService.getClassSpace('onDragStart')}}" ng-show="isTranslated">
+                    <div class="page {{AdminClassService.getClassSpace('onDragStart')}}" ng-show="isTranslated && loaded">
                         <!-- PAGE__HEADER -->
                         <div class="page__header">
                             <div class="row">
@@ -390,7 +392,7 @@
                         <!-- PAGE__CONTENT -->
                         <div class="page__content" ng-show="!settings" ng-switch on="item.nav_item_type">
                             <div class="row">
-                                <div class="col s12 page__no-padding" ng-switch-when="1" ng-controller="NavItemTypePageController">
+                                <div class="col s12 page__no-padding" ng-switch-when="1">
                                     <ul class="page__list" ng-show="container.nav_item_page.id">
                                         <li class="page__placeholder accordion__entry--open" ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'"></li>
                                     </ul>

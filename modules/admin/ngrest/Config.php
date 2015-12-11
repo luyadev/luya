@@ -14,7 +14,6 @@ use luya\helpers\ArrayHelper;
  *         'firstname' => [
  *             'name' => 'firstname',
  *             'alias' => 'Vorname',
- *             'gridCols' => 12,
  *             'i18n' => false,
  *             'extraField' => false,
  *             'plugins' => [
@@ -96,7 +95,7 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
 
         $options = ArrayHelper::merge([
             'name' => null,
-            'gridCols' => 12,
+            'i18n' => false,
             'alias' => null,
             'plugins' => [],
             'i18n' => false,
