@@ -6,6 +6,7 @@
             {% if cfgs.textType == 1 %}{{ extras.text }}{% else %}<p>{{ extras.text|nl2br }}</p>{% endif %}
             
             {% if cfgs.btnHref and cfgs.btnLabel is not empty %}
+                <br>
                 <a class="button" {% if cfgs.targetBlank == 1  %}target="_blank"{% endif %} href="{% if cfgs.btnHref is not empty %}{{ cfgs.btnHref }}{% else %}#{% endif %}">
                 {% if cfgs.btnLabel is not empty %} {{ cfgs.btnLabel }} {% endif %}
                 </a>

@@ -30,6 +30,7 @@ class LinkButtonBlock extends \cmsadmin\base\Block
            ],
            'cfgs' => [
                 ['var' => 'targetBlank', 'label' => Module::t('block_link_button_targetblank_label'), 'type' => 'zaa-checkbox'],
+                ['var' => 'simpleLink', 'label' => Module::t('block_link_button_simpleLink_label'), 'type' => 'zaa-checkbox'],
            ],
         ];
     }
@@ -52,7 +53,8 @@ class LinkButtonBlock extends \cmsadmin\base\Block
      */
     public function twigFrontend()
     {
-        return '<a class="button" 
+        return '<a 
+                    {% if cfgs.simpleLink == 0  %}class="button" {% endif %}
                     {% if cfgs.targetBlank == 1  %}target="_blank"{% endif %} 
                     href="{% if vars.btnHref is not empty %}{{ vars.btnHref }}{% else %}#{% endif %}">
                     {% if vars.btnLabel is not empty %} {{ vars.btnLabel }} {% endif %}

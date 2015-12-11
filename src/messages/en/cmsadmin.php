@@ -84,6 +84,8 @@ return [
     'block_link_button_name' => 'Link button',
     'block_link_button_btnlabel_label' => 'Button Label',
     'block_link_button_btnhref_label' => 'Link adress',
+    'block_link_button_targetblank_label' => 'Opens the linked document in a new window or tab',
+    'block_link_button_simpleLink_label' => 'Use a simple link',
 
     // ListBlock
     'block_list_name' => 'List',

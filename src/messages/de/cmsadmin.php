@@ -85,6 +85,8 @@ return [
     'block_link_button_name' => 'Link Button',
     'block_link_button_btnlabel_label' => 'Button Label',
     'block_link_button_btnhref_label' => 'Link Adresse',
+    'block_link_button_targetblank_label' => 'Link in einem neuen Fenster oder Tag öffnen',
+    'block_link_button_simpleLink_label' => 'Als einfachen Link verwenden',
 
     // ListBlock
     'block_list_name' => 'Auflistung',
