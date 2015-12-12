@@ -71,7 +71,7 @@ class CrawlContainer extends \yii\base\Object
         $index = Index::find()->asArray()->indexBy('url')->all();
 
         if (count($builder) == 0) {
-            throw new Exception('The array index have length 0, stop script exec.');
+            throw new Exception('The crawler have not found any results. Wrong base url? Or set a rule which tracks all urls?');
             exit;
         }
 
@@ -140,10 +140,11 @@ class CrawlContainer extends \yii\base\Object
     
     private function filterUrlIsValid($url)
     {
-        var_dump($url);
         foreach($this->filterRegex as $rgx) {
             $r = preg_match($rgx, $url, $results);
-            var_dump($r);
+            if ($r === 1) {
+                return false;
+            }
         }
         return true;
     }

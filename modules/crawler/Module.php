@@ -14,5 +14,12 @@ class Module extends \luya\base\Module
 
     public $baseUrl = null;
     
+    /**
+     * 
+     * @var array with full regular expressions:
+     * 'filterRegex' => [
+	 *     '/\.\//i',
+	 * ],
+     */
     public $filterRegex = [];
 }
