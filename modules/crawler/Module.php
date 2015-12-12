@@ -13,4 +13,6 @@ class Module extends \luya\base\Module
     public $isCoreModule = true;
 
     public $baseUrl = null;
+    
+    public $filterRegex = [];
 }

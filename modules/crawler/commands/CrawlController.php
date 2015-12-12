@@ -18,7 +18,7 @@ class CrawlController extends \luya\console\Command
     {
         $client = new Client();
         $pageCrawler = new CrawlPage(['client' => $client, 'baseUrl' => $this->module->baseUrl]);
-        $container = new CrawlContainer(['baseUrl' => $this->module->baseUrl, 'pageCrawler' => $pageCrawler]);
+        $container = new CrawlContainer(['baseUrl' => $this->module->baseUrl, 'pageCrawler' => $pageCrawler, 'filterRegex' => $this->module->filterRegex]);
 
         $this->output(print_r($container->getReport(), true));
 

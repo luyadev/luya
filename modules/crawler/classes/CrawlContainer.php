@@ -19,6 +19,8 @@ class CrawlContainer extends \yii\base\Object
 
     public $report = [];
 
+    public $filterRegex = [];
+    
     private $_crawlers = [];
 
     protected function getCrawler($url)
@@ -135,6 +137,16 @@ class CrawlContainer extends \yii\base\Object
         return false;
         */
     }
+    
+    private function filterUrlIsValid($url)
+    {
+        var_dump($url);
+        foreach($this->filterRegex as $rgx) {
+            $r = preg_match($rgx, $url, $results);
+            var_dump($r);
+        }
+        return true;
+    }
 
     public function urlStatus($url)
     {
@@ -143,21 +155,25 @@ class CrawlContainer extends \yii\base\Object
         if (!$model) {
 
             // add the url to the index
-            BuilderIndex::addToIndex($url, $this->getCrawler($url)->getTitle());
-
-            // update the urls content
-            $model = BuilderIndex::findUrl($url);
-            $model->content = $this->getCrawler($url)->getContent();
-            $model->crawled = 1;
-            $model->status_code = 1;
-            $model->last_indexed = time();
-            $model->language_info = $this->getCrawler($url)->getLanguageInfo();
-            $model->save(false);
-
-            // add the pages links to the index
-            foreach ($this->getCrawler($url)->getLinks() as $link) {
-                if ($this->matchBaseUrl($link[1])) {
-                    BuilderIndex::addToIndex($link[1], $link[0]);
+            if ($this->filterUrlIsValid($url)) {
+                BuilderIndex::addToIndex($url, $this->getCrawler($url)->getTitle());
+    
+                // update the urls content
+                $model = BuilderIndex::findUrl($url);
+                $model->content = $this->getCrawler($url)->getContent();
+                $model->crawled = 1;
+                $model->status_code = 1;
+                $model->last_indexed = time();
+                $model->language_info = $this->getCrawler($url)->getLanguageInfo();
+                $model->save(false);
+    
+                // add the pages links to the index
+                foreach ($this->getCrawler($url)->getLinks() as $link) {
+                    if ($this->matchBaseUrl($link[1])) {
+                        if ($this->filterUrlIsValid($link[1])) {
+                            BuilderIndex::addToIndex($link[1], $link[0]);
+                        }
+                    }
                 }
             }
         } else {
