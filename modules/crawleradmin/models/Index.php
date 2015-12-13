@@ -16,9 +16,9 @@ class Index extends \admin\ngrest\base\Model
     public function scenarios()
     {
         return [
-            'default' => ['url', 'content', 'title', 'arguments_json', 'language_info', 'added_to_index', 'last_update'],
-            'restcreate' => ['url', 'content', 'title', 'arguments_json', 'language_info'],
-            'restupdate' => ['url', 'content', 'title', 'arguments_json', 'language_info'],
+            'default' => ['url', 'content', 'title', 'language_info', 'added_to_index', 'last_update'],
+            'restcreate' => ['url', 'content', 'title', 'language_info'],
+            'restupdate' => ['url', 'content', 'title', 'language_info'],
         ];
     }
 
@@ -114,7 +114,7 @@ class Index extends \admin\ngrest\base\Model
 
     public function genericSearchFields()
     {
-        return ['url', 'content', 'title', 'arguments_json', 'language_info'];
+        return ['url', 'content', 'title', 'language_info'];
     }
 
     public function ngRestApiEndpoint()
@@ -128,7 +128,6 @@ class Index extends \admin\ngrest\base\Model
         $config->list->field('title', 'Title')->text();
         $config->list->field('language_info', 'Language_info')->text();
         $config->list->field('content', 'Content')->textarea();
-        $config->list->field('arguments_json', 'Arguments_json')->textarea();
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);
 

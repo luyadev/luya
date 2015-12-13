@@ -4,6 +4,21 @@ namespace crawleradmin\models;
 
 class BuilderIndex extends \admin\ngrest\base\Model
 {
+    public function init()
+    {
+        $this->on(self::EVENT_BEFORE_INSERT, [$this, 'hashContent']);
+        $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'hashContent']);
+    }
+    
+    public function hashContent($event)
+    {
+        $this->content_hash = md5($this->content);
+        $count = self::find()->where(['content_hash' => $this->content_hash])->count();
+        if ($count > 0) {
+            $this->is_dublication = 1;
+        }
+    }
+    
     /* yii model properties */
 
     public static function tableName()
@@ -14,9 +29,9 @@ class BuilderIndex extends \admin\ngrest\base\Model
     public function scenarios()
     {
         return [
-            'restcreate' => ['url', 'content', 'title', 'arguments_json', 'language_info'],
-            'restupdate' => ['url', 'content', 'title', 'arguments_json', 'language_info'],
-            'default' => ['url', 'content', 'title', 'arguments_json', 'language_info'],
+            'restcreate' => ['url', 'content', 'title', 'language_info'],
+            'restupdate' => ['url', 'content', 'title', 'language_info'],
+            'default' => ['url', 'content', 'title', 'language_info', 'content_hash', 'is_dublication'],
         ];
     }
 
@@ -60,7 +75,7 @@ class BuilderIndex extends \admin\ngrest\base\Model
 
     public function genericSearchFields()
     {
-        return ['url', 'content', 'title', 'arguments_json', 'language_info'];
+        return ['url', 'content', 'title', 'language_info'];
     }
 
     public function ngRestApiEndpoint()
@@ -74,7 +89,6 @@ class BuilderIndex extends \admin\ngrest\base\Model
         $config->list->field('title', 'Title')->text();
         $config->list->field('language_info', 'Language_info')->text();
         $config->list->field('content', 'Content')->textarea();
-        $config->list->field('arguments_json', 'Arguments_json')->textarea();
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);
 

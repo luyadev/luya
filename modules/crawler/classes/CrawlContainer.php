@@ -78,7 +78,7 @@ class CrawlContainer extends \yii\base\Object
 
     public function finish()
     {
-        $builder = BuilderIndex::find()->indexBy('url')->asArray()->all();
+        $builder = BuilderIndex::find()->where(['is_dublication' => 0])->indexBy('url')->asArray()->all();
         $index = Index::find()->asArray()->indexBy('url')->all();
 
         if (count($builder) == 0) {

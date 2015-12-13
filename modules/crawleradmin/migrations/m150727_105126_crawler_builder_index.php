@@ -12,7 +12,7 @@ class m150727_105126_crawler_builder_index extends Migration
             'content' => 'TEXT',
             'title' => 'varchar(200)',
             'last_indexed' => 'int(11)',
-            'arguments_json' => 'text NOT NULL',
+            'arguments_json' => 'text NOT NULL', // removed in beta3
             'language_info' => 'varchar(80)',
             'crawled' => 'tinyint(1) default 0',
             'status_code' => 'tinyint(4) default 0',
