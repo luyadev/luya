@@ -25,6 +25,6 @@ class CrawlController extends \luya\console\Command
         $this->output(print_r($container->getReport(), true));
 
         $timeElapsed = round((microtime(true) - $start) / 60, 2);
-        return $this->outputSuccess('Cralwer finished in ' . $timeElapsed . ' seconds.');
+        return $this->outputSuccess('Cralwer finished in ' . $timeElapsed . ' min.');
     }
 }
