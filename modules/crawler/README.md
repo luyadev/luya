@@ -26,9 +26,9 @@ Für Async Searchs kann der Restcontroller verwendet werden, hier ein Jquery bei
 
 > Achtung die Url Composition prefix muss gegen sein für mehrsprachige Urls.
 
-```javascript
+```
 
-var url = 'http://luya.io/en/crawler/rest/;
+var url = '<?= \luya\helpers\Url::toInternal(['crawler/rest/index']); ?>';
 
 $.ajax({
 	url : url 
