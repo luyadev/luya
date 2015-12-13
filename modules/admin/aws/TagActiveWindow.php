@@ -37,6 +37,7 @@ class TagActiveWindow extends \admin\ngrest\base\ActiveWindow
 
         if ($find) {
             TagRelation::deleteAll(['tag_id' => $tagId, 'table_name' => $this->tableName, 'pk_id' => $this->getItemId()]);
+            return 0;
         } else {
             $model = new TagRelation();
             $model->setAttributes([
@@ -45,9 +46,8 @@ class TagActiveWindow extends \admin\ngrest\base\ActiveWindow
                 'pk_id' => $this->getItemId(),
             ]);
             $model->insert(false);
+            return 1;
         }
-
-        return true;
     }
 
     public function callbackSaveTag($tagName)
