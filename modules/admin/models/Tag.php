@@ -2,8 +2,6 @@
 
 namespace admin\models;
 
-use admin\aws\TagActiveWindow;
-
 class Tag extends \admin\ngrest\base\Model
 {
     /* yii model properties */
@@ -46,8 +44,6 @@ class Tag extends \admin\ngrest\base\Model
         $config->create->copyFrom('list');
         $config->update->copyFrom('list');
         $config->delete = true;
-
-        $config->aw->register(new TagActiveWindow("admin_tag"), 'Tags');
 
         return $config;
     }
