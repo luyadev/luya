@@ -51,7 +51,7 @@
             <!-- Token -->
             <form class="card hidden" method="post" id="secureForm">
                 <div class="card-content clearfix">
-                    <span class="card-title black-text"><?= \admin\Module::t('login_pre_title', ['title' => Yii::$app->siteTitle]); ?><</span>
+                    <span class="card-title black-text"><?= \admin\Module::t('login_pre_title', ['title' => Yii::$app->siteTitle]); ?></span>
 
                     <br />
                     <br />
