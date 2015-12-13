@@ -16,12 +16,15 @@ class CrawlController extends \luya\console\Command
 {
     public function actionIndex()
     {
+        $start = microtime(true);
+        
         $client = new Client();
         $pageCrawler = new CrawlPage(['client' => $client, 'baseUrl' => $this->module->baseUrl]);
         $container = new CrawlContainer(['baseUrl' => $this->module->baseUrl, 'pageCrawler' => $pageCrawler, 'filterRegex' => $this->module->filterRegex]);
 
         $this->output(print_r($container->getReport(), true));
 
-        return $this->outputSuccess('Index Crawler finished');
+        $timeElapsed = round((microtime(true) - $start) / 60, 2);
+        return $this->outputSuccess('Cralwer finished in ' . $timeElapsed . ' seconds.');
     }
 }

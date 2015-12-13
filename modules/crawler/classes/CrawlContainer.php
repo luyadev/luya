@@ -17,11 +17,22 @@ class CrawlContainer extends \yii\base\Object
 
     public $pageCrawler = null;
 
-    public $report = [];
-
     public $filterRegex = [];
     
     private $_crawlers = [];
+    
+    public $log = [
+        'new' => [],
+        'update' => [],
+        'delete' => [],
+        'delete_issue' => [],
+        'unchanged' => [],
+        'filtered' => [],
+    ];
+    
+    public function addLog($cat, $message) {
+        $this->log[$cat][] = $message;
+    }
 
     protected function getCrawler($url)
     {
@@ -62,7 +73,7 @@ class CrawlContainer extends \yii\base\Object
 
     public function getReport()
     {
-        return $this->report;
+        return $this->log;
     }
 
     public function finish()
@@ -75,20 +86,12 @@ class CrawlContainer extends \yii\base\Object
             exit;
         }
 
-        $compare = [
-            'new' => [],
-            'update' => [],
-            'delete' => [],
-            'delete_issue' => [],
-            'unchanged' => [],
-        ];
-
         foreach ($builder as $url => $page) {
             if (isset($index[$url])) { // page exists in index
                 if ($index[$url]['content'] == $page['content']) {
-                    $compare['unchanged'][] = $url;
+                    $this->addLog('unchanged', $url);
                 } else {
-                    $compare['update'][] = $url;
+                    $this->addLog('update', $url);
                     $update = Index::findOne(['url' => $url]);
                     $update->attributes = $page;
                     $update->last_update = time();
@@ -96,7 +99,7 @@ class CrawlContainer extends \yii\base\Object
                 }
                 unset($index[$url]);
             } else {
-                $compare['new'][] = $url;
+                $this->addLog('new', $url);
                 $insert = new Index();
                 $insert->attributes = $page;
                 $insert->added_to_index = time();
@@ -107,18 +110,16 @@ class CrawlContainer extends \yii\base\Object
 
         // delete not unseted urls from index
         foreach ($index as $deleteUrl => $deletePage) {
-            $compare['delete'][] = $deleteUrl;
+            $this->addLog('delete', $url);
             $model = Index::findOne($deletePage['id']);
             $model->delete(false);
         }
 
         // delete empty content empty title
         foreach (Index::find()->where(['=', 'content', ''])->orWhere(['=', 'title', ''])->all() as $page) {
-            $compare['delete_issue'][] = $page->url;
+            $this->addLog('delete_issue', $url);
             $page->delete(false);
         }
-
-        $this->report = $compare;
     }
 
     public function matchBaseUrl($url)
@@ -128,14 +129,6 @@ class CrawlContainer extends \yii\base\Object
         }
         
         return true;
-        /*
-        $host = parse_url($url, PHP_URL_HOST);
-        if ($host == $this->baseHost) {
-            return true;
-        }
-
-        return false;
-        */
     }
     
     private function filterUrlIsValid($url)
@@ -143,6 +136,7 @@ class CrawlContainer extends \yii\base\Object
         foreach($this->filterRegex as $rgx) {
             $r = preg_match($rgx, $url, $results);
             if ($r === 1) {
+                $this->addLog('filtered', $url);
                 return false;
             }
         }
@@ -188,7 +182,9 @@ class CrawlContainer extends \yii\base\Object
 
                 foreach ($this->getCrawler($url)->getLinks() as $link) {
                     if ($this->matchBaseUrl($link[1])) {
-                        BuilderIndex::addToIndex($link[1], $link[0]);
+                        if ($this->filterUrlIsValid($link[1])) {
+                            BuilderIndex::addToIndex($link[1], $link[0]);
+                        }
                     }
                 }
             }
