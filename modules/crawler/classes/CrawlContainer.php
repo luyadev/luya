@@ -172,18 +172,23 @@ class CrawlContainer extends \yii\base\Object
                 }
             }
         } else {
-            if ($model->crawled !== 1) {
-                $model->content = $this->getCrawler($url)->getContent();
-                $model->crawled = 1;
-                $model->status_code = 1;
-                $model->last_indexed = time();
-                $model->language_info = $this->getCrawler($url)->getLanguageInfo();
-                $model->save(false);
-
-                foreach ($this->getCrawler($url)->getLinks() as $link) {
-                    if ($this->matchBaseUrl($link[1])) {
-                        if ($this->filterUrlIsValid($link[1])) {
-                            BuilderIndex::addToIndex($link[1], $link[0]);
+            
+            if (!$this->filterUrlIsValid($url)) {
+                $model->delete();
+            } else {
+                if ($model->crawled !== 1) {
+                    $model->content = $this->getCrawler($url)->getContent();
+                    $model->crawled = 1;
+                    $model->status_code = 1;
+                    $model->last_indexed = time();
+                    $model->language_info = $this->getCrawler($url)->getLanguageInfo();
+                    $model->save(false);
+    
+                    foreach ($this->getCrawler($url)->getLinks() as $link) {
+                        if ($this->matchBaseUrl($link[1])) {
+                            if ($this->filterUrlIsValid($link[1])) {
+                                BuilderIndex::addToIndex($link[1], $link[0]);
+                            }
                         }
                     }
                 }
