@@ -8,21 +8,19 @@ use yii\web\Response;
 
 class NgrestController extends \admin\base\Controller
 {
+    public $disablePermissionCheck = true;
+    
     public function behaviors()
     {
-        return [
-            [
+        $behaviors = parent::behaviors();
+        $behaviors[] = [
             'class' => 'yii\filters\ContentNegotiator',
             'only' => ['callback'],
                 'formats' => [
                     'application/json' => Response::FORMAT_JSON,
                 ],
-                'languages' => [
-                    'en',
-                    'de',
-                ],
-            ],
-        ];
+            ];
+        return $behaviors;
     }
 
     public function actionRender()
