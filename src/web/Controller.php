@@ -101,6 +101,16 @@ abstract class Controller extends \yii\web\Controller
      */
     public function getModuleLayoutViewPath()
     {
+        // if the module settings is turn to use the module view path we use them always first!
+        if ($this->module->controllerUseModuleViewPath !== null) {
+            $this->useModuleViewPath = $this->module->controllerUseModuleViewPath;
+        }
+        
+        // use default yii behaviour
+        if ($this->useModuleViewPath) {
+            return '@'.$this->module->id.'/views/';
+        }
+        
         return '@app/views/'.$this->module->id.'/';
     }
 
