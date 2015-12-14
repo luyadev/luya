@@ -13,9 +13,11 @@ class BuilderIndex extends \admin\ngrest\base\Model
     public function hashContent($event)
     {
         $this->content_hash = md5($this->content);
-        $count = self::find()->where(['content_hash' => $this->content_hash])->count();
+        $count = self::find()->where(['content_hash' => $this->content_hash])->andWhere(['!=', 'url', $this->url])->count();
         if ($count > 0) {
             $this->is_dublication = 1;
+        } else {
+            $this->is_dublication = 0;
         }
     }
     
@@ -89,7 +91,6 @@ class BuilderIndex extends \admin\ngrest\base\Model
         $config->list->field('title', 'Title')->text();
         $config->list->field('language_info', 'Language_info')->text();
         $config->list->field('content', 'Content')->textarea();
-        $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);
 
         return $config;
