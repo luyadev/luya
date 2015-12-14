@@ -40,7 +40,8 @@ class ModuleReflectionTest extends \tests\web\Base
         $this->assertEquals('unit-test-2', $content['id']);
         $this->assertEquals('unitmodule', $content['module']);
         $this->assertNotEquals('@app/views/unitmodule/unit-test', $content['viewPath']);
-        $this->assertEquals('@app/views/unitmodule/', $content['moduleLayoutViewPath']);
+        $this->assertNotEquals('@app/views/unitmodule/', $content['moduleLayoutViewPath']);
+        $this->assertEquals('@unitmodule/views/', $content['moduleLayoutViewPath']);
     }
 
     public function testModuleSuffix()

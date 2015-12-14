@@ -58,13 +58,12 @@ class UrlManagerTest extends \tests\web\Base
         $request->pathInfo = 'news/english-test/1';
 
         $r = $urlManager->parseRequest($request);
-
         $this->assertArrayHasKey(0, $r);
         $this->assertArrayHasKey(1, $r);
 
         $this->assertArrayHasKey('id', $r[1]);
 
-        $this->assertEquals('/news/test', $r[0]);
+        $this->assertEquals('news/test', $r[0]);
 
         $this->assertEquals('1', $r[1]['id']);
     }

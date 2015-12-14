@@ -51,6 +51,8 @@ class UrlManager extends \yii\web\UrlManager
             $route[0] = '';
         }
         
+        $route[0] = ltrim($route[0], '/');
+        
         return $route;
     }
 
