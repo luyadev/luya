@@ -31,10 +31,20 @@ class DefaultController extends \account\base\Controller
      * @param $_GET['redirect'] should be urlencoded
      * @param $_POST['LoginForm'] data to login
      */
-    public function actionIndex()
+    public function actionIndex($ref = null)
     {
+        if (!empty($ref)) {
+            Yii::$app->session->set('accountRef', $ref);
+        }
+        
         if (!$this->module->getUserIdentity()->isGuest) {
-            return $this->redirect(Url::toManager('account/settings/index'));
+            if (Yii::$app->session->get('accountRef')) {
+                $url = Yii::$app->session->get('accountRef');
+                Yii::$app->session->remove('accountRef');
+            } else {
+                $url = Url::toManager('account/settings/index');
+            }
+            return $this->redirect($url);
         }
 
         $model = new LoginForm();
@@ -43,12 +53,15 @@ class DefaultController extends \account\base\Controller
             $model->attributes = Yii::$app->request->post('LoginForm');
             if (($userObject = $model->login()) !== false) {
                 if ($this->module->getUserIdentity()->login($userObject)) {
-                    $redirect = Yii::$app->request->get('redirect', false);
-                    if (!$redirect) {
-                        $redirect = Url::toManager('account/settings/index');
+                    
+                    $url = Yii::$app->session->get('accountRef');
+                    if (!$url) {
+                        $url = Url::toManager('account/settings/index');
+                    } else {
+                        Yii::$app->session->remove('accountRef');
                     }
 
-                    return $this->redirect($redirect);
+                    return $this->redirect($url);
                 }
             }
         }

@@ -3,8 +3,7 @@
 namespace account\properties;
 
 use Yii;
-use luya\helpers\Url;
-
+use cms\helpers\Url;
 class IsProtectedAreaProperty extends \admin\base\Property
 {
     public function init()
@@ -14,10 +13,10 @@ class IsProtectedAreaProperty extends \admin\base\Property
 
     public function eventBeforeRender($event)
     {
-        if ($this->value === 1) {
+        if ($this->value == 1) {
             if (Yii::$app->getModule('account')->getUserIdentity()->isGuest) {
                 $event->isValid = false;
-                Yii::$app->response->redirect(Url::toManager('account/default/index'));
+                return Yii::$app->response->redirect(Url::toModuleRoute('account', 'account/default/index', ['ref' => Yii::$app->request->url]));
             }
         }
     }
