@@ -20,6 +20,8 @@ LUYA CHANGELOG
 - `#484` added toast service with error and success messages.
 - `#649` added maxlength for text input fields of 255 chars (on zaa-text).
 - `#651` fixed issue where image and file list array where unable to be i18n casted.
+- `#659` fixed security issue for ngrest callbacks.
+- `#658` fixed composition rules issue where parse request creates absolut urls.
 
 1.0.0-beta2 (3.12.2015)
 -------------------------
