@@ -53,7 +53,7 @@ class DefaultController extends \account\base\Controller
             }
         }
 
-        return $this->render('index', ['model' => $model]);
+        return $this->renderLayout('index', ['model' => $model]);
     }
 
     public function actionLogout()
@@ -65,6 +65,6 @@ class DefaultController extends \account\base\Controller
 
     public function actionLostpass()
     {
-        return 'lost password form';
+        return $this->renderLayout('lostpass');
     }
 }

@@ -8,6 +8,6 @@ class SettingsController extends \account\base\Controller
     {
         $model = $this->module->getUserIdentity()->getIdentity();
 
-        return $this->render('index', ['model' => $model]);
+        return $this->renderLayout('index', ['model' => $model]);
     }
 }

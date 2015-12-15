@@ -15,7 +15,7 @@ class m150302_154115_account_user extends Migration
             'password' => Schema::TYPE_STRING,
             'password_salt' => Schema::TYPE_STRING,
             'auth_token' => Schema::TYPE_STRING,
-            'is_deleted' => Schema::TYPE_SMALLINT,
+            'is_deleted' => 'tinyint(11) default 0',
         ]);
     }
 

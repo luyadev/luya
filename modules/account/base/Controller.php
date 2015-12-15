@@ -25,4 +25,9 @@ class Controller extends \luya\web\Controller
             ],
         ];
     }
+    
+    public function isGuest()
+    {
+        return $this->module->getUserIdentity()->isGuest;
+    }
 }

@@ -7,6 +7,7 @@ class LoginForm extends \yii\base\Model
     private $_user = false;
 
     public $email;
+    
     public $password;
 
     public function rules()
@@ -41,7 +42,7 @@ class LoginForm extends \yii\base\Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = \account\models\User::findByEmail($this->email);
+            $this->_user = \accountadmin\models\User::findByEmail($this->email);
         }
 
         return $this->_user;

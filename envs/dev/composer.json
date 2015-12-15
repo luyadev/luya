@@ -39,6 +39,7 @@
             "newsadmin\\" : "../../modules/newsadmin",
             "news\\" : "../../modules/news",
             "account\\" : "../../modules/account",
+            "accountadmin\\" : "../../modules/accountadmin",
             "errorapi\\" : "../../modules/errorapi",
             "gallery\\" : "../../modules/gallery",
             "galleryadmin\\" : "../../modules/galleryadmin",

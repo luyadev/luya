@@ -1,15 +1,21 @@
 <?php
 
-namespace account\models;
+namespace accountadmin\models;
 
 use Yii;
 
-class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
+class User extends \admin\ngrest\base\Model implements \yii\web\IdentityInterface
 {
     public $password_confirm = null;
 
     public $plainPassword = null;
 
+    public function init()
+    {
+        parent::init();
+        $this->on(self::EVENT_BEFORE_INSERT, [$this, 'encodePassword']);
+    }
+    
     public static function tableName()
     {
         return 'account_user';
@@ -23,8 +29,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['email', 'password'], 'required', 'on' => 'login'],
-            [['firstname', 'lastname', 'email', 'password'], 'required', 'on' => 'register'],
+            //[['email', 'password'], 'required', 'on' => 'login'],
+            [['email', 'password', 'password_confirm'], 'required', 'on' => 'register'],
             [['email'], 'email', 'on' => 'register'],
             [['email'], 'validateUserExists', 'on' => 'register'],
             [['password'], 'validatePassword', 'on' => 'register'],
@@ -34,8 +40,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function scenarios()
     {
         return [
-            'register' => ['firstname', 'lastname', 'email', 'password', 'password_confirm'],
-            'login' => ['email', 'password'],
+            'register' => ['firstname', 'lastname', 'email', 'password', 'password_confirm', 'gender', 'street', 'zip', 'city', 'country', 'company', 'subscription_newsletter', 'subscription_medianews'],
+            //'login' => ['email', 'password'],
+            'restupdate' => ['firstname', 'lastname', 'email', 'street', 'zip', 'city', 'country', 'company', 'subscription_newsletter', 'subscription_medianews', 'is_mail_verified', 'is_active'],
         ];
     }
 
@@ -73,9 +80,33 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $this->password_confirm = $this->password;
     }
 
-    // identityInterface
-
-    /* IdentityInterface below */
+    /* NgRest */
+    
+    public function ngRestApiEndpoint()
+    {
+        return 'api-account-user';
+    }
+    
+    public function ngRestConfig($config)
+    {
+        $config->list->field("firstname", "Vorname")->text();
+        $config->list->field("lastname", "Lastname")->text();
+        $config->list->field("email", "E-Mail")->text();
+        $config->list->field("subscription_newsletter", "Newsletter")->toggleStatus();
+        $config->list->field("subscription_medianews", "Neuigkeiten")->toggleStatus();
+        $config->list->field("is_mail_verified", "E-Mail verifiziert")->toggleStatus();
+        $config->list->field("is_active", "Aktiviert")->toggleStatus();
+        
+        $config->update->copyFrom('list');
+        $config->update->field('street', 'Strasse')->text();
+        $config->update->field('zip', 'PLZ')->text();
+        $config->update->field('city', 'Ortschaft')->text();
+        $config->update->field('country', 'Land')->text();
+        $config->update->field('company', 'Firma')->text();
+        return $config;
+    }
+    
+    /* IdentityInterface */
 
     /**
      * Finds an identity by the given ID.
@@ -114,7 +145,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public function getAuthKey()
     {
-        return $this->auth_key; // @todo use this key for what?
+        return $this->auth_key;
     }
 
     /**
