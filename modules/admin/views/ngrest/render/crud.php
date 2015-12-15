@@ -26,7 +26,7 @@
                     <a class="tabs__anchor" ng-click="switchTo(0)"><i class="material-icons tabs__icon">menu</i> <?= \admin\Module::t('ngrest_crud_btn_list'); ?></a>
                 </li>
 
-                <?php if ($canCreate): ?>
+                <?php if ($canCreate && $config->getPointer('create')): ?>
                     <li class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==1}">
                         <a class="tabs__anchor" style="" ng-click="switchTo(1)"><i class="material-icons tabs__icon">add_box</i> <?= \admin\Module::t('ngrest_crud_btn_add'); ?></a>
                     </li>
