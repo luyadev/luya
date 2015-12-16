@@ -8,9 +8,6 @@ use yii\db\Query;
 use yii\helpers\Inflector;
 use luya\helpers\FileHelper;
 use admin\helpers\Storage;
-use admin\storage\FileQuery;
-use admin\storage\ImageQuery;
-use admin\storage\FolderQuery;
 use admin\models\StorageFile;
 use admin\models\StorageImage;
 use admin\models\StorageFilter;
@@ -49,13 +46,17 @@ use Imagine\Gd\Imagine;
  * (new admin\file\Query())->where(['id' => 10])->one();
  * ```
  * 
+ * or 
+ * 
+ * ```php
+ * (new admin\file\Query())->findOne(10);
+ * ```
+ * 
  * ### images
  * 
  * ### filters
  * 
  * ### folders
- * 
- * @todo when the old storage composition is removed, rename the queryobject classes
  * 
  * @property string $httpPath Get the http path to the storage folder.
  * @property string $serverPath Get the server path (for php) to the storage folder.
@@ -134,14 +135,19 @@ class StorageContainer extends \yii\base\Component
         return (isset($this->imagesArray[$imageId])) ? $this->imagesArray[$imageId] : false;
     }
     
-    public function findFiles(array $args)
+    public function findFiles(array $args = [])
     {
-        return (new FileQuery())->where($args)->all();
+        return (new \admin\file\Query())->where($args)->all();
+    }
+    
+    public function findFile(array $args = [])
+    {
+        return (new \admin\file\Query())->where($args)->one();
     }
     
     public function getFile($fileId)
     {
-        return (new FileQuery())->findOne($fileId);
+        return (new \admin\file\Query())->findOne($fileId);
     }
     
     /**
@@ -204,14 +210,19 @@ class StorageContainer extends \yii\base\Component
         return false;
     }
     
-    public function findImage(array $args)
+    public function findImages(array $args = [])
     {
-        return (new ImageQuery())->where($args)->all();
+        return (new \admin\image\Query())->where($args)->all();
+    }
+    
+    public function findImage(array $args = [])
+    {
+        return (new \admin\image\Query())->where($args)->one();
     }
     
     public function getImage($imageId)
     {
-        return (new ImageQuery())->findOne($imageId);
+        return (new \admin\image\Query())->findOne($imageId);
     }
     
     /**
@@ -222,7 +233,7 @@ class StorageContainer extends \yii\base\Component
     public function addImage($fileId, $filterId = 0, $throwException = false)
     {
         try {
-            $query = (new ImageQuery())->where(['file_id' => $fileId, 'filter_id' => $filterId])->one();
+            $query = (new \admin\image\Query())->where(['file_id' => $fileId, 'filter_id' => $filterId])->one();
             
             if ($query) {
                 return $query;
@@ -295,9 +306,19 @@ class StorageContainer extends \yii\base\Component
         return (isset($this->foldersArray[$folderId])) ? $this->foldersArray[$folderId] : false;
     }
     
+    public function findFolders(array $args = [])
+    {
+        return (new \admin\folder\Query())->where($args)->all();
+    }
+    
+    public function findFolder(array $args = [])
+    {
+        return (new \admin\folder\Query())->where($args)->one();
+    }
+    
     public function getFolder($folderId)
     {
-        return (new FolderQuery())->where(['id' => $folderId])->one();
+        return (new \admin\folder\Query())->where(['id' => $folderId])->one();
     }
     
     public function addFolder($folderName, $parentFolderId = 0)

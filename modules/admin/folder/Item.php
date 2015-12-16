@@ -1,13 +1,12 @@
 <?php
 
-namespace admin\storage;
+namespace admin\folder;
 
 use Yii;
-use admin\storage\FolderQuery;
 
-class FolderQueryObject extends \yii\base\Object
+class Item extends \yii\base\Object
 {
-    use \admin\storage\ObjectTrait;
+    use \admin\storage\ItemTrait;
     
     public function getId()
     {
@@ -31,12 +30,12 @@ class FolderQueryObject extends \yii\base\Object
     
     public function getParent()
     {
-        return (!empty($this->getParentId())) ? (new FolderQuery())->findOne($this->getParentId()) : false;
+        return (!empty($this->getParentId())) ? Yii::$app->storage->getFolder($this->getParentId()) : false;
     }
     
     public function getFilesCount()
     {
-        return (new FileQuery())->where(['is_hidden' => 0, 'is_deleted' => 0, 'folder_id' => $this->getId()])->count();
+        return (new \admin\file\Query())->where(['is_hidden' => 0, 'is_deleted' => 0, 'folder_id' => $this->getId()])->count();
     }
     
     public function toArray()

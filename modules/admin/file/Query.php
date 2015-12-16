@@ -1,16 +1,15 @@
 <?php
 
-namespace admin\storage;
+namespace admin\file;
 
 use Yii;
-use Exception;
 
 /**
- * @property object $storage The storage container object
+ * @property object $storage The storage component
  * 
  * @author nadar
  */
-class FileQuery extends \yii\base\Object
+class Query extends \yii\base\Object
 {
     use \admin\storage\QueryTrait;
     
@@ -24,13 +23,13 @@ class FileQuery extends \yii\base\Object
         return $this->storage->getFilesArrayItem($id);
     }
     
-    public function createObject(array $itemArray)
+    public function createItem(array $itemArray)
     {
-        return FileQueryObject::create($itemArray);
+        return Item::create($itemArray);
     }
     
     public function createIteratorObject(array $data)
     {
-        return Yii::createObject(['class' => FileQueryIterator::className(), 'data' => $data]);
+        return Yii::createObject(['class' => Iterator::className(), 'data' => $data]);
     }
 }

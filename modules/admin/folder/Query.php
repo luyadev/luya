@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\storage;
+namespace admin\folder;
 
 use Yii;
 
@@ -9,7 +9,7 @@ use Yii;
  * 
  * @author nadar
  */
-class FolderQuery extends \yii\base\Object
+class Query extends \yii\base\Object
 {
     use \admin\storage\QueryTrait;
     
@@ -23,13 +23,13 @@ class FolderQuery extends \yii\base\Object
         return $this->storage->getFoldersArrayItem($id);
     }
     
-    public function createObject(array $itemArray)
+    public function createItem(array $itemArray)
     {
-        return FolderQueryObject::create($itemArray);
+        return Item::create($itemArray);
     }
     
     public function createIteratorObject(array $data)
     {
-        return Yii::createObject(['class' => FolderQueryIterator::className(), 'data' => $data]);
+        return Yii::createObject(['class' => Iterator::className(), 'data' => $data]);
     }
 }

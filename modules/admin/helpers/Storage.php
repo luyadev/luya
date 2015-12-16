@@ -47,7 +47,7 @@ class Storage
         $model = StorageFile::find()->where(['id' => $fileId, 'is_deleted' => 0])->one();
         if ($model) {
             if ($cleanup) {
-                foreach(Yii::$app->storage->findImage(['file_id' => $fileId]) as $imageItem) {
+                foreach(Yii::$app->storage->findImages(['file_id' => $fileId]) as $imageItem) {
                     StorageImage::findOne($imageItem->id)->delete();
                 }
             }
@@ -76,7 +76,7 @@ class Storage
         if ($image) {
             $fileId = $image->fileId;
             
-            foreach(Yii::$app->storage->findImage(['file_id' => $fileId]) as $imageItem) {
+            foreach(Yii::$app->storage->findImages(['file_id' => $fileId]) as $imageItem) {
                 StorageImage::findOne($imageItem->id)->delete();
             }
             

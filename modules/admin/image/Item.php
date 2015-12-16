@@ -1,13 +1,12 @@
 <?php
 
-namespace admin\storage;
+namespace admin\image;
 
 use Yii;
-use admin\storage\FileQuery;
 
-class ImageQueryObject extends \yii\base\Object
+class Item extends \yii\base\Object
 {
-    use \admin\storage\ObjectTrait;
+    use \admin\storage\ItemTrait;
     
     public function getId()
     {
@@ -46,7 +45,7 @@ class ImageQueryObject extends \yii\base\Object
     
     public function getFile()
     {
-        return (new FileQuery())->findOne($this->getFileId());
+        return Yii::$app->storage->getFile($this->getFileId());
     }
     
     public function applyFilter($filterName)

@@ -1,15 +1,14 @@
 <?php
 
-namespace admin\storage;
+namespace admin\file;
 
 use Yii;
 use luya\helpers\Url;
 use luya\helpers\FileHelper;
-use admin\storage\FolderQuery;
 
-class FileQueryObject extends \yii\base\Object
+class Item extends \yii\base\Object
 {
-    use \admin\storage\ObjectTrait;
+    use \admin\storage\ItemTrait;
     
     private $_imageMimeTypes = ['image/gif', 'image/jpeg', 'image/png'];
     
@@ -25,7 +24,7 @@ class FileQueryObject extends \yii\base\Object
     
     public function getFolder()
     {
-        return (new FolderQuery())->findOne($this->getFolderId());
+        return Yii::$app->storage->getFolder($this->getFolderId());
     }
     
     public function getName()

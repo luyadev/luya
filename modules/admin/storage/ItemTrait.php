@@ -4,7 +4,7 @@ namespace admin\storage;
 
 use Yii;
 
-trait ObjectTrait
+trait ItemTrait
 {
     public $itemArray = [];
 

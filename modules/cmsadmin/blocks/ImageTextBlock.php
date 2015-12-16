@@ -5,7 +5,6 @@ namespace cmsadmin\blocks;
 use Yii;
 use cmsadmin\Module;
 use cebe\markdown\GithubMarkdown;
-use admin\storage\ImageQuery;
 
 class ImageTextBlock extends \cmsadmin\base\Block
 {
@@ -116,7 +115,7 @@ class ImageTextBlock extends \cmsadmin\base\Block
     {
         return [
             'imageSource' => $this->getImageSource(),
-            'imageAdmin' => ($image = (new ImageQuery())->findOne($this->getVarValue('imageId'))) ? $image->applyFilter('medium-thumbnail')->toArray() : false,
+            'imageAdmin' => ($image = Yii::$app->storage->getImage($this->getVarValue('imageId'))) ? $image->applyFilter('medium-thumbnail')->toArray() : false,
             'imagePosition' => $this->getVarValue('imagePosition', 'left'),
             'imageWidth' => $this->getImageSource() ? @getimagesize($this->getImageSource())[0] : 0,
             'margin' => $this->getCfgValue('margin', $this->defaultMargin),

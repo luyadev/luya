@@ -5,8 +5,6 @@ namespace cmsadmin\base;
 use Yii;
 use yii\helpers\Inflector;
 use luya\helpers\Url;
-use admin\storage\ImageQuery;
-use admin\storage\FileQuery;
 
 /**
  * Base class for all CMS Blocks.
@@ -404,7 +402,7 @@ abstract class Block extends \yii\base\Object implements BlockInterface
             return false;
         }
         
-        $image = (new ImageQuery())->findOne($value);
+        $image = Yii::$app->storage->getImage($value);
         
         if (!$image) {
             return false;
@@ -434,7 +432,7 @@ abstract class Block extends \yii\base\Object implements BlockInterface
     protected function zaaFileUpload($value)
     {
         if (!empty($value)) {
-            $file = (new FileQuery())->findOne($value);
+            $file = Yii::$app->storage->getFile($value);
             
             if ($file) {
                 return $file->toArray();

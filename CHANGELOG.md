@@ -3,6 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-beta3 (in progress)
 -------------------------
+- **[BC BREAK]** removed `admin\storage\FileQuery`, `admin\storage\ImageQuery`, `admin\storage\FolderQuery` and replace with `admin\file\Query`, `admin\image\Query`, `admin\folder\Query`.
 
 - `#660` Updated spacing; Replaced arrows
 - `#654` Added border to file- and image-array, added fix break between text and button at the ImageTextBlock, added additional configuration on LinkButtonBlock and some missing translations.
@@ -24,6 +25,7 @@ LUYA CHANGELOG
 - `#659` fixed security issue for ngrest callbacks.
 - `#658` fixed composition rules issue where parse request creates absolut urls.
 - `#661` added block helper methods (prefix with zaa) to get file/s and image/s data.
+- `#663` renamed storage query classes, added findImage, findFolder and findFile.
 
 1.0.0-beta2 (3.12.2015)
 -------------------------

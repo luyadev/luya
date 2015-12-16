@@ -2,7 +2,7 @@
 
 namespace admin\controllers;
 
-use admin\storage\FileQuery;
+use Yii;
 use admin\models\StorageFile;
 use yii\web\BadRequestHttpException;
 use yii\web\yii\web;
@@ -12,7 +12,7 @@ class FileController extends \luya\web\Controller
     public function actionDownload($id, $hash, $fileName)
     {
         // find file in file query
-        $fileData = (new FileQuery())->where(['id' => $id, 'hash_name' => $hash, 'is_deleted' => 0])->one();
+        $fileData = Yii::$app->storage->findFile(['id' => $id, 'hash_name' => $hash, 'is_deleted' => 0]);
         // proceed when file exists
         if ($fileData) {
             // get file source from storage system

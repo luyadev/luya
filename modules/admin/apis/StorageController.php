@@ -8,9 +8,6 @@ use admin\helpers\Storage;
 use admin\models\StorageImage;
 use admin\models\StorageFile;
 use admin\models\StorageFolder;
-use admin\storage\FolderQuery;
-use admin\storage\ImageQuery;
-use admin\storage\FileQuery;
 use admin\Module;
 
 /**
@@ -23,7 +20,7 @@ class StorageController extends \admin\base\RestController
     public function actionDataFolders()
     {
         $folders = [];
-        foreach ((new FolderQuery())->all() as $folder) {
+        foreach (Yii::$app->storage->findFolders() as $folder) {
             $folders[] = $folder->toArray();
         }
         
@@ -33,7 +30,7 @@ class StorageController extends \admin\base\RestController
     public function actionDataFiles()
     {
         $files = [];
-        foreach ((new FileQuery())->where(['is_hidden' => 0, 'is_deleted' => 0])->all() as $file) {
+        foreach (Yii::$app->storage->findFiles(['is_hidden' => 0, 'is_deleted' => 0]) as $file) {
             $data = $file->toArray();
             if ($file->isImage) {
                 // add tiny thumbnail
@@ -62,7 +59,7 @@ class StorageController extends \admin\base\RestController
     public function actionDataImages()
     {
         $images = [];
-        foreach ((new ImageQuery())->all() as $image) {
+        foreach (Yii::$app->storage->findImages() as $image) {
             $images[] = $image->toArray();
         }
         
@@ -218,214 +215,4 @@ class StorageController extends \admin\base\RestController
     
         return $model->save();
     }
-    
-    // old controller methods
-
-    /*
-    public function actionFilesMove()
-    {
-        $toFolderId = Yii::$app->request->post('toFolderId', 0);
-        $fileIds = Yii::$app->request->post('fileIds', []);
-
-        return Storage::moveFilesToFolder($fileIds, $toFolderId);
-    }
-    */
-
-    /*
-    public function actionImageUpload()
-    {
-        $fileId = Yii::$app->request->post('fileId', null);
-        $filterId = Yii::$app->request->post('filterId', null);
-
-        try {
-            $create = Yii::$app->storage->addImage($fileId, $filterId);
-            return ['id' => $create->id, 'error' => false, 'message' => 'upload ok', 'image' => $create->source];
-        } catch (Exception $err) {
-            return ['id' => 0, 'error' => true, 'message' => 'error while creating image: ' . $err->getMessage(), 'image' => null];
-        }
-    }
-    */
-    
-    // until here new storage
-
-    /*
-    
-    public function actionAllImagePaths()
-    {
-        $images = [];
-        foreach (StorageImage::find()->asArray()->all() as $imageRow) {
-            $img = Yii::$app->storage->getImage($imageRow['id']);
-            if ($img) {
-                $images[] = $img->toArray();
-            }
-        }
-
-        return $images;
-    }
-
-    public function actionImagePath($imageId)
-    {
-        return Yii::$app->storage->getImage($imageId)->toArray();
-    }
-
-    public function actionAllFilePaths()
-    {
-        return $this->filesAll();
-    }
-
-    public function actionFilePath($fileId)
-    {
-        return Yii::$app->storage->getFile($fileId)->toArray();
-    }
-
-    public function actionAllFolderFiles()
-    {
-        $data = [];
-        
-        $data[] = ['folder' => ['id' => 0], 'items' => $this->actionGetFiles(0)];
-        
-        foreach ($this->filesAll() as $folder) {
-            $data[] = ['folder' => $folder, 'items' => $this->actionGetFiles($folder['id'])];
-        }
-
-        return $data;
-    }
-
-    public function actionGetFiles($folderId)
-    {
-        $files = [];
-        foreach(Yii::$app->storage->findFiles(['folder_id' => $folderId]) as $file) {
-            $imageData = false;
-            $thumbnail = false;
-            $error = false;
-            
-            if ($file->isImage) {
-                $image = $file->noFilterImage;
-                $imageData = $image->toArray();
-                if ($image) {
-                    $thumbImage = $image->applyFilter('tiny-thumbnail');
-                    if ($thumbImage) {
-                        $thumbnail = $thumbImage->toArray();
-                    }
-                }
-            }
-            
-            
-            $files[] = [
-                'file_data' => $file->toArray(),
-                'image_data' => $imageData,
-                'thumbnail_data' => $thumbnail,
-            ];
-        }
-        return $files;
-    }
-
-    public function actionGetFolders()
-    {
-        return $this->helperGetFolderTree();
-    }
-
-    public function actionFolderCreate()
-    {
-        $folderName = Yii::$app->request->post('folderName', null);
-        $parentFolderId = Yii::$app->request->post('parentFolderId', 0);
-
-        $model = new StorageFolder();
-        $model->name = $folderName;
-        $model->parent_id = $parentFolderId;
-        $model->timestamp_create = time();
-        
-        return $model->save();
-        
-    }
-
-    // here
-    
-    
-
-    
-
-    */
-    
-    // helpers as of removment
-
-    /*
-    private function filesAllFromFolder($folderId)
-    {
-        $files = StorageFile::find()->select(['admin_storage_file.id', 'name_original', 'extension', 'file_size', 'upload_timestamp', 'firstname', 'lastname'])->leftJoin('admin_user', 'admin_user.id=admin_storage_file.upload_user_id')->where(['folder_id' => $folderId, 'is_hidden' => 0, 'admin_storage_file.is_deleted' => 0])->asArray()->all();
-    
-        return $this->internalListData($files);
-    }
-
-    private function filesAll()
-    {
-        $files = StorageFile::find()->select(['admin_storage_file.id', 'name_original', 'extension', 'file_size', 'upload_timestamp', 'firstname', 'lastname'])->leftJoin('admin_user', 'admin_user.id=admin_storage_file.upload_user_id')->where(['is_hidden' => 0, 'admin_storage_file.is_deleted' => 0])->asArray()->all();
-    
-        return $this->internalListData($files);
-    }
-    
-    private function internalListData($files)
-    {
-        foreach ($files as $k => $v) {
-            // @todo check fileHasImage sth
-            if ($v['extension'] == 'jpg' || $v['extension'] == 'png') {
-                $isImage = true;
-                
-                try {
-                    $image = Yii::$app->storage->addImage($v['id'], 0);
-                    
-                    if ($image) {
-                        $thumb = $image->applyFilter('tiny-thumbnail');
-                        if ($thumb) {
-                            $thumb->toArray();
-                        }
-                        $originalImage = $image->toArray();
-                    } else {
-                        $thumb = false;
-                        $originalImage = false;
-                    }
-                } catch(Exception $e) {
-                    $thumb = false;
-                    $originalImage = false;
-                }
-            } else {
-                $isImage = false;
-                $thumb = false;
-                $originalImage = false;
-            }
-            $files[$k]['is_image'] = $isImage;
-            $files[$k]['thumbnail'] = $thumb;
-            $files[$k]['original_image'] = $originalImage;
-            $files[$k]['file_data'] = Yii::$app->storage->getFile($v['id']);
-        }
-    
-        return $files;
-    }
-    */
-    // folder helper
-
-    /*
-    private function helperFolderPartialFolderTree($parentId)
-    {
-        $data = [];
-        foreach ($this->helperGetSubFolders($parentId) as $row) {
-            $data[] = [
-                'data' => $row,
-                '__items' => $this->helperFolderPartialFolderTree($row['id']),
-            ];
-        }
-    
-        return $data;
-    }
-    
-    public function helperGetFolderTree()
-    {
-        return $this->helperFolderPartialFolderTree(0);
-    }
-    
-    public function helperGetSubFolders($parentFolderId)
-    {
-        return \admin\models\StorageFolder::find()->where(['parent_id' => $parentFolderId, 'is_deleted' => 0])->asArray()->all();
-    }
-    */
 }

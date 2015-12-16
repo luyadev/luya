@@ -51,19 +51,19 @@ trait QueryTrait
     {
         $data = array_filter($this->getDataProvider(), [$this, 'whereFilter']);
         
-        return (count($data) !== 0) ? $this->createObject(array_values($data)[0]): false;
+        return (count($data) !== 0) ? $this->createItem(array_values($data)[0]): false;
     }
     
     public function findOne($id)
     {
-        return ($itemArray = $this->getItemDataProvider($id)) ? $this->createObject($itemArray) : false;
+        return ($itemArray = $this->getItemDataProvider($id)) ? $this->createItem($itemArray) : false;
     }
     
     abstract public function getDataProvider();
     
     abstract public function getItemDataProvider($id);
     
-    abstract public function createObject(array $itemArray);
+    abstract public function createItem(array $itemArray);
     
     abstract public function createIteratorObject(array $data);
 }

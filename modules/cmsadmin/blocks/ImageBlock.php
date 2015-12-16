@@ -4,7 +4,6 @@ namespace cmsadmin\blocks;
 
 use Yii;
 use cmsadmin\Module;
-use admin\storage\ImageQuery;
 use admin\storage\admin\storage;
 
 class ImageBlock extends \cmsadmin\base\Block

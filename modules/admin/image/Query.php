@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\storage;
+namespace admin\image;
 
 use Yii;
 
@@ -9,7 +9,7 @@ use Yii;
  * 
  * @author nadar
  */
-class ImageQuery extends \yii\base\Object
+class Query extends \yii\base\Object
 {
     use \admin\storage\QueryTrait;
     
@@ -23,13 +23,13 @@ class ImageQuery extends \yii\base\Object
         return $this->storage->getImagesArrayItem($id);
     }
     
-    public function createObject(array $itemArray)
+    public function createItem(array $itemArray)
     {
-        return ImageQueryObject::create($itemArray);
+        return Item::create($itemArray);
     }
     
     public function createIteratorObject(array $data)
     {
-        return Yii::createObject(['class' => ImageQueryIterator::className(), 'data' => $data]);
+        return Yii::createObject(['class' => Iterator::className(), 'data' => $data]);
     }
 }
