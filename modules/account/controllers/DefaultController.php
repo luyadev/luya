@@ -44,7 +44,7 @@ class DefaultController extends \account\base\Controller
             } else {
                 $url = Url::toManager('account/settings/index');
             }
-            return $this->redirect($url);
+            $this->redirect($url);
         }
 
         $model = new LoginForm();
@@ -61,7 +61,7 @@ class DefaultController extends \account\base\Controller
                         Yii::$app->session->remove('accountRef');
                     }
 
-                    return $this->redirect($url);
+                    $this->redirect($url);
                 }
             }
         }
