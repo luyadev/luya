@@ -2,7 +2,7 @@
 	"use strict";
 	
 	// CrudController.js
-	zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminLangService, LuyaLoading) {
+	zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminLangService, LuyaLoading, AdminToastService) {
 		
 		LuyaLoading.start();
 		
@@ -99,12 +99,13 @@
 		$scope.deleteErrors = [];
 		
 		$scope.deleteItem = function(id, $event) {
-			var cfm = confirm("Möchten Sie diesen Eintrag wirklich entfernen? (Kann nicht rückgängig gemacht werden.)");
-			if (cfm == true) {
+			AdminToastService.confirm('Möchten Sie diesen Eintrag wirklich entfernen? Diese Aktion kann nicht rückgängig gemacht werden.', function($timeout, $toast) {
 				$scope.deleteErrors = [];
 				$http.delete($scope.config.apiEndpoint + '/'+id).success(function(r) {
 					$scope.loadList();
-					////Materialize.toast('Der Datensatz wurde erfolgreich entfernt.', 3000);
+
+					$toast.close();
+					AdminToastService.success('Der Datensatz wurde erfolgreich entfernt.', 2000);
 				}).error(function(r) {
 					for (var i in r) {
 						angular.forEach(r[i], function(v, k) {
@@ -112,7 +113,7 @@
 						})
 					}
 				});
-			}
+			});
 		};
 		
 		$scope.toggleUpdate = function(id, $event) {
@@ -121,7 +122,7 @@
 				$scope.data.update = data;
 				$scope.switchTo(2);
 			}).error(function(data) {
-				alert('ERROR LOADING UPDATE DATA');
+				AdminToastService.error('Während des Ladens ist ein Fehler aufgetreten.', 2000);
 			});
 		};
 		
@@ -150,7 +151,7 @@
 			
 			$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true)).success(function(data) {
 				$scope.loadList();
-				////Materialize.toast('Der Datensatz wurde erfolgreich aktualsiert.', 3000);
+				AdminToastService.success('Der Datensatz wurde erfolgreich aktualisiert.', 2000);
 				$scope.switchTo(0);
 			}).error(function(data) {
 				$scope.updateErrors = data;
@@ -164,7 +165,7 @@
 			$http.post($scope.config.apiEndpoint, angular.toJson($scope.data.create, true)).success(function(data) {
 				$scope.loadList();
 				$scope.data.create = {};
-				//Materialize.toast('Der neue Datensatz wurde erfolgreich erstellt.', 3000);
+				AdminToastService.success('Der neue Datensatz wurde erfolgreich erstellt.', 2000);
 				$scope.switchTo(0);
 			}).error(function(data) {
 				$scope.createErrors = data;
@@ -206,7 +207,7 @@
 	
 // activeWindowController.js
 	
-	zaa.controller("ActiveWindowTagController", function($scope, $http) {
+	zaa.controller("ActiveWindowTagController", function($scope, $http, AdminToastService) {
 
 		$scope.crud = $scope.$parent; // {{ data.aw.itemId }}
 		
@@ -238,9 +239,9 @@
 				$scope.crud.sendActiveWindowCallback('SaveTag', {'tagName': tagName}).then(function(response) {
 					if (response.data) {
 						$scope.tags.push({id: response.data, name: tagName});
-						//Materialize.toast('Der Tag ' + tagName + ' wurde gespeichert.', 500);
+						AdminToastService.success(tagName + ' wurde gespeichert.', 2000);
 					} else {
-						//Materialize.toast('Der Tag ' + tagName + ' existiert bereits und wurde deshalb nicht gespeichert.', 2000);
+						AdminToastService.error(tagName + ' existiert bereits und kann nicht erneut hinzugefügt werden.', 2000);
 					}
 					$scope.newTagName = null;
 				});
@@ -252,7 +253,7 @@
 
 				$scope.relation[tag.id] = response.data;
 
-				//Materialize.toast('Tag Information wurde gespeichert.', 500);
+				AdminToastService.success('Tag Informationen wurde gespeichert.', 2000);
 			});
 		};
 		
@@ -343,7 +344,7 @@
 		
 		$scope.reload = function() {
 			CacheReloadService.reload();
-		}
+		};
 		
 		$scope.rights = [];
 		
@@ -366,14 +367,14 @@
 			angular.forEach($scope.auths,function(value, key) {
 				$scope.rights[value.id] = {base: 0, create: 0, update: 0, 'delete': 0 };
 			})
-		}
+		};
 		
 		$scope.getRights = function() {
 			$http.get($scope.crud.getActiveWindowCallbackUrl('getRights')).success(function(response) {
 				$scope.rights = response.rights;
 				$scope.auths = response.auths;
 			})
-		}
+		};
 		
 		$scope.$watch(function() { return $scope.data.aw.itemId }, function(n, o) {
 			$scope.getRights();
@@ -489,10 +490,9 @@
 			$http.get('admin/api-admin-timestamp', { ignoreLoadingBar: true }).success(function(response) {
 				$scope.forceReload = response.forceReload;
 				if ($scope.forceReload) {
-					var reload = confirm("Das System wurde aktualisiert un muss neu geladen werden, bitte speichern Sie das aktuelle Formular. (Wenn Sie auf 'Abbrechen' klicken wird dieser Dialog in 30 Sekunden wieder erscheinen.)");
-					if (reload) {
+					AdminToastService.confirm('Das System wurde aktualisiert un muss neu geladen werden, bitte speichern Sie das aktuelle Formular. (Wenn Sie auf "Abbrechen" klicken wird dieser Dialog in 30 Sekunden wieder erscheinen.)', function($timeout, $toast) {
 						$scope.reload();
-					}
+					});
 				}
 				$scope.notify = response.useronline;
 				$timeout(tick, 240000);

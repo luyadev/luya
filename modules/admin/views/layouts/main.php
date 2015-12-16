@@ -320,10 +320,24 @@ $this->beginPage()
 <!-- /ANGULAR SCRIPTS -->
 
 <div class="luya-container ng-cloak">
-    <div ng-repeat="item in toastQueue" class="alert" ng-class="{'alert--success': item.type == 'success', 'alert--danger': item.type == 'error'}" style="position:absolute; z-index:999999; top:0px; padding:20px; margin:0px; background-color:white;">
-        <p>{{item.message}}</p>
-        <button ng-show="item.type == 'confirm'" class="btn btn--small red" ng-click="item.close()">Nein</button>
-        <button ng-show="item.type == 'confirm'" class="btn btn--small" ng-click="item.click()">Ja</button>
+    <div class="toasts" ng-repeat="item in toastQueue">
+        <div class="toasts__confirm" ng-if="item.type == 'confirm'">
+            <div class="toasts__item toasts__item--confirm">
+                <p>{{item.message}}</p>
+
+                <div class="toasts__item-buttons">
+                    <button class="btn btn--small grey" ng-click="item.close()">Abbrechen</button>
+                    <button class="btn btn--small red" ng-click="item.click()">Ja</button>
+                </div>
+            </div>
+        </div>
+        <div class="toasts__info" ng-if="item.type != 'confirm'">
+            <div class="toasts__item" ng-class="{'toasts__item--success': item.type == 'success', 'toasts__item--error': item.type == 'error', 'toasts__item--confirm': item.type == 'confirm'}" style="transform: translateY(-{{ ($index * 120) }}%);">
+                <i class="toasts__text-icon material-icons" ng-show="item.type == 'success'">check_circle</i>
+                <i class="toasts__text-icon material-icons" ng-show="item.type == 'error'">error_outline</i>
+                <p class="toasts__text">{{item.message}}</p>
+            </div>
+        </div>
     </div>
 
     <div class="navbar-fixed">

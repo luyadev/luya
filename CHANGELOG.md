@@ -10,6 +10,7 @@ LUYA CHANGELOG
 
 **ISSUES**
 
+- `#650` Updated styling; Updated old (materialize) toast calls (replaced with new ones)
 - `#660` Updated spacing; Replaced arrows
 - `#662` Rearrange zaa-table option icons and added auto-scroll to table
 - `#654` Added border to file- and image-array, added fix break between text and button at the ImageTextBlock, added additional configuration on LinkButtonBlock and some missing translations.

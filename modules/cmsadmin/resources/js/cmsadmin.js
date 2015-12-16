@@ -846,9 +846,9 @@
 	    				$toast.close();
 	    			});
 	    		}).error(function(response) {
-					// toast error page could'nt be delete because there are redirects linking to this page
+					AdminToastService.error('Diese Seite kann nicht gelöscht werden, löschen Sie zuerst die Weiterleitungen.', 5000);
 				});
-			})
+			});
 			
 			/*
 			if (confirm('Are you sure you want to delete this page?')) {
@@ -868,7 +868,11 @@
 	    $scope.$watch(function() { return $scope.navData.is_offline }, function(n, o) {
 	    	if (n !== o && n !== undefined) {
 	    		$http.get('admin/api-cms-nav/toggle-offline', { params : { navId : $scope.navData.id , offlineStatus : n }}).success(function(response) {
-	    			// toast status changed!
+					if ($scope.navData.is_offline == 1) {
+						AdminToastService.notify($scope.navData.title + " offline.", 2000);
+					} else {
+						AdminToastService.notify($scope.navData.title + " online.", 2000);
+					}
 	    		});
 	    	}
 	    });
@@ -876,7 +880,11 @@
 	    $scope.$watch(function() { return $scope.navData.is_hidden }, function(n, o) {
 			if (n !== o && n !== undefined) {
 				$http.get('admin/api-cms-nav/toggle-hidden', { params : { navId : $scope.navData.id , hiddenStatus : n }}).success(function(response) {
-					// toast status changed!
+					if ($scope.navData.is_hidden == 1) {
+						AdminToastService.notify($scope.navData.title + " versteckt.", 2000);
+					} else {
+						AdminToastService.notify($scope.navData.title + " sichtbar.", 2000);
+					}
 				});
 			}
 		});
@@ -885,7 +893,11 @@
 	    	if (n !== o && n !== undefined) {
 				$http.get('admin/api-cms-nav/toggle-home', { params : { navId : $scope.navData.id , homeState : n }}).success(function(response) {
 					$scope.menuDataReload().then(function() {
-	    				// toast status changed!
+						if ($scope.navData.is_home == 1) {
+							AdminToastService.notify($scope.navData.title + " ist Startseite.", 2000);
+						} else {
+							AdminToastService.notify($scope.navData.title + " ist keine Startseite.", 2000);
+						}
 	    			});
 				});
 			}
@@ -1005,7 +1017,7 @@
 				$.param(typeDataCopy),
 				headers
 			).then(function successCallback(response) {
-				//Materialize.toast('<span> Die Seite «'+itemCopy.title+'» wurde aktualisiert.</span>', 2000);
+				AdminToastService.success('Die Seite «' + itemCopy.title + '» wurde aktualisiert!', 2000);
 				$scope.menuDataReload();
 				$scope.refresh();
 				$scope.toggleSettings();
@@ -1249,7 +1261,7 @@
 	 * @param $scope.block
 	 *            from ng-repeat
 	 */
-	zaa.controller("PageBlockEditController", function($scope, $sce, $http, ApiCmsNavItemPageBlockItem, AdminClassService) {
+	zaa.controller("PageBlockEditController", function($scope, $sce, $http, ApiCmsNavItemPageBlockItem, AdminClassService, AdminToastService) {
 	
 		$scope.onStart = function() {
 			$scope.$apply(function() {
@@ -1357,17 +1369,20 @@
 		};
 		
 		$scope.removeBlock = function(block) {
-	        if (confirm('Block «' + block.name + '» wirklich löschen?')) {
-	            ApiCmsNavItemPageBlockItem.delete({id: block.id}, function (rsp) {
-	                $scope.PagePlaceholderController.NavItemTypePageController.refresh();
-	                //Materialize.toast('Block «' + block.name + '» wurde entfernt!', 3000);
-	            });
-	        }
+
+			AdminToastService.confirm('Block «' + block.name + '» wirklich löschen?', function($timeout, $toast) {
+				ApiCmsNavItemPageBlockItem.delete({id: block.id}, function (rsp) {
+					$scope.PagePlaceholderController.NavItemTypePageController.refresh();
+
+					$toast.close();
+					AdminToastService.success('Block «' + block.name + '» wurde entfernt!', 2000);
+				});
+			});
 		};
 		
 		$scope.save = function () {
 			ApiCmsNavItemPageBlockItem.update({ id : $scope.block.id }, $.param({json_config_values : JSON.stringify($scope.data), json_config_cfg_values : JSON.stringify($scope.cfgdata) }), function(rsp) {
-				//Materialize.toast('<span> Block «'+$scope.block.name+'» wurde aktualisiert.</span>', 2000)
+				AdminToastService.success('Block «' + $scope.block.name + '» wurde aktualisiert!', 2000);
 				$scope.edit = false;
 				$scope.config = false;
 				$scope.block.is_dirty = 1;

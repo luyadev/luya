@@ -365,11 +365,11 @@ zaa.factory("AdminToastService", function($q, $timeout, $injector) {
 	
 	service.success = function(message, timeout) {
 		service.notify(message, timeout, 'success');
-	}
+	};
 	
 	service.error = function(message, timeout) {
 		service.notify(message, timeout, 'error');
-	}
+	};
 	
 	service.confirm = function(message, callback) {
 		var uuid = guid();

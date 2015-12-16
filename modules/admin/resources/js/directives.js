@@ -1042,7 +1042,7 @@
     /**
      * FILE MANAGER DIR
      */
-    zaa.directive("storageFileManager", function(Upload, ServiceFoldersData, ServiceFilesData, LuyaLoading) {
+    zaa.directive("storageFileManager", function(Upload, ServiceFoldersData, ServiceFilesData, LuyaLoading, AdminToastService) {
         return {
             restrict : 'E',
             transclude : false,
@@ -1240,7 +1240,7 @@
                         }
                         */
                     });
-                }
+                };
 
                 $scope.deleteFolder = function(folder) {
                     // check if folder is empty
@@ -1254,7 +1254,7 @@
                             });
                         });
                     });
-                }
+                };
                 
                 $scope.fileDetail = false;
                 
@@ -1280,16 +1280,17 @@
                 };
                 
                 $scope.removeFiles = function() {
-                    var cfm = confirm("Möchten Sie diese Datei wirklich entfernen?");
-                    if (cfm) {
+                    AdminToastService.confirm('Möchten Sie diese Datei wirklich entfernen?', function($timeout, $toast) {
                         $http.post('admin/api-admin-storage/filemanager-remove-files', $.param({'ids' : $scope.selectedFiles}), {
                             headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
                         }).success(function(transport) {
                             $scope.filesDataReload().then(function() {
+                                $toast.close();
+                                AdminToastService.success("Datei wurde erfolgreich gelöscht.", 2000);
                                 $scope.selectedFiles = [];
                             });
                         });
-                    }
+                    });
                 }
                 
             },
