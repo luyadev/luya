@@ -5,6 +5,8 @@ namespace cmsadmin\base;
 use Yii;
 use yii\helpers\Inflector;
 use luya\helpers\Url;
+use admin\storage\ImageQuery;
+use admin\storage\FileQuery;
 
 /**
  * Base class for all CMS Blocks.
@@ -377,5 +379,131 @@ abstract class Block extends \yii\base\Object implements BlockInterface
         }
 
         return file_get_contents($twigFile);
+    }
+    
+    /**
+     * Get all informations from an zaa-image-upload type:
+     * 
+     * ```php
+     * 'image' => $this->zaaImageUpload($this->getVarValue('myImage')),
+     * ```
+     * 
+     * apply a filter for the image
+     * 
+     * ```php
+     * 'imageFiltered' => $this->zaaImageUpload($this->getVarValue('myImage', 'small-thumbnail'),
+     * ```
+     * 
+     * @param string|int $value Provided the value
+     * @param boolean|string $applyFilter To apply a filter insert the identifier of the filter.
+     * @return boolean|array Returns false when not found, returns an array with all data for the image on success.
+     */
+    protected function zaaImageUpload($value, $applyFilter = false)
+    {
+        if (empty($value)) {
+            return false;
+        }
+        
+        $image = (new ImageQuery())->findOne($value);
+        
+        if (!$image) {
+            return false;
+        }
+        
+        if ($applyFilter && is_string($applyFilter)) {
+            $filter = $image->applyFilter($applyFilter);
+            
+            if ($filter) {
+                return $filter->toArray();
+            }
+        }
+        
+        return $image->toArray();
+    }
+    
+    /**
+     * Return all informations for a file if exists
+     * 
+     * ```php
+     * 'file' => $this->zaaFileUpload($this->getVarValue('myFile')),
+     * ```
+     * 
+     * @param string|int $value Provided the value
+     * @return boolean|array Returns false when not found, returns an array with all data for the image on success.
+     */
+    protected function zaaFileUpload($value)
+    {
+        if (!empty($value)) {
+            $file = (new FileQuery())->findOne($value);
+            
+            if ($file) {
+                return $file->toArray();
+            }
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Get the full array for the specific zaa-file-array-upload type
+     * 
+     * ```php
+     * 'fileList' => $this->zaaFileArrayUpload('files'),
+     * ```
+     * 
+     * Each array item will have all file query item data and a caption key.
+     * 
+     * @param string|int $value The specific var or cfg fieldvalue.
+     * @return array Returns an array in any case, even an empty array.
+     */
+    protected function zaaFileArrayUpload($value)
+    {
+        if (!empty($value) && is_array($value)) {
+            $data = [];
+            
+            foreach($value as $key => $item) {
+                $file = $this->zaaFileUpload($item['fileId']);
+                if ($file) {
+                    $file['caption'] = $item['caption'];
+                    $data[$key] = $file;
+                }
+            }
+            
+            return $data;
+        }
+        
+        return [];
+    }
+
+    /**
+     * Get the full array for the specific zaa-file-image-upload type
+     * 
+     * ```php
+     * 'imageList' => $this->zaaImageArrayUpload('images'),
+     * ```
+     * 
+     * Each array item will have all file query item data and a caption key.
+     * 
+     * @param string|int $value The specific var or cfg fieldvalue.
+     * @param boolean|string $applyFilter To apply a filter insert the identifier of the filter.
+     * @return array Returns an array in any case, even an empty array.
+     */
+    protected function zaaImageArrayUpload($value, $applyFilter = false)
+    {
+        if (!empty($value) && is_array($value)) {
+            $data = [];
+            
+            foreach($value as $key => $item) {
+                $image = $this->zaaImageUpload($item['imageId'], $applyFilter);
+                if ($image) {
+                    $image['caption'] = $item['caption'];
+                    $data[$key] = $image;
+                }
+            }
+            
+            return $data;
+        }
+        
+        return [];
     }
 }

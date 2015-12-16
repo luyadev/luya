@@ -23,6 +23,7 @@ LUYA CHANGELOG
 - `#651` fixed issue where image and file list array where unable to be i18n casted.
 - `#659` fixed security issue for ngrest callbacks.
 - `#658` fixed composition rules issue where parse request creates absolut urls.
+- `#661` added block helper methods (prefix with zaa) to get file/s and image/s data.
 
 1.0.0-beta2 (3.12.2015)
 -------------------------
