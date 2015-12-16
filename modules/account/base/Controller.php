@@ -2,6 +2,8 @@
 
 namespace account\base;
 
+use Yii;
+
 class Controller extends \luya\web\Controller
 {
     public function getRules()
@@ -20,7 +22,7 @@ class Controller extends \luya\web\Controller
         return [
             'access' => [
                 'class' => \yii\filters\AccessControl::className(),
-                'user' => $this->module->getUserIdentity(),
+                'user' => Yii::$app->getModule('account')->getUserIdentity(),
                 'rules' => $this->getRules(),
             ],
         ];
@@ -28,6 +30,6 @@ class Controller extends \luya\web\Controller
     
     public function isGuest()
     {
-        return $this->module->getUserIdentity()->isGuest;
+        return Yii::$app->getModule('account')->getUserIdentity()->isGuest;
     }
 }
