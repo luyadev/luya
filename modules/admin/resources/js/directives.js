@@ -2,6 +2,24 @@
     "use strict";
 
     // form.js
+    zaa.directive("zaaLink", function(){
+        return {
+            restrict: "E",
+            scope: {
+                "model": "=",
+                "options": "=",
+                "label": "@label",
+                "i18n": "@i18n",
+                "id": "@fieldid",
+                "name": "@fieldname",
+                "placeholder": "@placeholder"
+            },
+            template: function() {
+                return '<update-form-redirect data="model"></update-form-redirect>';
+            }
+        }
+    });
+
     zaa.directive("zaaInjector", function($compile) {
         return {
             restrict: "E",

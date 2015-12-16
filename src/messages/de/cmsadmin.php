@@ -260,5 +260,9 @@ return [
     // missing from LineBlock
     'block_line_linecolor_grey' => 'Grau',
     'block_line_linecolor_black' => 'Schwarz',
+
+    // LinkButtonBlock
+    'block_link_button_empty' => 'Es wurde noch kein Link angegeben.',
+
 ];
 

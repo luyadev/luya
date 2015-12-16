@@ -81,9 +81,9 @@ return [
     'block_line_linecolor_label' => 'Color',
 
     // LinkButtonBlock
-    'block_link_button_name' => 'Link button',
+    'block_link_button_name' => 'Link Button',
     'block_link_button_btnlabel_label' => 'Button Label',
-    'block_link_button_btnhref_label' => 'Link adress',
+    'block_link_button_btnhref_label' => 'Link Address',
     'block_link_button_targetblank_label' => 'Opens the linked document in a new window or tab',
     'block_link_button_simpleLink_label' => 'Use a simple link',
 
@@ -259,5 +259,8 @@ return [
     // missing from LineBlock
     'block_line_linecolor_grey' => 'Grey',
     'block_line_linecolor_black' => 'Black',
+
+    // LinkButtonBlock
+    'block_link_button_empty' => 'The link target is empty.',
 ];
 
