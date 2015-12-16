@@ -3,13 +3,15 @@ LUYA CHANGELOG
 
 1.0.0-beta3 (in progress)
 -------------------------
-- **[BC BREAK]** removed `admin\storage\FileQuery`, `admin\storage\ImageQuery`, `admin\storage\FolderQuery` and replace with `admin\file\Query`, `admin\image\Query`, `admin\folder\Query`.
 
-<<<<<<< f609de97549ba31ff494a01bf7319c7a006f591e
+**[BC BREAK]**
+
+- **removed `admin\storage\FileQuery`, `admin\storage\ImageQuery`, `admin\storage\FolderQuery` and replace with `admin\file\Query`, `admin\image\Query`, `admin\folder\Query`.**
+
+**ISSUES**
+
 - `#660` Updated spacing; Replaced arrows
-=======
 - `#662` Rearrange zaa-table option icons and added auto-scroll to table
->>>>>>> Rearrage table-cell option-icons and added auto-scroll to table close #662
 - `#654` Added border to file- and image-array, added fix break between text and button at the ImageTextBlock, added additional configuration on LinkButtonBlock and some missing translations.
 - `#648` fixed bug where ajax block callback have no composition prefix.
 - `#637` fixed issue where image upload does not change ng-model when image already exists in image data list.
