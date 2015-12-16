@@ -36,59 +36,24 @@ class FileListBlock extends \cmsadmin\base\Block
                         ['value' => '0', 'label' => Module::t("block_file_list_files_showtype_no")],
                     ],
                 ],
-                /*
-                ['var' => 'showSize', 'label' => 'Dateigrösse anzeigen?', 'type' => 'zaa-select', 'options' =>
-                    [
-                        ['value' => '0', 'label' => 'Ja'],
-                        ['value' => '1', 'label' => 'Nein'],
-                    ],
-                ],
-                */
             ],
         ];
     }
-
-    public function getFiles()
-    {
-        $fileEntries = $this->getVarValue('files');
-        $files = [];
-
-        if (!empty($fileEntries)) {
-            foreach ($fileEntries as $fileEntry) {
-                if (array_key_exists('fileId', $fileEntry)) {
-                    $files[] = [
-                        'meta' => $fileEntry,
-                        'file' => Yii::$app->storage->getFile($fileEntry['fileId']),
-                    ];
-                }
-            }
-        }
-
-        /*
-         * filesize:
-         *
-         * $file = get_headers($file['file']['source_http'], 1);
-         * $file["Content-Length"];
-         *
-         */
-
-        return $files;
-    }
-
+    
     public function extraVars()
     {
         return [
-            'fileList' => $this->getFiles(),
+            'fileList' => $this->zaaFileArrayUpload($this->getVarValue('files')),
         ];
     }
 
     public function twigFrontend()
     {
-        return '{% if extras.fileList is not empty %}<ul>{% for fileEntry in extras.fileList %}<li><a target="_blank" href="{{ fileEntry.file.source }}">{{ fileEntry.meta.caption }}{% if cfgs.showType %} ({{ fileEntry.file.extension }}){% endif %}</a></li>{% endfor %}</ul>{% endif %}';
+        return '{% if extras.fileList is not empty %}<ul>{% for fileEntry in extras.fileList %}<li><a target="_blank" href="{{ fileEntry.source }}">{{ fileEntry.caption }}{% if cfgs.showType %} ({{ fileEntry.extension }}){% endif %}</a></li>{% endfor %}</ul>{% endif %}';
     }
 
     public function twigAdmin()
     {
-        return '{% if extras.fileList is empty %}<span class="block__empty-text">Es wurden noch keine Dateien angegeben.</span>{% else %}<ul>{% for fileEntry in extras.fileList %}<li><a target="_blank" href="{{ fileEntry.file.source_http }}">{{ fileEntry.meta.caption }}{% if cfgs.showType == 1 %} ({{ fileEntry.file.extension }}){% endif %}</a></li>{% endfor %}</ul>{% endif %}';
+        return '{% if extras.fileList is empty %}<span class="block__empty-text">Es wurden noch keine Dateien angegeben.</span>{% else %}<ul>{% for fileEntry in extras.fileList %}<li><a target="_blank" href="{{ fileEntry.source_http }}">{{ fileEntry.caption }}{% if cfgs.showType == 1 %} ({{ fileEntry.extension }}){% endif %}</a></li>{% endfor %}</ul>{% endif %}';
     }
 }

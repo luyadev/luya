@@ -36,15 +36,14 @@ class ImageBlock extends \cmsadmin\base\Block
     public function extraVars()
     {
         return [
-            'image' => ($image = (new ImageQuery())->findOne($this->getVarValue('imageId'))) ? $image->toArray() : false,
-            'imageAdmin' => ($image = (new ImageQuery())->findOne($this->getVarValue('imageId'))) ? $image->applyFilter('medium-thumbnail')->toArray() : false,
+            'image' => $this->zaaImageUpload($this->getVarValue('imageId')),
+            'imageAdmin' => $this->zaaImageUpload($this->getVarValue('imageId', 'medium-thumbnail')),
         ];
     }
 
     public function twigFrontend()
     {
-        return '
-            {% if extras.image is not empty %}
+        return '{% if extras.image is not empty %}
                 <div class="image">
                     <figure>
                         <img class="img-responsive" src="{{extras.image.source}}" {% if vars.caption is not empty %}alt="{{vars.caption}}" title="{{vars.caption}}"{% endif %} border="0" />
@@ -53,8 +52,7 @@ class ImageBlock extends \cmsadmin\base\Block
                         {% endif %}
                     </figure>
                 </div>
-            {% endif %}
-        ';
+            {% endif %}';
     }
 
     public function twigAdmin()
