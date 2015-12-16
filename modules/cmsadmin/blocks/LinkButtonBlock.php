@@ -3,6 +3,7 @@
 namespace cmsadmin\blocks;
 
 use cmsadmin\Module;
+use Yii;
 
 /**
  * Simple button element with a link function
@@ -18,57 +19,77 @@ class LinkButtonBlock extends \cmsadmin\base\Block
 
     public function icon()
     {
-        return 'link'; // choose icon from: http://materializecss.com/icons.html
+        return 'link';
     }
 
     public function config()
     {
         return [
-           'vars' => [
-               ['var' => 'btnLabel', 'label' => Module::t('block_link_button_btnlabel_label'), 'type' => 'zaa-text'],
-               ['var' => 'btnHref', 'label' => Module::t('block_link_button_btnhref_label'), 'type' => 'zaa-text'],
-           ],
-           'cfgs' => [
-                ['var' => 'targetBlank', 'label' => Module::t('block_link_button_targetblank_label'), 'type' => 'zaa-checkbox'],
-                ['var' => 'simpleLink', 'label' => Module::t('block_link_button_simpleLink_label'), 'type' => 'zaa-checkbox'],
-           ],
+            'vars' => [
+                ['var' => 'label', 'label' => Module::t('block_link_button_btnlabel_label'), 'type' => 'zaa-text'],
+                ['var' => 'linkData', 'label' => Module::t('block_link_button_btnhref_label'), 'type' => 'zaa-link'],
+            ],
+            'cfgs' => [
+                [
+                    'var' => 'targetBlank',
+                    'label' => Module::t('block_link_button_targetblank_label'),
+                    'type' => 'zaa-checkbox'
+                ],
+                [
+                    'var' => 'simpleLink',
+                    'label' => Module::t('block_link_button_simpleLink_label'),
+                    'type' => 'zaa-checkbox'
+                ],
+            ],
         ];
     }
 
-    /**
-     * Return an array containg all extra vars. Those variables you can access in the Twig Templates via {{extras.*}}.
-     */
+    public function getLinkTarget()
+    {
+        $linkData = $this->getVarValue('linkData', null);
+        $data = null;
+        if ($linkData) {
+            if ($linkData['type'] == '1') {
+                $menu = Yii::$app->menu->find()->where(['nav_id' => $linkData['value']])->one();
+                if ($menu) {
+                    $data = $menu->getLink();
+                }
+            }
+            if ($linkData['type'] == '2') {
+                $data = $linkData['value'];
+            }
+        }
+        return $data;
+    }
+
+    public function getCssClass()
+    {
+        $data = '';
+
+        if ($this->getCfgValue('simpleLink', 0) == 0) {
+            $data = 'btn btn-default';
+        }
+        return $data;
+    }
+
     public function extraVars()
     {
         return [
-            // add your custom extra vars here
+            'linkTarget' => $this->getLinkTarget(),
+            'cssClass' => $this->getCssClass(),
         ];
     }
 
-    /**
-     * Available twig variables:
-     * @param {{vars.btnLabel}}
-     * @param {{vars.btnHref}}
-     * @param {{cfgs.targetBlank}}
-     */
     public function twigFrontend()
     {
-        return '<a 
-                    {% if cfgs.simpleLink == 0  %}class="button" {% endif %}
-                    {% if cfgs.targetBlank == 1  %}target="_blank"{% endif %} 
-                    href="{% if vars.btnHref is not empty %}{{ vars.btnHref }}{% else %}#{% endif %}">
-                    {% if vars.btnLabel is not empty %} {{ vars.btnLabel }} {% endif %}
-                </a>';
+        return '{% if extras.linkTarget is not empty %}<a class="{{ extras.cssClass }}"{% if cfgs.targetBlank == 1  %}target="_blank" ' .
+        '{% endif %} href="{{ extras.linkTarget }}">{% if vars.label is not empty %} {{ vars.label }} {% endif %}' .
+        '</a>{% endif %}';
     }
 
-    /**
-     * Available twig variables:
-     * @param {{vars.btnLabel}}
-     * @param {{vars.btnHref}}
-     * @param {{cfgs.targetBlank}}
-     */
     public function twigAdmin()
     {
-        return '<p>' . Module::t('block_link_button_name') . '</p>';
+        return '<p>' . Module::t('block_link_button_name') . ': {% if vars.linkData is empty %}' . Module::t('block_link_button_empty') . '</p>{% else %}' .
+        '</p><br/><strong>{% if vars.label is not empty %} {{ vars.label }} {% endif %}</strong>{% endif %}';
     }
 }
