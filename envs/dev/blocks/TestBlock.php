@@ -52,7 +52,7 @@ class TestBlock extends \cmsadmin\base\Block
         }
 
         return [
-            'image' => $image
+            'image' => $image,
         ];
     }
 
