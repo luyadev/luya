@@ -26,3 +26,7 @@ phpunit.xml
 vendor/
 scripts/.subsplit
 /build/
+
+### Compile
+scripts/.sass_log
+scripts/.pid.*
