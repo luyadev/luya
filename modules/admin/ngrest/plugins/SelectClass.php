@@ -12,8 +12,12 @@ class SelectClass extends \admin\ngrest\plugins\Select
     public function __construct($class, $valueField, $labelField, $initValue = null)
     {
         $this->data[] = [
-            'value' => NULL,
-            'label' => "",
+            'value' => null,
+            'label' => \admin\Module::t('ngrest_select_no_selection'),
+        ];
+        $this->data[] = [
+            'value' => null,
+            'label' => "- - - - - - - - - - - - - - - -",
         ];
 
         if (is_object($class)) {

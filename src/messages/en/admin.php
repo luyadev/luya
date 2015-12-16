@@ -126,5 +126,7 @@ return [
     'model_loginform_email_label' => 'Email',
     'model_loginform_password_label' => 'Password',
     'model_loginform_wrong_user_or_password' => 'Wrong user or password.',
+    
+    'ngrest_select_no_selection' => 'Select nothing',
 ];
 
