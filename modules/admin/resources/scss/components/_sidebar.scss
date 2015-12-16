@@ -172,11 +172,12 @@
 	}
 }
 
-.sidebar__group-title-icon--rotated {
-	transform: rotate(180deg);
+.sidebar__group-title-icon {
+	margin-left: -5px;
+	transform: rotate(0deg);
 	transition: 0.25s ease transform;
 
-	&.sidebar__group-title-icon--not-rotated {
-		transform: rotate(0deg);
+	&.sidebar__group-title-icon--closed {
+		transform: rotate(-90deg);
 	}
 }

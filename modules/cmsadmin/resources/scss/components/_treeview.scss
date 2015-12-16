@@ -11,7 +11,7 @@ $treeview--padding: 5px;
 	transition: 0.25s ease background-color;
 
 	i {
-		font-size: 16px;
+		font-size: 1.2rem;
 	}
 
 	span,
@@ -178,6 +178,7 @@ $treeview--padding: 5px;
 }
 
 .treeview__toggler {
+	margin-top: 1px;
 	transform: rotate(0deg);
 	transition: 0.25s ease transform;
 
