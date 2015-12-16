@@ -4,9 +4,9 @@ LUYA CHANGELOG
 1.0.0-beta3 (in progress)
 -------------------------
 
-**[BC BREAK]**
+**BC BREAKS**
 
-- **removed `admin\storage\FileQuery`, `admin\storage\ImageQuery`, `admin\storage\FolderQuery` and replace with `admin\file\Query`, `admin\image\Query`, `admin\folder\Query`.**
+- `#663` **Removed `admin\storage\FileQuery`, `admin\storage\ImageQuery`, `admin\storage\FolderQuery` and replace with `admin\file\Query`, `admin\image\Query`, `admin\folder\Query`.**
 
 **ISSUES**
 
