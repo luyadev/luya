@@ -61,7 +61,7 @@
 				}
 			},
 			template : function() {
-				return '<div class="btn" ng-click="goTo(navId)">{{path}}</div> in {{container}}';
+				return '<a ng-click="goTo(navId)" style="cursor:pointer">{{path}}</a> in {{container}}';
 			}
 		}
 	});
