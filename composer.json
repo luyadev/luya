@@ -5,7 +5,6 @@
 	"keywords" : ["php", "yii2", "cms", "luya", "programmatic", "content", "angular", "modular"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
-	"minimum-stability": "dev",
 	"authors" : [
 		{
 			"name" : "Basil",
@@ -18,19 +17,19 @@
 	},
 	"require" : {
 		"php": ">=5.5.0",
-		"yiisoft/yii2": "2.0.6",
-		"twig/twig" : "1.*",
-        "curl/curl" : "1.2.1",
-        "phpmailer/phpmailer": "5.2.*@stable"
+		"yiisoft/yii2": "~2.0.0",
+		"twig/twig" : "~1.0",
+        "curl/curl" : "~1.0",
+        "phpmailer/phpmailer": "~5.2"
 	},
-	"require-dev" : {
-		"yiisoft/yii2-debug" : "2.0.5",
-		"phpunit/phpunit" : "4.8.15",
-        "phpunit/php-code-coverage" : "2.2.4",
-		"fabpot/php-cs-fixer" : "@stable",
-		"imagine/imagine": "0.6.3",
-		"codeclimate/php-test-reporter": "@stable"
-	},
+    "require-dev" : {
+        "yiisoft/yii2-debug" : "~2.0.0",
+        "phpunit/phpunit" : "~5.0",
+        "phpunit/php-code-coverage" : "~3.0",
+        "fabpot/php-cs-fixer" : "~1.0",
+        "imagine/imagine": "*",
+        "codeclimate/php-test-reporter": "*"
+    },
 	"autoload" : {
 		"psr-4" : {
 			"luya\\" : "src/"
