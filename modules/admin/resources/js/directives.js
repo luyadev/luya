@@ -847,6 +847,11 @@
                     scope.ngModel = fileId;
                 }
                 
+                scope.reset = function() {
+                	scope.ngModel = 0;
+                	scope.fileinfo = null;
+                }
+                
                 scope.toggleModal = function() {
                     scope.modal = !scope.modal;
                 }
@@ -986,15 +991,20 @@
                 });
                 
                 scope.$watch(function() { return scope.fileId }, function(n, o) {
-                    if (n != 0 && n !== undefined && n !== o  && n != o) {
-                        scope.filterApply();
+                	if (n !== undefined && n != null && n != o) {
+                		if (n == 0) {
+                            scope.filterId = 0;
+                            scope.imageinfo = null;
+                            scope.ngModel = 0;
+                            console.log(scope.imageinfo);
+                        } else {
+                        	scope.filterApply();
+                        }
                     }
                 });
                 
                 scope.$watch(function() { return scope.ngModel }, function(n, o) {
                     if (n != 0 && n != null && n !== undefined) {
-                        
-                        
                         var filtering = $filter('findidfilter')(scope.imagesData, n, true);
                         if (filtering) {
                             scope.imageinfo = filtering;

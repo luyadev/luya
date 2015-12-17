@@ -10,6 +10,7 @@ LUYA CHANGELOG
 
 **ISSUES**
 
+- `#652` Added ability to reset/clear image and file uploads in directives.
 - `#646` Added a link block with the possibility of linking to internal pages and external target.
 - `#650` Updated styling; Updated old (materialize) toast calls (replaced with new ones)
 - `#660` Updated spacing; Replaced arrows

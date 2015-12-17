@@ -32,8 +32,6 @@ $this->beginPage()
 </head>
 <body ng-cloak>
 <?php $this->beginBody(); ?>
-<!-- ANGULAR SCRIPTS -->
-
 <div class="loading-overlay" ng-show="LuyaLoading.getState()">
     <div class="loading-overlay__content">
         <h3 class="loading-overlay__title">
@@ -50,7 +48,6 @@ $this->beginPage()
             </div>
         </div>
     </div>
-
 </div>
 
 
@@ -74,6 +71,7 @@ $this->beginPage()
                         <?= Luya::t('admin', 'layout_select_file'); ?>
                     </span>
         </div>
+        <span ng-click="reset()" ng-show="fileinfo!=null"><i class="material-icons">remove_circle</i></span>
         <span class="fileupload__path" ng-bind="fileinfo.name"></span>
 
         <modal is-modal-hidden="modal"><storage-file-manager selection="true" /></modal>
@@ -83,12 +81,11 @@ $this->beginPage()
 <script type="text/ng-template" id="storageImageUpload">
     <div class="imageupload">
         <storage-file-upload ng-model="fileId"></storage-file-upload>
-
         <div ng-show="originalFileIsRemoved">
             <div class="alert alert--danger"><?= Luya::t('admin', 'layout_deleted_file'); ?></div>
         </div><!--
         --><div class="imageupload__preview">
-            <img ng-src="{{imageinfo.source}}" class="responsive-img" />
+            <img ng-src="{{imageinfo.source}}" ng-show="imageinfo != null" class="responsive-img" />
             <div class="imageupload__loading" ng-hide="!imageLoading">
                 <div class="preloader-wrapper big active">
                     <div class="spinner-layer spinner-green-only">
