@@ -996,7 +996,6 @@
                             scope.filterId = 0;
                             scope.imageinfo = null;
                             scope.ngModel = 0;
-                            console.log(scope.imageinfo);
                         } else {
                         	scope.filterApply();
                         }

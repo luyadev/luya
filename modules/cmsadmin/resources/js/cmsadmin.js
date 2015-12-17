@@ -397,31 +397,6 @@
 		});
 	});
 	
-	/*
-	zaa.service('MenuService', function($http) {
-		var service = [];
-		
-		service.menu = [];
-		
-		service.navcontainers = [];
-		
-		service.refresh = function() {
-			service.navcontainers = [];
-			$http.get('admin/api-cms-menu/all').success(function(response) {
-				console.log('old menu service', response);
-				for (var i in response) {
-					service.navcontainers.push({ name : response[i]['name'], id : parseInt(response[i]['id'])});
-				}
-				service.menu = response;
-			});
-		}
-		
-		service.refresh();
-		
-		return service;
-	});
-	*/
-	
 	zaa.controller("DraftsController", function($scope, $state, ServiceMenuData) {
 		
 		$scope.menuData = ServiceMenuData.data;
@@ -557,70 +532,6 @@
 			return false;
 		}
 	    
-		//$scope.containers = $scope.menuData.containers;
-		
-		// old
-		
-		/*
-		
-		$scope.hiddenCats = {};
-		
-		$scope.toggleCat = function(catId) {
-			if (catId in $scope.hiddenCats) {
-				$scope.hiddenCats[catId] = !$scope.hiddenCats[catId];
-			} else {
-				$scope.hiddenCats[catId] = 1;
-			}
-		};
-		
-		$scope.toggleIsHidden = function(catId) {
-			if (catId in $scope.hiddenCats) {
-				if ($scope.hiddenCats[catId] == 1) {
-					return true;
-				}
-			}
-			
-			return false;
-		}
-		
-		$scope.AdminLangService = AdminLangService;
-		
-		$scope.AdminLangService.load(true);
-		
-		NewMenuService.get();
-		
-		$scope.$watch(function() { return NewMenuService.data; }, function(n) {
-			$scope.menu = n;
-		});
-		
-		$scope.showDrag = false;
-		
-		$scope.toggleDrag = function() {
-			$scope.showDrag = !$scope.showDrag;
-		}
-		
-		DroppableBlocksService.load();
-		
-	    $scope.isCurrentElement = function(navId) {
-	    	if ($state.params.navId == navId) {
-	    		return true;
-	    	}
-	    	
-	    	return false;
-	    }
-	    
-	    $scope.go = function(navId) {
-	    	$state.go('custom.cmsedit', { navId : navId });
-	    };
-	    
-	    
-	    $scope.onStart = function() {
-		};
-		
-		$scope.onStop = function() {
-		};
-		
-		*/
 	});
 	
 	// create.js
@@ -778,36 +689,6 @@
 			$scope.loadNavProperties();
 		}
 		
-		
-		/*
-		
-		$scope.$watch(function() { return $scope.navData.is_draft }, function(n, o) {
-			if (n == 1) {
-				AdminLangService.resetDefault();
-			}
-		});
-		
-		*/
-	
-	    
-	    
-	    /*
-		$http.get('admin/api-cms-nav/detail', { params : { navId : $scope.id }}).success(function(response) {
-			$scope.navData = response;
-		});
-		
-		*/
-		
-		/* <!-- properties */
-		
-		/*
-		
-		PropertiesService.get().then(function(r) {
-			$scope.properties = r;
-		});
-		
-		*/
-		
 		$scope.propValues = {};
 		
 		$scope.hasValues = false;
@@ -849,18 +730,6 @@
 					AdminToastService.error('Diese Seite kann nicht gelöscht werden, löschen Sie zuerst die Weiterleitungen.', 5000);
 				});
 			});
-			
-			/*
-			if (confirm('Are you sure you want to delete this page?')) {
-	    		$http.get('admin/api-cms-nav/delete', { params : { navId : $scope.navData.id }}).success(function(response) {
-	    			//NewMenuService.get(true);
-	    			$scope.isDeleted = true;
-	    			$scope.menuDataReload();
-	    		}).error(function(response) {
-					// toast error page could'nt be delete because there are redirects linking to this page
-				});;
-	    	}
-	    	*/
 	    };
 		
 		/* properties --> */
@@ -903,64 +772,6 @@
 			}
 		});
 	    
-		/*
-		$scope.$watch(function() { return $scope.navData.is_home }, function(n, o) {
-			if (o !== undefined) {
-				$http.get('admin/api-cms-nav/toggle-home', { params : { navId : $scope.navData.id , homeState : n }}).success(function(response) {
-				});
-			}
-		});
-		
-		$scope.$watch(function() { return $scope.navData.is_hidden }, function(n, o) {
-			console.log(n, o);
-			if (o !== undefined) {
-				$http.get('admin/api-cms-nav/toggle-hidden', { params : { navId : $scope.navData.id , hiddenStatus : n }}).success(function(response) {
-					//NewMenuService.get(true);
-					// send toast
-					if (n == 1) {
-						//Materialize.toast('<span>Die Seite ist nun Unsichtbar.</span>', 2000)
-					} else {
-						//Materialize.toast('<span>Die Seite ist nun Sichtbar.</span>', 2000)
-					}
-				});
-			}
-		});
-		
-		$scope.$watch(function() { return $scope.navData.is_offline }, function(n, o) {
-			if (o !== undefined) {
-				$http.get('admin/api-cms-nav/toggle-offline', { params : { navId : $scope.navData.id , offlineStatus : n }}).success(function(response) {
-					//NewMenuService.get(true);
-					// send toast
-					if (n == 1) {
-						//Materialize.toast('<span>Die Seite ist nun <span style="color:red;">Offline</span>.</span>', 2000)
-					} else {
-						//Materialize.toast('<span>Die Seite ist nun <span style="color:green;">Online</span>.</span>', 2000)
-					}
-				});
-			}
-		});
-		
-	    $scope.trash = function() {
-	    	if (confirm('your are sure you want to delete this page?')) {
-	    		$http.get('admin/api-cms-nav/delete', { params : { navId : $scope.navData.id }}).success(function(response) {
-	    			//NewMenuService.get(true);
-	    			$scope.isDeleted = true;
-	    		});
-	    	}
-	    };
-		*/
-		
-	    /*
-		$scope.AdminClassService = AdminClassService;
-		
-		$scope.AdminLangService = AdminLangService;
-		
-		$scope.refresh = function() {
-			$scope.langs = $scope.AdminLangService.data;
-		}
-		
-		$scope.refresh();
-		*/
 		
 		initializer();
 	});
@@ -1055,33 +866,6 @@
 						}
 						
 					}
-					
-					/*
-					$scope.item = response['item'];
-					
-					$http({
-						url : 'admin/api-cms-navitem/type-data',
-						method : 'get',
-						params : { navItemId : response.id }
-					}).success(function(r) {
-						$scope.typeData = r;
-
-					})
-					
-					
-					
-					$timeout(function() {
-						$scope.showContainer = true;
-						$scope.$broadcast('refreshItems');
-					}, 500);
-				} else {
-					$timeout(function() {
-						$scope.showContainer = true;
-						$scope.$broadcast('refreshItems');
-					}, 500);
-				}
-				
-				*/
 				}
 				$scope.loaded = true
 			});
@@ -1146,83 +930,6 @@
 		init();
 	});
 	
-	/*
-	zaa.controller("NavItemTypePageController", function($scope, $http, $timeout, LuyaLoading) {
-		
-		$scope.NavItemController = $scope.$parent;
-		
-		$scope.container = [];
-		
-		$scope.$on('refreshItems', function(event) {
-			$scope.refresh(true);
-		});
-		
-		$scope.refresh = function(forceReload) {
-			$http({
-				url : 'admin/api-cms-navitem/tree',
-				method : 'GET',
-				params : { navItemPageId : $scope.NavItemController.item.nav_item_type_id }
-			}).success(function(response) {
-				if ($scope.container.length == 0 || forceReload === true) {
-					$scope.container = response;
-				} else {
-					// merge new content item to placeholder
-					var old_ph = $scope.container.__placeholders;
-					var new_ph = response.__placeholders;
-					for (var i in old_ph) {
-						$scope.container.__placeholders[i]['__nav_item_page_block_items'] = new_ph[i]['__nav_item_page_block_items'];
-					}
-				}
-				$timeout(function() {
-					$scope.$parent.$parent.$parent.enableSidebar();
-				}, 100);
-			});
-		};
-		
-		$scope.refreshNested = function(prevId, placeholderVar) {
-			
-			$http({
-				url : 'admin/api-cms-navitem/reload-placeholder',
-				method : 'GET',
-				params : { navItemPageId : $scope.NavItemController.item.nav_item_type_id, prevId : prevId, placeholderVar : placeholderVar}
-			}).success(function(response) {
-				for (var i in $scope.container.__placeholders) {
-					var out = $scope.revPlaceholders($scope.container.__placeholders[i], prevId, placeholderVar, response);
-					if (out !== false ) {
-						return;
-					}
-				}
-				
-			});
-		}
-		$scope.revPlaceholders = function(placeholder, prevId, placeholderVar, replaceContent) {
-			var tmp = placeholder['prev_id'];
-			if (parseInt(prevId) == parseInt(tmp) && placeholderVar == placeholder['var']) {
-				placeholder['__nav_item_page_block_items'] = replaceContent;
-				return true;
-			}
-			
-			var find = $scope.revFind(placeholder, prevId, placeholderVar, replaceContent)
-			if (find !== false) {
-				return find;
-			}
-			return false;
-		}
-		
-		$scope.revFind = function(placeholder, prevId, placeholderVar, replaceContent) {
-			for (var i in placeholder['__nav_item_page_block_items']) {
-				for (var holder in placeholder['__nav_item_page_block_items'][i]['__placeholders']) {
-					var rsp = $scope.revPlaceholders(placeholder['__nav_item_page_block_items'][i]['__placeholders'][holder], prevId, placeholderVar, replaceContent);
-					if (rsp !== false) {
-						return rsp;
-					}
-				}
-			}
-			return false;
-		}
-		
-	});
-	*/
 	
 	/**
 	 * @param $scope.placeholder
