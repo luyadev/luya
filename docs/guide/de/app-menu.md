@@ -1,71 +1,81 @@
-Layout Menu
+Menu Navigation
 ===========
 
 > `links` ist seit 1.0.0-beta1 deprecated, anstelle wird `menu` verwendet.
 
-Menu Component
+Wie erstelle ich eine Navigation für meine Seite? Wie kann man ein Footer/Meta Menu erstellen? Wie gebe ich den aktuelle link aus? Wie gehe ich mit den verschiedenen Navigations Typen um? Die Menu Komponente ist ein Datebank ähnlicher Container welcher alle nötigen Informationen gemäss deinem wunsch anzeigt.
 
-**Query menu data**
+Die Menu Componente (Oder auch MenuContainer) kann via `Yii::$app->menu` aufgerufen werden. Jeder Eintrag aus der Menu Komponenten gibt ein [Menu-Item-Object](https://luya.io/api/cms-menu-item.html). Alle Getter methoden zbsp `$itemObject->getLink()` können direkt als `$itemObject->link` aufgerufen werden. Das wird durch die Yii base object implementation gewährleistet.
 
-ability to add multiple querys as "AND" chain. like below: parent_nav_id = 0 AND parent_nav_id = 1
+Aktuelle Seite ausgeben
+----------------------
+
+Eines der wichtigtes features der menu componente ist das ausgeben und erkenne der aktuellen seite auf welcher du dich aktuell befindest. Dies wird über die Methode `getCurrent()` ausgegeben. Diese methode liefert dir wieder ein Menu-Item-Object zurück.
+
+Ausgeben des aktuelle Links:
 
 ```php
-foreach(Yii::$app->menu->find()->where(['parent_nav_id' => 0, 'parent_nav_id' => 1])->all() as $item) {
-    echo $item->title;
+echo Yii::$app->menu->current->link;
+```
+
+dies entspricht auch dem klassischem wegem der get methoden. Wir empfehlen aber die shortform variante welche oben stehtn.
+
+```php
+echo Yii::$app->menu->getCurrent()->getLink();
+```
+
+Startseite ausgeben
+------------------
+
+Die aktuelle home seite kann über die helper methode `getHome()` aufgerufen werden, somit könnten man zbsp. der Titel der Home sete wei folgt anzeigen
+
+```php
+echo Yii::$app->menu->home->title;
+```
+
+Menu Auslesen
+-------------
+
+Das auslesen von menu Daten mit bestimmten optionen operiert über die `find()` methode. Hier ein beispiel für das ausgeben aller menu einträge auf der ersten eben:
+
+```php
+foreach(Yii::$app->menu->find()->where(['parent_nav_id' => 0])->all() as $itemObject) {
+    var_dump($itemObject);
 }
 ```
 
-Find one item:
+Das oben gezeigt beispiel findet alle daten wie folgt als sql ähnlicher snytax ausgedrückt: `WHERE parent_nav_id = 0`. Um mehrer bedingunge anzuknöpfen 
 
-```php
-$item = Yii::$app->menu->find()->where(['id' => 1])->one();
+```
+foreach(Yii::$app->menu->find()->where(['parent_nav_id' => 0, 'is_active' => 1])->all() as $itemObject) {
+    var_dump($itemObject);
+}
 ```
 
-If the element coult nod be found, one will return *false*.
-
-**Getter methods of an item**
+Dies entspricht einer and where bedingung ähnlichen sql syntax: `WHERE parent_nav_id = 0 AND is_active = 1`. Um bedingungen auszuführen welche nicht immer eine AND verknlüpfung entsprechen kann man einen array ausdruck verwenden:
 
 ```php
-$item->getTitle();
-$item->getLink();
-$item->getAlias();
-$item->getChildren();
-$item->getParent();
-$item->teardown();
+where(['!=', 'is_active', 0])->andWhere(['==', 'parent_nav_id', 0]); // WHERE is_active != AND parent_nav_id === 0
 ```
 
-All getter methods can be access like
+|Operatoren |Entspricht
+|---|---
+|<= | Kleiner als und aktueller Wert
+|<  | Kleiner als
+|>  | Grösser als
+|>= | Grösser als und aktueller Wert
+|=  | Entspricht
+|== | Entspricht mit Typen vergleich.
+
+Breadcrumbs ausgeben
+--------------------
+
+Um zum beispiel die breadcrumbs der aktuellen Seite ausgzugeben kann die Item-Object-Method `getTeardown()` zbsp. wie folg verwendet werden.
 
 ```php
-$item->title;
-$item->link;
-$item->alias;
-$item->childeren;
-$item->parent;
-```
-
-Get current active Item
-
-```php
-$item = Yii::$app->menu->getCurrent();
-```
-
-as of getter
-
-```php
-$item = Yii::$app->menu->current;
-```
-
-Get home item
-
-```php
-$item = Yii::$app->menu->getHome();
-```
-
-as of getter
-
-```php
-$item = Yii::$app->menu->home;
+foreach(Yii::$app->menu->current->teardown as $item) {
+    echo '<li><a href="' . $item->link . '">' . $item->title . '</a></li>';
+}
 ```
 
 Sprachen (composition)
