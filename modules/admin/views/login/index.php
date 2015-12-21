@@ -10,6 +10,7 @@
 
             <!-- Normal login -->
             <form class="card" method="post" id="loginForm">
+                <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken; ?>" />
                 <div class="card-content clearfix">
                     <span class="card-title black-text"><?= \admin\Module::t('login_pre_title', ['title' => Yii::$app->siteTitle]); ?></span>
 
@@ -20,7 +21,7 @@
                         <div class="input input--text input--vertical col s12">
                             <label class="input__label" for="email"><?= \admin\Module::t('login_mail'); ?></label>
                             <div class="input__field-wrapper">
-                                <input class="input__field" id="email" name="login[email]" value="<?= $model->email; ?>" type="email" />
+                                <input class="input__field" id="email" name="login[email]" type="email" />
                             </div>
                         </div>
                     </div>
@@ -29,7 +30,7 @@
                         <div class="input input--text input--vertical col s12">
                             <label class="input__label" for="password"><?= \admin\Module::t('login_password'); ?></label>
                             <div class="input__field-wrapper">
-                                <input class="input__field" id="password" name="login[password]" value="<?= $model->email; ?>" type="password" />
+                                <input class="input__field" id="password" name="login[password]" type="password" />
                             </div>
                         </div>
                     </div>
@@ -50,6 +51,7 @@
 
             <!-- Token -->
             <form class="card hidden" method="post" id="secureForm">
+                <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken; ?>" />
                 <div class="card-content clearfix">
                     <span class="card-title black-text"><?= \admin\Module::t('login_pre_title', ['title' => Yii::$app->siteTitle]); ?></span>
 
@@ -60,7 +62,7 @@
                         <div class="input input--text input--vertical col s12">
                             <label class="input__label" for="secure_token"><?= \admin\Module::t('login_securetoken'); ?></label>
                             <div class="input__field-wrapper">
-                                <input class="input__field" name="secure_token" id="secure_token" value="<?= $model->email; ?>" type="text" />
+                                <input class="input__field" name="secure_token" id="secure_token" type="text" />
                                 <small><?= \admin\Module::t('login_securetoken_info'); ?></small>
                             </div>
                         </div>

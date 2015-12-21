@@ -5,6 +5,7 @@
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <?php $this->head() ?>
+        <?= yii\helpers\Html::csrfMetaTags() ?>
     </head>
     <body>
     <?php $this->beginBody() ?>

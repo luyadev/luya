@@ -7,34 +7,36 @@ LUYA CHANGELOG
 **BC BREAKS**
 
 - `#663` **Removed `admin\storage\FileQuery`, `admin\storage\ImageQuery`, `admin\storage\FolderQuery` and replace with `admin\file\Query`, `admin\image\Query`, `admin\folder\Query`.**
+- `#667` **As the csrf validation is enabled by default, you have to integrate them into your forms and head. [Guide to include CSRF Token forms](http://zero-exception.blogspot.ch/2015/01/yii2-using-csrf-token.html)**
 
 **ISSUES**
 
+- `#667` Enabled the csrf validation token in luya\web\Request (default setting).
 - `#652` Added ability to reset/clear image and file uploads in directives.
 - `#646` Added a link block with the possibility of linking to internal pages and external target.
 - `#650` Updated styling; Updated old (materialize) toast calls (replaced with new ones)
 - `#660` Updated spacing; Replaced arrows
 - `#662` Rearrange zaa-table option icons and added auto-scroll to table
 - `#654` Added border to file- and image-array, added fix break between text and button at the ImageTextBlock, added additional configuration on LinkButtonBlock and some missing translations.
-- `#648` fixed bug where ajax block callback have no composition prefix.
-- `#637` fixed issue where image upload does not change ng-model when image already exists in image data list.
-- `#638` fixed issue where menu component does not use `createRouteEnsure`.
-- `#634` added getContainer and getLevelCurrentItems for menu component.
-- `#633` added the ability to register new translations/message quickly in the Module.php via $translation property.
-- `#643` added ability to get cms menu item siblings.
-- `#644` added ability to get all menu items for a specific level `getLevelContainer` in menu component.
-- `#639` added missing translations for divider line block.
-- `#158` added ability to sort the items in list block.
-- `#425` added ability to move columnds and rows up/down in table block.
-- `#647` added image delete helpers to admin storage helper.
-- `#449` added toast service with confirmations.
-- `#484` added toast service with error and success messages.
-- `#649` added maxlength for text input fields of 255 chars (on zaa-text).
-- `#651` fixed issue where image and file list array where unable to be i18n casted.
-- `#659` fixed security issue for ngrest callbacks.
-- `#658` fixed composition rules issue where parse request creates absolut urls.
-- `#661` added block helper methods (prefix with zaa) to get file/s and image/s data.
-- `#663` renamed storage query classes, added findImage, findFolder and findFile.
+- `#648` Fixed bug where ajax block callback have no composition prefix.
+- `#637` Fixed issue where image upload does not change ng-model when image already exists in image data list.
+- `#638` Fixed issue where menu component does not use `createRouteEnsure`.
+- `#634` Added getContainer and getLevelCurrentItems for menu component.
+- `#633` Added the ability to register new translations/message quickly in the Module.php via $translation property.
+- `#643` Added ability to get cms menu item siblings.
+- `#644` Added ability to get all menu items for a specific level `getLevelContainer` in menu component.
+- `#639` Added missing translations for divider line block.
+- `#158` Added ability to sort the items in list block.
+- `#425` Added ability to move columnds and rows up/down in table block.
+- `#647` Added image delete helpers to admin storage helper.
+- `#449` Added toast service with confirmations.
+- `#484` Added toast service with error and success messages.
+- `#649` Added maxlength for text input fields of 255 chars (on zaa-text).
+- `#651` Fixed issue where image and file list array where unable to be i18n casted.
+- `#659` Fixed security issue for ngrest callbacks.
+- `#658` Fixed composition rules issue where parse request creates absolut urls.
+- `#661` Added block helper methods (prefix with zaa) to get file/s and image/s data.
+- `#663` Renamed storage query classes, added findImage, findFolder and findFile.
 
 1.0.0-beta2 (3.12.2015)
 -------------------------

@@ -1,10 +1,7 @@
 <?php
 use \yii\helpers\Html;
-
 $this->beginPage();
-
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +20,6 @@ $this->beginPage();
         }
     </style>
     <?php $this->head() ?>
-
     <?= Html::csrfMetaTags() ?>
 </head>
 <body>

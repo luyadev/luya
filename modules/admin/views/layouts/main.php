@@ -1,10 +1,9 @@
 <?php
 use \admin\Module;
-use \yii\helpers\Url;
 use \luya\Module as Luya;
-
+use \yii\helpers\Html;
+use \luya\helpers\Url;
 $user = Yii::$app->adminuser->getIdentity();
-
 $this->beginPage()
 ?><!DOCTYPE html>
 <html ng-app="zaa" ng-controller="LayoutMenuController">
@@ -26,6 +25,7 @@ $this->beginPage()
         }
     </style>
     <?php $this->head(); ?>
+    <?= Html::csrfMetaTags() ?>
     <script>
         var authToken = '<?=$user->getAuthToken();?>';
     </script>

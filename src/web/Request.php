@@ -18,8 +18,6 @@ class Request extends \yii\web\Request
 
     public $cookieValidationKey = 'cookeivalidationkey';
 
-    public $enableCsrfValidation = false;
-
     public $parsers = [
         'application/json' => 'yii\web\JsonParser',
     ];
