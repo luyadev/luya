@@ -37,6 +37,7 @@ LUYA CHANGELOG
 - `#658` Fixed composition rules issue where parse request creates absolut urls.
 - `#661` Added block helper methods (prefix with zaa) to get file/s and image/s data.
 - `#663` Renamed storage query classes, added findImage, findFolder and findFile.
+- `#603` Added the ability to us `no_filter` option in zaa-image-array-upload types.
 
 1.0.0-beta2 (3.12.2015)
 -------------------------

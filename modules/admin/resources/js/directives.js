@@ -635,7 +635,7 @@
 
                                     '<div class="list__left row">' +
                                         '<div class="col s8">' +
-                                            '<storage-image-upload ng-model="image.imageId"></storage-image-upload>' +
+                                            '<storage-image-upload ng-model="image.imageId" options="options"></storage-image-upload>' +
                                         '</div>' +
                                         '<div class="input-field col s4">' +
                                             '<textarea ng-model="image.caption" class="materialize-textarea"></textarea>' +
