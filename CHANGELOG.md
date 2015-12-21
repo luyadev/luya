@@ -27,7 +27,7 @@ LUYA CHANGELOG
 - `#644` Added ability to get all menu items for a specific level `getLevelContainer` in menu component.
 - `#639` Added missing translations for divider line block.
 - `#158` Added ability to sort the items in list block.
-- `#425` Added ability to move columnds and rows up/down in table block.
+- `#425` Added ability to move columns and rows up/down in table block.
 - `#647` Added image delete helpers to admin storage helper.
 - `#449` Added toast service with confirmations.
 - `#484` Added toast service with error and success messages.
