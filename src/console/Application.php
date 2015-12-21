@@ -30,6 +30,7 @@ class Application extends \yii\console\Application
         'setup' => '\luya\console\commands\SetupController',
         'health' => '\luya\console\commands\HealthController',
         'block' => '\luya\console\commands\BlockController',
+        'storage' => '\luya\console\commands\StorageController',
     ];
 
     /**

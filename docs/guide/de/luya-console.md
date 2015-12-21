@@ -24,6 +24,7 @@ Befehlsübersicht
 |module/create     |-                             |`module/create`           |Erstellt ein [Frontend/Admin Module](app-module.md) mit einem Assistenten.
 |command           |$moduleName, $route           |`command teammodule controller/action` |Ausführen eines eigenen Konsolenbefehls.
 |block/create		|-								|`block/create`	|Wizzard für das erstellen von neuen Cms [Inhalts Blöcken](app-blocks.md).
+|storage/cleanup    |-								|`storage/cleanup`	|Überprüft den 'storage' Ordner auf verwaiste Dateien und löscht diese nach Bestätigung.
 
 
 Einen Command erstellen

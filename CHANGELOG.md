@@ -11,6 +11,7 @@ LUYA CHANGELOG
 
 **ISSUES**
 
+- `#653` Added storage consistency check to import and the new storage/cleanup console command
 - `#667` Enabled the csrf validation token in luya\web\Request (default setting).
 - `#652` Added ability to reset/clear image and file uploads in directives.
 - `#646` Added a link block with the possibility of linking to internal pages and external target.

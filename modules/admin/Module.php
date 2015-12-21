@@ -89,6 +89,7 @@ class Module extends \admin\base\Module
             '\\admin\\importers\\AuthImporter',
             '\\admin\\importers\\FilterImporter',
             '\\admin\\importers\\PropertyImporter',
+            '\\admin\\importers\\StorageImporter',
         ];
     }
     
