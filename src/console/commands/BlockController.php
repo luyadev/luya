@@ -9,6 +9,10 @@ use yii\helpers\Console;
 
 class BlockController extends \luya\console\Command
 {
+    public $extras = [];
+    
+    public $phpdoc = [];
+    
     private function getModuleProposal()
     {
         $modules = [];
@@ -46,7 +50,25 @@ class BlockController extends \luya\console\Command
         return [
             'select' => "[['value' => 1, 'label' => 'Label for Value 1']]",
             'checkbox-array' => "['items' => [['id' => 1, 'label' => 'Label for Value 1']]]",
+            'image-upload' => "['no_filter' => false]",
+            'image-array-upload' => "['no_filter' => false]",
         ];
+    }
+    
+    private function getExtraVarDef($type, $varName, $func)
+    {
+        $info = [
+            'image-upload' => function($varName) use ($func) { return '$this->zaaImageUpload($this->'.$func.'(\''.$varName.'\')),'; },
+            'image-array-upload' => function($varName) use ($func)  { return '$this->zaaImageArrayUpload($this->'.$func.'(\''.$varName.'\')),'; },
+            'file-upload' => function($varName) use ($func)  { return '$this->zaaFileUpload($this->'.$func.'(\''.$varName.'\')),'; },
+            'file-array-upload' => function($varName) use ($func)  { return '$this->zaaFileArrayUpload($this->'.$func.'(\''.$varName.'\')),'; },
+        ];
+        
+        if (array_key_exists($type, $info)) {
+            return "'".$varName."' => ".$info[$type]($varName);
+        }
+        
+        return false;
     }
 
     private function getVariableTypeOption($type)
@@ -85,8 +107,6 @@ class BlockController extends \luya\console\Command
 
         $blockName = Inflector::camelize($blockName);
 
-        $phpdoc = [];
-
         // vars
 
         $config = [
@@ -99,8 +119,8 @@ class BlockController extends \luya\console\Command
             $doVars = $this->confirm('Add new Variable (vars)?', false);
             $i = 1;
             while ($doVars) {
-                $item = $this->varCreator('Variabel (vars) #'.$i);
-                $phpdoc[] = '{{vars.'.$item['var'].'}}';
+                $item = $this->varCreator('Variabel (vars) #'.$i, 'var');
+                $this->phpdoc[] = '{{vars.'.$item['var'].'}}';
                 $config['vars'][] = $item;
                 $doVars = $this->confirm('Add one more?', false);
                 ++$i;
@@ -108,8 +128,8 @@ class BlockController extends \luya\console\Command
             $doCfgs = $this->confirm('Add new Configuration (cgfs)?', false);
             $i = 1;
             while ($doCfgs) {
-                $item = $this->varCreator('Configration (cfgs) #'.$i);
-                $phpdoc[] = '{{cfgs.'.$item['var'].'}}';
+                $item = $this->varCreator('Configration (cfgs) #'.$i, 'cfg');
+                $this->phpdoc[] = '{{cfgs.'.$item['var'].'}}';
                 $config['cfgs'][] = $item;
                 $doCfgs = $this->confirm('Add one more?', false);
                 ++$i;
@@ -118,7 +138,7 @@ class BlockController extends \luya\console\Command
             $i = 1;
             while ($doPlaceholders) {
                 $item = $this->placeholderCreator('Placeholder (placeholders) #'.$i);
-                $phpdoc[] = '{{placeholders.'.$item['var'].'}}';
+                $this->phpdoc[] = '{{placeholders.'.$item['var'].'}}';
                 $config['placeholders'][] = $item;
                 $doPlaceholders = $this->confirm('Add one more?', false);
                 ++$i;
@@ -157,7 +177,7 @@ class BlockController extends \luya\console\Command
         // method icon
         $content .= '    public function icon()'.PHP_EOL;
         $content .= '    {'.PHP_EOL;
-        $content .= '        return \'\'; // choose icon from: http://materializecss.com/icons.html'.PHP_EOL;
+        $content .= '        return \'extension\'; // choose icon from: http://materializecss.com/icons.html'.PHP_EOL;
         $content .= '    }'.PHP_EOL.PHP_EOL;
 
         $content .= '    public function config()'.PHP_EOL;
@@ -205,14 +225,16 @@ class BlockController extends \luya\console\Command
         $content .= '    public function extraVars()'.PHP_EOL;
         $content .= '    {'.PHP_EOL;
         $content .= '        return ['.PHP_EOL;
-        $content .= '            // add your custom extra vars here'.PHP_EOL;
+        foreach($this->extras as $x) {
+        $content .= '            '.$x.PHP_EOL;
+        }
         $content .= '        ];'.PHP_EOL;
         $content .= '    }'.PHP_EOL.PHP_EOL;
 
         // method twigFrontend
         $content .= '    /**'.PHP_EOL;
         $content .= '     * Available twig variables:'.PHP_EOL;
-        foreach ($phpdoc as $doc) {
+        foreach ($this->phpdoc as $doc) {
             $content .= '     * @param '.$doc.PHP_EOL;
         }
         $content .= '     */'.PHP_EOL;
@@ -224,7 +246,7 @@ class BlockController extends \luya\console\Command
         // method twigAdmin
         $content .= '    /**'.PHP_EOL;
         $content .= '     * Available twig variables:'.PHP_EOL;
-        foreach ($phpdoc as $doc) {
+        foreach ($this->phpdoc as $doc) {
             $content .= '     * @param '.$doc.PHP_EOL;
         }
         $content .= '     */'.PHP_EOL;
@@ -270,7 +292,13 @@ class BlockController extends \luya\console\Command
         return $v;
     }
 
-    private function varCreator($prefix)
+    /**
+     * 
+     * @param unknown $prefix
+     * @param string $type 'var', 'cfg'
+     * @return multitype:string Ambigous <string, array>
+     */
+    private function varCreator($prefix, $typeCast)
     {
         $this->output(PHP_EOL.'-> Create new '.$prefix, Console::FG_YELLOW);
         $name = $this->prompt('Variable Name:', ['required' => true]);
@@ -285,6 +313,19 @@ class BlockController extends \luya\console\Command
 
         if ($this->hasVariableTypeOption($type)) {
             $v['options'] = $this->getVariableTypeOption($type);
+        }
+        
+        if ($typeCast == 'var') {
+            $func = 'getVarValue';
+        } else {
+            $func = 'getCfgValue';
+        }
+        
+        $extra = $this->getExtraVarDef($type, $v['var'], $func);
+        
+        if ($extra) {
+            $this->phpdoc[] = '{{extras.'.$v['var'].'}}';
+            $this->extras[] = $extra;
         }
 
         $this->output('Added '.$prefix.PHP_EOL, Console::FG_GREEN);
