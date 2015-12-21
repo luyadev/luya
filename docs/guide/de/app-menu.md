@@ -7,6 +7,8 @@ Wie erstelle ich eine Navigation für meine Seite? Wie kann man ein Footer/Meta 
 
 Die Menu Componente (Oder auch MenuContainer) kann via `Yii::$app->menu` aufgerufen werden. Jeder Eintrag aus der Menu Komponenten gibt ein [Menu-Item-Object](https://luya.io/api/cms-menu-item.html). Alle Getter methoden zbsp `$itemObject->getLink()` können direkt als `$itemObject->link` aufgerufen werden. Das wird durch die Yii base object implementation gewährleistet.
 
+Die *Menu-Component* befindet sich automatisch abhängig von der *Composition-Component* im richtigen sprach kontext.
+
 Aktuelle Seite ausgeben
 ----------------------
 
@@ -18,7 +20,7 @@ Ausgeben des aktuelle Links:
 echo Yii::$app->menu->current->link;
 ```
 
-dies entspricht auch dem klassischem wegem der get methoden. Wir empfehlen aber die shortform variante welche oben stehtn.
+dies kann auch über den klassischen aufruf der getter methoden bewerkstelligt werden, wir empfehlen aber der einfachheits halber immer die shortform zu verwenden:
 
 ```php
 echo Yii::$app->menu->getCurrent()->getLink();
@@ -27,7 +29,7 @@ echo Yii::$app->menu->getCurrent()->getLink();
 Startseite ausgeben
 ------------------
 
-Die aktuelle home seite kann über die helper methode `getHome()` aufgerufen werden, somit könnten man zbsp. der Titel der Home sete wei folgt anzeigen
+Die aktuelle *Home/Startseite* kann über die helper methode `getHome()` aufgerufen werden, somit könnten man zbsp. der Titel der Home-Seite wie folgt anzeigen:
 
 ```php
 echo Yii::$app->menu->home->title;
@@ -80,7 +82,7 @@ foreach(Yii::$app->menu->current->teardown as $item) {
 
 Sprachen (composition)
 ----------------------
-Zusätzlich zur Link-Komponente wird die `composition` Komponente gebraucht. Sie gibt Auskunft über die aktuellen Sprachen und den Umgebungszustand. Die Composition Pattern Komponente kann definiert werden (@TBD). Du kannst mit `Yii::$app->composition` auf die Composition Komponente zugreifen. Um Daten auszulesen verwendest du die `getKey()` Methode. Um auf den aktuelle Sprachcode zuzugreifen verwenden Sie:
+Zusätzlich zur Menu-Komponente wird die `composition` Komponente gebraucht um aktuelle sprach informationen auszugeben. Sie gibt Auskunft über die aktuellen Sprachen und den Umgebungszustand. Die Composition Pattern Komponente kann definiert werden (@TBD). Du kannst mit `Yii::$app->composition` auf die Composition Komponente zugreifen. Um Daten auszulesen verwendest du die `getKey()` Methode. Um auf den aktuelle Sprachcode zuzugreifen verwenden Sie:
 
 > seite 1.0.0-beta1 verfügt die composition component ein array access und daten können anstelle von `$composition->geyKey('keyName')` via `$compositon['keyName']` aufgerufen werden.
 
