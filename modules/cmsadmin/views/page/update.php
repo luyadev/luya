@@ -184,8 +184,8 @@
                                 
                                     <div class="toolbar__group" ng-show="navData.is_draft == 1">
                                         <div class="toolbar__group">
-                                        <div class="switch">
-                                            <label>
+                                            <div class="switch">
+                                                <label>
                                                     <span><b><?= \cmsadmin\Module::t('view_update_is_draft_mode'); ?></b></span>
                                                 </label>
                                             </div>
@@ -287,6 +287,24 @@
                             <div class="col s12">
                                 <div class="alert alert--info">
                                     <?= \cmsadmin\Module::t('view_update_no_translations'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12" ng-controller="CopyPageController">
+                                Möchten Sie diese Seite von einer anderen Sprache erstellen?
+                                <button ng-click="loadItems()" ng-show="!isOpen">Ja</button>
+                                <div ng-show="isOpen">
+                                    <ul>
+                                        <li ng-repeat="item in items">{{item.lang.name}} - {{ item.title }} <i>({{item.alias}})</i> <button type="button" ng-click="select(item)" >Verwenden</button></li>
+                                    </ul>
+                                    
+                                    <div ng-show="itemSelection">
+                                        Titel: <input type="text" ng-model="itemSelection.title" />
+                                        <br />Alias: <input type="text" ng-model="itemSelection.alias" />
+                                        
+                                        <button ng-click="save()">Seite erstellen</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

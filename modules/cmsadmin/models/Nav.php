@@ -279,6 +279,37 @@ class Nav extends \yii\db\ActiveRecord
         $navItem->nav_id = $nav->id;
         return $navItem->save();
     }
+    
+    /**
+     * 1. find item
+     * 2. create a new item (based on the find $navItemId type)
+     * 3. copy nav item type data (blocks, layout, or redirects, module, etc.)
+     * 
+     * @param unknown $navItemId
+     * @param unknown $langId
+     * @param unknown $title
+     * @param unknown $alias
+     * @return boolean
+     */
+    public function createItemLanguageCopy($navItemId, $langId, $title, $alias)
+    {
+        /*
+        $item = NavItem::findOne($navItemId);
+        
+        $model = new NavItem();
+        $model->attributes = $item->toArray();
+        $model->title = $title;
+        $model->alias = $alias;
+        $model->lang_id = $langId;
+        
+        
+        // save
+        // copy type (find type)
+        // copy content depending on type (blocks for example)
+        */
+        
+        return false;
+    }
 
     public function createPageFromDraft(
         $parentNavId,

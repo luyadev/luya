@@ -22,6 +22,11 @@ class NavController extends \admin\base\RestController
     {
         return Yii::$app->request->post($name, null);
     }
+    
+    public function actionFindNavItems($navId)
+    {
+        return NavItem::find()->where(['nav_id' => $navId])->asArray()->with('lang')->all();
+    }
 
     public function actionGetProperties($navId)
     {
@@ -233,6 +238,17 @@ class NavController extends \admin\base\RestController
             Yii::$app->response->statusCode = 422;
         }
     
+        return $create;
+    }
+    
+    public function actionCreateFromPage()
+    {
+        $model = new \cmsadmin\models\Nav();
+        $create = $model->createItemLanguageCopy($this->postArg('id'), $this->postArg('toLangId'), $this->postArg('title'), $this->postArg('alias'));
+        if ($create !== true) {
+            Yii::$app->response->statusCode = 422;
+        }
+        
         return $create;
     }
 }

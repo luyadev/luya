@@ -411,6 +411,42 @@
 		
 	});
 	
+	zaa.controller("CopyPageController", function($scope, $http) {
+		
+		var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
+		
+		$scope.NavItemController = $scope.$parent;
+		
+		$scope.navId = 0;
+		
+		$scope.items = null;
+		
+		$scope.isOpen = false;
+		
+		$scope.itemSelection = false;
+		
+		$scope.select = function(item) {
+			$scope.itemSelection = angular.copy(item);
+		};
+		
+		$scope.loadItems = function() {
+			$scope.navId = $scope.NavItemController.NavController.navData.id;
+			
+			$http.get('admin/api-cms-nav/find-nav-items', { params: { navId : $scope.navId }}).success(function(response) {
+				$scope.items = response;
+				$scope.isOpen = true;
+			});
+		};
+		
+		$scope.save = function() {
+			$scope.itemSelection['toLangId'] = $scope.NavItemController.lang.id;
+			$http.post('admin/api-cms-nav/create-from-page', $.param($scope.itemSelection), headers).success(function(response) {
+				console.log('succes', response);
+			});
+		}
+		
+	});
+	
 	zaa.controller("DropNavController", function($scope, $http, ServiceMenuData) {
 		
 		$scope.droppedNavItem = null;
