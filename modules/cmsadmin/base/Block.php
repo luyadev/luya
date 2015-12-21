@@ -446,7 +446,7 @@ abstract class Block extends \yii\base\Object implements BlockInterface
      * Get the full array for the specific zaa-file-array-upload type
      * 
      * ```php
-     * 'fileList' => $this->zaaFileArrayUpload('files'),
+     * 'fileList' => $this->zaaFileArrayUpload($this->getVarValue('files')),
      * ```
      * 
      * Each array item will have all file query item data and a caption key.
@@ -477,7 +477,7 @@ abstract class Block extends \yii\base\Object implements BlockInterface
      * Get the full array for the specific zaa-file-image-upload type
      * 
      * ```php
-     * 'imageList' => $this->zaaImageArrayUpload('images'),
+     * 'imageList' => $this->zaaImageArrayUpload($this->getVarValue('images')),
      * ```
      * 
      * Each array item will have all file query item data and a caption key.
