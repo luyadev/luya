@@ -41,6 +41,7 @@ class CommandController extends \luya\console\Command
         $this->output('- module/create');
         $this->output('- block/create');
         $this->output('- health');
+        $this->output('- storage/cleanup');
 
         return 0;
     }
