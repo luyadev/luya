@@ -1,7 +1,7 @@
 
 <script type="text/ng-template" id="createform.html">
-    <form ng-switch on="data.nav_item_type" class="card-panel">
-        <h5><?= \cmsadmin\Module::t('view_index_add_title'); ?></h5>
+    <form ng-switch on="data.nav_item_type">
+        
 
         <div class="row">
             <div class="input input--radios col s12">

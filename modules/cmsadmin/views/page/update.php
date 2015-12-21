@@ -292,24 +292,50 @@
                         </div>
                         <div class="row">
                             <div class="col s12" ng-controller="CopyPageController">
-                                Möchten Sie diese Seite von einer anderen Sprache erstellen?
-                                <button ng-click="loadItems()" ng-show="!isOpen">Ja</button>
-                                <div ng-show="isOpen">
-                                    <ul>
-                                        <li ng-repeat="item in items">{{item.lang.name}} - {{ item.title }} <i>({{item.alias}})</i> <button type="button" ng-click="select(item)" >Verwenden</button></li>
-                                    </ul>
-                                    
-                                    <div ng-show="itemSelection">
-                                        Titel: <input type="text" ng-model="itemSelection.title" />
-                                        <br />Alias: <input type="text" ng-model="itemSelection.alias" />
+                                <div class="card-panel">
+                                    <h5>Neue Seite aus Sprache</h5>
+                                    <p>Möchten Sie diese Seite von einer anderen bereits bestehenden Sprache erstellen?</p>
+                                    <p><button ng-click="loadItems()" ng-show="!isOpen" class="btn">Ja</button></p>
+                                    <div ng-show="isOpen">
+                                        <hr />
                                         
-                                        <button ng-click="save()">Seite erstellen</button>
+                                         
+                                        
+                                        <ul>
+                                            <li ng-repeat="item in items"><input type="radio" ng-model="selection" value="{{item.id}}"><label ng-click="select(item);">{{item.lang.name}} <i>&laquo; {{ item.title }} &raquo;</i></label></li>
+                                        </ul>
+                                        
+                                        <div ng-show="itemSelection">
+                                            <div class="row">
+                                                <div class="input input--text col s12">
+                                                    <label class="input__label"><?= \cmsadmin\Module::t('view_index_page_title'); ?></label>
+                                                    <div class="input__field-wrapper">
+                                                        <input name="text" type="text" class="input__field" ng-model="itemSelection.title" />
+                                                    </div>
+                                                </div>
+                                            <div class="row">
+                                            </div>    
+                                                <div class="input input--text col s12">
+                                                    <label class="input__label"><?= \cmsadmin\Module::t('view_index_page_alias'); ?></label>
+                                                    <div class="input__field-wrapper">
+                                                        <input name="text" type="text" class="input__field" ng-model="itemSelection.alias" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <button ng-click="save()" class="btn"><?= \cmsadmin\Module::t('view_index_page_btn_save'); ?></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div ng-controller="CmsadminCreateInlineController">
-                            <create-form data="data"></create-form>
+                        <div class="row">
+                            <div class="col s12" ng-controller="CmsadminCreateInlineController">
+                                <div class="card-panel">
+                                    <h5>Leere Seite erstellen</h5>
+                                    <create-form data="data"></create-form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="page {{AdminClassService.getClassSpace('onDragStart')}}" ng-show="isTranslated && loaded">

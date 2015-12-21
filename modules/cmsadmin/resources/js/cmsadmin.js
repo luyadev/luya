@@ -425,7 +425,10 @@
 		
 		$scope.itemSelection = false;
 		
+		$scope.selection = 0;
+		
 		$scope.select = function(item) {
+			$scope.selection = item.id;
 			$scope.itemSelection = angular.copy(item);
 		};
 		
