@@ -37,8 +37,8 @@ class StorageController extends \luya\console\Command
             if ($success) {
                 return $this->outputSuccess(count($fileList) . " files successful deleted.");
             }
-        } else {
-            return $this->outputSuccess("No orphaned files found.");
+            return $this->outputError("Cleanup could not be completed. Please look into error above.");
         }
+        return $this->outputSuccess("No orphaned files found.");
     }
 }
