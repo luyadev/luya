@@ -241,5 +241,29 @@ return [
     'btn_save' => 'Сохранить',
     
 // added translation in 1.0.0-beta3:
+
+    // NavItemModule
+    'model_navitemmodule_module_name_label' => 'Module name',
+
+    // NavItem
+    'model_navitem_title_label' => 'Page title',
+    'model_navitem_alias_label' => 'URL Path segment',
+
+    // NavItemPage
+    'model_navitempage_layout_label' => 'Layout',
+
+    // NavItemRedirect
+    'model_navitemredirect_type_label' => 'Type of redirect',
+    'model_navitemredirect_value_label' => 'Target of redirect',
+    
+    // missing from LineBlock
+    'block_line_linecolor_grey' => 'Grey',
+    'block_line_linecolor_black' => 'Black',
+
+    // LinkButtonBlock
+    'block_link_button_empty' => 'The link target is empty.',
+    
+    // cmsadmin/create page
+    'view_index_add_title' => 'Add new page',
     
 ];

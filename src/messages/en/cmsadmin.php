@@ -262,5 +262,8 @@ return [
 
     // LinkButtonBlock
     'block_link_button_empty' => 'The link target is empty.',
+    
+    // cmsadmin/create page
+    'view_index_add_title' => 'Add new page',
 ];
 

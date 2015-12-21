@@ -10,7 +10,6 @@ class FilterImporter extends \luya\base\Importer
     {
         $model = StorageEffect::find()->where(['identifier' => $identifier])->one();
         if ($model) {
-            $this->getImporter()->addLog('filters', 'effect "'.$identifier.'" updated');
             $model->setAttributes($fields, false);
             $model->update(false);
         } else {
@@ -51,8 +50,6 @@ class FilterImporter extends \luya\base\Importer
                 ['var' => 'height', 'label' => 'Hoehe in Pixel'],
             ]]),
         ]);
-
-        $this->getImporter()->addLog('filters', 'starting filter import:');
 
         foreach ($this->getImporter()->getDirectoryFiles('filters') as $file) {
             $filterClassName = $file['ns'];
