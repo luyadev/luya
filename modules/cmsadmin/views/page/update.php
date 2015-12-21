@@ -30,7 +30,6 @@
             <div class="block__body cmsadmin-tags" ng-click="toggleEdit()" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
             <form class="block__edit">
                 <div class="block__edit-content">
-                    <p class="block__config__text"><?= \cmsadmin\Module::t('view_update_blockcontent'); ?><span class="block__config__text-section"> - <?= \cmsadmin\Module::t('view_update_settings'); ?> - </span></p>
                     <div class="row" ng-repeat="field in block.vars">
                         <div class="block__help help help--is-right-aligned" ng-show="hasInfo(field.var)">
                             <div class="help__button">
@@ -42,7 +41,7 @@
                     </div>
                 </div>
                 <div class="block__config-content">
-                    <p class="block__config__text"><?= \cmsadmin\Module::t('view_update_blockcontent'); ?><span class="block__config__text-section"> - <?= \cmsadmin\Module::t('view_update_configs'); ?> - </span></p>
+                    <p class="block__config__text"><span class="block__config__text-section"><?= \cmsadmin\Module::t('view_update_configs'); ?></span></p>
                     <div class="row" ng-repeat="cfgField in block.cfgs">
                         <div class="block__help help help--is-right-aligned" ng-show="hasInfo(cfgField.var)">
                             <div class="help__button">
