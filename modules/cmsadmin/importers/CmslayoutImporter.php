@@ -54,7 +54,6 @@ class CmslayoutImporter extends \luya\base\Importer
                 if ($layoutItem) {
                     $match = $this->comparePlaceholders($_placeholders, json_decode($layoutItem->json_config, true));
                     if ($match) {
-                        $this->getImporter()->addLog('layouts', 'existing cmslayout '.$file.' does not have changed.');
                         continue;
                     }
                     $layoutItem->scenario = 'restupdate';

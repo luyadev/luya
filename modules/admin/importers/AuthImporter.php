@@ -8,7 +8,6 @@ class AuthImporter extends \luya\base\Importer
 {
     public function run()
     {
-        $this->getImporter()->addLog('auth', 'start auth importer');
         $modules = Yii::$app->getModules();
         $data = [
             'apis' => [],

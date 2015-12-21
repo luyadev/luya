@@ -24,7 +24,6 @@ class BlockImporter extends \luya\base\Importer
                 $block->insert();
                 $this->getImporter()->addLog('block', $ns.' new block has been added to database.');
             } else {
-                $this->getImporter()->addLog('block', $ns.' already in the database.');
                 $exists[] = $model['id'];
             }
         }
