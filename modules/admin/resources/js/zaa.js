@@ -244,6 +244,7 @@ function guid() {
 			request: function (config) {
 				config.headers = config.headers || {};
 				config.headers.Authorization = "Bearer " + authToken;
+				config.headers['X-CSRF-Token'] = $('meta[name="csrf-token"]').attr("content");
 				return config;
 			},
 			responseError: function(data) {
