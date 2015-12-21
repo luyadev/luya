@@ -263,6 +263,9 @@ return [
 
     // LinkButtonBlock
     'block_link_button_empty' => 'Es wurde noch kein Link angegeben.',
+    
+    // cmsadmin/create page
+    'view_index_add_title' => 'Neue Seite hinzufügen',
 
 ];
 
