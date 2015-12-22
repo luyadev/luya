@@ -4,6 +4,7 @@ namespace cmsadmin\models;
 
 use Yii;
 use admin\models\Lang;
+use yii\base\Exception;
 
 /**
  * Each creation of a navigation block requires the nav_item_type_id which need to be created first with NavItemType Model.
@@ -215,5 +216,127 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     public function getLang()
     {
         return $this->hasOne(\admin\models\Lang::className(), ['id' => 'lang_id']);
+    }
+
+    /**
+     *
+     * Copy content of type cms_nav_item_page to a target nav item. This will create a new entry in cms_nav_item_page and for every used block a new entry in cms_nav_item_page_block_item
+     *
+     * @param $targetNavItem nav item object
+     * @return bool
+     */
+    public function copyPageItem($targetNavItem)
+    {
+        if ($this->nav_item_type !== 1) {
+            return false;
+        }
+
+        $sourcePageItem = NavItemPage::findOne($this->nav_item_type_id);
+
+        if (!$sourcePageItem) {
+            return false;
+        }
+        $pageItem = new NavItemPage();
+        $pageItem->attributes = $sourcePageItem->toArray();
+
+        if (!$pageItem->save()) {
+            return false;
+        }
+
+        $targetNavItem->nav_item_type_id = $pageItem->id;
+        if (!$targetNavItem->save()) {
+            return false;
+        }
+
+        $pageBlocks = NavItemPageBlockItem::findAll(['nav_item_page_id' => $sourcePageItem->id]);
+
+        foreach ($pageBlocks as $block) {
+            $blockItem = new NavItemPageBlockItem();
+            $blockItem->attributes = $block->toArray();
+            $blockItem->nav_item_page_id = $pageItem->id;
+            $blockItem->insert();
+        }
+        return true;
+    }
+
+    /**
+     *
+     * Copy content of type cms_nav_item_module to a target nav item. This will create a new entry in cms_nav_item_module.
+     *
+     * @param $targetNavItem
+     * @return bool
+     */
+    public function copyModuleItem($targetNavItem)
+    {
+        if ($this->nav_item_type !== 2) {
+            return false;
+        }
+
+        $sourceModuleItem = NavItemModule::findOne($this->nav_item_type_id);
+        if (!$sourceModuleItem) {
+            return false;
+        }
+        $moduleItem = new NavItemModule();
+        $moduleItem->attributes = $sourceModuleItem->toArray();
+
+        if (!$moduleItem->save()) {
+            return false;
+        }
+
+        $targetNavItem->nav_item_type_id = $moduleItem->id;
+        return $targetNavItem->save();
+    }
+
+    /**
+     *
+     * Copy content of type cms_nav_item_redirect to a target nav item. This will create a new entry in cms_nav_item_redirect.
+     *
+     * @param $targetNavItem
+     * @return bool
+     */
+    public function copyRedirectItem($targetNavItem)
+    {
+        if ($this->nav_item_type !== 3) {
+            return false;
+        }
+
+        $sourceRedirectItem = NavItemRedirect::findOne($this->nav_item_type_id);
+        if (!$sourceRedirectItem) {
+            return false;
+        }
+        $redirectItem = new NavItemRedirect();
+        $redirectItem->attributes = $sourceRedirectItem->toArray();
+
+        if (!$redirectItem->save()) {
+            return false;
+        }
+
+        $targetNavItem->nav_item_type_id = $redirectItem->id;
+        return $targetNavItem->save();
+    }
+
+    /**
+     *
+     * Copy nav item type content.
+     *
+     * @param $targetNavItem
+     * @return bool
+     * @throws Exception type not recognized (1,2,3)
+     */
+    public function copyTypeContent($targetNavItem)
+    {
+        if (!$targetNavItem instanceof \yii\db\ActiveRecord) {
+            throw new Exception("Target nav item must be an instance of ActiveRecord.");
+        }
+        switch ($this->nav_item_type) {
+            case 1:
+                return $this->copyPageItem($targetNavItem);
+            case 2:
+                return $this->copyModuleItem($targetNavItem);
+            case 3:
+                return $this->copyRedirectItem($targetNavItem);
+        }
+
+        throw new Exception("Unable to find nav item type.");
     }
 }
