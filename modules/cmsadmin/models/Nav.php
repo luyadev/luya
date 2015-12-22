@@ -279,48 +279,46 @@ class Nav extends \yii\db\ActiveRecord
         $navItem->nav_id = $nav->id;
         return $navItem->save();
     }
-    
+
     /**
-     * 1. find item
-     * 2. create a new item (based on the find $navItemId type)
-     * 3. copy nav item type data (blocks, layout, or redirects, module, etc.)
-     * 
-     * @param unknown $navItemId
-     * @param unknown $langId
-     * @param unknown $title
-     * @param unknown $alias
-     * @return boolean
+     *
+     * Create a new nav item with a specific language, title and alias based on a given nav item id.
+     * All content of the source nav item will be copied dependent on the nav item type (page content, module link, redirect informations).
+     *
+     * @param $navItemId source nav item
+     * @param $langId (new) target language
+     * @param $title title of nav item
+     * @param $alias alias of nav item
+     * @return bool
      */
     public function createItemLanguageCopy($navItemId, $langId, $title, $alias)
     {
-        /*
-        $item = NavItem::findOne($navItemId);
-        
-        $model = new NavItem();
-        $model->attributes = $item->toArray();
-        $model->title = $title;
-        $model->alias = $alias;
-        $model->lang_id = $langId;
-        
-        
-        // save
-        // copy type (find type)
-        // copy content depending on type (blocks for example)
-        */
-        
-        return false;
+        $sourceNavItem = NavItem::findOne($navItemId);
+
+        if (!$sourceNavItem) {
+            return false;
+        }
+
+        if (NavItem::find()->where(['nav_id' => $sourceNavItem->nav_id, 'lang_id' => $langId])->one()) {
+            return false;
+        }
+
+        $navItem = new NavItem();
+        $navItem->attributes = $sourceNavItem->toArray();
+        $navItem->title = $title;
+        $navItem->alias = $alias;
+        $navItem->lang_id = $langId;
+        $navItem->setParentFromModel();
+
+        if (!$navItem->save()) {
+            return false;
+        }
+
+        return $sourceNavItem->copyTypeContent($navItem);
     }
 
-    public function createPageFromDraft(
-        $parentNavId,
-        $navContainerId,
-        $langId,
-        $title,
-        $alias,
-        $description,
-        $fromDraftNavId,
-        $isDraft = false
-    ) {
+    public function createPageFromDraft($parentNavId, $navContainerId, $langId, $title, $alias, $description, $fromDraftNavId, $isDraft = false)
+    {
         if (!$isDraft && empty($isDraft) && !is_numeric($isDraft)) {
             $isDraft = 0;
         }
@@ -383,16 +381,8 @@ class Nav extends \yii\db\ActiveRecord
         return $navItem->save();
     }
 
-    public function createPage(
-        $parentNavId,
-        $navContainerId,
-        $langId,
-        $title,
-        $alias,
-        $layoutId,
-        $description,
-        $isDraft = false
-    ) {
+    public function createPage($parentNavId, $navContainerId, $langId, $title, $alias, $layoutId, $description, $isDraft = false)
+    {
         $_errors = [];
 
         $nav = $this;
@@ -529,16 +519,8 @@ class Nav extends \yii\db\ActiveRecord
         return $navItemId;
     }
 
-    public function createRedirect(
-        $parentNavId,
-        $navContainerId,
-        $langId,
-        $title,
-        $alias,
-        $redirectType,
-        $redirectTypeValue,
-        $description
-    ) {
+    public function createRedirect($parentNavId, $navContainerId, $langId, $title, $alias, $redirectType, $redirectTypeValue, $description)
+    {
         $_errors = [];
 
         $nav = $this;
