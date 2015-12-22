@@ -93,7 +93,6 @@ abstract class Block extends \yii\base\Object implements BlockInterface
     {
         $params['callback'] = Inflector::camel2id($callbackName);
         $params['id'] = $this->getEnvOption('id', 0);
-
         return Url::toAjax('cms/block/index', $params);
     }
 

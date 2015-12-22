@@ -11,6 +11,7 @@ LUYA CHANGELOG
 
 **ISSUES**
 
+- `#671` Auto enabled csrf meta tags registration in luya web view base class.
 - `#669` fixed bug where ajax block csrf validation does not work as of get request informations.
 - `#653` Added storage consistency check to import and the new storage/cleanup console command
 - `#667` Enabled the csrf validation token in luya\web\Request (default setting).

@@ -10,6 +10,23 @@ class View extends \yii\web\View
     private $_publicHtml = null;
     
     /**
+     * @var boolean If csrf validation is enabled in the request component, and autoRegisterCsrf is enabled, then
+     * all the meta informations will be auto added to meta tags.
+     */
+    public $autoRegisterCsrf = true;
+    
+    public function init()
+    {
+        // call parent initializer
+        parent::init();
+        // auto register csrf tags if enabled
+        if ($this->autoRegisterCsrf && Yii::$app->request->enableCsrfValidation) {
+            $this->registerMetaTag(['name' => 'csrf-param', 'content' => Yii::$app->request->csrfParam], 'csrfParam');
+            $this->registerMetaTag( ['name' => 'csrf-token', 'content' => Yii::$app->request->getCsrfToken()], 'csrfToken');
+        }
+    }
+    
+    /**
      * @todo verify there is already a yii-way solution
      *
      * @param string $assetName
