@@ -149,18 +149,18 @@ class StorageImporter extends \luya\base\Importer
 
         $orphanedFileList = static::getOrphanedFileList();
 
-        if ($orphanedFileList) {
+        if ($orphanedFileList === false) {
+            $log["error"] = "unable to find a storage folder '".Yii::$app->storage->serverPath."' to compare.";
+        } else {
             $log["files_missing_in_table"] = count($orphanedFileList);
-    
+            
             $log["files_missing_in_file_table"] = static::removeMissingStorageFiles();
-    
+            
             $log["files_missing_in_image_table"] = static::removeMissingImageFiles();
-    
+            
             foreach (static::getOrphanedFileList() as $file) {
                 $log["files_to_remove"][] = $file;
             }
-        } else {
-            $log[] = 'unable to find a storage folder \''.Yii::$app->storage->serverPath.'\' to compare.';
         }
         $this->addLog("storage", $log);
     }
