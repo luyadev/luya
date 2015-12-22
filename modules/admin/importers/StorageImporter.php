@@ -160,7 +160,7 @@ class StorageImporter extends \luya\base\Importer
                 $log["files_to_remove"][] = $file;
             }
         } else {
-            $log[] = 'unable to find a storage folder to compare.';
+            $log[] = 'unable to find a storage folder \''.Yii::$app->storage->serverPath.'\' to compare.';
         }
         $this->addLog("storage", $log);
     }
