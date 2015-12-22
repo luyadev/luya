@@ -11,6 +11,17 @@ class StorageImporter extends \luya\base\Importer
 {
     public $queueListPosition = self::QUEUE_POSITION_LAST;
 
+    public static function getFindFilesDirectory()
+    {
+        $path = Yii::$app->storage->serverPath;
+        
+        if (is_dir($path) && file_exists($path)) {
+            return FileHelper::findFiles($path, ['except' => ['.*']]);
+        }
+        
+        return false;
+    }
+    
     /**
      *
      * 1. get all files from storage folder
@@ -19,9 +30,13 @@ class StorageImporter extends \luya\base\Importer
      *
      * @return array list of orphaned files
      */
-    static function getOrphanedFileList()
+    public static function getOrphanedFileList()
     {
-        $storageFileList = FileHelper::findFiles(Yii::$app->storage->serverPath, ['except' => ['.*']]);
+        $storageFileList = static::getFindFilesDirectory();
+        
+        if (!$storageFileList) {
+            return false;
+        }
 
         // check storage files
         $allStorageFileEntries = StorageFile::find()->where(['is_deleted' => 0])->indexBy('id')->asArray()->all();
@@ -58,9 +73,13 @@ class StorageImporter extends \luya\base\Importer
      *
      * @return int count of flagged 'is_deleted' entries
      */
-    static function removeMissingStorageFiles()
+    public static function removeMissingStorageFiles()
     {
-        $storageFileList = FileHelper::findFiles(Yii::$app->storage->serverPath, ['except' => ['.*']]);
+        $storageFileList = static::getFindFilesDirectory();
+        
+        if (!$storageFileList) {
+            return false;
+        }
 
         // check storage files
         $allStorageFileEntries = StorageFile::find()->where(['is_deleted' => 0])->indexBy('id')->all();
@@ -91,9 +110,13 @@ class StorageImporter extends \luya\base\Importer
      *
      * @return int count of removed entries
      */
-    static function removeMissingImageFiles()
+    public static function removeMissingImageFiles()
     {
-        $storageFileList = FileHelper::findFiles(realpath(Yii::$app->storage->serverPath), ['except' => ['.*']]);
+        $storageFileList = static::getFindFilesDirectory();
+        
+        if (!$storageFileList) {
+            return false;
+        }
 
         // check storage files
         $allStorageFileEntries = StorageFile::find()->where(['is_deleted' => 0])->indexBy('id')->all();
@@ -124,18 +147,21 @@ class StorageImporter extends \luya\base\Importer
     {
         $log = [];
 
-        $orphanedFileList = StorageImporter::getOrphanedFileList();
+        $orphanedFileList = static::getOrphanedFileList();
 
-        $log["files_missing_in_table"] = count($orphanedFileList);
-
-        $log["files_missing_in_file_table"] = StorageImporter::removeMissingStorageFiles();
-
-        $log["files_missing_in_image_table"] = StorageImporter::removeMissingImageFiles();
-
-        foreach (StorageImporter::getOrphanedFileList() as $file) {
-            $log["files_to_remove"][] = $file;
+        if ($orphanedFileList) {
+            $log["files_missing_in_table"] = count($orphanedFileList);
+    
+            $log["files_missing_in_file_table"] = static::removeMissingStorageFiles();
+    
+            $log["files_missing_in_image_table"] = static::removeMissingImageFiles();
+    
+            foreach (static::getOrphanedFileList() as $file) {
+                $log["files_to_remove"][] = $file;
+            }
+        } else {
+            $log[] = 'unable to find a storage folder to compare.';
         }
-
         $this->addLog("storage", $log);
     }
 }
