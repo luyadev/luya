@@ -265,5 +265,17 @@ return [
     
     // cmsadmin/create page
     'view_index_add_title' => 'Add new page',
+    'view_index_add_page_from_language' => 'Add page from langauge',
+    'view_index_add_page_from_language_info' => 'Möchten Sie diese Seite von einer anderen bereits bestehenden Sprache erstellen?',
+    'view_index_add_page_empty' => 'Add new empty page',
+    'view_index_language_loading' => 'Loading page',
+    
+    // drafs
+    'draft_title' => 'Drafts',
+    'draft_text' => 'Hier können Sie alle erstellten Vorlagen einsehen und diese Bearbeiten. Um eine Vorlage zu verwenden erstellen Sie eine neue Seite.',
+    'draft_column_id' => 'ID',
+    'draft_column_title' => 'Title',
+    'draft_column_action' => 'Action',
+    'draft_edit_button' => 'Edit',
     
 ];

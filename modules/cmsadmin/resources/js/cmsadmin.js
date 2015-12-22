@@ -411,7 +411,7 @@
 		
 	});
 	
-	zaa.controller("CopyPageController", function($scope, $http) {
+	zaa.controller("CopyPageController", function($scope, $http, AdminToastService) {
 		
 		var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 		
@@ -444,7 +444,12 @@
 		$scope.save = function() {
 			$scope.itemSelection['toLangId'] = $scope.NavItemController.lang.id;
 			$http.post('admin/api-cms-nav/create-from-page', $.param($scope.itemSelection), headers).success(function(response) {
-				console.log('succes', response);
+				if (response) {
+					AdminToastService.success('The page translation has been created successfull.', 4000);
+					$scope.NavItemController.refresh();
+				} else {
+					AdminToastService.error('Error while creating translation', 5000);
+				}
 			});
 		}
 		

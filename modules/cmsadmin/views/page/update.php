@@ -280,7 +280,7 @@
                         <div class="alert alert--info"><?= \cmsadmin\Module::t('view_update_draft_no_lang_error'); ?></div>
                     </div>
                     <div class="alert alert--info" ng-show="!loaded">
-                        <p>Daten der Seite werden geladen.</p>
+                        <p><?= \cmsadmin\Module::t('view_index_language_loading'); ?></p>
                     </div>
                     <div class="page" ng-show="!isTranslated && navData.is_draft == 0 && loaded">
                         <div class="row">
@@ -293,18 +293,14 @@
                         <div class="row">
                             <div class="col s12" ng-controller="CopyPageController">
                                 <div class="card-panel">
-                                    <h5>Neue Seite aus Sprache</h5>
-                                    <p>Möchten Sie diese Seite von einer anderen bereits bestehenden Sprache erstellen?</p>
+                                    <h5><?= \cmsadmin\Module::t('view_index_add_page_from_language'); ?></h5>
+                                    <p><?= \cmsadmin\Module::t('view_index_add_page_from_language_info'); ?></p>
                                     <p><button ng-click="loadItems()" ng-show="!isOpen" class="btn">Ja</button></p>
                                     <div ng-show="isOpen">
                                         <hr />
-                                        
-                                         
-                                        
                                         <ul>
                                             <li ng-repeat="item in items"><input type="radio" ng-model="selection" value="{{item.id}}"><label ng-click="select(item);">{{item.lang.name}} <i>&laquo; {{ item.title }} &raquo;</i></label></li>
                                         </ul>
-                                        
                                         <div ng-show="itemSelection">
                                             <div class="row">
                                                 <div class="input input--text col s12">
@@ -332,7 +328,7 @@
                         <div class="row">
                             <div class="col s12" ng-controller="CmsadminCreateInlineController">
                                 <div class="card-panel">
-                                    <h5>Leere Seite erstellen</h5>
+                                    <h5><?= \cmsadmin\Module::t('view_index_add_page_empty'); ?></h5>
                                     <create-form data="data"></create-form>
                                 </div>
                             </div>

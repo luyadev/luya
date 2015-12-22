@@ -1,19 +1,20 @@
-<div ng-controller="DraftsController" class="page" style="margin:20px;">
-    <div class="row">
-        <div class="col s12">
-            <h1>Vorlagen</h1>
+<div class="row">
+    <div class="col s12">
+        <h5><?= \cmsadmin\Module::t('draft_title'); ?></h5>
+        <p><?= \cmsadmin\Module::t('draft_text'); ?></p>
+        <div class="card-panel" ng-controller="DraftsController">
             <table class="striped">
                 <thead>
                 <tr>
-                    <th>id</th>
-                    <th>Titel</th>
-                    <th>Aktion</th>
+                    <th><?= \cmsadmin\Module::t('draft_column_id'); ?></th>
+                    <th><?= \cmsadmin\Module::t('draft_column_title'); ?></th>
+                    <th><?= \cmsadmin\Module::t('draft_column_action'); ?></th>
                 </tr>
                 </thead>
                 <tr ng-repeat="item in menuData.drafts">
                     <td>{{item.id}}</td>
                     <td>{{item.title}}</td>
-                    <td><button type="button" ng-click="go(item.id)" class="btn btn-flat">Bearbeiten</button>
+                    <td><button type="button" ng-click="go(item.id)" class="btn btn-flat"><?= \cmsadmin\Module::t('draft_edit_button'); ?></button>
                 </tr>
             </table>
         </div>
