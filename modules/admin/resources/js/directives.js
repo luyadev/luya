@@ -80,7 +80,6 @@
                     }
                 })
             }, template: function() {
-                //return '<div class="input-field col s{{grid}}"><input placeholder="{{placeholder}}" name="{{name}}" id="{{id}}" ng-class="{\'invalid\' : !isValid }" type="number" ng-model="model" min="0" /><label for="{{id}}">{{label}}</label></div>';
                 return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" name="{{name}}" ng-model="model" type="number" min="0" class="input__field" ng-class="{\'invalid\' : !isValid }" placeholder="{{placeholder}}" /></div></div>';
             }
         }
@@ -99,7 +98,6 @@
                 "placeholder": "@placeholder"
             },
             template: function() {
-                //return '<div class="input-field col s{{grid}}"><input placeholder="{{placeholder}}" id="{{id}}" name="{{name}}" ng-model="model" type="text" /><label for="{{id}}">{{label}}</label></div>';
                 return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" maxlength="255" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /></div></div>';
             }
         }
@@ -118,7 +116,6 @@
                 "placeholder": "@placeholder"
             },
             template: function() {
-                //return '<div class="input-field col s{{grid}}"><textarea placeholder="{{placeholder}}" id="{{id}}" name="{{name}}" ng-model="model" class="materialize-textarea"></textarea><label for="{{id}}">{{label}}</label></div>';
                 return '<div class="input input--textarea" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><textarea id="{{id}}" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}"></textarea></div></div>';
             }
         }
@@ -166,7 +163,6 @@
                 });
             },
             template: function() {
-                // return '<div class="col s{{grid}}"><label for="{{id}}">{{label}}</label><select name="{{name}}" id="{{id}}" class="browser-default" ng-options="item.value as item.label for item in options" ng-model="model"></select></div>';
                 return '<div class="input input--select" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><select name="{{name}}" id="{{id}}" class="input__field browser-default" ng-options="item.value as item.label for item in options" ng-model="model"></select></div>';
             }
         }
@@ -914,7 +910,7 @@
         }
     });
     
-    zaa.directive('storageImageUpload', function($http, $filter, ServiceFiltersData, ServiceImagesData) {
+    zaa.directive('storageImageUpload', function($http, $filter, ServiceFiltersData, ServiceImagesData, AdminToastService) {
         return {
             restrict : 'E',
             scope : {
@@ -970,11 +966,12 @@
                             if (!success.error) {
                                 scope.imagesDataReload().then(function(r) {
                                     scope.ngModel = success.id;
+                                    AdminToastService.success('Das Bild wurde erfolgreich erstellt.', 2000);
                                     scope.imageLoading = false;
                                 });
                             }
                         }).error(function(error) {
-                            alert('Beim Anwenden des Filters auf die Datei ist ein Fehler Passiert');
+                        	AdminToastService.error('Beim Anwenden des Filters auf die Datei ist ein Fehler Passiert', 5000);
                             scope.imageLoading = false;
                         });
                     } else {

@@ -99,13 +99,13 @@
 		$scope.deleteErrors = [];
 		
 		$scope.deleteItem = function(id, $event) {
-			AdminToastService.confirm('Möchten Sie diesen Eintrag wirklich entfernen? Diese Aktion kann nicht rückgängig gemacht werden.', function($timeout, $toast) {
+			AdminToastService.confirm(i18n['js_ngrest_rm_page'], function($timeout, $toast) {
 				$scope.deleteErrors = [];
 				$http.delete($scope.config.apiEndpoint + '/'+id).success(function(r) {
 					$scope.loadList();
 
 					$toast.close();
-					AdminToastService.success('Der Datensatz wurde erfolgreich entfernt.', 2000);
+					AdminToastService.success(i18n['js_ngrest_rm_confirm'], 2000);
 				}).error(function(r) {
 					for (var i in r) {
 						angular.forEach(r[i], function(v, k) {
@@ -122,7 +122,7 @@
 				$scope.data.update = data;
 				$scope.switchTo(2);
 			}).error(function(data) {
-				AdminToastService.error('Während des Ladens ist ein Fehler aufgetreten.', 2000);
+				AdminToastService.error(i18n['js_ngrest_error'], 2000);
 			});
 		};
 		
@@ -151,7 +151,7 @@
 			
 			$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true)).success(function(data) {
 				$scope.loadList();
-				AdminToastService.success('Der Datensatz wurde erfolgreich aktualisiert.', 2000);
+				AdminToastService.success(i18n['js_ngrest_rm_update'], 2000);
 				$scope.switchTo(0);
 			}).error(function(data) {
 				$scope.updateErrors = data;
@@ -165,7 +165,7 @@
 			$http.post($scope.config.apiEndpoint, angular.toJson($scope.data.create, true)).success(function(data) {
 				$scope.loadList();
 				$scope.data.create = {};
-				AdminToastService.success('Der neue Datensatz wurde erfolgreich erstellt.', 2000);
+				AdminToastService.success(i18n['js_ngrest_rm_success'], 2000);
 				$scope.switchTo(0);
 			}).error(function(data) {
 				$scope.createErrors = data;
@@ -241,7 +241,7 @@
 						$scope.tags.push({id: response.data, name: tagName});
 						AdminToastService.success(tagName + ' wurde gespeichert.', 2000);
 					} else {
-						AdminToastService.error(tagName + ' existiert bereits und kann nicht erneut hinzugefügt werden.', 2000);
+						AdminToastService.error(tagName + ' ' + i18n['js_tag_exists'], 2000);
 					}
 					$scope.newTagName = null;
 				});
@@ -253,7 +253,7 @@
 
 				$scope.relation[tag.id] = response.data;
 
-				AdminToastService.success('Tag Informationen wurde gespeichert.', 2000);
+				AdminToastService.success(i18n['js_tag_success'], 2000);
 			});
 		};
 		
@@ -490,7 +490,7 @@
 			$http.get('admin/api-admin-timestamp', { ignoreLoadingBar: true }).success(function(response) {
 				$scope.forceReload = response.forceReload;
 				if ($scope.forceReload) {
-					AdminToastService.confirm('Das System wurde aktualisiert un muss neu geladen werden, bitte speichern Sie das aktuelle Formular. (Wenn Sie auf "Abbrechen" klicken wird dieser Dialog in 30 Sekunden wieder erscheinen.)', function($timeout, $toast) {
+					AdminToastService.confirm(i18n['js_admin_reload'], function($timeout, $toast) {
 						$scope.reload();
 					});
 				}

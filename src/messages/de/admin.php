@@ -128,5 +128,15 @@ return [
     'model_loginform_wrong_user_or_password' => 'Falscher Benutzer oder Passwort.',
     
     'ngrest_select_no_selection' => 'Keine Auswahl',
+    
+    // js data
+    'js_ngrest_error' => 'Während des Ladens ist ein Fehler aufgetreten.',
+    'js_ngrest_rm_page' => 'Möchten Sie diesen Eintrag wirklich entfernen? Diese Aktion kann nicht rückgängig gemacht werden.',
+    'js_ngrest_rm_confirm' => 'Der Datensatz wurde erfolgreich entfernt.',
+    'js_ngrest_rm_update' => 'Der Datensatz wurde erfolgreich aktualisiert.',
+    'js_ngrest_rm_success' => 'Der neue Datensatz wurde erfolgreich erstellt.',
+    'js_tag_exists' => 'existiert bereits und kann nicht erneut hinzugefügt werden.',
+    'js_tag_success' => 'Tag Informationen wurde gespeichert.',
+    'js_admin_reload' => 'Das System wurde aktualisiert un muss neu geladen werden, bitte speichern Sie das aktuelle Formular. (Wenn Sie auf "Abbrechen" klicken wird dieser Dialog in 30 Sekunden wieder erscheinen.)',
 ];
 

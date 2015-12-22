@@ -24,9 +24,6 @@ $this->beginPage()
         }
     </style>
     <?php $this->head(); ?>
-    <script>
-        var authToken = '<?=$user->getAuthToken();?>';
-    </script>
 </head>
 <body ng-cloak>
 <?php $this->beginBody(); ?>
