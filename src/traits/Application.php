@@ -22,6 +22,19 @@ trait Application
     
     public $remoteToken = false;
 
+    public $webrootDirectory = 'public_html';
+    
+    private $_webroot = null;
+    
+    public function getWebroot()
+    {
+        if ($this->_webroot === null) {
+            $this->_webroot = realpath(realpath($this->basePath) . DIRECTORY_SEPARATOR . $this->webrootDirectory);
+        }
+        
+        return $this->_webroot;
+    }
+    
     public $luyaCoreComponents = [
         'mail' => ['class' => 'luya\components\Mail'],
     ];

@@ -21,7 +21,7 @@ class Bootstrap extends \luya\base\Bootstrap
     public function beforeRun($app)
     {
         Yii::setAlias('@web', $app->basePath);
-        Yii::setAlias('@webroot', dirname(getcwd()));
+        Yii::setAlias('@webroot', $app->webroot);
     }
 
     /**
