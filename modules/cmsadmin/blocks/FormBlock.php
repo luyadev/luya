@@ -83,6 +83,7 @@ class FormBlock extends \cmsadmin\base\Block
             'name' => Yii::$app->request->post('name'),
             'email' => Yii::$app->request->post('email'),
             'mailerResponse' => $this->getPostResponse(),
+            'csrf' => Yii::$app->request->csrfToken,
         ];
     }
 
@@ -124,6 +125,7 @@ class FormBlock extends \cmsadmin\base\Block
                         '{% endif %}'.
                     '{% endif %}'.
                     '<form class="form-horizontal" role="form" method="post" action="">'.
+                        '<input type="hidden" name="_csrf" value="{{extras.csrf}}" />'.
                         '<div class="form-group">'.
                             '<label for="name" class="col-sm-2 control-label">{{ extras.nameLabel }}</label>'.
                             '<div class="col-sm-10">'.

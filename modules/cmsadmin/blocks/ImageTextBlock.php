@@ -115,7 +115,8 @@ class ImageTextBlock extends \cmsadmin\base\Block
     {
         return [
             'imageSource' => $this->getImageSource(),
-            'imageAdmin' => ($image = Yii::$app->storage->getImage($this->getVarValue('imageId'))) ? $image->applyFilter('medium-thumbnail')->toArray() : false,
+            'imageAdmin' => $this->zaaImageUpload($this->getVarValue('imageId'), 'medium-thumbnail'),
+            //'imageAdmin' => ($image = Yii::$app->storage->getImage($this->getVarValue('imageId'))) ? $image->applyFilter('medium-thumbnail')->toArray() : false,
             'imagePosition' => $this->getVarValue('imagePosition', 'left'),
             'imageWidth' => $this->getImageSource() ? @getimagesize($this->getImageSource())[0] : 0,
             'margin' => $this->getCfgValue('margin', $this->defaultMargin),
