@@ -66,7 +66,7 @@ $this->beginPage()
                         <?= Luya::t('admin', 'layout_select_file'); ?>
                     </span>
         </div>
-        <span ng-click="reset()" ng-show="fileinfo!=null"><i class="material-icons">remove_circle</i></span>
+        <span class="fileupload__reset" ng-click="reset()" ng-show="fileinfo!=null"><i class="material-icons">remove_circle</i></span>
         <span class="fileupload__path" ng-bind="fileinfo.name"></span>
 
         <modal is-modal-hidden="modal"><storage-file-manager selection="true" /></modal>

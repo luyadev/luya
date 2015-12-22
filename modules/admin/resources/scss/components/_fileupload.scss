@@ -10,18 +10,32 @@
 }
 
 .fileupload__btn {
+	display: inline-block;
 	width: 165px;
 	box-sizing: content-box;
-	vertical-align: top;
+	vertical-align: middle;
+}
 
-	// Width with padding : 225px
+.fileupload__reset {
+	display: inline-block;
+	vertical-align: middle;
+	width: 24px;
+	color: color("red", "base");
+	transition: 0.25s ease transform;
+
+	&:hover {
+		cursor: pointer;
+		color: color("red", "darken-3");
+	}
 }
 
 .fileupload__path {
+	display: inline-block;
+	vertical-align: middle;
 
 	// Overwrite default materializecss styles
 
-	width: calc(100% - 245px) !important; // 100% - (width + padding of fileupload__btn)
+	width: calc(100% - 265px - 24px) !important; // 100% - (width + padding of fileupload__btn)
 	height: 36px !important;
 	margin-left: 15px !important;
 	color: color("grey", "lighten-1") !important;
