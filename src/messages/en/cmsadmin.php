@@ -28,7 +28,7 @@ return [
     'block_form_default_message_label' => 'Message',
     'block_form_default_message_error' => 'Please enter a messag',
     'block_form_default_send_label' => 'Submit',
-    'block_form_default_send_error' => 'Sorry we have exprience an error while sending your message.',
+    'block_form_default_send_error' => 'An error occurred when sending your message.',
     'block_form_default_send_success' => 'Thanks for your request.',
     'block_form_default_mail_subject' => 'Contact request',
 
@@ -59,7 +59,7 @@ return [
     'block_image_text_btnlabel_label' => 'Button label',
     'block_image_text_btnhref_label' => 'Button link adress',
     'block_image_text_targetblank_label' => 'Open link an a new window',
-    'block_image_text_help_texttype' => 'The texttype is strictly referring to the text and not the heading.',
+    'block_image_text_help_texttype' => 'The text type is strictly referring to the text and not the heading.',
     'block_image_text_no_image' => 'No image have been uploaded yet.',
     'block_image_text_no_text' => 'No text have been insereted yet.',
 
@@ -111,7 +111,7 @@ return [
     'block_map_maptype_roadmap' => 'Street map',
     'block_map_maptype_satellitemap' => 'Satellite map',
     'block_map_maptype_hybrid' => 'Satellite map with road names',
-    'block_map_no_content' => 'No address have been provided yet.',
+    'block_map_no_content' => 'No address has been provided yet.',
 
     // Module Block
     'block_module_name' => 'Module',
@@ -266,34 +266,34 @@ return [
     // cmsadmin/create page
     'view_index_add_title' => 'Add new page',
     'view_index_add_page_from_language' => 'Add page from langauge',
-    'view_index_add_page_from_language_info' => 'Möchten Sie diese Seite von einer anderen bereits bestehenden Sprache erstellen?',
+    'view_index_add_page_from_language_info' => 'Would you like to copy the contents from another language when creating this page?',
     'view_index_add_page_empty' => 'Add new empty page',
     'view_index_language_loading' => 'Loading page',
     
     // drafts
     'draft_title' => 'Drafts',
-    'draft_text' => 'Hier können Sie alle erstellten Vorlagen einsehen und diese Bearbeiten. Um eine Vorlage zu verwenden erstellen Sie eine neue Seite.',
+    'draft_text' => 'Here you can see and edit existing drafts. Drafts can be applied when creating a new page.',
     'draft_column_id' => 'ID',
     'draft_column_title' => 'Title',
     'draft_column_action' => 'Action',
     'draft_edit_button' => 'Edit',
     
     // js cmsadmin.js
-    'js_added_translation_ok' => 'Die Übersetzung dieser Seite wurde erfolgreich erstellt.',
-    'js_added_translation_error' => 'Error while creating translation',
-    'js_page_add_exists' => 'In dieser Ebene existiert bereits eine Seite mit dieser URL.',
-    'js_page_property_refresh' => 'Die Eigenschaften wurden aktualisiert.',
-    'js_page_confirm_delete' => 'Möchten Sie diese Seite wirklich löschen?',
-    'js_page_delete_error_cause_redirects' => 'Diese Seite kann nicht gelöscht werden, löschen Sie zuerst die Weiterleitungen.',
+    'js_added_translation_ok' => 'The translation of this page was created successfully.',
+    'js_added_translation_error' => 'An error occurred when creating the translation',
+    'js_page_add_exists' => 'There already exists a page with the same URL in this group.',
+    'js_page_property_refresh' => 'The properties were updated.',
+    'js_page_confirm_delete' => 'Do you really want to delete this page?',
+    'js_page_delete_error_cause_redirects' => 'This page can not be deleted. You first have to delete all redirections to this page.',
     'js_state_online' => '%title% online',
     'js_state_offline' => '%title% offline',
-    'js_state_hidden' => '%title% versteckt',
-    'js_state_visible' => '%title% sichtbar',
-    'js_state_is_home' => '%title% ist Startseite',
-    'js_state_is_not_home' => '%title% ist keine Startseite',
-    'js_page_item_update_ok' => 'Die Seite «%title%» wurde aktualisiert!',
-    'js_page_block_update_ok' => 'Block «%name%» wurde aktualisiert!',
-    'js_page_block_remove_ok' => 'Block «%name%» wurde entfernt!',
-    'js_page_block_visbility_change' => 'Die sichtbarkeit von «%name%» wurde erfolgreich geändert.',
+    'js_state_hidden' => '%title% hidden',
+    'js_state_visible' => '%title% visible',
+    'js_state_is_home' => '%title% is root page',
+    'js_state_is_not_home' => '%title% is no root page',
+    'js_page_item_update_ok' => 'The page «%title%» was updated!',
+    'js_page_block_update_ok' => 'The block «%name%» was updated!',
+    'js_page_block_remove_ok' => 'The block «%name%» was deleted!',
+    'js_page_block_visbility_change' => 'The visibility of «%name%» was changed successfully.',
 ];
 
