@@ -146,7 +146,7 @@ return [
     'js_dir_no_selection' => 'No entries available yet. Add new entries by clicking the <span class="green-text">+</span> below to the left.',
     'js_dir_image_upload_ok' => 'The image was created successfully.',
     'js_dir_image_filter_error' => 'There was an error when applying the filter to the file.',
-    'js_dir_upload_wait' => 'You data is being uploaded and processed. This can take several minutes.',
+    'js_dir_upload_wait' => 'Your data is being uploaded and processed. This can take several minutes.',
     'js_dir_manager_upload_image_ok' => 'The file was uploaded successfully.',
     'js_dir_manager_rm_file_confirm' => 'Do you really want to delete this file?',
     'js_dir_manager_rm_file_ok' => 'The file was deleted successfully.',
