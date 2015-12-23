@@ -260,7 +260,7 @@
                 return '<div class="input input--multiple-checkboxes"  ng-class="{\'input--hide-label\': i18n}">' +
                             '<label class="input__label">{{label}}</label>' +
                             '<div class="input__field-wrapper">' +
-                                '<input class="input__searchfield" type="text" ng-change="filtering()" ng-model="searchString" placeholder="Suchen" /> {{optionitems.length}} von {{options.items.length}}'+
+                                '<input class="input__searchfield" type="text" ng-change="filtering()" ng-model="searchString" placeholder="Suchen" /> {{optionitems.length}} ' + i18n['js_dir_till'] + '{{options.items.length}}'+
                                 '<div ng-repeat="(k, item) in optionitems track by k">' +
                                     '<input type="checkbox" ng-checked="isChecked(item)" id="{{random}}_{{k}}" ng-click="toggleSelection(item)" />' +
                                     '<label for="{{random}}_{{k}}">{{item.label}}</label>' +
@@ -336,9 +336,7 @@
                                 '<input ng-blur="reform()" type="text" ng-model="year" placeholder="{{placeholders.year}}" class="input__field" style="width:100px;" /><span class="input__divider input__divider--centered input__divider--icon"><i class="material-icons">access_time</i></span>' +
                                 '<input ng-blur="reform()" type="text" ng-model="hour" placeholder="{{placeholders.hour}}" class="input__field" /><span class="input__divider input__divider--centered">:</span>' +
                                 '<input ng-blur="reform()" type="text" ng-model="min" placeholder="{{placeholders.minute}}" class="input__field" />' +
-                                '<button class="input__button btn btn--small grey darken-1" type="button" ng-click="now()">' +
-                                    'Aktuelles Datum setzen' +
-                                '</button>' +
+                                '<button class="input__button btn btn--small grey darken-1" type="button" ng-click="now()">' + i18n['js_dir_set_date'] + '</button>' +
                             '</div>' +
                        '</div>';
             }
@@ -402,9 +400,7 @@
                                 '<input ng-blur="reform()" type="text" ng-model="day" placeholder="{{placeholders.day}}" class="input__field" /><span class="input__divider">.</span>' +
                                 '<input ng-blur="reform()" type="text" ng-model="month" placeholder="{{placeholders.month}}" class="input__field" /><span class="input__divider">.</span>' +
                                 '<input ng-blur="reform()" type="text" ng-model="year" placeholder="{{placeholders.year}}" class="input__field" style="width:100px;" />' +
-                                '<button class="input__button btn btn--small grey darken-1" type="button" ng-click="today()">' +
-                                    'Aktuelles Datum setzen' +
-                                '</button>' +
+                                '<button class="input__button btn btn--small grey darken-1" type="button" ng-click="today()">' + i18n['js_dir_set_date'] + '</button>' +
                             '</div>'
                         '</div>';
             }
@@ -425,7 +421,7 @@
             controller: function($scope) {
                 
                 if ($scope.model == undefined) {
-                    $scope.model = [{}];
+                    $scope.model = [{0:''}];
                 }
                 
                 $scope.addColumn = function() {
@@ -515,9 +511,8 @@
                             '<table class="zaa-table">'+
                                 '<thead>'+
                                     '<tr>'+
-                                        '<td width="90">Zeile</td>'+
+                                        '<td width="30"></td>'+
                                         '<td data-ng-repeat="(hk, hr) in model[0] track by hk">'+
-                                            '<p class="zaa-table-col-title">Spalte {{hk}}</p>'+
                                             '<div class="zaa-table__cell-toolbar-top">'+
                                                 '<button ng-show="{{hk > 0}}" ng-click="moveLeft(hk)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn--cellmove-left"><i class="material-icons" style="transform: rotate(180deg);">play_arrow</i></button>' +
                                                 '<div class="zaa-table__cell-toolbar-center">'+
@@ -531,8 +526,7 @@
                                     '</tr>'+
                                 '</thead>' +
                                 '<tr data-ng-repeat="(key, row) in model track by key">'+
-                                    '<td>'+                                                                             
-                                        '<p class="zaa-table-row-title">#{{key+1}}</p>'+ 
+                                    '<td>'+                                                  
                                         '<button type="button" class="btn-floating zaa-table__btn zaa-table__btn--del" ng-click="removeRow(key)">'+
                                             '<i class="material-icons">delete</i>'+
                                         '</button>'+
@@ -546,8 +540,8 @@
                                     '</td>'+
                                 '</tr>'+
                             '</table>'+
-                            '<button ng-click="addRow()" type="button" class="[ waves-effect waves-light ] btn btn--small">Zeile hinzufügen <i class="material-icons right">add</i></button>'+
-                            '<button ng-click="addColumn()" type="button" style="float:right;" class="[ waves-effect waves-light ] btn btn--small">Spalte einfügen <i class="material-icons right">add</i></button>'+
+                            '<button ng-click="addRow()" type="button" class="[ waves-effect waves-light ] btn btn--small">'+i18n['js_dir_table_add_row']+' <i class="material-icons right">add</i></button>'+
+                            '<button ng-click="addColumn()" type="button" style="float:right;" class="[ waves-effect waves-light ] btn btn--small">'+i18n['js_dir_table_add_column']+' <i class="material-icons right">add</i></button>'+
                         '</div>';
             }
         }
@@ -626,7 +620,7 @@
                 return '<div class="input input--image-array imagearray" ng-class="{\'input--hide-label\': i18n}">' +
                             '<label class="input__label">{{label}}</label>' +
                             '<div class="input__field-wrapper">' +
-                                '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="green-text">+</span> links unten ein.</p>' +
+                                '<p class="list__no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
                                 '<div ng-repeat="(key,image) in model track by key" class="row list__item">' +
 
                                     '<div class="list__left row">' +
@@ -635,7 +629,7 @@
                                         '</div>' +
                                         '<div class="input-field col s4">' +
                                             '<textarea ng-model="image.caption" class="materialize-textarea"></textarea>' +
-                                            '<label>Beschreibung</label>' +
+                                            '<label>'+i18n['js_dir_image_description']+'</label>' +
                                         '</div>' +
                                     '</div>' +
 
@@ -681,7 +675,7 @@
                 return '<div class="input input--file-array filearray" ng-class="{\'input--hide-label\': i18n}">' +
                             '<label class="input__label">{{label}}</label>' +
                             '<div class="input__field-wrapper">' +
-                                '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="green-text">+</span> links unten ein.</p>' +
+                                '<p class="list__no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
                                 '<div ng-repeat="(key,file) in model track by key" class="row list__item">' +
 
                                     '<div class="list__left row">' +
@@ -690,7 +684,7 @@
                                         '</div>' +
                                         '<div class="input-field col s4">' +
                                             '<input type="text" ng-model="file.caption" class="filearray__description-input" />' +
-                                            '<label>Beschreibung</label>' +
+                                            '<label>'+i18n['js_dir_image_description']+'</label>' +
                                         '</div>' +
                                     '</div>' +
 
@@ -773,9 +767,9 @@
             },
             template: function() {
                 return '<div class="input input--list list" ng-class="{\'input--hide-label\': i18n}">' +
-                            '<label class="input__label">Auflistung</label>' +
+                            '<label class="input__label">{{label}}</label>' +
                             '<div class="input__field-wrapper">' +
-                                '<p class="list__no-entry" ng-hide="model.length > 0">Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="green-text">+</span> links unten ein.</p>' +
+                                '<p class="list__no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
                                 '<div ng-repeat="(key,row) in model track by key" class="list__item">' +
                                     '<div class="list__left" style="width:calc(100% - 140px)">' +
                                         '<input class="list__input" type="text" ng-model="row.value" />' +
@@ -966,12 +960,12 @@
                             if (!success.error) {
                                 scope.imagesDataReload().then(function(r) {
                                     scope.ngModel = success.id;
-                                    AdminToastService.success('Das Bild wurde erfolgreich erstellt.', 2000);
+                                    AdminToastService.success(i18n['js_dir_image_upload_ok'], 2000);
                                     scope.imageLoading = false;
                                 });
                             }
                         }).error(function(error) {
-                        	AdminToastService.error('Beim Anwenden des Filters auf die Datei ist ein Fehler Passiert', 5000);
+                        	AdminToastService.error(i18n['js_dir_image_filter_error'], 7000);
                             scope.imageLoading = false;
                         });
                     } else {
@@ -1105,7 +1099,7 @@
                 $scope.$watch('uploadingfiles', function (uploadingfiles) {
                     if (uploadingfiles != null) {
                         $scope.uploadResults = 0;
-                        LuyaLoading.start('Ihr Daten werden hochgeladen und verarbeitet. Dies kann einige Minuten dauern.');
+                        LuyaLoading.start(i18n['js_dir_upload_wait']);
                         for (var i = 0; i < uploadingfiles.length; i++) {
                             $scope.errorMsg = null;
                             (function (uploadingfiles) {
@@ -1119,6 +1113,8 @@
                     if ($scope.uploadingfiles != null) {
                         if (n == $scope.uploadingfiles.length) {
                             $scope.filesDataReload().then(function() {
+                            	console.log('fertritg');
+                            	AdminToastService.success(i18n['js_dir_manager_upload_image_ok'], 2000);
                                 LuyaLoading.stop();
                             });
                         }
@@ -1304,13 +1300,13 @@
                 };
                 
                 $scope.removeFiles = function() {
-                    AdminToastService.confirm('Möchten Sie diese Datei wirklich entfernen?', function($timeout, $toast) {
+                    AdminToastService.confirm(i18n['js_dir_manager_rm_file_confirm'], function($timeout, $toast) {
                         $http.post('admin/api-admin-storage/filemanager-remove-files', $.param({'ids' : $scope.selectedFiles}), {
                             headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
                         }).success(function(transport) {
                             $scope.filesDataReload().then(function() {
                                 $toast.close();
-                                AdminToastService.success("Datei wurde erfolgreich gelöscht.", 2000);
+                                AdminToastService.success(i18n['js_dir_manager_rm_file_ok'], 2000);
                                 $scope.selectedFiles = [];
                             });
                         });

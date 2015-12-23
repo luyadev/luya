@@ -271,7 +271,7 @@ return [
     'view_index_add_page_empty' => 'Leere Seite erstellen',
     'view_index_language_loading' => 'Daten der Seite werden geladen.',
     
-    // drafs
+    // drafts
     'draft_title' => 'Vorlagen',
     'draft_text' => 'Hier können Sie alle erstellten Vorlagen einsehen und diese Bearbeiten. Um eine Vorlage zu verwenden erstellen Sie eine neue Seite.',
     'draft_column_id' => 'ID',

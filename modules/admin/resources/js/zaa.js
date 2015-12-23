@@ -1,4 +1,4 @@
-var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angular-loading-bar", "ngFileUpload", "ngWig", "slugifier", "afkl.lazyImage"]);
+var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angular-loading-bar", "ngFileUpload", "ngWig", "slugifier"]);
 
 
 /**
@@ -177,7 +177,7 @@ function guid() {
 		return {
 			start : function(myMessage) {
 				if (myMessage == undefined) {
-					stateMessage = 'Der Server verarbeitet Ihre Daten. Bitte warten Sie einen Augenblick.';
+					stateMessage = i18n['js_zaa_server_proccess'];
 				} else {
 					stateMessage = myMessage;
 				}

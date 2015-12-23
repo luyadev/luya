@@ -12,7 +12,7 @@ class Main extends \luya\web\Asset
     ];
 
     public $js = [
-        'js/lazy-image.min.js', // Lazy loading image
+        //'js/lazy-image.min.js', // Lazy loading image
         'js/zaa.js',
         'js/services.js',
         'js/directives.js',

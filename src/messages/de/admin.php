@@ -138,5 +138,18 @@ return [
     'js_tag_exists' => 'existiert bereits und kann nicht erneut hinzugefügt werden.',
     'js_tag_success' => 'Tag Informationen wurde gespeichert.',
     'js_admin_reload' => 'Das System wurde aktualisiert un muss neu geladen werden, bitte speichern Sie das aktuelle Formular. (Wenn Sie auf "Abbrechen" klicken wird dieser Dialog in 30 Sekunden wieder erscheinen.)',
+    'js_dir_till' => 'von',
+    'js_dir_set_date' => 'Aktuelles Datum setzen',
+    'js_dir_table_add_row' => 'Zeile hinzufügen',
+    'js_dir_table_add_column' => 'Spalte einfügen',
+    'js_dir_image_description' => 'Beschreibung',
+    'js_dir_no_selection' => 'Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="green-text">+</span> links unten ein.',
+    'js_dir_image_upload_ok' => 'Das Bild wurde erfolgreich erstellt.',
+    'js_dir_image_filter_error' => 'Beim Anwenden des Filters auf die Datei ist ein Fehler Passiert',
+    'js_dir_upload_wait' => 'Ihr Daten werden hochgeladen und verarbeitet. Dies kann einige Minuten dauern.',
+    'js_dir_manager_upload_image_ok' => 'Datei wurde erfolgreich hochgeladen.',
+    'js_dir_manager_rm_file_confirm' => 'Möchten Sie diese Datei wirklich entfernen?',
+    'js_dir_manager_rm_file_ok' => 'Datei wurde erfolgreich gelöscht.',
+    'js_zaa_server_proccess' => 'Der Server verarbeitet Ihre Daten. Bitte warten Sie einen Augenblick.',
 ];
 
