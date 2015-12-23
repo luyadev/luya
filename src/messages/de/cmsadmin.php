@@ -278,5 +278,23 @@ return [
     'draft_column_title' => 'Titel',
     'draft_column_action' => 'Aktion',
     'draft_edit_button' => 'Bearbeiten',
+    
+    // js cmsadmin.js
+    'js_added_translation_ok' => 'Die Übersetzung dieser Seite wurde erfolgreich erstellt.',
+    'js_added_translation_error' => 'Error while creating translation',
+    'js_page_add_exists' => 'In dieser Ebene existiert bereits eine Seite mit dieser URL.',
+    'js_page_property_refresh' => 'Die Eigenschaften wurden aktualisiert.',
+    'js_page_confirm_delete' => 'Möchten Sie diese Seite wirklich löschen?',
+    'js_page_delete_error_cause_redirects' => 'Diese Seite kann nicht gelöscht werden, löschen Sie zuerst die Weiterleitungen.',
+    'js_state_online' => '%title% online',
+    'js_state_offline' => '%title% offline',
+    'js_state_hidden' => '%title% versteckt',
+    'js_state_visible' => '%title% sichtbar',
+    'js_state_is_home' => '%title% ist Startseite',
+    'js_state_is_not_home' => '%title% ist keine Startseite',
+    'js_page_item_update_ok' => 'Die Seite «%title%» wurde aktualisiert!',
+    'js_page_block_update_ok' => 'Block «%name%» wurde aktualisiert!',
+    'js_page_block_remove_ok' => 'Block «%name%» wurde entfernt!',
+    'js_page_block_visbility_change' => 'Die sichtbarkeit von «%name%» wurde erfolgreich geändert.',
 ];
 

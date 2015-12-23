@@ -12,6 +12,16 @@ function guid() {
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
+function i18nParam(varName, params) {
+	var varValue = i18n[varName];
+	
+	angular.forEach(params, function(value, key) {
+		varValue = varValue.replace("%"+key+"%", value);
+	})
+	
+	return varValue;
+}
+
 /* zephir angular admin */
 /* resolve controller: https://github.com/angular-ui/ui-router/wiki#resolve */
 (function() {
