@@ -20,7 +20,6 @@ class Module extends \admin\base\Module
     public $apis = [
         'api-admin-common' => 'admin\apis\CommonController',
         'api-admin-remote' => 'admin\apis\RemoteController',
-        //'api-admin-defaults' => 'admin\apis\DefaultsController',
         'api-admin-storage' => 'admin\apis\StorageController',
         'api-admin-menu' => 'admin\apis\MenuController',
         'api-admin-timestamp' => 'admin\apis\TimestampController',
@@ -43,8 +42,28 @@ class Module extends \admin\base\Module
         'admin\assets\Main',
     ];
 
+    public $registerJsTranslation = [
+        'js_ngrest_rm_page', 'js_ngrest_rm_confirm', 'js_ngrest_error', 'js_ngrest_rm_update', 'js_ngrest_rm_success', 'js_tag_exists', 'js_tag_success', 'js_admin_reload'
+    ];
+    
     public $moduleMenus = [];
 
+    private $_jsTranslations = [];
+    
+    public function getJsTranslations()
+    {
+        return $this->_jsTranslations;
+    }
+    
+    public function setJsTranslations(array $translations)
+    {
+        foreach($translations as $module => $data) {
+            foreach($data as $key) {
+                $this->_jsTranslations[$key] = \luya\Module::t($module, $key);
+            }
+        }
+    }
+    
     public function getMenu()
     {
         return $this

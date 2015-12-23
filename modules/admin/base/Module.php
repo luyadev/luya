@@ -58,6 +58,13 @@ class Module extends \luya\base\Module
     private $_permissionRoutes = [];
 
     /**
+     * 
+     * @var array Register translations from admin modules, to make them available in javascript files trough
+     * the `i18n['yourTranslation']` object.
+     */    
+    public $registerJsTranslation = [];
+    
+    /**
      * Checks if a config exist in the linked property based on the provided `$apiEndpoint`.
      *
      * @param string $apiEndpoint The identifier of an apiEndpoint. ApiEndpoints are listed in the module class.
