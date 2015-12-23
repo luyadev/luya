@@ -38,7 +38,7 @@ class StorageImporter extends \luya\base\Importer
             return false;
         }
 
-        // check storage files
+        // check storage files which are not flagged as deleted
         $allStorageFileEntries = StorageFile::find()->where(['is_deleted' => 0])->indexBy('id')->asArray()->all();
 
         foreach ($storageFileList as $key => $file) {
@@ -52,17 +52,20 @@ class StorageImporter extends \luya\base\Importer
 
         // check image filter files
         $imageList = StorageImage::find()->asArray()->all();
+        // check all storage files including is_deleted entries
+        $allStorageFileEntries = StorageFile::find()->indexBy('id')->asArray()->all();
 
         foreach ($imageList as $image) {
-            $filterImage = $image['filter_id'] . '_' . $allStorageFileEntries[$image['file_id']]['name_new_compound'];
-            foreach ($storageFileList as $key => $file) {
-                if ($filterImage == pathinfo($file, PATHINFO_BASENAME)) {
-                    unset($storageFileList[$key]);
-                    break;
+            if (array_key_exists($image['file_id'], $allStorageFileEntries)) {
+                $filterImage = $image['filter_id'] . '_' . $allStorageFileEntries[$image['file_id']]['name_new_compound'];
+                foreach ($storageFileList as $key => $file) {
+                    if ($filterImage == pathinfo($file, PATHINFO_BASENAME)) {
+                        unset($storageFileList[$key]);
+                        break;
+                    }
                 }
             }
         }
-
         return $storageFileList;
     }
 
@@ -119,7 +122,7 @@ class StorageImporter extends \luya\base\Importer
         }
 
         // check storage files
-        $allStorageFileEntries = StorageFile::find()->where(['is_deleted' => 0])->indexBy('id')->all();
+        $allStorageFileEntries = StorageFile::find()->indexBy('id')->all();
 
         $count = 0;
 
@@ -127,19 +130,22 @@ class StorageImporter extends \luya\base\Importer
         $imageList = StorageImage::find()->all();
 
         foreach ($imageList as $image) {
-            $filterImage = $image['filter_id'] . '_' . $allStorageFileEntries[$image['file_id']]['name_new_compound'];
-            $found = false;
-            foreach ($storageFileList as $key => $file) {
-                if ($filterImage == pathinfo($file, PATHINFO_BASENAME)) {
-                    $found = true;
-                    break;
+            if (array_key_exists($image['file_id'], $allStorageFileEntries)) {
+                $filterImage = $image['filter_id'] . '_' . $allStorageFileEntries[$image['file_id']]['name_new_compound'];
+                $found = false;
+                foreach ($storageFileList as $key => $file) {
+                    if ($filterImage == pathinfo($file, PATHINFO_BASENAME)) {
+                        $found = true;
+                        break;
+                    }
+                }
+                if (!$found) {
+                    $image->delete();
+                    $count++;
                 }
             }
-            if (!$found) {
-                $image->delete();
-                $count++;
-            }
         }
+
         return $count;
     }
 
