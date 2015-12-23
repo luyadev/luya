@@ -34,7 +34,7 @@ return [
 
     // admin/dashboard
     'dashboard_title' => 'Welcome.',
-    'dashboard_text' => 'You can switch between modules witgatih the main navigation at the top of the screen.<br />The Sidenavigation on the left, gives you access to functions of the selected module.',
+    'dashboard_text' => 'You can switch between modules in the main navigation at the top of the screen.<br />The side navigation to the left gives you access to functions of the selected module.',
 
     // layout
     'layout_select_file' => 'Choose file',
@@ -131,24 +131,24 @@ return [
     
     // js data
     'js_ngrest_error' => 'An error occured while loading.',
-    'js_ngrest_rm_page' => 'Möchten Sie diesen Eintrag wirklich entfernen? Diese Aktion kann nicht rückgängig gemacht werden.',
-    'js_ngrest_rm_confirm' => 'Der Datensatz wurde erfolgreich entfernt.',
-    'js_ngrest_rm_update' => 'Der Datensatz wurde erfolgreich aktualisiert.',
-    'js_ngrest_rm_success' => 'Der neue Datensatz wurde erfolgreich erstellt.',
-    'js_tag_exists' => 'existiert bereits und kann nicht erneut hinzugefügt werden.',
-    'js_tag_success' => 'Tag Informationen wurde gespeichert.',
-    'js_admin_reload' => 'Das System wurde aktualisiert un muss neu geladen werden, bitte speichern Sie das aktuelle Formular. (Wenn Sie auf "Abbrechen" klicken wird dieser Dialog in 30 Sekunden wieder erscheinen.)',
-    'js_dir_till' => 'von',
-    'js_dir_set_date' => 'Aktuelles Datum setzen',
-    'js_dir_table_add_row' => 'Zeile hinzufügen',
-    'js_dir_table_add_column' => 'Spalte einfügen',
-    'js_dir_image_description' => 'Beschreibung',
-    'js_dir_no_selection' => 'Noch keine Einträge erfasst. Neue Einträge fügen Sie mit dem <span class="green-text">+</span> links unten ein.',
-    'js_dir_image_upload_ok' => 'Das Bild wurde erfolgreich erstellt.',
-    'js_dir_image_filter_error' => 'Beim Anwenden des Filters auf die Datei ist ein Fehler Passiert',
-    'js_dir_upload_wait' => 'Ihr Daten werden hochgeladen und verarbeitet. Dies kann einige Minuten dauern.',
-    'js_dir_manager_upload_image_ok' => 'Datei wurde erfolgreich hochgeladen.',
-    'js_dir_manager_rm_file_confirm' => 'Möchten Sie diese Datei wirklich entfernen?',
-    'js_dir_manager_rm_file_ok' => 'Datei wurde erfolgreich gelöscht.',
+    'js_ngrest_rm_page' => 'Do you really want to delete this entry? This can not be undone.',
+    'js_ngrest_rm_confirm' => 'The record was deleted successfully.',
+    'js_ngrest_rm_update' => 'The record was updated successfully.',
+    'js_ngrest_rm_success' => 'The new record was inserted successfully.',
+    'js_tag_exists' => 'exists already and can not be added.',
+    'js_tag_success' => 'Tag information was saved.',
+    'js_admin_reload' => 'The system was updated and has to be reloaded. Please save your changes in the current form. (Clicking "cancel" will display this dialog again in 30 seconds.)',
+    'js_dir_till' => 'to',
+    'js_dir_set_date' => 'Set current date',
+    'js_dir_table_add_row' => 'Add row',
+    'js_dir_table_add_column' => 'Add column',
+    'js_dir_image_description' => 'Description',
+    'js_dir_no_selection' => 'No entries available yet. Add new entries by clicking the <span class="green-text">+</span> below to the left.',
+    'js_dir_image_upload_ok' => 'The image was created successfully.',
+    'js_dir_image_filter_error' => 'There was an error when applying the filter to the file.',
+    'js_dir_upload_wait' => 'You data is being uploaded and processed. This can take several minutes.',
+    'js_dir_manager_upload_image_ok' => 'The file was uploaded successfully.',
+    'js_dir_manager_rm_file_confirm' => 'Do you really want to delete this file?',
+    'js_dir_manager_rm_file_ok' => 'The file was deleted successfully.',
 ];
 
