@@ -23,6 +23,15 @@
     }
     tbody {
         tr {
+			&:not(:first-of-type):not(:last-of-type) {
+				.zaa-table__cell-toolbar-side {
+					width: 60px;
+				}
+				.zaa-table__btn--cellmove-bottom {
+					left: 25px;
+				}
+			}
+
             &:nth-child(even) {
                 //Every second row
                 background-color: color("grey", "lighten-4");
