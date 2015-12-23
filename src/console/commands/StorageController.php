@@ -2,8 +2,8 @@
 
 namespace luya\console\commands;
 
-use admin\importers\StorageImporter;
 use Yii;
+use admin\importers\StorageImporter;
 
 class StorageController extends \luya\console\Command
 {
@@ -15,6 +15,10 @@ class StorageController extends \luya\console\Command
     {
         $fileList = StorageImporter::getOrphanedFileList();
 
+        if ($fileList === false) {
+            return $this->outputError("Could not find the storage folder to clean up.");
+        }
+        
         if (count($fileList) > 0) {
             $this->output(print_r($fileList, true));
         }
