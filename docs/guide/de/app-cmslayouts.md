@@ -1,10 +1,14 @@
 CMS Layout
 ==========
-Sobald *LUYA* mit dem CMS-Modul benutzt wird (dies ist bei einer Standardinstallation der Fall).
+Sobald *LUYA* mit dem CMS-Modul benutzt wird (dies ist bei einer Standardinstallation der Fall) können die CMS Layouts verwendet werden.
 
-Alle CMS-Layouts werden im Projekt Views Verzeichnis `views` im Ordner `cmslayouts` abgelegt. Wenn wir nun ein neues Layout erstellen möchten mit 2 Spalten und dies `2columns` nennen würde der Pfad für die Twig Datei wie folgt aussehen `views/cmslayouts/2columns.twig`.
+Alle CMS Layouts werden im Projekt Views Verzeichnis `views` im Ordner `cmslayouts` abgelegt. Wenn wir nun ein neues Layout erstellen möchten mit 2 Spalten und dies `2columns` nennen würde der Pfad für die Twig Datei wie folgt aussehen 
 
-> Alle Layouts sind [Twig](http://twig.sensiolabs.org/) Dateien mit der Endung *.twig*.
+```
+views/cmslayouts/2columns.twig
+```
+
+> Alle Layouts sind [Twig](http://twig.sensiolabs.org/) Dateien mit der Endung *.twig*, so können die Daten beim Import geparst werden.
 
 Du kannst nun in deiner neuen *2columns.twig* Datei ein Markup hinterlegen und definieren wo die Platzhalter aus dem CMS System mit Benutzer-Blöcken abgefüllt werden dürfen. Um einen Platzhalter innerhalb des Layouts zu markieren fügst du den Code `{{placeholders.left}}` ein, wobei *left* die Bezeichnung des Platzerhalters ist. In unserem Beispiel mit 2 Platzerhaltern könnten ein Layout zbsp. wie folgt aussehn:
 
@@ -18,6 +22,8 @@ Du kannst nun in deiner neuen *2columns.twig* Datei ein Markup hinterlegen und d
     </div>
 </div>
 ```
+
+> Du kann in den CMS Layouts alle [Luya Twig funktionen](luya-twig.md) benutzen.
 
 Dies wird dem Benutzer nun 2 Platzerhalter zur verfügung stellen an dem er Blöcke platzieren kann.
 
@@ -39,6 +45,4 @@ Der Import Prozess wird zurück geben was gemacht wurde:
 )
 ```
 
-> Die Namen der Platzhalter (labels) können im Administrationbereich unter *CMS-EInstellunge->Layouts* angepasst werden.
-
-> Twig Funktionen funktionieren auf in einem CMS Layout.
+> Die Namen der Platzhalter (labels) können im Administrationsbereich unter *CMS-Einstellunge -> Layouts* angepasst werden.
