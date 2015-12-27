@@ -8,10 +8,10 @@ return [
     'button_send' => 'Отправить',
 
     // login
-    'login_pre_title' => 'Авторизоваться как {title}',
+    'login_pre_title' => 'Авторизоваться в {title}',
     'login_mail' => 'Email',
     'login_password' => 'Пароль',
-    'login_btn_login' => 'Логин',
+    'login_btn_login' => 'Войти',
     'login_securetoken' => 'Секретный код',
     'login_securetoken_info' => 'Введите код безопасности, который был отправлен на ваш адрес электронной почты.',
 
@@ -121,4 +121,33 @@ return [
     'aws_changepassword_new_pass_retry' => 'Повторите пароль',
     
 // added translation in 1.0.0-beta3:
+
+    // models/LoginForm
+    'model_loginform_email_label' => 'Email',
+    'model_loginform_password_label' => 'Пароль',
+    'model_loginform_wrong_user_or_password' => 'Неверный логин или пароль.',
+
+    'ngrest_select_no_selection' => 'Ничего не выбрано',
+
+    // js data
+    'js_ngrest_error' => 'Произошла ошибка при загрузке.',
+    'js_ngrest_rm_page' => 'Вы действительно хотите удалить эту запись? Это действие нельяз будет отменить.',
+    'js_ngrest_rm_confirm' => 'Запись успешно удалена.',
+    'js_ngrest_rm_update' => 'Запись успешно изменена.',
+    'js_ngrest_rm_success' => 'Новая запись успешно добавлена.',
+    'js_tag_exists' => 'Такой тег уже существует.',
+    'js_tag_success' => 'Тег сохранен.',
+    'js_admin_reload' => 'Система была обновлена и должна быть перезагружена. Пожалуйста сохраните свои изменения в текущей форме. (Если нажать "отмена" это окно появится снова через 30 секунд.)',
+    'js_dir_till' => 'в',
+    'js_dir_set_date' => 'Установите текущую дату',
+    'js_dir_table_add_row' => 'Добавить строку',
+    'js_dir_table_add_column' => 'Добавить колонку',
+    'js_dir_image_description' => 'Описание',
+    'js_dir_no_selection' => 'Нет доступных записей. Для создание записи нажмите на <span class="green-text">+</span> ниже слева.',
+    'js_dir_image_upload_ok' => 'Изображение было успешно создано.',
+    'js_dir_image_filter_error' => 'При применении фильтра произошла ошибка.',
+    'js_dir_upload_wait' => 'Ваши данные загружаются и обрабатываются. Это может занять несколько минут.',
+    'js_dir_manager_upload_image_ok' => 'Файл был успешно загружен.',
+    'js_dir_manager_rm_file_confirm' => 'Выдействительно хотите удалить файл?',
+    'js_dir_manager_rm_file_ok' => 'Файл был успешно удален.',
 ];
