@@ -19,9 +19,13 @@ class RegisterController extends \account\base\Controller
         ];
     }
 
+    /**
+     * @todo implementation
+     * @param unknown $hash
+     */
     public function actionActivate($hash)
     {
-        var_dump($hash);
+        // activation process
     }
     
     public function actionIndex()
@@ -37,7 +41,9 @@ class RegisterController extends \account\base\Controller
         if (Yii::$app->request->post()) {
             $model->load(Yii::$app->request->post());
             if (($user = $model->register()) !== false) {
-                //Yii::$app->mail->compose('Registrierung', 'Sie haben sich erfolgreich registriert.<br />E-Mail: '.$model->email.'<br />Passwort: '.$model->plainPassword.'<br /><br />Sie können Sich nun einloggen.')->address($model->email)->send();
+                
+                $state = null;
+                
                 if ($this->module->registerConfirmEmail) {
                     // send mail
                     $hashKey = Yii::$app->security->generateRandomString();
@@ -57,7 +63,7 @@ class RegisterController extends \account\base\Controller
                     $state = 2;
                 }
                 
-                if (!$state) {
+                if ($state === null) {
                     $mail = $this->renderPartial('mail/_login.php', ['user' => $user]);
                     // the user is registered directly.
                     $user->is_mail_verified = 1;

@@ -1,4 +1,4 @@
-<? if (!$state): ?>
+<?php if (!$state): ?>
 <? $form = \yii\widgets\ActiveForm::begin(['id' => 'login-form','options' => ['class' => 'form-horizontal']]); ?>
 <?= $form->field($model, 'gender')->dropdownlist(['' => 'Bitte wählen', 0 => 'Frau', 1 => 'Herr']); ?>
 <?= $form->field($model, 'company') ?>
@@ -18,11 +18,11 @@
 <? \yii\widgets\ActiveForm::end(); ?>
 <? endif; ?>
 
-<? if ($state == 1): ?>
+<?php if ($state == 1): ?>
 <p>Sie haben sich erfolgreich registriert, bitte bestätigten Sie den Link welcheln wir Ihnen per E-Mail versendet haben.</p>
-<? elseif ($state == 2): ?>
+<?php elseif ($state == 2): ?>
 <p>Erfolgreich registriert. Sie werden von einem Administrator freigeschalten.</p>
-<? elseif ($state == 3): ?>
+<?php elseif ($state == 3): ?>
 <p>Sie haben sich erfolgreich registriert und könnnen sich jetzt einloggen</p>
 <a href="<?= luya\helpers\Url::toManager('account/default/index'); ?>">Login</a>
-<? endif; ?>
+<?php endif; ?>
