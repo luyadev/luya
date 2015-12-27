@@ -26,7 +26,7 @@ return [
     
     // menu items
     'menu_access_item_user' => 'Benutzer',
-    'menu_access_item_group' => 'Benutzergruppen',
+    'menu_access_item_group' => 'Group',
     'menu_system_item_language' => 'Sprachen',
     'menu_system_item_tags' => 'Tags',
     'menu_images_item_effects' => 'Effekte',
@@ -48,7 +48,7 @@ return [
     'layout_filemenager_remove_selected_files' => 'markierte Dateien löschen',
     'layout_filemanager_move_selected_files' => 'Verschieben nach',
     'layout_filemanager_upload_error' => 'Fehler beim Hochladen der Datei',
-    'layout_filemanager_col_name' => 'Name',
+    'layout_filemenager_col_name' => 'Name',
     'layout_filemanager_col_type' => 'Typ',
     'layout_filemanager_col_date' => 'Erstellungsdatum',
     'layout_filemanager_detail_name' => 'Dateiname',

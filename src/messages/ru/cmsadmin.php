@@ -177,7 +177,7 @@ return [
     'view_index_type_module' => 'Модуль',
     'view_index_type_redirect' => 'Переадресация',
     'view_index_as_draft' => 'Как в шаблоне',
-    'view_index_as_draft_help' => 'Вы хотитеопределить новую страницу в качестве шаблона?',
+    'view_index_as_draft_help' => 'Вы хотите определить новую страницу в качестве шаблона?',
     'view_index_no' => 'Нет',
     'view_index_yes' => 'Да',
     'view_index_page_title' => 'Название страницы',
@@ -219,7 +219,7 @@ return [
     'view_update_no_properties_exists' => 'Не все свойства были сохранены для этой страницы.',
     'view_update_draft_no_lang_error' => 'Черновики не имеют языковых харектиристик.',
     'view_update_no_translations' => 'Эта страница еще не переведена.',
-    'view_update_page_is_module' => 'СТраница является <b>модулем</b>.',
+    'view_update_page_is_module' => 'Страница является <b>модулем</b>.',
     'view_update_page_is_redirect_internal' => 'Эта страница имеет <b>внутреннюю переадресацию</b> на <show-internal-redirection nav-id="typeData.value" />.',
     'view_update_page_is_redirect_external' => 'Эта страница имеет <b>внешнюю переадресацию</b> на <a ng-href="{{typeData.value}}">{{typeData.value}}</a>',
     
@@ -243,39 +243,56 @@ return [
 // added translation in 1.0.0-beta3:
 
     // NavItemModule
-    'model_navitemmodule_module_name_label' => 'Module name',
+    'model_navitemmodule_module_name_label' => 'Название модуля',
 
     // NavItem
-    'model_navitem_title_label' => 'Page title',
-    'model_navitem_alias_label' => 'URL Path segment',
+    'model_navitem_title_label' => 'Название страницы',
+    'model_navitem_alias_label' => 'URL путь',
 
     // NavItemPage
-    'model_navitempage_layout_label' => 'Layout',
+    'model_navitempage_layout_label' => 'Шаблон',
 
     // NavItemRedirect
-    'model_navitemredirect_type_label' => 'Type of redirect',
-    'model_navitemredirect_value_label' => 'Target of redirect',
+    'model_navitemredirect_type_label' => 'Тип редиректа',
+    'model_navitemredirect_value_label' => 'Цель редиректа',
     
     // missing from LineBlock
-    'block_line_linecolor_grey' => 'Grey',
-    'block_line_linecolor_black' => 'Black',
+    'block_line_linecolor_grey' => 'Серый',
+    'block_line_linecolor_black' => 'Черный',
 
     // LinkButtonBlock
-    'block_link_button_empty' => 'The link target is empty.',
+    'block_link_button_empty' => 'Ссылка цели пуста.',
     
     // cmsadmin/create page
-    'view_index_add_title' => 'Add new page',
-    'view_index_add_page_from_language' => 'Add page from langauge',
-    'view_index_add_page_from_language_info' => 'Möchten Sie diese Seite von einer anderen bereits bestehenden Sprache erstellen?',
-    'view_index_add_page_empty' => 'Add new empty page',
-    'view_index_language_loading' => 'Loading page',
+    'view_index_add_title' => 'Доавить новую страницу',
+    'view_index_add_page_from_language' => 'Добавить перевод для страницы',
+    'view_index_add_page_from_language_info' => 'Хотите скопировать контент другого языка для создания записи?',
+    'view_index_add_page_empty' => 'Добавить пустую страницу',
+    'view_index_language_loading' => 'Загрузка страницы',
     
-    // drafs
-    'draft_title' => 'Drafts',
-    'draft_text' => 'Hier können Sie alle erstellten Vorlagen einsehen und diese Bearbeiten. Um eine Vorlage zu verwenden erstellen Sie eine neue Seite.',
+    // drafts
+    'draft_title' => 'Черновики',
+    'draft_text' => 'Здесь вы можете просматривать и редактировать существующие черновики. Черновики могут быть применены при создании новой страницы.',
     'draft_column_id' => 'ID',
-    'draft_column_title' => 'Title',
-    'draft_column_action' => 'Action',
-    'draft_edit_button' => 'Edit',
+    'draft_column_title' => 'Название',
+    'draft_column_action' => 'Действие',
+    'draft_edit_button' => 'Редактировать',
     
+    // js cmsadmin.js
+    'js_added_translation_ok' => 'Перевод этой страницы был успешно создан.',
+    'js_added_translation_error' => 'Произошла ошибка при создании перевода',
+    'js_page_add_exists' => 'Уже существует страница с таким же URL в этой группе.',
+    'js_page_property_refresh' => 'Свойства были обновлены.',
+    'js_page_confirm_delete' => 'Вы действительно хотите удалить эту страницу?',
+    'js_page_delete_error_cause_redirects' => 'Эта страница не может быть удалена. Вы должны сначала удалить все зависимости этой страницы.',
+    'js_state_online' => '%title% в сети',
+    'js_state_offline' => '%title% не в сети',
+    'js_state_hidden' => '%title% скрыт',
+    'js_state_visible' => '%title% виден',
+    'js_state_is_home' => '%title% корневая страница',
+    'js_state_is_not_home' => '%title% не корневая страница',
+    'js_page_item_update_ok' => 'Страница «%title%» была обновлена!',
+    'js_page_block_update_ok' => 'Блок «%name%» был обновлен!',
+    'js_page_block_remove_ok' => 'Блок «%name%» был удален!',
+    'js_page_block_visbility_change' => 'Видимость «%name%» была успешно изменена.',
 ];

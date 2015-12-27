@@ -34,7 +34,7 @@ return [
 
     // admin/dashboard
     'dashboard_title' => 'Welcome.',
-    'dashboard_text' => 'You can switch between modules in the main navigation at the top of the screen.<br />The side navigation to the left gives you access to functions of the selected module.',
+    'dashboard_text' => 'You can switch between modules witgatih the main navigation at the top of the screen.<br />The Sidenavigation on the left, gives you access to functions of the selected module.',
 
     // layout
     'layout_select_file' => 'Choose file',
@@ -48,7 +48,7 @@ return [
     'layout_filemenager_remove_selected_files' => 'Delete marked files',
     'layout_filemanager_move_selected_files' => 'Move to',
     'layout_filemanager_upload_error' => 'Error while uploading file.',
-    'layout_filemanager_col_name' => 'Name',
+    'layout_filemenager_col_name' => 'Name',
     'layout_filemanager_col_type' => 'Type',
     'layout_filemanager_col_date' => 'Creation Date',
     'layout_filemanager_detail_name' => 'Filename',
