@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     // Blocks
 
     // AudioBlock
@@ -180,7 +179,7 @@ return [
     'view_index_no' => 'Nein',
     'view_index_yes' => 'Ja',
     'view_index_page_title' => 'Seitentitel',
-    'view_index_page_alias' => 'URL Pfadsegment',
+    'view_index_page_alias' => 'Pfadsegment',
     'view_index_page_meta_description' => 'Beschreibung (Meta Description für Google)',
     'view_index_page_nav_container' => 'Navigations-Container',
     'view_index_page_parent_page' => 'Übergeordnete Seite',
@@ -207,7 +206,7 @@ return [
     'view_update_drop_blocks' => 'Inhaltsblöcke hier platzieren',
     'view_update_blockcontent' => 'Block content',
     'view_update_settings' => 'Einstellungen',
-    'view_update_configs' => 'Optionale Konfiguration',
+    'view_update_config' => 'Optionale Konfiguration',
     'view_update_btn_save' => 'Speichern',
     'view_update_btn_cancel' => 'Abbrechen',
     'view_update_holder_state_on' => 'Platzhalter einklappen',
@@ -238,21 +237,4 @@ return [
     'btn_abort' => 'Abbrechen',
     'btn_refresh' => 'Aktualisieren',
     'btn_save' => 'Speichern',
-
-    // added translation in 1.0.0-beta2:
-
-    // NavItemModule
-    'model_navitemmodule_module_name_label' => 'Modul Name',
-
-    // NavItem
-    'model_navitem_title_label' => 'Seitentitel',
-    'model_navitem_alias_label' => 'Pfadsegment',
-
-    // NavItemPage
-    'model_navitempage_layout_label' => 'Layout',
-
-    // NavItemRedirect
-    'model_navitemredirect_type_label' => 'Art der Weiterleitung',
-    'model_navitemredirect_value_label' => 'Ziel der Weiterleitung',
 ];
-

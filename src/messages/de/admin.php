@@ -99,7 +99,7 @@ return [
     'model_group_description' => 'Beschreibung',
     'model_group_user_buttons' => 'Benutzer',
     'model_group_btn_aws_groupauth' => 'Berechtigungen',
-
+    
     //views/ngrest/crud
     'ngrest_crud_btn_list' => 'Einträge',
     'ngrest_crud_btn_add' => 'Hinzufügen',
@@ -119,12 +119,4 @@ return [
     'aws_changepassword_succes' => 'Dein neues Passwort wurde erfolgreich verschlüsselt und angepasst.',
     'aws_changepassword_new_pass' => 'Neues Passwort',
     'aws_changepassword_new_pass_retry' => 'Neues Passwort wiederholen',
-
-    // added translation in 1.0.0-beta2:
-
-    // models/LoginForm
-    'model_loginform_email_label' => 'E-Mail',
-    'model_loginform_password_label' => 'Passwort',
-    'model_loginform_wrong_user_or_password' => 'Falscher Benutzer oder Passwort.',
 ];
-

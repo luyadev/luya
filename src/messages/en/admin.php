@@ -119,12 +119,4 @@ return [
     'aws_changepassword_succes' => 'The password have been encrypted and stored successful.',
     'aws_changepassword_new_pass' => 'New password',
     'aws_changepassword_new_pass_retry' => 'New passwort repeat',
-
-    // added translation in 1.0.0-beta2:
-
-    // models/LoginForm
-    'model_loginform_email_label' => 'Email',
-    'model_loginform_password_label' => 'Password',
-    'model_loginform_wrong_user_or_password' => 'Wrong user or password.',
 ];
-
