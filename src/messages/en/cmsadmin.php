@@ -28,7 +28,7 @@ return [
     'block_form_default_message_label' => 'Message',
     'block_form_default_message_error' => 'Please enter a messag',
     'block_form_default_send_label' => 'Submit',
-    'block_form_default_send_error' => 'An error occurred when sending your message.',
+    'block_form_default_send_error' => 'Sorry we have exprience an error while sending your message.',
     'block_form_default_send_success' => 'Thanks for your request.',
     'block_form_default_mail_subject' => 'Contact request',
 
@@ -59,7 +59,7 @@ return [
     'block_image_text_btnlabel_label' => 'Button label',
     'block_image_text_btnhref_label' => 'Button link adress',
     'block_image_text_targetblank_label' => 'Open link an a new window',
-    'block_image_text_help_texttype' => 'The text type is strictly referring to the text and not the heading.',
+    'block_image_text_help_texttype' => 'The texttype is strictly referring to the text and not the heading.',
     'block_image_text_no_image' => 'No image have been uploaded yet.',
     'block_image_text_no_text' => 'No text have been insereted yet.',
 
@@ -71,24 +71,22 @@ return [
 
     // LineBlock
     'block_line_name' => 'Dividing line',
-    'block_line_linespace_label' => 'Spacing',
+    'block_line_linespace_label' => 'Line spacing',
     'block_line_linespace_space' => 'Spacing(top/bottom)',
-    'block_line_linestyle_label' => 'Style',
+    'block_line_linestyle_label' => 'Line style',
     'block_line_linestyle_dotted' => 'Dotted',
     'block_line_linestyle_dashed' => 'Dashed',
     'block_line_linestyle_solid' => 'Continuous',
-    'block_line_linewidth_label' => 'Thickness',
-    'block_line_linecolor_label' => 'Color',
+    'block_line_linewidth_label' => 'Line width',
+    'block_line_linecolor_label' => 'Line color',
 
     // LinkButtonBlock
-    'block_link_button_name' => 'Link Button',
+    'block_link_button_name' => 'Link button',
     'block_link_button_btnlabel_label' => 'Button Label',
-    'block_link_button_btnhref_label' => 'Link Address',
-    'block_link_button_targetblank_label' => 'Opens the linked document in a new window or tab',
-    'block_link_button_simpleLink_label' => 'Use a simple link',
+    'block_link_button_btnhref_label' => 'Link adress',
 
     // ListBlock
-    'block_list_name' => 'List',
+    'block_list_name' => 'Listing',
     'block_list_elements_label' => 'Elements',
     'block_list_listtype_label' => 'Type',
     'block_list_listtype_ul' => 'Listing',
@@ -111,7 +109,7 @@ return [
     'block_map_maptype_roadmap' => 'Street map',
     'block_map_maptype_satellitemap' => 'Satellite map',
     'block_map_maptype_hybrid' => 'Satellite map with road names',
-    'block_map_no_content' => 'No address has been provided yet.',
+    'block_map_no_content' => 'No address have been provided yet.',
 
     // Module Block
     'block_module_name' => 'Module',
