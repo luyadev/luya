@@ -1,12 +1,12 @@
 <?php
 
-namespace tests\web\cms\components;
+namespace tests\web\cms\menu;
 
 
 use Yii;
 use cms\components\Menu;
 
-class MenuTest extends \tests\web\Base
+class ContainerTest extends \tests\web\Base
 {
     public function testComponentExists()
     {
