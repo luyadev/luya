@@ -2,6 +2,11 @@
 
 namespace luya\traits;
 
+/**
+ * @property string $webroot returns the webroot directory event for console commands.
+ * 
+ * @author nadar
+ */
 trait Application
 {
     /**

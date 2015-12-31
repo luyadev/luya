@@ -4,7 +4,8 @@ namespace luya\traits;
 
 use Yii;
 use yii\web\NotFoundHttpException;
-use luya\helpers\Url;
+use yii\helpers\Json;
+use Curl\Curl;
 
 trait ErrorHandler
 {
@@ -17,18 +18,12 @@ trait ErrorHandler
         if ($exception instanceof NotFoundHttpException || !$this->transferException) {
             return parent::renderException($exception);
         }
-
-        $data = json_encode($this->getExceptionArray($exception));
-
-        $curl = new \Curl\Curl();
-        $rsp = $curl->post(Url::trailing($this->api).'create', [
-            'error_json' => $data,
+        
+        $curl = new Curl();
+        $response = $curl->post(rtrim($this->api, '/').'/create', [
+            'error_json' => Json::encode($this->getExceptionArray($exception)),
         ]);
-
-        if (!YII_DEBUG) {
-            return '<html><head><title>Fehler</title></head><body style="padding:40px;"><h2>Seiten Fehler</h2><p>Es ist ein unerwartet Fehler passiert, wir bitten um Entschuldigung. Bitte versuchen Sie es später erneut.</p></body></html>';
-        }
-
+        
         return parent::renderException($exception);
     }
 
@@ -53,17 +48,15 @@ trait ErrorHandler
 
         return [
             'message' => $exception->getMessage(),
-            'serverName' => (isset($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : null,
-            'request_uri' => (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : null,
-            'date' => date('d.m.Y H:i'),
-            'line' => $exception->getLine(),
             'file' => $exception->getFile(),
+            'line' => $exception->getLine(),
+            'requestUri' => (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : null,
+            'serverName' => (isset($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : null,
+            'date' => date('d.m.Y H:i'),
             'trace' => $_trace,
             'ip' => (isset($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : null,
             'get' => Yii::$app->request->get(),
             'post' => Yii::$app->request->post(),
-            'server' => $_SERVER,
-            'session' => (isset($_SESSION)) ? $_SESSION : null,
         ];
     }
 }
