@@ -22,6 +22,36 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
+--
+-- Tabellenstruktur für Tabelle `error_data`
+--
+
+CREATE TABLE `error_data` (
+`id` int(11) NOT NULL,
+  `identifier` varchar(255) DEFAULT NULL,
+  `error_json` text,
+  `timestamp_create` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Indizes der exportierten Tabellen
+--
+
+--
+-- Indizes für die Tabelle `error_data`
+--
+ALTER TABLE `error_data`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT für exportierte Tabellen
+--
+
+--
+-- AUTO_INCREMENT für Tabelle `error_data`
+--
+ALTER TABLE `error_data`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 -- --------------------------------------------------------
 

@@ -16,6 +16,9 @@ $config = [
         ],
         'news' => 'news\Module',
         'newsadmin' => 'newsadmin\Module',
+        'errorapi' => [
+            'class' => 'errorapi\Module',
+        ],
         'cms' => [
             'class' => 'cms\Module',
             'assets' => [

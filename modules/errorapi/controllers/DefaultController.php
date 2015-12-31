@@ -3,7 +3,13 @@
 namespace errorapi\controllers;
 
 use Yii;
+use errorapi\models\Data;
 
+/**
+ * 
+ * @todo create phpunit test for module controller actions
+ * @author nadar
+ */
 class DefaultController extends \luya\rest\Controller
 {
     public function userAuthClass()
@@ -12,36 +18,33 @@ class DefaultController extends \luya\rest\Controller
     }
 
     /**
-     * @param $_POST['error_json']
-     *
+     * @param $_POST['error_json'] = json_encode(['message' => 'What?', 'serverName' => 'example.com']);
      * @return string
      */
     public function actionCreate()
     {
-        $model = new \errorapi\models\Data();
-        $model->error_json = \yii::$app->request->post('error_json', null);
+        $model = new Data();
+        $model->error_json = Yii::$app->request->post('error_json', null);
+        
         if ($model->save()) {
-            $this->slack('#'.$model->identifier.' | '.$model->serverName.': '.$model->msg, '#luya');
-            $html = '<table border="1" cellpadding="5" cellspacing="0">';
-            foreach (json_decode($model->error_json, true) as $k => $v) {
-                $html .= '<tr>';
-                $html .= '<td><strong>'.$k.':</strong></td>';
-                $html .= '<td>';
-                if (is_array($v)) {
-                    $html .= '<pre><code>'.print_r($v, true).'</code></pre>';
-                } else {
-                    $html .= $v;
-                }
-                $html .= '</td>';
-                $html .= '</tr>';
+            
+            if ($this->module->slackToken !== null) {
+                $this->slack('#'.$model->identifier.' | '.$model->serverName.': '.$model->message, $this->module->slackChannel);
             }
-            $html .= '</table>';
-            Yii::$app->mail->compose('Subject', $html)->address($this->module->recipient)->send();
-
+            
+            $mailHtml = $this->renderPartial('_mail', ['model' => $model]);
+            
+            if (!empty($this->module->recipient)) {
+                $mailer = Yii::$app->mail->compose('Error Api: ' . $model->serverName, $mailHtml);
+                foreach($this->module->recipient as $recipient) {
+                    $mailer->address($recipient);
+                }
+                $mailer->send();
+            }
             return true;
-        } else {
-            return $model->getErrors();
         }
+        
+        return $model->getErrors();
     }
 
     public function slack($message, $room)
