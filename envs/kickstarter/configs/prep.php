@@ -39,8 +39,11 @@ $config = [
     		/*
     		 * ATTENTION:
     		 * To help us improve our Software you can enable (true) this property to send all Exceptions directly to the luya developer team. The follwing informations will be transfered:
-    		 * - $_GET, $_POST, $_SESSION & $_SERVER
+    		 * - $_GET, $_POST
     		 * - Exception Object (inlcuding stack trace, line, linenr, message, file)
+    		 * 
+    		 * You can also create your own errorapi (zehir/luya-modul-errorapi) module to get notification
+    		 * about the errors from your projects.
     		 */
             'transferException' => false,
         ],
