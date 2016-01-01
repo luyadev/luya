@@ -27,6 +27,8 @@ class Auth extends \yii\base\Component
 
     public function permissionVerify($type, $permissionWeight)
     {
+        $numbers = [];
+        
         switch ($type) {
             case self::CAN_CREATE:
                 $numbers = [1, 4, 6, 9];
@@ -59,7 +61,7 @@ class Auth extends \yii\base\Component
         ->bindValue('api', $apiEndpoint)
         ->queryAll();
 
-        if (!$typeVerification) {
+        if ($typeVerification === false) {
             return (count($groups) > 0) ? true : false;
         }
 

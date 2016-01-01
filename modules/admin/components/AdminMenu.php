@@ -34,6 +34,7 @@ class AdminMenu extends \yii\base\Component
             return $this->_nodes[$id];
         }
         $i = 1;
+        $data = null;
         foreach ($this->getMenu() as $item) {
             ++$i;
             if ($id == $i) {
