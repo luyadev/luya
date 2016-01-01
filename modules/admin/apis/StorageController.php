@@ -105,13 +105,12 @@ class StorageController extends \admin\base\RestController
     */
     public function actionFilesUpload()
     {
-        $files = [];
         foreach ($_FILES as $k => $file) {
             if ($file['error'] !== UPLOAD_ERR_OK) {
                 return ['upload' => false, 'message' => $this->_uploaderErrors[$file['error']]];
             }
             try {
-                $create = Yii::$app->storage->addFile($file['tmp_name'], $file['name'], Yii::$app->request->post('folderId', 0));
+                Yii::$app->storage->addFile($file['tmp_name'], $file['name'], Yii::$app->request->post('folderId', 0));
                 return ['upload' => true, 'message' => Module::t('api_storage_file_upload_succes')];
             } catch (Exception $err) {
                 return ['upload' => false, 'message' => Module::t('api_sotrage_file_upload_error', ['error' => $err->getMessage()])];
