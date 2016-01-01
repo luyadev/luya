@@ -1,5 +1,5 @@
 <?php if (!$state): ?>
-<? $form = \yii\widgets\ActiveForm::begin(['id' => 'login-form','options' => ['class' => 'form-horizontal']]); ?>
+<?php $form = \yii\widgets\ActiveForm::begin(['id' => 'login-form','options' => ['class' => 'form-horizontal']]); ?>
 <?= $form->field($model, 'gender')->dropdownlist(['' => 'Bitte wählen', 0 => 'Frau', 1 => 'Herr']); ?>
 <?= $form->field($model, 'company') ?>
 <?= $form->field($model, 'firstname') ?>
@@ -15,8 +15,8 @@
 <?= $form->field($model,  'subscription_medianews')->checkbox(); ?>
 <button type="submit">Submit</button>
 <?= $form->errorSummary($model); ?>
-<? \yii\widgets\ActiveForm::end(); ?>
-<? endif; ?>
+<?php \yii\widgets\ActiveForm::end(); ?>
+<?php endif; ?>
 
 <?php if ($state == 1): ?>
 <p>Sie haben sich erfolgreich registriert, bitte bestätigten Sie den Link welcheln wir Ihnen per E-Mail versendet haben.</p>

@@ -36,19 +36,19 @@ class Data extends \yii\db\ActiveRecord
             return $this->addError('error_json', 'must be type string to unserialize.');
         }
         
-        $arr = json_decode($this->error_json, true);
+        $errorJsonArray = json_decode($this->error_json, true);
         
-        if (!isset($arr['message']) || !isset($arr['serverName'])) {
+        if (!isset($errorJsonArray['message']) || !isset($errorJsonArray['serverName'])) {
             $event->isValid = false; 
             return $this->addError('error_json', 'error_json must contain message and serverName keys with values.');
         }
         
-        $this->errorArray = $arr;
-        $this->message = $arr['message'];
-        $this->serverName = $arr['serverName'];
+        $this->errorArray = $errorJsonArray;
+        $this->message = $errorJsonArray['message'];
+        $this->serverName = $errorJsonArray['serverName'];
         $this->timestamp_create = time();
         $this->identifier = $this->createMessageIdentifier($this->message);
-        $this->error_json = json_encode($arr);
+        $this->error_json = json_encode($errorJsonArray);
     }
 
     public function createMessageIdentifier($msg)
