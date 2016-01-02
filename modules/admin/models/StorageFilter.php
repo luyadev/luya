@@ -54,13 +54,14 @@ class StorageFilter extends \admin\ngrest\base\Model
                     }
                     break;
                 case 'thumbnail':
+                    // THUMBNAIL_OUTBOUND & THUMBNAIL_INSET
+                    $type = \Imagine\Image\ImageInterface::THUMBNAIL_INSET;
+                    
+                    if (isset($item->effect_json_values['type']) && !empty($item->effect_json_values['type'])) {
+                        $type = $item->effect_json_values['type'];
+                    }
+                    
                     if (is_null($newimage)) {
-                        // THUMBNAIL_OUTBOUND & THUMBNAIL_INSET
-                        $type = \Imagine\Image\ImageInterface::THUMBNAIL_INSET;
-
-                        if (isset($item->effect_json_values['type']) && !empty($item->effect_json_values['type'])) {
-                            $type = $item->effect_json_values['type'];
-                        }
                         $newimage = $image->thumbnail(new \Imagine\Image\Box($item->effect_json_values['width'], $item->effect_json_values['height']), $type);
                     } else {
                         $newimage = $newimage->thumbnail(new \Imagine\Image\Box($item->effect_json_values['width'], $item->effect_json_values['height']), $type);

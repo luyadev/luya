@@ -2,9 +2,14 @@
 
 namespace admin\ngrest\base;
 
+/**
+ * @todo implement yii\base\Object
+ * @todo check item and config on init()
+ * @author nadar
+ */
 abstract class ActiveWindow implements \admin\ngrest\interfaces\ActiveWindow
 {
-    public $config = false;
+    public $config = null;
 
     public $module = null;
 

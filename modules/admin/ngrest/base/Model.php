@@ -71,7 +71,7 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
     }
 
     /**
-     * @param string $value          The valued which is provided from the setter method
+     * @param array $value          The valued which is provided from the setter method
      * @param string $viaTableName   Example viaTable name: news_article_tag
      * @param string $localTableId   The name of the field inside the viaTable which represents the match against the local table, example: article_id
      * @param string $foreignTableId The name of the field inside the viaTable which represents the match against the foreign table, example: tag_id
@@ -80,9 +80,9 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
      *
      * @return bool
      */
-    public function setRelation($value, $viaTableName, $localTableId, $foreignTableId)
+    public function setRelation(array $value, $viaTableName, $localTableId, $foreignTableId)
     {
-        $delete = Yii::$app->db->createCommand()->delete($viaTableName, [$localTableId => $this->id])->execute();
+        Yii::$app->db->createCommand()->delete($viaTableName, [$localTableId => $this->id])->execute();
         $batch = [];
         foreach ($value as $k => $v) {
             // $this->id: the value of the current database model, example when relation ins on user model id would be user id
@@ -90,7 +90,7 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
             $batch[] = [$this->id, $v['id']];
         }
         if (!empty($batch)) {
-            $insert = Yii::$app->db->createCommand()->batchInsert($viaTableName, [$localTableId, $foreignTableId], $batch)->execute();
+            Yii::$app->db->createCommand()->batchInsert($viaTableName, [$localTableId, $foreignTableId], $batch)->execute();
         }
         // @todo check if an error happends wile the delete and/or update proccess.
         return true;

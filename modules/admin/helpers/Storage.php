@@ -12,7 +12,7 @@ class Storage
     /**
      * @var array All errors from the files array.
      */
-    private static $uploaderErrors = [
+    public static $uploadErrors = [
         0 => 'There is no error, the file uploaded with success',
         1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
         2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
@@ -128,10 +128,9 @@ class Storage
     
     public static function uploadFromFiles(array $filesArray, $toFolder = 0, $isHidden = false)
     {
-        $files = [];
         foreach ($filesArray as $k => $file) {
             if ($file['error'] !== UPLOAD_ERR_OK) {
-                return ['upload' => false, 'message' => static::$uploaderErrors[$file['error']], 'file_id' => 0];
+                return ['upload' => false, 'message' => static::$uploadErrors[$file['error']], 'file_id' => 0];
             }
             try {
                 $file = Yii::$app->storage->addFile($file['tmp_name'], $file['name'], $toFolder, $isHidden);
