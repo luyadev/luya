@@ -189,6 +189,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
     {
         if ($element['i18n'] && $configContext !== self::TYPE_LIST) {
             $i = 0;
+            $return = [];
             foreach ($this->getLangs() as $lang) {
                 if ($i == 0) {
                     $return[] = [

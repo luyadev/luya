@@ -2,13 +2,11 @@
 
 namespace admin\ngrest\base;
 
-use admin\ngrest\Config;
-
 abstract class Render
 {
-    public $config = [];
+    public $config = null;
 
-    public function setConfig(Config $config)
+    public function setConfig(\admin\ngrest\Config $config)
     {
         $this->config = $config;
     }

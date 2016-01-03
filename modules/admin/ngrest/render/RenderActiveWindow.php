@@ -9,6 +9,8 @@ class RenderActiveWindow extends \admin\ngrest\base\Render implements \admin\ngr
 {
     private $itemId = null;
 
+    public $activeWindowHash = null;
+    
     public function render()
     {
         if (($activeWindow = $this->findActiveWindow($this->activeWindowHash)) !== false) {

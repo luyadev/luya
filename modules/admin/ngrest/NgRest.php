@@ -35,10 +35,9 @@ class NgRest
 
     public function render(\admin\ngrest\base\Render $render)
     {
-        $this->renderer = $render;
-        $this->renderer->setConfig($this->config);
-
-        return $this->renderer->render();
+        $this->render = $render;
+        $this->render->setConfig($this->config);
+        return $this->render->render();
     }
 
     public static function findConfig($ngRestConfigHash)

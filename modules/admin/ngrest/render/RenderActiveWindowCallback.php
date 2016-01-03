@@ -21,8 +21,6 @@ class RenderActiveWindowCallback extends \admin\ngrest\base\Render implements \a
 
         $function = 'callback'.ucfirst($activeWindowCallback);
 
-        $args = Yii::$app->request->post();
-
         return ObjectHelper::callMethodSanitizeArguments($obj, $function, Yii::$app->request->post());
         /*
         $reflection = new \ReflectionMethod($obj, $function);
