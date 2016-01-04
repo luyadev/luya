@@ -35,7 +35,7 @@ class Mail extends \yii\base\Component
 
     public $port = 587;
 
-    public $doDebug = 0;
+    public $debug = false;
     
     /**
      * @var string Posible values are `tls` or `ssl`
@@ -46,7 +46,6 @@ class Mail extends \yii\base\Component
     {
         if ($this->_phpmailer === null) {
             $this->_phpmailer = new PHPMailer();
-            $this->_phpmailer->do_debug = $this->doDebug;
             $this->_phpmailer->CharSet = 'UTF-8';
         }
 
@@ -56,7 +55,9 @@ class Mail extends \yii\base\Component
     public function create()
     {
         if ($this->isSMTP) {
-            $this->mailer()->SMTPDebug = false;
+            if ($this->debug) {
+                $this->mailer()->SMTPDebug = 2;
+            }
             $this->mailer()->isSMTP();
             $this->mailer()->SMTPSecure = $this->smtpSecure;
             $this->mailer()->Host = $this->host;
