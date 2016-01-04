@@ -3,12 +3,11 @@
     "description": "The kickstarter for a new luya project.",
     "type": "project",
     "license":"MIT",
-    "minimum-stability": "dev",
     "require": {
-        "zephir/luya" : "1.0.0-beta2",
-        "zephir/luya-module-cms" : "1.0.0-beta2",
-        "zephir/luya-module-cmsadmin" : "1.0.0-beta2",
-        "zephir/luya-module-admin" : "1.0.0-beta2"
+        "zephir/luya" : "1.0.0-beta3",
+        "zephir/luya-module-cms" : "1.0.0-beta3",
+        "zephir/luya-module-cmsadmin" : "1.0.0-beta3",
+        "zephir/luya-module-admin" : "1.0.0-beta3"
     },
     "scripts": {
         "post-create-project-cmd": [

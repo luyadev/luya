@@ -16,8 +16,8 @@
 		"issues" : "https://github.com/zephir/luya/issues"
 	},
 	"require" : {
-		"zephir/luya" : "1.0.0-beta2",
-		"zephir/luya-module-crawleradmin" : "1.0.0-beta2",
+		"zephir/luya" : "1.0.0-beta3",
+		"zephir/luya-module-crawleradmin" : "1.0.0-beta3",
 		"fabpot/goutte" : "3.1.*",
 		"jakeasmith/http_build_url" : "0.1.3"
 	},

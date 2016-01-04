@@ -1,13 +1,13 @@
 LUYA CHANGELOG
 ==============
 
-1.0.0-beta3 (in progress)
+1.0.0-beta3 (4.1.2016)
 -------------------------
 
 **BC BREAKS**
 
 - `#663` **Removed `admin\storage\FileQuery`, `admin\storage\ImageQuery`, `admin\storage\FolderQuery` and replace with `admin\file\Query`, `admin\image\Query`, `admin\folder\Query`.**
-- `#667` **As the csrf validation is enabled by default, you have to integrate them into your forms and head. [Guide to include CSRF Token forms](http://zero-exception.blogspot.ch/2015/01/yii2-using-csrf-token.html)**
+- `#667` **As the csrf validation is enabled by default, you have to integrate them into your forms if you are not using the ActiveForm Widget. [Guide to include CSRF Token forms](http://zero-exception.blogspot.ch/2015/01/yii2-using-csrf-token.html). Luya will auto insert the csrf meta tag to your head section if you are using the CMS Modul.**
 
 **ISSUES**
 

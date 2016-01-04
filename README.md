@@ -13,7 +13,7 @@ LUYA
 
 What is **LUYA**? We have build a *fast*, *modular* and *beautiful* looking system to create content based on blocks or database tables. *LUYA* is based on the [Yii2 Framework](https://github.com/yiisoft/yii2), [Angular](https://angularjs.org) and [Materialize CSS](materializecss.com).
 
-![Luya Admin](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/luya-beta2.png)
+![Luya Admin](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/luya-beta3.png)
 
 ### Installation
 
@@ -39,7 +39,7 @@ We are always looking for people who share their thoughts, code and problems wit
 ### Unit Tests
 
 1. Create Database (example luya_phpunit)
-2. Insert Database dump from `tests/sql/1.0.0-beta2.sql`
+2. Insert Database dump from `tests/sql/1.0.0-beta3.sql`
 3. Rename phpunit.xml.dist to phpunit.xml
 4. Change dsn, username and passwort in phpunit.xml
 5. Ensure you have installed current composer packages `composer install`.
