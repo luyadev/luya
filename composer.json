@@ -17,9 +17,9 @@
 	},
 	"require" : {
 		"php": ">=5.5.0",
-		"yiisoft/yii2": "~2.0.0",
-		"twig/twig" : "~1.0",
-        "curl/curl" : "~1.0",
+		"yiisoft/yii2": "2.0.6",
+		"twig/twig" : "1.*",
+        "curl/curl" : "1.*",
         "phpmailer/phpmailer": "~5.2"
 	},
     "require-dev" : {
