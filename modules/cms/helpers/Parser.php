@@ -44,14 +44,6 @@ class Parser
                 case 'link':
                     $replace = static::functionLink($row);
                     break;
-
-                case 'file':
-                    continue;
-                    break;
-
-                default:
-                    continue;
-                    break;
             }
 
             if ($replace !== null) {
@@ -92,10 +84,5 @@ class Parser
         }
 
         return '<a href="'.$href.'">'.$label.'</a>';
-    }
-
-    public static function functionFile($result)
-    {
-        return;
     }
 }
