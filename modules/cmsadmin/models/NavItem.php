@@ -77,6 +77,8 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
 
     public function getType()
     {
+        $object = false;
+        
         switch ($this->nav_item_type) {
             case self::TYPE_PAGE:
                 $object = NavItemPage::findOne($this->nav_item_type_id);
@@ -88,6 +90,11 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
                 $object = NavItemRedirect::findOne($this->nav_item_type_id);
                 break;
         }
+        
+        if ($object === false) {
+            throw new Exception("Unable to find type for the current nav item.");
+        }
+        
         // assign the current context for an item type object.
         $object->setNavItem($this);
 

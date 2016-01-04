@@ -2,6 +2,8 @@
 
 namespace cmsadmin\models;
 
+use yii\helpers\Json;
+
 class Layout extends \admin\ngrest\base\Model
 {
     public function ngRestApiEndpoint()
@@ -45,7 +47,7 @@ class Layout extends \admin\ngrest\base\Model
 
     public function getJsonConfig($node = false)
     {
-        $json = @json_decode($this->json_config, true);
+        $json = Json::decode($this->json_config);
 
         if (!$node) {
             return $json;

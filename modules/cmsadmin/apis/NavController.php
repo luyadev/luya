@@ -150,14 +150,6 @@ class NavController extends \admin\base\RestController
         }
     }
 
-    public function actionResort()
-    {
-        $navItemId = $this->postArg('nav_item_id');
-        $newSortIndex = $this->postArg('new_sort_index');
-
-        $response = \cmsadmin\models\Nav::resort($navItemId, $newSortIndex);
-    }
-
     /**
      * creates a new nav entry for the type page (nav_id will be created.
      *

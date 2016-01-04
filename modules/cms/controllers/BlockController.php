@@ -18,13 +18,15 @@ class BlockController extends \cms\base\Controller
         $model = NavItemPageBlockItem::findOne($id);
         
         if (!$model) {
-            throw new Exception("Unabled to find item id.");    
+            throw new Exception("Unable to find item id.");    
         }
         
         $block = Block::objectId($model->block_id, $model->id, 'callback');
 
-        $method = 'callback'.Inflector::id2camel($callback);
-
-        return ObjectHelper::callMethodSanitizeArguments($block, $method, Yii::$app->request->get());
+        if (!$block) {
+            throw new Exception("Unable to find block object.");
+        }
+        
+        return ObjectHelper::callMethodSanitizeArguments($block, 'callback'.Inflector::id2camel($callback), Yii::$app->request->get());
     }
 }

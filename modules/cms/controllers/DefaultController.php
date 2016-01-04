@@ -5,6 +5,7 @@ namespace cms\controllers;
 use Yii;
 use yii\web\View;
 use yii\web\NotFoundHttpException;
+use Exception;
 
 class DefaultController extends \cms\base\Controller
 {

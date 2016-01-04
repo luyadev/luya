@@ -83,7 +83,6 @@ class CrawlContainer extends \yii\base\Object
 
         if (count($builder) == 0) {
             throw new Exception('The crawler have not found any results. Wrong base url? Or set a rule which tracks all urls?');
-            exit;
         }
 
         foreach ($builder as $url => $page) {
@@ -110,14 +109,14 @@ class CrawlContainer extends \yii\base\Object
 
         // delete not unseted urls from index
         foreach ($index as $deleteUrl => $deletePage) {
-            $this->addLog('delete', $url);
+            $this->addLog('delete', $deleteUrl);
             $model = Index::findOne($deletePage['id']);
             $model->delete(false);
         }
 
         // delete empty content empty title
         foreach (Index::find()->where(['=', 'content', ''])->orWhere(['=', 'title', ''])->all() as $page) {
-            $this->addLog('delete_issue', $url);
+            $this->addLog('delete_issue', $page->url);
             $page->delete(false);
         }
     }
