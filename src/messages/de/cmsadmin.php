@@ -296,5 +296,7 @@ return [
     'js_page_block_update_ok' => 'Block «%name%» wurde aktualisiert!',
     'js_page_block_remove_ok' => 'Block «%name%» wurde entfernt!',
     'js_page_block_visbility_change' => 'Die sichtbarkeit von «%name%» wurde erfolgreich geändert.',
+    
+// added translation in 1.0.0-beta4:
 ];
 

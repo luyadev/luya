@@ -45,7 +45,7 @@ return [
     'layout_filemanager_save_dir' => 'Сохранить?',
     'layout_filemanager_remove_dir' => 'Удалить папку?',
     'layout_filemanager_remove_dir_not_empty' => 'Папка не пуста - все равно удалить?',
-    'layout_filemenager_remove_selected_files' => 'Удалить отмеченные файлы',
+    'layout_filemanager_remove_selected_files' => 'Удалить отмеченные файлы',
     'layout_filemanager_move_selected_files' => 'Переместить',
     'layout_filemanager_upload_error' => 'Ошибка при загрузке файла.',
     'layout_filemenager_col_name' => 'Название',
@@ -150,4 +150,6 @@ return [
     'js_dir_manager_upload_image_ok' => 'Файл был успешно загружен.',
     'js_dir_manager_rm_file_confirm' => 'Вы действительно хотите удалить этот файл?',
     'js_dir_manager_rm_file_ok' => 'Файл был успешно удален.',
+    
+// added translation in 1.0.0-beta4:
 ];

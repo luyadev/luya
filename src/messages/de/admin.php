@@ -45,7 +45,7 @@ return [
     'layout_filemanager_save_dir' => 'Speichern?',
     'layout_filemanager_remove_dir' => 'Verzeichniss löschen?',
     'layout_filemanager_remove_dir_not_empty' => 'Das Verzeichnis ist nicht leer - trotzdem löschen?',
-    'layout_filemenager_remove_selected_files' => 'markierte Dateien löschen',
+    'layout_filemanager_remove_selected_files' => 'markierte Dateien löschen',
     'layout_filemanager_move_selected_files' => 'Verschieben nach',
     'layout_filemanager_upload_error' => 'Fehler beim Hochladen der Datei',
     'layout_filemanager_col_name' => 'Name',
@@ -151,5 +151,7 @@ return [
     'js_dir_manager_rm_file_confirm' => 'Möchten Sie diese Datei wirklich entfernen?',
     'js_dir_manager_rm_file_ok' => 'Datei wurde erfolgreich gelöscht.',
     'js_zaa_server_proccess' => 'Der Server verarbeitet Ihre Daten. Bitte warten Sie einen Augenblick.',
+    
+// added translation in 1.0.0-beta4:
 ];
 

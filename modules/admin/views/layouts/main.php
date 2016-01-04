@@ -300,7 +300,7 @@ $this->beginPage()
                 <span class="floating-button-label__label"><?= Luya::t('admin', 'layout_filemanager_upload_files'); ?></span>
             </label>
 
-            <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?= Luya::t('admin', 'layout_filemanager_remove_selected_files'); ?><</button>
+            <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?= Luya::t('admin', 'layout_filemanager_remove_selected_files'); ?></button>
             <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove"><?= Luya::t('admin', 'layout_filemanager_move_selected_files'); ?></button>
 
         </div>

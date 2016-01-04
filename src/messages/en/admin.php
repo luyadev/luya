@@ -45,7 +45,7 @@ return [
     'layout_filemanager_save_dir' => 'Save?',
     'layout_filemanager_remove_dir' => 'Delete directory?',
     'layout_filemanager_remove_dir_not_empty' => 'The directory is not empty - delete anyway?',
-    'layout_filemenager_remove_selected_files' => 'Delete marked files',
+    'layout_filemanager_remove_selected_files' => 'Delete marked files',
     'layout_filemanager_move_selected_files' => 'Move to',
     'layout_filemanager_upload_error' => 'Error while uploading file.',
     'layout_filemanager_col_name' => 'Name',
@@ -150,5 +150,7 @@ return [
     'js_dir_manager_upload_image_ok' => 'The file was uploaded successfully.',
     'js_dir_manager_rm_file_confirm' => 'Do you really want to delete this file?',
     'js_dir_manager_rm_file_ok' => 'The file was deleted successfully.',
+    
+// added translation in 1.0.0-beta4:
 ];
 
