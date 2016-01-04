@@ -223,8 +223,7 @@ class Nav extends \yii\db\ActiveRecord
         $startIndex = (int)$this->sort_index;
         foreach (self::find()->where('sort_index >= :index', ['index' => $startIndex])->andWhere(['nav_container_id' => $this->nav_container_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $item) {
             ++$startIndex;
-            $up = Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id',
-                ['id' => $item['id']])->execute();
+            Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id', ['id' => $item['id']])->execute();
         }
     }
 
@@ -233,8 +232,7 @@ class Nav extends \yii\db\ActiveRecord
         $startIndex = (int)$this->sort_index;
         foreach (self::find()->where('sort_index >= :index', ['index' => $startIndex])->andWhere(['nav_container_id' => $this->nav_container_id, 'parent_nav_id' => $this->parent_nav_id])->orderBy('sort_index ASC')->asArray()->all() as $item) {
             --$startIndex;
-            $up = Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id',
-                ['id' => $item['id']])->execute();
+            Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $startIndex], 'id=:id', ['id' => $item['id']])->execute();
         }
     }
 
@@ -351,14 +349,13 @@ class Nav extends \yii\db\ActiveRecord
             $errors = ArrayHelper::merge($navItem->getErrors(), $errors);
         }
 
-        if (!empty($_errors)) {
-            return $_errors;
+        if (!empty($errors)) {
+            return $errors;
         }
 
         // get draft nav item data
         $draftNavItem = NavItem::findOne(['nav_id' => $fromDraftNavId]);
 
-        $typeId = $draftNavItem->nav_item_type_id;
         $navItemPageId = $draftNavItem->type->id;
         $layoutId = $draftNavItem->type->layout_id;
         $pageBlocks = NavItemPageBlockItem::findAll(['nav_item_page_id' => $navItemPageId]);

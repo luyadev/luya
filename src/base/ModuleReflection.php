@@ -83,7 +83,7 @@ class ModuleReflection extends \yii\base\Object
     public function run()
     {
         // request route
-        $requestRoute = $this->requestRoute;
+        $requestRoute = $this->getRequestRoute();
         // see if request array is correct
         if (!isset($requestRoute['route']) || !isset($requestRoute['args'])) {
             throw new Exception('The provide request array does not contain route or arg keys.');
