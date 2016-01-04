@@ -5,7 +5,6 @@
 	"keywords" : ["php", "luya", "module", "news"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
-	"minimum-stability": "dev",
 	"authors" : [
 		{
 			"name" : "Basil",
