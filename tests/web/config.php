@@ -21,11 +21,10 @@ $config = [
         ],
         'cms' => [
             'class' => 'cms\Module',
-            'assets' => [
-                'app\assets\ResourcesAsset',
-            ],
         ],
-        'cmsadmin' => 'cmsadmin\Module',
+        'cmsadmin' => [
+            'class' => 'cmsadmin\Module',
+        ],
         'unitmodule' => [
             'class' => '\tests\data\modules\unitmodule\Module',
         ],

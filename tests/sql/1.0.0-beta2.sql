@@ -60,13 +60,10 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 
 CREATE TABLE IF NOT EXISTS `admin_property` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `module_name` varchar(120) DEFAULT NULL,
   `var_name` varchar(80) NOT NULL,
-  `type` varchar(40) NOT NULL,
-  `label` varchar(120) NOT NULL,
-  `option_json` varchar(255) DEFAULT NULL,
-  `default_value` varchar(255) DEFAULT NULL
+  `class_name` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
