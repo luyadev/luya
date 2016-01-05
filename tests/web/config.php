@@ -18,6 +18,11 @@ $config = [
         'newsadmin' => 'newsadmin\Module',
         'errorapi' => [
             'class' => 'errorapi\Module',
+            /*
+            'recipient' => [
+                'you@example.com',
+            ]
+            */
         ],
         'cms' => [
             'class' => 'cms\Module',
@@ -52,6 +57,11 @@ $config = [
             'password' => DB_PASS,
             'charset' => 'utf8',
         ],
+        /*
+        'mail' => [
+            'password' => '******',
+        ],
+        */
     ],
 ];
 
