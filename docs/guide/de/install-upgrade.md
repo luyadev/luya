@@ -28,7 +28,7 @@ composer update
 
 Dies wird dir nun ein neues composer.lock file generieren und kann einige Minuten dauern. Die neuen LUYA Daten wurden somit erfolgreich in das vendor Verzeichniss gespeichert. Das aktualisiere `composer.lock` file kannst du nun in dein VCS hinzufügen, somit können anderen Personen die an diesem Projekt arbeiten lediglich den `composer install` befehl ausführen.
 
-> Wenn du einen Composer beim updaten erhälst stelle sicher das du `"minimum-stability" : "beta"` eingestellt hast.
+> Wenn du einen Fehler beim Updaten erhältst, stelle sicher dass du `"minimum-stability" : "beta"` eingestellt hast.
 
 ### Konsole
 
