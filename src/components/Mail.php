@@ -89,6 +89,36 @@ class Mail extends \yii\base\Component
         return $this;
     }
 
+    /**
+     * Add multiple adresses into the mailer object.
+     * 
+     * If no key is used, the name is going to be ignore, if a string key is availabe it represents the name.
+     * 
+     * ```php
+     * adresses(['foo@example.com', 'bar@example.com']);
+     * ```
+     * 
+     * or with names
+     * 
+     * ```php
+     * adresses(['John Doe' => 'john.doe@example.com', 'Jane Doe' => 'jane.doe@example.com']);
+     * ```
+     * 
+     * @return void
+     * @since 1.0.0-beta4
+     * @param array $emails An array with email adresses or name => email paring to use names.
+     */
+    public function adresses(array $emails)
+    {
+        foreach($emails as $name => $mail) {
+            if (is_int($name)) {
+                $this->address($mail);
+            } else {
+                $this->address($mail, $name);
+            }
+        } 
+    }
+    
     public function address($email, $name = null)
     {
         $this->mailer()->addAddress($email, (empty($name)) ? $email : $name);

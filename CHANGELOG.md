@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **ISSUES**
 
+- `#693` Added mailer component method adresses() function to assigne multiple recipients at the same time.
 - `#691` Create the module migration folder if the folder does not exists.
 - `#687` Fixed issue in StorageImporter and empty storage folder.
 - `#684` Improved styling of error api module mails.
