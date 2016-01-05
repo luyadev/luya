@@ -34,7 +34,7 @@ class StorageImporter extends \luya\base\Importer
     {
         $storageFileList = static::getFindFilesDirectory();
         
-        if (!$storageFileList) {
+        if ($storageFileList === false) {
             return false;
         }
 

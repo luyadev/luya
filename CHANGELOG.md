@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **ISSUES**
 
+- `#687` fixed issue in StorageImporter and empty storage folder.
 - `#684` Improved styling of error api module mails.
 
 1.0.0-beta3 (4.1.2016)
