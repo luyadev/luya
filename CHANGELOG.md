@@ -4,6 +4,10 @@ LUYA CHANGELOG
 1.0.0-beta4 (in progress)
 -------------------------
 
+**ISSUES**
+
+- `#684` Improved styling of error api module mails.
+
 1.0.0-beta3 (4.1.2016)
 -------------------------
 
