@@ -26,7 +26,7 @@ class DefaultControllerTest extends \tests\web\Base
     
     public function testCreateData()
     {
-        Yii::$app->request->setBodyParams(['error_json' => json_encode(['inf' => ['fo' => 'bar'], 'message' => 'What?', 'serverName' => 'example.com'])]);
+        Yii::$app->request->setBodyParams(['error_json' => json_encode(['information' => ['foo' => 'bar'], 'message' => 'What?', 'serverName' => 'example.com', 'trace' => [['message' => 'yes', 'file' => 'file.php', 'line' => 11], ['message' => 'no', 'fle' => 'otherfile.php', 'line' => 27]]])]);
         
         $response = Yii::$app->getModule('errorapi')->runAction('default/create');
         
