@@ -4,6 +4,7 @@ namespace luya\console\commands;
 
 use Yii;
 use yii\helpers\Console;
+use luya\helpers\FileHelper;
 
 /**
  * @see https://github.com/yiisoft/yii2/issues/384
@@ -36,7 +37,6 @@ class MigrateController extends \yii\console\controllers\MigrateController
 
     private function initModuleMigrationDirectories()
     {
-        // @todo: replace with \yii::$app->params['modules']
         foreach (Yii::$app->modules as $key => $item) {
             $module = Yii::$app->getModule($key);
             $this->moduleMigrationDirectories[$key] = $module->getBasePath().DIRECTORY_SEPARATOR.'migrations';
@@ -60,6 +60,14 @@ class MigrateController extends \yii\console\controllers\MigrateController
         return new $class();
     }
 
+    /**
+     * Create new migration, first param the name, second param the module where the migration should be put in.
+     * 
+     * @param string $name The name of the migration
+     * @param string|boolean $module The module name where the migration should be placed in.
+     * @todo replace module param with user teminal selection.
+     * @see \yii\console\controllers\BaseMigrateController::actionCreate()
+     */
     public function actionCreate($name, $module = false)
     {
         if (!preg_match('/^\w+$/', $name)) {
@@ -81,6 +89,11 @@ class MigrateController extends \yii\console\controllers\MigrateController
 
         if ($this->confirm("Create new migration '$file'?")) {
             $content = $this->renderFile(Yii::getAlias($this->templateFile), ['className' => $name]);
+            
+            if (!file_exists($folder)) {
+                FileHelper::createDirectory($folder, 0775, false);
+            }
+            
             file_put_contents($file, $content);
             $this->stdout("\nMigration created successfully.\n", Console::FG_GREEN);
 
