@@ -108,6 +108,14 @@ Es können alle Icons des Material-Designs von Google verwendet werden.
 | Sichtbar                  | [visibility](https://www.google.com/design/icons/#ic_visibility)              | `<i class="material-icons">visibility</i>`        |
 | Unsichtbar                | [visibility_off](https://www.google.com/design/icons/#ic_visibility_off)      | `<i class="material-icons">visibility_off</i>`    |
 
+##### Icons mit Text
+Wenn man Icons inklusive Text verwenden möchte, muss das Icon je nach Ausrichtung die Klasse `left` oder `right` erhalten.
+
+**Beispiel:**
+```
+<button class="btn-flat">Beispiel Label <i class="material-icons right">check</i></button>
+```
+
 Buttons
 -------
 Luya kann alle [Material-Design Buttons von Google](http://materializecss.com/buttons.html) verwenden.  
@@ -122,6 +130,17 @@ Eigenschaften:
 ```
 <button class="btn">
     Button default
+</button>
+```
+
+##### "Flache" Buttons
+![Flat button](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/btn--flat.png "Default Button")
+Eigenschaften:
+* Hat Standardmässig keinen Hintergrund und, bis auf die Veränderung des cursors (`cursor: pointer`), keinen Hover Effekt.
+
+```
+<button class="btn-flat">
+    Button Flat
 </button>
 ```
 
