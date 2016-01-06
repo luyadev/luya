@@ -134,7 +134,9 @@ Eigenschaften:
 ```
 
 ##### "Flache" Buttons
-![Flat button](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/btn--flat.png "Default Button")
+![Flat button](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/btn--flat.png "Flat Button")  
+Im obigen Screenshot sind 3 flat buttons mit jeweils einem Icon aufgeführt. Da flat buttons keine Hintergrundfarbe und hover styles haben, eigenen Sie sich zur Darstellung von sekundären Funktionen.
+
 Eigenschaften:
 * Hat Standardmässig keinen Hintergrund und, bis auf die Veränderung des cursors (`cursor: pointer`), keinen Hover Effekt.
 
