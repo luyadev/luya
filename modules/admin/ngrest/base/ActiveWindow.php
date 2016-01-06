@@ -2,7 +2,9 @@
 
 namespace admin\ngrest\base;
 
+use Yii;
 use luya\Exception;
+use admin\ngrest\base\ActiveWindowView;
 
 /**
  * Base class for all ActiveWindow classes.
@@ -11,17 +13,21 @@ use luya\Exception;
  * 
  * @author nadar
  */
-abstract class ActiveWindow extends \yii\base\Object implements \admin\ngrest\interfaces\ActiveWindow
+abstract class ActiveWindow extends \yii\base\Object implements \yii\base\ViewContextInterface
 {
-    public $config = null;
-
-    public $module = null;
-
-    private $_itemId = false;
-
+    private $_itemId = null;
+    
     private $_view = null;
-
+    
     private $_name = null;
+    
+    private $_hashName = null;
+    
+    public $module = null;
+    
+    public $icon = 'extension';
+    
+    public $alias = false;
     
     public function init()
     {
@@ -30,6 +36,16 @@ abstract class ActiveWindow extends \yii\base\Object implements \admin\ngrest\in
         if ($this->module === null) {
             throw new Exception('The ActiveWindow property \'module\' of '.get_called_class().' can not be null. You have to defined the module in where the ActiveWindow is defined. For example `public $module = \'@admin\';`');
         }
+    }
+    
+    public function getAlias()
+    {
+        return $this->alias;
+    }
+    
+    public function getIcon()
+    {
+        return $this->icon;
     }
     
     public function getName()
@@ -41,12 +57,30 @@ abstract class ActiveWindow extends \yii\base\Object implements \admin\ngrest\in
         return $this->_name;
     }
     
+    public function getHashName()
+    {
+        if ($this->_hashName === null) {
+            $this->_hashName = sha1($this->getName() . $this->icon . $this->alias);
+        }
+        
+        return $this->_hashName;
+    }
+    
+    public function getViewPath()
+    {
+        $module = $this->module;
+        
+        if (substr($module, 0, 1) !== '@') {
+            $module = '@'.$module;
+        }
+        
+        return implode(DIRECTORY_SEPARATOR, [Yii::getAlias($module), 'views', 'aws', strtolower($this->getName())]);
+    }
+    
     public function getView()
     {
         if ($this->_view === null) {
-            $this->_view = new \admin\ngrest\base\View();
-            $this->_view->id = strtolower($this->getName());
-            $this->_view->module = $this->module;
+            $this->_view = new ActiveWindowView();
         }
 
         return $this->_view;
@@ -54,24 +88,39 @@ abstract class ActiveWindow extends \yii\base\Object implements \admin\ngrest\in
 
     public function render($name, array $params = [])
     {
-        return $this->getView()->render($name, $params);
+        return $this->getView()->render($name, $params, $this);
     }
 
     public function setItemId($itemId)
     {
-        $this->_itemId = $itemId;
+        if (is_int($itemId)) {
+            return $this->_itemId = $itemId;
+        }
+        
+        throw new Exception("Unable to set active window item id, item id value must be integer.");
     }
 
     public function getItemId()
     {
         return $this->_itemId;
     }
-
-    public function setConfig(array $activeWindowConfig)
+    
+    public function sendError($message)
     {
-        $this->config = $activeWindowConfig;
+        return ['error' => true, 'message' => $message];
     }
-
+    
+    public function sendSuccess($message)
+    {
+        return ['error' => false, 'message' => $message];
+    }
+    
+    /**
+     * @todo remove
+     * @param string $success
+     * @param unknown $transport
+     * @return multitype:boolean unknown
+     */
     public function response($success = true, $transport)
     {
         return ['error' => !$success, 'transport' => $transport];

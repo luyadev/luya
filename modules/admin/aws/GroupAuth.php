@@ -8,6 +8,8 @@ class GroupAuth extends \admin\ngrest\base\ActiveWindow
 {
     public $module = 'admin';
 
+    public $icon = 'verified_user';
+    
     public function index()
     {
         return $this->render('index');

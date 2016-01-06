@@ -4,6 +4,18 @@ namespace admin\aws;
 
 use Yii;
 
+/**
+ * based on the example table.
+ *
+ * $this->createTable("gallery_album_image", [
+ *     "image_id" => "int(11) NOT NULL default 0",
+ *     "album_id" => "int(11) NOT NULL default 0",
+ * ]);
+ *
+ * @param string $refTableName     gallery_album_image
+ * @param string $imageIdFieldName image_id
+ * @param string $refFieldName     album_id
+ */
 class Gallery extends \admin\ngrest\base\ActiveWindow
 {
     public $refTableName = null;
@@ -14,24 +26,14 @@ class Gallery extends \admin\ngrest\base\ActiveWindow
 
     public $module = 'admin';
 
-    /**
-     * based on the example table.
-     *
-     * $this->createTable("gallery_album_image", [
-     *     "image_id" => "int(11) NOT NULL default 0",
-     *     "album_id" => "int(11) NOT NULL default 0",
-     * ]);
-     *
-     * @param string $refTableName     gallery_album_image
-     * @param string $imageIdFieldName image_id
-     * @param string $refFieldName     album_id
-     */
+    /*
     public function __construct($refTableName, $imageIdFieldName, $refFieldName)
     {
         $this->refTableName = $refTableName;
         $this->imageIdFieldName = $imageIdFieldName;
         $this->refFieldName = $refFieldName;
     }
+    */
 
     public function index()
     {

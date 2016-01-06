@@ -56,8 +56,9 @@ class Group extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
-        $config->aw->register(new \admin\aws\GroupAuth(), Module::t('model_group_btn_aws_groupauth'));
-
+        
+        //$config->aw->register(new \admin\aws\GroupAuth(), Module::t('model_group_btn_aws_groupauth'));
+        $config->aw->load(['class' => 'admin\aws\GroupAuth', 'alias' => Module::t('model_group_btn_aws_groupauth')]);
         $config->delete = true;
 
         $config->list->field('name', Module::t('model_group_name'))->text();

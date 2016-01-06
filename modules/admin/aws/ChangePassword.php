@@ -8,6 +8,8 @@ class ChangePassword extends \admin\ngrest\base\ActiveWindow
 {
     public $module = 'admin';
 
+    public $icon = 'vpn_key';
+    
     public function index()
     {
         return $this->render('index', [

@@ -60,21 +60,18 @@ class ConfigBuilderTest extends \tests\web\Base
     public function testNgRestConfigAW()
     {
         $config = new \admin\ngrest\ConfigBuilder();
-        $config->aw->register(new \admin\aws\ChangePassword(), 'Change Password');
+        $config->aw->load(['class' => 'admin\aws\ChangePassword', 'alias' => 'Change Password']);
         $cfg = $config->getConfig();
 
         $this->assertArrayHasKey('aw', $cfg);
         $aw = $cfg['aw'];
-
-        $this->assertArrayHasKey('a4935e3b2248d9c6667a02faf4b0966e35333a92', $aw);
-        $obj = $aw['a4935e3b2248d9c6667a02faf4b0966e35333a92'];
+        $this->assertArrayHasKey('00a8a03b008f1b28d968f894d83c2e87c64c046c', $aw);
+        $obj = $aw['00a8a03b008f1b28d968f894d83c2e87c64c046c'];
 
         $this->assertArrayHasKey('object', $obj);
-        $this->assertArrayHasKey('activeWindowHash', $obj);
-        $this->assertArrayHasKey('class', $obj);
         $this->assertArrayHasKey('alias', $obj);
+        $this->assertArrayHasKey('icon', $obj);
 
-        $this->assertEquals('a4935e3b2248d9c6667a02faf4b0966e35333a92', $obj['activeWindowHash']);
 
         $ngRestConfig = new \admin\ngrest\Config(['apiEndpoint' => 'api-admin-test', 'primaryKey' => 'id']);
         $ngRestConfig->setConfig($cfg);

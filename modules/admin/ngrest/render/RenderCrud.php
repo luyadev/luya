@@ -92,11 +92,11 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
                 ];
             }
             // get all activeWindows assign to the crud
-            foreach ($this->getActiveWindows() as $activeWindow) {
+            foreach ($this->getActiveWindows() as $hash => $config) {
                 $buttons[] = [
-                    'ngClick' => 'getActiveWindow(\''.$activeWindow['activeWindowHash'].'\', item.'.$this->config->primaryKey.', $event)',
-                    'icon' => $activeWindow['icon'],
-                    'label' => $activeWindow['alias'],
+                    'ngClick' => 'getActiveWindow(\''.$hash.'\', item.'.$this->config->primaryKey.', $event)',
+                    'icon' => $config['icon'],
+                    'label' => $config['alias'],
                 ];
             }
 

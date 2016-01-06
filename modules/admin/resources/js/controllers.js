@@ -6,6 +6,8 @@
 		
 		LuyaLoading.start();
 		
+		$scope.toast = AdminToastService;
+		
 		/*
 		 * 6.10.2015: remove dialogs, add variable toggler to display. added ngSwitch
 		 */
@@ -202,7 +204,6 @@
 		};
 		
 		$scope.config = {};
-		
 	});
 	
 // activeWindowController.js

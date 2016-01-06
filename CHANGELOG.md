@@ -4,6 +4,18 @@ LUYA CHANGELOG
 1.0.0-beta4 (in progress)
 -------------------------
 
+**BC BREAKS**
+
+`#697`: As part of the implementation of `yii\base\Object` for ActiveWindows the process how the ActiveWindow and the ngrest works together slightly changed. Use `$config->aw->load()` instead of `$config->aw->register()`, as the ActiveWindow will be loaded directly on call. Examples of how to load the active window:
+
+```php
+load('app\modules\foobar\test\MyActiveWindow');
+load([
+    'class' => 'app\modules\foobar\test\MyActiveWindow',
+    'property1' => 'value for property 1'
+]);
+```
+
 **ISSUES**
 
 - `#696` Fixed bug where set relation method in ngrest model for checkbox realtions can handle not angular conform post data.

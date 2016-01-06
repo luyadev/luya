@@ -76,7 +76,7 @@ class Album extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
-        $config->aw->register(new \admin\aws\Gallery('gallery_album_image', 'image_id', 'album_id'), 'Bilder Hochladen &amp; Verwalten');
+        $config->aw->load(['class' => 'admin\aws\Gallery', 'refTableName' => 'gallery_album_image', 'imageIdFieldName' => 'image_id', 'refFieldName' => 'album_id', 'alias' => 'Bilder Hochladen &amp; Verwalten']);
 
         $config->list->field('cat_id', 'Kategorie')->selectClass('\galleryadmin\models\Cat', 'id', 'title');
         $config->list->field('title', 'Titel')->text();

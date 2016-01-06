@@ -9,6 +9,4 @@ interface ActiveWindow
     public function getItemId();
 
     public function index();
-
-    public function setConfig(array $activeWindowConfig);
 }

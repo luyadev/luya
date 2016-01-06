@@ -7,7 +7,7 @@ namespace admin\ngrest\render;
  */
 class RenderActiveWindow extends \admin\ngrest\base\Render implements \admin\ngrest\interfaces\Render
 {
-    private $itemId = null;
+    private $_itemId = null;
 
     public $activeWindowHash = null;
     
@@ -16,9 +16,7 @@ class RenderActiveWindow extends \admin\ngrest\base\Render implements \admin\ngr
         if (($activeWindow = $this->findActiveWindow($this->activeWindowHash)) !== false) {
             $object = $activeWindow['object'];
             unset($activeWindow['object']);
-            $object->setConfig($activeWindow);
-            $object->setItemId($this->itemId);
-
+            $object->setItemId($this->_itemId);
             return $object->index();
         }
     }
@@ -30,7 +28,7 @@ class RenderActiveWindow extends \admin\ngrest\base\Render implements \admin\ngr
 
     public function setItemId($id)
     {
-        $this->itemId = $id;
+        $this->_itemId = (int) $id;
     }
 
     public function findActiveWindow($activeWindowHash)

@@ -89,8 +89,6 @@ class StorageFilter extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
-        //$config->aw->register(new \admin\aws\FilterEffectChain(), 'Chain');
-
         $config->list->field('name', 'Name')->text();
         $config->list->field('identifier', 'Identifier')->text();
 

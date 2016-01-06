@@ -4,6 +4,7 @@ namespace admin\ngrest\render;
 
 use Yii;
 use luya\helpers\ObjectHelper;
+use yii\helpers\Inflector;
 
 /**
  * @todo sanitize post (\yii\helpers\HtmlPurifier::process(...)
@@ -19,7 +20,7 @@ class RenderActiveWindowCallback extends \admin\ngrest\base\Render implements \a
         $activeWindows = $this->config->getPointer('aw');
         $obj = $activeWindows[$activeWindowHash]['object'];
 
-        $function = 'callback'.ucfirst($activeWindowCallback);
+        $function = 'callback'.Inflector::id2camel($activeWindowCallback);
 
         return ObjectHelper::callMethodSanitizeArguments($obj, $function, Yii::$app->request->post());
         /*

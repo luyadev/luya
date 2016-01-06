@@ -10,9 +10,5 @@ class ActiveWindowTest extends \tests\web\Base
 
         $this->assertEquals('bar', $aw->render('index', ['foo' => 'bar']));
         $this->assertEquals('index', $aw->index());
-
-        $aw->setConfig(['id' => 1]);
-
-        $this->assertArrayHasKey('id', $aw->config);
     }
 }

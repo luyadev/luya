@@ -2,7 +2,8 @@
 
 namespace admin\ngrest;
 
-use Exception;
+use Yii;
+use luya\Exception;
 use luya\helpers\ArrayHelper;
 
 class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
@@ -77,8 +78,61 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
         return $this;
     }
 
+    /**
+     * Creates a new active window object using the given configuration.
+     *
+     * Below are some usage examples:
+     *
+     * ```php
+     * // create an object using a class name
+     * load('app\modules\foobar\test\MyActiveWindow');
+     *
+     * // create an object using a configuration array
+     * load([
+     *     'class' => 'app\modules\foobar\test\MyActiveWindow',
+     *     'property1' => 'value for property 1'
+     * ]);
+     *
+     * ```
+     *
+     * @param string|array $type the object type. This can be specified in one of the following forms:
+     *
+     * - a string: representing the class name of the object to be created
+     * - a configuration array: the array must contain a `class` element which is treated as the object class,
+     *   and the rest of the name-value pairs will be used to initialize the corresponding object properties
+     *   
+     * @since 1.0.0-beta4
+     */
+    public function load($objectType)
+    {
+        if ($this->pointer !== 'aw') {
+            throw new Exception('Register method can only be used in aw pointer context.');
+        }
+        
+        $object = Yii::createObject($objectType);
+        
+        $this->config[$this->pointer][$object->getHashName()] = [
+            'object' => $object,
+            'alias' => $object->getAlias(),
+            'icon' => $object->getIcon(),
+        ];
+        
+        return $this;
+    }
+    
+    /**
+     * @todo remove in beta5
+     * 
+     * @param unknown $activeWindowObject
+     * @param unknown $aliasConfig
+     * @throws Exception
+     * @return \admin\ngrest\ConfigBuilder
+     */
     public function register($activeWindowObject, $aliasConfig)
     {
+        trigger_error("This method will be removed in beta5, use load() instead.");
+        
+        /*
         if ($this->pointer !== 'aw') {
             throw new Exception('register method can only be used in aw pointer context.');
         }
@@ -96,12 +150,13 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
         $this->config[$this->pointer][$activeWindowHash] = [
             'object' => $activeWindowObject,
             'activeWindowHash' => $activeWindowHash,
-            'class' => $activeWindowClass,
+            //'class' => $activeWindowClass,
             'alias' => $alias,
             'icon' => $icon,
         ];
 
         return $this;
+        */
     }
 
     public function extraField($name, $alias, $i18n = false)
