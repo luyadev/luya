@@ -2,7 +2,7 @@
 
 namespace admin\ngrest\base;
 
-use Exception;
+use luya\Exception;
 
 class View extends \yii\base\View
 {
@@ -12,11 +12,8 @@ class View extends \yii\base\View
 
     public function render($view, $params = [], $context = null)
     {
-        if ($this->id === null) {
-            throw new Exception("The ActiveWindow View 'id' can't be empty!");
-        }
-        if ($this->module === null) {
-            throw new Exception("The ActiveWindow View 'module' can't be empty!");
+        if ($this->id === null || $this->module === null) {
+            throw new Exception("The 'id' and 'module' properties are required to render the view file '$view'.");
         }
 
         if ($context === null) {

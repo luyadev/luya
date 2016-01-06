@@ -2,12 +2,16 @@
 
 namespace admin\ngrest\base;
 
+use luya\Exception;
+
 /**
- * @todo implement yii\base\Object
- * @todo check item and config on init()
+ * Base class for all ActiveWindow classes.
+ * 
+ * An ActiveWindow is basically a custom view which renders your data attached to a row in the CRUD grid table.
+ * 
  * @author nadar
  */
-abstract class ActiveWindow implements \admin\ngrest\interfaces\ActiveWindow
+abstract class ActiveWindow extends \yii\base\Object implements \admin\ngrest\interfaces\ActiveWindow
 {
     public $config = null;
 
@@ -17,11 +21,31 @@ abstract class ActiveWindow implements \admin\ngrest\interfaces\ActiveWindow
 
     private $_view = null;
 
+    private $_name = null;
+    
+    public function init()
+    {
+        parent::init();
+        
+        if ($this->module === null) {
+            throw new Exception('The ActiveWindow property \'module\' of '.get_called_class().' can not be null. You have to defined the module in where the ActiveWindow is defined. For example `public $module = \'@admin\';`');
+        }
+    }
+    
+    public function getName()
+    {
+        if ($this->_name === null) {
+            $this->_name = ((new \ReflectionClass($this))->getShortName());
+        }
+        
+        return $this->_name;
+    }
+    
     public function getView()
     {
         if ($this->_view === null) {
             $this->_view = new \admin\ngrest\base\View();
-            $this->_view->id = strtolower(((new \ReflectionClass($this))->getShortName()));
+            $this->_view->id = strtolower($this->getName());
             $this->_view->module = $this->module;
         }
 
