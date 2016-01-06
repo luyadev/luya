@@ -87,7 +87,13 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
         foreach ($value as $k => $v) {
             // $this->id: the value of the current database model, example when relation ins on user model id would be user id
             // $v['id'] extra field values foreached from the join table, so id will represent the joined table pk.
-            $batch[] = [$this->id, $v['id']];
+            
+            // issue #696 array logic
+            if (is_array($v)) { // its an array and is based on the logic of the angular checkbox releation ['id' => 123]
+                $batch[] = [$this->id, $v['id']];
+            } else { // its not an array so it could have been assigned from the frontend
+                $batch[] = [$this->id, $v];
+            }
         }
         if (!empty($batch)) {
             Yii::$app->db->createCommand()->batchInsert($viaTableName, [$localTableId, $foreignTableId], $batch)->execute();
