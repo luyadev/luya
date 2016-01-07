@@ -4,6 +4,7 @@ namespace luya\web;
 
 use Yii;
 use luya\helpers\Url;
+use yii\web\BadRequestHttpException;
 
 /**
  * @todo see http://www.yiiframework.com/doc-2.0/guide-runtime-routing.html#adding-rules-dynamically
@@ -152,6 +153,10 @@ class UrlManager extends \yii\web\UrlManager
 
         $item = $this->menu->find()->where(['id' => $navItemId])->with('hidden')->one();
 
+        if (!$item) {
+            throw new BadRequestHttpException("Unable to find nav_item_id '$navItemId' to generate the module link for url '$url'.");
+        }
+        
         $replaceRoute = preg_replace("/$module/", rtrim($item->link, '/'), ltrim($route, '/'), 1);
 
         return $replaceRoute;
