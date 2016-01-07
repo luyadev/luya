@@ -103,11 +103,41 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
 
     public function onBeforeUpdate($value, $oldValue)
     {
-        $this->getModel()->setRelation($value, $this->refJoinTable, $this->refModelPkId, $this->refJoinPkId);
+        $this->setRelation($value, $this->refJoinTable, $this->refModelPkId, $this->refJoinPkId);
     }
 
     public function onAfterCreate($value)
     {
-        $this->getModel()->setRelation($value, $this->refJoinTable, $this->refModelPkId, $this->refJoinPkId);
+        $this->setRelation($value, $this->refJoinTable, $this->refModelPkId, $this->refJoinPkId);
+    }
+    
+    /**
+     * @param array $value          The valued which is provided from the setter method
+     * @param string $viaTableName   Example viaTable name: news_article_tag
+     * @param string $localTableId   The name of the field inside the viaTable which represents the match against the local table, example: article_id
+     * @param string $foreignTableId The name of the field inside the viaTable which represents the match against the foreign table, example: tag_id
+     *
+     * @return bool
+     */
+    public function setRelation(array $value, $viaTableName, $localTableId, $foreignTableId)
+    {
+        Yii::$app->db->createCommand()->delete($viaTableName, [$localTableId => $this->getModel()->id])->execute();
+        $batch = [];
+        foreach ($value as $k => $v) {
+            // $this->id: the value of the current database model, example when relation ins on user model id would be user id
+            // $v['id'] extra field values foreached from the join table, so id will represent the joined table pk.
+    
+            // issue #696 array logic
+            if (is_array($v)) { // its an array and is based on the logic of the angular checkbox releation ['id' => 123]
+                $batch[] = [$this->getModel()->id, $v['id']];
+            } else { // its not an array so it could have been assigned from the frontend
+                $batch[] = [$this->getModel()->id, $v];
+            }
+        }
+        if (!empty($batch)) {
+            Yii::$app->db->createCommand()->batchInsert($viaTableName, [$localTableId, $foreignTableId], $batch)->execute();
+        }
+        // @todo check if an error happends wile the delete and/or update proccess.
+        return true;
     }
 }

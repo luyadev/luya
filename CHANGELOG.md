@@ -18,6 +18,7 @@ load([
 
 **ISSUES**
 
+- `#695` Moved `setRelation` method tocheckbox releation plugin instead of ngrest\base\Model.
 - `#696` Fixed bug where set relation method in ngrest model for checkbox realtions can handle not angular conform post data.
 - `#693` Added mailer component method adresses() function to assigne multiple recipients at the same time.
 - `#691` Create the module migration folder if the folder does not exists.

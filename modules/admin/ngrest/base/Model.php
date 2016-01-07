@@ -71,38 +71,6 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
     }
 
     /**
-     * @param array $value          The valued which is provided from the setter method
-     * @param string $viaTableName   Example viaTable name: news_article_tag
-     * @param string $localTableId   The name of the field inside the viaTable which represents the match against the local table, example: article_id
-     * @param string $foreignTableId The name of the field inside the viaTable which represents the match against the foreign table, example: tag_id
-     *
-     * @todo should be outside of model, move to checkboxrelation plugin ?
-     *
-     * @return bool
-     */
-    public function setRelation(array $value, $viaTableName, $localTableId, $foreignTableId)
-    {
-        Yii::$app->db->createCommand()->delete($viaTableName, [$localTableId => $this->id])->execute();
-        $batch = [];
-        foreach ($value as $k => $v) {
-            // $this->id: the value of the current database model, example when relation ins on user model id would be user id
-            // $v['id'] extra field values foreached from the join table, so id will represent the joined table pk.
-            
-            // issue #696 array logic
-            if (is_array($v)) { // its an array and is based on the logic of the angular checkbox releation ['id' => 123]
-                $batch[] = [$this->id, $v['id']];
-            } else { // its not an array so it could have been assigned from the frontend
-                $batch[] = [$this->id, $v];
-            }
-        }
-        if (!empty($batch)) {
-            Yii::$app->db->createCommand()->batchInsert($viaTableName, [$localTableId, $foreignTableId], $batch)->execute();
-        }
-        // @todo check if an error happends wile the delete and/or update proccess.
-        return true;
-    }
-
-    /**
      * can be overwritte in the model class or could be directly defined as property $extraFields.
      *
      * @return array Array containing extrafields, where value is the extraField name.
@@ -119,17 +87,6 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
     {
         return static::find();
     }
-
-    /*
-    public function afterFind()
-    {
-        if ($this->getNgRestCallType() == 'list') {
-            $this->trigger(self::EVENT_AFTER_NGREST_FIND);
-        }
-
-        return parent::afterFind();
-    }
-    */
 
     public function afterFind()
     {
