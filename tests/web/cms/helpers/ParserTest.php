@@ -23,11 +23,11 @@ class ParserTest extends \tests\web\Base
         
         $content = 'link[1] link test link[]';
 
-        $this->assertEquals('<a href="/">Page 1</a> link test link[]', Parser::encode($content));
+        $this->assertEquals('<a href="/">Homepage</a> link test link[]', Parser::encode($content));
 
         $content = 'link[2] link test link[]';
 
-        $this->assertEquals('<a href="/de/page-2">Page 2</a> link test link[]', Parser::encode($content));
+        $this->assertEquals('<a href="/en/page-1">Page 1</a> link test link[]', Parser::encode($content));
 
         $content = 'link[1](label)';
 
@@ -35,7 +35,11 @@ class ParserTest extends \tests\web\Base
 
         $content = 'link[2](label)';
 
-        $this->assertEquals('<a href="/de/page-2">label</a>', Parser::encode($content));
+        $this->assertEquals('<a href="/en/page-1">label</a>', Parser::encode($content));
+        
+        $content = 'link[3](label)';
+        
+        $this->assertEquals('<a href="/en/page-2">label</a>', Parser::encode($content));
     }
 
     public function testStaticLinksParser()

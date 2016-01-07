@@ -17,29 +17,29 @@ class ContainerTest extends \tests\web\Base
     {
         $objectData = new \cms\menu\Container((new \luya\web\Request()));
         $current = $objectData->current;
-        $this->assertEquals("Page 1", $current->title);
+        $this->assertEquals("Homepage", $current->title);
         $this->assertEquals(Yii::$app->urlManager->prependBaseUrl(''), $current->link);
     }
     
     public function testGetCurrent()
     {
         $current = Yii::$app->menu->current;
-        $this->assertEquals("Page 1", $current->title);
+        $this->assertEquals("Homepage", $current->title);
         $this->assertEquals(Yii::$app->urlManager->prependBaseUrl(''), $current->link);
     }
     
     public function testGetHome()
     {
         $home = Yii::$app->menu->home;
-        $this->assertEquals("Page 1", $home->title);
+        $this->assertEquals("Homepage", $home->title);
         $this->assertEquals(Yii::$app->urlManager->prependBaseUrl(''), $home->link);
     }
     
     public function testOffsetArrayAccess()
     {
         $menu = Yii::$app->menu;
-        $this->assertEquals(4, count($menu['de']));
-        $this->assertEquals(0, count($menu['en']));
+        $this->assertEquals(10, count($menu['de']));
+        $this->assertEquals(10, count($menu['en']));
     }
     
     public function testCurrentAppendix()

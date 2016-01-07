@@ -30,8 +30,8 @@ class ModelTest extends \tests\web\Base
 
         $find = DummyTableModel::findOne($id);
 
-        $this->assertEquals('foo-de', $find->i18n_text);
-        $this->assertEquals('foo-de', $find->i18n_textarea);
+        $this->assertEquals('foo-en', $find->i18n_text);
+        $this->assertEquals('foo-en', $find->i18n_textarea);
         $this->assertEquals(true, is_array($find->file_array));
         $this->assertEquals(true, is_array($find->image_array));
         $this->assertEquals($time, $find->date);

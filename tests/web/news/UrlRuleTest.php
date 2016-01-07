@@ -23,7 +23,7 @@ class UrlRuleTest extends \tests\web\Base
         Yii::$app->request->baseUrl = '';
         Yii::$app->request->scriptUrl = '';
         Yii::$app->urlManager->addRules($this->urlRules);
-        Yii::$app->composition->setKey('langShortCode', 'de');
+        Yii::$app->composition->setKey('langShortCode', 'en');
     }
 
     public function testComposition()
@@ -34,7 +34,7 @@ class UrlRuleTest extends \tests\web\Base
 
         Yii::$app->composition->hidden = false;
         $full = Yii::$app->composition->getFull();
-        $this->assertEquals('de', $full);
+        $this->assertEquals('en', $full);
     }
 
     public function testCompositionUrls()
@@ -68,7 +68,7 @@ class UrlRuleTest extends \tests\web\Base
 
         Yii::$app->composition->hidden = false;
         $url = Url::toManager('news/default/detail', ['id' => 1, 'title' => 'foo-bar']);
-        $this->assertEquals('/de/news/1/foo-bar', $url);
+        $this->assertEquals('/en/news/1/foo-bar', $url);
 
         Yii::$app->composition->hidden = true;
         $url = Url::toManager('news/default/detail', ['id' => 1, 'title' => 'foo-bar', 'pa' => 'ram']);
@@ -76,7 +76,7 @@ class UrlRuleTest extends \tests\web\Base
 
         Yii::$app->composition->hidden = false;
         $url = Url::toManager('news/default/detail', ['id' => 1, 'title' => 'foo-bar', 'pa' => 'ram']);
-        $this->assertEquals('/de/news/1/foo-bar?pa=ram', $url);
+        $this->assertEquals('/en/news/1/foo-bar?pa=ram', $url);
     }
 
     public function testModuleContextUrls()
@@ -89,12 +89,12 @@ class UrlRuleTest extends \tests\web\Base
         Yii::$app->urlManager->contextNavItemId = 2;
 
         $url = Url::toManager('news/default/detail', ['id' => 1, 'title' => 'foo-bar']);
-        $this->assertEquals('/de/page-2/1/foo-bar', $url);
+        $this->assertEquals('/en/page-1/1/foo-bar', $url);
 
         Yii::$app->urlManager->contextNavItemId = 2;
 
         $url = Url::toManager('news/default/detail', ['id' => 1, 'title' => 'foo-bar', 'pa' => 'ram']);
-        $this->assertEquals('/de/page-2/1/foo-bar?pa=ram', $url);
+        $this->assertEquals('/en/page-1/1/foo-bar?pa=ram', $url);
 
         Yii::$app->urlManager->contextNavItemId = 1;
 

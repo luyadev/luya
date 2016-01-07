@@ -22,6 +22,6 @@ class BlockControllerTest extends \tests\web\Base
      */
     public function testUnableToFindItemId()
     {
-        $response = Yii::$app->getModule('cms')->runAction('block/index', ['callback' => 'test', 'id' => 1]);
+        $response = Yii::$app->getModule('cms')->runAction('block/index', ['callback' => 'test', 'id' => 0]);
     }
 }

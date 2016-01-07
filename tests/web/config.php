@@ -47,9 +47,6 @@ $config = [
         'request' => [
             'forceWebRequest' => true,
         ],
-        'composition' => [
-            'default' => ['langShortCode' => 'de'],
-        ],
         'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => DB_DSN,

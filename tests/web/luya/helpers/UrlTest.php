@@ -27,7 +27,7 @@ class UrlTest extends \tests\web\Base
         Yii::$app->request->baseUrl = '';
         Yii::$app->request->scriptUrl = '';
         $url = Url::toAjax('news/default/index', ['id' => 1, 'title' => 'foo-bar']);
-        $this->assertEquals('/de/news/default/index?id=1&title=foo-bar', $url);
+        $this->assertEquals('/en/news/default/index?id=1&title=foo-bar', $url);
     }
     
     public function testBaseHelper()
@@ -48,7 +48,7 @@ class UrlTest extends \tests\web\Base
     public function testAjaxStaticHelper()
     {
         Yii::$app->request->baseUrl = '';
-        $this->assertEquals('/de/not/exists/action', Url::toAjax('not/exists/action'));
+        $this->assertEquals('/en/not/exists/action', Url::toAjax('not/exists/action'));
         
         Yii::$app->composition->hidden = true;
         $this->assertEquals('/not/exists/action', Url::toAjax('not/exists/action'));
