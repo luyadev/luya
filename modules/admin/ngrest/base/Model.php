@@ -6,6 +6,8 @@ use Yii;
 use admin\behaviors\LogBehavior;
 use admin\models\Lang;
 use yii\helpers\Json;
+use yii\base\InvalidConfigException;
+use yii\base\yii\base;
 
 abstract class Model extends \yii\db\ActiveRecord implements \admin\base\GenericSearchInterface
 {
@@ -221,7 +223,99 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
 
         return $this->ngRestServiceArray;
     }
+    
+    /**
+     * Define the field types for ngrest, to use `ngRestConfigDefine()`. The definition can contain properties, but does not have to.
+     *
+     * ```php
+     * ngrestAttributeTypes()
+     * {
+     *     return [
+     *         'firstname' => 'text',
+     *         'lastname' => 'text',
+     *         'description' => 'textarea',
+     *         'position' => ['selectArray', [0 => 'Mr', 1 => 'Mrs']],
+     *         'image_id' => 'image',
+     *         'image_id_2' => ['image'], // is equal to `image_id` field.
+     *         'image_id_with_no_filter' => ['image', true],
+     *     ];
+     * }
+     * ```
+     *
+     * @return array
+     * @since 1.0.0-beta4
+     */
+    public function ngrestAttributeTypes()
+    {
+        return [];
+    }
 
+    /**
+     * Inject data from the model into the config, usage exmple in ngRestConfig method context:
+     * 
+     * ```php
+     * public function ngRestConfig($config)
+     * {
+     *     // ...
+     *     $this->ngRestConfigDefine($config, 'list', ['firstname', 'lastname', 'image_id']);
+     *     $this->ngRestConfigDefine($config, 'create', ['firstname', 'lastname', 'description', 'position', 'image_id']);
+     *     $this->ngRestConfigDefine($config, 'update', ['firstname', 'lastname', 'description', 'position', 'image_id']);
+     *     // ....
+     *     return $config;
+     * }
+     * ```
+     * 
+     * 
+     * @param \admin\ngrest\ConfigBuilder $config
+     * @param unknown $type
+     * @param array $fields
+     * @throws \yii\base\InvalidConfigException
+     * @since 1.0.0-beta4
+     */
+    public function ngRestConfigDefine(\admin\ngrest\ConfigBuilder $config, $type, array $fields)
+    {
+        $types = $this->ngrestAttributeTypes();
+        
+        $scenarios = $this->scenarios();
+        
+        $scenario = false;
+        
+        if ($type == 'create' || $type == 'update') {
+            $scenario = 'rest'.$type;
+        }
+        
+        if ($scenario) {
+            if (!isset($scenarios[$scenario])) {
+                throw new InvalidConfigException("The scenario '$scenario' does not exists in your secnarios, have you forgote to defined the '$scenario' in the scenarios() method?");
+            } else {
+                $scenarios = $scenarios[$scenario];
+            }
+        }
+        
+        foreach($fields as $field) {
+            
+            if (!isset($types[$field])) {
+                throw new InvalidConfigException("The ngrest attribue '$field' does not exists in ngrestAttributeTypes() method.");
+            }
+            
+            if ($scenario && !in_array($field, $scenarios)) {
+                throw new InvalidConfigException("The field '$field' does not exists in the scenario '$scenario'. You have to define them in the scenarios() method.");
+            }
+            
+            $definition = $types[$field];
+            
+            $args = [];
+            if (is_array($definition)) {
+                $method = $definition[0];
+                $args = array_slice($definition, 1);
+            } else {
+                $method = $definition;
+            }
+            
+            $config->$type->field($field, $this->getAttributeLabel($field))->addPlugin($method, $args);
+        }
+    }
+    
     public function getNgRestConfig()
     {
         if ($this->_config == null) {

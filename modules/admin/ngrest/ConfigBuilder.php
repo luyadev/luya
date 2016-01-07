@@ -14,7 +14,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
 
     private $_pointersMap = ['list', 'create', 'update', 'delete', 'aw'];
 
-    public $config = [];
+    protected $config = [];
 
     public function __set($key, $value)
     {
@@ -27,10 +27,8 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
      * Set the pointer of the current object (example $config->list) se pointer['key'] = $key.
      *
      * @param string $key
-     *
      * @throws Exception
-     *
-     * @return \admin\ngrest\Config
+     * @return \admin\ngrest\ConfigBuilder
      */
     public function __get($key)
     {
@@ -51,14 +49,26 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
      *
      * @param unknown $name
      * @param unknown $args
-     *
-     * @return \admin\ngrest\Config
+     * @return \admin\ngrest\ConfigBuilder
      */
     public function __call($name, $args)
     {
+        return $this->addPlugin($name, $args);
+    }
+    
+    /**
+     * Add a Plugin to the current field pointer plugins array.
+     * 
+     * @param string $name The name of the ngrest\plugin
+     * @param array $args
+     * @return \admin\ngrest\ConfigBuilder
+     * @since 1.0.0-beta4
+     */
+    public function addPlugin($name, array $args)
+    {
         $plugin = ['class' => '\\admin\\ngrest\\plugins\\'.ucfirst($name), 'args' => $args];
         $this->config[$this->pointer][$this->field]['plugins'][] = $plugin;
-
+        
         return $this;
     }
 
@@ -161,12 +171,6 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
 
     public function extraField($name, $alias, $i18n = false)
     {
-        /*
-        if (!$this->extraFieldExists($name)) {
-            throw new \Exception('If you set extraFields, you have to define them first as a property inside your AR model.');
-        }
-        */
-
         $this->config[$this->pointer][$name] = [
             'name' => $name, 'i18n' => $i18n, 'alias' => $alias, 'plugins' => [], 'i18n' => false, 'extraField' => true,
         ];
