@@ -247,7 +247,7 @@ class Item extends \yii\base\Object
     }
 
     /**
-     * Get all sibilings for the current item
+     * Get all sibilings for the current item, this also includes the current item iteself.
      * 
      * @return array An array with all item-object siblings
      * @since 1.0.0-beta3
