@@ -27,6 +27,12 @@ class Item extends \yii\base\Object
     public $itemArray = null;
 
     /**
+     * @var string|null Can contain the language context, so the sub querys for this item will be the same language context
+     * as the parent object which created this object.
+     */
+    public $lang = null;
+    
+    /**
      * @var array Privat property containing with informations for the
      *            Query Object.
      */
@@ -185,6 +191,15 @@ class Item extends \yii\base\Object
     {
         return User::findOne($this->itemArray['update_user_id']);
     }
+    
+    /**
+     * Internal used to retriev redirect data if any
+     * @return multitype:
+     */
+    protected function redirectMapData($key)
+    {
+        return (!empty($this->itemArray['redirect'])) ? $this->itemArray['redirect'][$key] : false;
+    }
 
     /**
      * Returns the current item link relative path with composition (language). The
@@ -194,7 +209,21 @@ class Item extends \yii\base\Object
      */
     public function getLink()
     {
-        return ($this->itemArray['is_home'] && Yii::$app->composition->defaultLangShortCode == $this->itemArray['lang']) ? Yii::$app->urlManager->prependBaseUrl('') : $this->itemArray['link'];
+        // take care of redirect
+        if ($this->getType() === 3) {
+            switch ($this->redirectMapData('type')) {
+                case 1:
+                    return (($item = (new Query())->where(['nav_id' => $this->redirectMapData('value')])->with($this->_with)->lang($this->lang)->one())) ? $item->getLink() : null;
+                case 2:
+                    return $this->redirectMapData('value');
+            }
+        }
+        
+        if ($this->itemArray['is_home'] && Yii::$app->composition->defaultLangShortCode == $this->itemArray['lang']) {
+            return Yii::$app->urlManager->prependBaseUrl('');
+        }
+        
+        return $this->itemArray['link'];
     }
 
     /**
@@ -226,7 +255,7 @@ class Item extends \yii\base\Object
      */
     public function getParent()
     {
-        return (new Query())->where(['nav_id' => $this->parentNavId])->with($this->_with)->one();
+        return (new Query())->where(['nav_id' => $this->parentNavId])->with($this->_with)->lang($this->lang)->one();
     }
 
     /**
@@ -254,7 +283,7 @@ class Item extends \yii\base\Object
      */
     public function getSiblings()
     {
-        return (new Query())->where(['parent_nav_id' => $this->getParentNavId()])->with($this->_with)->all();
+        return (new Query())->where(['parent_nav_id' => $this->getParentNavId()])->with($this->_with)->lang($this->lang)->all();
     }
     
     /**
@@ -282,7 +311,7 @@ class Item extends \yii\base\Object
      */
     public function getChildren()
     {
-        return (new Query())->where(['parent_nav_id' => $this->navId])->with($this->_with)->all();
+        return (new Query())->where(['parent_nav_id' => $this->navId])->with($this->_with)->lang($this->lang)->all();
     }
 
     /**
@@ -292,7 +321,7 @@ class Item extends \yii\base\Object
      */
     public function hasChildren()
     {
-        return ((new Query())->where(['parent_nav_id' => $this->navId])->with($this->_with)->one()) ? true : false;
+        return ((new Query())->where(['parent_nav_id' => $this->navId])->with($this->_with)->lang($this->lang)->one()) ? true : false;
     }
 
     /**

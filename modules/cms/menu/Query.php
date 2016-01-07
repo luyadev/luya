@@ -249,32 +249,32 @@ class Query extends \yii\base\Object
 
     public function one()
     {
-        $data = $this->filter($this->_where, $this->menu[$this->lang]);
+        $data = $this->filter($this->_where, $this->menu[$this->getLang()]);
 
         if (count($data) == 0) {
             return false;
         }
 
-        return static::createItemObject(array_values($data)[0]);
+        return static::createItemObject(array_values($data)[0], $this->getLang());
     }
 
     public function all()
     {
-        return static::createArrayIterator($this->filter($this->_where, $this->menu[$this->lang]));
+        return static::createArrayIterator($this->filter($this->_where, $this->menu[$this->getLang()]), $this->getLang());
     }
     
     public function count()
     {
-        return count($this->filter($this->_where, $this->menu[$this->lang]));
+        return count($this->filter($this->_where, $this->menu[$this->getLang()]));
     }
 
-    public static function createArrayIterator($data)
+    public static function createArrayIterator($data, $langContext)
     {
-        return Yii::createObject(['class' => QueryIterator::className(), 'data' => $data]);
+        return Yii::createObject(['class' => QueryIterator::className(), 'data' => $data, 'lang' => $langContext]);
     }
 
-    public static function createItemObject(array $itemArray)
+    public static function createItemObject(array $itemArray, $langContext)
     {
-        return Yii::createObject(['class' => Item::className(), 'itemArray' => $itemArray]);
+        return Yii::createObject(['class' => Item::className(), 'itemArray' => $itemArray, 'lang' => $langContext]);
     }
 }

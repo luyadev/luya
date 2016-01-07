@@ -18,6 +18,7 @@ load([
 
 **ISSUES**
 
+- `#694` Pages with redirects now return the url of the redirected page instead of the temp generate alias name for this item in the menu component.
 - `#695` Moved `setRelation` method tocheckbox releation plugin instead of ngrest\base\Model.
 - `#696` Fixed bug where set relation method in ngrest model for checkbox realtions can handle not angular conform post data.
 - `#693` Added mailer component method adresses() function to assigne multiple recipients at the same time.

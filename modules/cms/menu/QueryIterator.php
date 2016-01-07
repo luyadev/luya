@@ -22,6 +22,12 @@ class QueryIterator extends \yii\base\Object implements Iterator, Countable
     public $data = [];
 
     /**
+     * @var string|null Can contain the language context, so the sub querys for this item will be the same language context
+     * as the parent object which created this object.
+     */
+    public $lang = null;
+    
+    /**
      * Callculate to number of items when using count() function against the QueryIterator object.
      * 
      * @return int The number of elements in the object.
@@ -38,7 +44,7 @@ class QueryIterator extends \yii\base\Object implements Iterator, Countable
      */
     public function current()
     {
-        return Query::createItemObject(current($this->data));
+        return Query::createItemObject(current($this->data), $this->lang);
     }
 
     /**
