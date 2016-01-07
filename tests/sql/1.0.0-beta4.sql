@@ -22,6 +22,36 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
+--
+-- Tabellenstruktur für Tabelle `error_data`
+--
+
+CREATE TABLE `error_data` (
+`id` int(11) NOT NULL,
+  `identifier` varchar(255) DEFAULT NULL,
+  `error_json` text,
+  `timestamp_create` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Indizes der exportierten Tabellen
+--
+
+--
+-- Indizes für die Tabelle `error_data`
+--
+ALTER TABLE `error_data`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT für exportierte Tabellen
+--
+
+--
+-- AUTO_INCREMENT für Tabelle `error_data`
+--
+ALTER TABLE `error_data`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 -- --------------------------------------------------------
 
@@ -30,13 +60,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `admin_property` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `module_name` varchar(120) DEFAULT NULL,
   `var_name` varchar(80) NOT NULL,
-  `type` varchar(40) NOT NULL,
-  `label` varchar(120) NOT NULL,
-  `option_json` varchar(255) DEFAULT NULL,
-  `default_value` varchar(255) DEFAULT NULL
+  `class_name` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -421,7 +448,9 @@ CREATE TABLE IF NOT EXISTS `admin_storage_folder` (
 CREATE TABLE IF NOT EXISTS `admin_storage_image` (
 `id` int(11) NOT NULL,
   `file_id` int(11) DEFAULT NULL,
-  `filter_id` int(11) DEFAULT NULL
+  `filter_id` int(11) DEFAULT NULL,
+  `resolution_width` int(11) DEFAULT NULL,
+  `resolution_height` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -439,7 +468,8 @@ CREATE TABLE IF NOT EXISTS `admin_user` (
   `password` varchar(255) DEFAULT NULL,
   `password_salt` varchar(255) DEFAULT NULL,
   `auth_token` varchar(255) DEFAULT NULL,
-  `is_deleted` smallint(6) DEFAULT NULL
+  `is_deleted` smallint(6) DEFAULT NULL,
+  `force_reload` smallint(1) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
@@ -560,24 +590,22 @@ INSERT INTO `cms_block_group` (`id`, `name`, `is_deleted`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cms_cat`
+-- Table structure for table `cms_nav_container`
 --
 
-CREATE TABLE IF NOT EXISTS `cms_cat` (
+CREATE TABLE IF NOT EXISTS `cms_nav_container` (
 `id` int(11) NOT NULL,
   `name` varchar(180) NOT NULL,
-  `rewrite` varchar(80) NOT NULL,
-  `default_nav_id` int(11) NOT NULL,
-  `is_default` tinyint(1) NOT NULL DEFAULT '0',
+  `alias` varchar(80) NOT NULL,
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `cms_cat`
+-- Dumping data for table `cms_nav_container`
 --
 
-INSERT INTO `cms_cat` (`id`, `name`, `rewrite`, `default_nav_id`, `is_default`, `is_deleted`) VALUES
-(1, 'Hauptnavigation', 'default', 1, 1, 0);
+INSERT INTO `cms_nav_container` (`id`, `name`, `alias`, `is_deleted`) VALUES
+(1, 'Hauptnavigation', 'default', 0);
 
 -- --------------------------------------------------------
 
@@ -607,23 +635,25 @@ INSERT INTO `cms_layout` (`id`, `name`, `json_config`, `view_file`) VALUES
 
 CREATE TABLE IF NOT EXISTS `cms_nav` (
 `id` int(11) NOT NULL,
-  `cat_id` int(11) NOT NULL DEFAULT '0',
+  `nav_container_id` int(11) NOT NULL DEFAULT '0',
   `parent_nav_id` int(11) NOT NULL DEFAULT '0',
   `sort_index` int(11) NOT NULL DEFAULT '0',
   `is_deleted` tinyint(1) DEFAULT '0',
   `is_hidden` tinyint(1) DEFAULT '0',
-  `is_offline` tinyint(1) DEFAULT '0'
+  `is_offline` tinyint(1) DEFAULT '0',
+  `is_home` tinyint(1) DEFAULT '0',
+   `is_draft` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `cms_nav`
 --
 
-INSERT INTO `cms_nav` (`id`, `cat_id`, `parent_nav_id`, `sort_index`, `is_deleted`, `is_hidden`) VALUES
-(1, 1, 0, 1, 0, 0),
-(2, 1, 0, 2, 0, 0),
-(3, 1, 0, 3, 0, 0),
-(4, 1, 0, 4, 0, 0);
+INSERT INTO `cms_nav` (`id`, `nav_container_id`, `parent_nav_id`, `sort_index`, `is_deleted`, `is_hidden`, `is_home`) VALUES
+(1, 1, 0, 1, 0, 0, 1),
+(2, 1, 0, 2, 0, 0, 0),
+(3, 1, 0, 3, 0, 0, 0),
+(4, 1, 0, 4, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -642,20 +672,28 @@ CREATE TABLE IF NOT EXISTS `cms_nav_item` (
   `timestamp_create` int(11) DEFAULT NULL,
   `timestamp_update` int(11) DEFAULT NULL,
   `title` varchar(180) NOT NULL,
-  `rewrite` varchar(80) NOT NULL
+  `alias` varchar(80) NOT NULL,
+  `description` text
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `cms_nav_item`
 --
 
-INSERT INTO `cms_nav_item` (`id`, `nav_id`, `lang_id`, `nav_item_type`, `nav_item_type_id`, `create_user_id`, `update_user_id`, `timestamp_create`, `timestamp_update`, `title`, `rewrite`) VALUES
+INSERT INTO `cms_nav_item` (`id`, `nav_id`, `lang_id`, `nav_item_type`, `nav_item_type_id`, `create_user_id`, `update_user_id`, `timestamp_create`, `timestamp_update`, `title`, `alias`) VALUES
 (1, 1, 1, 1, 1, 1, 1, 1439281771, 0, 'Page 1', 'page-1'),
 (2, 2, 1, 1, 2, 1, 1, 1439281801, 0, 'Page 2', 'page-2'),
 (3, 3, 1, 2, 1, 1, 1, 1439282169, 0, 'My News Page', 'my-news-page'),
 (4, 4, 1, 2, 2, 1, 1, 1439282169, 0, 'News Module', 'news-module-page');
 
 -- --------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `cms_nav_item_redirect` (
+  `id` int(11) NOT NULL,
+  `type` int(11) NOT NULL,
+  `value` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COMMENT='latin1_swedish_ci';
+
 
 --
 -- Table structure for table `cms_nav_item_module`
@@ -712,7 +750,8 @@ CREATE TABLE IF NOT EXISTS `cms_nav_item_page_block_item` (
   `update_user_id` int(11) DEFAULT '0',
   `timestamp_create` int(11) DEFAULT '0',
   `timestamp_update` int(11) DEFAULT '0',
-  `sort_index` int(11) DEFAULT '0'
+  `sort_index` int(11) DEFAULT '0',
+  `is_hidden` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -964,9 +1003,9 @@ ALTER TABLE `cms_block_group`
  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `cms_cat`
+-- Indexes for table `cms_nav_container`
 --
-ALTER TABLE `cms_cat`
+ALTER TABLE `cms_nav_container`
  ADD PRIMARY KEY (`id`);
 
 --
@@ -1137,9 +1176,9 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 ALTER TABLE `cms_block_group`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT for table `cms_cat`
+-- AUTO_INCREMENT for table `cms_nav_container`
 --
-ALTER TABLE `cms_cat`
+ALTER TABLE `cms_nav_container`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `cms_layout`
@@ -1204,3 +1243,4 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
