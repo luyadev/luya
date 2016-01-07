@@ -32,4 +32,9 @@ class Number extends \admin\ngrest\base\Plugin
     {
         return $this->renderCreate($doc);
     }
+    
+    public function onAfterNgRestFind($fieldValue)
+    {
+        return (int) $fieldValue;
+    }
 }
