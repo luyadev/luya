@@ -107,8 +107,7 @@ class Query extends \yii\base\Object
      * where(['parent_nav_id' => 0, 'container' => 'footer']);
      * ```
      * 
-     * @param array $args
-     *
+     * @param array $args The where defintion can be either an key-value pairing or a condition representen as array.
      * @return \cms\menu\Query
      */
     public function where(array $args)
@@ -129,7 +128,10 @@ class Query extends \yii\base\Object
     }
 
     /**
+     * Add another where statement to the existing, this is the case when using compare operators, as then only
+     * one where definition can bet set.
      * 
+     * @see \cms\menu\Query->where() 
      * @param array $args
      */
     public function andWhere(array $args)
@@ -143,7 +145,6 @@ class Query extends \yii\base\Object
      * or the default language if no information is presented.
      * 
      * @param string $langShortCode Language Short Code e.g. de or en
-     *
      * @return \cms\menu\Query
      */
     public function lang($langShortCode)
@@ -156,6 +157,7 @@ class Query extends \yii\base\Object
     /**
      * @param string|array $with can be a string  containg "hidden" or an array with multiple patters
      * for example `['hidden']`. Further with statements upcoming.
+     * @return \cms\menu\Query
      */
     public function with($types)
     {
@@ -169,6 +171,11 @@ class Query extends \yii\base\Object
         return $this;
     }
 
+    /**
+     * Return the current language from composition if not set via `lang()`.
+     * 
+     * @return string
+     */
     public function getLang()
     {
         if ($this->_lang === null) {
@@ -178,34 +185,12 @@ class Query extends \yii\base\Object
         return $this->_lang;
     }
 
-    public function arrayFilter($value, $field)
-    {
-        if ($field == 'is_hidden' && $this->_with['hidden'] === false && $value == 1) {
-            return false;
-        }
-
-        foreach ($this->_where as $expression) {
-            if ($expression['field'] == $field) {
-                switch ($expression['op']) {
-                    case '=':
-                        return ($value == $expression['value']);
-                    case '==':
-                        return ($value === $expression['value']);
-                    case '>':
-                        return ($value > $expression['value']);
-                    case '>=':
-                        return ($value >= $expression['value']);
-                    case '<':
-                        return ($value < $expression['value']);
-                    case '<=':
-                        return ($value <= $expression['value']);
-                }
-            }
-        }
-
-        return true;
-    }
-
+    /**
+     * Set a limition for the amount of results.
+     * 
+     * @param integer $count The number of rows to return
+     * @return \cms\menu\Query
+     */
     public function limit($count)
     {
         if (is_numeric($count)) {
@@ -215,38 +200,30 @@ class Query extends \yii\base\Object
         return $this;
     }
     
-    public function offset($count)
+    /**
+     * Define offset start for the rows, if you defined offset to be 5 and you have 11 rows, the
+     * first 5 rows will be skiped. This is commonly used to make pagination function in combination
+     * with the limit() function.
+     * 
+     * @param integer $offset Defines the amount of offset start position.
+     * @return \cms\menu\Query
+     */
+    public function offset($offset)
     {
-        if (is_numeric($count)) {
-            $this->_offset = $count;
+        if (is_numeric($offset)) {
+            $this->_offset = $offset;
         }
         
         return $this;
     }
-    
-    public function filter(array $whereExpression, $containerData)
-    {
-        $data = array_filter($containerData, function ($item) {
-            foreach ($item as $field => $value) {
-                if (!$this->arrayFilter($value, $field)) {
-                    return false;
-                }
-            }
 
-            return true;
-        });
-        
-        if ($this->_offset !== null) {
-            $data = array_slice($data, $this->_offset, null, true);
-        }
-        
-        if ($this->_limit !== null) {
-            $data = array_slice($data, 0, $this->_limit, true);
-        }
-        
-        return $data;
-    }
-
+    /**
+     * Retrieve only one result for your query, even if there are more rows then one, it will
+     * just pick the first row from the filtered result and return the item object. If the filtering
+     * based on the query settings does not return any result, the return will be false.
+     * 
+     * @return \cms\menu\Item|boolean Returns the Item object or false if nothing found.
+     */
     public function one()
     {
         $data = $this->filter($this->_where, $this->menu[$this->getLang()]);
@@ -258,23 +235,85 @@ class Query extends \yii\base\Object
         return static::createItemObject(array_values($data)[0], $this->getLang());
     }
 
+    /**
+     * Retrieve all found rows based on the filtering options and returns the the QueryIterator object
+     * which is represents an array.
+     * 
+     * @return \cms\menu\QueryIterator Returns the QueryIterator object.
+     */
     public function all()
     {
         return static::createArrayIterator($this->filter($this->_where, $this->menu[$this->getLang()]), $this->getLang());
     }
     
+    /**
+     * Returns the count for the provided filter options.
+     * 
+     * @return integer The number of rows for your filtering options.
+     */
     public function count()
     {
         return count($this->filter($this->_where, $this->menu[$this->getLang()]));
     }
-
-    public static function createArrayIterator($data, $langContext)
+    
+    public static function createArrayIterator(array $data, $langContext)
     {
-        return Yii::createObject(['class' => QueryIterator::className(), 'data' => $data, 'lang' => $langContext]);
+    	return Yii::createObject(['class' => QueryIterator::className(), 'data' => $data, 'lang' => $langContext]);
     }
-
+    
     public static function createItemObject(array $itemArray, $langContext)
     {
-        return Yii::createObject(['class' => Item::className(), 'itemArray' => $itemArray, 'lang' => $langContext]);
+    	return Yii::createObject(['class' => Item::className(), 'itemArray' => $itemArray, 'lang' => $langContext]);
+    }
+    
+    protected function filter(array $whereExpression, $containerData)
+    {
+    	$data = array_filter($containerData, function ($item) {
+    		foreach ($item as $field => $value) {
+    			if (!$this->arrayFilter($value, $field)) {
+    				return false;
+    			}
+    		}
+    
+    		return true;
+    	});
+    
+    		if ($this->_offset !== null) {
+    			$data = array_slice($data, $this->_offset, null, true);
+    		}
+    
+    		if ($this->_limit !== null) {
+    			$data = array_slice($data, 0, $this->_limit, true);
+    		}
+    
+    		return $data;
+    }
+    
+    protected function arrayFilter($value, $field)
+    {
+    	if ($field == 'is_hidden' && $this->_with['hidden'] === false && $value == 1) {
+    		return false;
+    	}
+    
+    	foreach ($this->_where as $expression) {
+    		if ($expression['field'] == $field) {
+    			switch ($expression['op']) {
+    				case '=':
+    					return ($value == $expression['value']);
+    				case '==':
+    					return ($value === $expression['value']);
+    				case '>':
+    					return ($value > $expression['value']);
+    				case '>=':
+    					return ($value >= $expression['value']);
+    				case '<':
+    					return ($value < $expression['value']);
+    				case '<=':
+    					return ($value <= $expression['value']);
+    			}
+    		}
+    	}
+    
+    	return true;
     }
 }
