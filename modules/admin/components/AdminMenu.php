@@ -165,7 +165,8 @@ class AdminMenu extends \yii\base\Component
                 if ($key == 'groups') {
                     foreach ($value as $group => $groupValue) {
                         foreach ($groupValue['items'] as $array) {
-                            $data[] = $array;
+                            $array['module'] = $node;
+                        	$data[] = $array;
                         }
                     }
                 }

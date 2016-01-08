@@ -23,10 +23,14 @@ class SearchController extends \admin\base\RestController
                     throw new Exception('The model must be an instance of GenericSearchInterface');
                 }
                 $data = $model->genericSearch($query);
+                $stateProvider = $model->genericSearchStateProvider();
+                
                 if (count($data) > 0) {
                     $search[] = [
+                    	'type' => 'custom',
                         'menuItem' => $node,
                         'data' => $data,
+                    	'stateProvider' => $stateProvider,
                     ];
                 }
             }
@@ -38,6 +42,7 @@ class SearchController extends \admin\base\RestController
                 $data = $ctrl[0]->runAction('search', ['query' => $query]);
                 if (count($data) > 0) {
                     $search[] = [
+                    	'type' => 'api',
                         'menuItem' => $api,
                         'data' => $data,
                     ];

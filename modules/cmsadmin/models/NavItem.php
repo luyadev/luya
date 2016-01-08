@@ -187,7 +187,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
 
     public function genericSearchFields()
     {
-        return ['title', 'alias'];
+        return ['title', 'alias', 'nav_id'];
     }
 
     public function genericSearch($searchQuery)
@@ -199,6 +199,22 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
         }
 
         return $query->select($fields)->asArray()->all();
+    }
+    
+    /**
+     * Return the angular state provider config for custom.cmsedit.
+     * 
+     * {@inheritDoc}
+     * @see \admin\base\GenericSearchInterface::genericSearchStateProvider()
+     */
+    public function genericSearchStateProvider()
+    {
+    	return [
+    		'state' => 'custom.cmsedit',
+    		'params' => [
+    			'navId' => 'nav_id',
+    		],
+    	];
     }
 
     /**

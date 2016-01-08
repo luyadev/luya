@@ -16,6 +16,8 @@ load([
 ]);
 ```
 
+`#690`: The new `admin\base\GenericSearchInterface` interface defines a new method `genericSearchStateProvider()` which defines the condition for the angular uirouter state to enable item clicks.
+
 **ISSUES**
 
 - `#694` Pages with redirects now return the url of the redirected page instead of the temp generate alias name for this item in the menu component.

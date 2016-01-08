@@ -487,6 +487,27 @@
 		
 		$scope.showOnlineContainer = false;
 		
+		$scope.searchDetailClick = function(itemConfig, itemData) {
+			if (itemConfig.type == 'custom') {
+				$scope.click(itemConfig.menuItem).then(function() {
+					if (itemConfig.stateProvider) {
+						var params = {};
+						angular.forEach(itemConfig.stateProvider.params, function(value, key) {
+							params[key] = itemData[value];
+						})
+						
+						$state.go(itemConfig.stateProvider.state, params);
+					}
+				});
+				
+			} else {
+				$scope.click(itemConfig.menuItem.module).then(function() {
+					var res = itemConfig.menuItem.route.split("-");
+					$state.go('default.route', { moduleRouteId : res[0], controllerId : res[1], actionId : res[2]});
+				});
+			}
+		};
+		
 		(function tick(){
 			$http.get('admin/api-admin-timestamp', { ignoreLoadingBar: true }).success(function(response) {
 				$scope.forceReload = response.forceReload;
@@ -547,9 +568,9 @@
 			$scope.mobileOpen = false;
 			$scope.$broadcast('topMenuClick', { menuItem : menuItem });
 			if (menuItem.template) {
-				$state.go('custom', { 'templateId' : menuItem.template });
+				return $state.go('custom', { 'templateId' : menuItem.template });
 			} else {
-				$state.go('default', { 'moduleId' : menuItem.id});
+				return $state.go('default', { 'moduleId' : menuItem.id});
 			}
 		};
 		

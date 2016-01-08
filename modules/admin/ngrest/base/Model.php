@@ -180,6 +180,17 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
 
         return $fields;
     }
+    
+    /**
+     * Current Ng-Rest item does not have a detail view.
+     * 
+     * {@inheritDoc}
+     * @see \admin\base\GenericSearchInterface::genericSearchStateProvider()
+     */
+    public function genericSearchStateProvider()
+    {
+    	return false;
+    }
 
     /**
      * @param string $searchQuery a search string
