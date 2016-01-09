@@ -256,11 +256,27 @@ class Query extends \yii\base\Object
         return count($this->filter($this->_where, $this->menu[$this->getLang()]));
     }
     
+    /**
+     * Static method to create an iterator object based on the provided array data with
+     * optional language context.
+     * 
+     * @param array $data The filtere results where the iterator object should be created with
+     * @param string $langContext The language short code context, if any.
+     * @return \cms\menu\QueryIterator
+     */
     public static function createArrayIterator(array $data, $langContext)
     {
     	return Yii::createObject(['class' => QueryIterator::className(), 'data' => $data, 'lang' => $langContext]);
     }
     
+    /**
+     * Static method to create the item object itself, is used for the one() method and in the current() method
+     * of the QueryIterator class.
+     * 
+     * @param array $itemArray The item array data for the object
+     * @param string  $langContext The language short code context, if any.
+     * @return \cms\menu\Item
+     */
     public static function createItemObject(array $itemArray, $langContext)
     {
     	return Yii::createObject(['class' => Item::className(), 'itemArray' => $itemArray, 'lang' => $langContext]);
