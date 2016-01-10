@@ -496,14 +496,20 @@
 							params[key] = itemData[value];
 						})
 						
-						$state.go(itemConfig.stateProvider.state, params);
+						$state.go(itemConfig.stateProvider.state, params).then(function() {
+							$scope.closeSearchInput();
+						})
+					} else {
+						$scope.closeSearchInput();
 					}
 				});
 				
 			} else {
 				$scope.click(itemConfig.menuItem.module).then(function() {
 					var res = itemConfig.menuItem.route.split("-");
-					$state.go('default.route', { moduleRouteId : res[0], controllerId : res[1], actionId : res[2]});
+					$state.go('default.route', { moduleRouteId : res[0], controllerId : res[1], actionId : res[2]}).then(function() {
+						$scope.closeSearchInput();
+					})
 				});
 			}
 		};
