@@ -1,6 +1,25 @@
 (function() {
 	"use strict";
 	
+	zaa.config(function($stateProvider, resolverProvider) {
+		$stateProvider
+		.state("default.route.detail", {
+			url: "/:id",
+			parent: 'default.route',
+			template: '<ui-view/>',
+			controller:function($scope, $stateParams) {
+				
+				$scope.crud = $scope.$parent;
+				
+				$scope.init = function() {
+					$scope.crud.toggleUpdate($stateParams.id);
+				}
+				
+				$scope.init();
+			}
+		})
+	});
+	
 	// CrudController.js
 	zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminLangService, LuyaLoading, AdminToastService) {
 		
@@ -22,6 +41,9 @@
 		$scope.crudSwitchType = 0;
 		
 		$scope.switchTo = function(type) {
+			if (type == 0 || type == 1) {
+				$state.go('default.route');
+			}
 			$scope.crudSwitchType = type;
 		};
 		
@@ -118,11 +140,12 @@
 			});
 		};
 		
-		$scope.toggleUpdate = function(id, $event) {
+		$scope.toggleUpdate = function(id) {
 			$scope.data.updateId = id;
 			$http.get($scope.config.apiEndpoint + '/'+id+'?' + $scope.config.apiUpdateQueryString).success(function(data) {
 				$scope.data.update = data;
 				$scope.switchTo(2);
+				$state.go('default.route.detail', {id : id});
 			}).error(function(data) {
 				AdminToastService.error(i18n['js_ngrest_error'], 2000);
 			});
@@ -508,7 +531,17 @@
 				$scope.click(itemConfig.menuItem.module).then(function() {
 					var res = itemConfig.menuItem.route.split("-");
 					$state.go('default.route', { moduleRouteId : res[0], controllerId : res[1], actionId : res[2]}).then(function() {
-						$scope.closeSearchInput();
+						if (itemConfig.stateProvider) {
+							var params = {};
+							angular.forEach(itemConfig.stateProvider.params, function(value, key) {
+								params[key] = itemData[value];
+							})
+							$state.go(itemConfig.stateProvider.state, params).then(function() {
+								$scope.closeSearchInput();
+							})
+						} else {
+							$scope.closeSearchInput();
+						}
 					})
 				});
 			}

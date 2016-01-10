@@ -40,11 +40,13 @@ class SearchController extends \admin\base\RestController
             if ($api['permissionIsApi']) {
                 $ctrl = $module->createController($api['permssionApiEndpoint']);
                 $data = $ctrl[0]->runAction('search', ['query' => $query]);
+                $stateProvider = $ctrl[0]->runAction('search-provider');
                 if (count($data) > 0) {
                     $search[] = [
                     	'type' => 'api',
                         'menuItem' => $api,
                         'data' => $data,
+                    	'stateProvider' => $stateProvider,
                     ];
                 }
             }

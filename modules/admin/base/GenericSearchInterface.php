@@ -36,4 +36,6 @@ interface GenericSearchInterface
      * @since 1.0.0-beta4 
      */
     public function genericSearchStateProvider();
+    
+    public function genericSearchHiddenFields();
 }

@@ -30,4 +30,11 @@ class Api extends \admin\base\RestActiveController
 
         return $model->genericSearch($query);
     }
+
+    public function actionSearchProvider()
+    {
+    	$model = Yii::createObject($this->modelClass);
+    	
+    	return $model->genericSearchStateProvider();
+    }
 }

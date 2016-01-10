@@ -189,6 +189,11 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     {
         return ['title', 'alias', 'nav_id'];
     }
+    
+    public function genericSearchHiddenFields()
+    {
+    	return [];
+    }
 
     public function genericSearch($searchQuery)
     {

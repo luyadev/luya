@@ -17,7 +17,8 @@
 </script>
 
 <div ng-controller="<?=$config->hash; ?>" ng-init="init()">
-
+	<!-- This fake ui-view is used to render the detail item, which actuals uses the parent scope in the ui router controller. -->
+	<div style="visibility:hidden;" ui-view></div>
     <div ng-switch="crudSwitchType">
 
         <div class="tabs">

@@ -16,10 +16,11 @@ load([
 ]);
 ```
 
-`#690`: The new `admin\base\GenericSearchInterface` interface defines a new method `genericSearchStateProvider()` which defines the condition for the angular uirouter state to enable item clicks.
+`#690`: The new `admin\base\GenericSearchInterface` interface defines a new method `genericSearchStateProvider()` which defines the condition for the angular uirouter state to enable item clicks. There is also a method called `genericSearchHiddenFields()` which will return an array with fields not to display in admin search result list.
 
 **ISSUES**
 
+- `#690` Added ability to click generic search items in admin search view. Therefore new methods have been implement to GenericSearchInterface.
 - `#704` Added ability to close ngrest crud create, update and aw scope with ESC key.
 - `#694` Pages with redirects now return the url of the redirected page instead of the temp generate alias name for this item in the menu component.
 - `#695` Moved `setRelation` method tocheckbox releation plugin instead of ngrest\base\Model.

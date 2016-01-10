@@ -181,6 +181,11 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
         return $fields;
     }
     
+    public function genericSearchHiddenFields()
+    {
+    	return [];
+    }
+    
     /**
      * Current Ng-Rest item does not have a detail view.
      * 
@@ -189,7 +194,12 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
      */
     public function genericSearchStateProvider()
     {
-    	return false;
+    	return [
+			'state' => 'default.route.detail',
+    		'params' => [
+    			'id' => 'id',
+    		],
+    	];
     }
 
     /**
@@ -200,6 +210,13 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
     public function genericSearch($searchQuery)
     {
         $fields = $this->genericSearchFields();
+        $pk = $this->getNgRestPrimaryKey();
+        
+        // add pk to fields list automatically to make click able state providers
+        if (!in_array($pk, $fields)) {
+        	$fields[] = $pk;
+        }
+        
         // create active query object
         $query = self::find();
         // foreach all fields from genericSearchFields metod

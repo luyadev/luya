@@ -44,6 +44,7 @@ function i18nParam(varName, params) {
 				templateUrl: function ($stateParams) {
 	                return $stateParams.moduleRouteId + "/" + $stateParams.controllerId  + "/" + $stateParams.actionId;
 	            },
+	            parent: 'default',
 	            resolve : {
 	            	adminServiceResolver: adminServiceResolver
 				}
