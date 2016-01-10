@@ -97,7 +97,7 @@
         </div>
         <!-- /LIST -->
     
-        <div class="card-panel" ng-switch-when="1">
+        <div class="card-panel" ng-switch-when="1" zaa-esc="closeCreate()">
 
             <?php if ($canCreate && $config->getPointer('create')): ?>
                 <form name="formCreate" role="form" ng-submit="submitCreate()">
@@ -141,7 +141,7 @@
             <?php endif; ?>
         </div>
     
-        <div class="card-panel" ng-switch-when="2">
+        <div class="card-panel" ng-switch-when="2" zaa-esc="closeUpdate()">
             <?php if ($canUpdate && $config->getPointer('update')): ?>
                 <form name="formUpdate" role="form" ng-submit="submitUpdate()">
                     <!-- MODAL CONTENT -->
@@ -185,7 +185,7 @@
     </div>
 
     <!-- activeWindow MODAL -->
-    <div ng-show="activeWindowModal" class="modal__wrapper">
+    <div ng-show="activeWindowModal" class="modal__wrapper" zaa-esc="closeActiveWindow()">
         <div class="modal">
             <button class="btn waves-effect waves-light modal__close btn-floating red" type="button" ng-click="closeActiveWindow()">
                 <i class="material-icons">close</i>

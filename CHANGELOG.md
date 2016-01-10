@@ -20,6 +20,7 @@ load([
 
 **ISSUES**
 
+- `#704` Added ability to close ngrest crud create, update and aw scope with ESC key.
 - `#694` Pages with redirects now return the url of the redirected page instead of the temp generate alias name for this item in the menu component.
 - `#695` Moved `setRelation` method tocheckbox releation plugin instead of ngrest\base\Model.
 - `#696` Fixed bug where set relation method in ngrest model for checkbox realtions can handle not angular conform post data.
