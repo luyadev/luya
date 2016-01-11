@@ -20,6 +20,7 @@ load([
 
 **ISSUES**
 
+- `#697` New ActiveWindow helpers, extend from yii\base\Object to add ability to configure the classes. See BC BREAKS.
 - `#706` Fixed bug where Filter::encode() trys to handler object and array values.
 - `#705` Fixed bug where parse request removes partial string from the request when composition is the same as the module name begin with (`de` - `debug`).
 - `#690` Added ability to click generic search items in admin search view. Therefore new methods have been implement to GenericSearchInterface.

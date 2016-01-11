@@ -1,11 +1,13 @@
 NgRest ActiveWindow
 ===================
+
 Ein *NgRest ActiveWindow* ist ein Fenster welches auf eine ID angeknüpft wird, dies zeigt sich als *Button* in der Grid übersicht deiner Datensätze. Du kannst nun auf den Knopf klicken und inhalt für diese aktuelle geklickt *ID* anzeigen. Ein *ActiveWindow" ist eine Klasse mit dem suffx *ActiveWindow* und befinden sich im Ordners `aws`.
 
 Beim aufruven des *ActiveWindows* via den *Button* innerhalb der *Grid-Liste* wird als immer die `index()` methode gerendet.
 
 Beispiel Klasse
 ------------------
+
 So könnten ein *ActiveWindow* mit dem Namen *Test* aussehen.
 
 ```php
@@ -20,9 +22,9 @@ class TestActiveWindow extends \admin\ngrest\base\ActiveWindow
         return $this->render("index");
     }
     
-    public function callbackSayhello($name)
+    public function callbackSayHello($name)
     {
-        return 'Hello ' . $name . ' from item: ' . $this->getItemId();
+        $this->sendSuccess('Hello: ' . $this->itemId);
     }
 }
 ```
@@ -31,60 +33,64 @@ class TestActiveWindow extends \admin\ngrest\base\ActiveWindow
 * Jedes *ActiveWindow* muss über eine `index()` methode verfügen.
 * Callbacks müssen den prefix `callback` haben.
 
+Um einen vordefinierten namen und icon deines Active Window zu vergeben, überschreibe die properties:
+
+* $alias
+* $icon
+
+```php
+public $alias = 'Das ist mein AW';
+
+public $icon = 'extension';
+```
+
 > Pro Tipp: Du kannst andere *ActiveWindows* extenden (`extends XYZActiveWindow`) und die `$module` propertie anpassen um deine eigenen views zu rendern.
 
 View Files
 -----------
-@TODO
-The render method from the example class above would try to find the view:
 
-`@admin/views/aws/testactivewindow/index__`
+Das view file welches bei `$this->render('index')` gesucht wird würde im folgenden Ordner liegen `@admin/views/aws/testactivewindow` und der Datei names ist `index.php`.
 
-Example content to interact with the callback `callbackSayhello` could be:
+Es gibt vordefinierte helper methoden aus dem view context welche zbsp. eine Button zur Verfügung stellen welcher direkt den Callback mit gewünschten optioen aufruft. Natürlich können auch angular resource files hinterlegt werden um komplexe tasks abzuwickeln.
 
-```
-<h1>Hello ActiveWindow</h1>
-<button type="button" ng-click="sendActiveWindowCallback('sayhello', { name : 'John Doe' })">Call the Callback</button>
+Ein beispiel für den Inhalt des index views, der einen Knopf beinhaltet welchen die `callbackSayHello` methode aufruft:
 
-<h3>RESPONSE:</h3>
-<p>{{ activeWindowCallbackResponse }}</p>
+```php
+<h1>Window mit Button</h1>
+<p>Beim klicken des Buttons sagen wir Hallo.</p>
+<?= $this->callbackButton('Button Name', 'say-hello', ['params' => ['name' => 'Radan']]); ?>
 ```
 
-Callbacks
-----------
-@TODO
-After pushing the ***Call the Callback*** button, the activeWindowCallbackResponse variable would be filled with "Hello John Doe from item: 1", where the item id is the current selected element you have registered the ActiveWindow.
+Die Callbacks
+------------
+
+Wenn Sie die helper methoden wie `callbackButton()` verwenden im view, müssen Sie nach gewissen regeln spielen. Mit folgenden Funktionen können Sie der Helper methode mitteilen was innerhalb des Callbacks passiert ist:
+
++ `sendSuccess($message)` Gibt ein erfolg zurück mit einer Nachricht.
++ `sendError($message)` Gibt einen Fehler zurück mit einer Nachricht.
 
 In NgRest einbinden
 --------------------
-Um ein ActiveWindow einzubinden registerien Sie die Klasse im `aw` pointer mit der Funktion `register` innerhalb ihres ngrest config abschnittes.
+
+Um ein ActiveWindow einzubinden registerien Sie die Klasse im `aw` pointer mit der Funktion `load` innerhalb ihres ngrest config abschnittes. Da Active Windows über das yii\base\Object verfügen kannst du alle public eigenschaften des ActiveWindows beim load befehln überschreiben.
 
 ```php
 public function ngRestConfig($config)
 {
     // ...
-    $config->aw->register(new \admin\aws\TestActiveWindow(), 'Mein Test Window');
+    $config->aw->load(['class' => '\admin\aws\TestActiveWindow()', 'alias' => 'Mein Test Window', 'icon' => 'extension');
     // ...
     
     return $config;
 }
 ```
 
-Das erste Argument der register Klasse definiert die *ActiveWindow Klasse*. Es wird also ein Object erzeugt. Die ActiveWindows können initial Paremter verlangen welche im Konstruktor der ActiveWindows definiert werden.
-
-Wenn anstelle eines Textes ein Icon oder beides dargestellt werden soll, musst du den zweiten paremetner von register mit einem array blegen welches den key `ìcon` oder `alias` hat.
-
-Ein beispiel für ein icon anstelle des Texts:
-
-```php
-$config->aw->register(new \admin\aws\ChangePassword(), ['icon' => 'vpn_key']);
-```
-
 Vordefinierte Active Windows
 ----------------------------
+
 Gewisse Active Windows kannst du in deinem Projekte wieder verwenden und müssen nicht zusätzlich entwickelt werden. Hier eine Liste von ActiveWindows die du verwendest kannst und mit der Installtion der Admin ebene automatisch mit geliefert werden.
 
-|name   |Klasse |Parameter
+|Name   |Klasse |Public Properties
 |--     |--     |--
-|Tag    |`admin\aws\TagActiveWindow` |`($tableName)` 
-|Gallery|`admin\aws\Gallery` |`($refTableName, $imageIdFieldName, $refFieldName)`
+|Tag    |`admin\aws\TagActiveWindow` | <ul><li>$tableName</li></ul>
+|Gallery|`admin\aws\Gallery` |<ul><li>$refTableName</li><li>$imageIdFieldName</li><li>$refFieldName</li></ul>
