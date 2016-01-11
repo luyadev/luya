@@ -311,7 +311,7 @@
 			if (!(id in $scope.files)) {
 				$scope.crud.sendActiveWindowCallback('AddImageToIndex', {'fileId' : id }).then(function(response) {
 					var data = response.data;
-					$scope.files[data.file_id] = data;
+					$scope.files[data.fileId] = data;
 				});
 			}
 		};
@@ -320,14 +320,14 @@
 			$http.get($scope.crud.getActiveWindowCallbackUrl('loadAllImages')).success(function(response) {
 				$scope.files = {}
 				response.forEach(function(value, key) {
-					$scope.files[value.file_id] = value;
+					$scope.files[value.fileId] = value;
 				});
 			})
 		};
 		
 		$scope.remove = function(file) {
-			$scope.crud.sendActiveWindowCallback('RemoveFromIndex', {'imageId' : file.iimage_id }).then(function(response) {
-				delete $scope.files[file.file_id];
+			$scope.crud.sendActiveWindowCallback('RemoveFromIndex', {'imageId' : file.id }).then(function(response) {
+				delete $scope.files[file.fileId];
 			});
 		};
 		
