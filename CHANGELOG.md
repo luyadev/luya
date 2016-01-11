@@ -20,6 +20,7 @@ load([
 
 **ISSUES**
 
+- `#692` Added date and version indicator to module creation phpdoc.
 - `#697` New ActiveWindow helpers, extend from yii\base\Object to add ability to configure the classes. See BC BREAKS.
 - `#706` Fixed bug where Filter::encode() trys to handler object and array values.
 - `#705` Fixed bug where parse request removes partial string from the request when composition is the same as the module name begin with (`de` - `debug`).
