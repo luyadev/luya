@@ -21,14 +21,17 @@ class Parser
     const REGEX = '/(?<function>link|file)\[(?<value>.*?)\](\((?<sub>.*?)\))?/mi';
 
     /**
-     * Regex Tester.
      * 
-     * @see https://regex101.com/r/tI7pK1/3
-     *
+     * 
+     * @see https://regex101.com/r/tI7pK1/3 - Online Regex tester
      * @param string $content
      */
     public static function encode($content)
     {
+        if (is_object($content) || is_array($content)) {
+            return $content;
+        }
+        
         preg_match_all(static::REGEX, $content, $results, PREG_SET_ORDER);
 
         foreach ($results as $row) {

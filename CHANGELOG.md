@@ -20,6 +20,7 @@ load([
 
 **ISSUES**
 
+- `#706` Fixed bug where Filter::encode() trys to handler object and array values.
 - `#705` Fixed bug where parse request removes partial string from the request when composition is the same as the module name begin with (`de` - `debug`).
 - `#690` Added ability to click generic search items in admin search view. Therefore new methods have been implement to GenericSearchInterface.
 - `#704` Added ability to close ngrest crud create, update and aw scope with ESC key.
