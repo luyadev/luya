@@ -71,7 +71,7 @@
                 <thead>
                     <tr>
                         <?php foreach ($config->getPointer('list') as $item): ?>
-                            <th><?= $item['alias']; ?> <i ng-click="changeOrder('<?= $item['name']; ?>', '+')" ng-class="{'active-orderby' : isOrderBy('+<?= $item['name']; ?>') }" class="mdi-hardware-keyboard-arrow-up grid-sort-btn"></i> <i ng-click="changeOrder('<?= $item['name']; ?>', '-')" ng-class="{'active-orderby' : isOrderBy('-<?= $item['name']; ?>') }" class="mdi-hardware-keyboard-arrow-down grid-sort-btn"></i></th>
+                            <th><?= $item['alias']; ?> <i ng-click="changeOrder('<?= $item['name']; ?>', '+')" ng-class="{'active-orderby' : isOrderBy('+<?= $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeOrder('<?= $item['name']; ?>', '-')" ng-class="{'active-orderby' : isOrderBy('-<?= $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
                         <?php endforeach; ?>
                         <?php if (count($this->context->getButtons()) > 0): ?>
                             <th style="text-align:right;"><span class="grid-data-length">{{data.list.length}} <?= \admin\Module::t('ngrest_crud_rows_count'); ?></span></th>
