@@ -20,6 +20,7 @@ load([
 
 **ISSUES**
 
+- `#705` Fixed bug where parse request removes partial string from the request when composition is the same as the module name begin with (`de` - `debug`).
 - `#690` Added ability to click generic search items in admin search view. Therefore new methods have been implement to GenericSearchInterface.
 - `#704` Added ability to close ngrest crud create, update and aw scope with ESC key.
 - `#694` Pages with redirects now return the url of the redirected page instead of the temp generate alias name for this item in the menu component.

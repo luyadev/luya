@@ -35,26 +35,30 @@ class UrlManager extends \yii\web\UrlManager
         
         $request->setPathInfo($resolver['route']);
         
-        $route = parent::parseRequest($request);
+        $parsedRequest = parent::parseRequest($request);
 
         if ($this->composition->hidden) {
-            return $route;
+            return $parsedRequest;
         }
-
+        // temp write variables
         $composition = $this->composition->full;
-
         $length = strlen($composition);
-        if (substr($route[0], 0, $length) == $composition) {
-            $route[0] = substr($route[0], $length);
+        $route = $parsedRequest[0];
+        // route matches composition exactly, so we have to remove the composition informations
+        if ($route === $composition) {
+            $parsedRequest[0] = false;
+        // now see if the composition (+1 as we add add trailing slash at the end) matches the cutted route request part, if so its composition prefix, remove it.
+        } elseif (substr($route, 0, $length+1) == $composition.'/') {
+            $parsedRequest[0] = substr($parsedRequest[0], $length);
         }
-
-        if ($route[0] === false || $route[0] == '/') {
-            $route[0] = '';
+        // fix broken request urls
+        if ($parsedRequest[0] === false || $parsedRequest[0] == '/') {
+            $parsedRequest[0] = '';
         }
-        
-        $route[0] = ltrim($route[0], '/');
-        
-        return $route;
+        // ltrim all request to fix request routes
+        $parsedRequest[0] = ltrim($parsedRequest[0], '/');
+        // return new parsted request route
+        return $parsedRequest;
     }
 
     public function addRules($rules, $append = true)
