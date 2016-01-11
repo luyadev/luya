@@ -126,7 +126,7 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
         foreach ($value as $k => $v) {
             // $this->id: the value of the current database model, example when relation ins on user model id would be user id
             // $v['id'] extra field values foreached from the join table, so id will represent the joined table pk.
-    
+
             // issue #696 array logic
             if (is_array($v)) { // its an array and is based on the logic of the angular checkbox releation ['id' => 123]
                 $batch[] = [$this->getModel()->id, $v['id']];

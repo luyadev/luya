@@ -131,7 +131,7 @@ abstract class Module extends \yii\base\Module
      */
     private function registerTranslations()
     {
-        foreach($this->translations as $translation) {
+        foreach ($this->translations as $translation) {
             Yii::$app->i18n->translations[$translation['prefix']] = [
                 'class' => 'yii\i18n\PhpMessageSource',
                 'basePath' => $translation['basePath'],

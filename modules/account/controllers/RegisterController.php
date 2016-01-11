@@ -41,7 +41,6 @@ class RegisterController extends \account\base\Controller
         if (Yii::$app->request->post()) {
             $model->load(Yii::$app->request->post());
             if (($user = $model->register()) !== false) {
-                
                 $state = null;
                 
                 if ($this->module->registerConfirmEmail) {

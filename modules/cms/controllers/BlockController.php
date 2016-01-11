@@ -18,7 +18,7 @@ class BlockController extends \cms\base\Controller
         $model = NavItemPageBlockItem::findOne($id);
         
         if (!$model) {
-            throw new Exception("Unable to find item id.");    
+            throw new Exception("Unable to find item id.");
         }
         
         $block = Block::objectId($model->block_id, $model->id, 'callback');

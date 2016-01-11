@@ -204,7 +204,7 @@ return [
     'view_index_sidebar_move' => 'Move',
     
     // view_update
-    
+
     'view_update_drop_blocks' => 'Drop the Content blocks here',
     'view_update_blockcontent' => 'Block content',
     'view_update_configs' => 'Optional Configurations',
@@ -224,7 +224,7 @@ return [
     'view_update_page_is_redirect_external' => 'This page is <b>external redirect</b> to <a ng-href="{{typeData.value}}">{{typeData.value}}</a>',
     
     // menu
-    
+
     'menu_node_cms' => 'Page Content',
     'menu_node_cmssettings' => 'CMS Settings',
     'menu_group_env' => 'Environment',
@@ -235,7 +235,7 @@ return [
     'menu_group_item_elements_group' => 'Groups',
      
     // global
-    
+
     'btn_abort' => 'Abort',
     'btn_refresh' => 'Refresh',
     'btn_save' => 'Save',
@@ -298,4 +298,3 @@ return [
     
 // added translation in 1.0.0-beta4:
 ];
-

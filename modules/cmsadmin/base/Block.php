@@ -458,7 +458,7 @@ abstract class Block extends \yii\base\Object implements BlockInterface
         if (!empty($value) && is_array($value)) {
             $data = [];
             
-            foreach($value as $key => $item) {
+            foreach ($value as $key => $item) {
                 $file = $this->zaaFileUpload($item['fileId']);
                 if ($file) {
                     $file['caption'] = $item['caption'];
@@ -490,7 +490,7 @@ abstract class Block extends \yii\base\Object implements BlockInterface
         if (!empty($value) && is_array($value)) {
             $data = [];
             
-            foreach($value as $key => $item) {
+            foreach ($value as $key => $item) {
                 $image = $this->zaaImageUpload($item['imageId'], $applyFilter);
                 if ($image) {
                     $image['caption'] = $item['caption'];

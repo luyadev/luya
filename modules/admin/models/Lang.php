@@ -9,6 +9,8 @@ class Lang extends \admin\ngrest\base\Model
     private static $_langInstance = null;
 
     private static $_langInstanceQuery = null;
+    
+    private static $_langInstanceFindActive = null;
 
     public function ngRestApiEndpoint()
     {
@@ -84,12 +86,16 @@ class Lang extends \admin\ngrest\base\Model
 
     public static function findActive()
     {
-        $langShortCode = Yii::$app->composition->getKey('langShortCode');
-
-        if (!$langShortCode) {
-            return self::getDefault();
+        if (self::$_langInstanceFindActive === null) {
+            $langShortCode = Yii::$app->composition->getKey('langShortCode');
+    
+            if (!$langShortCode) {
+                self::$_langInstanceFindActive = self::getDefault();
+            } else {
+                self::$_langInstanceFindActive = self::find()->where(['short_code' => $langShortCode])->asArray()->one();
+            }
         }
-
-        return self::find()->where(['short_code' => $langShortCode])->asArray()->one();
+        
+        return self::$_langInstanceFindActive;
     }
 }

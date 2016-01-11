@@ -30,7 +30,8 @@ class CrawlContainer extends \yii\base\Object
         'filtered' => [],
     ];
     
-    public function addLog($cat, $message) {
+    public function addLog($cat, $message)
+    {
         $this->log[$cat][] = $message;
     }
 
@@ -132,7 +133,7 @@ class CrawlContainer extends \yii\base\Object
     
     private function filterUrlIsValid($url)
     {
-        foreach($this->filterRegex as $rgx) {
+        foreach ($this->filterRegex as $rgx) {
             $r = preg_match($rgx, $url, $results);
             if ($r === 1) {
                 $this->addLog('filtered', $url);
@@ -171,7 +172,6 @@ class CrawlContainer extends \yii\base\Object
                 }
             }
         } else {
-            
             if (!$this->filterUrlIsValid($url)) {
                 $model->delete();
             } else {

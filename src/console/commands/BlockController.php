@@ -58,10 +58,10 @@ class BlockController extends \luya\console\Command
     private function getExtraVarDef($type, $varName, $func)
     {
         $info = [
-            'image-upload' => function($varName) use ($func) { return '$this->zaaImageUpload($this->'.$func.'(\''.$varName.'\')),'; },
-            'image-array-upload' => function($varName) use ($func)  { return '$this->zaaImageArrayUpload($this->'.$func.'(\''.$varName.'\')),'; },
-            'file-upload' => function($varName) use ($func)  { return '$this->zaaFileUpload($this->'.$func.'(\''.$varName.'\')),'; },
-            'file-array-upload' => function($varName) use ($func)  { return '$this->zaaFileArrayUpload($this->'.$func.'(\''.$varName.'\')),'; },
+            'image-upload' => function ($varName) use ($func) { return '$this->zaaImageUpload($this->'.$func.'(\''.$varName.'\')),'; },
+            'image-array-upload' => function ($varName) use ($func) { return '$this->zaaImageArrayUpload($this->'.$func.'(\''.$varName.'\')),'; },
+            'file-upload' => function ($varName) use ($func) { return '$this->zaaFileUpload($this->'.$func.'(\''.$varName.'\')),'; },
+            'file-array-upload' => function ($varName) use ($func) { return '$this->zaaFileArrayUpload($this->'.$func.'(\''.$varName.'\')),'; },
         ];
         
         if (array_key_exists($type, $info)) {
@@ -225,8 +225,8 @@ class BlockController extends \luya\console\Command
         $content .= '    public function extraVars()'.PHP_EOL;
         $content .= '    {'.PHP_EOL;
         $content .= '        return ['.PHP_EOL;
-        foreach($this->extras as $x) {
-        $content .= '            '.$x.PHP_EOL;
+        foreach ($this->extras as $x) {
+            $content .= '            '.$x.PHP_EOL;
         }
         $content .= '        ];'.PHP_EOL;
         $content .= '    }'.PHP_EOL.PHP_EOL;

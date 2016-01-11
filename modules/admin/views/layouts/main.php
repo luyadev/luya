@@ -2,6 +2,7 @@
 use \admin\Module;
 use \luya\Module as Luya;
 use \luya\helpers\Url;
+
 $user = Yii::$app->adminuser->getIdentity();
 $this->beginPage()
 ?><!DOCTYPE html>

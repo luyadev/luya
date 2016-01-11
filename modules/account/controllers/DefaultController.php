@@ -53,7 +53,6 @@ class DefaultController extends \account\base\Controller
             $model->attributes = Yii::$app->request->post('LoginForm');
             if (($userObject = $model->login()) !== false) {
                 if ($this->module->getUserIdentity()->login($userObject)) {
-                    
                     $url = Yii::$app->session->get('accountRef');
                     if (!$url) {
                         $url = Url::toManager('account/settings/index');

@@ -33,7 +33,7 @@ class AudioBlock extends \cmsadmin\base\Block
     public function getFieldHelp()
     {
         return [
-            'soundUrl' => Module::t('block_audio_help_soundurl'),            
+            'soundUrl' => Module::t('block_audio_help_soundurl'),
         ];
     }
 

@@ -1,5 +1,5 @@
 <?php if (!$state): ?>
-<?php $form = \yii\widgets\ActiveForm::begin(['id' => 'login-form','options' => ['class' => 'form-horizontal']]); ?>
+<?php $form = \yii\widgets\ActiveForm::begin(['id' => 'login-form', 'options' => ['class' => 'form-horizontal']]); ?>
 <?= $form->field($model, 'gender')->dropdownlist(['' => 'Bitte wählen', 0 => 'Frau', 1 => 'Herr']); ?>
 <?= $form->field($model, 'company') ?>
 <?= $form->field($model, 'firstname') ?>

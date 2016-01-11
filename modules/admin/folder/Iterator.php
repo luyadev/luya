@@ -20,5 +20,4 @@ class Iterator extends \admin\storage\IteratorAbstract
     {
         return Item::create(current($this->data));
     }
-
 }

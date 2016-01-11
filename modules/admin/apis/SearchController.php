@@ -27,10 +27,10 @@ class SearchController extends \admin\base\RestController
                 
                 if (count($data) > 0) {
                     $search[] = [
-                    	'type' => 'custom',
+                        'type' => 'custom',
                         'menuItem' => $node,
                         'data' => $data,
-                    	'stateProvider' => $stateProvider,
+                        'stateProvider' => $stateProvider,
                     ];
                 }
             }
@@ -43,10 +43,10 @@ class SearchController extends \admin\base\RestController
                 $stateProvider = $ctrl[0]->runAction('search-provider');
                 if (count($data) > 0) {
                     $search[] = [
-                    	'type' => 'api',
+                        'type' => 'api',
                         'menuItem' => $api,
                         'data' => $data,
-                    	'stateProvider' => $stateProvider,
+                        'stateProvider' => $stateProvider,
                     ];
                 }
             }

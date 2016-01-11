@@ -124,7 +124,6 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
     public function i18nAfterFind()
     {
         foreach ($this->i18n as $field) {
-            
             $values = $this->$field;
             
             // if its not already unserialized, decode it
@@ -183,7 +182,7 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
     
     public function genericSearchHiddenFields()
     {
-    	return [];
+        return [];
     }
     
     /**
@@ -194,12 +193,12 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
      */
     public function genericSearchStateProvider()
     {
-    	return [
-			'state' => 'default.route.detail',
-    		'params' => [
-    			'id' => 'id',
-    		],
-    	];
+        return [
+            'state' => 'default.route.detail',
+            'params' => [
+                'id' => 'id',
+            ],
+        ];
     }
 
     /**
@@ -214,7 +213,7 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
         
         // add pk to fields list automatically to make click able state providers
         if (!in_array($pk, $fields)) {
-        	$fields[] = $pk;
+            $fields[] = $pk;
         }
         
         // create active query object
@@ -320,8 +319,7 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
             }
         }
         
-        foreach($fields as $field) {
-            
+        foreach ($fields as $field) {
             if (!isset($types[$field])) {
                 throw new InvalidConfigException("The ngrest attribue '$field' does not exists in ngrestAttributeTypes() method.");
             }

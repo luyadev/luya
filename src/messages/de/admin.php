@@ -154,4 +154,3 @@ return [
     
 // added translation in 1.0.0-beta4:
 ];
-

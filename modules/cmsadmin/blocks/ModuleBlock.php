@@ -36,7 +36,7 @@ class ModuleBlock extends \cmsadmin\base\Block
     public function getModuleNames()
     {
         $data = [];
-        foreach(Yii::$app->getFrontendModules() as $k => $f ) {
+        foreach (Yii::$app->getFrontendModules() as $k => $f) {
             $data[] = ['value' => $k, 'label' => $k];
         }
         return $data;

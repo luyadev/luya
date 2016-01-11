@@ -266,7 +266,7 @@ class Query extends \yii\base\Object
      */
     public static function createArrayIterator(array $data, $langContext)
     {
-    	return Yii::createObject(['class' => QueryIterator::className(), 'data' => $data, 'lang' => $langContext]);
+        return Yii::createObject(['class' => QueryIterator::className(), 'data' => $data, 'lang' => $langContext]);
     }
     
     /**
@@ -279,57 +279,57 @@ class Query extends \yii\base\Object
      */
     public static function createItemObject(array $itemArray, $langContext)
     {
-    	return Yii::createObject(['class' => Item::className(), 'itemArray' => $itemArray, 'lang' => $langContext]);
+        return Yii::createObject(['class' => Item::className(), 'itemArray' => $itemArray, 'lang' => $langContext]);
     }
     
     protected function filter(array $whereExpression, $containerData)
     {
-    	$data = array_filter($containerData, function ($item) {
-    		foreach ($item as $field => $value) {
-    			if (!$this->arrayFilter($value, $field)) {
-    				return false;
-    			}
-    		}
+        $data = array_filter($containerData, function ($item) {
+            foreach ($item as $field => $value) {
+                if (!$this->arrayFilter($value, $field)) {
+                    return false;
+                }
+            }
     
-    		return true;
-    	});
+            return true;
+        });
     
-    		if ($this->_offset !== null) {
-    			$data = array_slice($data, $this->_offset, null, true);
-    		}
+        if ($this->_offset !== null) {
+            $data = array_slice($data, $this->_offset, null, true);
+        }
     
-    		if ($this->_limit !== null) {
-    			$data = array_slice($data, 0, $this->_limit, true);
-    		}
+        if ($this->_limit !== null) {
+            $data = array_slice($data, 0, $this->_limit, true);
+        }
     
-    		return $data;
+        return $data;
     }
     
     protected function arrayFilter($value, $field)
     {
-    	if ($field == 'is_hidden' && $this->_with['hidden'] === false && $value == 1) {
-    		return false;
-    	}
+        if ($field == 'is_hidden' && $this->_with['hidden'] === false && $value == 1) {
+            return false;
+        }
     
-    	foreach ($this->_where as $expression) {
-    		if ($expression['field'] == $field) {
-    			switch ($expression['op']) {
-    				case '=':
-    					return ($value == $expression['value']);
-    				case '==':
-    					return ($value === $expression['value']);
-    				case '>':
-    					return ($value > $expression['value']);
-    				case '>=':
-    					return ($value >= $expression['value']);
-    				case '<':
-    					return ($value < $expression['value']);
-    				case '<=':
-    					return ($value <= $expression['value']);
-    			}
-    		}
-    	}
+        foreach ($this->_where as $expression) {
+            if ($expression['field'] == $field) {
+                switch ($expression['op']) {
+                    case '=':
+                        return ($value == $expression['value']);
+                    case '==':
+                        return ($value === $expression['value']);
+                    case '>':
+                        return ($value > $expression['value']);
+                    case '>=':
+                        return ($value >= $expression['value']);
+                    case '<':
+                        return ($value < $expression['value']);
+                    case '<=':
+                        return ($value <= $expression['value']);
+                }
+            }
+        }
     
-    	return true;
+        return true;
     }
 }

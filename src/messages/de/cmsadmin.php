@@ -172,7 +172,7 @@ return [
     'block_wysiwyg_no_content' => 'Es wurde noch kein Text eingegeben.',
 
     // views/default/index
-    
+
     'view_index_add_type' => 'Seitentyp',
     'view_index_type_page' => 'Seite',
     'view_index_type_module' => 'Modul',
@@ -205,7 +205,7 @@ return [
     'view_index_sidebar_move' => 'Verschieben',
     
     // view_update
-    
+
     'view_update_drop_blocks' => 'Inhaltsblöcke hier platzieren',
     'view_update_blockcontent' => 'Block content',
     'view_update_settings' => 'Einstellungen',
@@ -225,7 +225,7 @@ return [
     'view_update_page_is_redirect_external' => 'Diese Seite ist ein <b>externer Redirect</b> auf <a ng-href="{{typeData.value}}">{{typeData.value}}</a>',
     
     // menu
-    
+
     'menu_node_cms' => 'Seiteninhalte',
     'menu_node_cmssettings' => 'CMS-Einstellungen',
     'menu_group_env' => 'Umgebung',
@@ -236,7 +236,7 @@ return [
     'menu_group_item_elements_group' => 'Gruppen',
    
     // global
-    
+
     'btn_abort' => 'Abbrechen',
     'btn_refresh' => 'Aktualisieren',
     'btn_save' => 'Speichern',
@@ -299,4 +299,3 @@ return [
     
 // added translation in 1.0.0-beta4:
 ];
-

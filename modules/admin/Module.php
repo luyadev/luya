@@ -58,8 +58,8 @@ class Module extends \admin\base\Module
     
     public function setJsTranslations(array $translations)
     {
-        foreach($translations as $module => $data) {
-            foreach($data as $key) {
+        foreach ($translations as $module => $data) {
+            foreach ($data as $key) {
                 $this->_jsTranslations[$key] = \luya\Module::t($module, $key);
             }
         }

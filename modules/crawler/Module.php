@@ -18,8 +18,8 @@ class Module extends \luya\base\Module
      * 
      * @var array with full regular expressions:
      * 'filterRegex' => [
-	 *     '/\.\//i',
-	 * ],
+     *     '/\.\//i',
+     * ],
      */
     public $filterRegex = [];
 }

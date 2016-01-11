@@ -48,7 +48,7 @@ abstract class RegisterForm extends \yii\base\Model implements \account\Register
     
     public function getModel()
     {
-        if ($this->_model === null ) {
+        if ($this->_model === null) {
             $this->_model = Yii::createObject(['class' => $this->modelClass]);
         }
     

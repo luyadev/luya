@@ -1,5 +1,6 @@
 <?php
 use luya\helpers\Url;
+
 ?>
 <div class="container">
     <?php echo $content; ?>

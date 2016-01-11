@@ -27,7 +27,7 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
     {
         $return = [];
         
-        foreach($array as $k => $v) {
+        foreach ($array as $k => $v) {
             if (is_numeric($v)) {
                 $return[$k] = (int)$v;
             } elseif (is_array($v)) {

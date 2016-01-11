@@ -15,5 +15,4 @@ class Module extends \admin\base\Module
         ->itemApi('Benutzer', 'accountadmin-user-index', 'account_circle', 'api-account-user')
         ->menu();
     }
-    
 }

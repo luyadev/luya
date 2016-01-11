@@ -29,7 +29,7 @@ class Index extends \admin\ngrest\base\Model
         if (empty($index)) {
             $index = $item;
         } else {
-            foreach($index as $k => $v) {
+            foreach ($index as $k => $v) {
                 if (!array_key_exists($k, $item)) {
                     unset($index[$k]);
                 }
@@ -39,7 +39,6 @@ class Index extends \admin\ngrest\base\Model
 
     public static function searchByQuery($query, $languageInfo)
     {
-        
         $query = trim(Html::encode($query));
         
         if (strlen($query) < 1) {
@@ -51,16 +50,16 @@ class Index extends \admin\ngrest\base\Model
         $index = [];
         
         foreach ($parts as $word) {
-           $q = self::find()->select(['id', 'content'])->where(['like', 'content', $word]);
-           if (!empty($languageInfo)) {
-               $q->andWhere(['language_info' => $languageInfo]);
-           }
-           $data = $q->asArray()->indexBy('id')->all();
-           static::indexer($data, $index);
+            $q = self::find()->select(['id', 'content'])->where(['like', 'content', $word]);
+            if (!empty($languageInfo)) {
+                $q->andWhere(['language_info' => $languageInfo]);
+            }
+            $data = $q->asArray()->indexBy('id')->all();
+            static::indexer($data, $index);
         }
         
         $ids = [];
-        foreach($index as $item) {
+        foreach ($index as $item) {
             $ids[] = $item['id'];
         }
         

@@ -129,7 +129,7 @@ class NavController extends \admin\base\RestController
             // check for internal redirects
             $redirectResult = false;
             $redirects = NavItemRedirect::find()->where(['value' => $navId])->asArray()->all();
-            foreach($redirects as $redirect) {
+            foreach ($redirects as $redirect) {
                 $navItem = NavItem::find()->where(['nav_item_type' => 3, 'nav_item_type_id' => $redirect['id']])->one();
                 $redirectResult = empty(Nav::find()->where(['id' => $navItem->nav_id, 'is_deleted' => 0])->one()) ? $redirectResult : true;
             }
@@ -161,7 +161,7 @@ class NavController extends \admin\base\RestController
         $model = new \cmsadmin\models\Nav();
         
         if (!empty($fromDraft)) {
-            $create = $model->createPageFromDraft($this->postArg('parent_nav_id'), $this->postArg('nav_container_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'),$this->postArg('description'), $fromDraft, $this->postArg('is_draft'));
+            $create = $model->createPageFromDraft($this->postArg('parent_nav_id'), $this->postArg('nav_container_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('description'), $fromDraft, $this->postArg('is_draft'));
         } else {
             $create = $model->createPage($this->postArg('parent_nav_id'), $this->postArg('nav_container_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('layout_id'), $this->postArg('description'), $this->postArg('is_draft'));
         }

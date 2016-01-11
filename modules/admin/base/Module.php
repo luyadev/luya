@@ -61,7 +61,7 @@ class Module extends \luya\base\Module
      * 
      * @var array Register translations from admin modules, to make them available in javascript files trough
      * the `i18n['yourTranslation']` object.
-     */    
+     */
     public $registerJsTranslation = [];
     
     /**

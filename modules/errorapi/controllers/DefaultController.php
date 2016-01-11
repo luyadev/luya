@@ -27,7 +27,6 @@ class DefaultController extends \luya\rest\Controller
         $model->error_json = Yii::$app->request->post('error_json', null);
         
         if ($model->save()) {
-            
             if ($this->module->slackToken !== null) {
                 $this->slack('#'.$model->identifier.' | '.$model->serverName.': '.$model->message, $this->module->slackChannel);
             }
@@ -36,7 +35,7 @@ class DefaultController extends \luya\rest\Controller
             
             if (!empty($this->module->recipient)) {
                 $mailer = Yii::$app->mail->compose('Error Api: ' . $model->serverName, $mailHtml);
-                foreach($this->module->recipient as $recipient) {
+                foreach ($this->module->recipient as $recipient) {
                     $mailer->address($recipient);
                 }
                 $mailer->send();

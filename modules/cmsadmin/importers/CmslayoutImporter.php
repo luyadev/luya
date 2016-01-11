@@ -109,7 +109,6 @@ class CmslayoutImporter extends \luya\base\Importer
             }
 
             foreach ($holder as $var => $value) {
-                
                 if ($var == "label") {
                     continue;
                 }

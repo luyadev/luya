@@ -110,13 +110,13 @@ class Mail extends \yii\base\Component
      */
     public function adresses(array $emails)
     {
-        foreach($emails as $name => $mail) {
+        foreach ($emails as $name => $mail) {
             if (is_int($name)) {
                 $this->address($mail);
             } else {
                 $this->address($mail, $name);
             }
-        } 
+        }
     }
     
     public function address($email, $name = null)
@@ -147,7 +147,7 @@ class Mail extends \yii\base\Component
      * @throws Exception
      */
     public function smtpTest($verbose)
-    {   
+    {
         //Create a new SMTP instance
         $smtp = new SMTP();
         

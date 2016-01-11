@@ -192,7 +192,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     
     public function genericSearchHiddenFields()
     {
-    	return [];
+        return [];
     }
 
     public function genericSearch($searchQuery)
@@ -214,14 +214,16 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
      */
     public function genericSearchStateProvider()
     {
-    	return [
-    		'state' => 'custom.cmsedit',
-    		'params' => [
-    			'navId' => 'nav_id',
-    		],
-    	];
+        return [
+            'state' => 'custom.cmsedit',
+            'params' => [
+                'navId' => 'nav_id',
+            ],
+        ];
     }
 
+    private static $_navItemModules = [];
+    
     /**
      * @todo use AR or queryCommand? NavItem::find()->leftJoin('cms_nav_item_module', 'nav_item_type_id=cms_nav_item_module.id')->where(['nav_item_type' => 2, 'cms_nav_item_module.module_name' => $moduleName])->asArray()->one()
      *
@@ -231,6 +233,10 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
      */
     public static function findNavItem($moduleName)
     {
+        if (isset(self::$_navItemModules[$moduleName])) {
+            return self::$_navItemModules[$moduleName];
+        }
+        
         // current active lang:
         $default = Lang::findActive();
 
@@ -238,6 +244,8 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
             ':module' => $moduleName, ':lang_id' => $default['id'],
         ])->queryOne();
 
+        self::$_navItemModules[$moduleName] = $query;
+        
         return $query;
     }
 

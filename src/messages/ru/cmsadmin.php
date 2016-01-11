@@ -204,7 +204,7 @@ return [
     'view_index_sidebar_move' => 'Переместить',
     
     // view_update
-    
+
     'view_update_drop_blocks' => 'Перетащите блок контента сюда',
     'view_update_blockcontent' => 'Блок контента',
     'view_update_config' => 'Дополнительные настройки',
@@ -224,7 +224,7 @@ return [
     'view_update_page_is_redirect_external' => 'Эта страница имеет <b>внешнюю переадресацию</b> на <a ng-href="{{typeData.value}}">{{typeData.value}}</a>',
     
     // menu
-    
+
     'menu_node_cms' => 'Контент страницы',
     'menu_node_cmssettings' => 'CMS Настройки',
     'menu_group_env' => 'Окружающая среда',
@@ -235,7 +235,7 @@ return [
     'menu_group_item_elements_group' => 'Группы',
      
     // global
-    
+
     'btn_abort' => 'Отмена',
     'btn_refresh' => 'Обновить',
     'btn_save' => 'Сохранить',
