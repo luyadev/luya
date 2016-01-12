@@ -152,6 +152,7 @@
 }
 .block__edit-content {
 	display: none;
+	padding-right: 40px; // This padding is needed to give a little bit of space if there is a "help" icon
 }
 .block--edit .block__edit {
 	opacity: 1;

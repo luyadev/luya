@@ -24,7 +24,7 @@ class TableBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'table', 'label' => Module::t('block_table_table_label'), 'type' => 'zaa-table'],
+                ['var' => 'table', 'label' => "", 'type' => 'zaa-table'],
             ],
             'cfgs' => [
                 ['var' => 'header', 'label' => Module::t('block_table_header_label'), 'type' => 'zaa-checkbox'],

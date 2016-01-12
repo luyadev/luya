@@ -134,7 +134,7 @@ return [
 
     // TableBlock
     'block_table_name' => 'Tabelle',
-    'block_table_table_label' => 'Text',
+    'block_table_table_label' => 'Tabelle',
     'block_table_header_label' => 'Erste Zeile als Tabellenkopf verwenden',
     'block_table_stripe_label' => 'Jede Zeile abwechselnd hervorheben (Zebramuster)',
     'block_table_border_label' => 'Rand zu jeder Seite der Tabelle hinzufügen',

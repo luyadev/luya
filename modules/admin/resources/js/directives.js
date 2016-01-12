@@ -507,7 +507,7 @@
             },
             template: function() {
                 return '<div class="zaa-table__wrapper">'+
-                            '<h5>{{label}}</h5>' +
+                            '<h5 ng-show="label">{{label}}</h5>' +
                             '<table class="zaa-table">'+
                                 '<thead>'+
                                     '<tr>'+
