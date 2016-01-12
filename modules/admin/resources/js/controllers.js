@@ -21,7 +21,7 @@
 	});
 	
 	// CrudController.js
-	zaa.controller("CrudController", function($scope, $http, $sce, $state, AdminLangService, LuyaLoading, AdminToastService) {
+	zaa.controller("CrudController", function($scope, $filter, $http, $sce, $state, AdminLangService, LuyaLoading, AdminToastService) {
 		
 		LuyaLoading.start();
 		
@@ -80,6 +80,7 @@
 		
 		$scope.changeOrder = function(field, sort) {
 			$scope.orderBy = sort + field;
+			$scope.data.list = $filter('orderBy')($scope.data.list, sort + field);
 		};
 		
 		$scope.getActiveWindow = function (activeWindowId, id, $event) {

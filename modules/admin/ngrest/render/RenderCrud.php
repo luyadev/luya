@@ -210,10 +210,6 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
             return $return;
         }
 
-        if ($element['i18n'] && $configContext == self::TYPE_LIST) {
-            $element['name'] = $element['name'].'.'.$this->getDefaultLangShortCode();
-        }
-
         $ngModel = $this->ngModelString($configContext, $element['name']);
         $id = 'id-'.md5($ngModel);
 

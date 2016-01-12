@@ -123,7 +123,11 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
 
     public function i18nAfterFind()
     {
+        $langShortCode = $this->getDefaultLang('short_code');
+        $languages = $this->getLanguages();
+        
         foreach ($this->i18n as $field) {
+            // get value for current field
             $values = $this->$field;
             
             // if its not already unserialized, decode it
@@ -131,27 +135,21 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
                 $values = Json::decode($this->$field);
             }
             
-            //$values = @json_decode($this->$field, true);
             // fall back for not transformed values
             if (!is_array($values)) {
                 $values = (array) $values;
             }
-            // creata all languages where doe not exists in the array
-            foreach ($this->getLanguages() as $lang) {
+            
+            // add all not existing languages to the array (for example a language has been added after the database item has been created)
+            foreach ($languages as $lang) {
                 if (!array_key_exists($lang['short_code'], $values)) {
                     $values[$lang['short_code']] = '';
                 }
             }
-            // if its not an grest call automaticaly load the default language
-            if (!$this->getNgRestCallType()) {
-                //$langShortCode = $defaultLang['short_code'];
-                $langShortCode = $this->getDefaultLang('short_code');
-                // @todo first get data from collection, if not found get data from lang default
-                if (array_key_exists($langShortCode, $values)) {
-                    $values = $values[$langShortCode];
-                } else {
-                    $values = '';
-                }
+            
+            // If its not an ngrest call or the ngrest call ist 'list' auto return the value for the current default language.
+            if (!$this->getNgRestCallType() || $this->getNgRestCallType() == 'list') {
+                $values = (array_key_exists($langShortCode, $values)) ? $values[$langShortCode] : '';
             }
 
             $this->$field = $values;

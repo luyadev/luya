@@ -79,7 +79,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="(key, item) in data.list | orderBy:orderBy | srcbox:searchString">
+                    <tr ng-repeat="(key, item) in data.list | srcbox:searchString">
                         <?php foreach ($config->getPointer('list') as $item): ?>
                             <?php foreach ($this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_LIST) as $element): ?>
                                 <td><?= $element['html']; ?></td>
