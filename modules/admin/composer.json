@@ -17,18 +17,6 @@
 	},
 	"require" : {
 		"zephir/luya" : "1.0.0-beta3",
-        "bower-asset/jquery" : "2.1.*@stable",
-        "bower-asset/jquery-ui" : "1.*@stable",
-        "bower-asset/angular" : "1.4.7@stable",
-        "bower-asset/angular-i18n" : "1.4.7@stable",
-        "bower-asset/angular-resource": "1.4.7@stable",
-        "bower-asset/angular-ui-router" : "0.2.*@stable",
-        "bower-asset/angular-loading-bar" : "0.8.*@stable",
-        "bower-asset/angular-dragdrop" : "1.*@stable",
-        "bower-asset/angular-slugify" : "1.0.*",
-        "bower-asset/twig.js" : "0.8.4@stable",
-        "bower-asset/ng-file-upload" : "9.1.1",
-        "bower-asset/ng-wig" : "2.1.1",
         "imagine/imagine": "0.6.3"
 	},
 	"autoload" : {
@@ -37,9 +25,6 @@
 		}
 	},
 	"extra": {
-    	"asset-installer-paths": {
-            "bower-asset-library": "vendor/bower"
-        },
         "branch-alias": {
             "dev-master": "1.0.x-dev"
         }

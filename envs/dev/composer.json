@@ -1,22 +1,9 @@
 {
-    "minimum-stability": "dev",
     "require": {
         "yiisoft/yii2": "~2.0.0",
         "yiisoft/yii2-gii" : "~2.0.0",
         "yiisoft/yii2-debug" : "~2.0.0",
         "twig/twig" : "~1.0",
-        "bower-asset/jquery" : "2.1.*@stable",
-        "bower-asset/jquery-ui" : "1.*@stable",
-        "bower-asset/angular" : "1.4.6@stable",
-        "bower-asset/angular-i18n" : "1.4.6@stable",
-        "bower-asset/angular-resource": "1.4.6@stable",
-        "bower-asset/angular-ui-router" : "0.2.*@stable",
-        "bower-asset/angular-loading-bar" : "0.8.*@stable",
-        "bower-asset/angular-dragdrop" : "1.*@stable",
-        "bower-asset/angular-slugify" : "1.0.*",
-        "bower-asset/twig.js" : "0.7.2@stable",
-        "bower-asset/ng-file-upload" : "5.0.*",
-        "bower-asset/ng-wig" : "2.1.1",
         "ext-curl" : "*",
         "curl/curl" : "1.2.1",
         "imagine/imagine": "0.6.3",
@@ -24,6 +11,19 @@
         "fabpot/goutte" : "3.1.*",
         "jakeasmith/http_build_url" : "1.0.0",
         "ifsnop/mysqldump-php":"2.*"
+    },
+    "require-dev" {
+        "bower-asset/jquery-ui" : "1.11.4",
+        "bower-asset/angular" : "1.4.8",
+        "bower-asset/angular-i18n" : "1.4.8",
+        "bower-asset/angular-resource": "1.4.8",
+        "bower-asset/angular-ui-router" : "0.2.15",
+        "bower-asset/angular-loading-bar" : "0.8.0",
+        "bower-asset/angular-dragdrop" : "1.0.13",
+        "bower-asset/angular-slugify" : "1.0.1",
+        "bower-asset/twig.js" : "0.8.6",
+        "bower-asset/ng-file-upload" : "11.0.2",
+        "bower-asset/ng-wig" : "2.3.3"
     },
     "extra": {
         "asset-installer-paths": {

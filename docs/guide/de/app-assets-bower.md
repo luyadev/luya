@@ -10,7 +10,6 @@ Durch das globale initailisieren des `fxp/composer-asset-plugin` Plugins bei der
 
 ```json
 require : {
-    "bower-asset/jquery" : "2.1.*@stable",
     "bower-asset/jquery-ui" : "1.*@stable"
 }
 ```
@@ -25,6 +24,8 @@ Stelle sicher das in deiner `composer.json` Datei auch das folgende Segement hin
 }
 ```
 
+> Tipp: Wenn Sie Jquery einbindne möchten benutzen Sie das `yii\web\JqueryAssset` Bundle welches automatisch von Yii installiert wird.
+
 Bower im Asset verwenden
 ------------------------
 Die *Asset Datei* untersheide sich nicht gross von den üblichen [Projekt Assets](app-assets.md). Der massgebende unterschied liegt im `$sourcePath` welcher nun auf das Bower Verzeichnis zielen soll:
@@ -35,7 +36,6 @@ class JqueryAsset extends \luya\web\Asset
 	public $sourcePath = '@bower';
 
 	public $js = [
-        'jquery/dist/jquery.min.js',
         'jquery-ui/jquery-ui.min.js',
     ];
 }

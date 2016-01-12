@@ -20,6 +20,7 @@ load([
 
 **ISSUES**
 
+- `#681` Removed js download via fxp/bower plugin and replaced by downloading resources and created vendor folder. Composer asset has been removed from luya modules.
 - `#682` Added last login timestamp to user list table.
 - `#685` Fixed bug where NgRest crud sort does not work anymore, changed the default output for ngrest type list calls to hide i18n date and directly return the language value from the api.
 - `#692` Added date and version indicator to module creation phpdoc.

@@ -1,5 +1,5 @@
 <?php
-
+/*
 namespace admin\assets;
 
 class Bower extends \luya\web\Asset
@@ -29,3 +29,4 @@ class Bower extends \luya\web\Asset
         'angular-loading-bar/build/loading-bar.min.css',
     ];
 }
+*/

@@ -21,6 +21,6 @@ class Main extends \luya\web\Asset
 
     public $depends = [
         'admin\assets\Jquery',
-        'admin\assets\Bower',
+        'admin\assets\BowerVendor',
     ];
 }
