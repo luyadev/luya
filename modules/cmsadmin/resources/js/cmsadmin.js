@@ -66,7 +66,7 @@
                 data : '='
             },
             templateUrl : 'updateformpage.html',
-            controller : function($scope, $resource) {
+            controller : function($scope) {
             	
             	$scope.layoutsData = ServiceLayoutsData.data;
 				
@@ -195,7 +195,7 @@
 				data : '='
 			},
 			templateUrl : 'createformpage.html',
-			controller : function($scope, $resource) {
+			controller : function($scope) {
 				
 				$scope.data.use_draft = 0;
 				
@@ -263,14 +263,17 @@
 	
 	// factory.js
 	
+	/*
 	zaa.factory('ApiCmsNavContainer', function($resource) {
 		return $resource('admin/api-cms-navcontainer/:id');
 	});
+	*/
 	
+	/*
 	zaa.factory('ApiCmsBlock', function($resource) {
 		return $resource('admin/api-cms-block/:id');
 	});
-	
+	*/
 	
 	zaa.factory('ApiCmsNavItemPageBlockItem', function($resource) {
 		return $resource('admin/api-cms-navitempageblockitem/:id', { id : '@_id' }, {
