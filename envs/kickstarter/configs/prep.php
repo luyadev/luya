@@ -118,7 +118,7 @@ $config = [
          * http://www.yiiframework.com/doc-2.0/guide-caching-data.html#cache-apis
          */
         'cache' => [
-            'class' => 'yii\caching\FileCache', // choose between different caching systems, see yii2 documentation.
+            'class' => 'yii\caching\DummyCache', // use: yii\caching\FileCache
         ],
     ]
 ];
