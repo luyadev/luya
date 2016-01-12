@@ -79,24 +79,12 @@ use cms\menu\Query as MenuQuery;
  */
 class Container extends \yii\base\Component implements ArrayAccess
 {
+    use \luya\traits\CacheableTrait;
+    
     /**
      * @var luya\web\Request Request object
      */
     public $request = null;
-
-    /**
-     * @var boolean If enabled and the cache component is available the menu language containers will be
-     * cached for the time defined in $cacheExpiration.
-     * 
-     * @since 1.0.0-beta4
-     */
-    public $cacheEnabled = true;
-    
-    /**
-     * @var integer Defined the duration of the caching lifetime in seconds. 3600 = 1 hour.
-     * @since 1.0.0-beta4
-     */
-    public $cacheExpiration = 3600;
     
     private $_composition = null;
 
@@ -109,8 +97,6 @@ class Container extends \yii\base\Component implements ArrayAccess
     private $_languages = null;
 
     private $_redirectMap = null;
-
-    private $_cachable = null;
     
     /**
      * Class constructor to DI the request object.
@@ -123,22 +109,6 @@ class Container extends \yii\base\Component implements ArrayAccess
     {
         $this->request = $request;
         parent::__construct($config);
-    }
-    
-    /**
-     * Check if the current configuration of the application and the property allows a caching of the
-     * language container data.
-     * 
-     * @return boolean
-     * @since 1.0.0-beta4
-     */
-    public function isCachable()
-    {
-        if ($this->_cachable === null) {
-            $this->_cachable = ($this->cacheEnabled && Yii::$app->has('cache')) ? true : false;
-        }
-        
-        return $this->_cachable;
     }
     
     /**
@@ -401,39 +371,6 @@ class Container extends \yii\base\Component implements ArrayAccess
     }
 
     /* private methods */
-    
-    /**
-     * Set the cache value if caching is allowed.
-     * 
-     * @param string $key The identifier key
-     * @param mix $value The value to store in the cache component.
-     * @return void
-     */
-    private function setHasCache($key, $value)
-    {
-        if ($this->isCachable()) {
-            Yii::$app->cache->set($key, $value, $this->cacheExpiration);
-        }
-    }
-    
-    /**
-     * Get the caching data if caching is allowed and there is any data stored for this key.
-     * 
-     * @param string $key The identifiere key
-     * @return mixed|boolean Returns the data, if not found returns false.
-     */
-    private function getHasCache($key)
-    {
-        if ($this->isCachable()) {
-            $data = Yii::$app->cache->get($key);
-            if ($data) {
-                Yii::info("CMS Module menu container key '$key' loaded from cache.", "luya-cms");
-                return $data;
-            }
-        }
-    
-        return false;
-    }
 
     /**
      * Find the current element based on the request get property 'path'.
