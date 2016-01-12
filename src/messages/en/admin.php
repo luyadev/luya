@@ -152,4 +152,6 @@ return [
     'js_dir_manager_rm_file_ok' => 'The file was deleted successfully.',
     
 // added translation in 1.0.0-beta4:
+
+    'ngrest_crud_empty_row' => 'No data has been added to this table yet.',
 ];

@@ -85,7 +85,7 @@
                                 <td><?= $element['html']; ?></td>
                             <?php endforeach; ?>
                         <?php endforeach; ?>
-                        <?php if (count($this->context->getButtons()) > 0): ?>cd
+                        <?php if (count($this->context->getButtons()) > 0): ?>
                         <td style="text-align:right;">
                             <?php foreach ($this->context->getButtons() as $item): ?>
                             <a class="waves-effect waves-light btn-flat btn--bordered" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons<? if(!empty($item['label'])): ?> left<? endif; ?>"><?=$item['icon']; ?></i><?=$item['label']; ?></a>
@@ -95,6 +95,7 @@
                     </tr>
                 </tbody>
             </table>
+            <div ng-show="data.list.length == 0" class="alert alert--info"><?= \admin\Module::t('ngrest_crud_empty_row'); ?></div>
         </div>
         <!-- /LIST -->
     
