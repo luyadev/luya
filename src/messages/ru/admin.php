@@ -150,6 +150,7 @@ return [
     'js_dir_manager_upload_image_ok' => 'Файл был успешно загружен.',
     'js_dir_manager_rm_file_confirm' => 'Вы действительно хотите удалить этот файл?',
     'js_dir_manager_rm_file_ok' => 'Файл был успешно удален.',
+    'js_zaa_server_proccess' => 'Сервер обрабатывает данные. Пожалуйста подождите',
     
 // added translation in 1.0.0-beta4:
 ];

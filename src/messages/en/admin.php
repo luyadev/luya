@@ -150,6 +150,7 @@ return [
     'js_dir_manager_upload_image_ok' => 'The file was uploaded successfully.',
     'js_dir_manager_rm_file_confirm' => 'Do you really want to delete this file?',
     'js_dir_manager_rm_file_ok' => 'The file was deleted successfully.',
+    'js_zaa_server_proccess' => 'The server is processing your data, please hang on.',
     
 // added translation in 1.0.0-beta4:
 
