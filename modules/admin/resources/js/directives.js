@@ -896,7 +896,7 @@
                     }
                 });
                 
-                $scope.imageSrc = false;
+                $scope.imageSrc = null;
             },
             template: function() {
                 return '<div ng-show="imageSrc!==false"><img ng-src="{{imageSrc}}" /></div>';
