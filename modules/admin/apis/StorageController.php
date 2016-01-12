@@ -188,6 +188,8 @@ class StorageController extends \admin\base\RestController
         }
         $model->is_deleted = true;
         
+        Yii::$app->storage->deleteHasCache(Yii::$app->storage->folderCacheKey);
+        
         return $model->update();
     }
     
