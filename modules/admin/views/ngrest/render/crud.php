@@ -85,10 +85,10 @@
                                 <td><?= $element['html']; ?></td>
                             <?php endforeach; ?>
                         <?php endforeach; ?>
-                        <?php if (count($this->context->getButtons()) > 0): ?>
+                        <?php if (count($this->context->getButtons()) > 0): ?>cd
                         <td style="text-align:right;">
                             <?php foreach ($this->context->getButtons() as $item): ?>
-                            <a class="waves-effect waves-light btn-flat" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons left"><?=$item['icon']; ?></i><?=$item['label']; ?></a>
+                            <a class="waves-effect waves-light btn-flat btn--bordered" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons<? if(!empty($item['label'])): ?> left<? endif; ?>"><?=$item['icon']; ?></i><?=$item['label']; ?></a>
                             <?php endforeach; ?>
                         </td>
                         <?php endif; ?>

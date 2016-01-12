@@ -20,6 +20,7 @@ load([
 
 **ISSUES**
 
+- `#700` Added .btn--bordered class that adds a smooth black border to the btn. Improves visibility.
 - `#698` Added console command controller helpers and console command `aw/create` to generate a new ActiveWindow.
 - `#708` Fixed bug where ngrest list image plugin does return false and ng-src try to render the image name `false`.
 - `#681` Removed js download via fxp/bower plugin and replaced by downloading resources and created vendor folder. Composer asset has been removed from luya modules.

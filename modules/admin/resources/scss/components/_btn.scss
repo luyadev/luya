@@ -43,3 +43,30 @@
         top: 6px;
     }
 }
+
+/**
+ * #BTN--BORDERED
+ * Bordered button
+ **/
+.btn--bordered {
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	padding: 0 10px;
+
+	i {
+		margin-top: -1px;
+	}
+
+	&:hover {
+		border-color: map_get($grey, "darken-2");
+	}
+
+	&.btn--red-bordered {
+		border-color: map_get($red, "base");
+	}
+	&.btn--green-bordered {
+		border-color: map_get($green, "base");
+	}
+	&.btn--blue-bordered {
+		border-color: map_get($blue, "base");
+	}
+}
