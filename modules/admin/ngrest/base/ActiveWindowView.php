@@ -11,7 +11,7 @@ class ActiveWindowView extends \yii\base\View
      * 
      * @param string $value The name/value of the button to display for the user.
      * @param string $callback The id of the callback if the callback method s name is `callbackSayHello` the callback id would be `say-hello`.
-     * @param array $options Define behavior of the button, optionas are name-value pairs. The following options are available:
+     * @param array $options Define behavior of the button, options are name-value pairs. The following options are available:
      * 
      * - params: array, Add additional parameters which will be sent to the callback. ['foo' => 'bar']
      * - closeOnSuccess: boolean, if enabled, the active window will close after successfully sendSuccess() response from callback.
