@@ -84,6 +84,20 @@ class Container extends \yii\base\Component implements ArrayAccess
      */
     public $request = null;
 
+    /**
+     * @var boolean If enabled and the cache component is available the menu language containers will be
+     * cached for the time defined in $cacheExpiration.
+     * 
+     * @since 1.0.0-beta4
+     */
+    public $cacheEnabled = true;
+    
+    /**
+     * @var integer Defined the duration of the caching lifetime in seconds. 3600 = 1 hour.
+     * @since 1.0.0-beta4
+     */
+    public $cacheExpiration = 3600;
+    
     private $_composition = null;
 
     private $_current = null;
@@ -96,6 +110,8 @@ class Container extends \yii\base\Component implements ArrayAccess
 
     private $_redirectMap = null;
 
+    private $_cachable = null;
+    
     /**
      * Class constructor to DI the request object.
      * 
@@ -108,7 +124,23 @@ class Container extends \yii\base\Component implements ArrayAccess
         $this->request = $request;
         parent::__construct($config);
     }
-
+    
+    /**
+     * Check if the current configuration of the application and the property allows a caching of the
+     * language container data.
+     * 
+     * @return boolean
+     * @since 1.0.0-beta4
+     */
+    public function isCachable()
+    {
+        if ($this->_cachable === null) {
+            $this->_cachable = ($this->cacheEnabled && Yii::$app->has('cache')) ? true : false;
+        }
+        
+        return $this->_cachable;
+    }
+    
     /**
      * ArrayAccess check if the offset key exists in the language array.
      * 
@@ -369,6 +401,39 @@ class Container extends \yii\base\Component implements ArrayAccess
     }
 
     /* private methods */
+    
+    /**
+     * Set the cache value if caching is allowed.
+     * 
+     * @param string $key The identifier key
+     * @param mix $value The value to store in the cache component.
+     * @return void
+     */
+    private function setHasCache($key, $value)
+    {
+        if ($this->isCachable()) {
+            Yii::$app->cache->set($key, $value, $this->cacheExpiration);
+        }
+    }
+    
+    /**
+     * Get the caching data if caching is allowed and there is any data stored for this key.
+     * 
+     * @param string $key The identifiere key
+     * @return mixed|boolean Returns the data, if not found returns false.
+     */
+    private function getHasCache($key)
+    {
+        if ($this->isCachable()) {
+            $data = Yii::$app->cache->get($key);
+            if ($data) {
+                Yii::info("CMS Module menu container key '$key' loaded from cache.", "luya-cms");
+                return $data;
+            }
+        }
+    
+        return false;
+    }
 
     /**
      * Find the current element based on the request get property 'path'.
@@ -495,46 +560,54 @@ class Container extends \yii\base\Component implements ArrayAccess
      */
     private function loadLanguageContainer($langShortCode)
     {
-        $lang = $this->getLanguage($langShortCode);
-
-        if (!$lang) {
-            throw new NotFoundHttpException(sprintf("The requested language '%s' does not exist in language table", $langShortCode));
-        }
-
-        $data = $this->getNavData($lang['id']);
-
-        $index = $this->buildIndexForContainer($data);
-
-        $languageContainer = [];
-
-        foreach ($data as $key => $item) {
-            $alias = $item['alias'];
-
-            if ($item['parent_nav_id'] > 0 && array_key_exists($item['parent_nav_id'], $index)) {
-                $alias = $index[$item['parent_nav_id']].'/'.$item['alias'];
+        $cacheKey = 'MenuContainerCache'.$langShortCode;
+        
+        $languageContainer = $this->getHasCache($cacheKey);
+        
+        if ($languageContainer === false) {
+            $lang = $this->getLanguage($langShortCode);
+    
+            if (!$lang) {
+                throw new NotFoundHttpException(sprintf("The requested language '%s' does not exist in language table", $langShortCode));
             }
-
-            $languageContainer[$key] = [
-                'id' => $item['id'],
-                'nav_id' => $item['nav_id'],
-                'lang' => $lang['short_code'],
-                'link' => $this->buildItemLink($alias, $langShortCode),
-                'title' => $item['title'],
-                'alias' => $alias,
-                'description' => $item['description'],
-                'create_user_id' => $item['create_user_id'],
-                'update_user_id' => $item['update_user_id'],
-                'timestamp_create' => $item['timestamp_create'],
-                'timestamp_update' => $item['timestamp_update'],
-                'is_home' => $item['is_home'],
-                'parent_nav_id' => $item['parent_nav_id'],
-                'sort_index' => $item['sort_index'],
-                'is_hidden' => $item['is_hidden'],
-                'type' => $item['nav_item_type'],
-                'redirect' => ($item['nav_item_type'] == 3) ? $this->redirectMap[$item['nav_item_type_id']] : 0,
-                'container' => $item['container'],
-                'depth' => count(explode('/', $alias)),
-            ];
+    
+            $data = $this->getNavData($lang['id']);
+    
+            $index = $this->buildIndexForContainer($data);
+    
+            $languageContainer = [];
+    
+            foreach ($data as $key => $item) {
+                $alias = $item['alias'];
+    
+                if ($item['parent_nav_id'] > 0 && array_key_exists($item['parent_nav_id'], $index)) {
+                    $alias = $index[$item['parent_nav_id']].'/'.$item['alias'];
+                }
+    
+                $languageContainer[$key] = [
+                    'id' => $item['id'],
+                    'nav_id' => $item['nav_id'],
+                    'lang' => $lang['short_code'],
+                    'link' => $this->buildItemLink($alias, $langShortCode),
+                    'title' => $item['title'],
+                    'alias' => $alias,
+                    'description' => $item['description'],
+                    'create_user_id' => $item['create_user_id'],
+                    'update_user_id' => $item['update_user_id'],
+                    'timestamp_create' => $item['timestamp_create'],
+                    'timestamp_update' => $item['timestamp_update'],
+                    'is_home' => $item['is_home'],
+                    'parent_nav_id' => $item['parent_nav_id'],
+                    'sort_index' => $item['sort_index'],
+                    'is_hidden' => $item['is_hidden'],
+                    'type' => $item['nav_item_type'],
+                    'redirect' => ($item['nav_item_type'] == 3) ? $this->redirectMap[$item['nav_item_type_id']] : 0,
+                    'container' => $item['container'],
+                    'depth' => count(explode('/', $alias)),
+                ];
+            }
+            
+            $this->setHasCache($cacheKey, $languageContainer);
         }
 
         return $languageContainer;

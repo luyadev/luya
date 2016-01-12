@@ -20,6 +20,7 @@ load([
 
 **ISSUES**
 
+- `#710` Added the ability to cache the menu component language containers, is on by default if any cache class is registered.
 - `#703` Added highlight effect after crud item edit success.
 - `#700` Added .btn--bordered class that adds a smooth black border to the btn. Improves visibility.
 - `#698` Added console command controller helpers and console command `aw/create` to generate a new ActiveWindow.
