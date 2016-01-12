@@ -73,12 +73,12 @@ class Block extends \admin\ngrest\base\Model
 
     public static function objectId($blockId, $id, $context, $pageObject = null)
     {
-        $block = self::find()->where(['id' => $blockId])->one();
+        $block = self::find()->where(['id' => $blockId])->asArray()->one();
         if (!$block) {
             return false;
         }
 
-        $class = $block->class;
+        $class = $block['class'];
         if (!class_exists($class)) {
             return false;
         }
