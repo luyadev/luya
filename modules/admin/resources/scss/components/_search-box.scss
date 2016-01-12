@@ -25,9 +25,15 @@
 
 .search-box__group-title {
 	display: block;
-	margin: 20px 0 15px 5px;
-	color: color("grey", "base");
-	font-size: 0.8rem;
+	margin: 10px 0 15px 5px;
+	padding-top: 10px;
+	color: color("teal", "base");
+	font-size: 1rem;
+	border-top: 2px solid color("teal", "base");
+
+	i {
+		margin-top: -2px;
+	}
 }
 
 .search-box th:first-letter,
@@ -35,3 +41,9 @@
 	text-transform: uppercase;
 }
 
+.search-box tr:hover td {
+	background-color: map_get($teal, "lighten-2");
+	color: #fff;
+	user-select: none;
+	cursor: pointer;
+}

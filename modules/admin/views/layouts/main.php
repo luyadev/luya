@@ -484,18 +484,16 @@ $this->beginPage()
         <div class="row" ng-repeat="item in searchResponse">
             <div class="col s12">
                 <b class="search-box__group-title"><i class="left material-icons">{{item.menuItem.icon}}</i> {{item.menuItem.alias}}</b>
-				<table>
+				<table class="search-box__table">
                     <thead>
-                    <tr ng-repeat="row in item.data | limitTo:1">
-                        <th ng-repeat="(k,v) in row">{{k}}</th>
-                        <th></th>
-                    </tr>
+                        <tr ng-repeat="row in item.data | limitTo:1">
+                            <th ng-repeat="(k,v) in row">{{k}}</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="row in item.data" ng-click="searchDetailClick(item, row)">
-                        <td ng-repeat="(k,v) in row">{{v}}</td>
-                        <td style="width: 20px;"><a ng-click="searchDetailClick(item, row)" class="right"><i class="material-icons">chevron_right</i></a></td>
-                    </tr>
+                        <tr ng-repeat="row in item.data" ng-click="searchDetailClick(item, row)">
+                            <td class="search-box__row" ng-repeat="(k,v) in row">{{v}}</td>
+                        </tr>
                     </tbody>
                 </table>
                 <br /><br />
