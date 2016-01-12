@@ -20,6 +20,7 @@ load([
 
 **ISSUES**
 
+- `#682` Added last login timestamp to user list table.
 - `#685` Fixed bug where NgRest crud sort does not work anymore, changed the default output for ngrest type list calls to hide i18n date and directly return the language value from the api.
 - `#692` Added date and version indicator to module creation phpdoc.
 - `#697` New ActiveWindow helpers, extend from yii\base\Object to add ability to configure the classes. See BC BREAKS.

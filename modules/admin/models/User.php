@@ -4,6 +4,7 @@ namespace admin\models;
 
 use Yii;
 use yii\web\IdentityInterface;
+use admin\models\UserLogin;
 
 /**
  * $salt = \Yii::$app->getSecurity()->generateRandomString();
@@ -15,11 +16,20 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
 {
     use \admin\traits\SoftDeleteTrait;
 
+    public function getLastloginTimestamp()
+    {
+        $item = UserLogin::find()->select(['timestamp_create'])->where(['user_id' => $this->id])->orderBy('id DESC')->asArray()->one();
+        
+        if ($item) {
+            return $item['timestamp_create'];
+        }
+    }
+    
     public function ngRestApiEndpoint()
     {
         return 'api-admin-user';
     }
-
+    
     public function ngRestConfig($config)
     {
         //$config->aw->register(new \admin\aws\ChangePassword(), ['icon' => 'vpn_key']);
@@ -34,6 +44,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
         $config->list->field('firstname', 'Vorname')->text();
         $config->list->field('lastname', 'Nachname')->text();
         $config->list->field('email', 'E-Mail')->text();
+        $config->list->extraField('lastloginTimestamp', 'Last Login')->datetime();
         $config->update->copyFrom('create', ['password']);
 
         $config->delete = true;
@@ -214,7 +225,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
 
     public function extraFields()
     {
-        return ['groups'];
+        return ['groups', 'lastloginTimestamp'];
     }
 
     /* ------------------------------------ yii2 auth methods below ------------------------------------ */
