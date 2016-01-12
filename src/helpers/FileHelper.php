@@ -44,4 +44,13 @@ class FileHelper extends \yii\helpers\BaseFileHelper
     {
         return hash_file('md5', $sourceFile);
     }
+    
+    public static function writeFile($fileName, $content)
+    {
+        try {
+            return file_put_contents($fileName, $content);
+        } catch (\Exception $error) {
+            return false;
+        }
+    }
 }
