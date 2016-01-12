@@ -791,6 +791,7 @@
 				$.param(typeDataCopy),
 				headers
 			).then(function successCallback(response) {
+				$scope.loaded = false;
 				AdminToastService.success(i18nParam('js_page_item_update_ok', {'title': itemCopy.title}), 2000);
 				$scope.menuDataReload();
 				$scope.refresh();

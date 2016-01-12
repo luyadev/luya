@@ -39,6 +39,7 @@ load([
 - `#691` Create the module migration folder if the folder does not exists.
 - `#687` Fixed issue in StorageImporter and empty storage folder.
 - `#684` Improved styling of error api module mails.
+- `#683` Fixed bug where nav item data update does not show loading dialog.
 
 1.0.0-beta3 (4.1.2016)
 -------------------------
