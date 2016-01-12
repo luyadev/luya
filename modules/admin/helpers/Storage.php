@@ -52,6 +52,8 @@ class Storage
                 }
             }
             
+            Yii::$app->storage->deleteHasCache(Yii::$app->storage->fileCacheKey);
+            Yii::$app->storage->deleteHasCache(Yii::$app->storage->imageCacheKey);
             return $model->delete();
         }
     
@@ -80,6 +82,8 @@ class Storage
                 StorageImage::findOne($imageItem->id)->delete();
             }
             
+            Yii::$app->storage->deleteHasCache(Yii::$app->storage->imageCacheKey);
+            Yii::$app->storage->deleteHasCache(Yii::$app->storage->fileCacheKey);
             return static::removeFile($fileId);
         }
         

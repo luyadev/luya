@@ -67,7 +67,7 @@ trait CacheableTrait
      * @param mix $value The value to store in the cache component.
      * @return void
      */
-    protected function setHasCache($key, $value)
+    public function setHasCache($key, $value)
     {
         if ($this->isCachable()) {
             Yii::$app->cache->set($key, $value, $this->cacheExpiration);
@@ -79,7 +79,7 @@ trait CacheableTrait
      * 
      * @param string $key The cache identifier
      */
-    protected function deleteHasCache($key)
+    public function deleteHasCache($key)
     {
         if ($this->isCachable()) {
             Yii::$app->cache->delete($key);
@@ -92,7 +92,7 @@ trait CacheableTrait
      * @param string $key The identifiere key
      * @return mixed|boolean Returns the data, if not found returns false.
      */
-    protected function getHasCache($key)
+    public function getHasCache($key)
     {
         if ($this->isCachable()) {
             $data = Yii::$app->cache->get($key);
