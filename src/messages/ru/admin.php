@@ -153,4 +153,6 @@ return [
     'js_zaa_server_proccess' => 'Сервер обрабатывает данные. Пожалуйста подождите',
     
 // added translation in 1.0.0-beta4:
+
+    'ngrest_crud_empty_row' => 'Данные пока не добавлены в таблицу',
 ];
