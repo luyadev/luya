@@ -83,14 +83,6 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
     {
         if ($this->_buttons === null) {
             $buttons = [];
-            // do we have an edit button
-            if (count($this->getFields('update')) > 0 && $this->can(Auth::CAN_UPDATE)) {
-                $buttons[] = [
-                    'ngClick' => 'toggleUpdate(item.'.$this->config->primaryKey.', $event)',
-                    'icon' => 'mode_edit',
-                    'label' => '',
-                ];
-            }
             // get all activeWindows assign to the crud
             foreach ($this->getActiveWindows() as $hash => $config) {
                 $buttons[] = [
@@ -99,7 +91,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
                     'label' => $config['alias'],
                 ];
             }
-
+            // check if deletable is enabled
             if ($this->config->isDeletable() && $this->can(Auth::CAN_DELETE)) {
                 $buttons[] = [
                     'ngClick' => 'deleteItem(item.'.$this->config->primaryKey.', $event)',
@@ -107,6 +99,15 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
                     'label' => '',
                 ];
             }
+            // do we have an edit button
+            if (count($this->getFields('update')) > 0 && $this->can(Auth::CAN_UPDATE)) {
+                $buttons[] = [
+                    'ngClick' => 'toggleUpdate(item.'.$this->config->primaryKey.', $event)',
+                    'icon' => 'mode_edit',
+                    'label' => '',
+                ];
+            }
+            
             $this->_buttons = $buttons;
         }
 
