@@ -191,7 +191,7 @@
 				$scope.highlightId = $scope.data.updateId;
 				$timeout(function() {
 					$scope.highlightId = 0;
-				}, 1000);
+				}, 3000);
 				
 			}).error(function(data) {
 				$scope.updateErrors = data;
