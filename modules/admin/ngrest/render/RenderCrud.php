@@ -65,6 +65,11 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
     {
         return 'admin/'.$this->config->apiEndpoint;
     }
+    
+    public function getPrimaryKey()
+    {
+        return $this->config->primaryKey;
+    }
 
     /**
      * collection all the buttons in the crud list.

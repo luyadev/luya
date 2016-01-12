@@ -13,6 +13,7 @@
         $scope.config.update = <?= $this->context->getFieldsJson('update'); ?>;
         $scope.config.ngrestConfigHash = '<?= $config->hash; ?>';
         $scope.config.activeWindowCallbackUrl = '<?= $activeWindowCallbackUrl; ?>';
+        $scope.config.pk = '<?= $this->context->getPrimaryKey(); ?>';
     });
 </script>
 
@@ -79,7 +80,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="(key, item) in data.list | srcbox:searchString">
+                    <tr ng-repeat="(key, item) in data.list | srcbox:searchString" ng-class="{'crud__item-highlight': isHighlighted(item)}">
                         <?php foreach ($config->getPointer('list') as $item): ?>
                             <?php foreach ($this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_LIST) as $element): ?>
                                 <td><?= $element['html']; ?></td>

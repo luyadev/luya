@@ -21,7 +21,7 @@
 	});
 	
 	// CrudController.js
-	zaa.controller("CrudController", function($scope, $filter, $http, $sce, $state, AdminLangService, LuyaLoading, AdminToastService) {
+	zaa.controller("CrudController", function($scope, $filter, $http, $sce, $state, $timeout, AdminLangService, LuyaLoading, AdminToastService) {
 		
 		LuyaLoading.start();
 		
@@ -160,7 +160,6 @@
 			$scope.switchTo(0);
 		};
 		
-		
 		$scope.activeWindowModal = false;
 		
 		$scope.openActiveWindow = function() {
@@ -171,6 +170,16 @@
 			$scope.activeWindowModal = false;
 		};
 		
+		$scope.highlightId = 0;
+		
+		$scope.isHighlighted = function(itemId) {
+			if (itemId[$scope.config.pk] == $scope.highlightId) {
+				return true;
+			}
+			
+			return false;
+		};
+		
 		$scope.submitUpdate = function () {
 			
 			$scope.updateErrors = [];
@@ -179,6 +188,11 @@
 				$scope.loadList();
 				AdminToastService.success(i18n['js_ngrest_rm_update'], 2000);
 				$scope.switchTo(0);
+				$scope.highlightId = $scope.data.updateId;
+				$timeout(function() {
+					$scope.highlightId = 0;
+				}, 1000);
+				
 			}).error(function(data) {
 				$scope.updateErrors = data;
 			});
