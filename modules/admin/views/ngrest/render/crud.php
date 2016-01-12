@@ -89,7 +89,7 @@
                         <?php if (count($this->context->getButtons()) > 0): ?>
                         <td style="text-align:right;">
                             <?php foreach ($this->context->getButtons() as $item): ?>
-                            <a class="waves-effect waves-light btn-flat btn--bordered" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons<? if(!empty($item['label'])): ?> left<? endif; ?>"><?=$item['icon']; ?></i><?=$item['label']; ?></a>
+                            <a class="waves-effect waves-light btn-flat btn--bordered" ng-click="<?= $item['ngClick']; ?>"><i class="material-icons<?php if (!empty($item['label'])): ?> left<?php endif; ?>"><?=$item['icon']; ?></i><?=$item['label']; ?></a>
                             <?php endforeach; ?>
                         </td>
                         <?php endif; ?>
