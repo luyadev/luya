@@ -20,7 +20,7 @@ class FileController extends \luya\web\Controller
             // verify again against database to add counter
             $model = StorageFile::findOne($fileData->id);
             // proceed when model exists
-            if ($model && file_exists($fileSourcePath)) {
+            if ($model && file_exists($fileSourcePath) && is_readable($fileSourcePath)) {
                 // update the model count stats
                 $count = $model->passthrough_file_stats + 1;
                 $model->passthrough_file_stats = $count;
@@ -34,7 +34,6 @@ class FileController extends \luya\web\Controller
                 header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
                 header('Pragma: public');
                 header('Content-Length: ' . filesize($fileSourcePath));
-                ob_clean();
                 flush();
                 readfile($fileSourcePath);
                 exit;
