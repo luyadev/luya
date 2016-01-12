@@ -69,7 +69,17 @@ use Imagine\Gd\Imagine;
  */
 class StorageContainer extends \yii\base\Component
 {
+    use \luya\traits\CacheableTrait;
+    
     public $request = null;
+    
+    public $fileCacheKey = 'storageFileCacheKey';
+    
+    public $imageCacheKey = 'storageImageCacheKey';
+    
+    public $folderCacheKey = 'storageFolderCacheKey';
+    
+    public $filterCacheKey = 'storageFilterCacheKey';
     
     private $_httpPath = null;
     
@@ -110,7 +120,7 @@ class StorageContainer extends \yii\base\Component
     public function getFilesArray()
     {
         if ($this->_filesArray === null) {
-            $this->_filesArray = (new Query())->from('admin_storage_file')->select(['id', 'is_hidden', 'is_deleted', 'folder_id', 'name_original', 'name_new', 'name_new_compound', 'mime_type', 'extension', 'hash_name', 'upload_timestamp', 'file_size', 'upload_user_id'])->indexBy('id')->all();
+            $this->_filesArray = $this->getQueryCacheHelper((new Query())->from('admin_storage_file')->select(['id', 'is_hidden', 'is_deleted', 'folder_id', 'name_original', 'name_new', 'name_new_compound', 'mime_type', 'extension', 'hash_name', 'upload_timestamp', 'file_size', 'upload_user_id'])->indexBy('id'), $this->fileCacheKey);
         }
         
         return $this->_filesArray;
@@ -124,7 +134,7 @@ class StorageContainer extends \yii\base\Component
     public function getImagesArray()
     {
         if ($this->_imagesArray === null) {
-            $this->_imagesArray = (new Query())->from('admin_storage_image')->select(['id', 'file_id', 'filter_id', 'resolution_width', 'resolution_height'])->indexBy('id')->all();
+            $this->_imagesArray = $this->getQueryCacheHelper((new Query())->from('admin_storage_image')->select(['id', 'file_id', 'filter_id', 'resolution_width', 'resolution_height'])->indexBy('id'), $this->imageCacheKey);
         }
         
         return $this->_imagesArray;
@@ -202,6 +212,7 @@ class StorageContainer extends \yii\base\Component
         
         if ($model->validate()) {
             if ($model->save()) {
+                $this->deleteHasCache($this->fileCacheKey);
                 $this->_filesArray[$model->id] = $model->toArray();
                 return $this->getFile($model->id);
             }
@@ -281,7 +292,7 @@ class StorageContainer extends \yii\base\Component
             }
             
             $this->_imagesArray[$model->id] = $model->toArray();
-            
+            $this->deleteHasCache($this->imageCacheKey);
             return $this->getImage($model->id);
         } catch (Exception $err) {
             if ($throwException) {
@@ -295,7 +306,7 @@ class StorageContainer extends \yii\base\Component
     public function getFoldersArray()
     {
         if ($this->_foldersArray === null) {
-            $this->_foldersArray = (new Query())->from('admin_storage_folder')->select(['id', 'name', 'parent_id', 'timestamp_create'])->where(['is_deleted' => 0])->orderBy(['name' => 'ASC'])->indexBy('id')->all();
+            $this->_foldersArray = $this->getQueryCacheHelper((new Query())->from('admin_storage_folder')->select(['id', 'name', 'parent_id', 'timestamp_create'])->where(['is_deleted' => 0])->orderBy(['name' => 'ASC'])->indexBy('id'), $this->folderCacheKey);
         }
         
         return $this->_foldersArray;
@@ -327,13 +338,14 @@ class StorageContainer extends \yii\base\Component
         $model->name = $folderName;
         $model->parent_id = $parentFolderId;
         $model->timestamp_create = time();
+        $this->deleteHasCache($this->folderCacheKey);
         return $model->save(false);
     }
     
     public function getFiltersArray()
     {
         if ($this->_filtersArray === null) {
-            $this->_filtersArray = (new Query())->from('admin_storage_filter')->select(['id', 'identifier', 'name'])->indexBy('identifier')->all();
+            $this->_filtersArray = $this->getQueryCacheHelper((new Query())->from('admin_storage_filter')->select(['id', 'identifier', 'name'])->indexBy('identifier'), $this->filterCacheKey);
         }
         
         return $this->_filtersArray;
@@ -342,5 +354,17 @@ class StorageContainer extends \yii\base\Component
     public function getFiltersArrayItem($filterIdentifier)
     {
         return (isset($this->filtersArray[$filterIdentifier])) ? $this->filtersArray[$filterIdentifier] : false;
+    }
+    
+    protected function getQueryCacheHelper(\yii\db\Query $query, $key)
+    {
+        $data = $this->getHasCache($key);
+        
+        if ($data === false) {
+            $data = $query->all();
+            $this->setHasCache($key, $data);
+        }
+        
+        return $data;
     }
 }

@@ -140,9 +140,6 @@ class NavItemPage extends \cmsadmin\base\NavItemType
                     
                     if ($blockObject->cacheEnabled) {
                         $this->setHasCache($cacheKey, $blockResponse, $blockObject->cacheExpiration);
-                        //Yii::info($cacheKey . ": will be cached!");
-                    } else {
-                        //Yii::info($cacheKey. ": will NOT be cached!");
                     }
                 }
             }

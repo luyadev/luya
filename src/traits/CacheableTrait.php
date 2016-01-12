@@ -97,9 +97,10 @@ trait CacheableTrait
         if ($this->isCachable()) {
             $data = Yii::$app->cache->get($key);
             if ($data) {
-                Yii::info("CMS Module menu container key '$key' loaded from cache.", "luya-cms");
+                Yii::info("Cacheable trait key '$key' loaded from cache.", "luya");
                 return $data;
             }
+            Yii::info("Cacheable trait key '$key' NOT loaded.", "luya");
         }
     
         return false;
