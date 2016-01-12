@@ -12,7 +12,7 @@
         "jakeasmith/http_build_url" : "1.0.0",
         "ifsnop/mysqldump-php":"2.*"
     },
-    "require-dev" {
+    "require-dev": {
         "bower-asset/jquery-ui" : "1.11.4",
         "bower-asset/angular" : "1.4.8",
         "bower-asset/angular-i18n" : "1.4.8",
