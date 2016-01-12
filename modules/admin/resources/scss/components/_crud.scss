@@ -31,3 +31,11 @@
 	line-height: 1em;
 	margin-top: -0.5em;
 }
+
+table td {
+	transition: 0.25s ease background-color;
+}
+
+.crud__item-highlight td {
+	background-color: rgba(map_get($green, "base"), 0.5);
+}
