@@ -29,7 +29,7 @@ $config = [
      * of LUYA is also that you can use the Website without the CMS module! 
      */
     'defaultRoute' => 'cms',
-	
+    
     /*
      * Define the basePath of the project (Yii Configration Setup
      */
@@ -78,13 +78,13 @@ $config = [
          * Add your smtp connection to the mail component to send mails (which is required for secure login), you can test your
          * mail component with the luya console command ./vendor/bin/luya health/mailer.
          */
-    	'mail' => [
-    		'host' => null,
-    		'username' => null,
-    		'password' => null,
-    		'from' => null,
-    		'fromName' => null,
-    	],
+        'mail' => [
+            'host' => null,
+            'username' => null,
+            'password' => null,
+            'from' => null,
+            'fromName' => null,
+        ],
 
         /*
          * ATTENTION:
@@ -95,7 +95,7 @@ $config = [
          * You can also create your own errorapi (zehir/luya-modul-errorapi) module to get notification
          * about the errors from your projects.
          */
-    	'errorHandler' => [
+        'errorHandler' => [
             'transferException' => false,
         ],
         

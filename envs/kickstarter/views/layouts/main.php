@@ -1,4 +1,4 @@
-<? $this->beginPage(); ?>
+<?php $this->beginPage(); ?>
 <html>
     <head>
         <title>Luya &mdash; <?= $this->title; ?></title>
@@ -32,9 +32,9 @@
         <div class="container" id="content">
             <div class="row">
                 <ol class="breadcrumb">
-                    <? foreach(Yii::$app->menu->current->teardown as $item): ?>
+                    <?php foreach (Yii::$app->menu->current->teardown as $item): ?>
                     <li><a href="<?= $item->link; ?>"><?= $item->title; ?></a>
-                    <? endforeach; ?>
+                    <?php endforeach; ?>
                 </ol>
             </div>
         
@@ -43,23 +43,23 @@
                     <ul>
                     <?php foreach (Yii::$app->menu->find()->where(['parent_nav_id' => 0, 'container' => 'default'])->all() as $item): ?>
                         <li>
-                            <a<? if($item->isActive): ?> class="active"<?endif;?> href="<?= $item->link; ?>"><?= $item->title; ?></a>
-                            <? if($item->hasChildren()): ?>
+                            <a<?php if ($item->isActive): ?> class="active"<?endif;?> href="<?= $item->link; ?>"><?= $item->title; ?></a>
+                            <?php if ($item->hasChildren()): ?>
                             <ul>
-                                <? foreach($item->children as $child): ?>
-                                    <li><a<? if($child->isActive): ?> class="active"<?endif;?> href="<?= $child->link; ?>">&raquo; <?= $child->title; ?></a></li>
+                                <?php foreach ($item->children as $child): ?>
+                                    <li><a<?php if ($child->isActive): ?> class="active"<?endif;?> href="<?= $child->link; ?>">&raquo; <?= $child->title; ?></a></li>
                                     
-                                    <? if($child->hasChildren()): ?>
+                                    <?php if ($child->hasChildren()): ?>
                                     <ul>
-                                        <? foreach($child->children as $grandChild): ?>
-                                            <li><a<? if($grandChild->isActive): ?> class="active"<?endif;?> href="<?= $grandChild->link; ?>">&raquo; <?= $grandChild->title; ?></a>
-                                        <? endforeach; ?>
+                                        <?php foreach ($child->children as $grandChild): ?>
+                                            <li><a<?php if ($grandChild->isActive): ?> class="active"<?endif;?> href="<?= $grandChild->link; ?>">&raquo; <?= $grandChild->title; ?></a>
+                                        <?php endforeach; ?>
                                     </ul>
-                                    <? endif; ?>
+                                    <?php endif; ?>
                                     
-                                <? endforeach; ?>
+                                <?php endforeach; ?>
                             </ul>
-                            <? endif; ?>
+                            <?php endif; ?>
                         </li>
                     <?php endforeach; ?>
                     </ul>
