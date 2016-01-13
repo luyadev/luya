@@ -98,6 +98,6 @@ class VideoBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return '{% if extras.url is not empty %}<div class="video-container" style="margin:100px"><iframe width="640" height="480" src="{{ extras.url }}" frameborder="0" allowfullscreen></iframe></div>{% else %}<span class="block__empty-text">' . Module::t('block_video_no_video') . '</span>{% endif %}';
+        return '{% if extras.url is not empty %}<div class="video-container" style="margin:40px; max-height:300px;"><iframe width="640" height="480" src="{{ extras.url }}" frameborder="0" allowfullscreen></iframe></div>{% else %}<span class="block__empty-text">' . Module::t('block_video_no_video') . '</span>{% endif %}';
     }
 }
