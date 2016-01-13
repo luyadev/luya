@@ -180,6 +180,7 @@ class CrawlContainer extends \yii\base\Object
                     $model->crawled = 1;
                     $model->status_code = 1;
                     $model->last_indexed = time();
+                    $model->title = $this->getCrawler($url)->getTitle();
                     $model->language_info = $this->getCrawler($url)->getLanguageInfo();
                     $model->save(false);
     
