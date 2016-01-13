@@ -1,7 +1,7 @@
 LUYA CHANGELOG
 ==============
 
-1.0.0-beta4 (in progress)
+1.0.0-beta4 (13.1.2016)
 -------------------------
 
 **BC BREAKS**

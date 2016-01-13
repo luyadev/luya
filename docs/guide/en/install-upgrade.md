@@ -1,9 +1,9 @@
 Upgrading Luya
 ==============
 
-This page describes how to update an existing luya instance to the newest version. Der current version is `1.0.0-beta3`.
+This page describes how to update an existing luya instance to the newest version. Der current version is `1.0.0-beta4`.
 
-> This guide explains how to upgrade from `1.0.0-beta1` to `1.0.0-beta`.
+> This guide explains how to upgrade from `1.0.0-beta3` to `1.0.0-beta4`.
 
 ### Composer
 
@@ -11,10 +11,10 @@ change the luya versions for each modules and luya itself in you your composer.j
 
 ```
 "require": {
-    "zephir/luya" : "1.0.0-beta3",
-    "zephir/luya-module-cms" : "1.0.0-beta3",
-    "zephir/luya-module-cmsadmin" : "1.0.0-beta3",
-    "zephir/luya-module-admin" : "1.0.0-beta3"
+    "zephir/luya" : "1.0.0-beta4",
+    "zephir/luya-module-cms" : "1.0.0-beta4",
+    "zephir/luya-module-cmsadmin" : "1.0.0-beta4",
+    "zephir/luya-module-admin" : "1.0.0-beta4"
 }
 ```
 

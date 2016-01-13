@@ -14,7 +14,7 @@ class Module extends \luya\base\Module
      *
      * @var string
      */
-    const VERSION = '1.0.0-beta4-dev';
+    const VERSION = '1.0.0-beta4';
 
     /**
      * Default url behavior if luya is included. first rule which will be picked.

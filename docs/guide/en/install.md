@@ -10,7 +10,7 @@ composer global require "fxp/composer-asset-plugin:1.1.1"
 Open your Terminal and execute the `create-project` to checkout the kickstarter/example project. 
 
 ```
-composer create-project zephir/luya-kickstarter:1.0.0-beta3
+composer create-project zephir/luya-kickstarter:1.0.0-beta4
 ```
 
 This above command will create a folder (inside of your current folder where the `composer create-project` command was execute) named __luya-kickstarter__. After the command is finished (can take some time) you can move all the files where ever you want to have them.

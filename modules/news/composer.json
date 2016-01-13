@@ -16,8 +16,8 @@
 		"issues" : "https://github.com/zephir/luya/issues"
 	},
 	"require" : {
-		"zephir/luya" : "1.0.0-beta3",
-		"zephir/luya-module-newsadmin" : "1.0.0-beta3"
+		"zephir/luya" : "1.0.0-beta4",
+		"zephir/luya-module-newsadmin" : "1.0.0-beta4"
 	},
 	"autoload" : {
 		"psr-4" : {
