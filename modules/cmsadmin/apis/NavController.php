@@ -76,6 +76,7 @@ class NavController extends \admin\base\RestController
         $item = Nav::find()->where(['id' => $navId])->one();
 
         if ($item) {
+            Yii::$app->menu->flushCache();
             $item->is_hidden = $hiddenStatus;
             $item->update(false);
 
@@ -88,7 +89,7 @@ class NavController extends \admin\base\RestController
     public function actionToggleHome($navId, $homeState)
     {
         $item = Nav::find()->where(['id' => $navId])->one();
-
+        Yii::$app->menu->flushCache();
         if ($homeState == 1) {
             Nav::updateAll(['is_home' => 0]);
             $item->setAttributes([
@@ -108,6 +109,7 @@ class NavController extends \admin\base\RestController
         $item = Nav::find()->where(['id' => $navId])->one();
 
         if ($item) {
+            Yii::$app->menu->flushCache();
             $item->is_offline = $offlineStatus;
             $item->update(false);
 
@@ -126,6 +128,7 @@ class NavController extends \admin\base\RestController
     {
         $model = \cmsadmin\models\Nav::find()->where(['id' => $navId])->one();
         if ($model) {
+            Yii::$app->menu->flushCache();
             // check for internal redirects
             $redirectResult = false;
             $redirects = NavItemRedirect::find()->where(['value' => $navId])->asArray()->all();
@@ -169,7 +172,7 @@ class NavController extends \admin\base\RestController
         if ($create !== true) {
             Yii::$app->response->statusCode = 422;
         }
-
+        Yii::$app->menu->flushCache();
         return $create;
     }
     
@@ -178,6 +181,7 @@ class NavController extends \admin\base\RestController
      */
     public function actionCreatePageItem()
     {
+        Yii::$app->menu->flushCache();
         $model = new \cmsadmin\models\Nav();
         $create = $model->createPageItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('layout_id'), $this->postArg('description'));
         if ($create !== true) {
@@ -189,6 +193,7 @@ class NavController extends \admin\base\RestController
 
     public function actionCreateModule()
     {
+        Yii::$app->menu->flushCache();
         $model = new \cmsadmin\models\Nav();
         $create = $model->createModule($this->postArg('parent_nav_id'), $this->postArg('nav_container_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('module_name'), $this->postArg('description'));
         if ($create !== true) {
@@ -200,6 +205,7 @@ class NavController extends \admin\base\RestController
 
     public function actionCreateModuleItem()
     {
+        Yii::$app->menu->flushCache();
         $model = new \cmsadmin\models\Nav();
         $create = $model->createModuleItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('module_name'), $this->postArg('description'));
         if ($create !== true) {
@@ -213,6 +219,7 @@ class NavController extends \admin\base\RestController
 
     public function actionCreateRedirect()
     {
+        Yii::$app->menu->flushCache();
         $model = new \cmsadmin\models\Nav();
         $create = $model->createRedirect($this->postArg('parent_nav_id'), $this->postArg('nav_container_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('redirect_type'), $this->postArg('redirect_type_value'), $this->postArg('description'));
         if ($create !== true) {
@@ -224,6 +231,7 @@ class NavController extends \admin\base\RestController
     
     public function actionCreateRedirectItem()
     {
+        Yii::$app->menu->flushCache();
         $model = new \cmsadmin\models\Nav();
         $create = $model->createRedirectItem($this->postArg('nav_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('redirect_type'), $this->postArg('redirect_type_value'), $this->postArg('description'));
         if ($create !== true) {
@@ -235,6 +243,7 @@ class NavController extends \admin\base\RestController
     
     public function actionCreateFromPage()
     {
+        Yii::$app->menu->flushCache();
         $model = new \cmsadmin\models\Nav();
         $create = $model->createItemLanguageCopy($this->postArg('id'), $this->postArg('toLangId'), $this->postArg('title'), $this->postArg('alias'));
         if ($create !== true) {

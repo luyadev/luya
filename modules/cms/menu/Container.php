@@ -86,6 +86,8 @@ class Container extends \yii\base\Component implements ArrayAccess
      */
     public $request = null;
     
+    public $cachePrefix = 'MenuContainerCache';
+    
     private $_composition = null;
 
     private $_current = null;
@@ -497,7 +499,7 @@ class Container extends \yii\base\Component implements ArrayAccess
      */
     private function loadLanguageContainer($langShortCode)
     {
-        $cacheKey = 'MenuContainerCache'.$langShortCode;
+        $cacheKey = $this->cachePrefix.$langShortCode;
         
         $languageContainer = $this->getHasCache($cacheKey);
         
@@ -548,5 +550,15 @@ class Container extends \yii\base\Component implements ArrayAccess
         }
 
         return $languageContainer;
+    }
+    
+    /**
+     * Flush all caching data for the menu for each language
+     */
+    public function flushCache()
+    {
+        foreach ($this->getLanguages() as $lang) {
+            $this->deleteHasCache($this->cachePrefix . $lang['short_code']);
+        }
     }
 }
