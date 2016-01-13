@@ -36,7 +36,7 @@ class ModelTest extends \tests\web\Base
         $this->assertEquals(true, is_array($find->image_array));
         $this->assertEquals($time, $find->date);
         $this->assertEquals($time, $find->datetime);
-        $this->assertEquals('', $find->cms_page);
+        $this->assertInstanceOf('cms\menu\Item', $find->cms_page);
 
         // list
         
