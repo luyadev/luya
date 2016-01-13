@@ -20,7 +20,7 @@ menu-dropdown,
 		&:before {
 			content: "";
 			position: absolute;
-			background-color: $grey--darken;
+			background-color: map_get($grey, "darken-1");
 			height: 100%;
 			width: 2px;
 			left: 11px;
@@ -29,7 +29,7 @@ menu-dropdown,
 		&:after {
 			content: "";
 			position: absolute;
-			background-color: $grey--darken;
+			background-color: map_get($grey, "darken-1");
 			height: 2px;
 			width: 8px;
 			left: 11px;
