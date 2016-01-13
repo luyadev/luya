@@ -2,6 +2,7 @@
 
 namespace admin\aws;
 
+use luya\Exception;
 use admin\models\Tag;
 use admin\models\TagRelation;
 
@@ -11,11 +12,15 @@ class TagActiveWindow extends \admin\ngrest\base\ActiveWindow
 
     public $tableName = null;
 
-    public function __construct($tableName)
+    public function init()
     {
-        $this->tableName = $tableName;
+        parent::init();
+        
+        if ($this->tableName === null) {
+            throw new Exception("The Active Window tableName property can not be null.");
+        }
     }
-
+    
     public function index()
     {
         return $this->render('index');
