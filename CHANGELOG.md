@@ -20,6 +20,7 @@ load([
 
 **ISSUES**
 
+- `#702` Added slugify suggestion when creating a translation copy of an existing item.
 - `#707` Added small padding to block-edit-content too add some space for the "help" icon.
 - `#710` Added the ability to cache the menu component language containers, is on by default if any cache class is registered.
 - `#703` Added highlight effect after crud item edit success.

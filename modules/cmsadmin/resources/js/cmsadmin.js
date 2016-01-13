@@ -176,7 +176,7 @@
 						$scope.data.title = null;
 						$scope.data.alias = null;
 						if ($scope.data.isInline) {
-							$scope.$parent.$parent.getItem($scope.data.lang_id, $scope.data.nav_id); /* getItem(nav_id, lang_id); */
+							$scope.$parent.$parent.getItem($scope.data.lang_id, $scope.data.nav_id);
 						}
 						
 					}, function(reason) {
@@ -264,16 +264,14 @@
 	// factory.js
 	
 	/*
-	zaa.factory('ApiCmsNavContainer', function($resource) {
-		return $resource('admin/api-cms-navcontainer/:id');
-	});
-	*/
+	 * zaa.factory('ApiCmsNavContainer', function($resource) { return
+	 * $resource('admin/api-cms-navcontainer/:id'); });
+	 */
 	
 	/*
-	zaa.factory('ApiCmsBlock', function($resource) {
-		return $resource('admin/api-cms-block/:id');
-	});
-	*/
+	 * zaa.factory('ApiCmsBlock', function($resource) { return
+	 * $resource('admin/api-cms-block/:id'); });
+	 */
 	
 	zaa.factory('ApiCmsNavItemPageBlockItem', function($resource) {
 		return $resource('admin/api-cms-navitempageblockitem/:id', { id : '@_id' }, {
@@ -337,7 +335,7 @@
 		
 	});
 	
-	zaa.controller("CopyPageController", function($scope, $http, AdminToastService) {
+	zaa.controller("CopyPageController", function($scope, $http, AdminToastService, Slug) {
 		
 		var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 		
@@ -357,6 +355,10 @@
 			$scope.selection = item.id;
 			$scope.itemSelection = angular.copy(item);
 		};
+		
+		$scope.aliasSuggestion = function() {
+			$scope.itemSelection.alias = Slug.slugify($scope.itemSelection.title);
+		}
 		
 		$scope.loadItems = function() {
 			$scope.navId = $scope.NavItemController.NavController.navData.id;

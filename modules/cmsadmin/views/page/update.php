@@ -306,7 +306,7 @@
                                                 <div class="input input--text col s12">
                                                     <label class="input__label"><?= \cmsadmin\Module::t('view_index_page_title'); ?></label>
                                                     <div class="input__field-wrapper">
-                                                        <input name="text" type="text" class="input__field" ng-model="itemSelection.title" />
+                                                        <input name="text" type="text" class="input__field" ng-change="aliasSuggestion()" ng-model="itemSelection.title" />
                                                     </div>
                                                 </div>
                                             <div class="row">
