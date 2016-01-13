@@ -212,20 +212,6 @@
 </script>
 <!-- /CREATE DRAF FORM -->
 
-<script type="text/ng-template" id="menuDropdownReverse.html">
-
-    <div class="input">
-        <input type="radio" ng-checked="data.id == navId" />
-        <label ng-click="changeModel(data)">
-            <span class="menu-dropdown__label">{{ data.title }}</span>
-        </label>
-    </div>
-
-    <ul class="menu-dropdown__list">
-        <li class="menu-dropdown__item" ng-repeat="data in menuData.items | menuparentfilter:container.id:data.id" ng-include="'menuDropdownReverse.html'"></li>
-    </ul>
-</script>
-
 <!-- treeview item -->
 <script type="text/ng-template" id="reverse.html">
 

@@ -59,6 +59,20 @@ $this->beginPage()
     </div>
 </script>
 
+<script type="text/ng-template" id="menuDropdownReverse">
+
+    <div class="input">
+        <input type="radio" ng-checked="data.id == navId" />
+        <label ng-click="changeModel(data)">
+            <span class="menu-dropdown__label">{{ data.title }}</span>
+        </label>
+    </div>
+
+    <ul class="menu-dropdown__list">
+        <li class="menu-dropdown__item" ng-repeat="data in menuData.items | menuparentfilter:container.id:data.id" ng-include="'menuDropdownReverse'"></li>
+    </ul>
+</script>
+
 <script type="text/ng-template" id="storageFileUpload">
     <div class="fileupload">
         <div class="fileupload__btn btn-flat [ grey lighten-4 ]" ng-click="toggleModal()">

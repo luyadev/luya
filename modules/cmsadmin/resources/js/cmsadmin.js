@@ -9,31 +9,56 @@
 			scope : {
 				navId : '='
 			},
-			link : function(scope) {
-				
-				/* service ServiceMenuData inheritance */
-				
-				scope.menuData = ServiceMenuData.data;
-				
-				scope.$on('service:MenuData', function(event, data) {
-					scope.menuData = data;
-				});
-			},
 			controller : function($scope) {
+				
 				$scope.changeModel = function(data) {
 					$scope.navId = data.id;
 				}
+				
+				$scope.menuData = ServiceMenuData.data;
+				
+				$scope.$on('service:MenuData', function(event, data) {
+					$scope.menuData = data;
+				});
+				
+				function init() {
+					ServiceMenuData.load();
+				}
+				
+				init();
 			},
 			template : function() {
 				return '<div class="menu-dropdown__category" ng-repeat="container in menuData.containers">' +
                             '<b class="menu-dropdown__title">{{container.name}}</b>' +
                             '<ul class="menu-dropdown__list">' +
-                                '<li class="menu-dropdown__item" ng-repeat="data in menuData.items | menuparentfilter:container.id:0" ng-include="\'menuDropdownReverse.html\'"></li>' +
+                                '<li class="menu-dropdown__item" ng-repeat="data in menuData.items | menuparentfilter:container.id:0" ng-include="\'menuDropdownReverse\'"></li>' +
                             '</ul>' +
                         '</div>';
 			}
 		}
 	});
+	
+	zaa.directive("zaaCmsPage", function($compile){
+        return {
+            restrict: "E",
+            scope: {
+                "model": "=",
+                "options": "=",
+                "label": "@label",
+                "i18n": "@i18n",
+                "id": "@fieldid",
+                "name": "@fieldname"
+            },
+            template: function() {
+                return '<div class="input input--image-upload" ng-class="{\'input--hide-label\': i18n}">' +
+                            '<label class="input__label">{{label}}</label>' +
+                            '<div class="input__field-wrapper">' +
+                                '<menu-dropdown class="menu-dropdown" nav-id="model" />' +
+                            '</div>' +
+                        '</div>';
+            }
+        }
+    });
 
 	zaa.directive("showInternalRedirection", function() {
 		return {

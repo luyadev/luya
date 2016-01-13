@@ -786,29 +786,6 @@
             }
         }
     });
-    
-    zaa.directive("zaaCmsPage", function($timeout){
-        return {
-            restrict: "E",
-            scope: {
-                "model": "=",
-                "options": "=",
-                "label": "@label",
-                "i18n": "@i18n",
-                "id": "@fieldid",
-                "name": "@fieldname"
-            },
-            controller: function($scope) {
-                $scope.click = function(value) {
-                    $scope.model = parseInt(value);
-                };
-            },
-            template: function(){
-                return '<div class="col s{{grid}}"><h3>{{label}}</h3><p ng-repeat="(key, title) in options track by key"><input type="radio" ng-model="model" ng-click="click(key)" name="cmsPageNavId" value="{{key}}" id="{{id}}_{{key}}" /> <label for="{{id}}_{{key}}">{{title}}</label></p></div>';
-            }
-        }
-    });
-    
     // storage.js
     
     zaa.directive('storageFileUpload', function($http, ServiceFilesData, $filter) {
@@ -1113,7 +1090,6 @@
                     if ($scope.uploadingfiles != null) {
                         if (n == $scope.uploadingfiles.length) {
                             $scope.filesDataReload().then(function() {
-                            	console.log('fertritg');
                             	AdminToastService.success(i18n['js_dir_manager_upload_image_ok'], 2000);
                                 LuyaLoading.stop();
                             });

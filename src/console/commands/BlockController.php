@@ -42,6 +42,7 @@ class BlockController extends \luya\console\Command
             'image-array-upload' => 'creates an asrray with image id an caption string',
             'list-array' => 'Creates an array with a key variable value',
             'table' => 'User can dynamic create tables (jsons)',
+            'cms-page' => 'Returns CMS page selection tree (only when cms is registered).',
         ];
     }
 
