@@ -8,6 +8,7 @@ LUYA CHANGELOG
 
 **ISSUES**
 
+- `#716` Add is_deleted files to the storag container list.
 - `#715` CMS nav item model does now slugify the alias in the model before create/update to ensure correct alias paths.
 
 1.0.0-beta4 (13.1.2016)
