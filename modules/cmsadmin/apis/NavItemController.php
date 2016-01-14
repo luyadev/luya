@@ -238,24 +238,30 @@ class NavItemController extends \admin\base\RestController
 
     public function actionMoveBefore($moveItemId, $droppedBeforeItemId)
     {
-        if (!$result = Nav::moveToBefore($moveItemId, $droppedBeforeItemId)) {
-            Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in target parent nav id.');
+        $result = Nav::moveToBefore($moveItemId, $droppedBeforeItemId);
+        
+        if ($result !== true) {
+            Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in drop target "'.$result['title'].'".');
         }
         return ['success' => $result];
     }
 
     public function actionMoveAfter($moveItemId, $droppedAfterItemId)
     {
-        if (!$result = Nav::moveToAfter($moveItemId, $droppedAfterItemId)) {
-            Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in target parent nav id.');
+        $result = Nav::moveToAfter($moveItemId, $droppedAfterItemId);
+        
+        if ($result !== true) {
+            Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in drop target "'.$result['title'].'".');
         }
         return ['success' => $result];
     }
 
     public function actionMoveToChild($moveItemId, $droppedOnItemId)
     {
-        if (!$result = Nav::moveToChild($moveItemId, $droppedOnItemId)) {
-            Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in target parent nav id.');
+        $result = Nav::moveToChild($moveItemId, $droppedOnItemId);
+        
+        if ($result !== true) {
+            Yii::$app->response->setStatusCode(422, 'Found URL alias duplication in drop target "'.$result['title'].'".');
         }
         return ['success' => $result];
     }

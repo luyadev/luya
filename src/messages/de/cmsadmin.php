@@ -282,7 +282,7 @@ return [
     // js cmsadmin.js
     'js_added_translation_ok' => 'Die Übersetzung dieser Seite wurde erfolgreich erstellt.',
     'js_added_translation_error' => 'Error while creating translation',
-    'js_page_add_exists' => 'In dieser Ebene existiert bereits eine Seite mit dieser URL.',
+    'js_page_add_exists' => 'In dieser Ebene existiert bereits eine Seite "%title%" mit dieser URL (id=%id%).',
     'js_page_property_refresh' => 'Die Eigenschaften wurden aktualisiert.',
     'js_page_confirm_delete' => 'Möchten Sie diese Seite wirklich löschen?',
     'js_page_delete_error_cause_redirects' => 'Diese Seite kann nicht gelöscht werden, löschen Sie zuerst die Weiterleitungen.',

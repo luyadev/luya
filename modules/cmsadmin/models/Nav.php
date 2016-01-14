@@ -148,16 +148,16 @@ class Nav extends \yii\db\ActiveRecord
      *
      * @param $currentNavId
      * @param $targetNav
-     * @return bool true when duplicate found
+     * @return boolean|mixed returns `true` if no duplication has been found, otherwhise returns an array with the duplicated existing item.
      */
     public static function checkDuplicateAlias($currentNavId, $parentNavId)
     {
         $currentNavItems = NavItem::find()->where(['nav_id' => $currentNavId])->asArray()->all();
-        foreach (self::find()->where(['parent_nav_id' => $parentNavId])->andWhere(['<>', 'id', $currentNavId])->asArray()->all() as $item) {
+        foreach (self::find()->where(['parent_nav_id' => $parentNavId, 'is_deleted' => 0])->andWhere(['<>', 'id', $currentNavId])->asArray()->all() as $item) {
             foreach ($currentNavItems as $currentNavItem) {
-                $itemNavItem = NavItem::findOne(['nav_id' => $item['id'], 'lang_id' => $currentNavItem['lang_id']]);
-                if ($itemNavItem && $currentNavItem['alias'] == $itemNavItem->alias) {
-                    return false;
+                $itemNavItem = NavItem::find()->asArray()->where(['nav_id' => $item['id'], 'lang_id' => $currentNavItem['lang_id']])->one();
+                if ($itemNavItem && $currentNavItem['alias'] == $itemNavItem['alias']) {
+                    return $itemNavItem;
                 }
             }
         }
@@ -169,8 +169,10 @@ class Nav extends \yii\db\ActiveRecord
         $move = self::findOne($moveNavId);
         $to = self::findOne($toBeforeNavId);
 
-        if (!self::checkDuplicateAlias($move->id, $to->parent_nav_id)) {
-            return false;
+        $response = self::checkDuplicateAlias($move->id, $to->parent_nav_id);
+        
+        if ($response !== true) {
+            return $response;
         }
 
         $to->moveUpstairs();
@@ -188,8 +190,10 @@ class Nav extends \yii\db\ActiveRecord
         $move = self::findOne($moveNavId);
         $to = self::findOne($toAfterNavId);
 
-        if (!self::checkDuplicateAlias($move->id, $to->parent_nav_id)) {
-            return false;
+        $response = self::checkDuplicateAlias($move->id, $to->parent_nav_id);
+        
+        if ($response !== true) {
+            return $response;
         }
 
         $to->moveDownstairs();
@@ -207,8 +211,11 @@ class Nav extends \yii\db\ActiveRecord
         $move = self::findOne($moveNavId);
         $on = self::findOne($droppedOnItemId);
 
-        if (!self::checkDuplicateAlias($move->id, $on->id)) {
-            return false;
+
+        $response = self::checkDuplicateAlias($move->id, $on->id);
+        
+        if ($response !== true) {
+            return $response;
         }
 
         $move->nav_container_id = $on->nav_container_id;

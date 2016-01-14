@@ -276,7 +276,7 @@ return [
     // js cmsadmin.js
     'js_added_translation_ok' => 'Перевод этой страницы был успешно создан.',
     'js_added_translation_error' => 'Произошла ошибка при создании перевода',
-    'js_page_add_exists' => 'Уже существует страница с таким же URL в этой группе.',
+    'js_page_add_exists' => 'Уже существует страница "%title" с таким же URL в этой группе (id=%id%).',
     'js_page_property_refresh' => 'Свойства были обновлены.',
     'js_page_confirm_delete' => 'Вы действительно хотите удалить эту страницу?',
     'js_page_delete_error_cause_redirects' => 'Эта страница не может быть удалена. Вы должны сначала удалить все зависимости этой страницы.',

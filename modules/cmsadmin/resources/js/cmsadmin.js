@@ -412,8 +412,8 @@
 		
 		$scope.droppedNavItem = null;
 
-		$scope.errorMessageOnDuplicateAlias = function() {
-			AdminToastService.error(i18n['js_page_add_exists'], 5000);
+		$scope.errorMessageOnDuplicateAlias = function(response) {
+			AdminToastService.error(i18nParam('js_page_add_exists', {title: response.success.title, id: response.success.nav_id}), 5000);
 		}
 		
 	    $scope.onBeforeDrop = function($event, $ui) {
@@ -421,7 +421,7 @@
 			$http.get('admin/api-cms-navitem/move-before', { params : { moveItemId : $scope.droppedNavItem.id, droppedBeforeItemId : itemid }}).success(function(r) {
 				ServiceMenuData.load(true);
 			}).error(function(r) {
-				$scope.errorMessageOnDuplicateAlias();
+				$scope.errorMessageOnDuplicateAlias(r);
 			});
 	    }
 	    
@@ -430,7 +430,7 @@
 			$http.get('admin/api-cms-navitem/move-after', { params : { moveItemId : $scope.droppedNavItem.id, droppedAfterItemId : itemid }}).success(function(r) {
 				ServiceMenuData.load(true);
 			}).error(function(r) {
-				$scope.errorMessageOnDuplicateAlias();
+				$scope.errorMessageOnDuplicateAlias(r);
 				ServiceMenuData.load(true);
 			});
 	    }
@@ -440,7 +440,7 @@
 			$http.get('admin/api-cms-navitem/move-to-child', { params : { moveItemId : $scope.droppedNavItem.id, droppedOnItemId : itemid }}).success(function(r) {
 				ServiceMenuData.load(true);
 			}).error(function(r) {
-				$scope.errorMessageOnDuplicateAlias();
+				$scope.errorMessageOnDuplicateAlias(r);
 				ServiceMenuData.load(true);
 			});
 	    }
@@ -450,7 +450,7 @@
 	    	$http.get('admin/api-cms-navitem/move-to-container', { params : { moveItemId : $scope.droppedNavItem.id, droppedOnCatId : itemid }}).success(function(r) {
 	    		ServiceMenuData.load(true);
 			}).error(function(r) {
-				$scope.errorMessageOnDuplicateAlias();
+				$scope.errorMessageOnDuplicateAlias(r);
 				ServiceMenuData.load(true);
 			});
 	    }

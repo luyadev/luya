@@ -281,7 +281,7 @@ return [
     // js cmsadmin.js
     'js_added_translation_ok' => 'The translation of this page was created successfully.',
     'js_added_translation_error' => 'An error occurred when creating the translation',
-    'js_page_add_exists' => 'There already exists a page with the same URL in this group.',
+    'js_page_add_exists' => 'There already exists a page "%title" with the same URL in this group (id=%id%).',
     'js_page_property_refresh' => 'The properties were updated.',
     'js_page_confirm_delete' => 'Do you really want to delete this page?',
     'js_page_delete_error_cause_redirects' => 'This page can not be deleted. You first have to delete all redirections to this page.',
