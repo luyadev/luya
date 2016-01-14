@@ -18,6 +18,7 @@ class Module extends \admin\base\Module
         'api-cms-block' => 'cmsadmin\\apis\\BlockController',
         'api-cms-blockgroup' => 'cmsadmin\\apis\\BlockgroupController',
         'api-cms-navcontainer' => 'cmsadmin\apis\NavContainerController',
+        'api-cms-navitemblock' => 'cmsadmin\apis\NavItemBlockController',
     ];
 
     public $assets = [

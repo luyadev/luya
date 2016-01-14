@@ -19,12 +19,13 @@
                     <div class="block__title" ng-bind-html="safe(block.full_name)" ng-click="toggleEdit()"></div>
                 </div>
                 <div class="right">
-                    <i ng-click="toggleHidden()" class="material-icons block__toolbar__icon" ng-show="block.is_hidden==0">visibility</i>
-                    <i ng-click="toggleHidden()" class="material-icons block__toolbar__icon" ng-show="block.is_hidden==1">visibility_off</i>
-                    <i ng-show="isEditable()" class="material-icons block__toolbar__icon" ng-class="{ 'block__toolbar__icon--active' : edit }" ng-click="toggleEdit()" title="Edit">edit</i>
-                    <i ng-show="isConfigable()" class="material-icons block__toolbar__icon" ng-class="{ 'block__toolbar__icon--active' : config }"ng-click="toggleConfig()" title="Confi">settings</i>
-                    <i ng-show="!edit && !config" class="material-icons block__toolbar__icon" ng-click="removeBlock(block)">delete</i>
-                    <i ng-show="edit || config" class="material-icons block__toolbar__icon" ng-click="toggleBlockSettings()">close</i>
+                    <i ng-click="copyBlock()" alt="Copy" title="Copy" class="material-icons block__tollbar__icon">content_copy</i>
+                    <i ng-click="toggleHidden()" alt="Visible" title="Visible" class="material-icons block__toolbar__icon" ng-show="block.is_hidden==0">visibility</i>
+                    <i ng-click="toggleHidden()" alt="Invisible" title="Invisible" class="material-icons block__toolbar__icon" ng-show="block.is_hidden==1">visibility_off</i>
+                    <i ng-show="isEditable()" alt="Edit" title="Edit" class="material-icons block__toolbar__icon" ng-class="{ 'block__toolbar__icon--active' : edit }" ng-click="toggleEdit()" title="Edit">edit</i>
+                    <i ng-show="isConfigable()" alt="Config" title="Config" class="material-icons block__toolbar__icon" ng-class="{ 'block__toolbar__icon--active' : config }"ng-click="toggleConfig()" title="Confi">settings</i>
+                    <i ng-show="!edit && !config" alt="Delete" title="Delete" class="material-icons block__toolbar__icon" ng-click="removeBlock(block)">delete</i>
+                    <i ng-show="edit || config" alt="Close" title="Close" class="material-icons block__toolbar__icon" ng-click="toggleBlockSettings()">close</i>
                 </div>
             </div>
             <div class="block__body cmsadmin-tags" ng-click="toggleEdit()" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
@@ -463,6 +464,10 @@
 
             <div class="blockholder" ng-controller="DroppableBlocksController">
                 <div class="col s12">
+                	<p>CopyStack:</p>
+                	<ul>
+                		<li ng-repeat="stackItem in copyStack" data-drag="true" data-copy="true" jqyoui-draggable="{placeholder: 'keep', onStart : 'onStart', onStop : 'onStop'}" ng-model="stackItem" data-jqyoui-options="{revert: false, refreshPositions : true, snapTolerance : 40, helper : 'clone', cursor:'move', cursorAt: { top: 0, left: 0 }}">{{stackItem.name}} <i>({{stackItem.blockId}})</i></li>
+                	</ul>
                     <div class="blockholder__search" ng-class="{'blockholder__search--active': searchQuery}">
                         <input class="blockholder__input" type="text" ng-model="searchQuery" value="" id="blockholderSearch" />
                         <label class="blockholder__icon blockholder__icon--search" for="blockholderSearch"><i class="material-icons">search</i></label>

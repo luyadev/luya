@@ -38,6 +38,26 @@ zaa.config(function(resolverProvider) {
 });
 
 /*
+block data copy stack
+*/
+
+zaa.factory("ServiceBlockCopyStack", function() {
+	var service = [];
+	
+	service.stack = [];
+	
+	service.push = function(blockId, name) {
+		service.stack.push({blockId: blockId, name: name, event: 'isServiceBlockCopyInstance'});
+	};
+	
+	service.getStack = function() {
+		return service.stack;
+	};
+	
+	return service;
+});
+
+/*
 
 $scope.menuData = ServiceMenuData.data;
 				
