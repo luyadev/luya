@@ -50,7 +50,7 @@ $this->beginPage()
 <script type="text/ng-template" id="modal">
     <div class="modal__wrapper" ng-show="!isModalHidden">
         <div class="modal">
-            <button class="btn waves-effect waves-light modal__close btn-floating red" ng-click="isModalHidden = true">
+            <button type="button" class="btn waves-effect waves-light modal__close btn-floating red" ng-click="isModalHidden = true">
                 <i class="material-icons">close</i>
             </button>
             <div class="modal-content" ng-transclude></div>
@@ -228,8 +228,8 @@ $this->beginPage()
                     <span class="floating-button-label__label"><?= Luya::t('admin', 'layout_filemanager_upload_files'); ?></span>
                 </label>
 
-                <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?= Luya::t('admin', 'layout_filemanager_remove_selected_files'); ?></button>
-                <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove"><?= Luya::t('admin', 'layout_filemanager_move_selected_files'); ?></button>
+                <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?= Luya::t('admin', 'layout_filemanager_remove_selected_files'); ?></button>
+                <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove"><?= Luya::t('admin', 'layout_filemanager_move_selected_files'); ?></button>
 
                 <div class="alert alert--danger" ng-show="errorMsg" style="clear:both;"><?= Luya::t('admin', 'layout_filemanager_upload_error'); ?>: {{errorMsg}}</div>
 
@@ -315,8 +315,8 @@ $this->beginPage()
                 <span class="floating-button-label__label"><?= Luya::t('admin', 'layout_filemanager_upload_files'); ?></span>
             </label>
 
-            <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?= Luya::t('admin', 'layout_filemanager_remove_selected_files'); ?></button>
-            <button class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove"><?= Luya::t('admin', 'layout_filemanager_move_selected_files'); ?></button>
+            <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?= Luya::t('admin', 'layout_filemanager_remove_selected_files'); ?></button>
+            <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove"><?= Luya::t('admin', 'layout_filemanager_move_selected_files'); ?></button>
 
         </div>
     </div>
@@ -333,8 +333,8 @@ $this->beginPage()
                 <p>{{item.message}}</p>
 
                 <div class="toasts__item-buttons">
-                    <button class="btn btn--small grey" ng-click="item.close()">Abbrechen</button>
-                    <button class="btn btn--small red" ng-click="item.click()">Ja</button>
+                    <button type="button" class="btn btn--small grey" ng-click="item.close()">Abbrechen</button>
+                    <button type="button" class="btn btn--small red" ng-click="item.click()">Ja</button>
                 </div>
             </div>
         </div>
