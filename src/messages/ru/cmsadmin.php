@@ -292,4 +292,6 @@ return [
     'js_page_block_visbility_change' => 'Видимость «%name%» была успешно изменена.',
 
 // added translation in 1.0.0-beta4:
+
+// added translation in 1.0.0-beta5:
 ];

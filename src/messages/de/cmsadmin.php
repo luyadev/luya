@@ -299,6 +299,8 @@ return [
     
 // added translation in 1.0.0-beta4:
 
+// added translation in 1.0.0-beta5:
+
     // videoBlock
     'block_video_width_label' => 'Breite in Pixel festlegen',
     'block_video_help_width' => 'Wird ignoriert, wenn 0 oder Feld leer'

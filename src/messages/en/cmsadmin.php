@@ -298,6 +298,8 @@ return [
     
 // added translation in 1.0.0-beta4:
 
+// added translation in 1.0.0-beta5:
+
     // videoBlock
     'block_video_width_label' => 'Width in pixel',
     'block_video_help_width' => 'Will be ignored when 0 or empty'
