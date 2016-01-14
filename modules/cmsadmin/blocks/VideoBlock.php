@@ -28,6 +28,7 @@ class VideoBlock extends \cmsadmin\base\Block
             ],
             'cfgs' => [
                 ['var' => 'controls', 'label' => Module::t('block_video_controls_label'), 'type' => 'zaa-checkbox'],
+                ['var' => 'width', 'label' => Module::t('block_video_width_label'), 'type' => 'zaa-number'],
             ],
         ];
     }
@@ -37,6 +38,7 @@ class VideoBlock extends \cmsadmin\base\Block
         return [
             'url' => Module::t('block_video_help_url'),
             'controls' => Module::t('block_video_help_controls'),
+            'width' => Module::t('block_video_help_width'),
         ];
     }
 
@@ -88,16 +90,18 @@ class VideoBlock extends \cmsadmin\base\Block
     {
         return [
             'url' => $this->constructUrl(),
+            'width' => $this->getCfgValue('width', 0),
         ];
     }
 
     public function twigFrontend()
     {
-        return '{% if extras.url is not empty %}<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="{{ extras.url }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>{% endif %}';
+        return '{% if extras.url is not empty %}{% if extras.width %}<div style="width:{{ extras.width }}">{% endif %}<div class="embed-responsive embed-responsive-16by9">'.
+        '<iframe class="embed-responsive-item" src="{{ extras.url }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>{% if extras.width %}</div>{% endif %}</div>{% endif %}';
     }
 
     public function twigAdmin()
     {
-        return '{% if extras.url is not empty %}<div class="video-container" style="margin:40px; max-height:300px;"><iframe width="640" height="480" src="{{ extras.url }}" frameborder="0" allowfullscreen></iframe></div>{% else %}<span class="block__empty-text">' . Module::t('block_video_no_video') . '</span>{% endif %}';
+        return '{% if extras.url is not empty %}<div style="margin:25px;width:300px"><div class="video-container"><iframe width="640" height="480" src="{{ extras.url }}" frameborder="0" allowfullscreen></iframe></div></div>{% else %}<span class="block__empty-text">' . Module::t('block_video_no_video') . '</span>{% endif %}';
     }
 }

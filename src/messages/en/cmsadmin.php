@@ -297,4 +297,8 @@ return [
     'js_page_block_visbility_change' => 'The visibility of «%name%» was changed successfully.',
     
 // added translation in 1.0.0-beta4:
+
+    // videoBlock
+    'block_video_width_label' => 'Width in pixel',
+    'block_video_help_width' => 'Will be ignored when 0 or empty'
 ];
