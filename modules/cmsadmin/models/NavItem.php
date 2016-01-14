@@ -5,6 +5,7 @@ namespace cmsadmin\models;
 use Yii;
 use admin\models\Lang;
 use yii\base\Exception;
+use yii\helpers\Inflector;
 
 /**
  * Each creation of a navigation block requires the nav_item_type_id which need to be created first with NavItemType Model.
@@ -52,6 +53,11 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
         return 'cms_nav_item';
     }
 
+    public function slugifyAlias()
+    {
+        $this->alias = Inflector::slug($this->alias);
+    }
+    
     public function rules()
     {
         return [
@@ -161,12 +167,14 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
         $this->timestamp_update = 0;
         $this->create_user_id = Yii::$app->adminuser->getId();
         $this->update_user_id = Yii::$app->adminuser->getId();
+        $this->slugifyAlias();
     }
     
     public function eventBeforeUpdate()
     {
         $this->timestamp_update = time();
         $this->update_user_id = Yii::$app->adminuser->getId();
+        $this->slugifyAlias();
     }
 
     /**

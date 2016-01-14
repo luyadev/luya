@@ -209,7 +209,7 @@ class NavItemController extends \admin\base\RestController
         $model->nav_item_type_id = $itemModel->id;
         $model->update(false);
 
-        return true;
+        return $model->toArray();
     }
 
     /**

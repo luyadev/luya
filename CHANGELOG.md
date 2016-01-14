@@ -8,6 +8,8 @@ LUYA CHANGELOG
 
 **ISSUES**
 
+- `#715` CMS nav item model does now slugify the alias in the model before create/update to ensure correct alias paths.
+
 1.0.0-beta4 (13.1.2016)
 -------------------------
 
