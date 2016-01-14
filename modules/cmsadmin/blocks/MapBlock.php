@@ -24,8 +24,18 @@ class MapBlock extends \cmsadmin\base\Block
     {
         return [
             'vars' => [
-                ['var' => 'address', 'label' => Module::t('block_map_address_label'), 'type' => 'zaa-text', 'placeholder' => 'Zephir Software Design AG, Tramstrasse 66, 4142 Münchenstein'],
-                ['var' => 'zoom', 'label' => Module::t('block_map_zoom_label'), 'type' => 'zaa-select', 'initvalue' => '12', 'options' => [
+                [
+                    'var' => 'address',
+                    'label' => Module::t('block_map_address_label'),
+                    'type' => 'zaa-text',
+                    'placeholder' => 'Zephir Software Design AG, Tramstrasse 66, 4142 Münchenstein'
+                ],
+                [
+                    'var' => 'zoom',
+                    'label' => Module::t('block_map_zoom_label'),
+                    'type' => 'zaa-select',
+                    'initvalue' => '12',
+                    'options' => [
                         ['value' => '0', 'label' => Module::t('block_map_zoom_entire')],
                         ['value' => '1', 'label' => '4000 km'],
                         ['value' => '2', 'label' => '2000 km (' . Module::t('block_map_zoom_world') . ')'],
@@ -50,7 +60,11 @@ class MapBlock extends \cmsadmin\base\Block
                         ['value' => '21', 'label' => '2.5 m'],
                     ],
                 ],
-                    ['var' => 'maptype', 'label' => Module::t('block_map_maptype_label'), 'type' => 'zaa-select', 'options' => [
+                [
+                    'var' => 'maptype',
+                    'label' => Module::t('block_map_maptype_label'),
+                    'type' => 'zaa-select',
+                    'options' => [
                         ['value' => 'm', 'label' => Module::t('block_map_maptype_roadmap')],
                         ['value' => 'k', 'label' => Module::t('block_map_maptype_satellitemap')],
                         ['value' => 'h', 'label' => Module::t('block_map_maptype_hybrid')],
