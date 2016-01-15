@@ -202,6 +202,10 @@
 	transform: translateY(0) !important;
 	font-size: inherit !important;
 
+	i {
+		display: inline-block !important;
+	}
+
 	.navbar__search--open & {
 		width: auto !important;
 		left: 1rem !important;

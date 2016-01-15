@@ -7,7 +7,6 @@ class Main extends \luya\web\Asset
     public $sourcePath = '@admin/resources';
 
     public $css = [
-        '//fonts.googleapis.com/icon?family=Material+Icons',
         'css/admin.css',
     ];
 
