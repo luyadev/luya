@@ -11,7 +11,14 @@ class Tag extends \admin\ngrest\base\Model
 
     public function attributeLabel()
     {
-        return ['title' => 'Tag-Name'];
+        return ['title' => newsadmin\Module::t('tag_title')];
+    }
+
+    public function ngrestAttributeTypes()
+    {
+        return [
+            'title' => 'text',
+        ];
     }
 
     public function rules()
@@ -38,7 +45,7 @@ class Tag extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
-        $config->list->field('title', 'Titel')->text();
+        $this->ngRestConfigDefine($config, 'list', ['title']);
 
         $config->update->copyFrom('list', ['id']);
         $config->create->copyFrom('list', ['id']);

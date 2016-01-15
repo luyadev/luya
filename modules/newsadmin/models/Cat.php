@@ -1,6 +1,7 @@
 <?php
 
 namespace newsadmin\models;
+use newsadmin;
 
 class Cat extends \admin\ngrest\base\Model
 {
@@ -24,7 +25,14 @@ class Cat extends \admin\ngrest\base\Model
 
     public function attributeLabels()
     {
-        return ['title' => 'Kategoriename'];
+        return ['title' => newsadmin\Module::t('cat_title')];
+    }
+
+    public function ngrestAttributeTypes()
+    {
+        return [
+            'title' => 'text',
+        ];
     }
 
     public function init()
@@ -58,7 +66,7 @@ class Cat extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
-        $config->list->field('title', 'Kategoriename')->text();
+        $this->ngRestConfigDefine($config, 'list', ['title']);
 
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);

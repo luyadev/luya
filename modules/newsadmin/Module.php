@@ -22,4 +22,19 @@ class Module extends \admin\base\Module
                 ->itemApi('Tags', 'newsadmin-tag-index', 'label_outline', 'api-news-tag')
         ->menu();
     }
+
+    public $translations = [
+        [
+            'prefix' => 'modules/newsadmin/*',
+            'basePath' => '@luya/modules/newsadmin/messages',
+            'fileMap' => [
+                'modules/newsadmin' => 'newsadmin.php',
+            ],
+        ],
+    ];
+
+    public static function t($message, array $params = [])
+    {
+        return \luya\Module::t('modules/newsadmin', $message, $params);
+    }
 }
