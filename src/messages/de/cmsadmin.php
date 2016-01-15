@@ -223,7 +223,6 @@ return [
     'view_update_page_is_module' => 'Diese Seite ist als <b>Module</b> hinterlegt.',
     'view_update_page_is_redirect_internal' => 'Diese Seite ist ein <b>interner Redirect</b> auf <show-internal-redirection nav-id="typeData.value" />.',
     'view_update_page_is_redirect_external' => 'Diese Seite ist ein <b>externer Redirect</b> auf <a ng-href="{{typeData.value}}">{{typeData.value}}</a>',
-    'view_update_blockholder_clipboard' => 'Zwischenablage',
     
     // menu
 
@@ -304,5 +303,9 @@ return [
 
     // videoBlock
     'block_video_width_label' => 'Breite in Pixel festlegen',
-    'block_video_help_width' => 'Wird ignoriert, wenn 0 oder Feld leer'
+    'block_video_help_width' => 'Wird ignoriert, wenn 0 oder Feld leer',
+
+    // view update - blockholder
+    'view_update_blockholder_clipboard' => 'Zwischenablage',
+
 ];

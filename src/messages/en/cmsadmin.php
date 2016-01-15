@@ -222,7 +222,6 @@ return [
     'view_update_page_is_module' => 'This page is a <b>module</b>.',
     'view_update_page_is_redirect_internal' => 'This page is <b>internal redirect</b> to <show-internal-redirection nav-id="typeData.value" />.',
     'view_update_page_is_redirect_external' => 'This page is <b>external redirect</b> to <a ng-href="{{typeData.value}}">{{typeData.value}}</a>',
-    'view_update_blockholder_clipboard' => 'Clipboard',
     
     // menu
 
@@ -303,5 +302,9 @@ return [
 
     // videoBlock
     'block_video_width_label' => 'Width in pixel',
-    'block_video_help_width' => 'Will be ignored when 0 or empty'
+    'block_video_help_width' => 'Will be ignored when 0 or empty',
+
+    // view update - blockholder
+    'view_update_blockholder_clipboard' => 'Clipboard',
+
 ];
