@@ -464,10 +464,12 @@
 
             <div class="blockholder" ng-controller="DroppableBlocksController">
                 <div class="col s12">
-                	<p>CopyStack:</p>
-                	<ul>
-                		<li ng-repeat="stackItem in copyStack" data-drag="true" data-copy="true" jqyoui-draggable="{placeholder: 'keep', onStart : 'onStart', onStop : 'onStop'}" ng-model="stackItem" data-jqyoui-options="{revert: false, refreshPositions : true, snapTolerance : 40, helper : 'clone', cursor:'move', cursorAt: { top: 0, left: 0 }}">{{stackItem.name}} <i>({{stackItem.blockId}})</i></li>
-                	</ul>
+                    <div class="blockholder__group blockholder__group--clipboard">
+                        <b class="blockholder__group-title blockholder__group-title--clipboard"><i class="material-icons left">content_copy</i> <?= \cmsadmin\Module::t('view_update_blockholder_clipboard') ?></b>
+                        <div class="blockholder__block" ng-repeat="stackItem in copyStack" data-drag="true" data-copy="true" jqyoui-draggable="{placeholder: 'keep', onStart : 'onStart', onStop : 'onStop'}" ng-model="stackItem" data-jqyoui-options="{revert: false, refreshPositions : true, snapTolerance : 40, helper : 'clone', cursor:'move', cursorAt: { top: 0, left: 0 }}">
+                            <span>{{stackItem.name}}</span>
+                        </div>
+                    </div>
                     <div class="blockholder__search" ng-class="{'blockholder__search--active': searchQuery}">
                         <input class="blockholder__input" type="text" ng-model="searchQuery" value="" id="blockholderSearch" />
                         <label class="blockholder__icon blockholder__icon--search" for="blockholderSearch"><i class="material-icons">search</i></label>

@@ -222,6 +222,7 @@ return [
     'view_update_page_is_module' => 'Страница является <b>модулем</b>.',
     'view_update_page_is_redirect_internal' => 'Эта страница имеет <b>внутреннюю переадресацию</b> на <show-internal-redirection nav-id="typeData.value" />.',
     'view_update_page_is_redirect_external' => 'Эта страница имеет <b>внешнюю переадресацию</b> на <a ng-href="{{typeData.value}}">{{typeData.value}}</a>',
+    'view_update_blockholder_clipboard' => '', // todo
     
     // menu
 

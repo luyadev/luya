@@ -10,15 +10,28 @@
 	margin-bottom: 20px;
 }
 
+.blockholder__group--clipboard {
+	background-color: #fff;
+	padding: 10px;
+}
+
 .blockholder__group-title {
 	display: block;
 	font-weight: 400;
 	color: #fff;
 	margin-bottom: 5px;
 
+	i {
+		font-size: 20px;
+	}
+
 	&:first-of-type {
 		margin-top: 0;
 	}
+}
+
+.blockholder__group-title--clipboard {
+	color: #000;
 }
 
 .blockholder__search {
