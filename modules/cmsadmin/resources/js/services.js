@@ -41,17 +41,22 @@ zaa.config(function(resolverProvider) {
 block data copy stack
 */
 
-zaa.factory("ServiceBlockCopyStack", function() {
+zaa.factory("ServiceBlockCopyStack", function($rootScope) {
 	var service = [];
 	
 	service.stack = [];
 	
-	service.push = function(blockId, name) {
-		service.stack.push({blockId: blockId, name: name, event: 'isServiceBlockCopyInstance'});
+	service.clear = function() {
+		service.stack = [];
+		$rootScope.$broadcast('service:CopyStack', service.stack);
 	};
 	
-	service.getStack = function() {
-		return service.stack;
+	service.push = function(blockId, name) {
+		if (service.stack.length > 4) {
+			service.stack.shift();
+		}
+		service.stack.push({blockId: blockId, name: name, event: 'isServiceBlockCopyInstance'});
+		$rootScope.$broadcast('service:CopyStack', service.stack);
 	};
 	
 	return service;

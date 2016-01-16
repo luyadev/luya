@@ -1163,7 +1163,15 @@
 		
 		// controller logic
 		
-		$scope.copyStack = ServiceBlockCopyStack.getStack();
+		$scope.copyStack = ServiceBlockCopyStack.stack;
+		
+		$scope.$on('service:CopyStack', function(event, stack) {
+			$scope.copyStack = stack;
+		});
+		
+		$scope.clearStack = function() {
+			ServiceBlockCopyStack.clear();
+		};
 		
 		$scope.searchQuery = '';
 		

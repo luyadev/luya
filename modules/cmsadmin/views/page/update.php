@@ -461,7 +461,6 @@
         </div>
 
         <div class="cms__sidebar">
-
             <div class="blockholder" ng-controller="DroppableBlocksController">
                 <div class="col s12">
                     <div class="blockholder__group blockholder__group--clipboard" ng-show="copyStack.length > 0">
@@ -469,6 +468,7 @@
                         <div class="blockholder__block" ng-repeat="stackItem in copyStack" data-drag="true" data-copy="true" jqyoui-draggable="{placeholder: 'keep', onStart : 'onStart', onStop : 'onStop'}" ng-model="stackItem" data-jqyoui-options="{revert: false, refreshPositions : true, snapTolerance : 40, helper : 'clone', cursor:'move', cursorAt: { top: 0, left: 0 }}">
                             <span>{{stackItem.name}}</span>
                         </div>
+                        <button type="button" ng-click="clearStack()" class="btn">x</button>
                     </div>
                     <div class="blockholder__search" ng-class="{'blockholder__search--active': searchQuery}">
                         <input class="blockholder__input" type="text" ng-model="searchQuery" value="" id="blockholderSearch" />
@@ -487,5 +487,4 @@
             </div>
         </div>
     </div>
-
 </div>
