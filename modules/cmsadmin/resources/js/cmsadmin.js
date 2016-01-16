@@ -1117,7 +1117,6 @@
 			var event = $scope.droppedBlock['event'] || false;
 			
 			if (event === 'isServiceBlockCopyInstance') {
-				
 				$http.post('admin/api-cms-navitemblock/copy-block-from-stack', $.param({
 					copyBlockId: $scope.droppedBlock.blockId,
 					sortIndex: sortIndex,
@@ -1127,9 +1126,7 @@
 					$scope.PagePlaceholderController.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 					$scope.droppedBlock = {};
 				});
-				
 			} else {
-				return;
 				if (moveBlock === false) {
 					ApiCmsNavItemPageBlockItem.save($.param({ prev_id : $scope.placeholder.prev_id, sort_index : sortIndex, block_id : $scope.droppedBlock.id , placeholder_var : $scope.placeholder.var, nav_item_page_id : $scope.placeholder.nav_item_page_id }), function(rsp) {
 						$scope.PagePlaceholderController.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
