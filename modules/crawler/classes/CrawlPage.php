@@ -2,6 +2,7 @@
 
 namespace crawler\classes;
 
+use Goutte\Client;
 use yii\base\InvalidConfigException;
 use yii\base\yii\base;
 use luya\helpers\Url;
@@ -25,8 +26,8 @@ class CrawlPage extends \yii\base\Object
 
     public function init()
     {
-        if ($this->client === null && $this->baseUrl === null) {
-            throw new InvalidConfigException('client or baseHost properties can not be null.');
+        if ($this->baseUrl === null) {
+            throw new InvalidConfigException('baseUrl properties can not be null.');
         }
         
         $info = parse_url($this->baseUrl);
@@ -43,12 +44,19 @@ class CrawlPage extends \yii\base\Object
     public function getCrawler()
     {
         if ($this->_crawler === null) {
+            $this->client = new Client();
             $this->_crawler = $this->client->request('GET', $this->pageUrl);
         }
 
         return $this->_crawler;
     }
 
+    public function getContentType()
+    {
+        $this->getCrawler();
+        return $this->client->getResponse()->getHeader('Content-Type');
+    }
+    
     public function getLinks()
     {
         $links = $this->getCrawler()->filterXPath('//a')->each(function ($node, $i) {
@@ -88,20 +96,6 @@ class CrawlPage extends \yii\base\Object
     {
         return $this->getCrawler()->filterXPath('//title')->text();
     }
-
-    /*
-    public function getBaseUrl()
-    {
-        $base = $this->getCrawler()->filterXPath('//base');
-        $data = $base->extract(array('href'));
-
-        if (isset($data[0])) {
-            return Url::trailing($data[0]);
-        }
-
-        return false;
-    }
-    */
 
     private function tempGetContent($url)
     {

@@ -8,6 +8,7 @@ use yii\base\InvalidConfigException;
 use crawleradmin\models\BuilderIndex;
 use crawleradmin\models\Index;
 use luya\helpers\Url;
+use crawler\classes\CrawlPage;
 
 class CrawlContainer extends \yii\base\Object
 {
@@ -38,8 +39,8 @@ class CrawlContainer extends \yii\base\Object
     protected function getCrawler($url)
     {
         if (!array_key_exists($url, $this->_crawlers)) {
-            $crawler = clone $this->pageCrawler;
-            $crawler->pageUrl = $url;
+            $crawler = new CrawlPage(['baseUrl' => $this->baseUrl, 'pageUrl' => $url]);
+            
             $this->_crawlers[$url] = $crawler;
         }
 
@@ -83,7 +84,7 @@ class CrawlContainer extends \yii\base\Object
         $index = Index::find()->asArray()->indexBy('url')->all();
 
         if (count($builder) == 0) {
-            throw new Exception('The crawler have not found any results. Wrong base url? Or set a rule which tracks all urls?');
+            throw new Exception('The crawler have not found any results. Wrong base url? Or set a rule which tracks all urls? log: ', print_r($this->getReport(), true));
         }
 
         foreach ($builder as $url => $page) {
@@ -140,6 +141,14 @@ class CrawlContainer extends \yii\base\Object
                 return false;
             }
         }
+
+        $type = $this->getCrawler($url)->getContentType();
+        
+        if (strpos($type, 'text/html') === false) {
+            $this->addLog('invalid_header', $url . ' invalid header ' . $type);
+            return false;
+        }
+        
         return true;
     }
 

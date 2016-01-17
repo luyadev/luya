@@ -2,7 +2,6 @@
 
 namespace crawler\commands;
 
-use Goutte\Client;
 use crawler\classes\CrawlContainer;
 use crawler\classes\CrawlPage;
 
@@ -18,9 +17,8 @@ class CrawlController extends \luya\console\Command
     {
         $start = microtime(true);
         
-        $client = new Client();
-        $pageCrawler = new CrawlPage(['client' => $client, 'baseUrl' => $this->module->baseUrl]);
-        $container = new CrawlContainer(['baseUrl' => $this->module->baseUrl, 'pageCrawler' => $pageCrawler, 'filterRegex' => $this->module->filterRegex]);
+        
+        $container = new CrawlContainer(['baseUrl' => $this->module->baseUrl, 'filterRegex' => $this->module->filterRegex]);
 
         $this->output(print_r($container->getReport(), true));
 
