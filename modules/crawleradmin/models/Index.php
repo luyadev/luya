@@ -3,6 +3,7 @@
 namespace crawleradmin\models;
 
 use yii\helpers\Html;
+use crawleradmin\Module;
 
 class Index extends \admin\ngrest\base\Model
 {
@@ -19,6 +20,16 @@ class Index extends \admin\ngrest\base\Model
             'default' => ['url', 'content', 'title', 'language_info', 'added_to_index', 'last_update'],
             'restcreate' => ['url', 'content', 'title', 'language_info'],
             'restupdate' => ['url', 'content', 'title', 'language_info'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'url' => Module::t('index_url'),
+            'title' => Module::t('index_title'),
+            'language_info' => Module::t('index_language_info'),
+            'content' => Module::t('index_content'),
         ];
     }
 
@@ -121,12 +132,19 @@ class Index extends \admin\ngrest\base\Model
         return 'api-crawler-index';
     }
 
+    public function ngrestAttributeTypes()
+    {
+        return [
+            'url' => 'text',
+            'title' => 'text',
+            'language_info' => 'text',
+            'content' => 'textarea',
+        ];
+    }
+
     public function ngRestConfig($config)
     {
-        $config->list->field('url', 'Url')->text();
-        $config->list->field('title', 'Title')->text();
-        $config->list->field('language_info', 'Language_info')->text();
-        $config->list->field('content', 'Content')->textarea();
+        $this->ngRestConfigDefine($config, 'list', ['url', 'title', 'language_info', 'content']);
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);
 

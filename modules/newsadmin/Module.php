@@ -2,6 +2,8 @@
 
 namespace newsadmin;
 
+use yii;
+
 class Module extends \admin\base\Module
 {
     public $isCoreModule = true;
@@ -15,11 +17,26 @@ class Module extends \admin\base\Module
     public function getMenu()
     {
         return $this
-        ->node('News', 'local_library')
-            ->group('Daten')
-                ->itemApi('News Eintrag', 'newsadmin-article-index', 'edit', 'api-news-article')
-                ->itemApi('Kategorien', 'newsadmin-cat-index', 'label_outline', 'api-news-cat')
-                ->itemApi('Tags', 'newsadmin-tag-index', 'label_outline', 'api-news-tag')
+        ->node(Module::t('news'), 'local_library')
+            ->group(Module::t('news_administrate'))
+                ->itemApi(Module::t('article'), 'newsadmin-article-index', 'edit', 'api-news-article')
+                ->itemApi(Module::t('cat'), 'newsadmin-cat-index', 'bookmark_border', 'api-news-cat')
+                ->itemApi(Module::t('tag'), 'newsadmin-tag-index', 'label_outline', 'api-news-tag')
         ->menu();
+    }
+
+    public $translations = [
+        [
+            'prefix' => 'newsadmin*',
+            'basePath' => '@newsadmin/messages',
+            'fileMap' => [
+                'newsadmin' => 'newsadmin.php',
+            ],
+        ],
+    ];
+
+    public static function t($message, array $params = [])
+    {
+        return Yii::t('newsadmin', $message, $params, Yii::$app->luyaLanguage);
     }
 }

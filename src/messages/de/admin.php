@@ -157,4 +157,8 @@ return [
     'ngrest_crud_empty_row' => 'Es wurden noch keine Datensätze erfasst.',
     
 // added translation in 1.0.0-beta5:
+
+    // aws/gallery
+    'aws_gallery_empty' => 'Sie haben noch keine Bilder für diese Album ausgewählt. Klicken Sie im Dateimanager (links) auf die gewünschten Bilder, welche Sie in das Album hinzufügen möchten.',
+    'aws_gallery_images' => 'Album Bilder',
 ];

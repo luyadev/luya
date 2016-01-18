@@ -2,6 +2,7 @@
 
 namespace newsadmin\models;
 
+use newsadmin\Module;
 use Yii;
 
 class Article extends \admin\ngrest\base\Model
@@ -36,9 +37,30 @@ class Article extends \admin\ngrest\base\Model
     public function attributeLabels()
     {
         return [
-          'cat_id' => 'Kategorie',
-          'title' => 'Titel',
-          'text' => 'Beschreibung',
+            'title' => Module::t('article_title'),
+            'text' => Module::t('article_text'),
+            'image_id' => Module::t('article_image_id'),
+            'timestamp_create' => Module::t('article_timestamp_create'),
+            'timestamp_display_from' => Module::t('article_timestamp_display_from'),
+            'timestamp_display_until' => Module::t('article_timestamp_display_until'),
+            'is_display_limit' => Module::t('article_is_display_limit'),
+            'image_list' => Module::t('article_image_list'),
+            'file_list' => Module::t('article_file_list'),
+        ];
+    }
+
+    public function ngrestAttributeTypes()
+    {
+        return [
+            'title' => 'text',
+            'text' => 'textarea',
+            'image_id' => 'image',
+            'timestamp_create' => 'datetime',
+            'timestamp_display_from' => 'date',
+            'timestamp_display_until' => 'date',
+            'is_display_limit' => 'toggleStatus',
+            'image_list' => 'imageArray',
+            'file_list' => 'fileArray',
         ];
     }
 
@@ -108,28 +130,16 @@ class Article extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
-        $config->list->field('cat_id', 'Kategorie')->selectClass('\newsadmin\models\Cat', 'id', 'title');
-        $config->list->field('title', 'Titel')->text();
-        $config->list->field('timestamp_create', 'Datum')->date();
-        $config->list->field('image_id', 'Bild')->image();
-        
-        $config->update->field('cat_id', 'Kategorie')->selectClass('\newsadmin\models\Cat', 'id', 'title');
-        $config->update->field('title', 'Titel')->text();
-        $config->update->field('text', 'Beschreibung')->textarea();
-        $config->update->field('timestamp_create', 'News erstellt am:')->date();
-        $config->update->field('timestamp_display_from', 'News anzeigen ab')->date();
+        $this->ngRestConfigDefine($config, 'list', ['title', 'timestamp_create', 'image_id']);
+        $config->list->field('cat_id', Module::t('article_cat_id'))->selectClass('\newsadmin\models\Cat', 'id', 'title');
 
-        $config->update->field('is_display_limit', 'News Anzeige zeitlich einschränken:')->toggleStatus();
-        $config->update->field('timestamp_display_until', 'News anzeigen bis')->date();
-        $config->update->field('image_id', 'Bild')->image();
-        $config->update->field('image_list', 'Bild Liste')->imageArray();
-        $config->update->field('file_list', 'Datei Liste')->fileArray();
-
-        $config->update->extraField('tags', 'Tags')->checkboxRelation(\newsadmin\models\Tag::className(), 'news_article_tag', 'article_id', 'tag_id', ['title']);
-
-        $config->delete = true;
+        $this->ngRestConfigDefine($config, 'update', ['title', 'text', 'timestamp_create', 'timestamp_display_from', 'is_display_limit', 'timestamp_display_until', 'image_id', 'image_list', 'file_list']);
+        $config->update->field('cat_id', Module::t('article_cat_id'))->selectClass('\newsadmin\models\Cat', 'id', 'title');
+        $config->update->extraField('tags', Module::t('article_tag'))->checkboxRelation(\newsadmin\models\Tag::className(), 'news_article_tag', 'article_id', 'tag_id', ['title']);
 
         $config->create->copyFrom('update', ['timestamp_display_until']);
+
+        $config->delete = true;
 
         return $config;
     }

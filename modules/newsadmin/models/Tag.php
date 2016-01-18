@@ -2,6 +2,8 @@
 
 namespace newsadmin\models;
 
+use newsadmin\Module;
+
 class Tag extends \admin\ngrest\base\Model
 {
     public static function tableName()
@@ -11,12 +13,19 @@ class Tag extends \admin\ngrest\base\Model
 
     public function attributeLabel()
     {
-        return ['title' => 'Tag-Name'];
+        return ['title' => Module::t('tag_title')];
+    }
+
+    public function ngrestAttributeTypes()
+    {
+        return [
+            'title' => 'text',
+        ];
     }
 
     public function rules()
     {
-        return [['title', 'required', 'message' => 'Bitte geben Sie einen Tag-Namen ein.']];
+        return [['title', 'required', 'message' => Module::t('tag_title_create_error')]];
     }
 
     public function scenarios()
@@ -38,7 +47,7 @@ class Tag extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
-        $config->list->field('title', 'Titel')->text();
+        $this->ngRestConfigDefine($config, 'list', ['title']);
 
         $config->update->copyFrom('list', ['id']);
         $config->create->copyFrom('list', ['id']);

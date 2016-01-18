@@ -2,7 +2,7 @@
 
 namespace crawleradmin\apis;
 
-class BuilderIndexController extends \admin\ngrest\base\Api
+class BuilderindexController extends \admin\ngrest\base\Api
 {
-    public $modelClass = '\crawleradmin\models\BuilderIndex';
+    public $modelClass = '\crawleradmin\models\Builderindex';
 }

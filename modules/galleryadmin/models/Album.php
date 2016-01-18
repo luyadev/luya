@@ -2,6 +2,8 @@
 
 namespace galleryadmin\models;
 
+use galleryadmin\Module;
+
 class Album extends \admin\ngrest\base\Model
 {
     public static function tableName()
@@ -20,8 +22,17 @@ class Album extends \admin\ngrest\base\Model
     public function rules()
     {
         return [
-            ['cat_id', 'required', 'message' => 'Bitte wählen Sie eine Kategorie aus.'],
-            ['title', 'required', 'message' => 'Bitte geben Sie einen Titel ein.'],
+            ['cat_id', 'required', 'message' => Module::t('album_category_error')],
+            ['title', 'required', 'message' => Module::t('album_title_create_error')],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'title' => Module::t('album_title'),
+            'description' => Module::t('album_description'),
+            'cover_image_id' => Module::t('album_cover_image_id'),
         ];
     }
 
@@ -74,14 +85,27 @@ class Album extends \admin\ngrest\base\Model
         return 'api-gallery-album';
     }
 
+    public function ngrestAttributeTypes()
+    {
+        return [
+            'title' => 'text',
+            'description' => 'textarea',
+            'cover_image_id' => 'image',
+        ];
+    }
+
     public function ngRestConfig($config)
     {
-        $config->aw->load(['class' => 'admin\aws\Gallery', 'refTableName' => 'gallery_album_image', 'imageIdFieldName' => 'image_id', 'refFieldName' => 'album_id', 'alias' => 'Bilder Hochladen &amp; Verwalten']);
+        $config->aw->load([
+            'class' => 'admin\aws\Gallery',
+            'refTableName' => 'gallery_album_image',
+            'imageIdFieldName' => 'image_id',
+            'refFieldName' => 'album_id',
+            'alias' => Module::t('album_upload')
+        ]);
 
-        $config->list->field('cat_id', 'Kategorie')->selectClass('\galleryadmin\models\Cat', 'id', 'title');
-        $config->list->field('title', 'Titel')->text();
-        $config->list->field('description', 'Beschreibung')->textarea();
-        $config->list->field('cover_image_id', 'Cover-Bild')->image();
+        $config->list->field('cat_id', Module::t('cat_title'))->selectClass('\galleryadmin\models\Cat', 'id', 'title');
+        $this->ngRestConfigDefine($config, 'list', ['title', 'description', 'cover_image_id']);
 
         $config->create->copyFrom('list', ['id']);
         $config->update->copyFrom('list', ['id']);

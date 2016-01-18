@@ -2,7 +2,9 @@
 
 namespace crawleradmin\models;
 
-class BuilderIndex extends \admin\ngrest\base\Model
+use crawleradmin\Module;
+
+class Builderindex extends \admin\ngrest\base\Model
 {
     public function init()
     {
@@ -34,6 +36,16 @@ class BuilderIndex extends \admin\ngrest\base\Model
             'restcreate' => ['url', 'content', 'title', 'language_info'],
             'restupdate' => ['url', 'content', 'title', 'language_info'],
             'default' => ['url', 'content', 'title', 'language_info', 'content_hash', 'is_dublication'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'url' => Module::t('builderindex_url'),
+            'title' => Module::t('builderindex_title'),
+            'language_info' => Module::t('builderindex_language_info'),
+            'content' => Module::t('builderindex_content'),
         ];
     }
 
@@ -85,12 +97,19 @@ class BuilderIndex extends \admin\ngrest\base\Model
         return 'api-crawler-builderindex';
     }
 
+    public function ngrestAttributeTypes()
+    {
+        return [
+            'url' => 'text',
+            'title' => 'text',
+            'language_info' => 'text',
+            'content' => 'textarea',
+        ];
+    }
+
     public function ngRestConfig($config)
     {
-        $config->list->field('url', 'Url')->text();
-        $config->list->field('title', 'Title')->text();
-        $config->list->field('language_info', 'Language_info')->text();
-        $config->list->field('content', 'Content')->textarea();
+        $this->ngRestConfigDefine($config, 'list', ['url', 'title', 'language_info', 'content']);
         $config->update->copyFrom('list', ['id']);
 
         return $config;
