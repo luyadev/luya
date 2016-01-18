@@ -2,6 +2,8 @@
 
 namespace newsadmin\models;
 
+use newsadmin\Module;
+
 class Tag extends \admin\ngrest\base\Model
 {
     public static function tableName()
@@ -11,7 +13,7 @@ class Tag extends \admin\ngrest\base\Model
 
     public function attributeLabel()
     {
-        return ['title' => newsadmin\Module::t('tag_title')];
+        return ['title' => Module::t('tag_title')];
     }
 
     public function ngrestAttributeTypes()
@@ -23,7 +25,7 @@ class Tag extends \admin\ngrest\base\Model
 
     public function rules()
     {
-        return [['title', 'required', 'message' => 'Bitte geben Sie einen Tag-Namen ein.']];
+        return [['title', 'required', 'message' => Module::t('tag_title_create_error')]];
     }
 
     public function scenarios()

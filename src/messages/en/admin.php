@@ -157,4 +157,9 @@ return [
     'ngrest_crud_empty_row' => 'No data has been added to this table yet.',
     
 // added translation in 1.0.0-beta5:
+
+    // aws/gallery
+    'aws_gallery_empty' => 'Please select some images on the left to add them into the gallery album.',
+    'aws_gallery_images' => 'Album images',
+
 ];

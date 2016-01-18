@@ -1,7 +1,8 @@
 <?php
 
 namespace newsadmin\models;
-use newsadmin;
+
+use newsadmin\Module;
 
 class Cat extends \admin\ngrest\base\Model
 {
@@ -20,12 +21,12 @@ class Cat extends \admin\ngrest\base\Model
 
     public function rules()
     {
-        return [['title', 'required', 'message' => 'Bitte geben Sie einen Kategorienamen ein.']];
+        return [['title', 'required', 'message' => Module::t('cat_title_create_error')]];
     }
 
     public function attributeLabels()
     {
-        return ['title' => newsadmin\Module::t('cat_title')];
+        return ['title' => Module::t('cat_title')];
     }
 
     public function ngrestAttributeTypes()
@@ -46,7 +47,7 @@ class Cat extends \admin\ngrest\base\Model
         $items = Article::find()->where(['cat_id' => $this->id])->all();
 
         if (count($items) > 0) {
-            $this->addError('id', 'Diese Kategorie wird noch von einem oder mehreren Terminen benutzt und kann nicht gelöscht werden.');
+            $this->addError('id', Module::t('cat_delete_error'));
             $event->isValid = false;
 
             return;

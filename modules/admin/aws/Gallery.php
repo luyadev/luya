@@ -26,6 +26,8 @@ class Gallery extends \admin\ngrest\base\ActiveWindow
 
     public $module = 'admin';
 
+    public $icon = 'photo_library';
+
     /*
     public function __construct($refTableName, $imageIdFieldName, $refFieldName)
     {

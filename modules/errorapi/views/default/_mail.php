@@ -5,7 +5,7 @@
 ?>
 <h1 style="color: #f00;"><?= $model->message; ?></h1>
 <p style="color: #800000;">from <strong><?= $model->serverName; ?></strong></p>
-<a href="https://github.com/zephir/luya/issues/new?title=<?= urlencode('#'. $model->identifier . ' ' . $model->message);?>">Create new Issue on GitHub</a>
+<a href="https://github.com/zephir/luya/issues/new?title=<?= urlencode('#'. $model->identifier . ' ' . $model->message);?>"><?= errorapi\Module::t('mail_create_issue') ?></a>
 <table cellspacing="2" cellpadding="6" border="0" width="1200">
 <?php foreach ($model->errorArray as $key => $value): ?>
 <tr>

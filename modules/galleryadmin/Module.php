@@ -1,6 +1,7 @@
 <?php
 
 namespace galleryadmin;
+use yii;
 
 class Module extends \admin\base\Module
 {
@@ -13,10 +14,25 @@ class Module extends \admin\base\Module
 
     public function getMenu()
     {
-        return $this->node('Gallerien', 'photo_album')
-            ->group('Verwalten')
-                ->itemApi('Alben', 'galleryadmin-album-index', 'camera', 'api-gallery-album')
-                ->itemApi('Kategorien', 'galleryadmin-cat-index', 'collections', 'api-gallery-cat')
+        return $this->node(Module::t('gallery'), 'photo_album')
+            ->group(Module::t('gallery_administrate'))
+                ->itemApi(Module::t('album'), 'galleryadmin-album-index', 'camera', 'api-gallery-album')
+                ->itemApi(Module::t('cat'), 'galleryadmin-cat-index', 'collections', 'api-gallery-cat')
         ->menu();
+    }
+
+    public $translations = [
+        [
+            'prefix' => 'galleryadmin*',
+            'basePath' => '@luya/messages',
+            'fileMap' => [
+                'galleryadmin' => 'galleryadmin.php',
+            ],
+        ],
+    ];
+
+    public static function t($message, array $params = [])
+    {
+        return Yii::t('galleryadmin', $message, $params, Yii::$app->luyaLanguage);
     }
 }

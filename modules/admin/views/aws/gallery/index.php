@@ -4,9 +4,9 @@
     </div>
     <div class="col s4" style="background-color:#F0F0F0;">
         <div style="padding:10px;">
-            <h5>Album Bilder</h5>
+            <h5><?= \admin\Module::t('aws_gallery_images')?></h5>
             <div ng-show="isEmptyObject(files)">
-                <p>Sie haben noch keine Bilder für diese Album ausgewählt. Klicken Sie im Dateimanager (links) auf die gewünschten Bilder, welche Sie in das Album hinzufügen möchten.</p>
+                <p><?= \admin\Module::t('aws_gallery_empty')?></p>
             </div>
             <div class="col s3" ng-repeat="file in files" style="min-height:180px;">
                 <button type="button" ng-click="remove(file)" class="btn btn-flat"><i class="material-icons">delete</i></button>
