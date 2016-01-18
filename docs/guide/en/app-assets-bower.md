@@ -4,6 +4,7 @@ load assets via composer bower
 require
 --------
 added your bower packages into the require part:
+
 ```json
 require : {
     "bower-asset/jquery" : "2.1.*@stable",
@@ -14,6 +15,7 @@ require : {
 extras
 ------
 check your composer.json to set the extra informations:
+
 ```json
     "extra": {
         "asset-installer-paths": {
@@ -25,6 +27,7 @@ check your composer.json to set the extra informations:
 asset
 -----
 create php asset class based in your config above:
+
 ```php
 class JqueryAsset extends \luya\web\Asset
 {

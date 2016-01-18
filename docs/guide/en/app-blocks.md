@@ -1,6 +1,8 @@
 Create a new block inside your project
 =====================================
 
+> Use `./vendor/bin/luya block/create` to create new blocks! this will help you step by step configure a new project app block!
+
 Put all your project specific cms blocks inside a ***blocks*** folder. This blocks folder is placed in the projects root folder.
 
 An example code of a block could look like this: (The file Test is placed in ***blocks/Test.php***
@@ -51,7 +53,6 @@ To see all configuration possibilitys checkout the [Cms Block Guide](cms-blocks.
 you can also render files instead of simple return strings, like this:
 
 ```php
-
 public function twigFrontend()
 {
 	return $this->render();
@@ -62,13 +63,12 @@ public function twigFrontend()
 by default it will look for a view file inside @app/views/blocks. By changing the module property inside the class object you can changed the path in where the file should be found:
 
 ```php
-
 public $module = 'mymodule';
-
 ```
-or
-```php
 
+or
+
+```php
 public function getModule()
 {
 	return '@mymodule';
@@ -95,13 +95,13 @@ You want to access the actual time and get the upper case version of your define
 
 ```
 public function extraVars()
-    {
+{
 
-       return [
-            "mytime" => time(),
-            "newtext" => strtoupper($this->getVarValue("text")),
-        ];
-    }
+   return [
+        "mytime" => time(),
+        "newtext" => strtoupper($this->getVarValue("text")),
+    ];
+}
 ```
 
 Use the defined extraVars in Twig like this:

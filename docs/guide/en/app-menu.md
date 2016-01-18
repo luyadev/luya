@@ -1,4 +1,115 @@
-Show Navigation in the Frontend Layout
-======================================
+Menu Navigation
+===========
 
-link component is not available anymore. use `menu` component. english part not yet translated.
+You can access the `menu` component trough `Yii::$app->menu`. This component will help you to create menus, find childs, get items of containers, etc. The menu component will automatically added to the componsten when you register the cms (menu component is part of the cms module).
+
+When you request a menu item you will always get a [Menu-Item-Object](https://luya.io/api/cms-menu-item.html) object which provides a lot of getter methods.
+
+The *Menu-Component* will automatic load the current active menu items based on your current language (which will be evulated by the `composition` component).
+
+Get the current Site
+----------------------
+
+One of the most important features is to get the current active menu item, to access this [Menu-Item-Object](https://luya.io/api/cms-menu-item.html) you can use `getCurrent()` or as its a `yii\base\Object` you can access it trough `current`.
+
+```php
+echo Yii::$app->menu->current->link;
+```
+
+or
+
+```php
+echo Yii::$app->menu->getCurrent()->getLink();
+```
+
+Where `getCurrent()` / `current` returns a [Menu-Item-Object](https://luya.io/api/cms-menu-item.html).
+
+Get Homepage
+------------------
+
+To get the homepage us the `getHome()` method which will return a [Menu-Item-Object](https://luya.io/api/cms-menu-item.html).
+
+```php
+echo Yii::$app->menu->home->title;
+```
+
+Menu Auslesen
+-------------
+
+To read an list specific parts of the menu use the `find()` method (which is somehwat equilvalent implementation of Yii2 ActiveRecord pattern:
+
+```php
+foreach(Yii::$app->menu->find()->where(['parent_nav_id' => 0])->all() as $itemObject) {
+    var_dump($itemObject);
+}
+```
+
+The example obe would look in a sql expression somewhat like this `WHERE parent_nav_id = 0`.
+
+```
+foreach(Yii::$app->menu->find()->where(['parent_nav_id' => 0, 'is_active' => 1])->all() as $itemObject) {
+    var_dump($itemObject);
+}
+```
+This will look somewhat like this `WHERE parent_nav_id = 0 AND is_active = 1`.
+
+Another example with differnte conditions:
+
+```php
+where(['!=', 'is_active', 0])->andWhere(['==', 'parent_nav_id', 0]); // WHERE is_active != AND parent_nav_id === 0
+```
+
+|Operator |Equals
+|---|---
+|<= | Smaller as and equal
+|<  | Smaller as
+|>  | Bigger as
+|>= | Bigger as and equal
+|=  | Equals
+|== | Equal and type comparison
+
+Breadcrumbs output
+--------------------
+
+To get the current breadcrumbs of the current menu item you can use the item object method `getTeardown`, so you can get all items from the item and below. The `getTeardown()` method works of course on every Nav-Item-Object, so you can teardown whatever you like to.
+
+```php
+foreach(Yii::$app->menu->current->teardown as $item) {
+    echo '<li><a href="' . $item->link . '">' . $item->title . '</a></li>';
+}
+```
+
+Languages (composition)
+----------------------
+
+In Addition to the Menu componet the `composition` componet is used to retrieve the current language settings based on differnet inputs, you can use the composition pattern without the cms, but if you have included the cms it will have to match the language table.
+
+```php
+$langShortCode = Yii::$app->composition['langShortCode'];
+```
+
+To get the full composition pattern.
+
+```
+echo Yii::$app->composition->full;
+```
+
+> We will add an extra section for this, later.
+
+Links zu Seiten im CMS
+---------------------
+
+We have built some small helper commands you can use whever you are in your cms:
+
+|Link Syntax        |Html Ausgabe
+|----               |----
+|`link [3] (Alternative Link Name)`  |`<a href="url/to/3">Alternative Link Name</a>`
+|`link [3]`                           |`<a href="url/to/3">Name of 3</a>`
+|`link [www.luya.io]`                 |`<a href="http://www.luya.io">luya.io</a>`
+|`link [luya.io] (go to Docu)` |`<a href="http://luya.io">Go to docu</a>`
+
+**ATTENTION:** The obven metnioned `Link Syntax` muss be used **without** Whitspaces.
+
+To the the page number (which is 3, used above) you will find the Page-Id in when hover over the menu item in the cms admin menu-tree:
+
+![Seiten ID](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/cms-nav-page-id.jpg "Seiten ID")
