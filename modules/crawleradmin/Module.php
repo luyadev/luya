@@ -23,7 +23,7 @@ class Module extends \admin\base\Module
     public $translations = [
         [
             'prefix' => 'crawleradmin*',
-            'basePath' => '@luya/messages',
+            'basePath' => '@crawleradmin/messages',
             'fileMap' => [
                 'crawleradmin' => 'crawleradmin.php',
             ],

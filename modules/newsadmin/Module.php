@@ -28,7 +28,7 @@ class Module extends \admin\base\Module
     public $translations = [
         [
             'prefix' => 'newsadmin*',
-            'basePath' => '@luya/messages',
+            'basePath' => '@newsadmin/messages',
             'fileMap' => [
                 'newsadmin' => 'newsadmin.php',
             ],

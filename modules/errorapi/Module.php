@@ -22,7 +22,7 @@ class Module extends \luya\base\Module
     public $translations = [
         [
             'prefix' => 'errorapi*',
-            'basePath' => '@luya/messages',
+            'basePath' => '@errorapi/messages',
             'fileMap' => [
                 'errorapi' => 'errorapi.php',
             ],

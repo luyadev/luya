@@ -24,7 +24,7 @@ class Module extends \admin\base\Module
     public $translations = [
         [
             'prefix' => 'galleryadmin*',
-            'basePath' => '@luya/messages',
+            'basePath' => '@galleryadmin/messages',
             'fileMap' => [
                 'galleryadmin' => 'galleryadmin.php',
             ],
