@@ -12,7 +12,7 @@ trait Application
     private $_webroot = null;
     
     /**
-     * @var string Title for the appliation used in differnt sections like Login screen
+     * @var string Title for the application used in different sections like Login screen
      */
     public $siteTitle = 'Luya';
 
@@ -28,15 +28,15 @@ trait Application
     public $luyaLanguage = 'en';
     
     /**
-     * @var string|boolean A token which will be used to collect data from a central host if you want to enable thise feature.
-     * Use https://www.random.org/strings/ to create complex strings. When you have enabled this feature you can collect to from 
+     * @var string|boolean Set a token, which will be used to collect data from a central host, if you want to enable this feature.
+     * Use http://passwordsgenerator.net/ to create complex strings. When you have enabled this feature you can collect information's from
      * all your hosts with `example.com/admin/remote?token=Sha1EncodedRemoteToken`.
      */
     public $remoteToken = false;
 
     /**
      * @var string The directory where your webroot represents, this is basically used to find the webroot directory
-     * in the console mode, cause some importer classes need thos variables.
+     * in the console mode, cause some importer classes need those variables.
      */
     public $webrootDirectory = 'public_html';
     
@@ -67,7 +67,7 @@ trait Application
     }
 
     /**
-     * @return array Containing all module objects which are coreModules and isntance of luya\base\Module.
+     * @return array Containing all module objects which are coreModules and instance of luya\base\Module.
      */
     public function getApplicationModules()
     {
@@ -83,7 +83,7 @@ trait Application
     }
 
     /**
-     * Return a list with all registrated frontend modules except 'luya' and 'cms'. This is needed in the module block.
+     * Return a list with all registered frontend modules except 'luya' and 'cms'. This is needed in the module block.
      *
      * @return array
      */
