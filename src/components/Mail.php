@@ -117,6 +117,8 @@ class Mail extends \yii\base\Component
                 $this->address($mail, $name);
             }
         }
+        
+        return $this;
     }
     
     public function address($email, $name = null)
