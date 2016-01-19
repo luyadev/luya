@@ -97,6 +97,8 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
 
     public function eventBeforeDelete()
     {
+        // delete all attached sub blocks
+        $this->deleteAllSubBlocks($this->id);
         // verify if the block exists or not
         $class = ($this->block) ? $this->block->class : 'class_does_not_exists';
         // log event
@@ -119,6 +121,21 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
 
         if (empty($this->json_config_values)) {
             $this->json_config_values = json_encode([], JSON_FORCE_OBJECT);
+        }
+    }
+
+    private function deleteAllSubBlocks($blockId)
+    {
+        if ($blockId) {
+            $subBlocks = NavItemPageBlockItem::findAll(['prev_id' => $blockId]);
+            foreach ($subBlocks as $block) {
+                // check for attached sub blocks and start recursion
+                $attachedBlocks = NavItemPageBlockItem::findAll(['prev_id' => $block->id]);
+                if ($attachedBlocks) {
+                    $this->deleteAllSubBlocks($block->id);
+                }
+                $block->delete();
+            }
         }
     }
 
