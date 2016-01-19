@@ -8,6 +8,7 @@ LUYA CHANGELOG
 
 **ISSUES**
 
+- `#725` Fixed missing content in layout blocks after page copy
 - `#726` Crawler module does now ignore not text based response header.
 - `#308` Added copy and paste for cms blocks
 - `#716` Add is_deleted files to the storag container list.
