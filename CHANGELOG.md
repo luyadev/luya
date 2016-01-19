@@ -8,6 +8,7 @@ LUYA CHANGELOG
 
 **ISSUES**
 
+- `#735` Fixed clean deleting of cms placeholder blocks (i.e. layout block) and all attached sub blocks
 - `#733` Fixed missing sub cms blocks when using copy cms block function
 - `#725` Fixed missing content in layout cms blocks after page copy
 - `#726` Crawler module does now ignore not text based response header.
