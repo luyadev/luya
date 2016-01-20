@@ -1,0 +1,138 @@
+<?php
+
+namespace authadmin;
+
+use authadmin\AuthIdentityInterface;
+
+/**
+ * User class to login based on yii\web\User, but allows you to check whether a user 
+ * is in this group or not.
+ * 
+ * Assume we have made 3 groups:
+ * 
+ * + group-a
+ * + group-b
+ * + group-c
+ * 
+ * And we assume we have different users login forms which have access only to the
+ * defined groups.
+ * 
+ * 
+ * ```php
+ * class app\UserCustomers implements AuthUserInterface
+ * {
+ *     public function getGroups()
+ *     {
+ *         return ['group-a', 'group-c'];
+ *     }
+ * }
+ * ```
+ * 
+ * ```php
+ * class app\UserCompanys implements AuthUserInterface
+ * {
+ *     public function getGroups()
+ *     {
+ *         return ['group-b'];
+ *     }
+ * }
+ * ```
+ * 
+ * Lets perform the login on the IdentiyInterface base:
+ * 
+ * ```
+ * Yii::$app->user->login(\app\UserCompanys);
+ * ```
+ * 
+ * Lets say the validation of the UserCompanys was successfull based on the validation
+ * rules of the same class (IdentityInterface). Now we can quickly check if the the
+ * user is allowed in the current group:
+ * 
+ * ```
+ * if (Yii::$app->user->inGroup('group-b')) {
+ *     // this user can see those parts of the Website.
+ * }
+ * ```
+ * 
+ * The above usecase is very straight forward in templates, a more common scenario are
+ * the useaccess of access restricting filters. The below example will show how action1 and
+ * action2 will have seperate allowed groups. while action3 can be access as guest. If
+ * there is no gues defined all actions which are not in the allowed list for the groups
+ * are denied automatically.
+ * 
+ * ```
+ * public function behaviors()
+ * {
+ * 	   return [
+ * 			'access' => [
+ * 				'class' => 'authadmin\filters\GroupAuth',
+ * 				'allow' => [
+ * 					'action1' => ['group-b'],
+ * 					'action2' => ['group-a', 'group-c'],
+ * 				],
+ * 				'guest' => ['action3'],
+ * 			],
+ * 	   ];
+ * }
+ * ```
+ * 
+ * Another use case is to make sure some files are only by access by the allowed group,
+ * for this scenario. Therefore you can assign groups to a file which will be allowed
+ * to download/see this file. To make sure the defined group can acces the file is a global
+ * event which happens before file download, as the bootstrap proccess of luya modules can
+ * particpate on.
+ * 
+ * ```
+ * public function init()
+ * {
+ * 	   parent::init();
+ *     Yii::$app->on(Admin::EVENT_BEFORE_FILE_DOWNLOAD, [$this, 'verifyUserGroup']);
+ * }
+ * 
+ * public function verifyUserGroup($event)
+ * {
+ *     $event->isValid = (!$event->hasPermissions() || Yii::$app->user->inGroup($event->getFileGroups()));
+ * }
+ * ```
+ * 
+ * @author nadar
+ */
+class User extends \yii\web\User
+{
+	public function init()
+	{
+		parent::init();
+		$this->on(self::EVENT_BEFORE_LOGIN, [$this, 'eventBeforeLogin']);
+	}
+	
+	/*
+	public function eventBeforeLogin($event)
+	{
+		return $event->isValid = $this->inGroup
+	}
+	*/
+	
+	/**
+	 * 
+	 * @param string|array $alias
+	 */
+	public function inGroup($alias)
+	{
+		$identity = $this->identity;
+		
+		if (!$identity instanceof EventBeforeFileDownload) {
+			throw new \Exception("error defintion");
+		}
+		
+		if (!$this->isGuest) {
+			$groups = (array) $alias;
+			foreach ($groups as $groupAlias) {
+				if (in_array($groupAlias, $identity->authgroups)) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+}
