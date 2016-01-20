@@ -1,7 +1,6 @@
 <?php
 
 namespace galleryadmin;
-use yii;
 
 class Module extends \admin\base\Module
 {
