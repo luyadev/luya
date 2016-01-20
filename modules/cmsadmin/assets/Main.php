@@ -20,7 +20,7 @@ class Main extends \yii\web\AssetBundle
 
     public $css = [
         'css/cmsadmin.css',
-        'css/cmsadmin-tags.css',
+        'css/cmsadmin-block-styles.css',
     ];
 
     public $depends = [
