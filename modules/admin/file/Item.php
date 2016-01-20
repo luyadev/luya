@@ -83,6 +83,16 @@ class Item extends \yii\base\Object
     }
     
     /**
+     * Delivers the url for nice urls /file/id/hash/hello-world.jpg
+     *
+     * @return string
+     */
+    public function getSourceStatic()
+    {
+        return Url::toRoute(['/admin/file/download', 'id' => $this->getId(), 'hash' => $this->getHashName(), 'fileName' => $this->getName()], true);
+    }
+    
+    /**
      * @return string
      */
     public function getHttpSource()
