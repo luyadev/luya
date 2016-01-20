@@ -34,7 +34,17 @@ Sie können auch Parameter innerhalb der Regel definieren, ein Beispiel für ein
 ['pattern' => 'artikel/<id:\d+>', 'route' => 'estore/article/index'],
 ```
 
-Um einen Parameter anzugeben bei erstellen einer Url verwenden Sie das Arguments Array der Url::toManager helper funktion `\luya\helpers\Url::toManager('estore/article/index', ['id' => 7]);`.
+Um einen Parameter anzugeben bei erstellen einer Url verwenden Sie das Arguments Array der Url::toManager helper funktion:
+
+```
+\luya\helpers\Url::toManager('estore/article/index', ['id' => 7]);
+```
+
+Die selbe funktion würde mit dem toRoute helper von Yii wie folgt aussehen:
+
+```
+\luya\helpers\Url::toRoute(['/estore/article/index', 'id' => 7]);
+```
 
 > Url Regel sollten immer den Modul prefix enthalten um innerhalb des CMS Context keine gleichnamigen URLS zu erhalten.
 
