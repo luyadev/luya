@@ -130,13 +130,47 @@ class Storage
         return $file->update(false);
     }
     
+    /**
+     * 
+     * @param array $filesArray Use $_FILES
+     * @param number $toFolder
+     * @param string $isHidden
+     * 
+     * @todo what happen if $files does have more then one entry, as the response is limit to 1
+     */
     public static function uploadFromFiles(array $filesArray, $toFolder = 0, $isHidden = false)
     {
-        foreach ($filesArray as $k => $file) {
-            if ($file['error'] !== UPLOAD_ERR_OK) {
-                return ['upload' => false, 'message' => static::$uploadErrors[$file['error']], 'file_id' => 0];
+        $files = [];
+        
+        foreach ($filesArray as $fileArrayKey => $file) {
+            // check whtever the upload is an array (multidimensional or not)
+            if (is_array($file['tmp_name'])) {
+                foreach($file['tmp_name'] as $index => $value) {
+                    $files[] = [
+                        'name' => $file['name'][$index],
+                        'type' => $file['type'][$index],
+                        'tmp_name' => $file['tmp_name'][$index],
+                        'error' => $file['error'][$index],
+                        'size' => $file['size'][$index],
+                    ];
+                }
+            } else {
+                $files[] = [
+                    'name' => $file['name'],
+                    'type' => $file['type'],
+                    'tmp_name' => $file['tmp_name'],
+                    'error' => $file['error'],
+                    'size' => $file['size'],
+                ];
             }
+        }
+        
+        foreach ($files as $file) {
             try {
+                if ($file['error'] !== UPLOAD_ERR_OK) {
+                    return ['upload' => false, 'message' => static::$uploadErrors[$file['error']], 'file_id' => 0];
+                }
+                
                 $file = Yii::$app->storage->addFile($file['tmp_name'], $file['name'], $toFolder, $isHidden);
                 if ($file) {
                     return ['upload' => true, 'message' => 'file uploaded succesfully', 'file_id' => $file->id];
@@ -146,6 +180,6 @@ class Storage
             }
         }
     
-        return ['upload' => false, 'message' => 'no files selected', 'file_id' => 0];
+        return ['upload' => false, 'message' => 'no files selected or empty files list.', 'file_id' => 0];
     }
 }
