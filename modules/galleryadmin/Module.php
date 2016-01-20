@@ -2,6 +2,8 @@
 
 namespace galleryadmin;
 
+use Yii;
+
 class Module extends \admin\base\Module
 {
     public $isCoreModule = true;
