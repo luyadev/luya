@@ -5,6 +5,8 @@ Luya installieren
 
 Mit diesen wenigen Schritten kannst Du ganz einfach ein eigenes Luya-Projekt erstellen. Um Luya installieren zu können, musst du [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) auf deinem Mac-, Linux- oder Windows- Computer installiert haben. Natürlich musst Du über eine Webserver-Umgebung mit [PHP](http://php.net) (ab Version 5.4) verfügen (zbsp. [MAMP](https://www.mamp.info/de/) oder [XAMPP](https://www.apachefriends.org/index.html)).
 
+> Wir haben auch ein [Installations Video auf Youtube](https://www.youtube.com/watch?v=7StCJviSGkg) welches dir vielleicht helfen kann!
+
 Composer
 --------
 Als erstes registrieren wir das `fxp/composer-asset-plugin` global für deine gesamte Arbeitsumgebung. Luya benötigt dies um [BOWER](http://bower.io) Pakete (zbsp. Jquery, Angular, etc.) in deinem Vendor Ordner zu speichern.

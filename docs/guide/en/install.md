@@ -3,6 +3,8 @@ Create a new Luya Project
 
 With those few steps you can install *LUYA* on your System. To install *LUYA* you have to install [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) on your Mac, Unix or Windows System.
 
+> We have also made a [Install Video on Youtube](https://www.youtube.com/watch?v=7StCJviSGkg) who could help you!
+
 First of all you have to install the global `fxp/composer-asset-plugin` plugin, which is required by Yii to install bower packages via composer. So open your Terminal go into your Webserver folder and insert:
 
 ```sh
