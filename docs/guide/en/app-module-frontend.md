@@ -31,5 +31,3 @@ page title
 
 use $this->title
 
-
-```

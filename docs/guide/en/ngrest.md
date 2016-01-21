@@ -23,6 +23,7 @@ public function ngRestConfig($config)
 Multilingual fields
 -------------------
 If you want to have multilingual fields based on the system (admin) language table you can just pass the variable ***$i18n*** an array containing are fields which should be translated. like this:
+
 ```php
 class Model extends \admin\ngrest\base\Model
 {
@@ -40,6 +41,7 @@ The ng-rest config pointers describes the "scene" where the to configure fields 
 * ***delete*** Enable the delete button to the model coresponding `delete()` method.
 
 For example if you want to add the fields ***title*** and ***description*** into the list and create pointers just put:
+
 ```php
 public function ngRestConfig($config)
 {
@@ -50,6 +52,7 @@ public function ngRestConfig($config)
     $this->create->field("description", "Description");
 }
 ```
+
 The fields title and description are now configure in the list and create actions. So you could now see the fields in the grid view and you could create new entrys for those two fields.
 
 If you want to see all configuration possibilitys after field, have a look at the [NGREST FIELDS CONFIGURATIOn GUIDE](start-ngrest-fields.md).

@@ -1,6 +1,8 @@
 Angular Active Window
 ==============
 
+> Use `./vendor/bin/luya aw/create` to quickly generate a new Active Window.
+
 Create an ActiveWindow which interactives with the ActiveWindow callback functions using angular.
 
 ActiveWindow Class

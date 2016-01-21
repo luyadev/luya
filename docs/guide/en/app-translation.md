@@ -3,6 +3,7 @@ Create translations
 Createa a `message` folder in your application root folder. 
 
 register the messages component in your config:
+
 ```php
 'components' => [
     'i18n' => [
@@ -16,6 +17,7 @@ register the messages component in your config:
 ```
 
 folder strcuture:
+
 ```
 messages
 	de
@@ -25,6 +27,7 @@ messages
 ```
 
 example content of `messages/de/app.php`
+
 ```
 return [
     'foo' => 'Ich bin der Deutsche value für "Foo"',
@@ -32,13 +35,16 @@ return [
 ```
 
 use:
+
 ```php
 echo Yii::t('app', 'foo');
 ```
 
 Variables in translations
 --------------------------
+
 if you have a parameter to use in the translation
+
 ```php
 $paramValue = time();
 
@@ -46,6 +52,7 @@ echo Yii::t('app', 'foo-param', $paramValue);
 ```
 
 the translation inside the messages array must look like:
+
 ```php
 return [
 	'foo-param' => 'Its now {0} in unix timestamp!'

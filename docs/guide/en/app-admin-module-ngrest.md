@@ -1,3 +1,8 @@
+Angular Crud
+------------
+
+> Use `./vendor/bin/luya crud/create` to generate the ngrest crud, but first create module `./vendor/bin/luya module/create` and after that create table you want to applay the crud `./vendor/bin/luya migrate/create thetable mymodule`
+
 The `crud` command will guide you trough the described steps below.
 
 1. Create Model and NG Rest Config
@@ -66,6 +71,7 @@ class News extends \admin\ngrest\base\Model
 ```
 
 If you want to add multlingual fields, just add an array for the to configure fields in the $i18n variable like this:
+
 ```php
 class News extends \admin\ngrest\base\Model
 {
