@@ -3,6 +3,7 @@
 namespace cmsadmin\blocks;
 
 use Yii;
+use cms\Exception;
 use cmsadmin\Module;
 use luya\helpers\ModuleHelper;
 
@@ -79,28 +80,32 @@ class ModuleBlock extends \cmsadmin\base\Block
         if ($this->isAdminContext() || empty($moduleName) || count($this->getEnvOptions()) === 0) {
             return;
         }
-
-        $ctrl = $this->getCfgValue('moduleController');
-        $action = $this->getCfgValue('moduleAction', 'index');
-        $actionArgs = json_decode($this->getCfgValue('moduleActionArgs'), true);
-        if (empty($actionArgs)) {
-            $actionArgs = [];
-        }
-
-        // get module
-        $module = Yii::$app->getModule($moduleName);
-        $module->context = 'cms';
         
-        // start module reflection
-        $reflection = ModuleHelper::reflectionObject($module);
-        $reflection->suffix = $this->getEnvOption('restString');
-
-        // if a controller has been defined we inject a custom starting route for the
-        // module reflection object.
-        if (!empty($ctrl)) {
-            $reflection->defaultRoute($ctrl, $action, $actionArgs);
+        try {
+            $ctrl = $this->getCfgValue('moduleController');
+            $action = $this->getCfgValue('moduleAction', 'index');
+            $actionArgs = json_decode($this->getCfgValue('moduleActionArgs'), true);
+            if (empty($actionArgs)) {
+                $actionArgs = [];
+            }
+    
+            // get module
+            $module = Yii::$app->getModule($moduleName);
+            $module->context = 'cms';
+            
+            // start module reflection
+            $reflection = ModuleHelper::reflectionObject($module);
+            $reflection->suffix = $this->getEnvOption('restString');
+    
+            // if a controller has been defined we inject a custom starting route for the
+            // module reflection object.
+            if (!empty($ctrl)) {
+                $reflection->defaultRoute($ctrl, $action, $actionArgs);
+            }
+    
+            return $reflection->run();
+        } catch (\Exception $err) {
+            throw new Exception('Module Block Exception: ' . $err->getMessage());
         }
-
-        return $reflection->run();
     }
 }
