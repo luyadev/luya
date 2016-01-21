@@ -10,6 +10,10 @@
         "zephir/luya-module-cmsadmin" : "1.0.0-beta4",
         "zephir/luya-module-admin" : "1.0.0-beta4"
     },
+    "require-dev": {
+        "yiisoft/yii2-gii" : "~2.0.0",
+        "yiisoft/yii2-debug" : "~2.0.0"
+    },
     "scripts": {
         "post-create-project-cmd": [
             "yii\\composer\\Installer::postCreateProject"
