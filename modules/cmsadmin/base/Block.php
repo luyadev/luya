@@ -379,6 +379,40 @@ abstract class Block extends \yii\base\Object implements BlockInterface
     }
     
     /**
+     * Create the options array for a zaa-select field based on an key value pairing
+     * array.
+     * 
+     * @param array $options The key value array pairing the select array should be created from.
+     * @since 1.0.0-beta5
+     */
+    protected function zaaSelectArrayOption(array $options)
+    {
+        $transform = [];
+        foreach ($options as $key => $value) {
+            $transform[] = ['value' => $key, 'label' => $value];
+        }
+        
+        return $transform;
+    }
+    
+    /**
+     * Create the Options list in the config for a zaa-checkbox-array based on an 
+     * key => value pairing array.
+     * 
+     * @param array $options The array who cares the options with items 
+     * @since 1.0.0-beta5
+     */
+    protected function zaaCheckboxArrayOption(array $options)
+    {
+        $transform = [];
+        foreach ($options as $key => $value) {
+            $transform[] = ['id' => $key, 'value' => $value];
+        }
+        
+        return ['items' => $transform];
+    }
+    
+    /**
      * Get all informations from an zaa-image-upload type:
      * 
      * ```php
