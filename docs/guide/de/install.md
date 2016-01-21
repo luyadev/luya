@@ -98,15 +98,9 @@ http://localhost/luya-kickstarter/admin
 
 Wenn du dich eingeloggt hast, kannst nun der *Administrator* Gruppe alle *Berechtigungen* erteilen.
 
-PHP Einstellungen
------------------
+Probleme
+--------
 
-Bitte beachte, ob du in deiner PHP-Konfiguration **short_open_tags** aktiviert ist ( `<?` anstelle von `<?php` ), da diese in den *Views* verwendet werden.
+Wenn du Problem, unerwartet Fehler oder andere komische Verhalten entdeckst: Lass es uns wissen und mache ein [Issue auf GitHub](https://github.com/zephir/luya/issues) oder komm in unser [Gitter Chat](https://gitter.im/zephir/luya) Chat. 
 
-|Konfiguration |Wert
-|--- |----
-|short_open_tags | 1
-|memory_limit |512
-|max_execution_time|60
-|post_max_size|16M
-|upload_max_filesize|16M
+[![Join the chat at https://gitter.im/zephir/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zephir/luya?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
