@@ -1,170 +1,51 @@
-Start collaboration
-===================
+help creating LUYA
+==================
+If you like to contribute to the LUYA project you can easyl follow thes few steps:
 
-How to collaborate with us and contribute to the LUYA Project.
+1. fork the [zephir/luya](https://github.com/zephir/luya) project to your account..
+2. Define your working environment
+3. Rebase the master
+4. Create a new branch
+5. Commit, push and pull-request
 
-1. Fork Luya
-2. Recommended directory structure
-3. Clone luya fork
-4. Create luya-kickstarter project
-4. a) Update config
-4. b) Update composer.json
-5. Define the upstream repo
-6. Work routine 
-7. Add changes to zephir/luya (Pull request)
+Forken
+------
+To Fork the the [LUYA](https://github.com/zephir/luya) project click on the FORK Button, this will create a copy of the repository on your account. After forking the repositor you have to clone it into your local composer  via `git clone https://github.com/yourusername/luya`. 
 
-1. Fork Luya
--------------
-
-Fork the Luya project on Github: [https://github.com/zephir/luya](https://github.com/zephir/luya).
 ![fork-luya](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/start-collaboration-fork.jpg "Fork Luya")
 
-2. Recommended directory structure
-------------------------------------
-You will have two directories that depend on each other.
+> Tipps with [git clone](https://help.github.com/articles/importing-a-git-repository-using-the-command-line/).
 
-1. The «luya» directory
-2. The «luya-kickstarter» directory
+Wokring Environemnt
+---------------
 
-I will work with the following structure:
-```
-luya-working-dir/
-├ luya/     	# https://github.com/zephir/luya
-├ website/  	# https://github.com/zephir/luya-kickstarter
-```
+After successfull clone into your localhost you will find a folder `envs/dev` in your LUYA fork project. This is the working environemnt you can test all functions and modules directly against the luya source code (even of the modules).
 
-3. Clone luya fork
--------------------
-Working directory: luya-working-dir/luya/
+So now you have to configure the envs/dev environemnt, to do this go into the configs folter `envs/dev/configs` and copy the file `server.php.dist` to `server.php` and change all the environemnt setting you whish. The most important will be the *Database Component* you have to configure matching your server settings.
 
-Use following command to clone the forked Luya project.
+> The `server.php` is in gitingore list.
 
-Don't forget to replace "username" with your Github username
-```
-git clone https://github.com/username/luya.git .
+As we assumen you have installe composer now you can rown `composer install` inside of your `envs/dev` folter, this will installed all required depenencies and create the psr4 mappings to the local files.
+
+After that we are only have to do the basic terminal commands in your console:
+
+Install Database:
+
+```sh
+./vendor/bin/luya migrate
 ```
 
-4. Create luya-kickstarter project
-------------------------------------
-Working directory: luya-working-dir/website/
+Import data from env to databse
 
-1. Create the luya-kickstarter project with composer.
-2. Move all files from the created directory into luya-working-dir/website/
-```
-composer create-project --prefer-dist zephir/luya-kickstarter:dev-master .
-```
-You will be asked if you want to remove the .git files. Answer with Y if you want to push the luya-kickstarter project into your own repository.
-```
-Do you want to remove the existing VCS (.git, .svn..) history? [Y,n]? 
+```sh
+./vendor/bin/luya import
 ```
 
-All files are now in the right place.
+and finally setup the envs instance to login with your user:
 
-### 4. a) Update config
-Copy local config template:
-```
-cp configs/local.php.dist config/local.php
-```
-Edit local config and update db informations:
-```
-'db' => [
-	'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=your_dbname;unix_socket=your_unix_socket',
-    'username' => 'your_username',
-    'password' => 'your_password'
-]
+```sh
+./vendor/bin/luya setup
 ```
 
-Copy preproduction config:
-```
-cp configs/prep.php.dist configs/prep.php
-```
+After this you can now open the public_html folder in your browser of your dev env `localhost/luya/envs/dev/public_html`.
 
-Copy server config:
-```
-cp configs/server.php.dist configs/server.php
-```
-
-Per default, no other changes to the config are required.
-
-### 4. b) Update composer
-To work on luya modules, we have to update the composer.json.
-Change it's content to the following:
-```
-{
-    ...
-    "require": {
-        "yiisoft/yii2": "2.0.*"
-    },
-    "autoload" : {
-        "psr-4" : {
-            "luya\\" : "../luya/src/",
-            "admin\\" : "../luya/modules/admin",
-            "cms\\" : "../luya/modules/cms",
-            "cmsadmin\\" : "../luya/modules/cmsadmin"
-        }
-    },
-    ...
-}
-```
-**Run:**
-```
-composer update
-```
-
-All luya relevant files are now loaded from the luya-working-dir/luya/ folder.
-
-For more informations and troubleshooting: [https://github.com/zephir/luya-kickstarter](https://github.com/zephir/luya-kickstarter)
-
-Working routine
-----------------
-
-***Firsttime***
-
-Run following command:
-```
-./scripts/rebasemaster.sh init
-```
-
-***Otherwise:***
-
-Run following command:
-```
-./scripts/rebasemaster.sh
-```
-
-Now that you're on the newest release, create a branch from master:
-Don't forget to replace "newBranch" with a meaningful name.
-```
-git checkout -b newBranch master
-```
-
-Commit & Push all changes to this new branch.
-
-Add changes to zephir/luya (Pull request)
------------------------------------------
-Now that you've committed and pushed all of your files, go to your forked luya project on Github.
-Click on «Pull request» on the right side and then on the green button «New pull request».
-
-On the following screen, choose your branch to merge, check everything and create the pull request.
-![pull-request](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/start-collaboration-pull-request.jpg "Pull request")
-
-
-Installtion on MAC OSX with MAMP
----
-Use a different DSN in the Config
-```
-'dsn' => 'mysql:host=localhost;dbname=luyaweb;unix_socket=/Applications/MAMP/tmp/mysql/mysql.sock',
-```
-
-Create a .bash_profile file in your home folder (cd ~) with following content
-```
-export PATH=/Applications/MAMP/bin/php/php5.6.2/bin:$PATH
-```
-***Attention:*** If you've [ZSH](https://github.com/robbyrussell/oh-my-zsh) installed, add the above "export" line to the ***end*** of the ***.zshrc*** file in your home directory (~/.zshrc).
-
-change the php version to your current active php version. To verify and test this informations use:
-```
-which php
-php -i
-```
