@@ -1,14 +1,15 @@
 Help us improve LUYA
 ==================
+
 If you like to contribute to the LUYA project you can easyl follow thes few steps:
 
 1. fork the [zephir/luya](https://github.com/zephir/luya) project to your account..
 2. Define your working environment
 3. Rebase the master
 4. Create a new branch
-5. Commit, push and pull-request
+5. Commit, push and create pull-request
 
-Forken
+Fork
 ------
 To Fork the the [LUYA](https://github.com/zephir/luya) project click on the FORK Button, this will create a copy of the repository on your account. After forking the repositor you have to clone it into your local composer  via `git clone https://github.com/yourusername/luya`. 
 
