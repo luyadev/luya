@@ -54,12 +54,12 @@ class Module extends \admin\base\Module
 
 Import Methode
 --------------
-Module verfügen über eine `import(\luya\commands\ImportCommand $import)`. Wenn import ein array zurück gibt müssen dies Klassen-Namen sein welche von `\luya\base\Importer` extenden.
+Module verfügen über eine `import(\luya\console\interfaces\ImportController $import)`. Wenn import ein array zurück gibt müssen dies Klassen-Namen sein welche von `\luya\base\Importer` extenden.
 
 Beispiel für Klassen Response
 
 ```php
-public function import(\luya\commands\ImportController $import)
+public function import(\luya\console\interfaces\ImportController $import)
 {
     return [
         '\\cmsadmin\\importers\\BlockImporter',
@@ -71,7 +71,7 @@ public function import(\luya\commands\ImportController $import)
 Beispiel für Code welcher direkt in der Methode ausgeführt wird und auf die $import variable zurück greift für helper funktionen und loggin mechanismus:
 
 ```php
-public function import(\luya\commands\ImportController $import)
+public function import(\luya\console\interfaces\ImportController $import)
 {
     foreach ($import->getDirectoryFiles('filters') as $file) {
         $filterClassName = $file['ns'];

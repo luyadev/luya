@@ -3,7 +3,7 @@ Help us improve LUYA
 
 If you like to contribute to the LUYA project you can easyl follow thes few steps:
 
-1. fork the [zephir/luya](https://github.com/zephir/luya) project to your account..
+1. Fork the [zephir/luya](https://github.com/zephir/luya) project to your account.
 2. Define your working environment
 3. Rebase the master
 4. Create a new branch
@@ -17,18 +17,16 @@ To Fork the the [LUYA](https://github.com/zephir/luya) project click on the FORK
 
 > Tipps with [git clone](https://help.github.com/articles/importing-a-git-repository-using-the-command-line/).
 
-Wokring Environemnt
+Working environment
 ---------------
 
-After successfull clone into your localhost you will find a folder `envs/dev` in your LUYA fork project. This is the working environemnt you can test all functions and modules directly against the luya source code (even of the modules).
+After successfull clone into your webserver/computer you will find a folder `envs/dev` in your *LUYA* fork project. This is the working environment you can test all functions and modules directly against the *LUYA* source code (even of the modules).
 
-So now you have to configure the envs/dev environemnt, to do this go into the configs folter `envs/dev/configs` and copy the file `server.php.dist` to `server.php` and change all the environemnt setting you whish. The most important will be the *Database Component* you have to configure matching your server settings.
+So now you have to configure the envs/dev environment. To do so, go into the configs folder `envs/dev/configs` and copy the file `server.php.dist` to `server.php` and modify all the components and modules to fit your needs. The most important will be the *Database Component* you have to configure matching your server settings.
 
-> The `server.php` is in gitingore list.
+As we assume you have [installed composer](install.md) already on your computer now you can rown `composer install` inside of your `envs/dev` folder, this will install all required depenencies and create the psr4 mappings to the local *LUYA* library files (src, modules, etc.).
 
-As we assumen you have installe composer now you can rown `composer install` inside of your `envs/dev` folter, this will installed all required depenencies and create the psr4 mappings to the local files.
-
-After that we are only have to do the basic terminal commands in your console:
+After that you just have to run the basic terminal commands in your console:
 
 Install Database:
 
@@ -48,7 +46,7 @@ and finally setup the envs instance to login with your user:
 ./vendor/bin/luya setup
 ```
 
-After this you can now open the public_html folder in your browser of your dev env `localhost/luya/envs/dev/public_html`.
+After this you can now open the *public_html* folder in your browser of your dev env `localhost/luya/envs/dev/public_html`.
 
 Rebase your Master
 ------------------
