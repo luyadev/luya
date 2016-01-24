@@ -91,31 +91,34 @@ Visit your *LUYA* Fork on GitHub now and you will see a **PULL REQUEST** Button 
 Informations about Design and CSS
 =================================
 
-Admin Design Kompilierung
+Admin Design compile
 -------------------------
-Damit alle styles kompiliert werden, benötigen Sie folgende Programme / Plugins:
+
+To compile the syles you have to install the following tools and plugins:
 
 * [Compass](http://compass-style.org/install/) (gem install compass)
 * [Autoprefixer-rails](autoprefixer-rails) (gem install autoprefixer-rails)
 
-> Bei Berechtigungsfehlern kannst du die oben genannten Befehle mit "sudo" ausführen, oder die Berechtigung im Installationsverzeichniss von ruby anpassen.*
+> If you have not enough rights to run the command use *sudo* to run the commands, ro change the permissions in the install directory of ruby.
 
-Wenn die oben genannten Befehle erfolgreich ausgeführt wurden, kannst du nun in das gewünschte Modul (Unterordner ressources/) wechseln und folgenden Befehl ausführen
+
+If you have installed the tools successfull, you can no switch to the `resources` folder and run:
 
 ```sh
 compass watch
 ```
 
-oder
+or
 
-```sh
+```
 compass compile
 ```
 
-+ "compile" Befehl kompiliert alle Styles einmalig und muss bei Änderungen erneut ausgeführt werden.
-+ Der "watch" Befehl kompiliert automatisch sobald eine Datei geändert wurde.
++ compile: will compile all styles once
++ watch: watching for changes in the file and runs compile automatic
 
-Jedes Modul hat eine eigene Compass Konfiguration (config.rb). Daher muss auch der oben genannte Befehl in jedem Modul (Unterordner ressources/) einzeln ausgeführt werden.
 
-> Alle CMS relevanten Styles werden im SCSS Format erfasst. Dabei muss man sich an die Richtlinien der [cssguidelines](http://cssguidelin.es) halten.
+Each module does have its own compass configratuons `config.rb`, so you have to run this process in each sub folder for the specific module.
+
+> All LUYA admin styles are compose in the scss format and have to to be writen corresponding the [cssguidelines](http://cssguidelin.es).
 

@@ -75,31 +75,28 @@ Informationen bezüglich Design und CSS
 
 Admin Design Kompilierung
 -------------------------
-
-To compile the syles you have to install the following tools and plugins:
+Damit alle styles kompiliert werden, benötigen Sie folgende Programme / Plugins:
 
 * [Compass](http://compass-style.org/install/) (gem install compass)
 * [Autoprefixer-rails](autoprefixer-rails) (gem install autoprefixer-rails)
 
-> If you have not enough rights to run the command use *sudo* to run the commands, ro change the permissions in the install directory of ruby.
+> Bei Berechtigungsfehlern kannst du die oben genannten Befehle mit "sudo" ausführen, oder die Berechtigung im Installationsverzeichniss von ruby anpassen.*
 
-
-If you have installed the tools successfull, you can no switch to the `resources` folder and run:
+Wenn die oben genannten Befehle erfolgreich ausgeführt wurden, kannst du nun in das gewünschte Modul (Unterordner ressources/) wechseln und folgenden Befehl ausführen
 
 ```sh
 compass watch
 ```
 
-or
+oder
 
-```
+```sh
 compass compile
 ```
 
-+ compile: will compile all styles once
-+ watch: watching for changes in the file and runs compile automatic
++ "compile" Befehl kompiliert alle Styles einmalig und muss bei Änderungen erneut ausgeführt werden.
++ Der "watch" Befehl kompiliert automatisch sobald eine Datei geändert wurde.
 
+Jedes Modul hat eine eigene Compass Konfiguration (config.rb). Daher muss auch der oben genannte Befehl in jedem Modul (Unterordner ressources/) einzeln ausgeführt werden.
 
-Each module does have its own compass configratuons `config.rb`, so you have to run this process in each sub folder for the specific module.
-
-> All LUYA admin styles are compose in the scss format and have to to be writen corresponding the [cssguidelines](http://cssguidelin.es).
+> Alle CMS relevanten Styles werden im SCSS Format erfasst. Dabei muss man sich an die Richtlinien der [cssguidelines](http://cssguidelin.es) halten.
