@@ -70,91 +70,36 @@ Nun ist dein neuer Branch auf der Github Platform. Wechslen nun im Browser auf d
 
 ![pull-request](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/start-collaboration-pull-request.jpg "Pull request")
 
+Informationen bezüglich Design und CSS
+======================================
+
 Admin Design Kompilierung
 -------------------------
-Damit alle styles kompiliert werden, benötigen Sie folgende Programme / Plugins:
+
+To compile the syles you have to install the following tools and plugins:
 
 * [Compass](http://compass-style.org/install/) (gem install compass)
 * [Autoprefixer-rails](autoprefixer-rails) (gem install autoprefixer-rails)
 
-*Bei Berechtigungsfehlern kannst du die oben genannten Befehle mit "sudo" ausführen, oder die Berechtigung im Installationsverzeichniss von ruby anpassen.*
+> If you have not enough rights to run the command use *sudo* to run the commands, ro change the permissions in the install directory of ruby.
 
-Wenn die oben genannten Befehle erfolgreich ausgeführt wurden, kannst du nun in das gewünschte Modul (Unterordner ressources/) wechseln und folgenden Befehl ausführen
 
+If you have installed the tools successfull, you can no switch to the `resources` folder and run:
+
+```sh
+compass watch
 ```
-    compass watch
-```
 
-oder
+or
 
 ```
 compass compile
 ```
 
-*Der "compile" Befehl kompiliert alle Styles einmalig und muss bei Änderungen erneut ausgeführt werden. Der "watch" Befehl kompiliert automatisch sobald eine Datei geändert wurde.*
++ compile: will compile all styles once
++ watch: watching for changes in the file and runs compile automatic
 
-*Jedes Modul hat eine eigene Compass Konfiguration (config.rb). Daher muss auch der oben genannte Befehl in jedem Modul (Unterordner ressources/) einzeln ausgeführt werden.*
 
-Admin Design Aufteilung
------------------------
-Alle CMS relevanten Styles werden im SCSS Format erfasst. Dabei muss man sich an die Richtlinien der [cssguidelines](http://cssguidelin.es) halten.
+Each module does have its own compass configratuons `config.rb`, so you have to run this process in each sub folder for the specific module.
 
-Je nach Element werden die Styles aus anderen Modulen geladen. Aktuell unterscheidet man zwischen **admin** und **cmsadmin**.
-
-**admin**
-
-Liefert die styles für Navigation, CRUD, Benutzerinformationen und weiteres. Ausserdem definiert es die Erscheinung von wiederverwendeten Elementen (z.B. Formularelemente).
-
-**cmsadmin**
-
-Liefert alle styles für die Inhaltsverwaltung im CMS. z.B. Treeview, Seiten, Placeholders, Blöcke etc.
-
-Step-by-Step Beschreibung Luya-Branching/Forking
-------------------------------------------------
-Sobald du mit deinen Veränderungen fertig bist, empfiehlt es sich als erstes mit git status eine Übersicht über alle getätigten Veränderungen zu verschaffen. Ungewollte Veränderungen kannst du mit 
-```
-git checkout /Pfad/zur/Datei.xyz 
-```
-verwerfen.
-
-**1. Rebase**
-
-Im Luya-Projekt-Verzeichnis, im dem Unterordner /scripts findest du ein shell-Skript das dir diesen Schritt erleichtert. Um dieses auszuführen wechselst du in der Console in das besagte Verzeichnis und führst das rebasemaster-Skript aus(./rebasemaster).
-
-**2. Einen neuen Branch erstellen**
-
-Um einen neuen Branch mit deinen Veränderungen zu erstellen tippe: 
-```
-git checkout -b dein-persoenlicher-branch-mit-veraenderungen
-```
-(WICHTIG: Der Branch-Namen darf keine Leerzeichen enthalten!)
-
-**3. Änderungen hinzufügen**
-
-Um deine Änderungen dem Stage-Verzeichnis hinzuzufügen musst du dich im Root-Verzeichnis befinden und kannst mit dem gewohnten Befehl
-```
-git add * oder /Pfad/zur/Datei.xyz 
-```
-hinzufügen.
-Nun wird natürlich noch der commit erwartet um die Änderungen dem Lokalen-Repository hinzuzufügen mittels des
-```
-git commit -m "Meine Commit Message" 
-```
-Befehls.
-
-**4. Branch verwerfen**
-
-Hierfür verwendest du fast den selben Befehl wie bei der erstellung, lediglich ohne das -b.
-```
-git checkout dein-persoenlicher-branch-mit-veraenderungen
-```
-
-**5. Push!**
-
-Natürlich musst du noch "pushen", hierfür verwendest du den Befehl: 
-```
-git push origin dein-persoenlicher-branch-mit-veraenderungen
-```
-
-Abschliessend begibst du dich auf dein GitHub-Profil zu dem Luya-Fork und betätigst den "Compare and pull request"-Button und bestätigst dies mittels des "Create pull-request" Buttons.
-Fertig!
+> All LUYA admin styles are compose in the scss format and have to to be writen corresponding the [cssguidelines](http://cssguidelin.es).
