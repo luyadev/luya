@@ -3,7 +3,9 @@
 namespace cmsadmin\blocks;
 
 use Yii;
+use cms\Exception;
 use cmsadmin\Module;
+use luya\helpers\ModuleHelper;
 
 class ModuleBlock extends \cmsadmin\base\Block
 {
@@ -26,11 +28,18 @@ class ModuleBlock extends \cmsadmin\base\Block
                 ['var' => 'moduleName', 'label' => Module::t('block_module_modulename_label'), 'type' => 'zaa-select', 'options' => $this->getModuleNames()],
             ],
             'cfgs' => [
-                ['var' => 'moduleController', 'label' => Module::t('block_module_modulecontroller_label'), 'type' => 'zaa-text'],
+                ['var' => 'moduleController', 'label' => Module::t('block_module_modulecontroller_label'), 'type' => 'zaa-select', 'options' => $this->zaaSelectArrayOption($this->getControllerClasses())],
                 ['var' => 'moduleAction', 'label' => Module::t('block_module_moduleaction_label'), 'type' => 'zaa-text'],
                 ['var' => 'moduleActionArgs', 'label' => Module::t('block_module_moduleactionargs_label'), 'type' => 'zaa-text'],
             ],
         ];
+    }
+    
+    public function getControllerClasses()
+    {
+        $moduleName = $this->getVarValue('moduleName', false);
+
+        return (empty($moduleName)) ? [] : Yii::$app->getModule($moduleName)->getControllerFiles();
     }
 
     public function getModuleNames()
@@ -68,36 +77,35 @@ class ModuleBlock extends \cmsadmin\base\Block
 
     private function moduleContent($moduleName)
     {
-        if ($this->isAdminContext()) {
+        if ($this->isAdminContext() || empty($moduleName) || count($this->getEnvOptions()) === 0) {
             return;
         }
-        /*
-         * in the admin context (means env options are empty) we do not have to render the module!
-         */
-        if (empty($moduleName) || count($this->getEnvOptions()) === 0) {
-            return;
+        
+        try {
+            $ctrl = $this->getCfgValue('moduleController');
+            $action = $this->getCfgValue('moduleAction', 'index');
+            $actionArgs = json_decode($this->getCfgValue('moduleActionArgs'), true);
+            if (empty($actionArgs)) {
+                $actionArgs = [];
+            }
+    
+            // get module
+            $module = Yii::$app->getModule($moduleName);
+            $module->context = 'cms';
+            
+            // start module reflection
+            $reflection = ModuleHelper::reflectionObject($module);
+            $reflection->suffix = $this->getEnvOption('restString');
+    
+            // if a controller has been defined we inject a custom starting route for the
+            // module reflection object.
+            if (!empty($ctrl)) {
+                $reflection->defaultRoute($ctrl, $action, $actionArgs);
+            }
+    
+            return $reflection->run();
+        } catch (\Exception $err) {
+            throw new Exception('Module Block Exception: ' . $err->getMessage());
         }
-
-        $ctrl = $this->getCfgValue('moduleController');
-        $action = $this->getCfgValue('moduleAction');
-        $actionArgs = json_decode($this->getCfgValue('moduleActionArgs'), true);
-        if (empty($actionArgs)) {
-            $actionArgs = [];
-        }
-
-        // get module
-        $module = Yii::$app->getModule($moduleName);
-        $module->context = 'cms';
-        //$module->setContextOptions($this->getEnvOptions());
-        // start module reflection
-
-        $reflection = \luya\helpers\ModuleHelper::reflectionObject($module);
-        $reflection->suffix = $this->getEnvOption('restString');
-
-        if ($ctrl && $action) {
-            $reflection->defaultRoute($ctrl, $action, $actionArgs);
-        }
-
-        return $reflection->run();
     }
 }

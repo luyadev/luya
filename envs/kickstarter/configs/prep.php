@@ -71,6 +71,11 @@ $config = [
          */
         'cmsadmin' => 'cmsadmin\Module',
         
+        /*
+         * Add your custom modules here, example code to add a module you have generate with `./vendor/bin/luya module/create`.
+         */
+        
+        // 'foobar' => 'app\modules\foobar\Module',
     ],
     'components' => [
         

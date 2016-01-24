@@ -4,6 +4,8 @@ namespace luya\base;
 
 use yii;
 use Exception;
+use luya\helpers\FileHelper;
+use yii\helpers\Inflector;
 
 /**
  * All Luya modules must extend on this base module class.
@@ -208,5 +210,22 @@ abstract class Module extends \yii\base\Module
     public function getNamespace()
     {
         return implode('\\', array_slice(explode('\\', get_class($this)), 0, -1));
+    }
+    
+    /**
+     * Returns all controller files of this module from the `getControllerPath()` folder, where the key is the reusable 
+     * id of this controller and value the file on the server.
+     * 
+     * @return array Returns an array where the key is the controller id and value the original file.
+     * @since 1.0.0-beta5
+     */
+    public function getControllerFiles()
+    {
+        $files = [];
+        foreach (FileHelper::findFiles($this->controllerPath) as $file) {
+            $value = ltrim(str_replace([$this->controllerPath, 'Controller.php'], '', $file), '/');
+            $files[Inflector::camel2id($value)] = $file;
+        }
+        return $files;
     }
 }

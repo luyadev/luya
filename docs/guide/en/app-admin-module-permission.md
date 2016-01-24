@@ -4,6 +4,7 @@ Admin Permission
 The permissions are handled in `getMenu()` method inside your `Module.php`:
 
 Example with custom  routes
+
 ```php
 public function getMenu()
 {
@@ -17,6 +18,7 @@ public function getMenu()
 ```
 
 Example with apis
+
 ```php
 public function getMenu()
 {
@@ -32,6 +34,7 @@ public function getMenu()
 ```
 
 you can also also set `disablePermissionCheck` to true inside your admin controller to avoid rights managmenet:
+
 ```php
 namespace myadmin\controllers;
 

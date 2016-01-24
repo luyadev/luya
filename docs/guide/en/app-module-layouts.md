@@ -1,19 +1,21 @@
 moduleLayout
 ------------
 
-use 
-```php
-$this->renderLayout([
+We have add antoher layout wrapper for module views and templates:
 
-]]); 
+```php
+$this->renderLayout('myaction', [
+    'foo' => 'bar
+]); 
 ```
 
-to render a fake like layout inside modules
+to render a fake like layout inside modules.
 
 
 EXAMPLE
 =======
 controllers/DefaultController.php
+
 ```php
 namespace app\modules\estore\controllers;
 
@@ -31,7 +33,9 @@ class DefaultController extends \app\modules\estore\base\EstoreController
     }
 }
 ```
+
 base/EstoreController.php
+
 ```php
 namespace app\modules\estore\base;
 
@@ -48,6 +52,7 @@ class EstoreController extends \luya\base\PageController
 ```
 
 @app/views/estore/moduleLayout.php
+
 ```php
 estore header
 <hr />
@@ -55,3 +60,4 @@ estore header
 <hr />
 estore footer
 <?php  print_r($this->context->getBasketTotal());?>
+```

@@ -1,8 +1,9 @@
 <?php
 
-namespace authadmin;
+namespace luya\web;
 
-use authadmin\AuthIdentityInterface;
+use luya\web\GroupUserIdentityInterface;
+use yii\base\InvalidConfigException;
 
 /**
  * User class to login based on yii\web\User, but allows you to check whether a user 
@@ -19,7 +20,7 @@ use authadmin\AuthIdentityInterface;
  * 
  * 
  * ```php
- * class app\UserCustomers implements AuthUserInterface
+ * class app\UserCustomers implements GroupUserIdentityInterface
  * {
  *     public function getGroups()
  *     {
@@ -29,7 +30,7 @@ use authadmin\AuthIdentityInterface;
  * ```
  * 
  * ```php
- * class app\UserCompanys implements AuthUserInterface
+ * class app\UserCompanys implements GroupUserIdentityInterface
  * {
  *     public function getGroups()
  *     {
@@ -97,22 +98,10 @@ use authadmin\AuthIdentityInterface;
  * 
  * @author nadar
  */
-class User extends \yii\web\User
+class GroupUser extends \yii\web\User
 {
-	public function init()
-	{
-		parent::init();
-		$this->on(self::EVENT_BEFORE_LOGIN, [$this, 'eventBeforeLogin']);
-	}
-	
-	/*
-	public function eventBeforeLogin($event)
-	{
-		return $event->isValid = $this->inGroup
-	}
-	*/
-	
 	/**
+	 * Checks whether a user exists for the provided group based on the GroupUserIdentityInterface implementation
 	 * 
 	 * @param string|array $alias
 	 */
@@ -120,8 +109,8 @@ class User extends \yii\web\User
 	{
 		$identity = $this->identity;
 		
-		if (!$identity instanceof EventBeforeFileDownload) {
-			throw new \Exception("error defintion");
+		if (!$identity instanceof GroupUserIdentityInterface) {
+			throw new InvalidConfigException("The group user must be instance of GroupUserIdentityInterface.");
 		}
 		
 		if (!$this->isGuest) {

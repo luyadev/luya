@@ -3,9 +3,11 @@
 namespace admin\controllers;
 
 use Yii;
+use admin\Module;
 use admin\models\StorageFile;
 use yii\web\BadRequestHttpException;
 use yii\web\yii\web;
+use admin\events\FileDownloadEvent;
 
 class FileController extends \luya\web\Controller
 {
@@ -21,6 +23,15 @@ class FileController extends \luya\web\Controller
             $model = StorageFile::findOne($fileData->id);
             // proceed when model exists
             if ($model && file_exists($fileSourcePath) && is_readable($fileSourcePath)) {
+                
+                $event = new FileDownloadEvent(['file' => $fileData]);
+                
+                Yii::$app->trigger(Module::EVENT_BEFORE_FILE_DOWNLOAD, $event);
+                
+                if (!$event->isValid) {
+                    throw new BadRequestHttpException('Unable to performe this request due to access restrictions');
+                }
+                
                 // update the model count stats
                 $count = $model->passthrough_file_stats + 1;
                 $model->passthrough_file_stats = $count;

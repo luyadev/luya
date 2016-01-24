@@ -3,6 +3,7 @@
 namespace luya\base;
 
 use Exception;
+use yii\base\InvalidConfigException;
 
 /**
  * Run any route inside the provided module.
@@ -72,10 +73,10 @@ class ModuleReflection extends \yii\base\Object
         return $array;
     }
 
-    public function defaultRoute($controller, $action = 'index', array $args = [])
+    public function defaultRoute($controller, $action = null, array $args = [])
     {
         $this->_defaultRoute = [
-            'route' => implode('/', [$this->module->id, $controller, $action]),
+            'route' => implode('/', [$this->module->id, $controller, (empty($action)) ? 'index' : $action]),
             'args' => $args,
         ];
     }
@@ -92,7 +93,7 @@ class ModuleReflection extends \yii\base\Object
         $controller = $this->module->createController($requestRoute['route']);
         // throw error if the requests request does not returns a valid controller object
         if (!isset($controller[0]) && !is_object($controller[0])) {
-            throw new Exception(sprintf("Unable to create controller for route '%s' and  arguments '%s'", $requestRoute['route'], print_r($requestRoute['args'], true)));
+            throw new InvalidConfigException(sprintf("Unable to create controller '%s' for module '%s'.", $requestRoute['route'], $this->module->id));
         }
         // run the action on the provided controller object
         return $controller[0]->runAction($controller[1], $requestRoute['args']);

@@ -5,6 +5,8 @@ Luya installieren
 
 Mit diesen wenigen Schritten kannst Du ganz einfach ein eigenes Luya-Projekt erstellen. Um Luya installieren zu können, musst du [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) auf deinem Mac-, Linux- oder Windows- Computer installiert haben. Natürlich musst Du über eine Webserver-Umgebung mit [PHP](http://php.net) (ab Version 5.4) verfügen (zbsp. [MAMP](https://www.mamp.info/de/) oder [XAMPP](https://www.apachefriends.org/index.html)).
 
+> Wir haben auch ein [Installations Video auf Youtube](https://www.youtube.com/watch?v=7StCJviSGkg) welches dir vielleicht helfen kann!
+
 Composer
 --------
 Als erstes registrieren wir das `fxp/composer-asset-plugin` global für deine gesamte Arbeitsumgebung. Luya benötigt dies um [BOWER](http://bower.io) Pakete (zbsp. Jquery, Angular, etc.) in deinem Vendor Ordner zu speichern.
@@ -98,15 +100,9 @@ http://localhost/luya-kickstarter/admin
 
 Wenn du dich eingeloggt hast, kannst nun der *Administrator* Gruppe alle *Berechtigungen* erteilen.
 
-PHP Einstellungen
------------------
+Probleme
+--------
 
-Bitte beachte, ob du in deiner PHP-Konfiguration **short_open_tags** aktiviert ist ( `<?` anstelle von `<?php` ), da diese in den *Views* verwendet werden.
+Wenn du Problem, unerwartet Fehler oder andere komische Verhalten entdeckst: Lass es uns wissen und mache ein [Issue auf GitHub](https://github.com/zephir/luya/issues) oder komm in unser [Gitter Chat](https://gitter.im/zephir/luya) Chat. 
 
-|Konfiguration |Wert
-|--- |----
-|short_open_tags | 1
-|memory_limit |512
-|max_execution_time|60
-|post_max_size|16M
-|upload_max_filesize|16M
+[![Join the chat at https://gitter.im/zephir/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zephir/luya?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
