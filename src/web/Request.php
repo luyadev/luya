@@ -16,7 +16,7 @@ class Request extends \yii\web\Request
      */
     public $forceWebRequest = false;
 
-    public $cookieValidationKey = 'cookeivalidationkey';
+    public $cookieValidationKey = 'luya-1.0.0-beta5-cookie-validation-key';
 
     public $parsers = [
         'application/json' => 'yii\web\JsonParser',
