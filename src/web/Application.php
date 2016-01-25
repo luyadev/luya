@@ -5,9 +5,9 @@ namespace luya\web;
 /**
  * Luya Web Application.
  *
- * @property object $composition Composition property
- * @property object $twig The twig component
- * @property object $element The element component
+ * @property \luya\web\Composition $composition Composition property
+ * @property \luya\web\Twig $twig The twig component
+ * @property \luya\web\Element $element The element component
  * @author nadar
  */
 class Application extends \yii\web\Application
