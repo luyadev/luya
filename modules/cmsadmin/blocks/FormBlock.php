@@ -84,6 +84,9 @@ class FormBlock extends \cmsadmin\base\Block
             'email' => Yii::$app->request->post('email'),
             'mailerResponse' => $this->getPostResponse(),
             'csrf' => Yii::$app->request->csrfToken,
+            'nameErrorFlag' => Yii::$app->request->isPost ? (Yii::$app->request->post('name') ? 1 : 0): 1,
+            'emailErrorFlag' => Yii::$app->request->isPost ? (Yii::$app->request->post('email') ? 1 : 0): 1,
+            'messageErrorFlag' => Yii::$app->request->isPost ? (Yii::$app->request->post('message') ? 1 : 0): 1,
         ];
     }
 
@@ -106,8 +109,10 @@ class FormBlock extends \cmsadmin\base\Block
     {
         $request = Yii::$app->request;
 
-        if ($request->post('message') && $request->post('email') && $request->post('name')) {
-            return $this->sendMail($request->post('message'), $request->post('email'), $request->post('name'));
+        if (Yii::$app->request->isPost) {
+            if ($request->post('message') && $request->post('email') && $request->post('name')) {
+                return $this->sendMail($request->post('message'), $request->post('email'), $request->post('name'));
+            }
         }
     }
 
@@ -130,21 +135,21 @@ class FormBlock extends \cmsadmin\base\Block
                             '<label for="name" class="col-sm-2 control-label">{{ extras.nameLabel }}</label>'.
                             '<div class="col-sm-10">'.
                                 '<input type="text" class="form-control" id="name" name="name" placeholder="{{ extras.namePlaceholder }}" value="{% if extras.mailerResponse != "success" %}{{ extras.name }}{% endif %}">'.
-                                '{% if not extras.name %}<p class="text-danger">{{ extras.nameError }}</p>{% endif %}'.
+                                '{% if not extras.nameErrorFlag%}<p class="text-danger">{{ extras.nameError }}</p>{% endif %}'.
                             '</div>'.
                         '</div>'.
                         '<div class="form-group">'.
                             '<label for="email" class="col-sm-2 control-label">{{ extras.emailLabel }}</label>'.
                             '<div class="col-sm-10">'.
                                 '<input type="email" class="form-control" id="email" name="email" placeholder="{{ extras.emailPlaceholder }}" value="{% if extras.mailerResponse != "success" %}{{ extras.email }}{% endif %}">'.
-                                '{% if not extras.email %}<p class="text-danger">{{ extras.emailError }}</p>{% endif %}'.
+                                '{% if not extras.emailErrorFlag %}<p class="text-danger">{{ extras.emailError }}</p>{% endif %}'.
                             '</div>'.
                         '</div>'.
                         '<div class="form-group">'.
                             '<label for="message" class="col-sm-2 control-label">{{ extras.messageLabel }}</label>'.
                             '<div class="col-sm-10">'.
                                 '<textarea class="form-control" rows="4" name="message">{% if extras.mailerResponse != "success" %}{{ extras.message }}{% endif %}</textarea>'.
-                                '{% if not extras.message %}<p class="text-danger">{{ extras.messageError }}</p>{% endif %}'.
+                                '{% if not extras.messageErrorFlag %}<p class="text-danger">{{ extras.messageError }}</p>{% endif %}'.
                             '</div>'.
                         '</div>'.
                         '{{ sentLabel }}'.
