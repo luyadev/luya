@@ -8,6 +8,7 @@ LUYA CHANGELOG
 
 **ISSUES**
 
+- `#748` Added new ngrest plugin for checkbox list arrays `checkboxList(['key' => 'value'])`.
 - `#735` Fixed clean deleting of cms placeholder blocks (i.e. layout block) and all attached sub blocks
 - `#733` Fixed missing sub cms blocks when using copy cms block function
 - `#725` Fixed missing content in layout cms blocks after page copy
