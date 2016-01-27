@@ -68,7 +68,7 @@ class TextBlock extends \cmsadmin\base\Block
 
     public function twigFrontend()
     {
-        return '{% if vars.content is not empty and vars.textType == 1 %}<p>{{ extras.text }}</p>{% elseif vars.content is not empty and vars.textType == 0 %}<p>{{ extras.text|nl2br }}</p>{% endif %}';
+        return '{% if vars.content is not empty and vars.textType == 1 %}{{ extras.text }}{% elseif vars.content is not empty and vars.textType == 0 %}<p>{{ extras.text|nl2br }}</p>{% endif %}';
     }
 
     public function twigAdmin()
