@@ -367,4 +367,21 @@ class StorageContainer extends \yii\base\Component
         
         return $data;
     }
+    
+    /**
+     * Will force to refresh all container arrays and clean up the cache
+     * 
+     * @since 1.0.0-beta5
+     */
+    public function flushArrays()
+    {
+        $this->_filesArray = null;
+        $this->_imagesArray = null;
+        $this->_foldersArray = null;
+        $this->_filtersArray = null;
+        $this->deleteHasCache($this->fileCacheKey);
+        $this->deleteHasCache($this->imageCacheKey);
+        $this->deleteHasCache($this->folderCacheKey);
+        $this->deleteHasCache($this->filterCacheKey);
+    }
 }
