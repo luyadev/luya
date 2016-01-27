@@ -132,6 +132,67 @@ class Storage
     
     /**
      * 
+     * @param array $fileArray Its an entry of the files array like $_FILEs['logo_image'];
+     * @param number $toFolder
+     * @param string $isHidden
+     */
+    public static function uploadFromFileArray(array $fileArray, $toFolder = 0, $isHidden = false)
+    {
+        $files = self::extractFilesDataFromFilesArray($fileArray);
+        
+        if (count($files) !== 1) {
+            return ['upload' => false, 'message' => 'no image found'];
+        }
+        
+        return self::verifyAndSaveFile($files[0], $toFolder, $isHidden);
+    }
+    
+    private static function extractFilesDataFromFilesArray(array $file)
+    {
+        $files = [];
+        if (is_array($file['tmp_name'])) {
+            foreach($file['tmp_name'] as $index => $value) {
+                $files[] = [
+                    'name' => $file['name'][$index],
+                    'type' => $file['type'][$index],
+                    'tmp_name' => $file['tmp_name'][$index],
+                    'error' => $file['error'][$index],
+                    'size' => $file['size'][$index],
+                ];
+            }
+        } else {
+            $files[] = [
+                'name' => $file['name'],
+                'type' => $file['type'],
+                'tmp_name' => $file['tmp_name'],
+                'error' => $file['error'],
+                'size' => $file['size'],
+            ];
+        }
+        
+        return $files;
+    }
+    
+    private static function verifyAndSaveFile(array $file, $toFolder = 0, $isHidden = false)
+    {
+        try {
+            if ($file['error'] !== UPLOAD_ERR_OK) {
+                return ['upload' => false, 'message' => static::$uploadErrors[$file['error']], 'file_id' => 0];
+            }
+    
+            $file = Yii::$app->storage->addFile($file['tmp_name'], $file['name'], $toFolder, $isHidden);
+            if ($file) {
+                return ['upload' => true, 'message' => 'file uploaded succesfully', 'file_id' => $file->id];
+            }
+        } catch (Exception $err) {
+            return ['upload' => false, 'message' => $err->getMessage()];
+        }
+        
+        return ['upload' => false, 'message' => 'no files selected or empty files list.', 'file_id' => 0];
+    }
+    
+    /**
+     * 
      * @param array $filesArray Use $_FILES
      * @param number $toFolder
      * @param string $isHidden
@@ -141,43 +202,12 @@ class Storage
     public static function uploadFromFiles(array $filesArray, $toFolder = 0, $isHidden = false)
     {
         $files = [];
-        
         foreach ($filesArray as $fileArrayKey => $file) {
-            // check whtever the upload is an array (multidimensional or not)
-            if (is_array($file['tmp_name'])) {
-                foreach($file['tmp_name'] as $index => $value) {
-                    $files[] = [
-                        'name' => $file['name'][$index],
-                        'type' => $file['type'][$index],
-                        'tmp_name' => $file['tmp_name'][$index],
-                        'error' => $file['error'][$index],
-                        'size' => $file['size'][$index],
-                    ];
-                }
-            } else {
-                $files[] = [
-                    'name' => $file['name'],
-                    'type' => $file['type'],
-                    'tmp_name' => $file['tmp_name'],
-                    'error' => $file['error'],
-                    'size' => $file['size'],
-                ];
-            }
+            array_merge($files, self::extractFilesDataFromFilesArray($file));
         }
         
         foreach ($files as $file) {
-            try {
-                if ($file['error'] !== UPLOAD_ERR_OK) {
-                    return ['upload' => false, 'message' => static::$uploadErrors[$file['error']], 'file_id' => 0];
-                }
-                
-                $file = Yii::$app->storage->addFile($file['tmp_name'], $file['name'], $toFolder, $isHidden);
-                if ($file) {
-                    return ['upload' => true, 'message' => 'file uploaded succesfully', 'file_id' => $file->id];
-                }
-            } catch (Exception $err) {
-                return ['upload' => false, 'message' => $err->getMessage()];
-            }
+            return self::verifyAndSaveFile($file, $toFolder, $isHidden);
         }
     
         return ['upload' => false, 'message' => 'no files selected or empty files list.', 'file_id' => 0];
