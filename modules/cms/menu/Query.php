@@ -266,7 +266,7 @@ class Query extends \yii\base\Object
      */
     public static function createArrayIterator(array $data, $langContext)
     {
-        return Yii::createObject(['class' => QueryIterator::className(), 'data' => $data, 'lang' => $langContext]);
+        return (new QueryIteratorFilter(Yii::createObject(['class' => QueryIterator::className(), 'data' => $data, 'lang' => $langContext])));
     }
     
     /**

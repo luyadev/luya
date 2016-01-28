@@ -51,7 +51,7 @@ class Item extends \yii\base\Object
         // call parent object initializer
         parent::init();
     }
-
+    
     /**
      * Get the Id of the Item, the Id is an unique identifiere an represents the
      * id column in the cms_nav_item table.
@@ -63,6 +63,16 @@ class Item extends \yii\base\Object
         return $this->itemArray['id'];
     }
 
+    public function getIsHidden()
+    {
+        return (bool) $this->itemArray['is_hidden'];
+    }
+    
+    public function setIsHidden($value)
+    {
+        $this->itemArray['is_hidden'] = (int) $value;
+    }
+    
     /**
      * Return the current container name of this item.
      *
@@ -113,6 +123,11 @@ class Item extends \yii\base\Object
     public function getTitle()
     {
         return $this->itemArray['title'];
+    }
+    
+    public function setTitle($title)
+    {
+        return $this->itemArray['title'] = $title;
     }
     
     /**

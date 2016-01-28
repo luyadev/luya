@@ -3,7 +3,6 @@
 namespace cms\menu;
 
 use Iterator;
-use Countable;
 
 /**
  * Iterator class for menu items.
@@ -14,7 +13,7 @@ use Countable;
  *
  * @author nadar
  */
-class QueryIterator extends \yii\base\Object implements Iterator, Countable
+class QueryIterator extends \yii\base\Object implements Iterator
 {
     /**
      * @var array An array containing the data to iterate.
@@ -26,16 +25,6 @@ class QueryIterator extends \yii\base\Object implements Iterator, Countable
      * as the parent object which created this object.
      */
     public $lang = null;
-    
-    /**
-     * Callculate to number of items when using count() function against the QueryIterator object.
-     * 
-     * @return int The number of elements in the object.
-     */
-    public function count()
-    {
-        return count($this->data);
-    }
 
     /**
      * Iterator get current element, generates a new object for the current item on accessing.s.

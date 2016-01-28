@@ -68,7 +68,7 @@ class ContainerTest extends \tests\web\Base
     public function testFindAll()
     {
         $iterator = Yii::$app->menu->findAll(['parent_nav_id' => 0]);
-        $this->assertTrue($iterator instanceof \cms\menu\QueryIterator);
+        $this->assertTrue($iterator instanceof \cms\menu\QueryIteratorFilter);
     }
     
     /**

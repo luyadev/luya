@@ -81,6 +81,8 @@ class Container extends \yii\base\Component implements ArrayAccess
 {
     use \luya\traits\CacheableTrait;
     
+    const MENU_ITEM_EVENT = 'menuItemEvent';
+    
     /**
      * @var luya\web\Request Request object
      */
