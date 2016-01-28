@@ -48,6 +48,9 @@ class UrlRule extends \luya\web\UrlRule
         // extra data from request to composition, which changes the pathInfo of the Request-Object.
         $resolver = Yii::$app->composition->getResolvedPathInfo($request);
 
+
+        Yii::trace("LUYA UrlRUle component has resolved '".print_r($resolver, true)."'", __METHOD__);
+        
         //$request->setPathInfo($resolver['route']);
 
         // set user env variabls
@@ -66,6 +69,7 @@ class UrlRule extends \luya\web\UrlRule
         if (count($urlParts) > 0 && !array_key_exists($urlParts[0], Yii::$app->modules)) {
             if (class_exists($this->getDefaultClassName())) {
                 $manager->addRules([['class' => $this->getDefaultClassName()]], false);
+                Yii::info("If there are url parts and its not a module, load the default route based UrlRule if the class '".$this->getDefaultClassName()."' exstists.", __METHOD__);
                 return $manager->parseRequest($request);
             }
         }

@@ -2,6 +2,8 @@
 
 namespace luya\traits;
 
+use Yii;
+
 /**
  * @property string $webroot returns the webroot directory event for console commands.
  * @property \luya\components\Mail $mail Get luya mail component
@@ -39,6 +41,17 @@ trait Application
      * in the console mode, cause some importer classes need those variables.
      */
     public $webrootDirectory = 'public_html';
+    
+    /**
+     * Add trace info to luya application trait
+     */
+    public function init()
+    {
+        // call parent
+        parent::init();
+        // add trace info
+        Yii::trace('LUYA Application starts here', __METHOD__);
+    }
     
     /**
      * Read only property which is used in cli bootstrap process to set the @webroot alias

@@ -24,10 +24,17 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
      */
     public function bootstrap($app)
     {
+        // add trace
+        Yii::beginProfile('LUYA Boostrap process profiling', __METHOD__);
+        
         $this->extractModules($app);
         $this->beforeRun($app);
         $this->registerComponents($app);
         $this->run($app);
+        
+        // end trace
+        Yii::trace('End of the LUYA bootstraping process', __METHOD__);
+        Yii::endProfile('LUYA Boostrap process profiling');
     }
 
     /**
