@@ -21,11 +21,6 @@ abstract class Property extends \yii\base\Component
 
     public $value = null;
 
-    public function find()
-    {
-        $this->trigger(self::EVENT_BEFORE_FIND);
-    }
-
     abstract public function varName();
 
     abstract public function label();
@@ -40,6 +35,11 @@ abstract class Property extends \yii\base\Component
     public function defaultValue()
     {
         return false;
+    }
+    
+    public function getValue()
+    {
+        return $this->value;
     }
 
     public function install()

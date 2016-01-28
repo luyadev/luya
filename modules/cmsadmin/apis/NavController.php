@@ -7,6 +7,7 @@ use Yii;
 use cmsadmin\models\Property;
 use cmsadmin\models\Nav;
 use cmsadmin\models\NavItem;
+use yii\helpers\Json;
 
 /**
  * example.com/admin/api-cms-nav/create-page
@@ -32,9 +33,14 @@ class NavController extends \admin\base\RestController
     {
         $data = [];
         foreach (Property::find()->select(['admin_prop_id', 'value'])->where(['nav_id' => $navId])->asArray()->all() as $row) {
-            if (is_numeric($row['value'])) {
-                $row['value'] = (int) $row['value'];
-            }
+            
+            $object = \admin\models\Property::findOne($row['admin_prop_id']);
+            $blockObject = $object->createObject($row['value']);
+            
+            $value = $blockObject->getValue();
+            
+            $row['value'] = (is_numeric($value)) ? (int) $value : $value;
+             
             $data[] = $row;
         }
 
@@ -48,7 +54,7 @@ class NavController extends \admin\base\RestController
             $rows[] = [
                 'nav_id' => $navId,
                 'admin_prop_id' => $id,
-                'value' => $value,
+                'value' => (is_array($value)) ? Json::encode($value) : $value,
             ];
         }
 
