@@ -22,6 +22,7 @@ class ImageTextBlock extends \cmsadmin\base\Block
     {
         if ($this->_parser === null) {
             $this->_parser = new GithubMarkdown();
+            $this->_parser->enableNewlines = true;
         }
 
         return $this->_parser;
@@ -92,8 +93,6 @@ class ImageTextBlock extends \cmsadmin\base\Block
         $text = $this->getVarValue('text');
 
         if ($this->getCfgValue('textType')) {
-            // convert line breaks into two spaces
-            $text = str_replace("\n", "\r\r ", $text);
             $text = $this->getParser()->parse($text);
         }
 
