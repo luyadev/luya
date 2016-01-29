@@ -444,8 +444,8 @@ $this->beginPage()
             <thead>
             <tr>
                 <th></th>
-                <th><?= Luya::t('admin', 'layout_btn_reload'); ?>Name</th>
-                <th><?= Luya::t('admin', 'layout_btn_reload'); ?>E-Mail</th>
+                <th><?= Luya::t('admin', 'layout_useronline_name'); ?></th>
+                <th><?= Luya::t('admin', 'layout_useronline_mail'); ?></th>
                 <td></td>
             </tr>
             </thead>
@@ -459,7 +459,7 @@ $this->beginPage()
                 <td>{{row.email}}</td>
                 <td>
                     <small ng-hide="row.is_active">
-                        <b><?= Luya::t('admin', 'layout_btn_reload'); ?>Inaktiv seit</b><br />
+                        <b><?= Luya::t('admin', 'layout_useronline_inactivesince'); ?></b><br />
                         {{row.inactive_since}}
                     </small>
                 </td>
