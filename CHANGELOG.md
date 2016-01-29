@@ -10,6 +10,7 @@ LUYA CHANGELOG
 
 - `#747` Fixed wording bug in useronline panel of admin layout.
 - `#748` Added new ngrest plugin for checkbox list arrays `checkboxList(['key' => 'value'])`.
+- `#744` Added checkbox list plugin for ngrest to create checkbox element based on an array with key value pairing.
 - `#735` Fixed clean deleting of cms placeholder blocks (i.e. layout block) and all attached sub blocks
 - `#733` Fixed missing sub cms blocks when using copy cms block function
 - `#725` Fixed missing content in layout cms blocks after page copy

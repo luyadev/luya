@@ -5,6 +5,12 @@ namespace admin\ngrest\plugins;
 use admin\ngrest\base\Plugin;
 use yii\helpers\Json;
 
+/**
+ * Createa checkbox list with selection based on an array with key value pairing.
+ * 
+ * @author nadar
+ * @since 1.0.0-beta
+ */
 class CheckboxList extends Plugin
 {
     public $items = [];
