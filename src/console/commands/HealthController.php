@@ -43,6 +43,9 @@ class HealthController extends \luya\console\Command
                     $this->outputError("$folder: unable to create directory");
                 }
             } else {
+            	if (!is_writable($folder) && $writable) {
+            		@chmod($folder, $mode);
+            	}
                 $this->outputSuccess("$folder: directory exists");
             }
 
