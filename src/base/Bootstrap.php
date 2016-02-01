@@ -94,6 +94,7 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
             if (method_exists($module, 'registerComponents')) {
                 foreach ($module->registerComponents() as $componentId => $definition) {
                     if (!$app->has($componentId)) {
+                        Yii::trace('Register component ' . $componentId, __METHOD__);
                         $app->set($componentId, $definition);
                     }
                 }

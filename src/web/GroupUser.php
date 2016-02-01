@@ -116,7 +116,7 @@ class GroupUser extends \yii\web\User
         if (!$this->isGuest) {
             $groups = (array) $alias;
             foreach ($groups as $groupAlias) {
-                if (in_array($groupAlias, $identity->authgroups)) {
+                if (in_array($groupAlias, $identity->authGroups())) {
                     return true;
                 }
             }
