@@ -11,10 +11,21 @@ class GroupAuthProperty extends \admin\base\Property
     {
         // parent initializer
         parent::init();
-        
-        // check if the current menu item does have this group
-        //var_dump($this->getValue());
-        
+        // atache before render to stop render if not in group
+        $this->on(self::EVENT_BEFORE_RENDER, [$this, 'eventBeforeRender']);
+    }
+    
+    public function eventBeforeRender($event)
+    {
+        if ($this->requiresAuth()) {
+            $event->isValid = false;
+            foreach (Yii::$app->getModule('frontendgroup')->frontendUsers as $userComponent) {
+                $user = Yii::$app->get($userComponent);
+                if (!$user->isGuest && $user->inGroup($this->getGroups())) {
+                    $event->isValid = true;
+                }
+            }
+        }
     }
     
     public function varName()

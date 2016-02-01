@@ -17,7 +17,7 @@ After adding to your composer json you have to include the frontendgroup module 
 ```php
 'modules' => [
     // ...
-    frontendgroup' => [
+    'frontendgroup' => [
         'class' => 'frontendgroup\Module',
         'frontendUsers' => [
             'user1', 'user2', 'user3',
@@ -75,4 +75,4 @@ class User1 extends \yii\db\ActiveRecord implements GroupUserIdentityInterface
 }
 ```
 
-The the above user class of `User1` is now allowed to access all pages which are defined for `groupA' and `groupB`.
+The the above user class of `User1` is now allowed to access all pages which are defined for `groupA` and `groupB`.

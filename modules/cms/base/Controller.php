@@ -6,6 +6,7 @@ use Yii;
 use cms\helpers\Parser;
 use cmsadmin\models\NavItem;
 use yii\web\NotFoundHttpException;
+use yii\web\MethodNotAllowedHttpException;
 
 abstract class Controller extends \luya\web\Controller
 {
@@ -35,7 +36,8 @@ abstract class Controller extends \luya\web\Controller
             $object = $model->getNav()->getProperty($property['var_name']);
             $object->trigger($object::EVENT_BEFORE_RENDER, $event);
             if (!$event->isValid) {
-                Yii::$app->end();
+                throw new MethodNotAllowedHttpException('Your are not allowed to see this page.');
+                return Yii::$app->end();
             }
         }
 
