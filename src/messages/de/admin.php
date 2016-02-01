@@ -161,7 +161,7 @@ return [
     // aws/gallery
     'aws_gallery_empty' => 'Sie haben noch keine Bilder für diese Album ausgewählt. Klicken Sie im Dateimanager (links) auf die gewünschten Bilder, welche Sie in das Album hinzufügen möchten.',
     'aws_gallery_images' => 'Album Bilder',
-	'layout_useronline_name' => 'Name',
-	'layout_useronline_mail' => 'E-Mail',
-	'layout_useronline_inactivesince' => 'Inaktiv seit',
+    'layout_useronline_name' => 'Name',
+    'layout_useronline_mail' => 'E-Mail',
+    'layout_useronline_inactivesince' => 'Inaktiv seit',
 ];

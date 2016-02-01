@@ -161,8 +161,8 @@ return [
     // aws/gallery
     'aws_gallery_empty' => 'Please select some images on the left to add them into the gallery album.',
     'aws_gallery_images' => 'Album images',
-	'layout_useronline_name' => 'Name',
-	'layout_useronline_mail' => 'E-Mail',
-	'layout_useronline_inactivesince' => 'Inactive since',
+    'layout_useronline_name' => 'Name',
+    'layout_useronline_mail' => 'E-Mail',
+    'layout_useronline_inactivesince' => 'Inactive since',
 
 ];

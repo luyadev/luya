@@ -100,28 +100,28 @@ use yii\base\InvalidConfigException;
  */
 class GroupUser extends \yii\web\User
 {
-	/**
-	 * Checks whether a user exists for the provided group based on the GroupUserIdentityInterface implementation
-	 * 
-	 * @param string|array $alias
-	 */
-	public function inGroup($alias)
-	{
-		$identity = $this->identity;
-		
-		if (!$identity instanceof GroupUserIdentityInterface) {
-			throw new InvalidConfigException("The group user must be instance of GroupUserIdentityInterface.");
-		}
-		
-		if (!$this->isGuest) {
-			$groups = (array) $alias;
-			foreach ($groups as $groupAlias) {
-				if (in_array($groupAlias, $identity->authgroups)) {
-					return true;
-				}
-			}
-		}
-		
-		return false;
-	}
+    /**
+     * Checks whether a user exists for the provided group based on the GroupUserIdentityInterface implementation
+     * 
+     * @param string|array $alias
+     */
+    public function inGroup($alias)
+    {
+        $identity = $this->identity;
+        
+        if (!$identity instanceof GroupUserIdentityInterface) {
+            throw new InvalidConfigException("The group user must be instance of GroupUserIdentityInterface.");
+        }
+        
+        if (!$this->isGuest) {
+            $groups = (array) $alias;
+            foreach ($groups as $groupAlias) {
+                if (in_array($groupAlias, $identity->authgroups)) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
 }
