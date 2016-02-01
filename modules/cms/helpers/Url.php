@@ -3,7 +3,7 @@
 namespace cms\helpers;
 
 use Yii;
-use Exception;
+use luya\Exception;
 use cmsadmin\models\NavItem;
 
 class Url

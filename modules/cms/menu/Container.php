@@ -90,6 +90,8 @@ class Container extends \yii\base\Component implements ArrayAccess
     
     public $cachePrefix = 'MenuContainerCache';
     
+    private $_currentUrlRule = null;
+    
     private $_composition = null;
 
     private $_current = null;
@@ -113,6 +115,16 @@ class Container extends \yii\base\Component implements ArrayAccess
     {
         $this->request = $request;
         parent::__construct($config);
+    }
+    
+    public function setCurrentUrlRule(array $rule)
+    {
+        $this->_currentUrlRule = $rule;
+    }
+    
+    public function getCurrentUrlRule()
+    {
+        return $this->_currentUrlRule;
     }
     
     /**

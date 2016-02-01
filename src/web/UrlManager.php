@@ -31,7 +31,7 @@ class UrlManager extends \yii\web\UrlManager
     public function parseRequest($request)
     {
         // extra data from request to composition, which changes the pathInfo of the Request-Object.
-        $resolver = Yii::$app->composition->getResolvedPathInfo($request);
+        $resolver = $this->composition->getResolvedPathInfo($request);
         
         $request->setPathInfo($resolver['route']);
         
@@ -115,21 +115,22 @@ class UrlManager extends \yii\web\UrlManager
         $response = $this->internalCreateUrl($params);
 
         if ($this->contextNavItemId) {
-            return $this->urlReplaceModule($response, $this->contextNavItemId);
+            return $this->urlReplaceModule($response, $this->contextNavItemId, $this->composition);
         }
 
         return $response;
     }
 
-    public function createMenuItemUrl($params, $navItemId)
+    public function createMenuItemUrl($params, $navItemId, $composition = null)
     {
-        $url = $this->internalCreateUrl($params);
+        $composition = (empty($composition)) ? $this->composition : $composition;
+        $url = $this->internalCreateUrl($params, $composition);
 
         if (!$this->menu) {
             return $url;
         }
 
-        return $this->urlReplaceModule($url, $navItemId);
+        return $this->urlReplaceModule($url, $navItemId, $composition);
     }
 
     private function findModuleInRoute($route)
@@ -145,18 +146,19 @@ class UrlManager extends \yii\web\UrlManager
         return false;
     }
 
-    private function urlReplaceModule($url, $navItemId)
+    private function urlReplaceModule($url, $navItemId, \luya\web\Composition $composition)
     {
         $route = $this->removeBaseUrl($url);
-        $route = $this->composition->removeFrom($route);
+        $route = $composition->removeFrom($route);
         $module = $this->findModuleInRoute($route);
 
         if (!$module) {
             return $url;
         }
-
-        $item = $this->menu->find()->where(['id' => $navItemId])->with('hidden')->one();
-
+        
+        
+        $item = $this->menu->find()->where(['id' => $navItemId])->with('hidden')->lang($composition['langShortCode'])->one();
+        
         if (!$item) {
             throw new BadRequestHttpException("Unable to find nav_item_id '$navItemId' to generate the module link for url '$url'.");
         }
@@ -166,11 +168,13 @@ class UrlManager extends \yii\web\UrlManager
         return $replaceRoute;
     }
 
-    public function internalCreateUrl($params)
+    public function internalCreateUrl($params, $composition = null)
     {
+        $composition = (empty($composition)) ? $this->composition : $composition;
+        
         $originalParams = $params;
         // creata parameter where route contains a composition
-        $params[0] = $this->composition->prependTo($params[0]);
+        $params[0] = $composition->prependTo($params[0]);
 
         $response = parent::createUrl($params);
 
@@ -181,7 +185,7 @@ class UrlManager extends \yii\web\UrlManager
         }
 
         $response = $this->removeBaseUrl($response);
-        $response = $this->composition->prependTo($response);
+        $response = $composition->prependTo($response);
 
         return $this->prependBaseUrl($response);
     }

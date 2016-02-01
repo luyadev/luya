@@ -4,6 +4,7 @@ namespace cms\widgets;
 
 use Yii;
 use admin\models\Lang;
+use luya\web\Composition;
 
 class LanguageSwitcher extends \luya\base\Widget
 {
@@ -14,18 +15,35 @@ class LanguageSwitcher extends \luya\base\Widget
         // Get current link
         $current = Yii::$app->menu->current;
         
-        $appendix = Yii::$app->menu->currentAppendix;
+        $rule = Yii::$app->menu->currentUrlRule;
         
         $items = [];
         
+        
         // Loop through all languages
-        foreach(Lang::find()->asArray()->all() as $lang) {
+        foreach (Lang::find()->asArray()->all() as $lang) {
             // Find item of current link with the lang
             $item = Yii::$app->menu->find()->where(['nav_id' => $current->navId])->lang($lang['short_code'])->with('hidden')->one();
         
             if ($item) {
+                
+                $link = $item->link;
+                
+                if ($item->type == 2) {
+                    
+                    $routeParams = [$rule['route']];
+                    
+                    foreach ($rule['params'] as $key => $value) {
+                        $routeParams[$key] = $value;
+                    }
+                    
+                    $compositionObject = Yii::createObject(Composition::className());
+                    $compositionObject['langShortCode'] = $lang['short_code'];
+                    $link = Yii::$app->urlManager->createMenuItemUrl($routeParams, $item->id, $compositionObject);
+                }
+                
                 $items[] = [
-                    'href' => $item->link,
+                    'href' => $link,
                     'isCurrent' => $currentLang == $lang['short_code'],
                     'language' => $lang,
                 ];

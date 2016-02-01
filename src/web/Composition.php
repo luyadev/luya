@@ -276,6 +276,12 @@ class Composition extends \yii\base\Component implements \ArrayAccess
         return $prepend.$prefix.'/'.ltrim($route, '/');
     }
 
+    /**
+     * Remove the composition full parterns from a given route
+     * 
+     * @param string $route
+     * @return string route cleanup from the compositon pattern (without).
+     */
     public function removeFrom($route)
     {
         $pattern = preg_quote($this->getFull().'/');

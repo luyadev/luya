@@ -57,6 +57,10 @@ class NavItemModule extends \cmsadmin\base\NavItemType
         $reflection = \luya\helpers\ModuleHelper::reflectionObject($module);
         $reflection->suffix = $this->getOption('restString');
 
-        return $reflection->run();
+        $response = $reflection->run();
+        
+        Yii::$app->menu->setCurrentUrlRule($reflection->getUrlRule());
+        
+        return $response;
     }
 }
