@@ -8,6 +8,7 @@ LUYA CHANGELOG
 
 **ISSUES**
 
+- `#750` Fixed bug where module block object returns yii\web\Response instead of string.
 - `#747` Fixed wording bug in useronline panel of admin layout.
 - `#748` Added new ngrest plugin for checkbox list arrays `checkboxList(['key' => 'value'])`.
 - `#744` Added checkbox list plugin for ngrest to create checkbox element based on an array with key value pairing.

@@ -6,6 +6,7 @@ use Yii;
 use cms\Exception;
 use cmsadmin\Module;
 use luya\helpers\ModuleHelper;
+use yii\web\Response;
 
 class ModuleBlock extends \cmsadmin\base\Block
 {
@@ -103,7 +104,14 @@ class ModuleBlock extends \cmsadmin\base\Block
                 $reflection->defaultRoute($ctrl, $action, $actionArgs);
             }
     
-            return $reflection->run();
+            $response = $reflection->run();
+            
+            if ($response instanceof Response) {
+                return Yii::$app->end(0, $response);
+            }
+            
+            return $response;
+            
         } catch (\Exception $err) {
             throw new Exception('Module Block Exception: ' . $err->getMessage());
         }
