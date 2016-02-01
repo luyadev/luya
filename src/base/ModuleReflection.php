@@ -2,6 +2,7 @@
 
 namespace luya\base;
 
+use Yii;
 use Exception;
 use yii\base\InvalidConfigException;
 
@@ -67,7 +68,16 @@ class ModuleReflection extends \yii\base\Object
         $array['route'] = $this->module->resolveRoute($array['route']);
         // overload args if none defined with massiv get assigment
         if (count($array['args']) === 0) {
-            $array['args'] = $this->request->get();
+            /**
+             * issue: https://github.com/zephir/luya/issues/754
+             * 
+             * 01.02.2016: we have to remove the get param overloading, otherwhise we can not guarnte
+             * to re generate the current url rule. Have to verify why in which case this was needed.
+             * 
+             * original: $array['args'] = $this->request->get();
+             * new: do not overload: $array['args'] = [];
+             */
+            $array['args'] = [];
         }
 
         return $array;
@@ -78,6 +88,17 @@ class ModuleReflection extends \yii\base\Object
         $this->_defaultRoute = [
             'route' => implode('/', [$this->module->id, $controller, (empty($action)) ? 'index' : $action]),
             'args' => $args,
+        ];
+    }
+    
+    public function getUrlRule()
+    {
+        $request = $this->getRequestRoute();
+        
+        return [
+            'module' => $this->module->id,
+            'route' => $this->module->id . '/' . $request['route'],
+            'params' => $request['args'],
         ];
     }
 
@@ -95,6 +116,9 @@ class ModuleReflection extends \yii\base\Object
         if (!isset($controller[0]) && !is_object($controller[0])) {
             throw new InvalidConfigException(sprintf("Unable to create controller '%s' for module '%s'.", $requestRoute['route'], $this->module->id));
         }
+        
+        Yii::info('LUYA module run module "'.$this->module->id.'" route ' . $requestRoute['route'], __METHOD__);
+        
         // run the action on the provided controller object
         return $controller[0]->runAction($controller[1], $requestRoute['args']);
     }
