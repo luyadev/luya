@@ -4,6 +4,7 @@ namespace luya\console\commands;
 
 use Yii;
 use yii\helpers\FileHelper;
+use yii\helpers\Console;
 
 class HealthController extends \luya\console\Command
 {
@@ -31,8 +32,12 @@ class HealthController extends \luya\console\Command
     {
         $error = false;
 
+        Console::clearScreenBeforeCursor();
+        
         @chdir(Yii::getAlias('@app'));
 
+        $this->output('The directory the health commands is applying to: ' . Yii::getAlias('@app'));
+        
         foreach ($this->folders as $folder => $writable) {
             if (!file_exists($folder)) {
                 $mode = ($writable) ? 0777 : 0775;
@@ -43,10 +48,12 @@ class HealthController extends \luya\console\Command
                     $this->outputError("$folder: unable to create directory");
                 }
             } else {
-            	if (!is_writable($folder) && $writable) {
-            		@chmod($folder, $mode);
-            	}
-                $this->outputSuccess("$folder: directory exists");
+                $this->outputInfo("$folder: directory exists already");
+            }
+            
+            if ($writable && !is_writable($folder)) {
+                $this->outputInfo("$folder: is not writeable, try to set mode '$mode'.");
+                @chmod($folder, $mode);
             }
 
             if ($writable) {
@@ -59,7 +66,7 @@ class HealthController extends \luya\console\Command
 
         foreach ($this->files as $file) {
             if (file_exists($file)) {
-                $this->outputSuccess("$file: file exists.");
+                $this->outputInfo("$file: file exists.");
             } else {
                 $error = true;
                 $this->outputError("$file: file does not exists!");

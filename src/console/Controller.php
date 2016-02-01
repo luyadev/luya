@@ -45,7 +45,6 @@ abstract class Controller extends \yii\console\Controller
      * Helper method to stop the console command with an error message, outputError returns exit code 1.
      *
      * @param string $message The message which should be displayed.
-     *
      * @return number Exit code 1
      */
     public function outputError($message)
@@ -59,13 +58,27 @@ abstract class Controller extends \yii\console\Controller
      * Helper method to stop the console command with a success message, outputSuccess returns exit code 0.
      *
      * @param string $message The message which sould be displayed
-     *
      * @return number Exit code 0
      */
     public function outputSuccess($message)
     {
         $this->output($message, Console::FG_GREEN);
 
+        return 0;
+    }
+    
+    /**
+     * Helper method to stop the console command with a info message which is threated in case of returns as success
+     * but does have a different output color (blue). outputInfo returns exit code 0.
+     * 
+     * @param string $message The message which sould be displayed.
+     * @return number Exit code 0
+     * @since 1.0.0-beta5
+     */
+    public function outputInfo($message)
+    {
+        $this->output($message, Console::FG_CYAN);
+        
         return 0;
     }
 }
