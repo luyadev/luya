@@ -2,7 +2,7 @@
 	"name" : "zephir/luya-module-newsadmin",
 	"description" : "Zephir Luya News Admin-Module",
 	"type" : "luya-module",
-	"keywords" : ["php", "luya", "module", "news", "newsadmin"],
+	"keywords" : ["php", "luya", "module", "news", "newsadmin", "yii2", "yii"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
 	"authors" : [

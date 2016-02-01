@@ -2,7 +2,7 @@
     "name" : "zephir/luya-module-exporter",
     "description" : "Zephir Luya Exporter Module",
     "type" : "luya-module",
-    "keywords" : ["php", "luya", "module", "export", "storage", "sql", "download", "preproduction", "dev"],
+    "keywords" : ["php", "luya", "module", "export", "storage", "sql", "download", "preproduction", "dev", "yii2", "yii"],
     "license": "MIT",
     "homepage" : "http://luya.io",
     "authors" : [

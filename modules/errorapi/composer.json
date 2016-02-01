@@ -2,7 +2,7 @@
 	"name" : "zephir/luya-module-errorapi",
 	"description" : "Zephir Luya Error Api",
 	"type" : "luya-module",
-	"keywords" : ["php", "luya", "module", "errorapi"],
+	"keywords" : ["php", "luya", "module", "errorapi", "yii2", "yii"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
 	"authors" : [

@@ -2,7 +2,7 @@
 	"name" : "zephir/luya-module-remoteadmin",
 	"description" : "Zephir Luya Remote Admin-Module",
 	"type" : "luya-module",
-	"keywords" : ["php", "luya", "module", "remote", "remoteadmin"],
+	"keywords" : ["php", "luya", "module", "remote", "remoteadmin", "yii2", "yii"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
 	"authors" : [

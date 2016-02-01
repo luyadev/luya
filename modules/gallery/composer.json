@@ -2,7 +2,7 @@
 	"name" : "zephir/luya-module-gallery",
 	"description" : "Zephir Luya Gallery Module",
 	"type" : "luya-module",
-	"keywords" : ["php", "luya", "module", "gallery"],
+	"keywords" : ["php", "luya", "module", "gallery", "yii2", "yii"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
 	"authors" : [

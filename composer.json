@@ -2,7 +2,7 @@
 	"name" : "zephir/luya",
 	"description" : "The programmatic CMS based on the Yii2 Framework. http://luya.io",
 	"type" : "project",
-	"keywords" : ["php", "yii2", "cms", "luya", "programmatic", "content", "angular", "modular"],
+	"keywords" : ["php", "yii2", "cms", "luya", "programmatic", "content", "angular", "modular", "yii2-wrapper"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
 	"authors" : [

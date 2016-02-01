@@ -2,7 +2,7 @@
 	"name" : "zephir/luya-module-styleguide",
 	"description" : "Zephir Luya Styleguide",
 	"type" : "luya-module",
-	"keywords" : ["php", "luya", "module", "styleguide"],
+	"keywords" : ["php", "luya", "module", "styleguide", "yii2", "yii"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
 	"authors" : [

@@ -2,7 +2,7 @@
 	"name" : "zephir/luya-module-account",
 	"description" : "Zephir Luya User Account",
 	"type" : "luya-module",
-	"keywords" : ["php", "luya", "module", "account"],
+	"keywords" : ["php", "luya", "module", "account", "yii2", "yii"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
 	"authors" : [

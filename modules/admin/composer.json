@@ -2,7 +2,7 @@
 	"name" : "zephir/luya-module-admin",
 	"description" : "Zephir Luya Admin",
 	"type" : "luya-module",
-	"keywords" : ["php", "luya", "module", "admin"],
+	"keywords" : ["php", "luya", "module", "admin", "yii2", "yii", "administration", "angular", "ngrest", "manage", "panel"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
 	"authors" : [

@@ -2,7 +2,7 @@
 	"name" : "zephir/luya-module-news",
 	"description" : "Zephir Luya News",
 	"type" : "luya-module",
-	"keywords" : ["php", "luya", "module", "news"],
+	"keywords" : ["php", "luya", "module", "news", "yii2", "yii"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
 	"authors" : [
