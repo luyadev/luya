@@ -97,10 +97,10 @@ trait CacheableTrait
         if ($this->isCachable()) {
             $data = Yii::$app->cache->get($key);
             if ($data) {
-                Yii::info("Cacheable trait key '$key' loaded from cache.", "luya");
+                Yii::info("Cacheable trait key '$key' loaded from cache.", __METHOD__);
                 return $data;
             }
-            Yii::info("Cacheable trait key '$key' NOT loaded.", "luya");
+            Yii::info("Cacheable trait key '$key' NOT loaded.", __METHOD__);
         }
     
         return false;
