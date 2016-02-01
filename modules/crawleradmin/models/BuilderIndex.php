@@ -4,7 +4,7 @@ namespace crawleradmin\models;
 
 use crawleradmin\Module;
 
-class Builderindex extends \admin\ngrest\base\Model
+class BuilderIndex extends \admin\ngrest\base\Model
 {
     public function init()
     {

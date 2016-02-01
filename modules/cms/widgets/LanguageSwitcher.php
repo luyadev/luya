@@ -26,11 +26,9 @@ class LanguageSwitcher extends \luya\base\Widget
             $item = Yii::$app->menu->find()->where(['nav_id' => $current->navId])->lang($lang['short_code'])->with('hidden')->one();
         
             if ($item) {
-                
                 $link = $item->link;
                 
                 if ($item->type == 2) {
-                    
                     $routeParams = [$rule['route']];
                     
                     foreach ($rule['params'] as $key => $value) {

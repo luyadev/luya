@@ -151,7 +151,7 @@ class Storage
     {
         $files = [];
         if (is_array($file['tmp_name'])) {
-            foreach($file['tmp_name'] as $index => $value) {
+            foreach ($file['tmp_name'] as $index => $value) {
                 $files[] = [
                     'name' => $file['name'][$index],
                     'type' => $file['type'][$index],

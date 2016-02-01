@@ -18,12 +18,12 @@
     <th></th>
 </tr>
 </thead>
-<? $err = false; foreach($sites as $site): ?>
+<?php $err = false; foreach ($sites as $site): ?>
     <tr>
         <td><?= $site['data']['id']; ?></td>
         <td><a href="<?= $site['data']['url']; ?>" target="_blank"><?= $site['data']['url']; ?></a></td>
         
-        <? if($site['remote']): ?>
+        <?php if ($site['remote']): ?>
             <td <?= $this->context->colorize($site['remote']['app_debug']); ?>><?= $this->context->textify($site['remote']['app_debug']); ?></td>
             <td <?= $this->context->colorize($site['remote']['app_transfer_exceptions']); ?>><?= $this->context->textify($site['remote']['app_transfer_exceptions']); ?></td>
             
@@ -40,15 +40,15 @@
                     </button>
                 </a>
             </td>
-        <? else: $err = true; ?>
+        <?php else: $err = true; ?>
             <td colspan="7"><div style="background-color:#FF8A80; padding:4px; color:white;">Die Remote-Seite konnte nicht erreicht werden. Fehler beim abrufen der Remote-Informationen.</div></td>
-        <? endif; ?>
+        <?php endif; ?>
     </tr>
-<? endforeach; ?>
+<?php endforeach; ?>
 </table>
 </div>
 
-<? if($err): ?>
+<?php if ($err): ?>
 <div class="card-panel red accent-1">
 <p>Wenn das abrufen der Remote-Seite einen Fehler ausgibt könnten diese folgende Ursachen haben:</p>
 <ul>
@@ -56,4 +56,4 @@
     <li>Die Seite verfügt nicht über das <b>Admin-Module</b>. Das Admin-Modul ist zwingend notwending um Remote-Informationen anzuzeigen.</li>
 </ul>
 </div>
-<? endif; ?>
+<?php endif; ?>

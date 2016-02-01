@@ -63,7 +63,6 @@ class Site extends \admin\ngrest\base\Model
         $data = Yii::$app->cache->get($url);
         
         if ($data === false) {
-            
             $curl = new \Curl\Curl();
             
             if ($this->auth_is_enabled) {

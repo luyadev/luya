@@ -23,7 +23,6 @@ class FileController extends \luya\web\Controller
             $model = StorageFile::findOne($fileData->id);
             // proceed when model exists
             if ($model && file_exists($fileSourcePath) && is_readable($fileSourcePath)) {
-                
                 $event = new FileDownloadEvent(['file' => $fileData]);
                 
                 Yii::$app->trigger(Module::EVENT_BEFORE_FILE_DOWNLOAD, $event);

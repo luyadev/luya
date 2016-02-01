@@ -17,7 +17,7 @@ class CheckboxList extends Plugin
     
     public function __construct(array $items)
     {
-        $this->items = $items;    
+        $this->items = $items;
     }
     
     public function renderList($doc)
@@ -78,8 +78,8 @@ class CheckboxList extends Plugin
     {
         $data = [];
         
-        foreach($this->items as $value => $label) {
-            $data[] = ['value' => $value, 'label' => $label];    
+        foreach ($this->items as $value => $label) {
+            $data[] = ['value' => $value, 'label' => $label];
         }
         
         return ['items' => $data];

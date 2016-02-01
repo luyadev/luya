@@ -17,7 +17,7 @@ class StatusController extends \admin\base\Controller
     public function actionIndex()
     {
         $sites = [];
-        foreach(Site::find()->all() as $site) {
+        foreach (Site::find()->all() as $site) {
             $sites[] = [
                 'data' => $site->toArray(),
                 'remote' => $site->getRemote(),
@@ -29,7 +29,7 @@ class StatusController extends \admin\base\Controller
         $curl->get('https://packagist.org/packages/zephir/luya.json');
         $json = Json::decode($curl->response);
         
-        foreach($json['package']['versions'] as $version =>  $package) {
+        foreach ($json['package']['versions'] as $version =>  $package) {
             if ($version == 'dev-master') {
                 continue;
             }
@@ -40,7 +40,7 @@ class StatusController extends \admin\base\Controller
         
         return $this->renderPartial('index', [
             'sites' => $sites,
-            'currentVersion' => $this->current,    
+            'currentVersion' => $this->current,
         ]);
     }
     

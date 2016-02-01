@@ -15,5 +15,4 @@ class Module extends \admin\base\Module
         ->itemApi('Seiten', 'remoteadmin-site-index', 'cloud', 'api-remote-site')
         ->menu();
     }
-    
 }
