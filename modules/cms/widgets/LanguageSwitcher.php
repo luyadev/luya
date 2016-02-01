@@ -31,7 +31,7 @@ class LanguageSwitcher extends \luya\base\Widget
                 ];
             } else {
                 $items[] = [
-                    'href' => $lang['short_code'],
+                    'href' => Yii::$app->urlManager->prependBaseUrl($lang['short_code']),
                     'isCurrent' => $currentLang == $lang['short_code'],
                     'language' => $lang,
                 ];
@@ -39,7 +39,8 @@ class LanguageSwitcher extends \luya\base\Widget
         }
         
         return $this->render('index', [
-            'items' => $items
+            'items' => $items,
+            'currentLanguage' => Lang::find()->where(['short_code' => $currentLang])->asArray()->one(),
         ]);
     }
 }
