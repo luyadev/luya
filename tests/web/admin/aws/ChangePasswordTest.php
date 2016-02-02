@@ -2,6 +2,8 @@
 
 namespace tests\web\admin\aws;
 
+use Yii;
+
 class ChangePasswordTest extends \tests\web\Base
 {
     public $aws = null;
@@ -9,7 +11,7 @@ class ChangePasswordTest extends \tests\web\Base
     public function setUp()
     {
         parent::setUp();
-        $this->aws = new \admin\aws\ChangePassword();
+        $this->aws = Yii::createObject(['class' => 'admin\aws\ChangePassword', 'className' => 'admin\models\User']);
     }
 
     public function testIndex()
