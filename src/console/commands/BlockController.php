@@ -169,6 +169,21 @@ class BlockController extends \luya\console\Command
             $content .= PHP_EOL.'    public $module = \''.$module.'\';'.PHP_EOL.PHP_EOL;
         }
 
+        // properties for caching
+        $content .= '    /**'.PHP_EOL;
+        $content .= '     * @var bool Choose whether block is a layout/container/segmnet/section block or not, Container elements will be optically displayed'.PHP_EOL;
+        $content .= '     * in a different way for a better user experience. Container block will not display isDirty colorizing.'.PHP_EOL;
+        $content .= '     */'.PHP_EOL;
+        $content .= '    public $isContainer = false;'.PHP_EOL . PHP_EOL;
+        $content .= '    /**'.PHP_EOL;
+        $content .= '     * @var bool Choose whether a block can be cached trough the caching component. Be carefull with caching container blocks.'.PHP_EOL;
+        $content .= '     */'.PHP_EOL;
+        $content .= '    public $cacheEnabled = false;'.PHP_EOL . PHP_EOL;
+        $content .= '    /**'.PHP_EOL;
+        $content .= '     * @var int The cache lifetime for this block in seconds (3600 = 1 hour), only affects when cacheEnabled is true'.PHP_EOL;
+        $content .= '     */'.PHP_EOL;
+        $content .= '    public $cacheExpiration = 3600;'.PHP_EOL . PHP_EOL;
+        
         // method name
         $content .= '    public function name()'.PHP_EOL;
         $content .= '    {'.PHP_EOL;

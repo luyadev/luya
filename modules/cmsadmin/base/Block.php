@@ -27,26 +27,26 @@ abstract class Block extends \yii\base\Object implements BlockInterface
     public $cacheEnabled = false;
     
     /**
-     * @var int The cache lifetime for this block in seconds (3600 = 1 hour), only affects when cacheEnabled is true
+     * @var int The cache lifetime for this block in seconds (3600 = 1 hour), only affects when cacheEnabled is true. 0 means never expire.
      */
     public $cacheExpiration = 3600;
     
     /**
      * @var bool Choose whether block is a layout/container/segmnet/section block or not, Container elements will be optically displayed
-     *           in a different way for a better user experience. Container block will not display isDirty colorizing.
+     * in a different way for a better user experience. Container block will not display isDirty colorizing.
      */
     public $isContainer = false;
 
     /**
      * @var string Containing the name of the environment (used to find the view files to render). The
-     *             module(Name) can be started with the Yii::getAlias() prefix `@`, otherwhise the `@` will be 
-     *             added automatically.
+     * module(Name) can be started with the Yii::getAlias() prefix `@`, otherwhise the `@` will be 
+     * added automatically.
      */
     public $module = 'app';
 
     /**
      * @var array Define a list of assets to be insert in the frontend context. The assets will be ignored in
-     *            admin context. Example usage of assets property:
+     * admin context. Example usage of assets property:
      * 
      * ```php
      * public $assets = [
@@ -96,6 +96,9 @@ abstract class Block extends \yii\base\Object implements BlockInterface
         return Url::toAjax('cms/block/index', $params);
     }
 
+    /**
+     * Contains the icon
+     */
     public function icon()
     {
         return;
