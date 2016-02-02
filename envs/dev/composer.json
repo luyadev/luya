@@ -48,7 +48,8 @@
             "moduletest\\" : "modules/moduletest",
             "styleguide\\" : "../../modules/styleguide",
             "exporter\\" : "../../modules/exporter",
-            "frontendgroup\\" : "../../modules/frontendgroup"
+            "frontendgroup\\" : "../../modules/frontendgroup",
+            "remoteadmin\\" : "../../modules/remoteadmin"
         }
     }
 }
