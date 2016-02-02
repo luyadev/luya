@@ -8,6 +8,7 @@ LUYA CHANGELOG
 
 **ISSUES**
 
+- `#722` Fixed bug where search results have not been sticky after update submit.
 - `#711` Added information about cache and container in block wizzard.
 - `#745` Fixed bug where is_hidden state of file upload has not be assigned due to model validation error.
 - `#741` Added new frontendgroup module to catch permission depneding on the logged in users groups [see implentation docs](https://github.com/zephir/luya-module-frontendgroup).

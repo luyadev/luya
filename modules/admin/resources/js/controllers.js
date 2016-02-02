@@ -170,6 +170,10 @@
 			$scope.activeWindowModal = false;
 		};
 		
+		$scope.evalSearchString = function(e) {
+			$scope.searchString = e.searchString;
+		}
+		
 		$scope.highlightId = 0;
 		
 		$scope.isHighlighted = function(itemId) {
