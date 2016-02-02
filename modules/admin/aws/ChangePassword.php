@@ -2,13 +2,24 @@
 
 namespace admin\aws;
 
+use Yii;
 use admin\Module;
+use luya\Exception;
 
 class ChangePassword extends \admin\ngrest\base\ActiveWindow
 {
     public $module = 'admin';
 
     public $icon = 'vpn_key';
+    
+    /**
+     * @var string The name of the class should be used to change password
+     * 
+     * ```php
+     * $className = 'admin\models\User';
+     * ```
+     */
+    public $className = null;
     
     public function index()
     {
@@ -19,13 +30,22 @@ class ChangePassword extends \admin\ngrest\base\ActiveWindow
 
     public function callbackSave($newpass, $newpasswd)
     {
-        $model = new \admin\models\User();
-        $user = $model->findOne($this->getItemId());
-        $user->scenario = 'changepassword';
-        if ($user->changePassword($newpass, $newpasswd)) {
-            return $this->response(true, ['message' => Module::t('aws_changepassword_succes')]);
-        } else {
-            return $this->response(false, $user->getFirstErrors());
+        $object = Yii::createObject($this->className);
+        
+        if (!$object instanceof ChangePasswordInterface) {
+            throw new Exception('The password change class must be instance of ChangePasswordInterface');
         }
+        
+        $model = $object->findOne($this->getItemId());
+        
+        if ($model) {
+            if ($model->changePassword($newpass, $newpasswd)) {
+                return $this->sendSuccess(Module::t('aws_changepassword_succes'));
+            }
+            
+            return $this->sendError($model->getFirstErrors());
+        }
+        
+        return $this->sendError('Global Error');
     }
 }

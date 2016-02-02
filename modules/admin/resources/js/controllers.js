@@ -357,6 +357,7 @@
 		$scope.crud = $scope.$parent;
 		
 		$scope.init = function() {
+			$scope.errorMessage = [];
 			$scope.error = false;
 			$scope.submitted = false;
 			$scope.transport = [];
@@ -372,7 +373,10 @@
 			$scope.crud.sendActiveWindowCallback('save', {'newpass' : $scope.newpass, 'newpasswd' : $scope.newpasswd}).then(function(response) {
 				$scope.submitted = true;
 				$scope.error = response.data.error;
-				$scope.transport = response.data.transport;
+				$scope.transport = response.data.message;
+				if ($scope.error) {
+					$scope.errorMessage = response.data.message;
+				}
 			})
 		};
 	});

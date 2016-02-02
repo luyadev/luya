@@ -5,6 +5,7 @@ namespace admin\models;
 use Yii;
 use yii\web\IdentityInterface;
 use admin\models\UserLogin;
+use admin\aws\ChangePasswordInterface;
 
 /**
  * $salt = \Yii::$app->getSecurity()->generateRandomString();
@@ -12,7 +13,7 @@ use admin\models\UserLogin;
  *
  * @author nadar
  */
-class User extends \admin\ngrest\base\Model implements IdentityInterface
+class User extends \admin\ngrest\base\Model implements IdentityInterface, ChangePasswordInterface
 {
     use \admin\traits\SoftDeleteTrait;
 
@@ -32,8 +33,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface
     
     public function ngRestConfig($config)
     {
-        //$config->aw->register(new \admin\aws\ChangePassword(), ['icon' => 'vpn_key']);
-        $config->aw->load(['class' => 'admin\aws\ChangePassword']);
+        $config->aw->load(['class' => 'admin\aws\ChangePassword', 'className' => 'admin\models\User']);
         
         $config->create->field('title', 'Anrede')->selectArray(static::getTitles(), 0);
         $config->create->field('firstname', 'Vorname')->text();
