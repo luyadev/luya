@@ -49,16 +49,21 @@ class NavController extends \admin\base\RestController
     public function actionSaveProperties($navId)
     {
         $rows = [];
+        
+        $doNotDeleteList = [];
+        
         foreach (Yii::$app->request->post() as $id => $value) {
             $rows[] = [
                 'nav_id' => $navId,
                 'admin_prop_id' => $id,
                 'value' => (is_array($value)) ? Json::encode($value) : $value,
             ];
+
+            $doNotDeleteList[] = $id;
         }
 
         foreach ($rows as $atrs) {
-            $model = \cmsadmin\models\Property::find()->where(['admin_prop_id' => $atrs['admin_prop_id'], 'nav_id' => $navId])->one();
+            $model = Property::find()->where(['admin_prop_id' => $atrs['admin_prop_id'], 'nav_id' => $navId])->one();
 
             if ($model) {
                 if (empty($atrs['value']) && $atrs['value'] != 0) {
@@ -73,6 +78,10 @@ class NavController extends \admin\base\RestController
                 $model->attributes = $atrs;
                 $model->insert(false);
             }
+        }
+        
+        foreach (Property::find()->where(['nav_id' => $navId])->andWhere(['not in', 'admin_prop_id', $doNotDeleteList])->all() as $prop) {
+            $prop->delete(false);
         }
     }
 
