@@ -4,7 +4,7 @@ namespace remoteadmin;
 class Module extends \admin\base\Module
 {
     public $apis = [
-        'api-remote-site' => 'app\modules\remoteadmin\apis\SiteController',
+        'api-remote-site' => 'remoteadmin\apis\SiteController',
     ];
     
     public function getMenu()

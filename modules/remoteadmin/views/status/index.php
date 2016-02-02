@@ -1,19 +1,18 @@
 <div class="card-panel">
-<h3>Remote Seiten Übersicht</h3>
-<p>Alle Remote Daten werden für <strong>2 Minuten</strong> im cache gespeichert.</p>
-<p>Aktuelle Luya Version: <?= $currentVersion['version']; ?> <i>(release datum <?= $currentVersion['time']; ?>)</i></p>
+<h3>Remote Admin</h3>
+<p>All Remote-Date will be cached for <strong>2 minutes</strong>. You can us the reload button to flush the whole page cache.</p>
+<p>Current LUYA Version is <?= $currentVersion['version']; ?> <i>(release date <?= date("d.m.Y", strtotime($currentVersion['time'])); ?>)</i></p>
 <table class="bordered hoverable">
 <thead>
 <tr>
     <th>Id</th>
     <th>Url</th>
+    <th>Time *</th>
     <th>YII_DEBUG</th>
-    
-    <th>Sendet Fehler</th>
+    <th>Transfer Exceptions</th>
     <th>Admins Online</th>
     <th>YII_ENV</th>
-    
-    <th>Luya Version</th>
+    <th>LUYA Version</th>
     <th>Yii Version</th>
     <th></th>
 </tr>
@@ -24,6 +23,7 @@
         <td><a href="<?= $site['data']['url']; ?>" target="_blank"><?= $site['data']['url']; ?></a></td>
         
         <?php if ($site['remote']): ?>
+        	<td><?= round($site['remote']['app_elapsed_time'], 2); ?> seconds</td>
             <td <?= $this->context->colorize($site['remote']['app_debug']); ?>><?= $this->context->textify($site['remote']['app_debug']); ?></td>
             <td <?= $this->context->colorize($site['remote']['app_transfer_exceptions']); ?>><?= $this->context->textify($site['remote']['app_transfer_exceptions']); ?></td>
             
@@ -41,11 +41,12 @@
                 </a>
             </td>
         <?php else: $err = true; ?>
-            <td colspan="7"><div style="background-color:#FF8A80; padding:4px; color:white;">Die Remote-Seite konnte nicht erreicht werden. Fehler beim abrufen der Remote-Informationen.</div></td>
+            <td colspan="7"><div style="background-color:#FF8A80; padding:4px; color:white;">We are unable to retrieve dat from this Remote Page.</div></td>
         <?php endif; ?>
     </tr>
 <?php endforeach; ?>
 </table>
+<p><small>* Time: Returns the total elapsed time since the start of the request on the Remote application. Its the speed of the application, not the time elapsed to make the remote request.</small></p>
 </div>
 
 <?php if ($err): ?>
