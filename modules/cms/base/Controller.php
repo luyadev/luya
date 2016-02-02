@@ -7,6 +7,7 @@ use cms\helpers\Parser;
 use cmsadmin\models\NavItem;
 use yii\web\NotFoundHttpException;
 use yii\web\MethodNotAllowedHttpException;
+use yii\web\Response;
 
 abstract class Controller extends \luya\web\Controller
 {
@@ -49,6 +50,11 @@ abstract class Controller extends \luya\web\Controller
         ]);
 
         $content = $typeModel->getContent();
+        
+        if ($content instanceof Response) {
+            return Yii::$app->end(0, $content);
+        }
+        
 
         if ($this->view->title === null) {
             $this->view->title = $model->title;
