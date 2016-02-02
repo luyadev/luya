@@ -29,6 +29,7 @@ class RemoteController extends \luya\rest\Controller
             'app_env' => YII_ENV,
             'app_transfer_exceptions' => (int) Yii::$app->errorHandler->transferException,
             'admin_online_count' => UserOnline::getCount(),
+            'app_elapsed_time' => Yii::getLogger()->getElapsedTime(),
         ];
     }
 }
