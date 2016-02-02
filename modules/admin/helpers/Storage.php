@@ -203,7 +203,7 @@ class Storage
     {
         $files = [];
         foreach ($filesArray as $fileArrayKey => $file) {
-            array_merge($files, self::extractFilesDataFromFilesArray($file));
+            $files = array_merge($files, self::extractFilesDataFromFilesArray($file));
         }
         
         foreach ($files as $file) {
