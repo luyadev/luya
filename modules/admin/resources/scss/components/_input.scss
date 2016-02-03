@@ -40,7 +40,7 @@ $input--date-width:			50px;
 		height: auto;
 
 		&:before {
-			margin-left: $input__label-width;
+			margin-left: $input__label-width + 5px;
 			border-color: $input--label-color;
 			top: 50%;
 			margin-top: -9px;

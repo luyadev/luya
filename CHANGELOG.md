@@ -8,6 +8,8 @@ LUYA CHANGELOG
 
 **ISSUES**
 
+
+- `#717` Updated styles for input--single-checkbox.
 - `#734` Added remoteadmin module to public modules.
 - `#722` Fixed bug where search results have not been sticky after update submit.
 - `#711` Added information about cache and container in block wizzard.
