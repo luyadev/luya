@@ -88,18 +88,24 @@ input[type="checkbox"]:checked + .input__label:before {
 }	
 
 .input__field-wrapper {
-	padding: 5px;
+	padding: 5px 0;
 	position: relative;
 	display: inline-block;
-	width: calc(100% - #{$input__label-width});
+	width: 100%;
 	vertical-align: middle;
 	font-size: $input-font-size;
 	line-height: $input-font-size;
+
+	.input__label + & {
+		width: calc(100% - #{$input__label-width});
+		padding: 5px;
+	}
 
 	.input--vertical & {
 		display: block;
 		width: 100%;
 		text-align: left;
+		padding: 5px 0;
 	}
 
 	.input--hide-label & {

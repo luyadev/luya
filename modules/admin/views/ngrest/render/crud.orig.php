@@ -53,7 +53,7 @@
             
             
             <div style="margin-bottom:30px;">
-                <div class="input input--vertical input--text">
+                <div class="input input--text">
                     <div class="input__field-wrapper">
                         <input class="input__field" id="searchString" ng-model="searchString" ng-change="evalSearchString()" type="text" placeholder="<?= \admin\Module::t('ngrest_crud_search_text'); ?>" />
                     </div>

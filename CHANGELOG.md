@@ -9,6 +9,7 @@ LUYA CHANGELOG
 **ISSUES**
 
 
+- `#756` Updated styles for input--vertical. Updated aws change password view.
 - `#717` Updated styles for input--single-checkbox.
 - `#734` Added remoteadmin module to public modules.
 - `#722` Fixed bug where search results have not been sticky after update submit.
