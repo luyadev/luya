@@ -169,5 +169,35 @@ zaa.factory("ServiceLayoutsData", function($http, $q, $rootScope) {
 	return service;
 });
 
+
+/*
+ * CMS LIVE EDIT SERIVCE
+ * 
+ * $scope.liveEditMode = ServiceLiveEditMode.state
+ */
+zaa.factory("ServiceLiveEditMode", function($rootScope) {
+	
+	var service = [];
+	
+	service.state = false;
+	
+	service.url = null;
+	
+	service.toggle = function() {
+		service.state = !service.state;
+	}
+	
+	service.setUrl = function(itemId) {
+		service.url = homeUrl  + 'preview/' + itemId;
+	};
+	
+	service.changeUrl = function(itemId) {
+		service.setUrl(itemId);
+		$rootScope.$broadcast('service:LiveEditModeUrlChange', service.url);
+	}
+	
+	return service;
+});
+
 // end of use strict
 })();

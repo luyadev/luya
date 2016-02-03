@@ -15,6 +15,7 @@ class DefaultController extends \admin\base\Controller
     {
         // register auth token
         $this->view->registerJs("var authToken='".Yii::$app->adminuser->identity->authToken ."';", \luya\web\View::POS_HEAD);
+        $this->view->registerJs("var homeUrl='".Url::home(true)."';", \luya\web\View::POS_HEAD);
         // register admin js translations from module
         $this->view->registerJs('var i18n=' . Json::encode($this->module->jsTranslations), \luya\web\View::POS_HEAD);
         // return and render index view file

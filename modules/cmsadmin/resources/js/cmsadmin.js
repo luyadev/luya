@@ -468,9 +468,37 @@
 		};
 	});
 	
-	zaa.controller("CmsMenuTreeController", function($scope, $state, ServiceMenuData) {
+	zaa.controller("CmsLiveEdit", function($scope, ServiceLiveEditMode) {
+		
+		$scope.display = false;
+		
+		$scope.url = homeUrl;
+		
+		$scope.$watch(function() { return ServiceLiveEditMode.state }, function(n, o) {
+			$scope.display = n;
+		});
+		
+		$scope.$on('service:LiveEditModeUrlChange', function(event, url) {
+			var d = new Date();
+			var n = d.getTime();
+			$scope.url = url + '?' + n;
+		});
+		
+	});
+	
+	zaa.controller("CmsMenuTreeController", function($scope, $state, ServiceMenuData, ServiceLiveEditMode) {
 		
 		$scope.menuData = ServiceMenuData.data;
+		
+		$scope.liveEditState = 0;
+		
+		$scope.$watch(function() { return ServiceLiveEditMode.state }, function(n, o) {
+			$scope.liveEditState = n;
+		});
+		
+		$scope.toggleLiveEdit = function() {
+			ServiceLiveEditMode.toggle();
+		}
 		
 		$scope.$on('service:MenuData', function(event, data) {
 			$scope.menuData = data;
@@ -489,6 +517,7 @@
 		};
 		
 		$scope.go = function(data) {
+			ServiceLiveEditMode.changeUrl(data.nav_item_id);
 			$state.go('custom.cmsedit', { navId : data.id });
 	    };
 		
@@ -770,11 +799,25 @@
 	 * @param $scope.lang
 	 *            from ng-repeat
 	 */
-	zaa.controller("NavItemController", function($scope, $http, $timeout, ServiceMenuData, AdminLangService, AdminToastService) {
+	zaa.controller("NavItemController", function($scope, $http, $timeout, ServiceMenuData, AdminLangService, AdminToastService, ServiceLiveEditMode) {
 		
 		$scope.loaded = false;
 		
 		$scope.NavController = $scope.$parent;
+		
+		$scope.liveEditState = false;
+		
+		$scope.$watch(function() { return ServiceLiveEditMode.state }, function(n, o) {
+			$scope.liveEditState = n;
+		});
+		
+		$scope.openLiveUrl = function(id) {
+			ServiceLiveEditMode.changeUrl(id);
+		};
+		
+		$scope.loadLiveUrl = function() {
+			ServiceLiveEditMode.changeUrl($scope.item.id);
+		}
 		
 		// serviceMenuData inheritance
 		
@@ -828,6 +871,8 @@
 			});
 		};
 		
+		$scope.homeUrl = homeUrl;
+		
 		$scope.toggleSettings = function() {
 			$scope.reset();
 			$scope.settings = !$scope.settings;
@@ -851,7 +896,6 @@
 						$scope.typeData = response['typeData'];
 						$scope.isTranslated = true;
 						$scope.reset();
-						
 						if ($scope.item.nav_item_type == 1) {
 							$scope.container = response['tree'];
 						}
@@ -876,6 +920,8 @@
 				method : 'GET',
 				params : { navItemPageId : $scope.item.nav_item_type_id, prevId : prevId, placeholderVar : placeholderVar}
 			}).success(function(response) {
+
+				ServiceLiveEditMode.changeUrl($scope.item.id);
 				for (var i in $scope.container.__placeholders) {
 					var out = $scope.revPlaceholders($scope.container.__placeholders[i], prevId, placeholderVar, response);
 					if (out !== false ) {
@@ -959,8 +1005,10 @@
 	 * @param $scope.block
 	 *            from ng-repeat
 	 */
-	zaa.controller("PageBlockEditController", function($scope, $sce, $http, ApiCmsNavItemPageBlockItem, AdminClassService, AdminToastService, ServiceBlockCopyStack) {
+	zaa.controller("PageBlockEditController", function($scope, $sce, $http, ApiCmsNavItemPageBlockItem, AdminClassService, AdminToastService, ServiceBlockCopyStack, ServiceLiveEditMode) {
 	
+		$scope.PagePlaceholderController = $scope.$parent;
+		
 		$scope.onStart = function() {
 			$scope.$apply(function() {
 				AdminClassService.setClassSpace('onDragStart', 'page--drag-active');
@@ -1024,8 +1072,6 @@
 		
 		$scope.cfgdata = $scope.block.cfgvalues || {};
 		
-		$scope.PagePlaceholderController = $scope.$parent;
-		
 		$scope.edit = false;
 		$scope.config = false;
 
@@ -1074,6 +1120,7 @@
 			AdminToastService.confirm('Block «' + block.name + '» wirklich löschen?', function($timeout, $toast) {
 				ApiCmsNavItemPageBlockItem.delete({id: block.id}, function (rsp) {
 					$scope.PagePlaceholderController.NavItemTypePageController.refresh();
+					$scope.PagePlaceholderController.NavItemTypePageController.loadLiveUrl();
 					$toast.close();
 					AdminToastService.success(i18nParam('js_page_block_remove_ok', {name: block.name}), 2000);
 				});
@@ -1092,6 +1139,7 @@
 				    params: { blockId : $scope.block.id }
 				}).success(function(rsp) {
 					$scope.block = rsp;
+					$scope.PagePlaceholderController.NavItemTypePageController.loadLiveUrl();
 				});
 				
 			});

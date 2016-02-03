@@ -179,6 +179,15 @@ function i18nParam(varName, params) {
 	    }
 	});
 	
+	zaa.filter('trustAsResourceUrl', function($sce) {
+	    return function(val, enabled) {
+	    	if (!enabled) {
+	    		return null;
+	    	}
+	        return $sce.trustAsResourceUrl(val);
+	    };
+	});
+	
 	zaa.factory("LuyaLoading", function($timeout) {
 	
 		var state = false;

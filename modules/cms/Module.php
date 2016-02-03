@@ -2,6 +2,8 @@
 
 namespace cms;
 
+use luya\web\UrlRule;
+
 /**
  * Cms Module.
  * 
@@ -13,7 +15,9 @@ class Module extends \luya\base\Module
      * @var array We have no urlRules in cms Module. the UrlRoute file will only be used when
      *            no module is provided. So the CMS url alias does only apply on default behavior.
      */
-    public $urlRules = [];
+    public $urlRules = [
+        ['pattern' => 'preview/<itemId:\d+>', 'route' => 'cms/preview/index', 'position' => UrlRule::POSITION_BEFORE_LUYA],
+    ];
 
     /**
      * @var bool If enabled the cms content will be compressed (removing of whitespaces and tabs).

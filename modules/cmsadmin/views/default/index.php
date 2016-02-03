@@ -215,7 +215,7 @@
 <!-- treeview item -->
 <script type="text/ng-template" id="reverse.html">
 
-    <div data-drag="true"  jqyoui-draggable data-jqyoui-options="{revert: true, delay: 200, scroll : false, handle : '.treeview__link--draggable'}" ng-model="data">
+    <div data-drag="true" jqyoui-draggable data-jqyoui-options="{revert: true, delay: 200, scroll : false, handle : '.treeview__link--draggable'}" ng-model="data">
 
         <div class="treeview__drop" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onBeforeDrop()', multiple : true}">
         </div>
@@ -261,6 +261,14 @@
             <span class="sidebar__text"><?= \cmsadmin\Module::t('view_index_sidebar_new_page'); ?></span>
         </a>
 
+		<a class="sidebar__button sidebar__button-grey" ng-click="toggleLiveEdit()">
+			<div class="sidebar__icon-holder">
+                <i class="sidebar__icon material-icons">live_tv</i>
+            </div>
+			<span class="sidebar__text" ng-show="liveEditState">LIVE EDIT DISABLE</span>
+			<span class="sidebar__text" ng-show="!liveEditState">LIVE EDIT ENABLE</span>
+		</a>
+
         <a class="sidebar__button sidebar__button--grey" ui-sref="custom.cmsdraft">
             <div class="sidebar__icon-holder">
                 <i class="sidebar__icon material-icons">receipt</i>
@@ -291,7 +299,7 @@
 <!-- /SIDEBAR -->
 
 <!-- MAIN -->
-<div class="luya-container__main">
+<div class="luya-container__main" style="width: 48%; float: left;">
 
     <div class="col s12">
         <div ui-view></div>
@@ -299,3 +307,8 @@
 
 </div>
 <!-- /MAIN -->
+
+<div style="width:50%; height:100%; border-left:10px solid #2196F3 !important; float: left;" ng-controller="CmsLiveEdit" ng-show="display">
+<iframe ng-src="{{ url | trustAsResourceUrl:display}}" frameborder="0" width="100%" height="100%" style="border:0px;"></iframe>
+</div>
+
