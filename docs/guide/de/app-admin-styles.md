@@ -10,6 +10,15 @@ Standardmässig wird das Label links vom Inputfeld dargestellt. Möchte man aus 
 Ein Beispiel:  
 ![input--text--vertical](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/input--text--vertical.jpg "Einfaches Inputfeld, Label darüber")
 
+```
+<div class="input input--text input--vertical">
+    <label class="input__label" for="[input-id]">[input-label]</label>
+    <div class="input__field-wrapper">
+        <input class="input__field" id="[input-id]" name="[input-name]" type="text" placeholder="[input-placeholder]" />
+    </div>
+</div>
+```
+
 ##### Einfacher Input
 ![input--text](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/input--text.jpg "Einfaches Inputfeld")
 
@@ -108,7 +117,7 @@ Es können alle Icons des Material-Designs von Google verwendet werden.
 | Sichtbar                  | [visibility](https://www.google.com/design/icons/#ic_visibility)              | `<i class="material-icons">visibility</i>`        |
 | Unsichtbar                | [visibility_off](https://www.google.com/design/icons/#ic_visibility_off)      | `<i class="material-icons">visibility_off</i>`    |
 
-##### Icons mit Text
+##### Icons mit Text / Buttons mit icons
 Wenn man Icons inklusive Text verwenden möchte, muss das Icon je nach Ausrichtung die Klasse `left` oder `right` erhalten.
 
 **Beispiel:**
@@ -124,8 +133,9 @@ Bisher sind vier Variationen davon ausgehend definiert:
 #####Default Buttons 
 ![Default button](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/btn.png "Default Button")  
 Eigenschaften:
-- Die Default-Hintergrundfarbe wurde mit einem Grünton überschrieben (siehe Farben) und der Schriftfarbe weiss.
-- Der Default-hover-Effekt wurde mit einem dunkleren Farbton überschrieben.
+
+* Die Default-Hintergrundfarbe wurde mit einem Grünton überschrieben (siehe Farben) und der Schriftfarbe weiss.
+* Der Default-hover-Effekt wurde mit einem dunkleren Farbton überschrieben.
 
 ```
 <button class="btn">
@@ -138,6 +148,7 @@ Eigenschaften:
 Im obigen Screenshot sind 3 flat buttons mit jeweils einem Icon aufgeführt. Da flat buttons keine Hintergrundfarbe und hover styles haben, eigenen Sie sich zur Darstellung von sekundären Funktionen.
 
 Eigenschaften:
+
 * Hat Standardmässig keinen Hintergrund und, bis auf die Veränderung des cursors (`cursor: pointer`), keinen Hover Effekt.
 
 ```
@@ -149,7 +160,8 @@ Eigenschaften:
 #####Kleine Buttons
 ![Small button](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/btn--small.png "Kleine Button")  
 Eigenschaften:
-- Halbiertes Padding (1 satt 2rem).
+
+* Halbiertes Padding (1 satt 2rem).
 
 ```
 <button class="btn btn--small">
@@ -160,7 +172,8 @@ Eigenschaften:
 #####Fette-Buttons
 ![Bold button](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/btn--bold.png "Fett Button")  
 Eigenschaften:
-- Font-weight ist hier bold(500).
+
+* Font-weight ist hier bold(500).
 
 ```
 <button class="btn btn--bold">
@@ -171,8 +184,10 @@ Eigenschaften:
 #####Runde Buttons
 ![Round button with icon](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/app-admin-styles/btn-floating.png "Runde Button mit Icon")  
 Eigenschaften:  
--Überschreibungen wie der Default-Button.  
-Achtung: Kann nicht mit der btn--small Klasse kombiniert werden!
+
+* Überschreibungen wie der Default-Button.  
+
+> **Achtung:** Kann nicht mit der btn--small Klasse kombiniert werden!
 
 ```
 <button class="btn btn-floating">
