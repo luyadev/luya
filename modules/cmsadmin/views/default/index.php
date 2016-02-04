@@ -306,7 +306,7 @@
     <!-- /SIDEBAR -->
 
     <!-- MAIN -->
-    <div class="luya-container__main" ng-class="{ 'luya-container__main--liveedit-active': display }">
+    <div id="rzLeft" class="luya-container__main" ng-class="{ 'luya-container__main--liveedit-active': display }">
 
         <div class="col s12">
             <div ui-view></div>
@@ -315,8 +315,9 @@
     </div>
     <!-- /MAIN -->
 
-    <div class="luya-container__liveedit"  ng-class="{ 'luya-container__liveedit--active': display }">
-    <iframe ng-src="{{ url | trustAsResourceUrl:display}}" frameborder="0" width="100%" height="100%" style="border:0px;"></iframe>
+    <div id="rzRight" resizer resizer-left="#rzLeft" resizer-cover="#rzCover" resizer-right="#rzRight" class="luya-container__liveedit" ng-class="{ 'luya-container__liveedit--active': display }">
+    	<div style="height:100%; width:100%; background-color:rgba(255,255,255,0.5); position:absolute; display:none;" id="rzCover"></div>
+    	<iframe  ng-src="{{ url | trustAsResourceUrl:display}}" frameborder="0" width="100%" height="100%" style="border:0px;"></iframe>
     </div>
 </div>
 
