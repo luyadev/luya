@@ -50,6 +50,8 @@ class InjectItem extends \yii\base\Object
     
     public $alias = null;
     
+    public $link = null;
+    
     public $description = null;
     
     public $createUserId = 0;
@@ -128,7 +130,7 @@ class InjectItem extends \yii\base\Object
     
     public function getLink()
     {
-        return $this->menu->buildItemLink($this->getAlias(), $this->getLang());
+        return ($this->link === null) ? $this->menu->buildItemLink($this->getAlias(), $this->getLang()) : $this->link;
     }
     
     public function getParentNavId()
@@ -188,7 +190,7 @@ class InjectItem extends \yii\base\Object
 
     public function getId()
     {
-        return $this->menuItem->id . '_' . $this->getChildOf();
+        return $this->menuItem->id . '_' . md5(spl_object_hash($this) . $this->getAlias());
     }
     
     public function getNavId()
