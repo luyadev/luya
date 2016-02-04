@@ -4,10 +4,9 @@ LUYA CHANGELOG
 1.0.0-beta5 (in progress)
 -------------------------
 
-**BC BREAKS**
-
 **ISSUES**
 
+- `#727` Added the ability to inject data into the menu component.
 - `#719` Fixed bug in CMS Module, where blocks keep a empty ghost block after moving into another placeholder.
 - `#762` Added class filemanager__toolbar--top to add margin-bottom to toolbar.
 - `#756` Updated styles for input--vertical. Updated aws change password view.

@@ -7,7 +7,7 @@ When you request a menu item you will always get a [Menu-Item-Object](https://lu
 
 The *Menu-Component* will automatic load the current active menu items based on your current language (which will be evulated by the `composition` component).
 
-Get the current Site
+Get the current site
 ----------------------
 
 One of the most important features is to get the current active menu item, to access this [Menu-Item-Object](https://luya.io/api/cms-menu-item.html) you can use `getCurrent()` or as its a `yii\base\Object` you can access it trough `current`.
@@ -33,7 +33,7 @@ To get the homepage us the `getHome()` method which will return a [Menu-Item-Obj
 echo Yii::$app->menu->home->title;
 ```
 
-Menu Auslesen
+Get menu data
 -------------
 
 To read an list specific parts of the menu use the `find()` method (which is somehwat equilvalent implementation of Yii2 ActiveRecord pattern:
@@ -96,8 +96,8 @@ echo Yii::$app->composition->full;
 
 > We will add an extra section for this, later.
 
-Links zu Seiten im CMS
----------------------
+Link syntax in CMS blocks
+------------------------
 
 We have built some small helper commands you can use whever you are in your cms:
 
@@ -112,4 +112,41 @@ We have built some small helper commands you can use whever you are in your cms:
 
 To the the page number (which is 3, used above) you will find the Page-Id in when hover over the menu item in the cms admin menu-tree:
 
-![Seiten ID](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/cms-nav-page-id.jpg "Seiten ID")
+![Page ID](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/cms-nav-page-id.jpg "Seiten ID")
+
+Menu Item Injection
+------------------
+
+> since 1.0.0-beta5
+
+There is also a possibility to inject data into the menu component direct from every part of your web application.
+
+An item inject gives a module the possibility to add items into the menu Container.
+
+The most important propertie of the injectItem clas is the `childOf` definition, this is where you have to define who is the parent *nav_item.id*.
+
+An item inject contain be done during the eventAfterLoad event to attach at the right initializer moment of the item, but could be done any time. To inject an item use the `injectItem` method on the menu Container like below:
+
+```
+Yii::$app->menu->injectItem(new InjectItem([
+    'childOf' => 123,
+    'title' => 'This is the inject title',
+    'alias' => 'this-is-the-inject-alias',
+]));
+```
+
+To attach the item at right moment you can bootstrap your module and use the `eventAfterLoad`
+event of the menu component:
+
+```
+Yii::$app->menu->on(Container::MENU_AFTER_LOAD, function($event) {
+
+    $newItem = new InjectItem([
+        'childOf' => 123,
+        'title' => 'Inject Title',
+        'alias' => 'inject-title',
+    ]);
+
+    $event->sender->injectItem($newItem);
+});
+```
