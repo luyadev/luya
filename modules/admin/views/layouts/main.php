@@ -184,7 +184,7 @@ $this->beginPage()
         <!-- TREE -->
         <div class="filemanager__tree">
 
-            <div class="filemanager__toolbar">
+            <div class="filemanager__toolbar filemanager__toolbar--top">
 
                 <div class="floating-form left" ng-class="{ 'floating-form--active' : showFolderForm }">
                     <div class="floating-form__form">
