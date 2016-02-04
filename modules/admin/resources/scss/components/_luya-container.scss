@@ -29,6 +29,7 @@
 	&.luya-container__main--liveedit-active {
 		width: 60%;
         padding-left: $luya-container__sidebar--width + $luya-container__sidebar--liveedit-active-margin; // Cause the margin value is negative, "add" the value
+		box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
 	}
 }
 
@@ -72,10 +73,10 @@
     position: fixed;
     right: 0;
     top: $navbar-height;
+	bottom: 0;
 	display: none;
 	width: 40%;
-	height: 100%;
-	border-left: 5px solid color('teal', 'base');
+	height: auto;
 
 	&.luya-container__liveedit--active {
 		display: block;

@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **ISSUES**
 
+- `#713` Added LIVE iFrame preview. Added styles to get something like a "window feeling".
 - `#764` Fixed bug that caused the copied element to hide behind the page element.
 - `#727` Added the ability to inject data into the menu component.
 - `#719` Fixed bug in CMS Module, where blocks keep a empty ghost block after moving into another placeholder.
