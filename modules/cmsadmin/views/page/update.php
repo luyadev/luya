@@ -465,7 +465,7 @@
                 <div class="col s12">
                     <div class="blockholder__group blockholder__group--clipboard" ng-show="copyStack.length > 0">
                         <b class="blockholder__group-title blockholder__group-title--clipboard"><i class="material-icons left">content_copy</i> <?= \cmsadmin\Module::t('view_update_blockholder_clipboard') ?></b>
-                        <div class="blockholder__block" ng-repeat="stackItem in copyStack" data-drag="true" data-copy="true" jqyoui-draggable="{placeholder: 'keep', onStart : 'onStart', onStop : 'onStop'}" ng-model="stackItem" data-jqyoui-options="{revert: true refreshPositions : true, snapTolerance : 40, cursor:'move', cursorAt: { top: 0, left: 0 }}">
+                        <div class="blockholder__block" ng-repeat="stackItem in copyStack" data-drag="true" data-copy="true" jqyoui-draggable="{placeholder: 'keep', onStart : 'onStart', onStop : 'onStop'}" ng-model="stackItem" data-jqyoui-options="{revert: true, refreshPositions : true, snapTolerance : 40, cursor:'move', cursorAt: { top: 0, left: 0 }}">
                             <span>{{stackItem.name}}</span>
                         </div>
                         <button type="button" ng-click="clearStack()" class="btn">x</button>
