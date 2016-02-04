@@ -81,7 +81,12 @@ class Container extends \yii\base\Component implements ArrayAccess
 {
     use \luya\traits\CacheableTrait;
     
+    /**
+     * @todo rename to EVENT_ON_ITEM_FIND
+     */
     const MENU_ITEM_EVENT = 'menuItemEvent';
+    
+    const EVENT_AFTER_LOAD = 'eventAfterLoad';
     
     /**
      * @var luya\web\Request Request object
@@ -200,6 +205,7 @@ class Container extends \yii\base\Component implements ArrayAccess
     {
         if (!array_key_exists($langShortCode, $this->_languageContainer)) {
             $this->_languageContainer[$langShortCode] = $this->loadLanguageContainer($langShortCode);
+            $this->trigger(self::EVENT_AFTER_LOAD);
         }
 
         return $this->_languageContainer[$langShortCode];
@@ -445,7 +451,7 @@ class Container extends \yii\base\Component implements ArrayAccess
      *
      * @return string
      */
-    private function buildItemLink($alias, $langShortCode)
+    public function buildItemLink($alias, $langShortCode)
     {
         return Yii::$app->getUrlManager()->prependBaseUrl($this->composition->prependTo($alias, $this->composition->createRouteEnsure(['langShortCode' => $langShortCode])));
     }
@@ -530,6 +536,7 @@ class Container extends \yii\base\Component implements ArrayAccess
     
             $languageContainer = [];
     
+            // $key = cms_nav_item.id (as of indexBy('id'))
             foreach ($data as $key => $item) {
                 $alias = $item['alias'];
     
@@ -562,8 +569,13 @@ class Container extends \yii\base\Component implements ArrayAccess
             
             $this->setHasCache($cacheKey, $languageContainer);
         }
-
+        
         return $languageContainer;
+    }
+    
+    public function injectItem(InjectItem $item)
+    {
+        $this->_languageContainer[$item->getLang()][$item->getId()] = $item->toArray();
     }
     
     /**
