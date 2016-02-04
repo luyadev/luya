@@ -1,6 +1,6 @@
 <script type="text/ng-template" id="recursion.html">
 <div class="accordion__header" ng-mouseenter="mouseEnter()" ng-click="toggleOpen()"><i class="material-icons">expand_more</i> {{placeholder.label}}</div>
-<div class="accordion__body" ng-class="{ 'accordion__body--empty' : !placeholder.__nav_item_page_block_items.length }" style="min-height:50px;">
+<div class="accordion__body" ng-class="{ 'accordion__body--empty' : !placeholder.__nav_item_page_block_items.length }">
     <div class="page__drop">
         <div class="page__drop-zone" ng-controller="DropBlockController" ng-model="droppedBlock" data-sortindex="0" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'page__drop--hover' }" jqyoui-droppable="{onDrop: 'onDrop()'}">
         </div>
