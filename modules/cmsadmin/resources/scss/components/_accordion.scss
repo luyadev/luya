@@ -65,9 +65,10 @@
     width: 100px;
     height: 40px;
     position: absolute;
-    right: -18px;
     background-size: cover;
     opacity: 0.5;
+    right: 200px;
+    bottom: -20px;
 }
 
 .accordion__body .accordion__body--empty:after {

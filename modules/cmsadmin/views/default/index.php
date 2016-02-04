@@ -251,64 +251,80 @@
 <!-- /SCRIPT TEMPLATES -->
 
 <!-- SIDEBAR -->
-<div class="luya-container__sidebar sidebar">
-    <div ng-controller="CmsMenuTreeController">
+<div ng-controller="CmsLiveEdit" style="height: 100%;">
+    <div class="luya-container__sidebar sidebar" ng-class="{ 'luya-container__sidebar--liveedit-active': display }">
+        <div ng-controller="CmsMenuTreeController">
 
-        <a class="sidebar__button sidebar__button--positive" ui-sref="custom.cmsadd">
-            <div class="sidebar__icon-holder">
-                <i class="sidebar__icon material-icons">add</i>
+            <a class="sidebar__button sidebar__button--positive" ui-sref="custom.cmsadd">
+                <div class="sidebar__icon-holder">
+                    <i class="sidebar__icon material-icons">add</i>
+                </div>
+                <span class="sidebar__text"><?= \cmsadmin\Module::t('view_index_sidebar_new_page'); ?></span>
+            </a>
+
+            <a class="sidebar__button sidebar__button-grey" ng-click="toggleLiveEdit()">
+                <div class="sidebar__icon-holder">
+                    <i class="sidebar__icon material-icons">live_tv</i>
+                </div>
+                <span class="sidebar__text" ng-show="liveEditState">LIVE EDIT DISABLE</span>
+                <span class="sidebar__text" ng-show="!liveEditState">LIVE EDIT ENABLE</span>
+            </a>
+
+            <a class="sidebar__button sidebar__button--grey" ui-sref="custom.cmsdraft">
+                <div class="sidebar__icon-holder">
+                    <i class="sidebar__icon material-icons">receipt</i>
+                </div>
+                <span class="sidebar__text"><?= \cmsadmin\Module::t('view_index_sidebar_drafts'); ?></span>
+            </a>
+
+            <div class="sidebar__button sidebar__button--grey sidebar__button--switch switch" ng-class="{ 'sidebar__button--active': showDrag }">
+                <label>
+                    <input type="checkbox" ng-model="liveEditState" ng-true-value="1" ng-false-value="0">
+                    <span class="lever"></span>
+                    <div class="sidebar__icon-holder">
+                        <i class="sidebar__icon material-icons">live_tv</i>
+                    </div>
+                    <span class="sidebar__text">Live Edit</span>
+                </label>
             </div>
-            <span class="sidebar__text"><?= \cmsadmin\Module::t('view_index_sidebar_new_page'); ?></span>
-        </a>
 
-		<a class="sidebar__button sidebar__button-grey" ng-click="toggleLiveEdit()">
-			<div class="sidebar__icon-holder">
-                <i class="sidebar__icon material-icons">live_tv</i>
+            <div class="sidebar__button sidebar__button--grey sidebar__button--switch switch" ng-class="{ 'sidebar__button--active': showDrag }">
+                <label>
+                    <input type="checkbox" ng-model="showDrag" ng-true-value="1" ng-false-value="0">
+                    <span class="lever"></span>
+                    <div class="sidebar__icon-holder">
+                        <i class="sidebar__icon material-icons">mouse</i>
+                    </div>
+                    <span class="sidebar__text"><?= \cmsadmin\Module::t('view_index_sidebar_move'); ?></span>
+                </label>
             </div>
-			<span class="sidebar__text" ng-show="liveEditState">LIVE EDIT DISABLE</span>
-			<span class="sidebar__text" ng-show="!liveEditState">LIVE EDIT ENABLE</span>
-		</a>
 
-        <a class="sidebar__button sidebar__button--grey" ui-sref="custom.cmsdraft">
-            <div class="sidebar__icon-holder">
-                <i class="sidebar__icon material-icons">receipt</i>
+
+            <div class="treeview" ng-repeat="catitem in menuData.containers" ng-class="{ 'treeview--drag-active' : showDrag }">
+                <h5 class="sidebar__group-title sidebar__group-title--clickable" ng-click="toggleCat(catitem.id)"><i class="material-icons sidebar__group-title-icon" ng-class="{'sidebar__group-title-icon--closed': toggleIsHidden(catitem.id)}">arrow_drop_down</i> <span>{{catitem.name}}</span></h5>
+
+                <div class="treeview__drop" ng-show="(menuData.items|menuparentfilter:catitem.id:0).length == 0 && !toggleIsHidden(catitem.id)" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{catitem.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onEmptyDrop()', multiple : true}"></div>
+
+                <ul class="treeview__list" ng-hide="toggleIsHidden(catitem.id)">
+                    <li class="treeview__item" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:0" ng-include="'reverse.html'"></li>
+                </ul>
             </div>
-            <span class="sidebar__text"><?= \cmsadmin\Module::t('view_index_sidebar_drafts'); ?></span>
-        </a>
-
-        <div class="sidebar__button sidebar__button--grey sidebar__button--switch switch" ng-class="{ 'sidebar__button--active': showDrag }">
-            <label>
-                <input type="checkbox" ng-model="showDrag" ng-true-value="1" ng-false-value="0">
-                <span class="lever"></span>
-                <?= \cmsadmin\Module::t('view_index_sidebar_move'); ?>
-            </label>
-        </div>
-
-
-        <div class="treeview" ng-repeat="catitem in menuData.containers" ng-class="{ 'treeview--drag-active' : showDrag }">
-            <h5 class="sidebar__group-title sidebar__group-title--clickable" ng-click="toggleCat(catitem.id)"><i class="material-icons sidebar__group-title-icon" ng-class="{'sidebar__group-title-icon--closed': toggleIsHidden(catitem.id)}">arrow_drop_down</i> <span>{{catitem.name}}</span></h5>
-            
-            <div class="treeview__drop" ng-show="(menuData.items|menuparentfilter:catitem.id:0).length == 0 && !toggleIsHidden(catitem.id)" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{catitem.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onEmptyDrop()', multiple : true}"></div>
-            
-            <ul class="treeview__list" ng-hide="toggleIsHidden(catitem.id)">
-                <li class="treeview__item" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:0" ng-include="'reverse.html'"></li>
-            </ul>
         </div>
     </div>
-</div>
-<!-- /SIDEBAR -->
+    <!-- /SIDEBAR -->
 
-<!-- MAIN -->
-<div class="luya-container__main" style="width: 48%; float: left;">
+    <!-- MAIN -->
+    <div class="luya-container__main" ng-class="{ 'luya-container__main--liveedit-active': display }">
 
-    <div class="col s12">
-        <div ui-view></div>
+        <div class="col s12">
+            <div ui-view></div>
+        </div>
+
     </div>
+    <!-- /MAIN -->
 
-</div>
-<!-- /MAIN -->
-
-<div style="width:50%; height:100%; border-left:10px solid #2196F3 !important; float: left;" ng-controller="CmsLiveEdit" ng-show="display">
-<iframe ng-src="{{ url | trustAsResourceUrl:display}}" frameborder="0" width="100%" height="100%" style="border:0px;"></iframe>
+    <div class="luya-container__liveedit"  ng-class="{ 'luya-container__liveedit--active': display }">
+    <iframe ng-src="{{ url | trustAsResourceUrl:display}}" frameborder="0" width="100%" height="100%" style="border:0px;"></iframe>
+    </div>
 </div>
 

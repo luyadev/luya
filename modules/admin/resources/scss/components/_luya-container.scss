@@ -24,6 +24,12 @@
 	// Look & Feel
 	background-color: color("grey", "lighten-4");
 
+    z-index: 5;
+
+	&.luya-container__main--liveedit-active {
+		width: 60%;
+        padding-left: $luya-container__sidebar--width + $luya-container__sidebar--liveedit-active-margin; // Cause the margin value is negative, "add" the value
+	}
 }
 
 /**
@@ -44,9 +50,33 @@
 	background-color: color('shades', 'white');
 	overflow: auto;
 
-	@extend .z-depth-1;
+    z-index: 10;
+
+    transition: 0.25s ease margin-left;
+
+    &.luya-container__sidebar--liveedit-active {
+        margin-left: $luya-container__sidebar--liveedit-active-margin;
+
+        &:hover {
+            margin-left: 0;
+        }
+    }
 
 	@media #{$small-and-down} {
 		top: $navbar-height-mobile;
+	}
+}
+
+.luya-container__liveedit {
+    position: fixed;
+    right: 0;
+    top: $navbar-height;
+	display: none;
+	width: 40%;
+	height: 100%;
+	border-left: 5px solid color('teal', 'base');
+
+	&.luya-container__liveedit--active {
+		display: block;
 	}
 }
