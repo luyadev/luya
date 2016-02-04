@@ -492,13 +492,9 @@
 		
 		$scope.liveEditState = 0;
 		
-		$scope.$watch(function() { return ServiceLiveEditMode.state }, function(n, o) {
-			$scope.liveEditState = n;
-		});
-		
-		$scope.toggleLiveEdit = function() {
-			ServiceLiveEditMode.toggle();
-		}
+		$scope.$watch('liveEditStateToggler', function(n) {
+			ServiceLiveEditMode.state = n;
+		})
 		
 		$scope.$on('service:MenuData', function(event, data) {
 			$scope.menuData = data;

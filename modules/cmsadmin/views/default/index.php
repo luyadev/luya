@@ -262,14 +262,6 @@
                 <span class="sidebar__text"><?= \cmsadmin\Module::t('view_index_sidebar_new_page'); ?></span>
             </a>
 
-            <a class="sidebar__button sidebar__button-grey" ng-click="toggleLiveEdit()">
-                <div class="sidebar__icon-holder">
-                    <i class="sidebar__icon material-icons">live_tv</i>
-                </div>
-                <span class="sidebar__text" ng-show="liveEditState">LIVE EDIT DISABLE</span>
-                <span class="sidebar__text" ng-show="!liveEditState">LIVE EDIT ENABLE</span>
-            </a>
-
             <a class="sidebar__button sidebar__button--grey" ui-sref="custom.cmsdraft">
                 <div class="sidebar__icon-holder">
                     <i class="sidebar__icon material-icons">receipt</i>
@@ -279,12 +271,12 @@
 
             <div class="sidebar__button sidebar__button--grey sidebar__button--switch switch" ng-class="{ 'sidebar__button--active': showDrag }">
                 <label>
-                    <input type="checkbox" ng-model="liveEditState" ng-true-value="1" ng-false-value="0">
+                    <input type="checkbox" ng-model="liveEditStateToggler" ng-true-value="1" ng-false-value="0">
                     <span class="lever"></span>
                     <div class="sidebar__icon-holder">
                         <i class="sidebar__icon material-icons">live_tv</i>
                     </div>
-                    <span class="sidebar__text">Live Edit</span>
+                    <span class="sidebar__text">Auto Preview</span>
                 </label>
             </div>
 
