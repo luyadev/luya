@@ -30,7 +30,6 @@
 		/*
 		 * 6.10.2015: remove dialogs, add variable toggler to display. added ngSwitch
 		 */
-		
 		$scope.AdminLangService = AdminLangService;
 		
 		/**
@@ -54,8 +53,6 @@
 		$scope.orderBy = "+id";
 		
 		$scope.showCrudList = true;
-		
-		$scope.searchString = "";
 		
 		$scope.currentMenuItem = null;
 		
@@ -169,10 +166,6 @@
 		$scope.closeActiveWindow = function() {
 			$scope.activeWindowModal = false;
 		};
-		
-		$scope.evalSearchString = function(e) {
-			$scope.searchString = e.searchString;
-		}
 		
 		$scope.highlightId = 0;
 		
