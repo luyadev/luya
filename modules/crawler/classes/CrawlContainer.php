@@ -5,7 +5,7 @@ namespace crawler\classes;
 use Yii;
 use Exception;
 use yii\base\InvalidConfigException;
-use crawleradmin\models\BuilderIndex;
+use crawleradmin\models\Builderindex;
 use crawleradmin\models\Index;
 use luya\helpers\Url;
 use crawler\classes\CrawlPage;
@@ -62,11 +62,11 @@ class CrawlContainer extends \yii\base\Object
 
     public function find()
     {
-        foreach (BuilderIndex::find()->where(['crawled' => 0])->all() as $item) {
+        foreach (Builderindex::find()->where(['crawled' => 0])->all() as $item) {
             $this->urlStatus($item->url);
         }
 
-        if (count(BuilderIndex::findAll(['crawled' => 0])) > 0) {
+        if (count(Builderindex::findAll(['crawled' => 0])) > 0) {
             $this->find();
         } else {
             $this->finish();
@@ -80,7 +80,7 @@ class CrawlContainer extends \yii\base\Object
 
     public function finish()
     {
-        $builder = BuilderIndex::find()->where(['is_dublication' => 0])->indexBy('url')->asArray()->all();
+        $builder = Builderindex::find()->where(['is_dublication' => 0])->indexBy('url')->asArray()->all();
         $index = Index::find()->asArray()->indexBy('url')->all();
 
         if (count($builder) == 0) {
@@ -154,16 +154,16 @@ class CrawlContainer extends \yii\base\Object
 
     public function urlStatus($url)
     {
-        $model = BuilderIndex::findUrl($url);
+        $model = Builderindex::findUrl($url);
 
         if (!$model) {
 
             // add the url to the index
             if ($this->filterUrlIsValid($url)) {
-                BuilderIndex::addToIndex($url, $this->getCrawler($url)->getTitle());
+                Builderindex::addToIndex($url, $this->getCrawler($url)->getTitle());
     
                 // update the urls content
-                $model = BuilderIndex::findUrl($url);
+                $model = Builderindex::findUrl($url);
                 $model->content = $this->getCrawler($url)->getContent();
                 $model->crawled = 1;
                 $model->status_code = 1;
@@ -175,7 +175,7 @@ class CrawlContainer extends \yii\base\Object
                 foreach ($this->getCrawler($url)->getLinks() as $link) {
                     if ($this->matchBaseUrl($link[1])) {
                         if ($this->filterUrlIsValid($link[1])) {
-                            BuilderIndex::addToIndex($link[1], $link[0]);
+                            Builderindex::addToIndex($link[1], $link[0]);
                         }
                     }
                 }
@@ -196,7 +196,7 @@ class CrawlContainer extends \yii\base\Object
                     foreach ($this->getCrawler($url)->getLinks() as $link) {
                         if ($this->matchBaseUrl($link[1])) {
                             if ($this->filterUrlIsValid($link[1])) {
-                                BuilderIndex::addToIndex($link[1], $link[0]);
+                                Builderindex::addToIndex($link[1], $link[0]);
                             }
                         }
                     }

@@ -7,7 +7,7 @@ use Yii;
 class Module extends \admin\base\Module
 {
     public $apis = [
-        'api-crawler-builderindex' => 'crawleradmin\apis\BuilderIndexController',
+        'api-crawler-builderindex' => 'crawleradmin\apis\BuilderindexController',
         'api-crawler-index' => 'crawleradmin\apis\IndexController',
     ];
 
