@@ -12,7 +12,7 @@
     </div>
 
     <div ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController">
-        <div class="block" ng-class="{ 'block--edit' : edit , 'block--config' : config ,'block--is-hidden': block.is_hidden==1,'block--is-dirty' : !block.is_dirty && isEditable() && !block.is_container, 'block--is-container': block.is_container }" data-drag="true" jqyoui-draggable="{onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{snapTolerance : 40, handle : '.block__move', delay: 200, cursor:'move', cursorAt: { top: 0, left: 0 }, revert:true }" ng-model="block">
+        <div class="block" ng-class="{ 'block--edit' : edit , 'block--config' : config ,'block--is-hidden': block.is_hidden==1,'block--is-dirty' : !block.is_dirty && isEditable() && !block.is_container, 'block--is-container': block.is_container }" data-drag="true" jqyoui-draggable="{placeholder: 'keep', onStart : 'onStart', onStop : 'onStop'}" data-jqyoui-options="{revert: true, refreshPositions : true, snapTolerance : 40, handle : '.block__move', delay: 200, cursor:'move', cursorAt: { top: 0, left: 0 } }" ng-model="block">
             <div class="block__toolbar">
                 <div class="left">
                     <i class="block__move material-icons">open_with</i>
@@ -466,7 +466,7 @@
                 <div class="col s12">
                     <div class="blockholder__group blockholder__group--clipboard" ng-show="copyStack.length > 0">
                         <b class="blockholder__group-title blockholder__group-title--clipboard"><i class="material-icons left">content_copy</i> <?= \cmsadmin\Module::t('view_update_blockholder_clipboard') ?></b>
-                        <div class="blockholder__block" ng-repeat="stackItem in copyStack" data-drag="true" data-copy="true" jqyoui-draggable="{placeholder: 'keep', onStart : 'onStart', onStop : 'onStop'}" ng-model="stackItem" data-jqyoui-options="{revert: false, refreshPositions : true, snapTolerance : 40, helper : 'clone', cursor:'move', cursorAt: { top: 0, left: 0 }}">
+                        <div class="blockholder__block" ng-repeat="stackItem in copyStack" data-drag="true" data-copy="true" jqyoui-draggable="{placeholder: 'keep', onStart : 'onStart', onStop : 'onStop'}" ng-model="stackItem" data-jqyoui-options="{revert: true refreshPositions : true, snapTolerance : 40, cursor:'move', cursorAt: { top: 0, left: 0 }}">
                             <span>{{stackItem.name}}</span>
                         </div>
                         <button type="button" ng-click="clearStack()" class="btn">x</button>

@@ -8,6 +8,7 @@ LUYA CHANGELOG
 
 **ISSUES**
 
+- `#719` Fixed bug in CMS Module, where blocks keep a empty ghost block after moving into another placeholder.
 - `#762` Added class filemanager__toolbar--top to add margin-bottom to toolbar.
 - `#756` Updated styles for input--vertical. Updated aws change password view.
 - `#717` Updated styles for input--single-checkbox.

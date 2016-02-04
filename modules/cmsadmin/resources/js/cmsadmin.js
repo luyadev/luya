@@ -326,7 +326,7 @@
 		}
 		
 		return service;
-	})
+	});
 	
 	// layout.js
 	
@@ -1188,6 +1188,8 @@
 					}), function(rsp) {
 						$scope.PagePlaceholderController.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 						$scope.droppedBlock = {};
+						$($ui.helper).remove(); //destroy clone
+			            $($ui.draggable).remove(); //remove from list
 					});
 				}
 			}
