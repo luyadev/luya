@@ -15,16 +15,22 @@
 .luya-container__main {
 
 	// Positioning
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	top: $navbar-height;
 	padding-left: $luya-container__sidebar--width;
+	overflow: scroll;
 
 	// Dimensions
 	width: 100%;
-	min-height: 100%;
 
 	// Look & Feel
 	background-color: color("grey", "lighten-4");
 
     z-index: 5;
+
+	transition: 0.25s ease padding-left;
 
 	&.luya-container__main--liveedit-active {
 		width: 60%;
