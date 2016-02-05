@@ -148,9 +148,9 @@
                             <div class="col s12">
 
                                 <!-- LEFT TOOLBAR -->
-                                <div class="left">
+                                <div class="toolbar__left">
                                     <!-- CONFIG BUTTON -->
-                                    <div class="toolbar__group" ng-show="propertiesData.length && navData.is_draft == 0">
+                                    <div class="toolbar__group toolbar__group--settings" ng-show="propertiesData.length && navData.is_draft == 0">
                                         <a class="[ btn-flat btn--small ][ grey-text text-darken-2 ]" ng-click="togglePropMask()">
                                             <i class="material-icons cms__prop-toggle">settings</i>
                                         </a>
@@ -158,13 +158,13 @@
                                     <!-- /CONFIG BUTTON -->
 
                                     <!-- DELETE BUTTON -->
-                                    <div class="toolbar__group">
+                                    <div class="toolbar__group toolbar__group--delete">
                                         <a ng-click="trash()" class="[ waves-effect waves-blue ][ btn-flat btn--small ][ grey-text text-darken-2 ]"><i class="material-icons">delete</i></a>
                                     </div>
                                     <!-- /DELETE BUTTON -->
 
                                     <!-- PLACEHOLDER TOGGLE -->
-                                    <div class="toolbar__group">
+                                    <div class="toolbar__group toolbar__group--placeholder-state">
                                         <div class="switch">
                                             <label>
                                                 <span ng-if="placeholderState"><?= \cmsadmin\Module::t('view_update_holder_state_on'); ?></span>
@@ -179,9 +179,8 @@
                                 </div> <!-- /LEFT TOOLBAR -->
 
                                 <!-- RIGHT TOOLBAR -->
-                                <div class="right">
+                                <div class="toolbar__right">
 
-                                
                                     <div class="toolbar__group" ng-show="navData.is_draft == 1">
                                         <div class="toolbar__group">
                                             <div class="switch">
@@ -192,7 +191,7 @@
                                         </div>
                                     </div>
                                     <!-- IS_HOME SWITCH -->
-                                    <div class="toolbar__group" ng-show="navData.is_draft == 0">
+                                    <div class="toolbar__group  toolbar__group--homepage" ng-show="navData.is_draft == 0">
                                         <div class="switch">
                                             <label title="Setzt diese Seite als Startseite.">
                                                 <?= \cmsadmin\Module::t('view_update_is_homepage'); ?>
@@ -204,7 +203,7 @@
                                     <!-- /IS_HOME SWITCH -->
                                     
                                     <!-- VISIBILITY SWITCH -->
-                                    <div class="toolbar__group" ng-show="navData.is_draft == 0">
+                                    <div class="toolbar__group  toolbar__group--visibility" ng-show="navData.is_draft == 0">
                                         <div class="switch switch--with-icons">
                                             <label title="Schaltet die Seite Sichtbar / Unsichtbar. Beeinflusst die Navigation.">
                                                 <i class="switch__icon material-icons" ng-show="!navData.is_hidden">visibility</i>
@@ -217,7 +216,7 @@
                                     <!-- /VISIBILITY SWITCH -->
                                     
                                     <!-- OFFLINE SWITCH -->
-                                    <div class="toolbar__group" ng-show="navData.is_draft == 0">
+                                    <div class="toolbar__group toolbar__group--online" ng-show="navData.is_draft == 0">
                                         <div class="switch switch--with-icons">
                                             <label title="Schaltet die Seite online / offline. Eine Seite die offline ist, kann nicht aufgerufen werden.">
                                                 <i class="switch__icon material-icons green-text" ng-show="!navData.is_offline">cloud_queue</i>
@@ -230,7 +229,7 @@
                                     <!-- /OFFLINE SWITCH -->
 
                                     <!-- LANGUAGE SWITCH -->
-                                    <div class="toolbar__group langswitch" ng-show="navData.is_draft == 0">
+                                    <div class="toolbar__group toolbar__group--langswitch langswitch" ng-show="navData.is_draft == 0">
                                         <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'langswitch__item--active' : AdminLangService.isInSelection(lang.short_code)}" class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ] ng-binding ng-scope">
                                             <span class="flag flag--{{lang.short_code}}">
                                                 <span class="flag__fallback">{{lang.name}}</span>

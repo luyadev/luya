@@ -15,10 +15,14 @@
 		background-color: color("blue", "lighten-1");
 	}
 
-    &:first-child {   
+    &:first-child {
         border-radius: 4px 0 0 4px;
     }
     &:last-child {
         border-radius: 0 4px 4px 0;
+    }
+
+    &:first-of-type:last-of-type {
+        border-radius: 4px;
     }
 }
