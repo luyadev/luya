@@ -135,46 +135,59 @@ function i18nParam(varName, params) {
 	
 	zaa.directive('resizer', function($document) {
 
-		return function($scope, $element, $attrs) {
+		return {
+			scope: {
+				trigger : '@'
+			},
+			link: function($scope, $element, $attrs) {
 
-			$element.on('mousedown', function(event) {
-				event.preventDefault();
-				$document.on('mousemove', mousemove);
-				$document.on('mouseup', mouseup);
-			});
-
-			function mousemove(event) {
-
-				$($attrs.resizerCover).show();
-				// Handle vertical resizer
-				var x = event.pageX;
-				var i = window.innerWidth;
 				
-				if (x < 600) {
-					x = 600;
-				}
+				$scope.$watch('trigger', function(n, o) {
+					if (n == 0) {
+						$($attrs.resizerLeft).removeAttr('style');
+						$($attrs.resizerRight).removeAttr('style');
+					}
+				})
 				
-				if (x > (i-400)) {
-					x = (i-400);
-				}
-				
-				var wl = $($attrs.resizerLeft).width();
-				var wr = $($attrs.resizerRight).width();
-
-				$($attrs.resizerLeft).css({
-					width: x + 'px'
+				$element.on('mousedown', function(event) {
+					event.preventDefault();
+					$document.on('mousemove', mousemove);
+					$document.on('mouseup', mouseup);
 				});
-				$($attrs.resizerRight).css({
-					width: (i-x) + 'px'
-				});
-			}
 
-			function mouseup() {
-				$($attrs.resizerCover).hide();
-				$document.unbind('mousemove', mousemove);
-				$document.unbind('mouseup', mouseup);
+				function mousemove(event) {
+
+					$($attrs.resizerCover).show();
+					// Handle vertical resizer
+					var x = event.pageX;
+					var i = window.innerWidth;
+					
+					if (x < 600) {
+						x = 600;
+					}
+					
+					if (x > (i-400)) {
+						x = (i-400);
+					}
+					
+					var wl = $($attrs.resizerLeft).width();
+					var wr = $($attrs.resizerRight).width();
+
+					$($attrs.resizerLeft).css({
+						width: x + 'px'
+					});
+					$($attrs.resizerRight).css({
+						width: (i-x) + 'px'
+					});
+				}
+
+				function mouseup() {
+					$($attrs.resizerCover).hide();
+					$document.unbind('mousemove', mousemove);
+					$document.unbind('mouseup', mouseup);
+				}
 			}
-		};
+		}
 	})
 	
 	zaa.directive("focusMe", function($timeout) {

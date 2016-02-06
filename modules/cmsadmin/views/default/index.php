@@ -315,7 +315,7 @@
     </div>
     <!-- /MAIN -->
 
-    <div id="rzRight" resizer resizer-left="#rzLeft" resizer-cover="#rzCover" resizer-right="#rzRight" class="liveedit luya-container__liveedit" ng-class="{ 'luya-container__liveedit--active': display }">
+    <div id="rzRight" resizer trigger="{{display}}" resizer-left="#rzLeft" resizer-cover="#rzCover" resizer-right="#rzRight" class="liveedit luya-container__liveedit" ng-class="{ 'luya-container__liveedit--active': display }">
     	<div class="liveedit__cover" id="rzCover"></div>
         <div class="liveedit__iframe-wrapper">
     	    <iframe class="liveedit__iframe"  ng-src="{{ url | trustAsResourceUrl:display}}" frameborder="0" width="100%" height="100%"></iframe>

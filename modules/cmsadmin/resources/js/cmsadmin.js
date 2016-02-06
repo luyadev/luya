@@ -470,7 +470,7 @@
 	
 	zaa.controller("CmsLiveEdit", function($scope, ServiceLiveEditMode) {
 		
-		$scope.display = false;
+		$scope.display = 0;
 		
 		$scope.url = homeUrl;
 		

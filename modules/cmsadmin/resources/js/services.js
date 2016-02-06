@@ -179,7 +179,7 @@ zaa.factory("ServiceLiveEditMode", function($rootScope) {
 	
 	var service = [];
 	
-	service.state = false;
+	service.state = 0;
 	
 	service.url = null;
 	
