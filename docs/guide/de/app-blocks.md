@@ -1,8 +1,9 @@
 Projekt Blöcke
 ==============
-Was sind Blöcke? Element die man im CMS-Modul in die *cmslayout*-Platzhalter hinein ziehen kann um neue Inhaltsabschnitte zu generieren. Bei der Installation von Luya lieferen wir eine vielzahl von benutzbaren Blöcke mit, wenn du aber speziel wünsche an dein Inhaltselement hast kannst du dies wiefolgt erstellen.
 
-> Blöcke können auch als Inhaltselemnte bezeichnet werden.
+> Benutze `./vendor/bin/luya block/create` um einen block zu erstellen.
+
+Was sind Blöcke (oder auch als Inhaltselemente bezeichnet)? Element die man im CMS-Modul in die *cmslayout*-Platzhalter hinein ziehen kann um neue Inhaltsabschnitte zu generieren. Bei der Installation von Luya lieferen wir eine vielzahl von benutzbaren Blöcke mit, wenn du aber speziel wünsche an dein Inhaltselement hast kannst du dies wiefolgt erstellen.
 
 Ein *Projekt-Block* muss in deinem Projekt-Ordner unter `blocks` hinzugefügt werden. Alle Block-Klassen sollten den Suffix `Block` haben. In unserem Beispiel erstellen wir einen TextTransform Block in diesem wir einen Eingabetext zu Grossbuchstaben umwandeln und in einem Paragraph Tag zurück gebe. Dieser Block würde also den Namen `TextTransformBlock` haben und im Verzeichniss `blocks` liegen.
 
