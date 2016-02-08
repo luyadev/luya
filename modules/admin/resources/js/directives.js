@@ -228,7 +228,13 @@
                 
                 $scope.searchString = '';
                 
-                $scope.optionitems = $scope.options.items;
+                $scope.options = [];
+                
+                $scope.$watch('options', function(n, o) {
+                	if (n.hasOwnProperty('items')) {
+                    	$scope.optionitems = n.items;
+                    }
+                });
                 
                 $scope.filtering = function() {
                     $scope.optionitems = $filter('filter')($scope.options.items, $scope.searchString);

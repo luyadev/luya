@@ -211,24 +211,16 @@
 	
 		$scope.loadList = function() {
 			LuyaLoading.start();
-			$http.get($scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString).success(function(data) {
-				LuyaLoading.stop();
-				$scope.data.list = data;
-			});
-			
-			$http.get($scope.config.apiEndpoint + '/services').success(function(rsp) {
-				$scope.service = rsp;
+			$http.get($scope.config.apiEndpoint + '/services').success(function(serviceResponse) {
+				$scope.service = serviceResponse;
+				$http.get($scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString).success(function(data) {
+					LuyaLoading.stop();
+					$scope.data.list = data;
+				});
 			});
 		};
 		
 		$scope.service = [];
-		
-		/*
-		$scope.toggler = {
-			create : false,
-			update : false
-		}
-		*/
 		
 		$scope.data = {
 			create : {},
