@@ -9,6 +9,8 @@ use Exception;
 
 class DefaultController extends \cms\base\Controller
 {
+    public $enableCsrfValidation = false;
+    
     public function init()
     {
         parent::init();

@@ -30,7 +30,7 @@ class LoginController extends \admin\base\Controller
     {
         // redirect logged in users
         if (!Yii::$app->adminuser->isGuest) {
-            return $this->redirect(Url::base(true).'/admin');
+            return $this->redirect(['/admin/default/index']);
         }
     
         $this->view->registerJs("$(function(){ $('#email').focus(); observeLogin('#loginForm', '".Url::toAjax('admin/login/async')."', '".Url::toAjax('admin/login/async-token')."'); });", \luya\web\View::POS_END);

@@ -1,5 +1,4 @@
 <?php
-use \admin\Module;
 use \luya\Module as Luya;
 use \luya\helpers\Url;
 
