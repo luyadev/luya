@@ -25,12 +25,16 @@ class StorageImage extends \yii\db\ActiveRecord
         return $this->hasOne(StorageFile::className(), ['id' => 'file_id']);
     }
     
+    public function deleteSource()
+    {
+        $image = Yii::$app->storage->getImage($this->id);
+        @unlink($image->serverSource);
+    }
+    
     public function beforeDelete()
     {
         if (parent::beforeDelete()) {
-            $image = Yii::$app->storage->getImage($this->id);
-            @unlink($image->serverSource);
-
+            $this->deleteSource();
             return true;
         } else {
             return false;

@@ -25,12 +25,22 @@ class Item extends \yii\base\Object
     
     public function getSource()
     {
-        return ($this->getFile()) ? Yii::$app->storage->httpPath . '/' . $this->getFilterId() . '_' . $this->getFile()->getSystemFileName() : false;
+        if (!$this->getFileExists()) {
+            // we try to add the image
+            $apply = Yii::$app->storage->addImage($this->getFileId(), $this->getFilterId());
+        }
+        
+        return ($this->getFile()) ? Yii::$app->storage->httpPath . '/' . $this->getFilterId() . '_' . $this->getFile()->getSystemFileName() : false;   
     }
     
     public function getServerSource()
     {
         return ($this->getFile()) ? Yii::$app->storage->serverPath . '/' . $this->getFilterId() . '_' . $this->getFile()->getSystemFileName() : false;
+    }
+    
+    public function getFileExists()
+    {
+        return file_exists($this->getServerSource());
     }
     
     public function getResolutionWidth()
@@ -43,9 +53,15 @@ class Item extends \yii\base\Object
         return $this->itemArray['resolution_height'];
     }
     
+    private $_file = null;
+    
     public function getFile()
     {
-        return Yii::$app->storage->getFile($this->getFileId());
+        if ($this->_file === null) {
+            $this->_file = Yii::$app->storage->getFile($this->getFileId());
+        }
+        
+        return $this->_file;
     }
     
     public function applyFilter($filterName)

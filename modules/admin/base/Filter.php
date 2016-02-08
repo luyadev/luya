@@ -213,6 +213,8 @@ abstract class Filter extends \yii\base\Object
         // array containing the processed chain ids
         $processed = [];
 
+        $removeImages = false;
+        
         foreach ($this->getChain() as $chain) {
             // get filter chain for filter and effect
             $model = StorageFilterChain::find()->where(['filter_id' => $filterModel->id, 'effect_id' => $chain['effect_id']])->one();
@@ -220,6 +222,7 @@ abstract class Filter extends \yii\base\Object
                 if (Json::decode($chain['effect_json_values']) != $model->effect_json_values) {
                     $model->effect_json_values = $chain['effect_json_values'];
                     if ($model->update(false)) {
+                        $removeImages = true;
                         $this->addLog("Effect chain option have been updated for '{$filterModel->name}'.");
                     }
                 }
@@ -227,6 +230,7 @@ abstract class Filter extends \yii\base\Object
                 $model = new StorageFilterChain();
                 $model->setAttributes(['filter_id' => $filterModel->id, 'effect_id' => $chain['effect_id'], 'effect_json_values' => $chain['effect_json_values']]);
                 if ($model->save(false)) {
+                    $removeImages = true;
                     $this->addLog("Effect chain option have been added for '{$filterModel->name}'.");
                 }
             }
@@ -236,6 +240,12 @@ abstract class Filter extends \yii\base\Object
         foreach (StorageFilterChain::find()->where(['not in', 'id', $processed])->andWhere(['=', 'filter_id', $filterModel->id])->all() as $deletion) {
             $this->addLog("Effect chain option have been removed for '{$filterModel->name}'");
             $deletion->delete();
+            $removeImages = true;
+        }
+        
+        if ($removeImages) {
+            $this->addLog("remove image filter source cache.");
+            $filterModel->removeImageSources();
         }
 
         return true;

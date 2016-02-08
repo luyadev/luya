@@ -38,6 +38,13 @@ class StorageFilter extends \admin\ngrest\base\Model
         ];
     }
     
+    public function removeImageSources()
+    {
+        foreach(StorageImage::find()->where(['filter_id' => $this->id])->all() as $img) {
+            $img->deleteSource();
+        }
+    }
+    
     public function beforeDelete()
     {
         if (parent::beforeDelete()) {

@@ -56,7 +56,6 @@ class FilterImporter extends \luya\base\Importer
         
         foreach ($this->getImporter()->getDirectoryFiles('filters') as $file) {
             $filterClassName = $file['ns'];
-            
             if (class_exists($filterClassName)) {
                 $object = new $filterClassName();
                 $object->save();

@@ -246,7 +246,7 @@ class StorageContainer extends \yii\base\Component
         try {
             $query = (new \admin\image\Query())->where(['file_id' => $fileId, 'filter_id' => $filterId])->one();
             
-            if ($query) {
+            if ($query && $query->fileExists) {
                 return $query;
             }
             
@@ -255,7 +255,6 @@ class StorageContainer extends \yii\base\Component
             if (!$fileQuery) {
                 throw new Exception("Unable to create image, cause the base file does not exist.");
             }
-            
             
             $imagine = new Imagine();
             $image = $imagine->open($fileQuery->serverSource);

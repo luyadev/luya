@@ -49,7 +49,7 @@ class StorageImporter extends \luya\base\Importer
                 }
             }
         }
-
+        
         // check image filter files
         $imageList = StorageImage::find()->asArray()->all();
         // check all storage files including is_deleted entries
@@ -66,6 +66,7 @@ class StorageImporter extends \luya\base\Importer
                 }
             }
         }
+        
         return $storageFileList;
     }
 
@@ -106,13 +107,12 @@ class StorageImporter extends \luya\base\Importer
         return $count;
     }
 
-    /**
-     *
-     * 1. get all files from storage folder
-     * 2. check each image/filter db entry if not available in file list and remove them from 'admin_storage_image'
-     *
-     * @return int count of removed entries
+    /*
+     * 8.2.2016: Disabled, as we want to re create files if they are not existing.
+     * if file exist in table but not on the serve we could have delete the file as the
+     * filter has changed.
      */
+    /*
     public static function removeMissingImageFiles()
     {
         $storageFileList = static::getFindFilesDirectory();
@@ -148,6 +148,7 @@ class StorageImporter extends \luya\base\Importer
 
         return $count;
     }
+    */
 
     public function run()
     {
@@ -162,7 +163,7 @@ class StorageImporter extends \luya\base\Importer
             
             $log["files_missing_in_file_table"] = static::removeMissingStorageFiles();
             
-            $log["files_missing_in_image_table"] = static::removeMissingImageFiles();
+            //$log["files_missing_in_image_table"] = static::removeMissingImageFiles();
             
             foreach (static::getOrphanedFileList() as $file) {
                 $log["files_to_remove"][] = $file;
