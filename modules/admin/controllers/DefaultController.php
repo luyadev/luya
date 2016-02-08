@@ -19,7 +19,7 @@ class DefaultController extends \admin\base\Controller
         // register admin js translations from module
         $this->view->registerJs('var i18n=' . Json::encode($this->module->jsTranslations), \luya\web\View::POS_HEAD);
         // Init ElementQueries after page load
-        $this->view->registerJs('setTimeout( function() {ElementQueries.listen(); ElementQueries.init();}, 1500);', \luya\web\View::POS_LOAD);
+        // $this->view->registerJs('setTimeout( function() {ElementQueries.listen(); ElementQueries.init();}, 1500);', \luya\web\View::POS_LOAD);
         // return and render index view file
         return $this->render('index');
     }

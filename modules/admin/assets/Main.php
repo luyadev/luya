@@ -11,8 +11,8 @@ class Main extends \luya\web\Asset
     ];
 
     public $js = [
-        'js/libs/ResizeSensor.js',
-        'js/libs/ElementQueries.js',
+        //'js/libs/ResizeSensor.js',
+        //'js/libs/ElementQueries.js',
         'js/zaa.js',
         'js/services.js',
         'js/directives.js',
