@@ -53,4 +53,22 @@ class UrlTest extends \tests\web\Base
         Yii::$app->composition->hidden = true;
         $this->assertEquals('/not/exists/action', Url::toAjax('not/exists/action'));
     }
+    
+    public function testHelperEquals()
+    {
+        Yii::$app->composition->hidden = true;
+        $this->assertEquals(Url::to(['/admin/login/index']), Url::toManager('admin/login/index'));
+        
+        Yii::$app->composition->hidden = false;
+        $this->assertEquals(Url::to(['/admin/login/index']), Url::toManager('admin/login/index'));
+    }
+    
+    public function testHelperEqualsInteranl()
+    {
+        Yii::$app->composition->hidden = true;
+        $this->assertEquals(Url::to(['/admin/login/index']), Url::toInternal(['admin/login/index']));
+    
+        Yii::$app->composition->hidden = false;
+        $this->assertEquals(Url::to(['/admin/login/index']), Url::toInternal(['admin/login/index']));
+    }
 }
