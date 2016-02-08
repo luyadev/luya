@@ -47,7 +47,7 @@ return [
     'layout_filemanager_remove_dir_not_empty' => 'Папка не пуста - все равно удалить?',
     'layout_filemanager_remove_selected_files' => 'Удалить отмеченные файлы',
     'layout_filemanager_move_selected_files' => 'Переместить',
-    'layout_filemanager_upload_error' => 'Ошибка при загрузке файла.',
+    'layout_filemanager_upload_error' => 'Ошибка при загрузке файла',
     'layout_filemenager_col_name' => 'Название',
     'layout_filemanager_col_type' => 'Тип',
     'layout_filemanager_col_date' => 'Дата создания',
