@@ -22,7 +22,9 @@
 				});
 				
 				function init() {
-					ServiceMenuData.load();
+					if ($scope.menuData.length == 0) {
+						ServiceMenuData.load();
+					}
 				}
 				
 				init();
