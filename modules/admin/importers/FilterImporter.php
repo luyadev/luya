@@ -3,6 +3,7 @@
 namespace admin\importers;
 
 use admin\models\StorageEffect;
+use admin\models\StorageFilter;
 
 class FilterImporter extends \luya\base\Importer
 {
@@ -51,16 +52,24 @@ class FilterImporter extends \luya\base\Importer
             ]]),
         ]);
 
+        $list = [];
+        
         foreach ($this->getImporter()->getDirectoryFiles('filters') as $file) {
             $filterClassName = $file['ns'];
+            
             if (class_exists($filterClassName)) {
                 $object = new $filterClassName();
                 $object->save();
+                $list[] = $object->identifier();
                 $log = $object->getLog();
                 if (count($log) > 0) {
                     $this->getImporter()->addLog('filters', implode(', ', $log));
                 }
             }
+        }
+        
+        foreach(StorageFilter::find()->where(['not in', 'identifier', $list])->all() as $filter) {
+            $filter->delete();
         }
     }
 }

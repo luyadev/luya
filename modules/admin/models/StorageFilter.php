@@ -37,6 +37,18 @@ class StorageFilter extends \admin\ngrest\base\Model
             'restupdate' => ['name', 'identifier'],
         ];
     }
+    
+    public function beforeDelete()
+    {
+        if (parent::beforeDelete()) {
+            foreach(StorageImage::find()->where(['filter_id' => $this->id])->all() as $img) {
+                $img->delete();
+            }
+            return true;
+        }
+        
+        return false;
+    }
 
     public function applyFilter($image, $imagine)
     {
