@@ -130,4 +130,21 @@ class UrlManagerTest extends \tests\web\Base
         Yii::$app->request->scriptUrl = '';
         $this->assertSame('/urlmodule', $urlManager->createUrl(['urlmodule/default/index']));
     }
+    
+    public function testOriginalCreateAbsoluteUrl()
+    {
+        $urlManager = Yii::$app->urlManager;
+
+        Yii::$app->request->baseUrl = '';
+        Yii::$app->request->scriptUrl = '';
+        
+        $this->assertEquals('http://localhost/en/admin/login', $urlManager->createAbsoluteUrl(['admin/login/index']));
+        $this->assertEquals('http://localhost/en/module/not/found', $urlManager->createAbsoluteUrl(['module/not/found']));
+        $this->assertEquals('http://localhost/en/urlmodule', $urlManager->createAbsoluteUrl(['urlmodule/default/index']));
+        
+        Yii::$app->composition->hidden = true;
+        $this->assertEquals('http://localhost/admin/login', $urlManager->createAbsoluteUrl(['admin/login/index']));
+        $this->assertEquals('http://localhost/module/not/found', $urlManager->createAbsoluteUrl(['module/not/found']));
+        $this->assertEquals('http://localhost/urlmodule', $urlManager->createAbsoluteUrl(['urlmodule/default/index']));
+    }
 }

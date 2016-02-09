@@ -19,28 +19,38 @@ class Url extends \yii\helpers\Url
 
     /**
      * This helper method will not concern any context informations
-     * @param array $routeParams Example array to route `['module/controller/action']`.
+     * @param array $routeParams Example array to route `['/module/controller/action']`.
+     * @param boolean $scheme Whether to return the absolute url or not
      */
-    public static function toInternal(array $routeParams)
+    public static function toInternal(array $routeParams, $scheme = false)
     {
+        if ($scheme) {
+            return Yii::$app->getUrlManager()->internalCreateAbsoluteUrl($routeParams); 
+        }
+        
         return Yii::$app->getUrlManager()->internalCreateUrl($routeParams);
     }
     
     /**
      * Only stil exists to avoid bc break, fromer known as `to()` us `Url::toRoute(['/module/controller/action', 'arg1' => 'arg1value']);` instead.
      * Wrapper functions for the createUrl function of the url manager.
-     * 
      *
      * @param string $route
      * @param array  $params
+     * @param boolean $sheme Whether to return static url or not
+     * @todo we have to remove this method as it provides no additinal functions to the yii\helpers\url to method
      */
-    public static function toManager($route, array $params = [])
+    public static function toManager($route, array $params = [], $scheme = false)
     {
         $routeParams = [$route];
         foreach ($params as $key => $value) {
             $routeParams[$key] = $value;
         }
 
+        if ($scheme) {
+            return Yii::$app->getUrlManager()->createAbsoluteUrl($routeParams);
+        }
+        
         return Yii::$app->getUrlManager()->createUrl($routeParams);
     }
 

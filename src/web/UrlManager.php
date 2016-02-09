@@ -176,8 +176,16 @@ class UrlManager extends \yii\web\UrlManager
         return $replaceRoute;
     }
 
+    /**
+     * 
+     * @param string|array $params An array with params or not (e.g. `['module/controller/action', 'param1' => 'value1']`)
+     * @param null|object $composition Composition instance to change the route behavior
+     * @return string
+     */
     public function internalCreateUrl($params, $composition = null)
     {
+        $params = (array) $params;
+        
         $composition = (empty($composition)) ? $this->composition : $composition;
         
         $originalParams = $params;
@@ -196,5 +204,18 @@ class UrlManager extends \yii\web\UrlManager
         $response = $composition->prependTo($response);
 
         return $this->prependBaseUrl($response);
+    }
+    
+    public function internalCreateAbsoluteUrl($params, $scheme = null)
+    {
+        $params = (array) $params;
+        $url = $this->internalCreateUrl($params);
+        if (strpos($url, '://') === false) {
+            $url = $this->getHostInfo() . $url;
+        }
+        if (is_string($scheme) && ($pos = strpos($url, '://')) !== false) {
+            $url = $scheme . substr($url, $pos);
+        }
+        return $url;
     }
 }

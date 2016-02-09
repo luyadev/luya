@@ -111,4 +111,38 @@ class UrlRuleTest extends \tests\web\Base
         $this->assertEquals('/en/admin/login', Url::toRoute(['/admin/login/index']));
         $this->assertEquals('/en/admin/login', Url::toInternal(['/admin/login/index']));
     }
+    
+    public function testModuleContextOtherModuleAbsoluteUrls()
+    {
+        Yii::$app->request->baseUrl = '';
+        Yii::$app->request->scriptUrl = '';
+        
+        Yii::$app->urlManager->contextNavItemId = 11;
+    
+        $this->assertEquals('http://localhost/en/admin/login', Url::toManager('admin/login/index', [], true));
+        $this->assertEquals('http://localhost/en/admin/login', Url::to(['/admin/login/index'], true));
+        $this->assertEquals('http://localhost/en/admin/login', Url::toRoute(['/admin/login/index'], true));
+        $this->assertEquals('http://localhost/en/admin/login', Url::toInternal(['/admin/login/index'], true));
+        
+        Yii::$app->urlManager->contextNavItemId = 1;
+        
+        $url = Url::toManager('news/default/detail', ['id' => 1, 'title' => 'foo-bar'], true);
+        $this->assertEquals('http://localhost/1/foo-bar', $url);
+        
+        Yii::$app->urlManager->contextNavItemId = 2;
+        
+        $url = Url::toManager('news/default/detail', ['id' => 1, 'title' => 'foo-bar'], true);
+        $this->assertEquals('http://localhost/en/page-1/1/foo-bar', $url);
+        
+        Yii::$app->urlManager->contextNavItemId = 2;
+        
+        $url = Url::toManager('news/default/detail', ['id' => 1, 'title' => 'foo-bar', 'pa' => 'ram'], true);
+        $this->assertEquals('http://localhost/en/page-1/1/foo-bar?pa=ram', $url);
+        
+        Yii::$app->urlManager->contextNavItemId = 1;
+        
+        $url = Url::toManager('news/default/detail', ['id' => 1, 'title' => 'page-2-news-title', 'news' => 'page'], true);
+        $this->assertEquals('http://localhost/1/page-2-news-title?news=page', $url);
+        
+    }
 }
