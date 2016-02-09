@@ -1,7 +1,7 @@
 LUYA CHANGELOG
 ==============
 
-1.0.0-beta5 (in progress)
+1.0.0-beta5 (9.2.2016)
 -------------------------
 
 **ISSUES**

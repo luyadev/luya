@@ -1,9 +1,9 @@
 LUYA aktualisieren
 ==================
 
-Diese Sektion erklärt wie man LUYA bei einem neuen Versions Release upgrade kann. Die aktuelle Version von LUYA ist `1.0.0-beta4`. Eine sicherung der Datenbank und des `storage` Ordners wird empfohlen.
+Diese Sektion erklärt wie man LUYA bei einem neuen Versions Release upgrade kann. Die aktuelle Version von LUYA ist `1.0.0-beta5`. Eine sicherung der Datenbank und des `storage` Ordners wird empfohlen.
 
-> Dieser Guide erklärt das aktualle Upgrade von `1.0.0-beta3` auf `1.0.0-beta4`.
+> Dieser Guide erklärt das aktualle Upgrade von `1.0.0-beta4` auf `1.0.0-beta5`.
 
 ### Composer
 
@@ -11,10 +11,10 @@ Diese Sektion erklärt wie man LUYA bei einem neuen Versions Release upgrade kan
 
 ```
 "require": {
-    "zephir/luya" : "1.0.0-beta4",
-    "zephir/luya-module-cms" : "1.0.0-beta4",
-    "zephir/luya-module-cmsadmin" : "1.0.0-beta4",
-    "zephir/luya-module-admin" : "1.0.0-beta4"
+    "zephir/luya" : "1.0.0-beta5",
+    "zephir/luya-module-cms" : "1.0.0-beta5",
+    "zephir/luya-module-cmsadmin" : "1.0.0-beta5",
+    "zephir/luya-module-admin" : "1.0.0-beta5"
 }
 ```
 

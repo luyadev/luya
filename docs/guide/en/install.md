@@ -14,7 +14,7 @@ composer global require "fxp/composer-asset-plugin:1.1.1"
 After that, we execute the composer `create-project` to checkout the **luya-kickstarter** project (a basic project you can start with out of the box).
 
 ```sh
-composer create-project zephir/luya-kickstarter:1.0.0-beta4
+composer create-project zephir/luya-kickstarter:1.0.0-beta5
 ```
 
 This above command will create a folder (inside of your current folder where the `composer create-project` command was execute) named __luya-kickstarter__. After the command is finished go into the **configs** folder inside your application and copy the dist template files to original php files.
