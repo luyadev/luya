@@ -1,31 +1,31 @@
 cat/index.php
 =============
 ```
-<? foreach($catData as $item): ?>
+<?php foreach($catData as $item): ?>
     <div class="well">
-        <h1><?= $item->title; ?></h1>
-        <a href="<?= \luya\helpers\Url::toManager('gallery/alben/index', ['catId' => $item->id, 'title' => \yii\helpers\Inflector::slug($item->title)]); ?>">Alben anzeigen</a>
+        <h1><?php echo $item->title; ?></h1>
+        <a href="<?php echo \luya\helpers\Url::toManager('gallery/alben/index', ['catId' => $item->id, 'title' => \yii\helpers\Inflector::slug($item->title)]); ?>">Alben anzeigen</a>
     </div>
-<? endforeach; ?>
+<?php endforeach; ?>
 ```
 
 alben/index.php
 ===============
 ```
 <table border="1">
-<? foreach($albenData as $item): ?>
+<?php foreach($albenData as $item): ?>
 <tr>
-    <td><img src="<?= Yii::$app->storage->getImage($item->cover_image_id)->applyFilter('medium-thumbnail'); ?>" border="0" /></td>
+    <td><img src="<?php echo Yii::$app->storage->getImage($item->cover_image_id)->applyFilter('medium-thumbnail'); ?>" border="0" /></td>
     <td>
         <pre>
-            <? print_r($item->toArray()); ?>
+            <?php print_r($item->toArray()); ?>
         </pre>
-        <h2><?= $item->title; ?></h2>
-        <p><?= $item->description; ?></p>
-        <p><a href="<?= $item->getDetailUrl(); ?>"><?= $item->getDetailUrl(); ?></a>
+        <h2><?php echo $item->title; ?></h2>
+        <p><?php echo $item->description; ?></p>
+        <p><a href="<?php echo $item->getDetailUrl(); ?>"><?php echo $item->getDetailUrl(); ?></a>
     </td>
 </tr>
-<? endforeach; ?>
+<?php endforeach; ?>
 </table>
 ```
 
@@ -35,19 +35,19 @@ album/index.php
 <div class="well">
 <table border="1">
 <tr>
-    <td><img src="<?= Yii::$app->storage->getImage($item->cover_image_id)->applyFilter('medium-thumbnail'); ?>" border="0" /></td>
+    <td><img src="<?php echo Yii::$app->storage->getImage($item->cover_image_id)->applyFilter('medium-thumbnail'); ?>" border="0" /></td>
     <td>
-        <h2><?= $model->title; ?></h2>
-        <p><?= $model->description; ?></p>
-        <p><a href="<?= $model->getDetailUrl(); ?>"><?= $model->getDetailUrl(); ?></a>
+        <h2><?php echo $model->title; ?></h2>
+        <p><?php echo $model->description; ?></p>
+        <p><a href="<?php echo $model->getDetailUrl(); ?>"><?php echo $model->getDetailUrl(); ?></a>
         
         <h3>Bilder</h3>
         <div class="row">
-            <? foreach($model->images() as $image): ?>
+            <?php foreach($model->images() as $image): ?>
                 <div class="col-md-3">
-                    <img class="img-responsive" src="<?= Yii::$app->storage->getImage($item->cover_image_id)->applyFilter('medium-thumbnail'); ?>" border="0" />
+                    <img class="img-responsive" src="<?php echo Yii::$app->storage->getImage($item->cover_image_id)->applyFilter('medium-thumbnail'); ?>" border="0" />
                 </div>
-            <? endforeach; ?>
+            <?php endforeach; ?>
         </div>
         
     </td>

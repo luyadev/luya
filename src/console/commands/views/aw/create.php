@@ -10,16 +10,16 @@
 echo "<?php\n";
 ?>
 
-namespace <?= $namespace; ?>;
+namespace <?php echo $namespace; ?>;
 
 /**
- * Active Window created at <?= date("d.m.Y H:i"); ?> on LUYA Version <?= $luya; ?>.
+ * Active Window created at <?php echo date("d.m.Y H:i"); ?> on LUYA Version <?php echo $luya; ?>.
  */
-class <?= $className; ?> extends \luya\ngrest\base\ActiveWindow
+class <?php echo $className; ?> extends \luya\ngrest\base\ActiveWindow
 {
-	public $module = '@<?= $moduleId; ?>';
+	public $module = '@<?php echo $moduleId; ?>';
 	
-	public $alias = '<?= $alias; ?>';
+	public $alias = '<?php echo $alias; ?>';
 	
 	public $icon = 'extension';
 	

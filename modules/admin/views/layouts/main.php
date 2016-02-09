@@ -9,10 +9,10 @@ $this->beginPage()
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title><?= Yii::$app->siteTitle; ?> // {{currentItem.alias}}</title>
+    <title><?php echo Yii::$app->siteTitle; ?> // {{currentItem.alias}}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <base href="<?= Url::base(true); ?>/admin" />
+    <base href="<?php echo Url::base(true); ?>/admin" />
     <style type="text/css">
         [ng:cloak],
         [ng-cloak],
@@ -77,7 +77,7 @@ $this->beginPage()
         <div class="fileupload__btn btn-flat [ grey lighten-4 ]" ng-click="toggleModal()">
             <i class="material-icons left">attach_file</i>
                     <span>
-                        <?= Luya::t('admin', 'layout_select_file'); ?>
+                        <?php echo Luya::t('admin', 'layout_select_file'); ?>
                     </span>
         </div>
         <span class="fileupload__reset" ng-click="reset()" ng-show="fileinfo!=null"><i class="material-icons">remove_circle</i></span>
@@ -91,7 +91,7 @@ $this->beginPage()
     <div class="imageupload">
         <storage-file-upload ng-model="fileId"></storage-file-upload>
         <div ng-show="originalFileIsRemoved">
-            <div class="alert alert--danger"><?= Luya::t('admin', 'layout_deleted_file'); ?></div>
+            <div class="alert alert--danger"><?php echo Luya::t('admin', 'layout_deleted_file'); ?></div>
         </div><!--
         --><div class="imageupload__preview">
             <img ng-src="{{imageinfo.source}}" ng-show="imageinfo != null" class="responsive-img" />
@@ -111,7 +111,7 @@ $this->beginPage()
         </div>
         <div class="imageupload__filter" ng-show="!noFilters()">
             <label>Filter Auswahl</label>
-            <select name="filterId" ng-model="filterId"><option value="0"><?= Luya::t('admin', 'layout_no_filter'); ?></option><option ng-repeat="item in filtersData" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
+            <select name="filterId" ng-model="filterId"><option value="0"><?php echo Luya::t('admin', 'layout_no_filter'); ?></option><option ng-repeat="item in filtersData" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
         </div>
         
     </div>
@@ -133,7 +133,7 @@ $this->beginPage()
                         <span ng-show="folderUpdateForm && currentFolderId==folder.id">
                             <input type="text" ng-model="folder.name" class="filemanager__file-dialog__input"/>
                             <div class="filemanager__file-dialog">
-                                <span><?= Luya::t('admin', 'layout_filemanager_save_dir'); ?></span>
+                                <span><?php echo Luya::t('admin', 'layout_filemanager_save_dir'); ?></span>
                                 <span class="btn-floating white">
                                     <i class="material-icons filemanager__file-dialog__icon" ng-click="updateFolder(folder)">check</i>
                                 </span>
@@ -145,7 +145,7 @@ $this->beginPage()
                         <i class="material-icons filemanager__file-move-icon" ng-click="moveFilesTo(folder.id)" ng-show="showFoldersToMove && currentFolderId != folder.id">keyboard_return</i>
                         <span ng-show="folderDeleteForm && currentFolderId==folder.id">
                             <div class="filemanager__file-dialog">
-                                <span><?= Luya::t('admin', 'layout_filemanager_remove_dir'); ?></span>
+                                <span><?php echo Luya::t('admin', 'layout_filemanager_remove_dir'); ?></span>
                                 <span class="btn-floating white">
                                     <i class="material-icons filemanager__file-dialog__icon" ng-click="checkEmptyFolder(folder)">check</i>
                                 </span>
@@ -158,7 +158,7 @@ $this->beginPage()
 
                         <span ng-show="folderDeleteConfirmForm && currentFolderId==folder.id">
                             <div class="filemanager__file-dialog">
-                                <span><?= Luya::t('admin', 'layout_filemanager_remove_dir_not_empty'); ?></span>
+                                <span><?php echo Luya::t('admin', 'layout_filemanager_remove_dir_not_empty'); ?></span>
                                 <span class="btn-floating white">
                                     <i class="material-icons filemanager__file-dialog__icon" ng-click="deleteFolder(folder)">check</i>
                                 </span>
@@ -187,13 +187,13 @@ $this->beginPage()
 
                 <div class="floating-form left" ng-class="{ 'floating-form--active' : showFolderForm }">
                     <div class="floating-form__form">
-                        <input class="floating-form__input" type="text" ng-model="newFolderName" id="foldername" placeholder="<?= Luya::t('admin', 'layout_filemanager_folder'); ?>" />
+                        <input class="floating-form__input" type="text" ng-model="newFolderName" id="foldername" placeholder="<?php echo Luya::t('admin', 'layout_filemanager_folder'); ?>" />
                     </div><!-- PREVENT WHITESPACE
                          --><div class="floating-form__actions">
                         <span class="[ floating-form__button floating-form__button--active ] btn-floating" ng-click="createNewFolder(newFolderName)"><i class="material-icons">check</i></span>
                         <span class="floating-form__button floating-form__button--active-close btn-floating" ng-click="folderFormToggler()"><i class="material-icons">add</i></span>
                     </div><!-- PREVENT WHITESPACE
-                         --><span class="floating-form__label" ng-click="folderFormToggler()"><?= Luya::t('admin', 'layout_filemanager_add_folder'); ?></span>
+                         --><span class="floating-form__label" ng-click="folderFormToggler()"><?php echo Luya::t('admin', 'layout_filemanager_add_folder'); ?></span>
                 </div>
 
             </div>
@@ -204,7 +204,7 @@ $this->beginPage()
                     <div class="filemanager__folder-button folder-root" ng-click="changeCurrentFolderId(0)">
                         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default">folder_open</i>
                         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active">folder</i>
-                        <span class="filemanager__folder-name"><?= Luya::t('admin', 'layout_filemanager_root_dir'); ?></span>
+                        <span class="filemanager__folder-name"><?php echo Luya::t('admin', 'layout_filemanager_root_dir'); ?></span>
                     </div>
                     <ul class="filemanager__folders">
                         <li class="filemanager__folder" ng-class="{'filemanager__folder--active' : currentFolderId == folder.id}" ng-repeat="folder in foldersData | filemanagerdirsfilter:0" ng-include="'reverseFolders'"></li>
@@ -224,13 +224,13 @@ $this->beginPage()
                             <span class="btn-floating">
                                 <i class="material-icons">file_upload</i>
                             </span>
-                    <span class="floating-button-label__label"><?= Luya::t('admin', 'layout_filemanager_upload_files'); ?></span>
+                    <span class="floating-button-label__label"><?php echo Luya::t('admin', 'layout_filemanager_upload_files'); ?></span>
                 </label>
 
-                <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?= Luya::t('admin', 'layout_filemanager_remove_selected_files'); ?></button>
-                <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove"><?= Luya::t('admin', 'layout_filemanager_move_selected_files'); ?></button>
+                <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?php echo Luya::t('admin', 'layout_filemanager_remove_selected_files'); ?></button>
+                <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove"><?php echo Luya::t('admin', 'layout_filemanager_move_selected_files'); ?></button>
 
-                <div class="alert alert--danger" ng-show="errorMsg" style="clear:both;"><?= Luya::t('admin', 'layout_filemanager_upload_error'); ?>: {{errorMsg}}</div>
+                <div class="alert alert--danger" ng-show="errorMsg" style="clear:both;"><?php echo Luya::t('admin', 'layout_filemanager_upload_error'); ?>: {{errorMsg}}</div>
 
             </div>
 
@@ -244,9 +244,9 @@ $this->beginPage()
                         <i class="material-icons clickable" ng-click="toggleSelectionAll()">done_all</i>
                     </th>
                     <th></th>
-                    <th><?= Luya::t('admin', 'layout_filemanager_col_name'); ?></th>
-                    <th><?= Luya::t('admin', 'layout_filemanager_col_type'); ?></th>
-                    <th><?= Luya::t('admin', 'layout_filemanager_col_date'); ?></th>
+                    <th><?php echo Luya::t('admin', 'layout_filemanager_col_name'); ?></th>
+                    <th><?php echo Luya::t('admin', 'layout_filemanager_col_type'); ?></th>
+                    <th><?php echo Luya::t('admin', 'layout_filemanager_col_date'); ?></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -276,22 +276,22 @@ $this->beginPage()
                     <table class="filemanager__table striped">
                         <tbody>
                         <tr>
-                            <td><i><?= Luya::t('admin', 'layout_filemanager_detail_name'); ?></i></td><td>{{ fileDetail.name }}</td>
+                            <td><i><?php echo Luya::t('admin', 'layout_filemanager_detail_name'); ?></i></td><td>{{ fileDetail.name }}</td>
                         </tr>
                         <tr>
-                            <td><i><?= Luya::t('admin', 'layout_filemanager_detail_date'); ?></i></td><td>{{fileDetail.uploadTimestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
+                            <td><i><?php echo Luya::t('admin', 'layout_filemanager_detail_date'); ?></i></td><td>{{fileDetail.uploadTimestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
                         </tr>
                         <tr>
-                            <td><i><?= Luya::t('admin', 'layout_filemanager_detail_filetype'); ?></i></td><td>{{ fileDetail.extension }}</td>
+                            <td><i><?php echo Luya::t('admin', 'layout_filemanager_detail_filetype'); ?></i></td><td>{{ fileDetail.extension }}</td>
                         </tr>
                         <tr>
-                            <td><i><?= Luya::t('admin', 'layout_filemanager_detail_size'); ?></i></td><td>{{ fileDetail.sizeReadable }}</td>
+                            <td><i><?php echo Luya::t('admin', 'layout_filemanager_detail_size'); ?></i></td><td>{{ fileDetail.sizeReadable }}</td>
                         </tr>
                         <tr>
-                            <td><i><?= Luya::t('admin', 'layout_filemanager_detail_id'); ?></i></td><td> {{ fileDetail.id }}</td>
+                            <td><i><?php echo Luya::t('admin', 'layout_filemanager_detail_id'); ?></i></td><td> {{ fileDetail.id }}</td>
                         </tr>
                         <tr>
-                            <td><i><?= Luya::t('admin', 'layout_filemanager_detail_download'); ?></i></td><td><a ng-href="{{fileDetail.source}}" target="_blank" class="btn btn-floating"><i class="material-icons">cloud_download</i></a></td>
+                            <td><i><?php echo Luya::t('admin', 'layout_filemanager_detail_download'); ?></i></td><td><a ng-href="{{fileDetail.source}}" target="_blank" class="btn btn-floating"><i class="material-icons">cloud_download</i></a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -311,11 +311,11 @@ $this->beginPage()
                         <span class="btn-floating">
                             <i class="material-icons">file_upload</i>
                         </span>
-                <span class="floating-button-label__label"><?= Luya::t('admin', 'layout_filemanager_upload_files'); ?></span>
+                <span class="floating-button-label__label"><?php echo Luya::t('admin', 'layout_filemanager_upload_files'); ?></span>
             </label>
 
-            <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?= Luya::t('admin', 'layout_filemanager_remove_selected_files'); ?></button>
-            <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove"><?= Luya::t('admin', 'layout_filemanager_move_selected_files'); ?></button>
+            <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?php echo Luya::t('admin', 'layout_filemanager_remove_selected_files'); ?></button>
+            <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove"><?php echo Luya::t('admin', 'layout_filemanager_move_selected_files'); ?></button>
 
         </div>
     </div>
@@ -361,13 +361,13 @@ $this->beginPage()
                     <li ng-click="reload()" style="cursor: pointer;">
                         <div class="navbar__button">
                             <i class="material-icons">replay</i>
-                            <p class="icon__spawn-text"><?= Luya::t('admin', 'layout_btn_reload'); ?></p>
+                            <p class="icon__spawn-text"><?php echo Luya::t('admin', 'layout_btn_reload'); ?></p>
                         </div>
                     </li>
                     <li ng-mouseenter="showDebugContainer=1" ng-mouseleave="showDebugContainer=0">
                         <div class="navbar__button">
                             <i class="material-icons">developer_board</i>
-                            <p class="icon__spawn-text"><?= Luya::t('admin', 'layout_btn_version'); ?></p>
+                            <p class="icon__spawn-text"><?php echo Luya::t('admin', 'layout_btn_version'); ?></p>
                         </div>
                     </li>
                     <li ng-mouseenter="showOnlineContainer=1" ng-mouseleave="showOnlineContainer=0">
@@ -375,21 +375,21 @@ $this->beginPage()
                             <div class="navbar__button__circle-icon">
                                 <p class="navbar__button__circle-usercount">{{notify.length}}</p>
                             </div>
-                            <p class="icon__spawn-text"><?= Luya::t('admin', 'layout_btn_useronline'); ?></p>
+                            <p class="icon__spawn-text"><?php echo Luya::t('admin', 'layout_btn_useronline'); ?></p>
                         </div>
                     </li>
                     <li>
                         <div class="navbar__button navbar__button--redhighlight">
-                            <a href="<?= Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="navbar__button__anchor">
+                            <a href="<?php echo Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="navbar__button__anchor">
                                 <i class="material-icons">exit_to_app</i>
-                                <p class="icon__spawn-text"><?= Luya::t('admin', 'layout_btn_logout'); ?></p>
+                                <p class="icon__spawn-text"><?php echo Luya::t('admin', 'layout_btn_logout'); ?></p>
                             </a>
                         </div>
                     </li>
                     <li>
                         <div class="navbar__button">
                             <i class="material-icons left">account_circle</i><strong><?php echo $user->firstname; ?></strong><!-- NO WHITESPACE
-                                    --><p class="icon__spawn-text"><?= Luya::t('admin', 'layout_btn_profile'); ?></p>
+                                    --><p class="icon__spawn-text"><?php echo Luya::t('admin', 'layout_btn_profile'); ?></p>
                         </div>
                     </li>
                 </ul>
@@ -415,26 +415,26 @@ $this->beginPage()
         <table class="bordered">
             <thead>
             <tr>
-                <th><?= Luya::t('admin', 'layout_debug_table_key'); ?></th>
-                <th><?= Luya::t('admin', 'layout_debug_table_value'); ?></th>
+                <th><?php echo Luya::t('admin', 'layout_debug_table_key'); ?></th>
+                <th><?php echo Luya::t('admin', 'layout_debug_table_value'); ?></th>
             </tr>
             </thead>
-            <tr><td><?= Luya::t('admin', 'layout_debug_luya_version'); ?>:</td><td><?= Luya::VERSION; ?></td></tr>
-            <tr><td><?= Luya::t('admin', 'layout_debug_id'); ?>:</td><td><?= Yii::$app->id ?></td></tr>
-            <tr><td><?= Luya::t('admin', 'layout_debug_sitetitle'); ?>:</td><td><?= Yii::$app->siteTitle ?></td></tr>
-            <tr><td><?= Luya::t('admin', 'layout_debug_remotetoken'); ?>:</td><td><?= $this->context->colorizeValue(Yii::$app->remoteToken, true); ?></td></tr>
-            <tr><td><?= Luya::t('admin', 'layout_debug_assetmanager_forcecopy'); ?>:</td><td><?= $this->context->colorizeValue(Yii::$app->assetManager->forceCopy); ?></td></tr>
-            <tr><td><?= Luya::t('admin', 'layout_debug_transfer_exceptions'); ?>:</td><td><?= $this->context->colorizeValue(Yii::$app->errorHandler->transferException); ?></td></tr>
-            <tr><td><?= Luya::t('admin', 'layout_debug_yii_debug'); ?>:</td><td><?= $this->context->colorizeValue(YII_DEBUG); ?></td></tr>
-            <tr><td><?= Luya::t('admin', 'layout_debug_yii_env'); ?>:</td><td><?= YII_ENV; ?></td></tr>
-            <tr><td><?= Luya::t('admin', 'layout_debug_app_language'); ?>:</td><td><?= Yii::$app->language; ?></td></tr>
-            <tr><td><?= Luya::t('admin', 'layout_debug_luya_language'); ?>:</td><td><?= Yii::$app->luyaLanguage; ?></td></tr>
-            <tr><td><?= Luya::t('admin', 'layout_debug_yii_timezone'); ?>:</td><td><?= Yii::$app->timeZone; ?></td></tr>
-            <tr><td><?= Luya::t('admin', 'layout_debug_php_timezone'); ?>:</td><td><?= date_default_timezone_get(); ?></td></tr>
-            <tr><td><?= Luya::t('admin', 'layout_debug_php_ini_memory_limit'); ?>:</td><td><?= ini_get('memory_limit'); ?></td></tr>
-            <tr><td><?= Luya::t('admin', 'layout_debug_php_ini_max_exec'); ?>:</td><td><?= ini_get('max_execution_time'); ?></td></tr>
-            <tr><td><?= Luya::t('admin', 'layout_debug_php_ini_post_max_size'); ?>:</td><td><?= ini_get('post_max_size'); ?></td></tr>
-            <tr><td><?= Luya::t('admin', 'layout_debug_php_ini_upload_max_file'); ?>:</td><td><?= ini_get('upload_max_filesize'); ?></td></tr>
+            <tr><td><?php echo Luya::t('admin', 'layout_debug_luya_version'); ?>:</td><td><?php echo Luya::VERSION; ?></td></tr>
+            <tr><td><?php echo Luya::t('admin', 'layout_debug_id'); ?>:</td><td><?php echo Yii::$app->id ?></td></tr>
+            <tr><td><?php echo Luya::t('admin', 'layout_debug_sitetitle'); ?>:</td><td><?php echo Yii::$app->siteTitle ?></td></tr>
+            <tr><td><?php echo Luya::t('admin', 'layout_debug_remotetoken'); ?>:</td><td><?php echo $this->context->colorizeValue(Yii::$app->remoteToken, true); ?></td></tr>
+            <tr><td><?php echo Luya::t('admin', 'layout_debug_assetmanager_forcecopy'); ?>:</td><td><?php echo $this->context->colorizeValue(Yii::$app->assetManager->forceCopy); ?></td></tr>
+            <tr><td><?php echo Luya::t('admin', 'layout_debug_transfer_exceptions'); ?>:</td><td><?php echo $this->context->colorizeValue(Yii::$app->errorHandler->transferException); ?></td></tr>
+            <tr><td><?php echo Luya::t('admin', 'layout_debug_yii_debug'); ?>:</td><td><?php echo $this->context->colorizeValue(YII_DEBUG); ?></td></tr>
+            <tr><td><?php echo Luya::t('admin', 'layout_debug_yii_env'); ?>:</td><td><?php echo YII_ENV; ?></td></tr>
+            <tr><td><?php echo Luya::t('admin', 'layout_debug_app_language'); ?>:</td><td><?php echo Yii::$app->language; ?></td></tr>
+            <tr><td><?php echo Luya::t('admin', 'layout_debug_luya_language'); ?>:</td><td><?php echo Yii::$app->luyaLanguage; ?></td></tr>
+            <tr><td><?php echo Luya::t('admin', 'layout_debug_yii_timezone'); ?>:</td><td><?php echo Yii::$app->timeZone; ?></td></tr>
+            <tr><td><?php echo Luya::t('admin', 'layout_debug_php_timezone'); ?>:</td><td><?php echo date_default_timezone_get(); ?></td></tr>
+            <tr><td><?php echo Luya::t('admin', 'layout_debug_php_ini_memory_limit'); ?>:</td><td><?php echo ini_get('memory_limit'); ?></td></tr>
+            <tr><td><?php echo Luya::t('admin', 'layout_debug_php_ini_max_exec'); ?>:</td><td><?php echo ini_get('max_execution_time'); ?></td></tr>
+            <tr><td><?php echo Luya::t('admin', 'layout_debug_php_ini_post_max_size'); ?>:</td><td><?php echo ini_get('post_max_size'); ?></td></tr>
+            <tr><td><?php echo Luya::t('admin', 'layout_debug_php_ini_upload_max_file'); ?>:</td><td><?php echo ini_get('upload_max_filesize'); ?></td></tr>
         </table>
     </div>
 
@@ -443,8 +443,8 @@ $this->beginPage()
             <thead>
             <tr>
                 <th></th>
-                <th><?= Luya::t('admin', 'layout_useronline_name'); ?></th>
-                <th><?= Luya::t('admin', 'layout_useronline_mail'); ?></th>
+                <th><?php echo Luya::t('admin', 'layout_useronline_name'); ?></th>
+                <th><?php echo Luya::t('admin', 'layout_useronline_mail'); ?></th>
                 <td></td>
             </tr>
             </thead>
@@ -458,7 +458,7 @@ $this->beginPage()
                 <td>{{row.email}}</td>
                 <td>
                     <small ng-hide="row.is_active">
-                        <b><?= Luya::t('admin', 'layout_useronline_inactivesince'); ?></b><br />
+                        <b><?php echo Luya::t('admin', 'layout_useronline_inactivesince'); ?></b><br />
                         {{row.inactive_since}}
                     </small>
                 </td>
@@ -471,12 +471,12 @@ $this->beginPage()
 
         <div class="center" ng-show="searchResponse==null && searchQuery.length <= 2 && searchQuery.length > 0">
             <br /><br /><br />
-            <p><?= Luya::t('admin', 'layout_search_min_letters'); ?></p>
+            <p><?php echo Luya::t('admin', 'layout_search_min_letters'); ?></p>
         </div>
 
         <div class="center" ng-show="(searchResponse.length == 0 && searchResponse != null) && searchQuery.length > 2">
             <br /><br /><br />
-            <p><?= Luya::t('admin', 'layout_search_no_results'); ?></p>
+            <p><?php echo Luya::t('admin', 'layout_search_no_results'); ?></p>
         </div>
 
         <div class="center" ng-show="searchResponse==null && searchQuery.length > 2">

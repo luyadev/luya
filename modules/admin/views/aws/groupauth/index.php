@@ -1,17 +1,17 @@
 <div ng-controller="ActiveWindowGroupAuth">
 
-    <button type="button" ng-click="toggleAll()" class="btn btn-flat"><?= admin\Module::t('aws_groupauth_select_all'); ?></button>
-    <button type="button" ng-click="untoggleAll()" class="btn btn-flat"><?= admin\Module::t('aws_groupauth_deselect_all'); ?></button>
+    <button type="button" ng-click="toggleAll()" class="btn btn-flat"><?php echo admin\Module::t('aws_groupauth_select_all'); ?></button>
+    <button type="button" ng-click="untoggleAll()" class="btn btn-flat"><?php echo admin\Module::t('aws_groupauth_deselect_all'); ?></button>
 
     <form id="updateSubscription">
         <table class="bordered highlight">
             <thead>
                 <tr>
-                    <th><?= admin\Module::t('aws_groupauth_th_module'); ?></th>
-                    <th><?= admin\Module::t('aws_groupauth_th_function'); ?></th>
-                    <th><?= admin\Module::t('aws_groupauth_th_add'); ?></th>
-                    <th><?= admin\Module::t('aws_groupauth_th_edit'); ?></th>
-                    <th><?= admin\Module::t('aws_groupauth_th_remove'); ?></th>
+                    <th><?php echo admin\Module::t('aws_groupauth_th_module'); ?></th>
+                    <th><?php echo admin\Module::t('aws_groupauth_th_function'); ?></th>
+                    <th><?php echo admin\Module::t('aws_groupauth_th_add'); ?></th>
+                    <th><?php echo admin\Module::t('aws_groupauth_th_edit'); ?></th>
+                    <th><?php echo admin\Module::t('aws_groupauth_th_remove'); ?></th>
                 </tr>
             </thead>
             <tr ng-repeat="a in auths">
@@ -24,5 +24,5 @@
         </table>
     </form>
     
-    <button type="button" ng-click="save(rights)" class="btn btn-flat"><?= admin\Module::t('button_save'); ?></button>
+    <button type="button" ng-click="save(rights)" class="btn btn-flat"><?php echo admin\Module::t('button_save'); ?></button>
 </div>

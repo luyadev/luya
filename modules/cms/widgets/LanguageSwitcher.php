@@ -22,11 +22,11 @@ use luya\web\Composition;
  * ```html
  * <div class="langnav">
  *   <ul class="langnav__list">
- *   <? foreach($items as $item): ?>
+ *   <?php foreach($items as $item): ?>
  *       <li class="langnav__item">
- *       	<a class="langnav__link <? if ($item['isCurrent']): ?>langnav__link--current<?endif; ?>" href="<?= $item['href']; ?>"><?= $item['language']['short_code']; ?></a>
+ *       	<a class="langnav__link <?php if ($item['isCurrent']): ?>langnav__link--current<?endif; ?>" href="<?php echo $item['href']; ?>"><?php echo $item['language']['short_code']; ?></a>
  *       </li>
- *   <? endforeach; ?>
+ *   <?php endforeach; ?>
  *   </ul>
  * </div>
  * ```

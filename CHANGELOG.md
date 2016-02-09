@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **ISSUES**
 
+- `#743` Replacing all short open tags
 - `#752` Filter import removes old filters, filter import detect chain changes and removes image sources, storage component trys to recreate an image if not existing.
 - `#739` Fixed bug where menu container service does refresh and menu reloads at the same time.
 - `#713` Added LIVE iFrame preview. Added styles to get something like a "window feeling".

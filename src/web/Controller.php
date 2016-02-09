@@ -142,7 +142,7 @@ abstract class Controller extends \yii\web\Controller
      *  <li>Basket</li>
      * </ul>
      * <div id="estore-wrapper">
-     *      <?= $content; ?>
+     *      <?php echo $content; ?>
      * </div>
      * ```
      * 

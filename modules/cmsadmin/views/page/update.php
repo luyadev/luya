@@ -7,7 +7,7 @@
     </div>
 
     <div ng-show="!placeholder.__nav_item_page_block_items.length">
-        <p class="accordion__empty-message"><?= \cmsadmin\Module::t('view_update_drop_blocks'); ?></p>
+        <p class="accordion__empty-message"><?php echo \cmsadmin\Module::t('view_update_drop_blocks'); ?></p>
     </div>
 
     <div ng-repeat="(key, block) in placeholder.__nav_item_page_block_items" ng-controller="PageBlockEditController">
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="block__config-content">
-                    <p class="block__config__text"><span class="block__config__text-section"><?= \cmsadmin\Module::t('view_update_configs'); ?></span></p>
+                    <p class="block__config__text"><span class="block__config__text-section"><?php echo \cmsadmin\Module::t('view_update_configs'); ?></span></p>
                     <div class="row" ng-repeat="cfgField in block.cfgs">
                         <div class="block__help help help--is-right-aligned" ng-show="hasInfo(cfgField.var)">
                             <div class="help__button">
@@ -57,8 +57,8 @@
                     <div class="row">
                         <div class="col s12">
                             <div class="right">
-                            <button class="[ waves-effect waves-light ] btn btn--small red" ng-click="toggleBlockSettings()"><i class="material-icons left">cancel</i><?= \cmsadmin\Module::t('view_update_btn_cancel'); ?></button>
-                                <button class="[ waves-effect waves-light ] btn btn--small" ng-click="save()"><i class="material-icons left">done</i><?= \cmsadmin\Module::t('view_update_btn_save'); ?></button>
+                            <button class="[ waves-effect waves-light ] btn btn--small red" ng-click="toggleBlockSettings()"><i class="material-icons left">cancel</i><?php echo \cmsadmin\Module::t('view_update_btn_cancel'); ?></button>
+                                <button class="[ waves-effect waves-light ] btn btn--small" ng-click="save()"><i class="material-icons left">done</i><?php echo \cmsadmin\Module::t('view_update_btn_save'); ?></button>
                             </div>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
 <script type="text/ng-template" id="updateformpage.html">
     <div class="row">
         <div class="input input--select col s12">
-            <label class="input__label"><?= \cmsadmin\Module::t('view_index_page_layout'); ?></label>
+            <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_layout'); ?></label>
             <div class="input__field-wrapper">
                 <select class="input__field browser-default" ng-model="data.layout_id" ng-options="lts.id as lts.name for lts in layouts"></select>
             </div>
@@ -94,7 +94,7 @@
 <script type="text/ng-template" id="updateformmodule.html">
     <div class="row">
         <div class="input input--text col s12">
-            <label class="input__label"><?= \cmsadmin\Module::t('view_index_module_select'); ?></label>
+            <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_module_select'); ?></label>
             <div class="input__field-wrapper">
                 <input name="text" type="text" class="input__field" ng-model="data.module_name" />
             </div>
@@ -107,27 +107,27 @@
 <script type="text/ng-template" id="updateformredirect.html">
     <div class="row">
         <div class="input input--radios col s12">
-            <label class="input__label"><?= \cmsadmin\Module::t('view_index_redirect_type'); ?></label>
+            <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_redirect_type'); ?></label>
             <div class="input__field-wrapper">
-                <input type="radio" ng-model="data.type" value="1"><label ng-click="data.type = 1"><?= \cmsadmin\Module::t('view_index_redirect_internal'); ?></label> <br />
-                <input type="radio" ng-model="data.type" value="2"><label ng-click="data.type = 2"><?= \cmsadmin\Module::t('view_index_redirect_external'); ?></label>
+                <input type="radio" ng-model="data.type" value="1"><label ng-click="data.type = 1"><?php echo \cmsadmin\Module::t('view_index_redirect_internal'); ?></label> <br />
+                <input type="radio" ng-model="data.type" value="2"><label ng-click="data.type = 2"><?php echo \cmsadmin\Module::t('view_index_redirect_external'); ?></label>
             </div>
         </div>
     </div>
 
     <div class="row" ng-switch on="data.type">
         <div class="col s12" ng-switch-when="1">
-            <p><?= \cmsadmin\Module::t('view_index_redirect_internal_select'); ?></p>
+            <p><?php echo \cmsadmin\Module::t('view_index_redirect_internal_select'); ?></p>
             <menu-dropdown class="menu-dropdown" nav-id="data.value" />
         </div>
 
         <div class="col s12" ng-switch-when="2">
 
             <div class="input input--text col s12">
-                <label class="input__label"><?= \cmsadmin\Module::t('view_index_redirect_external_link'); ?></label>
+                <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_redirect_external_link'); ?></label>
                 <div class="input__field-wrapper">
                     <input name="text" type="text" class="input__field" ng-model="data.value" placeholder="http://" />
-                    <small><?= \cmsadmin\Module::t('view_index_redirect_external_link_help'); ?></small>
+                    <small><?php echo \cmsadmin\Module::t('view_index_redirect_external_link_help'); ?></small>
                 </div>
             </div>
         </div>
@@ -167,8 +167,8 @@
                                     <div class="toolbar__group toolbar__group--placeholder-state">
                                         <div class="switch">
                                             <label>
-                                                <span ng-if="placeholderState"><?= \cmsadmin\Module::t('view_update_holder_state_on'); ?></span>
-                                                <span ng-if="!placeholderState"><?= \cmsadmin\Module::t('view_update_holder_state_off'); ?></span>
+                                                <span ng-if="placeholderState"><?php echo \cmsadmin\Module::t('view_update_holder_state_on'); ?></span>
+                                                <span ng-if="!placeholderState"><?php echo \cmsadmin\Module::t('view_update_holder_state_off'); ?></span>
                                                 <input type="checkbox" ng-model="placeholderState" ng-true-value="1" ng-false-value="0">
                                                 <span class="lever"></span>
                                             </label>
@@ -185,7 +185,7 @@
                                         <div class="toolbar__group">
                                             <div class="switch">
                                                 <label>
-                                                    <span><b><?= \cmsadmin\Module::t('view_update_is_draft_mode'); ?></b></span>
+                                                    <span><b><?php echo \cmsadmin\Module::t('view_update_is_draft_mode'); ?></b></span>
                                                 </label>
                                             </div>
                                         </div>
@@ -194,7 +194,7 @@
                                     <div class="toolbar__group  toolbar__group--homepage" ng-show="navData.is_draft == 0">
                                         <div class="switch">
                                             <label title="Setzt diese Seite als Startseite.">
-                                                <?= \cmsadmin\Module::t('view_update_is_homepage'); ?>
+                                                <?php echo \cmsadmin\Module::t('view_update_is_homepage'); ?>
                                                 <input type="checkbox" ng-model="navData.is_home" ng-true-value="1" ng-false-value="0">
                                                 <span class="lever"></span>
                                             </label>
@@ -251,8 +251,8 @@
             <div class="row" ng-show="showPropForm">
                 <div class="col s12">
                     <div class="card-panel">
-                    <h5><?= \cmsadmin\Module::t('view_update_properties_title'); ?></h5>
-                    <div ng-show="!hasValues" class="alert alert--info"><?= \cmsadmin\Module::t('view_update_no_properties_exists'); ?></div>
+                    <h5><?php echo \cmsadmin\Module::t('view_update_properties_title'); ?></h5>
+                    <div ng-show="!hasValues" class="alert alert--info"><?php echo \cmsadmin\Module::t('view_update_no_properties_exists'); ?></div>
                         <div class="row" ng-repeat="prop in propertiesData">
                             <zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{prop.label}}" model="propValues[prop.id]"></zaa-injector>
                         </div>
@@ -262,9 +262,9 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <div class="right">
-                                        <button type="button" ng-click="togglePropMask()" class="btn red"><?= \cmsadmin\Module::t('btn_abort'); ?> <i class="material-icons left">cancel</i></button>
-                                        <button type="button" ng-click="storePropValues()" class="btn" ng-show="hasValues"><?= \cmsadmin\Module::t('btn_refresh'); ?> <i class="material-icons right">check</i></button>
-                                        <button type="button" ng-click="storePropValues()" class="btn" ng-show="!hasValues"><?= \cmsadmin\Module::t('btn_save'); ?> <i class="material-icons right">check</i></button>
+                                        <button type="button" ng-click="togglePropMask()" class="btn red"><?php echo \cmsadmin\Module::t('btn_abort'); ?> <i class="material-icons left">cancel</i></button>
+                                        <button type="button" ng-click="storePropValues()" class="btn" ng-show="hasValues"><?php echo \cmsadmin\Module::t('btn_refresh'); ?> <i class="material-icons right">check</i></button>
+                                        <button type="button" ng-click="storePropValues()" class="btn" ng-show="!hasValues"><?php echo \cmsadmin\Module::t('btn_save'); ?> <i class="material-icons right">check</i></button>
                                     </div>
                                 </div>
                             </div>
@@ -276,24 +276,24 @@
                 <div class="col s{{(12/AdminLangService.selection.length)}}" ng-repeat="lang in languagesData" ng-show="AdminLangService.isInSelection(lang.short_code)" ng-controller="NavItemController">
                     <!-- PAGE -->
                     <div class="page" ng-show="!isTranslated && navData.is_draft == 1">
-                        <div class="alert alert--info"><?= \cmsadmin\Module::t('view_update_draft_no_lang_error'); ?></div>
+                        <div class="alert alert--info"><?php echo \cmsadmin\Module::t('view_update_draft_no_lang_error'); ?></div>
                     </div>
                     <div class="alert alert--info" ng-show="!loaded">
-                        <p><?= \cmsadmin\Module::t('view_index_language_loading'); ?></p>
+                        <p><?php echo \cmsadmin\Module::t('view_index_language_loading'); ?></p>
                     </div>
                     <div class="page" ng-show="!isTranslated && navData.is_draft == 0 && loaded">
                         <div class="row">
                             <div class="col s12">
                                 <div class="alert alert--info">
-                                    <?= \cmsadmin\Module::t('view_update_no_translations'); ?>
+                                    <?php echo \cmsadmin\Module::t('view_update_no_translations'); ?>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col s12" ng-controller="CopyPageController">
                                 <div class="card-panel">
-                                    <h5><?= \cmsadmin\Module::t('view_index_add_page_from_language'); ?></h5>
-                                    <p><?= \cmsadmin\Module::t('view_index_add_page_from_language_info'); ?></p>
+                                    <h5><?php echo \cmsadmin\Module::t('view_index_add_page_from_language'); ?></h5>
+                                    <p><?php echo \cmsadmin\Module::t('view_index_add_page_from_language_info'); ?></p>
                                     <p><button ng-click="loadItems()" ng-show="!isOpen" class="btn">Ja</button></p>
                                     <div ng-show="isOpen">
                                         <hr />
@@ -303,7 +303,7 @@
                                         <div ng-show="itemSelection">
                                             <div class="row">
                                                 <div class="input input--text col s12">
-                                                    <label class="input__label"><?= \cmsadmin\Module::t('view_index_page_title'); ?></label>
+                                                    <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_title'); ?></label>
                                                     <div class="input__field-wrapper">
                                                         <input name="text" type="text" class="input__field" ng-change="aliasSuggestion()" ng-model="itemSelection.title" />
                                                     </div>
@@ -311,14 +311,14 @@
                                             <div class="row">
                                             </div>    
                                                 <div class="input input--text col s12">
-                                                    <label class="input__label"><?= \cmsadmin\Module::t('view_index_page_alias'); ?></label>
+                                                    <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_alias'); ?></label>
                                                     <div class="input__field-wrapper">
                                                         <input name="text" type="text" class="input__field" ng-model="itemSelection.alias" />
                                                     </div>
                                                 </div>
                                             </div>
                                             
-                                            <button ng-click="save()" class="btn"><?= \cmsadmin\Module::t('view_index_page_btn_save'); ?></button>
+                                            <button ng-click="save()" class="btn"><?php echo \cmsadmin\Module::t('view_index_page_btn_save'); ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -327,7 +327,7 @@
                         <div class="row">
                             <div class="col s12" ng-controller="CmsadminCreateInlineController">
                                 <div class="card-panel">
-                                    <h5><?= \cmsadmin\Module::t('view_index_add_page_empty'); ?></h5>
+                                    <h5><?php echo \cmsadmin\Module::t('view_index_add_page_empty'); ?></h5>
                                     <create-form data="data"></create-form>
                                 </div>
                             </div>
@@ -362,7 +362,7 @@
 
                             <div class="row">
                                 <div class="input input--text col s12">
-                                    <label class="input__label"><?= \cmsadmin\Module::t('view_index_page_title'); ?></label>
+                                    <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_title'); ?></label>
                                     <div class="input__field-wrapper">
                                         <input type="text" class="input__field validate" ng-model="itemCopy.title" />
                                     </div>
@@ -370,7 +370,7 @@
                             </div>
                             <div class="row">
                                 <div class="input input--text col s12">
-                                    <label class="input__label"><?= \cmsadmin\Module::t('view_index_page_alias'); ?></label>
+                                    <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_alias'); ?></label>
                                     <div class="input__field-wrapper">
                                         <input type="text" class="input__field validate" ng-model="itemCopy.alias" />
                                     </div>
@@ -378,7 +378,7 @@
                             </div>
                             <div class="row">
                                 <div class="input input--text col s12">
-                                    <label class="input__label"><?= \cmsadmin\Module::t('view_index_page_meta_description'); ?></label>
+                                    <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_meta_description'); ?></label>
                                     <div class="input__field-wrapper">
                                         <textarea class="input__field validate" ng-model="itemCopy.description"></textarea>
                                     </div>
@@ -386,11 +386,11 @@
                             </div>
                             <div class="row">
                                 <div class="input input--radios col s12">
-                                    <label class="input__label"><?= \cmsadmin\Module::t('view_index_add_type'); ?></label>
+                                    <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_add_type'); ?></label>
                                     <div class="input__field-wrapper">
-                                        <input type="radio" ng-model="itemCopy.nav_item_type" value="1"><label ng-click="itemCopy.nav_item_type = 1"><?= \cmsadmin\Module::t('view_index_type_page'); ?></label> <br />
-                                        <input type="radio" ng-model="itemCopy.nav_item_type" value="2"><label ng-click="itemCopy.nav_item_type = 2"><?= \cmsadmin\Module::t('view_index_type_module'); ?></label> <br />
-                                        <input type="radio" ng-model="itemCopy.nav_item_type" value="3"><label ng-click="itemCopy.nav_item_type = 3"><?= \cmsadmin\Module::t('view_index_type_redirect'); ?></label>
+                                        <input type="radio" ng-model="itemCopy.nav_item_type" value="1"><label ng-click="itemCopy.nav_item_type = 1"><?php echo \cmsadmin\Module::t('view_index_type_page'); ?></label> <br />
+                                        <input type="radio" ng-model="itemCopy.nav_item_type" value="2"><label ng-click="itemCopy.nav_item_type = 2"><?php echo \cmsadmin\Module::t('view_index_type_module'); ?></label> <br />
+                                        <input type="radio" ng-model="itemCopy.nav_item_type" value="3"><label ng-click="itemCopy.nav_item_type = 3"><?php echo \cmsadmin\Module::t('view_index_type_redirect'); ?></label>
                                     </div>
                                 </div>
                             </div>
@@ -412,8 +412,8 @@
                                 <div class="row">
                                     <div class="col s12">
                                         <div class="right">
-                                            <button class="btn waves-effect waves-light red" type="button" ng-click="toggleSettings()"><?= \cmsadmin\Module::t('btn_abort'); ?> <i class="material-icons left">cancel</i></button>
-                                            <button class="btn waves-effect waves-light" type="button" ng-click="save(itemCopy, typeDataCopy)"><?= \cmsadmin\Module::t('btn_save'); ?> <i class="material-icons right">check</i></button>
+                                            <button class="btn waves-effect waves-light red" type="button" ng-click="toggleSettings()"><?php echo \cmsadmin\Module::t('btn_abort'); ?> <i class="material-icons left">cancel</i></button>
+                                            <button class="btn waves-effect waves-light" type="button" ng-click="save(itemCopy, typeDataCopy)"><?php echo \cmsadmin\Module::t('btn_save'); ?> <i class="material-icons right">check</i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -437,15 +437,15 @@
                                     </ul>
                                 </div>
                                 <div class="col s12" ng-switch-when="2">
-                                    <p><?= \cmsadmin\Module::t('view_update_page_is_module'); ?></p>
+                                    <p><?php echo \cmsadmin\Module::t('view_update_page_is_module'); ?></p>
                                 </div>
                                 <div class="col s12" ng-switch-when="3">
                                     <div ng-switch on="typeData.type">
                                         <div ng-switch-when="1">
-                                            <p><?= \cmsadmin\Module::t('view_update_page_is_redirect_internal'); ?></p>
+                                            <p><?php echo \cmsadmin\Module::t('view_update_page_is_redirect_internal'); ?></p>
                                         </div>
                                         <div ng-switch-when="2">
-                                            <p><?= \cmsadmin\Module::t('view_update_page_is_redirect_external'); ?>.</p>
+                                            <p><?php echo \cmsadmin\Module::t('view_update_page_is_redirect_external'); ?>.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -463,7 +463,7 @@
             <div class="blockholder" ng-controller="DroppableBlocksController">
                 <div class="col s12">
                     <div class="blockholder__group blockholder__group--clipboard" ng-show="copyStack.length > 0">
-                        <b class="blockholder__group-title blockholder__group-title--clipboard"><i class="material-icons left">content_copy</i> <?= \cmsadmin\Module::t('view_update_blockholder_clipboard') ?></b>
+                        <b class="blockholder__group-title blockholder__group-title--clipboard"><i class="material-icons left">content_copy</i> <?php echo \cmsadmin\Module::t('view_update_blockholder_clipboard') ?></b>
                         <div class="blockholder__block" ng-repeat="stackItem in copyStack" data-drag="true" data-copy="true" jqyoui-draggable="{placeholder: 'keep', onStart : 'onStart', onStop : 'onStop'}" ng-model="stackItem" data-jqyoui-options="{revert: false, refreshPositions : true, snapTolerance : 40, helper : 'clone', cursor:'move', cursorAt: { top: 0, left: 0 }}">
                             <span>{{stackItem.name}}</span>
                         </div>
