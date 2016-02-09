@@ -8,6 +8,7 @@
     margin-top: 10px;
     float: left;
 }
+
 .imageupload__filter {
     width: 100%;
     select {
@@ -22,6 +23,7 @@
         margin-left: 15px !important;
     }
 }
+
 .imageupload__preview {
     position: relative;
     font-size: 0;
@@ -29,6 +31,10 @@
     width: 225px;
     height: auto;
     text-align: center;
+}
+
+.imageupload__size {
+    font-size: 14px;
 }
 
 .imageupload__loading {

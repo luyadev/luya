@@ -94,8 +94,8 @@ $this->beginPage()
             <div class="alert alert--danger"><?php echo Luya::t('admin', 'layout_deleted_file'); ?></div>
         </div><!--
         --><div class="imageupload__preview">
-            
             <img ng-src="{{thumb.source}}" ng-show="imageinfo != null" class="responsive-img" />
+            <div class="imageupload__size" ng-show="!imageLoading">{{ imageinfo.resolutionWidth }} x {{ imageinfo.resolutionHeight }}</div>
             <div class="imageupload__loading" ng-hide="!imageLoading">
                 <div class="preloader-wrapper big active">
                     <div class="spinner-layer spinner-green-only">
@@ -110,7 +110,6 @@ $this->beginPage()
                 </div>
             </div>
         </div>
-<p>{{ imageinfo.resolutionWidth }} x {{ imageinfo.resolutionHeight }}</p>
         <div class="imageupload__filter" ng-show="!noFilters()">
             <label>Filter Auswahl</label>
             <select name="filterId" ng-model="filterId"><option value="0"><?php echo Luya::t('admin', 'layout_no_filter'); ?></option><option ng-repeat="item in filtersData" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
