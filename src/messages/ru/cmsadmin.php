@@ -295,4 +295,11 @@ return [
 
 // added translation in 1.0.0-beta5:
 
+    // videoBlock
+    'block_video_width_label' => 'Ширина в пикселях',
+    'block_video_help_width' => 'Будет игнорироватся при значении 0 или пусто',
+
+    // view update - blockholder
+    'view_update_blockholder_clipboard' => 'Буфер обмена',
+
 ];

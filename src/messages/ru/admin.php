@@ -155,6 +155,13 @@ return [
 // added translation in 1.0.0-beta4:
 
     'ngrest_crud_empty_row' => 'Данные пока не добавлены в таблицу',
-    
+
 // added translation in 1.0.0-beta5:
+
+    // aws/gallery
+    'aws_gallery_empty' => 'Выберите несколько изображений слева, чтобы добавить их в галерею.',
+    'aws_gallery_images' => 'Галерея',
+    'layout_useronline_name' => 'Имя',
+    'layout_useronline_mail' => 'E-Mail',
+    'layout_useronline_inactivesince' => 'Неактивный с',
 ];
