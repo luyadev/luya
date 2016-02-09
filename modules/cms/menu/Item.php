@@ -5,6 +5,7 @@ namespace cms\menu;
 use Yii;
 use Exception;
 use admin\models\User;
+use cmsadmin\models\NavItemModule;
 
 /**
  * Menu item Object.
@@ -142,6 +143,25 @@ class Item extends \yii\base\Object
     public function getType()
     {
         return (int) $this->itemArray['type'];
+    }
+    
+    /**
+     * If the type of the item is equals 2 we can detect the module name and returns
+     * this information.
+     * 
+     * @return boolean|string The name of the module or false if not found or wrong type
+     * @since 1.0.0-beta5
+     */
+    public function getModuleName()
+    {
+        if ($this->getType() === 2) {
+            $module = NavItemModule::find()->select(['module_name'])->where(['id' => $this->itemArray['nav_item_type_id']])->asArray()->one();
+            if ($module) {
+                return $module['module_name'];
+            }
+        }
+        
+        return false;
     }
     
     /**

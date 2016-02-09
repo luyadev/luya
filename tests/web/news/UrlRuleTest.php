@@ -101,4 +101,14 @@ class UrlRuleTest extends \tests\web\Base
         $url = Url::toManager('news/default/detail', ['id' => 1, 'title' => 'page-2-news-title', 'news' => 'page']);
         $this->assertEquals('/1/page-2-news-title?news=page', $url);
     }
+    
+    public function testModuleContextOtherModuleUrls()
+    {
+        Yii::$app->urlManager->contextNavItemId = 11;
+    
+        $this->assertEquals('/en/admin/login', Url::toManager('admin/login/index'));
+        $this->assertEquals('/en/admin/login', Url::to(['/admin/login/index']));
+        $this->assertEquals('/en/admin/login', Url::toRoute(['/admin/login/index']));
+        $this->assertEquals('/en/admin/login', Url::toInternal(['/admin/login/index']));
+    }
 }

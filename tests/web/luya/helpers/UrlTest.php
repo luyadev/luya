@@ -63,7 +63,7 @@ class UrlTest extends \tests\web\Base
         $this->assertEquals(Url::to(['/admin/login/index']), Url::toManager('admin/login/index'));
     }
     
-    public function testHelperEqualsInteranl()
+    public function testHelperEqualsInternal()
     {
         Yii::$app->composition->hidden = true;
         $this->assertEquals(Url::to(['/admin/login/index']), Url::toInternal(['admin/login/index']));

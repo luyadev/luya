@@ -561,6 +561,7 @@ class Container extends \yii\base\Component implements ArrayAccess
                     'sort_index' => $item['sort_index'],
                     'is_hidden' => $item['is_hidden'],
                     'type' => $item['nav_item_type'],
+                    'nav_item_type_id' => $item['nav_item_type_id'],
                     'redirect' => ($item['nav_item_type'] == 3) ? $this->redirectMap[$item['nav_item_type_id']] : 0,
                     'container' => $item['container'],
                     'depth' => count(explode('/', $alias)),

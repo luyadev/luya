@@ -163,6 +163,14 @@ class UrlManager extends \yii\web\UrlManager
             throw new BadRequestHttpException("Unable to find nav_item_id '$navItemId' to generate the module link for url '$url'.");
         }
         
+        // if the item type is (2) module and the current context module is not equals we don't have to remove to replace the module name
+        // as this is an url rule not related to the current module.
+        if ($item->type == 2) {
+            if ($module !== $item->moduleName) {
+                return $url;
+            }
+        }
+        
         $replaceRoute = preg_replace("/$module/", rtrim($item->link, '/'), ltrim($route, '/'), 1);
 
         return $replaceRoute;
