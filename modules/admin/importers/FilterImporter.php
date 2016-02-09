@@ -67,7 +67,7 @@ class FilterImporter extends \luya\base\Importer
             }
         }
         
-        foreach(StorageFilter::find()->where(['not in', 'identifier', $list])->all() as $filter) {
+        foreach (StorageFilter::find()->where(['not in', 'identifier', $list])->all() as $filter) {
             $filter->delete();
         }
     }

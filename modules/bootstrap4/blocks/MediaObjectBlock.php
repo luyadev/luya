@@ -18,5 +18,4 @@
  */
 class MediaObjectBlock extends \cmsadmin\base\Block
 {
-    
 }

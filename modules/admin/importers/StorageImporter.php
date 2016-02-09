@@ -164,7 +164,7 @@ class StorageImporter extends \luya\base\Importer
             $log["files_missing_in_file_table"] = static::removeMissingStorageFiles();
             
             //$log["files_missing_in_image_table"] = static::removeMissingImageFiles();
-            
+
             foreach (static::getOrphanedFileList() as $file) {
                 $log["files_to_remove"][] = $file;
             }

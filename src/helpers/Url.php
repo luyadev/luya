@@ -25,7 +25,7 @@ class Url extends \yii\helpers\Url
     public static function toInternal(array $routeParams, $scheme = false)
     {
         if ($scheme) {
-            return Yii::$app->getUrlManager()->internalCreateAbsoluteUrl($routeParams); 
+            return Yii::$app->getUrlManager()->internalCreateAbsoluteUrl($routeParams);
         }
         
         return Yii::$app->getUrlManager()->internalCreateUrl($routeParams);

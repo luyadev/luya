@@ -40,7 +40,7 @@ class StorageFilter extends \admin\ngrest\base\Model
     
     public function removeImageSources()
     {
-        foreach(StorageImage::find()->where(['filter_id' => $this->id])->all() as $img) {
+        foreach (StorageImage::find()->where(['filter_id' => $this->id])->all() as $img) {
             $img->deleteSource();
         }
     }
@@ -48,7 +48,7 @@ class StorageFilter extends \admin\ngrest\base\Model
     public function beforeDelete()
     {
         if (parent::beforeDelete()) {
-            foreach(StorageImage::find()->where(['filter_id' => $this->id])->all() as $img) {
+            foreach (StorageImage::find()->where(['filter_id' => $this->id])->all() as $img) {
                 $img->delete();
             }
             return true;

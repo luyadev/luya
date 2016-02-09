@@ -14,7 +14,7 @@ use frontendgroup\properties\GroupAuthProperty;
  * @author nadar
  */
 class Module extends \luya\base\Module implements BootstrapInterface
-{   
+{
     protected $properties = [];
     
     public function bootstrap($app)
@@ -25,12 +25,11 @@ class Module extends \luya\base\Module implements BootstrapInterface
             $this->properties = CmsProperty::findAll(['admin_prop_id' => $findProperty->id]);
             Yii::$app->menu->on(Container::MENU_ITEM_EVENT, [$this, 'hideElements']);
         }
-        
     }
 
     public function hideElements($event)
     {
-        foreach($this->properties as $prop) {
+        foreach ($this->properties as $prop) {
             if ($prop->object->requiresAuth() && $event->item->navId == $prop->nav_id) {
                 $event->visible = false;
                 foreach ($this->frontendUsers as $userComponent) {

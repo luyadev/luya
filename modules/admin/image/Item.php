@@ -33,7 +33,7 @@ class Item extends \yii\base\Object
             $apply = Yii::$app->storage->addImage($this->getFileId(), $this->getFilterId());
         }
         
-        return ($this->getFile()) ? Yii::$app->storage->httpPath . '/' . $this->getFilterId() . '_' . $this->getFile()->getSystemFileName() : false;   
+        return ($this->getFile()) ? Yii::$app->storage->httpPath . '/' . $this->getFilterId() . '_' . $this->getFile()->getSystemFileName() : false;
     }
     
     public function getServerSource()
