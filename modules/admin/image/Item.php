@@ -8,6 +8,8 @@ class Item extends \yii\base\Object
 {
     use \admin\storage\ItemTrait;
     
+    private $_file = null;
+    
     public function getId()
     {
         return $this->itemArray['id'];
@@ -26,7 +28,8 @@ class Item extends \yii\base\Object
     public function getSource()
     {
         if (!$this->getFileExists()) {
-            // we try to add the image
+            // The image source does not exist, probably it has been deleted due to filter changes.
+            // Storage-Component is going go try to re-create this image now.
             $apply = Yii::$app->storage->addImage($this->getFileId(), $this->getFilterId());
         }
         
@@ -52,8 +55,6 @@ class Item extends \yii\base\Object
     {
         return $this->itemArray['resolution_height'];
     }
-    
-    private $_file = null;
     
     public function getFile()
     {
