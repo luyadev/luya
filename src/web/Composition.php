@@ -309,6 +309,9 @@ class Composition extends \yii\base\Component implements \ArrayAccess
             case 'it':
                 return 'it_IT';
                 break;
+            case 'ru':
+                return 'ru_RU';
+                break;
         }
     }
 
