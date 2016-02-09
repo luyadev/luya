@@ -1,20 +1,20 @@
 <?php if (!$state): ?>
 <?php $form = \yii\widgets\ActiveForm::begin(['id' => 'login-form', 'options' => ['class' => 'form-horizontal']]); ?>
-<?= $form->field($model, 'gender')->dropdownlist(['' => 'Bitte wählen', 0 => 'Frau', 1 => 'Herr']); ?>
-<?= $form->field($model, 'company') ?>
-<?= $form->field($model, 'firstname') ?>
-<?= $form->field($model, 'lastname') ?>
-<?= $form->field($model, 'email') ?>
-<?= $form->field($model, 'password')->passwordInput() ?>
-<?= $form->field($model, 'password_confirm')->passwordInput() ?>
-<?= $form->field($model, 'street') ?>
-<?= $form->field($model, 'zip') ?>
-<?= $form->field($model, 'city') ?>
-<?= $form->field($model, 'country') ?>
-<?= $form->field($model, 'subscription_newsletter')->checkbox(); ?>
-<?= $form->field($model,  'subscription_medianews')->checkbox(); ?>
+<?php echo $form->field($model, 'gender')->dropdownlist(['' => 'Bitte wählen', 0 => 'Frau', 1 => 'Herr']); ?>
+<?php echo $form->field($model, 'company') ?>
+<?php echo $form->field($model, 'firstname') ?>
+<?php echo $form->field($model, 'lastname') ?>
+<?php echo $form->field($model, 'email') ?>
+<?php echo $form->field($model, 'password')->passwordInput() ?>
+<?php echo $form->field($model, 'password_confirm')->passwordInput() ?>
+<?php echo $form->field($model, 'street') ?>
+<?php echo $form->field($model, 'zip') ?>
+<?php echo $form->field($model, 'city') ?>
+<?php echo $form->field($model, 'country') ?>
+<?php echo $form->field($model, 'subscription_newsletter')->checkbox(); ?>
+<?php echo $form->field($model,  'subscription_medianews')->checkbox(); ?>
 <button type="submit">Submit</button>
-<?= $form->errorSummary($model); ?>
+<?php echo $form->errorSummary($model); ?>
 <?php \yii\widgets\ActiveForm::end(); ?>
 <?php endif; ?>
 
@@ -24,5 +24,5 @@
 <p>Erfolgreich registriert. Sie werden von einem Administrator freigeschalten.</p>
 <?php elseif ($state == 3): ?>
 <p>Sie haben sich erfolgreich registriert und könnnen sich jetzt einloggen</p>
-<a href="<?= luya\helpers\Url::toManager('account/default/index'); ?>">Login</a>
+<a href="<?php echo luya\helpers\Url::toManager('account/default/index'); ?>">Login</a>
 <?php endif; ?>

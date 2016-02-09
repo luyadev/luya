@@ -4,9 +4,9 @@
     </div>
     <div class="col s4" style="background-color:#F0F0F0;">
         <div style="padding:10px;">
-            <h5><?= \admin\Module::t('aws_gallery_images')?></h5>
+            <h5><?php echo \admin\Module::t('aws_gallery_images')?></h5>
             <div ng-show="isEmptyObject(files)">
-                <p><?= \admin\Module::t('aws_gallery_empty')?></p>
+                <p><?php echo \admin\Module::t('aws_gallery_empty')?></p>
             </div>
             <div class="col s3" ng-repeat="file in files" style="min-height:180px;">
                 <button type="button" ng-click="remove(file)" class="btn btn-flat"><i class="material-icons">delete</i></button>

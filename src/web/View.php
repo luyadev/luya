@@ -71,7 +71,7 @@ class View extends \yii\web\View
      * then you can access the image file inside your view files with:
      *
      * ```
-     * <img src="<?= $this->publicHtml; ?>/img/luya.png" />
+     * <img src="<?php echo $this->publicHtml; ?>/img/luya.png" />
      * ```
      *
      * There is also a twig variable providing the same value:
