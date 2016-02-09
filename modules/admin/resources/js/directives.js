@@ -985,6 +985,25 @@
                             scope.fileId = filtering.fileId;
                         }
                     }
+                });
+                
+                scope.thumb = false;
+                
+                scope.thumbnailfilter = scope.filtersData['medium-thumbnail'];
+                
+                scope.$watch('imageinfo', function(n, o) {
+                	if (n != 0 && n != null && n !== undefined) {
+                		if (n.filterId != 0) {
+                			scope.thumb = n;
+                		} else {
+                			var result = $filter('findthumbnail')(scope.imagesData, n.fileId, scope.thumbnailfilter.id);
+                			if (!result) {
+                				scope.thumb = n;
+                			} else {
+                				scope.thumb = result;
+                			}
+                		}
+                	}
                 })
             },
             templateUrl : 'storageImageUpload'
@@ -1002,6 +1021,21 @@
             
             return result;
         };
+    });
+    
+    zaa.filter("findthumbnail", function() {
+    	return function(input, fileId, thumbnailFilterId) {
+    		var result = false;
+    		angular.forEach(input, function(value, key) {
+    			if (!result) {
+	    			if (value.fileId == fileId && value.filterId == thumbnailFilterId) {
+	    				result = value;
+	    			}
+    			}
+    		})
+    		
+    		return result;
+    	}
     });
     
     zaa.filter("findidfilter", function() {
