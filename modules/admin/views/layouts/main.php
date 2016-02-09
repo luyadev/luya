@@ -93,7 +93,7 @@ $this->beginPage()
         <div ng-show="originalFileIsRemoved">
             <div class="alert alert--danger"><?php echo Luya::t('admin', 'layout_deleted_file'); ?></div>
         </div><!--
-        --><div class="imageupload__preview">
+        --><div class="imageupload__preview" ng-show="imageinfo != null">
             <img ng-src="{{thumb.source}}" ng-show="imageinfo != null" class="responsive-img" />
             <div class="imageupload__size" ng-show="!imageLoading">{{ imageinfo.resolutionWidth }} x {{ imageinfo.resolutionHeight }}</div>
             <div class="imageupload__loading" ng-hide="!imageLoading">
@@ -110,7 +110,7 @@ $this->beginPage()
                 </div>
             </div>
         </div>
-        <div class="imageupload__filter" ng-show="!noFilters()">
+        <div class="imageupload__filter" ng-show="!noFilters() && imageinfo != null">
             <label>Filter Auswahl</label>
             <select name="filterId" ng-model="filterId"><option value="0"><?php echo Luya::t('admin', 'layout_no_filter'); ?></option><option ng-repeat="item in filtersData" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
         </div>
