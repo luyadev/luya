@@ -19,8 +19,8 @@ What is **LUYA**? We have build a *fast*, *modular* and *beautiful* looking syst
 
 We have a made an absolut easy to understand *STEP-BY-STEP* Guide to install Luya:
 
-+ ![Deutsch](https://raw.githubusercontent.com/savetheinternet/Tinyboard/master/static/flags/de.png) [Installationsanleitung](https://luya.io/install)
-+ ![English](https://raw.githubusercontent.com/savetheinternet/Tinyboard/master/static/flags/us.png) [Setup Guide](https://luya.io/en/guide/install)
++ ![Deutsch](https://raw.githubusercontent.com/savetheinternet/Tinyboard/master/static/flags/de.png) [Installationsanleitung](https://luya.io/de/handbuch)
++ ![English](https://raw.githubusercontent.com/savetheinternet/Tinyboard/master/static/flags/us.png) [Setup Guide](https://luya.io/en/guide)
 
 ### Questions and Problems
 
@@ -32,7 +32,7 @@ If you have any questions or problems, don't hesitate to create a [new issue](ht
 
 We are always looking for people who share their thoughts, code and problems with us. Below the links to the contribution guides:
 
-+ ![Deutsch](https://raw.githubusercontent.com/savetheinternet/Tinyboard/master/static/flags/de.png) [Anleitung](https://luya.io/luya-collaboration)
++ ![Deutsch](https://raw.githubusercontent.com/savetheinternet/Tinyboard/master/static/flags/de.png) [Anleitung](https://luya.io/de/handbuch/luya-collaboration)
 + ![English](https://raw.githubusercontent.com/savetheinternet/Tinyboard/master/static/flags/us.png) [Guide](https://luya.io/en/guide/luya-collaboration)
 
 
