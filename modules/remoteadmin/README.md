@@ -11,3 +11,5 @@ REMOTE ADMIN
 + Quick Link to the Luya instance
 
 We will add more and more features in future to make your conrol panel over all LUYA websites one of the powerful LUYA tools!
+
+![Remote Admin](remote-admin.png)
