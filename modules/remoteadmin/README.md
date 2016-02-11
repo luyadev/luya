@@ -5,10 +5,10 @@ REMOTE ADMIN
 
 *What is REMOTE ADMIN?* Well, have you ever created several websites with the same system and delivered them to different Providers? Remote Admin provides you the ability to collect all your LUYA Websites into the REMOTE ADMIN and helps you to see:
 
-+ Which websites are outdated? (compare LUYA version to the current LUYA version inside packagist)
-+ Returns informatiions about the Website itself, to make sure they are configured well.
-+ See how many administration users are Online.
-+ Direct Link to the Webseite.
++ See all outdated websites (auto compare LUYA version to the lastet version available on packagist).
++ Collect informations about the Website itself, to make sure they are configured well.
++ See how many administrators are active.
++ Direct Link to the Website.
 
 We will add more features in future, to make the LUYA control panel a powerfull tool!
 
