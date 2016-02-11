@@ -56,7 +56,7 @@ class LanguageSwitcher extends \luya\base\Widget
             if ($item) {
                 $link = $item->link;
                 
-                if ($item->type == 2) {
+                if ($item->type == 2  && !empty($rule)) {
                     $routeParams = [$rule['route']];
                     
                     foreach ($rule['params'] as $key => $value) {
