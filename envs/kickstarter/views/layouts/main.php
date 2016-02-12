@@ -52,7 +52,7 @@
                                     <?php if ($child->hasChildren()): ?>
                                     <ul>
                                         <?php foreach ($child->children as $grandChild): ?>
-                                            <li><a<?php if ($grandChild->isActive): ?> class="active"<?endif;?> href="<?php echo $grandChild->link; ?>">&raquo; <?php echo $grandChild->title; ?></a>
+                                            <li><a<?php if ($grandChild->isActive): ?> class="active"<?php endif;?> href="<?php echo $grandChild->link; ?>">&raquo; <?php echo $grandChild->title; ?></a>
                                         <?php endforeach; ?>
                                     </ul>
                                     <?php endif; ?>
