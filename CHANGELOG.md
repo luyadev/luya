@@ -13,6 +13,7 @@ LUYA CHANGELOG
 
 **ISSUES**
 
+- `#772` Fixing some more short open tags in kickstarter project
 - `#766` Added image dimensions below the preview. Styled the dimensions div. (Image upload)
 - `#743` Replacing all short open tags
 - `#752` Filter import removes old filters, filter import detect chain changes and removes image sources, storage component trys to recreate an image if not existing.
