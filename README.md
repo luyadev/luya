@@ -26,7 +26,8 @@ We have a made an absolut easy to understand *STEP-BY-STEP* Guide to install Luy
 
 If you have any questions or problems, don't hesitate to create a [new issue](https://github.com/zephir/luya/issues/new) on the project repository.
 
-+ [Questions & Issues](https://github.com/zephir/luya/issues)
++ [Issues on GitHub](https://github.com/zephir/luya/issues)
++ [Ask us in Gitter](https://gitter.im/zephir/luya)
 
 ### Contribution
 
