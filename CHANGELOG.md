@@ -4,8 +4,7 @@ LUYA CHANGELOG
 1.0.0-beta6 (in progress)
 -------------------------
 
-**ISSUES**
-
+- `#774` Update Yii Version to 2.0.7
 - `#768` Fixed issue where language switcher widget throws an exception when rule is empty.
 
 1.0.0-beta5 (9.2.2016)
