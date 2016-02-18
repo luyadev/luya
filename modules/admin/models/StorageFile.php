@@ -3,6 +3,7 @@
 namespace admin\models;
 
 use Yii;
+use luya\web\Application;
 
 class StorageFile extends \yii\db\ActiveRecord
 {
@@ -50,7 +51,7 @@ class StorageFile extends \yii\db\ActiveRecord
     {
         $this->upload_timestamp = time();
         if (empty($this->upload_user_id)) {
-            if (!Yii::$app->adminuser->isGuest) {
+            if (Yii::$app instanceof Application && !Yii::$app->adminuser->isGuest) {
                 $this->upload_user_id = Yii::$app->adminuser->getId();
             }
         }
