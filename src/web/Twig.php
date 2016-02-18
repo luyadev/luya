@@ -10,13 +10,19 @@ use Twig_Extension_Debug;
 
 /**
  * from string:
+ * 
+ * ```
  * $twig = Yii::$app->twig->env(new \Twig_Loader_String());
  * $html = $twig->render(['foo' => 'var']);.
- *
+ * ```
+ * 
  * from file:
+ * 
+ * ```
  * $twig = Yii::$app->twig->env(new \Twig_Loader_Filesystem(\yii::getAlias('@app/views/cmslayouts/')));
  * $html = $twig->render('xyz.twig', ['foo' => 'var']);
- *
+ * ```
+ * 
  * @author nadar
  */
 class Twig extends \yii\base\Component

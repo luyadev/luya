@@ -4,8 +4,17 @@ LUYA CHANGELOG
 1.0.0-beta6 (in progress)
 -------------------------
 
-**ISSUES**
+**BC BREAKS**
 
+`#777`: The suffix (ActiveWindow) is now removed from the folders where the view files are located:
++ before: `MyTestActiveWindow` folder for view files: `views/<locator>/mytestactivewindow`
++ after: `MyTestActiveWindow` folder for view files: `views/<locator>/mytest`.
+This is consitent naming as the for controllers (DefaultController) folder name is `default`.
+
+**ISSUS**
+
+- `#777` Renamed ActiveWindow folder name to lookup view files to render (Removed the suffix ActiveWindow).
+- `#774` Update Yii Version to 2.0.7
 - `#768` Fixed issue where language switcher widget throws an exception when rule is empty.
 
 1.0.0-beta5 (9.2.2016)

@@ -5,6 +5,7 @@ namespace admin\ngrest\base;
 use Yii;
 use luya\Exception;
 use admin\ngrest\base\ActiveWindowView;
+use yii\helpers\StringHelper;
 
 /**
  * Base class for all ActiveWindow classes.
@@ -22,6 +23,8 @@ abstract class ActiveWindow extends \yii\base\Object implements \yii\base\ViewCo
     private $_name = null;
     
     private $_hashName = null;
+    
+    protected $suffix = 'ActiveWindow';
     
     public $module = null;
     
@@ -57,6 +60,17 @@ abstract class ActiveWindow extends \yii\base\Object implements \yii\base\ViewCo
         return $this->_name;
     }
     
+    public function getViewFolderName()
+    {
+        $name = $this->getName();
+        
+        if (StringHelper::endsWith($name, $this->suffix, false)) {
+            $name = substr($name, 0, -(strlen($this->suffix)));
+        }
+        
+        return strtolower($name);
+    }
+    
     public function getHashName()
     {
         if ($this->_hashName === null) {
@@ -74,7 +88,7 @@ abstract class ActiveWindow extends \yii\base\Object implements \yii\base\ViewCo
             $module = '@'.$module;
         }
         
-        return implode(DIRECTORY_SEPARATOR, [Yii::getAlias($module), 'views', 'aws', strtolower($this->getName())]);
+        return implode(DIRECTORY_SEPARATOR, [Yii::getAlias($module), 'views', 'aws', $this->getViewFolderName()]);
     }
     
     public function getView()
