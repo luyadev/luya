@@ -7,7 +7,7 @@ class m151007_113638_admin_file_use_socket extends Migration
     public function up()
     {
         $this->addColumn('admin_storage_file', 'passthrough_file', 'tinyint(1) default 0');
-        $this->addColumn('admin_storage_file', 'passthrough_file_password', 'varchar(40) NOT NULL');
+        $this->addColumn('admin_storage_file', 'passthrough_file_password', 'varchar(40)');
         $this->addColumn('admin_storage_file', 'passthrough_file_stats', 'int(11) default 0');
     }
 
