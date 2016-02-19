@@ -119,24 +119,13 @@ abstract class ActiveWindow extends \yii\base\Object implements \yii\base\ViewCo
         return $this->_itemId;
     }
     
-    public function sendError($message)
+    public function sendError($message, array $data = [])
     {
-        return ['error' => true, 'message' => $message];
+        return ['error' => true, 'message' => $message, 'responseData' => $data];
     }
     
-    public function sendSuccess($message)
+    public function sendSuccess($message, array $data = [])
     {
-        return ['error' => false, 'message' => $message];
-    }
-    
-    /**
-     * @todo remove
-     * @param string $success
-     * @param unknown $transport
-     * @return multitype:boolean unknown
-     */
-    public function response($success = true, $transport)
-    {
-        return ['error' => !$success, 'transport' => $transport];
+        return ['error' => false, 'message' => $message, 'responseData' => $data];
     }
 }
