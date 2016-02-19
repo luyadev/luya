@@ -12,61 +12,108 @@ class Item extends \yii\base\Object
     
     private $_imageMimeTypes = ['image/gif', 'image/jpeg', 'image/png'];
     
+    /**
+     * 
+     * @return mixed
+     */
     public function getId()
     {
         return $this->itemArray['id'];
     }
     
+    /**
+     * 
+     * @return mixed
+     */
     public function getFolderId()
     {
         return $this->itemArray['folder_id'];
     }
     
+    /**
+     * 
+     */
     public function getFolder()
     {
         return Yii::$app->storage->getFolder($this->getFolderId());
     }
     
+    /**
+     * 
+     * @return mixed
+     */
     public function getName()
     {
         return $this->itemArray['name_original'];
     }
     
+    /**
+     * 
+     * @return mixed
+     */
     public function getSystemFileName()
     {
         return $this->itemArray['name_new_compound'];
     }
     
+    /**
+     * 
+     * @return mixed
+     */
     public function getMimeType()
     {
         return $this->itemArray['mime_type'];
     }
     
+    /**
+     * 
+     * @return mixed
+     */
     public function getExtension()
     {
         return $this->itemArray['extension'];
     }
     
+    /**
+     * 
+     * @return mixed
+     */
     public function getSize()
     {
         return $this->itemArray['file_size'];
     }
     
+    /**
+     * 
+     * @return string
+     */
     public function getSizeReadable()
     {
         return FileHelper::humanReadableFilesize($this->getSize());
     }
     
+    /**
+     * 
+     * @return mixed
+     */
     public function getUploadTimestamp()
     {
         return $this->itemArray['upload_timestamp'];
     }
     
+    /**
+     * 
+     * @return boolean
+     */
     public function getIsImage()
     {
         return in_array($this->getMimeType(), $this->_imageMimeTypes);
     }
     
+    /**
+     * 
+     * @return mixed
+     */
     public function getHashName()
     {
         return $this->itemArray['hash_name'];
@@ -100,11 +147,19 @@ class Item extends \yii\base\Object
         return Yii::$app->storage->httpPath . '/' . $this->itemArray['name_new_compound'];
     }
     
+    /**
+     * 
+     * @return string
+     */
     public function getServerSource()
     {
         return Yii::$app->storage->serverPath . '/' . $this->itemArray['name_new_compound'];
     }
     
+    /**
+     * 
+     * @return string[]|boolean[]|mixed[]
+     */
     public function toArray()
     {
         return [

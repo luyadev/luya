@@ -64,7 +64,6 @@ use Imagine\Gd\Imagine;
  * @property array $imagesArray An array containg all images
  * @property array $foldersArray An array containing all folders
  * @property array $filtersArray An array with all filters
- * 
  * @author nadar
  */
 class StorageContainer extends \yii\base\Component
@@ -93,12 +92,21 @@ class StorageContainer extends \yii\base\Component
     
     private $_filtersArray = null;
     
+    /**
+     * 
+     * @param \luya\web\Request $request
+     * @param array $config
+     */
     public function __construct(\luya\web\Request $request, array $config = [])
     {
         $this->request = $request;
         parent::__construct($config);
     }
     
+    /**
+     * 
+     * @return string
+     */
     public function getHttpPath()
     {
         if ($this->_httpPath === null) {
@@ -108,6 +116,10 @@ class StorageContainer extends \yii\base\Component
         return $this->_httpPath;
     }
     
+    /**
+     * 
+     * @return string
+     */
     public function getServerPath()
     {
         if ($this->_serverPath === null) {
@@ -117,6 +129,10 @@ class StorageContainer extends \yii\base\Component
         return $this->_serverPath;
     }
     
+    /**
+     * 
+     * @return NULL|mixed|boolean
+     */
     public function getFilesArray()
     {
         if ($this->_filesArray === null) {
@@ -126,11 +142,20 @@ class StorageContainer extends \yii\base\Component
         return $this->_filesArray;
     }
     
+    /**
+     * 
+     * @param unknown $fileId
+     * @return boolean|mixed
+     */
     public function getFilesArrayItem($fileId)
     {
         return (isset($this->filesArray[$fileId])) ? $this->filesArray[$fileId] : false;
     }
     
+    /**
+     * 
+     * @return NULL|mixed|boolean
+     */
     public function getImagesArray()
     {
         if ($this->_imagesArray === null) {
@@ -140,31 +165,52 @@ class StorageContainer extends \yii\base\Component
         return $this->_imagesArray;
     }
     
+    /**
+     * 
+     * @param unknown $imageId
+     * @return boolean|mixed
+     */
     public function getImagesArrayItem($imageId)
     {
         return (isset($this->imagesArray[$imageId])) ? $this->imagesArray[$imageId] : false;
     }
     
+    /**
+     * 
+     * @param array $args
+     */
     public function findFiles(array $args = [])
     {
         return (new \admin\file\Query())->where($args)->all();
     }
     
+    /**
+     * 
+     * @param array $args
+     */
     public function findFile(array $args = [])
     {
         return (new \admin\file\Query())->where($args)->one();
     }
     
+    /**
+     * 
+     * @param unknown $fileId
+     * @return \admin\storage\admin\storage\QueryTrait|\admin\storage\Object
+     */
     public function getFile($fileId)
     {
         return (new \admin\file\Query())->findOne($fileId);
     }
     
     /**
-     * @todo its a copy from the old colde, refactor code
-     * @param string $fileSource
-     * @param string $fileName
-     * @param int $folderId
+     * Add a new file based on the source to the file
+     * 
+     * @param string $fileSource Path to the file source where the file should be created from
+     * @param string $fileName The name of this file (must contain data type suffix).
+     * @param int $folderId The id of the folder where the file should be sorted in
+     * @param boolean $isHidden Should the file visible in the filemanager
+     * @return boolean|exception
      */
     public function addFile($fileSource, $fileName, $folderId = 0, $isHidden = false)
     {
@@ -221,25 +267,41 @@ class StorageContainer extends \yii\base\Component
         return false;
     }
     
+    /**
+     * 
+     * @param array $args
+     */
     public function findImages(array $args = [])
     {
         return (new \admin\image\Query())->where($args)->all();
     }
     
+    /**
+     * 
+     * @param array $args
+     */
     public function findImage(array $args = [])
     {
         return (new \admin\image\Query())->where($args)->one();
     }
     
+    /**
+     * 
+     * @param unknown $imageId
+     * @return \admin\storage\admin\storage\QueryTrait|\admin\storage\Object
+     */
     public function getImage($imageId)
     {
         return (new \admin\image\Query())->findOne($imageId);
     }
     
     /**
-     * @todo this is a copy of the old code, clean up!
-     * @param unknown $fileId
-     * @param unknown $filterId
+     * Add a new image based on an existing file
+     * 
+     * @param integer $fileId The id of the file where image should be created from.
+     * @param integer $filterId The id of the filter which should be applied to, if filter is 0, no filter will be added.
+     * @param boolean $throwException Whether the addImage should throw an exception or just return boolean
+     * @return boolean|exception 
      */
     public function addImage($fileId, $filterId = 0, $throwException = false)
     {
@@ -302,6 +364,10 @@ class StorageContainer extends \yii\base\Component
         return false;
     }
     
+    /**
+     * 
+     * @return NULL|mixed|boolean
+     */
     public function getFoldersArray()
     {
         if ($this->_foldersArray === null) {
@@ -311,26 +377,49 @@ class StorageContainer extends \yii\base\Component
         return $this->_foldersArray;
     }
     
+    /**
+     * 
+     * @param unknown $folderId
+     * @return boolean|mixed
+     */
     public function getFoldersArrayItem($folderId)
     {
         return (isset($this->foldersArray[$folderId])) ? $this->foldersArray[$folderId] : false;
     }
     
+    /**
+     * 
+     * @param array $args
+     */
     public function findFolders(array $args = [])
     {
         return (new \admin\folder\Query())->where($args)->all();
     }
     
+    /**
+     * 
+     * @param array $args
+     */
     public function findFolder(array $args = [])
     {
         return (new \admin\folder\Query())->where($args)->one();
     }
     
+    /**
+     * 
+     * @param unknown $folderId
+     */
     public function getFolder($folderId)
     {
         return (new \admin\folder\Query())->where(['id' => $folderId])->one();
     }
     
+    /**
+     * 
+     * @param unknown $folderName
+     * @param number $parentFolderId
+     * @return boolean
+     */
     public function addFolder($folderName, $parentFolderId = 0)
     {
         $model = new StorageFolder();
@@ -341,6 +430,10 @@ class StorageContainer extends \yii\base\Component
         return $model->save(false);
     }
     
+    /**
+     * 
+     * @return NULL|mixed|boolean
+     */
     public function getFiltersArray()
     {
         if ($this->_filtersArray === null) {
@@ -350,6 +443,11 @@ class StorageContainer extends \yii\base\Component
         return $this->_filtersArray;
     }
     
+    /**
+     * 
+     * @param unknown $filterIdentifier
+     * @return boolean|mixed
+     */
     public function getFiltersArrayItem($filterIdentifier)
     {
         return (isset($this->filtersArray[$filterIdentifier])) ? $this->filtersArray[$filterIdentifier] : false;
