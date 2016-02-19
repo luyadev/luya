@@ -23,7 +23,7 @@ class ChangePasswordTest extends \tests\web\Base
     {
         $this->aws->setItemId(1);
         $response = $this->aws->callbackSave('foo', 'bar');
-        $this->assertEquals(2, count($response));
+        $this->assertEquals(3, count($response));
         $this->assertEquals(1, $response['error']);
     }
 
@@ -31,7 +31,7 @@ class ChangePasswordTest extends \tests\web\Base
     {
         $this->aws->setItemId(1);
         $response = $this->aws->callbackSave('testluyaio', 'testluyaio');
-        $this->assertEquals(2, count($response));
+        $this->assertEquals(3, count($response));
         $this->assertEquals(0, $response['error']);
     }
 }
