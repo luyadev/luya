@@ -308,4 +308,14 @@ return [
     // view update - blockholder
     'view_update_blockholder_clipboard' => 'Zwischenablage',
 
+// added translation in 1.0.0-beta6:
+
+    // ImageBlock
+    'block_image_fixed_width' => 'Fixe Bildbreite',
+    'block_image_fixed_height' => 'Fixe Bildhöhe',
+
+    // LayoutBlock
+    'block_layout_left_column_css_class' => 'CSS-Klassen für linke Spalte',
+    'block_layout_right_column_css_class' => 'CSS-Klassen für rechte Spalte',
+
 ];

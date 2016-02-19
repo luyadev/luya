@@ -39,6 +39,10 @@ class LayoutBlock extends \cmsadmin\base\Block
                     ],
                 ],
             ],
+            'cfgs' => [
+                ['var' => 'leftColumnClasses', 'label' => Module::t('block_layout_left_column_css_class'), 'type' => 'zaa-text'],
+                ['var' => 'rightColumnClasses', 'label' => Module::t('block_layout_right_column_css_class'), 'type' => 'zaa-text'],
+            ],
             'placeholders' => [
                 ['var' => 'left', 'label' => Module::t('block_layout_placeholders_left')],
                 ['var' => 'right', 'label' => Module::t('block_layout_placeholders_right')],
@@ -56,7 +60,7 @@ class LayoutBlock extends \cmsadmin\base\Block
 
     public function twigFrontend()
     {
-        return '<div class="row"><div class="col-md-{{ extras.leftWidth }}">{{ placeholders.left }}</div><div class="col-md-{{ extras.rightWidth }}">{{ placeholders.right }}</div></div>';
+        return '<div class="row"><div class="col-md-{{ extras.leftWidth }} {{ cfgs.leftColumnClasses }}">{{ placeholders.left }}</div><div class="col-md-{{ extras.rightWidth }} {{ cfgs.rightColumnClasses }}">{{ placeholders.right }}</div></div>';
     }
 
     public function twigAdmin()

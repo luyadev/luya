@@ -1,6 +1,6 @@
 {% if extras.imageSource and vars.text %}
     <div>
-        <img class="{% if extras.imagePosition == "left" %}pull-left{% else %}pull-right{% endif %} img-responsive" src="{{ extras.imageSource }}" style="{% if extras.imagePosition == "right" %}margin-left:{{ extras.margin }}{% else %}margin-right:{{ extras.margin }}{% endif %};margin-bottom:{{ extras.margin }}; max-width: 50%;">
+        <img class="{% if extras.imagePosition == "left" %}pull-left{% else %}pull-right{% endif %} img-responsive" src="{{ extras.imageSource }}" {% if cfgs.width %}width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} style="{% if extras.imagePosition == "right" %}margin-left:{{ extras.margin }}{% else %}margin-right:{{ extras.margin }}{% endif %};margin-bottom:{{ extras.margin }}; max-width: 50%;">
         <div>
             {% if cfgs.heading is not empty %}<{{ cfgs.headingType }}>{{ cfgs.heading }}</{{ cfgs.headingType }}>{% endif %}
             {% if cfgs.textType == 1 %}{{ extras.text }}{% else %}<p>{{ extras.text|nl2br }}</p>{% endif %}

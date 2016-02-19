@@ -77,6 +77,8 @@ class ImageTextBlock extends \cmsadmin\base\Block
                 ['var' => 'btnLabel', 'label' => Module::t('block_image_text_btnlabel_label'), 'type' => 'zaa-text'],
                 ['var' => 'btnHref', 'label' => Module::t('block_image_text_btnhref_label'), 'type' => 'zaa-text'],
                 ['var' => 'targetBlank', 'label' => Module::t('block_image_text_targetblank_label'), 'type' => 'zaa-checkbox'],
+                ['var' => 'width', 'label' => Module::t('block_image_fixed_width'), 'type' => 'zaa-text'],
+                ['var' => 'height', 'label' => Module::t('block_image_fixed_height'), 'type' => 'zaa-text'],
             ],
         ];
     }
@@ -137,7 +139,7 @@ class ImageTextBlock extends \cmsadmin\base\Block
                     '<span class="block__empty-text">' . Module::t('block_image_text_no_text') . '</span>'.
                 '{% endif %}'.
                 '{% if extras.imageAdmin.source and vars.text %}'.
-                    '<img src="{{ extras.imageAdmin.source }}" border=0 style="{% if extras.imagePosition == "left" %}float:left;{% else %}float:right{% endif %};{% if extras.imagePosition == "right" %}margin-left:{{ extras.margin }}{% else %}margin-right:{{ extras.margin }}{% endif %};margin-bottom:{{ extras.margin }}; max-width: 50%;"">'.
+                    '<img src="{{ extras.imageAdmin.source }}"{% if cfgs.width %} width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} border="0" style="{% if extras.imagePosition == "left" %}float:left;{% else %}float:right{% endif %};{% if extras.imagePosition == "right" %}margin-left:{{ extras.margin }}{% else %}margin-right:{{ extras.margin }}{% endif %};margin-bottom:{{ extras.margin }}; max-width: 50%;"">'.
                     '<p>{% if cfgs.textType == 1 %}{{ extras.text }}{% else %}{{ extras.text|nl2br }}{% endif %}</p>'.
                 '{% endif %}';
     }

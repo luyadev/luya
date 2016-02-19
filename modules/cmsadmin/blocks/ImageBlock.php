@@ -47,6 +47,10 @@ class ImageBlock extends \cmsadmin\base\Block
                     ],
                 ],
             ],
+            'cfgs' => [
+                ['var' => 'width', 'label' => Module::t('block_image_fixed_width'), 'type' => 'zaa-text'],
+                ['var' => 'height', 'label' => Module::t('block_image_fixed_height'), 'type' => 'zaa-text'],
+            ],
         ];
     }
 
@@ -75,7 +79,7 @@ class ImageBlock extends \cmsadmin\base\Block
         return '{% if extras.image is not empty %}
                 <div class="image">
                     <figure>
-                        <img class="img-responsive" src="{{extras.image.source}}" {% if vars.caption is not empty %}alt="{{vars.caption}}" title="{{vars.caption}}"{% endif %} border="0" />
+                        <img class="img-responsive" src="{{extras.image.source}}" {% if vars.caption is not empty %}alt="{{vars.caption}}" title="{{vars.caption}}"{% endif %}{% if cfgs.width %} width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} border="0" />
                         {% if extras.text is not empty %}
                             <figcaption>
                             {% if vars.textType == 1 %}{{ extras.text }}{% else %}<p>{{ extras.text|nl2br }}</p>{% endif %}
@@ -88,7 +92,7 @@ class ImageBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        $image = '{% if extras.imageAdmin.source %}<p><img src="{{extras.imageAdmin.source}}" border="0" style="max-width: 100%;" /><p>{% else %}<span class="block__empty-text">' . Module::t('block_image_no_image') . '</span>{% endif %}';
+        $image = '{% if extras.imageAdmin.source %}<p><img src="{{extras.imageAdmin.source}}"{% if cfgs.width %} width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} border="0" style="max-width: 100%;" /><p>{% else %}<span class="block__empty-text">' . Module::t('block_image_no_image') . '</span>{% endif %}';
         $image.= '{% if vars.caption is not empty %}{{vars.caption}}{% endif %}';
 
         return $image;
