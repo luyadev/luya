@@ -35,8 +35,8 @@ class FileHelper extends \yii\helpers\BaseFileHelper
         $path = pathinfo($sourceFile);
     
         return (object) [
-            'extension' => $path['extension'],
-            'name' => $path['filename'],
+            'extension' => isset($path['extension']) ? $path['extension'] : false,
+            'name' => isset($path['filename']) ? $path['filename'] : false,
         ];
     }
     
