@@ -1,8 +1,9 @@
-Bootstrap 4 Module for LUYA
-============================
+BOOTSTRAP 4 CLASSES
+===================
 
-This module contains:
+Wrapper classes for new [Bootstrap 4](http://v4-alpha.getbootstrap.com).
 
-+ cms blocks based on bootstrap 4 components (panels, alerts, tables, ...)
-+ widgets for frontend based on bootstrap 4 styles
-+ asset file to include in your project
++ ActiveForm Widget
++ ActiveField Widget
++ CMS Blocks
++ Asset File
