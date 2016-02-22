@@ -1,0 +1,31 @@
+{
+    "name" : "zephir/luya-module-contactform",
+    "description" : "LUYA Form Builder",
+    "type" : "luya-module",
+    "keywords" : ["php", "luya", "module", "cms", "yii2", "yii", "contact", "form", "yii2form", "dynamicformbuilder", "yii2-form"],
+    "license": "MIT",
+    "homepage" : "http://luya.io",
+    "authors" : [
+        {
+            "name" : "Basil",
+            "email" : "git@nadar.io",
+            "homepage" : "https://github.com/nadar"
+        }
+    ],
+    "support" : {
+        "issues" : "https://github.com/zephir/luya/issues"
+    },
+    "require" : {
+        "zephir/luya" : "1.0.0-beta5"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "contactform\\" : ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
