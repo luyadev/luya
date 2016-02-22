@@ -19,7 +19,7 @@ git subsplit publish "
     modules/newsadmin:$BASE/luya-module-newsadmin.git
     modules/account:$BASE/luya-module-account.git
     modules/accountadmin:$BASE/luya-module-accountadmin.git
-    modules/bootstrap4:$BASE/luya-bootstrap4.git
+    modules/contactform:$BASE/luya-module-contactform.git
     modules/errorapi:$BASE/luya-module-errorapi.git
     modules/exporter:$BASE/luya-module-exporter.git
     modules/gallery:$BASE/luya-module-gallery.git
