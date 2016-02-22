@@ -13,6 +13,7 @@ This is consitent naming as the for controllers (DefaultController) folder name 
 
 **ISSUS**
 
+- `#775` Fixed issue where migration/down could not find the migration file.
 - `#776` Fixed bug where command module selector does not work with foreign modules.
 - `#777` Renamed ActiveWindow folder name to lookup view files to render (Removed the suffix ActiveWindow).
 - `#774` Update Yii Version to 2.0.7

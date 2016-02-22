@@ -5,6 +5,7 @@ namespace luya\console\commands;
 use Yii;
 use yii\helpers\Console;
 use luya\helpers\FileHelper;
+use yii\console\Exception;
 
 /**
  * @see https://github.com/yiisoft/yii2/issues/384
@@ -21,8 +22,6 @@ class MigrateController extends \yii\console\controllers\MigrateController
     public $migrationFileDirs = array();
 
     public $moduleMigrationDirectories = array();
-
-    /* public $migrationTable = 'yii_migration'; @TODO rename migration table? */
 
     public function beforeAction($action)
     {
@@ -54,10 +53,31 @@ class MigrateController extends \yii\console\controllers\MigrateController
 
     protected function createMigration($class)
     {
-        $file = $this->migrationFileDirs[$class].DIRECTORY_SEPARATOR.$class.'.php';
-        require_once $file;
-
-        return new $class();
+        $orig = $this->migrationPath . DIRECTORY_SEPARATOR . $class . '.php';
+        
+        if (file_exists($orig)) {
+            require_once $file;
+            return new $class();
+        } else {
+            if (isset($this->migrationFileDirs[$class])) {
+                $file = $this->migrationFileDirs[$class].DIRECTORY_SEPARATOR.$class.'.php';
+                if (file_exists($file)) {
+                    require_once $file;
+                    return new $class();
+                }
+            }
+        }
+        
+        
+        $module = $this->prompt("Could not find migration class. Please enter the module name who belongs to '$class.':");
+        $dir = $this->getModuleMigrationDirectorie($module);
+        $file = $dir . DIRECTORY_SEPARATOR . $class . '.php';
+        if (file_exists($file)) {
+            require_once $file;
+            return new $class();
+        }
+        
+        throw new Exception("Unable to find migration for provided module $file.");
     }
 
     /**
