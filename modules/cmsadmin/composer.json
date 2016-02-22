@@ -1,6 +1,6 @@
 {
 	"name" : "zephir/luya-module-cmsadmin",
-	"description" : "Zephir Luya CMS Admin-Module",
+	"description" : "Yii2 LUYA CMS Admin-Module",
 	"type" : "luya-module",
 	"keywords" : ["php", "luya", "module", "cms", "cmsadmin", "yii2", "yii", "yii2-cms", "yii2-cmsadmin"],
 	"license": "MIT",

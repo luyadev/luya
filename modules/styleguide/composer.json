@@ -1,6 +1,6 @@
 {
 	"name" : "zephir/luya-module-styleguide",
-	"description" : "Zephir Luya Styleguide",
+	"description" : "Yii2 LUYA Styleguide",
 	"type" : "luya-module",
 	"keywords" : ["php", "luya", "module", "styleguide", "yii2", "yii"],
 	"license": "MIT",

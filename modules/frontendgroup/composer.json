@@ -1,6 +1,6 @@
 {
     "name" : "zephir/luya-module-frontendgroup",
-    "description" : "Zephir Luya Frontendgroup Module",
+    "description" : "Yii2 LUYA Frontendgroup Module",
     "type" : "luya-module",
     "keywords" : ["php", "luya", "module", "frontend", "frontendusers", "usergroups", "group", "authorization", "yii2", "yii"],
     "license": "MIT",

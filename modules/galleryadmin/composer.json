@@ -1,6 +1,6 @@
 {
 	"name" : "zephir/luya-module-galleryadmin",
-	"description" : "Zephir Luya Gallery Admin-Module",
+	"description" : "Yii2 LUYA Gallery Admin-Module",
 	"type" : "luya-module",
 	"keywords" : ["php", "luya", "module", "gallery", "galleryadmin", "yii2", "yii"],
 	"license": "MIT",

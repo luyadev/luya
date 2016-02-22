@@ -1,6 +1,6 @@
 {
 	"name" : "zephir/luya-module-admin",
-	"description" : "Zephir Luya Admin",
+	"description" : "Yii2 LUYA Admin",
 	"type" : "luya-module",
 	"keywords" : ["php", "luya", "module", "admin", "yii2", "yii", "administration", "angular", "ngrest", "manage", "panel"],
 	"license": "MIT",

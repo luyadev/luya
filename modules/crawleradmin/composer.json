@@ -1,6 +1,6 @@
 {
 	"name" : "zephir/luya-module-crawleradmin",
-	"description" : "Zephir Luya Crawler Admin-Module",
+	"description" : "Yii2 LUYA Crawler Admin-Module",
 	"type" : "luya-module",
 	"keywords" : ["php", "luya", "module", "crawler", "crawleradmin", "yii2", "yii"],
 	"license": "MIT",

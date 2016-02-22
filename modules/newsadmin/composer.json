@@ -1,6 +1,6 @@
 {
 	"name" : "zephir/luya-module-newsadmin",
-	"description" : "Zephir Luya News Admin-Module",
+	"description" : "Yii2 LUYA News Admin-Module",
 	"type" : "luya-module",
 	"keywords" : ["php", "luya", "module", "news", "newsadmin", "yii2", "yii"],
 	"license": "MIT",

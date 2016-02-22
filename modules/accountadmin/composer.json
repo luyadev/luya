@@ -1,6 +1,6 @@
 {
     "name" : "zephir/luya-module-accountadmin",
-    "description" : "Zephir Luya User Account Admin",
+    "description" : "Yii2 LUYA User Account Admin",
     "type" : "luya-module",
     "keywords" : ["php", "luya", "module", "account", "admin", "yii2", "yii"],
     "license": "MIT",
