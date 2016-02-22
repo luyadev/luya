@@ -105,7 +105,7 @@ return [
     'ngrest_crud_btn_add' => 'Add',
     'ngrest_crud_btn_close' => 'Close',
     'ngrest_crud_search_text' => 'Enter search term...',
-    'ngrest_crud_rows_count' => 'Entires',
+    'ngrest_crud_rows_count' => 'Entries',
     'ngrest_crud_btn_create' => 'Create',
 
     // apis
