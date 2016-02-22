@@ -38,6 +38,9 @@ class Command extends \luya\console\Controller
     {
         $modules = [];
         foreach (Yii::$app->getModules() as $id => $object) {
+            if (!$object instanceof \luya\base\Module) {
+                continue;
+            }
             if (isset($options['onlyAdmin'])) {
                 if (!$object->isAdmin) {
                     continue;
