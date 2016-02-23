@@ -24,8 +24,8 @@
         <!-- You can delete this line in your template! as this is only a luya information. -->
         <div style="padding:20px; background-color:#9ccc65; margin-top:20px;" class="container">
             <div>
-                <?php echo \luya\Module::t('luya', 'kickstarter_success'); ?>
-                <?php echo \luya\Module::t('luya', 'kickstarter_admin_link', ['link' => \luya\helpers\Url::toInternal(['admin/default/index']), true]); ?>
+                <?php echo Yii::t('app', 'kickstarter_success'); ?>
+                <?php echo Yii::t('app', 'kickstarter_admin_link', ['link' => \luya\helpers\Url::toInternal(['admin/default/index']), true]); ?>
             </div>
         </div>
         

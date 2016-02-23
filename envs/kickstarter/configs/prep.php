@@ -119,6 +119,14 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\DummyCache', // use: yii\caching\FileCache
         ],
+        
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                ],
+            ],
+        ],
     ],
     
     'bootstrap' => [
