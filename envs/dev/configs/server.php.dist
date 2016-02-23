@@ -9,7 +9,6 @@ $config = [
     'basePath' => dirname(__DIR__),
     'defaultRoute' => 'cms', // set the default module
 	'modules' => [
-        'luya' => 'luya\Module',
         'cms' => [
             'class' => 'cms\Module',
             'assets' => [
@@ -40,6 +39,9 @@ $config = [
             'password' => '',
             'charset' => 'utf8'
         ]
+    ],
+    'bootstrap' => [
+        'cms',
     ]
 ];
 

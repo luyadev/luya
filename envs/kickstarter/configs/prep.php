@@ -36,12 +36,6 @@ $config = [
     'basePath' => dirname(__DIR__),
     
     'modules' => [
-        
-        /*
-         * This module is need to run Luya. It contains the different luya bootstraping proccess and components etc.
-         */
-        'luya' => 'luya\Module',
-        
         /*
          * If you have other administration module (like cmsadmin) then you going to need this module. The Admin module provides
          * a lot of functionalitiy like storage system etc. But the basic concept of LUYA is also that you can use LUYA without the
@@ -125,7 +119,11 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\DummyCache', // use: yii\caching\FileCache
         ],
-    ]
+    ],
+    
+    'bootstrap' => [
+        'cms',
+    ],
 ];
 
 /**
