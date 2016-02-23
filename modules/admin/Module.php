@@ -2,8 +2,8 @@
 
 namespace admin;
 
-use luya\Module as Luya;
-use luya\components\UrlRule;
+use Yii;
+use luya\web\UrlRule;
 
 class Module extends \admin\base\Module
 {
@@ -68,7 +68,7 @@ class Module extends \admin\base\Module
     {
         foreach ($translations as $module => $data) {
             foreach ($data as $key) {
-                $this->_jsTranslations[$key] = \luya\Module::t($module, $key);
+                $this->_jsTranslations[$key] = Yii::t($module, $key);
             }
         }
     }
@@ -76,17 +76,17 @@ class Module extends \admin\base\Module
     public function getMenu()
     {
         return $this
-        ->nodeRoute(Luya::t('admin', 'menu_node_filemanager'), 'folder_open', 'admin-storage-index', 'admin/storage/index')
-        ->node(Luya::t('admin', 'menu_node_system'), 'layers')
-            ->group(Luya::t('admin', 'menu_group_access'))
-                ->itemApi(Luya::t('admin', 'menu_access_item_user'), 'admin-user-index', 'person', 'api-admin-user')
-                ->itemApi(Luya::t('admin', 'menu_access_item_group'), 'admin-group-index', 'group', 'api-admin-group')
-            ->group(Luya::t('admin', 'menu_group_system'))
-                ->itemApi(Luya::t('admin', 'menu_system_item_language'), 'admin-lang-index', 'language', 'api-admin-lang')
-                ->itemApi(Luya::t('admin', 'menu_system_item_tags'), 'admin-tag-index', 'label', 'api-admin-tag')
-            ->group(Luya::t('admin', 'menu_group_images'))
-                ->itemApi(Luya::t('admin', 'menu_images_item_effects'), 'admin-effect-index', 'blur_circular', 'api-admin-effect')
-                ->itemApi(Luya::t('admin', 'menu_images_item_filters'), 'admin-filter-index', 'adjust', 'api-admin-filter')
+        ->nodeRoute(Module::t('menu_node_filemanager'), 'folder_open', 'admin-storage-index', 'admin/storage/index')
+        ->node(Module::t('menu_node_system'), 'layers')
+            ->group(Module::t('menu_group_access'))
+                ->itemApi(Module::t('menu_access_item_user'), 'admin-user-index', 'person', 'api-admin-user')
+                ->itemApi(Module::t('menu_access_item_group'), 'admin-group-index', 'group', 'api-admin-group')
+            ->group(Module::t('menu_group_system'))
+                ->itemApi(Module::t('menu_system_item_language'), 'admin-lang-index', 'language', 'api-admin-lang')
+                ->itemApi(Module::t('menu_system_item_tags'), 'admin-tag-index', 'label', 'api-admin-tag')
+            ->group(Module::t('menu_group_images'))
+                ->itemApi(Module::t('menu_images_item_effects'), 'admin-effect-index', 'blur_circular', 'api-admin-effect')
+                ->itemApi(Module::t('menu_images_item_filters'), 'admin-filter-index', 'adjust', 'api-admin-filter')
         ->menu();
     }
 
@@ -107,6 +107,16 @@ class Module extends \admin\base\Module
             ],
         ];
     }
+    
+    public $translations = [
+        [
+            'prefix' => 'admin*',
+            'basePath' => '@admin/messages',
+            'fileMap' => [
+                'admin' => 'admin.php',
+            ],
+        ],
+    ];
 
     public function import(\luya\console\interfaces\ImportController $import)
     {
@@ -120,6 +130,6 @@ class Module extends \admin\base\Module
     
     public static function t($message, array $params = [])
     {
-        return \luya\Module::t('admin', $message, $params);
+        return Yii::t('admin', $message, $params, Yii::$app->luyaLanguage);
     }
 }

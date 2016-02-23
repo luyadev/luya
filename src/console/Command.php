@@ -5,7 +5,6 @@ namespace luya\console;
 use Yii;
 use yii\helpers\StringHelper;
 use yii\helpers\Inflector;
-use luya\Module;
 
 class Command extends \luya\console\Controller
 {
@@ -87,6 +86,6 @@ class Command extends \luya\console\Controller
      */
     public function getLuyaVersion()
     {
-        return Module::VERSION;
+        return \luya\Boot::VERSION;
     }
 }

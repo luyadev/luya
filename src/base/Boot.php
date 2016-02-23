@@ -19,6 +19,15 @@ use luya\helpers\ArrayHelper;
 abstract class Boot
 {
     /**
+     * The current luya version.
+     *
+     * @link https://github.com/zephir/luya/blob/master/CHANGELOG.md
+     *
+     * @var string
+     */
+    const VERSION = '1.0.0-beta6-dev';
+    
+    /**
      * @var string The path to the config file, which returns an array containing you configuration.
      */
     public $configFile = '../configs/server.php';

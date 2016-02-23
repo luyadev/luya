@@ -2,7 +2,7 @@
 
 namespace newsadmin;
 
-use yii;
+use Yii;
 
 class Module extends \admin\base\Module
 {

@@ -20,7 +20,7 @@ class UrlRuleTest extends \tests\web\Base
         Yii::$app->composition->pattern = '<langShortCode:[a-z]{2}>/<foo:[0-9]{4}>/<bar:[a-z0-9]+>';
 
         $manager = new UrlManager();
-        $rule = new \luya\components\UrlRule();
+        $rule = new \luya\web\UrlRule();
 
         $response = $rule->parseRequest($manager, $request);
 
@@ -38,7 +38,7 @@ class UrlRuleTest extends \tests\web\Base
         $request->pathInfo = '/news';
 
         $manager = new UrlManager();
-        $rule = new \luya\components\UrlRule();
+        $rule = new \luya\web\UrlRule();
 
         // first part and not a module. equals false;
         $this->assertEquals(false, $rule->parseRequest($manager, $request));
@@ -49,7 +49,7 @@ class UrlRuleTest extends \tests\web\Base
         $request = new Request();
         $request->pathInfo = '';
 
-        $rule = new \luya\components\UrlRule();
+        $rule = new \luya\web\UrlRule();
 
         $this->assertEquals(true, is_array($rule->getUrlParts($request)));
         $this->assertEquals(0, count($rule->getUrlParts($request)));
@@ -93,7 +93,7 @@ class UrlRuleTest extends \tests\web\Base
         $request->pathInfo = $url;
 
         $manager = new UrlManager();
-        $rule = new \luya\components\UrlRule();
+        $rule = new \luya\web\UrlRule();
 
         return $rule->parseRequest($manager, $request);
     }

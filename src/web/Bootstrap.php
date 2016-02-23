@@ -29,7 +29,7 @@ class Bootstrap extends \luya\base\Bootstrap
                 if (isset($v['position'])) {
                     $pos = $v['position'];
                 } else {
-                    $pos = \luya\components\UrlRule::POSITION_AFTER_LUYA;
+                    $pos = \luya\web\UrlRule::POSITION_AFTER_LUYA;
                 }
                 
                 $this->_urlRules[$pos][] = $v;

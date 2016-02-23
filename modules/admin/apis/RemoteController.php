@@ -4,7 +4,6 @@ namespace admin\apis;
 
 use Yii;
 use Exception;
-use Luya\Module;
 use admin\models\UserOnline;
 
 class RemoteController extends \luya\rest\Controller
@@ -23,7 +22,7 @@ class RemoteController extends \luya\rest\Controller
 
         return [
             'yii_version' => Yii::getVersion(),
-            'luya_version' => Module::VERSION,
+            'luya_version' => \luya\Boot::VERSION,
             'app_title' => Yii::$app->siteTitle,
             'app_debug' => (int) YII_DEBUG,
             'app_env' => YII_ENV,

@@ -3,13 +3,15 @@
 namespace cms;
 
 use luya\web\UrlRule;
+use yii\base\BootstrapInterface;
+use luya\web\Application;
 
 /**
  * Cms Module.
  * 
  * @author nadar
  */
-class Module extends \luya\base\Module
+class Module extends \luya\base\Module implements BootstrapInterface
 {
     /**
      * @var array We have no urlRules in cms Module. the UrlRoute file will only be used when
@@ -50,5 +52,17 @@ class Module extends \luya\base\Module
                 'class' => 'cms\menu\Container',
             ],
         ];
+    }
+
+    public function bootstrap($app)
+    {
+        $app->on(Application::EVENT_BEFORE_REQUEST, function($event) {
+            if (!$event->sender->request->isConsoleRequest && !$event->sender->request->isAdmin()) {
+                $event->sender->urlManager->addRules([
+                    ['class' => 'cms\components\RouteBehaviorUrlRule'],
+                    ['class' => 'cms\components\CatchAllUrlRule'],
+                ]);
+            }
+        });
     }
 }

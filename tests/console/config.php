@@ -11,7 +11,7 @@ $config = [
     'basePath' => dirname(__DIR__),
     'defaultRoute' => 'unitmodule',
     'modules' => [
-        'luya' => 'luya\Module',
+        //'luya' => 'luya\Module',
         'admin' => [
             'class' => 'admin\Module',
         ],

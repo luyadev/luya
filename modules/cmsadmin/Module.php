@@ -2,6 +2,8 @@
 
 namespace cmsadmin;
 
+use Yii;
+
 class Module extends \admin\base\Module
 {
     public $isCoreModule = true;
@@ -33,14 +35,14 @@ class Module extends \admin\base\Module
     public function getMenu()
     {
         return $this
-            ->nodeRoute(static::t('menu_node_cms'), 'content_copy', 'cmsadmin-default-index', 'cmsadmin/default/index', 'cmsadmin\models\NavItem')
-            ->node(static::t('menu_node_cmssettings'), 'settings')
-                ->group(static::t('menu_group_env'))
-                    ->itemApi(static::t('menu_group_item_env_container'), 'cmsadmin-navcontainer-index', 'label_outline', 'api-cms-navcontainer')
-                    ->itemApi(static::t('menu_group_item_env_layouts'), 'cmsadmin-layout-index', 'view_quilt', 'api-cms-layout')
-                ->group(static::t('menu_group_elements'))
-                    ->itemApi(static::t('menu_group_item_elements_group'), 'cmsadmin-blockgroup-index', 'view_module', 'api-cms-blockgroup')
-                    ->itemApi(static::t('menu_group_item_elements_blocks'), 'cmsadmin-block-index', 'format_align_left', 'api-cms-block')
+            ->nodeRoute(Module::t('menu_node_cms'), 'content_copy', 'cmsadmin-default-index', 'cmsadmin/default/index', 'cmsadmin\models\NavItem')
+            ->node(Module::t('menu_node_cmssettings'), 'settings')
+                ->group(Module::t('menu_group_env'))
+                    ->itemApi(Module::t('menu_group_item_env_container'), 'cmsadmin-navcontainer-index', 'label_outline', 'api-cms-navcontainer')
+                    ->itemApi(Module::t('menu_group_item_env_layouts'), 'cmsadmin-layout-index', 'view_quilt', 'api-cms-layout')
+                ->group(Module::t('menu_group_elements'))
+                    ->itemApi(Module::t('menu_group_item_elements_group'), 'cmsadmin-blockgroup-index', 'view_module', 'api-cms-blockgroup')
+                    ->itemApi(Module::t('menu_group_item_elements_blocks'), 'cmsadmin-block-index', 'format_align_left', 'api-cms-block')
             ->menu();
     }
 
@@ -73,8 +75,18 @@ class Module extends \admin\base\Module
         ];
     }
     
+    public $translations = [
+        [
+            'prefix' => 'cmsadmin*',
+            'basePath' => '@cmsadmin/messages',
+            'fileMap' => [
+                'cmsadmin' => 'cmsadmin.php',
+            ],
+        ],
+    ];
+    
     public static function t($message, array $params = [])
     {
-        return \luya\Module::t('cmsadmin', $message, $params);
+        return Yii::t('cmsadmin', $message, $params, Yii::$app->luyaLanguage);
     }
 }

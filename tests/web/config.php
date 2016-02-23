@@ -10,7 +10,6 @@ $config = [
     'basePath' => dirname(__DIR__),
     'defaultRoute' => 'cms',
     'modules' => [
-        'luya' => 'luya\Module',
         'admin' => [
             'class' => 'admin\Module',
         ],
@@ -60,6 +59,7 @@ $config = [
         ],
         */
     ],
+    'bootstrap' => ['cms'],
 ];
 
 return $config;

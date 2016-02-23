@@ -160,7 +160,7 @@ class BlockController extends \luya\console\Command
         $content = '<?php'.PHP_EOL.PHP_EOL;
         $content .= 'namespace '.$ns.';'.PHP_EOL.PHP_EOL;
         $content .= '/**'.PHP_EOL;
-        $content .= ' * Block created with Luya Block Creator Version '.\luya\Module::VERSION.' at '.date('d.m.Y H:i').PHP_EOL;
+        $content .= ' * Block created with Luya Block Creator Version '.\luya\Boot::VERSION.' at '.date('d.m.Y H:i').PHP_EOL;
         $content .= ' */'.PHP_EOL;
         $content .= 'class '.$blockName.' extends \cmsadmin\base\Block'.PHP_EOL;
         $content .= '{'.PHP_EOL;

@@ -51,7 +51,7 @@ class ModuleController extends \luya\console\Command
         $content = '<?php'.PHP_EOL;
         $content .= 'namespace app\modules\\'.$moduleName.';'.PHP_EOL.PHP_EOL;
         $content .= '/**'.PHP_EOL;
-        $content .= ' * Module created with Luya Module Creator Version '.\luya\Module::VERSION.' at '.date('d.m.Y H:i').PHP_EOL;
+        $content .= ' * Module created with Luya Module Creator Version '.\luya\Boot::VERSION.' at '.date('d.m.Y H:i').PHP_EOL;
         $content .= ' */'.PHP_EOL;
         $content .= 'class Module extends '.(($isAdmin) ? '\admin\base\Module' : '\luya\base\Module').PHP_EOL;
         $content .= '{'.PHP_EOL;
