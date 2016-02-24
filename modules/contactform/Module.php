@@ -24,6 +24,8 @@ use luya\Exception;
  */
 class Module extends \luya\base\Module
 {
+    public $useAppViewPath = true;
+    
     public $attributes = null;
     
     public $attributeLabels = [];

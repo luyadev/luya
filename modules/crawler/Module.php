@@ -10,6 +10,8 @@ namespace crawler;
  */
 class Module extends \luya\base\Module
 {
+    public $useAppViewPath = true;
+    
     public $isCoreModule = true;
 
     public $baseUrl = null;

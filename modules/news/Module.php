@@ -4,6 +4,8 @@ namespace news;
 
 class Module extends \luya\base\Module
 {
+    public $useAppViewPath = true;
+    
     public $isCoreModule = true;
 
     public $urlRules = [
