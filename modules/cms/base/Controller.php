@@ -11,10 +11,6 @@ use yii\web\Response;
 
 abstract class Controller extends \luya\web\Controller
 {
-    /*
-     * Use the view files inside the cms module and not within the user project code.
-     */
-    public $useModuleViewPath = true;
 
     public function renderItem($navItemId, $appendix = null)
     {

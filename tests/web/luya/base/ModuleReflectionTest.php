@@ -28,6 +28,7 @@ class ModuleReflectionTest extends \tests\web\Base
         $this->assertEquals('@app/views/unitmodule/', $content['moduleLayoutViewPath']);
     }
 
+    /*
     public function testModuleObject()
     {
         $ref = $this->buildObject(Yii::$app->getModule('unitmodule'));
@@ -43,6 +44,7 @@ class ModuleReflectionTest extends \tests\web\Base
         $this->assertNotEquals('@app/views/unitmodule/', $content['moduleLayoutViewPath']);
         $this->assertEquals('@unitmodule/views/', $content['moduleLayoutViewPath']);
     }
+    */
 
     public function testModuleSuffix()
     {

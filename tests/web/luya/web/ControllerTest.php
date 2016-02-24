@@ -19,14 +19,12 @@ class ControllerTest extends \tests\web\Base
 
     public function testViewRender()
     {
-        $this->controller->useModuleViewPath = true;
         $view1 = $this->controller->render('view1');
         $this->assertEquals('view1', $view1);
     }
 
     public function testViewLayoutRender()
     {
-        $this->controller->useModuleViewPath = true;
         $view2 = $this->controller->renderLayout('view2');
         $this->assertEquals('view2', $view2);
     }

@@ -4,8 +4,6 @@ namespace tests\data\modules\unitmodule\controllers;
 
 class UnitTest2Controller extends \luya\web\Controller
 {
-    public $useModuleViewPath = true;
-
     public function actionIndex()
     {
         return [

@@ -45,23 +45,24 @@ abstract class Module extends \yii\base\Module
     public $requiredComponents = [];
 
     /**
-     * @var bool Enable or Disable where the PATH to the layout file should be inside the @app namespace or inside your module.
+     * @var bool Defines the location of the layout file whether in the @app namespace or a module:
      * 
      * - true = looking for layout file in `@app/views/<ID>/layouts`.
-     * - false = looking for layout file in @module/views/layouts/`.
+     * - false = looking for layout file in `@module/views/layouts/`.
      * 
      * This variable is only available if your not in a context call. A context call would be if the cms renders the module.
      */
     public $useAppLayoutPath = true;
-
+    
     /**
-     * @var bool This variable can enable the view path defintion for all controllers inside this module.
+     * @var bool Define the location of the view files inside the controller actions
      * 
-     * - true = the view path inside this module will be used
-     * - false = the view path of the projects app view will be used.
+     * - true = the view path of the @app/views
+     * - false = the view path of the @modulename/views
+     * 
      */
-    public $controllerUseModuleViewPath = null;
-
+    public $useAppViewPath = false;
+    
     /**
      * @var array Each module can have assets, all module controllers will register those assets in the view.. Valid class name to the asset e.g. 
      * 

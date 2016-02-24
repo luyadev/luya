@@ -18,8 +18,6 @@ class Module extends \luya\base\Module
 
     public $userIdentity = '\account\components\User';
 
-    public $controllerUseModuleViewPath = true;
-
     /**
      * @var string defined your custom RegisterForm validation model must impelement `account\RegisterInterface`.
      */

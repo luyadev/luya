@@ -10,11 +10,6 @@ namespace luya\web;
 abstract class Controller extends \yii\web\Controller
 {
     /**
-     * @var bool Use the default behaviour of Yii. This will result in loading the templates inside the Modules.
-     */
-    public $useModuleViewPath = false;
-
-    /**
      * @var array skips defined assets from the module base, you can not skip assets which are registered in the local asset variable. To Skip
      *            all the assets from the module ($this->module->assets) you can use skipAssets = ["*"];.
      */
@@ -64,17 +59,11 @@ abstract class Controller extends \yii\web\Controller
      */
     public function getViewPath()
     {
-        // if the module settings is turn to use the module view path we use them always first!
-        if ($this->module->controllerUseModuleViewPath !== null) {
-            $this->useModuleViewPath = $this->module->controllerUseModuleViewPath;
+        if ($this->module->useAppViewPath) {
+            return '@app/views/'.$this->module->id.'/'.$this->id;
         }
-
-        // use default yii behaviour
-        if ($this->useModuleViewPath) {
-            return parent::getViewPath();
-        }
-        // use client repository specific path
-        return '@app/views/'.$this->module->id.'/'.$this->id;
+        
+        return parent::getViewPath();
     }
 
     /**
@@ -101,17 +90,11 @@ abstract class Controller extends \yii\web\Controller
      */
     public function getModuleLayoutViewPath()
     {
-        // if the module settings is turn to use the module view path we use them always first!
-        if ($this->module->controllerUseModuleViewPath !== null) {
-            $this->useModuleViewPath = $this->module->controllerUseModuleViewPath;
+        if ($this->module->useAppViewPath) {
+            return '@app/views/'.$this->module->id.'/';
         }
         
-        // use default yii behaviour
-        if ($this->useModuleViewPath) {
-            return '@'.$this->module->id.'/views/';
-        }
-        
-        return '@app/views/'.$this->module->id.'/';
+        return '@'.$this->module->id.'/views/';
     }
 
     /**

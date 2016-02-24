@@ -18,13 +18,6 @@ class Controller extends \luya\web\Controller
     public $layout = '@admin/views/layouts/main';
 
     /**
-     * @var boolena Use the view folder inside the module
-     *
-     * @see \luya\base\Module
-     */
-    public $useModuleViewPath = true;
-
-    /**
      * @var bool When enabling `$disablePermissionCheck` all actions are not secured by access controller but
      *           are do require an authtenticated user (logged in user).
      */
