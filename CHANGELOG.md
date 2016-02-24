@@ -4,15 +4,10 @@ LUYA CHANGELOG
 1.0.0-beta6 (in progress)
 -------------------------
 
-**BC BREAKS**
+**BC BREAKS** See [UPGRADE.md](UPGRADE.md) as we have made some major changes.
 
-`#777`: The suffix (ActiveWindow) is now removed from the folders where the view files are located:
-+ before: `MyTestActiveWindow` folder for view files: `views/<locator>/mytestactivewindow`
-+ after: `MyTestActiveWindow` folder for view files: `views/<locator>/mytest`.
-This is consitent naming as the for controllers (DefaultController) folder name is `default`.
-
-**ISSUS**
-
+- `#771` Removed LUYA module and replaced as library instead.
+- `#780` Removed view path defintions
 - `#774` Update to Yii Version 2.0.7
 - `#779` Fixed issue where folder cache have not been reloaded when cache component is active.
 - `#775` Fixed issue where migration/down could not find the migration file.
@@ -23,8 +18,6 @@ This is consitent naming as the for controllers (DefaultController) folder name 
 
 1.0.0-beta5 (9.2.2016)
 -------------------------
-
-**ISSUES**
 
 - `#772` Fixing some more short open tags in kickstarter project
 - `#766` Added image dimensions below the preview. Styled the dimensions div. (Image upload)
