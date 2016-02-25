@@ -34,8 +34,9 @@ In order to enable the above created error api for your website you just have to
 'components' => [
 	// ...
 	'errorHandler' => [
-		'class' => 'luya\web\ErrorHandler'
-		'api' => 'https://example.com/errorapi' // where example is the domain you have setup error api above
+		'class' => 'luya\web\ErrorHandler',
+		'api' => 'https://example.com/errorapi', // where example is the domain you have setup error api above
+		'transferException' => true',
 	],
 ]
 ```
