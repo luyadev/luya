@@ -51,6 +51,11 @@ abstract class Controller extends \luya\web\Controller
             return Yii::$app->end(0, $content);
         }
         
+        // it seems to be a json response as it is an array
+        if (is_array($content)) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return $content;
+        }
 
         if ($this->view->title === null) {
             $this->view->title = $model->title;

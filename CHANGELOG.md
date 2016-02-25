@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **BC BREAKS** See [UPGRADE.md](UPGRADE.md) as we have made some major changes.
 
+- `#782` Fixed bug where CMS json response could be parsed.
 - `#760` Added [bootstrap 4 module](https://github.com/luyadev/luya-bootstrap4) to enable active forms, blocks and other widgets.
 - `#771` Removed LUYA module and replaced as library instead.
 - `#780` Removed view path defintions

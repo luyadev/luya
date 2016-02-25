@@ -33,8 +33,15 @@ class DefaultController extends \cms\base\Controller
             throw new NotFoundHttpException($e->getMessage());
         }
 
+        $content = $this->renderItem($current->id, Yii::$app->menu->currentAppendix);
+        
+        // it is a json response (so the Response object is set to JSON_FORMAT).
+        if (is_array($content)) {
+            return $content;
+        }
+        
         return $this->render('index', [
-            'pageContent' => $this->renderItem($current->id, Yii::$app->menu->currentAppendix),
+            'pageContent' => $content,
         ]);
     }
 }
