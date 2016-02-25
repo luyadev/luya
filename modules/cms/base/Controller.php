@@ -53,7 +53,6 @@ abstract class Controller extends \luya\web\Controller
         
         // it seems to be a json response as it is an array
         if (is_array($content)) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
             return $content;
         }
 
