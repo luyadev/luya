@@ -116,4 +116,20 @@ class CompositionTest extends \tests\web\Base
         $this->assertEquals('', $resolve['route']);
         $this->assertEquals('ch', $resolve['resolvedValues']['countryShortCode']);
     }
+    
+    public function testMultiDomainMapping()
+    {
+        $request = new Request();
+        $request->pathInfo = 'foo/bar';
+        $request->hostInfo = 'example.fr';
+        
+        $composition = new \luya\web\Composition($request, [
+            'hostInfoMapping' => ['example.fr' => ['langShortCode' => 'fr', 'x' => 'y']]
+        ]);
+        
+        $resolv = $composition->getResolvedPathInfo($request);
+        
+        $this->assertEquals('fr', $resolv['compositionKeys']['langShortCode']);
+        $this->assertTrue(isset($resolv['compositionKeys']['x']));
+    }
 }

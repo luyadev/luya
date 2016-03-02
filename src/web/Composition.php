@@ -55,6 +55,23 @@ class Composition extends \yii\base\Component implements \ArrayAccess
     public $default = ['langShortCode' => 'en'];
 
     /**
+     * Define the default behavior for differnet host info schemas, if the host info is not found
+     * the default behvaior via `$default` will be used.
+     * 
+     * @var array An array where the key is the host info and value the array with the default configuration .e.g.
+     * 
+     * ```
+     * 'hostInfoMapping' => [
+     *     'http://mydomain.com' => ['langShortCode' => 'en'],
+     *     'http://meinedomain.de' => ['langShortCode' => 'de'],
+     * ],
+     * ```
+     * 
+     * The above configuration must be defined in your compostion componeont configuration in your config file.
+     */
+    public $hostInfoMapping = [];
+    
+    /**
      * @var array Read-Only property, contains all composition key value paringins
      */
     private $_composition = [];
@@ -90,6 +107,11 @@ class Composition extends \yii\base\Component implements \ArrayAccess
         if (!array_key_exists('langShortCode', $this->default)) {
             throw new Exception("The composition default rule must contain a langShortCode.");
         }
+        
+        if (array_key_exists($this->request->hostInfo, $this->hostInfoMapping)) {
+            $this->default = $this->hostInfoMapping[$this->request->hostInfo];
+        }
+        
         // atach event to component
         $this->on(self::EVENT_AFTER_SET, [$this, 'eventAfterSet']);
         // resolved data
