@@ -16,7 +16,6 @@ configure the payment module in your config
     // ...
     'payment' => [
         'class' => 'payment\Module',
-        'accountId' => '123123123',
     ]
     // ...
 ],
@@ -27,22 +26,32 @@ add your transaction where ever you are:
 
 ```php
 
-$transaction = new \luya\payment\transaction\SaferPayTransaction();
-
-$process = new payment\PaymentProcess($transaction, [
-    'amount' => 123123, // in cent
-    'orderId' => 'uniqueOrderIdNumber',
-    'currency' => 'USD',
-    'successLink' => 'example.com/onlinestore/success.php', // user has paid successfull
-    'errorLink' => 'example.com/onlinestore/error.php', // user got a payment error
-    'backLink' => 'example.com/onlinestore/back.php', // used has pushed the back button
-]); 
-
-$uniqueProcessId = $process->getId();
-
-$response = $process->dispatch(); // will create a yii\web\Response
-Yii::$app->end($response); // or return $process->dispatch(); as controllers can handle response objects
-
+class StoreCheckoutController extends \luya\web\Controller
+{
+    public function actionIndex()
+    {
+         // The orderId/basketId should be an unique key for each transaction. based on this key the transacton
+         // hash and auth token will be created.
+        $orderId = 123456789;
+        
+       $process = new payment\PaymentProcess([
+           'transactionConfig' => [
+               'class' => SaferPayTransaction::className(),
+               'accountId' => 'SAFERPAYACCOUNTID', // each transaction can have specific attributes, saferpay requires an accountId',
+           ],
+           'orderId' => $orderId,
+           'amount' => 123123, // in cents
+           'currency' => 'USD',
+           'successLink' => 'example.com/onlinestore/success.php', // user has paid successfull
+           'errorLink' => 'example.com/onlinestore/error.php', // user got a payment error
+           'backLink' => 'example.com/onlinestore/back.php', // user has pushed the back button
+       ]);
+        
+       $processId = $proccess->getId(); // you can store this information in your shop logic to know the transaction id later on!
+        
+       return $process->dispatch($this); // where $this is the current controller environment
+    }
+}
 ```
 
 lets assume the user successfull entered the url so he will land back in `successLink` in our case `success.php`:
@@ -51,7 +60,7 @@ lets assume the user successfull entered the url so he will land back in `succes
 // success.php
 
 
-$process = payment\PaymentProcess::findActive(); // will find the above payment process based on session data (or others?)
+$process = payment\PaymentProcess::findBySession(); // will find the above payment process based on session data (or others?)
 
 // save the informations related to your estore, mark the order as paid
 
