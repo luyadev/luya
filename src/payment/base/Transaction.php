@@ -6,11 +6,27 @@ use yii\base\Object;
 
 class Transaction extends Object
 {
-    public $provider = null;
+    private $_process = null;
     
-    public function __construct(ProviderInterface $provider, array $config = [])
+    public function setProcess(\luya\payment\base\PaymentProcessInterface $process)
     {
-        $this->provider = $provider;
-        parent::__construct($config);
+        $this->_process = $process;
+    }
+    
+    public function getProcess()
+    {
+        return $this->_process;
+    }
+    
+    private $_context = null;
+    
+    public function setContext(\yii\web\Controller $context)
+    {
+        $this->_context = $context;
+    }
+    
+    public function getContext()
+    {
+        return $this->_context;
     }
 }

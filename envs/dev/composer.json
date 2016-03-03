@@ -49,7 +49,8 @@
             "styleguide\\" : "../../modules/styleguide",
             "exporter\\" : "../../modules/exporter",
             "frontendgroup\\" : "../../modules/frontendgroup",
-            "remoteadmin\\" : "../../modules/remoteadmin"
+            "remoteadmin\\" : "../../modules/remoteadmin",
+            "payment\\" : "../../modules/payment"
         }
     }
 }

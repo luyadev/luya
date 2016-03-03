@@ -13,4 +13,6 @@ interface TransactionInterface
     public function fail();
     
     public function back();
+    
+    public function getProvider();
 }

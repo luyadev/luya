@@ -8,7 +8,7 @@ use luya\payment\PaymentException;
 use luya\payment\base\ProviderInterface;
 
 class SaferPayProvider extends Provider implements ProviderInterface
-{  
+{
     public function getId()
     {
         return 'saferpay';
@@ -34,5 +34,44 @@ class SaferPayProvider extends Provider implements ProviderInterface
         }
         
         throw new PaymentException($curl->error_message);
+    }
+    
+    public function callConfirm($data, $signature)
+    {
+        $curl = new Curl();
+        $curl->post('https://www.saferpay.com/hosting/VerifyPayConfirm.asp', [
+            'DATA' => $data,
+            'SIGNATURE' => $signature,
+        ]);
+        
+        if (!$curl->error) {
+            return $curl->response;
+        }
+        
+        throw new PaymentException("payconfirm error");
+    }
+    
+    public function callComplete($id, $token, $amount, $action, $accountId, $spPassword = null)
+    {
+        $data = [
+            'ID' => $id,
+            'TOKEN' => $token,
+            'AMOUNT' => $amount,
+            'ACTION' => $action,
+            'ACCOUNTID' => $accountId,
+        ];
+        
+        if (!empty($spPassword)) {
+            $data['spPassword'] = $spPassword;
+        }
+        
+        $curl = new Curl();
+        $curl->post('https://www.saferpay.com/hosting/PayCompleteV2.asp', $data);
+        
+        if (!$curl->error) {
+            return $curl->response;
+        }
+        
+        throw new PaymentException("payconfirm error");
     }
 }

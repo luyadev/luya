@@ -42,28 +42,42 @@ class StoreCheckoutController extends \luya\web\Controller
            'orderId' => $orderId,
            'amount' => 123123, // in cents
            'currency' => 'USD',
-           'successLink' => 'example.com/onlinestore/success.php', // user has paid successfull
-           'errorLink' => 'example.com/onlinestore/error.php', // user got a payment error
-           'backLink' => 'example.com/onlinestore/back.php', // user has pushed the back button
+           'successLink' => Url::toRoute(['/mystore/store-checkout/success'], true), // user has paid successfull
+           'errorLink' => Url::toRoute(['/mystore/store-checkout/error'], true), // user got a payment error
+           'backLink' => Url::toRoute(['/mystore/store-checkout/back'], true), // user has pushed the back button
        ]);
         
-       $processId = $proccess->getId(); // you can store this information in your shop logic to know the transaction id later on!
+       Yii::$app->session->set('storeTransactionId', $process->getId()); // you can store this information in your shop logic to know the transaction id later on!
         
        return $process->dispatch($this); // where $this is the current controller environment
     }
+    
+    public function actionSuccess()
+    {
+        $process = PaymentProcess::findById(Yii::$app->session->get('storeTransactionId', 0));
+        
+        // create order for customer ...
+        // ...
+        
+        $process->close(PaymentProcess::STATE_SUCCESS);
+    }
+    
+    public function actionError()
+    {
+        $process = PaymentProcess::findById(Yii::$app->session->get('storeTransactionId', 0));
+        
+        // display error for payment
+        
+        $process->close(PaymentProcess::STATE_ERROR);
+    }
+    
+    public function actionBack()
+    {
+        $process = PaymentProcess::findById(Yii::$app->session->get('storeTransactionId', 0));
+        
+        // redirect the user back to where he can choose another payment.
+        
+        $process->close(PaymentProcess::STATE_BACK);
+    }
 }
-```
-
-lets assume the user successfull entered the url so he will land back in `successLink` in our case `success.php`:
-
-```php
-// success.php
-
-
-$process = payment\PaymentProcess::findBySession(); // will find the above payment process based on session data (or others?)
-
-// save the informations related to your estore, mark the order as paid
-
-$proccess->close();
-
 ```
