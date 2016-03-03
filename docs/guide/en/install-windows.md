@@ -3,7 +3,7 @@ Create a new Luya Project on Windows and XAMPP
 
 With those few steps you can install *LUYA* on your System. To install *LUYA* you have to install [Composer](https://getcomposer.org/doc/00-intro.md#installation-windows) on your Windows System.
 
-First of all you have to install the global `fxp/composer-asset-plugin` plugin, which is required by Yii to install bower packages via composer. So open your Terminal go into your Webserver folder and insert:
+First of all you have to install the global `fxp/composer-asset-plugin` plugin, which is required by Yii to install bower packages via composer. So open your Command Prompt go into your Webserver folder and insert:
 
 ```sh
 composer global require "fxp/composer-asset-plugin:1.1.1"
@@ -22,7 +22,9 @@ copy server.php.dist server.php
 copy local.php.dist local.php
 ```
 
-Now change the database connection inside the `configs/local.php` file to fit your mysql servers configuration. You should open all config files once to change values and understand the behavior. After successfully setting up your database connection, you have to reopen your Terminal and change into your project directory and excute the console command at `public_html` folder.
+Now change the database connection inside the `configs/local.php` file to fit your mysql servers configuration. You should open all config files once to change values and understand the behavior. After successfully setting up your database connection, you have to reopen your Command Prompt and change into your project directory and excute the console command at `public_html` folder.
+
+> `php` command is available if you already add your php.exe path on your system environment variable
 
 Create all Database tables:
 
