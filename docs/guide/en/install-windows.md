@@ -22,7 +22,7 @@ copy server.php.dist server.php
 copy local.php.dist local.php
 ```
 
-Now change the database connection inside the `configs/local.php` file to fit your mysql servers configuration. __You could use the commented line `// OSX XAMPP: ` on Windows.__ You should open all config files once to change values and understand the behavior. After successfully setting up your database connection, you have to reopen your Terminal and change into your project directory and excute the console command at `public_html` folder.
+Now change the database connection inside the `configs/local.php` file to fit your mysql servers configuration. You should open all config files once to change values and understand the behavior. After successfully setting up your database connection, you have to reopen your Terminal and change into your project directory and excute the console command at `public_html` folder.
 
 Create all Database tables:
 
