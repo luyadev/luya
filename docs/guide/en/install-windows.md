@@ -35,13 +35,13 @@ php index.html migrate
 Import specific data into the Database:
 
 ```sh
-php index.html import
+php index.php import
 ```
 
 At least we execute the setup command which will install an administration area user, group and sets the lowest permission.
 
 ```
-php index.html setup
+php index.php setup
 ```
 
 The setup proccess will ask you for an email and password to store your personal login data inside the database (of course the password will be encrypted).
