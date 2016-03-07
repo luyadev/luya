@@ -10,7 +10,8 @@
         "phpmailer/phpmailer": "~5.0",
         "fabpot/goutte" : "3.1.*",
         "jakeasmith/http_build_url" : "1.0.0",
-        "ifsnop/mysqldump-php":"2.*"
+        "ifsnop/mysqldump-php":"2.*",
+        "paypal/rest-api-sdk-php" : "~1.6.0"
     },
     "require-dev": {
         "bower-asset/jquery-ui" : "1.11.4",
@@ -50,7 +51,7 @@
             "exporter\\" : "../../modules/exporter",
             "frontendgroup\\" : "../../modules/frontendgroup",
             "remoteadmin\\" : "../../modules/remoteadmin",
-            "payment\\" : "../../modules/payment"
+            "payment\\" : "../../../luya-module-payment/src"
         }
     }
 }
