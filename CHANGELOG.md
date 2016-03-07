@@ -4,7 +4,7 @@ LUYA CHANGELOG
 1.0.0-beta6 (in progress)
 -------------------------
 
-**BC BREAKS** See [UPGRADE.md](UPGRADE.md) as we have made some major changes.
+**BC BREAKS** See [UPGRADE.md](UPGRADE.md) as we have made some major change.
 
 - `#785` Added composition default behavior based on host mapping informations
 - `#782` Fixed bug where CMS json response could be parsed.
