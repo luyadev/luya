@@ -14,8 +14,8 @@ This document will help you upgrading from one LUYA Version into another
   ```
 
 * `#780`: In terms of Yii2 controller view render behavior consistency:
-  - removed `$useModuleViewPath` propertie of `luya\web\Controller`.
-  - removed `$controllerUseModuleViewPath` propertie of `luya\base\Module` replaced with `$useAppViewPath`.
+  - removed `$useModuleViewPath` property of `luya\web\Controller`.
+  - removed `$controllerUseModuleViewPath` property of `luya\base\Module` replaced with `$useAppViewPath`.
 
 * `#777` The suffix (ActiveWindow) is now removed from the folders where the view files are located:
   - before: `MyTestActiveWindow` folder for view files: `views/<locator>/mytestactivewindow`
