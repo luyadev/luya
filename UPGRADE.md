@@ -6,7 +6,7 @@ This document will help you upgrading from one LUYA Version into another
 1.0.0-beta6
 -----------
 
-* `#771`: As we have removed the `LUYA` module as module and use it as library you have to remove the `luya\Module` in your application. But when you are using the *CMS-Module* you must bootstrap it instead in your application config setting:
+* `#771`: As we have removed the `LUYA` module as module and use it as library you have to remove the `luya\Module` in your application. But when you are using the *CMS-Module* you must [bootstrap](http://www.yiiframework.com/doc-2.0/guide-runtime-bootstrapping.html) it instead, by adding a new entry in your application config settings:
   ```php
   'bootstrap' => [
       'cms',
