@@ -6,7 +6,7 @@ This module provides a very fast and secure way to create customizable contact f
 ### install
 
 ```json
-"zephir/luya-module-contactform" : "1.0.0-beta5"
+"luyadev/luya-module-contactform" : "1.0.0-beta5"
 ```
 
 

@@ -2,8 +2,8 @@
 # apt-get install svn
 # wget https://github.com/dflydev/git-subsplit/archive/master.zip
 
-REPO="git@github.com:zephir/luya"
-BASE="git@github.com:zephir"
+REPO="git@github.com:luyadev/luya"
+BASE="git@github.com:luyadev"
 
 if [ "$1" = "init" ]; then
 	git subsplit init $REPO
@@ -12,6 +12,7 @@ else
 fi
 
 git subsplit publish "
+    core:$BASE/luya-core.git
     modules/admin:$BASE/luya-module-admin.git
     modules/cms:$BASE/luya-module-cms.git
     modules/cmsadmin:$BASE/luya-module-cmsadmin.git

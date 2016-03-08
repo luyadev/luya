@@ -8,7 +8,7 @@ To create strong and secure website its important to know all exceptions before 
 add to your composer.json
 
 ```
-"zephir/luya-module-errorapi" : "1.0.0-beta5",
+"luyadev/luya-module-errorapi" : "1.0.0-beta5",
 ```
 
 add the module to your application config:

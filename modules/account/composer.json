@@ -1,5 +1,5 @@
 {
-	"name" : "zephir/luya-module-account",
+	"name" : "luyadev/luya-module-account",
 	"description" : "Yii2 LUYA User Account",
 	"type" : "luya-module",
 	"keywords" : ["php", "luya", "module", "account", "yii2", "yii"],
@@ -13,12 +13,12 @@
 		}
 	],
 	"support" : {
-		"issues" : "https://github.com/zephir/luya/issues"
+		"issues" : "https://github.com/luyadev/luya/issues"
 	},
 	"require" : {
-		"zephir/luya" : "1.0.0-beta5",
-		"zephir/luya-module-admin" : "1.0.0-beta5",
-		"zephir/luya-module-accountadmin" : "1.0.0-beta5"
+		"luyadev/luya-core" : "1.0.0-beta5",
+		"luyadev/luya-module-admin" : "1.0.0-beta5",
+		"luyadev/luya-module-accountadmin" : "1.0.0-beta5"
 	},
 	"autoload" : {
 		"psr-4" : {

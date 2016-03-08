@@ -1,5 +1,5 @@
 {
-	"name" : "zephir/luya-module-admin",
+	"name" : "luyadev/luya-module-admin",
 	"description" : "Yii2 LUYA Admin",
 	"type" : "luya-module",
 	"keywords" : ["php", "luya", "module", "admin", "yii2", "yii", "administration", "angular", "ngrest", "manage", "panel"],
@@ -13,10 +13,10 @@
 		}
 	],
 	"support" : {
-		"issues" : "https://github.com/zephir/luya/issues"
+		"issues" : "https://github.com/luyadev/luya/issues"
 	},
 	"require" : {
-		"zephir/luya" : "1.0.0-beta5",
+		"luyadev/luya-core" : "1.0.0-beta5",
         "imagine/imagine": "0.6.3"
 	},
 	"autoload" : {

@@ -1,5 +1,5 @@
 {
-	"name" : "zephir/luya-module-gallery",
+	"name" : "luyadev/luya-module-gallery",
 	"description" : "Yii2 LUYA Gallery Module",
 	"type" : "luya-module",
 	"keywords" : ["php", "luya", "module", "gallery", "yii2", "yii"],
@@ -13,11 +13,11 @@
 		}
 	],
 	"support" : {
-		"issues" : "https://github.com/zephir/luya/issues"
+		"issues" : "https://github.com/luyadev/luya/issues"
 	},
 	"require" : {
-		"zephir/luya" : "1.0.0-beta5",
-		"zephir/luya-module-galleryadmin" : "1.0.0-beta5"
+		"luyadev/luya-core" : "1.0.0-beta5",
+		"luyadev/luya-module-galleryadmin" : "1.0.0-beta5"
 	},
 	"autoload" : {
 		"psr-4" : {

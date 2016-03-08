@@ -1,5 +1,5 @@
 {
-	"name" : "zephir/luya-module-styleguide",
+	"name" : "luyadev/luya-module-styleguide",
 	"description" : "Yii2 LUYA Styleguide",
 	"type" : "luya-module",
 	"keywords" : ["php", "luya", "module", "styleguide", "yii2", "yii"],
@@ -13,10 +13,10 @@
 		}
 	],
 	"support" : {
-		"issues" : "https://github.com/zephir/luya/issues"
+		"issues" : "https://github.com/luyadev/luya/issues"
 	},
 	"require" : {
-		"zephir/luya" : "1.0.0-beta5"
+		"luyadev/luya-core" : "1.0.0-beta5"
 	},
 	"autoload" : {
 		"psr-4" : {

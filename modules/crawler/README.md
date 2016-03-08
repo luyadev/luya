@@ -8,7 +8,7 @@ An easy to use page crawler to make an internal search field on your page. The c
 Add to composer json:
 
 ```
-"zephir/luya-module-crawler" : "1.0.0-beta5"
+"luyadev/luya-module-crawler" : "1.0.0-beta5"
 ```
 
 Add the module to your configuration

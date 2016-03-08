@@ -1,5 +1,5 @@
 {
-	"name" : "zephir/luya-module-cms",
+	"name" : "luyadev/luya-module-cms",
 	"description" : "Yii2 LUYA Cms",
 	"type" : "luya-module",
 	"keywords" : ["php", "luya", "module", "cms", "yii2", "yii", "contentmanager", "content", "yii2-cms"],
@@ -13,11 +13,11 @@
 		}
 	],
 	"support" : {
-		"issues" : "https://github.com/zephir/luya/issues"
+		"issues" : "https://github.com/luyadev/luya/issues"
 	},
 	"require" : {
-		"zephir/luya" : "1.0.0-beta5",
-		"zephir/luya-module-cmsadmin" : "1.0.0-beta5"
+		"luyadev/luya-core" : "1.0.0-beta5",
+		"luyadev/luya-module-cmsadmin" : "1.0.0-beta5"
 	},
 	"autoload" : {
 		"psr-4" : {
