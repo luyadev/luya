@@ -1,7 +1,7 @@
 LUYA
 ====
 
-The [Yii 2](https://github.com/yiisoft/yii2) wrapper which provides out of the box functions like an **administration interface**, a beautiful looking **content management system**, **payment** modules, **agency workflow** and other tools to develop your website pretty fast!
+The [Yii 2](https://github.com/yiisoft/yii2) wrapper which provides out of the box functions like an **administration interface**, a beautiful looking **content management system**, **payment** modules, **agency workflows** and other tools to develop your website pretty fast!
 
 ![PHP7](https://img.shields.io/badge/php7-yes-green.svg)
 [![Build Status](https://travis-ci.org/luyadev/luya.svg?branch=master)](https://travis-ci.org/luyadev/luya)
