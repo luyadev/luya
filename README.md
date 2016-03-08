@@ -1,7 +1,9 @@
 LUYA
-----
+====
 
-### ATTENTION
+The [Yii 2](https://github.com/yiisoft/yii2) wrapper which provides out of the box functions like an *administration interface*, a beautiful looking *content management system*, *payment* modules, *agency workflow* and other tools to develop your website pretty fast!
+
+#### ATTENTION
 
 **We have moved all repositories to the new HQ of LUYA, `luyadev` instead of `zephir`. In order to update your packages, remove `zephir` and replace with `luyadev` in your composer require section. The old packages will still work for a while.**
 
@@ -12,13 +14,11 @@ LUYA
 [![Total Downloads](https://poser.pugx.org/zephir/luya/downloads)](https://packagist.org/packages/zephir/luya) 
 [![Join the chat at https://gitter.im/zephir/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zephir/luya)
 
-What is **LUYA**? We have build a *fast*, *modular* and *beautiful* looking system to create content based on blocks or database tables. *LUYA* is based on the [Yii2 Framework](https://github.com/yiisoft/yii2), [Angular](https://angularjs.org) and [Materialize CSS](http://materializecss.com/).
-
 ![Luya Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-beta5.png)
 
 ### Installation
 
-We have a made an absolut easy to understand *STEP-BY-STEP* Guide to install Luya:
+We have a made an absolut easy to understand *STEP-BY-STEP* Guide to install LUYA:
 
 + ![Deutsch](https://raw.githubusercontent.com/savetheinternet/Tinyboard/master/static/flags/de.png) [Installationsanleitung](https://luya.io/de/handbuch)
 + ![English](https://raw.githubusercontent.com/savetheinternet/Tinyboard/master/static/flags/us.png) [Setup Guide](https://luya.io/en/guide)
