@@ -21,7 +21,7 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"cms\\" : ""
+			"cms\\" : "src/"
 		}
 	},
 	"extra": {
