@@ -1,11 +1,7 @@
 LUYA
 ====
 
-The [Yii 2](https://github.com/yiisoft/yii2) wrapper which provides out of the box functions like an *administration interface*, a beautiful looking *content management system*, *payment* modules, *agency workflow* and other tools to develop your website pretty fast!
-
-#### ATTENTION
-
-**We have moved all repositories to the new HQ of LUYA, `luyadev` instead of `zephir`. In order to update your packages, remove `zephir` and replace with `luyadev` in your composer require section. The old packages will still work for a while.**
+The [Yii 2](https://github.com/yiisoft/yii2) wrapper which provides out of the box functions like an **administration interface**, a beautiful looking **content management system**, **payment** modules, **agency workflow** and other tools to develop your website pretty fast!
 
 ![PHP7](https://img.shields.io/badge/php7-yes-green.svg)
 [![Build Status](https://travis-ci.org/luyadev/luya.svg?branch=master)](https://travis-ci.org/luyadev/luya)
@@ -15,6 +11,10 @@ The [Yii 2](https://github.com/yiisoft/yii2) wrapper which provides out of the b
 [![Join the chat at https://gitter.im/zephir/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zephir/luya)
 
 ![Luya Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-beta5.png)
+
+#### ATTENTION
+
+**We have moved all repositories to the new HQ of LUYA, `luyadev` instead of `zephir`. In order to update your packages, remove `zephir` and replace with `luyadev` in your composer require section. The old packages will still work for a while.**
 
 ### Installation
 
