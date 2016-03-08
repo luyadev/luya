@@ -16,7 +16,7 @@
 		"issues" : "https://github.com/luyadev/luya/issues"
 	},
 	"require" : {
-		"luyadev/luya-core" : "1.0.0-beta5",
+		"luyadev/luya-core" : "dev-master as 1.0.0-beta5",
 		"luyadev/luya-module-newsadmin" : "1.0.0-beta5"
 	},
 	"autoload" : {
