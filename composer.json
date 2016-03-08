@@ -32,7 +32,7 @@
     },
 	"autoload" : {
 		"psr-4" : {
-			"luya\\" : "src/"
+			"luya\\" : "core/"
 		}
 	},
 	"autoload-dev": {

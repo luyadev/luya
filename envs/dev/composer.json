@@ -33,7 +33,7 @@
     },
     "autoload" : {
         "psr-4" : {
-            "luya\\" : "../../src/",
+            "luya\\" : "../../core/",
             "admin\\" : "../../modules/admin",
             "cms\\" : "../../modules/cms",
             "cmsadmin\\" : "../../modules/cmsadmin",
