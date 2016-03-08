@@ -4,8 +4,7 @@ LUYA
 [![Join the chat at https://gitter.im/zephir/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zephir/luya?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ![PHP7](https://img.shields.io/badge/php7-yes-green.svg)
-[![License](https://poser.pugx.org/zephir/luya-module-admin/license)](https://packagist.org/packages/zephir/luya-module-admin)
-[![Build Status](https://travis-ci.org/zephir/luya.svg?branch=master)](https://travis-ci.org/zephir/luya)
+[![Build Status](https://travis-ci.org/luyadev/luya.svg?branch=master)](https://travis-ci.org/luyadev/luya)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/zephir/luya/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/zephir/luya/?branch=master)
 [![Code Climate](https://codeclimate.com/github/zephir/luya/badges/gpa.svg)](https://codeclimate.com/github/zephir/luya)
 [![Dependency Status](https://www.versioneye.com/user/projects/55d0ce4315ff9b0014000166/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55d0ce4315ff9b0014000166)
