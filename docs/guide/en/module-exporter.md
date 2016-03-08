@@ -8,7 +8,7 @@ The exporter module allows you to easy download the full databse and storage dat
 add to your composer.json
 
 ```
-"zephir/luya-module-exporter" : "1.0.0-beta5",
+"luyadev/luya-module-exporter" : "1.0.0-beta5",
 ```
 
 add the module to your application config:

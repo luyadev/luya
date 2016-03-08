@@ -7,7 +7,7 @@ Installieren
 News via Composer-Require beindung hinzufügen:
 
 ```
-"zephir/luya-module-news" : "dev-master"
+"luyadev/luya-module-news" : "dev-master"
 ```
 
 Um das News Module einzufügen gibts du folgende konfiguration an:

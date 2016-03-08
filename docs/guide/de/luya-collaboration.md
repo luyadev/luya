@@ -2,7 +2,7 @@ Bei LUYA mithelfen
 ==================
 Wenn du am *LUYA* Projekt mitarbeiten möchtest kannst du mit den folgenden Schritten leicht deine Änderungen mitteilen.
 
-1. Forke das [zephir/luya](https://github.com/zephir/luya) Projekte in deinen Account.
+1. Forke das [luyadev/luya](https://github.com/luyadev/luya) Projekte in deinen Account.
 2. Erstelle deine Arbeitsumgebung mit `envs/dev`.
 4. Rebase deinen Master
 5. Erstelle einen Branch
@@ -10,9 +10,9 @@ Wenn du am *LUYA* Projekt mitarbeiten möchtest kannst du mit den folgenden Schr
 
 Forken
 ------
-Um unser *LUYA* repository zu forken klicken gehen Sie auf [zephir/luya](https://github.com/zephir/luya) und danach auf den **FORK** Knopf. Dies wird eine Kopie der aktuellen Daten von Luya in dein eigenes Github Profil erstellen welches du danach auf deinem Computer via `git clone https://github.com/deinuser/luya` auschecken kannst. 
+Um unser *LUYA* repository zu forken klicken gehen Sie auf [luyadev/luya](https://github.com/luyadev/luya) und danach auf den **FORK** Knopf. Dies wird eine Kopie der aktuellen Daten von Luya in dein eigenes Github Profil erstellen welches du danach auf deinem Computer via `git clone https://github.com/deinuser/luya` auschecken kannst. 
 
-![fork-luya](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/start-collaboration-fork.jpg "Fork Luya")
+![fork-luya](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/start-collaboration-fork.jpg "Fork Luya")
 
 > Tipps zum Ungang mit [git clone](https://help.github.com/articles/importing-a-git-repository-using-the-command-line/)
 
@@ -49,7 +49,7 @@ Ansonsten kannst du das rebasemaster script ohne argument asuführen
 ./scripts/rebasemaster.sh
 ```
 
-> `rebasemaster.sh` wechselt in dein lokaler master branch, holt die neuen Daten vom upstream (zephir/luya) und macht ein rebase der neuen Infomrationen in deinen lokalen master.
+> `rebasemaster.sh` wechselt in dein lokaler master branch, holt die neuen Daten vom upstream (luyadev/luya) und macht ein rebase der neuen Infomrationen in deinen lokalen master.
 
 Branch erstellen
 ----------------
@@ -68,7 +68,7 @@ Du kannst nun deine Änderungen in deinen neu erstellen Branch *commiten* und de
 
 Nun ist dein neuer Branch auf der Github Platform. Wechslen nun im Browser auf dein *LUYA* Fork innterhalb deines GitHub Profils und klicke auf den **PULL REQUEST** Knopf.
 
-![pull-request](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/start-collaboration-pull-request.jpg "Pull request")
+![pull-request](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/start-collaboration-pull-request.jpg "Pull request")
 
 Informationen bezüglich Design und CSS
 ======================================

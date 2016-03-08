@@ -3,28 +3,28 @@ REMOTE ADMIN
 
 **The powerful tool for Agencies!**
 
-*What is REMOTE ADMIN?* Well, have you ever created several websites with the same system and delivered them to different Providers? Remote Admin provides you the ability to collect all your [LUYA](https://github.com/zephir/luya#readme) Websites into the REMOTE ADMIN and helps you to see:
+*What is REMOTE ADMIN?* Well, have you ever created several websites with the same system and delivered them to different Providers? Remote Admin provides you the ability to collect all your [LUYA](https://github.com/luyadev/luya#readme) Websites into the REMOTE ADMIN and helps you to see:
 
 + See all outdated websites (auto compare LUYA version to the lastet version available on packagist).
 + Collect informations about the Website itself, to make sure they are configured well.
 + See how many administrators are active.
 + Direct Link to the Website.
 
-We will add more features in future, to make the [LUYA](https://github.com/zephir/luya#readme) control panel a powerfull tool!
+We will add more features in future, to make the [LUYA](https://github.com/luyadev/luya#readme) control panel a powerfull tool!
 
-![Remote Admin](https://raw.githubusercontent.com/zephir/luya-module-remoteadmin/master/remote-admin.png)
+![Remote Admin](https://raw.githubusercontent.com/luyadev/luya-module-remoteadmin/master/remote-admin.png)
 
 How to
 ------
 
-Remote Admin will work out of the box with all [LUYA](https://github.com/zephir/luya#readme) instances you create, just add a `remoteToken` in your project application config and install the remoteadmin module on your privat/company Server/Website and you are able to add all instances.
+Remote Admin will work out of the box with all [LUYA](https://github.com/luyadev/luya#readme) instances you create, just add a `remoteToken` in your project application config and install the remoteadmin module on your privat/company Server/Website and you are able to add all instances.
 
 ### Your LUYA Website Cockpit instance
 
 require remoteadmin in composer.json:
 
 ```
-"zephir/luya-module-remoteadmin" : "1.0.0-beta5",
+"luyadev/luya-module-remoteadmin" : "1.0.0-beta5",
 ```
 
 add remote admin to the list of your modules:

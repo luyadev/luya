@@ -97,7 +97,7 @@ Das obenzeigte Template setzt natürlich voraus das alle Variabeln `title`, `des
 
 Styleguide
 ==========
-Um einen Styleguide output aufzurufen muss in der `composer.json` Datei `require : { "zephir/luya-module-styleguide" : "dev-master" }` hinterlegt werden und via composer update installiert werden.
+Um einen Styleguide output aufzurufen muss in der `composer.json` Datei `require : { "luyadev/luya-module-styleguide" : "dev-master" }` hinterlegt werden und via composer update installiert werden.
 
 Danach muss das Module in der Config hinzugefügt werden:
 

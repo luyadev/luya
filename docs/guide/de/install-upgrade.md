@@ -11,10 +11,10 @@ Diese Sektion erklärt wie man LUYA bei einem neuen Versions Release upgrade kan
 
 ```
 "require": {
-    "zephir/luya" : "1.0.0-beta5",
-    "zephir/luya-module-cms" : "1.0.0-beta5",
-    "zephir/luya-module-cmsadmin" : "1.0.0-beta5",
-    "zephir/luya-module-admin" : "1.0.0-beta5"
+    "luyadev/luya" : "1.0.0-beta5",
+    "luyadev/luya-module-cms" : "1.0.0-beta5",
+    "luyadev/luya-module-cmsadmin" : "1.0.0-beta5",
+    "luyadev/luya-module-admin" : "1.0.0-beta5"
 }
 ```
 

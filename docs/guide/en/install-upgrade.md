@@ -11,10 +11,10 @@ change the luya versions for each modules and luya itself in you your composer.j
 
 ```
 "require": {
-    "zephir/luya" : "1.0.0-beta5",
-    "zephir/luya-module-cms" : "1.0.0-beta5",
-    "zephir/luya-module-cmsadmin" : "1.0.0-beta5",
-    "zephir/luya-module-admin" : "1.0.0-beta5"
+    "luyadev/luya" : "1.0.0-beta5",
+    "luyadev/luya-module-cms" : "1.0.0-beta5",
+    "luyadev/luya-module-cmsadmin" : "1.0.0-beta5",
+    "luyadev/luya-module-admin" : "1.0.0-beta5"
 }
 ```
 

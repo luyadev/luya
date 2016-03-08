@@ -18,7 +18,7 @@ composer global require "fxp/composer-asset-plugin:~1.1.1"
 Als nächstes erstellen wir ein `Kickstarter` Projekte mit Hilfe des `composer create-project` Befehls. Dafür musst du lediglich dein *Terminal* öffnen und den folgenden Befehl eingeben:
 
 ```sh
-composer create-project zephir/luya-kickstarter:1.0.0-beta5
+composer create-project luyadev/luya-kickstarter:1.0.0-beta5
 ```
 
 > Die installation und all ihrere abhängigkeiten welche noch nicht im cache sind kann durchaus mehrere Minuten dauern.
@@ -103,6 +103,6 @@ Wenn du dich eingeloggt hast, kannst nun der *Administrator* Gruppe alle *Berech
 Probleme
 --------
 
-Wenn du Problem, unerwartet Fehler oder andere komische Verhalten entdeckst: Lass es uns wissen und mache ein [Issue auf GitHub](https://github.com/zephir/luya/issues) oder komm in unser [Gitter Chat](https://gitter.im/zephir/luya) Chat. 
+Wenn du Problem, unerwartet Fehler oder andere komische Verhalten entdeckst: Lass es uns wissen und mache ein [Issue auf GitHub](https://github.com/luyadev/luya/issues) oder komm in unser [Gitter Chat](https://gitter.im/luyadev/luya) Chat. 
 
-[![Join the chat at https://gitter.im/zephir/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zephir/luya?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/luyadev/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/luyadev/luya?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)

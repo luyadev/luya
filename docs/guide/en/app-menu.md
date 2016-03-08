@@ -112,7 +112,7 @@ We have built some small helper commands you can use whever you are in your cms:
 
 To the the page number (which is 3, used above) you will find the Page-Id in when hover over the menu item in the cms admin menu-tree:
 
-![Page ID](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/cms-nav-page-id.jpg "Seiten ID")
+![Page ID](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/cms-nav-page-id.jpg "Seiten ID")
 
 Menu Item Injection
 ------------------

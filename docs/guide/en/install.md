@@ -14,7 +14,7 @@ composer global require "fxp/composer-asset-plugin:1.1.1"
 After that, we execute the composer `create-project` to checkout the **luya-kickstarter** project (a basic project you can start with out of the box).
 
 ```sh
-composer create-project zephir/luya-kickstarter:1.0.0-beta5
+composer create-project luyadev/luya-kickstarter:1.0.0-beta5
 ```
 
 This above command will create a folder (inside of your current folder where the `composer create-project` command was execute) named __luya-kickstarter__. After the command is finished go into the **configs** folder inside your application and copy the dist template files to original php files.
@@ -53,6 +53,6 @@ You can now log in into your administration interface `http://localhost/luya-kic
 Problems
 --------
 
-When you have Problems with installing *LUYA* or have unexpected errors or strange behaviors, let us know and [Issue on GitHub](https://github.com/zephir/luya/issues) or [Join the Gitter Chat](https://gitter.im/zephir/luya) we love your Feedback!
+When you have Problems with installing *LUYA* or have unexpected errors or strange behaviors, let us know and [Issue on GitHub](https://github.com/luyadev/luya/issues) or [Join the Gitter Chat](https://gitter.im/luyadev/luya) we love your Feedback!
 
-[![Join the chat at https://gitter.im/zephir/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zephir/luya?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/luyadev/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/luyadev/luya?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)

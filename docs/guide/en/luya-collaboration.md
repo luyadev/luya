@@ -3,7 +3,7 @@ Help us improve LUYA
 
 If you like to contribute to the LUYA project you can easyl follow thes few steps:
 
-1. Fork the [zephir/luya](https://github.com/zephir/luya) project to your account.
+1. Fork the [luyadev/luya](https://github.com/luyadev/luya) project to your account.
 2. Define your working environment
 3. Rebase the master
 4. Create a new branch
@@ -11,9 +11,9 @@ If you like to contribute to the LUYA project you can easyl follow thes few step
 
 Fork
 ------
-To Fork the the [LUYA](https://github.com/zephir/luya) project click on the FORK Button, this will create a copy of the repository on your account. After forking the repositor you have to clone it into your local composer  via `git clone https://github.com/yourusername/luya`. 
+To Fork the the [LUYA](https://github.com/luyadev/luya) project click on the FORK Button, this will create a copy of the repository on your account. After forking the repositor you have to clone it into your local composer  via `git clone https://github.com/yourusername/luya`. 
 
-![fork-luya](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/start-collaboration-fork.jpg "Fork Luya")
+![fork-luya](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/start-collaboration-fork.jpg "Fork Luya")
 
 > Tipps with [git clone](https://help.github.com/articles/importing-a-git-repository-using-the-command-line/).
 
@@ -51,7 +51,7 @@ After this you can now open the *public_html* folder in your browser of your dev
 Rebase your Master
 ------------------
 
-We have added a little script where you can rebase your master to create new branches from an clean dev-master branch. The rebasemaster script will configure the original `zephir/luya` repo as upstream, switch into the master branch and update the code.
+We have added a little script where you can rebase your master to create new branches from an clean dev-master branch. The rebasemaster script will configure the original `luyadev/luya` repo as upstream, switch into the master branch and update the code.
 
 > When you run the rebasemaster script for the first time, you have to add the init flag, this will configure the upstream.
 
@@ -85,7 +85,7 @@ git push origin
 
 Visit your *LUYA* Fork on GitHub now and you will see a **PULL REQUEST** Button where you can create a Pull-Request:
 
-![pull-request](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/start-collaboration-pull-request.jpg "Pull request")
+![pull-request](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/start-collaboration-pull-request.jpg "Pull request")
 
 
 Informations about Design and CSS
