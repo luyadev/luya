@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **BC BREAKS** See [UPGRADE.md](UPGRADE.md) as we have made some major changes.
 
+- `#791` Replaced the source folder with core and create a read only module as the LUYA module is no longer need since beta6.
 - `#785` Added composition default behavior based on host mapping informations
 - `#782` Fixed bug where CMS json response could be parsed.
 - `#760` Added [bootstrap 4 module](https://github.com/luyadev/luya-bootstrap4) to enable active forms, blocks and other widgets.
