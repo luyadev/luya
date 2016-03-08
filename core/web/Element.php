@@ -118,6 +118,17 @@ class Element extends \yii\base\Component
     }
 
     /**
+     * Checks whether an elemnt exists in the elements list or not
+     * 
+     * @param string $name The name of the element
+     * @return boolean 
+     */
+    public function hasElement($name)
+    {
+        return array_key_exists($name, $this->_elements);
+    }
+    
+    /**
      * Returns an array with all registered Element-Names.
      *
      * @return array Value is the name of the element

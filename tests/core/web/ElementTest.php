@@ -80,4 +80,13 @@ class ElementTest extends \tests\LuyaWebTestCase
         $this->assertEquals(0, count($lmns));
         $this->assertEquals(true, is_array($lmns));
     }
+    
+    public function testIncludeInitiConfigFile()
+    {
+        $element = new \luya\web\Element(['configFile' => '@unitmodule/elements.php']);
+        
+        $this->assertTrue($element->hasElement('button'));
+        $this->assertTrue($element->hasElement('teaserbox'));
+        $this->assertFalse($element->hasElement('foobarinsertion'));
+    }
 }
