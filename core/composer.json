@@ -1,0 +1,36 @@
+{
+    "name" : "luyadev/luya-core",
+    "description" : "LUYA Core",
+    "type" : "luya-module",
+    "keywords" : ["php", "luya", "yii2", "yii", "wrapper"],
+    "license": "MIT",
+    "homepage" : "http://luya.io",
+    "authors" : [
+        {
+            "name" : "Basil",
+            "email" : "git@nadar.io",
+            "homepage" : "https://github.com/nadar"
+        }
+    ],
+    "support" : {
+        "issues" : "https://github.com/luyadev/luya/issues"
+    },
+    "require" : {
+        "php": ">=5.5.0",
+        "yiisoft/yii2": "2.0.7",
+        "twig/twig" : "1.24.0",
+        "curl/curl" : "1.3.0",
+        "phpmailer/phpmailer": "5.2.14"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "luya\\" : ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
+    "bin" : ["bin/luya"]
+}
