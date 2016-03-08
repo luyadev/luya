@@ -3,7 +3,7 @@
     "description": "The kickstarter for a new LUYA application project.",
     "type": "project",
     "license":"MIT",
-    "minimum-stability" : "beta",
+    "minimum-stability" : "dev",
     "require": {
         "luyadev/luya-module-cms" : "dev-master as 1.0.0-beta5",
         "luyadev/luya-module-admin" : "dev-master as 1.0.0-beta5"
