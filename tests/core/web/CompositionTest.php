@@ -3,6 +3,7 @@
 namespace tests\core\web;
 
 use luya\web\Request;
+use luya\web\Composition;
 
 /**
  * removed tests to implemented here (if not already).
@@ -131,5 +132,29 @@ class CompositionTest extends \tests\LuyaWebTestCase
         
         $this->assertEquals('fr', $resolv['compositionKeys']['langShortCode']);
         $this->assertTrue(isset($resolv['compositionKeys']['x']));
+    }
+    
+    public function testGetDefaultLanguage()
+    {
+        $request = new Request();
+        $comp = new Composition($request);
+        $this->assertEquals('en', $comp->getDefaultLangShortCode());
+    }
+    
+    public function testGetKeys()
+    {
+        $request = new Request();
+        $comp = new Composition($request);
+        $this->assertTrue(is_array($comp->get()));
+        $this->assertArrayHasKey('langShortCode', $comp->get());
+    }
+    
+    /**
+     * @expectedException Exception
+     */
+    public function testExceptionOnInit()
+    {
+        $request = new Request();
+        $comp = new Composition($request, ['default' => ['noLangShortCode' => 'ch']]);
     }
 }
