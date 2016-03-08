@@ -10,6 +10,7 @@ LUYA
 ![PHP7](https://img.shields.io/badge/php7-yes-green.svg)
 [![Build Status](https://travis-ci.org/luyadev/luya.svg?branch=master)](https://travis-ci.org/luyadev/luya)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/luyadev/luya/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/luyadev/luya/?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/luyadev/luya/badge.svg?branch=master)](https://coveralls.io/github/luyadev/luya?branch=master)
 [![Total Downloads](https://poser.pugx.org/zephir/luya/downloads)](https://packagist.org/packages/zephir/luya) 
 
 What is **LUYA**? We have build a *fast*, *modular* and *beautiful* looking system to create content based on blocks or database tables. *LUYA* is based on the [Yii2 Framework](https://github.com/yiisoft/yii2), [Angular](https://angularjs.org) and [Materialize CSS](http://materializecss.com/).

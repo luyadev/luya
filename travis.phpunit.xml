@@ -18,7 +18,6 @@
 		</blacklist>
 		<whitelist processUncoveredFilesFromWhitelist="false">
             <directory suffix=".php">./src</directory>
-            <directory suffix=".php">./modules</directory>
         </whitelist>
 	</filter>
     <php>
