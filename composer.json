@@ -28,7 +28,8 @@
         "phpunit/php-code-coverage" : "~2.0",
         "fabpot/php-cs-fixer" : "~1.0",
         "imagine/imagine": "*",
-        "codeclimate/php-test-reporter": "*"
+        "codeclimate/php-test-reporter": "*",
+        "satooshi/php-coveralls": "~1.0"
     },
 	"autoload" : {
 		"psr-4" : {
