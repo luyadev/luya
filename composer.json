@@ -1,5 +1,5 @@
 {
-	"name" : "zephir/luya",
+	"name" : "luyadev/luya",
 	"description" : "The programmatic CMS based on the Yii2 Framework. http://luya.io",
 	"type" : "project",
 	"keywords" : ["php", "yii2", "cms", "luya", "programmatic", "content", "angular", "modular", "yii2-wrapper"],
@@ -13,7 +13,7 @@
 		}
 	],
 	"support" : {
-		"issues" : "https://github.com/zephir/luya/issues"
+		"issues" : "https://github.com/luyadev/luya/issues"
 	},
 	"require" : {
 		"php": ">=5.5.0",
@@ -61,5 +61,5 @@
             "dev-master": "1.0.x-dev"
         }
     },
-    "bin" : ["src/bin/luya"]
+    "bin" : ["core/bin/luya"]
 }

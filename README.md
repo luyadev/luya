@@ -5,14 +5,13 @@ LUYA
 
 ![PHP7](https://img.shields.io/badge/php7-yes-green.svg)
 [![Build Status](https://travis-ci.org/luyadev/luya.svg?branch=master)](https://travis-ci.org/luyadev/luya)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/zephir/luya/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/zephir/luya/?branch=master)
-[![Code Climate](https://codeclimate.com/github/zephir/luya/badges/gpa.svg)](https://codeclimate.com/github/zephir/luya)
-[![Dependency Status](https://www.versioneye.com/user/projects/55d0ce4315ff9b0014000166/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55d0ce4315ff9b0014000166)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/luyadev/luya/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/zephir/luya/?branch=master)
+[![Code Climate](https://codeclimate.com/github/luyadev/luya/badges/gpa.svg)](https://codeclimate.com/github/zephir/luya)
 [![Total Downloads](https://poser.pugx.org/zephir/luya/downloads)](https://packagist.org/packages/zephir/luya) 
 
 What is **LUYA**? We have build a *fast*, *modular* and *beautiful* looking system to create content based on blocks or database tables. *LUYA* is based on the [Yii2 Framework](https://github.com/yiisoft/yii2), [Angular](https://angularjs.org) and [Materialize CSS](http://materializecss.com/).
 
-![Luya Admin](https://raw.githubusercontent.com/zephir/luya/master/docs/guide/img/luya-beta5.png)
+![Luya Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-beta5.png)
 
 ### Installation
 
@@ -25,8 +24,8 @@ We have a made an absolut easy to understand *STEP-BY-STEP* Guide to install Luy
 
 If you have any questions or problems, don't hesitate to create a [new issue](https://github.com/zephir/luya/issues/new) on the project repository.
 
-+ [Issues on GitHub](https://github.com/zephir/luya/issues)
-+ [Ask us in Gitter](https://gitter.im/zephir/luya)
++ [Issues on GitHub](https://github.com/luyadev/luya/issues)
++ [Ask us in Gitter](https://gitter.im/luyadev/luya)
 
 ### Contribution
 
