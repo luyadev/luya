@@ -17,7 +17,7 @@
 	},
 	"require" : {
 		"luyadev/luya-core" : "dev-master as 1.0.0-beta5",
-		"luyadev/luya-module-cmsadmin" : "1.0.0-beta5"
+		"luyadev/luya-module-cmsadmin" : "dev-master as 1.0.0-beta5"
 	},
 	"autoload" : {
 		"psr-4" : {
