@@ -106,10 +106,6 @@ class ModuleReflection extends \yii\base\Object
     {
         // request route
         $requestRoute = $this->getRequestRoute();
-        // see if request array is correct
-        if (!isset($requestRoute['route']) || !isset($requestRoute['args'])) {
-            throw new Exception('The provide request array does not contain route or arg keys.');
-        }
         // create controller object
         $controller = $this->module->createController($requestRoute['route']);
         // throw error if the requests request does not returns a valid controller object

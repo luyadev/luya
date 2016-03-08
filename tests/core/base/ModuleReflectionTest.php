@@ -12,12 +12,27 @@ class ModuleReflectionTest extends \tests\LuyaWebTestCase
         return new ModuleReflection(new \luya\web\Request(), new \luya\web\UrlManager(), ['module' => $module]);
     }
 
+    /**
+     * @expectedException Exception
+     */
+    public function testInitException()
+    {
+        return new ModuleReflection(new \luya\web\Request(), new \luya\web\UrlManager());
+    }
+    
     public function testShareObject()
     {
         //$ref = new ModuleReflection(Yii::$app->getModule('unitmodule'));
         $ref = $this->buildObject(Yii::$app->getModule('unitmodule'));
         $ref->defaultRoute('unit-test', 'index', ['x' => 'y']);
         $reflectionRequest = $ref->getRequestRoute();
+        
+        $url = $ref->getUrlRule();
+        
+        $this->assertEquals('unitmodule', $url['module']);
+        $this->assertEquals('unitmodule/unit-test/index', $url['route']);
+        $this->assertEquals('y', $url['params']['x']);
+        
         $content = $ref->run();
 
         $this->assertEquals(5, count($content));
@@ -58,6 +73,12 @@ class ModuleReflectionTest extends \tests\LuyaWebTestCase
         $this->assertEquals('bar/index', $response['route']);
         $this->assertEquals(0, count($response['args']));
 
+        $url = $ref->getUrlRule();
+        
+        $this->assertEquals('urlmodule', $url['module']);
+        $this->assertEquals('urlmodule/bar/index', $url['route']);
+        $this->assertTrue(empty($url['params']));
+        
         $controllerResponse = $ref->run();
 
         $this->assertEquals('bar', $controllerResponse);
