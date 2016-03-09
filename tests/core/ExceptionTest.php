@@ -11,4 +11,10 @@ class ExceptionTest extends \tests\LuyaWebTestCase
     {
         throw new \luya\Exception('fixme');
     }
+    
+    public function testNameException()
+    {
+        $e = new \luya\Exception('fixme');
+        $this->assertEquals('Luya Exception', $e->getName());
+    }
 }
