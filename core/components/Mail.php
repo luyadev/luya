@@ -132,7 +132,7 @@ class Mail extends \yii\base\Component
      */
     public function setSubject($subject)
     {
-        $this->mailer->Subject = $subject;
+        $this->getMailer()->Subject = $subject;
         return $this;
     }
     
@@ -144,7 +144,7 @@ class Mail extends \yii\base\Component
      */
     public function setBody($body)
     {
-        $this->mailer->Body = $body;
+        $this->getMailer()->Body = $body;
         return $this;
     }
 
@@ -181,14 +181,15 @@ class Mail extends \yii\base\Component
     }
     
     /**
+     * Add a single addresse with optional name
      * 
-     * @param unknown $email
-     * @param unknown $name
+     * @param string $email The email adresse e.g john@example.com
+     * @param string $name The name for the adresse e.g John Doe
      * @return \luya\components\Mail
      */
     public function address($email, $name = null)
     {
-        $this->mailer->addAddress($email, (empty($name)) ? $email : $name);
+        $this->getMailer()->addAddress($email, (empty($name)) ? $email : $name);
 
         return $this;
     }
@@ -200,7 +201,7 @@ class Mail extends \yii\base\Component
      */
     public function send()
     {
-        return $this->mailer->send();
+        return $this->getMailer()->send();
     }
 
     /**
@@ -210,7 +211,7 @@ class Mail extends \yii\base\Component
      */
     public function getError()
     {
-        return $this->mailer->ErrorInfo;
+        return $this->getMailer()->ErrorInfo;
     }
 
     /**
