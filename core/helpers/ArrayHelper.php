@@ -4,24 +4,39 @@ namespace luya\helpers;
 
 class ArrayHelper extends \yii\helpers\BaseArrayHelper
 {
+    /**
+     * Create an object from an array.
+     * 
+     * @param array $array
+     * @return object
+     */
     public static function toObject(array $array)
     {
         return json_decode(json_encode($array), false);
     }
 
+    /**
+     * Prepend an assoc array item as first entry for a given array.
+     * 
+     * @param array $arr The array where the value should be prepend
+     * @param string $key The new array key
+     * @param mix $val The value for the new key
+     * @return array
+     */
     public static function arrayUnshiftAssoc(&$arr, $key, $val)
     {
         $arr = array_reverse($arr, true);
         $arr[$key] = $val;
-
         return array_reverse($arr, true);
     }
     
     /**
-     * cast an array into their respectiv types 
+     * TypeCast values from a mixed array source. numeric values will be casted as integer.
      * 
-     * @param unknown $array
-     * @return multitype:number unknown multitype:number NULL unknown
+     * This method is often used to convert corect json respons arrays
+     * 
+     * @param array $array The array which should be type casted
+     * @return array An array with type casted values
      */
     public static function typeCast($array)
     {
