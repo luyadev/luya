@@ -28,7 +28,7 @@ the response value of `$mail` is a boolean value. If something happends wrong yo
 ```php
 if (!$mail) {
 	echo "Houston, we have problem: " . PHP_EOL;
-	echo Yii::$app->mail->error();
+	echo Yii::$app->mail->error;
 } else {
 	echo "Wow, mail has been sent!";
 }
@@ -49,7 +49,7 @@ foreach($recipients as $mail) {
 }
 if (!$mail->send()) {
 	echo "Houston, we have problem: " . PHP_EOL;
-	echo Yii::$app->mail->error();
+	echo Yii::$app->mail->error;
 } else {
 	echo "Wow, mail has been sent!";
 }
@@ -63,14 +63,14 @@ If you want to access the phpmailer object you should use the Object-Mode which 
 $mail = Yii::$app->mail;
 $mail->compose('Mail Subject', 'My HTML email content goes here.');
 $mail->address("foobar@luya.io", "John Doe");
-$mail->mailer()->From = 'from@example.com';
-$mail->mailer()->FromName = 'Mailer';
-$mail->mailer()->addReplyTo('info@example.com', 'Information');
-$mail->mailer()->addCC('cc@example.com');
-$mail->mailer()->addBCC('bcc@example.com');
+$mail->mailer->From = 'from@example.com';
+$mail->mailer->FromName = 'Mailer';
+$mail->mailer->addReplyTo('info@example.com', 'Information');
+$mail->mailer->addCC('cc@example.com');
+$mail->mailer->addBCC('bcc@example.com');
 if (!$mail->send()) {
 	echo "Houston, we have problem: " . PHP_EOL;
-	echo Yii::$app->mail->error();
+	echo Yii::$app->mail->error;
 } else {
 	echo "Wow, mail has been sent!";
 }

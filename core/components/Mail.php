@@ -7,7 +7,19 @@ use PHPMailer;
 use SMTP;
 
 /**
- * smtp debug
+ * LUYA mail component to compose messages and send them via SMTP.
+ * 
+ * This component is registered on each LUYA instance, how to use:
+ * 
+ * ```php
+ * if (Yii::$app->mail->compose('Subject', 'Message body of the Mail'->adress('info@example.com')->send()) {
+ *     echo "Mail has been sent!";
+ * } else {
+ *     echo "Error" : Yii::$app->mail->error;
+ * }
+ * ```
+ * 
+ * SMTP debug help:
  * 
  * ```
  * swaks -s HOST -p 587 -ehlo localhost -au AUTH_USER -to TO_ADRESSE -tls
@@ -17,7 +29,7 @@ use SMTP;
  */
 class Mail extends \yii\base\Component
 {
-    private $_phpmailer = null;
+    private $_mailer = null;
 
     public $from = 'php@zephir.ch';
 
@@ -42,50 +54,97 @@ class Mail extends \yii\base\Component
      */
     public $smtpSecure = 'tls';
     
+    /**
+     * @todo Remove in beta7
+     * @return NULL|\PHPMailer
+     */
     public function mailer()
     {
-        if ($this->_phpmailer === null) {
-            $this->_phpmailer = new PHPMailer();
-            $this->_phpmailer->CharSet = 'UTF-8';
-        }
-
-        return $this->_phpmailer;
+        trigger_error("Deprecated function called: " . __METHOD__, E_USER_NOTICE);
+        return $this->getMailer();
     }
-
-    public function create()
+    
+    /**
+     * Getter for the mailer object
+     * 
+     * @return \PHPMailer
+     */
+    public function getMailer()
     {
-        if ($this->isSMTP) {
-            if ($this->debug) {
-                $this->mailer()->SMTPDebug = 2;
+        if ($this->_mailer === null) {
+            $this->_mailer = new PHPmailer;
+            $this->_mailer->CharSet = 'UTF-8';
+            $this->_mailer->From = $this->from;
+            $this->_mailer->FromName = $this->fromName;
+            $this->_mailer->isHTML(true);
+            $this->_mailer->AltBody = $this->altBody;
+            // if sending over smtp, define the settings for the smpt server
+            if ($this->isSMTP) {
+                if ($this->debug) {
+                    $this->_mailer->SMTPDebug = 2;
+                }
+                $this->_mailer->isSMTP();
+                $this->_mailer->SMTPSecure = $this->smtpSecure;
+                $this->_mailer->Host = $this->host;
+                $this->_mailer->SMTPAuth = true;
+                $this->_mailer->Username = $this->username;
+                $this->_mailer->Password = $this->password;
+                $this->_mailer->Port = $this->port;
+                $this->_mailer->SMTPOptions = [
+                    'ssl' => ['verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => true],
+                ];
             }
-            $this->mailer()->isSMTP();
-            $this->mailer()->SMTPSecure = $this->smtpSecure;
-            $this->mailer()->Host = $this->host;
-            $this->mailer()->SMTPAuth = true;
-            $this->mailer()->Username = $this->username;
-            $this->mailer()->Password = $this->password;
-            $this->mailer()->Port = $this->port;
-            $this->mailer()->SMTPOptions = array(
-                'ssl' => array(
-                    'verify_peer' => false,
-                    'verify_peer_name' => false,
-                    'allow_self_signed' => true,
-                ),
-            );
         }
-        $this->mailer()->From = $this->from;
-        $this->mailer()->FromName = $this->fromName;
-        $this->mailer()->isHTML(true);
-        $this->mailer()->AltBody = $this->altBody;
-    }
 
+        return $this->_mailer;
+    }
+    
+    /**
+     * Reset the mailer object to null
+     * 
+     * @return void
+     */
+    public function cleanup()
+    {
+        $this->_mailer = null;
+    }
+    
+    /**
+     * Compose a new mail message, this will first flush existing mailer objects
+     * 
+     * @param string $subject The subject of the mail
+     * @param string $body The HTML body of the mail message.
+     * @return \luya\components\Mail
+     */
     public function compose($subject, $body)
     {
         $this->cleanup();
-        $this->create();
-        $this->mailer()->Subject = $subject;
-        $this->mailer()->Body = $body;
-
+        $this->setSubject($subject);
+        $this->setBody($body);
+        return $this;
+    }
+    
+    /**
+     * Set the mail message subject of the mailer instance
+     * 
+     * @param string $subject The subject message
+     * @return \luya\components\Mail
+     */
+    public function setSubject($subject)
+    {
+        $this->mailer->Subject = $subject;
+        return $this;
+    }
+    
+    /**
+     * Set the HTML body for the mailer message
+     * 
+     * @param string $body The HTML body message
+     * @return \luya\components\Mail
+     */
+    public function setBody($body)
+    {
+        $this->mailer->Body = $body;
         return $this;
     }
 
@@ -104,7 +163,7 @@ class Mail extends \yii\base\Component
      * adresses(['John Doe' => 'john.doe@example.com', 'Jane Doe' => 'jane.doe@example.com']);
      * ```
      * 
-     * @return void
+     * @return \luya\components\Mail
      * @since 1.0.0-beta4
      * @param array $emails An array with email adresses or name => email paring to use names.
      */
@@ -121,26 +180,37 @@ class Mail extends \yii\base\Component
         return $this;
     }
     
+    /**
+     * 
+     * @param unknown $email
+     * @param unknown $name
+     * @return \luya\components\Mail
+     */
     public function address($email, $name = null)
     {
-        $this->mailer()->addAddress($email, (empty($name)) ? $email : $name);
+        $this->mailer->addAddress($email, (empty($name)) ? $email : $name);
 
         return $this;
     }
 
+    /**
+     * Trigger the send event of the mailer
+     * 
+     * @return boolean
+     */
     public function send()
     {
-        return $this->mailer()->send();
+        return $this->mailer->send();
     }
 
-    public function error()
+    /**
+     * Get the mailer error info if any.
+     * 
+     * @return string
+     */
+    public function getError()
     {
-        return $this->mailer()->ErrorInfo;
-    }
-
-    public function cleanup()
-    {
-        $this->_phpmailer = null;
+        return $this->mailer->ErrorInfo;
     }
 
     /**
@@ -159,11 +229,10 @@ class Mail extends \yii\base\Component
         }
         
         try {
-            //Connect to an SMTP server
+            // connect to an SMTP server
             if ($smtp->connect($this->host, $this->port)) {
-                //Say hello
-                if ($smtp->hello('localhost')) { //Put your host name in here
-                    //Authenticate
+                // yay hello
+                if ($smtp->hello('localhost')) {
                     if ($smtp->authenticate($this->username, $this->password)) {
                         return true;
                     } else {
