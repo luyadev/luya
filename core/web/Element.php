@@ -195,6 +195,6 @@ class Element extends \yii\base\Component
     {
         $twig = Yii::$app->twig->env(new Twig_Loader_Filesystem($this->getFolder()));
 
-        return $twig->render(FileHelper::appendExtensionToString($file, 'twig'), $args);
+        return $twig->render(FileHelper::ensureExtension($file, 'twig'), $args);
     }
 }
