@@ -139,6 +139,18 @@ class CompositionTest extends \tests\LuyaWebTestCase
         $request = new Request();
         $comp = new Composition($request);
         $this->assertEquals('en', $comp->getDefaultLangShortCode());
+        
+        // test route override
+        $override = $comp->createRoute(['langShortCode' => 'us']);
+        
+        $this->assertEquals('us', $override);
+        
+        // as override does not set/change the base value
+        $this->assertEquals('en', $comp->getLanguage());
+        $this->assertEquals('en', $comp['langShortCode']);
+        $this->assertTrue(isset($comp['langShortCode']));
+        $comp['fooCode'] = 'bar';
+        $this->assertEquals('bar', $comp['fooCode']);
     }
     
     public function testGetKeys()
@@ -156,5 +168,35 @@ class CompositionTest extends \tests\LuyaWebTestCase
     {
         $request = new Request();
         $comp = new Composition($request, ['default' => ['noLangShortCode' => 'ch']]);
+    }
+    
+    /**
+     * @expectedException Exception
+     */
+    public function testEmptyAssignException()
+    {
+        $request = new Request();
+        $comp = new Composition($request);
+        $comp[] = 'bar';
+    }
+    
+    /**
+     * @expectedException Exception
+     */
+    public function testNotAllowedUnset()
+    {
+        $request = new Request();
+        $comp = new Composition($request);
+        unset($comp['langShortCode']);
+    }
+    
+    public function testRemoval()
+    {
+        $request = new Request();
+        $request->pathInfo = 'foo/bar';
+        $request->hostInfo = 'example.fr';
+        $comp = new Composition($request);
+        
+        $this->assertEquals('this-should/be-left', $comp->removeFrom('en/this-should/be-left'));
     }
 }
