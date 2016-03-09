@@ -2,6 +2,11 @@
 
 namespace luya\helpers;
 
+/**
+ * Extend the Yii Array Helper class
+ * 
+ * @author nadar
+ */
 class ArrayHelper extends \yii\helpers\BaseArrayHelper
 {
     /**

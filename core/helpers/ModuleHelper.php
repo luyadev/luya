@@ -5,6 +5,11 @@ namespace luya\helpers;
 use Yii;
 use luya\base\ModuleReflection;
 
+/**
+ * Module Helper class
+ * 
+ * @author nadar
+ */
 class ModuleHelper
 {
     /**

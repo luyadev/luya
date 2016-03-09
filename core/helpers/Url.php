@@ -4,6 +4,11 @@ namespace luya\helpers;
 
 use Yii;
 
+/**
+ * Extend the Yii Url Helper class
+ * 
+ * @author nadar
+ */
 class Url extends \yii\helpers\Url
 {
     /**
