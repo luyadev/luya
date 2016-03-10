@@ -134,7 +134,7 @@ class Composition extends \yii\base\Component implements \ArrayAccess
     {
         if ($event->key == 'langShortCode') {
             Yii::$app->language = $event->value;
-            setlocale(LC_ALL, $this->locale, $this->locale.'.utf8');
+            setlocale(LC_ALL, $this->getLocale(), $this->getLocale().'.utf8');
         }
     }
     
@@ -321,19 +321,14 @@ class Composition extends \yii\base\Component implements \ArrayAccess
         switch ($this->getKey('langShortCode')) {
             case 'de':
                 return 'de_DE';
-                break;
-            case 'en':
-                return 'en_EN';
-                break;
             case 'fr':
                 return 'fr_FR';
-                break;
             case 'it':
                 return 'it_IT';
-                break;
             case 'ru':
                 return 'ru_RU';
-                break;
+            default:
+                return 'en_EN';
         }
     }
 
