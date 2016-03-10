@@ -1,12 +1,12 @@
 <?php
 
-namespace tests\web\cms\helpers;
+namespace cmstests\src\helpers;
 
 use Yii;
 use cms\helpers\Url;
-use luyatest\LuyaWebTestCase;
+use cmstests\CmsFrontendTestCase;
 
-class UrlTest extends LuyaWebTestCase
+class UrlTest extends CmsFrontendTestCase
 {
     public function testToModuleFromOldLuyaBaseTest()
     {

@@ -1,12 +1,12 @@
 <?php
 
-namespace tests\web\cms\controllers;
+namespace cmstests\src\controllers;
 
 
 use Yii;
-use luyatest\LuyaWebTestCase;
+use cmstests\CmsFrontendTestCase;
 
-class PreviewControllerTest extends LuyaWebTestCase
+class PreviewControllerTest extends CmsFrontendTestCase
 {
     
     /**

@@ -1,12 +1,12 @@
 <?php
 
-namespace tests\web\cms\helpers;
+namespace cmstests\src\helpers;
 
 use Yii;
 use cms\helpers\Parser;
-use luyatest\LuyaWebTestCase;
+use cmstests\CmsFrontendTestCase;
 
-class ParserTest extends LuyaWebTestCase
+class ParserTest extends CmsFrontendTestCase
 {
     public function testLinkBasicParser()
     {

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b20ad557830e29cf661de15bb61d78f2",
-    "content-hash": "869171d97a950d260f2a8ca83f612f37",
+    "hash": "30560ee282263e8a2bfded011136fa87",
+    "content-hash": "0e5152f943171c1799fafcd686836676",
     "packages": [
         {
             "name": "bower-asset/jquery",
@@ -368,12 +368,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-core.git",
-                "reference": "12ad4150fb717280db9044d06cec429ab3d5010e"
+                "reference": "b74768393221fd229400dee39ea9c18abc2831bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/12ad4150fb717280db9044d06cec429ab3d5010e",
-                "reference": "12ad4150fb717280db9044d06cec429ab3d5010e",
+                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/b74768393221fd229400dee39ea9c18abc2831bd",
+                "reference": "b74768393221fd229400dee39ea9c18abc2831bd",
                 "shasum": ""
             },
             "require": {
@@ -417,7 +417,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2016-03-09 14:57:28"
+            "time": "2016-03-10 09:50:06"
         },
         {
             "name": "luyadev/luya-module-admin",
@@ -850,6 +850,80 @@
                 "instantiate"
             ],
             "time": "2015-06-14 21:17:01"
+        },
+        {
+            "name": "luyadev/luya",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/luyadev/luya.git",
+                "reference": "515fb22d6249f570308987e9aeaaf70873f5f53c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/luyadev/luya/zipball/515fb22d6249f570308987e9aeaaf70873f5f53c",
+                "reference": "515fb22d6249f570308987e9aeaaf70873f5f53c",
+                "shasum": ""
+            },
+            "require": {
+                "curl/curl": "1.3.0",
+                "php": ">=5.5.0",
+                "phpmailer/phpmailer": "5.2.14",
+                "twig/twig": "1.24.0",
+                "yiisoft/yii2": "2.0.7"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "*",
+                "fabpot/php-cs-fixer": "~1.0",
+                "imagine/imagine": "*",
+                "phpunit/php-code-coverage": "~2.0",
+                "phpunit/phpunit": "~4.0",
+                "satooshi/php-coveralls": "~1.0",
+                "yiisoft/yii2-debug": "~2.0.0"
+            },
+            "bin": [
+                "core/bin/luya"
+            ],
+            "type": "project",
+            "extra": {
+                "asset-installer-paths": {
+                    "bower-asset-library": "vendor/bower"
+                },
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "luya\\": "core/",
+                    "luyatest\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Basil",
+                    "email": "git@nadar.io",
+                    "homepage": "https://github.com/nadar"
+                }
+            ],
+            "description": "The programmatic CMS based on the Yii2 Framework. http://luya.io",
+            "homepage": "http://luya.io",
+            "keywords": [
+                "angular",
+                "cms",
+                "content",
+                "luya",
+                "modular",
+                "php",
+                "programmatic",
+                "yii2",
+                "yii2-wrapper"
+            ],
+            "time": "2016-03-10 09:56:34"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -1775,7 +1849,8 @@
     "stability-flags": {
         "luyadev/luya-core": 20,
         "luyadev/luya-module-admin": 20,
-        "luyadev/luya-module-cmsadmin": 20
+        "luyadev/luya-module-cmsadmin": 20,
+        "luyadev/luya": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -28,6 +28,11 @@
 			"cms\\" : "src/"
 		}
 	},
+	"autoload-dev" : {
+	   "psr-4" : {
+	       "cmstests\\" : "tests/"
+	   }
+	},
 	"extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"

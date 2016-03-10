@@ -1,13 +1,13 @@
 <?php
 
-namespace tests\web\cms\menu;
 
+namespace cmstests\src\menu;
 
 use Yii;
 use cms\components\Menu;
-use luyatest\LuyaWebTestCase;
+use cmstests\CmsFrontendTestCase;
 
-class ContainerTest extends LuyaWebTestCase
+class ContainerTest extends CmsFrontendTestCase
 {
     public function testComponentExists()
     {

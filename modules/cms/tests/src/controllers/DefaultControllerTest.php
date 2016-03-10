@@ -1,16 +1,17 @@
 <?php
 
-namespace tests\web\cms\controllers;
+namespace cmstests\src\controllers;
 
 
+use cmstests\CmsFrontendTestCase;
+use cms\Module;
 use Yii;
-use luyatest\LuyaWebTestCase;
 
-class DefaultControllerTest extends LuyaWebTestCase
+class DefaultControllerTest extends CmsFrontendTestCase
 {
     public function testDefaultPage()
     {
-        $response = Yii::$app->getModule('cms')->runAction('default/index');
+        $response = (new Module('cms'))->runAction('default/index');
         
         $this->assertFalse(empty($response));
     }

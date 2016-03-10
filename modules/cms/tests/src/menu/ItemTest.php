@@ -1,13 +1,13 @@
 <?php
 
-namespace tests\web\cms\menu;
+namespace cmstests\src\menu;
 
 use Yii;
 use admin\models\User;
 use cms\menu\Query;
-use luyatest\LuyaWebTestCase;
+use cmstests\CmsFrontendTestCase;
 
-class ItemTest extends LuyaWebTestCase
+class ItemTest extends CmsFrontendTestCase
 {
     public function testItemFunctions()
     {
