@@ -16,7 +16,7 @@ class DynamicModel extends \yii\base\DynamicModel
     public function attributeLabels()
     {
         $labels = [];
-        foreach($this->attributeLabels as $key => $value) {
+        foreach ($this->attributeLabels as $key => $value) {
             $labels[$key] = Yii::t('app', $value);
         }
         
