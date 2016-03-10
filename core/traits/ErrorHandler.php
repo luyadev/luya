@@ -45,7 +45,7 @@ trait ErrorHandler
      * Get an readable array to transfer from an exception
      * 
      * @todo: catch getPrevious() exception.
-     * @param object $exception Exception to render 
+     * @param \Exception $exception Exception to render 
      * @return array An array with transformed exception data
      */
     public function getExceptionArray(\Exception $exception)
