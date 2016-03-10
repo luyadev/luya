@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\data\modules\viewmodule;
+namespace luyatest\data\modules\viewmodule;
 
 class Module extends \luya\base\Module
 {

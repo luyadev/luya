@@ -1,8 +1,8 @@
 <?php
 
-namespace tests\core\helpers;
+namespace luyatest\core\helpers;
 
-use tests\LuyaWebTestCase;
+use luyatest\LuyaWebTestCase;
 use luya\helpers\ArrayHelper;
 
 class ArrayHelperTest extends LuyaWebTestCase

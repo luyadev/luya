@@ -4,8 +4,9 @@ namespace tests\web\cms\helpers;
 
 use Yii;
 use cms\helpers\Parser;
+use luyatest\LuyaWebTestCase;
 
-class ParserTest extends \tests\web\Base
+class ParserTest extends LuyaWebTestCase
 {
     public function testLinkBasicParser()
     {

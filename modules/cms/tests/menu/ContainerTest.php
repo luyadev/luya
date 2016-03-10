@@ -5,8 +5,9 @@ namespace tests\web\cms\menu;
 
 use Yii;
 use cms\components\Menu;
+use luyatest\LuyaWebTestCase;
 
-class ContainerTest extends \tests\web\Base
+class ContainerTest extends LuyaWebTestCase
 {
     public function testComponentExists()
     {

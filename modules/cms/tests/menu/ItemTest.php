@@ -5,8 +5,9 @@ namespace tests\web\cms\menu;
 use Yii;
 use admin\models\User;
 use cms\menu\Query;
+use luyatest\LuyaWebTestCase;
 
-class ItemTest extends \tests\web\Base
+class ItemTest extends LuyaWebTestCase
 {
     public function testItemFunctions()
     {

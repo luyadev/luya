@@ -1,10 +1,10 @@
 <?php
 
-namespace tests\core\web;
+namespace luyatest\core\web;
 
 use Yii;
 
-class ElementTest extends \tests\LuyaWebTestCase
+class ElementTest extends \luyatest\LuyaWebTestCase
 {
     public function testElement()
     {

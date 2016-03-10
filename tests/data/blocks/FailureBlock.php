@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\data\blocks;
+namespace luyatest\data\blocks;
 
 class FailureBlock extends \cmsadmin\base\Block
 {

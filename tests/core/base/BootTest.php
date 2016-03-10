@@ -1,10 +1,10 @@
 <?php
 
-namespace tests\core\base;
+namespace luyatest\core\base;
 
 use luya\Boot;
 
-class BootTest extends \tests\LuyaWebTestCase
+class BootTest extends \luyatest\LuyaWebTestCase
 {
     public function testBaseObject()
     {

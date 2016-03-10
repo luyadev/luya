@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\data\modules\urlmodule;
+namespace luyatest\data\modules\urlmodule;
 
 class Module extends \luya\base\Module
 {

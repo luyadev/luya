@@ -4,8 +4,9 @@ namespace tests\web\cms\controllers;
 
 
 use Yii;
+use luyatest\LuyaWebTestCase;
 
-class BlockControllerTest extends \tests\web\Base
+class BlockControllerTest extends LuyaWebTestCase
 {
     
     /**

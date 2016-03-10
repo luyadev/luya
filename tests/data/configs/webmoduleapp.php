@@ -8,7 +8,7 @@ return [
     'defaultRoute' => 'unitmodule',
     'modules' => [
         'unitmodule' => [
-            'class' => 'tests\data\modules\unitmodule\Module',
+            'class' => 'luyatest\data\modules\unitmodule\Module',
         ],
     ],
 ];

@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\data\modules\unitmodule\commands;
+namespace luyatest\data\modules\unitmodule\commands;
 
 class CommandOutputController extends \luya\console\Command
 {

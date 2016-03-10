@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\core\web;
+namespace luyatest\core\web;
 
 use luya\web\Request;
 use luya\web\Composition;
@@ -23,7 +23,7 @@ use luya\web\Composition;
  * 
  * @author nadar
  */
-class CompositionTest extends \tests\LuyaWebTestCase
+class CompositionTest extends \luyatest\LuyaWebTestCase
 {
     public function testResolvedPaths()
     {

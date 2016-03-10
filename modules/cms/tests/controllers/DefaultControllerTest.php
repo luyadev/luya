@@ -4,8 +4,9 @@ namespace tests\web\cms\controllers;
 
 
 use Yii;
+use luyatest\LuyaWebTestCase;
 
-class DefaultControllerTest extends \tests\web\Base
+class DefaultControllerTest extends LuyaWebTestCase
 {
     public function testDefaultPage()
     {

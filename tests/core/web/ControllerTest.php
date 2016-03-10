@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\core\web;
+namespace luyatest\core\web;
 
 use Yii;
 
@@ -8,7 +8,7 @@ class StubController extends \luya\web\Controller
 {
 }
 
-class ControllerTest extends \tests\LuyaWebTestCase
+class ControllerTest extends \luyatest\LuyaWebTestCase
 {
     public $controller;
 

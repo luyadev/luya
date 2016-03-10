@@ -1,9 +1,9 @@
 <?php
 
-namespace tests\core\traits;
+namespace luyatest\core\traits;
 
 use Exception;
-use tests\LuyaWebTestCase;
+use luyatest\LuyaWebTestCase;
 use luya\console\ErrorHandler;
 
 class ErrorHandlerTest extends LuyaWebTestCase

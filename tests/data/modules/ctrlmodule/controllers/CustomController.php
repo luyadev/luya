@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\data\modules\ctrlmodule\controllers;
+namespace luyatest\data\modules\ctrlmodule\controllers;
 
 class CustomController extends \luya\web\Controller
 {

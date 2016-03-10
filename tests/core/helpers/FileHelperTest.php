@@ -1,8 +1,8 @@
 <?php
 
-namespace tests\core\helpers;
+namespace luyatest\core\helpers;
 
-use tests\LuyaWebTestCase;
+use luyatest\LuyaWebTestCase;
 use luya\helpers\FileHelper;
 
 class FileHelperTest extends LuyaWebTestCase

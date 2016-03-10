@@ -8,16 +8,16 @@ return [
     'defaultRoute' => 'unitmodule',
     'modules' => [
         'unitmodule' => [
-            'class' => '\tests\data\modules\unitmodule\Module',
+            'class' => '\luyatest\data\modules\unitmodule\Module',
         ],
         'urlmodule' => [
-            'class' => '\tests\data\modules\urlmodule\Module',
+            'class' => '\luyatest\data\modules\urlmodule\Module',
         ],
         'viewmodule' => [
-            'class' => '\tests\data\modules\viewmodule\Module',
+            'class' => '\luyatest\data\modules\viewmodule\Module',
         ],
         'ctrlmodule' => [
-            'class' => '\tests\data\modules\ctrlmodule\Module',
+            'class' => '\luyatest\data\modules\ctrlmodule\Module',
         ],
     ],
     'components' => [

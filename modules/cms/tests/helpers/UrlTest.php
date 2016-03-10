@@ -4,8 +4,9 @@ namespace tests\web\cms\helpers;
 
 use Yii;
 use cms\helpers\Url;
+use luyatest\LuyaWebTestCase;
 
-class UrlTest extends \tests\web\Base
+class UrlTest extends LuyaWebTestCase
 {
     public function testToModuleFromOldLuyaBaseTest()
     {

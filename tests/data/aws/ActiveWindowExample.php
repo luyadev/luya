@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\data\aws;
+namespace luyatest\data\aws;
 
 class ActiveWindowExample extends \admin\ngrest\base\ActiveWindow
 {

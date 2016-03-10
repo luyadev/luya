@@ -1,10 +1,10 @@
 <?php
 
-namespace tests\core\base;
+namespace luyatest\core\base;
 
 use Yii;
 
-class ModuleTest extends \tests\LuyaWebTestCase
+class ModuleTest extends \luyatest\LuyaWebTestCase
 {
 
     public function testResolveRoute()

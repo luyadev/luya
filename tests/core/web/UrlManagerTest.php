@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\core\web;
+namespace luyatest\core\web;
 
 use Yii;
 use luya\web\UrlManager;
@@ -9,7 +9,7 @@ use luya\web\Request;
 /**
  * @author nadar
  */
-class UrlManagerTest extends \tests\LuyaWebTestCase
+class UrlManagerTest extends \luyatest\LuyaWebTestCase
 {
     public $urlRules = [
         ['pattern' => 'news/detail/<id:\d+>/<title:[a-zA-Z0-9\-]+>/', 'route' => 'news/default/detail'],

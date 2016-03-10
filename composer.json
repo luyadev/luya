@@ -33,12 +33,12 @@
     },
 	"autoload" : {
 		"psr-4" : {
-			"luya\\" : "core/"
+			"luya\\" : "core/",
+			"luyatest\\" : "tests/"
 		}
 	},
 	"autoload-dev": {
         "psr-4": {
-            "tests\\": "tests/",
             "admin\\" : "modules/admin",
             "cms\\" : "modules/cms",
             "cmsadmin\\" : "modules/cmsadmin",
