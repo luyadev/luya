@@ -60,11 +60,13 @@ class Parser
     public static function functionLink($result)
     {
         $alias = false;
+        $external = true;
         if (is_numeric($result['value'])) {
             $menuItem = Yii::$app->menu->find()->where(['nav_id' => $result['value']])->with('hidden')->one();
             if ($menuItem) {
                 $href = $menuItem->link;
                 $alias = $menuItem->title;
+                $external = false;
             } else {
                 $href = '#link_not_found';
             }
@@ -86,6 +88,8 @@ class Parser
             }
         }
 
-        return '<a href="'.$href.'">'.$label.'</a>';
+        $class = $external ? 'link-external' : 'link-internal';
+        $target = $external ? 'target="_blank"' : null;
+        return '<a href="'.$href.'" label="'.$label.'" class="'.$class.'" '.$target.'>'.$label.'</a>';
     }
 }
