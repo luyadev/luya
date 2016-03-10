@@ -7,12 +7,26 @@ use yii\web\NotFoundHttpException;
 use yii\helpers\Json;
 use Curl\Curl;
 
+/**
+ * ErrorHandler trait to extend the renderException method with an api call if enabled.
+ * 
+ * @author nadar
+ */
 trait ErrorHandler
 {
+    /**
+     * @var string The url where the errorapi module has been added
+     */
     public $api = 'http://luya.io/errorapi';
 
+    /**
+     * @var boolean Enable the transfer of exception informations
+     */
     public $transferException = false;
 
+    /**
+     * {@inheritdoc}
+     */
     public function renderException($exception)
     {
         if ($exception instanceof NotFoundHttpException || !$this->transferException) {
@@ -28,13 +42,13 @@ trait ErrorHandler
     }
 
     /**
-     * @todo: catch getPrevious() exception
-     *
-     * @param object $exception Exception
-     *
-     * @return multitype:multitype:Ambigous <NULL, unknown>
+     * Get an readable array to transfer from an exception
+     * 
+     * @todo: catch getPrevious() exception.
+     * @param object $exception Exception to render 
+     * @return array An array with transformed exception data
      */
-    public function getExceptionArray($exception)
+    public function getExceptionArray(\Exception $exception)
     {
         $_trace = [];
         foreach ($exception->getTrace() as $key => $item) {

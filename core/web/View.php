@@ -5,6 +5,11 @@ namespace luya\web;
 use Yii;
 use luya\helpers\Url;
 
+/**
+ * LUYA web view wrapper
+ * 
+ * @author nadar
+ */
 class View extends \yii\web\View
 {
     private $_publicHtml = null;

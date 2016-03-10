@@ -5,6 +5,8 @@ namespace luya\traits;
 use Yii;
 
 /**
+ * LUYA Appliation trait
+ * 
  * @property string $webroot returns the webroot directory event for console commands.
  * @property \luya\components\Mail $mail Get luya mail component
  * @author nadar
@@ -50,7 +52,7 @@ trait Application
         // call parent
         parent::init();
         // add trace info
-        Yii::trace('LUYA Application starts here', __METHOD__);
+        Yii::trace('initialize LUYA Application', __METHOD__);
     }
     
     /**

@@ -4,6 +4,11 @@ namespace luya\web;
 
 use yii\web\IdentityInterface;
 
+/**
+ * The identity interface for group users
+ * 
+ * @author nadar
+ */
 interface GroupUserIdentityInterface extends IdentityInterface
 {
     /**
