@@ -31,17 +31,17 @@ class UrlManager extends \yii\web\UrlManager
     public function parseRequest($request)
     {
         // extra data from request to composition, which changes the pathInfo of the Request-Object.
-        $resolver = $this->composition->getResolvedPathInfo($request);
+        $resolver = $this->getComposition()->getResolvedPathInfo($request);
         
         $request->setPathInfo($resolver['route']);
         
         $parsedRequest = parent::parseRequest($request);
 
-        if ($this->composition->hidden) {
+        if ($this->getComposition()->hidden) {
             return $parsedRequest;
         }
         // temp write variables
-        $composition = $this->composition->full;
+        $composition = $this->getComposition()->full;
         $length = strlen($composition);
         $route = $parsedRequest[0];
         // route matches composition exactly, so we have to remove the composition informations
@@ -115,7 +115,7 @@ class UrlManager extends \yii\web\UrlManager
         $response = $this->internalCreateUrl($params);
 
         if ($this->contextNavItemId) {
-            return $this->urlReplaceModule($response, $this->contextNavItemId, $this->composition);
+            return $this->urlReplaceModule($response, $this->contextNavItemId, $this->getComposition());
         }
 
         return $response;
@@ -123,7 +123,7 @@ class UrlManager extends \yii\web\UrlManager
 
     public function createMenuItemUrl($params, $navItemId, $composition = null)
     {
-        $composition = (empty($composition)) ? $this->composition : $composition;
+        $composition = (empty($composition)) ? $this->getComposition() : $composition;
         $url = $this->internalCreateUrl($params, $composition);
 
         if (!$this->menu) {
@@ -186,7 +186,7 @@ class UrlManager extends \yii\web\UrlManager
     {
         $params = (array) $params;
         
-        $composition = (empty($composition)) ? $this->composition : $composition;
+        $composition = (empty($composition)) ? $this->getComposition() : $composition;
         
         $originalParams = $params;
         // creata parameter where route contains a composition

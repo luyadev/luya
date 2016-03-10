@@ -74,7 +74,7 @@ abstract class Importer extends \yii\base\Object
      */
     public function addLog($section, $value)
     {
-        $this->importer->addLog($section, $value);
+        $this->getImporter()->addLog($section, $value);
     }
 
     /**
