@@ -1,8 +1,8 @@
 <?php
 
-namespace luyatest\core;
+namespace luyatests\core;
 
-class ExceptionTest extends \luyatest\LuyaWebTestCase
+class ExceptionTest extends \luyatests\LuyaWebTestCase
 {
     /**
      * @expectedException \luya\Exception

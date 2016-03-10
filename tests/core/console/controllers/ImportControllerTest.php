@@ -1,10 +1,10 @@
 <?php
 
-namespace luyatest\core\console\controllers;
+namespace luyatests\core\console\controllers;
 
 use Yii;
 
-class ImportControllerTest extends \luyatest\LuyaConsoleTestCase
+class ImportControllerTest extends \luyatests\LuyaConsoleTestCase
 {
     /*
     public function testCustomCommandSuccess()

@@ -1,6 +1,6 @@
 <?php
 
-namespace luyatest\core\components;
+namespace luyatests\core\components;
 
 use Yii;
 use luya\components\Mail;
@@ -8,7 +8,7 @@ use luya\components\Mail;
 /**
  * @author nadar
  */
-class MailTest extends \luyatest\LuyaWebTestCase
+class MailTest extends \luyatests\LuyaWebTestCase
 {
     public function testAppMailerObject()
     {

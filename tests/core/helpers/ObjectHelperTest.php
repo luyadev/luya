@@ -1,6 +1,6 @@
 <?php
 
-namespace luyatest\core\helpers;
+namespace luyatests\core\helpers;
 
 use luya\helpers\ObjectHelper;
 
@@ -33,7 +33,7 @@ class TestObject
     }
 }
 
-class ObjectHelperTest extends \luyatest\LuyaWebTestCase
+class ObjectHelperTest extends \luyatests\LuyaWebTestCase
 {
     public function testRequiredArgs()
     {
@@ -88,7 +88,7 @@ class ObjectHelperTest extends \luyatest\LuyaWebTestCase
     
     /**
      *  @expectedException Exception
-     *  @expectedExceptionMessage The argument 'foo' is required for method 'm3' in class 'luyatest\core\helpers\TestObject'.
+     *  @expectedExceptionMessage The argument 'foo' is required for method 'm3' in class 'luyatests\core\helpers\TestObject'.
      */
     public function testException()
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace luyatest\data\modules\urlmodule\controllers;
+namespace luyatests\data\modules\urlmodule\controllers;
 
 class BarController extends \luya\web\Controller
 {

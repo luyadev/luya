@@ -1,11 +1,11 @@
 <?php
 
-namespace luyatest\core\web;
+namespace luyatests\core\web;
 
 use Yii;
 use luya\web\Request;
 
-class RequestTest extends \luyatest\LuyaWebTestCase
+class RequestTest extends \luyatests\LuyaWebTestCase
 {
     public function testIsAdmin()
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace luyatest\data\modules\ctrlmodule\controllers;
+namespace luyatests\data\modules\ctrlmodule\controllers;
 
 class DefaultController extends \luya\web\Controller
 {

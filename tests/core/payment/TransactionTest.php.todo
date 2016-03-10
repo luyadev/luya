@@ -1,13 +1,13 @@
 <?php
 
-namespace luyatest\core\payment;
+namespace luyatests\core\payment;
 
 
 use luya\payment\transaction\SaferPayTransaction;
 /**
  * @author nadar
  */
-class TransactionTest extends \luyatest\LuyaTestCase
+class TransactionTest extends \luyatests\luyatestsCase
 {
     public function testSaferPayAction()
     {

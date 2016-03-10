@@ -27,35 +27,16 @@
         "phpunit/phpunit" : "~4.0",
         "phpunit/php-code-coverage" : "~2.0",
         "fabpot/php-cs-fixer" : "~1.0",
-        "imagine/imagine": "*",
-        "codeclimate/php-test-reporter": "*",
         "satooshi/php-coveralls": "~1.0"
     },
-	"autoload" : {
-		"psr-4" : {
-			"luya\\" : "core/",
-			"luyatest\\" : "tests/"
-		}
-	},
-	"autoload-dev": {
-        "psr-4": {
-            "admin\\" : "modules/admin",
-            "cms\\" : "modules/cms",
-            "cmsadmin\\" : "modules/cmsadmin",
-            "newsadmin\\" : "modules/newsadmin",
-            "news\\" : "modules/news",
-            "account\\" : "modules/account",
-            "errorapi\\" : "modules/errorapi",
-            "gallery\\" : "modules/gallery",
-            "galleryadmin\\" : "modules/galleryadmin",
-            "crawler\\" : "modules/crawler",
-            "crawleradmin\\" : "modules/crawleradmin",
-            "styleguide\\" : "modules/styleguide",
-            "exporter\\" : "modules/exporter"
+    "autoload" : {
+        "psr-4" : {
+            "luya\\" : "core/",
+            "luyatests\\" : "tests/"
         }
     },
-	"extra": {
-    	"asset-installer-paths": {
+    "extra": {
+        "asset-installer-paths": {
             "bower-asset-library": "vendor/bower"
         },
         "branch-alias": {

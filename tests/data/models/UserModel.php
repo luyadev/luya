@@ -1,6 +1,6 @@
 <?php
 
-namespace luyatest\data\models;
+namespace luyatests\data\models;
 
 class UserModel extends \admin\ngrest\base\Model
 {

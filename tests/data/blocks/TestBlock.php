@@ -1,6 +1,6 @@
 <?php
 
-namespace luyatest\data\blocks;
+namespace luyatests\data\blocks;
 
 class TestBlock extends \cmsadmin\base\Block
 {

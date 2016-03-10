@@ -1,10 +1,10 @@
 <?php
 
-namespace luyatest\core\web;
+namespace luyatests\core\web;
 
 use luya\web\View;
 
-class ViewTest extends \luyatest\LuyaWebTestCase
+class ViewTest extends \luyatests\LuyaWebTestCase
 {
     public function testCompress()
     {

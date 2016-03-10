@@ -1,8 +1,8 @@
 <?php
 
-namespace luyatest\data\modules\unitmodule;
+namespace luyatests\data\modules\unitmodule;
 
-use luyatest\data\modules\unitmodule\components\FooComponent;
+use luyatests\data\modules\unitmodule\components\FooComponent;
 class Module extends \luya\base\Module
 {
     public $useAppViewPath = true;

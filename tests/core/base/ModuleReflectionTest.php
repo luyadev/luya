@@ -1,11 +1,11 @@
 <?php
 
-namespace luyatest\core\base;
+namespace luyatests\core\base;
 
 use Yii;
 use luya\base\ModuleReflection;
 
-class ModuleReflectionTest extends \luyatest\LuyaWebTestCase
+class ModuleReflectionTest extends \luyatests\LuyaWebTestCase
 {
     private function buildObject($module)
     {

@@ -1,9 +1,9 @@
 <?php
 
-namespace luyatest\core\console;
+namespace luyatests\core\console;
 
 use Yii;
-use luyatest\LuyaConsoleTestCase;
+use luyatests\LuyaConsoleTestCase;
 use luya\console\Command;
 
 class CommandTest extends LuyaConsoleTestCase

@@ -1,6 +1,6 @@
 <?php
 
-namespace luyatest\core\web;
+namespace luyatests\core\web;
 
 use luya\web\Twig;
 
@@ -9,7 +9,7 @@ use luya\web\Twig;
  *
  * @author nadar
  */
-class TwigTest extends \luyatest\LuyaWebTestCase
+class TwigTest extends \luyatests\LuyaWebTestCase
 {
     private function getEnv()
     {

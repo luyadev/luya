@@ -1,6 +1,6 @@
 <?php
 
-namespace luyatest\data\modules\ctrlmodule;
+namespace luyatests\data\modules\ctrlmodule;
 
 class Module extends \luya\base\Module
 {

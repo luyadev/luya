@@ -1,6 +1,6 @@
 <?php
 
-namespace luyatest\core\base;
+namespace luyatests\core\base;
 
 use Yii;
 use luya\base\Bootstrap;
@@ -14,7 +14,7 @@ class CustomBootstrap extends Bootstrap
     {}
 }
 
-class BootstrapTest extends \luyatest\LuyaWebTestCase
+class BootstrapTest extends \luyatests\LuyaWebTestCase
 {
     public function testCustomBootstrapHasModule()
     {

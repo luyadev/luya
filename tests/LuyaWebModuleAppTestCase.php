@@ -1,6 +1,6 @@
 <?php
 
-namespace luyatest;
+namespace luyatests;
 
 use Yii;
 

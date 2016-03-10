@@ -1,11 +1,11 @@
 <?php
 
-namespace luyatest\core\helpers;
+namespace luyatests\core\helpers;
 
 use Yii;
 use luya\helpers\Url;
 
-class UrlTest extends \luyatest\LuyaWebTestCase
+class UrlTest extends \luyatests\LuyaWebTestCase
 {
 
     public function testTrailing()

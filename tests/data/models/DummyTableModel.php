@@ -1,6 +1,6 @@
 <?php
 
-namespace luyatest\data\models;
+namespace luyatests\data\models;
 
 class DummyTableModel extends \admin\ngrest\base\Model
 {
