@@ -5,6 +5,7 @@ namespace luya\console\commands;
 use Yii;
 use yii\helpers\Console;
 use yii\helpers\Inflector;
+use luya\Boot;
 
 class CrudController extends \luya\console\Command
 {
@@ -21,7 +22,7 @@ class CrudController extends \luya\console\Command
             return $this->outputError('Crud creation aborted.');
         }
 
-        $shema = Yii::$app->db->getTableSchema($sqlTable);
+        $shema = Yii::$app->db->getTableSchema($sqlTable, true);
 
         if (!$shema) {
             return $this->outputError("Could not read informations from database table '$sqlTable', table does not exist.");
@@ -66,96 +67,97 @@ class CrudController extends \luya\console\Command
                 mkdir($folder);
             }
 
+            $extended = true;
+            
             if (file_exists($folder.DIRECTORY_SEPARATOR.$item['file'])) {
-                echo $this->ansiFormat("Can not create $folder".DIRECTORY_SEPARATOR.$item['file'].', file does already exists!', Console::FG_RED).PHP_EOL;
-            } else {
-                $content = '<?php'.PHP_EOL.PHP_EOL;
-                $content .= 'namespace '.$item['ns'].';'.PHP_EOL.PHP_EOL;
-                switch ($name) {
+                if ($name == 'model') {
+                    $this->outputInfo("Mode '".$item['file']."' exists already. Created an abstract NgRest model where you can extend from.");
+                } else {
+                    $this->outputInfo("File '".$item['file']."' exists already, created a .copy file instead.");
+                }
+                $item['file'] = $item['file'].'.copy';
+                $extended = false;
+            }
+            
+            $content = '<?php'.PHP_EOL.PHP_EOL;
+            $content .= 'namespace '.$item['ns'].';'.PHP_EOL.PHP_EOL;
+            switch ($name) {
 
-                    case 'api':
-                        $content .= 'class '.$item['class'].' extends \admin\ngrest\base\Api'.PHP_EOL;
-                        $content .= '{'.PHP_EOL;
-                        $content .= '    public $modelClass = \''.$modelNs.'\';'.PHP_EOL;
-                        $content .= '}';
-                        break;
+                case 'api':
+                    $content = $this->view->render('@luya/console/commands/views/crud/create_api.php', [
+                        'className' => $item['class'],
+                        'modelClass' => $modelNs,
+                        'namespace' => $item['ns'],
+                        'luyaVersion' => Boot::VERSION,
+                    ]);
+                    break;
 
-                    case 'controller':
-                        $content .= 'class '.$item['class'].' extends \admin\ngrest\base\Controller'.PHP_EOL;
-                        $content .= '{'.PHP_EOL;
-                        $content .= '    public $modelClass = \''.$modelNs.'\';'.PHP_EOL;
-                        $content .= '}';
-                        break;
+                case 'controller':
+                    $content = $this->view->render('@luya/console/commands/views/crud/create_controller.php', [
+                        'className' => $item['class'],
+                        'modelClass' => $modelNs,
+                        'namespace' => $item['ns'],
+                        'luyaVersion' => Boot::VERSION,
+                    ]);
+                    break;
 
-                    case 'model':
+                case 'model':
 
-                        $names = [];
-                        $allfields = [];
-                        $ngrest = [
-                            'text' => [],
-                            'textarea' => [],
-                        ];
-                        foreach ($shema->columns as $k => $v) {
-                            $allfields[] = $v->name;
-                            if ($v->phpType == 'string') {
-                                $names[] = $v->name;
-                                if ($v->type == 'text') {
-                                    $ngrest['textarea'][] = $v->name;
-                                }
-                                if ($v->type == 'string') {
-                                    $ngrest['text'][] = $v->name;
-                                }
+                    if (!$extended) {
+                        $modelName = $modelName . 'NgRest';
+                        $item['file'] = $modelName . '.php';
+                        $item['class'] = $modelName;
+                    }
+                    
+                    $names = [];
+                    $allfields = [];
+                    $fieldConfigs = [];
+                    $i18n = [];
+                    foreach ($shema->columns as $k => $v) {
+                        if ($v->isPrimaryKey) {
+                            continue;
+                        }
+                        $allfields[] = $v->name;
+                        if ($v->phpType == 'string' || $v->phpType == 'integer') {
+                            $names[] = $v->name;
+                            if ($v->type == 'text') {
+                                $fieldConfigs[$v->name] = 'textarea';
+                                $i18n[] = $v->name;
+                            }
+                            if ($v->type == 'string') {
+                                $fieldConfigs[$v->name] = 'text';
+                                $i18n[] = $v->name;
+                            }
+                            if ($v->type == 'integer' || $v->type == 'bigint' || $v->type == 'smallint') {
+                                $fieldConfigs[$v->name] = 'number';
+                            }
+                            if ($v->type == 'boolean') {
+                                $fieldConfigs[$v->name] = 'toggleStatus';
                             }
                         }
+                    }
+                    
+                    $content = $this->view->render('@luya/console/commands/views/crud/create_model.php', [
+                        'className' => $item['class'],
+                        'modelClass' => $modelNs,
+                        'namespace' => $item['ns'],
+                        'luyaVersion' => Boot::VERSION,
+                        'apiEndpoint' => $apiEndpoint,
+                        'sqlTable' => $sqlTable,
+                        'fieldNames' => $names,
+                        'allFieldNames' => $allfields,
+                        'fieldConfigs' => $fieldConfigs,
+                        'i18n' => $i18n,
+                        'extended' => $extended,
+                    ]);
+                    
+                    break;
+            }
 
-                        $content .= 'class '.$item['class'].' extends \admin\ngrest\base\Model'.PHP_EOL;
-                        $content .= '{'.PHP_EOL;
-                        $content .= '    /* yii model properties */'.PHP_EOL.PHP_EOL;
-                        $content .= '    public static function tableName()'.PHP_EOL;
-                        $content .= '    {'.PHP_EOL;
-                        $content .= '        return \''.$sqlTable.'\';'.PHP_EOL;
-                        $content .= '    }'.PHP_EOL.PHP_EOL;
-                        $content .= '    public function rules()'.PHP_EOL;
-                        $content .= '    {'.PHP_EOL;
-                        $content .= '        return ['.PHP_EOL;
-                        $content .= '            [[\''.implode("', '", $names).'\'], \'required\'],'.PHP_EOL;
-                        $content .= '        ];'.PHP_EOL;
-                        $content .= '    }'.PHP_EOL.PHP_EOL;
-                        $content .= '    public function scenarios()'.PHP_EOL;
-                        $content .= '    {'.PHP_EOL;
-                        $content .= '        return ['.PHP_EOL;
-                        $content .= '            \'restcreate\' => [\''.implode("', '", $allfields).'\'],'.PHP_EOL;
-                        $content .= '            \'restupdate\' => [\''.implode("', '", $allfields).'\'],'.PHP_EOL;
-                        $content .= '        ];'.PHP_EOL;
-                        $content .= '    }'.PHP_EOL.PHP_EOL;
-                        $content .= '    /* ngrest model properties */'.PHP_EOL.PHP_EOL;
-                        $content .= '    public function genericSearchFields()'.PHP_EOL;
-                        $content .= '    {'.PHP_EOL;
-                        $content .= '        return [\''.implode("', '", $names).'\'];'.PHP_EOL;
-                        $content .= '    }'.PHP_EOL.PHP_EOL;
-                        $content .= '    public function ngRestApiEndpoint()'.PHP_EOL;
-                        $content .= '    {'.PHP_EOL;
-                        $content .= '        return \''.$apiEndpoint.'\';'.PHP_EOL;
-                        $content .= '    }'.PHP_EOL.PHP_EOL;
-                        $content .= '    public function ngRestConfig($config)'.PHP_EOL;
-                        $content .= '    {'.PHP_EOL;
-                        foreach ($ngrest['text'] as $n) {
-                            $content .= '        $config->list->field(\''.$n.'\', \''.Inflector::humanize($n).'\')->text();'.PHP_EOL;
-                        }
-                        foreach ($ngrest['textarea'] as $n) {
-                            $content .= '        $config->list->field(\''.$n.'\', \''.Inflector::humanize($n).'\')->textarea();'.PHP_EOL;
-                        }
-                        $content .= '        $config->create->copyFrom(\'list\');'.PHP_EOL;
-                        $content .= '        $config->update->copyFrom(\'list\');'.PHP_EOL;
-                        $content .= '        return $config;'.PHP_EOL;
-                        $content .= '    }'.PHP_EOL;
-                        $content .= '}';
-                        break;
-                }
-
-                if (file_put_contents($folder.DIRECTORY_SEPARATOR.$item['file'], $content)) {
-                    echo $this->ansiFormat('- File '.$folder.DIRECTORY_SEPARATOR.$item['file'].' created.', Console::FG_GREEN).PHP_EOL;
-                }
+            
+            
+            if (file_put_contents($folder.DIRECTORY_SEPARATOR.$item['file'], $content)) {
+                echo $this->ansiFormat('- File '.$folder.DIRECTORY_SEPARATOR.$item['file'].' created.', Console::FG_GREEN).PHP_EOL;
             }
         }
 
