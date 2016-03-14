@@ -8,6 +8,7 @@ use admin\models\Lang;
 use yii\helpers\Json;
 use yii\base\InvalidConfigException;
 use yii\base\yii\base;
+use yii\db\ActiveQuery;
 
 abstract class Model extends \yii\db\ActiveRecord implements \admin\base\GenericSearchInterface
 {
@@ -88,7 +89,7 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
      */
     public static function ngRestFind()
     {
-        return static::find();
+        return Yii::createObject(ActiveQuery::className(), [get_called_class()]);
     }
 
     public function afterFind()
