@@ -128,7 +128,7 @@ class CrudController extends \luya\console\Command
                                 $fieldConfigs[$v->name] = 'text';
                                 $i18n[] = $v->name;
                             }
-                            if ($v->type == 'integer' || $v->type == 'bigint' || $v->type == 'smallint') {
+                            if ($v->type == 'integer' || $v->type == 'bigint' || $v->type == 'smallint' || $v->type == 'decimal') {
                                 $fieldConfigs[$v->name] = 'number';
                             }
                             if ($v->type == 'boolean') {
