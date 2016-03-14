@@ -65,8 +65,9 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
         ]);
 
         if (count($this->i18n) > 0) {
-            $this->on(self::EVENT_BEFORE_INSERT, [$this, 'i18nBeforeUpdateAndCreate']);
-            $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'i18nBeforeUpdateAndCreate']);
+            $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'i18nEncodeFields']);
+            $this->on(self::EVENT_BEFORE_INSERT, [$this, 'i18nEncodeFields']);
+            $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'i18nEncodeFields']);
             $this->on(self::EVENT_AFTER_FIND, [$this, 'i18nAfterFind']);
             $this->on(self::EVENT_AFTER_NGREST_FIND, [$this, 'i18nAfterFind']);
         }
@@ -156,7 +157,7 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
         }
     }
 
-    public function i18nBeforeUpdateAndCreate()
+    public function i18nEncodeFields()
     {
         foreach ($this->i18n as $field) {
             // if it is notyet serialize, encode
