@@ -24,13 +24,13 @@ class DefaultController extends \luya\web\Controller
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             
-            $html = '<h1>Contact Form</h1><p>Submission Date: '.date("d.m.Y H:i").'</p><table border="1">';
+            $html = '<h1>Contact Form '.Yii::$app->siteTitle.'</h1><p>Submission Date: '.date("d.m.Y H:i").'</p><table border="1">';
             foreach($model->getAttributes() as $key => $value) {
                 $html.='<tr><td>'.$model->getAttributeLabel($key).'</td><td>' . nl2br($value) . '</td>';
             }
             $html.= '</table>';
             
-            $mail = Yii::$app->mail->compose('contactform', $html);
+            $mail = Yii::$app->mail->compose('['.Yii::$app->siteTitle.'] contact form', $html);
             $mail->adresses($this->module->recipients);
             
             if ($mail->send()) {
