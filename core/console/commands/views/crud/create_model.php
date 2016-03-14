@@ -22,9 +22,9 @@ use Yii;
 /**
  * NgRest Model created at <?php echo date("d.m.Y H:i"); ?> on LUYA Version <?php echo $luyaVersion; ?>.
  */
-<? if (!$extended): ?>abstract <?endif;?>class <?php echo $className; ?> extends \admin\ngrest\base\Model
+<?php if (!$extended): ?>abstract <?endif;?>class <?php echo $className; ?> extends \admin\ngrest\base\Model
 {
-    <? if($extended): ?>
+    <?php if ($extended): ?>
     /**
      * @inheritdoc
      */
@@ -39,9 +39,9 @@ use Yii;
     public function attributeLabels()
     {
         return [
-        <? foreach($allFieldNames as $name): ?>
+        <?php foreach ($allFieldNames as $name): ?>
     '<?= $name; ?>' => Yii::t('app', '<?= \yii\helpers\Inflector::humanize($name); ?>'),
-        <? endforeach;?>];
+        <?php endforeach;?>];
     }
     
     /**
@@ -55,7 +55,7 @@ use Yii;
     }
     
     // ngrest base model methods
-    <? endif; ?>/**
+    <?php endif; ?>/**
      * @var An array containing all fields which should be transformed to multilingual fields and stored as json in the database.
      */
     public $i18n = ['<?= implode("', '", $i18n); ?>'];
@@ -93,7 +93,7 @@ use Yii;
     public function ngrestAttributeTypes()
     {
         return [
-        <? foreach($fieldConfigs as $name => $type): ?>
+        <?php foreach ($fieldConfigs as $name => $type): ?>
     '<?=$name; ?>' => '<?= $type;?>',
         <?endforeach;?>];
     }

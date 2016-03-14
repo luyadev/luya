@@ -3,6 +3,7 @@
 namespace luya\base;
 
 use Yii;
+
 /**
  * Base class for luya bootsrapping proccess.
  *
