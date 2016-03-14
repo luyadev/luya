@@ -3,6 +3,7 @@
 namespace luya\base;
 
 use Exception;
+use ReflectionClass;
 use luya\web\Application as WebApplication;
 use luya\console\Application as ConsoleApplication;
 use luya\helpers\ArrayHelper;
@@ -145,6 +146,17 @@ abstract class Boot
         }
     }
 
+    /**
+     * Returns the path to luya core files
+     * 
+     * @return string The base path to the luya core folder.
+     */
+    public static function getLuyaBasePath()
+    {
+        $reflector = new ReflectionClass(get_called_class());
+        return dirname($reflector->getFileName());
+    }
+    
     /**
      * Helper method to check whether the provided Yii Base file exists, if yes include and
      * return the file.
