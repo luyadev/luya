@@ -2,6 +2,9 @@
 
 namespace admin\models;
 
+use Imagine\Image\ImagineInterface;
+use Imagine\Image\ImageInterface;
+
 /**
  * This is the model class for table "admin_group".
  *
@@ -57,7 +60,16 @@ class StorageFilter extends \admin\ngrest\base\Model
         return false;
     }
 
-    public function applyFilter($image, $imagine)
+    /**
+     * ApplyFilter to an imagine object based on the current model informations effect chain.
+     * 
+     * `#795` transparency issue can appear when the image is not in RGB mode
+     * 
+     * @param object $image The opend imagine image of the "original" uploaded image. This can be either a GdImage or other Imagine types.
+     * @param ImagineInterface $imagine
+     * @return ImageInterface The new transformed/changed image
+     */
+    public function applyFilter($image, ImagineInterface $imagine)
     {
         $newimage = null;
 
