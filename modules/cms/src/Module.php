@@ -45,9 +45,6 @@ class Module extends \luya\base\Module implements BootstrapInterface
     public function registerComponents()
     {
         return [
-            'links' => [
-                'class' => 'cms\components\Links',
-            ],
             'menu' => [
                 'class' => 'cms\menu\Container',
             ],
