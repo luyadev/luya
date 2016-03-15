@@ -115,6 +115,16 @@ class ModuleReflection extends \yii\base\Object
         
         Yii::info('LUYA module run module "'.$this->module->id.'" route ' . $requestRoute['route'], __METHOD__);
         
+        /**
+         * issue: https://github.com/zephir/luya/issues/754
+         * 
+         * As the route resolving should not contain empty argument list we overload the $requertRoute['args'] if they are empty
+         * with the whole get params
+         */
+        if (empty($requestRoute['args'])) {
+            $requestRoute['args'] = $this->request->get();
+        }
+        
         // run the action on the provided controller object
         return $controller[0]->runAction($controller[1], $requestRoute['args']);
     }
