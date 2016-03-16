@@ -1,1 +1,1 @@
-console.log('asdf');
+/* luya cms toolbar.js */
