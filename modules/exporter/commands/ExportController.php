@@ -14,7 +14,7 @@ class ExportController extends \luya\console\Command
         $hash = time();
         $cacheFolder = Yii::getAlias('@runtime/exporter/'.$hash);
 
-        FileHelper::createDirectory($cacheFolder);
+        FileHelper::createDirectory($cacheFolder, 0777);
 
         $dump = new Mysqldump\Mysqldump(Yii::$app->db->dsn, Yii::$app->db->username, Yii::$app->db->password);
         $dump->start($cacheFolder.'/mysql.sql');
@@ -25,11 +25,13 @@ class ExportController extends \luya\console\Command
             $source = readlink($source);
         }
         
-        FileHelper::copyDirectory($source, $cacheFolder.'/storage');
+        FileHelper::copyDirectory($source, $cacheFolder.'/storage', ['dirMode' => 0777, 'fileMode' => 0775]);
 
         $save = Yii::getAlias($this->module->downloadFile);
 
-        @unlink($save);
+        if (file_exists($save)) {
+            @unlink($save);
+        }
 
         ZipHelper::dir($cacheFolder.'/', $save);
     }
