@@ -16,4 +16,9 @@ class Page extends \yii\base\Component
 
         return false;
     }
+    
+    public function getProperties()
+    {
+        return $this->model->nav->getProperties();
+    }
 }

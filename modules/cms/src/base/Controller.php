@@ -28,7 +28,11 @@ abstract class Controller extends \luya\web\Controller
     {
         $view = $event->sender;
         $folder = Yii::getAlias('@cms');
-        echo "<div id=\"luya-cms-toolbar\">".$view->renderPhpFile($folder . '/views/_toolbar.php', ['menu' => Yii::$app->menu])."</div>";
+        echo "<div id=\"luya-cms-toolbar\">".$view->renderPhpFile($folder . '/views/_toolbar.php', [
+            'menu' => Yii::$app->menu,
+            'composition' => Yii::$app->composition,
+            'luyaTagParsing' => $event->sender->context->module->enableTagParsing,
+        ])."</div>";
         // echo is used in order to support cases where asset manager is not available
         echo '<style>' . $view->renderPhpFile($folder . '/assets/toolbar.css') . '</style>';
         echo '<script>' . $view->renderPhpFile($folder . '/assets/toolbar.js') . '</script>';
