@@ -2,8 +2,8 @@
 
 namespace cms;
 
-use luya\web\UrlRule;
 use yii\base\BootstrapInterface;
+use luya\web\UrlRule;
 use luya\web\Application;
 
 /**

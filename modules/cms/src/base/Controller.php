@@ -3,6 +3,7 @@
 namespace cms\base;
 
 use Yii;
+use luya\web\View;
 use cms\helpers\Parser;
 use cmsadmin\models\NavItem;
 use yii\web\NotFoundHttpException;
@@ -12,6 +13,27 @@ use yii\web\Response;
 abstract class Controller extends \luya\web\Controller
 {
 
+    public function init()
+    {
+        parent::init();
+        
+        if (Yii::$app->has('adminuser') && !Yii::$app->adminuser->isGuest) {
+            $this->on(self::EVENT_BEFORE_ACTION, function($event) {
+                $event->sender->getView()->on(View::EVENT_BEGIN_BODY, [$this, 'renderToolbar']);
+            });
+        }
+    }
+    
+    public function renderToolbar($event)
+    {
+        $view = $event->sender;
+        $folder = Yii::getAlias('@cms');
+        echo "<div id=\"luya-cms-toolbar\">".$view->renderPhpFile($folder . '/views/_toolbar.php', ['menu' => Yii::$app->menu])."</div>";
+        // echo is used in order to support cases where asset manager is not available
+        echo '<style>' . $view->renderPhpFile($folder . '/assets/toolbar.css') . '</style>';
+        echo '<script>' . $view->renderPhpFile($folder . '/assets/toolbar.js') . '</script>';
+    }
+    
     public function renderItem($navItemId, $appendix = null)
     {
         $model = NavItem::findOne($navItemId);
