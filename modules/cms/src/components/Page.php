@@ -11,7 +11,7 @@ class Page extends \yii\base\Component
         $object = $this->model->nav->getProperty($name);
 
         if ($object) {
-            return $object->value;
+            return $object->getValue();
         }
 
         return false;
