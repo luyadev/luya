@@ -36,12 +36,12 @@ abstract class Controller extends \luya\web\Controller
             $props[] = ['label' => $o->label(), 'value' => Yii::$app->page->getProperty($prop['var_name'])];
         }
         
-        echo "<div id=\"luya-cms-toolbar\">".$view->renderPhpFile($folder . '/views/_toolbar.php', [
+        echo $view->renderPhpFile($folder . '/views/_toolbar.php', [
             'menu' => Yii::$app->menu,
             'composition' => Yii::$app->composition,
             'luyaTagParsing' => $event->sender->context->module->enableTagParsing,
             'properties' => $props,
-        ])."</div>";
+        ]);
         // echo is used in order to support cases where asset manager is not available
         echo '<style>' . $view->renderPhpFile($folder . '/assets/toolbar.css') . '</style>';
         echo '<script>' . $view->renderPhpFile($folder . '/assets/toolbar.js') . '</script>';
