@@ -19,7 +19,13 @@ class ExportController extends \luya\console\Command
         $dump = new Mysqldump\Mysqldump(Yii::$app->db->dsn, Yii::$app->db->username, Yii::$app->db->password);
         $dump->start($cacheFolder.'/mysql.sql');
 
-        FileHelper::copyDirectory(Yii::getAlias('@web/public_html/storage'), $cacheFolder.'/storage');
+        $source = Yii::getAlias('@web/public_html/storage');
+        
+        if (is_link($source)) {
+            $source = readlink($source);
+        }
+        
+        FileHelper::copyDirectory($source, $cacheFolder.'/storage');
 
         $save = Yii::getAlias($this->module->downloadFile);
 
