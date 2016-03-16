@@ -1,3 +1,31 @@
 #luya-cms-toolbar {
-    background-color:#F0F0F0; padding:10px; border-bottom:1px solid #999;
+    background-color:rgba(0,0,0,0.3); padding:10px; border-bottom:1px solid #999; position:fixed; z-index:99999999; width:100%;
+}
+
+#luya-toolbar-table td {
+ padding:0px 10px; font-size:12px;
+}
+
+#luya-toolbar-table .title {
+ font-weight:bold; font-size:14px;
+}
+
+#luya-toolbar-table .title a {
+ color:#333;
+}
+
+#luya-toolbar-table .red {
+ color:red; font-size:14px;
+}
+
+#luya-toolbar-table .green {
+ color:green; font-size:14px;
+}
+
+#luya-toolbar-table .label {
+ background-color:#F0F0F0; border-radius:4px; padding:2px 8px; font-size:12px;
+}
+
+#luya-toolbar-table .label-bold {
+ font-weight:bold;
 }
