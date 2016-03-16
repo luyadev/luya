@@ -17,7 +17,7 @@ abstract class Controller extends \luya\web\Controller
     {
         parent::init();
         
-        if (Yii::$app->has('adminuser') && !Yii::$app->adminuser->isGuest) {
+        if (Yii::$app->has('adminuser') && !Yii::$app->adminuser->isGuest && $this->module->overlayToolbar === true) {
             $this->on(self::EVENT_BEFORE_ACTION, function($event) {
                 $event->sender->getView()->on(View::EVENT_BEGIN_BODY, [$this, 'renderToolbar']);
             });

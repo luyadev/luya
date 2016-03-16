@@ -58,6 +58,7 @@ $config = [
                 'app\assets\ResourcesAsset'
             ],
             'enableCompression' => true, // compressing the cms output (removing white spaces and newlines)
+     		'overlayToolbar' => true, // enable or disable to cms overlay toolbar which display infos about the current page and config.
         ],
         
         /*

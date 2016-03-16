@@ -23,9 +23,15 @@ class Module extends \luya\base\Module implements BootstrapInterface
 
     /**
      * @var bool If enabled the cms content will be compressed (removing of whitespaces and tabs).
+     * @todo rename to $contentCompression (as enable is expressed by the boolean value)
      */
     public $enableCompression = true;
 
+    /**
+     * @var boolean Whether the overlay toolbar of the CMS should be enabled or disabled.
+     */
+    public $overlayToolbar = true;
+    
     /**
      * @var bool If enableTagParsing is enabled tags like `link(1)` or `link(1)[Foo Bar]` will be parsed
      *           and transformed into links based on the cms.
