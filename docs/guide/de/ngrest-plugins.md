@@ -26,4 +26,6 @@ Plugin Übersicht
 |cmsPage    |Eine CMS Seite kann ausgewählt werden welche danach an dieser erstellt gerendert und angezeigt wird. Feld muss interger sein|
 |color                                                  |Stellt den RGB Wert in Hexadezimalangabe (z.B. `FF0000`) als Farbe dar (funktioniert nur im *List*-View).|
 |number                                                  |Zahlenfeld.|
+|decimal                                                |Gebrochene Zahl (float).| `steps` gibt die geforderten Nachkommastellen und Schrittgrösse an. Default = 0.001
 |cmsPage                                                |Gibt ein menu object zurück
+

@@ -84,7 +84,38 @@
             }
         }
     });
-    
+
+    zaa.directive("zaaDecimal", function() {
+        return {
+            restrict: "E",
+            scope: {
+                "model": "=",
+                "options": "=",
+                "label": "@label",
+                "i18n": "@i18n",
+                "id": "@fieldid",
+                "name": "@fieldname",
+                "placeholder": "@placeholder"
+            }, controller: function($scope) {
+                if ($scope.options === null) {
+                    $scope.steps = 0.01;
+                } else {
+                    $scope.steps = $scope.options['steps'];
+                }
+            }, link: function($scope) {
+                $scope.$watch(function() { return $scope.model }, function(n, o) {
+                    if(angular.isNumber($scope.model)) {
+                        $scope.isValid = true;
+                    } else {
+                        $scope.isValid = false;
+                    }
+                })
+            }, template: function() {
+                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" name="{{name}}" ng-model="model" type="number" min="0" step="{{steps}}" class="input__field" ng-class="{\'invalid\' : !isValid }" placeholder="{{placeholder}}" /></div></div>';
+            }
+        }
+    });
+
     zaa.directive("zaaText", function(){
         return {
             restrict: "E",
