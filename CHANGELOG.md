@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **BC BREAKS** See [UPGRADE.md](UPGRADE.md) as we have made some major changes.
 
+- `#758` Due to replacement of twig, cms layout files must be a phpfile instead of a twig file (see upgrade.md).
 - `#754` Fixed module reflection overloading, this happens when no required get params are not in the url rules.
 - `#793` Added external link parser informations like class and target blank
 - `#791` Replaced the source folder with core and create a read only module as the LUYA module is no longer need since beta6.

@@ -1,5 +1,5 @@
 <div class="row">
     <div class="col-md-12">
-        {{ placeholders.content }}
+    	<?= $placeholders['content']; ?>
     </div>
 </div>

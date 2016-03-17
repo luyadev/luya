@@ -2,15 +2,27 @@
 
 namespace cmsadmin\models;
 
-use Exception;
-use cmsadmin\models\NavItemPageBlockItem;
 use Yii;
 use yii\db\Query;
+use luya\Exception;
+use luya\web\View;
+use cmsadmin\models\NavItemPageBlockItem;
 
 class NavItemPage extends \cmsadmin\base\NavItemType
 {
     private $_twig = null;
 
+    private $_view = null;
+
+    public function getView()
+    {
+        if ($this->_view === null) {
+            $this->_view = new View();
+        }
+        
+        return $this->_view;
+    }
+    
     public static function tableName()
     {
         return 'cms_nav_item_page';
@@ -58,11 +70,27 @@ class NavItemPage extends \cmsadmin\base\NavItemType
 
     public function getContent()
     {
+        if ($this->layout) {
+            $layoutFile = Yii::getAlias('@app/views/cmslayouts/' . $this->layout->view_file);
+            $placholders = [];
+            foreach ($this->layout->getJsonConfig('placeholders') as $item) {
+                $placholders[$item['var']] = $this->renderPlaceholder($this->id, $item['var'], 0);
+            }
+            return $this->getView()->renderPhpFile($layoutFile, ['placeholders' => $placholders]);
+        }
+        
+        throw new Exception("Could not find the requested cms layout id '".$this->layout_id."' for nav item page id '". $this->id . "'. Make sure your page does not have an old inactive/deleted cms layout selected.");
+        
+        /*
+        exit;
         $twig = Yii::$app->twig->env(new \Twig_Loader_Filesystem(Yii::getAlias('@app/views/cmslayouts/')));
 
         $insertion = [];
 
         $layout = $this->layout;
+        
+        var_dump($this->layout);
+        exit;
         
         if ($layout) {
             foreach ($layout->getJsonConfig('placeholders') as $item) {
@@ -75,8 +103,11 @@ class NavItemPage extends \cmsadmin\base\NavItemType
 
             return $data;
         }
+        
+        
 
         throw new Exception("Could not find the requested cms layout id '".$this->layout_id."' for nav item page id '". $this->id . "'. Make sure your page does not have an old inactive/deleted cms layout selected.");
+        */
     }
     
     private function setHasCache($key, $value, $expirationTime)

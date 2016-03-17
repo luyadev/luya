@@ -6,6 +6,7 @@ use Yii;
 use Exception;
 use cmsadmin\models\Layout;
 use yii\db\yii\db;
+use luya\helpers\FileHelper;
 
 class CmslayoutImporter extends \luya\base\Importer
 {
@@ -27,33 +28,42 @@ class CmslayoutImporter extends \luya\base\Importer
                 if ($file == '.' || $file == '..') {
                     continue;
                 }
+                
+                $fileinfo = FileHelper::getFileInfo($file);
+                $oldTwigName = $fileinfo->name . '.twig';
+                if ($fileinfo->extension !== 'php') {
+                    throw new Exception("layout file '$file': Since 1.0.0-beta6, cms layouts must be a php file with '<?= \$placeholders['content']; ?>' instead of a twig '{{placeholders.content}}'");
+                }
+                
                 $layoutFiles[] = $file;
-                $layoutItem = Layout::find()->where(['view_file' => $file])->one();
+                $layoutFiles[] = $oldTwigName;
+                
 
                 $content = file_get_contents($cmslayouts.DIRECTORY_SEPARATOR.$file);
-                // find all twig brackets
-                preg_match_all("/\{\{(.*?)\}\}/", $content, $results);
-                // local vars
+                
+                preg_match_all("/placeholders\[[\'\"](.*?)[\'\"]\]/", $content, $results);
+                
                 $_placeholders = [];
-                // explode the specific vars for each type
-                foreach ($results[1] as $match) {
-                    $parts = explode('.', trim($match));
-                    switch ($parts[0]) {
-                        case 'placeholders':
-                            
-                            if (!$this->verifyVariable($parts[1])) {
-                                throw new Exception("Wrong variable name detected '".$parts[1]."'. Special chars are not allowed in placeholder variables, allowed chars are a-zA-Z0-9");
-                            }
-                            
-                            $_placeholders[] = ['label' => $parts[1], 'var' => $parts[1]];
-                            break;
+                foreach ($results[1] as $holderName) {
+                    if (!$this->verifyVariable($holderName)) {
+                        throw new Exception("Wrong variable name detected '".$holderName."'. Special chars are not allowed in placeholder variables, allowed chars are a-zA-Z0-9");
                     }
+                    $_placeholders[] = ['label' => $holderName, 'var' => $holderName];
                 }
-
+                
                 $_placeholders = ['placeholders' => $_placeholders];
+                
+                $layoutItem = Layout::find()->where(['or', ['view_file' => $file], ['view_file' =>  $oldTwigName]])->one();
+                
                 if ($layoutItem) {
                     $match = $this->comparePlaceholders($_placeholders, json_decode($layoutItem->json_config, true));
                     if ($match) {
+                        $layoutItem->scenario = 'restupdate';
+                        $layoutItem->setAttributes([
+                            'name' => ucfirst($file),
+                            'view_file' => $file,
+                        ]);
+                        $layoutItem->save();
                         continue;
                     }
                     $layoutItem->scenario = 'restupdate';
