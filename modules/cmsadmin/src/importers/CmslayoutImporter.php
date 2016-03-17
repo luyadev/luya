@@ -3,10 +3,9 @@
 namespace cmsadmin\importers;
 
 use Yii;
-use Exception;
-use cmsadmin\models\Layout;
-use yii\db\yii\db;
+use luya\Exception;
 use luya\helpers\FileHelper;
+use cmsadmin\models\Layout;
 
 class CmslayoutImporter extends \luya\base\Importer
 {
@@ -37,14 +36,13 @@ class CmslayoutImporter extends \luya\base\Importer
                 
                 $layoutFiles[] = $file;
                 $layoutFiles[] = $oldTwigName;
-                
 
                 $content = file_get_contents($cmslayouts.DIRECTORY_SEPARATOR.$file);
                 
                 preg_match_all("/placeholders\[[\'\"](.*?)[\'\"]\]/", $content, $results);
                 
                 $_placeholders = [];
-                foreach ($results[1] as $holderName) {
+                foreach (array_unique($results[1]) as $holderName) {
                     if (!$this->verifyVariable($holderName)) {
                         throw new Exception("Wrong variable name detected '".$holderName."'. Special chars are not allowed in placeholder variables, allowed chars are a-zA-Z0-9");
                     }
@@ -73,7 +71,7 @@ class CmslayoutImporter extends \luya\base\Importer
                         'json_config' => json_encode($_placeholders),
                     ]);
                     $layoutItem->save();
-                    $this->getImporter()->addLog('layouts', 'existing cmslayout '.$file.' updated');
+                    $this->addLog('cmslayouts', 'existing cmslayout '.$file.' updated');
                 } else {
                     // add item into the database table
                     $data = new Layout();
@@ -84,7 +82,7 @@ class CmslayoutImporter extends \luya\base\Importer
                         'json_config' => json_encode($_placeholders),
                     ]);
                     $data->save();
-                    $this->getImporter()->addLog('layouts', 'new cmslayout '.$file.' found and added to databse.');
+                    $this->addLog('cmslayoutscd pu', 'new cmslayout '.$file.' found and added to databse.');
                 }
             }
 
