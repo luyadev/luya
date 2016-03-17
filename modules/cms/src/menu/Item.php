@@ -283,6 +283,18 @@ class Item extends \yii\base\Object
         return $this->itemArray['depth'];
     }
 
+    private $_parent = null;
+    
+    /**
+     * Check whether parent element exists or not
+     * 
+     * @return boolean
+     */
+    public function hasParent()
+    {
+        return ($this->getParent()) ? true : false;
+    }
+    
     /**
      * Returns a Item-Object of the parent element, if no parent element exists returns false.
      * 
@@ -290,7 +302,11 @@ class Item extends \yii\base\Object
      */
     public function getParent()
     {
-        return (new Query())->where(['nav_id' => $this->parentNavId])->with($this->_with)->lang($this->lang)->one();
+        if ($this->_parent === null) {
+            $this->_parent = (new Query())->where(['nav_id' => $this->parentNavId])->with($this->_with)->lang($this->lang)->one();
+        }
+        
+        return $this->_parent;
     }
 
     /**
@@ -339,6 +355,8 @@ class Item extends \yii\base\Object
         return array_reverse($data, true);
     }
 
+    private $_children = null;
+    
     /**
      * Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
      * 
@@ -346,7 +364,11 @@ class Item extends \yii\base\Object
      */
     public function getChildren()
     {
-        return (new Query())->where(['parent_nav_id' => $this->navId])->with($this->_with)->lang($this->lang)->all();
+        if ($this->_children === null) {
+            $this->_children = (new Query())->where(['parent_nav_id' => $this->navId])->with($this->_with)->lang($this->lang)->all();
+        }
+        
+        return $this->_children;
     }
 
     /**
@@ -356,7 +378,7 @@ class Item extends \yii\base\Object
      */
     public function hasChildren()
     {
-        return ((new Query())->where(['parent_nav_id' => $this->navId])->with($this->_with)->lang($this->lang)->one()) ? true : false;
+        return ($this->getChildren()) ? true : false;
     }
 
     /**
