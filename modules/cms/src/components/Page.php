@@ -5,20 +5,69 @@ namespace cms\components;
 class Page extends \yii\base\Component
 {
     public $model = null;
+    
+    private $_properties = null;
+    
+    private $_instances = [];
 
-    public function getProperty($name)
+    private function getPropertyInstanceObject($name)
     {
-        $object = $this->model->nav->getProperty($name);
+        if (!array_key_exists($name, $this->_instances)) {
+            $this->_instances[$name] = $this->model->nav->getProperty($name);
+        }
+        
+        return $this->_instances[$name];
+    }
+
+    /**
+     * Get a propertie value (by default) or defined the method to invoke from this object.
+     * 
+     * ```php
+     * ->getProperty('foobar');
+     * ```
+     * 
+     * will return false if not found and will invoke be default the `getValue()` method. You can change the 
+     * default value with the second paramter.
+     * 
+     * ```php
+     * ->getProperty('foobar', null);
+     * ```
+     * 
+     * will return null if not found otherwhise will invoke `getValue()` method of the property.
+     * 
+     * ```php
+     * ->getProperty('foobar', [], 'getImages');
+     * ```
+     * 
+     * will return an empty array if not found, otherwhise will invoke the `getImages()` method of this property object..
+     * 
+     * @param string $name The defined name of the property defined in `varName()` of your property.
+     * @param string $defaultValue The default value who should be returned when the property could not be found, default is `false`.
+     * @param string $invokeMethod The method which should be invoked/called when the property exists, default is `getValue`.
+     * @return mixed Returns the value from the `$defaultValue` if not found, otherwhise the return value from the invoken property method.
+     */
+    public function getProperty($name, $defaultValue = false, $invokeMethod = 'getValue')
+    {
+        $object = $this->getPropertyInstanceObject($name);
 
         if ($object) {
-            return $object->getValue();
+            return $object->$invokeMethod();
         }
 
-        return false;
+        return $defaultValue;
+    }
+    
+    public function getPropertyObject($name)
+    {
+        return $this->getPropertyInstanceObject($name);
     }
     
     public function getProperties()
     {
-        return $this->model->nav->getProperties();
+        if ($this->_properties === null) {
+            $this->_properties = $this->model->nav->getProperties();
+        }
+        
+        return $this->_properties;
     }
 }
