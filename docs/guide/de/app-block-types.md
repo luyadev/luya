@@ -67,3 +67,4 @@ Natürlich benötigen wir mehr als nur Textfelder für die Typen-Einträge. Hier
 | zaa-list-array            | array         | Erstellt einen Textinput für mehrer Eingaben. (zbsp. Listen).
 | zaa-table					| array			| Erstellt eine Tabelle anhand eines Json inputs. Der rückgabe Wert ist ein Array wobei der Key dem Spalten-Namen entspricht.
 | zaa-cms-page              | int           | *Nur wenn CMS registrier* gibt die navId für die menu komponent zurück.
+| zaa-decimal               | float         | Erstellt ein Feld mit einem numerischen Inputfeld. Options: `options="{steps:0.0001}"` gibt die Nachkommastellen und Schrittgrösse an.

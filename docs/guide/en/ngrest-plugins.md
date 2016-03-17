@@ -21,6 +21,7 @@ fields
 | [checkboxRelation](start-ngrest-field-checkboxRelation.md) | Createa checkbox part based on a refTable/viaTable.
 | date											| Creates an input field with a datepicker popover (model value: dd-mm-yyyy)
 | datetime | creates a date and time input (basic test)
+| decimal                                               | Creates a decimal input field. First parameter defines optional step size. Default = 0.001
 
 
 field implicits

@@ -63,6 +63,7 @@ AVAILABLE VAR TYPES
 | zaa-image-upload		| creata a image upload form and return the imageId on success
 | zaa-image-array-upload | creates an asrray with image id an caption string
 | zaa-list-array | creates an array with a key variable `value`
+| zaa-decimal           | Creates decimal input field with option: `options="{'steps':0.0001}"` to define step size. Default = 0.001.
 
 
 TWIG FRONTEND
