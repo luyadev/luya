@@ -2,8 +2,6 @@
 
 namespace app\properties;
 
-use Yii;
-
 class TestProperty extends \admin\base\Property
 {
     public function init()
