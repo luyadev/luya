@@ -43,6 +43,7 @@ abstract class Controller extends \luya\web\Controller
             'properties' => $props,
         ]);
         // echo is used in order to support cases where asset manager is not available
+        echo '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
         echo '<style>' . $view->renderPhpFile($folder . '/assets/toolbar.css') . '</style>';
         echo '<script>' . $view->renderPhpFile($folder . '/assets/toolbar.js') . '</script>';
     }

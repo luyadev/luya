@@ -58,16 +58,16 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "2.2.1",
+            "version": "2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jquery/jquery-dist.git",
-                "reference": "788eaba2f83e7b7445c7a83a50c81c0704423874"
+                "reference": "086d381cd2f3b4b8b0af85ecb2c9593a61e5b4bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/788eaba2f83e7b7445c7a83a50c81c0704423874",
-                "reference": "788eaba2f83e7b7445c7a83a50c81c0704423874",
+                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/086d381cd2f3b4b8b0af85ecb2c9593a61e5b4bd",
+                "reference": "086d381cd2f3b4b8b0af85ecb2c9593a61e5b4bd",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -1696,13 +1696,13 @@
             "version": "0.2.15",
             "source": {
                 "type": "git",
-                "url": "https://github.com/angular-ui/angular-ui-router-bower.git",
-                "reference": "90ce66133afc3572a8d7556d6d3fcee0efd8bb13"
+                "url": "https://github.com/angular-ui/ui-router.git",
+                "reference": "805e69bae319e922e4d3265b7ef565058aaff850"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/angular-ui/angular-ui-router-bower/zipball/90ce66133afc3572a8d7556d6d3fcee0efd8bb13",
-                "reference": "90ce66133afc3572a8d7556d6d3fcee0efd8bb13",
+                "url": "https://api.github.com/repos/angular-ui/ui-router/zipball/805e69bae319e922e4d3265b7ef565058aaff850",
+                "reference": "805e69bae319e922e4d3265b7ef565058aaff850",
                 "shasum": ""
             },
             "require": {
