@@ -25,6 +25,7 @@ $config = [
 	    ],
 	    'crawleradmin' => 'crawleradmin\Module',
 	    'exporter' => 'exporter\Module',
+	    'ngresttest' => 'ngresttest\Module',
     ],
     'components' => [
     	'mail' => [

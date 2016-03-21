@@ -51,7 +51,8 @@
             "exporter\\" : "../../modules/exporter",
             "frontendgroup\\" : "../../modules/frontendgroup",
             "remoteadmin\\" : "../../modules/remoteadmin",
-            "payment\\" : "../../../luya-module-payment/src"
+            "payment\\" : "../../../luya-module-payment/src",
+            "ngresttest\\" : "modules/ngresttest"
         }
     }
 }
