@@ -2,6 +2,11 @@
 
 namespace admin\ngrest\plugins;
 
+/**
+ * Date and Time input field
+ * 
+ * @author nadar
+ */
 class Datetime extends \admin\ngrest\base\Plugin
 {
     public function renderList($id, $ngModel)

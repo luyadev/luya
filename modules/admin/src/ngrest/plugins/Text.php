@@ -2,6 +2,11 @@
 
 namespace admin\ngrest\plugins;
 
+/**
+ * Create a text input select for a given field.
+ * 
+ * @author nadar
+ */
 class Text extends \admin\ngrest\base\Plugin
 {
     public $placeholder = null;

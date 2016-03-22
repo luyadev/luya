@@ -2,6 +2,13 @@
 
 namespace admin\ngrest\plugins;
 
+use luya\Exception;
+
+/**
+ * Render Colorized overview
+ * 
+ * @author nadar
+ */
 class Color extends \admin\ngrest\base\Plugin
 {
     public function renderList($id, $ngModel)
@@ -18,11 +25,11 @@ class Color extends \admin\ngrest\base\Plugin
 
     public function renderCreate($id, $ngModel)
     {
-        throw new \Exception('Error: there is no create implementation for ColorPlugin yet!');
+        throw new Exception('Error: there is no create implementation for ColorPlugin yet!');
     }
 
     public function renderUpdate($id, $ngModel)
     {
-        throw new \Exception('Error: there is no update implementation for ColorPlugin yet!');
+        throw new Exception('Error: there is no update implementation for ColorPlugin yet!');
     }
 }

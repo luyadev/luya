@@ -2,6 +2,11 @@
 
 namespace admin\ngrest\plugins;
 
+/**
+ * Create a password input for a given field.
+ * 
+ * @author nadar
+ */
 class Password extends \admin\ngrest\base\Plugin
 {
     public function renderList($id, $ngModel)

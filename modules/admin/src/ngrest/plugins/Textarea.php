@@ -2,6 +2,11 @@
 
 namespace admin\ngrest\plugins;
 
+/**
+ * Create a textarea input for a given field.
+ * 
+ * @author nadar
+ */
 class Textarea extends \admin\ngrest\base\Plugin
 {
     public $placeholder = null;

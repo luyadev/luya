@@ -3,11 +3,20 @@
 namespace admin\ngrest\plugins;
 
 /**
- * @todo rename to SelectModel instead of SelectClass
+ * Create a selection dropdown based on an ActiveRecord Model.
+ * 
+ * Example usage:
+ * 
+ * ```
+ * public function ngrestAttributeTypes()
+ * {
+ * 		'genres' => ['selectModel', 'modelClass' => path\to\Genres::className(), 'valueField' => 'id', 'labelField' => 'title'],
+ * }
+ * ```
  *
  * @author nadar
  */
-class SelectClass extends \admin\ngrest\plugins\Select
+class SelectModel extends \admin\ngrest\plugins\Select
 {
     public $modelClass = null;
     

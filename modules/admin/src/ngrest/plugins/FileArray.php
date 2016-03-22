@@ -5,6 +5,8 @@ namespace admin\ngrest\plugins;
 use yii\helpers\Json;
 
 /**
+ * Multi File-Upload selector
+ * 
  * @author nadar
  */
 class FileArray extends \admin\ngrest\base\Plugin
@@ -26,6 +28,7 @@ class FileArray extends \admin\ngrest\base\Plugin
     
     public function onBeforeSave($event)
     {
+    	// if its not i18n casted field we have to serialize the the file array as json and abort further event excution.
         if (!$this->i18n) {
             $event->sender->setAttribute($this->name, $this->i18nFieldEncode($event->sender->getAttribute($this->name)));
             return false;
@@ -34,30 +37,21 @@ class FileArray extends \admin\ngrest\base\Plugin
         return true;
     }
     
-    /*
-
-    public function onAfterNgRestFind($fieldValue)
+    public function onBeforeExpandFind($event)
     {
-        return Json::decode($fieldValue);
-    }
-
-    public function onAfterFind($fieldValue)
-    {
-        return Json::decode($fieldValue);
-    }
-
-    public function onBeforeCreate($value)
-    {
-        if (empty($value) || !is_array($value)) {
-            $value = [];
-        }
-        return Json::encode($value);
-    }
-
-    public function onBeforeUpdate($value, $oldValue)
-    {
-        return $this->onBeforeCreate($value);
+    	if (!$this->i18n) {
+    		$event->sender->setAttribute($this->name, Json::decode($event->sender->getAttribute($this->name)));
+    		return false;
+    	}
+    	 
+    	return true;
     }
     
-    */
+    public function onBeforeFind($event)
+    {
+    	if (!$this->i18n) {
+    		$event->sender->setAttribute($this->name, Json::decode($event->sender->getAttribute($this->name)));
+    		return false;
+    	}
+    }
 }

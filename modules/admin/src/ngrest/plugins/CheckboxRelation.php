@@ -6,11 +6,10 @@ use Yii;
 use admin\ngrest\base\Model;
 
 /**
- * @todo check if the plugin is opened by an extraField, cause its not working on casual fields
- *
- * @author nadar
+ * Create multi select input for a relation table.
  * 
  * @property string|object $model 
+ * @author nadar
  */
 class CheckboxRelation extends \admin\ngrest\base\Plugin
 {

@@ -2,6 +2,11 @@
 
 namespace admin\ngrest\plugins;
 
+/**
+ * Data input field
+ * 
+ * @author nadar
+ */
 class Date extends \admin\ngrest\base\Plugin
 {
     public function renderList($id, $ngModel)

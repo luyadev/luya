@@ -2,6 +2,11 @@
 
 namespace admin\ngrest\plugins;
 
+/**
+ * Decimal Input-Form field.
+ * 
+ * @author nadar
+ */
 class Decimal extends \admin\ngrest\base\Plugin
 {
     public $steps = 0;
@@ -25,11 +30,4 @@ class Decimal extends \admin\ngrest\base\Plugin
     {
         $event->sender->setAttribute($this->name, (float) $event->sender->getAttribute($this->name));
     }
-    
-    /*
-    public function onAfterNgRestFind($fieldValue)
-    {
-        return (float) $fieldValue;
-    }
-    */
 }

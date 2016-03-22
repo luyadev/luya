@@ -3,17 +3,17 @@
 namespace admin\ngrest\plugins;
 
 use Yii;
-use admin\ngrest\base\Model;
 
+/**
+ * Create ability to select a CMS page.
+ * 
+ * @author nadar
+ */
 class CmsPage extends \admin\ngrest\base\Plugin
 {
     public function renderList($id, $ngModel)
     {
         return $this->createListTag($ngModel);
-        /*
-        $doc->appendChild($doc->createElement('span', '{{item.'.$this->name.'}}'));
-        return $doc;
-        */
     }
 
     public function renderCreate($id, $ngModel)
@@ -27,17 +27,18 @@ class CmsPage extends \admin\ngrest\base\Plugin
     }
 
     /**
-     * @todo TEST THIS!
-     * {@inheritDoc}
-     * @see \admin\ngrest\base\Plugin::onAfterListFind()
+     * @todo testing
      */
-    public function onAfterListFind($event)
+    public function onAfterFind($event)
     {
-        var_dump($event->sender->getAttribute($this->name));
+    	$fieldValue = $event->sender->getAttribute($this->name);
+    	$menuItem = (!empty($fieldValue)) ? Yii::$app->menu->find()->where(['nav_id' => $fieldValue])->one() : $fieldValue;
+    	$event->setAttribute($this->name, $menuItem);
     }
-    
+    /*
     public function onAfterFind($fieldValue)
     {
         return (!empty($fieldValue)) ? Yii::$app->menu->find()->where(['nav_id' => $fieldValue])->one() : $fieldValue;
     }
+    */
 }

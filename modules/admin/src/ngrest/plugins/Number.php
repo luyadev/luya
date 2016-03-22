@@ -2,6 +2,11 @@
 
 namespace admin\ngrest\plugins;
 
+/**
+ * Create a number html 5 input tage with optional placeholder.
+ * 
+ * @author nadar
+ */
 class Number extends \admin\ngrest\base\Plugin
 {
     public $placeholder = null;

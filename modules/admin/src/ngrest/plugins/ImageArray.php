@@ -5,6 +5,8 @@ namespace admin\ngrest\plugins;
 use yii\helpers\Json;
 
 /**
+ * Mutli Image-Upload selector ability.
+ * 
  * @author nadar
  */
 class ImageArray extends \admin\ngrest\base\Plugin
@@ -26,37 +28,32 @@ class ImageArray extends \admin\ngrest\base\Plugin
 
     public function onBeforeSave($event)
     {
+    	// if its not i18n casted field we have to serialize the the image array as json and abort further event excution.
         if (!$this->i18n) {
-            $event->sender->setAttribute($this->name, $this->i18nFieldEncode($event->sender->getAttribute($this->name)));
+            $event->sender->setAttribute($this->name, Json::encode($event->sender->getAttribute($this->name)));
             return false;
         }
     
         return true;
     }
     
-    /*
-    public function onAfterNgRestFind($fieldValue)
+    public function onBeforeExpandFind($event)
     {
-        return Json::decode($fieldValue);
+    	if (!$this->i18n) {
+    		$event->sender->setAttribute($this->name, Json::decode($event->sender->getAttribute($this->name)));
+    		return false;
+    	}
+    	
+    	return true;
     }
-
-    public function onAfterFind($fieldValue)
+    
+    public function onBeforeFind($event)
     {
-        return Json::decode($fieldValue);
+    	if (!$this->i18n) {
+    		$event->sender->setAttribute($this->name, Json::decode($event->sender->getAttribute($this->name)));
+    		return false;
+    	}
+    	
+    	return true;
     }
-
-    public function onBeforeCreate($value)
-    {
-        if (empty($value) || !is_array($value)) {
-            $value = [];
-        }
-        
-        return Json::encode($value);
-    }
-
-    public function onBeforeUpdate($value, $oldValue)
-    {
-        return $this->onBeforeCreate($value);
-    }
-    */
 }

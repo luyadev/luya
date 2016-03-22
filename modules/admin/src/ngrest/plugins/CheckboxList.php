@@ -6,21 +6,14 @@ use admin\ngrest\base\Plugin;
 use yii\helpers\Json;
 
 /**
- * Createa checkbox list with selection based on an array with key value pairing.
+ * Create a checkbox list with selection based on an array with key value pairing.
  * 
+ * @todo testing and complete find and save events.
  * @author nadar
- * @since 1.0.0-beta
  */
 class CheckboxList extends Plugin
 {
     public $items = [];
-    
-    /*
-    public function __construct(array $items)
-    {
-        $this->items = $items;
-    }
-    */
     
     public function renderList($id, $ngModel)
     {
@@ -37,11 +30,23 @@ class CheckboxList extends Plugin
         return $this->renderCreate($id, $ngModel);
     }
     
+    protected function getItems()
+    {
+    	$data = [];
+    
+    	foreach ($this->items as $value => $label) {
+    		$data[] = ['value' => $value, 'label' => $label];
+    	}
+    
+    	return ['items' => $data];
+    }
+    
     public function serviceData()
     {
         return ['checkboxitems' => $this->getItems()];
     }
     
+    /*
     public function onAfterNgRestFind($fieldValue)
     {
         return Json::decode($fieldValue);
@@ -83,4 +88,5 @@ class CheckboxList extends Plugin
         
         return ['items' => $data];
     }
+    */
 }

@@ -2,6 +2,11 @@
 
 namespace admin\ngrest\plugins;
 
+/**
+ * Create toggle checkbox for a given field
+ * 
+ * @author nadar
+ */
 class ToggleStatus extends \admin\ngrest\base\Plugin
 {
     public function renderList($id, $ngModel)

@@ -5,12 +5,8 @@ namespace admin\ngrest\plugins;
 use admin\ngrest\base\Model;
 
 /**
- * create a select dropdown box with option list:.
- *
- * Thee following propertys are provided:
- * - select(['array' => [ 'key' => 'label', 'key2' => 'label2' ]]);
- * - select(['model' => ['class' => '\path\to\model\class', 'value' => 'ValueFieldKeyName', 'label' => 'LabelFieldKeyName']]);
- *
+ * Base class for select dropdowns.
+ * 
  * @author nadar
  */
 abstract class Select extends \admin\ngrest\base\Plugin

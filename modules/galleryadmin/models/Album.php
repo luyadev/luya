@@ -91,6 +91,7 @@ class Album extends \admin\ngrest\base\Model
             'title' => 'text',
             'description' => 'textarea',
             'cover_image_id' => 'image',
+        	'cat_id' => ['selectModel', 'modelClass' => Cat::className(), 'valueField' => 'id', 'labelField' => 'title'],
         ];
     }
 
@@ -104,7 +105,6 @@ class Album extends \admin\ngrest\base\Model
             'alias' => Module::t('album_upload')
         ]);
 
-        $config->list->field('cat_id', Module::t('cat_title'))->selectClass('\galleryadmin\models\Cat', 'id', 'title');
         $this->ngRestConfigDefine($config, 'list', ['title', 'description', 'cover_image_id']);
 
         $config->create->copyFrom('list', ['id']);

@@ -61,7 +61,7 @@ class Article extends \admin\ngrest\base\Model
             'is_display_limit' => 'toggleStatus',
             'image_list' => 'imageArray',
             'file_list' => 'fileArray',
-            'cat_id' => ['selectClass', 'modelClass' => '\newsadmin\models\Cat', 'valueField' => 'id', 'labelField' => 'title']
+            'cat_id' => ['selectModel', 'modelClass' => '\newsadmin\models\Cat', 'valueField' => 'id', 'labelField' => 'title']
         ];
     }
 
@@ -120,7 +120,7 @@ class Article extends \admin\ngrest\base\Model
 
     public $tags = []; // cause of extra fields - will pe parsed trough the ngrest plugins.
 
-    public $i18n = ['title', 'text'];
+    public $i18n = ['title', 'text', 'image_list'];
 
     public $extraFields = ['tags'];
 
