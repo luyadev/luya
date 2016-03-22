@@ -3,48 +3,47 @@
 namespace admin\ngrest\plugins;
 
 use Yii;
+use admin\ngrest\base\Model;
 
 /**
  * @todo check if the plugin is opened by an extraField, cause its not working on casual fields
  *
  * @author nadar
+ * 
+ * @property string|object $model 
  */
 class CheckboxRelation extends \admin\ngrest\base\Plugin
 {
-    public $model = null;
-
-    public $modelTable = null;
-
+	private $_model;
+	
     public $refJoinTable = null;
 
     public $refModelPkId = null;
 
     public $refJoinPkId = null;
 
-    public $displayFields = null;
+    public $labelFields = null;
 
-    public $displayTemplate = null;
+    public $labelTemplate = null;
 
-    /**
-     * @param unknown $model           \news\models\Tag::className()
-     * @param unknown $refJoinTable    news_article_tag
-     * @param unknown $refModelPkId    news_article_tag.arictle_id
-     * @param unknown $refJoinPkId     news_article_tag.tag_id
-     * @param array   $displayFields
-     * @param string  $displayTemplate
-     */
-    /*
-    public function __construct($model, $refJoinTable, $refModelPkId, $refJoinPkId, array $displayFields, $displayTemplate = null)
+    public function init()
     {
-        $this->model = Yii::createObject(['class' => $model]);
-        $this->refJoinTable = $refJoinTable;
-        $this->refModelPkId = $refModelPkId;
-        $this->refJoinPkId = $refJoinPkId;
-        $this->displayFields = $displayFields;
-        $this->displayTemplate = $displayTemplate;
+    	parent::init();
+    	
+    	$this->addEvent(Model::EVENT_AFTER_INSERT, [$this, 'afterSaveEvent']);
+    	$this->addEvent(Model::EVENT_AFTER_UPDATE, [$this, 'afterSaveEvent']);
     }
-    */
+    
+    public function setModel($className)
+    {
+    	$this->_model = (!is_object($className)) ? Yii::createObject(['class' => $className]) : $className;
+    }
 
+    public function getModel()
+    {
+    	return $this->_model;
+    }
+    
     private function getOptionsData()
     {
         $items = [];
@@ -52,13 +51,13 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
         $pk = $this->model->primaryKey();
         $pkName = reset($pk);
 
-        $select = $this->displayFields;
+        $select = $this->labelFields;
         $select[] = $pkName;
         foreach ($this->model->find()->select($select)->all() as $item) {
             $array = $item->getAttributes($select);
             unset($array[$pkName]);
-            if ($this->displayTemplate) {
-                $label = vsprintf($this->displayTemplate, $array);
+            if ($this->labelTemplate) {
+                $label = vsprintf($this->labelTemplate, $array);
             } else {
                 $label = implode(', ', $array);
             }
@@ -67,20 +66,16 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
 
         return ['items' => $items];
     }
+    
 
     public function renderList($id, $ngModel)
     {
-        return $doc;
+    	return $this->createListTag($ngModel);
     }
 
     public function renderCreate($id, $ngModel)
     {
-        $elmn = $this->createBaseElement($doc, 'zaa-checkbox-array');
-        $elmn->setAttribute('options', $this->getServiceName('relationdata'));
-
-        $doc->appendChild($elmn);
-
-        return $doc;
+    	return $this->createFormTag('zaa-checkbox-array', $id, $ngModel, ['options' => $this->getServiceName('relationdata')]);
     }
 
     public function renderUpdate($id, $ngModel)
@@ -93,25 +88,21 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
         return ['relationdata' => $this->getOptionsData()];
     }
 
-    public function onAfterFind($fieldValue)
+    public function onBeforeExpandFind($event)
     {
-        return $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $this->getModel()->id])->all();
+    	$event->sender->{$this->name} = $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $event->sender->id])->all();
+    }
+    
+    public function onBeforeFind($event)
+    {
+    	$event->sender->{$this->name} = $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $event->sender->id])->all();
     }
 
-    public function onAfterNgRestFind($fieldValue)
+    public function afterSaveEvent($event)
     {
-        return $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $this->getModel()->id])->all();
+    	$this->setRelation($event->sender->{$this->name}, $this->refJoinTable, $this->refModelPkId, $this->refJoinPkId, $event->sender->id);
     }
 
-    public function onBeforeUpdate($value, $oldValue)
-    {
-        $this->setRelation($value, $this->refJoinTable, $this->refModelPkId, $this->refJoinPkId);
-    }
-
-    public function onAfterCreate($value)
-    {
-        $this->setRelation($value, $this->refJoinTable, $this->refModelPkId, $this->refJoinPkId);
-    }
     
     /**
      * @param array $value          The valued which is provided from the setter method
@@ -121,9 +112,9 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
      *
      * @return bool
      */
-    public function setRelation(array $value, $viaTableName, $localTableId, $foreignTableId)
+    public function setRelation(array $value, $viaTableName, $localTableId, $foreignTableId, $activeRecordId)
     {
-        Yii::$app->db->createCommand()->delete($viaTableName, [$localTableId => $this->getModel()->id])->execute();
+        Yii::$app->db->createCommand()->delete($viaTableName, [$localTableId => $activeRecordId])->execute();
         $batch = [];
         foreach ($value as $k => $v) {
             // $this->id: the value of the current database model, example when relation ins on user model id would be user id
@@ -131,9 +122,9 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
 
             // issue #696 array logic
             if (is_array($v)) { // its an array and is based on the logic of the angular checkbox releation ['id' => 123]
-                $batch[] = [$this->getModel()->id, $v['id']];
+                $batch[] = [$activeRecordId, $v['id']];
             } else { // its not an array so it could have been assigned from the frontend
-                $batch[] = [$this->getModel()->id, $v];
+                $batch[] = [$activeRecordId, $v];
             }
         }
         if (!empty($batch)) {

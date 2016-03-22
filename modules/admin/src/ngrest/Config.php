@@ -142,28 +142,10 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
                 if (is_array($fields)) {
                     foreach ($fields as $field) {
                         if (isset($field['type'])) {
-                            
                             $fieldName = $field['name'];
-                            
                             if (!array_key_exists($fieldName, $plugins)) {
                                 $plugins[$fieldName] = $field;
                             }
-                            
-                            /*
-                            
-                            //foreach ($field['plugins'] as $plugin) {
-                                $fieldName = $field['name'];
-                                $hash = md5($plugin['class']);
-
-                                if (!array_key_exists($fieldName, $plugins)) {
-                                    $plugins[$fieldName] = [];
-                                }
-                                if (!array_key_exists($hash, $plugins[$fieldName])) {
-                                    $plugins[$fieldName][$hash] = $plugin;
-                                }
-                            //}
-                             
-                             */
                         }
                     }
                 }
@@ -172,21 +154,6 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
         }
 
         return $this->_plugins;
-    }
-    
-    public function getContextPlugins($contextPointer)
-    {
-        $plugins = [];
-        $pointerFields = $this->getPointer($contextPointer);
-        
-        if ($pointerFields) {
-            foreach ($pointerFields as $field) {
-                $plugins[$field['name']] = $field;
-            }
-        }
-        
-        return $plugins;
-      
     }
 
     /**

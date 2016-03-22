@@ -123,9 +123,19 @@ abstract class Plugin extends Component
         }
     }
     
+    public function onBeforeCollectServiceData($event)
+    {
+    	return true;
+    }
+    
     public function onCollectServiceData($event)
     {
-        $event->sender->addNgRestServiceData($this->name, $this->serviceData());
+    	if ($this->onBeforeCollectServiceData($event)) {
+    		$data = $this->serviceData();
+    		if (!empty($data)) {
+    			$event->sender->addNgRestServiceData($this->name, $data);
+    		}
+    	}
     }
     
     public function getServiceName($name)

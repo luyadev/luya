@@ -6,17 +6,18 @@ class SelectArray extends \admin\ngrest\plugins\Select
 {
     public $data = [];
     
-    /*
-    public function __construct(array $assocArray, $initValue = null)
+    public function init()
     {
-        $this->initValue = $initValue;
-
-        foreach ($assocArray as $key => $value) {
-            $this->data[] = [
-                'value' => (int) $key,
-                'label' => $value,
-            ];
-        }
+    	parent::init();
+    	
+    	$cleandata = [];
+    	foreach ($this->data as $key => $value) {
+    		$cleandata[] = [
+    			'value' => (int) $key,
+    			'label' => $value,
+    		];
+    	}
+    	
+    	$this->data = $cleandata;
     }
-    */
 }
