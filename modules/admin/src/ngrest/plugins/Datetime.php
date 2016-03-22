@@ -4,8 +4,12 @@ namespace admin\ngrest\plugins;
 
 class Datetime extends \admin\ngrest\base\Plugin
 {
-    public function renderList($doc)
+    public function renderList($id, $ngModel)
     {
+        return [
+            $this->createListTag($ngModel),
+        ];
+        /*
         $activatedElement = $doc->createElement('span', '{{item.'.$this->name.'*1000 | date : \'dd.MM.yyyy - HH.mm\'}}');
         $activatedElement->setAttribute('ng-if', 'item.'.$this->name);
 
@@ -16,19 +20,16 @@ class Datetime extends \admin\ngrest\base\Plugin
         $doc->appendChild($disabledElement);
 
         return $doc;
+        */
     }
 
-    public function renderCreate($doc)
+    public function renderCreate($id, $ngModel)
     {
-        $elmn = $this->createBaseElement($doc, 'zaa-datetime');
-        // append to document
-        $doc->appendChild($elmn);
-        // return DomDocument
-        return $doc;
+        return $this->createFormTag('zaa-datetime', $id, $ngModel);
     }
 
-    public function renderUpdate($doc)
+    public function renderUpdate($id, $ngModel)
     {
-        return $this->renderCreate($doc);
+        return $this->renderCreate($id, $ngModel);
     }
 }

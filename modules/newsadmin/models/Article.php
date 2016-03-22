@@ -61,6 +61,7 @@ class Article extends \admin\ngrest\base\Model
             'is_display_limit' => 'toggleStatus',
             'image_list' => 'imageArray',
             'file_list' => 'fileArray',
+            'cat_id' => ['selectClass', 'modelClass' => '\newsadmin\models\Cat', 'valueField' => 'id', 'labelField' => 'title']
         ];
     }
 
@@ -130,12 +131,11 @@ class Article extends \admin\ngrest\base\Model
 
     public function ngRestConfig($config)
     {
-        $this->ngRestConfigDefine($config, 'list', ['title', 'timestamp_create', 'image_id']);
-        $config->list->field('cat_id', Module::t('article_cat_id'))->selectClass('\newsadmin\models\Cat', 'id', 'title');
+        $this->ngRestConfigDefine($config, 'list', ['title', 'cat_id', 'timestamp_create', 'image_id']);
 
-        $this->ngRestConfigDefine($config, 'update', ['title', 'text', 'timestamp_create', 'timestamp_display_from', 'is_display_limit', 'timestamp_display_until', 'image_id', 'image_list', 'file_list']);
-        $config->update->field('cat_id', Module::t('article_cat_id'))->selectClass('\newsadmin\models\Cat', 'id', 'title');
-        $config->update->extraField('tags', Module::t('article_tag'))->checkboxRelation(\newsadmin\models\Tag::className(), 'news_article_tag', 'article_id', 'tag_id', ['title']);
+        $this->ngRestConfigDefine($config, 'update', ['title', 'cat_id', 'text', 'timestamp_create', 'timestamp_display_from', 'is_display_limit', 'timestamp_display_until', 'image_id', 'image_list', 'file_list']);
+        
+        //$config->update->extraField('tags', Module::t('article_tag'))->checkboxRelation(\newsadmin\models\Tag::className(), 'news_article_tag', 'article_id', 'tag_id', ['title']);
 
         $config->create->copyFrom('update', ['timestamp_display_until']);
 

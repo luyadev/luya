@@ -9,25 +9,18 @@ namespace admin\ngrest\plugins;
  */
 class File extends \admin\ngrest\base\Plugin
 {
-    public function renderList($doc)
+    public function renderList($id, $ngModel)
     {
-        $elmn = $doc->createElement('span', '{{item.'.$this->name.'}}');
-        $doc->appendChild($elmn);
-
-        return $doc;
+        return $this->createListTag($ngModel);
     }
 
-    public function renderCreate($doc)
+    public function renderCreate($id, $ngModel)
     {
-        $elmn = $this->createBaseElement($doc, 'zaa-file-upload');
-        // append to document
-        $doc->appendChild($elmn);
-        // return DomDocument
-        return $doc;
+        return $this->createFormTag('zaa-file-upload', $id, $ngModel);
     }
 
-    public function renderUpdate($doc)
+    public function renderUpdate($id, $ngModel)
     {
-        return $this->renderCreate($doc);
+        return $this->renderCreate($id, $ngModel);
     }
 }

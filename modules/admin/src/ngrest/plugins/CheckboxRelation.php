@@ -33,6 +33,7 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
      * @param array   $displayFields
      * @param string  $displayTemplate
      */
+    /*
     public function __construct($model, $refJoinTable, $refModelPkId, $refJoinPkId, array $displayFields, $displayTemplate = null)
     {
         $this->model = Yii::createObject(['class' => $model]);
@@ -42,6 +43,7 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
         $this->displayFields = $displayFields;
         $this->displayTemplate = $displayTemplate;
     }
+    */
 
     private function getOptionsData()
     {
@@ -66,12 +68,12 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
         return ['items' => $items];
     }
 
-    public function renderList($doc)
+    public function renderList($id, $ngModel)
     {
         return $doc;
     }
 
-    public function renderCreate($doc)
+    public function renderCreate($id, $ngModel)
     {
         $elmn = $this->createBaseElement($doc, 'zaa-checkbox-array');
         $elmn->setAttribute('options', $this->getServiceName('relationdata'));
@@ -81,9 +83,9 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
         return $doc;
     }
 
-    public function renderUpdate($doc)
+    public function renderUpdate($id, $ngModel)
     {
-        return $this->renderCreate($doc);
+        return $this->renderCreate($id, $ngModel);
     }
 
     public function serviceData()

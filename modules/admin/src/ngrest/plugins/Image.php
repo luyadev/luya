@@ -11,32 +11,18 @@ class Image extends \admin\ngrest\base\Plugin
 {
     public $noFilters = false;
 
-    public function __construct($noFilters = false)
+    public function renderList($id, $ngModel)
     {
-        $this->noFilters = $noFilters;
+        return $this->createTag('storage-image-thumbnail-display', null, ['image-id' => "{{{$ngModel}}}"]);
     }
 
-    public function renderList($doc)
+    public function renderCreate($id, $ngModel)
     {
-        $elmn = $doc->createElement('storage-image-thumbnail-display');
-        $elmn->setAttribute('image-id', '{{item.'.$this->name.'}}');
-        $doc->appendChild($elmn);
-
-        return $doc;
+        return $this->createFormTag('zaa-image-upload', $id, $ngModel, ['options' => json_encode(['no_filter' => $this->noFilters])]);
     }
 
-    public function renderCreate($doc)
+    public function renderUpdate($id, $ngModel)
     {
-        $elmn = $this->createBaseElement($doc, 'zaa-image-upload');
-        $elmn->setAttribute('options', json_encode(['no_filter' => $this->noFilters]));
-        // append to document
-        $doc->appendChild($elmn);
-        // return DomDocument
-        return $doc;
-    }
-
-    public function renderUpdate($doc)
-    {
-        return $this->renderCreate($doc);
+        return $this->renderCreate($id, $ngModel);
     }
 }

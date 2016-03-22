@@ -4,6 +4,7 @@ namespace admin;
 
 use Yii;
 use luya\web\UrlRule;
+use admin\components\AdminLanguage;
 
 class Module extends \admin\base\Module
 {
@@ -93,6 +94,9 @@ class Module extends \admin\base\Module
     public function registerComponents()
     {
         return [
+            'adminLanguage' => [
+                'class' => AdminLanguage::className(),
+            ],
             'adminuser' => [
                 'class' => \admin\components\AdminUser::className(),
             ],

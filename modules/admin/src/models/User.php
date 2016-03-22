@@ -35,7 +35,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface, Change
     {
         $config->aw->load(['class' => 'admin\aws\ChangePassword', 'className' => 'admin\models\User']);
         
-        $config->create->field('title', 'Anrede')->selectArray(static::getTitles(), 0);
+        $config->create->field('title', 'Anrede')->selectArray(['data' => static::getTitles(), 'initValue' => 0]);
         $config->create->field('firstname', 'Vorname')->text();
         $config->create->field('lastname', 'Nachname')->text();
         $config->create->field('email', 'E-Mail-Adresse')->text();

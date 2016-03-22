@@ -9,28 +9,32 @@ use yii\helpers\Json;
  */
 class ImageArray extends \admin\ngrest\base\Plugin
 {
-    public function renderList($doc)
+    public function renderList($id, $ngModel)
     {
-        $elmn = $doc->createElement('span', '[Bilder-Liste]');
-        $doc->appendChild($elmn);
-
-        return $doc;
+        return $this->createListTag($ngModel);
     }
 
-    public function renderCreate($doc)
+    public function renderCreate($id, $ngModel)
     {
-        $elmn = $this->createBaseElement($doc, 'zaa-image-array-upload');
-        // append to document
-        $doc->appendChild($elmn);
-        // return DomDocument
-        return $doc;
+        return $this->createFormTag('zaa-image-array-upload', $id, $ngModel);
     }
 
-    public function renderUpdate($doc)
+    public function renderUpdate($id, $ngModel)
     {
-        return $this->renderCreate($doc);
+        return $this->renderCreate($id, $ngModel);
     }
 
+    public function onBeforeSave($event)
+    {
+        if (!$this->i18n) {
+            $event->sender->setAttribute($this->name, $this->i18nFieldEncode($event->sender->getAttribute($this->name)));
+            return false;
+        }
+    
+        return true;
+    }
+    
+    /*
     public function onAfterNgRestFind($fieldValue)
     {
         return Json::decode($fieldValue);
@@ -54,4 +58,5 @@ class ImageArray extends \admin\ngrest\base\Plugin
     {
         return $this->onBeforeCreate($value);
     }
+    */
 }

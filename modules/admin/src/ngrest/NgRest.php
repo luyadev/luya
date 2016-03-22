@@ -54,4 +54,14 @@ class NgRest
     {
         yii::$app->session->set($this->config->hash, serialize($this->config));
     }
+    
+    public static function createPluginObject($className, $name, $alias, $i18n, $args = [])
+    {
+        return Yii::createObject(array_merge([
+            'class' => $className,
+            'name' => $name,
+            'alias' => $alias,
+            'i18n' => $i18n,
+        ], $args));
+    }
 }

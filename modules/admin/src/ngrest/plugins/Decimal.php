@@ -6,35 +6,30 @@ class Decimal extends \admin\ngrest\base\Plugin
 {
     public $steps = 0;
 
-    public function __construct($decimalSteps = 0.001)
+    public function renderList($id, $ngModel)
     {
-        $this->steps = $decimalSteps;
+        return $this->createListTag($ngModel);
     }
 
-    public function renderList($doc)
+    public function renderCreate($id, $ngModel)
     {
-        $doc->appendChild($doc->createElement('span', '{{item.'.$this->name.'}}'));
-
-        return $doc;
+        return $this->createFormTag('zaa-decimal', $id, $ngModel, ['options' => json_encode(['steps' => $this->steps ])]);
     }
 
-    public function renderCreate($doc)
+    public function renderUpdate($id, $ngModel)
     {
-        $elmn = $this->createBaseElement($doc, 'zaa-decimal');
-        $elmn->setAttribute('options', json_encode(['steps' => $this->steps ]));
-        // append to document
-        $doc->appendChild($elmn);
-        // return DomDocument
-        return $doc;
-    }
-
-    public function renderUpdate($doc)
-    {
-        return $this->renderCreate($doc);
+        return $this->renderCreate($id, $ngModel);
     }
     
+    public function onAfterFind($event)
+    {
+        $event->sender->setAttribute($this->name, (float) $event->sender->getAttribute($this->name));
+    }
+    
+    /*
     public function onAfterNgRestFind($fieldValue)
     {
         return (float) $fieldValue;
     }
+    */
 }

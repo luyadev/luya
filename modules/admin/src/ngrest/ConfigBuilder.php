@@ -53,11 +53,20 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
      */
     public function __call($name, $args)
     {
+        $args = (isset($args[0])) ? $args[0] : [];
+        
+        if (!is_array($args)) {
+            throw new Exception("Since 1.0.0-beta6 ngrest plugin constructors must be provided as array config. Error in $name: $args");
+        }
+        
         return $this->addPlugin($name, $args);
     }
     
     /**
      * Add a Plugin to the current field pointer plugins array.
+     * 
+     * @TODO rename to addType
+     * @TODO check if type is already defined
      * 
      * @param string $name The name of the ngrest\plugin
      * @param array $args
@@ -67,7 +76,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
     public function addPlugin($name, array $args)
     {
         $plugin = ['class' => '\\admin\\ngrest\\plugins\\'.ucfirst($name), 'args' => $args];
-        $this->config[$this->pointer][$this->field]['plugins'][] = $plugin;
+        $this->config[$this->pointer][$this->field]['type'] = $plugin;
         
         return $this;
     }
@@ -78,8 +87,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
             'name' => $name,
             'i18n' => $i18n,
             'alias' => (is_null($alias)) ? $name : $alias,
-            'plugins' => [],
-            'i18n' => false,
+            'type' => null, // @todo use text as default?
             'extraField' => false,
         ];
 
@@ -129,50 +137,11 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
         
         return $this;
     }
-    
-    /**
-     * @todo remove in beta5
-     * 
-     * @param unknown $activeWindowObject
-     * @param unknown $aliasConfig
-     * @throws Exception
-     * @return \admin\ngrest\ConfigBuilder
-     */
-    public function register($activeWindowObject, $aliasConfig)
-    {
-        trigger_error("This method will be removed in beta5, use load() instead.");
-        
-        /*
-        if ($this->pointer !== 'aw') {
-            throw new Exception('register method can only be used in aw pointer context.');
-        }
-
-        if (is_array($aliasConfig)) {
-            $alias = (isset($aliasConfig['alias'])) ? $aliasConfig['alias'] : false;
-            $icon = (isset($aliasConfig['icon'])) ? $aliasConfig['icon'] : false;
-        } else {
-            $alias = $aliasConfig;
-            $icon = false;
-        }
-
-        $activeWindowClass = get_class($activeWindowObject);
-        $activeWindowHash = sha1($alias.$activeWindowClass);
-        $this->config[$this->pointer][$activeWindowHash] = [
-            'object' => $activeWindowObject,
-            'activeWindowHash' => $activeWindowHash,
-            //'class' => $activeWindowClass,
-            'alias' => $alias,
-            'icon' => $icon,
-        ];
-
-        return $this;
-        */
-    }
 
     public function extraField($name, $alias, $i18n = false)
     {
         $this->config[$this->pointer][$name] = [
-            'name' => $name, 'i18n' => $i18n, 'alias' => $alias, 'plugins' => [], 'i18n' => false, 'extraField' => true,
+            'name' => $name, 'i18n' => $i18n, 'alias' => $alias, 'type' => null, 'extraField' => true,
         ];
         $this->field = $name;
 

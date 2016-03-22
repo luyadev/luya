@@ -4,6 +4,9 @@ namespace admin\ngrest\plugins;
 
 class SelectArray extends \admin\ngrest\plugins\Select
 {
+    public $data = [];
+    
+    /*
     public function __construct(array $assocArray, $initValue = null)
     {
         $this->initValue = $initValue;
@@ -15,4 +18,5 @@ class SelectArray extends \admin\ngrest\plugins\Select
             ];
         }
     }
+    */
 }

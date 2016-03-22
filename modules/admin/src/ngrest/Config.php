@@ -16,7 +16,7 @@ use luya\helpers\ArrayHelper;
  *             'alias' => 'Vorname',
  *             'i18n' => false,
  *             'extraField' => false,
- *             'plugins' => [
+ *             'type' => [
  *                 'class' => '\\admin\\ngrest\\plugins\\Text',
  *                 'args' => ['arg1' => 'arg1_value', 'arg2' => 'arg2_value']
  *             ]
@@ -97,8 +97,7 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
             'name' => null,
             'i18n' => false,
             'alias' => null,
-            'plugins' => [],
-            'i18n' => false,
+            'type' => null,
             'extraField' => false,
         ], $options);
 
@@ -142,8 +141,17 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
             foreach ($this->getConfig() as $pointer => $fields) {
                 if (is_array($fields)) {
                     foreach ($fields as $field) {
-                        if (isset($field['plugins'])) {
-                            foreach ($field['plugins'] as $plugin) {
+                        if (isset($field['type'])) {
+                            
+                            $fieldName = $field['name'];
+                            
+                            if (!array_key_exists($fieldName, $plugins)) {
+                                $plugins[$fieldName] = $field;
+                            }
+                            
+                            /*
+                            
+                            //foreach ($field['plugins'] as $plugin) {
                                 $fieldName = $field['name'];
                                 $hash = md5($plugin['class']);
 
@@ -153,7 +161,9 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
                                 if (!array_key_exists($hash, $plugins[$fieldName])) {
                                     $plugins[$fieldName][$hash] = $plugin;
                                 }
-                            }
+                            //}
+                             
+                             */
                         }
                     }
                 }
@@ -162,6 +172,21 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
         }
 
         return $this->_plugins;
+    }
+    
+    public function getContextPlugins($contextPointer)
+    {
+        $plugins = [];
+        $pointerFields = $this->getPointer($contextPointer);
+        
+        if ($pointerFields) {
+            foreach ($pointerFields as $field) {
+                $plugins[$field['name']] = $field;
+            }
+        }
+        
+        return $plugins;
+      
     }
 
     /**
@@ -194,11 +219,9 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
             $this->addField('list', $this->primaryKey, [
                 'name' => $this->primaryKey,
                 'alias' => 'ID',
-                'plugins' => [
-                    [
-                        'class' => '\admin\ngrest\plugins\Text',
-                        'args' => [],
-                    ],
+                'type' => [
+                    'class' => '\admin\ngrest\plugins\Text',
+                    'args' => [],
                 ],
             ]);
         }

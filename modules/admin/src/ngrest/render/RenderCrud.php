@@ -7,6 +7,7 @@ use DOMDocument;
 use yii\base\View;
 use admin\components\Auth;
 use admin\models\Lang;
+use admin\ngrest\NgRest;
 
 /**
  * @author nadar
@@ -206,7 +207,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
                 $id = 'id-'.md5($ngModel.$lang['short_code']);
                 // anzahl cols durch anzahl sprachen
                 $return[] = [
-                    'html' => '<div class="crud__i18n-col crud__i18n-col--{{(12/AdminLangService.selection.length)}}" ng-show="AdminLangService.isInSelection(\''.$lang['short_code'].'\')">'.$this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'], true).'<div class="crud__flag"><span class="flag flag--'.$lang['short_code'].'"><span class="flag__fallback flag__fallback--colorized">'.$lang['short_code'].'</span></span></div></div>',
+                    'html' => '<div class="crud__i18n-col crud__i18n-col--{{(12/AdminLangService.selection.length)}}" ng-show="AdminLangService.isInSelection(\''.$lang['short_code'].'\')">'.$this->renderElementPlugins($configContext, $element['type'], $id, $element['name'], $ngModel, $element['alias'], true).'<div class="crud__flag"><span class="flag flag--'.$lang['short_code'].'"><span class="flag__fallback flag__fallback--colorized">'.$lang['short_code'].'</span></span></div></div>',
                 ];
 
                 ++$i;
@@ -221,35 +222,40 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
 
         return [
             [
-                'html' => $this->renderElementPlugins($configContext, $element['plugins'], $id, $element['name'], $ngModel, $element['alias'], false),
+                'html' => $this->renderElementPlugins($configContext, $element['type'], $id, $element['name'], $ngModel, $element['alias'], false),
             ],
         ];
     }
 
-    private function renderElementPlugins($configContext, $plugins, $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmni18n)
+    private function renderElementPlugins($configContext, $typeConfig, $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmni18n)
     {
-        $doc = new DOMDocument('1.0');
+        $obj = NgRest::createPluginObject($typeConfig['class'], $elmnName, $elmnAlias, $elmni18n, $typeConfig['args']);
+        $method = 'render'.ucfirst($configContext);
+        $html = $obj->$method($elmnId, $elmnModel);
 
-        foreach ($plugins as $key => $plugin) {
-            $doc = $this->renderPlugin($doc, $configContext, $plugin['class'], $plugin['args'], $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmni18n);
-        }
+        return (is_array($html)) ? implode(" ", $html) : $html;
+        /*
+        //$doc = new DOMDocument('1.0');
 
-        return trim($doc->saveHTML());
+        return $this->renderPlugin($doc, $configContext, $typeConfig['class'], $typeConfig['args'], $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmni18n);
+
+        //return trim($doc->saveHTML());
+         
+         */
     }
 
+    /*
     private function renderPlugin($DOMDocument, $configContext, $className, $classArgs, $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmni18n)
     {
-        $ref = new \ReflectionClass($className);
-        $obj = $ref->newInstanceArgs($classArgs);
-        $obj->setConfig($elmnId, $elmnName, $elmnModel, $elmnAlias, $elmni18n);
+        $obj = NgRest::createPluginObject($className, $elmnName, $elmnAlias, $elmni18n, $classArgs);
         $method = 'render'.ucfirst($configContext);
-
-        return $obj->$method($DOMDocument);
+        return $obj->$method($elmnId, $elmnModel);
     }
+    */
 
     private function ngModelString($configContext, $fieldId)
     {
-        return 'data.'.$configContext.'.'.$fieldId;
+        return ($configContext == self::TYPE_LIST) ? 'item.'.$fieldId : 'data.'.$configContext.'.'.$fieldId;
     }
 
     private function i18nNgModelString($configContext, $fieldId, $lang)

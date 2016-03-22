@@ -3,15 +3,24 @@
 namespace admin\ngrest\base;
 
 use Yii;
-use admin\behaviors\LogBehavior;
-use admin\models\Lang;
-use yii\helpers\Json;
 use yii\base\InvalidConfigException;
-use yii\base\yii\base;
 use yii\db\ActiveQuery;
+use admin\ngrest\NgRest;
+use admin\ngrest\NgRestModeInterface;
+use admin\behaviors\LogBehavior;
+use admin\base\GenericSearchInterface;
+use yii\helpers\Json;
 
-abstract class Model extends \yii\db\ActiveRecord implements \admin\base\GenericSearchInterface
+abstract class Model extends \yii\db\ActiveRecord implements GenericSearchInterface, NgRestModeInterface
 {
+    /**
+     * @var string This event will be trigger after the find population of each row when ngrest loads the data from the server to edit data. (When click on edit icon)
+     */
+    const EVENT_AFTER_NGREST_UPDATE_FIND = 'afterNgrestUpdateFind';
+    
+    /**
+     * @var string This event will be trigger after the find poulation of each row when ngrest load the overview list (crud).
+     */
     const EVENT_AFTER_NGREST_FIND = 'afterNgrestFind';
 
     const EVENT_SERVICE_NGREST = 'serviceNgrest';
@@ -20,51 +29,33 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
 
     const SCENARIO_RESTUPDATE = 'restupdate';
 
-    private $_ngrestCallType = null;
-
-    private $_ngRestPrimaryKey = null;
-
-    private $_config = null;
-
-    /**
-     * Containg the default language assoc array.
-     * 
-     * @var array
-     */
-    private $_lang = null;
-
-    /**
-     * Containg all availabe languages from Lang Model.
-     * 
-     * @var array
-     */
-    private $_langs = null;
-
     public $i18n = [];
 
     public $extraFields = [];
 
-    public $ngRestServiceArray = [];
-
-    abstract public function ngRestConfig($config);
-
-    abstract public function ngRestApiEndpoint();
+    protected $ngRestServiceArray = [];
 
     public function init()
     {
         parent::init();
-
+        
+        foreach ($this->getNgRestConfig()->getPlugins() as $field => $plugin) {
+            $plugin = NgRest::createPluginObject($plugin['type']['class'], $plugin['name'], $plugin['alias'], $plugin['i18n'], $plugin['type']['args']);
+            foreach ($plugin->events() as $on => $handler) {
+                $this->on($on, is_string($handler) ? [$plugin, $handler] : $handler);
+            }
+        }
+     
+        // attaching behaviors after init is used to prevent user how like to use `behaviors()` method do not after to
+        // call the parent behaviors.
         $this->attachBehaviors([
-            'EventBehavior' => [
-                'class' => EventBehavior::className(),
-                'ngRestConfig' => $this->getNgRestConfig(),
-            ],
             'LogBehavior' => [
                 'class' => LogBehavior::className(),
                 'api' => $this->ngRestApiEndpoint(),
             ],
         ]);
 
+        /*
         if (count($this->i18n) > 0) {
             $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'i18nEncodeFields']);
             $this->on(self::EVENT_BEFORE_INSERT, [$this, 'i18nEncodeFields']);
@@ -72,6 +63,7 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
             $this->on(self::EVENT_AFTER_FIND, [$this, 'i18nAfterFind']);
             $this->on(self::EVENT_AFTER_NGREST_FIND, [$this, 'i18nAfterFind']);
         }
+        */
     }
 
     /**
@@ -95,34 +87,18 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
     public function afterFind()
     {
         if ($this->getNgRestCallType()) {
-            $this->trigger(self::EVENT_AFTER_NGREST_FIND);
+            if ($this->getNgRestCallType() == 'list') {
+                $this->trigger(self::EVENT_AFTER_NGREST_FIND);
+            }
+            if ($this->getNgRestCallType() == 'update') {
+                $this->trigger(self::EVENT_AFTER_NGREST_UPDATE_FIND);
+            }
         } else {
             return parent::afterFind();
         }
     }
 
-    private function getDefaultLang($field = false)
-    {
-        if ($this->_lang === null) {
-            $this->_lang = Lang::findActive();
-        }
-
-        if ($field) {
-            return $this->_lang[$field];
-        }
-
-        return $this->_lang;
-    }
-
-    private function getLanguages()
-    {
-        if ($this->_langs === null) {
-            $this->_langs = Lang::getQuery();
-        }
-
-        return $this->_langs;
-    }
-
+    /*
     public function i18nAfterFind()
     {
         $langShortCode = $this->getDefaultLang('short_code');
@@ -167,7 +143,13 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
             }
         }
     }
+    */
 
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \admin\base\GenericSearchInterface::genericSearchFields()
+     */
     public function genericSearchFields()
     {
         $fields = [];
@@ -180,6 +162,11 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
         return $fields;
     }
     
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \admin\base\GenericSearchInterface::genericSearchHiddenFields()
+     */
     public function genericSearchHiddenFields()
     {
         return [];
@@ -203,7 +190,7 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
 
     /**
      * @param string $searchQuery a search string
-     *
+     * {@inheritDoc}
      * @see \admin\base\GenericSearchInterface::genericSearch()
      */
     public function genericSearch($searchQuery)
@@ -226,6 +213,8 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
         return $query->select($fields)->all();
     }
 
+    private $_ngrestCallType = null;
+    
     public function getNgRestCallType()
     {
         if ($this->_ngrestCallType === null) {
@@ -235,6 +224,8 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
         return $this->_ngrestCallType;
     }
 
+    private $_ngRestPrimaryKey = null;
+    
     public function getNgRestPrimaryKey()
     {
         if ($this->_ngRestPrimaryKey === null) {
@@ -244,6 +235,11 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
         return $this->_ngRestPrimaryKey;
     }
 
+    public function addNgRestServiceData($field, $data)
+    {
+        $this->ngRestServiceArray[$field] = $data;
+    }
+    
     public function getNgrestServices()
     {
         $this->trigger(self::EVENT_SERVICE_NGREST);
@@ -342,6 +338,13 @@ abstract class Model extends \yii\db\ActiveRecord implements \admin\base\Generic
         }
     }
     
+    private $_config = null;
+    
+    /**
+     * Build and call the full config object if not build yet for this model.
+     * 
+     * @return object|mixed
+     */
     public function getNgRestConfig()
     {
         if ($this->_config == null) {

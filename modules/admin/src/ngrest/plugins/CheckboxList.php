@@ -15,27 +15,26 @@ class CheckboxList extends Plugin
 {
     public $items = [];
     
+    /*
     public function __construct(array $items)
     {
         $this->items = $items;
     }
+    */
     
-    public function renderList($doc)
+    public function renderList($id, $ngModel)
     {
-        return $doc;
+        return $this->createTag('span', 'no supported yet in list view');
     }
     
-    public function renderCreate($doc)
+    public function renderCreate($id, $ngModel)
     {
-        $elmn = $this->createBaseElement($doc, 'zaa-checkbox-array');
-        $elmn->setAttribute('options', $this->getServiceName('checkboxitems'));
-        $doc->appendChild($elmn);
-        return $doc;
+        return $this->createBasicTag('zaa-checkbox-array', $id, $ngModel, ['options' => $this->getServiceName('checkboxitems')]);
     }
     
-    public function renderUpdate($doc)
+    public function renderUpdate($id, $ngModel)
     {
-        return $this->renderCreate($doc);
+        return $this->renderCreate($id, $ngModel);
     }
     
     public function serviceData()

@@ -2,6 +2,8 @@
 
 namespace admin\ngrest\plugins;
 
+use admin\ngrest\base\Model;
+
 /**
  * create a select dropdown box with option list:.
  *
@@ -17,28 +19,19 @@ abstract class Select extends \admin\ngrest\base\Plugin
 
     public $data = [];
 
-    public function renderList($doc)
+    public function renderList($id, $ngModel)
     {
-        $elmn = $doc->createElement('span', '{{item.'.$this->name.'}}');
-        $doc->appendChild($elmn);
-
-        return $doc;
+        return $this->createListTag($ngModel);
     }
 
-    public function renderCreate($doc)
+    public function renderCreate($id, $ngModel)
     {
-        $elmn = $this->createBaseElement($doc, 'zaa-select');
-        $elmn->setAttribute('initvalue', $this->initValue);
-        $elmn->setAttribute('options', $this->getServiceName('selectdata'));
-        // append to document
-        $doc->appendChild($elmn);
-        // return DomDocument
-        return $doc;
+        return $this->createFormTag('zaa-select', $id, $ngModel, ['initvalue' => $this->initValue, 'options' => $this->getServiceName('selectdata')]);
     }
 
-    public function renderUpdate($doc)
+    public function renderUpdate($id, $ngModel)
     {
-        return $this->renderCreate($doc);
+        return $this->renderCreate($id, $ngModel);
     }
 
     public function serviceData()
@@ -46,6 +39,18 @@ abstract class Select extends \admin\ngrest\base\Plugin
         return ['selectdata' => $this->data];
     }
 
+    /*
+    public function events()
+    {
+        return [
+            Model::EVENT_SERVICE_NGREST => function($e) {
+                $e->sender->addNgRestServiceData($this->name, $this->serviceData());
+            }
+        ];
+    }
+    */
+    
+    /*
     public function onAfterNgRestFind($fieldValue)
     {
         if ($this->getModel()->getNgRestCallType() == 'list') {
@@ -58,4 +63,5 @@ abstract class Select extends \admin\ngrest\base\Plugin
 
         return $fieldValue;
     }
+    */
 }
