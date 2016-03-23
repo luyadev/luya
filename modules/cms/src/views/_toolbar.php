@@ -27,6 +27,14 @@ use luya\helpers\Url;
             </div>
         </div>
 
+		<? if ($menu->current->type ==2): ?>
+		<div class="luya-cms-toolbar__button">
+			<div class="luya-cms-toolbar__button-text">
+                <label class="label"><i class="material-icons">extension</i> <?= $menu->current->moduleName; ?></label>
+            </div>
+        </div>
+		<? endif; ?>
+
         <div class="luya-cms-toolbar__button">
             <a class="luya-cms-toolbar__container-toggler" href="javascript:void(0);" onclick="toggleDetails(this, 'luya-cms-toolbar-seo-container')">
                 <span>SEO</span> <i class="material-icons">keyboard_arrow_down</i>

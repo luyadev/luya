@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **BC BREAKS** See [UPGRADE.md](UPGRADE.md) as we have made some major changes.
 
+- `#798` Added LUYA CMS toolbar
 - `#761` Added missing translations for cms block delete message.
 - `#796` Fixed bug where not existing module throws an create defualt object from empty value exception.
 - `#807` Rewrite of NgRest plugin system to match yii2 base object config and fix several issus with mutli lingual casted fields.
