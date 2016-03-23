@@ -317,5 +317,7 @@ return [
     // LayoutBlock
     'block_layout_left_column_css_class' => 'CSS-Klassen für linke Spalte',
     'block_layout_right_column_css_class' => 'CSS-Klassen für rechte Spalte',
+    
+    'js_page_block_delete_confirm' => 'Block «%name%» wirklich löschen?',
 
 ];

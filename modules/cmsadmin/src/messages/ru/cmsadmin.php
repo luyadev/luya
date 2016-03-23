@@ -302,4 +302,15 @@ return [
     // view update - blockholder
     'view_update_blockholder_clipboard' => 'Буфер обмена',
 
+// added translation in 1.0.0-beta6:
+    
+    // ImageBlock
+    'block_image_fixed_width' => 'Image width',
+    'block_image_fixed_height' => 'Image height',
+    
+    // LayoutBlock
+    'block_layout_left_column_css_class' => 'CSS classes for left column',
+    'block_layout_right_column_css_class' => 'CSS classes for right column',
+    
+    'js_page_block_delete_confirm' => 'Are you sure you want to remove the block «%name%»?',
 ];

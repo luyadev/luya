@@ -1115,7 +1115,8 @@
 		
 		$scope.removeBlock = function(block) {
 
-			AdminToastService.confirm('Block «' + block.name + '» wirklich löschen?', function($timeout, $toast) {
+			
+			AdminToastService.confirm(i18nParam('js_page_block_delete_confirm', {name: block.name}), function($timeout, $toast) {
 				ApiCmsNavItemPageBlockItem.delete({id: block.id}, function (rsp) {
 					$scope.PagePlaceholderController.NavItemTypePageController.refresh();
 					$scope.PagePlaceholderController.NavItemTypePageController.loadLiveUrl();

@@ -317,4 +317,5 @@ return [
     'block_layout_left_column_css_class' => 'CSS classes for left column',
     'block_layout_right_column_css_class' => 'CSS classes for right column',
 
+    'js_page_block_delete_confirm' => 'Are you sure you want to remove the block «%name%»?',
 ];
