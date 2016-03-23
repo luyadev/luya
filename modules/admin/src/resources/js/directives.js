@@ -1202,6 +1202,13 @@
                 
                 $scope.selectedFiles = [];
                 
+                $scope.toggleSelectionAll = function() {
+                	var files = $filter('filemanagerfilesfilter')($scope.filesData, $scope.currentFolderId, $scope.onlyImages);
+                	files.forEach(function(value, key) {
+                		$scope.toggleSelection(value);
+                	})
+                }
+                
                 $scope.toggleSelection = function(file) {
                     if ($scope.allowSelection == 'true') {
                         // parent inject 
