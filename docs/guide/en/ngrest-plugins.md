@@ -16,8 +16,9 @@ fields
 | ace													| Creates an ace editor
 | togglestatus                                          | Creates a checkbox
 | image													| Creates an image uploader and returns the imageId to the obeserved field
-| imageArray											| Creates an uploader for multiple images and serialize them as json into the data tabel (type must be text).
+| imageArray											| Creates an uploader for multiple images and serialize them as json into the data table (type must be text).
 | file													| Creates a file upload and returns the fileId to the observed field
+| fileArray                                            | Creates an uploader for multiple files and serialize them as json into the data table (type must be text).
 | [checkboxRelation](start-ngrest-field-checkboxRelation.md) | Createa checkbox part based on a refTable/viaTable.
 | date											| Creates an input field with a datepicker popover (model value: dd-mm-yyyy)
 | datetime | creates a date and time input (basic test)
