@@ -472,7 +472,23 @@ class Container extends \yii\base\Component implements ArrayAccess
         ->indexBy('id')
         ->all();
     }
-
+   
+    private $_paths = [];
+    
+    private $_nodes = [];
+   
+    private function processParant($nodeId, $path)
+    {
+        $parentId = $this->_nodes[$nodeId]['parent_nav_id'];
+        $alias = $this->_nodes[$nodeId]['alias'];
+    
+        if ($parentId > 0 && array_key_exists($parentId, $this->_nodes)) {
+            return $this->processParant($parentId, $path) . '/' . $alias;
+        }
+    
+        return $alias;
+    }
+    
     /**
      * Helper method to build an index with all the alias paths to build the correct links.
      * 
@@ -482,20 +498,18 @@ class Container extends \yii\base\Component implements ArrayAccess
      */
     private function buildIndexForContainer($data)
     {
-        $index = [];
-
+        $this->_paths = [];
+        $this->_nodes = [];
+        
         foreach ($data as $item) {
-            if (!array_key_exists($item['nav_id'], $index)) {
-                if ($item['parent_nav_id'] > 0 && array_key_exists($item['parent_nav_id'], $index)) {
-                    $alias = $index[$item['parent_nav_id']].'/'.$item['alias'];
-                } else {
-                    $alias = $item['alias'];
-                }
-                $index[$item['nav_id']] = $alias;
-            }
+            $this->_nodes[$item['nav_id']] = ['parent_nav_id' => $item['parent_nav_id'], 'alias' => $item['alias'], 'nav_id' => $item['nav_id']];
         }
-
-        return $index;
+        
+        foreach ($this->_nodes as $node) {
+            $this->_paths[$node['nav_id']] = $this->processParant($node['nav_id'], null);
+        }
+        
+        return $this->_paths;
     }
 
     /**
