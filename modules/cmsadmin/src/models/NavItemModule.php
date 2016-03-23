@@ -3,6 +3,7 @@
 namespace cmsadmin\models;
 
 use Yii;
+use cms\Exception;
 
 class NavItemModule extends \cmsadmin\base\NavItemType
 {
@@ -28,6 +29,10 @@ class NavItemModule extends \cmsadmin\base\NavItemType
 
         $module = $this->module_name;
 
+        if (!Yii::$app->hasModule($module)) {
+            throw new Exception("The module '$module' does not exist in your module configuration list.");
+        }
+        
         $this->_module = Yii::$app->getModule($module);
         $this->_module->context = 'cms';
         /*

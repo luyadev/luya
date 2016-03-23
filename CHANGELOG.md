@@ -6,7 +6,8 @@ LUYA CHANGELOG
 
 **BC BREAKS** See [UPGRADE.md](UPGRADE.md) as we have made some major changes.
 
-- `#807` Rewritten NgRest plugin system to match yii2 base object config and fix several issus with mutli lingual casted fields.
+- `#796` Fixed bug where not existing module throws an create defualt object from empty value exception.
+- `#807` Rewrite of NgRest plugin system to match yii2 base object config and fix several issus with mutli lingual casted fields.
 - `#802` Adding new decimal NgRest Plugin / block field type including possiblity to configure step size.
 - `#758` Due to replacement of twig, cms layout files must be a phpfile instead of a twig file (see upgrade.md).
 - `#754` Fixed module reflection overloading, this happens when no required get params are not in the url rules.
