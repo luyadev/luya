@@ -318,14 +318,14 @@ class StorageContainer extends \yii\base\Component
                 throw new Exception("Unable to create image, cause the base file does not exist.");
             }
             
-            $imagine = new Imagine();
-            $image = $imagine->open($fileQuery->serverSource);
-            
             $fileName = $filterId.'_'.$fileQuery->systemFileName;
             $fileSavePath = $this->serverPath . '/' . $fileName;
+            
             if (empty($filterId)) {
-                $save = $image->save($fileSavePath);
+                $save = @copy($fileQuery->serverSource, $fileSavePath);
             } else {
+                $imagine = new Imagine();
+                $image = $imagine->open($fileQuery->serverSource);
                 $model = StorageFilter::find()->where(['id' => $filterId])->one();
                 if (!$model) {
                     throw new Exception("Could not find the provided filter id '$filterId'.");

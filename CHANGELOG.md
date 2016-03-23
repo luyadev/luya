@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **BC BREAKS** See [UPGRADE.md](UPGRADE.md) as we have made some major changes.
 
+- `#808` Images without filter are not process by imagine anymore and get copied directly.
 - `#804` Fixed bug with wrong menu index generation.
 - `#799` Added ability to sort filemanager columns.
 - `#801` Fixed bug where multi selection of files did not work.
