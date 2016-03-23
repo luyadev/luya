@@ -66,7 +66,6 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
      * Add a Plugin to the current field pointer plugins array.
      * 
      * @TODO rename to addType
-     * @TODO check if type is already defined
      * 
      * @param string $name The name of the ngrest\plugin
      * @param array $args
@@ -96,6 +95,16 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
         return $this;
     }
 
+    public function extraField($name, $alias, $i18n = false)
+    {
+        $this->config[$this->pointer][$name] = [
+            'name' => $name, 'i18n' => $i18n, 'alias' => (is_null($alias)) ? $name : $alias, 'type' => null, 'extraField' => true,
+        ];
+        $this->field = $name;
+    
+        return $this;
+    }
+    
     /**
      * Creates a new active window object using the given configuration.
      *
@@ -135,16 +144,6 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
             'icon' => $object->getIcon(),
         ];
         
-        return $this;
-    }
-
-    public function extraField($name, $alias, $i18n = false)
-    {
-        $this->config[$this->pointer][$name] = [
-            'name' => $name, 'i18n' => $i18n, 'alias' => $alias, 'type' => null, 'extraField' => true,
-        ];
-        $this->field = $name;
-
         return $this;
     }
 

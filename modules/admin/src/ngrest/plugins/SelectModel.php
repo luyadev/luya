@@ -10,7 +10,7 @@ namespace admin\ngrest\plugins;
  * ```
  * public function ngrestAttributeTypes()
  * {
- * 		'genres' => ['selectModel', 'modelClass' => path\to\Genres::className(), 'valueField' => 'id', 'labelField' => 'title'],
+ * 		'genres' => ['selectModel', 'modelClass' => path\to\Genres::className(), 'valueField' => 'id', 'labelField' => 'title']],
  * }
  * ```
  *

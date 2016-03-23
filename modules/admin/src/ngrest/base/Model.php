@@ -274,6 +274,17 @@ abstract class Model extends \yii\db\ActiveRecord implements GenericSearchInterf
     }
 
     /**
+     * Same as ngrestAttributeTypes() but used `extraField` instead of `field`
+     * 
+     * @return array
+     * @since 1.0.0-beta6
+     */
+    public function ngrestExtraAttributeTypes()
+    {
+        return [];
+    }
+    
+    /**
      * Inject data from the model into the config, usage exmple in ngRestConfig method context:
      * 
      * ```php
@@ -298,6 +309,7 @@ abstract class Model extends \yii\db\ActiveRecord implements GenericSearchInterf
     public function ngRestConfigDefine(\admin\ngrest\ConfigBuilder $config, $type, array $fields)
     {
         $types = $this->ngrestAttributeTypes();
+        $extraTypes = $this->ngrestExtraAttributeTypes();
         
         $scenarios = $this->scenarios();
         
@@ -316,15 +328,21 @@ abstract class Model extends \yii\db\ActiveRecord implements GenericSearchInterf
         }
         
         foreach ($fields as $field) {
-            if (!isset($types[$field])) {
-                throw new InvalidConfigException("The ngrest attribue '$field' does not exists in ngrestAttributeTypes() method.");
+            if (!isset($types[$field]) && !isset($extraTypes[$field])) {
+                throw new InvalidConfigException("The ngrest attribue '$field' does not exists in ngrestAttributeTypes() nor in ngrestExtraAttributeTypes() method.");
             }
             
             if ($scenario && !in_array($field, $scenarios)) {
                 throw new InvalidConfigException("The field '$field' does not exists in the scenario '$scenario'. You have to define them in the scenarios() method.");
             }
-            
-            $definition = $types[$field];
+
+            if (isset($extraTypes[$field])) {
+                $typeField = 'extraField';
+                $definition = $extraTypes[$field];
+            } else {
+                $typeField = 'field';
+                $definition = $types[$field];
+            }
             
             $args = [];
             if (is_array($definition)) {
@@ -334,7 +352,7 @@ abstract class Model extends \yii\db\ActiveRecord implements GenericSearchInterf
                 $method = $definition;
             }
             
-            $config->$type->field($field, $this->getAttributeLabel($field))->addPlugin($method, $args);
+            $config->$type->$typeField($field, $this->getAttributeLabel($field))->addPlugin($method, $args);
         }
     }
     

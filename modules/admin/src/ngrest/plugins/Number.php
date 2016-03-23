@@ -2,6 +2,8 @@
 
 namespace admin\ngrest\plugins;
 
+use luya\helpers\ArrayHelper;
+
 /**
  * Create a number html 5 input tage with optional placeholder.
  * 
@@ -26,10 +28,19 @@ class Number extends \admin\ngrest\base\Plugin
         return $this->renderCreate($id, $ngModel);
     }
     
-    /*
-    public function onAfterNgRestFind($fieldValue)
+    public function onAfterExpandFind($event)
     {
-        return (int) $fieldValue;
+        $fieldValue = $event->sender->getAttribute($this->name);
+        
+        if (is_array($fieldValue)) {
+            $event->sender->setAttribute($this->name, ArrayHelper::typeCast($fieldValue));
+        } else {
+            $event->sender->setAttribute($this->name, (int) $fieldValue);
+        }
     }
-    */
+    
+    public function onAfterFind($event)
+    {
+        $event->sender->setAttribute($this->name, (int) $event->sender->getAttribute($this->name));
+    }
 }

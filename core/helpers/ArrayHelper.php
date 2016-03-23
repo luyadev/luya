@@ -49,7 +49,11 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
         
         foreach ($array as $k => $v) {
             if (is_numeric($v)) {
-                $return[$k] = (int)$v;
+                if (is_float($v)) {
+                    $return[$k] = (float)$v;
+                } else {
+                    $return[$k] = (int)$v;
+                }
             } elseif (is_array($v)) {
                 $return[$k] = self::typeCast($v);
             } else {

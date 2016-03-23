@@ -10,7 +10,7 @@ namespace admin\ngrest\plugins;
  * ```
  * public function ngrestAttributeTypes()
  * {
- * 		'genres' => ['selectArray', 'data' => [1 => 'Male', 2 => 'Female'],
+ * 		'genres' => ['selectArray', 'data' => [1 => 'Male', 2 => 'Female']],
  * }
  * ```
  * 

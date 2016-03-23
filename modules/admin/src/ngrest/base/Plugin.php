@@ -9,19 +9,54 @@ use yii\helpers\Html;
 use luya\Exception;
 use admin\ngrest\base\Model;
 
+/**
+ * Base class for all plugins
+ * 
+ * @author nadar
+ */
 abstract class Plugin extends Component
 {
+    /**
+     * @var string The name of the field corresponding to the ActiveRecord (also known as fieldname)
+     */
     public $name = null;
     
+    /**
+     * @var string The alias name of the plugin choosen by the user (also known as label)
+     */
     public $alias = null;
     
-    public $i18n = null; // true/false - active yet?
+    /**
+     * @var boolean Whether the plugin is in i18n context or not.
+     */
+    public $i18n = null;
 
-    abstract public function renderList($id, $ngModel); // @TODO replace $doc with $ngModel as ngModel should not be a global object in this context, also add $id
+    /**
+     * Renders the element for the CRUD LIST overview for a specific type.
+     * 
+     * @param string $id The ID of the element in the current context
+     * @param string $ngModel The name to access the data in angular context.
+     * @return string|array Returns the html element as a string or an array which will be concated
+     */
+    abstract public function renderList($id, $ngModel);
     
-    abstract public function renderCreate($id, $ngModel); // @TODO replace $doc with $ngModel as ngModel should not be a global object in this context, also add $id
+    /**
+     * Renders the element for the CRUD CREATE FORM for a specific type.
+     *
+     * @param string $id The ID of the element in the current context
+     * @param string $ngModel The name to access the data in angular context.
+     * @return string|array Returns the html element as a string or an array which will be concated
+     */
+    abstract public function renderCreate($id, $ngModel);
     
-    abstract public function renderUpdate($id, $ngModel); // @TODO replace $doc with $ngModel as ngModel should not be a global object in this context, also add $id
+    /**
+     * Renders the element for the CRUD UPDATE FORM for a specific type.
+     *
+     * @param string $id The ID of the element in the current context
+     * @param string $ngModel The name to access the data in angular context.
+     * @return string|array Returns the html element as a string or an array which will be concated
+     */
+    abstract public function renderUpdate($id, $ngModel);
     
     public function init()
     {
@@ -47,7 +82,7 @@ abstract class Plugin extends Component
     private $_events = [];
     
     /**
-     * an override without calling the parent::events will stop all other events used by default
+     * An override without calling the parent::events will stop all other events used by default.
      */
     public function events()
     {
@@ -114,12 +149,19 @@ abstract class Plugin extends Component
         return true;
     }
     
+    public function onAfterExpandFind($event)
+    {
+        return true;
+    }
+    
     public function onExpandFind($event)
     {
         if ($this->onBeforeExpandFind($event)) {
             if ($this->i18n) {
                 $event->sender->setAttribute($this->name, $this->i18nFieldDecode($event->sender->getAttribute($this->name)));
-            }   
+            }
+            
+            $this->onAfterExpandFind($event);
         }
     }
     
@@ -225,111 +267,4 @@ abstract class Plugin extends Component
     {
         return $this->createTag('span', null, ['ng-bind' => $ngModel]);
     }
-    
-    // REMOVE BELOW HERE
-    
-    /*
-    protected function createBaseElement($doc, $type)
-    {
-        $elmn = $doc->createElement($type);
-        $elmn->setAttribute('fieldid', $this->id);
-        $elmn->setAttribute('fieldname', $this->name);
-        $elmn->setAttribute('model', $this->ngModel);
-        $elmn->setAttribute('label', $this->alias);
-        $elmn->setAttribute('i18n', $this->i18n);
-    
-        return $elmn;
-    }
-    
-    
-    protected $id = null;
-
-    protected $name = null;
-
-    protected $alias = null;
-
-    protected $ngModel = null;
-
-    protected $i18n = null;
-
-    private $_model = null;
-    
-    public function setModel($model)
-    {
-        $this->_model = $model;
-    }
-
-    public function getModel()
-    {
-        return $this->_model;
-    }
-    
-
-    protected function createBaseElement($doc, $type)
-    {
-        $elmn = $doc->createElement($type);
-        $elmn->setAttribute('fieldid', $this->id);
-        $elmn->setAttribute('fieldname', $this->name);
-        $elmn->setAttribute('model', $this->ngModel);
-        $elmn->setAttribute('label', $this->alias);
-        $elmn->setAttribute('i18n', $this->i18n);
-
-        return $elmn;
-    }
-
-    public function setConfig($id, $name, $ngModel, $alias, $i18n)
-    {
-        $this->id = $id;
-        $this->name = $name;
-        $this->ngModel = $ngModel;
-        $this->alias = $alias;
-        $this->i18n = $i18n;
-    }
-
-    public function getServiceName($name)
-    {
-        return 'service.'.$this->name.'.'.$name;
-    }
-
-    public function serviceData()
-    {
-        return false;
-    }
-
-    public function onBeforeCreate($fieldValue)
-    {
-        return false;
-    }
-
-    public function onAfterCreate($fieldValue)
-    {
-        return false;
-    }
-
-    public function onBeforeUpdate($fieldValue, $oldValue)
-    {
-        return false;
-    }
-
-    public function onAfterFind($fieldValue)
-    {
-        return false;
-    }
-
-    public function onAfterNgRestFind($fieldValue)
-    {
-        return false;
-    }
-
-    abstract public function renderList($doc);
-
-    abstract public function renderCreate($doc);
-
-    abstract public function renderUpdate($doc);
-
-    public function events()
-    {
-        return [];
-    }
-    */
 }

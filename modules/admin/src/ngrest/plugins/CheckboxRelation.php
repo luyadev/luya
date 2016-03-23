@@ -8,6 +8,35 @@ use admin\ngrest\base\Model;
 /**
  * Create multi select input for a relation table.
  * 
+ * Example usage:
+ * 
+ * Define an extra propertie:
+ * 
+ * ```php
+ * 
+ * public $groups = [];
+ * 
+ * public $extraFields = ['groups'];
+ * 
+ * ```
+ * 
+ * configure the extra field with `ngrestExtraAttributeTypes`:
+ * 
+ * ```php
+ * public function ngrestExtraAttributeTypes()
+ * {
+ *      'groups' => [
+ *          'checkboxRelation', 
+ *       	'model' => User::className(), 
+ *       	'refJoinTable' => 'admin_user_group', 
+ *       	'refModelPkId' => 'group_id', 
+ *       	'refJoinPkId' => 'user_id', 
+ *       	'labelFields' => ['firstname', 'lastname', 'email'], 
+ *       	'labelTemplate' =>  '%s %s (%s)'
+ *       ],
+ * }
+ * ```
+ * 
  * @property string|object $model 
  * @author nadar
  */

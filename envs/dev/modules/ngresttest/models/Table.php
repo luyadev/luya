@@ -66,7 +66,6 @@ class Table extends \admin\ngrest\base\Model
     public function rules()
     {
         return [
-             [['image', 'imageArray', 'file', 'fileArray', 'text', 'textarea', 'selectArray', 'checkboxList', 'date', 'datetime', 'decimal', 'number', 'password',  'toggleStatus', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus'], 'required'],
         ];
     }
     
@@ -115,8 +114,8 @@ class Table extends \admin\ngrest\base\Model
             'fileArray' => 'fileArray',
             'text' => 'text',
             'textarea' => 'textarea',
-            'selectArray' => 'text', //['selectArray', ['foo', 'bar']],
-            'checkboxList' => 'text', //['checkboxList', ['foo', 'bar']],
+            'selectArray' => ['selectArray', 'data' => [1 => 'Male', 2 => 'Female']],
+            'checkboxList' => ['checkboxList', 'data' => [1 => 'Male', 2 => 'Female']],
             //'checkboxRelation' => 'textarea',
             //'color' =>
             'date' => 'date',
@@ -133,8 +132,8 @@ class Table extends \admin\ngrest\base\Model
             'i18n_fileArray' => 'fileArray',
             'i18n_text' => 'text',
             'i18n_textarea' => 'textarea',
-            'i18n_selectArray' => 'text', //['selectArray', ['foo', 'bar']],
-            'i18n_checkboxList' => 'text', //['checkboxList', ['foo', 'bar']],
+            'i18n_selectArray' => ['selectArray', 'data' => [1 => 'Male', 2 => 'Female']],
+            'i18n_checkboxList' => ['checkboxList', 'data' => [1 => 'Male', 2 => 'Female']], //['checkboxList', ['foo', 'bar']],
             //'checkboxRelation' => 'textarea',
             //'i18n_color' =>
             'i18n_date' => 'date',

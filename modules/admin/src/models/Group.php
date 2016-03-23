@@ -53,29 +53,51 @@ class Group extends \admin\ngrest\base\Model
     {
         return 'api-admin-group';
     }
+    
+    public function attributeLabels()
+    {
+        return [
+            'name' => Module::t('model_group_name'),
+            'text' => Module::t('model_group_description'),
+        ];
+    }
+    
+    public function ngrestAttributeTypes()
+    {
+        return [
+            'name' => 'text',
+            'text' => 'textarea',
+        ];
+    }
+    
+    public function ngrestExtraAttributeTypes()
+    {
+        return [
+            'users' => [
+                'checkboxRelation',
+                'model' => User::className(),
+                'refJoinTable' => 'admin_user_group',
+                'refModelPkId' => 'group_id',
+                'refJoinPkId' => 'user_id',
+                'labelFields' => ['firstname', 'lastname', 'email'],
+                'labelTemplate' =>  '%s %s (%s)'
+            ],
+        ];
+    }
 
     public function ngRestConfig($config)
     {
-        
-        //$config->aw->register(new \admin\aws\GroupAuth(), Module::t('model_group_btn_aws_groupauth'));
+        // load active window to config
         $config->aw->load(['class' => 'admin\aws\GroupAuth', 'alias' => Module::t('model_group_btn_aws_groupauth')]);
+        
+        // define config
+        $this->ngRestConfigDefine($config, 'list', ['name', 'text']);
+        $this->ngRestConfigDefine($config, 'create', ['name', 'text', 'users']);
+        $this->ngRestConfigDefine($config, 'update', ['name', 'text', 'users']);
+        
+        // add ability to delete items
         $config->delete = true;
-
-        $config->list->field('name', Module::t('model_group_name'))->text();
-        $config->list->field('text', Module::t('model_group_description'))->textarea();
-
-        $config->create->copyFrom('list', ['id']);
-        $config->create->extraField('users', Module::t('model_group_user_buttons'))->checkboxRelation([
-        	'model' => \admin\models\User::className(), 
-        	'refJoinTable' => 'admin_user_group', 
-        	'refModelPkId' => 'group_id', 
-        	'refJoinPkId' => 'user_id', 
-        	'labelFields' => ['firstname', 'lastname', 'email'], 
-        	'labelTemplate' =>  '%s %s (%s)'
-        ]);
-
-        $config->update->copyFrom('create');
-
+        
         return $config;
     }
 }

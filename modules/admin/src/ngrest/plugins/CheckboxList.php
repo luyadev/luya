@@ -8,21 +8,29 @@ use yii\helpers\Json;
 /**
  * Create a checkbox list with selection based on an array with key value pairing.
  * 
+ * Example usage:
+ * 
+ * ```
+ * public function ngrestAttributeTypes()
+ * {
+ * 		'genres' => ['checkboxList', 'data' => [1 => 'Male', 2 => 'Female']],
+ * }
+ * 
  * @todo testing and complete find and save events.
  * @author nadar
  */
 class CheckboxList extends Plugin
 {
-    public $items = [];
+    public $data = [];
     
     public function renderList($id, $ngModel)
     {
-        return $this->createTag('span', 'no supported yet in list view');
+        return $this->createListTag('span', 'no supported yet in list view');
     }
     
     public function renderCreate($id, $ngModel)
     {
-        return $this->createBasicTag('zaa-checkbox-array', $id, $ngModel, ['options' => $this->getServiceName('checkboxitems')]);
+        return $this->createFormTag('zaa-checkbox-array', $id, $ngModel, ['options' => $this->getServiceName('checkboxitems')]);
     }
     
     public function renderUpdate($id, $ngModel)
@@ -34,7 +42,7 @@ class CheckboxList extends Plugin
     {
     	$data = [];
     
-    	foreach ($this->items as $value => $label) {
+    	foreach ($this->data as $value => $label) {
     		$data[] = ['value' => $value, 'label' => $label];
     	}
     
@@ -46,47 +54,32 @@ class CheckboxList extends Plugin
         return ['checkboxitems' => $this->getItems()];
     }
     
-    /*
-    public function onAfterNgRestFind($fieldValue)
+    public function onBeforeSave($event)
     {
-        return Json::decode($fieldValue);
-    }
-    
-    public function onAfterFind($fieldValue)
-    {
-        return Json::decode($fieldValue);
-    }
-    
-    public function onBeforeUpdate($value, $oldValue)
-    {
-        return $this->onBeforeCreate($value);
-    }
-    
-    public function onBeforeCreate($value)
-    {
-        if (empty($value) || !is_array($value)) {
-            $values = [];
-        } else {
-            foreach ($value as $k => $v) {
-                if (is_array($v)) {
-                    $values[$k] = $v;
-                } else {
-                    $values[$k] = ['id' => $v];
-                }
-            }
+        // if its not i18n casted field we have to serialize the the file array as json and abort further event excution.
+        if (!$this->i18n) {
+            $event->sender->setAttribute($this->name, $this->i18nFieldEncode($event->sender->getAttribute($this->name)));
+            return false;
         }
-        return Json::encode($values);
+    
+        return true;
     }
     
-    protected function getItems()
+    public function onBeforeExpandFind($event)
     {
-        $data = [];
-        
-        foreach ($this->items as $value => $label) {
-            $data[] = ['value' => $value, 'label' => $label];
+        if (!$this->i18n) {
+            $event->sender->setAttribute($this->name, Json::decode($event->sender->getAttribute($this->name)));
+            return false;
         }
-        
-        return ['items' => $data];
+    
+        return true;
     }
-    */
+    
+    public function onBeforeFind($event)
+    {
+        if (!$this->i18n) {
+            $event->sender->setAttribute($this->name, Json::decode($event->sender->getAttribute($this->name)));
+            return false;
+        }
+    }
 }
