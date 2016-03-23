@@ -2,8 +2,6 @@
 
 namespace admin\base;
 
-use admin\models\Property as PropertyModel;
-
 /**
  * Abstract Page Property Class.
  * 
@@ -14,8 +12,6 @@ use admin\models\Property as PropertyModel;
 abstract class Property extends \yii\base\Component
 {
     const EVENT_BEFORE_RENDER = 'EVENT_BEFORE_RENDER';
-
-    const EVENT_BEFORE_FIND = 'EVENT_BEFORE_FIND';
 
     public $moduleName = null;
 
@@ -40,38 +36,5 @@ abstract class Property extends \yii\base\Component
     public function getValue()
     {
         return $this->value;
-    }
-
-    public function install()
-    {
-        $model = PropertyModel::find()->where(['var_name' => $this->varName()])->one();
-        if ($model) {
-            $model->setAttributes([
-                'module_name' => $this->moduleName,
-                //'type' => $this->type(),
-                //'label' => $this->label(),
-                //'option_json' => json_encode($this->options()),
-                //'default_value' => $this->defaultValue(),
-                'class_name' => static::className(),
-            ]);
-            $model->update(false);
-
-            return $model->id;
-        } else {
-            $model = new PropertyModel();
-            $model->setAttributes([
-                'var_name' => $this->varName(),
-                'module_name' => $this->moduleName,
-                //'type' => $this->type(),
-                //'label' => $this->label(),
-                //'option_json' => json_encode($this->options()),
-                //'default_value' => $this->defaultValue(),
-                'class_name' => static::className(),
-            ]);
-            $insert = $model->insert(false);
-            if ($insert) {
-                return $model->id;
-            }
-        }
     }
 }
