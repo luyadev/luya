@@ -245,15 +245,15 @@ $this->beginPage()
                         <i class="material-icons clickable" ng-click="toggleSelectionAll()">done_all</i>
                     </th>
                     <th></th>
-                    <th><?php echo Admin::t('layout_filemanager_col_name'); ?></th>
-                    <th><?php echo Admin::t('layout_filemanager_col_type'); ?></th>
-                    <th><?php echo Admin::t('layout_filemanager_col_date'); ?></th>
+                    <th><?php echo Admin::t('layout_filemanager_col_name'); ?><i ng-click="changeSortField('name')" ng-class="{'active-orderby' : sortField == 'name' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-name')" ng-class="{'active-orderby' : sortField == '-name' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
+                    <th><?php echo Admin::t('layout_filemanager_col_type'); ?><i ng-click="changeSortField('extension')" ng-class="{'active-orderby' : sortField == 'extension' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-extension')" ng-class="{'active-orderby' : sortField == '-extension' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
+                    <th><?php echo Admin::t('layout_filemanager_col_date'); ?><i ng-click="changeSortField('uploadTimestamp')" ng-class="{'active-orderby' : sortField == 'uploadTimestamp' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-uploadTimestamp')" ng-class="{'active-orderby' : sortField == '-uploadTimestamp' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
                 </tr>
                 </thead>
                 <tbody>
 
                 <!-- FILES -->
-                <tr ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages" class="filemanager__file" ng-class="{ 'clickable selectable' : allowSelection == 'false' }">
+                <tr ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages | orderBy:sortField" class="filemanager__file" ng-class="{ 'clickable selectable' : allowSelection == 'false' }">
                     <td ng-click="toggleSelection(file)" class="filemanager__checkox-column" ng-hide="allowSelection == 'true'">
                         <input type="checkbox" ng-checked="inSelection(file)" id="{{file.id}}" />
                         <label for="checked-status-managed-by-angular-{{file.id}}"></label>

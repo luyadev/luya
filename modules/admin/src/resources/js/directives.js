@@ -1254,6 +1254,12 @@
                 
                 // controller logic 
                 
+                $scope.sortField = 'name';
+                
+                $scope.changeSortField = function(name) {
+                	$scope.sortField = name;
+                }
+                
                 $scope.currentFolderId = 0;
                 
                 $scope.changeCurrentFolderId = function(folderId) {
