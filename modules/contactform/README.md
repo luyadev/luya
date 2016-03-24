@@ -1,16 +1,18 @@
-Contact Form Module
+LUYA CONTACT FORM MODULE
 ===================
 
-This module provides a very fast and secure way to create customizable contact forms:
+This module provides a very fast and secure way to create customizable contact forms.
 
-### install
+Installation
+----
 
-```json
-"luyadev/luya-module-contactform" : "1.0.0-beta5"
+Require the contact module via composer
+
+```sh
+composer require luyadev/luya-module-contactform
 ```
 
-
-### configure module
+add the contact form module to your config:
 
 ```php
 'modules' => [
@@ -42,7 +44,9 @@ To defined the attribute labels you can configure the module as followed:
 
 By default LUYA will wrap the value into the `Yii::t('app', $value)` functions so you are able to translate the attributes labels. The above exmaple would look like this `Yii::t('app', 'E-Mail')`.
 
-### create view file
+#### View Files
+
+Create the view file for the corresponding model data:
 
 ```php
 <?php
