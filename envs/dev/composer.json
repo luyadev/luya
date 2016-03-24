@@ -46,6 +46,7 @@
             "galleryadmin\\" : "../../modules/galleryadmin",
             "crawler\\" : "../../modules/crawler",
             "crawleradmin\\" : "../../modules/crawleradmin",
+            "contactform\\" : "../../modules/contactform",
             "moduletest\\" : "modules/moduletest",
             "styleguide\\" : "../../modules/styleguide",
             "exporter\\" : "../../modules/exporter",
