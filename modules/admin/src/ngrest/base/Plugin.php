@@ -66,8 +66,8 @@ abstract class Plugin extends Component
             throw new Exception("Plugin attributes id, name, alias, ngModel and i18n must be configured.");
         }
         
-        $this->addEvent(Model::EVENT_BEFORE_INSERT, 'onSave');
-        $this->addEvent(Model::EVENT_BEFORE_UPDATE, 'onSave');
+        $this->addEvent(Model::EVENT_BEFORE_VALIDATE, 'onSave');
+        //$this->addEvent(Model::EVENT_BEFORE_VALIDATE, 'onSave'); // before we have used BEFORE_INSERT & BEFORE_UPDATE events instead on before validate
         $this->addEvent(Model::EVENT_AFTER_FIND, 'onFind');
         $this->addEvent(Model::EVENT_AFTER_NGREST_FIND, 'onListFind');
         $this->addEvent(Model::EVENT_AFTER_NGREST_UPDATE_FIND, 'onExpandFind');

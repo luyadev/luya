@@ -77,7 +77,7 @@ abstract class Model extends \yii\db\ActiveRecord implements GenericSearchInterf
     }
 
     /**
-     * @TODO ATTENTION THIS IS NOT SECURE TO HIDE SENSITIVE DATA, TO HIDE SENSTIVIE DATA YOU ALWAYS HAVE TO OVERWRITE find()
+     * 
      */
     public static function ngRestFind()
     {
