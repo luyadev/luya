@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **BC BREAKS** See [UPGRADE.md](UPGRADE.md) as we have made some major changes.
 
+- `#809` Fixed bug in SoftDelete trait and renamed SoftDeleteValue() to FieldStateDescriber().
 - `#794` Added small anty spam function, added docs, added callback and nicer looking email for the contact form module.
 - `#808` Images without filter are not process by imagine anymore and get copied directly.
 - `#804` Fixed bug with wrong menu index generation.

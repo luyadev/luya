@@ -15,9 +15,7 @@ This document will help you upgrading from one LUYA Version into another
        - ['selectArray', 'data' => [1 => 'Male', 2 => 'Female']]
        - ['checkboxList', 'data' => [1 => 'Male', 2 => 'Female']]
        - ['checkboxRelation', 'model' => User::className(), 'refJoinTable' => 'admin_user_group', 'refModelPkId' => 'group_id', 'refJoinPkId' => 'user_id', 'labelFields' => ['firstname', 'lastname', 'email'], 'labelTemplate' =>  '%s %s (%s)']
-
 * `#758`: Due to replacement of twig, cms layout files must be a phpfile instead of a twig file. The following file `main.twig` would be new `main.php`, file content compare:
-
   old:
   ```twig
   <div>{{placeholders.content}}</div>
@@ -27,20 +25,17 @@ This document will help you upgrading from one LUYA Version into another
   ```php
   <div><?= $placeholders['content']; ?></div>
   ```
-
 * `#771`: As we have removed the LUYA module as module and use it as library you have to remove the `luya\Module` in your application. But when you are using the *CMS-Module* you must [bootstrap](http://www.yiiframework.com/doc-2.0/guide-runtime-bootstrapping.html) it instead, by adding a new entry in your application config settings:
   ```php
   'bootstrap' => [
       'cms',
   ],
   ```
-
+* `#809`: Soft delete admin trait public static method `SoftDeleteValues` has ben renamed to `FieldStateDescriber`.
 * `#791`: As we removed the LUYA module, the luya core library is now availabel trough the composer package `luyadev/luya-core` instead of using `zephir/luya`. You can also remove the luya composer package from your require section as it should be defined as dependencie of the modules.
-
 * `#780`: In terms of Yii2 controller view render behavior consistency:
   - removed `$useModuleViewPath` property of `luya\web\Controller`.
   - removed `$controllerUseModuleViewPath` property of `luya\base\Module` replaced with `$useAppViewPath`.
-
 * `#777` The suffix (ActiveWindow) is now removed from the folders where the view files are located:
   - before: `MyTestActiveWindow` folder for view files: `views/<locator>/mytestactivewindow`
   - after: `MyTestActiveWindow` folder for view files: `views/<locator>/mytest`.
