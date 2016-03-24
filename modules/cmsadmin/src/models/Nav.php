@@ -53,40 +53,24 @@ class Nav extends \yii\db\ActiveRecord
         return $this->hasMany(NavItem::className(), ['nav_id' => 'id']);
     }
 
+    private $_properties = null;
+    
     public function getProperties()
     {
-        return CmsProperty::find()->where(['nav_id' => $this->id])->leftJoin('admin_property',
-            'admin_prop_id=admin_property.id')->select([
-            'cms_nav_property.*',
-            'admin_property.module_name',
-            'admin_property.class_name',
-            'admin_property.var_name'
-        ])->asArray()->all();
+        if ($this->_properties === null) {
+            $this->_properties = CmsProperty::find()->where(['nav_id' => $this->id])->with('adminProperty')->all();
+        }
+        
+        return $this->_properties;
     }
-
-    /*
     public function getProperty($varName)
     {
-        $value = CmsProperty::find()->where(['nav_id' => $this->id])->leftJoin('admin_property', 'admin_prop_id=admin_property.id')->select(['cms_nav_property.value'])->andWhere(['admin_property.var_name' => $varName])->asArray()->one();
-        if ($value) {
-            return $value['value'];
-        } else {
-            return false;
+        foreach ($this->getProperties() as $prop) {
+            if ($prop->adminProperty->var_name == $varName) {
+                return $prop->getObject();
+            }
         }
-    }
-    */
-    public function getProperty($varName)
-    {
-        $value = CmsProperty::find()->where(['nav_id' => $this->id])->leftJoin('admin_property',
-            'admin_prop_id=admin_property.id')->select([
-            'cms_nav_property.value',
-            'admin_property.class_name'
-        ])->andWhere(['admin_property.var_name' => $varName])->asArray()->one();
-
-        if ($value) {
-            return AdminProperty::getObject($value['class_name'], $value['value']);
-        }
-
+        
         return false;
     }
 

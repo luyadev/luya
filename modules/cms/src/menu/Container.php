@@ -8,6 +8,7 @@ use ArrayAccess;
 use yii\web\NotFoundHttpException;
 use yii\db\Query as DbQuery;
 use cms\menu\Query as MenuQuery;
+use cmsadmin\models\NavItemModule;
 
 /**
  * Menu container component by language.
@@ -108,6 +109,8 @@ class Container extends \yii\base\Component implements ArrayAccess
     private $_languages = null;
 
     private $_redirectMap = null;
+    
+    private $_modulesMap = null;
     
     /**
      * Class constructor to DI the request object.
@@ -454,6 +457,20 @@ class Container extends \yii\base\Component implements ArrayAccess
     public function buildItemLink($alias, $langShortCode)
     {
         return Yii::$app->getUrlManager()->prependBaseUrl($this->composition->prependTo($alias, $this->composition->createRouteEnsure(['langShortCode' => $langShortCode])));
+    }
+    
+    /**
+     * Return all nav item modules to request data later in items
+     * 
+     * @return array An array with all modules index by the id
+     */
+    public function getModulesMap()
+    {
+        if ($this->_modulesMap === null) {
+            $this->_modulesMap = NavItemModule::find()->select(['module_name', 'id'])->indexBy('id')->asArray()->all();
+        }
+        
+        return $this->_modulesMap;
     }
 
     /**

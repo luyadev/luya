@@ -32,8 +32,8 @@ abstract class Controller extends \luya\web\Controller
         $props = [];
         
         foreach(Yii::$app->page->getProperties() as $prop) {
-            $o = Yii::$app->page->model->getNav()->getProperty($prop['var_name']);
-            $props[] = ['label' => $o->label(), 'value' => Yii::$app->page->getProperty($prop['var_name'])];
+            $o = $prop->getObject();
+            $props[] = ['label' => $o->label(), 'value' => $o->getValue()];
         }
         
         echo $view->renderPhpFile($folder . '/views/_toolbar.php', [
@@ -50,7 +50,7 @@ abstract class Controller extends \luya\web\Controller
     
     public function renderItem($navItemId, $appendix = null)
     {
-        $model = NavItem::findOne($navItemId);
+        $model = NavItem::find()->where(['id' => $navItemId])->with('nav')->one();
 
         if (!$model) {
             throw new NotFoundHttpException('The requested nav item could not found.');
@@ -65,8 +65,11 @@ abstract class Controller extends \luya\web\Controller
 
         $event = new \cms\events\BeforeRenderEvent();
         $event->menu = Yii::$app->menu->current;
-        foreach ($model->getNav()->getProperties() as $property) {
-            $object = $model->getNav()->getProperty($property['var_name']);
+        foreach ($model->nav->getProperties() as $property) {
+            //$object = $model->getNav()->getProperty($property['var_name']);
+            
+            $object = $property->getObject();
+            
             $object->trigger($object::EVENT_BEFORE_RENDER, $event);
             if (!$event->isValid) {
                 throw new MethodNotAllowedHttpException('Your are not allowed to see this page.');
@@ -80,8 +83,9 @@ abstract class Controller extends \luya\web\Controller
             'navItemId' => $navItemId,
             'restString' => $appendix,
         ]);
-
+        
         $content = $typeModel->getContent();
+        
         
         if ($content instanceof Response) {
             return Yii::$app->end(0, $content);
@@ -106,7 +110,6 @@ abstract class Controller extends \luya\web\Controller
         if ($this->module->enableTagParsing) {
             $content = Parser::encode($content);
         }
-
         return $content;
     }
 }

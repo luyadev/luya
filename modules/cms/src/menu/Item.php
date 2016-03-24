@@ -5,7 +5,6 @@ namespace cms\menu;
 use Yii;
 use Exception;
 use admin\models\User;
-use cmsadmin\models\NavItemModule;
 
 /**
  * Menu item Object.
@@ -155,9 +154,8 @@ class Item extends \yii\base\Object
     public function getModuleName()
     {
         if ($this->getType() === 2) {
-            $module = NavItemModule::find()->select(['module_name'])->where(['id' => $this->itemArray['nav_item_type_id']])->asArray()->one();
-            if ($module) {
-                return $module['module_name'];
+            if (isset($this->itemArray['nav_item_type_id'], Yii::$app->menu->modulesMap)) {
+                return Yii::$app->menu->modulesMap[$this->itemArray['nav_item_type_id']]['module_name'];
             }
         }
         

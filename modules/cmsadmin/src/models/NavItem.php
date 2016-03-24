@@ -109,7 +109,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
 
     public function getNav()
     {
-        return Nav::find()->where(['id' => $this->nav_id])->one();
+        return $this->hasOne(Nav::className(), ['id' => 'nav_id']);
     }
 
     public function getContent()
