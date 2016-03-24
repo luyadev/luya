@@ -53,6 +53,7 @@
             "frontendgroup\\" : "../../modules/frontendgroup",
             "remoteadmin\\" : "../../modules/remoteadmin",
             "payment\\" : "../../../luya-module-payment/src",
+            "basicauth\\" : "../../../luya-module-basicauth/src",
             "ngresttest\\" : "modules/ngresttest"
         }
     }
