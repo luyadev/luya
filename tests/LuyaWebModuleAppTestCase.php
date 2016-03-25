@@ -5,8 +5,8 @@ namespace luyatests;
 use Yii;
 use luyatests\LuyaTestCaseInterface;
 
-require __DIR__.'/../vendor/autoload.php';
-require __DIR__.'/data/env.php';
+require 'vendor/autoload.php';
+require 'data/env.php';
 
 class LuyaWebModuleAppTestCase extends \PHPUnit_Framework_TestCase implements LuyaTestCaseInterface
 {
