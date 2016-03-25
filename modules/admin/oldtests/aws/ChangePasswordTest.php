@@ -1,10 +1,11 @@
 <?php
 
-namespace tests\web\admin\aws;
+namespace tests\admin\aws;
 
 use Yii;
+use admintests\AdminTestCase;
 
-class ChangePasswordTest extends \tests\web\Base
+class ChangePasswordTest extends AdminTestCase
 {
     public $aws = null;
 

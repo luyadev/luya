@@ -1,8 +1,10 @@
 <?php
 
-namespace tests\web\admin\ngrest;
+namespace admintests\admin\ngrest;
 
-class ConfigTest extends \tests\web\Base
+use admintests\AdminTestCase;
+
+class ConfigTest extends AdminTestCase
 {
     /**
      * @expectedException Exception

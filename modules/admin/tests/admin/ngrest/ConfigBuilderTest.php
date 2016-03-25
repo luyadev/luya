@@ -1,10 +1,11 @@
 <?php
 
-namespace tests\web\admin\ngrest;
+namespace admintests\admin\ngrest;
 
 use Yii;
+use admintests\AdminTestCase;
 
-class ConfigBuilderTest extends \tests\web\Base
+class ConfigBuilderTest extends AdminTestCase
 {
     private function getConfig()
     {
@@ -42,17 +43,16 @@ class ConfigBuilderTest extends \tests\web\Base
         $this->assertArrayHasKey('name', $testvar);
         $this->assertArrayHasKey('i18n', $testvar);
         $this->assertArrayHasKey('alias', $testvar);
-        $this->assertArrayHasKey('plugins', $testvar);
+        $this->assertArrayHasKey('type', $testvar);
         $this->assertArrayHasKey('i18n', $testvar);
         $this->assertArrayHasKey('extraField', $testvar);
 
-        $plugins = $testvar['plugins'];
+        $plugin = $testvar['type'];
 
-        $this->assertArrayHasKey(0, $plugins);
-        $this->assertArrayHasKey('class', $plugins[0]);
-        $this->assertArrayHasKey('args', $plugins[0]);
+        $this->assertArrayHasKey('class', $plugin);
+        $this->assertArrayHasKey('args', $plugin);
         // check if args
-        $this->assertEquals('\admin\ngrest\plugins\Textarea', $plugins[0]['class']);
+        $this->assertEquals('\admin\ngrest\plugins\Textarea', $plugin['class']);
         // text extraField = 1
         $this->assertEquals(1, $create['create_extra_var_2']['extraField']);
     }
@@ -85,12 +85,6 @@ class ConfigBuilderTest extends \tests\web\Base
         $plugins = $ngRest->getPlugins();
 
         $this->assertEquals(4, count($plugins));
-        $this->assertEquals(1, count($plugins['create_var_1']));
-
-        $plugins = $ngRest->plugins;
-
-        $this->assertEquals(4, count($plugins));
-        $this->assertEquals(1, count($plugins['create_var_1']));
     }
 
     public function testNgRestConfigExtraFields()
