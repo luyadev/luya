@@ -3,11 +3,12 @@
 namespace luyatests;
 
 use Yii;
+use luyatests\LuyaTestCaseInterface;
 
 require __DIR__.'/../vendor/autoload.php';
 require __DIR__.'/data/env.php';
 
-class LuyaConsoleTestCase extends \PHPUnit_Framework_TestCase
+class LuyaConsoleTestCase extends \PHPUnit_Framework_TestCase implements LuyaTestCaseInterface
 {
     public $app = null;
 
@@ -15,12 +16,17 @@ class LuyaConsoleTestCase extends \PHPUnit_Framework_TestCase
     {
         $this->mockApp();
     }
+    
+    public function getConfigFile()
+    {
+    	return  __DIR__ .'/data/configs/console.php';
+    }
 
     public function mockApp()
     {
         if ($this->app === null) {
             $this->app = new \luya\Boot();
-            $this->app->configFile = __DIR__ .'/data/configs/console.php';
+            $this->app->configFile = $this->getConfigFile();
             $this->app->mockOnly = true;
             $this->app->setYiiPath(__DIR__.'/../vendor/yiisoft/yii2/Yii.php');
             $this->app->applicationConsole();
