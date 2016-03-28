@@ -5,6 +5,7 @@ namespace cmsadmin\base;
 use Yii;
 use yii\helpers\Inflector;
 use luya\helpers\Url;
+use cmsadmin\blockfolders\BaseFolder;
 
 /**
  * Base class for all CMS Blocks.
@@ -56,6 +57,11 @@ abstract class Block extends \yii\base\Object implements BlockInterface
      */
     public $assets = [];
 
+    public function getBlockFolder()
+    {
+    	return BaseFolder::className();
+    }
+    
     /**
      * Return link for usage in ajax request, the link will call the defined callback inside
      * this block. All callback methods must start with `callback`. An example for a callback method:.
