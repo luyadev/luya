@@ -16,6 +16,14 @@ The [Yii 2](https://github.com/yiisoft/yii2) wrapper which provides out of the b
 
 **We have moved all repositories to the new HQ of LUYA, `luyadev` instead of `zephir`. In order to update your packages, remove `zephir` and replace with `luyadev` in your composer require section. The old packages will still work for a while.**
 
+#### ROADMAP
+
++ beta6 release (April 2016)
++ beta7 release (May 2016)
++ rc1 release (June 2016)
++ rc2 release (July 2016)
++ version 1.0.0 (August 2016)
+
 ### Installation
 
 We have a made an absolut easy to understand *STEP-BY-STEP* Guide to install LUYA:
