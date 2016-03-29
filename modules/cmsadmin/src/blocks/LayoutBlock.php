@@ -3,6 +3,7 @@
 namespace cmsadmin\blocks;
 
 use cmsadmin\Module;
+use cmsadmin\blockgroups\LayoutGroup;
 
 class LayoutBlock extends \cmsadmin\base\Block
 {
@@ -66,5 +67,10 @@ class LayoutBlock extends \cmsadmin\base\Block
     public function twigAdmin()
     {
         return '';
+    }
+    
+    public function getBlockGroup()
+    {
+        return LayoutGroup::className();
     }
 }

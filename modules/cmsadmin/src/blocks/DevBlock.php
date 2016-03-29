@@ -3,6 +3,7 @@
 namespace cmsadmin\blocks;
 
 use cmsadmin\Module;
+use cmsadmin\blockgroups\DevelopmentGroup;
 
 class DevBlock extends \cmsadmin\base\Block
 {
@@ -32,5 +33,10 @@ class DevBlock extends \cmsadmin\base\Block
     public function twigAdmin()
     {
         return '';
+    }
+    
+    public function getBlockGroup()
+    {
+        return DevelopmentGroup::className();
     }
 }
