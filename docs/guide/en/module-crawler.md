@@ -5,10 +5,10 @@ An easy to use page crawler to make an internal search field on your page. The c
 
 ### Install
 
-Add to composer json:
+Add composer package:
 
-```
-"luyadev/luya-module-crawler" : "dev-master"
+```sh
+composer require luyadev/luya-module-crawler
 ```
 
 Add the module to your configuration

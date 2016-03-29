@@ -4,10 +4,10 @@ News Modul
 Installieren
 ------------
 
-News via Composer-Require beindung hinzufügen:
+News via Composer einbinden:
 
 ```
-"luyadev/luya-module-news" : "dev-master"
+composer require luyadev/luya-module-news
 ```
 
 Um das News Module einzufügen gibts du folgende konfiguration an:

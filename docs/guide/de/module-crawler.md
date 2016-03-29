@@ -3,11 +3,12 @@ Seiten Crawler
 
 *(since 1.0.0-alpha13 release)*
 
-Crawler via Composer-Require beindung hinzufügen:
+Crawler via über composer einbinden:
 
+```sh
+composer require luyadev/luya-module-crawler
 ```
-"luyadev/luya-module-crawler" : "dev-master"
-```
+
 
 Um das Cralwer Module einzufügen gibts du folgende konfiguration an:
 
