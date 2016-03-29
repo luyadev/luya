@@ -16,30 +16,44 @@ class BlockGroup extends \admin\ngrest\base\Model
         return 'cms_block_group';
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'name' => 'Name',
+            'identifer' => 'Identifier',
+        ];
+    }
+    
+    public function ngrestAttributeTypes()
+    {
+        return [
+            'name' => 'text',
+            'identifier' => 'text',
+        ];
+    }
+    
     public function ngRestConfig($config)
     {
         $config->delete = true;
-
-        $config->list->field('name', 'Name')->text();
-
-        $config->create->copyFrom('list', ['id']);
-        $config->update->copyFrom('list', ['id']);
-
+        
+        $this->ngRestConfigDefine($config, ['list', 'create', 'update'], ['name', 'identifier']);
+        
         return $config;
     }
 
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name', 'identifier'], 'required'],
+            ['identifier', 'unique'],
         ];
     }
 
     public function scenarios()
     {
         return [
-            'restcreate' => ['name'],
-            'restupdate' => ['name'],
+            'restcreate' => ['name', 'identifier'],
+            'restupdate' => ['name', 'identifier'],
         ];
     }
 }

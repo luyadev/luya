@@ -17,17 +17,27 @@ class Block extends \admin\ngrest\base\Model
     {
         return 'cms_block';
     }
+    
+    public function ngrestAttributeTypes()
+    {
+        return [
+            'group_id' => ['selectModel', 'modelClass' => BlockGroup::className(), 'valueField' => 'id', 'labelField' => 'name'],
+            'class' => 'text',
+        ];
+    }
+    
+    public function attributeLabels()
+    {
+        return [
+            'group_id' => 'Group',
+            'class' => 'Object Class',
+        ];
+    }
 
     public function ngRestConfig($config)
     {
-        $config->list->field('class', 'Class')->text();
-        $config->list->field('group_id', 'Gruppe')->selectModel(['modelClass' => BlockGroup::className(), 'valueField' => 'id', 'labelField' => 'name']);;
-
-        $config->create->field('class', 'Class')->text();
-        $config->create->field('group_id', 'Gruppe')->selectModel(['modelClass' => BlockGroup::className(), 'valueField' => 'id', 'labelField' => 'name']);
-
-        $config->update->copyFrom('create');
-
+        $this->ngRestConfigDefine($config, ['list'], ['group_id', 'class']);
+        
         return $config;
     }
 
@@ -41,9 +51,9 @@ class Block extends \admin\ngrest\base\Model
     public function scenarios()
     {
         return [
-            'commandinsert' => ['class', 'system_block', 'group_id'],
-            'restcreate' => ['class', 'group_id', 'system_block'],
-            'restupdate' => ['class', 'group_id', 'system_block'],
+            'commandinsert' => ['class', 'group_id'],
+            'restcreate' => ['class', 'group_id'],
+            'restupdate' => ['class', 'group_id'],
         ];
     }
 

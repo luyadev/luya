@@ -10,7 +10,6 @@ class m150108_154017_cms_block extends Migration
         $this->createTable('cms_block', [
             'id' => 'pk',
             'group_id' => Schema::TYPE_INTEGER,
-            'system_block' => Schema::TYPE_INTEGER,
             'class' => Schema::TYPE_STRING,
         ]);
     }

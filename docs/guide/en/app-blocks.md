@@ -183,3 +183,48 @@ You could store this created link from above inside your extras vars and pass it
 ### Callback parameters
 
 You can pass aditional values to the callback by using the post ajax method and collect them in your callback via Yii::$app->request->post(). The get parameters are used to resolve the callback.
+
+
+Block Groups
+============
+
+> since 1.0.0-beta6
+
+We have added the ability to manage the block groups via classes, so you can add new groups on your blocks can depend on a block group, when you run the import command luya will create the folders (block groups) and add/update the blocks into the provided groups.
+
+To add new blockgroups create folder in your `@app` namespace, or inside a module with the name `blockgroups`, to add a folder create class like this `app\blockgroups\MySuperGroup`:
+
+```
+<?php
+
+namespace app\blockgroups;
+
+class MySuperGroup extends \cmsadmin\base\BlockGroup
+{
+    public function identifier()
+    {
+        return 'my-super-group';
+    }
+    
+    public function label()
+    {
+        return 'My Super Group Elements';
+    }
+}
+```
+
+the folder will be created on import. Now blocks can belong to this folder, to do so override the `getBlockGroup` method of your block:
+
+```
+public function getBlockGroup()
+{
+    return \app\blocksgroups\MySuperGroup::className();
+}
+```
+
+You can also use one of the predefined group block class:
+
++ `\cmsadmin\blockgroups\MainGroup::className()` (this is default group for all blocks)
++ `\cmsadmin\blockgroups\LayoutGroup::className()`
++ `\cmsadmin\blockgroups\ProjectGroup::className()`
++ `\cmsadmin\blockgroups\DevelopmentGroup::className()`

@@ -12,7 +12,7 @@ class ImportController extends \luya\console\Command implements \luya\console\in
 
     private $_log = [];
 
-    private $_scanFolders = ['blocks', 'filters', 'properties'];
+    private $_scanFolders = ['blocks', 'filters', 'properties', 'blockgroups'];
 
     public function init()
     {

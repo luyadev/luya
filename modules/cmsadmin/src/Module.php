@@ -69,6 +69,7 @@ class Module extends \admin\base\Module
     public function import(\luya\console\interfaces\ImportController $import)
     {
         return [
+            '\\cmsadmin\\importers\\BlockGroupImporter',
             '\\cmsadmin\\importers\\BlockImporter',
             '\\cmsadmin\\importers\\CmslayoutImporter',
             '\\cmsadmin\\importers\\PropertyConsistencyImporter',

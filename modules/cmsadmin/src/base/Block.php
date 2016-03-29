@@ -5,7 +5,7 @@ namespace cmsadmin\base;
 use Yii;
 use yii\helpers\Inflector;
 use luya\helpers\Url;
-use cmsadmin\blockfolders\BaseFolder;
+use cmsadmin\blockgroups\MainGroup;
 
 /**
  * Base class for all CMS Blocks.
@@ -57,9 +57,15 @@ abstract class Block extends \yii\base\Object implements BlockInterface
      */
     public $assets = [];
 
-    public function getBlockFolder()
+    /**
+     * Contains the class name for the block group class
+     * 
+     * @return string The classname on which the block should be stored in.
+     * @since 1.0.0-beta6
+     */
+    public function getBlockGroup()
     {
-    	return BaseFolder::className();
+    	return MainGroup::className();
     }
     
     /**

@@ -501,7 +501,6 @@ CREATE TABLE IF NOT EXISTS `admin_user_online` (
 CREATE TABLE IF NOT EXISTS `cms_block` (
   `id` int(11) NOT NULL,
   `group_id` int(11) DEFAULT NULL,
-  `system_block` int(11) DEFAULT NULL,
   `class` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
@@ -510,33 +509,33 @@ CREATE TABLE IF NOT EXISTS `cms_block` (
 --
 
 INSERT INTO `cms_block` (`id`, `group_id`, `system_block`, `class`) VALUES
-(1, 1, 0, '\\cmsadmin\\blocks\\AudioBlock'),
-(2, 1, 0, '\\cmsadmin\\blocks\\DevBlock'),
-(3, 1, 0, '\\cmsadmin\\blocks\\FileListBlock'),
-(4, 1, 0, '\\cmsadmin\\blocks\\FormBlock'),
-(5, 1, 0, '\\cmsadmin\\blocks\\HtmlBlock'),
-(6, 1, 0, '\\cmsadmin\\blocks\\ImageBlock'),
-(7, 1, 0, '\\cmsadmin\\blocks\\ImageTextBlock'),
-(8, 1, 0, '\\cmsadmin\\blocks\\LayoutBlock'),
-(9, 1, 0, '\\cmsadmin\\blocks\\LineBlock'),
-(10, 1, 0, '\\cmsadmin\\blocks\\LinkButtonBlock'),
-(11, 1, 0, '\\cmsadmin\\blocks\\ListBlock'),
-(12, 1, 0, '\\cmsadmin\\blocks\\MapBlock'),
-(13, 1, 0, '\\cmsadmin\\blocks\\ModuleBlock'),
-(14, 1, 0, '\\cmsadmin\\blocks\\QuoteBlock'),
-(15, 1, 0, '\\cmsadmin\\blocks\\SpacingBlock'),
-(16, 1, 0, '\\cmsadmin\\blocks\\TableBlock'),
-(17, 1, 0, '\\cmsadmin\\blocks\\TextBlock'),
-(18, 1, 0, '\\cmsadmin\\blocks\\TitleBlock'),
-(19, 1, 0, '\\cmsadmin\\blocks\\VideoBlock'),
-(20, 1, 0, '\\cmsadmin\\blocks\\WysiwygBlock'),
-(21, 1, 0, '\\newsadmin\\blocks\\LatestNews'),
-(22, 1, 0, '\\galleryadmin\\blocks\\GalleryAlbum'),
-(23, 1, 0, '\\app\\blocks\\AjaxBlock'),
-(24, 1, 0, '\\app\\blocks\\ImageListTestBlock'),
-(25, 1, 0, '\\app\\blocks\\ImageNoFilterBlock'),
-(26, 1, 0, '\\app\\blocks\\TestBlock'),
-(27, 1, 0, '\\app\\blocks\\WellBlock');
+(1, 1,'\\cmsadmin\\blocks\\AudioBlock'),
+(2, 1,'\\cmsadmin\\blocks\\DevBlock'),
+(3, 1,'\\cmsadmin\\blocks\\FileListBlock'),
+(4, 1,'\\cmsadmin\\blocks\\FormBlock'),
+(5, 1,'\\cmsadmin\\blocks\\HtmlBlock'),
+(6, 1,'\\cmsadmin\\blocks\\ImageBlock'),
+(7, 1,'\\cmsadmin\\blocks\\ImageTextBlock'),
+(8, 1,'\\cmsadmin\\blocks\\LayoutBlock'),
+(9, 1,'\\cmsadmin\\blocks\\LineBlock'),
+(10, 1,'\\cmsadmin\\blocks\\LinkButtonBlock'),
+(11, 1,'\\cmsadmin\\blocks\\ListBlock'),
+(12, 1,'\\cmsadmin\\blocks\\MapBlock'),
+(13, 1,'\\cmsadmin\\blocks\\ModuleBlock'),
+(14, 1,'\\cmsadmin\\blocks\\QuoteBlock'),
+(15, 1,'\\cmsadmin\\blocks\\SpacingBlock'),
+(16, 1,'\\cmsadmin\\blocks\\TableBlock'),
+(17, 1,'\\cmsadmin\\blocks\\TextBlock'),
+(18, 1,'\\cmsadmin\\blocks\\TitleBlock'),
+(19, 1,'\\cmsadmin\\blocks\\VideoBlock'),
+(20, 1,'\\cmsadmin\\blocks\\WysiwygBlock'),
+(21, 1,'\\newsadmin\\blocks\\LatestNews'),
+(22, 1,'\\galleryadmin\\blocks\\GalleryAlbum'),
+(23, 1,'\\app\\blocks\\AjaxBlock'),
+(24, 1,'\\app\\blocks\\ImageListTestBlock'),
+(25, 1,'\\app\\blocks\\ImageNoFilterBlock'),
+(26, 1,'\\app\\blocks\\TestBlock'),
+(27, 1,'\\app\\blocks\\WellBlock');
 
 -- --------------------------------------------------------
 
