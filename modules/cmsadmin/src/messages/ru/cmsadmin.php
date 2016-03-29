@@ -313,4 +313,5 @@ return [
     'block_layout_right_column_css_class' => 'CSS classes for right column',
     
     'js_page_block_delete_confirm' => 'Are you sure you want to remove the block «%name%»?',
+    'view_index_page_meta_keywords' => 'Keywords for SEO analytics (Example: restaurant, pizza, italy)'
 ];

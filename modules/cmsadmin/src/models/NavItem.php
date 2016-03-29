@@ -62,7 +62,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     {
         return [
             [['lang_id', 'title', 'alias', 'nav_item_type'], 'required'],
-            [['nav_id', 'description'], 'safe'],
+            [['nav_id', 'description', 'keywords'], 'safe'],
         ];
     }
 
@@ -77,7 +77,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     public function scenarios()
     {
         return [
-            'default' => ['title', 'alias', 'nav_item_type', 'nav_id', 'lang_id', 'description'],
+            'default' => ['title', 'alias', 'nav_item_type', 'nav_id', 'lang_id', 'description', 'keywords'],
         ];
     }
 

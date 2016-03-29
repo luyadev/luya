@@ -385,6 +385,14 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="input input--text col s12">
+                                    <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_meta_keywords'); ?></label>
+                                    <div class="input__field-wrapper">
+                                        <textarea class="input__field validate" ng-model="itemCopy.keywords"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="input input--radios col s12">
                                     <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_add_type'); ?></label>
                                     <div class="input__field-wrapper">

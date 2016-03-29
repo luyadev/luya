@@ -172,6 +172,36 @@ class Item extends \yii\base\Object
         return $this->itemArray['description'];
     }
 
+    private $_keywords = null;
+    
+    private $_delimiters = [',', ';', ' ', '|'];
+    
+    /**
+     * @return array An array with all keywords for this page
+     * @since 1.0.0-beta6
+     */
+    public function getKeywords()
+    {
+        if ($this->_keywords === null) {
+            
+            if (empty($this->itemArray['keywords'])) {
+                $this->_keywords = [];
+            } else {
+                
+                $keywords = [];
+                foreach(explode($this->_delimiters[0], str_replace($this->_delimiters, $this->_delimiters[0], $this->itemArray['keywords'])) as $name) {
+                    if (!empty($name)) {
+                        $keywords[] = trim($name);
+                    }
+                }
+                
+                $this->_keywords = $keywords;
+            }
+        }
+        
+        return $this->_keywords;
+    }
+    
     /**
      * Returns the current alias name of the item (identifier for the url)
      * also (& previous) called rewrite.

@@ -271,6 +271,18 @@ class Container extends \yii\base\Component implements ArrayAccess
     }
 
     /**
+     * Ability to override the current item in order to make real preview urls (as when resolver does
+     * not work of changed urls).
+     * 
+     * @param \cms\menu\Item $item The current item object
+     * @since 1.0.0-beta6
+     */
+    public function setCurrent(\cms\menu\Item $item)
+    {
+        $this->_current = $item;
+    }
+    
+    /**
      * Get the current menu item resolved by active language (from composition).
      * 
      * @return \cms\menu\Item An item-object for the current active item.
@@ -481,7 +493,7 @@ class Container extends \yii\base\Component implements ArrayAccess
     private function getNavData($langId)
     {
         return (new DbQuery())->from(['cms_nav_item item'])
-        ->select(['item.id', 'item.nav_id', 'item.title', 'item.description', 'item.alias', 'item.timestamp_create', 'item.timestamp_update', 'item.create_user_id', 'item.update_user_id', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'nav_container.alias AS container'])
+        ->select(['item.id', 'item.nav_id', 'item.title', 'item.description', 'item.keywords', 'item.alias', 'item.timestamp_create', 'item.timestamp_update', 'item.create_user_id', 'item.update_user_id', 'nav.is_home', 'nav.parent_nav_id', 'nav.sort_index', 'nav.is_hidden', 'item.nav_item_type', 'item.nav_item_type_id', 'nav_container.alias AS container'])
         ->leftJoin('cms_nav nav', 'nav.id=item.nav_id')
         ->leftJoin('cms_nav_container nav_container', 'nav_container.id=nav.nav_container_id')
         ->where(['nav.is_deleted' => 0, 'item.lang_id' => $langId, 'nav.is_offline' => 0, 'nav.is_draft' => 0])
@@ -583,6 +595,7 @@ class Container extends \yii\base\Component implements ArrayAccess
                     'title' => $item['title'],
                     'alias' => $alias,
                     'description' => $item['description'],
+                    'keywords' => $item['keywords'],
                     'create_user_id' => $item['create_user_id'],
                     'update_user_id' => $item['update_user_id'],
                     'timestamp_create' => $item['timestamp_create'],

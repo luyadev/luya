@@ -36,11 +36,14 @@ abstract class Controller extends \luya\web\Controller
             $props[] = ['label' => $o->label(), 'value' => $o->getValue()];
         }
         
+        $menu = Yii::$app->menu;
+        
         echo $view->renderPhpFile($folder . '/views/_toolbar.php', [
-            'menu' => Yii::$app->menu,
+            'menu' => $menu,
             'composition' => Yii::$app->composition,
             'luyaTagParsing' => $event->sender->context->module->enableTagParsing,
             'properties' => $props,
+            'content' => strip_tags(NavItem::findOne($menu->current->id)->getContent()),
         ]);
         // echo is used in order to support cases where asset manager is not available
         echo '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';

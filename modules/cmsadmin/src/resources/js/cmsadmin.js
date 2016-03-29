@@ -854,6 +854,7 @@
 			typeDataCopy.title = itemCopy.title;
 			typeDataCopy.alias = itemCopy.alias;
 			typeDataCopy.description = itemCopy.description;
+			typeDataCopy.keywords = itemCopy.keywords;
 			$http.post(
 				'admin/api-cms-navitem/update-page-item?navItemId=' + navItemId + '&navItemType=' + itemCopy.nav_item_type + '&navItemTypeId=' + itemCopy.nav_item_type_id,
 				$.param(typeDataCopy),

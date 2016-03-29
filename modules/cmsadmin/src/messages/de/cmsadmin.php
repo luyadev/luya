@@ -319,5 +319,6 @@ return [
     'block_layout_right_column_css_class' => 'CSS-Klassen für rechte Spalte',
     
     'js_page_block_delete_confirm' => 'Block «%name%» wirklich löschen?',
+    'view_index_page_meta_keywords' => 'Keywords für SEO analytics (Beispiel: restaurant, pizza, italy)'
 
 ];

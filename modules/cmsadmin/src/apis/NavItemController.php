@@ -145,6 +145,7 @@ class NavItemController extends \admin\base\RestController
         $model->title = Yii::$app->request->post('title', false);
         $model->alias = Yii::$app->request->post('alias', false);
         $model->description = Yii::$app->request->post('description', null);
+        $model->keywords = Yii::$app->request->post('keywords');
 
         if ((!$model->validate()) || (!$model->save())) {
             return $this->sendModelError($model);

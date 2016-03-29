@@ -21,6 +21,9 @@ class PreviewController extends \cms\base\Controller
 
         $item = Yii::$app->menu->find()->where(['id' => $itemId])->with('hidden')->lang($langShortCode)->one();
 
+        // set the current item, as it would be resolved wrong from the url manager / request path
+        Yii::$app->menu->current = $item;
+        
         if (!$item) {
             throw new NotFoundHttpException("Unable to find item id $itemId");
         }
