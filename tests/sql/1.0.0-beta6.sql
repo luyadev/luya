@@ -508,7 +508,7 @@ CREATE TABLE IF NOT EXISTS `cms_block` (
 -- Dumping data for table `cms_block`
 --
 
-INSERT INTO `cms_block` (`id`, `group_id`, `system_block`, `class`) VALUES
+INSERT INTO `cms_block` (`id`, `group_id`, `class`) VALUES
 (1, 1,'\\cmsadmin\\blocks\\AudioBlock'),
 (2, 1,'\\cmsadmin\\blocks\\DevBlock'),
 (3, 1,'\\cmsadmin\\blocks\\FileListBlock'),
