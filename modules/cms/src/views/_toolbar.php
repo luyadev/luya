@@ -128,7 +128,7 @@ if (!empty($menu->current->keywords)) {
                 	<? else: ?>
                 		<ul class="luya-cms-toolbar__no-bullets">
                 			<? foreach($keywords as $keyword): ?>
-                			 <li><span class="luya-cms-toolbar__badge<?= $keyword[1] > 0 ? ' luya-cms-toolbar__badge--success' : ' luya-cms-toolbar__badge--danger'  ?>"><?= $keyword[1]; ?></span> <?= $keyword[0]; ?></li>
+                			 <li><span class="luya-cms-toolbar__badge<?= $keyword[1] > 0 ? ' luya-cms-toolbar__badge--success' : ' luya-cms-toolbar__badge--danger'  ?>"><?= $keyword[1]; ?></span> <span><?= $keyword[0]; ?></span></li>
                 			<? endforeach; ?>
                 		</ul>
                 	<? endif; ?>
@@ -176,6 +176,7 @@ if (!empty($menu->current->keywords)) {
     <div class="luya-cms-toolbar-container__toggler">
         <a href="javascript:void(0);" onclick="toggleLuyaToolbar()">
             <i class="material-icons luya-cms-toolbar__arrow">keyboard_arrow_down</i>
+            <div class="luya-cms-toolbar-container__toggler-badge">!</div>
         </a>
     </div>
 </div>
