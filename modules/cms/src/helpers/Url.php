@@ -6,7 +6,7 @@ use Yii;
 use luya\Exception;
 use cmsadmin\models\NavItem;
 
-class Url
+class Url extends \luya\helpers\Url
 {
     /**
      * if the module could not be found (not registered in the cms) the method returns the provided module name.
