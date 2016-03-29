@@ -66,8 +66,10 @@ abstract class Controller extends \luya\web\Controller
             'model' => $model,
         ]);
 
+        $currentMenu = Yii::$app->menu->current;
+        
         $event = new \cms\events\BeforeRenderEvent();
-        $event->menu = Yii::$app->menu->current;
+        $event->menu = $currentMenu;
         foreach ($model->nav->getProperties() as $property) {
             //$object = $model->getNav()->getProperty($property['var_name']);
             
@@ -103,11 +105,19 @@ abstract class Controller extends \luya\web\Controller
             $this->view->title = $model->title;
         }
         
+        
+        
         $this->view->registerMetaTag(['name' => 'og:title', 'content' => $this->view->title], 'fbTitle');
+        $this->view->registerMetaTag(['name' => 'og:type', 'content' => 'website'], 'ogType');
+        
         
         if (!empty($model->description)) {
             $this->view->registerMetaTag(['name' => 'description', 'content' => $model->description], 'metaDescription');
             $this->view->registerMetaTag(['name' => 'og:description', 'content' => $model->description], 'fbDescription');
+        }
+        
+        if (!empty($model->keywords)) {
+            $this->view->registerMetaTag(['name' => 'keywords', 'content' => implode(", ", $currentMenu->keywords)], 'metyKeywords');
         }
         
         if ($this->module->enableTagParsing) {
