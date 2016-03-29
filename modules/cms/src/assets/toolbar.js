@@ -22,9 +22,9 @@ var toggleClass = function (element, className) {
     if(element.className.indexOf(className) < 0) {
         element.className += ' ' + className;
         element.className = element.className.trim();
-        setCookie('luyatb', '1', 30);
+        Cookie.set('luyatb', '1', 30);
     } else {
-    	document.cookie = "luyatb=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+    	Cookie.erase('luyatb');
         element.className = element.className.replace(className, '').trim();
     }
 };
@@ -35,26 +35,68 @@ var removeClassFromElements = function (elements, className) {
     }
 };
 
-var setCookie = function(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + "; " + expires;
-};
+/**
+ * @see https://developers.livechatinc.com/blog/setting-cookies-to-subdomains-in-javascript/
+ */
+var Cookie =
+{
+   set: function(name, value, days)
+   {
+      var domain, domainParts, date, expires, host;
 
-var getCookie = function(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0; i<ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1);
-        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
-    }
-    return "";
+      if (days)
+      {
+         date = new Date();
+         date.setTime(date.getTime()+(days*24*60*60*1000));
+         expires = "; expires="+date.toGMTString();
+      } else {
+         expires = "";
+      }
+
+      host = location.host;
+      if (host.split('.').length === 1)
+      {
+         document.cookie = name+"="+value+expires+"; path=/";
+      } else {
+         domainParts = host.split('.');
+         domainParts.shift();
+         domain = '.'+domainParts.join('.');
+
+         document.cookie = name+"="+value+expires+"; path=/; domain="+domain;
+
+         if (Cookie.get(name) == null || Cookie.get(name) != value)
+         {
+            domain = '.'+host;
+            document.cookie = name+"="+value+expires+"; path=/; domain="+domain;
+         }
+      }
+   },
+
+   get: function(name)
+   {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for (var i=0; i < ca.length; i++)
+      {
+         var c = ca[i];
+         while (c.charAt(0)==' ')
+         {
+            c = c.substring(1,c.length);
+         }
+
+         if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+      }
+      return null;
+   },
+
+   erase: function(name)
+   {
+      Cookie.set(name, '', -1);
+   }
 };
 
 (function() {
-	v = getCookie('luyatb');
+	v = Cookie.get('luyatb');
 	if (v==1) {
 		toggleLuyaToolbar();
 	}
