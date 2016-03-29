@@ -26,7 +26,6 @@
     background-color: #2196F3;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
     height: 50px;
-    padding: 0 25px;
     position: relative;
     width: 100%;
     z-index: 1000;
@@ -45,12 +44,29 @@
 .luya-cms-toolbar__logo {
     display: inline-block;
     vertical-align: middle;
-    width: 50px;
+    text-align: center;
+    font-size: 10px;
+    padding: 0 15px;
+}
+
+.luya-cms-toolbar__logo a {
+    color: #fff;
+    text-decoration: none
 }
 
 .luya-cms-toolbar__logo img {
     height: auto;
-    width: 100%;
+    max-width: 100%;
+}
+
+.luya-cms-toolbar__no-bullets {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.luya-cms-toolbar__no-bullets li:not(:first-of-type) {
+    margin-top: 5px;
 }
 
 /* ==================================================
@@ -60,8 +76,16 @@
 .luya-cms-toolbar__button {
     color: #fff;
     display: inline-block;
-    margin-left: 10px;
+    font-size: 14px;
+    line-height: 1;
+    margin: 0;
     vertical-align: middle;
+    border-right: 1px solid #fff;
+    float: left;
+}
+
+.luya-cms-toolbar__button--info {
+    margin-right: 5px;
 }
 
 .luya-cms-toolbar__button a,
@@ -82,6 +106,15 @@
     color: #2196F3;
 }
 
+.luya-cms-toolbar__button--info {
+    background-color: #fff;
+    color: #2196F3;
+}
+
+.luya-cms-toolbar__button--info i {
+    color: #000;
+}
+
 .luya-cms-toolbar__button span,
 .luya-cms-toolbar__button i {
     vertical-align: middle;
@@ -93,6 +126,44 @@
 
 .luya-cms-toolbar-wrapper--open .luya-cms-toolbar__button a.open .material-icons {
     transform: rotate(180deg);
+}
+
+.luya-cms-toolbar__pull-right {
+    float: right;
+}
+
+.luya-cms-toolbar__margin-left {
+    margin-left: 10px;
+}
+
+/* ==================================================
+ * Badge
+ * ================================================== */
+
+.luya-cms-toolbar__badge {
+    display: inline-block;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    color: #000;
+    font-size: 12px;
+    line-height: 1;
+    padding: 2px 8px;
+    text-align: center;
+}
+
+.luya-cms-toolbar__badge--danger {
+    background-color: #FF4E50;
+    color: #fff;
+}
+
+.luya-cms-toolbar__badge--success {
+    background-color: #64CC2A;
+    color: #fff;
+}
+
+.luya-cms-toolbar__badge--warning {
+    background-color: #FF7841;
+    color: #fff;
 }
 
 /* ==================================================
@@ -155,24 +226,34 @@
     display: block;
 }
 
-.luya-cms-toolbar__list-entry label {
+.luya-cms-toolbar__list-entry-left,
+.luya-cms-toolbar__list-entry-right {
     display: inline-block;
-    font-weight: bold;
+    vertical-align: top;
+}
+
+.luya-cms-toolbar__list-entry-left {
     min-width: 250px;
 }
 
-.luya-cms-toolbar__list-entry p {
-    display: inline-block;
+.luya-cms-toolbar__list-entry label {
+    font-weight: bold;
 }
 
 /* ==================================================
  * Text colors
  * ================================================== */
 
-.luya-cms-toolbar__danger-text {
-    color: #F44336;
+.luya-cms-toolbar__text {}
+
+.luya-cms-toolbar__text--danger {
+    color: #FF4E50;
 }
 
-.luya-cms-toolbar__success-text {
-    color: #4CAF50;
+.luya-cms-toolbar__text--success {
+    color: #64CC2A;
+}
+
+.luya-cms-toolbar__text--warning {
+    color: #FF7841;
 }
