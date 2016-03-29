@@ -33,6 +33,10 @@ class AdminController extends \admin\base\RestController
                 ];
             }
 
+            if (empty($blocks)) {
+                continue;
+            }
+            
             $groups[] = [
                 'group' => $group,
                 'blocks' => $blocks,
