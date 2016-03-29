@@ -299,60 +299,73 @@ abstract class Model extends \yii\db\ActiveRecord implements GenericSearchInterf
      * }
      * ```
      * 
+     * You can also use an array defintion to handle booth types at the same time
      * 
-     * @param \admin\ngrest\ConfigBuilder $config
-     * @param unknown $type
-     * @param array $fields
+     * ```php
+     * public function ngRestConfig($config)
+     * {
+     *     // ...
+     *     $this->ngRestConfigDefine($config, ['create', 'update'], ['firstname', 'lastname', 'description', 'position', 'image_id']);
+     *     // ....
+     *     return $config;
+     * }
+     * ```
+     * 
+     * @param \admin\ngrest\ConfigBuilder $config The config which the defintion should be append
+     * @param string|array $assignedType This can be a string with a type or an array with multiple types
+     * @param array $fields An array with fields assign to types type based on the an `ngrestAttributeTypes` defintion.
      * @throws \yii\base\InvalidConfigException
      * @since 1.0.0-beta4
      */
-    public function ngRestConfigDefine(\admin\ngrest\ConfigBuilder $config, $type, array $fields)
+    public function ngRestConfigDefine(\admin\ngrest\ConfigBuilder $config, $assignedType, array $fields)
     {
         $types = $this->ngrestAttributeTypes();
         $extraTypes = $this->ngrestExtraAttributeTypes();
         
         $scenarios = $this->scenarios();
         
-        $scenario = false;
+        $assignedType = (array) $assignedType;
         
-        if ($type == 'create' || $type == 'update') {
-            $scenario = 'rest'.$type;
-        }
-        
-        if ($scenario) {
-            if (!isset($scenarios[$scenario])) {
-                throw new InvalidConfigException("The scenario '$scenario' does not exists in your secnarios, have you forgote to defined the '$scenario' in the scenarios() method?");
-            } else {
-                $scenarios = $scenarios[$scenario];
-            }
-        }
-        
-        foreach ($fields as $field) {
-            if (!isset($types[$field]) && !isset($extraTypes[$field])) {
-                throw new InvalidConfigException("The ngrest attribue '$field' does not exists in ngrestAttributeTypes() nor in ngrestExtraAttributeTypes() method.");
+        foreach ($assignedType as $type)
+        {
+            $scenario = false;
+            $scenarioFields = [];
+            if ($type == 'create' || $type == 'update') {
+                $scenario = 'rest'.$type;
+                if (!isset($scenarios[$scenario])) {
+                    throw new InvalidConfigException("The scenario '$scenario' does not exists in your scenarios list, have you forgote to defined the '$scenario' in the scenarios() method?");
+                } else {
+                    $scenarioFields = $scenarios[$scenario];
+                }
             }
             
-            if ($scenario && !in_array($field, $scenarios)) {
-                throw new InvalidConfigException("The field '$field' does not exists in the scenario '$scenario'. You have to define them in the scenarios() method.");
+            foreach ($fields as $field) {
+                if (!isset($types[$field]) && !isset($extraTypes[$field])) {
+                    throw new InvalidConfigException("The ngrest attribue '$field' does not exists in ngrestAttributeTypes() nor in ngrestExtraAttributeTypes() method.");
+                }
+                
+                if ($scenario && !in_array($field, $scenarioFields)) {
+                    throw new InvalidConfigException("The field '$field' does not exists in the scenario '$scenario'. You have to define them in the scenarios() method.");
+                }
+    
+                if (isset($extraTypes[$field])) {
+                    $typeField = 'extraField';
+                    $definition = $extraTypes[$field];
+                } else {
+                    $typeField = 'field';
+                    $definition = $types[$field];
+                }
+                
+                $args = [];
+                if (is_array($definition)) {
+                    $method = $definition[0];
+                    $args = array_slice($definition, 1);
+                } else {
+                    $method = $definition;
+                }
+                
+                $config->$type->$typeField($field, $this->getAttributeLabel($field))->addPlugin($method, $args);
             }
-
-            if (isset($extraTypes[$field])) {
-                $typeField = 'extraField';
-                $definition = $extraTypes[$field];
-            } else {
-                $typeField = 'field';
-                $definition = $types[$field];
-            }
-            
-            $args = [];
-            if (is_array($definition)) {
-                $method = $definition[0];
-                $args = array_slice($definition, 1);
-            } else {
-                $method = $definition;
-            }
-            
-            $config->$type->$typeField($field, $this->getAttributeLabel($field))->addPlugin($method, $args);
         }
     }
     
