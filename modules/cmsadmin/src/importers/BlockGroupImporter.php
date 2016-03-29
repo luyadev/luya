@@ -11,6 +11,8 @@ class BlockGroupImporter extends Importer
     
     public function run()
     {
+        $handled = [];
+        
         foreach ($this->getImporter()->getDirectoryFiles('blockgroups') as $file) {
             
             $obj = new $file['ns']();
@@ -25,6 +27,7 @@ class BlockGroupImporter extends Importer
             if ($model) {
                 $model->updateAttributes(['name' => $obj->label()]);
                 $this->addLog('blockgroup', 'update blockgroup name: ' . $obj->label());
+                $handled[] = $model->id;
             } else {
                 $model = new BlockGroup();
                 $model->name = $obj->label();
@@ -32,6 +35,13 @@ class BlockGroupImporter extends Importer
                 $model->created_timestamp = time();
                 $model->save(false);
                 $this->addLog('blockgroup', 'added blockgroup with name: ' . $obj->label());
+                $handled[] = $model->id;
+            }
+        }
+        
+        foreach (BlockGroup::find()->where(['not in', 'id', $handled])->all() as $oldBlockGroup) {
+            if ($oldBlockGroup->delete()) {
+                $this->addLog('blockgroup', 'Old blockgroup has been deleted: ' . $oldBlockGroup->name);
             }
         }
     }
