@@ -22,7 +22,7 @@ var toggleClass = function (element, className) {
     if(element.className.indexOf(className) < 0) {
         element.className += ' ' + className;
         element.className = element.className.trim();
-        Cookie.set('luyatb', '1', 30);
+        Cookie.set('luyatb', '1');
     } else {
     	Cookie.erase('luyatb');
         element.className = element.className.replace(className, '').trim();
@@ -44,18 +44,16 @@ var Cookie =
    {
       var domain, domainParts, date, expires, host;
 
-      if (days)
-      {
+      if (days) {
          date = new Date();
          date.setTime(date.getTime()+(days*24*60*60*1000));
          expires = "; expires="+date.toGMTString();
       } else {
          expires = "";
       }
-
+      
       host = location.host;
-      if (host.split('.').length === 1)
-      {
+      if (host.split('.').length === 1) {
          document.cookie = name+"="+value+expires+"; path=/";
       } else {
          domainParts = host.split('.');
@@ -91,7 +89,7 @@ var Cookie =
 
    erase: function(name)
    {
-      Cookie.set(name, '', -1);
+	   Cookie.set(name, '0', -1);
    }
 };
 
