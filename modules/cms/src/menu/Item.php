@@ -331,7 +331,7 @@ class Item extends \yii\base\Object
     public function getParent()
     {
         if ($this->_parent === null) {
-            $this->_parent = (new Query())->where(['nav_id' => $this->parentNavId])->with($this->_with)->lang($this->lang)->one();
+            $this->_parent = (new Query())->where(['nav_id' => $this->parentNavId, 'container' => $this->getContainer()])->with($this->_with)->lang($this->lang)->one();
         }
         
         return $this->_parent;
@@ -362,7 +362,7 @@ class Item extends \yii\base\Object
      */
     public function getSiblings()
     {
-        return (new Query())->where(['parent_nav_id' => $this->getParentNavId()])->with($this->_with)->lang($this->lang)->all();
+        return (new Query())->where(['parent_nav_id' => $this->getParentNavId(), 'container' => $this->getContainer()])->with($this->_with)->lang($this->lang)->all();
     }
     
     /**
@@ -393,7 +393,7 @@ class Item extends \yii\base\Object
     public function getChildren()
     {
         if ($this->_children === null) {
-            $this->_children = (new Query())->where(['parent_nav_id' => $this->navId])->with($this->_with)->lang($this->lang)->all();
+            $this->_children = (new Query())->where(['parent_nav_id' => $this->navId, 'container' => $this->getContainer()])->with($this->_with)->lang($this->lang)->all();
         }
         
         return $this->_children;

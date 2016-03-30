@@ -300,9 +300,13 @@ class Container extends \yii\base\Component implements ArrayAccess
      * Get all items for a specific level.
      *
      * @param integer $level levels starts with 1
+     * @param \cms\menu\Item $baseItem Provide an optional element which represents the base calculation item for Theme
+     * siblings/children calculation, this can be case when you have several contains do not want to use the "current" Item
+     * as base calucation, because getCurrent() could be in another container so it would get you all level container items for
+     * this container.
      * @return boolean|array QueryIterator with data
      */
-    public function getLevelContainer($level)
+    public function getLevelContainer($level, \cms\menu\Item $baseItem = null)
     {
         // define if the requested level is the root line (level 1) or not
         $rootLine = ($level === 1) ? true : false;
@@ -310,15 +314,20 @@ class Container extends \yii\base\Component implements ArrayAccess
         $level--;
         // foreach counter
         $i = 1;
+        
+        if ($baseItem === null) {
+            $baseItem = $this->getCurrent();
+        }
+        
         // foreach 
-        foreach ($this->getCurrent()->with('hidden')->getTeardown() as $item) {
+        foreach ($baseItem->with('hidden')->getTeardown() as $item) {
             // if its the root line an match level 1 get all siblings
             if ($rootLine && $i == 1) {
                 return $item->siblings;
             } elseif ($i == $level) {
                 return $item->children;
             }
-            ++$i;
+            $i++;
         }
         // no no container found for the defined level
         return false;

@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **BC BREAKS** See [UPGRADE.md](UPGRADE.md) as we have made some major changes.
 
+- `#815` Fixed bug where level container does also return items from other containers, add optional base element attribute for getLevelContainer
 - `#810` Fixed bug where cms toolbar does not affect domain cookie storage.
 - `#809` Fixed bug in SoftDelete trait and renamed SoftDeleteValue() to FieldStateDescriber().
 - `#794` Added small anty spam function, added docs, added callback and nicer looking email for the contact form module.
