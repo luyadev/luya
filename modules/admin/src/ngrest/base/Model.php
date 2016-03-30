@@ -40,10 +40,12 @@ abstract class Model extends \yii\db\ActiveRecord implements GenericSearchInterf
         parent::init();
         
         foreach ($this->getNgRestConfig()->getPlugins() as $field => $plugin) {
+            /*
             $plugin = NgRest::createPluginObject($plugin['type']['class'], $plugin['name'], $plugin['alias'], $plugin['i18n'], $plugin['type']['args']);
             foreach ($plugin->events() as $on => $handler) {
                 $this->on($on, is_string($handler) ? [$plugin, $handler] : $handler);
             }
+            */
         }
      
         // attaching behaviors after init is used to prevent user how like to use `behaviors()` method do not after to

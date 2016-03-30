@@ -33,7 +33,7 @@ class CmsPage extends \admin\ngrest\base\Plugin
     {
     	$fieldValue = $event->sender->getAttribute($this->name);
     	$menuItem = (!empty($fieldValue)) ? Yii::$app->menu->find()->where(['nav_id' => $fieldValue])->one() : $fieldValue;
-    	$event->setAttribute($this->name, $menuItem);
+    	$event->sender->setAttribute($this->name, $menuItem);
     }
     /*
     public function onAfterFind($fieldValue)
