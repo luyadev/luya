@@ -181,6 +181,18 @@ class Mail extends \yii\base\Component
     }
     
     /**
+     * Correct spelled alias method for `adresses`.
+     * 
+     * @todo remove wrong spelled on release
+     * @param array $emails
+     * @return \luya\components\Mail
+     */
+    public function addresses(array $emails)
+    {
+        return $this->adresses($emails);
+    }
+    
+    /**
      * Add a single addresse with optional name
      * 
      * @param string $email The email adresse e.g john@example.com
