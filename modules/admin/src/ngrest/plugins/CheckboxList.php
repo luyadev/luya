@@ -68,7 +68,7 @@ class CheckboxList extends Plugin
     public function onBeforeExpandFind($event)
     {
         if (!$this->i18n) {
-            $event->sender->setAttribute($this->name, Json::decode($event->sender->getAttribute($this->name)));
+            $event->sender->setAttribute($this->name, $this->jsonDecode($event->sender->getAttribute($this->name)));
             return false;
         }
     
@@ -78,7 +78,7 @@ class CheckboxList extends Plugin
     public function onBeforeFind($event)
     {
         if (!$this->i18n) {
-            $event->sender->setAttribute($this->name, Json::decode($event->sender->getAttribute($this->name)));
+            $event->sender->setAttribute($this->name, $this->jsonDecode($event->sender->getAttribute($this->name)));
             return false;
         }
     }

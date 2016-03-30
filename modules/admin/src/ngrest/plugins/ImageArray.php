@@ -40,7 +40,7 @@ class ImageArray extends \admin\ngrest\base\Plugin
     public function onBeforeExpandFind($event)
     {
     	if (!$this->i18n) {
-    		$event->sender->setAttribute($this->name, Json::decode($event->sender->getAttribute($this->name)));
+    		$event->sender->setAttribute($this->name, $this->jsonDecode($event->sender->getAttribute($this->name)));
     		return false;
     	}
     	
@@ -50,7 +50,7 @@ class ImageArray extends \admin\ngrest\base\Plugin
     public function onBeforeFind($event)
     {
     	if (!$this->i18n) {
-    		$event->sender->setAttribute($this->name, Json::decode($event->sender->getAttribute($this->name)));
+    		$event->sender->setAttribute($this->name, $this->jsonDecode($event->sender->getAttribute($this->name)));
     		return false;
     	}
     	

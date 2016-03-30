@@ -243,6 +243,16 @@ abstract class Plugin extends Component
         return $value;
     }
     
+    /**
+     * Json decode value but verifys if its empty, cause this can thrown an json decode exception.
+     * @param string $value The string to encode
+     * @return mixed
+     */
+    public function jsonDecode($value)
+    {
+        return (empty($value)) ? [] : Json::decode($value);
+    }
+    
     public function i18nDecodedGetActive(array $fieldValues)
     {
         $langShortCode = Yii::$app->adminLanguage->getActiveShortCode();
