@@ -34,18 +34,27 @@ abstract class Model extends \yii\db\ActiveRecord implements GenericSearchInterf
     public $extraFields = [];
 
     protected $ngRestServiceArray = [];
+    
+    private static $_pluginInstances = [];
+    
+    private static function findPluginInstance($field, array $plugin)
+    {
+        if (!isset(self::$_pluginInstances[self::tableName()][$field])) {
+            self::$_pluginInstances[self::tableName()][$field] = NgRest::createPluginObject($plugin['type']['class'], $plugin['name'], $plugin['alias'], $plugin['i18n'], $plugin['type']['args']);
+        }
+        
+        return self::$_pluginInstances[self::tableName()][$field];
+    }
 
     public function init()
     {
         parent::init();
         
         foreach ($this->getNgRestConfig()->getPlugins() as $field => $plugin) {
-            /*
-            $plugin = NgRest::createPluginObject($plugin['type']['class'], $plugin['name'], $plugin['alias'], $plugin['i18n'], $plugin['type']['args']);
+            $plugin = self::findPluginInstance($field, $plugin);
             foreach ($plugin->events() as $on => $handler) {
                 $this->on($on, is_string($handler) ? [$plugin, $handler] : $handler);
             }
-            */
         }
      
         // attaching behaviors after init is used to prevent user how like to use `behaviors()` method do not after to
