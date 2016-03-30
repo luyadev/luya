@@ -22,6 +22,12 @@ Um das Cralwer Module einzufügen gibts du folgende konfiguration an:
 
 wobie die `baseUrl` der URL entspricht welche deinen Such-Index aufbauen soll.
 
+After setup the module in your config you have to run the migrations:
+
+```sh
+./vendor/bin/luya migrate`
+```
+
 Ausführen
 ---------
 

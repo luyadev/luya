@@ -21,7 +21,13 @@ Add the module to your configuration
 'crawleradmin' => 'crawleradmin\Module',
 ```
 
-Where `baseUr` is the domain you want to crawler all informations.
+Where `baseUrl` is the domain you want to crawler all informations.
+
+After setup the module in your config you have to run the migrations:
+
+```sh
+./vendor/bin/luya migrate`
+```
 
 ### Execute
 
