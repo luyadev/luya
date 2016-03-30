@@ -32,6 +32,11 @@ abstract class Plugin extends Component
     public $i18n = null;
 
     /**
+     * @var mixed This value will be used when the i18n decodes the given value but is not set yet, default value.
+     */
+    public $i18nEmptyValue = '';
+    
+    /**
      * Renders the element for the CRUD LIST overview for a specific type.
      * 
      * @param string $id The ID of the element in the current context
@@ -117,7 +122,7 @@ abstract class Plugin extends Component
     {
         if ($this->onBeforeListFind($event)) {
             if ($this->i18n) {
-                $event->sender->setAttribute($this->name, $this->i18nDecodedGetActive($this->i18nFieldDecode($event->sender->getAttribute($this->name))));
+                $event->sender->setAttribute($this->name, $this->i18nDecodedGetActive($this->i18nFieldDecode($event->sender->getAttribute($this->name), $this->i18nEmptyValue)));
             }
             $this->onAfterListFind($event);
         }
@@ -137,7 +142,7 @@ abstract class Plugin extends Component
     {
         if ($this->onBeforeFind($event)) {
             if ($this->i18n) {
-                $event->sender->setAttribute($this->name, $this->i18nDecodedGetActive($this->i18nFieldDecode($event->sender->getAttribute($this->name))));
+                $event->sender->setAttribute($this->name, $this->i18nDecodedGetActive($this->i18nFieldDecode($event->sender->getAttribute($this->name), $this->i18nEmptyValue)));
             }
             
             $this->onAfterFind($event);
@@ -158,7 +163,7 @@ abstract class Plugin extends Component
     {
         if ($this->onBeforeExpandFind($event)) {
             if ($this->i18n) {
-                $event->sender->setAttribute($this->name, $this->i18nFieldDecode($event->sender->getAttribute($this->name)));
+                $event->sender->setAttribute($this->name, $this->i18nFieldDecode($event->sender->getAttribute($this->name), $this->i18nEmptyValue));
             }
             
             $this->onAfterExpandFind($event);
@@ -209,9 +214,10 @@ abstract class Plugin extends Component
      * Decode from Json to PHP
      * 
      * @param string|array $field The value to decode (or if alreay is an array already)
+     * @param string $onEmptyValue Defines the value if the language could not be found and a value will be returns, this value will be used.
      * @return array returns an array with decoded field value
      */
-    public function i18nFieldDecode($value)
+    public function i18nFieldDecode($value, $onEmptyValue = '')
     {
         $langShortCode = Yii::$app->adminLanguage->getActiveShortCode();
         $languages = Yii::$app->adminLanguage->getLanguages();
@@ -230,7 +236,7 @@ abstract class Plugin extends Component
         // add all not existing languages to the array (for example a language has been added after the database item has been created)
         foreach ($languages as $lang) {
             if (!array_key_exists($lang['short_code'], $value)) {
-                $value[$lang['short_code']] = '';
+                $value[$lang['short_code']] = $onEmptyValue;
             }
         }
     

@@ -749,9 +749,11 @@
             },
             controller: function($scope, $element, $timeout) {
     
-                if ($scope.model == undefined) {
-                    $scope.model = [];
-                }
+                $scope.init = function() {
+                	if ($scope.model == undefined || $scope.model == null) {
+                        $scope.model = [];
+                    }
+                };
                 
                 $scope.add = function() {
                     $scope.model.push({ value : '' });
@@ -800,6 +802,8 @@
                     }
                     return false;
                 }
+                
+                $scope.init();
     
             },
             template: function() {
