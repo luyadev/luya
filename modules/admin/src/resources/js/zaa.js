@@ -297,6 +297,17 @@ function i18nParam(varName, params) {
 		return service;
 	});
 	
+	/**
+	 * Example usage of luya admin modal:
+	 * 
+	 * ```
+	 * <button ng-click="modalState=!modalState">Toggle Modal</button>
+     * <modal is-modal-hidden="modalState">
+     * 	  <h1>Modal Container</h1>
+     *    <p>Hello world!</p>
+     * </modal>
+     * ```
+	 */
 	zaa.directive("modal", function($timeout) {
 		return {
 			restrict: "E",

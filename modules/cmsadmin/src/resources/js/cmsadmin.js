@@ -97,7 +97,7 @@
             	
             	$scope.layoutsData = ServiceLayoutsData.data;
 				
-            	$scope.$on('service:BlocksData', function(event, data) {
+            	$scope.$on('service:LayoutsData', function(event, data) {
             		$scope.layoutsData = data;
             	});
             	
@@ -362,6 +362,50 @@
 		
 	});
 	
+	zaa.controller("PageVersionsController", function($scope, $http, ServiceLayoutsData, AdminToastService) {
+		/**
+		 * @var object $typeData From parent scope controller NavItemController
+		 * @var object $item From parent scope controller NavItemController
+		 * @var string $versionName From ng-model
+		 * @var integer $fromVersionPageId From ng-model the version copy from or 0 = new empty/blank version
+		 * @var integer $versionLayoutId From ng-model, only if fromVersionPageId is 0
+ 		 */
+		
+		var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
+		
+		
+		// layoutsData
+		
+		$scope.layoutsData = ServiceLayoutsData.data;
+		
+    	$scope.$on('service:LayoutsData', function(event, data) {
+    		$scope.layoutsData = data;
+    	});
+		
+    	// controller logic
+    	
+    	$scope.changeVersionLayout = function(versionItem) {
+    		$http.post('admin/api-cms-navitem/change-page-version-layout', $.param({'pageItemId': versionItem.id, 'layoutId': versionItem.layout_id}), headers).success(function(response) {
+    			$scope.refreshForce();
+    			AdminToastService.success('The Layout has been updated successfull.', 2000);
+			});
+    	};
+    	
+		$scope.createNewVersionSubmit = function() {
+			$http.post('admin/api-cms-navitem/create-page-version', $.param({'layoutId': $scope.versionLayoutId, 'navItemId': $scope.item.id, 'name': $scope.versionName, 'fromPageId': $scope.fromVersionPageId}), headers).success(function(response) {
+				$scope.refreshForce();
+				AdminToastService.success('The new layout has been added.', 2000);
+			});
+		};
+		
+		$scope.useVersion = function(versionItem) {
+			$http.post('admin/api-cms-navitem/change-page-version', $.param({'navItemId': $scope.item.id, 'useItemPageVersionId': versionItem.id}), headers).success(function(response) {
+				$scope.item.nav_item_type_id = versionItem.id;
+				AdminToastService.success('The Version change has been successfull.', 2000);
+			});
+		};
+	});
+	
 	zaa.controller("CopyPageController", function($scope, $http, AdminToastService, Slug) {
 		
 		var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
@@ -414,6 +458,8 @@
 		
 		$scope.droppedNavItem = null;
 
+		$scope.showVersionList = false;
+		
 		$scope.errorMessageOnDuplicateAlias = function(response) {
 			AdminToastService.error(i18nParam('js_page_add_exists', {title: response.success.title, id: response.success.nav_id}), 5000);
 		}
@@ -883,6 +929,8 @@
 		
 		$scope.container = [];
 		
+		$scope.currentPageVersion = 0;
+		
 		$scope.getItem = function(langId, navId) {
 			$http({
 			    url: 'admin/api-cms-navitem/nav-lang-item', 
@@ -896,20 +944,30 @@
 						$scope.isTranslated = true;
 						$scope.reset();
 						if ($scope.item.nav_item_type == 1) {
-							$scope.container = response['tree'];
+							$scope.currentPageVersion = response.item.nav_item_type_id;
+							$scope.container = response.typeData[response.item.nav_item_type_id]['contentAsArray'];
 						}
 						
 					}
 				}
 				$scope.loaded = true
 			});
+		};
+		
+		$scope.switchVersion = function(pageVersionid) {
+			$scope.container = $scope.typeData[pageVersionid]['contentAsArray'];
+			$scope.currentPageVersion = pageVersionid;
+		};
+		
+		$scope.refreshForce = function() {
+			$scope.getItem($scope.lang.id, $scope.NavController.id);
 		}
+		
 		$scope.refresh = function() {
 			if (AdminLangService.isInSelection($scope.lang.short_code)) {
 				$scope.getItem($scope.lang.id, $scope.NavController.id);
 			}
-		}
-		
+		};
 		
 		// <!-- NavItemTypePageController CODE
 		
@@ -917,7 +975,7 @@
 			$http({
 				url : 'admin/api-cms-navitem/reload-placeholder',
 				method : 'GET',
-				params : { navItemPageId : $scope.item.nav_item_type_id, prevId : prevId, placeholderVar : placeholderVar}
+				params : { navItemPageId : $scope.currentPageVersion, prevId : prevId, placeholderVar : placeholderVar}
 			}).success(function(response) {
 
 				ServiceLiveEditMode.changeUrl($scope.item.id);
@@ -961,7 +1019,6 @@
 		function init() {
 			$scope.refresh();
 		}
-		
 		
 		init();
 	});

@@ -396,7 +396,7 @@ class Nav extends \yii\db\ActiveRecord
             'description' => $description,
             'nav_item_type' => 1
         ];
-        $navItemPage->attributes = ['layout_id' => $layoutId];
+        $navItemPage->attributes = ['layout_id' => $layoutId, 'create_user_id' => Yii::$app->adminuser->getId(), 'timestamp_create' => time(), 'version_alias' => 'Initial'];
 
         if (!$nav->validate()) {
             $_errors = ArrayHelper::merge($nav->getErrors(), $_errors);
@@ -419,6 +419,8 @@ class Nav extends \yii\db\ActiveRecord
         $navItem->nav_id = $nav->id;
         $navItemId = $navItem->save();
 
+        $navItemPage->updateAttributes(['nav_item_id' => $navItem->id]);
+        
         return $navItemId;
     }
 
@@ -438,7 +440,7 @@ class Nav extends \yii\db\ActiveRecord
             'description' => $description,
             'nav_item_type' => 1
         ];
-        $navItemPage->attributes = ['layout_id' => $layoutId];
+        $navItemPage->attributes = ['layout_id' => $layoutId, 'create_user_id' => Yii::$app->adminuser->getId(), 'timestamp_create' => time(), 'version_alias' => 'Initial'];
 
         if (!$navItem->validate()) {
             $_errors = ArrayHelper::merge($navItem->getErrors(), $_errors);
@@ -456,6 +458,8 @@ class Nav extends \yii\db\ActiveRecord
         $navItem->nav_item_type_id = $navItemPage->id;
         $navItemId = $navItem->save();
 
+        $navItemPage->updateAttributes(['nav_item_id' => $navItem->id]);
+        
         return $navItemId;
     }
 

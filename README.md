@@ -22,7 +22,7 @@ The [Yii 2](https://github.com/yiisoft/yii2) wrapper which provides out of the b
 + beta7 release (May 2016)
 + rc1 release (June 2016)
 + rc2 release (July 2016)
-+ version 1.0.0 (August 2016)
++ version 1.0.0 (August/September 2016)
 
 ### Installation
 

@@ -83,7 +83,7 @@
         <div class="input input--select col s12">
             <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_layout'); ?></label>
             <div class="input__field-wrapper">
-                <select class="input__field browser-default" ng-model="data.layout_id" ng-options="lts.id as lts.name for lts in layouts"></select>
+                <small><i class="material-icons">warning</i> To change the layout, open the versions list (since beta6)</small>
             </div>
         </div>
     </div>
@@ -346,9 +346,10 @@
                                                 <i class="material-icons [ waves-effect waves-blue ]">open_in_new</i>
                                             </a>
                                             <a ng-click="openLiveUrl(item.id)" ng-show="liveEditState" class="right"><i class="material-icons [ waves-effect waves-blue ]">open_in_new</i></a>
+                                            <a ng-click="showVersionList=!showVersionList" class="right"><i class="material-icons  [ waves-effect waves-blue ]">list</i></a>
                                         </span>
                                         <span ng-hide="!settings">
-                                            <i ng-click="toggleSettings()" class="mdi-navigation-close right [ waves-effect waves-blue ]"></i>
+                                            <a ng-click="toggleSettings()"  class="right"><i class="material-icons">close</i></a>
                                         </span>
                                     </h4>
                                     <p>{{lang.name}}</p>
@@ -440,6 +441,33 @@
                         <div class="page__content" ng-show="!settings" ng-switch on="item.nav_item_type">
                             <div class="row">
                                 <div class="col s12 page__no-padding" ng-switch-when="1">
+                                	<div style="background-color:#b3e5fc; padding:20px;" ng-controller="PageVersionsController" ng-show="showVersionList">
+                                    	<h5>Versions</h5>
+                                    	<p>The following list shows you all the available versions of the current site.</p>
+    									<ul>
+    										<li ng-repeat="versionItem in typeData" ng-init="modalState=true">
+    											<strong>#{{$index+1}}</strong><button class="btn" ng-click="switchVersion(versionItem.id)"><small>{{versionItem.timestamp_create * 1000 | date:'short'}}</small> {{ versionItem.version_alias }}</button>
+    											<button ng-click="modalState=!modalState">Edit Layout</button>
+    											<modal is-modal-hidden="modalState">
+    												Layout: <select ng-model="versionItem.layout_id" ng-options="lts.id as lts.name for lts in layoutsData"></select>
+    												<hr />
+    												<button class="btn" ng-click="changeVersionLayout(versionItem)">Update Layout</button>
+    											</modal>
+    											<span ng-if="versionItem.id == item.nav_item_type_id"><i class="material-icons">done</i></span>
+    											<span ng-if="versionItem.id !== item.nav_item_type_id"><button class="btn" ng-click="useVersion(versionItem)">USE THIS</button></span>
+    										</li>
+    									</ul>
+    									<h5>Create Version</h5>
+    									<select ng-model="fromVersionPageId">
+    										<option value="0">New/Empty Version</option>
+    										<option ng-repeat="versionItem in typeData" value="{{versionItem.id}}">Copy existing: {{versionItem.version_alias}}</option>
+    									</select>
+    									
+    									<span ng-show="fromVersionPageId==0">Layout: <select ng-model="versionLayoutId" ng-options="lts.id as lts.name for lts in layoutsData"></select></span>
+    									
+    									Name: <input type="text" style="width:400px;" ng-model="versionName" />
+    									<button type="button" ng-click="createNewVersionSubmit()">Create new Version</button>
+									</div>
                                     <ul class="page__list" ng-show="container.nav_item_page.id">
                                         <li class="page__placeholder accordion__entry--open" ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'"></li>
                                     </ul>

@@ -29,8 +29,7 @@ class NavItemController extends \admin\base\RestController
             return [
                 'error' => false,
                 'item' => $item->toArray(),
-                'typeData' => $item->getType()->toArray(),
-                'tree' => ($item->nav_item_type == 1) ? $this->actionTree($item->getType()->id) : false,
+                'typeData' => ($item->nav_item_type == 1) ? NavItemPage::getVersionList($item->id) : $item->getType()->toArray(),
             ];
         }
         
@@ -39,21 +38,76 @@ class NavItemController extends \admin\base\RestController
 
     public function actionReloadPlaceholder($navItemPageId, $prevId, $placeholderVar)
     {
-        return $this->getSub($placeholderVar, (int) $navItemPageId, (int) $prevId);
+        return NavItemPage::getPlaceholder($placeholderVar, (int) $navItemPageId, (int) $prevId);
     }
-
-    /*
-    public function actionTypeData($navItemId)
-    {
-        return NavItem::findOne($navItemId)->getType()->toArray();
-    }
-    */
 
     public function actionUpdateItemTypeData($navItemId)
     {
         return NavItem::findOne($navItemId)->updateType(Yii::$app->request->post());
     }
+    
+    public function actionChangePageVersionLayout()
+    {
+        $pageItemId = Yii::$app->request->post('pageItemId');
+        $layoutId = Yii::$app->request->post('layoutId');
 
+        $model = NavItemPage::findOne(['id' => $pageItemId]);
+        
+        if ($model) {
+            return $model->updateAttributes(['layout_id' => $layoutId]);
+        }
+        
+        return false;
+    }
+
+    public function actionChangePageVersion()
+    {
+        $navItemId = Yii::$app->request->post('navItemId');
+        $useItemPageVersionId = Yii::$app->request->post('useItemPageVersionId');
+        
+        $model = NavItem::findOne(['id' => $navItemId, 'nav_item_type' => NavItem::TYPE_PAGE]);
+        
+        if ($model) {
+            return $model->updateAttributes(['nav_item_type_id' => $useItemPageVersionId]);
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Create a new cms_nv_item_page for an existing nav_item, this is also known as a "new version" of a page item.
+     * 
+     */
+    public function actionCreatePageVersion()
+    {
+        $name = Yii::$app->request->post('name');
+        $fromPageId = Yii::$app->request->post('fromPageId');
+        $navItemId = Yii::$app->request->post('navItemId');
+        $layoutId = Yii::$app->request->post('layoutId');
+        
+        if (!empty($fromPageId)) {
+            $fromPageModel = NavItemPage::findOne($fromPageId);
+            $layoutId = $fromPageModel->layout_id;
+        }
+        
+        $model = new NavItemPage();
+        $model->attributes = [
+            'nav_item_id' => $navItemId,
+            'timestamp_create' => time(),
+            'create_user_id' => Yii::$app->adminuser->getId(),
+            'version_alias' => $name,
+            'layout_id' => $layoutId,
+        ];
+        
+        $save = $model->save(false);
+        
+        if (!empty($fromPageId) && $save) {
+            NavItemPage::copyBlocks($fromPageModel->id, $model->id);
+        }
+        
+        return ['error' => !$save];
+    }
+    
     /**
      * admin/api-cms-navitem/update-item?navItemId=2.
      *
@@ -267,122 +321,9 @@ class NavItemController extends \admin\base\RestController
         return ['success' => $result];
     }
 
-    /**
-     * RECUSRION.
-     */
-    public function actionTree($navItemPageId)
-    {
-        $nav_item_page = (new \yii\db\Query())->select('*')->from('cms_nav_item_page t1')->leftJoin('cms_layout', 'cms_layout.id=t1.layout_id')->where(['t1.id' => $navItemPageId])->one();
-
-        $return = [
-            'nav_item_page' => ['id' => $nav_item_page['id'], 'layout_id' => $nav_item_page['layout_id'], 'layout_name' => $nav_item_page['name']],
-            '__placeholders' => [],
-        ];
-
-        $nav_item_page['json_config'] = json_decode($nav_item_page['json_config'], true);
-
-        if (isset($nav_item_page['json_config']['placeholders'])) {
-            foreach ($nav_item_page['json_config']['placeholders'] as $placeholderKey => $placeholder) {
-                $placeholder['nav_item_page_id'] = $navItemPageId;
-                $placeholder['prev_id'] = 0;
-                $placeholder['__nav_item_page_block_items'] = [];
-
-                $return['__placeholders'][$placeholderKey] = $placeholder;
-
-                $placeholderVar = $placeholder['var'];
-
-                $return['__placeholders'][$placeholderKey]['__nav_item_page_block_items'] = $this->getSub($placeholderVar, $navItemPageId, 0);
-            }
-        }
-
-        return $return;
-    }
-
     public function actionGetBlock($blockId)
     {
-        return $this->getBlock($blockId);
-    }
-
-    private function getSub($placeholderVar, $navItemPageId, $prevId)
-    {
-        /*
-        $nav_item_page_block_item_data = (new \yii\db\Query())->select([
-                't1_id' => 't1.id', 't1.is_dirty', 'block_id', 't1_nav_item_page_id' => 't1.nav_item_page_id', 't1_json_config_values' => 't1.json_config_values', 't1_json_config_cfg_values' => 't1.json_config_cfg_values', 't1_placeholder_var' => 't1.placeholder_var', 't1_prev_id' => 't1.prev_id',
-                //'t2_id' => 't2.id', 't2_name' => 't2.name', 't2_json_config' => 't2.json_config', 't2_twig_admin' => 't2.twig_admin',
-        ])->from('cms_nav_item_page_block_item t1')->orderBy('t1.sort_index ASC')->where(['t1.prev_id' => $prevId, 't1.nav_item_page_id' => $navItemPageId, 't1.placeholder_var' => $placeholderVar])->all();
-        */
-
-        $nav_item_page_block_item_data = (new \yii\db\Query())->select(['id'])->from('cms_nav_item_page_block_item')->orderBy('sort_index ASC')->where(['prev_id' => $prevId, 'nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar])->all();
-
-        $data = [];
-
-        foreach ($nav_item_page_block_item_data as $blockItem) {
-            $block = $this->getBlock($blockItem['id']);
-            if ($block) {
-                $data[] = $block;
-            }
-        }
-
-        return $data;
-    }
-
-    private function getBlock($blockId)
-    {
-        $blockItem = (new \yii\db\Query())->select('*')->from('cms_nav_item_page_block_item')->where(['id' => $blockId])->one();
-
-        $blockObject = \cmsadmin\models\Block::objectId($blockItem['block_id'], $blockItem['id'], 'admin', NavItem::findOne($blockItem['nav_item_page_id']));
-        if ($blockObject === false) {
-            return false;
-        }
-
-        $blockItem['json_config_values'] = json_decode($blockItem['json_config_values'], true);
-        $blockItem['json_config_cfg_values'] = json_decode($blockItem['json_config_cfg_values'], true);
-
-        $blockValue = $blockItem['json_config_values'];
-        $blockCfgValue = $blockItem['json_config_cfg_values'];
-
-        $blockObject->setVarValues((empty($blockValue)) ? [] : $blockValue);
-        $blockObject->setCfgValues((empty($blockCfgValue)) ? [] : $blockCfgValue);
-
-        $placeholders = [];
-
-        foreach ($blockObject->getPlaceholders() as $pk => $pv) {
-            $pv['nav_item_page_id'] = $blockItem['nav_item_page_id'];
-            $pv['prev_id'] = $blockItem['id'];
-            $placeholderVar = $pv['var'];
-
-            $pv['__nav_item_page_block_items'] = $this->getSub($placeholderVar, $blockItem['nav_item_page_id'], $blockItem['id']);
-
-            $placeholder = $pv;
-
-            $placeholders[] = $placeholder;
-        }
-
-        if (empty($blockItem['json_config_values'])) {
-            $blockItem['json_config_values'] = new \stdClass();
-        }
-
-        if (empty($blockItem['json_config_cfg_values'])) {
-            $blockItem['json_config_cfg_values'] = new \stdClass();
-        }
-
-        return [
-            'is_dirty' => (int) $blockItem['is_dirty'],
-            'is_container' => (int) $blockObject->isContainer,
-            'id' => $blockItem['id'],
-            'is_hidden' => $blockItem['is_hidden'],
-            'name' => $blockObject->name(),
-            'icon' => $blockObject->icon(),
-            'full_name' => $blockObject->getFullName(),
-            'twig_admin' => $blockObject->twigAdmin(),
-            'vars' => $blockObject->getVars(),
-            'cfgs' => $blockObject->getCfgs(),
-            'extras' => $blockObject->extraVars(),
-            'values' => $blockItem['json_config_values'],
-            'field_help' => $blockObject->getFieldHelp(),
-            'cfgvalues' => $blockItem['json_config_cfg_values'], // add: t1_json_config_cfg_values
-            '__placeholders' => $placeholders,
-        ];
+        return NavItemPage::getBlock($blockId);
     }
     
     public function actionToggleBlockHidden($blockId, $hiddenState)

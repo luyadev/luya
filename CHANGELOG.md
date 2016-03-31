@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **BC BREAKS** See [UPGRADE.md](UPGRADE.md) as we have made some major changes.
 
+- `#818` Added basic implementation of page version in cms (run `./vendor/bin/luya commands cmsadmin updater/version` once after upgrading to beta6).
 - `#815` Fixed bug where level container does also return items from other containers, add optional base element attribute for getLevelContainer
 - `#810` Fixed bug where cms toolbar does not affect domain cookie storage.
 - `#809` Fixed bug in SoftDelete trait and renamed SoftDeleteValue() to FieldStateDescriber().

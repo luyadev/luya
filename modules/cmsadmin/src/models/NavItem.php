@@ -282,6 +282,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
         }
         $pageItem = new NavItemPage();
         $pageItem->attributes = $sourcePageItem->toArray();
+        $pageItem->nav_item_id = $targetNavItem->id;
 
         if (!$pageItem->save()) {
             return false;
@@ -292,6 +293,8 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
             return false;
         }
 
+        
+        // @TODO replace with NavItemPage::copyBlocks($sourcePageItem->id, $pageItem->id);
         $pageBlocks = NavItemPageBlockItem::findAll(['nav_item_page_id' => $sourcePageItem->id]);
 
         $idLink = [];
