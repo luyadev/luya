@@ -263,6 +263,10 @@ class Item extends \yii\base\Object
      * Returns the current item link relative path with composition (language). The
      * path is always relativ to the host.
      * 
+     * As changed in 1.0.0-beta6, hidden links will be returned from getLink. So if you make a link
+     * from a page to a hidden page, the link of the hidden page will be returned and the link
+     * will be successfully displayed
+     * 
      * @return string e.g. "/home/about-us" or with composition "/de/home/about-us"
      */
     public function getLink()
@@ -271,7 +275,7 @@ class Item extends \yii\base\Object
         if ($this->getType() === 3) {
             switch ($this->redirectMapData('type')) {
                 case 1:
-                    return (($item = (new Query())->where(['nav_id' => $this->redirectMapData('value')])->with($this->_with)->lang($this->lang)->one())) ? $item->getLink() : null;
+                    return (($item = (new Query())->where(['nav_id' => $this->redirectMapData('value')])->with(['hidden'])->lang($this->lang)->one())) ? $item->getLink() : null;
                 case 2:
                     return $this->redirectMapData('value');
             }
@@ -406,14 +410,24 @@ class Item extends \yii\base\Object
 
     /**
      * You can use with() before the following methods:
+     * 
      * - getParent()
      * - getParents()
      * - getTeardown()
      * - getChildren()
      * - hasChildren().
      * 
+     * Example use of with in subquery of the current item:
+     * 
+     * ```php
+     * if ($item->with(['hidden'])->hasChildren()) {
+     *     print_r($item->getChildren());
+     * }
+     * ```
+     * 
+     * The above example display also hidden pages.
+     * 
      * @see \cms\menu\Query::with()
-     *
      * @return \cms\menu\Item;
      */
     public function with($with)
