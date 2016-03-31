@@ -259,7 +259,7 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
 
     public function getLang()
     {
-        return $this->hasOne(\admin\models\Lang::className(), ['id' => 'lang_id']);
+        return $this->hasOne(Lang::className(), ['id' => 'lang_id']);
     }
 
     /**

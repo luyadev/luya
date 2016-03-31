@@ -9,15 +9,15 @@ use yii\helpers\Html;
  */
 ?>
 
-<? if ($success): ?>
+<?php if ($success): ?>
     <div class="alert alert-success">The form has been submited successfull.</div>
-<? else: ?>
-    <? $form = ActiveForm::begin(); ?>
+<?php else: ?>
+    <?php $form = ActiveForm::begin(); ?>
     
     <?= $form->field($model, 'name'); ?>
     <?= $form->field($model, 'message')->textarea(); ?>
     
     <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
     
-    <? ActiveForm::end(); ?>
-<? endif; ?>
+    <?php ActiveForm::end(); ?>
+<?php endif; ?>
