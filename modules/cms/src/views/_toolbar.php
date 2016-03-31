@@ -18,27 +18,22 @@ if (!empty($menu->current->keywords)) {
         }
     }
 }
-
 ?>
-
 <div id="luya-cms-toolbar-wrapper">
 
     <div id="luya-cms-toolbar">
-
         <div class="luya-cms-toolbar__button luya-cms-toolbar__button--info">
             <div class="luya-cms-toolbar__button-text">
-                <? if ($menu->current->isHidden): ?>
+                <?php if ($menu->current->isHidden): ?>
                     <i class="material-icons" alt="Not visible" title="Not visible">visibility_off</i>
-                <? else: ?>
+                <?php else: ?>
                     <i class="material-icons" alt="Visible" title="Visible">visibility</i>
-                <? endif; ?>
-                
-                <? if ($menu->current->type == 2): ?>
+                <?php endif; ?>
+                <?php if ($menu->current->type == 2): ?>
                     <span class="luya-cms-toolbar__badge luya-cms-toolbar__margin-left">
                         Modul: <strong><?= $menu->current->moduleName; ?></strong>
                     </span>
-                <? endif; ?>
-
+                <?php endif; ?>
             </div>
         </div>
     
@@ -60,13 +55,13 @@ if (!empty($menu->current->keywords)) {
             </a>
         </div>
 
-        <? if (!empty($properties)): ?>
+        <?php if (!empty($properties)): ?>
             <div class="luya-cms-toolbar__button">
                 <a class="luya-cms-toolbar__container-toggler" href="javascript:void(0);" onclick="toggleDetails(this, 'luya-cms-toolbar-properties-container')">
                     <span class="luya-cms-toolbar__badge"><?= count($properties); ?></span> <span>Properties</span> <i class="material-icons">keyboard_arrow_down</i>
                 </a>
             </div>
-        <? endif; ?>
+        <?php endif; ?>
 
         <div class="luya-cms-toolbar__pull-right">
 
@@ -100,11 +95,11 @@ if (!empty($menu->current->keywords)) {
                 </div>
                 <div class="luya-cms-toolbar__list-entry-right">
                     <p>
-                        <? if (empty($menu->current->description)): ?>
+                        <?php if (empty($menu->current->description)): ?>
                             <span class="luya-cms-toolbar__text--danger">No description found!</span>
-                        <? else: ?>
+                        <?php else: ?>
                             <span class="luya-cms-toolbar__text--success"><?= $menu->current->description; ?></span>
-                        <? endif; ?>
+                        <?php endif; ?>
                     </p>
                 </div>
             </div>
@@ -123,15 +118,15 @@ if (!empty($menu->current->keywords)) {
                     <label>Keywords</label>
                 </div>
                 <div class="luya-cms-toolbar__list-entry-right">
-                	<? if (empty($keywords)): ?>
+                	<?php if (empty($keywords)): ?>
                 		<p class="luya-cms-toolbar__text--danger">No keywords found! You should add keywords in order to analyze your content.</p>
-                	<? else: ?>
+                	<?php else: ?>
                 		<ul class="luya-cms-toolbar__no-bullets">
-                			<? foreach($keywords as $keyword): ?>
+                			<?php foreach($keywords as $keyword): ?>
                 			 <li><span class="luya-cms-toolbar__badge<?= $keyword[1] > 0 ? ' luya-cms-toolbar__badge--success' : ' luya-cms-toolbar__badge--danger'  ?>"><?= $keyword[1]; ?></span> <span><?= $keyword[0]; ?></span></li>
-                			<? endforeach; ?>
+                			<?php endforeach; ?>
                 		</ul>
-                	<? endif; ?>
+                	<?php endif; ?>
                 </div>
             </div>
         </div>
@@ -139,7 +134,7 @@ if (!empty($menu->current->keywords)) {
 
     <div id="luya-cms-toolbar-composition-container" class="luya-cms-toolbar__container">
         <div class="luya-cms-toolbar__list">
-            <? foreach ($composition->get() as $key => $value): ?>
+            <?php foreach ($composition->get() as $key => $value): ?>
                 <div class="luya-cms-toolbar__list-entry">
                     <div class="luya-cms-toolbar__list-entry-left">
                         <label><?= $key ?></label>
@@ -150,14 +145,13 @@ if (!empty($menu->current->keywords)) {
                         </p>
                     </div>
                 </div>
-            <? endforeach; ?>
+            <?php endforeach; ?>
         </div>
     </div>
-
-    <? if (!empty($properties)): ?>
+    <?php if (!empty($properties)): ?>
         <div id="luya-cms-toolbar-properties-container" class="luya-cms-toolbar__container">
             <div class="luya-cms-toolbar__list">
-                <? foreach ($properties as $prop): ?>
+                <?php foreach ($properties as $prop): ?>
                     <div class="luya-cms-toolbar__list-entry">
                         <div class="luya-cms-toolbar__list-entry-left">
                             <label><?= $prop['label'] ?></label>
@@ -168,11 +162,10 @@ if (!empty($menu->current->keywords)) {
                             </p>
                         </div>
                     </div>
-                <? endforeach; ?>
+                <?php endforeach; ?>
             </div>
         </div>
-    <? endif; ?>
-
+    <?php endif; ?>
     <div class="luya-cms-toolbar-container__toggler">
         <a href="javascript:void(0);" onclick="toggleLuyaToolbar()">
             <i class="material-icons luya-cms-toolbar__arrow">keyboard_arrow_down</i>
