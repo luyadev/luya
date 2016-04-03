@@ -38,13 +38,38 @@ abstract class Controller extends \luya\web\Controller
         
         $menu = Yii::$app->menu;
         
+        // seo keyword frequency 
+        $seoAlert = 0;
+        $keywords = [];
+        $content = strip_tags(NavItem::findOne($menu->current->id)->getContent());
+        
+        if (empty($menu->current->description)) {
+        	$seoAlert++;
+        }
+        
+        if (empty($menu->current->keywords)) {
+        	$seoAlert++;
+        } else {
+        	foreach ($menu->current->keywords as $word) {
+        		if (preg_match_all('/' . $word . '/i', $content, $matches)) {
+        			$keywords[] = [$word, count($matches[0])];
+        		} else {
+        			$keywords[] = [$word, 0];
+        			$seoAlert++;
+        		}
+        	}
+        }
+        
         echo $view->renderPhpFile($folder . '/views/_toolbar.php', [
+        	'keywords' => $keywords,
+        	'seoAlertCount' => $seoAlert,
             'menu' => $menu,
             'composition' => Yii::$app->composition,
             'luyaTagParsing' => $event->sender->context->module->enableTagParsing,
             'properties' => $props,
-            'content' => strip_tags(NavItem::findOne($menu->current->id)->getContent()),
+            'content' => $content,
         ]);
+        
         // echo is used in order to support cases where asset manager is not available
         echo '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
         echo '<style>' . $view->renderPhpFile($folder . '/assets/toolbar.css') . '</style>';

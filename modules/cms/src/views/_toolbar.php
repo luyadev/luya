@@ -1,23 +1,5 @@
 <?php
 use luya\helpers\Url;
-
-$seoAlert = false;
-$keywords = [];
-
-if (empty($menu->current->keywords) || empty($menu->current->description)) {
-    $seoAlert = true;    
-}
-
-if (!empty($menu->current->keywords)) {
-    foreach ($menu->current->keywords as $word) {
-        if (preg_match_all('/' . $word . '/i', $content, $matches)) {
-            $keywords[] = [$word, count($matches[0])];
-        } else {
-            $keywords[] = [$word, 0];
-            $seoAlert = true;
-        }
-    }
-}
 ?>
 <div id="luya-cms-toolbar-wrapper">
 
@@ -45,7 +27,7 @@ if (!empty($menu->current->keywords)) {
 
         <div class="luya-cms-toolbar__button">
             <a class="luya-cms-toolbar__container-toggler" href="javascript:void(0);" onclick="toggleDetails(this, 'luya-cms-toolbar-seo-container')">
-                <?php if($seoAlert): ?><span class="luya-cms-toolbar__badge luya-cms-toolbar__badge--danger">2</span><?php endif;?> <span>SEO</span> <i class="material-icons">keyboard_arrow_down</i>
+                <?php if($seoAlertCount > 0): ?><span class="luya-cms-toolbar__badge luya-cms-toolbar__badge--danger"><?= $seoAlertCount; ?></span><?php endif;?> <span>SEO</span> <i class="material-icons">keyboard_arrow_down</i>
             </a>
         </div>
 
@@ -121,6 +103,9 @@ if (!empty($menu->current->keywords)) {
                 	<?php if (empty($keywords)): ?>
                 		<p class="luya-cms-toolbar__text--danger">No keywords found! You should add keywords in order to analyze your content.</p>
                 	<?php else: ?>
+                		<?php if ($seoAlertCount > 0): ?>
+                		<p class="luya-cms-toolbar__badge--warning">Some of your keywords are not found in your content, you should fix this by chaning your keywords or add content for your defined keywords.</p>
+                		<?php endif; ?>
                 		<ul class="luya-cms-toolbar__no-bullets">
                 			<?php foreach($keywords as $keyword): ?>
                 			 <li><span class="luya-cms-toolbar__badge<?= $keyword[1] > 0 ? ' luya-cms-toolbar__badge--success' : ' luya-cms-toolbar__badge--danger'  ?>"><?= $keyword[1]; ?></span> <span><?= $keyword[0]; ?></span></li>
@@ -169,7 +154,9 @@ if (!empty($menu->current->keywords)) {
     <div class="luya-cms-toolbar-container__toggler">
         <a href="javascript:void(0);" onclick="toggleLuyaToolbar()">
             <i class="material-icons luya-cms-toolbar__arrow">keyboard_arrow_down</i>
-            <div class="luya-cms-toolbar-container__toggler-badge">!</div>
+            <?php if ($seoAlertCount > 0): ?>
+            <div class="luya-cms-toolbar-container__toggler-badge"><?= $seoAlertCount; ?></div>
+            <?php endif; ?>
         </a>
     </div>
 </div>
