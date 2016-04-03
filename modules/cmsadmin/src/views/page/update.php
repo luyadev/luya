@@ -181,7 +181,7 @@
                                 <!-- RIGHT TOOLBAR -->
                                 <div class="toolbar__right">
 
-                                    <div class="toolbar__group" ng-show="navData.is_draft == 1">
+                                    <div class="toolbar__group" ng-show="isDraft == true">
                                         <div class="toolbar__group">
                                             <div class="switch">
                                                 <label>
@@ -191,7 +191,7 @@
                                         </div>
                                     </div>
                                     <!-- IS_HOME SWITCH -->
-                                    <div class="toolbar__group  toolbar__group--homepage" ng-show="navData.is_draft == 0">
+                                    <div class="toolbar__group  toolbar__group--homepage" ng-show="isDraft == false">
                                         <div class="switch">
                                             <label title="Setzt diese Seite als Startseite.">
                                                 <?php echo \cmsadmin\Module::t('view_update_is_homepage'); ?>
@@ -203,7 +203,7 @@
                                     <!-- /IS_HOME SWITCH -->
                                     
                                     <!-- VISIBILITY SWITCH -->
-                                    <div class="toolbar__group  toolbar__group--visibility" ng-show="navData.is_draft == 0">
+                                    <div class="toolbar__group  toolbar__group--visibility" ng-show="isDraft == false">
                                         <div class="switch switch--with-icons">
                                             <label title="Schaltet die Seite Sichtbar / Unsichtbar. Beeinflusst die Navigation.">
                                                 <i class="switch__icon material-icons" ng-show="!navData.is_hidden">visibility</i>
@@ -216,7 +216,7 @@
                                     <!-- /VISIBILITY SWITCH -->
                                     
                                     <!-- OFFLINE SWITCH -->
-                                    <div class="toolbar__group toolbar__group--online" ng-show="navData.is_draft == 0">
+                                    <div class="toolbar__group toolbar__group--online" ng-show="isDraft == false">
                                         <div class="switch switch--with-icons">
                                             <label title="Schaltet die Seite online / offline. Eine Seite die offline ist, kann nicht aufgerufen werden.">
                                                 <i class="switch__icon material-icons green-text" ng-show="!navData.is_offline">cloud_queue</i>

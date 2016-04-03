@@ -355,7 +355,16 @@ class Nav extends \yii\db\ActiveRecord
         $nav->save();
         $navItemPage = new NavItemPage();
         $navItemPage->layout_id = $layoutId;
+        $navItemPage->timestamp_create = time();
+        $navItemPage->version_alias = 'initial';
+        $navItemPage->create_user_id = Yii::$app->adminuser->getId();
+        
+        if (!$navItemPage->validate()) {
+        	return $navItemPage->getErrors();
+        }
+        
         $navItemPage->save();
+        
         foreach ($pageBlocks as $block) {
             $i = new NavItemPageBlockItem();
             $i->attributes = $block->toArray();
@@ -366,7 +375,11 @@ class Nav extends \yii\db\ActiveRecord
         $navItem->nav_id = $nav->id;
         $navItem->nav_item_type_id = $navItemPage->id;
 
-        return $navItem->save();
+        $navItem->save();
+        
+        $navItemPage->updateAttributes(['nav_item_id' => $navItem->id]);
+        
+        return true;
     }
 
     public function createPage($parentNavId, $navContainerId, $langId, $title, $alias, $layoutId, $description, $isDraft = false)

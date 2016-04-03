@@ -747,11 +747,6 @@
 		
 		$scope.AdminClassService = AdminClassService;
 		
-		function initializer() {
-			$scope.navData = $filter('filter')($scope.menuData.items, {id: $scope.id}, true)[0];
-			$scope.loadNavProperties();
-		}
-		
 		$scope.propValues = {};
 		
 		$scope.hasValues = false;
@@ -795,47 +790,62 @@
 			});
 	    };
 		
-		/* properties --> */
+	    $scope.isDraft = false;
 		
-	    $scope.$watch(function() { return $scope.navData.is_offline }, function(n, o) {
-	    	if (n !== o && n !== undefined) {
-	    		$http.get('admin/api-cms-nav/toggle-offline', { params : { navId : $scope.navData.id , offlineStatus : n }}).success(function(response) {
-					if ($scope.navData.is_offline == 1) {
-						AdminToastService.notify(i18nParam('js_state_offline', {title: $scope.navData.title}), 2000);
-					} else {
-						AdminToastService.notify(i18nParam('js_state_online', {title: $scope.navData.title}), 2000);
-					}
-	    		});
-	    	}
-	    });
 	    
-	    $scope.$watch(function() { return $scope.navData.is_hidden }, function(n, o) {
-			if (n !== o && n !== undefined) {
-				$http.get('admin/api-cms-nav/toggle-hidden', { params : { navId : $scope.navData.id , hiddenStatus : n }}).success(function(response) {
-					if ($scope.navData.is_hidden == 1) {
-						AdminToastService.notify(i18nParam('js_state_hidden', {title: $scope.navData.title}), 2000);
-					} else {
-						AdminToastService.notify(i18nParam('js_state_visible', {title: $scope.navData.title}), 2000);
+	    function initializer() {
+			$scope.navData = $filter('filter')($scope.menuData.items, {id: $scope.id}, true)[0];
+			
+			if ($scope.navData == undefined) {
+				$scope.isDraft = true;
+			} else {
+			
+				$scope.loadNavProperties();
+				
+				/* watchers for properties if its not a draft */
+				
+				/* properties --> */
+				
+			    $scope.$watch(function() { return $scope.navData.is_offline }, function(n, o) {
+			    	if (n !== o && n !== undefined) {
+			    		$http.get('admin/api-cms-nav/toggle-offline', { params : { navId : $scope.navData.id , offlineStatus : n }}).success(function(response) {
+							if ($scope.navData.is_offline == 1) {
+								AdminToastService.notify(i18nParam('js_state_offline', {title: $scope.navData.title}), 2000);
+							} else {
+								AdminToastService.notify(i18nParam('js_state_online', {title: $scope.navData.title}), 2000);
+							}
+			    		});
+			    	}
+			    });
+			    
+			    $scope.$watch(function() { return $scope.navData.is_hidden }, function(n, o) {
+					if (n !== o && n !== undefined) {
+						$http.get('admin/api-cms-nav/toggle-hidden', { params : { navId : $scope.navData.id , hiddenStatus : n }}).success(function(response) {
+							if ($scope.navData.is_hidden == 1) {
+								AdminToastService.notify(i18nParam('js_state_hidden', {title: $scope.navData.title}), 2000);
+							} else {
+								AdminToastService.notify(i18nParam('js_state_visible', {title: $scope.navData.title}), 2000);
+							}
+						});
+					}
+				});
+			    
+			    $scope.$watch(function() { return $scope.navData.is_home }, function(n, o) {
+			    	if (n !== o && n !== undefined) {
+						$http.get('admin/api-cms-nav/toggle-home', { params : { navId : $scope.navData.id , homeState : n }}).success(function(response) {
+							$scope.menuDataReload().then(function() {
+								if ($scope.navData.is_home == 1) {
+									AdminToastService.notify(i18nParam('js_state_is_home', {title: $scope.navData.title}), 2000);
+								} else {
+									AdminToastService.notify(i18nParam('js_state_is_not_home', {title: $scope.navData.title}), 2000);
+								}
+			    			});
+						});
 					}
 				});
 			}
-		});
+		}
 	    
-	    $scope.$watch(function() { return $scope.navData.is_home }, function(n, o) {
-	    	if (n !== o && n !== undefined) {
-				$http.get('admin/api-cms-nav/toggle-home', { params : { navId : $scope.navData.id , homeState : n }}).success(function(response) {
-					$scope.menuDataReload().then(function() {
-						if ($scope.navData.is_home == 1) {
-							AdminToastService.notify(i18nParam('js_state_is_home', {title: $scope.navData.title}), 2000);
-						} else {
-							AdminToastService.notify(i18nParam('js_state_is_not_home', {title: $scope.navData.title}), 2000);
-						}
-	    			});
-				});
-			}
-		});
-	    
-		
 		initializer();
 	});
 	
