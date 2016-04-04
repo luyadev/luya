@@ -58,7 +58,7 @@ use Yii;
     <?php endif; ?>/**
      * @var An array containing all fields which should be transformed to multilingual fields and stored as json in the database.
      */
-    public $i18n = ['<?= implode("', '", $i18n); ?>'];
+    public $i18n = ['<?= implode("', '", $textFields); ?>'];
     
     /**
      * @inheritdoc
@@ -76,7 +76,7 @@ use Yii;
      */
     public function genericSearchFields()
     {
-        return ['<?= implode("', '", $fieldNames); ?>'];
+        return ['<?= implode("', '", $textFields); ?>'];
     }
     
     /**
@@ -105,8 +105,7 @@ use Yii;
     {
         // define fields for types based from ngrestAttributeTypes
         $this->ngRestConfigDefine($config, 'list', ['<?= implode($fieldNames, "', '"); ?>']);
-        $this->ngRestConfigDefine($config, 'create', ['<?= implode($fieldNames, "', '"); ?>']);
-        $this->ngRestConfigDefine($config, 'update', ['<?= implode($fieldNames, "', '"); ?>']);
+        $this->ngRestConfigDefine($config, ['create', 'update'], ['<?= implode($fieldNames, "', '"); ?>']);
         
         // enable or disable ability to delete;
         $config->delete = false; 

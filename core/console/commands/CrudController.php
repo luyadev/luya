@@ -112,6 +112,7 @@ class CrudController extends \luya\console\Command
                     $names = [];
                     $allfields = [];
                     $fieldConfigs = [];
+                    $textFields = [];
                     $i18n = [];
                     foreach ($shema->columns as $k => $v) {
                         if ($v->isPrimaryKey) {
@@ -120,20 +121,29 @@ class CrudController extends \luya\console\Command
                         
                         $allfields[] = $v->name;
                         
+                        
                         if ($v->type == 'text') {
                             $fieldConfigs[$v->name] = 'textarea';
                             $i18n[] = $v->name;
                             $names[] = $v->name;
+                            $textFields[] = $v->name;
                         }
                         if ($v->type == 'string') {
                             $fieldConfigs[$v->name] = 'text';
                             $i18n[] = $v->name;
                             $names[] = $v->name;
+                            $textFields[] = $v->name;
                         }
-                        if ($v->type == 'integer' || $v->type == 'bigint' || $v->type == 'smallint' || $v->type == 'decimal') {
+                        if ($v->type == 'integer' || $v->type == 'bigint' || $v->type == 'smallint') {
                             $fieldConfigs[$v->name] = 'number';
                             $names[] = $v->name;
                         }
+                        
+                        if ($v->type == 'decimal') {
+                            $fieldConfigs[$v->name] = 'decimal';
+                            $names[] = $v->name;
+                        }
+                        
                         if ($v->type == 'boolean') {
                             $fieldConfigs[$v->name] = 'toggleStatus';
                             $names[] = $v->name;
@@ -152,6 +162,7 @@ class CrudController extends \luya\console\Command
                         'fieldConfigs' => $fieldConfigs,
                         'i18n' => $i18n,
                         'extended' => $extended,
+                        'textFields' => $textFields,
                     ]);
                     
                     break;
