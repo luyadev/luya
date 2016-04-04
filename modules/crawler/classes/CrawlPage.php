@@ -6,6 +6,7 @@ use Goutte\Client;
 use yii\base\InvalidConfigException;
 use yii\base\yii\base;
 use luya\helpers\Url;
+use Symfony\Component\DomCrawler\Crawler;
 
 class CrawlPage extends \yii\base\Object
 {
@@ -19,6 +20,8 @@ class CrawlPage extends \yii\base\Object
     
     private $_crawler = null;
 
+    public $verbose = false;
+    
     public function __clone()
     {
         $this->flush();
@@ -33,6 +36,13 @@ class CrawlPage extends \yii\base\Object
         $info = parse_url($this->baseUrl);
         
         $this->baseHost = $info['scheme'] . '://' . $info['host'];
+    }
+    
+    public function verbosePrint($key, $value = null)
+    {
+        if ($this->verbose) {
+            echo  $key .': ' . $value . PHP_EOL;
+        }
     }
 
     public function flush()
@@ -59,9 +69,14 @@ class CrawlPage extends \yii\base\Object
     
     public function getLinks()
     {
-        $links = $this->getCrawler()->filterXPath('//a')->each(function ($node, $i) {
+        $bodyContent = $this->tempGetContent($this->pageUrl);
+        
+        $crawler = new Crawler($bodyContent);
+        
+        $links = $crawler->filterXPath('//a')->each(function ($node, $i) {
             return $node->extract(array('_text', 'href'))[0];
         });
+        
         foreach ($links as $key => $item) {
             $url = parse_url($item[1]);
 
@@ -104,7 +119,7 @@ class CrawlPage extends \yii\base\Object
         $content = $curl->response;
 
         if (empty($content)) {
-            return '';
+            return null;
         }
         
         $dom = new \DOMDocument('1.0', 'utf-8');
@@ -129,8 +144,31 @@ class CrawlPage extends \yii\base\Object
 
             $bodyContent = $dom->saveXML($domBody);
             //$bodyContent = $this->dom->saveHTML($this->domBody); // argument not allowed on 5.3.5 or less, see: http://www.php.net/manual/de/domdocument.savehtml.php
+        } else {
+            $this->verbosePrint('unable to find body tag, or the length of body tags', $url);
         }
 
+        $bodyContent = preg_replace('/\s+/', ' ', $bodyContent);
+        
+        // find crawl full ignore
+        preg_match("/\[CRAWL_FULL_IGNORE\]/s", $bodyContent, $output);
+        if (isset($output[0])) {
+            if ($output[0] == '[CRAWL_FULL_IGNORE]') {
+                $this->verbosePrint('Crawler tag found: CRAWL_FULL_IGNORE', $this->pageUrl);
+                $bodyContent = null;
+            }
+        }
+        
+        if ($bodyContent !== null) {
+            // remove crawl ignore tags
+            preg_match_all("/\[CRAWL_IGNORE\](.*?)\[\/CRAWL_IGNORE\]/s", $bodyContent, $output);
+            if (isset($output[0]) && count($output[0]) > 0) {
+                foreach($output[0] as $ignorPartial) {
+                    $bodyContent = str_replace($ignorPartial, '', $bodyContent);
+                }
+            }            
+        }
+        
         return $bodyContent;
     }
 
@@ -138,24 +176,8 @@ class CrawlPage extends \yii\base\Object
     {
         $bodyContent = $this->tempGetContent($this->pageUrl);
 
-        // find crawl full ignore
-        preg_match("/\[CRAWL_FULL_IGNORE\]/s", $bodyContent, $output);
-        if (isset($output[0])) {
-            if ($output[0] == '[CRAWL_FULL_IGNORE]') {
-                return;
-            }
-        }
-
-        $content = preg_replace('/\s+/', ' ', $bodyContent);
-
-        // remove crawl ignore tags
-        preg_match_all("/\[CRAWL_IGNORE\](.*?)\[\/CRAWL_IGNORE\]/s", $content, $output);
-        if (isset($output[0]) && count($output[0]) > 0) {
-            $content = str_replace($output[0], '', $content);
-        }
-
         // strip tags and stuff
-        $content = strip_tags($content);
+        $content = strip_tags($bodyContent);
 
         // remove whitespaces and stuff
         $content = trim(str_replace(array("\n", "\r", "\t", "\n\r", "\r\n"), '', $content));

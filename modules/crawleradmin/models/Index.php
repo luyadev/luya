@@ -53,7 +53,7 @@ class Index extends \admin\ngrest\base\Model
         $query = trim(Html::encode($query));
         
         if (strlen($query) < 1) {
-            return false;
+            return [];
         }
         
         $parts = explode(" ", $query);
@@ -83,7 +83,7 @@ class Index extends \admin\ngrest\base\Model
         $query = trim(Html::encode($query));
         
         if (strlen($query) < 1) {
-            return false;
+            return [];
         }
         
         $q = self::find()->where(['like', 'content', $query]);

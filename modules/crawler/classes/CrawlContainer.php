@@ -20,6 +20,8 @@ class CrawlContainer extends \yii\base\Object
 
     public $filterRegex = [];
     
+    public $verbose = false;
+    
     private $_crawlers = [];
     
     public $log = [
@@ -35,11 +37,18 @@ class CrawlContainer extends \yii\base\Object
     {
         $this->log[$cat][] = $message;
     }
+    
+    public function verbosePrint($key, $value = null)
+    {
+        if ($this->verbose) {
+            echo  $key .': ' . $value . PHP_EOL;
+        }
+    }
 
     protected function getCrawler($url)
     {
         if (!array_key_exists($url, $this->_crawlers)) {
-            $crawler = new CrawlPage(['baseUrl' => $this->baseUrl, 'pageUrl' => $url]);
+            $crawler = new CrawlPage(['baseUrl' => $this->baseUrl, 'pageUrl' => $url, 'verbose' => $this->verbose]);
             
             $this->_crawlers[$url] = $crawler;
         }
@@ -52,9 +61,16 @@ class CrawlContainer extends \yii\base\Object
         if ($this->baseUrl === null) {
             throw new InvalidConfigException("argument 'baseUrl' can not be null.");
         }
+        
         $this->baseUrl = Url::trailing($this->baseUrl);
         $this->baseHost = parse_url($this->baseUrl, PHP_URL_HOST);
+        
+        $this->verbosePrint('baseUrl', $this->baseUrl);
+        $this->verbosePrint('baseHost', $this->baseHost);
+        
         Yii::$app->db->createCommand()->truncateTable('crawler_builder_index')->execute();
+        
+        $this->verbosePrint('truncate of table crawerl_builder_index', 'yes');
         // init base url
         $this->urlStatus($this->baseUrl);
         $this->find();
@@ -84,7 +100,7 @@ class CrawlContainer extends \yii\base\Object
         $index = Index::find()->asArray()->indexBy('url')->all();
 
         if (count($builder) == 0) {
-            throw new Exception('The crawler have not found any results. Wrong base url? Or set a rule which tracks all urls? log: ', print_r($this->getReport(), true));
+            throw new Exception('The crawler have not found any results. Wrong base url? Or set a rule which tracks all urls? Try to enable verbose output.');
         }
 
         foreach ($builder as $url => $page) {
@@ -137,6 +153,7 @@ class CrawlContainer extends \yii\base\Object
         foreach ($this->filterRegex as $rgx) {
             $r = preg_match($rgx, $url, $results);
             if ($r === 1) {
+                $this->verbosePrint('url does not match filter regex', $rgx);
                 $this->addLog('filtered', $url);
                 return false;
             }
@@ -145,6 +162,7 @@ class CrawlContainer extends \yii\base\Object
         $type = $this->getCrawler($url)->getContentType();
         
         if (strpos($type, 'text/html') === false) {
+            $this->verbosePrint('url is not type of content "text/html"', $type);
             $this->addLog('invalid_header', $url . ' invalid header ' . $type);
             return false;
         }
@@ -154,10 +172,11 @@ class CrawlContainer extends \yii\base\Object
 
     public function urlStatus($url)
     {
+        $this->verbosePrint('Inspect URL Status', $url);
         $model = Builderindex::findUrl($url);
 
         if (!$model) {
-
+            $this->verbosePrint('found in builder index', 'no');
             // add the url to the index
             if ($this->filterUrlIsValid($url)) {
                 Builderindex::addToIndex($url, $this->getCrawler($url)->getTitle());
@@ -181,6 +200,7 @@ class CrawlContainer extends \yii\base\Object
                 }
             }
         } else {
+            $this->verbosePrint('found in builder index', 'yes');
             if (!$this->filterUrlIsValid($url)) {
                 $model->delete();
             } else {
