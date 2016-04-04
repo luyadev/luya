@@ -9,6 +9,20 @@ use yii\helpers\Inflector;
 class Command extends \luya\console\Controller
 {
     /**
+     * @var Default option for all luya comamnds, to enable verbose output
+     */
+    public $verbose = false;
+    
+    /**
+     * {@inheritDoc}
+     * @see \yii\console\Controller::options()
+     */
+    public function options($actionID)
+    {
+        return ['verbose'];
+    }
+    
+    /**
      * Get selection list of all module types.
      * 
      * @return string
