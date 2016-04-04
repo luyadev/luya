@@ -912,7 +912,7 @@
 			typeDataCopy.description = itemCopy.description;
 			typeDataCopy.keywords = itemCopy.keywords;
 			$http.post(
-				'admin/api-cms-navitem/update-page-item?navItemId=' + navItemId + '&navItemType=' + itemCopy.nav_item_type + '&navItemTypeId=' + itemCopy.nav_item_type_id,
+				'admin/api-cms-navitem/update-page-item?navItemId=' + navItemId + '&navItemType=' + itemCopy.nav_item_type,
 				$.param(typeDataCopy),
 				headers
 			).then(function successCallback(response) {
@@ -955,7 +955,9 @@
 						$scope.reset();
 						if ($scope.item.nav_item_type == 1) {
 							$scope.currentPageVersion = response.item.nav_item_type_id;
-							$scope.container = response.typeData[response.item.nav_item_type_id]['contentAsArray'];
+							if (response.item.nav_item_type_id in response.typeData) {
+								$scope.container = response.typeData[response.item.nav_item_type_id]['contentAsArray'];
+							}
 						}
 						
 					}

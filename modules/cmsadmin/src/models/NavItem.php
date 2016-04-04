@@ -6,13 +6,17 @@ use Yii;
 use admin\models\Lang;
 use yii\base\Exception;
 use yii\helpers\Inflector;
+use admin\base\GenericSearchInterface;
 
 /**
+ * NavItem Model represents a Item bound to Nav and Language, each Nav(Menu) can contain a nav_item for each language.
+ * 
+ * 
  * Each creation of a navigation block requires the nav_item_type_id which need to be created first with NavItemType Model.
  *
  * @author nadar
  */
-class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchInterface
+class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
 {
     const TYPE_PAGE = 1;
 
@@ -28,36 +32,44 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
         $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'validateAlias']);
         $this->on(self::EVENT_BEFORE_INSERT, [$this, 'beforeCreate']);
         $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'eventBeforeUpdate']);
-        $this->on(self::EVENT_BEFORE_DELETE, [$this, 'logEvent']);
-        $this->on(self::EVENT_AFTER_INSERT, [$this, 'logEvent']);
-        $this->on(self::EVENT_AFTER_UPDATE, [$this, 'logEvent']);
+        
+        $this->on(self::EVENT_BEFORE_DELETE, [$this, 'eventLogger']);
+        $this->on(self::EVENT_AFTER_INSERT, [$this, 'eventLogger']);
+        $this->on(self::EVENT_AFTER_UPDATE, [$this, 'eventLogger']);
     }
 
-    public function logEvent($e)
+    /**
+     * Log the current event in a database to retrieve data in case of emergency. This method will be trigger
+     * on: EVENT_BEFORE_DELETE, EVENT_AFTER_INSERT & EVENT_AFTER_UPDATE
+     * 
+     * @param \yii\base\Event $event
+     * @return boolean
+     */
+    protected function eventLogger($event)
     {
-        switch ($e->name) {
+        switch ($event->name) {
             case 'afterInsert':
-                Log::add(1, "nav_item.insert '".$this->title."', cms_nav_item.id '".$this->id."'", $this->toArray());
-                break;
+                return Log::add(1, "nav_item.insert '".$this->title."', cms_nav_item.id '".$this->id."'", $this->toArray());
             case 'afterUpdate':
-                Log::add(2, "nav_item.update '".$this->title."', cms_nav_item.id '".$this->id."'", $this->toArray());
-                break;
+                return Log::add(2, "nav_item.update '".$this->title."', cms_nav_item.id '".$this->id."'", $this->toArray());
             case 'afterDelete':
-                Log::add(3, "nav_item.delete '".$this->title."', cms_nav_item.id '".$this->id."'", $this->toArray());
-                break;
+                return Log::add(3, "nav_item.delete '".$this->title."', cms_nav_item.id '".$this->id."'", $this->toArray());
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * @see \yii\db\ActiveRecord::tableName()
+     */
     public static function tableName()
     {
         return 'cms_nav_item';
     }
-
-    public function slugifyAlias()
-    {
-        $this->alias = Inflector::slug($this->alias);
-    }
     
+    /**
+     * {@inheritDoc}
+     * @see \yii\base\Model::rules()
+     */
     public function rules()
     {
         return [
@@ -66,6 +78,10 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
         ];
     }
 
+    /**
+     * {@inheritDoc}
+     * @see \yii\base\Model::attributeLabels()
+     */
     public function attributeLabels()
     {
         return [
@@ -74,57 +90,96 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
         ];
     }
 
+    /**
+     * {@inheritDoc}
+     * @see \yii\base\Model::scenarios()
+     */
+    /*
     public function scenarios()
     {
         return [
             'default' => ['title', 'alias', 'nav_item_type', 'nav_id', 'lang_id', 'description', 'keywords'],
         ];
     }
+    */
 
+    public function slugifyAlias()
+    {
+        $this->alias = Inflector::slug($this->alias);
+    }
+    
+    private $_type = null;
+    
+    /**
+     * GET the type object based on the nav_item_type defintion and the nav_item_type_id which is the
+     * primary key for the corresponding type table (page, module, redirect). This approach has been choosen
+     * do dynamically extend type of pages whithout any limitaiton.
+     * 
+     * After finding the type object, the type object will get the inheritance context via `setNavItem()`.
+     * 
+     * @return \cmsadmin\models\NavItemPage|\cmsadmin\models\NavItemModule|\cmsadmin\models\NavItemRedirect Returns the object based on the type
+     * @throws Exception
+     */
     public function getType()
     {
-        $object = false;
-        
-        switch ($this->nav_item_type) {
-            case self::TYPE_PAGE:
-                $object = NavItemPage::findOne($this->nav_item_type_id);
-                break;
-            case self::TYPE_MODULE:
-                $object = NavItemModule::findOne($this->nav_item_type_id);
-                break;
-            case self::TYPE_REDIRECT:
-                $object = NavItemRedirect::findOne($this->nav_item_type_id);
-                break;
+        if ($this->_type === null) {
+            // what kind of item type are we looking for
+            if ($this->nav_item_type == self::TYPE_PAGE) {
+                $this->_type = NavItemPage::findOne($this->nav_item_type_id);;
+            } elseif ($this->nav_item_type == self::TYPE_MODULE) {
+                $this->_type = NavItemModule::findOne($this->nav_item_type_id);;
+            } elseif ($this->nav_item_type == self::TYPE_REDIRECT) {
+                $this->_type = NavItemRedirect::findOne($this->nav_item_type_id);
+            }
+            
+            if ($this->_type === null) {
+                throw new Exception("Unable to find type corresponding object for nav item.");
+            }
+            
+            // set context for the object
+            $this->_type->setNavItem($this);
         }
         
-        if ($object === false) {
-            throw new Exception("Unable to find type for the current nav item.");
-        }
-        
-        // assign the current context for an item type object.
-        $object->setNavItem($this);
-
-        return $object;
+        return $this->_type;
     }
 
+    /**
+     * Get the related nav entry for this nav_item.
+     * 
+     * @return ActiveQuery
+     */
     public function getNav()
     {
         return $this->hasOne(Nav::className(), ['id' => 'nav_id']);
     }
 
+    /**
+     * Get the render content for the specific type, see the defintion of `getContent()` in the available types.
+     * 
+     * @return mixed
+     */
     public function getContent()
     {
         return $this->getType()->getContent();
     }
 
-    public function updateType($postData)
+    /**
+     * Update attributes of the current nav item type relation.
+     * 
+     * @param array $postData
+     * @return boolean Whether the update has been successfull or not
+     */
+    public function updateType(array $postData)
     {
         $model = $this->getType();
-        $model->attributes = $postData;
-
+        $model->setAttributes($postData);
         return $model->update();
     }
 
+    /**
+     * Get the parent nav id information from the existing getNav relation and overrides the public properties parent_nav_id of this model.
+     * This is applied because of the validation process to make sure this rewrite does not already exists.
+     */
     public function setParentFromModel()
     {
         $this->parent_nav_id = $this->nav->parent_nav_id;
@@ -193,16 +248,28 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
 
     /* GenericSearchInterface */
 
+    /**
+     * {@inheritDoc}
+     * @see \admin\base\GenericSearchInterface::genericSearchFields()
+     */
     public function genericSearchFields()
     {
         return ['title', 'alias', 'nav_id'];
     }
     
+    /**
+     * {@inheritDoc}
+     * @see \admin\base\GenericSearchInterface::genericSearchHiddenFields()
+     */
     public function genericSearchHiddenFields()
     {
         return [];
     }
 
+    /**
+     * {@inheritDoc}
+     * @see \admin\base\GenericSearchInterface::genericSearch()
+     */
     public function genericSearch($searchQuery)
     {
         $query = self::find();
@@ -215,7 +282,8 @@ class NavItem extends \yii\db\ActiveRecord implements \admin\base\GenericSearchI
     }
     
     /**
-     * Return the angular state provider config for custom.cmsedit.
+     * Return the angular state provider config for custom.cmsedit to handle the selection
+     * and jump/linking in the search results container.
      * 
      * {@inheritDoc}
      * @see \admin\base\GenericSearchInterface::genericSearchStateProvider()

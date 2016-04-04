@@ -139,6 +139,7 @@ class NavItemController extends \admin\base\RestController
      * @param $navItemType
      * @param $navItemTypeId
      */
+    /*
     public function deleteItem($navItemType, $navItemTypeId)
     {
         $model = null;
@@ -157,6 +158,7 @@ class NavItemController extends \admin\base\RestController
             $model->delete();
         }
     }
+    */
 
     /**
      * extract a post var and set to model attribute with the same name.
@@ -174,97 +176,89 @@ class NavItemController extends \admin\base\RestController
     /**
      * check old entries - delete if obsolete (changed type) and add new entry to the appropriate cms_nav_item_(page/module/redirect).
      *
-     * @param $navItemId
-     * @param $navItemType
-     * @param $navItemTypeId
-     * @param $title
-     * @param $alias
-     *
+     * @param integer The id of the nav_item item which should be changed
+     * @param integer The NEW type of content for the above nav_item.id
      * @return array|bool
      */
-    public function actionUpdatePageItem($navItemId, $navItemType, $navItemTypeId)
+    public function actionUpdatePageItem($navItemId, $navItemType)
     {
-        $model = NavItem::find()->where(['id' => $navItemId])->one();
+        $model = NavItem::findOne($navItemId);
+        
         if (!$model) {
-            throw new Exception('Unable to find item id '.$navItemId);
+            throw new Exception('Unable to find the requested nav item object.');
         }
+        
         $model->setParentFromModel();
-        // save old id
-        $oldNavItemType = $model->nav_item_type;
-        $oldNavItemTypeId = $model->nav_item_type_id;
-        $oldTitle = $model->title;
-        $oldAlias = $model->alias;
-
-        $model->nav_item_type = $navItemType;
         $model->title = Yii::$app->request->post('title', false);
         $model->alias = Yii::$app->request->post('alias', false);
         $model->description = Yii::$app->request->post('description', null);
         $model->keywords = Yii::$app->request->post('keywords');
 
-        if ((!$model->validate()) || (!$model->save())) {
+        // make sure the currently provided informations are valid (like title);
+        if (!$model->validate()) {
             return $this->sendModelError($model);
         }
-
-        $itemModel = null;
-        if ($oldNavItemType == $model->nav_item_type) {
+      
+        if ($model->nav_item_type == $navItemType) {
+            $typeModel = $model->getType();
+            // lets just update the type data
             switch ($navItemType) {
-                case 1:
-                    $itemModel = NavItemPage::find()->where(['id' => $navItemTypeId])->one();
-                    break;
                 case 2:
-                    $itemModel = NavItemModule::find()->where(['id' => $navItemTypeId])->one();
+                    $this->setPostAttribute($typeModel, 'module_name');
+                    if (!$typeModel->validate()) {
+                        return $this->sendModelError($typeModel);
+                    }
+                    $typeModel->update();
                     break;
                 case 3:
-                    $itemModel = NavItemRedirect::find()->where(['id' => $navItemTypeId])->one();
+                    $this->setPostAttribute($typeModel, 'type');
+                    $this->setPostAttribute($typeModel, 'value');
+                    if (!$typeModel->validate()) {
+                        return $this->sendModelError($typeModel);
+                    }
+                    $typeModel->update();
                     break;
             }
+            // store updated type model and nav item model!
+            return $model->save();
+            
         } else {
+            // complety switch the type of this item (delete old type)
+            $oldType = $model->getType();
+            // set the new type
+            $model->nav_item_type = $navItemType;
             switch ($navItemType) {
                 case 1:
-                    $itemModel = new NavItemPage();
-                    break;
+                    $oldType->delete();
+                    $model->nav_item_type_id = 0;
+                    return $model->update();
                 case 2:
-                    $itemModel = new NavItemModule();
+                    $typeModel = new NavItemModule();
+                    $this->setPostAttribute($typeModel, 'module_name');
+                    if (!$typeModel->validate()) {
+                        return $this->sendModelError($typeModel);
+                    }
+                    $oldType->delete();
+                    $typeModel->insert();
+                    $model->nav_item_type_id = $typeModel->id;
+                    return $model->update();
                     break;
                 case 3:
-                    $itemModel = new NavItemRedirect();
+                    $typeModel = new NavItemRedirect();
+                    $this->setPostAttribute($typeModel, 'type');
+                    $this->setPostAttribute($typeModel, 'value');
+                    if (!$typeModel->validate()) {
+                        return $this->sendModelError($typeModel);
+                    }
+                    $oldType->delete();
+                    $typeModel->insert();
+                    $model->nav_item_type_id = $typeModel->id;
+                    return $model->update();
                     break;
             }
         }
-
-        switch ($navItemType) {
-            case 1:
-                $this->setPostAttribute($itemModel, 'layout_id');
-                break;
-            case 2:
-                $this->setPostAttribute($itemModel, 'module_name');
-                break;
-            case 3:
-                $this->setPostAttribute($itemModel, 'type');
-                $this->setPostAttribute($itemModel, 'value');
-                break;
-        }
-
-        if ((!$itemModel->validate()) || (!$itemModel->save())) {
-            // error: reverse changes in nav item
-            $model->nav_item_type = $oldNavItemType;
-            $model->nav_item_type_id = $oldNavItemTypeId;
-            $model->alias = $oldAlias;
-            $model->title = $oldTitle;
-            $model->update(false);
-
-            return $this->sendModelError($itemModel);
-        }
-
-        if ($oldNavItemType != $model->nav_item_type) {
-            $this->deleteItem($oldNavItemType, $oldNavItemTypeId);
-        }
-
-        // save new type id
-        $model->nav_item_type_id = $itemModel->id;
-        $model->update(false);
-
-        return $model->toArray();
+        
+        return false;
     }
 
     /**

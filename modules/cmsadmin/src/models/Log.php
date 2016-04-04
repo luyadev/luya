@@ -42,17 +42,14 @@ class Log extends \yii\db\ActiveRecord
      */
     public static function add($type, $message, array $additionalData = [])
     {
-        $attrs = [
+        $model = new self();
+        $model->setAttributes([
             'is_insertion' => ($type == 1) ? 1 : 0,
             'is_update' => ($type == 2) ? 1 : 0,
             'is_deletion' => ($type == 3) ? 1 : 0,
             'message' => $message,
             'data_json' => $additionalData,
-        ];
-
-        $model = new self();
-        $model->setAttributes($attrs);
-
+        ]);
         return $model->insert(false);
     }
 }
