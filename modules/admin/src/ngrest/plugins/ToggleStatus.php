@@ -3,48 +3,49 @@
 namespace admin\ngrest\plugins;
 
 /**
- * Create toggle checkbox for a given field
+ * Create toggle checkbox for a given field.
+ * 
+ * You can change the value for true/false state by using the `trueValue` and `falseValue` porperties while confiure
+ * the plugin for the given field.
+ * 
+ * Example of using init Value preselected
+ * 
+ * ```php
+ * 'is_downloadable' => ['toggleStatus', 'initValue' => 1],
+ * ```
+ * 
+ * Now the checkbox is set the 1 by default (which is equals to $trueValue).
  * 
  * @author nadar
  */
 class ToggleStatus extends \admin\ngrest\base\Plugin
 {
+    /**
+     * @var string|integer The value which shoud be picked for angular true state
+     */
+    public $trueValue = 1;
+    
+    /**
+     * @var string|integer The value which shoud be picked for angular false state
+     */
+    public $falseValue = 0;
+    
+    /**
+     * @var string|integer The default value which should be assigned to the field on creation
+     */
+    public $initValue = 0;
+    
     public function renderList($id, $ngModel)
     {
         return [
-            $this->createTag('i', null, ['ng-if' => $ngModel, 'ng-bind' => 'check', 'class' => 'material-icons']),
-            $this->createTag('i', null, ['ng-if' => "!$ngModel", 'ng-bind' => 'close', 'class' => 'material-icons']),
+            $this->createTag('i', 'check', ['ng-if' => "$ngModel == $this->trueValue", 'class' => 'material-icons']),
+            $this->createTag('i', 'close', ['ng-if' => "$ngModel == $this->falseValue", 'class' => 'material-icons']),
         ];
-        
-        /*
-        $activatedElement = $doc->createElement('i');
-        $activatedElement->setAttribute('ng-if', 'item.'.$this->name);
-        $activatedElement->setAttribute('ng-bind', '\'check\'');
-        $activatedElement->setAttribute('class', 'material-icons');
-
-        $disabledElement = $doc->createElement('i');
-        $disabledElement->setAttribute('ng-if', '!item.'.$this->name);
-        $disabledElement->setAttribute('ng-bind', '\'close\'');
-        $disabledElement->setAttribute('class', 'material-icons');
-
-        $doc->appendChild($activatedElement);
-        $doc->appendChild($disabledElement);
-
-        return $doc;
-        */
     }
 
     public function renderCreate($id, $ngModel)
     {
-        return $this->createFormTag('zaa-checkbox', $id, $ngModel, ['options' => json_encode(['true-value' => 1, 'false-value' => 0])]);
-        /*
-        $elmn = $this->createBaseElement($doc, 'zaa-checkbox');
-        $elmn->setAttribute('options', json_encode(['true-value' => 1, 'false-value' => 0]));
-        // append to document
-        $doc->appendChild($elmn);
-        // return DomDocument
-        return $doc;
-        */
+        return $this->createFormTag('zaa-checkbox', $id, $ngModel, ['options' => json_encode(['true-value' => $this->trueValue, 'false-value' => $this->falseValue]), 'initvalue' => $this->initValue]);
     }
 
     public function renderUpdate($id, $ngModel)

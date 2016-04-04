@@ -12,20 +12,8 @@ class Datetime extends \admin\ngrest\base\Plugin
     public function renderList($id, $ngModel)
     {
         return [
-            $this->createListTag($ngModel),
+            $this->createTag('span', null, ['ng-bind' => $ngModel.'*1000 | date : \'dd.MM.yyyy - HH.mm\'']),
         ];
-        /*
-        $activatedElement = $doc->createElement('span', '{{item.'.$this->name.'*1000 | date : \'dd.MM.yyyy - HH.mm\'}}');
-        $activatedElement->setAttribute('ng-if', 'item.'.$this->name);
-
-        $disabledElement = $doc->createElement('span', '-');
-        $disabledElement->setAttribute('ng-if', '!item.'.$this->name);
-
-        $doc->appendChild($activatedElement);
-        $doc->appendChild($disabledElement);
-
-        return $doc;
-        */
     }
 
     public function renderCreate($id, $ngModel)

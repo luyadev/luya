@@ -22,6 +22,16 @@ function i18nParam(varName, params) {
 	return varValue;
 }
 
+/**
+ * Type cast numeric values to integer
+ * 
+ * @param value
+ * @returns
+ */
+function typeCastValue(value) {
+	return $.isNumeric(value) ? parseInt(value) : value;
+}
+
 /* zephir angular admin */
 /* resolve controller: https://github.com/angular-ui/ui-router/wiki#resolve */
 (function() {

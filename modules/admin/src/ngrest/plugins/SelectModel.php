@@ -28,14 +28,10 @@ class SelectModel extends \admin\ngrest\plugins\Select
     {
         parent::init();
         
-        $this->data[] = [
-            'value' => null,
-            'label' => \admin\Module::t('ngrest_select_no_selection'),
-        ];
-        $this->data[] = [
-            'value' => null,
-            'label' => "- - - - - - - - - - - - - - - -",
-        ];
+        $this->data = [
+    	    ['value' => 0,'label' => \admin\Module::t('ngrest_select_no_selection')],
+    	    ['value' => null, 'label' => "- - - - - - - - - - - - - - - -"],
+    	];
         
         $class = $this->modelClass;
         

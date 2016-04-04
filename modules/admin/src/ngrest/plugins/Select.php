@@ -5,13 +5,13 @@ namespace admin\ngrest\plugins;
 use admin\ngrest\base\Model;
 
 /**
- * Base class for select dropdowns.
+ * Base class for select dropdowns via Array or Model.
  * 
  * @author nadar
  */
 abstract class Select extends \admin\ngrest\base\Plugin
 {
-    public $initValue = null;
+    public $initValue = 0;
 
     public $data = [];
 
@@ -34,30 +34,13 @@ abstract class Select extends \admin\ngrest\base\Plugin
     {
         return ['selectdata' => $this->data];
     }
-
-    /*
-    public function events()
-    {
-        return [
-            Model::EVENT_SERVICE_NGREST => function($e) {
-                $e->sender->addNgRestServiceData($this->name, $this->serviceData());
-            }
-        ];
-    }
-    */
     
-    /*
-    public function onAfterNgRestFind($fieldValue)
+    public function onAfterListFind($event)
     {
-        if ($this->getModel()->getNgRestCallType() == 'list') {
-            foreach ($this->data as $item) {
-                if ($item['value'] == $fieldValue) {
-                    return $item['label'];
-                }
+        foreach ($this->data as $item) {
+            if ($item['value'] == $event->sender->getAttribute($this->name)) {
+                $event->sender->setAttribute($this->name, $item['label']);
             }
         }
-
-        return $fieldValue;
     }
-    */
 }

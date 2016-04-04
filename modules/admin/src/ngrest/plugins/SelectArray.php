@@ -24,7 +24,11 @@ class SelectArray extends \admin\ngrest\plugins\Select
     {
     	parent::init();
     	
-    	$cleandata = [];
+    	$cleandata = [
+    	    ['value' => 0,'label' => \admin\Module::t('ngrest_select_no_selection')],
+    	    ['value' => null, 'label' => "- - - - - - - - - - - - - - - -"],
+    	];
+    	
     	foreach ($this->data as $key => $value) {
     		$cleandata[] = [
     			'value' => (int) $key,

@@ -5,12 +5,29 @@ namespace admin\ngrest\plugins;
 use luya\helpers\ArrayHelper;
 
 /**
- * Create a number html 5 input tage with optional placeholder.
+ * Create a HTML5 number-tag.
+ * 
+ * You can optional set a placeholder value to guide your users, or an init value which will be assigned
+ * to the angular model if nothing is set.
+ * 
+ * Example for default init Value
+ * 
+ * ```php
+ * 'sort_index' => ['number', 'initValue' => 1000],
+ * ```
  * 
  * @author nadar
  */
 class Number extends \admin\ngrest\base\Plugin
 {
+    /**
+     * @var integer The default init value for this field
+     */
+    public $initValue = 0;
+    
+    /**
+     * @var integer Html field placeholder
+     */
     public $placeholder = null;
 
     public function renderList($id, $ngModel)
@@ -20,7 +37,7 @@ class Number extends \admin\ngrest\base\Plugin
 
     public function renderCreate($id, $ngModel)
     {
-        return $this->createFormTag('zaa-number', $id, $ngModel, ['placeholder' => $this->placeholder]);
+        return $this->createFormTag('zaa-number', $id, $ngModel, ['placeholder' => $this->placeholder, 'initvalue' => $this->initValue]);
     }
 
     public function renderUpdate($id, $ngModel)

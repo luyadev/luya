@@ -70,9 +70,13 @@
                 "i18n": "@i18n",
                 "id": "@fieldid",
                 "name": "@fieldname",
-                "placeholder": "@placeholder"
+                "placeholder": "@placeholder",
+                "initvalue" : "@initvalue"
             }, link: function($scope) {
                 $scope.$watch(function() { return $scope.model }, function(n, o) {
+                	if (n == undefined) {
+                		$scope.model = parseInt($scope.initvalue);
+                	}
                     if(angular.isNumber($scope.model)) {
                         $scope.isValid = true;
                     } else {
@@ -186,7 +190,7 @@
                     scope.$watch(function() { return scope.model }, function(n, o) {
                         if (n === undefined && o === undefined) {
                             if (jQuery.isNumeric(scope.initvalue)) {
-                                scope.initvalue = parseInt(scope.initvalue);
+                                scope.initvalue = typeCastValue(scope.initvalue);
                             }
                             scope.model = scope.initvalue;
                         }
@@ -202,7 +206,7 @@
     /**
      * options = {'true-value' : 1, 'false-value' : 0};
      */
-    zaa.directive("zaaCheckbox", function() {
+    zaa.directive("zaaCheckbox", function($timeout) {
         return {
             restrict: "E",
             scope: {
@@ -211,7 +215,8 @@
                 "i18n": "@i18n",
                 "id": "@fieldid",
                 "name": "@fieldname",
-                "label": "@label"
+                "label": "@label",
+                "initvalue": "@initvalue"
             },
             controller: function($scope) {
                 if ($scope.options === null) {
@@ -221,6 +226,15 @@
                     $scope.valueTrue = $scope.options['true-value'];
                     $scope.valueFalse = $scope.options['false-value'];  
                 }
+                
+                $scope.init = function() {
+            		if ($scope.model == undefined && $scope.model == null) {
+            			$scope.model = typeCastValue($scope.initvalue);
+            		}
+                };
+                $timeout(function() {
+                	$scope.init();
+            	})
             },
             template: function() {
                 return '<div class="input input--single-checkbox">' +
