@@ -8,7 +8,7 @@ This document will help you upgrading from one LUYA Version into another
 
 **We have moved all repositories to the new HQ of LUYA, `luyadev` instead of `zephir`. In order to to update your packages, remove `zephir` and replace with `luyadev` in your composer require section.**
 
-* `#818`: Since 1.0.0-beta6 we have added the versions concept of luya pages you have to run once the command `./vendor/bin/luya commands cmsadmin updater/versions` **after executing the migration** process.
+* `#818`: Since 1.0.0-beta6 we have added the versions concept of luya pages you have to run once the command `./vendor/bin/luya command cmsadmin updater/versions` **after executing the migration** process.
 
 * `#807`: The NgRest plugin system has been rewritten to use the yii component base class, as therefore some plugin configuration has changed as the are not using the constructor any more instead are configurable via base object of the class properties. changes:
    - `selectClass` has ben renamed to `selectModel`.
@@ -34,7 +34,7 @@ This document will help you upgrading from one LUYA Version into another
   ],
   ```
 * `#809`: Soft delete admin trait public static method `SoftDeleteValues` has ben renamed to `FieldStateDescriber`.
-* `#791`: As we removed the LUYA module, the luya core library is now availabel trough the composer package `luyadev/luya-core` instead of using `zephir/luya`. You can also remove the luya composer package from your require section as it should be defined as dependencie of the modules.
+* `#791`: As we removed the LUYA module, the luya core library is now availabel trough the composer package `luyadev/luya-core` instead of using `zephir/luya`. You can also remove the luya composer package from your require section as it should be defined as dependencie of the modules. As part of this change you now have to `bootstrap` the cms module in the bootstrap section of your config.
 * `#780`: In terms of Yii2 controller view render behavior consistency:
   - removed `$useModuleViewPath` property of `luya\web\Controller`.
   - removed `$controllerUseModuleViewPath` property of `luya\base\Module` replaced with `$useAppViewPath`.
