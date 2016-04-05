@@ -1,9 +1,10 @@
-Admin Permission
----------------
+Admin Berechtigungen
+====================
 
-The permissions are handled in `getMenu()` method inside your `Module.php`:
+Um eine Berechtigung für eine *Api-Schnittstelle* oder eine manuel erstelle *Route* zu erstellen gehen Sie in die `getMenu()` Funktion ihres Modules.
 
-Example with custom  routes
+Custom Menu-Route
+-------------
 
 ```php
 public function getMenu()
@@ -17,7 +18,8 @@ public function getMenu()
 }
 ```
 
-Example with apis
+Menu-Api
+-------
 
 ```php
 public function getMenu()
@@ -33,38 +35,64 @@ public function getMenu()
 }
 ```
 
-you can also also set `disablePermissionCheck` to true inside your admin controller to avoid rights managmenet:
+Controller Berechtiungen Ausschalten
+------------------------------------
+Sie können innerhalb eines Controllers die Eigenschaft `disablePermissionCheck` auf `true` stellen um jeglich Prüfung von Berechtigungen **auszuschalten**, es wird jedoch geprüft ob eine Benutzer eingeloggt ist:
 
 ```php
-namespace myadmin\controllers;
-
 class MyTestController extends \admin\base\Controller
 {
-	
-	public $disablePermissionCheck = true;
-	
-	public function actionIndex()
-	{
-		// this method will not be checked by permission, but will check if a logged in user request the action.
-	}
+    
+    public $disablePermissionCheck = true;
+    
+    public function actionIndex()
+    {
+        // Diese Action kann von jedem Benutzer geöffnet werden, aber nicht einem Fremden-Gast der nicht in der Administration eingeloggt ist.
+    }
 }
 ```
 
-extend permission inside your Module.php
+Route und Api berechtigung ohne Menu
+------------------------------------
+Sie könne nauch *api* und *route* einträge erstellen ohne die `getMenu()` Funktion. Dazu gehen Sie in die `Module.php` und fügen wahlweise folgende methoden ein:
 
 ```php
 public function extendPermissionApis()
 {
     return [
-        ['api' => 'api-cms-navitempageblockitem', 'alias' => 'Create and Move blocks'],
+        ['api' => 'api-cms-navitempageblockitem', 'alias' => 'Blöcke einfügen und verschieben'],
     ];
 }
 
 public function extendPermissionRoutes()
 {
     return [
-        ['route' => 'cmsadmin/page/create', 'alias' => 'Create Page'],
-        ['route' => 'cmsadmin/page/update', 'alias' => 'Update Page'],
+        ['route' => 'cmsadmin/page/create', 'alias' => 'Seiten erstellen'],
+        ['route' => 'cmsadmin/page/update', 'alias' => 'Seiten bearbeiten'],
     ];
 }
 ```
+
+Interne berechtigungs berechnung
+--------------------------------
+Es gibt 3 zustände für die Berechtiung welche wie folgt berechnet werden:
+
+| Name          | Wert
+| ------        | ----
+| crud_create   | 1
+| crud_update   | 3
+| crud_delete   | 5
+
+Somit kommen beim addieren Dieser Werte folgende Zuständ zusammen
+
+| create    | update    | delete    | Wert          | Beschreibung
+| ---       | ---       | ---       | ---           | ----
+| ☐         | ☐         | ☐         | 0             | Keine berechtigung
+| ☑         | ☐         | ☐         | 1             | erstellen
+| ☐         | ☑         | ☐         | 3             | bearbeiten
+| ☑         | ☑         | ☐         | 4             | erstellen, bearbeiten
+| ☐         | ☐         | ☑         | 5             | löschen
+| ☑         | ☐         | ☑         | 6             | erstellen, löschen
+| ☐         | ☑         | ☑         | 8             | bearbeiten, löschen
+| ☑         | ☑         | ☑         | 9             | erstellen, bearbeiten, löschen
+

@@ -1,64 +1,57 @@
-NGREST
-============
+NgRest
+======
+In dieser Sektion gehen wir nur auf das *NgRest Model* ein, um den ganzen zusammenhang und deren verbindung zu verstehen oder ein Beispiel einzurichten schaune Sie sich bitte die Sektion [Admin Modul NgRest Crud](app-admin-module-ngrest.md) an. *NgRest* ist ein verbindung zwischen Model, RestApi und Angular. Die NgRest konfiguration kann direkt auf den Output deines Models einfluss nehmen und dir komplexe arbeiten via *Plugins* abnehmen.
 
-What is NG-REST?
-----------------
-NG-Rest is the luya CRUD Configurator for REST APIS. Basicaly create the api and configure the crud (cread, read, update & delete) via the ng-rest configuration and you will get a fully functional Angular Crud Manager.
+> Eine NgRest Tabelle muss einen eindeutigen Primary Key Feld (am besten ID) haben.
 
-Where?
---------
-All the ngrest configurations are made directly in the Model class. Create a ngRestConfig($config) method inside the controller to modify your configuration. By default a configuration object is passed directly into this method.
+Wo konfigurieren?
+-----------------
+Die *NgRest* Konfiguration wird in der Methode `ngRestConfig($config)` hinterlegt, welche sich im *Model* der anzusprechenden Tabelle liegt, so könne wir direkten einfluss auf die Outputs der Modelle nehmen und deren *events* benutzen. Hier ein beispiel einer *NgRest* Konfiguration innerhalb des Models.
 
 ```php
 public function ngRestConfig($config)
 {
-    // here you can add, modify, delete your config
-    $config->list->field("title", "Title")->text;
+    $config->list->field('name', 'Name')->text();
+    $config->list->field('short_code', 'Kurz-Code')->text();
     
-    // at the end just return the config variable back
+    $config->create->copyFrom('list', ['id']);
+    
+    $config->update->copyFrom('list', ['id']);
+    
     return $config;
 }
 ```
 
-Multilingual fields
--------------------
-If you want to have multilingual fields based on the system (admin) language table you can just pass the variable ***$i18n*** an array containing are fields which should be translated. like this:
+In diesem Beispiel werden auf dem *list pointer* (Auflistung der Daten) das feld `name` und `short_code` angezeigt. Für das *update* (bearbeiten) und *create* (hinzufügen) Formular werden alle Daten aus der Listen übersicht kopiert (`copyFrom`) aber ohne das ID Feld (welches automatisch hinzugefügt wird zur listen übersicht). Der `copyFrom` befehl ist dazu da, dass die konfiguration nicht immer erneut eingegeben werden müssen das sich das bearbeiten und hinzufügen Formular meist nicht unterscheiden.
+
+> Beim kopieren via `copyFrom` aus dem *list* pointer zu anderen Pointer müssen Sie das **id** Feld jeweils nicht mit kopieren da die ID nicht verändert werden sollten beim bearbeiten und via AI beim hinzufügen gesetzt wird.
+
+Die Pointers
+------------
+Es gibt 4 verschiedene Interaktionen zwischen Crud und Model (via Angular) und somit in der *NgRest* config eingestellt werden können.
+
+| pointer   | Beschreibung
+| ---       | ---
+| list      | Auflistung, Tabelarische darstellung der Daten.
+| create    | Hinzufügen Formular, welche Felder sollen beim erstellen angzeigt werden.
+| update    | Bearbeiten Formular eines Datensatz, welce Felder sollen bei bearbeiten angzeigt werden.
+| delete    | Dürften Einträge werden oder nicht (Standard mässig ausgeschalten und muss via `$config->delete = true` expliziet aktiviert werden.
+| aw        | *ActiveWindows*, hier kannst du eine eigenen Knöpfe anhängen und aktionen ausführen (zbsp. Passwort ändern, Bestellungs übersicht, gallery upload, etc.)
+
+Einträge Entfernen
+------------------
+Wenn Sie den `delete` pointer aktivieren
 
 ```php
-class Model extends \admin\ngrest\base\Model
-{
-    public $i18n = ['title', 'description']; // will transform those field into multilingual fields
-}
-```
+$config->delete = true;
+``` 
 
-Configuration Pointers
---------------------
-The ng-rest config pointers describes the "scene" where the to configure fields should appear. Available pointers are:
-* ***list*** This pointer describes the moment when the fields are listed in the grid view (tabelaric list)
-* ***create*** This pointer descibtes the "create new entry" form.
-* ***update*** This pointer describtes the "update existing entry" form.
-* ***aw*** This pointer describes the attached "buttons and actions" forms.
-* ***delete*** Enable the delete button to the model coresponding `delete()` method.
+wird ein Löschen Knopf eingefügt welcher standard mässig auf die [Yii AR delete methode](http://www.yiiframework.com/doc-2.0/yii-db-activerecord.html#delete()-detail) zugreift und den Eintrag unwiederruflich löscht. Sie können diese methode jedoch zu jederzeit auch für Ihre bedürfnisse anpassen und *überschreiben.
 
-For example if you want to add the fields ***title*** and ***description*** into the list and create pointers just put:
+Wenn Sie ein *Soft-Delete* einführen möchten welches zbsp. auf das Feld `is_deleted` hört, und somit auch alle Einträge beim anzeigen ausblenden muss (überschreiben der `find()` methode) können Sie die `delete` und `find` methode überschreiben oder das `admin\traits\SoftDeleteTrait` einfügen:
 
 ```php
-public function ngRestConfig($config)
-{
-    $this->list->field("title", "Title");
-    $this->list->field("description", "Description");
-    
-    $this->create->field("title", "Title");
-    $this->create->field("description", "Description");
-}
+use admin\traits\SoftDeleteTrait;
 ```
 
-The fields title and description are now configure in the list and create actions. So you could now see the fields in the grid view and you could create new entrys for those two fields.
-
-If you want to see all configuration possibilitys after field, have a look at the [NGREST FIELDS CONFIGURATIOn GUIDE](start-ngrest-fields.md).
-
-Delete
-------
-If you set `$config->delete = true` the remove/delete button will be display. Be default the *ActiveRecord* Model will now execute the `delete()` [yii AR delete](http://www.yiiframework.com/doc-2.0/yii-db-activerecord.html#delete()-detail) from the model. If you only want to set an element to `is_hidden=1` you have to **override** the `delete()` method.
-
-Instead of override the `find()` and `delete()` method you can also use the `admin\traits\SoftDeleteTrait` trait. If you want to change the trait properites implement `public static SoftDeleteValues()` to your model and return the specific key values for the delete behavior. The find behavior will automatically be inverted from the delete values.
+über die `public static function SoftDeleteValues()` können Sie die Werte änderne welche für `delete` und `find` via trait gesetzt werden. Wobei der Array-Key dem Feld enstpricht und der Array-Value dem Wert welcher beim `delete()` event haben soll. Beim `find()` befehl werden die `SoftDeleteValues` inverted und umgekehrt verwendet.

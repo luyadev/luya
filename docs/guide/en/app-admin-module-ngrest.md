@@ -1,39 +1,51 @@
-Angular Crud
-------------
+Admin Modul NgRest CRUD
+=======================
+Eines der Kernbestandteile von *LUYA* liegt darin in kurzer Zeit eine mächtige Administrations Oberfläche zu erstellen auch NgRest CRUD genannt. Ein CRUD beinhaltet *create (erstellen)*, *read (lesen)*, *update (aktualisieren)* und *delete (löschen)* also alle nötigen Methoden, um eine Datenbank Tabelle zu aktualisieren. Das Wort NgRest besteht aus A**Ng**ular**Rest** (Representational State Transfer), weil die gesamt *LUYA* Adminoberfläch wie REST ansprechbar ist und durch das extrem starke Angular Javascript Framework angesprochen wird. Um einen NgRest Oberfläch zu erstellen benötigen wir folgendes:
 
-> Use `./vendor/bin/luya crud/create` to generate the ngrest crud, but first create module `./vendor/bin/luya module/create` and after that create table you want to applay the crud `./vendor/bin/luya migrate/create thetable mymodule`
++ [Migration Tabelle](luya-console.md#migration)
++ Einen Api-Endpoint Eintrag im Modul
++ Ein Model
++ Einen Controller
++ Einen API-Controler
++ Einen Menu Eintrag im Modul
 
-The `crud` command will guide you trough the described steps below.
+> Sie können mit dem [Konsolenbefehl](luya-console.md) `crud/create` sämtliche Dateien generieren. Es empfiehlt sich jedoch die einzelnen Punkte zu verstehen.
 
-1. Create Model and NG Rest Config
-2. Create API Controller
-3. Add Module API Endpoint
-4. Create Module Controller
-5. Add Module Menu Entry
-
-We assume to already have Migration Entry which creates the Database table.
-
-
-
-
-1.) Create Model and NG Rest Config
---------------------------------
-
-Create the ActiveRecord model in <ADMIN_MODULE>/models/<MODEL_NAME>. We assume to create a new News Module Navigation Item, so we call the new model News.
-
-In this example we just have name, title and text which is required for all the rest scenarios "restcreate" and "restupdate". There are cases which does not require fields on create but require them on update.
-
-__new:__ You have to implement those ngrest methods: getNgRestApiEndpoint(), getNgRestPrimaryKey(), ngRestConfig($config);
+NgRest Api-Endpoint
+-----------------
+Öffnen Sie die `Module.php` in dem Module, in dem sie die *NgRest* Oberfläche initialisieren möchten und fügen Sie die Eigenschaft `public $apis` ein. Tragen Sie nun einen **Api-Endpoint** für Ihre Schnittstelle ein wobei der Key dem späteren Link zur Schnittstelle und Value der ApiController Klasse enspricht.  
 
 ```php
 <?php
-namespace newsadmin\models;
+namespace teamadmin;
 
-class News extends \admin\ngrest\base\Model
+class Module extends \admin\base\Module
+{
+    public $apis = [
+        'api-team-member' => 'teamadmin\\apis\\MemberController',
+    ];
+}
+```
+
+Ein Api-Endpoint besteht immer aus *api-{module}-{model}* wobei beim *module* immer das **Frontend-Module** gewählt wird.
+
+> Api-Endpoints haben **nie** das Admin Prefix, da es in diesem Kontext keinen Sinn ergäbe. Technisch gesehen kann man jedoch jeglich Text als Api-Endpoint hinterlegen.
+
+Alle Apis werden **singular** ausgedrückt (wie Datenbank Tabellen), also **member** und nicht  ~~members~~ .
+
+NgRest Model
+-----------------
+Nachdem Sie eine Datenbank Tabelle via [Migration](luya-console.md) erstellt haben, können Sie ein *ActiveRecord* Model erstellen im Ordner `models` mit dem Namen der Tabelle:
+
+```php
+<?php
+namespace teamadmin\models;
+
+class Member extends \admin\ngrest\base\Model
 {
     public static function tableName()
     {
-        return 'news';
+        return 'teamadmin_member';
     }
     
     public function rules()
@@ -53,7 +65,7 @@ class News extends \admin\ngrest\base\Model
     
     /* ng-rest method config */
     
-    public $ngRestEndpoint = 'api-news-news';
+    public $ngRestEndpoint = 'api-team-member';
     
     public function ngRestConfig($config) 
     {
@@ -70,85 +82,49 @@ class News extends \admin\ngrest\base\Model
 }
 ```
 
-If you want to add multlingual fields, just add an array for the to configure fields in the $i18n variable like this:
+Eine detaillierte Erkärung der `ngRestConfig() Methode finden Sie in der [NgRest Sektion](ngrest.md).
+
+NgRest Controller
+-----------------
+Um die CRUD Logik anzuzeigen, müssen wir einen Controller anlegen, welcher auf das *Model* verweist:
 
 ```php
-class News extends \admin\ngrest\base\Model
+<?php
+namespace teamadmin\controllers;
+
+class MemberController extends \admin\ngrest\base\Controller
 {
-    ...
-    
-    public $i18n = ['title', 'text'];
-    
-    ...
+    public $modelClass = 'teamadmin\models\Member';
 }
 ```
 
-Now all the crud actions for the fields "title" and "text" are available in the system languages. It will generate a json inside of the sql table which gets en/decoded.
-
-2. Create API Controller
-------------------------
-
-Create a new file in the apis folder. For instance NewsController.php
+NgRest Api
+----------
+TBD: Warum NgRest Api?
 
 ```php
 <?php
 namespace news\apis;
 
-class NewsController extends \admin\ngrest\base\Api
+class MemberController extends \admin\ngrest\base\Api
 {
-    public $modelClass = 'newsadmin\models\News';
+    public $modelClass = 'teamadmin\models\Member';
 }
 
 ```
 
-3. Add Module API Endpoint
----------------------------
-
-Add an array entry in Module.php to public static $apis variable which defines the end point for you API. In this case the REST API Endpoint would look like:
-
-http://yourexample.com/admin/api-news-news
-
-```php
-<?php
-namespace news;
-
-class Module extends \admin\base\Module
-{
-    public $apis = [
-        ...
-        'api-news-news' => 'newsadmin\\apis\\NewsController',
-        ...
-    ];
-```
-
-
-4. Create Module Controller 
-----------------------------------------------
-
-Let the controller know your model
-
-```php
-<?php
-namespace newsadmin\controllers;
-
-class NewsController extends \admin\ngrest\base\Controller
-{
-    public $modelClass = 'newsadmin\models\News';
-}
-```
-
-5. Module Menu Entry
---------------------------
-
-the newsadmin-news-index references to the yii MVC path for the controller defined in step 4. So its <MODULE>-<CONTROLLER>-<ACTION>.
+NgRest Menu Eintrag
+--------------------
+Fügen Sie nun die `getMenu()` Funktion in Ihre `Module.php` ein, um die Menu Einträge zu erstellen und die 
+[Berechtigungen](app-admin-module-permission.md) zu setzen:
 
 ```php
 public function getMenu()
 {
-return $this
-->node("News", "fa-wrench")
-    ->group("Verwalten")
-        ->itemApi("News Items", "newsadmin-news-index", "fa-ils", "api-news-news")
-->menu();
+    return $this
+    ->node("Team Admin", "fa-wrench")
+        ->group("Verwalten")
+            ->itemApi("Mitglieder/Members", "teamadmin-member-index", "fa-ils", "api-teamadmin-member")
+    ->menu();
 }
 ```

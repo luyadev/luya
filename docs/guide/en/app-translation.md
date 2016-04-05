@@ -1,8 +1,6 @@
-Create translations
-====================
-Createa a `message` folder in your application root folder. 
-
-register the messages component in your config:
+Übersetzungen
+=============
+Um übersetzungen innerhalbt der *Controller* oder *Views* zu erstellen benutzen wir die Yii `translations` Komponent. Die müssen wir aber zuerst in der [Konfiguration](install-structures.md) einbetten und zwar im `components` Abschnitt. Diese könnte in etwa so ausshen:
 
 ```php
 'components' => [
@@ -16,46 +14,73 @@ register the messages component in your config:
 ]
 ```
 
-folder strcuture:
+> Denke Sie daran das Sie alle Komponenten in der `prep.php` und `prod.php` gleichermassen eintragen.
+
+Nun werden alle *Messages-Source* Dateien die mit dem prefix `app` beginnen in die Übersetzung geladen. Um eine solche *Message-Source* Datei zu erstellen wechseln Sie in ihr Projekt-Verzeichnis und erstellen Sie den Ordner `messages`. Der Inhalt des Messages könnten nun wie folgt aussehen gemäss des *app* prefix beispiels:
 
 ```
-messages
-	de
-		- app.php
-	en
-		- app.php
+.
+└── messages
+    ├── de
+    │   ├── app.php
+    │   └── app-otherparts.php
+    └── en
+        ├── app.php
+        └── app-otherparts.php
 ```
 
-example content of `messages/de/app.php`
+Message-Source
+---------------
+Der Inhalt einer solchen *Message-Source* Datei gibt immer ein *array* zurück. Hier ein Beispiel für `messages/de/app.php`:
 
 ```
 return [
-    'foo' => 'Ich bin der Deutsche value für "Foo"',
+    'title_top' => 'Hallo ich bin die Übersetzung Oben',
+    'title_footer' => 'Hallo ich bin ein Footer Title',
+    'body' => 'Ich bin die Body Variabel!',
 ];
 ```
 
-use:
+Um nun auf diese Übersetzunge zuzugreifen benutzer wir
 
 ```php
-echo Yii::t('app', 'foo');
+echo Yii::t('app', 'title_top'); // Gibt "Hallo ich bin die Übersetzung Oben" zurück
 ```
 
-Variables in translations
---------------------------
+> Die Wrapper funktion im Twig `t('app', 'title_top')`.
 
-if you have a parameter to use in the translation
-
-```php
-$paramValue = time();
-
-echo Yii::t('app', 'foo-param', $paramValue);
-```
-
-the translation inside the messages array must look like:
+Um eine Nachricht mit einem Paramter (also ein Dynamischer Wert welcher bei der ÜBersetzung nicht bekannt ist) zu erstellen, függen wir in der *Message-Source* Datei einen Platzhalter `{0}` ein. Wobei die Nummerierung der Anzahl Platzhalter entspricht.
 
 ```php
 return [
-	'foo-param' => 'Its now {0} in unix timestamp!'
+    'datum' => 'Heute ist der <b>{0}</b> in Unixzeit.'
 ];
 ```
-see: [yii2 messages dok](https://github.com/yiisoft/yii2/blob/master/docs/guide/tutorial-i18n.md)
+
+und bei der Ausgabe ersetzen wir `{0}` durch einen Wert:
+
+```
+echo Yii::t('app', 'datum', time()); // Gibt "Heute ist der <b>435829046</b> in Unixzeit" zurück.
+```
+
+Mehrsprachige Urls
+------------------
+@TODO!
+
++ [Frontend Modul](app-module-frontend.md) Dokumentation
+
+```php
+
+    public $urlRules = [
+        ['pattern' => 'estore/warenkorb', 'route' => 'estore/default/basket', 'composition' => 
+            [
+                'en' => 'estore/the-basket',
+                'de' => 'estore/der-warenkorb'
+            ]
+        ],
+    ];
+```
+
+Links
+-----
++ [Mehr zum Thema Messages in der Yii Dokumentation](http://www.yiiframework.com/doc-2.0/guide-tutorial-i18n.html#message-translation)
