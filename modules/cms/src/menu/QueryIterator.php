@@ -27,6 +27,11 @@ class QueryIterator extends \yii\base\Object implements Iterator
     public $lang = null;
 
     /**
+     * @see \cms\menu\Query::with()
+     */
+    public $with = [];
+    
+    /**
      * Iterator get current element, generates a new object for the current item on accessing.s.
      * 
      * @return \cms\menu\Item

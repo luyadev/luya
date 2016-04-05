@@ -36,6 +36,10 @@ use Exception;
  * $items = (new \cms\menu\Query())->where(['parent_nav_id' => 0])->with(['hidden'])->all();
  * ```
  * 
+ * Attention: When you append the `with['hidden']` state, the visibility of the item will be overriden, even when you
+ * change them with event inject. So take care of using with hidden when protecting items for beeing seen by guest users
+ * (in example of protected several items for not logged in users).
+ * 
  * @property object $menu Contains menu Object.
  * @since 1.0.0-beta1
  * @author nadar
@@ -243,7 +247,7 @@ class Query extends \yii\base\Object
      */
     public function all()
     {
-        return static::createArrayIterator($this->filter($this->_where, $this->menu[$this->getLang()]), $this->getLang());
+        return static::createArrayIterator($this->filter($this->_where, $this->menu[$this->getLang()]), $this->getLang(), $this->_with);
     }
     
     /**
@@ -264,9 +268,9 @@ class Query extends \yii\base\Object
      * @param string $langContext The language short code context, if any.
      * @return \cms\menu\QueryIterator
      */
-    public static function createArrayIterator(array $data, $langContext)
+    public static function createArrayIterator(array $data, $langContext, $with)
     {
-        return (new QueryIteratorFilter(Yii::createObject(['class' => QueryIterator::className(), 'data' => $data, 'lang' => $langContext])));
+        return (new QueryIteratorFilter(Yii::createObject(['class' => QueryIterator::className(), 'data' => $data, 'lang' => $langContext, 'with' => $with])));
     }
     
     /**
@@ -314,8 +318,6 @@ class Query extends \yii\base\Object
         foreach ($this->_where as $expression) {
             if ($expression['field'] == $field) {
                 switch ($expression['op']) {
-                    case '=':
-                        return ($value == $expression['value']);
                     case '==':
                         return ($value === $expression['value']);
                     case '>':
@@ -326,6 +328,8 @@ class Query extends \yii\base\Object
                         return ($value < $expression['value']);
                     case '<=':
                         return ($value <= $expression['value']);
+                    default:
+                        return ($value == $expression['value']);
                 }
             }
         }

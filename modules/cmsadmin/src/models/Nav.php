@@ -232,7 +232,7 @@ class Nav extends \yii\db\ActiveRecord
         $_errors = [];
 
         // nav
-        $nav = $this;
+        $nav = $this; // @todo use new self and make static method instead
         $nav->attributes = [
             'parent_nav_id' => 0,
             'nav_container_id' => 0,

@@ -510,22 +510,10 @@ class Container extends \yii\base\Component implements ArrayAccess
         ->indexBy('id')
         ->all();
     }
-   
+        
     private $_paths = [];
     
     private $_nodes = [];
-   
-    private function processParant($nodeId, $path)
-    {
-        $parentId = $this->_nodes[$nodeId]['parent_nav_id'];
-        $alias = $this->_nodes[$nodeId]['alias'];
-    
-        if ($parentId > 0 && array_key_exists($parentId, $this->_nodes)) {
-            return $this->processParant($parentId, $path) . '/' . $alias;
-        }
-    
-        return $alias;
-    }
     
     /**
      * Helper method to build an index with all the alias paths to build the correct links.
@@ -548,6 +536,18 @@ class Container extends \yii\base\Component implements ArrayAccess
         }
         
         return $this->_paths;
+    }
+     
+    private function processParant($nodeId, $path)
+    {
+        $parentId = $this->_nodes[$nodeId]['parent_nav_id'];
+        $alias = $this->_nodes[$nodeId]['alias'];
+    
+        if ($parentId > 0 && array_key_exists($parentId, $this->_nodes)) {
+            return $this->processParant($parentId, $path) . '/' . $alias;
+        }
+    
+        return $alias;
     }
 
     /**
@@ -615,7 +615,8 @@ class Container extends \yii\base\Component implements ArrayAccess
                     'is_hidden' => $item['is_hidden'],
                     'type' => $item['nav_item_type'],
                     'nav_item_type_id' => $item['nav_item_type_id'],
-                    'redirect' => ($item['nav_item_type'] == 3) ? $this->redirectMap[$item['nav_item_type_id']] : 0,
+                    'redirect' => ($item['nav_item_type'] == 3 && isset($this->redirectMap[$item['nav_item_type_id']])) ? $this->redirectMap[$item['nav_item_type_id']] : false,
+                    'module_name' => ($item['nav_item_type'] == 2 && isset($this->modulesMap[$item['nav_item_type_id']])) ? $this->modulesMap[$item['nav_item_type_id']]['module_name'] : false,
                     'container' => $item['container'],
                     'depth' => count(explode('/', $alias)),
                 ];

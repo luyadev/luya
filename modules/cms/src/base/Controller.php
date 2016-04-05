@@ -26,6 +26,9 @@ abstract class Controller extends \luya\web\Controller
     
     public function renderToolbar($event)
     {
+        Yii::warning('LUYA CMS Toolbar is enabled, this slow down your application and generates more database requests.', __METHOD__);
+        Yii::info('LUYA CMS Toolbar rendering start');
+        Yii::beginProfile('LUYA CMS Toolbar profiling', __METHOD__);
         $view = $event->sender;
         $folder = Yii::getAlias('@cms');
         
@@ -74,6 +77,9 @@ abstract class Controller extends \luya\web\Controller
         echo '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
         echo '<style>' . $view->renderPhpFile($folder . '/assets/toolbar.css') . '</style>';
         echo '<script>' . $view->renderPhpFile($folder . '/assets/toolbar.js') . '</script>';
+        
+        Yii::endProfile('LUYA CMS Toolbar profiling', __METHOD__);
+        Yii::info('LUYA CMS Toolbar rendering is finished', __METHOD__);
     }
     
     public function renderItem($navItemId, $appendix = null)

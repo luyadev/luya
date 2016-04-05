@@ -38,7 +38,7 @@ use luya\Exception;
  *     $event->sender->injectItem($newItem);
  * });
  * ```
- * 
+ * @todo create item interface
  * @author nadar
  * @since 1.0.0-beta5
  */

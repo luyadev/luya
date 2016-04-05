@@ -113,9 +113,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     /**
      * GET the type object based on the nav_item_type defintion and the nav_item_type_id which is the
      * primary key for the corresponding type table (page, module, redirect). This approach has been choosen
-     * do dynamically extend type of pages whithout any limitaiton.
-     * 
-     * After finding the type object, the type object will get the inheritance context via `setNavItem()`.
+     * do dynamically extend type of pages whithout any limitation.
      * 
      * @return \cmsadmin\models\NavItemPage|\cmsadmin\models\NavItemModule|\cmsadmin\models\NavItemRedirect Returns the object based on the type
      * @throws Exception
@@ -123,6 +121,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     public function getType()
     {
         if ($this->_type === null) {
+            
             // what kind of item type are we looking for
             if ($this->nav_item_type == self::TYPE_PAGE) {
                 $this->_type = NavItemPage::findOne($this->nav_item_type_id);;
@@ -137,7 +136,8 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
             }
             
             // set context for the object
-            $this->_type->setNavItem($this);
+            /// 5.4.2016: Discontinue, as the type model does have getNavItem relation
+            //$this->_type->setNavItem($this);
         }
         
         return $this->_type;
@@ -300,31 +300,6 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
 
     private static $_navItemModules = [];
     
-    /**
-     * @todo use AR or queryCommand? NavItem::find()->leftJoin('cms_nav_item_module', 'nav_item_type_id=cms_nav_item_module.id')->where(['nav_item_type' => 2, 'cms_nav_item_module.module_name' => $moduleName])->asArray()->one()
-     *
-     * @param unknown $moduleName
-     *
-     * @return unknown
-     */
-    public static function findNavItem($moduleName)
-    {
-        if (isset(self::$_navItemModules[$moduleName])) {
-            return self::$_navItemModules[$moduleName];
-        }
-        
-        // current active lang:
-        $default = Lang::findActive();
-
-        $query = Yii::$app->db->createCommand('SELECT i.* FROM cms_nav_item as i LEFT JOIN (cms_nav_item_module as m) ON (i.nav_item_type_id=m.id) WHERE i.nav_item_type=2 AND i.lang_id=:lang_id AND m.module_name=:module')->bindValues([
-            ':module' => $moduleName, ':lang_id' => $default['id'],
-        ])->queryOne();
-
-        self::$_navItemModules[$moduleName] = $query;
-        
-        return $query;
-    }
-
     public function getLang()
     {
         return $this->hasOne(Lang::className(), ['id' => 'lang_id']);

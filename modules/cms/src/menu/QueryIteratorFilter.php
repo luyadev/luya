@@ -25,6 +25,9 @@ class QueryIteratorFilter extends FilterIterator implements Countable
     {
         $event = new MenuItemEvent();
         $event->item = $this->current();
+        if (isset($this->getInnerIterator()->with['hidden'])) {
+            $event->visible = true;
+        }
         Yii::$app->menu->trigger(Container::MENU_ITEM_EVENT, $event);
         return $event->visible;
     }

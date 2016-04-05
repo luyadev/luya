@@ -23,6 +23,15 @@ class NavItemPage extends \cmsadmin\base\NavItemType
         return $this->_view;
     }
     
+    /**
+     * {@InheritDoc}
+     * @see \cmsadmin\base\NavItemType::getNumericType()
+     */
+    public static function getNummericType()
+    {
+        return NavItem::TYPE_PAGE;
+    }
+    
     public static function tableName()
     {
         return 'cms_nav_item_page';

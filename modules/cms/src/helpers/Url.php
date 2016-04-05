@@ -4,7 +4,6 @@ namespace cms\helpers;
 
 use Yii;
 use luya\Exception;
-use cmsadmin\models\NavItem;
 
 class Url extends \luya\helpers\Url
 {
@@ -19,13 +18,10 @@ class Url extends \luya\helpers\Url
      */
     public static function toModule($moduleName)
     {
-        $model = NavItem::findNavItem($moduleName);
+        $item = Yii::$app->menu->find()->where(['module_name' => $moduleName])->with(['hidden'])->one();
 
-        if ($model) {
-            $menuItem = Yii::$app->menu->find()->where(['id' => $model['id']])->with('hidden')->one();
-            if ($menuItem) {
-                return $menuItem->link;
-            }
+        if ($item) {
+            $item->link;
         }
 
         return $moduleName;
@@ -46,9 +42,10 @@ class Url extends \luya\helpers\Url
      */
     public static function toModuleRoute($moduleName, $route, array $params = [])
     {
-        $model = NavItem::findNavItem($moduleName);
-        if ($model) {
-            return static::toMenuItem($model['id'], $route, $params);
+        $item = Yii::$app->menu->find()->where(['module_name' => $moduleName])->with(['hidden'])->one();
+        
+        if ($item) {
+            return static::toMenuItem($item->id, $route, $params);
         }
 
         throw new Exception("The module route creation could not find the module '$moduleName', have you created a page with this module in this langauge context?");

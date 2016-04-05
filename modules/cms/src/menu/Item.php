@@ -154,9 +154,12 @@ class Item extends \yii\base\Object
     public function getModuleName()
     {
         if ($this->getType() === 2) {
+            return $this->itemArray['module_name'];
+            /*
             if (isset($this->itemArray['nav_item_type_id'], Yii::$app->menu->modulesMap)) {
                 return Yii::$app->menu->modulesMap[$this->itemArray['nav_item_type_id']]['module_name'];
             }
+            */
         }
         
         return false;

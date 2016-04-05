@@ -18,6 +18,15 @@ class NavItemRedirect extends \cmsadmin\base\NavItemType
         return 'cms_nav_item_redirect';
     }
 
+    /**
+     * {@InheritDoc}
+     * @see \cmsadmin\base\NavItemType::getNumericType()
+     */
+    public static function getNummericType()
+    {
+        return NavItem::TYPE_REDIRECT;
+    }
+    
     public function rules()
     {
         return [

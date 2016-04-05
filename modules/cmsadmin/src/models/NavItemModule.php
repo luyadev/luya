@@ -4,9 +4,19 @@ namespace cmsadmin\models;
 
 use Yii;
 use cms\Exception;
+use luya\helpers\ModuleHelper;
 
 class NavItemModule extends \cmsadmin\base\NavItemType
 {
+    /**
+     * {@InheritDoc}
+     * @see \cmsadmin\base\NavItemType::getNumericType()
+     */
+    public static function getNummericType()
+    {
+        return NavItem::TYPE_MODULE;
+    }
+    
     public static function tableName()
     {
         return 'cms_nav_item_module';
@@ -49,6 +59,8 @@ class NavItemModule extends \cmsadmin\base\NavItemType
         ];
     }
 
+    private $_content = null;
+    
     /**
      * @todo: see if $pathAfterRoute could be available in the urlRules, otherwise display default
      * (non-PHPdoc)
@@ -57,15 +69,18 @@ class NavItemModule extends \cmsadmin\base\NavItemType
      */
     public function getContent()
     {
-        $module = $this->getModule();
-
-        $reflection = \luya\helpers\ModuleHelper::reflectionObject($module);
-        $reflection->suffix = $this->getOption('restString');
-
-        $response = $reflection->run();
+        if ($this->_content == null) {
+            
+            $module = $this->getModule();
+            
+            $reflection = ModuleHelper::reflectionObject($module);
+            $reflection->suffix = $this->getOption('restString');
+            
+            $this->_content = $reflection->run();
+            
+            Yii::$app->menu->setCurrentUrlRule($reflection->getUrlRule());
+        }
         
-        Yii::$app->menu->setCurrentUrlRule($reflection->getUrlRule());
-        
-        return $response;
+        return $this->_content;
     }
 }

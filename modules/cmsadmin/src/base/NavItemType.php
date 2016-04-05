@@ -2,14 +2,35 @@
 
 namespace cmsadmin\base;
 
+use cmsadmin\models\NavItem;
+
 abstract class NavItemType extends \yii\db\ActiveRecord
 {
     public $options = [];
 
-    private $_navItem = null;
-
+    /**
+     * Returns the databas-nummeric identifier to make the navItem relation.
+     * 
+     * @return integer The numeric identifier for the type (1=page, 2=module, 3=redirect, ...)
+     */
+    abstract static public function getNummericType();
+    
+    /**
+     * Get the response content for the item type
+     * 
+     * @return mixed
+     */
     abstract public function getContent();
-
+    
+    /**
+     * Get the corresponding nav item type for this type object
+     */
+    public function getNavItem()
+    {
+        return $this->hasOne(NavItem::className(), ['nav_item_type_id' => 'id'])->where(['nav_item_type' => static::getNummericType()]);
+    }
+    
+    /*
     public function setNavItem($navItem)
     {
         $this->_navItem = $navItem;
@@ -19,6 +40,7 @@ abstract class NavItemType extends \yii\db\ActiveRecord
     {
         return $this->_navItem;
     }
+    */
 
     public function getContextPropertysArray()
     {
