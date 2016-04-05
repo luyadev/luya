@@ -69,11 +69,11 @@ class CrawlPage extends \yii\base\Object
     
     public function getLinks()
     {
-        $bodyContent = $this->tempGetContent($this->pageUrl);
+        // $bodyContent = $this->tempGetContent($this->pageUrl);
         
-        $crawler = new Crawler($bodyContent);
+        //$crawler = new Crawler($bodyContent);
         
-        $links = $crawler->filterXPath('//a')->each(function ($node, $i) {
+        $links = $this->getCrawler()->filterXPath('//a')->each(function ($node, $i) {
             return $node->extract(array('_text', 'href'))[0];
         });
         
@@ -99,6 +99,7 @@ class CrawlPage extends \yii\base\Object
                 'query' => (isset($host['query'])) ? $host['query'] : [],
             ], HTTP_URL_JOIN_QUERY | HTTP_URL_STRIP_FRAGMENT);
         }
+        
         return $links;
     }
 

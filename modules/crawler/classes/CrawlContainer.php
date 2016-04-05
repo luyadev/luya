@@ -153,7 +153,7 @@ class CrawlContainer extends \yii\base\Object
         foreach ($this->filterRegex as $rgx) {
             $r = preg_match($rgx, $url, $results);
             if ($r === 1) {
-                $this->verbosePrint('url does not match filter regex', $rgx);
+                $this->verbosePrint("'" . $url . "' matches regex and will be skipped", $rgx);
                 $this->addLog('filtered', $url);
                 return false;
             }
