@@ -13,8 +13,31 @@ use admin\models\User;
  * returning title, url and ids or retrieve depending item iterations like parents or childs. As the
  * Item Object extends the yii\base\Object all getter methods can be access as property.
  *
+ * @property integer $id Returns Unique identifier of item, represents data record of cms_nav_item table.
+ * @property boolean $isHidden Returns boolean state of visbility.
+ * @property string $container Returns the container name.
+ * @property integer $navId Returns the Navigation Id which is not unique but is used for the menu tree
+ * @property integer $parentNavId Returns the parent navigation id of this item (0 = root level).
+ * @property string $title Returns the title of this page
+ * @property integer $type Returns the type of page 1=Page with blocks, 2=Module, 3=Redirect
+ * @property string $moduleName Returns the name of the module if its of type module(2)
+ * @property string $description Returns the page description (used for making meta key description).
+ * @property array $keywords Returns an array of user defined keywords for this page (user to generate meta keywords)
+ * @property string $alias Returns the alias name of this page.
+ * @property integer $dateCreated Returns an unix timestamp when the page was created.
+ * @property integer $dateUpdated Returns an unix timestamp when the page was last time updated.
+ * @property object $userCreated Returns an active record object for the admin user who created this page.
+ * @property object $userUpdated Returns an active record object for the admin user who last time updated this page.
+ * @property string $link  Returns the current item link relative path with composition (language). The path is always relativ to the host.
+ * @property boolean $isActive Returns a boolean value whether the current item is an active link or not, this is also for all parent elements. If a child item is active, the parent element is activ as well.
+ * @property integer $depth Returns the depth of the navigation tree start with 1. Also known as menu level.
+ * @property object $parent Returns a Item-Object of the parent element, if no parent element exists returns false.
+ * @property array $parents Return all parent elements **without** the current item.
+ * @property array $sibilings Get all sibilings for the current item, this also includes the current item iteself.
+ * @property array $teardown Return all parent elemtns **with** the current item.
+ * @property array $children Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
+ * 
  * @author nadar
- *
  * @since 1.0.0-beta1
  */
 class Item extends \yii\base\Object
@@ -60,7 +83,7 @@ class Item extends \yii\base\Object
      */
     public function getId()
     {
-        return $this->itemArray['id'];
+        return (int) $this->itemArray['id'];
     }
 
     public function getIsHidden()
@@ -92,7 +115,7 @@ class Item extends \yii\base\Object
      */
     public function getNavId()
     {
-        return $this->itemArray['nav_id'];
+        return (int) $this->itemArray['nav_id'];
     }
 
     /**
@@ -112,7 +135,7 @@ class Item extends \yii\base\Object
      */
     public function getParentNavId()
     {
-        return $this->itemArray['parent_nav_id'];
+        return (int) $this->itemArray['parent_nav_id'];
     }
 
     /**
