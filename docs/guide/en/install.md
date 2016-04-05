@@ -21,10 +21,10 @@ This above command will create a folder (inside of your current folder where the
 
 ```sh
 cp server.php.dist server.php
-cp local.php.dist local.php
+cp localdb.php.dist localdb.php
 ```
 
-Now change the database connection inside the `configs/local.php` file to fit your mysql servers configuration. You should open all config files once to change values and understand the behavior. After successfully setting up your database connection, you have to reopen your Terminal and change into your project project directory and excute the **LUYA** binary files which has been installed into your vendor folder by composer.
+Now change the database connection inside the `configs/localdb.php` file to fit your mysql servers configuration. You should open all config files once to change values and understand the behavior. After successfully setting up your database connection, you have to reopen your Terminal and change into your project project directory and excute the **LUYA** binary files which has been installed into your vendor folder by composer.
 
 Create all Database tables:
 

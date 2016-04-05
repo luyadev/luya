@@ -57,16 +57,11 @@ $config = [
     'defaultRoute' => 'cms',
     
     /*
-     * Define the basePath of the project (Yii Configration Setup
+     * Define the basePath of the project (Yii Configration Setup)
      */
     'basePath' => dirname(__DIR__),
     
     'modules' => [
-        
-        /*
-         * This module is need to run Luya. It contains the different luya bootstraping proccess and components etc.
-         */
-        'luya' => 'luya\Module',
         
         /*
          * If you have other administration module (like cmsadmin) then you going to need this module. The Admin module provides
@@ -146,6 +141,9 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\DummyCache', // use: yii\caching\FileCache
         ],
-    ]
+    ],
+    'bootstrap' => [
+        'cms',
+    ],
 ];
 ```

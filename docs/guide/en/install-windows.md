@@ -19,10 +19,10 @@ This above command will create a folder (inside of your current folder where the
 
 ```sh
 copy server.php.dist server.php
-copy local.php.dist local.php
+copy localdb.php.dist localdb.php
 ```
 
-Now change the database connection inside the `configs/local.php` file to fit your mysql servers configuration. You should open all config files once to change values and understand the behavior. After successfully setting up your database connection, you have to reopen your Command Prompt and change into your project directory and excute the console command at `public_html` folder.
+Now change the database connection inside the `configs/localdb.php` file to fit your mysql servers configuration. You should open all config files once to change values and understand the behavior. After successfully setting up your database connection, you have to reopen your Command Prompt and change into your project directory and excute the console command at `public_html` folder.
 
 > `php` command is available if you already add your php.exe path on your system environment variable
 

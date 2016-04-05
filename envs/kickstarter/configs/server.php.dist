@@ -5,4 +5,4 @@
  */
 
 // in this case we return the pre production configs:
-return require 'prep.php';
+return require 'local.php';
