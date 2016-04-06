@@ -323,9 +323,9 @@ class Container extends \yii\base\Component implements ArrayAccess
         foreach ($baseItem->with('hidden')->getTeardown() as $item) {
             // if its the root line an match level 1 get all siblings
             if ($rootLine && $i == 1) {
-                return $item->siblings;
+                return $item->without(['hidden'])->siblings;
             } elseif ($i == $level) {
-                return $item->children;
+                return $item->without(['hidden'])->children;
             }
             $i++;
         }

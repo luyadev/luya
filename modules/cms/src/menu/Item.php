@@ -462,4 +462,31 @@ class Item extends \yii\base\Object
 
         return $this;
     }
+    
+    /**
+     * Unset a value from the `with()` method. Lets assume you want to to get the children with hidden
+     * 
+     * ```php
+     * foreach ($item->with('hidden')->children as $child) {
+     *     // but get the sibilings without the hidden state
+     *     $siblings = $child->without('hidden')->siblings;
+     * }
+     * ```
+     * 
+     * @param string|array $without Can be a string `hidden` or an array `['hidden']`.
+     * @return \cms\menu\Item
+     */
+    public function without($without)
+    {
+        $without = (array) $without;
+        
+        foreach ($without as $expression) {
+            $key = array_search($expression, $this->_with);
+            if ($key !== false) {
+                unset($this->_with[$key]);
+            }
+        }
+        
+        return $this;
+    }
 }
