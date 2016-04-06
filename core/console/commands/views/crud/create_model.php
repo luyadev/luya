@@ -21,6 +21,9 @@ use Yii;
 
 /**
  * NgRest Model created at <?php echo date("d.m.Y H:i"); ?> on LUYA Version <?php echo $luyaVersion; ?>.
+ *
+<?php foreach($properties as $name => $type): ?> * @property <?= $type; ?> $<?= $name . PHP_EOL; ?>
+<?php endforeach;?>
  */
 <?php if (!$extended): ?>abstract <?endif;?>class <?php echo $className; ?> extends \admin\ngrest\base\Model
 {

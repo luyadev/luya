@@ -120,7 +120,7 @@ class CrudController extends \luya\console\Command
                         }
                         
                         $allfields[] = $v->name;
-                        
+                        $properties[$v->name] = $v->type;
                         
                         if ($v->type == 'text') {
                             $fieldConfigs[$v->name] = 'textarea';
@@ -163,6 +163,7 @@ class CrudController extends \luya\console\Command
                         'i18n' => $i18n,
                         'extended' => $extended,
                         'textFields' => $textFields,
+                        'properties' => $properties,
                     ]);
                     
                     break;
