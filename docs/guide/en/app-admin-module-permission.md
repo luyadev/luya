@@ -1,7 +1,7 @@
-Admin Berechtigungen
+Admin Permissions
 ====================
 
-Um eine Berechtigung für eine *Api-Schnittstelle* oder eine manuel erstelle *Route* zu erstellen gehen Sie in die `getMenu()` Funktion ihres Modules.
+In order to set permissions for an API-Gateway or a custom Route you can add those informations into the `getMenu()` method function of the corresponding module and run the `import` command. LUYA admin will then create those permissiosn and you can allocate those in the groups and users settings.
 
 Custom Menu-Route
 -------------
@@ -35,7 +35,7 @@ public function getMenu()
 }
 ```
 
-Controller Berechtiungen Ausschalten
+Disable controller permissions
 ------------------------------------
 Sie können innerhalb eines Controllers die Eigenschaft `disablePermissionCheck` auf `true` stellen um jeglich Prüfung von Berechtigungen **auszuschalten**, es wird jedoch geprüft ob eine Benutzer eingeloggt ist:
 

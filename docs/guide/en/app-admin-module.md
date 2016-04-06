@@ -11,6 +11,8 @@ Some Features you can use in Admin Modules:
 + Apis
 + Permissions
 
+> You can use the [Console Command](app-console.md) `module/create` to create a frontend or an admin module.
+
 ### Controller views
 
 Inside an administration module you shoud always use `renderPartial()` method, as there is no layout views because you are in an Angular context.

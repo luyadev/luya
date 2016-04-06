@@ -1,5 +1,8 @@
 Layouts
 -------
+
+> TO BE TRANSLATED
+
 Alle views welche mit `$this->render($viewFile)` verarbeitet werden inkludieren das layout welches in `views/layouts/main.php` liegt. Wer nun aber inerhalb des Modules einen *Layout ähnlichen* view rendenr möchte kann dies mit `$this->renderLayout($viewFile)` bezwecken. Warum nicht `$this->render($viewFile)` verwenden? 
 
 + `renderLayout($viewFile)` verwendet einen klar definieren view namen welcher verwendet werden muss.

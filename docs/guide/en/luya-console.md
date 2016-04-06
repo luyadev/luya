@@ -7,10 +7,11 @@ To execute a console command open your Terminal and go into the base directory o
 ./vendor/bin/luya <command>
 ```
 
+> Under windows you can run commands via the composer file `composer exec luya <command>`
+
 Where *command* is one of the following commands below:
 
-Command overview
-----------------
+### Available commands
 
 |Befehl            |Optionen                      |Beispiel                  |Beschreibung
 | --------         | ---------------              | ---------                 | ---------
@@ -28,7 +29,7 @@ Command overview
 |storage/cleanup    |-								|`storage/cleanup`	|Cleanup not existing files compare file system and database.
 
 
-Einen Command erstellen
+Create your own command
 ------------------------
 You can always create your custom command. Custom commands are stored within a module in the folder `commands`. The main differenc is that commands can only be execute from the console command and does not have view files to render, an example command. We assume you have moulde *yourmodule* with a contorller *NotifyController* with two actions *actionIndex* and *actionBar*:
 

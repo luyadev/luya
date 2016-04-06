@@ -1,5 +1,11 @@
-NgRest
+NgRest Model
 ======
+
+The `NgRest` crud model class is the based class for the api, based on this Active Record class the find, update and created validation rules will be perfomed. The main different to the Yii2 Restful implementation is the to use `admin\ngrest\base\Model` as base class. So the ngrest crud model provides additianl informations to what fields you want to edit, create or list in your crud view.
+
+
+> TO BE TRANSLATED
+
 In dieser Sektion gehen wir nur auf das *NgRest Model* ein, um den ganzen zusammenhang und deren verbindung zu verstehen oder ein Beispiel einzurichten schaune Sie sich bitte die Sektion [Admin Modul NgRest Crud](app-admin-module-ngrest.md) an. *NgRest* ist ein verbindung zwischen Model, RestApi und Angular. Die NgRest konfiguration kann direkt auf den Output deines Models einfluss nehmen und dir komplexe arbeiten via *Plugins* abnehmen.
 
 > Eine NgRest Tabelle muss einen eindeutigen Primary Key Feld (am besten ID) haben.

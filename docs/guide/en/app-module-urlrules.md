@@ -1,5 +1,8 @@
 Url-Rules/Url-Regel (Lesbare Urls)
 --------------------------
+
+> TO BE TRANSLATED
+
 Um eine neue *Url-Rule* (Regel) zu defnieren gehen Sie in die `Module.php` Datei 
 des Moduls und fügen Sie eine neuen eigenschaft(property) `public $urlRules` mit einem Leeren Array `= []` hinzu. Um eine neue Regel zu erstellen müssen Sie ein Array Element erstellen und dies keys *pattern* und *route" definieren.
 

@@ -1,7 +1,7 @@
 CMS Blocks
 ==============
 
-> use `./vendor/bin/luya block/create` run build blocks quick.
+> use `./vendor/bin/luya block/create` to build blocks with a cli wizzard.
 
 What are Blocks? Blocks are elements used in the CMS Module to display and configure data. Blocks are dropped into the placeholders of an [cmslayout](app-cmslayouts.md). An easy example of a block could be a pargraph tag where the user can add the content. LUYA CMS Modules ships with some default blocks, but you can always create your own elements.
 

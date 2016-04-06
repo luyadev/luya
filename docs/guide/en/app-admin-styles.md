@@ -1,5 +1,8 @@
 Admin Styleguide
 ================
+
+> TO BE TRANSLATED
+
 Dieser kleine Styleguide ist eine Referenz für Komponenten die im Admin verwendet werden können.  
 Zurzeit deckt dieser Styleguide nur das Thema Input Felder ab.
 

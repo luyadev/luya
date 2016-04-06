@@ -5,7 +5,7 @@ A very important behvaior in *LUYA* projects are **modules**. You can always use
 + [Admin](app-admin-module.md) Contains Model Data, NgRest Cruds
 + [Frontend](app-module-frontend.md) Contains frontend logic with controllers, logic and views.
 
-> You can use the [Console Command](app-console.md) `module/create` to quick create new module.
+> You can use the [Console Command](app-console.md) `module/create` to create a frontend or an admin module.
 
 Integrate
 ---------

@@ -1,15 +1,16 @@
 Browser Support
 -----------------
-*LUYA* wird von folgenden Betriebssystemen mit den dabei aufgeführten Browser unterstützt:
 
-Mac OSX Lion und aufwärts
+*LUYA ADMIN* ist currently supported by the following operating systems and browsers:
+
+Mac OSX Lion and up
 ----------------
 + Safari 5.1
 + Firefox 42
 + Chrome 46
 + Opera 25
 
-Windows 7 und aufwärts
+Windows 7 and up
 -------------------
 + Internet Explorer 10
 + Firefox 42
@@ -18,7 +19,6 @@ Windows 7 und aufwärts
 
 Mobile Browser
 -------------------
-Bisher unterstützt *LUYA* werder iOS, Windows Phone noch Android Browser
+Current the responsive admin mode is not finished and strongly under development
 
-
-Hinweis: Für das beste *LUYA*-Erlebnis empfehlen wir die Verwendung von Google Chrome oder Mozilla Firefox.
+> For the best *LUYA* experience we currently recommend you to use the `Google Chrome` or `Firefox`

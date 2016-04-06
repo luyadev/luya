@@ -1,6 +1,8 @@
 NgRest ActiveWindow
 ===================
 
+> TO BE TRANSLATED
+
 Ein *NgRest ActiveWindow* ist ein Fenster welches auf eine ID angeknüpft wird, dies zeigt sich als *Button* in der Grid übersicht deiner Datensätze. Du kannst nun auf den Knopf klicken und inhalt für diese aktuelle geklickt *ID* anzeigen. Ein *ActiveWindow" ist eine Klasse mit dem suffx *ActiveWindow* und befinden sich im Ordners `aws`.
 
 Beim aufruven des *ActiveWindows* via den *Button* innerhalb der *Grid-Liste* wird als immer die `index()` methode gerendet.

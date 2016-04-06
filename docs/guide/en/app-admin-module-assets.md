@@ -1,23 +1,24 @@
-Admin-Modul Assets
+Admin Assets
 ==================
 
-Möchte man im Admin Kontext externe Ressourcen verwenden, können diese ähnlich zum Frontend Kontext über ein Assetbundle eingebunden werden. Da es sehr wahrscheinlich ist, dass man dazu die Werkzeuge benötigt (Angular mit allen bereits definierten Direktiven, Bower, Jquery, etc.), sollte man unbedingt das `Main` Bundle als Abhängigkeit mit einbinden:
+This section describes how to add assets (css or javascript) files to your administration module, to make sure are depending and initializing your files at the right point, all your custom assets should depend on the `admin\assets\Main` packaged.
 
-### Asset-Bundle Datei mit den grundlegenden Abhängigkeiten
 
-Als Beispiel wird ein Javascript Asset eingebunden:
+### Example Bundle
+
+Below en example administration asset file depending on the administration main asset bundle:
 
 ```php
 <?php
 
-namespace app\assets;
+namespace app\modules\myadmin\assets;
 
-class CalendarAsset extends \luya\web\Asset
+class MyAdminAsset extends \luya\web\Asset
 {
-    public $sourcePath = '@app/resources';
+    public $sourcePath = '@myadmin/resources';
 
     public $js = [
-        'js/calendar.js',
+        'js/johndoe.js',
     ];
 
     // important to solve all javascript dependency issues relating jquery, bower, angular, ...
@@ -27,51 +28,21 @@ class CalendarAsset extends \luya\web\Asset
 }
 ```
 
-> Asset Daten sollten, wie auch im Frontendkontext, immer im Ordner `resources` hinterlegt werden.
+> The asset bundle itself should always stored in a `assets` folder where the resource files for the asset should always located in a `resources` folder.
 
-Dieses Asset wird nun die Datei `calendar.js` im Ordner `@app/resources/` suchen.
+### Embed the asset
 
-### Einbinden der Assets in Module.php
-Um die oben erstellte `Calendar` *Admin Modul Asset* Datei einzubinden, wird die `Module.php` der Applikation bzw. des Moduls im `$assets` Array um einen Eintrag erweitert.
+To emebed the above created example asset file stored in your admin module you hav to add the asset bundle into your `$assets` array config of the belonging `Module.php` file as shown below:
 
 ```php
 <?php
-namespace app\modules\meinmodule;
+namespace app\modules\myadmin;
 
 class Module extends \admin\base\Module
 {
     public $assets = [
-        'app\assets\CalendarAsset'
+        'app\modules\myadmin\assets\MyAdminAsset'
     ];
 
 }
 ```
-
-### Assets in einem Modul einbinden
-
-Ähnlich zu der Einbindung im Applikationskontext, wird das Verzeichnis `assets` unter dem entsprechenden Modul angelegt und die Asset-Klasse abgeleitet:
-
- ```
- <?php
-
- namespace app\modules\examplemodule\assets;
-
- class MyAsset extends \luya\web\Asset
- {
-     public $sourcePath = '@examplemodule/resources';
-
-     public $js = [
-         'js/myscript.js',
-     ];
-
-     public $css = [
-         'css/mycss.css',
-     ];
-
-     public $depends = [
-         'admin\assets\Main',
-     ];
- }
- ```
-
-Die Einbindung in `Module.php` im jeweiligen Modul erfolgt analog dem oberen Beispiel unter `Einbinden der Assets in Module.php`.
