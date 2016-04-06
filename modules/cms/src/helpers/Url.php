@@ -21,7 +21,7 @@ class Url extends \luya\helpers\Url
         $item = Yii::$app->menu->find()->where(['module_name' => $moduleName])->with(['hidden'])->one();
 
         if ($item) {
-            $item->link;
+            return $item->link;
         }
 
         return $moduleName;
