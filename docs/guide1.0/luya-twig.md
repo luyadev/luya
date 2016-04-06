@@ -3,6 +3,26 @@ Twig functions
 
 the following twig functions are available in all twig ***frontend*** templates. Not in in block twigAdmin, cause they are rendere with twig.js:
 
+### Functions
+
+|Funktion           |Beispiel        |Beschreibung      
+|--------           |------------    |------------
+|menuFindOne        |`menuFindOne(1)` |Findet einen Menu eintrag für die angegeben Nav-Item-id (kurz id).
+|menuCurrent        |`menuCurrent()`    |Gibt das aktuelle menue element zurück. Dies beinhaltet ein [Item-Object](https://luya.io/api/cms-menu-item.html).
+|menuCurrentLevel   |`menuCurrentLevel(1)`  |Gibt das aktuelle menu item zurück für das angegeben level, die Level Angaben starten bei 1.
+|menuFindAll        |`menuFindAll('container-alias', 0)` |Gibt alle menu element für den definieren Menu Container und die angegeben parent_nav_id (hier 0) an.
+|asset              |`asset('\\my\\project\\Asset')` |Gibt das Klassen Objekt für eine Asset Klasse zurück. `false` falls nicht gefunden.
+|image              |`image(123)` |Gibt das aktuelle Bild objekt für die angebgeben ID zurück. `false` falls nicht gefunden.
+|filterApply        |`filterApply(123, 'my-filter-to-apply')` |Wendet einen Filter auf ein Bild an (falls dieser noch nicht angwendet wurde) und gibt den aboslute Bildpfad zurück des neue generierteen Bildes.
+|element            |`element('button','arg1','arg2')` |Ruf das Html Element `button` auf mit den Paramteren `arg1` und `arg2`.
+|t                  |`t('app', 'bar')`  |Twig wrapper für `Yii::t('app', 'bar')` in [Übersetzungen](app-translation.md).
+
+### Variables
+
+|Variabel          |Ausgabe
+|---               |---
+|publicHtml        |Gibt den aktuellen Pfad für dateien und Bilder zurück [getPublicHtml()](https://luya.io/api/luya-web-view.html#getPublicHtml()-detail)
+
 
 links
 -----
