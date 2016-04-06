@@ -18,50 +18,98 @@ Preparations
 3. Define and Add the Api-Endpoint to your Module and enable the Authorizations
 4. Import and Setup privileges.
 
-> TO BE TRANSLATED
-
 ## 1. The Model
 
-Nachdem Sie eine Datenbank Tabelle via [Migration](luya-console.md) erstellt haben, können Sie ein *ActiveRecord* Model erstellen im Ordner `models` mit dem Namen der Tabelle:
+We assume you have a made a table via the migrations (in your example below we assume you make a team module with members) and executue the migrations so you can no creat an `ActiveRecord` model for the provided table. The model represents the datasource for the REST API, you can create the model with the gii module extension or you can also generate the model and the rest of the classes with the `crud/create` cli command.
 
+Lets have close look at what you model should look like, in our member example of the teammodule:
 ```php
 <?php
 namespace teamadmin\models;
 
 class Member extends \admin\ngrest\base\Model
 {
+    /**
+     * Yii2 related ActiveRecord code
+     */
     public static function tableName()
     {
         return 'teamadmin_member';
     }
     
+    /**
+     * Yii2 related ActiveRecord code
+     */
     public function rules()
     {
         return [
-            [['name', 'title', 'text'], 'required']
+            [['name', 'title', 'text'], 'required'],
         ];
     }
     
+    /**
+     * By default those rest scenarios will be used to multi assign post values. You should not forget to
+     * call the parent scenarios in order to make sure the default scenarios (for frontend implmentations) are
+     * also provided.
+     */
     public function scenarios()
     {
+        $scenarios = parent::scenarios();
+        $scenarios['restcreate'] = ['name', 'title', 'text'];
+        $scenarios['restupdate'] = ['name', 'title', 'text'];
+        return $scenarios;
+    }
+    
+    /**
+     * Yii related ActiveRecord code
+     */
+    public function attributeLabels()
+    {
         return [
-            'restcreate' => ['name', 'title', 'text'],
-            'restupdate' => ['name', 'title', 'text'],
+            'name' => 'Name',
+            'title' => 'Title',
+            'text' => 'Text Message',   
         ];
     }
     
-    /* ng-rest method config */
+    /* NGREST SPECIFIC CONFIGURATIONS */
     
+    /**
+     * @return array An array define the field types of each field
+     */
+    public function ngrestAttributeTypes()
+    {
+        return [
+            'name' => 'text',
+            'title' => ['selectArray', 'data' => ['Mr', 'Mrs']],
+            'text' => 'textarea',
+        ];
+    }
+    
+    /**
+     * This is the api endpoint for the ngrest implementation, so the ngrest config needs to know where should
+     * all the angular calls go.
+     */
     public $ngRestEndpoint = 'api-team-member';
     
-    public function ngRestConfig($config) 
+    /**
+     * Enable which fields should automaticcally be available as multilingual fields!
+     */
+    public $i18n = ['text'];
+    
+    /**
+     * Define the ngrest config, which fileds should be available in create form, updateform and the grid overview list.
+     * 
+     * @return \admin\ngrest\Config the configured ngrest object
+     */
+    public function ngRestConfig($config)
     {
-        $config->list->field("name", "Name")->text();
-        $config->list->field("title", "Titel")->text();
-        $config->list->field("text", "Text")->textarea();
+        // define fields for types based from ngrestAttributeTypes
+        $this->ngRestConfigDefine($config, 'list', ['title', 'name']);
+        $this->ngRestConfigDefine($config, ['create', 'update'], ['title, 'name', 'text']);
         
-        $config->create->copyFrom('list', ['id']);
-        $config->update->copyFrom('list', ['id']);
+        // enable or disable ability to delete;
+        $config->delete = false; 
         
         return $config;
     }
@@ -69,13 +117,16 @@ class Member extends \admin\ngrest\base\Model
 }
 ```
 
-Eine detaillierte Erkärung der `ngRestConfig() Methode finden Sie in der [NgRest Sektion](ngrest.md).
+You can read more about the configuration (specially `ngRestConfig()`) of the ngrest object in [ngrest-model.md](ngrest model section).
+
 
 ## 2. Controller and API
 
+Each NgRest Crud needs an API (to make the rest call, create, update, list which are provided trough [Yii2 RESTful](http://www.yiiframework.com/doc-2.0/guide-rest-quick-start.html)) and a controller which contains the angular template for your configure `ngRestConfig()`. The API and the Controller are basically only Gateways for the Output and do relate to the ngrest model:
+
 ### NgRest Controller
 
-Um die CRUD Logik anzuzeigen, müssen wir einen Controller anlegen, welcher auf das *Model* verweist:
+Example of an ngrest controller (which are located in `<module>/controllers`):
 
 ```php
 <?php
@@ -89,7 +140,7 @@ class MemberController extends \admin\ngrest\base\Controller
 
 ### NgRest Api
 
-TBD: Warum NgRest Api?
+Example of an api controller (which are located in `<module>/apis`):
 
 ```php
 <?php
@@ -99,14 +150,15 @@ class MemberController extends \admin\ngrest\base\Api
 {
     public $modelClass = 'teamadmin\models\Member';
 }
-
 ```
 
-## 3. Api-Endpoint
+## 3. Api-Endpoint & Authorization
+
+The last part of the ngrest process is the let your application know where your api is located (Yii2 controller namespace) and to make permission entries for the ngrest (who can create, update, delete and see the crud).
 
 ### Endpoint
 
-Öffnen Sie die `Module.php` in dem Module, in dem sie die *NgRest* Oberfläche initialisieren möchten und fügen Sie die Eigenschaft `public $apis` ein. Tragen Sie nun einen **Api-Endpoint** für Ihre Schnittstelle ein wobei der Key dem späteren Link zur Schnittstelle und Value der ApiController Klasse enspricht.  
+To let your application know what apis are registered you have to open the Module class of the module where the ngrest crud is located and add a linkin entry into the `$apis` propertie.
 
 ```php
 <?php
@@ -115,31 +167,34 @@ namespace teamadmin;
 class Module extends \admin\base\Module
 {
     public $apis = [
-        'api-team-member' => 'teamadmin\\apis\\MemberController',
+        'api-team-member' => 'teamadmin\apis\MemberController',
     ];
 }
 ```
 
-Ein Api-Endpoint besteht immer aus *api-{module}-{model}* wobei beim *module* immer das **Frontend-Module** gewählt wird.
+There are a few rules while defining the api endpoint name:
 
-> Api-Endpoints haben **nie** das Admin Prefix, da es in diesem Kontext keinen Sinn ergäbe. Technisch gesehen kann man jedoch jeglich Text als Api-Endpoint hinterlegen.
-
-Alle Apis werden **singular** ausgedrückt (wie Datenbank Tabellen), also **member** und nicht  ~~members~~ .
++ An Endpoint is always build like `api-<module>-<model>` where *<module>* is always the frontend module.
++ API Endpoints does never have an admin prefix in the module, by defintion. So event when you have only one module `foobaradmin` the choosen module name for the endpoint would be `foobar`.
++ APIs are alaways **singular** described, its not ~~members~~ its *member*.
 
 ### Menu
-Fügen Sie nun die `getMenu()` Funktion in Ihre `Module.php` ein, um die Menu Einträge zu erstellen und die 
-[Berechtigungen](app-admin-module-permission.md) zu setzen:
+
+The store the permission informations of your newly created ngrest crud you have to override the `getMenu()` method of your Module class where the ngrest crud belongs to.
 
 ```php
 public function getMenu()
 {
     return $this
-    ->node("Team Admin", "fa-wrench")
-        ->group("Verwalten")
-            ->itemApi("Mitglieder/Members", "teamadmin-member-index", "fa-ils", "api-teamadmin-member")
+    ->node("Team Admin", "account")
+        ->group("Manager")
+            ->itemApi("Members", "teamadmin-member-index", "extension", "api-teamadmin-member")
     ->menu();
 }
 ```
+
+The Icons `account` and `extension` are choosem from the google material icons: https://design.google.com/icons/. You can add as much nodes, groups and items as you want. The first argument of `node`, `group` and `itemApi` as the navigation button display in the administration area, you can wrapp them with Yii::t in order to make internalisations.
+
 ## 4. Import and Priviliges
 
 run `./vendor/bin/luya import`, open the administration area and allocated the new menu items to a group.

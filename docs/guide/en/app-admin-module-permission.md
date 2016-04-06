@@ -35,64 +35,73 @@ public function getMenu()
 }
 ```
 
-Disable controller permissions
-------------------------------------
-Sie können innerhalb eines Controllers die Eigenschaft `disablePermissionCheck` auf `true` stellen um jeglich Prüfung von Berechtigungen **auszuschalten**, es wird jedoch geprüft ob eine Benutzer eingeloggt ist:
+Disable controller permission
+-----------------------------
+
+Inside of each `luya\web\Controller` abstracted class you can disable the permission check be enabling(overriding) the property `public $disablePermissionCheck = true;`. This means all **logged in users** can access this controller, but guest (nog logged in users) are still not allowed to see this controller.
 
 ```php
 class MyTestController extends \admin\base\Controller
 {
-    
     public $disablePermissionCheck = true;
     
     public function actionIndex()
     {
-        // Diese Action kann von jedem Benutzer geöffnet werden, aber nicht einem Fremden-Gast der nicht in der Administration eingeloggt ist.
+        // This action can be performed by all logged in admin users, but not guest users.
     }
 }
 ```
 
-Route und Api berechtigung ohne Menu
+Route and Api permssions without Menu
 ------------------------------------
-Sie könne nauch *api* und *route* einträge erstellen ohne die `getMenu()` Funktion. Dazu gehen Sie in die `Module.php` und fügen wahlweise folgende methoden ein:
+
+You can also setup permissions which are not regulated trough `getMenu()`, to do so you open the Module class and override the following methods:
 
 ```php
 public function extendPermissionApis()
 {
     return [
-        ['api' => 'api-cms-navitempageblockitem', 'alias' => 'Blöcke einfügen und verschieben'],
-    ];
-}
-
-public function extendPermissionRoutes()
-{
-    return [
-        ['route' => 'cmsadmin/page/create', 'alias' => 'Seiten erstellen'],
-        ['route' => 'cmsadmin/page/update', 'alias' => 'Seiten bearbeiten'],
+        ['api' => 'api-cms-moveblock', 'alias' => 'Move blocks'],
     ];
 }
 ```
 
-Interne berechtigungs berechnung
---------------------------------
-Es gibt 3 zustände für die Berechtiung welche wie folgt berechnet werden:
+The above api `api-cms-moveblock` is now protected by the administration authorization system and you can allocate who is able to edit,create and delete performing.
 
-| Name          | Wert
+```php
+public function extendPermissionRoutes()
+{
+    return [
+        ['route' => 'cmsadmin/page/create', 'alias' => 'Page Create'],
+        ['route' => 'cmsadmin/page/update', 'alias' => 'Page Edit'],
+    ];
+}
+```
+
+The above *module/controller/action* route is now protected by administration authorization.
+
+Internal permission calculation
+--------------------------------
+
+There are 3 state of permssions who got their assign values:
+
+| Name          | Value
 | ------        | ----
 | crud_create   | 1
 | crud_update   | 3
 | crud_delete   | 5
 
-Somit kommen beim addieren Dieser Werte folgende Zuständ zusammen
 
-| create    | update    | delete    | Wert          | Beschreibung
+In order to combine thos values you will get those values:
+
+| create    | update    | delete    | Value          | Description
 | ---       | ---       | ---       | ---           | ----
-| ☐         | ☐         | ☐         | 0             | Keine berechtigung
-| ☑         | ☐         | ☐         | 1             | erstellen
-| ☐         | ☑         | ☐         | 3             | bearbeiten
-| ☑         | ☑         | ☐         | 4             | erstellen, bearbeiten
-| ☐         | ☐         | ☑         | 5             | löschen
-| ☑         | ☐         | ☑         | 6             | erstellen, löschen
-| ☐         | ☑         | ☑         | 8             | bearbeiten, löschen
-| ☑         | ☑         | ☑         | 9             | erstellen, bearbeiten, löschen
+| ☐         | ☐         | ☐         | 0             | No permission
+| ☑         | ☐         | ☐         | 1             | create
+| ☐         | ☑         | ☐         | 3             | update
+| ☑         | ☑         | ☐         | 4             | create, update
+| ☐         | ☐         | ☑         | 5             | delete
+| ☑         | ☐         | ☑         | 6             | create, delete
+| ☐         | ☑         | ☑         | 8             | update, delete
+| ☑         | ☑         | ☑         | 9             | create, update, delete
 

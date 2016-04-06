@@ -1,6 +1,8 @@
 load assets via composer bower
 ==============================
 
+> The LUYA team discontinued to user bower assets, as it makes the composer update process very slow.
+
 require
 --------
 added your bower packages into the require part:
