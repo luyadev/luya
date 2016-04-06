@@ -1,12 +1,15 @@
-Example Data
+Structures
 ============
 
-Example Project Folder Hierarchy
+Example Project Folder hierarchy
 --------------------------------
+
+This is what a standard luya kickstarter appliation hierarchy should look like and wher you have to put your content
+
 ```
 .
 ├── public_html
-│   ├── assets
+│   ├── storage
 │   └── css
 ├── assets
 ├── blocks
@@ -31,8 +34,10 @@ Example Project Folder Hierarchy
 Example Config
 --------------
 
+This is what a default configuration file would look like:
+
 ```php
-$config = [
+return [
     
     /*
      * For best interoperability it is recommended that you use only alphanumeric characters when specifying an application ID
