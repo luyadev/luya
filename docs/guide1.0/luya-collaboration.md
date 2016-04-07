@@ -13,7 +13,7 @@ Fork
 ------
 To Fork the the [LUYA](https://github.com/luyadev/luya) project click on the FORK Button, this will create a copy of the repository on your account. After forking the repositor you have to clone it into your local composer  via `git clone https://github.com/yourusername/luya`. 
 
-![fork-luya](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/start-collaboration-fork.jpg "Fork Luya")
+![fork-luya](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/start-collaboration-fork.jpg "Fork Luya")
 
 > Tipps with [git clone](https://help.github.com/articles/importing-a-git-repository-using-the-command-line/).
 
@@ -85,7 +85,7 @@ git push origin
 
 Visit your *LUYA* Fork on GitHub now and you will see a **PULL REQUEST** Button where you can create a Pull-Request:
 
-![pull-request](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/start-collaboration-pull-request.jpg "Pull request")
+![pull-request](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/start-collaboration-pull-request.jpg "Pull request")
 
 
 Informations about Design and CSS

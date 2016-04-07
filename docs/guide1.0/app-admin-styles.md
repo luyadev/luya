@@ -11,7 +11,7 @@ Input Felder
 Standardmässig wird das Label links vom Inputfeld dargestellt. Möchte man aus dieser Darstellung ausbrechen und das Label über das Input Feld setzen, muss man lediglich dem `.input` div die Klasse `.input--vertical` hinzufügen.  
   
 Ein Beispiel:  
-![input--text--vertical](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/input--text--vertical.jpg "Einfaches Inputfeld, Label darüber")
+![input--text--vertical](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/app-admin-styles/input--text--vertical.jpg "Einfaches Inputfeld, Label darüber")
 
 ```
 <div class="input input--text input--vertical">
@@ -23,7 +23,7 @@ Ein Beispiel:
 ```
 
 ##### Einfacher Input
-![input--text](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/input--text.jpg "Einfaches Inputfeld")
+![input--text](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/app-admin-styles/input--text.jpg "Einfaches Inputfeld")
 
 ```
 <div class="input input--text">
@@ -35,7 +35,7 @@ Ein Beispiel:
 ```
 
 ##### Textarea
-![input--textarea](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/input--textarea.jpg "Einfaches Textfeld")
+![input--textarea](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/app-admin-styles/input--textarea.jpg "Einfaches Textfeld")
 
 ```
 <div class="input input--textarea">
@@ -47,7 +47,7 @@ Ein Beispiel:
 ```
 
 ##### Select
-![input--select](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/input--select.jpg "Select dropdown")
+![input--select](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/app-admin-styles/input--select.jpg "Select dropdown")
 
 ```
 <div class="input input--select">
@@ -60,7 +60,7 @@ Ein Beispiel:
 ```
 
 ##### Radio buttons
-![input--radios](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/input--radios.jpg "Radio group")
+![input--radios](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/app-admin-styles/input--radios.jpg "Radio group")
 
 ```
 <div class="input input--radios">
@@ -74,7 +74,7 @@ Ein Beispiel:
 ```
 
 ##### Single Checkbox
-![input--single-checkbox](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/input--single-checkbox.jpg "Alleinstehende Checkbox - Gut für Einstellungen (On / Off)")
+![input--single-checkbox](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/app-admin-styles/input--single-checkbox.jpg "Alleinstehende Checkbox - Gut für Einstellungen (On / Off)")
 
 ```
 <div class="input input--single-checkbox">
@@ -84,7 +84,7 @@ Ein Beispiel:
 ```
 
 ##### Checkboxes
-![input--multiple-checkboxes](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/input--multiple-checkboxes.jpg "Checkbox Gruppe")
+![input--multiple-checkboxes](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/app-admin-styles/input--multiple-checkboxes.jpg "Checkbox Gruppe")
 
 ```
 <div class="input input--multiple-checkboxes">
@@ -134,7 +134,7 @@ Luya kann alle [Material-Design Buttons von Google](http://materializecss.com/bu
 Bisher sind vier Variationen davon ausgehend definiert:
 
 #####Default Buttons 
-![Default button](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/btn.png "Default Button")  
+![Default button](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/app-admin-styles/btn.png "Default Button")  
 Eigenschaften:
 
 * Die Default-Hintergrundfarbe wurde mit einem Grünton überschrieben (siehe Farben) und der Schriftfarbe weiss.
@@ -147,7 +147,7 @@ Eigenschaften:
 ```
 
 ##### "Flache" Buttons
-![Flat button](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/btn--flat.png "Flat Button")  
+![Flat button](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/app-admin-styles/btn--flat.png "Flat Button")  
 Im obigen Screenshot sind 3 flat buttons mit jeweils einem Icon aufgeführt. Da flat buttons keine Hintergrundfarbe und hover styles haben, eigenen Sie sich zur Darstellung von sekundären Funktionen.
 
 Eigenschaften:
@@ -161,7 +161,7 @@ Eigenschaften:
 ```
 
 #####Kleine Buttons
-![Small button](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/btn--small.png "Kleine Button")  
+![Small button](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/app-admin-styles/btn--small.png "Kleine Button")  
 Eigenschaften:
 
 * Halbiertes Padding (1 satt 2rem).
@@ -173,7 +173,7 @@ Eigenschaften:
 ```
 
 #####Fette-Buttons
-![Bold button](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/btn--bold.png "Fett Button")  
+![Bold button](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/app-admin-styles/btn--bold.png "Fett Button")  
 Eigenschaften:
 
 * Font-weight ist hier bold(500).
@@ -185,7 +185,7 @@ Eigenschaften:
 ```
 
 #####Runde Buttons
-![Round button with icon](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/app-admin-styles/btn-floating.png "Runde Button mit Icon")  
+![Round button with icon](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/app-admin-styles/btn-floating.png "Runde Button mit Icon")  
 Eigenschaften:  
 
 * Überschreibungen wie der Default-Button.  

@@ -10,7 +10,7 @@ The [Yii 2](https://github.com/yiisoft/yii2) wrapper which provides out of the b
 [![Total Downloads](https://poser.pugx.org/zephir/luya/downloads)](https://packagist.org/packages/zephir/luya) 
 [![Join the chat at https://gitter.im/zephir/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zephir/luya)
 
-![Luya Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-beta5.png)
+![Luya Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/luya-beta5.png)
 
 #### ATTENTION
 
