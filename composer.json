@@ -17,16 +17,14 @@
 	},
 	"require" : {
 		"php": ">=5.5.0",
-		"yiisoft/yii2": "2.0.7",
-		"twig/twig" : "1.24.0",
-        "curl/curl" : "1.3.0",
-        "phpmailer/phpmailer": "5.2.14"
+		"yiisoft/yii2": "^2.0",
+		"twig/twig" : "^1.24",
+        "curl/curl" : "^1.3",
+        "phpmailer/phpmailer": "^5.2"
 	},
     "require-dev" : {
-        "yiisoft/yii2-debug" : "~2.0.0",
         "phpunit/phpunit" : "~4.0",
         "phpunit/php-code-coverage" : "~2.0",
-        "fabpot/php-cs-fixer" : "~1.0",
         "satooshi/php-coveralls": "~1.0"
     },
     "autoload" : {
