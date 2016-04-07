@@ -3,16 +3,15 @@
     "description": "The kickstarter for a new LUYA application project.",
     "type": "project",
     "license":"MIT",
-    "minimum-stability" : "dev",
     "require": {
         "luyadev/luya-core" : "^1.0@dev",
-        "luyadev/luya-module-admin" : "^1.0@beta",
-        "luyadev/luya-module-cms" : "^1.0@beta",
-        "luyadev/luya-module-cmsadmin" : "^1.0@beta"
+        "luyadev/luya-module-admin" : "^1.0@dev",
+        "luyadev/luya-module-cms" : "^1.0@dev",
+        "luyadev/luya-module-cmsadmin" : "^1.0@dev"
     },
     "require-dev": {
-        "yiisoft/yii2-gii" : "~2.0.0",
-        "yiisoft/yii2-debug" : "~2.0.0"
+        "yiisoft/yii2-gii" : "^2.0",
+        "yiisoft/yii2-debug" : "^2.0"
     },
     "scripts": {
         "post-create-project-cmd": [
