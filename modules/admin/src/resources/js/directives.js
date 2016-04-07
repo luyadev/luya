@@ -885,6 +885,11 @@
                             scope.fileinfo = filtering[0];
                         }
                     }
+                    
+                    /* reset file directive if an event resets the image model to undefined */
+                    if (n == 0) {
+                    	scope.reset();
+                    }
                 });
             },
             templateUrl : 'storageFileUpload'
@@ -1034,6 +1039,15 @@
                             scope.fileId = filtering.fileId;
                         }
                     }
+                    
+                    /* reset image preview directive if an event resets the image model to undefined */
+                    if (n == undefined) {
+                    	scope.fileId = 0;
+                        scope.filterId = 0;
+                        scope.imageinfo = null;
+                        scope.thumb = false;
+                    }
+                    
                 });
                 
                 scope.thumb = false;
