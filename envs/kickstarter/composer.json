@@ -5,8 +5,10 @@
     "license":"MIT",
     "minimum-stability" : "dev",
     "require": {
-        "luyadev/luya-module-cms" : "dev-master as 1.0.0-beta5",
-        "luyadev/luya-module-admin" : "dev-master as 1.0.0-beta5"
+        "luyadev/luya-core" : "^1.0@dev",
+        "luyadev/luya-module-admin" : "^1.0@beta",
+        "luyadev/luya-module-cms" : "^1.0@beta",
+        "luyadev/luya-module-cmsadmin" : "^1.0@beta"
     },
     "require-dev": {
         "yiisoft/yii2-gii" : "~2.0.0",
