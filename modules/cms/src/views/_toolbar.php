@@ -7,9 +7,9 @@ use luya\helpers\Url;
         <div class="luya-cms-toolbar__button luya-cms-toolbar__button--info">
             <div class="luya-cms-toolbar__button-text">
                 <?php if ($menu->current->isHidden): ?>
-                    <i class="material-icons" alt="Not visible" title="Not visible">visibility_off</i>
+                    <i class="material-icons" alt="<?= cms\Module::t('tb_visible_not_alt'); ?>" title="<?= cms\Module::t('tb_visible_not_alt'); ?>">visibility_off</i>
                 <?php else: ?>
-                    <i class="material-icons" alt="Visible" title="Visible">visibility</i>
+                    <i class="material-icons" alt="<?= cms\Module::t('tb_visible_alt'); ?>" title="<?= cms\Module::t('tb_visible_alt'); ?>">visibility</i>
                 <?php endif; ?>
                 <?php if ($menu->current->type == 2): ?>
                     <span class="luya-cms-toolbar__badge luya-cms-toolbar__margin-left">
@@ -21,26 +21,26 @@ use luya\helpers\Url;
     
         <div class="luya-cms-toolbar__button">
             <a target="_blank" href="<?= Url::toRoute(['/admin/default/index', '#' => '/template/cmsadmin-default-index/update/' . $menu->current->navId], true); ?>">
-                <i alt="Edit this page in CMS interface" title="Edit this page in CMS interface"  class="material-icons">mode_edit</i>
+                <i alt="<?= cms\Module::t('tb_edit_alt'); ?>" title="<?= cms\Module::t('tb_edit_alt'); ?>"  class="material-icons">mode_edit</i>
             </a>
         </div>
 
         <div class="luya-cms-toolbar__button">
             <a class="luya-cms-toolbar__container-toggler" href="javascript:void(0);" onclick="toggleDetails(this, 'luya-cms-toolbar-seo-container')">
-                <?php if($seoAlertCount > 0): ?><span class="luya-cms-toolbar__badge luya-cms-toolbar__badge--danger"><?= $seoAlertCount; ?></span><?php endif;?> <span>SEO</span> <i class="material-icons">keyboard_arrow_down</i>
+                <?php if($seoAlertCount > 0): ?><span class="luya-cms-toolbar__badge luya-cms-toolbar__badge--danger"><?= $seoAlertCount; ?></span><?php endif;?> <span><?= cms\Module::t('tb_seo'); ?></span> <i class="material-icons">keyboard_arrow_down</i>
             </a>
         </div>
 
         <div class="luya-cms-toolbar__button">
             <a class="luya-cms-toolbar__container-toggler" href="javascript:void(0);" onclick="toggleDetails(this, 'luya-cms-toolbar-composition-container')">
-                <span class="luya-cms-toolbar__badge"><?= count($composition->get()); ?></span> <span>Composition</span> <i class="material-icons">keyboard_arrow_down</i>
+                <span class="luya-cms-toolbar__badge"><?= count($composition->get()); ?></span> <span><?= cms\Module::t('tb_composition'); ?></span> <i class="material-icons">keyboard_arrow_down</i>
             </a>
         </div>
 
         <?php if (!empty($properties)): ?>
             <div class="luya-cms-toolbar__button">
                 <a class="luya-cms-toolbar__container-toggler" href="javascript:void(0);" onclick="toggleDetails(this, 'luya-cms-toolbar-properties-container')">
-                    <span class="luya-cms-toolbar__badge"><?= count($properties); ?></span> <span>Properties</span> <i class="material-icons">keyboard_arrow_down</i>
+                    <span class="luya-cms-toolbar__badge"><?= count($properties); ?></span> <span><?= cms\Module::t('tb_properties'); ?></span> <i class="material-icons">keyboard_arrow_down</i>
                 </a>
             </div>
         <?php endif; ?>
@@ -63,7 +63,7 @@ use luya\helpers\Url;
         <div class="luya-cms-toolbar__list">
             <div class="luya-cms-toolbar__list-entry">
                 <div class="luya-cms-toolbar__list-entry-left">
-                    <label>Title</label>
+                    <label><?= cms\Module::t('tb_seo_title'); ?></label>
                 </div>
                 <div class="luya-cms-toolbar__list-entry-right">
                     <p>
@@ -73,12 +73,12 @@ use luya\helpers\Url;
             </div>
             <div class="luya-cms-toolbar__list-entry">
                 <div class="luya-cms-toolbar__list-entry-left">
-                    <label>Description</label>
+                    <label><?= cms\Module::t('tb_seo_description'); ?></label>
                 </div>
                 <div class="luya-cms-toolbar__list-entry-right">
                     <p>
                         <?php if (empty($menu->current->description)): ?>
-                            <span class="luya-cms-toolbar__text--danger">No description found!</span>
+                            <span class="luya-cms-toolbar__text--danger"><?= cms\Module::t('tb_seo_description_notfound'); ?></span>
                         <?php else: ?>
                             <span class="luya-cms-toolbar__text--success"><?= $menu->current->description; ?></span>
                         <?php endif; ?>
@@ -87,7 +87,7 @@ use luya\helpers\Url;
             </div>
             <div class="luya-cms-toolbar__list-entry">
                 <div class="luya-cms-toolbar__list-entry-left">
-                    <label>Link</label>
+                    <label><?= cms\Module::t('tb_seo_link'); ?></label>
                 </div>
                 <div class="luya-cms-toolbar__list-entry-right">
                     <p>
@@ -97,14 +97,14 @@ use luya\helpers\Url;
             </div>
             <div class="luya-cms-toolbar__list-entry">
                 <div class="luya-cms-toolbar__list-entry-left">
-                    <label>Keywords</label>
+                    <label><?= cms\Module::t('tb_seo_keywords'); ?></label>
                 </div>
                 <div class="luya-cms-toolbar__list-entry-right">
                 	<?php if (empty($keywords)): ?>
-                		<p class="luya-cms-toolbar__text--danger">No keywords found! You should add keywords in order to analyze your content.</p>
+                		<p class="luya-cms-toolbar__text--danger"><?= cms\Module::t('tb_seo_keywords_notfound'); ?></p>
                 	<?php else: ?>
                 		<?php if ($seoAlertCount > 0): ?>
-                		<p class="luya-cms-toolbar__badge--warning">Some of your keywords are not found in your content, you should fix this by chaning your keywords or add content for your defined keywords.</p>
+                		<p class="luya-cms-toolbar__badge--warning"><?= cms\Module::t('tb_seo_warning'); ?></p>
                 		<?php endif; ?>
                 		<ul class="luya-cms-toolbar__no-bullets">
                 			<?php foreach($keywords as $keyword): ?>

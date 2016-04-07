@@ -2,6 +2,7 @@
 
 namespace cms;
 
+use Yii;
 use yii\base\BootstrapInterface;
 use luya\web\UrlRule;
 use luya\web\Application;
@@ -67,5 +68,20 @@ class Module extends \luya\base\Module implements BootstrapInterface
                 ]);
             }
         });
+    }
+    
+    public $translations = [
+        [
+            'prefix' => 'cms*',
+            'basePath' => '@cms/messages',
+            'fileMap' => [
+                'cms' => 'cms.php',
+            ],
+        ],
+    ];
+    
+    public static function t($message, array $params = [])
+    {
+        return Yii::t('cms', $message, $params, Yii::$app->luyaLanguage);
     }
 }
