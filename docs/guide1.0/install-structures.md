@@ -152,3 +152,33 @@ return [
     ],
 ];
 ```
+
+Composer Dev
+------------
+
+In order to get latest development build (dev-master) for the luya modules and core your composer.json could look like this:
+
+```json
+ {
+    "require": {
+        "luyadev/luya-core" : "^1.0@dev",
+        "luyadev/luya-module-admin" : "^1.0@dev",
+        "luyadev/luya-module-cms" : "^1.0@dev",
+        "luyadev/luya-module-cmsadmin" : "^1.0@dev",
+        "luyadev/luya-module-crawler" : "^1.0@dev",
+        "luyadev/luya-module-crawleradmin" : "^1.0@dev",
+        "luyadev/luya-module-payment" : "^1.0@dev",
+        "luyadev/luya-module-exporter" : "^1.0@dev",
+        "luyadev/luya-deployer" : "^1.0@dev"
+    },
+    "require-dev" : {
+        "yiisoft/yii2-debug" : "^2.0",
+        "yiisoft/yii2-gii" : "^2.0"
+    },
+    "extra": {
+        "asset-installer-paths": {
+            "bower-asset-library": "vendor/bower"
+        }
+    }
+}
+```
