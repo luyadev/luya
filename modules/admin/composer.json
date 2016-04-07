@@ -15,14 +15,8 @@
 	"support" : {
 		"issues" : "https://github.com/luyadev/luya/issues"
 	},
-	"require" : {
-		"luyadev/luya-core" : "dev-master as 1.0.0-beta5",
-        "imagine/imagine": "0.6.3"
-	},
 	"require-dev" : {
-		"luyadev/luya" : "dev-master",
-		"phpunit/phpunit" : "~4.0",
-        "phpunit/php-code-coverage" : "~2.0"
+		"phpunit/phpunit" : "~4.0"
 	},
 	"autoload" : {
 		"psr-4" : {

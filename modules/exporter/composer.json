@@ -16,7 +16,6 @@
         "issues" : "https://github.com/luyadev/luya/issues"
     },
     "require" : {
-        "luyadev/luya-core" : "dev-master as 1.0.0-beta5",
         "ifsnop/mysqldump-php":"2.*"
     },
     "autoload" : {
