@@ -13,19 +13,6 @@
         "ifsnop/mysqldump-php":"2.*",
         "paypal/rest-api-sdk-php" : "~1.6.0"
     },
-    "require-dev": {
-        "bower-asset/jquery-ui" : "1.11.4",
-        "bower-asset/angular" : "1.4.8",
-        "bower-asset/angular-i18n" : "1.4.8",
-        "bower-asset/angular-resource": "1.4.8",
-        "bower-asset/angular-ui-router" : "0.2.15",
-        "bower-asset/angular-loading-bar" : "0.8.0",
-        "bower-asset/angular-dragdrop" : "1.0.13",
-        "bower-asset/angular-slugify" : "1.0.1",
-        "bower-asset/twig.js" : "0.8.6",
-        "bower-asset/ng-file-upload" : "11.0.2",
-        "bower-asset/ng-wig" : "2.3.3"
-    },
     "extra": {
         "asset-installer-paths": {
             "bower-asset-library": "vendor/bower"
