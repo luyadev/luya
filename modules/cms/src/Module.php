@@ -72,7 +72,7 @@ class Module extends \luya\base\Module implements BootstrapInterface
     
     public $translations = [
         [
-            'prefix' => 'cms*',
+            'prefix' => 'cms',
             'basePath' => '@cms/messages',
             'fileMap' => [
                 'cms' => 'cms.php',
