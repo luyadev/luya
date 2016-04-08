@@ -4,8 +4,10 @@ namespace cmsadmin\models;
 
 use Yii;
 use Exception;
+use cmsadmin\base\NavItemType;
+use cmsadmin\base\NavItemTypeInterface;
 
-class NavItemRedirect extends \cmsadmin\base\NavItemType
+class NavItemRedirect extends NavItemType implements NavItemTypeInterface
 {
     const TYPE_INTERNAL_PAGE = 1;
 

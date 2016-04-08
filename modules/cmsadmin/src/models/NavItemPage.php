@@ -7,8 +7,10 @@ use yii\db\Query;
 use luya\Exception;
 use luya\web\View;
 use cmsadmin\models\NavItemPageBlockItem;
+use cmsadmin\base\NavItemType;
+use cmsadmin\base\NavItemTypeInterface;
 
-class NavItemPage extends \cmsadmin\base\NavItemType
+class NavItemPage extends NavItemType implements NavItemTypeInterface
 {
     private $_twig = null;
 

@@ -5,8 +5,10 @@ namespace cmsadmin\models;
 use Yii;
 use cms\Exception;
 use luya\helpers\ModuleHelper;
+use cmsadmin\base\NavItemTypeInterface;
+use cmsadmin\base\NavItemType;
 
-class NavItemModule extends \cmsadmin\base\NavItemType
+class NavItemModule extends NavItemType implements NavItemTypeInterface
 {
     /**
      * {@InheritDoc}

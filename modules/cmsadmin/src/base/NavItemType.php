@@ -7,13 +7,6 @@ use cmsadmin\models\NavItem;
 abstract class NavItemType extends \yii\db\ActiveRecord
 {
     public $options = [];
-
-    /**
-     * Returns the databas-nummeric identifier to make the navItem relation.
-     * 
-     * @return integer The numeric identifier for the type (1=page, 2=module, 3=redirect, ...)
-     */
-    abstract static public function getNummericType();
     
     /**
      * Get the response content for the item type
