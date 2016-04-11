@@ -1,6 +1,14 @@
 # netbeans
 /nbproject
 
+# PHPStorm
+.idea/
+
+# eclipse
+.buildpath
+.project
+.settings
+
 # composer vendor dir
 /vendor
 
@@ -17,13 +25,11 @@ composer.phar
 #/public_html/storage
 
 # project config
-/configs/local.php
+/configs/localdb.php
 /configs/server.php
 
-/config/local.php
-/config/server.php
+# SASS
+/resources/.sass-cache
 
-# eclipse
-.buildpath
-.project
-.settings
+# Compiled files
+/resources/local/
