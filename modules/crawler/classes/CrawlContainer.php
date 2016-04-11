@@ -142,6 +142,7 @@ class CrawlContainer extends \yii\base\Object
     public function matchBaseUrl($url)
     {
         if (strpos($url, $this->baseUrl) === false) {
+            $this->verbosePrint("url '$url' does not match baseUrl '{$this->baseUrl}'");
             return false;
         }
         
@@ -162,7 +163,7 @@ class CrawlContainer extends \yii\base\Object
         $type = $this->getCrawler($url)->getContentType();
         
         if (strpos($type, 'text/html') === false) {
-            $this->verbosePrint('url is not type of content "text/html"', $type);
+            $this->verbosePrint('link "'.$url.'" is not type of content "text/html"', $type);
             $this->addLog('invalid_header', $url . ' invalid header ' . $type);
             return false;
         }
