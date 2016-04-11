@@ -369,11 +369,11 @@ class Item extends \yii\base\Object
      */
     public function getParents()
     {
-        $parent = $this->getParent();
+        $parent = $this->with($this->_with)->getParent();
         $data = [];
         while ($parent) {
             $data[] = $parent;
-            $parent = $parent->getParent();
+            $parent = $parent->with($this->_with)->getParent();
         }
 
         return array_reverse($data);
@@ -391,18 +391,18 @@ class Item extends \yii\base\Object
     }
     
     /**
-     * Return all parent elemtns **with** the current item.
+     * Return all parent elements **with** the current item.
      * 
      * @return array An array with Item-Objects.
      */
     public function getTeardown()
     {
-        $parent = $this->getParent();
+        $parent = $this->with($this->_with)->getParent();
         $current = $this;
         $data[$current->id] = $current;
         while ($parent) {
             $data[$parent->id] = $parent;
-            $parent = $parent->getParent();
+            $parent = $parent->with($this->_with)->getParent();
         }
 
         return array_reverse($data, true);
