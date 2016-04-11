@@ -56,7 +56,7 @@ class MigrateController extends \yii\console\controllers\MigrateController
         $orig = $this->migrationPath . DIRECTORY_SEPARATOR . $class . '.php';
         
         if (file_exists($orig)) {
-            require_once $file;
+            require_once $orig;
             return new $class();
         } else {
             if (isset($this->migrationFileDirs[$class])) {
@@ -95,7 +95,8 @@ class MigrateController extends \yii\console\controllers\MigrateController
         }
 
         $name = 'm'.gmdate('ymd_His').'_'.$name;
-
+        $folder = false;
+        
         if (!$module) {
             $file = $this->migrationPath.DIRECTORY_SEPARATOR.$name.'.php';
         } else {
@@ -110,7 +111,7 @@ class MigrateController extends \yii\console\controllers\MigrateController
         if ($this->confirm("Create new migration '$file'?")) {
             $content = $this->renderFile(Yii::getAlias($this->templateFile), ['className' => $name]);
             
-            if (!file_exists($folder)) {
+            if ($folder !== false && !file_exists($folder)) {
                 FileHelper::createDirectory($folder, 0775, false);
             }
             
