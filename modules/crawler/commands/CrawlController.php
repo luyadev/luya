@@ -49,6 +49,6 @@ class CrawlController extends \luya\console\Command
             }
         }
         
-        return $this->outputSuccess(PHP_EOL . 'Cralwer finished in ' . $timeElapsed . ' min.');
+        return $this->outputSuccess(PHP_EOL . 'Crawler finished in ' . $timeElapsed . ' min.');
     }
 }

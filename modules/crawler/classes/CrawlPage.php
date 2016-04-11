@@ -119,7 +119,12 @@ class CrawlPage extends \yii\base\Object
         $curl->get($url);
         $content = $curl->response;
 
+        if ($curl->error) {
+            $this->verbosePrint('Curl error message for url ' . $url, $curl->error_message);
+        }
+        
         if (empty($content)) {
+            $this->verbosePrint('The curl get process returns in empty response', $url);
             return null;
         }
         
@@ -175,6 +180,8 @@ class CrawlPage extends \yii\base\Object
 
     public function getContent()
     {
+        $this->verbosePrint('get content for', $this->pageUrl);
+        
         $bodyContent = $this->tempGetContent($this->pageUrl);
 
         // strip tags and stuff
