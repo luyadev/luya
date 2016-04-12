@@ -11,7 +11,7 @@ use luya\helpers\ArrayHelper;
  */
 class Decimal extends \admin\ngrest\base\Plugin
 {
-    public $steps = 0;
+    public $steps = 2;
 
     public function renderList($id, $ngModel)
     {
