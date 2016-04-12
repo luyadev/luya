@@ -67,6 +67,10 @@ trait ErrorHandler
             $_message = $exception->getMessage();
             $_file = $exception->getFile();
             $_line = $exception->getLine();
+        } elseif (is_string($exception)) {
+            $_message = 'exception string: ' . $exception;
+        } elseif (is_array($exception)) {
+            $_message = 'exception array dump: ' . print_r($exception, true);
         }
 
         return [
