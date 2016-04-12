@@ -50,7 +50,7 @@ class BlockController extends \luya\console\Command
     {
         return [
             'select' => "[['value' => 1, 'label' => 'Label for Value 1']]",
-            'checkbox-array' => "['items' => [['id' => 1, 'label' => 'Label for Value 1']]]",
+            'checkbox-array' => "['items' => [['value' => 1, 'label' => 'Label for Value 1']]]",
             'image-upload' => "['no_filter' => false]",
             'image-array-upload' => "['no_filter' => false]",
         ];

@@ -421,7 +421,7 @@ abstract class Block extends \yii\base\Object implements BlockInterface
     {
         $transform = [];
         foreach ($options as $key => $value) {
-            $transform[] = ['id' => $key, 'label' => $value];
+            $transform[] = ['value' => $key, 'label' => $value];
         }
         
         return ['items' => $transform];

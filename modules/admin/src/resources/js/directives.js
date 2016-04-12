@@ -248,10 +248,6 @@
     /** 
      * options arg object:
      * 
-     * options.items[] = { "id" : 1, "label" => 'Label for Value 1' }
-     * 
-     * new
-     * 
      * options.items[] = { "value" : 1, "label" => 'Label for Value 1' }
      */
     zaa.directive("zaaCheckboxArray", function(){
@@ -289,17 +285,17 @@
                 
                 $scope.toggleSelection = function (value) {
                     for (var i in $scope.model) {
-                        if ($scope.model[i]["id"] == value.value) {
+                        if ($scope.model[i]["value"] == value.value) {
                             $scope.model.splice(i, 1);
                             return;
                         }
                     }
-                    $scope.model.push({ id: value.value});
+                    $scope.model.push({'value': value.value});
                 }
                 
                 $scope.isChecked = function(item) {
                     for (var i in $scope.model) {
-                        if ($scope.model[i]["id"] == item.value) {
+                        if ($scope.model[i]["value"] == item.value) {
                             return true;
                         }
                     }

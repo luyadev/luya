@@ -41,3 +41,14 @@ This document will help you upgrading from one LUYA Version into another
 * `#777` The suffix (ActiveWindow) is now removed from the folders where the view files are located:
   - before: `MyTestActiveWindow` folder for view files: `views/<locator>/mytestactivewindow`
   - after: `MyTestActiveWindow` folder for view files: `views/<locator>/mytest`.
+
+* `#822`: `#822` zaa-checkbox-array renamed variables.
+    ```
+    changed options from zaa-checkbox-array in ngrest directive from:
+
+    options.items[] = { "id" : 1, "value" => 'Label for Value 1' }
+    
+    to:
+    
+    options.items[] = { "value" : 1, "label" => 'Label for Value 1' }
+    ```

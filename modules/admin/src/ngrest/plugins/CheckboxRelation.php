@@ -149,8 +149,8 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
             // $v['id'] extra field values foreached from the join table, so id will represent the joined table pk.
 
             // issue #696 array logic
-            if (is_array($v)) { // its an array and is based on the logic of the angular checkbox releation ['id' => 123]
-                $batch[] = [$activeRecordId, $v['id']];
+            if (is_array($v)) { // its an array and is based on the logic of the angular checkbox releation ['id' => 123] // new: 'value' => 123 since beta6
+                $batch[] = [$activeRecordId, $v['value']];
             } else { // its not an array so it could have been assigned from the frontend
                 $batch[] = [$activeRecordId, $v];
             }
