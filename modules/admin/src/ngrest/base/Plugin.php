@@ -8,6 +8,7 @@ use yii\helpers\Json;
 use yii\helpers\Html;
 use luya\Exception;
 use admin\ngrest\base\Model;
+use yii\base\InvalidParamException;
 
 /**
  * Base class for all plugins
@@ -225,7 +226,11 @@ abstract class Plugin extends Component
     
         // if its not already unserialized, decode it
         if (!is_array($value) && !empty($value)) {
-            $value = Json::decode($value);
+            try {
+                $value = Json::decode($value);
+            } catch (InvalidParamException $e) {
+                $value = [];
+            }
         }
     
         // fall back for not transformed values
