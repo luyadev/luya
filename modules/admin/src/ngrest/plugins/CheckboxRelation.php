@@ -67,6 +67,18 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
     	$this->_model = (!is_object($className)) ? Yii::createObject(['class' => $className]) : $className;
     }
 
+    private $_modelPrimaryKey = null;
+    
+    public function getModelPrimaryKey()
+    {
+        if ($this->_modelPrimaryKey === null) {
+            $pkname = $this->model->primaryKey();
+            $this->_modelPrimaryKey = reset($pkname);
+        }
+        
+        return $this->_modelPrimaryKey;
+    }
+    
     public function getModel()
     {
     	return $this->_model;
@@ -77,7 +89,7 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
         $items = [];
 
         $pk = $this->model->primaryKey();
-        $pkName = reset($pk);
+        $pkName = $this->getModelPrimaryKey();
 
         $select = $this->labelFields;
         $select[] = $pkName;
@@ -118,7 +130,11 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
 
     public function onBeforeExpandFind($event)
     {
-    	$event->sender->{$this->name} = $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $event->sender->id])->all();
+        $data = [];
+        foreach ($this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $event->sender->id])->each() as $item) {
+            $data[] = ['value' => $item->getAttribute($this->getModelPrimaryKey())];
+        }
+    	$event->sender->{$this->name} = $data;
     }
     
     public function onBeforeFind($event)
@@ -130,7 +146,6 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
     {
     	$this->setRelation($event->sender->{$this->name}, $this->refJoinTable, $this->refModelPkId, $this->refJoinPkId, $event->sender->id);
     }
-
     
     /**
      * @param array $value          The valued which is provided from the setter method
@@ -150,7 +165,9 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
 
             // issue #696 array logic
             if (is_array($v)) { // its an array and is based on the logic of the angular checkbox releation ['id' => 123] // new: 'value' => 123 since beta6
-                $batch[] = [$activeRecordId, $v['value']];
+                if (isset($v['value'])) {
+                    $batch[] = [$activeRecordId, $v['value']];
+                }
             } else { // its not an array so it could have been assigned from the frontend
                 $batch[] = [$activeRecordId, $v];
             }
