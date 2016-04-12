@@ -45,25 +45,34 @@ trait ErrorHandler
      * Get an readable array to transfer from an exception
      * 
      * @todo: catch getPrevious() exception.
-     * @param \Exception $exception Exception to render 
+     * @param mixed $exception Exception object
      * @return array An array with transformed exception data
      */
-    public function getExceptionArray(\Exception $exception)
+    public function getExceptionArray($exception)
     {
         $_trace = [];
-        foreach ($exception->getTrace() as $key => $item) {
-            $_trace[$key] = [
-                'file' => isset($item['file']) ? $item['file'] : null,
-                'line' => isset($item['line']) ? $item['line'] : null,
-                'function' => isset($item['function']) ? $item['function'] : null,
-                'class' => isset($item['class']) ? $item['class'] : null,
-            ];
+        $_message = 'Uknonwn exception object, not instance of \Exception.';
+        $_file = 'unknown';
+        $_line = 0;
+        
+        if ($exception instanceof \Exception) {
+            foreach ($exception->getTrace() as $key => $item) {
+                $_trace[$key] = [
+                    'file' => isset($item['file']) ? $item['file'] : null,
+                    'line' => isset($item['line']) ? $item['line'] : null,
+                    'function' => isset($item['function']) ? $item['function'] : null,
+                    'class' => isset($item['class']) ? $item['class'] : null,
+                ];
+            }
+            $_message = $exception->getMessage();
+            $_file = $exception->getFile();
+            $_line = $exception->getLine();
         }
 
         return [
-            'message' => $exception->getMessage(),
-            'file' => $exception->getFile(),
-            'line' => $exception->getLine(),
+            'message' => $_message,
+            'file' => $_file,
+            'line' => $_line,
             'requestUri' => (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : null,
             'serverName' => (isset($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : null,
             'date' => date('d.m.Y H:i'),

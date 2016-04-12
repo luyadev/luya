@@ -26,7 +26,7 @@ class ErrorHandlerTest extends LuyaWebTestCase
             $this->assertArrayHasKey('post', $response);
             $this->assertTrue(is_Array($response['trace']));
         } catch(Exception $e) {
-            $this->assertEquals('Error: foobar', $err->getMessage());
+            $this->assertEquals('Error: foobar', $e->getMessage());
         }
     }
 }
