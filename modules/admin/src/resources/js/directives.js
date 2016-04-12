@@ -273,7 +273,9 @@
                 
                 $scope.searchString = '';
                 
-                $scope.options = [];
+                if ($scope.options == undefined) {
+                	$scope.options = [];
+                }
                 
                 $scope.$watch('options', function(n, o) {
                 	if (n.hasOwnProperty('items')) {
