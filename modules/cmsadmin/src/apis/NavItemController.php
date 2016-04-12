@@ -229,7 +229,9 @@ class NavItemController extends \admin\base\RestController
             $model->nav_item_type = $navItemType;
             switch ($navItemType) {
                 case 1:
-                    $oldType->delete();
+                    if ($oldType) {
+                        $oldType->delete();
+                    }
                     $model->nav_item_type_id = 0;
                     return $model->update();
                 case 2:
@@ -238,7 +240,9 @@ class NavItemController extends \admin\base\RestController
                     if (!$typeModel->validate()) {
                         return $this->sendModelError($typeModel);
                     }
-                    $oldType->delete();
+                    if ($oldType) {
+                        $oldType->delete();
+                    }
                     $typeModel->insert();
                     $model->nav_item_type_id = $typeModel->id;
                     return $model->update();
@@ -250,7 +254,9 @@ class NavItemController extends \admin\base\RestController
                     if (!$typeModel->validate()) {
                         return $this->sendModelError($typeModel);
                     }
-                    $oldType->delete();
+                     if ($oldType) {
+                        $oldType->delete();
+                    }
                     $typeModel->insert();
                     $model->nav_item_type_id = $typeModel->id;
                     return $model->update();

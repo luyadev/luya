@@ -132,7 +132,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
             }
             
             if ($this->_type === null) {
-                throw new Exception("Unable to find type corresponding object for nav item.");
+                $this->_type = false;
             }
             
             // set context for the object
