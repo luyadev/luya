@@ -387,21 +387,24 @@
     	$scope.changeVersionLayout = function(versionItem) {
     		$http.post('admin/api-cms-navitem/change-page-version-layout', $.param({'pageItemId': versionItem.id, 'layoutId': versionItem.layout_id}), headers).success(function(response) {
     			$scope.refreshForce();
-    			AdminToastService.success('The Layout has been updated successfull.', 2000);
+    			AdminToastService.success('The Layout has been updated successfull.', 4000);
 			});
     	};
     	
-		$scope.createNewVersionSubmit = function() {
-			$http.post('admin/api-cms-navitem/create-page-version', $.param({'layoutId': $scope.versionLayoutId, 'navItemId': $scope.item.id, 'name': $scope.versionName, 'fromPageId': $scope.fromVersionPageId}), headers).success(function(response) {
+		$scope.createNewVersionSubmit = function(data) {
+			if (data.fromVersionPageId != 0) {
+				data.versionLayoutId = 0;
+			}
+			$http.post('admin/api-cms-navitem/create-page-version', $.param({'layoutId': data.versionLayoutId, 'navItemId': $scope.item.id, 'name': data.versionName, 'fromPageId': data.fromVersionPageId}), headers).success(function(response) {
 				$scope.refreshForce();
-				AdminToastService.success('The new layout has been added.', 2000);
+				AdminToastService.success('The new version has been added.', 4000);
 			});
 		};
 		
 		$scope.useVersion = function(versionItem) {
 			$http.post('admin/api-cms-navitem/change-page-version', $.param({'navItemId': $scope.item.id, 'useItemPageVersionId': versionItem.id}), headers).success(function(response) {
 				$scope.item.nav_item_type_id = versionItem.id;
-				AdminToastService.success('The Version change has been successfull.', 2000);
+				AdminToastService.success('The Version change has been successfull.', 4000);
 			});
 		};
 	});
@@ -939,6 +942,8 @@
 		
 		$scope.container = [];
 		
+		$scope.currentVersionInformation = null;
+		
 		$scope.currentPageVersion = 0;
 		
 		$scope.getItem = function(langId, navId) {
@@ -956,6 +961,7 @@
 						if ($scope.item.nav_item_type == 1) {
 							$scope.currentPageVersion = response.item.nav_item_type_id;
 							if (response.item.nav_item_type_id in response.typeData) {
+								$scope.currentVersionInformation = response.typeData[response.item.nav_item_type_id];
 								$scope.container = response.typeData[response.item.nav_item_type_id]['contentAsArray'];
 							}
 						}
@@ -968,6 +974,7 @@
 		
 		$scope.switchVersion = function(pageVersionid) {
 			$scope.container = $scope.typeData[pageVersionid]['contentAsArray'];
+			$scope.currentVersionInformation = $scope.typeData[pageVersionid];
 			$scope.currentPageVersion = pageVersionid;
 		};
 		

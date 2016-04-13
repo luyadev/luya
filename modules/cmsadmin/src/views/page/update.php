@@ -444,6 +444,7 @@
 
 
                                     <!-- OLD -->
+                                    <!-- 
                                     <div style="padding:10px 15px;" ng-controller="PageVersionsController" ng-show="showVersionList">
 
                                         <div class="card-panel">
@@ -502,7 +503,7 @@
                                     <!-- Versions -->
                                     <div class="page__versions" ng-controller="PageVersionsController" ng-init="createVersionModalState=true; editVersionModalState=true">
                                         <div class="page__versions-left">
-                                            <span class="page__versions-title page__versions-title--black"><span>Aktuelle Version:</span> <strong>Huhu (#1)</strong> <i class="material-icons" ng-click="editVersionModalState=false">edit</i></span>
+                                            <span class="page__versions-title page__versions-title--black"><span>Aktuelle Version:</span> <strong>{{ currentVersionInformation.version_alias}}</strong> <i class="material-icons" ng-click="editVersionModalState=false">edit</i></span>
                                         </div><!--
                                         --><div class="page__versions-right">
                                             <span class="page__versions-title">Versionen: </span>
@@ -516,24 +517,24 @@
 
                                         <!-- Edit version modal -->
                                         <modal is-modal-hidden="editVersionModalState">
-                                            Layout: <select ng-model="versionItem.layout_id" ng-options="lts.id as lts.name for lts in layoutsData"></select>
+                                            Layout: <select ng-model="currentVersionInformation.layout_id" ng-options="lts.id as lts.name for lts in layoutsData"></select>
                                             <hr />
-                                            <button class="btn" ng-click="changeVersionLayout(versionItem)">Update Layout</button>
+                                            <button class="btn" ng-click="changeVersionLayout(currentVersionInformation)">Update Layout</button>
                                         </modal>
                                         <!-- /Edit version modal -->
-
+                                        
                                         <!-- Add version modal -->
                                         <modal is-modal-hidden="createVersionModalState">
                                             <h5>Create Version</h5>
-                                            <select ng-model="fromVersionPageId">
+                                            <select ng-model="create.fromVersionPageId">
                                                 <option value="0">New/Empty Version</option>
                                                 <option ng-repeat="versionItem in typeData" value="{{versionItem.id}}">Copy existing: {{versionItem.version_alias}}</option>
                                             </select>
 
-                                            <span ng-show="fromVersionPageId==0">Layout: <select ng-model="versionLayoutId" ng-options="lts.id as lts.name for lts in layoutsData"></select></span>
-
-                                            Name: <input type="text" style="width:400px;" ng-model="versionName" />
-                                            <button type="button" ng-click="createNewVersionSubmit()">Create new Version</button>
+                                            <span ng-show="create.fromVersionPageId==0">Layout: <select ng-model="create.versionLayoutId" ng-options="lts.id as lts.name for lts in layoutsData"></select></span>
+                                           
+                                            Name: <input type="text" style="width:400px;" ng-model="create.versionName" />
+                                            <button type="button" ng-click="createNewVersionSubmit(create)">Create new Version</button>
                                         </modal>
                                         <!-- /Add version modal -->
 
