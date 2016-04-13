@@ -441,7 +441,7 @@
                         <div class="page__content" ng-show="!settings" ng-switch on="item.nav_item_type">
                             <div class="row">
                                 <div class="col s12 page__no-padding" ng-switch-when="1">
-                                	<div style="padding:10px 15px; ng-controller="PageVersionsController" ng-show="showVersionList">
+                                	<div style="padding:10px 15px;" ng-controller="PageVersionsController" ng-show="showVersionList">
                                     	<div class="card-panel">
                                         	<h5>Versionen</h5>
                                         	<p>The following list shows you all the available versions of the current site.</p>
@@ -474,7 +474,7 @@
         											</td>
         											<td>
         												<span ng-if="versionItem.id == item.nav_item_type_id">Diese Version wird benutzt</span>
-        												<span ng-if="versionItem.id !== item.nav_item_type_id"><button class="btn" ng-click="useVersion(versionItem)">Version benutzen</button></span>
+        												<span ng-if="versionItem.id !== item.nav_item_type_id"><button class="btn" ng-click="useVersion(versionItem)" type="button">Version benutzen</button></span>
         											</td>
     											</tr>
     										</table>
