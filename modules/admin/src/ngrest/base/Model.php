@@ -9,7 +9,6 @@ use admin\ngrest\NgRest;
 use admin\ngrest\NgRestModeInterface;
 use admin\behaviors\LogBehavior;
 use admin\base\GenericSearchInterface;
-use yii\helpers\Json;
 
 abstract class Model extends \yii\db\ActiveRecord implements GenericSearchInterface, NgRestModeInterface
 {
@@ -35,46 +34,18 @@ abstract class Model extends \yii\db\ActiveRecord implements GenericSearchInterf
 
     protected $ngRestServiceArray = [];
     
-    private static $_pluginInstances = [];
-    
-    private static function findPluginInstance($field, array $plugin)
+    public function behaviors()
     {
-        if (!isset(self::$_pluginInstances[self::tableName()][$field])) {
-            self::$_pluginInstances[self::tableName()][$field] = NgRest::createPluginObject($plugin['type']['class'], $plugin['name'], $plugin['alias'], $plugin['i18n'], $plugin['type']['args']);
-        }
-        
-        return self::$_pluginInstances[self::tableName()][$field];
-    }
-
-    public function init()
-    {
-        parent::init();
-        
-        foreach ($this->getNgRestConfig()->getPlugins() as $field => $plugin) {
-            $plugin = self::findPluginInstance($field, $plugin);
-            foreach ($plugin->events() as $on => $handler) {
-                $this->on($on, is_string($handler) ? [$plugin, $handler] : $handler);
-            }
-        }
-     
-        // attaching behaviors after init is used to prevent user how like to use `behaviors()` method do not after to
-        // call the parent behaviors.
-        $this->attachBehaviors([
+        return [
+            'NgRestEventBehvaior' => [
+                'class' => NgRestEventBehavior::className(),
+                'plugins' => $this->getNgRestConfig()->getPlugins(),
+            ],
             'LogBehavior' => [
                 'class' => LogBehavior::className(),
                 'api' => $this->ngRestApiEndpoint(),
             ],
-        ]);
-
-        /*
-        if (count($this->i18n) > 0) {
-            $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'i18nEncodeFields']);
-            $this->on(self::EVENT_BEFORE_INSERT, [$this, 'i18nEncodeFields']);
-            $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'i18nEncodeFields']);
-            $this->on(self::EVENT_AFTER_FIND, [$this, 'i18nAfterFind']);
-            $this->on(self::EVENT_AFTER_NGREST_FIND, [$this, 'i18nAfterFind']);
-        }
-        */
+        ];
     }
 
     /**
@@ -108,53 +79,6 @@ abstract class Model extends \yii\db\ActiveRecord implements GenericSearchInterf
             return parent::afterFind();
         }
     }
-
-    /*
-    public function i18nAfterFind()
-    {
-        $langShortCode = $this->getDefaultLang('short_code');
-        $languages = $this->getLanguages();
-        
-        foreach ($this->i18n as $field) {
-            // get value for current field
-            $values = $this->$field;
-            
-            // if its not already unserialized, decode it
-            if (!is_array($this->$field) && !empty($this->$field)) {
-                $values = Json::decode($this->$field);
-            }
-            
-            // fall back for not transformed values
-            if (!is_array($values)) {
-                $values = (array) $values;
-            }
-            
-            // add all not existing languages to the array (for example a language has been added after the database item has been created)
-            foreach ($languages as $lang) {
-                if (!array_key_exists($lang['short_code'], $values)) {
-                    $values[$lang['short_code']] = '';
-                }
-            }
-            
-            // If its not an ngrest call or the ngrest call ist 'list' auto return the value for the current default language.
-            if (!$this->getNgRestCallType() || $this->getNgRestCallType() == 'list') {
-                $values = (array_key_exists($langShortCode, $values)) ? $values[$langShortCode] : '';
-            }
-
-            $this->$field = $values;
-        }
-    }
-
-    public function i18nEncodeFields()
-    {
-        foreach ($this->i18n as $field) {
-            // if it is notyet serialize, encode
-            if (is_array($this->$field)) {
-                $this->$field = Json::encode($this->$field);
-            }
-        }
-    }
-    */
 
     /**
      * 

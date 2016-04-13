@@ -24,14 +24,12 @@ class SelectModel extends \admin\ngrest\plugins\Select
     
     public $labelField = null;
     
-    public function init()
+    public function getData()
     {
-        parent::init();
-        
-        $this->data = [
-    	    ['value' => 0,'label' => \admin\Module::t('ngrest_select_no_selection')],
-    	    ['value' => null, 'label' => "- - - - - - - - - - - - - - - -"],
-    	];
+        $data = [
+            ['value' => 0,'label' => \admin\Module::t('ngrest_select_no_selection')],
+            ['value' => null, 'label' => "- - - - - - - - - - - - - - - -"],
+        ];
         
         $class = $this->modelClass;
         
@@ -46,42 +44,12 @@ class SelectModel extends \admin\ngrest\plugins\Select
                 $label = reset($label);
             }
         
-            $this->data[] = [
+            $data[] = [
                 'value' => (int) $item->{$this->valueField},
                 'label' => $label,
             ];
-        }
+        }   
+        
+        return $data;
     }
-    /*
-    public function __construct($class, $valueField, $labelField, $initValue = null)
-    {
-        $this->data[] = [
-            'value' => null,
-            'label' => \admin\Module::t('ngrest_select_no_selection'),
-        ];
-        $this->data[] = [
-            'value' => null,
-            'label' => "- - - - - - - - - - - - - - - -",
-        ];
-
-        if (is_object($class)) {
-            $class = $class::className();
-        }
-
-        $this->initValue = $initValue;
-
-        foreach ($class::find()->all() as $item) {
-            $label = $item->$labelField;
-
-            if (is_array($label)) {
-                $label = reset($label);
-            }
-
-            $this->data[] = [
-                'value' => (int) $item->$valueField,
-                'label' => $label,
-            ];
-        }
-    }
-    */
 }

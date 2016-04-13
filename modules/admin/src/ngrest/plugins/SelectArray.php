@@ -18,24 +18,27 @@ namespace admin\ngrest\plugins;
  */
 class SelectArray extends \admin\ngrest\plugins\Select
 {
-    public $data = [];
+    private $_data = null;
     
-    public function init()
+    public function setData(array $data)
     {
-    	parent::init();
-    	
-    	$cleandata = [
-    	    ['value' => 0,'label' => \admin\Module::t('ngrest_select_no_selection')],
-    	    ['value' => null, 'label' => "- - - - - - - - - - - - - - - -"],
-    	];
-    	
-    	foreach ($this->data as $key => $value) {
-    		$cleandata[] = [
-    			'value' => (int) $key,
-    			'label' => $value,
-    		];
-    	}
-    	
-    	$this->data = $cleandata;
+        $this->_data = $data;
+    }
+    
+    public function getData()
+    {
+        $cleandata = [
+            ['value' => 0,'label' => \admin\Module::t('ngrest_select_no_selection')],
+            ['value' => null, 'label' => "- - - - - - - - - - - - - - - -"],
+        ];
+         
+        foreach ($this->_data as $key => $value) {
+            $cleandata[] = [
+                'value' => (int) $key,
+                'label' => $value,
+            ];
+        }
+         
+        return $cleandata;
     }
 }

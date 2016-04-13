@@ -13,7 +13,7 @@ abstract class Select extends \admin\ngrest\base\Plugin
 {
     public $initValue = 0;
 
-    public $data = [];
+    abstract public function getData();
 
     public function renderList($id, $ngModel)
     {
