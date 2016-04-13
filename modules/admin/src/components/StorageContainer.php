@@ -417,10 +417,11 @@ class StorageContainer extends \yii\base\Component
     }
     
     /**
+     * Add new folder
      * 
      * @param unknown $folderName
      * @param number $parentFolderId
-     * @return boolean
+     * @return fals|folder Id
      */
     public function addFolder($folderName, $parentFolderId = 0)
     {
@@ -429,7 +430,11 @@ class StorageContainer extends \yii\base\Component
         $model->parent_id = $parentFolderId;
         $model->timestamp_create = time();
         $this->deleteHasCache($this->folderCacheKey);
-        return $model->save(false);
+        if ($model->save(false)) {
+            return $model->id;
+        }
+        
+        return false;
     }
     
     /**
