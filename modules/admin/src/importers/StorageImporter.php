@@ -154,6 +154,8 @@ class StorageImporter extends \luya\base\Importer
     {
         $log = [];
 
+        Yii::$app->storage->processThumbnails();
+        
         $orphanedFileList = static::getOrphanedFileList();
 
         if ($orphanedFileList === false) {

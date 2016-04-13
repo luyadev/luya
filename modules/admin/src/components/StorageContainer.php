@@ -176,6 +176,7 @@ class StorageContainer extends \yii\base\Component
     }
     
     /**
+     * Find multiples files with an admin\file\Query all
      * 
      * @param array $args
      */
@@ -185,7 +186,7 @@ class StorageContainer extends \yii\base\Component
     }
     
     /**
-     * 
+     * Find a single file with an admin\file\Query one
      * @param array $args
      */
     public function findFile(array $args = [])
@@ -210,7 +211,7 @@ class StorageContainer extends \yii\base\Component
      * @param string $fileName The name of this file (must contain data type suffix).
      * @param int $folderId The id of the folder where the file should be sorted in
      * @param boolean $isHidden Should the file visible in the filemanager
-     * @return boolean|exception
+     * @return boolean|\admin\file\Item|\Exception
      */
     public function addFile($fileSource, $fileName, $folderId = 0, $isHidden = false)
     {
@@ -253,6 +254,7 @@ class StorageContainer extends \yii\base\Component
             'hash_file' => $fileHash,
             'hash_name' => $fileHashName,
             'is_hidden' => ($isHidden) ? 1 : 0,
+            'is_deleted' => 0,
             'file_size' => @filesize($savePath),
         ]);
         
@@ -301,7 +303,7 @@ class StorageContainer extends \yii\base\Component
      * @param integer $fileId The id of the file where image should be created from.
      * @param integer $filterId The id of the filter which should be applied to, if filter is 0, no filter will be added.
      * @param boolean $throwException Whether the addImage should throw an exception or just return boolean
-     * @return boolean|exception 
+     * @return boolean|\admin\image\Item|\Exception 
      */
     public function addImage($fileId, $filterId = 0, $throwException = false)
     {
@@ -480,5 +482,30 @@ class StorageContainer extends \yii\base\Component
         $this->deleteHasCache($this->imageCacheKey);
         $this->deleteHasCache($this->folderCacheKey);
         $this->deleteHasCache($this->filterCacheKey);
+    }
+    
+    /**
+     * This method allwos you to generate all thumbnails for the file manager, you can trigger this process when
+     * importing or creating several images at once, so the user does not have to create the thumbnails
+     * 
+     * @return void
+     * @since 1.0.0-beta6
+     */
+    public function processThumbnails()
+    {
+        foreach ($this->findFiles(['is_hidden' => 0, 'is_deleted' => 0]) as $file) {
+            if ($file->isImage) {
+                // create tiny thumbnail
+                $filter = $this->getFiltersArrayItem('tiny-thumbnail');
+                if ($filter) {
+                    $this->addImage($file->id, $filter['id']);
+                }
+                // create medium thumbnail
+                $filter = $this->getFiltersArrayItem('medium-thumbnail');
+                if ($filter) {
+                    $this->addImage($file->id, $filter['id']);
+                }
+            }
+        }
     }
 }

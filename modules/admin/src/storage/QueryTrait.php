@@ -3,6 +3,7 @@
 namespace admin\storage;
 
 use Yii;
+use luya\Exception;
 
 trait QueryTrait
 {
@@ -52,6 +53,9 @@ trait QueryTrait
     protected function whereFilter($item)
     {
         foreach ($this->_where as $whereKey => $whereValue) {
+            if (!isset($item[$whereKey])) {
+                throw new Exception("The where key '$whereKey' does not exist in the item array. Item: " . print_r($item));
+            }
             if ($item[$whereKey] != $whereValue) {
                 return false;
             }

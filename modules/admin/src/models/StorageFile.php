@@ -22,7 +22,7 @@ class StorageFile extends \yii\db\ActiveRecord
     {
         return [
             [['name_original', 'name_new', 'mime_type', 'name_new_compound', 'extension', 'hash_file', 'hash_name'], 'required'],
-            [['folder_id', 'upload_timestamp', 'file_size', 'upload_user_id', 'upload_timestamp'], 'safe'],
+            [['folder_id', 'upload_timestamp', 'file_size', 'upload_user_id', 'upload_timestamp', 'is_deleted'], 'safe'],
             [['is_hidden'], 'integer']
         ];
     }
