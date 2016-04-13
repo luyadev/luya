@@ -2,78 +2,187 @@
  * #PAGE
  */
 .page {
-	background-color: $page--background;
-	box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    background-color: $page--background;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
 /**
  * #PAGE__HEADER
  */
 .page__header {
-	background: $page__header--background;
-	color: $page__header--color;
-	padding-left: 5px;
+    background: $page__header--background;
+    color: $page__header--color;
+    padding-left: 5px;
 
-	a i {
-		color: $black;
-	}
+    a i {
+        color: $black;
+    }
+}
+
+/**
+ * #PAGE__VERSIONS
+ */
+.page__versions {
+    background-color: $page__header--background;
+    min-height: 35px;
+    padding: 0 10px 0 15px;
+}
+
+.page__versions-left,
+.page__versions-right {
+    display: inline-block;
+    width: 50%;
+}
+
+.page__versions-right {
+    text-align: right;
+}
+
+.page__versions-title {
+    color: darken($page__header--background, 30);
+    display: inline-block;
+    margin-right: 5px;
+    transform: translateY(5px);
+
+    * {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    &.page__versions-title--black {
+        color: $black;
+    }
+
+    .page__versions-left & {
+        font-size: 22px;
+    }
+
+    i {
+        cursor: pointer;
+        display: inline-block;
+        font-size: 20px;
+        margin-left: 10px;
+    }
+}
+
+// Tab
+.page__version {
+    background-color: $white;
+    border: 2px solid $accordion__header-bg;
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+    color: $black;
+    opacity: .6;
+    outline: 0;
+    padding: 3px 10px 8px 10px;
+    transform: translateY(8px);
+    transition: 0.25s ease transform, 0.25s ease opacity;
+    z-index: 10;
+
+    &:not(:last-of-type) {
+        margin-right: 5px;
+    }
+
+    &:hover,
+    &.page__version--visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    &.page__version--in-use {
+        border-color: $blue;
+        color: $blue;
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    &.page__version--add {
+        border-color: $green;
+        color: $green;
+        opacity: 1;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 4px;
+        transform: translateY(8px);
+        transition: .15s ease color, .25s ease background-color;
+
+        &:hover {
+            background-color: $green;
+            color: $white;
+        }
+
+        i {
+            font-size: 16px;
+            margin: 0 0 -1px 0;
+        }
+    }
 }
 
 /**
  * #PAGE__CONTENT
  */
 .page__content {
-	background-color: $page--background;
-	padding: 0;
+    background-color: $page--background;
+    padding: 0;
 }
 
 .page__no-padding {
-	padding: 0;
+    padding: 0;
 }
 
 .page__list {
-	margin: 0;
+    margin: 0;
+    position: relative;
 }
 
 /**
  * #PAGE__DROP
  */
 .page__drop {
-	height: 0;
-	margin: 0;
-	background-color: transparent;
-	width: 100%;
-	display: block;
-	position: relative;
+    background-color: transparent;
+    display: block;
+    height: 0;
+    margin: 0;
+    position: relative;
+    width: 100%;
 }
 
 .accordion__body > .page__drop:first-of-type .page__drop-zone {
-	margin-top: 0px;
+    margin-top: 0;
 }
+
 .accordion__body > div:last-of-type .page__drop-zone {
-	margin-top: -14px;
+    margin-top: -14px;
 }
 
 .page__drop-zone {
-	position: absolute;
-	width: 100%;
-	height: 15px;
-	margin-top: -7.5px;
-	background-color: transparent;
-	pointer-events: none;
-	transition: 0.25s ease background-color, 0.5s ease border-color, 0.25s ease height, 0.25s ease margin-top;
-	border: none;
-	z-index: 5;
+    background-color: transparent;
+    border: none;
+    height: 15px;
+    margin-top: -7.5px;
+    pointer-events: none;
+    position: absolute;
+    transition: 0.25s ease background-color, 0.5s ease border-color, 0.25s ease height, 0.25s ease margin-top;
+    width: 100%;
+    z-index: 5;
 }
 
 .page--drag-active .page__drop-zone {
-	background-color: rgba($page__drop-zone--background, 0.8);
-	pointer-events: auto;
+    background-color: rgba($page__drop-zone--background, 0.8);
+    pointer-events: auto;
 
-	&.page__drop--hover {
-		background-color: rgba(darken($page__drop-zone--background, 10), 0.8);
-		height: 20px;
-		margin-top: -10px;
-		z-index: 10;
-	}
+    &.page__drop--hover {
+        background-color: rgba(darken($page__drop-zone--background, 10), 0.8);
+        height: 20px;
+        margin-top: -10px;
+        z-index: 10;
+    }
+}
+
+.page__no-version-warning {
+    background-color: #fff;
+    padding: 18px;
+    margin: 0;
+    position: relative;
+    z-index: 10
 }

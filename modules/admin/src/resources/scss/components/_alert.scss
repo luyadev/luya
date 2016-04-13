@@ -1,38 +1,42 @@
 .alert {
-	margin: 25px 0;
-	padding: 10px 0;
+    margin: 25px 0;
+    padding: 10px 0;
 }
 
 .alert--danger {
-	color: color("red", "base");
+    color: color("red", "base");
 }
 
 .alert--success {
-	color: color("green", "base");
+    color: color("green", "base");
 }
 
 .alert--warning {
-	color: color("yellow", "darken-3");
+    color: color("yellow", "darken-3");
 }
 
 .alert--info {
-	color: color("blue", "base");
-	background-color: color("light-blue", "lighten-5");
-	padding: 10px 20px;
+    background-color: color("light-blue", "lighten-5");
+    color: color("blue", "base");
+    padding: 10px 20px;
 }
 
 .alert {
 
-	i, ul, p, span {
-		display: inline-block;
-		vertical-align: middle;
-		margin: 0;
-	}
+    i, ul, p, span {
+        display: inline-block;
+        margin: 0;
+        vertical-align: middle;
+    }
 
-	i {
-		font-size: 54px;
-		line-height: 54px;
-		margin-right: 25px;
-	}
+    i {
+        font-size: 54px;
+        line-height: 54px;
+        margin-right: 25px;
+    }
+
+    &.alert--icon-no-margin i {
+        margin: 0;
+    }
 
 }

@@ -201,7 +201,7 @@
                                         </div>
                                     </div>
                                     <!-- /IS_HOME SWITCH -->
-                                    
+
                                     <!-- VISIBILITY SWITCH -->
                                     <div class="toolbar__group  toolbar__group--visibility" ng-show="isDraft == false">
                                         <div class="switch switch--with-icons">
@@ -214,7 +214,7 @@
                                         </div>
                                     </div>
                                     <!-- /VISIBILITY SWITCH -->
-                                    
+
                                     <!-- OFFLINE SWITCH -->
                                     <div class="toolbar__group toolbar__group--online" ng-show="isDraft == false">
                                         <div class="switch switch--with-icons">
@@ -309,7 +309,7 @@
                                                     </div>
                                                 </div>
                                             <div class="row">
-                                            </div>    
+                                            </div>
                                                 <div class="input input--text col s12">
                                                     <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_alias'); ?></label>
                                                     <div class="input__field-wrapper">
@@ -317,7 +317,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <button ng-click="save()" class="btn"><?php echo \cmsadmin\Module::t('view_index_page_btn_save'); ?></button>
                                         </div>
                                     </div>
@@ -346,7 +346,6 @@
                                                 <i class="material-icons [ waves-effect waves-blue ]">open_in_new</i>
                                             </a>
                                             <a ng-click="openLiveUrl(item.id)" ng-show="liveEditState" class="right"><i class="material-icons [ waves-effect waves-blue ]">open_in_new</i></a>
-                                            <a ng-click="showVersionList=!showVersionList" class="right"><i class="material-icons  [ waves-effect waves-blue ]">list</i></a>
                                         </span>
                                         <span ng-hide="!settings">
                                             <a ng-click="toggleSettings()"  class="right"><i class="material-icons">close</i></a>
@@ -433,7 +432,7 @@
                                     <li ng-repeat="err in errors">{{err.message}}</li>
                                 </ul>
                             </div>
-                            
+
                         </form>
                         <!-- /PAGE__CONTENT--SETTINGS -->
 
@@ -441,63 +440,110 @@
                         <div class="page__content" ng-show="!settings" ng-switch on="item.nav_item_type">
                             <div class="row">
                                 <div class="col s12 page__no-padding" ng-switch-when="1">
-                                	<div style="padding:10px 15px;" ng-controller="PageVersionsController" ng-show="showVersionList">
-                                    	<div class="card-panel">
+
+
+
+                                    <!-- OLD -->
+                                    <div style="padding:10px 15px;" ng-controller="PageVersionsController" ng-show="showVersionList">
+
+                                        <div class="card-panel">
                                         	<h5>Versionen</h5>
-                                        	<p>The following list shows you all the available versions of the current site.</p>
-        									<table class="striped">
-    											<thead>
-    												<tr>
-    													<th>Id</th>
-    													<th>Datum</th>
-    													<th>Bezeichnung</th>
-    													<th>Wechseln</th>
-    													<th>Bearbeiten</th>
-    													<th>Benutzen</th>
-    												</tr>
-    											</thead>
-    											<tr ng-repeat="versionItem in typeData" ng-init="modalState=true">
-    												<td>#{{$index+1}}</td>
-    												<td>{{versionItem.timestamp_create * 1000 | date:'short'}}</td>
-    												<td>{{ versionItem.version_alias }}</td>
-    												<td>
-    													<button ng-show="currentPageVersion !== versionItem.id" class="btn" ng-click="switchVersion(versionItem.id)">Anzeigen</button>
-    													<span ng-show="currentPageVersion == versionItem.id">Wird angezeigt</span>
-    												</td>
-    												<td>
-    													<button ng-click="modalState=!modalState">Layout bearbeiten</button>
-            											<modal is-modal-hidden="modalState">
-            												Layout: <select ng-model="versionItem.layout_id" ng-options="lts.id as lts.name for lts in layoutsData"></select>
-            												<hr />
-            												<button class="btn" ng-click="changeVersionLayout(versionItem)">Update Layout</button>
-            											</modal>
-        											</td>
-        											<td>
-        												<span ng-if="versionItem.id == item.nav_item_type_id">Diese Version wird benutzt</span>
-        												<span ng-if="versionItem.id !== item.nav_item_type_id"><button class="btn" ng-click="useVersion(versionItem)" type="button">Version benutzen</button></span>
-        											</td>
-    											</tr>
-    										</table>
-										</div>	
-											
-										<div class="card-panel">
-        									<h5>Create Version</h5>
-        									<select ng-model="fromVersionPageId">
-        										<option value="0">New/Empty Version</option>
-        										<option ng-repeat="versionItem in typeData" value="{{versionItem.id}}">Copy existing: {{versionItem.version_alias}}</option>
-        									</select>
-        									
-        									<span ng-show="fromVersionPageId==0">Layout: <select ng-model="versionLayoutId" ng-options="lts.id as lts.name for lts in layoutsData"></select></span>
-        									
-        									Name: <input type="text" style="width:400px;" ng-model="versionName" />
-        									<button type="button" ng-click="createNewVersionSubmit()">Create new Version</button>
-    									</div>
-									</div>
-									
-									<div ng-show="container.length == 0" class="alert alert alert--info">
-										<p>This Page does not have a Version with a Layout yet, create a new version for this page. To creata new Version click the <i class="material-icons">list</i>icon.</p>
-									</div>
-									
+                                            <p>The following list shows you all the available versions of the current site.</p>
+                                            <table class="striped">
+                                                <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>Datum</th>
+                                                    <th>Bezeichnung</th>
+                                                    <th>Wechseln</th>
+                                                    <th>Bearbeiten</th>
+                                                    <th>Benutzen</th>
+                                                </tr>
+                                                </thead>
+                                                <tr ng-repeat="versionItem in typeData" ng-init="modalState=true">
+                                                    <td>#{{$index+1}}</td>
+                                                    <td>{{versionItem.timestamp_create * 1000 | date:'short'}}</td>
+                                                    <td>{{ versionItem.version_alias }}</td>
+                                                    <td>
+                                                        <button ng-show="currentPageVersion !== versionItem.id" class="btn" ng-click="switchVersion(versionItem.id)">Anzeigen</button>
+                                                        <span ng-show="currentPageVersion == versionItem.id">Wird angezeigt</span>
+                                                    </td>
+                                                    <td>
+                                                        <button ng-click="modalState=!modalState">Layout bearbeiten</button>
+                                                        <modal is-modal-hidden="modalState">
+                                                            Layout: <select ng-model="versionItem.layout_id" ng-options="lts.id as lts.name for lts in layoutsData"></select>
+                                                            <hr />
+                                                            <button class="btn" ng-click="changeVersionLayout(versionItem)">Update Layout</button>
+                                                        </modal>
+                                                    </td>
+                                                    <td>
+                                                        <span ng-if="versionItem.id == item.nav_item_type_id">Diese Version wird benutzt</span>
+                                                        <span ng-if="versionItem.id !== item.nav_item_type_id"><button class="btn" ng-click="useVersion(versionItem)" type="button">Version benutzen</button></span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+
+                                        <div class="card-panel">
+                                            <h5>Create Version</h5>
+                                            <select ng-model="fromVersionPageId">
+                                                <option value="0">New/Empty Version</option>
+                                                <option ng-repeat="versionItem in typeData" value="{{versionItem.id}}">Copy existing: {{versionItem.version_alias}}</option>
+                                            </select>
+
+                                            <span ng-show="fromVersionPageId==0">Layout: <select ng-model="versionLayoutId" ng-options="lts.id as lts.name for lts in layoutsData"></select></span>
+
+                                            Name: <input type="text" style="width:400px;" ng-model="versionName" />
+                                            <button type="button" ng-click="createNewVersionSubmit()">Create new Version</button>
+                                        </div>
+                                    </div>
+                                    <!-- /OLD -->
+
+                                    <!-- Versions -->
+                                    <div class="page__versions" ng-controller="PageVersionsController" ng-init="createVersionModalState=true; editVersionModalState=true">
+                                        <div class="page__versions-left">
+                                            <span class="page__versions-title page__versions-title--black"><span>Aktuelle Version:</span> <strong>Huhu (#1)</strong> <i class="material-icons" ng-click="editVersionModalState=false">edit</i></span>
+                                        </div><!--
+                                        --><div class="page__versions-right">
+                                            <span class="page__versions-title">Versionen: </span>
+                                            <button class="page__version" ng-class="{'page__version--visible': currentPageVersion == versionItem.id, 'page__version--in-use': versionItem.id == item.nav_item_type_id}" ng-repeat="versionItem in typeData" ng-click="switchVersion(versionItem.id)" ng-init="modalState=true" title="{{ versionItem.version_alias }}">
+                                                {{$index+1}}
+                                            </button>
+                                            <button class="page__version page__version--add" ng-click="createVersionModalState=false">
+                                                <i class="material-icons left">add</i>
+                                            </button>
+                                        </div>
+
+                                        <!-- Edit version modal -->
+                                        <modal is-modal-hidden="editVersionModalState">
+                                            Layout: <select ng-model="versionItem.layout_id" ng-options="lts.id as lts.name for lts in layoutsData"></select>
+                                            <hr />
+                                            <button class="btn" ng-click="changeVersionLayout(versionItem)">Update Layout</button>
+                                        </modal>
+                                        <!-- /Edit version modal -->
+
+                                        <!-- Add version modal -->
+                                        <modal is-modal-hidden="createVersionModalState">
+                                            <h5>Create Version</h5>
+                                            <select ng-model="fromVersionPageId">
+                                                <option value="0">New/Empty Version</option>
+                                                <option ng-repeat="versionItem in typeData" value="{{versionItem.id}}">Copy existing: {{versionItem.version_alias}}</option>
+                                            </select>
+
+                                            <span ng-show="fromVersionPageId==0">Layout: <select ng-model="versionLayoutId" ng-options="lts.id as lts.name for lts in layoutsData"></select></span>
+
+                                            Name: <input type="text" style="width:400px;" ng-model="versionName" />
+                                            <button type="button" ng-click="createNewVersionSubmit()">Create new Version</button>
+                                        </modal>
+                                        <!-- /Add version modal -->
+
+                                    </div>
+                                    <!-- /Versions -->
+
+                                    <div ng-show="container.length == 0" class="page__no-version-warning alert alert--warning alert--icon-no-margin">
+                                        <p>This Page does not have a Version with a Layout yet, create a new version for this page with the add icon <i class="material-icons green-text">add</i> on the right.</p>
+                                    </div>
+
                                     <ul class="page__list" ng-show="container.nav_item_page.id">
                                         <li class="page__placeholder accordion__entry--open" ng-repeat="placeholder in container.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'"></li>
                                     </ul>
