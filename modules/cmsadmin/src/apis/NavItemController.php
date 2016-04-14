@@ -72,6 +72,12 @@ class NavItemController extends \admin\base\RestController
         $navItemId = Yii::$app->request->post('navItemId');
         $layoutId = Yii::$app->request->post('layoutId');
         
+        $navItemModel = NavItem::findOne($navItemId);
+        
+        if (!$navItemModel) {
+            throw new \luya\Exception("Unable to find nav item model");
+        }
+        
         if (!empty($fromPageId)) {
             $fromPageModel = NavItemPage::findOne($fromPageId);
             $layoutId = $fromPageModel->layout_id;
@@ -90,6 +96,10 @@ class NavItemController extends \admin\base\RestController
         
         if (!empty($fromPageId) && $save) {
             NavItemPage::copyBlocks($fromPageModel->id, $model->id);
+        }
+        
+        if (empty($navItemModel->nav_item_type_id) && $navItemModel->nav_item_type == 1) {
+            $navItemModel->updateAttributes(['nav_item_type_id' => $model->id]);
         }
         
         return ['error' => !$save];

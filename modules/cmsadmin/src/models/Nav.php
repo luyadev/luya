@@ -303,6 +303,12 @@ class Nav extends \yii\db\ActiveRecord
             return false;
         }
 
+        // we have created the copy, but its seems like no version existis for the original to copy page,
+        // so we can not copy any content, lets return true and skip copy process.
+        if (empty($sourceNavItem->nav_item_type_id)) {
+            return true;
+        }
+        
         return $sourceNavItem->copyTypeContent($navItem);
     }
 

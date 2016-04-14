@@ -82,8 +82,7 @@
     <div class="row">
         <div class="input input--select col s12">
             <label class="input__label">Live Version</label>
-            
-            <div class="input__field-wrapper">
+            <div class="input__field-wrapper" ng-show="typeData!==undefined">
                 <select ng-model="data.nav_item_type_id" ng-options="version.id as version.version_alias for version in parent.typeData" ng-change="typeDataCopy.nav_item_type_id=parent.itemCopy.nav_item_type_id" />
             </div>
         </div>
@@ -588,17 +587,17 @@
                                                 <div class="input input--radios">
                                                     <label class="input__label"></label>
                                                     <div class="input__field-wrapper">
-                                                        <input type="radio" ng-checked="copyExistingVersion"><label ng-click="copyExistingVersion=true">Copy</label> <br />
-                                                        <input type="radio" ng-checked="!copyExistingVersion"><label ng-click="copyExistingVersion=false">New</label> <br />
+                                                        <input type="radio" ng-checked="create.copyExistingVersion"><label ng-click="create.copyExistingVersion=true">Copy</label> <br />
+                                                        <input type="radio" ng-checked="!create.copyExistingVersion"><label ng-click="create.copyExistingVersion=false">New</label> <br />
                                                     </div>
                                                 </div>
 
-                                                <div class="input input--select" ng-show="copyExistingVersion">
+                                                <div class="input input--select" ng-show="create.copyExistingVersion">
                                                     <label class="input__label" for="edit-version-modal-layout">Copy Version</label>
                                                     <select class="input__field" id="edit-version-modal-layout" name="edit-version-modal-layout" ng-model="create.fromVersionPageId" ng-options="versionItem.id as versionItem.version_alias for versionItem in typeData"></select>
                                                 </div>
 
-                                                <div class="input input--select" ng-show="!copyExistingVersion">
+                                                <div class="input input--select" ng-show="!create.copyExistingVersion">
                                                     <label class="input__label" for="create-version-modal-layout">Layout</label>
                                                     <select class="input__field" id="create-version-modal-layout" name="create-version-modal-layout" ng-model="create.versionLayoutId" ng-options="lts.id as lts.name for lts in layoutsData"></select>
                                                 </div>

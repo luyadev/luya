@@ -391,7 +391,7 @@
     	};
     	
 		$scope.createNewVersionSubmit = function(data) {
-			if (data.fromVersionPageId != 0) {
+			if (data.copyExistingVersion) {
 				data.versionLayoutId = 0;
 			}
 			$http.post('admin/api-cms-navitem/create-page-version', $.param({'layoutId': data.versionLayoutId, 'navItemId': $scope.item.id, 'name': data.versionName, 'fromPageId': data.fromVersionPageId}), headers).success(function(response) {
