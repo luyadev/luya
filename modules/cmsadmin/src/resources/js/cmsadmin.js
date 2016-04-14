@@ -372,11 +372,20 @@
     		$scope.layoutsData = data;
     	});
 		
+    	$scope.closeCreateModal = function() {
+    		$scope.createVersionModalState = true;
+    	}
+    	
+    	$scope.closeEditModal = function() {
+    		$scope.editVersionModalState = true;
+    	}
+    	
     	// controller logic
     	
     	$scope.changeVersionLayout = function(versionItem) {
-    		$http.post('admin/api-cms-navitem/change-page-version-layout', $.param({'pageItemId': versionItem.id, 'layoutId': versionItem.layout_id}), headers).success(function(response) {
+    		$http.post('admin/api-cms-navitem/change-page-version-layout', $.param({'pageItemId': versionItem.id, 'layoutId': versionItem.layout_id, 'alias': versionItem.version_alias}), headers).success(function(response) {
     			$scope.refreshForce();
+    			$scope.closeEditModal();
     			AdminToastService.success('The Layout has been updated successfull.', 4000);
 			});
     	};
@@ -387,14 +396,8 @@
 			}
 			$http.post('admin/api-cms-navitem/create-page-version', $.param({'layoutId': data.versionLayoutId, 'navItemId': $scope.item.id, 'name': data.versionName, 'fromPageId': data.fromVersionPageId}), headers).success(function(response) {
 				$scope.refreshForce();
+				$scope.closeCreateModal();
 				AdminToastService.success('The new version has been added.', 4000);
-			});
-		};
-		
-		$scope.useVersion = function(versionItem) {
-			$http.post('admin/api-cms-navitem/change-page-version', $.param({'navItemId': $scope.item.id, 'useItemPageVersionId': versionItem.id}), headers).success(function(response) {
-				$scope.item.nav_item_type_id = versionItem.id;
-				AdminToastService.success('The Version change has been successfull.', 4000);
 			});
 		};
 	});

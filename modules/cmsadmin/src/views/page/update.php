@@ -546,7 +546,7 @@
                                                             <button class="btn" type="submit" ng-click="changeVersionLayout(currentVersionInformation)">
                                                                 <?php echo \admin\Module::t('Update Version'); ?> <i class="material-icons right">check</i>
                                                             </button>
-                                                            <button class="btn red" type="button" ng-click="editVersionModalState=true">
+                                                            <button class="btn red" type="button" ng-click="closeEditModal()">
                                                                 <i class="material-icons left">cancel</i> <?php echo \admin\Module::t('button_abort'); ?>
                                                             </button>
                                                         </div>
@@ -612,7 +612,7 @@
                                                             <button class="btn" type="submit" ng-click="createNewVersionSubmit(create)">
                                                                 <?php echo \admin\Module::t('Create Version'); ?> <i class="material-icons right">check</i>
                                                             </button>
-                                                            <button class="btn red" type="button" ng-click="createVersionModalState=true">
+                                                            <button class="btn red" type="button" ng-click="closeCreateModal()">
                                                                 <i class="material-icons left">cancel</i> <?php echo \admin\Module::t('button_abort'); ?>
                                                             </button>
                                                         </div>

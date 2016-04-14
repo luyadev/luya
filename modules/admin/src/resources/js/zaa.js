@@ -326,7 +326,7 @@ function typeCastValue(value) {
 			},
 			replace: true,
 			transclude: true,
-			templateUrl: "modal"
+			templateUrl: "modal",
 		}
 	});
 	

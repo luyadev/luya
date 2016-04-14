@@ -50,25 +50,12 @@ class NavItemController extends \admin\base\RestController
     {
         $pageItemId = Yii::$app->request->post('pageItemId');
         $layoutId = Yii::$app->request->post('layoutId');
+        $alias = Yii::$app->request->post('alias');
 
         $model = NavItemPage::findOne(['id' => $pageItemId]);
         
         if ($model) {
-            return $model->updateAttributes(['layout_id' => $layoutId]);
-        }
-        
-        return false;
-    }
-
-    public function actionChangePageVersion()
-    {
-        $navItemId = Yii::$app->request->post('navItemId');
-        $useItemPageVersionId = Yii::$app->request->post('useItemPageVersionId');
-        
-        $model = NavItem::findOne(['id' => $navItemId, 'nav_item_type' => NavItem::TYPE_PAGE]);
-        
-        if ($model) {
-            return $model->updateAttributes(['nav_item_type_id' => $useItemPageVersionId]);
+            return $model->updateAttributes(['layout_id' => $layoutId, 'version_alias' => $alias]);
         }
         
         return false;
