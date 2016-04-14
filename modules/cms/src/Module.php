@@ -23,8 +23,9 @@ class Module extends \luya\base\Module implements BootstrapInterface
     ];
 
     /**
-     * @var string To handle error messages in your application put "'errorHandler' => ['errorAction' => 'cms/error/index']" in config file.
-     * To replace the standard error view file with your own - configure via the cms module in your config: "'cms' => ['errorViewFile' => '@app/views/error/index.php']"
+     * @var string To handle error messages in your application put `'errorHandler' => ['errorAction' => 'cms/error/index']` in config file.
+     * To replace the standard error view file with your own - configure via the cms module in your config: `'cms' => ['errorViewFile' => '@app/views/error/index.php']`
+     * Please note that you'll have to define the layout in the view as it's rendered via `renderPartial()`.
      */
     public $errorViewFile = "@cms/views/error/index.php";
 
