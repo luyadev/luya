@@ -23,6 +23,12 @@ class Module extends \luya\base\Module implements BootstrapInterface
     ];
 
     /**
+     * @var string To handle error messages in your application put "'errorHandler' => ['errorAction' => 'cms/error/index']" in config file.
+     *             To replace the standard error view file with your own - configure via the cms module in your config: "'cms' => ['errorViewFile' => '@app/views/error/index.php']"
+     */
+    public $errorViewFile = "@cms/views/error/index.php";
+
+    /**
      * @var bool If enabled the cms content will be compressed (removing of whitespaces and tabs).
      * @todo rename to $contentCompression (as enable is expressed by the boolean value)
      */
