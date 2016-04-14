@@ -16,7 +16,7 @@ class Module extends \luya\base\Module implements BootstrapInterface
 {
     /**
      * @var array We have no urlRules in cms Module. the UrlRoute file will only be used when
-     *            no module is provided. So the CMS url alias does only apply on default behavior.
+     * no module is provided. So the CMS url alias does only apply on default behavior.
      */
     public $urlRules = [
         ['pattern' => 'preview/<itemId:\d+>', 'route' => 'cms/preview/index', 'position' => UrlRule::POSITION_BEFORE_LUYA],
@@ -24,7 +24,7 @@ class Module extends \luya\base\Module implements BootstrapInterface
 
     /**
      * @var string To handle error messages in your application put "'errorHandler' => ['errorAction' => 'cms/error/index']" in config file.
-     *             To replace the standard error view file with your own - configure via the cms module in your config: "'cms' => ['errorViewFile' => '@app/views/error/index.php']"
+     * To replace the standard error view file with your own - configure via the cms module in your config: "'cms' => ['errorViewFile' => '@app/views/error/index.php']"
      */
     public $errorViewFile = "@cms/views/error/index.php";
 
@@ -41,7 +41,7 @@ class Module extends \luya\base\Module implements BootstrapInterface
     
     /**
      * @var bool If enableTagParsing is enabled tags like `link(1)` or `link(1)[Foo Bar]` will be parsed
-     *           and transformed into links based on the cms.
+     * and transformed into links based on the cms.
      */
     public $enableTagParsing = true;
 

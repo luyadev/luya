@@ -8,7 +8,8 @@ class ErrorController extends \luya\web\Controller
 {
     public function actionIndex()
     {
-        $exception = Yii::$app->errorHandler->exception;
-        return $this->render($this->module->errorViewFile, ['exception' => $exception]);
+        return $this->renderPartial($this->module->errorViewFile, [
+            'exception' => Yii::$app->errorHandler->exception
+        ]);
     }
 }
