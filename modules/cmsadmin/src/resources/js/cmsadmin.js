@@ -86,7 +86,7 @@
 		}
 	});
 
-    zaa.directive("updateFormPage", function(ServiceLayoutsData) {
+    zaa.directive("updateFormPage", function() {
         return {
             restrict : 'EA',
             scope : {
@@ -95,17 +95,7 @@
             templateUrl : 'updateformpage.html',
             controller : function($scope) {
             	
-            	$scope.layoutsData = ServiceLayoutsData.data;
-				
-            	$scope.$on('service:LayoutsData', function(event, data) {
-            		$scope.layoutsData = data;
-            	});
-            	
-            	function initializer() {
-            		$scope.layouts = $scope.layoutsData;
-            	}
-            	
-            	initializer();
+            	$scope.parent = $scope.$parent.$parent;
             }
         }
     });
@@ -900,7 +890,12 @@
 		
 		$scope.reset = function() {
 			$scope.itemCopy = angular.copy($scope.item);
-			$scope.typeDataCopy = angular.copy($scope.typeData);
+			if ($scope.item.nav_item_type == 1) {
+				$scope.typeDataCopy = angular.copy({'nav_item_type_id' : $scope.item.nav_item_type_id });
+			} else {
+				$scope.typeDataCopy = angular.copy($scope.typeData);
+			}
+			
 		}
 		
 		$scope.errors = [];

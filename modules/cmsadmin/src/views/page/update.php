@@ -81,9 +81,10 @@
 <script type="text/ng-template" id="updateformpage.html">
     <div class="row">
         <div class="input input--select col s12">
-            <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_layout'); ?></label>
+            <label class="input__label">Live Version</label>
+            
             <div class="input__field-wrapper">
-                <small><i class="material-icons">warning</i> To change the layout, open the versions list (since beta6)</small>
+                <select ng-model="data.nav_item_type_id" ng-options="version.id as version.version_alias for version in parent.typeData" ng-change="typeDataCopy.nav_item_type_id=parent.itemCopy.nav_item_type_id" />
             </div>
         </div>
     </div>

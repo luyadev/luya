@@ -203,6 +203,9 @@ class NavItemController extends \admin\base\RestController
             $typeModel = $model->getType();
             // lets just update the type data
             switch ($navItemType) {
+                case 1:
+                    $this->setPostAttribute($model, 'nav_item_type_id');
+                    break;
                 case 2:
                     $this->setPostAttribute($typeModel, 'module_name');
                     if (!$typeModel->validate()) {
