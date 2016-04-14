@@ -518,24 +518,109 @@
 
                                         <!-- Edit version modal -->
                                         <modal is-modal-hidden="editVersionModalState">
-                                            Layout: <select ng-model="currentVersionInformation.layout_id" ng-options="lts.id as lts.name for lts in layoutsData"></select>
-                                            <hr />
-                                            <button class="btn" ng-click="changeVersionLayout(currentVersionInformation)">Update Layout</button>
+                                            <div class="modal__header modal__header--light modal__header--for-form">
+                                                <div class="row">
+                                                    <div class="col s12">
+                                                        <h3>Edit Version</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal__content">
+                                                <div class="input input--text">
+                                                    <label class="input__label" for="edit-version-modal-name">Name</label>
+                                                    <div class="input__field-wrapper">
+                                                        <input class="input__field" id="edit-version-modal-name" name="edit-version-modal-name" type="text" ng-model="currentVersionInformation.version_alias" />
+                                                    </div>
+                                                </div>
+                                                <div class="input input--select">
+                                                    <label class="input__label" for="edit-version-modal-layout">Layout</label>
+                                                    <select class="input__field" id="edit-version-modal-layout" name="edit-version-modal-layout" ng-model="currentVersionInformation.layout_id" ng-options="lts.id as lts.name for lts in layoutsData"></select>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal__footer">
+                                                <div class="row">
+                                                    <div class="col s12">
+                                                        <div class="right">
+                                                            <button class="btn" type="submit" ng-click="changeVersionLayout(currentVersionInformation)">
+                                                                <?php echo \admin\Module::t('Update Version'); ?> <i class="material-icons right">check</i>
+                                                            </button>
+                                                            <button class="btn red" type="button" ng-click="editVersionModalState=true">
+                                                                <i class="material-icons left">cancel</i> <?php echo \admin\Module::t('button_abort'); ?>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </modal>
                                         <!-- /Edit version modal -->
                                         
                                         <!-- Add version modal -->
-                                        <modal is-modal-hidden="createVersionModalState">
-                                            <h5>Create Version</h5>
-                                            <select ng-model="create.fromVersionPageId">
-                                                <option value="0">New/Empty Version</option>
-                                                <option ng-repeat="versionItem in typeData" value="{{versionItem.id}}">Copy existing: {{versionItem.version_alias}}</option>
-                                            </select>
+                                        <modal is-modal-hidden="createVersionModalState" ng-init="copyExistingVersion=true">
+                                            <div class="modal__header modal__header--light modal__header--for-form">
+                                                <div class="row">
+                                                    <div class="col s12">
+                                                        <h3>Create Version</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                            <span ng-show="create.fromVersionPageId==0">Layout: <select ng-model="create.versionLayoutId" ng-options="lts.id as lts.name for lts in layoutsData"></select></span>
-                                           
-                                            Name: <input type="text" style="width:400px;" ng-model="create.versionName" />
-                                            <button type="button" ng-click="createNewVersionSubmit(create)">Create new Version</button>
+                                            <div class="modal__content">
+
+                                                <div class="input input--text">
+                                                    <label class="input__label" for="create-version-modal-name"></label>
+                                                    <div class="input__field-wrapper">
+                                                        <div class="alert alert--info">
+                                                            <i class="material-icons">info</i>
+                                                            <p>You can create any number of page versions with different contents.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="input input--text">
+                                                    <label class="input__label" for="create-version-modal-name">Name</label>
+                                                    <div class="input__field-wrapper">
+                                                        <input class="input__field" id="create-version-modal-name" name="create-version-modal-name" type="text" ng-model="create.versionName" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="input input--radios">
+                                                    <label class="input__label"></label>
+                                                    <div class="input__field-wrapper">
+                                                        <input type="radio" ng-checked="copyExistingVersion"><label ng-click="copyExistingVersion=true">Copy</label> <br />
+                                                        <input type="radio" ng-checked="!copyExistingVersion"><label ng-click="copyExistingVersion=false">New</label> <br />
+                                                    </div>
+                                                </div>
+
+                                                <div class="input input--select" ng-show="copyExistingVersion">
+                                                    <label class="input__label" for="edit-version-modal-layout">Copy Version</label>
+                                                    <select class="input__field" id="edit-version-modal-layout" name="edit-version-modal-layout" ng-model="create.fromVersionPageId" ng-options="versionItem.id as versionItem.version_alias for versionItem in typeData"></select>
+                                                </div>
+
+                                                <div class="input input--select" ng-show="!copyExistingVersion">
+                                                    <label class="input__label" for="create-version-modal-layout">Layout</label>
+                                                    <select class="input__field" id="create-version-modal-layout" name="create-version-modal-layout" ng-model="create.versionLayoutId" ng-options="lts.id as lts.name for lts in layoutsData"></select>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="modal__footer">
+                                                <div class="row">
+                                                    <div class="col s12">
+                                                        <div class="right">
+                                                            <button class="btn" type="submit" ng-click="createNewVersionSubmit(create)">
+                                                                <?php echo \admin\Module::t('Create Version'); ?> <i class="material-icons right">check</i>
+                                                            </button>
+                                                            <button class="btn red" type="button" ng-click="createVersionModalState=true">
+                                                                <i class="material-icons left">cancel</i> <?php echo \admin\Module::t('button_abort'); ?>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
                                         </modal>
                                         <!-- /Add version modal -->
 

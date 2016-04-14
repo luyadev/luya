@@ -31,10 +31,14 @@
 .page__versions-left,
 .page__versions-right {
     display: inline-block;
-    width: 50%;
+}
+
+.page__versions-left {
+    width: 25%;
 }
 
 .page__versions-right {
+    width: 75%;
     text-align: right;
 }
 
@@ -76,7 +80,7 @@
     outline: 0;
     padding: 3px 10px 8px 10px;
     transform: translateY(8px);
-    transition: 0.25s ease transform, 0.25s ease opacity;
+    transition: 0.25s ease transform, 0.25s ease opacity, 0.25s ease background-color;
     z-index: 10;
 
     &:not(:last-of-type) {
@@ -86,29 +90,34 @@
     &:hover,
     &.page__version--visible {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateY(0);
     }
 
     &.page__version--in-use {
         border-color: $blue;
-        color: $blue;
+        background-color: $blue;
+        color: $white;
         opacity: 1;
-        transform: translateX(0);
+        transform: translateY(8px);
+
+        &.page__version--visible,
+        &:hover {
+            transform: translateY(0);
+        }
     }
 
     &.page__version--add {
         border-color: $green;
         color: $green;
         opacity: 1;
-        padding-left: 5px;
-        padding-right: 5px;
-        padding-top: 4px;
+        padding: 4px 5px 14px 5px;
         transform: translateY(8px);
-        transition: .15s ease color, .25s ease background-color;
+        transition: .15s ease color, .25s ease background-color, .25s ease transform;
 
         &:hover {
             background-color: $green;
             color: $white;
+            transform: translateY(0);
         }
 
         i {
