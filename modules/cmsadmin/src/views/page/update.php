@@ -82,7 +82,7 @@
     <div class="row">
         <div class="input input--select col s12">
             <label class="input__label">Live Version</label>
-            <div class="input__field-wrapper" ng-show="typeData!==undefined">
+            <div class="input__field-wrapper" ng-show="parent.typeData!==undefined">
                 <select ng-model="data.nav_item_type_id" ng-options="version.id as version.version_alias for version in parent.typeData" ng-change="typeDataCopy.nav_item_type_id=parent.itemCopy.nav_item_type_id" />
             </div>
         </div>
