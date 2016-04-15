@@ -48,7 +48,7 @@ class Url extends \luya\helpers\Url
             return static::toMenuItem($item->id, $route, $params);
         }
 
-        throw new Exception("The module route creation could not find the module '$moduleName', have you created a page with this module in this langauge context?");
+        throw new Exception("The module route creation could not find the module '$moduleName'. Have you created a page with this module in this language context?");
     }
 
     /**

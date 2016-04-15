@@ -265,7 +265,7 @@ return [
     
     // cmsadmin/create page
     'view_index_add_title' => 'Add new page',
-    'view_index_add_page_from_language' => 'Add page from langauge',
+    'view_index_add_page_from_language' => 'Add page from language',
     'view_index_add_page_from_language_info' => 'Would you like to copy the contents from another language when creating this page?',
     'view_index_add_page_empty' => 'Add new empty page',
     'view_index_language_loading' => 'Loading page',
