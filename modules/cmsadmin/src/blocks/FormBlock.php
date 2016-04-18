@@ -93,10 +93,10 @@ class FormBlock extends \cmsadmin\base\Block
     public function sendMail($message, $email, $name)
     {
         $mail = Yii::$app->mail;
+        $mail->fromName = $name;
+        $mail->from = $email;
         $mail->compose($this->getVarValue('subjectText', $this->defaultMailSubject), $message);
         $mail->address($this->getVarValue('emailAddress'), $name);
-        $mail->mailer()->From = $email;
-        $mail->mailer()->FromName = $name;
 
         if (!$mail->send()) {
             return 'Error: '.$mail->error();
