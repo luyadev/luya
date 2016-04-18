@@ -82,8 +82,8 @@ trait ErrorHandler
             'date' => date('d.m.Y H:i'),
             'trace' => $_trace,
             'ip' => (isset($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : null,
-            'get' => Yii::$app->request->get(),
-            'post' => Yii::$app->request->post(),
+            'get' => (isset($_GET)) ? $_GET : [],
+            'post' => (isset($_POST)) ? $_POST : [],
         ];
     }
 }
