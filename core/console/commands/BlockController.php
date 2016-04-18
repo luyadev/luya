@@ -35,7 +35,7 @@ class BlockController extends \luya\console\Command
             'date' => 'Date Selector',
             'datetime' => 'Date and Time selector',
             'checkbox' => 'A single Checkbox',
-            'checkbox-array' => 'radio BUttons with several inputs',
+            'checkbox-array' => 'radio Buttons with several inputs',
             'file-upload' => 'User can upload a single file',
             'file-array-upload' => 'User can upload severals files',
             'image-upload' => 'creata a image upload form and return the imageId on success',
