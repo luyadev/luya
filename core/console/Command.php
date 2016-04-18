@@ -2,21 +2,31 @@
 
 namespace luya\console;
 
-use Yii;
-
 class Command extends \luya\console\Controller
 {
     /**
-     * @var Default option for all luya comamnds, to enable verbose output
+     * @var boolean Whether the verbose printing is enabled from options parameter or not.
      */
     public $verbose = false;
     
     /**
+     * @var boolean Whether the command is in interactive mode or not, provided by option paremeters.
+     */
+    public $interactive = true;
+    
+    public function verbosePrint($message)
+    {
+        if ($this->verbose) {
+            $this->output($message);
+        }
+    }
+    
+    /**
      * {@inheritDoc}
-     * @see \yii\console\Controller::options()
+     * @see \luya\console\Controller::options()
      */
     public function options($actionID)
     {
-        return ['verbose'];
+        return ['verbose', 'interactive'];
     }
 }

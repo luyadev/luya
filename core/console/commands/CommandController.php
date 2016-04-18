@@ -2,8 +2,6 @@
 
 namespace luya\console\commands;
 
-use Yii;
-
 /**
  * Run a LUYA command, this is a very quick implementation for console commands.
  * 
@@ -20,13 +18,6 @@ use Yii;
  */
 class CommandController extends \luya\console\Command
 {
-    public $verbose = false;
-    
-    public function options($actionID)
-    {
-        return ['verbose'];
-    }
-    
     /**
      * Run the module route
      * 
@@ -39,25 +30,6 @@ class CommandController extends \luya\console\Command
         echo $this->outputInfo("This method is deprecated since 1.0.0-beta6");
         
         return $this->outputError("Instead us: ./vendor/bin/luya {$module}/{$route}");
-        /*
-        $module = Yii::$app->getModule($module);
-        
-        if (!$module) {
-            return $this->outputError("Module '$module' does not exist in module list, add the Module to your configuration.");
-        }
-
-        // change the namespace where the controller should be lookuped up in
-        $module->controllerNamespace = $module->namespace . '\commands';
-        
-        // action response
-        $response = $module->runAction($route, ['verbose' => $this->verbose]);
-
-        if ($this->isMuted()) {
-            return $response;
-        }
-
-        return $response;
-        */
     }
 
     /**
