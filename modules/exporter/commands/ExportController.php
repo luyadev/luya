@@ -41,24 +41,4 @@ class ExportController extends \luya\console\Command
 
         ZipHelper::dir($cacheFolder.'/', $save);
     }
-    
-    /**
-     * 
-     * @param unknown $fromDsn
-     * @param unknown $fromUsername
-     * @param unknown $fromPassword
-     */
-    public function actionCopyToLocal($fromDsn, $fromUsername, $fromPassword)
-    {
-        $temp = tmpfile();
-        
-        $dump = new Mysqldump\Mysqldump($fromDsn, $fromUsername, $fromPassword);
-        $dump->start($temp);
-        
-        if ($this->confirm('Are you sure you want to remove all the tables for this Database?')) {
-            foreach (Yii::$app->db->schema->getTableNames() as $name) {
-                var_dump($name);
-            }
-        }
-    }
 }
