@@ -154,14 +154,22 @@ class StorageImporter extends \luya\base\Importer
     {
         $log = [];
 
+        $this->importer->verbosePrint('process thumbnail', __METHOD__);
+        
         Yii::$app->storage->processThumbnails();
         
+        $this->importer->verbosePrint('get orphaned file list', __METHOD__);
+        
         $orphanedFileList = static::getOrphanedFileList();
+        
+        $this->importer->verbosePrint('orphaned file list response.', __METHOD__);
 
         if ($orphanedFileList === false) {
             $log["error"] = "unable to find a storage folder '".Yii::$app->storage->serverPath."' to compare.";
         } else {
             $log["files_missing_in_table"] = count($orphanedFileList);
+            
+            $this->importer->verbosePrint('remove missing storage files', __METHOD__);
             
             $log["files_missing_in_file_table"] = static::removeMissingStorageFiles();
             
@@ -171,6 +179,9 @@ class StorageImporter extends \luya\base\Importer
                 $log["files_to_remove"][] = $file;
             }
         }
+
+        $this->importer->verbosePrint('finished storage importer', __METHOD__);
+        
         $this->addLog("storage", $log);
     }
 }

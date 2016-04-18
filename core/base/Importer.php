@@ -18,7 +18,7 @@ namespace luya\base;
  *     }
  * }
  * ```
- * 
+ * @property \luya\console\commands\ImportController $importer Importer Object
  * @author nadar
  */
 abstract class Importer extends \yii\base\Object
@@ -44,7 +44,7 @@ abstract class Importer extends \yii\base\Object
     /**
      * Class constructor containing the importer object from where its called.
      * 
-     * @param \luya\commands\ImportController $importer Import Object `\luya\commands\ImportController`.
+     * @param \luya\console\commands\ImportController $importer Import Object `\luya\commands\ImportController`.
      */
     public function __construct(\luya\console\interfaces\ImportController $importer, $config = [])
     {
@@ -55,7 +55,7 @@ abstract class Importer extends \yii\base\Object
     /**
      * Returns the import object to use the importers methods.
      * 
-     * @return object Import Object
+     * @return object Import \luya\console\commands\ImportController
      */
     public function getImporter()
     {
@@ -71,10 +71,11 @@ abstract class Importer extends \yii\base\Object
      * 
      * @param string $section
      * @param string $value
+	 * @todo trigger deprecated section call
      */
     public function addLog($section, $value)
     {
-        $this->getImporter()->addLog($section, $value);
+        $this->getImporter()->addLog(get_called_class(), $value);
     }
 
     /**

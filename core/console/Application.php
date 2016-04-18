@@ -5,6 +5,7 @@ namespace luya\console;
 use Yii;
 use yii\base\InvalidRouteException;
 use yii\helpers\Console;
+use yii\base\InvalidCallException;
 
 /**
  * Luya CLI Application.
@@ -69,16 +70,21 @@ class Application extends \yii\console\Application
         // In addition to the default behavior of runAction, the console command
         // will strip the first element of the route and threat it as a module
         // changed the controller namespace to run the commands
-        $partial = explode("/", $route);
-        // if there is a first key in the splitted array
-        if (isset($partial[0]) && ($module = Yii::$app->getModule($partial[0]))) {
-            // change the controller namespace of this module to make usage of `commands`.
-            $module->controllerNamespace = $module->namespace . '\commands';
-            unset($partial[0]);
-            // action response
-            return $module->runAction(implode("/", $partial), $params);
+        if (!empty($route)) {
+	        $partial = explode("/", $route);
+	        // if there is a first key in the splitted array
+	        if (isset($partial[0]) && (count($partial) > 1) && ($module = Yii::$app->getModule($partial[0]))) {
+	            // change the controller namespace of this module to make usage of `commands`.
+	            $module->controllerNamespace = $module->namespace . '\commands';
+	            unset($partial[0]);
+	            // action response
+	            try {
+	            	return $module->runAction(implode("/", $partial), $params);
+	            } catch (\Exception $e) {
+	            	throw new InvalidCallException($e->getMessage());
+	            }
+	        }
         }
-        
         return parent::runAction($route, $params);
     }
 }

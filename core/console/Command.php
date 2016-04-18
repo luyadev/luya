@@ -14,10 +14,10 @@ class Command extends \luya\console\Controller
      */
     public $interactive = true;
     
-    public function verbosePrint($message)
+    public function verbosePrint($message, $section = null)
     {
         if ($this->verbose) {
-            $this->output($message);
+            $this->output((!empty($section)) ? $section . ': ' . $message : $message);
         }
     }
     

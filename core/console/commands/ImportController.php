@@ -107,12 +107,14 @@ class ImportController extends \luya\console\Command implements \luya\console\in
     {
         try {
             $queue = [];
-    
+    		$this->verbosePrint('Run import index', __METHOD__);
             foreach (Yii::$app->getModules() as $id => $module) {
                 if ($module instanceof \luya\base\Module) {
+                	$this->verbosePrint('collect module import data:' . $id, __METHOD__);
                     $response = $module->import($this);
                     if (is_array($response)) { // importer returns an array with class names
                         foreach ($response as $class) {
+                        	$this->verbosePrint("add '$class' to queue list", __METHOD__);
                             $obj = new $class($this);
                             $prio = $obj->queueListPosition;
                             while (true) {
@@ -130,7 +132,9 @@ class ImportController extends \luya\console\Command implements \luya\console\in
             ksort($queue);
     
             foreach ($queue as $pos => $object) {
-                $object->run();
+            	$this->verbosePrint("run object '" .$object->className() . " on pos $pos.", __METHOD__);
+                $objectResponse = $object->run();
+                $this->verbosePrint("run response: " . var_export($objectResponse, true), __METHOD__);
             }
     
             if (Yii::$app->hasModule('admin')) {
@@ -138,6 +142,7 @@ class ImportController extends \luya\console\Command implements \luya\console\in
                 Yii::$app->db->createCommand()->update('admin_user', ['force_reload' => 1])->execute();
             }
     
+            $this->verbosePrint('importer finish, log outpu: ' . var_export($this->_log, true), __METHOD__);
             return $this->outputSuccess(print_r($this->_log, true));
         } catch (Exception $err) {
             return $this->outputError(sprintf("Exception while importing: '%s' in file '%s' on line '%s'.", $err->getMessage(), $err->getFile(), $err->getLine()));
