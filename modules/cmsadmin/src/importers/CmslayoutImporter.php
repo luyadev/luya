@@ -82,7 +82,7 @@ class CmslayoutImporter extends \luya\base\Importer
                         'json_config' => json_encode($_placeholders),
                     ]);
                     $data->save();
-                    $this->addLog('cmslayoutscd pu', 'new cmslayout '.$file.' found and added to databse.');
+                    $this->addLog('cmslayouts', 'new cmslayout '.$file.' found and added to database.');
                 }
             }
 
