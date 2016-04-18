@@ -8,6 +8,8 @@ This document will help you upgrading from one LUYA Version into another
 
 **We have moved all repositories to the new HQ of LUYA, `luyadev` instead of `zephir`. In order to to update your packages, remove `zephir` and replace with `luyadev` in your composer require section.**
 
+* `#833`: Command controller in console is deprecated use default route behavior instead `module/controller/action`, run action will find the module commands namespace controllers if available in the config.
+
 * `#818`: Since 1.0.0-beta6 we have added the versions concept of luya pages you have to run once the command `./vendor/bin/luya command cmsadmin updater/versions` **after executing the migration** process.
 
 * `#807`: The NgRest plugin system has been rewritten to use the yii component base class, as therefore some plugin configuration has changed as the are not using the constructor any more instead are configurable via base object of the class properties. changes:

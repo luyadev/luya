@@ -6,6 +6,9 @@ LUYA CHANGELOG
 
 **BC BREAKS** See [UPGRADE.md](UPGRADE.md) as we have made some major changes.
 
+- `#805` Added CMS Keywords to CMS module in order to analyze the input content for its keywords.
+- `#784` Add Blocks folder depency via `getGroup` of each block.
+- `#833` Remove console CommandController and replace with runAction override of consoel application in order to make options available.
 - `#826` Fixed deprecated function call in FormBlock.
 - `#787` Fixed bug with sort block problem.
 - `#822` zaa-checkbox-array renamed variables.

@@ -26,7 +26,7 @@ add the module to your application config:
 Now you can install a cronjob or run the command when doing deployment to prepare the download:
 
 ```sh
-./vendor/bin/luya command exporter export
+./vendor/bin/luya exporter/export
 ```
 
 In order to download the above created files just go onto:

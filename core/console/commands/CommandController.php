@@ -15,6 +15,7 @@ use Yii;
  * 
  * where the route is part of the controller/action as Yii2 routes concept.
  * 
+ * @todo remove/delete in beta7
  * @author nadar
  */
 class CommandController extends \luya\console\Command
@@ -35,6 +36,10 @@ class CommandController extends \luya\console\Command
      */
     public function actionIndex($module, $route = 'default')
     {
+        echo $this->outputInfo("This method is deprecated since 1.0.0-beta6");
+        
+        return $this->outputError("Instead us: ./vendor/bin/luya {$module}/{$route}");
+        /*
         $module = Yii::$app->getModule($module);
         
         if (!$module) {
@@ -52,14 +57,15 @@ class CommandController extends \luya\console\Command
         }
 
         return $response;
+        */
     }
 
     /**
-     * @todo remove in rc1
+     * @todo remove/delete in rc1
      * @return number
      */
     public function actionHelp()
     {
-        return $this->outputInfo('Use ./vendor/bin/luya instead of this help aciton, will be removed in rc1');
+        return $this->outputInfo('Use ./vendor/bin/luya instead. This action will be deleted soon.');
     }
 }

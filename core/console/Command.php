@@ -30,9 +30,9 @@ class Command extends \luya\console\Controller
      */
     public function selectModuleType()
     {
-        return $this->select('What kind of Module you want to create?', [
-            'frontend' => 'Frontend Modules are mainly used to render views.',
-            'admin' => 'Admin Modules are mainly used when you Data-Managment should be done inside the Administration area.',
+        return $this->select('What type of Module you want to create?', [
+            'frontend' => 'Frontend Modules are used to render views.',
+            'admin' => 'Admin Modules are used when the Data-Managment should be done inside the Administration area.',
         ]);
     }
     

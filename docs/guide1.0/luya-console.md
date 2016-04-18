@@ -18,15 +18,15 @@ Where *command* is one of the following commands below:
 |migrate           |-                             |`migrate`                 |Execute all migrations from all modules, updates your database if any.
 |migrate/create    |$tableName [, $moduleName ]   |`migrate/create mymigration1 modulename` |Create new migration file named `mymigration1` in the module `modulename`.
 |setup             |-                             |`setup`              |Execute the *LUYA* Setup will create a user, group and base table informations.
-|setup/user         |-                            |`setup/user`         |Create a new user for the *LUYA* Admin from command line.
+|setup/user        |-                            |`setup/user`         |Create a new user for the *LUYA* Admin from command line.
 |import            |-                             |`import`             |Updates permission, import cms blocks, updates cms layouts, updates image filters. Create your custom [importer](app-module.md#import-method)
 |health            |-                             |`health`             |Tests all basic directory if they are writeable and existing.
 |health/mailer     |-                             |`health/mailer`      |Check if you mailer component is working and can send mails.
 |crud/create       |-                             |`crud/create`        |Create new [NgRest Crud](app-admin-module-ngrest.md) with a wizzard.
 |module/create     |-                             |`module/create`      |Create new [Frontend/Admin Module](app-module.md) with a wizzard.
-|command           |$moduleName, $route           |`command teammodule controller/action` |Execute your custom command (see how-to below)s.
 |block/create		|-								|`block/create`	|Create new [Inhalts Blöcken](app-blocks.md) with a wizzard.
-|storage/cleanup    |-								|`storage/cleanup`	|Cleanup not existing files compare file system and database.
+|storage/cleanup   |-								|`storage/cleanup`	|Cleanup not existing files compare file system and database.
+|<route>           |-                             |`mymodule/commandcontroller/action` |All comands stored in the folder `commands` can be run by default routing.
 
 
 Create your own command
@@ -58,12 +58,13 @@ class NotifyController extends \luya\console\Command
 To run the `actionIndex()` from the above mentioned `NotfyController` controller in the `yourmodule` module:
 
 ```sh
-./vendor/bin/luya command yourmodule notify
+./vendor/bin/luya yourmodule/notify
 ```
 
 to execute the `actionBar()` we have to change the route for the noify controller:
 
 ```sh
-./vendor/bin/luya command yourmodule notify/bar
+./vendor/bin/luya yourmodule/notify/bar
 ```
+
 

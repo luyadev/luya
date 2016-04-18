@@ -47,7 +47,7 @@ Now refresh all existing importer components with the import commmand
 In beta we have introduced cms page version so you have to run the following command once, after the migrate/import command:
 
 ```sh
-./vendor/bin/luya command cmsadmin updater/versions
+./vendor/bin/luya command cmsadmin/updater/versions
 ```
 
 Your system is now up to date. Don't forget to check the *CHANGELOG.md* for backward compatibility breaks *[BC BREAK]*.

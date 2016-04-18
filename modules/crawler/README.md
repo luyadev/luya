@@ -34,7 +34,7 @@ After setup the module in your config you have to run the migrations:
 To execute the command (and run the crawler proccess) use the crawler command `crawl`, you should put this command in cronjob to make sure your index is up-to-date:
 
 ```sh
-./vendor/bin/luya command crawler crawl
+./vendor/bin/luya crawler crawl
 ```
 
 Create search form

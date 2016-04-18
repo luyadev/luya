@@ -8,13 +8,13 @@ use crawler\classes\CrawlContainer;
  * Crawler command to build the index:
  * 
  * ```
- * ./vendor/bin/luya command crawler crawl
+ * ./vendor/bin/luya crawler/crawl
  * ```
  * 
  * Verbose while crawling
  * 
  * ```
- * ./vendor/bin/luya command crawler crawl --verbose
+ * ./vendor/bin/luya crawler/crawl --verbose
  * ```
  *
  * @author nadar

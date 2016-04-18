@@ -31,8 +31,8 @@ abstract class Importer extends \yii\base\Object
 
     /**
      * @var int The priority between 0 and 100 where to Import command should be queued.
-     *          + 0 = First
-     *          + 100 = Last
+     * + 0 = First
+     * + 100 = Last
      */
     public $queueListPosition = self::QUEUE_POSITION_MIDDLE;
 

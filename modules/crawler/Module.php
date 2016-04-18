@@ -8,7 +8,7 @@ namespace crawler;
  * The Crawler will create an index with all pages based on your defined `baseUrl`. You can run the crawler by using the command
  * 
  * ```sh
- * ./vendor/bin/luya command crawler crawl
+ * ./vendor/bin/luya crawler/crawl
  * ```
  * 
  * This will create an index where you can search inside (See helper methods in `crawleradmin\models\Index` to find by query methods).
