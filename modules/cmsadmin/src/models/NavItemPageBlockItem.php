@@ -30,6 +30,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         $this->on(self::EVENT_AFTER_UPDATE, [$this, 'eventAfterUpdate']);
         $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'eventBeforeUpdate']);
         $this->on(self::EVENT_BEFORE_DELETE, [$this, 'eventBeforeDelete']);
+        $this->on(self::EVENT_AFTER_DELETE, [$this, 'eventAfterDelete']);
     }
 
     public function rules()
@@ -99,10 +100,19 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     {
         // delete all attached sub blocks
         $this->deleteAllSubBlocks($this->id);
+        //save block data for afterDeleteEvent
+        $this->_olds = $this->getOldAttributes();
         // verify if the block exists or not
         $class = ($this->block) ? $this->block->class : 'class_does_not_exists';
         // log event
         Log::add(3, "block.delete '".$class."', cms_nav_item_page_block_item.id '".$this->id."'");
+    }
+
+    public function eventAfterDelete()
+    {
+        if (!empty($this->_olds)) {
+            $this->reindex($this->_olds['nav_item_page_id'], $this->_olds['placeholder_var'], $this->_olds['prev_id']);
+        }
     }
 
     public function eventAfterInsert()
@@ -142,7 +152,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     private function reindex($navItemPageId, $placeholderVar, $prevId)
     {
         $index = 0;
-        $datas = self::find()->andWhere(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId])->orderBy('sort_index ASC')->all();
+        $datas = self::find()->andWhere(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId])->orderBy('sort_index ASC, timestamp_create DESC')->all();
         foreach ($datas as $item) {
             Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $index], ['id' => $item->id])->execute();
             ++$index;
