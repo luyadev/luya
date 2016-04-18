@@ -31,22 +31,49 @@ class Mail extends \yii\base\Component
 {
     private $_mailer = null;
 
+    /**
+     * @var string sender email address
+     */
     public $from = 'php@zephir.ch';
 
+    /**
+     * @var string sender name
+     */
     public $fromName = 'php@zephir.ch';
 
+    /**
+     * @var string email server host address
+     */
     public $host = 'mail.zephir.ch';
 
+    /**
+     * @var string email server username
+     */
     public $username = 'php@zephir.ch';
 
+    /**
+     * @var string email server password
+     */
     public $password = null; // insert password
 
+    /**
+     * @var bool disable if you want to use old PHP sendmail
+     */
     public $isSMTP = true;
 
+    /**
+     * @var string alternate text message if email client doesn't support HTML
+     */
     public $altBody = 'Please use a HTML compatible E-Mail-Client to read this E-Mail.';
 
+    /**
+     * @var int email server port
+     */
     public $port = 587;
 
+    /**
+     * @var bool enable debug output mode 'Data and commands'
+     */
     public $debug = false;
     
     /**

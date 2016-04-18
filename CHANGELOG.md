@@ -6,6 +6,7 @@ LUYA CHANGELOG
 
 **BC BREAKS** See [UPGRADE.md](UPGRADE.md) as we have made some major changes.
 
+- `#826` Fixed deprecated function call in FormBlock.
 - `#787` Fixed bug with sort block problem.
 - `#822` zaa-checkbox-array renamed variables.
 - `#818` Added basic implementation of page version in cms (run `./vendor/bin/luya commands cmsadmin updater/version` once after upgrading to beta6).
