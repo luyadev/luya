@@ -339,13 +339,24 @@ class Item extends \yii\base\Object
     private $_parent = null;
     
     /**
+     * Getter method wrapper for `hasParent()`
+     * 
+     * @return boolean
+     * @since 1.0.0-beta6
+     */
+    public function getHasParent()
+    {
+        return $this->hasParent();
+    }
+    
+    /**
      * Check whether parent element exists or not
      * 
      * @return boolean
      */
     public function hasParent()
     {
-        return ($this->getParent()) ? true : false;
+        return (count($this->getParent()) > 0) ? true : false;
     }
     
     /**
@@ -423,6 +434,17 @@ class Item extends \yii\base\Object
         
         return $this->_children;
     }
+    
+    /**
+     * Getter method wrapper for `hasChildren()`
+     * 
+     * @since 1.0.0-beta6
+     * @return boolean
+     */
+    public function getHasChildren()
+    {
+        return $this->hasChildren();
+    }
 
     /**
      * Check whether an item has childrens or not returning a boolean value.
@@ -431,7 +453,7 @@ class Item extends \yii\base\Object
      */
     public function hasChildren()
     {
-        return ($this->getChildren()) ? true : false;
+        return (count($this->getChildren()) > 0) ? true : false;
     }
 
     /**
