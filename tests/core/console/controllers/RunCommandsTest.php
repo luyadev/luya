@@ -9,7 +9,7 @@ class RunCommandsTest extends \luyatests\LuyaConsoleTestCase
     public function testCustomCommandSuccess()
     {
         Yii::$app->request->setParams([
-            'command', 'unitmodule', 'command-output/success',
+            'unitmodule/command-output/success',
         ]);
 
         $this->assertEquals(0, Yii::$app->run());
@@ -18,7 +18,7 @@ class RunCommandsTest extends \luyatests\LuyaConsoleTestCase
     public function testCustomCommandError()
     {
         Yii::$app->request->setParams([
-            'command', 'unitmodule', 'command-output/error',
+            'unitmodule/command-output/error',
         ]);
 
         $this->assertEquals(1, Yii::$app->run());
