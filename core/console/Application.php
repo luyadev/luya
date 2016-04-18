@@ -68,31 +68,36 @@ class Application extends \yii\console\Application
         try {
             return parent::runAction($route, $params);
         } catch (\Exception $e) {
-            try {
-                
-                // In addition to the default behavior of runAction, the console command
-                // will strip the first element of the route and threat it as a module
-                // changed the controller namespace to run the commands
-                $partial = explode("/", $route);
-                
-                // if there is a first key in the splitted array
-                if (isset($partial[0])) {
-                    // get the module name (assuming thas routes allways use the module name first)
-                    $moduleName = $partial[0];
-                    $module = Yii::$app->getModule($moduleName);
-                    // verify if the module exists in the list of modules
-                    if (!$module) {
-                        throw new InvalidRouteException("Could not find Module '$moduleName', add the Module to your configuration file.");
-                    }
-                    // change the controller namespace of this module to make usage of `commands`.
-                    $module->controllerNamespace = $module->namespace . '\commands';
-                    unset($partial[0]);
-                    // action response
-                    return $module->runAction(implode("/", $partial), $params);
-                }
-            } catch (\Exception $e) {
-                return Console::ansiFormat($e->getMessage(), [Console::FG_RED]) . PHP_EOL;
-            }
+            // we just have to catch the parent exception in order to process further checks
+            // Another possibility would be to invert the process: first check by module name, after run parent action.
         }
+        
+        try {
+            //return Console::ansiFormat('[LUYA:]'.$e->getMessage(), [Console::FG_RED]) . PHP_EOL;
+            // In addition to the default behavior of runAction, the console command
+            // will strip the first element of the route and threat it as a module
+            // changed the controller namespace to run the commands
+            $partial = explode("/", $route);
+            
+            // if there is a first key in the splitted array
+            if (isset($partial[0])) {
+                // get the module name (assuming thas routes allways use the module name first)
+                $moduleName = $partial[0];
+                $module = Yii::$app->getModule($moduleName);
+                // verify if the module exists in the list of modules
+                if (!$module) {
+                    throw new InvalidRouteException("Could not find Module '$moduleName', add the Module to your configuration file.");
+                }
+                // change the controller namespace of this module to make usage of `commands`.
+                $module->controllerNamespace = $module->namespace . '\commands';
+                unset($partial[0]);
+                // action response
+                return $module->runAction(implode("/", $partial), $params);
+            }
+        } catch (\Exception $err) {
+            return "[LUYA]:" . $err->getMessage();
+        }
+        
+        return '[BASE]: Unable to create route ' . $route;
     }
 }
