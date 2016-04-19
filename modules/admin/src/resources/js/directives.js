@@ -905,6 +905,41 @@
         }
     });
     
+    zaa.directive('storageFileDisplay', function(ServiceFilesData) {
+    	return {
+    		restrict: 'E',
+    		scope: {
+    			fileId: '@fileId'
+    		},
+    		controller: function($scope, $filter) {
+				
+    			// ServiceFilesData inheritance
+                
+                $scope.filesData = ServiceFilesData.data;
+                
+                $scope.$on('service:FilesData', function(event, data) {
+                    $scope.filesData = data;
+                });
+                
+                // controller
+                
+                $scope.fileinfo = null;
+                
+                $scope.$watch('fileId', function(n, o) {
+                    if (n != 0 && n != null && n !== undefined) {
+                    	var filtering = $filter('filter')($scope.filesData, {id: n}, true);
+                        if (filtering && filtering.length == 1) {
+                        	$scope.fileinfo = filtering[0];
+                        }
+                    }
+                });
+    		},
+    		template: function() {
+                return '<div ng-show="fileinfo!==null">{{ fileinfo.name }}</div>';
+            }
+    	}
+    });
+    
     zaa.directive('storageImageThumbnailDisplay', function(ServiceImagesData, ServiceFilesData) {
         return {
             restrict: 'E',
