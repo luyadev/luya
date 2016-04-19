@@ -7,6 +7,14 @@ use cebe\markdown\GithubMarkdown;
 /**
  * Create a textarea input for a given field.
  * 
+ * Example uf using the nl2br option
+ * 
+ * ```php
+ * ['mytext' => ['textarea', 'nl2br' => true]],
+ * ```
+ * 
+ * This will automatically generate nl2br on after find event (before display).
+ * 
  * @author nadar
  */
 class Textarea extends \admin\ngrest\base\Plugin
