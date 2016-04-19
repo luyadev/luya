@@ -125,14 +125,14 @@ class ImportController extends Command implements ImportControllerInterface
     {
         try {
             $queue = [];
-    		$this->verbosePrint('Run import index', __METHOD__);
+            $this->verbosePrint('Run import index', __METHOD__);
             foreach (Yii::$app->getModules() as $id => $module) {
                 if ($module instanceof \luya\base\Module) {
-                	$this->verbosePrint('collect module importers from module: ' . $id, __METHOD__);
+                    $this->verbosePrint('collect module importers from module: ' . $id, __METHOD__);
                     $response = $module->import($this);
                     if (is_array($response)) { // importer returns an array with class names
                         foreach ($response as $class) {
-                        	$this->verbosePrint("add object '$class' to queue list", __METHOD__);
+                            $this->verbosePrint("add object '$class' to queue list", __METHOD__);
                             $obj = new $class($this);
                             $prio = $obj->queueListPosition;
                             while (true) {
@@ -150,7 +150,7 @@ class ImportController extends Command implements ImportControllerInterface
             ksort($queue);
     
             foreach ($queue as $pos => $object) {
-            	$this->verbosePrint("run object '" .$object->className() . " on pos $pos.", __METHOD__);
+                $this->verbosePrint("run object '" .$object->className() . " on pos $pos.", __METHOD__);
                 $objectResponse = $object->run();
                 $this->verbosePrint("run object response: " . var_export($objectResponse, true), __METHOD__);
             }
