@@ -973,7 +973,9 @@
                         
                         var file = $filter('findidfilter')($scope.filesData, filtering.fileId, true);
                         
-                        $scope.imageSrc = file.thumbnail.source;
+                        if (file) {
+                        	$scope.imageSrc = file.thumbnail.source;
+                        }
                     }
                 });
                 
