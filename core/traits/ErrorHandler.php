@@ -2,7 +2,6 @@
 
 namespace luya\traits;
 
-use Yii;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Json;
 use Curl\Curl;
@@ -84,6 +83,8 @@ trait ErrorHandler
             'ip' => (isset($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : null,
             'get' => (isset($_GET)) ? $_GET : [],
             'post' => (isset($_POST)) ? $_POST : [],
+            'session' => (isset($_SESSION)) ? $_SESSION : [],
+            'server' => (isset($_SERVER)) ? $_SERVER : [],
         ];
     }
 }
