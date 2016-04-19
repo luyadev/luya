@@ -15,7 +15,7 @@ class FilterImporter extends Importer
             $model->setAttributes($fields, false);
             $model->update(false);
         } else {
-            $this->getImporter()->addLog('effect "'.$identifier.'" added');
+            $this->addLog('effect "'.$identifier.'" added');
             $insert = new StorageEffect();
             $insert->identifier = $identifier;
             $insert->setAttributes($fields, false);
@@ -63,7 +63,7 @@ class FilterImporter extends Importer
                 $list[] = $object->identifier();
                 $log = $object->getLog();
                 if (count($log) > 0) {
-                    $this->getImporter()->addLog(implode(', ', $log));
+                    $this->addLog(implode(', ', $log));
                 }
             }
         }

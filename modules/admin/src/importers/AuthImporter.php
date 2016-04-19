@@ -34,8 +34,7 @@ class AuthImporter extends Importer
         $toClean = Yii::$app->auth->prepareCleanup($data);
         if (count($toClean) > 0) {
             foreach ($toClean as $rule) {
-                $this->getImporter()->addLog('old auth rule: "'.$rule['alias_name'].'" in module '.$rule['module_name'].' will be automaticaly deleted.');
-                //echo $this->ansiFormat('old auth rule: "'.$rule['alias_name'].'" in module '.$rule['module_name'], Console::FG_RED).PHP_EOL;
+                $this->addLog('old auth rule: "'.$rule['alias_name'].'" in module '.$rule['module_name'].' will be automaticaly deleted.');
             }
 
             Yii::$app->auth->executeCleanup($toClean);

@@ -29,7 +29,7 @@ class BlockImporter extends Importer
                     'class' => $ns,
                 ]);
                 $block->insert();
-                $this->getImporter()->addLog($ns.' new block has been added to database.');
+                $this->addLog($ns.' new block has been added to database.');
             } else {
                 $model->updateAttributes(['group_id' => $blockGroupId]);
                 $exists[] = $model->id;
@@ -37,7 +37,7 @@ class BlockImporter extends Importer
         }
         foreach ($allblocks as $block) {
             if (!in_array($block->id, $exists)) {
-                $this->getImporter()->addLog('block id '.$block->id.' removed from database.');
+                $this->addLog('block id '.$block->id.' removed from database.');
                 $block->delete();
             }
         }
