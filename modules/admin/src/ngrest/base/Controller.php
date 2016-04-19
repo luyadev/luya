@@ -5,6 +5,11 @@ namespace admin\ngrest\base;
 use Yii;
 use Exception;
 
+/**
+ * Base Controller for all NgRest Controllers.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class Controller extends \admin\base\Controller
 {
     public $modelClass = null;

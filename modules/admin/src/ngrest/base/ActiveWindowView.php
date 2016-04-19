@@ -5,6 +5,11 @@ namespace admin\ngrest\base;
 use yii\helpers\Json;
 use yii\helpers\Inflector;
 
+/**
+ * Active Window View
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class ActiveWindowView extends \yii\base\View
 {
     /**

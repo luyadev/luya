@@ -15,9 +15,6 @@
 	"support" : {
 		"issues" : "https://github.com/luyadev/luya/issues"
 	},
-	"require" : {
-		"cebe/markdown": "~1.0.0 | ~1.1.0"
-	},
 	"autoload" : {
 		"psr-4" : {
 			"cmsadmin\\" : "src/"

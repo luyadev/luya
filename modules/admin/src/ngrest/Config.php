@@ -6,6 +6,8 @@ use Exception;
 use luya\helpers\ArrayHelper;
 
 /**
+ * Create NgRest config from Array.
+ * 
  * Example config array to `setConfig($array)`:.
  * 
  * ```php

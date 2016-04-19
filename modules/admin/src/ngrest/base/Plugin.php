@@ -11,9 +11,9 @@ use admin\ngrest\base\Model;
 use yii\base\InvalidParamException;
 
 /**
- * Base class for all plugins
+ * Base class for all NgRest Plugins
  * 
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 abstract class Plugin extends Component
 {
@@ -64,8 +64,13 @@ abstract class Plugin extends Component
      */
     abstract public function renderUpdate($id, $ngModel);
     
+    /**
+     * {@inheritDoc}
+     * @see \yii\base\Object::init()
+     */
     public function init()
     {
+        // call parent initializer
         parent::init();
         
         if ($this->name === null || $this->alias === null || $this->i18n === null) {
@@ -73,147 +78,71 @@ abstract class Plugin extends Component
         }
         
         $this->addEvent(Model::EVENT_BEFORE_VALIDATE, 'onSave');
-        //$this->addEvent(Model::EVENT_BEFORE_VALIDATE, 'onSave'); // before we have used BEFORE_INSERT & BEFORE_UPDATE events instead on before validate
         $this->addEvent(Model::EVENT_AFTER_FIND, 'onFind');
         $this->addEvent(Model::EVENT_AFTER_NGREST_FIND, 'onListFind');
         $this->addEvent(Model::EVENT_AFTER_NGREST_UPDATE_FIND, 'onExpandFind');
         $this->addEvent(Model::EVENT_SERVICE_NGREST, 'onCollectServiceData');
     }
-    
-    public function addEvent($trigger, $handler)
-    {
-        $this->_events[$trigger] = $handler;   
-    }
 
-    private $_events = [];
-    
     /**
-     * An override without calling the parent::events will stop all other events used by default.
+     * Return the defined constant for a angular service instance in the current object.
+     * 
+     * @param string $name The name of the service defined as array key in `serviceData()`.
+     * @return string
      */
-    public function events()
-    {
-        return $this->_events;
-    }
-    
-    public function onBeforeSave($event)
-    {
-        return true;
-    }
-    
-    public function onSave($event)
-    {
-        if ($this->onBeforeSave($event)) {
-            if ($this->i18n) {
-                $event->sender->setAttribute($this->name, $this->i18nFieldEncode($event->sender->getAttribute($this->name)));
-            }    
-        }
-    }
-    
-    public function onBeforeListFind($event)
-    {
-        return true;
-    }
-    
-    public function onAfterListFind($event)
-    {
-        return true;
-    }
-    
-    public function onListFind($event)
-    {
-        if ($this->onBeforeListFind($event)) {
-            if ($this->i18n) {
-                $event->sender->setAttribute($this->name, $this->i18nDecodedGetActive($this->i18nFieldDecode($event->sender->getAttribute($this->name), $this->i18nEmptyValue)));
-            }
-            $this->onAfterListFind($event);
-        }
-    }
-    
-    public function onBeforeFind($event)
-    {
-        return true;
-    }
-    
-    public function onAfterFind($event)
-    {
-        return true;
-    }
-    
-    public function onFind($event)
-    {
-        if ($this->onBeforeFind($event)) {
-            if ($this->i18n) {
-                $event->sender->setAttribute($this->name, $this->i18nDecodedGetActive($this->i18nFieldDecode($event->sender->getAttribute($this->name), $this->i18nEmptyValue)));
-            }
-            
-            $this->onAfterFind($event);
-        }
-    }
-    
-    public function onBeforeExpandFind($event)
-    {
-        return true;
-    }
-    
-    public function onAfterExpandFind($event)
-    {
-        return true;
-    }
-    
-    public function onExpandFind($event)
-    {
-        if ($this->onBeforeExpandFind($event)) {
-            if ($this->i18n) {
-                $event->sender->setAttribute($this->name, $this->i18nFieldDecode($event->sender->getAttribute($this->name), $this->i18nEmptyValue));
-            }
-            
-            $this->onAfterExpandFind($event);
-        }
-    }
-    
-    public function onBeforeCollectServiceData($event)
-    {
-    	return true;
-    }
-    
-    public function onCollectServiceData($event)
-    {
-    	if ($this->onBeforeCollectServiceData($event)) {
-    		$data = $this->serviceData();
-    		if (!empty($data)) {
-    			$event->sender->addNgRestServiceData($this->name, $data);
-    		}
-    	}
-    }
-    
     public function getServiceName($name)
     {
         return 'service.'.$this->name.'.'.$name;
     }
     
+    /**
+     * Define the service data which will be called when creating the ngrest crud view. You may override
+     * this method in your plugin.
+     * 
+     * Example Response
+     * 
+     * ```php
+     * return [
+     *     'titles' => ['mr, 'mrs'];
+     * ];
+     * ```
+     * 
+     * The above service data can be used when creating the tags with `$this->getServiceName('titles')`.
+     * 
+     * @return boolean|array
+     */
     public function serviceData()
     {
         return false;
     }
     
     /**
-     * Encode from PHP to Json
+     * Json decode value but verifys if its empty, cause this can thrown an json decode exception.
      * 
+     * @param string $value The string to encode
+     * @return mixed
+     */
+    public function jsonDecode($value)
+    {
+        return (empty($value)) ? [] : Json::decode($value);
+    }
+    
+    // I18N HELPERS
+    
+    /**
+     * Encode from PHP to Json
+     *
      * @param string|array $field
      * @return string Returns a string
      */
     public function i18nFieldEncode($value)
     {
-        if (is_array($value)) {
-            return Json::encode($value);
-        }
-    
-        return $value;
+        return (is_array($value)) ? Json::encode($value) : $value;
     }
     
     /**
      * Decode from Json to PHP
-     * 
+     *
      * @param string|array $field The value to decode (or if alreay is an array already)
      * @param string $onEmptyValue Defines the value if the language could not be found and a value will be returns, this value will be used.
      * @return array returns an array with decoded field value
@@ -249,15 +178,10 @@ abstract class Plugin extends Component
     }
     
     /**
-     * Json decode value but verifys if its empty, cause this can thrown an json decode exception.
-     * @param string $value The string to encode
-     * @return mixed
+     * 
+     * @param array $fieldValues
+     * @return string|unknown
      */
-    public function jsonDecode($value)
-    {
-        return (empty($value)) ? [] : Json::decode($value);
-    }
-    
     public function i18nDecodedGetActive(array $fieldValues)
     {
         $langShortCode = Yii::$app->adminLanguage->getActiveShortCode();
@@ -265,11 +189,13 @@ abstract class Plugin extends Component
         return (array_key_exists($langShortCode, $fieldValues)) ? $fieldValues[$langShortCode] : '';
     }
     
+    // HTML TAG HELPERS
+    
     /**
-     * wrapper for html tag
-     * 
-     * @param unknown $name
-     * @param unknown $content
+     * Wrapper for Yii Html::tag method
+     *
+     * @param string $name
+     * @param string $content
      * @param array $options
      * @return string
      */
@@ -278,14 +204,221 @@ abstract class Plugin extends Component
         return Html::tag($name, $content, $options);
     }
     
+    /**
+     * Helper method to create a form tag based on current object.
+     * 
+     * @param string $name
+     * @param string $id
+     * @param string $ngModel
+     * @param array $options
+     * @return string
+     */
     public function createFormTag($name, $id, $ngModel, array $options = [])
     {
-        $opts = array_merge($options, ['fieldid' => $id, 'model' => $ngModel, 'label' => $this->alias, 'fieldname' => $this->name, 'i18n' => ($this->i18n) ? 1 : '']);
-        return $this->createTag($name, null, $opts);
+        return $this->createTag($name, null, array_merge($options, ['fieldid' => $id, 'model' => $ngModel, 'label' => $this->alias, 'fieldname' => $this->name, 'i18n' => ($this->i18n) ? 1 : '']));
     }
     
+    /**
+     * Helper method to create a span tag with the ng-model in angular context for the crud overview
+     * @param string $ngModel
+     * @return string
+     */
     public function createListTag($ngModel)
     {
         return $this->createTag('span', null, ['ng-bind' => $ngModel]);
+    }
+    
+    // EVENTS
+    
+    private $_events = [];
+    
+    /**
+     * Add an event to the list of events
+     * 
+     * @param string $trigger ActiveRecord event name
+     * @param string $handler Method-Name inside this object
+     */
+    public function addEvent($trigger, $handler)
+    {
+        $this->_events[$trigger] = $handler;
+    }
+    
+    /**
+     * An override without calling the parent::events will stop all other events used by default.
+     * 
+     * @return array
+     */
+    public function events()
+    {
+        return $this->_events;
+    }
+    
+    // ON SAVE
+    
+    /**
+     * This event will be triggered before `onSave` event.
+     * 
+     * @param \yii\db\AfterSaveEvent $event AfterSaveEvent represents the information available in yii\db\ActiveRecord::EVENT_AFTER_INSERT and yii\db\ActiveRecord::EVENT_AFTER_UPDATE.
+     * @return boolean
+     */
+    public function onBeforeSave($event)
+    {
+        return true;
+    }
+    
+     /**
+     * This event will be triggered `onSave` event.
+     * 
+     * @param \yii\db\AfterSaveEvent $event AfterSaveEvent represents the information available in yii\db\ActiveRecord::EVENT_AFTER_INSERT and yii\db\ActiveRecord::EVENT_AFTER_UPDATE.
+     * @return void
+     */
+    public function onSave($event)
+    {
+        if ($this->onBeforeSave($event)) {
+            if ($this->i18n) {
+                $event->sender->setAttribute($this->name, $this->i18nFieldEncode($event->sender->getAttribute($this->name)));
+            }    
+        }
+    }
+    
+    // ON LIST FIND
+    
+    /**
+     * This event will be triger before `onListFind`.
+     * 
+     * @param unknown $event
+     * @return boolean
+     */
+    public function onBeforeListFind($event)
+    {
+        return true;
+    }
+    
+    /**
+     * 
+     * @param unknown $event
+     */
+    public function onListFind($event)
+    {
+        if ($this->onBeforeListFind($event)) {
+            if ($this->i18n) {
+                $event->sender->setAttribute($this->name, $this->i18nDecodedGetActive($this->i18nFieldDecode($event->sender->getAttribute($this->name), $this->i18nEmptyValue)));
+            }
+            $this->onAfterListFind($event);
+        }
+    }
+    
+    /**
+     * This event will be triggered after `onListFind`.
+     * 
+     * @param unknown $event
+     * @return boolean
+     */
+    public function onAfterListFind($event)
+    {
+        return true;
+    }
+    
+    // ON FIND
+    
+    /**
+     * This event will be trigger before `onFind`.
+     * @param unknown $event
+     * @return boolean
+     */
+    public function onBeforeFind($event)
+    {
+        return true;
+    }
+    
+    /**
+     * 
+     * @param unknown $event
+     */
+    public function onFind($event)
+    {
+        if ($this->onBeforeFind($event)) {
+            if ($this->i18n) {
+                $event->sender->setAttribute($this->name, $this->i18nDecodedGetActive($this->i18nFieldDecode($event->sender->getAttribute($this->name), $this->i18nEmptyValue)));
+            }
+            
+            $this->onAfterFind($event);
+        }
+    }
+    
+    /**
+     * This event will be trigger after `onFind`.
+     * @param unknown $event
+     * @return boolean
+     */
+    public function onAfterFind($event)
+    {
+        return true;
+    }
+    
+    // ON EXPAND FIND
+    
+    /**
+     * This event will be triggered before `onExpandFind`.
+     * 
+     * @param unknown $event
+     * @return boolean
+     */
+    public function onBeforeExpandFind($event)
+    {
+        return true;
+    }
+    
+    /**
+     * 
+     * @param unknown $event
+     */
+    public function onExpandFind($event)
+    {
+        if ($this->onBeforeExpandFind($event)) {
+            if ($this->i18n) {
+                $event->sender->setAttribute($this->name, $this->i18nFieldDecode($event->sender->getAttribute($this->name), $this->i18nEmptyValue));
+            }
+            
+            $this->onAfterExpandFind($event);
+        }
+    }
+    
+    /**
+     * This event will be triggered after `onExpandFind`.
+     * 
+     * @param unknown $event
+     * @return boolean
+     */
+    public function onAfterExpandFind($event)
+    {
+        return true;
+    }
+    
+    // ON COLLECT SERVICE DATA
+    
+    /**
+     * This event will be triggered before `onCollectServiceData`.
+     * 
+     * @param unknown $event
+     * @return boolean
+     */
+    public function onBeforeCollectServiceData($event)
+    {
+    	return true;
+    }
+    
+    /**
+     * 
+     * @param unknown $event
+     */
+    public function onCollectServiceData($event)
+    {
+    	if ($this->onBeforeCollectServiceData($event)) {
+    		$data = $this->serviceData();
+    		if (!empty($data)) {
+    			$event->sender->addNgRestServiceData($this->name, $data);
+    		}
+    	}
     }
 }

@@ -7,6 +7,11 @@ use yii\base\InvalidConfigException;
 use yii\db\ActiveRecord;
 use admin\ngrest\NgRest;
 
+/**
+ * NgRest Event Behavior which is attached to all NgRest Models
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class NgRestEventBehavior extends Behavior
 {
     public $plugins = null;

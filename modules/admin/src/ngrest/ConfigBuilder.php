@@ -6,6 +6,11 @@ use Yii;
 use luya\Exception;
 use luya\helpers\ArrayHelper;
 
+/**
+ * Config Builder class to make the NgRest Configs
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
 {
     protected $pointer = null;

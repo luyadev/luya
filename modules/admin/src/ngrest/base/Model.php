@@ -10,6 +10,11 @@ use admin\ngrest\NgRestModeInterface;
 use admin\behaviors\LogBehavior;
 use admin\base\GenericSearchInterface;
 
+/**
+ * Base Model for all NgRest Models
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 abstract class Model extends \yii\db\ActiveRecord implements GenericSearchInterface, NgRestModeInterface
 {
     /**

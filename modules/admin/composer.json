@@ -16,7 +16,8 @@
 		"issues" : "https://github.com/luyadev/luya/issues"
 	},
 	"require" : {
-	    "imagine/imagine" : "^0.6.3"
+	    "imagine/imagine" : "^0.6.3",
+	    "cebe/markdown": "~1.0.0 | ~1.1.0"
 	},
 	"require-dev" : {
 		"phpunit/phpunit" : "~4.0"
