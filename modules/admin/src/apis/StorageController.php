@@ -135,7 +135,6 @@ class StorageController extends \admin\base\RestController
                 return false;
             }
         }
-    
         return true;
     }
     

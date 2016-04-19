@@ -51,10 +51,9 @@ class Storage
                     StorageImage::findOne($imageItem->id)->delete();
                 }
             }
-            
-            Yii::$app->storage->deleteHasCache(Yii::$app->storage->fileCacheKey);
-            Yii::$app->storage->deleteHasCache(Yii::$app->storage->imageCacheKey);
-            return $model->delete();
+            $response = $model->delete();
+            Yii::$app->storage->flushArrays();
+            return $response;
         }
     
         return true;
@@ -70,6 +69,7 @@ class Storage
     public static function removeImage($imageId, $cleanup = true)
     {
         if (!$cleanup) {
+            Yii::$app->storage->flushArrays();
             return StorageImage::findOne($imageId)->delete();
         }
         
@@ -82,8 +82,7 @@ class Storage
                 StorageImage::findOne($imageItem->id)->delete();
             }
             
-            Yii::$app->storage->deleteHasCache(Yii::$app->storage->imageCacheKey);
-            Yii::$app->storage->deleteHasCache(Yii::$app->storage->fileCacheKey);
+            Yii::$app->storage->flushArrays();
             return static::removeFile($fileId);
         }
         
@@ -120,6 +119,8 @@ class Storage
         foreach ($fileIds as $fileId) {
             static::moveFileToFolder($fileId, $folderId);
         }
+        
+        Yii::$app->storage->flushArrays();
     }
     
     public static function moveFileToFolder($fileId, $folderId)
@@ -127,6 +128,8 @@ class Storage
         $file = StorageFile::findOne($fileId);
         $file->folder_id = $folderId;
     
+        Yii::$app->storage->flushArrays();
+        
         return $file->update(false);
     }
     
