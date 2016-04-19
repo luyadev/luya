@@ -16,7 +16,7 @@ class SpacingBlock extends \cmsadmin\base\Block
         ['value' => 3, 'label' => 'Grosser Abstand'],
     ];
 
-    public $defaultValue = 2;
+    public $defaultValue = 1;
 
     public function name()
     {
@@ -47,7 +47,7 @@ class SpacingBlock extends \cmsadmin\base\Block
 
     public function twigFrontend()
     {
-        return '{% for i in 1..extras.spacing %}<p></br></p>{% endfor %}';
+        return '<p class="spacing-block spacing-block--{{extras.spacing}}">{% for i in 1..extras.spacing %}</br>{% endfor %}</p>';
     }
 
     public function twigAdmin()
