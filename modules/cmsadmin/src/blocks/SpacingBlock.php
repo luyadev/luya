@@ -47,7 +47,7 @@ class SpacingBlock extends \cmsadmin\base\Block
 
     public function twigFrontend()
     {
-        return '<p class="m-t-{{extras.spacing}}">{% for i in 1..extras.spacing %}</br>{% endfor %}</p>';
+        return '<p class="spacing-block spacing-block--{{extras.spacing}}">{% for i in 1..extras.spacing %}</br>{% endfor %}</p>';
     }
 
     public function twigAdmin()
