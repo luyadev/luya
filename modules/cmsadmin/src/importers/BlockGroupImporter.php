@@ -2,8 +2,8 @@
 
 namespace cmsadmin\importers;
 
-use luya\base\Importer;
 use cmsadmin\models\BlockGroup;
+use luya\console\Importer;
 
 class BlockGroupImporter extends Importer
 {
@@ -18,7 +18,7 @@ class BlockGroupImporter extends Importer
             $obj = new $file['ns']();
             
             if (!$obj) {
-                $this->addLog('blockgroup', 'Unable to create file object for: ' . $file['ns']);
+                $this->addLog('Unable to create file object for: ' . $file['ns']);
                 continue;
             }
             
@@ -26,7 +26,7 @@ class BlockGroupImporter extends Importer
             
             if ($model) {
                 $model->updateAttributes(['name' => $obj->label()]);
-                $this->addLog('blockgroup', 'update blockgroup name: ' . $obj->label());
+                $this->addLog('update blockgroup name: ' . $obj->label());
                 $handled[] = $model->id;
             } else {
                 $model = new BlockGroup();
@@ -34,14 +34,14 @@ class BlockGroupImporter extends Importer
                 $model->identifier = $obj->identifier();
                 $model->created_timestamp = time();
                 $model->save(false);
-                $this->addLog('blockgroup', 'added blockgroup with name: ' . $obj->label());
+                $this->addLog('added blockgroup with name: ' . $obj->label());
                 $handled[] = $model->id;
             }
         }
         
         foreach (BlockGroup::find()->where(['not in', 'id', $handled])->all() as $oldBlockGroup) {
             if ($oldBlockGroup->delete()) {
-                $this->addLog('blockgroup', 'Old blockgroup has been deleted: ' . $oldBlockGroup->name);
+                $this->addLog('Old blockgroup has been deleted: ' . $oldBlockGroup->name);
             }
         }
     }

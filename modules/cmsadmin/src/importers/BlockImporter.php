@@ -5,8 +5,9 @@ namespace cmsadmin\importers;
 use Yii;
 use cmsadmin\models\Block;
 use cmsadmin\models\BlockGroup;
+use luya\console\Importer;
 
-class BlockImporter extends \luya\base\Importer
+class BlockImporter extends Importer
 {
     public function run()
     {
@@ -28,7 +29,7 @@ class BlockImporter extends \luya\base\Importer
                     'class' => $ns,
                 ]);
                 $block->insert();
-                $this->getImporter()->addLog('block', $ns.' new block has been added to database.');
+                $this->getImporter()->addLog($ns.' new block has been added to database.');
             } else {
                 $model->updateAttributes(['group_id' => $blockGroupId]);
                 $exists[] = $model->id;
@@ -36,7 +37,7 @@ class BlockImporter extends \luya\base\Importer
         }
         foreach ($allblocks as $block) {
             if (!in_array($block->id, $exists)) {
-                $this->getImporter()->addLog('block', 'block id '.$block->id.' removed from database.');
+                $this->getImporter()->addLog('block id '.$block->id.' removed from database.');
                 $block->delete();
             }
         }

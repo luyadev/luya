@@ -4,8 +4,9 @@ namespace admin\importers;
 
 use admin\models\StorageEffect;
 use admin\models\StorageFilter;
+use luya\console\Importer;
 
-class FilterImporter extends \luya\base\Importer
+class FilterImporter extends Importer
 {
     private function refresh($identifier, $fields)
     {
@@ -14,7 +15,7 @@ class FilterImporter extends \luya\base\Importer
             $model->setAttributes($fields, false);
             $model->update(false);
         } else {
-            $this->getImporter()->addLog('filters', 'effect "'.$identifier.'" added');
+            $this->getImporter()->addLog('effect "'.$identifier.'" added');
             $insert = new StorageEffect();
             $insert->identifier = $identifier;
             $insert->setAttributes($fields, false);
@@ -62,7 +63,7 @@ class FilterImporter extends \luya\base\Importer
                 $list[] = $object->identifier();
                 $log = $object->getLog();
                 if (count($log) > 0) {
-                    $this->getImporter()->addLog('filters', implode(', ', $log));
+                    $this->getImporter()->addLog(implode(', ', $log));
                 }
             }
         }

@@ -6,8 +6,9 @@ use Yii;
 use luya\Exception;
 use luya\helpers\FileHelper;
 use cmsadmin\models\Layout;
+use luya\console\Importer;
 
-class CmslayoutImporter extends \luya\base\Importer
+class CmslayoutImporter extends Importer
 {
     private function verifyVariable($chars)
     {
@@ -71,7 +72,7 @@ class CmslayoutImporter extends \luya\base\Importer
                         'json_config' => json_encode($_placeholders),
                     ]);
                     $layoutItem->save();
-                    $this->addLog('cmslayouts', 'existing cmslayout '.$file.' updated');
+                    $this->addLog('existing cmslayout '.$file.' updated');
                 } else {
                     // add item into the database table
                     $data = new Layout();
@@ -82,7 +83,7 @@ class CmslayoutImporter extends \luya\base\Importer
                         'json_config' => json_encode($_placeholders),
                     ]);
                     $data->save();
-                    $this->addLog('cmslayouts', 'new cmslayout '.$file.' found and added to database.');
+                    $this->addLog('new cmslayout '.$file.' found and added to database.');
                 }
             }
 

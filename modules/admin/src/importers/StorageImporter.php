@@ -6,8 +6,9 @@ use admin\models\StorageFile;
 use admin\models\StorageImage;
 use luya\helpers\FileHelper;
 use Yii;
+use luya\console\Importer;
 
-class StorageImporter extends \luya\base\Importer
+class StorageImporter extends Importer
 {
     public $queueListPosition = self::QUEUE_POSITION_LAST;
 
@@ -182,6 +183,6 @@ class StorageImporter extends \luya\base\Importer
 
         $this->importer->verbosePrint('finished storage importer', __METHOD__);
         
-        $this->addLog("storage", $log);
+        $this->addLog($log);
     }
 }

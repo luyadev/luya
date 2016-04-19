@@ -3,9 +3,8 @@
 namespace luya\console;
 
 use Yii;
-use yii\base\InvalidRouteException;
 use yii\helpers\Console;
-use yii\base\InvalidCallException;
+use yii\base\ExitException;
 
 /**
  * Luya CLI Application.
@@ -81,7 +80,7 @@ class Application extends \yii\console\Application
 	            try {
 	            	return $module->runAction(implode("/", $partial), $params);
 	            } catch (\Exception $e) {
-	            	throw new InvalidCallException($e->getMessage());
+	            	throw new ExitException("[LUYA]" . $e->getMessage());
 	            }
 	        }
         }

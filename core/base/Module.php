@@ -6,6 +6,7 @@ use yii;
 use Exception;
 use luya\helpers\FileHelper;
 use yii\helpers\Inflector;
+use luya\console\interfaces\ImportControllerInterface;
 
 /**
  * All Luya modules must extend on this base module class.
@@ -194,11 +195,12 @@ abstract class Module extends \yii\base\Module
     }
 
     /**
-     * The import method will be called from exec/import command.
-     *
-     * @return void|string
+     * Define a last of importer class with an array or run code directily with the import() method.
+     * 
+     * @param ImportControllerInterface $importer
+     * @return boolean|array
      */
-    public function import(\luya\console\interfaces\ImportController $exec)
+    public function import(ImportControllerInterface $importer)
     {
         return false;
     }

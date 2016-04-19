@@ -8,7 +8,7 @@ use yii\helpers\StringHelper;
 use yii\helpers\Inflector;
 
 /**
- * Base class for all LUYA commands.
+ * Base class for all LUYA console controllers.
  *
  * @author nadar
  */

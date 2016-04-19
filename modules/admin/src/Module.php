@@ -5,6 +5,7 @@ namespace admin;
 use Yii;
 use luya\web\UrlRule;
 use admin\components\AdminLanguage;
+use luya\console\interfaces\ImportControllerInterface;
 
 class Module extends \admin\base\Module
 {
@@ -122,7 +123,7 @@ class Module extends \admin\base\Module
         ],
     ];
 
-    public function import(\luya\console\interfaces\ImportController $import)
+    public function import(ImportControllerInterface $import)
     {
         return [
             '\\admin\\importers\\AuthImporter',

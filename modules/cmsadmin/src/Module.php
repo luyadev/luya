@@ -3,6 +3,7 @@
 namespace cmsadmin;
 
 use Yii;
+use luya\console\interfaces\ImportControllerInterface;
 
 class Module extends \admin\base\Module
 {
@@ -66,7 +67,7 @@ class Module extends \admin\base\Module
      * @todo do not only import, also update changes in the template
      * @todo how do we send back values into the executblae controller for output purposes?
      */
-    public function import(\luya\console\interfaces\ImportController $import)
+    public function import(ImportControllerInterface $import)
     {
         return [
             '\\cmsadmin\\importers\\BlockGroupImporter',

@@ -4,8 +4,9 @@ namespace admin\importers;
 
 use Yii;
 use admin\models\Property;
+use luya\console\Importer;
 
-class PropertyImporter extends \luya\base\Importer
+class PropertyImporter extends Importer
 {
     public $queueListPosition = self::QUEUE_POSITION_FIRST;
 
@@ -21,13 +22,13 @@ class PropertyImporter extends \luya\base\Importer
                 if ($object) {
                     $ids[] = $this->install($object);
                     //$ids[] = $object->install();
-                    $this->getImporter()->addLog('properties', 'Property '.$object->varName().' is installed and up to date.');
+                    $this->addLog('Property '.$object->varName().' is installed and up to date.');
                 }
             }
         }
 
         foreach (Property::find()->where(['not in', 'id', $ids])->all() as $model) {
-            $this->getImporter()->addLog('properties', 'Removing property (id:'.$model->id.') '.$model->var_name);
+            $this->addLog('Removing property (id:'.$model->id.') '.$model->var_name);
             $model->delete();
         }
     }

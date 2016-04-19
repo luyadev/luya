@@ -3,8 +3,9 @@
 namespace cmsadmin\importers;
 
 use Yii;
+use luya\console\Importer;
 
-class PropertyConsistencyImporter extends \luya\base\Importer
+class PropertyConsistencyImporter extends Importer
 {
     public $queueListPosition = self::QUEUE_POSITION_LAST;
 
@@ -15,7 +16,7 @@ class PropertyConsistencyImporter extends \luya\base\Importer
             $exists = Yii::$app->db->createCommand('SELECT * FROM admin_property WHERE id=:id')->bindParam(':id', $row['admin_prop_id'])->queryOne();
             if (!$exists) {
                 Yii::$app->db->createCommand()->delete('cms_nav_property', ['id' => $row['id']])->execute();
-                $this->addLog('propertyConsistency', 'removed old cms property with value '.$row['value']);
+                $this->addLog('removed old cms property with value '.$row['value']);
             }
         }
     }

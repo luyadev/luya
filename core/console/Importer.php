@@ -1,6 +1,8 @@
 <?php
 
-namespace luya\base;
+namespace luya\console;
+
+use luya\console\interfaces\ImportControllerInterface;
 
 /**
  * Abstract importer class provides basic funcionality to access the
@@ -8,18 +10,18 @@ namespace luya\base;
  * method where the basic logic of the class will be executed.
  * 
  * ```php
- * class XyzImporter extends \luya\base\Importer
+ * class XyzImporter extends \luya\console\Importer
  * {
  *     public function run()
  *     {
- *         $this->getImporter()->addLog('xyz', 'XyzImporter have been started');
+ *         $this->addLog('XyzImporter have been started');
  *         
  *         // importer logic goes here
  *     }
  * }
  * ```
- * @property \luya\console\commands\ImportController $importer Importer Object
- * @author nadar
+ * @property \luya\console\interfaces\ImportControllerInterface $importer Importer Object
+ * @author Basil Suter <basil@nadar.io>
  */
 abstract class Importer extends \yii\base\Object
 {
@@ -44,9 +46,9 @@ abstract class Importer extends \yii\base\Object
     /**
      * Class constructor containing the importer object from where its called.
      * 
-     * @param \luya\console\commands\ImportController $importer Import Object `\luya\commands\ImportController`.
+     * @param \luya\console\interfaces\ImportControllerInterface $importer Import Object `\luya\commands\ImportController`.
      */
-    public function __construct(\luya\console\interfaces\ImportController $importer, $config = [])
+    public function __construct(ImportControllerInterface $importer, $config = [])
     {
         $this->_importer = $importer;
         parent::__construct($config);
@@ -55,7 +57,7 @@ abstract class Importer extends \yii\base\Object
     /**
      * Returns the import object to use the importers methods.
      * 
-     * @return object Import \luya\console\commands\ImportController
+     * @return object Import \luya\console\interfaces\ImportControllerInterface
      */
     public function getImporter()
     {
@@ -73,7 +75,7 @@ abstract class Importer extends \yii\base\Object
      * @param string $value
 	 * @todo trigger deprecated section call
      */
-    public function addLog($section, $value)
+    public function addLog($value)
     {
         $this->getImporter()->addLog(get_called_class(), $value);
     }

@@ -5,8 +5,24 @@ namespace luya\console\commands;
 use Yii;
 use Exception;
 use admin\models\Config;
+use luya\console\Command;
+use luya\console\interfaces\ImportControllerInterface;
 
-class ImportController extends \luya\console\Command implements \luya\console\interfaces\ImportController
+/**
+ * Import controller runs the module defined importer classes.
+ * 
+ * The importer classes are defined inthe modules `import()` methods which inherits this class. To run
+ * the importer class you have execute:
+ * 
+ * ```
+ * ./vendor/bin/luya import
+ * ```
+ * 
+ * Each of the importer classes must extend the luya\console\Importer class.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
+class ImportController extends Command implements ImportControllerInterface
 {
     private $_dirs = [];
 
@@ -59,19 +75,10 @@ class ImportController extends \luya\console\Command implements \luya\console\in
     }
 
     /**
-     * Get all files from a directory (direcotry must be in _scanFolders map). An array will be returnd with the keys
-     * - file => the Filename
-     * - ns => the absolut namepsace to this file.
+     * Get directory files for specific folder
      * 
-     * ```php
-     * $this->getDirectoryFiles('blocks');
-     * ```
-     * 
-     * If there are no files found getDirectoryFiles will return an empty array.
-     * 
-     * @param stirng $folderName
-     *
-     * @return array
+     * {@inheritDoc}
+     * @see \luya\console\interfaces\ImportControllerInterface::getDirectoryFiles()
      */
     public function getDirectoryFiles($folderName)
     {
@@ -89,20 +96,31 @@ class ImportController extends \luya\console\Command implements \luya\console\in
     }
 
     /**
-     * Add something to the output.
+     * Add Log entrie for a specific section
      * 
-     * ```php
-     * $this->addLog('block', 'new block <ID> have been found and added to database');
-     * ```
-     * 
-     * @param string $section
-     * @param string $value
+     * {@inheritDoc}
+     * @see \luya\console\interfaces\ImportControllerInterface::addLog()
      */
     public function addLog($section, $value)
     {
         $this->_log[$section][] = $value;
     }
+    
+    /**
+     * Return the log array data.
+     * 
+     * @return array
+     */
+    private function getLog()
+    {
+        return $this->_log;
+    }
 
+    /**
+     * Default action of import controller, runs the import process
+     * 
+     * @return number
+     */
     public function actionIndex()
     {
         try {
@@ -110,11 +128,11 @@ class ImportController extends \luya\console\Command implements \luya\console\in
     		$this->verbosePrint('Run import index', __METHOD__);
             foreach (Yii::$app->getModules() as $id => $module) {
                 if ($module instanceof \luya\base\Module) {
-                	$this->verbosePrint('collect module import data:' . $id, __METHOD__);
+                	$this->verbosePrint('collect module importers from module: ' . $id, __METHOD__);
                     $response = $module->import($this);
                     if (is_array($response)) { // importer returns an array with class names
                         foreach ($response as $class) {
-                        	$this->verbosePrint("add '$class' to queue list", __METHOD__);
+                        	$this->verbosePrint("add object '$class' to queue list", __METHOD__);
                             $obj = new $class($this);
                             $prio = $obj->queueListPosition;
                             while (true) {
@@ -134,7 +152,7 @@ class ImportController extends \luya\console\Command implements \luya\console\in
             foreach ($queue as $pos => $object) {
             	$this->verbosePrint("run object '" .$object->className() . " on pos $pos.", __METHOD__);
                 $objectResponse = $object->run();
-                $this->verbosePrint("run response: " . var_export($objectResponse, true), __METHOD__);
+                $this->verbosePrint("run object response: " . var_export($objectResponse, true), __METHOD__);
             }
     
             if (Yii::$app->hasModule('admin')) {
@@ -142,8 +160,20 @@ class ImportController extends \luya\console\Command implements \luya\console\in
                 Yii::$app->db->createCommand()->update('admin_user', ['force_reload' => 1])->execute();
             }
     
-            $this->verbosePrint('importer finish, log outpu: ' . var_export($this->_log, true), __METHOD__);
-            return $this->outputSuccess(print_r($this->_log, true));
+            $this->verbosePrint('importer finished, get log output: ' . var_export($this->getLog(), true), __METHOD__);
+            
+            foreach ($this->getLog() as $section => $value) {
+                $this->outputInfo(PHP_EOL . $section . ":");
+                foreach ($value as $k => $v) {
+                    if (is_array($v)) {
+                        $this->output(print_r($v, true));
+                    } else {
+                        $this->output(" - " . $v);
+                    }
+                }
+            }
+            
+            return $this->outputSuccess("Importer run successfull.");
         } catch (Exception $err) {
             return $this->outputError(sprintf("Exception while importing: '%s' in file '%s' on line '%s'.", $err->getMessage(), $err->getFile(), $err->getLine()));
         }
