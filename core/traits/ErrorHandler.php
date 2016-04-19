@@ -33,7 +33,7 @@ trait ErrorHandler
         }
         
         $curl = new Curl();
-        $response = $curl->post(rtrim($this->api, '/').'/create', [
+        $curl->post(rtrim($this->api, '/').'/create', [
             'error_json' => Json::encode($this->getExceptionArray($exception)),
         ]);
         
