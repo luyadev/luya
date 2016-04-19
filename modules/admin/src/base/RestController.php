@@ -4,7 +4,7 @@ namespace admin\base;
 
 use Yii;
 
-/*
+/**
  * provides the basic functionality to access and serialize this controller via rest
  * api. Does not define the method names!
  *

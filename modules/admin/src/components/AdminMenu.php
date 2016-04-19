@@ -4,6 +4,11 @@ namespace admin\components;
 
 use Yii;
 
+/**
+ * Admin Menu Data
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class AdminMenu extends \yii\base\Component
 {
     private $_menu = null;

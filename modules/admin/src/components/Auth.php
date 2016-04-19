@@ -8,6 +8,11 @@ use yii\db\Query;
 use yii\helpers\ArrayHelper;
 use admin\models\UserOnline;
 
+/**
+ * Auth components gives informations about permissions, who can do what.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class Auth extends \yii\base\Component
 {
     const CAN_CREATE = 1;

@@ -5,7 +5,7 @@ namespace admin\components;
 use admin\models\UserOnline;
 
 /**
- * use getId() to get the current admin user.
+ * Admin-User component contains informations about the identitiy of the Admin-User
  * 
  * @author nadar
  */

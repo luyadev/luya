@@ -2,6 +2,11 @@
 
 namespace admin\base;
 
+/**
+ * Defines a structure for the Admin search, called generic search.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 interface GenericSearchInterface
 {
     public function genericSearchFields();

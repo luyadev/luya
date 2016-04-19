@@ -5,10 +5,13 @@ namespace admin\components;
 use yii\base\Component;
 use admin\models\Lang;
 
+/**
+ * Admin Language component to make singelton similiar pattern to retrievie langauges
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class AdminLanguage extends Component
 {
-
-
     /**
      * Containg the default language assoc array.
      *
