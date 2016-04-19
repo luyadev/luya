@@ -224,7 +224,7 @@ abstract class Module extends \yii\base\Module
      * @since 1.0.0-beta5
      */
     public function getControllerFiles()
-    {   
+    {
         try { // https://github.com/yiisoft/yii2/blob/master/framework/base/Module.php#L233
             $files = [];
             foreach (FileHelper::findFiles($this->controllerPath) as $file) {
