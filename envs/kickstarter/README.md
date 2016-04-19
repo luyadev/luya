@@ -1,25 +1,25 @@
-Create new Luya Project
-=======================
+Create a LUYA Application
+=========================
 
-We have moved all __documentations__ and __installation instructions__ to our new project website [luya.io](https://luya.io). We are working hard to add new content every day. Below a list of helpful links you maybe look for:
+LUYA: The [Yii 2](https://github.com/yiisoft/yii2) wrapper which provides out of the box functions like an **administration interface**, a beautiful looking **content management system**, **payment** modules, **agency workflows** and other tools to develop your website pretty fast!
 
 ### Installation
 
 We have a made an absolut easy to understand *STEP-BY-STEP* Guide to install Luya:
 
-+ ![Deutsch](https://raw.githubusercontent.com/savetheinternet/Tinyboard/master/static/flags/de.png) [Installationsanleitung](https://luya.io/de/handbuch)
-+ ![English](https://raw.githubusercontent.com/savetheinternet/Tinyboard/master/static/flags/us.png) [Setup Guide](https://luya.io/en/guide/install)
++ [How to install LUYA](https://luya.io)
++ [LUYA in Videos](https://luya.io/en/video-tutorials)
 
 ### Questions and Problems
 
 If you have any questions or problems, don't hesitate to create a [new issue](https://github.com/zephir/luya/issues/new) on the project repository.
 
-+ [Questions & Issues](https://github.com/zephir/luya/issues)
++ [Issues on GitHub](https://github.com/luyadev/luya/issues)
++ [Ask us in Gitter](https://gitter.im/luyadev/luya)
 
 ### Contribution
 
 We are always looking for people who share their thoughts, code and problems with us. Below the links to the contribution guides:
 
-+ ![Deutsch](https://raw.githubusercontent.com/savetheinternet/Tinyboard/master/static/flags/de.png) [Anleitung](https://luya.io/de/handbuch/luya-collaboration)
-+ ![English](https://raw.githubusercontent.com/savetheinternet/Tinyboard/master/static/flags/us.png) [Guide](https://luya.io/en/guide/luya-collaboration)
+[Help us building LUYA](https://luya.io/en/guide/luya-collaboration)
 
