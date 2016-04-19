@@ -37,7 +37,7 @@ class SelectModel extends \admin\ngrest\plugins\Select
             $class = $class::className();
         }
         
-        foreach ($class::find()->all() as $item) {
+        foreach ($class::find()->orderBy([$this->labelField => SORT_ASC])->all() as $item) {
             $label = $item->{$this->labelField};
         
             if (is_array($label)) {
