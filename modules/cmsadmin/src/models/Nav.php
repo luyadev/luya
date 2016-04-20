@@ -67,7 +67,7 @@ class Nav extends \yii\db\ActiveRecord
      */
     public function getActiveLanguageItem()
     {
-        return $this->hasOne(NavItem::className(), ['nav_id' => 'id'])->andWhere(['lang_id' => Lang::getLangIdByShortCode(Yii::$app->composition['langShortCode'])]);
+        return $this->hasOne(NavItem::className(), ['nav_id' => 'id'])->andWhere(['lang_id' => Yii::$app->adminLanguage->activeId]);
     }
 
     /**

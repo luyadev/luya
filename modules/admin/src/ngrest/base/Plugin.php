@@ -8,7 +8,7 @@ use yii\helpers\Json;
 use yii\helpers\Html;
 use luya\Exception;
 use admin\ngrest\base\Model;
-use yii\base\InvalidParamException;
+use admin\helpers\I18n;
 
 /**
  * Base class for all NgRest Plugins
@@ -137,7 +137,7 @@ abstract class Plugin extends Component
      */
     public function i18nFieldEncode($value)
     {
-        return (is_array($value)) ? Json::encode($value) : $value;
+        return I18n::encode($value);
     }
     
     /**
@@ -149,32 +149,7 @@ abstract class Plugin extends Component
      */
     public function i18nFieldDecode($value, $onEmptyValue = '')
     {
-        $langShortCode = Yii::$app->adminLanguage->getActiveShortCode();
-        $languages = Yii::$app->adminLanguage->getLanguages();
-    
-    
-        // if its not already unserialized, decode it
-        if (!is_array($value) && !empty($value)) {
-            try {
-                $value = Json::decode($value);
-            } catch (InvalidParamException $e) {
-                $value = [];
-            }
-        }
-    
-        // fall back for not transformed values
-        if (!is_array($value)) {
-            $value = (array) $value;
-        }
-    
-        // add all not existing languages to the array (for example a language has been added after the database item has been created)
-        foreach ($languages as $lang) {
-            if (!array_key_exists($lang['short_code'], $value)) {
-                $value[$lang['short_code']] = $onEmptyValue;
-            }
-        }
-    
-        return $value;
+        return I18n::decode($value, $onEmptyValue);
     }
     
     /**
@@ -184,9 +159,7 @@ abstract class Plugin extends Component
      */
     public function i18nDecodedGetActive(array $fieldValues)
     {
-        $langShortCode = Yii::$app->adminLanguage->getActiveShortCode();
-    
-        return (array_key_exists($langShortCode, $fieldValues)) ? $fieldValues[$langShortCode] : '';
+        return I18n::findCurrent(findCurrent);
     }
     
     // HTML TAG HELPERS

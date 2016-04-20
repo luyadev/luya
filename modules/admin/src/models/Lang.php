@@ -59,13 +59,9 @@ class Lang extends \admin\ngrest\base\Model
         $this->is_default = 0;
     }
 
-    public static function getLangIdByShortCode($shortCode)
-    {
-        $item = self::find()->select(['id'])->where(['short_code' => $shortCode])->asArray()->one();
-
-        return ($item) ? $item['id'] : false;
-    }
-
+    /**
+     * @return array
+     */
     public static function getQuery()
     {
         if (self::$_langInstanceQuery === null) {
@@ -75,6 +71,10 @@ class Lang extends \admin\ngrest\base\Model
         return self::$_langInstanceQuery;
     }
 
+    /**
+     * 
+     * @return array
+     */
     public static function getDefault()
     {
         if (self::$_langInstance === null) {
@@ -84,6 +84,11 @@ class Lang extends \admin\ngrest\base\Model
         return self::$_langInstance;
     }
 
+    /**
+     * Get the active langauge array 
+     * 
+     * @return array
+     */
     public static function findActive()
     {
         if (self::$_langInstanceFindActive === null) {

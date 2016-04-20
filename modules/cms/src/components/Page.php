@@ -2,6 +2,23 @@
 
 namespace cms\components;
 
+/**
+ * Get page informations (actually its about properties) will be removed on rc1
+ * 
+ * Get a property value
+ * 
+ * ```php
+ * echo Yii::$app->page->getProperty('foobar');
+ * ```
+ * 
+ * If the property has enabled `i18n = true` in the object you have to collect the active language with
+ * help of the I18n helper:
+ * 
+ * ```
+ * \admin\helpers\I18n::findCurrent(Yii::$app->page->getProperty('foobar'));
+ * ```
+ * @author Basil Suter <basil@nadar.io>
+ */
 class Page extends \yii\base\Component
 {
     public $model = null;

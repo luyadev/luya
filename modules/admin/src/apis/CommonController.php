@@ -31,6 +31,7 @@ class CommonController extends \admin\base\RestController
                 'label' => $object->label(),
                 'type' => $object->type(),
                 'default_value' => $object->defaultValue(),
+                'i18n' => $object->i18n,
             ];
         }
         

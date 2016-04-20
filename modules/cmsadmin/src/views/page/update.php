@@ -254,7 +254,17 @@
                     <h5><?php echo \cmsadmin\Module::t('view_update_properties_title'); ?></h5>
                     <div ng-show="!hasValues" class="alert alert--info"><?php echo \cmsadmin\Module::t('view_update_no_properties_exists'); ?></div>
                         <div class="row" ng-repeat="prop in propertiesData">
-                            <zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{prop.label}}" model="propValues[prop.id]"></zaa-injector>
+                            <div ng-if="prop.i18n">
+                             <ul>
+                              <li ng-repeat="lang in languagesData">
+                               <zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{lang.name}}: {{prop.label}}" model="propValues[prop.id][lang.short_code]"></zaa-injector>
+                              </li>
+                             </ul>
+                              
+                            </div>
+                            <div ng-if="!prop.i18n">
+                                <zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{prop.label}}" model="propValues[prop.id]"></zaa-injector>
+                             </div>
                         </div>
 
                         <br />

@@ -2,6 +2,8 @@
 
 namespace admin\base;
 
+use admin\helpers\I18n;
+
 /**
  * Abstract Page Property Class.
  * 
@@ -16,6 +18,8 @@ abstract class Property extends \yii\base\Component
     public $moduleName = null;
 
     public $value = null;
+    
+    public $i18n = false;
 
     abstract public function varName();
 
@@ -35,6 +39,9 @@ abstract class Property extends \yii\base\Component
     
     public function getValue()
     {
+        if ($this->i18n) {
+            $this->value = I18n::decode($this->value);
+        }
         return $this->value;
     }
 }

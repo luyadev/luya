@@ -6,7 +6,7 @@ use yii\base\Component;
 use admin\models\Lang;
 
 /**
- * Admin Language component to make singelton similiar pattern to retrievie langauges
+ * Admin Language component to make singelton similiar pattern to collect langauges and active language.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
@@ -26,9 +26,11 @@ class AdminLanguage extends Component
      */
     private $_languages = null;
     
-
-    private $_activeLanguageShortCode = null;
-    
+    /**
+     * Get the array of the current active language (its not an AR object!)
+     * 
+     * @return array
+     */
     public function getActiveLanguage()
     {
         if ($this->_activeLanguage === null) {
@@ -38,16 +40,31 @@ class AdminLanguage extends Component
         return $this->_activeLanguage;
     }
     
+    /**
+     * Get the current active langauge Short-Code
+     * 
+     * @return string
+     */
     public function getActiveShortCode()
     {
-        if ($this->_activeLanguageShortCode === null) {
-            $lang = $this->getActiveLanguage();
-            $this->_activeLanguageShortCode = $lang['short_code'];
-        }
-        
-        return $this->_activeLanguageShortCode;
+        return $this->getActiveLanguage()['short_code'];
     }
     
+    /**
+     * Get the current active language ID
+     * 
+     * @return int
+     */
+    public function getActiveId()
+    {
+        return (int) $this->getActiveLanguage()['id'];
+    }
+    
+    /**
+     * Get an array of all languages (its not an AR object!)
+     * 
+     * @return array
+     */
     public function getLanguages()
     {
         if ($this->_languages === null) {
@@ -56,6 +73,4 @@ class AdminLanguage extends Component
     
         return $this->_languages;
     }
-    
-    
 }
