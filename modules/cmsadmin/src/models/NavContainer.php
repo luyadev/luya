@@ -4,6 +4,11 @@ namespace cmsadmin\models;
 
 use admin\models\Lang;
 
+/**
+ * Represents the Navigation-Containers.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class NavContainer extends \admin\ngrest\base\Model
 {
     use \admin\traits\SoftDeleteTrait;

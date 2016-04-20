@@ -11,17 +11,33 @@ use cmsadmin\models\NavItem;
 use cmsadmin\models\NavItemPageBlockItem;
 
 /**
- * @todo what happens when resort items if an items is deleted?
- *
- * @author nadar
+ * CMS Nav Model ActiveRecord
+ * 
+ * This is the main class for the cms navigation/menu structure. The Nav item contains information about the state of the page like visibility,
+ * sort-index, online or offline. It also contains information about its a child of another nav element, but it does **NOT** contain informations
+ * about the content, title or alias (link) itself, cause those informations are stored in the the [[\cmsadmin\models\NavItem]] to the corresponding
+ * language. So basically the Nav contains the structure and state of the menu/navigation put not content, or titles cause those are related to a language.
+ * 
+ * 
+ * @property \cmsadmin\models\NavItem $activeLanguageItem Returns the NavItem for the current active user language with with the context object nav id.
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
 class Nav extends \yii\db\ActiveRecord
 {
+    /**
+     * {@inheritDoc}
+     * @see \yii\db\BaseActiveRecord::tableName()
+     */
     public static function tableName()
     {
         return 'cms_nav';
     }
 
+    /**
+     * {@inheritDoc}
+     * @see \yii\db\BaseActiveRecord::init()
+     */
     public function init()
     {
         parent::init();
@@ -31,6 +47,10 @@ class Nav extends \yii\db\ActiveRecord
         $this->on(self::EVENT_AFTER_DELETE, [$this, 'reindex']);
     }
 
+    /**
+     * {@inheritDoc}
+     * @see \yii\base\Model::rules()
+     */
     public function rules()
     {
         return [
@@ -39,15 +59,22 @@ class Nav extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function findContent($navId)
+    /**
+     * Get the cms_nav_item for this nav object with the corresponding current active language id (based
+     * on the composition component).
+     * 
+     * @return \cmsadmin\models\NavItem The corresponding nav item object for the active language.
+     */
+    public function getActiveLanguageItem()
     {
-        $lang = Yii::$app->composition->getKey('langShortCode');
-        $langId = Lang::getLangIdByShortCode($lang);
-        $item = NavItem::find()->where(['lang_id' => $langId, 'nav_id' => $navId])->one();
-
-        return ($item) ? $item->getContent() : false;
+        return $this->hasOne(NavItem::className(), ['nav_id' => 'id'])->andWhere(['lang_id' => Lang::getLangIdByShortCode(Yii::$app->composition['langShortCode'])]);
     }
 
+    /**
+     * Return all nav items related to this object.
+     * 
+     * @return \yii\db\ActiveQuery
+     */
     public function getNavItems()
     {
         return $this->hasMany(NavItem::className(), ['nav_id' => 'id']);
@@ -55,6 +82,9 @@ class Nav extends \yii\db\ActiveRecord
 
     private $_properties = null;
     
+    /**
+     * 
+     */
     public function getProperties()
     {
         if ($this->_properties === null) {
@@ -63,6 +93,12 @@ class Nav extends \yii\db\ActiveRecord
         
         return $this->_properties;
     }
+    
+    /**
+     * 
+     * @param unknown $varName
+     * @return boolean
+     */
     public function getProperty($varName)
     {
         foreach ($this->getProperties() as $prop) {
@@ -115,6 +151,8 @@ class Nav extends \yii\db\ActiveRecord
         }
     }
 
+    // static helpers to move and copie
+    
     public static function moveToContainer($moveNavId, $toCatId)
     {
         $move = self::findOne($moveNavId);
@@ -227,6 +265,9 @@ class Nav extends \yii\db\ActiveRecord
         }
     }
 
+    // create methods
+    // @todo make static, moved to helper class?
+    
     public function createDraft($title, $langId)
     {
         $_errors = [];

@@ -9,12 +9,13 @@ use yii\helpers\Inflector;
 use admin\base\GenericSearchInterface;
 
 /**
- * NavItem Model represents a Item bound to Nav and Language, each Nav(Menu) can contain a nav_item for each language.
- * 
- * 
- * Each creation of a navigation block requires the nav_item_type_id which need to be created first with NavItemType Model.
+ * NavItem Model represents a Item bound to Nav and Language, each Nav(Menu) can contain a nav_item for each language.Each 
+ * cms_nav_item is related to a type of item (module, page or redirect) which is stored in nav_item_type (number) and another field
+ * nav_item_type_id (pk of the table).
  *
- * @author nadar
+ * @property \cmsadmin\models\NavItemPage|\cmsadmin\models\NavItemModule\cmsadmin\models\NavItemRedirect $type The type object based on the current type id
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
 class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
 {

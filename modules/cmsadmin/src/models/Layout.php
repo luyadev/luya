@@ -4,6 +4,11 @@ namespace cmsadmin\models;
 
 use yii\helpers\Json;
 
+/**
+ * Layout Model for CMS-Layouts.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class Layout extends \admin\ngrest\base\Model
 {
     public function ngRestApiEndpoint()

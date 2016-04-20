@@ -4,6 +4,11 @@ namespace cmsadmin\models;
 
 use Yii;
 
+/**
+ * Block ActiveRecord contains the Block<->Group relation.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class Block extends \admin\ngrest\base\Model
 {
     private $cachedDeletedId = 0;

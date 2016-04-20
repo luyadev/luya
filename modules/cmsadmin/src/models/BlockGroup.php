@@ -2,6 +2,11 @@
 
 namespace cmsadmin\models;
 
+/**
+ * Represents the Block-Group Model where blocks can be stored inside.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class BlockGroup extends \admin\ngrest\base\Model
 {
     use \admin\traits\SoftDeleteTrait;

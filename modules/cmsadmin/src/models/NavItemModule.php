@@ -8,6 +8,11 @@ use luya\helpers\ModuleHelper;
 use cmsadmin\base\NavItemTypeInterface;
 use cmsadmin\base\NavItemType;
 
+/**
+ * Represents the type MODULE for a NavItem. 
+ *
+ * @author Basil Suter <basil@nadar.io>
+ */
 class NavItemModule extends NavItemType implements NavItemTypeInterface
 {
     /**

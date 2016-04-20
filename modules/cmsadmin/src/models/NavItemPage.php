@@ -10,6 +10,11 @@ use cmsadmin\models\NavItemPageBlockItem;
 use cmsadmin\base\NavItemType;
 use cmsadmin\base\NavItemTypeInterface;
 
+/**
+ * Represents the type PAGE for a NavItem.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class NavItemPage extends NavItemType implements NavItemTypeInterface
 {
     private $_twig = null;
@@ -96,7 +101,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
             $layoutFile = Yii::getAlias('@app/views/cmslayouts/' . $this->layout->view_file);
             $placholders = [];
             foreach ($this->layout->getJsonConfig('placeholders') as $item) {
-                $placholders[$item['var']] = $this->renderPlaceholder($this->id, $item['var'], 0);
+                $placholders[$item['var']] = $this->renderPlaceholder($item['var']);
             }
             return $this->getView()->renderPhpFile($layoutFile, ['placeholders' => $placholders]);
         }
@@ -104,7 +109,32 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
         throw new Exception("Could not find the requested cms layout id '".$this->layout_id."' for nav item page id '". $this->id . "'. Make sure your page does not have an old inactive/deleted cms layout selected.");
     }
 
-    private function renderPlaceholder($navItemPageId, $placeholderVar, $prevId)
+    /**
+     * Render as the cmslayout placeholder for this model page.
+     * 
+     * If we assume you have a placeholder variable `foobar` in the cmslayout for this page:
+     * 
+     * ```php
+     * <div>
+     *     <?= $placeholders['foobar']; ?>
+     * </div>
+     * ```
+     * 
+     * You can access the content of foobar with
+     * 
+     * ```php
+     * return Nav::findOne(ID_OF_THE_PAGE)->activeLanguageItem->type->renderPlaceholder('content'));
+     * ```
+     * 
+     * @param string $placeholderName The Cmslayout placeholder identifier
+     * @return string
+     */
+    public function renderPlaceholder($placeholderName)
+    {
+        return $this->renderPlaceholderRecursive($this->id, $placeholderName, 0);
+    }
+    
+    private function renderPlaceholderRecursive($navItemPageId, $placeholderVar, $prevId)
     {
         $string = '';
 
@@ -137,7 +167,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
                     // render sub placeholders and set into object
                     $insertedHolders = [];
                     foreach ($blockObject->getPlaceholders() as $item) {
-                        $insertedHolders[$item['var']] = $this->renderPlaceholder($navItemPageId, $item['var'], $placeholder['id']);
+                        $insertedHolders[$item['var']] = $this->renderPlaceholderRecursive($navItemPageId, $item['var'], $placeholder['id']);
                     }
                     $blockObject->setPlaceholderValues($insertedHolders);
                     // output buffer the rendered frontend string based on the current twig env

@@ -5,13 +5,14 @@ namespace cmsadmin\models;
 use Yii;
 
 /**
- * sort_index numbers always starts from 0 and not from 1, like a default array behaviour. If a
+ * Represents an ITEM for the type NavItemPage.
+ * 
+ * Sort_index numbers always starts from 0 and not from 1, like a default array behaviour. If a
  * negative sort_index is provided its always the last sort_index item (reason: we dont know the sort key of
  * the "at the end" dropparea).
  *
  * @todo remove scenarios?
- *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class NavItemPageBlockItem extends \yii\db\ActiveRecord
 {

@@ -7,6 +7,11 @@ use Exception;
 use cmsadmin\base\NavItemType;
 use cmsadmin\base\NavItemTypeInterface;
 
+/**
+ * Represents the type REDIRECT for a NavItem.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class NavItemRedirect extends NavItemType implements NavItemTypeInterface
 {
     const TYPE_INTERNAL_PAGE = 1;

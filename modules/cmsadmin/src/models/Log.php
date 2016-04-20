@@ -4,6 +4,11 @@ namespace cmsadmin\models;
 
 use Yii;
 
+/**
+ * Eventer-Logger for CMS Activitys
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class Log extends \yii\db\ActiveRecord
 {
     public function init()
