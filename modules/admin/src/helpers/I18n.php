@@ -4,6 +4,7 @@ namespace admin\helpers;
 
 use Yii;
 use yii\helpers\Json;
+use yii\base\InvalidParamException;
 
 /**
  * I18n Encode/Decode helper method
