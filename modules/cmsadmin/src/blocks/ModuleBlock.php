@@ -112,7 +112,7 @@ class ModuleBlock extends \cmsadmin\base\Block
             
             return $response;
         } catch (\Exception $err) {
-            throw new Exception('Module Block Exception: ' . $err->getMessage());
+            throw new Exception('Exception has been throwed in Module Block', 0, $err);
         }
     }
 }

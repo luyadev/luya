@@ -73,14 +73,14 @@ class Application extends \yii\console\Application
             $partial = explode("/", $route);
             // if there is a first key in the splitted array
             if (isset($partial[0]) && (count($partial) > 1) && ($module = Yii::$app->getModule($partial[0]))) {
-                // change the controller namespace of this module to make usage of `commands`.
-                $module->controllerNamespace = $module->namespace . '\commands';
-                unset($partial[0]);
-                // action response
                 try {
+                    // change the controller namespace of this module to make usage of `commands`.
+                    $module->controllerNamespace = $module->namespace . '\commands';
+                    unset($partial[0]);
+                    // action response
                     return $module->runAction(implode("/", $partial), $params);
                 } catch (\Exception $e) {
-                    throw new ExitException("[LUYA]" . $e->getMessage());
+                    throw new ExitException("Module runAction exception for route '{$route}' in Module '{$module->id}'", 0, $e);
                 }
             }
         }
