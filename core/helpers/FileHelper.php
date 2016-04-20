@@ -13,7 +13,7 @@ use Exception;
 class FileHelper extends \yii\helpers\BaseFileHelper
 {
     /**
-     * Generate a human readable size informations from provided Byte size
+     * Generate a human readable size informations from provided Byte/s size
      * 
      * @param integer $size The size to convert in Byte
      * @return string The readable size definition

@@ -3,6 +3,7 @@
 namespace crawler\commands;
 
 use crawler\classes\CrawlContainer;
+use luya\helpers\FileHelper;
 
 /**
  * Crawler command to build the index:
@@ -49,6 +50,9 @@ class CrawlController extends \luya\console\Command
                     }
                 }
             }
+            
+            $this->outputInfo(PHP_EOL . 'memory usage: ' . FileHelper::humanReadableFilesize(memory_get_usage()));
+            $this->outputInfo('memory peak usage: ' . FileHelper::humanReadableFilesize(memory_get_peak_usage()));
             
             return $this->outputSuccess(PHP_EOL . 'Crawler finished in ' . $timeElapsed . ' min.');
         } catch (\Exception $e) {

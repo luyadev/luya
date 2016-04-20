@@ -33,6 +33,18 @@ class CrawlContainer extends \yii\base\Object
         'filtered' => [],
     ];
     
+    private $_proccessed = [];
+    
+    protected function addProcessed($link)
+    {
+        $this->_proccessed[] = $link;
+    }
+    
+    protected function isProcessed($link)
+    {
+        return in_array($link, $this->_proccessed);
+    }
+    
     public function addLog($cat, $message)
     {
         $this->log[$cat][] = $message;
@@ -48,8 +60,8 @@ class CrawlContainer extends \yii\base\Object
     protected function getCrawler($url)
     {
         if (!array_key_exists($url, $this->_crawlers)) {
+            usleep(200000);
             $crawler = new CrawlPage(['baseUrl' => $this->baseUrl, 'pageUrl' => $url, 'verbose' => $this->verbose]);
-            
             $this->_crawlers[$url] = $crawler;
         }
 
@@ -78,11 +90,16 @@ class CrawlContainer extends \yii\base\Object
 
     public function find()
     {
-        foreach (Builderindex::find()->where(['crawled' => 0])->all() as $item) {
-            $this->urlStatus($item->url);
+        foreach (Builderindex::find()->where(['crawled' => 0])->asArray()->all() as $item) {
+            if (!$this->isProcessed($item['url'])) {
+                if ($this->urlStatus($item['url'])) {
+                    $this->addProcessed($item['url']);   
+                }
+            }
+            
         }
 
-        if (count(Builderindex::findAll(['crawled' => 0])) > 0) {
+        if (Builderindex::find()->where(['crawled' => 0])->count() > 0) {
             $this->find();
         } else {
             $this->finish();
@@ -185,6 +202,13 @@ class CrawlContainer extends \yii\base\Object
     public function urlStatus($url)
     {
         $this->verbosePrint('Inspect URL Status', $url);
+        
+        usleep(1000);
+        gc_collect_cycles();
+        
+        $this->verbosePrint('memory usage', memory_get_usage());
+        $this->verbosePrint('memory usage peak', memory_get_peak_usage());
+        
         $model = Builderindex::findUrl($this->encodeUrl($url));
 
         if (!$model) {
@@ -204,6 +228,9 @@ class CrawlContainer extends \yii\base\Object
     
                 // add the pages links to the index
                 foreach ($this->getCrawler($url)->getLinks() as $link) {
+                    if ($this->isProcessed($link[1])) {
+                        continue;
+                    }
                     if ($this->matchBaseUrl($link[1])) {
                         if ($this->filterUrlIsValid($link[1])) {
                             Builderindex::addToIndex($link[1], $link[0], $url);
@@ -226,6 +253,9 @@ class CrawlContainer extends \yii\base\Object
                     $model->save(false);
     
                     foreach ($this->getCrawler($url)->getLinks() as $link) {
+                        if ($this->isProcessed($link[1])) {
+                            continue;
+                        }
                         if ($this->matchBaseUrl($link[1])) {
                             if ($this->filterUrlIsValid($link[1])) {
                                 Builderindex::addToIndex($link[1], $link[0], $url);
@@ -235,5 +265,9 @@ class CrawlContainer extends \yii\base\Object
                 }
             }
         }
+        
+        unset($model);
+        
+        return true;
     }
 }
