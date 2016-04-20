@@ -159,7 +159,7 @@ abstract class Plugin extends Component
      */
     public function i18nDecodedGetActive(array $fieldValues)
     {
-        return I18n::findCurrent(findCurrent);
+        return I18n::findCurrent($fieldValues);
     }
     
     // HTML TAG HELPERS
