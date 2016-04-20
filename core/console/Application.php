@@ -80,7 +80,7 @@ class Application extends \yii\console\Application
                     // action response
                     return $module->runAction(implode("/", $partial), $params);
                 } catch (\Exception $e) {
-                    throw new ExitException("Module runAction exception for route '{$route}' in Module '{$module->id}'", 0, $e);
+                    throw new ExitException(1, "Module runAction exception for route '{$route}' in Module '{$module->id}'", 0, $e);
                 }
             }
         }

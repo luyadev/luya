@@ -168,19 +168,30 @@ class CrawlContainer extends \yii\base\Object
             return false;
         }
         
+        if ($url !== $this->encodeUrl($url)) {
+            $this->verbosePrint("filtered url '$url' cause of unallowed chars", $this->encodeUrl($url));
+            $this->addLog('invalid_encode', $url . ' contains invalid chars');
+            return false;
+        }
+        
         return true;
+    }
+
+    protected function encodeUrl($url)
+    {
+        return preg_replace("/(a-z0-9\-\#\?\=\/\.\:)/i", '', $url);
     }
 
     public function urlStatus($url)
     {
         $this->verbosePrint('Inspect URL Status', $url);
-        $model = Builderindex::findUrl($url);
+        $model = Builderindex::findUrl($this->encodeUrl($url));
 
         if (!$model) {
             $this->verbosePrint('found in builder index', 'no');
             // add the url to the index
             if ($this->filterUrlIsValid($url)) {
-                Builderindex::addToIndex($url, $this->getCrawler($url)->getTitle());
+                Builderindex::addToIndex($url, $this->getCrawler($url)->getTitle(), 'unknown');
     
                 // update the urls content
                 $model = Builderindex::findUrl($url);
@@ -195,7 +206,7 @@ class CrawlContainer extends \yii\base\Object
                 foreach ($this->getCrawler($url)->getLinks() as $link) {
                     if ($this->matchBaseUrl($link[1])) {
                         if ($this->filterUrlIsValid($link[1])) {
-                            Builderindex::addToIndex($link[1], $link[0]);
+                            Builderindex::addToIndex($link[1], $link[0], $url);
                         }
                     }
                 }
@@ -217,7 +228,7 @@ class CrawlContainer extends \yii\base\Object
                     foreach ($this->getCrawler($url)->getLinks() as $link) {
                         if ($this->matchBaseUrl($link[1])) {
                             if ($this->filterUrlIsValid($link[1])) {
-                                Builderindex::addToIndex($link[1], $link[0]);
+                                Builderindex::addToIndex($link[1], $link[0], $url);
                             }
                         }
                     }

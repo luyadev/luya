@@ -33,9 +33,9 @@ class Builderindex extends \admin\ngrest\base\Model
     public function scenarios()
     {
         return [
-            'restcreate' => ['url', 'content', 'title', 'language_info'],
-            'restupdate' => ['url', 'content', 'title', 'language_info'],
-            'default' => ['url', 'content', 'title', 'language_info', 'content_hash', 'is_dublication'],
+            'restcreate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page'],
+            'restupdate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page'],
+            'default' => ['url', 'content', 'title', 'language_info', 'content_hash', 'is_dublication', 'url_found_on_page'],
         ];
     }
 
@@ -46,6 +46,7 @@ class Builderindex extends \admin\ngrest\base\Model
             'title' => Module::t('builderindex_title'),
             'language_info' => Module::t('builderindex_language_info'),
             'content' => Module::t('builderindex_content'),
+            'url_found_on_page' => 'Url found on Page',
         ];
     }
 
@@ -69,7 +70,7 @@ class Builderindex extends \admin\ngrest\base\Model
         return self::findOne(['url' => $url]);
     }
 
-    public static function addToIndex($url, $title = null)
+    public static function addToIndex($url, $title = null, $urlFoundOnPage = null)
     {
         $model = self::findOne(['url' => $url]);
 
@@ -80,9 +81,10 @@ class Builderindex extends \admin\ngrest\base\Model
         $model = new self();
         $model->url = $url;
         $model->title = $title;
+        $model->url_found_on_page = $urlFoundOnPage;
         $model->crawled = 0;
 
-        return $model->insert();
+        return $model->save(false);
     }
 
     /* ngrest model properties */
@@ -103,14 +105,15 @@ class Builderindex extends \admin\ngrest\base\Model
             'url' => 'text',
             'title' => 'text',
             'language_info' => 'text',
+            'url_found_on_page' => 'text',
             'content' => 'textarea',
         ];
     }
 
     public function ngRestConfig($config)
     {
-        $this->ngRestConfigDefine($config, 'list', ['url', 'title', 'language_info', 'content']);
-        $config->update->copyFrom('list', ['id']);
+        $this->ngRestConfigDefine($config, 'list', ['url', 'title', 'language_info', 'url_found_on_page']);
+        $this->ngRestConfigDefine($config, ['create', 'update'], ['url', 'title', 'language_info', 'url_found_on_page', 'content']);
 
         return $config;
     }

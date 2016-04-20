@@ -17,9 +17,9 @@ class Index extends \admin\ngrest\base\Model
     public function scenarios()
     {
         return [
-            'default' => ['url', 'content', 'title', 'language_info', 'added_to_index', 'last_update'],
-            'restcreate' => ['url', 'content', 'title', 'language_info'],
-            'restupdate' => ['url', 'content', 'title', 'language_info'],
+            'default' => ['url', 'content', 'title', 'language_info', 'added_to_index', 'last_update', 'url_found_on_page'],
+            'restcreate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page'],
+            'restupdate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page'],
         ];
     }
 
@@ -30,6 +30,7 @@ class Index extends \admin\ngrest\base\Model
             'title' => Module::t('index_title'),
             'language_info' => Module::t('index_language_info'),
             'content' => Module::t('index_content'),
+            'url_found_on_page' => 'Url found on Page',
         ];
     }
 
@@ -138,16 +139,15 @@ class Index extends \admin\ngrest\base\Model
             'url' => 'text',
             'title' => 'text',
             'language_info' => 'text',
+            'url_found_on_page' => 'text',
             'content' => 'textarea',
         ];
     }
 
     public function ngRestConfig($config)
     {
-        $this->ngRestConfigDefine($config, 'list', ['url', 'title', 'language_info', 'content']);
-        $config->create->copyFrom('list', ['id']);
-        $config->update->copyFrom('list', ['id']);
-
+        $this->ngRestConfigDefine($config, 'list', ['url', 'title', 'language_info', 'url_found_on_page']);
+        $this->ngRestConfigDefine($config, ['create', 'update'], ['url', 'title', 'language_info', 'url_found_on_page', 'content']);
         return $config;
     }
 }
