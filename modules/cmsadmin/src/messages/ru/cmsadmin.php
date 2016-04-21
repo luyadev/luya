@@ -235,4 +235,26 @@ return [
 
 // added translation in 1.0.0-beta6:
 
+    'block_image_fixed_width' => 'Fixed image width',
+    'block_image_fixed_height' => 'Fixed image height',
+    'block_layout_left_column_css_class' => 'CSS classes for right-hand column',
+    'block_layout_right_column_css_class' => 'CSS classes for left-hand column',
+    'js_page_block_delete_confirm' => 'Really delete block «%name%»?',
+    'view_index_page_meta_keywords' => 'Keywords for SEO analytics (example: restaurant, pizza, italy)',
+    'current_version' => 'Working version',
+    'Initial' => 'First Version',
+    'view_index_page_version_chooser' => 'Published version',
+    'versions_selector' => 'Versions',
+    'page_has_no_version' => 'This page has no version and no layout yet. Create a new version by clicking the add icon <i class="material-icons green-text">add</i> to the right.',
+    'version_edit_title' => 'Edit version',
+    'version_input_name' => 'Name',
+    'version_input_layout' => 'Layout',
+    'version_create_title' => 'Add new version',
+    'version_create_info' => 'You can create any number of page versions with different contents. Publish a version to make it visible on the website.',
+    'version_input_copy_chooser' => 'Version to copy',
+    'version_create_copy' => 'Create copy of an existing version.',
+    'version_create_new' => 'Create a new, empty version.',
+    'js_version_update_success' => 'The version has been updated successfully.',
+    'js_version_error_empty_fields' => 'One or more fields are empty or have an invalid value.',
+    'js_version_create_success' => 'The new version has been saved successfully.',
 ];
