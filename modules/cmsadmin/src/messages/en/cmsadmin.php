@@ -1,23 +1,14 @@
 <?php
 
 return [
-    // Blocks
-
-    // AudioBlock
     'block_audio_name' => 'Audio',
     'block_audio_help_soundurl' => 'Paste your embed code from soundcloud.com here.',
-
-    // DevBlock
     'block_dev_name' => 'Design-Tester',
-
-    // FileListBlock
     'block_file_list_name' => 'Fileslist',
     'block_file_list_files_label' => 'Files',
     'block_file_list_files_showtype_label' => 'Display filetype?',
     'block_file_list_showtype_yes' => "Yes",
     'block_file_list_showtype_no' => "No",
-
-    // FormBlock
     'block_form_name' => 'Form',
     'block_form_default_name_label' => 'Name',
     'block_form_default_name_placeholder' => 'First and Lastname',
@@ -31,18 +22,12 @@ return [
     'block_form_default_send_error' => 'An error occurred when sending your message.',
     'block_form_default_send_success' => 'Thanks for your request.',
     'block_form_default_mail_subject' => 'Contact request',
-
-    // HtmlBlock
     'block_html_html_label' => 'HTML code',
     'block_html_no_content' => 'No HTML code have been added yet.',
-
-    // ImageBlock
     'block_image_name' => 'Image',
     'block_image_imageid_label' => 'Image upload',
     'block_image_caption_label' => 'Image caption',
     'block_image_no_image' => 'No images have been uploaded so far.',
-
-    // ImageTextBlock
     'block_image_text_name' => 'Text with image',
     'block_image_text_text_label' => 'Text',
     'block_image_text_imageid_label' => 'Image upload',
@@ -62,14 +47,10 @@ return [
     'block_image_text_help_texttype' => 'The text type is strictly referring to the text and not the heading.',
     'block_image_text_no_image' => 'No image have been uploaded yet.',
     'block_image_text_no_text' => 'No text have been insereted yet.',
-
-    // LayoutBlock
     'block_layout_name' => 'Layout',
     'block_layout_width_label' => 'Size of the first column (max 12 units)',
     'block_layout_placeholders_left' => 'Left',
     'block_layout_placeholders_right' => 'Right',
-
-    // LineBlock
     'block_line_name' => 'Dividing line',
     'block_line_linespace_label' => 'Spacing',
     'block_line_linespace_space' => 'Spacing(top/bottom)',
@@ -79,23 +60,17 @@ return [
     'block_line_linestyle_solid' => 'Continuous',
     'block_line_linewidth_label' => 'Thickness',
     'block_line_linecolor_label' => 'Color',
-
-    // LinkButtonBlock
     'block_link_button_name' => 'Link Button',
     'block_link_button_btnlabel_label' => 'Button Label',
     'block_link_button_btnhref_label' => 'Link Address',
     'block_link_button_targetblank_label' => 'Opens the linked document in a new window or tab',
     'block_link_button_simpleLink_label' => 'Use a simple link',
-
-    // ListBlock
     'block_list_name' => 'List',
     'block_list_elements_label' => 'Elements',
     'block_list_listtype_label' => 'Type',
     'block_list_listtype_ul' => 'Listing',
     'block_list_listtype_ol' => 'Numeration',
     'block_list_no_content' => 'No content yet.',
-
-    // MapBlock
     'block_map_name' => 'Map',
     'block_map_address_label' => 'Address',
     'block_map_zoom_label' => 'Zoom',
@@ -112,8 +87,6 @@ return [
     'block_map_maptype_satellitemap' => 'Satellite map',
     'block_map_maptype_hybrid' => 'Satellite map with road names',
     'block_map_no_content' => 'No address has been provided yet.',
-
-    // Module Block
     'block_module_name' => 'Module',
     'block_module_modulename_label' => 'Module name',
     'block_module_modulecontroller_label' => 'Controller Name (without controller suffix)',
@@ -121,17 +94,11 @@ return [
     'block_module_moduleactionargs_label' => 'Action Argumente (json: {"var":"value"})',
     'block_module_no_module' => 'No module has been provided yet.',
     'block_module_integration' => 'Module integration',
-
-    // QuoteBlock
     'block_quote_name' => 'Quote',
     'block_quote_content_label' => 'Text',
     'block_quote_no_content' => 'No quote has been provided yet.',
-
-    // SpacingBlock
     'block_spacing_name' => 'Space',
     'block_spacing_spacing_label' =>'Space',
-
-    // TableBlock
     'block_table_name' => 'Table',
     'block_table_table_label' => 'Text',
     'block_table_header_label' => 'Use first row as table head',
@@ -140,38 +107,27 @@ return [
     'block_table_equaldistance_label' => 'Use equal distance for columns',
     'block_table_help_table' => 'You have to add a column and row, before adding content to the table.',
     'block_table_no_table' => 'No table content has been provided yet.',
-
-    // TextBlock
     'block_text_name' => 'Text',
     'block_text_content_label' => 'Text',
     'block_text_texttype_label' =>'Text type',
     'block_text_texttype_normal' => 'Casual Text',
     'block_text_texttype_markdown' => 'Markdown Text',
     'block_text_no_content' => 'No text has been provided yet.',
-
-    // TitleBlock
     'block_title_name' => 'Heading',
     'block_title_content_label' => 'Title',
     'block_title_headingtype_label' => 'Size',
     'block_title_headingtype_heading' => 'Heading',
     'block_title_no_content' => 'No heading data has been provided yet.',
-
-    // VideoBlock
     'block_video_name' => 'Video',
     'block_video_url_label' => 'Video URL',
     'block_video_controls_label' => 'Hide video controls?',
     'block_video_help_url' => 'YouTube and Vimeo Url are supported.',
     'block_video_help_controls' => 'This option is supported only by YouTube Videos.',
     'block_video_no_video' => 'No valid Video URL has been provided yet.',
-
-    // WysiwygBlock
     'block_wysiwyg_name' => 'Texteditor',
     'block_wysiwyg_content_label' => 'Content',
     'block_wysiwyg_help_content' => 'Click on the first row to add data',
     'block_wysiwyg_no_content' => 'No text has been provided yet.',
-    
-    // views/default/index
-
     'view_index_add_type' => 'Page Type',
     'view_index_type_page' => 'Page',
     'view_index_type_module' => 'Module',
@@ -198,13 +154,9 @@ return [
     'view_index_redirect_internal_select' => 'Choose the internal page that should be forwarded to.',
     'view_index_redirect_external_link' => 'External link',
     'view_index_redirect_external_link_help' => 'External links start with http:// or https://',
-
     'view_index_sidebar_new_page' => 'Create new page',
     'view_index_sidebar_drafts' => 'Templates',
     'view_index_sidebar_move' => 'Move',
-    
-    // view_update
-
     'view_update_drop_blocks' => 'Drop the Content blocks here',
     'view_update_blockcontent' => 'Block content',
     'view_update_configs' => 'Optional Configurations',
@@ -222,9 +174,6 @@ return [
     'view_update_page_is_module' => 'This page is a <b>module</b>.',
     'view_update_page_is_redirect_internal' => 'This page is <b>internal redirect</b> to <show-internal-redirection nav-id="typeData.value" />.',
     'view_update_page_is_redirect_external' => 'This page is <b>external redirect</b> to <a ng-href="{{typeData.value}}">{{typeData.value}}</a>',
-    
-    // menu
-
     'menu_node_cms' => 'Page Content',
     'menu_node_cmssettings' => 'CMS Settings',
     'menu_group_env' => 'Environment',
@@ -233,52 +182,32 @@ return [
     'menu_group_elements' => 'Content elements',
     'menu_group_item_elements_blocks' => 'Manage',
     'menu_group_item_elements_group' => 'Groups',
-     
-    // global
-
     'btn_abort' => 'Abort',
     'btn_refresh' => 'Refresh',
     'btn_save' => 'Save',
 
 // added translation in 1.0.0-beta3:
 
-    // NavItemModule
     'model_navitemmodule_module_name_label' => 'Module name',
-
-    // NavItem
     'model_navitem_title_label' => 'Page title',
     'model_navitem_alias_label' => 'URL Path segment',
-
-    // NavItemPage
     'model_navitempage_layout_label' => 'Layout',
-
-    // NavItemRedirect
     'model_navitemredirect_type_label' => 'Type of redirect',
     'model_navitemredirect_value_label' => 'Target of redirect',
-    
-    // missing from LineBlock
     'block_line_linecolor_grey' => 'Grey',
     'block_line_linecolor_black' => 'Black',
-
-    // LinkButtonBlock
     'block_link_button_empty' => 'The link target is empty.',
-    
-    // cmsadmin/create page
     'view_index_add_title' => 'Add new page',
     'view_index_add_page_from_language' => 'Add page from language',
     'view_index_add_page_from_language_info' => 'Would you like to copy the contents from another language when creating this page?',
     'view_index_add_page_empty' => 'Add new empty page',
     'view_index_language_loading' => 'Loading page',
-    
-    // drafts
     'draft_title' => 'Drafts',
     'draft_text' => 'Here you can see and edit existing drafts. Drafts can be applied when creating a new page.',
     'draft_column_id' => 'ID',
     'draft_column_title' => 'Title',
     'draft_column_action' => 'Action',
     'draft_edit_button' => 'Edit',
-    
-    // js cmsadmin.js
     'js_added_translation_ok' => 'The translation of this page was created successfully.',
     'js_added_translation_error' => 'An error occurred when creating the translation',
     'js_page_add_exists' => 'There already exists a page "%title" with the same URL in this group (id=%id%).',
@@ -300,23 +229,32 @@ return [
 
 // added translation in 1.0.0-beta5:
 
-    // videoBlock
     'block_video_width_label' => 'Width in pixel',
     'block_video_help_width' => 'Will be ignored when 0 or empty',
-
-    // view update - blockholder
     'view_update_blockholder_clipboard' => 'Clipboard',
 
 // added translation in 1.0.0-beta6:
 
-    // ImageBlock
-    'block_image_fixed_width' => 'Image width',
-    'block_image_fixed_height' => 'Image height',
-
-    // LayoutBlock
-    'block_layout_left_column_css_class' => 'CSS classes for left column',
-    'block_layout_right_column_css_class' => 'CSS classes for right column',
-
-    'js_page_block_delete_confirm' => 'Are you sure you want to remove the block «%name%»?',
-    'view_index_page_meta_keywords' => 'Keywords for SEO analytics (Example: restaurant, pizza, italy)'
+    'block_image_fixed_width' => 'Fixe Bildbreite',
+    'block_image_fixed_height' => 'Fixe Bildhöhe',
+    'block_layout_left_column_css_class' => 'CSS-Klassen für linke Spalte',
+    'block_layout_right_column_css_class' => 'CSS-Klassen für rechte Spalte',
+    'js_page_block_delete_confirm' => 'Block «%name%» wirklich löschen?',
+    'view_index_page_meta_keywords' => 'Keywords für SEO analytics (Beispiel: restaurant, pizza, italien)',
+    'current_version' => 'Aktuelle Version',
+    'Initial' => 'Erste Version',
+    'view_index_page_version_chooser' => 'Live Version',
+    'versions_selector' => 'Versionen',
+    'page_has_no_version' => 'This Page does not have a Version with a Layout yet, create a new version for this page with the add icon <i class="material-icons green-text">add</i> on the right.',
+    'version_edit_title' => 'Version Bearbeiten',
+    'version_input_name' => 'Bezeichnung',
+    'version_input_layout' => 'Layout',
+    'version_create_title' => 'Neue Version hinzufügen',
+    'version_create_info' => 'You can create any number of page versions with different contents.',
+    'version_input_copy_chooser' => 'zu kopierende Version',
+    'version_create_copy' => 'Eine Kopie einer existierenden Version erstellen.',
+    'version_create_new' => 'Eine neue, leere Version erstellen.',
+    'js_version_update_success' => 'Die Änderungen an der Version wurden erfolgreich gespeichert.',
+    'js_version_error_empty_fields' => 'Eines oder mehrer Felder sind leer oder haben einen falschen Wert',
+    'js_version_create_success' => 'Die neue Version wurde erfolgreich gespeichert',
 ];

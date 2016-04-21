@@ -5,6 +5,7 @@ namespace cmsadmin\commands;
 use luya\console\Command;
 use admin\models\Config;
 use cmsadmin\models\NavItem;
+use cmsadmin\Module;
 
 /**
  * This controller is part of the beta6 release and adds the version ability database migrations.
@@ -33,7 +34,7 @@ class UpdaterController extends Command
                 'nav_item_id' => $item->id,
                 'timestamp_create' => $item->timestamp_create,
                 'create_user_id' => $item->create_user_id,
-                'version_alias' => 'Initial'
+                'version_alias' => Module::VERSION_INIT_LABEL,
             ]);
             
             $this->outputSuccess('- updated: ' . $item->title);

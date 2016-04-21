@@ -9,6 +9,7 @@ use admin\models\Property as AdminProperty;
 use cmsadmin\models\Property as CmsProperty;
 use cmsadmin\models\NavItem;
 use cmsadmin\models\NavItemPageBlockItem;
+use cmsadmin\Module;
 
 /**
  * CMS Nav Model ActiveRecord
@@ -403,7 +404,7 @@ class Nav extends \yii\db\ActiveRecord
         $navItemPage = new NavItemPage();
         $navItemPage->layout_id = $layoutId;
         $navItemPage->timestamp_create = time();
-        $navItemPage->version_alias = 'initial';
+        $navItemPage->version_alias = Module::VERSION_INIT_LABEL;
         $navItemPage->create_user_id = Yii::$app->adminuser->getId();
         
         if (!$navItemPage->validate()) {
@@ -456,7 +457,7 @@ class Nav extends \yii\db\ActiveRecord
             'description' => $description,
             'nav_item_type' => 1
         ];
-        $navItemPage->attributes = ['layout_id' => $layoutId, 'create_user_id' => Yii::$app->adminuser->getId(), 'timestamp_create' => time(), 'version_alias' => 'Initial'];
+        $navItemPage->attributes = ['layout_id' => $layoutId, 'create_user_id' => Yii::$app->adminuser->getId(), 'timestamp_create' => time(), 'version_alias' => Module::VERSION_INIT_LABEL];
 
         if (!$nav->validate()) {
             $_errors = ArrayHelper::merge($nav->getErrors(), $_errors);
@@ -500,7 +501,7 @@ class Nav extends \yii\db\ActiveRecord
             'description' => $description,
             'nav_item_type' => 1
         ];
-        $navItemPage->attributes = ['layout_id' => $layoutId, 'create_user_id' => Yii::$app->adminuser->getId(), 'timestamp_create' => time(), 'version_alias' => 'Initial'];
+        $navItemPage->attributes = ['layout_id' => $layoutId, 'create_user_id' => Yii::$app->adminuser->getId(), 'timestamp_create' => time(), 'version_alias' => Module::VERSION_INIT_LABEL];
 
         if (!$navItem->validate()) {
             $_errors = ArrayHelper::merge($navItem->getErrors(), $_errors);

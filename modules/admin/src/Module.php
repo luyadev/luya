@@ -70,7 +70,7 @@ class Module extends \admin\base\Module
     {
         foreach ($translations as $module => $data) {
             foreach ($data as $key) {
-                $this->_jsTranslations[$key] = Yii::t($module, $key);
+                $this->_jsTranslations[$key] = Yii::t($module, $key, [], Yii::$app->luyaLanguage);
             }
         }
     }

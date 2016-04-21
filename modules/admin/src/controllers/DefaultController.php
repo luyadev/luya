@@ -37,11 +37,11 @@ class DefaultController extends \admin\base\Controller
 
     public function colorizeValue($value, $displayValue = false)
     {
-        $text = ($displayValue) ? $value : 'AN';
+        $text = ($displayValue) ? $value : Module::t('debug_state_on');
         if ($value) {
             return '<span style="color:green;">'.$text.'</span>';
         }
 
-        return '<span style="color:red;">Aus</span>';
+        return '<span style="color:red;">'.Module::t('debug_state_off').'</span>';
     }
 }

@@ -72,6 +72,14 @@ class NavItemController extends \admin\base\RestController
         $navItemId = Yii::$app->request->post('navItemId');
         $layoutId = Yii::$app->request->post('layoutId');
         
+        if (empty($name) || empty($navItemId)) {
+            return ['error' => true];
+        }
+        
+        if (empty($fromPageId) && empty($layoutId)) {
+            return ['error' => true];
+        }
+        
         $navItemModel = NavItem::findOne($navItemId);
         
         if (!$navItemModel) {

@@ -386,18 +386,28 @@
     		$http.post('admin/api-cms-navitem/change-page-version-layout', $.param({'pageItemId': versionItem.id, 'layoutId': versionItem.layout_id, 'alias': versionItem.version_alias}), headers).success(function(response) {
     			$scope.refreshForce();
     			$scope.closeEditModal();
-    			AdminToastService.success('The Layout has been updated successfull.', 4000);
+    			AdminToastService.success(i18n['js_version_update_success'], 4000);
 			});
     	};
     	
 		$scope.createNewVersionSubmit = function(data) {
+			if (data == undefined) {
+				AdminToastService.error(i18n['js_version_error_empty_fields'], 4000);
+				return null;
+			}
 			if (data.copyExistingVersion) {
 				data.versionLayoutId = 0;
 			}
 			$http.post('admin/api-cms-navitem/create-page-version', $.param({'layoutId': data.versionLayoutId, 'navItemId': $scope.item.id, 'name': data.versionName, 'fromPageId': data.fromVersionPageId}), headers).success(function(response) {
+				if (response.error) {
+					AdminToastService.error(i18n['js_version_error_empty_fields'], 4000);
+					return null;
+				}
+				
 				$scope.refreshForce();
 				$scope.closeCreateModal();
-				AdminToastService.success('The new version has been added.', 4000);
+				
+				AdminToastService.success(i18n['js_version_create_success'], 4000);
 			});
 		};
 	});

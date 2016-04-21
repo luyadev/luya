@@ -81,7 +81,7 @@
 <script type="text/ng-template" id="updateformpage.html">
     <div class="row">
         <div class="input input--select col s12">
-            <label class="input__label">Live Version</label>
+            <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_version_chooser'); ?></label>
             <div class="input__field-wrapper" ng-show="parent.typeData!==undefined">
                 <select ng-model="data.nav_item_type_id" ng-options="version.id as version.version_alias for version in parent.typeData" ng-change="typeDataCopy.nav_item_type_id=parent.itemCopy.nav_item_type_id" />
             </div>
@@ -450,73 +450,13 @@
                         <div class="page__content" ng-show="!settings" ng-switch on="item.nav_item_type">
                             <div class="row">
                                 <div class="col s12 page__no-padding" ng-switch-when="1">
-
-
-
-                                    <!-- OLD -->
-                                    <!-- 
-                                    <div style="padding:10px 15px;" ng-controller="PageVersionsController" ng-show="showVersionList">
-
-                                        <div class="card-panel">
-                                        	<h5>Versionen</h5>
-                                            <p>The following list shows you all the available versions of the current site.</p>
-                                            <table class="striped">
-                                                <thead>
-                                                <tr>
-                                                    <th>Id</th>
-                                                    <th>Datum</th>
-                                                    <th>Bezeichnung</th>
-                                                    <th>Wechseln</th>
-                                                    <th>Bearbeiten</th>
-                                                    <th>Benutzen</th>
-                                                </tr>
-                                                </thead>
-                                                <tr ng-repeat="versionItem in typeData" ng-init="modalState=true">
-                                                    <td>#{{$index+1}}</td>
-                                                    <td>{{versionItem.timestamp_create * 1000 | date:'short'}}</td>
-                                                    <td>{{ versionItem.version_alias }}</td>
-                                                    <td>
-                                                        <button ng-show="currentPageVersion !== versionItem.id" class="btn" ng-click="switchVersion(versionItem.id)">Anzeigen</button>
-                                                        <span ng-show="currentPageVersion == versionItem.id">Wird angezeigt</span>
-                                                    </td>
-                                                    <td>
-                                                        <button ng-click="modalState=!modalState">Layout bearbeiten</button>
-                                                        <modal is-modal-hidden="modalState">
-                                                            Layout: <select ng-model="versionItem.layout_id" ng-options="lts.id as lts.name for lts in layoutsData"></select>
-                                                            <hr />
-                                                            <button class="btn" ng-click="changeVersionLayout(versionItem)">Update Layout</button>
-                                                        </modal>
-                                                    </td>
-                                                    <td>
-                                                        <span ng-if="versionItem.id == item.nav_item_type_id">Diese Version wird benutzt</span>
-                                                        <span ng-if="versionItem.id !== item.nav_item_type_id"><button class="btn" ng-click="useVersion(versionItem)" type="button">Version benutzen</button></span>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-
-                                        <div class="card-panel">
-                                            <h5>Create Version</h5>
-                                            <select ng-model="fromVersionPageId">
-                                                <option value="0">New/Empty Version</option>
-                                                <option ng-repeat="versionItem in typeData" value="{{versionItem.id}}">Copy existing: {{versionItem.version_alias}}</option>
-                                            </select>
-
-                                            <span ng-show="fromVersionPageId==0">Layout: <select ng-model="versionLayoutId" ng-options="lts.id as lts.name for lts in layoutsData"></select></span>
-
-                                            Name: <input type="text" style="width:400px;" ng-model="versionName" />
-                                            <button type="button" ng-click="createNewVersionSubmit()">Create new Version</button>
-                                        </div>
-                                    </div>
-                                    <!-- /OLD -->
-
                                     <!-- Versions -->
                                     <div class="page__versions" ng-controller="PageVersionsController" ng-init="createVersionModalState=true; editVersionModalState=true">
                                         <div class="page__versions-left">
-                                            <span class="page__versions-title page__versions-title--black"><span>Aktuelle Version:</span> <strong>{{ currentVersionInformation.version_alias}}</strong> <i class="material-icons" ng-click="editVersionModalState=false">edit</i></span>
+                                            <span class="page__versions-title page__versions-title--black"><span><?= \cmsadmin\Module::t('current_version'); ?>:</span> <strong>{{ currentVersionInformation.version_alias}}</strong> <i class="material-icons" ng-click="editVersionModalState=false">edit</i></span>
                                         </div><!--
                                         --><div class="page__versions-right">
-                                            <span class="page__versions-title">Versionen: </span>
+                                            <span class="page__versions-title"><?= \cmsadmin\Module::t('versions_selector'); ?>: </span>
                                             <button class="page__version" ng-class="{'page__version--visible': currentPageVersion == versionItem.id, 'page__version--in-use': versionItem.id == item.nav_item_type_id}" ng-repeat="versionItem in typeData" ng-click="switchVersion(versionItem.id)" ng-init="modalState=true" title="{{ versionItem.version_alias }}">
                                                 {{$index+1}}
                                             </button>
@@ -530,20 +470,20 @@
                                             <div class="modal__header modal__header--light modal__header--for-form">
                                                 <div class="row">
                                                     <div class="col s12">
-                                                        <h3>Edit Version</h3>
+                                                        <h3><?= \cmsadmin\Module::t('version_edit_title'); ?></h3>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="modal__content">
                                                 <div class="input input--text">
-                                                    <label class="input__label" for="edit-version-modal-name">Name</label>
+                                                    <label class="input__label" for="edit-version-modal-name"><?= \cmsadmin\Module::t('version_input_name'); ?></label>
                                                     <div class="input__field-wrapper">
                                                         <input class="input__field" id="edit-version-modal-name" name="edit-version-modal-name" type="text" ng-model="currentVersionInformation.version_alias" />
                                                     </div>
                                                 </div>
                                                 <div class="input input--select">
-                                                    <label class="input__label" for="edit-version-modal-layout">Layout</label>
+                                                    <label class="input__label" for="edit-version-modal-layout"><?= \cmsadmin\Module::t('version_input_layout'); ?></label>
                                                     <select class="input__field" id="edit-version-modal-layout" name="edit-version-modal-layout" ng-model="currentVersionInformation.layout_id" ng-options="lts.id as lts.name for lts in layoutsData"></select>
                                                 </div>
                                             </div>
@@ -570,7 +510,7 @@
                                             <div class="modal__header modal__header--light modal__header--for-form">
                                                 <div class="row">
                                                     <div class="col s12">
-                                                        <h3>Create Version</h3>
+                                                        <h3><?= \cmsadmin\Module::t('version_create_title'); ?></h3>
                                                     </div>
                                                 </div>
                                             </div>
@@ -582,13 +522,13 @@
                                                     <div class="input__field-wrapper">
                                                         <div class="alert alert--info">
                                                             <i class="material-icons">info</i>
-                                                            <p>You can create any number of page versions with different contents.</p>
+                                                            <p><?= \cmsadmin\Module::t('version_create_info'); ?></p>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="input input--text">
-                                                    <label class="input__label" for="create-version-modal-name">Name</label>
+                                                    <label class="input__label" for="create-version-modal-name"><?= \cmsadmin\Module::t('version_input_name'); ?></label>
                                                     <div class="input__field-wrapper">
                                                         <input class="input__field" id="create-version-modal-name" name="create-version-modal-name" type="text" ng-model="create.versionName" />
                                                     </div>
@@ -597,18 +537,18 @@
                                                 <div class="input input--radios">
                                                     <label class="input__label"></label>
                                                     <div class="input__field-wrapper">
-                                                        <input type="radio" ng-checked="create.copyExistingVersion"><label ng-click="create.copyExistingVersion=true">Copy</label> <br />
-                                                        <input type="radio" ng-checked="!create.copyExistingVersion"><label ng-click="create.copyExistingVersion=false">New</label> <br />
+                                                        <input type="radio" ng-checked="create.copyExistingVersion"><label ng-click="create.copyExistingVersion=true"><?= \cmsadmin\Module::t('version_create_copy'); ?></label> <br />
+                                                        <input type="radio" ng-checked="!create.copyExistingVersion"><label ng-click="create.copyExistingVersion=false"><?= \cmsadmin\Module::t('version_create_new'); ?></label> <br />
                                                     </div>
                                                 </div>
 
                                                 <div class="input input--select" ng-show="create.copyExistingVersion">
-                                                    <label class="input__label" for="edit-version-modal-layout">Copy Version</label>
+                                                    <label class="input__label" for="edit-version-modal-layout"><?= \cmsadmin\Module::t('version_input_copy_chooser'); ?></label>
                                                     <select class="input__field" id="edit-version-modal-layout" name="edit-version-modal-layout" ng-model="create.fromVersionPageId" ng-options="versionItem.id as versionItem.version_alias for versionItem in typeData"></select>
                                                 </div>
 
                                                 <div class="input input--select" ng-show="!create.copyExistingVersion">
-                                                    <label class="input__label" for="create-version-modal-layout">Layout</label>
+                                                    <label class="input__label" for="create-version-modal-layout"><?= \cmsadmin\Module::t('version_input_layout'); ?></label>
                                                     <select class="input__field" id="create-version-modal-layout" name="create-version-modal-layout" ng-model="create.versionLayoutId" ng-options="lts.id as lts.name for lts in layoutsData"></select>
                                                 </div>
 
@@ -637,7 +577,7 @@
                                     <!-- /Versions -->
 
                                     <div ng-show="container.length == 0" class="page__no-version-warning alert alert--warning alert--icon-no-margin">
-                                        <p>This Page does not have a Version with a Layout yet, create a new version for this page with the add icon <i class="material-icons green-text">add</i> on the right.</p>
+                                        <p><?= \cmsadmin\Module::t('page_has_no_version'); ?></p>
                                     </div>
 
                                     <ul class="page__list" ng-show="container.nav_item_page.id">

@@ -1,42 +1,29 @@
 <?php
 
 return [
-    // global
     'language_name' => 'Deutsch',
     'button_save' => 'Speichern',
     'button_abort' => 'Abbrechen',
     'button_send' => 'Senden',
-    
-    // login
     'login_pre_title' => 'Anmeldung für {title}',
     'login_mail' => 'E-Mail',
     'login_password' => 'Passwort',
     'login_btn_login' => 'Anmelden',
     'login_securetoken' => 'Sicherheitscode',
     'login_securetoken_info' => 'Geben Sie den Sicherheitscode ein, der Ihnen per E-Mail geschickt wurde.',
-    
-    // menu nodes
     'menu_node_system' => 'System',
     'menu_node_filemanager' => 'Dateimanager',
-    
-    // menu groups
     'menu_group_access' => 'Zugriff',
     'menu_group_system' => 'System',
     'menu_group_images' => 'Bilder',
-    
-    // menu items
     'menu_access_item_user' => 'Benutzer',
     'menu_access_item_group' => 'Benutzergruppen',
     'menu_system_item_language' => 'Sprachen',
     'menu_system_item_tags' => 'Tags',
     'menu_images_item_effects' => 'Effekte',
     'menu_images_item_filters' => 'Filter',
-    
-    // admin/dashboard
     'dashboard_title' => 'Herzlich willkommen.',
     'dashboard_text' => 'Über die Hauptnavigation oben können Sie zwischen den Modulen wechseln.<br />Die Seitennavigation links gibt Ihnen Zugriff auf die Funktionen des angewählten Moduls.',
-    
-    // layout
     'layout_select_file' => 'Datei auswählen',
     'layout_deleted_file' => 'Die Originale Datei wurde entfernt. Sie können keine Filter anwenden ohne original Datei. Laden Sie eine neue Datei hoch und Filter anzuwenden.',
     'layout_no_filter' => 'Kein Filter',
@@ -84,8 +71,6 @@ return [
     'layout_filemanager_folder' => 'Ordner',
     'layout_filemanager_add_folder' => 'Ordner hinzufügen',
     'layout_filemanager_root_dir' => 'Stammverzeichnis',
-    
-    // aws/groupauth
     'aws_groupauth_select_all' => 'Alle markieren',
     'aws_groupauth_deselect_all' => 'Alle aufheben',
     'aws_groupauth_th_module' => 'Module',
@@ -93,28 +78,20 @@ return [
     'aws_groupauth_th_add' => 'Hinzufügen',
     'aws_groupauth_th_edit' => 'Bearbeiten',
     'aws_groupauth_th_remove' => 'Löschen',
-    
-    // models/group
     'model_group_name' => 'Name',
     'model_group_description' => 'Beschreibung',
     'model_group_user_buttons' => 'Benutzer',
     'model_group_btn_aws_groupauth' => 'Berechtigungen',
-
-    //views/ngrest/crud
     'ngrest_crud_btn_list' => 'Einträge',
     'ngrest_crud_btn_add' => 'Hinzufügen',
     'ngrest_crud_btn_close' => 'Schliessen',
     'ngrest_crud_search_text' => 'Suchbegriff eingeben...',
     'ngrest_crud_rows_count' => 'Einträge',
     'ngrest_crud_btn_create' => 'Erstellen',
-    
-    // apis
     'api_storage_image_upload_error' => 'Beim hochladen des Bildes ist folgender Fehler passiert \'{error}\'.',
     'api_storage_file_upload_success' => 'Datei wurde erfolgreich hochgeladen.',
     'api_sotrage_file_upload_error' => 'Beim hochladen der Datei ist folgender Fehler passiert \'{error}\'.',
     'api_sotrage_file_upload_empty_error' => 'Es wurden keine Dateine zum hochladen gefunden. Keine daten gewählt.',
-    
-    // aws/changepassword
     'aws_changepassword_info' => 'Geben Sie ein neues Passwort für den Benutzer ein. Das neue Passwort muss mindestens <strong>6 Zeichen</strong> lang sein.',
     'aws_changepassword_succes' => 'Dein neues Passwort wurde erfolgreich verschlüsselt und angepasst.',
     'aws_changepassword_new_pass' => 'Neues Passwort',
@@ -122,14 +99,10 @@ return [
 
 // added translation in 1.0.0-beta3:
 
-    // models/LoginForm
     'model_loginform_email_label' => 'E-Mail',
     'model_loginform_password_label' => 'Passwort',
     'model_loginform_wrong_user_or_password' => 'Falscher Benutzer oder Passwort.',
-    
     'ngrest_select_no_selection' => 'Keine Auswahl',
-    
-    // js data
     'js_ngrest_error' => 'Während des Ladens ist ein Fehler aufgetreten.',
     'js_ngrest_rm_page' => 'Möchten Sie diesen Eintrag wirklich entfernen? Diese Aktion kann nicht rückgängig gemacht werden.',
     'js_ngrest_rm_confirm' => 'Der Datensatz wurde erfolgreich entfernt.',
@@ -158,10 +131,15 @@ return [
     
 // added translation in 1.0.0-beta5:
 
-    // aws/gallery
     'aws_gallery_empty' => 'Sie haben noch keine Bilder für diese Album ausgewählt. Klicken Sie im Dateimanager (links) auf die gewünschten Bilder, welche Sie in das Album hinzufügen möchten.',
     'aws_gallery_images' => 'Album Bilder',
     'layout_useronline_name' => 'Name',
     'layout_useronline_mail' => 'E-Mail',
     'layout_useronline_inactivesince' => 'Inaktiv seit',
+    
+// added translations in 1.0.0-beta6
+
+    'layout_debug_caching' => 'Caching',
+    'debug_state_on' => 'An',
+    'debug_state_off' => 'Aus',
 ];

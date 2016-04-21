@@ -1,42 +1,29 @@
 <?php
 
 return [
-    // global
     'language_name' => 'Русский',
     'button_save' => 'Сохранить',
     'button_abort' => 'Отмена',
     'button_send' => 'Отправить',
-
-    // login
     'login_pre_title' => 'Авторизоваться в {title}',
     'login_mail' => 'Email',
     'login_password' => 'Пароль',
     'login_btn_login' => 'Вход',
     'login_securetoken' => 'Секретный код',
     'login_securetoken_info' => 'Введите код безопасности, который был отправлен на ваш адрес электронной почты.',
-
-    // menu nodes
     'menu_node_system' => 'Система',
     'menu_node_filemanager' => 'Файловый менеджер',
-
-    // menu groups
     'menu_group_access' => 'Доступ',
     'menu_group_system' => 'Система',
     'menu_group_images' => 'Изображения',
-
-    // menu items
     'menu_access_item_user' => 'Пользователи',
     'menu_access_item_group' => 'Групы',
     'menu_system_item_language' => 'Языки',
     'menu_system_item_tags' => 'Теги',
     'menu_images_item_effects' => 'Эффекты',
     'menu_images_item_filters' => 'Фильтры',
-
-    // admin/dashboard
     'dashboard_title' => 'Добро пожаловать.',
     'dashboard_text' => 'Вы можете переключаться между модулями главной навигации в верхней части экрана.<br />Меню слева, дает доступ к функциям выбранного модуля.',
-
-    // layout
     'layout_select_file' => 'Выберите файл',
     'layout_deleted_file' => 'Вы не можете применить фильтр, потому что исходный файл был удален. Загрузить или выберите новый файл, чтобы применить фильтр.',
     'layout_no_filter' => 'Нет фильтра',
@@ -84,8 +71,6 @@ return [
     'layout_filemanager_folder' => 'Папка',
     'layout_filemanager_add_folder' => 'Добавить папку',
     'layout_filemanager_root_dir' => 'Корневая папка',
-
-    // aws/groupauth
     'aws_groupauth_select_all' => 'Выделить все',
     'aws_groupauth_deselect_all' => 'Снять все',
     'aws_groupauth_th_module' => 'Модули',
@@ -93,28 +78,20 @@ return [
     'aws_groupauth_th_add' => 'Добавить',
     'aws_groupauth_th_edit' => 'Редактировать',
     'aws_groupauth_th_remove' => 'Удалить',
-
-    // models/group
     'model_group_name' => 'Название',
     'model_group_description' => 'Описание',
     'model_group_user_buttons' => 'Пользователь',
     'model_group_btn_aws_groupauth' => 'Разрешения',
-
-    //views/ngrest/crud
     'ngrest_crud_btn_list' => 'Записи',
     'ngrest_crud_btn_add' => 'Добавить',
     'ngrest_crud_btn_close' => 'Закрыть',
     'ngrest_crud_search_text' => 'Введите слово для поиска...',
     'ngrest_crud_rows_count' => 'Записи',
     'ngrest_crud_btn_create' => 'Создать',
-
-    // apis
     'api_storage_image_upload_error' => 'Произошла ошибка при загрузке изображения \'{error}\'.',
     'api_storage_file_upload_success' => 'Файлы были успешно загружены.',
     'api_sotrage_file_upload_error' => 'Произошла следующая ошибка при загрузки файла \'{error}\'.',
     'api_sotrage_file_upload_empty_error' => 'Не найдено файлов для загрузки. Выбрали ли вы какие-то файлы?',
-
-    // aws/changepassword
     'aws_changepassword_info' => 'Пожалуйста введите новый пароль. Пароль должен состоять минимум из 6 символов.',
     'aws_changepassword_succes' => 'Пароль успешно изменен.',
     'aws_changepassword_new_pass' => 'Новый пароль',
@@ -122,14 +99,10 @@ return [
 
 // added translation in 1.0.0-beta3:
 
-    // models/LoginForm
     'model_loginform_email_label' => 'Email',
     'model_loginform_password_label' => 'Пароль',
     'model_loginform_wrong_user_or_password' => 'Неверный логин или пароль.',
-
     'ngrest_select_no_selection' => 'Ничего не выбрано',
-
-    // js data
     'js_ngrest_error' => 'Произошла ошибка при загрузке.',
     'js_ngrest_rm_page' => 'Вы действительно хотите удалить эту запись? Это действие нельзя будет отменить.',
     'js_ngrest_rm_confirm' => 'Эта запись была успешно удалена.',
@@ -164,4 +137,10 @@ return [
     'layout_useronline_name' => 'Имя',
     'layout_useronline_mail' => 'E-Mail',
     'layout_useronline_inactivesince' => 'Неактивный с',
+    
+// added translations in 1.0.0-beta6
+
+    'layout_debug_caching' => 'Caching',
+    'debug_state_on' => 'On',
+    'debug_state_off' => 'Off',
 ];

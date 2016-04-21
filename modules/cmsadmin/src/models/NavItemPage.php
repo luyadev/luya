@@ -9,6 +9,7 @@ use luya\web\View;
 use cmsadmin\models\NavItemPageBlockItem;
 use cmsadmin\base\NavItemType;
 use cmsadmin\base\NavItemTypeInterface;
+use cmsadmin\Module;
 
 /**
  * Represents the type PAGE for a NavItem.
@@ -71,7 +72,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
             'content_as_array' => 'contentAsArray',
         ];
     }
-
+    
     /**
      * Get the list of version/pages for a specific nav item id
      * 
@@ -86,6 +87,9 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
     {
         $fields = parent::fields();
         $fields['contentAsArray'] = 'contentAsArray';
+        $fields['version_alias'] = function ($model) {
+            return Module::t($model->version_alias);
+        };
         return $fields;
     }
     

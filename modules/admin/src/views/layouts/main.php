@@ -426,7 +426,7 @@ $this->beginPage()
             <tr><td><?php echo Admin::t('layout_debug_remotetoken'); ?>:</td><td><?php echo $this->context->colorizeValue(Yii::$app->remoteToken, true); ?></td></tr>
             <tr><td><?php echo Admin::t('layout_debug_assetmanager_forcecopy'); ?>:</td><td><?php echo $this->context->colorizeValue(Yii::$app->assetManager->forceCopy); ?></td></tr>
             <tr><td><?php echo Admin::t('layout_debug_transfer_exceptions'); ?>:</td><td><?php echo $this->context->colorizeValue(Yii::$app->errorHandler->transferException); ?></td></tr>
-            <tr><td>Caching</td><td><?= (Yii::$app->has('cache')) ? Yii::$app->cache->className() : $this->context->colorizeValue(false); ?></td></tr>
+            <tr><td><?php echo Admin::t('layout_debug_caching'); ?>:</td><td><?= (Yii::$app->has('cache')) ? Yii::$app->cache->className() : $this->context->colorizeValue(false); ?></td></tr>
             <tr><td><?php echo Admin::t('layout_debug_yii_debug'); ?>:</td><td><?php echo $this->context->colorizeValue(YII_DEBUG); ?></td></tr>
             <tr><td><?php echo Admin::t('layout_debug_yii_env'); ?>:</td><td><?php echo YII_ENV; ?></td></tr>
             <tr><td><?php echo Admin::t('layout_debug_app_language'); ?>:</td><td><?php echo Yii::$app->language; ?></td></tr>
