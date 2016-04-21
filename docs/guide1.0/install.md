@@ -50,6 +50,20 @@ The setup proccess will ask you for an email and password to store your personal
 
 You can now log in into your administration interface `http://localhost/luya-kickstarter/admin` (depending on where you have located the luya files). When you have successfull logged into the administration area, navigate to **System** -> **Groups** and click **Authorizations**. This will open an Active Window where you can enable all permissions for your Group.
 
+Dev-Master
+----------
+
+Maybe you like to test the newest features of LUYA, so you can use the fowllowing composer json requirements, but do not forget to read the [README.MD](https://github.com/luyadev/luya/blob/master/UPGRADE.md).
+
+```json
+"require": {
+    "luyadev/luya-core" : "^1.0@dev",
+    "luyadev/luya-module-admin" : "^1.0@dev",
+    "luyadev/luya-module-cms" : "^1.0@dev",
+    "luyadev/luya-module-cmsadmin" : "^1.0@dev"
+}
+```    
+
 Problems
 --------
 

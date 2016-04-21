@@ -10,11 +10,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <h1><?php echo Yii::$app->siteTitle; ?></h1>
+                        <a href="https://luya.io" target="_blank"><img src="<?= $this->publicHtml; ?>/images/luya-transparent.png" style="padding:20px 0px;" height="70"/></a>
                     </div>
                     <div class="col-md-6">
                         <div class="git pull-right">
-                            <a href="https://github.com/zephir/luya" target="_blank" alt="Luya on GitHub" title="Luya on GitHub"><i class="fa fa-github fa-2x"></i></a>
+                            <a href="https://github.com/zephir/luya" target="_blank" alt="LUYA on GitHub" title="LUYA on GitHub"><i class="fa fa-github fa-2x"></i></a>
                         </div>
                     </div>
                 </div>
@@ -47,23 +47,22 @@
                             <?php if ($item->hasChildren()): ?>
                             <ul>
                                 <?php foreach ($item->children as $child): ?>
-                                    <li><a<?php if ($child->isActive): ?> class="active"<?php endif;?> href="<?php echo $child->link; ?>">&raquo; <?php echo $child->title; ?></a></li>
-                                    
-                                    <?php if ($child->hasChildren()): ?>
-                                    <ul>
-                                        <?php foreach ($child->children as $grandChild): ?>
-                                            <li><a<?php if ($grandChild->isActive): ?> class="active"<?php endif;?> href="<?php echo $grandChild->link; ?>">&raquo; <?php echo $grandChild->title; ?></a>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                    <?php endif; ?>
-                                    
+                                    <li>
+                                        <a<?php if ($child->isActive): ?> class="active"<?php endif;?> href="<?php echo $child->link; ?>">&raquo; <?php echo $child->title; ?></a>
+                                        <?php if ($child->hasChildren()): ?>
+                                        <ul>
+                                            <?php foreach ($child->children as $grandChild): ?>
+                                                <li><a<?php if ($grandChild->isActive): ?> class="active"<?php endif;?> href="<?php echo $grandChild->link; ?>">&raquo; <?php echo $grandChild->title; ?></a></li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                        <?php endif; ?>
+                                    </li>
                                 <?php endforeach; ?>
                             </ul>
                             <?php endif; ?>
                         </li>
                     <?php endforeach; ?>
                     </ul>
-                </ul>
                 </div>
                 <div class="col-md-9">
                     <?php echo $content; ?>
