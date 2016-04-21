@@ -356,7 +356,7 @@ class Item extends \yii\base\Object
      */
     public function hasParent()
     {
-        return (count($this->getParent()) > 0) ? true : false;
+        return ($this->getParent()) ? true : false;
     }
     
     /**

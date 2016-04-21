@@ -9,6 +9,11 @@ use luya\helpers\ObjectHelper;
 use cmsadmin\models\Block;
 use cmsadmin\models\NavItemPageBlockItem;
 
+/**
+ * CMS Ajax-Block Controller Responder.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class BlockController extends \cms\base\Controller
 {
     public $enableCsrfValidation = false;

@@ -12,7 +12,7 @@ use Yii;
 class Url extends \yii\helpers\Url
 {
     /**
-     * add a trailing slash to an url if there is no trailing slash at the end of the url.
+     * Add a trailing slash to an url if there is no trailing slash at the end of the url.
      *
      * @param string $url   The url which a trailing slash should be appended
      * @param string $slash If you want to trail a file on a windows system it gives you the ability to add forward slashes.
@@ -24,6 +24,7 @@ class Url extends \yii\helpers\Url
 
     /**
      * This helper method will not concern any context informations
+     * 
      * @param array $routeParams Example array to route `['/module/controller/action']`.
      * @param boolean $scheme Whether to return the absolute url or not
      */
@@ -64,17 +65,15 @@ class Url extends \yii\helpers\Url
      *
      * @param string $route  The base routing path defined in yii. module/controller/action
      * @param array  $params Optional array containing get parameters with key value pairing
-     *
      * @return string
      */
     public static function toAjax($route, array $params = [])
     {
-        if (!empty($params)) {
-            $params = '?'.http_build_query($params);
-        } else {
-            $params = null;
+        $routeParams = ['/'.$route];
+        foreach ($params as $key => $value) {
+            $routeParams[$key] = $value;
         }
-
-        return Yii::$app->urlManager->prependBaseUrl(Yii::$app->composition->prependTo($route).$params);
+        
+        return static::toInternal($routeParams, true);
     }
 }

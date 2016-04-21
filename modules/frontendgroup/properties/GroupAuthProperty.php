@@ -5,8 +5,18 @@ namespace frontendgroup\properties;
 use Yii;
 use yii\helpers\Json;
 
+/**
+ * The Property where you can choose the groups who can see the menu item.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class GroupAuthProperty extends \admin\base\Property
 {
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \yii\base\Object::init()
+     */
     public function init()
     {
         // parent initializer
@@ -57,8 +67,11 @@ class GroupAuthProperty extends \admin\base\Property
     {
         $groups = [];
         foreach ($this->getValue() as $value) {
-            $groups[] = $value['id'];
+            if (isset($value['value'])) { // since beta6 has changed the checkbox array to value instead of `id`
+                $groups[] = $value['value'];
+            }
         }
+        
         return $groups;
     }
     

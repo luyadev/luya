@@ -4,13 +4,12 @@ namespace cms;
 
 use Yii;
 use yii\base\BootstrapInterface;
-use luya\web\UrlRule;
 use luya\web\Application;
 
 /**
  * Cms Module.
  * 
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Module extends \luya\base\Module implements BootstrapInterface
 {
@@ -19,7 +18,8 @@ class Module extends \luya\base\Module implements BootstrapInterface
      * no module is provided. So the CMS url alias does only apply on default behavior.
      */
     public $urlRules = [
-        ['pattern' => 'preview/<itemId:\d+>', 'route' => 'cms/preview/index', 'position' => UrlRule::POSITION_BEFORE_LUYA],
+        ['pattern' => 'preview/<itemId:\d+>', 'route' => 'cms/preview/index'],
+        ['pattern' => 'block-ajax/<id:\d+>/<callback:[a-z0-9\-]+>', 'route' => 'cms/block/index'],
     ];
 
     /**

@@ -7,6 +7,11 @@ use yii\web\View;
 use yii\web\NotFoundHttpException;
 use Exception;
 
+/**
+ * CMS Default Rendering
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class DefaultController extends \cms\base\Controller
 {
     public $enableCsrfValidation = false;

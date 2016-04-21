@@ -335,7 +335,7 @@ class Container extends \yii\base\Component implements ArrayAccess
 
     /**
      * Get the current item for specified level/depth. Menus always start on level/depth 1. This works
-     * only i reversed order, to get the parent level from a child!
+     * only in reversed order, to get the parent level from a child!
      * 
      * @param int $level Level menu starts with 1
      *

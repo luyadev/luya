@@ -21,7 +21,7 @@ class UrlTest extends \luyatests\LuyaWebTestCase
         Yii::$app->request->baseUrl = '';
         Yii::$app->request->scriptUrl = '';
         $url = Url::toAjax('news/default/index', ['id' => 1, 'title' => 'foo-bar']);
-        $this->assertEquals('/en/news/default/index?id=1&title=foo-bar', $url);
+        $this->assertEquals('http://localhost/en/news/default/index?id=1&title=foo-bar', $url);
     }
     
     public function testBaseHelper()
@@ -42,10 +42,10 @@ class UrlTest extends \luyatests\LuyaWebTestCase
     public function testAjaxStaticHelper()
     {
         Yii::$app->request->baseUrl = '';
-        $this->assertEquals('/en/not/exists/action', Url::toAjax('not/exists/action'));
+        $this->assertEquals('http://localhost/en/not/exists/action', Url::toAjax('not/exists/action'));
         
         Yii::$app->composition->hidden = true;
-        $this->assertEquals('/not/exists/action', Url::toAjax('not/exists/action'));
+        $this->assertEquals('http://localhost/not/exists/action', Url::toAjax('not/exists/action'));
     }
     
     public function testHelperEquals()

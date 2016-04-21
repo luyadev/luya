@@ -10,26 +10,36 @@ use cmsadmin\models\Property as CmsProperty;
 use frontendgroup\properties\GroupAuthProperty;
 
 /**
+ * FrontendGroup Module.
  * 
- * @author nadar
+ * This Module must be bootstraped in your config in order to protect the menu items.
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
 class Module extends \luya\base\Module implements BootstrapInterface
 {
-    protected $properties = [];
-    
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \yii\base\BootstrapInterface::bootstrap()
+     */
     public function bootstrap($app)
     {
         $findProperty = Property::findOne(['class_name' => GroupAuthProperty::className()]);
-        
         if ($findProperty) {
-            $this->properties = CmsProperty::findAll(['admin_prop_id' => $findProperty->id]);
-            Yii::$app->menu->on(Container::MENU_ITEM_EVENT, [$this, 'hideElements']);
+            Yii::$app->menu->on(Container::MENU_ITEM_EVENT, [$this, 'hideElements'], CmsProperty::findAll(['admin_prop_id' => $findProperty->id]));
         }
     }
 
+    /**
+     * Hide the elements which are protected by the propertie.
+     * 
+     * @param \cms\menu\Container::MENU_ITEM_EVENT $event
+     */
     public function hideElements($event)
     {
-        foreach ($this->properties as $prop) {
+        $properties = $event->data;
+        foreach ($properties as $prop) {
             if ($prop->object->requiresAuth() && $event->item->navId == $prop->nav_id) {
                 $event->visible = false;
                 foreach ($this->frontendUsers as $userComponent) {

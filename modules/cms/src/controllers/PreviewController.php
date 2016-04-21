@@ -7,6 +7,11 @@ use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use cmsadmin\models\NavItem;
 
+/**
+ * CMS Preview Rendering
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class PreviewController extends \cms\base\Controller
 {
     public function actionIndex($itemId)

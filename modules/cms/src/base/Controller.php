@@ -12,76 +12,6 @@ use yii\web\Response;
 
 abstract class Controller extends \luya\web\Controller
 {
-
-    public function init()
-    {
-        parent::init();
-        
-        if (Yii::$app->has('adminuser') && !Yii::$app->adminuser->isGuest && $this->module->overlayToolbar === true) {
-            $this->on(self::EVENT_BEFORE_ACTION, function($event) {
-                $event->sender->getView()->on(View::EVENT_BEGIN_BODY, [$this, 'renderToolbar']);
-            });
-        }
-    }
-    
-    public function renderToolbar($event)
-    {
-        Yii::warning('LUYA CMS Toolbar is enabled, this slow down your application and generates more database requests.', __METHOD__);
-        Yii::info('LUYA CMS Toolbar rendering start');
-        Yii::beginProfile('LUYA CMS Toolbar profiling', __METHOD__);
-        $view = $event->sender;
-        $folder = Yii::getAlias('@cms');
-        
-        $props = [];
-        
-        foreach(Yii::$app->page->getProperties() as $prop) {
-            $o = $prop->getObject();
-            $props[] = ['label' => $o->label(), 'value' => $o->getValue()];
-        }
-        
-        $menu = Yii::$app->menu;
-        
-        // seo keyword frequency 
-        $seoAlert = 0;
-        $keywords = [];
-        $content = strip_tags(NavItem::findOne($menu->current->id)->getContent());
-        
-        if (empty($menu->current->description)) {
-        	$seoAlert++;
-        }
-        
-        if (empty($menu->current->keywords)) {
-        	$seoAlert++;
-        } else {
-        	foreach ($menu->current->keywords as $word) {
-        		if (preg_match_all('/' . $word . '/i', $content, $matches)) {
-        			$keywords[] = [$word, count($matches[0])];
-        		} else {
-        			$keywords[] = [$word, 0];
-        			$seoAlert++;
-        		}
-        	}
-        }
-        
-        echo $view->renderPhpFile($folder . '/views/_toolbar.php', [
-        	'keywords' => $keywords,
-        	'seoAlertCount' => $seoAlert,
-            'menu' => $menu,
-            'composition' => Yii::$app->composition,
-            'luyaTagParsing' => $event->sender->context->module->enableTagParsing,
-            'properties' => $props,
-            'content' => $content,
-        ]);
-        
-        // echo is used in order to support cases where asset manager is not available
-        echo '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
-        echo '<style>' . $view->renderPhpFile($folder . '/assets/toolbar.css') . '</style>';
-        echo '<script>' . $view->renderPhpFile($folder . '/assets/toolbar.js') . '</script>';
-        
-        Yii::endProfile('LUYA CMS Toolbar profiling', __METHOD__);
-        Yii::info('LUYA CMS Toolbar rendering is finished', __METHOD__);
-    }
-    
     public function renderItem($navItemId, $appendix = null)
     {
         $model = NavItem::find()->where(['id' => $navItemId])->with('nav')->one();
@@ -154,6 +84,66 @@ abstract class Controller extends \luya\web\Controller
         if ($this->module->enableTagParsing) {
             $content = Parser::encode($content);
         }
+        
+        if (Yii::$app->has('adminuser') && !Yii::$app->adminuser->isGuest && $this->module->overlayToolbar === true) {
+            $this->view->registerCssFile('https://fonts.googleapis.com/icon?family=Material+Icons');
+            $this->getView()->on(View::EVENT_BEGIN_BODY, [$this, 'renderToolbar'], ['content' => $content]);
+        }
         return $content;
+    }
+    
+    public function renderToolbar($event)
+    {
+        Yii::info('LUYA CMS Toolbar rendering start', __METHOD__);
+        $view = $event->sender;
+    
+        $folder = Yii::getAlias('@cms');
+    
+        $props = [];
+    
+        foreach(Yii::$app->page->getProperties() as $prop) {
+            $o = $prop->getObject();
+            $props[] = ['label' => $o->label(), 'value' => $o->getValue()];
+        }
+    
+        $menu = Yii::$app->menu;
+    
+        // seo keyword frequency
+        $seoAlert = 0;
+        $keywords = [];
+        $content = strip_tags($event->data['content']);
+    
+        if (empty($menu->current->description)) {
+            $seoAlert++;
+        }
+    
+        if (empty($menu->current->keywords)) {
+            $seoAlert++;
+        } else {
+            foreach ($menu->current->keywords as $word) {
+                if (preg_match_all('/' . $word . '/i', $content, $matches)) {
+                    $keywords[] = [$word, count($matches[0])];
+                } else {
+                    $keywords[] = [$word, 0];
+                    $seoAlert++;
+                }
+            }
+        }
+        
+        // echo is used in order to support cases where asset manager is not available
+        echo '<style>' . $view->renderPhpFile($folder . '/assets/toolbar.css') . '</style>';
+        echo '<script>' . $view->renderPhpFile($folder . '/assets/toolbar.js') . '</script>';
+    
+        echo $view->renderPhpFile($folder . '/views/_toolbar.php', [
+            'keywords' => $keywords,
+            'seoAlertCount' => $seoAlert,
+            'menu' => $menu,
+            'composition' => Yii::$app->composition,
+            'luyaTagParsing' => $event->sender->context->module->enableTagParsing,
+            'properties' => $props,
+            'content' => $content,
+        ]);
+    
+        Yii::info('LUYA CMS Toolbar rendering is finished', __METHOD__);
     }
 }
