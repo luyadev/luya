@@ -224,7 +224,7 @@ return [
     'js_page_block_update_ok' => 'The block «%name%» was updated!',
     'js_page_block_remove_ok' => 'The block «%name%» was deleted!',
     'js_page_block_visbility_change' => 'The visibility of «%name%» was changed successfully.',
-    
+
 // added translation in 1.0.0-beta4:
 
 // added translation in 1.0.0-beta5:
@@ -235,26 +235,26 @@ return [
 
 // added translation in 1.0.0-beta6:
 
-    'block_image_fixed_width' => 'Fixe Bildbreite',
-    'block_image_fixed_height' => 'Fixe Bildhöhe',
-    'block_layout_left_column_css_class' => 'CSS-Klassen für linke Spalte',
-    'block_layout_right_column_css_class' => 'CSS-Klassen für rechte Spalte',
-    'js_page_block_delete_confirm' => 'Block «%name%» wirklich löschen?',
-    'view_index_page_meta_keywords' => 'Keywords für SEO analytics (Beispiel: restaurant, pizza, italien)',
-    'current_version' => 'Aktuelle Version',
-    'Initial' => 'Erste Version',
-    'view_index_page_version_chooser' => 'Live Version',
-    'versions_selector' => 'Versionen',
-    'page_has_no_version' => 'This Page does not have a Version with a Layout yet, create a new version for this page with the add icon <i class="material-icons green-text">add</i> on the right.',
-    'version_edit_title' => 'Version Bearbeiten',
-    'version_input_name' => 'Bezeichnung',
+    'block_image_fixed_width' => 'Fixed image width',
+    'block_image_fixed_height' => 'Fixed image height',
+    'block_layout_left_column_css_class' => 'CSS classes for right-hand column',
+    'block_layout_right_column_css_class' => 'CSS classes for left-hand column',
+    'js_page_block_delete_confirm' => 'Really delete block «%name%»?',
+    'view_index_page_meta_keywords' => 'Keywords for SEO analytics (example: restaurant, pizza, italy)',
+    'current_version' => 'Working version',
+    'Initial' => 'First Version',
+    'view_index_page_version_chooser' => 'Published version',
+    'versions_selector' => 'Versions',
+    'page_has_no_version' => 'This page has no version and no layout yet. Create a new version by clicking the add icon <i class="material-icons green-text">add</i> to the right.',
+    'version_edit_title' => 'Edit version',
+    'version_input_name' => 'Name',
     'version_input_layout' => 'Layout',
-    'version_create_title' => 'Neue Version hinzufügen',
-    'version_create_info' => 'You can create any number of page versions with different contents.',
-    'version_input_copy_chooser' => 'zu kopierende Version',
-    'version_create_copy' => 'Eine Kopie einer existierenden Version erstellen.',
-    'version_create_new' => 'Eine neue, leere Version erstellen.',
-    'js_version_update_success' => 'Die Änderungen an der Version wurden erfolgreich gespeichert.',
-    'js_version_error_empty_fields' => 'Eines oder mehrer Felder sind leer oder haben einen falschen Wert',
-    'js_version_create_success' => 'Die neue Version wurde erfolgreich gespeichert',
+    'version_create_title' => 'Add new version',
+    'version_create_info' => 'You can create any number of page versions with different contents. Publish a version to make it visible on the website.',
+    'version_input_copy_chooser' => 'Version to copy',
+    'version_create_copy' => 'Create copy of an existing version.',
+    'version_create_new' => 'Create a new, empty version.',
+    'js_version_update_success' => 'The version has been updated successfully.',
+    'js_version_error_empty_fields' => 'One or more fields are empty or have an invalid value.',
+    'js_version_create_success' => 'The new version has been saved successfully.',
 ];
