@@ -21,7 +21,7 @@ class RouteBehaviorUrlRule extends \yii\web\UrlRule
         $parts = explode("/", $request->pathInfo);
         
         if (!isset($parts[0]) || !Yii::$app->hasModule($parts[0]) || $parts[0] === 'cms') {
-            return false;   
+            return false;
         }
         
         // add trace info

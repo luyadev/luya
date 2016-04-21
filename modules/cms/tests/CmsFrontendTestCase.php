@@ -20,5 +20,5 @@ class CmsFrontendTestCase extends \PHPUnit_Framework_TestCase
             $this->app->setYiiPath(__DIR__.'/../vendor/yiisoft/yii2/Yii.php');
             $this->app->applicationWeb();
         }
-    }    
+    }
 }

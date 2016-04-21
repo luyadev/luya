@@ -6,14 +6,14 @@ use admin\ngrest\aw\CallbackFormWidget;
 
 <h1>Maps</h1>
 
-<? $form = CallbackFormWidget::begin(['callback' => 'get-coordinates', 'buttonValue' => 'Verify', 'angularCallbackFunction' => 'function($response) {
+<?php $form = CallbackFormWidget::begin(['callback' => 'get-coordinates', 'buttonValue' => 'Verify', 'angularCallbackFunction' => 'function($response) {
     
     initMap($response.cords);
 
 };']); ?>
 
 <?= $form->field('address', 'Adresse:'); ?>
-<? $form::end(); ?>
+<?php $form::end(); ?>
 
 <div id="map" style="height:800px; width:100%;"></div>
 
@@ -34,12 +34,12 @@ use admin\ngrest\aw\CallbackFormWidget;
 	}
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo $mapsApiKey; ?>&signed_in=true"></script>
-<? /*
+<?php /*
 
 <div id="map" style="height:800px; width:100%;"></div>
 <script>
 function initMap() {
-	
+    
   var uluru = {lat: -25.363, lng: 131.044};
 
   var map = new google.maps.Map(document.getElementById('map'), {

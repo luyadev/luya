@@ -152,7 +152,7 @@ class Nav extends \yii\db\ActiveRecord
     }
 
     // static helpers to move and copie
-    
+
     public static function moveToContainer($moveNavId, $toCatId)
     {
         $move = self::findOne($moveNavId);
@@ -267,7 +267,7 @@ class Nav extends \yii\db\ActiveRecord
 
     // create methods
     // @todo make static, moved to helper class?
-    
+
     public function createDraft($title, $langId)
     {
         $_errors = [];
@@ -407,7 +407,7 @@ class Nav extends \yii\db\ActiveRecord
         $navItemPage->create_user_id = Yii::$app->adminuser->getId();
         
         if (!$navItemPage->validate()) {
-        	return $navItemPage->getErrors();
+            return $navItemPage->getErrors();
         }
         
         $navItemPage->save();

@@ -2,7 +2,6 @@
 
 namespace tests\web\errorapi\controllers;
 
-
 use Yii;
 
 class DefaultControllerTest extends \tests\web\Base

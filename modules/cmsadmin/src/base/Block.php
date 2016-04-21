@@ -65,7 +65,7 @@ abstract class Block extends \yii\base\Object implements BlockInterface
      */
     public function getBlockGroup()
     {
-    	return MainGroup::className();
+        return MainGroup::className();
     }
     
     /**

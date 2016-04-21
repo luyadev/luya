@@ -212,7 +212,7 @@ class Item extends \yii\base\Object
             if (empty($this->itemArray['keywords'])) {
                 $this->_keywords = [];
             } else {
-                foreach(explode($this->_delimiters[0], str_replace($this->_delimiters, $this->_delimiters[0], $this->itemArray['keywords'])) as $name) {
+                foreach (explode($this->_delimiters[0], str_replace($this->_delimiters, $this->_delimiters[0], $this->itemArray['keywords'])) as $name) {
                     if (!empty(trim($name))) {
                         $this->_keywords[] = trim($name);
                     }

@@ -15,8 +15,8 @@ return [
         'request' => [
             'forceWebRequest' => true,
         ],
-    	'db' => [
-    		'class' => 'yii\db\Connection',
-    	]
+        'db' => [
+            'class' => 'yii\db\Connection',
+        ]
     ],
 ];

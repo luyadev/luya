@@ -2,7 +2,6 @@
 
 namespace cmstests\src\controllers;
 
-
 use Yii;
 use cmstests\CmsFrontendTestCase;
 

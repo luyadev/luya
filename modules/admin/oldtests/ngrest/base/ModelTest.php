@@ -39,7 +39,7 @@ class ModelTest extends \tests\web\Base
         $this->assertInstanceOf('cms\menu\Item', $find->cms_page);
 
         // list
-        
+
         Yii::$app->request->setQueryParams([
             'ngrestCallType' => 'list',
         ]);
@@ -59,7 +59,7 @@ class ModelTest extends \tests\web\Base
         $this->arrayHasKey('en', $find->i18n_textarea);
         
         // update
-        
+
         Yii::$app->request->setQueryParams([
             'ngrestCallType' => 'update',
         ]);

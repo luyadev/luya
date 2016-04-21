@@ -79,7 +79,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
      */
     public static function getVersionList($navItemId)
     {
-        return self::find()->where(['nav_item_id' => $navItemId])->indexBy('id')->orderBy(['id' => SORT_ASC])->all(); 
+        return self::find()->where(['nav_item_id' => $navItemId])->indexBy('id')->orderBy(['id' => SORT_ASC])->all();
     }
 
     public function fields()
@@ -232,7 +232,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
     }
     
     // ajax parts to get the tree moved from the controller to the model in version beta 6
-    
+
     /**
      * RECUSRION.
      */

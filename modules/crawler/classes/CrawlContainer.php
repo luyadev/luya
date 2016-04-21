@@ -93,10 +93,9 @@ class CrawlContainer extends \yii\base\Object
         foreach (Builderindex::find()->where(['crawled' => 0])->asArray()->all() as $item) {
             if (!$this->isProcessed($item['url'])) {
                 if ($this->urlStatus($item['url'])) {
-                    $this->addProcessed($item['url']);   
+                    $this->addProcessed($item['url']);
                 }
             }
-            
         }
 
         if (Builderindex::find()->where(['crawled' => 0])->count() > 0) {

@@ -33,7 +33,7 @@ abstract class Controller extends \luya\web\Controller
         $event->menu = $currentMenu;
         foreach ($model->nav->getProperties() as $property) {
             //$object = $model->getNav()->getProperty($property['var_name']);
-            
+
             $object = $property->getObject();
             
             $object->trigger($object::EVENT_BEFORE_RENDER, $event);
@@ -101,7 +101,7 @@ abstract class Controller extends \luya\web\Controller
     
         $props = [];
     
-        foreach(Yii::$app->page->getProperties() as $prop) {
+        foreach (Yii::$app->page->getProperties() as $prop) {
             $o = $prop->getObject();
             $props[] = ['label' => $o->label(), 'value' => $o->getValue()];
         }

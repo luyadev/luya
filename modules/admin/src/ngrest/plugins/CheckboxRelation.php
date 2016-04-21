@@ -42,8 +42,8 @@ use admin\ngrest\base\Model;
  */
 class CheckboxRelation extends \admin\ngrest\base\Plugin
 {
-	private $_model;
-	
+    private $_model;
+    
     public $refJoinTable = null;
 
     public $refModelPkId = null;
@@ -56,15 +56,15 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
 
     public function init()
     {
-    	parent::init();
-    	
-    	$this->addEvent(Model::EVENT_AFTER_INSERT, [$this, 'afterSaveEvent']);
-    	$this->addEvent(Model::EVENT_AFTER_UPDATE, [$this, 'afterSaveEvent']);
+        parent::init();
+        
+        $this->addEvent(Model::EVENT_AFTER_INSERT, [$this, 'afterSaveEvent']);
+        $this->addEvent(Model::EVENT_AFTER_UPDATE, [$this, 'afterSaveEvent']);
     }
     
     public function setModel($className)
     {
-    	$this->_model = (!is_object($className)) ? Yii::createObject(['class' => $className]) : $className;
+        $this->_model = (!is_object($className)) ? Yii::createObject(['class' => $className]) : $className;
     }
 
     private $_modelPrimaryKey = null;
@@ -81,7 +81,7 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
     
     public function getModel()
     {
-    	return $this->_model;
+        return $this->_model;
     }
     
     private function getOptionsData()
@@ -110,12 +110,12 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
 
     public function renderList($id, $ngModel)
     {
-    	return $this->createListTag($ngModel);
+        return $this->createListTag($ngModel);
     }
 
     public function renderCreate($id, $ngModel)
     {
-    	return $this->createFormTag('zaa-checkbox-array', $id, $ngModel, ['options' => $this->getServiceName('relationdata')]);
+        return $this->createFormTag('zaa-checkbox-array', $id, $ngModel, ['options' => $this->getServiceName('relationdata')]);
     }
 
     public function renderUpdate($id, $ngModel)
@@ -134,17 +134,17 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
         foreach ($this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $event->sender->id])->each() as $item) {
             $data[] = ['value' => $item->getAttribute($this->getModelPrimaryKey())];
         }
-    	$event->sender->{$this->name} = $data;
+        $event->sender->{$this->name} = $data;
     }
     
     public function onBeforeFind($event)
     {
-    	$event->sender->{$this->name} = $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $event->sender->id])->all();
+        $event->sender->{$this->name} = $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $event->sender->id])->all();
     }
 
     public function afterSaveEvent($event)
     {
-    	$this->setRelation($event->sender->{$this->name}, $this->refJoinTable, $this->refModelPkId, $this->refJoinPkId, $event->sender->id);
+        $this->setRelation($event->sender->{$this->name}, $this->refJoinTable, $this->refModelPkId, $this->refJoinPkId, $event->sender->id);
     }
     
     /**

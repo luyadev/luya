@@ -14,7 +14,6 @@ class BlockGroupImporter extends Importer
         $handled = [];
         
         foreach ($this->getImporter()->getDirectoryFiles('blockgroups') as $file) {
-            
             $obj = new $file['ns']();
             
             if (!$obj) {

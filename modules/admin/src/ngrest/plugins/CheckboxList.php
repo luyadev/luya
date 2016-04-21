@@ -40,13 +40,13 @@ class CheckboxList extends Plugin
     
     protected function getItems()
     {
-    	$data = [];
+        $data = [];
     
-    	foreach ($this->data as $value => $label) {
-    		$data[] = ['value' => $value, 'label' => $label];
-    	}
+        foreach ($this->data as $value => $label) {
+            $data[] = ['value' => $value, 'label' => $label];
+        }
     
-    	return ['items' => $data];
+        return ['items' => $data];
     }
     
     public function serviceData()

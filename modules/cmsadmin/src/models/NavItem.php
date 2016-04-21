@@ -125,9 +125,9 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
             
             // what kind of item type are we looking for
             if ($this->nav_item_type == self::TYPE_PAGE) {
-                $this->_type = NavItemPage::findOne($this->nav_item_type_id);;
+                $this->_type = NavItemPage::findOne($this->nav_item_type_id);
             } elseif ($this->nav_item_type == self::TYPE_MODULE) {
-                $this->_type = NavItemModule::findOne($this->nav_item_type_id);;
+                $this->_type = NavItemModule::findOne($this->nav_item_type_id);
             } elseif ($this->nav_item_type == self::TYPE_REDIRECT) {
                 $this->_type = NavItemRedirect::findOne($this->nav_item_type_id);
             }

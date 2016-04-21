@@ -266,8 +266,7 @@ abstract class Model extends \yii\db\ActiveRecord implements GenericSearchInterf
         
         $assignedType = (array) $assignedType;
         
-        foreach ($assignedType as $type)
-        {
+        foreach ($assignedType as $type) {
             $scenario = false;
             $scenarioFields = [];
             if ($type == 'create' || $type == 'update') {

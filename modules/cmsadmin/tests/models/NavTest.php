@@ -11,5 +11,4 @@ class NavTest extends \tests\web\Base
         $this->assertEquals(false, Nav::findContent(0));
         $this->assertEquals(null, Nav::findContent(1));
     }
-
 }

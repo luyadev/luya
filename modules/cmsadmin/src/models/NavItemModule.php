@@ -77,7 +77,6 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
     public function getContent()
     {
         if ($this->_content == null) {
-            
             $module = $this->getModule();
             
             $reflection = ModuleHelper::reflectionObject($module);

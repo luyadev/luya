@@ -52,7 +52,7 @@ trait SoftDeleteTrait
     private static function internalUpdateValues()
     {
         $update = [];
-        foreach(static::FieldStateDescriber() as $field => $value) {
+        foreach (static::FieldStateDescriber() as $field => $value) {
             $update[$field] = (is_array($value)) ? $value[0] : $value;
         }
         return $update;
@@ -70,7 +70,7 @@ trait SoftDeleteTrait
 
     public function delete()
     {
-        $this->updateAttributes(static::internalUpdateValues());   
+        $this->updateAttributes(static::internalUpdateValues());
         return true;
     }
 }

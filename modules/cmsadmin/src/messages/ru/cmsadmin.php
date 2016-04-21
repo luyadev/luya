@@ -303,7 +303,7 @@ return [
     'view_update_blockholder_clipboard' => 'Буфер обмена',
 
 // added translation in 1.0.0-beta6:
-    
+
     // ImageBlock
     'block_image_fixed_width' => 'Image width',
     'block_image_fixed_height' => 'Image height',

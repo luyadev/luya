@@ -10,7 +10,7 @@ return [
     'tb_seo_link' => 'URL Link',
     'tb_seo_keywords' => 'Keywords',
     'tb_seo_keywords_notfound' => 'No keywords found! You should add keywords in order to analyze your content.',
-    'tb_seo_warning' => 'Some of your keywords are not found in your content, you should fix this by chaning your keywords or add content for your defined keywords',    
+    'tb_seo_warning' => 'Some of your keywords are not found in your content, you should fix this by chaning your keywords or add content for your defined keywords',
     'tb_edit_alt' => 'Edit this page in CMS interface',
     'tb_visible_not_alt' => 'This page is NOT visible for the visitor',
     'tb_visible_alt' => 'This page is visible for your visitor',

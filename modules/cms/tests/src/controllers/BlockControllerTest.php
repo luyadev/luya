@@ -2,7 +2,6 @@
 
 namespace cmstests\src\controllers;
 
-
 use cmstests\CmsFrontendTestCase;
 use cms\Module;
 
@@ -23,7 +22,6 @@ class BlockControllerTest extends CmsFrontendTestCase
      */
     public function testUnableToFindItemId()
     {
-        
         $response = (new Module('cms'))->runAction('block/index', ['callback' => 'test', 'id' => 0]);
     }
 }

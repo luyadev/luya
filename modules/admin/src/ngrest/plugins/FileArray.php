@@ -28,7 +28,7 @@ class FileArray extends \admin\ngrest\base\Plugin
     
     public function onBeforeSave($event)
     {
-    	// if its not i18n casted field we have to serialize the the file array as json and abort further event excution.
+        // if its not i18n casted field we have to serialize the the file array as json and abort further event excution.
         if (!$this->i18n) {
             $event->sender->setAttribute($this->name, $this->i18nFieldEncode($event->sender->getAttribute($this->name)));
             return false;
@@ -39,19 +39,19 @@ class FileArray extends \admin\ngrest\base\Plugin
     
     public function onBeforeExpandFind($event)
     {
-    	if (!$this->i18n) {
-    		$event->sender->setAttribute($this->name, $this->jsonDecode($event->sender->getAttribute($this->name)));
-    		return false;
-    	}
-    	 
-    	return true;
+        if (!$this->i18n) {
+            $event->sender->setAttribute($this->name, $this->jsonDecode($event->sender->getAttribute($this->name)));
+            return false;
+        }
+         
+        return true;
     }
     
     public function onBeforeFind($event)
     {
-    	if (!$this->i18n) {
-    		$event->sender->setAttribute($this->name, $this->jsonDecode($event->sender->getAttribute($this->name)));
-    		return false;
-    	}
+        if (!$this->i18n) {
+            $event->sender->setAttribute($this->name, $this->jsonDecode($event->sender->getAttribute($this->name)));
+            return false;
+        }
     }
 }

@@ -128,7 +128,7 @@ abstract class Plugin extends Component
     }
     
     // I18N HELPERS
-    
+
     /**
      * Encode from PHP to Json
      *
@@ -163,7 +163,7 @@ abstract class Plugin extends Component
     }
     
     // HTML TAG HELPERS
-    
+
     /**
      * Wrapper for Yii Html::tag method
      *
@@ -202,7 +202,7 @@ abstract class Plugin extends Component
     }
     
     // EVENTS
-    
+
     private $_events = [];
     
     /**
@@ -227,7 +227,7 @@ abstract class Plugin extends Component
     }
     
     // ON SAVE
-    
+
     /**
      * This event will be triggered before `onSave` event.
      * 
@@ -250,12 +250,12 @@ abstract class Plugin extends Component
         if ($this->onBeforeSave($event)) {
             if ($this->i18n) {
                 $event->sender->setAttribute($this->name, $this->i18nFieldEncode($event->sender->getAttribute($this->name)));
-            }    
+            }
         }
     }
     
     // ON LIST FIND
-    
+
     /**
      * This event will be triger before `onListFind`.
      * 
@@ -293,7 +293,7 @@ abstract class Plugin extends Component
     }
     
     // ON FIND
-    
+
     /**
      * This event will be trigger before `onFind`.
      * @param unknown $event
@@ -330,7 +330,7 @@ abstract class Plugin extends Component
     }
     
     // ON EXPAND FIND
-    
+
     /**
      * This event will be triggered before `onExpandFind`.
      * 
@@ -369,7 +369,7 @@ abstract class Plugin extends Component
     }
     
     // ON COLLECT SERVICE DATA
-    
+
     /**
      * This event will be triggered before `onCollectServiceData`.
      * 
@@ -378,7 +378,7 @@ abstract class Plugin extends Component
      */
     public function onBeforeCollectServiceData($event)
     {
-    	return true;
+        return true;
     }
     
     /**
@@ -387,11 +387,11 @@ abstract class Plugin extends Component
      */
     public function onCollectServiceData($event)
     {
-    	if ($this->onBeforeCollectServiceData($event)) {
-    		$data = $this->serviceData();
-    		if (!empty($data)) {
-    			$event->sender->addNgRestServiceData($this->name, $data);
-    		}
-    	}
+        if ($this->onBeforeCollectServiceData($event)) {
+            $data = $this->serviceData();
+            if (!empty($data)) {
+                $event->sender->addNgRestServiceData($this->name, $data);
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 <?php
 use luya\helpers\Url;
+
 ?>
 <div id="luya-cms-toolbar-wrapper">
 
@@ -27,7 +28,7 @@ use luya\helpers\Url;
 
         <div class="luya-cms-toolbar__button">
             <a class="luya-cms-toolbar__container-toggler" href="javascript:void(0);" onclick="toggleDetails(this, 'luya-cms-toolbar-seo-container')">
-                <?php if($seoAlertCount > 0): ?><span class="luya-cms-toolbar__badge luya-cms-toolbar__badge--danger"><?= $seoAlertCount; ?></span><?php endif;?> <span><?= cms\Module::t('tb_seo'); ?></span> <i class="material-icons">keyboard_arrow_down</i>
+                <?php if ($seoAlertCount > 0): ?><span class="luya-cms-toolbar__badge luya-cms-toolbar__badge--danger"><?= $seoAlertCount; ?></span><?php endif;?> <span><?= cms\Module::t('tb_seo'); ?></span> <i class="material-icons">keyboard_arrow_down</i>
             </a>
         </div>
 
@@ -107,7 +108,7 @@ use luya\helpers\Url;
                 		<p class="luya-cms-toolbar__badge--warning"><?= cms\Module::t('tb_seo_warning'); ?></p>
                 		<?php endif; ?>
                 		<ul class="luya-cms-toolbar__no-bullets">
-                			<?php foreach($keywords as $keyword): ?>
+                			<?php foreach ($keywords as $keyword): ?>
                 			 <li><span class="luya-cms-toolbar__badge<?= $keyword[1] > 0 ? ' luya-cms-toolbar__badge--success' : ' luya-cms-toolbar__badge--danger'  ?>"><?= $keyword[1]; ?></span> <span><?= $keyword[0]; ?></span></li>
                 			<?php endforeach; ?>
                 		</ul>

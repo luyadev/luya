@@ -89,7 +89,7 @@ class ItemTest extends CmsFrontendTestCase
     }
     
     // translation tests
-    
+
     public function testHomeLanguageCompare()
     {
         $this->assertEquals("/luya/envs/dev/public_html/", (new Query())->where(['nav_id' => 1])->lang('en')->one()->link);
@@ -209,5 +209,4 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(2, count((new Query())->where(['nav_id' => 3])->lang('en')->one()->children));
         $this->assertEquals(2, count((new Query())->where(['nav_id' => 3])->lang('de')->one()->children));
     }
-    
 }

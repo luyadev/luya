@@ -91,7 +91,7 @@ class Album extends \admin\ngrest\base\Model
             'title' => 'text',
             'description' => 'textarea',
             'cover_image_id' => 'image',
-        	'cat_id' => ['selectModel', 'modelClass' => Cat::className(), 'valueField' => 'id', 'labelField' => 'title'],
+            'cat_id' => ['selectModel', 'modelClass' => Cat::className(), 'valueField' => 'id', 'labelField' => 'title'],
         ];
     }
 

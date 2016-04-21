@@ -143,6 +143,5 @@ class UrlRuleTest extends \tests\web\Base
         
         $url = Url::toManager('news/default/detail', ['id' => 1, 'title' => 'page-2-news-title', 'news' => 'page'], true);
         $this->assertEquals('http://localhost/1/page-2-news-title?news=page', $url);
-        
     }
 }

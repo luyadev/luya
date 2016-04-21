@@ -11,7 +11,7 @@ class m150108_154017_cms_block extends Migration
             'id' => 'pk',
             'group_id' => Schema::TYPE_INTEGER,
             'class' => Schema::TYPE_STRING,
-        	'system_block' => 'tinyint(1)', // this field can be dropped on releases as we drop the field in beta6 migration
+            'system_block' => 'tinyint(1)', // this field can be dropped on releases as we drop the field in beta6 migration
         ]);
     }
 

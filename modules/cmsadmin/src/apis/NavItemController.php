@@ -221,7 +221,6 @@ class NavItemController extends \admin\base\RestController
             }
             // store updated type model and nav item model!
             return $model->save();
-            
         } else {
             // complety switch the type of this item (delete old type)
             $oldType = $model->getType();
@@ -255,8 +254,8 @@ class NavItemController extends \admin\base\RestController
                         return $this->sendModelError($typeModel);
                     }
                      if ($oldType) {
-                        $oldType->delete();
-                    }
+                         $oldType->delete();
+                     }
                     $typeModel->insert();
                     $model->nav_item_type_id = $typeModel->id;
                     return $model->update();

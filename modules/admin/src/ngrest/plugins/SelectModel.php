@@ -48,7 +48,7 @@ class SelectModel extends \admin\ngrest\plugins\Select
                 'value' => (int) $item->{$this->valueField},
                 'label' => $label,
             ];
-        }   
+        }
         
         return $data;
     }

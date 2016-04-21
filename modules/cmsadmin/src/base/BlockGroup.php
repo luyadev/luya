@@ -6,7 +6,7 @@ use yii\base\Object;
 
 abstract class BlockGroup extends Object
 {
-	abstract function identifier();
-	
-	abstract function label();
+    abstract public function identifier();
+    
+    abstract public function label();
 }

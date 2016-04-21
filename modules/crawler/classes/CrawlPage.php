@@ -142,7 +142,7 @@ class CrawlPage extends \yii\base\Object
 
     private function tempGetContent($url)
     {
-            try {
+        try {
             $curl = new \Curl\Curl();
             $curl->get($url);
             $content = $curl->response;
@@ -163,7 +163,7 @@ class CrawlPage extends \yii\base\Object
             libxml_clear_errors();
     
             $dom->preserveWhiteSpace = false; // remove redundant white spaces
-    
+
             $body = $dom->getElementsByTagName('body');
     
             $bodyContent = null;
@@ -197,10 +197,10 @@ class CrawlPage extends \yii\base\Object
                 // remove crawl ignore tags
                 preg_match_all("/\[CRAWL_IGNORE\](.*?)\[\/CRAWL_IGNORE\]/s", $bodyContent, $output);
                 if (isset($output[0]) && count($output[0]) > 0) {
-                    foreach($output[0] as $ignorPartial) {
+                    foreach ($output[0] as $ignorPartial) {
                         $bodyContent = str_replace($ignorPartial, '', $bodyContent);
                     }
-                }            
+                }
             }
             
             return $bodyContent;

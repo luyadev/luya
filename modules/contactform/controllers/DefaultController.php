@@ -36,7 +36,6 @@ class DefaultController extends \luya\web\Controller
         }
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            
             if ((intval(time()) - intval(Yii::$app->session->get('renderTime', 0))) < $this->module->spamDetectionDelay) {
                 throw new Exception("We haved catched a spam contact form with the values: " . print_r($model->attributes, true));
             }
@@ -52,7 +51,6 @@ class DefaultController extends \luya\web\Controller
                 if (is_callable($cb)) {
                     $cb($model);
                 }
-                
             } else {
                 $this->success = false;
             }
