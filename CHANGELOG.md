@@ -1,7 +1,7 @@
 LUYA CHANGELOG
 ==============
 
-1.0.0-beta6 (in progress)
+1.0.0-beta6 (21.04.2016)
 -------------------------
 
 **BC BREAKS** See [UPGRADE.md](UPGRADE.md) as we have made some major changes.
