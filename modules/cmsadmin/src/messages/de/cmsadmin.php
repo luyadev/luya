@@ -224,7 +224,7 @@ return [
     'js_page_block_update_ok' => 'Block «%name%» wurde aktualisiert!',
     'js_page_block_remove_ok' => 'Block «%name%» wurde entfernt!',
     'js_page_block_visbility_change' => 'Die sichtbarkeit von «%name%» wurde erfolgreich geändert.',
-    
+
 // added translation in 1.0.0-beta4:
 
 // added translation in 1.0.0-beta5:
@@ -240,21 +240,21 @@ return [
     'block_layout_left_column_css_class' => 'CSS-Klassen für linke Spalte',
     'block_layout_right_column_css_class' => 'CSS-Klassen für rechte Spalte',
     'js_page_block_delete_confirm' => 'Block «%name%» wirklich löschen?',
-    'view_index_page_meta_keywords' => 'Keywords für SEO analytics (Beispiel: restaurant, pizza, italien)',
-    'current_version' => 'Aktuelle Version',
+    'view_index_page_meta_keywords' => 'Keywords für SEO-Analytics (Beispiel: restaurant, pizza, italien)',
+    'current_version' => 'Arbeitsversion',
     'Initial' => 'Erste Version',
-    'view_index_page_version_chooser' => 'Live Version',
+    'view_index_page_version_chooser' => 'Publizierte Version',
     'versions_selector' => 'Versionen',
-    'page_has_no_version' => 'This Page does not have a Version with a Layout yet, create a new version for this page with the add icon <i class="material-icons green-text">add</i> on the right.',
-    'version_edit_title' => 'Version Bearbeiten',
+    'page_has_no_version' => 'Diese Seite hat noch keine Version und kein Layout. Erstellen Sie eine neue Version für diese Seite durch Anklicken des Hinzufügen-Icons <i class="material-icons green-text">add</i> auf der rechten Seite.',
+    'version_edit_title' => 'Version bearbeiten',
     'version_input_name' => 'Bezeichnung',
     'version_input_layout' => 'Layout',
     'version_create_title' => 'Neue Version hinzufügen',
-    'version_create_info' => 'You can create any number of page versions with different contents.',
-    'version_input_copy_chooser' => 'zu kopierende Version',
-    'version_create_copy' => 'Eine Kopie einer existierenden Version erstellen.',
+    'version_create_info' => 'Sie können von jeder Seite eine beliebige Anzahl Versionen mit unterschiedlichen Inhalten erstellen. Über die Publizieren-Funktion können Sie bestimmen, welche Version auf der Website angezeigt werden soll.',
+    'version_input_copy_chooser' => 'Zu kopierende Version',
+    'version_create_copy' => 'Kopie einer existierenden Version erstellen.',
     'version_create_new' => 'Eine neue, leere Version erstellen.',
     'js_version_update_success' => 'Die Änderungen an der Version wurden erfolgreich gespeichert.',
-    'js_version_error_empty_fields' => 'Eines oder mehrer Felder sind leer oder haben einen falschen Wert',
-    'js_version_create_success' => 'Die neue Version wurde erfolgreich gespeichert',
+    'js_version_error_empty_fields' => 'Eines oder mehrere Felder sind leer oder haben einen falschen Wert.',
+    'js_version_create_success' => 'Die neue Version wurde erfolgreich gespeichert.',
 ];
