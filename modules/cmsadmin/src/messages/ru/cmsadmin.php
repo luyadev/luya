@@ -245,7 +245,7 @@ return [
     'Initial' => 'Первая версия',
     'view_index_page_version_chooser' => 'Опубликованная версия',
     'versions_selector' => 'Версии',
-    'page_has_no_version' => 'Эта страница еще не имеет версий и шаблонов. Создайте новую версию кликнув на иконку <i class="material-icons green-text">Добавить</i> справа.',
+    'page_has_no_version' => 'Эта страница еще не имеет версий и шаблонов. Создайте новую версию кликнув на иконку <i class="material-icons green-text">add</i> справа.',
     'version_edit_title' => 'Редактировать версию',
     'version_input_name' => 'Имя',
     'version_input_layout' => 'Шаблон',
