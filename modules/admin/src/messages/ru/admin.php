@@ -140,7 +140,7 @@ return [
     
 // added translations in 1.0.0-beta6
 
-    'layout_debug_caching' => 'Caching',
-    'debug_state_on' => 'On',
-    'debug_state_off' => 'Off',
+    'layout_debug_caching' => 'Кеширование',
+    'debug_state_on' => 'Вкл.',
+    'debug_state_off' => 'Выкл.',
 ];
