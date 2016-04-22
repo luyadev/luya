@@ -14,7 +14,7 @@ class ElementTest extends \luyatests\LuyaWebTestCase
             return 'baz';
         });
 
-        $this->assertEquals('baz', $element->run('bar'));
+        $this->assertEquals('baz', $element->getElement('bar'));
         $this->assertEquals('baz', $element->bar());
     }
 
