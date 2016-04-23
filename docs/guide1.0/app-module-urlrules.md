@@ -1,19 +1,10 @@
-Url-Rules/Url-Regel (Lesbare Urls)
---------------------------
+# Module URL Rules
 
-> TO BE TRANSLATED
+When dealing with modules with several actions and pages you may use nice readable urls instead of the default routing behavior. To do so, you can configure each module with url rules corresponding to a route.
 
-Um eine neue *Url-Rule* (Regel) zu defnieren gehen Sie in die `Module.php` Datei 
-des Moduls und fügen Sie eine neuen eigenschaft(property) `public $urlRules` mit einem Leeren Array `= []` hinzu. Um eine neue Regel zu erstellen müssen Sie ein Array Element erstellen und dies keys *pattern* und *route" definieren.
+## Configure Rules
 
-| Variabel Name     | Beschreibung
-| --------------    | ------------
-| pattern           | Den Wert der Adresse den Sie *neu* erzeugen möchten und für die Endbenutzer ersichtlich ist.
-| route             | Wohin soll die neue Adresse-Intern geleitet werden. Welche Url-Route (module/controller/action) soll geöffnet werden.
-
-### Beispiel 
-
-Die `Module.php` Datei um die Regel erweitern:
+To configure a new rule you have to open the Module file (`Module.php`) of the module you want to add new url rules. Now you can add rules to the `$urlRules` proprtie, which is an array where you have to add a new item each item must contain a route and a pattern.
 
 ```php
 <?php
@@ -22,48 +13,53 @@ namespace app\modules\team;
 class Module extends \luya\base\Module
 {
     public $urlRules = [
-        ['pattern' => 'warenkorb', 'route' => 'estore/basket/index']
+        ['pattern' => 'my-basket', 'route' => 'estore/basket/index']
     ];
 }
 ```
 
-Die Adresse `warenkorb` würde nun die Aktion `actionIndex` in `BasektController` innerhalb des Modules `estore` öffnen und zurück geben.
+The url rule explained in details:
 
-Um die Lesbare Url innerhalb eines `views` zu erstellen verwenden Sie `luya\helpers\Url::toManager` wie folgt `\luya\helpers\Url::toManager('estore/basket/index');`.
+|Variable     |Description
+|-------------|------------
+|pattern      |The newly defined name for the rule, which is what the end-users can see.
+|route        |To internal route used to determine the new location, based on the yii2 routing concept `module/controller/action`.
 
-Sie können auch Parameter innerhalb der Regel definieren, ein Beispiel für einen Artikel innerhalb des Estores:
+You can also us parameters in your url rules ([More on the Yii2 Documentation](http://www.yiiframework.com/doc-2.0/guide-runtime-routing.html#parameterizing-routes).
 
 ```php
 ['pattern' => 'artikel/<id:\d+>', 'route' => 'estore/article/index'],
 ```
 
-Um einen Parameter anzugeben bei erstellen einer Url verwenden Sie das Arguments Array der Url::toManager helper funktion:
+> When you using the module in a cms context, your patterns must be prefix with the module name like `team/my-basket`, otherwise the cms can not auto replace the new pattern with the cms context informations.
 
-```
-\luya\helpers\Url::toManager('estore/article/index', ['id' => 7]);
-```
+## Using the Rule to make a Link
 
-Die selbe funktion würde mit dem toRoute helper von Yii wie folgt aussehen:
+When you have defined url rules for your module, you may want to use them in your view/controller files to generate the links where the user can click on it. To make links we use the `luya\helpers\Url` class. Lets assume we create links for both above created patterns.
 
-```
-\luya\helpers\Url::toRoute(['/estore/article/index', 'id' => 7]);
+```php
+\luya\helpers\Url::toRoute(['/estore/basket/index']);
 ```
 
-> Url Regel sollten immer den Modul prefix enthalten um innerhalb des CMS Context keine gleichnamigen URLS zu erhalten.
+and the parameterized route
 
-### Mehrspachige URLs
+```php
+\luya\helpers\Url::toRoute(['/estore/article/index', 'id' => 123]);
+```
 
-Um eine URL regel für bestimmte [Compositions](app-menu.md) pattern zu hinterlegen fügen Sie den `composition` key zur Regel hinzu, das array innerhalb der composition kann den *pattern* key für für die entsprechenden composition überschreiben. Wenn keine composition auf die aktuelle Situation zutrifft wird der default Wert in `pattern` verwendet. Ein Biespiel:
+## Multilingual language patterns
+
+When you have multi lingual pages, you need patterns for different languages, you can define them in your `$urlRules` configuration.
 
 ```php
 public $urlRules = [
-    ['pattern' => 'estore/warenkorb', 'route' => 'estore/basket/default', 'composition' => 
+    ['pattern' => 'estore/basket', 'route' => 'estore/basket/default', 'composition' => 
         [
             'fr' => 'estore/panier',
-            'en' => 'estore/basket'
+            'de' => 'estore/warenkorb'
         ]
     ],
 ];
 ```
 
-Wenn nun `Yii::$app->composition->getFull()` dem Wert *fr* entsprich wird der Pattern Wert `estore/panier` anstelle von `estore/warenkorb` verwendet.
+To verify what composition language is used you can run `Yii::$app->composition['langShortCode'];`, the composition component is taking care of LUYA multi language websites and is registered by default for all LUYA projects.
