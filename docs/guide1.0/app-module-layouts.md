@@ -1,52 +1,59 @@
-Layouts
--------
+# Controller Layouts
 
-> TO BE TRANSLATED
+When using the render method inside a controller, the layout file of your application will be wrapped around the render output. This is [Yii2 Layout](http://www.yiiframework.com/doc-2.0/guide-structure-views.html#layouts) function, but in some cases you want to additionaly render another layout inside the controller for all the actions, this is why we came up with `$this->renderLayout($viewFile)`, a method where the behavior is similar to the layout wrapping process of Yii.
 
-Alle views welche mit `$this->render($viewFile)` verarbeitet werden inkludieren das layout welches in `views/layouts/main.php` liegt. Wer nun aber inerhalb des Modules einen *Layout ähnlichen* view rendenr möchte kann dies mit `$this->renderLayout($viewFile)` bezwecken. Warum nicht `$this->render($viewFile)` verwenden? 
+RenderLayouts is also a very common used behavior in estores, assume you have a controller for the estore and methods which display different stages - a basket, confirmation page, etc. - so maybe you like to display the total basket account on each page, this would be a perfect case for using `renderLayout` instead of repeating html each time.
 
-+ `renderLayout($viewFile)` verwendet einen klar definieren view namen welcher verwendet werden muss.
-+ die Variabeln `$content` entspricht dem inhalt des angegeben `$viewFile`.
+### Example
 
-Als Parameter für `renderLayout()` verwenden Sie ein array, wobei der key einer Variabel entspricht und value dem Inhalt. Wenn Sie eine variabel benötigen, wie `$content` muss diese überall bei wiederverwendung von renderLayout innerhalb dieses Moduls angegene werden. (Alternativ können Sie `$context` verwenden. Sie nächste Sektion).
-
-### Beispiel
-Abstrakte Klasse `modules/estore/base/Controller.php`:
-
-```php
-<?php
-namespace app\modules\estore\base;
-
-abstract class EstoreController extends \luya\web\Controller
-{
-    public function getBasketTotal()
-    {
-        return [
-            'currency' => 'CHF',
-            'amount' => '20.00',
-        ];
-    }
-}
-```
-
-Controller-Datei `modules/estore/controllers/DefaultController.php`:
+We keep going with the estore example, lets assume we have an estore controller with 2 actions.
 
 ```php
 <?php
 namespace app\modules\estore\controllers;
 
-class DefaultController extends \app\modules\estore\base\Controller
+class DefaultController extends \luya\web\Controller
 {
-    public function actionIndex()
-    {
-        return $this->renderLayout('index');        
-    }
-    
+	/**
+	 * @return int Calculate the number of basket items
+	 */
+	public function getBasketCount()
+	{
+		return 10;
+	}
+
+	/**
+	 * Returns all basket items for this user.
+	 */
     public function actionBasket()
     {   
+    	// add your basket action logic
         return $this->renderLayout('basket');
+    }
+    
+    /**
+     * Display confirmation page.
+     */
+    public function actionConfirm()
+    {
+    	// add your confirmation action logic
+    	return $this->renderLayout('confirm');
     }
 }
 ```
 
-Jetzt können Sie in beiden `renderPartial` views auf die Funktion `$this->context->getBasketTotal` zugreifen unabhängig von Ihrere Controller Logik.
+Now render layout will lookup for a `layout.php` file inside your views folder where the other views (confirm and basket) are. The layout can also get the context informations from the controller. An example of what the layout file could look like:
+
+```php
+<div class="row">
+	<div class="col-md-10">
+		<!-- where the content of the basket and confirm layout will be returned -->
+		<?= $content; ?>
+	</div>
+	
+	<div class="col-md-2">
+		<h1>Basket</h1>
+		<p><?= $this->context->getBasketCount(); ?> item(s)</p>
+	</div>
+</div>
+```
