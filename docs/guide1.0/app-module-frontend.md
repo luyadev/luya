@@ -1,13 +1,12 @@
-Frontend Modul
-==============
+# Frontend Modul
 
-> TO BE TRANSLATED
+When you have specific logic you want to apply to your website, this can be a form where user can input data, or you may load data from a database and render a custom view then you can create a frontend module. You can then integrate the module into your cms or open the url of the module directly, depends on what you wish to do.
 
-Ein *Frontend* Modul kann direkt views rendern und daten aus modellen ausgeben. Um ein Modul aufzurufen öffnen sprechen Sie das Module im Browser direkt mit deren namen an `http://localhost/meinprojekt/meinmodul` oder wenn man sich im CMS Context bewegt ein Module-Block hinzufügen.
+Frontend module are also a very common way to redistributed logic of a controller, but let the user implement the view files to fit their look.
 
-View Render Einstellungen
--------------------------
-Ein Modul kann via `$useAppLayoutPath` entscheiden ob alle views *isoliert* im Modul liegen sollen oder alle views im Views Ordner des Projekts liegen sollen also *shared*. Die isolierte Methode kann verwendet werden wenn ein Modul die komplette kontrolle und unabhängig eines Projekts verwendet werden soll. Alle Daten werden somit gelifert und der Benutzer muss keine Zeit in tempaltes mehr investieren. Dies kann zum Beispiel bei einer komplexen Kalender ansicht verwenden werden wobei das Look und Feel via CSS geregelt wird. Standardmässig wird die *shared* Methode verwendet (`$useAppLayoutPath = true`). Die `$useAppLayoutPath` können Sie in der `Module.php` Datei als Klassen eigeschanft definieren.
+### View rendering options
+
+As already mentioned, frontend modules commonly contain controller logic, but my use the view files from the project you integrate the module, therefore we have created an possibility you can regulate where the view files of a module should be rendered.
 
 ```php
 <?php
@@ -15,82 +14,57 @@ namespace app\modules\team;
 
 class Module extends \luya\base\Module
 {
-    public $useAppLayoutPath = false; // nun werden die views im Modul Ordner gesucht
+    public $useAppViewPath = true; // views will be looked up in the @app/views folder.
 }
 ```
 
-> Die `$useAppLayoutPath` eigenschaft sollte nur in Frontend Modulen verwendet werden.
+You can enable this option for all modules by chaning the default value inside your module class or you can even configure the views location inside your configuration afterwards.
 
-Controllers
------------
-Alle Controller müssen von `luya\base\Controller` abstrahieren.
+- `$useAppViewPath = true` = The view path of the module will be: *@app/views*
+- `$useAppViewPath = false` = The view path of the module will be: *@modulename/views*
 
-> `luya\base\PageController` ist nicht mehr valid seit Version 1.0.0-alpha11.
+#### CMS-Context
 
-Standard Route
---------------
-Per Yii defintioni wird als standard controller und index der `DefaultController` und die `indexAction` ausgeführt. Um diese zu ändern kanns du im Module die Property `$defaultRoute` auf deine standrd *<controller>/<action>* route anpassen, ein paar Beispiele:
+When including a module in the cms, the rendering of your modules view file will automaticcaly ignore the layout, oterhiwse you would have a mess with html as the cms already wraps its cmslayout and afterwards also wraps the layout. But you may use the [Frontend Layouts](app-module-layouts.md) which allows you to use a sub layout for all the module controller views.
 
-```php
-public $defaultRoute = 'cat'; // neue standard route: cat/index
+## Title and Meta-Informations
 
-public $defaultRoute = 'detail/index'; // neue standard route: detail/index
-
-public $defaultROute = 'detail'; // neue standard route: detail/index
-```
-
-Context
--------
-Die verwendung der `$context` variabel innerhalb eines views kann sehr effektiv sein bei *vielen controllern* und views. Wenn Sie eine *public* methode in einen Controller implenetieren, zbsp. `public function getBasketTotal()` kann diese Funktione innerhalb des views mit `$this->context->getBasketTotal()` aufgerufen werden. Wenn Sie nun eine `abstract` Controlle erstellen und diesen als `extends` benutzen so können Sie diese abstrahiert controller logik in allen views wieder verwenden.
-
-Titel und Meta-Tags
--------------------
-In einer Action kann die Titel Tag (title tag) Eigenschaft über den view definiert werden:
+LUYA uses the default implementation of the title variable inside the [Yii Titel-Tag](http://www.yiiframework.com/doc-2.0/guide-structure-views.html#setting-page-titles) view object, you can override the title inside an action:
 
 ```php
 public function actionIndex()
 {
-    // etwas passiert hier
+	// change the title of the page
+    $this->view->title = 'Hello World title';
     
-    $this->view->title = 'Ich bin der Seiten Titel';
+    // render your file
+    return $this->render('index');
+}
+```
+
+But you can also directly set the title inside your view file
+
+```php
+<? $this->title = 'Hello World title'; ?>
+<p>...</p>
+```
+
+This is equals for meta tags or descriptions:
+
+```php
+public function actionIndex()
+{
+	// register meta tag
+    $this->view->registerMetaTag(['name' => 'keywords', 'content' => 'Luya, Yii, PHP']);
+    $this->view->registerMetaTag(['name' => 'description', 'content' => 'Description of this Page.'], 'metaDescription');
     
     return $this->render('index');
 }
 ```
 
-Der Titel kann aber auch direkt im obenangange render file `index` gesetzt werden, also im PHP-Template:
+or in the view file:
 
 ```php
-<? $this->title = 'Ich bin der Seiten Titel im Template'; ?>
-<h1>Hallo Welt</h1>
-<p>... Restliche ausgabe des Templates</p>
+$this->registerMetaTag(['name' => 'keywords', 'content' => 'Luya, Yii, PHP']);
+$this->registerMetaTag(['name' => 'description', 'content' => 'Description of this Page.'], 'metaDescription');
 ```
-
-+ [Titel-Tag Yii](http://www.yiiframework.com/doc-2.0/guide-structure-views.html#setting-page-titles)
-
-Das selbe gilt für Meta informationen, im controller:
-
-```php
-public function actionIndex()
-{
-    $this->view->registerMetaTag(['name' => 'keywords', 'content' => 'luya, yii, php']);
-    
-    return $this->render('index');
-}
-```
-
-oder direkt im view file
-
-```php
-<? $this->registerMetaTag(['name' => 'keywords', 'content' => 'luya, yii, php']); ?>
-<h1>Hallo Welt</h1>
-<p>... Restliche ausgabe des Templates</p>
-```
-
-Um die meta description des CMS zu überschreiben benutze **registerMetaTags** mit dem keyword **metaDescription** wie folgt:
-
-```
-$this->view->registerMetaTag(['name' => 'description', 'content' => $model->description], 'metaDescription');
-```
-
-+ [Meta-Tags Yii Dokumentation](http://www.yiiframework.com/doc-2.0/guide-structure-views.html#registering-meta-tags)
