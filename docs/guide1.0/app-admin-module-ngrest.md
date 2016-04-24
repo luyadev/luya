@@ -7,6 +7,8 @@ The word *NgRest* is explained as follows: A**Ng**ular**Rest** (Representational
 
 > In order to create your own *NgRest* quickly and not understanding the details under the hood, you can create a migration with your data table, create an admin module and the run `./vendor/bin/luya crud/create`.
 
+![ngrest-crud](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/ngrest-crud.png "NgRest Image")
+
 #### Steps to understand and create an NgRest Crud
 
 Preparations

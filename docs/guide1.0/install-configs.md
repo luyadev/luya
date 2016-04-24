@@ -6,7 +6,7 @@ Below are all these configs and environments explained.
 
 ## Overview
 
-![configs-graphic](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/configs-luya.jpg "Konfiguration LUYA")
+![configs-graphic](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/configs-luya.jpg "LUYA Envs config")
 
 ## server.php
 The `server.php` file returns the currently used config. It's used to change the config on different environment.

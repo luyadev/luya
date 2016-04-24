@@ -1,34 +1,28 @@
-NGREST FIELD CONFIGS
-==========
+# NgRest Config Plugins
 
-Below an overview of all allowed field configs
+An NgRest Plugin is like the type of an input. You can create selects, date pickers, file or image uploads, etc. Each NgRest Config Plugin can have its configuration options.
 
+### Available Plugins
 
-fields
------------
+|Name				|Return		|Description
+|--------------		|---		|-------------
+|text				|string		|Input type text field.
+|textArray			|array		|Multiple input type text fields.
+|textarea		  	|string		|Textarea input type field.
+|password			|string		|Input type password field.
+|[selectArray](start-ngrest-field-select.md) |string	|Select Dropdown with options from input configuration.
+|[selectModel](start-ngrest-field-select.md) |string	|Select Dropdown with options given from an Active Record Model class.
+|togglestatus       |integer/string	|Create checkbox where you can toggle on or off.
+|image				|integer	|Create an image upload and returns the imageId from storage system.
+|imageArray			|array		|Creates an uploader for multiple images and returns an array with the image ids from the storage system.
+|file				|integer		|Creates a file upload and returns the fileId from the storage system.
+|fileArray          |array		|Creates an uploader for multiple files and returns an array with the file ids from the storage system.
+|CheckboxList		|array		|Create multiple checkboxes and return the selected items as array.
+|[checkboxRelation](start-ngrest-field-checkboxRelation.md) |array |Create multiple checkbox based on another model with a via table.
+|date				|integer |Datepicker to choose date, month and year. Returns the unix timestamp of the selection.
+|datetime 			|integer |Datepicker to choose date, month, year hour and minute. Returns the unix timestamp of the selection.
+|decimal            |float	|Creates a decimal input field. First parameter defines optional step size. Default = 0.001
+|number				|integer |Input field where only numbers are allowed.
+|cmsPage			|\cms\menu\Item |Cms Page selection and returns the menu component item.
 
-| Name				  									|  Description
-| ------------------- 									| -------------
-| text				  									| creates a basic input text field
-| textarea		  	  									| creates a textarea input field
-| password												| creates a text field with type password
-| [select](start-ngrest-field-select.md)				| creates a select dropdown with options
-| ace													| Creates an ace editor
-| togglestatus                                          | Creates a checkbox
-| image													| Creates an image uploader and returns the imageId to the obeserved field
-| imageArray											| Creates an uploader for multiple images and serialize them as json into the data table (type must be text).
-| file													| Creates a file upload and returns the fileId to the observed field
-| fileArray                                            | Creates an uploader for multiple files and serialize them as json into the data table (type must be text).
-| [checkboxRelation](start-ngrest-field-checkboxRelation.md) | Createa checkbox part based on a refTable/viaTable.
-| date											| Creates an input field with a datepicker popover (model value: dd-mm-yyyy)
-| datetime | creates a date and time input (basic test)
-| decimal                                               | Creates a decimal input field. First parameter defines optional step size. Default = 0.001
-
-
-field implicits
-----------------
-
-| Name					| Description
-|-----------------------| -------------------
-| required				| makes the previous field required (based on the set id)
-
+> Check the class reference/api guide to find out more about configuration options of the plugins.
