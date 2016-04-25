@@ -76,6 +76,8 @@ class Textarea extends \admin\ngrest\base\Plugin
             $this->_markdownParser = new GithubMarkdown();
             $this->_markdownParser->enableNewlines = true;
         }
+        
+        return $this->_markdownParser;
     }
     
     /**
