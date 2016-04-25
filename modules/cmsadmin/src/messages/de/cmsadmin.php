@@ -257,4 +257,10 @@ return [
     'js_version_update_success' => 'Die Änderungen an der Version wurden erfolgreich gespeichert.',
     'js_version_error_empty_fields' => 'Eines oder mehrere Felder sind leer oder haben einen falschen Wert.',
     'js_version_create_success' => 'Die neue Version wurde erfolgreich gespeichert.',
+
+// added translation in 1.0.0-beta7:
+
+    'block_image_internallink_label' => 'Interner Link',
+    'block_image_externallink_label' => 'Externer Link (Überschreibt den internen)',
+
 ];

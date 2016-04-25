@@ -50,6 +50,8 @@ class ImageBlock extends \cmsadmin\base\Block
             'cfgs' => [
                 ['var' => 'width', 'label' => Module::t('block_image_fixed_width'), 'type' => 'zaa-text'],
                 ['var' => 'height', 'label' => Module::t('block_image_fixed_height'), 'type' => 'zaa-text'],
+                ['var' => 'internalLink', 'label' => Module::t('block_image_internallink_label'), 'type' => 'zaa-cms-page'],
+                ['var' => 'externalLink', 'label' => Module::t('block_image_externallink_label'), 'type' => 'zaa-text'],
             ],
         ];
     }
@@ -67,10 +69,25 @@ class ImageBlock extends \cmsadmin\base\Block
 
     public function extraVars()
     {
+        $linkIsExternal = true;
+        $link = $this->getCfgValue('externalLink', false);
+        
+        if(!$link && $this->getCfgValue('internalLink', false)) {
+            $linkIsExternal = false;
+            $link = Yii::$app->menu->find()->where(['nav_id' => $this->getCfgValue('internalLink')])->one();
+            if($link) {
+                $link = $link->link;
+            } else {
+                $link = false;
+            }
+        }
+
         return [
             'image' => $this->zaaImageUpload($this->getVarValue('imageId')),
             'imageAdmin' => $this->zaaImageUpload($this->getVarValue('imageId', 'medium-thumbnail')),
-            'text' => $this->getText()
+            'text' => $this->getText(),
+            'link' => $link,
+            'linkIsExternal' => $linkIsExternal
         ];
     }
 
@@ -79,7 +96,16 @@ class ImageBlock extends \cmsadmin\base\Block
         return '{% if extras.image is not empty %}
                 <div class="image">
                     <figure>
-                        <img class="img-responsive" src="{{extras.image.source}}" {% if vars.caption is not empty %}alt="{{vars.caption}}" title="{{vars.caption}}"{% endif %}{% if cfgs.width %} width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} border="0" />
+                        {% if extras.link %}
+                            <a class="text-teaser" href="{{ extras.link }}"{% if extras.linkIsExternal %} target="_blank"{% endif %}>
+                        {% endif %}
+                        
+                            <img class="img-responsive" src="{{extras.image.source}}" {% if vars.caption is not empty %}alt="{{vars.caption}}" title="{{vars.caption}}"{% endif %}{% if cfgs.width %} width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} border="0" />
+                            
+                        {% if extras.link %}
+                            </a>
+                        {% endif %}
+                        
                         {% if extras.text is not empty %}
                             <figcaption>
                             {% if vars.textType == 1 %}{{ extras.text }}{% else %}<p>{{ extras.text|nl2br }}</p>{% endif %}
