@@ -43,26 +43,31 @@ trait ErrorHandler
     /**
      * Get an readable array to transfer from an exception
      * 
-     * @todo: catch getPrevious() exception.
      * @param mixed $exception Exception object
      * @return array An array with transformed exception data
      */
     public function getExceptionArray($exception)
     {
-        $_trace = [];
+        
         $_message = 'Uknonwn exception object, not instance of \Exception.';
         $_file = 'unknown';
         $_line = 0;
+        $_trace = [];
+        $_previousException = [];
         
         if ($exception instanceof \Exception) {
-            foreach ($exception->getTrace() as $key => $item) {
-                $_trace[$key] = [
-                    'file' => isset($item['file']) ? $item['file'] : null,
-                    'line' => isset($item['line']) ? $item['line'] : null,
-                    'function' => isset($item['function']) ? $item['function'] : null,
-                    'class' => isset($item['class']) ? $item['class'] : null,
+            $prev = $exception->getPrevious();
+            
+            if (!empty($prev)) {
+                $_previousException = [
+                    'message' => $prev->getMessage(),
+                    'file' => $prev->getFile(),
+                    'line' => $prev->getLine(),
+                    'trace' => $this->buildTrace($prev),
                 ];
             }
+            
+            $_trace = $this->buildTrace($exception);
             $_message = $exception->getMessage();
             $_file = $exception->getFile();
             $_line = $exception->getLine();
@@ -80,11 +85,26 @@ trait ErrorHandler
             'serverName' => (isset($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : null,
             'date' => date('d.m.Y H:i'),
             'trace' => $_trace,
+            'previousException' => $_previousException,
             'ip' => (isset($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : null,
             'get' => (isset($_GET)) ? $_GET : [],
             'post' => (isset($_POST)) ? $_POST : [],
             'session' => (isset($_SESSION)) ? $_SESSION : [],
             'server' => (isset($_SERVER)) ? $_SERVER : [],
         ];
+    }
+    
+    private function buildTrace(\Exception $exception)
+    {
+        $_trace = [];
+        foreach ($exception->getTrace() as $key => $item) {
+            $_trace[$key] = [
+                'file' => isset($item['file']) ? $item['file'] : null,
+                'line' => isset($item['line']) ? $item['line'] : null,
+                'function' => isset($item['function']) ? $item['function'] : null,
+                'class' => isset($item['class']) ? $item['class'] : null,
+            ];
+        }
+        return $_trace;
     }
 }
