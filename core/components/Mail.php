@@ -197,7 +197,8 @@ class Mail extends \yii\base\Component
      */
     protected function wrapLayout($content)
     {
-        if (!$this->layout) {
+        // do not wrap the content if layout is empty
+        if (empty($this->layout)) {
             return $content;
         }
         
