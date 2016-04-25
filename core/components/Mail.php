@@ -2,9 +2,11 @@
 
 namespace luya\components;
 
+use Yii;
 use Exception;
 use PHPMailer;
 use SMTP;
+use luya\web\View;
 
 /**
  * LUYA mail component to compose messages and send them via SMTP.
@@ -25,7 +27,9 @@ use SMTP;
  * swaks -s HOST -p 587 -ehlo localhost -au AUTH_USER -to TO_ADRESSE -tls
  * ```
  * 
- * @author nadar
+ * @property \PHPMailer $mailer The PHP Mailer object
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
 class Mail extends \yii\base\Component
 {
@@ -82,14 +86,23 @@ class Mail extends \yii\base\Component
     public $smtpSecure = 'tls';
     
     /**
-     * @todo Remove in beta7
-     * @return NULL|\PHPMailer
+     * @since 1.0.0-beta7
+     * @var string|boolean Define a layout template file which is going to be wrapped around the setBody()
+     * content. The file alias will be resolved so an example layout could look as followed:
+     * 
+     * ```php
+     * $layout = '@app/views/maillayout.php';
+     * ```
+     * 
+     * In your config or any mailer object. As in layouts the content of the mail specific html can be access
+     * in the `$content` variable. The example content of `maillayout.php` from above could look like this:
+     * 
+     * ```php
+     * <h1>My Company</h1>
+     * <div><?= $content; ?></div>
+     * ```
      */
-    public function mailer()
-    {
-        trigger_error("Deprecated function called: " . __METHOD__, E_USER_NOTICE);
-        return $this->getMailer();
-    }
+    public $layout = false;
     
     /**
      * Getter for the mailer object
@@ -164,17 +177,34 @@ class Mail extends \yii\base\Component
     }
     
     /**
-     * Set the HTML body for the mailer message
+     * Set the HTML body for the mailer message, if a layout is defined the layout
+     * will automatically wrapped about the html body.
      * 
      * @param string $body The HTML body message
      * @return \luya\components\Mail
      */
     public function setBody($body)
     {
-        $this->getMailer()->Body = $body;
+        $this->getMailer()->Body = $this->wrapLayout($body);
         return $this;
     }
 
+    /**
+     * Wrap the layout from the `$layout` propertie and store
+     * the passed  content as $content variable in the view.
+     * 
+     * @param string $content The content to wrapp inside the layout.
+     */
+    protected function wrapLayout($content)
+    {
+        if (!$this->layout) {
+            return $content;
+        }
+        
+        $view = new View();
+        return $view->renderPhpFile(Yii::getAlias($this->layout), ['content' => $content]);
+    }
+    
     /**
      * Add multiple adresses into the mailer object.
      * 
