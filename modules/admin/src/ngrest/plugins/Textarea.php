@@ -89,7 +89,7 @@ class Textarea extends \admin\ngrest\base\Plugin
         }
         
         if ($this->markdown) {
-            $event->sender->setAttribute($this->name, $this->markdownPaser->parse($event->sender->getAttribute($this->name)));
+            $event->sender->setAttribute($this->name, $this->markdownParser->parse($event->sender->getAttribute($this->name)));
         }
     }
 }
