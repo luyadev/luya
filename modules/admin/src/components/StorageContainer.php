@@ -512,5 +512,7 @@ class StorageContainer extends \yii\base\Component
                 }
             }
         }
+        
+        return true;
     }
 }
