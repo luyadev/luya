@@ -63,4 +63,10 @@ class Module extends \luya\base\Module
      * ```
      */
     public $filterRegex = [];
+    
+    /**
+     * @var array|boolean Define an array of extension where the links should automatically not follow in order to save memory.
+     * If you like to disable this feature (small pages) you can set `false`.
+     */
+    public $doNotFollowExtensions = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'tiff', 'bmp', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'csv', 'zip'];
 }

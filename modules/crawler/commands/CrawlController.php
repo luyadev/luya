@@ -32,7 +32,7 @@ class CrawlController extends \luya\console\Command
                 $this->output('[==================== VERBOSE ====================]');
             }
             
-            $container = new CrawlContainer(['baseUrl' => $this->module->baseUrl, 'filterRegex' => $this->module->filterRegex, 'verbose' => $this->verbose]);
+            $container = new CrawlContainer(['baseUrl' => $this->module->baseUrl, 'filterRegex' => $this->module->filterRegex, 'verbose' => $this->verbose, 'doNotFollowExtensions' => $this->module->doNotFollowExtensions]);
     
             if ($this->verbose) {
                 $this->output('[================== VERBOSE END ==================]');

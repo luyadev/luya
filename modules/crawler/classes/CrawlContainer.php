@@ -22,6 +22,8 @@ class CrawlContainer extends \yii\base\Object
     
     public $verbose = false;
     
+    public $doNotFollowExtensions = false;
+    
     private $_crawlers = [];
     
     public $log = [
@@ -60,7 +62,6 @@ class CrawlContainer extends \yii\base\Object
     protected function getCrawler($url)
     {
         if (!array_key_exists($url, $this->_crawlers)) {
-            usleep(200000);
             $crawler = new CrawlPage(['baseUrl' => $this->baseUrl, 'pageUrl' => $url, 'verbose' => $this->verbose]);
             $this->_crawlers[$url] = $crawler;
         }
@@ -165,6 +166,23 @@ class CrawlContainer extends \yii\base\Object
         return true;
     }
     
+    /**
+     * 
+     * @param unknown $file
+     * @return boolean true = valid; false = invalid does not match
+     */
+    public function filterExtensionFile($file)
+    {
+        $extension = pathinfo($file, PATHINFO_EXTENSION);
+
+        if (in_array(strtolower($extension), $this->doNotFollowExtensions)) {
+            $this->verbosePrint('extenion is in doNotFollowExtensions list', $extension);
+            return false;
+        }
+        
+        return true;
+    }
+    
     private function filterUrlIsValid($url)
     {
         foreach ($this->filterRegex as $rgx) {
@@ -176,17 +194,22 @@ class CrawlContainer extends \yii\base\Object
             }
         }
 
-        $type = $this->getCrawler($url)->getContentType();
-        
-        if (strpos($type, 'text/html') === false) {
-            $this->verbosePrint('link "'.$url.'" is not type of content "text/html"', $type);
-            $this->addLog('invalid_header', $url . ' invalid header ' . $type);
+        if (!$this->filterExtensionFile($url)) {
+            $this->verbosePrint('url is filtered from do not follow filters list', $url);
             return false;
         }
+        
+        $type = $this->getCrawler($url)->getContentType();
         
         if ($url !== $this->encodeUrl($url)) {
             $this->verbosePrint("filtered url '$url' cause of unallowed chars", $this->encodeUrl($url));
             $this->addLog('invalid_encode', $url . ' contains invalid chars');
+            return false;
+        }
+        
+        if (strpos($type, 'text/html') === false) {
+            $this->verbosePrint('link "'.$url.'" is not type of content "text/html"', $type);
+            $this->addLog('invalid_header', $url . ' invalid header ' . $type);
             return false;
         }
         
@@ -202,7 +225,6 @@ class CrawlContainer extends \yii\base\Object
     {
         $this->verbosePrint('Inspect URL Status', $url);
         
-        usleep(1000);
         gc_collect_cycles();
         
         $this->verbosePrint('memory usage', memory_get_usage());
