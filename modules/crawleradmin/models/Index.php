@@ -51,7 +51,7 @@ class Index extends \admin\ngrest\base\Model
 
     public static function searchByQuery($query, $languageInfo)
     {
-        $query = trim(Html::encode($query));
+        $query = trim(htmlentities($query, ENT_QUOTES));
         
         if (strlen($query) < 1) {
             return [];
@@ -81,7 +81,7 @@ class Index extends \admin\ngrest\base\Model
     
     public static function flatSearchByQuery($query, $languageInfo)
     {
-        $query = trim(Html::encode($query));
+        $query = trim(htmlentities($query, ENT_QUOTES));
         
         if (strlen($query) < 1) {
             return [];
