@@ -127,11 +127,11 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         $this->timestamp_create = time();
         $this->create_user_id = Yii::$app->adminuser->getId();
         if (empty($this->json_config_cfg_values)) {
-            $this->json_config_cfg_values = json_encode([], JSON_FORCE_OBJECT);
+            $this->json_config_cfg_values = json_encode((object) [], JSON_FORCE_OBJECT);
         }
 
         if (empty($this->json_config_values)) {
-            $this->json_config_values = json_encode([], JSON_FORCE_OBJECT);
+            $this->json_config_values = json_encode((object) [], JSON_FORCE_OBJECT);
         }
     }
 

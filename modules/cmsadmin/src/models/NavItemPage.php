@@ -324,11 +324,11 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
         }
     
         if (empty($blockItem['json_config_values'])) {
-            $blockItem['json_config_values'] = new \stdClass();
+            $blockItem['json_config_values'] = ['__e' => '__o'];
         }
     
         if (empty($blockItem['json_config_cfg_values'])) {
-            $blockItem['json_config_cfg_values'] = new \stdClass();
+            $blockItem['json_config_cfg_values'] = ['__e' => '__o'];
         }
     
         return [
