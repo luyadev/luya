@@ -26,19 +26,10 @@ class CmsPage extends \admin\ngrest\base\Plugin
         return $this->renderCreate($id, $ngModel);
     }
 
-    /**
-     * @todo testing
-     */
     public function onAfterFind($event)
     {
         $fieldValue = $event->sender->getAttribute($this->name);
-        $menuItem = (!empty($fieldValue)) ? Yii::$app->menu->find()->where(['nav_id' => $fieldValue])->one() : $fieldValue;
+        $menuItem = (!empty($fieldValue)) ? Yii::$app->menu->find()->where(['nav_id' => $fieldValue])->with(['hidden'])->one() : $fieldValue;
         $event->sender->setAttribute($this->name, $menuItem);
     }
-    /*
-    public function onAfterFind($fieldValue)
-    {
-        return (!empty($fieldValue)) ? Yii::$app->menu->find()->where(['nav_id' => $fieldValue])->one() : $fieldValue;
-    }
-    */
 }
