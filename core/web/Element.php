@@ -3,7 +3,7 @@
 namespace luya\web;
 
 use Yii;
-use Exception;
+use luya\Exception;
 use luya\helpers\FileHelper;
 use Twig_Loader_Filesystem;
 
@@ -62,6 +62,11 @@ class Element extends \yii\base\Component
      */
     public $viewsFolder = '@app/views/elements/';
 
+    /**
+     * @var string $renderEngine Define the render engine you want to use for the element component, can be `php` or `twig`.
+     */
+    public $renderEngine = 'php';
+    
     /**
      * @var array Contains all registered elements.
      */
@@ -210,8 +215,14 @@ class Element extends \yii\base\Component
      */
     public function render($file, array $args = [])
     {
-        $twig = Yii::$app->twig->env(new Twig_Loader_Filesystem($this->getFolder()));
-
-        return $twig->render(FileHelper::ensureExtension($file, 'twig'), $args);
+        if ($this->renderEngine == 'php') {
+            $view = new View();
+            return $view->renderPhpFile(rtrim($this->getFolder(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . FileHelper::ensureExtension($file, 'php'), $args);
+        } elseif ($this->renderEngine == 'twig') {
+            $twig = Yii::$app->twig->env(new Twig_Loader_Filesystem($this->getFolder()));
+            return $twig->render(FileHelper::ensureExtension($file, 'twig'), $args);
+        }
+        
+        throw new Exception('Not supported render engine: ' . $this->renderEngine);
     }
 }

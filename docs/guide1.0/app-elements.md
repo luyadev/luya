@@ -43,7 +43,7 @@ echo Yii::$app->element->button('https://luya.io', 'Go to website');
 
 Where `button` is the name of the element closure defined in your elements.php file. In order to get and render an element in twig use the following function:
 
-```
+```twig
 {{ element('button', 'https://luya.io', 'Go to website') }}
 ```
 
@@ -58,17 +58,29 @@ When you have a more complex html element, the possibility to concate the html p
 }
 ```
 
-The above example will render the file `button` with the paremeters `['href' => $href, 'name' => $name ]`. The twig file (*button*) must be stored in the folder `@app/views/elements` with the name `button.twig`. An example content of `@app/views/elements/button.twig` could look like this:
+The above example will render the file `button` with the paremeters `['href' => $href, 'name' => $name ]`. The twig file (*button*) must be stored in the folder `@app/views/elements` with the name `button.php`. An example content of `@app/views/elements/button.php` could look like this:
 
+```php
+<a href="<?= $href; ?>" class="btn btn-primary"><?= $name; ?></a>
 ```
-<a href="{{ href }}" class="btn btn-primary">{{ name }}</a>
-```
+
+> You can also use twig by configuring the element component propertie `renderEngine = 'twig'`.
 
 ### Rekursives Rendering
 
 Sometimes you want to render another element component inside another template, you can use the above mentioned `element` twig function. Example recursiv rendering:
 
+```php
+<div class="teaser-box">
+    <h1><?= $title; ?></h1>
+    <p><?= $description; ?></p>
+    <?= Yii::$app->element->button($buttonHref, $buttonName); ?>
+</div>
 ```
+
+or in twig template syntax
+
+```twig
 <div class="teaser-box">
     <h1>{{ title }}</h1>
     <p>{{ description }}</p>
