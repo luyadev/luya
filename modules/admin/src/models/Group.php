@@ -59,6 +59,7 @@ class Group extends \admin\ngrest\base\Model
         return [
             'name' => Module::t('model_group_name'),
             'text' => Module::t('model_group_description'),
+            'users' => Module::t('model_group_user_buttons'),
         ];
     }
     
