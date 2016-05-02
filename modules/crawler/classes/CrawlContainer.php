@@ -124,6 +124,8 @@ class CrawlContainer extends \yii\base\Object
             if (isset($index[$url])) { // page exists in index
                 if ($index[$url]['content'] == $page['content']) {
                     $this->addLog('unchanged', $url);
+                    $update = Index::findOne(['url' => $url]);
+                    $update->updateAttributes(['title' => $page['title']]);
                 } else {
                     $this->addLog('update', $url);
                     $update = Index::findOne(['url' => $url]);
