@@ -21,5 +21,6 @@ return [
     'index_title' => 'Bezeichnung',
     'index_language_info' => 'Sprachinfo',
     'index_content' => 'Inhalt',
+    'index_url_found' => 'URL auf folgender Seite gefunden',
 
 ];
