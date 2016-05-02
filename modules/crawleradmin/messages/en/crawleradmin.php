@@ -13,6 +13,7 @@ return [
     'builderindex_title' => 'Title',
     'builderindex_language_info' => 'Language info',
     'builderindex_content' => 'Content',
+    'builderindex_url_found' => 'Url found on Page',
 
     //index
     'crawler_builderindex' => 'Page cache',
