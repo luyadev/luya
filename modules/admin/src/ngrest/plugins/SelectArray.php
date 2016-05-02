@@ -2,6 +2,8 @@
 
 namespace admin\ngrest\plugins;
 
+use luya\helpers\ArrayHelper;
+
 /**
  * Create a selection based on an assoc array provided via $data attribute.
  * 
@@ -34,11 +36,11 @@ class SelectArray extends \admin\ngrest\plugins\Select
          
         foreach ($this->_data as $key => $value) {
             $cleandata[] = [
-                'value' => (int) $key,
+                'value' => $key,
                 'label' => $value,
             ];
         }
-         
-        return $cleandata;
+
+        return ArrayHelper::typeCast($cleandata);
     }
 }
