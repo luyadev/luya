@@ -3,6 +3,7 @@
 namespace admin\ngrest\plugins;
 
 use admin\ngrest\base\Model;
+use luya\helpers\StringHelper;
 
 /**
  * Base class for select dropdowns via Array or Model.
@@ -37,8 +38,9 @@ abstract class Select extends \admin\ngrest\base\Plugin
     
     public function onAfterListFind($event)
     {
+        $value = StringHelper::typeCast($event->sender->getAttribute($this->name));
         foreach ($this->data as $item) {
-            if ($item['value'] == $event->sender->getAttribute($this->name)) {
+            if ($item['value'] === $value) {
                 $event->sender->setAttribute($this->name, $item['label']);
             }
         }

@@ -4,6 +4,8 @@ namespace admin\ngrest\plugins;
 
 use admin\ngrest\base\Plugin;
 use yii\helpers\Json;
+use luya\helpers\ArrayHelper;
+use luya\helpers\StringHelper;
 
 /**
  * Create a checkbox list with selection based on an array with key value pairing.
@@ -23,9 +25,11 @@ class CheckboxList extends Plugin
 {
     public $data = [];
     
+    public $i18nEmptyValue = [];
+    
     public function renderList($id, $ngModel)
     {
-        return $this->createListTag('span', 'no supported yet in list view');
+        return $this->createListTag($ngModel);
     }
     
     public function renderCreate($id, $ngModel)
@@ -46,7 +50,7 @@ class CheckboxList extends Plugin
             $data[] = ['value' => $value, 'label' => $label];
         }
     
-        return ['items' => $data];
+        return ['items' => ArrayHelper::typeCast($data)];
     }
     
     public function serviceData()
@@ -71,7 +75,7 @@ class CheckboxList extends Plugin
             $event->sender->setAttribute($this->name, $this->jsonDecode($event->sender->getAttribute($this->name)));
             return false;
         }
-    
+        
         return true;
     }
     
@@ -83,5 +87,27 @@ class CheckboxList extends Plugin
         }
         
         return true;
+    }
+    
+    public function onAfterListFind($event)
+    {
+        $value = $event->sender->getAttribute($this->name);
+        if (!$this->i18n) {
+            $value = $this->jsonDecode($value);
+        }
+        
+        $value = StringHelper::typeCast($value);
+        
+        if (!empty($value)) {
+            $results = [];
+            foreach ($this->getItems()['items'] as $item) {
+                foreach ($value as $k => $v) {
+                    if (isset($v['value']) && $item['value'] === $v['value']) {
+                        $results[] = $item['label'];
+                    }
+                }
+            }
+            $event->sender->setAttribute($this->name, implode(", ", $results));
+        }
     }
 }

@@ -56,6 +56,8 @@ class I18n
         foreach ($languages as $lang) {
             if (!array_key_exists($lang['short_code'], $value)) {
                 $value[$lang['short_code']] = $onEmptyValue;
+            } elseif (empty($value[$lang['short_code']])) {
+                $value[$lang['short_code']] = $onEmptyValue;
             }
         }
     

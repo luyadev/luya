@@ -268,8 +268,9 @@ abstract class Plugin extends Component
     }
     
     /**
+     * This event is only trigger when returning the ngrest crud list data.
      * 
-     * @param unknown $event
+     * @param \admin\ngrest\base\Model::EVENT_AFTER_NGREST_FIND $event
      */
     public function onListFind($event)
     {
