@@ -30,7 +30,7 @@ class Index extends \admin\ngrest\base\Model
             'title' => Module::t('index_title'),
             'language_info' => Module::t('index_language_info'),
             'content' => Module::t('index_content'),
-            'url_found_on_page' => 'Url found on Page',
+            'url_found_on_page' => Module::t('index_url_found'),
         ];
     }
 
