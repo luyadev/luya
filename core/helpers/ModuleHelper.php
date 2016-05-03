@@ -32,6 +32,7 @@ class ModuleHelper
 		$action = (isset($parts[2])) ? $parts[2] : 'index';
 		
 		if ($module) {
+			$module->context = 'cms';
 			$object = static::reflectionObject($module);
 			$object->defaultRoute($controller, $action, $params);
 			return $object->run();
