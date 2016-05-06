@@ -5,6 +5,8 @@ namespace luya\console;
 use Yii;
 use yii\helpers\Console;
 use yii\base\ExitException;
+use yii\base\InvalidRouteException;
+use yii\console\Exception;
 
 /**
  * Luya CLI Application.
@@ -54,7 +56,7 @@ class Application extends \yii\console\Application
      * changed the controller namespace to run the commands.
      * 
      * ```
-     * ./vendor/bin/luya <module>/<commandController><commandAction>
+     * ./vendor/bin/luya <module>/<commandController>/<commandAction>
      * ```
      * 
      * Will run all controllers located in the `commands` folder of a module.
@@ -65,7 +67,6 @@ class Application extends \yii\console\Application
      */
     public function runAction($route, $params = [])
     {
-        //return Console::ansiFormat('[LUYA:]'.$e->getMessage(), [Console::FG_RED]) . PHP_EOL;
         // In addition to the default behavior of runAction, the console command
         // will strip the first element of the route and threat it as a module
         // changed the controller namespace to run the commands
@@ -80,10 +81,11 @@ class Application extends \yii\console\Application
                     // action response
                     return $module->runAction(implode("/", $partial), $params);
                 } catch (\Exception $e) {
-                    throw new ExitException(1, "Module runAction exception for route '{$route}' in Module '{$module->id}'", 0, $e);
+                    return Console::output("Command Exception: '" . $e->getMessage() . "' in file '" . $e->getFile() . "' on line '" . $e->getLine() . "'.");
                 }
             }
         }
+        // call parent action
         return parent::runAction($route, $params);
     }
 }
