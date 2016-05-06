@@ -4,8 +4,6 @@ namespace luya\console;
 
 use Yii;
 use yii\helpers\Console;
-use yii\base\ExitException;
-use yii\base\InvalidRouteException;
 use yii\console\Exception;
 
 /**
