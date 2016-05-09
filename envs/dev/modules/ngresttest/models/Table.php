@@ -114,8 +114,8 @@ class Table extends \admin\ngrest\base\Model
             'fileArray' => 'fileArray',
             'text' => 'text',
             'textarea' => 'textarea',
-            'selectArray' => ['selectArray', 'data' => [1 => 'Male', 2 => 'Female']],
-            'checkboxList' => ['checkboxList', 'data' => [1 => 'Male', 2 => 'Female']],
+            'selectArray' => ['selectArray', 'data' => [1 => 'Male', 2 => 'Female', 'homo' => 'Homobulusl', '4' => 'A string casted number!']],
+            'checkboxList' => ['checkboxList', 'data' => [1 => 'Male', 2 => 'Female', 'homo' => 'Homobulusl', '4' => 'A string casted number!']],
             //'checkboxRelation' => 'textarea',
             //'color' =>
             'date' => 'date',
@@ -132,8 +132,8 @@ class Table extends \admin\ngrest\base\Model
             'i18n_fileArray' => 'fileArray',
             'i18n_text' => 'text',
             'i18n_textarea' => 'textarea',
-            'i18n_selectArray' => ['selectArray', 'data' => [1 => 'Male', 2 => 'Female']],
-            'i18n_checkboxList' => ['checkboxList', 'data' => [1 => 'Male', 2 => 'Female']], //['checkboxList', ['foo', 'bar']],
+            'i18n_selectArray' => ['selectArray', 'data' => [1 => 'Male', 2 => 'Female', 'homo' => 'Homobulusl', '4' => 'A string casted number!']],
+            'i18n_checkboxList' => ['checkboxList', 'data' => [1 => 'Male', 2 => 'Female', 'homo' => 'Homobulusl', '4' => 'A string casted number!']], //['checkboxList', ['foo', 'bar']],
             //'checkboxRelation' => 'textarea',
             //'i18n_color' =>
             'i18n_date' => 'date',
@@ -152,10 +152,14 @@ class Table extends \admin\ngrest\base\Model
     public function ngRestConfig($config)
     {
         // define fields for types based from ngrestAttributeTypes
+        /*
         $this->ngRestConfigDefine($config, 'list', ['image', 'imageArray', 'file', 'fileArray', 'text', 'textarea', 'selectArray', 'checkboxList', 'date', 'datetime', 'decimal', 'number', 'password', 'toggleStatus', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus']);
         $this->ngRestConfigDefine($config, 'create', ['image', 'imageArray', 'file', 'fileArray', 'text', 'textarea', 'selectArray', 'checkboxList', 'date', 'datetime', 'decimal', 'number', 'password', 'toggleStatus', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus']);
         $this->ngRestConfigDefine($config, 'update', ['image', 'imageArray', 'file', 'fileArray', 'text', 'textarea', 'selectArray', 'checkboxList', 'date', 'datetime', 'decimal', 'number', 'password', 'toggleStatus', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus']);
+        */
         
+        $this->ngRestConfigDefine($config, ['list', 'create', 'update'], ['selectArray', 'checkboxList', 'i18n_selectArray', 'i18n_checkboxList']);
+       
         // enable or disable ability to delete;
         $config->delete = false; 
         
