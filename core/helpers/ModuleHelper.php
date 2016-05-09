@@ -12,7 +12,7 @@ use luya\Exception;
  * @author Basil Suter <basil@nadar.io>
  */
 class ModuleHelper
-{	
+{
     /**
      * Create module reflection object based on a luya module.
      * 

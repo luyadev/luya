@@ -165,11 +165,11 @@ class Element extends \yii\base\Component
      */
     public function getElement($name, array $params = [])
     {
-    	if (!array_key_exists($name, $this->_elements)) {
-    		throw new Exception("The requested element '$name' does not exist in the list. You may register the element first with `addElement(name, closure)`.");
-    	}
+        if (!array_key_exists($name, $this->_elements)) {
+            throw new Exception("The requested element '$name' does not exist in the list. You may register the element first with `addElement(name, closure)`.");
+        }
     
-    	return call_user_func_array($this->_elements[$name], $params);
+        return call_user_func_array($this->_elements[$name], $params);
     }
 
     /**
@@ -185,7 +185,7 @@ class Element extends \yii\base\Component
      */
     public function run($name, array $params = [])
     {
-    	trigger_error('method `run()` is deprectaed, use `getElement` instead.', E_NOTICE);
+        trigger_error('method `run()` is deprectaed, use `getElement` instead.', E_NOTICE);
         return $this->getElement($name, $params);
     }
 

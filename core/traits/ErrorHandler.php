@@ -48,7 +48,6 @@ trait ErrorHandler
      */
     public function getExceptionArray($exception)
     {
-        
         $_message = 'Uknonwn exception object, not instance of \Exception.';
         $_file = 'unknown';
         $_line = 0;
