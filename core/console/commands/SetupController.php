@@ -7,6 +7,12 @@ use admin\models\Config;
 use admin\models\User;
 use admin\models\Group;
 
+/**
+ * Setup LUYA Admin.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ *
+ */
 class SetupController extends \luya\console\Command
 {
     private function insert($table, $fields)
@@ -15,6 +21,8 @@ class SetupController extends \luya\console\Command
     }
 
     /**
+     * Create a new user and append them to an existing group.
+     * 
      * @todo don't write directly in db table (admin_user_group)
      * @todo reuse encode password function from user model
      * @todo find better solution for while(true)/break loop
@@ -81,6 +89,8 @@ class SetupController extends \luya\console\Command
     }
 
     /**
+     * Initialize the LUYA Administration.
+     * 
      * @todo use options instead, override options()
      * @todo see if admin is availoable
      *

@@ -7,6 +7,11 @@ use yii\helpers\Inflector;
 use yii\helpers\FileHelper;
 use yii\helpers\Console;
 
+/**
+ * Provide CMS Block helpers
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class BlockController extends \luya\console\Command
 {
     public $extras = [];
@@ -84,6 +89,11 @@ class BlockController extends \luya\console\Command
         return array_key_exists($type, $this->getVariableTypesOptions());
     }
 
+    /**
+     * Wizzard to create a new CMS block.
+     * 
+     * @return number
+     */
     public function actionCreate()
     {
         $type = $this->select('Do you want to create an app or module Block?', [

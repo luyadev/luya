@@ -8,13 +8,9 @@ use luya\helpers\FileHelper;
 use yii\console\Exception;
 
 /**
+ * Extended Yii2 Migration-Tool to run Database migrations.
+ * 
  * @see https://github.com/yiisoft/yii2/issues/384
- *
- * @use php yii migrate/create foomigration
- * @use php yii migrate/up
- *
- * @todo create command for module specified, like: php yii postsql/create news foomigration
- *
  * @author nadar
  */
 class MigrateController extends \yii\console\controllers\MigrateController

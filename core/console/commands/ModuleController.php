@@ -5,8 +5,19 @@ namespace luya\console\commands;
 use Yii;
 use yii\helpers\Console;
 
+/**
+ * Command to create LUYA modules.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ *
+ */
 class ModuleController extends \luya\console\Command
 {
+    /**
+     * Create a new frontend/admin module.
+     * 
+     * @return number
+     */
     public function actionCreate()
     {
         Console::clearScreenBeforeCursor();

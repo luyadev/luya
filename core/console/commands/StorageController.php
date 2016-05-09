@@ -2,14 +2,17 @@
 
 namespace luya\console\commands;
 
-use Yii;
 use admin\importers\StorageImporter;
 
+/**
+ * LUYA Admin Storage command.
+ * 
+ * @author Martin Petrasch <martin.petrasch@zephir.ch>
+ */
 class StorageController extends \luya\console\Command
 {
-
     /**
-     * delete orphaned files -> wait for user confirmation (y/n)
+     * Delete orphaned files, but requires user confirmation to ensure delete process.
      */
     public function actionCleanup()
     {

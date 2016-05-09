@@ -117,7 +117,7 @@ class ImportController extends Command implements ImportControllerInterface
     }
 
     /**
-     * Default action of import controller, runs the import process
+     * Run the import process.
      * 
      * @return number
      */

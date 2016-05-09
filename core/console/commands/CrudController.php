@@ -7,8 +7,18 @@ use yii\helpers\Console;
 use yii\helpers\Inflector;
 use luya\Boot;
 
+/**
+ * NgRest Crud console commands.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class CrudController extends \luya\console\Command
 {
+    /**
+     * Create Ng-Rest-Model, Controller and Api for an existing Database-Table.
+     * 
+     * @return number
+     */
     public function actionCreate()
     {
         $module = $this->prompt('Module Name (e.g. galleryadmin):');

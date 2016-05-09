@@ -33,6 +33,8 @@ class CommandController extends \luya\console\Command
     }
 
     /**
+     * Display all commands
+     * 
      * @todo remove/delete in rc1
      * @return number
      */
