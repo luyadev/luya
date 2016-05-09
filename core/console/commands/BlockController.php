@@ -68,6 +68,7 @@ class BlockController extends \luya\console\Command
             'image-array-upload' => function ($varName) use ($func) { return '$this->zaaImageArrayUpload($this->'.$func.'(\''.$varName.'\')),'; },
             'file-upload' => function ($varName) use ($func) { return '$this->zaaFileUpload($this->'.$func.'(\''.$varName.'\')),'; },
             'file-array-upload' => function ($varName) use ($func) { return '$this->zaaFileArrayUpload($this->'.$func.'(\''.$varName.'\')),'; },
+            'cms-page' => function($varName) use ($func) { return 'Yii::$app->menu->findOne([\'nav_id\' => $this->'.$func.'(\''.$varName.'\', 0)]),'; },
         ];
         
         if (array_key_exists($type, $info)) {
@@ -169,6 +170,7 @@ class BlockController extends \luya\console\Command
 
         $content = '<?php'.PHP_EOL.PHP_EOL;
         $content .= 'namespace '.$ns.';'.PHP_EOL.PHP_EOL;
+        $content .= 'use Yii;'.PHP_EOL.PHP_EOL;
         $content .= '/**'.PHP_EOL;
         $content .= ' * Block created with Luya Block Creator Version '.\luya\Boot::VERSION.' at '.date('d.m.Y H:i').PHP_EOL;
         $content .= ' */'.PHP_EOL;
