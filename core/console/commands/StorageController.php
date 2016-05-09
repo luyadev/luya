@@ -48,4 +48,18 @@ class StorageController extends \luya\console\Command
         }
         return $this->outputSuccess("No orphaned files found.");
     }
+    
+    /**
+     * Create all thumbnails for filemanager preview. Otherwhise they are created on request load.
+     */
+    public function actionProcessThumbnails()
+    {
+        $response = Yii::$app->storage->processThumbnails();
+        
+        if ($response) {
+            return $this->outputSuccess('Successful generated storage thumbnails.');
+        }
+        
+        return $this->outputError('Error while creating the storage thumbnails.');
+    }
 }
