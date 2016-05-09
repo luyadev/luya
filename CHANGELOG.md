@@ -4,6 +4,7 @@ LUYA CHANGELOG
 1.0.0-beta7 (in progress)
 -------------------------
 
+- `#847` Fixed bug in model crud/createcreate command template where short open tag is disabled.
 - `#729` Added extra variable informations when creating a block with cms-page type to help retrieve menu informations.
 - `#848` Detached composition event when using langauge switcher composition context setter, as it causes the application language.
 
