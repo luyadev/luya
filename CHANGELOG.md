@@ -4,6 +4,8 @@ LUYA CHANGELOG
 1.0.0-beta7 (in progress)
 -------------------------
 
+- `#848` Detached composition event when using langauge switcher composition context setter.
+
 1.0.0-beta6 (21.04.2016)
 -------------------------
 
