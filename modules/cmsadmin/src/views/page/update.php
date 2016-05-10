@@ -195,8 +195,11 @@
                                         <div class="switch">
                                             <label title="Setzt diese Seite als Startseite.">
                                                 <?php echo \cmsadmin\Module::t('view_update_is_homepage'); ?>
+                                                <span ng-if="navData.is_home"><i class="switch__icon material-icons">check</i></span>
+                                                <span ng-if="!navData.is_home">
                                                 <input type="checkbox" ng-model="navData.is_home" ng-true-value="1" ng-false-value="0">
                                                 <span class="lever"></span>
+                                                </span>
                                             </label>
                                         </div>
                                     </div>
