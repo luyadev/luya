@@ -12,7 +12,6 @@ use admin\models\StorageFile;
 use admin\models\StorageImage;
 use admin\models\StorageFilter;
 use admin\models\StorageFolder;
-use Imagine\Gd\Imagine;
 
 /**
  * Create images, files, manipulate, foreach and get details. The storage container 
@@ -326,7 +325,7 @@ class StorageContainer extends \yii\base\Component
             if (empty($filterId)) {
                 $save = @copy($fileQuery->serverSource, $fileSavePath);
             } else {
-                $imagine = new Imagine();
+                $imagine = \yii\imagine\Image::getImagine();
                 $image = $imagine->open($fileQuery->serverSource);
                 $model = StorageFilter::find()->where(['id' => $filterId])->one();
                 if (!$model) {
@@ -334,6 +333,8 @@ class StorageContainer extends \yii\base\Component
                 }
                 $newimage = $model->applyFilter($image, $imagine);
                 $save = $newimage->save($fileSavePath);
+                
+                unset($newimage);
             }
             
             if (!$save) {
