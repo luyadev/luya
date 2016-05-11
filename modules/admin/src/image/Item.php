@@ -90,6 +90,10 @@ class Item extends \yii\base\Object
     public function getSource()
     {
         if (!$this->getFileExists()) {
+            if (Yii::$app->storage->autoFixMissingImageSources === false) {
+                return false;
+            }
+            
             // The image source does not exist, probably it has been deleted due to filter changes.
             // Storage-Component is going go try to re-create this image now.
             $apply = Yii::$app->storage->addImage($this->getFileId(), $this->getFilterId());

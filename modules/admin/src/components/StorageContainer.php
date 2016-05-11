@@ -79,6 +79,14 @@ class StorageContainer extends \yii\base\Component
     
     public $filterCacheKey = 'storageFilterCacheKey';
     
+    /**
+     * @var boolean When enabled the storage component will try to recreated missing images when `getSource()` of an
+     * image is called but the `getFileExists()` does return false, which means that the source file has been deleted.
+     * So in those cases the storage component will automatiaccly try to recreated this image based on the filterId and
+     * fileId.
+     */
+    public $autoFixMissingImageSources = true;
+    
     private $_httpPath = null;
     
     private $_serverPath = null;
