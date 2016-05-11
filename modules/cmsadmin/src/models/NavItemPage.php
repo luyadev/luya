@@ -10,6 +10,8 @@ use cmsadmin\models\NavItemPageBlockItem;
 use cmsadmin\base\NavItemType;
 use cmsadmin\base\NavItemTypeInterface;
 use cmsadmin\Module;
+use luya\traits\CacheableTrait;
+use yii\caching\DbDependency;
 
 /**
  * Represents the type PAGE for a NavItem.
@@ -18,6 +20,8 @@ use cmsadmin\Module;
  */
 class NavItemPage extends NavItemType implements NavItemTypeInterface
 {
+    use CacheableTrait;
+    
     private $_twig = null;
 
     private $_view = null;
@@ -179,7 +183,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
                     $blockResponse = $blockObject->renderFrontend($this->getTwig());
                     
                     if ($blockObject->cacheEnabled) {
-                        $this->setHasCache($cacheKey, $blockResponse, $blockObject->cacheExpiration);
+                        $this->setHasCache($cacheKey, $blockResponse, null, $blockObject->cacheExpiration);
                     }
                 }
             }
@@ -216,6 +220,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
         return (empty($response)) ? [] : $response;
     }
     
+    /*
     private function setHasCache($key, $value, $expirationTime)
     {
         if (Yii::$app->has('cache')) {
@@ -234,38 +239,50 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
     
         return false;
     }
+    */
     
     // ajax parts to get the tree moved from the controller to the model in version beta 6
 
     /**
-     * RECUSRION.
+     * Get the full array content from all the blocks, placeholders, vars configs and values recursiv for this current NavItemPage (which is layout version for a nav item)
+     * @return array
      */
     public function getContentAsArray()
     {
-        $nav_item_page = (new \yii\db\Query())->select('*')->from('cms_nav_item_page t1')->leftJoin('cms_layout', 'cms_layout.id=t1.layout_id')->where(['t1.id' => $this->id])->one();
-    
-        $return = [
-            'nav_item_page' => ['id' => $nav_item_page['id'], 'layout_id' => $nav_item_page['layout_id'], 'layout_name' => $nav_item_page['name']],
-            '__placeholders' => [],
-        ];
-    
-        $nav_item_page['json_config'] = json_decode($nav_item_page['json_config'], true);
-    
-        if (isset($nav_item_page['json_config']['placeholders'])) {
-            foreach ($nav_item_page['json_config']['placeholders'] as $placeholderKey => $placeholder) {
-                $placeholder['nav_item_page_id'] = $this->id;
-                $placeholder['prev_id'] = 0;
-                $placeholder['__nav_item_page_block_items'] = [];
-    
-                $return['__placeholders'][$placeholderKey] = $placeholder;
-    
-                $placeholderVar = $placeholder['var'];
-    
-                $return['__placeholders'][$placeholderKey]['__nav_item_page_block_items'] = self::getPlaceholder($placeholderVar, $this->id, 0);
+        $cache = $this->getHasCache('navItemPageContentAsArray'.$this->id);
+        
+        if ($cache === false) {
+        
+            $nav_item_page = (new \yii\db\Query())->select('*')->from('cms_nav_item_page t1')->leftJoin('cms_layout', 'cms_layout.id=t1.layout_id')->where(['t1.id' => $this->id])->one();
+        
+            $return = [
+                'nav_item_page' => ['id' => $nav_item_page['id'], 'layout_id' => $nav_item_page['layout_id'], 'layout_name' => $nav_item_page['name']],
+                '__placeholders' => [],
+            ];
+        
+            $nav_item_page['json_config'] = json_decode($nav_item_page['json_config'], true);
+        
+            if (isset($nav_item_page['json_config']['placeholders'])) {
+                foreach ($nav_item_page['json_config']['placeholders'] as $placeholderKey => $placeholder) {
+                    $placeholder['nav_item_page_id'] = $this->id;
+                    $placeholder['prev_id'] = 0;
+                    $placeholder['__nav_item_page_block_items'] = [];
+        
+                    $return['__placeholders'][$placeholderKey] = $placeholder;
+        
+                    $placeholderVar = $placeholder['var'];
+        
+                    $return['__placeholders'][$placeholderKey]['__nav_item_page_block_items'] = self::getPlaceholder($placeholderVar, $this->id, 0);
+                }
             }
+        
+            $this->setHasCache('navItemPageContentAsArray'.$this->id, $return, new DbDependency(['sql' => 'SELECT id FROM cms_nav_item_page_block_item WHERE nav_item_page_id=12 ORDER by timestamp_update DESC LIMIT 1']), 0);
+            
+            return $return;
+            
         }
-    
-        return $return;
+        
+        return $cache;
     }
     
     public static function getPlaceholder($placeholderVar, $navItemPageId, $prevId)

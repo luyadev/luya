@@ -9,7 +9,7 @@ use Yii;
  * 
  * Concret implementation example:
  * 
- * ```
+ * ```php
  * $cacheKey = 'foobar';
  * 
  * $cache = $this->getHasCache($cacheKey);
@@ -17,11 +17,18 @@ use Yii;
  * if ($cache === false) {
  * 
  *     // execute code and save cache data into variable
+ *     $cache = "Hello World";
  *     
  *     $this->setHasCache($cacheKey, $cache); // variable $cache has been changed from above
  * }
  * 
  * return $cache;
+ * ```
+ * 
+ * An example for a simple cache query dependency
+ * 
+ * ```php
+ * $this->setHasCache('myCacheKey', $folders, new DbDependency(['sql' => 'SELECT MAX(id) FROM admin_storage_folder WHERE is_deleted=0']), 0);
  * ```
  * 
  * @author nadar
@@ -36,7 +43,7 @@ trait CacheableTrait
     public $cacheEnabled = true;
     
     /**
-     * @var integer Defined the duration of the caching lifetime in seconds. 3600 = 1 hour, 86400 = 24 hours.
+     * @var integer Defined the duration of the caching lifetime in seconds. 3600 = 1 hour, 86400 = 24 hours. 0 is forever
      */
     public $cacheExpiration = 86400;
 
@@ -64,13 +71,14 @@ trait CacheableTrait
      * Set the cache value if caching is allowed.
      *
      * @param string $key The identifier key
-     * @param mix $value The value to store in the cache component.
+     * @param mixed $value The value to store in the cache component.
+     * @param \yii\caching\Dependency $dependency Dependency of the cached item. If the dependency changes, the corresponding value in the cache will be invalidated when it is fetched via get(). This parameter is ignored if $serializer is false.
      * @return void
      */
-    public function setHasCache($key, $value)
+    public function setHasCache($key, $value, $dependency = null, $cacheExpiration = null)
     {
         if ($this->isCachable()) {
-            Yii::$app->cache->set($key, $value, $this->cacheExpiration);
+            Yii::$app->cache->set($key, $value, (is_null($cacheExpiration)) ? $this->cacheExpiration : $cacheExpiration, $dependency);
         }
     }
     

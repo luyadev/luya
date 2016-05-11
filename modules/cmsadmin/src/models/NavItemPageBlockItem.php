@@ -125,6 +125,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     public function eventBeforeInsert()
     {
         $this->timestamp_create = time();
+        $this->timestamp_update = time();
         $this->create_user_id = Yii::$app->adminuser->getId();
         if (empty($this->json_config_cfg_values)) {
             $this->json_config_cfg_values = json_encode((object) [], JSON_FORCE_OBJECT);
