@@ -3,9 +3,9 @@
 namespace admin\components;
 
 use Yii;
-use Exception;
 use yii\db\Query;
 use yii\helpers\Inflector;
+use luya\Exception;
 use luya\helpers\FileHelper;
 use admin\helpers\Storage;
 use admin\models\StorageFile;
@@ -366,9 +366,9 @@ class StorageContainer extends \yii\base\Component
             $this->_imagesArray[$model->id] = $model->toArray();
             $this->deleteHasCache($this->imageCacheKey);
             return $this->getImage($model->id);
-        } catch (Exception $err) {
+        } catch (\Exception $err) {
             if ($throwException) {
-                throw new Exception($err->getMessage(), $err->getCode(), $err);
+                throw new Exception("add image exception: " . $err->getMessage(), 0, $err);
             }
         }
         
