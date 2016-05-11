@@ -2,6 +2,7 @@
 
 namespace luya\console\commands;
 
+use Yii;
 use admin\importers\StorageImporter;
 
 /**
