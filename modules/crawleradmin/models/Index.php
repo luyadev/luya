@@ -118,7 +118,7 @@ class Index extends \admin\ngrest\base\Model
 
     public function highlight($word, $text, $sheme = "<span style='background-color:#FFEBD1; color:black;'>%s</span>")
     {
-        return preg_replace("/".htmlentities($word, ENT_QUOTES)."/i", sprintf($sheme, $word), $text);
+        return preg_replace("/".preg_quote(htmlentities($word, ENT_QUOTES), '/')."/i", sprintf($sheme, $word), $text);
     }
 
     /* ngrest model properties */

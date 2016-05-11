@@ -4,6 +4,7 @@ LUYA CHANGELOG
 1.0.0-beta7 (in progress)
 -------------------------
 
+- `#858` Fixed bug where crawler word highlight functions does not quote the preg_replace identifier.
 - `#856` Disable the ability to unset a current homepage in the cms module, this may lead into a state without any homepage defined.
 - `#847` Fixed bug in model crud/createcreate command template where short open tag is disabled.
 - `#729` Added extra variable informations when creating a block with cms-page type to help retrieve menu informations.
