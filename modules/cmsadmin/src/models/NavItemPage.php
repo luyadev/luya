@@ -249,9 +249,9 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
      */
     public function getContentAsArray()
     {
-        $cache = $this->getHasCache('navItemPageContentAsArray'.$this->id);
+        // $cache = $this->getHasCache('navItemPageContentAsArray'.$this->id);
         
-        if ($cache === false) {
+        // if ($cache === false) {
         
             $nav_item_page = (new \yii\db\Query())->select('*')->from('cms_nav_item_page t1')->leftJoin('cms_layout', 'cms_layout.id=t1.layout_id')->where(['t1.id' => $this->id])->one();
         
@@ -276,13 +276,13 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
                 }
             }
         
-            $this->setHasCache('navItemPageContentAsArray'.$this->id, $return, new DbDependency(['sql' => 'SELECT id FROM cms_nav_item_page_block_item WHERE nav_item_page_id=12 ORDER by timestamp_update DESC LIMIT 1']), 0);
+            // $this->setHasCache('navItemPageContentAsArray'.$this->id, $return, new DbDependency(['sql' => 'SELECT id FROM cms_nav_item_page_block_item WHERE nav_item_page_id=12 ORDER by timestamp_update DESC LIMIT 1']), 0);
             
             return $return;
             
-        }
+        //}
         
-        return $cache;
+        //return $cache;
     }
     
     public static function getPlaceholder($placeholderVar, $navItemPageId, $prevId)
