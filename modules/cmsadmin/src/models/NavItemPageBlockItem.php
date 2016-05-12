@@ -3,6 +3,7 @@
 namespace cmsadmin\models;
 
 use Yii;
+use cmsadmin\Module;
 
 /**
  * Represents an ITEM for the type NavItemPage.
@@ -76,7 +77,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     public function eventBeforeUpdate()
     {
         $this->is_dirty = 1;
-        $this->update_user_id = Yii::$app->adminuser->getId();
+        $this->update_user_id = Module::getAuthorUserId()
         $this->timestamp_update = time();
     }
 
@@ -126,7 +127,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     {
         $this->timestamp_create = time();
         $this->timestamp_update = time();
-        $this->create_user_id = Yii::$app->adminuser->getId();
+        $this->create_user_id = Module::getAuthorUserId();
         if (empty($this->json_config_cfg_values)) {
             $this->json_config_cfg_values = json_encode((object) [], JSON_FORCE_OBJECT);
         }

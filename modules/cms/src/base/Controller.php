@@ -4,7 +4,7 @@ namespace cms\base;
 
 use Yii;
 use luya\web\View;
-use cms\helpers\Parser;
+use cms\helpers\TagParser;
 use cmsadmin\models\NavItem;
 use yii\web\NotFoundHttpException;
 use yii\web\MethodNotAllowedHttpException;
@@ -82,7 +82,7 @@ abstract class Controller extends \luya\web\Controller
         }
         
         if ($this->module->enableTagParsing) {
-            $content = Parser::encode($content);
+            $content = TagParser::convert($content);
         }
         
         if (Yii::$app->has('adminuser') && !Yii::$app->adminuser->isGuest && $this->module->overlayToolbar === true) {

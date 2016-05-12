@@ -5,33 +5,39 @@ namespace cms\helpers;
 use Yii;
 
 /**
- * Hello link:123123.
+ * TagParser to convert CMS Module Tags into HTML Tags
  * 
- * link[123]
- * link[123](Href Label)
- * link[http://www.google.ch](Href Label)
+ * Available encoding tags:
  * 
- * file[123]
- * file[123](File Label)
+ * + link[123]
+ * + link[123](Link label)
+ * + link[http://www.google.ch](Link label)
+ * + file[123]
+ * + file[123](File label)
  * 
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
-class Parser
+class TagParser
 {
+    /**
+     * @var string Base regular expression to determine function, values and value-sub informations.
+     * @see https://regex101.com/r/tI7pK1/3 - Online Regex tester
+     */
     const REGEX = '/(?<function>link|file)\[(?<value>.*?)\](\((?<sub>.*?)\))?/mi';
 
     /**
+     * Convert the CMS-Tags into HTML-Tags.
      * 
-     * 
-     * @see https://regex101.com/r/tI7pK1/3 - Online Regex tester
-     * @param string $content
+     * @param string $content The content where the CMS-Tags should be found and convert into Html-Tags.
+     * @return string The converted output of $content.
      */
-    public static function encode($content)
+    public static function convert($content)
     {
-        if (is_object($content) || is_array($content)) {
+        // verify if content is a string otherwhise just return the original provided content
+        if (!is_string($content)) { 
             return $content;
         }
-        
+        // find all tags based on the REGEX expression
         preg_match_all(static::REGEX, $content, $results, PREG_SET_ORDER);
 
         foreach ($results as $row) {
@@ -60,7 +66,7 @@ class Parser
         return $content;
     }
 
-    public static function functionLink($result)
+    private static function functionLink($result)
     {
         $alias = false;
         $external = true;
@@ -96,7 +102,7 @@ class Parser
         return '<a href="'.$href.'" label="'.$label.'" class="'.$class.'" '.$target.'>'.$label.'</a>';
     }
     
-    public static function functionFile($result)
+    private static function functionFile($result)
     {
         $file = Yii::$app->storage->getFile($result['value']);
         

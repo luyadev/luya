@@ -95,4 +95,9 @@ class Module extends \admin\base\Module
     {
         return Yii::t('cmsadmin', $message, $params, Yii::$app->luyaLanguage);
     }
+    
+    public static function getAuthorUserId()
+    {
+        return (Yii::$app instanceof \luya\web\Application) ? Yii::$app->adminuser->getId() : 0;
+    }
 }

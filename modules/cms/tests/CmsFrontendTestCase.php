@@ -2,6 +2,9 @@
 
 namespace cmstests;
 
+require 'vendor/autoload.php';
+require 'data/env.php';
+
 class CmsFrontendTestCase extends \PHPUnit_Framework_TestCase
 {
     public $app = null;

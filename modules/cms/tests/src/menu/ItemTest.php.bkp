@@ -21,7 +21,7 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(1, $obj->type);
         $this->assertEquals("", $obj->description);
         $this->assertEquals("homepage", $obj->alias);
-        $this->assertEquals(1452169829, $obj->dateCreated);
+        $this->assertNotNull($obj->dateCreated);
         $this->assertEquals(0, $obj->dateUpdated);
         //$user->assertTrue($obj->userCreated instanceof User);
         //$user->assertTrue($obj->userUpdated instanceof User);
@@ -39,7 +39,7 @@ class ItemTest extends CmsFrontendTestCase
     public function testChildItem()
     {
         $obj = Yii::$app->menu->findOne(['id' => 10]);
-        $this->assertEquals("/luya/envs/dev/public_html/en/page-2/sub-page-2-of-2", $obj->link);
+        $this->assertEquals("/luya/envs/dev/public_html/en/page1/p1-page3", $obj->link);
         $this->assertEquals(2, $obj->depth);
         $this->assertEquals(2, count($obj->siblings));
     }
