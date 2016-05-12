@@ -3,6 +3,7 @@
 namespace cms\helpers;
 
 use Yii;
+use luya\helpers\Url;
 
 /**
  * TagParser to convert CMS Module Tags into HTML Tags
@@ -39,16 +40,14 @@ class TagParser
         }
         // find all tags based on the REGEX expression
         preg_match_all(static::REGEX, $content, $results, PREG_SET_ORDER);
-
+        // foreach all the results matches the regex
         foreach ($results as $row) {
-
-            // fixed issue when ussing link[] cause value is empty
+            // When value is empty (can be caused by using `link[]` we have to skip this item.
             if (empty($row['value'])) {
                 continue;
             }
-
-            $replace = null;
-
+            // if a function matches replace will contain the parse function response
+            $replace = false;
             switch ($row['function']) {
                 case 'link':
                     $replace = static::functionLink($row);
@@ -57,8 +56,8 @@ class TagParser
                     $replace = static::functionFile($row);
                     break;
             }
-
-            if ($replace !== null) {
+            // the function contains values, so we have to preg_replace the original content with the parsed content
+            if ($replace !== false) {
                 $content = preg_replace('['.preg_quote($row[0]).']mi', $replace, $content, 1);
             }
         }
@@ -66,7 +65,7 @@ class TagParser
         return $content;
     }
 
-    private static function functionLink($result)
+    private static function functionLink(array $result)
     {
         $alias = false;
         $external = true;
@@ -80,10 +79,14 @@ class TagParser
                 $href = '#link_not_found';
             }
         } else {
-            $href = $result['value'];
-
-            if (preg_match('#https?://#', $href) === 0) {
-                $href = 'http://'.$href;
+            if (substr($result['value'], 0, 2) == '//') {
+                $href = preg_replace('#//#', Url::base(true) . '/', $result['value'], 1);
+                $external = false;
+            } else {
+                $href = $result['value'];
+                if (preg_match('#https?://#', $href) === 0) {
+                    $href = 'http://'.$href;
+                }
             }
         }
 
@@ -93,24 +96,26 @@ class TagParser
             if ($alias) {
                 $label = $alias;
             } else {
-                $label = $result['value'];
+                $label = $href;
             }
         }
 
         $class = $external ? 'link-external' : 'link-internal';
-        $target = $external ? 'target="_blank"' : null;
-        return '<a href="'.$href.'" label="'.$label.'" class="'.$class.'" '.$target.'>'.$label.'</a>';
+        $target = $external ? ' target="_blank"' : null;
+        return '<a href="'.$href.'" label="'.$label.'" class="'.$class.'"'.$target.'>'.$label.'</a>';
     }
     
-    private static function functionFile($result)
+    private static function functionFile(array $result)
     {
         $file = Yii::$app->storage->getFile($result['value']);
         
-        if ($file) {
-            $name = isset($result['sub']) ? $result['sub'] : $file->name;
-            $source = $file->sourceStatic;
-            
-            return '<a href="'.$source.'" target="_blank">'.$name.'</a>';
+        if (!$file) {
+            return false;
         }
+        
+        $name = isset($result['sub']) ? $result['sub'] : $file->name;
+        $source = $file->sourceStatic;
+            
+        return '<a href="'.$source.'" target="_blank">'.$name.'</a>';
     }
 }
