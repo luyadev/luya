@@ -80,11 +80,18 @@
 			$scope.data.list = $filter('orderBy')($scope.data.list, sort + field);
 		};
 		
+		$scope.temp = {};
+		
+		$scope.activeWindowReload = function() {
+			$scope.getActiveWindow($scope.temp.activeWindowId, $scope.temp.id);
+		}
+		
 		$scope.getActiveWindow = function (activeWindowId, id, $event) {
 			$http.post('admin/ngrest/render', $.param({ itemId : id, activeWindowHash : activeWindowId , ngrestConfigHash : $scope.config.ngrestConfigHash }), {
 				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 			})
 			.success(function(data) {
+				$scope.temp = {activeWindowId: activeWindowId, id: id};
 				$scope.openActiveWindow();
 				$scope.data.aw.itemId = id;
 				$scope.data.aw.configCallbackUrl = $scope.config.activeWindowCallbackUrl;
