@@ -137,6 +137,11 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
         $event->sender->{$this->name} = $data;
     }
     
+    public function onBeforeListFind($event)
+    {
+    	$event->sender->{$this->name} = $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $event->sender->id])->all();
+    }
+    
     public function onBeforeFind($event)
     {
         $event->sender->{$this->name} = $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $event->sender->id])->all();
