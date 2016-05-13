@@ -80,10 +80,8 @@
 			$scope.data.list = $filter('orderBy')($scope.data.list, sort + field);
 		};
 		
-		$scope.temp = {};
-		
 		$scope.activeWindowReload = function() {
-			$scope.getActiveWindow($scope.temp.activeWindowId, $scope.temp.id);
+			$scope.getActiveWindow($scope.data.aw.hash, $scope.data.aw.itemId);
 		}
 		
 		$scope.getActiveWindow = function (activeWindowId, id, $event) {
@@ -91,7 +89,6 @@
 				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 			})
 			.success(function(data) {
-				$scope.temp = {activeWindowId: activeWindowId, id: id};
 				$scope.openActiveWindow();
 				$scope.data.aw.itemId = id;
 				$scope.data.aw.configCallbackUrl = $scope.config.activeWindowCallbackUrl;
