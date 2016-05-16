@@ -2,9 +2,7 @@
 
 The `NgRest` crud model class is the based class for the api, based on this Active Record class the find, update and created validation rules will be perfomed. The main different to the Yii2 Restful implementation is the to use `admin\ngrest\base\Model` as base class. So the ngrest crud model provides additianl informations to what fields you want to edit, create or list in your crud view.
 
-![ngrest-crud](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/ngrest-crud.png "NgRest Image")
-
-You should read the [Admin NgRest Crud Concept](app-admin-module-ngrest.md) in order to understand waht the NgRest Model is all about.
+> You should read the [Admin NgRest Crud Concept](app-admin-module-ngrest.md) in order to understand what the NgRest Model is all about.
 
 ## Where do i configure?
 

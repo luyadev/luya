@@ -25,8 +25,10 @@ Where *command* is one of the following commands below:
 |crud/create       |-                             |`crud/create`        |Create new [NgRest Crud](app-admin-module-ngrest.md) with a wizzard.
 |module/create     |-                             |`module/create`      |Create new [Frontend/Admin Module](app-module.md) with a wizzard.
 |block/create		|-								|`block/create`	|Create new [Inhalts Blöcken](app-blocks.md) with a wizzard.
-|storage/cleanup   |-								|`storage/cleanup`	|Cleanup not existing files compare file system and database.
-|<route>           |-                             |`mymodule/commandcontroller/action` |All comands stored in the folder `commands` can be run by default routing.
+|storage/cleanup|-|`storage/cleanup`|Cleanup not existing files compare file system and database.
+|storage/process-thumbnails|-|`storage/process-thumbnails`|Create all thumbnails for filemanager preview. Otherwhise they are created on request load.
+|aw/create|-|`aw/create`|Generate a new Active Window class file based on your configuration.
+|<route>|-|`mymodule/commandcontroller/action`|All comands stored in the folder `commands` can be run by default routing.
 
 
 Create your own command
