@@ -77,7 +77,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     public function eventBeforeUpdate()
     {
         $this->is_dirty = 1;
-        $this->update_user_id = Module::getAuthorUserId()
+        $this->update_user_id = Module::getAuthorUserId();
         $this->timestamp_update = time();
     }
 
