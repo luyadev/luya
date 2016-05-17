@@ -1,8 +1,6 @@
 # NgRest ActiveWindow
 
-An *NgRest ActiveWindow* is a concept to attach a modal window into an [Ng Rest Crud List](app-admin-module-ngrest.md). The Active Window is always bound to an **ID** of an item and is represented as a button with an icon and/or an alias. 
-
-An example of a Button in the crud list:
+An *NgRest ActiveWindow* is a concept to attach a modal window into an [Ng Rest Crud List](app-admin-module-ngrest.md). The Active Window is always bound to an **ID** of an item and is represented as a button with an icon and/or an alias. An example of a Button in the crud list:
 
 ![button](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/aw_button.png "Active Window Button")
 
@@ -10,9 +8,9 @@ An example of an active window (Change Password) when clicked:
 
 ![overlay-window](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/aw_window.png "Active Window Overlay")
 
-> Use the [aw/create console command](luya-console.md) to generate a new Active Window.
+### Create an Active Window
 
-### Example Window
+> Use the [aw/create console command](luya-console.md) to generate a new Active Window.
 
 A very example basic class with the name *TestActiveWindow* just renders an index and contains a callback:
 
@@ -35,57 +33,79 @@ class TestActiveWindow extends \admin\ngrest\base\ActiveWindow
 }
 ```
 
-# Attaching the Active Window
+Some general informations about Active Windows:
 
-> TBD translations
++ The popertie `$module` is required and is used to determine the path for the views files.
++ The `index()` method is required and will always be the default method which is rendered when clicking on the button in the crud grid list.
++ Callbacks must be prefix with `callback`, the properties of the callbacks can be either required or not.
 
-Um ein ActiveWindow einzubinden registerien Sie die Klasse im `aw` pointer mit der Funktion `load` innerhalb ihres ngrest config abschnittes. Da Active Windows über das yii\base\Object verfügen kannst du alle public eigenschaften des ActiveWindows beim load befehln überschreiben.
+Wokring with callbacks
+
++ To return successfull data use `sendSuccess($message)`.
++ To return error data use `sendError($message)`.
+
+# Attaching the Class
+
+In order to add an Active Window into your NgRest config, you have to add the class to the `aw` pointer of your config and use the `load` method to bind the class to the aw pointer. As the Active Window contains the yii\base\Object as extend class you can configure all public properties while loading the class. Below an example of how to load an Active Window class and defined `alias` and `icon` public properties. The alias and icon probierts does exist in every Active Window an can always be overwritten.
 
 ```php
 public function ngRestConfig($config)
 {
-    // ...
-    $config->aw->load(['class' => '\admin\aws\TestActiveWindow()', 'alias' => 'Mein Test Window', 'icon' => 'extension');
+    $config->aw->load(['class' => \admin\aws\TestActiveWindow::className(), 'alias' => 'My Window Alias', 'icon' => 'extension']);
+    
     // ...
     
     return $config;
 }
 ```
 
-* Ein *ActiveWindow* muss immer über eine `$module` property verfügen, diese dient dazu den Pfad für die view files ausfindig zu machen.
-* Jedes *ActiveWindow* muss über eine `index()` methode verfügen.
-* Callbacks müssen den prefix `callback` haben.
-
-Um einen vordefinierten namen und icon deines Active Window zu vergeben, überschreibe die properties:
-
-* $alias
-* $icon
-
-```php
-public $alias = 'Das ist mein AW';
-
-public $icon = 'extension';
-```
-
-> Pro Tipp: Du kannst andere *ActiveWindows* extenden (`extends XYZActiveWindow`) und die `$module` propertie anpassen um deine eigenen views zu rendern.
-
 # View Files
 
-> TBD translations
+To render view files you can run the method `$this->render()` inside your active window class. The render method will lookup for php view file based on the base path of your `$module` propertie. Lets assume we run `$this->render('index')` and have defined `admin` as your `$module` propertie and your Active Window name is `TestActiveWindow` this will try to find the view file under the path `@admin/views/aws/test/index.php`. 
 
-Das view file welches bei `$this->render('index')` gesucht wird würde im folgenden Ordner liegen `@admin/views/aws/testactivewindow` und der Datei names ist `index.php`.
+#### How to make Button
 
-Es gibt vordefinierte helper methoden aus dem view context welche zbsp. eine Button zur Verfügung stellen welcher direkt den Callback mit gewünschten optioen aufruft. Natürlich können auch angular resource files hinterlegt werden um komplexe tasks abzuwickeln.
-
-Ein beispiel für den Inhalt des index views, der einen Knopf beinhaltet welchen die `callbackSayHello` methode aufruft:
+In order to create a button with a callback we use the helper method `$this->callbackButton`. Example view File
 
 ```php
-<h1>Window mit Button</h1>
-<p>Beim klicken des Buttons sagen wir Hallo.</p>
-<?= $this->callbackButton('Button Name', 'say-hello', ['params' => ['name' => 'Radan']]); ?>
+<?php
+/*
+ * @var $this \admin\ngrest\base\ActiveWindowView
+ */
+
+echo $this->callbackButton('My Button', 'hello-world', ['params' => ['name' => 'John Doe']]);
 ```
 
-### Angular in View files
+The callback of this button should look like this:
+
+```php
+public function callbackHelloWolrd($name)
+{
+    return $this->sendSuccess('Hello ' . $name);
+}
+```
+
+#### Generate a Form
+
+You can also use the callback from widget to create a form sending data to a callback
+
+```php
+<? $form = CallbackFormWidget::begin(['callback' => 'post-data', 'buttonValue' => 'Submit']); ?>
+<?= $form->field('firstname', 'Firstname'); ?>
+<?= $form->field('lastname', 'Lastname:'); ?>
+<? $form::end(); ?>
+```
+
+The corresponding callback should look like this:
+
+```php
+public function callbackPostData($firstname, $lastname)
+{
+    return $this->sendError('error while collecting data... maybe?');
+}
+```
+
+#### Angular in View files
 
 As the administration interface is written in angular you can aso create inline Angular Controllers and interact with your Active Window class.
 
@@ -113,21 +133,13 @@ zaa.bootstrap.register('InlineController', function($scope, $controller) {
 
 After the the Active Window response from function `addToList` has recieved, the active window well be reloaded. This is just a very quick integration example and does not give the user a true angular experience, but let you create solutions in a very quick time.
 
-# Callback
-
-> TBD translations
-
-Wenn Sie die helper methoden wie `callbackButton()` verwenden im view, müssen Sie nach gewissen regeln spielen. Mit folgenden Funktionen können Sie der Helper methode mitteilen was innerhalb des Callbacks passiert ist:
-
-+ `sendSuccess($message)` Gibt ein erfolg zurück mit einer Nachricht.
-+ `sendError($message)` Gibt einen Fehler zurück mit einer Nachricht.
-
 # Existing Reusable Active Windows
 
-Gewisse Active Windows kannst du in deinem Projekte wieder verwenden und müssen nicht zusätzlich entwickelt werden. Hier eine Liste von ActiveWindows die du verwendest kannst und mit der Installtion der Admin ebene automatisch mit geliefert werden.
+The admin module of LUYA provides some basic reusable active windows you can reuse and work with them out of the box, just attach them to your ngrest config and maybe change some properties.
 
-|Name   |Klasse |Public Properties
+|Name   |Class |Public Properties
 |--     |--     |--
 |Tag    |`admin\aws\TagActiveWindow`|<ul><li>$tableName</li></ul>
 |Gallery|`admin\aws\Gallery`|<ul><li>$refTableName</li><li>$imageIdFieldName</li><li>$refFieldName</li></ul>
 |ChangePassword|`admin\aws\ChangePassword`|<ul><li>$className</li></ul>
+|CoordinatesActiveWindow|`admin\aws\CoordinatesActiveWindow`|<ul><li>$ampsApikey</li></ul>
