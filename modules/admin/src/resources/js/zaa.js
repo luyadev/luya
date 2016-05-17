@@ -337,7 +337,7 @@ function typeCastValue(value) {
 	});
 	
 	// factory.js
-	zaa.factory("authInterceptor", function($rootScope, $q) {
+	zaa.factory("authInterceptor", function($rootScope, $q, AdminToastService) {
 		return {
 			request: function (config) {
 				config.headers = config.headers || {};
@@ -349,6 +349,7 @@ function typeCastValue(value) {
 				if (data.status == 401) {
 					window.location = "admin/default/logout";
 				}
+				AdminToastService.error("Response Error: " + data.status + " " + data.statusText, 5000);
 				return $q.reject(data);
 			}
 		};
