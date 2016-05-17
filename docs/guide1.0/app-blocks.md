@@ -218,7 +218,7 @@ the folder will be created on import. Now blocks can belong to this folder, to d
 ```
 public function getBlockGroup()
 {
-    return \app\blocksgroups\MySuperGroup::className();
+    return \app\blockgroups\MySuperGroup::className();
 }
 ```
 
