@@ -5,8 +5,11 @@ namespace luya\base;
 use Yii;
 
 /**
- * @inheritdoc
- * @author nadar
+ * DynamicModel extends from yii\base\Dynamic Model.
+ * 
+ * Additional Dynamic Model to provide attribute labels.
+ * 
+ * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta6
  */
 class DynamicModel extends \yii\base\DynamicModel

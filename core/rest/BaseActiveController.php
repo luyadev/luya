@@ -2,6 +2,11 @@
 
 namespace luya\rest;
 
+/**
+ * Base Class for all Rest ActiveControllers
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 abstract class BaseActiveController extends \yii\rest\ActiveController implements \luya\rest\BehaviorInterface
 {
     use \luya\rest\BehaviorTrait;

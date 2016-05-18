@@ -9,6 +9,8 @@ use Twig_SimpleFilter;
 use Twig_Extension_Debug;
 
 /**
+ * LUYA Twig Component
+ * 
  * from string:
  * 
  * ```

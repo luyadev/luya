@@ -4,10 +4,10 @@ namespace luya\rest;
 
 use Yii;
 
-/*
- * Basic
+/**
+ * Basic Rest Controller class
  *
- * ´´´
+ * ```php
  * class TestController extends \luya\rest\Controller
  * {
  *     public function actionFooBar()
@@ -15,8 +15,9 @@ use Yii;
  *         return ['foo', 'bar'];
  *     }
  * }
- *
- * @author nadar
+ * ```
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
 class Controller extends \yii\web\Controller
 {

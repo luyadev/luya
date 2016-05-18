@@ -7,6 +7,8 @@ use luya\helpers\Url;
 use yii\web\BadRequestHttpException;
 
 /**
+ * Extended LUYA UrlManager
+ * 
  * UrlManger extends the Yii2 Url Manager by resolving composition informations while parseRequest and provides other helper methods.
  * 
  * @todo see http://www.yiiframework.com/doc-2.0/guide-runtime-routing.html#adding-rules-dynamically

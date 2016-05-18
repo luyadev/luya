@@ -2,6 +2,11 @@
 
 namespace luya\rest;
 
+/**
+ * Rest Behavior Trait to implement basic Rest behaviors.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 trait BehaviorTrait
 {
     private function getUserAuthClass()

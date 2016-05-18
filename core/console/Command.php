@@ -2,7 +2,12 @@
 
 namespace luya\console;
 
-class Command extends \luya\console\Controller
+/**
+ * Base class for all Commands
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
+abstract class Command extends \luya\console\Controller
 {
     /**
      * @var boolean Whether the verbose printing is enabled from options parameter or not.
@@ -14,6 +19,12 @@ class Command extends \luya\console\Controller
      */
     public $interactive = true;
     
+    /**
+     * Method to print informations directly when verbose is enabled.
+     * 
+     * @param string $message
+     * @param string $section
+     */
     public function verbosePrint($message, $section = null)
     {
         if ($this->verbose) {
