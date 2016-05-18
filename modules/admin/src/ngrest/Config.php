@@ -6,9 +6,9 @@ use Exception;
 use luya\helpers\ArrayHelper;
 
 /**
- * Create NgRest config from Array.
+ * Defines and holds an NgRest Config.
  * 
- * Example config array to `setConfig($array)`:.
+ * Example config array to set via `setConfig()`.
  * 
  * ```php
  * $array = [
@@ -30,7 +30,7 @@ use luya\helpers\ArrayHelper;
  * ];
  * ```
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
 {
@@ -44,7 +44,7 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
 
     public $apiEndpoint = null;
 
-    public $primaryKey = null; /* not sure yet if right place to impelment about config */
+    public $primaryKey = null; /* @todo not sure yet if right place to impelment about config */
 
     public function setConfig(array $config)
     {

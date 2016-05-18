@@ -9,6 +9,12 @@ use luya\helpers\ArrayHelper;
 /**
  * Config Builder class to make the NgRest Configs
  * 
+ * @property \admin\ngrest\ConfigBuilder $list Set the pointer to list and return the ConfigBuilder for this pointer.
+ * @property \admin\ngrest\ConfigBuilder $create Set the pointer to create and return the ConfigBuilder for this pointer.
+ * @property \admin\ngrest\ConfigBuilder $update Set the pointer to update and return the ConfigBuilder for this pointer.
+ * @property \admin\ngrest\ConfigBuilder $aw Set the pointer to aw and return the ConfigBuilder for this pointer.
+ * @property boolean $delete Define whether the delete button is availabe or not
+ * 
  * @author Basil Suter <basil@nadar.io>
  */
 class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
@@ -17,10 +23,16 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
 
     protected $field = null;
 
-    private $_pointersMap = ['list', 'create', 'update', 'delete', 'aw'];
-
     protected $config = [];
 
+    private $_pointersMap = ['list', 'create', 'update', 'delete', 'aw'];
+    
+    /**
+     * Maig setter function, defines whether a pointer exists or not, if not existing it will be created.
+     * 
+     * @param string $key
+     * @param mixed $value
+     */
     public function __set($key, $value)
     {
         if (!array_key_exists($key, $this->config)) {
@@ -70,8 +82,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
     /**
      * Add a Plugin to the current field pointer plugins array.
      * 
-     * @TODO rename to addType
-     * 
+     * @todo rename to addType
      * @param string $name The name of the ngrest\plugin
      * @param array $args
      * @return \admin\ngrest\ConfigBuilder
@@ -85,6 +96,14 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
         return $this;
     }
 
+    /**
+     * Define a field.
+     * 
+     * @param string $name
+     * @param string $alias
+     * @param boolean $i18n
+     * @return \admin\ngrest\ConfigBuilder
+     */
     public function field($name, $alias = null, $i18n = false)
     {
         $this->config[$this->pointer][$name] = [
@@ -100,6 +119,14 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
         return $this;
     }
 
+    /**
+     * Define an extra field.
+     * 
+     * @param string $name
+     * @param string $alias
+     * @param boolean $i18n
+     * @return \admin\ngrest\ConfigBuilder
+     */
     public function extraField($name, $alias, $i18n = false)
     {
         $this->config[$this->pointer][$name] = [
@@ -152,6 +179,13 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
         return $this;
     }
 
+    /**
+     * Copy from a pointer into another with optional removal of fields, the copie will applied
+     * to the current active pointer.
+     * 
+     * @param string $key The pointer to copy from
+     * @param array $removeFields
+     */
     public function copyFrom($key, $removeFields = [])
     {
         $temp = $this->config[$key];
@@ -164,6 +198,12 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
         $this->config[$this->pointer] = ArrayHelper::merge($this->config[$this->pointer], $temp);
     }
 
+    /**
+     * Return the NgRest Config
+     * 
+     * {@inheritDoc}
+     * @see \admin\ngrest\interfaces\ConfigBuilder::getConfig()
+     */
     public function getConfig()
     {
         return $this->config;
