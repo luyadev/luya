@@ -785,7 +785,7 @@
 	    	
 			AdminToastService.confirm(i18n['js_page_confirm_delete'], function($timeout, $toast) {
 				
-				$http.get('admin/api-cms-nav/delete', { params : { navId : $scope.navData.id }}).success(function(response) {
+				$http.get('admin/api-cms-nav/delete', { params : { navId : $scope.id }}).success(function(response) {
 	    			$scope.isDeleted = true;
 	    			$scope.menuDataReload().then(function() {
 	    				$toast.close();
