@@ -102,7 +102,10 @@ use Yii;
     }
     
     /**
-     * @return \admin\ngrest\Config the configured ngrest object
+     * Define the NgRestConfig for this model with the ConfigBuilder object.
+     *
+     * @param \admin\ngrest\ConfigBuilder $config The current active config builder object.
+     * @return \admin\ngrest\ConfigBuilder
      */
     public function ngRestConfig($config)
     {
