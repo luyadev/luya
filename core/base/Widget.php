@@ -14,15 +14,15 @@ use yii\helpers\Inflector;
  */
 class Widget extends \yii\base\Widget
 {
-	/**
-	 * Find view paths in application folder.
-	 * 
-	 * {@inheritDoc}
-	 * @see \yii\base\Widget::getViewPath()
-	 */
+    /**
+     * Find view paths in application folder.
+     * 
+     * {@inheritDoc}
+     * @see \yii\base\Widget::getViewPath()
+     */
     public function getViewPath()
     {
-    	// get reflection
+        // get reflection
         $class = new ReflectionClass($this);
         // get path with alias
         return '@app/views/widgets/' . Inflector::camel2id($class->getShortName());

@@ -68,7 +68,7 @@ class BlockController extends \luya\console\Command
             'image-array-upload' => function ($varName) use ($func) { return '$this->zaaImageArrayUpload($this->'.$func.'(\''.$varName.'\')),'; },
             'file-upload' => function ($varName) use ($func) { return '$this->zaaFileUpload($this->'.$func.'(\''.$varName.'\')),'; },
             'file-array-upload' => function ($varName) use ($func) { return '$this->zaaFileArrayUpload($this->'.$func.'(\''.$varName.'\')),'; },
-            'cms-page' => function($varName) use ($func) { return 'Yii::$app->menu->findOne([\'nav_id\' => $this->'.$func.'(\''.$varName.'\', 0)]),'; },
+            'cms-page' => function ($varName) use ($func) { return 'Yii::$app->menu->findOne([\'nav_id\' => $this->'.$func.'(\''.$varName.'\', 0)]),'; },
         ];
         
         if (array_key_exists($type, $info)) {
