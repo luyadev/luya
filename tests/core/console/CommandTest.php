@@ -6,11 +6,17 @@ use Yii;
 use luyatests\LuyaConsoleTestCase;
 use luya\console\Command;
 
+class SubCommand extends Command
+{
+	// as command is an abstract class
+}
+
+
 class CommandTest extends LuyaConsoleTestCase
 {
     public function testModuleTypeSelector()
     {
-        $cmd = new Command('myid', Yii::$app->getModule('unitmodule'));
+        $cmd = new SubCommand('myid', Yii::$app->getModule('unitmodule'));
         
         $className = $cmd->createClassName('das-ist-mein', 'mein0r');
         
