@@ -93,6 +93,7 @@ You can also use the callback from widget to create a form sending data to a cal
 <? $form = CallbackFormWidget::begin(['callback' => 'post-data', 'buttonValue' => 'Submit']); ?>
 <?= $form->field('firstname', 'Firstname'); ?>
 <?= $form->field('lastname', 'Lastname:'); ?>
+<?= $form->field('message')->textarea(); ?>
 <? $form::end(); ?>
 ```
 

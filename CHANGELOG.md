@@ -4,6 +4,7 @@ LUYA CHANGELOG
 1.0.0-beta7 (in progress)
 -------------------------
 
+- `#867` Added new callbackform activefield configurations to add the ability of different input methods in Active Windows.
 - `#864` Fixed issue where Active Window class properties could not be serialized as they can contain closures.
 - `#861` Added new link helper to create realtive urls for the current website, use `link[//about-me]` will replace `//` with the current base url.
 - `#860` Using Yii2 imagine extension instead of native imagine extension in order to fix memory leaks and optimize thumbnail/crop calculations.
