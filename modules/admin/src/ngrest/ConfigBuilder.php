@@ -171,7 +171,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
         $object = Yii::createObject($objectType);
         
         $this->config[$this->pointer][$object->getHashName()] = [
-            'object' => $object,
+            'objectConfig' => $objectType,
             'alias' => $object->getAlias(),
             'icon' => $object->getIcon(),
         ];

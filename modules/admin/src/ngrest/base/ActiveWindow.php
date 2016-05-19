@@ -21,7 +21,7 @@ use admin\ngrest\base\ActiveWindowView;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-abstract class ActiveWindow extends Object implements ViewContextInterface, \Serializable
+abstract class ActiveWindow extends Object implements ViewContextInterface
 {
 	/**
 	 * @var string $suffix The suffix to use for all classes
@@ -226,25 +226,5 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, \Ser
     public function sendSuccess($message, array $data = [])
     {
         return ['error' => false, 'message' => $message, 'responseData' => $data];
-    }
-    
-    /**
-     * Magical function to not serialize any properties.
-     */
-    public function __sleep()
-    {
-    	return [];
-    }
-    
-    // Serializable interface implementation
-    
-    public function serialize()
-    {
-    	return serialize($this->_itemId);
-    }
-    
-    public function unserialize($data)
-    {
-    	$this->_itemId = unserialize($data);
     }
 }
