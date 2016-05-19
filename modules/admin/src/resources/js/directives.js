@@ -699,7 +699,7 @@
                                         '</div>'+
                                     '</td>'+
                                     '<td data-ng-repeat="(field,value) in row track by field">'+
-                                        '<input type="text" ng-model="model[key][field]"class="zaa-table__input"/>'+
+                                        '<textarea ng-model="model[key][field]" class="zaa-table__textarea"></textarea>'+
                                     '</td>'+
                                 '</tr>'+
                             '</table>'+
