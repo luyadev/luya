@@ -73,7 +73,7 @@ class Table extends \admin\ngrest\base\Model
     /**
      * @var An array containing all fields which should be transformed to multilingual fields and stored as json in the database.
      */
-    public $i18n = ['i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus'];
+    public $i18n = ['i18n_sortRelationArray', 'i18n_sortRelationModel', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus'];
     
     /**
      * @inheritdoc
@@ -81,8 +81,8 @@ class Table extends \admin\ngrest\base\Model
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios['restcreate'] = ['image', 'imageArray', 'file', 'fileArray', 'text', 'textarea', 'selectArray', 'checkboxList', 'date', 'datetime', 'decimal', 'number', 'password',  'toggleStatus', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus'];
-        $scenarios['restupdate'] = ['image', 'imageArray', 'file', 'fileArray', 'text', 'textarea', 'selectArray', 'checkboxList', 'date', 'datetime', 'decimal', 'number', 'password',  'toggleStatus', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus'];
+        $scenarios['restcreate'] = ['sortRelationArray', 'sortRelationModel', 'i18n_sortRelationArray', 'i18n_sortRelationModel', 'image', 'imageArray', 'file', 'fileArray', 'text', 'textarea', 'selectArray', 'checkboxList', 'date', 'datetime', 'decimal', 'number', 'password',  'toggleStatus', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus'];
+        $scenarios['restupdate'] = ['sortRelationArray', 'sortRelationModel', 'i18n_sortRelationArray', 'i18n_sortRelationModel', 'image', 'imageArray', 'file', 'fileArray', 'text', 'textarea', 'selectArray', 'checkboxList', 'date', 'datetime', 'decimal', 'number', 'password',  'toggleStatus', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus'];
         return $scenarios;
     }
     
@@ -107,6 +107,13 @@ class Table extends \admin\ngrest\base\Model
      */
     public function ngrestAttributeTypes()
     {
+        return [
+            'sortRelationArray' => ['sortRelationArray', 'data' => ['hi', 'ho']],
+            'sortRelationModel' => ['SortRelationArray', 'data' => ['hi', 'ho']],
+            'i18n_sortRelationArray' => ['SortRelationArray', 'data' => ['hi', 'ho']],
+            'i18n_sortRelationModel' => ['SortRelationArray', 'data' => ['hi', 'ho']]
+        ];
+        /*
         return [
             'image' => 'image',
             'imageArray' => 'imageArray',
@@ -144,6 +151,7 @@ class Table extends \admin\ngrest\base\Model
             //'selectClass' => 'textarea',
             'i18n_toggleStatus' => 'toggleStatus',
         ];
+        */
     }
     
     /**
@@ -158,10 +166,10 @@ class Table extends \admin\ngrest\base\Model
         $this->ngRestConfigDefine($config, 'update', ['image', 'imageArray', 'file', 'fileArray', 'text', 'textarea', 'selectArray', 'checkboxList', 'date', 'datetime', 'decimal', 'number', 'password', 'toggleStatus', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus']);
         */
         
-        $this->ngRestConfigDefine($config, ['list', 'create', 'update'], ['selectArray', 'checkboxList', 'i18n_selectArray', 'i18n_checkboxList']);
+        $this->ngRestConfigDefine($config, ['list', 'create', 'update'], ['sortRelationArray', 'i18n_sortRelationArray']);
        
         // enable or disable ability to delete;
-        $config->delete = false; 
+        $config->delete = true; 
         
         return $config;
     }

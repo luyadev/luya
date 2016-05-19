@@ -2,23 +2,6 @@
     "use strict";
 
     // form.js
-    zaa.directive("zaaLink", function(){
-        return {
-            restrict: "E",
-            scope: {
-                "model": "=",
-                "options": "=",
-                "label": "@label",
-                "i18n": "@i18n",
-                "id": "@fieldid",
-                "name": "@fieldname",
-                "placeholder": "@placeholder"
-            },
-            template: function() {
-                return '<update-form-redirect data="model"></update-form-redirect>';
-            }
-        }
-    });
 
     zaa.directive("zaaInjector", function($compile) {
         return {
@@ -40,6 +23,126 @@
                 var elmn = $compile(angular.element('<' + $scope.dir + ' options="options" initvalue="{{initvalue}}" fieldid="{{fieldid}}" fieldname="{{fieldname}}" placeholder="{{placeholder}}" model="model" label="{{label}}" i18n="{{grid}}" />'))($scope);
                 $element.replaceWith(elmn);
             },
+        }
+    });
+    
+    /**
+     * @var object $model Contains existing data for the displaying the existing relations
+     * 
+     * ```js
+     * [
+     * 	{'sortpos': 1, 'value': 1},
+     *  {'sortpos': 2, 'value': 4},
+     * ]
+     * ```
+     * 
+     * @var object $options Provides options to build the sort relation array:
+     * 
+     * ```js
+     * {
+     * 	'sourceData': [
+     * 		{'value': 1, 'label': 'Source Entry #1'}
+     * 		{'value': 2, 'label': 'Source Entry #2'}
+     * 		{'value': 3, 'label': 'Source Entry #3'}
+     * 		{'value': 4, 'label': 'Source Entry #4'}
+     * 	]
+     * }
+     * ```
+     */
+    zaa.directive("zaaSortRelationArray", function() {
+    	return {
+    		restrict: "E",
+    		scope: {
+    			"model": "=",
+    			"options": "=",
+    			"label": "@label",
+    			"i18n": "@i18n",
+                "id": "@fieldid",
+                "name": "@fieldname",
+    		},
+    		controller: function($scope, $filter) {
+    			
+    			$scope.sourceData = [];
+    			
+    			$scope.$watch(function() { return $scope.model }, function(n, o) {
+    				if (n == undefined) {
+    					$scope.model = [];
+    				}
+    			});
+    			
+    			$scope.$watch(function() { return $scope.options }, function(n, o) {
+    				if (n !== undefined && n !== null) {
+    					$scope.sourceData = n.sourceData;
+    				}
+    			})
+    			
+    			$scope.getSourceOptions = function() {
+    				return $scope.sourceData;
+    			};
+    			
+    			$scope.getModelItems = function() {
+    				return $filter('orderBy')($scope.model, 'sortpos');
+    			}
+    			
+    			$scope.addToModel = function(option) {
+    				
+    				var match = false;
+    				
+    				angular.forEach($scope.model, function(value, key) {
+    					if (value.value == option.value) {
+    						match = true;
+    					}
+    				})
+    				
+    				if (!match) {
+    					var pos = 1;
+    					if ($scope.model.length > 0) {
+    						var items = $filter('orderBy')($scope.model, 'sortpos');
+    						angular.forEach(items, function(value, key) {
+    							items[key].sortpos = pos;
+    							pos++;
+    						});
+    					}
+    					$scope.model.push({'sortpos': pos, 'value': option.value, 'label': option.label});
+    				}
+    			};
+    			
+    			$scope.removeFromModel = function(key) {
+    				$scope.model.splice(key, 1);
+    			}
+    			
+    			$scope.moveUp = function(index) {
+                    index = parseInt(index);
+                    var oldPos = $scope.model[index].sortpos;
+                    console.log('oldPos', oldPos);
+                }
+
+                $scope.moveDown = function(index) {
+                    index = parseInt(index);
+                    var oldPos = $scope.model[index].sortpos;
+                    console.log('oldPos', oldPos);
+                }
+    		},
+    		template: function() {
+    			return '<div><ul><li ng-repeat="(key, item) in getModelItems() track by item.value"><i ng-click="removeFromModel(key)" class="material-icons">remove</i> {{item.label}} <i ng-click="moveUp(key)" class="material-icons" style="transform: rotate(270deg);">play_arrow</i> <i ng-click="moveDown(key)" class="material-icons" style="transform: rotate(90deg);">play_arrow</i></li></ul>Options:<ul><li ng-repeat="option in getSourceOptions()"><i ng-click="addToModel(option)" class="material-icons">add</i> {{ option.label }}</li></ul></div>';
+    		}
+    	}
+    });
+    
+    zaa.directive("zaaLink", function(){
+        return {
+            restrict: "E",
+            scope: {
+                "model": "=",
+                "options": "=",
+                "label": "@label",
+                "i18n": "@i18n",
+                "id": "@fieldid",
+                "name": "@fieldname",
+            },
+            template: function() {
+                return '<update-form-redirect data="model"></update-form-redirect>';
+            }
         }
     });
     
@@ -286,7 +389,7 @@
                 
                 $scope.$watch('options', function(n, o) {
                 	if (n != undefined && n.hasOwnProperty('items')) {
-                    	$scope.optionitems = n.items;
+                    	$scope.optionitems = $filter('orderBy')(n.items, 'label');
                     }
                 });
                 
@@ -574,13 +677,13 @@
                                         '<td width="30"></td>'+
                                         '<td data-ng-repeat="(hk, hr) in model[0] track by hk">'+
                                             '<div class="zaa-table__cell-toolbar-top">'+
-                                                '<button ng-show="{{hk > 0}}" ng-click="moveLeft(hk)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn--cellmove-left"><i class="material-icons" style="transform: rotate(180deg);">play_arrow</i></button>' +
+                                                '<button type="button" ng-show="{{hk > 0}}" ng-click="moveLeft(hk)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn--cellmove-left"><i class="material-icons" style="transform: rotate(180deg);">play_arrow</i></button>' +
                                                 '<div class="zaa-table__cell-toolbar-center">'+
                                                     '<button type="button" ng-click="removeColumn(hk)" class="btn-floating zaa-table__btn zaa-table__btn--del" data-drag="true">'+
                                                         '<i class="material-icons">delete</i>'+
                                                     '</button>'+
                                                 '</div>'+
-                                                '<button ng-click="moveRight(hk)" ng-show="showRightButton(hk)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn--cellmove-right"><i class="material-icons">play_arrow</i></button>' +
+                                                '<button type="button" ng-click="moveRight(hk)" ng-show="showRightButton(hk)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn--cellmove-right"><i class="material-icons">play_arrow</i></button>' +
                                             '</div>'+                                           
                                         '</td>'+
                                     '</tr>'+
@@ -591,8 +694,8 @@
                                             '<i class="material-icons">delete</i>'+
                                         '</button>'+
                                         '<div class="zaa-table__cell-toolbar-side">'+
-                                            '<button ng-show="{{key > 0}}" ng-click="moveUp(key)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn zaa-table__btn--cellmove-top"><i class="material-icons" style="transform: rotate(270deg);">play_arrow</i></button>' +
-                                            '<button ng-show="showDownButton(key)" ng-click="moveDown(key)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn zaa-table__btn--cellmove-bottom"><i class="material-icons" style="transform: rotate(90deg);">play_arrow</i></button><br/>' +
+                                            '<button type="button" ng-show="{{key > 0}}" ng-click="moveUp(key)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn zaa-table__btn--cellmove-top"><i class="material-icons" style="transform: rotate(270deg);">play_arrow</i></button>' +
+                                            '<button type="button" ng-show="showDownButton(key)" ng-click="moveDown(key)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn zaa-table__btn--cellmove-bottom"><i class="material-icons" style="transform: rotate(90deg);">play_arrow</i></button><br/>' +
                                         '</div>'+
                                     '</td>'+
                                     '<td data-ng-repeat="(field,value) in row track by field">'+
@@ -749,7 +852,7 @@
                                     '</div>' +
 
                                     '<div class="list__right">' +
-                                        '<button class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
+                                        '<button type="button" class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
                                     '</div>' +
                                 '</div>' +
                                 '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ waves-effect waves-circle waves-light ]"><i class="material-icons">add</i></button>' +
@@ -839,9 +942,9 @@
                                         '<input class="list__input" type="text" ng-model="row.value" />' +
                                     '</div>' +
                                     '<div class="list__right" style="width:130px">' +
-                                        '<button ng-show="{{key > 0}}" ng-click="moveUp(key)" style="margin-top: 10px"><i class="material-icons" style="transform: rotate(270deg);">play_arrow</i></button>' +
-                                        '<button ng-show="showDownButton(key)" ng-click="moveDown(key)"><i class="material-icons" style="transform: rotate(90deg);">play_arrow</i></button>' +
-                                        '<button class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" style="margin-right:10px" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
+                                        '<button type="button" ng-show="{{key > 0}}" ng-click="moveUp(key)" style="margin-top: 10px"><i class="material-icons" style="transform: rotate(270deg);">play_arrow</i></button>' +
+                                        '<button type="button" ng-show="showDownButton(key)" ng-click="moveDown(key)"><i class="material-icons" style="transform: rotate(90deg);">play_arrow</i></button>' +
+                                        '<button type="button" class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" style="margin-right:10px" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
                                     '</div>' +
                                 '</div>' +
                                 '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ waves-effect waves-circle waves-light ]"><i class="material-icons">add</i></button>' +
