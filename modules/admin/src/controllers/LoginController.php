@@ -6,6 +6,7 @@ use Yii;
 use yii\web\Response;
 use luya\helpers\Url;
 use admin\models\LoginForm;
+use admin\Module;
 
 class LoginController extends \admin\base\Controller
 {
@@ -33,6 +34,8 @@ class LoginController extends \admin\base\Controller
             return $this->redirect(['/admin/default/index']);
         }
     
+        Yii::$app->session->destroy();
+        
         $this->view->registerJs("$(function(){ $('#email').focus(); observeLogin('#loginForm', '".Url::toAjax('admin/login/async')."', '".Url::toAjax('admin/login/async-token')."'); });", \luya\web\View::POS_END);
     
         return $this->render('index');
@@ -55,11 +58,11 @@ class LoginController extends \admin\base\Controller
                     // misc error while login ?!
                 }
             } else {
-                return ['errors' => 'Der eingegeben Sicherheitscode ist falsch.', 'refresh' => false];
+                return ['errors' => Module::t('login_async_token_error'), 'refresh' => false];
             }
         }
 
-        return ['errors' => 'Ein Globaler-Fehler ist enstanden. Bitte kontaktieren Sie Ihren Seitenbetreiber.', 'refresh' => false];
+        return ['errors' => Module::t('login_async_token_globalerror'), 'refresh' => false];
     }
 
     public function actionAsync()
@@ -75,7 +78,6 @@ class LoginController extends \admin\base\Controller
                 if ($this->module->secureLogin) {
                     if ($model->sendSecureLogin()) {
                         Yii::$app->session->set('secureId', $model->getUser()->id);
-
                         return ['refresh' => false, 'errors' => false, 'enterSecureToken' => true];
                     } else {
                         // misc error while secure token sent ?!

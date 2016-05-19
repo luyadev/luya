@@ -142,4 +142,11 @@ return [
     'layout_debug_caching' => 'Caching',
     'debug_state_on' => 'An',
     'debug_state_off' => 'Aus',
+    
+// added translations in 1.0.0-beta7
+
+    'login_securetoken_mail_subject' => 'LUYA Sicherheitscode',
+    'login_securetoken_mail' => '<h1>LUYA Sicherheitscode</h1><p>Verwenden Sie den folgenden Sicherheitscode für den Zugriff auf die Administration der Website {url}:</p><p><strong>{token}</strong></p>',
+    'login_async_token_error' => 'Der eingegeben Sicherheitscode ist falsch',
+    'login_async_token_globalerror' => 'Ein Globaler-Fehler ist enstanden. Bitte kontaktieren Sie Ihren Seitenbetreiber.',
 ];
