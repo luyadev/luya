@@ -398,6 +398,10 @@
                 }
                 
                 $scope.toggleSelection = function (value) {
+                	if ($scope.model == undefined) {
+                		$scope.model = [];
+                	}
+                	
                     for (var i in $scope.model) {
                         if ($scope.model[i]["value"] == value.value) {
                             $scope.model.splice(i, 1);
@@ -882,6 +886,9 @@
                 };
                 
                 $scope.add = function() {
+                	if ($scope.model == undefined) {
+                		$scope.model = [];
+                	}
                     $scope.model.push({ value : '' });
                     $scope.setFocus();
                 };
