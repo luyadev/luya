@@ -3,6 +3,7 @@
 namespace admin\ngrest\plugins;
 
 use admin\ngrest\base\Plugin;
+use yii\helpers\Json;
 
 abstract class SortRelation extends Plugin
 {
@@ -28,5 +29,25 @@ abstract class SortRelation extends Plugin
         return [
             'sortrelationdata' => $this->getData(),
         ];
+    }
+    
+    public function onBeforeSave($event)
+    {
+    	// if its not i18n casted field we have to serialize the the image array as json and abort further event excution.
+    	if (!$this->i18n) {
+    		$event->sender->setAttribute($this->name, Json::encode($event->sender->getAttribute($this->name)));
+    		return false;
+    	}
+    
+    	return true;
+    }
+    
+	public function onBeforeFind($event)
+    {
+        if (!$this->i18n) {
+            $event->sender->setAttribute($this->name, $this->jsonDecode($event->sender->getAttribute($this->name)));
+        }
+        
+        return true;
     }
 }

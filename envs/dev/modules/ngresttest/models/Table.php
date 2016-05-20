@@ -3,6 +3,7 @@
 namespace ngresttest\models;
 
 use Yii;
+use admin\models\User;
 
 /**
  * NgRest Model created at 21.03.2016 14:05 on LUYA Version 1.0.0-beta6-dev.
@@ -109,9 +110,9 @@ class Table extends \admin\ngrest\base\Model
     {
         return [
             'sortRelationArray' => ['sortRelationArray', 'data' => ['hi', 'ho']],
-            'sortRelationModel' => ['SortRelationArray', 'data' => ['hi', 'ho']],
+            'sortRelationModel' => ['SortRelationModel', 'modelClass' => User::className(), 'valueField' => 'id', 'labelField' => 'email'],
             'i18n_sortRelationArray' => ['SortRelationArray', 'data' => ['hi', 'ho']],
-            'i18n_sortRelationModel' => ['SortRelationArray', 'data' => ['hi', 'ho']]
+            'i18n_sortRelationModel' => ['SortRelationModel', 'modelClass' => User::className(), 'valueField' => 'id', 'labelField' => 'email']
         ];
         /*
         return [
@@ -166,7 +167,7 @@ class Table extends \admin\ngrest\base\Model
         $this->ngRestConfigDefine($config, 'update', ['image', 'imageArray', 'file', 'fileArray', 'text', 'textarea', 'selectArray', 'checkboxList', 'date', 'datetime', 'decimal', 'number', 'password', 'toggleStatus', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus']);
         */
         
-        $this->ngRestConfigDefine($config, ['list', 'create', 'update'], ['sortRelationArray', 'i18n_sortRelationArray']);
+        $this->ngRestConfigDefine($config, ['list', 'create', 'update'], ['sortRelationArray', 'i18n_sortRelationArray', 'sortRelationModel', 'i18n_sortRelationModel']);
        
         // enable or disable ability to delete;
         $config->delete = true; 

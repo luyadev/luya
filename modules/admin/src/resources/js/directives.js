@@ -81,7 +81,7 @@
     			};
     			
     			$scope.getModelItems = function() {
-    				return $filter('orderBy')($scope.model, 'sortpos');
+    				return $scope.model;
     			}
     			
     			$scope.addToModel = function(option) {
@@ -95,15 +95,7 @@
     				})
     				
     				if (!match) {
-    					var pos = 1;
-    					if ($scope.model.length > 0) {
-    						var items = $filter('orderBy')($scope.model, 'sortpos');
-    						angular.forEach(items, function(value, key) {
-    							items[key].sortpos = pos;
-    							pos++;
-    						});
-    					}
-    					$scope.model.push({'sortpos': pos, 'value': option.value, 'label': option.label});
+    					$scope.model.push({'value': option.value, 'label': option.label});
     				}
     			};
     			
@@ -113,14 +105,16 @@
     			
     			$scope.moveUp = function(index) {
                     index = parseInt(index);
-                    var oldPos = $scope.model[index].sortpos;
-                    console.log('oldPos', oldPos);
+                    var oldRow = $scope.model[index];
+                    $scope.model[index] = $scope.model[index-1];
+                    $scope.model[index-1] = oldRow;
                 }
 
                 $scope.moveDown = function(index) {
                     index = parseInt(index);
-                    var oldPos = $scope.model[index].sortpos;
-                    console.log('oldPos', oldPos);
+                    var oldRow = $scope.model[index];
+                    $scope.model[index] = $scope.model[index+1];
+                    $scope.model[index+1] = oldRow;
                 }
     		},
     		template: function() {
