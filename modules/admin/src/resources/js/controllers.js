@@ -46,6 +46,26 @@
 			$scope.crudSwitchType = type;
 		};
 		
+		
+		/* export */
+		
+		$scope.exportLoading = false;
+		
+		$scope.exportResponse = false;
+		
+		$scope.exportData = function() {
+			$scope.exportLoading = true;
+			$http.get($scope.config.apiEndpoint + '/export').success(function(response) {
+				$scope.exportLoading = false;
+				$scope.exportResponse = response;
+			});
+		};
+		
+		$scope.exportDownload = function() {
+			window.open($scope.exportResponse.url);
+			return false;
+		}
+		
 		/* old definitions */
 		
 		$scope.parentController = $scope.$parent;

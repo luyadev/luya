@@ -3,6 +3,8 @@
 namespace admin\ngrest\base;
 
 use Yii;
+use luya\helpers\FileHelper;
+use luya\helpers\Url;
 
 /**
  * Wrapper for yii2 basic rest controller used with a model class. The wrapper is made to
@@ -14,9 +16,7 @@ class Api extends \admin\base\RestActiveController
 {
     public function actionServices()
     {
-        $model = Yii::createObject($this->modelClass);
-
-        return $model->getNgrestServices();
+        return $this->model->getNgrestServices();
     }
 
     public function actionSearch($query)
@@ -26,15 +26,29 @@ class Api extends \admin\base\RestActiveController
 
             return ['query' => 'The query string must be at least 3 chars'];
         }
-        $model = Yii::createObject($this->modelClass);
-
-        return $model->genericSearch($query);
+        return $this->model->genericSearch($query);
     }
 
     public function actionSearchProvider()
     {
-        $model = Yii::createObject($this->modelClass);
-        
-        return $model->genericSearchStateProvider();
+        return $this->model->genericSearchStateProvider();
+    }
+    
+    public function actionExport()
+    {
+    	$tempData = null;
+    	foreach($this->model->find()->all() as $key => $value) {
+    		$tempData.= $key . 'data';
+    	}
+    	
+    	$key = uniqid('ngre', true);
+    	
+    	FileHelper::writeFile('@runtime/'.$key.'.tmp', $tempData);
+    	
+    	Yii::$app->session->set('tempNgRestKey', $key);
+    	
+    	return [
+    		'url' => Url::toRoute(['/admin/ngrest/export-download', 'key' => base64_encode($key)]),
+    	];
     }
 }

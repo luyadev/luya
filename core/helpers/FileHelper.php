@@ -2,13 +2,14 @@
 
 namespace luya\helpers;
 
+use Yii;
 use admin\ngrest\plugins\File;
 use Exception;
 
 /**
  * Extending the Yii File Helper class.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class FileHelper extends \yii\helpers\BaseFileHelper
 {
@@ -75,7 +76,8 @@ class FileHelper extends \yii\helpers\BaseFileHelper
     }
     
     /**
-     * Basic helper method to write files with exception capture
+     * Basic helper method to write files with exception capture. The fileName will auto wrapped
+     * trough the Yii::getAlias function.
      * 
      * @param string $fileName The path to the file with file name
      * @param string $content The content to store in this File
@@ -84,9 +86,26 @@ class FileHelper extends \yii\helpers\BaseFileHelper
     public static function writeFile($fileName, $content)
     {
         try {
-            return file_put_contents($fileName, $content);
+            return file_put_contents(Yii::getAlias($fileName), $content);
         } catch (Exception $error) {
             return false;
         }
+    }
+    
+    /**
+     * Basic helper to retreive the content of a file and catched exception. The filename
+     * will auto alias encode by Yii::getAlias function.
+     * 
+     * @since 1.0.0-beta7
+     * @param sring $fileName The path to the file to get the content
+     * @return string|boolean
+     */
+    public static function getFileContent($fileName)
+    {
+    	try {
+    		return file_get_contents(Yii::getAlias($fileName));
+    	} catch (Exception $error) {
+    		return false;
+    	}
     }
 }

@@ -5,6 +5,8 @@ namespace admin\controllers;
 use Yii;
 use admin\ngrest\NgRest;
 use yii\web\Response;
+use luya\Exception;
+use luya\helpers\FileHelper;
 
 class NgrestController extends \admin\base\Controller
 {
@@ -46,5 +48,20 @@ class NgrestController extends \admin\base\Controller
         $ngrest = new NgRest($config);
 
         return $ngrest->render($render);
+    }
+    
+    public function actionExportDownload($key)
+    {
+    	$sessionkey = Yii::$app->session->get('tempNgRestKey');
+    	
+    	if ($sessionkey !== base64_decode($key)) {
+    		throw new Exception('Invalid Export download key.');
+    	}
+    	
+    	$content = FileHelper::getFileContent('@runtime/'.$sessionkey.'.tmp');
+    	
+    	Yii::$app->session->remove('tempNgRestKey');
+    	
+    	return Yii::$app->response->sendContentAsFile($content, 'filedownload.csv');
     }
 }
