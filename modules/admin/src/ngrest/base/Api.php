@@ -34,11 +34,36 @@ class Api extends \admin\base\RestActiveController
         return $this->model->genericSearchStateProvider();
     }
     
+    /**
+     * @todo added very basic csv support, must be stored as class, just a temp solution
+     * @return array
+     */
     public function actionExport()
     {
     	$tempData = null;
+    	
+    	// first row
+    	$header = [];
+    	$i = 0;
+    	
     	foreach($this->model->find()->all() as $key => $value) {
-    		$tempData.= $key . 'data';
+    	    
+    	    $row = [];
+    	    foreach ($value->getAttributes() as $k => $v) {
+    	        
+    	        if ($i === 0) {
+    	             $header[] = $this->model->getAttributeLabel($k);
+    	        }
+    	        
+    	        $row[] = '"'. str_replace('"', '\"', $v) .'"';
+    	    }
+    	    
+    	    
+    	    if ($i=== 0) {
+    	        $tempData.= implode(",", $header) . "\n";
+    	    }
+    	    $tempData.= implode(",", $row) . "\n";
+    	    $i++;
     	}
     	
     	$key = uniqid('ngre', true);

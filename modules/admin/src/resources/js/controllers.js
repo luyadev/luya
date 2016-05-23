@@ -53,15 +53,19 @@
 		
 		$scope.exportResponse = false;
 		
+		$scope.exportDownloadButton = false;
+		
 		$scope.exportData = function() {
 			$scope.exportLoading = true;
 			$http.get($scope.config.apiEndpoint + '/export').success(function(response) {
 				$scope.exportLoading = false;
 				$scope.exportResponse = response;
+				$scope.exportDownloadButton = true;
 			});
 		};
 		
 		$scope.exportDownload = function() {
+			$scope.exportDownloadButton = false;
 			window.open($scope.exportResponse.url);
 			return false;
 		}

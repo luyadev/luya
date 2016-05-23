@@ -52,10 +52,10 @@
         <div class="card-panel" ng-show="crudSwitchType==0">
             
             <div>
-            	<button type="button" ng-click="exportData()">Export</button>
+            	<button type="button" ng-show="!exportDownloadButton" ng-click="exportData()">CSV Export</button>
             	<div ng-show="exportLoading">Daten werden vorbereitet.</div>	
-            	<div ng-show="exportResponse">
-            		<button ng-click="exportDownload()" class="btn" type="button">Download</button>
+            	<div ng-show="exportDownloadButton">
+            		<button ng-click="exportDownload()" class="btn" type="button">Download CSV</button>
             	</div>
             </div>
             
