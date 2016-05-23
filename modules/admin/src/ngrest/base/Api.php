@@ -55,6 +55,10 @@ class Api extends \admin\base\RestActiveController
     	             $header[] = $this->model->getAttributeLabel($k);
     	        }
     	        
+    	        if (is_array($v)) {
+    	            $v = implode(",", $v);
+    	        }
+    	        
     	        $row[] = '"'. str_replace('"', '\"', $v) .'"';
     	    }
     	    

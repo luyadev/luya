@@ -155,6 +155,11 @@ abstract class Model extends \yii\db\ActiveRecord implements GenericSearchInterf
 
     private $_ngrestCallType = null;
     
+    /**
+     * Determine the current call type based on get params as they can change the output behavior to make the ngrest crud list view.
+     * 
+     * @return boolean|string
+     */
     public function getNgRestCallType()
     {
         if ($this->_ngrestCallType === null) {
