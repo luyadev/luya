@@ -54,7 +54,7 @@ trait ErrorHandler
         $_trace = [];
         $_previousException = [];
         
-        if ($exception instanceof \Exception) {
+        if (is_object($exception)) {
             $prev = $exception->getPrevious();
             
             if (!empty($prev)) {
@@ -93,7 +93,7 @@ trait ErrorHandler
         ];
     }
     
-    private function buildTrace(\Exception $exception)
+    private function buildTrace($exception)
     {
         $_trace = [];
         foreach ($exception->getTrace() as $key => $item) {
