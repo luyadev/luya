@@ -51,11 +51,13 @@
         <!-- LIST -->
         <div class="card-panel" ng-show="crudSwitchType==0">
             
-            <div>
-            	<button type="button" ng-show="!exportDownloadButton" ng-click="exportData()">CSV Export</button>
-            	<div ng-show="exportLoading">Daten werden vorbereitet.</div>	
+            <div class="right" style="margin-bottom:15px;">
+            	<button type="button" ng-show="!exportDownloadButton && !exportLoading" ng-click="exportData()" class="btn blue btn--small">
+                    <i class="material-icons left">unarchive</i> CSV generieren
+                </button>
+            	<div ng-show="exportLoading" class="btn disabled btn--small"><i class="material-icons left spin">cached</i> CSV wird generiert</div>
             	<div ng-show="exportDownloadButton">
-            		<button ng-click="exportDownload()" class="btn" type="button">Download CSV</button>
+            		<button ng-click="exportDownload()" class="btn green btn--small" type="button"><i class="material-icons">file_download</i> CSV herunterladen</button>
             	</div>
             </div>
             
