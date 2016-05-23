@@ -15,7 +15,7 @@ use cms\menu\InjectItem;
  */
 class PreviewController extends \cms\base\Controller
 {
-    public function actionIndex($itemId)
+    public function actionIndex($itemId, $version = false)
     {
         if (Yii::$app->adminuser->isGuest) {
             throw new ForbiddenHttpException('Unable to see the preview page, session expired or not logged in.');
@@ -51,7 +51,7 @@ class PreviewController extends \cms\base\Controller
         Yii::$app->menu->current = $item;
         
         return $this->render('index', [
-            'pageContent' => $this->renderItem($itemId),
+            'pageContent' => $this->renderItem($itemId, null, $version),
         ]);
     }
 }

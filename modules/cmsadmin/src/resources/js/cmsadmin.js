@@ -539,7 +539,7 @@
 		$scope.$on('service:LiveEditModeUrlChange', function(event, url) {
 			var d = new Date();
 			var n = d.getTime();
-			$scope.url = url + '?' + n;
+			$scope.url = url + '&' + n;
 		});
 		
 	});
@@ -571,7 +571,7 @@
 		};
 		
 		$scope.go = function(data) {
-			ServiceLiveEditMode.changeUrl(data.nav_item_id);
+			ServiceLiveEditMode.changeUrl(data.nav_item_id, 0);
 			$state.go('custom.cmsedit', { navId : data.id });
 	    };
 		
@@ -875,12 +875,12 @@
 			$scope.liveEditState = n;
 		});
 		
-		$scope.openLiveUrl = function(id) {
-			ServiceLiveEditMode.changeUrl(id);
+		$scope.openLiveUrl = function(id, versionId) {
+			ServiceLiveEditMode.changeUrl(id, versionId);
 		};
 		
 		$scope.loadLiveUrl = function() {
-			ServiceLiveEditMode.changeUrl($scope.item.id);
+			ServiceLiveEditMode.changeUrl($scope.item.id, $scope.currentPageVersion);
 		}
 		
 		// serviceMenuData inheritance
@@ -988,6 +988,7 @@
 			$scope.container = $scope.typeData[pageVersionid]['contentAsArray'];
 			$scope.currentVersionInformation = $scope.typeData[pageVersionid];
 			$scope.currentPageVersion = pageVersionid;
+			$scope.loadLiveUrl();
 		};
 		
 		$scope.refreshForce = function() {
@@ -1009,7 +1010,7 @@
 				params : { navItemPageId : $scope.currentPageVersion, prevId : prevId, placeholderVar : placeholderVar}
 			}).success(function(response) {
 
-				ServiceLiveEditMode.changeUrl($scope.item.id);
+				ServiceLiveEditMode.changeUrl($scope.item.id, $scope.currentPageVersion);
 				for (var i in $scope.container.__placeholders) {
 					var out = $scope.revPlaceholders($scope.container.__placeholders[i], prevId, placeholderVar, response);
 					if (out !== false ) {

@@ -355,10 +355,10 @@
                                         {{item.title}}
                                         <span ng-hide="settings">
                                             <i ng-click="toggleSettings()" class="material-icons right [ waves-effect waves-blue ]">mode_edit</i>
-                                            <a ng-href="{{homeUrl}}preview/{{item.id}}" target="_blank" class="right" ng-show="!liveEditState">
+                                            <a ng-href="{{homeUrl}}preview/{{item.id}}?version={{currentPageVersion}}" target="_blank" class="right" ng-show="!liveEditState">
                                                 <i class="material-icons [ waves-effect waves-blue ]">open_in_new</i>
                                             </a>
-                                            <a ng-click="openLiveUrl(item.id)" ng-show="liveEditState" class="right"><i class="material-icons [ waves-effect waves-blue ]">open_in_new</i></a>
+                                            <a ng-click="openLiveUrl(item.id, currentPageVersion)" ng-show="liveEditState" class="right"><i class="material-icons [ waves-effect waves-blue ]">open_in_new</i></a>
                                         </span>
                                         <span ng-hide="!settings">
                                             <a ng-click="toggleSettings()"  class="right"><i class="material-icons">close</i></a>

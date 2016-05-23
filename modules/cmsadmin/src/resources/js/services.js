@@ -187,12 +187,15 @@ zaa.factory("ServiceLiveEditMode", function($rootScope) {
 		service.state = !service.state;
 	}
 	
-	service.setUrl = function(itemId) {
-		service.url = homeUrl  + 'preview/' + itemId;
+	service.setUrl = function(itemId, versionId) {
+		service.url = homeUrl  + 'preview/' + itemId + '?version=' + versionId;
 	};
 	
-	service.changeUrl = function(itemId) {
-		service.setUrl(itemId);
+	service.changeUrl = function(itemId, versionId) {
+		if (versionId == undefined) {
+			versionId = 0;
+		}
+		service.setUrl(itemId, versionId);
 		$rootScope.$broadcast('service:LiveEditModeUrlChange', service.url);
 	}
 	
