@@ -79,7 +79,7 @@
 
 <!-- UPDATE PAGE FORM -->
 <script type="text/ng-template" id="updateformpage.html">
-    <div class="row">
+    <div class="row" ng-show="isEditAvailable()">
         <div class="input input--select col s12">
             <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_version_chooser'); ?></label>
             <div class="input__field-wrapper" ng-show="parent.typeData!==undefined">

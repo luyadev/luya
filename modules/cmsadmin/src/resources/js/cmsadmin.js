@@ -96,6 +96,10 @@
             controller : function($scope) {
             	
             	$scope.parent = $scope.$parent.$parent;
+            	
+            	$scope.isEditAvailable = function() {
+            		return $scope.parent.item.nav_item_type == 1;
+            	}
             }
         }
     });
