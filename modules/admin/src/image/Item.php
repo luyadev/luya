@@ -85,9 +85,10 @@ class Item extends \yii\base\Object
     /**
      * The source of the image where you can access the image by the web.
      * 
+     * @param boolean $scheme Whether the source path should be absolute or not.
      * @return string|boolean
      */
-    public function getSource()
+    public function getSource($scheme = false)
     {
         if (!$this->getFileExists()) {
             if (Yii::$app->storage->autoFixMissingImageSources === false) {
@@ -98,8 +99,10 @@ class Item extends \yii\base\Object
             // Storage-Component is going go try to re-create this image now.
             $apply = Yii::$app->storage->addImage($this->getFileId(), $this->getFilterId());
         }
+       
+        $httpPath = ($scheme) ? Yii::$app->storage->absoluteHttpPath : Yii::$app->storage->httpPath;
         
-        return ($this->getFile()) ? Yii::$app->storage->httpPath . '/' . $this->getFilterId() . '_' . $this->getFile()->getSystemFileName() : false;
+        return ($this->getFile()) ? $httpPath . '/' . $this->getFilterId() . '_' . $this->getFile()->getSystemFileName() : false;
     }
     
     /**

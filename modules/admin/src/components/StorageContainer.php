@@ -5,8 +5,10 @@ namespace admin\components;
 use Yii;
 use yii\db\Query;
 use yii\helpers\Inflector;
+use yii\base\Component;
 use luya\Exception;
 use luya\helpers\FileHelper;
+use luya\helpers\Url;
 use admin\helpers\Storage;
 use admin\models\StorageFile;
 use admin\models\StorageImage;
@@ -58,17 +60,22 @@ use admin\models\StorageFolder;
  * ### folders
  * 
  * @property string $httpPath Get the http path to the storage folder.
+ * @property string $absoluteHttpPath Get the absolute http path to the storage folder.
  * @property string $serverPath Get the server path (for php) to the storage folder.
  * @property array $filesArray An array containing all files
  * @property array $imagesArray An array containg all images
  * @property array $foldersArray An array containing all folders
  * @property array $filtersArray An array with all filters
- * @author nadar
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
-class StorageContainer extends \yii\base\Component
+class StorageContainer extends Component
 {
     use \luya\traits\CacheableTrait;
     
+    /**
+     * @var \luya\web\Request Request object resolved from DI.
+     */
     public $request = null;
     
     public $fileCacheKey = 'storageFileCacheKey';
@@ -87,19 +94,8 @@ class StorageContainer extends \yii\base\Component
      */
     public $autoFixMissingImageSources = true;
     
-    private $_httpPath = null;
-    
-    private $_serverPath = null;
-    
-    private $_filesArray = null;
-    
-    private $_imagesArray = null;
-    
-    private $_foldersArray = null;
-    
-    private $_filtersArray = null;
-    
     /**
+     * Consturctor resolveds Request component from DI container
      * 
      * @param \luya\web\Request $request
      * @param array $config
@@ -110,7 +106,10 @@ class StorageContainer extends \yii\base\Component
         parent::__construct($config);
     }
     
+    private $_httpPath = null;
+    
     /**
+     * Get the base path to the storage directory
      * 
      * @return string
      */
@@ -123,8 +122,27 @@ class StorageContainer extends \yii\base\Component
         return $this->_httpPath;
     }
     
+    private $_absoluteHttpPath = null;
+    
     /**
+     * Get the base absolute base path to the storage direcotry
      * 
+     * @return string;
+     * @since 1.0.0-beta7
+     */
+    public function getAbsoluteHttpPath()
+    {
+    	if ($this->_absoluteHttpPath === null) {
+    		$this->_absoluteHttpPath = Url::base(true) . '/storage';
+    	}
+
+    	return $this->_absoluteHttpPath;
+    }
+    
+    private $_serverPath = null;
+    
+    /**
+     * Get the internal server path to the storage folder
      * @return string
      */
     public function getServerPath()
@@ -135,6 +153,8 @@ class StorageContainer extends \yii\base\Component
         
         return $this->_serverPath;
     }
+    
+    private $_filesArray = null;
     
     /**
      * 
@@ -158,6 +178,8 @@ class StorageContainer extends \yii\base\Component
     {
         return (isset($this->filesArray[$fileId])) ? $this->filesArray[$fileId] : false;
     }
+    
+    private $_imagesArray = null;
     
     /**
      * 
@@ -375,6 +397,8 @@ class StorageContainer extends \yii\base\Component
         return false;
     }
     
+    private $_foldersArray = null;
+    
     /**
      * 
      * @return NULL|mixed|boolean
@@ -445,6 +469,8 @@ class StorageContainer extends \yii\base\Component
         
         return false;
     }
+    
+    private $_filtersArray = null;
     
     /**
      * 
