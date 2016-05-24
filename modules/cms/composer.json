@@ -1,8 +1,8 @@
 {
 	"name" : "luyadev/luya-module-cms",
-	"description" : "Yii2 LUYA Cms",
+	"description" : "Yii2 LUYA CMS",
 	"type" : "luya-module",
-	"keywords" : ["php", "luya", "module", "cms", "yii2", "yii", "contentmanager", "content", "yii2-cms"],
+	"keywords" : ["php", "luya", "module", "cms", "yii2", "yii", "contentmanager", "content", "yii2-cms", "luya-module"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
 	"authors" : [
@@ -16,7 +16,7 @@
 		"issues" : "https://github.com/luyadev/luya/issues"
 	},
 	"require-dev" : {
-	   "phpunit/phpunit" : "~4.0"
+	   "phpunit/phpunit" : "~5.0"
 	},
 	"autoload" : {
 		"psr-4" : {
