@@ -4,6 +4,7 @@ LUYA CHANGELOG
 1.0.0-beta7 (in progress)
 -------------------------
 
+- `#817` Skip PHP 5.5 support in LUYA core.
 - `#873` Added NgRest crud CSV export ability to generate a full csv based on ngrest model.
 - `#866` Fixed bug when deleting a cms page template.
 - `#867` Added new callbackform activefield configurations to add the ability of different input methods in Active Windows.
