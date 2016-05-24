@@ -237,6 +237,8 @@ $this->beginPage()
 
             <div class="row">
 
+            <input type="text" ng-model="searchQuery" />
+
             <div class="col" ng-class="{'s8' : fileDetail, 's12' : !fileDetail }">
             <table class="filemanager__table hoverable striped">
                 <thead>
@@ -253,7 +255,7 @@ $this->beginPage()
                 <tbody>
 
                 <!-- FILES -->
-                <tr ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages | orderBy:sortField" class="filemanager__file" ng-class="{ 'clickable selectable' : allowSelection == 'false' }">
+                <tr ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField" class="filemanager__file" ng-class="{ 'clickable selectable' : allowSelection == 'false' }">
                     <td ng-click="toggleSelection(file)" class="filemanager__checkox-column" ng-hide="allowSelection == 'true'">
                         <input type="checkbox" ng-checked="inSelection(file)" id="{{file.id}}" />
                         <label for="checked-status-managed-by-angular-{{file.id}}"></label>

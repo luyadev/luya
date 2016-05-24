@@ -4,6 +4,7 @@ LUYA CHANGELOG
 1.0.0-beta7 (in progress)
 -------------------------
 
+- `#839` Admin Filemanager search function to filter file list
 - `#821` CMS block visibility toggler does now affect live-preview reloader
 - `#817` Skip PHP 5.5 support in LUYA core.
 - `#873` Added NgRest crud CSV export ability to generate a full csv based on ngrest model.

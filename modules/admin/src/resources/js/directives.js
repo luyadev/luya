@@ -1455,6 +1455,8 @@
                 
                 // controller logic 
                 
+                $scope.searchQuery = '';
+                
                 $scope.sortField = 'name';
                 
                 $scope.changeSortField = function(name) {
