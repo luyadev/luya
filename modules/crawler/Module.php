@@ -69,4 +69,9 @@ class Module extends \luya\base\Module
      * If you like to disable this feature (small pages) you can set `false`.
      */
     public $doNotFollowExtensions = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'tiff', 'bmp', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'csv', 'zip'];
+    
+    /**
+     * @var array E-Mail-Adresses array with recipients for the statistic command
+     */
+    public $statisticRecipients = [];
 }

@@ -2,8 +2,9 @@
 
 namespace crawleradmin\models;
 
-use yii\helpers\Html;
+use Yii;
 use crawleradmin\Module;
+use crawleradmin\models\Searchdata;
 
 class Index extends \admin\ngrest\base\Model
 {
@@ -18,8 +19,8 @@ class Index extends \admin\ngrest\base\Model
     {
         return [
             'default' => ['url', 'content', 'title', 'language_info', 'added_to_index', 'last_update', 'url_found_on_page'],
-            'restcreate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page'],
-            'restupdate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page'],
+            'restcreate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page', 'last_update', 'url_found_on_page', 'added_to_index'],
+            'restupdate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page', 'last_update', 'url_found_on_page', 'added_to_index'],
         ];
     }
 
@@ -31,6 +32,8 @@ class Index extends \admin\ngrest\base\Model
             'language_info' => Module::t('index_language_info'),
             'content' => Module::t('index_content'),
             'url_found_on_page' => Module::t('index_url_found'),
+            'added_to_index' => ' add to index on',
+            'last_update' => 'last update'
         ];
     }
 
@@ -76,7 +79,18 @@ class Index extends \admin\ngrest\base\Model
         }
         
         
-        return self::find()->where(['in', 'id', $ids])->all();
+        $result = self::find()->where(['in', 'id', $ids])->all();
+        
+        $searchData = new SearchData();
+        $searchData->attributes = [
+            'query' => $query,
+            'results' => count($result),
+            'timestamp' => time(),
+            'language' => Yii::$app->composition->language,
+        ];
+        $searchData->save();
+        
+        return $result;
     }
     
     public static function flatSearchByQuery($query, $languageInfo)
@@ -91,8 +105,20 @@ class Index extends \admin\ngrest\base\Model
         if (!empty($languageInfo)) {
             $q->andWhere(['language_info' => $languageInfo]);
         }
+        $result = $q->all();
         
-        return $q->all();
+        $searchData = new SearchData();
+        $searchData->attributes = [
+            'query' => $query,
+            'results' => count($result),
+            'timestamp' => time(),
+            'language' => Yii::$app->composition->language,
+        ];
+        $searchData->save();
+        
+        return $result;
+        
+        
     }
 
     public function preview($word, $cutAmount = 150)
@@ -141,13 +167,15 @@ class Index extends \admin\ngrest\base\Model
             'language_info' => 'text',
             'url_found_on_page' => 'text',
             'content' => 'textarea',
+            'last_update' => 'datetime',
+            'added_to_index' => 'datetime',
         ];
     }
 
     public function ngRestConfig($config)
     {
-        $this->ngRestConfigDefine($config, 'list', ['url', 'title', 'language_info', 'url_found_on_page']);
-        $this->ngRestConfigDefine($config, ['create', 'update'], ['url', 'title', 'language_info', 'url_found_on_page', 'content']);
+        $this->ngRestConfigDefine($config, 'list', ['title', 'url', 'language_info', 'last_update', 'added_to_index']);
+        $this->ngRestConfigDefine($config, ['create', 'update'], ['url', 'title', 'language_info', 'url_found_on_page', 'content', 'last_update', 'added_to_index']);
         return $config;
     }
 }

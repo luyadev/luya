@@ -4,6 +4,7 @@ LUYA CHANGELOG
 1.0.0-beta7 (in progress)
 -------------------------
 
+- `#845` Crawler added search data model to analys the querys and added command to send search results.
 - `#839` Admin Filemanager search function to filter file list
 - `#821` CMS block visibility toggler does now affect live-preview reloader
 - `#817` Skip PHP 5.5 support in LUYA core.
