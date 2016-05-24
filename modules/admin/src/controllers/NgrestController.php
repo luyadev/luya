@@ -53,6 +53,7 @@ class NgrestController extends \admin\base\Controller
     public function actionExportDownload($key)
     {
     	$sessionkey = Yii::$app->session->get('tempNgRestKey');
+    	$fileName = Yii::$app->session->get('tempNgRestFileName');
     	
     	if ($sessionkey !== base64_decode($key)) {
     		throw new Exception('Invalid Export download key.');
@@ -61,7 +62,9 @@ class NgrestController extends \admin\base\Controller
     	$content = FileHelper::getFileContent('@runtime/'.$sessionkey.'.tmp');
     	
     	Yii::$app->session->remove('tempNgRestKey');
+    	Yii::$app->session->remove('tempNgRestFileName');
+        @unlink(Yii::getAlias('@runtime/'.$sessionkey.'.tmp'));
     	
-    	return Yii::$app->response->sendContentAsFile($content, 'filedownload.csv');
+    	return Yii::$app->response->sendContentAsFile($content, $fileName . '-export-'.date("Y-m-d-H-i").'.csv', ['mimeType' => 'application/csv']);
     }
 }

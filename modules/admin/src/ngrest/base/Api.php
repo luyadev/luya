@@ -5,6 +5,7 @@ namespace admin\ngrest\base;
 use Yii;
 use luya\helpers\FileHelper;
 use luya\helpers\Url;
+use yii\helpers\Inflector;
 
 /**
  * Wrapper for yii2 basic rest controller used with a model class. The wrapper is made to
@@ -35,6 +36,7 @@ class Api extends \admin\base\RestActiveController
     }
     
     /**
+     * Prepare a temp file to
      * @todo added very basic csv support, must be stored as class, just a temp solution
      * @return array
      */
@@ -74,6 +76,7 @@ class Api extends \admin\base\RestActiveController
     	
     	FileHelper::writeFile('@runtime/'.$key.'.tmp', $tempData);
     	
+    	Yii::$app->session->set('tempNgRestFileName', Inflector::slug($this->model->tableName()));
     	Yii::$app->session->set('tempNgRestKey', $key);
     	
     	return [

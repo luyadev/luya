@@ -4,6 +4,7 @@ LUYA CHANGELOG
 1.0.0-beta7 (in progress)
 -------------------------
 
+- `#873` Added NgRest crud CSV export ability to generate a full csv based on ngrest model.
 - `#866` Fixed bug when deleting a cms page template.
 - `#867` Added new callbackform activefield configurations to add the ability of different input methods in Active Windows.
 - `#864` Fixed issue where Active Window class properties could not be serialized as they can contain closures.

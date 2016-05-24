@@ -64,11 +64,11 @@
                 <div class="button-right__right">
                     <div>
                         <button type="button" ng-show="!exportDownloadButton && !exportLoading" ng-click="exportData()" class="btn cyan btn--small" style="width: 100%;">
-                            <i class="material-icons left">unarchive</i> CSV generieren
+                            <i class="material-icons left">unarchive</i> <?= \admin\Module::t('ngrest_crud_csv_export_btn'); ?>
                         </button>
                         <div ng-show="exportLoading" class="btn disabled btn--small center" style="width: 100%;"><i class="material-icons spin">cached</i></div>
                         <div ng-show="exportDownloadButton">
-                            <button ng-click="exportDownload()" class="btn light-green btn--small" type="button" style="width: 100%;"><i class="material-icons left">file_download</i> CSV herunterladen</button>
+                            <button ng-click="exportDownload()" class="btn light-green btn--small" type="button" style="width: 100%;"><i class="material-icons left">file_download</i> <?= \admin\Module::t('ngrest_crud_csv_export_btn_dl'); ?></button>
                         </div>
                     </div>
                 </div>
