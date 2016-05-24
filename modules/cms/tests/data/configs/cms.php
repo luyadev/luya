@@ -7,7 +7,9 @@ return [
     'basePath' => dirname(__DIR__),
     'defaultRoute' => 'cms',
     'modules' => [
-        'cms' => 'cms\Module',
+        'cms' => [
+        	'class' => 'cms\Module'
+        ],
     ],
     'components' => [
         'request' => [
