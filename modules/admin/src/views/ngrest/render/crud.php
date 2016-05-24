@@ -50,23 +50,29 @@
         
         <!-- LIST -->
         <div class="card-panel" ng-show="crudSwitchType==0">
-            
-            <div class="right" style="margin-bottom:15px;">
-            	<button type="button" ng-show="!exportDownloadButton && !exportLoading" ng-click="exportData()" class="btn blue btn--small">
-                    <i class="material-icons left">unarchive</i> CSV generieren
-                </button>
-            	<div ng-show="exportLoading" class="btn disabled btn--small"><i class="material-icons left spin">cached</i> CSV wird generiert</div>
-            	<div ng-show="exportDownloadButton">
-            		<button ng-click="exportDownload()" class="btn green btn--small" type="button"><i class="material-icons">file_download</i> CSV herunterladen</button>
-            	</div>
-            </div>
-            
-            <div style="margin-bottom:30px;">
-                <div class="input input--text">
-                    <div class="input__field-wrapper">
-                        <input class="input__field" id="searchString" ng-model="searchString" ng-change="evalSearchString()" type="text" placeholder="<?php echo \admin\Module::t('ngrest_crud_search_text'); ?>" />
+
+            <div class="button-right" style="margin-bottom:30px;">
+
+                <div class="button-right__left">
+                    <div class="input input--text">
+                        <div class="input__field-wrapper">
+                            <input class="input__field" id="searchString" ng-model="searchString" ng-change="evalSearchString()" type="text" placeholder="<?php echo \admin\Module::t('ngrest_crud_search_text'); ?>" />
+                        </div>
                     </div>
                 </div>
+
+                <div class="button-right__right">
+                    <div>
+                        <button type="button" ng-show="!exportDownloadButton && !exportLoading" ng-click="exportData()" class="btn cyan btn--small" style="width: 100%;">
+                            <i class="material-icons left">unarchive</i> CSV generieren
+                        </button>
+                        <div ng-show="exportLoading" class="btn disabled btn--small center" style="width: 100%;"><i class="material-icons spin">cached</i></div>
+                        <div ng-show="exportDownloadButton">
+                            <button ng-click="exportDownload()" class="btn light-green btn--small" type="button" style="width: 100%;"><i class="material-icons left">file_download</i> CSV herunterladen</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             
 
