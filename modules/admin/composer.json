@@ -2,7 +2,7 @@
 	"name" : "luyadev/luya-module-admin",
 	"description" : "Yii2 LUYA Admin",
 	"type" : "luya-module",
-	"keywords" : ["php", "luya", "module", "admin", "yii2", "yii", "administration", "angular", "ngrest", "manage", "panel"],
+	"keywords" : ["php", "luya", "module", "admin", "yii2", "yii", "administration", "angular", "ngrest", "manage", "panel", "luya-module"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
 	"authors" : [
@@ -20,7 +20,8 @@
 	    "cebe/markdown": "~1.0.0 | ~1.1.0"
 	},
 	"require-dev" : {
-		"phpunit/phpunit" : "~4.0"
+		"phpunit/phpunit" : "~5.0",
+		"luyadev/luya" : "^1.0@dev"
 	},
 	"autoload" : {
 		"psr-4" : {
@@ -28,6 +29,11 @@
 			"admintests\\" : "tests/"
 		}
 	},
+	"autoload-dev" : {
+       "psr-4" : {
+           "admintests\\" : "tests/"
+       }
+    },
 	"extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"

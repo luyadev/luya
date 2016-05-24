@@ -5,7 +5,7 @@ return [
     'siteTitle' => 'Luya Tests',
     'remoteToken' => 'testtoken',
     'basePath' => dirname(__DIR__),
-    'defaultRoute' => 'unitmodule',
+    'defaultRoute' => 'admin',
     'modules' => [
         'admin' => [
             'class' => '\admin\Module',
@@ -15,8 +15,8 @@ return [
         'request' => [
             'forceWebRequest' => true,
         ],
-        'db' => [
-            'class' => 'yii\db\Connection',
-        ]
+    	'db' => [
+    		'class' => 'yii\db\Connection',
+    	]
     ],
 ];
