@@ -115,10 +115,29 @@
                     var oldRow = $scope.model[index];
                     $scope.model[index] = $scope.model[index+1];
                     $scope.model[index+1] = oldRow;
+                };
+                
+                $scope.showDownButton = function(index) {
+                    if (parseInt(index) < Object.keys($scope.model).length - 1) {
+                        return true;
+                    }
+                    return false;
+                }
+                
+                $scope.elementInModel = function(item) {
+            		var match = false;
+    				
+    				angular.forEach($scope.model, function(value, key) {
+    					if (value.value == item.value) {
+    						match = true;
+    					}
+    				});
+    				
+    				return !match;
                 }
     		},
     		template: function() {
-    			return '<div><ul><li ng-repeat="(key, item) in getModelItems() track by item.value"><i ng-click="removeFromModel(key)" class="material-icons">remove</i> {{item.label}} <i ng-click="moveUp(key)" class="material-icons" style="transform: rotate(270deg);">play_arrow</i> <i ng-click="moveDown(key)" class="material-icons" style="transform: rotate(90deg);">play_arrow</i></li></ul>Options:<ul><li ng-repeat="option in getSourceOptions()"><i ng-click="addToModel(option)" class="material-icons">add</i> {{ option.label }}</li></ul></div>';
+    			return '<div class="row"><div class="col s6"><ul><li ng-repeat="(key, item) in getModelItems() track by key"><i ng-show="{{key > 0}}" ng-click="moveUp(key)" class="material-icons" style="transform: rotate(270deg);">play_arrow</i> <i ng-show="showDownButton(key)" ng-click="moveDown(key)" class="material-icons" style="transform: rotate(90deg);">play_arrow</i> {{item.label}} <i ng-click="removeFromModel(key)" class="material-icons">delete</i></li></ul></div><div class="col s6">Options:<ul><li ng-repeat="option in getSourceOptions()" ng-show="elementInModel(option)"><i ng-click="addToModel(option)" class="material-icons">add</i> {{ option.label }}</li></ul></div></div>';
     		}
     	}
     });
