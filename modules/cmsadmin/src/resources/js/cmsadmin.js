@@ -1119,6 +1119,8 @@
 			    method: "GET",
 			    params: { blockId : $scope.block.id, hiddenState: $scope.block.is_hidden }
 			}).success(function(response) {
+				/* load live url on hidden trigger */
+				$scope.PagePlaceholderController.NavItemTypePageController.$parent.$parent.loadLiveUrl();
 				// successfull toggle hidden state of block
 				AdminToastService.notify(i18nParam('js_page_block_visbility_change', {name: $scope.block.name}), 2000);
 			});
