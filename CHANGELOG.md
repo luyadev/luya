@@ -22,7 +22,9 @@ LUYA CHANGELOG
 - `#856` Disable the ability to unset a current homepage in the cms module, this may lead into a state without any homepage defined.
 - `#847` Fixed bug in model crud/createcreate command template where short open tag is disabled.
 - `#729` Added extra variable informations when creating a block with cms-page type to help retrieve menu informations.
-- `#848` Detached composition event when using langauge switcher composition context setter, as it causes the application language.
+- `#848` Detached composition event when using language switcher composition context setter, as it causes the application language.
+- `#837` Added CMS ability to preview page versions.
+- `#838` Added CMS ability to preview offline pages.
 
 1.0.0-beta6 (21.04.2016)
 -------------------------
