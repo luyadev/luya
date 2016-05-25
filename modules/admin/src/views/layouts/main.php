@@ -356,7 +356,7 @@ $this->beginPage()
 
                 <ul class="left hide-on-med-and-down">
                     <li class="navbar__item" ng-repeat="item in items" ng-class="{'navbar__item--active' : isActive(item) }">
-                        <a ng-click="click(item);" class="navbar__link"><i class="material-icons left navbar__icon">{{item.icon}}</i>{{item.alias}}</a>
+                        <a ng-click="click(item);" class="navbar__link"><i class="material-icons navbar__icon">{{item.icon}}</i>{{item.alias}}</a>
                     </li>
                 </ul>
 
