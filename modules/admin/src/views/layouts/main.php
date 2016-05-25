@@ -228,6 +228,12 @@ $this->beginPage()
                     <span class="floating-button-label__label"><?php echo Admin::t('layout_filemanager_upload_files'); ?></span>
                 </label>
 
+                <div class="filemanager__search input input--text">
+                    <div class="input__field-wrapper">
+                        <input class="input__field filemanager__search-input" type="text" ng-model="searchQuery" placeholder="<?= Admin::t('layout_filemanager_search_text') ?>" />
+                    </div>
+                </div>
+
                 <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?php echo Admin::t('layout_filemanager_remove_selected_files'); ?></button>
                 <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove"><?php echo Admin::t('layout_filemanager_move_selected_files'); ?></button>
 
@@ -236,8 +242,6 @@ $this->beginPage()
             </div>
 
             <div class="row">
-
-            <input type="text" ng-model="searchQuery" />
 
             <div class="col" ng-class="{'s8' : fileDetail, 's12' : !fileDetail }">
             <table class="filemanager__table hoverable striped">

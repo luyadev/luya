@@ -151,4 +151,5 @@ return [
     'login_async_token_globalerror' => 'Ein Globaler-Fehler ist enstanden. Bitte kontaktieren Sie Ihren Seitenbetreiber.',
     'ngrest_crud_csv_export_btn' => 'CSV generieren',
     'ngrest_crud_csv_export_btn_dl' => 'CSV herunterladen',
+    'layout_filemanager_search_text' => 'Suchbegriff eingeben...',
 ];

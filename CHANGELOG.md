@@ -3,6 +3,8 @@ LUYA CHANGELOG
 
 1.0.0-beta7 (in progress)
 -------------------------
+
+- `#839` Styled the form search input.
 - `#856` Styled the new is Homepage indicator. Added check_circle in green.
 - `#857` Improved responsive behavior of navbar. Moved icons above text. Updated colors.
 - `#828` Fixed z-index bug in page version tabs.

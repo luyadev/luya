@@ -151,4 +151,5 @@ return [
     'login_async_token_globalerror' => 'A Server Error occured, please contact your Site administrator.',
     'ngrest_crud_csv_export_btn' => 'Generate CSV',
     'ngrest_crud_csv_export_btn_dl' => 'Download CSV',
+    'layout_filemanager_search_text' => 'Enter search term...',
 ];
