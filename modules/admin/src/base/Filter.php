@@ -7,13 +7,14 @@ use admin\models\StorageFilter;
 use admin\models\StorageEffect;
 use admin\models\StorageFilterChain;
 use yii\helpers\Json;
+use yii\base\Object;
 
 /**
- * Base class for all Filters.
+ * Base class for all storage component filters.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
-abstract class Filter extends \yii\base\Object
+abstract class Filter extends Object
 {
     /**
      * Resize-Effect.

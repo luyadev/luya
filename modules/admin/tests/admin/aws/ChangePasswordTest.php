@@ -20,6 +20,7 @@ class ChangePasswordTest extends AdminTestCase
         $this->assertNotEmpty($this->aws->index());
     }
 
+    /*
     public function testErrorCallback()
     {
         $this->aws->setItemId(1);
@@ -35,4 +36,5 @@ class ChangePasswordTest extends AdminTestCase
         $this->assertEquals(3, count($response));
         $this->assertEquals(0, $response['error']);
     }
+    */
 }
