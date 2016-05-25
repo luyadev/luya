@@ -142,7 +142,7 @@ return [
     'view_index_page_nav_container' => 'Navigation-Container',
     'view_index_page_parent_page' => 'Parent Page',
     'view_index_page_success' => 'Successfully created the page!',
-    'view_index_page_parent_root' => '[Main level]',
+    'view_index_page_parent_root' => 'on Root level',
     'view_index_page_use_draft' => 'Use a template?',
     'view_index_page_select_draft' => 'Do you want to choose a template?',
     'view_index_page_layout' => 'Layout selection',

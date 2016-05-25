@@ -142,7 +142,7 @@ return [
     'view_index_page_nav_container' => 'Navigations-Container',
     'view_index_page_parent_page' => 'Übergeordnete Seite',
     'view_index_page_success' => 'Diese Seite wurde erfolgreich erstellt!',
-    'view_index_page_parent_root' => '[Hauptebene]',
+    'view_index_page_parent_root' => 'Auf der Hauptebene',
     'view_index_page_use_draft' => 'Eine Vorlage verwenden?',
     'view_index_page_select_draft' => 'Möchtest du aus einer Vorlage auswählen?',
     'view_index_page_layout' => 'Layout auswahl',

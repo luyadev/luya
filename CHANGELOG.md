@@ -5,6 +5,7 @@ LUYA CHANGELOG
 -------------------------
 
 - `#828` Fixed z-index bug in page version tabs.
+- `#853` Fixed bug where cms page creation parent page selector was not working anymore.
 - `#846` Added absolute http source path for images in storage component via `getSource(true)`.
 - `#845` Crawler added search data model to analys the querys and added command to send search results.
 - `#839` Admin Filemanager search function to filter file list

@@ -63,10 +63,9 @@
             <div class="input input--select col s12">
                 <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_parent_page'); ?></label>
                 <div class="input__field-wrapper">
-                    <select class="input__field browser-default" ng-model="data.parent_nav_id">
-                        <option value="0"><?php echo \cmsadmin\Module::t('view_index_page_parent_root'); ?></option>
-                        <option ng-repeat="nav in navitems" value="{{nav.id}}">{{nav.title}}</option>
-                    </select>
+                    <input id="[checkbox-id]" ng-model="data.parent_nav_id" value="0" ng-true-value="0" type="checkbox" />
+                    <label for="[checkbox-id]"><?php echo \cmsadmin\Module::t('view_index_page_parent_root'); ?></label>
+                    <menu-dropdown class="menu-dropdown" nav-id="data.parent_nav_id" />
                 </div>
             </div>
         </div>
