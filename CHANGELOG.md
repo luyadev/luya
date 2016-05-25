@@ -4,6 +4,7 @@ LUYA CHANGELOG
 1.0.0-beta7 (in progress)
 -------------------------
 
+- `#876` Improved textarea styling in zaa-table.
 - `#863` Fixed behavior of module controller layouts when using in cms context.
 - `#839` Styled the form search input.
 - `#856` Styled the new is Homepage indicator. Added check_circle in green.

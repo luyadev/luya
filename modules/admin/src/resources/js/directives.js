@@ -694,25 +694,25 @@
                                         '<td width="30"></td>'+
                                         '<td data-ng-repeat="(hk, hr) in model[0] track by hk">'+
                                             '<div class="zaa-table__cell-toolbar-top">'+
-                                                '<button type="button" ng-show="{{hk > 0}}" ng-click="moveLeft(hk)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn--cellmove-left"><i class="material-icons" style="transform: rotate(180deg);">play_arrow</i></button>' +
+                                                '<button type="button" ng-show="{{hk > 0}}" ng-click="moveLeft(hk)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn--cellmove-left" tabindex="-1"><i class="material-icons" style="transform: rotate(180deg);">play_arrow</i></button>' +
                                                 '<div class="zaa-table__cell-toolbar-center">'+
-                                                    '<button type="button" ng-click="removeColumn(hk)" class="btn-floating zaa-table__btn zaa-table__btn--del" data-drag="true">'+
+                                                    '<button type="button" ng-click="removeColumn(hk)" class="btn-floating zaa-table__btn zaa-table__btn--del" data-drag="true" tabindex="-1">'+
                                                         '<i class="material-icons">delete</i>'+
                                                     '</button>'+
                                                 '</div>'+
-                                                '<button type="button" ng-click="moveRight(hk)" ng-show="showRightButton(hk)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn--cellmove-right"><i class="material-icons">play_arrow</i></button>' +
+                                                '<button type="button" ng-click="moveRight(hk)" ng-show="showRightButton(hk)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn--cellmove-right" tabindex="-1"><i class="material-icons">play_arrow</i></button>' +
                                             '</div>'+                                           
                                         '</td>'+
                                     '</tr>'+
                                 '</thead>' +
                                 '<tr data-ng-repeat="(key, row) in model track by key">'+
                                     '<td>'+                                                  
-                                        '<button type="button" class="btn-floating zaa-table__btn zaa-table__btn--del" ng-click="removeRow(key)">'+
+                                        '<button type="button" class="btn-floating zaa-table__btn zaa-table__btn--del" ng-click="removeRow(key)" tabindex="-1">'+
                                             '<i class="material-icons">delete</i>'+
                                         '</button>'+
                                         '<div class="zaa-table__cell-toolbar-side">'+
-                                            '<button type="button" ng-show="{{key > 0}}" ng-click="moveUp(key)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn zaa-table__btn--cellmove-top"><i class="material-icons" style="transform: rotate(270deg);">play_arrow</i></button>' +
-                                            '<button type="button" ng-show="showDownButton(key)" ng-click="moveDown(key)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn zaa-table__btn--cellmove-bottom"><i class="material-icons" style="transform: rotate(90deg);">play_arrow</i></button><br/>' +
+                                            '<button type="button" ng-show="{{key > 0}}" ng-click="moveUp(key)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn zaa-table__btn--cellmove-top" tabindex="-1"><i class="material-icons" style="transform: rotate(270deg);">play_arrow</i></button>' +
+                                            '<button type="button" ng-show="showDownButton(key)" ng-click="moveDown(key)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn zaa-table__btn--cellmove-bottom" tabindex="-1"><i class="material-icons" style="transform: rotate(90deg);">play_arrow</i></button><br/>' +
                                         '</div>'+
                                     '</td>'+
                                     '<td data-ng-repeat="(field,value) in row track by field">'+
