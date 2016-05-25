@@ -50,8 +50,6 @@ class PreviewController extends \cms\base\Controller
         // set the current item, as it would be resolved wrong from the url manager / request path
         Yii::$app->menu->current = $item;
         
-        return $this->render('index', [
-            'pageContent' => $this->renderItem($itemId, null, $version),
-        ]);
+        return $this->renderContent($this->renderItem($itemId, null, $version));
     }
 }

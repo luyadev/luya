@@ -44,7 +44,6 @@ abstract class Controller extends \luya\web\Controller
         $event = new \cms\events\BeforeRenderEvent();
         $event->menu = $currentMenu;
         foreach ($model->nav->getProperties() as $property) {
-            //$object = $model->getNav()->getProperty($property['var_name']);
 
             $object = $property->getObject();
             
@@ -83,6 +82,12 @@ abstract class Controller extends \luya\web\Controller
             return $content;
         }
 
+        // https://github.com/luyadev/luya/issues/863 - if context controller is not false and the layout variable is not empty, the layout file will be displayed
+        // as its already renderd by the module controller itself.
+        if ($typeModel->controller !== false && !empty($typeModel->controller->layout)) {
+            $this->layout = false;
+        }
+        
         if ($this->view->title === null) {
             $this->view->title = $model->title;
         }

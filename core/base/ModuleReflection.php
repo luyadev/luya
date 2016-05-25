@@ -18,6 +18,8 @@ class ModuleReflection extends \yii\base\Object
     public $request = null;
 
     public $urlManager = null;
+    
+    public $controller = null;
 
     private $_defaultRoute = null;
 
@@ -125,7 +127,9 @@ class ModuleReflection extends \yii\base\Object
             $requestRoute['args'] = $this->request->get();
         }
         
+        $this->controller = $controller[0];
+        
         // run the action on the provided controller object
-        return $controller[0]->runAction($controller[1], $requestRoute['args']);
+        return $this->controller->runAction($controller[1], $requestRoute['args']);
     }
 }

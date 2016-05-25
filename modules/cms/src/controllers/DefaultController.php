@@ -45,8 +45,6 @@ class DefaultController extends \cms\base\Controller
             return $content;
         }
         
-        return $this->render('index', [
-            'pageContent' => $content,
-        ]);
+        return $this->renderContent($content);
     }
 }
