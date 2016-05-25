@@ -109,7 +109,7 @@ class Table extends \admin\ngrest\base\Model
     public function ngrestAttributeTypes()
     {
         return [
-            'sortRelationArray' => ['sortRelationArray', 'data' => ['hi', 'ho']],
+            'sortRelationArray' => ['sortRelationArray', 'data' => ['hi', 'ho', 'hi2', 'ho2', 'hi3', 'ho3', 'hi4', 'ho4', 'hi5', 'ho5', 'hi5', 'ho5', 'hi6', 'ho6', 'hi7', 'ho7']],
             'sortRelationModel' => ['SortRelationModel', 'modelClass' => User::className(), 'valueField' => 'id', 'labelField' => 'email'],
             'i18n_sortRelationArray' => ['SortRelationArray', 'data' => ['hi', 'ho']],
             'i18n_sortRelationModel' => ['SortRelationModel', 'modelClass' => User::className(), 'valueField' => 'id', 'labelField' => 'email']

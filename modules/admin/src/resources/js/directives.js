@@ -63,6 +63,8 @@
     		controller: function($scope, $filter) {
     			
     			$scope.sourceData = [];
+
+                $scope.dropdownOpen = false;
     			
     			$scope.$watch(function() { return $scope.model }, function(n, o) {
     				if (n == undefined) {
@@ -137,7 +139,36 @@
                 }
     		},
     		template: function() {
-    			return '<div class="row"><div class="col s6"><ul><li ng-repeat="(key, item) in getModelItems() track by key"><i ng-show="{{key > 0}}" ng-click="moveUp(key)" class="material-icons" style="transform: rotate(270deg);">play_arrow</i> <i ng-show="showDownButton(key)" ng-click="moveDown(key)" class="material-icons" style="transform: rotate(90deg);">play_arrow</i> {{item.label}} <i ng-click="removeFromModel(key)" class="material-icons">delete</i></li></ul></div><div class="col s6">Options:<ul><li ng-repeat="option in getSourceOptions()" ng-show="elementInModel(option)"><i ng-click="addToModel(option)" class="material-icons">add</i> {{ option.label }}</li></ul></div></div>';
+    			return '' +
+                    '<div class="zaa-sortrelation">' +
+                        '<ul class="zaa-sortrelation__list>">' +
+                            '<li class="zaa-sortrelation__entry" ng-repeat="(key, item) in getModelItems() track by key">' +
+                                '<div class="zaa-sortrelation__arrows">' +
+                                    '<i ng-show="{{key > 0}}" ng-click="moveUp(key)" class="material-icons" style="transform: rotate(270deg);">play_arrow</i>' +
+                                    '<i ng-show="showDownButton(key)" ng-click="moveDown(key)" class="material-icons" style="transform: rotate(90deg);">play_arrow</i>' +
+                                '</div>' +
+
+                                '<span class="zaa-sortrelation__text">{{item.label}}</span>' +
+
+                                '<div class="zaa-sortrelation__trash">' +
+                                    '<i ng-click="removeFromModel(key)" class="material-icons">delete</i>' +
+                                '</div>' +
+                            '</li>' +
+                            '<li class="zaa-sortrelation__entry zaa-sortrelation__entry--dropdown">' +
+                                '<ul class="zaa-sortrelation__dropdown">' +
+                                    '<li class="zaa-sortrelation__dropdown-filter">' +
+                                        '<input class="zaa-sortrelation__filter" type="search" placeholder="Hinzufügen..." ng-focus="dropdownOpen = true" />' +
+                                    '</li>' +
+                                    '<li class="zaa-sortrelation__dropdown-entry" ng-repeat="option in getSourceOptions()" ng-show="dropdownOpen && elementInModel(option)" ng-click="addToModel(option)">' +
+                                        '<i class="material-icons">add_circle</i><span>{{ option.label }}</span>' +
+                                    '</li>' +
+                                '</ul>' +
+                                '<div class="zaa-sortrelation__dropdown-arrow" ng-class="{\'zaa-sortrelation__dropdown-arrow--active\': dropdownOpen}">' +
+                                    '<i ng-click="dropdownOpen = !dropdownOpen" class="material-icons">arrow_drop_down</i>' +
+                                '</div>' +
+                            '</li>' +
+                        '</ul>' +
+                    '</div>';
     		}
     	}
     });

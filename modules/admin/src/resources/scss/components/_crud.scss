@@ -1,41 +1,46 @@
 .crud__langswitch {
-	display: inline-block;
-	padding-bottom: 0 !important;
-	margin-top: 17px;
-	float: right;
+    display: inline-block;
+    float: right;
+    margin-top: 17px;
+    padding-bottom: 0 !important;
 }
 
 .crud__i18n-col {
-	position: relative;
-	float: left;
-	width: 100%;
-	padding-left: 15px;
+    float: left;
+    padding-left: 15px;
+    position: relative;
+    width: 100%;
 
-	.input--text .input__field,
-	.input--textarea .input__field {
-		padding-right: 38px;
-	}
+    .input--text .input__field,
+    .input--textarea .input__field {
+        padding-right: 38px;
+    }
 
-	@for $i from 1 through 12 {
-		&.crud__i18n-col--#{$i} {
-			width: (100% / 12) * $i;
-		}
-	}
+    @for $i from 1 through 12 {
+        &.crud__i18n-col--#{$i} {
+            width: (100% / 12) * $i;
+        }
+    }
 }
 
 .crud__flag {
-	position: absolute;
-	top: 50%;
-	right: 11px;
-	z-index: 50;
-	line-height: 1em;
-	margin-top: -0.5em;
+    line-height: 1em;
+    margin-top: -0.5em;
+    position: absolute;
+    right: 11px;
+    top: 50%;
+    z-index: 50;
+
+    zaa-sort-relation-array + & {
+        top: .5em;
+        right: 4px;
+    }
 }
 
 table td {
-	transition: 0.25s ease background-color;
+    transition: 0.25s ease background-color;
 }
 
 .crud__item-highlight td {
-	background-color: rgba(map_get($green, "base"), 0.5);
+    background-color: rgba(map_get($green, "base"), 0.5);
 }
