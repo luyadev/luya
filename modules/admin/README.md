@@ -1,6 +1,8 @@
 LUYA ADMIN
 ==========
 
+[![Build Status](https://travis-ci.org/luyadev/luya-module-admin.svg?branch=master)](https://travis-ci.org/luyadev/luya-module-admin)
+
 This is the READ ONLY repo for the administration interface of LUYA. It is based on [Angular JS](https://angularjs.org/) and Material Design. The basic concept behind the administration module is that you can plug your own administration interfaces for your modules very quick.
 
 Your customer must edit the data, and want to implement the administration very quick, so we have build some nice tools out of the box:
