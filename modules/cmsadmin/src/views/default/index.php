@@ -129,7 +129,10 @@
         <div class="input input--select col s12"  ng-show="data.use_draft==0">
             <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_layout'); ?></label>
             <div class="input__field-wrapper">
-                <select class="input__field browser-default" ng-model="data.layout_id" ng-options="lts.id as lts.name for lts in layouts"></select>
+                <select class="input__field" ng-model="data.layout_id">
+                    <option value="">---Please select---</option>
+                    <option ng-repeat="item in layouts" value="{{item.id}}">{{item.name}}</option>
+                </select>
             </div>
         </div>
     </div>
@@ -148,7 +151,10 @@
         <div class="input input--text col s12">
             <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_module_select'); ?></label>
             <div class="input__field-wrapper">
-                <input name="text" type="text" class="input__field" ng-model="data.module_name" />
+                <select ng-model="data.module_name" class="input__field">
+                    <option value="">---Please select---</option>
+                    <option ng-repeat="item in modules" value="{{item.value}}">{{item.label}}</option>
+                </select>
             </div>
         </div>
     </div>

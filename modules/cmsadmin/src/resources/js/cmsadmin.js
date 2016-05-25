@@ -250,7 +250,7 @@
 		}
 	});
 
-	zaa.directive("createFormModule", function() {
+	zaa.directive("createFormModule", function($http) {
 		return {
 			restrict : 'EA',
 			scope : {
@@ -258,6 +258,12 @@
 			},
 			templateUrl : 'createformmodule.html',
 			controller : function($scope) {
+				
+				$scope.modules = [];
+				
+				$http.get('admin/api-admin-common/data-modules').then(function(response) {
+					$scope.modules = response.data;
+				})
 				
 				$scope.save = function() {
 					$scope.$parent.exec();
