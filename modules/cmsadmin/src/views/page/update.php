@@ -193,15 +193,16 @@
                                     <!-- IS_HOME SWITCH -->
                                     <div class="toolbar__group  toolbar__group--homepage" ng-show="isDraft == false">
                                         <div class="switch">
-                                            <label title="Setzt diese Seite als Startseite.">
+                                            <label title="Setzt diese Seite als Startseite." ng-if="!navData.is_home">
                                                 <?php echo \cmsadmin\Module::t('view_update_is_homepage'); ?>
-                                                <span ng-if="navData.is_home"><i class="switch__icon material-icons">check</i></span>
-                                                <span ng-if="!navData.is_home">
                                                 <input type="checkbox" ng-model="navData.is_home" ng-true-value="1" ng-false-value="0">
                                                 <span class="lever"></span>
-                                                </span>
                                             </label>
                                         </div>
+                                        <span class="grey-text text-darken-2" ng-if="navData.is_home">
+                                            <i class="material-icons cms__prop-toggle green-text text-darken-1" style="vertical-align: middle; margin-right: 3px;">check_circle</i>
+                                            <span  style="vertical-align: bottom">Startseite</span>
+                                        </span>
                                     </div>
                                     <!-- /IS_HOME SWITCH -->
 
