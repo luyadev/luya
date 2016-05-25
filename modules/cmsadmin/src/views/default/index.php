@@ -130,7 +130,8 @@
             <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_layout'); ?></label>
             <div class="input__field-wrapper">
                 <select class="input__field" ng-model="data.layout_id">
-                    <option value="">---Please select---</option>
+                    <option value=""><?= \cmsadmin\Module::t('view_index_create_page_please_choose'); ?></option>
+                    <option value="">- - - - -</option>
                     <option ng-repeat="item in layouts" value="{{item.id}}">{{item.name}}</option>
                 </select>
             </div>
@@ -152,7 +153,8 @@
             <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_module_select'); ?></label>
             <div class="input__field-wrapper">
                 <select ng-model="data.module_name" class="input__field">
-                    <option value="">---Please select---</option>
+                    <option value=""><?= \cmsadmin\Module::t('view_index_create_page_please_choose'); ?></option>
+                    <option value="">- - - - -</option>
                     <option ng-repeat="item in modules" value="{{item.value}}">{{item.label}}</option>
                 </select>
             </div>

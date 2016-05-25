@@ -147,7 +147,7 @@ return [
     'view_index_page_select_draft' => 'Хотите выбрать шаблон?',
     'view_index_page_layout' => 'Выбор шаблона',
     'view_index_page_btn_save' => 'Сохранить новую страницу',
-    'view_index_module_select' => 'Название модуля (Yii-ID)',
+    'view_index_module_select' => 'Название модуля',
     'view_index_redirect_type' => 'Тип переадресации',
     'view_index_redirect_internal' => 'Внутреняя страница',
     'view_index_redirect_external' => 'Внешний URL-адрес',

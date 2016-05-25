@@ -147,7 +147,7 @@ return [
     'view_index_page_select_draft' => 'Möchtest du aus einer Vorlage auswählen?',
     'view_index_page_layout' => 'Layout auswahl',
     'view_index_page_btn_save' => 'Neue Seite speichern',
-    'view_index_module_select' => 'Modul Name (Yii-ID)',
+    'view_index_module_select' => 'Modul Name',
     'view_index_redirect_type' => 'Art der Weiterleitung',
     'view_index_redirect_internal' => 'Interne-Seite',
     'view_index_redirect_external' => 'Externe URL',
@@ -262,5 +262,5 @@ return [
 
     'block_image_internallink_label' => 'Interner Link',
     'block_image_externallink_label' => 'Externer Link (Überschreibt den internen)',
-
+    'view_index_create_page_please_choose' => 'Bitte wählen'
 ];

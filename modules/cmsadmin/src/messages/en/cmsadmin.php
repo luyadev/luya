@@ -147,7 +147,7 @@ return [
     'view_index_page_select_draft' => 'Do you want to choose a template?',
     'view_index_page_layout' => 'Layout selection',
     'view_index_page_btn_save' => 'Save new page',
-    'view_index_module_select' => 'Module name (Yii-ID)',
+    'view_index_module_select' => 'Module name',
     'view_index_redirect_type' => 'Forwarding type',
     'view_index_redirect_internal' => 'Internal page',
     'view_index_redirect_external' => 'External URL',
@@ -262,5 +262,5 @@ return [
 
     'block_image_internallink_label' => 'Internal Link',
     'block_image_externallink_label' => 'External Link (Overrides internal link if set)',
-
+    'view_index_create_page_please_choose' => 'Please choose'
 ];
