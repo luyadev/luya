@@ -3,7 +3,7 @@ LUYA CHANGELOG
 
 1.0.0-beta7 (in progress)
 -------------------------
-
+- `#857` Improved responsive behavior of navbar.
 - `#828` Fixed z-index bug in page version tabs.
 - `#853` Fixed bug where cms page creation parent page selector was not working anymore.
 - `#846` Added absolute http source path for images in storage component via `getSource(true)`.

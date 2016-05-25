@@ -8,9 +8,15 @@ nav {
 
   a { color: $navbar-font-color; }
 
+  .navbar__search-wrapper i {
+    height: $navbar-height-mobile;
+    line-height: $navbar-height-mobile;
+  }
+
   .nav-wrapper {
     position: relative;
     height: 100%;
+    line-height: 64px;
 
     i {
       display: block;

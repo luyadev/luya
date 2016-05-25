@@ -360,7 +360,7 @@ $this->beginPage()
                     </li>
                 </ul>
 
-                <ul class="right navbar__right">
+                <ul class="right navbar__right hide-on-small-only">
                     <li ng-click="reload()" style="cursor: pointer;">
                         <div class="navbar__button">
                             <i class="material-icons">replay</i>
