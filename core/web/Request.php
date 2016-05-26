@@ -38,8 +38,8 @@ class Request extends \yii\web\Request
         $pathInfo = $resolver['route'];
         $parts = explode('/', $pathInfo);
         $first = reset($parts);
-
-        if ($first == 'admin') {
+        
+        if (preg_match('/admin/i', $first, $results)) {
             return true;
         }
 
