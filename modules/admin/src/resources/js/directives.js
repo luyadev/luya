@@ -27,7 +27,7 @@
     			}
     		},
     		template: function() {
-    			return '<div><button ng-click="toggleWindow()" type="button">Toggle</button><div ng-show="showWindow" class="modal__wrapper" zaa-esc="closeActiveWindow()"><div class="modal"><button class="btn waves-effect waves-light modal__close btn-floating red" type="button" ng-click="toggleWindow()"><i class="material-icons">close</i></button><div class="modal-content" compile-html ng-bind-html="content"></div></div><div class="modal__background"></div></div></div>';
+    			return '<div><button ng-click="toggleWindow()" type="button">Toggle</button><div ng-show="showWindow" class="modal__wrapper"><div class="modal"><button class="btn waves-effect waves-light modal__close btn-floating red" type="button" ng-click="toggleWindow()"><i class="material-icons">close</i></button><div class="modal-content" compile-html ng-bind-html="content"></div></div><div class="modal__background"></div></div></div>';
     		}
     	}
     });
