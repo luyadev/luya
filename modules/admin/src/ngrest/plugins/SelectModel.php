@@ -55,11 +55,12 @@ class SelectModel extends \admin\ngrest\plugins\Select
         return $data;
     }
 
-    /*
+    
     public function renderCreate($id, $ngModel)
     {
         
-        $menu = Yii::$app->adminmenu->getApiDetail($this->model->ngRestApiEndpoint());
+        $menu = Yii::$app->adminmenu->getApiDetail($this->modelClass::ngRestApiEndpoint());
+        
         $route = null;
         if ($menu) {
             $route = str_replace('-', '/', $menu['route']);
@@ -70,5 +71,4 @@ class SelectModel extends \admin\ngrest\plugins\Select
             $this->createFormTag('zaa-select', $id, $ngModel, ['initvalue' => $this->initValue, 'options' => $this->getServiceName('selectdata')]),
         ];
     }
-    */
 }
