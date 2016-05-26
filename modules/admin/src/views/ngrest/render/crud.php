@@ -14,9 +14,9 @@
         $scope.config.ngrestConfigHash = '<?php echo $config->hash; ?>';
         $scope.config.activeWindowCallbackUrl = '<?php echo $activeWindowCallbackUrl; ?>';
         $scope.config.pk = '<?php echo $this->context->getPrimaryKey(); ?>';
+        $scope.config.inline = <?= (int) $config->inline; ?>;
     });
 </script>
-
 <div ng-controller="<?php echo $config->hash; ?>" ng-init="init()">
 	<!-- This fake ui-view is used to render the detail item, which actuals uses the parent scope in the ui router controller. -->
 	<div style="visibility:hidden;" ui-view></div>
@@ -115,7 +115,7 @@
         </div>
         <!-- /LIST -->
     
-        <div class="card-panel" ng-show="crudSwitchType==1" zaa-esc="closeCreate()">
+        <div class="card-panel" ng-show="crudSwitchType==1" <?php if (!$config->inline): ?>zaa-esc="closeCreate()"<?php endif; ?>>
 
             <?php if ($canCreate && $config->getPointer('create')): ?>
                 <form name="formCreate" role="form" ng-submit="submitCreate()">
@@ -158,7 +158,7 @@
             <?php endif; ?>
         </div>
     
-        <div class="card-panel" ng-show="crudSwitchType==2" zaa-esc="closeUpdate()">
+        <div class="card-panel" ng-show="crudSwitchType==2" <?php if (!$config->inline): ?>zaa-esc="closeUpdate()"<?php endif; ?>>
             <?php if ($canUpdate && $config->getPointer('update')): ?>
                 <form name="formUpdate" role="form" ng-submit="submitUpdate()">
                     <!-- MODAL CONTENT -->
@@ -202,7 +202,7 @@
     </div>
 
     <!-- activeWindow MODAL -->
-    <div ng-show="activeWindowModal" class="modal__wrapper" zaa-esc="closeActiveWindow()">
+    <div ng-show="activeWindowModal" class="modal__wrapper" <?php if (!$config->inline): ?>zaa-esc="closeActiveWindow()"<?php endif; ?>>
         <div class="modal">
             <button class="btn waves-effect waves-light modal__close btn-floating red" type="button" ng-click="closeActiveWindow()">
                 <i class="material-icons">close</i>

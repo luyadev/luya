@@ -41,6 +41,12 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
     private $_extraFields = null;
 
     private $_hash = null;
+    
+    /**
+     * @var boolean Determine whether this ngrest config is runing as inline window mode (a modal dialog with the 
+     * crud inside) or not. When inline mode is enabled some features like ESC-Keys and URL chaning must be disabled.
+     */
+    public $inline = false;
 
     public $apiEndpoint = null;
 

@@ -1,6 +1,37 @@
 (function() {
     "use strict";
 
+    zaa.directive("crudLoader", function($http, $sce) {
+    	return {
+    		restrict: "E",
+    		replace: true,
+    		transclude: false,
+    		scope: {
+    			"api": "@api",
+    		},
+    		controller: function($scope) {
+    			$scope.showWindow = false;
+    			
+    			$scope.content = null;
+    			
+    			$scope.toggleWindow = function() {
+    				if (!$scope.showWindow) {
+    					$http.get($scope.api+'/?inline=1').then(function(response) {
+    						$scope.content = $sce.trustAsHtml(response.data);
+    						$scope.showWindow = true;
+    					})
+    				} else {
+    					$scope.$parent.loadService();
+    					$scope.showWindow = false;
+    				}
+    			}
+    		},
+    		template: function() {
+    			return '<div><button ng-click="toggleWindow()" type="button">Toggle</button><div ng-show="showWindow" class="modal__wrapper" zaa-esc="closeActiveWindow()"><div class="modal"><button class="btn waves-effect waves-light modal__close btn-floating red" type="button" ng-click="toggleWindow()"><i class="material-icons">close</i></button><div class="modal-content" compile-html ng-bind-html="content"></div></div><div class="modal__background"></div></div></div>';
+    		}
+    	}
+    });
+    
     // form.js
 
     zaa.directive("zaaInjector", function($compile) {

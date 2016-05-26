@@ -2,6 +2,8 @@
 
 namespace admin\ngrest\plugins;
 
+use Yii;
+
 /**
  * Create a selection dropdown based on an ActiveRecord Model.
  * 
@@ -52,4 +54,21 @@ class SelectModel extends \admin\ngrest\plugins\Select
         
         return $data;
     }
+
+    /*
+    public function renderCreate($id, $ngModel)
+    {
+        
+        $menu = Yii::$app->adminmenu->getApiDetail($this->model->ngRestApiEndpoint());
+        $route = null;
+        if ($menu) {
+            $route = str_replace('-', '/', $menu['route']);
+        }
+        
+        return [
+            $this->createTag('crud-loader', 'zalalim', ['api' => $route]),
+            $this->createFormTag('zaa-select', $id, $ngModel, ['initvalue' => $this->initValue, 'options' => $this->getServiceName('selectdata')]),
+        ];
+    }
+    */
 }

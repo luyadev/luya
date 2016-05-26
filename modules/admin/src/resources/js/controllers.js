@@ -21,6 +21,13 @@
 	});
 	
 	// CrudController.js
+	/**
+	 * Base Crud Controller
+	 * 
+	 * Assigned config variables from the php view assigned from child to parent:
+	 * 
+	 * + bool $config.inline Determines whether this crud is in inline mode orno
+	 */
 	zaa.controller("CrudController", function($scope, $filter, $http, $sce, $state, $timeout, AdminLangService, LuyaLoading, AdminToastService) {
 		
 		LuyaLoading.start();
@@ -171,7 +178,9 @@
 			$http.get($scope.config.apiEndpoint + '/'+id+'?' + $scope.config.apiUpdateQueryString).success(function(data) {
 				$scope.data.update = data;
 				$scope.switchTo(2);
-				$state.go('default.route.detail', {id : id});
+				if (!$scope.inline) {
+					$state.go('default.route.detail', {id : id});
+				}
 			}).error(function(data) {
 				AdminToastService.error(i18n['js_ngrest_error'], 2000);
 			});
@@ -237,6 +246,12 @@
 			});
 		};
 	
+		$scope.loadService = function() {
+			$http.get($scope.config.apiEndpoint + '/services').success(function(serviceResponse) {
+				$scope.service = serviceResponse;
+			});
+		}
+		
 		$scope.loadList = function() {
 			LuyaLoading.start();
 			$http.get($scope.config.apiEndpoint + '/services').success(function(serviceResponse) {
