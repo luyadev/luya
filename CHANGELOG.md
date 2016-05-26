@@ -4,6 +4,7 @@ LUYA CHANGELOG
 1.0.0-beta7 (in progress)
 -------------------------
 
+- `#877` **[BC BREAK]** Changing the `ngRestApiEndpoint` method to static. Use `public static function ngRestApiEndpoint()`.
 - `#876` Improved textarea styling in zaa-table.
 - `#863` Fixed behavior of module controller layouts when using in cms context.
 - `#839` Styled the form search input.

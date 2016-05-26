@@ -3,6 +3,11 @@ LUYA UPGRADE
 
 This document will help you upgrading from one LUYA Version into another
 
+1.0.0-beta7
+-----------
+
+* `#877`: *all* NgRest base model does have function `public function ngRestApiEndpoint()` and defines the api endpoint. This method is now **static**. So use `public static function ngRestApiEndpoint()` instead.
+
 1.0.0-beta6
 -----------
 

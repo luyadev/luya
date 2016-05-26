@@ -49,7 +49,7 @@ class Group extends \admin\ngrest\base\Model
 
     public $users = [];
 
-    public function ngRestApiEndpoint()
+    public static function ngRestApiEndpoint()
     {
         return 'api-admin-group';
     }

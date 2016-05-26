@@ -85,7 +85,7 @@ use Yii;
     /**
      * @return string Defines the api endpoint for the angular calls
      */
-    public function ngRestApiEndpoint()
+    public static function ngRestApiEndpoint()
     {
         return '<?= $apiEndpoint; ?>';
     }

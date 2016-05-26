@@ -11,7 +11,7 @@ use yii\helpers\Json;
  */
 class Layout extends \admin\ngrest\base\Model
 {
-    public function ngRestApiEndpoint()
+    public static function ngRestApiEndpoint()
     {
         return 'api-cms-layout';
     }

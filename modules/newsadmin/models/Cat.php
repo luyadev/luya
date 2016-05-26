@@ -60,7 +60,7 @@ class Cat extends \admin\ngrest\base\Model
 
     public $i18n = ['title'];
 
-    public function ngRestApiEndpoint()
+    public static function ngRestApiEndpoint()
     {
         return 'api-news-cat';
     }

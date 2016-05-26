@@ -94,7 +94,7 @@ class Lang extends \admin\ngrest\base\Model
      * {@inheritDoc}
      * @see \admin\ngrest\NgRestModeInterface::ngRestApiEndpoint()
      */
-    public function ngRestApiEndpoint()
+    public static function ngRestApiEndpoint()
     {
         return 'api-admin-lang';
     }

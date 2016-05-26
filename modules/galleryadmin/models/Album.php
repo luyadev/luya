@@ -80,7 +80,7 @@ class Album extends \admin\ngrest\base\Model
 
     public $i18n = ['title', 'description'];
 
-    public function ngRestApiEndpoint()
+    public static function ngRestApiEndpoint()
     {
         return 'api-gallery-album';
     }

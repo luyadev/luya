@@ -93,7 +93,10 @@ class Member extends \admin\ngrest\base\Model
      * This is the api endpoint for the ngrest implementation, so the ngrest config needs to know where should
      * all the angular calls go.
      */
-    public $ngRestEndpoint = 'api-team-member';
+     public static function ngRestApiEndpoint()
+     {
+        return 'api-team-member';
+     }
     
     /**
      * Enable which fields should automaticcally be available as multilingual fields!

@@ -154,7 +154,7 @@ class Index extends \admin\ngrest\base\Model
         return ['url', 'content', 'title', 'language_info'];
     }
 
-    public function ngRestApiEndpoint()
+    public static function ngRestApiEndpoint()
     {
         return 'api-crawler-index';
     }

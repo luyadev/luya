@@ -40,7 +40,7 @@ class StorageEffect extends \admin\ngrest\base\Model
 
     // ngrest
 
-    public function ngRestApiEndpoint()
+    public static function ngRestApiEndpoint()
     {
         return 'api-admin-effect';
     }

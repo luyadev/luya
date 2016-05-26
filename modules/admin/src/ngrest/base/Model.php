@@ -5,17 +5,18 @@ namespace admin\ngrest\base;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 use admin\ngrest\NgRest;
-use admin\ngrest\NgRestModeInterface;
 use admin\behaviors\LogBehavior;
 use admin\base\GenericSearchInterface;
+use admin\ngrest\interfaces\NgRestModeInterface;
 
 /**
  * Base Model for all NgRest Models
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-abstract class Model extends \yii\db\ActiveRecord implements GenericSearchInterface, NgRestModeInterface
+abstract class Model extends ActiveRecord implements GenericSearchInterface, NgRestModeInterface
 {
     /**
      * @var string This event will be trigger after the find population of each row when ngrest loads the data from the server to edit data. (When click on edit icon)
@@ -48,7 +49,7 @@ abstract class Model extends \yii\db\ActiveRecord implements GenericSearchInterf
             ],
             'LogBehavior' => [
                 'class' => LogBehavior::className(),
-                'api' => $this->ngRestApiEndpoint(),
+                'api' => static::ngRestApiEndpoint(),
             ],
         ];
     }
@@ -323,7 +324,7 @@ abstract class Model extends \yii\db\ActiveRecord implements GenericSearchInterf
     public function getNgRestConfig()
     {
         if ($this->_config == null) {
-            $config = Yii::createObject(['class' => '\admin\ngrest\Config', 'apiEndpoint' => $this->ngRestApiEndpoint(), 'primaryKey' => $this->getNgRestPrimaryKey()]);
+            $config = Yii::createObject(['class' => '\admin\ngrest\Config', 'apiEndpoint' => static::ngRestApiEndpoint(), 'primaryKey' => $this->getNgRestPrimaryKey()]);
             $configBuilder = new \admin\ngrest\ConfigBuilder();
             $this->ngRestConfig($configBuilder);
             $config->setConfig($configBuilder->getConfig());

@@ -26,7 +26,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface, Change
         }
     }
     
-    public function ngRestApiEndpoint()
+    public static function ngRestApiEndpoint()
     {
         return 'api-admin-user';
     }

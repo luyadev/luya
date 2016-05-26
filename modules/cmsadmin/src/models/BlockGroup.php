@@ -11,7 +11,7 @@ class BlockGroup extends \admin\ngrest\base\Model
 {
     use \admin\traits\SoftDeleteTrait;
 
-    public function ngRestApiEndpoint()
+    public static function ngRestApiEndpoint()
     {
         return 'api-cms-blockgroup';
     }

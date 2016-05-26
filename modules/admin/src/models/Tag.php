@@ -33,7 +33,7 @@ class Tag extends \admin\ngrest\base\Model
         return ['name'];
     }
 
-    public function ngRestApiEndpoint()
+    public static function ngRestApiEndpoint()
     {
         return 'api-admin-tag';
     }

@@ -124,7 +124,7 @@ class Article extends \admin\ngrest\base\Model
 
     public $extraFields = ['tags'];
 
-    public function ngRestApiEndpoint()
+    public static function ngRestApiEndpoint()
     {
         return 'api-news-article';
     }
