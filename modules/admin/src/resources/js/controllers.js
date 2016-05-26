@@ -12,7 +12,9 @@
 				$scope.crud = $scope.$parent;
 				
 				$scope.init = function() {
-					$scope.crud.toggleUpdate($stateParams.id);
+					if (!$scope.crud.config.inline) {
+						$scope.crud.toggleUpdate($stateParams.id);
+					}
 				}
 				
 				$scope.init();
@@ -48,7 +50,9 @@
 		
 		$scope.switchTo = function(type) {
 			if (type == 0 || type == 1) {
-				$state.go('default.route');
+				if (!$scope.inline) {
+					$state.go('default.route');
+				}
 			}
 			$scope.crudSwitchType = type;
 		};
