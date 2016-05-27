@@ -3,7 +3,6 @@
 namespace cms\helpers;
 
 use Yii;
-use luya\helpers\Url;
 
 /**
  * TagParser to convert CMS Module Tags into HTML Tags
@@ -80,7 +79,7 @@ class TagParser
             }
         } else {
             if (substr($result['value'], 0, 2) == '//') {
-                $href = preg_replace('#//#', Url::base(true) . '/', $result['value'], 1);
+                $href = preg_replace('#//#', \cms\helpers\Url::base(true) . '/', $result['value'], 1);
                 $external = false;
             } else {
                 $href = $result['value'];
