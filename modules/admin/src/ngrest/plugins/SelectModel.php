@@ -56,18 +56,11 @@ class SelectModel extends \admin\ngrest\plugins\Select
     }
 
     
+    
     public function renderCreate($id, $ngModel)
     {
-        
-        $menu = Yii::$app->adminmenu->getApiDetail($this->modelClass::ngRestApiEndpoint());
-        
-        $route = null;
-        if ($menu) {
-            $route = str_replace('-', '/', $menu['route']);
-        }
-        
         return [
-            $this->createTag('crud-loader', 'zalalim', ['api' => $route]),
+            $this->createCrudLoaderTag($this->modelClass),
             $this->createFormTag('zaa-select', $id, $ngModel, ['initvalue' => $this->initValue, 'options' => $this->getServiceName('selectdata')]),
         ];
     }

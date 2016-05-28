@@ -201,6 +201,23 @@ abstract class Plugin extends Component
         return $this->createTag('span', null, ['ng-bind' => $ngModel]);
     }
     
+    /**
+     * Create a tag for relation window toggler with directive crudLoader based on a ngrest model class.
+     * 
+     * @param string $ngrestModelClass
+     * @return string The generated tag or null if permission does not exists
+     */
+    public function createCrudLoaderTag($ngrestModelClass)
+    {
+    	$menu = Yii::$app->adminmenu->getApiDetail($ngrestModelClass::ngRestApiEndpoint());
+    	
+    	if ($menu) {
+    		return $this->createTag('crud-loader', null, ['api' => str_replace('-', '/', $menu['route'])]);
+    	}
+    	
+    	return null;
+    }
+    
     // EVENTS
 
     private $_events = [];

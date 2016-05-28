@@ -64,7 +64,7 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
     
     public function setModel($className)
     {
-        $this->_model = (!is_object($className)) ? Yii::createObject(['class' => $className]) : $className;
+        $this->_model = $className;
     }
 
     private $_modelPrimaryKey = null;
@@ -81,6 +81,10 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
     
     public function getModel()
     {
+    	if (!is_object($this->_model)) {
+    		$this->_model = Yii::createObject(['class' => $this->_model]);
+    	}
+    	
         return $this->_model;
     }
     
@@ -115,14 +119,8 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
 
     public function renderCreate($id, $ngModel)
     {
-        $menu = Yii::$app->adminmenu->getApiDetail($this->model->ngRestApiEndpoint());
-        $route = null;
-        if ($menu) {
-            $route = str_replace('-', '/', $menu['route']);
-        }
-        
         return [
-            $this->createTag('crud-loader', 'zalalim', ['api' => $route]),
+        	$this->createCrudLoaderTag($this->model->className()),
             $this->createFormTag('zaa-checkbox-array', $id, $ngModel, ['options' => $this->getServiceName('relationdata')]),
         ];
     }
