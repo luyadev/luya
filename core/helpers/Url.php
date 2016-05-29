@@ -38,7 +38,7 @@ class Url extends \yii\helpers\Url
     }
     
     /**
-     * Only stil exists to avoid bc break, fromer known as `to()` us `Url::toRoute(['/module/controller/action', 'arg1' => 'arg1value']);` instead.
+     * Only stil exists to avoid bc break, former known as `to()`. Use `Url::toRoute(['/module/controller/action', 'arg1' => 'arg1value']);` instead.
      * Wrapper functions for the createUrl function of the url manager.
      *
      * @param string $route
