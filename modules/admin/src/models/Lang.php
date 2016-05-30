@@ -22,7 +22,23 @@ class Lang extends \admin\ngrest\base\Model
     public function init()
     {
         parent::init();
-        $this->on(self::EVENT_AFTER_VALIDATE, [$this, 'validateDefaultLanguage']);
+        
+        /**
+         * After validation event find out if default has to be set or not. Check if if current value
+         * has default to 1, disabled the other default attributes.
+         */
+        $this->on(self::EVENT_BEFORE_INSERT, function($event) {
+        	if ($this->is_default == 1) {
+        		self::updateAll(['is_default' => 0]);
+        	}
+        });
+        
+        $this->on(self::EVENT_BEFORE_UPDATE, function($event) {
+        	if ($this->is_default == 1) {
+        		$this->markAttributeDirty('is_default');
+        		self::updateAll(['is_default' => 0]);
+    		}
+        });
     }
     
     /**
@@ -32,21 +48,6 @@ class Lang extends \admin\ngrest\base\Model
     public static function tableName()
     {
         return 'admin_lang';
-    }
-    
-    /**
-     * After validation event find out if default has to be set or not. Check if if current value
-     * has default to 1, disabled the other default attributes.
-     */
-    public function validateDefaultLanguage()
-    {
-        if ($this->isNewRecord && $this->is_default == 1) {
-            self::updateAll(['is_default' => 0]);
-        } elseif (!$this->isNewRecord && $this->is_default == 1) {
-            self::updateAll(['is_default' => 0]);
-        } else {
-            $this->is_default = 0;
-        }
     }
     
     /**
