@@ -33,6 +33,7 @@ class Album extends \admin\ngrest\base\Model
             'title' => Module::t('album_title'),
             'description' => Module::t('album_description'),
             'cover_image_id' => Module::t('album_cover_image_id'),
+            'cat_id' => 'Categorie', // @todo messages table
         ];
     }
 
@@ -106,9 +107,7 @@ class Album extends \admin\ngrest\base\Model
         ]);
 
         $this->ngRestConfigDefine($config, 'list', ['title', 'description', 'cover_image_id']);
-
-        $config->create->copyFrom('list', ['id']);
-        $config->update->copyFrom('list', ['id']);
+        $this->ngRestConfigDefine($config, ['create', 'update'], ['cat_id', 'title', 'description', 'cover_image_id']);
 
         $config->delete = true;
 
