@@ -53,6 +53,10 @@ class Api extends \admin\base\RestActiveController
     	    $row = [];
     	    foreach ($value->getAttributes() as $k => $v) {
     	        
+    	        if (is_object($v)) {
+    	            continue;
+    	        }
+    	        
     	        if ($i === 0) {
     	             $header[] = $this->model->getAttributeLabel($k);
     	        }
