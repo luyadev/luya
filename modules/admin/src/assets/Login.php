@@ -20,4 +20,14 @@ class Login extends \luya\web\Asset
     public $depends = [
         'admin\assets\Jquery',
     ];
+    
+    /*
+    public $publishOptions = [
+        'only' => [
+            'js/*',
+            'css/*',
+            'img/*',
+        ]
+    ];
+    */
 }

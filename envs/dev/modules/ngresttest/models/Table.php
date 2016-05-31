@@ -4,6 +4,7 @@ namespace ngresttest\models;
 
 use Yii;
 use admin\models\User;
+use admin\aws\FlowActiveWindow;
 
 /**
  * NgRest Model created at 21.03.2016 14:05 on LUYA Version 1.0.0-beta6-dev.
@@ -98,7 +99,7 @@ class Table extends \admin\ngrest\base\Model
     /**
      * @return string Defines the api endpoint for the angular calls
      */
-    public function ngRestApiEndpoint()
+    public static function ngRestApiEndpoint()
     {
         return 'api-ngresttest-table';
     }
@@ -160,6 +161,7 @@ class Table extends \admin\ngrest\base\Model
      */
     public function ngRestConfig($config)
     {
+        $config->aw->load(['class' => FlowActiveWindow::className()]);
         // define fields for types based from ngrestAttributeTypes
         /*
         $this->ngRestConfigDefine($config, 'list', ['image', 'imageArray', 'file', 'fileArray', 'text', 'textarea', 'selectArray', 'checkboxList', 'date', 'datetime', 'decimal', 'number', 'password', 'toggleStatus', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus']);
