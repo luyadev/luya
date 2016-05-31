@@ -21,6 +21,7 @@ class ActiveWindowView extends \yii\base\View
      * - params: array, Add additional parameters which will be sent to the callback. ['foo' => 'bar']
      * - closeOnSuccess: boolean, if enabled, the active window will close after successfully sendSuccess() response from callback.
      * - reloadListOnSuccess: boolean, if enabled, the active window will reload the ngrest crud list after success response from callback via sendSuccess().
+     * - reloadWindowOnSuccess: boolena, if enabled the active window will reload itself after success (when successResponse is returnd).
      * - class: string, html class fur the button
      * @return string
      */
@@ -38,6 +39,7 @@ class ActiveWindowView extends \yii\base\View
             'buttonNameValue' => $value,
             'closeOnSuccess' => (isset($options['closeOnSuccess'])) ? '$scope.crud.closeActiveWindow();' : null,
             'reloadListOnSuccess' => (isset($options['reloadListOnSuccess'])) ? '$scope.crud.loadList();' : null,
+        	'reloadWindowOnSuccess' => (isset($options['reloadWindowOnSuccess'])) ? '$scope.$parent.activeWindowReload();' : null,
             'buttonClass' => (isset($options['class'])) ? $options['class'] : 'btn',
         ]);
     }
