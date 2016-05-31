@@ -9,6 +9,7 @@ use yii\helpers\Html;
 use luya\Exception;
 use admin\ngrest\base\Model;
 use admin\helpers\I18n;
+use luya\helpers\ArrayHelper;
 
 /**
  * Base class for all NgRest Plugins
@@ -196,9 +197,9 @@ abstract class Plugin extends Component
      * @param string $ngModel
      * @return string
      */
-    public function createListTag($ngModel)
+    public function createListTag($ngModel, array $options = [])
     {
-        return $this->createTag('span', null, ['ng-bind' => $ngModel]);
+        return $this->createTag('span', null, ArrayHelper::merge(['ng-bind' => $ngModel], $options));
     }
     
     /**

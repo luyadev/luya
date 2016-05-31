@@ -105,6 +105,16 @@ function typeCastValue(value) {
 		}
 	})
 	
+	zaa.filter('trustAsUnsafe', function($sce) {
+	    return function(val, enabled) {
+	        return $sce.trustAsHtml(val);
+	    };
+	});
+	
+	/**
+	 * Controller: $scope.content = $sce.trustAsHtml(response.data);
+	 * Template: <div compile-html ng-bind-html="content"></div>
+	 */
 	zaa.directive("compileHtml", function($compile, $parse) {
 		return {
 			restrict: "A",
