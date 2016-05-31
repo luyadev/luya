@@ -26,4 +26,11 @@ class CommandTest extends LuyaConsoleTestCase
         
         $this->assertEquals(\luya\Boot::VERSION, $cmd->getLuyaVersion());
     }
+    
+    public function testHelper()
+    {
+        $cmd = new SubCommand('myid', Yii::$app->getModule('unitmodule'));
+        
+        $this->assertEquals(\luya\Boot::VERSION, $cmd->getLuyaVersion());
+    }
 }
