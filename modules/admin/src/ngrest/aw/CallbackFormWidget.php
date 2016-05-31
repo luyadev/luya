@@ -36,16 +36,39 @@ use yii\helpers\ArrayHelper;
  */
 class CallbackFormWidget extends \yii\base\Widget
 {
+    /**
+     * @var array Options for the Active Form:
+     * 
+     * - params: array, Add additional parameters which will be sent to the callback. ['foo' => 'bar']
+     * - buttonClass: string, an optional class for the submit button replaces `btn`.
+     * - closeOnSuccess: boolean, if enabled, the active window will close after successfully sendSuccess() response from callback.
+     * - reloadListOnSuccess: boolean, if enabled, the active window will reload the ngrest crud list after success response from callback via sendSuccess().
+     */
     public $options = [];
     
+    /**
+     * @var string Required value of the Submit Button
+     */
     public $buttonValue = null;
     
+    /**
+     * @var string Required value of the callback in the Active Window which should be triggered by this Form.
+     */
     public $callback = null;
 
+    /**
+     * @var string Optional string with javascript callback function which is going to be triggered after angular response.
+     */
     public $angularCallbackFunction = 'function() {};';
 
+    /**
+     * @var string The ActiveField class with field type methods.
+     */
     public $fieldClass = '\admin\ngrest\aw\ActiveField';
     
+    /**
+     * @var array This config options are automaticcally are used when creating a field based on the `fieldClass`.
+     */
     public $fieldConfig = [];
     
     /**
@@ -131,6 +154,7 @@ class CallbackFormWidget extends \yii\base\Widget
             'reloadListOnSuccess' => (isset($this->options['reloadListOnSuccess'])) ? '$scope.crud.loadList();' : null,
             'form' => $content,
             'angularCallbackFunction' => $this->angularCallbackFunction,
+            'buttonClass' => (isset($options['buttonClass'])) ? $options['buttonClass'] : 'btn',
         ]);
     }
 }
