@@ -258,14 +258,14 @@ abstract class Plugin extends Component
     }
     
      /**
-     * This event will be triggered `onSave` event.
+     * This event will be triggered `onSave` event. If the property of this plugin inside the model, the event will not be triggered.
      * 
      * @param \yii\db\AfterSaveEvent $event AfterSaveEvent represents the information available in yii\db\ActiveRecord::EVENT_AFTER_INSERT and yii\db\ActiveRecord::EVENT_AFTER_UPDATE.
      * @return void
      */
     public function onSave($event)
     {
-        if ($this->onBeforeSave($event)) {
+        if ($this->isAttributeWriteable($event) && $this->onBeforeSave($event)) {
             if ($this->i18n) {
                 $event->sender->setAttribute($this->name, $this->i18nFieldEncode($event->sender->getAttribute($this->name)));
             }
@@ -286,13 +286,13 @@ abstract class Plugin extends Component
     }
     
     /**
-     * This event is only trigger when returning the ngrest crud list data.
+     * This event is only trigger when returning the ngrest crud list data. If the property of this plugin inside the model, the event will not be triggered.
      * 
      * @param \admin\ngrest\base\Model::EVENT_AFTER_NGREST_FIND $event
      */
     public function onListFind($event)
     {
-        if ($this->onBeforeListFind($event)) {
+        if ($this->isAttributeWriteable($event) && $this->onBeforeListFind($event)) {
             if ($this->i18n) {
                 $event->sender->setAttribute($this->name, $this->i18nDecodedGetActive($this->i18nFieldDecode($event->sender->getAttribute($this->name), $this->i18nEmptyValue)));
             }
@@ -324,12 +324,12 @@ abstract class Plugin extends Component
     }
     
     /**
-     * 
+     * ActiveRecord afterFind event. If the property of this plugin inside the model, the event will not be triggered.
      * @param unknown $event
      */
     public function onFind($event)
     {
-        if ($this->onBeforeFind($event)) {
+        if ($this->isAttributeWriteable($event) && $this->onBeforeFind($event)) {
             if ($this->i18n) {
                 $event->sender->setAttribute($this->name, $this->i18nDecodedGetActive($this->i18nFieldDecode($event->sender->getAttribute($this->name), $this->i18nEmptyValue)));
             }
@@ -362,12 +362,12 @@ abstract class Plugin extends Component
     }
     
     /**
-     * 
+     * NgRest Model crud list/overview event after find. If the property of this plugin inside the model, the event will not be triggered.
      * @param unknown $event
      */
     public function onExpandFind($event)
     {
-        if ($this->onBeforeExpandFind($event)) {
+        if ($this->isAttributeWriteable($event) && $this->onBeforeExpandFind($event)) {
             if ($this->i18n) {
                 $event->sender->setAttribute($this->name, $this->i18nFieldDecode($event->sender->getAttribute($this->name), $this->i18nEmptyValue));
             }
@@ -412,5 +412,16 @@ abstract class Plugin extends Component
                 $event->sender->addNgRestServiceData($this->name, $data);
             }
         }
+    }
+
+    /**
+     * Check wehther the current plugin attribute is writeable in the Model class or not. If not writeable some events will be stopped from
+     * further processing. This is mainly used when adding extraFields to the grid list view.
+     * 
+     * @param object $event The current event object 
+     */
+    protected function isAttributeWriteable($event)
+    {
+        return ($event->sender->hasAttribute($this->name) || $event->sender->canSetProperty($this->name));
     }
 }
