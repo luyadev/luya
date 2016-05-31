@@ -2,6 +2,7 @@
 
 namespace luya\console;
 
+use Yii;
 use yii\helpers\StringHelper;
 use yii\helpers\Inflector;
 
