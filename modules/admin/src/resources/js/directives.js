@@ -12,9 +12,9 @@
     		controller: function($scope) {
 
     			$scope.showWindow = false;
-    			
+
     			$scope.content = null;
-    			
+
     			$scope.toggleWindow = function() {
     				if (!$scope.showWindow) {
     					$http.get($scope.api+'/?inline=1').then(function(response) {
@@ -32,7 +32,7 @@
     		}
     	}
     });
-    
+
     // form.js
 
     zaa.directive("zaaInjector", function($compile) {
@@ -57,19 +57,19 @@
             },
         }
     });
-    
+
     /**
      * @var object $model Contains existing data for the displaying the existing relations
-     * 
+     *
      * ```js
      * [
      * 	{'sortpos': 1, 'value': 1},
      *  {'sortpos': 2, 'value': 4},
      * ]
      * ```
-     * 
+     *
      * @var object $options Provides options to build the sort relation array:
-     * 
+     *
      * ```js
      * {
      * 	'sourceData': [
@@ -93,50 +93,50 @@
                 "name": "@fieldname",
     		},
     		controller: function($scope, $filter) {
-    			
+
     			$scope.sourceData = [];
 
                 $scope.dropdownOpen = false;
-    			
+
     			$scope.$watch(function() { return $scope.model }, function(n, o) {
     				if (n == undefined) {
     					$scope.model = [];
     				}
     			});
-    			
+
     			$scope.$watch(function() { return $scope.options }, function(n, o) {
     				if (n !== undefined && n !== null) {
     					$scope.sourceData = n.sourceData;
     				}
     			})
-    			
+
     			$scope.getSourceOptions = function() {
     				return $scope.sourceData;
     			};
-    			
+
     			$scope.getModelItems = function() {
     				return $scope.model;
     			}
-    			
+
     			$scope.addToModel = function(option) {
-    				
+
     				var match = false;
-    				
+
     				angular.forEach($scope.model, function(value, key) {
     					if (value.value == option.value) {
     						match = true;
     					}
     				})
-    				
+
     				if (!match) {
     					$scope.model.push({'value': option.value, 'label': option.label});
     				}
     			};
-    			
+
     			$scope.removeFromModel = function(key) {
     				$scope.model.splice(key, 1);
     			}
-    			
+
     			$scope.moveUp = function(index) {
                     index = parseInt(index);
                     var oldRow = $scope.model[index];
@@ -150,61 +150,62 @@
                     $scope.model[index] = $scope.model[index+1];
                     $scope.model[index+1] = oldRow;
                 };
-                
+
                 $scope.showDownButton = function(index) {
                     if (parseInt(index) < Object.keys($scope.model).length - 1) {
                         return true;
                     }
                     return false;
                 }
-                
+
                 $scope.elementInModel = function(item) {
             		var match = false;
-    				
+
     				angular.forEach($scope.model, function(value, key) {
     					if (value.value == item.value) {
     						match = true;
     					}
     				});
-    				
+
     				return !match;
                 }
     		},
     		template: function() {
-    			return '' +
-                    '<div class="zaa-sortrelation">' +
-                        '<ul class="zaa-sortrelation__list>">' +
-                            '<li class="zaa-sortrelation__entry" ng-repeat="(key, item) in getModelItems() track by key">' +
-                                '<div class="zaa-sortrelation__arrows">' +
-                                    '<i ng-show="{{key > 0}}" ng-click="moveUp(key)" class="material-icons" style="transform: rotate(270deg);">play_arrow</i>' +
-                                    '<i ng-show="showDownButton(key)" ng-click="moveDown(key)" class="material-icons" style="transform: rotate(90deg);">play_arrow</i>' +
-                                '</div>' +
+    			return '<div class="input input--sortrelation" ng-class="{\'input--hide-label\': i18n}">' +
+                    '<label class="input__label" for="{{id}}">{{label}}</label>' +
+                    '<div class="input__field-wrapper">' +
+                        '<div class="zaa-sortrelation">' +
+                            '<ul class="zaa-sortrelation__list>">' +
+                                '<li class="zaa-sortrelation__entry" ng-repeat="(key, item) in getModelItems() track by key">' +
+                                    '<div class="zaa-sortrelation__arrows">' +
+                                        '<i ng-show="{{key > 0}}" ng-click="moveUp(key)" class="material-icons" style="transform: rotate(270deg);">play_arrow</i>' +
+                                        '<i ng-show="showDownButton(key)" ng-click="moveDown(key)" class="material-icons" style="transform: rotate(90deg);">play_arrow</i>' +
+                                    '</div>' +
 
-                                '<span class="zaa-sortrelation__text">{{item.label}}</span>' +
+                                    '<span class="zaa-sortrelation__text">{{item.label}}</span>' +
 
-                                '<div class="zaa-sortrelation__trash">' +
-                                    '<i ng-click="removeFromModel(key)" class="material-icons">delete</i>' +
-                                '</div>' +
-                            '</li>' +
-                            '<li class="zaa-sortrelation__entry zaa-sortrelation__entry--dropdown">' +
-                                '<ul class="zaa-sortrelation__dropdown">' +
-                                    '<li class="zaa-sortrelation__dropdown-filter">' +
-                                        '<input class="zaa-sortrelation__filter" type="search" placeholder="Hinzufügen..." ng-focus="dropdownOpen = true" />' +
-                                    '</li>' +
-                                    '<li class="zaa-sortrelation__dropdown-entry" ng-repeat="option in getSourceOptions()" ng-show="dropdownOpen && elementInModel(option)" ng-click="addToModel(option)">' +
-                                        '<i class="material-icons">add_circle</i><span>{{ option.label }}</span>' +
-                                    '</li>' +
-                                '</ul>' +
-                                '<div class="zaa-sortrelation__dropdown-arrow" ng-class="{\'zaa-sortrelation__dropdown-arrow--active\': dropdownOpen}">' +
-                                    '<i ng-click="dropdownOpen = !dropdownOpen" class="material-icons">arrow_drop_down</i>' +
-                                '</div>' +
-                            '</li>' +
-                        '</ul>' +
+                                    '<div class="zaa-sortrelation__trash">' +
+                                        '<i ng-click="removeFromModel(key)" class="material-icons">delete</i>' +
+                                    '</div>' +
+                                '</li>' +
+                                '<li class="zaa-sortrelation__dropdown-filter" ng-class="{\'zaa-sortrelation__dropdown-filter--open\': dropdownOpen}">' +
+                                    '<input class="zaa-sortrelation__filter" type="search" placeholder="Hinzufügen..." ng-focus="dropdownOpen = true" />' +
+                                    '<ul class="zaa-sortrelation__dropdown">' +
+                                        '<li class="zaa-sortrelation__dropdown-entry" ng-repeat="option in getSourceOptions()" ng-show="dropdownOpen && elementInModel(option)" ng-click="addToModel(option)">' +
+                                            '<i class="material-icons">add_circle</i><span>{{ option.label }}</span>' +
+                                        '</li>' +
+                                    '</ul>' +
+                                    '<div class="zaa-sortrelation__dropdown-arrow" ng-class="{\'zaa-sortrelation__dropdown-arrow--active\': dropdownOpen}">' +
+                                        '<i ng-click="dropdownOpen = !dropdownOpen" class="material-icons">arrow_drop_down</i>' +
+                                    '</div>' +
+                                '</li>' +
+                            '</ul>' +
+                        '</div>' +
                     '</div>';
     		}
     	}
     });
-    
+
     zaa.directive("zaaLink", function(){
         return {
             restrict: "E",
@@ -221,7 +222,7 @@
             }
         }
     });
-    
+
     zaa.directive("zaaWysiwyg", function() {
         return {
             restrict: "E",
@@ -238,7 +239,7 @@
             }
         }
     });
-    
+
     zaa.directive("zaaNumber", function() {
         return {
             restrict: "E",
@@ -316,7 +317,7 @@
             }
         }
     });
-    
+
     zaa.directive("zaaTextarea", function(){
         return {
             restrict: "E",
@@ -349,7 +350,7 @@
             }
         }
     });
-    
+
     zaa.directive("zaaPassword", function(){
         return {
             restrict: "E",
@@ -366,7 +367,7 @@
             }
         }
     });
-    
+
     zaa.directive("zaaSelect", function($timeout){
         return {
             restrict: "E",
@@ -396,7 +397,7 @@
             }
         }
     });
-    
+
     /**
      * options = {'true-value' : 1, 'false-value' : 0};
      */
@@ -418,9 +419,9 @@
                     $scope.valueFalse = 0;
                 } else {
                     $scope.valueTrue = $scope.options['true-value'];
-                    $scope.valueFalse = $scope.options['false-value'];  
+                    $scope.valueFalse = $scope.options['false-value'];
                 }
-                
+
                 $scope.init = function() {
             		if ($scope.model == undefined && $scope.model == null) {
             			$scope.model = typeCastValue($scope.initvalue);
@@ -438,10 +439,10 @@
             }
         }
     });
-    
-    /** 
+
+    /**
      * options arg object:
-     * 
+     *
      * options.items[] = { "value" : 1, "label" => 'Label for Value 1' }
      */
     zaa.directive("zaaCheckboxArray", function(){
@@ -456,28 +457,28 @@
                 "label": "@label"
             },
             controller: function($scope, $filter) {
-                
+
                 if ($scope.model == undefined) {
                     $scope.model = [];
                 }
-                
+
                 $scope.searchString = '';
-                
+
                 $scope.$watch('options', function(n, o) {
                 	if (n != undefined && n.hasOwnProperty('items')) {
                     	$scope.optionitems = $filter('orderBy')(n.items, 'label');
                     }
                 });
-                
+
                 $scope.filtering = function() {
                     $scope.optionitems = $filter('filter')($scope.options.items, $scope.searchString);
                 }
-                
+
                 $scope.toggleSelection = function (value) {
                 	if ($scope.model == undefined) {
                 		$scope.model = [];
                 	}
-                	
+
                     for (var i in $scope.model) {
                         if ($scope.model[i]["value"] == value.value) {
                             $scope.model.splice(i, 1);
@@ -486,7 +487,7 @@
                     }
                     $scope.model.push({'value': value.value});
                 }
-                
+
                 $scope.isChecked = function(item) {
                     for (var i in $scope.model) {
                         if ($scope.model[i]["value"] == item.value) {
@@ -513,7 +514,7 @@
             }
         }
     });
-    
+
     zaa.directive("zaaDatetime", function() {
         return {
             restrict: "E",
@@ -526,13 +527,13 @@
                 "i18n": "@i18n"
             },
             controller: function($scope) {
-                
+
                 var date = new Date();
-                
+
                 $scope.slicer = function(value) {
                     return ('0' + value).slice(-2);
                 };
-                
+
                 $scope.placeholders = {
                     "day": $scope.slicer(date.getDate()),
                     "month": $scope.slicer(date.getMonth() + 1),
@@ -558,7 +559,7 @@
                     $scope.hour = $scope.slicer(date.getHours());
                     $scope.reform();
                 };
-                
+
                 $scope.$watch(function() { return $scope.model }, function(n, o) {
                     if (n !== undefined && n != null) {
                         var date = new Date(n*1000);
@@ -585,7 +586,7 @@
             }
         }
     });
-    
+
     zaa.directive("zaaDate", function() {
         return {
             restrict: "E",
@@ -598,19 +599,19 @@
                 "i18n": "@i18n"
             },
             controller: function($scope) {
-                
+
                 var date = new Date();
-                
+
                 $scope.slicer = function(value) {
                     return ('0' + value).slice(-2);
                 };
-                
+
                 $scope.placeholders = {
                     "day": $scope.slicer(date.getDate()),
                     "month": $scope.slicer(date.getMonth() + 1),
                     "year": date.getFullYear()
                 };
-                
+
                 $scope.reform = function() {
                     if ($scope.year != null && $scope.month != null && $scope.day != null) {
                         var date = new Date(parseInt($scope.year, 10), parseInt(($scope.month-1), 10), parseInt($scope.day, 10));
@@ -618,7 +619,7 @@
                         $scope.model = (mil/1000);
                     }
                 };
-                
+
                 $scope.today = function() {
                     var date = new Date();
                     $scope.day = $scope.slicer(date.getDate()),
@@ -626,7 +627,7 @@
                     $scope.year = date.getFullYear();
                     $scope.reform();
                 };
-                
+
                 $scope.$watch(function() { return $scope.model }, function(n, o) {
                     if (n !== undefined && n != null) {
                         var date = new Date(n*1000);
@@ -649,7 +650,7 @@
             }
         }
     });
-    
+
     zaa.directive("zaaTable", function() {
         return {
             restrict: "E",
@@ -662,32 +663,32 @@
                 "name": "@fieldname"
             },
             controller: function($scope) {
-                
+
                 if ($scope.model == undefined) {
                     $scope.model = [{0:''}];
                 }
-                
+
                 $scope.addColumn = function() {
                     var len = 0;
                     for (var o in $scope.model[0]) {
                         len++;
                     }
-                    
+
                     for(var i in $scope.model) {
                          $scope.model[i][len] = '';
                     }
                 }
-                
+
                 $scope.addRow = function() {
                     var elmn = $scope.model[0];
                     var ins = {};
                     for (var i in elmn) {
                         ins[i] = '';
                     }
-                    
+
                     $scope.model.push(ins);
                 }
-                
+
                 $scope.removeColumn = function(key) {
                     for (var i in $scope.model) {
                         var item = $scope.model[i];
@@ -730,7 +731,7 @@
                     $scope.model[index] = $scope.model[index+1];
                     $scope.model[index+1] = oldRow;
                 }
-                
+
                 $scope.removeRow = function(key) {
                     $scope.model.splice(key, 1);
                 }
@@ -764,12 +765,12 @@
                                                     '</button>'+
                                                 '</div>'+
                                                 '<button type="button" ng-click="moveRight(hk)" ng-show="showRightButton(hk)" class="btn zaa-table__btn zaa-table__btn--cellmove zaa-table__btn--cellmove-right" tabindex="-1"><i class="material-icons">play_arrow</i></button>' +
-                                            '</div>'+                                           
+                                            '</div>'+
                                         '</td>'+
                                     '</tr>'+
                                 '</thead>' +
                                 '<tr data-ng-repeat="(key, row) in model track by key">'+
-                                    '<td>'+                                                  
+                                    '<td>'+
                                         '<button type="button" class="btn-floating zaa-table__btn zaa-table__btn--del" ng-click="removeRow(key)" tabindex="-1">'+
                                             '<i class="material-icons">delete</i>'+
                                         '</button>'+
@@ -789,7 +790,7 @@
             }
         }
     });
-    
+
     zaa.directive("zaaFileUpload", function($compile){
         return {
             restrict: "E",
@@ -811,7 +812,7 @@
             }
         }
     });
-    
+
     zaa.directive("zaaImageUpload", function($compile){
         return {
             restrict: "E",
@@ -833,7 +834,7 @@
             }
         }
     });
-    
+
     zaa.directive("zaaImageArrayUpload", function(){
         return {
             restrict: "E",
@@ -846,15 +847,15 @@
                 "name": "@fieldname"
             },
             controller: function($scope) {
-                
+
                 if ($scope.model == undefined) {
                     $scope.model = [];
                 }
-                
+
                 $scope.add = function() {
                     $scope.model.push({ imageId : 0, caption : '' });
                 };
-                
+
                 $scope.remove = function(key) {
                     $scope.model.splice(key, 1);
                 };
@@ -887,7 +888,7 @@
             }
         }
     });
-    
+
     zaa.directive("zaaFileArrayUpload", function(){
         return {
             restrict: "E",
@@ -900,19 +901,19 @@
                 "name": "@fieldname"
             },
             controller: function($scope, $element, $timeout) {
-                
+
                 if ($scope.model == undefined) {
                     $scope.model = [];
                 }
-    
+
                 $scope.add = function() {
                     $scope.model.push({ fileId : 0, caption : '' });
                 };
-                
+
                 $scope.remove = function(key) {
                     $scope.model.splice(key, 1);
                 };
-    
+
             },
             template: function() {
                 return '<div class="input input--file-array filearray" ng-class="{\'input--hide-label\': i18n}">' +
@@ -941,7 +942,7 @@
             }
         }
     });
-    
+
     zaa.directive("zaaListArray", function() {
         return {
             restrict: "E",
@@ -954,13 +955,13 @@
                 "name": "@fieldname"
             },
             controller: function($scope, $element, $timeout) {
-    
+
                 $scope.init = function() {
                 	if ($scope.model == undefined || $scope.model == null) {
                         $scope.model = [];
                     }
                 };
-                
+
                 $scope.add = function() {
                 	if ($scope.model == undefined) {
                 		$scope.model = [];
@@ -968,11 +969,11 @@
                     $scope.model.push({ value : '' });
                     $scope.setFocus();
                 };
-                
+
                 $scope.remove = function(key) {
                     $scope.model.splice(key, 1);
                 };
-                
+
                 $scope.refactor = function(key, row) {
                     if (key !== ($scope.model.length -1)) {
                         if (row['value'] == "") {
@@ -980,11 +981,11 @@
                         }
                     }
                 };
-    
+
                 $scope.setFocus = function() {
                     $timeout(function() {
                         var input = $element.children('.list').children('.list__item:last-of-type').children('.list__left').children('input');
-    
+
                         if(input.length == 1) {
                             input[0].focus();
                         }
@@ -1011,9 +1012,9 @@
                     }
                     return false;
                 }
-                
+
                 $scope.init();
-    
+
             },
             template: function() {
                 return '<div class="input input--list list" ng-class="{\'input--hide-label\': i18n}">' +
@@ -1037,7 +1038,7 @@
         }
     });
     // storage.js
-    
+
     zaa.directive('storageFileUpload', function($http, ServiceFilesData, $filter) {
         return {
             restrict : 'E',
@@ -1045,34 +1046,34 @@
                 ngModel : '='
             },
             link : function(scope) {
-                
+
                 // ServiceFilesData inhertiance
-                
+
                 scope.filesData = ServiceFilesData.data;
-                
+
                 scope.$on('service:FilesData', function(event, data) {
                     scope.filesData = data;
                 });
-                
+
                 // controller logic
-                
+
                 scope.modal = true;
                 scope.fileinfo = null;
-                
+
                 scope.select = function(fileId) {
                     scope.toggleModal();
                     scope.ngModel = fileId;
                 }
-                
+
                 scope.reset = function() {
                 	scope.ngModel = 0;
                 	scope.fileinfo = null;
                 }
-                
+
                 scope.toggleModal = function() {
                     scope.modal = !scope.modal;
                 }
-                
+
                 scope.$watch(function() { return scope.ngModel }, function(n, o) {
                     if (n != 0 && n != null && n !== undefined) {
                         var filtering = $filter('filter')(scope.filesData, {id: n}, true);
@@ -1080,7 +1081,7 @@
                             scope.fileinfo = filtering[0];
                         }
                     }
-                    
+
                     /* reset file directive if an event resets the image model to undefined */
                     if (n == 0) {
                     	scope.reset();
@@ -1090,7 +1091,7 @@
             templateUrl : 'storageFileUpload'
         }
     });
-    
+
     zaa.directive('storageFileDisplay', function(ServiceFilesData) {
     	return {
     		restrict: 'E',
@@ -1098,19 +1099,19 @@
     			fileId: '@fileId'
     		},
     		controller: function($scope, $filter) {
-				
+
     			// ServiceFilesData inheritance
-                
+
                 $scope.filesData = ServiceFilesData.data;
-                
+
                 $scope.$on('service:FilesData', function(event, data) {
                     $scope.filesData = data;
                 });
-                
+
                 // controller
-                
+
                 $scope.fileinfo = null;
-                
+
                 $scope.$watch('fileId', function(n, o) {
                     if (n != 0 && n != null && n !== undefined) {
                     	var filtering = $filter('filter')($scope.filesData, {id: n}, true);
@@ -1125,7 +1126,7 @@
             }
     	}
     });
-    
+
     zaa.directive('storageImageThumbnailDisplay', function(ServiceImagesData, ServiceFilesData) {
         return {
             restrict: 'E',
@@ -1133,38 +1134,38 @@
                 imageId: '@imageId'
             },
             controller: function($scope, $filter) {
-                
+
                 // ServiceFilesData inheritance
-                
+
                 $scope.filesData = ServiceFilesData.data;
-                
+
                 $scope.$on('service:FilesData', function(event, data) {
                     $scope.filesData = data;
                 });
-                
+
                 // ServiceImagesData inheritance
-                
+
                 $scope.imagesData = ServiceImagesData.data;
-                
+
                 $scope.$on('service:ImagesData', function(event, data) {
                     $scope.imagesData = data;
                 });
-                
+
                 // controller logic
-                
+
                 $scope.$watch(function() { return $scope.imageId }, function(n, o) {
                     if (n != 0 && n !== undefined) {
-                        
+
                         var filtering = $filter('findidfilter')($scope.imagesData, n, true);
-                        
+
                         var file = $filter('findidfilter')($scope.filesData, filtering.fileId, true);
-                        
+
                         if (file) {
                         	$scope.imageSrc = file.thumbnail.source;
                         }
                     }
                 });
-                
+
                 $scope.imageSrc = null;
             },
             template: function() {
@@ -1172,7 +1173,7 @@
             }
         }
     });
-    
+
     zaa.directive('storageImageUpload', function($http, $filter, ServiceFiltersData, ServiceImagesData, AdminToastService) {
         return {
             restrict : 'E',
@@ -1181,43 +1182,43 @@
                 options : '=',
             },
             link : function(scope) {
-    
+
                 // ServiceImagesData inheritance
-                
+
                 scope.imagesData = ServiceImagesData.data;
-                
+
                 scope.$on('service:ImagesData', function(event, data) {
                     scope.imagesData = data;
                 });
-                
+
                 scope.imagesDataReload = function() {
                     return ServiceImagesData.load(true);
                 }
-                
+
                 // ServiceFiltesrData inheritance
-                
+
                 scope.filtersData = ServiceFiltersData.data;
-                
+
                 scope.$on('service:FiltersData', function(event, data) {
                     scope.filtersData = data;
                 });
-                
+
                 // controller logic
-                
+
                 scope.noFilters = function() {
                     if (scope.options) {
                         return scope.options.no_filter;
                     }
                 }
-                
+
                 scope.imageLoading = false;
-                
+
                 scope.fileId = 0;
-                
+
                 scope.filterId = 0;
-                
+
                 scope.imageinfo = null;
-                
+
                 scope.filterApply = function() {
                     var items = $filter('filter')(scope.imagesData, {fileId: scope.fileId, filterId: scope.filterId}, true);
                     if (items && items.length == 0) {
@@ -1243,13 +1244,13 @@
                         scope.imageinfo = item;
                     }
                 };
-                
+
                 scope.$watch(function() { return scope.filterId }, function(n, o) {
                     if (n != null && n !== undefined && scope.fileId !== 0 && n !== o && n != o) {
                         scope.filterApply();
                     }
                 });
-                
+
                 scope.$watch(function() { return scope.fileId }, function(n, o) {
                 	if (n !== undefined && n != null && n != o) {
                 		if (n == 0) {
@@ -1261,7 +1262,7 @@
                         }
                     }
                 });
-                
+
                 scope.$watch(function() { return scope.ngModel }, function(n, o) {
                     if (n != 0 && n != null && n !== undefined) {
                         var filtering = $filter('findidfilter')(scope.imagesData, n, true);
@@ -1271,7 +1272,7 @@
                             scope.fileId = filtering.fileId;
                         }
                     }
-                    
+
                     /* reset image preview directive if an event resets the image model to undefined */
                     if (n == undefined) {
                     	scope.fileId = 0;
@@ -1279,13 +1280,13 @@
                         scope.imageinfo = null;
                         scope.thumb = false;
                     }
-                    
+
                 });
-                
+
                 scope.thumb = false;
-                
+
                 scope.thumbnailfilter = scope.filtersData['medium-thumbnail'];
-                
+
                 scope.$watch('imageinfo', function(n, o) {
                 	if (n != 0 && n != null && n !== undefined) {
                 		if (n.filterId != 0) {
@@ -1304,7 +1305,7 @@
             templateUrl : 'storageImageUpload'
         }
     });
-    
+
     zaa.filter("filemanagerdirsfilter", function() {
         return function(input, parentFolderId) {
             var result = [];
@@ -1313,11 +1314,11 @@
                     result.push(value);
                 }
             });
-            
+
             return result;
         };
     });
-    
+
     zaa.filter("findthumbnail", function() {
     	return function(input, fileId, thumbnailFilterId) {
     		var result = false;
@@ -1328,31 +1329,31 @@
 	    			}
     			}
     		})
-    		
+
     		return result;
     	}
     });
-    
+
     zaa.filter("findidfilter", function() {
         return function(input, id) {
-            
+
             var result = false;
-            
+
             angular.forEach(input, function(value, key) {
                 if (value.id == id) {
                     result = value;
                 }
             });
-            
+
             return result;
         }
     });
-    
+
     zaa.filter("filemanagerfilesfilter", function() {
         return function(input, folderId, onlyImages) {
-            
+
             var result = [];
-            
+
             angular.forEach(input, function(data) {
                 if (onlyImages) {
                     if (data.folderId == folderId && data.isImage == true) {
@@ -1364,11 +1365,11 @@
                     }
                 }
             });
-            
+
             return result;
         };
     });
-    
+
     /**
      * FILE MANAGER DIR
      */
@@ -1381,33 +1382,33 @@
                 onlyImages : '@onlyImages'
             },
             controller : function($scope, $http, $filter, $timeout) {
-                
+
                 // ServiceFoldersData inheritance
-                
+
                 $scope.foldersData = ServiceFoldersData.data;
-                
+
                 $scope.$on('service:FoldersData', function(event, data) {
                     $scope.foldersData = data;
                 });
-                
+
                 $scope.foldersDataReload = function() {
                     return ServiceFoldersData.load(true);
                 }
-                
+
                 // ServiceFilesData inheritance
-                
+
                 $scope.filesData = ServiceFilesData.data;
-                
+
                 $scope.$on('service:FilesData', function(event, data) {
                     $scope.filesData = data;
                 });
-                
+
                 $scope.filesDataReload = function() {
                     return ServiceFilesData.load(true);
                 }
-                
+
                 // upload logic
-                
+
                 $scope.$watch('uploadingfiles', function (uploadingfiles) {
                     if (uploadingfiles != null) {
                         $scope.uploadResults = 0;
@@ -1420,7 +1421,7 @@
                         }
                     }
                 });
-    
+
                 $scope.$watch('uploadResults', function(n, o) {
                     if ($scope.uploadingfiles != null) {
                         if (n == $scope.uploadingfiles.length) {
@@ -1431,20 +1432,20 @@
                         }
                     }
                 })
-                
+
                 $scope.uploadUsingUpload = function(file) {
                     file.upload = Upload.upload({
                         url: 'admin/api-admin-storage/files-upload',
                         fields: {'folderId': $scope.currentFolderId},
                         file: file
                     });
-    
+
                     file.upload.then(function (response) {
                         $timeout(function () {
                             $scope.uploadResults++;
                             file.processed = true;
                             file.result = response.data;
-                            
+
                             if (file.result.upload == false) {
                                 $scope.errorMsg = file.result.message;
                             }
@@ -1454,32 +1455,32 @@
                             $scope.errorMsg = response.status + ': ' + response.data;
                         }
                     });
-    
+
                     file.upload.progress(function (evt) {
                         file.processed = false;
                         // Math.min is to fix IE which reports 200% sometimes
                         file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
                     });
                 }
-                
+
                 // selector logic
-                
+
                 $scope.selectedFiles = [];
-                
+
                 $scope.toggleSelectionAll = function() {
                 	var files = $filter('filemanagerfilesfilter')($scope.filesData, $scope.currentFolderId, $scope.onlyImages);
                 	files.forEach(function(value, key) {
                 		$scope.toggleSelection(value);
                 	})
                 }
-                
+
                 $scope.toggleSelection = function(file) {
                     if ($scope.allowSelection == 'true') {
                         // parent inject 
                         $scope.$parent.select(file.id);
                         return;
                     }
-    
+
                     var i = $scope.selectedFiles.indexOf(file.id);
                     if (i > -1) {
                         $scope.selectedFiles.splice(i, 1);
@@ -1487,21 +1488,21 @@
                         $scope.selectedFiles.push(file.id);
                     }
                 };
-    
+
                 $scope.inSelection = function(file) {
                     var response = $scope.selectedFiles.indexOf(file.id);
-                    
+
                     if (response != -1) {
                         return true;
                     }
-                    
+
                     return false;
                 };
-                
+
                 // folder add
-                
+
                 $scope.showFolderForm = false;
-                
+
                 $scope.createNewFolder = function(newFolderName) {
                     $http.post('admin/api-admin-storage/folder-create', $.param({ folderName : newFolderName , parentFolderId : $scope.currentFolderId }), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
@@ -1511,33 +1512,33 @@
                         })
                     });
                 };
-                
+
                 $scope.folderFormToggler = function() {
                     $scope.showFolderForm = !$scope.showFolderForm;
                 };
-                
+
                 // controller logic 
-                
+
                 $scope.searchQuery = '';
-                
+
                 $scope.sortField = 'name';
-                
+
                 $scope.changeSortField = function(name) {
                 	$scope.sortField = name;
                 }
-                
+
                 $scope.currentFolderId = 0;
-                
+
                 $scope.changeCurrentFolderId = function(folderId) {
                     $scope.currentFolderId = folderId;
                 };
-                
+
                 $scope.folderUpdateForm = false;
-                
+
                 $scope.folderDeleteForm = false;
-                
+
                 $scope.folderDeleteConfirmForm = false;
-                
+
                 $scope.toggleFolderMode = function(mode) {
                     if (mode == 'edit') {
                         $scope.folderUpdateForm = true;
@@ -1557,7 +1558,7 @@
                         $scope.folderDeleteConfirmForm = false;
                     }
                 };
-                
+
                 $scope.updateFolder = function(folder) {
                     $http.post('admin/api-admin-storage/folder-update?folderId=' + folder.id, $.param({ name : folder.name }), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
@@ -1565,7 +1566,7 @@
                         $scope.toggleFolderMode(false);
                     });
                 }
-                
+
                 $scope.checkEmptyFolder = function(folder) {
                     $http.post('admin/api-admin-storage/is-folder-empty?folderId=' + folder.id, $.param({ name : folder.name }), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
@@ -1601,19 +1602,19 @@
                         });
                     });
                 };
-                
+
                 $scope.fileDetail = false;
-                
+
                 $scope.showFoldersToMove = false;
-                
+
                 $scope.openFileDetail = function(file) {
                     $scope.fileDetail = file;
                 };
-                
+
                 $scope.closeFileDetail = function() {
                     $scope.fileDetail = false;
                 };
-                
+
                 $scope.moveFilesTo = function(folderId) {
                     $http.post('admin/api-admin-storage/filemanager-move-files', $.param({'fileIds' : $scope.selectedFiles, 'toFolderId' : folderId}), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
@@ -1624,7 +1625,7 @@
                         });
                     });
                 };
-                
+
                 $scope.removeFiles = function() {
                     AdminToastService.confirm(i18n['js_dir_manager_rm_file_confirm'], function($timeout, $toast) {
                         $http.post('admin/api-admin-storage/filemanager-remove-files', $.param({'ids' : $scope.selectedFiles}), {
@@ -1638,7 +1639,7 @@
                         });
                     });
                 }
-                
+
             },
             templateUrl : 'storageFileManager'
         }
