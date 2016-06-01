@@ -2,7 +2,7 @@
 	"name" : "luyadev/luya-module-cms",
 	"description" : "Yii2 LUYA CMS",
 	"type" : "luya-module",
-	"keywords" : ["php", "luya", "module", "cms", "yii2", "yii", "contentmanager", "content", "yii2-cms", "luya-module"],
+	"keywords" : ["php", "luya", "module", "cms", "yii2", "yii", "contentmanager", "content", "yii2-cms"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
 	"authors" : [

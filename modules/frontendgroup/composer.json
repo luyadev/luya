@@ -2,7 +2,7 @@
     "name" : "luyadev/luya-module-frontendgroup",
     "description" : "Yii2 LUYA Frontendgroup Module",
     "type" : "luya-module",
-    "keywords" : ["php", "luya", "module", "frontend", "frontendusers", "usergroups", "group", "authorization", "yii2", "yii"],
+    "keywords" : ["php", "luya", "module", "frontend", "frontendusers", "usergroups", "group", "authorization", "yii2", "yii", "luya-module"],
     "license": "MIT",
     "homepage" : "http://luya.io",
     "authors" : [

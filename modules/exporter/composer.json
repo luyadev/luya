@@ -2,7 +2,7 @@
     "name" : "luyadev/luya-module-exporter",
     "description" : "Yii2 LUYA Exporter Module",
     "type" : "luya-module",
-    "keywords" : ["php", "luya", "module", "export", "storage", "sql", "download", "preproduction", "dev", "yii2", "yii"],
+    "keywords" : ["php", "luya", "module", "export", "storage", "sql", "download", "preproduction", "dev", "yii2", "yii", "luya-module"],
     "license": "MIT",
     "homepage" : "http://luya.io",
     "authors" : [

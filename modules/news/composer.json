@@ -2,7 +2,7 @@
 	"name" : "luyadev/luya-module-news",
 	"description" : "Yii2 LUYA News",
 	"type" : "luya-module",
-	"keywords" : ["php", "luya", "module", "news", "yii2", "yii"],
+	"keywords" : ["php", "luya", "module", "news", "yii2", "yii", "luya-module"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
 	"authors" : [

@@ -2,7 +2,7 @@
 	"name" : "luyadev/luya-module-styleguide",
 	"description" : "Yii2 LUYA Styleguide",
 	"type" : "luya-module",
-	"keywords" : ["php", "luya", "module", "styleguide", "yii2", "yii"],
+	"keywords" : ["php", "luya", "module", "styleguide", "yii2", "yii", "luya-module"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
 	"authors" : [

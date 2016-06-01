@@ -2,7 +2,7 @@
 	"name" : "luyadev/luya-module-errorapi",
 	"description" : "Yii2 LUYA Error Api",
 	"type" : "luya-module",
-	"keywords" : ["php", "luya", "module", "errorapi", "yii2", "yii"],
+	"keywords" : ["php", "luya", "module", "errorapi", "yii2", "yii", "luya-module"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
 	"authors" : [

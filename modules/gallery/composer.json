@@ -2,7 +2,7 @@
 	"name" : "luyadev/luya-module-gallery",
 	"description" : "Yii2 LUYA Gallery Module",
 	"type" : "luya-module",
-	"keywords" : ["php", "luya", "module", "gallery", "yii2", "yii"],
+	"keywords" : ["php", "luya", "module", "gallery", "yii2", "yii", "luya-module"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
 	"authors" : [

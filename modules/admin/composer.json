@@ -2,7 +2,7 @@
 	"name" : "luyadev/luya-module-admin",
 	"description" : "Yii2 LUYA Admin",
 	"type" : "luya-module",
-	"keywords" : ["php", "luya", "module", "admin", "yii2", "yii", "administration", "angular", "ngrest", "manage", "panel", "luya-module"],
+	"keywords" : ["php", "luya", "module", "admin", "yii2", "yii", "administration", "angular", "ngrest", "manage", "panel"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
 	"authors" : [

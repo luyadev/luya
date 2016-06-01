@@ -2,7 +2,7 @@
 	"name" : "luyadev/luya-module-crawler",
 	"description" : "Yii2 LUYA Crawler Module",
 	"type" : "luya-module",
-	"keywords" : ["php", "luya", "module", "crawler", "yii2", "yii", "yii2-pagecrawler", "pagecrawler"],
+	"keywords" : ["php", "luya", "module", "crawler", "yii2", "yii", "yii2-pagecrawler", "pagecrawler", "luya-module"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
 	"authors" : [
