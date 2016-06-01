@@ -120,7 +120,7 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
     public function renderCreate($id, $ngModel)
     {
         return [
-        	$this->createCrudLoaderTag($this->model->className()),
+            $this->createCrudLoaderTag($this->model->className()),
             $this->createFormTag('zaa-checkbox-array', $id, $ngModel, ['options' => $this->getServiceName('relationdata')]),
         ];
     }

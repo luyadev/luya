@@ -32,13 +32,19 @@
     z-index: 50;
 
     zaa-sort-relation-array + & {
-        top: .5em;
         right: 4px;
+        top: .5em;
     }
 }
 
 table td {
     transition: 0.25s ease background-color;
+
+    .badge {
+        border-radius: 5px;
+        padding: 5px 20px;
+        position: relative;
+    }
 }
 
 .crud__item-highlight td {

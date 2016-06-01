@@ -10,6 +10,7 @@
     			"api": "@api",
     		},
     		controller: function($scope) {
+
     			$scope.showWindow = false;
     			
     			$scope.content = null;
@@ -27,7 +28,7 @@
     			}
     		},
     		template: function() {
-    			return '<div><button ng-click="toggleWindow()" type="button">Toggle</button><div ng-show="showWindow" class="modal__wrapper"><div class="modal"><button class="btn waves-effect waves-light modal__close btn-floating red" type="button" ng-click="toggleWindow()"><i class="material-icons">close</i></button><div class="modal-content" compile-html ng-bind-html="content"></div></div><div class="modal__background"></div></div></div>';
+    			return '<div class="crud-loader-tag"><button ng-click="toggleWindow()" type="button" class="btn btn-floating green lighten-1"><i class="material-icons">playlist_add</i></button><div ng-show="showWindow" class="modal__wrapper"><div class="modal"><button class="btn waves-effect waves-light modal__close btn-floating red" type="button" ng-click="toggleWindow()"><i class="material-icons">close</i></button><div class="modal-content" compile-html ng-bind-html="content"></div></div><div class="modal__background"></div></div></div>';
     		}
     	}
     });
