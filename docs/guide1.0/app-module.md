@@ -9,7 +9,7 @@ A very important behvaior in *LUYA* projects are **modules**. You can always use
 
 ### Use and configure
 
-To integrate a module, you have to define the them in your config file `prep.php` and `prod.php` (depending on which enviroment your `server.php` is configure), in the modules section:
+To integrate a module you have to define it in your config file `prep.php` and / or `prod.php`, depending on which environment your `server.php` is returning, in the modules section:
 
 ```php
 $config = [
@@ -21,7 +21,7 @@ $config = [
 
 ## Example Module
 
-In our example we make a *TEAM Module* which has a frontend module part and admin moudl part. All admin modules have by defintion the suffix **admin**, the naming of the modules would look like this in our case:
+In our example we make a *TEAM Module* which has a frontend and admin module part. All admin modules have by defintion the suffix **admin**, the naming of the modules would look like this in our case:
 
 + team *Frontend* `modules/team/Module.php`
 + teamadmin *Admin* `modules/teamadmin/Module.php`
@@ -37,7 +37,7 @@ class Module extends \luya\base\Module
 }
 ```
 
-Das *Admin* Modul `modules/teamadmin/Module.php`:
+The *Admin* Module `modules/teamadmin/Module.php`:
 
 ```php
 <?php
@@ -52,9 +52,9 @@ class Module extends \admin\base\Module
 
 ## Import Method
 
-All modules can contain a `import(\luya\console\interfaces\ImportController $import)` import method, this method will be called when running the [console command import](luya-console.md) and is one of the main ideas behind LUYA, store data from programmatic files into your databse while importing. If the `import()` method returns an array, each class must be extends of `luya\console\Importer`.
+All modules can contain a `import(\luya\console\interfaces\ImportController $import)` import method, this method will be called when running the [console command `import`](luya-console.md). One of the main ideas behind LUYA is to store data from programmatic files into your databse while importing. If the `import()` method returns an array each class must extend the `luya\console\Importer` class.
 
-Example reponse for multiple importer classes:
+Example response for multiple importer classes:
 
 ```php
 public function import(\luya\console\interfaces\ImportController $import)
@@ -66,7 +66,7 @@ public function import(\luya\console\interfaces\ImportController $import)
 }
 ```
 
-Example code where import directly does handle some code
+Example code where import directly does handle some code:
 
 ```php
 public function import(\luya\console\interfaces\ImportController $import)
