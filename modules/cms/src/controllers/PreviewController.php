@@ -32,6 +32,8 @@ class PreviewController extends \cms\base\Controller
         if (!$item) {
         	// create new item to inject
         	$inject = new InjectItem([
+        	    'id' => $navItem->nav->id,
+        	    'navId' => $itemId,
         		'childOf' => Yii::$app->menu->home->id,
         		'title' => $navItem->title,
         		'alias' => $navItem->alias,
