@@ -205,8 +205,31 @@ Eigenschaften:
 Info divs
 ---------
 
-Coming soon.
+Folgende Info-Divs sind verfügbar:
 
+**Info**
+![alert alert--info](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/app-admin-styles/alert.alert--info.jpg "alert alert--info")  
+```
+<div class="alert alert--info">Lorem ipsum dolor sit amet...</div>
+```
+
+**Warnung**
+![alert alert--warning](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/app-admin-styles/alert.alert--warning.jpg "alert alert--warning")  
+```
+<div class="alert alert--warning">Lorem ipsum dolor sit amet...</div>
+```
+
+**Erfolg**
+![alert alert--success](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/app-admin-styles/alert.alert--success.jpg "alert alert--success")  
+```
+<div class="alert alert--success">Lorem ipsum dolor sit amet...</div>
+```
+
+**Fehler**
+![alert alert--danger](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/app-admin-styles/alert.alert--danger.jpg "alert alert--danger")  
+```
+<div class="alert alert--danger">Lorem ipsum dolor sit amet...</div>
+```
 
 Badges
 ------
