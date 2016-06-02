@@ -1643,7 +1643,6 @@
                 // file detail view logic
                 
                 $scope.storeFileCaption = function(fileDetail) {
-                	console.log(fileDetail);
                 	$http.post('admin/api-admin-storage/filemanager-update-caption', $.param({'id': fileDetail.id, 'captionsText' : fileDetail.captionArray}), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
                     }).success(function(transport) {

@@ -1,9 +1,4 @@
-<?php 
-
-
-use admin\helpers\I18n;
-
-$this->beginPage(); ?>
+<?php $this->beginPage(); ?>
 <html>
     <head>
         <title>Luya &mdash; <?php echo $this->title; ?></title>
@@ -74,6 +69,4 @@ $this->beginPage(); ?>
     <?php $this->endBody() ?>
     </body>
 </html>
-
-<? var_dump(Yii::$app->storage->getImage(1)->caption); ?>
 <?php $this->endPage() ?>
