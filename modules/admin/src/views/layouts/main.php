@@ -302,10 +302,18 @@ $this->beginPage()
                         </tr>
                         </tbody>
                     </table>
+                    <div class="card-panel">
+                    <h3>Captions</h3>
+                    <ul>
+                        <li ng-repeat="(key, cap) in fileDetail.captionArray">
+                            {{ key }}: <input type="text" ng-model="fileDetail.captionArray[key]" />
+                        </li>
+                    </ul>
+                    <button type="button" class="btn" ng-click="storeFileCaption(fileDetail)">Save</button>
+                    </div>
                     <span ng-if="fileDetail.isImage">
                         <img class="responsive-img" ng-src="{{fileDetail.thumbnailMedium.source}}" />
                     </span>
-                    </p>
                     <a class="btn btn--small right" ng-click="closeFileDetail()"><i class="material-icons">zoom_out</i></a>
                 </div> <!-- detail-wrapper END -->
             </div>

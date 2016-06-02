@@ -35,7 +35,6 @@ class I18n
      */
     public static function decode($value, $onEmptyValue = '')
     {
-        $langShortCode = Yii::$app->adminLanguage->getActiveShortCode();
         $languages = Yii::$app->adminLanguage->getLanguages();
     
         // if its not already unserialized, decode it
@@ -47,6 +46,11 @@ class I18n
             }
         }
     
+        // if value is empty, we create an empty array
+        if (empty($value)) {
+            $value = [];
+        }
+        
         // fall back for not transformed values
         if (!is_array($value)) {
             $value = (array) $value;

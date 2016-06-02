@@ -10,6 +10,7 @@ use admin\models\StorageFolder;
 use admin\Module;
 use luya\traits\CacheableTrait;
 use yii\caching\DbDependency;
+use admin\helpers\I18n;
 
 /**
  * @author nadar
@@ -71,6 +72,25 @@ class StorageController extends \admin\base\RestController
         }
         
         return $cache;
+    }
+    
+    public function actionFilemanagerUpdateCaption()
+    {
+        $fileId = Yii::$app->request->post('id', false);
+        $captionsText = Yii::$app->request->post('captionsText', false);
+        
+        if ($fileId && $captionsText) {
+            $model = StorageFile::findOne($fileId);
+            if ($model) {
+                $model->updateAttributes([
+                    'caption' => I18n::encode($captionsText),
+                ]);
+                
+                return true;
+            }
+        }
+        
+        return false;
     }
     
     public function actionDataImages()

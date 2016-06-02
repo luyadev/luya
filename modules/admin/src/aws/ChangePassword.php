@@ -6,6 +6,13 @@ use Yii;
 use admin\Module;
 use luya\Exception;
 
+/**
+ * Change Passwort Active Window.
+ * 
+ * The model class defined by `className` must implement the `\admin\aws\ChangePasswordInterface`.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class ChangePassword extends \admin\ngrest\base\ActiveWindow
 {
     public $module = 'admin';

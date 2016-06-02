@@ -5,6 +5,30 @@ namespace admin\models;
 use Yii;
 use luya\web\Application;
 
+/**
+ * This is the model class for table "admin_storage_file".
+ *
+ * @property integer $id
+ * @property integer $is_hidden
+ * @property integer $folder_id
+ * @property string $name_original
+ * @property string $name_new
+ * @property string $name_new_compound
+ * @property string $mime_type
+ * @property string $extension
+ * @property string $hash_file
+ * @property string $hash_name
+ * @property integer $upload_timestamp
+ * @property integer $file_size
+ * @property integer $upload_user_id
+ * @property integer $is_deleted
+ * @property integer $passthrough_file
+ * @property string $passthrough_file_password
+ * @property integer $passthrough_file_stats
+ * @property string $caption
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class StorageFile extends \yii\db\ActiveRecord
 {
     public function init()
@@ -23,7 +47,8 @@ class StorageFile extends \yii\db\ActiveRecord
         return [
             [['name_original', 'name_new', 'mime_type', 'name_new_compound', 'extension', 'hash_file', 'hash_name'], 'required'],
             [['folder_id', 'upload_timestamp', 'file_size', 'upload_user_id', 'upload_timestamp', 'is_deleted'], 'safe'],
-            [['is_hidden'], 'integer']
+            [['is_hidden'], 'integer'],
+            [['caption'], 'string'],
         ];
     }
     

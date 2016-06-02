@@ -49,6 +49,10 @@ class Item extends \yii\base\Object
      */
     public function getCaption()
     {
+        if ($this->_caption === null) {
+            $this->_caption = $this->file->caption;
+        }
+        
         return $this->_caption;
     }
     

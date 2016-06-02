@@ -5,12 +5,53 @@ namespace admin\file;
 use Yii;
 use luya\helpers\Url;
 use luya\helpers\FileHelper;
+use admin\helpers\I18n;
 
+/**
+ * Storage File Item
+ * 
+ * @property string $catpion The file caption
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class Item extends \yii\base\Object
 {
     use \admin\storage\ItemTrait;
     
     private $_imageMimeTypes = ['image/gif', 'image/jpeg', 'image/png'];
+    
+    private $_caption = null;
+    
+    /**
+     * Set caption for file item, override existings values
+     *
+     * @param string $text The caption text for this image
+     * @since 1.0.0-beta7
+     */
+    public function setCaption($text)
+    {
+        $this->_caption = trim($text);
+    }
+    
+    /**
+     * Return the caption text for this file, if not defined the item array will be collected
+     *
+     * @return string The caption text for this image
+     * @since 1.0.0-beta7
+     */
+    public function getCaption()
+    {
+        if ($this->_caption === null) {
+            $this->_caption = I18n::findCurrent($this->getCaptionArray());
+        }
+    
+        return $this->_caption;
+    }
+    
+    public function getCaptionArray()
+    {
+        return I18n::decode($this->itemArray['caption']);
+    }
     
     /**
      * 
@@ -176,6 +217,7 @@ class Item extends \yii\base\Object
             'uploadTimestamp' => $this->getUploadTimestamp(),
             'size' => $this->getSize(),
             'sizeReadable' => $this->getSizeReadable(),
+            'captionArray' => $this->getCaptionArray(),
         ];
     }
 }
