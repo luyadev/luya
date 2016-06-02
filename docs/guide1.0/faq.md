@@ -1,7 +1,7 @@
 FAQ
 ===
 
-Common quested for LUYA Projects.
+Common LUYA questions.
 
 ### I got Composer Api Rate-Limit exception
 
