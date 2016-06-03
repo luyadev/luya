@@ -1,0 +1,50 @@
+.aws-gallery__image-wrapper {
+    display: block;
+    position: relative;
+}
+
+.aws-gallery__image {
+    height: auto;
+    position: relative;
+    width: 100%;
+}
+
+.aws-gallery__image-index {
+    background-color: rgba(color('shades', 'black'), .7);
+    border-radius: 50%;
+    color: color('shades', 'white');
+    font-size: 14px;
+    height: 40px;
+    left: 5px;
+    line-height: 40px;
+    position: absolute;
+    text-align: center;
+    top: 5px;
+    width: 40px;
+    z-index: 50;
+}
+
+.aws-gallery__image-btn {
+    background-color: rgba(color('shades', 'white'), .7);
+    border: none;
+    border-radius: 50%;
+    bottom: 12px;
+    color: color('shades', 'black');
+    height: 40px;
+    position: absolute;
+    right: 5px;
+    text-align: center;
+    transition: .25s ease-in-out transform, .15s ease-in-out color, .25s ease-in-out background-color;
+    width: 40px;
+    z-index: 50;
+
+    i {
+        line-height: 37px;
+    }
+
+    &:hover {
+        background-color: rgba(color('red', 'base'), .7);
+        color: color('shades', 'white');
+        transform: scale(1.1);
+    }
+}

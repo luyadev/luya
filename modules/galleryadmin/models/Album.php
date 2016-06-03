@@ -14,8 +14,8 @@ class Album extends \admin\ngrest\base\Model
     public function scenarios()
     {
         return [
-            'restcreate' => ['title', 'description', 'cover_image_id', 'cat_id'],
-            'restupdate' => ['title', 'description', 'cover_image_id', 'cat_id'],
+            'restcreate' => ['title', 'description', 'cover_image_id', 'cat_id', 'sort_index', 'is_highlight'],
+            'restupdate' => ['title', 'description', 'cover_image_id', 'cat_id', 'sort_index', 'is_highlight'],
         ];
     }
 
@@ -33,7 +33,9 @@ class Album extends \admin\ngrest\base\Model
             'title' => Module::t('album_title'),
             'description' => Module::t('album_description'),
             'cover_image_id' => Module::t('album_cover_image_id'),
-            'cat_id' => 'Categorie', // @todo messages table
+            'cat_id' => Module::t('album_cat_id'),
+            'sort_index' => Module::t('album_sort_index'),
+            'is_highlight' => Module::t('album_is_highlight'),
         ];
     }
 
@@ -93,6 +95,8 @@ class Album extends \admin\ngrest\base\Model
             'description' => 'textarea',
             'cover_image_id' => 'image',
             'cat_id' => ['selectModel', 'modelClass' => Cat::className(), 'valueField' => 'id', 'labelField' => 'title'],
+            'sort_index' => 'number',
+            'is_highlight' => 'toggleStatus',
         ];
     }
 
@@ -106,8 +110,8 @@ class Album extends \admin\ngrest\base\Model
             'alias' => Module::t('album_upload')
         ]);
 
-        $this->ngRestConfigDefine($config, 'list', ['title', 'description', 'cover_image_id']);
-        $this->ngRestConfigDefine($config, ['create', 'update'], ['cat_id', 'title', 'description', 'cover_image_id']);
+        $this->ngRestConfigDefine($config, 'list', ['title', 'sort_index', 'is_highlight', 'cover_image_id']);
+        $this->ngRestConfigDefine($config, ['create', 'update'], ['cat_id', 'title', 'description', 'cover_image_id', 'sort_index', 'is_highlight']);
 
         $config->delete = true;
 

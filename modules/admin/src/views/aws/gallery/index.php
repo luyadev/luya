@@ -8,9 +8,12 @@
             <div ng-show="isEmptyObject(files)">
                 <p><?php echo \admin\Module::t('aws_gallery_empty')?></p>
             </div>
-            <div class="col s3" ng-repeat="file in files" style="min-height:180px;">
-                <button type="button" ng-click="remove(file)" class="btn btn-flat"><i class="material-icons">delete</i></button>
-                <img ng-src="{{file.source}}" height="150" class="responsive-img" />
+            <div class="col s3" ng-repeat="file in files">
+                <div class="aws-gallery__image-wrapper">
+                    <div class="aws-gallery__image-index">{{ $index+1 }}</div>
+                    <img class="aws-gallery__image" ng-src="{{file.source}}" height="auto" width="100%" />
+                    <button class="aws-gallery__image-btn" type="button" ng-click="remove(file)"><i class="material-icons">delete</i></button>
+                </div>
             </div>
         </div>
     </div>
