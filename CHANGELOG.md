@@ -5,6 +5,7 @@ LUYA CHANGELOG
 -------------------------
 
 - `#877` **[BC BREAK]** Changing the `ngRestApiEndpoint` method to static. Use `public static function ngRestApiEndpoint()`.
+- `#578` Added new sort relation plugin as requested to make relations with sortable data from model or array.
 - `#876` Improved textarea styling in zaa-table.
 - `#863` Fixed behavior of module controller layouts when using in cms context.
 - `#839` Styled the form search input.

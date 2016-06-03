@@ -94,6 +94,8 @@
     		},
     		controller: function($scope, $filter) {
 
+    			$scope.searchString = null;
+    			
     			$scope.sourceData = [];
 
                 $scope.dropdownOpen = false;
@@ -129,6 +131,7 @@
     				})
 
     				if (!match) {
+    					$scope.searchString = null;
     					$scope.model.push({'value': option.value, 'label': option.label});
     				}
     			};
@@ -189,9 +192,9 @@
                                     '</div>' +
                                 '</li>' +
                                 '<li class="zaa-sortrelation__dropdown-filter" ng-class="{\'zaa-sortrelation__dropdown-filter--open\': dropdownOpen}">' +
-                                    '<input class="zaa-sortrelation__filter" type="search" placeholder="Hinzufügen..." ng-focus="dropdownOpen = true" />' +
+                                    '<input class="zaa-sortrelation__filter" type="search" ng-model="searchString" placeholder="Hinzufügen..." ng-focus="dropdownOpen = true" />' +
                                     '<ul class="zaa-sortrelation__dropdown">' +
-                                        '<li class="zaa-sortrelation__dropdown-entry" ng-repeat="option in getSourceOptions()" ng-show="dropdownOpen && elementInModel(option)" ng-click="addToModel(option)">' +
+                                        '<li class="zaa-sortrelation__dropdown-entry" ng-repeat="option in getSourceOptions() | filter:searchString" ng-show="dropdownOpen && elementInModel(option)" ng-click="addToModel(option)">' +
                                             '<i class="material-icons">add_circle</i><span>{{ option.label }}</span>' +
                                         '</li>' +
                                     '</ul>' +
