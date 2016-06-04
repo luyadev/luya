@@ -17,6 +17,8 @@ After setting up composer, we execute the composer `create-project` command to c
 composer create-project luyadev/luya-kickstarter:1.0.0-beta6
 ```
 
+> Note: During the installation Composer may ask for your Github login credentials. This is normal because Composer needs to get enough API rate-limit to retrieve the dependent package information from Github. For more details, please refer to the [Composer documentation](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens).
+
 The `crate-project` command will create a folder (inside of your current folder where the `composer create-project` command was execute) named **luya-kickstarter**. After the command is finished go into the **configs** folder inside the application and copy the dist template files to original php files.
 
 ```sh
