@@ -12,6 +12,7 @@ use Yii;
  * + link[123]
  * + link[123](Link label)
  * + link[http://www.google.ch](Link label)
+ * + link[//go/there]
  * + file[123]
  * + file[123](File label)
  * 
@@ -64,6 +65,13 @@ class TagParser
         return $content;
     }
 
+    /**
+     * Parse the links from regex results
+     * 
+     * @todo Use Yii2 HTML helper to generate tags.
+     * @param array $result
+     * @return string
+     */
     private static function functionLink(array $result)
     {
         $alias = false;
@@ -104,6 +112,12 @@ class TagParser
         return '<a href="'.$href.'" label="'.$label.'" class="'.$class.'"'.$target.'>'.$label.'</a>';
     }
     
+    /**
+     * Parse the file content from the regex result
+     * 
+     * @param array $result
+     * @return string
+     */
     private static function functionFile(array $result)
     {
         $file = Yii::$app->storage->getFile($result['value']);
