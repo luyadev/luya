@@ -27,6 +27,12 @@ After runing the `composer update` command you have to run the migration command
 ./vendor/bin/luya migrate
 ```
 
+and import the module to your database:
+
+```
+./vendor/bin/luya import
+```
+
 You can now login to your administration area and setup the permissions in order to see the gallery module in your administration area. To integrate the module to your page you can create a page with *type* module or use the *module block*.
 
 

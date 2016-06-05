@@ -10,9 +10,9 @@ use luya\console\interfaces\ImportControllerInterface;
 use yii\base\InvalidParamException;
 
 /**
- * All Luya modules must extend on this base module class.
+ * Base Module class for all LUYA Modules.
  * 
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 abstract class Module extends \yii\base\Module
 {
@@ -76,8 +76,8 @@ abstract class Module extends \yii\base\Module
 
     /**
      * @var string if this/the module is included via another module (parent module), the parent module will write its 
-     *             name inside the child modules $context variable. For example the cms includes the news module, the context variable
-     *             of news would have the value "cms".
+     * name inside the child modules $context variable. For example the cms includes the news module, the context variable
+     * of news would have the value "cms".
      */
     public $context = null;
 
@@ -87,9 +87,9 @@ abstract class Module extends \yii\base\Module
     public $moduleLayout = 'layout';
 
     /**
-     * @var bool If this property is enabled, the module will be hidden in selections where use can choose a module,
-     *           example in wizzard commands where they can create classes inside the modules. (e.g block/create, crud/create).
-     *           In the method `Yii::$app->getLuyaModules()` the modules will not be listed.
+     * @var bool If this property is enabled, the module will be hidden in selections where users can choose a module,
+     * example in wizzard commands where they can create classes inside the modules. (e.g block/create, crud/create).
+     * In the method `Yii::$app->getLuyaModules()` the modules will not be listed.
      */
     public $isCoreModule = true;
     

@@ -1,0 +1,36 @@
+<?php
+
+namespace gallery\controllers;
+
+use luya\web\Controller;
+use galleryadmin\models\Album;
+
+/**
+ * Get all collections or for a specificy categorie.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
+class CollectionsController extends Controller
+{
+	/**
+	 * Get all collections
+	 */
+	public function actionData()
+	{
+		return $this->render('data', [
+			'data' => Album::find()->orderBy(['is_highlight' => SORT_DESC, 'sort_index' => SORT_ASC])->all(),
+		]);
+	}
+	
+	/**
+	 * Get all collections for a specfici categorie
+	 * 
+	 * @param integer $catId
+	 */
+	public function actionDataByCategorie($catId)
+	{
+		return $this->render('data_by_categorie', [
+			'data' => Album::find()->where(['cat_id' => $catId])->orderBy(['is_highlight' => SORT_DESC, 'sort_index' => SORT_ASC])->all(),
+		]);
+	}
+}
