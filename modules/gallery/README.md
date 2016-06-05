@@ -1,5 +1,41 @@
-cat/index.php
-=============
+# Gallery Module
+
+The gallery module allows you create folders and collection and upload images to the collections. Its an easy way to create a gallery very quick and create your own view files.
+
+## Installtion
+
+Require the modules in your composer.json
+
+```
+"luyadev/luya-module-gallery" : "^1.0@dev",
+"luyadev/luya-module-galleryadmin" : "^1.0@dev",
+```
+
+Now add the modules to your configuration in the modules section:
+
+```php
+'modules' => [
+	// ...
+	'gallery' => 'gallery\Module',
+	'galleryadmin' => 'galleryadmin\Module',
+]
+```
+
+After runing the `composer update` command you have to run the migration command in order to setup the database:
+
+```
+./vendor/bin/luya migrate
+```
+
+You can now login to your administration area and setup the permissions in order to see the gallery module in your administration area. To integrate the module to your page you can create a page with *type* module or use the *module block*.
+
+
+## View files
+
+As the modules are not shipped with default view files you can use the following examples:
+
+#### cat/index.php
+
 ```
 <?php foreach($catData as $item): ?>
     <div class="well">
@@ -9,8 +45,8 @@ cat/index.php
 <?php endforeach; ?>
 ```
 
-alben/index.php
-===============
+#### alben/index.php
+
 ```
 <table border="1">
 <?php foreach($albenData as $item): ?>
@@ -29,8 +65,8 @@ alben/index.php
 </table>
 ```
 
-album/index.php
-===============
+#### album/index.php
+
 ```
 <div class="well">
 <table border="1">
