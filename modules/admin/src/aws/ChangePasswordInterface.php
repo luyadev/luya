@@ -9,5 +9,7 @@ namespace admin\aws;
  */
 interface ChangePasswordInterface
 {
+    public static function findOne($condition);
+    
     public function changePassword($newPassword, $newPasswordRepetition);
 }
