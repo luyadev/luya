@@ -27,8 +27,6 @@ class Config extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'value'], 'required'],
-            [['name'], 'string', 'max' => 80],
-            [['value'], 'string', 'max' => 255],
             [['name'], 'unique'],
         ];
     }
@@ -91,7 +89,6 @@ class Config extends \yii\db\ActiveRecord
         $model = new self();
         $model->value = $value;
         $model->name = $name;
-
         return $model->save();
     }
 
