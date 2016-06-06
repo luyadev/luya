@@ -111,6 +111,14 @@ class Query extends \yii\base\Object
      * where(['parent_nav_id' => 0, 'container' => 'footer']);
      * ```
      * 
+     * Its **not possibile** to make where conditions on the same column:
+     * 
+     * ```php
+     * where(['>', 'id', 1])->andWHere(['<', 'id', 3]);
+     * ```
+     * 
+     * This will only appaend the first condition where id is bigger then 1 and ignore the second one
+     * 
      * @param array $args The where defintion can be either an key-value pairing or a condition representen as array.
      * @return \cms\menu\Query
      */

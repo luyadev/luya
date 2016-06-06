@@ -2,56 +2,90 @@
 
 namespace admin\storage;
 
-use Yii;
 use luya\Exception;
 
+/**
+ * Querying data for file, image and filter items.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 trait QueryTrait
 {
-    private $_storage = null;
-    
     private $_where = [];
     
-    /**
-     * Singleton behavior for storage component getter.
-     * 
-     * @return admin\components\StorageContainer
-     */
-    public function getStorage()
-    {
-        if ($this->_storage === null) {
-            $this->_storage = Yii::$app->storage;
-        }
-        
-        return $this->_storage;
-    }
+    private $_offset = null;
+    
+    private $_limit = null;
+    
+    private $_whereOperators = ['<', '<=', '>', '>=', '=', '=='];
     
     /**
-     * Define the Query specific where values, all where conditions as provided with an assoc array, where the key is the 
-     * field and the value accords to the field value. Each Query object have different condition keys, see the specific query
-     * class to find all conditions.
-     * 
-     * ```php
-     * ->where(['id' => 1]); // WHERE id=1
-     * ```
-     * 
-     * ```php
-     * ->where(['id' => 1, 'folder_id' => 2]); // WHERE id=1 AND folder_id=2
-     * ```
-     * 
-     * All where conditions are defined as "equal" operators, so its *not possible* to set an not equal condition.
-     * 
-     * @param array $args Where "equal" conditions, multiple conditions are thread as "AND" statement.
-     * @return \admin\storage\QueryTrait|Object Current object, to make object chaining possible.
+     * Return an array with all item values provided for this query method.
+     *
+     * @return array
      */
-    public function where(array $args)
-    {
-        $this->_where = $args;
-        
-        return $this;
-    }
+    abstract public function getDataProvider();
     
+    /**
+     * Return the item for the specificy key item. If not found, false must be returned.
+     * @param integer $id
+     * @return array|boolean Returns the item array or false if not found.
+     */
+    abstract public function getItemDataProvider($id);
+    
+    /**
+     *
+     * @param array $itemArray
+     */
+    abstract public function createItem(array $itemArray);
+    
+    /**
+     *
+     * @param array $data
+     */
+    abstract public function createIteratorObject(array $data);
+    
+    /**
+     * Internal array filter function
+     * @param unknown $item
+     * @throws Exception
+     */
     protected function whereFilter($item)
     {
+        if (empty($this->_where)) {
+            return true;
+        }
+        
+        foreach ($this->_where as $expression) {
+            
+            $whereKey = $expression['field'];
+            
+            if (!isset($item[$whereKey])) {
+                throw new Exception("The where key '$whereKey' does not exist in the item array. Item: " . print_r($item));
+            }
+            
+            $value = $item[$whereKey];
+            
+            if ($whereKey == $field) {
+                switch ($expression['op']) {
+                    case '==':
+                        return ($value === $expression['value']);
+                    case '>':
+                        return ($value > $expression['value']);
+                    case '>=':
+                        return ($value >= $expression['value']);
+                    case '<':
+                        return ($value < $expression['value']);
+                    case '<=':
+                        return ($value <= $expression['value']);
+                    default:
+                        return ($value == $expression['value']);
+                }
+            }
+        }
+        
+        return true;
+        /*
         foreach ($this->_where as $whereKey => $whereValue) {
             if (!isset($item[$whereKey])) {
                 throw new Exception("The where key '$whereKey' does not exist in the item array. Item: " . print_r($item));
@@ -62,6 +96,173 @@ trait QueryTrait
         }
         
         return true;
+        */
+    }
+    
+    protected function arrayFilter($value, $field)
+    {
+        foreach ($this->_where as $expression) {
+            if ($expression['field'] == $field) {
+                switch ($expression['op']) {
+                    case '==':
+                        return ($value === $expression['value']);
+                    case '>':
+                        return ($value > $expression['value']);
+                    case '>=':
+                        return ($value >= $expression['value']);
+                    case '<':
+                        return ($value < $expression['value']);
+                    case '<=':
+                        return ($value <= $expression['value']);
+                    default:
+                        return ($value == $expression['value']);
+                }
+            }
+        }
+    
+        return true;
+    }
+    
+    protected function filter()
+    {
+        $containerData = $this->getDataProvider();
+        $whereExpression = $this->_where;
+        
+        if (empty($whereExpression)) {
+            return $containerData;
+        }
+        
+        $data = array_filter($containerData, function ($item) {
+            foreach ($item as $field => $value) {
+                if (!$this->arrayFilter($value, $field)) {
+                    return false;
+                }
+            }
+    
+            return true;
+        });
+    
+        /*
+        if ($this->_offset !== null) {
+            $data = array_slice($data, $this->_offset, null, true);
+        }
+
+        if ($this->_limit !== null) {
+            $data = array_slice($data, 0, $this->_limit, true);
+        }
+        */
+
+        return $data;
+    }
+    
+    /**
+     * Set a limition for the amount of results.
+     *
+     * @param integer $count The number of rows to return
+     * @return \admin\storage\QueryTrait
+     */
+    public function limit($count)
+    {
+        if (is_numeric($count)) {
+            $this->_limit = $count;
+        }
+    
+        return $this;
+    }
+    
+    /**
+     * Define offset start for the rows, if you defined offset to be 5 and you have 11 rows, the
+     * first 5 rows will be skiped. This is commonly used to make pagination function in combination
+     * with the limit() function.
+     *
+     * @param integer $offset Defines the amount of offset start position.
+     * @return \admin\storage\QueryTrait
+     */
+    public function offset($offset)
+    {
+        if (is_numeric($offset)) {
+            $this->_offset = $offset;
+        }
+    
+        return $this;
+    }
+    
+    /**
+     * Query where similar behavior of filtering items.
+     * 
+     * Operator Filtering:
+     * 
+     * ```php
+     * where(['operator', 'field', 'value']);
+     * ```
+     * 
+     * Allowed operators
+     * + **<** expression where field is smaller then value.
+     * + **>** expression where field is bigger then value.
+     * + **=** expression where field is equal value.
+     * + **<=** expression where field is small or equal then value.
+     * + **>=** expression where field is bigger or equal then value.
+     * + **==** expression where field is equal to the value and even the type must be equal.
+     * 
+     * Only one operator speific argument can be provided, to chain another expression
+     * use the `andWhere()` method.
+     * 
+     * Multi Dimension Filtering:
+     * 
+     * The most common case for filtering items is the equal expression combined with
+     * add statements.
+     * 
+     * For example the following expression
+     * 
+     * ```php
+     * where(['=', 'id', 0])->andWhere(['=', 'name', 'footer']);
+     * ```
+     * 
+     * is equal to the short form multi deimnsion filtering expression
+     * 
+     * ```php
+     * where(['id' => 0, 'name' => 'footer']);
+     * ```
+     * 
+     * Its **not possibile** to make where conditions on the same column:
+     * 
+     * ```php
+     * where(['>', 'id', 1])->andWHere(['<', 'id', 3]);
+     * ```
+     * 
+     * This will only appaend the first condition where id is bigger then 1 and ignore the second one
+     * 
+     * @param array $args The where defintion can be either an key-value pairing or a condition representen as array.
+     * @return \admin\storage\QueryTrait
+     */
+    public function where(array $args)
+    {
+        foreach ($args as $key => $value) {
+            if (in_array($value, $this->_whereOperators, true)) {
+                if (count($args) !== 3) {
+                    throw new Exception(sprintf("Wrong where(['%s']) condition, see http://luya.io/api/cms-menu-query.html#where()-detail for all available conditions.", implode("', '", $args)));
+                }
+                $this->_where[] = ['op' => $args[0], 'field' => $args[1], 'value' => $args[2]];
+                break;
+            } else {
+                $this->_where[] = ['op' => '=', 'field' => $key, 'value' => $value];
+            }
+        }
+    
+        return $this;
+    }
+    
+    /**
+     * Add another where statement to the existing, this is the case when using compare operators, as then only
+     * one where definition can bet set.
+     *
+     * @see \admin\storage\QueryTrait->where()
+     * @param array $args
+     * @return \admin\storage\QueryTrait
+     */
+    public function andWhere(array $args)
+    {
+        return $this->where($args);
     }
     
     /**
@@ -71,16 +272,17 @@ trait QueryTrait
      */
     public function all()
     {
-        return $this->createIteratorObject(array_filter($this->getDataProvider(), [$this, 'whereFilter']));
+        return $this->createIteratorObject($this->filter());
     }
     
     /**
+     * Get the count of items
      * 
      * @return integer Amount of filtere data.
      */
     public function count()
     {
-        return count(array_filter($this->getDataProvider(), [$this, 'whereFilter']));
+        return count($this->filter());
     }
     
     /**
@@ -90,7 +292,7 @@ trait QueryTrait
      */
     public function one()
     {
-        $data = array_filter($this->getDataProvider(), [$this, 'whereFilter']);
+        $data = $this->filter();
         
         return (count($data) !== 0) ? $this->createItem(array_values($data)[0]): false;
     }
@@ -105,12 +307,4 @@ trait QueryTrait
     {
         return ($itemArray = $this->getItemDataProvider($id)) ? $this->createItem($itemArray) : false;
     }
-    
-    abstract public function getDataProvider();
-    
-    abstract public function getItemDataProvider($id);
-    
-    abstract public function createItem(array $itemArray);
-    
-    abstract public function createIteratorObject(array $data);
 }

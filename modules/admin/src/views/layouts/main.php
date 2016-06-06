@@ -89,6 +89,7 @@ $this->beginPage()
 
 <script type="text/ng-template" id="storageImageUpload">
     <div class="imageupload">
+        <div ng-if="imageNotFoundError" class="alert alert--danger" style="margin-top:0px;">The requested image id ({{ngModel}}) could not be found anymore. The orignal file has been deleted in the filemanager!</div>
         <storage-file-upload ng-model="fileId"></storage-file-upload>
         <div ng-show="originalFileIsRemoved">
             <div class="alert alert--danger"><?php echo Admin::t('layout_deleted_file'); ?></div>
@@ -128,8 +129,8 @@ $this->beginPage()
                             {{folder.name }}                                            
                         </span>
 
-        <i class="material-icons filemanager__edit-icon" ng-show="currentFolderId==folder.id" ng-click="toggleFolderMode('edit')">mode_edit</i>
-        <i class="material-icons filemanager__delete-icon" ng-show="currentFolderId==folder.id" ng-click="toggleFolderMode('remove')">delete</i>
+                        <i class="material-icons filemanager__edit-icon" ng-show="currentFolderId==folder.id" ng-click="toggleFolderMode('edit')">mode_edit</i>
+                        <i class="material-icons filemanager__delete-icon" ng-show="currentFolderId==folder.id" ng-click="toggleFolderMode('remove')">delete</i>
                         
                         <span ng-show="folderUpdateForm && currentFolderId==folder.id">
                             <input type="text" ng-model="folder.name" class="filemanager__file-dialog__input"/>

@@ -198,6 +198,28 @@ class Item extends \yii\base\Object
     }
     
     /**
+     * Return whether the file is hidden or not
+     * 
+     * @since 1.0.0-beta7
+     * @return boolean
+     */
+    public function getIsHidden()
+    {
+        return (bool) $this->itemArray['is_hidden'];
+    }
+    
+    /**
+     * Return whether the file is delted or not
+     * 
+     * @since 1.0.0-beta7
+     * @return boolean
+     */
+    public function getIsDeleted()
+    {
+        return (bool) $this->itemArray['is_deleted'];
+    }
+    
+    /**
      * 
      * @return string[]|boolean[]|mixed[]
      */

@@ -1222,6 +1222,8 @@
 
                 scope.imageinfo = null;
 
+                scope.imageNotFoundError = false;
+                
                 scope.filterApply = function() {
                     var items = $filter('filter')(scope.imagesData, {fileId: scope.fileId, filterId: scope.filterId}, true);
                     if (items && items.length == 0) {
@@ -1273,6 +1275,8 @@
                             scope.imageinfo = filtering;
                             scope.filterId = filtering.filterId;
                             scope.fileId = filtering.fileId;
+                        } else {
+                        	scope.imageNotFoundError = true;
                         }
                     }
 

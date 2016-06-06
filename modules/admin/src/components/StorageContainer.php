@@ -285,6 +285,7 @@ class StorageContainer extends Component
             'is_hidden' => ($isHidden) ? 1 : 0,
             'is_deleted' => 0,
             'file_size' => @filesize($savePath),
+            'caption' => null,
         ]);
         
         if ($model->validate()) {
