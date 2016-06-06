@@ -46,59 +46,12 @@ trait QueryTrait
     abstract public function createIteratorObject(array $data);
     
     /**
-     * Internal array filter function
-     * @param unknown $item
-     * @throws Exception
+     * Process items against where filters
+     * 
+     * @param unknown $value
+     * @param unknown $field
+     * @return boolean
      */
-    protected function whereFilter($item)
-    {
-        if (empty($this->_where)) {
-            return true;
-        }
-        
-        foreach ($this->_where as $expression) {
-            
-            $whereKey = $expression['field'];
-            
-            if (!isset($item[$whereKey])) {
-                throw new Exception("The where key '$whereKey' does not exist in the item array. Item: " . print_r($item));
-            }
-            
-            $value = $item[$whereKey];
-            
-            if ($whereKey == $field) {
-                switch ($expression['op']) {
-                    case '==':
-                        return ($value === $expression['value']);
-                    case '>':
-                        return ($value > $expression['value']);
-                    case '>=':
-                        return ($value >= $expression['value']);
-                    case '<':
-                        return ($value < $expression['value']);
-                    case '<=':
-                        return ($value <= $expression['value']);
-                    default:
-                        return ($value == $expression['value']);
-                }
-            }
-        }
-        
-        return true;
-        /*
-        foreach ($this->_where as $whereKey => $whereValue) {
-            if (!isset($item[$whereKey])) {
-                throw new Exception("The where key '$whereKey' does not exist in the item array. Item: " . print_r($item));
-            }
-            if ($item[$whereKey] != $whereValue) {
-                return false;
-            }
-        }
-        
-        return true;
-        */
-    }
-    
     protected function arrayFilter($value, $field)
     {
         foreach ($this->_where as $expression) {
@@ -123,6 +76,11 @@ trait QueryTrait
         return true;
     }
     
+    /**
+     * Filter container data provider against where conditions
+     * 
+     * @return array
+     */
     protected function filter()
     {
         $containerData = $this->getDataProvider();
