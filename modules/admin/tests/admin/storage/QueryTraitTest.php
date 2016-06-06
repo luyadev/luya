@@ -139,4 +139,29 @@ class QueryTraitTest extends AdminTestCase
             $this->assertArrayHasKey('name', $item->toArray());
         }
     }
+    
+    public function testLimit()
+    {
+        $this->assertEquals(2, count((new FixtureQueryTrait())->limit(2)->all()));
+        $this->assertEquals(1, count((new FixtureQueryTrait())->limit(1)->all()));
+        
+        $items = (new FixtureQueryTrait())->where(['>', 'id', 1])->limit(1)->all();
+
+        $this->assertEquals(1, count($items));
+        
+        foreach ($items as $item) {
+            $this->assertEquals(2, $item->id);
+        }
+    }
+    
+    public function testOffset()
+    {
+        $items = (new FixtureQueryTrait())->where(['>', 'id', 1])->offset(1)->limit(1)->all();
+        
+        $this->assertEquals(1, count($items));
+        
+        foreach ($items as $item) {
+            $this->assertEquals(3, $item->id);
+        }
+    }
 }

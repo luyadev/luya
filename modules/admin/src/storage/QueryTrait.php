@@ -87,20 +87,19 @@ trait QueryTrait
         $whereExpression = $this->_where;
         
         if (empty($whereExpression)) {
-            return $containerData;
+            $data = $containerData;
+        } else {
+            $data = array_filter($containerData, function ($item) {
+                foreach ($item as $field => $value) {
+                    if (!$this->arrayFilter($value, $field)) {
+                        return false;
+                    }
+                }
+        
+                return true;
+            });
         }
         
-        $data = array_filter($containerData, function ($item) {
-            foreach ($item as $field => $value) {
-                if (!$this->arrayFilter($value, $field)) {
-                    return false;
-                }
-            }
-    
-            return true;
-        });
-    
-        /*
         if ($this->_offset !== null) {
             $data = array_slice($data, $this->_offset, null, true);
         }
@@ -108,7 +107,6 @@ trait QueryTrait
         if ($this->_limit !== null) {
             $data = array_slice($data, 0, $this->_limit, true);
         }
-        */
 
         return $data;
     }
