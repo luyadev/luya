@@ -17,7 +17,8 @@
 	},
 	"require" : {
 	    "yiisoft/yii2-imagine": "~2.0.0",
-	    "cebe/markdown": "~1.0.0 | ~1.1.0"
+	    "cebe/markdown": "~1.0.0 | ~1.1.0",
+	    "flowjs/flow-php-server": "^1.0"
 	},
 	"require-dev" : {
 		"phpunit/phpunit" : "~5.0",
