@@ -190,6 +190,11 @@ class Table extends \admin\ngrest\base\Model implements FlowActiveWindowInterfac
         ])->execute();
     }
     
+    public function flowDeleteImage(Item $image)
+    {
+    	Yii::$app->db->createCommand()->delete('ngresttest_table_images', ['image_id' => $image->id])->execute();
+    }
+    
     public function flowListImages()
     {
         return ArrayHelper::getColumn((new Query())->select(['image_id'])->from('ngresttest_table_images')->where(['model_id' => $this->id])->indexBy('image_id')->all(), 'image_id');

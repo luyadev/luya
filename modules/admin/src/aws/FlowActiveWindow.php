@@ -8,6 +8,7 @@ use Flow\Request;
 use luya\helpers\FileHelper;
 use yii\base\InvalidConfigException;
 use Flow\File;
+use admin\helpers\Storage;
 
 /**
  * Active Window created at 31.05.2016 15:45 on LUYA Version 1.0.0-beta7-dev.
@@ -47,8 +48,13 @@ class FlowActiveWindow extends \admin\ngrest\base\ActiveWindow
 	{
 	    $data = $this->getModelItem()->flowListImages();
 	    
-	    return $this->sendSuccess('list laoded', [
-	        'data' => $data,
+	    $images = [];
+	    foreach (Yii::$app->storage->findImages(['in', 'id', $data]) as $item) {
+	    	$images[$item->id] = $item->applyFilter('small-crop')->toArray();
+	    }
+	    
+	    return $this->sendSuccess('list loaded', [
+	        'images' => $images,
 	    ]);
 	}
 	
@@ -70,6 +76,20 @@ class FlowActiveWindow extends \admin\ngrest\base\ActiveWindow
 	public function getModelItem()
 	{
 	    return $this->model->findOne($this->itemId);
+	}
+	
+	public function callbackRemove($imageId)
+	{
+		$image = Yii::$app->storage->getImage($imageId);
+		
+		if ($image) {
+			$this->modelItem->flowDeleteImage($image);
+			if (Storage::removeImage($image->id, true)) {
+				return $this->sendSuccess('image has been removed');
+			}
+		}
+		
+		return $this->sendError('Unable to remove this image');
 	}
 	
 	public function callbackUpload()
@@ -104,11 +124,14 @@ class FlowActiveWindow extends \admin\ngrest\base\ActiveWindow
 	            
 	            $image = Yii::$app->storage->addImage($file->id);
 	            if ($image) {
+	            	
+	            	$image->applyFilter('small-crop');
+	            	
     	            $model = $this->model;
     	            $row = $this->getModelItem();
     	            if ($row) {
     	                $row->flowSaveImage($image);
-    	                return $image->toArray();
+    	                return 'done';
     	            }
 	            }
 	        }
