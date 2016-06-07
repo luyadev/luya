@@ -123,6 +123,33 @@ class QueryTraitTest extends AdminTestCase
         $this->assertEquals(1, (new FixtureQueryTrait())->where(['>', 'id', 1])->andWhere(['==', 'group', 'B'])->count());
     }
     
+    public function testWhereInOperatorConditions()
+    {
+    	$x = (new FixtureQueryTrait())->where(['in', 'id', [1,3]])->all();
+    	
+    	$this->assertEquals(2, count($x));
+    		
+    	
+    	$i = 0;
+    	foreach ($x as $k => $v) {
+    		if ($i == 0) {
+    			$this->assertEquals(1, $v->id);
+    		} else {
+    			$this->assertEquals(3, $v->id);
+    		}
+    		
+    		$i++;
+    	}
+    }
+    
+    /**
+     * @expectedException
+     */
+    public function testWhereInvalidOperatorException()
+    {
+    	(new FixtureQueryTrait())->where(['foo', 'id', [1,3]])->all();
+    }
+    
     public function testIterator()
     {
         $b = (new FixtureQueryTrait())->where(['group' => 'B'])->all();

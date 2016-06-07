@@ -17,7 +17,7 @@ trait QueryTrait
     
     private $_limit = null;
     
-    private $_whereOperators = ['<', '<=', '>', '>=', '=', '=='];
+    private $_whereOperators = ['<', '<=', '>', '>=', '=', '==', 'in'];
     
     /**
      * Return an array with all item values provided for this query method.
@@ -57,6 +57,8 @@ trait QueryTrait
         foreach ($this->_where as $expression) {
             if ($expression['field'] == $field) {
                 switch ($expression['op']) {
+                	case '=':
+                		return ($value == $expression['value']);
                     case '==':
                         return ($value === $expression['value']);
                     case '>':
@@ -67,8 +69,8 @@ trait QueryTrait
                         return ($value < $expression['value']);
                     case '<=':
                         return ($value <= $expression['value']);
-                    default:
-                        return ($value == $expression['value']);
+                    case 'in':
+                    	return in_array($value, $expression['value']);
                 }
             }
         }
