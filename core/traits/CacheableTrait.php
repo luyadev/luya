@@ -37,8 +37,8 @@ use Yii;
 trait CacheableTrait
 {
     /**
-     * @var boolean If enabled and the cache component is available the menu language containers will be
-     * cached for the time defined in $cacheExpiration.
+     * @var boolean If enabled and the cache component is available. If disabled it will fully ignore the any caching but
+     * does not throw exception.
      */
     public $cacheEnabled = true;
     
@@ -78,6 +78,11 @@ trait CacheableTrait
     public function setHasCache($key, $value, $dependency = null, $cacheExpiration = null)
     {
         if ($this->isCachable()) {
+            
+            if (is_array($dependency)) {
+                $dependency = Yii::createObject($dependency);
+            }
+            
             Yii::$app->cache->set($key, $value, (is_null($cacheExpiration)) ? $this->cacheExpiration : $cacheExpiration, $dependency);
         }
     }
@@ -104,11 +109,14 @@ trait CacheableTrait
     {
         if ($this->isCachable()) {
             $data = Yii::$app->cache->get($key);
+            
+            $enumKey = (is_array($key)) ? implode(",", $key) : $key;
+            
             if ($data) {
-                Yii::info("Cacheable trait key '$key' loaded from cache.", __METHOD__);
+                Yii::info("Cacheable trait key '$enumKey' successfully loaded from cache.", __METHOD__);
                 return $data;
             }
-            Yii::info("Cacheable trait key '$key' NOT loaded.", __METHOD__);
+            Yii::info("Cacheable trait key '$enumKey' has not been found in cache.", __METHOD__);
         }
     
         return false;

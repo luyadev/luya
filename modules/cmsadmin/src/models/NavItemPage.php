@@ -16,6 +16,13 @@ use yii\caching\DbDependency;
 /**
  * Represents the type PAGE for a NavItem.
  * 
+ * @property integer $id
+ * @property integer $layout_id
+ * @property integer $nav_item_id
+ * @property integer $timestamp_create
+ * @property integer $create_user_id
+ * @property string $version_alias
+ * 
  * @author Basil Suter <basil@nadar.io>
  */
 class NavItemPage extends NavItemType implements NavItemTypeInterface

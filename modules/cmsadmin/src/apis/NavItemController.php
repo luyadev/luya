@@ -11,9 +11,32 @@ use Exception;
 use cmsadmin\models\Nav;
 use cmsadmin\models\NavItem;
 use cmsadmin\models\NavItemPageBlockItem;
+use luya\web\filters\ResponseCache;
+use yii\caching\DbDependency;
 
 class NavItemController extends \admin\base\RestController
 {
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        
+        $behaviors['responseCache'] = [
+            'class' => ResponseCache::className(),
+            'actions' => ['nav-lang-item'],
+            'variations' => [
+                Yii::$app->request->get('navId', 0),
+                Yii::$app->request->get('langId', 0),
+            ],
+            'dependency' => [
+                'class' => DbDependency::className(),
+                'sql' => 'SELECT timestamp_update FROM cms_nav_item WHERE lang_id=:lang_id AND nav_id=:nav_id',
+                'params' => [':lang_id' => Yii::$app->request->get('langId', 0), ':nav_id' => Yii::$app->request->get('navId', 0)]
+            ]
+        ];
+        
+        return $behaviors;
+    }
+    
     /**
      * http://example.com/admin/api-cms-navitem/nav-lang-item?access-token=XXX&navId=A&langId=B.
      *
