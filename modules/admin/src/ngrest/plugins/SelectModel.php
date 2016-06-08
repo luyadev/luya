@@ -26,6 +26,17 @@ class SelectModel extends \admin\ngrest\plugins\Select
     
     public $labelField = null;
     
+    private static $_dataInstance = [];
+
+    public static function getDataInstance($class, $labelField)
+    {
+        if (!isset(static::$_dataInstance[$class])) {
+            static::$_dataInstance[$class] = $class::find()->orderBy([$labelField => SORT_ASC])->all();
+        }
+        
+        return static::$_dataInstance[$class];
+    }
+    
     public function getData()
     {
         $data = [
@@ -39,7 +50,7 @@ class SelectModel extends \admin\ngrest\plugins\Select
             $class = $class::className();
         }
         
-        foreach ($class::find()->orderBy([$this->labelField => SORT_ASC])->all() as $item) {
+        foreach (static::getDataInstance($class, $this->labelField) as $item) {
             $label = $item->{$this->labelField};
         
             if (is_array($label)) {
@@ -54,8 +65,6 @@ class SelectModel extends \admin\ngrest\plugins\Select
         
         return $data;
     }
-
-    
     
     public function renderCreate($id, $ngModel)
     {
