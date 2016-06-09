@@ -45,7 +45,10 @@ zaa.bootstrap.register('FlowController', function($scope, $controller) {
           <table class="striped">
             <tr ng-repeat="file in $flow.files">
                 <td>{{$index+1}}</td>
-                <td><div ng-if="file.upload"><button tyle="button" class="btn btn-floating"><i class="material-icons">done</i></button></div></td>
+                <td>
+                    <div ng-if="file.upload"><button tyle="button" class="btn btn-floating"><i class="material-icons">done</i></button></div>
+                    <div ng-if="!file.upload"><i class="material-icons spin">cached</i></div>    
+                </td>
                 <td>{{file.name}}</td>
             </tr>
           </table>
