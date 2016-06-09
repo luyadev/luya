@@ -14,7 +14,7 @@ use admin\image\Item;
  * {
  *     Yii::$app->db->createCommand()->insert('flow_gallery', [
  *         'model_id' => $this->id,
- *         'image_id' => $image->id,y
+ *         'image_id' => $image->id,
  *     ])->execute();
  * }
  * 
@@ -26,6 +26,22 @@ use admin\image\Item;
  * public function flowListImages()
  * {
  *     return ArrayHelper::getColumn((new Query())->select(['image_id'])->from('flow_gallery')->where(['model_id' => $this->id])->indexBy('image_id')->all(), 'image_id');
+ * }
+ * ```
+ * 
+ * You can **aslo** use the [[admin\aws\FlowActiveWindowTrait]] which enables those methods and you only have to configure
+ * the relation table between the model/item and the image.
+ * 
+ * ```php
+ * use FlowActiveWindowTrait;
+ * 
+ * public function flowConfig()
+ * {
+ *     return [
+ *         'table' => 'relation_table_name', // the table which contains the relation data between model/item and image.
+ *         'itemField' => 'group_id', // the field defined on where the window is attached
+ *         'imageField' => 'image_id', // the value of the image id can be stored in. 
+ *     ];
  * }
  * ```
  * 

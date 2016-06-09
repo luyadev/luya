@@ -3,15 +3,37 @@
 namespace admin\aws;
 
 use Yii;
+use yii\base\InvalidConfigException;
 use Flow\Config;
 use Flow\Request;
-use luya\helpers\FileHelper;
-use yii\base\InvalidConfigException;
 use Flow\File;
+use luya\helpers\FileHelper;
 use admin\helpers\Storage;
 
 /**
- * Active Window created at 31.05.2016 15:45 on LUYA Version 1.0.0-beta7-dev.
+ * Flow Uploader ActiveWindow enables multi image upload with chunck ability.
+ * 
+ * The Flow ActiveWindow will not store any data in the filemanager as its thought to be used in large image upload 
+ * scenarios like galleries, event the image are chuncked into parts in order to enable large image uploads.
+ * 
+ * Example use:
+ * 
+ * ```
+ * public function ngRestConfig($config)
+ * {
+ *     // ...
+ *     $config->aw->load(['class' => FlowActiveWindow, 'modelClass' => self::className()]);
+ * }
+ * ```
+ * 
+ * The property `modelClass` must be defined and the defined model class must implement the interface `FlowActiveWindowInterface` 
+ * in order to perfom all tasks defined in the FlowActiveWindow. There is also a helper Trait you can include in order to do
+ * the basic jobs of such a image relation table.
+ * 
+ * 
+ * [[\admin\aw\FlowActiveWindowTrait]]
+ * 
+ * @since 1.0.0-beta7
  */
 class FlowActiveWindow extends \admin\ngrest\base\ActiveWindow
 {
