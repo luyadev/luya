@@ -144,3 +144,4 @@ The admin module of LUYA provides some basic reusable active windows you can reu
 |Gallery|`admin\aws\Gallery`|<ul><li>$refTableName</li><li>$imageIdFieldName</li><li>$refFieldName</li></ul>
 |ChangePassword|`admin\aws\ChangePassword`|<ul><li>$className</li></ul>
 |CoordinatesActiveWindow|`admin\aws\CoordinatesActiveWindow`|<ul><li>$ampsApikey</li></ul>
+|FlowActiveWindow|`admin\aws\FlowActiveWindow`|<ul><li>$modelClass</li></ul>
