@@ -62,6 +62,7 @@ interface FlowActiveWindowInterface
      * by implementing this method.
      * 
      * @param \admin\image\Item $image The storage image item object which has been generated from active window.
+     * @return void
      */
     public function flowSaveImage(Item $image);
     
@@ -70,11 +71,19 @@ interface FlowActiveWindowInterface
      * the corresponding reference item in your database table. The image objec deletion will be trigger by the active window.
      * 
      * @param \admin\image\Item $image
+     * @return void
      */
     public function flowDeleteImage(Item $image);
     
     /**
-     * Get an array with all ids for the storage component.
+     * Get an array with all ids for the storage component. Only the image ids for the current
+     * model/item id should be returned:
+     * 
+     * ```php
+     * return [1,2,3]; // where 1,2,3 are ids of the image from the storage component
+     * ```
+     * 
+     * @return array An array where only the images are returned.
      */
     public function flowListImages();
 }
