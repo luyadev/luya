@@ -786,8 +786,9 @@
 		$scope.storePropValues = function() {
 			var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 			$http.post('admin/api-cms-nav/save-properties?navId='+$scope.id, $.param($scope.propValues), headers).success(function(response) {
-				AdminToastService.success(i18n['js_page_property_refresh'], 2000);
+				AdminToastService.success(i18n['js_page_property_refresh'], 4000);
 				$scope.loadNavProperties();
+				$scope.showPropForm = false;
 			});
 		}
 		
