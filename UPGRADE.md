@@ -7,6 +7,8 @@ This document will help you upgrading from one LUYA Version into another
 -----------
 
 * `#877`: *all* NgRest base model does have function `public function ngRestApiEndpoint()` and defines the api endpoint. This method is now **static**. So use `public static function ngRestApiEndpoint()` instead.
+* `#875`: As part of the tag Parser rework, the helper method to parse luya tags (links, etc.) `cms\helpers\Parser::encode($text)` has been changed to `cms\helpers\TagParser::convert($text)`.
+
 
 1.0.0-beta6
 -----------
