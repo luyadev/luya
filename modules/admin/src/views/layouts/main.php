@@ -304,13 +304,14 @@ $this->beginPage()
                         </tbody>
                     </table>
                     <div class="card-panel">
-                    <h3>Captions</h3>
-                    <ul>
-                        <li ng-repeat="(key, cap) in fileDetail.captionArray">
-                            {{ key }}: <input type="text" ng-model="fileDetail.captionArray[key]" />
-                        </li>
-                    </ul>
-                    <button type="button" class="btn" ng-click="storeFileCaption(fileDetail)">Save</button>
+                    <h4><?= Admin::t('layout_filemanager_file_captions'); ?></h4>
+                    <div class="input input--text" ng-repeat="(key, cap) in fileDetail.captionArray">>
+                    <label class="input__label" for="[input-id]">{{key}}</label>
+                    <div class="input__field-wrapper">
+                        <input class="input__field" ng-model="fileDetail.captionArray[key]" type="text" />
+                    </div>
+                    </div>
+                    <button type="button" class="btn" ng-click="storeFileCaption(fileDetail)"><?= Admin::t('layout_filemanager_file_captions_save_btn'); ?></button>
                     </div>
                     <span ng-if="fileDetail.isImage">
                         <img class="responsive-img" ng-src="{{fileDetail.thumbnailMedium.source}}" />
