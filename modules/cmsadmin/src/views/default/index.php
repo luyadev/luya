@@ -283,7 +283,7 @@
                     <div class="sidebar__icon-holder">
                         <i class="sidebar__icon material-icons">live_tv</i>
                     </div>
-                    <span class="sidebar__text">Auto Preview</span>
+                    <span class="sidebar__text"><?= \cmsadmin\Module::t('view_index_sidebar_autopreview'); ?></span>
                 </label>
             </div>
 

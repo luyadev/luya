@@ -262,5 +262,6 @@ return [
 
     'block_image_internallink_label' => 'Internal Link',
     'block_image_externallink_label' => 'External Link (Overrides internal link if set)',
-    'view_index_create_page_please_choose' => 'Please choose'
+    'view_index_create_page_please_choose' => 'Please choose',
+    'view_index_sidebar_autopreview' => 'Auto Preview',
 ];

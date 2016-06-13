@@ -6,16 +6,30 @@ use Yii;
 use yii\web\IdentityInterface;
 use admin\models\UserLogin;
 use admin\aws\ChangePasswordInterface;
+use admin\Module;
+use admin\traits\SoftDeleteTrait;
 
 /**
- * $salt = \Yii::$app->getSecurity()->generateRandomString();
- * $password = \Yii::$app->getSecurity()->generatePasswordHash("yourpass" . $salt);.
- *
- * @author nadar
+ * User Model represents all Administration Users.
+ * 
+ * @property integer $id
+ * @property string $firstname
+ * @property string $lastname
+ * @property integer $title
+ * @property string $email
+ * @property string $password
+ * @property string $password_salt
+ * @property string $auth_token
+ * @property integer $is_deleted
+ * @property string $secure_token
+ * @property integer $secure_token_timestamp
+ * @property integer $force_reload
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
 class User extends \admin\ngrest\base\Model implements IdentityInterface, ChangePasswordInterface
 {
-    use \admin\traits\SoftDeleteTrait;
+    use SoftDeleteTrait;
 
     public function getLastloginTimestamp()
     {
@@ -31,22 +45,32 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface, Change
         return 'api-admin-user';
     }
     
+    public function ngrestAttributeTypes()
+    {
+        return [
+            'title' => ['selectArray', 'data' => static::getTitles(), 'initValue' => 0],
+            'firstname' => 'text',
+            'lastname' => 'text',
+            'email' => 'text',
+            'password' => 'password',
+        ];
+    }
+    
+    public function ngrestExtraAttributeTypes()
+    {
+        return [
+            'lastloginTimestamp' => 'datetime',
+        ];
+    }
+    
     public function ngRestConfig($config)
     {
         $config->aw->load(['class' => 'admin\aws\ChangePassword', 'className' => 'admin\models\User']);
         
-        $config->create->field('title', 'Anrede')->selectArray(['data' => static::getTitles(), 'initValue' => 0]);
-        $config->create->field('firstname', 'Vorname')->text();
-        $config->create->field('lastname', 'Nachname')->text();
-        $config->create->field('email', 'E-Mail-Adresse')->text();
-        $config->create->field('password', 'Passwort')->password();
-
-        $config->list->field('firstname', 'Vorname')->text();
-        $config->list->field('lastname', 'Nachname')->text();
-        $config->list->field('email', 'E-Mail')->text();
-        $config->list->extraField('lastloginTimestamp', 'Last Login')->datetime();
-        $config->update->copyFrom('create', ['password']);
-
+        $this->ngRestConfigDefine($config, 'list', ['firstname', 'lastname', 'email', 'lastloginTimestamp']);
+        $this->ngRestConfigDefine($config, 'create', ['title', 'firstname', 'lastname', 'email', 'password']);
+        $this->ngRestConfigDefine($config, 'update', ['title', 'firstname', 'lastname', 'email']);
+        
         $config->delete = true;
 
         return $config;
@@ -83,11 +107,11 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface, Change
     public function attributeLabels()
     {
         return [
-            'title' => 'Anrede',
-            'firstname' => 'Vorname',
-            'lastname' => 'Nachname',
-            'email' => 'E-Mail',
-            'password' => 'Passwort',
+            'title' => Module::t('mode_user_title'),
+            'firstname' => Module::t('mode_user_firstname'),
+            'lastname' => Module::t('mode_user_lastname'),
+            'email' => Module::t('mode_user_email'),
+            'password' => Module::t('mode_user_password'),
         ];
     }
 
@@ -134,15 +158,6 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface, Change
         return parent::find()->where(['is_deleted' => 0]);
     }
 
-    public function debugPass($pass)
-    {
-        $salt = Yii::$app->getSecurity()->generateRandomString();
-        $password = Yii::$app->getSecurity()->generatePasswordHash($pass.$salt);
-
-        echo "salt: $salt\n\n<br />";
-        echo "pass: $password";
-    }
-
     public function changePassword($newpass, $newpasswd)
     {
         if (strlen($newpass) < 8) {
@@ -164,31 +179,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface, Change
 
         return $this->addError('newpass', 'Fehler beim Verschlüsseln des Passworts aufgetreten!');
     }
-
-    /*
-    public function changePassword($oldpass, $newpass, $newpasswd)
-    {
-        if (strlen($newpass) < 8) {
-            return $this->addError('password', 'Das neue Passwort muss mindistens 8 Zeichen lang sein');
-        }
-        if ($newpass !== $newpasswd) {
-            return $this->addError('password', 'Das neue Passwort muss mit der wiederholung überein stimmen.');
-        }
-
-        if (!$this->validatePassword($oldpass)) {
-            return $this->addError('oldpass', 'Das alte passwort ist nicht korrekt!' . $oldpass . ' | ' . $this->password);
-        }
-
-        $this->password = $newpass;
-
-        if($this->verifyPassword()) {
-            return true;
-        }
-
-        return false;
-    }
-
-    */
+    
     public function encodePassword()
     {
         if (empty($this->password) || strlen($this->password) < 8) {
