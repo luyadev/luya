@@ -1279,9 +1279,8 @@
                         	scope.imageNotFoundError = true;
                         }
                     }
-
                     /* reset image preview directive if an event resets the image model to undefined */
-                    if (n == undefined) {
+                    if (n == undefined || n == 0) {
                     	scope.fileId = 0;
                         scope.filterId = 0;
                         scope.imageinfo = null;
