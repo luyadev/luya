@@ -1163,7 +1163,7 @@
 
                         var file = $filter('findidfilter')($scope.filesData, filtering.fileId, true);
 
-                        if (file) {
+                        if (file && file.thumbnail) {
                         	$scope.imageSrc = file.thumbnail.source;
                         }
                     }
