@@ -1,6 +1,6 @@
 {
 	"name" : "luyadev/luya-module-errorapi",
-	"description" : "Yii2 LUYA Error Api",
+	"description" : "To create strong and secure website its important to know all exceptions before your customer knows the exceptions and to make sure the exception happends only once.",
 	"type" : "luya-module",
 	"keywords" : ["php", "luya", "module", "errorapi", "yii2", "yii", "luya-module"],
 	"license": "MIT",

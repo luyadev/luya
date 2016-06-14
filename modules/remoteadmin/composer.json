@@ -1,6 +1,6 @@
 {
 	"name" : "luyadev/luya-module-remoteadmin",
-	"description" : "Yii2 LUYA Remote Admin-Module",
+	"description" : "Remote Admin provides you the ability to collect all your LUYA Websites.",
 	"type" : "luya-module",
 	"keywords" : ["php", "luya", "module", "remote", "remoteadmin", "yii2", "yii", "luya-module"],
 	"license": "MIT",

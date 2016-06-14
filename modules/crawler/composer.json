@@ -1,6 +1,6 @@
 {
 	"name" : "luyadev/luya-module-crawler",
-	"description" : "Yii2 LUYA Crawler Module",
+	"description" : "An easy to use page crawler to make an internal search field on your page. The crawlermodule gather all informations about the sides on the configured domain.",
 	"type" : "luya-module",
 	"keywords" : ["php", "luya", "module", "crawler", "yii2", "yii", "yii2-pagecrawler", "pagecrawler", "luya-module"],
 	"license": "MIT",

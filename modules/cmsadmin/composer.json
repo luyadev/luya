@@ -1,6 +1,6 @@
 {
 	"name" : "luyadev/luya-module-cmsadmin",
-	"description" : "Yii2 LUYA CMS Admin-Module",
+	"description" : "Content manager administration module",
 	"type" : "luya-module",
 	"keywords" : ["php", "luya", "module", "cms", "cmsadmin", "yii2", "yii", "yii2-cms", "yii2-cmsadmin"],
 	"license": "MIT",
