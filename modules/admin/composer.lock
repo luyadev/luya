@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ee13c05ac0606f5e0891ecc543ce7e07",
-    "content-hash": "34fb70cb1517cbd0f0672ba197b904b1",
+    "hash": "dadf73c45e3c206d0602eecbf1d10028",
+    "content-hash": "bdf19ea6f413de93b681549ccd5e9aa7",
     "packages": [
         {
             "name": "bower-asset/jquery",
@@ -755,12 +755,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya.git",
-                "reference": "aa0805bcab31911cfbe4b44dc4b560ba9f025a4c"
+                "reference": "50d9c10e403fc6036146a45e184d17977852fd7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya/zipball/aa0805bcab31911cfbe4b44dc4b560ba9f025a4c",
-                "reference": "aa0805bcab31911cfbe4b44dc4b560ba9f025a4c",
+                "url": "https://api.github.com/repos/luyadev/luya/zipball/50d9c10e403fc6036146a45e184d17977852fd7b",
+                "reference": "50d9c10e403fc6036146a45e184d17977852fd7b",
                 "shasum": ""
             },
             "require": {
@@ -817,7 +817,7 @@
                 "yii2",
                 "yii2-wrapper"
             ],
-            "time": "2016-06-14 09:56:42"
+            "time": "2016-06-14 11:51:18"
         },
         {
             "name": "myclabs/deep-copy",
