@@ -110,6 +110,16 @@ class StorageContainer extends Component
     private $_httpPath = null;
     
     /**
+     * Setter for the http path in order to read online storage files.
+     * 
+     * @param string $path
+     */
+    public function setHttpPath($path)
+    {
+        $this->_httpPath = $path;
+    }
+    
+    /**
      * Get the base path to the storage directory
      * 
      * @return string
@@ -124,6 +134,15 @@ class StorageContainer extends Component
     }
     
     private $_absoluteHttpPath = null;
+    
+    /**
+     * Setter fro the absolute http path in order to read from another storage source.
+     * @param unknown $path
+     */
+    public function setAbsoluteHttpPath($path)
+    {
+        $this->_absoluteHttpPath = $path;
+    }
     
     /**
      * Get the base absolute base path to the storage direcotry
