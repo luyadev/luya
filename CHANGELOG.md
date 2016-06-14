@@ -5,6 +5,7 @@ LUYA CHANGELOG
 -------------------------
 
 - `#877` **[BC BREAK]** Changing the `ngRestApiEndpoint` method to static. Use `public static function ngRestApiEndpoint()`.
+- `#880` Fixed copy/paste layout block recursion problem.
 - `#831` Close the propertie mask after saving/updating propertie values.
 - `#578` Added new sort relation plugin as requested to make relations with sortable data from model or array.
 - `#876` Improved textarea styling in zaa-table.

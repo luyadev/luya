@@ -38,7 +38,7 @@ class NavItemBlockController extends \admin\base\RestController
     {
         $model = NavItemPageBlockItem::findOne(Yii::$app->request->post('copyBlockId', 0));
 
-        if ($model) {
+        if (($model) && ((Yii::$app->request->post('copyBlockId', 0) !== Yii::$app->request->post('prevId', false)))) {
             $newModel = new NavItemPageBlockItem();
             $newModel->attributes = $model->toArray();
             $newModel->is_dirty = 0;
