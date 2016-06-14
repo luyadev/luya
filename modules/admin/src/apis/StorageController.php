@@ -49,7 +49,7 @@ class StorageController extends \admin\base\RestController
                 $data = $file->toArray();
                 if ($file->isImage) {
                     // add tiny thumbnail
-                    $filter = Yii::$app->storage->getFiltersArrayItem('tiny-thumbnail');
+                    $filter = Yii::$app->storage->getFiltersArrayItem('tiny-crop');
                     if ($filter) {
                         $thumbnail = Yii::$app->storage->addImage($file->id, $filter['id']);
                         if ($thumbnail) {
