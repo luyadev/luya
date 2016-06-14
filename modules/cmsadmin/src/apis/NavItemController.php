@@ -133,6 +133,8 @@ class NavItemController extends \admin\base\RestController
             $navItemModel->updateAttributes(['nav_item_type_id' => $model->id]);
         }
         
+        $navItemModel->updateAttributes(['timestamp_update' => time()]);
+        
         return ['error' => !$save];
     }
     
@@ -152,6 +154,7 @@ class NavItemController extends \admin\base\RestController
         }
         $model->setParentFromModel();
         $model->attributes = Yii::$app->request->post();
+        $model->timestamp_update = time();
         if ($model->validate()) {
             if ($model->save()) {
                 return true;

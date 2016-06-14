@@ -938,6 +938,9 @@
 				$.param(typeDataCopy),
 				headers
 			).then(function successCallback(response) {
+				if (itemCopy.nav_item_type !== 1) {
+					$scope.currentPageVersion = 0;
+				}
 				$scope.loaded = false;
 				AdminToastService.success(i18nParam('js_page_item_update_ok', {'title': itemCopy.title}), 2000);
 				$scope.menuDataReload();
