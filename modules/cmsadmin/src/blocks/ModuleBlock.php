@@ -40,7 +40,7 @@ class ModuleBlock extends \cmsadmin\base\Block
     {
         $moduleName = $this->getVarValue('moduleName', false);
 
-        return (empty($moduleName)) ? [] : Yii::$app->getModule($moduleName)->getControllerFiles();
+        return (empty($moduleName) || !Yii::$app->hasModule($moduleName)) ? [] : Yii::$app->getModule($moduleName)->getControllerFiles();
     }
 
     public function getModuleNames()
@@ -80,6 +80,10 @@ class ModuleBlock extends \cmsadmin\base\Block
     {
         if ($this->isAdminContext() || empty($moduleName) || count($this->getEnvOptions()) === 0) {
             return;
+        }
+        
+        if (!Yii::$app->hasModule($moduleName)) {
+        	return;
         }
         
         try {
