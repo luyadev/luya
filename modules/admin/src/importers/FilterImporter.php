@@ -29,20 +29,24 @@ class FilterImporter extends Importer
             'name' => 'Thumbnail',
             'imagine_name' => 'thumbnail',
             'imagine_json_params' => json_encode(['vars' => [
-                ['var' => 'type', 'label' => 'outbound or inset'], // THUMBNAIL_OUTBOUND & THUMBNAIL_INSET
                 ['var' => 'width', 'label' => 'Breit in Pixel'],
                 ['var' => 'height', 'label' => 'Hoehe in Pixel'],
+                ['var' => 'mode', 'label' => 'outbound or inset'], // THUMBNAIL_OUTBOUND & THUMBNAIL_INSET
+                ['var' => 'saveOptions', 'label' => 'save options'],
             ]]),
         ]);
 
+        /*
         $this->refresh('resize', [
             'name' => 'Zuschneiden',
             'imagine_name' => 'resize',
             'imagine_json_params' => json_encode(['vars' => [
                 ['var' => 'width', 'label' => 'Breit in Pixel'],
                 ['var' => 'height', 'label' => 'Hoehe in Pixel'],
+                ['var' => 'saveOptions', 'label' => 'save options'],
             ]]),
         ]);
+        */
 
         $this->refresh('crop', [
             'name' => 'Crop',
@@ -50,6 +54,7 @@ class FilterImporter extends Importer
             'imagine_json_params' => json_encode(['vars' => [
                 ['var' => 'width', 'label' => 'Breit in Pixel'],
                 ['var' => 'height', 'label' => 'Hoehe in Pixel'],
+                ['var' => 'saveOptions', 'label' => 'save options'],
             ]]),
         ]);
 

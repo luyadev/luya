@@ -6,6 +6,7 @@ This document will help you upgrading from one LUYA Version into another
 1.0.0-beta7
 -----------
 
+* `#860`: As part of using the Yii2 imagine Extension we removed the `Resize`-Effect Filter chain and renamed the `Thumbnail`-Effect option `type` to `mode`.
 * `#877`: *all* NgRest base model does have function `public function ngRestApiEndpoint()` and defines the api endpoint. This method is now **static**. So use `public static function ngRestApiEndpoint()` instead.
 * `#875`: As part of the tag Parser rework, the helper method to parse luya tags (links, etc.) `cms\helpers\Parser::encode($text)` has been changed to `cms\helpers\TagParser::convert($text)`.
 

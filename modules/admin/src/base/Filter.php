@@ -19,7 +19,7 @@ abstract class Filter extends Object
     /**
      * Resize-Effect.
      */
-    const EFFECT_RESIZE = 'resize';
+    //const EFFECT_RESIZE = 'resize';
 
     /**
      * Thumbnail-Effect.
@@ -120,12 +120,10 @@ abstract class Filter extends Object
      * be thrown.
      *
      * @param string $effectIdentifier The name of effect, used EFFECT prefixed constants like
-     *                                 + EFFECT_RESIZE
-     *                                 + EFFECT_THUMBNAIL
-     *                                 + EFFECT_CROP
-     *
+     * + EFFECT_RESIZE
+     * + EFFECT_THUMBNAIL
+     * + EFFECT_CROP
      * @return array Contain an array with the effect properties.
-     *
      * @throws Exception
      */
     public function findEffect($effectIdentifier)
@@ -144,9 +142,7 @@ abstract class Filter extends Object
      * Get an array with all the effect param options, based on the effect params defintion.
      *
      * @param array $effectParamsDefintion
-     *
      * @throws Exception When the vars key does not exists in the effect definition.
-     *
      * @return array
      */
     public function getEffectParamsList($effectParams)
@@ -168,9 +164,7 @@ abstract class Filter extends Object
     /**
      * Returns a parsed effect chain for the current Filter. The method verifys if the provieded effect
      * parameters are available in the effect defintions of luya.
-     *
      * @return array Each row of the array must have "effect_id" and "effect_json_values" key.
-     *
      * @throws Exception When effect option could be found in the effect defintions.
      */
     public function getChain()

@@ -19,7 +19,7 @@ class LargeThumbnail extends \admin\base\Filter
         return [
             [self::EFFECT_THUMBNAIL, [
                 'width' => 800,
-                'height' => 800,
+                'height' => null,
             ]],
         ];
     }

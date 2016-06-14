@@ -4,6 +4,7 @@ namespace admin\models;
 
 use Imagine\Image\ImagineInterface;
 use Imagine\Image\ImageInterface;
+use admin\file\Item;
 
 /**
  * This is the model class for table "admin_group".
@@ -59,7 +60,20 @@ class StorageFilter extends \admin\ngrest\base\Model
         
         return false;
     }
+    
 
+    public function applyFilterChain(Item $file, $fileSavePath)
+    {
+        $loadFrom = $file->getServerSource();
+        
+        foreach (StorageFilterChain::find()->where(['filter_id' => $this->id])->joinWith('effect')->all() as $chain) {
+            $response = $chain->applyFilter($loadFrom, $fileSavePath);
+            $loadFrom = $fileSavePath;
+        }
+        
+        return true;
+    }
+    
     /**
      * ApplyFilter to an imagine object based on the current model informations effect chain.
      * 
@@ -69,6 +83,7 @@ class StorageFilter extends \admin\ngrest\base\Model
      * @param ImagineInterface $imagine
      * @return ImageInterface The new transformed/changed image
      */
+    /*
     public function applyFilter($image, ImagineInterface $imagine)
     {
         $newimage = null;
@@ -110,6 +125,7 @@ class StorageFilter extends \admin\ngrest\base\Model
 
         return $newimage;
     }
+    */
 
     // ngrest
 

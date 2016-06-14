@@ -3,7 +3,6 @@ LUYA GUIDE
 
 ```
 .
-├── admin-effects.md
 ├── app-admin-module-assets.md
 ├── app-admin-module.md
 ├── app-admin-module-ngrest.md
@@ -17,6 +16,7 @@ LUYA GUIDE
 ├── app-cmsproperties.md
 ├── app-elements.md
 ├── app-filters.md
+├── app-filter-effects.md
 ├── app-menu.md
 ├── app-translation.md
 ├── app-module.md

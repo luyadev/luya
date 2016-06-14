@@ -3,9 +3,37 @@
 namespace admin\models;
 
 use yii\helpers\Json;
+use Imagine\Image\ManipulatorInterface;
+use yii\base\InvalidConfigException;
+use yii\imagine\Image;
 
+/**
+ * Contains all information about filter effects for a single Chain element (like: thumbnail, 200x200).
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class StorageFilterChain extends \yii\db\ActiveRecord
 {
+    private $comperator = [
+        'crop' => [
+            'required' => ['width', 'height'],
+            'options' => ['start' => [0, 0], 'saveOptions' => []],
+        ],
+        'thumbnail' => [
+            'required' => ['width', 'height'],
+            'options' => ['mode' => ManipulatorInterface::THUMBNAIL_OUTBOUND, 'saveOptions' => []]
+        ],
+        'watermark' => [
+            
+        ],
+        'text' => [
+            
+        ],
+        'frame' => [
+            
+        ]
+    ];
+    
     public static function tableName()
     {
         return 'admin_storage_filter_chain';
@@ -40,6 +68,60 @@ class StorageFilterChain extends \yii\db\ActiveRecord
 
     public function getEffect()
     {
-        return $this->hasOne(\admin\models\StorageEffect::className(), ['id' => 'effect_id']);
+        return $this->hasOne(StorageEffect::className(), ['id' => 'effect_id']);
+    }
+    
+    protected function getJsonValue($key)
+    {
+        return (array_key_exists($key, $this->effect_json_values)) ? $this->effect_json_values[$key] : false;
+    }
+    
+    public function applyFilter($loadFromPath, $imageSavePath)
+    {
+        if (!$this->evalMethod()) {
+            throw new InvalidConfigException('The requested effect mode ' . $this->effect->imagine_name . ' is not supported');
+        }
+        
+        if (!$this->evalRequiredMethodParams()) {
+            throw new InvalidConfigException("The requested effect mode does require some parameters which are not provided.");
+        }
+        
+        switch ($this->effect->imagine_name) {
+            case "crop":
+                Image::crop($loadFromPath, $this->getMethodParam('width'), $this->getMethodParam('height'))->save($imageSavePath, $this->getMethodParam('saveOptions'));
+                break;
+            case "thumbnail":
+                Image::thumbnail($loadFromPath, $this->getMethodParam('width'), $this->getMethodParam('height'), $this->getMethodParam('mode'))->save($imageSavePath, $this->getMethodParam('saveOptions'));
+                break;
+        }
+    }
+
+    protected function evalMethod()
+    {
+        return (isset($this->comperator[$this->effect->imagine_name])) ? $this->comperator[$this->effect->imagine_name] : false;
+    }
+    
+    protected function evalRequiredMethodParams()
+    {
+        foreach ($this->evalMethod()['required'] as $param) {
+            if ($this->getJsonValue($param) === false) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    protected function getMethodParam($name)
+    {
+        $value = $this->getJsonValue($name);
+        
+        if ($value === false) {
+            if (isset($this->evalMethod()['options'][$name])) {
+                return $this->evalMethod()['options'][$name];
+            }
+        }
+        
+        return $value;
     }
 }

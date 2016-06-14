@@ -14,6 +14,7 @@ use admin\models\StorageFile;
 use admin\models\StorageImage;
 use admin\models\StorageFilter;
 use admin\models\StorageFolder;
+use yii\imagine\Image;
 
 /**
  * Create images, files, manipulate, foreach and get details. The storage container 
@@ -328,7 +329,7 @@ class StorageContainer extends Component
     }
     
     /**
-     * Add a new image based on an existing file
+     * Add a new image based on an existing file information.
      * 
      * @param integer $fileId The id of the file where image should be created from.
      * @param integer $filterId The id of the filter which should be applied to, if filter is 0, no filter will be added.
@@ -356,20 +357,16 @@ class StorageContainer extends Component
             if (empty($filterId)) {
                 $save = @copy($fileQuery->serverSource, $fileSavePath);
             } else {
-                $imagine = \yii\imagine\Image::getImagine();
-                $image = $imagine->open($fileQuery->serverSource);
                 $model = StorageFilter::find()->where(['id' => $filterId])->one();
+                
                 if (!$model) {
                     throw new Exception("Could not find the provided filter id '$filterId'.");
                 }
-                $newimage = $model->applyFilter($image, $imagine);
-                $save = $newimage->save($fileSavePath);
                 
-                unset($newimage);
-            }
-            
-            if (!$save) {
-                throw new Exception("unable to store file $fileSavePath");
+                if (!$model->applyFilterChain($fileQuery, $fileSavePath)) {
+                    throw new Exception("Unable to create and save image '".$fileSavePath."'.");   
+                }
+                
             }
             
             $resolution = Storage::getImageResolution($fileSavePath);
