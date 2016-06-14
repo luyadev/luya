@@ -5,7 +5,7 @@ namespace admin\models;
 use yii\helpers\Json;
 use Imagine\Image\ManipulatorInterface;
 use yii\base\InvalidConfigException;
-use yii\imagine\Image;
+use admin\helpers\Image; // temp replaces the yii\imagine\Image
 
 /**
  * Contains all information about filter effects for a single Chain element (like: thumbnail, 200x200).

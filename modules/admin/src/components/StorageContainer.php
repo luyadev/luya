@@ -14,7 +14,6 @@ use admin\models\StorageFile;
 use admin\models\StorageImage;
 use admin\models\StorageFilter;
 use admin\models\StorageFolder;
-use yii\imagine\Image;
 
 /**
  * Create images, files, manipulate, foreach and get details. The storage container 
