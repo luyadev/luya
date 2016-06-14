@@ -109,6 +109,16 @@ class StorageContainer extends Component
     private $_httpPath = null;
     
     /**
+     * Setter for the http path in order to read online storage files.
+     * 
+     * @param string $path
+     */
+    public function setHttpPath($path)
+    {
+        $this->_httpPath = $path;
+    }
+    
+    /**
      * Get the base path to the storage directory
      * 
      * @return string
@@ -123,6 +133,15 @@ class StorageContainer extends Component
     }
     
     private $_absoluteHttpPath = null;
+    
+    /**
+     * Setter fro the absolute http path in order to read from another storage source.
+     * @param unknown $path
+     */
+    public function setAbsoluteHttpPath($path)
+    {
+        $this->_absoluteHttpPath = $path;
+    }
     
     /**
      * Get the base absolute base path to the storage direcotry
@@ -285,6 +304,7 @@ class StorageContainer extends Component
             'is_hidden' => ($isHidden) ? 1 : 0,
             'is_deleted' => 0,
             'file_size' => @filesize($savePath),
+            'caption' => null,
         ]);
         
         if ($model->validate()) {
@@ -327,16 +347,25 @@ class StorageContainer extends Component
     }
     
     /**
-     * Add a new image based on an existing file
+     * Add a new image based on an existing file information.
      * 
      * @param integer $fileId The id of the file where image should be created from.
-     * @param integer $filterId The id of the filter which should be applied to, if filter is 0, no filter will be added.
+     * @param integer $filterId The id of the filter which should be applied to, if filter is 0, no filter will be added. Filter can new also be the string name of the filter like `tiny-crop`.
      * @param boolean $throwException Whether the addImage should throw an exception or just return boolean
      * @return boolean|\admin\image\Item|\Exception 
      */
     public function addImage($fileId, $filterId = 0, $throwException = false)
     {
         try {
+            // if the filterId is provded as a string the filter will be looked up by its name in the get filters array list.
+            if (is_string($filterId) && !is_numeric($filterId)) {
+                $filterLookup = $this->getFiltersArrayItem($filterId);
+                if (!$filterLookup) {
+                    throw new Exception("The provided filter name " . $filterId . " does not exist.");
+                }
+                $filterId = $filterLookup['id'];
+            }
+            
             $query = (new \admin\image\Query())->where(['file_id' => $fileId, 'filter_id' => $filterId])->one();
             
             if ($query && $query->fileExists) {
@@ -355,20 +384,16 @@ class StorageContainer extends Component
             if (empty($filterId)) {
                 $save = @copy($fileQuery->serverSource, $fileSavePath);
             } else {
-                $imagine = \yii\imagine\Image::getImagine();
-                $image = $imagine->open($fileQuery->serverSource);
                 $model = StorageFilter::find()->where(['id' => $filterId])->one();
+                
                 if (!$model) {
                     throw new Exception("Could not find the provided filter id '$filterId'.");
                 }
-                $newimage = $model->applyFilter($image, $imagine);
-                $save = $newimage->save($fileSavePath);
                 
-                unset($newimage);
-            }
-            
-            if (!$save) {
-                throw new Exception("unable to store file $fileSavePath");
+                if (!$model->applyFilterChain($fileQuery, $fileSavePath)) {
+                    throw new Exception("Unable to create and save image '".$fileSavePath."'.");   
+                }
+                
             }
             
             $resolution = Storage::getImageResolution($fileSavePath);
@@ -536,15 +561,8 @@ class StorageContainer extends Component
         foreach ($this->findFiles(['is_hidden' => 0, 'is_deleted' => 0]) as $file) {
             if ($file->isImage) {
                 // create tiny thumbnail
-                $filter = $this->getFiltersArrayItem('tiny-thumbnail');
-                if ($filter) {
-                    $this->addImage($file->id, $filter['id']);
-                }
-                // create medium thumbnail
-                $filter = $this->getFiltersArrayItem('medium-thumbnail');
-                if ($filter) {
-                    $this->addImage($file->id, $filter['id']);
-                }
+                $this->addImage($file->id, 'tiny-crop');
+                $this->addImage($file->id, 'medium-thumbnail');
             }
         }
         

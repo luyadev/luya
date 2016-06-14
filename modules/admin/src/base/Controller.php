@@ -4,6 +4,7 @@ namespace admin\base;
 
 use Yii;
 use yii\filters\AccessControl;
+use admin\models\UserOnline;
 
 /**
  * Base controller for all Admin-Module controllers.
@@ -49,6 +50,9 @@ class Controller extends \luya\web\Controller
                     }
                     // get the route based on the current $action object
                     $route = implode('/', [$action->controller->module->id, $action->controller->id, $action->id]);
+                    
+                    UserOnline::refreshUser(Yii::$app->adminuser->getId(), $route);
+                    
                     // check the access inside auth->matchRoute and return true/false.
                     return Yii::$app->auth->matchRoute(Yii::$app->adminuser->getId(), $route);
                 },

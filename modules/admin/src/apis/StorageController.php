@@ -49,7 +49,7 @@ class StorageController extends \admin\base\RestController
                 $data = $file->toArray();
                 if ($file->isImage) {
                     // add tiny thumbnail
-                    $filter = Yii::$app->storage->getFiltersArrayItem('tiny-thumbnail');
+                    $filter = Yii::$app->storage->getFiltersArrayItem('tiny-crop');
                     if ($filter) {
                         $thumbnail = Yii::$app->storage->addImage($file->id, $filter['id']);
                         if ($thumbnail) {
@@ -100,7 +100,9 @@ class StorageController extends \admin\base\RestController
         if ($cache === false) {
             $images = [];
             foreach (Yii::$app->storage->findImages() as $image) {
-                $images[] = $image->toArray();
+                if (!$image->file->isHidden && !$image->file->isDeleted) {
+                    $images[] = $image->toArray();
+                }
             }
             $this->setHasCache('storageApiDataImages', $images, new DbDependency(['sql' => 'SELECT MAX(id) FROM admin_storage_image']), 0);
             return $images;
@@ -153,8 +155,10 @@ class StorageController extends \admin\base\RestController
                 return ['upload' => false, 'message' => $this->_uploaderErrors[$file['error']]];
             }
             try {
-                Yii::$app->storage->addFile($file['tmp_name'], $file['name'], Yii::$app->request->post('folderId', 0));
-                return ['upload' => true, 'message' => Module::t('api_storage_file_upload_succes')];
+                $file = Yii::$app->storage->addFile($file['tmp_name'], $file['name'], Yii::$app->request->post('folderId', 0));
+                if ($file) {
+                    return ['upload' => true, 'message' => Module::t('api_storage_file_upload_succes')];
+                }
             } catch (Exception $err) {
                 return ['upload' => false, 'message' => Module::t('api_sotrage_file_upload_error', ['error' => $err->getMessage()])];
             }

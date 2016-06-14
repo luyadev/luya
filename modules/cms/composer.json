@@ -1,6 +1,6 @@
 {
 	"name" : "luyadev/luya-module-cms",
-	"description" : "Yii2 LUYA CMS",
+	"description" : "Frontend module to display CMS content",
 	"type" : "luya-module",
 	"keywords" : ["php", "luya", "module", "cms", "yii2", "yii", "contentmanager", "content", "yii2-cms"],
 	"license": "MIT",

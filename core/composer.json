@@ -1,6 +1,6 @@
 {
     "name" : "luyadev/luya-core",
-    "description" : "LUYA Core",
+    "description" : "The LUYA core classes in addition to the Yii2 Framework",
     "type" : "luya-module",
     "keywords" : ["php", "luya", "yii2", "yii", "wrapper"],
     "license": "MIT",

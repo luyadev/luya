@@ -131,7 +131,7 @@
 				$scope.data.aw.hash = activeWindowId;
 				$scope.data.aw.id = activeWindowId; /* @todo: remove! BUT: equal to above, but still need in jquery accessing */
 				$scope.data.aw.content = $sce.trustAsHtml(data);
-				//dispatchEvent('onCrudActiveWindowLoad');
+				$scope.$broadcast('awloaded', {id: activeWindowId});
 			})
 		};
 	

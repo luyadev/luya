@@ -4,7 +4,11 @@ LUYA CHANGELOG
 1.0.0-beta7 (in progress)
 -------------------------
 
+- `#860` **[BC BREAK]** Using Yii2 imagine extension instead of native imagine extension in order to fix memory leaks and optimize thumbnail/crop calculations.
 - `#877` **[BC BREAK]** Changing the `ngRestApiEndpoint` method to static. Use `public static function ngRestApiEndpoint()`.
+- `#875` **[BC BREAK]** cms\helpers\Parser::encode() renmaed to cms\helpers\TagParser::conver()
+- `#880` Fixed copy/paste layout block recursion problem.
+- `#831` Close the propertie mask after saving/updating propertie values.
 - `#578` Added new sort relation plugin as requested to make relations with sortable data from model or array.
 - `#876` Improved textarea styling in zaa-table.
 - `#863` Fixed behavior of module controller layouts when using in cms context.
@@ -23,7 +27,6 @@ LUYA CHANGELOG
 - `#867` Added new callbackform activefield configurations to add the ability of different input methods in Active Windows.
 - `#864` Fixed issue where Active Window class properties could not be serialized as they can contain closures.
 - `#861` Added new link helper to create realtive urls for the current website, use `link[//about-me]` will replace `//` with the current base url.
-- `#860` Using Yii2 imagine extension instead of native imagine extension in order to fix memory leaks and optimize thumbnail/crop calculations.
 - `#859` Added caching abilities for storage data apis and cms nav item page content as array data recursion.
 - `#858` Fixed bug where crawler word highlight functions does not quote the preg_replace identifier.
 - `#856` Disable the ability to unset a current homepage in the cms module, this may lead into a state without any homepage defined.

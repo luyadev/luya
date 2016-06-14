@@ -19,7 +19,7 @@ class SmallThumbnail extends \admin\base\Filter
         return [
             [self::EFFECT_THUMBNAIL, [
                 'width' => 100,
-                'height' => 100,
+                'height' => null,
             ]],
         ];
     }

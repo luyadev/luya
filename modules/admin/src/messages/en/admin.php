@@ -152,4 +152,6 @@ return [
     'ngrest_crud_csv_export_btn' => 'Generate CSV',
     'ngrest_crud_csv_export_btn_dl' => 'Download CSV',
     'layout_filemanager_search_text' => 'Enter search term...',
+    'layout_filemanager_file_captions' => 'File caption',
+    'layout_filemanager_file_captions_save_btn' => 'Save',
 ];

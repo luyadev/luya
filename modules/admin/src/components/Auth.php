@@ -6,7 +6,6 @@ use Yii;
 use Exception;
 use yii\db\Query;
 use yii\helpers\ArrayHelper;
-use admin\models\UserOnline;
 
 /**
  * Auth components gives informations about permissions, who can do what.
@@ -21,6 +20,47 @@ class Auth extends \yii\base\Component
 
     const CAN_DELETE = 3;
 
+    private $_permissionTable = null;
+    
+    /**
+     * Get Permision from sql table by userId
+     * 
+     * @param integer $userId
+     * @return array
+     */
+    private function getPermissionTable($userId)
+    {
+        if ($this->_permissionTable === null) {
+        $this->_permissionTable = Yii::$app->db->createCommand('SELECT * FROM admin_user_group AS t1 LEFT JOIN(admin_group_auth as t2 LEFT JOIN (admin_auth as t3) ON (t2.auth_id = t3.id)) ON (t1.group_id=t2.group_id) WHERE t1.user_id=:user_id')
+            ->bindValue('user_id', $userId)
+            ->queryAll();
+        }
+        
+        return $this->_permissionTable;
+    }
+    
+    public function getApiTable($userId, $apiEndpoint)
+    {
+        $data = [];
+        foreach ($this->getPermissionTable($userId) as $item) {
+            if ($item['api'] == $apiEndpoint) {
+                $data[] = $item;
+            }
+        }
+        return $data;
+    }
+    
+    public function getRouteTable($userId, $route)
+    {
+        $data = [];
+        foreach ($this->getPermissionTable($userId) as $item) {
+            if ($item['route'] == $route) {
+                $data[] = $item;
+            }
+        }
+        return $data;
+    }
+    
     public function permissionWeight($create, $update, $delete)
     {
         $create = $create ? 1 : 0;
@@ -60,11 +100,7 @@ class Auth extends \yii\base\Component
      */
     public function matchApi($userId, $apiEndpoint, $typeVerification = false)
     {
-        UserOnline::refreshUser($userId, $apiEndpoint);
-        $groups = Yii::$app->db->createCommand('SELECT * FROM admin_user_group AS t1 LEFT JOIN(admin_group_auth as t2 LEFT JOIN (admin_auth as t3) ON (t2.auth_id = t3.id)) ON (t1.group_id=t2.group_id) WHERE t1.user_id=:user_id AND t3.api=:api')
-        ->bindValue('user_id', $userId)
-        ->bindValue('api', $apiEndpoint)
-        ->queryAll();
+        $groups = $this->getApiTable($userId, $apiEndpoint);
 
         if ($typeVerification === false) {
             return (count($groups) > 0) ? true : false;
@@ -89,12 +125,8 @@ class Auth extends \yii\base\Component
      */
     public function matchRoute($userId, $route)
     {
-        UserOnline::refreshUser($userId, $route);
-        $groups = Yii::$app->db->createCommand('SELECT * FROM admin_user_group AS t1 LEFT JOIN(admin_group_auth as t2 LEFT JOIN (admin_auth as t3) ON (t2.auth_id = t3.id)) ON (t1.group_id=t2.group_id) WHERE t1.user_id=:user_id AND t3.route=:route')
-        ->bindValue('user_id', $userId)
-        ->bindValue('route', $route)
-        ->queryAll();
-
+        $groups = $this->getRouteTable($userId, $route);
+        
         if (is_array($groups) && count($groups) > 0) {
             return true;
         }

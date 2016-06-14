@@ -19,7 +19,7 @@ class MediumThumbnail extends \admin\base\Filter
         return [
             [self::EFFECT_THUMBNAIL, [
                 'width' => 300,
-                'height' => 300,
+                'height' => null,
             ]],
         ];
     }

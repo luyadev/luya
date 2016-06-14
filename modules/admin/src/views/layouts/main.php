@@ -89,6 +89,7 @@ $this->beginPage()
 
 <script type="text/ng-template" id="storageImageUpload">
     <div class="imageupload">
+        <div ng-if="imageNotFoundError" class="alert alert--danger" style="margin-top:0px;">The requested image id ({{ngModel}}) could not be found anymore. The orignal file has been deleted in the filemanager!</div>
         <storage-file-upload ng-model="fileId"></storage-file-upload>
         <div ng-show="originalFileIsRemoved">
             <div class="alert alert--danger"><?php echo Admin::t('layout_deleted_file'); ?></div>
@@ -128,8 +129,8 @@ $this->beginPage()
                             {{folder.name }}                                            
                         </span>
 
-        <i class="material-icons filemanager__edit-icon" ng-show="currentFolderId==folder.id" ng-click="toggleFolderMode('edit')">mode_edit</i>
-        <i class="material-icons filemanager__delete-icon" ng-show="currentFolderId==folder.id" ng-click="toggleFolderMode('remove')">delete</i>
+                        <i class="material-icons filemanager__edit-icon" ng-show="currentFolderId==folder.id" ng-click="toggleFolderMode('edit')">mode_edit</i>
+                        <i class="material-icons filemanager__delete-icon" ng-show="currentFolderId==folder.id" ng-click="toggleFolderMode('remove')">delete</i>
                         
                         <span ng-show="folderUpdateForm && currentFolderId==folder.id">
                             <input type="text" ng-model="folder.name" class="filemanager__file-dialog__input"/>
@@ -303,13 +304,14 @@ $this->beginPage()
                         </tbody>
                     </table>
                     <div class="card-panel">
-                    <h3>Captions</h3>
-                    <ul>
-                        <li ng-repeat="(key, cap) in fileDetail.captionArray">
-                            {{ key }}: <input type="text" ng-model="fileDetail.captionArray[key]" />
-                        </li>
-                    </ul>
-                    <button type="button" class="btn" ng-click="storeFileCaption(fileDetail)">Save</button>
+                    <h4><?= Admin::t('layout_filemanager_file_captions'); ?></h4>
+                    <div class="input input--text" ng-repeat="(key, cap) in fileDetail.captionArray">>
+                    <label class="input__label" for="[input-id]">{{key}}</label>
+                    <div class="input__field-wrapper">
+                        <input class="input__field" ng-model="fileDetail.captionArray[key]" type="text" />
+                    </div>
+                    </div>
+                    <button type="button" class="btn" ng-click="storeFileCaption(fileDetail)"><?= Admin::t('layout_filemanager_file_captions_save_btn'); ?></button>
                     </div>
                     <span ng-if="fileDetail.isImage">
                         <img class="responsive-img" ng-src="{{fileDetail.thumbnailMedium.source}}" />

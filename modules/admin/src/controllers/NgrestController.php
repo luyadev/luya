@@ -12,6 +12,8 @@ class NgrestController extends \admin\base\Controller
 {
     public $disablePermissionCheck = true;
     
+    public $enableCsrfValidation = false;
+    
     public function behaviors()
     {
         $behaviors = parent::behaviors();

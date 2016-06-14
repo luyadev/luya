@@ -1163,7 +1163,7 @@
 
                         var file = $filter('findidfilter')($scope.filesData, filtering.fileId, true);
 
-                        if (file) {
+                        if (file && file.thumbnail) {
                         	$scope.imageSrc = file.thumbnail.source;
                         }
                     }
@@ -1222,6 +1222,8 @@
 
                 scope.imageinfo = null;
 
+                scope.imageNotFoundError = false;
+                
                 scope.filterApply = function() {
                     var items = $filter('filter')(scope.imagesData, {fileId: scope.fileId, filterId: scope.filterId}, true);
                     if (items && items.length == 0) {
@@ -1273,11 +1275,12 @@
                             scope.imageinfo = filtering;
                             scope.filterId = filtering.filterId;
                             scope.fileId = filtering.fileId;
+                        } else {
+                        	scope.imageNotFoundError = true;
                         }
                     }
-
                     /* reset image preview directive if an event resets the image model to undefined */
-                    if (n == undefined) {
+                    if (n == undefined || n == 0) {
                     	scope.fileId = 0;
                         scope.filterId = 0;
                         scope.imageinfo = null;

@@ -20,11 +20,6 @@ class LargeCrop extends \admin\base\Filter
             [self::EFFECT_THUMBNAIL, [
                 'width' => 800,
                 'height' => 800,
-                'type' => \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND,
-            ]],
-            [self::EFFECT_CROP, [
-                'width' => 800,
-                'height' => 800,
             ]],
         ];
     }

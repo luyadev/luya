@@ -5,9 +5,18 @@ namespace luya\helpers;
 use Yii;
 
 /**
- * Extend the Yii Url Helper class
+ * URL Helper to create URLs and other tools.
  * 
- * @author nadar
+ * This Class extends the \yii\helpers\Url class which provides tools to create URLs based on the 
+ * URL-Manager component. There are also other little helper methods to work with urls.
+ * 
+ * An example of create an URL based on Route in the UrlManager:
+ * 
+ * ```php
+ * Url::toRoute(['/module/controller/action']);
+ * ```
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
 class Url extends \yii\helpers\Url
 {
@@ -75,5 +84,29 @@ class Url extends \yii\helpers\Url
         }
         
         return static::toInternal($routeParams, true);
+    }
+    
+    /**
+     * Apply the http protcol to an url to make sure valid clickable links. Commonly used when provide link where user could have added urls
+     * in an administration area. For Example:
+     * 
+     * ```php
+     * Url::ensureHttp('luya.io'); // return http://luya.io
+     * Url::ensureHttp('www.luya.io'); // return https://luya.io
+     * Url::ensureHttp('luya.io', true); // return https://luya.io
+     * ```
+     * 
+     * @param string $url The url where the http protcol should be applied to if missing
+     * @param boolean $https Whether the ensured url should be returned as https or not.
+     * @return string
+     * @since 1.0.0-beta7
+     */
+    public static function ensureHttp($url, $https = false)
+    {
+        if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+            $url = ($https ? "https://" : "http://") . $url;
+        }
+        
+        return $url;
     }
 }

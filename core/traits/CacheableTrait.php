@@ -5,9 +5,9 @@ namespace luya\traits;
 use Yii;
 
 /**
- * Cacheable trait to specific cache for yii components. 
+ * Cacheable trait allows caching whether application has caching enabled or not.
  * 
- * Concret implementation example:
+ * implementation example:
  * 
  * ```php
  * $cacheKey = 'foobar';
@@ -28,17 +28,29 @@ use Yii;
  * An example for a simple cache query dependency
  * 
  * ```php
- * $this->setHasCache('myCacheKey', $folders, new DbDependency(['sql' => 'SELECT MAX(id) FROM admin_storage_folder WHERE is_deleted=0']), 0);
+ * $this->setHasCache('myCacheKey', $data, new DbDependency(['sql' => 'SELECT MAX(id) FROM admin_storage_folder WHERE is_deleted=0']), 0);
  * ```
  * 
- * @author nadar
+ * You can also use an array notation in order to generate cache dependency:
+ * 
+ * ```php
+ * $dependency = [
+ *     'class' => 'yii\caching\DbDependency',
+ *     'sql' => 'SELECT max(timestamp) FROM table WHERE id=:id',
+ *     'params' => [':id' => Yii::$app->request->get('id')],
+ * ];
+ * 
+ * $this->setHasCache(['my', 'key'], $data, $dependency);
+ * ```
+ * 
+ * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta4
  */
 trait CacheableTrait
 {
     /**
-     * @var boolean If enabled and the cache component is available the menu language containers will be
-     * cached for the time defined in $cacheExpiration.
+     * @var boolean If enabled and the cache component is available. If disabled it will fully ignore the any caching but
+     * does not throw exception.
      */
     public $cacheEnabled = true;
     
@@ -68,16 +80,22 @@ trait CacheableTrait
     }
     
     /**
-     * Set the cache value if caching is allowed.
+     * Store cache data for a specific key if caching is enabled in this application.
      *
-     * @param string $key The identifier key
+     * @param string|array $key The identifier key or a array to store complex keys
      * @param mixed $value The value to store in the cache component.
-     * @param \yii\caching\Dependency $dependency Dependency of the cached item. If the dependency changes, the corresponding value in the cache will be invalidated when it is fetched via get(). This parameter is ignored if $serializer is false.
+     * @param \yii\caching\Dependency|array $dependency Dependency of the cached item. If the dependency changes, the corresponding value in the cache will be invalidated when it is fetched
+     * via get(). This parameter is ignored if $serializer is false. You can also define an array with defintion which will generate the Object instead of object is provided.
      * @return void
      */
     public function setHasCache($key, $value, $dependency = null, $cacheExpiration = null)
     {
         if ($this->isCachable()) {
+            
+            if (is_array($dependency)) {
+                $dependency = Yii::createObject($dependency);
+            }
+            
             Yii::$app->cache->set($key, $value, (is_null($cacheExpiration)) ? $this->cacheExpiration : $cacheExpiration, $dependency);
         }
     }
@@ -85,7 +103,7 @@ trait CacheableTrait
     /**
      * Remove a value from the cache if caching is enabled.
      * 
-     * @param string $key The cache identifier
+     * @param string|array $key The cache identifier
      */
     public function deleteHasCache($key)
     {
@@ -97,18 +115,21 @@ trait CacheableTrait
     /**
      * Get the caching data if caching is allowed and there is any data stored for this key.
      *
-     * @param string $key The identifiere key
+     * @param string|array $key The identifiere key, can be a string or an array which will be calculated.
      * @return mixed|boolean Returns the data, if not found returns false.
      */
     public function getHasCache($key)
     {
         if ($this->isCachable()) {
             $data = Yii::$app->cache->get($key);
+            
+            $enumKey = (is_array($key)) ? implode(",", $key) : $key;
+            
             if ($data) {
-                Yii::info("Cacheable trait key '$key' loaded from cache.", __METHOD__);
+                Yii::info("Cacheable trait key '$enumKey' successfully loaded from cache.", __METHOD__);
                 return $data;
             }
-            Yii::info("Cacheable trait key '$key' NOT loaded.", __METHOD__);
+            Yii::info("Cacheable trait key '$enumKey' has not been found in cache.", __METHOD__);
         }
     
         return false;

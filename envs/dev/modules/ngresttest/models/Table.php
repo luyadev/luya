@@ -5,11 +5,15 @@ namespace ngresttest\models;
 use Yii;
 use admin\models\User;
 use admin\aws\FlowActiveWindow;
+use admin\aws\FlowActiveWindowInterface;
+use admin\image\Item;
+use yii\db\Query;
+use luya\helpers\ArrayHelper;
 
 /**
  * NgRest Model created at 21.03.2016 14:05 on LUYA Version 1.0.0-beta6-dev.
  */
-class Table extends \admin\ngrest\base\Model
+class Table extends \admin\ngrest\base\Model implements FlowActiveWindowInterface
 {
         /**
      * @inheritdoc
@@ -161,7 +165,7 @@ class Table extends \admin\ngrest\base\Model
      */
     public function ngRestConfig($config)
     {
-        $config->aw->load(['class' => FlowActiveWindow::className()]);
+        $config->aw->load(['class' => FlowActiveWindow::className(), 'modelClass' => self::className()]);
         // define fields for types based from ngrestAttributeTypes
         /*
         $this->ngRestConfigDefine($config, 'list', ['image', 'imageArray', 'file', 'fileArray', 'text', 'textarea', 'selectArray', 'checkboxList', 'date', 'datetime', 'decimal', 'number', 'password', 'toggleStatus', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus']);
@@ -175,5 +179,24 @@ class Table extends \admin\ngrest\base\Model
         $config->delete = true; 
         
         return $config;
+    }
+    
+    public function flowSaveImage(Item $image)
+    {
+        Yii::$app->db->createCommand()->insert('ngresttest_table_images', [
+            'model_id' => $this->id,
+            'image_id' => $image->id,
+            'sort_index' => 0,
+        ])->execute();
+    }
+    
+    public function flowDeleteImage(Item $image)
+    {
+    	Yii::$app->db->createCommand()->delete('ngresttest_table_images', ['image_id' => $image->id])->execute();
+    }
+    
+    public function flowListImages()
+    {
+        return ArrayHelper::getColumn((new Query())->select(['image_id'])->from('ngresttest_table_images')->where(['model_id' => $this->id])->indexBy('image_id')->all(), 'image_id');
     }
 }

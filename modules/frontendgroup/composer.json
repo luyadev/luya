@@ -1,6 +1,6 @@
 {
     "name" : "luyadev/luya-module-frontendgroup",
-    "description" : "Yii2 LUYA Frontendgroup Module",
+    "description" : "Provide the ability to allow cms pages for specific user groups.",
     "type" : "luya-module",
     "keywords" : ["php", "luya", "module", "frontend", "frontendusers", "usergroups", "group", "authorization", "yii2", "yii", "luya-module"],
     "license": "MIT",

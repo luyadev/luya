@@ -786,8 +786,9 @@
 		$scope.storePropValues = function() {
 			var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 			$http.post('admin/api-cms-nav/save-properties?navId='+$scope.id, $.param($scope.propValues), headers).success(function(response) {
-				AdminToastService.success(i18n['js_page_property_refresh'], 2000);
+				AdminToastService.success(i18n['js_page_property_refresh'], 4000);
 				$scope.loadNavProperties();
+				$scope.showPropForm = false;
 			});
 		}
 		
@@ -937,6 +938,9 @@
 				$.param(typeDataCopy),
 				headers
 			).then(function successCallback(response) {
+				if (itemCopy.nav_item_type !== 1) {
+					$scope.currentPageVersion = 0;
+				}
 				$scope.loaded = false;
 				AdminToastService.success(i18nParam('js_page_item_update_ok', {'title': itemCopy.title}), 2000);
 				$scope.menuDataReload();

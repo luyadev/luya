@@ -6,6 +6,7 @@ use Yii;
 use Exception;
 use admin\components\Auth;
 use admin\ngrest\base\Model;
+use admin\models\UserOnline;
 
 /**
  * Wrapper for yii2 basic rest controller used with a model class. The wrapper is made to
@@ -73,6 +74,8 @@ class RestActiveController extends \yii\rest\ActiveController implements \luya\r
                 break;
         }
 
+        UserOnline::refreshUser($this->userAuthClass()->getIdentity()->id, $this->id);
+        
         if (!Yii::$app->auth->matchApi($this->userAuthClass()->getIdentity()->id, $this->id, $type)) {
             throw new \yii\web\ForbiddenHttpException('you are unable to access this controller due to access restrictions.');
         }

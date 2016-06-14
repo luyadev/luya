@@ -95,7 +95,7 @@ class InjectItem extends \yii\base\Object
                 throw new Exception("To inject an item which is on the root container you have to override all methods");
             }
             
-            $this->_menuItem = $this->menu->findOne(['id' => $this->getChildOf()]);
+            $this->_menuItem = $this->menu->find()->where(['id' => $this->getChildOf()])->with('hidden')->one();
         }
         
         return $this->_menuItem;
