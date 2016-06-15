@@ -4,6 +4,8 @@ namespace cmsadmin\blocks;
 
 use cmsadmin\Module;
 use Yii;
+use luya\helpers\Url;
+use yii\helpers\Html;
 
 class FormBlock extends \cmsadmin\base\Block
 {
@@ -92,14 +94,21 @@ class FormBlock extends \cmsadmin\base\Block
 
     public function sendMail($message, $email, $name)
     {
+        $email = Html::encode($email);
+        $name = Html::encode($name);
+        
+        $html = "<p>You have recieved an E-Mail via Form Block on " . Url::base(true)."</p>";
+        $html.= "<p>From: " . $name." ($email)<br />Time:".date("d.m.Y - H:i"). "<br />";
+        $html.= "Message:<br />" . nl2br(Html::encode($message)) ."</p>";
+        
         $mail = Yii::$app->mail;
         $mail->fromName = $name;
         $mail->from = $email;
-        $mail->compose($this->getVarValue('subjectText', $this->defaultMailSubject), $message);
-        $mail->address($this->getVarValue('emailAddress'), $name);
+        $mail->compose($this->getVarValue('subjectText', $this->defaultMailSubject), $html);
+        $mail->address($this->getVarValue('emailAddress'));
 
         if (!$mail->send()) {
-            return 'Error: '.$mail->error();
+            return 'Error: '.$mail->error;
         } else {
             return 'success';
         }
@@ -152,7 +161,6 @@ class FormBlock extends \cmsadmin\base\Block
                                 '{% if not extras.messageErrorFlag %}<p class="text-danger">{{ extras.messageError }}</p>{% endif %}'.
                             '</div>'.
                         '</div>'.
-                        '{{ sentLabel }}'.
                         '<div class="form-group">'.
                             '<div class="col-sm-10 col-sm-offset-2">'.
                                 '<input id="submit" name="submit" type="submit" value="{{ extras.sendLabel }}" class="btn btn-primary">'.
@@ -164,23 +172,22 @@ class FormBlock extends \cmsadmin\base\Block
 
     public function twigAdmin()
     {
-        return  '{% if vars.emailAddress is not empty %}'.
+        return  '<p><i>Form Block</i></p>{% if vars.emailAddress is not empty %}'.
                     '{% if vars.headline is not empty %}<h3>{{ vars.headline }}</h3>{% endif %}'.
-                    '<form id="contact_form" action="#" method="POST" enctype="multipart/form-data">'.
-                        '<div class="row">'.
-                            '<label for="name">{{ extras.nameLabel }}</label><br />'.
-                            '<input id="name" class="input" name="name" type="text" value="" size="30" /><br />'.
+                        '<div class="input input--text">'.
+                            '<label for="name" class="input__label">{{ extras.nameLabel }}</label>'.
+                            '<div class="input__field-wrapper"><input id="name" class="input__field" disabled="disabled" /></div>'.
                         '</div>'.
-                        '<div class="row">'.
-                            '<label for="email">{{ extras.emailLabel }}</label><br />'.
-                            '<input id="email" class="input" name="email" type="text" value="" size="30" /><br />'.
+                        '<div class="input input--text">'.
+                        '<label for="name" class="input__label">{{ extras.emailLabel }}</label>'.
+                        '<div class="input__field-wrapper"><input id="name" class="input__field" disabled="disabled" /></div>'.
                         '</div>'.
-                        '<div class="row">'.
-                            '<label for="message">{{ extras.messageLabel }}</label><br />'.
-                            '<textarea id="message" class="input" name="message" rows="7" cols="30"></textarea><br />'.
+                        '<div class="input input--text">'.
+                        '<label for="name" class="input__label">{{ extras.messageLabel }}</label>'.
+                        '<div class="input__field-wrapper"><textarea class="input__field" disabled="disabled" /></div>'.
                         '</div>'.
-                        '<input id="submit_button" type="submit" value="{{ extras.sentLabel }}" disabled/>'.
-                    '</form>{% else %}<span class="block__empty-text">Es wurde noch keine Emailadresse angegeben.</span>'.
+                        '<button class="btn" disabled>{{ extras.sendLabel }}</button>'.
+                    '{% else %}<span class="block__empty-text">Es wurde noch keine Emailadresse angegeben.</span>'.
                 '{% endif %}';
     }
 }
