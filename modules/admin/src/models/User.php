@@ -101,6 +101,8 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface, Change
             [['email', 'password'], 'required', 'on' => 'login'],
             [['secure_token'], 'required', 'on' => 'securelayer'],
             [['title', 'firstname', 'lastname', 'email', 'password'], 'required', 'on' => 'default'],
+            [['email'], 'email'],
+            [['email'], 'unique', 'on' => ['restcreate', 'restupdate']],
         ];
     }
 
