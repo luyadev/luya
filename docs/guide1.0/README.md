@@ -1,6 +1,6 @@
 # LUYA GUIDE
 
-### Installtion
+### Installation
 
 + [Setup](install.md)
 + [Setup Mac](install-mac.md)
