@@ -115,7 +115,7 @@ $this->beginPage()
             <label>Filter Auswahl</label>
             <select name="filterId" ng-model="filterId"><option value="0"><?php echo Admin::t('layout_no_filter'); ?></option><option ng-repeat="item in filtersData" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
         </div>
-        
+
     </div>
 </script>
 
@@ -277,7 +277,7 @@ $this->beginPage()
                 <!-- /FILES -->
 
                 </tbody>
-            </table>            
+            </table>
             </div>
             <div class="col s4" ng-show="fileDetail">
                 <div class="filemanager__detail-wrapper">
@@ -303,15 +303,15 @@ $this->beginPage()
                         </tr>
                         </tbody>
                     </table>
-                    <div class="card-panel">
-                    <h4><?= Admin::t('layout_filemanager_file_captions'); ?></h4>
-                    <div class="input input--text" ng-repeat="(key, cap) in fileDetail.captionArray">>
-                    <label class="input__label" for="[input-id]">{{key}}</label>
-                    <div class="input__field-wrapper">
-                        <input class="input__field" ng-model="fileDetail.captionArray[key]" type="text" />
-                    </div>
-                    </div>
-                    <button type="button" class="btn" ng-click="storeFileCaption(fileDetail)"><?= Admin::t('layout_filemanager_file_captions_save_btn'); ?></button>
+                    <div class="card-panel clearfix">
+                        <strong><?= Admin::t('layout_filemanager_file_captions'); ?></strong>
+                        <div class="input input--text input--vertical" ng-repeat="(key, cap) in fileDetail.captionArray">
+                            <label class="input__label" for="id-{{key}}">{{key}}</label>
+                            <div class="input__field-wrapper">
+                                <input class="input__field" id="id-{{key}}" name="{{key}}" type="text" ng-model="fileDetail.captionArray[key]" />
+                            </div>
+                        </div>
+                        <button type="button" class="filemanager__detail-save-button btn btn--small right" ng-click="storeFileCaption(fileDetail)"><?= Admin::t('layout_filemanager_file_captions_save_btn'); ?></button>
                     </div>
                     <span ng-if="fileDetail.isImage">
                         <img class="responsive-img" ng-src="{{fileDetail.thumbnailMedium.source}}" />
@@ -531,7 +531,7 @@ $this->beginPage()
             </div>
         </div>
     </div>
-        
+
     <!-- ANGULAR-VIEW -->
     <div class="luya-container__angular-placeholder module-{{currentItem.moduleId}}" ui-view></div>
     <!-- /ANGULAR-VIEW -->
