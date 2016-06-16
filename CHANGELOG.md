@@ -7,6 +7,7 @@ LUYA CHANGELOG
 - `#860` **[BC BREAK]** Using Yii2 imagine extension instead of native imagine extension in order to fix memory leaks and optimize thumbnail/crop calculations.
 - `#877` **[BC BREAK]** Changing the `ngRestApiEndpoint` method to static. Use `public static function ngRestApiEndpoint()`.
 - `#875` **[BC BREAK]** cms\helpers\Parser::encode() renmaed to cms\helpers\TagParser::conver()
+- `#878` Increased z-index for toast messages
 - `#880` Fixed copy/paste layout block recursion problem.
 - `#831` Close the propertie mask after saving/updating propertie values.
 - `#578` Added new sort relation plugin as requested to make relations with sortable data from model or array.
