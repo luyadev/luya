@@ -58,8 +58,4 @@ class BowerVendor extends \luya\web\Asset
         'ng-file-upload/ng-file-upload.min.js',
         'ng-file-upload/ng-file-upload-shim.min.js',
     ];
-    
-    public $css = [
-        'angular-loading-bar/build/loading-bar.min.css',
-    ];
 }
