@@ -86,7 +86,7 @@ trait CacheableTrait
      * @param mixed $value The value to store in the cache component.
      * @param \yii\caching\Dependency|array $dependency Dependency of the cached item. If the dependency changes, the corresponding value in the cache will be invalidated when it is fetched
      * via get(). This parameter is ignored if $serializer is false. You can also define an array with defintion which will generate the Object instead of object is provided.
-     * @return void
+     * @return boolean Whether set has been success or not
      */
     public function setHasCache($key, $value, $dependency = null, $cacheExpiration = null)
     {
@@ -96,20 +96,25 @@ trait CacheableTrait
                 $dependency = Yii::createObject($dependency);
             }
             
-            Yii::$app->cache->set($key, $value, (is_null($cacheExpiration)) ? $this->cacheExpiration : $cacheExpiration, $dependency);
+            return Yii::$app->cache->set($key, $value, (is_null($cacheExpiration)) ? $this->cacheExpiration : $cacheExpiration, $dependency);
         }
+        
+        return false;
     }
     
     /**
      * Remove a value from the cache if caching is enabled.
      * 
      * @param string|array $key The cache identifier
+     * @return boolean Whether delete of key has been success or not
      */
     public function deleteHasCache($key)
     {
         if ($this->isCachable()) {
-            Yii::$app->cache->delete($key);
+            return Yii::$app->cache->delete($key);
         }
+        
+        return false;
     }
     
     /**
