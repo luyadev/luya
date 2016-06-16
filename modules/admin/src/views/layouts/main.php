@@ -25,7 +25,7 @@ $this->beginPage()
     </style>
     <?php $this->head(); ?>
 </head>
-<body ng-cloak>
+<body ng-cloak flow-prevent-drop>
 <?php $this->beginBody(); ?>
 <div class="loading-overlay" ng-show="LuyaLoading.getState()">
     <div class="loading-overlay__content">
