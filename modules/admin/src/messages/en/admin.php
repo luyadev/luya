@@ -154,4 +154,9 @@ return [
     'layout_filemanager_search_text' => 'Enter search term...',
     'layout_filemanager_file_captions' => 'File caption',
     'layout_filemanager_file_captions_save_btn' => 'Save',
+    'mode_user_title' => 'Title',
+    'mode_user_firstname' => 'Firstname',
+    'mode_user_lastname' => 'Lastname',
+    'mode_user_email' => 'E-Mail',
+    'mode_user_password' => 'Password'
 ];
