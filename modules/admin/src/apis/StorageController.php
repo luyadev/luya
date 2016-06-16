@@ -21,6 +21,16 @@ class StorageController extends \admin\base\RestController
     
     // new beta2 controller meethods
 
+    protected function flushApiCache()
+    {
+        Yii::$app->storage->flushArrays();
+        $this->deleteHasCache('storageApiDataFolders');   
+        $this->deleteHasCache('storageApiDataFiles');
+        $this->deleteHasCache('storageApiDataImages');
+    }
+    
+    // DATA READERS
+    
     public function actionDataFolders()
     {
         $cache = $this->getHasCache('storageApiDataFolders');
@@ -74,25 +84,6 @@ class StorageController extends \admin\base\RestController
         return $cache;
     }
     
-    public function actionFilemanagerUpdateCaption()
-    {
-        $fileId = Yii::$app->request->post('id', false);
-        $captionsText = Yii::$app->request->post('captionsText', false);
-        
-        if ($fileId && $captionsText) {
-            $model = StorageFile::findOne($fileId);
-            if ($model) {
-                $model->updateAttributes([
-                    'caption' => I18n::encode($captionsText),
-                ]);
-                
-                return true;
-            }
-        }
-        
-        return false;
-    }
-    
     public function actionDataImages()
     {
         $cache = $this->getHasCache('storageApiDataImages');
@@ -109,6 +100,29 @@ class StorageController extends \admin\base\RestController
         }
         
         return $cache;
+    }
+    
+    // ACTIONS
+    
+    public function actionFilemanagerUpdateCaption()
+    {
+        $fileId = Yii::$app->request->post('id', false);
+        $captionsText = Yii::$app->request->post('captionsText', false);
+    
+        if ($fileId && $captionsText) {
+            $model = StorageFile::findOne($fileId);
+            if ($model) {
+                $model->updateAttributes([
+                    'caption' => I18n::encode($captionsText),
+                ]);
+    
+                $this->flushApiCache();
+    
+                return true;
+            }
+        }
+    
+        return false;
     }
     
     public function actionImageUpload()
@@ -172,7 +186,9 @@ class StorageController extends \admin\base\RestController
         $toFolderId = Yii::$app->request->post('toFolderId', 0);
         $fileIds = Yii::$app->request->post('fileIds', []);
         
-        return Storage::moveFilesToFolder($fileIds, $toFolderId);
+        $response = Storage::moveFilesToFolder($fileIds, $toFolderId);
+        $this->flushApiCache();
+        return $response;
     }
     
     public function actionFilemanagerRemoveFiles()
@@ -234,7 +250,7 @@ class StorageController extends \admin\base\RestController
         }
         $model->is_deleted = true;
         
-        Yii::$app->storage->deleteHasCache(Yii::$app->storage->folderCacheKey);
+        $this->flushApiCache();
         
         return $model->update();
     }
@@ -247,7 +263,7 @@ class StorageController extends \admin\base\RestController
         }
         $model->attributes = Yii::$app->request->post();
     
-        Yii::$app->storage->deleteHasCache(Yii::$app->storage->folderCacheKey);
+        $this->flushApiCache();
         
         return $model->update();
     }
@@ -257,7 +273,7 @@ class StorageController extends \admin\base\RestController
         $folderName = Yii::$app->request->post('folderName', null);
         $parentFolderId = Yii::$app->request->post('parentFolderId', 0);
     
-        Yii::$app->storage->deleteHasCache(Yii::$app->storage->folderCacheKey);
+        $this->flushApiCache();
         
         return Yii::$app->storage->addFolder($folderName, $parentFolderId);
     }
