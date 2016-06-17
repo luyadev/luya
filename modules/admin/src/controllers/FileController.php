@@ -5,10 +5,15 @@ namespace admin\controllers;
 use Yii;
 use admin\Module;
 use admin\models\StorageFile;
-use yii\web\BadRequestHttpException;
-use yii\web\yii\web;
 use admin\events\FileDownloadEvent;
+use yii\web\BadRequestHttpException;
+use yii\web\NotFoundHttpException;
 
+/**
+ * File Download Controller
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class FileController extends \luya\web\Controller
 {
     public function actionDownload($id, $hash, $fileName)
@@ -50,7 +55,7 @@ class FileController extends \luya\web\Controller
             }
         }
         
-        // throw bad request exception.
-        throw new BadRequestHttpException("Unable to find requested file.");
+        // throw not found http exception, will not trigger error api transfer.
+        throw new NotFoundHttpException("Unable to find requested file.");
     }
 }

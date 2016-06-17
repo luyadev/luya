@@ -7,6 +7,7 @@ LUYA CHANGELOG
 - `#860` **[BC BREAK]** Using Yii2 imagine extension instead of native imagine extension in order to fix memory leaks and optimize thumbnail/crop calculations.
 - `#877` **[BC BREAK]** Changing the `ngRestApiEndpoint` method to static. Use `public static function ngRestApiEndpoint()`.
 - `#875` **[BC BREAK]** cms\helpers\Parser::encode() renmaed to cms\helpers\TagParser::conver()
+- `#896` Change exception for not found file downloads in order to skip exception transfer.
 - `#888` Added FlowActiveWindow in order to add big image uploads without using the filemanager, allows chuck upload.
 - `#885` Updated markup and styles to improve display of caption form in filemanager
 - `#723` Removed loading-bar.css from BowerVendor
