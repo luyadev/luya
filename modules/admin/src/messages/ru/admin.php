@@ -143,4 +143,21 @@ return [
     'layout_debug_caching' => 'Кеширование',
     'debug_state_on' => 'Вкл.',
     'debug_state_off' => 'Выкл.',
+
+// added translations in 1.0.0-beta7
+
+    'login_securetoken_mail_subject' => 'Код безопасности LUYA',
+    'login_securetoken_mail' => '<h1>Код безопасности LUYA</h1><p>Используйте следующий код для входа в свою админ-панель на {url}:</p><p><strong>{token}</strong></p>',
+    'login_async_token_error' => 'Предоставленный код безопасности неверный.',
+    'login_async_token_globalerror' => 'Произошла ошибка сервера, пожалуйста, обратитесь к администратору сайта.',
+    'ngrest_crud_csv_export_btn' => 'Сгенерировать CSV',
+    'ngrest_crud_csv_export_btn_dl' => 'Скачать CSV',
+    'layout_filemanager_search_text' => 'Введите условия поиска...',
+    'layout_filemanager_file_captions' => 'Название файла',
+    'layout_filemanager_file_captions_save_btn' => 'Сохранить',
+    'mode_user_title' => 'Заголовок',
+    'mode_user_firstname' => 'Имя',
+    'mode_user_lastname' => 'Фамилия',
+    'mode_user_email' => 'E-Mail',
+    'mode_user_password' => 'Пароль'
 ];

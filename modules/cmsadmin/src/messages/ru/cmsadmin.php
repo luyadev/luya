@@ -257,4 +257,11 @@ return [
     'js_version_update_success' => 'Версия была успешно обновлена.',
     'js_version_error_empty_fields' => 'Имеются пустые или невалидные поля.',
     'js_version_create_success' => 'Новая версия успешно сохранена.',
+
+// added translation in 1.0.0-beta7:
+
+    'block_image_internallink_label' => 'Внутренняя ссылка',
+    'block_image_externallink_label' => 'Внешняя ссылка (Приоритет выше чем у внутренней ссылки)',
+    'view_index_create_page_please_choose' => 'Пожалуйста, выберите',
+    'view_index_sidebar_autopreview' => 'Автоматический предпросмотр',
 ];
