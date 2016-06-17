@@ -1,9 +1,9 @@
 Upgrading Luya
 ==============
 
-This page describes how to update an existing luya instance to the newest version. The current version of LUYA is `1.0.0-beta6`.
+This page describes how to update an existing luya instance to the newest version. The current version of LUYA is `1.0.0-beta7`.
 
-> This guide explains how to upgrade from `1.0.0-beta5` to `1.0.0-beta6`.
+> This guide explains how to upgrade from `1.0.0-beta6` to `1.0.0-beta7`.
 
 ### Composer
 
@@ -11,10 +11,10 @@ change the luya versions for each modules and luya itself in you your composer.j
 
 ```
 "require": {
-    "luyadev/luya-core" : "1.0.0-beta6",
-    "luyadev/luya-module-cms" : "1.0.0-beta6",
-    "luyadev/luya-module-cmsadmin" : "1.0.0-beta6",
-    "luyadev/luya-module-admin" : "1.0.0-beta6"
+    "luyadev/luya-core" : "1.0.0-beta7",
+    "luyadev/luya-module-cms" : "1.0.0-beta7",
+    "luyadev/luya-module-cmsadmin" : "1.0.0-beta7",
+    "luyadev/luya-module-admin" : "1.0.0-beta7"
 }
 ```
 
@@ -42,12 +42,6 @@ Now refresh all existing importer components with the import commmand
 ./vendor/bin/luya import
 ```
 
-#### Updater/Versions
+###
 
-In beta we have introduced cms page version so you have to run the following command once, after the migrate/import command:
-
-```sh
-./vendor/bin/luya command cmsadmin/updater/versions
-```
-
-Your system is now up to date. Don't forget to check the *CHANGELOG.md* for backward compatibility breaks *[BC BREAK]*.
+Read the [CHANGELOG](https://github.com/luyadev/luya/blob/master/CHANGELOG.md) and [UPGRADE Guide](https://github.com/luyadev/luya/blob/master/UPGRADE.md) in order to see all changes you have to make in your application to run the newest version of LUYA.

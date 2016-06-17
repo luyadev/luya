@@ -1,7 +1,7 @@
 LUYA UPGRADE
 ============
 
-This document will help you upgrading from one LUYA Version into another
+This document will help you upgrading from a LUYA Version into another.
 
 1.0.0-beta7
 -----------

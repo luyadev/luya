@@ -1,4 +1,4 @@
-Create a LUYA Application
+Create new LUYA Application
 =========================
 
 LUYA: The [Yii 2](https://github.com/yiisoft/yii2) wrapper which provides out of the box functions like an **administration interface**, a beautiful looking **content management system**, **payment** modules, **agency workflows** and other tools to develop your website pretty fast!
