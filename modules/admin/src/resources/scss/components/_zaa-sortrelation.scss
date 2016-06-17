@@ -1,0 +1,143 @@
+.zaa-sortrelation {
+}
+
+.zaa-sortrelation__entry {
+    display: block;
+    padding: 0 30px 0 55px;
+    position: relative;
+    width: 100%;
+
+    &:not(:last-child) {
+        margin-bottom: 5px;
+    }
+
+    &--dropdown {
+        border: none;
+    }
+}
+
+.zaa-sortrelation__arrows {
+    left: 0;
+    position: absolute;
+    top: 0;
+
+    i {
+        cursor: pointer;
+        transition: .25s ease color;
+
+        &:hover {
+            color: color('blue', 'base');
+        }
+    }
+}
+
+.zaa-sortrelation__trash {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    i {
+        transition: .25s ease color;
+
+        &:hover {
+            color: color('red', 'base');
+        }
+    }
+}
+
+.zaa-sortrelation__text {
+    //border: 1px solid color('grey', 'base');
+    display: block;
+    padding: 0 10px;
+    width: 100%;
+
+    .zaa-sortrelation__entry:not(:last-child) & {
+        border-bottom: 1px solid color('grey', 'lighten-2');
+        padding-bottom: 3px;
+    }
+}
+
+.zaa-sortrelation__entry--dropdown {
+    margin-left: 55px;
+    position: relative;
+}
+
+.zaa-sortrelation__dropdown {
+    background-color: #fff;
+    left: 56px;
+    max-height: 0;
+    overflow: scroll;
+    position: absolute;
+    right: 31px;
+    transition: .25s ease max-height;
+    z-index: 500;
+
+    .zaa-sortrelation__dropdown-filter--open & {
+        box-shadow: 0 5px 5px 1px rgba(0, 0, 0, .2);
+        max-height: 200px;
+    }
+}
+
+.zaa-sortrelation__dropdown-arrow {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 6px;
+    transition: .25s ease transform;
+
+    &--active {
+        transform: rotate(180deg) translateY(5px);
+    }
+}
+
+.zaa-sortrelation__dropdown-filter {
+    padding-left: 55px;
+    padding-right: 30px;
+    position: relative;
+}
+
+.zaa-sortrelation__filter {
+    box-sizing: border-box !important;
+    display: block;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 10px 0 0;
+    padding: 5px 10px 3px;
+    width: 100%;
+
+    &:hover,
+    &:focus {
+        outline: none;
+    }
+}
+
+.zaa-sortrelation__dropdown-entry {
+    cursor: pointer;
+    padding: 0 10px 3px;
+
+    &:first-child {
+        padding-top: 5px;
+    }
+
+    &:not(:last-child) {
+        border-bottom: 1px solid color('grey', 'lighten-2');
+        margin-bottom: 5px;
+        padding-bottom: 5px;
+    }
+
+    i,
+    span {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    i {
+        font-size: 16px;
+        margin-right: 5px;
+        transition: .25s ease color;
+    }
+    &:hover i {
+        color: color('green', 'base');
+    }
+}

@@ -6,12 +6,17 @@ use Yii;
 use Exception;
 use admin\components\Auth;
 use admin\ngrest\base\Model;
+use admin\models\UserOnline;
 
 /**
  * Wrapper for yii2 basic rest controller used with a model class. The wrapper is made to
  * change behaviours and overwrite the indexAction.
  *
  * usage like described in the yii2 guide.
+ * 
+ * @property \admin\ngrest\NgRestModeInterface $model Get the model object based on the $modelClass property.
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
 class RestActiveController extends \yii\rest\ActiveController implements \luya\rest\BehaviorInterface
 {
@@ -21,6 +26,17 @@ class RestActiveController extends \yii\rest\ActiveController implements \luya\r
 
     public $updateScenario = Model::SCENARIO_RESTUPDATE;
 
+    private $_model = null;
+    
+    public function getModel()
+    {
+    	if ($this->_model === null) {
+    		$this->_model = Yii::createObject($this->modelClass);
+    	}
+    	
+    	return $this->_model;
+    }
+    
     public function userAuthClass()
     {
         return Yii::$app->adminuser;
@@ -58,6 +74,8 @@ class RestActiveController extends \yii\rest\ActiveController implements \luya\r
                 break;
         }
 
+        UserOnline::refreshUser($this->userAuthClass()->getIdentity()->id, $this->id);
+        
         if (!Yii::$app->auth->matchApi($this->userAuthClass()->getIdentity()->id, $this->id, $type)) {
             throw new \yii\web\ForbiddenHttpException('you are unable to access this controller due to access restrictions.');
         }

@@ -1,6 +1,6 @@
 {
 	"name" : "luyadev/luya-module-cms",
-	"description" : "Yii2 LUYA Cms",
+	"description" : "Frontend module to display CMS content",
 	"type" : "luya-module",
 	"keywords" : ["php", "luya", "module", "cms", "yii2", "yii", "contentmanager", "content", "yii2-cms"],
 	"license": "MIT",
@@ -16,7 +16,9 @@
 		"issues" : "https://github.com/luyadev/luya/issues"
 	},
 	"require-dev" : {
-	   "phpunit/phpunit" : "~4.0"
+	   "phpunit/phpunit" : "~5.0",
+	   "luyadev/luya" : "^1.0@dev",
+	   "satooshi/php-coveralls": "~1.0"
 	},
 	"autoload" : {
 		"psr-4" : {

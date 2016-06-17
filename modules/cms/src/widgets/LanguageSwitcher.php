@@ -64,6 +64,7 @@ class LanguageSwitcher extends \luya\base\Widget
                     }
                     
                     $compositionObject = Yii::createObject(Composition::className());
+                    $compositionObject->off(Composition::EVENT_AFTER_SET);
                     $compositionObject['langShortCode'] = $lang['short_code'];
                     $link = Yii::$app->urlManager->createMenuItemUrl($routeParams, $item->id, $compositionObject);
                 }

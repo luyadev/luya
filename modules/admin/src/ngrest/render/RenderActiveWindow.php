@@ -2,6 +2,8 @@
 
 namespace admin\ngrest\render;
 
+use Yii;
+
 /**
  * @author nadar
  */
@@ -14,9 +16,9 @@ class RenderActiveWindow extends \admin\ngrest\base\Render implements \admin\ngr
     public function render()
     {
         if (($activeWindow = $this->findActiveWindow($this->activeWindowHash)) !== false) {
-            $object = $activeWindow['object'];
-            unset($activeWindow['object']);
+            $object = Yii::createObject($activeWindow['objectConfig']);
             $object->setItemId($this->_itemId);
+            Yii::$app->session->set($this->activeWindowHash, $this->_itemId);
             return $object->index();
         }
     }

@@ -5,6 +5,8 @@ namespace luya\console;
 use luya\console\interfaces\ImportControllerInterface;
 
 /**
+ * Base class for all Importer classes.
+ * 
  * Abstract importer class provides basic funcionality to access the
  * helper class via `getImporter()`. Each importer class must have run()
  * method where the basic logic of the class will be executed.
@@ -20,6 +22,7 @@ use luya\console\interfaces\ImportControllerInterface;
  *     }
  * }
  * ```
+ * 
  * @property \luya\console\interfaces\ImportControllerInterface $importer Importer Object
  * @author Basil Suter <basil@nadar.io>
  */

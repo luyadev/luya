@@ -1,5 +1,7 @@
-FILTERS
+Image Filters
 =======
+
+> since `1.0.0-beta7` we use the [Yii2 Imagine Extension](https://github.com/yiisoft/yii2-imagine) which strongly improves the behavior of creating thumbnails by auto calculating values.
 
 With *Filters* you can modify, crop, resize use effects on any image provided from the storage component. To add a filter just create a filter class within the `filters` directory of your project or module and run the import command to add the filter into the system. When you change the effect chain of your filter you have to run the import command again in ordner to update all the images which are using your filter.
 
@@ -47,16 +49,17 @@ public function chain()
     return [
         [self::EFFECT_THUMBNAIL, [
             'width' => 600,
-            'height' => 600,
-            'type' => \Imagine\Image\ImageInterface::THUMBNAIL_INSET
+            'height' => null,
         ]],
         [self::EFFECT_CROP, [
-            'width' => 600,
+            'width' => 400,
             'height' => 400,
         ]],
     ];
 }
 ```
+
+[Read more about effects in the chain](app-filter-effects.md)
 
 As you  can see the effect thumbnail usees the INSET Type, this is as the filter image manipulation system is based on [Imagine Libraray](http://imagine.readthedocs.org).
 

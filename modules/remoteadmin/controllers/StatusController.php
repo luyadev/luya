@@ -26,11 +26,11 @@ class StatusController extends \admin\base\Controller
         
         $curl = new \Curl\Curl();
         
-        $curl->get('https://packagist.org/packages/zephir/luya.json');
+        $curl->get('https://packagist.org/packages/luyadev/luya-core.json');
         $json = Json::decode($curl->response);
         
         foreach ($json['package']['versions'] as $version =>  $package) {
-            if ($version == 'dev-master') {
+            if ($version == 'dev-master' || !is_numeric(substr($version, 0 , 1))) {
                 continue;
             }
             
@@ -46,7 +46,7 @@ class StatusController extends \admin\base\Controller
     
     public function textify($value)
     {
-        return ($value) ? 'An' : 'Aus';
+        return ($value) ? 'On' : 'Off';
     }
     
     public function colorize($value)

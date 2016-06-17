@@ -36,7 +36,7 @@ class Site extends \admin\ngrest\base\Model
         return ['token', 'url'];
     }
 
-    public function ngRestApiEndpoint()
+    public static function ngRestApiEndpoint()
     {
         return 'api-remote-site';
     }

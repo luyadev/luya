@@ -37,7 +37,7 @@ class Controller extends \admin\base\Controller
         return $this->getModelObject()->getNgRestConfig();
     }
 
-    public function actionIndex()
+    public function actionIndex($inline = false)
     {
         $apiEndpoint = $this->getModelObject()->ngRestApiEndpoint();
 
@@ -55,7 +55,10 @@ class Controller extends \admin\base\Controller
         if (!$config) {
             throw new Exception("Provided NgRest config for controller '' is invalid.");
         }
-
+        
+        
+        $config->inline = (bool) $inline;
+        
         $ngrest = new \admin\ngrest\NgRest($config);
 
         return $ngrest->render(new \admin\ngrest\render\RenderCrud());

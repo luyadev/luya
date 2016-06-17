@@ -2,9 +2,11 @@
 
 namespace admin\ngrest\aw;
 
+use Yii;
 use luya\Exception;
 use yii\helpers\Json;
 use yii\helpers\Inflector;
+use yii\helpers\ArrayHelper;
 
 /**
  * Example usage:
@@ -16,21 +18,65 @@ use yii\helpers\Inflector;
  * 
  * };']); ?>
  * 
- * <?= $form->field('address', 'Adresse:'); ?>
+ * <?= $form->field('firstname'); ?>
+ * // equals
+ * <?= $this->field('firstname')->textInput(); ?>
+ * 
+ * // labels
+ * <?= $form->field('firstname', 'Firstname Label')->textInput(); ?>
+ * // equals
+ * <?= $form->field('firstname')->textInput()->label('Firstname Label'); ?>
+ * 
+ * // textarea
+ * <?= $form->field('text')->textarea(); ?>
+ * 
  * <? $form::end(); ?>
  * ```
  * @author nadar
  */
 class CallbackFormWidget extends \yii\base\Widget
 {
+    /**
+     * @var array Options for the Active Form:
+     * 
+     * - params: array, Add additional parameters which will be sent to the callback. ['foo' => 'bar']
+     * - buttonClass: string, an optional class for the submit button replaces `btn`.
+     * - closeOnSuccess: boolean, if enabled, the active window will close after successfully sendSuccess() response from callback.
+     * - reloadListOnSuccess: boolean, if enabled, the active window will reload the ngrest crud list after success response from callback via sendSuccess().
+     * - reloadWindowOnSuccess: boolena, if enabled the active window will reload itself after success (when successResponse is returnd).
+     */
     public $options = [];
     
+    /**
+     * @var string Required value of the Submit Button
+     */
     public $buttonValue = null;
     
+    /**
+     * @var string Required value of the callback in the Active Window which should be triggered by this Form.
+     */
     public $callback = null;
 
+    /**
+     * @var string Optional string with javascript callback function which is going to be triggered after angular response.
+     */
     public $angularCallbackFunction = 'function() {};';
+
+    /**
+     * @var string The ActiveField class with field type methods.
+     */
+    public $fieldClass = '\admin\ngrest\aw\ActiveField';
     
+    /**
+     * @var array This config options are automaticcally are used when creating a field based on the `fieldClass`.
+     */
+    public $fieldConfig = [];
+    
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \yii\base\Object::init()
+     */
     public function init()
     {
         parent::init();
@@ -42,27 +88,56 @@ class CallbackFormWidget extends \yii\base\Widget
         ob_start();
     }
     
-    public function field($name, $label, array $options = [])
+    /**
+     * Generate a field based on attribute name and optional label.
+     * 
+     * @param string $attribute The name of the field (which also will sent to the callback as this name)
+     * @param string $label Optional Label
+     * @param array $options
+     * @return \admin\ngrest\aw\ActiveField
+     */
+    public function field($attribute, $label = null, $options = [])
     {
-        return '
-        <div class="input input--text input--vertical">
-            <label class="input__label" for="'.$this->getFieldId($name).'">'.$label.'</label>
-            <div class="input__field-wrapper">
-                <input class="input__field" id="'.$this->getFieldId($name).'" ng-model="params.'.$name.'" />
-            </div>
-        </div>';
+    	$config = $this->fieldConfig;
+    	
+    	if (!isset($config['class'])) {
+    		$config['class'] = $this->fieldClass;
+    	}
+    	
+    	return Yii::createObject(ArrayHelper::merge($config, $options, [
+    		'attribute' => $attribute,
+    		'form' => $this,
+    		'label' => $label,
+    	]));
     }
     
+    /**
+     * Convert the callback to a camlized name.
+     * 
+     * @param unknown $callbackName
+     * @return string
+     */
     private function callbackConvert($callbackName)
     {
         return Inflector::camel2id($callbackName);
     }
     
-    private function getFieldId($name)
+    /**
+     * Get the id for a field based on the attribute name
+     * 
+     * @param string $name
+     * @return string
+     */
+    public function getFieldId($name)
     {
         return Inflector::camel2id($this->id . $name);
     }
     
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \yii\base\Widget::run()
+     */
     public function run()
     {
         $content = ob_get_clean();
@@ -78,8 +153,10 @@ class CallbackFormWidget extends \yii\base\Widget
             'buttonNameValue' => $this->buttonValue,
             'closeOnSuccess' => (isset($this->options['closeOnSuccess'])) ? '$scope.crud.closeActiveWindow();' : null,
             'reloadListOnSuccess' => (isset($this->options['reloadListOnSuccess'])) ? '$scope.crud.loadList();' : null,
+            'reloadWindowOnSuccess' => (isset($this->options['reloadWindowOnSuccess'])) ? '$scope.$parent.activeWindowReload();' : null,
             'form' => $content,
             'angularCallbackFunction' => $this->angularCallbackFunction,
+            'buttonClass' => (isset($options['buttonClass'])) ? $options['buttonClass'] : 'btn',
         ]);
     }
 }

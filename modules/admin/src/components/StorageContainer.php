@@ -3,16 +3,17 @@
 namespace admin\components;
 
 use Yii;
-use Exception;
 use yii\db\Query;
 use yii\helpers\Inflector;
+use yii\base\Component;
+use luya\Exception;
 use luya\helpers\FileHelper;
+use luya\helpers\Url;
 use admin\helpers\Storage;
 use admin\models\StorageFile;
 use admin\models\StorageImage;
 use admin\models\StorageFilter;
 use admin\models\StorageFolder;
-use Imagine\Gd\Imagine;
 
 /**
  * Create images, files, manipulate, foreach and get details. The storage container 
@@ -59,17 +60,22 @@ use Imagine\Gd\Imagine;
  * ### folders
  * 
  * @property string $httpPath Get the http path to the storage folder.
+ * @property string $absoluteHttpPath Get the absolute http path to the storage folder.
  * @property string $serverPath Get the server path (for php) to the storage folder.
  * @property array $filesArray An array containing all files
  * @property array $imagesArray An array containg all images
  * @property array $foldersArray An array containing all folders
  * @property array $filtersArray An array with all filters
- * @author nadar
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
-class StorageContainer extends \yii\base\Component
+class StorageContainer extends Component
 {
     use \luya\traits\CacheableTrait;
     
+    /**
+     * @var \luya\web\Request Request object resolved from DI.
+     */
     public $request = null;
     
     public $fileCacheKey = 'storageFileCacheKey';
@@ -80,19 +86,16 @@ class StorageContainer extends \yii\base\Component
     
     public $filterCacheKey = 'storageFilterCacheKey';
     
-    private $_httpPath = null;
-    
-    private $_serverPath = null;
-    
-    private $_filesArray = null;
-    
-    private $_imagesArray = null;
-    
-    private $_foldersArray = null;
-    
-    private $_filtersArray = null;
+    /**
+     * @var boolean When enabled the storage component will try to recreated missing images when `getSource()` of an
+     * image is called but the `getFileExists()` does return false, which means that the source file has been deleted.
+     * So in those cases the storage component will automatiaccly try to recreated this image based on the filterId and
+     * fileId.
+     */
+    public $autoFixMissingImageSources = true;
     
     /**
+     * Consturctor resolveds Request component from DI container
      * 
      * @param \luya\web\Request $request
      * @param array $config
@@ -103,7 +106,20 @@ class StorageContainer extends \yii\base\Component
         parent::__construct($config);
     }
     
+    private $_httpPath = null;
+    
     /**
+     * Setter for the http path in order to read online storage files.
+     * 
+     * @param string $path
+     */
+    public function setHttpPath($path)
+    {
+        $this->_httpPath = $path;
+    }
+    
+    /**
+     * Get the base path to the storage directory
      * 
      * @return string
      */
@@ -116,8 +132,36 @@ class StorageContainer extends \yii\base\Component
         return $this->_httpPath;
     }
     
+    private $_absoluteHttpPath = null;
+    
     /**
+     * Setter fro the absolute http path in order to read from another storage source.
+     * @param unknown $path
+     */
+    public function setAbsoluteHttpPath($path)
+    {
+        $this->_absoluteHttpPath = $path;
+    }
+    
+    /**
+     * Get the base absolute base path to the storage direcotry
      * 
+     * @return string;
+     * @since 1.0.0-beta7
+     */
+    public function getAbsoluteHttpPath()
+    {
+    	if ($this->_absoluteHttpPath === null) {
+    		$this->_absoluteHttpPath = Url::base(true) . '/storage';
+    	}
+
+    	return $this->_absoluteHttpPath;
+    }
+    
+    private $_serverPath = null;
+    
+    /**
+     * Get the internal server path to the storage folder
      * @return string
      */
     public function getServerPath()
@@ -129,6 +173,8 @@ class StorageContainer extends \yii\base\Component
         return $this->_serverPath;
     }
     
+    private $_filesArray = null;
+    
     /**
      * 
      * @return NULL|mixed|boolean
@@ -136,7 +182,7 @@ class StorageContainer extends \yii\base\Component
     public function getFilesArray()
     {
         if ($this->_filesArray === null) {
-            $this->_filesArray = $this->getQueryCacheHelper((new Query())->from('admin_storage_file')->select(['id', 'is_hidden', 'is_deleted', 'folder_id', 'name_original', 'name_new', 'name_new_compound', 'mime_type', 'extension', 'hash_name', 'upload_timestamp', 'file_size', 'upload_user_id'])->indexBy('id'), $this->fileCacheKey);
+            $this->_filesArray = $this->getQueryCacheHelper((new Query())->from('admin_storage_file')->select(['id', 'is_hidden', 'is_deleted', 'folder_id', 'name_original', 'name_new', 'name_new_compound', 'mime_type', 'extension', 'hash_name', 'upload_timestamp', 'file_size', 'upload_user_id', 'caption'])->indexBy('id'), $this->fileCacheKey);
         }
         
         return $this->_filesArray;
@@ -151,6 +197,8 @@ class StorageContainer extends \yii\base\Component
     {
         return (isset($this->filesArray[$fileId])) ? $this->filesArray[$fileId] : false;
     }
+    
+    private $_imagesArray = null;
     
     /**
      * 
@@ -256,6 +304,7 @@ class StorageContainer extends \yii\base\Component
             'is_hidden' => ($isHidden) ? 1 : 0,
             'is_deleted' => 0,
             'file_size' => @filesize($savePath),
+            'caption' => null,
         ]);
         
         if ($model->validate()) {
@@ -298,16 +347,25 @@ class StorageContainer extends \yii\base\Component
     }
     
     /**
-     * Add a new image based on an existing file
+     * Add a new image based on an existing file information.
      * 
      * @param integer $fileId The id of the file where image should be created from.
-     * @param integer $filterId The id of the filter which should be applied to, if filter is 0, no filter will be added.
+     * @param integer $filterId The id of the filter which should be applied to, if filter is 0, no filter will be added. Filter can new also be the string name of the filter like `tiny-crop`.
      * @param boolean $throwException Whether the addImage should throw an exception or just return boolean
      * @return boolean|\admin\image\Item|\Exception 
      */
     public function addImage($fileId, $filterId = 0, $throwException = false)
     {
         try {
+            // if the filterId is provded as a string the filter will be looked up by its name in the get filters array list.
+            if (is_string($filterId) && !is_numeric($filterId)) {
+                $filterLookup = $this->getFiltersArrayItem($filterId);
+                if (!$filterLookup) {
+                    throw new Exception("The provided filter name " . $filterId . " does not exist.");
+                }
+                $filterId = $filterLookup['id'];
+            }
+            
             $query = (new \admin\image\Query())->where(['file_id' => $fileId, 'filter_id' => $filterId])->one();
             
             if ($query && $query->fileExists) {
@@ -326,18 +384,16 @@ class StorageContainer extends \yii\base\Component
             if (empty($filterId)) {
                 $save = @copy($fileQuery->serverSource, $fileSavePath);
             } else {
-                $imagine = new Imagine();
-                $image = $imagine->open($fileQuery->serverSource);
                 $model = StorageFilter::find()->where(['id' => $filterId])->one();
+                
                 if (!$model) {
                     throw new Exception("Could not find the provided filter id '$filterId'.");
                 }
-                $newimage = $model->applyFilter($image, $imagine);
-                $save = $newimage->save($fileSavePath);
-            }
-            
-            if (!$save) {
-                throw new Exception("unable to store file $fileSavePath");
+                
+                if (!$model->applyFilterChain($fileQuery, $fileSavePath)) {
+                    throw new Exception("Unable to create and save image '".$fileSavePath."'.");   
+                }
+                
             }
             
             $resolution = Storage::getImageResolution($fileSavePath);
@@ -357,14 +413,16 @@ class StorageContainer extends \yii\base\Component
             $this->_imagesArray[$model->id] = $model->toArray();
             $this->deleteHasCache($this->imageCacheKey);
             return $this->getImage($model->id);
-        } catch (Exception $err) {
+        } catch (\Exception $err) {
             if ($throwException) {
-                throw new Exception($err->getMessage(), $err->getCode(), $err);
+                throw new Exception("add image exception: " . $err->getMessage(), 0, $err);
             }
         }
         
         return false;
     }
+    
+    private $_foldersArray = null;
     
     /**
      * 
@@ -437,6 +495,8 @@ class StorageContainer extends \yii\base\Component
         return false;
     }
     
+    private $_filtersArray = null;
+    
     /**
      * 
      * @return NULL|mixed|boolean
@@ -501,16 +561,11 @@ class StorageContainer extends \yii\base\Component
         foreach ($this->findFiles(['is_hidden' => 0, 'is_deleted' => 0]) as $file) {
             if ($file->isImage) {
                 // create tiny thumbnail
-                $filter = $this->getFiltersArrayItem('tiny-thumbnail');
-                if ($filter) {
-                    $this->addImage($file->id, $filter['id']);
-                }
-                // create medium thumbnail
-                $filter = $this->getFiltersArrayItem('medium-thumbnail');
-                if ($filter) {
-                    $this->addImage($file->id, $filter['id']);
-                }
+                $this->addImage($file->id, 'tiny-crop');
+                $this->addImage($file->id, 'medium-thumbnail');
             }
         }
+        
+        return true;
     }
 }

@@ -3,11 +3,17 @@
 namespace ngresttest\models;
 
 use Yii;
+use admin\models\User;
+use admin\aws\FlowActiveWindow;
+use admin\aws\FlowActiveWindowInterface;
+use admin\image\Item;
+use yii\db\Query;
+use luya\helpers\ArrayHelper;
 
 /**
  * NgRest Model created at 21.03.2016 14:05 on LUYA Version 1.0.0-beta6-dev.
  */
-class Table extends \admin\ngrest\base\Model
+class Table extends \admin\ngrest\base\Model implements FlowActiveWindowInterface
 {
         /**
      * @inheritdoc
@@ -73,7 +79,7 @@ class Table extends \admin\ngrest\base\Model
     /**
      * @var An array containing all fields which should be transformed to multilingual fields and stored as json in the database.
      */
-    public $i18n = ['i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus'];
+    public $i18n = ['i18n_sortRelationArray', 'i18n_sortRelationModel', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus'];
     
     /**
      * @inheritdoc
@@ -81,8 +87,8 @@ class Table extends \admin\ngrest\base\Model
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios['restcreate'] = ['image', 'imageArray', 'file', 'fileArray', 'text', 'textarea', 'selectArray', 'checkboxList', 'date', 'datetime', 'decimal', 'number', 'password',  'toggleStatus', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus'];
-        $scenarios['restupdate'] = ['image', 'imageArray', 'file', 'fileArray', 'text', 'textarea', 'selectArray', 'checkboxList', 'date', 'datetime', 'decimal', 'number', 'password',  'toggleStatus', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus'];
+        $scenarios['restcreate'] = ['sortRelationArray', 'sortRelationModel', 'i18n_sortRelationArray', 'i18n_sortRelationModel', 'image', 'imageArray', 'file', 'fileArray', 'text', 'textarea', 'selectArray', 'checkboxList', 'date', 'datetime', 'decimal', 'number', 'password',  'toggleStatus', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus'];
+        $scenarios['restupdate'] = ['sortRelationArray', 'sortRelationModel', 'i18n_sortRelationArray', 'i18n_sortRelationModel', 'image', 'imageArray', 'file', 'fileArray', 'text', 'textarea', 'selectArray', 'checkboxList', 'date', 'datetime', 'decimal', 'number', 'password',  'toggleStatus', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus'];
         return $scenarios;
     }
     
@@ -97,7 +103,7 @@ class Table extends \admin\ngrest\base\Model
     /**
      * @return string Defines the api endpoint for the angular calls
      */
-    public function ngRestApiEndpoint()
+    public static function ngRestApiEndpoint()
     {
         return 'api-ngresttest-table';
     }
@@ -108,14 +114,21 @@ class Table extends \admin\ngrest\base\Model
     public function ngrestAttributeTypes()
     {
         return [
+            'sortRelationArray' => ['sortRelationArray', 'data' => ['hi', 'ho', 'hi2', 'ho2', 'hi3', 'ho3', 'hi4', 'ho4', 'hi5', 'ho5', 'hi5', 'ho5', 'hi6', 'ho6', 'hi7', 'ho7']],
+            'sortRelationModel' => ['SortRelationModel', 'modelClass' => User::className(), 'valueField' => 'id', 'labelField' => 'email'],
+            'i18n_sortRelationArray' => ['SortRelationArray', 'data' => ['hi', 'ho']],
+            'i18n_sortRelationModel' => ['SortRelationModel', 'modelClass' => User::className(), 'valueField' => 'id', 'labelField' => 'email']
+        ];
+        /*
+        return [
             'image' => 'image',
             'imageArray' => 'imageArray',
             'file' => 'file',
             'fileArray' => 'fileArray',
             'text' => 'text',
             'textarea' => 'textarea',
-            'selectArray' => ['selectArray', 'data' => [1 => 'Male', 2 => 'Female']],
-            'checkboxList' => ['checkboxList', 'data' => [1 => 'Male', 2 => 'Female']],
+            'selectArray' => ['selectArray', 'data' => [1 => 'Male', 2 => 'Female', 'homo' => 'Homobulusl', '4' => 'A string casted number!']],
+            'checkboxList' => ['checkboxList', 'data' => [1 => 'Male', 2 => 'Female', 'homo' => 'Homobulusl', '4' => 'A string casted number!']],
             //'checkboxRelation' => 'textarea',
             //'color' =>
             'date' => 'date',
@@ -132,8 +145,8 @@ class Table extends \admin\ngrest\base\Model
             'i18n_fileArray' => 'fileArray',
             'i18n_text' => 'text',
             'i18n_textarea' => 'textarea',
-            'i18n_selectArray' => ['selectArray', 'data' => [1 => 'Male', 2 => 'Female']],
-            'i18n_checkboxList' => ['checkboxList', 'data' => [1 => 'Male', 2 => 'Female']], //['checkboxList', ['foo', 'bar']],
+            'i18n_selectArray' => ['selectArray', 'data' => [1 => 'Male', 2 => 'Female', 'homo' => 'Homobulusl', '4' => 'A string casted number!']],
+            'i18n_checkboxList' => ['checkboxList', 'data' => [1 => 'Male', 2 => 'Female', 'homo' => 'Homobulusl', '4' => 'A string casted number!']], //['checkboxList', ['foo', 'bar']],
             //'checkboxRelation' => 'textarea',
             //'i18n_color' =>
             'i18n_date' => 'date',
@@ -144,6 +157,7 @@ class Table extends \admin\ngrest\base\Model
             //'selectClass' => 'textarea',
             'i18n_toggleStatus' => 'toggleStatus',
         ];
+        */
     }
     
     /**
@@ -151,14 +165,38 @@ class Table extends \admin\ngrest\base\Model
      */
     public function ngRestConfig($config)
     {
+        $config->aw->load(['class' => FlowActiveWindow::className(), 'modelClass' => self::className()]);
         // define fields for types based from ngrestAttributeTypes
+        /*
         $this->ngRestConfigDefine($config, 'list', ['image', 'imageArray', 'file', 'fileArray', 'text', 'textarea', 'selectArray', 'checkboxList', 'date', 'datetime', 'decimal', 'number', 'password', 'toggleStatus', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus']);
         $this->ngRestConfigDefine($config, 'create', ['image', 'imageArray', 'file', 'fileArray', 'text', 'textarea', 'selectArray', 'checkboxList', 'date', 'datetime', 'decimal', 'number', 'password', 'toggleStatus', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus']);
         $this->ngRestConfigDefine($config, 'update', ['image', 'imageArray', 'file', 'fileArray', 'text', 'textarea', 'selectArray', 'checkboxList', 'date', 'datetime', 'decimal', 'number', 'password', 'toggleStatus', 'i18n_image', 'i18n_imageArray', 'i18n_file', 'i18n_fileArray', 'i18n_text', 'i18n_textarea', 'i18n_selectArray', 'i18n_checkboxList', 'i18n_date', 'i18n_datetime', 'i18n_decimal', 'i18n_number', 'i18n_password',  'i18n_toggleStatus']);
+        */
         
+        $this->ngRestConfigDefine($config, ['list', 'create', 'update'], ['sortRelationArray', 'i18n_sortRelationArray', 'sortRelationModel', 'i18n_sortRelationModel']);
+       
         // enable or disable ability to delete;
-        $config->delete = false; 
+        $config->delete = true; 
         
         return $config;
+    }
+    
+    public function flowSaveImage(Item $image)
+    {
+        Yii::$app->db->createCommand()->insert('ngresttest_table_images', [
+            'model_id' => $this->id,
+            'image_id' => $image->id,
+            'sort_index' => 0,
+        ])->execute();
+    }
+    
+    public function flowDeleteImage(Item $image)
+    {
+    	Yii::$app->db->createCommand()->delete('ngresttest_table_images', ['image_id' => $image->id])->execute();
+    }
+    
+    public function flowListImages()
+    {
+        return ArrayHelper::getColumn((new Query())->select(['image_id'])->from('ngresttest_table_images')->where(['model_id' => $this->id])->indexBy('image_id')->all(), 'image_id');
     }
 }

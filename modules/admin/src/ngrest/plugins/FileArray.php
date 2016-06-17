@@ -53,5 +53,7 @@ class FileArray extends \admin\ngrest\base\Plugin
             $event->sender->setAttribute($this->name, $this->jsonDecode($event->sender->getAttribute($this->name)));
             return false;
         }
+        
+        return true;
     }
 }

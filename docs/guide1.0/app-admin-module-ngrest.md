@@ -7,6 +7,8 @@ The word *NgRest* is explained as follows: A**Ng**ular**Rest** (Representational
 
 > In order to create your own *NgRest* quickly and not understanding the details under the hood, you can create a migration with your data table, create an admin module and the run `./vendor/bin/luya crud/create`.
 
+![ngrest-crud](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/ngrest-crud.png "NgRest Image")
+
 #### Steps to understand and create an NgRest Crud
 
 Preparations
@@ -23,6 +25,7 @@ Preparations
 We assume you have a made a table via the migrations (in your example below we assume you make a team module with members) and executue the migrations so you can no creat an `ActiveRecord` model for the provided table. The model represents the datasource for the REST API, you can create the model with the gii module extension or you can also generate the model and the rest of the classes with the `crud/create` cli command.
 
 Lets have close look at what you model should look like, in our member example of the teammodule:
+
 ```php
 <?php
 namespace teamadmin\models;
@@ -90,7 +93,10 @@ class Member extends \admin\ngrest\base\Model
      * This is the api endpoint for the ngrest implementation, so the ngrest config needs to know where should
      * all the angular calls go.
      */
-    public $ngRestEndpoint = 'api-team-member';
+     public static function ngRestApiEndpoint()
+     {
+        return 'api-team-member';
+     }
     
     /**
      * Enable which fields should automaticcally be available as multilingual fields!
@@ -106,7 +112,7 @@ class Member extends \admin\ngrest\base\Model
     {
         // define fields for types based from ngrestAttributeTypes
         $this->ngRestConfigDefine($config, 'list', ['title', 'name']);
-        $this->ngRestConfigDefine($config, ['create', 'update'], ['title, 'name', 'text']);
+        $this->ngRestConfigDefine($config, ['create', 'update'], ['title', 'name', 'text']);
         
         // enable or disable ability to delete;
         $config->delete = false; 

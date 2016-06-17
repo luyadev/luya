@@ -1,6 +1,6 @@
 {
 	"name" : "luyadev/luya-module-admin",
-	"description" : "Yii2 LUYA Admin",
+	"description" : "Administration core module for all LUYA admin modules",
 	"type" : "luya-module",
 	"keywords" : ["php", "luya", "module", "admin", "yii2", "yii", "administration", "angular", "ngrest", "manage", "panel"],
 	"license": "MIT",
@@ -16,11 +16,14 @@
 		"issues" : "https://github.com/luyadev/luya/issues"
 	},
 	"require" : {
-	    "imagine/imagine" : "^0.6.3",
-	    "cebe/markdown": "~1.0.0 | ~1.1.0"
+	    "imagine/imagine": "0.5.*",
+	    "cebe/markdown": "~1.0.0 | ~1.1.0",
+	    "flowjs/flow-php-server": "^1.0"
 	},
 	"require-dev" : {
-		"phpunit/phpunit" : "~4.0"
+		"phpunit/phpunit" : "~5.0",
+		"luyadev/luya" : "^1.0@dev",
+		"satooshi/php-coveralls": "~1.0"
 	},
 	"autoload" : {
 		"psr-4" : {
@@ -28,6 +31,11 @@
 			"admintests\\" : "tests/"
 		}
 	},
+	"autoload-dev" : {
+       "psr-4" : {
+           "admintests\\" : "tests/"
+       }
+    },
 	"extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"

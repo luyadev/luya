@@ -7,13 +7,13 @@ To execute a console command open your Terminal and go into the base directory o
 ./vendor/bin/luya <command>
 ```
 
-> Under windows you can run commands via the composer file `composer exec luya <command>`
+> On Windows Systems you can run commands via the composer exec command: `composer exec luya <command>`
 
 Where *command* is one of the following commands below:
 
 ### Available commands
 
-|Befehl            |Optionen                      |Beispiel                  |Beschreibung
+|Command            |Options                      |Example                  |Description
 | --------         | ---------------              | ---------                 | ---------
 |migrate           |-                             |`migrate`                 |Execute all migrations from all modules, updates your database if any.
 |migrate/create    |$tableName [, $moduleName ]   |`migrate/create mymigration1 modulename` |Create new migration file named `mymigration1` in the module `modulename`.
@@ -22,11 +22,13 @@ Where *command* is one of the following commands below:
 |import            |-                             |`import`             |Updates permission, import cms blocks, updates cms layouts, updates image filters. Create your custom [importer](app-module.md#import-method)
 |health            |-                             |`health`             |Tests all basic directory if they are writeable and existing.
 |health/mailer     |-                             |`health/mailer`      |Check if you mailer component is working and can send mails.
-|crud/create       |-                             |`crud/create`        |Create new [NgRest Crud](app-admin-module-ngrest.md) with a wizzard.
-|module/create     |-                             |`module/create`      |Create new [Frontend/Admin Module](app-module.md) with a wizzard.
-|block/create		|-								|`block/create`	|Create new [Inhalts Blöcken](app-blocks.md) with a wizzard.
-|storage/cleanup   |-								|`storage/cleanup`	|Cleanup not existing files compare file system and database.
-|<route>           |-                             |`mymodule/commandcontroller/action` |All comands stored in the folder `commands` can be run by default routing.
+|crud/create       |-                             |`crud/create`        |Create new [NgRest CRUD](app-admin-module-ngrest.md) with a wizzard.
+|module/create     |-                             |`module/create`      |Create new [frontend/admin module](app-module.md) with a wizzard.
+|block/create		|-								|`block/create`	|Create new [CMS content blocks](app-blocks.md) with a wizzard.
+|storage/cleanup|-|`storage/cleanup`|Cleanup not existing files compare file system and database.
+|storage/process-thumbnails|-|`storage/process-thumbnails`|Create all thumbnails for filemanager preview. Otherwhise they are created on request load.
+|aw/create|-|`aw/create`|Generate a new Active Window class file based on your configuration.
+|<route>|-|`mymodule/commandcontroller/action`|All comands stored in the folder `commands` can be run by default routing.
 
 
 Create your own command

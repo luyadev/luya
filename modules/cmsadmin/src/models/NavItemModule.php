@@ -84,6 +84,8 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
             
             $this->_content = $reflection->run();
             
+            $this->controller = $reflection->controller;
+            
             Yii::$app->menu->setCurrentUrlRule($reflection->getUrlRule());
         }
         

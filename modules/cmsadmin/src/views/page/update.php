@@ -79,7 +79,7 @@
 
 <!-- UPDATE PAGE FORM -->
 <script type="text/ng-template" id="updateformpage.html">
-    <div class="row">
+    <div class="row" ng-show="isEditAvailable()">
         <div class="input input--select col s12">
             <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_version_chooser'); ?></label>
             <div class="input__field-wrapper" ng-show="parent.typeData!==undefined">
@@ -193,12 +193,16 @@
                                     <!-- IS_HOME SWITCH -->
                                     <div class="toolbar__group  toolbar__group--homepage" ng-show="isDraft == false">
                                         <div class="switch">
-                                            <label title="Setzt diese Seite als Startseite.">
+                                            <label title="Setzt diese Seite als Startseite." ng-if="!navData.is_home">
                                                 <?php echo \cmsadmin\Module::t('view_update_is_homepage'); ?>
                                                 <input type="checkbox" ng-model="navData.is_home" ng-true-value="1" ng-false-value="0">
                                                 <span class="lever"></span>
                                             </label>
                                         </div>
+                                        <span class="grey-text text-darken-2" ng-if="navData.is_home">
+                                            <i class="material-icons cms__prop-toggle green-text text-darken-1" style="vertical-align: middle; margin-right: 3px;">check_circle</i>
+                                            <span  style="vertical-align: bottom">Startseite</span>
+                                        </span>
                                     </div>
                                     <!-- /IS_HOME SWITCH -->
 
@@ -352,10 +356,10 @@
                                         {{item.title}}
                                         <span ng-hide="settings">
                                             <i ng-click="toggleSettings()" class="material-icons right [ waves-effect waves-blue ]">mode_edit</i>
-                                            <a ng-href="{{homeUrl}}preview/{{item.id}}" target="_blank" class="right" ng-show="!liveEditState">
+                                            <a ng-href="{{homeUrl}}preview/{{item.id}}?version={{currentPageVersion}}" target="_blank" class="right" ng-show="!liveEditState">
                                                 <i class="material-icons [ waves-effect waves-blue ]">open_in_new</i>
                                             </a>
-                                            <a ng-click="openLiveUrl(item.id)" ng-show="liveEditState" class="right"><i class="material-icons [ waves-effect waves-blue ]">open_in_new</i></a>
+                                            <a ng-click="openLiveUrl(item.id, currentPageVersion)" ng-show="liveEditState" class="right"><i class="material-icons [ waves-effect waves-blue ]">open_in_new</i></a>
                                         </span>
                                         <span ng-hide="!settings">
                                             <a ng-click="toggleSettings()"  class="right"><i class="material-icons">close</i></a>

@@ -52,4 +52,20 @@ class MailTest extends \luyatests\LuyaWebTestCase
         $this->assertSame('arraywithname@example.com', $mailerTo[3][0]);
         $this->assertSame('Jane Doe', $mailerTo[3][1]);        
     }
+    
+    public function testLayoutWrapper()
+    {
+        $mail = new Mail();
+        $mail->layout = '@app/views/maillayout.php';
+        $mail->setBody('CONTENT');
+        $this->assertEquals('<div>CONTENT</div>', $mail->mailer->Body);
+    }
+    
+    public function testLayoutWithoutWrapper()
+    {
+        $mail = new Mail();
+        $mail->layout = false;
+        $mail->setBody('CONTENT');
+        $this->assertEquals('CONTENT', $mail->mailer->Body);
+    }
 }

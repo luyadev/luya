@@ -63,10 +63,9 @@
             <div class="input input--select col s12">
                 <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_parent_page'); ?></label>
                 <div class="input__field-wrapper">
-                    <select class="input__field browser-default" ng-model="data.parent_nav_id">
-                        <option value="0"><?php echo \cmsadmin\Module::t('view_index_page_parent_root'); ?></option>
-                        <option ng-repeat="nav in navitems" value="{{nav.id}}">{{nav.title}}</option>
-                    </select>
+                    <input id="[checkbox-id]" ng-model="data.parent_nav_id" value="0" ng-true-value="0" type="checkbox" />
+                    <label for="[checkbox-id]"><?php echo \cmsadmin\Module::t('view_index_page_parent_root'); ?></label>
+                    <menu-dropdown class="menu-dropdown" nav-id="data.parent_nav_id" />
                 </div>
             </div>
         </div>
@@ -130,7 +129,11 @@
         <div class="input input--select col s12"  ng-show="data.use_draft==0">
             <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_layout'); ?></label>
             <div class="input__field-wrapper">
-                <select class="input__field browser-default" ng-model="data.layout_id" ng-options="lts.id as lts.name for lts in layouts"></select>
+                <select class="input__field" ng-model="data.layout_id">
+                    <option value=""><?= \cmsadmin\Module::t('view_index_create_page_please_choose'); ?></option>
+                    <option value="">- - - - -</option>
+                    <option ng-repeat="item in layouts" value="{{item.id}}">{{item.name}}</option>
+                </select>
             </div>
         </div>
     </div>
@@ -149,7 +152,11 @@
         <div class="input input--text col s12">
             <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_module_select'); ?></label>
             <div class="input__field-wrapper">
-                <input name="text" type="text" class="input__field" ng-model="data.module_name" />
+                <select ng-model="data.module_name" class="input__field">
+                    <option value=""><?= \cmsadmin\Module::t('view_index_create_page_please_choose'); ?></option>
+                    <option value="">- - - - -</option>
+                    <option ng-repeat="item in modules" value="{{item.value}}">{{item.label}}</option>
+                </select>
             </div>
         </div>
     </div>
@@ -276,7 +283,7 @@
                     <div class="sidebar__icon-holder">
                         <i class="sidebar__icon material-icons">live_tv</i>
                     </div>
-                    <span class="sidebar__text">Auto Preview</span>
+                    <span class="sidebar__text"><?= \cmsadmin\Module::t('view_index_sidebar_autopreview'); ?></span>
                 </label>
             </div>
 

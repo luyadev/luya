@@ -6,6 +6,7 @@ Admin Styleguide
 Dieser kleine Styleguide ist eine Referenz für Komponenten die im Admin verwendet werden können.  
 Zurzeit deckt dieser Styleguide nur das Thema Input Felder ab.
 
+
 Input Felder
 ------------
 Standardmässig wird das Label links vom Inputfeld dargestellt. Möchte man aus dieser Darstellung ausbrechen und das Label über das Input Feld setzen, muss man lediglich dem `.input` div die Klasse `.input--vertical` hinzufügen.  
@@ -100,6 +101,7 @@ Ein Beispiel:
 </div>
 ```
 
+
 Icons
 -----
 Es können alle Icons des Material-Designs von Google verwendet werden.  
@@ -127,6 +129,7 @@ Wenn man Icons inklusive Text verwenden möchte, muss das Icon je nach Ausrichtu
 ```
 <button class="btn-flat">Beispiel Label <i class="material-icons right">check</i></button>
 ```
+
 
 Buttons
 -------
@@ -198,9 +201,47 @@ Eigenschaften:
 </button>
 ```
 
+
+Info divs
+---------
+
+Folgende Info-Divs sind verfügbar:
+
+**Info**
+![alert alert--info](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/app-admin-styles/alert.alert--info.jpg "alert alert--info")  
+```
+<div class="alert alert--info">Lorem ipsum dolor sit amet...</div>
+```
+
+**Warnung**
+![alert alert--warning](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/app-admin-styles/alert.alert--warning.jpg "alert alert--warning")  
+```
+<div class="alert alert--warning">Lorem ipsum dolor sit amet...</div>
+```
+
+**Erfolg**
+![alert alert--success](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/app-admin-styles/alert.alert--success.jpg "alert alert--success")  
+```
+<div class="alert alert--success">Lorem ipsum dolor sit amet...</div>
+```
+
+**Fehler**
+![alert alert--danger](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/app-admin-styles/alert.alert--danger.jpg "alert alert--danger")  
+```
+<div class="alert alert--danger">Lorem ipsum dolor sit amet...</div>
+```
+
+Badges
+------
+
+Es können die [Badges von Materialize](http://materializecss.com/badges.html) verwendet werden.
+
+In der CRUD-Tabelle können diese Badges ebenfalls verwendet werden. In diesem Fall wird der Badge in der entsprechenden Spalte dargestellt, anstatt sich rechts an der Zeile auszurichten.
+
+
 Tabellen
 --------
-Es können alle [Tabellen des Material-Designs von Google](http://materializecss.com/table.html) verwendet werden.
+Es können alle [Tabellen von Materialize](http://materializecss.com/table.html) verwendet werden.
 
 ```
 <table class="striped responsive-table hoverable">
@@ -225,20 +266,21 @@ Es können alle [Tabellen des Material-Designs von Google](http://materializecss
 </table>
 ```
 
+
 Farben
 ------
 Luya verwendet die [Farben vom Material-Design von Google](https://www.google.com/design/spec/style/color.html#).  
 Farbschema:  
 
-#####Bestätigungsfarbe Grün
+##### Bestätigungsfarbe Grün
 Colorcode: #4CAF50  
 Bzw. Farbe für die Meldung von gültigen Werten sowie für Schaltflächen mit empfohlenen Aktionen. 
 
-#####Warnungsfarbe Rot:  
+##### Warnfarbe Rot:  
 Colorcode: #EF5350  
 Farbe für die Kennzeichnung eines Abbruchs oder zum Beispiel eines Fehlers
 
-#####Luya Grundfarbe Blau:  
+##### Luya Grundfarbe Blau:  
 Colorcode: #2196F3  
 Generelle Gestalltungsfarbe der Admin GUI  
 

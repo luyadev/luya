@@ -142,12 +142,12 @@ return [
     'view_index_page_nav_container' => 'Navigations-Container',
     'view_index_page_parent_page' => 'Übergeordnete Seite',
     'view_index_page_success' => 'Diese Seite wurde erfolgreich erstellt!',
-    'view_index_page_parent_root' => '[Hauptebene]',
+    'view_index_page_parent_root' => 'Auf der Hauptebene',
     'view_index_page_use_draft' => 'Eine Vorlage verwenden?',
     'view_index_page_select_draft' => 'Möchtest du aus einer Vorlage auswählen?',
     'view_index_page_layout' => 'Layout auswahl',
     'view_index_page_btn_save' => 'Neue Seite speichern',
-    'view_index_module_select' => 'Modul Name (Yii-ID)',
+    'view_index_module_select' => 'Modul Name',
     'view_index_redirect_type' => 'Art der Weiterleitung',
     'view_index_redirect_internal' => 'Interne-Seite',
     'view_index_redirect_external' => 'Externe URL',
@@ -257,4 +257,11 @@ return [
     'js_version_update_success' => 'Die Änderungen an der Version wurden erfolgreich gespeichert.',
     'js_version_error_empty_fields' => 'Eines oder mehrere Felder sind leer oder haben einen falschen Wert.',
     'js_version_create_success' => 'Die neue Version wurde erfolgreich gespeichert.',
+
+// added translation in 1.0.0-beta7:
+
+    'block_image_internallink_label' => 'Interner Link',
+    'block_image_externallink_label' => 'Externer Link (Überschreibt den internen)',
+    'view_index_create_page_please_choose' => 'Bitte wählen',
+    'view_index_sidebar_autopreview' => 'Automatische Vorschau',
 ];

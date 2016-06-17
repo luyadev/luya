@@ -142,12 +142,12 @@ return [
     'view_index_page_nav_container' => 'Navigation-Container',
     'view_index_page_parent_page' => 'Parent Page',
     'view_index_page_success' => 'Successfully created the page!',
-    'view_index_page_parent_root' => '[Main level]',
+    'view_index_page_parent_root' => 'on Root level',
     'view_index_page_use_draft' => 'Use a template?',
     'view_index_page_select_draft' => 'Do you want to choose a template?',
     'view_index_page_layout' => 'Layout selection',
     'view_index_page_btn_save' => 'Save new page',
-    'view_index_module_select' => 'Module name (Yii-ID)',
+    'view_index_module_select' => 'Module name',
     'view_index_redirect_type' => 'Forwarding type',
     'view_index_redirect_internal' => 'Internal page',
     'view_index_redirect_external' => 'External URL',
@@ -257,4 +257,11 @@ return [
     'js_version_update_success' => 'The version has been updated successfully.',
     'js_version_error_empty_fields' => 'One or more fields are empty or have an invalid value.',
     'js_version_create_success' => 'The new version has been saved successfully.',
+
+// added translation in 1.0.0-beta7:
+
+    'block_image_internallink_label' => 'Internal Link',
+    'block_image_externallink_label' => 'External Link (Overrides internal link if set)',
+    'view_index_create_page_please_choose' => 'Please choose',
+    'view_index_sidebar_autopreview' => 'Auto Preview',
 ];

@@ -5,11 +5,15 @@ namespace luya\console\commands;
 use Yii;
 use admin\importers\StorageImporter;
 
+/**
+ * LUYA Admin Storage command.
+ * 
+ * @author Martin Petrasch <martin.petrasch@zephir.ch>
+ */
 class StorageController extends \luya\console\Command
 {
-
     /**
-     * delete orphaned files -> wait for user confirmation (y/n)
+     * Delete orphaned files, but requires user confirmation to ensure delete process.
      */
     public function actionCleanup()
     {
@@ -44,5 +48,19 @@ class StorageController extends \luya\console\Command
             return $this->outputError("Cleanup could not be completed. Please look into error above.");
         }
         return $this->outputSuccess("No orphaned files found.");
+    }
+    
+    /**
+     * Create all thumbnails for filemanager preview. Otherwhise they are created on request load.
+     */
+    public function actionProcessThumbnails()
+    {
+        $response = Yii::$app->storage->processThumbnails();
+        
+        if ($response) {
+            return $this->outputSuccess('Successful generated storage thumbnails.');
+        }
+        
+        return $this->outputError('Error while creating the storage thumbnails.');
     }
 }

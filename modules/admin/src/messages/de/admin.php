@@ -142,4 +142,21 @@ return [
     'layout_debug_caching' => 'Caching',
     'debug_state_on' => 'An',
     'debug_state_off' => 'Aus',
+    
+// added translations in 1.0.0-beta7
+
+    'login_securetoken_mail_subject' => 'LUYA Sicherheitscode',
+    'login_securetoken_mail' => '<h1>LUYA Sicherheitscode</h1><p>Verwenden Sie den folgenden Sicherheitscode für den Zugriff auf die Administration der Website {url}:</p><p><strong>{token}</strong></p>',
+    'login_async_token_error' => 'Der eingegeben Sicherheitscode ist falsch',
+    'login_async_token_globalerror' => 'Ein Globaler-Fehler ist enstanden. Bitte kontaktieren Sie Ihren Seitenbetreiber.',
+    'ngrest_crud_csv_export_btn' => 'CSV generieren',
+    'ngrest_crud_csv_export_btn_dl' => 'CSV herunterladen',
+    'layout_filemanager_search_text' => 'Suchbegriff eingeben...',
+    'layout_filemanager_file_captions' => 'Datei Beschreibungen',
+    'layout_filemanager_file_captions_save_btn' => 'Speichern',
+    'mode_user_title' => 'Anrede',
+    'mode_user_firstname' => 'Vorname',
+    'mode_user_lastname' => 'Nachname',
+    'mode_user_email' => 'E-Mail',
+    'mode_user_password' => 'Passwort'
 ];

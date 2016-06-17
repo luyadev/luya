@@ -3,19 +3,25 @@
 namespace luya\web;
 
 use Yii;
-use Exception;
+use yii\base\Component;
+use luya\Exception;
 use luya\helpers\Url;
 use luya\web\CompositionAfterSetEvent;
 
 /**
- * Luya Composition Component to provide i18n/language handling.
+ * LUYA Composition Component to provide i18n/language handling.
  * 
- * @since 1.0.0-beta1 Implementation of ArrayAccess.
- *
- * @author nadar
+ * @property string $full Return `getFull()` method represents full composition
+ * @property string $defaultLangShortCode Return default defined language shord code
+ * @property string $language Return wrapper of getKey('langShortCode')
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
-class Composition extends \yii\base\Component implements \ArrayAccess
+class Composition extends Component implements \ArrayAccess
 {
+    /**
+     * @var string This event will method will triggere after setKey method is proccessed
+     */
     const EVENT_AFTER_SET = 'EVENT_AFTER_SET';
     
     /**
@@ -30,20 +36,20 @@ class Composition extends \yii\base\Component implements \ArrayAccess
 
     /**
      * @var bool Enable or disable the->getFull() prefix. If disabled the response of getFull() would be empty, otherwhise it
-     *           returns the full prefix composition pattern based url.
+     * returns the full prefix composition pattern based url.
      */
     public $hidden = false;
 
     /**
      * @var string Url matching prefix, which is used for all the modules (e.g. an e-store requireds a language
-     *             as the cms needs this informations too). After proccessing this informations, they will be removed
-     *             from the url for further proccessing.
+     * as the cms needs this informations too). After proccessing this informations, they will be removed
+     * from the url for further proccessing.
      *
      * The fullqualified composer key will be stored in `$request->get('urlPrefixCompositionKey')`.
      *
      * Examples of how to use urlPrefixComposition
      * 
-     * ```
+     * ```php
      * $urlPrefixComposition = '<langShortCode:[a-z]{2}>/<countryShortCode:[a-z]{2}>'; // de/ch; fr/ch
      * ```
      */
@@ -91,7 +97,9 @@ class Composition extends \yii\base\Component implements \ArrayAccess
     }
 
     /**
+     * Return the the default langt short code.
      * 
+     * @return string
      */
     public function getDefaultLangShortCode()
     {
@@ -103,6 +111,8 @@ class Composition extends \yii\base\Component implements \ArrayAccess
      */
     public function init()
     {
+        parent::init();
+        
         // check if the required key langShortCode exist in the default array.
         if (!array_key_exists('langShortCode', $this->default)) {
             throw new Exception("The composition default rule must contain a langShortCode.");
@@ -142,7 +152,6 @@ class Composition extends \yii\base\Component implements \ArrayAccess
      * Resolve the current url request and retun an array contain resolved route and the resolved values.
      *
      * @param \yii\web\Request $request
-     *
      * @return array An array containing the route and the resolvedValues. Example array output when request path is `de/hello/world`:
      * 
      * ```php
@@ -213,7 +222,6 @@ class Composition extends \yii\base\Component implements \ArrayAccess
      *
      * @param string $key          The key to find in the composition array e.g. langShortCode
      * @param string $defaultValue The default value if they could not be found
-     *
      * @return string|bool
      */
     public function getKey($key, $defaultValue = false)

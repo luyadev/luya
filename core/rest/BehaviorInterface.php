@@ -2,6 +2,11 @@
 
 namespace luya\rest;
 
+/**
+ * Rest Behavior Interface
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 interface BehaviorInterface
 {
     /**

@@ -1,7 +1,7 @@
 <div class="card-panel">
 <h3>Remote Admin</h3>
 <p>All Remote-Date will be cached for <strong>2 minutes</strong>. You can us the reload button to flush the whole page cache.</p>
-<p>Current LUYA Version is <?php echo $currentVersion['version']; ?> <i>(release date <?php echo date("d.m.Y", strtotime($currentVersion['time'])); ?>)</i></p>
+<p>Current LUYA Version is <strong><?php echo $currentVersion['version']; ?></strong> <i>(release date <?php echo date("d.m.Y", strtotime($currentVersion['time'])); ?>)</i></p>
 <table class="bordered hoverable">
 <thead>
 <tr>

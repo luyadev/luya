@@ -25,6 +25,8 @@ class m160321_125556_ngresttest extends Migration
             'password' => 'text',
             'selectClass' => 'text',
             'toggleStatus' => 'text',
+            'sortRelationArray' => 'text',
+            'sortRelationModel' => 'text',
             
             // i18n
             
@@ -45,6 +47,8 @@ class m160321_125556_ngresttest extends Migration
             'i18n_password' => 'text',
             'i18n_selectClass' => 'text',
             'i18n_toggleStatus' => 'text',
+            'i18n_sortRelationArray' => 'text',
+            'i18n_sortRelationModel' => 'text',
         ]);
     }
 

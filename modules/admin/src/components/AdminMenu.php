@@ -180,4 +180,23 @@ class AdminMenu extends \yii\base\Component
 
         return $data;
     }
+
+    /**
+     * Return all informations about a menu point based on the api endpoint name.
+     * 
+     * @param string $api The Api Endpoint
+     * @return array|boolean
+     */
+    public function getApiDetail($api = null)
+    {
+        $items = $this->items;
+        
+        $key = array_search($api, array_column($items, 'permssionApiEndpoint'));
+        
+        if ($key !== false) {
+            return $items[$key];
+        }
+        
+        return false;
+    }
 }

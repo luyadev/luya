@@ -1,7 +1,46 @@
 LUYA CHANGELOG
 ==============
 
-1.0.0-beta6 (in progress)
+1.0.0-beta7 (in progress)
+-------------------------
+
+- `#860` **[BC BREAK]** Using Yii2 imagine extension instead of native imagine extension in order to fix memory leaks and optimize thumbnail/crop calculations.
+- `#877` **[BC BREAK]** Changing the `ngRestApiEndpoint` method to static. Use `public static function ngRestApiEndpoint()`.
+- `#875` **[BC BREAK]** cms\helpers\Parser::encode() renmaed to cms\helpers\TagParser::conver()
+- `#888` Added FlowActiveWindow in order to add big image uploads without using the filemanager, allows chuck upload.
+- `#885` Updated markup and styles to improve display of caption form in filemanager
+- `#723` Removed loading-bar.css from BowerVendor
+- `#878` Increased z-index for toast messages
+- `#880` Fixed copy/paste layout block recursion problem.
+- `#831` Close the propertie mask after saving/updating propertie values.
+- `#578` Added new sort relation plugin as requested to make relations with sortable data from model or array.
+- `#876` Improved textarea styling in zaa-table.
+- `#863` Fixed behavior of module controller layouts when using in cms context.
+- `#839` Styled the form search input.
+- `#856` Styled the new is Homepage indicator. Added check_circle in green.
+- `#857` Improved responsive behavior of navbar. Moved icons above text. Updated colors.
+- `#828` Fixed z-index bug in page version tabs.
+- `#853` Fixed bug where cms page creation parent page selector was not working anymore.
+- `#846` Added absolute http source path for images in storage component via `getSource(true)`.
+- `#845` Crawler added search data model to analys the querys and added command to send search results.
+- `#839` Admin Filemanager search function to filter file list
+- `#821` CMS block visibility toggler does now affect live-preview reloader
+- `#817` Skip PHP 5.5 support in LUYA core.
+- `#873` Added NgRest crud CSV export ability to generate a full csv based on ngrest model.
+- `#866` Fixed bug when deleting a cms page template.
+- `#867` Added new callbackform activefield configurations to add the ability of different input methods in Active Windows.
+- `#864` Fixed issue where Active Window class properties could not be serialized as they can contain closures.
+- `#861` Added new link helper to create realtive urls for the current website, use `link[//about-me]` will replace `//` with the current base url.
+- `#859` Added caching abilities for storage data apis and cms nav item page content as array data recursion.
+- `#858` Fixed bug where crawler word highlight functions does not quote the preg_replace identifier.
+- `#856` Disable the ability to unset a current homepage in the cms module, this may lead into a state without any homepage defined.
+- `#847` Fixed bug in model crud/createcreate command template where short open tag is disabled.
+- `#729` Added extra variable informations when creating a block with cms-page type to help retrieve menu informations.
+- `#848` Detached composition event when using language switcher composition context setter, as it causes the application language.
+- `#837` Added CMS ability to preview page versions.
+- `#838` Added CMS ability to preview offline pages.
+
+1.0.0-beta6 (21.04.2016)
 -------------------------
 
 **BC BREAKS** See [UPGRADE.md](UPGRADE.md) as we have made some major changes.

@@ -1,14 +1,13 @@
-App Assets
-==========
+# Application Assets
 
-class
------
-create an asset class extend from yii\web\AssetBundle like below:
+Asset files like CSS or JavaScript are resources you have to integrate in your web project but organize them in "package" like folders, so called Asset Bundles. Assets are based on [Yii2 Asset Bundles](http://www.yiiframework.com/doc-2.0/guide-structure-assets.html) you may read more detailed informations about. The LUYA assets describe just another way of including them into you project.
+
+An example class of an asset where files are located in `@app/resources` and includes the `css/styles.css` into the view files where the asset is loaded.
 
 ```php
 namespace app\assets;
 
-class LuyaioAsset extends \luya\web\Asset
+class MyTestAsset extends \luya\web\Asset
 {
     public $sourcePath = '@app/resources';
     
@@ -18,13 +17,14 @@ class LuyaioAsset extends \luya\web\Asset
 }
 ```
 
-the above example would register the asset folder @app/resources and copy the css file style.css (@app/resources/css/style.css) into the asset cache.
+From the example above the css file `style.css` would be looked up in the location `@app/resources/css/styles`.
 
-register asset
+> In a project context, we recommend to *not* store images inside the asset sources. Images should stored in the `public_html` folder and you can access them in the view with `src="<?= $this->publicHtml; ?>/myimage.jpg"`.
+
+### Using the Asset
 ---------------
-To register an asset file you have to put those files into the config. Each module can have assets. All controllers of this module will register those assets into the view.
 
-If you are in a cms context, all asset files must be registered to the cms module, otherwhise they will not be available in the cmslayout twig files. Added an array item to your modules asset array:
+To register an asset file you have to put those files into the config of a module. Each module can have assets. All controllers of this module will register those assets into the view automaticaly. If you are in a cms context, all asset files must be registered to the cms module, otherwise they will not be available in the cmslayouts. An example of registering assets into the cms module:
 
 ```php
 return [
@@ -42,31 +42,28 @@ return [
 ];
 ```
 
-
-If you need the to access the baseUrl of a specific class you can now get the class object like
-
-```php
-$luyaio = $this->getAssetManager()->getBundle('\\app\\assets\\LuyaioAsset');
-```
-
-All asset who are register with the module asset property can also be access in the twig files with the function:
-
-```
-{{ asset('\\app\\assets\\LuyaioAsset').baseUrl }}
-```
-
-register asset in the view
---------------------------
-If there is an asset you only need in the current php view file, you can always register them with the command:
+The original Yii way of including Assets is good as well, therefore you have to register the asset in any view file (views, layouts), an example of registering an asset:
 
 ```php
-$luyaio = \app\assets\LuyaioAsset::register($this);
+use app\assets\MyTestAsset;
+
+$asset = MyTestAsset::register($this); // $this represents the view object
 ```
 
-inside the view. Its not recommend to make us of this practice.
+### Accessing the asset path
 
-To access the baseUrl of the asset (cache) folder use the code below:
+Sometimes you may want to access the folder with the asset files, therefore you need to retrieve the baseUrl of the asset which as the *actual path of the folder in the filesystem* which is in the `public_html/assets/$HASH_NUMBER`.
+
+Run the the get bundle method inside your view file for the registered assetManager in the view object:
 
 ```php
-<img src="<?= $luyaio->baseUrl; ?>img/teaser.png" border="0" />
+$myAsset = $this->assetManager->getBundle('\\app\\assets\\MyTestAsset');
+
+echo $myAsset->baseUrl; 
+```
+
+To access the baseUrl of an asset in a twig template you may use:
+
+```
+{{ asset('\\app\\assets\\MyTestAsset').baseUrl }}
 ```

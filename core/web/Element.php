@@ -3,11 +3,13 @@
 namespace luya\web;
 
 use Yii;
-use Exception;
+use luya\Exception;
 use luya\helpers\FileHelper;
 use Twig_Loader_Filesystem;
 
 /**
+ * HTML Element Component.
+ * 
  * Ability to register small html elements via closure function and run those
  * parts an every part of the page.
  * 
@@ -46,7 +48,7 @@ use Twig_Loader_Filesystem;
  * ];
  * ```
  * 
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Element extends \yii\base\Component
 {
@@ -60,6 +62,11 @@ class Element extends \yii\base\Component
      */
     public $viewsFolder = '@app/views/elements/';
 
+    /**
+     * @var string $renderEngine Define the render engine you want to use for the element component, can be `php` or `twig`.
+     */
+    public $renderEngine = 'php';
+    
     /**
      * @var array Contains all registered elements.
      */
@@ -97,7 +104,7 @@ class Element extends \yii\base\Component
      */
     public function __call($name, $params)
     {
-        return $this->run($name, $params);
+        return $this->getElement($name, $params);
     }
 
     /**
@@ -147,6 +154,23 @@ class Element extends \yii\base\Component
     {
         return $this->_elements;
     }
+    
+    /**
+     * Renders the closure for the given name and returns the content.
+     *
+     * @param string $name   The name of the elemente to execute.
+     * @param array  $params The params to pass to the closure methode.
+     * @return mixed The return value of the executed closure function.
+     * @throws Exception
+     */
+    public function getElement($name, array $params = [])
+    {
+        if (!array_key_exists($name, $this->_elements)) {
+            throw new Exception("The requested element '$name' does not exist in the list. You may register the element first with `addElement(name, closure)`.");
+        }
+    
+        return call_user_func_array($this->_elements[$name], $params);
+    }
 
     /**
      * Run an element and return the closures return value.
@@ -157,14 +181,12 @@ class Element extends \yii\base\Component
      * @return mixed The return value of the executed closure function.
      *
      * @throws Exception
+     * @todo delete in RC1
      */
     public function run($name, array $params = [])
     {
-        if (!array_key_exists($name, $this->_elements)) {
-            throw new Exception("The requested element '$name' does not exist in the list. You may register the element first with `addElement(name, closure)`.");
-        }
-
-        return call_user_func_array($this->_elements[$name], $params);
+        trigger_error('method `run()` is deprectaed, use `getElement` instead.', E_NOTICE);
+        return $this->getElement($name, $params);
     }
 
     /**
@@ -193,8 +215,14 @@ class Element extends \yii\base\Component
      */
     public function render($file, array $args = [])
     {
-        $twig = Yii::$app->twig->env(new Twig_Loader_Filesystem($this->getFolder()));
-
-        return $twig->render(FileHelper::ensureExtension($file, 'twig'), $args);
+        if ($this->renderEngine == 'php') {
+            $view = new View();
+            return $view->renderPhpFile(rtrim($this->getFolder(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . FileHelper::ensureExtension($file, 'php'), $args);
+        } elseif ($this->renderEngine == 'twig') {
+            $twig = Yii::$app->twig->env(new Twig_Loader_Filesystem($this->getFolder()));
+            return $twig->render(FileHelper::ensureExtension($file, 'twig'), $args);
+        }
+        
+        throw new Exception('Not supported render engine: ' . $this->renderEngine);
     }
 }

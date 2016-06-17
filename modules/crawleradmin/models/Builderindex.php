@@ -46,7 +46,7 @@ class Builderindex extends \admin\ngrest\base\Model
             'title' => Module::t('builderindex_title'),
             'language_info' => Module::t('builderindex_language_info'),
             'content' => Module::t('builderindex_content'),
-            'url_found_on_page' => 'Url found on Page',
+            'url_found_on_page' => Module::t('builderindex_url_found'),
         ];
     }
 
@@ -94,7 +94,7 @@ class Builderindex extends \admin\ngrest\base\Model
         return ['url', 'content', 'title', 'language_info'];
     }
 
-    public function ngRestApiEndpoint()
+    public static function ngRestApiEndpoint()
     {
         return 'api-crawler-builderindex';
     }

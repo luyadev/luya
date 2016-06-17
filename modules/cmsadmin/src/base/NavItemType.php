@@ -8,6 +8,8 @@ abstract class NavItemType extends \yii\db\ActiveRecord
 {
     public $options = [];
     
+    public $controller = false;
+    
     /**
      * Get the response content for the item type
      * 

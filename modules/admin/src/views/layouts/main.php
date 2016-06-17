@@ -25,7 +25,7 @@ $this->beginPage()
     </style>
     <?php $this->head(); ?>
 </head>
-<body ng-cloak>
+<body ng-cloak flow-prevent-drop>
 <?php $this->beginBody(); ?>
 <div class="loading-overlay" ng-show="LuyaLoading.getState()">
     <div class="loading-overlay__content">
@@ -89,6 +89,7 @@ $this->beginPage()
 
 <script type="text/ng-template" id="storageImageUpload">
     <div class="imageupload">
+        <div ng-if="imageNotFoundError" class="alert alert--danger" style="margin-top:0px;">The requested image id ({{ngModel}}) could not be found anymore. The orignal file has been deleted in the filemanager!</div>
         <storage-file-upload ng-model="fileId"></storage-file-upload>
         <div ng-show="originalFileIsRemoved">
             <div class="alert alert--danger"><?php echo Admin::t('layout_deleted_file'); ?></div>
@@ -114,7 +115,7 @@ $this->beginPage()
             <label>Filter Auswahl</label>
             <select name="filterId" ng-model="filterId"><option value="0"><?php echo Admin::t('layout_no_filter'); ?></option><option ng-repeat="item in filtersData" value="{{ item.id }}">{{ item.name }} ({{ item.identifier }})</option></select>
         </div>
-        
+
     </div>
 </script>
 
@@ -128,8 +129,8 @@ $this->beginPage()
                             {{folder.name }}                                            
                         </span>
 
-        <i class="material-icons filemanager__edit-icon" ng-show="currentFolderId==folder.id" ng-click="toggleFolderMode('edit')">mode_edit</i>
-        <i class="material-icons filemanager__delete-icon" ng-show="currentFolderId==folder.id" ng-click="toggleFolderMode('remove')">delete</i>
+                        <i class="material-icons filemanager__edit-icon" ng-show="currentFolderId==folder.id" ng-click="toggleFolderMode('edit')">mode_edit</i>
+                        <i class="material-icons filemanager__delete-icon" ng-show="currentFolderId==folder.id" ng-click="toggleFolderMode('remove')">delete</i>
                         
                         <span ng-show="folderUpdateForm && currentFolderId==folder.id">
                             <input type="text" ng-model="folder.name" class="filemanager__file-dialog__input"/>
@@ -228,6 +229,12 @@ $this->beginPage()
                     <span class="floating-button-label__label"><?php echo Admin::t('layout_filemanager_upload_files'); ?></span>
                 </label>
 
+                <div class="filemanager__search input input--text">
+                    <div class="input__field-wrapper">
+                        <input class="input__field filemanager__search-input" type="text" ng-model="searchQuery" placeholder="<?= Admin::t('layout_filemanager_search_text') ?>" />
+                    </div>
+                </div>
+
                 <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?php echo Admin::t('layout_filemanager_remove_selected_files'); ?></button>
                 <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove"><?php echo Admin::t('layout_filemanager_move_selected_files'); ?></button>
 
@@ -253,7 +260,7 @@ $this->beginPage()
                 <tbody>
 
                 <!-- FILES -->
-                <tr ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages | orderBy:sortField" class="filemanager__file" ng-class="{ 'clickable selectable' : allowSelection == 'false' }">
+                <tr ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField" class="filemanager__file" ng-class="{ 'clickable selectable' : allowSelection == 'false' }">
                     <td ng-click="toggleSelection(file)" class="filemanager__checkox-column" ng-hide="allowSelection == 'true'">
                         <input type="checkbox" ng-checked="inSelection(file)" id="{{file.id}}" />
                         <label for="checked-status-managed-by-angular-{{file.id}}"></label>
@@ -270,7 +277,7 @@ $this->beginPage()
                 <!-- /FILES -->
 
                 </tbody>
-            </table>            
+            </table>
             </div>
             <div class="col s4" ng-show="fileDetail">
                 <div class="filemanager__detail-wrapper">
@@ -296,10 +303,19 @@ $this->beginPage()
                         </tr>
                         </tbody>
                     </table>
+                    <div class="card-panel clearfix">
+                        <strong><?= Admin::t('layout_filemanager_file_captions'); ?></strong>
+                        <div class="input input--text input--vertical" ng-repeat="(key, cap) in fileDetail.captionArray">
+                            <label class="input__label" for="id-{{key}}">{{key}}</label>
+                            <div class="input__field-wrapper">
+                                <input class="input__field" id="id-{{key}}" name="{{key}}" type="text" ng-model="fileDetail.captionArray[key]" />
+                            </div>
+                        </div>
+                        <button type="button" class="filemanager__detail-save-button btn btn--small right" ng-click="storeFileCaption(fileDetail)"><?= Admin::t('layout_filemanager_file_captions_save_btn'); ?></button>
+                    </div>
                     <span ng-if="fileDetail.isImage">
                         <img class="responsive-img" ng-src="{{fileDetail.thumbnailMedium.source}}" />
                     </span>
-                    </p>
                     <a class="btn btn--small right" ng-click="closeFileDetail()"><i class="material-icons">zoom_out</i></a>
                 </div> <!-- detail-wrapper END -->
             </div>
@@ -354,11 +370,11 @@ $this->beginPage()
 
                 <ul class="left hide-on-med-and-down">
                     <li class="navbar__item" ng-repeat="item in items" ng-class="{'navbar__item--active' : isActive(item) }">
-                        <a ng-click="click(item);" class="navbar__link"><i class="material-icons left navbar__icon">{{item.icon}}</i>{{item.alias}}</a>
+                        <a ng-click="click(item);" class="navbar__link"><i class="material-icons navbar__icon">{{item.icon}}</i>{{item.alias}}</a>
                     </li>
                 </ul>
 
-                <ul class="right navbar__right">
+                <ul class="right navbar__right hide-on-small-only">
                     <li ng-click="reload()" style="cursor: pointer;">
                         <div class="navbar__button">
                             <i class="material-icons">replay</i>
@@ -515,7 +531,7 @@ $this->beginPage()
             </div>
         </div>
     </div>
-        
+
     <!-- ANGULAR-VIEW -->
     <div class="luya-container__angular-placeholder module-{{currentItem.moduleId}}" ui-view></div>
     <!-- /ANGULAR-VIEW -->

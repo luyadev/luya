@@ -20,11 +20,6 @@ class MediumCrop extends \admin\base\Filter
             [self::EFFECT_THUMBNAIL, [
                 'width' => 300,
                 'height' => 300,
-                'type' => \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND,
-            ]],
-            [self::EFFECT_CROP, [
-                'width' => 300,
-                'height' => 300,
             ]],
         ];
     }

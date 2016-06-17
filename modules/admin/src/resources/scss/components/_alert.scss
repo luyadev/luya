@@ -4,19 +4,25 @@
 }
 
 .alert--danger {
+    background-color: color("red", "lighten-5");
     color: color("red", "base");
+    padding: 10px 20px;
 }
 
 .alert--success {
+    background-color: color("green", "lighten-5");
     color: color("green", "base");
+    padding: 10px 20px;
 }
 
 .alert--warning {
+    background-color: color("yellow", "lighten-5");
     color: color("yellow", "darken-3");
+    padding: 10px 20px;
 }
 
 .alert--info {
-    background-color: color("light-blue", "lighten-5");
+    background-color: color("blue", "lighten-5");
     color: color("blue", "base");
     padding: 10px 20px;
 }

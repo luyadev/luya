@@ -3,10 +3,12 @@
 namespace luya\rest;
 
 /**
+ * Override of Rest IndexAction class.
+ * 
  * This class is used to wrap the yii rest indexAction cause of a possibility
  * to overwrite the pagination parameter.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class IndexAction extends \yii\rest\IndexAction
 {

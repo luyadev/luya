@@ -19,7 +19,7 @@ class TinyThumbnail extends \admin\base\Filter
         return [
             [self::EFFECT_THUMBNAIL, [
                 'width' => 40,
-                'height' => 40,
+                'height' => null,
             ]],
         ];
     }

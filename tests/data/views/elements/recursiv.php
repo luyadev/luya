@@ -1,0 +1,1 @@
+<?= Yii::$app->element->bar(); ?>

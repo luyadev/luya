@@ -13,7 +13,7 @@ class Block extends \admin\ngrest\base\Model
 {
     private $cachedDeletedId = 0;
 
-    public function ngRestApiEndpoint()
+    public static function ngRestApiEndpoint()
     {
         return 'api-cms-block';
     }

@@ -405,7 +405,8 @@ class Nav extends \yii\db\ActiveRecord
         $navItemPage->layout_id = $layoutId;
         $navItemPage->timestamp_create = time();
         $navItemPage->version_alias = Module::VERSION_INIT_LABEL;
-        $navItemPage->create_user_id = Yii::$app->adminuser->getId();
+        $navItemPage->create_user_id = Module::getAuthorUserId();
+        $navItemPage->nav_item_id = 0;
         
         if (!$navItemPage->validate()) {
             return $navItemPage->getErrors();
@@ -457,7 +458,7 @@ class Nav extends \yii\db\ActiveRecord
             'description' => $description,
             'nav_item_type' => 1
         ];
-        $navItemPage->attributes = ['layout_id' => $layoutId, 'create_user_id' => Yii::$app->adminuser->getId(), 'timestamp_create' => time(), 'version_alias' => Module::VERSION_INIT_LABEL];
+        $navItemPage->attributes = ['nav_item_id' => 0, 'layout_id' => $layoutId, 'create_user_id' => Module::getAuthorUserId(), 'timestamp_create' => time(), 'version_alias' => Module::VERSION_INIT_LABEL];
 
         if (!$nav->validate()) {
             $_errors = ArrayHelper::merge($nav->getErrors(), $_errors);
@@ -501,7 +502,7 @@ class Nav extends \yii\db\ActiveRecord
             'description' => $description,
             'nav_item_type' => 1
         ];
-        $navItemPage->attributes = ['layout_id' => $layoutId, 'create_user_id' => Yii::$app->adminuser->getId(), 'timestamp_create' => time(), 'version_alias' => Module::VERSION_INIT_LABEL];
+        $navItemPage->attributes = ['nav_item_id' => 0, 'layout_id' => $layoutId, 'create_user_id' => Module::getAuthorUserId(), 'timestamp_create' => time(), 'version_alias' => Module::VERSION_INIT_LABEL];
 
         if (!$navItem->validate()) {
             $_errors = ArrayHelper::merge($navItem->getErrors(), $_errors);

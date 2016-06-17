@@ -40,7 +40,7 @@ class ModuleBlock extends \cmsadmin\base\Block
     {
         $moduleName = $this->getVarValue('moduleName', false);
 
-        return (empty($moduleName)) ? [] : Yii::$app->getModule($moduleName)->getControllerFiles();
+        return (empty($moduleName) || !Yii::$app->hasModule($moduleName)) ? [] : Yii::$app->getModule($moduleName)->getControllerFiles();
     }
 
     public function getModuleNames()
@@ -82,6 +82,10 @@ class ModuleBlock extends \cmsadmin\base\Block
             return;
         }
         
+        if (!Yii::$app->hasModule($moduleName)) {
+        	return;
+        }
+        
         try {
             $ctrl = $this->getCfgValue('moduleController');
             $action = $this->getCfgValue('moduleAction', 'index');
@@ -112,7 +116,7 @@ class ModuleBlock extends \cmsadmin\base\Block
             
             return $response;
         } catch (\Exception $err) {
-            throw new Exception('Exception has been throwed in Module Block', 0, $err);
+            throw new Exception('Exception has been throwed in Module Block: ' . $err->getMessage(), 0, $err);
         }
     }
 }

@@ -13,6 +13,22 @@ class Query extends \yii\base\Object
 {
     use \admin\storage\QueryTrait;
     
+    private $_storage = null;
+    
+    /**
+     * Singleton behavior for storage component getter.
+     *
+     * @return \admin\components\StorageContainer
+     */
+    public function getStorage()
+    {
+        if ($this->_storage === null) {
+            $this->_storage = Yii::$app->storage;
+        }
+    
+        return $this->_storage;
+    }
+    
     public function getDataProvider()
     {
         return $this->storage->imagesArray;

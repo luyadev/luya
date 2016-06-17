@@ -1,0 +1,23 @@
+{
+    "require": {
+        "yiisoft/yii2": "~2.0.0",
+        "twig/twig" : "~1.0",
+        "ext-curl" : "*",
+        "curl/curl" : "1.2.1",
+        "yiisoft/yii2-imagine": "~2.0.0",
+        "phpmailer/phpmailer": "~5.0"
+    },
+    "extra": {
+        "asset-installer-paths": {
+            "bower-asset-library": "vendor/bower"
+        }
+    },
+    "autoload" : {
+        "psr-4" : {
+            "luya\\" : "../../core/",
+            "admin\\" : "../../modules/admin/src",
+            "cms\\" : "../../modules/cms/src",
+            "cmsadmin\\" : "../../modules/cmsadmin/src"
+        }
+    }
+}

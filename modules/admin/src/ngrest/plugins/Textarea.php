@@ -76,6 +76,8 @@ class Textarea extends \admin\ngrest\base\Plugin
             $this->_markdownParser = new GithubMarkdown();
             $this->_markdownParser->enableNewlines = true;
         }
+        
+        return $this->_markdownParser;
     }
     
     /**
@@ -89,7 +91,7 @@ class Textarea extends \admin\ngrest\base\Plugin
         }
         
         if ($this->markdown) {
-            $event->sender->setAttribute($this->name, $this->markdownPaser->parse($event->sender->getAttribute($this->name)));
+            $event->sender->setAttribute($this->name, $this->markdownParser->parse($event->sender->getAttribute($this->name)));
         }
     }
 }

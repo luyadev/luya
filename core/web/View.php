@@ -6,20 +6,24 @@ use Yii;
 use luya\helpers\Url;
 
 /**
- * LUYA web view wrapper
+ * LUYA web view wrapper.
  * 
- * @author nadar
+ * Implements additional helper methods to the Yii web controller.
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
 class View extends \yii\web\View
 {
-    private $_publicHtml = null;
-    
     /**
      * @var boolean If csrf validation is enabled in the request component, and autoRegisterCsrf is enabled, then
      * all the meta informations will be auto added to meta tags.
      */
     public $autoRegisterCsrf = true;
     
+    /**
+     * Init view object. Implements auto register csrf meta tokens.
+     * @see \yii\base\View::init()
+     */
     public function init()
     {
         // call parent initializer
@@ -32,10 +36,10 @@ class View extends \yii\web\View
     }
     
     /**
+     * Get the url source for an asset.
+     * 
      * @todo verify there is already a yii-way solution
-     *
      * @param string $assetName
-     *
      * @return string
      */
     public function getAssetUrl($assetName)
@@ -47,20 +51,18 @@ class View extends \yii\web\View
      * Removes redundant whitespaces (>1) and new lines (>1).
      * 
      * @param string $content input string
-     *
      * @return string compressed string
      */
     public function compress($content)
     {
-        return preg_replace(array('/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s'), array('>', '<', '\\1'), $content);
+        return preg_replace(['/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s'], ['>', '<', '\\1'], $content);
     }
 
     /**
-     * Helper method for convenience.
+     * Generate urls helper method. 
      *
-     * @param string $route
-     * @param array  $params
-     *
+     * @param string $route The route to create `module/controller/action`.
+     * @param array $params Optional parameters passed as key value pairing.
      * @return string
      */
     public function url($route, array $params = [])
@@ -89,10 +91,6 @@ class View extends \yii\web\View
      */
     public function getPublicHtml()
     {
-        if ($this->_publicHtml === null) {
-            $this->_publicHtml = Yii::$app->request->baseUrl;
-        }
-        
-        return $this->_publicHtml;
+        return Yii::$app->request->baseUrl;
     }
 }

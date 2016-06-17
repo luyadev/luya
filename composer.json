@@ -23,8 +23,8 @@
         "phpmailer/phpmailer": "^5.2"
 	},
     "require-dev" : {
-        "phpunit/phpunit" : "~4.0",
-        "phpunit/php-code-coverage" : "~2.0",
+        "phpunit/phpunit" : "~5.0",
+        "phpunit/php-code-coverage" : "~3.0",
         "satooshi/php-coveralls": "~1.0"
     },
     "autoload" : {

@@ -1,6 +1,6 @@
-Übersetzungen
-=============
-Um übersetzungen innerhalbt der *Controller* oder *Views* zu erstellen benutzen wir die Yii `translations` Komponent. Die müssen wir aber zuerst in der [Konfiguration](install-structures.md) einbetten und zwar im `components` Abschnitt. Diese könnte in etwa so ausshen:
+# Translation / Messages
+
+This section explains how to use the [Yii Messaging system](http://www.yiiframework.com/doc-2.0/guide-tutorial-i18n.html#message-translation) inside a LUYA Project. This is a summary guide. To use the translation/messaging system in your controller or view files you have to configure the yii2 i18n component:
 
 ```php
 'components' => [
@@ -14,9 +14,7 @@ Um übersetzungen innerhalbt der *Controller* oder *Views* zu erstellen benutzen
 ]
 ```
 
-> Denke Sie daran das Sie alle Komponenten in der `prep.php` und `prod.php` gleichermassen eintragen.
-
-Nun werden alle *Messages-Source* Dateien die mit dem prefix `app` beginnen in die Übersetzung geladen. Um eine solche *Message-Source* Datei zu erstellen wechseln Sie in ihr Projekt-Verzeichnis und erstellen Sie den Ordner `messages`. Der Inhalt des Messages könnten nun wie folgt aussehen gemäss des *app* prefix beispiels:
+Now all the message with the prefix `app` will be loaded into the message component when the i18n component will be initialized. Now you have to define the files for the `app` prefix, which are located in your application (@app) folder `messages`. An example structure of the message folder could looke like this for the prefix app:
 
 ```
 .
@@ -29,58 +27,53 @@ Nun werden alle *Messages-Source* Dateien die mit dem prefix `app` beginnen in d
         └── app-otherparts.php
 ```
 
-Message-Source
----------------
-Der Inhalt einer solchen *Message-Source* Datei gibt immer ein *array* zurück. Hier ein Beispiel für `messages/de/app.php`:
+### Message Source Content
 
-```
-return [
-    'title_top' => 'Hallo ich bin die Übersetzung Oben',
-    'title_footer' => 'Hallo ich bin ein Footer Title',
-    'body' => 'Ich bin die Body Variabel!',
-];
-```
-
-Um nun auf diese Übersetzunge zuzugreifen benutzer wir
-
-```php
-echo Yii::t('app', 'title_top'); // Gibt "Hallo ich bin die Übersetzung Oben" zurück
-```
-
-> Die Wrapper funktion im Twig `t('app', 'title_top')`.
-
-Um eine Nachricht mit einem Paramter (also ein Dynamischer Wert welcher bei der ÜBersetzung nicht bekannt ist) zu erstellen, függen wir in der *Message-Source* Datei einen Platzhalter `{0}` ein. Wobei die Nummerierung der Anzahl Platzhalter entspricht.
+The message source file itself which contains the translations for the specific language is an array with a key where you can identifier the message and a value which is the content. Example content for `messages/de/app.php`:
 
 ```php
 return [
-    'datum' => 'Heute ist der <b>{0}</b> in Unixzeit.'
+    'title_top' => 'Hello everyone, i am title top!',
+    'title_footer' => 'This is just a footer title.',
+    'body' => 'The body welcomes you.',
 ];
 ```
 
-und bei der Ausgabe ersetzen wir `{0}` durch einen Wert:
-
-```
-echo Yii::t('app', 'datum', time()); // Gibt "Heute ist der <b>435829046</b> in Unixzeit" zurück.
-```
-
-Mehrsprachige Urls
-------------------
-@TODO!
-
-+ [Frontend Modul](app-module-frontend.md) Dokumentation
+In order to use the defined message you can run the `Yii:t` method like this:
 
 ```php
-
-    public $urlRules = [
-        ['pattern' => 'estore/warenkorb', 'route' => 'estore/default/basket', 'composition' => 
-            [
-                'en' => 'estore/the-basket',
-                'de' => 'estore/der-warenkorb'
-            ]
-        ],
-    ];
+echo Yii::t('app', 'title_top');
 ```
 
-Links
------
-+ [Mehr zum Thema Messages in der Yii Dokumentation](http://www.yiiframework.com/doc-2.0/guide-tutorial-i18n.html#message-translation)
+This would return *Hello everyone, i am title top!*.
+
+### Using translation in Twig
+
+There is also a twig function which allows you to retrieve the content like in Yii:t:
+
+```
+t('app', 'title_top')
+```
+
+### Placholders as Parameters
+
+Sometimes you may want to add a placeholder you can fill up with specific content. You can use a key for the placholder or using the array keys:
+
+```php
+return [
+    'today' => 'Today <b>{0}</b>.',
+    'tomorrow' => 'Tomorrow is the <b>{date}</b>.',
+];
+```
+
+The first example `today` could be used like this:
+
+```php
+echo Yii::t('app', 'today', time());
+```
+
+while the second example needs a speicifc key `date` as parameter:
+
+```php
+echo Yii::t('app', 'tomorrow', ['date' => time()]);
+```

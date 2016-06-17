@@ -4,60 +4,124 @@ namespace admin\models;
 
 use Yii;
 
+/**
+ * Language Model for Frontend/Admin.
+ * 
+ * This Model contains all languages from the database table `admin_lang` but also has helper methods
+ * to retrieve the curent active language based on several inputs like composition, config values, etc.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class Lang extends \admin\ngrest\base\Model
 {
-    private static $_langInstance = null;
-
-    private static $_langInstanceQuery = null;
-    
-    private static $_langInstanceFindActive = null;
-
-    public function ngRestApiEndpoint()
-    {
-        return 'api-admin-lang';
-    }
-
-    public function ngRestConfig($config)
-    {
-        $config->list->field('name', 'Name')->text();
-        $config->list->field('short_code', 'Kurz-Code')->text();
-
-        $config->create->copyFrom('list', ['id']);
-        $config->update->copyFrom('list', ['id']);
-
-        return $config;
-    }
-
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \yii\db\BaseActiveRecord::init()
+     */
     public function init()
     {
         parent::init();
-        $this->on(self::EVENT_BEFORE_INSERT, [$this, 'beforeCreate']);
+        
+        /**
+         * After validation event find out if default has to be set or not. Check if if current value
+         * has default to 1, disabled the other default attributes.
+         */
+        $this->on(self::EVENT_BEFORE_INSERT, function($event) {
+        	if ($this->is_default == 1) {
+        		self::updateAll(['is_default' => 0]);
+        	}
+        });
+        
+        $this->on(self::EVENT_BEFORE_UPDATE, function($event) {
+        	if ($this->is_default == 1) {
+        		$this->markAttributeDirty('is_default');
+        		self::updateAll(['is_default' => 0]);
+    		}
+        });
     }
-
+    
+    /**
+     * 
+     * @return string
+     */
     public static function tableName()
     {
         return 'admin_lang';
     }
-
+    
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \yii\base\Model::rules()
+     */
     public function rules()
     {
         return [
             [['name', 'short_code'], 'required'],
+            [['is_default'], 'integer'],
         ];
     }
-
+    
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \yii\base\Model::scenarios()
+     */
     public function scenarios()
     {
         return [
-            'restcreate' => ['name', 'short_code'],
-            'restupdate' => ['name', 'short_code'],
+            'restcreate' => ['name', 'short_code', 'is_default'],
+            'restupdate' => ['name', 'short_code', 'is_default'],
         ];
     }
-
-    public function beforeCreate()
+    
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \yii\base\Model::attributeLabels()
+     */
+    public function attributeLabels()
     {
-        $this->is_default = 0;
+        return [
+            'name' => 'Name',
+            'short_code' => 'Short Code',
+            'is_default' => 'Default Language',
+        ];
     }
+    
+    /**
+     *
+     * {@inheritDoc}
+     * @see \admin\ngrest\NgRestModeInterface::ngRestApiEndpoint()
+     */
+    public static function ngRestApiEndpoint()
+    {
+        return 'api-admin-lang';
+    }
+
+    public function ngrestAttributeTypes()
+    {
+        return [
+            'name' => 'text',
+            'short_code' => 'text',
+            'is_default' => ['toggleStatus', 'initValue' => 0],
+        ];
+    }
+    
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \admin\ngrest\NgRestModeInterface::ngRestConfig()
+     */
+    public function ngRestConfig($config)
+    {
+        $this->ngRestConfigDefine($config, ['list', 'create', 'update'], ['name', 'short_code', 'is_default']);
+        
+        return $config;
+    }
+    
+    private static $_langInstanceQuery = null;
 
     /**
      * @return array
@@ -71,6 +135,8 @@ class Lang extends \admin\ngrest\base\Model
         return self::$_langInstanceQuery;
     }
 
+    private static $_langInstance = null;
+    
     /**
      * 
      * @return array
@@ -84,6 +150,8 @@ class Lang extends \admin\ngrest\base\Model
         return self::$_langInstance;
     }
 
+    private static $_langInstanceFindActive = null;
+    
     /**
      * Get the active langauge array 
      * 

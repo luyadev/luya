@@ -1,4 +1,4 @@
-var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angular-loading-bar", "ngFileUpload", "ngWig", "slugifier"]);
+var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angular-loading-bar", "ngFileUpload", "ngWig", "slugifier", "flow"]);
 
 
 /**
@@ -105,6 +105,16 @@ function typeCastValue(value) {
 		}
 	})
 	
+	zaa.filter('trustAsUnsafe', function($sce) {
+	    return function(val, enabled) {
+	        return $sce.trustAsHtml(val);
+	    };
+	});
+	
+	/**
+	 * Controller: $scope.content = $sce.trustAsHtml(response.data);
+	 * Template: <div compile-html ng-bind-html="content"></div>
+	 */
 	zaa.directive("compileHtml", function($compile, $parse) {
 		return {
 			restrict: "A",
@@ -337,7 +347,7 @@ function typeCastValue(value) {
 	});
 	
 	// factory.js
-	zaa.factory("authInterceptor", function($rootScope, $q) {
+	zaa.factory("authInterceptor", function($rootScope, $q, AdminToastService) {
 		return {
 			request: function (config) {
 				config.headers = config.headers || {};
@@ -348,6 +358,10 @@ function typeCastValue(value) {
 			responseError: function(data) {
 				if (data.status == 401) {
 					window.location = "admin/default/logout";
+				}
+				
+				if (data.status != 422){ 
+				AdminToastService.error("Response Error: " + data.status + " " + data.statusText, 5000);
 				}
 				return $q.reject(data);
 			}

@@ -50,4 +50,13 @@ class CommonController extends \admin\base\RestController
     
         return true;
     }
+    
+    public function actionDataModules()
+    {
+        $data = [];
+        foreach (Yii::$app->getFrontendModules() as $k => $f) {
+            $data[] = ['value' => $k, 'label' => $k];
+        }
+        return $data;
+    }
 }

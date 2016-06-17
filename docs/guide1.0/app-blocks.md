@@ -85,14 +85,14 @@ class TestBlock extends \cmsadmin\base\Block
 
 ### Methods explained
 
-| Name | Return | Description
+|Name |Return |Description
 | ---- | --------| ------------
-| icon | string | Return the [Materialize-Icon](https://design.google.com/icons/) name
-| name | string | Return the Humand Readable name for the administration area.
-| config | array | Define all config variables there user can input in the administration area `cfgs`, `vars` and `placeholders`.
-| extraVars | array | Define additional variables to your template, so you can reuse them inside your view with `extras.VAR_NAME`.
-| twigFrontend | string | Returns the [Twig](http://twig.sensiolabs.org/) template to display in the frontend.
-| twigAdmin | string | Returns the [Twig.js](https://github.com/justjohn/twig.js/wiki) template to be display in the administration area.
+|icon |string |Return the [Materialize-Icon](https://design.google.com/icons/) name
+|name |string |Return the Humand Readable name for the administration area.
+|config |array |Define all config variables there user can input in the administration area `cfgs`, `vars` and `placeholders`. Read more about [CMS Block Config and different input types](app-block-types.md).
+|extraVars |array |Define additional variables to your template, so you can reuse them inside your view with `extras.VAR_NAME`.
+|twigFrontend |string |Returns the [Twig](http://twig.sensiolabs.org/) template to display in the frontend.
+|twigAdmin |string |Returns the [Twig.js](https://github.com/justjohn/twig.js/wiki) template to be display in the administration area.
 
 Caching
 -------
@@ -218,7 +218,7 @@ the folder will be created on import. Now blocks can belong to this folder, to d
 ```
 public function getBlockGroup()
 {
-    return \app\blocksgroups\MySuperGroup::className();
+    return \app\blockgroups\MySuperGroup::className();
 }
 ```
 

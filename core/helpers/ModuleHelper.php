@@ -4,11 +4,12 @@ namespace luya\helpers;
 
 use Yii;
 use luya\base\ModuleReflection;
+use luya\Exception;
 
 /**
  * Module Helper class
  * 
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class ModuleHelper
 {

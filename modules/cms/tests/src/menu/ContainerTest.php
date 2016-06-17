@@ -39,8 +39,7 @@ class ContainerTest extends CmsFrontendTestCase
     public function testOffsetArrayAccess()
     {
         $menu = Yii::$app->menu;
-        $this->assertEquals(10, count($menu['de']));
-        $this->assertEquals(10, count($menu['en']));
+        $this->assertEquals(13, count($menu['en']));
     }
     
     public function testCurrentAppendix()

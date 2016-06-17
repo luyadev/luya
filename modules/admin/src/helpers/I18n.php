@@ -35,7 +35,6 @@ class I18n
      */
     public static function decode($value, $onEmptyValue = '')
     {
-        $langShortCode = Yii::$app->adminLanguage->getActiveShortCode();
         $languages = Yii::$app->adminLanguage->getLanguages();
     
         // if its not already unserialized, decode it
@@ -47,6 +46,11 @@ class I18n
             }
         }
     
+        // if value is empty, we create an empty array
+        if (empty($value)) {
+            $value = [];
+        }
+        
         // fall back for not transformed values
         if (!is_array($value)) {
             $value = (array) $value;
@@ -55,6 +59,8 @@ class I18n
         // add all not existing languages to the array (for example a language has been added after the database item has been created)
         foreach ($languages as $lang) {
             if (!array_key_exists($lang['short_code'], $value)) {
+                $value[$lang['short_code']] = $onEmptyValue;
+            } elseif (empty($value[$lang['short_code']])) {
                 $value[$lang['short_code']] = $onEmptyValue;
             }
         }
@@ -65,13 +71,14 @@ class I18n
     /**
      * Find the corresponding element inside an array for the current active language
      *
-     * @param array $fieldValues
+     * @param array $fieldValues The array you want to to find the current
+     * @param mixed $onEmptyValue The value you can set when the language could not be found
      * @return string|unknown
      */
-    public static function findCurrent(array $fieldValues)
+    public static function findCurrent(array $fieldValues, $onEmptyValue = '')
     {
         $langShortCode = Yii::$app->adminLanguage->getActiveShortCode();
     
-        return (array_key_exists($langShortCode, $fieldValues)) ? $fieldValues[$langShortCode] : '';
+        return (array_key_exists($langShortCode, $fieldValues)) ? $fieldValues[$langShortCode] : $onEmptyValue;
     }
 }

@@ -1,33 +1,50 @@
 <?php
 
-namespace admintests\admin\base;
+namespace tests\admin\base;
 
-use admintests\AdminTestCase;
 use admin\base\Filter;
+use admintests\AdminTestCase;
 
-class DummyFilter extends Filter
+class MyFilter extends Filter
 {
     public function identifier()
     {
-        return 'dummytestfilter';
+        return 'my-test-filter';
     }
-    
+
     public function name()
     {
-        return 'dummy test filter';
+        return 'Mein Test Filter';
     }
-    
+
     public function chain()
     {
-        return [];
+        return [
+            [self::EFFECT_THUMBNAIL, [
+                'width' => 200,
+                'height' => 100,
+            ]],
+            [self::EFFECT_CROP, [
+                'width' => 200,
+                'height' => 100,
+            ]],
+        ];
     }
 }
 
 class FilterTest extends AdminTestCase
 {
-    public function testFilterObject()
+    public function testBase()
     {
-        $o = new DummyFilter();
-        $this->assertEmpty($o->getChain());
+        $filter = new MyFilter();
+        $this->assertEquals(true, is_object($filter));
+        // comment out as it requers databse
+        //$this->assertEquals(true, is_object($filter->findModel()));
+        //$this->assertEquals(true, is_array($filter->findEffect($filter::EFFECT_RESIZE)));
+        //$chain = $filter->getChain();
+        //$this->assertEquals(true, is_array($chain));
+        //$this->arrayHasKey('effect_id', $chain[0]);
+        //$this->arrayHasKey('effect_json_values', $chain[0]);
+
     }
 }

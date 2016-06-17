@@ -50,6 +50,7 @@ class Module extends \admin\base\Module
 
     public $assets = [
         'admin\assets\Main',
+        'admin\assets\Flow',
     ];
 
     public $registerJsTranslation = [

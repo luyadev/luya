@@ -1,6 +1,8 @@
 Menu Navigation
 ===========
 
+The `menu` component allows you to collect data to build the websites navigations. The menu component is part of the `cms` module.
+
 You can access the `menu` component trough `Yii::$app->menu`. This component will help you to create menus, find childs, get items of containers, etc. The menu component will automatically added to the componsten when you register the cms (menu component is part of the cms module).
 
 When you request a menu item you will always get a [Menu-Item-Object](https://luya.io/api/cms-menu-item.html) object which provides a lot of getter methods.
@@ -99,14 +101,17 @@ echo Yii::$app->composition->full;
 Link syntax in CMS blocks
 ------------------------
 
-We have built some small helper commands you can use whever you are in your cms:
+We have built some small helper commands you can use whever you are in your cms. You can also parse our own content with `cms\helpers\TagParser::convert($content)`.
 
-|Link Syntax        |Html Ausgabe
-|----               |----
-|`link [3] (Alternative Link Name)`  |`<a href="url/to/3">Alternative Link Name</a>`
+|Link Syntax|Output/Description
+|----       |----		
+|`link [3] (Alternativ Link Name)`  |`<a href="url/to/3">Alternativ Link Name</a>`
 |`link [3]`                           |`<a href="url/to/3">Name of 3</a>`
 |`link [www.luya.io]`                 |`<a href="http://www.luya.io">luya.io</a>`
 |`link [luya.io] (go to Docu)` |`<a href="http://luya.io">Go to docu</a>`
+|`link [//go/there]`|`<a href="http://example.com/go/there">go/there</a>` The slash will be replaced be the current domain.
+|`link [//go/there] (relativ link description)`|`<a href="http://example.com/go/there">relativ link description</a>`
+|`file [1]` |Get the path to the file with the ID 1
 
 **ATTENTION:** The obven metnioned `Link Syntax` muss be used **without** Whitspaces.
 

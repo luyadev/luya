@@ -82,7 +82,7 @@ class User extends \admin\ngrest\base\Model implements \yii\web\IdentityInterfac
 
     /* NgRest */
     
-    public function ngRestApiEndpoint()
+    public static function ngRestApiEndpoint()
     {
         return 'api-account-user';
     }

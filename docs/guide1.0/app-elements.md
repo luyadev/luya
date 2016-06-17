@@ -1,33 +1,23 @@
-Html Element Komponenten
-========================
+# Html Element Component
 
-> TO BE TRANSLATED
+The basic idea behind the *HTML Element Component* is based on a behavior known from *Angular Directives*. In a huge web project you have several html parts you may have to use an several locations but with different contents. Lets assume you have a Teaser-Box which contains a title and a picture, so the variables are the picture and the title, but the html base will be the same on all pages.
 
-Die Idee hinter den *Html Element Komponenten* basiert auf den *Angular Direktiven*. Ein vielzahl von Strukturierten Element welche wieder verwendet werden können an verschiedenen Orten. Ein Beispiel für eine Element Komponenten *Teaser-Box*, der Html Code
+Casual Example of an html partial you may reuse in different pages with different content.
 
 ```html
 <div class="teaser-box">
-    <h1>Titel</h1>
-    <p>Beschreibung</p>
+    <h1>Title</h1>
+    <p>Description</p>
     <a class="btn btn-primary" href="https://luya.io">Mehr erfahren</a>
 </div>
 ```
 
-wird in mehreren Templates immer wieder verwendet. Sobald sich diese Element Komponenten *Teaser-Box* verändert und zbsp. ein zusätzliches Wrapper Div anfügt, muss dies jeweils an allen verwendeten stellen angepasst werden.
+Now you can create an html element component for this.
 
-```html
-<div class="teaser-box">
-    <div class="teaser-box-wrapper">
-        <h1>Titel</h1>
-        <p>Beschreibung</p>
-        <a class="btn btn-primary" href="https://luya.io">Mehr erfahren</a>
-    </div>
-</div>
-```
 
-Elemente hinzufügen
---------------------
-Um diese Problem zu lösen verwenden wir die *Element Komponente*. Im Root Ordner deines Projekts (`@app`) kannst du eine `elements.php` Datei erstellen welche ein Array mit Element zurück gibt. Ein Element besteht aus einem *Namen* und einer *Closure* wobei die Closure verschiedene Funktionen erledigen kann. Um einen saubere und sinvolle Struktur aufzubauen verwenden so viel möglich Teilbare Elemente die später verändert werden können.
+## Create Element and Use
+
+To add a new html element component, go into your Application Folder (@app) and create a php file with the name `elements.php`. This file will contain all the element partials for this Project. An element is defined by a *name* and a corresponding *closure*. Below en example setup for `elements.php` file:
 
 ```php
 <?php
@@ -41,54 +31,56 @@ return [
 ];
 ```
 
-Das oben abgebildete Beispiel von `elements.php` enthält 2 Elemente:
+> Elements can also be added in a more dynamic way, by accessing the *element* component in your controller:  `Yii::$app->element->addElement('elementName', function() { });`.
 
-1. Button: Ein Template für einen Knopf
-2. Teaserbox: Eine Teaserbox welche wiederum das Button Element einfügt.
+To use a defined element you can access the `element` Component which is registered to any LUYA project by default, `Yii::$app->element`.
 
-> Elemente können natürlich jederzeit auch dynamisch registriert werden über `Yii::$app->element->addElement('elementName', function() { });`.
-
-Elemente benutzen
-=================
-Um die oben hinzugefügten Element *button* und *teaserbox* zu verwenden kannst du in jeder beliebigen Code stelle (controller, views, layouts) die Komponenten `Yii::$app->element` wie folgt benutzen:
+You can directly call the name of your element:
 
 ```php
-echo Yii::$app->element->button('https://luya.io', 'Mehr erfahren');
+echo Yii::$app->element->button('https://luya.io', 'Go to website');
 ```
 
-> In einer View-Datei (layouts, views) muss das Element mit `echo` ausgegeben werden.
+Where `button` is the name of the element closure defined in your elements.php file. In order to get and render an element in twig use the following function:
 
-In einem Twig-Template kann die Funktion `element` wie folgt verwendet werden:
-
-```
-{{ element('button', 'https://luya.io', 'Mehr erfahren') }}
+```twig
+{{ element('button', 'https://luya.io', 'Go to website') }}
 ```
 
-Wobei der erste Parameter dem aufzurufenden Element entspricht und die nachfolgenden Parameter der Element-Funktions Parameter entsprechen.
+## Render view file
 
-Rendern
-=======
-Bei komplexeren Elementen ist das Verknüpfen (concatenation) von String und Variablen keine bequeme sache. Aus diesem Grund kann innerhalb der Closure-Funktion auch die `render()` Methoden aufgerufen werden um Twig Files zu rendern mit dere dazugehörigen Parametern.
+
+When you have a more complex html element, the possibility to concate the html parts seems to look a little ugly, for this reason you can also render a view file with the function `render()`. This mehtod will render a defined TWIG file which is located in *@app/views/elements/__NAME__.twig*.
 
 ```php
-//...
-'button' => function($href, $name) {
+'myElementButton' => function($href, $name) {
     return $this->render('button', ['href' => $href, 'name' => $name ]);
-},
-//..
+}
 ```
 
-Dies wird im Verzeichnes `@app/views/elements` nach der Twig-Datei `button.twig` suchen und dieser Rendern. So könnten `@app/views/elements/button.twig` zum beispiel aussehen:
+The above example will render the file `button` with the paremeters `['href' => $href, 'name' => $name ]`. The twig file (*button*) must be stored in the folder `@app/views/elements` with the name `button.php`. An example content of `@app/views/elements/button.php` could look like this:
 
+```php
+<a href="<?= $href; ?>" class="btn btn-primary"><?= $name; ?></a>
 ```
-<a href="{{ href }}" class="btn btn-primary">{{ name }}</a>
-```
+
+> You can also use twig by configuring the element component propertie `renderEngine = 'twig'`.
 
 ### Rekursives Rendering
 
-Natürlich ist auch erlaubt in Twig-Datei andere element anzusprechen. Somit würde im Beispiel der Teaserbox das Template wie folgt aussehen:
+Sometimes you want to render another element component inside another template, you can use the above mentioned `element` twig function. Example recursiv rendering:
 
+```php
+<div class="teaser-box">
+    <h1><?= $title; ?></h1>
+    <p><?= $description; ?></p>
+    <?= Yii::$app->element->button($buttonHref, $buttonName); ?>
+</div>
 ```
+
+or in twig template syntax
+
+```twig
 <div class="teaser-box">
     <h1>{{ title }}</h1>
     <p>{{ description }}</p>
@@ -96,13 +88,19 @@ Natürlich ist auch erlaubt in Twig-Datei andere element anzusprechen. Somit wü
 </div>
 ```
 
-Das obenzeigte Template setzt natürlich voraus das alle Variabeln `title`, `description`, `buttonHref` und `buttonName` in die render methode assigend wurden.
+Of course the above example requires also that you have assigned the variables `title`, `description`, `buttonHref` und `buttonName` passed to the recursiv element rendering of button.
 
-Styleguide
-==========
-Um einen Styleguide output aufzurufen muss in der `composer.json` Datei `require : { "luyadev/luya-module-styleguide" : "dev-master" }` hinterlegt werden und via composer update installiert werden.
+# Automatic Styleguide from Elements 
 
-Danach muss das Module in der Config hinzugefügt werden:
+We have build a styleguide modules which renders all the available elements with example content, so you can share all the elements with other designer and make and discuss changes based on elements on not just on a finished web page, this gives you the ability to make more specific changes.
+
+Add the luya style guide module to your composer json
+
+```sh
+require luyadev/luya-module-styleguide
+```
+
+Configure the Module in your project config, the password is protected this page by default.
 
 ```php
 return [
@@ -117,6 +115,6 @@ return [
 ]
 ```
 
-> Die `password` eigenschaft dient dazu den Styleguide mit einem Passwort zu schützen damit dieser nicht von jederman aufgerufen werden kann.
+When you have successfull configure the styleguide module you can access it trough the url:
 
-Um den Styleguide aufzurufen besuche nun die Url `http://deinwebsite.com/styleguide`.
+(http://mywebsite.com/styleguide)[http://mywebsite.com/styleguide]

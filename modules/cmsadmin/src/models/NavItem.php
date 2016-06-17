@@ -7,6 +7,7 @@ use admin\models\Lang;
 use yii\base\Exception;
 use yii\helpers\Inflector;
 use admin\base\GenericSearchInterface;
+use cmsadmin\Module;
 
 /**
  * NavItem Model represents a Item bound to Nav and Language, each Nav(Menu) can contain a nav_item for each language.Each 
@@ -75,7 +76,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     {
         return [
             [['lang_id', 'title', 'alias', 'nav_item_type'], 'required'],
-            [['nav_id', 'description', 'keywords'], 'safe'],
+            [['nav_id', 'description', 'keywords', 'nav_item_type_id'], 'safe'],
         ];
     }
 
@@ -221,15 +222,15 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     {
         $this->timestamp_create = time();
         $this->timestamp_update = 0;
-        $this->create_user_id = Yii::$app->adminuser->getId();
-        $this->update_user_id = Yii::$app->adminuser->getId();
+        $this->create_user_id = Module::getAuthorUserId();
+        $this->update_user_id = Module::getAuthorUserId();
         $this->slugifyAlias();
     }
     
     public function eventBeforeUpdate()
     {
         $this->timestamp_update = time();
-        $this->update_user_id = Yii::$app->adminuser->getId();
+        $this->update_user_id = Module::getAuthorUserId();
         $this->slugifyAlias();
     }
 

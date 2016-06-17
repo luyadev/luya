@@ -12,7 +12,9 @@
 				$scope.crud = $scope.$parent;
 				
 				$scope.init = function() {
-					$scope.crud.toggleUpdate($stateParams.id);
+					if (!$scope.crud.config.inline) {
+						$scope.crud.toggleUpdate($stateParams.id);
+					}
 				}
 				
 				$scope.init();
@@ -21,6 +23,13 @@
 	});
 	
 	// CrudController.js
+	/**
+	 * Base Crud Controller
+	 * 
+	 * Assigned config variables from the php view assigned from child to parent:
+	 * 
+	 * + bool $config.inline Determines whether this crud is in inline mode orno
+	 */
 	zaa.controller("CrudController", function($scope, $filter, $http, $sce, $state, $timeout, AdminLangService, LuyaLoading, AdminToastService) {
 		
 		LuyaLoading.start();
@@ -41,10 +50,36 @@
 		
 		$scope.switchTo = function(type) {
 			if (type == 0 || type == 1) {
-				$state.go('default.route');
+				if (!$scope.inline) {
+					$state.go('default.route');
+				}
 			}
 			$scope.crudSwitchType = type;
 		};
+		
+		
+		/* export */
+		
+		$scope.exportLoading = false;
+		
+		$scope.exportResponse = false;
+		
+		$scope.exportDownloadButton = false;
+		
+		$scope.exportData = function() {
+			$scope.exportLoading = true;
+			$http.get($scope.config.apiEndpoint + '/export').success(function(response) {
+				$scope.exportLoading = false;
+				$scope.exportResponse = response;
+				$scope.exportDownloadButton = true;
+			});
+		};
+		
+		$scope.exportDownload = function() {
+			$scope.exportDownloadButton = false;
+			window.open($scope.exportResponse.url);
+			return false;
+		}
 		
 		/* old definitions */
 		
@@ -80,6 +115,10 @@
 			$scope.data.list = $filter('orderBy')($scope.data.list, sort + field);
 		};
 		
+		$scope.activeWindowReload = function() {
+			$scope.getActiveWindow($scope.data.aw.hash, $scope.data.aw.itemId);
+		}
+		
 		$scope.getActiveWindow = function (activeWindowId, id, $event) {
 			$http.post('admin/ngrest/render', $.param({ itemId : id, activeWindowHash : activeWindowId , ngrestConfigHash : $scope.config.ngrestConfigHash }), {
 				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
@@ -92,7 +131,7 @@
 				$scope.data.aw.hash = activeWindowId;
 				$scope.data.aw.id = activeWindowId; /* @todo: remove! BUT: equal to above, but still need in jquery accessing */
 				$scope.data.aw.content = $sce.trustAsHtml(data);
-				//dispatchEvent('onCrudActiveWindowLoad');
+				$scope.$broadcast('awloaded', {id: activeWindowId});
 			})
 		};
 	
@@ -143,7 +182,9 @@
 			$http.get($scope.config.apiEndpoint + '/'+id+'?' + $scope.config.apiUpdateQueryString).success(function(data) {
 				$scope.data.update = data;
 				$scope.switchTo(2);
-				$state.go('default.route.detail', {id : id});
+				if (!$scope.inline) {
+					$state.go('default.route.detail', {id : id});
+				}
 			}).error(function(data) {
 				AdminToastService.error(i18n['js_ngrest_error'], 2000);
 			});
@@ -209,6 +250,12 @@
 			});
 		};
 	
+		$scope.loadService = function() {
+			$http.get($scope.config.apiEndpoint + '/services').success(function(serviceResponse) {
+				$scope.service = serviceResponse;
+			});
+		}
+		
 		$scope.loadList = function() {
 			LuyaLoading.start();
 			$http.get($scope.config.apiEndpoint + '/services').success(function(serviceResponse) {

@@ -15,17 +15,17 @@
 echo "<?php\n";
 ?>
 
-namespace <?php echo $namespace; ?>;
+namespace <?= $namespace; ?>;
 
 use Yii;
 
 /**
- * NgRest Model created at <?php echo date("d.m.Y H:i"); ?> on LUYA Version <?php echo $luyaVersion; ?>.
+ * NgRest Model created at <?= date("d.m.Y H:i"); ?> on LUYA Version <?= $luyaVersion; ?>.
  *
 <?php foreach ($properties as $name => $type): ?> * @property <?= $type; ?> $<?= $name . PHP_EOL; ?>
 <?php endforeach;?>
  */
-<?php if (!$extended): ?>abstract <?endif;?>class <?php echo $className; ?> extends \admin\ngrest\base\Model
+<?php if (!$extended): ?>abstract <?php endif; ?>class <?= $className; ?> extends \admin\ngrest\base\Model
 {
     <?php if ($extended): ?>
     /**
@@ -44,7 +44,7 @@ use Yii;
         return [
         <?php foreach ($allFieldNames as $name): ?>
     '<?= $name; ?>' => Yii::t('app', '<?= \yii\helpers\Inflector::humanize($name); ?>'),
-        <?php endforeach;?>];
+        <?php endforeach; ?>];
     }
     
     /**
@@ -85,7 +85,7 @@ use Yii;
     /**
      * @return string Defines the api endpoint for the angular calls
      */
-    public function ngRestApiEndpoint()
+    public static function ngRestApiEndpoint()
     {
         return '<?= $apiEndpoint; ?>';
     }
@@ -98,11 +98,14 @@ use Yii;
         return [
         <?php foreach ($fieldConfigs as $name => $type): ?>
     '<?=$name; ?>' => '<?= $type;?>',
-        <?endforeach;?>];
+        <?php endforeach; ?>];
     }
     
     /**
-     * @return \admin\ngrest\Config the configured ngrest object
+     * Define the NgRestConfig for this model with the ConfigBuilder object.
+     *
+     * @param \admin\ngrest\ConfigBuilder $config The current active config builder object.
+     * @return \admin\ngrest\ConfigBuilder
      */
     public function ngRestConfig($config)
     {

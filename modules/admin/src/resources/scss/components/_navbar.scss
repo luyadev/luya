@@ -1,226 +1,225 @@
 .nav-wrapper {
-	padding-#{$navbar__search--position}: 60px;
+    padding-#{$navbar__search--position}: 60px;
 }
 
 .navbar__button {
-	padding: 0 15px;
-	cursor: pointer;
-	max-height: 64px;
-	// transition: 0.25s ease background-color;
+    cursor: pointer;
+    max-height: 64px;
+    padding: 0 15px;
+    // transition: 0.25s ease background-color;
 
-	&.navbar__button__circle {
-		min-height: 64px;
-		// transition: 0.25s ease color;
+    &.navbar__button__circle {
+        min-height: 64px;
+        // transition: 0.25s ease color;
 
-		.icon__spawn-text {
-			top:-15px;
-		}
-	}
+        .icon__spawn-text {
+            top: -15px;
+        }
+    }
 
-	&.navbar__button--redhighlight:hover {
-		i,
-		.icon__spawn-text {
-			color: color("red", "base");
-		}
-	}
+    &:hover {
+        background-color: color("blue", "darken-2");
 
-	&:hover {
-		background-color: color("grey", "lighten-3");
+        .icon__spawn-text {
+            opacity: 1;
+        }
 
-		.icon__spawn-text {
-			opacity: 1;
-		}
+        .navbar__button__circle-icon {
+            border-color: color("shades", "white");
+        }
 
-		.navbar__button__circle-icon {
-			border-color: color("blue", "base");
-		}
+        i,
+        strong,
+        .icon__spawn-text,
+        .navbar__button__circle-usercount {
+            color: color("shades", "white");
 
-    	i,
-		strong,
-		.icon__spawn-text,
-    	.navbar__button__circle-usercount {
-			color: color("blue", "base");
-
-		}
-	}	
+        }
+    }
 }
+
 .navbar__item {
-	// background-color: color("grey", "lighten-3");
-	&.navbar__item--active {
-		color: color("blue", "base");
-		background-color: color("grey", "lighten-3");
-		.navbar__link {
-			color: color("blue", "base");
-		}
-	}
+    // background-color: color("grey", "lighten-3");
+    &.navbar__item--active {
+        background-color: color("blue", "darken-2");
+        color: color("shades", "white");
+        .navbar__link {
+            color: color("shades", "white");
+        }
+    }
 }
 
 .navbar__button__anchor {
-	padding: 0;
+    padding: 0;
 }
+
 .navbar__right {
-	li {
-		max-height: 64px;
-	}
+    li {
+        max-height: 64px;
+    }
 }
+
 .navbar__button__circle-icon {
-	display: block;
-	position: relative;
-	border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    top: 16px;
     border: 3px solid;
     border-color: #fff;
-	// transition: 0.25s ease border-color;
+    border-radius: 50%;
+    display: block;
+    height: 32px;
     margin: 0 auto;
-}
-.navbar__button__circle-usercount {
-	text-align: center;
-    margin-top: -18px;
-}
-.icon__spawn-text {
-   	height: 0;
-   	opacity: 0;
-   	
-   	// transition: 0.25s ease opacity;
     position: relative;
-    top: -48px;
-    font-size: 8px;
+    top: 16px;
+    // transition: 0.25s ease border-color;
+    width: 32px;
+}
+
+.navbar__button__circle-usercount {
+    margin-top: -18px;
     text-align: center;
 }
+
+.icon__spawn-text {
+    font-size: 8px;
+    height: 0;
+
+    // transition: 0.25s ease opacity;
+    opacity: 0;
+    position: relative;
+    text-align: center;
+    top: -48px;
+}
+
 //MY END
 
 /**
  * #NAVBAR__LINK
  */
 .navbar__link {
-	font-size: 0.9rem;
-	cursor: pointer;
+    cursor: pointer;
+    font-size: 0.9rem;
 
-	.navbar__icon.left {
-		font-size: 1.3rem;
-	}
+    .navbar__icon.left {
+        font-size: 1.3rem;
+    }
 }
 
 /**
  * #NAVBAR__ICON
  */
 .navbar__icon {
-	&.right {
-		margin-left: 8px;
-	}
-	&.left {
-		margin-right: 8px;
-	}
+    &.right {
+        margin-left: 8px;
+    }
+    &.left {
+        margin-right: 8px;
+    }
 }
 
 /**
  * #NAVBAR__SEARCH
  */
 .navbar__search-wrapper {
-	position: absolute;
-	#{$navbar__search--position}: 0;
-	width: 60px;
-	transition: 0.25s ease position, 0.25s ease width, 0.25s ease background-color;
-	height: 56px;
-	z-index: 800;
+    height: 56px;
+    position: absolute;
+    transition: 0.25s ease position, 0.25s ease width, 0.25s ease background-color;
+    width: 60px;
+    z-index: 800;
+    #{$navbar__search--position}: 0;
 
-	&.navbar__search-wrapper--wide {
-		position: absolute;
-		width: $navbar__search--width-mobile;
+    &.navbar__search-wrapper--wide {
+        position: absolute;
+        width: $navbar__search--width-mobile;
 
-		@media (min-width: 600px) {
-			width: $navbar__search--width;
-		}
-	}
-	&:hover {
-		background-color: color("blue", "darken-1");
-	}
+        @media (min-width: 600px) {
+            width: $navbar__search--width;
+        }
+    }
+    &:hover {
+        background-color: color("blue", "darken-1");
+    }
 
-	@media (min-width: 600px) {
-		height: 64px;
-	}
+    @media (min-width: 600px) {
+        height: 64px;
+    }
 }
 
 .navbar__search {
-	height: 100%;
-	width: 100%;
-	display: inline-block;
-	position: relative;
+    display: inline-block;
+    height: 100%;
+    position: relative;
+    width: 100%;
 }
 
 .navbar__search-input {
-	box-sizing: border-box !important;
-	margin: 0 !important;
-	height: 100%;
-	width: 100% !important;
-	max-width: 100%;
-	padding: 0 !important;
-	transition: 0.4s 0.25s ease color, 0.4s 0.25s ease background-color !important;
-	outline: none;
-	background-color: transparent;
+    background-color: transparent;
+    box-sizing: border-box !important;
+    height: 100%;
+    margin: 0 !important;
+    max-width: 100%;
+    outline: none;
+    padding: 0 !important;
+    transition: 0.4s 0.25s ease color, 0.4s 0.25s ease background-color !important;
+    width: 100% !important;
 
-	& + label i {
-		color: color("shades", "white") !important;
-	}
+    & + label i {
+        color: color("shades", "white") !important;
+    }
 
-	.navbar__search--open & {
-		background-color: color("shades", "white") !important;
-		border: 0 !important;
-		box-shadow: none !important;
-		color: color("grey", "darken-3") !important;
-		transition: 0.25s ease width, 0.25s ease color, 0.25s ease background-color !important;
-		padding: 0 60px !important;
+    .navbar__search--open & {
+        background-color: color("shades", "white") !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        color: color("grey", "darken-3") !important;
+        padding: 0 60px !important;
+        transition: 0.25s ease width, 0.25s ease color, 0.25s ease background-color !important;
 
-		& + label i,
-		& + label + i {
-			color: color("grey", "darken-3") !important;
-}
-	}
+        & + label i,
+        & + label + i {
+            color: color("grey", "darken-3") !important;
+        }
+    }
 
-	.navbar__search:not(.navbar__search--open) &:focus {
-		color: inherit !important;
-		background-color: inherit !important;
+    .navbar__search:not(.navbar__search--open) &:focus {
+        background-color: inherit !important;
+        color: inherit !important;
 
-		& + label i {
-			color: color("shades", "white") !important;
-		}
-		& + label + i {
-			color: transparent !important;
-		}
-	}
+        & + label i {
+            color: color("shades", "white") !important;
+        }
+        & + label + i {
+            color: transparent !important;
+        }
+    }
 }
 
 .navbar__search-label {
-	position: absolute;
-	z-index: 1;
-	cursor: pointer !important;
-	width: 100% !important;
-	left: 0 !important;
-	text-align: center;
-	transform: translateY(0) !important;
-	font-size: inherit !important;
+    cursor: pointer !important;
+    font-size: inherit !important;
+    left: 0 !important;
+    position: absolute;
+    text-align: center;
+    transform: translateY(0) !important;
+    width: 100% !important;
+    z-index: 1;
 
-	i {
-		display: inline-block !important;
-	}
+    i {
+        display: inline-block !important;
+    }
 
-	.navbar__search--open & {
-		width: auto !important;
-		left: 1rem !important;
-	}
+    .navbar__search--open & {
+        left: 1rem !important;
+        width: auto !important;
+    }
 }
 
 .navbar__search-icon {
-	position: absolute;
-	right: 15px;
-	top: 0;
-	opacity: 0;
-	transition: 0.25s 0.25s ease opacity;
+    opacity: 0;
+    position: absolute;
+    right: 15px;
+    top: 0;
+    transition: 0.25s 0.25s ease opacity;
 
-	.navbar__search--open & {
-		opacity: 1;
-		cursor: pointer;
-	}
+    .navbar__search--open & {
+        cursor: pointer;
+        opacity: 1;
+    }
 }

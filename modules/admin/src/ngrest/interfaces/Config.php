@@ -5,6 +5,7 @@ namespace admin\ngrest\interfaces;
 /**
  * NgRest Config Interface
  * 
+ * @todo rename to ConfigInterface
  * @author Basil Suter <basil@nadar.io>
  */
 interface Config

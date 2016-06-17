@@ -3,7 +3,6 @@
 namespace admin\ngrest\render;
 
 use Yii;
-use DOMDocument;
 use yii\base\View;
 use admin\components\Auth;
 use admin\models\Lang;
@@ -89,14 +88,18 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
     {
         if ($this->_buttons === null) {
             $buttons = [];
-            // get all activeWindows assign to the crud
-            foreach ($this->getActiveWindows() as $hash => $config) {
-                $buttons[] = [
-                    'ngClick' => 'getActiveWindow(\''.$hash.'\', item.'.$this->config->primaryKey.', $event)',
-                    'icon' => $config['icon'],
-                    'label' => $config['alias'],
-                ];
+            
+            if ($this->can(Auth::CAN_UPDATE)) {
+                // get all activeWindows assign to the crud
+                foreach ($this->getActiveWindows() as $hash => $config) {
+                    $buttons[] = [
+                        'ngClick' => 'getActiveWindow(\''.$hash.'\', item.'.$this->config->primaryKey.', $event)',
+                        'icon' => $config['icon'],
+                        'label' => $config['alias'],
+                    ];
+                }
             }
+            
             // check if deletable is enabled
             if ($this->config->isDeletable() && $this->can(Auth::CAN_DELETE)) {
                 $buttons[] = [
@@ -234,24 +237,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
         $html = $obj->$method($elmnId, $elmnModel);
 
         return (is_array($html)) ? implode(" ", $html) : $html;
-        /*
-        //$doc = new DOMDocument('1.0');
-
-        return $this->renderPlugin($doc, $configContext, $typeConfig['class'], $typeConfig['args'], $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmni18n);
-
-        //return trim($doc->saveHTML());
-         
-         */
     }
-
-    /*
-    private function renderPlugin($DOMDocument, $configContext, $className, $classArgs, $elmnId, $elmnName, $elmnModel, $elmnAlias, $elmni18n)
-    {
-        $obj = NgRest::createPluginObject($className, $elmnName, $elmnAlias, $elmni18n, $classArgs);
-        $method = 'render'.ucfirst($configContext);
-        return $obj->$method($elmnId, $elmnModel);
-    }
-    */
 
     private function ngModelString($configContext, $fieldId)
     {

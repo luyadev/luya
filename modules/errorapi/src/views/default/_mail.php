@@ -20,9 +20,9 @@
                     </td>
                     <td style="background-color:#e1e1e1;">
                         <table cellspacing="0" cellpadding="4" border="0">
-                            <?php foreach ($trace as $k => $v): ?>
+                            <?php foreach ($trace as $kt => $vt): ?>
                             <tr>
-                                <td><?php echo $k; ?>:</td><td><?php echo $v; ?></td>
+                                <td><?php echo $kt; ?>:</td><td><?php echo $vt; ?></td>
                             </tr>
                             <?php endforeach; ?>
                         </table>
@@ -33,9 +33,35 @@
         <?php elseif (is_array($value)): ?>
             <table cellspacing="0" cellpadding="4" border="0">
                 <?php foreach ($value as $k => $v): ?>
-                <tr>
-                    <td><?php echo $k; ?>:</td><td><?php echo (is_array($v)) ?  print_r($v, true) : $v; ?></td>
-                </tr>
+                 <?php if ($k == 'trace'): ?>
+                    <tr>
+                        <td><?php echo $k; ?>:</td>
+                        <td>
+                          <table border="0" cellpadding="4" cellspacing="2" width="100%">
+                                <?php foreach ($v as $number => $trace): ?>
+                                <tr>
+                                    <td style="background-color:#e1e1e1; text-align:center;" width="40">
+                                        #<?php echo $number; ?>
+                                    </td>
+                                    <td style="background-color:#e1e1e1;">
+                                        <table cellspacing="0" cellpadding="4" border="0">
+                                            <?php foreach ($trace as $kk => $vv): ?>
+                                            <tr>
+                                                <td><?php echo $kk; ?>:</td><td><?php echo $vv; ?></td>
+                                            </tr>
+                                            <?php endforeach; ?>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </table>
+                        </td>
+                    </tr>
+                 <?php else: ?>
+                    <tr>
+                        <td><?php echo $k; ?>:</td><td><?php echo (is_array($v)) ?  print_r($v, true) : $v; ?></td>
+                    </tr>
+                 <?php endif; ?>
                 <?php endforeach; ?>
             </table>
         <?php else: ?>

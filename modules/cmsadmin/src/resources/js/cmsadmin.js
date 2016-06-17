@@ -96,6 +96,10 @@
             controller : function($scope) {
             	
             	$scope.parent = $scope.$parent.$parent;
+            	
+            	$scope.isEditAvailable = function() {
+            		return $scope.parent.item.nav_item_type == 1;
+            	}
             }
         }
     });
@@ -246,7 +250,7 @@
 		}
 	});
 
-	zaa.directive("createFormModule", function() {
+	zaa.directive("createFormModule", function($http) {
 		return {
 			restrict : 'EA',
 			scope : {
@@ -254,6 +258,12 @@
 			},
 			templateUrl : 'createformmodule.html',
 			controller : function($scope) {
+				
+				$scope.modules = [];
+				
+				$http.get('admin/api-admin-common/data-modules').then(function(response) {
+					$scope.modules = response.data;
+				})
 				
 				$scope.save = function() {
 					$scope.$parent.exec();
@@ -535,7 +545,7 @@
 		$scope.$on('service:LiveEditModeUrlChange', function(event, url) {
 			var d = new Date();
 			var n = d.getTime();
-			$scope.url = url + '?' + n;
+			$scope.url = url + '&' + n;
 		});
 		
 	});
@@ -567,7 +577,7 @@
 		};
 		
 		$scope.go = function(data) {
-			ServiceLiveEditMode.changeUrl(data.nav_item_id);
+			ServiceLiveEditMode.changeUrl(data.nav_item_id, 0);
 			$state.go('custom.cmsedit', { navId : data.id });
 	    };
 		
@@ -776,8 +786,9 @@
 		$scope.storePropValues = function() {
 			var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 			$http.post('admin/api-cms-nav/save-properties?navId='+$scope.id, $.param($scope.propValues), headers).success(function(response) {
-				AdminToastService.success(i18n['js_page_property_refresh'], 2000);
+				AdminToastService.success(i18n['js_page_property_refresh'], 4000);
 				$scope.loadNavProperties();
+				$scope.showPropForm = false;
 			});
 		}
 		
@@ -785,7 +796,7 @@
 	    	
 			AdminToastService.confirm(i18n['js_page_confirm_delete'], function($timeout, $toast) {
 				
-				$http.get('admin/api-cms-nav/delete', { params : { navId : $scope.navData.id }}).success(function(response) {
+				$http.get('admin/api-cms-nav/delete', { params : { navId : $scope.id }}).success(function(response) {
 	    			$scope.isDeleted = true;
 	    			$scope.menuDataReload().then(function() {
 	    				$toast.close();
@@ -871,12 +882,12 @@
 			$scope.liveEditState = n;
 		});
 		
-		$scope.openLiveUrl = function(id) {
-			ServiceLiveEditMode.changeUrl(id);
+		$scope.openLiveUrl = function(id, versionId) {
+			ServiceLiveEditMode.changeUrl(id, versionId);
 		};
 		
 		$scope.loadLiveUrl = function() {
-			ServiceLiveEditMode.changeUrl($scope.item.id);
+			ServiceLiveEditMode.changeUrl($scope.item.id, $scope.currentPageVersion);
 		}
 		
 		// serviceMenuData inheritance
@@ -927,6 +938,9 @@
 				$.param(typeDataCopy),
 				headers
 			).then(function successCallback(response) {
+				if (itemCopy.nav_item_type !== 1) {
+					$scope.currentPageVersion = 0;
+				}
 				$scope.loaded = false;
 				AdminToastService.success(i18nParam('js_page_item_update_ok', {'title': itemCopy.title}), 2000);
 				$scope.menuDataReload();
@@ -984,6 +998,7 @@
 			$scope.container = $scope.typeData[pageVersionid]['contentAsArray'];
 			$scope.currentVersionInformation = $scope.typeData[pageVersionid];
 			$scope.currentPageVersion = pageVersionid;
+			$scope.loadLiveUrl();
 		};
 		
 		$scope.refreshForce = function() {
@@ -1005,7 +1020,7 @@
 				params : { navItemPageId : $scope.currentPageVersion, prevId : prevId, placeholderVar : placeholderVar}
 			}).success(function(response) {
 
-				ServiceLiveEditMode.changeUrl($scope.item.id);
+				ServiceLiveEditMode.changeUrl($scope.item.id, $scope.currentPageVersion);
 				for (var i in $scope.container.__placeholders) {
 					var out = $scope.revPlaceholders($scope.container.__placeholders[i], prevId, placeholderVar, response);
 					if (out !== false ) {
@@ -1114,6 +1129,8 @@
 			    method: "GET",
 			    params: { blockId : $scope.block.id, hiddenState: $scope.block.is_hidden }
 			}).success(function(response) {
+				/* load live url on hidden trigger */
+				$scope.PagePlaceholderController.NavItemTypePageController.$parent.$parent.loadLiveUrl();
 				// successfull toggle hidden state of block
 				AdminToastService.notify(i18nParam('js_page_block_visbility_change', {name: $scope.block.name}), 2000);
 			});

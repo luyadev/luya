@@ -23,4 +23,14 @@ class Main extends \luya\web\Asset
         'admin\assets\Jquery',
         'admin\assets\BowerVendor',
     ];
+    
+    /*
+    public $publishOptions = [
+        'only' => [
+            'js/*',
+            'css/*',
+            'fonts/*',
+        ]
+    ];
+    */
 }

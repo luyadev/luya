@@ -64,7 +64,7 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
     
     public function setModel($className)
     {
-        $this->_model = (!is_object($className)) ? Yii::createObject(['class' => $className]) : $className;
+        $this->_model = $className;
     }
 
     private $_modelPrimaryKey = null;
@@ -81,6 +81,10 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
     
     public function getModel()
     {
+    	if (!is_object($this->_model)) {
+    		$this->_model = Yii::createObject(['class' => $this->_model]);
+    	}
+    	
         return $this->_model;
     }
     
@@ -115,7 +119,10 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
 
     public function renderCreate($id, $ngModel)
     {
-        return $this->createFormTag('zaa-checkbox-array', $id, $ngModel, ['options' => $this->getServiceName('relationdata')]);
+        return [
+            $this->createCrudLoaderTag($this->model->className()),
+            $this->createFormTag('zaa-checkbox-array', $id, $ngModel, ['options' => $this->getServiceName('relationdata')]),
+        ];
     }
 
     public function renderUpdate($id, $ngModel)
@@ -135,6 +142,11 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
             $data[] = ['value' => $item->getAttribute($this->getModelPrimaryKey())];
         }
         $event->sender->{$this->name} = $data;
+    }
+    
+    public function onBeforeListFind($event)
+    {
+    	$event->sender->{$this->name} = $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $event->sender->id])->all();
     }
     
     public function onBeforeFind($event)

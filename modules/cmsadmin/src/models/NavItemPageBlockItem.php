@@ -3,6 +3,7 @@
 namespace cmsadmin\models;
 
 use Yii;
+use cmsadmin\Module;
 
 /**
  * Represents an ITEM for the type NavItemPage.
@@ -10,6 +11,21 @@ use Yii;
  * Sort_index numbers always starts from 0 and not from 1, like a default array behaviour. If a
  * negative sort_index is provided its always the last sort_index item (reason: we dont know the sort key of
  * the "at the end" dropparea).
+ *
+ * @property integer $id
+ * @property integer $block_id
+ * @property string $placeholder_var
+ * @property integer $nav_item_page_id
+ * @property integer $prev_id
+ * @property string $json_config_values
+ * @property string $json_config_cfg_values
+ * @property integer $is_dirty
+ * @property integer $create_user_id
+ * @property integer $update_user_id
+ * @property integer $timestamp_create
+ * @property integer $timestamp_update
+ * @property integer $sort_index
+ * @property integer $is_hidden
  *
  * @todo remove scenarios?
  * @author Basil Suter <basil@nadar.io>
@@ -76,12 +92,13 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     public function eventBeforeUpdate()
     {
         $this->is_dirty = 1;
-        $this->update_user_id = Yii::$app->adminuser->getId();
+        $this->update_user_id = Module::getAuthorUserId();
         $this->timestamp_update = time();
     }
 
     public function eventAfterUpdate()
     {
+        $this->updateNavItemTimesamp();
         if (!empty($this->_olds)) {
             $oldPlaceholderVar = $this->_olds['placeholder_var'];
             $oldPrevId = (int) $this->_olds['prev_id'];
@@ -111,6 +128,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
 
     public function eventAfterDelete()
     {
+        $this->updateNavItemTimesamp();
         if (!empty($this->_olds)) {
             $this->reindex($this->_olds['nav_item_page_id'], $this->_olds['placeholder_var'], $this->_olds['prev_id']);
         }
@@ -118,6 +136,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
 
     public function eventAfterInsert()
     {
+        $this->updateNavItemTimesamp();
         $this->reindex($this->nav_item_page_id, $this->placeholder_var, $this->prev_id);
         Log::add(1, "block.insert '".$this->block->class."', cms_nav_item_page_block_item.id '".$this->id."'");
     }
@@ -125,13 +144,14 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     public function eventBeforeInsert()
     {
         $this->timestamp_create = time();
-        $this->create_user_id = Yii::$app->adminuser->getId();
+        $this->timestamp_update = time();
+        $this->create_user_id = Module::getAuthorUserId();
         if (empty($this->json_config_cfg_values)) {
-            $this->json_config_cfg_values = json_encode([], JSON_FORCE_OBJECT);
+            $this->json_config_cfg_values = json_encode((object) [], JSON_FORCE_OBJECT);
         }
 
         if (empty($this->json_config_values)) {
-            $this->json_config_values = json_encode([], JSON_FORCE_OBJECT);
+            $this->json_config_values = json_encode((object) [], JSON_FORCE_OBJECT);
         }
     }
 
@@ -177,5 +197,15 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     public function getBlock()
     {
         return $this->hasOne(\cmsadmin\models\Block::className(), ['id' => 'block_id']);
+    }
+    
+    private function updateNavItemTimesamp()
+    {
+        $this->navItemPage->navItem->updateAttributes(['timestamp_update' => time()]);
+    }
+    
+    public function getNavItemPage()
+    {
+        return $this->hasOne(NavItemPage::className(), ['id' => 'nav_item_page_id']);
     }
 }

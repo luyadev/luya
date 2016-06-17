@@ -66,6 +66,10 @@ class InjectItem extends \yii\base\Object
     
     private $_menuItem = null;
     
+    private $_id = null;
+    
+    private $_navId = null;
+    
     public function init()
     {
         parent::init();
@@ -91,7 +95,7 @@ class InjectItem extends \yii\base\Object
                 throw new Exception("To inject an item which is on the root container you have to override all methods");
             }
             
-            $this->_menuItem = $this->menu->findOne(['id' => $this->getChildOf()]);
+            $this->_menuItem = $this->menu->find()->where(['id' => $this->getChildOf()])->with('hidden')->one();
         }
         
         return $this->_menuItem;
@@ -187,14 +191,31 @@ class InjectItem extends \yii\base\Object
         return 0;
     }
 
+    public function setId($id)
+    {
+        $this->_id = $id;
+    }
+    
     public function getId()
     {
-        return $this->menuItem->id . '_' . md5(spl_object_hash($this) . $this->getAlias());
+        if ($this->_id === null) {
+            $this->_id = $this->menuItem->id . '_' . md5(spl_object_hash($this) . $this->getAlias());
+        }
+        
+        return $this->_id;
+    }
+    
+    public function setNavId($navId)
+    {
+        $this->_navId = $navId;
     }
     
     public function getNavId()
     {
-        return $this->menuItem->navId . '_' . $this->getChildOf();
+        if ($this->_navId === null) {
+            $this->_navId = $this->menuItem->navId . '_' . $this->getChildOf();
+        }
+        return $this->_navId;
     }
     
     public function toArray()

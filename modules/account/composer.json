@@ -2,7 +2,7 @@
 	"name" : "luyadev/luya-module-account",
 	"description" : "Yii2 LUYA User Account",
 	"type" : "luya-module",
-	"keywords" : ["php", "luya", "module", "account", "yii2", "yii"],
+	"keywords" : ["php", "luya", "module", "account", "yii2", "yii", "luya-module"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
 	"authors" : [
@@ -19,5 +19,10 @@
 		"psr-4" : {
 			"account\\" : ""
 		}
-	}
+	},
+	"extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
 }

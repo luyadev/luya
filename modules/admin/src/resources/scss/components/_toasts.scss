@@ -12,7 +12,7 @@ $toast-space-window: 15px;
 	right: 0;
 	bottom: 0;
 	background-color: rgba(0, 0, 0, 0.8);
-	z-index: 1000;
+	z-index: 10000;
 }
 
 .toasts__item {
@@ -25,7 +25,7 @@ $toast-space-window: 15px;
 	position: fixed;
 	bottom: $toast-space-window - 5px;
 	left: $toast-space-window;
-	z-index: 1100;
+	z-index: 12000;
 
 	// Spacing
 	padding: 10px 20px;
