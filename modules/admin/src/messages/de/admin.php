@@ -158,5 +158,12 @@ return [
     'mode_user_firstname' => 'Vorname',
     'mode_user_lastname' => 'Nachname',
     'mode_user_email' => 'E-Mail',
-    'mode_user_password' => 'Passwort'
+    'mode_user_password' => 'Passwort',
+    
+// added translations in 1.0.0-beta8
+    'aws_tag_new' => 'Neuen Eintrag erfassen',
+    'aws_tag_add' => 'Hinzufügen',
+    'aws_tag_search' => 'Einträge durchsuchen',
+    'aws_tag_list' => 'Liste aller Einträge',
+
 ];

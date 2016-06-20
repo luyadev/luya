@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col s12">
-        <h1>Tags</h1>
+        <h1><?= $this->context->alias; ?></h1>
     </div>
 </div>
 
@@ -12,14 +12,14 @@
                 <br />
 
                 <div class="input input--text">
-                    <label class="input__label" for="newTag">Neuen Tag erfassen:</label>
+                    <label class="input__label" for="newTag"><?php echo \admin\Module::t('aws_tag_new')?>:</label>
                     <div class="input__field-wrapper">
                         <input id="newTag" maxlength="255" ng-model="newTagName" type="text" class="input__field" />
                     </div>
                 </div>
 
                 <br />
-                <button type="button" ng-click="saveTag()" class="btn btn-flat right">Hinzufügen <i class="material-icons right">check</i></button>
+                <button type="button" ng-click="saveTag()" class="btn btn-flat right"><?php echo \admin\Module::t('aws_tag_add')?> <i class="material-icons right">check</i></button>
                 <div style="clear: both;"></div>
 
                 <br />
@@ -31,7 +31,7 @@
                 <br />
 
                 <div class="input input--text">
-                    <label class="input__label" for="searchString">Tags durchsuchen:</label>
+                    <label class="input__label" for="searchString"><?php echo \admin\Module::t('aws_tag_search')?>:</label>
                     <div class="input__field-wrapper">
                         <input id="searchString" maxlength="255" ng-model="searchString" type="text" class="input__field" />
                     </div>
@@ -40,7 +40,7 @@
                 <br />
 
                 <div class="input input--multiple-checkboxes">
-                    <label class="input__label">Tags</label>
+                    <label class="input__label"><?php echo \admin\Module::t('aws_tag_list')?>:</label>
                     <div class="input__field-wrapper">
                         <div ng-repeat="tag in tags | filter:searchString | orderBy:'name'">
                             <input type="checkbox" ng-model="relation[tag.id]" ng-checked="relation[tag.id] == 1" ng-true-value="1" ng-false-value="0">

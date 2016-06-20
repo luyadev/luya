@@ -9,6 +9,8 @@ use admin\models\TagRelation;
 /**
  * Create an Active Window where you can assign tags to a row of the underlying table via a ref table.
  *
+ * Use $alias to define the headline in the Active Window
+ *
  * Usage example of registering the Tag Active Window:
  *
  * ```php
@@ -20,6 +22,8 @@ use admin\models\TagRelation;
 class TagActiveWindow extends \admin\ngrest\base\ActiveWindow
 {
     public $module = 'admin';
+
+    public $icon = "view_list";
 
     public $tableName = null;
 

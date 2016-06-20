@@ -158,5 +158,11 @@ return [
     'mode_user_firstname' => 'Firstname',
     'mode_user_lastname' => 'Lastname',
     'mode_user_email' => 'E-Mail',
-    'mode_user_password' => 'Password'
+    'mode_user_password' => 'Password',
+
+// added translations in 1.0.0-beta8
+    'aws_tag_new' => 'Add new entry',
+    'aws_tag_add' => 'add',
+    'aws_tag_search' => 'Search entries',
+    'aws_tag_list' => 'List of all entries',
 ];
