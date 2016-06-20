@@ -277,7 +277,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface, Change
      */
     public function getAuthKey()
     {
-        return $this->auth_key; // @todo use this key for what?
+        return false;
     }
 
     /**
