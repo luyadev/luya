@@ -81,6 +81,20 @@ public function import(\luya\console\interfaces\ImportController $import)
 }
 ```
 
+## PSR-4 binding with composer
+
+Sometimes you dont want to use the long namepsaces names like `app\modules\mymodule` and create a shorter way to access your files. In order to add a shorter *alias* to your namespace you psr-4 bind them in your composer.json file. To do so open the `composer.json` file and add the *autoload* section (if not exists):
+
+```json
+"autoload" : {
+    "psr-4" : {
+        "mymodule\\" : "app/modules/mymodule"
+    }
+}
+```
+
+Run the `composer dump-autoload` command in order to refresh the autoload section of your composer file. Now you are able to access the *mymodule* files directly with the *mymodule* module namepsace.
+
 ## Links
 
 + [Frontend Modul guide](app-module-frontend.md)
