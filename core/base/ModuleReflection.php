@@ -4,7 +4,7 @@ namespace luya\base;
 
 use Yii;
 use Exception;
-use yii\base\InvalidConfigException;
+use yii\web\NotFoundHttpException;
 
 /**
  * Run any route inside the provided module.
@@ -112,7 +112,7 @@ class ModuleReflection extends \yii\base\Object
         $controller = $this->module->createController($requestRoute['route']);
         // throw error if the requests request does not returns a valid controller object
         if (!isset($controller[0]) && !is_object($controller[0])) {
-            throw new InvalidConfigException(sprintf("Unable to create controller '%s' for module '%s'.", $requestRoute['route'], $this->module->id));
+            throw new NotFoundHttpException(sprintf("Unable to create controller '%s' for module '%s'.", $requestRoute['route'], $this->module->id));
         }
         
         Yii::info('LUYA module run module "'.$this->module->id.'" route ' . $requestRoute['route'], __METHOD__);
