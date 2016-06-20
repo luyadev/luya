@@ -1,8 +1,10 @@
 LUYA CHANGELOG
 ==============
 
-1.0.0-beta7 (in progress)
+1.0.0-beta7 (20.06.2016)
 -------------------------
+
+**BC BREAKS** See [UPGRADE.md](UPGRADE.md) as we have made some backward compatibility breaks in this release.
 
 - `#860` **[BC BREAK]** Using Yii2 imagine extension instead of native imagine extension in order to fix memory leaks and optimize thumbnail/crop calculations.
 - `#877` **[BC BREAK]** Changing the `ngRestApiEndpoint` method to static. Use `public static function ngRestApiEndpoint()`.
@@ -44,7 +46,7 @@ LUYA CHANGELOG
 1.0.0-beta6 (21.04.2016)
 -------------------------
 
-**BC BREAKS** See [UPGRADE.md](UPGRADE.md) as we have made some major changes.
+**BC BREAKS** See [UPGRADE.md](UPGRADE.md) as we have made some backward compatibility breaks in this release.
 
 - `#805` Added CMS Keywords to CMS module in order to analyze the input content for its keywords.
 - `#784` Add Blocks folder depency via `getGroup` of each block.
