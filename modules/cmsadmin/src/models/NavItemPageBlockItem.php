@@ -201,7 +201,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     
     private function updateNavItemTimesamp()
     {
-        $this->navItemPage->navItem->updateAttributes(['timestamp_update' => time()]);
+        $this->navItemPage->forceNavItem->updateAttributes(['timestamp_update' => time()]);
     }
     
     public function getNavItemPage()

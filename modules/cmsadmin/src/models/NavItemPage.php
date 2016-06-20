@@ -399,4 +399,15 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
         
         return true;
     }
+    
+    /**
+     * This method is used to force the parent nav item for the corresponding page item. The default
+     * implemenation `getNavItem` works the invert way.
+     * 
+     * @return \cmsadmin\models\NavItem
+     */
+    public function getForceNavItem()
+    {
+    	return NavItem::findOne($this->nav_item_id);
+    }
 }

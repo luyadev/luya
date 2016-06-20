@@ -4,6 +4,11 @@ namespace cmsadmin\base;
 
 use cmsadmin\models\NavItem;
 
+/**
+ * Abstract class for all Item Types.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 abstract class NavItemType extends \yii\db\ActiveRecord
 {
     public $options = [];
