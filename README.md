@@ -18,10 +18,11 @@ The [Yii 2](https://github.com/yiisoft/yii2) wrapper which provides out of the b
 
 #### ROADMAP
 
-+ beta7 release (June 2016)
-+ rc1 release (August 2016)
-+ rc2 release (September 2016)
-+ version 1.0.0 (October 2016)
++ ✓ beta7 release (June 2016)
++ beta8 release (August 2016) - Last NEW features will be implemented (cms permissions)
++ rc1 release (September 2016) - Moving admin and frontend into each other
++ rc2 release (October 2016) - Documentations
++ version 1.0.0 (November 2016) - Final stable release
 
 ### Installation
 

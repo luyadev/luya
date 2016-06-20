@@ -26,7 +26,7 @@ abstract class Boot
      *
      * @var string
      */
-    const VERSION = '1.0.0-beta7';
+    const VERSION = '1.0.0-beta8-dev';
     
     /**
      * @var string The path to the config file, which returns an array containing you configuration.
