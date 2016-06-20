@@ -1,9 +1,9 @@
 // service resolver
 function adminServiceResolver(ServiceFoldersData, ServiceImagesData, ServiceFilesData, ServiceFiltersData, ServiceLanguagesData, ServicePropertiesData, AdminLangService) {
+	ServiceFiltersData.load();
 	ServiceFoldersData.load();
 	ServiceImagesData.load();
 	ServiceFilesData.load();
-	ServiceFiltersData.load();
 	ServiceLanguagesData.load();
 	ServicePropertiesData.load();
 	AdminLangService.load();

@@ -4,6 +4,7 @@ LUYA CHANGELOG
 1.0.0-beta8 (in progress)
 -------------------------
 
+- `#898` Fixed bug where filters dependencie in image thumbnail directive does not get resolved and result in js error.
 - `#902` Fixed bug where version blocks can not update its parent nav item object.
 
 1.0.0-beta7 (20.06.2016)

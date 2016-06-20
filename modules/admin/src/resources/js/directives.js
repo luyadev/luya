@@ -1214,6 +1214,8 @@
                     }
                 }
 
+                scope.thumbnailfilter = null;
+                
                 scope.imageLoading = false;
 
                 scope.fileId = 0;
@@ -1291,14 +1293,21 @@
 
                 scope.thumb = false;
 
-                scope.thumbnailfilter = scope.filtersData['medium-thumbnail'];
+                scope.getThumbnailFilter = function() {
+                	if (scope.thumbnailfilter === null) {
+                		if ('medium-thumbnail' in scope.filtersData) {
+                			scope.thumbnailfilter = scope.filtersData['medium-thumbnail'];
+                		}
+                	}
+                	return scope.thumbnailfilter;
+                }
 
                 scope.$watch('imageinfo', function(n, o) {
                 	if (n != 0 && n != null && n !== undefined) {
                 		if (n.filterId != 0) {
                 			scope.thumb = n;
                 		} else {
-                			var result = $filter('findthumbnail')(scope.imagesData, n.fileId, scope.thumbnailfilter.id);
+                			var result = $filter('findthumbnail')(scope.imagesData, n.fileId, scope.getThumbnailFilter().id);
                 			if (!result) {
                 				scope.thumb = n;
                 			} else {
