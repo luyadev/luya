@@ -32,7 +32,7 @@ class TagActiveWindow extends \admin\ngrest\base\ActiveWindow
         parent::init();
         
         if ($this->tableName === null) {
-            throw new \Exception("The Active Window tableName property can not be null.");
+            throw new Exception("The Active Window tableName property can not be null.");
         }
     }
     
