@@ -112,6 +112,12 @@ input[type="checkbox"]:checked + .input__label:before {
     .input--hide-label & {
         width: 100%;
     }
+
+    &.input--column {
+        -webkit-column-width: 250px;
+        -moz-column-width: 250px;
+        column-width: 250px;
+    }
 }
 
 .input .input__field {

@@ -41,8 +41,8 @@
 
                 <div class="input input--multiple-checkboxes">
                     <label class="input__label"><?php echo \admin\Module::t('aws_tag_list')?>:</label>
-                    <div class="input__field-wrapper">
-                        <div ng-repeat="tag in tags | filter:searchString | orderBy:'name'">
+                    <div class="input__field-wrapper input--column">
+                        <div ng-repeat="tag in tags | filter:searchString | orderBy:'name'" class="checkbox-column-fix">
                             <input type="checkbox" ng-model="relation[tag.id]" ng-checked="relation[tag.id] == 1" ng-true-value="1" ng-false-value="0">
                             <label ng-click="saveRelation(tag, relation[tag.id])">{{tag.name}}</label>
                         </div>

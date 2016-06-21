@@ -1,0 +1,12 @@
+.checkbox-column-fix {
+    input[type="checkbox"] + label:before {
+        top: 4px;
+    }
+    input[type="checkbox"]:checked + label:before {
+        top: 0;
+    }
+    input[type="checkbox"] + label {
+        padding-top: 4px;
+        margin-bottom: 4px;
+    }
+}
