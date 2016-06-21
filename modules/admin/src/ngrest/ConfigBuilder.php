@@ -62,8 +62,18 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
     }
 
     /**
-     * Assign a Plugin to a pointer['field'].
-     *
+     * Assign a Plugin to a pointer['field']. Example of using plugin
+     * 
+     * ```php
+     * ->create->field('mytext')->textarea(['placeholer' => 'example']);
+     * ```
+     * 
+     * this will call
+     * 
+     * ```php
+     * $this->addPlugin('textarea', ['placeholder' => 'example']);
+     * ```
+     * 
      * @param unknown $name
      * @param unknown $args
      * @return \admin\ngrest\ConfigBuilder
@@ -76,7 +86,19 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
             throw new Exception("Since 1.0.0-beta6 ngrest plugin constructors must be provided as array config. Error in $name: $args");
         }
         
-        return $this->addPlugin($name, $args);
+        return $this->addPlugin($this->prepandAdminPlugin($name), $args);
+    }
+    
+    /**
+     * Use the admin ngrest plugin base namespace as default
+     * 
+     * @param unknown $name
+     * @return string
+     * @since 1.0.0-beta8
+     */
+    public function prepandAdminPlugin($name)
+    {
+        return '\\admin\\ngrest\\plugins\\'.ucfirst($name); 
     }
     
     /**
@@ -90,7 +112,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
      */
     public function addPlugin($name, array $args)
     {
-        $plugin = ['class' => '\\admin\\ngrest\\plugins\\'.ucfirst($name), 'args' => $args];
+        $plugin = ['class' => $name, 'args' => $args];
         $this->config[$this->pointer][$this->field]['type'] = $plugin;
         
         return $this;

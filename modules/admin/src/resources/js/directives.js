@@ -371,6 +371,9 @@
         }
     });
 
+    /**
+     * options=[{"value":123,"label":123-Label}, {"value":abc,"label":ABC-Label}]
+     */
     zaa.directive("zaaSelect", function($timeout){
         return {
             restrict: "E",
@@ -446,7 +449,7 @@
     /**
      * options arg object:
      *
-     * options.items[] = { "value" : 1, "label" => 'Label for Value 1' }
+     * options.items[] = [{"value" : 1, "label" => 'Label for Value 1' }]
      */
     zaa.directive("zaaCheckboxArray", function(){
         return {

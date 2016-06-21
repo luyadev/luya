@@ -303,10 +303,15 @@ abstract class Model extends ActiveRecord implements GenericSearchInterface, NgR
                 
                 $args = [];
                 if (is_array($definition)) {
-                    $method = $definition[0];
-                    $args = array_slice($definition, 1);
+                    if (array_key_exists('class', $definition)) {
+                        $method = $definition['class'];
+                        unset($definition['class']);
+                    } else {
+                        $method = $config->prepandAdminPlugin($definition[0]);
+                        $args = array_slice($definition, 1);
+                    }
                 } else {
-                    $method = $definition;
+                    $method = $config->prepandAdminPlugin($definition);
                 }
                 
                 $config->$type->$typeField($field, $this->getAttributeLabel($field))->addPlugin($method, $args);
