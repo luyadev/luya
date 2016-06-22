@@ -26,3 +26,104 @@ An NgRest Plugin is like the type of an input. You can create selects, date pick
 |cmsPage			|\cms\menu\Item |Cms Page selection and returns the menu component item.
 
 > Check the class reference/api guide to find out more about configuration options of the plugins.
+
+## Create a custom project Plugin
+
+Sometimes you really want to have project specific input behavior. To achieve this you have to create your own custom NgRest Plugin. First create a Plugin class:
+
+```php
+<?php
+
+namespace myadminmodule\plugins;
+
+use admin\helpers\Angular;
+
+class TestPlugin extends \admin\ngrest\base\Plugin
+{
+    public function renderList($id, $ngModel)
+    {
+        $this->renderList($id, $ngModel);
+    }
+    
+    public function renderUpdate($id, $ngModel)
+    {
+        return Angular::directive('my-directive', $ngModel, ['data' => $this->getServiceName('data')]);
+    }
+    
+    public function renderCreate($id, $ngModel)
+    {
+        return Angular::directive('my-directive', $ngModel, ['data' => $this->getServiceName('data')]);
+    }
+    
+    public function serviceData()
+    {
+        return [
+            'data' => [
+                // some data we always want to expose to the directive,
+            ],
+        ];
+    }
+}
+```
+
+The above class is abstracted from the `admin\ngrest\base\Plugin` which requires the `renderUpdate`, `renderList` and `renderCreate` methods which are basically taking care of the form input or the element in the crud list view. As you can see we use the helper method `Angular::directive` to return a Form Input Tag with a custom directive named `my-directive`. The directive must be stored in en admin javascript file you can assign by using [Admin Module Assets](app-admin-module-assets.md). For example:
+
+```js
+zaa.directive("myDirective", function() {
+    return {
+        restrict: "E",
+        scope : {
+            'ngModel' : '=',
+            'data' : '=',
+        },
+        controller: function($scope, $filter) {
+            $scope.$watch(function() { return $scope.ngModel }, function(n, o) {
+                console.log(n, o);
+            });
+        },
+        template : function() {
+            return '<div>{{data | json }} - {{ ngModel }} - <input type="text" ng-model="ngModel" /></div>';
+        }
+    }
+});
+```
+
+Now in order to use the custom `TestPlugin` in your [NgRest Config Model](ngrest-model.md) cast ean extra Field which takes care of getting (list) and setting (update/create) the value in your `admin\ngrest\base\Model` ActiveRecord class model.
+
+```php
+class Product extends \admin\ngrest\base\Model
+{
+    // ... 
+    
+    public function setField($data)
+    {
+        // This is what happends when the value from the angualr api response trys to save or update the model with $data.
+    }
+    
+    public function getField()
+    {
+        // This is what happens when active record pattern trys to get the values for the field. This is basic getter/setter principal of the yii\base\Object.
+    }
+    
+    public function extraFields()
+    {
+        return ['field'];
+    }
+
+    public function ngrestExtraAttributeTypes()
+    {
+        return [
+            'field' => ['class' => myadminmodule\plugins\TestPlugin::className()],
+        ];
+    }
+    
+    public function ngRestConfig($config)
+    {
+        // ...
+        $this->ngRestConfigDefine($config, ['create', 'update', 'list'], ['field']);
+        // ...
+    }
+    
+    // ...
+}
+```

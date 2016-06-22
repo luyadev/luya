@@ -23,12 +23,49 @@ public function ngrestAttributeTypes()
         'text' => 'textarea',
         'description' => ['textarea', 'markdown' => true],
         'timestamp' => 'date',
-        'size' => 'nummeric',
+        'size' => 'number',
     ];
 }
 ```
 
 A defintion contains always the attribute (as key) and the ngrest plugin config, if you have to pass arguments to the plugin object you can define an array where the first key is the name of the plugin and the other keys are the plugin properties.
+
+#### Extra Fields
+
+Sometimes you want to define fields which are not part of the ActiveRecord model and are not part of the Database table. For Example you want to display a count of registered users on the curd list. To achieve this goal you may use the `extraFields` principal combined with the yii\base\Object getter/setter informations.
+
+```php
+public function getRegisteredCount()
+{
+    return Users::find()->count();
+}
+
+public function $extraFields = [
+    'registeredCount',
+];
+```
+
+Now we have an extraField with the name `registeredCount`. When accessing this extra Field the getter method `getRegisteredCount()` will execute and the number of users will be returned. In order to get this additional into the crud list grid view you have to define the extra field in `ngrestExtraAttributeTypes()` like the other not extra attribute fields.
+
+```php
+public function ngrestExtraAttributeTypes()
+{
+    return [
+        'registeredCount' => 'number',
+    ];
+}
+```
+
+Now the only thing you have to is to add the field to the `ngRestConfigDefine()` defintions.
+
+```php
+public function ngRestConfig($config)
+{
+    // ...
+    $this->ngRestConfigDefine($config, ['list'], ['registeredCount']);
+    // ...
+}
+```
 
 #### Pointers and ngRestConfig
 
