@@ -6,6 +6,8 @@ use Yii;
 use luya\helpers\FileHelper;
 use luya\helpers\Url;
 use yii\helpers\Inflector;
+use yii\base\InvalidCallException;
+use yii\data\ActiveDataProvider;
 
 /**
  * Wrapper for yii2 basic rest controller used with a model class. The wrapper is made to
@@ -33,6 +35,19 @@ class Api extends \admin\base\RestActiveController
     public function actionSearchProvider()
     {
         return $this->model->genericSearchStateProvider();
+    }
+    
+    public function actionFilter($filterName)
+    {
+        $model = $this->model;
+        
+        if (!array_key_exists($filterName, $model->filters())) {
+            throw new InvalidCallException("The requested filter does not exists in the filter list.");
+        }
+
+        return new ActiveDataProvider([
+            'query' => $model->filters()[$filterName],
+        ]);
     }
     
     /**

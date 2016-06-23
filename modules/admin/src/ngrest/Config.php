@@ -48,6 +48,8 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
      */
     public $inline = false;
 
+    public $filters = false;
+    
     public $apiEndpoint = null;
 
     public $primaryKey = null; /* @todo not sure yet if right place to impelment about config */

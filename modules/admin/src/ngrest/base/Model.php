@@ -12,7 +12,7 @@ use admin\base\GenericSearchInterface;
 use admin\ngrest\interfaces\NgRestModeInterface;
 
 /**
- * Base Model for all NgRest Models
+ * Base Model for all NgRest Models extends yii\db\ActiveRecord.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
@@ -28,16 +28,41 @@ abstract class Model extends ActiveRecord implements GenericSearchInterface, NgR
      */
     const EVENT_AFTER_NGREST_FIND = 'afterNgrestFind';
 
+    /**
+     * 
+     * @var unknown
+     */
     const EVENT_SERVICE_NGREST = 'serviceNgrest';
 
+    /**
+     * 
+     * @var unknown
+     */
     const SCENARIO_RESTCREATE = 'restcreate';
 
+    /**
+     * 
+     * @var unknown
+     */
     const SCENARIO_RESTUPDATE = 'restupdate';
 
+    /**
+     * @var array Defines all fields which should be casted as i18n fields. This will transform the defined fields into
+     * json language content parings and the plugins will threat the fields different when saving/updating or request
+     * informations.
+     * 
+     * ```php
+     * public $i18n = ['textField', 'anotherTextField', 'imageField']);
+     * ```
+     */
     public $i18n = [];
 
     protected $ngRestServiceArray = [];
     
+    /**
+     * {@inheritDoc}
+     * @see \yii\base\Component::behaviors()
+     */
     public function behaviors()
     {
         return [
@@ -53,13 +78,47 @@ abstract class Model extends ActiveRecord implements GenericSearchInterface, NgR
     }
 
     /**
+     * Define an array with filters you can select from the crud list. 
      * 
+     * ```php
+     * return [
+     *     'deleted' => self::find()->where(['is_deleted' => 0]),
+     *     'year2016' => self::find()->where(['between', 'date', 2015, 2016]),
+     * ];
+     * ```
+     */
+    public function filters()
+    {
+        return [];
+    }
+
+    /**
+     * The NgRestFind is used when performing the crud list index overivew. You
+     * can override this method in order to hide data from the ngRestFind command
+     * which populates all data from the database.
+     * 
+     * An example for hidding deleted news posts from the curd list:
+     * 
+     * ```php
+     * public static function ngRestFind()
+     * {
+     *     return parent::ngRestFind()->where(['is_deleted' => 0]);
+     * }
+     * ```
+     * 
+     * + see [[yii\db\ActiveRecord::find()]]
+     * 
+     * @return yii\db\ActiveQuery
      */
     public static function ngRestFind()
     {
         return Yii::createObject(ActiveQuery::className(), [get_called_class()]);
     }
 
+    /**
+     * {@inheritDoc}
+     * @see \yii\db\BaseActiveRecord::afterFind()
+     */
     public function afterFind()
     {
         if ($this->getNgRestCallType()) {
@@ -75,7 +134,6 @@ abstract class Model extends ActiveRecord implements GenericSearchInterface, NgR
     }
 
     /**
-     * 
      * {@inheritDoc}
      * @see \admin\base\GenericSearchInterface::genericSearchFields()
      */
@@ -92,7 +150,6 @@ abstract class Model extends ActiveRecord implements GenericSearchInterface, NgR
     }
     
     /**
-     * 
      * {@inheritDoc}
      * @see \admin\base\GenericSearchInterface::genericSearchHiddenFields()
      */
@@ -160,6 +217,10 @@ abstract class Model extends ActiveRecord implements GenericSearchInterface, NgR
 
     private $_ngRestPrimaryKey = null;
     
+    /**
+     * 
+     * @return \yii\db\string
+     */
     public function getNgRestPrimaryKey()
     {
         if ($this->_ngRestPrimaryKey === null) {
@@ -169,11 +230,19 @@ abstract class Model extends ActiveRecord implements GenericSearchInterface, NgR
         return $this->_ngRestPrimaryKey;
     }
 
+    /**
+     * 
+     * @param unknown $field
+     * @param unknown $data
+     */
     public function addNgRestServiceData($field, $data)
     {
         $this->ngRestServiceArray[$field] = $data;
     }
     
+    /**
+     * 
+     */
     public function getNgrestServices()
     {
         $this->trigger(self::EVENT_SERVICE_NGREST);

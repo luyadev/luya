@@ -76,6 +76,15 @@
             </div>
             
 
+            <div>
+                <ul>
+                    <li ng-click="loadList()">Reset</li>
+                    <? foreach (array_keys($config->filters) as $name): ?>
+                    <li ng-click="loadFilter('<?= $name; ?>')"><?= $name; ?></li>
+                    <? endforeach; ?>
+                </ul>
+            </div>
+
             <div ng-show="deleteErrors.length">
                 <div class="alert alert--danger">
                     <ul>

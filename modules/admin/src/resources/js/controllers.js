@@ -57,6 +57,12 @@
 			$scope.crudSwitchType = type;
 		};
 		
+		$scope.loadFilter = function(name) {
+			$http.get($scope.config.apiEndpoint + '/filter?filterName=' + name).success(function(data) {
+				LuyaLoading.stop();
+				$scope.data.list = data;
+			});
+		};
 		
 		/* export */
 		
