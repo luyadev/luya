@@ -6,18 +6,41 @@ use Yii;
 use admin\models\Config;
 use admin\models\User;
 use admin\models\Group;
+use yii\console\Exception;
 
 /**
- * Setup LUYA Admin.
+ * Setup the Administration Interface.
+ * 
+ * You can also use the parameters to run the setup command for example.
+ * 
+ * ```
+ * setup --email=foo@bar.com --password=test --firstname=John --lastname=Doe --interactive=0
+ * ```
+ * 
+ * This will perform the Setup task silent and does not prompt any questions.
  * 
  * @author Basil Suter <basil@nadar.io>
- *
  */
 class SetupController extends \luya\console\Command
 {
     private function insert($table, $fields)
     {
         return Yii::$app->db->createCommand()->insert($table, $fields)->execute();
+    }
+    
+    public $email = null;
+    
+    public $password = null;
+    
+    public $firstname = null;
+    
+    public $lastname = null;
+    
+    public $interactive = true;
+    
+    public function options($actionID)
+    {
+        return ['email', 'password', 'firstname', 'lastname', 'interactive'];
     }
 
     /**
@@ -38,24 +61,22 @@ class SetupController extends \luya\console\Command
     public function actionUser()
     {
         while (true) {
-            $email = $this->prompt('Benutzer E-Mail:');
+            $email = $this->prompt('User E-Mail:');
             if (!empty(User::findByEmail($email))) {
-                $this->outputError('Email existiert bereits!');
+                $this->outputError('The provided E-Mail already exsists in the System.');
             } else {
                 break;
             }
         }
 
-        $titleArray = ['Herr' => 1, 'Frau' => 2];
-        $title = $this->select('Anrede:', [
-            'Herr' => '1', 'Frau' => '2',
-        ]);
+        $titleArray = ['Mr' => 1, 'Mrs' => 2];
+        $title = $this->select('Title:', $titleArray);
 
-        $firstname = $this->prompt('Vorname:');
-        $lastname = $this->prompt('Nachname:');
-        $password = $this->prompt('Benutzer Passwort:');
+        $firstname = $this->prompt('Firstname:');
+        $lastname = $this->prompt('Lastname:');
+        $password = $this->prompt('User Password:');
 
-        if (!$this->confirm("Einen neuen Benutzer '$title $firstname $lastname, Email $email' mit dem Passwort '$password' anlegen?")) {
+        if (!$this->confirm("Are you sure to create the User '$email'?")) {
             return $this->outputError('Abort user creation process.');
         }
 
@@ -65,37 +86,31 @@ class SetupController extends \luya\console\Command
         $user->password = Yii::$app->getSecurity()->generatePasswordHash($password.$user->password_salt);
         $user->firstname = $firstname;
         $user->lastname = $lastname;
-
         $user->title = $titleArray[$title];
-        $user->save();
-        $userId = $user->id;
+        if (!$user->save()) {
+            throw new Exception("Unable to create new user.");
+        }
 
-        $groupEntries = Group::find()->all();
         $groupSelect = [];
 
-        $this->output('');
-        foreach ($groupEntries as $entry) {
+        foreach (Group::find()->all() as $entry) {
             $groupSelect[$entry->id] = $entry->name.' ('.$entry->text.')';
             $this->output($entry->id.' - '.$groupSelect[$entry->id]);
         }
-        $groupId = $this->select('Benutzergruppe:', $groupSelect);
+        $groupId = $this->select('Select Group the user should belong to:', $groupSelect);
 
         $this->insert('admin_user_group', [
-            'user_id' => $userId,
+            'user_id' => $user->id,
             'group_id' => $groupId,
         ]);
 
-        return $this->outputSuccess("Der Benutzer $firstname $lastname wurde erfolgreich angelegt.");
+        return $this->outputSuccess("The user ($email) has been created.");
     }
 
     /**
-     * Initialize the LUYA Administration.
+     * Setup the administration area.
      * 
-     * @todo use options instead, override options()
-     * @todo see if admin is availoable
-     *
-     * @param string $email
-     * @param string $password
+     * This action of setup will add a new user, group, languaga, permissions and default homepage and container.
      */
     public function actionIndex()
     {
@@ -107,30 +122,44 @@ class SetupController extends \luya\console\Command
             return $this->outputError('The setup process already have been started on the '.date('d.m.Y H:i', Config::get('setup_command_timestamp')).'. If you want to reinstall your luya project. Drop all tables from your Database, run the migrate command, run the import command and then re-run the setup command');
         }
 
-        $email = $this->prompt('Benutzer E-Mail:');
-        $password = $this->prompt('Benutzer Passwort:');
-        $firstname = $this->prompt('Vorname:');
-        $lastname = $this->prompt('Nachname:');
-        if (!$this->confirm("Create a new user ($email) with password '$password'?")) {
-            return $this->outputError('Abort by user.');
+        if (empty($this->email)) {
+            $this->email = $this->prompt('User E-Mail:');
+        }
+        
+        if (empty($this->password)) {
+            $this->password = $this->prompt('User Password:');
+        }
+        
+        if (empty($this->firstname)) {
+            $this->firstname = $this->prompt('Firstname:');
+        }
+        
+        if (empty($this->lastname)) {
+            $this->lastname = $this->prompt('Lastname:');
+        }
+        
+        if ($this->interactive) {
+            if (!$this->confirm("Confirm your login details in order to proceed with the Setup. E-Mail: {$this->email} Password: {$this->password} - Are those informations correct?")) {
+                return $this->outputError('Abort by user.');
+            }
         }
 
-        $salt = Yii::$app->getSecurity()->generateRandomString();
-        $pw = Yii::$app->getSecurity()->generatePasswordHash($password.$salt);
+        $salt = Yii::$app->security->generateRandomString();
+        $pw = Yii::$app->security->generatePasswordHash($this->password.$salt);
 
         $this->insert('admin_user', [
             'title' => 1,
-            'firstname' => $firstname,
-            'lastname' => $lastname,
-            'email' => $email,
+            'firstname' => $this->firstname,
+            'lastname' => $this->lastname,
+            'email' => $this->email,
             'password' => $pw,
             'password_salt' => $salt,
             'is_deleted' => 0,
         ]);
 
         $this->insert('admin_group', [
-            'name' => 'Adminstrator',
-            'text' => 'Administrator Accounts',
+            'name' => 'Administrator',
+            'text' => 'Administrator Accounts have full access to all Areas and can create, update and delete all data records.',
         ]);
 
         $this->insert('admin_user_group', [
@@ -166,6 +195,6 @@ class SetupController extends \luya\console\Command
 
         Config::set('setup_command_timestamp', time());
 
-        return $this->outputSuccess("You can now login with the Email '$email' and password '$password'.");
+        return $this->outputSuccess("Setup is finished. You can now login into the Administration-Area with the E-Mail '{$this->email}'.");
     }
 }
