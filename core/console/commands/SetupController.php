@@ -3,10 +3,10 @@
 namespace luya\console\commands;
 
 use Yii;
+use yii\console\Exception;
 use admin\models\Config;
 use admin\models\User;
 use admin\models\Group;
-use yii\console\Exception;
 
 /**
  * Setup the Administration Interface.
@@ -23,40 +23,137 @@ use yii\console\Exception;
  */
 class SetupController extends \luya\console\Command
 {
-    private function insert($table, $fields)
-    {
-        return Yii::$app->db->createCommand()->insert($table, $fields)->execute();
-    }
-    
+    /**
+     * @var string $email
+     */
     public $email = null;
     
+    /**
+     * @var string $password
+     */
     public $password = null;
     
+    /**
+     * @var string $firstname
+     */
     public $firstname = null;
     
+    /**
+     * @var string $lastname
+     */
     public $lastname = null;
     
+    /**
+     * @var booelan|integer
+     */
     public $interactive = true;
     
+    /**
+     * {@inheritDoc}
+     * @see \luya\console\Command::options()
+     */
     public function options($actionID)
     {
         return ['email', 'password', 'firstname', 'lastname', 'interactive'];
     }
 
     /**
+     * Setup the administration area.
+     *
+     * This action of setup will add a new user, group, languaga, permissions and default homepage and container.
+     * 
+     * @return boolean
+     */
+    public function actionIndex()
+    {
+        if (!Config::has('last_import_timestamp')) {
+            return $this->outputError("You have to run the 'import' process first. run in terminal: ./vendor/bin/luya import");
+        }
+    
+        if (Config::has('setup_command_timestamp')) {
+            return $this->outputError('The setup process already have been started on the '.date('d.m.Y H:i', Config::get('setup_command_timestamp')).'. If you want to reinstall your luya project. Drop all tables from your Database, run the migrate command, run the import command and then re-run the setup command');
+        }
+    
+        if (empty($this->email)) {
+            $this->email = $this->prompt('User E-Mail:');
+        }
+    
+        if (empty($this->password)) {
+            $this->password = $this->prompt('User Password:');
+        }
+    
+        if (empty($this->firstname)) {
+            $this->firstname = $this->prompt('Firstname:');
+        }
+    
+        if (empty($this->lastname)) {
+            $this->lastname = $this->prompt('Lastname:');
+        }
+    
+        if ($this->interactive) {
+            if ($this->confirm("Confirm your login details in order to proceed with the Setup. E-Mail: {$this->email} Password: {$this->password} - Are those informations correct?") !== true) {
+                return $this->outputError('Abort by user.');
+            }
+        }
+    
+        $salt = Yii::$app->security->generateRandomString();
+        $pw = Yii::$app->security->generatePasswordHash($this->password.$salt);
+    
+        $this->insert('admin_user', [
+            'title' => 1,
+            'firstname' => $this->firstname,
+            'lastname' => $this->lastname,
+            'email' => $this->email,
+            'password' => $pw,
+            'password_salt' => $salt,
+            'is_deleted' => 0,
+        ]);
+    
+        $this->insert('admin_group', [
+            'name' => 'Administrator',
+            'text' => 'Administrator Accounts have full access to all Areas and can create, update and delete all data records.',
+        ]);
+    
+        $this->insert('admin_user_group', [
+            'user_id' => 1,
+            'group_id' => 1,
+        ]);
+    
+        // get the api-admin-user and api-admin-group auth rights
+        $data = Yii::$app->db->createCommand("SELECT * FROM admin_auth WHERE api='api-admin-user' OR api='api-admin-group'")->queryAll();
+    
+        foreach ($data as $item) {
+            $this->insert('admin_group_auth', [
+                'group_id' => 1,
+                'auth_id' => $item['id'],
+                'crud_create' => 1,
+                'crud_update' => 1,
+                'crud_delete' => 1,
+            ]);
+        }
+    
+        $this->insert('admin_lang', [
+            'name' => 'English',
+            'short_code' => 'en',
+            'is_default' => 1,
+        ]);
+    
+        if (Yii::$app->hasModule('cms')) {
+            // insert default page
+            $this->insert("cms_nav", ['nav_container_id' => 1, 'parent_nav_id' => 0, 'sort_index' => 0, 'is_deleted' => 0, 'is_hidden' => 0, 'is_offline' => 0, 'is_home' => 1, 'is_draft' => 0]);
+            $this->insert("cms_nav_item", ['nav_id' => 1, 'lang_id' => 1, 'nav_item_type' => 1, 'nav_item_type_id' => 1, 'create_user_id' => 1, 'update_user_id' => 1, 'timestamp_create' => time(), 'title' => 'Homepage', 'alias' => 'homepage']);
+            $this->insert('cms_nav_item_page', ['layout_id' => 1, 'create_user_id' => 1, 'timestamp_create' => time(), 'version_alias' => 'Initial', 'nav_item_id' => 1]);
+        }
+    
+        Config::set('setup_command_timestamp', time());
+    
+        return $this->outputSuccess("Setup is finished. You can now login into the Administration-Area with the E-Mail '{$this->email}'.");
+    }
+    
+    /**
      * Create a new user and append them to an existing group.
      * 
-     * @todo don't write directly in db table (admin_user_group)
-     * @todo reuse encode password function from user model
-     * @todo find better solution for while(true)/break loop
-     * @todo find better solution for title array/selection
-     * @todo error handling (validate, can't save models)
-     *
-     * @param $title
-     * @param $firstname
-     * @param $lastname
-     * @param $email
-     * @param $password
+     * @return booelan
      */
     public function actionUser()
     {
@@ -76,7 +173,7 @@ class SetupController extends \luya\console\Command
         $lastname = $this->prompt('Lastname:');
         $password = $this->prompt('User Password:');
 
-        if (!$this->confirm("Are you sure to create the User '$email'?")) {
+        if ($this->confirm("Are you sure to create the User '$email'?") !== true) {
             return $this->outputError('Abort user creation process.');
         }
 
@@ -106,95 +203,15 @@ class SetupController extends \luya\console\Command
 
         return $this->outputSuccess("The user ($email) has been created.");
     }
-
+    
     /**
-     * Setup the administration area.
+     * Helper to insert data in database table.
      * 
-     * This action of setup will add a new user, group, languaga, permissions and default homepage and container.
+     * @param string $table
+     * @param string $fields
      */
-    public function actionIndex()
+    private function insert($table, $fields)
     {
-        if (!Config::has('last_import_timestamp')) {
-            return $this->outputError("You have to run the 'import' process first. run in terminal: ./vendor/bin/luya import");
-        }
-
-        if (Config::has('setup_command_timestamp')) {
-            return $this->outputError('The setup process already have been started on the '.date('d.m.Y H:i', Config::get('setup_command_timestamp')).'. If you want to reinstall your luya project. Drop all tables from your Database, run the migrate command, run the import command and then re-run the setup command');
-        }
-
-        if (empty($this->email)) {
-            $this->email = $this->prompt('User E-Mail:');
-        }
-        
-        if (empty($this->password)) {
-            $this->password = $this->prompt('User Password:');
-        }
-        
-        if (empty($this->firstname)) {
-            $this->firstname = $this->prompt('Firstname:');
-        }
-        
-        if (empty($this->lastname)) {
-            $this->lastname = $this->prompt('Lastname:');
-        }
-        
-        if ($this->interactive) {
-            if (!$this->confirm("Confirm your login details in order to proceed with the Setup. E-Mail: {$this->email} Password: {$this->password} - Are those informations correct?")) {
-                return $this->outputError('Abort by user.');
-            }
-        }
-
-        $salt = Yii::$app->security->generateRandomString();
-        $pw = Yii::$app->security->generatePasswordHash($this->password.$salt);
-
-        $this->insert('admin_user', [
-            'title' => 1,
-            'firstname' => $this->firstname,
-            'lastname' => $this->lastname,
-            'email' => $this->email,
-            'password' => $pw,
-            'password_salt' => $salt,
-            'is_deleted' => 0,
-        ]);
-
-        $this->insert('admin_group', [
-            'name' => 'Administrator',
-            'text' => 'Administrator Accounts have full access to all Areas and can create, update and delete all data records.',
-        ]);
-
-        $this->insert('admin_user_group', [
-            'user_id' => 1,
-            'group_id' => 1,
-        ]);
-
-        // get the api-admin-user and api-admin-group auth rights
-        $data = Yii::$app->db->createCommand("SELECT * FROM admin_auth WHERE api='api-admin-user' OR api='api-admin-group'")->queryAll();
-
-        foreach ($data as $item) {
-            $this->insert('admin_group_auth', [
-                'group_id' => 1,
-                'auth_id' => $item['id'],
-                'crud_create' => 1,
-                'crud_update' => 1,
-                'crud_delete' => 1,
-            ]);
-        }
-
-        $this->insert('admin_lang', [
-            'name' => 'English',
-            'short_code' => 'en',
-            'is_default' => 1,
-        ]);
-        
-        if (Yii::$app->hasModule('cms')) {
-            // insert default page
-            $this->insert("cms_nav", ['nav_container_id' => 1, 'parent_nav_id' => 0, 'sort_index' => 0, 'is_deleted' => 0, 'is_hidden' => 0, 'is_offline' => 0, 'is_home' => 1, 'is_draft' => 0]);
-            $this->insert("cms_nav_item", ['nav_id' => 1, 'lang_id' => 1, 'nav_item_type' => 1, 'nav_item_type_id' => 1, 'create_user_id' => 1, 'update_user_id' => 1, 'timestamp_create' => time(), 'title' => 'Homepage', 'alias' => 'homepage']);
-            $this->insert('cms_nav_item_page', ['layout_id' => 1, 'create_user_id' => 1, 'timestamp_create' => time(), 'version_alias' => 'Initial', 'nav_item_id' => 1]);
-        }
-
-        Config::set('setup_command_timestamp', time());
-
-        return $this->outputSuccess("Setup is finished. You can now login into the Administration-Area with the E-Mail '{$this->email}'.");
+        return Yii::$app->db->createCommand()->insert($table, $fields)->execute();
     }
 }
