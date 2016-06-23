@@ -16,7 +16,10 @@ use admin\ngrest\base\Model;
  * 
  * public $groups = [];
  * 
- * public $extraFields = ['groups'];
+ * public function extraFields()
+ * {
+ *     return ['groups'];
+ * }
  * 
  * ```
  * 

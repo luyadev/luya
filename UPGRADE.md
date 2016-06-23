@@ -3,7 +3,13 @@ LUYA UPGRADE
 
 This document will help you upgrading from a LUYA Version into another.
 
-1.0.0-beta7
+1.0.0-beta8 (in progress)
+-----------
+
+* `#907`: Removed the public attribute `$extraFields` in order to prevent confusings. Override `extraFields()` instead in `admin\ngrest\base\Model`.
+
+
+1.0.0-beta7 (released 20.06.2016)
 -----------
 
 * `#860`: As part of using the Yii2 imagine Extension we removed the `Resize`-Effect Filter chain and renamed the `Thumbnail`-Effect option `type` to `mode`.
@@ -11,7 +17,7 @@ This document will help you upgrading from a LUYA Version into another.
 * `#875`: As part of the tag Parser rework, the helper method to parse luya tags (links, etc.) `cms\helpers\Parser::encode($text)` has been changed to `cms\helpers\TagParser::convert($text)`.
 
 
-1.0.0-beta6
+1.0.0-beta6 (released 21.04.2016)
 -----------
 
 **We have moved all repositories to the new HQ of LUYA, `luyadev` instead of `zephir`. In order to to update your packages, remove `zephir` and replace with `luyadev` in your composer require section.**

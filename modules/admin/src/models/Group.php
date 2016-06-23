@@ -43,7 +43,10 @@ class Group extends \admin\ngrest\base\Model
         ];
     }
 
-    public $extraFields = ['users'];
+    public function extraFields()
+    {
+        return ['users'];
+    }
     
     // ngrest
 

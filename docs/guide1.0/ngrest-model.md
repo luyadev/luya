@@ -94,9 +94,10 @@ public function getRegisteredCount()
     return Users::find()->count();
 }
 
-public function $extraFields = [
-    'registeredCount',
-];
+public function extraFields()
+{
+    return ['registeredCount'];
+}
 ```
 
 Now we have an extraField with the name `registeredCount`. When accessing this extra Field the getter method `getRegisteredCount()` will execute and the number of users will be returned. In order to get this additional into the crud list grid view you have to define the extra field in `ngrestExtraAttributeTypes()` like the other not extra attribute fields.

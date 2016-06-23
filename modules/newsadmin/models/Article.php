@@ -122,7 +122,10 @@ class Article extends \admin\ngrest\base\Model
 
     public $i18n = ['title', 'text', 'image_list'];
 
-    public $extraFields = ['tags'];
+    public function extraFields()
+    {
+        return ['tags'];
+    }
 
     public static function ngRestApiEndpoint()
     {

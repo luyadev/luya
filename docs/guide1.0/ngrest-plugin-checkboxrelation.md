@@ -14,10 +14,15 @@ class User extends \admin\ngrest\base\Model
 
     public $groups = [];
     
-    public $extraFields = ['groups']; // define the extra field
+
+    public function extraFields()
+    {
+        return ['groups']; // add the groups field to the extraFields of this active record
+    }
     
-	public function scenarios()
-	{
+
+    public function scenarios()
+    {
         return [
            'restcreate' => ['title', 'text', 'image_id', 'groups'], // add the extraField to the safe attributes
            'restupdate' => ['title', 'text', 'image_id', 'groups'], // add the extraField to the safe attributes
@@ -39,12 +44,11 @@ class User extends \admin\ngrest\base\Model
         ];
     }
 
-	public function ngRestConfig($config)
-	{
-	    // ...
-		$this->ngRestConfigDefine($config, ['create', 'update'], ['groups']);
-		// ...
-	}
-
+    public function ngRestConfig($config)
+    {
+        // ...
+        $this->ngRestConfigDefine($config, ['create', 'update'], ['groups']);
+        // ...
+    }
 }
 ```

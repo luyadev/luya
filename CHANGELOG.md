@@ -4,6 +4,7 @@ LUYA CHANGELOG
 1.0.0-beta8 (in progress)
 -------------------------
 
+- `#907`: **[BC BREAK]** Removed the public attribute `$extraFields` in order to prevent confusings. Override `extraFields()` instead in `admin\ngrest\base\Model`.
 - `#898` Fixed bug where filters dependencie in image thumbnail directive does not get resolved and result in js error.
 - `#902` Fixed bug where version blocks can not update its parent nav item object.
 - `#906` Added silent mode for the LUYA setup process.

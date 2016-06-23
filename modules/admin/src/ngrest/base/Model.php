@@ -36,8 +36,6 @@ abstract class Model extends ActiveRecord implements GenericSearchInterface, NgR
 
     public $i18n = [];
 
-    public $extraFields = [];
-
     protected $ngRestServiceArray = [];
     
     public function behaviors()
@@ -52,16 +50,6 @@ abstract class Model extends ActiveRecord implements GenericSearchInterface, NgR
                 'api' => static::ngRestApiEndpoint(),
             ],
         ];
-    }
-
-    /**
-     * can be overwritte in the model class or could be directly defined as property $extraFields.
-     *
-     * @return array Array containing extrafields, where value is the extraField name.
-     */
-    public function extraFields()
-    {
-        return $this->extraFields;
     }
 
     /**
