@@ -189,6 +189,45 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
         return $this->_defaultLangShortCode;
     }
 
+    private function evalGroupFields($pointerElements)
+    {
+        $names = [];
+        foreach($pointerElements as $elmn) {
+            $names[$elmn['name']] = $elmn['name'];
+        }
+        
+        foreach ($this->config->attributeGroups as $group) {
+            foreach ($group[0] as $item) {
+                if (in_array($item, $names)) {
+                    unset($names[$item]);
+                }
+            }
+        }
+        
+        $groups[] = [$names, '__default', 'collapsed' => true, 'is_default' => true];
+        
+        
+        return array_merge($groups, $this->config->attributeGroups);
+    }
+    
+    public function forEachGroups($pointer)
+    {
+        $groups = $this->evalGroupFields($this->config->getPointer($pointer));
+
+        $data = [];
+        
+        foreach ($groups as $group) {
+            $data[] = [
+                'fields' => $this->config->getFields($pointer, $group[0]),
+                'name' => $group[1],
+                'collapsed' => (isset($group['collapsed'])) ? (bool) $group['collapsed'] : false,
+                'is_default' => (isset($group['is_default'])) ? (bool) $group['is_default'] : false,
+            ];
+        }
+        
+        return $data;
+    }
+    
     /**
      * @todo do not return the specofic type content, but return an array contain more infos also about is multi linguage and foreach in view file! 
      *

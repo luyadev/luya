@@ -136,14 +136,22 @@
 
                     <!-- MODAL CONTENT -->
                     <div class="modal__content">
-                        
-                        <?php foreach ($config->getPointer('create') as $k => $item): ?>
+                    <?php foreach($this->context->forEachGroups('create') as $group): ?>
+                        <?php if (!$group['is_default']): ?>
+                        <h5><?= $group['name']; ?> <? var_dump($group['collapsed']); ?></h5>
+                        <div style="border:1px solid #F0F0F0; margin-bottom:20px;">
+                        <?php endif; ?>
+                        <?php foreach($group['fields'] as $field => $fieldItem): ?>
                             <div class="row">
-                                <?php foreach ($this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_CREATE) as $element): ?>
-                                    <?php echo $element['html']; ?>
-                                <?php endforeach; ?>
+                            <?php foreach ($this->context->createElements($fieldItem, \admin\ngrest\render\RenderCrud::TYPE_CREATE) as $element): ?>
+                                <?php echo $element['html']; ?>
+                            <?php endforeach; ?>
                             </div>
                         <?php endforeach; ?>
+                        <?php if (!$group['is_default']): ?>
+                        </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
 
                         <div class="red lighten-2" style="color:white;" ng-show="createErrors.length">
                             <ul>
@@ -177,12 +185,21 @@
                 <form name="formUpdate" role="form" ng-submit="submitUpdate()">
                     <!-- MODAL CONTENT -->
                     <div class="modal__content">
-                        <?php foreach ($config->getPointer('update') as $k => $item): ?>
-                            <div class="row">
-                                <?php foreach ($this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_UPDATE) as $element): ?>
+                        <?php foreach($this->context->forEachGroups('update') as $group): ?>
+                            <?php if (!$group['is_default']): ?>
+                            <h5><?= $group['name']; ?> <? var_dump($group['collapsed']); ?></h5>
+                            <div style="border:1px solid #F0F0F0; margin-bottom:20px;">
+                            <?php endif; ?>
+                            <?php foreach($group['fields'] as $field => $fieldItem): ?>
+                                <div class="row">
+                                <?php foreach ($this->context->createElements($fieldItem, \admin\ngrest\render\RenderCrud::TYPE_UPDATE) as $element): ?>
                                     <?php echo $element['html']; ?>
                                 <?php endforeach; ?>
+                                </div>
+                            <?php endforeach; ?>
+                            <?php if (!$group['is_default']): ?>
                             </div>
+                            <?php endif; ?>
                         <?php endforeach; ?>
 
                         <div class="red lighten-2" style="color:white;" ng-show="updateErrors.length">

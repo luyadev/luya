@@ -115,6 +115,27 @@ abstract class Model extends ActiveRecord implements GenericSearchInterface, NgR
     }
     
     /**
+     * Grouping fields into fieldset similar group names which can be collapsed by default or not:
+     * 
+     * ```php
+     * public function ngRestAttributeGroups()
+     * {
+     *    return [
+     *       [['timestamp_create', 'timestamp_display_from', 'timestamp_display_until'], 'Zeiten', 'collapsed' => true],
+     *       [['image_list', 'file_list'], 'asdfasdf', 'collapsed' => false],   
+     *    ];
+     * }
+     * ```
+     * 
+     * @return array An array with groups where offset 1 are the fields, 2 the name of the group `collapsed` key if default collapsed or not.
+     * @since 1.0.0-beta8
+     */
+    public function ngRestAttributeGroups()
+    {
+        return [];
+    }
+    
+    /**
      * The NgRestFind is used when performing the crud list index overivew. You
      * can override this method in order to hide data from the ngRestFind command
      * which populates all data from the database.

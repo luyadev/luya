@@ -11,6 +11,7 @@ LUYA CHANGELOG
 - `#908` Added ability to set ngRestFilters the specific grid list data where conditions.
 - `#911` Added ability to set default sorting/ordering for grid list data in ngrest model.
 - `#912` Added ability to set angular successfull save/update callbacks in order to trigger reloads of lists.
+- `#913` Added ability to group fields into groups in the ngrest model in order to make cleaner forms.
 
 1.0.0-beta7 (20.06.2016)
 -------------------------

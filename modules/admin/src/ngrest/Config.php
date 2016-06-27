@@ -52,6 +52,8 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
     
     public $defaultOrder = null;
     
+    public $attributeGroups = false;
+    
     public $apiEndpoint = null;
 
     public $primaryKey = null; /* @todo not sure yet if right place to impelment about config */
@@ -125,6 +127,17 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
     public function getField($pointer, $field)
     {
         return ($this->hasField($pointer, $field)) ? $this->_config[$pointer][$field] : false;
+    }
+    
+    public function getFields($pointer, array $fields)
+    {
+        $data = [];
+        foreach ($fields as $fieldName) {
+            if ($this->getField($pointer, $fieldName)) {
+                $data[$fieldName] = $this->getField($pointer, $fieldName);
+            }
+        }
+        return $data;
     }
     
     /**
