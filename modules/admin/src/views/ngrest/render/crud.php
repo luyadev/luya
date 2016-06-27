@@ -15,6 +15,7 @@
         $scope.config.activeWindowCallbackUrl = '<?php echo $activeWindowCallbackUrl; ?>';
         $scope.config.pk = '<?php echo $this->context->getPrimaryKey(); ?>';
         $scope.config.inline = <?= (int) $config->inline; ?>;
+        $scope.orderBy = '<?= $config->getDefaultOrderDirection() . $config->getDefaultOrderField(); ?>';
     });
 </script>
 <div ng-controller="<?php echo $config->hash; ?>" ng-init="init()">

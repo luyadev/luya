@@ -102,7 +102,7 @@
 		
 		$scope.parentController = $scope.$parent;
 		
-		$scope.orderBy = "+id";
+		//$scope.orderBy = "+id";
 		
 		$scope.showCrudList = true;
 		

@@ -50,10 +50,40 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
 
     public $filters = false;
     
+    public $defaultOrder = null;
+    
     public $apiEndpoint = null;
 
     public $primaryKey = null; /* @todo not sure yet if right place to impelment about config */
 
+    public function getDefaultOrderField()
+    {
+        if ($this->defaultOrder === null) {
+            return false;
+        }
+        
+        return key($this->defaultOrder);
+    }
+    
+    public function getDefaultOrderDirection()
+    {
+        if ($this->defaultOrder === null) {
+            return false;
+        }
+        
+        $direction = (is_array($this->defaultOrder)) ? current($this->defaultOrder) : null; // us preg split to find in string?
+        
+        if ($direction == SORT_ASC || strtolower($direction) == 'asc') {
+            return '+';
+        }
+            
+        if ($direction == SORT_DESC || strtolower($direction) == 'desc') {
+            return '-';
+        }
+        
+        return '+';
+    }
+    
     public function setConfig(array $config)
     {
         if (count($this->_config) > 0) {

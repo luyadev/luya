@@ -96,6 +96,25 @@ abstract class Model extends ActiveRecord implements GenericSearchInterface, NgR
     }
 
     /**
+     * Define the default ordering for the ngrest list when loading, by default the primary key
+     * sorted ascending is used. To override the method for example sorting by a timestamp field:
+     * 
+     * ```php
+     * public function ngRestListOrder()
+     * {
+     *     return ['created_at' => SORT_ASC];
+     * }
+     * ```
+     *
+     * @return array Return an Array where the key is the field and value the direction. Example `['timestamp' => SORT_ASC]`.
+     * @since 1.0.0-beta8
+     */
+    public function ngRestListOrder()
+    {
+        return [$this->getNgRestPrimaryKey() => SORT_DESC];
+    }
+    
+    /**
      * The NgRestFind is used when performing the crud list index overivew. You
      * can override this method in order to hide data from the ngRestFind command
      * which populates all data from the database.

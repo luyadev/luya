@@ -122,6 +122,21 @@ public function ngRestConfig($config)
 }
 ```
 
+## Grid List default Order/Sort
+
+By default the gird list is sorted by the Primary Key (mostly known as ID) in Descending direction. To override the default implement just override the `ngRestListOrder` method with an array where the key is the field and value the direction of sorting.
+
+```php
+public function ngRestListOrder()
+{
+    return ['timestamp_created' => SORT_ASC];
+}
+```
+Now the default ordering of the grid list data is by the field *timestamp_created* in ascending position.
+
++ `SORT_ASC` = From lower to bigger chars/numbers *1,2,3,..*
++ `SORT_DESC` = From bigger to lower chars/numbers *...,3,2,1*
+
 ## Adding User-Filters
 
 Sometimes the users should filter the crud list data based on different where conditions, assuming we have some calendar data with huge amount of data. Now the administration user should have the possibility to see already past calendar entries, and upcoming calendar entries. To do so we create a new filter for this NgRest Model. To provide filters we have to override the method `ngRestFilters()` and provide an array with a name and a find statement to collect the data, for example the example described above:
