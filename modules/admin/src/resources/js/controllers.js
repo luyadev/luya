@@ -70,6 +70,7 @@
 				$http.get($scope.config.apiEndpoint + '/filter?filterName=' + $scope.currentFilter + '&' + $scope.config.apiListQueryString).success(function(data) {
 					LuyaLoading.stop();
 					$scope.data.list = data;
+					$scope.reApplyOrder();
 				});
 			}
 		};
@@ -129,6 +130,10 @@
 		$scope.changeOrder = function(field, sort) {
 			$scope.orderBy = sort + field;
 			$scope.data.list = $filter('orderBy')($scope.data.list, sort + field);
+		};
+		
+		$scope.reApplyOrder = function() {
+			$scope.data.list = $filter('orderBy')($scope.data.list, $scope.orderBy);
 		};
 		
 		$scope.activeWindowReload = function() {
@@ -279,6 +284,7 @@
 				$http.get($scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString).success(function(data) {
 					LuyaLoading.stop();
 					$scope.data.list = data;
+					$scope.reApplyOrder();
 				});
 			});
 		};
