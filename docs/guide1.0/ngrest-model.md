@@ -124,10 +124,10 @@ public function ngRestConfig($config)
 
 ## Adding User-Filters
 
-Sometimes the users should filter the crud list data based on different where conditions, assuming we have some calendar data with huge amount of data. Now the administration user should have the possibility to see already past calendar entries, and upcoming calendar entries. To do so we create a new filter for this NgRest Model. To provide filters we have to override the method `filters()` and provide an array with a name and a find statement to collect the data, for example the example described above:
+Sometimes the users should filter the crud list data based on different where conditions, assuming we have some calendar data with huge amount of data. Now the administration user should have the possibility to see already past calendar entries, and upcoming calendar entries. To do so we create a new filter for this NgRest Model. To provide filters we have to override the method `ngRestFilters()` and provide an array with a name and a find statement to collect the data, for example the example described above:
 
 ```php
-public function filters()
+public function ngRestFilters()
 {
     return [
         'Upcoming Events' => self::find()->where(['>=', 'timestamp', time()]),

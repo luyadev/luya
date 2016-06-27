@@ -86,8 +86,11 @@ abstract class Model extends ActiveRecord implements GenericSearchInterface, NgR
      *     'year2016' => self::find()->where(['between', 'date', 2015, 2016]),
      * ];
      * ```
+     * 
+     * @return array Return an array where key is the name and value is the find() condition for the filters.
+     * @since 1.0.0-beta8
      */
-    public function filters()
+    public function ngRestFilters()
     {
         return [];
     }

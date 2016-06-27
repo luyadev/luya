@@ -75,7 +75,7 @@ class Controller extends \admin\base\Controller
         
         
         $config->inline = (bool) $inline;
-        $config->filters = $this->model->filters();
+        $config->filters = $this->model->ngRestFilters();
         
         $ngrest = new \admin\ngrest\NgRest($config);
 

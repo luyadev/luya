@@ -44,12 +44,12 @@ class Api extends \admin\base\RestActiveController
         
         $filterName = Html::encode($filterName);
         
-        if (!array_key_exists($filterName, $model->filters())) {
+        if (!array_key_exists($filterName, $model->ngRestFilters())) {
             throw new InvalidCallException("The requested filter does not exists in the filter list.");
         }
 
         return new ActiveDataProvider([
-            'query' => $model->filters()[$filterName],
+            'query' => $model->ngRestFilters()[$filterName],
         ]);
     }
     
