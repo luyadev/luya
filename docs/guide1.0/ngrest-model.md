@@ -122,6 +122,36 @@ public function ngRestConfig($config)
 }
 ```
 
+## Adding User-Filters
+
+Sometimes the users should filter the crud list data based on different where conditions, assuming we have some calendar data with huge amount of data. Now the administration user should have the possibility to see already past calendar entries, and upcoming calendar entries. To do so we create a new filter for this NgRest Model. To provide filters we have to override the method `filters()` and provide an array with a name and a find statement to collect the data, for example the example described above:
+
+```php
+public function filters()
+{
+    return [
+        'Upcoming Events' => self::find()->where(['>=', 'timestamp', time()]),
+        'Past Events' => self::find()->where(['<=', 'timestamp', time()]),
+    ];
+}
+```
+
+Keep in mind, the query provider [yii\data\ActiveDataProvider](http://www.yiiframework.com/doc-2.0/yii-data-activedataprovider.html) will be used to populate your data, and the expression will be used as `query` Paraementer of the ActiveDataProvider, so now `all()` method needs to be called.
+
+
+## Override ngRestFind
+
+In order to customize the grid list query to hide (or join) data from the grid list view, you can override the `ngRestFind` public static method. This method will be called to retrieve all your data. For example we assume you want to list all news entries which `is_archived` is not 1 (represents an archived news message) than you could override the ngRestFind method as followed:
+
+```php
+public static function ngRestFind()
+{
+    return parent::ngRestFind()->where(['is_archived' => 0]);
+}
+```
+
+Now only the data where is_archived eqauls 0 will be listed in the crud list overview.
+
 ## Soft Deletion 
 
 We have also added a soft delete trait which is going to override the default implementation of the `delete` method. When enabled and configure, the soft delete trait will only mark the datarecord to `is_deleted = 1` instead of removing it from the database.

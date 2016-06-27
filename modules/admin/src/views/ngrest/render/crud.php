@@ -76,14 +76,17 @@
             </div>
             
 
-            <div>
-                <ul>
-                    <li ng-click="loadList()">Reset</li>
-                    <? foreach (array_keys($config->filters) as $name): ?>
-                    <li ng-click="loadFilter('<?= $name; ?>')"><?= $name; ?></li>
+            <?php if (!empty($config->filters)): ?>
+            <div class="input input--select input--vertical">
+                <label class="input__label">Apply Filters</label>
+                <select class="input__field" ng-change="reloadFilter()" ng-model="currentFilter">
+                    <option value="0">Reset to default</option>
+                     <? foreach (array_keys($config->filters) as $name): ?>
+                    <option value="<?= $name; ?>"><?= $name; ?></option>
                     <? endforeach; ?>
-                </ul>
+                </select>
             </div>
+            <?php endif; ?>
 
             <div ng-show="deleteErrors.length">
                 <div class="alert alert--danger">

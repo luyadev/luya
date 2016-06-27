@@ -26,6 +26,8 @@ We assume you have a made a table via the migrations (in your example below we a
 
 Lets have close look at what you model should look like, in our member example of the teammodule:
 
+> In order to read more about configuration and other abilitys to customize your CRUD read the [NgRest Model Config Section](ngrest-model.md).
+
 ```php
 <?php
 namespace teamadmin\models;

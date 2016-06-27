@@ -57,11 +57,20 @@
 			$scope.crudSwitchType = type;
 		};
 		
-		$scope.loadFilter = function(name) {
-			$http.get($scope.config.apiEndpoint + '/filter?filterName=' + name).success(function(data) {
-				LuyaLoading.stop();
-				$scope.data.list = data;
-			});
+		// angular select option does wrong type cast, so we cast 0 as string.
+		$scope.currentFilter = "0";
+		
+		// ng-change event triggers this method
+		$scope.reloadFilter = function() {
+			LuyaLoading.start();
+			if ($scope.currentFilter == 0) {
+				 $scope.loadList();
+			} else {
+				$http.get($scope.config.apiEndpoint + '/filter?filterName=' + $scope.currentFilter).success(function(data) {
+					LuyaLoading.stop();
+					$scope.data.list = data;
+				});
+			}
 		};
 		
 		/* export */
