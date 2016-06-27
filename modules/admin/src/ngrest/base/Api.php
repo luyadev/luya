@@ -8,6 +8,7 @@ use luya\helpers\Url;
 use yii\helpers\Inflector;
 use yii\base\InvalidCallException;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Html;
 
 /**
  * Wrapper for yii2 basic rest controller used with a model class. The wrapper is made to
@@ -40,6 +41,8 @@ class Api extends \admin\base\RestActiveController
     public function actionFilter($filterName)
     {
         $model = $this->model;
+        
+        $filterName = Html::encode($filterName);
         
         if (!array_key_exists($filterName, $model->filters())) {
             throw new InvalidCallException("The requested filter does not exists in the filter list.");
