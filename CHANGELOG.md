@@ -8,6 +8,7 @@ LUYA CHANGELOG
 - `#898` Fixed bug where filters dependencie in image thumbnail directive does not get resolved and result in js error.
 - `#902` Fixed bug where version blocks can not update its parent nav item object.
 - `#906` Added silent mode for the LUYA setup process.
+- `#908` Added ability to set ngRestFilters the specific grid list data where conditions.
 - `#911` Added ability to set default sorting/ordering for grid list data in ngrest model.
 
 1.0.0-beta7 (20.06.2016)
