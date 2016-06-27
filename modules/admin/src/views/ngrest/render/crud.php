@@ -79,7 +79,7 @@
             <?php if (!empty($config->filters)): ?>
             <div class="input input--select input--vertical">
                 <label class="input__label">Apply Filters</label>
-                <select class="input__field" ng-change="reloadFilter()" ng-model="currentFilter">
+                <select class="input__field" ng-change="realoadCrudList()" ng-model="currentFilter">
                     <option value="0">Reset to default</option>
                      <? foreach (array_keys($config->filters) as $name): ?>
                     <option value="<?= $name; ?>"><?= $name; ?></option>

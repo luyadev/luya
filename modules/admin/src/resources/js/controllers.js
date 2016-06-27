@@ -61,12 +61,13 @@
 		$scope.currentFilter = "0";
 		
 		// ng-change event triggers this method
-		$scope.reloadFilter = function() {
+		// this method is also used withing after save/update events in order to retrieve current selecter filter data.
+		$scope.realoadCrudList = function() {
 			LuyaLoading.start();
 			if ($scope.currentFilter == 0) {
 				 $scope.loadList();
 			} else {
-				$http.get($scope.config.apiEndpoint + '/filter?filterName=' + $scope.currentFilter).success(function(data) {
+				$http.get($scope.config.apiEndpoint + '/filter?filterName=' + $scope.currentFilter + '&' + $scope.config.apiListQueryString).success(function(data) {
 					LuyaLoading.stop();
 					$scope.data.list = data;
 				});
@@ -238,7 +239,7 @@
 			$scope.updateErrors = [];
 			
 			$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true)).success(function(data) {
-				$scope.loadList();
+				$scope.realoadCrudList();
 				AdminToastService.success(i18n['js_ngrest_rm_update'], 2000);
 				$scope.switchTo(0);
 				$scope.highlightId = $scope.data.updateId;
@@ -256,7 +257,7 @@
 			$scope.createErrors = [];
 			
 			$http.post($scope.config.apiEndpoint, angular.toJson($scope.data.create, true)).success(function(data) {
-				$scope.loadList();
+				$scope.realoadCrudList();
 				$scope.data.create = {};
 				AdminToastService.success(i18n['js_ngrest_rm_success'], 2000);
 				$scope.switchTo(0);
