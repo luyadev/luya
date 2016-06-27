@@ -16,6 +16,7 @@
         $scope.config.pk = '<?php echo $this->context->getPrimaryKey(); ?>';
         $scope.config.inline = <?= (int) $config->inline; ?>;
         $scope.orderBy = '<?= $config->getDefaultOrderDirection() . $config->getDefaultOrderField(); ?>';
+        $scope.saveCallback = <?= $config->getOption('saveCallback'); ?>;
     });
 </script>
 <div ng-controller="<?php echo $config->hash; ?>" ng-init="init()">

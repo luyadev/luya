@@ -117,6 +117,8 @@ class Lang extends \admin\ngrest\base\Model
     public function ngRestConfig($config)
     {
         $this->ngRestConfigDefine($config, ['list', 'create', 'update'], ['name', 'short_code', 'is_default']);
+     
+        $config->options = ['saveCallback' => 'function(ServiceLanguagesData) { ServiceLanguagesData.load(true).then(function() { $scope.AdminLangService.load(); }); }'];
         
         return $config;
     }

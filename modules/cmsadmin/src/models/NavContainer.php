@@ -53,6 +53,10 @@ class NavContainer extends \admin\ngrest\base\Model
         $config->create->copyFrom('list');
         $config->update->copyFrom('list');
 
+        $config->options = [
+            'saveCallback' => 'function(ServiceMenuData) { ServiceMenuData.load(true); }',
+        ];
+        
         return $config;
     }
 

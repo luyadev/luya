@@ -30,7 +30,7 @@
 	 * 
 	 * + bool $config.inline Determines whether this crud is in inline mode orno
 	 */
-	zaa.controller("CrudController", function($scope, $filter, $http, $sce, $state, $timeout, AdminLangService, LuyaLoading, AdminToastService) {
+	zaa.controller("CrudController", function($scope, $filter, $http, $sce, $state, $timeout, $injector, AdminLangService, LuyaLoading, AdminToastService) {
 		
 		LuyaLoading.start();
 		
@@ -102,7 +102,15 @@
 		
 		$scope.parentController = $scope.$parent;
 		
-		//$scope.orderBy = "+id";
+		// $scope.orderBy = "+id";
+		
+		// $scope.saveCallback = null;
+		
+		$scope.applySaveCallback = function() {
+			if ($scope.saveCallback != 0 && $scope.saveCallback != null && $scope.saveCallback != false) {
+				$injector.invoke($scope.saveCallback, this);
+			}
+		}
 		
 		$scope.showCrudList = true;
 		
@@ -245,12 +253,13 @@
 			
 			$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true)).success(function(data) {
 				$scope.realoadCrudList();
+				$scope.applySaveCallback();
 				AdminToastService.success(i18n['js_ngrest_rm_update'], 2000);
 				$scope.switchTo(0);
 				$scope.highlightId = $scope.data.updateId;
 				$timeout(function() {
 					$scope.highlightId = 0;
-				}, 3000);
+				}, 4000);
 				
 			}).error(function(data) {
 				$scope.updateErrors = data;
@@ -263,6 +272,7 @@
 			
 			$http.post($scope.config.apiEndpoint, angular.toJson($scope.data.create, true)).success(function(data) {
 				$scope.realoadCrudList();
+				$scope.applySaveCallback();
 				$scope.data.create = {};
 				AdminToastService.success(i18n['js_ngrest_rm_success'], 2000);
 				$scope.switchTo(0);

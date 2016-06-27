@@ -126,6 +126,27 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
     {
         return ($this->hasField($pointer, $field)) ? $this->_config[$pointer][$field] : false;
     }
+    
+    /**
+     * Get an option by its key from the options pointer. Define options like
+     * 
+     * ```php
+     * $configBuilder->options = ['saveCallback' => 'console.log(this)'];
+     * ```
+     * 
+     * Get the option parameter
+     * 
+     * ```php
+     * $config->getOption('saveCallback');
+     * ```
+     * 
+     * @param unknown $key
+     * @return boolean
+     */
+    public function getOption($key)
+    {
+        return ($this->hasPointer('options') && array_key_exists($key, $this->_config['options'])) ? $this->_config['options'][$key] : 0; 
+    }
 
     public function addField($pointer, $field, array $options = [])
     {

@@ -25,7 +25,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
 
     protected $config = [];
 
-    private $_pointersMap = ['list', 'create', 'update', 'delete', 'aw'];
+    private $_pointersMap = ['list', 'create', 'update', 'delete', 'aw', 'options'];
     
     /**
      * Maig setter function, defines whether a pointer exists or not, if not existing it will be created.

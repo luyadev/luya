@@ -167,6 +167,26 @@ public static function ngRestFind()
 
 Now only the data where is_archived eqauls 0 will be listed in the crud list overview.
 
+## Angular Save/Update callback
+
+Sometimes you just want to trigger some javascript functions after the save/update process in the NgRest Model, therefore you can add config options with wrapped inside a javascript function which will be evaluated in triggered, please take care of javascript errors and eval injections when using this method!
+
+```php
+
+public function ngRestConfig($config)
+{
+    // ...
+    
+    $config->options = [
+        'saveCallback' => 'function(ServiceMenuData) { ServiceMenuData.load(true); }', // this function callback will be trigger after save/update success calls.
+    ];
+    
+    // ...
+    
+    return $config;
+}
+```
+
 ## Soft Deletion 
 
 We have also added a soft delete trait which is going to override the default implementation of the `delete` method. When enabled and configure, the soft delete trait will only mark the datarecord to `is_deleted = 1` instead of removing it from the database.
