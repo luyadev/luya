@@ -1,3 +1,6 @@
+<?php
+use admin\ngrest\render\RenderCrud;
+?>
 <script>
     activeWindowCallbackUrl = '<?php echo $activeWindowCallbackUrl;?>';
     ngrestConfigHash = '<?php echo $config->hash; ?>';
@@ -17,6 +20,10 @@
         $scope.config.inline = <?= (int) $config->inline; ?>;
         $scope.orderBy = '<?= $config->getDefaultOrderDirection() . $config->getDefaultOrderField(); ?>';
         $scope.saveCallback = <?= $config->getOption('saveCallback'); ?>;
+        <?php if ($config->groupByField): ?>
+        $scope.groupBy = 1;
+		$scope.groupByField = "<?= $config->groupByField; ?>";
+        <?php endif; ?>
     });
 </script>
 <div ng-controller="<?php echo $config->hash; ?>" ng-init="init()">
@@ -90,6 +97,16 @@
             </div>
             <?php endif; ?>
 
+            <div class="input input--select input--vertical">
+                <label class="input__label">Group By Field</label>
+                <select class="input__field" ng-change="changeGroupByField()" ng-model="groupByField">
+                   <option value="0">Ausschalten</option>
+                   <?php foreach ($config->getPointer('list') as $item): ?>
+                   <option value="<?= $item['name']; ?>"><?= $item['alias']; ?></option>
+                   <?php endforeach; ?>
+                </select>
+            </div>
+
             <div ng-show="deleteErrors.length">
                 <div class="alert alert--danger">
                     <ul>
@@ -108,11 +125,12 @@
                         <?php endif; ?>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr ng-repeat="(key, item) in data.list | srcbox:searchString" ng-class="{'crud__item-highlight': isHighlighted(item)}">
+                <tbody ng-repeat="(key, items) in data.list | srcbox:searchString | groupBy: groupByField">
+                    <tr ng-if="groupBy" style="background-color:red;"><td colspan="100"><strong>{{key}}</strong></td></tr>
+                    <tr ng-repeat="(k, item) in items | srcbox:searchString" ng-class="{'crud__item-highlight': isHighlighted(item)}">
                         <?php foreach ($config->getPointer('list') as $item): ?>
-                            <?php foreach ($this->context->createElements($item, \admin\ngrest\render\RenderCrud::TYPE_LIST) as $element): ?>
-                                <td><?php echo $element['html']; ?></td>
+                            <?php foreach ($this->context->createElements($item, RenderCrud::TYPE_LIST) as $element): ?>
+                                <td ><?php echo $element['html']; ?></td>
                             <?php endforeach; ?>
                         <?php endforeach; ?>
                         <?php if (count($this->context->getButtons()) > 0): ?>
@@ -136,22 +154,22 @@
 
                     <!-- MODAL CONTENT -->
                     <div class="modal__content">
-                    <?php foreach($this->context->forEachGroups('create') as $group): ?>
-                        <?php if (!$group['is_default']): ?>
-                        <h5><?= $group['name']; ?> <? var_dump($group['collapsed']); ?></h5>
-                        <div style="border:1px solid #F0F0F0; margin-bottom:20px;">
-                        <?php endif; ?>
-                        <?php foreach($group['fields'] as $field => $fieldItem): ?>
-                            <div class="row">
-                            <?php foreach ($this->context->createElements($fieldItem, \admin\ngrest\render\RenderCrud::TYPE_CREATE) as $element): ?>
-                                <?php echo $element['html']; ?>
+                        <?php foreach($this->context->forEachGroups('create') as $group): ?>
+                            <?php if (!$group['is_default']): ?>
+                            <h5><?= $group['name']; ?> <? var_dump($group['collapsed']); ?></h5>
+                            <div style="border:1px solid #F0F0F0; margin-bottom:20px;">
+                            <?php endif; ?>
+                            <?php foreach($group['fields'] as $field => $fieldItem): ?>
+                                <div class="row">
+                                <?php foreach ($this->context->createElements($fieldItem, RenderCrud::TYPE_CREATE) as $element): ?>
+                                    <?php echo $element['html']; ?>
+                                <?php endforeach; ?>
+                                </div>
                             <?php endforeach; ?>
+                            <?php if (!$group['is_default']): ?>
                             </div>
+                            <?php endif; ?>
                         <?php endforeach; ?>
-                        <?php if (!$group['is_default']): ?>
-                        </div>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
 
                         <div class="red lighten-2" style="color:white;" ng-show="createErrors.length">
                             <ul>
@@ -160,7 +178,6 @@
                         </div>
 
                     </div>
-
                     <div class="modal__footer">
                         <div class="row">
                             <div class="col s12">
@@ -192,7 +209,7 @@
                             <?php endif; ?>
                             <?php foreach($group['fields'] as $field => $fieldItem): ?>
                                 <div class="row">
-                                <?php foreach ($this->context->createElements($fieldItem, \admin\ngrest\render\RenderCrud::TYPE_UPDATE) as $element): ?>
+                                <?php foreach ($this->context->createElements($fieldItem, RenderCrud::TYPE_UPDATE) as $element): ?>
                                     <?php echo $element['html']; ?>
                                 <?php endforeach; ?>
                                 </div>

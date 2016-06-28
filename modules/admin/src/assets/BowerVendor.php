@@ -57,5 +57,7 @@ class BowerVendor extends \luya\web\Asset
         // file upload
         'ng-file-upload/ng-file-upload.min.js',
         'ng-file-upload/ng-file-upload-shim.min.js',
+        
+        'angular-filter.min.js',
     ];
 }

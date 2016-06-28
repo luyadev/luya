@@ -136,6 +136,27 @@ abstract class Model extends ActiveRecord implements GenericSearchInterface, NgR
     }
     
     /**
+     * Enable the Grouping by a field option by default. Allows you to predefine the default group field.
+     * 
+     * ```php
+     * public function ngRestGroupByField()
+     * {
+     *     return 'cat_id';
+     * }
+     * ```
+     * 
+     * Now by default the fields are grouped by the cat_id field, the admin user can always reset the group by filter
+     * to none.
+     * 
+     * @return string The field of what the default grouping should be, false disables the default grouping (default).
+     * @since 1.0.0-beta8
+     */
+    public function ngRestGroupByField()
+    {
+        return false;
+    }
+    
+    /**
      * The NgRestFind is used when performing the crud list index overivew. You
      * can override this method in order to hide data from the ngRestFind command
      * which populates all data from the database.

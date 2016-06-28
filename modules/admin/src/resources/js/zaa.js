@@ -1,4 +1,4 @@
-var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angular-loading-bar", "ngFileUpload", "ngWig", "slugifier", "flow"]);
+var zaa = angular.module("zaa", ["ui.router", "ngResource", "ngDragDrop", "angular-loading-bar", "ngFileUpload", "ngWig", "slugifier", "flow", "angular.filter"]);
 
 
 /**

@@ -78,6 +78,7 @@ class Controller extends \admin\base\Controller
         $config->filters = $this->model->ngRestFilters();
         $config->defaultOrder = $this->model->ngRestListOrder();
         $config->attributeGroups = $this->model->ngRestAttributeGroups();
+        $config->groupByField = $this->model->ngRestGroupByField();
         
         $ngrest = new \admin\ngrest\NgRest($config);
 
