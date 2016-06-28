@@ -154,10 +154,11 @@ use admin\ngrest\render\RenderCrud;
 
                     <!-- MODAL CONTENT -->
                     <div class="modal__content">
-                        <?php foreach($this->context->forEachGroups('create') as $group): ?>
+                        <?php foreach($this->context->forEachGroups('create') as $key => $group): ?>
                             <?php if (!$group['is_default']): ?>
-                            <h5><?= $group['name']; ?> <? var_dump($group['collapsed']); ?></h5>
-                            <div style="border:1px solid #F0F0F0; margin-bottom:20px;">
+                            <div ng-init="groupToggler[<?= $key; ?>] = <?= (int) $group['collapsed']; ?>">
+                            <h5 ng-click="groupToggler[<?= $key; ?>] = !groupToggler[<?= $key; ?>]"><?= $group['name']; ?> +/- Toggler</h5>
+                            <div style="border:1px solid #F0F0F0; margin-bottom:20px;" ng-show="groupToggler[<?= $key; ?>]">
                             <?php endif; ?>
                             <?php foreach($group['fields'] as $field => $fieldItem): ?>
                                 <div class="row">
@@ -167,6 +168,7 @@ use admin\ngrest\render\RenderCrud;
                                 </div>
                             <?php endforeach; ?>
                             <?php if (!$group['is_default']): ?>
+                            </div>
                             </div>
                             <?php endif; ?>
                         <?php endforeach; ?>
@@ -202,23 +204,24 @@ use admin\ngrest\render\RenderCrud;
                 <form name="formUpdate" role="form" ng-submit="submitUpdate()">
                     <!-- MODAL CONTENT -->
                     <div class="modal__content">
-                        <?php foreach($this->context->forEachGroups('update') as $group): ?>
+                        <?php foreach($this->context->forEachGroups('update') as $key => $group): ?>
                             <?php if (!$group['is_default']): ?>
-                            <h5><?= $group['name']; ?> <? var_dump($group['collapsed']); ?></h5>
-                            <div style="border:1px solid #F0F0F0; margin-bottom:20px;">
+                            <div ng-init="groupToggler[<?= $key; ?>] = <?= (int) $group['collapsed']; ?>">
+                            <h5 ng-click="groupToggler[<?= $key; ?>] = !groupToggler[<?= $key; ?>]"><?= $group['name']; ?> +/- Toggler</h5>
+                            <div style="border:1px solid #F0F0F0; margin-bottom:20px;" ng-show="groupToggler[<?= $key; ?>]">
                             <?php endif; ?>
                             <?php foreach($group['fields'] as $field => $fieldItem): ?>
                                 <div class="row">
-                                <?php foreach ($this->context->createElements($fieldItem, RenderCrud::TYPE_UPDATE) as $element): ?>
+                                <?php foreach ($this->context->createElements($fieldItem, RenderCrud::TYPE_CREATE) as $element): ?>
                                     <?php echo $element['html']; ?>
                                 <?php endforeach; ?>
                                 </div>
                             <?php endforeach; ?>
                             <?php if (!$group['is_default']): ?>
                             </div>
+                            </div>
                             <?php endif; ?>
                         <?php endforeach; ?>
-
                         <div class="red lighten-2" style="color:white;" ng-show="updateErrors.length">
                             <ul>
                                 <li ng-repeat="error in updateErrors" style="padding:6px;">- {{error.message}}</li>
