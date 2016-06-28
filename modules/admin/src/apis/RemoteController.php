@@ -6,6 +6,11 @@ use Yii;
 use Exception;
 use admin\models\UserOnline;
 
+/**
+ * Remove API, allows to collect system data with a valid $token.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class RemoteController extends \luya\rest\Controller
 {
     public function userAuthClass()

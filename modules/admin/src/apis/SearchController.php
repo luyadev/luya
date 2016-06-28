@@ -7,7 +7,9 @@ use Exception;
 use admin\models\SearchData;
 
 /**
- * @author nadar
+ * Search API, allows you to perform search querys for the entire administration including all items provided in the auth section.
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
 class SearchController extends \admin\base\RestController
 {

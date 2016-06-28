@@ -6,6 +6,8 @@ use Yii;
 use admin\models\UserOnline;
 
 /**
+ * Timestamp API, refreshes the UserOnline system of the administration area.
+ * 
  * @author nadar
  */
 class TimestampController extends \admin\base\RestController

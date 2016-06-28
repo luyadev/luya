@@ -5,8 +5,8 @@ namespace admin\apis;
 use Yii;
 
 /**
- * @todo rename from auth to permission
- *
+ * Admin Menu API, provides all menu items and dashabord informations for a node or the entire system.
+ * 
  * @author nadar
  */
 class MenuController extends \admin\base\RestController
