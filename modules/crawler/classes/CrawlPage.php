@@ -36,6 +36,10 @@ class CrawlPage extends \yii\base\Object
         $info = parse_url($this->baseUrl);
         
         $this->baseHost = $info['scheme'] . '://' . $info['host'];
+        
+        if (isset($info['port'])) {
+            $this->baseHost .= ':' . $info['port'];
+        }
     }
     
     public function verbosePrint($key, $value = null)
