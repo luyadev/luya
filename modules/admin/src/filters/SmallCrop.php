@@ -2,6 +2,11 @@
 
 namespace admin\filters;
 
+/**
+ * Admin Module default Filter: Small Crop (100x100)
+ *
+ * @author Basil Suter <basil@nadar.io>
+ */
 class SmallCrop extends \admin\base\Filter
 {
     public function identifier()
@@ -11,7 +16,7 @@ class SmallCrop extends \admin\base\Filter
 
     public function name()
     {
-        return 'Zuschneiden klein (100x100)';
+        return 'Crop small (100x100)';
     }
 
     public function chain()

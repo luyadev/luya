@@ -2,6 +2,11 @@
 
 namespace admin\filters;
 
+/**
+ * Admin Module default Filter: Large Thumbanil (800xnull)
+ *
+ * @author Basil Suter <basil@nadar.io>
+ */
 class LargeThumbnail extends \admin\base\Filter
 {
     public function identifier()
@@ -11,7 +16,7 @@ class LargeThumbnail extends \admin\base\Filter
 
     public function name()
     {
-        return 'Thumbnail gross (800x800)';
+        return 'Thumbnail large (800xnull)';
     }
 
     public function chain()

@@ -2,6 +2,11 @@
 
 namespace admin\filters;
 
+/**
+ * Admin Module default Filter: Tiny Thumbnail (40xnull)
+ *
+ * @author Basil Suter <basil@nadar.io>
+ */
 class TinyThumbnail extends \admin\base\Filter
 {
     public function identifier()
@@ -11,7 +16,7 @@ class TinyThumbnail extends \admin\base\Filter
 
     public function name()
     {
-        return 'Thumbnail klein (40x40)';
+        return 'Thumbnail tiny (40xnull)';
     }
 
     public function chain()

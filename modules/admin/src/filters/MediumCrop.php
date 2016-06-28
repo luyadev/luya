@@ -2,6 +2,11 @@
 
 namespace admin\filters;
 
+/**
+ * Admin Module default Filter: Medium Crop (300x300)
+ *
+ * @author Basil Suter <basil@nadar.io>
+ */
 class MediumCrop extends \admin\base\Filter
 {
     public function identifier()
@@ -11,7 +16,7 @@ class MediumCrop extends \admin\base\Filter
 
     public function name()
     {
-        return 'Zuschneiden mittel (300x300)';
+        return 'Crop medium (300x300)';
     }
 
     public function chain()

@@ -2,6 +2,11 @@
 
 namespace admin\filters;
 
+/**
+ * Admin Module default Filter: Medium Thumbnail (300xnull)
+ *
+ * @author Basil Suter <basil@nadar.io>
+ */
 class MediumThumbnail extends \admin\base\Filter
 {
     public function identifier()
@@ -11,7 +16,7 @@ class MediumThumbnail extends \admin\base\Filter
 
     public function name()
     {
-        return 'Thumbnail mittel (300x300)';
+        return 'Thumbnail medium (300xnull)';
     }
 
     public function chain()

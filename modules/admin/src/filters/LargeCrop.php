@@ -2,6 +2,11 @@
 
 namespace admin\filters;
 
+/**
+ * Admin Module default Filter: Large Crop (800x800)
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class LargeCrop extends \admin\base\Filter
 {
     public function identifier()
@@ -11,7 +16,7 @@ class LargeCrop extends \admin\base\Filter
 
     public function name()
     {
-        return 'Zuschneiden gross (800x800)';
+        return 'Crop large (800x800)';
     }
 
     public function chain()

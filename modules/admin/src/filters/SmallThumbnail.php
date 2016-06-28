@@ -2,6 +2,11 @@
 
 namespace admin\filters;
 
+/**
+ * Admin Module default Filter: Small Thumbail (100xnull)
+ *
+ * @author Basil Suter <basil@nadar.io>
+ */
 class SmallThumbnail extends \admin\base\Filter
 {
     public function identifier()
@@ -11,7 +16,7 @@ class SmallThumbnail extends \admin\base\Filter
 
     public function name()
     {
-        return 'Thumbnail klein (100x100)';
+        return 'Thumbnail small (100xnull)';
     }
 
     public function chain()

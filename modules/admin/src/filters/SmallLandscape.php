@@ -2,6 +2,11 @@
 
 namespace admin\filters;
 
+/**
+ * Admin Module default Filter: Small Landscape (150x50)
+ *
+ * @author Basil Suter <basil@nadar.io>
+ */
 class SmallLandscape extends \admin\base\Filter
 {
     public function identifier()
@@ -11,7 +16,7 @@ class SmallLandscape extends \admin\base\Filter
 
     public function name()
     {
-        return 'Kleines Landschaftsbild (150x50)';
+        return 'Landscape small (150x50)';
     }
 
     public function chain()

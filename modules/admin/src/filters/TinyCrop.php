@@ -2,6 +2,11 @@
 
 namespace admin\filters;
 
+/**
+ * Admin Module default Filter: Tiny Crop (40x40)
+ *
+ * @author Basil Suter <basil@nadar.io>
+ */
 class TinyCrop extends \admin\base\Filter
 {
     public function identifier()
@@ -11,7 +16,7 @@ class TinyCrop extends \admin\base\Filter
 
     public function name()
     {
-        return 'Zuschneiden sehr klein (40x40)';
+        return 'Crop tiny (40x40)';
     }
 
     public function chain()
