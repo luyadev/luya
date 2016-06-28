@@ -49,7 +49,7 @@ public function ngRestConfig($config)
 {
     // define fields for types based from ngrestAttributeTypes
     $this->ngRestConfigDefine($config, 'list', ['title', 'name', 'timestamp']);
-    $this->ngRestConfigDefine($config, ['create', 'update'], ['title, 'name', 'text', 'desription', 'timestamp', 'size']);
+    $this->ngRestConfigDefine($config, ['create', 'update'], ['title', 'name', 'text', 'description', 'timestamp', 'size']);
     
     // enable or disable ability to delete;
     $config->delete = false; 
