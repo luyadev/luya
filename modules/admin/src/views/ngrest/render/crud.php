@@ -154,7 +154,7 @@ use admin\ngrest\render\RenderCrud;
 
                     <!-- MODAL CONTENT -->
                     <div class="modal__content">
-                        <?php foreach($this->context->forEachGroups('create') as $key => $group): ?>
+                        <?php foreach($this->context->forEachGroups(RenderCrud::TYPE_CREATE) as $key => $group): ?>
                             <?php if (!$group['is_default']): ?>
                             <div ng-init="groupToggler[<?= $key; ?>] = <?= (int) $group['collapsed']; ?>">
                             <h5 ng-click="groupToggler[<?= $key; ?>] = !groupToggler[<?= $key; ?>]"><?= $group['name']; ?> +/- Toggler</h5>
@@ -204,7 +204,7 @@ use admin\ngrest\render\RenderCrud;
                 <form name="formUpdate" role="form" ng-submit="submitUpdate()">
                     <!-- MODAL CONTENT -->
                     <div class="modal__content">
-                        <?php foreach($this->context->forEachGroups('update') as $key => $group): ?>
+                        <?php foreach($this->context->forEachGroups(RenderCrud::TYPE_UPDATE) as $key => $group): ?>
                             <?php if (!$group['is_default']): ?>
                             <div ng-init="groupToggler[<?= $key; ?>] = <?= (int) $group['collapsed']; ?>">
                             <h5 ng-click="groupToggler[<?= $key; ?>] = !groupToggler[<?= $key; ?>]"><?= $group['name']; ?> +/- Toggler</h5>
@@ -212,7 +212,7 @@ use admin\ngrest\render\RenderCrud;
                             <?php endif; ?>
                             <?php foreach($group['fields'] as $field => $fieldItem): ?>
                                 <div class="row">
-                                <?php foreach ($this->context->createElements($fieldItem, RenderCrud::TYPE_CREATE) as $element): ?>
+                                <?php foreach ($this->context->createElements($fieldItem, RenderCrud::TYPE_UPDATE) as $element): ?>
                                     <?php echo $element['html']; ?>
                                 <?php endforeach; ?>
                                 </div>
