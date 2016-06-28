@@ -137,6 +137,19 @@ Now the default ordering of the grid list data is by the field *timestamp_create
 + `SORT_ASC` = From lower to bigger chars/numbers *1,2,3,..*
 + `SORT_DESC` = From bigger to lower chars/numbers *...,3,2,1*
 
+## Grid List Group Fields
+
+To generate more administration user friendly crud list panels the ability to group fields helps a lot in case of usability. This will automtically group the field values for the defined field and removes the column if the defined group field. To define a default group by policy override the `ngRestGroupByField()` method like follow, returning a string with the field name where the group should be applied to:
+
+```php
+public function ngRestGroupByField()
+{
+    return 'cat_id';
+}
+```
+
+The field (`cat_id` in the example) must exist in the list pointer config array.
+
 ## Adding User-Filters
 
 Sometimes the users should filter the crud list data based on different where conditions, assuming we have some calendar data with huge amount of data. Now the administration user should have the possibility to see already past calendar entries, and upcoming calendar entries. To do so we create a new filter for this NgRest Model. To provide filters we have to override the method `ngRestFilters()` and provide an array with a name and a find statement to collect the data, for example the example described above:

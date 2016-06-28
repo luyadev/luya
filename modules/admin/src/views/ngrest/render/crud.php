@@ -118,7 +118,7 @@ use admin\ngrest\render\RenderCrud;
                 <thead>
                     <tr>
                         <?php foreach ($config->getPointer('list') as $item): ?>
-                            <th><?php echo $item['alias']; ?> <i ng-click="changeOrder('<?php echo $item['name']; ?>', '+')" ng-class="{'active-orderby' : isOrderBy('+<?php echo $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeOrder('<?php echo $item['name']; ?>', '-')" ng-class="{'active-orderby' : isOrderBy('-<?php echo $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
+                            <th ng-hide="groupBy && groupByField == '<?= $item['name']; ?>'"><?php echo $item['alias']; ?> <i ng-click="changeOrder('<?php echo $item['name']; ?>', '+')" ng-class="{'active-orderby' : isOrderBy('+<?php echo $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeOrder('<?php echo $item['name']; ?>', '-')" ng-class="{'active-orderby' : isOrderBy('-<?php echo $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
                         <?php endforeach; ?>
                         <?php if (count($this->context->getButtons()) > 0): ?>
                             <th style="text-align:right;"><span class="grid-data-length">{{data.list.length}} <?php echo \admin\Module::t('ngrest_crud_rows_count'); ?></span></th>
@@ -126,11 +126,11 @@ use admin\ngrest\render\RenderCrud;
                     </tr>
                 </thead>
                 <tbody ng-repeat="(key, items) in data.list | srcbox:searchString | groupBy: groupByField">
-                    <tr ng-if="groupBy" style="background-color:red;"><td colspan="100"><strong>{{key}}</strong></td></tr>
+                    <tr ng-if="groupBy" style="background-color:#2196F3; color:white;"><td colspan="100"><strong>{{key}}</strong></td></tr>
                     <tr ng-repeat="(k, item) in items | srcbox:searchString" ng-class="{'crud__item-highlight': isHighlighted(item)}">
                         <?php foreach ($config->getPointer('list') as $item): ?>
                             <?php foreach ($this->context->createElements($item, RenderCrud::TYPE_LIST) as $element): ?>
-                                <td ><?php echo $element['html']; ?></td>
+                                <td ng-hide="groupBy && groupByField == '<?= $item['name']; ?>'"><?php echo $element['html']; ?></td>
                             <?php endforeach; ?>
                         <?php endforeach; ?>
                         <?php if (count($this->context->getButtons()) > 0): ?>
