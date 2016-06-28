@@ -61,6 +61,11 @@ class Block extends \admin\ngrest\base\Model
             'restupdate' => ['class', 'group_id'],
         ];
     }
+    
+    public function ngRestGroupByField()
+    {
+        return 'group_id';
+    }
 
     /**
      * Save id before deleting for clean up in afterDelete()
