@@ -2,6 +2,11 @@
 
 namespace admin\assets;
 
+/**
+ * Login Asset contains all required files for the administration login screen.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class Login extends \luya\web\Asset
 {
     public $sourcePath = '@admin/resources';

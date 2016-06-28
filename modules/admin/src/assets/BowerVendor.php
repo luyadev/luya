@@ -3,6 +3,8 @@
 namespace admin\assets;
 
 /**
+ * BowerVendor Asset contains all files from old bower-asset depencies.
+ * 
  * Now the bower asset files are directly downloaded by the luya team and stored in the resources/vendor folder
  * base on the following composer.json data for fxp asset plugin:
  * 

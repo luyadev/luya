@@ -6,6 +6,11 @@ use Yii;
 use yii\db\ActiveRecord;
 use yii\web\Application;
 
+/**
+ * LogBehavior stores informations when active records are updated or inserted.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class LogBehavior extends \yii\base\Behavior
 {
     public $route = '';

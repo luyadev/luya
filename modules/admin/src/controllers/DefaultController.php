@@ -7,6 +7,11 @@ use admin\Module;
 use luya\helpers\Url;
 use yii\helpers\Json;
 
+/**
+ * Administration Controller provides, dashboard, logout and index.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class DefaultController extends \admin\base\Controller
 {
     public $disablePermissionCheck = true;

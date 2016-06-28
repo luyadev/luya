@@ -8,6 +8,11 @@ use luya\helpers\Url;
 use admin\models\LoginForm;
 use admin\Module;
 
+/**
+ * Login Controller contains async actions, async token send action and login mechanism.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class LoginController extends \admin\base\Controller
 {
     public $layout = '@admin/views/layouts/nosession';

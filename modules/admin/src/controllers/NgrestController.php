@@ -8,6 +8,11 @@ use yii\web\Response;
 use luya\Exception;
 use luya\helpers\FileHelper;
 
+/**
+ * NgRest Controller performs internal all NgRest calls for active windows and other jobs like exports or callbacks.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class NgrestController extends \admin\base\Controller
 {
     public $disablePermissionCheck = true;
