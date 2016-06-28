@@ -260,7 +260,7 @@ $this->beginPage()
                 <tbody>
 
                 <!-- FILES -->
-                <tr ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField" class="filemanager__file" ng-class="{ 'clickable selectable' : allowSelection == 'false' }">
+                <tr ng-repeat="file in filesData | filemanagerfilesfilter:currentFolderId:onlyImages:searchQuery | filter:searchQuery | orderBy:sortField" alt="fileId={{file.id}}" title="fileId={{file.id}}" class="filemanager__file" ng-class="{ 'clickable selectable' : allowSelection == 'false' }">
                     <td ng-click="toggleSelection(file)" class="filemanager__checkox-column" ng-hide="allowSelection == 'true'">
                         <input type="checkbox" ng-checked="inSelection(file)" id="{{file.id}}" />
                         <label for="checked-status-managed-by-angular-{{file.id}}"></label>
@@ -281,6 +281,7 @@ $this->beginPage()
             </div>
             <div class="col s4" ng-show="fileDetail">
                 <div class="filemanager__detail-wrapper">
+                    <h4>{{ fileDetail.name }}</h4>
                     <table class="filemanager__table striped">
                         <tbody>
                         <tr>
