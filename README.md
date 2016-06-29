@@ -31,6 +31,9 @@ We have a made an absolut easy to understand *STEP-BY-STEP* Guide to install LUY
 + [How to install LUYA](https://luya.io)
 + [LUYA in Videos](https://luya.io/en/video-tutorials)
 
++ [Changelog](CHANGELOG.md)
++ [Version upgrade Breaks](UPGRADE.md)
+
 ### Questions and Problems
 
 If you have any questions or problems, don't hesitate to create a [new issue](https://github.com/zephir/luya/issues/new) on the project repository.
@@ -44,11 +47,11 @@ We are always looking for people who share their thoughts, code and problems wit
 
 [Help us building LUYA](https://luya.io/en/guide/luya-collaboration)
 
-### Unit Tests
+### Unit Test
 
 1. Create Database (example luya_phpunit)
-2. Insert Database dump from `tests/sql/1.0.0-beta6.sql`
+2. Insert Database dump from `tests/data/sql/1.0.0-beta7.sql`
 3. Rename phpunit.xml.dist to phpunit.xml
 4. Change dsn, username and passwort in phpunit.xml
-5. Ensure you have installed current composer packages `composer install`.
+5. Ensure you have installed current composer packages `composer install` with dev packages.
 6. Execute the phpunit bin file `./vendor/bin/phpunit`.
