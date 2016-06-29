@@ -1,7 +1,9 @@
 LUYA
 ====
 
-The [Yii 2](https://github.com/yiisoft/yii2) wrapper which provides out of the box functions like an **administration interface**, a beautiful looking **content management system**, **payment** modules, **agency workflows** and other tools to develop your website pretty fast!
+The [Yii 2 PHP Framework](https://github.com/yiisoft/yii2) wrapper which provides out of the box functions like an **administration interface**, a beautiful looking **content management system**, **payment** modules, **agency workflows** and other tools to develop your website pretty fast!
+
+> 20, June 2016: We have released the next beta Version of LUYA: **1.0.0-beta7**.
 
 ![PHP7](https://img.shields.io/badge/php7-yes-green.svg)
 [![Build Status](https://travis-ci.org/luyadev/luya.svg?branch=master)](https://travis-ci.org/luyadev/luya)
@@ -10,23 +12,13 @@ The [Yii 2](https://github.com/yiisoft/yii2) wrapper which provides out of the b
 [![Total Downloads](https://poser.pugx.org/zephir/luya/downloads)](https://packagist.org/packages/zephir/luya) 
 [![Join the chat at https://gitter.im/zephir/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zephir/luya)
 
-> 20, June 2016: We have released the next beta Version of LUYA: **1.0.0-beta7**.
-
 ![Luya Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/luya-beta5.png)
 
 #### ATTENTION
 
 **We have moved all repositories to the new HQ of LUYA, `luyadev` instead of `zephir`. In order to update your packages, remove `zephir` and replace with `luyadev` in your composer require section. The old packages will still work for a while.**
 
-#### ROADMAP
-
-+ ✓ beta7 release (June 2016)
-+ beta8 release (August 2016) - Last NEW features will be implemented (cms permissions).
-+ rc1 release (unknown) - PHP Code Documentations and Guides updates.
-+ rc2 release (unknown) - Moving admin and frontend modules into one repository, remove subsplit process and make modules independent.
-+ version 1.0.0 (towards the end of year 2016) - First stable release of LUYA *yay*.
-
-### Installation
+## Installation
 
 We have a made an absolut easy to understand *STEP-BY-STEP* Guide to install LUYA:
 
@@ -39,20 +31,28 @@ Other helpfull informations
 + [Changelog](CHANGELOG.md)
 + [Version upgrade Breaks](UPGRADE.md)
 
-### Questions and Problems
+## Questions and Problems
 
 If you have any questions or problems, don't hesitate to create a [new issue](https://github.com/zephir/luya/issues/new) on the project repository.
 
 + [Issues on GitHub](https://github.com/luyadev/luya/issues)
 + [Ask us in Gitter](https://gitter.im/luyadev/luya)
 
-### Contribution
+#### Contribution
 
 We are always looking for people who share their thoughts, code and problems with us. Below the links to the contribution guides:
 
 [Help us building LUYA](https://luya.io/en/guide/luya-collaboration)
 
-### Unit Test
+#### ROADMAP
+
++ ✓ beta7 release (June 2016)
++ beta8 release (August 2016) - Last NEW features will be implemented (cms permissions).
++ rc1 release (unknown) - PHP Code Documentations and Guides updates.
++ rc2 release (unknown) - Moving admin and frontend modules into one repository, remove subsplit process and make modules independent.
++ version 1.0.0 (towards the end of year 2016) - First stable release of LUYA *yay*.
+
+#### Unit Test
 
 1. Create Database (example luya_phpunit)
 2. Insert Database dump from `tests/data/sql/1.0.0-beta7.sql`
