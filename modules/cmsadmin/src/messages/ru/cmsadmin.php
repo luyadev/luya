@@ -180,8 +180,8 @@ return [
     'menu_group_item_env_container' => 'Контейнеры',
     'menu_group_item_env_layouts' => 'Шаблоны',
     'menu_group_elements' => 'Элементы контента',
-    'menu_group_item_elements_blocks' => 'Управлять',
-    'menu_group_item_elements_group' => 'Группы',
+    'menu_group_item_elements_blocks' => 'Управлять', // @todo: translate to: manage Blocks
+    'menu_group_item_elements_group' => 'Группы', // @todo: translate to: manage Groups
     'btn_abort' => 'Отмена',
     'btn_refresh' => 'Обновить',
     'btn_save' => 'Сохранить',

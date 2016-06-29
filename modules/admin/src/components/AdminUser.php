@@ -2,6 +2,7 @@
 
 namespace admin\components;
 
+use Yii;
 use admin\models\UserOnline;
 
 /**
@@ -30,5 +31,28 @@ class AdminUser extends \yii\web\User
     public function onBeforeLogout()
     {
         UserOnline::removeUser($this->getId());
+    }
+    
+    /**
+     * Perform a can api match request for the logged in user if user is logged in, returns false otherwhise.
+     * 
+     * @param string $apiEndpoint
+     * @param string $typeVerification
+     * @return boolean
+     */
+    public function canApi($apiEndpoint, $typeVerification = false)
+    {
+        return !$this->isGuest && Yii::$app->auth->matchApi($this->getId(), $apiEndpoint, $typeVerification);
+    }
+
+    /**
+     * Perform a can route auth request match for the logged in user if user is logged in, returns false otherwhise.
+     * 
+     * @param string $route
+     * @return booelan
+     */
+    public function canRoute($route) 
+    {
+        return !$this->isGuest && Yii::$app->auth->matchRoute($this->getId(), $route);
     }
 }

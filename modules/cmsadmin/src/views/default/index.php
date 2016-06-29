@@ -262,19 +262,23 @@
     <div class="luya-container__sidebar sidebar" ng-class="{ 'luya-container__sidebar--liveedit-active': display }">
         <div ng-controller="CmsMenuTreeController">
 
+            <?php if (Yii::$app->adminuser->canRoute('cmsadmin/page/create')): ?>
             <a class="sidebar__button sidebar__button--positive" ui-sref="custom.cmsadd">
                 <div class="sidebar__icon-holder">
                     <i class="sidebar__icon material-icons">add</i>
                 </div>
                 <span class="sidebar__text"><?php echo \cmsadmin\Module::t('view_index_sidebar_new_page'); ?></span>
             </a>
+            <?php endif; ?>
 
+            <?php if (Yii::$app->adminuser->canRoute('cmsadmin/page/drafts')): ?>
             <a class="sidebar__button sidebar__button--grey" ui-sref="custom.cmsdraft">
                 <div class="sidebar__icon-holder">
                     <i class="sidebar__icon material-icons">receipt</i>
                 </div>
                 <span class="sidebar__text"><?php echo \cmsadmin\Module::t('view_index_sidebar_drafts'); ?></span>
             </a>
+            <?php endif; ?>
 
             <div class="sidebar__button sidebar__button--grey sidebar__button--switch switch" ng-class="{ 'sidebar__button--active': showDrag }">
                 <label>
@@ -287,6 +291,7 @@
                 </label>
             </div>
 
+            <?php if (Yii::$app->adminuser->canApi('api-cms-navitempageblockitem')): ?>
             <div class="sidebar__button sidebar__button--grey sidebar__button--switch switch" ng-class="{ 'sidebar__button--active': showDrag }">
                 <label>
                     <input type="checkbox" ng-model="showDrag" ng-true-value="1" ng-false-value="0">
@@ -297,7 +302,7 @@
                     <span class="sidebar__text"><?php echo \cmsadmin\Module::t('view_index_sidebar_move'); ?></span>
                 </label>
             </div>
-
+            <?php endif; ?>
 
             <div class="treeview" ng-repeat="catitem in menuData.containers" ng-class="{ 'treeview--drag-active' : showDrag }">
                 <h5 class="sidebar__group-title sidebar__group-title--clickable" ng-click="toggleCat(catitem.id)"><i class="material-icons sidebar__group-title-icon" ng-class="{'sidebar__group-title-icon--closed': toggleIsHidden(catitem.id)}">arrow_drop_down</i> <span>{{catitem.name}}</span></h5>
