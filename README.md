@@ -10,6 +10,8 @@ The [Yii 2](https://github.com/yiisoft/yii2) wrapper which provides out of the b
 [![Total Downloads](https://poser.pugx.org/zephir/luya/downloads)](https://packagist.org/packages/zephir/luya) 
 [![Join the chat at https://gitter.im/zephir/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zephir/luya)
 
+> 20, June 2016: We have released the next beta Version of LUYA: **1.0.0-beta7**.
+
 ![Luya Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/luya-beta5.png)
 
 #### ATTENTION
@@ -29,7 +31,10 @@ The [Yii 2](https://github.com/yiisoft/yii2) wrapper which provides out of the b
 We have a made an absolut easy to understand *STEP-BY-STEP* Guide to install LUYA:
 
 + [How to install LUYA](https://luya.io)
-+ [LUYA in Videos](https://luya.io/en/video-tutorials)
++ [LUYA Video Tutorials](https://luya.io/video-tutorials)
++ [How to upgrade current LUYA website](https://luya.io/guide/install-upgrade)
+
+Other helpfull informations
 
 + [Changelog](CHANGELOG.md)
 + [Version upgrade Breaks](UPGRADE.md)

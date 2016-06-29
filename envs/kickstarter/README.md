@@ -8,7 +8,7 @@ LUYA: The [Yii 2](https://github.com/yiisoft/yii2) wrapper which provides out of
 We have a made an absolut easy to understand *STEP-BY-STEP* Guide to install Luya:
 
 + [How to install LUYA](https://luya.io)
-+ [LUYA in Videos](https://luya.io/en/video-tutorials)
++ [LUYA in Videos](https://luya.io/video-tutorials)
 
 ### Questions and Problems
 
