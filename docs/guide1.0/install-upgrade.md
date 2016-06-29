@@ -3,8 +3,6 @@ Upgrading Luya
 
 This page describes how to update an existing luya instance to the newest version. The current version of LUYA is `1.0.0-beta7`.
 
-> This guide explains how to upgrade from `1.0.0-beta6` to `1.0.0-beta7`.
-
 ### Composer
 
 change the luya versions for each modules and luya itself in you your composer.json
@@ -36,12 +34,18 @@ After updating composer, excecute the following command to upgrade the Database.
 ./vendor/bin/luya migrate
 ```
 
-Now refresh all existing importer components with the import commmand
+Now refresh all existing importer components with the import commmand:
 
 ```sh
 ./vendor/bin/luya import
 ```
 
-###
+Sometimes image filters changes and you should reprocess all flemanager thumbnails:
 
-Read the [CHANGELOG](https://github.com/luyadev/luya/blob/master/CHANGELOG.md) and [UPGRADE Guide](https://github.com/luyadev/luya/blob/master/UPGRADE.md) in order to see all changes you have to make in your application to run the newest version of LUYA.
+```sh
+./vendor/bin/luya storage/process-thumbnails
+```
+
+### Upgrade the application code
+
+Read the [CHANGELOG](https://github.com/luyadev/luya/blob/master/CHANGELOG.md) to see all new, fixed and breaking features. The **most important** when upgrading into another Version is to [read the BC Breaks Guide](https://github.com/luyadev/luya/blob/master/UPGRADE.md) in order to see all changes you have to make in your application to run the newest version of LUYA.
