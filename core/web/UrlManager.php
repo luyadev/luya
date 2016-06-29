@@ -96,7 +96,7 @@ class UrlManager extends \yii\web\UrlManager
     /**
      * Get the menu component if its registered in the current applications.
      * 
-     * @return boolean|\cms\components\Menu
+     * @return boolean|\cms\menu\Container
      */
     public function getMenu()
     {

@@ -654,7 +654,7 @@
 					});
 				}
 				$scope.notify = response.useronline;
-				$timeout(tick, 240000);
+				$timeout(tick, 60000);
 			})
 		})();
 		

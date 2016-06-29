@@ -264,4 +264,11 @@ return [
     'block_image_externallink_label' => 'External Link (Overrides internal link if set)',
     'view_index_create_page_please_choose' => 'Please choose',
     'view_index_sidebar_autopreview' => 'Auto Preview',
+    
+    // added translation in 1.0.0-beta8
+    
+    'module_permission_add_new_page' => 'Create new Page',
+    'module_permission_update_pages' => 'Page Edit',
+    'module_permission_edit_drafts' => 'Draft Edit',
+    'module_permission_page_blocks' => 'Page Contentblocks',
 ];

@@ -226,7 +226,7 @@
 
         <div class="treeview__drop" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__drop--hover' }" jqyoui-droppable="{onDrop: 'onBeforeDrop()', multiple : true}">
         </div>
-        <a class="treeview__button treeview__link" title="id={{data.id}}" alt="id={{data.id}}" ng-class="{'treeview__link--active' : isCurrentElement(data.id), 'treeview__link--is-online' : data.is_offline == '0', 'treeview__link--is-hidden' : data.is_hidden == '1', 'treeview__link--draggable' : showDrag, 'treeview__link--hidden' : data.is_hidden == '1'}" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__link--hover' }" jqyoui-droppable="{onDrop: 'onChildDrop()', multiple : true}">
+        <a ng-if="data.is_editable" class="treeview__button treeview__link" title="id={{data.id}}" alt="id={{data.id}}" ng-class="{'treeview__link--active' : isCurrentElement(data.id), 'treeview__link--is-online' : data.is_offline == '0', 'treeview__link--is-hidden' : data.is_hidden == '1', 'treeview__link--draggable' : showDrag, 'treeview__link--hidden' : data.is_hidden == '1'}" ng-controller="DropNavController" ng-model="droppedNavItem" data-itemid="{{data.id}}" data-drop="true" data-jqyoui-options="{greedy : true, tolerance : 'pointer', hoverClass : 'treeview__link--hover' }" jqyoui-droppable="{onDrop: 'onChildDrop()', multiple : true}">
             <div class="treeview__icon-holder">
 
                 <i class="material-icons treeview__toggler" ng-click="toggleItem(data)" ng-hide="(menuData.items|menuparentfilter:catitem.id:data.id).length == 0" ng-class="{'treeview__toggler--subnav-closed': data.toggle_open!=1}">arrow_drop_down</i>
@@ -237,6 +237,18 @@
                 {{data.title}}
             </span>
 
+            <div class="treeview__info-icons">
+                <i ng-show="data.is_home==1" class="material-icons treeview__text-icon">home</i>
+            </div>
+        </a>
+
+        <a ng-if="!data.is_editable" class="treeview__button treeview__link" style="cursor: not-allowed;" ng-class="{'treeview__link--active' : isCurrentElement(data.id), 'treeview__link--is-online' : data.is_offline == '0', 'treeview__link--is-hidden' : data.is_hidden == '1', 'treeview__link--hidden' : data.is_hidden == '1'}">
+            <div class="treeview__icon-holder">
+
+                <i class="material-icons treeview__toggler" ng-click="toggleItem(data)" ng-hide="(menuData.items|menuparentfilter:catitem.id:data.id).length == 0" ng-class="{'treeview__toggler--subnav-closed': data.toggle_open!=1}">arrow_drop_down</i>
+
+            </div>
+            <span style="cursor: not-allowed;">{{data.title}}</span>
             <div class="treeview__info-icons">
                 <i ng-show="data.is_home==1" class="material-icons treeview__text-icon">home</i>
             </div>

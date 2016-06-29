@@ -4,7 +4,6 @@
 namespace cmstests\src\menu;
 
 use Yii;
-use cms\components\Menu;
 use cmstests\CmsFrontendTestCase;
 
 class ContainerTest extends CmsFrontendTestCase

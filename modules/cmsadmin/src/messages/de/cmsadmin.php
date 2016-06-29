@@ -264,4 +264,11 @@ return [
     'block_image_externallink_label' => 'Externer Link (Überschreibt den internen)',
     'view_index_create_page_please_choose' => 'Bitte wählen',
     'view_index_sidebar_autopreview' => 'Automatische Vorschau',
+    
+// added translation in 1.0.0-beta8
+
+    'module_permission_add_new_page' => 'Neue Seite erstellen',
+    'module_permission_update_pages' => 'Seiten Bearbeiten',
+    'module_permission_edit_drafts' => 'Vorlagen Bearbeiten',
+    'module_permission_page_blocks' => 'Seiten Inhaltsblöcke',
 ];

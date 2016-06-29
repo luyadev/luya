@@ -4,6 +4,10 @@ namespace cmsadmin;
 
 use Yii;
 use luya\console\interfaces\ImportControllerInterface;
+use cmsadmin\importers\BlockGroupImporter;
+use cmsadmin\importers\BlockImporter;
+use cmsadmin\importers\CmslayoutImporter;
+use cmsadmin\importers\PropertyConsistencyImporter;
 
 class Module extends \admin\base\Module
 {
@@ -37,50 +41,6 @@ class Module extends \admin\base\Module
         'js_version_update_success', 'js_version_error_empty_fields', 'js_version_create_success',
     ];
 
-    public function getMenu()
-    {
-        return $this
-            ->nodeRoute(Module::t('menu_node_cms'), 'content_copy', 'cmsadmin-default-index', 'cmsadmin/default/index', 'cmsadmin\models\NavItem')
-            ->node(Module::t('menu_node_cmssettings'), 'settings')
-                ->group(Module::t('menu_group_env'))
-                    ->itemApi(Module::t('menu_group_item_env_container'), 'cmsadmin-navcontainer-index', 'label_outline', 'api-cms-navcontainer')
-                    ->itemApi(Module::t('menu_group_item_env_layouts'), 'cmsadmin-layout-index', 'view_quilt', 'api-cms-layout')
-                ->group(Module::t('menu_group_elements'))
-                    ->itemApi(Module::t('menu_group_item_elements_group'), 'cmsadmin-blockgroup-index', 'view_module', 'api-cms-blockgroup')
-                    ->itemApi(Module::t('menu_group_item_elements_blocks'), 'cmsadmin-block-index', 'format_align_left', 'api-cms-block')
-            ->menu();
-    }
-
-    public function extendPermissionApis()
-    {
-        return [
-            ['api' => 'api-cms-navitempageblockitem', 'alias' => 'Blöcke einfügen und verschieben'],
-        ];
-    }
-
-    public function extendPermissionRoutes()
-    {
-        return [
-            ['route' => 'cmsadmin/page/create', 'alias' => 'Seiten Erstellen'],
-            ['route' => 'cmsadmin/page/update', 'alias' => 'Seiten Bearbeiten'],
-            ['route' => 'cmsadmin/page/drafts', 'alias' => 'Vorlagen Bearbeiten'],
-        ];
-    }
-
-    /**
-     * @todo do not only import, also update changes in the template
-     * @todo how do we send back values into the executblae controller for output purposes?
-     */
-    public function import(ImportControllerInterface $import)
-    {
-        return [
-            '\\cmsadmin\\importers\\BlockGroupImporter',
-            '\\cmsadmin\\importers\\BlockImporter',
-            '\\cmsadmin\\importers\\CmslayoutImporter',
-            '\\cmsadmin\\importers\\PropertyConsistencyImporter',
-        ];
-    }
-    
     public $translations = [
         [
             'prefix' => 'cmsadmin*',
@@ -91,11 +51,69 @@ class Module extends \admin\base\Module
         ],
     ];
     
+    public function getMenu()
+    {
+        return $this
+            ->nodeRoute(static::t('menu_node_cms'), 'content_copy', 'cmsadmin-default-index', 'cmsadmin/default/index', 'cmsadmin\models\NavItem')
+            ->node(static::t('menu_node_cmssettings'), 'settings')
+                ->group(static::t('menu_group_env'))
+                    ->itemRoute("Zugriffs Berechtigungen", "cmsadmin/permission/index", 'gavel')
+                    ->itemApi(static::t('menu_group_item_env_container'), 'cmsadmin-navcontainer-index', 'label_outline', 'api-cms-navcontainer')
+                    ->itemApi(static::t('menu_group_item_env_layouts'), 'cmsadmin-layout-index', 'view_quilt', 'api-cms-layout')
+                ->group(static::t('menu_group_elements'))
+                    ->itemApi(static::t('menu_group_item_elements_group'), 'cmsadmin-blockgroup-index', 'view_module', 'api-cms-blockgroup')
+                    ->itemApi(static::t('menu_group_item_elements_blocks'), 'cmsadmin-block-index', 'format_align_left', 'api-cms-block')
+            ->menu();
+    }
+
+    public function extendPermissionApis()
+    {
+        return [
+            ['api' => 'api-cms-navitempageblockitem', 'alias' => static::t('module_permission_page_blocks')],
+        ];
+    }
+
+    public function extendPermissionRoutes()
+    {
+        return [
+            ['route' => 'cmsadmin/page/create', 'alias' => static::t('module_permission_add_new_page')],
+            ['route' => 'cmsadmin/page/update', 'alias' => static::t('module_permission_update_pages')],
+            ['route' => 'cmsadmin/page/drafts', 'alias' => static::t('module_permission_edit_drafts')],
+        ];
+    }
+
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \luya\base\Module::import()
+     */
+    public function import(ImportControllerInterface $import)
+    {
+        return [
+            BlockGroupImporter::className(),
+            BlockImporter::className(),
+            CmslayoutImporter::className(),
+            PropertyConsistencyImporter::className(),
+        ];
+    }
+    
+    /**
+     * Translations for CMS Module.
+     * 
+     * @param unknown $message
+     * @param array $params
+     */
     public static function t($message, array $params = [])
     {
         return Yii::t('cmsadmin', $message, $params, Yii::$app->luyaLanguage);
     }
     
+    /**
+     * Get the user id of the logged in user in web appliation context.
+     * 
+     * @todo add isGuest check
+     * @return nummeric|0
+     */
     public static function getAuthorUserId()
     {
         return (Yii::$app instanceof \luya\web\Application) ? Yii::$app->adminuser->getId() : 0;
