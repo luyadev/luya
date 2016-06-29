@@ -19,10 +19,10 @@ The [Yii 2](https://github.com/yiisoft/yii2) wrapper which provides out of the b
 #### ROADMAP
 
 + ✓ beta7 release (June 2016)
-+ beta8 release (August 2016) - Last NEW features will be implemented (cms permissions)
-+ rc1 release (September 2016) - Moving admin and frontend into each other
-+ rc2 release (October 2016) - Documentations
-+ version 1.0.0 (November 2016) - Final stable release
++ beta8 release (August 2016) - Last NEW features will be implemented (cms permissions).
++ rc1 release (unknown) - PHP Code Documentations and Guides updates.
++ rc2 release (unknown) - Moving admin and frontend modules into one repository, remove subsplit process and make modules independent.
++ version 1.0.0 (towards the end of year 2016) - First stable release of LUYA *yay*.
 
 ### Installation
 
