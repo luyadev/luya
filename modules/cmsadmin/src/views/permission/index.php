@@ -1,44 +1,56 @@
-<?php
-
-function rightsColumns($navId)
-{
-    echo "<td>[ x ]</td><td>[ ]</td><td>[ xx ]</td>";
-}
-
-function recursive($row, $index = 0)
-{
-    if (empty($row)) {
-        return false;
-    }
-    
-    foreach ($row as $item) {
-        
-        echo "<tr><td>";
-        for ($i = 1; $i <= $index; $i++) {
-            echo "&nbsp;&nbsp;&nbsp;&nbsp;";
-        }
-        echo $item['title'] . "</td>";
-        echo rightsColumns(1);
-        echo "</tr>";
-        
-        recursive($item['__children'], $index+1);
-    }
-}
-
-?>
-<div class="card">
-    <h1>Zugriffs Berechtigungen</h1>
-    
-    
-    <table class="striped">
-        <? foreach($data as $row): ?>
+<script type="text/ng-template" id="reversepermissions.html">
+    <table class="bordered">
         <tr>
-            <td colspan="100"><strong>Container: <?= $row['container']['name']; ?></strong></td>
+            <td><strong>{{ data.title }}</strong></td>
+            <td ng-repeat="group in groups">
+                <div class="input input--single-checkbox">
+                    <input name="{{group.name}}" type="checkbox" />
+                    <label class="input__label">{{group.name}}</label>
+                </div>
+            </td>
         </tr>
-        
-        <?= recursive($row['items'], 0); ?>
-        
-        <? endforeach; ?>
     </table>
+    <ul style="padding-left:15px;">
+        <li ng-repeat="data in menuData.items | menuparentfilter:container.id:data.id" ng-include="'reversepermissions.html'" />
+    </ul>
+</script>
+<script>
+zaa.bootstrap.register('PermissionController', function($scope, $http, ServiceMenuData) {
+
+    // service menu data
     
+	$scope.menuData = ServiceMenuData.data;
+	
+	$scope.$on('service:MenuData', function(event, data) {
+		$scope.menuData = data;
+	});
+
+    // groups
+    
+    $scope.loadGroups = function() {
+        $http.get('admin/api-admin-group').then(function(response) {
+            $scope.groups = response.data;
+        });
+    };
+
+    $scope.groups = null;
+    
+    // init
+    
+    $scope.init = function() {
+        $scope.loadGroups();
+    	ServiceMenuData.load();
+    };
+
+    $scope.init();
+});
+</script>
+<div class="card" ng-controller="PermissionController" style="padding:10px; margin-top:10px;">
+    <h1>Seiten Zugriffs Berechtigung</h1>
+    <div class="treeview" ng-repeat="container in menuData.containers">
+        <h5>{{ container.name }}</h5>
+        <ul>
+            <li ng-repeat="data in menuData.items | menuparentfilter:container.id:0" ng-include="'reversepermissions.html'" />
+        </ul>
+    </div>
 </div>

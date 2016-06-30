@@ -552,13 +552,17 @@
 	
 	zaa.controller("CmsMenuTreeController", function($scope, $state, ServiceMenuData, ServiceLiveEditMode) {
 		
-		$scope.menuData = ServiceMenuData.data;
+		// live edit service
 		
 		$scope.liveEditState = 0;
 		
 		$scope.$watch('liveEditStateToggler', function(n) {
 			ServiceLiveEditMode.state = n;
-		})
+		});
+		
+		// menu Data
+		
+		$scope.menuData = ServiceMenuData.data;
 		
 		$scope.$on('service:MenuData', function(event, data) {
 			$scope.menuData = data;
