@@ -9,6 +9,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - `#907`: **[BC BREAK]** Removed the public attribute `$extraFields` in order to prevent confusings. Override `extraFields()` instead in `admin\ngrest\base\Model`.
 - `#898` Fixed bug where filters dependencie in image thumbnail directive does not get resolved and result in js error.
 - `#902` Fixed bug where version blocks can not update its parent nav item object.
+- `#918` Fixed bug where TagParser and Markdown conflicting http url/link parsing.
 - `#906` Added silent mode for the LUYA setup process.
 - `#908` Added ability to set ngRestFilters the specific grid list data where conditions.
 - `#911` Added ability to set default sorting/ordering for grid list data in ngrest model.

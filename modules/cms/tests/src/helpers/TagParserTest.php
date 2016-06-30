@@ -58,13 +58,31 @@ class TagParserTest extends CmsFrontendTestCase
         $this->assertSame(false, TagParser::convert(false));
         $this->assertSame(true, TagParser::convert(true));
         $this->assertSame(1, TagParser::convert(1));
+        $this->assertSame(0, TagParser::convert(0));
         $this->assertSame('string', TagParser::convert('string'));
         $this->assertSame([], TagParser::convert([]));
+        $this->assertSame('', TagParser::convert(''));
     }
     
     public function testNewInternalContent()
     {
         $this->assertSame('<a href="http://localhost/luya/envs/dev/public_html/link/goes/here" label="http://localhost/luya/envs/dev/public_html/link/goes/here" class="link-internal">http://localhost/luya/envs/dev/public_html/link/goes/here</a>', TagParser::convert('link[//link/goes/here]'));
         $this->assertSame('<a href="http://localhost/luya/envs/dev/public_html/link/goes/here" label="label" class="link-internal">label</a>', TagParser::convert('link[//link/goes/here](label)'));
+    }
+
+    public function testMarkdownConflict()
+    {
+        $this->assertEquals('<p>before <a href="http://www.luya.io" label="http://www.luya.io" class="link-external" target="_blank">http://www.luya.io</a> after</p>', $this->rnl(TagParser::convertWithMarkdown('before link[www.luya.io] after')));
+        $this->assertEquals('<p>[www.luya.io]</p>', $this->rnl(TagParser::convertWithMarkdown('[www.luya.io]')));
+        $this->assertEquals('<p><a href="url">www.luya.io</a></p>', $this->rnl(TagParser::convertWithMarkdown('[www.luya.io](url)')));
+        $this->assertEquals('<p><a href="http://www.luya.io" label="url" class="link-external" target="_blank">url</a></p>', $this->rnl(TagParser::convertWithMarkdown('link[www.luya.io](url)')));
+        $this->assertEquals('<p>www.url.com</p>', $this->rnl(TagParser::convertWithMarkdown('www.url.com')));
+        $this->assertEquals('<p>http://www.url.com</p>', $this->rnl(TagParser::convertWithMarkdown('http://www.url.com')));
+        $this->assertEquals('<p>&lt;www.url.com&gt;</p>', $this->rnl(TagParser::convertWithMarkdown('<www.url.com>')));
+    }
+    
+    private function rnl($content)
+    {
+        return trim(preg_replace('/\s\s+/', ' ', $content));
     }
 }

@@ -2,7 +2,6 @@
 
 namespace cmsadmin\blocks;
 
-use cebe\markdown\GithubMarkdown;
 use cmsadmin\Module;
 use cms\helpers\TagParser;
 
@@ -11,18 +10,6 @@ class TextBlock extends \cmsadmin\base\Block
     public $module = 'cmsadmin';
     
     public $cacheEnabled = true;
-
-    public $_parser = null;
-
-    public function getParser()
-    {
-        if ($this->_parser === null) {
-            $this->_parser = new GithubMarkdown();
-            $this->_parser->enableNewlines = true;
-        }
-
-        return $this->_parser;
-    }
 
     public function name()
     {
@@ -53,10 +40,7 @@ class TextBlock extends \cmsadmin\base\Block
         $text = $this->getVarValue('content');
 
         if ($this->getVarValue('textType') == 1) {
-            
-            // as markdown will parse the luya link syntax we are going to this by ourselfs fiters
-            $text = TagParser::convert($text);
-            $text = $this->getParser()->parse($text);
+            return TagParser::convertWithMarkdown($text);
         }
 
         return $text;

@@ -35,7 +35,7 @@ class TagParser
     public static function convert($content)
     {
         // verify if content is a string otherwhise just return the original provided content
-        if (!is_string($content)) { 
+        if (!is_string($content) || empty($content)) { 
             return $content;
         }
         // find all tags based on the REGEX expression
@@ -63,6 +63,16 @@ class TagParser
         }
 
         return $content;
+    }
+    
+    /**
+     * Convert the CMS-Tags into HTMl-Tags and additional convert GFM Markdown into Html as well. The main purpose
+     * of this method to fix the conflict between markdown and tag parser when using urls.
+     * @param unknown $content
+     */
+    public static function convertWithMarkdown($content)
+    {
+        return (new CmsMarkdown())->parse(static::convert($content));
     }
 
     /**

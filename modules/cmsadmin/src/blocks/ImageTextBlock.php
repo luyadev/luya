@@ -4,29 +4,17 @@ namespace cmsadmin\blocks;
 
 use Yii;
 use cmsadmin\Module;
-use cebe\markdown\GithubMarkdown;
+use cms\helpers\TagParser;
 
 class ImageTextBlock extends \cmsadmin\base\Block
 {
     public $module = 'cmsadmin';
-
-    public $_parser = null;
 
     public $cacheEnabled = true;
     
     private $defaultMargin = '20px';
 
     private $_source = null;
-
-    public function getParser()
-    {
-        if ($this->_parser === null) {
-            $this->_parser = new GithubMarkdown();
-            $this->_parser->enableNewlines = true;
-        }
-
-        return $this->_parser;
-    }
 
     public function name()
     {
@@ -95,7 +83,7 @@ class ImageTextBlock extends \cmsadmin\base\Block
         $text = $this->getVarValue('text');
 
         if ($this->getCfgValue('textType')) {
-            $text = $this->getParser()->parse($text);
+            return TagParser::convertWithMarkdown($text);
         }
 
         return $text;
