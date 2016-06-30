@@ -74,3 +74,14 @@ $this->registerMetaTag(['name' => 'description', 'content' => 'Description of th
 ### Forms
 
 As the csrf validation is enabled by default, you've to integrate them into your forms (if you're not using the ActiveForm Widget). You'll find all information here: [Guide to include CSRF Token forms] (http://zero-exception.blogspot.ch/2015/01/yii2-using-csrf-token.html). Luya will auto insert the csrf meta tag to your head section if you are using the CMS Modul.
+
+Quick fix without disabling csrf validation and not using the ActiveForm Widget: 
+
+```
+<form action='#' method='POST'>
+   <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
+   ....
+</form>
+```
+
+
