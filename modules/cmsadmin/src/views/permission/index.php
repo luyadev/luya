@@ -1,11 +1,11 @@
 <script type="text/ng-template" id="reversepermissions.html">
     <table class="bordered">
         <tr>
-            <td><strong>{{ data.title }}</strong></td>
+            <td><strong>{{ data.title }} {{ data | json }}</strong></td>
             <td ng-repeat="group in groups">
-                <div class="input input--single-checkbox">
-                    <input name="{{group.name}}" type="checkbox" />
-                    <label class="input__label">{{group.name}}</label>
+                <div class="input input--single-checkbox" ng-click="toggleSelection(data, group)">
+                    <input name="{{group.name}}" id="{{data.title}}--{{group.name}}" type="checkbox" />
+                    <label class="input__label" id="{{data.title}}--{{group.name}}">{{group.name}}</label>
                 </div>
             </td>
         </tr>
@@ -34,11 +34,28 @@ zaa.bootstrap.register('PermissionController', function($scope, $http, ServiceMe
     };
 
     $scope.groups = null;
+
+	// existing permissions
+	
+	$scope.loadPermissions = function() {
+		$http.get('admin/api-cms-menu/data-permissions').then(function(response) {
+			// load response data
+		});
+	};
+    
+	// selections
+	
+	$scope.toggleSelection = function(data, group) {
+		//  toggle selection group
+	};
+	
+	$scope.selection = {};
     
     // init
     
     $scope.init = function() {
         $scope.loadGroups();
+        $scope.loadPermissions();
     	ServiceMenuData.load();
     };
 
@@ -47,6 +64,7 @@ zaa.bootstrap.register('PermissionController', function($scope, $http, ServiceMe
 </script>
 <div class="card" ng-controller="PermissionController" style="padding:10px; margin-top:10px;">
     <h1>Seiten Zugriffs Berechtigung</h1>
+    <p>{{ selection | json }}</p>
     <div class="treeview" ng-repeat="container in menuData.containers">
         <h5>{{ container.name }}</h5>
         <ul>
