@@ -1,7 +1,7 @@
 {
 	"name" : "luyadev/luya-module-crawleradmin",
 	"description" : "Yii2 LUYA Crawler Admin-Module",
-	"type" : "luya-module",
+	"type" : "luya-crawler",
 	"keywords" : ["php", "luya", "module", "crawler", "crawleradmin", "yii2", "yii"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",

@@ -1,7 +1,7 @@
 {
     "name" : "luyadev/luya-module-accountadmin",
     "description" : "Yii2 LUYA User Account Admin",
-    "type" : "luya-module",
+    "type" : "luya-account",
     "keywords" : ["php", "luya", "module", "account", "admin", "yii2", "yii"],
     "license": "MIT",
     "homepage" : "http://luya.io",

@@ -1,7 +1,7 @@
 {
 	"name" : "luyadev/luya-module-galleryadmin",
 	"description" : "Yii2 LUYA Gallery Admin-Module",
-	"type" : "luya-module",
+	"type" : "luya-gallery",
 	"keywords" : ["php", "luya", "module", "gallery", "galleryadmin", "yii2", "yii"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",

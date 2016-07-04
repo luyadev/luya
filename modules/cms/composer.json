@@ -1,7 +1,7 @@
 {
 	"name" : "luyadev/luya-module-cms",
 	"description" : "Frontend module to display CMS content",
-	"type" : "luya-module",
+	"type" : "luya-core",
 	"keywords" : ["php", "luya", "module", "cms", "yii2", "yii", "contentmanager", "content", "yii2-cms"],
 	"license": "MIT",
 	"homepage" : "http://luya.io",
