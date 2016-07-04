@@ -1,11 +1,11 @@
 <script type="text/ng-template" id="reversepermissions.html">
     <table class="bordered">
         <tr>
-            <td><strong>{{ data.title }} {{ data | json }}</strong></td>
+            <td><strong>{{ data.title }}</strong></td>
             <td ng-repeat="group in groups">
-                <div class="input input--single-checkbox" ng-click="toggleSelection(data, group)">
-                    <input name="{{group.name}}" id="{{data.title}}--{{group.name}}" type="checkbox" />
-                    <label class="input__label" id="{{data.title}}--{{group.name}}">{{group.name}}</label>
+                <div class="input input--single-checkbox">
+                    <input name="{{group.name}}" id="{{data.title}}--{{group.name}}" type="checkbox" ng-click="toggleSelection(data, group)" ng-checked="isSelected(data, group)" />
+                    <label class="input__label" for="{{data.title}}--{{group.name}}">{{group.name}}</label>
                 </div>
             </td>
         </tr>
@@ -15,7 +15,7 @@
     </ul>
 </script>
 <script>
-zaa.bootstrap.register('PermissionController', function($scope, $http, ServiceMenuData) {
+zaa.bootstrap.register('PermissionController', function($scope, $http, $filter, ServiceMenuData) {
 
     // service menu data
     
@@ -39,16 +39,39 @@ zaa.bootstrap.register('PermissionController', function($scope, $http, ServiceMe
 	
 	$scope.loadPermissions = function() {
 		$http.get('admin/api-cms-menu/data-permissions').then(function(response) {
-			// load response data
+			$scope.selection = response.data;
 		});
 	};
     
 	// selections
 	
 	$scope.toggleSelection = function(data, group) {
-		//  toggle selection group
+        if ($scope.isSelected(data, group)) {
+            // delete request
+            $http.post('admin/api-cms-menu/data-permission-remove', {navId: data.id, groupId: group.id}).then(function() {
+                $scope.loadPermissions();
+            });
+        } else {
+            // insert request
+        	 $http.post('admin/api-cms-menu/data-permission-insert', {navId: data.id, groupId: group.id}).then(function() {
+        		 $scope.loadPermissions();
+        	 });
+        }
 	};
-	
+
+    $scope.isSelected = function(data, group) {
+        if ($scope.selection.hasOwnProperty(data.id)) {
+            var result = $filter('filter')($scope.selection[data.id], {group_id: group.id});
+            if (result.length > 0) {
+                return true; 
+            }
+        }
+
+        return false;
+    };
+
+
+	// represents selection data {1:navId, groups: [{group_id:1}, {group_id:2}]}
 	$scope.selection = {};
     
     // init
@@ -64,7 +87,6 @@ zaa.bootstrap.register('PermissionController', function($scope, $http, ServiceMe
 </script>
 <div class="card" ng-controller="PermissionController" style="padding:10px; margin-top:10px;">
     <h1>Seiten Zugriffs Berechtigung</h1>
-    <p>{{ selection | json }}</p>
     <div class="treeview" ng-repeat="container in menuData.containers">
         <h5>{{ container.name }}</h5>
         <ul>

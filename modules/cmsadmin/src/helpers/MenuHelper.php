@@ -38,6 +38,23 @@ class MenuHelper
             foreach ($items as $key => $item) {
             
                 $item['is_editable'] = (int) Yii::$app->adminuser->canRoute('cmsadmin/page/update');
+                
+                // the user have "page edit" permission, now we can check if the this group has more fined tuned permisionss from the 
+                // cms_nav_permissions table or not
+                if ($item['is_editable']) {
+                    
+                    $permitted = false;
+                    
+                    foreach (Yii::$app->adminuser->identity->groups as $group) {
+                        if ($permitted) {
+                            continue;
+                        }
+                        
+                        $permitted = self::navGroupPermission($item['id'], $group->id);
+                    }
+                    
+                    $item['is_editable'] = $permitted;
+                }
             
                 $data[$key] = $item;
             }
@@ -46,6 +63,24 @@ class MenuHelper
         }
         
         return self::$items;
+    }
+    
+    public static function navGroupPermission($navId, $groupId)
+    {
+        $definitions = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $groupId])->all();
+        
+        // the group has no permission defined, this means he can access ALL cms pages
+        if (count($definitions) == 0) {
+            return true;
+        }
+        
+        foreach ($definitions as $permission) {
+            if ($navId == $permission['nav_id']) {
+                return true;
+            }
+        }
+        
+        return false;
     }
     
     private static $containerItems = null;
