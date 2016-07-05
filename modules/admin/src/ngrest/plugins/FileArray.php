@@ -11,6 +11,8 @@ use yii\helpers\Json;
  */
 class FileArray extends \admin\ngrest\base\Plugin
 {
+    public $i18nEmptyValue = [];
+    
     public function renderList($id, $ngModel)
     {
         return $this->createListTag($ngModel);

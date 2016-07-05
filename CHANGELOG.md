@@ -10,6 +10,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - `#898` Fixed bug where filters dependencie in image thumbnail directive does not get resolved and result in js error.
 - `#902` Fixed bug where version blocks can not update its parent nav item object.
 - `#918` Fixed bug where TagParser and Markdown conflicting http url/link parsing.
+- `#920` Fixed bug where i18n image/file array lists have wrong default value, array expected string given.
 - `#906` Added silent mode for the LUYA setup process.
 - `#908` Added ability to set ngRestFilters the specific grid list data where conditions.
 - `#911` Added ability to set default sorting/ordering for grid list data in ngrest model.
