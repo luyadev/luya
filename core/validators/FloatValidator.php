@@ -2,6 +2,7 @@
 
 namespace luya\validators;
 
+use Yii;
 use yii\validators\Validator;
 
 /**
