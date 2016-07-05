@@ -4,8 +4,29 @@ namespace newsadmin\models;
 
 use newsadmin\Module;
 
+/**
+ * News Category Model
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class Cat extends \admin\ngrest\base\Model
 {
+    public $i18n = ['title'];
+    
+    public function init()
+    {
+        parent::init();
+        $this->on(self::EVENT_BEFORE_DELETE, [$this, 'eventBeforeDelete']);
+    }
+    
+    public function eventBeforeDelete($event)
+    {
+        if (count($this->articles) > 0) {
+            $this->addError('id', Module::t('cat_delete_error'));
+            $event->isValid = false;
+        }
+    }
+    
     public static function tableName()
     {
         return 'news_cat';
@@ -36,30 +57,6 @@ class Cat extends \admin\ngrest\base\Model
         ];
     }
 
-    public function init()
-    {
-        parent::init();
-        $this->on(self::EVENT_BEFORE_DELETE, [$this, 'eventBeforeDelete']);
-    }
-
-    public function eventBeforeDelete($event)
-    {
-        $items = Article::find()->where(['cat_id' => $this->id])->all();
-
-        if (count($items) > 0) {
-            $this->addError('id', Module::t('cat_delete_error'));
-            $event->isValid = false;
-
-            return;
-        }
-
-        $event->isValid = true;
-    }
-
-    // ngrest
-
-    public $i18n = ['title'];
-
     public static function ngRestApiEndpoint()
     {
         return 'api-news-cat';
@@ -75,5 +72,13 @@ class Cat extends \admin\ngrest\base\Model
         $config->delete = true;
 
         return $config;
+    }
+    
+    /**
+     * Get articles for this category.
+     */
+    public function getArticles()
+    {
+        return $this->hasMany(Article::className(), ['cat_id' => 'id']);
     }
 }
