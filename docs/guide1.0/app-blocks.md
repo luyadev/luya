@@ -81,7 +81,9 @@ class TestBlock extends \cmsadmin\base\Block
 }
 ```
 
-> You can always override the module views in your project. The CMS system will always lookup the app namespace first.
+#### Override default blocks
+
+Sometimes you just want to change the default behavior/template of systems blocks, you can always override all blocks provided from the system by adding a twig template with the name of the block in your project application views folder. Assuming you want to override the **template** of the `TextBlock` which is provided by default from the LUYA cms core. To do so go into your application view folder `views/blocks` and add a twig template with the name of the block, in this case `TextBlock.twig` now the system will pick this template first instead of systme block template. In addition to this method you could also make a custom block and extend from the existing Text block. `class MyTextBlock extends \cmsadmin\blocks\TextBlock` and override the `twigFrontend()` method so you have your own output.
 
 ### Methods explained
 
