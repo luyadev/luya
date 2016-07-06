@@ -42,4 +42,20 @@ class MenuController extends \admin\base\RestController
             return Yii::$app->db->createCommand()->insert('cms_nav_permission', ['group_id' => $groupId, 'nav_id' => $navId])->execute();
         }
     }
+    
+    public function actionDataPermissionInheritance()
+    {
+        $navId = Yii::$app->request->getBodyParam('navId');
+        $groupId = Yii::$app->request->getBodyParam('groupId');
+        
+        if (!empty($navId) && !empty($groupId)) {
+            $one = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $groupId, 'nav_id' => $navId])->one();
+            
+            if ($one) {
+                Yii::$app->db->createCommand()->delete('cms_nav_permission', ['group_id' => $groupId, 'nav_id' => $navId])->execute();
+            }
+            
+            return Yii::$app->db->createCommand()->insert('cms_nav_permission', ['group_id' => $groupId, 'nav_id' => $navId, 'inheritance' => 1])->execute();
+        }
+    }
 }
