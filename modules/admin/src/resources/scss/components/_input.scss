@@ -175,7 +175,6 @@ input[type="checkbox"]:checked + .input__label:before {
     cursor: pointer;
     display: inline-block;
     margin-left: 5px;
-    max-width: 100%;
     width: calc(100% - (#{$input__label-width} + 5px));
 }
 
@@ -196,6 +195,7 @@ input[type="checkbox"]:checked + .input__label:before {
 }
 
 .input--full-width .input__field {
+    max-width: 100%;
     width: 100%;
 }
 
