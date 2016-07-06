@@ -63,10 +63,42 @@ use admin\ngrest\render\RenderCrud;
             <div class="button-right" style="margin-bottom:30px;">
 
                 <div class="button-right__left">
-                    <div class="input input--text">
-                        <div class="input__field-wrapper">
-                            <input class="input__field" id="searchString" ng-model="searchString" ng-change="evalSearchString()" type="text" placeholder="<?php echo \admin\Module::t('ngrest_crud_search_text'); ?>" />
+                    <div class="row">
+                        <div class="col <?php if (!empty($config->filters)): ?>m12 l6<? else: ?>m6 l8<? endif; ?>">
+                            <div class="input input--text">
+                                <div class="input__field-wrapper">
+                                    <input class="input__field" id="searchString" ng-model="searchString" ng-change="evalSearchString()" type="text" placeholder="<?php echo \admin\Module::t('ngrest_crud_search_text'); ?>" />
+                                </div>
+                            </div>
                         </div>
+                        <div class="col <?php if (!empty($config->filters)): ?>m6 l3<? else: ?>m12 l4<? endif; ?>">
+                            <div class="input input--select input--vertical input--full-width">
+                                <div class="input__field-wrapper">
+                                    <i class="input__select-arrow material-icons">keyboard_arrow_down</i>
+                                    <select class="input__field" ng-change="changeGroupByField()" ng-model="groupByField">
+                                        <option value="0">Nach Feld gruppieren</option>
+                                        <?php foreach ($config->getPointer('list') as $item): ?>
+                                            <option value="<?= $item['name']; ?>"><?= $item['alias']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <?php if (!empty($config->filters)): ?>
+                            <div class="col m6 l3">
+                                <div class="input input--select input--vertical input--full-width">
+                                    <div class="input__field-wrapper">
+                                        <i class="input__select-arrow material-icons">keyboard_arrow_down</i>
+                                        <select class="input__field" ng-change="realoadCrudList()" ng-model="currentFilter">
+                                            <option value="0">Filter auswählen</option>
+                                            <?php foreach (array_keys($config->filters) as $name): ?>
+                                                <option value="<?= $name; ?>"><?= $name; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -82,29 +114,6 @@ use admin\ngrest\render\RenderCrud;
                     </div>
                 </div>
 
-            </div>
-            
-
-            <?php if (!empty($config->filters)): ?>
-            <div class="input input--select input--vertical">
-                <label class="input__label">Apply Filters</label>
-                <select class="input__field" ng-change="realoadCrudList()" ng-model="currentFilter">
-                    <option value="0">Reset to default</option>
-                     <?php foreach (array_keys($config->filters) as $name): ?>
-                    <option value="<?= $name; ?>"><?= $name; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <?php endif; ?>
-
-            <div class="input input--select input--vertical">
-                <label class="input__label">Group By Field</label>
-                <select class="input__field" ng-change="changeGroupByField()" ng-model="groupByField">
-                   <option value="0">Ausschalten</option>
-                   <?php foreach ($config->getPointer('list') as $item): ?>
-                   <option value="<?= $item['name']; ?>"><?= $item['alias']; ?></option>
-                   <?php endforeach; ?>
-                </select>
             </div>
 
             <div ng-show="deleteErrors.length">
@@ -126,7 +135,13 @@ use admin\ngrest\render\RenderCrud;
                     </tr>
                 </thead>
                 <tbody ng-repeat="(key, items) in data.list | srcbox:searchString | groupBy: groupByField">
-                    <tr ng-if="groupBy" style="background-color:#2196F3; color:white;"><td colspan="100"><strong>{{key}}</strong></td></tr>
+                    <tr ng-if="groupBy" class="table__group">
+                        <td colspan="100"> <!--ng-click="IS IT THIS?"-->
+                            <strong>{{key}}</strong>
+                            <i class="material-icons right"><!--ng-show="IF OPEN"-->keyboard_arrow_up</i>
+                            <i class="material-icons right"><!--ng-show="IF CLOSED"-->keyboard_arrow_down</i>
+                        </td>
+                    </tr>
                     <tr ng-repeat="(k, item) in items | srcbox:searchString" ng-class="{'crud__item-highlight': isHighlighted(item)}">
                         <?php foreach ($config->getPointer('list') as $item): ?>
                             <?php foreach ($this->context->createElements($item, RenderCrud::TYPE_LIST) as $element): ?>

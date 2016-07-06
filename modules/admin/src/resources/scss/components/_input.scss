@@ -114,9 +114,9 @@ input[type="checkbox"]:checked + .input__label:before {
     }
 
     &.input--column {
-        -webkit-column-width: 250px;
-        -moz-column-width: 250px;
         column-width: 250px;
+        -moz-column-width: 250px;
+        -webkit-column-width: 250px;
     }
 }
 
@@ -171,8 +171,11 @@ input[type="checkbox"]:checked + .input__label:before {
 // Custom behavior for select boxes
 .input--select .input__field {
     border: 1px solid $input--border-color !important;
+    border-radius: 0;
+    cursor: pointer;
     display: inline-block;
     margin-left: 5px;
+    max-width: 100%;
     width: calc(100% - (#{$input__label-width} + 5px));
 }
 
@@ -190,4 +193,20 @@ input[type="checkbox"]:checked + .input__label:before {
 
 .input__button {
     margin-left: 15px;
+}
+
+.input--full-width .input__field {
+    width: 100%;
+}
+
+.input__select-arrow {
+    position: absolute;
+    right: 0;
+    top: 12px;
+    z-index: 100;
+
+    & + .input__field {
+        padding-right: 35px;
+        appearance: none;
+    }
 }

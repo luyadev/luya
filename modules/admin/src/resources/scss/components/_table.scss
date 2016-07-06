@@ -10,3 +10,31 @@
         font-weight: 700;
     }
 }
+
+.table__group {
+    background-color: color('grey', 'base') !important;
+    border-left: 2px solid color('grey', 'base');
+    border-right: 2px solid color('grey', 'base');
+    color: color('shades', 'white');
+
+    > td {
+        border-bottom: 2px solid color('grey', 'base');
+        cursor: pointer;
+        padding: 10px;
+    }
+
+    &:first-child > td {
+        padding-top: 10px;
+    }
+
+    & ~ tr {
+        border-left: 2px solid color('grey', 'base');
+        td:last-child {
+            border-right: 2px solid color('grey', 'base');
+        }
+
+        &:last-child td {
+            border-bottom: 2px solid color('grey', 'base');
+        }
+    }
+}

@@ -49,6 +49,20 @@ class Article extends \admin\ngrest\base\Model
         ];
     }
 
+    public function ngRestFilters()
+    {
+        return [
+            'salami marc' => self::find()->where(['>=', 'timestamp_create', time()]),
+        ];
+    }
+
+    public function ngRestAttributeGroups()
+    {
+        return [
+            [['timestamp_create', 'timestamp_display_from', 'timestamp_display_until'], 'ich bin eine box', 'collapsed' => false],
+        ];
+    }
+
     public function ngrestAttributeTypes()
     {
         return [
