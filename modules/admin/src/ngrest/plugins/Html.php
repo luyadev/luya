@@ -41,4 +41,3 @@ class Html extends \admin\ngrest\base\Plugin
         throw new Exception("HTML Plugin does not support update form.");
     }
 }
-    

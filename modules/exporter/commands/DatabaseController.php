@@ -30,7 +30,7 @@ class DatabaseController extends Command
     public function actionRemoteReplaceLocal($remoteDsn, $remoteUsername, $remotePassword)
     {
         if (YII_ENV_PROD || YII_ENV == 'prod') {
-            throw new Exception("Its not possible to use remote-replace-local method in prod environment as it would remove the prod database env.");    
+            throw new Exception("Its not possible to use remote-replace-local method in prod environment as it would remove the prod database env.");
         }
         
         $temp = tempnam(sys_get_temp_dir(), uniqid());

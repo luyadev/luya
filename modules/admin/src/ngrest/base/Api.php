@@ -60,49 +60,47 @@ class Api extends \admin\base\RestActiveController
      */
     public function actionExport()
     {
-    	$tempData = null;
-    	
-    	// first row
-    	$header = [];
-    	$i = 0;
-    	
-    	foreach($this->model->find()->all() as $key => $value) {
-    	    
-    	    $row = [];
-    	    foreach ($value->getAttributes() as $k => $v) {
-    	        
-    	        if (is_object($v)) {
-    	            continue;
-    	        }
-    	        
-    	        if ($i === 0) {
-    	             $header[] = $this->model->getAttributeLabel($k);
-    	        }
-    	        
-    	        if (is_array($v)) {
-    	            $v = implode(",", $v);
-    	        }
-    	        
-    	        $row[] = '"'. str_replace('"', '\"', $v) .'"';
-    	    }
-    	    
-    	    
-    	    if ($i=== 0) {
-    	        $tempData.= implode(",", $header) . "\n";
-    	    }
-    	    $tempData.= implode(",", $row) . "\n";
-    	    $i++;
-    	}
-    	
-    	$key = uniqid('ngre', true);
-    	
-    	FileHelper::writeFile('@runtime/'.$key.'.tmp', $tempData);
-    	
-    	Yii::$app->session->set('tempNgRestFileName', Inflector::slug($this->model->tableName()));
-    	Yii::$app->session->set('tempNgRestKey', $key);
-    	
-    	return [
-    		'url' => Url::toRoute(['/admin/ngrest/export-download', 'key' => base64_encode($key)]),
-    	];
+        $tempData = null;
+        
+        // first row
+        $header = [];
+        $i = 0;
+        
+        foreach ($this->model->find()->all() as $key => $value) {
+            $row = [];
+            foreach ($value->getAttributes() as $k => $v) {
+                if (is_object($v)) {
+                    continue;
+                }
+                
+                if ($i === 0) {
+                    $header[] = $this->model->getAttributeLabel($k);
+                }
+                
+                if (is_array($v)) {
+                    $v = implode(",", $v);
+                }
+                
+                $row[] = '"'. str_replace('"', '\"', $v) .'"';
+            }
+            
+            
+            if ($i=== 0) {
+                $tempData.= implode(",", $header) . "\n";
+            }
+            $tempData.= implode(",", $row) . "\n";
+            $i++;
+        }
+        
+        $key = uniqid('ngre', true);
+        
+        FileHelper::writeFile('@runtime/'.$key.'.tmp', $tempData);
+        
+        Yii::$app->session->set('tempNgRestFileName', Inflector::slug($this->model->tableName()));
+        Yii::$app->session->set('tempNgRestKey', $key);
+        
+        return [
+            'url' => Url::toRoute(['/admin/ngrest/export-download', 'key' => base64_encode($key)]),
+        ];
     }
 }

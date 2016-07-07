@@ -102,10 +102,10 @@ class FileHelper extends \yii\helpers\BaseFileHelper
      */
     public static function getFileContent($fileName)
     {
-    	try {
-    		return file_get_contents(Yii::getAlias($fileName));
-    	} catch (Exception $error) {
-    		return false;
-    	}
+        try {
+            return file_get_contents(Yii::getAlias($fileName));
+        } catch (Exception $error) {
+            return false;
+        }
     }
 }

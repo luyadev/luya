@@ -51,7 +51,7 @@ class AdminUser extends \yii\web\User
      * @param string $route
      * @return booelan
      */
-    public function canRoute($route) 
+    public function canRoute($route)
     {
         return !$this->isGuest && Yii::$app->auth->matchRoute($this->getId(), $route);
     }

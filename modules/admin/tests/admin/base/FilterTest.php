@@ -45,6 +45,5 @@ class FilterTest extends AdminTestCase
         //$this->assertEquals(true, is_array($chain));
         //$this->arrayHasKey('effect_id', $chain[0]);
         //$this->arrayHasKey('effect_json_values', $chain[0]);
-
     }
 }

@@ -98,17 +98,17 @@ class CallbackFormWidget extends \yii\base\Widget
      */
     public function field($attribute, $label = null, $options = [])
     {
-    	$config = $this->fieldConfig;
-    	
-    	if (!isset($config['class'])) {
-    		$config['class'] = $this->fieldClass;
-    	}
-    	
-    	return Yii::createObject(ArrayHelper::merge($config, $options, [
-    		'attribute' => $attribute,
-    		'form' => $this,
-    		'label' => $label,
-    	]));
+        $config = $this->fieldConfig;
+        
+        if (!isset($config['class'])) {
+            $config['class'] = $this->fieldClass;
+        }
+        
+        return Yii::createObject(ArrayHelper::merge($config, $options, [
+            'attribute' => $attribute,
+            'form' => $this,
+            'label' => $label,
+        ]));
     }
     
     /**

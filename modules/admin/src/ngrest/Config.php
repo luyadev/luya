@@ -76,7 +76,7 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
         }
         
         $direction = (is_array($this->defaultOrder)) ? current($this->defaultOrder) : null; // us preg split to find in string?
-        
+
         if ($direction == SORT_ASC || strtolower($direction) == 'asc') {
             return '+';
         }
@@ -160,7 +160,7 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
      */
     public function getOption($key)
     {
-        return ($this->hasPointer('options') && array_key_exists($key, $this->_config['options'])) ? $this->_config['options'][$key] : 0; 
+        return ($this->hasPointer('options') && array_key_exists($key, $this->_config['options'])) ? $this->_config['options'][$key] : 0;
     }
 
     public function addField($pointer, $field, array $options = [])

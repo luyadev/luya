@@ -1,5 +1,6 @@
 <?php
 use admin\ngrest\render\RenderCrud;
+
 ?>
 <script>
     activeWindowCallbackUrl = '<?php echo $activeWindowCallbackUrl;?>';
@@ -64,14 +65,14 @@ use admin\ngrest\render\RenderCrud;
 
                 <div class="button-right__left">
                     <div class="row">
-                        <div class="col <?php if (!empty($config->filters)): ?>m12 l6<? else: ?>m6 l8<? endif; ?>">
+                        <div class="col <?php if (!empty($config->filters)): ?>m12 l6<?php else: ?>m6 l8<?php endif; ?>">
                             <div class="input input--text">
                                 <div class="input__field-wrapper">
                                     <input class="input__field" id="searchString" ng-model="searchString" ng-change="evalSearchString()" type="text" placeholder="<?php echo \admin\Module::t('ngrest_crud_search_text'); ?>" />
                                 </div>
                             </div>
                         </div>
-                        <div class="col <?php if (!empty($config->filters)): ?>m6 l3<? else: ?>m12 l4<? endif; ?>">
+                        <div class="col <?php if (!empty($config->filters)): ?>m6 l3<?php else: ?>m12 l4<?php endif; ?>">
                             <div class="input input--select input--vertical input--full-width">
                                 <div class="input__field-wrapper">
                                     <i class="input__select-arrow material-icons">keyboard_arrow_down</i>
@@ -169,7 +170,7 @@ use admin\ngrest\render\RenderCrud;
 
                     <!-- MODAL CONTENT -->
                     <div class="modal__content">
-                        <?php foreach($this->context->forEachGroups(RenderCrud::TYPE_CREATE) as $key => $group): ?>
+                        <?php foreach ($this->context->forEachGroups(RenderCrud::TYPE_CREATE) as $key => $group): ?>
                             <?php if (!$group['is_default']): ?>
                             <div class="form-group" ng-init="groupToggler[<?= $key; ?>] = <?= (int) $group['collapsed']; ?>">
                                 <p class="form-group__title" ng-click="groupToggler[<?= $key; ?>] = !groupToggler[<?= $key; ?>]">
@@ -180,7 +181,7 @@ use admin\ngrest\render\RenderCrud;
                                 <div class="form-group__fields" ng-show="groupToggler[<?= $key; ?>]">
                             <?php endif; ?>
 
-                            <?php foreach($group['fields'] as $field => $fieldItem): ?>
+                            <?php foreach ($group['fields'] as $field => $fieldItem): ?>
                                 <div class="row">
                                 <?php foreach ($this->context->createElements($fieldItem, RenderCrud::TYPE_CREATE) as $element): ?>
                                     <?php echo $element['html']; ?>
@@ -225,13 +226,13 @@ use admin\ngrest\render\RenderCrud;
                 <form name="formUpdate" role="form" ng-submit="submitUpdate()">
                     <!-- MODAL CONTENT -->
                     <div class="modal__content">
-                        <?php foreach($this->context->forEachGroups(RenderCrud::TYPE_UPDATE) as $key => $group): ?>
+                        <?php foreach ($this->context->forEachGroups(RenderCrud::TYPE_UPDATE) as $key => $group): ?>
                             <?php if (!$group['is_default']): ?>
                             <div ng-init="groupToggler[<?= $key; ?>] = <?= (int) $group['collapsed']; ?>">
                             <h5 ng-click="groupToggler[<?= $key; ?>] = !groupToggler[<?= $key; ?>]"><?= $group['name']; ?> +/- Toggler</h5>
                             <div style="border:1px solid #F0F0F0; margin-bottom:20px;" ng-show="groupToggler[<?= $key; ?>]">
                             <?php endif; ?>
-                            <?php foreach($group['fields'] as $field => $fieldItem): ?>
+                            <?php foreach ($group['fields'] as $field => $fieldItem): ?>
                                 <div class="row">
                                 <?php foreach ($this->context->createElements($fieldItem, RenderCrud::TYPE_UPDATE) as $element): ?>
                                     <?php echo $element['html']; ?>

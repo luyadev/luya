@@ -13,17 +13,17 @@ use admin\ngrest\base\Model;
 
 abstract class Controller extends \luya\web\Controller
 {
-	/**
-	 * Render the NavItem content and set several view specific data.
-	 * 
-	 * @param integer $navItemId
-	 * @param string $appendix
-	 * @param boolean|intger $setNavItemTypeId To get the content of a version this parameter will change the database value from the nav item Model
-	 * to this provided value 
-	 * 
-	 * @throws NotFoundHttpException
-	 * @throws MethodNotAllowedHttpException
-	 */
+    /**
+     * Render the NavItem content and set several view specific data.
+     * 
+     * @param integer $navItemId
+     * @param string $appendix
+     * @param boolean|intger $setNavItemTypeId To get the content of a version this parameter will change the database value from the nav item Model
+     * to this provided value 
+     * 
+     * @throws NotFoundHttpException
+     * @throws MethodNotAllowedHttpException
+     */
     public function renderItem($navItemId, $appendix = null, $setNavItemTypeId = false)
     {
         $model = NavItem::find()->where(['id' => $navItemId])->with('nav')->one();
@@ -44,7 +44,6 @@ abstract class Controller extends \luya\web\Controller
         $event = new \cms\events\BeforeRenderEvent();
         $event->menu = $currentMenu;
         foreach ($model->nav->getProperties() as $property) {
-
             $object = $property->getObject();
             
             $object->trigger($object::EVENT_BEFORE_RENDER, $event);
@@ -53,15 +52,15 @@ abstract class Controller extends \luya\web\Controller
                 return Yii::$app->end();
             }
         }
-		
+        
         if ($setNavItemTypeId !== false && !empty($setNavItemTypeId)) {
-        	$model->nav_item_type_id = $setNavItemTypeId;
+            $model->nav_item_type_id = $setNavItemTypeId;
         }
         
         $typeModel = $model->getType();
        
         if (!$typeModel) {
-        	throw new NotFoundHttpException("The requestd nav item could not be found with the paired type, maybe this version does not exists for this Type.");
+            throw new NotFoundHttpException("The requestd nav item could not be found with the paired type, maybe this version does not exists for this Type.");
         }
         
         $typeModel->setOptions([

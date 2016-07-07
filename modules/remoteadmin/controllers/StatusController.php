@@ -30,7 +30,7 @@ class StatusController extends \admin\base\Controller
         $json = Json::decode($curl->response);
         
         foreach ($json['package']['versions'] as $version =>  $package) {
-            if ($version == 'dev-master' || !is_numeric(substr($version, 0 , 1))) {
+            if ($version == 'dev-master' || !is_numeric(substr($version, 0, 1))) {
                 continue;
             }
             

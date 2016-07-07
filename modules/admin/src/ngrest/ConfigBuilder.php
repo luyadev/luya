@@ -98,7 +98,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
      */
     public function prepandAdminPlugin($name)
     {
-        return '\\admin\\ngrest\\plugins\\'.ucfirst($name); 
+        return '\\admin\\ngrest\\plugins\\'.ucfirst($name);
     }
     
     /**

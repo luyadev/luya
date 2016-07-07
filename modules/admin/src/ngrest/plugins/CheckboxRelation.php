@@ -84,10 +84,10 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
     
     public function getModel()
     {
-    	if (!is_object($this->_model)) {
-    		$this->_model = Yii::createObject(['class' => $this->_model]);
-    	}
-    	
+        if (!is_object($this->_model)) {
+            $this->_model = Yii::createObject(['class' => $this->_model]);
+        }
+        
         return $this->_model;
     }
     
@@ -149,7 +149,7 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
     
     public function onBeforeListFind($event)
     {
-    	$event->sender->{$this->name} = $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $event->sender->id])->all();
+        $event->sender->{$this->name} = $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $event->sender->id])->all();
     }
     
     public function onBeforeFind($event)

@@ -7,7 +7,7 @@ require 'data/env.php';
 
 class AdminTestCase extends \PHPUnit_Framework_TestCase
 {
-public $app = null;
+    public $app = null;
     
     public function setUp()
     {

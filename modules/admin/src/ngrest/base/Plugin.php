@@ -210,13 +210,13 @@ abstract class Plugin extends Component
      */
     public function createCrudLoaderTag($ngrestModelClass)
     {
-    	$menu = Yii::$app->adminmenu->getApiDetail($ngrestModelClass::ngRestApiEndpoint());
-    	
-    	if ($menu) {
-    		return $this->createTag('crud-loader', null, ['api' => str_replace('-', '/', $menu['route'])]);
-    	}
-    	
-    	return null;
+        $menu = Yii::$app->adminmenu->getApiDetail($ngrestModelClass::ngRestApiEndpoint());
+        
+        if ($menu) {
+            return $this->createTag('crud-loader', null, ['api' => str_replace('-', '/', $menu['route'])]);
+        }
+        
+        return null;
     }
     
     // EVENTS

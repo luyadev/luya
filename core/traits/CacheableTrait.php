@@ -91,7 +91,6 @@ trait CacheableTrait
     public function setHasCache($key, $value, $dependency = null, $cacheExpiration = null)
     {
         if ($this->isCachable()) {
-            
             if (is_array($dependency)) {
                 $dependency = Yii::createObject($dependency);
             }

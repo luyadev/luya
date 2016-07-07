@@ -167,7 +167,7 @@ class ResponseCache extends ActionFilter
                     $key[] = $value;
                 }
             }
-            $this->_cacheKey = $key;   
+            $this->_cacheKey = $key;
         }
         
         return $this->_cacheKey;

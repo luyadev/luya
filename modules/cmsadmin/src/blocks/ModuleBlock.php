@@ -83,7 +83,7 @@ class ModuleBlock extends \cmsadmin\base\Block
         }
         
         if (!Yii::$app->hasModule($moduleName)) {
-        	return;
+            return;
         }
         
         try {

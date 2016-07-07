@@ -144,7 +144,7 @@ return [
     'debug_state_off' => 'Off',
     
 // added translations in 1.0.0-beta7
-    
+
     'login_securetoken_mail_subject' => 'LUYA Security code',
     'login_securetoken_mail' => '<h1>LUYA Security code</h1><p>Use the following security code to login into your administration interface on {url}:</p><p><strong>{token}</strong></p>',
     'login_async_token_error' => 'The provided security code is wrong.',

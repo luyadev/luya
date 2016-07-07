@@ -23,9 +23,9 @@ use admin\ngrest\base\ActiveWindowView;
  */
 abstract class ActiveWindow extends Object implements ViewContextInterface
 {
-	/**
-	 * @var string $suffix The suffix to use for all classes
-	 */
+    /**
+     * @var string $suffix The suffix to use for all classes
+     */
     protected $suffix = 'ActiveWindow';
     
     /**
@@ -103,17 +103,17 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
      */
     public function getViewFolderName()
     {
-    	if ($this->_viewFolderName === null) {
-    		$name = $this->getName();
-    		
-    		if (StringHelper::endsWith($name, $this->suffix, false)) {
-    			$name = substr($name, 0, -(strlen($this->suffix)));
-    		}
-    		
-    		$this->_viewFolderName = strtolower($name);
-    	}
+        if ($this->_viewFolderName === null) {
+            $name = $this->getName();
+            
+            if (StringHelper::endsWith($name, $this->suffix, false)) {
+                $name = substr($name, 0, -(strlen($this->suffix)));
+            }
+            
+            $this->_viewFolderName = strtolower($name);
+        }
 
-    	return $this->_viewFolderName;
+        return $this->_viewFolderName;
     }
     
     private $_hashName = null;

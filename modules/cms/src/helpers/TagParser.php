@@ -35,7 +35,7 @@ class TagParser
     public static function convert($content)
     {
         // verify if content is a string otherwhise just return the original provided content
-        if (!is_string($content) || empty($content)) { 
+        if (!is_string($content) || empty($content)) {
             return $content;
         }
         // find all tags based on the REGEX expression

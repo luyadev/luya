@@ -50,7 +50,7 @@ abstract class Command extends \luya\console\Controller
     }
     
     // HELPER METHODS
-    
+
     /**
      * Get selection list of all module types.
      *

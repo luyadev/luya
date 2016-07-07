@@ -151,11 +151,11 @@ class StorageContainer extends Component
      */
     public function getAbsoluteHttpPath()
     {
-    	if ($this->_absoluteHttpPath === null) {
-    		$this->_absoluteHttpPath = Url::base(true) . '/storage';
-    	}
+        if ($this->_absoluteHttpPath === null) {
+            $this->_absoluteHttpPath = Url::base(true) . '/storage';
+        }
 
-    	return $this->_absoluteHttpPath;
+        return $this->_absoluteHttpPath;
     }
     
     private $_serverPath = null;
@@ -391,9 +391,8 @@ class StorageContainer extends Component
                 }
                 
                 if (!$model->applyFilterChain($fileQuery, $fileSavePath)) {
-                    throw new Exception("Unable to create and save image '".$fileSavePath."'.");   
+                    throw new Exception("Unable to create and save image '".$fileSavePath."'.");
                 }
-                
             }
             
             $resolution = Storage::getImageResolution($fileSavePath);

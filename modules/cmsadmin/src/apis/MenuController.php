@@ -75,12 +75,10 @@ class MenuController extends \admin\base\RestController
         $data = [];
         
         foreach ($navs as $nav) {
-            
             $array = $nav->toArray();
             $array['title'] = $nav->activeLanguageItem->title;
             
             foreach ($this->getGroups() as $key => $group) {
-                
                 $isInheritedFromParent = false;
                 
                 if (isset($parentGroup[$key])) {

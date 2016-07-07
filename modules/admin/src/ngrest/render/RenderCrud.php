@@ -192,7 +192,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
     private function evalGroupFields($pointerElements)
     {
         $names = [];
-        foreach($pointerElements as $elmn) {
+        foreach ($pointerElements as $elmn) {
             $names[$elmn['name']] = $elmn['name'];
         }
         

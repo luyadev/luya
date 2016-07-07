@@ -9,9 +9,9 @@ namespace gallery;
  */
 class Module extends \luya\base\Module
 {
-	/**
-	 * @var boolean This module does not have view files, so the view are looked up in the application folder.
-	 */
+    /**
+     * @var boolean This module does not have view files, so the view are looked up in the application folder.
+     */
     public $useAppViewPath = true;
     
     /**

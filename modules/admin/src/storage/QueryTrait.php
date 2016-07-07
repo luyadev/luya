@@ -57,8 +57,8 @@ trait QueryTrait
         foreach ($this->_where as $expression) {
             if ($expression['field'] == $field) {
                 switch ($expression['op']) {
-                	case '=':
-                		return ($value == $expression['value']);
+                    case '=':
+                        return ($value == $expression['value']);
                     case '==':
                         return ($value === $expression['value']);
                     case '>':
@@ -70,7 +70,7 @@ trait QueryTrait
                     case '<=':
                         return ($value <= $expression['value']);
                     case 'in':
-                    	return in_array($value, $expression['value']);
+                        return in_array($value, $expression['value']);
                 }
             }
         }

@@ -257,38 +257,38 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
     public function getContentAsArray()
     {
         // $cache = $this->getHasCache('navItemPageContentAsArray'.$this->id);
-        
+
         // if ($cache === false) {
-        
+
             $nav_item_page = (new \yii\db\Query())->select('*')->from('cms_nav_item_page t1')->leftJoin('cms_layout', 'cms_layout.id=t1.layout_id')->where(['t1.id' => $this->id])->one();
         
-            $return = [
+        $return = [
                 'nav_item_page' => ['id' => $nav_item_page['id'], 'layout_id' => $nav_item_page['layout_id'], 'layout_name' => $nav_item_page['name']],
                 '__placeholders' => [],
             ];
         
-            $nav_item_page['json_config'] = json_decode($nav_item_page['json_config'], true);
+        $nav_item_page['json_config'] = json_decode($nav_item_page['json_config'], true);
         
-            if (isset($nav_item_page['json_config']['placeholders'])) {
-                foreach ($nav_item_page['json_config']['placeholders'] as $placeholderKey => $placeholder) {
-                    $placeholder['nav_item_page_id'] = $this->id;
-                    $placeholder['prev_id'] = 0;
-                    $placeholder['__nav_item_page_block_items'] = [];
+        if (isset($nav_item_page['json_config']['placeholders'])) {
+            foreach ($nav_item_page['json_config']['placeholders'] as $placeholderKey => $placeholder) {
+                $placeholder['nav_item_page_id'] = $this->id;
+                $placeholder['prev_id'] = 0;
+                $placeholder['__nav_item_page_block_items'] = [];
         
-                    $return['__placeholders'][$placeholderKey] = $placeholder;
+                $return['__placeholders'][$placeholderKey] = $placeholder;
         
-                    $placeholderVar = $placeholder['var'];
+                $placeholderVar = $placeholder['var'];
         
-                    $return['__placeholders'][$placeholderKey]['__nav_item_page_block_items'] = self::getPlaceholder($placeholderVar, $this->id, 0);
-                }
+                $return['__placeholders'][$placeholderKey]['__nav_item_page_block_items'] = self::getPlaceholder($placeholderVar, $this->id, 0);
             }
+        }
         
             // $this->setHasCache('navItemPageContentAsArray'.$this->id, $return, new DbDependency(['sql' => 'SELECT id FROM cms_nav_item_page_block_item WHERE nav_item_page_id=12 ORDER by timestamp_update DESC LIMIT 1']), 0);
-            
+
             return $return;
             
         //}
-        
+
         //return $cache;
     }
     
@@ -408,6 +408,6 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
      */
     public function getForceNavItem()
     {
-    	return NavItem::findOne($this->nav_item_id);
+        return NavItem::findOne($this->nav_item_id);
     }
 }

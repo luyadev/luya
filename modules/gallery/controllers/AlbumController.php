@@ -18,7 +18,7 @@ class AlbumController extends \luya\web\Controller
         $model = Album::find()->where(['id' => $albumId])->one();
 
         if (!$model) {
-        	throw new NotFoundHttpException("Unable to find requested gallery collection.");
+            throw new NotFoundHttpException("Unable to find requested gallery collection.");
         }
         
         $this->view->registerMetaTag([

@@ -31,7 +31,7 @@ class Auth extends \yii\base\Component
     private function getPermissionTable($userId)
     {
         if ($this->_permissionTable === null) {
-        $this->_permissionTable = Yii::$app->db->createCommand('SELECT * FROM admin_user_group AS t1 LEFT JOIN(admin_group_auth as t2 LEFT JOIN (admin_auth as t3) ON (t2.auth_id = t3.id)) ON (t1.group_id=t2.group_id) WHERE t1.user_id=:user_id')
+            $this->_permissionTable = Yii::$app->db->createCommand('SELECT * FROM admin_user_group AS t1 LEFT JOIN(admin_group_auth as t2 LEFT JOIN (admin_auth as t3) ON (t2.auth_id = t3.id)) ON (t1.group_id=t2.group_id) WHERE t1.user_id=:user_id')
             ->bindValue('user_id', $userId)
             ->queryAll();
         }

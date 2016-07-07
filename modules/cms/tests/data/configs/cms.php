@@ -8,7 +8,7 @@ return [
     'defaultRoute' => 'cms',
     'modules' => [
         'cms' => [
-        	'class' => 'cms\Module'
+            'class' => 'cms\Module'
         ],
     ],
     'components' => [

@@ -117,8 +117,6 @@ class Index extends \admin\ngrest\base\Model
         $searchData->save();
         
         return $result;
-        
-        
     }
 
     public function preview($word, $cutAmount = 150)

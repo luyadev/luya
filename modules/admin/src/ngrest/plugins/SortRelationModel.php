@@ -51,15 +51,15 @@ class SortRelationModel extends SortRelation
     
     public function onAfterFind($event)
     {
-    	$data = $event->sender->getAttribute($this->name);
-    	
-    	if (!empty($data)) {
-    		$ids = [];
-    		foreach ($data as $key) {
-    			$ids[]=$key['value'];
-    		}
-    		$class = $this->modelClass;
-    		$event->sender->setAttribute($this->name, $class::find()->where(['in', 'id', $ids])->all());
-    	}
+        $data = $event->sender->getAttribute($this->name);
+        
+        if (!empty($data)) {
+            $ids = [];
+            foreach ($data as $key) {
+                $ids[]=$key['value'];
+            }
+            $class = $this->modelClass;
+            $event->sender->setAttribute($this->name, $class::find()->where(['in', 'id', $ids])->all());
+        }
     }
 }

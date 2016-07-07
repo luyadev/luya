@@ -30,11 +30,11 @@ class RestActiveController extends \yii\rest\ActiveController implements \luya\r
     
     public function getModel()
     {
-    	if ($this->_model === null) {
-    		$this->_model = Yii::createObject($this->modelClass);
-    	}
-    	
-    	return $this->_model;
+        if ($this->_model === null) {
+            $this->_model = Yii::createObject($this->modelClass);
+        }
+        
+        return $this->_model;
     }
     
     public function userAuthClass()

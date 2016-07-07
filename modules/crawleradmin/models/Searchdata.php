@@ -14,7 +14,7 @@ use Yii;
  */
 class Searchdata extends \admin\ngrest\base\Model
 {
-        /**
+    /**
      * @inheritdoc
      */
     public static function tableName()
@@ -97,7 +97,7 @@ class Searchdata extends \admin\ngrest\base\Model
         $this->ngRestConfigDefine($config, ['create', 'update'], ['query', 'results', 'timestamp', 'language']);
         
         // enable or disable ability to delete;
-        $config->delete = false; 
+        $config->delete = false;
         
         return $config;
     }

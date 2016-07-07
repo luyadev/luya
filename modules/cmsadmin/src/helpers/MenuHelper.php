@@ -31,7 +31,7 @@ class MenuHelper
             ->from('cms_nav')
             ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')
             ->orderBy(['sort_index' => SORT_ASC])
-            ->indexBy('id') 
+            ->indexBy('id')
             ->where(['cms_nav_item.lang_id' => Lang::getDefault()['id'], 'cms_nav.is_deleted' => 0, 'cms_nav.is_draft' => 0])
             ->all();
             
@@ -39,7 +39,6 @@ class MenuHelper
             $data = [];
             
             foreach ($items as $key => $item) {
-                
                 $item['is_editable'] = (int) Yii::$app->adminuser->canRoute('cmsadmin/page/update');
                 
                 // the user have "page edit" permission, now we can check if the this group has more fined tuned permisionss from the 

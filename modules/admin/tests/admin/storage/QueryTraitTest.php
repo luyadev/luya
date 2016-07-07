@@ -125,21 +125,21 @@ class QueryTraitTest extends AdminTestCase
     
     public function testWhereInOperatorConditions()
     {
-    	$x = (new FixtureQueryTrait())->where(['in', 'id', [1,3]])->all();
-    	
-    	$this->assertEquals(2, count($x));
-    		
-    	
-    	$i = 0;
-    	foreach ($x as $k => $v) {
-    		if ($i == 0) {
-    			$this->assertEquals(1, $v->id);
-    		} else {
-    			$this->assertEquals(3, $v->id);
-    		}
-    		
-    		$i++;
-    	}
+        $x = (new FixtureQueryTrait())->where(['in', 'id', [1, 3]])->all();
+        
+        $this->assertEquals(2, count($x));
+            
+        
+        $i = 0;
+        foreach ($x as $k => $v) {
+            if ($i == 0) {
+                $this->assertEquals(1, $v->id);
+            } else {
+                $this->assertEquals(3, $v->id);
+            }
+            
+            $i++;
+        }
     }
     
     /**
@@ -147,7 +147,7 @@ class QueryTraitTest extends AdminTestCase
      */
     public function testWhereInvalidOperatorException()
     {
-    	(new FixtureQueryTrait())->where(['foo', 'id', [1,3]])->all();
+        (new FixtureQueryTrait())->where(['foo', 'id', [1, 3]])->all();
     }
     
     public function testIterator()
@@ -156,7 +156,6 @@ class QueryTraitTest extends AdminTestCase
 
         $this->assertEquals(1, count($b));
         foreach ($b as $item) {
-            
             $this->assertEquals(3, $item->id);
             $this->assertEquals('B', $item->group);
             $this->assertEquals('Item 3', $item->name);

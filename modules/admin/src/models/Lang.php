@@ -27,17 +27,17 @@ class Lang extends \admin\ngrest\base\Model
          * After validation event find out if default has to be set or not. Check if if current value
          * has default to 1, disabled the other default attributes.
          */
-        $this->on(self::EVENT_BEFORE_INSERT, function($event) {
-        	if ($this->is_default == 1) {
-        		self::updateAll(['is_default' => 0]);
-        	}
+        $this->on(self::EVENT_BEFORE_INSERT, function ($event) {
+            if ($this->is_default == 1) {
+                self::updateAll(['is_default' => 0]);
+            }
         });
         
-        $this->on(self::EVENT_BEFORE_UPDATE, function($event) {
-        	if ($this->is_default == 1) {
-        		$this->markAttributeDirty('is_default');
-        		self::updateAll(['is_default' => 0]);
-    		}
+        $this->on(self::EVENT_BEFORE_UPDATE, function ($event) {
+            if ($this->is_default == 1) {
+                $this->markAttributeDirty('is_default');
+                self::updateAll(['is_default' => 0]);
+            }
         });
     }
     

@@ -59,10 +59,10 @@ class ImageBlock extends \cmsadmin\base\Block
         $linkIsExternal = true;
         $link = $this->getCfgValue('externalLink', false);
         
-        if(!$link && $this->getCfgValue('internalLink', false)) {
+        if (!$link && $this->getCfgValue('internalLink', false)) {
             $linkIsExternal = false;
             $link = Yii::$app->menu->find()->where(['nav_id' => $this->getCfgValue('internalLink')])->one();
-            if($link) {
+            if ($link) {
                 $link = $link->link;
             } else {
                 $link = false;

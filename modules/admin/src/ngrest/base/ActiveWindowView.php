@@ -39,7 +39,7 @@ class ActiveWindowView extends \yii\base\View
             'buttonNameValue' => $value,
             'closeOnSuccess' => (isset($options['closeOnSuccess'])) ? '$scope.crud.closeActiveWindow();' : null,
             'reloadListOnSuccess' => (isset($options['reloadListOnSuccess'])) ? '$scope.crud.loadList();' : null,
-        	'reloadWindowOnSuccess' => (isset($options['reloadWindowOnSuccess'])) ? '$scope.$parent.activeWindowReload();' : null,
+            'reloadWindowOnSuccess' => (isset($options['reloadWindowOnSuccess'])) ? '$scope.$parent.activeWindowReload();' : null,
             'buttonClass' => (isset($options['class'])) ? $options['class'] : 'btn',
         ]);
     }

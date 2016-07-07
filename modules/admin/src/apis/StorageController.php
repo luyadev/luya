@@ -26,13 +26,13 @@ class StorageController extends \admin\base\RestController
     protected function flushApiCache()
     {
         Yii::$app->storage->flushArrays();
-        $this->deleteHasCache('storageApiDataFolders');   
+        $this->deleteHasCache('storageApiDataFolders');
         $this->deleteHasCache('storageApiDataFiles');
         $this->deleteHasCache('storageApiDataImages');
     }
     
     // DATA READERS
-    
+
     public function actionDataFolders()
     {
         $cache = $this->getHasCache('storageApiDataFolders');
@@ -105,7 +105,7 @@ class StorageController extends \admin\base\RestController
     }
     
     // ACTIONS
-    
+
     public function actionFilemanagerUpdateCaption()
     {
         $fileId = Yii::$app->request->post('id', false);
