@@ -31,10 +31,10 @@ class MenuHelper
             ->from('cms_nav')
             ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')
             ->orderBy(['sort_index' => SORT_ASC])
-            ->indexBy('id')
             ->where(['cms_nav_item.lang_id' => Lang::getDefault()['id'], 'cms_nav.is_deleted' => 0, 'cms_nav.is_draft' => 0])
             ->all();
             
+            self::items(0);
             
             $data = [];
             
@@ -53,6 +53,14 @@ class MenuHelper
                         
                         $permitted = self::navGroupPermission($item['id'], $group->id);
                     }
+
+                    if (!$permitted) {
+                        $value = (isset(self::$data[$item['id']])) ? self::$data[$item['id']] : false;
+                        
+                        if ($value) {
+                            $permitted = true;
+                        }
+                    }
                     
                     $item['is_editable'] = $permitted;
                 }
@@ -64,6 +72,30 @@ class MenuHelper
         }
         
         return self::$items;
+    }
+    
+    private static $data = [];
+    
+    public static function items($parentNavId = 0, $fromInheritNode = false)
+    {
+        $items = Nav::find()->where(['parent_nav_id' => $parentNavId, 'is_deleted' => 0])->all();
+        
+        foreach ($items as $item) {
+        
+            if (!array_key_exists($item->id, self::$data)) {
+                self::$data[] = $fromInheritNode;
+            }
+            
+            foreach (Yii::$app->adminuser->identity->groups as $group) {
+                if ($fromInheritNode) {
+                    continue;
+                }
+                
+                $fromInheritNode = self::navGroupInheritanceNode($item->id, $group);
+            }
+            
+            self::items($item->id, $fromInheritNode);
+        }
     }
     
     public static function navGroupInheritanceNode($navId, Group $group)
