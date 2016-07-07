@@ -50,7 +50,7 @@ class MailTest extends \luyatests\LuyaWebTestCase
         $this->assertSame('arraymailonly@example.com', $mailerTo[2][1]);
         
         $this->assertSame('arraywithname@example.com', $mailerTo[3][0]);
-        $this->assertSame('Jane Doe', $mailerTo[3][1]);        
+        $this->assertSame('Jane Doe', $mailerTo[3][1]);
     }
     
     public function testLayoutWrapper()

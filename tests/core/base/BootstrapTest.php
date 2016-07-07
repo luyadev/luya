@@ -8,10 +8,12 @@ use luya\base\Bootstrap;
 class CustomBootstrap extends Bootstrap
 {
     public function beforeRun($app)
-    {}
+    {
+    }
     
     public function run($app)
-    {}
+    {
+    }
 }
 
 class BootstrapTest extends \luyatests\LuyaWebTestCase

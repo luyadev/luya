@@ -19,7 +19,7 @@ class LuyaWebTestCase extends \PHPUnit_Framework_TestCase implements LuyaTestCas
     
     public function getConfigFile()
     {
-    	return __DIR__ .'/data/configs/web.php';
+        return __DIR__ .'/data/configs/web.php';
     }
 
     public function mockApp()

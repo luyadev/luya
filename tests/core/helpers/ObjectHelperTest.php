@@ -41,7 +41,7 @@ class ObjectHelperTest extends \luyatests\LuyaWebTestCase
         
         $this->assertEquals(true, is_array($response));
         $this->assertEquals(2, count($response));
-    }  
+    }
     
     public function testOptionalArg()
     {

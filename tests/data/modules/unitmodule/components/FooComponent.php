@@ -6,5 +6,4 @@ use yii\base\Component;
 
 class FooComponent extends Component
 {
-    
 }

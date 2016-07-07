@@ -8,7 +8,7 @@ use luya\console\Command;
 
 class SubCommand extends Command
 {
-	// as command is an abstract class
+    // as command is an abstract class
 }
 
 

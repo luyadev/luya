@@ -1,1 +1,1 @@
-<?= Yii::$app->element->bar(); ?>
+<?= Yii::$app->element->bar();

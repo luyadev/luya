@@ -8,7 +8,6 @@ use luyatests\LuyaConsoleTestCase;
 
 class TestController extends Controller
 {
-    
 }
 
 class ControllerTest extends LuyaConsoleTestCase

@@ -3,6 +3,7 @@
 namespace luyatests\data\modules\unitmodule;
 
 use luyatests\data\modules\unitmodule\components\FooComponent;
+
 class Module extends \luya\base\Module
 {
     public $useAppViewPath = true;

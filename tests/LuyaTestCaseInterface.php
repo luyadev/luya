@@ -4,5 +4,5 @@ namespace luyatests;
 
 interface LuyaTestCaseInterface
 {
-	public function getConfigFile();
+    public function getConfigFile();
 }

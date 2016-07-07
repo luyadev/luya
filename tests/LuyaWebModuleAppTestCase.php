@@ -19,7 +19,7 @@ class LuyaWebModuleAppTestCase extends \PHPUnit_Framework_TestCase implements Lu
 
     public function getConfigFile()
     {
-    	return __DIR__ .'/data/configs/webmoduleapp.php';	
+        return __DIR__ .'/data/configs/webmoduleapp.php';
     }
     
     public function mockApp()

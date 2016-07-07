@@ -19,7 +19,7 @@ class LuyaConsoleTestCase extends \PHPUnit_Framework_TestCase implements LuyaTes
     
     public function getConfigFile()
     {
-    	return  __DIR__ .'/data/configs/console.php';
+        return  __DIR__ .'/data/configs/console.php';
     }
 
     public function mockApp()
