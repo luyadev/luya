@@ -81,7 +81,6 @@ class MenuHelper
         $items = Nav::find()->where(['parent_nav_id' => $parentNavId, 'is_deleted' => 0])->all();
         
         foreach ($items as $item) {
-        
             if (!array_key_exists($item->id, self::$data)) {
                 self::$data[] = $fromInheritNode;
             }
