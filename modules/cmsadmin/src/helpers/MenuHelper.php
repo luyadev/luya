@@ -5,7 +5,8 @@ namespace cmsadmin\helpers;
 use Yii;
 use admin\models\Lang;
 use yii\db\Query;
-use luya\helpers\ArrayHelper;
+use cmsadmin\models\Nav;
+use admin\models\Group;
 
 /**
  * Menu Helper to collect Data used in Administration areas.
@@ -29,20 +30,21 @@ class MenuHelper
             ->select(['cms_nav.id', 'nav_item_id' => 'cms_nav_item.id', 'nav_container_id', 'parent_nav_id', 'is_hidden', 'is_offline', 'is_draft', 'is_home', 'cms_nav_item.title'])
             ->from('cms_nav')
             ->leftJoin('cms_nav_item', 'cms_nav.id=cms_nav_item.nav_id')
-            ->orderBy('cms_nav.sort_index ASC')
+            ->orderBy(['sort_index' => SORT_ASC])
+            ->indexBy('id') 
             ->where(['cms_nav_item.lang_id' => Lang::getDefault()['id'], 'cms_nav.is_deleted' => 0, 'cms_nav.is_draft' => 0])
             ->all();
+            
             
             $data = [];
             
             foreach ($items as $key => $item) {
-            
+                
                 $item['is_editable'] = (int) Yii::$app->adminuser->canRoute('cmsadmin/page/update');
                 
                 // the user have "page edit" permission, now we can check if the this group has more fined tuned permisionss from the 
                 // cms_nav_permissions table or not
                 if ($item['is_editable']) {
-                    
                     $permitted = false;
                     
                     foreach (Yii::$app->adminuser->identity->groups as $group) {
@@ -65,6 +67,17 @@ class MenuHelper
         return self::$items;
     }
     
+    public static function navGroupInheritanceNode($navId, Group $group)
+    {
+        $definition = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $group->id, 'nav_id' => $navId])->one();
+        
+        if ($definition) {
+            return (bool) $definition['inheritance'];
+        }
+        
+        return false;
+    }
+    
     public static function navGroupPermission($navId, $groupId)
     {
         $definitions = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $groupId])->all();
@@ -81,45 +94,6 @@ class MenuHelper
         }
         
         return false;
-    }
-    
-    private static $containerItems = null;
-    
-    /**
-     * Get all containers with theyr corresponding items.
-     */
-    public static function getContainerItems()
-    {
-        if (self::$containerItems === null) {
-            self::$containerItems = ArrayHelper::index(static::getItems(), null, 'nav_container_id');
-        }
-        
-        return self::$containerItems;
-    }
-    
-    private static $containerItemsParentGroups = [];
-    
-    public static function getContainerItemsParentGroups($containerId)
-    {
-        if (!array_key_exists($containerId, self::$containerItemsParentGroups)) {
-            self::$containerItemsParentGroups[$containerId] = ArrayHelper::index(static::getItemsFromContainer($containerId), null, 'parent_nav_id');
-        }
-        return self::$containerItemsParentGroups[$containerId];
-    }
-
-    public static function getContainerItemsParentGroup($containerId, $parentId)
-    {
-        return isset(self::getContainerItemsParentGroups($containerId)[$parentId]) ? self::getContainerItemsParentGroups($containerId)[$parentId] : [];
-    }
-
-    /**
-     * Get all items for a specific container.
-     * 
-     * @param unknown $containerId
-     */
-    public static function getItemsFromContainer($containerId)
-    {
-        return (isset(static::getContainerItems()[$containerId])) ? static::getContainerItems()[$containerId] : [];
     }
     
     private static $containers = null;

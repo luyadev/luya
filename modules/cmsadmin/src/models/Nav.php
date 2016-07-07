@@ -3,9 +3,10 @@
 namespace cmsadmin\models;
 
 use Yii;
+use yii\db\Query;
 use yii\helpers\ArrayHelper;
-use admin\models\Lang;
 use admin\models\Property as AdminProperty;
+use admin\models\Group;
 use cmsadmin\models\Property as CmsProperty;
 use cmsadmin\models\NavItem;
 use cmsadmin\models\NavItemPageBlockItem;
@@ -97,7 +98,7 @@ class Nav extends \yii\db\ActiveRecord
     
     /**
      * 
-     * @param unknown $varName
+     * @param string $varName
      * @return boolean
      */
     public function getProperty($varName)
@@ -106,6 +107,46 @@ class Nav extends \yii\db\ActiveRecord
             if ($prop->adminProperty->var_name == $varName) {
                 return $prop->getObject();
             }
+        }
+        
+        return false;
+    }
+    
+    public function hasGroupPermission(Group $group)
+    {
+        $definitions = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $group->id])->all();
+        
+        // the group has no permission defined, this means he can access ALL cms pages
+        if (count($definitions) == 0) {
+            return true;
+        }
+        
+        foreach ($definitions as $permission) {
+            if ($this->id == $permission['nav_id']) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    public function hasGroupPermissionSelected(Group $group)
+    {
+        $definition = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $group->id, 'nav_id' => $this->id])->one();
+        
+        if ($definition) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public function isGroupPermissionInheritNode(Group $group)
+    {
+        $definition = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $group->id, 'nav_id' => $this->id])->one();
+        
+        if ($definition) {
+            return (bool) $definition['inheritance'];
         }
         
         return false;

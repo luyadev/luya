@@ -2,7 +2,7 @@
 
 namespace cmsadmin\models;
 
-use admin\models\Lang;
+use admin\traits\SoftDeleteTrait;
 
 /**
  * Represents the Navigation-Containers.
@@ -11,38 +11,33 @@ use admin\models\Lang;
  */
 class NavContainer extends \admin\ngrest\base\Model
 {
-    use \admin\traits\SoftDeleteTrait;
+    use SoftDeleteTrait;
 
+    public static function tableName()
+    {
+        return 'cms_nav_container';
+    }
+    
     public static function ngRestApiEndpoint()
     {
         return 'api-cms-navcontainer';
     }
 
-    private $_langId = null;
-
-    public function getLangId()
+    public function rules()
     {
-        if ($this->_langId === null) {
-            $array = Lang::getDefault();
-            $this->_langId = $array['id'];
-        }
-
-        return $this->_langId;
+        return [
+            [['name', 'alias'], 'required'],
+        ];
     }
-
-    private function getNavData()
+    
+    public function scenarios()
     {
-        $_data = [];
-        foreach (Nav::find()->all() as $item) {
-            $x = $item->getNavItems()->where(['lang_id' => $this->getLangId()])->asArray()->one();
-            if ($x) {
-                $_data[$x['nav_id']] = $x['title'];
-            }
-        }
-
-        return $_data;
+        return [
+            'restcreate' => ['name', 'alias'],
+            'restupdate' => ['name', 'alias'],
+        ];
     }
-
+    
     public function ngRestConfig($config)
     {
         $config->delete = true;
@@ -59,35 +54,14 @@ class NavContainer extends \admin\ngrest\base\Model
         
         return $config;
     }
-
-    public static function tableName()
+    
+    /**
+     * Relation returns all `cms_nav` rows belongs to this container sort by index without deleted or draf items.
+     * 
+     * @return \yii\db\ActiveQuery
+     */
+    public function getNavs()
     {
-        return 'cms_nav_container';
-    }
-
-    public function rules()
-    {
-        return [
-            [['name', 'alias'], 'required'],
-        ];
-    }
-
-    public function scenarios()
-    {
-        return [
-            'restcreate' => ['name', 'alias'],
-            'restupdate' => ['name', 'alias'],
-        ];
-    }
-
-    private static $_queryInstance = null;
-
-    public static function getQuery()
-    {
-        if (self::$_queryInstance === null) {
-            self::$_queryInstance = self::find()->asArray()->indexBy('id')->all();
-        }
-
-        return self::$_queryInstance;
+        return $this->hasMany(Nav::className(), ['nav_container_id' => 'id'])->where(['is_deleted' => 0, 'is_draft' => 0])->orderBy(['sort_index' => SORT_ASC]);
     }
 }
