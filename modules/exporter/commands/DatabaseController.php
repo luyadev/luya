@@ -42,21 +42,32 @@ class DatabaseController extends Command
         $dump->start($tempBackup);
     
         $this->outputInfo("Temporary Backup File has been created: " . $tempBackup);
-    
-        if ($this->confirm('Are you sure you want to drop all local tables and replace them with the Remote Databse?')) {
-            if ($this->confirm('Last Time: Really?')) {
-                foreach (Yii::$app->db->schema->getTableNames() as $name) {
-                    Yii::$app->db->createCommand()->dropTable($name)->execute();
+
+        if ($this->interactive) {
+            if ($this->confirm('Are you sure you want to drop all local tables and replace them with the Remote Databse?')) {
+                if ($this->confirm('Last Time: Really?')) {
+                    foreach (Yii::$app->db->schema->getTableNames() as $name) {
+                        Yii::$app->db->createCommand()->dropTable($name)->execute();
+                    }
+                    Yii::$app->db->createCommand()->setSql(file_get_contents($temp))->execute();
+
+                    unlink($temp);
+                    return $this->outputSuccess("The local database has been replace with the remote database.");
                 }
-                Yii::$app->db->createCommand()->setSql(file_get_contents($temp))->execute();
-                
-                unlink($temp);
-                return $this->outputSuccess("The local database has been replace with the remote database.");
             }
+
+            unlink($temp);
+            unlink($tempBackup);
+            return $this->outputError('Abort by user input.');
+
+        } else {
+            foreach (Yii::$app->db->schema->getTableNames() as $name) {
+                Yii::$app->db->createCommand()->dropTable($name)->execute();
+            }
+            Yii::$app->db->createCommand()->setSql(file_get_contents($temp))->execute();
+
+            unlink($temp);
+            return $this->outputSuccess("The local database has been replace with the remote database.");
         }
-    
-        unlink($temp);
-        unlink($tempBackup);
-        return $this->outputError('Abort by user input.');
     }
 }
