@@ -50,7 +50,7 @@ class Composition extends Component implements \ArrayAccess
      *    'de' => 'de_CH.utf',
      * ];
      */
-   	public $locales = [];
+    public $locales = [];
     
     /**
      * @var string Url matching prefix, which is used for all the modules (e.g. an e-store requireds a language
@@ -338,13 +338,11 @@ class Composition extends Component implements \ArrayAccess
      */
     public function getLocale()
     {
-    	$shortCode = $this->getKey('langShortCode');
-    	
-    	if (array_key_exists($shortCode, $this->locales)) {
-    		return $this->locales[$shortCode];	
-    	}
-    	
-        switch ($shortCode) {
+        if (array_key_exists($this->language, $this->locales)) {
+            return $this->locales[$this->language];
+        }
+        
+        switch ($this->language) {
             case 'de':
                 return 'de_DE';
             case 'fr':
