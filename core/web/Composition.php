@@ -41,6 +41,18 @@ class Composition extends Component implements \ArrayAccess
     public $hidden = false;
 
     /**
+     * @var array Can override the localisation value used for php internal `setlocale()` method for specific language. For example
+     * the language is de but the it should use the locale charset `de_CH.utf` (locale -a will return all locales installed on the server)
+     * you can define them inside an array where key is the language and value the locale value to be used.
+     * 
+     * ```php
+     * public $local = [
+     *    'de' => 'de_CH.utf',
+     * ];
+     */
+   	public $locales = [];
+    
+    /**
      * @var string Url matching prefix, which is used for all the modules (e.g. an e-store requireds a language
      * as the cms needs this informations too). After proccessing this informations, they will be removed
      * from the url for further proccessing.
@@ -326,7 +338,13 @@ class Composition extends Component implements \ArrayAccess
      */
     public function getLocale()
     {
-        switch ($this->getKey('langShortCode')) {
+    	$shortCode = $this->getKey('langShortCode');
+    	
+    	if (array_key_exists($shortCode, $this->locales)) {
+    		return $this->locales[$shortCode];	
+    	}
+    	
+        switch ($shortCode) {
             case 'de':
                 return 'de_DE';
             case 'fr':
