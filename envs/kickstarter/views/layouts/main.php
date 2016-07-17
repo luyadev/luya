@@ -1,7 +1,15 @@
-<?php $this->beginPage(); ?>
+<?php
+/**
+ * @var \luya\web\View $this
+ */
+
+\app\assets\ResourcesAsset::register($this);
+
+$this->beginPage();
+?>
 <html>
     <head>
-        <title>Luya &mdash; <?php echo $this->title; ?></title>
+        <title>LUYA &mdash; <?php echo $this->title; ?></title>
         <?php $this->head() ?>
     </head>
     <body>
@@ -71,7 +79,7 @@
         </div>
         <div id="footer">
             <div class="container divider">
-                <h4>&copy <?php echo date("Y"); ?> by <i>You</i> &amp; <i>Luya</i></h4>
+                <h4>&copy <?php echo date("Y"); ?> by <i>YOU</i> &amp; <i>LUYA</i></h4>
             </div>
         </div>
     <?php $this->endBody() ?>

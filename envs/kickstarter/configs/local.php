@@ -61,9 +61,6 @@ $config = [
          */
         'cms' => [
             'class' => 'cms\Module',
-            'assets' => [
-                'app\assets\ResourcesAsset'
-            ],
             'enableCompression' => true, // compressing the cms output (removing white spaces and newlines)
         ],
 
