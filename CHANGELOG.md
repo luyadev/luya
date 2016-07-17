@@ -19,6 +19,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - `#914` Added ability to group by a field in the crud data grid list overview.
 - `#894` Added ability to remove an existing page version.
 - `#820` Added ability to collect and evulate properties over menu component.
+- `#925` Added ability to override default localisations for composition pattern by using `$locales` public method in composition component.
 
 1.0.0-beta7 (20.06.2016)
 -------------------------
