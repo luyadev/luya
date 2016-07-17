@@ -271,4 +271,6 @@ return [
     'module_permission_update_pages' => 'Page Edit',
     'module_permission_edit_drafts' => 'Draft Edit',
     'module_permission_page_blocks' => 'Page Contentblocks',
+	'js_version_delete_confirm' => 'Are you sure to delete the page version «%alias%»?',
+	'js_version_delete_confirm_success' => 'The page version %alias% has been deleted successfull.',
 ];

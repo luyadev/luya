@@ -84,6 +84,17 @@ class NavItemController extends \admin\base\RestController
         return false;
     }
     
+    public function actionRemovePageVersion()
+    {
+    	$pageId = Yii::$app->request->getBodyParam('pageId');
+    	
+    	$page = NavItemPage::findOne($pageId);
+    	
+    	if ($page) {
+    		$page->delete();
+    	}
+    }
+    
     /**
      * Create a new cms_nv_item_page for an existing nav_item, this is also known as a "new version" of a page item.
      * 

@@ -33,6 +33,19 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
 
     private $_view = null;
 
+    public function init()
+    {
+    	parent::init();
+    	
+    	$this->on(self::EVENT_AFTER_DELETE, function($e) {
+    		foreach ($e->sender->navItemPageBlockItems as $item) {
+    			$item->delete();
+    		}
+    		
+    		$this->forceNavItem->updateAttributes(['timestamp_update' => time()]);
+    	});
+    }
+
     public function getView()
     {
         if ($this->_view === null) {
@@ -227,27 +240,6 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
         return (empty($response)) ? [] : $response;
     }
     
-    /*
-    private function setHasCache($key, $value, $expirationTime)
-    {
-        if (Yii::$app->has('cache')) {
-            Yii::$app->cache->set($key, $value, $expirationTime);
-        }
-    }
-    
-    private function getHasCache($key)
-    {
-        if (Yii::$app->has('cache')) {
-            $data = Yii::$app->cache->get($key);
-            if ($data) {
-                return $data;
-            }
-        }
-    
-        return false;
-    }
-    */
-    
     // ajax parts to get the tree moved from the controller to the model in version beta 6
 
     /**
@@ -256,11 +248,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
      */
     public function getContentAsArray()
     {
-        // $cache = $this->getHasCache('navItemPageContentAsArray'.$this->id);
 
-        // if ($cache === false) {
-
-            $nav_item_page = (new \yii\db\Query())->select('*')->from('cms_nav_item_page t1')->leftJoin('cms_layout', 'cms_layout.id=t1.layout_id')->where(['t1.id' => $this->id])->one();
+        $nav_item_page = (new \yii\db\Query())->select('*')->from('cms_nav_item_page t1')->leftJoin('cms_layout', 'cms_layout.id=t1.layout_id')->where(['t1.id' => $this->id])->one();
         
         $return = [
                 'nav_item_page' => ['id' => $nav_item_page['id'], 'layout_id' => $nav_item_page['layout_id'], 'layout_name' => $nav_item_page['name']],
@@ -283,13 +272,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
             }
         }
         
-            // $this->setHasCache('navItemPageContentAsArray'.$this->id, $return, new DbDependency(['sql' => 'SELECT id FROM cms_nav_item_page_block_item WHERE nav_item_page_id=12 ORDER by timestamp_update DESC LIMIT 1']), 0);
-
-            return $return;
-            
-        //}
-
-        //return $cache;
+		return $return;
     }
     
     public static function getPlaceholder($placeholderVar, $navItemPageId, $prevId)
@@ -409,5 +392,15 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
     public function getForceNavItem()
     {
         return NavItem::findOne($this->nav_item_id);
+    }
+    
+    /**
+     * Return all page block items for the current corresponding page. Not related to any sortings or placeholders.
+     * 
+     * @return ActiveQuery
+     */
+    public function getNavItemPageBlockItems()
+    {
+    	return $this->hasMany(NavItemPageBlockItem::className(), ['nav_item_page_id' => 'id']);
     }
 }

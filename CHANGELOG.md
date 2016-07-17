@@ -17,6 +17,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - `#912` Added ability to set angular successfull save/update callbacks in order to trigger reloads of lists.
 - `#913` Added ability to group fields into groups in the ngrest model in order to make cleaner forms.
 - `#914` Added ability to group by a field in the crud data grid list overview.
+- `#894` Added ability to remove an existing page version.
 
 1.0.0-beta7 (20.06.2016)
 -------------------------

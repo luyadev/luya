@@ -970,6 +970,18 @@
 		
 		$scope.currentVersionInformation = null;
 		
+		$scope.removeCurrentVersion = function() {
+			// {alias: $scope.currentVersionInformation.version_alias}
+			AdminToastService.confirm(i18nParam('js_version_delete_confirm', {alias: $scope.currentVersionInformation.version_alias}), function($toast, $http) {
+				$http.post('admin/api-cms-navitem/remove-page-version', {pageId : $scope.currentVersionInformation.id}).then(function(response) {
+					var aliasName = $scope.currentVersionInformation.version_alias;
+					$scope.refreshForce();
+					$toast.close();
+					AdminToastService.success(i18nParam('js_version_delete_confirm_success', {alias: aliasName}), 5000);
+				});
+			});
+		}
+		
 		$scope.currentPageVersion = 0;
 		
 		$scope.getItem = function(langId, navId) {

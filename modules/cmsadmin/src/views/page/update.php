@@ -457,7 +457,7 @@
                                     <!-- Versions -->
                                     <div class="page__versions" ng-controller="PageVersionsController" ng-init="createVersionModalState=true; editVersionModalState=true">
                                         <div class="page__versions-left">
-                                            <span class="page__versions-title page__versions-title--black"><span><?= \cmsadmin\Module::t('current_version'); ?>:</span> <strong>{{ currentVersionInformation.version_alias}}</strong> <i class="material-icons" ng-click="editVersionModalState=false">edit</i></span>
+                                            <span class="page__versions-title page__versions-title--black"><span><?= \cmsadmin\Module::t('current_version'); ?>:</span>&nbsp;<strong>{{ currentVersionInformation.version_alias}}</strong><i class="material-icons" ng-click="editVersionModalState=false">edit</i><i ng-show="currentPageVersion != item.nav_item_type_id" ng-click="removeCurrentVersion()" class="material-icons">delete</i></span>
                                         </div><!--
                                         --><div class="page__versions-right">
                                             <span class="page__versions-title"><?= \cmsadmin\Module::t('versions_selector'); ?>: </span>
