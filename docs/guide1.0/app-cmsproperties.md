@@ -62,12 +62,13 @@ Access the propertie
 
 You can access the properties in
 
-+ blocks
-+ layouts
++ [Blocks](app-blocks.md)
++ Layouts
++ [Menus](app-menu.md)
 
 > If you access a propertie but the properties has not been append to this page you will get the `defaultValue` defined from your block object.
 
-### in blocks
+### in Blocks
 
 ```php
 $this->getEnvOption('pageObject')->nav->getProperty('foobar');
@@ -93,6 +94,28 @@ get all properties
 ```php
 Yii::$app->page->properties;
 ```
+
+### in Menus
+
+> since 1.0.0-beta8
+
+A very common scenario is to add properties to an existing menu item like an image which should be used for the navigation instead of text. To collect the property for a menu item the menu component does have a `getProperty($varName)` method on each item. For example collecting the menu and retrieving the page property `navImage` could be done as followed:
+
+```php
+<?php foreach(Yii::$app->menu->find()->where(['parent_nav_id' => 0, 'container' => 'default'])->all() as $item): ?>
+<li>
+	<a href="<?= $item->link; ?>">
+		<?php /* now depending on the if the property `navImage` is set for this page item we can access this property object. */
+		if ($item->getProperty('navImage')): ?>
+		<img src="<?= $item->getProperty('navImage')->getValue(); ?>" />
+		<? endif; ?>
+	</a>
+</li>
+<?php endforeach; ?>
+```
+
+This method allows you find and evaluate properties for menu items and allows you also to use `Yii::$app->menu->current->getProperty('xyz')` instead of using `Yii::$app->page->getProperty('xyz')`.
+
 
 Events
 ------

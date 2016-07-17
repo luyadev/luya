@@ -3,8 +3,9 @@
 namespace cms\menu;
 
 use Yii;
-use Exception;
+use cms\Exception;
 use admin\models\User;
+use cmsadmin\models\Nav;
 
 /**
  * Menu item Object.
@@ -43,9 +44,8 @@ use admin\models\User;
 class Item extends \yii\base\Object
 {
     /**
-     * @var array The item property containing the informations with key
-     *            value parinings. This property will be assigned when creating the
-     *            Item-Object.
+     * @var array The item property containing the informations with key  value parinings. This property will be assigned when creating the
+     * Item-Object.
      */
     public $itemArray = null;
 
@@ -56,8 +56,7 @@ class Item extends \yii\base\Object
     public $lang = null;
     
     /**
-     * @var array Privat property containing with informations for the
-     *            Query Object.
+     * @var array Privat property containing with informations for the Query Object.
      */
     private $_with = [];
 
@@ -86,11 +85,21 @@ class Item extends \yii\base\Object
         return (int) $this->itemArray['id'];
     }
 
+    /**
+     * Whether the item is hidden or not if hidden items can be retreived (with/without settings).
+     * 
+     * @return boolean
+     */
     public function getIsHidden()
     {
         return (bool) $this->itemArray['is_hidden'];
     }
     
+    /**
+     * Override the default hidden state of an item.
+     * 
+     * @param boolean $value True or False depending on the visbility of the item.
+     */
     public function setIsHidden($value)
     {
         $this->itemArray['is_hidden'] = (int) $value;
@@ -148,9 +157,14 @@ class Item extends \yii\base\Object
         return $this->itemArray['title'];
     }
     
+    /**
+     * Override the current title of item.
+     * 
+     * @param string $title The title to override of the existing.
+     */
     public function setTitle($title)
     {
-        return $this->itemArray['title'] = $title;
+        $this->itemArray['title'] = $title;
     }
     
     /**
@@ -454,6 +468,29 @@ class Item extends \yii\base\Object
     public function hasChildren()
     {
         return (count($this->getChildren()) > 0) ? true : false;
+    }
+    
+    private $_model = null;
+    
+    /**
+     * This method allows you the retrieve a property for an page property. If the property is not found false will be retunrend
+     * otherwhise the property object itself will be returned (implements `\admin\base\Property`) so you can retrieve the value of the
+     * property by calling your custom method or the default `getValue()` method.
+     * 
+     * @param string $varName The variable name of the property defined inside of the property of the method `varName()`.
+     * @since 1.0.0-beta8
+     */
+    public function getProperty($varName)
+    {
+    	if ($this->_model === null) {
+    		$this->_model = Nav::findOne($this->navId);
+    	}
+
+    	if (empty($this->_model)) {
+    		throw new Exception('The model active record could not be found for the corresponding nav item. Maybe you have inconsistent Database data.');
+    	}
+    	
+    	return $this->_model->getProperty($varName);
     }
 
     /**
