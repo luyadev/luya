@@ -76,6 +76,10 @@ class MenuController extends \admin\base\RestController
         
         foreach ($navs as $nav) {
             $array = $nav->toArray();
+            
+            if (empty($nav->activeLanguageItem)) {
+            	continue;
+            }
             $array['title'] = $nav->activeLanguageItem->title;
             
             foreach ($this->getGroups() as $key => $group) {
