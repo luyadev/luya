@@ -12,6 +12,8 @@ use cebe\markdown\GithubMarkdown;
  */
 class CmsMarkdown extends GithubMarkdown
 {
+	public $enableNewlines = true;
+	
     protected function parseUrl($markdown)
     {
         return;
