@@ -482,15 +482,15 @@ class Item extends \yii\base\Object
      */
     public function getProperty($varName)
     {
-    	if ($this->_model === null) {
-    		$this->_model = Nav::findOne($this->navId);
-    	}
+        if ($this->_model === null) {
+            $this->_model = Nav::findOne($this->navId);
+        }
 
-    	if (empty($this->_model)) {
-    		throw new Exception('The model active record could not be found for the corresponding nav item. Maybe you have inconsistent Database data.');
-    	}
-    	
-    	return $this->_model->getProperty($varName);
+        if (empty($this->_model)) {
+            throw new Exception('The model active record could not be found for the corresponding nav item. Maybe you have inconsistent Database data.');
+        }
+        
+        return $this->_model->getProperty($varName);
     }
 
     /**
