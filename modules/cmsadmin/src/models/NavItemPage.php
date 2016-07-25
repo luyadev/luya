@@ -11,7 +11,6 @@ use cmsadmin\base\NavItemType;
 use cmsadmin\base\NavItemTypeInterface;
 use cmsadmin\Module;
 use luya\traits\CacheableTrait;
-use yii\caching\DbDependency;
 
 /**
  * Represents the type PAGE for a NavItem.
@@ -28,8 +27,6 @@ use yii\caching\DbDependency;
 class NavItemPage extends NavItemType implements NavItemTypeInterface
 {
     use CacheableTrait;
-    
-    private $_twig = null;
 
     private $_view = null;
 
@@ -165,18 +162,26 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
     private function renderPlaceholderRecursive($navItemPageId, $placeholderVar, $prevId)
     {
         $string = '';
-
-        foreach ($this->getPlaceholders($navItemPageId, $placeholderVar, $prevId) as $key => $placeholder) {
+        $i = 0;
+        $placeholders = $this->getPlaceholders($navItemPageId, $placeholderVar, $prevId);
+        $blocksCount = count($placeholders);
+        // foreach all placeholders but preserve varaibles above to make calculations
+        foreach ($placeholders as $key => $placeholder) {
+            $i++;
+            $prev = $key-1;
+            $next = $key+1;
             $cacheKey = NavItemPageBlockItem::cacheName($placeholder['id']);
             
             $blockResponse = $this->getHasCache($cacheKey);
             
             if ($blockResponse === false) {
-            
+                
                 // create block object
                 $blockObject = Block::objectId($placeholder['block_id'], $placeholder['id'], 'frontend', $this->getNavItem());
+                
                 // see if its a valid block object
                 if ($blockObject) {
+                    
                     if (count($blockObject->assets) > 0) {
                         $controllerObject = $this->getOption('cmsControllerObject');
                         if ($controllerObject) {
@@ -192,15 +197,21 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
                     foreach ($this->getOptions() as $optKey => $optValue) {
                         $blockObject->setEnvOption($optKey, $optValue);
                     }
+                    
+                    $blockObject->setEnvOption('index', $i);
+                    $blockObject->setEnvOption('itemsCount', $blocksCount);
+                    $blockObject->setEnvOption('isFirst', ($i == 1));
+                    $blockObject->setEnvOption('isLast', ($i == $blocksCount));
+                    $blockObject->setEnvOption('isPrevEqual', array_key_exists($prev, $placeholders) && $placeholder['block_id'] == $placeholders[$prev]['block_id']);
+                    $blockObject->setEnvOption('isNextEqual', array_key_exists($next, $placeholders) && $placeholder['block_id'] == $placeholders[$next]['block_id']);
                     // render sub placeholders and set into object
                     $insertedHolders = [];
                     foreach ($blockObject->getPlaceholders() as $item) {
                         $insertedHolders[$item['var']] = $this->renderPlaceholderRecursive($navItemPageId, $item['var'], $placeholder['id']);
                     }
                     $blockObject->setPlaceholderValues($insertedHolders);
-                    // output buffer the rendered frontend string based on the current twig env
-
-                    $blockResponse = $blockObject->renderFrontend($this->getTwig());
+                    // output buffer the rendered frontend method of the block
+                    $blockResponse = $blockObject->renderFrontend();
                     
                     if ($blockObject->cacheEnabled) {
                         $this->setHasCache($cacheKey, $blockResponse, null, $blockObject->cacheExpiration);
@@ -222,15 +233,6 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
         ->where(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId, 'is_hidden' => 0])
         ->orderBy('sort_index ASC')
         ->all();
-    }
-    
-    private function getTwig()
-    {
-        if ($this->_twig === null) {
-            $this->_twig = Yii::$app->twig->env(new \Twig_Loader_String());
-        }
-    
-        return $this->_twig;
     }
     
     private function jsonToArray($json)
@@ -346,7 +348,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
             'name' => $blockObject->name(),
             'icon' => $blockObject->icon(),
             'full_name' => $blockObject->getFullName(),
-            'twig_admin' => $blockObject->twigAdmin(),
+            'twig_admin' => $blockObject->renderAdmin(),
             'vars' => $blockObject->getVars(),
             'cfgs' => $blockObject->getCfgs(),
             'extras' => $blockObject->extraVars(),

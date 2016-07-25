@@ -25,6 +25,8 @@ use Twig_Extension_Debug;
  * $html = $twig->render('xyz.twig', ['foo' => 'var']);
  * ```
  * 
+ * @property \Twig_Environment stringEnv contains a string env object environemnt loaded from a string.
+ * 
  * @author nadar
  */
 class Twig extends \yii\base\Component
@@ -69,6 +71,17 @@ class Twig extends \yii\base\Component
                 return call_user_func_array(['Yii', 't'], $args);
             },
         ];
+    }
+    
+    private $_stringEnv = null;
+    
+    public function getStringEnv()
+    {
+        if ($this->_stringEnv === null) {
+            $this->_stringEnv = $this->env(new \Twig_Loader_String());
+        }
+        
+        return $this->_stringEnv;
     }
 
     public function env($loader)

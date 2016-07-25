@@ -13,6 +13,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - `#920` Fixed bug where i18n image/file array lists have wrong default value, array expected string given.
 - `#926` Fixed bug where kickstarter template is missing jquery, fixed by depending on yii\web\JqueryAsset.
 - `#906` Added silent mode for the LUYA setup process.
+- `#786` Added ability to retriev context informations from a block like, index, last, first, nextEqual, prevEqual.
 - `#908` Added ability to set ngRestFilters the specific grid list data where conditions.
 - `#911` Added ability to set default sorting/ordering for grid list data in ngrest model.
 - `#912` Added ability to set angular successfull save/update callbacks in order to trigger reloads of lists.
@@ -21,6 +22,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - `#894` Added ability to remove an existing page version.
 - `#820` Added ability to collect and evulate properties over menu component.
 - `#925` Added ability to override default localisations for composition pattern by using `$locales` public method in composition component.
+- `#928` Added ability to use PHP Views in Blocks.
 
 1.0.0-beta7 (20.06.2016)
 -------------------------

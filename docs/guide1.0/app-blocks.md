@@ -131,7 +131,13 @@ the following keys are available:
 + *blockId* Returns the id of this block (unique identifier)
 + *context* Returns frontend or backend to find out in which context you are.
 + *pageObject* Returns the `cmsadmin\models\NavItem` Object where you can run `getNav()` to retrievew the Nav Object.
-+ 
++ *isFirst* Returns whether this block is the first in its placeholder or not.
++ *isLast* Return whether his block is the last in its placeholder or not.
++ *index* Returns the number of the index/poisition within this placheholder.
++ *itemsCount* Returns the number of items inside this placeholder.
++ *isPrevEqual* Returns whether the previous item is of the same origin (block type, like text block) as the current.
++ *isNextEqual* Returns whether the next item is of the same origin (block type, like text block) as the current.
+
 ### Property
 
 If there are any CMS properties defined you can access them like this:

@@ -6,19 +6,17 @@ interface BlockInterface
 {
     // user base input/config methods
 
-    public function extraVars();
+    // public function extraVars();
 
-    public function name();
+    // public function name();
 
-    public function config();
-
-    public function twigFrontend();
-
-    public function twigAdmin();
+    // public function config();
 
     // luya based methods to access
 
-    public function getTwigFrontendContent();
+    // public function renderFrontend();
+    
+    // public function renderAdmin();
     
     public function getFieldHelp();
 
@@ -27,4 +25,16 @@ interface BlockInterface
     public function setCfgValues(array $values);
 
     public function setEnvOption($key, $value);
+    
+    // block unspecific methods
+    
+    public function renderFrontend();
+    
+    public function renderAdmin();
+    
+    public function name();
+    
+    public function config();
+    
+    public function extraVars();
 }
