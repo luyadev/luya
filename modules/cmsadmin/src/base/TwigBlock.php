@@ -4,6 +4,12 @@ namespace cmsadmin\base;
 
 use Yii;
 
+/**
+ * Represents a CMS Block with Twig views.
+ * 
+ * @since 1.0.0-beta8
+ * @author Basil Suter <basil@nadar.io>
+ */
 abstract class TwigBlock extends InternalBaseBlock implements TwigBlockInterface
 {
     /**

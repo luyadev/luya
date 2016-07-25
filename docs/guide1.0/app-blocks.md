@@ -10,6 +10,8 @@ Create Block
 
 You can add blocks to your project application or you can also add them to a module, in any case the folder name where the blocks are stored must named as **blocks**. Additionaly blocks should have the suffix `Block`. For example we build a block `TextTransformBlock` and store it in `app/blocks` or `app/modules/yourmodule/blocks`.
 
+> In 1.0.0-beta8 the new *PHP BLOCKS* are introduced. This allows you to use PHP Views instead of TWIG Templates. In order to use The new PHPBlocks you can extend the block from `cmsadmin\base\PhpBlock`. PhpBlocks does automatically requires a view file and the `twigAdmin()` is replaced by `admin()` method.
+
 ### Example
 
 An example text-block who uppercases all letters on output:

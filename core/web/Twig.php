@@ -31,6 +31,11 @@ use Twig_Extension_Debug;
  */
 class Twig extends \yii\base\Component
 {
+    /**
+     * Get the twig simple functions array to register.
+     * 
+     * @return array
+     */
     public function getFunctions()
     {
         return [
@@ -75,6 +80,11 @@ class Twig extends \yii\base\Component
     
     private $_stringEnv = null;
     
+    /**
+     * Get a Twig Environment Object from a string Loader.
+     * 
+     * @return \Twig_Environment
+     */
     public function getStringEnv()
     {
         if ($this->_stringEnv === null) {
@@ -84,6 +94,11 @@ class Twig extends \yii\base\Component
         return $this->_stringEnv;
     }
 
+    /**
+     * Generate a new twig environemnt with all functions and filters.
+     * 
+     * @param \Twig_Environment $loader The Environemnt Loader for the Twig instance.
+     */
     public function env($loader)
     {
         $twig = new Twig_Environment($loader, ['autoescape' => false, 'debug' => YII_DEBUG]);
