@@ -83,7 +83,7 @@ class Twig extends \yii\base\Component
     /**
      * Get a Twig Environment Object from a string Loader.
      * 
-     * @return \Twig_Environment
+     * @return \Twig_LoaderInterface
      */
     public function getStringEnv()
     {
@@ -97,7 +97,7 @@ class Twig extends \yii\base\Component
     /**
      * Generate a new twig environemnt with all functions and filters.
      * 
-     * @param \Twig_Environment $loader The Environemnt Loader for the Twig instance.
+     * @param \Twig_LoaderInterface $loader The Environemnt Loader for the Twig instance.
      */
     public function env($loader)
     {
