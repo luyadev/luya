@@ -135,15 +135,15 @@ use admin\ngrest\render\RenderCrud;
                         <?php endif; ?>
                     </tr>
                 </thead>
-                <tbody ng-repeat="(key, items) in data.list | srcbox:searchString | groupBy: groupByField">
+                <tbody ng-repeat="(key, items) in data.list | srcbox:searchString | groupBy: groupByField" ng-init="viewToggler[key]=true">
                     <tr ng-if="groupBy" class="table__group">
                         <td colspan="100"> <!--ng-click="IS IT THIS?"-->
                             <strong>{{key}}</strong>
-                            <i class="material-icons right"><!--ng-show="IF OPEN"-->keyboard_arrow_up</i>
-                            <i class="material-icons right"><!--ng-show="IF CLOSED"-->keyboard_arrow_down</i>
+                            <i class="material-icons right" ng-click="viewToggler[key]=true" ng-show="!viewToggler[key]">keyboard_arrow_up</i>
+                            <i class="material-icons right" ng-click="viewToggler[key]=false" ng-show="viewToggler[key]">keyboard_arrow_down</i>
                         </td>
                     </tr>
-                    <tr ng-repeat="(k, item) in items | srcbox:searchString" ng-class="{'crud__item-highlight': isHighlighted(item)}">
+                    <tr ng-repeat="(k, item) in items | srcbox:searchString" ng-show="viewToggler[key]" ng-class="{'crud__item-highlight': isHighlighted(item)}">
                         <?php foreach ($config->getPointer('list') as $item): ?>
                             <?php foreach ($this->context->createElements($item, RenderCrud::TYPE_LIST) as $element): ?>
                                 <td ng-hide="groupBy && groupByField == '<?= $item['name']; ?>'"><?php echo $element['html']; ?></td>
