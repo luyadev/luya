@@ -64,7 +64,7 @@ abstract class Controller extends \yii\web\Controller
      */
     public function getViewPath()
     {
-        if ($this->module->useAppViewPath) {
+        if ($this->module instanceof Module && $this->module->useAppViewPath) {
             return '@app/views/'.$this->module->id.'/'.$this->id;
         }
         
