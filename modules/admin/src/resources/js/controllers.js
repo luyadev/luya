@@ -48,7 +48,10 @@
 		 */
 		$scope.crudSwitchType = 0;
 		
-		$scope.switchTo = function(type) {
+		$scope.switchTo = function(type, reset) {
+			if (reset) {
+				$scope.resetData();
+			}
 			if (type == 0 || type == 1) {
 				if (!$scope.inline) {
 					$state.go('default.route');
@@ -218,6 +221,7 @@
 		};
 		
 		$scope.toggleUpdate = function(id) {
+			$scope.resetData();
 			$scope.data.updateId = id;
 			$http.get($scope.config.apiEndpoint + '/'+id+'?' + $scope.config.apiUpdateQueryString).success(function(data) {
 				$scope.data.update = data;
@@ -231,11 +235,11 @@
 		};
 		
 		$scope.closeUpdate = function () {
-			$scope.switchTo(0);
+			$scope.switchTo(0, true);
 	    };
 		
 		$scope.closeCreate = function() {
-			$scope.switchTo(0);
+			$scope.switchTo(0, true);
 		};
 		
 		$scope.activeWindowModal = false;
@@ -266,12 +270,11 @@
 				$scope.realoadCrudList();
 				$scope.applySaveCallback();
 				AdminToastService.success(i18n['js_ngrest_rm_update'], 2000);
-				$scope.switchTo(0);
+				$scope.switchTo(0, true);
 				$scope.highlightId = $scope.data.updateId;
 				$timeout(function() {
 					$scope.highlightId = 0;
 				}, 4000);
-				
 			}).error(function(data) {
 				$scope.updateErrors = data;
 			});
@@ -284,9 +287,8 @@
 			$http.post($scope.config.apiEndpoint, angular.toJson($scope.data.create, true)).success(function(data) {
 				$scope.realoadCrudList();
 				$scope.applySaveCallback();
-				$scope.data.create = {};
 				AdminToastService.success(i18n['js_ngrest_rm_success'], 2000);
-				$scope.switchTo(0);
+				$scope.switchTo(0, true);
 			}).error(function(data) {
 				$scope.createErrors = data;
 			});
@@ -311,6 +313,11 @@
 		};
 		
 		$scope.service = [];
+		
+		$scope.resetData = function() {
+			$scope.data.create = angular.copy({});
+			$scope.data.update = angular.copy({});
+		}
 		
 		$scope.data = {
 			create : {},

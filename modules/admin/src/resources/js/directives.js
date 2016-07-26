@@ -521,6 +521,12 @@
         }
     });
 
+    /**
+     * https://github.com/720kb/angular-datepicker#date-validation - Date Picker
+     * http://jsfiddle.net/bateast/Q6py9/1/ - Date Parse
+     * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date - Date Objects
+     * https://docs.angularjs.org/api/ng/filter/date - Angular Date Filter
+     */
     zaa.directive("zaaDatetime", function() {
         return {
             restrict: "E",
@@ -532,7 +538,92 @@
                 "name": "@fieldname",
                 "i18n": "@i18n"
             },
-            controller: function($scope) {
+            controller: function($scope, $filter) {
+            	
+            	$scope.pickerPreselect = new Date();
+            	
+            	$scope.$watch(function() { return $scope.model }, function(n, o) {
+            		if (n != o && n != null && n !== undefined) {
+            			var datep = new Date(n*1000);
+            			$scope.pickerPreselect = datep;
+            			$scope.date = $filter('date')(datep, 'dd.MM.yyyy');
+            			$scope.hour = $filter('date')(datep, 'H');
+            			$scope.min = $filter('date')(datep, 'm');
+            		} else {
+            			$scope.date = null;
+            			$scope.model = null;
+            		}
+            	});
+            	
+            	$scope.refactor = function(n) {
+            		if (n == 'Invalid Date' || n == "") {
+        				$scope.date = null;
+        				$scope.model = null;
+        			} else {
+            			var res = n.split(".");
+            			if (res.length == 3) {
+            				if (res[2].length == 4) {
+            					
+        						if (parseInt($scope.hour) > 23) {
+        							$scope.hour = 23;
+        						}
+        						
+        						if (parseInt($scope.min) > 59) {
+        							$scope.min = 59;
+        						}
+            					
+		        				var en = res[1] + "/" + res[0] + "/" + res[2] + " " + $scope.hour + ":" + $scope.min;
+		        				$scope.model = (Date.parse(en)/1000);
+		        				$scope.datePickerToggler = false;
+            				}
+            			}
+        			}
+            	}
+            	
+            	$scope.$watch(function() { return $scope.date }, function(n, o) {
+            		if (n != o && n != undefined && n != null) {
+            			$scope.refactor(n);
+            		}
+            	});
+            	
+            	$scope.autoRefactor = function() {
+            		$scope.refactor($scope.date);
+            	}
+            	
+            	$scope.datePickerToggler = false;
+            	
+            	$scope.toggleDatePicker = function() {
+            		$scope.datePickerToggler = !$scope.datePickerToggler;
+            	}
+            	
+            	
+            	$scope.hour = "0";
+            	
+            	$scope.min = "0";
+            	
+            },
+            template: function() {
+            	return '<div class="input input--date"  ng-class="{\'input--hide-label\': i18n}"><label class="input__label">{{label}}</label><div class="input__field-wrapper"><span class="btn btn-floating" ng-click="toggleDatePicker()"><i class="material-icons">date_range</i></span><datepicker date-set="{{pickerPreselect.toString()}}" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="dd.MM.yyyy"><input ng-model="date" type="text"/></datepicker>'+
+            	'<div ng-show="model!=null && date!=null" class="hour-selection"><input type="text" ng-model="hour"  ng-change="autoRefactor()" />:<input type="text" ng-model="min" ng-change="autoRefactor()" /></div>'
+            	'</div></div></div>';
+            }
+        }
+    });
+    
+    /*
+     * Original Version without Datepicker
+    zaa.directive("zaaDatetime", function() {
+        return {
+            restrict: "E",
+            scope: {
+                "model": "=",
+                "options": "=",
+                "label": "@label",
+                "id": "@fieldid",
+                "name": "@fieldname",
+                "i18n": "@i18n"
+            },
+            controller: function($scope, $timeout) {
 
                 var date = new Date();
 
@@ -567,7 +658,9 @@
                 };
 
                 $scope.$watch(function() { return $scope.model }, function(n, o) {
+                	console.log('watch', n);
                     if (n !== undefined && n != null) {
+                    	console.log('datetime', n);
                         var date = new Date(n*1000);
                         $scope.day = $scope.slicer(date.getDate());
                         $scope.month = $scope.slicer(date.getMonth() + 1);
@@ -575,6 +668,14 @@
                         $scope.min = $scope.slicer(date.getMinutes());
                         $scope.hour = $scope.slicer(date.getHours());
                     }
+                });
+                
+                $scope.init = function() {
+                	console.log('init', $scope.model);
+                }
+                
+                $timeout(function() {
+                	$scope.init();
                 });
             },
             template: function() {
@@ -592,7 +693,76 @@
             }
         }
     });
-
+	*/
+    
+    zaa.directive("zaaDate", function() {
+        return {
+            restrict: "E",
+            scope: {
+                "model": "=",
+                "options": "=",
+                "label": "@label",
+                "id": "@fieldid",
+                "name": "@fieldname",
+                "i18n": "@i18n"
+            },
+        	controller: function($scope, $filter) {
+            	
+            	$scope.pickerPreselect = new Date();
+            	
+            	$scope.$watch(function() { return $scope.model }, function(n, o) {
+            		if (n != o && n != null && n !== undefined) {
+            			var datep = new Date(n*1000);
+            			$scope.pickerPreselect = datep;
+            			$scope.date = $filter('date')(datep, 'dd.MM.yyyy');
+            		} else {
+            			$scope.date = null;
+            			$scope.model = null;
+            		}
+            	});
+            	
+            	$scope.refactor = function(n) {
+            		if (n == 'Invalid Date' || n == "") {
+        				$scope.date = null;
+        				$scope.model = null;
+        			} else {
+            			var res = n.split(".");
+            			if (res.length == 3) {
+            				if (res[2].length == 4) {
+            					var en = res[1] + "/" + res[0] + "/" + res[2];
+		        				$scope.model = (Date.parse(en)/1000);
+		        				$scope.datePickerToggler = false;
+            				}
+            			}
+        			}
+            	}
+            	
+            	$scope.$watch(function() { return $scope.date }, function(n, o) {
+            		if (n != o && n != undefined && n != null) {
+            			$scope.refactor(n);
+            		}
+            	});
+            	
+            	$scope.autoRefactor = function() {
+            		$scope.refactor($scope.date);
+            	}
+            	
+            	$scope.datePickerToggler = false;
+            	
+            	$scope.toggleDatePicker = function() {
+            		$scope.datePickerToggler = !$scope.datePickerToggler;
+            	}
+            	
+            },
+            template: function() {
+            	return '<div class="input input--date"  ng-class="{\'input--hide-label\': i18n}"><label class="input__label">{{label}}</label><div class="input__field-wrapper"><span class="btn btn-floating" ng-click="toggleDatePicker()"><i class="material-icons">date_range</i></span><datepicker date-set="{{pickerPreselect.toString()}}" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="dd.MM.yyyy"><input ng-model="date" type="text"/></datepicker></div></div></div>';
+            }
+        }
+    });
+    
+    /**
+     * Original zaaDate directive before datepicker implementation
+     *
     zaa.directive("zaaDate", function() {
         return {
             restrict: "E",
@@ -636,12 +806,15 @@
 
                 $scope.$watch(function() { return $scope.model }, function(n, o) {
                     if (n !== undefined && n != null) {
+                    	console.log('date', n);
                         var date = new Date(n*1000);
                         $scope.day = $scope.slicer(date.getDate()),
                         $scope.month = $scope.slicer(date.getMonth() + 1);
                         $scope.year = date.getFullYear();
                     }
                 });
+                
+                
             },
             template: function() {
                 return '<div class="input input--date" ng-class="{\'input--hide-label\': i18n}">' +
@@ -656,6 +829,7 @@
             }
         }
     });
+    */
 
     zaa.directive("zaaTable", function() {
         return {

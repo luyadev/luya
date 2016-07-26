@@ -37,6 +37,10 @@ class BowerVendor extends \luya\web\Asset
 {
     public $sourcePath = '@admin/resources/bowervendor';
     
+    public $css = [
+        'angular-datepicker/datepicker.min.css',
+    ];
+    
     public $js = [
         // jquery ui
         'jquery-ui/jquery-ui.min.js',
@@ -61,5 +65,6 @@ class BowerVendor extends \luya\web\Asset
         'ng-file-upload/ng-file-upload-shim.min.js',
         
         'angular-filter.min.js',
+        'angular-datepicker/datepicker.min.js',
     ];
 }

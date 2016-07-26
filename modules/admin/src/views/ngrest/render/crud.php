@@ -35,7 +35,7 @@ use admin\ngrest\render\RenderCrud;
         <div class="tabs">
             <ul>
                 <li class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==0}">
-                    <a class="tabs__anchor" ng-click="switchTo(0)"><i class="material-icons tabs__icon">menu</i> <?php echo \admin\Module::t('ngrest_crud_btn_list'); ?></a>
+                    <a class="tabs__anchor" ng-click="switchTo(0, true)"><i class="material-icons tabs__icon">menu</i> <?php echo \admin\Module::t('ngrest_crud_btn_list'); ?></a>
                 </li>
 
                 <?php if ($canCreate && $config->getPointer('create')): ?>
@@ -45,7 +45,7 @@ use admin\ngrest\render\RenderCrud;
                 <?php endif; ?>
                 
                 <li ng-show="crudSwitchType==2" class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==2}">
-                    <a class="tabs__anchor" ng-click="switchTo(0)"><i class="material-icons tabs__icon">cancel</i> <?php echo \admin\Module::t('ngrest_crud_btn_close'); ?></a>
+                    <a class="tabs__anchor" ng-click="switchTo(0, true)"><i class="material-icons tabs__icon">cancel</i> <?php echo \admin\Module::t('ngrest_crud_btn_close'); ?></a>
                 </li>
             </ul>
         </div>
