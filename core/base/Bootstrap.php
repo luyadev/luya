@@ -56,6 +56,10 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
                     $this->_modules[$id] = $moduleObject;
                 }
             }
+            // when no luya modules are registered an empty array will be returned.
+            if ($this->_modules === null) {
+                $this->_modules = [];
+            }
         }
     }
 
