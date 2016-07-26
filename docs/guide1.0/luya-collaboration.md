@@ -65,7 +65,7 @@ When you have configure the upstream with init, then just fo with the following 
 ./scripts/rebasemaster.sh
 ```
 
-Branch erstellen
+Create a branch
 ----------------
 
 To have no conflicts with your Master branch, you should always create a new branch from the current upstream branch, so run the rebmaster master script and after that create a new branch
@@ -74,7 +74,7 @@ To have no conflicts with your Master branch, you should always create a new bra
 git checkout -b your-fix-branch master
 ```
 
-Commit, Push und Pull Request
+Commit, Push and Pull Request
 -----------------------------
 
 You can now commit all your changes into the new branch you just created, after commiting all the changes you have to push to changes to your repository on GitHub:
