@@ -352,7 +352,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
     
     public function getViewPath()
     {
-        return $this->ensureModule() . '/views/blocks/';
+        return $this->ensureModule() . '/views/blocks';
     }
     
     /**

@@ -37,11 +37,6 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
      */
     public function frontend()
     {
-        $moduleName = $this->module;
-        if (substr($moduleName, 0, 1) !== '@') {
-            $moduleName = '@'.$moduleName;
-        }
-        
         return $this->view->render($this->getViewFileName('php'), [], $this);
     }
     
