@@ -14,6 +14,11 @@ use cmsadmin\models\NavItemPageBlockItem;
 use luya\web\filters\ResponseCache;
 use yii\caching\DbDependency;
 
+/**
+ * NavItem Api is cached response method to load data and perform changes of cms nav item.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class NavItemController extends \admin\base\RestController
 {
     public function behaviors()

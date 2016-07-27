@@ -8,11 +8,9 @@ use cmsadmin\models\BlockGroup;
 use luya\helpers\ArrayHelper;
 
 /**
- * api-cms-admin.
- *
- * Basic admin rest jobs
- *
- * @author nadar
+ * Admin Api delievers common api tasks like blocks and layouts.
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
 class AdminController extends \admin\base\RestController
 {

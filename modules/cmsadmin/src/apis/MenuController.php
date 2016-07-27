@@ -9,6 +9,11 @@ use yii\db\Query;
 use admin\models\Group;
 use cmsadmin\models\NavContainer;
 
+/**
+ * Menu Api provides commont tasks to retrieve cmsadmin menu data and cms group permissions setting tasks.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class MenuController extends \admin\base\RestController
 {
     public function actionDataMenu()
