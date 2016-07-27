@@ -30,6 +30,25 @@ class Url extends \luya\helpers\Url
     /**
      * Helper method to create a route based on the module name and the route and params.
      * 
+     * Use the route as defined in the modules' $urlRules array in order to generate the URL according
+     * to the rules' pattern. Example:
+     * 
+     * ```php
+     * Url::toModuleRoute('blog', 'blog/default/index', ['year' => '2016', 'month' => '07']);
+     * ```
+     * 
+     * generates the following URL, assuming the blog module is located on the CMS page /my-super-blog:
+     * 
+     * /my-super-blog/2016/07
+     * 
+     * according to the following URL rule:
+     * 
+     * ```php
+     * public $urlRules = [
+     *     ['pattern' => 'blog/<year:\d{4}>/<month:\d{2}>', 'route' => 'blog/default/index'],
+     * ];
+     * ```
+     * 
      * @param string $moduleName The ID of the module, which should be found inside the nav items.
      * @param string $route      The route for the url rules
      * @param array  $params     The parameters for the url rule
