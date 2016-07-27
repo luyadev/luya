@@ -5,6 +5,15 @@ namespace cms\helpers;
 use Yii;
 use luya\Exception;
 
+/**
+ * CMS Url Helper class extends luya\helpers\Url by CMS routing methods.
+ * 
+ * In addition to the luya\helpers\Url method which is extend it also allows you to make url rule calls to
+ * the cms specific contents. The CMS URL helper can only be used when the CMS module is loaded and used within
+ * your project application.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class Url extends \luya\helpers\Url
 {
     /**

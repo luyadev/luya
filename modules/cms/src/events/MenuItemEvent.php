@@ -3,6 +3,8 @@
 namespace cms\events;
 
 /**
+ * Event after Menu component is loaded and ready.
+ * 
  * Each Menu Item does have en event which will be trigger after create. You can also access
  * this event in your config like this for instance:
  * 

@@ -14,9 +14,10 @@ namespace cms\components;
  * If the property has enabled `i18n = true` in the object you have to collect the active language with
  * help of the I18n helper:
  * 
- * ```
+ * ```php
  * \admin\helpers\I18n::findCurrent(Yii::$app->page->getProperty('foobar'));
  * ```
+ * 
  * @author Basil Suter <basil@nadar.io>
  */
 class Page extends \yii\base\Component

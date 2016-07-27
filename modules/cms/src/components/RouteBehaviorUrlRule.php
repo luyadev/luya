@@ -5,6 +5,11 @@ namespace cms\components;
 use Yii;
 use yii\web\UrlRule;
 
+/**
+ * UrlRule to enable default routing behavior as the CatchAllRule will catch default routing behavior otherwhise.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class RouteBehaviorUrlRule extends \yii\web\UrlRule
 {
     public $pattern = '<module>/<controller>/<action>';
@@ -15,6 +20,10 @@ class RouteBehaviorUrlRule extends \yii\web\UrlRule
     
     public $mode = UrlRule::PARSING_ONLY;
     
+    /**
+     * {@inheritDoc}
+     * @see \yii\web\UrlRule::parseRequest()
+     */
     public function parseRequest($manager, $request)
     {
         // return the custom route

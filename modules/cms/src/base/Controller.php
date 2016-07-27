@@ -11,6 +11,11 @@ use yii\web\MethodNotAllowedHttpException;
 use yii\web\Response;
 use admin\ngrest\base\Model;
 
+/**
+ * Abstract Controller for CMS Controllers.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 abstract class Controller extends \luya\web\Controller
 {
     /**
