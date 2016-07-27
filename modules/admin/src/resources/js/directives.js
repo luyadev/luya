@@ -95,7 +95,7 @@
     		controller: function($scope, $filter) {
 
     			$scope.searchString = null;
-    			
+
     			$scope.sourceData = [];
 
                 $scope.dropdownOpen = false;
@@ -539,9 +539,9 @@
                 "i18n": "@i18n"
             },
             controller: function($scope, $filter) {
-            	
+
             	$scope.pickerPreselect = new Date();
-            	
+
             	$scope.$watch(function() { return $scope.model }, function(n, o) {
             		if (n != o && n != null && n !== undefined) {
             			var datep = new Date(n*1000);
@@ -554,7 +554,7 @@
             			$scope.model = null;
             		}
             	});
-            	
+
             	$scope.refactor = function(n) {
             		if (n == 'Invalid Date' || n == "") {
         				$scope.date = null;
@@ -563,15 +563,15 @@
             			var res = n.split(".");
             			if (res.length == 3) {
             				if (res[2].length == 4) {
-            					
+
         						if (parseInt($scope.hour) > 23) {
         							$scope.hour = 23;
         						}
-        						
+
         						if (parseInt($scope.min) > 59) {
         							$scope.min = 59;
         						}
-            					
+
 		        				var en = res[1] + "/" + res[0] + "/" + res[2] + " " + $scope.hour + ":" + $scope.min;
 		        				$scope.model = (Date.parse(en)/1000);
 		        				$scope.datePickerToggler = false;
@@ -579,37 +579,37 @@
             			}
         			}
             	}
-            	
+
             	$scope.$watch(function() { return $scope.date }, function(n, o) {
             		if (n != o && n != undefined && n != null) {
             			$scope.refactor(n);
             		}
             	});
-            	
+
             	$scope.autoRefactor = function() {
             		$scope.refactor($scope.date);
             	}
-            	
+
             	$scope.datePickerToggler = false;
-            	
+
             	$scope.toggleDatePicker = function() {
             		$scope.datePickerToggler = !$scope.datePickerToggler;
             	}
-            	
-            	
+
+
             	$scope.hour = "0";
-            	
+
             	$scope.min = "0";
-            	
+
             },
             template: function() {
-            	return '<div class="input input--date"  ng-class="{\'input--hide-label\': i18n}"><label class="input__label">{{label}}</label><div class="input__field-wrapper"><span class="btn btn-floating" ng-click="toggleDatePicker()"><i class="material-icons">date_range</i></span><datepicker date-set="{{pickerPreselect.toString()}}" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="dd.MM.yyyy"><input ng-model="date" type="text"/></datepicker>'+
-            	'<div ng-show="model!=null && date!=null" class="hour-selection"><input type="text" ng-model="hour"  ng-change="autoRefactor()" />:<input type="text" ng-model="min" ng-change="autoRefactor()" /></div>'
+            	return '<div class="input input--date" ng-class="{\'input--hide-label\': i18n}"><label class="input__label">{{label}}</label><div class="input__field-wrapper"><datepicker date-set="{{pickerPreselect.toString()}}" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="dd.MM.yyyy"><input ng-model="date" type="text" class="input__field" /><span class="btn btn-floating date-picker-icon" ng-click="toggleDatePicker()"><i class="material-icons">date_range</i></span></datepicker>'+
+            	'<div ng-show="model!=null && date!=null" class="hour-selection"><input type="text" ng-model="hour" ng-change="autoRefactor()" class="input__field input__field--hour" /><span class="time-divider">:</span><input type="text" ng-model="min" ng-change="autoRefactor()" class="input__field input__field--minute" /></div>'
             	'</div></div></div>';
             }
         }
     });
-    
+
     /*
      * Original Version without Datepicker
     zaa.directive("zaaDatetime", function() {
@@ -669,11 +669,11 @@
                         $scope.hour = $scope.slicer(date.getHours());
                     }
                 });
-                
+
                 $scope.init = function() {
                 	console.log('init', $scope.model);
                 }
-                
+
                 $timeout(function() {
                 	$scope.init();
                 });
@@ -694,7 +694,7 @@
         }
     });
 	*/
-    
+
     zaa.directive("zaaDate", function() {
         return {
             restrict: "E",
@@ -707,9 +707,9 @@
                 "i18n": "@i18n"
             },
         	controller: function($scope, $filter) {
-            	
+
             	$scope.pickerPreselect = new Date();
-            	
+
             	$scope.$watch(function() { return $scope.model }, function(n, o) {
             		if (n != o && n != null && n !== undefined) {
             			var datep = new Date(n*1000);
@@ -720,7 +720,7 @@
             			$scope.model = null;
             		}
             	});
-            	
+
             	$scope.refactor = function(n) {
             		if (n == 'Invalid Date' || n == "") {
         				$scope.date = null;
@@ -736,30 +736,30 @@
             			}
         			}
             	}
-            	
+
             	$scope.$watch(function() { return $scope.date }, function(n, o) {
             		if (n != o && n != undefined && n != null) {
             			$scope.refactor(n);
             		}
             	});
-            	
+
             	$scope.autoRefactor = function() {
             		$scope.refactor($scope.date);
             	}
-            	
+
             	$scope.datePickerToggler = false;
-            	
+
             	$scope.toggleDatePicker = function() {
             		$scope.datePickerToggler = !$scope.datePickerToggler;
             	}
-            	
+
             },
             template: function() {
-            	return '<div class="input input--date"  ng-class="{\'input--hide-label\': i18n}"><label class="input__label">{{label}}</label><div class="input__field-wrapper"><span class="btn btn-floating" ng-click="toggleDatePicker()"><i class="material-icons">date_range</i></span><datepicker date-set="{{pickerPreselect.toString()}}" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="dd.MM.yyyy"><input ng-model="date" type="text"/></datepicker></div></div></div>';
+            	return '<div class="input input--date"  ng-class="{\'input--hide-label\': i18n}"><label class="input__label">{{label}}</label><div class="input__field-wrapper"><datepicker date-set="{{pickerPreselect.toString()}}" datepicker-toggle="false" datepicker-show="{{datePickerToggler}}" date-format="dd.MM.yyyy"><input ng-model="date" type="text" class="input__field" /><span class="btn btn-floating date-picker-icon" ng-click="toggleDatePicker()"><i class="material-icons">date_range</i></span></datepicker></div></div></div>';
             }
         }
     });
-    
+
     /**
      * Original zaaDate directive before datepicker implementation
      *
@@ -813,8 +813,8 @@
                         $scope.year = date.getFullYear();
                     }
                 });
-                
-                
+
+
             },
             template: function() {
                 return '<div class="input input--date" ng-class="{\'input--hide-label\': i18n}">' +
@@ -1392,7 +1392,7 @@
                 }
 
                 scope.thumbnailfilter = null;
-                
+
                 scope.imageLoading = false;
 
                 scope.fileId = 0;
@@ -1402,7 +1402,7 @@
                 scope.imageinfo = null;
 
                 scope.imageNotFoundError = false;
-                
+
                 scope.filterApply = function() {
                     var items = $filter('filter')(scope.imagesData, {fileId: scope.fileId, filterId: scope.filterId}, true);
                     if (items && items.length == 0) {
@@ -1668,7 +1668,7 @@
 
                 $scope.toggleSelection = function(file) {
                     if ($scope.allowSelection == 'true') {
-                        // parent inject 
+                        // parent inject
                         $scope.$parent.select(file.id);
                         return;
                     }
@@ -1709,7 +1709,7 @@
                     $scope.showFolderForm = !$scope.showFolderForm;
                 };
 
-                // controller logic 
+                // controller logic
 
                 $scope.searchQuery = '';
 
@@ -1831,9 +1831,9 @@
                         });
                     });
                 }
-                
+
                 // file detail view logic
-                
+
                 $scope.storeFileCaption = function(fileDetail) {
                 	$http.post('admin/api-admin-storage/filemanager-update-caption', $.param({'id': fileDetail.id, 'captionsText' : fileDetail.captionArray}), {
                         headers : {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
