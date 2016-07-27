@@ -20,7 +20,7 @@
 			<directory>./tests</directory>
 		</blacklist>
 		<whitelist processUncoveredFilesFromWhitelist="false">
-            <directory suffix=".php">./src</directory>
+            <directory suffix=".php">./core</directory>
         </whitelist>
 	</filter>
     <php>
