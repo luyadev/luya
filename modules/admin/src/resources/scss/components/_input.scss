@@ -177,14 +177,14 @@ input[type='checkbox']:checked + .input__label:before {
     datepicker {
         position: relative;
 
+        padding-right: 50px;
         padding-bottom: 10px;
-        padding-left: 50px;
     }
 
     .date-picker-icon {
         position: absolute;
         top: 0;
-        left: 0;
+        right: 0;
     }
 
     .hour-selection {
@@ -224,6 +224,9 @@ input[type='checkbox']:checked + .input__label:before {
 
 // Datepicker itself
 ._720kb-datepicker-calendar {
+    right: 0;
+    left: auto;
+
     max-width: 300px;
 
     box-shadow: 0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);
