@@ -156,7 +156,7 @@ class Composition extends Component implements \ArrayAccess
     {
         if ($event->key == 'langShortCode') {
             Yii::$app->language = $event->value;
-            setlocale(LC_ALL, $this->getLocale(), $this->getLocale().'.utf8');
+            setlocale(LC_ALL, $this->getLocale().'.utf8', $this->getLocale());
         }
     }
     
