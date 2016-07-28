@@ -83,6 +83,7 @@ class NavItemController extends \admin\base\RestController
         $model = NavItemPage::findOne(['id' => $pageItemId]);
         
         if ($model) {
+            $model->forceNavItem->updateTimestamp();
             return $model->updateAttributes(['layout_id' => $layoutId, 'version_alias' => $alias]);
         }
         
@@ -96,6 +97,7 @@ class NavItemController extends \admin\base\RestController
     	$page = NavItemPage::findOne($pageId);
     	
     	if ($page) {
+    	    $page->forceNavItem->updateTimestamp();
     		$page->delete();
     	}
     }

@@ -234,6 +234,11 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
         $this->slugifyAlias();
     }
 
+    public function updateTimestamp()
+    {
+        $this->updateAttributes(['timestamp_update' => time()]);
+    }
+    
     /**
      * temp disabled the links for the specific module, cause we are not yet able to handle module integration blocks (find the module inside the content), so wo just
      * display all nav items tempo.

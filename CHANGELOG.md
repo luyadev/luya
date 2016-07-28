@@ -13,6 +13,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - `#920` Fixed bug where i18n image/file array lists have wrong default value, array expected string given.
 - `#926` Fixed bug where kickstarter template is missing jquery, fixed by depending on yii\web\JqueryAsset.
 - `#927` Fixed bug where Datetime/Date directive contains preseleced values (added date picker and time directice renewal).
+- `#929` Fixed bug where caching does not load new data when changing the layout of a cms page.
 - `#906` Added silent mode for the LUYA setup process.
 - `#786` Added ability to retriev context informations from a block like, index, last, first, nextEqual, prevEqual.
 - `#908` Added ability to set ngRestFilters the specific grid list data where conditions.

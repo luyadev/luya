@@ -203,7 +203,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     {
     	// if state makes sure this does not happend when the nav item page is getting deleted and triggers the child delete process.
     	if ($this->navItemPage) {
-    		$this->navItemPage->forceNavItem->updateAttributes(['timestamp_update' => time()]);
+    		$this->navItemPage->forceNavItem->updateTimestamp();
     	}
     }
     
