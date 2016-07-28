@@ -1,17 +1,23 @@
 Page Crawler
 ==============
 
-An easy to use page crawler to make an internal search field on your page. The crawlermodule gather all informations about the sides on the configured domain.
+An easy to use Full-Website page crawler to make provide search results on your page. The crawlermodule gather all informations about the sides on the configured domain and stores the index in the database. From there you can now create search querys to provide search results, there are also helper methods which provides inteligent search results by spliting the input into multiple search querys (used by default).
 
 ### Install
 
-Add to composer json:
+Add the package to your composer file
 
-```
-"luyadev/luya-module-crawler" : "1.0.0-beta5"
+```sh
+composer require luyadev/luya-module-crawler:^1.0@dev
 ```
 
-Add the module to your configuration
+or add it directly to your composer.json file:
+
+```sh
+"luyadev/luya-module-crawler" : "^1.0@dev"
+```
+
+Add the module to your configuration (config):
 
 ```php
 'crawler' => [
@@ -23,10 +29,11 @@ Add the module to your configuration
 
 Where `baseUrl` is the domain you want to crawler all informations.
 
-After setup the module in your config you have to run the migrations:
+After setup the module in your config you have to run the migrations and import command (to setup permissions):
 
 ```sh
-./vendor/bin/luya migrate`
+./vendor/bin/luya migrate
+./vendor/bin/luya import
 ```
 
 ### Execute
