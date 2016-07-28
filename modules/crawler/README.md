@@ -37,7 +37,9 @@ To execute the command (and run the crawler proccess) use the crawler command `c
 ./vendor/bin/luya crawler/crawl
 ```
 
- ### Statistic Command
+> In order to provide current crawl results you should create a cronjob which crawls the page each night: `cd httpdocs/current && ./vendor/bin/luya crawler/crawl`
+
+### Statistic Command
  
  You can also get statistic Results enabling a cronjob executing each week:
  
@@ -53,7 +55,6 @@ Make a post request with `query` to the `crawler/default/index` route and render
 ```php
 <h1>Search</h1>
 <p>You where looking for <b><?= $query; ?></b>.</p>
-
 <h2><?= count($results); ?> results</h2>
 <ul>
 <? foreach($results as $item): ?>
@@ -72,8 +73,7 @@ To make async search queries use the restcontroller route (jquery example):
 
 
 ```php
-
-var url = '<?= Url::toInternal(['crawler/rest/index']);?>;
+var url = '<?= Url::toInternal(['crawler/rest/index']); ?>';
 
 $.ajax({
 	url : url 
@@ -87,13 +87,13 @@ Crawler Settings
 
 Set the language in your html markup
 
-```
-<html lang="<?= $composition->getKey('langShortCode'); ?>">
+```html
+<html lang="<?= Yii::$app->composition->language; ?>">
 ```
 
 Partial ignore a content from the crawler:
 
-```
+```html
 <div>
 	<!-- [CRAWL_IGNORE] -->
 	<p>The crawler will never see and store this information</p>
@@ -103,8 +103,9 @@ Partial ignore a content from the crawler:
 
 Ignore a page complet:
 
-```
+```html
 <div>
 	<!-- [CRAWL_FULL_IGNORE] --> 
-	<p>Diese gesamte Seite wird ignoriert.</p>
+	<p>The full page will be ignored by the crawler.</p>
 </div>
+```
