@@ -73,12 +73,15 @@ where(['!=', 'is_active', 0])->andWhere(['==', 'parent_nav_id', 0]); // WHERE is
 Breadcrumbs output
 --------------------
 
-To get the current breadcrumbs of the current menu item you can use the item object method `getTeardown`, so you can get all items from the item and below. The `getTeardown()` method works of course on every Nav-Item-Object, so you can teardown whatever you like to.
+To get the current breadcrumbs of the current menu item you can use the item object method `getTeardown()` (which is equals to `teardown`) to collect all items downwards from the current item, teardown contains the menu itself, `getParents()` is almost equals but without the element itself you have applied the method. The `getTeardown()` method works of course on every Nav-Item-Object, so you can teardown whatever you like to.
 
 ```php
-foreach(Yii::$app->menu->current->teardown as $item) {
-    echo '<li><a href="' . $item->link . '">' . $item->title . '</a></li>';
-}
+<ol>
+    <li><a href="<?= Yii::$app->menu->home->link; ?>">Home</a></li>
+    <?php foreach (Yii::$app->menu->current->teardown as $item): ?>
+       <li><a href="<?= $item->link; ?>"><?= $item->title; ?></a></li>
+    <?php endforeach; ?>
+</ol>
 ```
 
 Languages (composition)
