@@ -116,7 +116,7 @@ We have built some small helper commands you can use whever you are in your cms.
 |`link [//go/there] (relativ link description)`|`<a href="http://example.com/go/there">relativ link description</a>`
 |`file [1]` |Get the path to the file with the ID 1
 
-**ATTENTION:** The obven metnioned `Link Syntax` muss be used **without** Whitspaces.
+**ATTENTION:** The above mentioned `Link Syntax` must be used **without** the whitspaces!
 
 To the the page number (which is 3, used above) you will find the Page-Id in when hover over the menu item in the cms admin menu-tree:
 
