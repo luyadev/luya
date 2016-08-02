@@ -264,7 +264,7 @@
                                <zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{lang.name}}: {{prop.label}}" model="propValues[prop.id][lang.short_code]"></zaa-injector>
                               </li>
                              </ul>
-                              
+
                             </div>
                             <div ng-if="!prop.i18n">
                                 <zaa-injector dir="prop.type" options="prop.option_json" fieldid="{{prop.var_name}}" fieldname="{{prop.var_name}}" initvalue="{{prop.default_value}}" label="{{prop.label}}" model="propValues[prop.id]"></zaa-injector>
@@ -456,18 +456,27 @@
                                 <div class="col s12 page__no-padding" ng-switch-when="1">
                                     <!-- Versions -->
                                     <div class="page__versions" ng-controller="PageVersionsController" ng-init="createVersionModalState=true; editVersionModalState=true">
-                                        <div class="page__versions-left">
-                                            <span class="page__versions-title page__versions-title--black"><span><?= \cmsadmin\Module::t('current_version'); ?>:</span>&nbsp;<strong>{{ currentVersionInformation.version_alias}}</strong><i class="material-icons" ng-click="editVersionModalState=false">edit</i><i ng-show="currentPageVersion != item.nav_item_type_id" ng-click="removeCurrentVersion()" class="material-icons">delete</i></span>
-                                        </div><!--
-                                        --><div class="page__versions-right">
-                                            <span class="page__versions-title"><?= \cmsadmin\Module::t('versions_selector'); ?>: </span>
-                                            <button class="page__version" ng-class="{'page__version--visible': currentPageVersion == versionItem.id, 'page__version--in-use': versionItem.id == item.nav_item_type_id}" ng-repeat="versionItem in typeData" ng-click="switchVersion(versionItem.id)" ng-init="modalState=true" title="{{ versionItem.version_alias }}">
-                                                {{$index+1}}
-                                            </button>
-                                            <button class="page__version page__version--add" ng-click="createVersionModalState=false">
-                                                <i class="material-icons left">add</i>
-                                            </button>
-                                        </div>
+                                        <!--<div class="page__versions-left">
+                                            <span class="page__versions-title page__versions-title--black">
+                                            <span><?= \cmsadmin\Module::t('current_version'); ?>:</span>&nbsp;
+                                            <strong>{{ currentVersionInformation.version_alias}}</strong><i class="material-icons" ng-click="editVersionModalState=false">edit</i>
+                                            <i ng-show="currentPageVersion != item.nav_item_type_id" ng-click="removeCurrentVersion()" class="material-icons">delete</i></span>
+                                        </div>-->
+                                        <span class="page__versions-label"><?= \cmsadmin\Module::t('versions_selector'); ?>: </span>
+                                        <button class="page__version" ng-class="{'page__version--visible': currentPageVersion == versionItem.id, 'page__version--in-use': versionItem.id == item.nav_item_type_id}" ng-repeat="versionItem in typeData" ng-init="modalState=true" title="{{ versionItem.version_alias }}" ng-click="switchVersion(versionItem.id);">
+                                            {{$index+1}}
+                                            <div class="page__version-popup">
+                                                <strong>{{ versionItem.version_alias}}</strong>
+                                                <span class="page__version-popup-buttons">
+                                                    <i class="material-icons" ng-click="editVersionModalState=false">edit</i>
+                                                    <i ng-show="item.nav_item_type_id != versionItem.id" ng-click="removeCurrentVersion()" class="material-icons">delete</i></span>
+                                                    <span class="page__version-popup-mouse-bridge"></span>
+                                                </span>
+                                            </div>
+                                        </button>
+                                        <button class="page__version page__version--add" ng-click="createVersionModalState=false">
+                                            <i class="material-icons left">add</i>
+                                        </button>
 
                                         <!-- Edit version modal -->
                                         <modal is-modal-hidden="editVersionModalState">
@@ -508,7 +517,7 @@
                                             </div>
                                         </modal>
                                         <!-- /Edit version modal -->
-                                        
+
                                         <!-- Add version modal -->
                                         <modal is-modal-hidden="createVersionModalState" ng-init="copyExistingVersion=true">
                                             <div class="modal__header modal__header--light modal__header--for-form">
