@@ -201,12 +201,12 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     
     private function updateNavItemTimesamp()
     {
-    	// if state makes sure this does not happend when the nav item page is getting deleted and triggers the child delete process.
-    	if ($this->navItemPage) {
-    	    if ($this->navItemPage->forceNavItem) {
+        // if state makes sure this does not happend when the nav item page is getting deleted and triggers the child delete process.
+        if ($this->navItemPage) {
+            if ($this->navItemPage->forceNavItem) {
                 $this->navItemPage->forceNavItem->updateTimestamp();
-    	    }
-    	}
+            }
+        }
     }
     
     public function getNavItemPage()

@@ -32,15 +32,15 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
 
     public function init()
     {
-    	parent::init();
-    	
-    	$this->on(self::EVENT_AFTER_DELETE, function($e) {
-    		foreach ($e->sender->navItemPageBlockItems as $item) {
-    			$item->delete();
-    		}
-    		
-    		$this->forceNavItem->updateAttributes(['timestamp_update' => time()]);
-    	});
+        parent::init();
+        
+        $this->on(self::EVENT_AFTER_DELETE, function ($e) {
+            foreach ($e->sender->navItemPageBlockItems as $item) {
+                $item->delete();
+            }
+            
+            $this->forceNavItem->updateAttributes(['timestamp_update' => time()]);
+        });
     }
 
     public function getView()
@@ -181,7 +181,6 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
                 
                 // see if its a valid block object
                 if ($blockObject) {
-                    
                     if (count($blockObject->assets) > 0) {
                         $controllerObject = $this->getOption('cmsControllerObject');
                         if ($controllerObject) {
@@ -250,7 +249,6 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
      */
     public function getContentAsArray()
     {
-
         $nav_item_page = (new \yii\db\Query())->select('*')->from('cms_nav_item_page t1')->leftJoin('cms_layout', 'cms_layout.id=t1.layout_id')->where(['t1.id' => $this->id])->one();
         
         $return = [
@@ -274,7 +272,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
             }
         }
         
-		return $return;
+        return $return;
     }
     
     public static function getPlaceholder($placeholderVar, $navItemPageId, $prevId)
@@ -403,6 +401,6 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
      */
     public function getNavItemPageBlockItems()
     {
-    	return $this->hasMany(NavItemPageBlockItem::className(), ['nav_item_page_id' => 'id']);
+        return $this->hasMany(NavItemPageBlockItem::className(), ['nav_item_page_id' => 'id']);
     }
 }

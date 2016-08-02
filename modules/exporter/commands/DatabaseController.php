@@ -59,7 +59,6 @@ class DatabaseController extends Command
             unlink($temp);
             unlink($tempBackup);
             return $this->outputError('Abort by user input.');
-
         } else {
             foreach (Yii::$app->db->schema->getTableNames() as $name) {
                 Yii::$app->db->createCommand()->dropTable($name)->execute();

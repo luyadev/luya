@@ -11,4 +11,5 @@ namespace cmsadmin\base;
  * @author Basil Suter <basil@nadar.io>
  */
 abstract class Block extends TwigBlock
-{}
+{
+}

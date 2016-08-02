@@ -92,14 +92,14 @@ class NavItemController extends \admin\base\RestController
     
     public function actionRemovePageVersion()
     {
-    	$pageId = Yii::$app->request->getBodyParam('pageId');
-    	
-    	$page = NavItemPage::findOne($pageId);
-    	
-    	if ($page) {
-    	    $page->forceNavItem->updateTimestamp();
-    		$page->delete();
-    	}
+        $pageId = Yii::$app->request->getBodyParam('pageId');
+        
+        $page = NavItemPage::findOne($pageId);
+        
+        if ($page) {
+            $page->forceNavItem->updateTimestamp();
+            $page->delete();
+        }
     }
     
     /**

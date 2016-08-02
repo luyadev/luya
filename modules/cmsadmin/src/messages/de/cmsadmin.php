@@ -271,6 +271,6 @@ return [
     'module_permission_update_pages' => 'Seiten Bearbeiten',
     'module_permission_edit_drafts' => 'Vorlagen Bearbeiten',
     'module_permission_page_blocks' => 'Seiten Inhaltsblöcke',
-	'js_version_delete_confirm' => 'Möchten Sie die Version «%alias%» wirklich Entfernen?',
-	'js_version_delete_confirm_success' => 'Die Seiten Version %alias% wurde erfolgreich entfernt.',
+    'js_version_delete_confirm' => 'Möchten Sie die Version «%alias%» wirklich Entfernen?',
+    'js_version_delete_confirm_success' => 'Die Seiten Version %alias% wurde erfolgreich entfernt.',
 ];

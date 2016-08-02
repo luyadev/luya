@@ -15,9 +15,9 @@ interface BlockInterface
     // luya based methods to access
 
     // public function renderFrontend();
-    
+
     // public function renderAdmin();
-    
+
     public function getFieldHelp();
 
     public function setVarValues(array $values);
@@ -27,7 +27,7 @@ interface BlockInterface
     public function setEnvOption($key, $value);
     
     // block unspecific methods
-    
+
     public function renderFrontend();
     
     public function renderAdmin();

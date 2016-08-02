@@ -83,7 +83,7 @@ class MenuController extends \admin\base\RestController
             $array = $nav->toArray();
             
             if (empty($nav->activeLanguageItem)) {
-            	continue;
+                continue;
             }
             $array['title'] = $nav->activeLanguageItem->title;
             

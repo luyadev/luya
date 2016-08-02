@@ -31,17 +31,17 @@ abstract class Controller extends \yii\web\Controller
         parent::init();
         
         if ($this->module instanceof Module) {
-	        // get asset bundles which are defined in the module and register them into the view
-	        foreach ($this->module->assets as $class) {
-	            if (!in_array($class, $this->skipModuleAssets) && !in_array('*', $this->skipModuleAssets)) {
-	                // autoload $class and register with current view
-	                $this->registerAsset($class);
-	            }
-	        }
-	        // get controller based assets
-	        foreach ($this->assets as $class) {
-	            $this->registerAsset($class);
-	        }
+            // get asset bundles which are defined in the module and register them into the view
+            foreach ($this->module->assets as $class) {
+                if (!in_array($class, $this->skipModuleAssets) && !in_array('*', $this->skipModuleAssets)) {
+                    // autoload $class and register with current view
+                    $this->registerAsset($class);
+                }
+            }
+            // get controller based assets
+            foreach ($this->assets as $class) {
+                $this->registerAsset($class);
+            }
         }
     }
 
