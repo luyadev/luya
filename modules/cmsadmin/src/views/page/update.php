@@ -455,7 +455,7 @@
                             <div class="row">
                                 <div class="col s12 page__no-padding" ng-switch-when="1">
                                     <!-- Versions -->
-                                    <div class="page__versions" ng-controller="PageVersionsController" ng-init="createVersionModalState=true; editVersionModalState=true">
+                                    <div class="page__versions" ng-controller="PageVersionsController" ng-init="createVersionModalState=true;">
                                         <!--<div class="page__versions-left">
                                             <span class="page__versions-title page__versions-title--black">
                                             <span><?= \cmsadmin\Module::t('current_version'); ?>:</span>&nbsp;
@@ -468,8 +468,8 @@
                                             <div class="page__version-popup">
                                                 <strong>{{ versionItem.version_alias}}</strong>
                                                 <span class="page__version-popup-buttons">
-                                                    <i class="material-icons" ng-click="editVersionModalState=false">edit</i>
-                                                    <i ng-show="item.nav_item_type_id != versionItem.id" ng-click="removeCurrentVersion()" class="material-icons">delete</i></span>
+                                                    <i class="material-icons" ng-click="toggleVersionEdit(versionItem.id);">edit</i>
+                                                    <i ng-show="item.nav_item_type_id != versionItem.id" ng-click="toggleRemoveVersion(versionItem.id)" class="material-icons">delete</i></span>
                                                     <span class="page__version-popup-mouse-bridge"></span>
                                                 </span>
                                             </div>
@@ -477,7 +477,6 @@
                                         <button class="page__version page__version--add" ng-click="createVersionModalState=false">
                                             <i class="material-icons left">add</i>
                                         </button>
-
                                         <!-- Edit version modal -->
                                         <modal is-modal-hidden="editVersionModalState">
                                             <div class="modal__header modal__header--light modal__header--for-form">

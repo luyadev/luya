@@ -373,7 +373,6 @@
 		
 		var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 		
-		
 		// layoutsData
 		
 		$scope.layoutsData = ServiceLayoutsData.data;
@@ -386,9 +385,26 @@
     		$scope.createVersionModalState = true;
     	}
     	
+    	$scope.editVersionModalState = true;
+    	
     	$scope.closeEditModal = function() {
     		$scope.editVersionModalState = true;
     	}
+    	
+    	$scope.openEditModal = function() {
+    		$scope.editVersionModalState = false;
+    	}
+    	
+		$scope.toggleVersionEdit = function(versionId) {
+			$scope.$parent.switchVersion(versionId);
+			$scope.openEditModal();
+		};
+		
+		$scope.toggleRemoveVersion = function(versionid) {
+			$scope.$parent.switchVersion(versionid);
+			$scope.$parent.removeCurrentVersion();
+			
+		}
     	
     	// controller logic
     	
