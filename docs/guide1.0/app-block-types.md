@@ -60,7 +60,8 @@ There are several types you can use instead `zaa-text` the most of them are self
 | zaa-select        | create a select dropdown with options based on the options parameter. The Options item must contain a value and label key
 | zaa-datetime | creates an integer value of datetime
 | zaa-date | creates an integer value of a date
-| zaa-checkbox-array | createa an array with checkboxes
+| zaa-checkbox | creates a single checkbox (e.g. to define on/off states)
+| zaa-checkbox-array | creates an array with checkboxes
 | zaa-file-upload       | creata a file upload form and returns the fileId on success
 | zaa-file-array-upload | creates an array with file id and caption string
 | zaa-image-upload      | creata a image upload form and return the imageId on success
