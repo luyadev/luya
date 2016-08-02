@@ -11,6 +11,9 @@ return [
         'unitmodule' => [
             'class' => 'luyatests\data\modules\unitmodule\Module',
         ],
+        'consolemodule' => [
+            'class' => 'luyatests\data\modules\consolemodule\Module',
+        ]
     ],
     'components' => [
         'db' => [
