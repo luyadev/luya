@@ -8,6 +8,7 @@ use admin\models\UserLogin;
 use admin\aws\ChangePasswordInterface;
 use admin\Module;
 use admin\traits\SoftDeleteTrait;
+use yii\helpers\Json;
 
 /**
  * User Model represents all Administration Users.
@@ -24,6 +25,7 @@ use admin\traits\SoftDeleteTrait;
  * @property string $secure_token
  * @property integer $secure_token_timestamp
  * @property integer $force_reload
+ * @property string $settings
  * 
  * @author Basil Suter <basil@nadar.io>
  */
@@ -38,6 +40,11 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface, Change
         if ($item) {
             return $item['timestamp_create'];
         }
+    }
+    
+    public function getSettings()
+    {
+        return Yii::createObject(['class' => UserSettings::className(), 'data' => Json::decode($this->settings)]);
     }
     
     public static function ngRestApiEndpoint()
@@ -103,6 +110,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface, Change
             [['title', 'firstname', 'lastname', 'email', 'password'], 'required', 'on' => 'default'],
             [['email'], 'email'],
             [['email'], 'unique', 'on' => ['restcreate', 'restupdate']],
+            [['settings'], 'string'],
         ];
     }
 
@@ -125,7 +133,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface, Change
             'changepassword' => ['password', 'password_salt'],
             'login' => ['email', 'password', 'force_reload'],
             'securelayer' => ['secure_token'],
-            'default' => ['title', 'firstname', 'lastname', 'email', 'password', 'force_reload'],
+            'default' => ['title', 'firstname', 'lastname', 'email', 'password', 'force_reload', 'settings'],
         ];
     }
 
