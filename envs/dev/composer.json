@@ -42,7 +42,8 @@
             "remoteadmin\\" : "../../modules/remoteadmin",
             "payment\\" : "../../../luya-module-payment/src",
             "basicauth\\" : "../../../luya-module-basicauth/src",
-            "ngresttest\\" : "modules/ngresttest"
+            "ngresttest\\" : "modules/ngresttest",
+            "bootstrap4\\" : "../../../luya-bootstrap4"
         }
     }
 }
