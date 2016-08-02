@@ -26,6 +26,7 @@ use luya\web\Application;
  * @property string $passthrough_file_password
  * @property integer $passthrough_file_stats
  * @property string $caption
+ * @property string $internal_note
  * 
  * @author Basil Suter <basil@nadar.io>
  */
@@ -48,7 +49,7 @@ class StorageFile extends \yii\db\ActiveRecord
             [['name_original', 'name_new', 'mime_type', 'name_new_compound', 'extension', 'hash_file', 'hash_name'], 'required'],
             [['folder_id', 'upload_timestamp', 'file_size', 'upload_user_id', 'upload_timestamp', 'is_deleted'], 'safe'],
             [['is_hidden'], 'integer'],
-            [['caption'], 'string'],
+            [['caption', 'internal_note'], 'string'],
         ];
     }
     
