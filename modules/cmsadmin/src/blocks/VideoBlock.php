@@ -45,10 +45,9 @@ class VideoBlock extends \cmsadmin\base\Block
     public function constructYoutubeUrl($scheme, $host, $query)
     {
         $url = '';
-        if (($pos = strpos($query, 'v=')) !== false) {
-            $videoId = substr($query, $pos + 2);
-
-            $url = $scheme . '://' . $host . '/embed/' . $videoId;
+        parse_str($query, $params);
+        if (isset($params['v'])) {
+            $url = $scheme . '://' . $host . '/embed/' . $params['v'];
 
             if ($this->getCfgValue('controls')) {
                 $url .= '?rel=0&amp;controls=0&amp;showinfo=0';
