@@ -4,10 +4,10 @@ namespace admin\assets;
 
 /**
  * BowerVendor Asset contains all files from old bower-asset depencies.
- * 
+ *
  * Now the bower asset files are directly downloaded by the luya team and stored in the resources/vendor folder
  * base on the following composer.json data for fxp asset plugin:
- * 
+ *
  * ```
  *   "bower-asset/jquery-ui" : "1.11.4",
  *   "bower-asset/angular" : "1.4.8",
@@ -22,7 +22,7 @@ namespace admin\assets;
  *   "bower-asset/ng-wig" : "2.3.3",
  * ```
  *
- * The query file is no used as we do use the yii\web\JqueryAsset 
+ * The query file is no used as we do use the yii\web\JqueryAsset
  *
  * ```
  *" bower-asset/jquery" : "2.2.0",
@@ -36,11 +36,11 @@ namespace admin\assets;
 class BowerVendor extends \luya\web\Asset
 {
     public $sourcePath = '@admin/resources/bowervendor';
-    
+
     public $css = [
-        'angular-datepicker/datepicker.min.css',
+        // 'angular-datepicker/datepicker.min.css', // Moved to scss
     ];
-    
+
     public $js = [
         // jquery ui
         'jquery-ui/jquery-ui.min.js',
@@ -63,7 +63,7 @@ class BowerVendor extends \luya\web\Asset
         // file upload
         'ng-file-upload/ng-file-upload.min.js',
         'ng-file-upload/ng-file-upload-shim.min.js',
-        
+
         'angular-filter.min.js',
         'angular-datepicker/datepicker.min.js',
     ];

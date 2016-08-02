@@ -3,7 +3,7 @@
  * http://materializecss.com/
  */
 
-@import "materialize/materialize";
+@import 'materialize/materialize';
 
 /**
  * Basic styles
@@ -12,15 +12,15 @@
  * 		typography: 			Typography styles
  * 		materialize-overwrite: 	Overwrite styles from Materialize that we don't need
  */
-@import "base/variables";
-@import "base/base";
-@import "base/typography";
-@import "base/materialize-overwrite";
+@import 'base/variables';
+@import 'base/base';
+@import 'base/typography';
+@import 'base/materialize-overwrite';
 
 /**
  * Helpers
  */
-@import "helpers/clearfix";
+@import 'helpers/clearfix';
 
 /**
  * Components
@@ -32,55 +32,56 @@
  *		toolbar:				Defines the .toolbar background and proportions
  */
 
-@import "components/material-icons";
+@import 'components/material-icons';
 
-@import "components/alert";
-@import "components/aws-gallery";
-@import "components/breadcrumb";
-@import "components/btn";
-@import "components/button-right";
-@import "components/checkbox-column-fix";
-@import "components/crud";
-@import "components/crud-loader-tag";
-@import "components/filearray";
-@import "components/filemanager";
-@import "components/fileupload";
-@import "components/flag";
-@import "components/floating-form";
-@import "components/flow";
-@import "components/floating-button-label";
-@import "components/form";
-@import "components/form-group";
-@import "components/help";
-@import "components/i18n";
-@import "components/imagearray";
-@import "components/imageupload";
-@import "components/input";
-@import "components/list";
-@import "components/loading-bar";
-@import "components/loading-indicator";
-@import "components/loading-overlay";
-@import "components/log";
-@import "components/luya-container";
-@import "components/menu-dropdown";
-@import "components/modal";
-@import "components/navbar";
-@import "components/ng-wig";
-@import "components/search-box";
-@import "components/sidebar";
-@import "components/spin";
-@import "components/submenu";
-@import "components/switch";
-@import "components/table";
-@import "components/toolbar";
-@import "components/useronline";
-@import "components/waves";
-@import "components/langswitch";
-@import "components/tabs";
-@import "components/toasts";
-@import "components/debug-container";
-@import "components/zaa-sortrelation";
-@import "components/zaa-table";
+@import 'components/alert';
+@import 'components/angular-datepicker';
+@import 'components/aws-gallery';
+@import 'components/breadcrumb';
+@import 'components/btn';
+@import 'components/button-right';
+@import 'components/checkbox-column-fix';
+@import 'components/crud';
+@import 'components/crud-loader-tag';
+@import 'components/filearray';
+@import 'components/filemanager';
+@import 'components/fileupload';
+@import 'components/flag';
+@import 'components/floating-form';
+@import 'components/flow';
+@import 'components/floating-button-label';
+@import 'components/form';
+@import 'components/form-group';
+@import 'components/help';
+@import 'components/i18n';
+@import 'components/imagearray';
+@import 'components/imageupload';
+@import 'components/input';
+@import 'components/list';
+@import 'components/loading-bar';
+@import 'components/loading-indicator';
+@import 'components/loading-overlay';
+@import 'components/log';
+@import 'components/luya-container';
+@import 'components/menu-dropdown';
+@import 'components/modal';
+@import 'components/navbar';
+@import 'components/ng-wig';
+@import 'components/search-box';
+@import 'components/sidebar';
+@import 'components/spin';
+@import 'components/submenu';
+@import 'components/switch';
+@import 'components/table';
+@import 'components/toolbar';
+@import 'components/useronline';
+@import 'components/waves';
+@import 'components/langswitch';
+@import 'components/tabs';
+@import 'components/toasts';
+@import 'components/debug-container';
+@import 'components/zaa-sortrelation';
+@import 'components/zaa-table';
 
 // Curently disabled
 // @import "components/user-menu";
@@ -89,4 +90,4 @@
  * Layouts
  *		luya-container:			Dimensiions and positionng of the luya-container
  */
-@import "layouts/luya-container";
+@import 'layouts/luya-container';

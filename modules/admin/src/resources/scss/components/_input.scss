@@ -174,24 +174,38 @@ input[type='checkbox']:checked + .input__label:before {
 
 // Custom date styling
 .input--date {
-    datepicker {
-        position: relative;
+    position: relative;
 
-        padding-right: 50px;
-        padding-bottom: 10px;
+    padding-right: 50px;
+
+    datepicker {
+        position: static;
+    }
+
+    &.input--with-time datepicker {
+        width: 50%;
     }
 
     .date-picker-icon {
         position: absolute;
         top: 0;
-        right: 0;
+        right: -50px;
     }
 
     .hour-selection {
-        display: block;
-        clear: both;
+        position: relative;
 
-        width: 100%;
+        display: inline-block;
+
+        width: 46%;
+        margin-left: 4%;
+        padding-left: 30px;
+    }
+
+    .hour-selection__icon {
+        position: absolute;
+        top: 5px;
+        left: 0;
     }
 
     .time-divider {
@@ -220,21 +234,6 @@ input[type='checkbox']:checked + .input__label:before {
             max-width: 49%;
         }
     }
-}
-
-// Datepicker itself
-._720kb-datepicker-calendar {
-    right: 0;
-    left: auto;
-
-    max-width: 300px;
-
-    box-shadow: 0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);
-}
-
-.input--date ._720kb-datepicker-calendar {
-    margin-top: 10px;
-    margin-left: -50px;
 }
 
 // Custom behavior for select boxes
