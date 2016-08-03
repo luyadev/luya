@@ -39,18 +39,21 @@ class StorageImporter extends Importer
             return false;
         }
 
+        //build storagefilelist index
+        $storageFileIndex = [];
+        foreach ($storageFileList as $key => $file) {
+            $storageFileIndex[] = pathinfo($file, PATHINFO_BASENAME);
+        }
+
         // check storage files which are not flagged as deleted
         $allStorageFileEntries = StorageFile::find()->where(['is_deleted' => 0])->indexBy('id')->asArray()->all();
 
-        foreach ($storageFileList as $key => $file) {
-            foreach ($allStorageFileEntries as $dbfile) {
-                if ($dbfile['name_new_compound'] == pathinfo($file, PATHINFO_BASENAME)) {
-                    unset($storageFileList[$key]);
-                    break;
-                }
+        foreach ($allStorageFileEntries as $dbfile) {
+            if (in_array($dbfile['name_new_compound'], $storageFileIndex)) {
+                unset($storageFileList[$key]);
             }
         }
-        
+
         // check image filter files
         $imageList = StorageImage::find()->asArray()->all();
         // check all storage files including is_deleted entries
@@ -59,15 +62,12 @@ class StorageImporter extends Importer
         foreach ($imageList as $image) {
             if (array_key_exists($image['file_id'], $allStorageFileEntries)) {
                 $filterImage = $image['filter_id'] . '_' . $allStorageFileEntries[$image['file_id']]['name_new_compound'];
-                foreach ($storageFileList as $key => $file) {
-                    if ($filterImage == pathinfo($file, PATHINFO_BASENAME)) {
-                        unset($storageFileList[$key]);
-                        break;
-                    }
+                if (in_array($filterImage, $storageFileIndex)) {
+                    unset($storageFileList[$key]);
                 }
             }
         }
-        
+
         return $storageFileList;
     }
 
@@ -91,15 +91,14 @@ class StorageImporter extends Importer
 
         $count = 0;
 
+        // build storagefilelist index
+        $storageFileIndex = [];
+        foreach ($storageFileList as $key => $file) {
+            $storageFileIndex[] = pathinfo($file, PATHINFO_BASENAME);
+        }
+
         foreach ($allStorageFileEntries as $dbfile) {
-            $found = false;
-            foreach ($storageFileList as $key => $file) {
-                if ($dbfile['name_new_compound'] == pathinfo($file, PATHINFO_BASENAME)) {
-                    $found = true;
-                    break;
-                }
-            }
-            if (!$found) {
+            if (!in_array($dbfile['name_new_compound'], $storageFileIndex)) {
                 $dbfile->is_deleted = 1;
                 $count++;
                 $dbfile->update(false);
@@ -176,13 +175,13 @@ class StorageImporter extends Importer
             
             //$log["files_missing_in_image_table"] = static::removeMissingImageFiles();
 
-            foreach (static::getOrphanedFileList() as $file) {
+            foreach ($orphanedFileList as $file) {
                 $log["files_to_remove"][] = $file;
             }
         }
 
         $this->importer->verbosePrint('finished storage importer', __METHOD__);
-        
+
         $this->addLog($log);
     }
 }
