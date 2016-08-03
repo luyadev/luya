@@ -26,6 +26,7 @@ use yii\helpers\Json;
  * @property integer $secure_token_timestamp
  * @property integer $force_reload
  * @property string $settings
+ * @property \admin\models\UserSetting $setting Setting object to store data.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
