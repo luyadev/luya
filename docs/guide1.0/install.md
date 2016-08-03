@@ -1,5 +1,4 @@
-Create a new Luya Project
-================
+# Create a LUYA Application
 
 With those few steps you can install *LUYA* on your Webserver. To install *LUYA* you have to install [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) on your Mac, Unix or Windows System.
 
