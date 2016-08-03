@@ -154,9 +154,6 @@ class StorageImporter extends Importer
     {
         $log = [];
 
-        $time_pre = microtime(true);
-
-
         $this->importer->verbosePrint('process thumbnail', __METHOD__);
         
         Yii::$app->storage->processThumbnails();
