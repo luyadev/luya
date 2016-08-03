@@ -44,7 +44,14 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface, Change
     
     public function getSettings()
     {
-        return Yii::createObject(['class' => UserSettings::className(), 'data' => Json::decode($this->settings)]);
+        return Yii::createObject(['class' => UserSettings::className(), 'sender' => $this, 'data' => Json::decode($this->settings)]);
+    }
+    
+    public function updateSettings(array $data)
+    {
+        $this->updateAttributes([
+            'settings' => Json::encode($data),
+        ]);
     }
     
     public static function ngRestApiEndpoint()
