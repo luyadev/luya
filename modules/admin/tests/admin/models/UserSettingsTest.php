@@ -3,13 +3,13 @@
 namespace admintests\models;
 
 use admintests\AdminTestCase;
-use admin\models\UserSettings;
+use admin\models\UserSetting;
 
 class UserSettingsTest extends AdminTestCase
 {
     public function testArraySetter()
     {
-        $model = new UserSettings();
+        $model = new UserSetting();
         
         // test set
         $this->assertTrue($model->set('1.1', 'value'));
@@ -32,6 +32,8 @@ class UserSettingsTest extends AdminTestCase
         $this->assertArrayHasKey('2', $model->data['x']['y']);
      
         // test get
+        $this->assertEquals(null, $model->get('notfound'));
+        $this->assertEquals(false, $model->get('notfound', false));
         $this->assertEquals('value', $model->get('1.1'));
         $this->assertEquals('value2', $model->get('1.2'));
         $this->assertEquals('value', $model->get('key'));
@@ -68,7 +70,7 @@ class UserSettingsTest extends AdminTestCase
     
     public function testArraySetterArrayAccess()
     {
-        $model = new UserSettings();
+        $model = new UserSetting();
     
         $model['1.2.3'] = 'value';
         
