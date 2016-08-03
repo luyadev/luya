@@ -19,6 +19,7 @@ class UserSettingsTest extends AdminTestCase
         $this->assertTrue($model->set('x.y.2', 'v2'));
         $this->assertFalse($model->set('x.y.2.b', '2_is_already_a_value_not_able_to_set_this_value'));
         $this->assertTrue($model->set('one.two.three', 'four'));
+        $this->assertTrue($model->set('cfg.override', 1));
         
         // inspect array data
         $this->assertArrayHasKey('1', $model->data);
@@ -38,6 +39,10 @@ class UserSettingsTest extends AdminTestCase
         $this->assertEquals('v2', $model->get('x.y.2'));
         $this->assertArrayHasKey('y', $model->get('x'));
         $this->assertArrayHasKey('1', $model->get('x.y'));
+        $this->assertEquals(1, $model->get('cfg.override'));
+        
+        $this->assertTrue($model->set('cfg.override', 2));
+        $this->assertEquals(2, $model->get('cfg.override'));
         
         // test has
         $this->assertFalse($model->has('does.not.exists'));

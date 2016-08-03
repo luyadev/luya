@@ -42,9 +42,15 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface, Change
         }
     }
     
-    public function getSettings()
+    private $_setting = null;
+    
+    public function getSetting()
     {
-        return Yii::createObject(['class' => UserSettings::className(), 'sender' => $this, 'data' => Json::decode($this->settings)]);
+        if ($this->_setting === null) {
+            $this->_setting = Yii::createObject(['class' => UserSetting::className(), 'sender' => $this, 'data' => Json::decode($this->settings)]);
+        }
+        
+        return $this->_setting;
     }
     
     public function updateSettings(array $data)

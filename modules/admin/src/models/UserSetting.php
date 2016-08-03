@@ -14,26 +14,26 @@ use yii\db\ActiveRecordInterface;
  * Store a value for a key
  * 
  * ```php
- * Yii::$app->adminuser->identity->set('lastPage', '.../url/to/last/page');
+ * Yii::$app->adminuser->identity->setting->set('lastPage', '.../url/to/last/page');
  * ```
  * 
  * `null`, `true` and `false` are also valid values to store. To remove a settings entry call the `remove()` method:
  * 
  * ```php
- * Yii::$app->adminuser->identity->remove('lastPage');
+ * Yii::$app->adminuser->identity->setting->remove('lastPage');
  * ```
  * 
  * In order to set arrayable values use dot notation, for example.
  * 
  * ```php
- * Yii::$app->adminuser->identity->set('menutree.id1', true);
- * Yii::$app->adminuser->identity->set('menutree.id2', false);
+ * Yii::$app->adminuser->identity->setting->set('menutree.id1', true);
+ * Yii::$app->adminuser->identity->setting->set('menutree.id2', false);
  * ```
  * 
  * The same works to get and delete array keys:
  * 
  * ```php
- * Yii::$app->adminuser->identity->get('menutree.id1');
+ * Yii::$app->adminuser->identity->setting->get('menutree.id1');
  * ```
  * 
  * If the key does not exists, null will be returned by default.
@@ -41,7 +41,7 @@ use yii\db\ActiveRecordInterface;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta8
  */
-class UserSettings extends Object implements \ArrayAccess
+class UserSetting extends Object implements \ArrayAccess
 {
     const SEPERATOR = '.';
     
@@ -132,11 +132,14 @@ class UserSettings extends Object implements \ArrayAccess
     public function set($key, $value)
     {
         $array = &$this->data;
-        foreach (explode(self::SEPERATOR, $key) as $key) {
-            if (is_array($array) && array_key_exists($key, $array) && !is_array($array[$key])) {
+        $keys = explode(self::SEPERATOR, $key);
+        $i = 1;
+        foreach ($keys as $key) {
+            if (is_array($array) && array_key_exists($key, $array) && !is_array($array[$key]) && $i !== count($keys)) {
                 return false;
             }
             $array = &$array[$key];
+            $i++;
         }
         $array = $value;
         $this->save();
