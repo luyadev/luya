@@ -566,7 +566,7 @@
 		
 	});
 	
-	zaa.controller("CmsMenuTreeController", function($scope, $state, ServiceMenuData, ServiceLiveEditMode) {
+	zaa.controller("CmsMenuTreeController", function($scope, $state, $http, ServiceMenuData, ServiceLiveEditMode) {
 		
 		// live edit service
 		
@@ -594,6 +594,9 @@
 			} else {
 				data['toggle_open'] = !data.toggle_open;
 			}
+			
+			$http.post('admin/api-cms-nav/tree-history', {data: data}).then(function(response) {});
+			
 		};
 		
 		$scope.go = function(data) {

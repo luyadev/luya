@@ -40,6 +40,7 @@ class MenuHelper
             
             foreach ($items as $key => $item) {
                 $item['is_editable'] = (int) Yii::$app->adminuser->canRoute('cmsadmin/page/update');
+                $item['toggle_open'] = (int) Yii::$app->adminuser->identity->setting->get('tree.'.$item['id']);
                 
                 // the user have "page edit" permission, now we can check if the this group has more fined tuned permisionss from the 
                 // cms_nav_permissions table or not

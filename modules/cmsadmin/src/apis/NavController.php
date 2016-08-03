@@ -26,6 +26,12 @@ class NavController extends \admin\base\RestController
         return Yii::$app->request->post($name, null);
     }
     
+    public function actionTreeHistory()
+    {
+        $item = Yii::$app->request->getBodyParam('data');
+        Yii::$app->adminuser->identity->setting->set('tree.'.$item['id'], (int) $item['toggle_open']);
+    }
+    
     public function actionFindNavItems($navId)
     {
         return NavItem::find()->where(['nav_id' => $navId])->asArray()->with('lang')->all();
