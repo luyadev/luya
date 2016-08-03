@@ -7,6 +7,9 @@ The changelog contains informations about bug fixes, new features or bc breaking
 -------------------------
 
 - `#907`: **[BC BREAK]** Removed the public attribute `$extraFields` in order to prevent confusings. Override `extraFields()` instead in `admin\ngrest\base\Model`.
+- `#836` Fixed slow processing of unneeded/orphaned files and database storage entries in StorageImporter
+- `#742` Fixed parsing bug for youtube URLs with additional parameters in video block
+- `#882` Added information to documentation about the 'only' publish options
 - `#898` Fixed bug where filters dependencie in image thumbnail directive does not get resolved and result in js error.
 - `#902` Fixed bug where version blocks can not update its parent nav item object.
 - `#918` Fixed bug where TagParser and Markdown conflicting http url/link parsing.
