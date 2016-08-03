@@ -1,7 +1,7 @@
 Admin Modul NgRest CRUD
 =======================
 
-One of the most powerfull tools in *LUYA*, is the **ANGULAR CRUD** surface, its combines *Angular*, *RESTful*, *CRUD* and *Active Record* in a very elegant and powerfull way. So in a more understable sentence "Generate formulars to create, update, delete and list your data very fast and elegant*. It creates and API you can talk trough Angular and you can configure it like an ActiveRecord, and also use it like an Active Record Model.
+One of the most powerfull tools in *LUYA*, is the **ANGULAR CRUD** surface, its combines *Angular*, *RESTful*, *CRUD* and *Active Record* in a very elegant and powerfull way. So in a more understable sentence *Generate formulars to create, update, delete and list your data very fast and elegant*. It creates and API you can talk trough Angular and you can configure it like an ActiveRecord, and also use it like an Active Record Model.
 
 The word *NgRest* is explained as follows: A**Ng**ular**Rest** (Representational State Transfer)
 
