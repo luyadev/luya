@@ -2,6 +2,10 @@
 
 namespace cmsadmin\models;
 
+use Yii;
+use admin\traits\SoftDeleteTrait;
+use yii\db\ActiveQuery;
+
 /**
  * Represents the Block-Group Model where blocks can be stored inside.
  * 
@@ -9,7 +13,7 @@ namespace cmsadmin\models;
  */
 class BlockGroup extends \admin\ngrest\base\Model
 {
-    use \admin\traits\SoftDeleteTrait;
+    use SoftDeleteTrait;
 
     public static function ngRestApiEndpoint()
     {
@@ -37,10 +41,13 @@ class BlockGroup extends \admin\ngrest\base\Model
         ];
     }
     
+    public static function find()
+    {
+        return Yii::createObject(ActiveQuery::className(), [get_called_class()]);
+    }
+    
     public function ngRestConfig($config)
     {
-        $config->delete = true;
-        
         $this->ngRestConfigDefine($config, ['list', 'create', 'update'], ['name', 'identifier']);
         
         return $config;
