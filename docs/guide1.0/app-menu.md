@@ -108,15 +108,15 @@ We have built some small helper commands you can use whever you are in your cms.
 
 |Link Syntax|Output/Description
 |----       |----		
-|`link<span></span>[3]<span></span>(Alternativ Link Name)`|`<a href="url/to/3">Alternativ Link Name</a>`
-|`link<span></span>[3]`|`<a href="url/to/3">Name of 3</a>`
-|`link<span></span>[www.luya.io]`|`<a href="http://www.luya.io">luya.io</a>`
-|`link<span></span>[luya.io]<span></span>(go to Docu)` |`<a href="http://luya.io">Go to docu</a>`
-|`link<span></span>[//go/there]`|`<a href="http://example.com/go/there">go/there</a>` The slash will be replaced be the current domain.
-|`link<span></span>[//go/there]<span></span>(relativ link description)`|`<a href="http://example.com/go/there">relativ link description</a>`
-|`file<span></span>[1]`|Get the path to the file with the ID 1
-|`mail<span></span>[info@luya.io]`|Generate an E-Mail mailto Link `<a href="mailto:info@luya.io">info@luya.io</a>`
-|`mail<span></span>[info@luya.io]<span></span>(Contact us)`|Generate an E-Mail link with an alternative label `<a href="mailto:info@luya.io">Contact us</a>`.
+|`link[3](Alternativ Link Name)`|`<a href="url/to/3">Alternativ Link Name</a>`
+|`link[3]`|`<a href="url/to/3">Name of 3</a>`
+|`link[www.luya.io]`|`<a href="http://www.luya.io">luya.io</a>`
+|`link[luya.io](go to Docu)` |`<a href="http://luya.io">Go to docu</a>`
+|`link[//go/there]`|`<a href="http://example.com/go/there">go/there</a>` The slash will be replaced be the current domain.
+|`link[//go/there](relativ link description)`|`<a href="http://example.com/go/there">relativ link description</a>`
+|`file[1]`|Get the path to the file with the ID 1
+|`mail[info@luya.io]`|Generate an E-Mail mailto Link `<a href="mailto:info@luya.io">info@luya.io</a>`
+|`mail[info@luya.io](Contact us)`|Generate an E-Mail link with an alternative label `<a href="mailto:info@luya.io">Contact us</a>`.
 
 **ATTENTION:** The above mentioned `Link Syntax` must be used **without** the whitspaces!
 
