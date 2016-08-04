@@ -106,19 +106,18 @@ Link syntax in CMS blocks
 
 We have built some small helper commands you can use whever you are in your cms. You can also parse our own content with `cms\helpers\TagParser::convert($content)`.
 
-|Link Syntax|Output/Description
-|----       |----		
-|`link[3](Alternativ Link Name)`|`<a href="url/to/3">Alternativ Link Name</a>`
-|`link[3]`|`<a href="url/to/3">Name of 3</a>`
-|`link[www.luya.io]`|`<a href="http://www.luya.io">luya.io</a>`
-|`link[luya.io](go to Docu)` |`<a href="http://luya.io">Go to docu</a>`
-|`link[//go/there]`|`<a href="http://example.com/go/there">go/there</a>` The slash will be replaced be the current domain.
-|`link[//go/there](relativ link description)`|`<a href="http://example.com/go/there">relativ link description</a>`
-|`file[1]`|Get the path to the file with the ID 1
-|`mail[info@luya.io]`|Generate an E-Mail mailto Link `<a href="mailto:info@luya.io">info@luya.io</a>`
-|`mail[info@luya.io](Contact us)`|Generate an E-Mail link with an alternative label `<a href="mailto:info@luya.io">Contact us</a>`.
-
-**ATTENTION:** The above mentioned `Link Syntax` must be used **without** the whitspaces!
+|Link syntax|Output|Description
+|----       |----  |---
+|`link[3]`|`<a href="url/to/3">Name of 3</a>`|Generate a link to an internal page Id where label is the page title from the database.
+|`link[3](label)`|`<a href="url/to/3">label</a>`|Generate a link to internal page Id where label is the link label.
+|`link[www.luya.io]`|`<a href="http://www.luya.io">luya.io</a>`|Generate a link to an external source where label is the equals the link. Missing http will automatically added prepaneded.
+|`link[www.luya.io](label)` |`<a href="http://luya.io">label</a>`|Generate a link to an exteranl source with a define label text.
+|`link[//go/there]`|`<a href="http://luya.io/go/there">go/there</a>`|Generate a relative link based on the current domain.
+|`link[//go/there](label)`|`<a href="http://luya.io/go/there">label</a>`|Generate a relative link based on the current domain with an additional label.
+|`file[1]`|`<a href="http://luya.io/storage/path/to/file/1.jpg">Database File 1</a>`|Generate a link to a internal database defined file id, label is the name of the file from the database.
+|`file[1](label)`|`<a href="http://luya.io/storage/path/to/file/1.jpg">label</a>`|Generate a link to a internal database defined file id, defined a custom label instead of database name.
+|`mail[info@luya.io]`|`<a href="mailto:info@luya.io">info@luya.io</a>`|Generate an E-Mail mailto Link `<a href="mailto:info@luya.io">info@luya.io</a>`
+|`mail[info@luya.io](Contact us)`|`<a href="mailto:info@luya.io">Contact us</a>`|Generate an E-Mail link with an alternative label `<a href="mailto:info@luya.io">Contact us</a>`.
 
 To the the page number (which is 3, used above) you will find the Page-Id in when hover over the menu item in the cms admin menu-tree:
 
