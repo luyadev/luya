@@ -2,6 +2,7 @@
 
 namespace cmsadmin\apis;
 
+use Yii;
 use cmsadmin\models\Layout;
 use cmsadmin\models\Block;
 use cmsadmin\models\BlockGroup;
@@ -21,7 +22,7 @@ class AdminController extends \admin\base\RestController
             $blocks = [];
             foreach (Block::find()->where(['group_id' => $group['id']])->all() as $block) {
                 $obj = Block::objectId($block['id'], 0, 'admin');
-                if (!$obj) {
+                if (!$obj || in_array($obj->className(), Yii::$app->getModule('cmsadmin')->hiddenBlocks)) {
                     continue;
                 }
                 $blocks[] = [

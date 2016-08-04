@@ -51,6 +51,41 @@ class Module extends \admin\base\Module
         ],
     ];
     
+    /**
+     * @var array Defined blocks to hidde from the cmsadmin. Those blocks are not listed in the Page Content blocks overview. You can override this
+     * variable inside your configuration of the cmsadmin. 
+     * 
+     * ```php
+     *  'modules' => [
+     *      'cmsadmin' => [
+     *          'class' => 'cmsadmin\Module',
+     *          'hiddenBlocks' => [
+     *              'cmsadmin\blocks\TextBlock',
+     *          ],
+     *      ],
+     *  ],
+     * ```
+	 *
+     * You can define blocks by using the string notation:
+     * 
+     * ```php
+     * 'hiddenBlocks' => [
+     *     'cmsadmin\blocks\TextBlock',
+     *     'cmsadmin\blocks\AudioBlock',
+     * ],
+     * ```
+     * 
+     * or you can use the object notation with static className method this is more convient as an IDE will auto complet the Input:
+     * 
+     * ```php
+     * 'hiddenBlocks' => [
+     *     \cmsadmin\blocks\TextBlock::className(),
+     *     \cmsadmin\blocks\AudioBlock::className(),
+     * ],
+     * ```
+     */
+    public $hiddenBlocks = [];
+    
     public function getMenu()
     {
         return $this
