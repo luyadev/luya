@@ -3,18 +3,23 @@
 namespace cms\helpers;
 
 use Yii;
+use yii\helpers\Html;
 
 /**
  * TagParser to convert CMS Module Tags into HTML Tags
  * 
  * Available encoding tags:
  * 
- * + link[123]
- * + link[123](Link label)
- * + link[http://www.google.ch](Link label)
- * + link[//go/there]
- * + file[123]
- * + file[123](File label)
+ * + `link[123]` Generate a link to an internal page Id where label is the page title from the database.
+ * + `link[123](label)` Generate a link to internal page Id where label is the link label.
+ * + `link[http://www.google.ch]` Generate a link to an external source where label is the equals the link. Missing http will automatically added prepaneded.
+ * + `link[http://www.google.ch](label)` Generate a link to an exteranl source with a define label text.
+ * + `link[//go/there]` Generate a relative link based on the current path/domain.
+ * + `link[//go/there](label)` Generate a relative link based on the current path/domain with an additional label.
+ * + `file[123]` Generate a link to a internal database defined file id, label is the name of the file from the database.
+ * + `file[123](label)` Generate a link to a internal database defined file id, defined a custom label instead of database name.
+ * + `mail[info@luya.io]` Generate a mailto: link where label is the email defined.
+ * + `mail[info@luya.io](label)` Generate a mailto: link with a custom label defined.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
@@ -24,7 +29,7 @@ class TagParser
      * @var string Base regular expression to determine function, values and value-sub informations.
      * @see https://regex101.com/r/tI7pK1/3 - Online Regex tester
      */
-    const REGEX = '/(?<function>link|file)\[(?<value>.*?)\](\((?<sub>.*?)\))?/mi';
+    const REGEX = '/(?<function>link|file|mail)\[(?<value>.*?)\](\((?<sub>.*?)\))?/mi';
 
     /**
      * Convert the CMS-Tags into HTML-Tags.
@@ -55,6 +60,9 @@ class TagParser
                 case 'file':
                     $replace = static::functionFile($row);
                     break;
+                case 'mail':
+                    $replace = static::functionMail($row);
+                    break;
             }
             // the function contains values, so we have to preg_replace the original content with the parsed content
             if ($replace !== false) {
@@ -75,6 +83,11 @@ class TagParser
         return (new CmsMarkdown())->parse(static::convert($content));
     }
 
+    private static function functionMail(array $result)
+    {
+        return Html::mailto((isset($result['sub'])) ? $result['sub'] : $result['value'], $result['value']);
+    }
+    
     /**
      * Parse the links from regex results
      * 
@@ -135,10 +148,7 @@ class TagParser
         if (!$file) {
             return false;
         }
-        
-        $name = isset($result['sub']) ? $result['sub'] : $file->name;
-        $source = $file->sourceStatic;
             
-        return '<a href="'.$source.'" target="_blank">'.$name.'</a>';
+        return Html::a(isset($result['sub']) ? $result['sub'] : $file->name, $file->sourceStatic, ['target' => '_blank']);
     }
 }

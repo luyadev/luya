@@ -81,6 +81,12 @@ class TagParserTest extends CmsFrontendTestCase
         $this->assertEquals('<p>&lt;www.url.com&gt;</p>', $this->rnl(TagParser::convertWithMarkdown('<www.url.com>')));
     }
     
+    public function testMailParser()
+    {
+        $this->assertSame('<a href="mailto:info@luya.io">info@luya.io</a>', TagParser::convert('mail[info@luya.io]'));
+        $this->assertSame('<a href="mailto:info@luya.io">Contact us</a>', TagParser::convert('mail[info@luya.io](Contact us)'));
+    }
+    
     private function rnl($content)
     {
         return trim(preg_replace('/\s\s+/', ' ', $content));
