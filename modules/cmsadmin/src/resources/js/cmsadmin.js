@@ -1019,10 +1019,12 @@
 						$scope.isTranslated = true;
 						$scope.reset();
 						if ($scope.item.nav_item_type == 1) {
-							$scope.currentPageVersion = response.item.nav_item_type_id;
+							if ($scope.currentPageVersion == 0) {
+								$scope.currentPageVersion = response.item.nav_item_type_id;
+							}
 							if (response.item.nav_item_type_id in response.typeData) {
-								$scope.currentVersionInformation = response.typeData[response.item.nav_item_type_id];
-								$scope.container = response.typeData[response.item.nav_item_type_id]['contentAsArray'];
+								$scope.currentVersionInformation = response.typeData[$scope.currentPageVersion];
+								$scope.container = response.typeData[$scope.currentPageVersion]['contentAsArray'];
 							}
 						}
 						
@@ -1254,8 +1256,6 @@
 		};
 		
 		$scope.removeBlock = function(block) {
-
-			
 			AdminToastService.confirm(i18nParam('js_page_block_delete_confirm', {name: block.name}), function($timeout, $toast) {
 				ApiCmsNavItemPageBlockItem.delete({id: block.id}, function (rsp) {
 					$scope.PagePlaceholderController.NavItemTypePageController.refresh();
