@@ -26,6 +26,16 @@ class NavController extends \admin\base\RestController
         return Yii::$app->request->post($name, null);
     }
     
+    public function actionSaveCatToggle()
+    {
+        $catId = Yii::$app->request->getBodyParam('catId');
+        $state = Yii::$app->request->getBodyParam('state');
+        
+        if ($catId) {
+            return Yii::$app->adminuser->identity->setting->set("togglecat.{$catId}", (int) $state);
+        }
+    }
+    
     public function actionTreeHistory()
     {
         $item = Yii::$app->request->getBodyParam('data');

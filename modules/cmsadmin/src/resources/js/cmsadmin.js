@@ -617,7 +617,7 @@
 	    	return false;
 	    }
 	    
-    	$scope.hiddenCats = {};
+    	$scope.hiddenCats = $scope.menuData.hiddenCats;
 		
 		$scope.toggleCat = function(catId) {
 			if (catId in $scope.hiddenCats) {
@@ -625,6 +625,8 @@
 			} else {
 				$scope.hiddenCats[catId] = 1;
 			}
+			
+			$http.post('admin/api-cms-nav/save-cat-toggle', {catId: catId, state: $scope.hiddenCats[catId]}).success(function(response) { console.log(response); });
 		};
 		
 		$scope.toggleIsHidden = function(catId) {

@@ -22,6 +22,7 @@ class MenuController extends \admin\base\RestController
             'items' => ArrayHelper::typeCast(MenuHelper::getItems()),
             'drafts' => ArrayHelper::typeCast(MenuHelper::getDrafts()),
             'containers' => ArrayHelper::typeCast(MenuHelper::getContainers()),
+            'hiddenCats' => ArrayHelper::typeCast(Yii::$app->adminuser->identity->setting->get("togglecat", [])),
         ];
     }
     
