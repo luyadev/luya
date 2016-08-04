@@ -629,7 +629,7 @@
                         </div>
                         <span ng-click="clearStack()" class="blockholder__clear-clipboard"><i class="material-icons">clear</i></span>
                     </div>
-                    <div class="blockholder__search" ng-class="{'blockholder__search--active': searchQuery}">
+                    <div class="blockholder__search" ng-class="{'blockholder__search--active': searchQuery}" zaa-esc="searchQuery=''"">
                         <input class="blockholder__input" type="text" ng-model="searchQuery" value="" id="blockholderSearch" />
                         <label class="blockholder__icon blockholder__icon--search" for="blockholderSearch"><i class="material-icons">search</i></label>
                         <label class="blockholder__icon blockholder__icon--cancel" for="blockholderCancel">
