@@ -623,11 +623,11 @@
             <div class="blockholder" ng-controller="DroppableBlocksController">
                 <div class="col s12">
                     <div class="blockholder__group blockholder__group--clipboard" ng-show="copyStack.length > 0">
-                        <b class="blockholder__group-title blockholder__group-title--clipboard"><i class="material-icons left">content_copy</i> <?php echo \cmsadmin\Module::t('view_update_blockholder_clipboard') ?></b>
+                        <b class="blockholder__group-title blockholder__group-title--clipboard"><i class="material-icons left">content_copy</i> <span><?php echo \cmsadmin\Module::t('view_update_blockholder_clipboard') ?></span></b>
                         <div class="blockholder__block" ng-repeat="stackItem in copyStack" data-drag="true" data-copy="true" jqyoui-draggable="{placeholder: 'keep', onStart : 'onStart', onStop : 'onStop'}" ng-model="stackItem" data-jqyoui-options="{revert: false, refreshPositions : true, snapTolerance : 40, helper : 'clone', cursor:'move', cursorAt: { top: 0, left: 0 }}">
                             <span>{{stackItem.name}}</span>
                         </div>
-                        <button type="button" ng-click="clearStack()" class="btn">x</button>
+                        <span ng-click="clearStack()" class="blockholder__clear-clipboard"><i class="material-icons">clear</i></span>
                     </div>
                     <div class="blockholder__search" ng-class="{'blockholder__search--active': searchQuery}">
                         <input class="blockholder__input" type="text" ng-model="searchQuery" value="" id="blockholderSearch" />
@@ -637,9 +637,8 @@
                         </label>
                     </div>
                     <div class="blockholder__group" ng-repeat="item in blocksData" ng-class="{'blockholder__group--favorite' : item.group.is_fav}">
-                        <b class="blockholder__group-title" ng-click="toggleGroup(item.group)">
-                            <i class="material-icons left" ng-show="item.group.toggle_open">keyboard_arrow_down</i>
-                            <i class="material-icons left" ng-show="!item.group.toggle_open">keyboard_arrow_up</i>
+                        <b class="blockholder__group-title" ng-click="toggleGroup(item.group)" ng-class="{'blockholder__group-title--collapsed': !item.group.toggle_open}">
+                            <i class="material-icons blockholder__group-toggler left" ng-click="toggleItem(data)" ng-class="{'blockholder__group-toggler--rotated': !item.group.toggle_open}">arrow_drop_down</i>
                             <i class="material-icons right" ng-if="item.group.is_fav">favorite</i>
                             <span>{{item.group.name}}</span>
                         </b>

@@ -24,7 +24,6 @@
  * #PAGE__VERSIONS
  */
 .page__versions {
-    min-height: 35px;
     padding: 0 10px 0 15px;
 
     text-align: right;
@@ -39,9 +38,10 @@
 .page__versions-label {
     display: inline-block;
 
-    margin-right: 5px;
+    margin-top: 4px;
+    margin-right: 8px;
 
-    transform: translateY(5px);
+    vertical-align: top;
 
     color: darken($page__header--background, 30);
 }
@@ -51,12 +51,12 @@
     position: relative;
     z-index: 0;
 
-    padding: 3px 10px 8px 10px;
+    padding: 3px 10px 3px 10px;
 
-    transition: .25s ease transform, .25s ease opacity, .25s ease background-color;
-    transform: translateY(8px);
+    transition: .25s ease opacity, .25s ease background-color;
+    vertical-align: bottom;
 
-    opacity: .6;
+    opacity: .3;
     color: $black;
     border: 2px solid $accordion__header-bg;
     border-bottom: none;
@@ -73,37 +73,26 @@
     }
 
     &:hover, &.page__version--visible {
-        transform: translateY(0);
-
         opacity: 1;
     }
 
     &.page__version--in-use {
-        transform: translateY(8px);
-
         opacity: 1;
         color: $white;
         border-color: $blue;
         background-color: $blue;
-
-        &.page__version--visible, &:hover {
-            transform: translateY(0);
-        }
     }
 
     &.page__version--add {
-        padding: 4px 5px 14px 5px;
+        padding: 7px 5px 6px 5px;
 
-        transition: .15s ease color, .25s ease background-color, .25s ease transform;
-        transform: translateY(8px);
+        transition: .15s ease color, .25s ease background-color;
 
         opacity: 1;
         color: $green;
         border-color: $green;
 
         &:hover {
-            transform: translateY(0);
-
             color: $white;
             background-color: $green;
         }
@@ -223,7 +212,6 @@
 
 .page__list {
     position: relative;
-    z-index: 5;
 
     margin: 0;
 }

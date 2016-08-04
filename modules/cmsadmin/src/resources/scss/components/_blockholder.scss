@@ -13,14 +13,28 @@
     margin-bottom: 20px;
 
     &--clipboard {
+        margin-top: -20px;
+        margin-right: -10px;
+        margin-bottom: 0;
+        margin-left: -10px;
         padding: 10px;
 
-        background-color: #fff;
+        @include clearfix;
     }
     &--favorite {
+        margin-right: -10px;
+        margin-left: -10px;
         padding: 10px;
 
         background-color: $red;
+    }
+}
+
+.blockholder__group-toggler {
+    transition: .25s ease transform;
+
+    &--rotated {
+        transform: rotate(-90deg);
     }
 }
 
@@ -33,6 +47,8 @@
 
     width: 100%;
     margin-bottom: 10px;
+
+    user-select: none;
 
     color: #fff;
 
@@ -65,10 +81,20 @@
     &[ng-click] {
         cursor: pointer;
     }
+
+    &--collapsed {
+        margin-bottom: 0;
+    }
 }
 
-.blockholder__group-title--clipboard {
-    color: #000;
+.blockholder__clear-clipboard {
+    float: right;
+
+    margin-top: 5px;
+
+    cursor: pointer;
+
+    color: $red;
 }
 
 .blockholder__search {
