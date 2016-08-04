@@ -31,6 +31,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - `#938` Added ability to hide specific cms blocks in the content manager by define them in the config.
 - `#939` Added ability to toggle block groups and favorize blocks.
 - `#800` Added ability to store the last directory of the filemanager in the user settings via ServiceFoldersDirecotryId service.
+- `#905` Added ability to inject custom ngrest plugin for an appliation specific desinged approach.
 
 
 1.0.0-beta7 (20.06.2016)
