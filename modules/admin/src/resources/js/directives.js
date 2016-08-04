@@ -1565,7 +1565,7 @@
     /**
      * FILE MANAGER DIR
      */
-    zaa.directive("storageFileManager", function(Upload, ServiceFoldersData, ServiceFilesData, LuyaLoading, AdminToastService) {
+    zaa.directive("storageFileManager", function(Upload, ServiceFoldersData, ServiceFilesData, LuyaLoading, AdminToastService, ServiceFoldersDirecotryId) {
         return {
             restrict : 'E',
             transclude : false,
@@ -1597,6 +1597,18 @@
 
                 $scope.filesDataReload = function() {
                     return ServiceFilesData.load(true);
+                }
+                
+                // ServiceFolderId 
+                
+                $scope.currentFolderId = ServiceFoldersDirecotryId.folderId;
+				
+                $scope.$on('FoldersDirectoryId', function(event, folderId) {
+                	$scope.currentFolderId = folderId;
+                });
+
+                $scope.foldersDataReload = function() {
+                	return ServiceFoldersDirecotryId.load(true);
                 }
 
                 // upload logic
@@ -1719,10 +1731,10 @@
                 	$scope.sortField = name;
                 }
 
-                $scope.currentFolderId = 0;
-
                 $scope.changeCurrentFolderId = function(folderId) {
                     $scope.currentFolderId = folderId;
+                    ServiceFoldersDirecotryId.folderId = folderId;
+                    $http.post('admin/api-admin-common/save-filemanager-folder-state', {folderId : folderId});
                 };
 
                 $scope.folderUpdateForm = false;

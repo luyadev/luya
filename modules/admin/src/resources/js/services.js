@@ -1,5 +1,5 @@
 // service resolver
-function adminServiceResolver(ServiceFoldersData, ServiceImagesData, ServiceFilesData, ServiceFiltersData, ServiceLanguagesData, ServicePropertiesData, AdminLangService) {
+function adminServiceResolver(ServiceFoldersData, ServiceImagesData, ServiceFilesData, ServiceFiltersData, ServiceLanguagesData, ServicePropertiesData, AdminLangService, ServiceFoldersDirecotryId) {
 	ServiceFiltersData.load();
 	ServiceFoldersData.load();
 	ServiceImagesData.load();
@@ -7,6 +7,7 @@ function adminServiceResolver(ServiceFoldersData, ServiceImagesData, ServiceFile
 	ServiceLanguagesData.load();
 	ServicePropertiesData.load();
 	AdminLangService.load();
+	ServiceFoldersDirecotryId.load();
 };
 
 /**
@@ -65,6 +66,42 @@ zaa.factory("ServiceFoldersData", function($http, $q, $rootScope) {
 					service.data = response;
 					$rootScope.$broadcast('service:FoldersData', service.data);
 					resolve(service.data);
+				});
+			}
+		});
+	};
+	
+	return service;
+});
+
+/*
+
+$scope.folderId = ServiceFoldersDirecotryId.folderId;
+					
+$scope.$on('FoldersDirectoryId', function(event, folderId) {
+	$scope.folderId = folderId;
+});
+
+$scope.foldersDataReload = function() {
+	return ServiceFoldersDirecotryId.load(true);
+}
+
+*/
+zaa.factory("ServiceFoldersDirecotryId", function($http, $q, $rootScope) {
+	
+	var service = [];
+	
+	service.folderId = false;
+	
+	service.load = function(forceReload) {
+		return $q(function(resolve, reject) {
+			if (service.folderId !== false && forceReload !== true) {
+				resolve(service.folderId);
+			} else {
+				$http.get("admin/api-admin-common/get-filemanager-folder-state").success(function(response) {
+					service.folderId = response;
+					$rootScope.$broadcast('service:FoldersDirectoryId', service.folderId);
+					resolve(service.folderId);
 				});
 			}
 		});

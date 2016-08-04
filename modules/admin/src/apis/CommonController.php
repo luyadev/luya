@@ -59,4 +59,19 @@ class CommonController extends \admin\base\RestController
         }
         return $data;
     }
+
+    public function actionSaveFilemanagerFolderState()
+    {
+        $folderId = Yii::$app->request->getBodyParam('folderId');
+        
+        if ($folderId) {
+            return Yii::$app->adminuser->identity->setting->set('filemanagerFolderId', $folderId);
+        }
+    }
+    
+    public function actionGetFilemanagerFolderState()
+    {
+        return Yii::$app->adminuser->identity->setting->get('filemanagerFolderId', 0);
+    }
+    
 }
