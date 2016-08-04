@@ -1607,7 +1607,7 @@
                 	$scope.currentFolderId = folderId;
                 });
 
-                $scope.foldersDataReload = function() {
+                $scope.foldersDirecotryIdReload = function() {
                 	return ServiceFoldersDirecotryId.load(true);
                 }
 

@@ -135,7 +135,7 @@
 				data : '='
 			},
 			templateUrl : 'createform.html',
-			controller : function($scope, $http, $filter, ServiceMenuData, Slug, ServiceLanguagesData) {
+			controller : function($scope, $http, $filter, ServiceMenuData, Slug, ServiceLanguagesData, AdminToastService) {
 				
 				$scope.error = [];
 				$scope.success = false;
@@ -199,8 +199,11 @@
 						if ($scope.data.isInline) {
 							$scope.$parent.$parent.getItem($scope.data.lang_id, $scope.data.nav_id);
 						}
-						
+						AdminToastService.success(i18n['view_index_page_success'], 4000);
 					}, function(reason) {
+						angular.forEach(reason, function(value, key) {
+							AdminToastService.error(value[0], 2000);
+						});
 						$scope.error = reason;
 					});
 				}

@@ -274,9 +274,8 @@ class StorageController extends \admin\base\RestController
     {
         $folderName = Yii::$app->request->post('folderName', null);
         $parentFolderId = Yii::$app->request->post('parentFolderId', 0);
-    
+        $response = Yii::$app->storage->addFolder($folderName, $parentFolderId);
         $this->flushApiCache();
-        
-        return Yii::$app->storage->addFolder($folderName, $parentFolderId);
+        return $response;
     }
 }

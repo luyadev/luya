@@ -82,7 +82,7 @@ $scope.$on('FoldersDirectoryId', function(event, folderId) {
 	$scope.folderId = folderId;
 });
 
-$scope.foldersDataReload = function() {
+$scope.foldersDirecotryIdReload = function() {
 	return ServiceFoldersDirecotryId.load(true);
 }
 
