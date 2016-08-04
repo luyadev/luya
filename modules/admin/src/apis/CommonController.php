@@ -66,6 +66,8 @@ class CommonController extends \admin\base\RestController
         
         if ($folderId) {
             return Yii::$app->adminuser->identity->setting->set('filemanagerFolderId', $folderId);
+        } else {
+            return Yii::$app->adminuser->identity->setting->remove('filemanagerFolderId');
         }
     }
     
