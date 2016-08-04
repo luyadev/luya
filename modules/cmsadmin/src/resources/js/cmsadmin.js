@@ -1366,9 +1366,7 @@
 				group.toggle_open = !group.toggle_open;
 			}
 			
-			$http.post('admin/api-cms-block/toggle-group', {group: group}).success(function(response) {
-				console.log(response);
-			});
+			$http.post('admin/api-cms-block/toggle-group', {group: group});
 		}
 		
 		// controller logic
