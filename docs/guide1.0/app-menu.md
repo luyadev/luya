@@ -108,15 +108,15 @@ We have built some small helper commands you can use whever you are in your cms.
 
 |Link Syntax|Output/Description
 |----       |----		
-|`link&#91;3&#93;(Alternativ Link Name)`  |`<a href="url/to/3">Alternativ Link Name</a>`
-|`link&#91;3&#93;`                           |`<a href="url/to/3">Name of 3</a>`
-|`link&#91;www.luya.io&#93;`                 |`<a href="http://www.luya.io">luya.io</a>`
-|`link&#91;luya.io&#93;(go to Docu)` |`<a href="http://luya.io">Go to docu</a>`
-|`link&#91;//go/there&#93;`|`<a href="http://example.com/go/there">go/there</a>` The slash will be replaced be the current domain.
-|`link&#91;//go/there&#93;(relativ link description)`|`<a href="http://example.com/go/there">relativ link description</a>`
-|`file&#91;1&#93;` |Get the path to the file with the ID 1
-|`mail&#91;info@luya.io&#93;`|Generate an E-Mail mailto Link `<a href="mailto:info@luya.io">info@luya.io</a>`
-|`mail&#91;info@luya.io&#93;(Contact us)`|Generate an E-Mail link with an alternative label `<a href="mailto:info@luya.io">Contact us</a>`.
+|`link<span></span>[3]<span></span>(Alternativ Link Name)`|`<a href="url/to/3">Alternativ Link Name</a>`
+|`link<span></span>[3]`|`<a href="url/to/3">Name of 3</a>`
+|`link<span></span>[www.luya.io]`|`<a href="http://www.luya.io">luya.io</a>`
+|`link<span></span>[luya.io]<span></span>(go to Docu)` |`<a href="http://luya.io">Go to docu</a>`
+|`link<span></span>[//go/there]`|`<a href="http://example.com/go/there">go/there</a>` The slash will be replaced be the current domain.
+|`link<span></span>[//go/there]<span></span>(relativ link description)`|`<a href="http://example.com/go/there">relativ link description</a>`
+|`file<span></span>[1]`|Get the path to the file with the ID 1
+|`mail<span></span>[info@luya.io]`|Generate an E-Mail mailto Link `<a href="mailto:info@luya.io">info@luya.io</a>`
+|`mail<span></span>[info@luya.io]<span></span>(Contact us)`|Generate an E-Mail link with an alternative label `<a href="mailto:info@luya.io">Contact us</a>`.
 
 **ATTENTION:** The above mentioned `Link Syntax` must be used **without** the whitspaces!
 
