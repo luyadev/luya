@@ -626,7 +626,7 @@
 				$scope.hiddenCats[catId] = 1;
 			}
 			
-			$http.post('admin/api-cms-nav/save-cat-toggle', {catId: catId, state: $scope.hiddenCats[catId]}).success(function(response) { console.log(response); });
+			$http.post('admin/api-cms-nav/save-cat-toggle', {catId: catId, state: $scope.hiddenCats[catId]});
 		};
 		
 		$scope.toggleIsHidden = function(catId) {
