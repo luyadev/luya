@@ -1347,6 +1347,30 @@
 			return ServiceBlocksData.load(true);
 		}
 		
+		$scope.addToFav = function(item) {
+			$http.post('admin/api-cms-block/to-fav', {block: item }).success(function(response) {
+				$scope.blocksDataReload();
+			});
+		};
+		
+		$scope.removeFromFav = function(item) {
+			$http.post('admin/api-cms-block/remove-fav', {block: item }).success(function(response) {
+				$scope.blocksDataReload();
+			});
+		};
+		
+		$scope.toggleGroup = function(group) {
+			if (group.toggle_open == undefined) {
+				group.toggle_open = 1;
+			} else {
+				group.toggle_open = !group.toggle_open;
+			}
+			
+			$http.post('admin/api-cms-block/toggle-group', {group: group}).success(function(response) {
+				console.log(response);
+			});
+		}
+		
 		// controller logic
 		
 		$scope.copyStack = ServiceBlockCopyStack.stack;

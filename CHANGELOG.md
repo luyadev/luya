@@ -29,6 +29,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - `#925` Added ability to override default localisations for composition pattern by using `$locales` public method in composition component.
 - `#928` Added ability to use PHP Views in Blocks.
 - `#938` Added ability to hide specific cms blocks in the content manager by define them in the config.
+- `#939` Added ability to toggle block groups and favorize blocks.
 
 1.0.0-beta7 (20.06.2016)
 -------------------------
