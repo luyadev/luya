@@ -681,8 +681,6 @@
 	
 	    $scope.closeSearchInput = function() {
 	        $scope.searchInputOpen = false;
-	        $scope.searchQuery = "";
-	        $scope.searchResponse = null;
 	    };
 		
 		$scope.searchResponse = null;

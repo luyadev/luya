@@ -420,7 +420,7 @@ $this->beginPage()
 
                 <div class="navbar__search-wrapper" ng-class="{ 'navbar__search-wrapper--wide' : searchInputOpen }">
                     <div class="input-field navbar__search" ng-class="{ 'navbar__search--open' : searchInputOpen }">
-                        <input id="global-search-input" ng-model="searchQuery" type="search" class="navbar__search-input">
+                        <input id="global-search-input" ng-model="searchQuery" type="search" class="navbar__search-input" ng-show="searchInputOpen">
                         <label for="global-search-input" class="navbar__search-label" ng-click="openSearchInput()"><i class="material-icons">search</i></label>
                         <i class="material-icons navbar__search-icon" ng-click="closeSearchInput()">close</i>
                     </div>
@@ -486,7 +486,7 @@ $this->beginPage()
         </table>
     </div>
 
-    <div ng-class="{ 'search-box--open' : searchQuery }" class="search-box" zaa-esc="escapeSearchInput()">
+    <div ng-class="{ 'search-box--open' : searchInputOpen }" class="search-box" zaa-esc="escapeSearchInput()">
 
         <div class="center" ng-show="searchResponse==null && searchQuery.length <= 2 && searchQuery.length > 0">
             <br /><br /><br />
