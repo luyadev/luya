@@ -637,11 +637,17 @@
                         </label>
                     </div>
                     <div class="blockholder__group" ng-repeat="item in blocksData" ng-class="{'blockholder__group--favorite' : item.group.is_fav}">
-                        <b class="blockholder__group-title" ng-click="toggleGroup(item.group)"><i class="material-icons" ng-show="item.group.toggle_open">keyboard_arrow_down</i><i class="material-icons" ng-show="!item.group.toggle_open">keyboard_arrow_up</i>{{item.group.name}}</b>
+                        <b class="blockholder__group-title" ng-click="toggleGroup(item.group)">
+                            <i class="material-icons left" ng-show="item.group.toggle_open">keyboard_arrow_down</i>
+                            <i class="material-icons left" ng-show="!item.group.toggle_open">keyboard_arrow_up</i>
+                            <i class="material-icons right" ng-if="item.group.is_fav">favorite</i>
+                            <span>{{item.group.name}}</span>
+                        </b>
                         <div class="blockholder__block" ng-show="item.group.toggle_open" ng-repeat="block in item.blocks | orderBy:'name' | filter:{name:searchQuery}" data-drag="true" jqyoui-draggable="{placeholder: 'keep', onStart : 'onStart', onStop : 'onStop'}" ng-model="block" data-jqyoui-options="{revert: false, refreshPositions : true, snapTolerance : 40, helper : 'clone', cursor:'move', cursorAt: { top: 0, left: 0 }}">
                             <span ng-bind-html="safe(block.full_name)"></span>
-                            <i class="material-icons" style="cursor: pointer;" ng-click="addToFav(block)" ng-if="!item.group.is_fav && !block.favorized">favorite_border</i>
-                            <i class="material-icons" style="cursor: pointer; color:#c62828 ;" ng-click="removeFromFav(block)" ng-if="!item.group.is_fav && block.favorized">favorite</i>
+                            <i class="material-icons blockholder__fav-icon" ng-click="addToFav(block)" ng-if="!item.group.is_fav && !block.favorized">favorite_border</i>
+                            <i class="material-icons blockholder__fav-icon blockholder__fav-icon--red" ng-click="removeFromFav(block)" ng-if="!item.group.is_fav && block.favorized">favorite</i>
+                            <i class="material-icons blockholder__fav-icon blockholder__fav-icon--red" ng-click="removeFromFav(block)" ng-if="item.group.is_fav">remove</i>
                         </div>
                     </div>
                 </div>
