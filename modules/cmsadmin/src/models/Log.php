@@ -6,6 +6,7 @@ use Yii;
 use admin\models\User;
 use yii\helpers\Json;
 use cmsadmin\Module;
+use yii\base\InvalidParamException;
 
 /**
  * Eventer-Logger for CMS Activitys
@@ -38,6 +39,15 @@ class Log extends \yii\db\ActiveRecord
         $this->data_json = json_encode($this->data_json);
     }
     
+    public function getMessageArray()
+    {
+        try {
+            return Json::decode($this->message);
+        } catch (InvalidParamException $err) {
+            return [];
+        }
+    }
+    
     public function getRowDescriber()
     {
         if (!empty($this->row_id)) {
@@ -49,7 +59,12 @@ class Log extends \yii\db\ActiveRecord
                 case "cms_nav_item_page_block_item":
                     $block = NavItemPageBlockItem::findOne($this->row_id);
                     if (!$block) {
-                        return;
+                        $arr = $this->getMessageArray();
+                        if (!empty($arr) && isset($arr['blockName'])) {
+                            return $arr['blockName'] . " ({$arr['pageTitle']})";
+                        } else {
+                            return;
+                        }
                     }
                     return $block->block->object->name() . " (" .$block->droppedPageTitle. ")";
             }
@@ -122,7 +137,7 @@ class Log extends \yii\db\ActiveRecord
                 case "nav":
                     return Module::t('log_action_delete_cms_nav', ['info' => $this->rowDescriber]);
                 case "cms_nav_item_page_block_item":
-                    return Module::t('log_action_delete_cms_nav_item_page_block_item');
+                    return Module::t('log_action_delete_cms_nav_item_page_block_item', ['info' => $this->rowDescriber]);
                 default:
                     return Module::t('log_action_delete_unkown');
             }
