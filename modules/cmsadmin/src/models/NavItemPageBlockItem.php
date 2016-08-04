@@ -106,7 +106,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
                 $this->reindex($this->nav_item_page_id, $oldPlaceholderVar, $oldPrevId);
             }
             $this->reindex($this->nav_item_page_id, $this->placeholder_var, $this->prev_id);
-            Log::add(2, "block.update '".$this->block->class."', cms_nav_item_page_block_item.id '".$this->id."'");
+            Log::add(2, ['tableName' => 'cms_nav_item_page_block_item', 'action' => 'update', 'row' => $this->id, 'pageTitle' => $this->droppedPageTitle], 'cms_nav_item_page_block_item', $this->id);
             
             if (Yii::$app->has('cache')) {
                 Yii::$app->cache->delete(static::cacheName($this->id));
@@ -123,7 +123,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         // verify if the block exists or not
         $class = ($this->block) ? $this->block->class : 'class_does_not_exists';
         // log event
-        Log::add(3, "block.delete '".$class."', cms_nav_item_page_block_item.id '".$this->id."'");
+        Log::add(3, ['tableName' => 'cms_nav_item_page_block_item', 'action' => 'delete', 'row' => $this->id, 'pageTitle' => $this->droppedPageTitle], 'cms_nav_item_page_block_item', $this->id);
     }
 
     public function eventAfterDelete()
@@ -138,7 +138,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     {
         $this->updateNavItemTimesamp();
         $this->reindex($this->nav_item_page_id, $this->placeholder_var, $this->prev_id);
-        Log::add(1, "block.insert '".$this->block->class."', cms_nav_item_page_block_item.id '".$this->id."'");
+        Log::add(1, ['tableName' => 'cms_nav_item_page_block_item', 'action' => 'insert', 'row' => $this->id, 'pageTitle' => $this->droppedPageTitle], 'cms_nav_item_page_block_item', $this->id);
     }
 
     public function eventBeforeInsert()
@@ -207,6 +207,18 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
                 $this->navItemPage->forceNavItem->updateTimestamp();
             }
         }
+    }
+
+    public function getDroppedPageTitle()
+    {
+        // if state makes sure this does not happend when the nav item page is getting deleted and triggers the child delete process.
+        if ($this->navItemPage) {
+            if ($this->navItemPage->forceNavItem) {
+                return $this->navItemPage->forceNavItem->title;
+            }
+        }
+
+        return;
     }
     
     public function getNavItemPage()

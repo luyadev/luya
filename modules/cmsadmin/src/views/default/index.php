@@ -333,7 +333,35 @@
     <div id="rzLeft" class="luya-container__main" ng-class="{ 'luya-container__main--liveedit-active': display }">
 
         <div class="col s12">
-            <div ui-view></div>
+            <div ui-view>
+                <div class="card" style="margin:20px;">
+                    <div class="row">
+                    <?php $i = 0; foreach($groups as $day => $data):?>
+                    <div class="col s12">
+                    <h3><?= strftime("%A, %e. %B", $day); ?></h3>
+                    <table class="table highlight bordered" style="border:1px solid #F0F0F0;">
+                    <?php foreach ($data as $log): ?>
+                        <tr>
+                            <td><?= strftime("%H:%M", $log->timestamp); ?></td>
+                            <td>
+                                <? if ($log->is_insertion): ?>
+                                    <i class="material-icons">add</i>
+                                <? elseif ($log->is_update): ?>
+                                    <i class="material-icons">create</i>
+                                <? elseif ($log->is_deletion): ?>
+                                     <i class="material-icons">delete</i>
+                                <? endif; ?>
+                            </td>
+                            <td><?= $log->user->firstname; ?> <?= $log->user->lastname; ?></td>
+                            <td><span title="<?= $log->message; ?> | <?= $log->data_json; ?>" alt="<?= $log->message; ?> | <?= $log->data_json; ?>"><?= $log->action; ?></span></td>
+                        </tr>
+                    <? endforeach; ?>
+                    </table>
+                    </div>
+                    <? endforeach; ?>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>

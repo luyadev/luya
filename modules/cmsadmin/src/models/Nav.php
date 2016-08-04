@@ -182,13 +182,13 @@ class Nav extends \yii\db\ActiveRecord
 
         switch ($e->name) {
             case 'afterInsert':
-                Log::add(1, "nav.insert, cms_nav.id '" . $this->id . "'", $this->toArray());
+                Log::add(1, ['tableName' => 'cms_nav', 'action' => 'insert', 'row' => $this->id], 'cms_nav', $this->id, $this->toArray());
                 break;
             case 'afterUpdate':
-                Log::add(2, "nav.update, cms_nav.id '" . $this->id . "'", $this->toArray());
+                Log::add(2, ['tableName' => 'cms_nav', 'action' => 'update', 'row' => $this->id], 'cms_nav', $this->id, $this->toArray());
                 break;
             case 'afterDelete':
-                Log::add(3, "nav.delete, cms_nav.id '" . $this->id . "'", $this->toArray());
+                Log::add(3, ['tableName' => 'cms_nav', 'action' => 'delete', 'row' => $this->id], 'cms_nav', $this->id, $this->toArray());
                 break;
         }
     }

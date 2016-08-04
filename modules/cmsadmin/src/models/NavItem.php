@@ -51,11 +51,11 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     {
         switch ($event->name) {
             case 'afterInsert':
-                return Log::add(1, "nav_item.insert '".$this->title."', cms_nav_item.id '".$this->id."'", $this->toArray());
+                return Log::add(1, ['tableName' => 'cms_nav_item', 'action' => 'insert', 'row' => $this->id], 'cms_nav_item', $this->id, $this->toArray());
             case 'afterUpdate':
-                return Log::add(2, "nav_item.update '".$this->title."', cms_nav_item.id '".$this->id."'", $this->toArray());
+                return Log::add(2, ['tableName' => 'cms_nav_item', 'action' => 'update', 'row' => $this->id], 'cms_nav_item', $this->id, $this->toArray());
             case 'afterDelete':
-                return Log::add(3, "nav_item.delete '".$this->title."', cms_nav_item.id '".$this->id."'", $this->toArray());
+                return Log::add(3, ['tableName' => 'cms_nav_item', 'action' => 'delete', 'row' => $this->id], 'cms_nav_item', $this->id, $this->toArray());
         }
     }
 

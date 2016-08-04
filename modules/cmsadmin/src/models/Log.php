@@ -3,9 +3,23 @@
 namespace cmsadmin\models;
 
 use Yii;
+use admin\models\User;
+use yii\helpers\Json;
+use cmsadmin\Module;
 
 /**
  * Eventer-Logger for CMS Activitys
+ * 
+ * @property integer $id
+ * @property integer $user_id
+ * @property integer $is_insertion
+ * @property integer $is_update
+ * @property integer $is_deletion
+ * @property integer $timestamp
+ * @property string $message
+ * @property string $data_json
+ * @property string $table_name
+ * @property integer $row_id
  * 
  * @author Basil Suter <basil@nadar.io>
  */
@@ -23,17 +37,101 @@ class Log extends \yii\db\ActiveRecord
         $this->user_id = (Yii::$app instanceof \luya\web\Application) ? Yii::$app->adminuser->getId() : 0;
         $this->data_json = json_encode($this->data_json);
     }
-
+    
+    public function getRowDescriber()
+    {
+        if (!empty($this->row_id)) {
+            switch ($this->table_name) {
+                case "nav":
+                    return Nav::findOne($this->row_id)->activeLanguageItem->title;
+                case "nav_item":
+                    return NavItem::findOne($this->row_id)->title;
+                case "cms_nav_item_page_block_item":
+                    $block = NavItemPageBlockItem::findOne($this->row_id);
+                    if (!$block) {
+                        return;
+                    }
+                    return $block->block->object->name() . " (" .$block->droppedPageTitle. ")";
+            }
+        }
+    }
+    
     public static function tableName()
     {
         return 'cms_log';
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'user_id' => 'User ID',
+            'is_insertion' => 'Is Insertion',
+            'is_update' => 'Is Update',
+            'is_deletion' => 'Is Deletion',
+            'timestamp' => 'Timestamp',
+            'message' => 'Message',
+            'data_json' => 'Data Json',
+            'table_name' => 'Table Name',
+            'row_id' => 'Row ID',
+        ];
+    }
+    
     public function rules()
     {
         return [
-            [['is_insertion', 'is_deletion', 'is_update', 'message', 'data_json'], 'safe'],
+            [['is_insertion', 'is_deletion', 'is_update', 'message', 'data_json', 'row_id', 'table_name'], 'safe'],
         ];
+    }
+    
+    public function getAction()
+    {
+        if ($this->is_insertion) {
+            switch($this->table_name) {
+                case "nav_item":
+                    return Module::t('log_action_insert_cms_nav_item', ['info' => $this->rowDescriber]);
+                case "nav":
+                    return Module::t('log_action_insert_cms_nav', ['info' => $this->rowDescriber]);
+                case "cms_nav_item_page_block_item":
+                    return Module::t('log_action_insert_cms_nav_item_page_block_item', ['info' => $this->rowDescriber]);
+                default:
+                    return Module::t('log_action_insert_unkown', ['info' => $this->rowDescriber]);
+            }
+        }
+        
+        if ($this->is_update) {
+            switch($this->table_name) {
+                case "nav_item":
+                    return Module::t('log_action_update_cms_nav_item', ['info' => $this->rowDescriber]);
+                case "nav":
+                    return Module::t('log_action_update_cms_nav', ['info' => $this->rowDescriber]);
+                case "cms_nav_item_page_block_item":
+                    return Module::t('log_action_update_cms_nav_item_page_block_item', ['info' => $this->rowDescriber]);
+                default:
+                    return Module::t('log_action_update_unkown', ['info' => $this->rowDescriber]);
+            }
+        }
+
+        if ($this->is_deletion) {
+            switch($this->table_name) {
+                case "nav_item":
+                    return Module::t('log_action_delete_cms_nav_item', ['info' => $this->rowDescriber]);
+                case "nav":
+                    return Module::t('log_action_delete_cms_nav', ['info' => $this->rowDescriber]);
+                case "cms_nav_item_page_block_item":
+                    return Module::t('log_action_delete_cms_nav_item_page_block_item');
+                default:
+                    return Module::t('log_action_delete_unkown');
+            }
+        }
+    }
+    
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
     /**
@@ -45,14 +143,16 @@ class Log extends \yii\db\ActiveRecord
      *                        + 3 = deletion
      * @param string $message
      */
-    public static function add($type, $message, array $additionalData = [])
+    public static function add($type, array $message, $tableName, $rowId = 0, array $additionalData = [])
     {
         $model = new self();
         $model->setAttributes([
             'is_insertion' => ($type == 1) ? 1 : 0,
             'is_update' => ($type == 2) ? 1 : 0,
             'is_deletion' => ($type == 3) ? 1 : 0,
-            'message' => $message,
+            'table_name' => $tableName,
+            'row_id' => $rowId,
+            'message' => Json::encode($message),
             'data_json' => $additionalData,
         ]);
         return $model->insert(false);

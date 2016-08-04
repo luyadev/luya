@@ -91,6 +91,13 @@ class Block extends \admin\ngrest\base\Model
         parent::afterDelete();
     }
 
+    public function getObject()
+    {
+        return Yii::createObject([
+            'class' => $this->class,
+        ]);
+    }
+    
     public static function objectId($blockId, $id, $context, $pageObject = null)
     {
         $block = self::find()->where(['id' => $blockId])->asArray()->one();
