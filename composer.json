@@ -1,6 +1,6 @@
 {
 	"name" : "luyadev/luya",
-	"description" : "The programmatic CMS based on the Yii2 Framework. http://luya.io",
+	"description" : "The Yii2 PHP Framework wrapper which provides out of the box functions like an administration interface, a beautiful looking content management system, payment modules, agency workflows and other tools to develop your website pretty fast!",
 	"type" : "project",
 	"keywords" : ["php", "yii2", "cms", "luya", "programmatic", "content", "angular", "modular", "yii2-wrapper"],
 	"license": "MIT",
