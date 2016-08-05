@@ -1031,8 +1031,11 @@
                 if ($scope.model == undefined) {
                     $scope.model = [];
                 }
-
+                
                 $scope.add = function() {
+                	if ($scope.model == null || $scope.model == '' || $scope.model == undefined) {
+                		$scope.model = [];
+                	}
                     $scope.model.push({ imageId : 0, caption : '' });
                 };
 
@@ -1087,6 +1090,9 @@
                 }
 
                 $scope.add = function() {
+                	if ($scope.model == null || $scope.model == '' || $scope.model == undefined) {
+                		$scope.model = [];
+                	}
                     $scope.model.push({ fileId : 0, caption : '' });
                 };
 
@@ -1143,7 +1149,7 @@
                 };
 
                 $scope.add = function() {
-                	if ($scope.model == undefined) {
+                	if ($scope.model == null || $scope.model == '' || $scope.model == undefined) {
                 		$scope.model = [];
                 	}
                     $scope.model.push({ value : '' });
