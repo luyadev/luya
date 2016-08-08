@@ -28,7 +28,7 @@ The url rule explained in details:
 You can also us parameters in your url rules ([More on the Yii2 Documentation](http://www.yiiframework.com/doc-2.0/guide-runtime-routing.html#parameterizing-routes).
 
 ```php
-['pattern' => 'artikel/<id:\d+>', 'route' => 'estore/article/index'],
+['pattern' => 'article-detail/<id:\d+>', 'route' => 'estore/article/index'],
 ```
 
 > When you using the module in a cms context, your patterns must be prefix with the module name like `team/my-basket`, otherwise the cms can not auto replace the new pattern with the cms context informations.
