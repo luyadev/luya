@@ -31,6 +31,8 @@ You can also us parameters in your url rules ([More on the Yii2 Documentation](h
 ['pattern' => 'artikel/<id:\d+>', 'route' => 'estore/article/index'],
 ```
 
+> When you using the module in a cms context, your patterns must be prefix with the module name like `team/my-basket`, otherwise the cms can not auto replace the new pattern with the cms context informations.
+
 Here also a helping list of regex expressions you may use to generate your variables inside the urls:
 
 |Regex      |Description        |Example
@@ -39,8 +41,6 @@ Here also a helping list of regex expressions you may use to generate your varia
 |`\w`       |Any word character (letter, number, underscore)|`<hash:\w+>`
 |`[abc]`    |Only the letters a, b or c|`<string:[abc]+>`
 |`[a-z0-9]` |All letter chars a-z (only lowercase) and numbers from 0 to 9|`<alias:[a-z0-9]+>`
-
-> When you using the module in a cms context, your patterns must be prefix with the module name like `team/my-basket`, otherwise the cms can not auto replace the new pattern with the cms context informations.
 
 ## Using the Rule to make a Link
 
