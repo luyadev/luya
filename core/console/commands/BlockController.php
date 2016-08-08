@@ -205,7 +205,7 @@ class BlockController extends \luya\console\Command
         // method icon
         $content .= '    public function icon()'.PHP_EOL;
         $content .= '    {'.PHP_EOL;
-        $content .= '        return \'extension\'; // choose icon from: http://materializecss.com/icons.html'.PHP_EOL;
+        $content .= '        return \'extension\'; // choose icon from: https://design.google.com/icons/'.PHP_EOL;
         $content .= '    }'.PHP_EOL.PHP_EOL;
 
         $content .= '    public function config()'.PHP_EOL;
