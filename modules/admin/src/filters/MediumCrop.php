@@ -9,7 +9,7 @@ namespace admin\filters;
  */
 class MediumCrop extends \admin\base\Filter
 {
-    public function identifier()
+    public static function identifier()
     {
         return 'medium-crop';
     }

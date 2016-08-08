@@ -36,7 +36,7 @@ abstract class Filter extends Object
      *
      * @return string The identifier must match [a-zA-Z0-9\-]
      */
-    abstract public function identifier();
+    abstract static public function identifier();
 
     /**
      * Understandable Name expression for the effect.
@@ -100,16 +100,16 @@ abstract class Filter extends Object
     public function findModel()
     {
         // find filter model based on the identifier
-        $model = StorageFilter::find()->where(['identifier' => $this->identifier()])->one();
+        $model = StorageFilter::find()->where(['identifier' => static::identifier()])->one();
         // if no model exists, create new record
         if (!$model) {
             $model = new StorageFilter();
             $model->setAttributes([
                 'name' => $this->name(),
-                'identifier' => $this->identifier(),
+                'identifier' => static::identifier(),
             ]);
             $model->insert(false);
-            $this->addLog("added new filter '".$this->identifier()."' to database.");
+            $this->addLog("added new filter '".static::identifier()."' to database.");
         }
 
         return $model;
@@ -203,7 +203,7 @@ abstract class Filter extends Object
         if ($filterModel->name !== $this->name()) {
             $filterModel->setAttribute('name', $this->name());
             $filterModel->update(false);
-            $this->addLog("Filter name '".$this->name()."' have been updated for identifier '".$this->identifier()."'.");
+            $this->addLog("Filter name '".$this->name()."' have been updated for identifier '".static::identifier()."'.");
         }
         // array containing the processed chain ids
         $processed = [];

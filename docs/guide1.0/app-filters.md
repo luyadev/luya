@@ -3,6 +3,8 @@ Image Filters
 
 > since `1.0.0-beta7` we use the [Yii2 Imagine Extension](https://github.com/yiisoft/yii2-imagine) which strongly improves the behavior of creating thumbnails by auto calculating values.
 
+> since `1.0.0-beta8` filter `identifier()` method is a **static** method.
+
 With *Filters* you can modify, crop, resize use effects on any image provided from the storage component. To add a filter just create a filter class within the `filters` directory of your project or module and run the import command to add the filter into the system. When you change the effect chain of your filter you have to run the import command again in ordner to update all the images which are using your filter.
 
 The basic concept behind filter classes, is to track filters in VCS system, so you can add a filter and push it into git, and your project members does have the same environement as you.
@@ -19,7 +21,7 @@ namespace app\filters;
 
 class MyFilter extends \admin\base\Filter
 {    
-    public function identifier()
+    public static function identifier()
     {
         return 'my-filter';
     }
@@ -81,6 +83,14 @@ Where *139* coult be the image id from your database source active record. If yo
 ```php
 <? foreach($newsData as $item): ?>
     <img src="<?= yii::$app->storage->getImage($item['imageId'])->applyFilter('my-filter')->source; ?>" border="0" />
+<? endforeach; ?>
+```
+
+Since beta8 you can alos directly use the identifier method to apply filters:
+
+```php
+<? foreach($newsData as $item): ?>
+    <img src="<?= yii::$app->storage->getImage($item['imageId'])->applyFilter(\app\filters\MyFilter::identifier())->source; ?>" border="0" />
 <? endforeach; ?>
 ```
 

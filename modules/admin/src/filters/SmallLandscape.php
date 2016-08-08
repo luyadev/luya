@@ -9,7 +9,7 @@ namespace admin\filters;
  */
 class SmallLandscape extends \admin\base\Filter
 {
-    public function identifier()
+    public static function identifier()
     {
         return 'small-landscape';
     }

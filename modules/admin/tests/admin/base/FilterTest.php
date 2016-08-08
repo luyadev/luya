@@ -7,7 +7,7 @@ use admintests\AdminTestCase;
 
 class MyFilter extends Filter
 {
-    public function identifier()
+    public static function identifier()
     {
         return 'my-test-filter';
     }

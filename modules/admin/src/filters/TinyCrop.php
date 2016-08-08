@@ -9,7 +9,7 @@ namespace admin\filters;
  */
 class TinyCrop extends \admin\base\Filter
 {
-    public function identifier()
+    public static function identifier()
     {
         return 'tiny-crop';
     }

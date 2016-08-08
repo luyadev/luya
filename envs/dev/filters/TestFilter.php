@@ -7,7 +7,7 @@ use Imagine\Image\ManipulatorInterface;
 
 class TestFilter extends Filter
 {
-    public function identifier()
+    public static function identifier()
     {
         return 'test-filter';
     }

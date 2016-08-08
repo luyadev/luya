@@ -6,7 +6,8 @@ The changelog contains informations about bug fixes, new features or bc breaking
 1.0.0-beta8 (in progress)
 -------------------------
 
-- `#907`: **[BC BREAK]** Removed the public attribute `$extraFields` in order to prevent confusings. Override `extraFields()` instead in `admin\ngrest\base\Model`.
+- `#940` **[BC BREAK]** Making filter class method `identifier()` static to allow IDE Automplete usage of filters. 
+- `#907` **[BC BREAK]** Removed the public attribute `$extraFields` in order to prevent confusings. Override `extraFields()` instead in `admin\ngrest\base\Model`.
 - `#836` Fixed slow processing of unneeded/orphaned files and database storage entries in StorageImporter
 - `#742` Fixed parsing bug for youtube URLs with additional parameters in video block
 - `#882` Added information to documentation about the 'only' publish options
