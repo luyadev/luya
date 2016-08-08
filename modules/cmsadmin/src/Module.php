@@ -66,7 +66,7 @@ class Module extends \admin\base\Module
      *      ],
      *  ],
      * ```
-	 *
+     *
      * You can define blocks by using the string notation:
      * 
      * ```php

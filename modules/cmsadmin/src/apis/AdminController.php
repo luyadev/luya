@@ -48,7 +48,6 @@ class AdminController extends \admin\base\RestController
         }
 
         if (!empty($favs)) {
-
             $favblocks = [];
             foreach ($favs as $fav) {
                 $favblocks[] = $fav;

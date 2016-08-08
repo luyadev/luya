@@ -105,7 +105,7 @@ class Log extends \yii\db\ActiveRecord
     public function getAction()
     {
         if ($this->is_insertion) {
-            switch($this->table_name) {
+            switch ($this->table_name) {
                 case "nav_item":
                     return Module::t('log_action_insert_cms_nav_item', ['info' => $this->rowDescriber]);
                 case "nav":
@@ -118,7 +118,7 @@ class Log extends \yii\db\ActiveRecord
         }
         
         if ($this->is_update) {
-            switch($this->table_name) {
+            switch ($this->table_name) {
                 case "nav_item":
                     return Module::t('log_action_update_cms_nav_item', ['info' => $this->rowDescriber]);
                 case "nav":
@@ -131,7 +131,7 @@ class Log extends \yii\db\ActiveRecord
         }
 
         if ($this->is_deletion) {
-            switch($this->table_name) {
+            switch ($this->table_name) {
                 case "nav_item":
                     return Module::t('log_action_delete_cms_nav_item', ['info' => $this->rowDescriber]);
                 case "nav":

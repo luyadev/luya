@@ -7,6 +7,7 @@ use admin\models\Lang;
 use yii\db\Query;
 use cmsadmin\models\Nav;
 use admin\models\Group;
+use luya\helpers\ArrayHelper;
 
 /**
  * Menu Helper to collect Data used in Administration areas.
@@ -34,7 +35,7 @@ class MenuHelper
             ->where(['cms_nav_item.lang_id' => Lang::getDefault()['id'], 'cms_nav.is_deleted' => 0, 'cms_nav.is_draft' => 0])
             ->all();
             
-            self::items(0);
+            self::loadInheritanceData(0);
             
             $data = [];
             
@@ -56,9 +57,8 @@ class MenuHelper
                     }
 
                     if (!$permitted) {
-                        $value = (isset(self::$data[$item['id']])) ? self::$data[$item['id']] : false;
-                        
-                        if ($value) {
+                        $value = (isset(self::$_inheritData[$item['id']])) ? self::$_inheritData[$item['id']] : false;
+                        if ($value === true) {
                             $permitted = true;
                         }
                     }
@@ -75,44 +75,107 @@ class MenuHelper
         return self::$items;
     }
     
-    private static $data = [];
+    /* LOAD INHERITANCE CHECK FOR ITEMS AND STORE INT $data*/
     
-    public static function items($parentNavId = 0, $fromInheritNode = false)
+    private static $_inheritData = [];
+    
+    private static $_navItems = null;
+    
+    private static function getNavItems()
     {
-        $items = Nav::find()->where(['parent_nav_id' => $parentNavId, 'is_deleted' => 0])->all();
+        if (self::$_navItems === null) {
+            $items = Nav::find()->select(['sort_index', 'id', 'parent_nav_id', 'is_deleted'])->where(['is_deleted' => 0])->orderBy(['sort_index' => SORT_ASC])->asArray()->all();
+            return self::$_navItems = ArrayHelper::index($items, null, 'parent_nav_id');
+        }
         
+        return self::$_navItems;
+    }
+    
+    /**
+     * Find nav_id inheritances
+     * 
+     * + Get all cms_nav items where is deleted 0 and sort_asc
+     * + foreach items
+     * + foreach all user groups for this item to check if an inheritance nod exists for this nav_item (self::navGroupInheritanceNode)
+     * + Set the interanl check to false, if inherit or internal check is true, set value into $data factory
+     * + proceed nodes of the current item with the information form $data factory as inheritation info.
+     * 
+     * @param number $parentNavId
+     * @param string $fromInheritNode
+     */
+    private static function loadInheritanceData($parentNavId = 0, $fromInheritNode = false)
+    {
+        // get items from singleton object
+        $items = (isset(self::getNavItems()[$parentNavId])) ? self::getNavItems()[$parentNavId] : [];
         foreach ($items as $item) {
-            if (!array_key_exists($item->id, self::$data)) {
-                self::$data[] = $fromInheritNode;
-            }
-            
+            $internalCheck = false;
             foreach (Yii::$app->adminuser->identity->groups as $group) {
-                if ($fromInheritNode) {
+                if ($internalCheck) {
                     continue;
                 }
-                
-                $fromInheritNode = self::navGroupInheritanceNode($item->id, $group);
+                $internalCheck = self::navGroupInheritanceNode($item['id'], $group);
+            }
+            if (!array_key_exists($item['id'], self::$_inheritData)) {
+                if ($fromInheritNode || $internalCheck) {
+                    self::$_inheritData[$item['id']] = true;
+                } else {
+                    self::$_inheritData[$item['id']] = false;
+                }
             }
             
-            self::items($item->id, $fromInheritNode);
+            self::loadInheritanceData($item['id'], self::$_inheritData[$item['id']]);
         }
+    }
+    
+    /* NAV GROUP INHERITANCE NODE */
+    
+    private static $_cmsPermissionData = null;
+    
+    private static function getCmsPermissionData()
+    {
+        if (self::$_cmsPermissionData === null) {
+            self::$_cmsPermissionData = ArrayHelper::index((new Query())->select("*")->from("cms_nav_permission")->all(), null, 'group_id');
+        }
+        
+        return self::$_cmsPermissionData;
     }
     
     public static function navGroupInheritanceNode($navId, Group $group)
     {
-        $definition = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $group->id, 'nav_id' => $navId])->one();
-        
+        // default defintion is false
+        $definition = false;
+        // see if permission data for group exists, foreach items and set if match
+        if (isset(self::getCmsPermissionData()[$group->id])) {
+            foreach (self::getCmsPermissionData()[$group->id] as $item) {
+                if ($item['nav_id'] == $navId) {
+                    $definition = $item['inheritance'];
+                }
+            }
+        }
         if ($definition) {
-            return (bool) $definition['inheritance'];
+            return (bool) $definition;
         }
         
         return false;
     }
     
+    /* NAV GROUP PERMISSION */
+    
+    private static $_navGroupPermissions = null;
+    
+    private static function getNavGroupPermissions()
+    {
+        if (self::$_navGroupPermissions === null) {
+            self::$_navGroupPermissions = ArrayHelper::index((new Query())->select(['group_id', 'nav_id'])->from("cms_nav_permission")->all(), null, 'group_id');
+        }
+
+        return self::$_navGroupPermissions;
+    }
+    
     public static function navGroupPermission($navId, $groupId)
     {
-        $definitions = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $groupId])->all();
-        
+        // get defintions from singleton
+        $definitions = (isset(self::getNavGroupPermissions()[$groupId])) ? self::getNavGroupPermissions()[$groupId] : [];
         // the group has no permission defined, this means he can access ALL cms pages
         if (count($definitions) == 0) {
             return true;
