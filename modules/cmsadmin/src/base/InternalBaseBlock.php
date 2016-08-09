@@ -399,7 +399,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
      * apply a filter for the image
      * 
      * ```php
-     * 'imageFiltered' => $this->zaaImageUpload($this->getVarValue('myImage', 'small-thumbnail'),
+     * 'imageFiltered' => $this->zaaImageUpload($this->getVarValue('myImage'), 'small-thumbnail'),
      * ```
      * 
      * @param string|int $value Provided the value
