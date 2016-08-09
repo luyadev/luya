@@ -177,7 +177,7 @@ class FlowActiveWindow extends \admin\ngrest\base\ActiveWindow
         $folder = Yii::getAlias('@runtime/flow-upload');
         
         if (!file_exists($folder)) {
-            return FileHelper::createDirectory($folder, 0777);
+            FileHelper::createDirectory($folder, 0777);
         }
         
         return $folder;
