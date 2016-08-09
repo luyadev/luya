@@ -359,9 +359,8 @@ function typeCastValue(value) {
 				if (data.status == 401) {
 					window.location = "admin/default/logout";
 				}
-				
 				if (data.status != 422){ 
-				AdminToastService.error("Response Error: " + data.status + " " + data.statusText, 5000);
+					AdminToastService.error("Response Error: " + data.status + " " + data.statusText, 5000);
 				}
 				return $q.reject(data);
 			}

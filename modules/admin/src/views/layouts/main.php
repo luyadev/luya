@@ -345,10 +345,9 @@ $this->beginPage()
 
 <div class="luya-container ng-cloak">
     <div class="toasts" ng-repeat="item in toastQueue">
-        <div class="toasts__confirm" ng-if="item.type == 'confirm'">
+        <div class="toasts__confirm" ng-if="item.type == 'confirm'" zaa-esc="item.close()">
             <div class="toasts__item toasts__item--confirm">
                 <p>{{item.message}}</p>
-
                 <div class="toasts__item-buttons">
                     <button type="button" class="btn btn--small grey" ng-click="item.close()">Abbrechen</button>
                     <button type="button" class="btn btn--small red" ng-click="item.click()">Ja</button>
