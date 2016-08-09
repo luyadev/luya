@@ -122,7 +122,7 @@ class Item extends \yii\base\Object
     /**
      * Return boolean value whether the file server source exsits on the server or not.
      * 
-     * @return boolean
+     * @return boolean Whether the file still exists in the storage folder or not.
      */
     public function getFileExists()
     {
@@ -130,9 +130,9 @@ class Item extends \yii\base\Object
     }
     
     /**
-     * Get the image resolution width.
+     * Get the image resolution width in Pixel.
      * 
-     * @return mixed
+     * @return string Get the width in Pixel.
      */
     public function getResolutionWidth()
     {
@@ -140,9 +140,9 @@ class Item extends \yii\base\Object
     }
     
     /**
-     * Get the image resolution height.
+     * Get the image resolution height in Pixel.
      * 
-     * @return mixed
+     * @return string Get the height in Pixel.
      */
     public function getResolutionHeight()
     {
@@ -175,9 +175,12 @@ class Item extends \yii\base\Object
     }
     
     /**
-     * Get the image object informations as array.
+     * Convert the Object informations into an Array.
      * 
-     * @return array 
+     * Sometimes you may want to retrieve all informations about the image item within an array, there the 
+     * toArray method is used.
+     * 
+     * @return array An array with all available methods as key and corresponding output.
      */
     public function toArray()
     {
