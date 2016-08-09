@@ -1,6 +1,6 @@
-Luya Mail
-===========
-Luya is shipped with the PhpMailer component `mail`. You can access the mail component with `Yii::$app->mail` and start mailing. To configure the component inside your config u can override class properties in your config like this:
+# LUYA Mail Component
+
+LUYA is shipped with a `mail` component who is using the PHPMailer. You can access the mail component with `Yii::$app->mail` and start sending mails. To configure the component u can override class properties in your config like this:
 
 ```php
 'components' => [
@@ -15,15 +15,27 @@ Luya is shipped with the PhpMailer component `mail`. You can access the mail com
 ]
 ```
 
-Chain-Mode
--------------
-To quickly send an email in one line you can use the code below.
+In order to test your configurations you can run the console command `health/mailer`. The command will try to connect to your mail server trough your provided credentials. By default the mailer component requires an SMTP Server and is not using the phpmail functions.
+
+```
+./vendor/bin/luya health/mailer
+```
+
+## Compose new E-Mail
+
+To quickly send an email in one line you can use the object chain mode like the example below:
 
 ```php
 $mail = Yii::$app->mail->compose('Mail Subject', 'My HTML email content goes here.')->address('recipient@luya.io')->send();
 ```
 
-the response value of `$mail` is a boolean value. If something happends wrong you can access the error inside the component like this:
+You can also use the method `adresses` with an array of all E-Mail adresse you would like to address.
+
+```php
+Yii::$app->mail->compose('Subject', '<p>Html</p>')->adresses(['john@doe.com', 'Jane Doe' => 'jane@doe.com'])->send();
+```
+
+The response value of `$mail` (actually its the response of the method `send()`) is a boolean value. If something happens wrong during the send process, you can access the error inside the component like following:
 
 ```php
 if (!$mail) {
@@ -34,29 +46,8 @@ if (!$mail) {
 }
 ```
 
-Object-Mode
------------
-As the mailer component is an object you can always access all methods in the mail component. This is very usefull when you are foreaching an array with recipients for example:
+## Using the PHPMailer Object
 
-```php
-// recipients array
-$recipients = ['foo@luya.io', 'bar@luya.io'];
-// mailer object
-$mail = Yii::$app->mail;
-$mail->compose('Mail Subject', 'My HTML email content goes here.');
-foreach($recipients as $mail) {
-	$mail->address($mail);
-}
-if (!$mail->send()) {
-	echo "Houston, we have problem: " . PHP_EOL;
-	echo Yii::$app->mail->error;
-} else {
-	echo "Wow, mail has been sent!";
-}
-```
-
-Set PHPMailer values
-----------------------------
 If you want to access the phpmailer object you should use the Object-Mode which provides access to the `mailer()` method which is the PHPMailer Object. Here you find a list of [PHPMailer propertys](https://github.com/PHPMailer/PHPMailer#a-simple-example) you can set like in the example below:
 
 ```php
