@@ -27,30 +27,39 @@ Now the envs/dev environment needs to be configured. To do so, go into the confi
 ```sh
 cp  server.php.dist server.php
 ```
+> Make sure your database information and setting are correctly configured in `configs/server.php`.
 
 As we assume you have [installed composer](install.md) already on your computer now you can run `composer install` inside of your `envs/dev` folder, this will install all required depenencies and create the psr4 mappings to the local *LUYA* library files (src, modules, etc.).
 
-After that you just have to run the basic terminal commands in your console:
+After `composer install` simply run this terminal commands in your console:
 
-Install Database:
-
-```sh
-./vendor/bin/luya migrate
-```
-
-Import data from env to databse
+1.) Navigate into your public_html folder:
 
 ```sh
-./vendor/bin/luya import
+cd public_html
 ```
 
-and finally setup the envs instance to login with your user:
+2.) Install Database:
 
 ```sh
-./vendor/bin/luya setup
+php index.php migrate
 ```
 
-After this you can now open the *public_html* folder in your browser of your dev env `localhost/luya/envs/dev/public_html`.
+3.) Import data from env to database
+
+```sh
+php index.php import
+```
+
+4.) and finally after importer has been run successfully setup the envs instance and configure your user account:
+
+```sh
+php index.php setup
+```
+
+5.) Open the *public_html* folder of your dev environment in your browser`localhost/luya/envs/dev/public_html`.
+
+> To access the admin area visit `localhost/luya/envs/dev/public_html/admin` 
 
 Rebase your Master
 ------------------
