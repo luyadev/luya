@@ -12,7 +12,7 @@ The basic concept behind filter classes, is to track filters in VCS system, so y
 Create a new filter
 -----------------
 
-To create a filter add a new file with the suffix `Filter` in your project or module folder `filters` and run the import command.
+To create a filter add a new file with the suffix `Filter` in your luya project root folder or module folder `filters` and run the import command.
 
 ```php
 <?php
@@ -78,7 +78,7 @@ An example of how to apply a filter in realtime to a retreived image:
 <img src="<?= yii::$app->storage->getImage(139)->applyFilter('my-filter')->source; ?>" border="0" />
 ```
 
-Where *139* coult be the image id from your database source active record. If you have casted a field with image() in your ngrest model you can access directly this variable:
+Where *139* could be the image id from your database source active record. If you have casted a field with image() in your ngrest model you can access directly this variable:
 
 ```php
 <? foreach($newsData as $item): ?>
