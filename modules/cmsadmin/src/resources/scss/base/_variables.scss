@@ -16,6 +16,7 @@ $deeporange:        #FF5722;
 
 $blue:                      #2196F3;
 $light-blue-accent-3:       #00b0ff;
+$blue--lighten-5:           #e1f5fe;
 
 $teal:              #009688;
 $teal--lighten-2:   #B2DFDB;
@@ -27,6 +28,7 @@ $pink--accent-3:	#f50057;
 $pink--accent-4:	#c51162;
 
 $green:				#4caf50;
+$green--lighten-3:  #A5D6A7;
 $green--accent-4:	#00c853;
 $green--darken-3:	#2e7d32;
 
@@ -73,7 +75,7 @@ $container-block--colors: (
     1: "#0D47A1",
     2: "#1976D2",
     3: "#2196F3",
-    4: "#64B5F6"    
+    4: "#64B5F6"
 );
 
 $page__drop-zone--background:				$green--accent-4;

@@ -1,0 +1,41 @@
+.permissions {
+    width: 100%;
+
+    td, th {
+        padding: 5px 10px;
+    }
+
+    .green.disabled {
+        background-color: $green--lighten-3 !important;
+    }
+}
+
+.permissions__group-button {
+    margin-right: 10px;
+}
+
+.permissions__container-spacing {
+    padding: 10px 0 !important;
+}
+
+.permissions__container-row {
+    background-color: $grey--darken;
+
+    th {
+        padding: 5px 10px;
+    }
+}
+
+.permissions__item-row {
+    &:nth-child(even) {
+        background-color: $grey;
+    }
+
+    &:hover {
+        background-color: $blue--lighten-5;
+    }
+
+    td {
+        border-left: 1px solid $grey--darken;
+    }
+}

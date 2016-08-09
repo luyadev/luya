@@ -1,17 +1,16 @@
-@import "base/variables";
+@import 'base/variables';
 
 
 /**
  * Prefix every module style with the module class
  */
 .module-cmsadmin {
-	/**
+    /**
 	 * #HELPERS
 	 *		clearfix:		Clearfix mixin
  	 */
-	@import "helpers/clearfix";
-
-	/**
+    @import 'helpers/clearfix';
+    /**
 	 * #COMPONENTS
 	 *		block:			Block styles
 	 *		blockholder:	Styles for the blockholder
@@ -20,12 +19,13 @@
      * 		page:			Styles for the page in the cms admin
      *		treeview:		Styles for the treeview
  	 */
-	@import "components/accordion";
-	@import "components/block";
-	@import "components/blockholder";
-	@import "components/cms";
-	@import "components/collapsible";
-	@import "components/liveedit";
-	@import "components/page";
-	@import "components/treeview";
+    @import 'components/accordion';
+    @import 'components/block';
+    @import 'components/blockholder';
+    @import 'components/cms';
+    @import 'components/collapsible';
+    @import 'components/liveedit';
+    @import 'components/page';
+    @import 'components/permissions';
+    @import 'components/treeview';
 }
