@@ -239,6 +239,7 @@ class Item extends \yii\base\Object
             'uploadTimestamp' => $this->getUploadTimestamp(),
             'size' => $this->getSize(),
             'sizeReadable' => $this->getSizeReadable(),
+            'caption' => $this->getCaption(),
             'captionArray' => $this->getCaptionArray(),
         ];
     }

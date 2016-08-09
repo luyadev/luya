@@ -64,10 +64,10 @@ class BlockController extends \luya\console\Command
     private function getExtraVarDef($type, $varName, $func)
     {
         $info = [
-            'image-upload' => function ($varName) use ($func) { return '$this->zaaImageUpload($this->'.$func.'(\''.$varName.'\')),'; },
-            'image-array-upload' => function ($varName) use ($func) { return '$this->zaaImageArrayUpload($this->'.$func.'(\''.$varName.'\')),'; },
-            'file-upload' => function ($varName) use ($func) { return '$this->zaaFileUpload($this->'.$func.'(\''.$varName.'\')),'; },
-            'file-array-upload' => function ($varName) use ($func) { return '$this->zaaFileArrayUpload($this->'.$func.'(\''.$varName.'\')),'; },
+            'image-upload' => function ($varName) use ($func) { return '$this->zaaImageUpload($this->'.$func.'(\''.$varName.'\'), false, true),'; },
+            'image-array-upload' => function ($varName) use ($func) { return '$this->zaaImageArrayUpload($this->'.$func.'(\''.$varName.'\'), false, true),'; },
+            'file-upload' => function ($varName) use ($func) { return '$this->zaaFileUpload($this->'.$func.'(\''.$varName.'\'), true),'; },
+            'file-array-upload' => function ($varName) use ($func) { return '$this->zaaFileArrayUpload($this->'.$func.'(\''.$varName.'\'), true),'; },
             'cms-page' => function ($varName) use ($func) { return 'Yii::$app->menu->findOne([\'nav_id\' => $this->'.$func.'(\''.$varName.'\', 0)]),'; },
         ];
         
@@ -174,7 +174,7 @@ class BlockController extends \luya\console\Command
         $content .= '/**'.PHP_EOL;
         $content .= ' * Block created with Luya Block Creator Version '.\luya\Boot::VERSION.' at '.date('d.m.Y H:i').PHP_EOL;
         $content .= ' */'.PHP_EOL;
-        $content .= 'class '.$blockName.' extends \cmsadmin\base\Block'.PHP_EOL;
+        $content .= 'class '.$blockName.' extends \cmsadmin\base\PhpBlock'.PHP_EOL;
         $content .= '{'.PHP_EOL;
 
         if ($module) {
@@ -248,7 +248,7 @@ class BlockController extends \luya\console\Command
 
         // method extraVars
         $content .= '    /**'.PHP_EOL;
-        $content .= '     * Return an array containg all extra vars. Those variables you can access in the Twig Templates via {{extras.*}}.'.PHP_EOL;
+        $content .= '     * Return an array containg all extra vars. The extra vars can be access within the `$extras` array.'.PHP_EOL;
         $content .= '     */'.PHP_EOL;
         $content .= '    public function extraVars()'.PHP_EOL;
         $content .= '    {'.PHP_EOL;
@@ -259,18 +259,6 @@ class BlockController extends \luya\console\Command
         $content .= '        ];'.PHP_EOL;
         $content .= '    }'.PHP_EOL.PHP_EOL;
 
-        // method twigFrontend
-        $content .= '    /**'.PHP_EOL;
-        $content .= '     * Available twig variables:'.PHP_EOL;
-        foreach ($this->phpdoc as $doc) {
-            $content .= '     * @param '.$doc.PHP_EOL;
-        }
-        $content .= '     */'.PHP_EOL;
-        $content .= '    public function twigFrontend()'.PHP_EOL;
-        $content .= '    {'.PHP_EOL;
-        $content .= '        return \'<p>My Frontend Twig of this Block</p>\';'.PHP_EOL;
-        $content .= '    }'.PHP_EOL.PHP_EOL;
-
         // method twigAdmin
         $content .= '    /**'.PHP_EOL;
         $content .= '     * Available twig variables:'.PHP_EOL;
@@ -278,9 +266,9 @@ class BlockController extends \luya\console\Command
             $content .= '     * @param '.$doc.PHP_EOL;
         }
         $content .= '     */'.PHP_EOL;
-        $content .= '    public function twigAdmin()'.PHP_EOL;
+        $content .= '    public function admin()'.PHP_EOL;
         $content .= '    {'.PHP_EOL;
-        $content .= '        return \'<p>My Admin Twig of this Block</p>\';'.PHP_EOL;
+        $content .= '        return \'<p>Block Admin</p>\';'.PHP_EOL;
         $content .= '    }'.PHP_EOL;
 
         $content .= '}'.PHP_EOL;

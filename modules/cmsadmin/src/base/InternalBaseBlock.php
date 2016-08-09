@@ -404,9 +404,10 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
      * 
      * @param string|int $value Provided the value
      * @param boolean|string $applyFilter To apply a filter insert the identifier of the filter.
+     * @param boolean $returnObject Whether the storage object should be returned or an array.
      * @return boolean|array Returns false when not found, returns an array with all data for the image on success.
      */
-    protected function zaaImageUpload($value, $applyFilter = false)
+    protected function zaaImageUpload($value, $applyFilter = false, $returnObject = false)
     {
         if (empty($value)) {
             return false;
@@ -422,10 +423,16 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
             $filter = $image->applyFilter($applyFilter);
             
             if ($filter) {
+                if ($returnObject) {
+                    return $filter;
+                }
                 return $filter->toArray();
             }
         }
         
+        if ($returnObject) {
+            return $image;
+        }
         return $image->toArray();
     }
     
@@ -437,14 +444,18 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
      * ```
      * 
      * @param string|int $value Provided the value
+     * @param boolean $returnObject Whether the storage object should be returned or an array.
      * @return boolean|array Returns false when not found, returns an array with all data for the image on success.
      */
-    protected function zaaFileUpload($value)
+    protected function zaaFileUpload($value, $returnObject = false)
     {
         if (!empty($value)) {
             $file = Yii::$app->storage->getFile($value);
             
             if ($file) {
+                if ($returnObject) {
+                    return $file;
+                }
                 return $file->toArray();
             }
         }
@@ -462,18 +473,18 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
      * Each array item will have all file query item data and a caption key.
      * 
      * @param string|int $value The specific var or cfg fieldvalue.
+     * @param boolean $returnObject Whether the storage object should be returned or an array.
      * @return array Returns an array in any case, even an empty array.
      */
-    protected function zaaFileArrayUpload($value)
+    protected function zaaFileArrayUpload($value, $returnObject = false)
     {
         if (!empty($value) && is_array($value)) {
             $data = [];
-            
             foreach ($value as $key => $item) {
-                $file = $this->zaaFileUpload($item['fileId']);
+                $file = $this->zaaFileUpload($item['fileId'], true);
                 if ($file) {
-                    $file['caption'] = $item['caption'];
-                    $data[$key] = $file;
+                    $file->caption = $item['caption'];
+                    $data[$key] = ($returnObject) ? $file : $file->toArray();
                 }
             }
             
@@ -494,18 +505,20 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
      * 
      * @param string|int $value The specific var or cfg fieldvalue.
      * @param boolean|string $applyFilter To apply a filter insert the identifier of the filter.
+     * @param boolean $returnObject Whether the storage object should be returned or an array.
      * @return array Returns an array in any case, even an empty array.
      */
-    protected function zaaImageArrayUpload($value, $applyFilter = false)
+    protected function zaaImageArrayUpload($value, $applyFilter = false, $returnObject = false)
     {
         if (!empty($value) && is_array($value)) {
             $data = [];
             
             foreach ($value as $key => $item) {
-                $image = $this->zaaImageUpload($item['imageId'], $applyFilter);
+                $image = $this->zaaImageUpload($item['imageId'], $applyFilter, true);
                 if ($image) {
-                    $image['caption'] = $item['caption'];
-                    $data[$key] = $image;
+                    $image->caption = $item['caption'];
+                    
+                    $data[$key] = ($returnObject) ? $image : $image->toArray();
                 }
             }
             
