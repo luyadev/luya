@@ -109,8 +109,6 @@ class MenuController extends \admin\base\RestController
                     'permissionCheckbox' => $nav->hasGroupPermissionSelected($group),
                     'groupFullPermission' => $this->groupHasFullPermission($group),
                 ];
-
-
             }
 
             $array['nav_level'] = $index;

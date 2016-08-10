@@ -36,7 +36,7 @@ abstract class Filter extends Object
      *
      * @return string The identifier must match [a-zA-Z0-9\-]
      */
-    abstract static public function identifier();
+    abstract public static function identifier();
 
     /**
      * Understandable Name expression for the effect.

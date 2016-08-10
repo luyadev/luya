@@ -75,5 +75,4 @@ class CommonController extends \admin\base\RestController
     {
         return Yii::$app->adminuser->identity->setting->get('filemanagerFolderId', 0);
     }
-    
 }
