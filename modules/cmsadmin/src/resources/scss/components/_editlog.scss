@@ -1,0 +1,92 @@
+
+
+.editlog {
+    margin-top: 10px;
+
+    .btn-floating {
+        margin-right: 1rem;
+        box-shadow: none !important;
+        cursor: default !important;
+        &.small {
+            line-height: 23px;
+
+            width: 23px;
+            height: 23px;
+        }
+
+        i {
+            line-height: 23px;
+        }
+    }
+}
+
+.editlog__icon {
+    font-size: 14px;
+}
+
+.editlog__collapsible {
+    margin: .5rem 0 1rem 0;
+
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+}
+
+
+.editlog__collapsible-header {
+    font-weight: bold;
+    line-height: 3rem;
+
+    display: block;
+
+    min-height: 3rem;
+    padding: 0 1rem;
+
+    cursor: pointer;
+    transition: color .25s ease-in-out;
+
+    color: $grey--dark;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+
+    i {
+        font-size: 1.6rem;
+        line-height: 3rem;
+
+        display: block;
+        float: left;
+
+        width: 2rem;
+        margin-right: 1rem;
+
+        transition: color .25s ease-in-out;
+        text-align: center;
+
+        color: $grey--dark;
+    }
+    &:hover {
+        color: $grey--darker;
+        i {
+            color: $grey--darker;
+        }
+    }
+}
+
+.editlog__collapsible-body {
+    box-sizing: border-box;
+
+    border-bottom: 1px solid #ddd;
+    background-color: $grey;
+}
+
+
+.editlog__collapsible-body-item {
+    line-height: 2rem;
+
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.editlog__collapsible-body-item-time {
+    position: relative;
+}

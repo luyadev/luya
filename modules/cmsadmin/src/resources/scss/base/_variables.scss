@@ -6,6 +6,8 @@ $white: #fff;
 $black: #000;
 $grey: #f5f5f5;
 $grey--darken: darken($grey, 10);
+$grey--dark: darken($grey, 30);
+$grey--darker: darken($grey, 60);
 
 $bluegrey--lighten-2:       #CFD8DC;
 $bluegrey--lighten-3:       #B0BEC5;
