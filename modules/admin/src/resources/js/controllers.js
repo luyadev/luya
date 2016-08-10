@@ -130,10 +130,6 @@
 		
 		$scope.currentMenuItem = null;
 		
-		$scope.createErrors = [];
-		
-		$scope.updateErrors = [];
-		
 		$scope.init = function () {
 			$scope.loadList();
 			$scope.$watch(function() { return $scope.parentController.currentItem }, function(newValue) {
@@ -200,22 +196,14 @@
 			});
 		};
 		
-		$scope.deleteErrors = [];
-		
 		$scope.deleteItem = function(id, $event) {
 			AdminToastService.confirm(i18n['js_ngrest_rm_page'], function($timeout, $toast) {
-				$scope.deleteErrors = [];
 				$http.delete($scope.config.apiEndpoint + '/'+id).success(function(r) {
 					$scope.loadList();
-
 					$toast.close();
 					AdminToastService.success(i18n['js_ngrest_rm_confirm'], 2000);
-				}).error(function(r) {
-					for (var i in r) {
-						angular.forEach(r[i], function(v, k) {
-							$scope.deleteErrors.push(v);
-						})
-					}
+				}).error(function(data) {
+					$scope.printErrors(data);
 				});
 			});
 		};
@@ -262,10 +250,13 @@
 			return false;
 		};
 		
+		$scope.printErrors = function(data) {
+			angular.forEach(data, function(value, key) {
+				AdminToastService.error(value.message, 3000);
+			});
+		};
+		
 		$scope.submitUpdate = function () {
-			
-			$scope.updateErrors = [];
-			
 			$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true)).success(function(data) {
 				$scope.realoadCrudList();
 				$scope.applySaveCallback();
@@ -276,21 +267,18 @@
 					$scope.highlightId = 0;
 				}, 4000);
 			}).error(function(data) {
-				$scope.updateErrors = data;
+				$scope.printErrors(data);
 			});
 		};
 		
 		$scope.submitCreate = function() {
-			
-			$scope.createErrors = [];
-			
 			$http.post($scope.config.apiEndpoint, angular.toJson($scope.data.create, true)).success(function(data) {
 				$scope.realoadCrudList();
 				$scope.applySaveCallback();
 				AdminToastService.success(i18n['js_ngrest_rm_success'], 2000);
 				$scope.switchTo(0, true);
 			}).error(function(data) {
-				$scope.createErrors = data;
+				$scope.printErrors(data);
 			});
 		};
 	
