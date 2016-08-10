@@ -45,7 +45,7 @@
     cursor: pointer;
     transition: color .25s ease-in-out;
 
-    color: $grey--dark;
+    color: color('grey','darken-2');
     border-bottom: 1px solid #ddd;
     background-color: #fff;
 
@@ -62,12 +62,12 @@
         transition: color .25s ease-in-out;
         text-align: center;
 
-        color: $grey--dark;
+        color: color('grey','darken-2');
     }
     &:hover {
-        color: $grey--darker;
+        color: color('grey','darken-3');
         i {
-            color: $grey--darker;
+            color: color('grey','darken-3');
         }
     }
 }
@@ -76,7 +76,7 @@
     box-sizing: border-box;
 
     border-bottom: 1px solid #ddd;
-    background-color: $grey;
+    background-color: color('grey', 'base');
 }
 
 
