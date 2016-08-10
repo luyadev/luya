@@ -62,12 +62,12 @@
         transition: color .25s ease-in-out;
         text-align: center;
 
-        color: color('grey','darken-3');
+        color: color('grey','darken-2');
     }
     &:hover {
-        color: color('grey','darken-2');
+        color: color('grey','darken-3');
         i {
-            color: color('grey','darken-2');
+            color: color('grey','darken-3');
         }
     }
 }
