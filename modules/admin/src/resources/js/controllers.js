@@ -516,6 +516,11 @@
 		
 		$scope.moduleId = $state.params.moduleId;
 		
+		$scope.loadDashboard = function() {
+			$scope.currentItem = null;
+			return $state.go('default', { 'moduleId' : $scope.moduleId});
+		}
+		
 		$scope.items = [];
 		
 		$scope.itemRoutes = [];
@@ -550,12 +555,12 @@
 		
 		$scope.resolveCurrentItem = function() {
 			if (!$scope.currentItem) {
-				if ($state.current.name == 'default.route') {
+				if ($state.current.name == 'default.route' || $state.current.name == 'default.route.detail') {
 					var params = [$stateParams.moduleRouteId, $stateParams.controllerId, $stateParams.actionId];
 					var route = params.join("-");
-					
 					if ($scope.itemRoutes.indexOf(route)) {
 						$scope.currentItem = $scope.itemRoutes[route];
+						$scope.currentItem.route = route;
 					}
 				}
 			}
@@ -579,9 +584,6 @@
 				}
 				$scope.resolveCurrentItem();
 			})
-			.error(function(data) {
-				console.log('error', data);
-			});
 		};
 		
 		$scope.$on('topMenuClick', function(e) {

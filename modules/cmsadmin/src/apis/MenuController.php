@@ -39,7 +39,7 @@ class MenuController extends \admin\base\RestController
 
             $data['containers'][] = [
                 'containerInfo' => $container,
-                'items' => self::$_permissionItemData[$container->id],
+                'items' => isset(self::$_permissionItemData[$container->id]) ? self::$_permissionItemData[$container->id] : [],
             ];
         }
         // collect group informations
