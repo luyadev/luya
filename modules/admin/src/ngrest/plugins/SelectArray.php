@@ -30,8 +30,8 @@ class SelectArray extends \admin\ngrest\plugins\Select
     public function getData()
     {
         $cleandata = [
-            ['value' => 0,'label' => \admin\Module::t('ngrest_select_no_selection')],
-            ['value' => null, 'label' => "- - - - - - - - - - - - - - - -"],
+            //['value' => 0,'label' => \admin\Module::t('ngrest_select_no_selection')],
+            //['value' => null, 'label' => "- - - - - - - - - - - - - - - -"],
         ];
          
         foreach ($this->_data as $key => $value) {

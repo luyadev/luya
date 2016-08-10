@@ -35,6 +35,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - `#905` Added ability to inject custom ngrest plugin for an appliation specific desinged approach.
 - `#930` Added ability to generate email links in TagParser.
 - `#935` Added ability to store settings inside the user profile.
+- `#947` Added chosen plugin in order to replace native selects.
 
 
 1.0.0-beta7 (20.06.2016)

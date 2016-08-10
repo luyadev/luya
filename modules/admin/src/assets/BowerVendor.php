@@ -39,6 +39,7 @@ class BowerVendor extends \luya\web\Asset
 
     public $css = [
         // 'angular-datepicker/datepicker.min.css', // Moved to scss
+        'angular-chosen/chosen.min.css',
     ];
 
     public $js = [
@@ -66,5 +67,6 @@ class BowerVendor extends \luya\web\Asset
 
         'angular-filter.min.js',
         'angular-datepicker/datepicker.min.js',
+        'angular-chosen/angular-chosen.min.js',
     ];
 }
