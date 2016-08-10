@@ -18,56 +18,31 @@
     <div class="luya-container__main">
         <div class="row">
             <div class="col s12" ui-view>
-                <div class="row">   
-
-                    <div class="col s12">
-
-                        <div class="log">
-                            <div class="log__day" ng-repeat="item in dashboard" ng-controller="DashboardController" ng-init="logItemOpen = $first">
-                                <div class="log__day-header">
-                                    <i class="material-icons">event</i>
-                                    <i class="log__day-toggler material-icons" ng-hide="logItemOpen" ng-click="logItemOpen = true">add</i>
-                                    <i class="log__day-toggler material-icons" ng-hide="!logItemOpen" ng-click="logItemOpen = false">remove</i>
-                                    <span>{{item.day * 1000 | date:"EEEE, dd.MM.yyyy"}}</span>
-                                </div>
-
-                                <div class="log__entries" ng-hide="!logItemOpen">
-
-                                    <div ng-repeat="(key, log) in item.items" ng-init="
-                                        userChanged = item.items[key - 1] == null || (item.items[key - 1] != null && item.items[key - 1].name != log.name);
-                                        iconChanged = item.items[key - 1] == null || (item.items[key - 1] != null && item.items[key - 1].icon != log.icon);
-                                    ">
-                                        <div class="log__entry" style="z-index: {{item.items.length - key}}" ng-class="{ 'log__entry--first-of-group' : userChanged || iconChanged }">
-
-                                            <!-- Show if user or icon changed -->
-                                            <div class="log__entry-header" ng-show="userChanged || iconChanged">
-                                                <i class="material-icons">{{log.icon}}</i>
-                                            </div>
-
-                                            <div class="log__entry-body">
-                                                <small ng-show="userChanged || iconChanged" class="log__user">
-                                                    <i class="material-icons">person</i>
-                                                    {{ log.name }}
-                                                </small>
-                                                <p>
-                                                    <small class="log__time">{{ log.timestamp * 1000 | date:"HH:mm" }} Uhr</small>
-                                                    <span class="log__info">
-                                                        {{log.alias}}
-                                                        <span ng-if="log.is_update == 1">bearbeitet.</span>
-                                                        <span ng-if="log.is_insert == 1">hinzugefügt.</span>
-                                                    </span>
-                                                </p>
-                                            </div>
+                <div class="editlog">
+                    <div class="row" ng-repeat="item in dashboard" ng-controller="DashboardController">
+                        <div class="col s12">
+                            <div class="editlog__collapsible z-depth-1">
+                                <div class="editlog__collapsible-header"> <i class="material-icons">today</i> {{item.day * 1000 | date:"EEEE, dd. MMMM"}}</div>
+                                <div class="editlog__collapsible-body">
+                                    <div class="row editlog__collapsible-body-item " ng-repeat="(key, log) in item.items">
+                                        <div class="col s6 m3 collapsible-body-item-time truncate">
+                                            <span class="btn-floating green small" ng-if="log.is_insert == 1">
+                                                <i class="material-icons editlog__icon">note_add</i>
+                                            </span>
+                                            <span class="btn-floating orange small" ng-if="log.is_update == 1">
+                                                <i class="material-icons editlog__icon">create</i>
+                                            </span>
+                                            <span>{{log.timestamp * 1000 | date:"HH:mm"}}</span>
+                                        </div>
+                                        <div class="col s6 m3">{{ log.name }}</div>
+                                        <div class="col s12 m6 truncate">
+                                            <span compile-html ng-bind-html="log.message | trustAsUnsafe"></span>
                                         </div>
                                     </div>
-
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>

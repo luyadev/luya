@@ -3,6 +3,7 @@
 namespace admin\apis;
 
 use Yii;
+use admin\Module;
 
 /**
  * Admin Menu API, provides all menu items and dashabord informations for a node or the entire system.
@@ -37,7 +38,7 @@ class MenuController extends \admin\base\RestController
 
         $log = [];
         foreach ($accessList as $access) {
-            $data = (new \yii\db\Query())->select(['timestamp_create', 'user_id', 'admin_ngrest_log.id', 'is_update', 'is_insert', 'admin_user.firstname', 'admin_user.lastname'])->from('admin_ngrest_log')->leftJoin('admin_user', 'admin_ngrest_log.user_id = admin_user.id')->orderBy('timestamp_create DESC')->where('api=:api and user_id!=0', [':api' => $access['permssionApiEndpoint']])->all();
+            $data = (new \yii\db\Query())->select(['timestamp_create', 'user_id', 'admin_ngrest_log.id', 'is_update', 'is_insert', 'admin_user.firstname', 'admin_user.lastname'])->from('admin_ngrest_log')->leftJoin('admin_user', 'admin_ngrest_log.user_id = admin_user.id')->orderBy('timestamp_create DESC')->limit(30)->where('api=:api and user_id!=0', [':api' => $access['permssionApiEndpoint']])->all();
             foreach ($data as $row) {
                 $date = mktime(0, 0, 0, date('n', $row['timestamp_create']), date('j', $row['timestamp_create']), date('Y', $row['timestamp_create']));
                 $log[$date][] = [
@@ -46,6 +47,7 @@ class MenuController extends \admin\base\RestController
                     'is_insert' => $row['is_insert'],
                     'timestamp' => $row['timestamp_create'],
                     'alias' => $access['alias'],
+                    'message' => ($row['is_update']) ? Module::t('dashboard_log_message_edit', ['container' => $access['alias']]) : Module::t('dashboard_log_message_add', ['container' => $access['alias']]),
                     'icon' => $access['icon'],
                 ];
             }

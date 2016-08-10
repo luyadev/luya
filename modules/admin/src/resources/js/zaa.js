@@ -113,7 +113,7 @@ function typeCastValue(value) {
 	
 	/**
 	 * Controller: $scope.content = $sce.trustAsHtml(response.data);
-	 * Template: <div compile-html ng-bind-html="content"></div>
+	 * Template: <div compile-html ng-bind-html="content | trustAsUnsafe"></div>
 	 */
 	zaa.directive("compileHtml", function($compile, $parse) {
 		return {
@@ -127,20 +127,11 @@ function typeCastValue(value) {
 		};
 	});
 	
-	zaa.directive("ngConfirmClick", function() {
-	     return {
-	         link: function (scope, element, attr) {
-	             var msg = attr.ngConfirmClick || "Are you sure?";
-	             var clickAction = attr.confirmedClick;
-	             element.bind("click",function (event) {
-	                 if ( window.confirm(msg) ) {
-	                     scope.$eval(clickAction)
-	                 }
-	             });
-	         }
-	     };
-	});
-	
+	/**
+	 * Usage:
+	 * 
+	 * <div zaa-esc="methodClosesThisDiv()" />
+	 */
 	zaa.directive("zaaEsc", function() {
 		return function(scope, element, attrs) {
 			$(document).on("keyup", function(e) {

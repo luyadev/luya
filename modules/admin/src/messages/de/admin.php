@@ -165,5 +165,6 @@ return [
     'aws_tag_add' => 'Hinzufügen',
     'aws_tag_search' => 'Einträge durchsuchen',
     'aws_tag_list' => 'Liste aller Einträge',
-
+    'dashboard_log_message_add' => 'Einen Datensatz zu <b>{container}</b> hinzugefügt.',
+    'dashboard_log_message_edit' => 'Einen Datensatz in <b>{container}</b> bearbeitet.',
 ];
