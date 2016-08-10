@@ -56,6 +56,7 @@ There are several types you can use instead `zaa-text` the most of them are self
 | zaa-password  | create a input password field which hides the input value behind * signs
 | zaa-textarea          | create a multirow input element known as textarea
 | zaa-number | create a numerics values
+| zaa-link | creates a link field for internal and external URLs
 | zaa-wysiwyg | create a small wysiwg editor
 | zaa-select        | create a select dropdown with options based on the options parameter. The Options item must contain a value and label key
 | zaa-datetime | creates an integer value of datetime
