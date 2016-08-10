@@ -1,7 +1,7 @@
 
 <script type="text/ng-template" id="createform.html">
     <form ng-switch on="data.nav_item_type">
-        
+
 
         <div class="row">
             <div class="input input--radios col s12">
@@ -35,7 +35,7 @@
                 </div>
             </div>
         <div class="row">
-        </div>    
+        </div>
             <div class="input input--text col s12">
                 <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_alias'); ?></label>
                 <div class="input__field-wrapper">
@@ -69,7 +69,7 @@
                 </div>
             </div>
         </div>
-        
+
 <hr style="margin:50px 0px; background-color:#F0F0F0; color:#F0F0F0; height:1px; border:0px;" />
 
         <div ng-switch-when="1">
@@ -334,36 +334,44 @@
 
         <div class="col s12">
             <div ui-view>
-                <div class="card" style="margin:20px;">
+                <div class="editlog">
                     <div class="row">
-                    <?php $i = 0; foreach ($groups as $day => $data):?>
-                    <div class="col s12">
-                    <h3><?= strftime("%A, %e. %B", $day); ?></h3>
-                    <table class="table highlight bordered" style="border:1px solid #F0F0F0;">
-                    <?php foreach ($data as $log): ?>
-                        <tr>
-                            <td><?= strftime("%H:%M", $log->timestamp); ?></td>
-                            <td>
-                                <?php if ($log->is_insertion): ?>
-                                    <i class="material-icons">add</i>
-                                <?php elseif ($log->is_update): ?>
-                                    <i class="material-icons">create</i>
-                                <?php elseif ($log->is_deletion): ?>
-                                     <i class="material-icons">delete</i>
-                                <?php endif; ?>
-                            </td>
-                            <td><?= $log->user->firstname; ?> <?= $log->user->lastname; ?></td>
-                            <td><span title="<?= $log->message; ?> | <?= $log->data_json; ?>" alt="<?= $log->message; ?> | <?= $log->data_json; ?>"><?= $log->action; ?></span></td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </table>
-                    </div>
-                    <?php endforeach; ?>
+                        <?php $i = 0; foreach ($groups as $day => $data):?>
+                            <div class="col s12">
+                                <div class="editlog__collapsible z-depth-1">
+                                    <div class="editlog__collapsible-header"> <i class="material-icons">today</i> <?= strftime("%A, %e. %B", $day); ?></div>
+                                    <div class="editlog__collapsible-body">
+                                        <?php foreach ($data as $log): ?>
+                                        <div class="row editlog__collapsible-body-item ">
+                                            <div class="col s6 m3 collapsible-body-item-time truncate">
+                                                <?php if ($log->is_insertion): ?>
+                                                <span class="btn-floating green small">
+                                                    <i class="material-icons editlog__icon">note_add</i>
+                                                </span>
+                                                <?php elseif ($log->is_update): ?>
+                                                <span class="btn-floating orange small">
+                                                    <i class="material-icons editlog__icon">create</i>
+                                                </span>
+                                                <?php elseif ($log->is_deletion): ?>
+                                                <span class="btn-floating red small">
+                                                     <i class="material-icons editlog__icon small">delete</i>
+                                                </span>
+                                                <?php endif; ?>
+                                                <span><?= strftime("%H:%M", $log->timestamp); ?> Uhr</span>
+                                            </div>
+                                            <div class="col s6 m3"><?= $log->user->firstname; ?> <?= $log->user->lastname; ?></div>
+                                            <div class="col s12 m6 truncate">
+                                                <span title="<?= $log->message; ?> | <?= $log->data_json; ?>" alt="<?= $log->message; ?> | <?= $log->data_json; ?>"><?= $log->action; ?></span></div>
+                                        </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
     <!-- /MAIN -->
 
@@ -374,4 +382,3 @@
         </div>
     </div>
 </div>
-

@@ -19,13 +19,15 @@
      * 		page:			Styles for the page in the cms admin
      *		treeview:		Styles for the treeview
  	 */
-    @import 'components/accordion';
-    @import 'components/block';
-    @import 'components/blockholder';
-    @import 'components/cms';
-    @import 'components/collapsible';
-    @import 'components/liveedit';
-    @import 'components/page';
+
+	@import "components/accordion";
+	@import "components/block";
+	@import "components/blockholder";
+	@import "components/cms";
+	@import "components/collapsible";
+    @import "components/editlog";
+	@import "components/liveedit";
+	@import "components/page";
     @import 'components/permissions';
-    @import 'components/treeview';
+	@import "components/treeview";
 }
