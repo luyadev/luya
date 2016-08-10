@@ -1,26 +1,22 @@
-CMS Blocks
-==============
+# CMS Blocks
 
-> use `./vendor/bin/luya block/create` to build blocks with a cli wizzard.
+What are Blocks? Blocks are elements used in the CMS Module to display and configure data. Blocks are dropped into the placeholders of an [CMS Layout](app-cmslayouts.md). An easy example of a block could be a paragraph tag where the user can add the content. LUYA CMS Modules ships with some default blocks, but you can always create your own elements.
 
-What are Blocks? Blocks are elements used in the CMS Module to display and configure data. Blocks are dropped into the placeholders of an [cmslayout](app-cmslayouts.md). An easy example of a block could be a pargraph tag where the user can add the content. LUYA CMS Modules ships with some default blocks, but you can always create your own elements.
+## Create a new Block
 
-Create Block
---------------
+> use `./vendor/bin/luya block/create` console command to generate a block.
 
 You can add blocks to your project application or you can also add them to a module, in any case the folder name where the blocks are stored must named as **blocks**. Additionaly blocks should have the suffix `Block`. For example we build a block `TextTransformBlock` and store it in `app/blocks` or `app/modules/yourmodule/blocks`.
 
 > In 1.0.0-beta8 the new *PHP BLOCKS* are introduced. This allows you to use PHP Views instead of TWIG Templates. In order to use The new PHPBlocks you can extend the block from `cmsadmin\base\PhpBlock`. PhpBlocks does automatically requires a view file and the `twigAdmin()` is replaced by `admin()` method.
 
-### Example
-
-An example text-block who uppercases all letters on output:
+This is what the `TextTransformBlock` could looke like in your code:
 
 ```php
 <?php
 namespace app\blocks;
 
-class TextTransformBlock extends \cmsadmin\base\Block
+class TextTransformBlock extends \cmsadmin\base\PhpBlock
 {
     public function icon()
     {
@@ -47,30 +43,40 @@ class TextTransformBlock extends \cmsadmin\base\Block
             'textTransformed' => strtoupper($this->getVarValue('mytext')),
         ];
     }
-    
-    public function twigFrontend()
-    {
-        return '<p>Original Input: {{vars.mytext}}</p><p>Input in Uppercase: {{extras.textTransformed}}';
-    }
 
-    public function twigAdmin()
+    public function admin()
     {
         return 'Administrations View: {{ vars.mytext }}';
     }
 }
 ```
 
-> Instead of concat the string in `twigFrontend()` you can also use `$this->render()`, this will try to find the view file for this block inside the views folder, named based on a naming convention.
+As we have switched to PHPBlock by default (in beta8) you now have to create also a view file, which is located in the view folder of your project: `app/views/blocks/`. The view file itself does have the same name is the class name of your block: `TextTransformBlock.php`. In your example from above the view file could look like this:
 
-### Register the block
+```php
+<p>Uppercase Text: <?= $extras['textTransformed'];?></p>
+<p>Original Text: <?= $vars['mytext']; ?></p>
+```
 
-After storing the Block in your project you have to *Import* block into your system. Open the Terminal and run the command:
+#### Register and import
+
+After creating the Block in your project you have to *Import* block into your system. The reason behind the import process is to avoid rely on database structure and to work with php files you can also check into version controller system. Run the [Import Command](luya-console.md):
 
 ```sh
 ./vendor/bin/luya import
 ```
 
-This will add or update the block into the cms system. If you renamed the block, the old block will be deleted.
+This will add or update the block into the cms system. If you rename the block or remove a block from the filesytem, the old block will be deleted from your database.
+
+#### Methods in detail
+
+|Name|Return|Description
+|----|--------|------------
+|icon|string|Return the [Materialize-Icon](https://design.google.com/icons/) name
+|name|string|Return the Humand Readable name for the administration area.
+|config|array|Define all config variables there user can input in the administration area `cfgs`, `vars` and `placeholders`. Read more about [CMS Block Config and different input types](app-block-types.md).
+|extraVars|array|Define additional variables to your template, so you can reuse them inside your view with `$extras.VAR_NAME`.
+|admin|string|Returns the [Twig.js](https://github.com/justjohn/twig.js/wiki) template to be display in the administration area.
 
 ### Module blocks
 
@@ -87,19 +93,7 @@ class TestBlock extends \cmsadmin\base\Block
 
 Sometimes you just want to change the default behavior/template of systems blocks, you can always override all blocks provided from the system by adding a twig template with the name of the block in your project application views folder. Assuming you want to override the **template** of the `TextBlock` which is provided by default from the LUYA cms core. To do so go into your application view folder `views/blocks` and add a twig template with the name of the block, in this case `TextBlock.twig` now the system will pick and render this template first. In addition to this method you could also make a custom block and extend from the existing Text block. `class MyTextBlock extends \cmsadmin\blocks\TextBlock` and override the `twigFrontend()` method so you have your own output.
 
-### Methods explained
-
-|Name |Return |Description
-| ---- | --------| ------------
-|icon |string |Return the [Materialize-Icon](https://design.google.com/icons/) name
-|name |string |Return the Humand Readable name for the administration area.
-|config |array |Define all config variables there user can input in the administration area `cfgs`, `vars` and `placeholders`. Read more about [CMS Block Config and different input types](app-block-types.md).
-|extraVars |array |Define additional variables to your template, so you can reuse them inside your view with `extras.VAR_NAME`.
-|twigFrontend |string |Returns the [Twig](http://twig.sensiolabs.org/) template to display in the frontend.
-|twigAdmin |string |Returns the [Twig.js](https://github.com/justjohn/twig.js/wiki) template to be display in the administration area.
-
-Caching
--------
+## Caching
 
 To speed up your system you can enable the cache for each block, to enable the caching you have to define a [caching component](http://www.yiiframework.com/doc-2.0/guide-caching-data.html#cache-components) in your config. By default block caching is disabled for all blocks.
 
@@ -118,8 +112,7 @@ public $cacheExpiration = 60;
 
 You can enable block caching for a block event if the caching component is not registered, so you can redistribute blocks and the behavior of them.
 
-Env option
-------------
+## Env option
 
 Each block is placed in an Environemnt (Env) you can access those informations inside your block logic:
 
@@ -140,7 +133,7 @@ the following keys are available:
 + *isPrevEqual* Returns whether the previous item is of the same origin (block type, like text block) as the current.
 + *isNextEqual* Returns whether the next item is of the same origin (block type, like text block) as the current.
 
-### Property
+#### Properties from CMS Page
 
 If there are any CMS properties defined you can access them like this:
 
@@ -150,8 +143,7 @@ $propObject = $this->getEnvOption('pageObject')->nav->getProperty('myCustomPrope
 
 If there is a property defined you will get the property object otherwhise returning `false`.
 
-Register assets
-----------------
+## Using assets in Blocks
 
 Blocks can have [Assets (CSS&JS)](app-assets.md). To register an asset use `public $assets = []` and define all assets you want to auto register. Assets will only regsitered in frontend context and are **not available** in the administration area.
 
@@ -165,8 +157,7 @@ class TestBlock extends \cmsadmin\base\Block
 }
 ```
 
-Ajax in blocks
----------------
+## Ajax Requests in Block
 
 To implement ajax inside a block the following concept is used:
 
@@ -190,23 +181,19 @@ $this->createAjaxLink('HellWorld', ['zeit' => time()]);
 
 You could store this created link from above inside your extras vars and pass it to the javascript.
 
-### Callback parameters
+#### Callback parameters
 
 You can pass aditional values to the callback by using the post ajax method and collect them in your callback via Yii::$app->request->post(). The get parameters are used to resolve the callback.
 
 
-Block Groups
-============
-
-> since 1.0.0-beta6
+# Block Groups
 
 We have added the ability to manage the block groups via classes, so you can add new groups on your blocks can depend on a block group, when you run the import command luya will create the folders (block groups) and add/update the blocks into the provided groups.
 
 To add new blockgroups create folder in your `@app` namespace, or inside a module with the name `blockgroups`, to add a folder create class like this `app\blockgroups\MySuperGroup`:
 
-```
+```php
 <?php
-
 namespace app\blockgroups;
 
 class MySuperGroup extends \cmsadmin\base\BlockGroup
@@ -225,7 +212,7 @@ class MySuperGroup extends \cmsadmin\base\BlockGroup
 
 the folder will be created on import. Now blocks can belong to this folder, to do so override the `getBlockGroup` method of your block:
 
-```
+```php
 public function getBlockGroup()
 {
     return \app\blockgroups\MySuperGroup::className();
