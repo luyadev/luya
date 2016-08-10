@@ -1,27 +1,26 @@
-
-
 .editlog {
     margin-top: 10px;
+
+    span {
+        display: inline-block;
+        vertical-align: middle;
+    }
 
     .btn-floating {
         margin-right: 1rem;
         box-shadow: none !important;
         cursor: default !important;
-        &.small {
-            line-height: 23px;
-
-            width: 23px;
-            height: 23px;
-        }
+        width: 30px;
+        height: 30px;
+        padding: 0;
 
         i {
-            line-height: 23px;
+            font-size: 16px;
+            line-height: 30px;
+            height: 30px;
+            padding-left: 1px;
         }
     }
-}
-
-.editlog__icon {
-    font-size: 14px;
 }
 
 .editlog__collapsible {
@@ -49,15 +48,20 @@
     border-bottom: 1px solid #ddd;
     background-color: #fff;
 
+    i, span {
+        vertical-align: middle;
+    }
+
     i {
         font-size: 1.6rem;
         line-height: 3rem;
+        height: 3rem;
 
         display: block;
         float: left;
 
         width: 2rem;
-        margin-right: 1rem;
+        margin: 0 1.1rem 0 4px;
 
         transition: color .25s ease-in-out;
         text-align: center;
@@ -66,6 +70,7 @@
     }
     &:hover {
         color: color('grey','darken-3');
+
         i {
             color: color('grey','darken-3');
         }
@@ -76,7 +81,6 @@
     box-sizing: border-box;
 
     border-bottom: 1px solid #ddd;
-    background-color: color('grey', 'base');
 }
 
 
@@ -85,6 +89,13 @@
 
     margin-bottom: 5px;
     padding: 5px;
+
+    &:nth-child(even) {
+        background-color: color('shades', 'white');
+    }
+    &:last-child {
+        margin-bottom: 0;
+    }
 }
 
 .editlog__collapsible-body-item-time {

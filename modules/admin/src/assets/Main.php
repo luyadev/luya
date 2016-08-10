@@ -4,7 +4,7 @@ namespace admin\assets;
 
 /**
  * Main Asset contains all administration area depending files and should be a dependency for all other assets.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Main extends \luya\web\Asset
@@ -28,7 +28,7 @@ class Main extends \luya\web\Asset
         'admin\assets\Jquery',
         'admin\assets\BowerVendor',
     ];
-    
+
     /*
     public $publishOptions = [
         'only' => [

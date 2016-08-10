@@ -124,11 +124,11 @@ return [
     'js_dir_manager_rm_file_confirm' => 'Do you really want to delete this file?',
     'js_dir_manager_rm_file_ok' => 'The file was deleted successfully.',
     'js_zaa_server_proccess' => 'The server is processing your data, please hang on.',
-    
+
 // added translation in 1.0.0-beta4:
 
     'ngrest_crud_empty_row' => 'No data has been added to this table yet.',
-    
+
 // added translation in 1.0.0-beta5:
 
     'aws_gallery_empty' => 'Please select some images on the left to add them into the gallery album.',
@@ -142,7 +142,7 @@ return [
     'layout_debug_caching' => 'Caching',
     'debug_state_on' => 'On',
     'debug_state_off' => 'Off',
-    
+
 // added translations in 1.0.0-beta7
 
     'login_securetoken_mail_subject' => 'LUYA Security code',
@@ -166,5 +166,5 @@ return [
     'aws_tag_search' => 'Search entries',
     'aws_tag_list' => 'List of all entries',
     'dashboard_log_message_add' => 'Added a new row to <b>{container}</b>.',
-    'dashboard_log_message_edit' => 'Updatet an existing row in <b>{container}</b>.',
+    'dashboard_log_message_edit' => 'Updated an existing row in <b>{container}</b>.',
 ];

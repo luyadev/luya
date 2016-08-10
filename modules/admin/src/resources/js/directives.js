@@ -399,7 +399,12 @@
                 });
             },
             template: function() {
-                return '<div class="input input--select" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><select name="{{name}}" id="{{id}}" class="input__field browser-default" chosen allow-single-deselect="true" width="\'400px\'" placeholder-text-single="\''+i18n['ngrest_select_no_selection']+ '\'" ng-options="item.value as item.label for item in options" ng-model="model"></select></div>';
+                return '<div class="input input--select" ng-class="{\'input--hide-label\': i18n}">' +
+                            '<label class="input__label" for="{{id}}">{{label}}</label>' +
+                            '<div class="input__select-wrapper">' +
+                                '<select name="{{name}}" id="{{id}}" class="input__field browser-default" chosen allow-single-deselect="true" width="\'100%\'" placeholder-text-single="\'' + i18n['ngrest_select_no_selection']+ '\'" ng-options="item.value as item.label for item in options" ng-model="model"></select>' +
+                            '</div>' +
+                        '</div>';
             }
         }
     });
@@ -1031,7 +1036,7 @@
                 if ($scope.model == undefined) {
                     $scope.model = [];
                 }
-                
+
                 $scope.add = function() {
                 	if ($scope.model == null || $scope.model == '' || $scope.model == undefined) {
                 		$scope.model = [];
@@ -1604,11 +1609,11 @@
                 $scope.filesDataReload = function() {
                     return ServiceFilesData.load(true);
                 }
-                
-                // ServiceFolderId 
-                
+
+                // ServiceFolderId
+
                 $scope.currentFolderId = ServiceFoldersDirecotryId.folderId;
-				
+
                 $scope.$on('FoldersDirectoryId', function(event, folderId) {
                 	$scope.currentFolderId = folderId;
                 });

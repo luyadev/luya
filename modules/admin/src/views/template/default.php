@@ -22,7 +22,7 @@
                     <div class="row" ng-repeat="item in dashboard" ng-controller="DashboardController">
                         <div class="col s12">
                             <div class="editlog__collapsible z-depth-1">
-                                <div class="editlog__collapsible-header"> <i class="material-icons">today</i> {{item.day * 1000 | date:"EEEE, dd. MMMM"}}</div>
+                                <div class="editlog__collapsible-header"> <i class="material-icons">today</i><span>{{item.day * 1000 | date:"EEEE, dd. MMMM"}}</span></div>
                                 <div class="editlog__collapsible-body">
                                     <div class="row editlog__collapsible-body-item " ng-repeat="(key, log) in item.items">
                                         <div class="col s6 m3 collapsible-body-item-time truncate">
@@ -34,7 +34,8 @@
                                             </span>
                                             <span>{{log.timestamp * 1000 | date:"HH:mm"}}</span>
                                         </div>
-                                        <div class="col s6 m3">{{ log.name }}</div>
+                                        <div class="col s6 m3">
+                                            <span>{{ log.name }}</span></div>
                                         <div class="col s12 m6 truncate">
                                             <span compile-html ng-bind-html="log.message | trustAsUnsafe"></span>
                                         </div>

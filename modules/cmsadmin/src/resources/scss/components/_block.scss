@@ -6,7 +6,6 @@
 	padding: 0;
 	margin: 10px 0;
 	position: relative;
-	overflow: hidden;
 	transition: 0.5s ease opacity;
 	border-top: none;
 	border-left: 0 solid transparent;
@@ -18,7 +17,7 @@
 	&.block--edit .block__toolbar,
 	&.block--config .block__toolbar,
 	&.block--is-container > .block__toolbar {
-		transform: translateY(0%);
+		display: block;
 	}
 	&:last-of-type {
 		margin-bottom: 0;
@@ -45,13 +44,11 @@
 
 	&.block--is-container {
 		padding-top: 32px;
-		// transition: 0.25s ease border-color;
 	}
 }
 
 .page--drag-active .block--is-container {
 	border-color: $grey--darken !important;
-	// border-color: red !important;
 }
 
 .block__toolbar {
@@ -77,12 +74,10 @@
 		cursor: pointer;
 	}
 
-	// Hover animation
-	transform: translateY(-100%);
+	display: none;
 }
 
 .block__toolbar__icon {
-    // color: $block__toolbar__icon;
     transition: 0.2s ease color;
 
     &:hover {
@@ -120,8 +115,7 @@
 }
 
 .block__body {
-	opacity: 1;
-	// transition: 0.25s 0.25s ease opacity, 0.25s 0.25s ease height, 0.3s ease padding;
+	display: block;
 	height: 100%;
 	padding: 20px 10px;
 	cursor: pointer;
@@ -130,21 +124,11 @@
 	display: none;
 }
 .block--edit .block__body {
-	opacity: 0;
-	padding: 0;
-	margin: 0;
-	height: 0;
-	overflow: hidden;
-	// transition: 0.25s ease opacity, 0.25s ease height, 0.5s ease padding;
+	display: none;
 }
 
 .block__edit {
-	opacity: 0;
-	padding: 0;
-	margin: 0;
-	height: 0;
-	overflow: hidden;
-	// transition: 0.25s ease opacity, 0.25s ease height, 0.3s ease padding;
+	display: none;
 
 	.collapsible {
 		margin-top: 30px;
@@ -155,30 +139,27 @@
 	padding-right: 40px; // This padding is needed to give a little bit of space if there is a "help" icon
 }
 .block--edit .block__edit {
-	opacity: 1;
+	display: block;
 	height: 100%;
-	// transition: 0.25s 0.25s ease opacity, 0.25s 0.25s ease height, 1s ease padding;
 	padding: ($block__toolbar--height + 5px) 10px 0 10px;
+
 	.block__edit-content {
 		display: block;
 	}
 }
 
 .block--config .block__body {
-	opacity: 0;
-	padding: 0;
-	margin: 0;
-	height: 0;
-	overflow: hidden;
+	display: none;
+
 	.collapsible {
 		margin-top: 30px;
 	}
 }
 .block--config .block__edit {
-	opacity: 1;
+	display: block;
 	height: 100%;
-	// transition: 0.25s 0.25s ease opacity, 0.25s 0.25s ease height, 1s ease padding;
 	padding: ($block__toolbar--height + 5px) 10px 0 10px;
+
 	.block__config-content {
 		display: block;
 	}
@@ -222,23 +203,3 @@
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

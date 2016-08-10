@@ -249,6 +249,18 @@ input[type='checkbox']:checked + .input__label:before {
     border-radius: 0;
 }
 
+.input__select-wrapper {
+    display: inline-block;
+    max-width: 700px;
+    width: calc(100% - (#{$input__label-width} + 5px));
+    padding-left: 5px;
+
+    .input__field {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
 // Custom behavior for textareas
 .input--textarea .input__field {
     height: 100px;

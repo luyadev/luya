@@ -339,22 +339,24 @@
                         <?php $i = 0; foreach ($groups as $day => $data):?>
                             <div class="col s12">
                                 <div class="editlog__collapsible z-depth-1">
-                                    <div class="editlog__collapsible-header"> <i class="material-icons">today</i> <?= strftime("%A, %e. %B", $day); ?></div>
+                                    <div class="editlog__collapsible-header">
+                                        <i class="material-icons">today</i><span><?= strftime("%A, %e. %B", $day); ?></span>
+                                    </div>
                                     <div class="editlog__collapsible-body">
                                         <?php foreach ($data as $log): ?>
                                         <div class="row editlog__collapsible-body-item ">
                                             <div class="col s6 m3 collapsible-body-item-time truncate">
                                                 <?php if ($log->is_insertion): ?>
-                                                <span class="btn-floating green small">
-                                                    <i class="material-icons editlog__icon">note_add</i>
+                                                <span class="btn-floating green">
+                                                    <i class="material-icons">note_add</i>
                                                 </span>
                                                 <?php elseif ($log->is_update): ?>
-                                                <span class="btn-floating orange small">
-                                                    <i class="material-icons editlog__icon">create</i>
+                                                <span class="btn-floating orange">
+                                                    <i class="material-icons">create</i>
                                                 </span>
                                                 <?php elseif ($log->is_deletion): ?>
-                                                <span class="btn-floating red small">
-                                                     <i class="material-icons editlog__icon small">delete</i>
+                                                <span class="btn-floating red">
+                                                     <i class="material-icons">delete</i>
                                                 </span>
                                                 <?php endif; ?>
                                                 <span><?= strftime("%H:%M", $log->timestamp); ?> Uhr</span>
