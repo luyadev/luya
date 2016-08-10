@@ -202,16 +202,16 @@ class CompositionTest extends \luyatests\LuyaWebTestCase
     
     public function testLocalisation()
     {
-    	$request = new Request();
-    	$comp = new Composition($request);
-    	
-    	// default
-    	$this->assertEquals('en_EN', $comp->getLocale());
-    	
-    	$comp->locales = ['de' => 'de_CH.utf'];
-    	
-    	$comp->setKey('langShortCode', 'de');
-    	
-    	$this->assertEquals('de_CH.utf', $comp->getLocale());
+        $request = new Request();
+        $comp = new Composition($request);
+        
+        // default
+        $this->assertEquals('en_EN', $comp->getLocale());
+        
+        $comp->locales = ['de' => 'de_CH.utf'];
+        
+        $comp->setKey('langShortCode', 'de');
+        
+        $this->assertEquals('de_CH.utf', $comp->getLocale());
     }
 }
