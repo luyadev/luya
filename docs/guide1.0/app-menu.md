@@ -46,7 +46,7 @@ foreach(Yii::$app->menu->find()->where(['parent_nav_id' => 0])->all() as $itemOb
 }
 ```
 
-The example obe would look in a sql expression somewhat like this `WHERE parent_nav_id = 0`.
+The example above would look in a sql expression somewhat like this `WHERE parent_nav_id = 0`.
 
 ```
 foreach(Yii::$app->menu->find()->where(['parent_nav_id' => 0, 'is_active' => 1])->all() as $itemObject) {
