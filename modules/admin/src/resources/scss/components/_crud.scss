@@ -25,15 +25,30 @@
 
 .crud__flag {
     line-height: 1em;
-    margin-top: -0.5em;
     position: absolute;
     right: 11px;
-    top: 50%;
+    top: 11px;
     z-index: 50;
+    opacity: .5;
 
     zaa-sort-relation-array + & {
         right: 4px;
         top: .5em;
+    }
+
+    zaa-select + & {
+        top: 5px;
+    }
+
+    zaa-text + &,
+    zaa-file-upload + &,
+    zaa-image-upload + &,
+    zaa-date + &,
+    zaa-datetime + &,
+    zaa-decimal + &,
+    zaa-number + &,
+    zaa-password + & {
+        top: 15px;
     }
 }
 

@@ -178,6 +178,10 @@ input[type='checkbox']:checked + .input__label:before {
 
     padding-right: 50px;
 
+    .i18n__fields & {
+        padding-right: 100px;
+    }
+
     datepicker {
         position: static;
     }
