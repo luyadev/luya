@@ -45,7 +45,7 @@ We are always looking for people who share their thoughts, code and problems wit
 #### ROADMAP
 
 + ✓ beta7 release (June 2016)
-+ beta8 release (August 2016) - Last NEW features will be implemented (cms permissions).
++ ✓ beta8 release (August 2016) - Last NEW features will be implemented (cms permissions).
 + rc1 release (unknown) - PHP Code Documentations and Guides updates.
 + rc2 release (unknown) - Moving admin and frontend modules into one repository, remove subsplit process and make modules independent.
 + version 1.0.0 (towards the end of year 2016) - First stable release of LUYA *yay*.
@@ -53,7 +53,7 @@ We are always looking for people who share their thoughts, code and problems wit
 #### Unit Test
 
 1. Create Database (example luya_phpunit)
-2. Insert Database dump from `tests/data/sql/1.0.0-beta7.sql`
+2. Insert Database dump from `tests/data/sql/1.0.0-beta8.sql`
 3. Rename phpunit.xml.dist to phpunit.xml
 4. Change dsn, username and passwort in phpunit.xml
 5. Ensure you have installed current composer packages `composer install` with dev packages.

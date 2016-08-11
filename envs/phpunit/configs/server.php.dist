@@ -13,6 +13,7 @@ return [
         'cms' => 'cms\Module',
         'cmsadmin' => 'cmsadmin\Module',
         'admin' => 'admin\Module',
+        'data' => 'app\modules\data\Module',
     ],
     'components' => [
         'errorHandler' => [
