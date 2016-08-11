@@ -3,7 +3,7 @@ LUYA UPGRADE
 
 This document will help you upgrading from a LUYA Version into another.
 
-1.0.0-beta8 (in progress)
+1.0.0-beta8 (11.08.2016)
 -----------
 
 * [#940](https://github.com/luyadev/luya/issues/940): The `admin\base\Filter` class for all filters requers now a **public static identifier()** method instead of a *none static* method.

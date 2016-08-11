@@ -3,7 +3,7 @@ LUYA CHANGELOG
 
 The changelog contains informations about bug fixes, new features or bc breaking code related to a GitHub issue. In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-1.0.0-beta8 (in progress)
+1.0.0-beta8 (11.08.2016)
 -------------------------
 
 - `#940` **[BC BREAK]** Making filter class method `identifier()` static to allow IDE Automplete usage of filters. 
