@@ -15,7 +15,7 @@ use luya\helpers\ArrayHelper;
  * a config file with custom Luya/Yii configuration must be provided via `$configFile` property. By default luya will try to find
  * the default config `../configs/server.php`.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 abstract class Boot
 {
@@ -26,7 +26,7 @@ abstract class Boot
      *
      * @var string
      */
-    const VERSION = '1.0.0-beta8-dev';
+    const VERSION = '1.0.0-beta8';
     
     /**
      * @var string The path to the config file, which returns an array containing you configuration.
