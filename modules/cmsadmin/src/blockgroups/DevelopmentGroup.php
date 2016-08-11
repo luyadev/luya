@@ -3,6 +3,7 @@
 namespace cmsadmin\blockgroups;
 
 use cmsadmin\base\BlockGroup;
+use cmsadmin\Module;
 
 class DevelopmentGroup extends BlockGroup
 {
@@ -13,6 +14,11 @@ class DevelopmentGroup extends BlockGroup
     
     public function label()
     {
-        return 'Development Elements';
+        return Module::t('block_group_dev_elements');
+    }
+    
+    public function getPosition()
+    {
+        return 100;
     }
 }

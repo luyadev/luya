@@ -265,7 +265,7 @@ return [
     'view_index_create_page_please_choose' => 'Please choose',
     'view_index_sidebar_autopreview' => 'Auto Preview',
     
-    // added translation in 1.0.0-beta8
+// added translation in 1.0.0-beta8
 
     'module_permission_add_new_page' => 'Create new Page',
     'module_permission_update_pages' => 'Page Edit',
@@ -285,4 +285,12 @@ return [
     'log_action_delete_cms_nav' => 'Removed Page <b>{info}</b>',
     'log_action_delete_cms_nav_item_page_block_item' => 'Deleted block <b>{info}</b>',
     'log_action_delete_unkown' => 'Deleted a row',
+    'block_group_dev_elements' => 'Development',
+    'block_group_layout_elements' => 'Layout',
+    'block_group_basic_elements' => 'Basics',
+    'block_group_project_elements' => 'Project',
+    'block_group_favorites' => 'Favorites',
+    'button_create_version' => 'Create Version',
+    'button_update_version' => 'Update Version',
+    'menu_group_item_env_permission' => 'Page Permissions'
 ];

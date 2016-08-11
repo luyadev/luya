@@ -93,7 +93,7 @@ class Module extends \admin\base\Module
             ->nodeRoute(static::t('menu_node_cms'), 'content_copy', 'cmsadmin-default-index', 'cmsadmin/default/index', 'cmsadmin\models\NavItem')
             ->node(static::t('menu_node_cmssettings'), 'settings')
                 ->group(static::t('menu_group_env'))
-                    ->itemRoute("Zugriffs Berechtigungen", "cmsadmin/permission/index", 'gavel')
+                    ->itemRoute(static::t('menu_group_item_env_permission'), "cmsadmin/permission/index", 'gavel')
                     ->itemApi(static::t('menu_group_item_env_container'), 'cmsadmin-navcontainer-index', 'label_outline', 'api-cms-navcontainer')
                     ->itemApi(static::t('menu_group_item_env_layouts'), 'cmsadmin-layout-index', 'view_quilt', 'api-cms-layout')
                 ->group(static::t('menu_group_elements'))

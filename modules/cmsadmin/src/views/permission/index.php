@@ -55,19 +55,14 @@
         $scope.init();
     });
 </script>
-
 <div ng-controller="PermissionController" class="card-panel">
-    <h3>CMS Page Permissions</h3>
-
+    <h3><?= \cmsadmin\Module::t('menu_group_item_env_permission'); ?></h3>
     <div class="permissions">
         <table>
             <thead>
                 <tr>
                     <th>
-                        <select>
-                            <option value="all" selected>Alle Container</option>
-                            <option ng-repeat="container in data.containers" value="{{container.containerInfo.id}}">{{ container.containerInfo.name }}</option>
-                        </select>
+                        
                     </th>
                     <th ng-repeat="group in data.groups">
                         <a class="btn btn-floating green permissions__group-button" ng-if="group.fullPermission"><i class="material-icons">check_circle</i></a>

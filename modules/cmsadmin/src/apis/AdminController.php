@@ -7,6 +7,7 @@ use cmsadmin\models\Layout;
 use cmsadmin\models\Block;
 use cmsadmin\models\BlockGroup;
 use luya\helpers\ArrayHelper;
+use cmsadmin\Module;
 
 /**
  * Admin Api delievers common api tasks like blocks and layouts.
@@ -22,10 +23,16 @@ class AdminController extends \admin\base\RestController
         $groups = [];
         foreach (BlockGroup::find()->asArray()->all() as $group) {
             $blocks = [];
+            $groupPosition = null;
             foreach (Block::find()->where(['group_id' => $group['id']])->all() as $block) {
                 $obj = Block::objectId($block['id'], 0, 'admin');
                 if (!$obj || in_array($obj->className(), Yii::$app->getModule('cmsadmin')->hiddenBlocks)) {
                     continue;
+                }
+                
+                if ($groupPosition == null) {
+                    $groupObject = Yii::createObject($obj->getBlockGroup());
+                    $groupPosition = $groupObject->getPosition();
                 }
                 $blocks[] = [
                     'id' => $block['id'],
@@ -42,6 +49,7 @@ class AdminController extends \admin\base\RestController
             $group['is_fav'] = 0;
             $group['toggle_open'] = (int) Yii::$app->adminuser->identity->setting->get("togglegroup.{$group['id']}", 1);
             $groups[] = [
+                'groupPosition' => $groupPosition,
                 'group' => $group,
                 'blocks' => $blocks,
             ];
@@ -58,9 +66,11 @@ class AdminController extends \admin\base\RestController
                     'toggle_open' => (int) Yii::$app->adminuser->identity->setting->get("togglegroup.99999", 1),
                     'id' => '99999',
                     'is_fav' => 1,
-                    'name' => 'Favorites',
+                    'name' => Module::t('block_group_favorites'),
                     'identifier' => 'favs',
+                    'position' => 0,
                 ],
+                'groupPosition' => 0,
                 'blocks' => $favblocks,
             ]);
         }

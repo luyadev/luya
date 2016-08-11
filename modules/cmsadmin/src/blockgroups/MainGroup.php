@@ -2,8 +2,8 @@
 
 namespace cmsadmin\blockgroups;
 
-use Yii;
 use cmsadmin\base\BlockGroup;
+use cmsadmin\Module;
 
 class MainGroup extends BlockGroup
 {
@@ -14,6 +14,11 @@ class MainGroup extends BlockGroup
     
     public function label()
     {
-        return Yii::t('app', 'Basic Elements');
+        return Module::t('block_group_basic_elements');
+    }
+    
+    public function getPosition()
+    {
+        return 90;
     }
 }

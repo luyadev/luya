@@ -285,4 +285,12 @@ return [
     'log_action_delete_cms_nav' => 'Seite <b>{info}</b> gelöscht',
     'log_action_delete_cms_nav_item_page_block_item' => 'Den Block <b>{info}</b> gelöscht.',
     'log_action_delete_unkown' => 'Einen Datensatz entfernt',
+    'block_group_dev_elements' => 'Entwickler',
+    'block_group_layout_elements' => 'Layouts',
+    'block_group_basic_elements' => 'Standard',
+    'block_group_project_elements' => 'Projekt',
+    'block_group_favorites' => 'Favoriten',
+    'button_create_version' => 'Version erstellen',
+    'button_update_version' => 'Bearbeiten speichern',
+    'menu_group_item_env_permission' => 'Seiten Zugriffsberechtigungen'
 ];

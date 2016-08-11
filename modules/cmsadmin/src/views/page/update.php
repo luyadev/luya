@@ -505,7 +505,7 @@
                                                     <div class="col s12">
                                                         <div class="right">
                                                             <button class="btn" type="submit" ng-click="changeVersionLayout(currentVersionInformation)">
-                                                                <?php echo \admin\Module::t('Update Version'); ?> <i class="material-icons right">check</i>
+                                                                <?php echo \cmsadmin\Module::t('button_update_version'); ?> <i class="material-icons right">check</i>
                                                             </button>
                                                             <button class="btn red" type="button" ng-click="closeEditModal()">
                                                                 <i class="material-icons left">cancel</i> <?php echo \admin\Module::t('button_abort'); ?>
@@ -571,7 +571,7 @@
                                                     <div class="col s12">
                                                         <div class="right">
                                                             <button class="btn" type="submit" ng-click="createNewVersionSubmit(create)">
-                                                                <?php echo \admin\Module::t('Create Version'); ?> <i class="material-icons right">check</i>
+                                                                <?php echo \cmsadmin\Module::t('button_create_version'); ?> <i class="material-icons right">check</i>
                                                             </button>
                                                             <button class="btn red" type="button" ng-click="closeCreateModal()">
                                                                 <i class="material-icons left">cancel</i> <?php echo \admin\Module::t('button_abort'); ?>
@@ -636,7 +636,7 @@
                             <div ng-show="searchQuery.length > 0" ng-click="searchQuery=''"><i class="material-icons">close</i></div>
                         </label>
                     </div>
-                    <div class="blockholder__group" ng-repeat="item in blocksData" ng-class="{'blockholder__group--favorite' : item.group.is_fav}">
+                    <div class="blockholder__group" ng-repeat="item in blocksData | orderBy:'groupPosition'" ng-class="{'blockholder__group--favorite' : item.group.is_fav}">
                         <b class="blockholder__group-title" ng-click="toggleGroup(item.group)" ng-class="{'blockholder__group-title--collapsed': !item.group.toggle_open}">
                             <i class="material-icons blockholder__group-toggler left" ng-click="toggleItem(data)" ng-class="{'blockholder__group-toggler--rotated': !item.group.toggle_open}">arrow_drop_down</i>
                             <i class="material-icons right" ng-if="item.group.is_fav">favorite</i>

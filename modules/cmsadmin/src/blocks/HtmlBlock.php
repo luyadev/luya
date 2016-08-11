@@ -3,6 +3,7 @@
 namespace cmsadmin\blocks;
 
 use cmsadmin\Module;
+use cmsadmin\blockgroups\DevelopmentGroup;
 
 class HtmlBlock extends \cmsadmin\base\Block
 {
@@ -40,5 +41,10 @@ class HtmlBlock extends \cmsadmin\base\Block
     public function twigAdmin()
     {
         return '{% if vars.html is empty %}<span class="block__empty-text">' . Module::t('block_html_no_content') . '</span>{% else %}{{ vars.html | raw }}{% endif %}';
+    }
+    
+    public function getBlockGroup()
+    {
+        return DevelopmentGroup::className();
     }
 }

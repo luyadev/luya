@@ -7,6 +7,7 @@ use cms\Exception;
 use cmsadmin\Module;
 use luya\helpers\ModuleHelper;
 use yii\web\Response;
+use cmsadmin\blockgroups\DevelopmentGroup;
 
 class ModuleBlock extends \cmsadmin\base\Block
 {
@@ -74,6 +75,11 @@ class ModuleBlock extends \cmsadmin\base\Block
     public function twigFrontend()
     {
         return '{{extras.moduleContent}}';
+    }
+    
+    public function getBlockGroup()
+    {
+        return DevelopmentGroup::className();
     }
 
     private function moduleContent($moduleName)
