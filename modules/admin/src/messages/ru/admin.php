@@ -159,5 +159,13 @@ return [
     'mode_user_firstname' => 'Имя',
     'mode_user_lastname' => 'Фамилия',
     'mode_user_email' => 'E-Mail',
-    'mode_user_password' => 'Пароль'
+    'mode_user_password' => 'Пароль',
+    
+// added translations in 1.0.0-beta8
+    'aws_tag_new' => 'Add new entry',
+    'aws_tag_add' => 'add',
+    'aws_tag_search' => 'Search entries',
+    'aws_tag_list' => 'List of all entries',
+    'dashboard_log_message_add' => 'Added a new row to <b>{container}</b>.',
+    'dashboard_log_message_edit' => 'Updated an existing row in <b>{container}</b>.',
 ];

@@ -264,4 +264,35 @@ return [
     'block_image_externallink_label' => 'Внешняя ссылка (Приоритет выше чем у внутренней ссылки)',
     'view_index_create_page_please_choose' => 'Пожалуйста, выберите',
     'view_index_sidebar_autopreview' => 'Автоматический предпросмотр',
+
+// added translation in 1.0.0-beta8
+    
+    'module_permission_add_new_page' => 'Create new Page',
+    'module_permission_update_pages' => 'Page Edit',
+    'module_permission_edit_drafts' => 'Draft Edit',
+    'module_permission_page_blocks' => 'Page Contentblocks',
+    'js_version_delete_confirm' => 'Are you sure to delete the page version «%alias%»?',
+    'js_version_delete_confirm_success' => 'The page version %alias% has been deleted successfull.',
+    'log_action_insert_cms_nav_item' => 'Added new language item <b>{info}</b>',
+    'log_action_insert_cms_nav' => 'Added new page <b>{info}</b>',
+    'log_action_insert_cms_nav_item_page_block_item' => 'Inserted a new block <b>{info}</b>',
+    'log_action_insert_unkown' => 'Added a new row',
+    'log_action_update_cms_nav_item' => 'Updated the language item of page <b>{info}</b>',
+    'log_action_update_cms_nav' => 'Updated the Status of page <b>{info}</b>',
+    'log_action_update_cms_nav_item_page_block_item' => 'Updated the content or configuration of block <b>{info}</b>',
+    'log_action_update_unkown' => 'Updatet an existing row',
+    'log_action_delete_cms_nav_item' => 'Removed a language version of <b>{info}</b>',
+    'log_action_delete_cms_nav' => 'Removed Page <b>{info}</b>',
+    'log_action_delete_cms_nav_item_page_block_item' => 'Deleted block <b>{info}</b>',
+    'log_action_delete_unkown' => 'Deleted a row',
+    'block_group_dev_elements' => 'Development',
+    'block_group_layout_elements' => 'Layout',
+    'block_group_basic_elements' => 'Basics',
+    'block_group_project_elements' => 'Project',
+    'block_group_favorites' => 'Favorites',
+    'block_group_text_elements' => 'Texts',
+    'button_create_version' => 'Create Version',
+    'button_update_version' => 'Update Version',
+    'menu_group_item_env_permission' => 'Page Permissions'
+    ];
 ];
