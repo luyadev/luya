@@ -27,7 +27,7 @@
 				}
 			]
 		},
-		"asset-pattern-skip-version": "(-build|-patch)"
+		"asset-pattern-skip-version": "(-build|-patch)",
         "asset-installer-paths": {
             "bower-asset-library": "vendor/bower"
         },
