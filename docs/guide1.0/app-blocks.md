@@ -207,8 +207,15 @@ class MySuperGroup extends \cmsadmin\base\BlockGroup
     {
         return 'My Super Group Elements';
     }
+    
+    public function getPosition()
+    {
+        return 30;
+    }
 }
 ```
+
+> The position of the block will start from lower to higher, means 1 will be at the top of the groups list in the administration and even higher will be more at the bottom.
 
 the folder will be created on import. Now blocks can belong to this folder, to do so override the `getBlockGroup` method of your block:
 
