@@ -18,7 +18,7 @@ trait Application
     /**
      * @var string Title for the application used in different sections like Login screen
      */
-    public $siteTitle = 'Luya';
+    public $siteTitle = 'LUYA Application';
 
     /**
      * @var string The internal used language to translate luya message, this is also used for all luya
