@@ -12,6 +12,8 @@ First of all you have to install the global `fxp/composer-asset-plugin` plugin, 
 composer global require "fxp/composer-asset-plugin:^1.0.0"
 ```
 
+> Since version 1.2 of the fxp/composer-asset-plugin which is required by Yii2 do not forget to set `"asset-pattern-skip-version": "(-build|-patch)"` in your `extras` section of your composer.json. Otherwise the composer update command will take almost forever.
+
 After setting up composer, we execute the composer `create-project` command to checkout the **luya-kickstarter** application, an *out of the box* setup you can directly run your website. We recommend to run the `create-project` command directly from your htdocs/webserver folder:
 
 ```sh
