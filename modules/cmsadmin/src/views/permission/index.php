@@ -13,7 +13,6 @@
     		$http.get('admin/api-cms-menu/data-permission-tree').then(function(response) {
                 $scope.data = response.data;
                 $scope.groupInjection = response.data.groups;
-                console.dir($scope.data, $scope.groupInjection);
     		});
     	};
 
