@@ -3,6 +3,7 @@
 namespace cmsadmin\blocks;
 
 use cmsadmin\Module;
+use cmsadmin\blockgroups\TextGroup;
 
 class WysiwygBlock extends \cmsadmin\base\Block
 {
@@ -42,5 +43,10 @@ class WysiwygBlock extends \cmsadmin\base\Block
     public function twigAdmin()
     {
         return '{% if vars.content is empty %}<span class="block__empty-text">' . Module::t('block_wysiwyg_no_content') . '</span>{% else %}{{ vars.content }}{% endif %}';
+    }
+    
+    public function getBlockGroup()
+    {
+        return TextGroup::className();
     }
 }

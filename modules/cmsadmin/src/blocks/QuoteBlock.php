@@ -3,6 +3,7 @@
 namespace cmsadmin\blocks;
 
 use cmsadmin\Module;
+use cmsadmin\blockgroups\TextGroup;
 
 class QuoteBlock extends \cmsadmin\base\Block
 {
@@ -37,5 +38,10 @@ class QuoteBlock extends \cmsadmin\base\Block
     public function twigAdmin()
     {
         return '{% if vars.content is not empty %}<blockquote>{{ vars.content }}</blockquote>{% else %}<span class="block__empty-text">' . Module::t('block_quote_no_content') . '</span>{% endif %}';
+    }
+    
+    public function getBlockGroup()
+    {
+        return TextGroup::className();
     }
 }

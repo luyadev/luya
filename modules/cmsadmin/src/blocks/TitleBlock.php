@@ -3,6 +3,7 @@
 namespace cmsadmin\blocks;
 
 use cmsadmin\Module;
+use cmsadmin\blockgroups\TextGroup;
 
 class TitleBlock extends \cmsadmin\base\Block
 {
@@ -52,5 +53,10 @@ class TitleBlock extends \cmsadmin\base\Block
     public function twigAdmin()
     {
         return '{% if vars.content is not empty %}<{{extras.headingType}}>{{ vars.content }}</{{extras.headingType}}>{% else %}<span class="block__empty-text">' . Module::t('block_title_no_content') . '</span>{% endif %}';
+    }
+    
+    public function getBlockGroup()
+    {
+        return TextGroup::className();
     }
 }

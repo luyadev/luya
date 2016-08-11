@@ -290,6 +290,7 @@ return [
     'block_group_basic_elements' => 'Basics',
     'block_group_project_elements' => 'Project',
     'block_group_favorites' => 'Favorites',
+    'block_group_text_elements' => 'Texts',
     'button_create_version' => 'Create Version',
     'button_update_version' => 'Update Version',
     'menu_group_item_env_permission' => 'Page Permissions'

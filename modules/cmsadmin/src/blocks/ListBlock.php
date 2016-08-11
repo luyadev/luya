@@ -3,6 +3,7 @@
 namespace cmsadmin\blocks;
 
 use cmsadmin\Module;
+use cmsadmin\blockgroups\TextGroup;
 
 class ListBlock extends \cmsadmin\base\Block
 {
@@ -49,5 +50,10 @@ class ListBlock extends \cmsadmin\base\Block
     public function twigAdmin()
     {
         return '{% if vars.elements is empty%}<span class="block__empty-text">' . Module::t('block_list_no_content') . '</span>{% else %}<{{ extras.listType }}>{% for row in vars.elements if row.value is not empty %}<li>{{ row.value }}</li>{% endfor %}</{{ extras.listType }}>{% endif %}';
+    }
+    
+    public function getBlockGroup()
+    {
+        return TextGroup::className();
     }
 }

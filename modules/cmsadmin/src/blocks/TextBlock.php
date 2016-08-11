@@ -4,6 +4,7 @@ namespace cmsadmin\blocks;
 
 use cmsadmin\Module;
 use cms\helpers\TagParser;
+use cmsadmin\blockgroups\TextGroup;
 
 class TextBlock extends \cmsadmin\base\Block
 {
@@ -62,5 +63,10 @@ class TextBlock extends \cmsadmin\base\Block
     {
         return '<p>{% if vars.content is empty %}<span class="block__empty-text">' . Module::t('block_text_no_content') . '</span>'.
         '{% elseif vars.content is not empty and vars.textType == 1 %}{{ extras.text }}{% elseif vars.content is not empty %}{{ extras.text|nl2br }}{% endif %}</p>';
+    }
+
+    public function getBlockGroup()
+    {
+        return TextGroup::className();
     }
 }
