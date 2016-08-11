@@ -48,7 +48,8 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface, Change
     public function getSetting()
     {
         if ($this->_setting === null) {
-            $this->_setting = Yii::createObject(['class' => UserSetting::className(), 'sender' => $this, 'data' => Json::decode($this->settings)]);
+            $settingsArray = (empty($this->settings)) ? [] : Json::decode($this->settings);
+            $this->_setting = Yii::createObject(['class' => UserSetting::className(), 'sender' => $this, 'data' => $settingsArray]);
         }
         
         return $this->_setting;
