@@ -361,7 +361,7 @@
                                                 <?php endif; ?>
                                                 <span><?= strftime("%H:%M", $log->timestamp); ?> Uhr</span>
                                             </div>
-                                            <div class="col s6 m3"><?= $log->user->firstname; ?> <?= $log->user->lastname; ?></div>
+                                            <div class="col s6 m3"><?php if(empty($log->user)): ?>system<?php else: ?><?= $log->user->firstname; ?> <?= $log->user->lastname; ?><?php endif; ?></div>
                                             <div class="col s12 m6 truncate">
                                                 <span title="<?= $log->message; ?> | <?= $log->data_json; ?>" alt="<?= $log->message; ?> | <?= $log->data_json; ?>"><?= $log->action; ?></span></div>
                                         </div>

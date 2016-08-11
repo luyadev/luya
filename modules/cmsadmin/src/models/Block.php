@@ -3,6 +3,7 @@
 namespace cmsadmin\models;
 
 use Yii;
+use cmsadmin\base\BlockInterface;
 
 /**
  * Block ActiveRecord contains the Block<->Group relation.
@@ -96,6 +97,18 @@ class Block extends \admin\ngrest\base\Model
         return Yii::createObject([
             'class' => $this->class,
         ]);
+    }
+    
+    /**
+     * Try to get the name of the log.
+     */
+    public function getNameForLog()
+    {
+        if ($this->object && $this->object instanceof BlockInterface) {
+            return $this->object->name();
+        }
+        
+        return $this->class;
     }
     
     public static function objectId($blockId, $id, $context, $pageObject = null)

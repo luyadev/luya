@@ -58,7 +58,7 @@ class Log extends \yii\db\ActiveRecord
                     return NavItem::findOne($this->row_id)->title;
                 case "cms_nav_item_page_block_item":
                     $block = NavItemPageBlockItem::findOne($this->row_id);
-                    if (!$block) {
+                    if (!$block || $block->block == null) {
                         $arr = $this->getMessageArray();
                         if (!empty($arr) && isset($arr['blockName'])) {
                             return $arr['blockName'] . " ({$arr['pageTitle']})";
@@ -66,7 +66,7 @@ class Log extends \yii\db\ActiveRecord
                             return;
                         }
                     }
-                    return $block->block->object->name() . " (" .$block->droppedPageTitle. ")";
+                    return $block->block->getNameForLog() . " (" .$block->droppedPageTitle. ")";
             }
         }
     }
