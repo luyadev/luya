@@ -119,6 +119,7 @@
 	height: 100%;
 	padding: 20px 10px;
 	cursor: pointer;
+	@include clearfix;
 }
 .block--is-container > .block__body {
 	display: none;
