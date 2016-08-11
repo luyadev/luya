@@ -1047,6 +1047,27 @@
                 $scope.remove = function(key) {
                     $scope.model.splice(key, 1);
                 };
+                
+                $scope.moveUp = function(index) {
+                    index = parseInt(index);
+                    var oldRow = $scope.model[index];
+                    $scope.model[index] = $scope.model[index-1];
+                    $scope.model[index-1] = oldRow;
+                };
+
+                $scope.moveDown = function(index) {
+                    index = parseInt(index);
+                    var oldRow = $scope.model[index];
+                    $scope.model[index] = $scope.model[index+1];
+                    $scope.model[index+1] = oldRow;
+                };
+                
+                $scope.showDownButton = function(index) {
+                    if (parseInt(index) < Object.keys($scope.model).length - 1) {
+                        return true;
+                    }
+                    return false;
+                };
             },
             template: function() {
                 return '<div class="input input--image-array imagearray" ng-class="{\'input--hide-label\': i18n}">' +
@@ -1056,6 +1077,8 @@
                                 '<div ng-repeat="(key,image) in model track by key" class="row list__item">' +
 
                                     '<div class="list__left row">' +
+	                                    '<span ng-click="moveUp(key)" ng-show="{{key > 0}}">UP</span>' +
+	                                	'<span ng-click="moveDown(key)" ng-show="showDownButton(key)">Down</span>' +
                                         '<div class="col s8">' +
                                             '<storage-image-upload ng-model="image.imageId" options="options"></storage-image-upload>' +
                                         '</div>' +
@@ -1064,11 +1087,9 @@
                                             '<label>'+i18n['js_dir_image_description']+'</label>' +
                                         '</div>' +
                                     '</div>' +
-
                                     '<div class="list__right">' +
                                         '<button type="button" class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
                                     '</div>' +
-
                                 '</div>' +
                                 '<button ng-click="add()" type="button" class="btn-floating left list__add-button [ waves-effect waves-circle waves-light ]"><i class="material-icons">add</i></button>' +
                             '</div>' +
@@ -1104,7 +1125,27 @@
                 $scope.remove = function(key) {
                     $scope.model.splice(key, 1);
                 };
+                
+                $scope.moveUp = function(index) {
+                    index = parseInt(index);
+                    var oldRow = $scope.model[index];
+                    $scope.model[index] = $scope.model[index-1];
+                    $scope.model[index-1] = oldRow;
+                };
 
+                $scope.moveDown = function(index) {
+                    index = parseInt(index);
+                    var oldRow = $scope.model[index];
+                    $scope.model[index] = $scope.model[index+1];
+                    $scope.model[index+1] = oldRow;
+                };
+                
+                $scope.showDownButton = function(index) {
+                    if (parseInt(index) < Object.keys($scope.model).length - 1) {
+                        return true;
+                    }
+                    return false;
+                };
             },
             template: function() {
                 return '<div class="input input--file-array filearray" ng-class="{\'input--hide-label\': i18n}">' +
@@ -1112,8 +1153,9 @@
                             '<div class="input__field-wrapper">' +
                                 '<p class="list__no-entry" ng-hide="model.length > 0">'+i18n['js_dir_no_selection']+'</p>' +
                                 '<div ng-repeat="(key,file) in model track by key" class="row list__item">' +
-
                                     '<div class="list__left row">' +
+                                    	'<span ng-click="moveUp(key)" ng-show="{{key > 0}}">UP</span>' +
+                                    	'<span ng-click="moveDown(key)" ng-show="showDownButton(key)">Down</span>' +
                                         '<div class="filearray__upload col s8">' +
                                             '<storage-file-upload ng-model="file.fileId"></storage-file-upload>' +
                                         '</div>' +
@@ -1122,7 +1164,6 @@
                                             '<label>'+i18n['js_dir_image_description']+'</label>' +
                                         '</div>' +
                                     '</div>' +
-
                                     '<div class="list__right">' +
                                         '<button type="button" class="btn-floating left list__delete-button [ red lighten-1 ][ waves-effect waves-circle waves-light ]" ng-click="remove(key)" tabindex="-1"><i class="material-icons">remove</i></button>' +
                                     '</div>' +
