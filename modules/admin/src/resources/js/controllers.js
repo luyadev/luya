@@ -252,7 +252,7 @@
 		
 		$scope.printErrors = function(data) {
 			angular.forEach(data, function(value, key) {
-				AdminToastService.error(value.message, 3000);
+				AdminToastService.error(value.message, 4500);
 			});
 		};
 		
