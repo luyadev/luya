@@ -113,13 +113,17 @@ class UserSetting extends Object implements \ArrayAccess
                     $array = &$array[$key];
                 }
             }
+            
+            if (isset($lastArray) && $lastArray[$key]);
+            unset($lastArray[$key]);
+            if (empty($lastArray)) {
+            	unset($lastArray);
+            }
+            $this->save();
+            return true;
         }
-
-        unset($lastArray[$key]);
-        if (empty($lastArray)) {
-            unset($lastArray);
-        }
-        $this->save();
+        
+        return false;
     }
 
     /**
