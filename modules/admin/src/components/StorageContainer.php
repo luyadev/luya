@@ -16,8 +16,10 @@ use admin\models\StorageFilter;
 use admin\models\StorageFolder;
 
 /**
+ * Storage Container for reading, saving and holding files.
+ * 
  * Create images, files, manipulate, foreach and get details. The storage container 
- * will be the singleton similar instance containing all the loaded images and files
+ * will be the singleton similar instance containing all the loaded images and files.
  * 
  * ### files
  * 
@@ -111,7 +113,20 @@ class StorageContainer extends Component
     /**
      * Setter for the http path in order to read online storage files.
      * 
-     * @param string $path
+     * Sometimes you want to set the http directory of where the files are display in the frontend to read from another
+     * server. For example you have a prod and a preprod sytem and when deploying the preprod system the database will
+     * be copied into the preprod system from prod. Now all the files are located on the prod system and you will have
+     * broke image/file links. To generate the image/file links you can now override the httpPath in your configuration
+     * to read all the files from the prod server. For example add this in the `components` section of your config:
+     * 
+     * ```php
+     * 'storage' => [
+     *     'class' => 'admin\components\StorageContainer',
+     *     'httpPath' => 'http://prod.example.com/storage',
+     * ]
+     * ```
+     * 
+     * @param string $path The location of your storage folder without trailing slash. E.g `http://prod.example.com/storage`
      */
     public function setHttpPath($path)
     {
@@ -119,9 +134,9 @@ class StorageContainer extends Component
     }
     
     /**
-     * Get the base path to the storage directory
+     * Get the base path to the storage directory.
      * 
-     * @return string
+     * @return string Get the relative http path to the storage folder if nothing is provided by the setter method `setHttpPath()`.
      */
     public function getHttpPath()
     {
@@ -136,7 +151,21 @@ class StorageContainer extends Component
     
     /**
      * Setter fro the absolute http path in order to read from another storage source.
-     * @param unknown $path
+     * 
+     * Sometimes you want to set the http directory of where the files are display in the frontend to read from another
+     * server. For example you have a prod and a preprod sytem and when deploying the preprod system the database will
+     * be copied into the preprod system from prod. Now all the files are located on the prod system and you will have
+     * broke image/file links. To generate the image/file links you can now override the httpPath in your configuration
+     * to read all the files from the prod server. For example add this in the `components` section of your config:
+     * 
+     * ```php
+     * 'storage' => [
+     *     'class' => 'admin\components\StorageContainer',
+     *     'absoluteHttpPath' => 'http://prod.example.com/storage',
+     * ]
+     * ```
+     * 
+     * @param string $path The absolute location of your storage folder without trailing slash. E.g `http://prod.example.com/storage`
      */
     public function setAbsoluteHttpPath($path)
     {
@@ -146,7 +175,7 @@ class StorageContainer extends Component
     /**
      * Get the base absolute base path to the storage direcotry
      * 
-     * @return string;
+     * @return string Get the absolute http path to the storage folder if nothing is provided by the setter method `setAbsoluteHttpPath()`.
      * @since 1.0.0-beta7
      */
     public function getAbsoluteHttpPath()
@@ -162,6 +191,7 @@ class StorageContainer extends Component
     
     /**
      * Get the internal server path to the storage folder
+     *
      * @return string
      */
     public function getServerPath()
