@@ -45,6 +45,13 @@
 	&.block--is-container {
 		padding-top: 32px;
 	}
+
+	&--first {
+		margin-top: 0;
+	}
+	&--last {
+		margin-bottom: 0;
+	}
 }
 
 .page--drag-active .block--is-container {
