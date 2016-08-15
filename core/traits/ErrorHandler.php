@@ -5,6 +5,7 @@ namespace luya\traits;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Json;
 use Curl\Curl;
+use luya\helpers\Url;
 
 /**
  * ErrorHandler trait to extend the renderException method with an api call if enabled.
@@ -14,15 +15,60 @@ use Curl\Curl;
 trait ErrorHandler
 {
     /**
-     * @var string The url where the errorapi module has been added
+     * @var string The url of the error api without trailing slash. Make sure you have installed the error api
+     * module on the requested api url (https://luya.io/guide/module/luyadev---luya-module-errorapi).
      */
     public $api = 'http://luya.io/errorapi';
 
     /**
-     * @var boolean Enable the transfer of exception informations
+     * @var boolean Enable the transfer of exceptions to the defined `$api` server.
      */
     public $transferException = false;
 
+    /**
+     * Send a custom message to the api server event its not related to an exception.
+     * 
+     * Sometimes you just want to pass informations to your application, this method allows you to transfer
+     * a message to your error api server.
+     * 
+     * Example of sending a message
+     * 
+     * ```php
+     * Yii::$app->errorHandler->transferMessage('Something went wrong here!', __FILE__, __LINE__);
+     * ```
+     * 
+     * @param string $message The message you want to send to the error api server.
+     * @param string $file The you are currently send the message (use __FILE__)
+     * @param string $line The line you want to submit (use __LINE__)
+     */
+    public function transferMessage($message, $file = __FILE__, $line = __LINE__)
+    {
+        return $this->apiServerSendData($this->getExceptionArray([
+            'message' => $message,
+            'file' => $file,
+            'line' => $line,
+        ]));
+    }
+    
+    /**
+     * Send the array data to the api server.
+     * 
+     * @param array $data The array to be sent to the server.
+     * @return boolean|null true/false if data has been sent to the api successfull or not, null if the transfer is disabled.
+     */
+    private function apiServerSendData(array $data)
+    {
+        if ($this->transferException) {
+            $curl = new Curl();
+            $curl->post(Url::ensureHttp(rtrim($this->api, '/')).'/create', [
+                'error_json' => Json::encode($data),
+            ]);
+            return !$curl->error;
+        }
+        
+        return null;
+    }
+    
     /**
      * {@inheritdoc}
      */
@@ -32,10 +78,7 @@ trait ErrorHandler
             return parent::renderException($exception);
         }
         
-        $curl = new Curl();
-        $curl->post(rtrim($this->api, '/').'/create', [
-            'error_json' => Json::encode($this->getExceptionArray($exception)),
-        ]);
+        $this->apiServerSendData($this->getExceptionArray($exception));
         
         return parent::renderException($exception);
     }
@@ -73,7 +116,9 @@ trait ErrorHandler
         } elseif (is_string($exception)) {
             $_message = 'exception string: ' . $exception;
         } elseif (is_array($exception)) {
-            $_message = 'exception array dump: ' . print_r($exception, true);
+            $_message = isset($exception['message']) ? $exception['message'] : 'exception array dump: ' . print_r($exception, true);
+            $_file = isset($exception['file']) ? $exception['file'] : __FILE__;
+            $_line = isset($exception['line']) ? $exception['line'] : __LINE__;
         }
 
         return [
