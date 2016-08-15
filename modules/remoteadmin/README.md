@@ -24,7 +24,7 @@ Remote Admin will work out of the box with all [LUYA](https://github.com/zephir/
 require remoteadmin in composer.json:
 
 ```
-"luyadev/luya-module-remoteadmin" : "1.0.0-beta5",
+"luyadev/luya-module-remoteadmin" : "1.0.0-beta8",
 ```
 
 add remote admin to the list of your modules:
