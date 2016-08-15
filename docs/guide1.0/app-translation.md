@@ -77,3 +77,17 @@ while the second example needs a speicifc key `date` as parameter:
 ```php
 echo Yii::t('app', 'tomorrow', ['date' => time()]);
 ```
+
+#### Conditions with parameters
+
+Sometimes you want to change the output inside the translation file based on input paremter values, lets assume the variables $slots has been assigend with the amount of left seats:
+
+```
+{slots, plural,=1{Only 1 place} =2{Only 2 places} other{Places}} available
+```
+
+Lets see what happens when the value of `$slots` is:
+
++ **1** = Only 1 place available
++ **2** = Only 2 places available
++ **3** = Places available
