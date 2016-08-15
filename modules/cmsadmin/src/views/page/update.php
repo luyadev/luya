@@ -201,7 +201,7 @@
                                         </div>
                                         <span class="grey-text text-darken-2" ng-if="navData.is_home">
                                             <i class="material-icons cms__prop-toggle green-text text-darken-1" style="vertical-align: middle; margin-right: 3px;">check_circle</i>
-                                            <span  style="vertical-align: bottom">Startseite</span>
+                                            <span  style="vertical-align: bottom"><?= \cmsadmin\Module::t('view_update_is_homepage'); ?></span>
                                         </span>
                                     </div>
                                     <!-- /IS_HOME SWITCH -->
