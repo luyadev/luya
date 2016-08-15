@@ -22,7 +22,7 @@ class Article extends \admin\ngrest\base\Model
     public function scenarios()
     {
         return [
-           'restcreate' => ['title', 'text', 'cat_id', 'image_id', 'image_list', 'tags', 'timestamp_display_from', 'timestamp_display_until', 'file_list'],
+           'restcreate' => ['title', 'text', 'cat_id', 'image_id', 'image_list', 'tags', 'timestamp_create', 'timestamp_display_from', 'timestamp_display_until', 'is_display_limit', 'file_list'],
            'restupdate' => ['title', 'text', 'cat_id', 'image_id', 'image_list', 'tags', 'timestamp_create', 'timestamp_display_from', 'timestamp_display_until', 'is_display_limit', 'file_list'],
        ];
     }
@@ -75,7 +75,9 @@ class Article extends \admin\ngrest\base\Model
     {
         $this->create_user_id = Yii::$app->adminuser->getId();
         $this->update_user_id = Yii::$app->adminuser->getId();
-        $this->timestamp_create = time();
+        if (empty($this->timestamp_create)) {
+            $this->timestamp_create = time();
+        }
         $this->timestamp_update = time();
         $this->timestamp_display_from = time();
     }
@@ -131,17 +133,21 @@ class Article extends \admin\ngrest\base\Model
     {
         return 'api-news-article';
     }
+    
+    public function ngRestAttributeGroups()
+    {
+        return [
+            [['timestamp_create', 'timestamp_display_from', 'is_display_limit', 'timestamp_display_until'], 'Time', 'collapsed'],
+            [['image_id', 'image_list', 'file_list'], 'Media'],
+        ];
+    }
 
     public function ngRestConfig($config)
     {
         $this->ngRestConfigDefine($config, 'list', ['title', 'cat_id', 'timestamp_create', 'image_id']);
 
-        $this->ngRestConfigDefine($config, 'update', ['title', 'cat_id', 'text', 'timestamp_create', 'timestamp_display_from', 'is_display_limit', 'timestamp_display_until', 'image_id', 'image_list', 'file_list']);
+        $this->ngRestConfigDefine($config, ['create', 'update'], ['title', 'cat_id', 'text', 'timestamp_create', 'timestamp_display_from', 'is_display_limit', 'timestamp_display_until', 'image_id', 'image_list', 'file_list']);
         
-        //$config->update->extraField('tags', Module::t('article_tag'))->checkboxRelation(\newsadmin\models\Tag::className(), 'news_article_tag', 'article_id', 'tag_id', ['title']);
-
-        $config->create->copyFrom('update', ['timestamp_display_until']);
-
         $config->delete = true;
 
         return $config;
