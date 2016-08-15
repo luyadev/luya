@@ -59,7 +59,7 @@ class Site extends \admin\ngrest\base\Model
     public function getRemote()
     {
         $url = Url::trailing($this->url);
-        
+        $url = Url::ensureHttp($url);
         $data = Yii::$app->cache->get($url);
         
         if ($data === false) {

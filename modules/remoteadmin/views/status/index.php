@@ -41,7 +41,7 @@
                 </a>
             </td>
         <?php else: $err = true; ?>
-            <td colspan="7"><div style="background-color:#FF8A80; padding:4px; color:white;">We are unable to retrieve dat from this Remote Page.</div></td>
+            <td colspan="7"><div style="background-color:#FF8A80; padding:4px; color:white;">Unable to retrieve data from the Remote Page.</div></td>
         <?php endif; ?>
     </tr>
 <?php endforeach; ?>
@@ -51,10 +51,11 @@
 
 <?php if ($err): ?>
 <div class="card-panel red accent-1">
-<p>Wenn das abrufen der Remote-Seite einen Fehler ausgibt könnten diese folgende Ursachen haben:</p>
+<p>If the request to a remote page returns an error, the following issues could have caused your request:</p>
 <ul>
-    <li>Die Seite liegt hinter einem HTTPAUTH schutz, du kannst diesen unter instanzen definieren.</li>
-    <li>Die Seite verfügt nicht über das <b>Admin-Module</b>. Das Admin-Modul ist zwingend notwending um Remote-Informationen anzuzeigen.</li>
+    <li>The requested website is secured by a httpauth authorization, you can add the httpauth credentials in the page configuration section.</li>
+    <li>The requested website url is wrong or not valid anymire. Make sure the url is correctly added with its protocol.</li>
+    <li>The requested website remote token is not defined in the config of the website itself or your enter secure token is wrong.</li>
 </ul>
 </div>
 <?php endif; ?>
