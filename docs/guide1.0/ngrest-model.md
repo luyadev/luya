@@ -150,7 +150,7 @@ public function ngRestGroupByField()
 
 The field (`cat_id` in the example) must exist in the list pointer config array.
 
-## Adding User-Filters
+## Grid List Adding User-Filters
 
 Sometimes the users should filter the crud list data based on different where conditions, assuming we have some calendar data with huge amount of data. Now the administration user should have the possibility to see already past calendar entries, and upcoming calendar entries. To do so we create a new filter for this NgRest Model. To provide filters we have to override the method `ngRestFilters()` and provide an array with a name and a find statement to collect the data, for example the example described above:
 
@@ -179,6 +179,22 @@ public static function ngRestFind()
 ```
 
 Now only the data where is_archived eqauls 0 will be listed in the crud list overview.
+
+## Update/Create field groups
+
+In order to make your forms better organized and viewable you can group the form fields into groups and collapsed them by default (for example not required fields are then hidden by default but can be access by clicking the group names).
+
+```php
+public function ngRestAttributeGroups()
+{
+   return [
+      [['timestamp_create', 'timestamp_display_from', 'timestamp_display_until'], 'Timestamps', 'collapsed' => true],
+      [['image_list', 'file_list'], 'Images', 'collapsed' => false],   
+   ];
+}
+```
+
+If collapsed is `true` then the form group is hidden when opening the form, otherwhise its open by default (which is default value when not provided).
 
 ## Angular Save/Update callback
 

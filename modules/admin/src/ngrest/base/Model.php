@@ -121,11 +121,13 @@ abstract class Model extends ActiveRecord implements GenericSearchInterface, NgR
      * public function ngRestAttributeGroups()
      * {
      *    return [
-     *       [['timestamp_create', 'timestamp_display_from', 'timestamp_display_until'], 'Zeiten', 'collapsed' => true],
-     *       [['image_list', 'file_list'], 'asdfasdf', 'collapsed' => false],   
+     *       [['timestamp_create', 'timestamp_display_from', 'timestamp_display_until'], 'Timestamps', 'collapsed' => true],
+     *       [['image_list', 'file_list'], 'Images', 'collapsed' => false],   
      *    ];
      * }
      * ```
+     * 
+     * If collapsed is `true` then the form group is hidden when opening the form, otherwhise its open by default (which is default value when not provided).
      * 
      * @return array An array with groups where offset 1 are the fields, 2 the name of the group `collapsed` key if default collapsed or not.
      * @since 1.0.0-beta8
