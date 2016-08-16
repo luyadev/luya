@@ -76,17 +76,26 @@ There are several types you can use to generate your block controllers and input
 
 A very common scenario is to collect data from an active record model, display the items and select them (via select or checkbox for example) and then access the selected model rows via extraVars. To achieve this a lot of code is required inside your blocks, which is good to understand what and why things happens. But if you need to get results quickly injectors are going to help you manage this kind of tasks.
 
+Injectors can, as the name already says, inject data into your `config()` method and assign custom data to `extraVars()`.
+
 Lets assume we have news articles from an ActiveRecord model you want to select insdie the administration area and return the selected model rows, now you can defined via the `injectors()` method a new injector:
 
 ```php
-public function injectors()
+class MyBlock extends \cmsadmin\base\PhpBlock
 {
-    return [
-        'newsData' => new cms\injector\ActiveQueryCheckboxInjector([
-            'query' => \news\models\Article::find(),
-            'type' => self::VAR_INJECTOR,
-        ]);
-    ];
+	// ...
+	
+	public function injectors()
+	{
+	    return [
+	        'newsData' => new cms\injector\ActiveQueryCheckboxInjector([
+	            'query' => \news\models\Article::find(),
+	            'type' => self::VAR_INJECTOR,
+	        ]);
+	    ];
+	}
+	
+	// ...
 }
 ```
 
