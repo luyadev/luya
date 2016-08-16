@@ -32,7 +32,7 @@ A defintion contains always the attribute (as key) and the ngrest plugin config,
 
 #### Pointers and ngRestConfig
 
-There are 4 specific pointers you can use to configure. A pointer as like a section of your config:* config eingestellt werden können.
+There are 4 specific pointers you can use to configure. A pointer as like a section of your config:
 
 |Pointer Name   |Description
 |---       |---
