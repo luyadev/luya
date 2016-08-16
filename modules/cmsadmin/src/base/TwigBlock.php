@@ -19,6 +19,7 @@ abstract class TwigBlock extends InternalBaseBlock implements TwigBlockInterface
      */
     public function renderFrontend()
     {
+    	$this->injectorSetup();
         return Yii::$app->twig->stringEnv->render($this->getTwigFrontendContent(), [
             'vars' => $this->getVarValues(),
             'cfgs' => $this->getCfgValues(),
@@ -29,6 +30,7 @@ abstract class TwigBlock extends InternalBaseBlock implements TwigBlockInterface
     
     public function renderAdmin()
     {
+    	$this->injectorSetup();
         return $this->twigAdmin();
     }
     

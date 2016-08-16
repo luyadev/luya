@@ -51,6 +51,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
      */
     public function renderFrontend()
     {
+    	$this->injectorSetup();
         return $this->frontend();
     }
     
@@ -60,6 +61,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
      */
     public function renderAdmin()
     {
+    	$this->injectorSetup();
         return $this->admin();
     }
 }

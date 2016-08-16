@@ -25,15 +25,17 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
 
     private $_envOptions = [];
 
-    public function init()
+    const VAR_INJECTOR = 'var';
+    
+    const CFG_INJECTOR = 'cfg';
+
+    protected function injectorSetup()
     {
-        parent::init();
-        
-        foreach ($this->injectors() as $varName => $injector) {
-            $injector->setContext($this);
-            $injector->varName = $varName;
-            $injector->setup();
-        }
+    	foreach ($this->injectors() as $varName => $injector) {
+    		$injector->setContext($this);
+    		$injector->varName = $varName;
+    		$injector->setup();
+    	}
     }
     
     /**
@@ -368,6 +370,11 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
         }
         
         return $this->_cfgs;
+    }
+    
+    public function addCfg(array $cfgConfig)
+    {
+    	$this->_cfgs[] = (new BlockCfg($cfgConfig))->toArray();
     }
 
     /**
