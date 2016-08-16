@@ -70,8 +70,8 @@ class UserSettingsTest extends AdminTestCase
     
     public function testUnsetRemoveElement()
     {
-    	$model = new UserSetting();
-    	$this->assertFalse($model->remove('not_exists'));
+        $model = new UserSetting();
+        $this->assertFalse($model->remove('not_exists'));
     }
     
     public function testArraySetterArrayAccess()

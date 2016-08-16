@@ -61,7 +61,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['json_config_values', 'json_config_cfg_values'], function($attribute, $params) {
+            [['json_config_values', 'json_config_cfg_values'], function ($attribute, $params) {
                 // if its not an array, the attribute is not dirty and has not to be serialized from input.
                 if (is_array($this->$attribute)) {
                     $data = ArrayHelper::typeCast($this->$attribute);
@@ -123,7 +123,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     public function fields()
     {
         $fields = parent::fields();
-        $fields['objectdetail'] = function($model) {
+        $fields['objectdetail'] = function ($model) {
             return \cmsadmin\models\NavItemPage::getBlock($model->id);
         };
         return $fields;

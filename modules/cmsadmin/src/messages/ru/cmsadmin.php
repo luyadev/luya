@@ -266,7 +266,7 @@ return [
     'view_index_sidebar_autopreview' => 'Автоматический предпросмотр',
 
 // added translation in 1.0.0-beta8
-    
+
     'module_permission_add_new_page' => 'Создать новую страницу',
     'module_permission_update_pages' => 'редактировать страницу ',
     'module_permission_edit_drafts' => 'Редактировать черновик',
