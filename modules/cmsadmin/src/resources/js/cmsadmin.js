@@ -303,6 +303,7 @@
 	 * $resource('admin/api-cms-block/:id'); });
 	 */
 	
+	/*
 	zaa.factory('ApiCmsNavItemPageBlockItem', function($resource) {
 		return $resource('admin/api-cms-navitempageblockitem/:id', { id : '@_id' }, {
 			save : {
@@ -320,7 +321,7 @@
 			}
 		});
 	});
-	
+	*/
 	zaa.factory('PlaceholderService', function() {
 		var service = [];
 		
@@ -1145,7 +1146,7 @@
 	 * @param $scope.block
 	 *            from ng-repeat
 	 */
-	zaa.controller("PageBlockEditController", function($scope, $sce, $http, ApiCmsNavItemPageBlockItem, AdminClassService, AdminToastService, ServiceBlockCopyStack, ServiceLiveEditMode) {
+	zaa.controller("PageBlockEditController", function($scope, $sce, $http, AdminClassService, AdminToastService, ServiceBlockCopyStack, ServiceLiveEditMode) {
 	
 		$scope.PagePlaceholderController = $scope.$parent;
 		
@@ -1259,16 +1260,34 @@
 		
 		$scope.removeBlock = function(block) {
 			AdminToastService.confirm(i18nParam('js_page_block_delete_confirm', {name: block.name}), function($timeout, $toast) {
+				$http.delete('admin/api-cms-navitempageblockitem/delete?id=' + block.id).success(function(response) {
+					$scope.PagePlaceholderController.NavItemTypePageController.refresh();
+					$scope.PagePlaceholderController.NavItemTypePageController.loadLiveUrl();
+					$toast.close();
+					AdminToastService.success(i18nParam('js_page_block_remove_ok', {name: block.name}), 2000);
+				});
+				/*
 				ApiCmsNavItemPageBlockItem.delete({id: block.id}, function (rsp) {
 					$scope.PagePlaceholderController.NavItemTypePageController.refresh();
 					$scope.PagePlaceholderController.NavItemTypePageController.loadLiveUrl();
 					$toast.close();
 					AdminToastService.success(i18nParam('js_page_block_remove_ok', {name: block.name}), 2000);
 				});
+				*/
 			});
 		};
 		
 		$scope.save = function () {
+			$http.put('admin/api-cms-navitempageblockitem/update?id=' + $scope.block.id, {json_config_values: $scope.data, json_config_cfg_values: $scope.cfgdata}).success(function(response) {
+				AdminToastService.success(i18nParam('js_page_block_update_ok', {name: $scope.block.name}), 2000);
+				$scope.edit = false;
+				$scope.config = false;
+				$scope.block.is_dirty = 1;
+				$scope.block = angular.copy(response.objectdetail);
+				$scope.PagePlaceholderController.NavItemTypePageController.loadLiveUrl();
+			});
+			/*
+			return;
 			ApiCmsNavItemPageBlockItem.update({ id : $scope.block.id }, $.param({json_config_values : JSON.stringify($scope.data), json_config_cfg_values : JSON.stringify($scope.cfgdata) }), function(rsp) {
 				AdminToastService.success(i18nParam('js_page_block_update_ok', {name: $scope.block.name}), 2000);
 				$scope.edit = false;
@@ -1284,6 +1303,7 @@
 				});
 				
 			});
+			*/
 		}
 		
 	});
@@ -1291,7 +1311,7 @@
 	/**
 	 * @TODO HANDLING SORT INDEX OF EACH BLOCK
 	 */
-	zaa.controller("DropBlockController", function($scope, $http, ApiCmsNavItemPageBlockItem, AdminClassService) {
+	zaa.controller("DropBlockController", function($scope, $http, AdminClassService) {
 		
 		$scope.PagePlaceholderController = $scope.$parent;
 		
@@ -1317,11 +1337,28 @@
 				});
 			} else {
 				if (moveBlock === false) {
+					$http.post('admin/api-cms-navitempageblockitem/create', { prev_id : $scope.placeholder.prev_id, sort_index : sortIndex, block_id : $scope.droppedBlock.id , placeholder_var : $scope.placeholder.var, nav_item_page_id : $scope.placeholder.nav_item_page_id }).success(function(response) {
+						$scope.PagePlaceholderController.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
+						$scope.droppedBlock = {};
+					});
+					/*
 					ApiCmsNavItemPageBlockItem.save($.param({ prev_id : $scope.placeholder.prev_id, sort_index : sortIndex, block_id : $scope.droppedBlock.id , placeholder_var : $scope.placeholder.var, nav_item_page_id : $scope.placeholder.nav_item_page_id }), function(rsp) {
 						$scope.PagePlaceholderController.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
 						$scope.droppedBlock = {};
 					})
+					*/
 				} else {
+					$http.put('admin/api-cms-navitempageblockitem/update?id=' + $scope.droppedBlock.id, {
+						prev_id : $scope.placeholder.prev_id,
+						placeholder_var : $scope.placeholder['var'],
+						sort_index : sortIndex
+					}).success(function(response) {
+						$scope.PagePlaceholderController.NavItemTypePageController.refreshNested($scope.placeholder.prev_id, $scope.placeholder.var);
+						$scope.droppedBlock = {};
+						$($ui.helper).remove(); //destroy clone
+			            $($ui.draggable).remove(); //remove from list
+					});
+					/*
 					ApiCmsNavItemPageBlockItem.update({ id : $scope.droppedBlock.id }, $.param({
 						prev_id : $scope.placeholder.prev_id,
 						placeholder_var : $scope.placeholder.var,
@@ -1332,6 +1369,7 @@
 						$($ui.helper).remove(); //destroy clone
 			            $($ui.draggable).remove(); //remove from list
 					});
+					*/
 				}
 			}
 			AdminClassService.setClassSpace('onDragStart', undefined);

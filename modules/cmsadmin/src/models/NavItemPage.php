@@ -170,7 +170,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
             $i++;
             $prev = $key-1;
             $next = $key+1;
-            $cacheKey = NavItemPageBlockItem::cacheName($placeholder['id']);
+            $cacheKey = ['blockcache', $placeholder['id']];
             
             $blockResponse = $this->getHasCache($cacheKey);
             

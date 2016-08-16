@@ -48,7 +48,7 @@ class BowerVendor extends \luya\web\Asset
         // angular files (official repo)
         'angular/angular.min.js',
         'angular-i18n/angular-locale_de-ch.js',
-        'angular-resource/angular-resource.min.js',
+        //'angular-resource/angular-resource.min.js',
         // ui router
         'angular-ui-router/release/angular-ui-router.min.js',
         // drag&drop (replace with native html5)

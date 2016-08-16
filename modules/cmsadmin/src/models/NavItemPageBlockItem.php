@@ -4,6 +4,10 @@ namespace cmsadmin\models;
 
 use Yii;
 use cmsadmin\Module;
+use luya\traits\CacheableTrait;
+use luya\helpers\ArrayHelper;
+use yii\db\ActiveQuery;
+use yii\helpers\Json;
 
 /**
  * Represents an ITEM for the type NavItemPage.
@@ -34,6 +38,8 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
 {
     private $_olds = [];
 
+    use CacheableTrait;
+    
     public static function tableName()
     {
         return 'cms_nav_item_page_block_item';
@@ -42,58 +48,98 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     public function init()
     {
         parent::init();
-        $this->on(self::EVENT_BEFORE_INSERT, [$this, 'eventBeforeInsert']);
+        $this->on(self::EVENT_BEFORE_DELETE, [$this, 'eventBeforeDelete']);
         $this->on(self::EVENT_AFTER_INSERT, [$this, 'eventAfterInsert']);
         $this->on(self::EVENT_AFTER_UPDATE, [$this, 'eventAfterUpdate']);
-        $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'eventBeforeUpdate']);
-        $this->on(self::EVENT_BEFORE_DELETE, [$this, 'eventBeforeDelete']);
         $this->on(self::EVENT_AFTER_DELETE, [$this, 'eventAfterDelete']);
+        $this->on(self::EVENT_AFTER_VALIDATE, [$this, 'ensureInputValues']);
     }
-
+    
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
-            [['sort_index'], 'resortIndex', 'on' => ['restcreate']],
-            [['sort_index'], 'resortIndex', 'on' => ['restupdate']],
+            [['json_config_values', 'json_config_cfg_values'], function($attribute, $params) {
+                // if its not an array, the attribute is not dirty and has not to be serialized from input.
+                if (is_array($this->$attribute)) {
+                    $data = ArrayHelper::typeCast($this->$attribute);
+                    foreach ($data as $key => $value) {
+                        if ($value === null) {
+                            unset($data[$key]);
+                        }
+                    }
+                
+                    if (isset($data['__e']) && count($data) >= 2) {
+                        unset($data['__e']);
+                    }
+                
+                    if (empty($data)) {
+                        $data['__e'] = '__v';
+                    }
+                
+                    $this->$attribute = Json::encode($data, JSON_FORCE_OBJECT);
+                }
+            }, 'skipOnEmpty' => false],
+            [['block_id', 'nav_item_page_id', 'prev_id', 'is_dirty', 'create_user_id', 'update_user_id', 'timestamp_create', 'timestamp_update', 'sort_index', 'is_hidden'], 'integer'],
+            [['placeholder_var'], 'required'],
+            [['json_config_values', 'json_config_cfg_values'], 'string'],
+            [['placeholder_var'], 'string', 'max' => 80],
         ];
     }
     
-    public static function cacheName($blockId)
+    public function scenarios()
     {
-        return 'cmsBlockCache'.$blockId;
+        $scene = parent::scenarios();
+        $scene['restcreate'] = $scene['default'];
+        $scene['restupdate'] = $scene['default'];
+        return $scene;
     }
-
+    
     /**
-     * resort the sort_index numbers for all items on the same: naav_item_page_id and prev_id and placholder_var.
+     * @inheritdoc
      */
-    public function resortIndex()
+    public function attributeLabels()
     {
-        if (!$this->isNewRecord) {
-            $this->_olds = $this->getOldAttributes();
-        }
-        // its a negative value, so its a last item, lets find the last index for current config
-        if ($this->sort_index < 0) {
-            $last = self::find()->andWhere(['nav_item_page_id' => $this->nav_item_page_id, 'placeholder_var' => $this->placeholder_var, 'prev_id' => $this->prev_id])->orderBy('sort_index DESC')->one();
-            if (!$last) {
-                $this->sort_index = 0;
-            } else {
-                $this->sort_index = $last->sort_index + 1;
-            }
-        } else { // its not a negative value, we have to find the positions after the current sort index and update to a higher level
-            $higher = self::find()->where('sort_index >= :index', ['index' => $this->sort_index])->andWhere(['nav_item_page_id' => $this->nav_item_page_id, 'placeholder_var' => $this->placeholder_var, 'prev_id' => $this->prev_id])->all();
-
-            foreach ($higher as $item) {
-                $newSortIndex = $item->sort_index + 1;
-                Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $newSortIndex], ['id' => $item->id])->execute();
-            }
-        }
+        return [
+            'id' => 'ID',
+            'block_id' => 'Block ID',
+            'placeholder_var' => 'Placeholder Var',
+            'nav_item_page_id' => 'Nav Item Page ID',
+            'prev_id' => 'Prev ID',
+            'json_config_values' => 'Json Config Values',
+            'json_config_cfg_values' => 'Json Config Cfg Values',
+            'is_dirty' => 'Is Dirty',
+            'create_user_id' => 'Create User ID',
+            'update_user_id' => 'Update User ID',
+            'timestamp_create' => 'Timestamp Create',
+            'timestamp_update' => 'Timestamp Update',
+            'sort_index' => 'Sort Index',
+            'is_hidden' => 'Is Hidden',
+        ];
     }
-
-    public function eventBeforeUpdate()
+    
+    public function fields()
     {
-        $this->is_dirty = 1;
-        $this->update_user_id = Module::getAuthorUserId();
-        $this->timestamp_update = time();
+        $fields = parent::fields();
+        $fields['objectdetail'] = function($model) {
+            return \cmsadmin\models\NavItemPage::getBlock($model->id);
+        };
+        return $fields;
+    }
+    
+    protected function ensureInputValues($event)
+    {
+        if ($this->isNewRecord) {
+            $this->timestamp_create = time();
+            $this->timestamp_update = time();
+            $this->create_user_id = Module::getAuthorUserId();
+        } else {
+            $this->is_dirty = 1;
+            $this->update_user_id = Module::getAuthorUserId();
+            $this->timestamp_update = time();
+        }
     }
 
     public function eventAfterUpdate()
@@ -108,9 +154,8 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
             $this->reindex($this->nav_item_page_id, $this->placeholder_var, $this->prev_id);
             Log::add(2, ['tableName' => 'cms_nav_item_page_block_item', 'action' => 'update', 'row' => $this->id, 'pageTitle' => $this->droppedPageTitle, 'blockName' => $this->block->getNameForLog()], 'cms_nav_item_page_block_item', $this->id);
             
-            if (Yii::$app->has('cache')) {
-                Yii::$app->cache->delete(static::cacheName($this->id));
-            }
+            
+            $this->deleteHasCache(['blockcache', $this->id]);
         }
     }
 
@@ -141,20 +186,6 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         Log::add(1, ['tableName' => 'cms_nav_item_page_block_item', 'action' => 'insert', 'row' => $this->id, 'pageTitle' => $this->droppedPageTitle, 'blockName' => $this->block->getNameForLog()], 'cms_nav_item_page_block_item', $this->id);
     }
 
-    public function eventBeforeInsert()
-    {
-        $this->timestamp_create = time();
-        $this->timestamp_update = time();
-        $this->create_user_id = Module::getAuthorUserId();
-        if (empty($this->json_config_cfg_values)) {
-            $this->json_config_cfg_values = json_encode((object) [], JSON_FORCE_OBJECT);
-        }
-
-        if (empty($this->json_config_values)) {
-            $this->json_config_values = json_encode((object) [], JSON_FORCE_OBJECT);
-        }
-    }
-
     private function deleteAllSubBlocks($blockId)
     {
         if ($blockId) {
@@ -170,6 +201,13 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         }
     }
 
+    /**
+     * Reindex the page block items in order to get requestd sorting.
+     * 
+     * @param unknown $navItemPageId
+     * @param unknown $placeholderVar
+     * @param unknown $prevId
+     */
     private function reindex($navItemPageId, $placeholderVar, $prevId)
     {
         $index = 0;
@@ -178,25 +216,6 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
             Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $index], ['id' => $item->id])->execute();
             ++$index;
         }
-    }
-
-    public static function find()
-    {
-        return parent::find()->orderBy('sort_index ASC');
-    }
-
-    public function scenarios()
-    {
-        return [
-            'restcreate' => ['block_id', 'placeholder_var', 'nav_item_page_id', 'json_config_values', 'json_config_cfg_values', 'prev_id', 'sort_index', 'is_hidden'],
-            'restupdate' => ['block_id', 'placeholder_var', 'nav_item_page_id', 'json_config_values', 'json_config_cfg_values', 'prev_id', 'sort_index', 'is_hidden'],
-            'default' => ['block_id', 'placeholder_var', 'nav_item_page_id', 'json_config_values', 'json_config_cfg_values', 'prev_id', 'sort_index', 'is_hidden', 'is_dirty'],
-        ];
-    }
-
-    public function getBlock()
-    {
-        return $this->hasOne(\cmsadmin\models\Block::className(), ['id' => 'block_id']);
     }
     
     private function updateNavItemTimesamp()
@@ -221,6 +240,31 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         return;
     }
     
+    /**
+     * Default sort on find command.
+     * 
+     * @return ActiveQuery
+     */
+    public static function find()
+    {
+        return parent::find()->orderBy(['sort_index' => SORT_ASC]);
+    }
+    
+    /**
+     * Get the block for the page block item
+     * 
+     * @return ActiveQuery
+     */
+    public function getBlock()
+    {
+        return $this->hasOne(Block::className(), ['id' => 'block_id']);
+    }
+    
+    /**
+     * Get the corresponding page where the block is stored.
+     * 
+     * @return ActiveQuery
+     */
     public function getNavItemPage()
     {
         return $this->hasOne(NavItemPage::className(), ['id' => 'nav_item_page_id']);

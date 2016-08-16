@@ -372,10 +372,12 @@ class NavItemController extends \admin\base\RestController
         return ['success' => $result];
     }
 
+    /*
     public function actionGetBlock($blockId)
     {
         return NavItemPage::getBlock($blockId);
     }
+    */
     
     public function actionToggleBlockHidden($blockId, $hiddenState)
     {
