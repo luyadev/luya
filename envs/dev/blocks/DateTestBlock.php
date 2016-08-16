@@ -3,6 +3,8 @@
 namespace app\blocks;
 
 use Yii;
+use cms\injectors\ActiveQueryCheckbox;
+use newsadmin\models\Article;
 
 /**
  * Block created with Luya Block Creator Version 1.0.0-rc1-dev at 15.08.2016 14:33
@@ -25,6 +27,13 @@ class DateTestBlock extends \cmsadmin\base\PhpBlock
      */
     public $cacheExpiration = 3600;
 
+    public function injectors()
+    {
+        return [
+            'foobar' => new ActiveQueryCheckbox(['query' => Article::find()]),
+        ];
+    }
+    
     public function name()
     {
         return 'DateTestBlock';
@@ -42,6 +51,9 @@ class DateTestBlock extends \cmsadmin\base\PhpBlock
                //['var' => 'date', 'label' => 'date', 'type' => 'zaa-date'],
                ['var' => 'datetime', 'label' => 'datetime', 'type' => 'zaa-datetime'],
            ],
+            'cfgs' => [
+                ['var' => 'asdfasdf', 'label' => 'Grösse', 'type' => 'zaa-checkbox', 'initvalue' => 1],
+            ],
         ];
     }
 

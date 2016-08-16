@@ -41,7 +41,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
             'vars' => $this->getVarValues(),
             'cfgs' => $this->getCfgValues(),
             'placeholders' => $this->getPlaceholderValues(),
-            'extras' => $this->extraVars(),
+            'extras' => $this->extraVarsOutput(),
         ], $this);
     }
     

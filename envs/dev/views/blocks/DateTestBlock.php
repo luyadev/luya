@@ -1,3 +1,3 @@
 <? print_r($vars); ?>
-
-<?= date("d.m.Y H:i", $vars['datetime']); ?>
+<? print_r($cfgs); ?>
+<? var_dump($extras); ?>

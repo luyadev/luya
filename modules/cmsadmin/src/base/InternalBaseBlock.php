@@ -7,6 +7,7 @@ use yii\helpers\Inflector;
 use yii\base\Object;
 use luya\helpers\Url;
 use cmsadmin\blockgroups\MainGroup;
+use luya\helpers\ArrayHelper;
 
 /**
  * Base Block for all Cms Blocks.
@@ -24,6 +25,17 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
 
     private $_envOptions = [];
 
+    public function init()
+    {
+        parent::init();
+        
+        foreach ($this->injectors() as $varName => $injector) {
+            $injector->setContext($this);
+            $injector->varName = $varName;
+            $injector->setup();
+        }
+    }
+    
     /**
      * @var bool Enable or disable the block caching
      */
@@ -68,6 +80,32 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
     public function getBlockGroup()
     {
         return MainGroup::className();
+    }
+    
+    /**
+     * Injectors are like huge helper objects which are going to automate functions, configs and variable assignement.
+     * 
+     * An example of an Injector which builds a select dropdown and assigns the active query data into the extra vars `foobar`.
+     *
+     * ```php
+     * public function injectors()
+     * {
+     *     return [
+     *         'foobar' => new cms\injector\ActiveQueryCheckbox([
+     *             'query' => MyModel::find()->where(['id' => 1]),
+     *             'type' => self::VAR_INJECTOR, // could be self::CFG_INJECTOR
+     *         ]);
+     *     ];
+     * }
+     * ```
+     * 
+     * Now the generated injector ActiveQueryCheckbox is going to grab all informations from the defined query and assign 
+     * them into the extra var foobar. Now you can access `$extras['foobar']` which returns all seleced rows from the checkbox
+     * you have assigend.
+     */
+    public function injectors()
+    {
+        return [];
     }
     
     /**
@@ -249,7 +287,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
     }
     
 
-    // access from outside
+    
 
     /**
      * @return array
@@ -257,6 +295,20 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
     public function extraVars()
     {
         return [];
+    }
+    
+    public function addExtraVar($key, $value)
+    {
+        $this->_extraVars[$key] = $value;
+    }
+    
+    private $_extraVars = [];
+    
+    // access from outside
+    public function extraVarsOutput()
+    {
+        $this->_extraVars = ArrayHelper::merge($this->_extraVars, $this->extraVars());
+        return $this->_extraVars;
     }
     
     /**
@@ -269,23 +321,29 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
         return [];
     }
 
+    private $_vars = [];
+    
     /**
      * @return array
      */
     public function getVars()
     {
         $config = $this->config();
-        if (!array_key_exists('vars', $config)) {
-            return [];
-        }
-        $data = [];
-        foreach ($config['vars'] as $item) {
-            $data[] = (new BlockVar($item))->toArray();
+        
+        if (isset($config['vars'])) {
+            foreach ($config['vars'] as $item) {
+                $this->_vars[] = (new BlockVar($item))->toArray();
+            }
         }
 
-        return $data;
+        return $this->_vars;
     }
 
+    public function addVar(array $varConfig)
+    {
+        $this->_vars[] = (new BlockVar($varConfig))->toArray();
+    }
+    
     /**
      * @return array
      */
@@ -293,6 +351,8 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
     {
         return (array_key_exists('placeholders', $this->config())) ? $this->config()['placeholders'] : [];
     }
+    
+    private $_cfgs = [];
 
     /**
      * @return array
@@ -300,15 +360,14 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
     public function getCfgs()
     {
         $config = $this->config();
-        if (!array_key_exists('cfgs', $config)) {
-            return [];
+        
+        if (isset($config['cfgs'])) {
+            foreach ($config['cfgs'] as $item) {
+                $this->_cfgs[] = (new BlockCfg($item))->toArray();
+            }
         }
-        $data = [];
-        foreach ($config['cfgs'] as $item) {
-            $data[] = (new BlockCfg($item))->toArray();
-        }
-
-        return $data;
+        
+        return $this->_cfgs;
     }
 
     /**

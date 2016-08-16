@@ -349,7 +349,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
             'twig_admin' => $blockObject->renderAdmin(),
             'vars' => $blockObject->getVars(),
             'cfgs' => $blockObject->getCfgs(),
-            'extras' => $blockObject->extraVars(),
+            'extras' => $blockObject->extraVarsOutput(),
             'values' => $blockItem['json_config_values'],
             'field_help' => $blockObject->getFieldHelp(),
             'cfgvalues' => $blockItem['json_config_cfg_values'], // add: t1_json_config_cfg_values
