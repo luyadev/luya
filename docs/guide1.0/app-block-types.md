@@ -40,7 +40,7 @@ This would create an input variable with a text input with the label `From Label
 ```php
 return [
     'vars' => [
-        ['var' => 'userInputText', 'label' => 'Beschreibung von userInputText', 'type' => 'zaa-text']
+        ['var' => 'userInputText', 'label' => 'Description of userInputText', 'type' => 'zaa-text']
     ]
 ];
 ```
@@ -48,25 +48,24 @@ return [
 Input-Types
 ------------------
 
-There are several types you can use instead `zaa-text` the most of them are self explaining
+There are several types you can use to generate your block controllers and inputs:
 
-| Type Name             | Description
-| --------------------- | -----------
-| zaa-text      | create a simple string input text value field
-| zaa-password  | create a input password field which hides the input value behind * signs
-| zaa-textarea          | create a multirow input element known as textarea
-| zaa-number | create a numerics values
-| zaa-link | creates a link field for internal and external URLs
-| zaa-wysiwyg | create a small wysiwg editor
-| zaa-select        | create a select dropdown with options based on the options parameter. The Options item must contain a value and label key
-| zaa-datetime | creates an integer value of datetime
-| zaa-date | creates an integer value of a date
-| zaa-checkbox | creates a single checkbox (e.g. to define on/off states)
-| zaa-checkbox-array | creates an array with checkboxes
-| zaa-file-upload       | creata a file upload form and returns the fileId on success
-| zaa-file-array-upload | creates an array with file id and caption string
-| zaa-image-upload      | creata a image upload form and return the imageId on success
-| zaa-image-array-upload | creates an asrray with image id an caption string
-| zaa-list-array | creates an array with a key variable `value`
-| zaa-decimal           | Creates decimal input field with option: `options="{'steps':0.0001}"` to define step size. Default = 0.001.
-
+|Type Name            |Description
+|---------------------|-----------
+|zaa-text|Create a simple string input text value field.
+|zaa-password|Create a input password field which hides the input value behind * signs
+|zaa-textarea|Create a multirow input element known as textarea
+|zaa-number|Create a numerics values
+|zaa-link|Create a link field for internal and external URLs
+|zaa-wysiwyg|Create a small wysiwg editor
+|[zaa-select](app-block-type-select.md)|Create a select dropdown with options based on the options parameter. The Options item must contain a value and label key
+|zaa-date|Create a datepicker where the user can choose a date, the response inside the block will be a unix timestamp.
+|zaa-datetime|Create a datepicker where the user can choose a date and provide an additional time, the response inside the block will be a unix timestamp.
+|[zaa-checkbox](app-block-type-checkbox.md)|Create a single checkbox (e.g. to define on/off states)
+|[zaa-checkbox-array](app-block-type-checkbox-array.md)|Create an array with checkboxes
+|zaa-file-upload|Create a file upload form and returns the fileId on success
+|zaa-file-array-upload|Create an array with file id and caption string
+|zaa-image-upload|Create a image upload form and return the imageId on success
+|zaa-image-array-upload|Create an asrray with image id an caption string
+|zaa-list-array|Create an array with a key variable `value`
+|zaa-decimal|Create decimal input field with option: `options="{'steps':0.0001}"` to define step size. Default = 0.001.

@@ -389,7 +389,7 @@
             link: function(scope) {
                 $timeout(function(){
                     scope.$watch(function() { return scope.model }, function(n, o) {
-                        if (n === undefined && o === undefined) {
+                        if (n == undefined || n == null || n == '') {
                             if (jQuery.isNumeric(scope.initvalue)) {
                                 scope.initvalue = typeCastValue(scope.initvalue);
                             }
