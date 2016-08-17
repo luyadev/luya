@@ -68,7 +68,13 @@ class Api extends \admin\base\RestActiveController
         
         foreach ($this->model->find()->all() as $key => $value) {
             $row = [];
-            foreach ($value->getAttributes() as $k => $v) {
+            
+            $attrs = $value->getAttributes();
+            foreach ($value->extraFields() as $field) {
+            	$attrs[$field] = $value->$field;
+            }
+            
+            foreach ($attrs as $k => $v) {
                 if (is_object($v)) {
                     continue;
                 }
