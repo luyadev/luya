@@ -547,6 +547,10 @@
 
             	$scope.pickerPreselect = new Date();
 
+            	$scope.isNumeric = function(num) {
+            	    return !isNaN(num)
+            	}
+            	
             	$scope.$watch(function() { return $scope.model }, function(n, o) {
             		if (n != null && n != undefined) {
             			var datep = new Date(n*1000);
@@ -561,7 +565,15 @@
             	});
 
             	$scope.refactor = function(n) {
-            		if (n == 'Invalid Date' || n == "") {
+            		if (!$scope.isNumeric($scope.hour) || $scope.hour == '') {
+						$scope.hour = "0";
+					}
+					
+					if (!$scope.isNumeric($scope.min)  || $scope.min == '') {
+						$scope.min = "0";
+					}
+            		
+            		if (n == 'Invalid Date' || n == "" || n == 'NaN') {
         				$scope.date = null;
         				$scope.model = null;
         			} else {
