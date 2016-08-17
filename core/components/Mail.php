@@ -6,7 +6,6 @@ use Yii;
 use Exception;
 use PHPMailer;
 use SMTP;
-use luya\web\View;
 
 /**
  * LUYA mail component to compose messages and send them via SMTP.
@@ -202,7 +201,7 @@ class Mail extends \yii\base\Component
             return $content;
         }
         
-        $view = new View();
+        $view = Yii::$app->getView();
         return $view->renderPhpFile(Yii::getAlias($this->layout), ['content' => $content]);
     }
     
