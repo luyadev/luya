@@ -55,7 +55,7 @@ There is also a twig function which allows you to retrieve the content like in Y
 t('app', 'title_top')
 ```
 
-### Placholders as Parameters
+### Placeholders as Parameters
 
 Sometimes you may want to add a placeholder you can fill up with specific content. You can use a key for the placholder or using the array keys:
 
@@ -72,7 +72,7 @@ The first example `today` could be used like this:
 echo Yii::t('app', 'today', time());
 ```
 
-while the second example needs a speicifc key `date` as parameter:
+While the second example needs a speicifc key `date` as parameter:
 
 ```php
 echo Yii::t('app', 'tomorrow', ['date' => time()]);
