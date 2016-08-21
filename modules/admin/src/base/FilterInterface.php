@@ -12,5 +12,5 @@ interface FilterInterface
 	 *
 	 * @return string The identifier must match [a-zA-Z0-9\-]
 	 */
-	abstract public static function identifier();
+	 public static function identifier();
 }
