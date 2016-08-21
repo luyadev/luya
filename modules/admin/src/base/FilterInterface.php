@@ -1,5 +1,7 @@
 <?php
 
+namespace admin\base;
+
 /**
  * Filter Interface
  * 
