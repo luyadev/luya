@@ -14,7 +14,7 @@ use yii\base\Object;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-abstract class Filter extends Object
+abstract class Filter extends Object implements FilterInterface
 {
     /**
      * Resize-Effect.
@@ -30,13 +30,6 @@ abstract class Filter extends Object
      * Crop-Effect.
      */
     const EFFECT_CROP = 'crop';
-
-    /**
-     * Unique identifier name for the effect, no special chars allowed.
-     *
-     * @return string The identifier must match [a-zA-Z0-9\-]
-     */
-    abstract public static function identifier();
 
     /**
      * Understandable Name expression for the effect.

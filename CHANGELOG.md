@@ -6,7 +6,8 @@ The changelog contains informations about bug fixes, new features or bc breaking
 1.0.0-rc1 (in progress)
 -----------------------
 
-- `#958` Fxied bug where date pickers does not work in block context but in crud context.
+- `#958` Fixed bug where date pickers does not work in block context but in crud context.
+- `#962` Fixed bug where abstract class should not implement static public function in php versions 5.2.0 - 5.6.25.
 - `#709` Removed ApiCmsNavItemPageBlockItem factory and angular resources dependencie.
 
 1.0.0-beta8 (11.08.2016)
