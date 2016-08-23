@@ -199,7 +199,28 @@ function typeCastValue(value) {
 				}
 			}
 		}
-	})
+	});
+	
+	/**
+	 * Readded ng-confirm-click in order to provide quick ability to implement confirm boxes.
+	 * 
+	 * ```
+	 * <button ng-confirm-click="Are you sure you want to to delete {{data.title}}?" confirmed-click="remove(data)">Remove</button>
+     * ```
+	 */
+	zaa.directive("ngConfirmClick", function() {
+ 	     return {
+ 	         link: function (scope, element, attr) {
+ 	             var msg = attr.ngConfirmClick || "Are you sure?";
+ 	             var clickAction = attr.confirmedClick;
+ 	             element.bind("click",function (event) {
+ 	                 if ( window.confirm(msg) ) {
+ 	                     scope.$eval(clickAction)
+ 	                 }
+ 	             });
+ 	         }
+ 	     };
+	 });
 	
 	zaa.directive("focusMe", function($timeout) {
 		return {
