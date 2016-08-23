@@ -224,7 +224,7 @@ class CrawlPage extends \yii\base\Object
             $content = strip_tags($bodyContent);
     
             // remove whitespaces and stuff
-            $content = trim(str_replace(array("\n", "\r", "\t", "\n\r", "\r\n"), '', $content));
+            $content = trim(str_replace(array("\n", "\r", "\t", "\n\r", "\r\n"), ' ', $content));
     
             $content = htmlentities($content, ENT_QUOTES | ENT_IGNORE, 'UTF-8');
     
