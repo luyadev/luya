@@ -34,12 +34,16 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
     {
         parent::init();
         
-        $this->on(self::EVENT_AFTER_DELETE, function ($e) {
-            foreach ($e->sender->navItemPageBlockItems as $item) {
+        $this->on(self::EVENT_AFTER_DELETE, function ($event) {
+            foreach ($event->sender->navItemPageBlockItems as $item) {
                 $item->delete();
             }
             
-            $this->forceNavItem->updateAttributes(['timestamp_update' => time()]);
+            $event->sender->forceNavItem->updateTimestamp();
+        });
+        
+        $this->on(self::EVENT_AFTER_UPDATE, function($event) {
+            $event->sender->forceNavItem->updateTimestamp();
         });
     }
 
@@ -170,7 +174,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
             $i++;
             $prev = $key-1;
             $next = $key+1;
-            $cacheKey = ['blockcache', $placeholder['id']];
+            $cacheKey = ['blockcache', (int) $placeholder['id']];
             
             $blockResponse = $this->getHasCache($cacheKey);
             

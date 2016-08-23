@@ -158,6 +158,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
             $this->timestamp_update = time();
             $this->create_user_id = Module::getAuthorUserId();
         } else {
+            $this->deleteHasCache(['blockcache', (int) $this->id]);
             $this->is_dirty = 1;
             $this->update_user_id = Module::getAuthorUserId();
             $this->timestamp_update = time();
@@ -175,9 +176,6 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
             }
             $this->reindex($this->nav_item_page_id, $this->placeholder_var, $this->prev_id);
             Log::add(2, ['tableName' => 'cms_nav_item_page_block_item', 'action' => 'update', 'row' => $this->id, 'pageTitle' => $this->droppedPageTitle, 'blockName' => $this->block->getNameForLog()], 'cms_nav_item_page_block_item', $this->id);
-            
-            
-            $this->deleteHasCache(['blockcache', $this->id]);
         }
     }
 
