@@ -131,6 +131,28 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     
     protected function ensureInputValues($event)
     {
+        // sort index fixture
+        
+        if (!$this->isNewRecord) {
+            $this->_olds = $this->getOldAttributes();
+        }
+        // its a negative value, so its a last item, lets find the last index for current config
+        if ($this->sort_index < 0) {
+            $last = self::originalFind()->andWhere(['nav_item_page_id' => $this->nav_item_page_id, 'placeholder_var' => $this->placeholder_var, 'prev_id' => $this->prev_id])->orderBy('sort_index DESC')->one();
+            if (!$last) {
+                $this->sort_index = 0;
+            } else {
+                $this->sort_index = $last->sort_index + 1;
+            }
+        } else { // its not a negative value, we have to find the positions after the current sort index and update to a higher level
+            $higher = self::originalFind()->where('sort_index >= :index', ['index' => $this->sort_index])->andWhere(['nav_item_page_id' => $this->nav_item_page_id, 'placeholder_var' => $this->placeholder_var, 'prev_id' => $this->prev_id])->all();
+            foreach ($higher as $item) {
+                $newSortIndex = $item->sort_index + 1;
+                Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $newSortIndex], ['id' => $item->id])->execute();
+            }
+        }
+        
+        // manipulate timestamps
         if ($this->isNewRecord) {
             $this->timestamp_create = time();
             $this->timestamp_update = time();
@@ -211,7 +233,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     private function reindex($navItemPageId, $placeholderVar, $prevId)
     {
         $index = 0;
-        $datas = self::find()->andWhere(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId])->orderBy('sort_index ASC, timestamp_create DESC')->all();
+        $datas = self::originalFind()->andWhere(['nav_item_page_id' => $navItemPageId, 'placeholder_var' => $placeholderVar, 'prev_id' => $prevId])->orderBy('sort_index ASC, timestamp_create DESC')->all();
         foreach ($datas as $item) {
             Yii::$app->db->createCommand()->update(self::tableName(), ['sort_index' => $index], ['id' => $item->id])->execute();
             ++$index;
@@ -238,6 +260,11 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         }
 
         return;
+    }
+    
+    public static function originalFind()
+    {
+        return Yii::createObject(ActiveQuery::className(), [get_called_class()]);
     }
     
     /**
