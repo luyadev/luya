@@ -95,6 +95,12 @@ class StorageController extends \luya\console\Command
                     ':filterId' => $row['filter_id'],
                 ])->queryOne();
             
+                
+                if (!$keep) {
+                    $this->outputError('Unable to find the first row for this delete request. Skip this one');
+                    continue;
+                }
+                
                 $remove = Yii::$app->db->createCommand()->delete('admin_storage_image', 'file_id=:fileId AND filter_id=:filterId AND id!=:id', [
                     ':fileId' => $row['file_id'],
                     ':filterId' => $row['filter_id'],
