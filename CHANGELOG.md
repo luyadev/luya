@@ -6,6 +6,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 1.0.0-rc1 (in progress)
 -----------------------
 
+- `#963` Fixed bug where caching if block is not reseted correctly.
 - `#836` Fixed bug where storage importer removes all files.
 - `#958` Fixed bug where date pickers does not work in block context but in crud context.
 - `#962` Fixed bug where abstract class should not implement static public function in php versions 5.2.0 - 5.6.25.
