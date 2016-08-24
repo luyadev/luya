@@ -427,16 +427,27 @@ class StorageContainer extends Component
             
             $resolution = Storage::getImageResolution($fileSavePath);
             
-            $model = new StorageImage();
-            $model->setAttributes([
-                'file_id' => $fileId,
-                'filter_id' => $filterId,
-                'resolution_width' => $resolution['width'],
-                'resolution_height' => $resolution['height'],
-            ]);
+            // ensure the existing of the model
             
-            if (!$model->save()) {
-                throw new Exception("Unable to save storage image, fatal database exception.");
+            $model = StorageImage::find()->where(['file_id' => $fileId, 'filter_id' => $filterId])->one();
+            
+            if ($model) {
+                $model->updateAttributes([
+                    'resolution_width' => $resolution['width'],
+                    'resolution_height' => $resolution['height'],
+                ]);
+            } else {
+                $model = new StorageImage();
+                $model->setAttributes([
+                    'file_id' => $fileId,
+                    'filter_id' => $filterId,
+                    'resolution_width' => $resolution['width'],
+                    'resolution_height' => $resolution['height'],
+                ]);
+                
+                if (!$model->save()) {
+                    throw new Exception("Unable to save storage image, fatal database exception.");
+                }
             }
             
             $this->_imagesArray[$model->id] = $model->toArray();

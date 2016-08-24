@@ -166,7 +166,13 @@ class ImportController extends Command implements ImportControllerInterface
                 $this->outputInfo(PHP_EOL . $section . ":");
                 foreach ($value as $k => $v) {
                     if (is_array($v)) {
-                        $this->output(print_r($v, true));
+                        foreach ($v as $kk => $kv) {
+                            if (is_array($kv)) {
+                                $this->output(" - {$kk}: " . print_r($kv, true));
+                            } else {
+                                $this->output(" - {$kk}: {$kv}");
+                            }
+                        }
                     } else {
                         $this->output(" - " . $v);
                     }

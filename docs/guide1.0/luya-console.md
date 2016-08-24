@@ -25,6 +25,7 @@ Where *command* is one of the following commands below:
 |`module/create`|Create new [frontend/admin module](app-module.md) with a wizzard.
 |`block/create`|Create new [CMS content blocks](app-blocks.md) with a wizzard.
 |`storage/cleanup`|Cleanup not existing files compare file system and database.
+|`storage/cleanup-image-table`|Find if dupliations are available in the image table (same filter and file id). If confirmed it will remove all duplications except of one, the first one created.
 |`storage/process-thumbnails`|Create all thumbnails for filemanager preview. Otherwhise they are created on request load.
 |`aw/create`|Generate a [new Active Window](ngrest-activewindow.md) class file based on your configuration.
 |`module/controller/action`|All comands stored in the folder `commands` can be run by default routing.
