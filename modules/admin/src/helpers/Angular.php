@@ -162,9 +162,17 @@ class Angular
     /**
      * zaaCheckboxArray directive
      * 
-     * ```
+     * ```php
      * AngularInput::zaaCheckboxArray($ngModel, $this->alias, [['value' => 123, 'label' => 123123], ['value' => 'A', 'label' => 'BCZ']]);
      * ```
+     * 
+     * If you like to build your custom angualr directive to use two way binding without items data you can use something like tis
+     * 
+     * ```php
+     * Angular::directive('zaa-checkbox-array', $ngModel, ['options' => $this->getServiceName('myDataService')]);
+     * ```
+     * 
+     * But make sure the service you call returns the data within ['items' => $data].
      * 
      * @param unknown $ngModel
      * @param unknown $label
