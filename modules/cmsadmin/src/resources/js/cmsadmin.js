@@ -631,6 +631,11 @@
 		};
 		
 		$scope.toggleIsHidden = function(catId) {
+			
+			if ($scope.hiddenCats == undefined) {
+				return false;
+			}
+			
 			if (catId in $scope.hiddenCats) {
 				if ($scope.hiddenCats[catId] == 1) {
 					return true;
