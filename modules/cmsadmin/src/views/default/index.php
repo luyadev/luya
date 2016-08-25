@@ -14,7 +14,7 @@
             </div>
         </div>
 
-<hr style="margin:50px 0px; background-color:#F0F0F0; color:#F0F0F0; height:1px; border:0px;" />
+<hr style="margin:10px 0px; background-color:#F0F0F0; color:#F0F0F0; height:1px; border:0px;" />
 
         <div class="row" ng-show="data.nav_item_type == 1 && !data.isInline">
             <div class="input input--text col s12">
@@ -34,8 +34,8 @@
                     <input name="text" type="text" class="input__field" ng-model="data.title" ng-change="aliasSuggestion()" focus-me="true" />
                 </div>
             </div>
-        <div class="row">
         </div>
+        <div class="row">
             <div class="input input--text col s12">
                 <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_alias'); ?></label>
                 <div class="input__field-wrapper">
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" ng-show="data.is_draft==0" ng-hide="data.isInline || navcontainer.length == 1">
+        <div class="row" ng-show="data.is_draft==0" ng-hide="data.isInline || navcontainer.length == 1 || data.parent_nav_id!=0">
             <div class="input input--select col s12">
                 <label class="input__label"><?php echo \cmsadmin\Module::t('view_index_page_nav_container'); ?></label>
                 <div class="input__field-wrapper">
@@ -70,7 +70,7 @@
             </div>
         </div>
 
-<hr style="margin:50px 0px; background-color:#F0F0F0; color:#F0F0F0; height:1px; border:0px;" />
+<hr style="margin:10px 0px; background-color:#F0F0F0; color:#F0F0F0; height:1px; border:0px;" />
 
         <div ng-switch-when="1">
             <create-form-page data="data"></create-form-page>
@@ -277,7 +277,7 @@
             <?php if (Yii::$app->adminuser->canRoute('cmsadmin/page/create')): ?>
             <a class="sidebar__button sidebar__button--positive" ui-sref="custom.cmsadd">
                 <div class="sidebar__icon-holder">
-                    <i class="sidebar__icon material-icons">add</i>
+                    <i class="sidebar__icon material-icons">add_box</i>
                 </div>
                 <span class="sidebar__text"><?php echo \cmsadmin\Module::t('view_index_sidebar_new_page'); ?></span>
             </a>

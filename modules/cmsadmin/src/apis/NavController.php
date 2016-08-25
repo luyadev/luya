@@ -195,10 +195,17 @@ class NavController extends \admin\base\RestController
         $fromDraft = $this->postArg('from_draft_id');
         $model = new \cmsadmin\models\Nav();
         
+        $parentNavId = $this->postArg('parent_nav_id');
+        $navContainerId = $this->postArg('nav_container_id');
+        
+        if (!empty($parentNavId)) {
+            $navContainerId = Nav::findOne($parentNavId)->nav_container_id;
+        }
+        
         if (!empty($fromDraft)) {
-            $create = $model->createPageFromDraft($this->postArg('parent_nav_id'), $this->postArg('nav_container_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('description'), $fromDraft, $this->postArg('is_draft'));
+            $create = $model->createPageFromDraft($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('description'), $fromDraft, $this->postArg('is_draft'));
         } else {
-            $create = $model->createPage($this->postArg('parent_nav_id'), $this->postArg('nav_container_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('layout_id'), $this->postArg('description'), $this->postArg('is_draft'));
+            $create = $model->createPage($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('layout_id'), $this->postArg('description'), $this->postArg('is_draft'));
         }
         
         if ($create !== true) {
