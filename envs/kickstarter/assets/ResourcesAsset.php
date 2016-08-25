@@ -22,6 +22,7 @@ class ResourcesAsset extends \luya\web\Asset
     	'only' => [
     		'bootstrap/*',
     		'css/*',
+    	    'js/*',
     	]
     ];
     
