@@ -271,6 +271,10 @@ class Nav extends \yii\db\ActiveRecord
         $move->sort_index = $to->sort_index;
         $move->update();
 
+        foreach ($move->getRecursiveChildren() as $child) {
+            $child->updateAttributes(['nav_container_id' => $to->nav_container_id]);
+        }
+        
         return true;
     }
 
@@ -292,6 +296,10 @@ class Nav extends \yii\db\ActiveRecord
         $move->sort_index = $to->sort_index;
         $move->update();
 
+        foreach ($move->getRecursiveChildren() as $child) {
+            $child->updateAttributes(['nav_container_id' => $to->nav_container_id]);
+        }
+        
         return true;
     }
 
@@ -311,6 +319,10 @@ class Nav extends \yii\db\ActiveRecord
         $move->parent_nav_id = $on->id;
         $move->update();
 
+        foreach ($move->getRecursiveChildren() as $child) {
+            $child->updateAttributes(['nav_container_id' => $on->nav_container_id]);
+        }
+        
         return true;
     }
 
