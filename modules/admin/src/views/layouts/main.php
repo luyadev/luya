@@ -83,7 +83,9 @@ $this->beginPage()
         <span class="fileupload__reset" ng-click="reset()" ng-show="fileinfo!=null"><i class="material-icons">remove_circle</i></span>
         <span class="fileupload__path" ng-bind="fileinfo.name"></span>
 
+        <div ng-if="!modal">
         <modal is-modal-hidden="modal"><storage-file-manager selection="true" /></modal>
+        </div>
     </div>
 </script>
 
