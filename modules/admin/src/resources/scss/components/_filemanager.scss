@@ -67,8 +67,8 @@
 }
 
 .filemanager__folder--active > .filemanager__folder-button {
-    background-color: color($filemanager--base-color, "darken-2");
-    border-radius: 2px;
+    background-color: $filemanager--highlight-color;
+    border-radius: 4px;
     color: color("shades", "white");
 }
 
@@ -115,7 +115,7 @@
 
     .filemanager__folders .filemanager__folders & {
         &:before {
-            background-color: color($filemanager--base-color, "darken-2");
+            background-color: color($filemanager--base-color, "white");
             content: "";
             height: 100%;
             left: -12px;
@@ -125,7 +125,7 @@
             z-index: 1;
         }
         &:after {
-            background-color: color($filemanager--base-color, "darken-2");
+            background-color: color($filemanager--base-color, "white");
             content: "";
             height: 1px;
             left: -12px;
@@ -138,6 +138,12 @@
         &:last-of-type:before {
             height: 20px;
         }
+    }
+
+    &-root {
+        display: inline-block;
+        background-image: url(#{$folder-icon-svg-path}/folder_opened.svg);
+        content: ' ';
     }
 
     &:last-of-type {
@@ -155,20 +161,23 @@
     position: relative;
     .filemanager__folder-name {
         display: inline-block;
-        margin-bottom: -4px;
         max-width: 115px;
         white-space: nowrap;
+        vertical-align: text-bottom;
     }
     //Font-color for the hovering folder-names
     &:hover > span {
-        color: color($filemanager--base-color, "darken-2");
+        color: color($filemanager--base-color, "black");
+        font-weight: bold;
     }
     &:hover > .filemanager__folder-name {
-        overflow: hidden;
+        // the foldername gets cut
+        //overflow: hidden;
     }
     //Font-color of the active selected folder-name
     .filemanager__folder.filemanager__folder--active > & > span {
-        color: color("shades", "white");
+        color: color("shades", "black");
+        font-weight: bold;
     }
     //Default-state all folder-icons
     .filemanager__folder-icon {
@@ -184,13 +193,13 @@
     //Hover to display the active-folder-icon
     &:hover > .filemanager__folder-icon--active {
         color: color($filemanager--base-color, "darken-2");
-        display: inline;
+        display: inline-block;
         z-index: 5;
     }
 
     .filemanager__folder.filemanager__folder--active > & > .filemanager__folder-icon--active {
         color: color("shades", "white");
-        display: inline;
+        display: inline-block;
         z-index: 5;
     }
     &:hover > .filemanager__folder-icon--default,
@@ -201,18 +210,43 @@
         max-width: 80px;
     }
 
+    .filemanager__folder-icon--default {
+        background-image: url(#{$folder-icon-svg-path}/folder_closed.svg);
+        content: ' ';
+    }
+
+    .filemanager__folder-icon--active {
+        background-image: url(#{$folder-icon-svg-path}/folder_opened.svg);
+        content: ' ';
+    }
+
     .filemanager__cancel-btn {
         background-color: color("red", "base");
     }
     .filemanager__file-dialog {
-        padding-top: 8px;
+        //padding-top: 8px;
+        padding: 20px;
         position: relative;
         span {
-            color: color("shades", "white");
+            color: color("shades", "black");
             margin-right: 4px;
+            font-weight: normal;
         }
         .btn-floating {
             background-color: color("light-blue", "accent-1");
+            margin-top:-7px;
+
+            &:hover i{
+                font-size: 2rem;
+
+                &.filemanager__cancel-icon {
+                    font-size: 2.4rem;
+                }
+            }
+        }
+        .filemanager__file-dialog--buttons {
+            display: inline-block;
+            margin-left: 20px;
         }
     }
     .filemanager__file-dialog__input {
@@ -251,13 +285,18 @@
     float: right;
     font-size: 22px;
     opacity: 0;
-    padding: 0 8px;
+    padding: 0 14px;
     pointer-events: none;
     position: relative;
-    right: 0;
+    right: 14px;
     top: 4px;
     transition: 0.25s ease opacity;
     vertical-align: middle;
+    color: grey;
+
+    &:hover {
+        color: #54c1ff;
+    }
 }
 
 .modal-content {

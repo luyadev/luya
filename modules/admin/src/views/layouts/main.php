@@ -124,8 +124,8 @@ $this->beginPage()
 <script type="text/ng-template" id="reverseFolders">
 
     <div class="filemanager__folder-button" ng-click="changeCurrentFolderId(folder.id)">
-        <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default">folder_open</i>
-        <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active">folder</i>
+        <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default"></i>
+        <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active"></i>
 
                         <span class="filemanager__folder-name">
                             {{folder.name }}                                            
@@ -138,37 +138,42 @@ $this->beginPage()
                             <input type="text" ng-model="folder.name" class="filemanager__file-dialog__input"/>
                             <div class="filemanager__file-dialog">
                                 <span><?php echo Admin::t('layout_filemanager_save_dir'); ?></span>
-                                <span class="btn-floating white">
-                                    <i class="material-icons filemanager__file-dialog__icon" ng-click="updateFolder(folder)">check</i>
-                                </span>
-                                <span class="btn-floating white">
-                                    <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="toggleFolderMode(false)">add</i>
-                                </span>
+                                <div class="filemanager__file-dialog--buttons">
+                                    <span class="btn-floating white">
+                                        <i class="material-icons filemanager__file-dialog__icon" ng-click="updateFolder(folder)">check</i>
+                                    </span>
+                                    <span class="btn-floating white">
+                                        <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="toggleFolderMode(false)">add</i>
+                                    </span>
+                                </div>                                
                             </div>
                         </span>
                         <i class="material-icons filemanager__file-move-icon" ng-click="moveFilesTo(folder.id)" ng-show="showFoldersToMove && currentFolderId != folder.id">keyboard_return</i>
                         <span ng-show="folderDeleteForm && currentFolderId==folder.id">
                             <div class="filemanager__file-dialog">
                                 <span><?php echo Admin::t('layout_filemanager_remove_dir'); ?></span>
-                                <span class="btn-floating white">
-                                    <i class="material-icons filemanager__file-dialog__icon" ng-click="checkEmptyFolder(folder)">check</i>
-                                </span>
-                                <span class="btn-floating white">
-                                    <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="toggleFolderMode(false)">add</i>
-                                </span>
-
+                                <div class="filemanager__file-dialog--buttons">
+                                    <span class="btn-floating white">
+                                        <i class="material-icons filemanager__file-dialog__icon" ng-click="checkEmptyFolder(folder)">check</i>
+                                    </span>
+                                    <span class="btn-floating white">
+                                        <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="toggleFolderMode(false)">add</i>
+                                    </span>
+                                </div>
                             </div>
                         </span>
 
                         <span ng-show="folderDeleteConfirmForm && currentFolderId==folder.id">
                             <div class="filemanager__file-dialog">
                                 <span><?php echo Admin::t('layout_filemanager_remove_dir_not_empty'); ?></span>
-                                <span class="btn-floating white">
-                                    <i class="material-icons filemanager__file-dialog__icon" ng-click="deleteFolder(folder)">check</i>
-                                </span>
-                                <span class="btn-floating white">
-                                    <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="toggleFolderMode(false)">add</i>
-                                </span>
+                                <div class="filemanager__file-dialog--buttons">
+                                    <span class="btn-floating white">
+                                        <i class="material-icons filemanager__file-dialog__icon" ng-click="deleteFolder(folder)">check</i>
+                                    </span>
+                                    <span class="btn-floating white">
+                                        <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="toggleFolderMode(false)">add</i>
+                                    </span>
+                                </div>
                             </div>
                         </span>
 
@@ -206,8 +211,7 @@ $this->beginPage()
             <ul class="filemanager__folders">
                 <li class="filemanager__folder" ng-class="{'filemanager__folder--active' : currentFolderId == 0 }">
                     <div class="filemanager__folder-button folder-root" ng-click="changeCurrentFolderId(0)">
-                        <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default">folder_open</i>
-                        <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active">folder</i>
+                        <i class="material-icons filemanager__folder-icon filemanager__folder-root"></i>
                         <span class="filemanager__folder-name"><?php echo Admin::t('layout_filemanager_root_dir'); ?></span>
                     </div>
                     <ul class="filemanager__folders">
