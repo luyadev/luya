@@ -192,6 +192,27 @@ class Nav extends \yii\db\ActiveRecord
                 break;
         }
     }
+    
+    /**
+     * Get an array of all childrens of the current item recursivly.
+     * 
+     * This method is mainly to find all recursive children of a nav item when moving a page into a container 
+     * all childrens requires to update its container id as well, so this method contains the data of its children
+     */
+    public function getRecursiveChildren()
+    {
+        $data = [];
+        $this->internalGetRecursiveChildren($data, $this->id);
+        return $data;
+    }
+    
+    private function internalGetRecursiveChildren(&$array, $parentNavId)
+    {
+        foreach (self::find()->where(['parent_nav_id' => $parentNavId])->all() as $item) {
+            $array[] = $item;
+            $this->internalGetRecursiveChildren($array, $item->id);
+        }
+    }
 
     // static helpers to move and copie
 
@@ -203,6 +224,10 @@ class Nav extends \yii\db\ActiveRecord
         $move->parent_nav_id = 0;
         $move->update();
 
+        foreach ($move->getRecursiveChildren() as $child) {
+            $child->updateAttributes(['nav_container_id' => $toCatId]);
+        }
+        
         return true;
     }
 
