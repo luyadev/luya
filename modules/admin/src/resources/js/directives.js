@@ -1641,17 +1641,6 @@
                 }
 
                 $scope.changeCurrentFolderId = function(folderId) {
-                    if ($scope.currentFolderId != folderId) {
-                        if ($scope.folderDeleteForm) {
-                            $scope.folderDeleteForm = false;
-                        }
-                        if ($scope.folderUpdateForm) {
-                            $scope.folderUpdateForm = false;
-                        }
-                        if ($scope.folderDeleteConfirmForm) {
-                            $scope.folderDeleteConfirmForm = false;
-                        }
-                    }
                     $scope.currentFolderId = folderId;
                     ServiceFoldersDirecotryId.folderId = folderId;
                     $http.post('admin/api-admin-common/save-filemanager-folder-state', {folderId : folderId});
