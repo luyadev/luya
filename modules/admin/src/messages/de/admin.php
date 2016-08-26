@@ -31,7 +31,7 @@ return [
     'layout_debug_table_value' => 'Wert',
     'layout_filemanager_save_dir' => 'Speichern?',
     'layout_filemanager_remove_dir' => 'Verzeichniss löschen?',
-    'layout_filemanager_remove_dir_not_empty' => 'Das Verzeichnis ist nicht leer - trotzdem löschen?',
+    'layout_filemanager_remove_dir_not_empty' => 'Das Verzeichnis ist nicht leer.<br/>Trotzdem löschen?',
     'layout_filemanager_remove_selected_files' => 'markierte Dateien löschen',
     'layout_filemanager_move_selected_files' => 'Verschieben nach',
     'layout_filemanager_upload_error' => 'Fehler beim Hochladen der Datei',

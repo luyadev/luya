@@ -1641,9 +1641,29 @@
                 }
 
                 $scope.changeCurrentFolderId = function(folderId) {
+                    if ($scope.currentFolderId != folderId) {
+                        if ($scope.folderDeleteForm) {
+                            $scope.folderDeleteForm = false;
+                        }
+                        if ($scope.folderUpdateForm) {
+                            $scope.folderUpdateForm = false;
+                        }
+                        if ($scope.folderDeleteConfirmForm) {
+                            $scope.folderDeleteConfirmForm = false;
+                        }
+                    }
                     $scope.currentFolderId = folderId;
                     ServiceFoldersDirecotryId.folderId = folderId;
                     $http.post('admin/api-admin-common/save-filemanager-folder-state', {folderId : folderId});
+                };
+
+                $scope.toggleFolderItem = function(data) {
+                    if (data.toggle_open == undefined) {
+                        data['toggle_open'] = 1;
+                    } else {
+                        data['toggle_open'] = !data.toggle_open;
+                    }
+                    $http.post('admin/api-admin-common/filemanager-foldertree-history', {data : data}).then(function(response) {});
                 };
 
                 $scope.folderUpdateForm = false;

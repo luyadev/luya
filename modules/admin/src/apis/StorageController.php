@@ -39,8 +39,10 @@ class StorageController extends \admin\base\RestController
         
         if ($cache === false) {
             $folders = [];
-            foreach (Yii::$app->storage->findFolders() as $folder) {
-                $folders[] = $folder->toArray();
+            foreach (Yii::$app->storage->findFolders() as $key => $folder) {
+                $folders[$key] = $folder->toArray();
+                $folders[$key]['toggle_open'] = (int) Yii::$app->adminuser->identity->setting->get('foldertree.'.$folder->id);
+                $folders[$key]['subfolder'] = Yii::$app->storage->getFolder($folder->id)->hasChild();
             }
             
             $this->setHasCache('storageApiDataFolders', $folders, new DbDependency(['sql' => 'SELECT MAX(id) FROM admin_storage_folder WHERE is_deleted=0']), 0);

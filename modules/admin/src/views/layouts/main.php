@@ -123,16 +123,17 @@ $this->beginPage()
 
 <script type="text/ng-template" id="reverseFolders">
 
+    <i class="material-icons treeview__toggler filemanager__folder-toggleicon" ng-click="toggleFolderItem(folder)" ng-hide="folder.subfolder==0" ng-class="{'treeview__toggler--subnav-closed': folder.toggle_open!=1}">arrow_drop_down</i>
     <div class="filemanager__folder-button" ng-click="changeCurrentFolderId(folder.id)">
         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default"></i>
         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active"></i>
 
-                        <span class="filemanager__folder-name">
+                        <span class="filemanager__folder-name" ng-hide="folderUpdateForm && currentFolderId==folder.id"">
                             {{folder.name }}                                            
                         </span>
 
-                        <i class="material-icons filemanager__edit-icon" ng-show="currentFolderId==folder.id" ng-click="toggleFolderMode('edit')">mode_edit</i>
-                        <i class="material-icons filemanager__delete-icon" ng-show="currentFolderId==folder.id" ng-click="toggleFolderMode('remove')">delete</i>
+                        <i class="material-icons filemanager__edit-icon" ng-click="toggleFolderMode('edit')">mode_edit</i>
+                        <i class="material-icons filemanager__delete-icon" ng-click="toggleFolderMode('remove')">delete</i>
                         
                         <span ng-show="folderUpdateForm && currentFolderId==folder.id">
                             <input type="text" ng-model="folder.name" class="filemanager__file-dialog__input"/>
@@ -179,7 +180,7 @@ $this->beginPage()
 
         <!-- mdi-mdi-action-highlight-remove -->
     </div>
-    <ul class="filemanager__folders" >
+    <ul class="filemanager__folders" ng-show="folder.toggle_open==1">
         <li class="filemanager__folder"  ng-class="{'filemanager__folder--active' : currentFolderId == folder.id, 'filemanager__folder--has-subfolders': folder.__items.length > 0}" ng-repeat="folder in foldersData | filemanagerdirsfilter:folder.id"  ng-include="'reverseFolders'"></li>
     </ul>
 </script>
@@ -209,9 +210,9 @@ $this->beginPage()
 
             <!-- FOLDER LIST -->
             <ul class="filemanager__folders">
-                <li class="filemanager__folder" ng-class="{'filemanager__folder--active' : currentFolderId == 0 }">
+                <li class="filemanager__folder filemanager__folder--root" ng-class="{'filemanager__folder--active' : currentFolderId == 0 }">
                     <div class="filemanager__folder-button folder-root" ng-click="changeCurrentFolderId(0)">
-                        <i class="material-icons filemanager__folder-icon filemanager__folder-root"></i>
+                        <i class="material-icons filemanager__folder-icon filemanager__folder-icon--root"></i>
                         <span class="filemanager__folder-name"><?php echo Admin::t('layout_filemanager_root_dir'); ?></span>
                     </div>
                     <ul class="filemanager__folders">
