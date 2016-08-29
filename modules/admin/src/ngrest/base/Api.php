@@ -87,6 +87,7 @@ class Api extends RestActiveController
 
         return new ActiveDataProvider([
             'query' => $model->ngRestFilters()[$filterName],
+            'pagination' => $this->pagination,
         ]);
     }
     

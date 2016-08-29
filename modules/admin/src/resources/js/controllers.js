@@ -66,14 +66,27 @@
 		
 		// ng-change event triggers this method
 		// this method is also used withing after save/update events in order to retrieve current selecter filter data.
-		$scope.realoadCrudList = function() {
+		$scope.realoadCrudList = function(pageId) {
 			LuyaLoading.start();
 			if ($scope.currentFilter == 0) {
-				 $scope.loadList();
+				 $scope.loadList(pageId);
 			} else {
-				$http.get($scope.config.apiEndpoint + '/filter?filterName=' + $scope.currentFilter + '&' + $scope.config.apiListQueryString).success(function(data) {
+				var url = $scope.config.apiEndpoint + '/filter?filterName=' + $scope.currentFilter + '&' + $scope.config.apiListQueryString;
+				if (pageId) {
+					url = url + '&page=' + pageId;
+				}
+				if ($scope.orderBy) {
+					url = url + '&sort=' + $scope.orderBy;
+				}
+				$http.get(url).then(function(response) {
+					$scope.setPagination(
+						response.headers('X-Pagination-Current-Page'),
+						response.headers('X-Pagination-Page-Count'),
+						response.headers('X-Pagination-Per-Page'),
+						response.headers('X-Pagination-Total-Count')
+					);
 					LuyaLoading.stop();
-					$scope.data.list = data;
+					$scope.data.list = response.data;
 					$scope.reApplyOrder();
 				});
 			}
@@ -149,7 +162,11 @@
 		
 		$scope.changeOrder = function(field, sort) {
 			$scope.orderBy = sort + field;
-			$scope.data.list = $filter('orderBy')($scope.data.list, sort + field);
+			if ($scope.pager) {
+				$scope.realoadCrudList(1);
+			} else {
+				$scope.data.list = $filter('orderBy')($scope.data.list, sort + field);
+			}
 		};
 		
 		$scope.reApplyOrder = function() {
@@ -290,13 +307,28 @@
 			});
 		}
 		
-		$scope.loadList = function() {
+		$scope.loadList = function(pageId) {
 			LuyaLoading.start();
 			$http.get($scope.config.apiEndpoint + '/services').success(function(serviceResponse) {
 				$scope.service = serviceResponse;
-				$http.get($scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString).success(function(data) {
+				var url = $scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString;
+				if (pageId !== undefined) {
+					url = url + '&page=' + pageId;
+				}
+				if ($scope.orderBy) {
+					url = url + '&sort=' + $scope.orderBy;
+				}
+				$http.get(url).then(function(response) {
+					$scope.setPagination(
+						response.headers('X-Pagination-Current-Page'),
+						response.headers('X-Pagination-Page-Count'),
+						response.headers('X-Pagination-Per-Page'),
+						response.headers('X-Pagination-Total-Count')
+					);
+
+					// return data
 					LuyaLoading.stop();
-					$scope.data.list = data;
+					$scope.data.list = response.data;
 					$scope.reApplyOrder();
 				});
 			});
@@ -307,6 +339,41 @@
 		$scope.resetData = function() {
 			$scope.data.create = angular.copy({});
 			$scope.data.update = angular.copy({});
+		}
+		
+		$scope.pagerPrevClick = function() {
+			if ($scope.pager.currentPage != 1) {
+				$scope.realoadCrudList(parseInt($scope.pager.currentPage)-1);
+			}
+		};
+		
+		$scope.pagerNextClick = function() {
+			if ($scope.pager.currentPage != $scope.pager.pageCount) {
+				$scope.realoadCrudList(parseInt($scope.pager.currentPage)+1);
+			}
+		};
+		
+		$scope.pager = false;
+		
+		$scope.setPagination = function(currentPage, pageCount, perPage, totalItems) {
+			if (currentPage != null && pageCount != null && perPage != null && totalItems != null) {
+				
+				var i = 1;
+				var urls = [];
+				for (i = 1; i <= pageCount; i++) {
+					urls.push(i);
+				}
+				
+				$scope.pager = {
+					'currentPage': currentPage,
+					'pageCount': pageCount,
+					'perPage': perPage,
+					'totalItems': totalItems,
+					'pages': urls,
+				};
+			} else {
+				$scope.pager = false;
+			}
 		}
 		
 		$scope.data = {

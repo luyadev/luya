@@ -115,6 +115,17 @@ use admin\ngrest\render\RenderCrud;
                     </div>
                 </div>
             </div>
+            
+            <div ng-if="pager" style="text-align: center;">
+                <ul class="pagination">
+                    <li class="waves-effect" ng-class="{'disabled' : pager.currentPage == 1}" ng-click="pagerPrevClick()"><a><i class="material-icons">chevron_left</i></a></li>
+                    <li class="waves-effect" ng-repeat="pageId in pager.pages" ng-class="{'active': pageId == pager.currentPage}" ng-click="realoadCrudList(pageId)">
+                        <a>{{pageId}}</a>
+                    </li> 
+                    <li class="waves-effect" ng-class="{'disabled' : pager.currentPage == pager.pageCount}" ng-click="pagerNextClick()"><a><i class="material-icons">chevron_right</i></a></li>
+                </ul>
+            </div>
+            
             <table class="striped responsive-table hoverable">
                 <thead>
                     <tr>
@@ -150,6 +161,17 @@ use admin\ngrest\render\RenderCrud;
                     </tr>
                 </tbody>
             </table>
+            
+            <div ng-if="pager" style="text-align: center;">
+                <ul class="pagination">
+                    <li class="waves-effect" ng-class="{'disabled' : pager.currentPage == 1}" ng-click="pagerPrevClick()"><a><i class="material-icons">chevron_left</i></a></li>
+                    <li class="waves-effect" ng-repeat="pageId in pager.pages" ng-class="{'active': pageId == pager.currentPage}" ng-click="realoadCrudList(pageId)">
+                        <a>{{pageId}}</a>
+                    </li> 
+                    <li class="waves-effect" ng-class="{'disabled' : pager.currentPage == pager.pageCount}" ng-click="pagerNextClick()"><a><i class="material-icons">chevron_right</i></a></li>
+                </ul>
+            </div>
+            
             <div ng-show="data.list.length == 0" class="alert alert--info"><?php echo \admin\Module::t('ngrest_crud_empty_row'); ?></div>
         </div>
         <!-- /LIST -->
