@@ -277,7 +277,12 @@
 		
 		$scope.submitUpdate = function () {
 			$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true)).success(function(data) {
-				$scope.realoadCrudList();
+				if ($scope.pager) {
+					$scope.realoadCrudList($scope.pager.currentPage);
+				} else {
+					$scope.realoadCrudList();
+				}
+				
 				$scope.applySaveCallback();
 				AdminToastService.success(i18n['js_ngrest_rm_update'], 2000);
 				$scope.switchTo(0, true);
