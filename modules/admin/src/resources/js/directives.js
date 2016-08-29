@@ -1652,7 +1652,7 @@
                     } else {
                         data['toggle_open'] = !data.toggle_open;
                     }
-                    $http.post('admin/api-admin-common/filemanager-foldertree-history', {data : data}).then(function(response) {});
+                    $http.post('admin/api-admin-common/filemanager-foldertree-history', {data : data});
                 };
 
                 $scope.folderUpdateForm = false;

@@ -128,7 +128,7 @@ $this->beginPage()
         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default"></i>
         <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active"></i>
 
-                        <span class="filemanager__folder-name" ng-hide="folderUpdateForm && currentFolderId==folder.id"">
+                        <span class="filemanager__folder-name" ng-hide="folderUpdateForm && currentFolderId==folder.id">
                             {{folder.name }}                                            
                         </span>
 
