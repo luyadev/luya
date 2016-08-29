@@ -23,6 +23,7 @@
 + [Translations](app-translation.md)
 + [Assets](app-assets.md)
 + [Bower Assets](app-assets-bower.md)
++ [Languages](app-language.md)
 
 ### Frontend Module
 
