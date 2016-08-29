@@ -2,11 +2,12 @@
 
 namespace luya\traits;
 
+use yii\web\Response;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\QueryParamAuth;
 use yii\filters\auth\HttpBearerAuth;
 use yii\filters\ContentNegotiator;
-use yii\web\Response;
+use luya\rest\UserBehaviorInterface;
 
 /**
  * Rest Behavior Trait to implement basic Rest behaviors.
