@@ -9,25 +9,19 @@ $this->beginPage()
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title><?php echo Yii::$app->siteTitle; ?> // {{currentItem.alias}}</title>
-    <meta name="description" content="">
+    <title><?php echo Yii::$app->siteTitle; ?> &rsaquo; {{currentItem.alias}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="<?php echo Url::base(true); ?>/admin" />
     <style type="text/css">
-        [ng:cloak],
-        [ng-cloak],
-        [data-ng-cloak],
-        [x-ng-cloak],
-        .ng-cloak,
-        .x-ng-cloak {
-            display: none !important;
-        }
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  			display: none !important;
+		}
     </style>
     <?php $this->head(); ?>
 </head>
 <body ng-cloak flow-prevent-drop>
 <?php $this->beginBody(); ?>
-<div class="loading-overlay" ng-show="LuyaLoading.getState()">
+<div class="loading-overlay" ng-if="LuyaLoading.getState()">
     <div class="loading-overlay__content">
         <h3 class="loading-overlay__title">
             {{LuyaLoading.getStateMessage()}}
@@ -135,7 +129,7 @@ $this->beginPage()
                         <i class="material-icons filemanager__edit-icon" ng-click="toggleFolderMode('edit')">mode_edit</i>
                         <i class="material-icons filemanager__delete-icon" ng-click="toggleFolderMode('remove')">delete</i>
                         
-                        <span ng-show="folderUpdateForm && currentFolderId==folder.id">
+                        <span ng-if="folderUpdateForm && currentFolderId==folder.id">
                             <input type="text" ng-model="folder.name" class="filemanager__file-dialog__input"/>
                             <div class="filemanager__file-dialog">
                                 <span><?php echo Admin::t('layout_filemanager_save_dir'); ?></span>
@@ -150,7 +144,7 @@ $this->beginPage()
                             </div>
                         </span>
                         <i class="material-icons filemanager__file-move-icon" ng-click="moveFilesTo(folder.id)" ng-show="showFoldersToMove && currentFolderId != folder.id">keyboard_return</i>
-                        <span ng-show="folderDeleteForm && currentFolderId==folder.id">
+                        <span ng-if="folderDeleteForm && currentFolderId==folder.id">
                             <div class="filemanager__file-dialog">
                                 <span><?php echo Admin::t('layout_filemanager_remove_dir'); ?></span>
                                 <div class="filemanager__file-dialog--buttons">
@@ -164,7 +158,7 @@ $this->beginPage()
                             </div>
                         </span>
 
-                        <span ng-show="folderDeleteConfirmForm && currentFolderId==folder.id">
+                        <span ng-if="folderDeleteConfirmForm && currentFolderId==folder.id">
                             <div class="filemanager__file-dialog">
                                 <span><?php echo Admin::t('layout_filemanager_remove_dir_not_empty'); ?></span>
                                 <div class="filemanager__file-dialog--buttons">
@@ -286,7 +280,7 @@ $this->beginPage()
                 </tbody>
             </table>
             </div>
-            <div class="col s4" ng-show="fileDetail">
+            <div class="col s4" ng-if="fileDetail">
                 <div class="filemanager__detail-wrapper">
                     <h4>{{ fileDetail.name }}</h4>
                     <table class="filemanager__table striped">
@@ -351,7 +345,7 @@ $this->beginPage()
 <!-- /ANGULAR SCRIPTS -->
 
 <div class="luya-container ng-cloak">
-    <div class="toasts" ng-repeat="item in toastQueue">
+    <div class="toasts" ng-if="toastQueue" ng-repeat="item in toastQueue">
         <div class="toasts__confirm" ng-if="item.type == 'confirm'" zaa-esc="item.close()">
             <div class="toasts__item toasts__item--confirm">
                 <p>{{item.message}}</p>
@@ -435,7 +429,7 @@ $this->beginPage()
         </nav>
     </div> <!-- /navbar-fixed -->
 
-    <div ng-show="showDebugContainer" class="debug-container">
+    <div ng-if="showDebugContainer" class="debug-container">
         <table class="bordered">
             <thead>
             <tr>
@@ -463,7 +457,7 @@ $this->beginPage()
         </table>
     </div>
 
-    <div ng-show="showOnlineContainer" class="useronline__modal">
+    <div ng-if="showOnlineContainer" class="useronline__modal">
         <table>
             <thead>
             <tr>

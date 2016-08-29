@@ -31,7 +31,7 @@
             <form class="block__edit" ng-if="edit || config">
                 <div class="block__edit-content">
                     <div class="row" ng-repeat="field in block.vars">
-                        <div class="block__help help help--is-right-aligned" ng-show="hasInfo(field.var)">
+                        <div class="block__help help help--is-right-aligned" ng-if="hasInfo(field.var)">
                             <div class="help__button">
                                 <i class="help__icon material-icons">help_outline</i>
                             </div>
@@ -43,7 +43,7 @@
                 <div class="block__config-content">
                     <p class="block__config__text"><span class="block__config__text-section"><?php echo \cmsadmin\Module::t('view_update_configs'); ?></span></p>
                     <div class="row" ng-repeat="cfgField in block.cfgs">
-                        <div class="block__help help help--is-right-aligned" ng-show="hasInfo(cfgField.var)">
+                        <div class="block__help help help--is-right-aligned" ng-if="hasInfo(cfgField.var)">
                             <div class="help__button">
                                 <i class="help__icon material-icons">help_outline</i>
                             </div>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </form>
-            <ul ng-show="block.__placeholders.length" class="accordion" >
+            <ul ng-if="block.__placeholders.length" class="accordion" >
                 <li class="accordion__entry" ng-repeat="placeholder in block.__placeholders" ng-controller="PagePlaceholderController" ng-include="'recursion.html'" ng-class="{ 'accordion__entry--open' : isOpen }"></li>
             </ul>
         </div>
@@ -135,7 +135,7 @@
 </script>
 <!-- /UPDATE REDIRECT FORM -->
 
-<div ng-controller="NavController" ng-show="!isDeleted">
+<div ng-controller="NavController" ng-if="!isDeleted">
 
     <div class="cms">
         <div class="cms__pages">

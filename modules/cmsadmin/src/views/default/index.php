@@ -254,7 +254,7 @@
             </div>
         </a>
 
-        <ul class="treeview__list" role="menu" ng-show="data.toggle_open==1">
+        <ul class="treeview__list" role="menu" ng-if="data.toggle_open==1">
             <li class="treeview__item" role="menuitem" ng-repeat="data in menuData.items | menuparentfilter:catitem.id:data.id" ng-include="'reverse.html'"></li>
         </ul>
 
