@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="block__body block-styles" ng-click="toggleEdit()" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
-            <form class="block__edit" ng-if="edit">
+            <form class="block__edit" ng-if="edit || config">
                 <div class="block__edit-content">
                     <div class="row" ng-repeat="field in block.vars">
                         <div class="block__help help help--is-right-aligned" ng-show="hasInfo(field.var)">
