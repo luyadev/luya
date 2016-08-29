@@ -2,6 +2,7 @@
 
 namespace admin\apis;
 
+use luya\traits\CacheableTrait;
 use Yii;
 use admin\models\Property;
 use admin\models\Lang;
@@ -14,6 +15,8 @@ use admin\models\Lang;
  */
 class CommonController extends \admin\base\RestController
 {
+    use CacheableTrait;
+    
     public function actionDataLanguages()
     {
         return Lang::find()->asArray()->all();
@@ -78,6 +81,8 @@ class CommonController extends \admin\base\RestController
 
     public function actionFilemanagerFoldertreeHistory()
     {
+        $this->deleteHasCache('storageApiDataFolders');
+
         $data = Yii::$app->request->getBodyParam('data');
         Yii::$app->adminuser->identity->setting->set('foldertree.'.$data['id'], (int) $data['toggle_open']);
     }
