@@ -76,7 +76,7 @@
 					url = url + '&page=' + pageId;
 				}
 				if ($scope.orderBy) {
-					url = url + '&sort=' + $scope.orderBy;
+					url = url + '&sort=' + $scope.orderBy.replace("+", "");
 				}
 				$http.get(url).then(function(response) {
 					$scope.setPagination(
@@ -316,7 +316,7 @@
 					url = url + '&page=' + pageId;
 				}
 				if ($scope.orderBy) {
-					url = url + '&sort=' + $scope.orderBy;
+					url = url + '&sort=' + $scope.orderBy.replace("+", "");
 				}
 				$http.get(url).then(function(response) {
 					$scope.setPagination(
