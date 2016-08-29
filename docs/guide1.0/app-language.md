@@ -21,6 +21,13 @@ Now you have set the default language of the application to **en** and the langu
 
 When using the CMS Module the configuration must match your configuration of the system languages (which is stored in the database) below a screenshot where the language short code *en* is set as *default language*:
 
-
-
 ![set-default-language](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/set-default-language.jpg "Set CMS default language")
+
+@TDB
+
++ Language Switcher
++ Multi Language Url Rules
++ Crud i18n
++ Domain matching language
++ Composition add another pattern
++ Get current application language within controllers etc.
