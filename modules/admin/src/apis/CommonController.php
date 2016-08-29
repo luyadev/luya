@@ -75,4 +75,10 @@ class CommonController extends \admin\base\RestController
     {
         return Yii::$app->adminuser->identity->setting->get('filemanagerFolderId', 0);
     }
+
+    public function actionFilemanagerFoldertreeHistory()
+    {
+        $data = Yii::$app->request->getBodyParam('data');
+        Yii::$app->adminuser->identity->setting->set('foldertree.'.$data['id'], (int) $data['toggle_open']);
+    }
 }

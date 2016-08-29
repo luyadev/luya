@@ -27,6 +27,11 @@ class Item extends \yii\base\Object
     {
         return !empty($this->getParentId());
     }
+
+    public function hasChild()
+    {
+        return ((new \admin\folder\Query())->where(['is_deleted' => 0, 'parent_id' => $this->getId()])->count() > 0 ? true: false);
+    }
     
     public function getParent()
     {

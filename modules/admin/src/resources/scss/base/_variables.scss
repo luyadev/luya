@@ -20,7 +20,9 @@ $navbar__search--width-mobile: 100%;
  * Different variables to modify the filemanager
  */
 $filemanager--base-color: "grey";
+$filemanager--highlight-color: #f2f2f2;
 $filemanager__tree--width: 400px;
+
 
 /**
  * #SIDEBAR
@@ -33,6 +35,12 @@ $sidebar--padding: 5px;
 $flag-icon-css-path: '../img/flags' !default;
 $flag-icon-rect-path: '/4x3' !default;
 $flag-icon-square-path: '/1x1' !default;
+
+/**
+/* #Folder
+*/
+
+$folder-icon-svg-path: '../img/folder' !default;
 
 // Key = language shortcode
 // Value = flag shortcode

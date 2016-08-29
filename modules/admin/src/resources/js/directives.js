@@ -1646,6 +1646,15 @@
                     $http.post('admin/api-admin-common/save-filemanager-folder-state', {folderId : folderId});
                 };
 
+                $scope.toggleFolderItem = function(data) {
+                    if (data.toggle_open == undefined) {
+                        data['toggle_open'] = 1;
+                    } else {
+                        data['toggle_open'] = !data.toggle_open;
+                    }
+                    $http.post('admin/api-admin-common/filemanager-foldertree-history', {data : data});
+                };
+
                 $scope.folderUpdateForm = false;
 
                 $scope.folderDeleteForm = false;
