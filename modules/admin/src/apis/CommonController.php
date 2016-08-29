@@ -78,6 +78,8 @@ class CommonController extends \admin\base\RestController
 
     public function actionFilemanagerFoldertreeHistory()
     {
+        $this->deleteHasCache('storageApiDataFolders');
+        
         $data = Yii::$app->request->getBodyParam('data');
         Yii::$app->adminuser->identity->setting->set('foldertree.'.$data['id'], (int) $data['toggle_open']);
     }
