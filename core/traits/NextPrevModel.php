@@ -7,7 +7,7 @@ use yii\db\ActiveQuery;
 /**
  * Trait to us within ActiveRecords to get next and prev (previous) model records of the current
  * ActiveRecord object model.
- * 
+ *
  * @author nadar
  * @since 1.0.0-beta6
  */
@@ -15,7 +15,7 @@ trait NextPrevModel
 {
     /**
      * Get the next actrive record of the current id
-     * 
+     *
      * @return ActiveQuery
      */
     public function getNext()
@@ -25,7 +25,7 @@ trait NextPrevModel
     
     /**
      * Get the previous record of a current id
-     * 
+     *
      * @return ActiveQuery
      */
     public function getPrev()

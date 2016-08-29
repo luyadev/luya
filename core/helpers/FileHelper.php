@@ -15,7 +15,7 @@ class FileHelper extends \yii\helpers\BaseFileHelper
 {
     /**
      * Generate a human readable size informations from provided Byte/s size
-     * 
+     *
      * @param integer $size The size to convert in Byte
      * @return string The readable size definition
      */
@@ -33,7 +33,7 @@ class FileHelper extends \yii\helpers\BaseFileHelper
     /**
      * Append a file extension to a path/file if there is no or an empty extension provided, this
      * helper methods is used to make sure the right extension existing on files.
-     * 
+     *
      * @param string $file The file where extension should be append if not existing
      * @param string $extension
      * @return the ensured file/path with extension
@@ -50,7 +50,7 @@ class FileHelper extends \yii\helpers\BaseFileHelper
     
     /**
      * Get extension and name from a file for the provided source/path of the file.
-     * 
+     *
      * @param string $sourceFile The path of the file
      * @return object With extension and name keys.
      */
@@ -66,7 +66,7 @@ class FileHelper extends \yii\helpers\BaseFileHelper
     
     /**
      * Generate a md5 hash of a file. This is eqauls to `md5sum` command
-     * 
+     *
      * @param string $sourceFile The path to the file
      * @return false|string Returns false or the md5 hash of this file
      */
@@ -78,7 +78,7 @@ class FileHelper extends \yii\helpers\BaseFileHelper
     /**
      * Basic helper method to write files with exception capture. The fileName will auto wrapped
      * trough the Yii::getAlias function.
-     * 
+     *
      * @param string $fileName The path to the file with file name
      * @param string $content The content to store in this File
      * @return boolean
@@ -95,7 +95,7 @@ class FileHelper extends \yii\helpers\BaseFileHelper
     /**
      * Basic helper to retreive the content of a file and catched exception. The filename
      * will auto alias encode by Yii::getAlias function.
-     * 
+     *
      * @since 1.0.0-beta7
      * @param sring $fileName The path to the file to get the content
      * @return string|boolean

@@ -7,7 +7,7 @@ use yii\helpers\Console;
 
 /**
  * Console Controller base class.
- * 
+ *
  * Extends the base controller by adding helper methods to output responses based on its
  * muted behavior to run unit tests without respones.
  *
@@ -73,7 +73,7 @@ abstract class Controller extends \yii\console\Controller
     /**
      * Helper method to stop the console command with a info message which is threated in case of returns as success
      * but does have a different output color (blue). outputInfo returns exit code 0.
-     * 
+     *
      * @param string $message The message which sould be displayed.
      * @return number Exit code 0
      * @since 1.0.0-beta5

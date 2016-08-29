@@ -6,7 +6,7 @@ use yii\helpers\ArrayHelper;
 
 /**
  * LUYA base bootstrap class which will be called during the bootstraping process.
- * 
+ *
  * @author nadar
  */
 class Bootstrap extends \luya\base\Bootstrap

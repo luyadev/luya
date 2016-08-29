@@ -8,7 +8,7 @@ use yii\web\NotFoundHttpException;
 
 /**
  * Run any route inside the provided module.
- * 
+ *
  * @author nadar
  */
 class ModuleReflection extends \yii\base\Object
@@ -29,7 +29,7 @@ class ModuleReflection extends \yii\base\Object
     {
         $this->request = $request;
         $this->urlManager = $urlManager;
-        // parent object 
+        // parent object
         parent::__construct($config);
     }
 
@@ -72,10 +72,10 @@ class ModuleReflection extends \yii\base\Object
         if (count($array['args']) === 0) {
             /**
              * issue: https://github.com/zephir/luya/issues/754
-             * 
+             *
              * 01.02.2016: we have to remove the get param overloading, otherwhise we can not guarnte
              * to re generate the current url rule. Have to verify why in which case this was needed.
-             * 
+             *
              * original: $array['args'] = $this->request->get();
              * new: do not overload: $array['args'] = [];
              */
@@ -119,7 +119,7 @@ class ModuleReflection extends \yii\base\Object
         
         /**
          * issue: https://github.com/zephir/luya/issues/754
-         * 
+         *
          * As the route resolving should not contain empty argument list we overload the $requertRoute['args'] if they are empty
          * with the whole get params
          */

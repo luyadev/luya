@@ -10,15 +10,15 @@ use admin\models\Group;
 
 /**
  * Setup the Administration Interface.
- * 
+ *
  * You can also use the parameters to run the setup command for example.
- * 
+ *
  * ```
  * setup --email=foo@bar.com --password=test --firstname=John --lastname=Doe --interactive=0
  * ```
- * 
+ *
  * This will perform the Setup task silent and does not prompt any questions.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class SetupController extends \luya\console\Command
@@ -61,7 +61,7 @@ class SetupController extends \luya\console\Command
      * Setup the administration area.
      *
      * This action of setup will add a new user, group, languaga, permissions and default homepage and container.
-     * 
+     *
      * @return boolean
      */
     public function actionIndex()
@@ -152,7 +152,7 @@ class SetupController extends \luya\console\Command
     
     /**
      * Create a new user and append them to an existing group.
-     * 
+     *
      * @return booelan
      */
     public function actionUser()
@@ -206,7 +206,7 @@ class SetupController extends \luya\console\Command
     
     /**
      * Helper to insert data in database table.
-     * 
+     *
      * @param string $table
      * @param string $fields
      */

@@ -7,7 +7,7 @@ use admin\importers\StorageImporter;
 
 /**
  * LUYA Admin Storage command.
- * 
+ *
  * @author Martin Petrasch <martin.petrasch@zephir.ch>
  */
 class StorageController extends \luya\console\Command
@@ -71,7 +71,7 @@ class StorageController extends \luya\console\Command
 
     /**
      * See image duplications exists of filter and file id combination and remove them execept of the first created.
-     * 
+     *
      * @return number
      */
     public function actionCleanupImageTable()

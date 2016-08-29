@@ -9,7 +9,7 @@ use yii\helpers\Console;
 
 /**
  * Provide CMS Block helpers
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class BlockController extends \luya\console\Command
@@ -64,11 +64,21 @@ class BlockController extends \luya\console\Command
     private function getExtraVarDef($type, $varName, $func)
     {
         $info = [
-            'image-upload' => function ($varName) use ($func) { return '$this->zaaImageUpload($this->'.$func.'(\''.$varName.'\'), false, true),'; },
-            'image-array-upload' => function ($varName) use ($func) { return '$this->zaaImageArrayUpload($this->'.$func.'(\''.$varName.'\'), false, true),'; },
-            'file-upload' => function ($varName) use ($func) { return '$this->zaaFileUpload($this->'.$func.'(\''.$varName.'\'), true),'; },
-            'file-array-upload' => function ($varName) use ($func) { return '$this->zaaFileArrayUpload($this->'.$func.'(\''.$varName.'\'), true),'; },
-            'cms-page' => function ($varName) use ($func) { return 'Yii::$app->menu->findOne([\'nav_id\' => $this->'.$func.'(\''.$varName.'\', 0)]),'; },
+            'image-upload' => function ($varName) use ($func) {
+                return '$this->zaaImageUpload($this->'.$func.'(\''.$varName.'\'), false, true),';
+            },
+            'image-array-upload' => function ($varName) use ($func) {
+                return '$this->zaaImageArrayUpload($this->'.$func.'(\''.$varName.'\'), false, true),';
+            },
+            'file-upload' => function ($varName) use ($func) {
+                return '$this->zaaFileUpload($this->'.$func.'(\''.$varName.'\'), true),';
+            },
+            'file-array-upload' => function ($varName) use ($func) {
+                return '$this->zaaFileArrayUpload($this->'.$func.'(\''.$varName.'\'), true),';
+            },
+            'cms-page' => function ($varName) use ($func) {
+                return 'Yii::$app->menu->findOne([\'nav_id\' => $this->'.$func.'(\''.$varName.'\', 0)]),';
+            },
         ];
         
         if (array_key_exists($type, $info)) {
@@ -92,7 +102,7 @@ class BlockController extends \luya\console\Command
 
     /**
      * Wizzard to create a new CMS block.
-     * 
+     *
      * @return number
      */
     public function actionCreate()
@@ -309,7 +319,7 @@ class BlockController extends \luya\console\Command
     }
 
     /**
-     * 
+     *
      * @param unknown $prefix
      * @param string $type 'var', 'cfg'
      * @return multitype:string Ambigous <string, array>

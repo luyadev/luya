@@ -8,7 +8,7 @@ use yii\helpers\Console;
 
 /**
  * Health/Status informations about the Application itself.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class HealthController extends \luya\console\Command
@@ -35,7 +35,7 @@ class HealthController extends \luya\console\Command
 
     /**
      * Create all required directories an check whether they are writeable or not.
-     * 
+     *
      * @return number
      */
     public function actionIndex()
@@ -88,7 +88,7 @@ class HealthController extends \luya\console\Command
 
     /**
      * Test Mail-Component (Use --verbose=1 to enable smtp debug output)
-     * 
+     *
      * @return bool|null
      * @throws Exception On smtp failure
      */

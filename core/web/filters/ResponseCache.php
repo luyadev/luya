@@ -9,13 +9,13 @@ use luya\traits\CacheableTrait;
 
 /**
  * Filter to enable Response Cache.
- * 
+ *
  * This filter can be applied on actions of a controller and is mainly used to cache API Response Data. The ability
- * to set duration an dependency are limited to a singel filter ability. So in order to use different dependencies 
+ * to set duration an dependency are limited to a singel filter ability. So in order to use different dependencies
  * for different actions you have to the response cache as multiple behaviors.
- * 
+ *
  * Cache different actions for a duration of 60 minutes:
- * 
+ *
  * ```php
  * public function behaviors()
  * {
@@ -30,10 +30,10 @@ use luya\traits\CacheableTrait;
  *     ];
  * }
  * ```
- * 
+ *
  * Cache action with dependency and differnt variations for an action with an `id` param. This allows you to ability
  * to cache only the response for the specific parameter.
- * 
+ *
  * ```php
  * public function behvaiors()
  * {
@@ -55,7 +55,7 @@ use luya\traits\CacheableTrait;
  *     ];
  * }
  * ```
- * 
+ *
  * @since 1.0.0-beta7
  * @author Basil Suter <basil@nadar.io>
  */
@@ -105,11 +105,11 @@ class ResponseCache extends ActionFilter
     /**
      * @var array The list of actions where the ResponseCache should be applied. You have to define the actions otherwhise the Response
      * Cache will not be active. For example,
-     * 
+     *
      * ```php
      * ['get-posts', 'data']
      * ```
-     * 
+     *
      * actions are defined as ID notation and not in camelcase style, the action prefix is also not used in action defition. For example `actionGetData` would be
      * written as `get-data`.
      */
@@ -117,7 +117,7 @@ class ResponseCache extends ActionFilter
     
     /**
      * This method will be applied before the action runs in order to determine whether this action should be cached or not.
-     * 
+     *
      * {@inheritDoc}
      * @see \yii\base\ActionFilter::beforeAction()
      */
@@ -142,7 +142,7 @@ class ResponseCache extends ActionFilter
     
     /**
      * Will be executed after the Response Object has send its content.
-     * 
+     *
      * @param \yii\web\ResponseEvent $event
      * @return void
      */
@@ -155,7 +155,7 @@ class ResponseCache extends ActionFilter
     
     /**
      * Calculate the cache key based in several informations in order to make cache key unique.
-     * 
+     *
      * @return array
      */
     protected function calculateCacheKey()

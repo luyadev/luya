@@ -10,16 +10,16 @@ use luya\console\interfaces\ImportControllerInterface;
 
 /**
  * Import controller runs the module defined importer classes.
- * 
+ *
  * The importer classes are defined inthe modules `import()` methods which inherits this class. To run
  * the importer class you have execute:
- * 
+ *
  * ```
  * ./vendor/bin/luya import
  * ```
- * 
+ *
  * Each of the importer classes must extend the luya\console\Importer class.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class ImportController extends Command implements ImportControllerInterface
@@ -76,7 +76,7 @@ class ImportController extends Command implements ImportControllerInterface
 
     /**
      * Get directory files for specific folder
-     * 
+     *
      * {@inheritDoc}
      * @see \luya\console\interfaces\ImportControllerInterface::getDirectoryFiles()
      */
@@ -97,7 +97,7 @@ class ImportController extends Command implements ImportControllerInterface
 
     /**
      * Add Log entrie for a specific section
-     * 
+     *
      * {@inheritDoc}
      * @see \luya\console\interfaces\ImportControllerInterface::addLog()
      */
@@ -108,7 +108,7 @@ class ImportController extends Command implements ImportControllerInterface
     
     /**
      * Return the log array data.
-     * 
+     *
      * @return array
      */
     private function getLog()
@@ -118,7 +118,7 @@ class ImportController extends Command implements ImportControllerInterface
 
     /**
      * Run the import process.
-     * 
+     *
      * @return number
      */
     public function actionIndex()

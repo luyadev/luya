@@ -8,7 +8,7 @@ use yii\console\Exception;
 
 /**
  * Luya CLI Application.
- * 
+ *
  * @author nadar
  */
 class Application extends \yii\console\Application
@@ -52,13 +52,13 @@ class Application extends \yii\console\Application
      * In addition to the default behavior of runAction, the console command
      * will strip the first element of the route and threat it as a module
      * changed the controller namespace to run the commands.
-     * 
+     *
      * ```
      * ./vendor/bin/luya <module>/<commandController>/<commandAction>
      * ```
-     * 
+     *
      * Will run all controllers located in the `commands` folder of a module.
-     * 
+     *
      * {@inheritDoc}
      * @see \yii\console\Application::runAction()
      * @since 1.0.0-beta6

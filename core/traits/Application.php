@@ -6,7 +6,7 @@ use Yii;
 
 /**
  * LUYA Appliation trait
- * 
+ *
  * @property string $webroot returns the webroot directory event for console commands.
  * @property \luya\components\Mail $mail Get luya mail component
  * @author nadar
@@ -57,7 +57,7 @@ trait Application
     
     /**
      * Read only property which is used in cli bootstrap process to set the @webroot alias
-     * 
+     *
      * ```
      * Yii::setAlias('@webroot', $app->webroot);
      * ```

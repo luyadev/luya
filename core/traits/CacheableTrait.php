@@ -6,43 +6,43 @@ use Yii;
 
 /**
  * Cacheable trait allows caching whether application has caching enabled or not.
- * 
+ *
  * implementation example:
- * 
+ *
  * ```php
  * $cacheKey = 'foobar';
- * 
+ *
  * $cache = $this->getHasCache($cacheKey);
- * 
+ *
  * if ($cache === false) {
- * 
+ *
  *     // execute code and save cache data into variable
  *     $cache = "Hello World";
- *     
+ *
  *     $this->setHasCache($cacheKey, $cache); // variable $cache has been changed from above
  * }
- * 
+ *
  * return $cache;
  * ```
- * 
+ *
  * An example for a simple cache query dependency
- * 
+ *
  * ```php
  * $this->setHasCache('myCacheKey', $data, new DbDependency(['sql' => 'SELECT MAX(id) FROM admin_storage_folder WHERE is_deleted=0']), 0);
  * ```
- * 
+ *
  * You can also use an array notation in order to generate cache dependency:
- * 
+ *
  * ```php
  * $dependency = [
  *     'class' => 'yii\caching\DbDependency',
  *     'sql' => 'SELECT max(timestamp) FROM table WHERE id=:id',
  *     'params' => [':id' => Yii::$app->request->get('id')],
  * ];
- * 
+ *
  * $this->setHasCache(['my', 'key'], $data, $dependency);
  * ```
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta4
  */
@@ -103,7 +103,7 @@ trait CacheableTrait
     
     /**
      * Remove a value from the cache if caching is enabled.
-     * 
+     *
      * @param string|array $key The cache identifier
      * @return boolean Whether delete of key has been success or not
      */

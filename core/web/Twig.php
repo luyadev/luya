@@ -10,30 +10,30 @@ use Twig_Extension_Debug;
 
 /**
  * LUYA Twig Component
- * 
+ *
  * from string:
- * 
+ *
  * ```
  * $twig = Yii::$app->twig->env(new \Twig_Loader_String());
  * $html = $twig->render(['foo' => 'var']);.
  * ```
- * 
+ *
  * from file:
- * 
+ *
  * ```
  * $twig = Yii::$app->twig->env(new \Twig_Loader_Filesystem(\yii::getAlias('@app/views/cmslayouts/')));
  * $html = $twig->render('xyz.twig', ['foo' => 'var']);
  * ```
- * 
+ *
  * @property \Twig_Environment stringEnv contains a string env object environemnt loaded from a string.
- * 
+ *
  * @author nadar
  */
 class Twig extends \yii\base\Component
 {
     /**
      * Get the twig simple functions array to register.
-     * 
+     *
      * @return array
      */
     public function getFunctions()
@@ -82,7 +82,7 @@ class Twig extends \yii\base\Component
     
     /**
      * Get a Twig Environment Object from a string Loader.
-     * 
+     *
      * @return \Twig_LoaderInterface
      */
     public function getStringEnv()
@@ -96,7 +96,7 @@ class Twig extends \yii\base\Component
 
     /**
      * Generate a new twig environemnt with all functions and filters.
-     * 
+     *
      * @param \Twig_LoaderInterface $loader The Environemnt Loader for the Twig instance.
      */
     public function env($loader)

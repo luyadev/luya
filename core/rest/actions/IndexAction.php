@@ -4,11 +4,11 @@ namespace luya\rest\actions;
 
 /**
  * IndexAction for REST implementation.
- * 
+ *
  * In order to enable or disable the pagination for index actions regulatet by the ActiveController
  * the main yii\rest\IndexAction is overriten by adding the pagination propertie to the action
  * provided from the luya\rest\ActiveController.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class IndexAction extends \yii\rest\IndexAction

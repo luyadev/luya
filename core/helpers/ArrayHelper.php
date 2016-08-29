@@ -4,14 +4,14 @@ namespace luya\helpers;
 
 /**
  * Extend the Yii Array Helper class
- * 
+ *
  * @author nadar
  */
 class ArrayHelper extends \yii\helpers\BaseArrayHelper
 {
     /**
      * Create an object from an array.
-     * 
+     *
      * @param array $array
      * @return object
      */
@@ -22,7 +22,7 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
 
     /**
      * Prepend an assoc array item as first entry for a given array.
-     * 
+     *
      * @param array $arr The array where the value should be prepend
      * @param string $key The new array key
      * @param mix $val The value for the new key
@@ -37,9 +37,9 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
     
     /**
      * TypeCast values from a mixed array source. numeric values will be casted as integer.
-     * 
+     *
      * This method is often used to convert corect json respons arrays
-     * 
+     *
      * @param array $array The array which should be type casted
      * @return array An array with type casted values
      */

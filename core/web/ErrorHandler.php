@@ -4,7 +4,7 @@ namespace luya\web;
 
 /**
  * LUYA ErrorHandler wrapper with error handler trait
- * 
+ *
  * @author nadar
  */
 class ErrorHandler extends \yii\web\ErrorHandler

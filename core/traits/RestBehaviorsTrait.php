@@ -11,10 +11,10 @@ use luya\rest\UserBehaviorInterface;
 
 /**
  * Rest Behavior Trait to implement basic Rest behaviors.
- * 
+ *
  * The RestBehaviorTraits is going to override the default behaviors of rest controllers based on yii2. If the implementation class
  * itself has the user behavior interface the user restrication is enabled.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 trait RestBehaviorsTrait

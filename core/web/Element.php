@@ -9,45 +9,45 @@ use Twig_Loader_Filesystem;
 
 /**
  * HTML Element Component.
- * 
+ *
  * Ability to register small html elements via closure function and run those
  * parts an every part of the page.
- * 
+ *
  * ```php
  * Yii::$app->element->addElement('foo', function($param) {
  *     return '<button>' . $param . '</button>';
  * });
  * ```
- * 
+ *
  * The above example can be execute like this:
- * 
+ *
  * ```php
  * echo Yii::$app->element->foo('Hello World');
  * ```
- * 
+ *
  * or in Twig
- * 
+ *
  * ```twig
  * {{ element('foo', 'Hello World') }}
  * ```
- * 
+ *
  * By default the Element-Component will lookup for an `elements.php` file returning an array
  * where the key is the element name and value the closure to be execute.
- * 
+ *
  * Example elements.php
- * 
+ *
  * ```php
  * <?php
  * return [
  *    'button' => function($value, $link) {
- *        return '<a class="btn btn-primary" href="'.$link.'">'.$value.'</a>';  
+ *        return '<a class="btn btn-primary" href="'.$link.'">'.$value.'</a>';
  *    },
  *    'teaserbox' => function($title, $text, $buttonValue, $buttonLink) {
  *        return '<div class="teaser-box" style="padding:10px; border:1px solid red;"><h1>'.$title.'</h1><p>'.$text.'</p>'.$this->button($buttonValue, $buttonLink).'</div>';
  *    },
  * ];
  * ```
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Element extends \yii\base\Component
@@ -93,12 +93,12 @@ class Element extends \yii\base\Component
 
     /**
      * Magic method to run an closre directly from the Element-Object, for convincience. Example use.
-     * 
+     *
      * ```php
      * $element = new Element();
      * $element->name($param1);
      * ```
-     * 
+     *
      * @param string $name   access method name
      * @param array  $params access method params
      */
@@ -109,10 +109,10 @@ class Element extends \yii\base\Component
 
     /**
      * Add an element with a closure to the elements array.
-     * 
+     *
      * @param string   $name    The identifier of the element where the close is binde to.
      * @param callable $closure The closure function to registered, for instance:
-     * 
+     *
      * ```php
      * function() {
      *     return 'foobar';
@@ -126,9 +126,9 @@ class Element extends \yii\base\Component
 
     /**
      * Checks whether an elemnt exists in the elements list or not
-     * 
+     *
      * @param string $name The name of the element
-     * @return boolean 
+     * @return boolean
      */
     public function hasElement($name)
     {
@@ -147,7 +147,7 @@ class Element extends \yii\base\Component
 
     /**
      * Return all elements as an array where the key is the name and the value the closure.
-     * 
+     *
      * @return array Key is the Name of the Element, value the Closure.
      */
     public function getElements()
@@ -174,7 +174,7 @@ class Element extends \yii\base\Component
 
     /**
      * Run an element and return the closures return value.
-     * 
+     *
      * @param string $name   The name of the elemente to execute.
      * @param array  $params The params to pass to the closure methode.
      *
@@ -190,9 +190,9 @@ class Element extends \yii\base\Component
     }
 
     /**
-     * Returns the path to the view files used for the render() method. Singleton method the return 
+     * Returns the path to the view files used for the render() method. Singleton method the return
      * the evaluated viewFolder path once.
-     * 
+     *
      * @return string Evaluated view foler path
      */
     public function getFolder()
@@ -207,7 +207,7 @@ class Element extends \yii\base\Component
     /**
      * Method to render twig files with theyr specific arguments, can be used inside the element closure depending
      * on where the closure was registered. Otherwhise the use of the element variable must be provided.
-     * 
+     *
      * @param string $file The name of the file to render.
      * @param array  $args The parameters to pass in the render file.
      *

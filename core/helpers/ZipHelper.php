@@ -6,7 +6,7 @@ use ZipArchive;
 
 /**
  * Zip Helper methods
- * 
+ *
  * @author nadar
  */
 class ZipHelper

@@ -10,7 +10,7 @@ use luya\helpers\ArrayHelper;
 
 /**
  * Luya Boot Wrapper.
- * 
+ *
  * Run the Luya/Yii Application based on the current enviroment which is determined trough get_sapi_name(). To run an application
  * a config file with custom Luya/Yii configuration must be provided via `$configFile` property. By default luya will try to find
  * the default config `../configs/server.php`.
@@ -45,7 +45,7 @@ abstract class Boot
     public $mockOnly = false;
 
     /**
-     * @var string Path to the Yii.php file.    
+     * @var string Path to the Yii.php file.
      */
     private $_baseYiiFile = null;
 
@@ -133,7 +133,7 @@ abstract class Boot
 
     /**
      * Run Web-Application based on the provided config file.
-     * 
+     *
      * @return string|void Returns the Yii Application run() method if mock is disabled. Otherwise returns void
      */
     public function applicationWeb()
@@ -148,7 +148,7 @@ abstract class Boot
 
     /**
      * Returns the path to luya core files
-     * 
+     *
      * @return string The base path to the luya core folder.
      */
     public static function getLuyaBasePath()
@@ -160,7 +160,7 @@ abstract class Boot
     /**
      * Helper method to check whether the provided Yii Base file exists, if yes include and
      * return the file.
-     * 
+     *
      * @return bool Return value based on require_once command.
      *
      * @throws Exception Throws Exception if the YiiBase file does not exists.

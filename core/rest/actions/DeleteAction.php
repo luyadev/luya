@@ -7,11 +7,11 @@ use yii\web\ServerErrorHttpException;
 
 /**
  * DeleteAction for REST implementation.
- * 
- * In order to report errors when deleting problems appear the delete action 
+ *
+ * In order to report errors when deleting problems appear the delete action
  * has been modified in order to return model getErrors() instead of an unknown
  * ServerErrorHttpException.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class DeleteAction extends \yii\rest\DeleteAction

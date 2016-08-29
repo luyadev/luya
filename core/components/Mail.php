@@ -9,9 +9,9 @@ use SMTP;
 
 /**
  * LUYA mail component to compose messages and send them via SMTP.
- * 
+ *
  * This component is registered on each LUYA instance, how to use:
- * 
+ *
  * ```php
  * if (Yii::$app->mail->compose('Subject', 'Message body of the Mail'->adress('info@example.com')->send()) {
  *     echo "Mail has been sent!";
@@ -19,15 +19,15 @@ use SMTP;
  *     echo "Error" : Yii::$app->mail->error;
  * }
  * ```
- * 
+ *
  * SMTP debug help:
- * 
+ *
  * ```
  * swaks -s HOST -p 587 -ehlo localhost -au AUTH_USER -to TO_ADRESSE -tls
  * ```
- * 
+ *
  * @property \PHPMailer $mailer The PHP Mailer object
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Mail extends \yii\base\Component
@@ -88,14 +88,14 @@ class Mail extends \yii\base\Component
      * @since 1.0.0-beta7
      * @var string|boolean Define a layout template file which is going to be wrapped around the setBody()
      * content. The file alias will be resolved so an example layout could look as followed:
-     * 
+     *
      * ```php
      * $layout = '@app/views/maillayout.php';
      * ```
-     * 
+     *
      * In your config or any mailer object. As in layouts the content of the mail specific html can be access
      * in the `$content` variable. The example content of `maillayout.php` from above could look like this:
-     * 
+     *
      * ```php
      * <h1>My Company</h1>
      * <div><?= $content; ?></div>
@@ -105,7 +105,7 @@ class Mail extends \yii\base\Component
     
     /**
      * Getter for the mailer object
-     * 
+     *
      * @return \PHPMailer
      */
     public function getMailer()
@@ -140,7 +140,7 @@ class Mail extends \yii\base\Component
     
     /**
      * Reset the mailer object to null
-     * 
+     *
      * @return void
      */
     public function cleanup()
@@ -150,7 +150,7 @@ class Mail extends \yii\base\Component
     
     /**
      * Compose a new mail message, this will first flush existing mailer objects
-     * 
+     *
      * @param string $subject The subject of the mail
      * @param string $body The HTML body of the mail message.
      * @return \luya\components\Mail
@@ -165,7 +165,7 @@ class Mail extends \yii\base\Component
     
     /**
      * Set the mail message subject of the mailer instance
-     * 
+     *
      * @param string $subject The subject message
      * @return \luya\components\Mail
      */
@@ -178,7 +178,7 @@ class Mail extends \yii\base\Component
     /**
      * Set the HTML body for the mailer message, if a layout is defined the layout
      * will automatically wrapped about the html body.
-     * 
+     *
      * @param string $body The HTML body message
      * @return \luya\components\Mail
      */
@@ -191,7 +191,7 @@ class Mail extends \yii\base\Component
     /**
      * Wrap the layout from the `$layout` propertie and store
      * the passed  content as $content variable in the view.
-     * 
+     *
      * @param string $content The content to wrapp inside the layout.
      */
     protected function wrapLayout($content)
@@ -207,19 +207,19 @@ class Mail extends \yii\base\Component
     
     /**
      * Add multiple adresses into the mailer object.
-     * 
+     *
      * If no key is used, the name is going to be ignore, if a string key is availabe it represents the name.
-     * 
+     *
      * ```php
      * adresses(['foo@example.com', 'bar@example.com']);
      * ```
-     * 
+     *
      * or with names
-     * 
+     *
      * ```php
      * adresses(['John Doe' => 'john.doe@example.com', 'Jane Doe' => 'jane.doe@example.com']);
      * ```
-     * 
+     *
      * @return \luya\components\Mail
      * @since 1.0.0-beta4
      * @param array $emails An array with email adresses or name => email paring to use names.
@@ -239,7 +239,7 @@ class Mail extends \yii\base\Component
     
     /**
      * Correct spelled alias method for `adresses`.
-     * 
+     *
      * @todo remove wrong spelled on release
      * @param array $emails
      * @return \luya\components\Mail
@@ -251,7 +251,7 @@ class Mail extends \yii\base\Component
     
     /**
      * Add a single addresse with optional name
-     * 
+     *
      * @param string $email The email adresse e.g john@example.com
      * @param string $name The name for the adresse e.g John Doe
      * @return \luya\components\Mail
@@ -265,7 +265,7 @@ class Mail extends \yii\base\Component
 
     /**
      * Trigger the send event of the mailer
-     * 
+     *
      * @return boolean
      */
     public function send()
@@ -275,7 +275,7 @@ class Mail extends \yii\base\Component
 
     /**
      * Get the mailer error info if any.
-     * 
+     *
      * @return string
      */
     public function getError()

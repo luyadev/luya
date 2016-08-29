@@ -19,7 +19,7 @@ use yii\db\ActiveRecordInterface;
  *     }
  * }
  * ```
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Controller extends BaseController
@@ -28,7 +28,7 @@ class Controller extends BaseController
     
     /**
      * Helper method to correctly send model erros and add correct response headers.
-     * 
+     *
      * @param ActiveRecordInterface $model
      * @throws ServerErrorHttpException
      * @return array

@@ -9,7 +9,7 @@ use luya\helpers\Url;
 
 /**
  * ErrorHandler trait to extend the renderException method with an api call if enabled.
- * 
+ *
  * @author nadar
  */
 trait ErrorHandler
@@ -27,16 +27,16 @@ trait ErrorHandler
 
     /**
      * Send a custom message to the api server event its not related to an exception.
-     * 
+     *
      * Sometimes you just want to pass informations to your application, this method allows you to transfer
      * a message to your error api server.
-     * 
+     *
      * Example of sending a message
-     * 
+     *
      * ```php
      * Yii::$app->errorHandler->transferMessage('Something went wrong here!', __FILE__, __LINE__);
      * ```
-     * 
+     *
      * @param string $message The message you want to send to the error api server.
      * @param string $file The you are currently send the message (use __FILE__)
      * @param string $line The line you want to submit (use __LINE__)
@@ -52,7 +52,7 @@ trait ErrorHandler
     
     /**
      * Send the array data to the api server.
-     * 
+     *
      * @param array $data The array to be sent to the server.
      * @return boolean|null true/false if data has been sent to the api successfull or not, null if the transfer is disabled.
      */
@@ -85,7 +85,7 @@ trait ErrorHandler
 
     /**
      * Get an readable array to transfer from an exception
-     * 
+     *
      * @param mixed $exception Exception object
      * @return array An array with transformed exception data
      */

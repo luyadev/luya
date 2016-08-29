@@ -6,7 +6,7 @@ use luya\base\Module;
 
 /**
  * Base class for all controllers in luya application Modules.
- * 
+ *
  * @author nadar
  */
 abstract class Controller extends \yii\web\Controller
@@ -90,7 +90,7 @@ abstract class Controller extends \yii\web\Controller
 
     /**
      * Returns the path for layout files when using `renderLayout()` method. Those module layouts are located in @app/views.
-     * 
+     *
      * @return string The path to the layout for the current Module.
      */
     public function getModuleLayoutViewPath()
@@ -103,10 +103,10 @@ abstract class Controller extends \yii\web\Controller
     }
 
     /**
-     * Luya implementation of layouts for controllers. The method will return a view file wrapped by a custom module layout. 
+     * Luya implementation of layouts for controllers. The method will return a view file wrapped by a custom module layout.
      * For example you have a e-store module with a header which returns the basket you can use the module layout in all the actions
      * to retrieve the same header. Example e-store controller class:.
-     * 
+     *
      * ```php
      * class EstoreController extends \luya\base\Controller
      * {
@@ -114,16 +114,16 @@ abstract class Controller extends \yii\web\Controller
      *     {
      *         return $this->renderLayout('index', ['content' => 'This is my index content in variabel $content.']);
      *     }
-     *     
+     *
      *     public function actionBasket()
      *     {
      *          return $this->renderLayout('basket', ['otherVariable' => 'This is a variable for the basket view file in variable $otherVariable.']);
      *     }
      * }
      * ```
-     * 
+     *
      * The example layout file which is located in `@app/views/module/layout` could look something like this:
-     * 
+     *
      * ```php
      * <ul>
      *  <li>E-Store Frontpage</li>
@@ -133,7 +133,7 @@ abstract class Controller extends \yii\web\Controller
      *      <?php echo $content; ?>
      * </div>
      * ```
-     * 
+     *
      * @param string $view   The name of the view file
      * @param array  $params The params to assign into the view file.
      *

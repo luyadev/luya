@@ -8,11 +8,11 @@ use yii\helpers\Inflector;
 
 /**
  * Console Command base class.
- * 
+ *
  * The main different to the `\luya\console\Controller` is by adding default options to each command like
  * the verbose and interactive properties you can always access and use. In addition there are some helper
  * methods commonly used to build wizzwards within command controllers.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 abstract class Command extends \luya\console\Controller
@@ -29,7 +29,7 @@ abstract class Command extends \luya\console\Controller
     
     /**
      * Method to print informations directly when verbose is enabled.
-     * 
+     *
      * @param string $message
      * @param string $section
      */

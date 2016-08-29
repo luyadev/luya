@@ -19,7 +19,7 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
     /**
      * Boostrap method will be invoken by Yii Application bootrapping proccess containing
      * the Application ($app) Object to get/set data.
-     * 
+     *
      * @param object $app Luya Application `luya\base\Application`.
      */
     public function bootstrap($app)
@@ -65,7 +65,7 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
 
     /**
      * Check if a Module exists in the module list `getModules()`.
-     * 
+     *
      * @param string $module The name of the Module
      *
      * @return bool
@@ -77,8 +77,8 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
 
     /**
      * Return all modules prepared by `extractModules()` method.
-     * 
-     * @return array An array containg all modules where the key is the module name and 
+     *
+     * @return array An array containg all modules where the key is the module name and
      *               the value is the Module Object `luya\base\Module`.
      */
     public function getModules()
@@ -89,7 +89,7 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
     /**
      * Register all components from the modules `registerComponents()` method to the
      * Applcation.
-     * 
+     *
      * @param object $app Luya Appliation `\luya\base\Application`.
      */
     private function registerComponents($app)
@@ -111,14 +111,14 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
 
     /**
      * This method will be invoke before the `run()` method.
-     * 
+     *
      * @param object $app Luya Application `luya\base\Application`
      */
     abstract public function beforeRun($app);
 
     /**
      * This method will be invoke after the `beforeRun()` method.
-     * 
+     *
      * @param object $app Luya Application `luya\base\Application`
      */
     abstract public function run($app);
