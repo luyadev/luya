@@ -9,6 +9,8 @@ use yii\helpers\Inflector;
 use yii\base\InvalidCallException;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
+use yii\base\Arrayable;
+use yii\base\ErrorException;
 
 /**
  * Wrapper for yii2 basic rest controller used with a model class. The wrapper is made to
@@ -76,7 +78,11 @@ class Api extends \admin\base\RestActiveController
             
             foreach ($attrs as $k => $v) {
                 if (is_object($v)) {
-                    continue;
+                    if ($v instanceof Arrayable) {
+                        $v = $v->toArray();
+                    } else {
+                        continue;
+                    }
                 }
                 
                 if ($i === 0) {
@@ -84,12 +90,26 @@ class Api extends \admin\base\RestActiveController
                 }
                 
                 if (is_array($v)) {
-                    $v = implode(",", $v);
+                    $tv = [];
+                    foreach ($v as $kk => $vv) {
+                        if (is_object($vv)) {
+                            if ($vv instanceof Arrayable) {
+                                $tv[] = implode(" | ", $vv->toArray());
+                            } else {
+                                continue;
+                            }
+                        } elseif (is_array($vv)) {
+                            $tv[] = implode(" | ", $vv);
+                        } else {
+                            $tv[] = $vv;
+                        }
+                    }
+                 
+                    $v = implode(" - ", $tv);
                 }
                 
                 $row[] = '"'. str_replace('"', '\"', $v) .'"';
             }
-            
             
             if ($i=== 0) {
                 $tempData.= implode(",", $header) . "\n";
@@ -100,13 +120,16 @@ class Api extends \admin\base\RestActiveController
         
         $key = uniqid('ngre', true);
         
-        FileHelper::writeFile('@runtime/'.$key.'.tmp', $tempData);
+        $store = FileHelper::writeFile('@runtime/'.$key.'.tmp', $tempData);
         
-        Yii::$app->session->set('tempNgRestFileName', Inflector::slug($this->model->tableName()));
-        Yii::$app->session->set('tempNgRestKey', $key);
+        if ($store) {
+            Yii::$app->session->set('tempNgRestFileName', Inflector::slug($this->model->tableName()));
+            Yii::$app->session->set('tempNgRestKey', $key);
+            return [
+                'url' => Url::toRoute(['/admin/ngrest/export-download', 'key' => base64_encode($key)]),
+            ];
+        }
         
-        return [
-            'url' => Url::toRoute(['/admin/ngrest/export-download', 'key' => base64_encode($key)]),
-        ];
+        throw new ErrorException("Unable to write the temporary file for the csv export. Make sure the runtime folder is writeable.");
     }
 }
