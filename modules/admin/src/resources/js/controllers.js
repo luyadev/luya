@@ -13,7 +13,9 @@
 				
 				$scope.init = function() {
 					if (!$scope.crud.config.inline) {
-						$scope.crud.toggleUpdate($stateParams.id);
+						if ($scope.crud.data.updateId != $stateParams.id) {
+							$scope.crud.toggleUpdate($stateParams.id);
+						}
 					}
 				}
 				
@@ -53,7 +55,7 @@
 				$scope.resetData();
 			}
 			if (type == 0 || type == 1) {
-				if (!$scope.inline) {
+				if (!$scope.config.inline) {
 					$state.go('default.route');
 				}
 			}
@@ -210,13 +212,13 @@
 		
 		$scope.toggleUpdate = function(id) {
 			$scope.resetData();
-			$scope.data.updateId = id;
 			$http.get($scope.config.apiEndpoint + '/'+id+'?' + $scope.config.apiUpdateQueryString).success(function(data) {
 				$scope.data.update = data;
 				$scope.switchTo(2);
-				if (!$scope.inline) {
+				if (!$scope.config.inline) {
 					$state.go('default.route.detail', {id : id});
 				}
+				$scope.data.updateId = id;
 			}).error(function(data) {
 				AdminToastService.error(i18n['js_ngrest_error'], 2000);
 			});

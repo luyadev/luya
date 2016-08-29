@@ -116,9 +116,9 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
         return array_key_exists($pointer, $this->_config);
     }
 
-    public function getPointer($pointer)
+    public function getPointer($pointer, $defaultValue = false)
     {
-        return ($this->hasPointer($pointer)) ? $this->_config[$pointer] : false;
+        return ($this->hasPointer($pointer)) ? $this->_config[$pointer] : $defaultValue;
     }
 
     public function hasField($pointer, $field)
@@ -254,6 +254,17 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
         }
 
         return $this->_extraFields;
+    }
+
+    public function getPointerExtraFields($pointer)
+    {
+        $extraFields = [];
+        foreach ($this->getPointer($pointer, []) as $field) {
+            if (isset($field['extraField']) && $field['extraField']) {
+                $extraFields[] = $field['name'];
+            }
+        }
+        return $extraFields;
     }
 
     public function onFinish()

@@ -93,7 +93,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
                 // get all activeWindows assign to the crud
                 foreach ($this->getActiveWindows() as $hash => $config) {
                     $buttons[] = [
-                        'ngClick' => 'getActiveWindow(\''.$hash.'\', item.'.$this->config->primaryKey.', $event)',
+                        'ngClick' => 'getActiveWindow(\''.$hash.'\', item.'.$this->config->primaryKey.')',
                         'icon' => $config['icon'],
                         'label' => $config['alias'],
                     ];
@@ -103,7 +103,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
             // check if deletable is enabled
             if ($this->config->isDeletable() && $this->can(Auth::CAN_DELETE)) {
                 $buttons[] = [
-                    'ngClick' => 'deleteItem(item.'.$this->config->primaryKey.', $event)',
+                    'ngClick' => 'deleteItem(item.'.$this->config->primaryKey.')',
                     'icon' => 'delete',
                     'label' => '',
                 ];
@@ -111,7 +111,7 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
             // do we have an edit button
             if (count($this->getFields('update')) > 0 && $this->can(Auth::CAN_UPDATE)) {
                 $buttons[] = [
-                    'ngClick' => 'toggleUpdate(item.'.$this->config->primaryKey.', $event)',
+                    'ngClick' => 'toggleUpdate(item.'.$this->config->primaryKey.')',
                     'icon' => 'mode_edit',
                     'label' => '',
                 ];
@@ -132,8 +132,8 @@ class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\inte
             $query['fields'] = implode(',', $this->getFields($type));
         }
         // doe we have extra fields to expand
-        if (count($this->config->extraFields) > 0) {
-            $query['expand'] = implode(',', $this->config->extraFields);
+        if (count($this->config->getPointerExtraFields($type)) > 0) {
+            $query['expand'] = implode(',', $this->config->getPointerExtraFields($type));
         }
         // return url decoed string from http_build_query
         return urldecode(http_build_query($query));
