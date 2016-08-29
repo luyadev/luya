@@ -8,11 +8,16 @@ use luya\helpers\FileHelper;
 use Yii;
 use luya\console\Importer;
 
+/**
+ * Storage system importer behavior to cleanup the storage database and folder.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class StorageImporter extends Importer
 {
     public $queueListPosition = self::QUEUE_POSITION_LAST;
 
-    public static function getFindFilesDirectory()
+    private static function getFindFilesDirectory()
     {
         $path = Yii::$app->storage->serverPath;
         
@@ -24,7 +29,8 @@ class StorageImporter extends Importer
     }
     
     /**
-     *
+     * Get orphaned files array.
+     * 
      * 1. get all files from storage folder
      * 2. check each file if available in db tables ('admin_storage_file' and 'admin_storage_image')
      * 3. remove each found entry and return list with all remaining orphaned files
@@ -33,7 +39,6 @@ class StorageImporter extends Importer
      */
     public static function getOrphanedFileList()
     {
-        //$storageFileList = static::getFindFilesDirectory();
         $diskFiles = static::getFindFilesDirectory();
         
         if ($diskFiles === false) {
@@ -41,14 +46,12 @@ class StorageImporter extends Importer
         }
 
         //build storagefilelist index
-        // $storageFileIndex = [];
         foreach ($diskFiles as $key => $file) {
             $diskFiles[pathinfo($file, PATHINFO_BASENAME)] = $file;
             unset($diskFiles[$key]);
         }
 
         // check storage files which are not flagged as deleted
-
         foreach (StorageFile::find()->where(['is_deleted' => 0])->indexBy('id')->asArray()->all() as $dbfile) {
             if (isset($diskFiles[$dbfile['name_new_compound']])) {
                 unset($diskFiles[$dbfile['name_new_compound']]);
@@ -58,6 +61,7 @@ class StorageImporter extends Importer
 
         // check image filter files
         $imageList = StorageImage::find()->asArray()->all();
+        
         // check all storage files including is_deleted entries
         $allStorageFileEntries = StorageFile::find()->indexBy('id')->asArray()->all();
 
@@ -75,7 +79,8 @@ class StorageImporter extends Importer
     }
 
     /**
-     *
+     * Mark not found files as deleted.
+     * 
      * 1. get all files from storage folder
      * 2. check each db entry if not available in file list and set is_deleted = 1
      *
@@ -86,7 +91,7 @@ class StorageImporter extends Importer
         $storageFileList = static::getFindFilesDirectory();
         
         if (!$storageFileList) {
-            return false;
+            return 0;
         }
 
         // check storage files
@@ -102,90 +107,42 @@ class StorageImporter extends Importer
 
         foreach ($allStorageFileEntries as $dbfile) {
             if (!in_array($dbfile['name_new_compound'], $storageFileIndex)) {
-                //$dbfile->is_deleted = 1;
                 $dbfile->updateAttributes(['is_deleted' => 1]);
                 $count++;
-                //$dbfile->update(false);
             }
         }
         return $count;
     }
 
-    /*
-     * 8.2.2016: Disabled, as we want to re create files if they are not existing.
-     * if file exist in table but not on the serve we could have delete the file as the
-     * filter has changed.
+    /**
+     * {@inheritDoc}
+     * @see \luya\console\Importer::run()
      */
-    /*
-    public static function removeMissingImageFiles()
-    {
-        $storageFileList = static::getFindFilesDirectory();
-        
-        if (!$storageFileList) {
-            return false;
-        }
-
-        // check storage files
-        $allStorageFileEntries = StorageFile::find()->indexBy('id')->all();
-
-        $count = 0;
-
-        // check image filter files
-        $imageList = StorageImage::find()->all();
-
-        foreach ($imageList as $image) {
-            if (array_key_exists($image['file_id'], $allStorageFileEntries)) {
-                $filterImage = $image['filter_id'] . '_' . $allStorageFileEntries[$image['file_id']]['name_new_compound'];
-                $found = false;
-                foreach ($storageFileList as $key => $file) {
-                    if ($filterImage == pathinfo($file, PATHINFO_BASENAME)) {
-                        $found = true;
-                        break;
-                    }
-                }
-                if (!$found) {
-                    $image->delete();
-                    $count++;
-                }
-            }
-        }
-
-        return $count;
-    }
-    */
-
     public function run()
     {
         $log = [];
 
-        $this->importer->verbosePrint('process thumbnail', __METHOD__);
-        
-        Yii::$app->storage->processThumbnails();
-        
-        $this->importer->verbosePrint('get orphaned file list', __METHOD__);
-        
+        $this->importer->verbosePrint('Retrieve all orphaned files.', __METHOD__);
         $orphanedFileList = static::getOrphanedFileList();
         
-        $this->importer->verbosePrint('orphaned file list response.', __METHOD__);
-
         if ($orphanedFileList === false) {
             $log["error"] = "unable to find a storage folder '".Yii::$app->storage->serverPath."' to compare.";
         } else {
+            
             $log["files_missing_in_table"] = count($orphanedFileList);
             
-            $this->importer->verbosePrint('remove missing storage files', __METHOD__);
-            
+            $this->importer->verbosePrint('Start marking not found storage files as deleted in database.', __METHOD__);
             $log["files_missing_in_file_table"] = static::removeMissingStorageFiles();
-            
-            //$log["files_missing_in_image_table"] = static::removeMissingImageFiles();
 
             foreach ($orphanedFileList as $file) {
                 $log["files_to_remove"][] = $file;
             }
         }
+        
+        $this->importer->verbosePrint('Start the thumbnail processing.', __METHOD__);
+        Yii::$app->storage->processThumbnails();
 
-        $this->importer->verbosePrint('finished storage importer', __METHOD__);
-
+        $this->importer->verbosePrint('Finished the storage importer run command.', __METHOD__);
         $this->addLog($log);
     }
 }
