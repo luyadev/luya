@@ -3,6 +3,8 @@
 namespace admin\base;
 
 use Yii;
+use luya\rest\UserBehaviorInterface;
+use luya\rest\Controller;
 
 /**
  * provides the basic functionality to access and serialize this controller via rest
@@ -18,17 +20,11 @@ use Yii;
  * }
  *
  * @author nadar
- *
  */
-class RestController extends \luya\rest\Controller implements \luya\rest\BehaviorInterface
+class RestController extends Controller implements UserBehaviorInterface
 {
     public function userAuthClass()
     {
         return Yii::$app->adminuser;
-    }
-
-    public function getUser()
-    {
-        return $this->userAuthClass()->getIdentity();
     }
 }

@@ -29,22 +29,9 @@ abstract class Model extends ActiveRecord implements GenericSearchInterface, NgR
     const EVENT_AFTER_NGREST_FIND = 'afterNgrestFind';
 
     /**
-     * 
-     * @var unknown
+     * @var string This event will be trigger when findin the service data of a plugin
      */
     const EVENT_SERVICE_NGREST = 'serviceNgrest';
-
-    /**
-     * 
-     * @var unknown
-     */
-    const SCENARIO_RESTCREATE = 'restcreate';
-
-    /**
-     * 
-     * @var unknown
-     */
-    const SCENARIO_RESTUPDATE = 'restupdate';
 
     /**
      * @var array Defines all fields which should be casted as i18n fields. This will transform the defined fields into

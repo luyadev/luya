@@ -6,6 +6,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 1.0.0-rc1 (in progress)
 -----------------------
 
+- `#970` **[BC BREAK]** Deleted, renamed and rearranged LUYA core REST classes and methods.
 - `#965` Fixed bug where cms pages are lost while creating when selecting a container but choose a sub page not from the related container.
 - `#957` Fixed bug where cms admin container movement lost container_id reference of children elements.
 - `#963` Fixed bug where caching if block is not reseted correctly.

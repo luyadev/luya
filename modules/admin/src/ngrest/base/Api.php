@@ -11,15 +11,50 @@ use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\base\Arrayable;
 use yii\base\ErrorException;
+use yii\base\InvalidConfigException;
+use admin\base\RestActiveController;
 
 /**
- * Wrapper for yii2 basic rest controller used with a model class. The wrapper is made to
- * change behaviours and overwrite the indexAction.
- *
- * usage like described in the yii2 guide.
+ * The RestActiveController for all NgRest implementations.
+ * 
+ * @property \admin\ngrest\NgRestModeInterface $model Get the model object based on the $modelClass property.
  */
-class Api extends \admin\base\RestActiveController
+class Api extends RestActiveController
 {
+    /**
+     * @var string Defines the related model for the NgRest Controller. The full qualiefied model name
+     * is required.
+     *
+     * ```php
+     * public $modelClass = 'admin\models\User';
+     * ```
+     */
+    public $modelClass = null;
+    
+    /**
+     * {@inheritDoc}
+     * @see \yii\rest\ActiveController::init()
+     */
+    public function init()
+    {
+        parent::init();
+    
+        if ($this->modelClass === null) {
+            throw new InvalidConfigException("The property `modelClass` must be defined by the Controller.");
+        }
+    }
+    
+    private $_model = null;
+    
+    public function getModel()
+    {
+        if ($this->_model === null) {
+            $this->_model = Yii::createObject($this->modelClass);
+        }
+    
+        return $this->_model;
+    }
+    
     public function actionServices()
     {
         return $this->model->getNgrestServices();

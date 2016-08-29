@@ -3,6 +3,9 @@
 namespace luya\rest;
 
 use Yii;
+use luya\traits\RestBehaviorsTrait;
+use yii\rest\Controller as BaseController;
+use yii\db\ActiveRecordInterface;
 
 /**
  * Basic Rest Controller class
@@ -19,27 +22,18 @@ use Yii;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class Controller extends \yii\web\Controller
+class Controller extends BaseController
 {
-    use \luya\rest\BehaviorTrait;
-
-    public $serializer = 'yii\rest\Serializer';
-
-    public $enableCsrfValidation = false;
-
-    public function afterAction($action, $result)
-    {
-        $result = parent::afterAction($action, $result);
-
-        return $this->serializeData($result);
-    }
-
-    protected function serializeData($data)
-    {
-        return Yii::createObject($this->serializer)->serialize($data);
-    }
-
-    public function sendModelError($model)
+    use RestBehaviorsTrait;
+    
+    /**
+     * Helper method to correctly send model erros and add correct response headers.
+     * 
+     * @param ActiveRecordInterface $model
+     * @throws ServerErrorHttpException
+     * @return array
+     */
+    public function sendModelError(ActiveRecordInterface $model)
     {
         if (!$model->hasErrors()) {
             throw new ServerErrorHttpException('Object error for unknown reason.');

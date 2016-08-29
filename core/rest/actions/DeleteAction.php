@@ -1,14 +1,18 @@
 <?php
 
-namespace admin\rest;
+namespace luya\rest\actions;
 
 use Yii;
+use yii\web\ServerErrorHttpException;
 
 /**
- * This class is used to wrap the yii rest indexAction cause of a possibility
- * to overwrite the pagination parameter.
- *
- * @author nadar
+ * DeleteAction for REST implementation.
+ * 
+ * In order to report errors when deleting problems appear the delete action 
+ * has been modified in order to return model getErrors() instead of an unknown
+ * ServerErrorHttpException.
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
 class DeleteAction extends \yii\rest\DeleteAction
 {
@@ -21,9 +25,10 @@ class DeleteAction extends \yii\rest\DeleteAction
         }
 
         if ($model->delete() === false) {
+            
+            // custom implementation of LUYA in order to throw more informations when delete errors haapens.
             if ($model->hasErrors()) {
                 Yii::$app->getResponse()->setStatusCode(500);
-
                 return $model->getErrors();
             }
 

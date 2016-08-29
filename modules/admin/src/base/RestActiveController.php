@@ -3,10 +3,13 @@
 namespace admin\base;
 
 use Yii;
-use Exception;
 use admin\components\Auth;
 use admin\ngrest\base\Model;
 use admin\models\UserOnline;
+use luya\rest\UserBehaviorInterface;
+use luya\traits\RestBehaviorsTrait;
+use yii\web\ForbiddenHttpException;
+use luya\rest\ActiveController;
 
 /**
  * Wrapper for yii2 basic rest controller used with a model class. The wrapper is made to
@@ -14,43 +17,17 @@ use admin\models\UserOnline;
  *
  * usage like described in the yii2 guide.
  * 
- * @property \admin\ngrest\NgRestModeInterface $model Get the model object based on the $modelClass property.
+ * 
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class RestActiveController extends \yii\rest\ActiveController implements \luya\rest\BehaviorInterface
+class RestActiveController extends ActiveController implements UserBehaviorInterface
 {
-    use \luya\rest\BehaviorTrait;
+    use RestBehaviorsTrait;
 
-    public $createScenario = Model::SCENARIO_RESTCREATE;
-
-    public $updateScenario = Model::SCENARIO_RESTUPDATE;
-
-    private $_model = null;
-    
-    public function getModel()
-    {
-        if ($this->_model === null) {
-            $this->_model = Yii::createObject($this->modelClass);
-        }
-        
-        return $this->_model;
-    }
-    
     public function userAuthClass()
     {
         return Yii::$app->adminuser;
-    }
-
-    public function actions()
-    {
-        $actions = parent::actions();
-
-        // change index class
-        $actions['index']['class'] = '\admin\rest\IndexAction';
-        $actions['delete']['class'] = '\admin\rest\DeleteAction';
-
-        return $actions;
     }
 
     public function checkAccess($action, $model = null, $params = [])
@@ -70,14 +47,14 @@ class RestActiveController extends \yii\rest\ActiveController implements \luya\r
                 $type = Auth::CAN_DELETE;
                 break;
             default:
-                throw new Exception("Unable to access the REST api, invalid $action");
+                throw new ForbiddenHttpException("Invalid RESPI Api action call.");
                 break;
         }
 
         UserOnline::refreshUser($this->userAuthClass()->getIdentity()->id, $this->id);
         
         if (!Yii::$app->auth->matchApi($this->userAuthClass()->getIdentity()->id, $this->id, $type)) {
-            throw new \yii\web\ForbiddenHttpException('you are unable to access this controller due to access restrictions.');
+            throw new ForbiddenHttpException('you are unable to access this controller due to access restrictions.');
         }
     }
 }
