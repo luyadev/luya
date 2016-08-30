@@ -9,14 +9,9 @@ $config = [
     'basePath' => dirname(__DIR__),
     'defaultRoute' => 'cms', // set the default module
 	'modules' => [
-        'cms' => [
-            'class' => 'cms\Module',
-            'assets' => [
-                'app\assets\ResourcesAsset'
-            ]
-        ],
-        'cmsadmin' => 'cmsadmin\Module',
-        'admin' => 'admin\Module',
+        'cms' => 'luya\cms\frontend\Module',
+        'cmsadmin' => 'luya\cms\admin\Module',
+        'admin' => 'luya\admin\Module',
         'news' => 'news\Module',
 	    'newsadmin' => 'newsadmin\Module',
 	    'crawler' => [
@@ -26,6 +21,8 @@ $config = [
 	    'crawleradmin' => 'crawleradmin\Module',
 	    'exporter' => 'exporter\Module',
 	    'ngresttest' => 'ngresttest\Module',
+	    'gii' => 'yii\gii\Module',
+        'debug' => 'yii\debug\Module',
     ],
     'components' => [
     	'mail' => [
@@ -44,7 +41,7 @@ $config = [
         ]
     ],
     'bootstrap' => [
-        'cms',
+        'cms', 'gii', 'debug'
     ]
 ];
 
