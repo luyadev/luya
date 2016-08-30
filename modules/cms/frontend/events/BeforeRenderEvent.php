@@ -1,6 +1,6 @@
 <?php
 
-namespace cms\events;
+namespace luya\cms\frontend\events;
 
 /**
  * An event will be triggered before the rendering of cms controller content happends.

@@ -9,6 +9,7 @@ use luya\cms\models\NavItem;
 use yii\web\NotFoundHttpException;
 use yii\web\MethodNotAllowedHttpException;
 use yii\web\Response;
+use luya\cms\frontend\events\BeforeRenderEvent;
 
 /**
  * Abstract Controller for CMS Controllers.
@@ -45,7 +46,7 @@ abstract class Controller extends \luya\web\Controller
 
         $currentMenu = Yii::$app->menu->current;
         
-        $event = new \cms\events\BeforeRenderEvent();
+        $event = new BeforeRenderEvent();
         $event->menu = $currentMenu;
         foreach ($model->nav->getProperties() as $property) {
             $object = $property->getObject();

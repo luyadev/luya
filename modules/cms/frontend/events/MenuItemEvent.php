@@ -1,6 +1,6 @@
 <?php
 
-namespace cms\events;
+namespace luya\cms\frontend\events;
 
 /**
  * Event after Menu component is loaded and ready.

@@ -1,3 +1,6 @@
+<?php
+use luya\cms\admin\Module;
+?>
 <script>
     zaa.bootstrap.register('PermissionController', function($scope, $http) {
 
@@ -55,7 +58,7 @@
     });
 </script>
 <div ng-controller="PermissionController" class="card-panel">
-    <h3><?= \cmsadmin\Module::t('menu_group_item_env_permission'); ?></h3>
+    <h3><?= Module::t('menu_group_item_env_permission'); ?></h3>
     <div class="permissions">
         <table>
             <thead>
