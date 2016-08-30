@@ -60,14 +60,14 @@ $config = [
          * You can use the cms module if you like.
          */
         'cms' => [
-            'class' => 'cms\Module',
+            'class' => 'luya\cms\frontend\Module',
             'enableCompression' => true, // compressing the cms output (removing white spaces and newlines)
         ],
 
         /*
          * This is the administration module for the `cms` module.
          */
-        'cmsadmin' => 'cmsadmin\Module',
+        'cmsadmin' => 'luya\cms\admin\Module',
     ],
     'components' => [
         
