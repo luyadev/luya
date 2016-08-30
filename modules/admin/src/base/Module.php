@@ -3,6 +3,7 @@
 namespace admin\base;
 
 use yii\helpers\ArrayHelper;
+use luya\base\AdminModuleInterface;
 
 /**
  * Admin-Module class.
@@ -11,10 +12,8 @@ use yii\helpers\ArrayHelper;
  *
  * @author nadar
  */
-class Module extends \luya\base\Module
+class Module extends \luya\base\Module implements AdminModuleInterface
 {
-    public $isAdmin = true;
-
     public $requiredComponents = ['db'];
 
     /**
@@ -57,6 +56,15 @@ class Module extends \luya\base\Module
 
     private $_permissionRoutes = [];
 
+    /**
+     * @var array Each module can have assets, all module controllers will register those assets in the view.. Valid class name to the asset e.g.
+     *
+     * ```php
+     * public $assets = ['\app\assets\TestAsset'];
+     * ```
+     */
+    public $assets = [];
+    
     /**
      * 
      * @var array Register translations from admin modules, to make them available in javascript files trough

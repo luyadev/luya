@@ -5,6 +5,7 @@ namespace luya\console;
 use Yii;
 use yii\helpers\StringHelper;
 use yii\helpers\Inflector;
+use luya\base\AdminModuleInterface;
 
 /**
  * Console Command base class.
@@ -84,7 +85,7 @@ abstract class Command extends \luya\console\Controller
                 continue;
             }
             if (isset($options['onlyAdmin'])) {
-                if (!$object->isAdmin) {
+                if (!$object instanceof AdminModuleInterface) {
                     continue;
                 }
             }

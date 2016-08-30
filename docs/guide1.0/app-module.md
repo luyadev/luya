@@ -7,6 +7,27 @@ A very important behvaior in *LUYA* projects are **modules**. You can always use
 
 > In order to create your custom modules you can run the [Console Command](app-console.md) `module/create` wizzard.
 
+Structure of Modules
+
+```
+.
+├── admin
+│   ├── assets
+│   ├── apis
+│   ├── importers
+│   ├── controllers
+│   ├── migrations
+│   └── resources
+├── frontend
+│   ├── assets
+│   ├── controllers
+│   ├── blockgroups
+│   ├── blocks
+│   └── views
+├── models
+└── helpers
+```
+
 ### Use and configure
 
 To integrate a module you have to define it in your config file `prep.php` and / or `prod.php`, depending on which environment your `server.php` is returning, in the modules section:

@@ -1,10 +1,10 @@
 <?php
 
-namespace cmstests\src\helpers;
+namespace luya\cms\tests\src\helpers;
 
 use Yii;
-use cms\helpers\TagParser;
-use cmstests\CmsFrontendTestCase;
+use luya\cms\helpers\TagParser;
+use luya\cms\tests\CmsFrontendTestCase;
 
 class TagParserTest extends CmsFrontendTestCase
 {

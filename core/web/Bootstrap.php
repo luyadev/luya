@@ -3,6 +3,7 @@
 namespace luya\web;
 
 use yii\helpers\ArrayHelper;
+use luya\base\AdminModuleInterface;
 
 /**
  * LUYA base bootstrap class which will be called during the bootstraping process.
@@ -47,7 +48,7 @@ class Bootstrap extends \luya\base\Bootstrap
     {
         // start the module now
         foreach ($this->getModules() as $id => $module) {
-            if ($module->isAdmin) {
+            if ($module instanceof AdminModuleInterface) {
                 $this->_adminAssets = ArrayHelper::merge($module->assets, $this->_adminAssets);
                 $this->_adminMenus = ArrayHelper::merge($module->getMenu(), $this->_adminMenus);
                 $this->_jsTranslations[$id] = $module->registerJsTranslation;

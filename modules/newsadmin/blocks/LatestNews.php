@@ -2,7 +2,9 @@
 
 namespace newsadmin\blocks;
 
-class LatestNews extends \cmsadmin\base\Block
+use luya\cms\models\NavItem;
+
+class LatestNews extends \luya\cms\base\Block
 {
     public $module = 'news';
 
@@ -15,7 +17,7 @@ class LatestNews extends \cmsadmin\base\Block
 
     public function init()
     {
-        foreach (\cmsadmin\models\NavItem::fromModule('news') as $item) {
+        foreach (NavItem::fromModule('news') as $item) {
             $this->_dropdown[] = ['value' => $item->id, 'label' => $item->title];
         }
     }

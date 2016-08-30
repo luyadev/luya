@@ -1,6 +1,6 @@
 <?php
 
-namespace cmstests;
+namespace luya\cms\tests;
 
 require 'vendor/autoload.php';
 require 'data/env.php';

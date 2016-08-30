@@ -38,7 +38,7 @@ abstract class Module extends \yii\base\Module
     /**
      * @var bool Determines if a Module is an admin Module or not. This way we can easely change the boot behavior for each Module.
      */
-    public $isAdmin = false;
+    /*public $isAdmin = false;*/
 
     /**
      * @var array An array containing all components which should be registered for the current module. If
@@ -65,15 +65,6 @@ abstract class Module extends \yii\base\Module
      */
     public $useAppViewPath = false;
     
-    /**
-     * @var array Each module can have assets, all module controllers will register those assets in the view.. Valid class name to the asset e.g.
-     *
-     * ```php
-     * public $assets = ['\app\assets\TestAsset'];
-     * ```
-     */
-    public $assets = [];
-
     /**
      * @var string if this/the module is included via another module (parent module), the parent module will write its
      * name inside the child modules $context variable. For example the cms includes the news module, the context variable

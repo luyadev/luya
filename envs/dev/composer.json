@@ -23,8 +23,7 @@
         "psr-4" : {
             "luya\\" : "../../core/",
             "admin\\" : "../../modules/admin/src",
-            "cms\\" : "../../modules/cms/src",
-            "cmsadmin\\" : "../../modules/cmsadmin/src",
+            "luya\\cms\\" : "../../modules/cms/",
             "newsadmin\\" : "../../modules/newsadmin",
             "news\\" : "../../modules/news/src",
             "account\\" : "../../modules/account",

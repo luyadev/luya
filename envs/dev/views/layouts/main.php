@@ -1,4 +1,9 @@
-<?php $this->beginPage(); ?>
+<?php use app\assets\ResourcesAsset;
+
+$this->beginPage(); 
+
+ResourcesAsset::register($this);
+?>
 <html>
     <head>
         <title>Luya &mdash; <?php echo $this->title; ?></title>

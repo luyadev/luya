@@ -3,6 +3,7 @@
 namespace luya\web;
 
 use luya\base\Module;
+use luya\base\AdminModuleInterface;
 
 /**
  * Base class for all controllers in luya application Modules.
@@ -30,7 +31,7 @@ abstract class Controller extends \yii\web\Controller
         // call parent
         parent::init();
         
-        if ($this->module instanceof Module) {
+        if ($this->module instanceof AdminModuleInterface) {
             // get asset bundles which are defined in the module and register them into the view
             foreach ($this->module->assets as $class) {
                 if (!in_array($class, $this->skipModuleAssets) && !in_array('*', $this->skipModuleAssets)) {

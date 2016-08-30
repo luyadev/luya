@@ -1,0 +1,67 @@
+<?php
+
+namespace luya\cms\models;
+
+use admin\traits\SoftDeleteTrait;
+
+/**
+ * Represents the Navigation-Containers.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
+class NavContainer extends \admin\ngrest\base\Model
+{
+    use SoftDeleteTrait;
+
+    public static function tableName()
+    {
+        return 'cms_nav_container';
+    }
+    
+    public static function ngRestApiEndpoint()
+    {
+        return 'api-cms-navcontainer';
+    }
+
+    public function rules()
+    {
+        return [
+            [['name', 'alias'], 'required'],
+        ];
+    }
+    
+    public function scenarios()
+    {
+        return [
+            'restcreate' => ['name', 'alias'],
+            'restupdate' => ['name', 'alias'],
+        ];
+    }
+    
+    public function ngRestConfig($config)
+    {
+        $config->delete = true;
+
+        $config->list->field('name', 'Name')->text();
+        $config->list->field('alias', 'Alias')->text();
+
+        $config->create->copyFrom('list');
+        $config->update->copyFrom('list');
+
+        $config->options = [
+            'saveCallback' => 'function(ServiceMenuData) { ServiceMenuData.load(true); }',
+        ];
+        
+        return $config;
+    }
+    
+    /**
+     * Relation returns all `cms_nav` rows belongs to this container sort by index without deleted or draf items.
+     * 
+     * @return \yii\db\ActiveQuery
+     */
+    public function getNavs()
+    {
+        return $this->hasMany(Nav::className(), ['nav_container_id' => 'id'])->where(['is_deleted' => 0, 'is_draft' => 0])->orderBy(['sort_index' => SORT_ASC]);
+    }
+}
