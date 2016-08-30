@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\ngrest\aw;
+namespace luya\admin\ngrest\aw;
 
 use yii\base\Object;
 use yii\helpers\Html;

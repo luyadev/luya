@@ -7,7 +7,7 @@ namespace luya\cms\admin\apis;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class BlockgroupController extends \admin\ngrest\base\Api
+class BlockgroupController extends \luya\admin\ngrest\base\Api
 {
     public $modelClass = 'luya\cms\models\BlockGroup';
 }

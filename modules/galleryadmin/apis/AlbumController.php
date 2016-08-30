@@ -2,7 +2,7 @@
 
 namespace galleryadmin\apis;
 
-class AlbumController extends \admin\ngrest\base\Api
+class AlbumController extends \luya\admin\ngrest\base\Api
 {
     public $modelClass = '\\galleryadmin\\models\Album';
 }

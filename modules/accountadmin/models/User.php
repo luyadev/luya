@@ -4,7 +4,7 @@ namespace accountadmin\models;
 
 use Yii;
 
-class User extends \admin\ngrest\base\Model implements \yii\web\IdentityInterface
+class User extends \luya\admin\ngrest\base\NgRestModel implements \yii\web\IdentityInterface
 {
     public $password_confirm = null;
 

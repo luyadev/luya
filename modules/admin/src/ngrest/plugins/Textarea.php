@@ -1,8 +1,9 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
 
 use cebe\markdown\GithubMarkdown;
+use luya\admin\ngrest\base\Plugin;
 
 /**
  * Create a textarea input for a given field.
@@ -17,7 +18,7 @@ use cebe\markdown\GithubMarkdown;
  * 
  * @author nadar
  */
-class Textarea extends \admin\ngrest\base\Plugin
+class Textarea extends Plugin
 {
     /**
      * @var string Html5 placholder attribute value to set and example for the user

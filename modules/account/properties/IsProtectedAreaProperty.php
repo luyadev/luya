@@ -3,7 +3,7 @@
 namespace account\properties;
 
 use Yii;
-use cms\helpers\Url;
+use luya\cms\helpers\Url;
 
 class IsProtectedAreaProperty extends \admin\base\Property
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\base;
+namespace luya\admin\base;
 
 use yii\helpers\ArrayHelper;
 use luya\base\AdminModuleInterface;

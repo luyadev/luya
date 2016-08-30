@@ -1,13 +1,15 @@
 <?php
 
-namespace admin\filters;
+namespace luya\admin\filters;
+
+use luya\admin\base\Filter;
 
 /**
  * Admin Module default Filter: Tiny Crop (40x40)
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class TinyCrop extends \admin\base\Filter
+class TinyCrop extends Filter
 {
     public static function identifier()
     {

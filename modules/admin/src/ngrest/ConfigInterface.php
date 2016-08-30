@@ -1,14 +1,13 @@
 <?php
 
-namespace admin\ngrest\interfaces;
+namespace luya\admin\ngrest;
 
 /**
  * NgRest Config Interface
  * 
- * @todo rename to ConfigInterface
  * @author Basil Suter <basil@nadar.io>
  */
-interface Config
+interface ConfigInterface
 {
     public function setConfig(array $config);
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace admin\ngrest\base;
+namespace luya\admin\ngrest\base;
 
 use yii\base\Behavior;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveRecord;
-use admin\ngrest\NgRest;
+use luya\admin\ngrest\NgRest;
 
 /**
  * NgRest Event Behavior which is attached to all NgRest Models

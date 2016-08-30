@@ -1,11 +1,11 @@
 <?php
 
-namespace admin\controllers;
+namespace luya\admin\controllers;
 
 use Yii;
-use admin\Module;
-use admin\models\StorageFile;
-use admin\events\FileDownloadEvent;
+use luya\admin\Module;
+use luya\admin\models\StorageFile;
+use luya\admin\events\FileDownloadEvent;
 use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
 

@@ -3,7 +3,7 @@
 namespace admintests\models;
 
 use admintests\AdminTestCase;
-use admin\models\UserSetting;
+use luya\admin\models\UserSetting;
 
 class UserSettingsTest extends AdminTestCase
 {

@@ -3,7 +3,7 @@
 namespace luya\helpers;
 
 use Yii;
-use admin\ngrest\plugins\File;
+use luya\admin\ngrest\plugins\File;
 use Exception;
 
 /**

@@ -4,9 +4,9 @@ namespace luya\console\commands;
 
 use Yii;
 use yii\console\Exception;
-use admin\models\Config;
-use admin\models\User;
-use admin\models\Group;
+use luya\admin\models\Config;
+use luya\admin\models\User;
+use luya\admin\models\Group;
 
 /**
  * Setup the Administration Interface.

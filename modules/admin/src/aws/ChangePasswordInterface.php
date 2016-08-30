@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\aws;
+namespace luya\admin\aws;
 
 /**
  * Change Password Active Window Interface

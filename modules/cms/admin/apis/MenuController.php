@@ -6,7 +6,7 @@ use Yii;
 use luya\helpers\ArrayHelper;
 use luya\cms\admin\helpers\MenuHelper;
 use yii\db\Query;
-use admin\models\Group;
+use luya\admin\models\Group;
 use luya\cms\models\NavContainer;
 
 /**
@@ -14,7 +14,7 @@ use luya\cms\models\NavContainer;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class MenuController extends \admin\base\RestController
+class MenuController extends \luya\admin\base\RestController
 {
     public function actionDataMenu()
     {

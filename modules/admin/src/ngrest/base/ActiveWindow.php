@@ -1,13 +1,13 @@
 <?php
 
-namespace admin\ngrest\base;
+namespace luya\admin\ngrest\base;
 
 use Yii;
 use luya\Exception;
 use yii\helpers\StringHelper;
 use yii\base\ViewContextInterface;
 use yii\base\Object;
-use admin\ngrest\base\ActiveWindowView;
+use luya\admin\ngrest\base\ActiveWindowView;
 
 /**
  * Base class for all ActiveWindow classes.

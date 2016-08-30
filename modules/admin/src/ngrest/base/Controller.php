@@ -1,10 +1,12 @@
 <?php
 
-namespace admin\ngrest\base;
+namespace luya\admin\ngrest\base;
 
 use Yii;
 use Exception;
 use yii\base\InvalidConfigException;
+use luya\admin\ngrest\NgRest;
+use luya\admin\ngrest\render\RenderCrud;
 
 /**
  * Base Controller for all NgRest Controllers.
@@ -13,7 +15,7 @@ use yii\base\InvalidConfigException;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class Controller extends \admin\base\Controller
+class Controller extends \luya\admin\base\Controller
 {
     /**
      * @var string Defines the related model for the NgRest Controller. The full qualiefied model name
@@ -80,8 +82,8 @@ class Controller extends \admin\base\Controller
         $config->attributeGroups = $this->model->ngRestAttributeGroups();
         $config->groupByField = $this->model->ngRestGroupByField();
         
-        $ngrest = new \admin\ngrest\NgRest($config);
+        $ngrest = new NgRest($config);
 
-        return $ngrest->render(new \admin\ngrest\render\RenderCrud());
+        return $ngrest->render(new RenderCrud());
     }
 }

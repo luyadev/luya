@@ -3,7 +3,7 @@
 namespace luya\cms\frontend\blocks;
 
 use Yii;
-use cms\Exception;
+use luya\cms\Exception;
 use luya\cms\frontend\Module;
 use luya\helpers\ModuleHelper;
 use yii\web\Response;

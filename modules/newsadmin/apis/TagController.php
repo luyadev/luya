@@ -2,7 +2,7 @@
 
 namespace newsadmin\apis;
 
-class TagController extends \admin\ngrest\base\Api
+class TagController extends \luya\admin\ngrest\base\Api
 {
     public $modelClass = '\\newsadmin\\models\\Tag';
 }

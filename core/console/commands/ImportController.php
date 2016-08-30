@@ -4,7 +4,7 @@ namespace luya\console\commands;
 
 use Yii;
 use Exception;
-use admin\models\Config;
+use luya\admin\models\Config;
 use luya\console\Command;
 use luya\console\interfaces\ImportControllerInterface;
 

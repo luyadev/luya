@@ -1,16 +1,17 @@
 <?php
 
-namespace admin\apis;
+namespace luya\admin\apis;
 
 use Yii;
-use admin\Module;
+use luya\admin\Module;
+use luya\admin\base\RestController;
 
 /**
  * Admin Menu API, provides all menu items and dashabord informations for a node or the entire system.
  * 
  * @author nadar
  */
-class MenuController extends \admin\base\RestController
+class MenuController extends RestController
 {
     public function actionIndex()
     {

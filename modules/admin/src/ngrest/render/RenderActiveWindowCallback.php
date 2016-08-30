@@ -1,17 +1,18 @@
 <?php
 
-namespace admin\ngrest\render;
+namespace luya\admin\ngrest\render;
 
 use Yii;
 use yii\helpers\Inflector;
 use luya\Exception;
 use luya\helpers\ObjectHelper;
+use luya\admin\ngrest\base\Render;
 
 /**
  * @todo sanitize post (\yii\helpers\HtmlPurifier::process(...)
  * @author nadar
  */
-class RenderActiveWindowCallback extends \admin\ngrest\base\Render implements \admin\ngrest\interfaces\Render
+class RenderActiveWindowCallback extends Render implements RenderInterface
 {
     public function render()
     {

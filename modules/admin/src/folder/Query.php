@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\folder;
+namespace luya\admin\folder;
 
 use Yii;
 
@@ -11,7 +11,7 @@ use Yii;
  */
 class Query extends \yii\base\Object
 {
-    use \admin\storage\QueryTrait;
+    use \luya\admin\storage\QueryTrait;
     
     private $_storage = null;
     

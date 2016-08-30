@@ -4,7 +4,7 @@ namespace newsadmin\models;
 
 use newsadmin\Module;
 
-class Tag extends \admin\ngrest\base\Model
+class Tag extends \luya\admin\ngrest\base\NgRestModel
 {
     public static function tableName()
     {

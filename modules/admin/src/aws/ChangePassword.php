@@ -1,10 +1,11 @@
 <?php
 
-namespace admin\aws;
+namespace luya\admin\aws;
 
 use Yii;
-use admin\Module;
+use luya\admin\Module;
 use luya\Exception;
+use luya\admin\ngrest\base\ActiveWindow;
 
 /**
  * Change Passwort Active Window.
@@ -13,7 +14,7 @@ use luya\Exception;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class ChangePassword extends \admin\ngrest\base\ActiveWindow
+class ChangePassword extends ActiveWindow
 {
     public $module = 'admin';
 

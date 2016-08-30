@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\components;
+namespace luya\admin\components;
 
 use yii;
 

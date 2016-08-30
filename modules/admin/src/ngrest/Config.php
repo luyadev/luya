@@ -1,9 +1,10 @@
 <?php
 
-namespace admin\ngrest;
+namespace luya\admin\ngrest;
 
 use Exception;
 use luya\helpers\ArrayHelper;
+use yii\base\Object;
 
 /**
  * Defines and holds an NgRest Config.
@@ -32,7 +33,7 @@ use luya\helpers\ArrayHelper;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
+class Config extends Object implements ConfigInterface
 {
     private $_config = [];
 
@@ -274,7 +275,7 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
                 'name' => $this->primaryKey,
                 'alias' => 'ID',
                 'type' => [
-                    'class' => '\admin\ngrest\plugins\Text',
+                    'class' => 'luya\admin\ngrest\plugins\Text',
                     'args' => [],
                 ],
             ]);

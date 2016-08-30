@@ -2,7 +2,7 @@
 
 namespace luya\cms\models;
 
-use admin\models\Property as AdminProperty;
+use luya\admin\models\Property as AdminProperty;
 
 /**
  * CMS PROPERTY

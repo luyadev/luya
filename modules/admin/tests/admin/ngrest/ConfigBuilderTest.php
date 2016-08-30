@@ -4,12 +4,14 @@ namespace admintests\admin\ngrest;
 
 use Yii;
 use admintests\AdminTestCase;
+use luya\admin\ngrest\ConfigBuilder;
+use luya\admin\ngrest\Config;
 
 class ConfigBuilderTest extends AdminTestCase
 {
     private function getConfig()
     {
-        $config = new \admin\ngrest\ConfigBuilder();
+        $config = new ConfigBuilder();
 
         $config->list->field('create_var_1', 'testlabel in list')->text();
         $config->list->field('list_var_1', 'testlabel')->textarea();
@@ -52,15 +54,15 @@ class ConfigBuilderTest extends AdminTestCase
         $this->assertArrayHasKey('class', $plugin);
         $this->assertArrayHasKey('args', $plugin);
         // check if args
-        $this->assertEquals('\admin\ngrest\plugins\Textarea', $plugin['class']);
+        $this->assertEquals('\luya\admin\ngrest\plugins\Textarea', $plugin['class']);
         // text extraField = 1
         $this->assertEquals(1, $create['create_extra_var_2']['extraField']);
     }
 
     public function testNgRestConfigAW()
     {
-        $config = new \admin\ngrest\ConfigBuilder();
-        $config->aw->load(['class' => 'admin\aws\ChangePassword', 'alias' => 'Change Password']);
+        $config = new ConfigBuilder();
+        $config->aw->load(['class' => 'luya\admin\aws\ChangePassword', 'alias' => 'Change Password']);
         $cfg = $config->getConfig();
 
         $this->assertArrayHasKey('aw', $cfg);
@@ -73,14 +75,14 @@ class ConfigBuilderTest extends AdminTestCase
         $this->assertArrayHasKey('icon', $obj);
 
 
-        $ngRestConfig = new \admin\ngrest\Config(['apiEndpoint' => 'api-admin-test', 'primaryKey' => 'id']);
+        $ngRestConfig = new Config(['apiEndpoint' => 'api-admin-test', 'primaryKey' => 'id']);
         $ngRestConfig->setConfig($cfg);
     }
 
     public function testNgRestConfigPlugins()
     {
         $configData = $this->getConfig();
-        $ngRest = new \admin\ngrest\Config(['apiEndpoint' => 'api-admin-test', 'primaryKey' => 'id']);
+        $ngRest = new Config(['apiEndpoint' => 'api-admin-test', 'primaryKey' => 'id']);
         $ngRest->setConfig($configData);
         $plugins = $ngRest->getPlugins();
 
@@ -90,7 +92,7 @@ class ConfigBuilderTest extends AdminTestCase
     public function testNgRestConfigExtraFields()
     {
         $configData = $this->getConfig();
-        $ngRest = new \admin\ngrest\Config(['apiEndpoint' => 'api-admin-test', 'primaryKey' => 'id']);
+        $ngRest = new Config(['apiEndpoint' => 'api-admin-test', 'primaryKey' => 'id']);
         $ngRest->setConfig($configData);
 
         $fields = $ngRest->getExtraFields();
@@ -105,7 +107,7 @@ class ConfigBuilderTest extends AdminTestCase
     public function testNgRestConfigAppendFieldOption()
     {
         $configData = $this->getConfig();
-        $ngRest = new \admin\ngrest\Config(['apiEndpoint' => 'api-admin-test', 'primaryKey' => 'id']);
+        $ngRest = new Config(['apiEndpoint' => 'api-admin-test', 'primaryKey' => 'id']);
         $ngRest->setConfig($configData);
 
         $ngRest->appendFieldOption('list_var_1', 'i18n', true);
@@ -119,7 +121,7 @@ class ConfigBuilderTest extends AdminTestCase
     {
         $configData = $this->getConfig();
 
-        $ngRestConfig = Yii::createObject(['class' => '\admin\ngrest\Config', 'apiEndpoint' => 'api-admin-test']);
+        $ngRestConfig = Yii::createObject(['class' => '\luya\admin\ngrest\Config', 'apiEndpoint' => 'api-admin-test']);
         //$ngRestConfig = new \admin\ngrest\Config('api-admin-test', 'id');
         $ngRestConfig->setConfig($configData);
 
@@ -141,7 +143,7 @@ class ConfigBuilderTest extends AdminTestCase
             'alias' => 'ID',
             'plugins' => [
                 [
-                    'class' => '\admin\ngrest\plugins\Text',
+                    'class' => '\luya\admin\ngrest\plugins\Text',
                     'args' => [],
                 ],
             ],
@@ -152,7 +154,7 @@ class ConfigBuilderTest extends AdminTestCase
     public function testOnFinish()
     {
         $configData = $this->getConfig();
-        $ngRestConfig = Yii::createObject(['class' => '\admin\ngrest\Config', 'apiEndpoint' => 'api-admin-test', 'primaryKey' => 'id']);
+        $ngRestConfig = Yii::createObject(['class' => '\luya\admin\ngrest\Config', 'apiEndpoint' => 'api-admin-test', 'primaryKey' => 'id']);
         //$ngRestConfig = new \admin\ngrest\Config('api-admin-test', 'id');
         $this->assertEquals(false, $ngRestConfig->hasField('list', 'id'));
         $ngRestConfig->setConfig($configData);

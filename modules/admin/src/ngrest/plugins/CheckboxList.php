@@ -1,8 +1,8 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
 
-use admin\ngrest\base\Plugin;
+use luya\admin\ngrest\base\Plugin;
 use yii\helpers\Json;
 use luya\helpers\ArrayHelper;
 use luya\helpers\StringHelper;

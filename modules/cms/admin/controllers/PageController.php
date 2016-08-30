@@ -2,7 +2,7 @@
 
 namespace luya\cms\admin\controllers;
 
-class PageController extends \admin\base\Controller
+class PageController extends \luya\admin\base\Controller
 {
     public function actionCreate()
     {

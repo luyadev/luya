@@ -12,7 +12,7 @@ use Yii;
  * @property integer $timestamp
  * @property string $language
  */
-class Searchdata extends \admin\ngrest\base\Model
+class Searchdata extends \luya\admin\ngrest\base\NgRestModel
 {
     /**
      * @inheritdoc

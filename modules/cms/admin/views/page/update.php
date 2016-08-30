@@ -511,7 +511,7 @@ use luya\cms\admin\Module;
                                                                 <?php echo Module::t('button_update_version'); ?> <i class="material-icons right">check</i>
                                                             </button>
                                                             <button class="btn red" type="button" ng-click="closeEditModal()">
-                                                                <i class="material-icons left">cancel</i> <?php echo \admin\Module::t('button_abort'); ?>
+                                                                <i class="material-icons left">cancel</i> <?php echo \luya\admin\Module::t('button_abort'); ?>
                                                             </button>
                                                         </div>
                                                     </div>
@@ -577,7 +577,7 @@ use luya\cms\admin\Module;
                                                                 <?php echo Module::t('button_create_version'); ?> <i class="material-icons right">check</i>
                                                             </button>
                                                             <button class="btn red" type="button" ng-click="closeCreateModal()">
-                                                                <i class="material-icons left">cancel</i> <?php echo \admin\Module::t('button_abort'); ?>
+                                                                <i class="material-icons left">cancel</i> <?php echo \luya\admin\Module::t('button_abort'); ?>
                                                             </button>
                                                         </div>
                                                     </div>

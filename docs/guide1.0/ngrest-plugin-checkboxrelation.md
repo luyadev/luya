@@ -9,7 +9,7 @@ The checkbox releation quickly adds the ability to make an checkbox input where 
 Below an example of a User model where you can select the related Groups and stored in a via/ref table named `admin_user_group`:
 
 ```php
-class User extends \admin\ngrest\base\Model
+class User extends \luya\admin\ngrest\base\NgRestModel
 {    
 
     public $groups = [];

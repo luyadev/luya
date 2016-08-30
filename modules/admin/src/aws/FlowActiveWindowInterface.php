@@ -1,8 +1,8 @@
 <?php
 
-namespace admin\aws;
+namespace luya\admin\aws;
 
-use admin\image\Item;
+use luya\admin\image\Item;
 
 /**
  * This interface must be implement by the model class provided in the FlowActiveWindow modelClass property.

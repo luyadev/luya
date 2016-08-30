@@ -1,10 +1,11 @@
 <?php
 
-namespace admin\aws;
+namespace luya\admin\aws;
 
 use luya\Exception;
-use admin\models\Tag;
-use admin\models\TagRelation;
+use luya\admin\models\Tag;
+use luya\admin\models\TagRelation;
+use luya\admin\ngrest\base\ActiveWindow;
 
 /**
  * Create an Active Window where you can assign tags to a row of the underlying table via a ref table.
@@ -14,12 +15,12 @@ use admin\models\TagRelation;
  * Usage example of registering the Tag Active Window:
  *
  * ```php
- * $config->aw->load(['class' => '\admin\aws\TagActiveWindow', 'alias' => 'Tags', 'tableName' => self::tableName()]);
+ * $config->aw->load(['class' => '\luya\admin\aws\TagActiveWindow', 'alias' => 'Tags', 'tableName' => self::tableName()]);
  * ```
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class TagActiveWindow extends \admin\ngrest\base\ActiveWindow
+class TagActiveWindow extends ActiveWindow
 {
     public $module = 'admin';
 

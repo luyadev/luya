@@ -1,13 +1,15 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
+
+use luya\admin\ngrest\base\Plugin;
 
 /**
  * Single Image-Upload
  * 
  * @author nadar
  */
-class Image extends \admin\ngrest\base\Plugin
+class Image extends Plugin
 {
     public $noFilters = false;
 

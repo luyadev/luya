@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\components;
+namespace luya\admin\components;
 
 use Yii;
 use yii\db\Query;
@@ -9,11 +9,13 @@ use yii\base\Component;
 use luya\Exception;
 use luya\helpers\FileHelper;
 use luya\helpers\Url;
-use admin\helpers\Storage;
-use admin\models\StorageFile;
-use admin\models\StorageImage;
-use admin\models\StorageFilter;
-use admin\models\StorageFolder;
+use luya\admin\helpers\Storage;
+use luya\admin\models\StorageFile;
+use luya\admin\models\StorageImage;
+use luya\admin\models\StorageFilter;
+use luya\admin\models\StorageFolder;
+use luya\traits\CacheableTrait;
+use luya\web\Request;
 
 /**
  * Storage Container for reading, saving and holding files.
@@ -30,7 +32,7 @@ use admin\models\StorageFolder;
  * which is equal to:
  * 
  * ```php
- * (new admin\file\Query())->where(['folder_id' => 10])->all();
+ * (new \luyaadmin\file\Query())->where(['folder_id' => 10])->all();
  * ```
  * 
  * to add a new file into the storage system use setFile
@@ -46,13 +48,13 @@ use admin\models\StorageFolder;
  * which is equal to:
  * 
  * ```php
- * (new admin\file\Query())->where(['id' => 10])->one();
+ * (new \luyaadmin\file\Query())->where(['id' => 10])->one();
  * ```
  * 
  * or 
  * 
  * ```php
- * (new admin\file\Query())->findOne(10);
+ * (new \luyaadmin\file\Query())->findOne(10);
  * ```
  * 
  * ### images
@@ -73,7 +75,7 @@ use admin\models\StorageFolder;
  */
 class StorageContainer extends Component
 {
-    use \luya\traits\CacheableTrait;
+    use CacheableTrait;
     
     /**
      * @var \luya\web\Request Request object resolved from DI.
@@ -102,7 +104,7 @@ class StorageContainer extends Component
      * @param \luya\web\Request $request
      * @param array $config
      */
-    public function __construct(\luya\web\Request $request, array $config = [])
+    public function __construct(Request $request, array $config = [])
     {
         $this->request = $request;
         parent::__construct($config);
@@ -254,22 +256,22 @@ class StorageContainer extends Component
     }
     
     /**
-     * Find multiples files with an admin\file\Query all
+     * Find multiples files with an \luyaadmin\file\Query all
      * 
      * @param array $args
      */
     public function findFiles(array $args = [])
     {
-        return (new \admin\file\Query())->where($args)->all();
+        return (new \luya\admin\file\Query())->where($args)->all();
     }
     
     /**
-     * Find a single file with an admin\file\Query one
+     * Find a single file with an \luyaadmin\file\Query one
      * @param array $args
      */
     public function findFile(array $args = [])
     {
-        return (new \admin\file\Query())->where($args)->one();
+        return (new \luya\admin\file\Query())->where($args)->one();
     }
     
     /**
@@ -279,7 +281,7 @@ class StorageContainer extends Component
      */
     public function getFile($fileId)
     {
-        return (new \admin\file\Query())->findOne($fileId);
+        return (new \luya\admin\file\Query())->findOne($fileId);
     }
     
     /**
@@ -354,7 +356,7 @@ class StorageContainer extends Component
      */
     public function findImages(array $args = [])
     {
-        return (new \admin\image\Query())->where($args)->all();
+        return (new \luya\admin\image\Query())->where($args)->all();
     }
     
     /**
@@ -363,17 +365,17 @@ class StorageContainer extends Component
      */
     public function findImage(array $args = [])
     {
-        return (new \admin\image\Query())->where($args)->one();
+        return (new \luya\admin\image\Query())->where($args)->one();
     }
     
     /**
      * 
      * @param unknown $imageId
-     * @return \admin\storage\admin\storage\QueryTrait|\admin\storage\Object
+     * @return \luya\admin\storage\admin\storage\QueryTrait|\luya\admin\storage\Object
      */
     public function getImage($imageId)
     {
-        return (new \admin\image\Query())->findOne($imageId);
+        return (new \luya\admin\image\Query())->findOne($imageId);
     }
     
     /**
@@ -396,7 +398,7 @@ class StorageContainer extends Component
                 $filterId = $filterLookup['id'];
             }
             
-            $query = (new \admin\image\Query())->where(['file_id' => $fileId, 'filter_id' => $filterId])->one();
+            $query = (new \luya\admin\image\Query())->where(['file_id' => $fileId, 'filter_id' => $filterId])->one();
             
             if ($query && $query->fileExists) {
                 return $query;
@@ -493,7 +495,7 @@ class StorageContainer extends Component
      */
     public function findFolders(array $args = [])
     {
-        return (new \admin\folder\Query())->where($args)->all();
+        return (new \luya\admin\folder\Query())->where($args)->all();
     }
     
     /**
@@ -502,7 +504,7 @@ class StorageContainer extends Component
      */
     public function findFolder(array $args = [])
     {
-        return (new \admin\folder\Query())->where($args)->one();
+        return (new \luya\admin\folder\Query())->where($args)->one();
     }
     
     /**
@@ -511,7 +513,7 @@ class StorageContainer extends Component
      */
     public function getFolder($folderId)
     {
-        return (new \admin\folder\Query())->where(['id' => $folderId])->one();
+        return (new \luya\admin\folder\Query())->where(['id' => $folderId])->one();
     }
     
     /**

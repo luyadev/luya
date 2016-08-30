@@ -1,8 +1,9 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
 
 use luya\helpers\ArrayHelper;
+use luya\admin\ngrest\base\Plugin;
 
 /**
  * Create a HTML5 number-tag.
@@ -18,7 +19,7 @@ use luya\helpers\ArrayHelper;
  * 
  * @author nadar
  */
-class Number extends \admin\ngrest\base\Plugin
+class Number extends Plugin
 {
     /**
      * @var integer The default init value for this field

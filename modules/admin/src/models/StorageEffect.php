@@ -1,6 +1,8 @@
 <?php
 
-namespace admin\models;
+namespace luya\admin\models;
+
+use luya\admin\ngrest\base\NgRestModel;
 
 /**
  * This is the model class for table "admin_group".
@@ -9,7 +11,7 @@ namespace admin\models;
  * @property string $name
  * @property string $text
  */
-class StorageEffect extends \admin\ngrest\base\Model
+class StorageEffect extends NgRestModel
 {
     /**
      * {@inheritdoc}

@@ -3,15 +3,16 @@
 namespace luya\cms\models;
 
 use Yii;
-use admin\traits\SoftDeleteTrait;
+use luya\admin\traits\SoftDeleteTrait;
 use yii\db\ActiveQuery;
+use luya\admin\ngrest\base\NgRestModel;
 
 /**
  * Represents the Block-Group Model where blocks can be stored inside.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class BlockGroup extends \admin\ngrest\base\Model
+class BlockGroup extends NgRestModel
 {
     use SoftDeleteTrait;
 

@@ -2,7 +2,7 @@
 
 namespace newsadmin\apis;
 
-class CatController extends \admin\ngrest\base\Api
+class CatController extends \luya\admin\ngrest\base\Api
 {
     public $modelClass = '\\newsadmin\\models\\Cat';
 }

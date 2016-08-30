@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\models;
+namespace luya\admin\models;
 
 /**
  * This is the model class for table "admin_config".

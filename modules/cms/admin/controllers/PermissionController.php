@@ -2,7 +2,7 @@
 
 namespace luya\cms\admin\controllers;
 
-use admin\base\Controller;
+use luya\admin\base\Controller;
 
 /**
  * Controller for Angular Permissions

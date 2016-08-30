@@ -9,7 +9,7 @@
  * This is copy from the orignal file of https://github.com/yiisoft/yii2-imagine/blob/master/BaseImage.php as its not yet released.
  */
 
-namespace admin\helpers;
+namespace luya\admin\helpers;
 
 use Yii;
 use Imagine\Image\Box;

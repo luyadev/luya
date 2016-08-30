@@ -1,12 +1,15 @@
+<?php
+use luya\admin\Module;
+?>
 <div ng-controller="ActiveWindowGalleryController">
     <div class="col s8">
     	<storage-file-manager selection="true" only-images="true" />
     </div>
     <div class="col s4" style="background-color:#F0F0F0;">
         <div style="padding:10px;">
-            <h5><?php echo \admin\Module::t('aws_gallery_images')?></h5>
+            <h5><?= Module::t('aws_gallery_images')?></h5>
             <div ng-show="isEmptyObject(files)">
-                <p><?php echo \admin\Module::t('aws_gallery_empty')?></p>
+                <p><?= Module::t('aws_gallery_empty')?></p>
             </div>
             <div class="col s3" ng-repeat="file in files">
                 <div class="aws-gallery__image-wrapper">

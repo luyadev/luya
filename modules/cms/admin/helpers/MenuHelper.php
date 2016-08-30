@@ -3,10 +3,10 @@
 namespace luya\cms\admin\helpers;
 
 use Yii;
-use admin\models\Lang;
+use luya\admin\models\Lang;
 use yii\db\Query;
-use \luya\cms\models\Nav;
-use admin\models\Group;
+use luya\cms\models\Nav;
+use luya\admin\models\Group;
 use luya\helpers\ArrayHelper;
 
 /**

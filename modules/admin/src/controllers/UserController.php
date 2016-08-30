@@ -1,13 +1,15 @@
 <?php
 
-namespace admin\controllers;
+namespace luya\admin\controllers;
+
+use luya\admin\ngrest\base\Controller;
 
 /**
  * NgRest User Controller.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class UserController extends \admin\ngrest\base\Controller
+class UserController extends Controller
 {
-    public $modelClass = 'admin\\models\\User';
+    public $modelClass = 'luya\admin\models\User';
 }

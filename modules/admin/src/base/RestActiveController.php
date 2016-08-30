@@ -1,11 +1,10 @@
 <?php
 
-namespace admin\base;
+namespace luya\admin\base;
 
 use Yii;
-use admin\components\Auth;
-use admin\ngrest\base\Model;
-use admin\models\UserOnline;
+use luya\admin\components\Auth;
+use luya\admin\models\UserOnline;
 use luya\rest\UserBehaviorInterface;
 use luya\traits\RestBehaviorsTrait;
 use yii\web\ForbiddenHttpException;

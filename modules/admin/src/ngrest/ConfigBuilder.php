@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\ngrest;
+namespace luya\admin\ngrest;
 
 use Yii;
 use luya\Exception;
@@ -9,15 +9,15 @@ use luya\helpers\ArrayHelper;
 /**
  * Config Builder class to make the NgRest Configs
  * 
- * @property \admin\ngrest\ConfigBuilder $list Set the pointer to list and return the ConfigBuilder for this pointer.
- * @property \admin\ngrest\ConfigBuilder $create Set the pointer to create and return the ConfigBuilder for this pointer.
- * @property \admin\ngrest\ConfigBuilder $update Set the pointer to update and return the ConfigBuilder for this pointer.
- * @property \admin\ngrest\ConfigBuilder $aw Set the pointer to aw and return the ConfigBuilder for this pointer.
+ * @property \luya\admin\ngrest\ConfigBuilder $list Set the pointer to list and return the ConfigBuilder for this pointer.
+ * @property \luya\admin\ngrest\ConfigBuilder $create Set the pointer to create and return the ConfigBuilder for this pointer.
+ * @property \luya\admin\ngrest\ConfigBuilder $update Set the pointer to update and return the ConfigBuilder for this pointer.
+ * @property \luya\admin\ngrest\ConfigBuilder $aw Set the pointer to aw and return the ConfigBuilder for this pointer.
  * @property boolean $delete Define whether the delete button is availabe or not
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
+class ConfigBuilder implements ConfigBuilderInterface
 {
     protected $pointer = null;
 
@@ -45,7 +45,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
      *
      * @param string $key
      * @throws Exception
-     * @return \admin\ngrest\ConfigBuilder
+     * @return \luya\admin\ngrest\ConfigBuilder
      */
     public function __get($key)
     {
@@ -76,7 +76,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
      * 
      * @param unknown $name
      * @param unknown $args
-     * @return \admin\ngrest\ConfigBuilder
+     * @return \luya\admin\ngrest\ConfigBuilder
      */
     public function __call($name, $args)
     {
@@ -98,7 +98,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
      */
     public function prepandAdminPlugin($name)
     {
-        return '\\admin\\ngrest\\plugins\\'.ucfirst($name);
+        return '\\luya\\admin\\ngrest\\plugins\\'.ucfirst($name);
     }
     
     /**
@@ -107,7 +107,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
      * @todo rename to addType
      * @param string $name The name of the ngrest\plugin
      * @param array $args
-     * @return \admin\ngrest\ConfigBuilder
+     * @return \luya\admin\ngrest\ConfigBuilder
      * @since 1.0.0-beta4
      */
     public function addPlugin($name, array $args)
@@ -124,7 +124,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
      * @param string $name
      * @param string $alias
      * @param boolean $i18n
-     * @return \admin\ngrest\ConfigBuilder
+     * @return \luya\admin\ngrest\ConfigBuilder
      */
     public function field($name, $alias = null, $i18n = false)
     {
@@ -147,7 +147,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
      * @param string $name
      * @param string $alias
      * @param boolean $i18n
-     * @return \admin\ngrest\ConfigBuilder
+     * @return \luya\admin\ngrest\ConfigBuilder
      */
     public function extraField($name, $alias, $i18n = false)
     {
@@ -224,7 +224,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
      * Return the NgRest Config
      * 
      * {@inheritDoc}
-     * @see \admin\ngrest\interfaces\ConfigBuilder::getConfig()
+     * @see \luya\admin\ngrest\interfaces\ConfigBuilder::getConfig()
      */
     public function getConfig()
     {

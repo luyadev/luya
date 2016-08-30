@@ -1,13 +1,15 @@
 <?php
 
-namespace admin\controllers;
+namespace luya\admin\controllers;
+
+use luya\admin\ngrest\base\Controller;
 
 /**
  * NgRest Group Controller.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class GroupController extends \admin\ngrest\base\Controller
+class GroupController extends Controller
 {
-    public $modelClass = 'admin\models\Group';
+    public $modelClass = 'luya\admin\models\Group';
 }

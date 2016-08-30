@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\ngrest\base;
+namespace luya\admin\ngrest\base;
 
 use Yii;
 use luya\helpers\FileHelper;
@@ -12,7 +12,7 @@ use yii\helpers\Html;
 use yii\base\Arrayable;
 use yii\base\ErrorException;
 use yii\base\InvalidConfigException;
-use admin\base\RestActiveController;
+use luya\admin\base\RestActiveController;
 
 /**
  * The RestActiveController for all NgRest implementations.

@@ -9,7 +9,7 @@ use Yii;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class BlockController extends \admin\ngrest\base\Api
+class BlockController extends \luya\admin\ngrest\base\Api
 {
     public $modelClass = 'luya\cms\models\Block';
     

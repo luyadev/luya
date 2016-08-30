@@ -1,15 +1,16 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
 
 use luya\Exception;
+use luya\admin\ngrest\base\Plugin;
 
 /**
  * Render Colorized overview
  * 
  * @author nadar
  */
-class Color extends \admin\ngrest\base\Plugin
+class Color extends Plugin
 {
     public function renderList($id, $ngModel)
     {

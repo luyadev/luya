@@ -1,8 +1,9 @@
 <?php
 
-namespace admin\aws;
+namespace luya\admin\aws;
 
 use Yii;
+use luya\admin\ngrest\base\ActiveWindow;
 
 /**
  * Create an Active Window where you can select Images and store them into a Ref Table.
@@ -30,7 +31,7 @@ use Yii;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class Gallery extends \admin\ngrest\base\ActiveWindow
+class Gallery extends ActiveWindow
 {
     public $refTableName = null;
 

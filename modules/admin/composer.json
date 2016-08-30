@@ -27,8 +27,7 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"admin\\" : "src/",
-			"admintests\\" : "tests/"
+			"luya\\admin\\" : "src/"
 		}
 	},
 	"autoload-dev" : {

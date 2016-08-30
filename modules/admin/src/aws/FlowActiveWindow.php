@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\aws;
+namespace luya\admin\aws;
 
 use Yii;
 use yii\base\InvalidConfigException;
@@ -8,7 +8,8 @@ use Flow\Config;
 use Flow\Request;
 use Flow\File;
 use luya\helpers\FileHelper;
-use admin\helpers\Storage;
+use luya\admin\helpers\Storage;
+use luya\admin\ngrest\base\ActiveWindow;
 
 /**
  * Flow Uploader ActiveWindow enables multi image upload with chunck ability.
@@ -35,7 +36,7 @@ use admin\helpers\Storage;
  * 
  * @since 1.0.0-beta7
  */
-class FlowActiveWindow extends \admin\ngrest\base\ActiveWindow
+class FlowActiveWindow extends ActiveWindow
 {
     public $module = '@admin';
     

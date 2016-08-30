@@ -3,6 +3,29 @@ LUYA UPGRADE
 
 This document will help you upgrading from a LUYA Version into another.
 
+1.0.0-rc1 (in progress)
+-----------
+
+As part of this release all module will be renamed. Frontend and admin module will be merged together. All module classes will get the prefix `luya`. So in order to upgrade your current modules, filters, blocks, blockgroups, models, etc. you have to rename a lot of classes of your project files:
+
+|old    |new
+|---    |---
+|`cmsadmin\...`|`luya\cms\admin\...`
+|`cms\...`|`luya\cms\frontend\...`
+|`admin\...`|`luya\admin\...`
+
+Search and replace examples:
+
+|search     |replace
+|---        |---
+|`\admin\ngrest\base\Api`|`\luya\admin\ngrest\base\Api`
+|`\admin\Module`|`\luya\admin\Module`
+|`\admin\ngrest\base\Model`|`\luya\admin\ngrest\base\NgRestModel`
+|`\admin\ngrest\base\Controller`|`\luya\admin\ngrest\base\Controller`
+|`\admin\base\RestController`|`\luya\admin\base\RestController`
+|`\admin\base\Controller`|`\luya\admin\base\Controller`
+
+
 1.0.0-beta8 (11.08.2016)
 -----------
 

@@ -1,13 +1,15 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
+
+use luya\admin\ngrest\base\Plugin;
 
 /**
  * Create a password input for a given field.
  * 
  * @author nadar
  */
-class Password extends \admin\ngrest\base\Plugin
+class Password extends Plugin
 {
     public function renderList($id, $ngModel)
     {

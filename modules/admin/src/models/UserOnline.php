@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\models;
+namespace luya\admin\models;
 
 class UserOnline extends \yii\db\ActiveRecord
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\helpers;
+namespace luya\admin\helpers;
 
 use yii\helpers\Html;
 

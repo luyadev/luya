@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\ngrest\aw;
+namespace luya\admin\ngrest\aw;
 
 use Yii;
 use luya\Exception;
@@ -65,7 +65,7 @@ class CallbackFormWidget extends \yii\base\Widget
     /**
      * @var string The ActiveField class with field type methods.
      */
-    public $fieldClass = '\admin\ngrest\aw\ActiveField';
+    public $fieldClass = '\luya\admin\ngrest\aw\ActiveField';
     
     /**
      * @var array This config options are automaticcally are used when creating a field based on the `fieldClass`.

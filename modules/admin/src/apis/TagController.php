@@ -1,13 +1,15 @@
 <?php
 
-namespace admin\apis;
+namespace luya\admin\apis;
+
+use luya\admin\ngrest\base\Api;
 
 /**
  * Tags API, provides ability to add, manage or collect all system tags.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class TagController extends \admin\ngrest\base\Api
+class TagController extends Api
 {
-    public $modelClass = '\admin\models\Tag';
+    public $modelClass = 'luya\admin\models\Tag';
 }

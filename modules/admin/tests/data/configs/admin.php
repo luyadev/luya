@@ -8,7 +8,7 @@ return [
     'defaultRoute' => 'admin',
     'modules' => [
         'admin' => [
-            'class' => '\admin\Module',
+            'class' => 'luya\admin\Module',
         ],
     ],
     'components' => [

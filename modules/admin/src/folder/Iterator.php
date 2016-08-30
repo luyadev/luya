@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\folder;
+namespace luya\admin\folder;
 
 /**
  * Iterator class for file items.
@@ -9,7 +9,7 @@ namespace admin\folder;
  *
  * @author nadar
  */
-class Iterator extends \admin\storage\IteratorAbstract
+class Iterator extends \luya\admin\storage\IteratorAbstract
 {
     /**
      * Iterator get current element, generates a new object for the current item on access.

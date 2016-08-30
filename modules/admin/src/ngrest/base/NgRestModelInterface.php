@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\ngrest\interfaces;
+namespace luya\admin\ngrest\base;
 
 /**
  * Interface For NgRest Model.
@@ -9,7 +9,7 @@ namespace admin\ngrest\interfaces;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-interface NgRestModeInterface
+interface NgRestModelInterface
 {
     /**
      * Defines the base inline configuration for the current Model.

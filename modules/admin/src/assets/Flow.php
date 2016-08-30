@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\assets;
+namespace luya\admin\assets;
 
 use luya\web\Asset;
 
@@ -18,6 +18,6 @@ class Flow extends Asset
     ];
     
     public $depends = [
-        'admin\assets\Main',
+        'luya\admin\assets\Main',
     ];
 }

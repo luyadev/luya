@@ -1,8 +1,9 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
 
 use yii\helpers\Json;
+use luya\admin\ngrest\base\Plugin;
 
 /**
  * Create a list element with self adding text inputs and responses as array.
@@ -10,7 +11,7 @@ use yii\helpers\Json;
  * @author nadar
  * @since 1.0.0-beta6
  */
-class TextArray extends \admin\ngrest\base\Plugin
+class TextArray extends Plugin
 {
     public $i18nEmptyValue = [];
     

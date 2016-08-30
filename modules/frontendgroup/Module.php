@@ -3,11 +3,11 @@
 namespace frontendgroup;
 
 use Yii;
-use cms\menu\Container;
 use yii\base\BootstrapInterface;
-use admin\models\Property;
-use cmsadmin\models\Property as CmsProperty;
+use luya\admin\models\Property;
+use luya\cms\models\Property as CmsProperty;
 use frontendgroup\properties\GroupAuthProperty;
+use luya\cms\Menu;
 
 /**
  * FrontendGroup Module.
@@ -27,14 +27,14 @@ class Module extends \luya\base\Module implements BootstrapInterface
     {
         $findProperty = Property::findOne(['class_name' => GroupAuthProperty::className()]);
         if ($findProperty) {
-            Yii::$app->menu->on(Container::MENU_ITEM_EVENT, [$this, 'hideElements'], CmsProperty::findAll(['admin_prop_id' => $findProperty->id]));
+            Yii::$app->menu->on(Menu::MENU_ITEM_EVENT, [$this, 'hideElements'], CmsProperty::findAll(['admin_prop_id' => $findProperty->id]));
         }
     }
 
     /**
      * Hide the elements which are protected by the propertie.
      * 
-     * @param \cms\menu\Container::MENU_ITEM_EVENT $event
+     * @param \luya\cms\Menu::MENU_ITEM_EVENT $event
      */
     public function hideElements($event)
     {

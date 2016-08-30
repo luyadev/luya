@@ -1,10 +1,10 @@
 <?php
 
-namespace admin\models;
+namespace luya\admin\models;
 
 use Yii;
 use yii\helpers\Url;
-use admin\Module;
+use luya\admin\Module;
 
 class LoginForm extends \yii\base\Model
 {
@@ -24,8 +24,8 @@ class LoginForm extends \yii\base\Model
     public function attributeLabels()
     {
         return [
-            'email' => \admin\Module::t('model_loginform_email_label'),
-            'password' => \admin\Module::t('model_loginform_password_label'),
+            'email' => Module::t('model_loginform_email_label'),
+            'password' => Module::t('model_loginform_password_label'),
         ];
     }
 
@@ -34,7 +34,7 @@ class LoginForm extends \yii\base\Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, \admin\Module::t('model_loginform_wrong_user_or_password'));
+                $this->addError($attribute, Module::t('model_loginform_wrong_user_or_password'));
             }
         }
     }
@@ -50,7 +50,7 @@ class LoginForm extends \yii\base\Model
 
     public function validateSecureToken($token, $userId)
     {
-        $user = \admin\models\User::findOne($userId);
+        $user = User::findOne($userId);
         
         if (!$user) {
             return false;
@@ -90,7 +90,7 @@ class LoginForm extends \yii\base\Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = \admin\models\User::findByEmail($this->email);
+            $this->_user = User::findByEmail($this->email);
         }
 
         return $this->_user;

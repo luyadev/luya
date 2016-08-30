@@ -1,5 +1,5 @@
 <?php
-use \admin\Module as Admin;
+use \luya\admin\Module as Admin;
 use \luya\helpers\Url;
 
 $user = Yii::$app->adminuser->getIdentity();

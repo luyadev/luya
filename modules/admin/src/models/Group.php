@@ -1,8 +1,11 @@
 <?php
 
-namespace admin\models;
+namespace luya\admin\models;
 
-use admin\Module;
+use luya\admin\Module;
+use luya\admin\traits\SoftDeleteTrait;
+use luya\admin\ngrest\base\NgRestModel;
+use luya\admin\aws\GroupAuth;
 
 /**
  * This is the model class for table "admin_group".
@@ -11,9 +14,9 @@ use admin\Module;
  * @property string $name
  * @property string $text
  */
-class Group extends \admin\ngrest\base\Model
+class Group extends NgRestModel
 {
-    use \admin\traits\SoftDeleteTrait;
+    use SoftDeleteTrait;
 
     /**
      * {@inheritdoc}
@@ -92,7 +95,7 @@ class Group extends \admin\ngrest\base\Model
     public function ngRestConfig($config)
     {
         // load active window to config
-        $config->aw->load(['class' => 'admin\aws\GroupAuth', 'alias' => Module::t('model_group_btn_aws_groupauth')]);
+        $config->aw->load(['class' => GroupAuth::className(), 'alias' => Module::t('model_group_btn_aws_groupauth')]);
         
         // define config
         $this->ngRestConfigDefine($config, 'list', ['name', 'text']);

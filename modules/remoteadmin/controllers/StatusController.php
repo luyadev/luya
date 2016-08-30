@@ -10,7 +10,7 @@ use remoteadmin\models\Site;
  * @author nadar
  *
  */
-class StatusController extends \admin\base\Controller
+class StatusController extends \luya\admin\base\Controller
 {
     public $current = null;
     

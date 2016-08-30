@@ -3,7 +3,7 @@
 namespace cms\widgets;
 
 use Yii;
-use admin\models\Lang;
+use luya\admin\models\Lang;
 use luya\web\Composition;
 
 /**

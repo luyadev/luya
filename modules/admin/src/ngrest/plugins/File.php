@@ -1,13 +1,15 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
+
+use luya\admin\ngrest\base\Plugin;
 
 /**
  * Single File-Upload
  * 
  * @author nadar
  */
-class File extends \admin\ngrest\base\Plugin
+class File extends Plugin
 {
     /**
      * 

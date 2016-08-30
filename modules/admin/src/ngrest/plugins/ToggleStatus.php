@@ -1,6 +1,8 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
+
+use luya\admin\ngrest\base\Plugin;
 
 /**
  * Create toggle checkbox for a given field.
@@ -18,7 +20,7 @@ namespace admin\ngrest\plugins;
  * 
  * @author nadar
  */
-class ToggleStatus extends \admin\ngrest\base\Plugin
+class ToggleStatus extends Plugin
 {
     /**
      * @var string|integer The value which shoud be picked for angular true state

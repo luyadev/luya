@@ -1,17 +1,18 @@
 <?php
 
-namespace admin\ngrest\render;
+namespace luya\admin\ngrest\render;
 
 use Yii;
 use yii\base\View;
-use admin\components\Auth;
-use admin\models\Lang;
-use admin\ngrest\NgRest;
+use luya\admin\components\Auth;
+use luya\admin\models\Lang;
+use luya\admin\ngrest\NgRest;
+use luya\admin\ngrest\base\Render;
 
 /**
  * @author nadar
  */
-class RenderCrud extends \admin\ngrest\base\Render implements \admin\ngrest\interfaces\Render
+class RenderCrud extends Render implements RenderInterface
 {
     const TYPE_LIST = 'list';
 

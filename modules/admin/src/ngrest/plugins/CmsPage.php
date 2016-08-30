@@ -1,15 +1,16 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
 
 use Yii;
+use luya\admin\ngrest\base\Plugin;
 
 /**
  * Create ability to select a CMS page.
  * 
  * @author nadar
  */
-class CmsPage extends \admin\ngrest\base\Plugin
+class CmsPage extends Plugin
 {
     public function renderList($id, $ngModel)
     {

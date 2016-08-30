@@ -1,11 +1,12 @@
 <?php
 
-namespace admin\apis;
+namespace luya\admin\apis;
 
 use luya\traits\CacheableTrait;
 use Yii;
-use admin\models\Property;
-use admin\models\Lang;
+use luya\admin\models\Property;
+use luya\admin\models\Lang;
+use luya\admin\base\RestController;
 
 /**
  * Delivers default values for the specifing table. It means it does not return a key numeric array,
@@ -13,7 +14,7 @@ use admin\models\Lang;
  *
  * @author nadar
  */
-class CommonController extends \admin\base\RestController
+class CommonController extends RestController
 {
     use CacheableTrait;
     

@@ -1,19 +1,22 @@
 <?php
 
-namespace admin\controllers;
+namespace luya\admin\controllers;
 
 use Yii;
-use admin\ngrest\NgRest;
+use luya\admin\ngrest\NgRest;
 use yii\web\Response;
 use luya\Exception;
 use luya\helpers\FileHelper;
+use luya\admin\base\Controller;
+use luya\admin\ngrest\render\RenderActiveWindow;
+use luya\admin\ngrest\render\RenderActiveWindowCallback;
 
 /**
  * NgRest Controller performs internal all NgRest calls for active windows and other jobs like exports or callbacks.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class NgrestController extends \admin\base\Controller
+class NgrestController extends Controller
 {
     public $disablePermissionCheck = true;
     
@@ -36,7 +39,7 @@ class NgrestController extends \admin\base\Controller
     {
         $config = NgRest::findConfig(Yii::$app->request->post('ngrestConfigHash', false));
 
-        $render = new \admin\ngrest\render\RenderActiveWindow();
+        $render = new RenderActiveWindow();
 
         $render->setItemId(Yii::$app->request->post('itemId', false));
         $render->setActiveWindowHash(Yii::$app->request->post('activeWindowHash', false));
@@ -50,7 +53,7 @@ class NgrestController extends \admin\base\Controller
     {
         $config = NgRest::findConfig(Yii::$app->request->get('ngrestConfigHash', false));
 
-        $render = new \admin\ngrest\render\RenderActiveWindowCallback();
+        $render = new RenderActiveWindowCallback();
 
         $ngrest = new NgRest($config);
 

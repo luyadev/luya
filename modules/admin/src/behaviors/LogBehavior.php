@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\behaviors;
+namespace luya\admin\behaviors;
 
 use Yii;
 use yii\db\ActiveRecord;

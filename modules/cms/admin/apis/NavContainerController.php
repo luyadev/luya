@@ -7,7 +7,7 @@ namespace luya\cms\admin\apis;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class NavContainerController extends \admin\ngrest\base\Api
+class NavContainerController extends \luya\admin\ngrest\base\Api
 {
     public $modelClass = 'luya\cms\models\NavContainer';
 }

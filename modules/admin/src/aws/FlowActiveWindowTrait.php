@@ -1,11 +1,11 @@
 <?php
 
-namespace admin\aws;
+namespace luya\admin\aws;
 
 use Yii;
 use yii\db\Query;
 use yii\base\InvalidConfigException;
-use admin\image\Item;
+use luya\admin\image\Item;
 use luya\helpers\ArrayHelper;
 
 /**

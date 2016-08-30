@@ -1,14 +1,13 @@
 <?php
 
-namespace admin\ngrest\interfaces;
+namespace luya\admin\ngrest;
 
 /**
  * Ngrest Config Builder Interface
  * 
- * @todo rename to ConfigBuilderInterface
  * @author Basil Suter <basil@nadar.io>
  */
-interface ConfigBuilder
+interface ConfigBuilderInterface
 {
     public function getConfig();
 }

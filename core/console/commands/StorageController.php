@@ -3,7 +3,7 @@
 namespace luya\console\commands;
 
 use Yii;
-use admin\importers\StorageImporter;
+use luya\admin\importers\StorageImporter;
 
 /**
  * LUYA Admin Storage command.

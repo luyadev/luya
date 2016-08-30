@@ -1,15 +1,16 @@
 <?php
 
-namespace admin\aws;
+namespace luya\admin\aws;
 
 use Yii;
+use luya\admin\ngrest\base\ActiveWindow;
 
 /**
  * Active Window to set permissions for a specific Group, used in groups ngrest model.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class GroupAuth extends \admin\ngrest\base\ActiveWindow
+class GroupAuth extends ActiveWindow
 {
     public $module = 'admin';
 

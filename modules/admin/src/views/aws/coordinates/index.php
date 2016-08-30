@@ -1,7 +1,5 @@
 <?php
-
-use admin\ngrest\aw\CallbackFormWidget;
-
+use luya\admin\ngrest\aw\CallbackFormWidget;
 ?>
 
 <h1>Maps</h1>

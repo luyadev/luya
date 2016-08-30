@@ -3,9 +3,9 @@
 namespace cmsadmin\commands;
 
 use luya\console\Command;
-use admin\models\Config;
-use cmsadmin\models\NavItem;
-use cmsadmin\Module;
+use luya\admin\models\Config;
+use luya\cms\models\NavItem;
+use luya\cms\admin\Module;
 
 /**
  * This controller is part of the beta6 release and adds the version ability database migrations.

@@ -3,7 +3,7 @@
 namespace luya\cms\models;
 
 use Yii;
-use cms\Exception;
+use luya\cms\Exception;
 use luya\helpers\ModuleHelper;
 use luya\cms\base\NavItemTypeInterface;
 use luya\cms\base\NavItemType;

@@ -2,7 +2,7 @@
 
 namespace tests\admin\components;
 
-use admin\components\Auth;
+use luya\admin\components\Auth;
 use admintests\AdminTestCase;
 
 class AuthTest extends AdminTestCase

@@ -6,7 +6,7 @@ use Yii;
 use crawleradmin\Module;
 use crawleradmin\models\Searchdata;
 
-class Index extends \admin\ngrest\base\Model
+class Index extends \luya\admin\ngrest\base\NgRestModel
 {
     /* yii model properties */
 

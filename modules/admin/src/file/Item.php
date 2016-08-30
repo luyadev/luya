@@ -1,11 +1,11 @@
 <?php
 
-namespace admin\file;
+namespace luya\admin\file;
 
 use Yii;
 use luya\helpers\Url;
 use luya\helpers\FileHelper;
-use admin\helpers\I18n;
+use luya\admin\helpers\I18n;
 
 /**
  * Storage File Item
@@ -35,7 +35,7 @@ use admin\helpers\I18n;
  */
 class Item extends \yii\base\Object
 {
-    use \admin\storage\ItemTrait;
+    use \luya\admin\storage\ItemTrait;
     
     private $_imageMimeTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg', 'image/bmp', '	image/tiff'];
     

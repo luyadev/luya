@@ -1,15 +1,16 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
 
 use yii\helpers\Json;
+use luya\admin\ngrest\base\Plugin;
 
 /**
  * Multi File-Upload selector
  * 
  * @author nadar
  */
-class FileArray extends \admin\ngrest\base\Plugin
+class FileArray extends Plugin
 {
     public $i18nEmptyValue = [];
     

@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\traits;
+namespace luya\admin\traits;
 
 /**
  * Trait to enable Soft Deletion for NgRest and ActiveRecord models.

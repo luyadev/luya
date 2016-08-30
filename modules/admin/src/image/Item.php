@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\image;
+namespace luya\admin\image;
 
 use Yii;
 
@@ -24,7 +24,7 @@ use Yii;
  */
 class Item extends \yii\base\Object
 {
-    use \admin\storage\ItemTrait;
+    use \luya\admin\storage\ItemTrait;
     
     private $_file = null;
     

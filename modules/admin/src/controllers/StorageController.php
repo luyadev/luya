@@ -1,13 +1,15 @@
 <?php
 
-namespace admin\controllers;
+namespace luya\admin\controllers;
+
+use luya\admin\base\Controller;
 
 /**
  * StorageController renders the Filemanager Template.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class StorageController extends \admin\base\Controller
+class StorageController extends Controller
 {
     public function actionIndex()
     {

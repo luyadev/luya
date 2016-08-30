@@ -1,13 +1,15 @@
 <?php
 
-namespace admin\controllers;
+namespace luya\admin\controllers;
+
+use luya\admin\ngrest\base\Controller;
 
 /**
  * NgRest Language Controller.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class LangController extends \admin\ngrest\base\Controller
+class LangController extends Controller
 {
-    public $modelClass = 'admin\models\Lang';
+    public $modelClass = 'luya\admin\models\Lang';
 }

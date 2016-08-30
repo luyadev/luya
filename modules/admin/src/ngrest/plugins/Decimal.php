@@ -1,15 +1,16 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
 
 use luya\helpers\ArrayHelper;
+use luya\admin\ngrest\base\Plugin;
 
 /**
  * Decimal Input-Form field.
  * 
  * @author nadar
  */
-class Decimal extends \admin\ngrest\base\Plugin
+class Decimal extends Plugin
 {
     public $steps = 0.01;
 

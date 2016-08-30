@@ -1,9 +1,10 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
 
 use Yii;
-use admin\ngrest\base\Model;
+use luya\admin\ngrest\base\NgRestModel;
+use luya\admin\ngrest\base\Plugin;
 
 /**
  * Create multi select input for a relation table.
@@ -43,7 +44,7 @@ use admin\ngrest\base\Model;
  * @property string|object $model 
  * @author nadar
  */
-class CheckboxRelation extends \admin\ngrest\base\Plugin
+class CheckboxRelation extends Plugin
 {
     private $_model;
     
@@ -61,8 +62,8 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
     {
         parent::init();
         
-        $this->addEvent(Model::EVENT_AFTER_INSERT, [$this, 'afterSaveEvent']);
-        $this->addEvent(Model::EVENT_AFTER_UPDATE, [$this, 'afterSaveEvent']);
+        $this->addEvent(NgRestModel::EVENT_AFTER_INSERT, [$this, 'afterSaveEvent']);
+        $this->addEvent(NgRestModel::EVENT_AFTER_UPDATE, [$this, 'afterSaveEvent']);
     }
     
     public function setModel($className)

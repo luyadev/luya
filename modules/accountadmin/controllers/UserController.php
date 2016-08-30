@@ -2,7 +2,7 @@
 
 namespace accountadmin\controllers;
 
-class UserController extends \admin\ngrest\base\Controller
+class UserController extends \luya\admin\ngrest\base\Controller
 {
     public $modelClass = '\accountadmin\models\User';
 }

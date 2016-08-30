@@ -10,7 +10,7 @@ use Yii;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class NavItemBlockController extends \admin\base\RestController
+class NavItemBlockController extends \luya\admin\base\RestController
 {
     /**
      * Copy all attached sub blocks (referencing sourceId) into new context and update prevId to sourceId

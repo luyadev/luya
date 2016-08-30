@@ -4,7 +4,7 @@ namespace galleryadmin\models;
 
 use galleryadmin\Module;
 
-class Cat extends \admin\ngrest\base\Model
+class Cat extends \luya\admin\ngrest\base\NgRestModel
 {
     /* yii model properties */
 

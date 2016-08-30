@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
 
 use Yii;
 
@@ -18,7 +18,7 @@ use Yii;
  *
  * @author nadar
  */
-class SelectModel extends \admin\ngrest\plugins\Select
+class SelectModel extends Select
 {
     public $modelClass = null;
     

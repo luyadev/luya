@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\storage;
+namespace luya\admin\storage;
 
 use luya\Exception;
 

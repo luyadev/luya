@@ -2,7 +2,7 @@
 
 namespace crawleradmin\apis;
 
-class IndexController extends \admin\ngrest\base\Api
+class IndexController extends \luya\admin\ngrest\base\Api
 {
     public $modelClass = '\crawleradmin\models\Index';
 }

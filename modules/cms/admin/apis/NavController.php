@@ -19,7 +19,7 @@ use yii\helpers\Json;
  *
  * @author nadar
  */
-class NavController extends \admin\base\RestController
+class NavController extends \luya\admin\base\RestController
 {
     private function postArg($name)
     {

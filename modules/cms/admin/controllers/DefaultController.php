@@ -4,7 +4,7 @@ namespace luya\cms\admin\controllers;
 
 use \luya\cms\models\Log;
 
-class DefaultController extends \admin\base\Controller
+class DefaultController extends \luya\admin\base\Controller
 {
     public function actionIndex()
     {

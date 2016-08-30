@@ -1,17 +1,19 @@
 <?php
 
-namespace admin\apis;
+namespace luya\admin\apis;
 
 use Yii;
 use Exception;
-use admin\models\SearchData;
+use luya\admin\models\SearchData;
+use luya\admin\base\RestController;
+use luya\admin\base\GenericSearchInterface;
 
 /**
  * Search API, allows you to perform search querys for the entire administration including all items provided in the auth section.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class SearchController extends \admin\base\RestController
+class SearchController extends RestController
 {
     public function actionIndex($query)
     {
@@ -21,7 +23,7 @@ class SearchController extends \admin\base\RestController
         foreach (Yii::$app->adminmenu->getModules() as $node) {
             if (isset($node['searchModelClass']) && !empty($node['searchModelClass'])) {
                 $model = Yii::createObject($node['searchModelClass']);
-                if (!$model instanceof \admin\base\GenericSearchInterface) {
+                if (!$model instanceof GenericSearchInterface) {
                     throw new Exception('The model must be an instance of GenericSearchInterface');
                 }
                 $data = $model->genericSearch($query);

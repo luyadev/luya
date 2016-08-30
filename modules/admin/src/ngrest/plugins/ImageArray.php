@@ -1,15 +1,16 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
 
 use yii\helpers\Json;
+use luya\admin\ngrest\base\Plugin;
 
 /**
  * Mutli Image-Upload selector ability.
  * 
  * @author nadar
  */
-class ImageArray extends \admin\ngrest\base\Plugin
+class ImageArray extends Plugin
 {
     public $i18nEmptyValue = [];
     

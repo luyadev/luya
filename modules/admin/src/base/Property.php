@@ -1,8 +1,9 @@
 <?php
 
-namespace admin\base;
+namespace luya\admin\base;
 
-use admin\helpers\I18n;
+use luya\admin\helpers\I18n;
+use yii\base\Component;
 
 /**
  * Abstract Page Property Class.
@@ -11,7 +12,7 @@ use admin\helpers\I18n;
  *
  * @author nadar
  */
-abstract class Property extends \yii\base\Component
+abstract class Property extends Component
 {
     const EVENT_BEFORE_RENDER = 'EVENT_BEFORE_RENDER';
 

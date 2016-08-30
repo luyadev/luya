@@ -1,13 +1,14 @@
 <?php
 
-namespace admin\ngrest\render;
+namespace luya\admin\ngrest\render;
 
 use Yii;
+use luya\admin\ngrest\base\Render;
 
 /**
  * @author nadar
  */
-class RenderActiveWindow extends \admin\ngrest\base\Render implements \admin\ngrest\interfaces\Render
+class RenderActiveWindow extends Render implements RenderInterface
 {
     private $_itemId = null;
 

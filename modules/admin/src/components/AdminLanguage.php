@@ -1,9 +1,9 @@
 <?php
 
-namespace admin\components;
+namespace luya\admin\components;
 
 use yii\base\Component;
-use admin\models\Lang;
+use luya\admin\models\Lang;
 
 /**
  * Admin Language component to make singelton similiar pattern to collect langauges and active language.

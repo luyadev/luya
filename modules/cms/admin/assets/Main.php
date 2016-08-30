@@ -24,6 +24,6 @@ class Main extends \yii\web\AssetBundle
     ];
 
     public $depends = [
-        'admin\assets\Main',
+        'luya\admin\assets\Main',
     ];
 }

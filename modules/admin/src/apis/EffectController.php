@@ -1,13 +1,15 @@
 <?php
 
-namespace admin\apis;
+namespace luya\admin\apis;
+
+use luya\admin\ngrest\base\Api;
 
 /**
  * Effects API, provides all available system effects.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class EffectController extends \admin\ngrest\base\Api
+class EffectController extends Api
 {
-    public $modelClass = 'admin\models\StorageEffect';
+    public $modelClass = 'luya\admin\models\StorageEffect';
 }

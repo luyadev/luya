@@ -1,17 +1,18 @@
 <?php
 
-namespace admin\apis;
+namespace luya\admin\apis;
 
 use Yii;
 use Exception;
-use admin\models\UserOnline;
+use luya\admin\models\UserOnline;
+use luya\rest\Controller;
 
 /**
  * Remove API, allows to collect system data with a valid $token.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class RemoteController extends \luya\rest\Controller
+class RemoteController extends Controller
 {
     public function userAuthClass()
     {

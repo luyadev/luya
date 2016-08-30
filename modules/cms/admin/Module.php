@@ -9,7 +9,7 @@ use luya\cms\admin\importers\BlockImporter;
 use luya\cms\admin\importers\CmslayoutImporter;
 use luya\cms\admin\importers\PropertyConsistencyImporter;
 
-class Module extends \admin\base\Module
+class Module extends \luya\admin\base\Module
 {
     /**
      * @var string The version label name of the first version, version alias is running through yii2 messaging system.
@@ -90,7 +90,7 @@ class Module extends \admin\base\Module
     public function getMenu()
     {
         return $this
-            ->nodeRoute(static::t('menu_node_cms'), 'content_copy', 'cmsadmin-default-index', 'cmsadmin/default/index', 'cmsadmin\models\NavItem')
+            ->nodeRoute(static::t('menu_node_cms'), 'content_copy', 'cmsadmin-default-index', 'cmsadmin/default/index', 'luya\cms\models\NavItem')
             ->node(static::t('menu_node_cmssettings'), 'settings')
                 ->group(static::t('menu_group_env'))
                     ->itemRoute(static::t('menu_group_item_env_permission'), "cmsadmin/permission/index", 'gavel')

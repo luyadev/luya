@@ -5,7 +5,7 @@ namespace remoteadmin\models;
 use Yii;
 use luya\helpers\Url;
 
-class Site extends \admin\ngrest\base\Model
+class Site extends \luya\admin\ngrest\base\NgRestModel
 {
     /* yii model properties */
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace admin\importers;
+namespace luya\admin\importers;
 
 use Yii;
-use admin\models\Property;
+use luya\admin\models\Property;
 use luya\console\Importer;
 
 class PropertyImporter extends Importer

@@ -1,13 +1,15 @@
 <?php
 
-namespace admin\apis;
+namespace luya\admin\apis;
+
+use luya\admin\ngrest\base\Api;
 
 /**
  * Filters API, provides all available system filters.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class FilterController extends \admin\ngrest\base\Api
+class FilterController extends Api
 {
-    public $modelClass = 'admin\models\StorageFilter';
+    public $modelClass = 'luya\admin\models\StorageFilter';
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\models;
+namespace luya\admin\models;
 
 use yii\base\Object;
 use yii\db\ActiveRecordInterface;

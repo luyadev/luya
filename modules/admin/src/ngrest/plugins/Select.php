@@ -1,16 +1,16 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
 
-use admin\ngrest\base\Model;
 use luya\helpers\StringHelper;
+use luya\admin\ngrest\base\Plugin;
 
 /**
  * Base class for select dropdowns via Array or Model.
  * 
  * @author nadar
  */
-abstract class Select extends \admin\ngrest\base\Plugin
+abstract class Select extends Plugin
 {
     public $initValue = 0;
 

@@ -221,7 +221,7 @@ public function ngRestConfig($config)
 We have also added a soft delete trait which is going to override the default implementation of the `delete` method. When enabled and configure, the soft delete trait will only mark the datarecord to `is_deleted = 1` instead of removing it from the database.
 
 ```php
-use admin\traits\SoftDeleteTrait;
+use luya\admin\traits\SoftDeleteTrait;
 ```
 
 By default, soft delete trait will use the field `is_deleted` to find and delete data records, you can configure the field by overriding the `FieldStateDescriber` method as followed:

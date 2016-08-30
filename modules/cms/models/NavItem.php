@@ -3,11 +3,11 @@
 namespace luya\cms\models;
 
 use Yii;
-use admin\models\Lang;
+use luya\admin\models\Lang;
 use yii\base\Exception;
 use yii\helpers\Inflector;
 use luya\cms\admin\Module;
-use admin\base\GenericSearchInterface;
+use luya\admin\base\GenericSearchInterface;
 
 /**
  * NavItem Model represents a Item bound to Nav and Language, each Nav(Menu) can contain a nav_item for each language.Each 

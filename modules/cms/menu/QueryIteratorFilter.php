@@ -5,7 +5,7 @@ namespace luya\cms\menu;
 use Yii;
 use FilterIterator;
 use Countable;
-use cms\events\MenuItemEvent;
+use luya\cms\frontend\events\MenuItemEvent;
 use luya\cms\Menu;
 
 /**

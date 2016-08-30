@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\ngrest\interfaces;
+namespace luya\admin\ngrest\base;
 
 /**
  * Active Window Interface
@@ -8,7 +8,7 @@ namespace admin\ngrest\interfaces;
  * @todo rename to ActiveWindowInterface
  * @author Basil Suter <basil@nadar.io>
  */
-interface ActiveWindow
+interface ActiveWindowInterface
 {
     public function setItemId($id);
 

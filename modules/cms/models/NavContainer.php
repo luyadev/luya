@@ -2,14 +2,15 @@
 
 namespace luya\cms\models;
 
-use admin\traits\SoftDeleteTrait;
+use luya\admin\traits\SoftDeleteTrait;
+use luya\admin\ngrest\base\NgRestModel;
 
 /**
  * Represents the Navigation-Containers.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class NavContainer extends \admin\ngrest\base\Model
+class NavContainer extends NgRestModel
 {
     use SoftDeleteTrait;
 

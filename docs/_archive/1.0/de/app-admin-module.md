@@ -7,7 +7,7 @@ Eigene Views Rendern
 Erstellen Sie einen Controller unter `controllers` zbsp. `TestController.php`.
 
 ```php
-class StatsController extends \admin\base\Controller
+class StatsController extends \luya\admin\base\Controller
 {
     public function actionIndex()
     {

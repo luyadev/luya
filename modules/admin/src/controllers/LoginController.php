@@ -1,25 +1,26 @@
 <?php
 
-namespace admin\controllers;
+namespace luya\admin\controllers;
 
 use Yii;
 use yii\web\Response;
 use luya\helpers\Url;
-use admin\models\LoginForm;
-use admin\Module;
+use luya\admin\models\LoginForm;
+use luya\admin\Module;
+use luya\admin\base\Controller;
 
 /**
  * Login Controller contains async actions, async token send action and login mechanism.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class LoginController extends \admin\base\Controller
+class LoginController extends Controller
 {
     public $layout = '@admin/views/layouts/nosession';
 
     public $skipModuleAssets = ['*'];
 
-    public $assets = ["\admin\assets\Login"];
+    public $assets = ["\luya\admin\assets\Login"];
 
     public function getRules()
     {

@@ -1,12 +1,12 @@
 <?php
 
-namespace admin\folder;
+namespace luya\admin\folder;
 
 use Yii;
 
 class Item extends \yii\base\Object
 {
-    use \admin\storage\ItemTrait;
+    use \luya\admin\storage\ItemTrait;
     
     public function getId()
     {
@@ -30,7 +30,7 @@ class Item extends \yii\base\Object
 
     public function hasChild()
     {
-        return ((new \admin\folder\Query())->where(['is_deleted' => 0, 'parent_id' => $this->getId()])->count() > 0 ? true: false);
+        return ((new \luya\admin\folder\Query())->where(['is_deleted' => 0, 'parent_id' => $this->getId()])->count() > 0 ? true: false);
     }
     
     public function getParent()
@@ -40,7 +40,7 @@ class Item extends \yii\base\Object
     
     public function getFilesCount()
     {
-        return (new \admin\file\Query())->where(['is_hidden' => 0, 'is_deleted' => 0, 'folder_id' => $this->getId()])->count();
+        return (new \luya\admin\file\Query())->where(['is_hidden' => 0, 'is_deleted' => 0, 'folder_id' => $this->getId()])->count();
     }
     
     public function toArray()

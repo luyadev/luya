@@ -20,7 +20,7 @@ use luya\cms\models\Layout;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class NavItemController extends \admin\base\RestController
+class NavItemController extends \luya\admin\base\RestController
 {
     public function behaviors()
     {

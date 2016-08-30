@@ -1,11 +1,11 @@
 <?php
 
-namespace admin\helpers;
+namespace luya\admin\helpers;
 
 use Exception;
 use Yii;
-use admin\models\StorageFile;
-use admin\models\StorageImage;
+use luya\admin\models\StorageFile;
+use luya\admin\models\StorageImage;
 
 class Storage
 {

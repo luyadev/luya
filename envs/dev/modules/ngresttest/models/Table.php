@@ -3,17 +3,18 @@
 namespace ngresttest\models;
 
 use Yii;
-use admin\models\User;
-use admin\aws\FlowActiveWindow;
-use admin\aws\FlowActiveWindowInterface;
-use admin\image\Item;
+use luya\admin\models\User;
+use luya\admin\aws\FlowActiveWindow;
+use luya\admin\aws\FlowActiveWindowInterface;
+use luya\admin\image\Item;
 use yii\db\Query;
 use luya\helpers\ArrayHelper;
+use luya\admin\ngrest\base\NgRestModel;
 
 /**
  * NgRest Model created at 21.03.2016 14:05 on LUYA Version 1.0.0-beta6-dev.
  */
-class Table extends \admin\ngrest\base\Model implements FlowActiveWindowInterface
+class Table extends NgRestModel implements FlowActiveWindowInterface
 {
         /**
      * @inheritdoc

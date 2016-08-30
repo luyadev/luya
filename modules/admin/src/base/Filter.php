@@ -1,11 +1,11 @@
 <?php
 
-namespace admin\base;
+namespace luya\admin\base;
 
 use Exception;
-use admin\models\StorageFilter;
-use admin\models\StorageEffect;
-use admin\models\StorageFilterChain;
+use luya\admin\models\StorageFilter;
+use luya\admin\models\StorageEffect;
+use luya\admin\models\StorageFilterChain;
 use yii\helpers\Json;
 use yii\base\Object;
 

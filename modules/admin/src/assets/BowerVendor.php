@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\assets;
+namespace luya\admin\assets;
 
 /**
  * BowerVendor Asset contains all files from old bower-asset depencies.

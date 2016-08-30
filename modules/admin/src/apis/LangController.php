@@ -1,13 +1,15 @@
 <?php
 
-namespace admin\apis;
+namespace luya\admin\apis;
+
+use luya\admin\ngrest\base\Api;
 
 /**
  * Language API, to manage, create, update and delte all system languages.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class LangController extends \admin\ngrest\base\Api
+class LangController extends Api
 {
-    public $modelClass = 'admin\models\Lang';
+    public $modelClass = 'luya\admin\models\Lang';
 }

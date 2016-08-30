@@ -14,7 +14,7 @@ use luya\cms\admin\Module;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class AdminController extends \admin\base\RestController
+class AdminController extends \luya\admin\base\RestController
 {
     public function actionDataBlocks()
     {

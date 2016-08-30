@@ -1,8 +1,8 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
 
-use admin\ngrest\base\Plugin;
+use luya\admin\ngrest\base\Plugin;
 
 abstract class SortRelation extends Plugin
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
 
 use luya\helpers\ArrayHelper;
 
@@ -18,7 +18,7 @@ use luya\helpers\ArrayHelper;
  * 
  * @author nadar
  */
-class SelectArray extends \admin\ngrest\plugins\Select
+class SelectArray extends Select
 {
     private $_data = null;
     

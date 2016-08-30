@@ -1,23 +1,24 @@
 <?php
 
-namespace admin\apis;
+namespace luya\admin\apis;
 
 use Yii;
 use Exception;
-use admin\helpers\Storage;
-use admin\models\StorageFile;
-use admin\models\StorageFolder;
-use admin\Module;
+use luya\admin\helpers\Storage;
+use luya\admin\models\StorageFile;
+use luya\admin\models\StorageFolder;
+use luya\admin\Module;
 use luya\traits\CacheableTrait;
 use yii\caching\DbDependency;
-use admin\helpers\I18n;
+use luya\admin\helpers\I18n;
+use luya\admin\base\RestController;
 
 /**
  * Storage API, provides data from system image, files, filters and folders to build the filemanager, allows create/delete process to manipulate storage data.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class StorageController extends \admin\base\RestController
+class StorageController extends RestController
 {
     use CacheableTrait;
     

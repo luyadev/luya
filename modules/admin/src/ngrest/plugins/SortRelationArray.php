@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
 
 class SortRelationArray extends SortRelation
 {

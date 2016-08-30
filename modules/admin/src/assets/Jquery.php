@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\assets;
+namespace luya\admin\assets;
 
 /**
  * Jquery Asset based on the yii\web\JqueryAsset.

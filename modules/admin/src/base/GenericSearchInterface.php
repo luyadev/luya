@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\base;
+namespace luya\admin\base;
 
 /**
  * Defines a structure for the Admin search, called generic search.

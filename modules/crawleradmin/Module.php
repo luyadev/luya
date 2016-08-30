@@ -4,7 +4,7 @@ namespace crawleradmin;
 
 use Yii;
 
-class Module extends \admin\base\Module
+class Module extends \luya\admin\base\Module
 {
     public $apis = [
         'api-crawler-builderindex' => 'crawleradmin\apis\BuilderindexController',

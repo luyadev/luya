@@ -3,8 +3,8 @@
 namespace luya\cms\menu;
 
 use Yii;
-use cms\Exception;
-use admin\models\User;
+use luya\cms\Exception;
+use luya\admin\models\User;
 use luya\cms\models\Nav;
 
 /**

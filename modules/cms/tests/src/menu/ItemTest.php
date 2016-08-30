@@ -3,7 +3,7 @@
 namespace luya\cms\tests\src\menu;
 
 use Yii;
-use admin\models\User;
+use luya\admin\models\User;
 use luya\cms\tests\CmsFrontendTestCase;
 use luya\cms\menu\Query;
 

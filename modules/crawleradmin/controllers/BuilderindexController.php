@@ -2,7 +2,7 @@
 
 namespace crawleradmin\controllers;
 
-class BuilderindexController extends \admin\ngrest\base\Controller
+class BuilderindexController extends \luya\admin\ngrest\base\Controller
 {
     public $modelClass = '\crawleradmin\models\Builderindex';
 }

@@ -1,13 +1,15 @@
 <?php
 
-namespace admin\controllers;
+namespace luya\admin\controllers;
+
+use luya\admin\ngrest\base\Controller;
 
 /**
  * NgRest Effect Controller.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class EffectController extends \admin\ngrest\base\Controller
+class EffectController extends Controller
 {
-    public $modelClass = 'admin\models\StorageEffect';
+    public $modelClass = 'luya\admin\models\StorageEffect';
 }

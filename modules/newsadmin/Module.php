@@ -4,7 +4,7 @@ namespace newsadmin;
 
 use Yii;
 
-class Module extends \admin\base\Module
+class Module extends \luya\admin\base\Module
 {
     public $isCoreModule = true;
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace admin\ngrest\base;
+namespace luya\admin\ngrest\base;
 
 use Yii;
 use yii\base\Component;
 use yii\helpers\Json;
 use yii\helpers\Html;
 use luya\Exception;
-use admin\ngrest\base\Model;
-use admin\helpers\I18n;
+use luya\admin\ngrest\base\NgRestModel;
+use luya\admin\helpers\I18n;
 use luya\helpers\ArrayHelper;
 
 /**
@@ -78,11 +78,11 @@ abstract class Plugin extends Component
             throw new Exception("Plugin attributes id, name, alias, ngModel and i18n must be configured.");
         }
         
-        $this->addEvent(Model::EVENT_BEFORE_VALIDATE, 'onSave');
-        $this->addEvent(Model::EVENT_AFTER_FIND, 'onFind');
-        $this->addEvent(Model::EVENT_AFTER_NGREST_FIND, 'onListFind');
-        $this->addEvent(Model::EVENT_AFTER_NGREST_UPDATE_FIND, 'onExpandFind');
-        $this->addEvent(Model::EVENT_SERVICE_NGREST, 'onCollectServiceData');
+        $this->addEvent(NgRestModel::EVENT_BEFORE_VALIDATE, 'onSave');
+        $this->addEvent(NgRestModel::EVENT_AFTER_FIND, 'onFind');
+        $this->addEvent(NgRestModel::EVENT_AFTER_NGREST_FIND, 'onListFind');
+        $this->addEvent(NgRestModel::EVENT_AFTER_NGREST_UPDATE_FIND, 'onExpandFind');
+        $this->addEvent(NgRestModel::EVENT_SERVICE_NGREST, 'onCollectServiceData');
     }
 
     /**

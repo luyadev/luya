@@ -4,7 +4,7 @@ namespace crawleradmin\models;
 
 use crawleradmin\Module;
 
-class Builderindex extends \admin\ngrest\base\Model
+class Builderindex extends \luya\admin\ngrest\base\NgRestModel
 {
     public function init()
     {

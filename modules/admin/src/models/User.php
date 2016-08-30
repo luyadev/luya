@@ -1,14 +1,16 @@
 <?php
 
-namespace admin\models;
+namespace luya\admin\models;
 
 use Yii;
 use yii\web\IdentityInterface;
-use admin\models\UserLogin;
-use admin\aws\ChangePasswordInterface;
-use admin\Module;
-use admin\traits\SoftDeleteTrait;
+use luya\admin\models\UserLogin;
+use luya\admin\aws\ChangePasswordInterface;
+use luya\admin\Module;
+use luya\admin\traits\SoftDeleteTrait;
 use yii\helpers\Json;
+use luya\admin\ngrest\base\NgRestModel;
+use luya\admin\aws\ChangePassword;
 
 /**
  * User Model represents all Administration Users.
@@ -30,7 +32,7 @@ use yii\helpers\Json;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class User extends \admin\ngrest\base\Model implements IdentityInterface, ChangePasswordInterface
+class User extends NgRestModel implements IdentityInterface, ChangePasswordInterface
 {
     use SoftDeleteTrait;
 
@@ -87,7 +89,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface, Change
     
     public function ngRestConfig($config)
     {
-        $config->aw->load(['class' => 'admin\aws\ChangePassword', 'className' => 'admin\models\User']);
+        $config->aw->load(['class' => ChangePassword::className(), 'className' => User::className()]);
         
         $this->ngRestConfigDefine($config, 'list', ['firstname', 'lastname', 'email', 'lastloginTimestamp']);
         $this->ngRestConfigDefine($config, 'create', ['title', 'firstname', 'lastname', 'email', 'password']);
@@ -235,7 +237,7 @@ class User extends \admin\ngrest\base\Model implements IdentityInterface, Change
 
     public function getGroups()
     {
-        return $this->hasMany(\admin\models\Group::className(), ['id' => 'group_id'])
+        return $this->hasMany(Group::className(), ['id' => 'group_id'])
         ->viaTable('admin_user_group', ['user_id' => 'id']);
     }
 

@@ -4,10 +4,10 @@ namespace tests\admin\storage;
 
 use Yii;
 use admintests\AdminTestCase;
-use admin\storage\QueryTrait;
+use luya\admin\storage\QueryTrait;
 use yii\base\Object;
-use admin\storage\ItemTrait;
-use admin\storage\IteratorAbstract;
+use luya\admin\storage\ItemTrait;
+use luya\admin\storage\IteratorAbstract;
 
 class FixtureQueryTrait extends Object
 {

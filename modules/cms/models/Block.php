@@ -4,13 +4,14 @@ namespace luya\cms\models;
 
 use Yii;
 use luya\cms\base\BlockInterface;
+use luya\admin\ngrest\base\NgRestModel;
 
 /**
  * Block ActiveRecord contains the Block<->Group relation.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class Block extends \admin\ngrest\base\Model
+class Block extends NgRestModel
 {
     private $cachedDeletedId = 0;
 

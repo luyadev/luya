@@ -1,13 +1,13 @@
 <?php
 
-namespace admin;
+namespace luya\admin;
 
 use Yii;
 use luya\web\UrlRule;
-use admin\components\AdminLanguage;
+use luya\admin\components\AdminLanguage;
 use luya\console\interfaces\ImportControllerInterface;
 
-class Module extends \admin\base\Module
+class Module extends \luya\admin\base\Module
 {
     /**
      * This event gets trigger before some trys to download a file.
@@ -27,30 +27,30 @@ class Module extends \admin\base\Module
     public $isCoreModule = true;
 
     public $apis = [
-        'api-admin-common' => 'admin\apis\CommonController',
-        'api-admin-remote' => 'admin\apis\RemoteController',
-        'api-admin-storage' => 'admin\apis\StorageController',
-        'api-admin-menu' => 'admin\apis\MenuController',
-        'api-admin-timestamp' => 'admin\apis\TimestampController',
-        'api-admin-search' => 'admin\apis\SearchController',
-        'api-admin-user' => 'admin\apis\UserController', // protected by auth()
-        'api-admin-group' => 'admin\apis\GroupController', // protected by auth()
-        'api-admin-lang' => 'admin\apis\LangController', // protected by auth()
-        'api-admin-effect' => 'admin\apis\EffectController', // protected by auth()
-        'api-admin-filter' => 'admin\apis\FilterController', // protected by auth()
-        'api-admin-tag' => 'admin\apis\TagController',
+        'api-admin-common' => 'luya\admin\apis\CommonController',
+        'api-admin-remote' => 'luya\admin\apis\RemoteController',
+        'api-admin-storage' => 'luya\admin\apis\StorageController',
+        'api-admin-menu' => 'luya\admin\apis\MenuController',
+        'api-admin-timestamp' => 'luya\admin\apis\TimestampController',
+        'api-admin-search' => 'luya\admin\apis\SearchController',
+        'api-admin-user' => 'luya\admin\apis\UserController', // protected by auth()
+        'api-admin-group' => 'luya\admin\apis\GroupController', // protected by auth()
+        'api-admin-lang' => 'luya\admin\apis\LangController', // protected by auth()
+        'api-admin-effect' => 'luya\admin\apis\EffectController', // protected by auth()
+        'api-admin-filter' => 'luya\admin\apis\FilterController', // protected by auth()
+        'api-admin-tag' => 'luya\admin\apis\TagController',
     ];
 
     public $urlRules = [
-        ['class' => 'admin\components\UrlRule'],
+        ['class' => 'luya\admin\components\UrlRule'],
         ['pattern' => 'file/<id:\d+>/<hash:\w+>/<fileName:(.*?)+>', 'route' => 'admin/file/download', 'position' => UrlRule::POSITION_BEFORE_LUYA],
         ['pattern' => 'admin', 'route' => 'admin/default/index', 'position' => UrlRule::POSITION_BEFORE_LUYA],
         ['pattern' => 'admin/login', 'route' => 'admin/login/index', 'position' => UrlRule::POSITION_BEFORE_LUYA],
     ];
 
     public $assets = [
-        'admin\assets\Main',
-        'admin\assets\Flow',
+        'luya\admin\assets\Main',
+        'luya\admin\assets\Flow',
     ];
 
     public $registerJsTranslation = [
@@ -101,16 +101,16 @@ class Module extends \admin\base\Module
                 'class' => AdminLanguage::className(),
             ],
             'adminuser' => [
-                'class' => \admin\components\AdminUser::className(),
+                'class' => \luya\admin\components\AdminUser::className(),
             ],
             'adminmenu' => [
-                'class' => \admin\components\AdminMenu::className(),
+                'class' => \luya\admin\components\AdminMenu::className(),
             ],
             'storage' => [
-                'class' => \admin\components\StorageContainer::className(),
+                'class' => \luya\admin\components\StorageContainer::className(),
             ],
             'auth' => [
-                'class' => \admin\components\Auth::className(),
+                'class' => \luya\admin\components\Auth::className(),
             ],
         ];
     }
@@ -128,10 +128,10 @@ class Module extends \admin\base\Module
     public function import(ImportControllerInterface $import)
     {
         return [
-            '\\admin\\importers\\AuthImporter',
-            '\\admin\\importers\\FilterImporter',
-            '\\admin\\importers\\PropertyImporter',
-            '\\admin\\importers\\StorageImporter',
+            '\\luya\\admin\\importers\\AuthImporter',
+            '\\luya\\admin\\importers\\FilterImporter',
+            '\\luya\\admin\\importers\\PropertyImporter',
+            '\\luya\\admin\\importers\\StorageImporter',
         ];
     }
     

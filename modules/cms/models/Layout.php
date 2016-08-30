@@ -3,13 +3,14 @@
 namespace luya\cms\models;
 
 use yii\helpers\Json;
+use luya\admin\ngrest\base\NgRestModel;
 
 /**
  * Layout Model for CMS-Layouts.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class Layout extends \admin\ngrest\base\Model
+class Layout extends NgRestModel
 {
     public static function ngRestApiEndpoint()
     {

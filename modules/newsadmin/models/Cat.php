@@ -9,7 +9,7 @@ use newsadmin\Module;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class Cat extends \admin\ngrest\base\Model
+class Cat extends \luya\admin\ngrest\base\NgRestModel
 {
     public $i18n = ['title'];
     

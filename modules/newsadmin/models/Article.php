@@ -5,7 +5,7 @@ namespace newsadmin\models;
 use newsadmin\Module;
 use Yii;
 
-class Article extends \admin\ngrest\base\Model
+class Article extends \luya\admin\ngrest\base\NgRestModel
 {
     public static function tableName()
     {

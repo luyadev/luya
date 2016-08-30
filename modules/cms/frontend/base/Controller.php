@@ -9,7 +9,6 @@ use luya\cms\models\NavItem;
 use yii\web\NotFoundHttpException;
 use yii\web\MethodNotAllowedHttpException;
 use yii\web\Response;
-use admin\ngrest\base\Model;
 
 /**
  * Abstract Controller for CMS Controllers.

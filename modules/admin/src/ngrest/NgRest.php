@@ -1,8 +1,9 @@
 <?php
 
-namespace admin\ngrest;
+namespace luya\admin\ngrest;
 
 use yii;
+use luya\admin\ngrest\render\RenderInterface;
 
 /**
  * NgRest Base Object
@@ -33,13 +34,13 @@ class NgRest
 
     private $render = null;
 
-    public function __construct(\admin\ngrest\Config $configObject)
+    public function __construct(ConfigInterface $configObject)
     {
         $configObject->onFinish();
         $this->config = $configObject;
     }
 
-    public function render(\admin\ngrest\base\Render $render)
+    public function render(RenderInterface $render)
     {
         $this->render = $render;
         $this->render->setConfig($this->config);

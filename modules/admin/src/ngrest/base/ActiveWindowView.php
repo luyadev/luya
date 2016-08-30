@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\ngrest\base;
+namespace luya\admin\ngrest\base;
 
 use yii\helpers\Json;
 use yii\helpers\Inflector;

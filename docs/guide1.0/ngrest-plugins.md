@@ -36,7 +36,7 @@ Sometimes you really want to have project specific input behavior. To achieve th
 
 namespace myadminmodule\plugins;
 
-use admin\helpers\Angular;
+use luya\admin\helpers\Angular;
 
 class TestPlugin extends \admin\ngrest\base\Plugin
 {
@@ -91,7 +91,7 @@ zaa.directive("myDirective", function() {
 Now in order to use the custom `TestPlugin` in your [NgRest Config Model](ngrest-model.md) cast ean extra Field which takes care of getting (list) and setting (update/create) the value in your `admin\ngrest\base\Model` ActiveRecord class model.
 
 ```php
-class Product extends \admin\ngrest\base\Model
+class Product extends \luya\admin\ngrest\base\NgRestModel
 {
     // ... 
     

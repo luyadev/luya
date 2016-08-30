@@ -7,7 +7,7 @@ namespace luya\cms\admin\apis;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class NavItemPageBlockItemController extends \admin\ngrest\base\Api
+class NavItemPageBlockItemController extends \luya\admin\ngrest\base\Api
 {
     public $modelClass = 'luya\cms\models\NavItemPageBlockItem';
 }

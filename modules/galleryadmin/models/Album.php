@@ -4,7 +4,7 @@ namespace galleryadmin\models;
 
 use galleryadmin\Module;
 
-class Album extends \admin\ngrest\base\Model
+class Album extends \luya\admin\ngrest\base\NgRestModel
 {
     public static function tableName()
     {

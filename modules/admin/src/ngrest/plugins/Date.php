@@ -1,6 +1,8 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
+
+use luya\admin\ngrest\base\Plugin;
 
 /**
  * Data input field
@@ -16,7 +18,7 @@ namespace admin\ngrest\plugins;
  * 
  * @author nadar
  */
-class Date extends \admin\ngrest\base\Plugin
+class Date extends Plugin
 {
     /**
      * @var string This text will be displayed in the list overview when no date has been slected

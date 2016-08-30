@@ -3,7 +3,7 @@
 namespace luya\cms\models;
 
 use Yii;
-use admin\models\User;
+use luya\admin\models\User;
 use yii\helpers\Json;
 use luya\cms\admin\Module;
 use yii\base\InvalidParamException;

@@ -2,7 +2,9 @@
 
 namespace app\properties;
 
-class TestProperty extends \admin\base\Property
+use luya\admin\base\Property;
+
+class TestProperty extends Property
 {
     public function init()
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\helpers;
+namespace luya\admin\helpers;
 
 use Yii;
 use yii\helpers\Json;

@@ -1,8 +1,10 @@
 <?php
 
-namespace admin\models;
+namespace luya\admin\models;
 
-class Tag extends \admin\ngrest\base\Model
+use luya\admin\ngrest\base\NgRestModel;
+
+class Tag extends NgRestModel
 {
     /* yii model properties */
 

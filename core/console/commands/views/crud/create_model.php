@@ -25,7 +25,7 @@ use Yii;
 <?php foreach ($properties as $name => $type): ?> * @property <?= $type; ?> $<?= $name . PHP_EOL; ?>
 <?php endforeach;?>
  */
-<?php if (!$extended): ?>abstract <?php endif; ?>class <?= $className; ?> extends \admin\ngrest\base\Model
+<?php if (!$extended): ?>abstract <?php endif; ?>class <?= $className; ?> extends \luya\admin\ngrest\base\NgRestModel
 {
     <?php if ($extended): ?>
     /**

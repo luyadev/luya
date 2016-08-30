@@ -1,8 +1,9 @@
 <?php
 
-namespace admin\models;
+namespace luya\admin\models;
 
 use Yii;
+use luya\admin\ngrest\base\NgRestModel;
 
 /**
  * Language Model for Frontend/Admin.
@@ -12,7 +13,7 @@ use Yii;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class Lang extends \admin\ngrest\base\Model
+class Lang extends NgRestModel
 {
     /**
      * 

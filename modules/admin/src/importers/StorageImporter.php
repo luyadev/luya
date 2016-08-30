@@ -1,9 +1,9 @@
 <?php
 
-namespace admin\importers;
+namespace luya\admin\importers;
 
-use admin\models\StorageFile;
-use admin\models\StorageImage;
+use luya\admin\models\StorageFile;
+use luya\admin\models\StorageImage;
 use luya\helpers\FileHelper;
 use Yii;
 use luya\console\Importer;
