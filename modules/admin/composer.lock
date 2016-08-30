@@ -566,12 +566,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya.git",
-                "reference": "47feee7cab8e95e9967876f370d7db0e50120efb"
+                "reference": "de24357f484e8abe6ffca2476e52580b8cc70a55"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya/zipball/47feee7cab8e95e9967876f370d7db0e50120efb",
-                "reference": "47feee7cab8e95e9967876f370d7db0e50120efb",
+                "url": "https://api.github.com/repos/luyadev/luya/zipball/de24357f484e8abe6ffca2476e52580b8cc70a55",
+                "reference": "de24357f484e8abe6ffca2476e52580b8cc70a55",
                 "shasum": ""
             },
             "require": {
@@ -627,7 +627,7 @@
                 "yii2",
                 "yii2-wrapper"
             ],
-            "time": "2016-08-30 11:33:19"
+            "time": "2016-08-30 16:12:28"
         },
         {
             "name": "myclabs/deep-copy",

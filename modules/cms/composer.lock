@@ -566,12 +566,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya.git",
-                "reference": "3ef5b9c4766aa2b3728461b183ed3537e3182673"
+                "reference": "de24357f484e8abe6ffca2476e52580b8cc70a55"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya/zipball/3ef5b9c4766aa2b3728461b183ed3537e3182673",
-                "reference": "3ef5b9c4766aa2b3728461b183ed3537e3182673",
+                "url": "https://api.github.com/repos/luyadev/luya/zipball/de24357f484e8abe6ffca2476e52580b8cc70a55",
+                "reference": "de24357f484e8abe6ffca2476e52580b8cc70a55",
                 "shasum": ""
             },
             "require": {
@@ -627,7 +627,7 @@
                 "yii2",
                 "yii2-wrapper"
             ],
-            "time": "2016-08-29 18:12:31"
+            "time": "2016-08-30 16:12:28"
         },
         {
             "name": "luyadev/luya-module-admin",
@@ -635,12 +635,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "8d64f182321f90364f2d59a0ac718e7e28f8efdb"
+                "reference": "75cae816f360ea5526180e4653a0472ee735f7d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/8d64f182321f90364f2d59a0ac718e7e28f8efdb",
-                "reference": "8d64f182321f90364f2d59a0ac718e7e28f8efdb",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/75cae816f360ea5526180e4653a0472ee735f7d7",
+                "reference": "75cae816f360ea5526180e4653a0472ee735f7d7",
                 "shasum": ""
             },
             "require": {
@@ -661,8 +661,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "admin\\": "src/",
-                    "admintests\\": "tests/"
+                    "luya\\admin\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -691,7 +690,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2016-08-29 18:12:31"
+            "time": "2016-08-30 14:34:36"
         },
         {
             "name": "myclabs/deep-copy",
