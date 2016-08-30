@@ -7,7 +7,7 @@ return [
     'basePath' => dirname(__DIR__),
     'defaultRoute' => 'cms',
     'modules' => [
-        'admin' => 'admin\Module',
+        'admin' => 'luya\admin\Module',
         'cms' => [
             'class' => '\luya\cms\frontend\Module'
         ],
