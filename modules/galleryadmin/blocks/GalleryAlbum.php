@@ -2,7 +2,10 @@
 
 namespace galleryadmin\blocks;
 
-class GalleryAlbum extends \cmsadmin\base\Block
+use luya\cms\base\Block;
+use luya\cms\models\NavItem;
+
+class GalleryAlbum extends Block
 {
     public $module = 'gallery';
 
@@ -12,7 +15,7 @@ class GalleryAlbum extends \cmsadmin\base\Block
 
     public function init()
     {
-        foreach (\cmsadmin\models\NavItem::fromModule('gallery') as $item) {
+        foreach (NavItem::fromModule('gallery') as $item) {
             $this->_dropdown[] = ['value' => $item->id, 'label' => $item->title];
         }
 
