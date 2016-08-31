@@ -1,12 +1,12 @@
 <?php
 
-namespace frontendgroup;
+namespace luya\frontendgroup;
 
 use Yii;
 use yii\base\BootstrapInterface;
 use luya\admin\models\Property;
 use luya\cms\models\Property as CmsProperty;
-use frontendgroup\properties\GroupAuthProperty;
+use luya\frontendgroup\properties\GroupAuthProperty;
 use luya\cms\Menu;
 
 /**

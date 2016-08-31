@@ -1,6 +1,6 @@
 <?php
 
-namespace frontendgroup\properties;
+namespace luya\frontendgroup\properties;
 
 use Yii;
 use yii\helpers\Json;

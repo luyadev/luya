@@ -18,7 +18,7 @@ After adding to your composer json you have to include the frontendgroup module 
 'modules' => [
     // ...
     'frontendgroup' => [
-        'class' => 'frontendgroup\Module',
+        'class' => 'luya\frontendgroup\Module',
         'frontendUsers' => [
             'user1', 'user2', 'user3',
         ],
