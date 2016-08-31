@@ -23,6 +23,7 @@ Search and replace examples:
 |`\admin\ngrest\base\Model`|`\luya\admin\ngrest\base\NgRestModel`
 |`\admin\ngrest\base\Controller`|`\luya\admin\ngrest\base\Controller`
 |`cms\helpers\TagParser`|`luya\cms\helpers\TagParser`
+|`cms\helpers\Url`|`luya\cms\helpers\Url`
 |`\admin\base\RestController`|`\luya\admin\base\RestController`
 |`\admin\base\Controller`|`\luya\admin\base\Controller`
 
