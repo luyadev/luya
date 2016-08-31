@@ -1,6 +1,6 @@
 <?php
 
-namespace news;
+namespace luya\news\frontend;
 
 /**
  * CMS Module

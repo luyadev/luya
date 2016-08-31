@@ -1,8 +1,9 @@
 <?php
 
-namespace newsadmin\blocks;
+namespace luya\news\admin\blocks;
 
 use luya\cms\models\NavItem;
+use luya\news\models\Article;
 
 class LatestNews extends \luya\cms\base\Block
 {
@@ -40,7 +41,7 @@ class LatestNews extends \luya\cms\base\Block
     public function extraVars()
     {
         return [
-            'items' => \newsadmin\models\Article::getAvailableNews($this->getCfgValue('limit', 10)),
+            'items' => Article::getAvailableNews($this->getCfgValue('limit', 10)),
         ];
     }
 

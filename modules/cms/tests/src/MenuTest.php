@@ -1,10 +1,10 @@
 <?php
 
 
-namespace luya\cms\tests\src;
+namespace cmstests\src;
 
 use Yii;
-use luya\cms\tests\CmsFrontendTestCase;
+use cmstests\CmsFrontendTestCase;
 use luya\cms\Menu;
 use luya\cms\menu\QueryIteratorFilter;
 use luya\cms\menu\Query;

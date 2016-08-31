@@ -1,10 +1,10 @@
 <?php
 
-namespace luya\cms\tests\src\menu;
+namespace cmstests\src\menu;
 
 use Yii;
 use luya\admin\models\User;
-use luya\cms\tests\CmsFrontendTestCase;
+use cmstests\CmsFrontendTestCase;
 use luya\cms\menu\Query;
 
 class ItemTest extends CmsFrontendTestCase

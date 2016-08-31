@@ -1,9 +1,9 @@
 <?php
 
-namespace luya\cms\tests\src\helpers;
+namespace cmstests\src\helpers;
 
 use luya\cms\helpers\CmsMarkdown;
-use luya\cms\tests\CmsFrontendTestCase;
+use cmstests\CmsFrontendTestCase;
 
 class CmsMarkdownTest extends CmsFrontendTestCase
 {

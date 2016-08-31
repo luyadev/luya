@@ -1,8 +1,8 @@
 <?php
 
-namespace newsadmin\models;
+namespace luya\news\models;
 
-use newsadmin\Module;
+use luya\news\admin\Module;
 
 class Tag extends \luya\admin\ngrest\base\NgRestModel
 {

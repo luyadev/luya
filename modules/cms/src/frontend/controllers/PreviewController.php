@@ -7,13 +7,14 @@ use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use luya\cms\models\NavItem;
 use luya\cms\menu\InjectItem;
+use luya\cms\frontend\base\Controller;
 
 /**
  * CMS Preview Rendering
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class PreviewController extends \cms\base\Controller
+class PreviewController extends Controller
 {
     public function actionIndex($itemId, $version = false)
     {

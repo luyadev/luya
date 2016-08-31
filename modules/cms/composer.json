@@ -23,9 +23,14 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"luya\\cms\\" : ""
+			"luya\\cms\\" : "src/"
 		}
 	},
+	"autoload-dev" : {
+       "psr-4" : {
+           "cmstests\\" : "tests/"
+       }
+    },
 	"extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"

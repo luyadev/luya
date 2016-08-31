@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\cms\tests\data\modules\controllers;
+namespace cmstests\data\modules\controllers;
 
 use luya\web\Controller;
 

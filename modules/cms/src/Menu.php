@@ -12,6 +12,7 @@ use luya\cms\Exception;
 use luya\cms\menu\Query as MenuQuery;
 use luya\cms\models\NavItemModule;
 use luya\traits\CacheableTrait;
+use luya\cms\menu\Item;
 
 
 
@@ -282,7 +283,7 @@ class Menu extends Component implements ArrayAccess
      * @param \cms\menu\Item $item The current item object
      * @since 1.0.0-beta6
      */
-    public function setCurrent(\cms\menu\Item $item)
+    public function setCurrent(Item $item)
     {
         $this->_current = $item;
     }

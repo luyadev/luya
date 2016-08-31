@@ -11,7 +11,7 @@ return [
         'cms' => [
             'class' => '\luya\cms\frontend\Module'
         ],
-        'CmsUnitModule' => '\luya\cms\tests\data\modules\CmsUnitModule',
+        'CmsUnitModule' => '\cmstests\data\modules\CmsUnitModule',
     ],
     'components' => [
         'request' => [

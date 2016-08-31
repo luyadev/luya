@@ -1,6 +1,6 @@
 <?php
 
-namespace newsadmin;
+namespace luya\news\admin;
 
 use Yii;
 
@@ -9,9 +9,9 @@ class Module extends \luya\admin\base\Module
     public $isCoreModule = true;
 
     public $apis = [
-        'api-news-article' => 'newsadmin\apis\ArticleController',
-        'api-news-tag' => 'newsadmin\apis\TagController',
-        'api-news-cat' => 'newsadmin\apis\CatController',
+        'api-news-article' => 'luya\news\admin\apis\ArticleController',
+        'api-news-tag' => 'luya\news\admin\apis\TagController',
+        'api-news-cat' => 'luya\news\admin\apis\CatController',
     ];
 
     public function getMenu()

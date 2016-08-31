@@ -1,9 +1,10 @@
 <?php
 
-namespace news\controllers;
+namespace luya\news\frontend\controllers;
 
-use newsadmin\models\Article;
-use newsadmin\models\Cat;
+use luya\news\models\Article;
+use luya\news\models\Cat;
+use yii\data\ActiveDataProvider;
 
 /**
  * News Module Defaul Controller contains actions to display and render views with predefined data.
@@ -18,8 +19,13 @@ class DefaultController extends \luya\web\Controller
      */
     public function actionIndex()
     {
+        $provider = new ActiveDataProvider([
+            'query' => Article::find(),
+        ]);
+        
         return $this->render('index', [
             'model' => Article::className(),
+            'provider' => $provider,
         ]);
     }
 
@@ -53,8 +59,13 @@ class DefaultController extends \luya\web\Controller
             return $this->goHome();
         }
         
+        $provider = new ActiveDataProvider([
+            'query' => $model->getArticles(),
+        ]);
+        
         return $this->render('category', [
             'model' => $model,
+            'provider' => $provider,
         ]);
     }
     

@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\cms\tests\data\blocks;
+namespace cmstests\data\blocks;
 
 use luya\cms\base\TwigBlock;
 

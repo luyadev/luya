@@ -1,9 +1,9 @@
 <?php
 
-namespace luya\cms\tests\src\frontend;
+namespace cmstests\src\frontend;
 
 use Yii;
-use luya\cms\tests\CmsFrontendTestCase;
+use cmstests\CmsFrontendTestCase;
 use luya\cms\frontend\blocks\ModuleBlock;
 
 class ModuleBlockTest extends CmsFrontendTestCase

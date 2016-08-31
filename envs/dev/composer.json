@@ -26,16 +26,17 @@
             
             "luya\\" : "../../core/",
             "luya\\admin\\" : "../../modules/admin/src",
-            "luya\\cms\\" : "../../modules/cms/",
+            "luya\\cms\\" : "../../modules/cms/src",
             "luya\\account\\" : "../../modules/account",
             "luya\\crawler\\" : "../../modules/crawler",
             "luya\\errorapi\\" : "../../modules/errorapi/src",
             "luya\\gallery\\" : "../../modules/gallery",
             "luya\\exporter\\" : "../../modules/exporter",
             "luya\\frontendgroup\\" : "../../modules/frontendgroup",
+            "luya\\news\\" : "../../modules/news/src",
             
-            "newsadmin\\" : "../../modules/newsadmin",
-            "news\\" : "../../modules/news/src",
+            
+            
             "styleguide\\" : "../../modules/styleguide",
             "remoteadmin\\" : "../../modules/remoteadmin",
             

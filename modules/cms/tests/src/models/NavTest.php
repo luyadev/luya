@@ -2,7 +2,7 @@
 
 namespace tests\web\cmsadmin\models;
 
-use luya\cms\tests\CmsFrontendTestCase;
+use cmstests\CmsFrontendTestCase;
 use luya\cms\models\Nav;
 
 class NavTest extends CmsFrontendTestCase

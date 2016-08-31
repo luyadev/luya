@@ -4,9 +4,9 @@ namespace tests\web\cmsadmin\base;
 
 
 use luya\cms\base\Block;
-use luya\cms\tests\data\blocks\TestBlock;
-use luya\cms\tests\data\blocks\FailureBlock;
-use luya\cms\tests\CmsFrontendTestCase;
+use cmstests\data\blocks\TestBlock;
+use cmstests\data\blocks\FailureBlock;
+use cmstests\CmsFrontendTestCase;
 
 class GetterSetter extends Block
 {

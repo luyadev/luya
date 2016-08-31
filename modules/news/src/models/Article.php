@@ -1,8 +1,8 @@
 <?php
 
-namespace newsadmin\models;
+namespace luya\news\models;
 
-use newsadmin\Module;
+use luya\news\admin\Module;
 use Yii;
 
 class Article extends \luya\admin\ngrest\base\NgRestModel
@@ -61,7 +61,7 @@ class Article extends \luya\admin\ngrest\base\NgRestModel
             'is_display_limit' => 'toggleStatus',
             'image_list' => 'imageArray',
             'file_list' => 'fileArray',
-            'cat_id' => ['selectModel', 'modelClass' => '\newsadmin\models\Cat', 'valueField' => 'id', 'labelField' => 'title']
+            'cat_id' => ['selectModel', 'modelClass' => Cat::className(), 'valueField' => 'id', 'labelField' => 'title']
         ];
     }
 
