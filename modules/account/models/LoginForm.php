@@ -1,6 +1,6 @@
 <?php
 
-namespace account\models;
+namespace luya\account\models;
 
 class LoginForm extends \yii\base\Model
 {
@@ -42,7 +42,7 @@ class LoginForm extends \yii\base\Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = \accountadmin\models\User::findByEmail($this->email);
+            $this->_user = User::findByEmail($this->email);
         }
 
         return $this->_user;

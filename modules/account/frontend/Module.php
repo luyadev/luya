@@ -1,6 +1,6 @@
 <?php
 
-namespace account;
+namespace luya\account\frontend;
 
 use Yii;
 
@@ -16,12 +16,12 @@ class Module extends \luya\base\Module
         ]],
     ];
 
-    public $userIdentity = '\account\components\User';
+    public $userIdentity = '\luya\account\frontend\components\User';
 
     /**
      * @var string defined your custom RegisterForm validation model must impelement `account\RegisterInterface`.
      */
-    public $registerFormClass = 'account\models\RegisterForm';
+    public $registerFormClass = 'luya\account\models\RegisterForm';
     
     /**
      * @var boolean Whether the email must be confirmet on registration with an activation link (double opt-in) or not.

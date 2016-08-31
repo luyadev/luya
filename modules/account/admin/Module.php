@@ -1,11 +1,11 @@
 <?php
 
-namespace accountadmin;
+namespace luya\account\admin;
 
 class Module extends \luya\admin\base\Module
 {
     public $apis = [
-        'api-account-user' => 'accountadmin\apis\UserController',
+        'api-account-user' => 'luya\account\admin\apis\UserController',
     ];
     
     public function getMenu()

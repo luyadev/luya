@@ -1,8 +1,10 @@
 <?php
 
-namespace account\controllers;
+namespace luya\account\frontend\controllers;
 
-class SettingsController extends \account\base\Controller
+use luya\account\frontend\base\Controller;
+
+class SettingsController extends Controller
 {
     public function actionIndex()
     {

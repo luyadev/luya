@@ -1,10 +1,10 @@
 <?php
 
-namespace account\components;
+namespace luya\account\frontend\components;
 
 class User extends \yii\web\User
 {
-    public $identityClass = '\accountadmin\models\User';
+    public $identityClass = '\luya\account\models\User';
 
     public $loginUrl = ['/account/login/default'];
 

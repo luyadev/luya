@@ -1,11 +1,12 @@
 <?php
 
-namespace account\properties;
+namespace luya\account\frontend\properties;
 
 use Yii;
 use luya\cms\helpers\Url;
+use luya\admin\base\Property;
 
-class IsProtectedAreaProperty extends \admin\base\Property
+class IsProtectedAreaProperty extends Property
 {
     public function init()
     {

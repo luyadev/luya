@@ -1,14 +1,15 @@
 <?php
 
-namespace account\base;
+namespace luya\account\frontend\base;
 
 use Yii;
+use luya\account\RegisterInterface;
 
-abstract class RegisterForm extends \yii\base\Model implements \account\RegisterInterface
+abstract class RegisterForm extends \yii\base\Model implements RegisterInterface
 {
     private $_model = null;
     
-    protected $modelClass = 'accountadmin\models\User';
+    protected $modelClass = 'luya\account\models\User';
     
     protected $modelScenario = 'register';
     

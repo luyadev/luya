@@ -1,6 +1,6 @@
 <?php
 
-namespace account\base;
+namespace luya\account\frontend\base;
 
 use Yii;
 

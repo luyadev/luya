@@ -24,11 +24,10 @@
             "luya\\" : "../../core/",
             "luya\\admin\\" : "../../modules/admin/src",
             "luya\\cms\\" : "../../modules/cms/",
+            "luya\\account\\" : "../../modules/account",
             
             "newsadmin\\" : "../../modules/newsadmin",
             "news\\" : "../../modules/news/src",
-            "account\\" : "../../modules/account",
-            "accountadmin\\" : "../../modules/accountadmin",
             "errorapi\\" : "../../modules/errorapi/src",
             "gallery\\" : "../../modules/gallery",
             "galleryadmin\\" : "../../modules/galleryadmin",

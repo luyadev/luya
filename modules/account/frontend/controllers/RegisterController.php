@@ -1,12 +1,13 @@
 <?php
 
-namespace account\controllers;
+namespace luya\account\frontend\controllers;
 
 use Yii;
 use Exception;
 use luya\helpers\Url;
+use luya\account\frontend\base\Controller;
 
-class RegisterController extends \account\base\Controller
+class RegisterController extends Controller
 {
     public function getRules()
     {

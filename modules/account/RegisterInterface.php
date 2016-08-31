@@ -1,6 +1,6 @@
 <?php
 
-namespace account;
+namespace luya\account;
 
 interface RegisterInterface
 {
