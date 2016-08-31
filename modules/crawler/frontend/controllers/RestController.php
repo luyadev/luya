@@ -1,18 +1,23 @@
 <?php
 
-namespace crawler\controllers;
+namespace luya\crawler\frontend\controllers;
 
 use Yii;
 use crawleradmin\models\Index;
 use yii\helpers\Html;
 
-class DefaultController extends \luya\web\Controller
+class RestController extends \luya\rest\Controller
 {
+    public function userAuthClass()
+    {
+        return false;
+    }
+
     public function actionIndex($query = null)
     {
-        return $this->render('index', [
+        return [
             'query' => Html::encode($query),
             'results' => Index::searchByQuery($query, Yii::$app->composition->getKey('langShortCode')),
-        ]);
+        ];
     }
 }

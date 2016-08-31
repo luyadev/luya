@@ -1,6 +1,6 @@
 <?php
 
-namespace crawler\classes;
+namespace luya\crawler\frontend\classes;
 
 use Yii;
 use Exception;
@@ -8,7 +8,7 @@ use yii\base\InvalidConfigException;
 use crawleradmin\models\Builderindex;
 use crawleradmin\models\Index;
 use luya\helpers\Url;
-use crawler\classes\CrawlPage;
+use luya\crawler\frontend\classes\CrawlPage;
 
 class CrawlContainer extends \yii\base\Object
 {

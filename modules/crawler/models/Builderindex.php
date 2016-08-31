@@ -1,8 +1,8 @@
 <?php
 
-namespace crawleradmin\models;
+namespace luya\crawler\models;
 
-use crawleradmin\Module;
+use luya\crawler\admin\Module;
 
 class Builderindex extends \luya\admin\ngrest\base\NgRestModel
 {

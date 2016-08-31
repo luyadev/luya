@@ -1,12 +1,12 @@
 <?php
 
-namespace crawler\classes;
+namespace luya\crawler\frontend\classes;
 
 use Goutte\Client;
 use yii\base\InvalidConfigException;
 use yii\base\yii\base;
 use luya\helpers\Url;
-use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\Domluya\crawler\frontend\Crawler;
 
 class CrawlPage extends \yii\base\Object
 {

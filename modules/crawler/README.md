@@ -17,14 +17,14 @@ or add it directly to your composer.json file:
 "luyadev/luya-module-crawler" : "^1.0@dev"
 ```
 
-Add the module to your configuration (config):
+Add the modules to your configuration (config) in the modules section:
 
 ```php
 'crawler' => [
-    'class' => 'crawler\Module',
+    'class' => 'luya\crawler\frontend\Module',
     'baseUrl' => 'http://luya.io',
 ],
-'crawleradmin' => 'crawleradmin\Module',
+'crawleradmin' => 'luya\crawler\admin\Module',
 ```
 
 Where `baseUrl` is the domain you want to crawler all informations.

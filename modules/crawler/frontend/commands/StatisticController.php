@@ -1,6 +1,6 @@
 <?php
 
-namespace crawler\commands;
+namespace luya\crawler\frontend\commands;
 
 use Yii;
 use luya\console\Command;

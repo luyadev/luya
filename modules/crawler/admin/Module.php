@@ -1,15 +1,15 @@
 <?php
 
-namespace crawleradmin;
+namespace luya\crawler\admin;
 
 use Yii;
 
 class Module extends \luya\admin\base\Module
 {
     public $apis = [
-        'api-crawler-builderindex' => 'crawleradmin\apis\BuilderindexController',
-        'api-crawler-index' => 'crawleradmin\apis\IndexController',
-        'api-crawler-searchdata' => 'crawleradmin\apis\SearchdataController',
+        'api-crawler-builderindex' => 'luya\crawler\admin\apis\BuilderindexController',
+        'api-crawler-index' => 'luya\crawler\admin\apis\IndexController',
+        'api-crawler-searchdata' => 'luya\crawler\admin\apis\SearchdataController',
     ];
 
     public function getMenu()

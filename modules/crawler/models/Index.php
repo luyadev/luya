@@ -1,10 +1,10 @@
 <?php
 
-namespace crawleradmin\models;
+namespace luya\crawler\models;
 
 use Yii;
-use crawleradmin\Module;
-use crawleradmin\models\Searchdata;
+use luya\crawler\admin\Module;
+use luya\crawler\models\Searchdata;
 
 class Index extends \luya\admin\ngrest\base\NgRestModel
 {

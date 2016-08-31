@@ -1,6 +1,6 @@
 <?php
 
-namespace crawleradmin\models;
+namespace luya\crawler\models;
 
 use Yii;
 

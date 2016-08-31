@@ -1,8 +1,8 @@
 <?php
 
-namespace crawler\commands;
+namespace luya\crawler\frontend\commands;
 
-use crawler\classes\CrawlContainer;
+use luya\crawler\frontend\classes\CrawlContainer;
 use luya\helpers\FileHelper;
 
 /**

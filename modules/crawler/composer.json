@@ -21,7 +21,7 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"crawler\\" : ""
+			"luya\\crawler\\" : ""
 		}
 	},
 	"extra": {
