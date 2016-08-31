@@ -22,10 +22,12 @@ Search and replace examples:
 |`\admin\Module`|`\luya\admin\Module`
 |`\admin\ngrest\base\Model`|`\luya\admin\ngrest\base\NgRestModel`
 |`\admin\ngrest\base\Controller`|`\luya\admin\ngrest\base\Controller`
+|`\admin\base\Filter`|`\luya\admin\base\Filter`
 |`cms\helpers\TagParser`|`luya\cms\helpers\TagParser`
 |`cms\helpers\Url`|`luya\cms\helpers\Url`
 |`\admin\base\RestController`|`\luya\admin\base\RestController`
 |`\admin\base\Controller`|`\luya\admin\base\Controller`
+|`\admin\ngrest\base\ActiveWindow`|`\luya\admin\ngrest\base\ActiveWindow`
 
 
 1.0.0-beta8 (11.08.2016)
