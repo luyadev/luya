@@ -1,6 +1,6 @@
 <?php
 
-namespace exporter\controllers;
+namespace luya\exporter\controllers;
 
 use Yii;
 use Exception;

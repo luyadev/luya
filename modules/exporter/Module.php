@@ -1,6 +1,6 @@
 <?php
 
-namespace exporter;
+namespace luya\exporter;
 
 class Module extends \luya\base\Module
 {

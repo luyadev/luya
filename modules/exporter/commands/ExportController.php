@@ -1,6 +1,6 @@
 <?php
 
-namespace exporter\commands;
+namespace luya\exporter\commands;
 
 use Yii;
 use luya\helpers\ZipHelper;

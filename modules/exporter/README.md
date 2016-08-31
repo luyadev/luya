@@ -17,7 +17,7 @@ Add the module to your application config:
 'modules' => [
 	// ...
 	'exporter' => [
-	    'class' => 'exporter\Module',
+	    'class' => 'luya\exporter\Module',
         'downloadPassword' => 'EnterYourSecureRandomToken',
 	],
 ]
