@@ -1,9 +1,9 @@
 <?php
 
-namespace gallery\controllers;
+namespace luya\gallery\frontend\controllers;
 
 use luya\web\Controller;
-use galleryadmin\models\Album;
+use luya\gallery\models\Album;
 
 /**
  * Get all collections or for a specificy categorie.

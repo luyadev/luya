@@ -1,8 +1,8 @@
 <?php
 
-namespace gallery\controllers;
+namespace luya\gallery\frontend\controllers;
 
-use galleryadmin\models\Album;
+use luya\gallery\models\Album;
 use yii\web\NotFoundHttpException;
 
 /**

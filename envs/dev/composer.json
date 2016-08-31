@@ -21,26 +21,26 @@
     },
     "autoload" : {
         "psr-4" : {
+            "ngresttest\\" : "modules/ngresttest",
+            "moduletest\\" : "modules/moduletest",
+            
             "luya\\" : "../../core/",
             "luya\\admin\\" : "../../modules/admin/src",
             "luya\\cms\\" : "../../modules/cms/",
             "luya\\account\\" : "../../modules/account",
             "luya\\crawler\\" : "../../modules/crawler",
+            "luya\\errorapi\\" : "../../modules/errorapi/src",
+            "luya\\gallery\\" : "../../modules/gallery",
+            "luya\\exporter\\" : "../../modules/exporter",
+            "luya\\frontendgroup\\" : "../../modules/frontendgroup",
             
             "newsadmin\\" : "../../modules/newsadmin",
             "news\\" : "../../modules/news/src",
-            "errorapi\\" : "../../modules/errorapi/src",
-            "gallery\\" : "../../modules/gallery",
-            "galleryadmin\\" : "../../modules/galleryadmin",
-            "contactform\\" : "../../modules/contactform",
-            "moduletest\\" : "modules/moduletest",
             "styleguide\\" : "../../modules/styleguide",
-            "exporter\\" : "../../modules/exporter",
-            "frontendgroup\\" : "../../modules/frontendgroup",
             "remoteadmin\\" : "../../modules/remoteadmin",
+            
             "payment\\" : "../../../luya-module-payment/src",
             "basicauth\\" : "../../../luya-module-basicauth/src",
-            "ngresttest\\" : "modules/ngresttest",
             "bootstrap4\\" : "../../../luya-bootstrap4"
         }
     }

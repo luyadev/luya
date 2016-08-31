@@ -1,6 +1,6 @@
 <?php
 
-namespace gallery;
+namespace luya\gallery\frontend;
 
 /**
  * Gallery Module

@@ -1,8 +1,8 @@
 <?php
 
-namespace galleryadmin\models;
+namespace luya\gallery\models;
 
-use galleryadmin\Module;
+use luya\gallery\admin\Module;
 
 class Album extends \luya\admin\ngrest\base\NgRestModel
 {

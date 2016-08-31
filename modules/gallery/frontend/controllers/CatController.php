@@ -1,8 +1,8 @@
 <?php
 
-namespace gallery\controllers;
+namespace luya\gallery\frontend\controllers;
 
-use galleryadmin\models\Cat;
+use luya\gallery\models\Cat;
 
 /**
  * Controller to get all categories.

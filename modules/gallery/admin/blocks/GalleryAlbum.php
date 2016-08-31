@@ -1,9 +1,10 @@
 <?php
 
-namespace galleryadmin\blocks;
+namespace luya\gallery\admin\blocks;
 
 use luya\cms\base\Block;
 use luya\cms\models\NavItem;
+use luya\gallery\models\Album;
 
 class GalleryAlbum extends Block
 {
@@ -19,7 +20,7 @@ class GalleryAlbum extends Block
             $this->_dropdown[] = ['value' => $item->id, 'label' => $item->title];
         }
 
-        foreach (\galleryadmin\models\Album::find()->asArray()->all() as $item) {
+        foreach (Album::find()->asArray()->all() as $item) {
             $this->_alben[] = ['value' => $item['id'], 'label' => $item['title']];
         }
     }
@@ -44,7 +45,7 @@ class GalleryAlbum extends Block
     public function extraVars()
     {
         return [
-            'album' => \galleryadmin\models\Album::find()->where(['id' => $this->getVarValue('albumId')])->one(),
+            'album' => Album::find()->where(['id' => $this->getVarValue('albumId')])->one(),
         ];
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace galleryadmin;
+namespace luya\gallery\admin;
 
 use Yii;
 
@@ -9,8 +9,8 @@ class Module extends \luya\admin\base\Module
     public $isCoreModule = true;
 
     public $apis = [
-        'api-gallery-album' => '\\galleryadmin\\apis\\AlbumController',
-        'api-gallery-cat' => 'galleryadmin\apis\CatController',
+        'api-gallery-album' => 'luya\gallery\admin\apis\AlbumController',
+        'api-gallery-cat' => 'luya\gallery\admin\apis\CatController',
     ];
 
     public function getMenu()
