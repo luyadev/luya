@@ -30,4 +30,23 @@ class StringHelper extends \yii\helpers\StringHelper
         
         return $string;
     }
+    
+    /**
+     * Replace only the first occurance found inside the string.
+     *
+     * The replace first method is *case sensitive*.
+     * 
+     * ```php
+     * StringHelper::replaceFirst('abc', '123', 'abc abc abc'); // returns "123 abc abc"
+     * ```
+     *
+     * @param string $from
+     * @param string $to
+     * @param string $subject
+     * @return mixed
+     */
+    public static function replaceFirst($from, $to, $subject)
+    {
+        return preg_replace('/'.preg_quote($from, '/').'/', $to, $subject, 1);
+    }
 }
