@@ -1,6 +1,6 @@
 <?php
 
-namespace errorapi;
+namespace luya\errorapi;
 
 use Yii;
 

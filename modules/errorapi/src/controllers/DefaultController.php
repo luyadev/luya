@@ -1,9 +1,9 @@
 <?php
 
-namespace errorapi\controllers;
+namespace luya\errorapi\controllers;
 
 use Yii;
-use errorapi\models\Data;
+use luya\errorapi\models\Data;
 
 /**
  * 

@@ -1,8 +1,8 @@
 <?php
 
-namespace errorapi\models;
+namespace luya\errorapi\models;
 
-use errorapi\Module;
+use luya\errorapi\Module;
 
 class Data extends \yii\db\ActiveRecord
 {

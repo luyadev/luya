@@ -17,7 +17,7 @@ add the module to your application config:
 'modules' => [
 	// ...
 	'errorapi' => [
-	    'class' => 'errorapi\Module',
+	    'class' => 'luya\luya\errorapi\Module',
 	    'recipient' => ['errors@example.com'],
 	    'slackToken' => 'YOUR_SECRET_SLACK_TOKEN',
 	],
