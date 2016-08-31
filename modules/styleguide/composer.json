@@ -17,7 +17,7 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"styleguide\\" : ""
+			"luya\\styleguide\\" : "src/"
 		}
 	},
 	"extra": {

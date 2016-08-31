@@ -1,6 +1,6 @@
 <?php
 
-namespace remoteadmin\models;
+namespace luya\remoteadmin\models;
 
 use Yii;
 use luya\helpers\Url;

@@ -17,7 +17,7 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"luya\\account\\" : ""
+			"luya\\account\\" : "src/"
 		}
 	},
 	"extra": {

@@ -1,9 +1,9 @@
 <?php
 
-namespace remoteadmin\controllers;
+namespace luya\remoteadmin\controllers;
 
 use yii\helpers\Json;
-use remoteadmin\models\Site;
+use luya\remoteadmin\models\Site;
 
 /**
  * @see packages api https://packagist.org/apidoc

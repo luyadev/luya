@@ -17,7 +17,7 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"luya\\gallery\\" : ""
+			"luya\\gallery\\" : "src/"
 		}
 	},
 	"extra": {

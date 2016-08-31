@@ -1,10 +1,10 @@
 <?php
-namespace remoteadmin;
+namespace luya\remoteadmin;
 
 class Module extends \luya\admin\base\Module
 {
     public $apis = [
-        'api-remote-site' => 'remoteadmin\apis\SiteController',
+        'api-remote-site' => 'luya\remoteadmin\apis\SiteController',
     ];
     
     public function getMenu()

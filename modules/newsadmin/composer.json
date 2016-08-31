@@ -17,7 +17,7 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"luya\news\admin\\" : ""
+			"luya\\news\\admin\\" : ""
 		}
 	},
 	"extra": {
