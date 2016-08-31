@@ -1,6 +1,6 @@
 <?php
 
-namespace cms\widgets;
+namespace luya\cms\widgets;
 
 use Yii;
 use luya\admin\models\Lang;
