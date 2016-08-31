@@ -11,7 +11,7 @@ namespace luya\crawler\frontend;
  * ./vendor/bin/luya crawler/crawl
  * ```
  * 
- * This will create an index where you can search inside (See helper methods in `crawleradmin\models\Index` to find by query methods).
+ * This will create an index where you can search inside (See helper methods in `luya\crawler\models\Index` to find by query methods).
  * You should run your crawler command by a cronjob to make sure your page will be crawled everynight and the users have a fresh index.
  * 
  * @link https://github.com/FriendsOfPHP/Goutte

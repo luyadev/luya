@@ -4,7 +4,7 @@ namespace luya\crawler\frontend\commands;
 
 use Yii;
 use luya\console\Command;
-use crawleradmin\models\Searchdata;
+use luya\crawler\models\Searchdata;
 use yii\console\Exception;
 
 /**

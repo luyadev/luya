@@ -3,7 +3,7 @@
 namespace luya\crawler\frontend\controllers;
 
 use Yii;
-use crawleradmin\models\Index;
+use luya\crawler\models\Index;
 use yii\helpers\Html;
 
 class RestController extends \luya\rest\Controller

@@ -5,8 +5,8 @@ namespace luya\crawler\frontend\classes;
 use Yii;
 use Exception;
 use yii\base\InvalidConfigException;
-use crawleradmin\models\Builderindex;
-use crawleradmin\models\Index;
+use luya\crawler\models\Builderindex;
+use luya\crawler\models\Index;
 use luya\helpers\Url;
 use luya\crawler\frontend\classes\CrawlPage;
 
