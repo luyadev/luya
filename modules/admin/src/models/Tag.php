@@ -17,6 +17,7 @@ class Tag extends NgRestModel
     {
         return [
             [['name'], 'required'],
+            [['name'], 'unique'],
         ];
     }
 
