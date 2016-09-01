@@ -4,12 +4,12 @@ namespace luya\console\commands;
 
 use Yii;
 use yii\helpers\Console;
+use luya\helpers\FileHelper;
 
 /**
  * Command to create LUYA modules.
  *
  * @author Basil Suter <basil@nadar.io>
- *
  */
 class ModuleController extends \luya\console\Command
 {
@@ -21,66 +21,50 @@ class ModuleController extends \luya\console\Command
     public function actionCreate()
     {
         Console::clearScreenBeforeCursor();
-        $moduleType = $this->select('What kind of Module you want to create?', ['frontend' => 'Frontend Modules are mainly used to render views.', 'admin' => 'Admin Modules are mainly used when you Data-Managment should be done inside the Administration area.']);
-        switch ($moduleType) {
-            case 'admin':
-                $isAdmin = true;
-                $text = 'Name of your new Admin-Module (e.g. newsadmin)';
-                break;
-            case 'frontend':
-                $isAdmin = false;
-                $text = 'Name of your new Frontend-Module (e.g. news)';
-                break;
+        
+        $moduleName = $this->prompt("Enter the name of the module you like to generate:");
+
+        $newName = preg_replace("/[^a-z]/", "", strtolower($moduleName));
+        
+        if ($newName !== $moduleName) {
+            if (!$this->confirm("We have changed the name to '{$newName}'. Do you want to proceed with this name?")) {
+                return $this->outputError('Abort by user.');
+            } else {
+                $moduleName = $newName;
+            }
         }
-
-        $moduleName = $this->prompt($text);
-
-        if ($isAdmin && substr($moduleName, -5) !== 'admin') {
-            return $this->outputError("The provided Modulename ($moduleName) must have the suffix 'admin' as it is an Admin-Module!");
+        
+        $appModulesFolder = Yii::$app->basePath . DIRECTORY_SEPARATOR . 'modules';
+        $moduleFolder = $appModulesFolder . DIRECTORY_SEPARATOR . $moduleName;
+        
+        if (file_exists($moduleFolder)) {
+            return $this->outputError("The folder " . $moduleFolder . " exists already.");
         }
+        
+        $folders = [
+            'basePath' => $moduleFolder,
+            'adminPath' => $moduleFolder . DIRECTORY_SEPARATOR . 'admin',
+            'frontendPath' => $moduleFolder . DIRECTORY_SEPARATOR . 'frontend',
+            'blocksPath' => $moduleFolder . DIRECTORY_SEPARATOR . 'frontend' . DIRECTORY_SEPARATOR . 'blocks',
+            'modelsPath' => $moduleFolder . DIRECTORY_SEPARATOR . 'models',
+        ];
 
-        if (!$this->confirm('Are you sure you want to create the '.(($isAdmin) ? 'Admin' : 'Frontend')." Module '".$moduleName."' now?")) {
-            return $this->outputError('abort by user.');
+        $vars = ['folders' => $folders, 'name' => $moduleName, 'ns' => 'app\\modules\\'.$moduleName];
+        
+        foreach ($folders as $folder) {
+            FileHelper::createDirectory($folder);
         }
-
-        $basePath = Yii::$app->basePath;
-
-        $modulesDir = $basePath.DIRECTORY_SEPARATOR.'modules';
-
-        if (!file_exists($modulesDir)) {
-            mkdir($modulesDir);
+        
+        $contents = [
+            $moduleFolder. DIRECTORY_SEPARATOR . 'README.md' => $this->view->render('@luya/console/commands/views/module/readme.php', $vars),
+            $moduleFolder. DIRECTORY_SEPARATOR . 'admin/Module.php' => $this->view->render('@luya/console/commands/views/module/adminmodule.php', $vars),
+            $moduleFolder. DIRECTORY_SEPARATOR . 'frontend/Module.php' => $this->view->render('@luya/console/commands/views/module/frontendmodule.php', $vars),
+        ];
+        
+        foreach ($contents as $fileName => $content) {
+            FileHelper::writeFile($fileName, $content);
         }
-
-        $moduleDir = $modulesDir.DIRECTORY_SEPARATOR.$moduleName;
-
-        if (!file_exists($moduleDir)) {
-            mkdir($moduleDir);
-        } else {
-            return $this->outputError("The Module '$moduleName' folder already exists!");
-        }
-
-        $content = '<?php'.PHP_EOL;
-        $content .= 'namespace app\modules\\'.$moduleName.';'.PHP_EOL.PHP_EOL;
-        $content .= '/**'.PHP_EOL;
-        $content .= ' * Module created with Luya Module Creator Version '.\luya\Boot::VERSION.' at '.date('d.m.Y H:i').PHP_EOL;
-        $content .= ' */'.PHP_EOL;
-        $content .= 'class Module extends '.(($isAdmin) ? '\admin\base\Module' : '\luya\base\Module').PHP_EOL;
-        $content .= '{'.PHP_EOL;
-        $content .= '    // add your custom Module properties here.'.PHP_EOL;
-        $content .= '}';
-
-        $modulephp = $moduleDir.DIRECTORY_SEPARATOR.'Module.php';
-
-        if (file_put_contents($modulephp, $content)) {
-            $out = PHP_EOL."'modules' => [".PHP_EOL;
-            $out .= "    '$moduleName' => [".PHP_EOL;
-            $out .= "        'class' => '\\app\\modules\\$moduleName\\Module'".PHP_EOL;
-            $out .= '    ],'.PHP_EOL;
-            $out .= ']'.PHP_EOL.PHP_EOL;
-
-            return $this->outputSuccess($out);
-        }
-
-        return $this->outputError("Unable to write module file '$modulephp'.");
+        
+        return $this->outputSuccess("Module files has been created successfull. Check the README file to understand how to added the module to your config.");
     }
 }

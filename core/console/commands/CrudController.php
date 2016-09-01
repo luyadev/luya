@@ -14,6 +14,12 @@ use luya\Boot;
  */
 class CrudController extends \luya\console\Command
 {
+    private function getSqlTablesArray()
+    {
+        $names = Yii::$app->db->schema->tableNames;
+        
+        return array_combine($names, $names);
+    }
     /**
      * Create Ng-Rest-Model, Controller and Api for an existing Database-Table.
      *
@@ -21,12 +27,21 @@ class CrudController extends \luya\console\Command
      */
     public function actionCreate()
     {
-        $module = $this->prompt('Module Name (e.g. galleryadmin):');
+        $this->outputInfo("Make sure the module is added to your configuration.");
+        $module = $this->selectModule(['onlyAdmin' => true, 'hideCore' => true, 'text' => 'Select the Module where the crud should be stored in:']);
         $modulePre = $new_str = preg_replace('/admin$/', '', $module);
         $modelName = $this->prompt('Model Name (e.g. Album)');
         $apiEndpoint = $this->prompt('Api Endpoint (e.g. api-'.$modulePre.'-'.strtolower($modelName).')');
 
-        $sqlTable = $this->prompt('Database Table name (e.g. '.strtolower($modulePre).'_'.Inflector::underscore($modelName).')');
+        $sqlSelection = true;
+        while($sqlSelection) {
+            $sqlTable = $this->prompt('Database Table name (e.g. '.strtolower($modulePre).'_'.Inflector::underscore($modelName).')');
+            if (isset($this->getSqlTablesArray()[$sqlTable])) {
+                $sqlSelection = false;
+            } else {
+                $this->outputError("The selected database '$sqlTable' does not exists in the list of tables.");
+            }
+        }
 
         if (!$this->confirm("Create '$modelName' controller, api & model based on sql table '$sqlTable' in module '$module' for api endpoint '$apiEndpoint'?")) {
             return $this->outputError('Crud creation aborted.');

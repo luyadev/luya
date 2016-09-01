@@ -6,6 +6,7 @@ use Yii;
 use yii\helpers\StringHelper;
 use yii\helpers\Inflector;
 use luya\base\AdminModuleInterface;
+use luya\base\CoreModuleInterface;
 
 /**
  * Console Command base class.
@@ -91,7 +92,7 @@ abstract class Command extends \luya\console\Controller
             }
     
             if (isset($options['hideCore'])) {
-                if ($object->isCoreModule) {
+                if ($object instanceof CoreModuleInterface) {
                     continue;
                 }
             }
