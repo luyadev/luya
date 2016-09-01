@@ -8,6 +8,7 @@ use luya\admin\models\Property;
 use luya\cms\models\Property as CmsProperty;
 use luya\frontendgroup\properties\GroupAuthProperty;
 use luya\cms\Menu;
+use luya\base\CoreModuleInterface;
 
 /**
  * FrontendGroup Module.
@@ -16,7 +17,7 @@ use luya\cms\Menu;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class Module extends \luya\base\Module implements BootstrapInterface
+class Module extends \luya\base\Module implements BootstrapInterface, CoreModuleInterface
 {
     /**
      * 

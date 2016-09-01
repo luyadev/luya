@@ -2,10 +2,10 @@
 
 namespace styleguide;
 
-class Module extends \luya\base\Module
-{
-    public $isCoreModule = true;
+use luya\base\CoreModuleInterface;
 
+class Module extends \luya\base\Module implements CoreModuleInterface
+{
     public $useAppLayoutPath = false;
 
     public $password = false;

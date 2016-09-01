@@ -5,13 +5,14 @@ namespace luya\cms\frontend;
 use Yii;
 use yii\base\BootstrapInterface;
 use luya\web\Application;
+use luya\base\CoreModuleInterface;
 
 /**
  * Cms Module.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class Module extends \luya\base\Module implements BootstrapInterface
+class Module extends \luya\base\Module implements BootstrapInterface, CoreModuleInterface
 {
     /**
      * @var array We have no urlRules in cms Module. the UrlRoute file will only be used when
@@ -45,11 +46,6 @@ class Module extends \luya\base\Module implements BootstrapInterface
      * and transformed into links based on the cms.
      */
     public $enableTagParsing = true;
-
-    /**
-     * @var bool CMS is a luya core module.
-     */
-    public $isCoreModule = true;
     
     /**
      * 

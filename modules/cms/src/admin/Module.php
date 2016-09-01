@@ -8,15 +8,14 @@ use luya\cms\admin\importers\BlockGroupImporter;
 use luya\cms\admin\importers\BlockImporter;
 use luya\cms\admin\importers\CmslayoutImporter;
 use luya\cms\admin\importers\PropertyConsistencyImporter;
+use luya\base\CoreModuleInterface;
 
-class Module extends \luya\admin\base\Module
+class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
     /**
      * @var string The version label name of the first version, version alias is running through yii2 messaging system.
      */
     const VERSION_INIT_LABEL = 'Initial';
-    
-    public $isCoreModule = true;
 
     public $apis = [
         'api-cms-admin' => 'luya\cms\admin\\apis\\AdminController',

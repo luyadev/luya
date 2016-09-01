@@ -1,7 +1,9 @@
 <?php
 namespace luya\remoteadmin;
 
-class Module extends \luya\admin\base\Module
+use luya\base\CoreModuleInterface;
+
+class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
     public $apis = [
         'api-remote-site' => 'luya\remoteadmin\apis\SiteController',

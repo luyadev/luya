@@ -3,11 +3,10 @@
 namespace luya\errorapi;
 
 use Yii;
+use luya\base\CoreModuleInterface;
 
-class Module extends \luya\base\Module
+class Module extends \luya\base\Module implements CoreModuleInterface
 {
-    public $isCoreModule = true;
-
     public $recipient = [];
 
     public $slackToken = null;

@@ -2,7 +2,9 @@
 
 namespace luya\account\admin;
 
-class Module extends \luya\admin\base\Module
+use luya\base\CoreModuleInterface;
+
+class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
     public $apis = [
         'api-account-user' => 'luya\account\admin\apis\UserController',

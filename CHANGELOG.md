@@ -6,6 +6,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 1.0.0-rc1 (in progress)
 -----------------------
 
+- `#976` **[BC BREAK]** Remove $isCoreModule replace with CoreModuleInterface
 - `#972` **[BC BREAK]** Merged to cms and cmsadmin modules into one folder and changed the namespace to `luya\cms` instead of `cms`/`cmsadmin`.
 - `#973` **[BC BREAK]** Removed `$assets` property from **none admin modules**.
 - `#974` **[BC BREAK]** Removed `$isAdmin` property.

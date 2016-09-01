@@ -2,22 +2,19 @@
 
 namespace luya\news\frontend;
 
+use luya\base\CoreModuleInterface;
+
 /**
  * CMS Module
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class Module extends \luya\base\Module
+class Module extends \luya\base\Module implements CoreModuleInterface
 {
     /**
      * @var boolean use the application view folder
      */
     public $useAppViewPath = true;
-    
-    /**
-     * @var boolean Is core module makes it inlist invisible
-     */
-    public $isCoreModule = true;
 
     /**
      * @var array

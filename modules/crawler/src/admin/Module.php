@@ -3,8 +3,9 @@
 namespace luya\crawler\admin;
 
 use Yii;
+use luya\base\CoreModuleInterface;
 
-class Module extends \luya\admin\base\Module
+class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
     public $apis = [
         'api-crawler-builderindex' => 'luya\crawler\admin\apis\BuilderindexController',

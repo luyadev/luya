@@ -4,6 +4,7 @@ namespace luya\traits;
 
 use Yii;
 use luya\base\AdminModuleInterface;
+use luya\base\CoreModuleInterface;
 
 /**
  * LUYA Appliation trait
@@ -90,7 +91,7 @@ trait Application
         $modules = [];
 
         foreach ($this->getModules() as $id => $obj) {
-            if ($obj instanceof \luya\base\Module && $obj->isCoreModule) {
+            if ($obj instanceof \luya\base\Module && $obj instanceof CoreModuleInterface) {
                 $modules[$id] = $obj;
             }
         }

@@ -36,11 +36,6 @@ abstract class Module extends \yii\base\Module
     public $urlRules = [];
 
     /**
-     * @var bool Determines if a Module is an admin Module or not. This way we can easely change the boot behavior for each Module.
-     */
-    /*public $isAdmin = false;*/
-
-    /**
      * @var array An array containing all components which should be registered for the current module. If
      *            the component does not exists an Exception will be thrown.
      */
@@ -76,13 +71,6 @@ abstract class Module extends \yii\base\Module
      * @var string The default name of the moduleLayout
      */
     public $moduleLayout = 'layout';
-
-    /**
-     * @var bool If this property is enabled, the module will be hidden in selections where users can choose a module,
-     * example in wizzard commands where they can create classes inside the modules. (e.g block/create, crud/create).
-     * In the method `Yii::$app->getLuyaModules()` the modules will not be listed.
-     */
-    public $isCoreModule = true;
     
     /**
      * @var array Add translations for your module, all translation array must have the keys "prefix", "basePath" and "fileMap"

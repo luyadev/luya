@@ -6,8 +6,9 @@ use Yii;
 use luya\web\UrlRule;
 use luya\admin\components\AdminLanguage;
 use luya\console\interfaces\ImportControllerInterface;
+use luya\base\CoreModuleInterface;
 
-class Module extends \luya\admin\base\Module
+class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
     /**
      * This event gets trigger before some trys to download a file.
@@ -23,8 +24,6 @@ class Module extends \luya\admin\base\Module
      * secureLogin. To test your smtp connection you can use `./vendor/bin/luya health/mailer`
      */
     public $secureLogin = false;
-
-    public $isCoreModule = true;
 
     public $apis = [
         'api-admin-common' => 'luya\admin\apis\CommonController',

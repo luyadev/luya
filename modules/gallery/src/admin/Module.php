@@ -3,10 +3,10 @@
 namespace luya\gallery\admin;
 
 use Yii;
+use luya\base\CoreModuleInterface;
 
-class Module extends \luya\admin\base\Module
+class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
-    public $isCoreModule = true;
 
     public $apis = [
         'api-gallery-album' => 'luya\gallery\admin\apis\AlbumController',

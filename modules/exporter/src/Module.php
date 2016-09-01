@@ -2,7 +2,9 @@
 
 namespace luya\exporter;
 
-class Module extends \luya\base\Module
+use luya\base\CoreModuleInterface;
+
+class Module extends \luya\base\Module implements CoreModuleInterface
 {
     public $downloadPassword = false;
 

@@ -2,6 +2,8 @@
 
 namespace luya\crawler\frontend;
 
+use luya\base\CoreModuleInterface;
+
 /**
  * LUYA Crawler
  * 
@@ -18,17 +20,12 @@ namespace luya\crawler\frontend;
  * @link http://api.symfony.com/2.7/Symfony/Component/DomCrawler.html
  * @author nadar
  */
-class Module extends \luya\base\Module
+class Module extends \luya\base\Module implements CoreModuleInterface
 {
     /**
      * @var boolean This module enables by default to lookup for view files in the apps/views folder.
      */
     public $useAppViewPath = true;
-    
-    /**
-     * @var boolean Is a LUYA core module.
-     */
-    public $isCoreModule = true;
 
     /**
      * @var string The based Url where the crawler should start to lookup for pages, the crawler only allowes
