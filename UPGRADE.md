@@ -18,13 +18,14 @@ Search and replace examples:
 
 |search     |replace
 |---        |---
+|`cms\helpers\TagParser`|`luya\cms\helpers\TagParser`
+|`cms\helpers\Url`|`luya\cms\helpers\Url`
+|`cmsadmin\base\Block`|`luya\cms\base\TwigBlock`
 |`\admin\ngrest\base\Api`|`\luya\admin\ngrest\base\Api`
 |`\admin\Module`|`\luya\admin\Module`
 |`\admin\ngrest\base\Model`|`\luya\admin\ngrest\base\NgRestModel`
 |`\admin\ngrest\base\Controller`|`\luya\admin\ngrest\base\Controller`
 |`\admin\base\Filter`|`\luya\admin\base\Filter`
-|`cms\helpers\TagParser`|`luya\cms\helpers\TagParser`
-|`cms\helpers\Url`|`luya\cms\helpers\Url`
 |`\admin\base\RestController`|`\luya\admin\base\RestController`
 |`\admin\base\Controller`|`\luya\admin\base\Controller`
 |`\admin\ngrest\base\ActiveWindow`|`\luya\admin\ngrest\base\ActiveWindow`
