@@ -13,6 +13,7 @@ use luya\cms\menu\Query as MenuQuery;
 use luya\cms\models\NavItemModule;
 use luya\traits\CacheableTrait;
 use luya\cms\menu\Item;
+use luya\cms\menu\InjectItem;
 
 
 
