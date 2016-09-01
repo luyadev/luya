@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "92909961b70f0576df3e887bf2956cf5",
+    "hash": "19349f34918b3440feb49f182388a4b4",
     "content-hash": "33c5d95e86ac55f16fb8cc7b413bdd3c",
     "packages": [],
     "packages-dev": [
@@ -566,12 +566,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya.git",
-                "reference": "de24357f484e8abe6ffca2476e52580b8cc70a55"
+                "reference": "bcb7e1a73b36d092c07d12886c150e3cc4a1ad6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya/zipball/de24357f484e8abe6ffca2476e52580b8cc70a55",
-                "reference": "de24357f484e8abe6ffca2476e52580b8cc70a55",
+                "url": "https://api.github.com/repos/luyadev/luya/zipball/bcb7e1a73b36d092c07d12886c150e3cc4a1ad6d",
+                "reference": "bcb7e1a73b36d092c07d12886c150e3cc4a1ad6d",
                 "shasum": ""
             },
             "require": {
@@ -627,7 +627,7 @@
                 "yii2",
                 "yii2-wrapper"
             ],
-            "time": "2016-08-30 16:12:28"
+            "time": "2016-09-01 13:33:03"
         },
         {
             "name": "luyadev/luya-module-admin",
@@ -635,12 +635,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "75cae816f360ea5526180e4653a0472ee735f7d7"
+                "reference": "5a4f6db5a84692eb6e6758179fa8f478db94e0b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/75cae816f360ea5526180e4653a0472ee735f7d7",
-                "reference": "75cae816f360ea5526180e4653a0472ee735f7d7",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/5a4f6db5a84692eb6e6758179fa8f478db94e0b9",
+                "reference": "5a4f6db5a84692eb6e6758179fa8f478db94e0b9",
                 "shasum": ""
             },
             "require": {
@@ -690,7 +690,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2016-08-30 14:34:36"
+            "time": "2016-09-01 13:21:23"
         },
         {
             "name": "myclabs/deep-copy",
