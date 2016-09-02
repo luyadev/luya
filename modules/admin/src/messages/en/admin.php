@@ -3,6 +3,7 @@
 return [
     'language_name' => 'English',
     'button_save' => 'Save',
+    'button_confirm' => 'Yes',
     'button_abort' => 'Cancel',
     'button_send' => 'Send',
     'login_pre_title' => 'Login for {title}',

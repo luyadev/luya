@@ -3,6 +3,7 @@
 return [
     'language_name' => 'Deutsch',
     'button_save' => 'Speichern',
+    'button_confirm' => 'Ja',
     'button_abort' => 'Abbrechen',
     'button_send' => 'Senden',
     'login_pre_title' => 'Anmeldung für {title}',

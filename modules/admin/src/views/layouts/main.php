@@ -350,8 +350,8 @@ $this->beginPage()
             <div class="toasts__item toasts__item--confirm">
                 <p>{{item.message}}</p>
                 <div class="toasts__item-buttons">
-                    <button type="button" class="btn btn--small grey" ng-click="item.close()">Abbrechen</button>
-                    <button type="button" class="btn btn--small red" ng-click="item.click()">Ja</button>
+                    <button type="button" class="btn btn--small grey" ng-click="item.close()"><?php echo Admin::t('button_abort'); ?></button>
+                    <button type="button" class="btn btn--small red" ng-click="item.click()"><?php echo Admin::t('button_confirm'); ?></button>
                 </div>
             </div>
         </div>
