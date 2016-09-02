@@ -3,6 +3,7 @@
 return [
     'language_name' => 'Русский',
     'button_save' => 'Сохранить',
+    'button_confirm' => 'да',
     'button_abort' => 'Отмена',
     'button_send' => 'Отправить',
     'login_pre_title' => 'Авторизоваться в {title}',
