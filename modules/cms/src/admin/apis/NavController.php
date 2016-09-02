@@ -51,7 +51,7 @@ class NavController extends \luya\admin\base\RestController
     {
         $data = [];
         foreach (Property::find()->select(['admin_prop_id', 'value'])->where(['nav_id' => $navId])->asArray()->all() as $row) {
-            $object = \admin\models\Property::findOne($row['admin_prop_id']);
+            $object = \luya\admin\models\Property::findOne($row['admin_prop_id']);
             $blockObject = $object->createObject($row['value']);
             
             $value = $blockObject->getValue();
