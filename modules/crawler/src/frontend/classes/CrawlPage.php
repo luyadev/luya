@@ -7,6 +7,7 @@ use yii\base\InvalidConfigException;
 use yii\base\yii\base;
 use luya\helpers\Url;
 use Symfony\Component\Domluya\crawler\frontend\Crawler;
+use luya\helpers\StringHelper;
 
 class CrawlPage extends \yii\base\Object
 {
@@ -94,6 +95,11 @@ class CrawlPage extends \yii\base\Object
             });
             
             foreach ($links as $key => $item) {
+                
+                if (StringHelper::contains(['@'], $item[1])) {
+                    continue;
+                }
+                
                 $url = parse_url($item[1]);
     
                 if (!isset($url['host']) || !isset($url['scheme'])) {
