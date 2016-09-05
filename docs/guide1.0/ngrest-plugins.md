@@ -42,7 +42,7 @@ class TestPlugin extends \admin\ngrest\base\Plugin
 {
     public function renderList($id, $ngModel)
     {
-        $this->renderList($id, $ngModel);
+        $this->createListTag($id, $ngModel);
     }
     
     public function renderUpdate($id, $ngModel)
