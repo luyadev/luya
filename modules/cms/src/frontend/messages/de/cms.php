@@ -156,6 +156,5 @@ return [
     'block_group_layout_elements' => 'Layouts',
     'block_group_basic_elements' => 'Standard',
     'block_group_project_elements' => 'Projekt',
-    'block_group_favorites' => 'Favoriten',
     'block_group_text_elements' => 'Texte',
 ];

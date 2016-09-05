@@ -152,7 +152,7 @@ return [
     'log_action_delete_cms_nav' => 'Удалена страницу <b>{info}</b>',
     'log_action_delete_cms_nav_item_page_block_item' => 'Удален блок <b>{info}</b>',
     'log_action_delete_unkown' => 'Удалена строка',
-    
+    'block_group_favorites' => 'Избранные',
     'button_create_version' => 'Создать версию',
     'button_update_version' => 'Обновить версию',
     'menu_group_item_env_permission' => 'Страница прав'

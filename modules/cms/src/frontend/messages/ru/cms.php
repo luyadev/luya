@@ -156,6 +156,5 @@ return [
     'block_group_layout_elements' => 'Шаблон',
     'block_group_basic_elements' => 'Общие',
     'block_group_project_elements' => 'Проект',
-    'block_group_favorites' => 'Избранные',
     'block_group_text_elements' => 'Текста',
 ];

@@ -152,7 +152,7 @@ return [
     'log_action_delete_cms_nav' => 'Removed Page <b>{info}</b>',
     'log_action_delete_cms_nav_item_page_block_item' => 'Deleted block <b>{info}</b>',
     'log_action_delete_unkown' => 'Deleted a row',
-    
+    'block_group_favorites' => 'Favorites',
     'button_create_version' => 'Create Version',
     'button_update_version' => 'Update Version',
     'menu_group_item_env_permission' => 'Page Permissions'
