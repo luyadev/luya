@@ -65,7 +65,13 @@ class Module extends \luya\base\Module implements CoreModuleInterface
      * @var array|boolean Define an array of extension where the links should automatically not follow in order to save memory.
      * If you like to disable this feature (small pages) you can set `false`.
      */
-    public $doNotFollowExtensions = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'tiff', 'bmp', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'csv', 'zip'];
+    public $doNotFollowExtensions = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'tiff', 'tif', 'eps', 'bmp', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'csv', 'zip'];
+    
+    /**
+     * @var boolean By default the title tag will be used for the page name, if `$useH1` is enabled the title for the page will be replaced by the h1 tag if found, oterwise
+     * only the title tag is used for titles.
+     */
+    public $useH1 = true;
     
     /**
      * @var array E-Mail-Adresses array with recipients for the statistic command

@@ -24,6 +24,8 @@ class CrawlContainer extends \yii\base\Object
     
     public $doNotFollowExtensions = false;
     
+    public $useH1 = true;
+    
     private $_crawlers = [];
     
     public $log = [
@@ -47,22 +49,26 @@ class CrawlContainer extends \yii\base\Object
         return in_array($link, $this->_proccessed);
     }
     
-    public function addLog($cat, $message)
+    public function addLog($cat, $message, $title = null)
     {
+        $message = (empty($title)) ? $message : $message . " ({$title})";
         $this->log[$cat][] = $message;
     }
     
     public function verbosePrint($key, $value = null)
     {
         if ($this->verbose) {
-            echo  $key .': ' . $value . PHP_EOL;
+            
+            $value = is_array($value) ? print_r($value, true) : $value;
+            
+            echo $key . ': ' . $value . PHP_EOL;
         }
     }
 
     protected function getCrawler($url)
     {
         if (!array_key_exists($url, $this->_crawlers)) {
-            $crawler = new CrawlPage(['baseUrl' => $this->baseUrl, 'pageUrl' => $url, 'verbose' => $this->verbose]);
+            $crawler = new CrawlPage(['baseUrl' => $this->baseUrl, 'pageUrl' => $url, 'verbose' => $this->verbose, 'useH1' => $this->useH1]);
             $this->_crawlers[$url] = $crawler;
         }
 
@@ -80,6 +86,9 @@ class CrawlContainer extends \yii\base\Object
         
         $this->verbosePrint('baseUrl', $this->baseUrl);
         $this->verbosePrint('baseHost', $this->baseHost);
+        $this->verbosePrint('useH1', $this->useH1);
+        $this->verbosePrint('filterRegex', $this->filterRegex);
+        $this->verbosePrint('doNotFollowExtensions', $this->doNotFollowExtensions);
         
         Yii::$app->db->createCommand()->truncateTable('crawler_builder_index')->execute();
         
@@ -123,11 +132,11 @@ class CrawlContainer extends \yii\base\Object
         foreach ($builder as $url => $page) {
             if (isset($index[$url])) { // page exists in index
                 if ($index[$url]['content'] == $page['content']) {
-                    $this->addLog('unchanged', $url);
+                    $this->addLog('unchanged', $url, $page['title']);
                     $update = Index::findOne(['url' => $url]);
                     $update->updateAttributes(['title' => $page['title']]);
                 } else {
-                    $this->addLog('update', $url);
+                    $this->addLog('update', $url, $page['title']);
                     $update = Index::findOne(['url' => $url]);
                     $update->attributes = $page;
                     $update->last_update = time();
@@ -135,7 +144,7 @@ class CrawlContainer extends \yii\base\Object
                 }
                 unset($index[$url]);
             } else {
-                $this->addLog('new', $url);
+                $this->addLog('new', $url, $page['title']);
                 $insert = new Index();
                 $insert->attributes = $page;
                 $insert->added_to_index = time();
@@ -146,14 +155,14 @@ class CrawlContainer extends \yii\base\Object
 
         // delete not unseted urls from index
         foreach ($index as $deleteUrl => $deletePage) {
-            $this->addLog('delete', $deleteUrl);
+            $this->addLog('delete', $deleteUrl, $deletePage['title']);
             $model = Index::findOne($deletePage['id']);
             $model->delete(false);
         }
 
         // delete empty content empty title
         foreach (Index::find()->where(['=', 'content', ''])->orWhere(['=', 'title', ''])->all() as $page) {
-            $this->addLog('delete_issue', $page->url);
+            $this->addLog('delete_issue', $page->url, $page->title);
             $page->delete(false);
         }
     }
@@ -243,6 +252,7 @@ class CrawlContainer extends \yii\base\Object
                 // update the urls content
                 $model = Builderindex::findUrl($url);
                 $model->content = $this->getCrawler($url)->getContent();
+                $model->title = $this->getCrawler($url)->getTitle();
                 $model->crawled = 1;
                 $model->status_code = 1;
                 $model->last_indexed = time();

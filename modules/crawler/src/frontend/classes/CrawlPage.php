@@ -6,8 +6,8 @@ use Goutte\Client;
 use yii\base\InvalidConfigException;
 use yii\base\yii\base;
 use luya\helpers\Url;
-use Symfony\Component\Domluya\crawler\frontend\Crawler;
 use luya\helpers\StringHelper;
+use Symfony\Component\Dom;
 
 class CrawlPage extends \yii\base\Object
 {
@@ -18,6 +18,8 @@ class CrawlPage extends \yii\base\Object
     public $baseUrl = null;
     
     public $baseHost = null;
+    
+    public $useH1 = true;
     
     private $_crawler = null;
 
@@ -97,6 +99,7 @@ class CrawlPage extends \yii\base\Object
             foreach ($links as $key => $item) {
                 
                 if (StringHelper::contains(['@'], $item[1])) {
+                    unset($links[$key]);
                     continue;
                 }
                 
@@ -105,7 +108,7 @@ class CrawlPage extends \yii\base\Object
                 if (!isset($url['host']) || !isset($url['scheme'])) {
                     $base = $this->baseHost;
                 } else {
-                    $base = $url['scheme'] . '//' . $url['host'];
+                    $base = $url['scheme'] . '://' . $url['host'];
                 }
                 
                 $path = null;
@@ -117,6 +120,7 @@ class CrawlPage extends \yii\base\Object
                 $url = rtrim($base, "/") . "/" . ltrim($path, "/");
                 
     
+                $links[$key][0] = self::cleanupString($links[$key][0]);
                 $links[$key][1] = http_build_url($url, [
                     'query' => (isset($host['query'])) ? $host['query'] : [],
                 ], HTTP_URL_JOIN_QUERY | HTTP_URL_STRIP_FRAGMENT);
@@ -147,7 +151,25 @@ class CrawlPage extends \yii\base\Object
             return null;
         }
         
-        return $crawler->filterXPath('//title')->text();
+        $text =  $crawler->filterXPath('//title')->text();
+        
+        $this->verbosePrint('? getTitle(): title tag found', $text);
+        if ($this->useH1) {
+            
+            
+            $response = $crawler->filter('h1')->each(function($node, $i) use ($text) {
+                if (!empty($node->text())) {
+                    return self::cleanupString($node->text());
+                }
+            });
+            
+            if (!empty($response) && isset($response[0])) {
+                $text = $response[0];
+                $this->verbosePrint('? getTitle(): h1 tag found', $text);
+            }
+        }
+        
+        return $text;
     }
 
     private function tempGetContent($url)
@@ -223,20 +245,20 @@ class CrawlPage extends \yii\base\Object
     {
         try {
             $this->verbosePrint('get content for', $this->pageUrl);
-            
-            $bodyContent = $this->tempGetContent($this->pageUrl);
-    
-            // strip tags and stuff
-            $content = strip_tags($bodyContent);
-    
-            // remove whitespaces and stuff
-            $content = trim(str_replace(array("\n", "\r", "\t", "\n\r", "\r\n"), ' ', $content));
-    
-            $content = htmlentities($content, ENT_QUOTES | ENT_IGNORE, 'UTF-8');
-    
-            return $content;
+            return self::cleanupString($this->tempGetContent($this->pageUrl));
         } catch (\Exception $e) {
             return null;
         }
+    }
+    
+    public static function cleanupString($string)
+    {
+        // strip tags and stuff
+        $content = strip_tags($string);
+        
+        // remove whitespaces and stuff
+        $content = trim(str_replace(array("\n", "\r", "\t", "\n\r", "\r\n"), ' ', $content));
+        
+        return htmlentities($content, ENT_QUOTES | ENT_IGNORE, 'UTF-8');
     }
 }
