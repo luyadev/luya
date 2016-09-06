@@ -70,6 +70,17 @@ where(['!=', 'is_active', 0])->andWhere(['==', 'parent_nav_id', 0]); // WHERE is
 |=  | Equals
 |== | Equal and type comparison
 
+Menu queries
+------------
+
+For more flexible menu queries, you can use the Query object. As an example, in order to search for top-level pages, including hidden ones, you would use:
+
+```php
+$items = (new \cms\menu\Query())->where(['parent_nav_id' => 0])->with(['hidden'])->all();
+```
+
+See <http://luya.io/api/cms-menu-query.html> for more details.
+
 Breadcrumbs output
 --------------------
 
