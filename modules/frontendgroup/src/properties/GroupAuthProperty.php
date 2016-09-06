@@ -4,13 +4,14 @@ namespace luya\frontendgroup\properties;
 
 use Yii;
 use yii\helpers\Json;
+use luya\admin\base\Property;
 
 /**
  * The Property where you can choose the groups who can see the menu item.
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-class GroupAuthProperty extends \admin\base\Property
+class GroupAuthProperty extends Property
 {
     /**
      * 
