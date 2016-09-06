@@ -48,11 +48,12 @@ To execute the command (and run the crawler proccess) use the crawler command `c
 
 ### Statistic Command
  
- You can also get statistic Results enabling a cronjob executing each week:
+You can also get statistic Results enabling a cronjob executing each week:
  
- ```sh
- ./vendor/bin/luya crawler/statistic
- ```
+```
+./vendor/bin/luya crawler/statistic
+```
+
 
 Create search form
 ------------------
@@ -104,7 +105,7 @@ Partial ignore a content from the crawler:
 <div>
 	<!-- [CRAWL_IGNORE] -->
 	<p>The crawler will never see and store this information</p>
-	<!-- [/CRAWL IGNORE] -->
+	<!-- [/CRAWL_IGNORE] -->
 </div>
 ```
 
