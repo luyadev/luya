@@ -3,6 +3,7 @@
 namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
+use luya\cms\helpers\TagParser;
 
 class TableBlock extends \luya\cms\base\Block
 {
@@ -31,6 +32,7 @@ class TableBlock extends \luya\cms\base\Block
                 ['var' => 'stripe', 'label' => Module::t('block_table_stripe_label'), 'type' => 'zaa-checkbox'],
                 ['var' => 'border', 'label' => Module::t('block_table_border_label'), 'type' => 'zaa-checkbox'],
                 ['var' => 'equaldistance', 'label' => Module::t('block_table_equaldistance_label'), 'type' => 'zaa-checkbox'],
+                ['var' => 'parseMarkdown', 'label' => Module::t('block_table_enable_markdown'), 'type' => 'zaa-checkbox'],
             ],
         ];
     }
@@ -53,9 +55,14 @@ class TableBlock extends \luya\cms\base\Block
                 continue;
             }
 
+            if ($this->getCfgValue('parseMarkdown', false)) {
+                foreach ($row as $k => $v) {
+                    $row[$k] = TagParser::convertWithMarkdown($v);
+                }
+            }
+            
             $table[] = $row;
         }
-
         return $table;
     }
 

@@ -157,4 +157,7 @@ return [
     'block_group_basic_elements' => 'Standard',
     'block_group_project_elements' => 'Projekt',
     'block_group_text_elements' => 'Texte',
+    
+    // rc1
+    'block_table_enable_markdown' => 'Markdown aktivieren',
 ];
