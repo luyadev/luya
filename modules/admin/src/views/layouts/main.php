@@ -344,7 +344,7 @@ $this->beginPage()
 
 <!-- /ANGULAR SCRIPTS -->
 
-<div class="luya-container luya-container--right-panel-active ng-cloak">
+<div class="luya-container ng-cloak" ng-class="{'luya-container--right-panel-active': sidePanel}">
     <div class="toasts" ng-if="toastQueue" ng-repeat="item in toastQueue">
         <div class="toasts__confirm" ng-if="item.type == 'confirm'" zaa-esc="item.close()">
             <div class="toasts__item toasts__item--confirm">
@@ -405,7 +405,7 @@ $this->beginPage()
                         </div>
                     </li>
                     <li>
-                        <div class="navbar__button">
+                        <div class="navbar__button" ng-click="toggleUserPanel()">
                             <i class="material-icons left">account_circle</i><strong><?php echo $user->firstname; ?></strong><!-- NO WHITESPACE
                                     --><p class="icon__spawn-text"><?php echo Admin::t('layout_btn_profile'); ?></p>
                         </div>
@@ -536,8 +536,12 @@ $this->beginPage()
     <!-- ANGULAR-VIEW -->
     <div class="luya-container__angular-placeholder module-{{currentItem.moduleId}}" ui-view></div>
     <!-- /ANGULAR-VIEW -->
-    <div class="luya-container__right-panel">
-        <h1>HIIII</h1>
+    <div class="luya-container__right-panel" ng-if="sidePanel">
+        <div ng-if="sidePanelUserMenu">
+            <h1><?= $user->firstname; ?> <?= $user->lastname; ?></h1>
+            <p><?= $user->email; ?></p>
+            <p><a href="<?php echo Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="btn red"><?php echo Admin::t('layout_btn_logout'); ?></a></p>
+        </div>
     </div>
 
 
