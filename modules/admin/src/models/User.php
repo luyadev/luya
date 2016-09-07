@@ -169,7 +169,8 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
 
     public function getAndStoreToken()
     {
-        $token = Yii::$app->security->generateRandomString(4);
+        $token = Yii::$app->security->generateRandomString(6);
+        $token = strtolower(str_replace(['-', '_'], 'a', $token));
         $this->setAttribute('secure_token', sha1($token));
         $this->setAttribute('secure_token_timestamp', time());
         $this->update(false);

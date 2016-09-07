@@ -148,7 +148,7 @@ return [
 // added translations in 1.0.0-beta7
 
     'login_securetoken_mail_subject' => 'Код безопасности LUYA',
-    'login_securetoken_mail' => '<h1>Код безопасности LUYA</h1><p>Используйте следующий код для входа в свою админ-панель на {url}:</p><p><strong>{token}</strong></p>',
+    'login_securetoken_mail' => '<h1>Код безопасности LUYA</h1><p>Используйте следующий код для входа в свою админ-панель на {url}:</p><span style="font-size:22px; letter-spacing:2px; padding:5px 10px; display:inline-block; background-color:#F0F0F0;">{token}</span>',
     'login_async_token_error' => 'Предоставленный код безопасности неверный.',
     'login_async_token_globalerror' => 'Произошла ошибка сервера, пожалуйста, обратитесь к администратору сайта.',
     'ngrest_crud_csv_export_btn' => 'Сгенерировать CSV',

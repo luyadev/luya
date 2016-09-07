@@ -147,7 +147,7 @@ return [
 // added translations in 1.0.0-beta7
 
     'login_securetoken_mail_subject' => 'LUYA Security code',
-    'login_securetoken_mail' => '<h1>LUYA Security code</h1><p>Use the following security code to login into your administration interface on {url}:</p><p><strong>{token}</strong></p>',
+    'login_securetoken_mail' => '<h1>LUYA Security code</h1><p>Use the following security code to login into your administration interface on {url}:</p><span style="font-size:22px; letter-spacing:2px; padding:5px 10px; display:inline-block; background-color:#F0F0F0;">{token}</span>',
     'login_async_token_error' => 'The provided security code is wrong.',
     'login_async_token_globalerror' => 'A Server Error occured, please contact your Site administrator.',
     'ngrest_crud_csv_export_btn' => 'Generate CSV',
