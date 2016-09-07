@@ -307,13 +307,13 @@ class Menu extends Component implements ArrayAccess
      * Get all items for a specific level.
      *
      * @param integer $level levels starts with 1
-     * @param \cms\menu\Item $baseItem Provide an optional element which represents the base calculation item for Theme
+     * @param \luya\cms\menu\Item $baseItem Provide an optional element which represents the base calculation item for Theme
      * siblings/children calculation, this can be case when you have several contains do not want to use the "current" Item
      * as base calucation, because getCurrent() could be in another container so it would get you all level container items for
      * this container.
      * @return boolean|array QueryIterator with data
      */
-    public function getLevelContainer($level, \cms\menu\Item $baseItem = null)
+    public function getLevelContainer($level, Item $baseItem = null)
     {
         // define if the requested level is the root line (level 1) or not
         $rootLine = ($level === 1) ? true : false;
@@ -346,7 +346,7 @@ class Menu extends Component implements ArrayAccess
      * 
      * @param int $level Level menu starts with 1
      *
-     * @return \cms\menu\Item An item-object for the specific level current.
+     * @return \luya\cms\menu\Item An item-object for the specific level current.
      */
     public function getLevelCurrent($level)
     {
@@ -376,7 +376,7 @@ class Menu extends Component implements ArrayAccess
     /**
      * Return the home site for the current resolved language resolved by \luya\web\Composition component.
      * 
-     * @return \cms\menu\Item An item-object for the home item for the current resolved language.
+     * @return \luya\cms\menu\Item An item-object for the home item for the current resolved language.
      */
     public function getHome()
     {
@@ -384,9 +384,9 @@ class Menu extends Component implements ArrayAccess
     }
 
     /**
-     * Wrapper method for `new \cms\menu\Query()` object.
+     * Wrapper method for `new \luya\cms\menu\Query()` object.
      * 
-     * @return \cms\menu\Query
+     * @return \luya\cms\menu\Query
      */
     public function find()
     {
@@ -397,11 +397,9 @@ class Menu extends Component implements ArrayAccess
      * Wrapper method to get all menu items for the current language without hidden items for
      * the specific where statement.
      * 
-     * @param array $where See \cms\menu\Query::where()
-     *
-     * @see \cms\menu\Query::where()
-     *
-     * @return \cms\menu\QueryIterator
+     * @param array $where See \luya\cms\menu\Query::where()
+     * @see \luya\cms\menu\Query::where()
+     * @return  \luya\cms\menu\QueryIterator
      */
     public function findAll(array $where)
     {
@@ -413,10 +411,8 @@ class Menu extends Component implements ArrayAccess
      * sepcific where statement.
      * 
      * @param array $where
-     *
-     * @see \cms\menu\Query::where()
-     *
-     * @return \cms\menu\QueryIterator
+     * @see \luya\cms\menu\Query::where()
+     * @return \luya\cms\menu\QueryIterator
      */
     public function findOne(array $where)
     {
@@ -433,7 +429,7 @@ class Menu extends Component implements ArrayAccess
      * 3. if no item could be found the home item will be returned
      * 4. otherwise return the alias match from step 2.
      * 
-     * @return \cms\menu\Item
+     * @return \luya\cms\menu\Item
      */
     private function resolveCurrent()
     {
@@ -479,7 +475,6 @@ class Menu extends Component implements ArrayAccess
      * prepand the base url for the provided alias.
      * 
      * @param string $alias
-     *
      * @return string
      */
     public function buildItemLink($alias, $langShortCode)
@@ -526,7 +521,6 @@ class Menu extends Component implements ArrayAccess
      * Helper method to build an index with all the alias paths to build the correct links.
      * 
      * @param array $data
-     *
      * @return array An array with the index where the key is the nav_id
      */
     private function buildIndexForContainer($data)
@@ -571,9 +565,7 @@ class Menu extends Component implements ArrayAccess
      * Helper method to load all contaienr data for a specific langauge.
      * 
      * @param string $langShortCode e.g. de
-     *
      * @throws Exception
-     *
      * @return array
      */
     private function loadLanguageContainer($langShortCode)
