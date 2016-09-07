@@ -30,6 +30,18 @@ abstract class Module extends \yii\base\Module
     public $apis = [];
 
     /**
+     * @var array An array with Tag class names to inject into the tag parser on luya boot, where key is the identifier and value the create object conifg:
+     * 
+     * ```php
+     * [
+     *     'link' => \luya\cms\tags\Link::className(),
+     *     'file' => ['class' => '\luya\cms\tags\Link'],
+     * ]
+     * ```
+     */
+    public $tags = [];
+    
+    /**
      * @var array Contains all urlRules for this module. Can't provided in key value pairing for pattern<=>route
      *            must be array containing class name or array with pattern, route informations.
      */
