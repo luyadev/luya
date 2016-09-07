@@ -55,11 +55,11 @@ zaa.factory("ServiceFoldersData", function($http, $q, $rootScope) {
 	
 	var service = [];
 	
-	service.data = [];
+	service.data = null;
 	
 	service.load = function(forceReload) {
 		return $q(function(resolve, reject) {
-			if (service.data.length > 0 && forceReload !== true) {
+			if (service.data !== null && forceReload !== true) {
 				resolve(service.data);
 			} else {
 				$http.get("admin/api-admin-storage/data-folders").success(function(response) {
