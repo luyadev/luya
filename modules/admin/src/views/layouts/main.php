@@ -344,7 +344,7 @@ $this->beginPage()
 
 <!-- /ANGULAR SCRIPTS -->
 
-<div class="luya-container ng-cloak">
+<div class="luya-container luya-container--right-panel-active ng-cloak">
     <div class="toasts" ng-if="toastQueue" ng-repeat="item in toastQueue">
         <div class="toasts__confirm" ng-if="item.type == 'confirm'" zaa-esc="item.close()">
             <div class="toasts__item toasts__item--confirm">
@@ -536,6 +536,10 @@ $this->beginPage()
     <!-- ANGULAR-VIEW -->
     <div class="luya-container__angular-placeholder module-{{currentItem.moduleId}}" ui-view></div>
     <!-- /ANGULAR-VIEW -->
+    <div class="luya-container__right-panel">
+        <h1>HIIII</h1>
+    </div>
+
 
 </div> <!-- /.luya-container -->
 <?php $this->endBody() ?>

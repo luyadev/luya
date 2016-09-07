@@ -30,3 +30,4 @@ scripts/.subsplit
 ### Compile
 scripts/.pid.*
 scripts/.sass_log
+.sass-cache

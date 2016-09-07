@@ -1,8 +1,30 @@
 .crud__langswitch {
     display: inline-block;
     float: right;
-    margin-top: 17px;
+    margin-top: 10px;
     padding-bottom: 0 !important;
+}
+
+.crud__button {
+    color: color("grey", "darken-1");
+    font-size: 12px;
+    height: 30px;
+    letter-spacing: 0.5px;
+    line-height: 30px;
+    padding: 0 5px;
+
+    tr:hover & {
+        color: color("shades", "black");
+    }
+
+    i {
+        font-size: 14px;
+        line-height: 30px;
+
+        &.left {
+            margin-right: 3px;
+        }
+    }
 }
 
 .crud__i18n-col {
@@ -25,11 +47,11 @@
 
 .crud__flag {
     line-height: 1em;
+    opacity: .5;
     position: absolute;
     right: 11px;
     top: 11px;
     z-index: 50;
-    opacity: .5;
 
     zaa-sort-relation-array + & {
         right: 4px;

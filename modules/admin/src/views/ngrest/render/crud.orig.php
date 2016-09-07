@@ -154,7 +154,7 @@ use luya\admin\Module;
                         <?php if (count($this->context->getButtons()) > 0): ?>
                         <td style="text-align:right;">
                             <?php foreach ($this->context->getButtons() as $item): ?>
-                            <a class="waves-effect waves-light btn-flat btn--bordered" ng-click="<?php echo $item['ngClick']; ?>"><i class="material-icons<?php if (!empty($item['label'])): ?> left<?php endif; ?>"><?php echo $item['icon']; ?></i><?php echo $item['label']; ?></a>
+                                <a class="crud__button waves-effect waves-light btn-flat btn--bordered" ng-click="<?php echo $item['ngClick']; ?>"><i class="material-icons<?php if (!empty($item['label'])): ?> left<?php endif; ?>"><?php echo $item['icon']; ?></i><?php echo $item['label']; ?></a>
                             <?php endforeach; ?>
                         </td>
                         <?php endif; ?>
