@@ -96,7 +96,7 @@ class UrlManager extends \yii\web\UrlManager
     /**
      * Get the menu component if its registered in the current applications.
      *
-     * @return boolean|\cms\menu\Container
+     * @return boolean|\luya\cms\Menu
      */
     public function getMenu()
     {
@@ -236,20 +236,26 @@ class UrlManager extends \yii\web\UrlManager
         return $url;
     }
     
+    /**
+     * See if the module of a provided route exists in the luya application list.
+     * 
+     * The module to test must be an instance of `luya\base\Module`.
+     * 
+     * @param unknown $route
+     * @return mixed|boolean
+     */
     private function findModuleInRoute($route)
     {
         $parts = array_values(array_filter(explode('/', $route)));
     
-        if (isset($parts[0])) {
-            if (array_key_exists($parts[0], Yii::$app->getApplicationModules())) {
-                return $parts[0];
-            }
+        if (isset($parts[0]) && array_key_exists($parts[0], Yii::$app->getApplicationModules())) {
+            return $parts[0];
         }
     
         return false;
     }
     
-    private function urlReplaceModule($url, $navItemId, \luya\web\Composition $composition)
+    private function urlReplaceModule($url, $navItemId, Composition $composition)
     {
         $route = $this->removeBaseUrl($url);
         $route = $composition->removeFrom($route);
@@ -258,7 +264,6 @@ class UrlManager extends \yii\web\UrlManager
         if (!$module) {
             return $url;
         }
-    
     
         $item = $this->menu->find()->where(['id' => $navItemId])->with('hidden')->lang($composition['langShortCode'])->one();
     
