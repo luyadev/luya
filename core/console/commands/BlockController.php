@@ -184,7 +184,7 @@ class BlockController extends \luya\console\Command
         $content .= '/**'.PHP_EOL;
         $content .= ' * Block created with Luya Block Creator Version '.\luya\Boot::VERSION.' at '.date('d.m.Y H:i').PHP_EOL;
         $content .= ' */'.PHP_EOL;
-        $content .= 'class '.$blockName.' extends \cmsadmin\base\PhpBlock'.PHP_EOL;
+        $content .= 'class '.$blockName.' extends \luya\cms\base\PhpBlock'.PHP_EOL;
         $content .= '{'.PHP_EOL;
 
         if ($module) {
