@@ -44,6 +44,7 @@ class Url extends \luya\helpers\Url
      * 
      * ```php
      * Url::toModuleRoute('blog', 'blog/default/index', ['year' => '2016', 'month' => '07']);
+     * Url::toModuleRoute('blog', ['/blog/default/index', 'year' => 2016, 'month' => '07]); // is equal
      * ```
      * 
      * generates the following URL, assuming the blog module is located on the CMS page /my-super-blog:
@@ -58,14 +59,12 @@ class Url extends \luya\helpers\Url
      * ];
      * ```
      * 
+     * 
      * @param string $moduleName The ID of the module, which should be found inside the nav items.
-     * @param string $route      The route for the url rules
-     * @param array  $params     The parameters for the url rule
-     *
+     * @param string|array $route The route of the module `module/controller/action` or an array like in Url::to with param infos `['/module/controller/action', 'foo' => 'bar']`.
+     * @param array  $params The parameters for the url rule. If the route is provided as an array with params the further defined params or overwritten by the array_merge process.
      * @throws Exception
-     *
      * @return string
-     *
      * @see \luya\helpers\Url::toModule()
      */
     public static function toModuleRoute($moduleName, $route, array $params = [])
@@ -82,17 +81,21 @@ class Url extends \luya\helpers\Url
     /**
      * create an url based on a context nav item informaiton inside the urlManager.
      *
-     * @param int    $navItemId
-     * @param string $route
-     * @param array  $params
+     * @param int $navItemId The menu item Id where the url should be created from
+     * @param string|array $route Can be a string `module/controller/action` or an array like in the Yii Url helpers::to methods `['/module/controller/action', 'param' => 'bar]`.
+     * @param array $params An array with params which are going to be attached to the route.
      *
      * @return string
      */
     public static function toMenuItem($navItemId, $route, array $params = [])
     {
-        $routeParams = [$route];
-        foreach ($params as $key => $value) {
-            $routeParams[$key] = $value;
+        if (is_array($route)) {
+            $routeParams = array_merge($route, $params);
+        } else {
+            $routeParams = [$route];
+            foreach ($params as $key => $value) {
+                $routeParams[$key] = $value;
+            }
         }
 
         return Yii::$app->urlManager->createMenuItemUrl($routeParams, $navItemId);
