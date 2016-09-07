@@ -5,6 +5,7 @@ namespace luya\console;
 use Yii;
 use yii\helpers\Console;
 use yii\console\Exception;
+use luya\traits\ApplicationTrait;
 
 /**
  * Luya CLI Application.
@@ -13,10 +14,7 @@ use yii\console\Exception;
  */
 class Application extends \yii\console\Application
 {
-    /*
-     * Use the application trait, providing shared methods and properties.
-     */
-    use \luya\traits\Application;
+    use ApplicationTrait;
 
     /**
      * @var bool Mute the Applications ouput, this is used to make application

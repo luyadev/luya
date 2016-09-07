@@ -2,6 +2,8 @@
 
 namespace luya\web;
 
+use luya\traits\ErrorHandlerTrait;
+
 /**
  * LUYA ErrorHandler wrapper with error handler trait
  *
@@ -9,7 +11,5 @@ namespace luya\web;
  */
 class ErrorHandler extends \yii\web\ErrorHandler
 {
-    public $memoryReserveSize = 0;
-
-    use \luya\traits\ErrorHandler;
+    use ErrorHandlerTrait;
 }

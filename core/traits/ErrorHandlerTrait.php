@@ -12,7 +12,7 @@ use luya\helpers\Url;
  *
  * @author nadar
  */
-trait ErrorHandler
+trait ErrorHandlerTrait
 {
     /**
      * @var string The url of the error api without trailing slash. Make sure you have installed the error api

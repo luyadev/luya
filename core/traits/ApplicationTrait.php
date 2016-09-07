@@ -5,6 +5,7 @@ namespace luya\traits;
 use Yii;
 use luya\base\AdminModuleInterface;
 use luya\base\Module;
+use luya\base\CoreModuleInterface;
 
 /**
  * LUYA Appliation trait
@@ -13,7 +14,7 @@ use luya\base\Module;
  * @property \luya\components\Mail $mail Get luya mail component
  * @author nadar
  */
-trait Application
+trait ApplicationTrait
 {
     private $_webroot = null;
     
@@ -111,7 +112,7 @@ trait Application
         $modules = [];
 
         foreach ($this->getModules() as $id => $obj) {
-            if ($obj instanceof Module && !$obj instanceof AdminModuleInterface && $id !== 'luya' && $id !== 'cms') {
+            if ($obj instanceof Module && !$obj instanceof AdminModuleInterface && !$obj instanceof CoreModuleInterface) {
                 $modules[$id] = $obj;
             }
         }
