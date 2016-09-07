@@ -260,7 +260,7 @@ class UrlManager extends \yii\web\UrlManager
         $route = $composition->removeFrom($this->removeBaseUrl($url));
         $module = $this->findModuleInRoute($route);
     
-        if ($module === false) {
+        if ($module === false || $this->menu === false) {
             return $url;
         }
     

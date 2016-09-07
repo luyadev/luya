@@ -147,4 +147,11 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
         $this->assertEquals('http://localhost/module/not/found', $urlManager->createAbsoluteUrl(['module/not/found']));
         $this->assertEquals('http://localhost/urlmodule', $urlManager->createAbsoluteUrl(['urlmodule/default/index']));
     }
+    
+    public function testContextUrlCreationButMenuDoesNotExists()
+    {
+        $urlManager = Yii::$app->urlManager;
+        $urlManager->contextNavItemId = 1;
+        $this->assertEquals('/luya/envs/dev/public_html/en/urlmodule/bar', $urlManager->createUrl(['/urlmodule/bar/index']));
+    }
 }
