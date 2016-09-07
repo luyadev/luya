@@ -242,7 +242,7 @@ class UrlManager extends \yii\web\UrlManager
      * The module to test must be an instance of `luya\base\Module`.
      * 
      * @param unknown $route
-     * @return mixed|boolean
+     * @return boolean|string
      */
     private function findModuleInRoute($route)
     {
@@ -257,11 +257,10 @@ class UrlManager extends \yii\web\UrlManager
     
     private function urlReplaceModule($url, $navItemId, Composition $composition)
     {
-        $route = $this->removeBaseUrl($url);
-        $route = $composition->removeFrom($route);
+        $route = $composition->removeFrom($this->removeBaseUrl($url));
         $module = $this->findModuleInRoute($route);
     
-        if (!$module) {
+        if ($module === false) {
             return $url;
         }
     
@@ -279,8 +278,6 @@ class UrlManager extends \yii\web\UrlManager
             }
         }
     
-        $replaceRoute = preg_replace("/$module/", rtrim($item->link, '/'), ltrim($route, '/'), 1);
-    
-        return $replaceRoute;
+        return preg_replace("/$module/", rtrim($item->link, '/'), ltrim($route, '/'), 1);
     }
 }
