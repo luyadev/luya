@@ -36,6 +36,7 @@ use luya\web\Composition;
  */
 class LanguageSwitcher extends \luya\base\Widget
 {
+    
     public function run()
     {
         $currentLang = Yii::$app->composition['langShortCode'];
@@ -47,9 +48,8 @@ class LanguageSwitcher extends \luya\base\Widget
         
         $items = [];
         
-        
         // Loop through all languages
-        foreach (Lang::find()->asArray()->all() as $lang) {
+        foreach (Yii::$app->adminLanguage->getLanguages() as $lang) {
             // Find item of current link with the lang
             $item = Yii::$app->menu->find()->where(['nav_id' => $current->navId])->lang($lang['short_code'])->with('hidden')->one();
         
@@ -85,7 +85,7 @@ class LanguageSwitcher extends \luya\base\Widget
         
         return $this->render('index', [
             'items' => $items,
-            'currentLanguage' => Lang::find()->where(['short_code' => $currentLang])->asArray()->one(),
+            'currentLanguage' => Yii::$app->adminLanguage->getLanguageByShortCode($currentLang),
         ]);
     }
 }

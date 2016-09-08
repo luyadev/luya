@@ -73,4 +73,9 @@ class AdminLanguage extends Component
     
         return $this->_languages;
     }
+    
+    public function getLanguageByShortCode($shortCode)
+    {
+        return isset($this->getLanguages()[$shortCode]) ? $this->getLanguages()[$shortCode] : false;
+    }
 }

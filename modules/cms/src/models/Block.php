@@ -112,9 +112,17 @@ class Block extends NgRestModel
         return $this->class;
     }
     
+    public static $blocks = [];
+    
     public static function objectId($blockId, $id, $context, $pageObject = null)
     {
-        $block = self::find()->where(['id' => $blockId])->asArray()->one();
+        if (isset(self::$blocks[$blockId])) {
+            $block = self::$blocks[$blockId];
+        } else {
+            $block = self::find()->select(['class'])->where(['id' => $blockId])->asArray()->one();
+            static::$blocks[$blockId] = $block;
+        }
+        
         if (!$block) {
             return false;
         }
