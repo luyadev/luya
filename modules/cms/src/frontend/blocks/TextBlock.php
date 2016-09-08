@@ -3,7 +3,7 @@
 namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
-use luya\cms\helpers\TagParser;
+use luya\TagParser;
 use luya\cms\frontend\blockgroups\TextGroup;
 
 class TextBlock extends \luya\cms\base\Block
