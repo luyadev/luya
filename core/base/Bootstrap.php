@@ -98,12 +98,10 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
             // set an alias for all user modules
             Yii::setAlias('@'.$id, $module->getBasePath());
             // see if the module has a registerComponents method
-            if (method_exists($module, 'registerComponents')) {
-                foreach ($module->registerComponents() as $componentId => $definition) {
-                    if (!$app->has($componentId)) {
-                        Yii::trace('Register component ' . $componentId, __METHOD__);
-                        $app->set($componentId, $definition);
-                    }
+            foreach ($module->registerComponents() as $componentId => $definition) {
+                if (!$app->has($componentId)) {
+                    Yii::trace('Register component ' . $componentId, __METHOD__);
+                    $app->set($componentId, $definition);
                 }
             }
         }

@@ -168,7 +168,7 @@ abstract class Boot
     private function includeYii()
     {
         if (file_exists($this->_baseYiiFile)) {
-            return require_once $this->_baseYiiFile;
+            return require_once($this->_baseYiiFile);
         }
 
         throw new Exception("YiiBase file does not exits '".$this->_baseYiiFile."'.");
