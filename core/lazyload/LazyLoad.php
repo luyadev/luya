@@ -39,7 +39,7 @@ class LazyLoad extends Widget
         
         if (static::$counter == 1) {
             LazyLoadAsset::register($this->view);
-            $this->view->registerJs("$('.lazy-image').lazyLoada();", View::POS_READY);
+            $this->view->registerJs("$('.lazy-image').lazyLoad();", View::POS_READY);
         }
     }
     
