@@ -274,16 +274,9 @@ use luya\admin\Module;
         </div>
 
     </div>
-
-    <!-- activeWindow MODAL -->
-    <div ng-show="activeWindowModal" class="modal__wrapper" <?php if (!$config->inline): ?>zaa-esc="closeActiveWindow()"<?php endif; ?>>
-        <div class="modal">
-            <button class="btn waves-effect waves-light modal__close btn-floating red" type="button" ng-click="closeActiveWindow()">
-                <i class="material-icons">close</i>
-            </button>
-            <div class="modal-content" compile-html ng-bind-html="data.aw.content"></div>
-        </div>
-        <div class="modal__background"></div>
-    </div>
+    
+     <modal is-modal-hidden="activeWindowModal" <?php if (!$config->inline): ?>zaa-esc="closeActiveWindow()"<?php endif; ?>>
+        <div class="modal-content" compile-html ng-bind-html="data.aw.content"></div>
+    </modal>
 
 </div>

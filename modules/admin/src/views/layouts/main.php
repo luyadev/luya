@@ -49,7 +49,7 @@ $this->beginPage()
             </button>
             <div class="modal-content" ng-transclude></div>
         </div>
-        <div class="modal__background"></div>
+        <div class="modal__background" ng-click="isModalHidden = true" style="cursor:pointer;"></div>
     </div>
 </script>
 

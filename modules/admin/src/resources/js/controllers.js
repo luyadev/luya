@@ -249,14 +249,14 @@
 			$scope.switchTo(0, true);
 		};
 		
-		$scope.activeWindowModal = false;
+		$scope.activeWindowModal = true;
 		
 		$scope.openActiveWindow = function() {
-			$scope.activeWindowModal = true;
+			$scope.activeWindowModal = false;
 		};
 		
 		$scope.closeActiveWindow = function() {
-			$scope.activeWindowModal = false;
+			$scope.activeWindowModal = true;
 		};
 		
 		$scope.highlightId = 0;
