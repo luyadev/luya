@@ -115,7 +115,7 @@ echo Yii::$app->composition->full;
 Link syntax in CMS blocks
 ------------------------
 
-We have built some small helper commands you can use whever you are in your cms. You can also parse our own content with `cms\helpers\TagParser::convert($content)`.
+We have built some small helper commands you can use whever you are in your cms. You can also parse our own content with `luya\TagParser::convert($content)`.
 
 |Link syntax|Output|Description
 |----       |----  |---
