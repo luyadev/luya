@@ -10,7 +10,9 @@ class FileTag extends BaseTag
 {
     public function readme()
     {
-        return '**FILE TAG**';
+        return <<<EOT
+Generat a link to a provided file. For Example `file[1]` will generate a link to the file but when you want to the an alternative text `file[1](My Text)` use the example.    
+EOT;
     }
     
     public function parse($value, $sub)

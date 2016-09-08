@@ -7,6 +7,7 @@ use luya\admin\Module;
 use luya\helpers\Url;
 use yii\helpers\Json;
 use luya\admin\base\Controller;
+use luya\TagParser;
 
 /**
  * Administration Controller provides, dashboard, logout and index.
@@ -49,5 +50,10 @@ class DefaultController extends Controller
         }
 
         return '<span style="color:red;">'.Module::t('debug_state_off').'</span>';
+    }
+    
+    public function getTags()
+    {
+        return TagParser::getInstantiatedTagObjects();
     }
 }

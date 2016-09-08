@@ -15,7 +15,9 @@ class MailTag extends BaseTag
 {
     public function readme()
     {
-        return '** WIKI**';
+        return <<<EOT
+The mail Tag allows you to create E-Mail links to an adress. Example use `mail[info@luya.io]` or with an additional value info use `mail[info@luya.io](send mail)`.      
+EOT;
     }
     
     public function parse($value, $sub)

@@ -80,6 +80,16 @@ class TagParser extends Object
         return (new TagMarkdownParser())->parse(static::convert($text));
     }
     
+    public static function getInstantiatedTagObjects()
+    {
+        $context = static::getInstance();
+        foreach ($context->tags as $key => $config) {
+            $context->instantiatTag($key);
+        }
+        
+        return $context->tags;
+    }
+    
     private static function getInstance()
     {
         if (self::$_instance === null) {
@@ -99,7 +109,7 @@ class TagParser extends Object
         return isset($this->tags[$tag]);
     }
 
-    private function evalTag($tag, $context)
+    private function instantiatTag($tag)
     {
         if (!$this->hasTag($tag)) {
             throw new Exception("Wowo tag not found!");
@@ -109,6 +119,11 @@ class TagParser extends Object
             $this->tags[$tag] = Yii::createObject($this->tags[$tag]);
             Yii::trace('tag parser object generated for:'. $tag, __CLASS__);
         }
+    }
+    
+    private function evalTag($tag, $context)
+    {
+        $this->instantiatTag($tag);
         
         $value = isset($context['value']) ? $context['value'] : false;
         $sub = isset($context['sub']) ? $context['sub'] : false;

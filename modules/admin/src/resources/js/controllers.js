@@ -675,14 +675,21 @@
 		
 		$scope.sidePanelUserMenu = false;
 		
+		$scope.sidePanelHelp = false;
+		
+		$scope.toggleHelpPanel = function() {
+			$scope.sidePanelHelp = !$scope.sidePanelHelp;
+			$scope.toggleSidePanel();
+		};
+		
 		$scope.toggleUserPanel = function() {
 			$scope.sidePanelUserMenu = !$scope.sidePanelUserMenu;
 			$scope.toggleSidePanel();
-		}
+		};
 		
 		$scope.toggleSidePanel = function() {
 			$scope.sidePanel = !$scope.sidePanel;
-		}
+		};
 		
 	    $scope.userMenuOpen = false;
 	

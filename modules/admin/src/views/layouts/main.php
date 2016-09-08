@@ -1,6 +1,7 @@
 <?php
 use \luya\admin\Module as Admin;
 use \luya\helpers\Url;
+use yii\helpers\Markdown;
 
 $user = Yii::$app->adminuser->getIdentity();
 $this->beginPage()
@@ -376,7 +377,7 @@ $this->beginPage()
                 </ul>
 
                 <ul class="right navbar__right hide-on-small-only">
-                    <li ng-click="reload()" style="cursor: pointer;">
+                    <li ng-click="reload()" >
                         <div class="navbar__button">
                             <i class="material-icons">replay</i>
                             <p class="icon__spawn-text"><?php echo Admin::t('layout_btn_reload'); ?></p>
@@ -394,6 +395,12 @@ $this->beginPage()
                                 <p class="navbar__button__circle-usercount">{{notify.length}}</p>
                             </div>
                             <p class="icon__spawn-text"><?php echo Admin::t('layout_btn_useronline'); ?></p>
+                        </div>
+                    </li>
+                    <li ng-click="toggleHelpPanel()" >
+                        <div class="navbar__button">
+                            <i class="material-icons">help</i>
+                            <p class="icon__spawn-text"><?php echo Admin::t('layout_btn_help'); ?></p>
                         </div>
                     </li>
                     <li>
@@ -542,9 +549,30 @@ $this->beginPage()
             <p><?= $user->email; ?></p>
             <p><a href="<?php echo Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="btn red"><?php echo Admin::t('layout_btn_logout'); ?></a></p>
         </div>
+        <div ng-if="sidePanelHelp">
+            <h1>Help</h1>
+            
+             <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                  <div class="collapsible-header"><i class="material-icons">filter_drama</i>Tags</div>
+                  <div class="collapsible-body">
+                    <? foreach ($this->context->tags as $name => $object): ?>
+                    <p><h3><?= $name; ?></h3><?= Markdown::processParagraph($object->readme()); ?>
+                    <? endforeach; ?>
+                  </div>
+                </li>
+                <li>
+                  <div class="collapsible-header"><i class="material-icons">place</i>FAQ</div>
+                  <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                </li>
+                <li>
+                  <div class="collapsible-header"><i class="material-icons">whatshot</i>Support</div>
+                  <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                </li>
+              </ul>
+            
+        </div>
     </div>
-
-
 </div> <!-- /.luya-container -->
 <?php $this->endBody() ?>
 </body>

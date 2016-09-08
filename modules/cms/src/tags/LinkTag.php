@@ -10,7 +10,9 @@ class LinkTag extends BaseTag
 {
     public function readme()
     {
-        return '** README LINK **';
+        return <<<EOT
+Generate a link to a page or an internal/external url.    
+EOT;
     }
 
     public function parse($value, $sub)
