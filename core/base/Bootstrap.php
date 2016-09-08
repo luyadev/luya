@@ -12,7 +12,7 @@ use Yii;
 abstract class Bootstrap implements \yii\base\BootstrapInterface
 {
     /**
-     * @var string|array Readonly variable contains all module Objects.
+     * @var array Readonly variable contains all module Objects.
      */
     private $_modules = null;
 
@@ -67,7 +67,6 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
      * Check if a Module exists in the module list `getModules()`.
      *
      * @param string $module The name of the Module
-     *
      * @return bool
      */
     public function hasModule($module)
@@ -78,8 +77,7 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
     /**
      * Return all modules prepared by `extractModules()` method.
      *
-     * @return array An array containg all modules where the key is the module name and
-     *               the value is the Module Object `luya\base\Module`.
+     * @return array An array containg all modules where the key is the module name and the value is the Module Object `luya\base\Module`.
      */
     public function getModules()
     {
