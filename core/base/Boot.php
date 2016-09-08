@@ -2,6 +2,7 @@
 
 namespace luya\base;
 
+use Yii;
 use Exception;
 use ReflectionClass;
 use luya\web\Application as WebApplication;
@@ -145,15 +146,15 @@ abstract class Boot
             return $this->app->run();
         }
     }
-
+    
     /**
      * Returns the path to luya core files
      *
      * @return string The base path to the luya core folder.
      */
-    public static function getLuyaBasePath()
+    public function getCoreBasePath()
     {
-        $reflector = new ReflectionClass(get_called_class());
+        $reflector = new ReflectionClass(get_class($this));
         return dirname($reflector->getFileName());
     }
     
@@ -168,7 +169,9 @@ abstract class Boot
     private function includeYii()
     {
         if (file_exists($this->_baseYiiFile)) {
-            return require_once($this->_baseYiiFile);
+            $require = require_once($this->_baseYiiFile);
+            Yii::setAlias('@luya', $this->getCoreBasePath());
+            return $require;
         }
 
         throw new Exception("YiiBase file does not exits '".$this->_baseYiiFile."'.");

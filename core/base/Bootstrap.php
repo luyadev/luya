@@ -27,9 +27,6 @@ abstract class Bootstrap implements \yii\base\BootstrapInterface
         // add trace
         Yii::beginProfile('LUYA Boostrap process profiling', __METHOD__);
         
-        // set the luya base path
-        Yii::setAlias('@luya', \luya\Boot::getLuyaBasePath());
-        
         $this->extractModules($app);
         $this->beforeRun($app);
         $this->registerComponents($app);
