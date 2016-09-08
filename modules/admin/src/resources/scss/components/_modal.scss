@@ -25,9 +25,9 @@
 }
 
 .modal__close {
-    position: fixed;
-    right: 5.5%;
-    top: 5.3%;
+    position: absolute;
+    top: 4px;
+    right: 5px;
 }
 
 .modal--bottom-sheet {
