@@ -1,13 +1,13 @@
 <?php
 
-namespace luya\tags;
+namespace luya\tag\tags;
 
 use yii\helpers\Html;
-use luya\base\BaseTag;
+use luya\tag\BaseTag;
 
 class MailTag extends BaseTag
 {
-    public function getReadmeMarkdown()
+    public function readme()
     {
         return '** WIKI**';
     }

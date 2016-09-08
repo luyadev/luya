@@ -23,6 +23,10 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
         ['pattern' => 'block-ajax/<id:\d+>/<callback:[a-z0-9\-]+>', 'route' => 'cms/block/index'],
     ];
 
+    public $tags = [
+        'link' => ['class' => 'luya\cms\tags\LinkTag'],
+    ];
+    
     /**
      * @var string To handle error messages in your application put `'errorHandler' => ['errorAction' => 'cms/error/index']` in config file.
      * To replace the standard error view file with your own - configure via the cms module in your config: `'cms' => ['errorViewFile' => '@app/views/error/index.php']`

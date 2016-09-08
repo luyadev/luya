@@ -1,12 +1,11 @@
 <?php
 
-namespace luya\base;
+namespace luya;
 
 use Yii;
 use yii\base\Object;
-use luya\tags\TagInterface;
-use yii\base\InvalidConfigException;
 use luya\Exception;
+use luya\tag\TagMarkdownParser;
 
 class TagParser extends Object
 {
@@ -37,24 +36,26 @@ class TagParser extends Object
         return static::getInstance()->processText($text);
     }
     
-    public static function convertWithMarkdown($content)
+    public static function convertWithMarkdown($text)
     {
-        
+        return (new TagMarkdownParser())->parse(static::convert($text));
     }
     
-    protected $tags = [];
+    private $tags = [
+        'mail' => ['class' => 'luya\tag\tags\MailTag'],
+    ];
     
-    protected function addTag($identifier, $tagObjectConfig)
+    private function addTag($identifier, $tagObjectConfig)
     {
         $this->tags[$identifier] = $tagObjectConfig;
     }
 
-    protected function hasTag($tag)
+    private function hasTag($tag)
     {
         return isset($this->tags[$tag]);
     }
 
-    protected function evalTag($tag, $context)
+    private function evalTag($tag, $context)
     {
         if (!$this->hasTag($tag)) {
             throw new Exception("Wowo tag not found!");
@@ -72,7 +73,7 @@ class TagParser extends Object
         return $this->tags[$tag]->parse($value, $sub);
     }
 
-    protected function processText($text)
+    private function processText($text)
     {
         // verify if content is a string otherwhise just return the original provided content
         if (!is_string($text) || empty($text)) {
@@ -90,10 +91,10 @@ class TagParser extends Object
             $tag = $row['function'];
             if ($this->hasTag($tag)) {
                 $replace = $this->evalTag($tag, $row);
-                $content = preg_replace('['.preg_quote($row[0]).']mi', $replace, $text, 1);
+                $text = preg_replace('['.preg_quote($row[0]).']mi', $replace, $text, 1);
             }
         }
         
-        return $content;
+        return $text;
     }
 }

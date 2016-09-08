@@ -4,7 +4,7 @@ namespace luya\cms\frontend\blocks;
 
 use Yii;
 use luya\cms\frontend\Module;
-use luya\cms\helpers\TagParser;
+use luya\TagParser;
 
 class ImageTextBlock extends \luya\cms\base\Block
 {

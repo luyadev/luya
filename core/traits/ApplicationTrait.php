@@ -48,6 +48,17 @@ trait ApplicationTrait
     public $webrootDirectory = 'public_html';
     
     /**
+     * @var array Add tags to the TagParser class. Example
+     * 
+     * ```php
+     * 'tags' => [
+     *     'foobar' => ['class' => '\app\tags\FoobarTag'],
+     * ],
+     * ```
+     */
+    public $tags = [];
+    
+    /**
      * Add trace info to luya application trait
      */
     public function init()

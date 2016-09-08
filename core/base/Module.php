@@ -34,10 +34,12 @@ abstract class Module extends \yii\base\Module
      * 
      * ```php
      * [
-     *     'link' => \luya\cms\tags\Link::className(),
-     *     'file' => ['class' => '\luya\cms\tags\Link'],
+     *     'link' => 'luya\cms\tags\LinkTag',
+     *     'file' => ['class' => 'luya\admin\tags\FileTag'],
      * ]
      * ```
+     * 
+     * As by default the yii2 configurable object you can also pass properties to your tag object in order to configure them.
      */
     public $tags = [];
     

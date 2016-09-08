@@ -9,6 +9,13 @@
 + [Structure & Config](install-structures.md)
 + [Environment Configs](install-configs.md)
 
+### Key Concepts
+
++ [LUYA Core](concept-core.md)
++ [Tags](concept-tags.md)
++ [Composition](concept-composition.md)
++ [HTML Element](concept-elements.md)
+
 ### Application
 
 + [CMS Layouts](app-cmslayouts.md)
@@ -16,7 +23,6 @@
 + [CMS Menu](app-menu.md)
 + [CMS Blocks](app-blocks.md)
 + [CMS Block Types](app-block-types.md)
-+ [HTML Element component](app-elements.md)
 + [Storage Filters](app-filters.md)
 + [Storage Filter Effects](app-filter-effects.md)
 + [Create custom Module](app-module.md)

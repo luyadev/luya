@@ -4,7 +4,7 @@ namespace luya\cms\frontend\base;
 
 use Yii;
 use luya\web\View;
-use luya\cms\helpers\TagParser;
+use luya\TagParser;
 use luya\cms\models\NavItem;
 use yii\web\NotFoundHttpException;
 use yii\web\MethodNotAllowedHttpException;

@@ -25,6 +25,10 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      */
     public $secureLogin = false;
 
+    public $tags = [
+        'file' => ['class' => 'luya\admin\tags\FileTag'],
+    ];
+    
     public $apis = [
         'api-admin-common' => 'luya\admin\apis\CommonController',
         'api-admin-remote' => 'luya\admin\apis\RemoteController',
