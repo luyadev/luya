@@ -406,7 +406,7 @@ class StorageContainer extends Component
             
             $fileQuery = $this->getFile($fileId);
             
-            if (!$fileQuery) {
+            if (!$fileQuery || !$fileQuery->fileExists) {
                 throw new Exception("Unable to create image, cause the base file does not exist.");
             }
             
@@ -430,7 +430,6 @@ class StorageContainer extends Component
             $resolution = Storage::getImageResolution($fileSavePath);
             
             // ensure the existing of the model
-            
             $model = StorageImage::find()->where(['file_id' => $fileId, 'filter_id' => $filterId])->one();
             
             if ($model) {
