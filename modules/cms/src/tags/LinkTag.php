@@ -5,6 +5,7 @@ namespace luya\cms\tags;
 use Yii;
 use luya\tag\BaseTag;
 use yii\helpers\Html;
+use luya\helpers\Url;
 
 class LinkTag extends BaseTag
 {
@@ -40,7 +41,7 @@ EOT;
             }
         }
         
-        if (isset($sub)) {
+        if (!empty($sub)) {
             $label = $sub;
         } else {
             if ($alias) {
@@ -50,6 +51,6 @@ EOT;
             }
         }
         
-        return Html::a($label, $href, ['class' => $external ? 'link-external' : 'link-internal', 'label' => $label, 'target' => $external ? ' target="_blank"' : null]);
+        return Html::a($label, $href, ['class' => $external ? 'link-external' : 'link-internal', 'label' => $label, 'target' => $external ? '_blank' : null]);
     }
 }
