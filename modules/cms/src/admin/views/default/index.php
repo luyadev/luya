@@ -292,7 +292,7 @@
             </a>
             <?php endif; ?>
 
-            <div class="sidebar__button sidebar__button--grey sidebar__button--switch switch" ng-class="{ 'sidebar__button--active': showDrag }">
+            <div class="sidebar__button sidebar__button--grey sidebar__button--switch switch" ng-class="{ 'sidebar__button--active': liveEditStateToggler }">
                 <label>
                     <input type="checkbox" ng-model="liveEditStateToggler" ng-true-value="1" ng-false-value="0">
                     <span class="lever"></span>
