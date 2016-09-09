@@ -11,6 +11,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - `#973` **[BC BREAK]** Removed `$assets` property from **none admin modules**.
 - `#974` **[BC BREAK]** Removed `$isAdmin` property.
 - `#970` **[BC BREAK]** Deleted, renamed and rearranged LUYA core REST classes and methods.
+- `#983` Added Lazy Load Widget
 - `#979` Added option to enable markdown parsing for table blocks.
 - `#971` Added basic pagination for NgRest Apis.
 - `#965` Fixed bug where cms pages are lost while creating when selecting a container but choose a sub page not from the related container.

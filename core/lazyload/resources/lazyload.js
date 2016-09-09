@@ -62,13 +62,14 @@
                 if($image.length <= 0)
                     return false;
 
-                var docViewTop = $(window).scrollTop();
-                var docViewBottom = docViewTop + $(window).height();
+                var docViewTop = $(window).scrollTop() - 200 - settings.threshold;
+                var docViewBottom = (docViewTop + $(window).height()) + 200 + settings.threshold;
                 var elemTop = $image.offset().top;
                 var elemBottom = elemTop + $image.outerHeight();
 
                 return (
-                    elemTop >= (docViewTop - 200 - settings.threshold) && elemBottom <= (docViewBottom + 200 + settings.threshold)
+                    elemTop >= docViewTop && elemTop <= docViewBottom ||
+                    elemTop <= docViewTop && elemBottom <= docViewBottom && elemBottom >= docViewTop
                 );
             });
         };
