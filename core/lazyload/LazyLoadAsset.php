@@ -9,7 +9,7 @@ class LazyLoadAsset extends Asset
     public $sourcePath = '@luya/lazyload/resources';
     
     public $js = [
-        'lazyload.js',
+        'lazyload.min.js',
     ];
     
     public $depends = [

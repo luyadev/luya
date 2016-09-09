@@ -14,7 +14,8 @@
 
         }, options );
 
-        var scrolled = false;
+        var viewportChanged = false;
+        var touchScrolling = false;
 
         /**
          * Fill the images array and replace the images with
@@ -96,13 +97,17 @@
         loadVisibleImages();
 
         setInterval( function() {
-            if(scrolled == true) {
+            if(viewportChanged == true || touchScrolling == true) {
                 loadVisibleImages();
                 scrolled = false;
             }
         }, 250);
-        $(window).on('scroll', function() {
-            scrolled = true;
+        $(document).on('touchmove', function() {
+            touchScrolling = true;
+        });
+        $(window).on('scroll resize', function() {
+            viewportChanged = true;
+            touchScrolling = false;
         });
     };
 
