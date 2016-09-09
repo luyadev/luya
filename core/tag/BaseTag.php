@@ -19,13 +19,13 @@ abstract class BaseTag extends Object implements TagInterface
     /**
      * Get the view object to register assets in tags.
      * 
-     * @retunr \luya\web\View
+     * @return \luya\web\View
      */
     public function getView()
     {
-    	if ($this->_view === null) {
-    		$this->_view = Yii::$app->getView();
-    	}
+        if ($this->_view === null) {
+            $this->_view = Yii::$app->getView();
+        }
     	
     	return $this->_view;
     }
