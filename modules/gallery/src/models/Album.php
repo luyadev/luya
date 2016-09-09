@@ -103,7 +103,7 @@ class Album extends \luya\admin\ngrest\base\NgRestModel
     public function ngRestConfig($config)
     {
         $config->aw->load([
-            'class' => 'admin\aws\Gallery',
+            'class' => 'luya\admin\aws\Gallery',
             'refTableName' => 'gallery_album_image',
             'imageIdFieldName' => 'image_id',
             'refFieldName' => 'album_id',
