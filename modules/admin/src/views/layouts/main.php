@@ -556,9 +556,9 @@ $this->beginPage()
                 <li>
                   <div class="collapsible-header"><i class="material-icons">filter_drama</i>Tags</div>
                   <div class="collapsible-body">
-                    <? foreach ($this->context->tags as $name => $object): ?>
+                    <?php foreach ($this->context->tags as $name => $object): ?>
                     <p><h3><?= $name; ?></h3><?= Markdown::processParagraph($object->readme()); ?>
-                    <? endforeach; ?>
+                    <?php endforeach; ?>
                   </div>
                 </li>
                 <li>
