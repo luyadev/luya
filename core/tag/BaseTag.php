@@ -2,6 +2,7 @@
 
 namespace luya\tag;
 
+use Yii;
 use yii\base\Object;
 
 /**
