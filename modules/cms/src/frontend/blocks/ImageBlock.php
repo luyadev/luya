@@ -39,6 +39,7 @@ class ImageBlock extends \luya\cms\base\Block
                 ['var' => 'height', 'label' => Module::t('block_image_fixed_height'), 'type' => 'zaa-text'],
                 ['var' => 'internalLink', 'label' => Module::t('block_image_internallink_label'), 'type' => 'zaa-cms-page'],
                 ['var' => 'externalLink', 'label' => Module::t('block_image_externallink_label'), 'type' => 'zaa-text'],
+            	['var' => 'cssClass', 'label' => Module::t('block_image_cfg_css_class'), 'type' => 'zaa-text'],
             ],
         ];
     }
@@ -87,7 +88,7 @@ class ImageBlock extends \luya\cms\base\Block
                             <a class="text-teaser" href="{{ extras.link }}"{% if extras.linkIsExternal %} target="_blank"{% endif %}>
                         {% endif %}
                         
-                            <img class="img-responsive" src="{{extras.image.source}}" {% if vars.caption is not empty %}alt="{{vars.caption}}" title="{{vars.caption}}"{% endif %}{% if cfgs.width %} width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} border="0" />
+                            <img class="img-responsive {{cfgs.cssClass}}" src="{{extras.image.source}}" {% if vars.caption is not empty %}alt="{{vars.caption}}" title="{{vars.caption}}"{% endif %}{% if cfgs.width %} width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} border="0" />
                             
                         {% if extras.link %}
                             </a>

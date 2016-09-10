@@ -160,4 +160,6 @@ return [
     
     // rc1
     'block_table_enable_markdown' => 'Markdown aktivieren',
+	'block_layout_row_column_css_class' => 'CSS-KLassen für Layout Div',
+	'block_image_cfg_css_class' => 'CSS Klassen für das Bild',
 ];

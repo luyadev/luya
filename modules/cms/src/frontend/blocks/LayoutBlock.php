@@ -43,6 +43,7 @@ class LayoutBlock extends \luya\cms\base\Block
             'cfgs' => [
                 ['var' => 'leftColumnClasses', 'label' => Module::t('block_layout_left_column_css_class'), 'type' => 'zaa-text'],
                 ['var' => 'rightColumnClasses', 'label' => Module::t('block_layout_right_column_css_class'), 'type' => 'zaa-text'],
+            	['var' => 'rowDivClass', Module::t('block_layout_row_column_css_class'), 'type' => 'zaa-teyt'],
             ],
             'placeholders' => [
                 ['var' => 'left', 'label' => Module::t('block_layout_placeholders_left')],
@@ -61,7 +62,7 @@ class LayoutBlock extends \luya\cms\base\Block
 
     public function twigFrontend()
     {
-        return '<div class="row"><div class="col-md-{{ extras.leftWidth }} {{ cfgs.leftColumnClasses }}">{{ placeholders.left }}</div><div class="col-md-{{ extras.rightWidth }} {{ cfgs.rightColumnClasses }}">{{ placeholders.right }}</div></div>';
+        return '<div class="row {{cfgs.rowDivClass}}"><div class="col-md-{{ extras.leftWidth }} {{ cfgs.leftColumnClasses }}">{{ placeholders.left }}</div><div class="col-md-{{ extras.rightWidth }} {{ cfgs.rightColumnClasses }}">{{ placeholders.right }}</div></div>';
     }
 
     public function twigAdmin()

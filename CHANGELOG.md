@@ -14,6 +14,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - `#983` Added Lazy Load Widget
 - `#979` Added option to enable markdown parsing for table blocks.
 - `#971` Added basic pagination for NgRest Apis.
+- `#956` Added optional image css class and layout css class in block configurations.
 - `#965` Fixed bug where cms pages are lost while creating when selecting a container but choose a sub page not from the related container.
 - `#957` Fixed bug where cms admin container movement lost container_id reference of children elements.
 - `#963` Fixed bug where caching if block is not reseted correctly.
