@@ -33,11 +33,12 @@ class LazyLoad extends Widget
      * @var integer The height of the image, this information should be provided in order to display a placeholder.
      */
     public $height = null;
-    
-    /**
-     * @var string Additional classes for the lazy load image.
-     */
-    public $class = null;
+
+    public $onlyTags = false;
+
+    public $class = 'lazy-image';
+
+    public $additionalClass = '';
     
     /**
      * {@inheritDoc}
@@ -55,7 +56,7 @@ class LazyLoad extends Widget
         
         if (static::$counter == 1) {
             LazyLoadAsset::register($this->view);
-            $this->view->registerJs("$('.lazy-image').lazyLoad();", View::POS_READY);
+            $this->view->registerJs("$(document).ready( function() { $('.lazy-image').lazyLoad(); });", View::POS_READY);
         }
     }
     
@@ -65,8 +66,19 @@ class LazyLoad extends Widget
      */
     public function run()
     {
-        $html = Html::tag('img', '', ['class' => 'lazy-image ' . $this->class, 'data-src' => $this->src, 'data-width' => $this->width, 'data-height' => $this->height]);
-        $html.= '<noscript><img class="lazy-image '.$this->class.'" src="'.$this->src.'" /></noscript>';
-        return $html;
+        $this->class .= " " . $this->additionalClass;
+
+        if($this->onlyTags) {
+            return "class = \"$this->class\"
+                    data-src = \"$this->src\"
+                    data-width = \"$this->width\"
+                    data-height = \"$this->height\"
+                    data-as-background = \"1\"
+            ";
+        }
+        
+        $tag = Html::tag('img', '', ['class' => $this->class, 'data-src' => $this->src, 'data-width' => $this->width, 'data-height' => $this->height]);
+        $tag.= '<noscript><img class="'.$this->class.'" src="'.$this->src.'" /></noscript>';
+        return $tag;
     }
 }
