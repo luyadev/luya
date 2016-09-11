@@ -19,14 +19,30 @@ use luya\web\View;
  */
 class LazyLoad extends Widget
 {
+	/**
+	 * @var string The path to the image you want to lazy load.
+	 */
     public $src = null;
     
+    /**
+     * @var integer The width of the image, this information should be provided in order to display a placeholder.
+     */
     public $width = null;
     
+    /**
+     * @var integer The height of the image, this information should be provided in order to display a placeholder.
+     */
     public $height = null;
     
-    public $class = 'lazy-image image';
+    /**
+     * @var string Additional classes for the lazy load image.
+     */
+    public $class = null;
     
+    /**
+     * {@inheritDoc}
+     * @see \yii\base\Object::init()
+     */
     public function init()
     {
         parent::init();
@@ -43,10 +59,14 @@ class LazyLoad extends Widget
         }
     }
     
+    /**
+     * {@inheritDoc}
+     * @see \yii\base\Widget::run()
+     */
     public function run()
     {
-        $tag = Html::tag('img', '', ['class' => $this->class, 'data-src' => $this->src, 'data-width' => $this->width, 'data-height' => $this->height]);
-        $tag.= '<noscript><img class="'.$this->class.'" src="'.$this->src.'" /></noscript>';
-        return $tag;
+        $html = Html::tag('img', '', ['class' => 'lazy-image ' . $this->class, 'data-src' => $this->src, 'data-width' => $this->width, 'data-height' => $this->height]);
+        $html.= '<noscript><img class="lazy-image '.$this->class.'" src="'.$this->src.'" /></noscript>';
+        return $html;
     }
 }
