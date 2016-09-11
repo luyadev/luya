@@ -33,6 +33,9 @@ class TextBlock extends \luya\cms\base\Block
                     ],
                 ],
             ],
+        	'cfgs' => [
+        		['var' => 'cssClass', 'label' => Module::t('block_cfg_additonal_css_class'), 'type' => 'zaa-text'],
+        	]
         ];
     }
 
@@ -56,7 +59,7 @@ class TextBlock extends \luya\cms\base\Block
 
     public function twigFrontend()
     {
-        return '{% if vars.content is not empty and vars.textType == 1 %}{{ extras.text }}{% elseif vars.content is not empty and vars.textType == 0 %}<p>{{ extras.text|nl2br }}</p>{% endif %}';
+        return '{% if vars.content is not empty and vars.textType == 1 %}{{ extras.text }}{% elseif vars.content is not empty and vars.textType == 0 %}<p{% if cfgs.cssClass is not empty %} class="{{cfgs.cssClass}}"{% endif %}>{{ extras.text|nl2br }}</p>{% endif %}';
     }
 
     public function twigAdmin()

@@ -35,6 +35,9 @@ class TitleBlock extends \luya\cms\base\Block
                     ],
                 ],
             ],
+        	'cfgs' => [
+        		['var' => 'cssClass', 'label' => Module::t('block_cfg_additonal_css_class'), 'type' => 'zaa-text'],
+        	]
         ];
     }
 
@@ -47,7 +50,7 @@ class TitleBlock extends \luya\cms\base\Block
 
     public function twigFrontend()
     {
-        return '{% if vars.content is not empty %}<{{ extras.headingType }}>{{ vars.content }}</{{ extras.headingType }}>{% endif %}';
+        return '{% if vars.content is not empty %}<{{ extras.headingType }}{% if cfgs.cssClass is not empty %} class="{{cfgs.cssClass}}"{% endif %}>{{ vars.content }}</{{ extras.headingType }}>{% endif %}';
     }
 
     public function twigAdmin()
