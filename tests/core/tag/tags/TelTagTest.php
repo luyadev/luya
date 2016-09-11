@@ -3,7 +3,7 @@
 namespace luyatests\core\tag\tags;
 
 use luyatests\LuyaWebTestCase;
-use luya\tags\tag\TelTag;
+use luya\tag\tags\TelTag;
 
 class TelTagTest extends LuyaWebTestCase
 {
