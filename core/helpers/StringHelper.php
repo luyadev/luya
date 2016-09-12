@@ -40,15 +40,15 @@ class StringHelper extends \yii\helpers\StringHelper
      * StringHelper::replaceFirst('abc', '123', 'abc abc abc'); // returns "123 abc abc"
      * ```
      *
-     * @param string $from
-     * @param string $to
-     * @param string $subject
+     * @param string $search The string you want to find
+     * @param string $replace The string you want to replace the first occurrence with.
+     * @param string $subject The string you want to look up to replace the first element.
      * @return mixed
      * @since 1.0.0-rc1
      */
-    public static function replaceFirst($from, $to, $subject)
+    public static function replaceFirst($search, $replace, $subject)
     {
-        return preg_replace('/'.preg_quote($from, '/').'/', $to, $subject, 1);
+        return preg_replace('/'.preg_quote($search, '/').'/', $replace, $subject, 1);
     }
     
     /**

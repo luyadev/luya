@@ -27,7 +27,7 @@ class LinkTag extends BaseTag
     public function parse($value, $sub)
     {
         if (substr($value, 0, 2) == '//') {
-            $value = StringHelper::replaceFirst('//', Url::base(true) . '/', $value, $value);
+            $value = StringHelper::replaceFirst('//', Url::base(true) . '/', $value);
             $external = false;
         } else {
             $external = true;
