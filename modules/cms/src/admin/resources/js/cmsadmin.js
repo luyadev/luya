@@ -1387,6 +1387,8 @@
 		
 		$scope.blocksData = ServiceBlocksData.data;
 		
+		$scope.blocksDataRestore = angular.copy($scope.blocksData);
+		
 		$scope.$on('service:BlocksData', function(event, data) {
 			$scope.blocksData = data;
 		});
@@ -1430,6 +1432,19 @@
 		};
 		
 		$scope.searchQuery = '';
+		
+		$scope.searchIsDirty = false;
+		
+		$scope.$watch('searchQuery', function(n, o) {
+			if (n !== '') {
+				$scope.searchIsDirty = true;
+				angular.forEach($scope.blocksData, function(value, key) {
+					value.group.toggle_open = 1
+				});
+			} else if($scope.searchIsDirty) {
+				$scope.blocksData = angular.copy($scope.blocksDataRestore);
+			}
+		})
 		
 		$scope.onStart = function() {
 			$scope.$apply(function() {
