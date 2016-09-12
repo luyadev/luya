@@ -49,6 +49,16 @@ class SetupController extends \luya\console\Command
     public $interactive = true;
     
     /**
+     * @var string The name of the default language e.g. English
+     */
+    public $langName = null;
+    
+    /**
+     * @var string The short code of the language e.g. en
+     */
+    public $langShortCode = null;
+    
+    /**
      * {@inheritDoc}
      * @see \luya\console\Command::options()
      */
@@ -75,21 +85,34 @@ class SetupController extends \luya\console\Command
         }
     
         if (empty($this->email)) {
-            $this->email = $this->prompt('User E-Mail:');
+            $this->email = $this->prompt('User E-Mail:', ['required' => true]);
         }
     
         if (empty($this->password)) {
-            $this->password = $this->prompt('User Password:');
+            $this->password = $this->prompt('User Password:', ['required' => true]);
         }
     
         if (empty($this->firstname)) {
-            $this->firstname = $this->prompt('Firstname:');
+            $this->firstname = $this->prompt('Firstname:', ['required' => true]);
         }
     
         if (empty($this->lastname)) {
-            $this->lastname = $this->prompt('Lastname:');
+            $this->lastname = $this->prompt('Lastname:', ['required' => true]);
         }
     
+        if (empty($this->langName)) {
+            $this->langName = $this->prompt('Standard language:', ['required' => true, 'default' => 'English']);
+        }
+        
+        if (empty($this->langShortCode)) {
+            $this->langShortCode = $this->prompt('Short-Code of the Standard language:', ['required' => true, 'default' => 'en', 'validator' => function($input, &$error) {
+                if (strlen($input) !== 2) {
+                    $error = 'The Short-Code must be 2 chars length only. Examples: de, en, fr, ru';
+                    return false;
+                }
+            }]);
+        }
+        
         if ($this->interactive) {
             if ($this->confirm("Confirm your login details in order to proceed with the Setup. E-Mail: {$this->email} Password: {$this->password} - Are those informations correct?") !== true) {
                 return $this->outputError('Abort by user.');
@@ -133,8 +156,8 @@ class SetupController extends \luya\console\Command
         }
     
         $this->insert('admin_lang', [
-            'name' => 'English',
-            'short_code' => 'en',
+            'name' => $this->langName,
+            'short_code' => $this->langShortCode,
             'is_default' => 1,
         ]);
     
@@ -145,6 +168,7 @@ class SetupController extends \luya\console\Command
             $this->insert('cms_nav_item_page', ['layout_id' => 1, 'create_user_id' => 1, 'timestamp_create' => time(), 'version_alias' => 'Initial', 'nav_item_id' => 1]);
         }
     
+        Config::set('rc1_block_classes_renameing', true);
         Config::set('setup_command_timestamp', time());
     
         return $this->outputSuccess("Setup is finished. You can now login into the Administration-Area with the E-Mail '{$this->email}'.");
