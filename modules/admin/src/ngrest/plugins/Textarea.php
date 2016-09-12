@@ -2,8 +2,8 @@
 
 namespace luya\admin\ngrest\plugins;
 
-use cebe\markdown\GithubMarkdown;
 use luya\admin\ngrest\base\Plugin;
+use luya\TagParser;
 
 /**
  * Create a textarea input for a given field.
@@ -64,23 +64,6 @@ class Textarea extends Plugin
         return $this->renderCreate($id, $ngModel);
     }
     
-    private $_markdownParser = null;
-    
-    /**
-     * Get markdown parser instance
-     *
-     * @return \cebe\markdown\GithubMarkdown
-     */
-    public function getMarkdownParser()
-    {
-        if ($this->_markdownParser === null) {
-            $this->_markdownParser = new GithubMarkdown();
-            $this->_markdownParser->enableNewlines = true;
-        }
-        
-        return $this->_markdownParser;
-    }
-    
     /**
      * {@inheritDoc}
      * @see \admin\ngrest\base\Plugin::onAfterFind()
@@ -92,7 +75,7 @@ class Textarea extends Plugin
         }
         
         if ($this->markdown) {
-            $event->sender->setAttribute($this->name, $this->markdownParser->parse($event->sender->getAttribute($this->name)));
+            $event->sender->setAttribute($this->name, TagParser::convertWithMarkdown($event->sender->getAttribute($this->name)));
         }
     }
 }

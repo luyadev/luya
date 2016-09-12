@@ -1,6 +1,6 @@
 <?php
-use \luya\admin\Module as Admin;
-use \luya\helpers\Url;
+use luya\admin\Module as Admin;
+use luya\helpers\Url;
 use yii\helpers\Markdown;
 
 $user = Yii::$app->adminuser->getIdentity();
