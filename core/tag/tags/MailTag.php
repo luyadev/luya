@@ -13,6 +13,11 @@ use luya\tag\BaseTag;
  */
 class MailTag extends BaseTag
 {
+    public function example()
+    {
+        return 'mail[info@luya.io](Mail us!)'; 
+    }
+    
     public function readme()
     {
         return <<<EOT

@@ -8,6 +8,11 @@ use yii\helpers\Html;
 
 class FileTag extends BaseTag
 {
+    public function example()
+    {
+        return 'file[123](Open Me!)';    
+    }
+    
     public function readme()
     {
         return <<<EOT

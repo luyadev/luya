@@ -8,6 +8,11 @@ use yii\helpers\Html;
 
 class TelTag extends BaseTag
 {
+    public function example()
+    {
+        return 'tel[+41 123 45 65](Call us!)';    
+    }
+    
     public function readme()
     {
         return 'Generate a tel link which is commonly used on mobile websites in order create a click to call link. tel[+41 061 123 123] or with with a name instead of the phone number tel[+41 061 123 123](call us now!).';

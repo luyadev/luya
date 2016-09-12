@@ -43,6 +43,7 @@ class TagParser extends Object
     private $tags = [
         'mail' => ['class' => 'luya\tag\tags\MailTag'],
         'tel' => ['class' => 'luya\tag\tags\TelTag'],
+        'link' => ['class' => 'luya\tag\tags\LinkTag'],
     ];
     
     private static $_instance = null;

@@ -399,7 +399,7 @@ $this->beginPage()
                     </li>
                     <li ng-click="toggleHelpPanel()" >
                         <div class="navbar__button">
-                            <i class="material-icons">help</i>
+                            <i class="material-icons">help_outline</i>
                             <p class="icon__spawn-text"><?php echo Admin::t('layout_btn_help'); ?></p>
                         </div>
                     </li>
@@ -550,7 +550,7 @@ $this->beginPage()
             <p><a href="<?php echo Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="btn red"><?php echo Admin::t('layout_btn_logout'); ?></a></p>
         </div>
         <div ng-if="sidePanelHelp">
-            <h1>Help</h1>
+            <h4>Informations &amp; Help</h4>
             
              <ul class="collapsible" data-collapsible="accordion" ng-init="tagsOpen=false">
                 <li>
@@ -558,11 +558,11 @@ $this->beginPage()
                   <div class="collapsible-body" ng-show="tagsOpen" style="display:block;">
                     <ul class="collection with-header">
                     <?php foreach ($this->context->tags as $name => $object): ?>
-                        <li class="collection-item" ng-mouseenter="isHover['<?=$name;?>']=true" ng-mouseleave="isHover['<?=$name;?>']=false">
-                            <div ng-show="isHover['<?=$name;?>']" style="position:absolute; padding:20px; position:fixed">
+                        <li class="collection-item" click-paste-pusher="<?= $object->example(); ?>" style="cursor: pointer;" ng-mouseenter="isHover['<?=$name;?>']=true" ng-mouseleave="isHover['<?=$name;?>']=false">
+                            <div ng-show="isHover['<?=$name;?>']" style="position:absolute;  right:20%; width:400px; padding:10px; position:fixed; background-color:black; color:white; z-index:9999999;">
                                 <?= Markdown::process($object->readme()); ?>
                             </div>
-                            <div><?= $name; ?><a click-paste-pusher="<?= $name; ?>[value](sub)" style="cursor: pointer;" class="secondary-content"><i class="material-icons">content_paste</i></a></div>
+                            <div><?= $name; ?><a class="secondary-content"><i class="material-icons">content_paste</i></a></div>
                         </li>
                     <?php endforeach; ?>
                     </ul>
