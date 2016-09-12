@@ -560,6 +560,8 @@ $this->beginPage()
                     <?php foreach ($this->context->tags as $name => $object): ?>
                         <li class="collection-item" click-paste-pusher="<?= $object->example(); ?>" style="cursor: pointer;" ng-mouseenter="isHover['<?=$name;?>']=true" ng-mouseleave="isHover['<?=$name;?>']=false">
                             <div ng-show="isHover['<?=$name;?>']" style="position:absolute;  right:20%; width:400px; padding:10px; position:fixed; background-color:black; color:white; z-index:9999999;">
+                                <h1><?= $name; ?></h1>
+                                <h2><i><?= $object->example(); ?></i></h2>
                                 <?= Markdown::process($object->readme()); ?>
                             </div>
                             <div><?= $name; ?><a class="secondary-content"><i class="material-icons">content_paste</i></a></div>
@@ -569,12 +571,8 @@ $this->beginPage()
                   </div>
                 </li>
                 <li>
-                  <div class="collapsible-header"><i class="material-icons">place</i>FAQ</div>
-                  <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-                </li>
-                <li>
-                  <div class="collapsible-header"><i class="material-icons">whatshot</i>Support</div>
-                  <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                  <div class="collapsible-header" ng-click="supportOpen=!supportOpen"><i class="material-icons">whatshot</i>Support</div>
+                  <div class="collapsible-body" ng-show="supportOpen" style="display:block;"><p>If you have any questions about your product please contact the webmaster.</p></div>
                 </li>
               </ul>
             
