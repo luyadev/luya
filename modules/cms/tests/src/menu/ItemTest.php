@@ -3,7 +3,6 @@
 namespace cmstests\src\menu;
 
 use Yii;
-use luya\admin\models\User;
 use cmstests\CmsFrontendTestCase;
 use luya\cms\menu\Query;
 
@@ -23,8 +22,6 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals("homepage", $obj->alias);
         $this->assertNotNull($obj->dateCreated);
         $this->assertEquals(0, $obj->dateUpdated);
-        //$user->assertTrue($obj->userCreated instanceof User);
-        //$user->assertTrue($obj->userUpdated instanceof User);
         $this->assertEquals("/luya/envs/dev/public_html/", $obj->link);
         $this->assertEquals(true, $obj->isActive);
         $this->assertEquals(1, $obj->depth);
