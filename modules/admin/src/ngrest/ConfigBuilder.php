@@ -8,13 +8,13 @@ use luya\helpers\ArrayHelper;
 
 /**
  * Config Builder class to make the NgRest Configs
- * 
+ *
  * @property \luya\admin\ngrest\ConfigBuilder $list Set the pointer to list and return the ConfigBuilder for this pointer.
  * @property \luya\admin\ngrest\ConfigBuilder $create Set the pointer to create and return the ConfigBuilder for this pointer.
  * @property \luya\admin\ngrest\ConfigBuilder $update Set the pointer to update and return the ConfigBuilder for this pointer.
  * @property \luya\admin\ngrest\ConfigBuilder $aw Set the pointer to aw and return the ConfigBuilder for this pointer.
  * @property boolean $delete Define whether the delete button is availabe or not
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class ConfigBuilder implements ConfigBuilderInterface
@@ -29,7 +29,7 @@ class ConfigBuilder implements ConfigBuilderInterface
     
     /**
      * Maig setter function, defines whether a pointer exists or not, if not existing it will be created.
-     * 
+     *
      * @param string $key
      * @param mixed $value
      */
@@ -63,17 +63,17 @@ class ConfigBuilder implements ConfigBuilderInterface
 
     /**
      * Assign a Plugin to a pointer['field']. Example of using plugin
-     * 
+     *
      * ```php
      * ->create->field('mytext')->textarea(['placeholer' => 'example']);
      * ```
-     * 
+     *
      * this will call
-     * 
+     *
      * ```php
      * $this->addPlugin('textarea', ['placeholder' => 'example']);
      * ```
-     * 
+     *
      * @param unknown $name
      * @param unknown $args
      * @return \luya\admin\ngrest\ConfigBuilder
@@ -91,7 +91,7 @@ class ConfigBuilder implements ConfigBuilderInterface
     
     /**
      * Use the admin ngrest plugin base namespace as default
-     * 
+     *
      * @param unknown $name
      * @return string
      * @since 1.0.0-beta8
@@ -103,7 +103,7 @@ class ConfigBuilder implements ConfigBuilderInterface
     
     /**
      * Add a Plugin to the current field pointer plugins array.
-     * 
+     *
      * @todo rename to addType
      * @param string $name The name of the ngrest\plugin
      * @param array $args
@@ -120,7 +120,7 @@ class ConfigBuilder implements ConfigBuilderInterface
 
     /**
      * Define a field.
-     * 
+     *
      * @param string $name
      * @param string $alias
      * @param boolean $i18n
@@ -143,7 +143,7 @@ class ConfigBuilder implements ConfigBuilderInterface
 
     /**
      * Define an extra field.
-     * 
+     *
      * @param string $name
      * @param string $alias
      * @param boolean $i18n
@@ -181,7 +181,7 @@ class ConfigBuilder implements ConfigBuilderInterface
      * - a string: representing the class name of the object to be created
      * - a configuration array: the array must contain a `class` element which is treated as the object class,
      *   and the rest of the name-value pairs will be used to initialize the corresponding object properties
-     *   
+     *
      * @since 1.0.0-beta4
      */
     public function load($objectType)
@@ -204,7 +204,7 @@ class ConfigBuilder implements ConfigBuilderInterface
     /**
      * Copy from a pointer into another with optional removal of fields, the copie will applied
      * to the current active pointer.
-     * 
+     *
      * @param string $key The pointer to copy from
      * @param array $removeFields
      */
@@ -222,7 +222,7 @@ class ConfigBuilder implements ConfigBuilderInterface
 
     /**
      * Return the NgRest Config
-     * 
+     *
      * {@inheritDoc}
      * @see \luya\admin\ngrest\interfaces\ConfigBuilder::getConfig()
      */

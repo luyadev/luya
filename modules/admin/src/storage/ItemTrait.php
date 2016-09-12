@@ -13,7 +13,7 @@ trait ItemTrait
 
     /**
      * Method to construct/build the item from Iterator or Query class.
-     * 
+     *
      * @param array $itemArray The array data
      * @return object Returns the specific item object (file, folder, image).
      */
@@ -25,7 +25,7 @@ trait ItemTrait
     /**
      * Convert the current Object methods to an array whether the key is the property and value the method
      * response for the given key.
-     * 
+     *
      * @return array
      */
     abstract public function toArray();

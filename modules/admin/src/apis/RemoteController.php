@@ -9,7 +9,7 @@ use luya\rest\Controller;
 
 /**
  * Remove API, allows to collect system data with a valid $token.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class RemoteController extends Controller

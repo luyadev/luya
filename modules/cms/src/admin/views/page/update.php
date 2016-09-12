@@ -1,5 +1,6 @@
 <?php
 use luya\cms\admin\Module;
+
 ?>
 <script type="text/ng-template" id="recursion.html">
 <div class="accordion__header" ng-mouseenter="mouseEnter()" ng-click="toggleOpen()"><i class="material-icons">expand_more</i> {{placeholder.label}}</div>

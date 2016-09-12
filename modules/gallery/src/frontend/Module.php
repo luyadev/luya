@@ -6,7 +6,7 @@ use luya\base\CoreModuleInterface;
 
 /**
  * Gallery Module
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Module extends \luya\base\Module implements CoreModuleInterface

@@ -33,9 +33,9 @@ class TextBlock extends \luya\cms\base\Block
                     ],
                 ],
             ],
-        	'cfgs' => [
-        		['var' => 'cssClass', 'label' => Module::t('block_cfg_additonal_css_class'), 'type' => 'zaa-text'],
-        	]
+            'cfgs' => [
+                ['var' => 'cssClass', 'label' => Module::t('block_cfg_additonal_css_class'), 'type' => 'zaa-text'],
+            ]
         ];
     }
 

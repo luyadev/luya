@@ -31,23 +31,23 @@ class DefaultController extends \luya\web\Controller
 
     /**
      * Get the category Model for a specific ID.
-     * 
+     *
      * Inside the Cat Object you can then retrieve its articles:
-     * 
+     *
      * ```php
      * foreach ($model->articles as $item) {
-     * 
+     *
      * }
      * ```
-     * 
+     *
      * or customize the where query:
-     * 
+     *
      * ```php
      * foreach ($model->getArticles()->where(['timestamp', time())->all() as $item) {
-     * 
+     *
      * }
      * ```
-     * 
+     *
      * @param integer $categoryId
      * @return \yii\web\Response|string
      */
@@ -71,7 +71,7 @@ class DefaultController extends \luya\web\Controller
     
     /**
      * Detail Action of Article
-     * 
+     *
      * @param integer $id
      * @param string $title
      * @return \yii\web\Response|string

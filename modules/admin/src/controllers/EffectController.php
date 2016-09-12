@@ -6,7 +6,7 @@ use luya\admin\ngrest\base\Controller;
 
 /**
  * NgRest Effect Controller.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class EffectController extends Controller

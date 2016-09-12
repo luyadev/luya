@@ -12,7 +12,7 @@ class ExportController extends \luya\console\Command
     /**
      * Create a zip file with database dump and storage files/images and stores the zip in
      * the runtime folder.
-     * 
+     *
      * @return void
      */
     public function actionIndex()

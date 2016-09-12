@@ -1,5 +1,6 @@
 <?php
 use luya\admin\ngrest\aw\CallbackFormWidget;
+
 ?>
 
 <h1>Maps</h1>
@@ -37,7 +38,7 @@ use luya\admin\ngrest\aw\CallbackFormWidget;
 <div id="map" style="height:800px; width:100%;"></div>
 <script>
 function initMap() {
-    
+
   var uluru = {lat: -25.363, lng: 131.044};
 
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -75,7 +76,7 @@ function initMap() {
     map: map,
     title: 'Uluru (Ayers Rock)'
   });
-  
+
   marker.addListener('click', function() {
     infowindow.open(map, marker);
   });

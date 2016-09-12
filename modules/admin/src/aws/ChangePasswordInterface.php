@@ -4,7 +4,7 @@ namespace luya\admin\aws;
 
 /**
  * Change Password Active Window Interface
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 interface ChangePasswordInterface

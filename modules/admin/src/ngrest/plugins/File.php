@@ -6,13 +6,13 @@ use luya\admin\ngrest\base\Plugin;
 
 /**
  * Single File-Upload
- * 
+ *
  * @author nadar
  */
 class File extends Plugin
 {
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\ngrest\base\Plugin::renderList()
      */
@@ -22,7 +22,7 @@ class File extends Plugin
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\ngrest\base\Plugin::renderCreate()
      */
@@ -32,7 +32,7 @@ class File extends Plugin
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\ngrest\base\Plugin::renderUpdate()
      */

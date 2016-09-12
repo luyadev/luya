@@ -9,7 +9,7 @@ use luya\base\CoreModuleInterface;
 
 /**
  * Cms Module.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Module extends \luya\base\Module implements BootstrapInterface, CoreModuleInterface
@@ -52,7 +52,7 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
     public $enableTagParsing = true;
     
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \luya\base\Module::registerComponents()
      */

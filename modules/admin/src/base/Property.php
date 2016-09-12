@@ -7,7 +7,7 @@ use yii\base\Component;
 
 /**
  * Abstract Page Property Class.
- * 
+ *
  * @todo remove defaultValue change to initvalue like in blocks!
  *
  * @author nadar

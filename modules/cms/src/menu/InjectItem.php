@@ -7,14 +7,14 @@ use luya\Exception;
 
 /**
  * An item inject gives a module the possibility to add items into the menu Container.
- * 
+ *
  * The most important propertie of the injectItem clas is the `childOf` definition, this
  * is where you have to define who is the parent *nav_item.id*.
- * 
+ *
  * An item inject contain be done during the eventAfterLoad event to attach at the right
  * initializer moment of the item, but could be done any time. To inject an item use the
  * `injectItem` method on the menu Container like below:
- * 
+ *
  * ```
  * Yii::$app->menu->injectItem(new InjectItem([
  *     'childOf' => 123,
@@ -22,19 +22,19 @@ use luya\Exception;
  *     'alias' => 'this-is-the-inject-alias',
  * ]));
  * ```
- * 
+ *
  * To attach the item at right moment you can bootstrap your module and use the `eventAfterLoad`
  * event of the menu component:
- * 
+ *
  * ```
  * Yii::$app->menu->on(Container::MENU_AFTER_LOAD, function($event) {
- * 
+ *
  *     $newItem = new InjectItem([
  *         'childOf' => 123,
  *         'title' => 'Inject Title',
  *         'alias' => 'inject-title',
  *     ]);
- * 
+ *
  *     $event->sender->injectItem($newItem);
  * });
  * ```

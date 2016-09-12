@@ -12,15 +12,15 @@ use luya\base\CoreModuleInterface;
 
 /**
  * FrontendGroup Module.
- * 
+ *
  * This Module must be bootstraped in your config in order to protect the menu items.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Module extends \luya\base\Module implements BootstrapInterface, CoreModuleInterface
 {
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \yii\base\BootstrapInterface::bootstrap()
      */
@@ -34,7 +34,7 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
 
     /**
      * Hide the elements which are protected by the propertie.
-     * 
+     *
      * @param \luya\cms\Menu::MENU_ITEM_EVENT $event
      */
     public function hideElements($event)

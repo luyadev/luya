@@ -1,6 +1,7 @@
 <?php
 use luya\admin\ngrest\render\RenderCrud;
 use luya\admin\Module;
+
 ?>
 <script>
     activeWindowCallbackUrl = '<?php echo $activeWindowCallbackUrl;?>';

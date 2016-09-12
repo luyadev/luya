@@ -6,7 +6,7 @@ use luya\admin\ngrest\base\Plugin;
 
 /**
  * Single Image-Upload
- * 
+ *
  * @author nadar
  */
 class Image extends Plugin
@@ -14,7 +14,7 @@ class Image extends Plugin
     public $noFilters = false;
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\ngrest\base\Plugin::renderList()
      */
@@ -24,7 +24,7 @@ class Image extends Plugin
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\ngrest\base\Plugin::renderCreate()
      */
@@ -34,7 +34,7 @@ class Image extends Plugin
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\ngrest\base\Plugin::renderUpdate()
      */

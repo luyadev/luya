@@ -6,7 +6,7 @@ use luya\admin\ngrest\ConfigInterface;
 
 /**
  * NgRest base rendere which is used in all ngrest render classes.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 abstract class Render

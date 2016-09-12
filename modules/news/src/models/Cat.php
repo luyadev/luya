@@ -6,7 +6,7 @@ use luya\news\admin\Module;
 
 /**
  * News Category Model
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Cat extends \luya\admin\ngrest\base\NgRestModel

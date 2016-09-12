@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 /**
  * ActiveWindow ActiveField Configration
- * 
+ *
  * @since 1.0.0-beta7
  * @author Basil Sutert <basil@nadar.io>
  */
@@ -43,7 +43,7 @@ class ActiveField extends Object
     /**
      * Define a label for this field. If false, no label will be used, if a label is provided from the configration
      * object (form) this will be overritten by this method.
-     * 
+     *
      * @param string $label The label of the element
      * @return \admin\ngrest\aw\ActiveField
      */
@@ -59,7 +59,7 @@ class ActiveField extends Object
     
     /**
      * Text input field
-     * 
+     *
      * @param array $options Optional data for the text input array.
      * @return \admin\ngrest\aw\ActiveField
      */
@@ -77,7 +77,7 @@ class ActiveField extends Object
     
     /**
      * Create text area
-     * 
+     *
      * @param array $options Optional data for the textarea input
      * @return \admin\ngrest\aw\ActiveField
      */
@@ -95,7 +95,7 @@ class ActiveField extends Object
     
     /**
      * Render the template based on input values of $parts.
-     * 
+     *
      * @return string
      */
     private function render()
@@ -126,7 +126,7 @@ class ActiveField extends Object
     /**
      * When the element is directly forced to echo its output this method is called and the template will be
      * render with the `render()` method.
-     * 
+     *
      * @return string
      */
     public function __toString()

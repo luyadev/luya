@@ -7,7 +7,7 @@ use luya\admin\models\UserOnline;
 
 /**
  * Admin-User component contains informations about the identitiy of the Admin-User
- * 
+ *
  * @author nadar
  */
 class AdminUser extends \yii\web\User
@@ -35,7 +35,7 @@ class AdminUser extends \yii\web\User
     
     /**
      * Perform a can api match request for the logged in user if user is logged in, returns false otherwhise.
-     * 
+     *
      * @param string $apiEndpoint
      * @param string $typeVerification
      * @return boolean
@@ -47,7 +47,7 @@ class AdminUser extends \yii\web\User
 
     /**
      * Perform a can route auth request match for the logged in user if user is logged in, returns false otherwhise.
-     * 
+     *
      * @param string $route
      * @return booelan
      */

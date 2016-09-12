@@ -15,9 +15,9 @@ use luya\rest\ActiveController;
  * change behaviours and overwrite the indexAction.
  *
  * usage like described in the yii2 guide.
- * 
- * 
- * 
+ *
+ *
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class RestActiveController extends ActiveController implements UserBehaviorInterface

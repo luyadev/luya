@@ -11,7 +11,7 @@ use yii\web\NotFoundHttpException;
 
 /**
  * File Download Controller
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class FileController extends \luya\web\Controller

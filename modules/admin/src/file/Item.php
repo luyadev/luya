@@ -9,7 +9,7 @@ use luya\admin\helpers\I18n;
 
 /**
  * Storage File Item
- * 
+ *
  * @property string $caption The file caption
  * @property array $captionArray Contains the captions for all languages
  * @property integer $id The File id
@@ -30,7 +30,7 @@ use luya\admin\helpers\I18n;
  * @property string $serverSource The path to the file on the filesystem of the server.
  * @property boolean $isHidden Whether the file is marked as hidden or not.
  * @property boolean $isDeleted Return whether the file has been removed from the filesytem or not.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Item extends \yii\base\Object
@@ -69,7 +69,7 @@ class Item extends \yii\base\Object
     
     /**
      * Get the array with all captions from the filemanager global "captions" definition for all provided languages
-     * 
+     *
      * @return array
      */
     public function getCaptionArray()
@@ -79,7 +79,7 @@ class Item extends \yii\base\Object
     
     /**
      * Get the ID of the file (File-Id) and has nothing incommon with the image id.
-     * 
+     *
      * @return integer
      */
     public function getId()
@@ -89,7 +89,7 @@ class Item extends \yii\base\Object
     
     /**
      * Get the Id of the folder fhe file is stored in.
-     * 
+     *
      * @return integer
      */
     public function getFolderId()
@@ -99,7 +99,7 @@ class Item extends \yii\base\Object
     
     /**
      * Get the Folder Object where the file is stored in.
-     * 
+     *
      * @return \admin\folder\Item The folder object
      */
     public function getFolder()
@@ -109,9 +109,9 @@ class Item extends \yii\base\Object
     
     /**
      * Get the original file name of the file.
-     * 
+     *
      * This is the file name the user has uploaded the file into the administration area. Including the file extensions
-     * 
+     *
      * @return string The original file name
      */
     public function getName()
@@ -121,10 +121,10 @@ class Item extends \yii\base\Object
     
     /**
      * Get the new defined storage file Name.
-     * 
+     *
      *  This is also known als *name_new_compound* from the admin_storage_file table. This is the original file name but
      *  without any bad letters or sign. Only a-z0-9 chars allowed.
-     *  
+     *
      * @return string The new file name inside the storage folder.
      */
     public function getSystemFileName()
@@ -134,15 +134,15 @@ class Item extends \yii\base\Object
     
     /**
      * Get the MIME Type of the file.
-     * 
+     *
      * The mime type is defined while uploading the file and is not checked against any other services. For example
      * the MIME type could be:
-     * 
+     *
      * + image/png
      * + image/jpg
      * + image/gif
      * + application/pdf
-     * 
+     *
      * @return string The MIME type of the file while uploading.
      */
     public function getMimeType()
@@ -152,17 +152,17 @@ class Item extends \yii\base\Object
     
     /**
      * Get the file extension.
-     * 
+     *
      * Contains the file extension of the file, this is used to concat the new file name with all its components.
      * Example extensions could be:
-     * 
+     *
      * + jpg
      * + gif
      * + pdf
      * + png
-     * 
+     *
      * Its also very commont to check the extensions against the mime type to make reading of files more secure.
-     * 
+     *
      * @return string The file extension name like jpg, gif, png etc.
      */
     public function getExtension()
@@ -172,7 +172,7 @@ class Item extends \yii\base\Object
     
     /**
      * Get the size of the file in Bytes.
-     * 
+     *
      * @return string Size of the file in Bytes.
      */
     public function getSize()
@@ -182,14 +182,14 @@ class Item extends \yii\base\Object
     
     /**
      * Get the size of a file in human readable size.
-     * 
+     *
      * For example sizes are partial splitet in readable forms:
-     * 
+     *
      * + 100B
      * + 100KB
      * + 10MB
      * + 1GB
-     * 
+     *
      * @return string The humand readable size.
      */
     public function getSizeReadable()
@@ -199,7 +199,7 @@ class Item extends \yii\base\Object
     
     /**
      * The Unix Timestamp when the file has been uploaded to the Server.
-     * 
+     *
      * @return integer Unix timestamp when the file has been uploaded.
      */
     public function getUploadTimestamp()
@@ -209,18 +209,18 @@ class Item extends \yii\base\Object
     
     /**
      * Whether the file is of type image or not.
-     * 
+     *
      * If the mime type of the files is equals to:
-     * 
+     *
      * + `image/gif`
      * + `image/jpeg`
      * + `image/jpg`
      * + `image/png`
      * + `image/bmp`
      * + `image/tiff`
-     * 
+     *
      * The file indicates to be an image and return value is true.
-     * 
+     *
      * @return boolean Whether the file is of type image or not.
      */
     public function getIsImage()
@@ -230,9 +230,9 @@ class Item extends \yii\base\Object
     
     /**
      * The unique file hash name for the file itself.
-     * 
+     *
      * This identifier is also used to prevent external access on files when accessing them.
-     * 
+     *
      * @return string The 8 chars long unique hash name of the file.
      */
     public function getHashName()
@@ -242,26 +242,26 @@ class Item extends \yii\base\Object
     
     /**
      * Get the realtive url to the source of the file.
-     * 
-     * The is the most common method when implementing the file object. This method allows you to generate links to the request file. For 
+     *
+     * The is the most common method when implementing the file object. This method allows you to generate links to the request file. For
      * example you may want users to see the file (assuming its a PDF).
-     * 
+     *
      * ```php
      * echo '<a href="{Yii::$app->storage->getFile(123)->source}">Download PDF</a>';
      * ```
-     * 
+     *
      * The output of source is a url which is provided by a UrlRUle of the admin module and returns nice readable source links:
-     * 
+     *
      * ```
      * /file/<ID>/<HASH>/<ORIGINAL_NAME>.<EXTENSION>
      * ```
-     * 
+     *
      * which could look like this when fille up:
-     * 
+     *
      * ```
      * /public_html/en/file/123/e976e224/foobar.png
      * ```
-     * 
+     *
      * @return string The relative source url to the file inside the storage folder with nice Urls.
      */
     public function getSource()
@@ -271,14 +271,14 @@ class Item extends \yii\base\Object
     
     /**
      * Get the absolute source url but with the sheme includes, means including server location.
-     * 
+     *
      * This is equals to `getSource()` method but alos includes the sheme of the current running websites as prefix
      * and is not a relativ url its a static one.
-     * 
+     *
      * ```
      * https://luya.io/en/file/123/e976e224/foobar.png
      * ```
-     * 
+     *
      * @return string The absolute source url to the file inside the storage folder with nice Urls.
      */
     public function getSourceStatic()
@@ -288,9 +288,9 @@ class Item extends \yii\base\Object
     
     /**
      * Get the source path without beautiful urls.
-     * 
+     *
      * This will return raw the path to the storage file inside the sotorage folder without readable urls.
-     * 
+     *
      * @return string The raw path to the file inside the storage folder.
      */
     public function getHttpSource()
@@ -300,10 +300,10 @@ class Item extends \yii\base\Object
     
     /**
      * Get the path to the source files internal, on the servers path.
-     * 
+     *
      * This is used when you want to to grab the file on server side for example to read the file
      * with `file_get_contents` and is the absolut path on the file system on the server.
-     * 
+     *
      * @return string The path to the file on the filesystem of the server.
      */
     public function getServerSource()
@@ -313,11 +313,11 @@ class Item extends \yii\base\Object
     
     /**
      * Return whether the file is hidden or not.
-     * 
+     *
      * Somefiles are uploaded by another process then the filemanager, for example user uploads in the
      * frontend can also be uploaded with the storage system but are hidden from the administration area
      * then the file is hidden but still available and usable.
-     * 
+     *
      * @since 1.0.0-beta7
      * @return boolean Whether the file is marked as hidden or not.
      */
@@ -328,11 +328,11 @@ class Item extends \yii\base\Object
     
     /**
      * Indicates wether a file is delete from the file system.
-     * 
+     *
      * When a file is deleted from the filesystem, for example by moving into the trash with the filemanager
      * in the administration area or by any other process who can delete files, the file will be removed from
      * the disk but will still exist in the database but is marked as *is_deleted*.
-     * 
+     *
      * @since 1.0.0-beta7
      * @return boolean Return whether the file has been removed from the filesytem or not.
      */
@@ -343,10 +343,10 @@ class Item extends \yii\base\Object
     
     /**
      * Convert the Object informations into an Array.
-     * 
-     * Sometimes you may want to retrieve all informations about the file item within an array, there the 
+     *
+     * Sometimes you may want to retrieve all informations about the file item within an array, there the
      * toArray method is used.
-     * 
+     *
      * @return array An array with all available methods as key and corresponding output.
      */
     public function toArray()

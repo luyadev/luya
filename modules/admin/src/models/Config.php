@@ -7,7 +7,7 @@ namespace luya\admin\models;
  *
  * @property string $name
  * @property string $value
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Config extends \yii\db\ActiveRecord
@@ -44,7 +44,7 @@ class Config extends \yii\db\ActiveRecord
     
     /**
      * Check whether a config value exists or not
-     * 
+     *
      * @param string $name
      * @return boolean
      */
@@ -55,7 +55,7 @@ class Config extends \yii\db\ActiveRecord
 
     /**
      * Get the value of a config value
-     * 
+     *
      * @param string $name
      * @return string|null
      */
@@ -72,7 +72,7 @@ class Config extends \yii\db\ActiveRecord
 
     /**
      * Store or Update an existing/new config value.
-     * 
+     *
      * @param string $name
      * @param string $value
      */
@@ -94,7 +94,7 @@ class Config extends \yii\db\ActiveRecord
 
     /**
      * Remove an existing config value
-     * 
+     *
      * @param string $name
      */
     public static function remove($name)

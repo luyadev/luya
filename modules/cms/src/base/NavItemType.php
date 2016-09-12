@@ -6,7 +6,7 @@ use luya\cms\models\NavItem;
 
 /**
  * Abstract class for all Item Types.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 abstract class NavItemType extends \yii\db\ActiveRecord
@@ -17,7 +17,7 @@ abstract class NavItemType extends \yii\db\ActiveRecord
     
     /**
      * Get the response content for the item type
-     * 
+     *
      * @return mixed
      */
     abstract public function getContent();

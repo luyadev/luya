@@ -6,7 +6,7 @@ use luya\admin\ngrest\base\Controller;
 
 /**
  * NgRest User Controller.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class UserController extends Controller

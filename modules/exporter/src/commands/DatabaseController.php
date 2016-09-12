@@ -9,7 +9,7 @@ use luya\Exception;
 
 /**
  * Database Exporter/Handlers.
- * 
+ *
  * @since 1.0.0-beta6
  * @author Basil Suter <basil@nadar.io>
  */
@@ -18,11 +18,11 @@ class DatabaseController extends Command
     /**
      * This action will FULLY(!!) drop all tables of the current configuration, create a zip from the
      * provided $remoteDsn Database and import the remote database:
-     * 
+     *
      * ```
      * ./vendor/bin/luya exporter/database/remote-replace-local "mysql:host=localhost;dbname=REMOTE_DB_NAME" "USERNAME" "PASSWORD"
      * ```
-     * 
+     *
      * @param string $fromDsn
      * @param string $fromUsername
      * @param string $fromPassword

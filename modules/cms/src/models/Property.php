@@ -6,9 +6,9 @@ use luya\admin\models\Property as AdminProperty;
 
 /**
  * CMS PROPERTY
- * 
+ *
  * Each CMS property is attached to an ADMIN PROPERTY with the current navigation (nav_id) context.
- * 
+ *
  * @author nadar
  */
 class Property extends \yii\db\ActiveRecord

@@ -4,7 +4,7 @@ namespace luya\admin\ngrest;
 
 /**
  * NgRest Config Interface
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 interface ConfigInterface

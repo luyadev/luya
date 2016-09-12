@@ -9,13 +9,13 @@ use yii\console\Exception;
 
 /**
  * Send E-Mail of search statistic for last 7 days.
- * 
+ *
  * Console command use:
- * 
+ *
  * ```
  * ./vendor/bin/luya crawler/statistic
  * ```
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class StatisticController extends Command

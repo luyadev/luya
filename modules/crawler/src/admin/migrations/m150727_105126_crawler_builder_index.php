@@ -33,7 +33,7 @@ class m150727_105126_crawler_builder_index extends Migration
     public function safeUp()
     {
     }
-    
+
     public function safeDown()
     {
     }

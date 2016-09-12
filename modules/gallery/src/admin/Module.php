@@ -7,7 +7,6 @@ use luya\base\CoreModuleInterface;
 
 class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
-
     public $apis = [
         'api-gallery-album' => 'luya\gallery\admin\apis\AlbumController',
         'api-gallery-cat' => 'luya\gallery\admin\apis\CatController',

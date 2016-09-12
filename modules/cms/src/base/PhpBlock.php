@@ -7,9 +7,9 @@ use yii\base\ViewContextInterface;
 
 /**
  * Represents a CMS block with PHP views.
- * 
+ *
  * @property \luya\web\View $view View Object.
- * 
+ *
  * @since 1.0.0-beta8
  * @author Basil Suter <basil@nadar.io>
  */
@@ -19,7 +19,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     
     /**
      * View Object getter.
-     * 
+     *
      * @return object|mixed
      */
     public function getView()
@@ -51,7 +51,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
      */
     public function renderFrontend()
     {
-    	$this->injectorSetup();
+        $this->injectorSetup();
         return $this->frontend();
     }
     
@@ -61,7 +61,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
      */
     public function renderAdmin()
     {
-    	$this->injectorSetup();
+        $this->injectorSetup();
         return $this->admin();
     }
 }

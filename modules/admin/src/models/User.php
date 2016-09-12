@@ -14,7 +14,7 @@ use luya\admin\aws\ChangePassword;
 
 /**
  * User Model represents all Administration Users.
- * 
+ *
  * @property integer $id
  * @property string $firstname
  * @property string $lastname
@@ -29,7 +29,7 @@ use luya\admin\aws\ChangePassword;
  * @property integer $force_reload
  * @property string $settings
  * @property \admin\models\UserSetting $setting Setting object to store data.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class User extends NgRestModel implements IdentityInterface, ChangePasswordInterface

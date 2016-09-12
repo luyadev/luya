@@ -3,7 +3,7 @@
 namespace luya\cms\base;
 
 /**
- * 
+ *
  * @author nadar
  * @since 1.0.0-beta6
  */

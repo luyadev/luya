@@ -7,7 +7,7 @@ use luya\admin\ngrest\base\Plugin;
 
 /**
  * Multi File-Upload selector
- * 
+ *
  * @author nadar
  */
 class FileArray extends Plugin

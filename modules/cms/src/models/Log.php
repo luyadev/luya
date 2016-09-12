@@ -10,7 +10,7 @@ use yii\base\InvalidParamException;
 
 /**
  * Eventer-Logger for CMS Activitys
- * 
+ *
  * @property integer $id
  * @property integer $user_id
  * @property integer $is_insertion
@@ -21,7 +21,7 @@ use yii\base\InvalidParamException;
  * @property string $data_json
  * @property string $table_name
  * @property integer $row_id
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Log extends \yii\db\ActiveRecord
@@ -151,7 +151,7 @@ class Log extends \yii\db\ActiveRecord
 
     /**
      * add new log entry.
-     * 
+     *
      * @param int    $type    The type of add
      *                        + 1 = insertion
      *                        + 2 = update

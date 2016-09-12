@@ -6,7 +6,7 @@ use luya\admin\ngrest\base\Controller;
 
 /**
  * NgRest Tag Controller.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class TagController extends Controller

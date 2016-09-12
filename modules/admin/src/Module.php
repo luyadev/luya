@@ -12,7 +12,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
     /**
      * This event gets trigger before some trys to download a file.
-     * 
+     *
      * @var string Event Name
      */
     const EVENT_BEFORE_FILE_DOWNLOAD = 'EVENT_BEFORE_FILE_DOWNLOAD';

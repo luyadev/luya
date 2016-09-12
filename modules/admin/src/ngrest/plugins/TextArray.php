@@ -7,7 +7,7 @@ use luya\admin\ngrest\base\Plugin;
 
 /**
  * Create a list element with self adding text inputs and responses as array.
- * 
+ *
  * @author nadar
  * @since 1.0.0-beta6
  */

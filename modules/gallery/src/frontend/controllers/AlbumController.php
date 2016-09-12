@@ -7,8 +7,8 @@ use yii\web\NotFoundHttpException;
 
 /**
  * Get all images from a collection (album)
- * 
- * @todo rename to 
+ *
+ * @todo rename to
  * @author Basil Suter <basil@nadar.io>
  */
 class AlbumController extends \luya\web\Controller

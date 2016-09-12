@@ -7,7 +7,7 @@ use Yii;
 
 /**
  * NavItemBlock Api provides the block copy from stack action.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class NavItemBlockController extends \luya\admin\base\RestController

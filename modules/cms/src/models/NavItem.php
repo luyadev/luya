@@ -10,12 +10,12 @@ use luya\cms\admin\Module;
 use luya\admin\base\GenericSearchInterface;
 
 /**
- * NavItem Model represents a Item bound to Nav and Language, each Nav(Menu) can contain a nav_item for each language.Each 
+ * NavItem Model represents a Item bound to Nav and Language, each Nav(Menu) can contain a nav_item for each language.Each
  * cms_nav_item is related to a type of item (module, page or redirect) which is stored in nav_item_type (number) and another field
  * nav_item_type_id (pk of the table).
  *
  * @property \luya\cms\models\NavItemPage|\luya\cms\models\NavItemModule\luya\cms\models\NavItemRedirect $type The type object based on the current type id
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
@@ -43,7 +43,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     /**
      * Log the current event in a database to retrieve data in case of emergency. This method will be trigger
      * on: EVENT_BEFORE_DELETE, EVENT_AFTER_INSERT & EVENT_AFTER_UPDATE
-     * 
+     *
      * @param \yii\base\Event $event
      * @return boolean
      */
@@ -116,7 +116,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
      * GET the type object based on the nav_item_type defintion and the nav_item_type_id which is the
      * primary key for the corresponding type table (page, module, redirect). This approach has been choosen
      * do dynamically extend type of pages whithout any limitation.
-     * 
+     *
      * @return \luya\cms\models\NavItemPage|\luya\cms\models\NavItemModule|\luya\cms\models\NavItemRedirect Returns the object based on the type
      * @throws Exception
      */
@@ -147,7 +147,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
 
     /**
      * Get the related nav entry for this nav_item.
-     * 
+     *
      * @return ActiveQuery
      */
     public function getNav()
@@ -157,7 +157,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
 
     /**
      * Get the render content for the specific type, see the defintion of `getContent()` in the available types.
-     * 
+     *
      * @return mixed
      */
     public function getContent()
@@ -167,7 +167,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
 
     /**
      * Update attributes of the current nav item type relation.
-     * 
+     *
      * @param array $postData
      * @return boolean Whether the update has been successfull or not
      */
@@ -242,7 +242,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     /**
      * temp disabled the links for the specific module, cause we are not yet able to handle module integration blocks (find the module inside the content), so wo just
      * display all nav items tempo.
-     * 
+     *
      * @todo fix me above!
      *
      * @param unknown $moduleName
@@ -291,7 +291,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     /**
      * Return the angular state provider config for custom.cmsedit to handle the selection
      * and jump/linking in the search results container.
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\base\GenericSearchInterface::genericSearchStateProvider()
      */

@@ -7,9 +7,9 @@ use yii\helpers\Html;
 
 /**
  * TagParser to convert CMS Module Tags into HTML Tags
- * 
+ *
  * Available encoding tags:
- * 
+ *
  * + `link[123]` Generate a link to an internal page Id where label is the page title from the database.
  * + `link[123](label)` Generate a link to internal page Id where label is the link label.
  * + `link[http://www.google.ch]` Generate a link to an external source where label is the equals the link. Missing http will automatically added prepaneded.
@@ -20,7 +20,7 @@ use yii\helpers\Html;
  * + `file[123](label)` Generate a link to a internal database defined file id, defined a custom label instead of database name.
  * + `mail[info@luya.io]` Generate a mailto: link where label is the email defined.
  * + `mail[info@luya.io](label)` Generate a mailto: link with a custom label defined.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class TagParserBackup
@@ -33,7 +33,7 @@ class TagParserBackup
 
     /**
      * Convert the CMS-Tags into HTML-Tags.
-     * 
+     *
      * @param string $content The content where the CMS-Tags should be found and convert into Html-Tags.
      * @return string The converted output of $content.
      */
@@ -90,7 +90,7 @@ class TagParserBackup
     
     /**
      * Parse the links from regex results
-     * 
+     *
      * @todo Use Yii2 HTML helper to generate tags.
      * @param array $result
      * @return string
@@ -137,7 +137,7 @@ class TagParserBackup
     
     /**
      * Parse the file content from the regex result
-     * 
+     *
      * @param array $result
      * @return string
      */

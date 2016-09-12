@@ -1,5 +1,6 @@
 <?php
 use luya\cms\admin\Module;
+
 ?>
 <script>
     zaa.bootstrap.register('PermissionController', function($scope, $http) {

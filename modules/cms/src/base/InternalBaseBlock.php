@@ -11,7 +11,7 @@ use luya\helpers\ArrayHelper;
 
 /**
  * Base Block for all Cms Blocks.
- * 
+ *
  * @since 1.0.0-beta8
  * @author Basil Suter <basil@nadar.io>
  */
@@ -31,11 +31,11 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
 
     protected function injectorSetup()
     {
-    	foreach ($this->injectors() as $varName => $injector) {
-    		$injector->setContext($this);
-    		$injector->varName = $varName;
-    		$injector->setup();
-    	}
+        foreach ($this->injectors() as $varName => $injector) {
+            $injector->setContext($this);
+            $injector->varName = $varName;
+            $injector->setup();
+        }
     }
     
     /**
@@ -56,7 +56,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
 
     /**
      * @var string Containing the name of the environment (used to find the view files to render). The
-     * module(Name) can be started with the Yii::getAlias() prefix `@`, otherwhise the `@` will be 
+     * module(Name) can be started with the Yii::getAlias() prefix `@`, otherwhise the `@` will be
      * added automatically.
      */
     public $module = 'app';
@@ -64,7 +64,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
     /**
      * @var array Define a list of assets to be insert in the frontend context. The assets will be ignored in
      * admin context. Example usage of assets property:
-     * 
+     *
      * ```php
      * public $assets = [
      *     'app\assets\MyAjaxBlockAsset',
@@ -75,7 +75,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
     
     /**
      * Contains the class name for the block group class
-     * 
+     *
      * @return string The classname on which the block should be stored in.
      * @since 1.0.0-beta6
      */
@@ -86,7 +86,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
     
     /**
      * Injectors are like huge helper objects which are going to automate functions, configs and variable assignement.
-     * 
+     *
      * An example of an Injector which builds a select dropdown and assigns the active query data into the extra vars `foobar`.
      *
      * ```php
@@ -100,8 +100,8 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
      *     ];
      * }
      * ```
-     * 
-     * Now the generated injector ActiveQueryCheckbox is going to grab all informations from the defined query and assign 
+     *
+     * Now the generated injector ActiveQueryCheckbox is going to grab all informations from the defined query and assign
      * them into the extra var foobar. Now you can access `$extras['foobar']` which returns all seleced rows from the checkbox
      * you have assigend.
      */
@@ -113,22 +113,22 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
     /**
      * Return link for usage in ajax request, the link will call the defined callback inside
      * this block. All callback methods must start with `callback`. An example for a callback method:.
-     * 
+     *
      * ```php
      * public function callbackTestAjax($arg1)
      * {
      *     return 'hello callback test ajax with argument: arg1 ' . $arg1;
      * }
      * ```
-     * 
+     *
      * The above defined callback link can be created with the follow code:
-     * 
+     *
      * ```php
      * $this->createAjaxLink('TestAjax', ['arg1' => 'My Value for Arg1']);
      * ```
-     * 
+     *
      * The most convient way to assign the variable is via extraVars
-     * 
+     *
      * ```php
      * public function extraVars()
      * {
@@ -137,7 +137,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
      *     ];
      * }
      * ```
-     * 
+     *
      * @param string $callbackName The callback name in uppercamelcase to call. The method must exists in the block class.
      * @param array  $params       A list of parameters who have to match the argument list in the method.
      *
@@ -262,7 +262,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
 
     /**
      * User method to get the cfgs inside the block.
-     * 
+     *
      * @param string $key
      * @param mixed  $default
      *
@@ -374,7 +374,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
     
     public function addCfg(array $cfgConfig)
     {
-    	$this->_cfgs[] = (new BlockCfg($cfgConfig))->toArray();
+        $this->_cfgs[] = (new BlockCfg($cfgConfig))->toArray();
     }
 
     /**
@@ -403,7 +403,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
     
     /**
      * Make sure the module contains its alias prefix @
-     * 
+     *
      * @return string The module name with alias prefix @.
      */
     protected function ensureModule()
@@ -424,7 +424,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
     /**
      * Create the options array for a zaa-select field based on an key value pairing
      * array.
-     * 
+     *
      * @param array $options The key value array pairing the select array should be created from.
      * @since 1.0.0-beta5
      */
@@ -439,10 +439,10 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
     }
     
     /**
-     * Create the Options list in the config for a zaa-checkbox-array based on an 
+     * Create the Options list in the config for a zaa-checkbox-array based on an
      * key => value pairing array.
-     * 
-     * @param array $options The array who cares the options with items 
+     *
+     * @param array $options The array who cares the options with items
      * @since 1.0.0-beta5
      */
     protected function zaaCheckboxArrayOption(array $options)
@@ -457,17 +457,17 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
     
     /**
      * Get all informations from an zaa-image-upload type:
-     * 
+     *
      * ```php
      * 'image' => $this->zaaImageUpload($this->getVarValue('myImage')),
      * ```
-     * 
+     *
      * apply a filter for the image
-     * 
+     *
      * ```php
      * 'imageFiltered' => $this->zaaImageUpload($this->getVarValue('myImage'), 'small-thumbnail'),
      * ```
-     * 
+     *
      * @param string|int $value Provided the value
      * @param boolean|string $applyFilter To apply a filter insert the identifier of the filter.
      * @param boolean $returnObject Whether the storage object should be returned or an array.
@@ -504,11 +504,11 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
     
     /**
      * Return all informations for a file if exists
-     * 
+     *
      * ```php
      * 'file' => $this->zaaFileUpload($this->getVarValue('myFile')),
      * ```
-     * 
+     *
      * @param string|int $value Provided the value
      * @param boolean $returnObject Whether the storage object should be returned or an array.
      * @return boolean|array Returns false when not found, returns an array with all data for the image on success.
@@ -531,13 +531,13 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
     
     /**
      * Get the full array for the specific zaa-file-array-upload type
-     * 
+     *
      * ```php
      * 'fileList' => $this->zaaFileArrayUpload($this->getVarValue('files')),
      * ```
-     * 
+     *
      * Each array item will have all file query item data and a caption key.
-     * 
+     *
      * @param string|int $value The specific var or cfg fieldvalue.
      * @param boolean $returnObject Whether the storage object should be returned or an array.
      * @return array Returns an array in any case, even an empty array.
@@ -562,13 +562,13 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
 
     /**
      * Get the full array for the specific zaa-file-image-upload type
-     * 
+     *
      * ```php
      * 'imageList' => $this->zaaImageArrayUpload($this->getVarValue('images')),
      * ```
-     * 
+     *
      * Each array item will have all file query item data and a caption key.
-     * 
+     *
      * @param string|int $value The specific var or cfg fieldvalue.
      * @param boolean|string $applyFilter To apply a filter insert the identifier of the filter.
      * @param boolean $returnObject Whether the storage object should be returned or an array.

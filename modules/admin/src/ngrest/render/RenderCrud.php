@@ -230,7 +230,7 @@ class RenderCrud extends Render implements RenderInterface
     }
     
     /**
-     * @todo do not return the specofic type content, but return an array contain more infos also about is multi linguage and foreach in view file! 
+     * @todo do not return the specofic type content, but return an array contain more infos also about is multi linguage and foreach in view file!
      *
      * @param unknown_type $element
      * @param string       $configContext list,create,update

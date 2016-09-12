@@ -7,9 +7,9 @@ use luya\admin\ngrest\base\Plugin;
 
 /**
  * Renders HTML in List View. Update/Create are disabled.
- * 
+ *
  * This will bind the Api Response as trusted html and allow the html injection.
- * 
+ *
  * @since 1.0.0-beta7
  * @author Basil Suter <basil@nadar.io>
  */

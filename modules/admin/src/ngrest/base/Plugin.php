@@ -13,7 +13,7 @@ use luya\helpers\ArrayHelper;
 
 /**
  * Base class for all NgRest Plugins
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 abstract class Plugin extends Component
@@ -40,7 +40,7 @@ abstract class Plugin extends Component
     
     /**
      * Renders the element for the CRUD LIST overview for a specific type.
-     * 
+     *
      * @param string $id The ID of the element in the current context
      * @param string $ngModel The name to access the data in angular context.
      * @return string|array Returns the html element as a string or an array which will be concated
@@ -87,7 +87,7 @@ abstract class Plugin extends Component
 
     /**
      * Return the defined constant for a angular service instance in the current object.
-     * 
+     *
      * @param string $name The name of the service defined as array key in `serviceData()`.
      * @return string
      */
@@ -99,17 +99,17 @@ abstract class Plugin extends Component
     /**
      * Define the service data which will be called when creating the ngrest crud view. You may override
      * this method in your plugin.
-     * 
+     *
      * Example Response
-     * 
+     *
      * ```php
      * return [
      *     'titles' => ['mr, 'mrs'];
      * ];
      * ```
-     * 
+     *
      * The above service data can be used when creating the tags with `$this->getServiceName('titles')`.
-     * 
+     *
      * @return boolean|array
      */
     public function serviceData()
@@ -119,7 +119,7 @@ abstract class Plugin extends Component
     
     /**
      * Json decode value but verifys if its empty, cause this can thrown an json decode exception.
-     * 
+     *
      * @param string $value The string to encode
      * @return mixed
      */
@@ -154,7 +154,7 @@ abstract class Plugin extends Component
     }
     
     /**
-     * 
+     *
      * @param array $fieldValues
      * @return string|unknown
      */
@@ -180,7 +180,7 @@ abstract class Plugin extends Component
     
     /**
      * Helper method to create a form tag based on current object.
-     * 
+     *
      * @param string $name
      * @param string $id
      * @param string $ngModel
@@ -204,7 +204,7 @@ abstract class Plugin extends Component
     
     /**
      * Create a tag for relation window toggler with directive crudLoader based on a ngrest model class.
-     * 
+     *
      * @param string $ngrestModelClass
      * @return string The generated tag or null if permission does not exists
      */
@@ -225,7 +225,7 @@ abstract class Plugin extends Component
     
     /**
      * Add an event to the list of events
-     * 
+     *
      * @param string $trigger ActiveRecord event name
      * @param string $handler Method-Name inside this object
      */
@@ -236,7 +236,7 @@ abstract class Plugin extends Component
     
     /**
      * An override without calling the parent::events will stop all other events used by default.
-     * 
+     *
      * @return array
      */
     public function events()
@@ -248,7 +248,7 @@ abstract class Plugin extends Component
 
     /**
      * This event will be triggered before `onSave` event.
-     * 
+     *
      * @param \yii\db\AfterSaveEvent $event AfterSaveEvent represents the information available in yii\db\ActiveRecord::EVENT_AFTER_INSERT and yii\db\ActiveRecord::EVENT_AFTER_UPDATE.
      * @return boolean
      */
@@ -259,7 +259,7 @@ abstract class Plugin extends Component
     
      /**
      * This event will be triggered `onSave` event. If the property of this plugin inside the model, the event will not be triggered.
-     * 
+     *
      * @param \yii\db\AfterSaveEvent $event AfterSaveEvent represents the information available in yii\db\ActiveRecord::EVENT_AFTER_INSERT and yii\db\ActiveRecord::EVENT_AFTER_UPDATE.
      * @return void
      */
@@ -276,7 +276,7 @@ abstract class Plugin extends Component
 
     /**
      * This event will be triger before `onListFind`.
-     * 
+     *
      * @param unknown $event
      * @return boolean
      */
@@ -287,7 +287,7 @@ abstract class Plugin extends Component
     
     /**
      * This event is only trigger when returning the ngrest crud list data. If the property of this plugin inside the model, the event will not be triggered.
-     * 
+     *
      * @param \admin\ngrest\base\Model::EVENT_AFTER_NGREST_FIND $event
      */
     public function onListFind($event)
@@ -302,7 +302,7 @@ abstract class Plugin extends Component
     
     /**
      * This event will be triggered after `onListFind`.
-     * 
+     *
      * @param unknown $event
      * @return boolean
      */
@@ -352,7 +352,7 @@ abstract class Plugin extends Component
 
     /**
      * This event will be triggered before `onExpandFind`.
-     * 
+     *
      * @param unknown $event
      * @return boolean
      */
@@ -378,7 +378,7 @@ abstract class Plugin extends Component
     
     /**
      * This event will be triggered after `onExpandFind`.
-     * 
+     *
      * @param unknown $event
      * @return boolean
      */
@@ -391,7 +391,7 @@ abstract class Plugin extends Component
 
     /**
      * This event will be triggered before `onCollectServiceData`.
-     * 
+     *
      * @param unknown $event
      * @return boolean
      */
@@ -401,7 +401,7 @@ abstract class Plugin extends Component
     }
     
     /**
-     * 
+     *
      * @param unknown $event
      */
     public function onCollectServiceData($event)
@@ -417,8 +417,8 @@ abstract class Plugin extends Component
     /**
      * Check wehther the current plugin attribute is writeable in the Model class or not. If not writeable some events will be stopped from
      * further processing. This is mainly used when adding extraFields to the grid list view.
-     * 
-     * @param object $event The current event object 
+     *
+     * @param object $event The current event object
      */
     protected function isAttributeWriteable($event)
     {

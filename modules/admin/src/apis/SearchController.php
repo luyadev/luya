@@ -10,7 +10,7 @@ use luya\admin\base\GenericSearchInterface;
 
 /**
  * Search API, allows you to perform search querys for the entire administration including all items provided in the auth section.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class SearchController extends RestController

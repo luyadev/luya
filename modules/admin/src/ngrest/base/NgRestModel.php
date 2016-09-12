@@ -14,7 +14,7 @@ use luya\admin\ngrest\ConfigBuilder;
 
 /**
  * Base Model for all NgRest Models extends yii\db\ActiveRecord.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 abstract class NgRestModel extends ActiveRecord implements GenericSearchInterface, NgRestModelInterface
@@ -38,7 +38,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      * @var array Defines all fields which should be casted as i18n fields. This will transform the defined fields into
      * json language content parings and the plugins will threat the fields different when saving/updating or request
      * informations.
-     * 
+     *
      * ```php
      * public $i18n = ['textField', 'anotherTextField', 'imageField']);
      * ```
@@ -66,15 +66,15 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
 
     /**
-     * Define an array with filters you can select from the crud list. 
-     * 
+     * Define an array with filters you can select from the crud list.
+     *
      * ```php
      * return [
      *     'deleted' => self::find()->where(['is_deleted' => 0]),
      *     'year2016' => self::find()->where(['between', 'date', 2015, 2016]),
      * ];
      * ```
-     * 
+     *
      * @return array Return an array where key is the name and value is the find() condition for the filters.
      * @since 1.0.0-beta8
      */
@@ -86,7 +86,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     /**
      * Define the default ordering for the ngrest list when loading, by default the primary key
      * sorted ascending is used. To override the method for example sorting by a timestamp field:
-     * 
+     *
      * ```php
      * public function ngRestListOrder()
      * {
@@ -104,19 +104,19 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     
     /**
      * Grouping fields into fieldset similar group names which can be collapsed by default or not:
-     * 
+     *
      * ```php
      * public function ngRestAttributeGroups()
      * {
      *    return [
      *       [['timestamp_create', 'timestamp_display_from', 'timestamp_display_until'], 'Timestamps', 'collapsed' => true],
-     *       [['image_list', 'file_list'], 'Images', 'collapsed' => false],   
+     *       [['image_list', 'file_list'], 'Images', 'collapsed' => false],
      *    ];
      * }
      * ```
-     * 
+     *
      * If collapsed is `true` then the form group is hidden when opening the form, otherwhise its open by default (which is default value when not provided).
-     * 
+     *
      * @return array An array with groups where offset 1 are the fields, 2 the name of the group `collapsed` key if default collapsed or not.
      * @since 1.0.0-beta8
      */
@@ -127,17 +127,17 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     
     /**
      * Enable the Grouping by a field option by default. Allows you to predefine the default group field.
-     * 
+     *
      * ```php
      * public function ngRestGroupByField()
      * {
      *     return 'cat_id';
      * }
      * ```
-     * 
+     *
      * Now by default the fields are grouped by the cat_id field, the admin user can always reset the group by filter
      * to none.
-     * 
+     *
      * @return string The field of what the default grouping should be, false disables the default grouping (default).
      * @since 1.0.0-beta8
      */
@@ -150,18 +150,18 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      * The NgRestFind is used when performing the crud list index overivew. You
      * can override this method in order to hide data from the ngRestFind command
      * which populates all data from the database.
-     * 
+     *
      * An example for hidding deleted news posts from the curd list:
-     * 
+     *
      * ```php
      * public static function ngRestFind()
      * {
      *     return parent::ngRestFind()->where(['is_deleted' => 0]);
      * }
      * ```
-     * 
+     *
      * + see [[yii\db\ActiveRecord::find()]]
-     * 
+     *
      * @return yii\db\ActiveQuery
      */
     public static function ngRestFind()
@@ -214,7 +214,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     
     /**
      * Current Ng-Rest item does not have a detail view.
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\base\GenericSearchInterface::genericSearchStateProvider()
      */
@@ -257,7 +257,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     
     /**
      * Determine the current call type based on get params as they can change the output behavior to make the ngrest crud list view.
-     * 
+     *
      * @return boolean|string
      */
     public function getNgRestCallType()
@@ -272,7 +272,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     private $_ngRestPrimaryKey = null;
     
     /**
-     * 
+     *
      * @return \yii\db\string
      */
     public function getNgRestPrimaryKey()
@@ -285,7 +285,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
 
     /**
-     * 
+     *
      * @param unknown $field
      * @param unknown $data
      */
@@ -295,7 +295,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
     
     /**
-     * 
+     *
      */
     public function getNgrestServices()
     {
@@ -332,7 +332,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
 
     /**
      * Same as ngrestAttributeTypes() but used `extraField` instead of `field`
-     * 
+     *
      * @return array
      * @since 1.0.0-beta6
      */
@@ -343,7 +343,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     
     /**
      * Inject data from the model into the config, usage exmple in ngRestConfig method context:
-     * 
+     *
      * ```php
      * public function ngRestConfig($config)
      * {
@@ -355,9 +355,9 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      *     return $config;
      * }
      * ```
-     * 
+     *
      * You can also use an array defintion to handle booth types at the same time
-     * 
+     *
      * ```php
      * public function ngRestConfig($config)
      * {
@@ -367,7 +367,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      *     return $config;
      * }
      * ```
-     * 
+     *
      * @param \luya\admin\ngrest\ConfigBuilder $config The config which the defintion should be append
      * @param string|array $assignedType This can be a string with a type or an array with multiple types
      * @param array $fields An array with fields assign to types type based on the an `ngrestAttributeTypes` defintion.
@@ -434,7 +434,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     
     /**
      * Build and call the full config object if not build yet for this model.
-     * 
+     *
      * @return object|mixed
      */
     public function getNgRestConfig()

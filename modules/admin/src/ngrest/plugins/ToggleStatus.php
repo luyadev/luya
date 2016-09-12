@@ -6,18 +6,18 @@ use luya\admin\ngrest\base\Plugin;
 
 /**
  * Create toggle checkbox for a given field.
- * 
+ *
  * You can change the value for true/false state by using the `trueValue` and `falseValue` porperties while confiure
  * the plugin for the given field.
- * 
+ *
  * Example of using init Value preselected
- * 
+ *
  * ```php
  * 'is_downloadable' => ['toggleStatus', 'initValue' => 1],
  * ```
- * 
+ *
  * Now the checkbox is set the 1 by default (which is equals to $trueValue).
- * 
+ *
  * @author nadar
  */
 class ToggleStatus extends Plugin

@@ -6,11 +6,11 @@ use yii\helpers\Html;
 
 /**
  * Helper Method to create angular tags.
- * 
+ *
  * The LUYA admin provides some default angular directives which are prefixed with `zaa`. In order to create custom
- * NgRest Plugins sometimes you may want to reuse those. There is also a helper method called `directive` which 
+ * NgRest Plugins sometimes you may want to reuse those. There is also a helper method called `directive` which
  * allows you the quickly generate a Html Tag for directives.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta8
  */
@@ -19,7 +19,7 @@ class Angular
 
     /**
      * Internal method to use to create the angular injector helper method like in angular context of directives.js
-     * 
+     *
      * ```
      * "dir": "=",
      * "model": "=",
@@ -31,7 +31,7 @@ class Angular
      * "placeholder": "@placeholder",
      * "initvalue": "@initvalue"
      * ```
-     * 
+     *
      * @param string $type
      * @param string $ngModel
      * @param string $label
@@ -49,17 +49,17 @@ class Angular
 
     /**
      * Create a Angular Directive tag based on the name.
-     * 
+     *
      * ```php
      * Angular::directive('my-input', 'name');
      * ```
-     * 
+     *
      * would produce the my input directive tag:
-     * 
+     *
      * ```html
      * <my-input ng-model="name"></my-input>
      * ```
-     * 
+     *
      * @param unknown $name
      * @param unknown $ngModel
      * @param array $options
@@ -71,7 +71,7 @@ class Angular
     
     /**
      * zaaSortRelationArray directive
-     * 
+     *
      * @param unknown $ngModel
      * @param unknown $label
      * @param array $sourceData
@@ -84,7 +84,7 @@ class Angular
         
     /**
      * zaaText directive
-     * 
+     *
      * @param unknown $ngModel
      * @param unknown $label
      * @param array $options
@@ -96,7 +96,7 @@ class Angular
     
     /**
      * zaaTextarea directive
-     * 
+     *
      * @param unknown $ngModel
      * @param unknown $label
      * @param array $options
@@ -108,7 +108,7 @@ class Angular
     
     /**
      * zaaNumber directive
-     * 
+     *
      * @param unknown $ngModel
      * @param unknown $label
      * @param array $options
@@ -120,7 +120,7 @@ class Angular
     
     /**
      * zaaDecimal directive
-     * 
+     *
      * @param unknown $ngModel
      * @param unknown $label
      * @param array $options
@@ -132,11 +132,11 @@ class Angular
     
     /**
      * Select directive
-     * 
+     *
      * ```
      * return AngularInput::zaaSelect($ngModel, $this->alias, [['value' => 123, 'label' => 123123]]);
      * ```
-     * 
+     *
      * @param unknown $ngModel
      * @param unknown $label
      * @param array $data
@@ -149,7 +149,7 @@ class Angular
     
     /**
      * zaaCheckbox directive
-     * 
+     *
      * @param unknown $ngModel
      * @param unknown $label
      * @param array $options
@@ -161,19 +161,19 @@ class Angular
     
     /**
      * zaaCheckboxArray directive
-     * 
+     *
      * ```php
      * AngularInput::zaaCheckboxArray($ngModel, $this->alias, [['value' => 123, 'label' => 123123], ['value' => 'A', 'label' => 'BCZ']]);
      * ```
-     * 
+     *
      * If you like to build your custom angualr directive to use two way binding without items data you can use something like tis
-     * 
+     *
      * ```php
      * Angular::directive('zaa-checkbox-array', $ngModel, ['options' => $this->getServiceName('myDataService')]);
      * ```
-     * 
+     *
      * But make sure the service you call returns the data within ['items' => $data].
-     * 
+     *
      * @param unknown $ngModel
      * @param unknown $label
      * @param array $data
@@ -186,7 +186,7 @@ class Angular
     
     /**
      * zaaDate directive
-     * 
+     *
      * @param unknown $ngModel
      * @param unknown $label
      * @param array $options
@@ -198,7 +198,7 @@ class Angular
     
     /**
      * zaaDatetime directive
-     * 
+     *
      * @param unknown $ngModel
      * @param unknown $label
      * @param array $options
@@ -210,7 +210,7 @@ class Angular
     
     /**
      * zaaTable directive
-     * 
+     *
      * @param unknown $ngModel
      * @param unknown $label
      * @param array $options
@@ -222,7 +222,7 @@ class Angular
     
     /**
      * zaaListArray directive
-     * 
+     *
      * @param unknown $ngModel
      * @param unknown $label
      * @param array $options
@@ -234,7 +234,7 @@ class Angular
     
     /**
      * zaaFileArrayUpload directive
-     * 
+     *
      * @param unknown $ngModel
      * @param unknown $label
      * @param array $options
@@ -246,7 +246,7 @@ class Angular
     
     /**
      * zaaImageArrayUpload directive
-     * 
+     *
      * @param unknown $ngModel
      * @param unknown $label
      * @param array $options
@@ -258,7 +258,7 @@ class Angular
     
     /**
      * zaaImageUpload directive
-     * 
+     *
      * @param unknown $ngModel
      * @param unknown $label
      * @param array $options
@@ -270,7 +270,7 @@ class Angular
     
     /**
      * zaaFileUpload directive
-     * 
+     *
      * @param unknown $ngModel
      * @param unknown $label
      * @param array $options

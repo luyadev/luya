@@ -8,7 +8,7 @@ use luya\admin\base\RestController;
 
 /**
  * Timestamp API, refreshes the UserOnline system of the administration area.
- * 
+ *
  * @author nadar
  */
 class TimestampController extends RestController

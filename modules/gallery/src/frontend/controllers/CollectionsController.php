@@ -7,7 +7,7 @@ use luya\gallery\models\Album;
 
 /**
  * Get all collections or for a specificy categorie.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class CollectionsController extends Controller
@@ -24,7 +24,7 @@ class CollectionsController extends Controller
     
     /**
      * Get all collections for a specfici categorie
-     * 
+     *
      * @param integer $catId
      */
     public function actionDataByCategorie($catId)

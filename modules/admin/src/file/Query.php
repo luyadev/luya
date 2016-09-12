@@ -6,7 +6,7 @@ use Yii;
 
 /**
  * @property object $storage The storage component
- * 
+ *
  * @author nadar
  */
 class Query extends \yii\base\Object

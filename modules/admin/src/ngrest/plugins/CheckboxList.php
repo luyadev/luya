@@ -9,15 +9,15 @@ use luya\helpers\StringHelper;
 
 /**
  * Create a checkbox list with selection based on an array with key value pairing.
- * 
+ *
  * Example usage:
- * 
+ *
  * ```
  * public function ngrestAttributeTypes()
  * {
  * 		'genres' => ['checkboxList', 'data' => [1 => 'Male', 2 => 'Female']],
  * }
- * 
+ *
  * @todo testing and complete find and save events.
  * @author nadar
  */

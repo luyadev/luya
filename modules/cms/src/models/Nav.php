@@ -15,15 +15,15 @@ use luya\cms\admin\Module;
 
 /**
  * CMS Nav Model ActiveRecord
- * 
+ *
  * This is the main class for the cms navigation/menu structure. The Nav item contains information about the state of the page like visibility,
  * sort-index, online or offline. It also contains information about its a child of another nav element, but it does **NOT** contain informations
  * about the content, title or alias (link) itself, cause those informations are stored in the the [[\cmsadmin\models\NavItem]] to the corresponding
  * language. So basically the Nav contains the structure and state of the menu/navigation put not content, or titles cause those are related to a language.
- * 
- * 
+ *
+ *
  * @property \luya\cms\models\NavItem $activeLanguageItem Returns the NavItem for the current active user language with with the context object nav id.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Nav extends ActiveRecord
@@ -65,7 +65,7 @@ class Nav extends ActiveRecord
     /**
      * Get the cms_nav_item for this nav object with the corresponding current active language id (based
      * on the composition component).
-     * 
+     *
      * @return \luya\cms\models\NavItem The corresponding nav item object for the active language.
      */
     public function getActiveLanguageItem()
@@ -75,7 +75,7 @@ class Nav extends ActiveRecord
 
     /**
      * Return all nav items related to this object.
-     * 
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getNavItems()
@@ -86,7 +86,7 @@ class Nav extends ActiveRecord
     private $_properties = null;
     
     /**
-     * 
+     *
      */
     public function getProperties()
     {
@@ -98,7 +98,7 @@ class Nav extends ActiveRecord
     }
     
     /**
-     * 
+     *
      * @param string $varName
      * @return boolean
      */
@@ -196,8 +196,8 @@ class Nav extends ActiveRecord
     
     /**
      * Get an array of all childrens of the current item recursivly.
-     * 
-     * This method is mainly to find all recursive children of a nav item when moving a page into a container 
+     *
+     * This method is mainly to find all recursive children of a nav item when moving a page into a container
      * all childrens requires to update its container id as well, so this method contains the data of its children
      */
     public function getRecursiveChildren()

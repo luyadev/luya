@@ -6,7 +6,7 @@ use luya\Exception;
 
 /**
  * Querying data for file, image and filter items.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 trait QueryTrait
@@ -47,7 +47,7 @@ trait QueryTrait
     
     /**
      * Process items against where filters
-     * 
+     *
      * @param unknown $value
      * @param unknown $field
      * @return boolean
@@ -80,7 +80,7 @@ trait QueryTrait
     
     /**
      * Filter container data provider against where conditions
-     * 
+     *
      * @return array
      */
     protected function filter()
@@ -147,13 +147,13 @@ trait QueryTrait
     
     /**
      * Query where similar behavior of filtering items.
-     * 
+     *
      * Operator Filtering:
-     * 
+     *
      * ```php
      * where(['operator', 'field', 'value']);
      * ```
-     * 
+     *
      * Allowed operators
      * + **<** expression where field is smaller then value.
      * + **>** expression where field is bigger then value.
@@ -161,35 +161,35 @@ trait QueryTrait
      * + **<=** expression where field is small or equal then value.
      * + **>=** expression where field is bigger or equal then value.
      * + **==** expression where field is equal to the value and even the type must be equal.
-     * 
+     *
      * Only one operator speific argument can be provided, to chain another expression
      * use the `andWhere()` method.
-     * 
+     *
      * Multi Dimension Filtering:
-     * 
+     *
      * The most common case for filtering items is the equal expression combined with
      * add statements.
-     * 
+     *
      * For example the following expression
-     * 
+     *
      * ```php
      * where(['=', 'id', 0])->andWhere(['=', 'name', 'footer']);
      * ```
-     * 
+     *
      * is equal to the short form multi deimnsion filtering expression
-     * 
+     *
      * ```php
      * where(['id' => 0, 'name' => 'footer']);
      * ```
-     * 
+     *
      * Its **not possibile** to make where conditions on the same column:
-     * 
+     *
      * ```php
      * where(['>', 'id', 1])->andWHere(['<', 'id', 3]);
      * ```
-     * 
+     *
      * This will only appaend the first condition where id is bigger then 1 and ignore the second one
-     * 
+     *
      * @param array $args The where defintion can be either an key-value pairing or a condition representen as array.
      * @return \admin\storage\QueryTrait
      */
@@ -225,7 +225,7 @@ trait QueryTrait
     
     /**
      * Find All
-     * 
+     *
      * @return admin\storage\IteratorAbstract|Object
      */
     public function all()
@@ -235,7 +235,7 @@ trait QueryTrait
     
     /**
      * Get the count of items
-     * 
+     *
      * @return integer Amount of filtere data.
      */
     public function count()
@@ -245,7 +245,7 @@ trait QueryTrait
     
     /**
      * Find One, if there are several items, it just takes the first one and does not throw an exception.
-     * 
+     *
      * @return admin\storage\QueryTrait|Object
      */
     public function one()
@@ -257,7 +257,7 @@ trait QueryTrait
     
     /**
      * FindOne returns the specific item id
-     * 
+     *
      * @param int $id The specific item id
      * @return admin\storage\QueryTrait|Object
      */

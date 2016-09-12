@@ -7,9 +7,9 @@ use luya\gallery\models\Cat;
 
 /**
  * Controller to get all collections from a categorie or just all collections.
- * 
+ *
  * This controller will be replaced with `CollectionController` in future.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class AlbenController extends \luya\web\Controller

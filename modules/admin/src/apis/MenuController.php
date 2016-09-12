@@ -8,7 +8,7 @@ use luya\admin\base\RestController;
 
 /**
  * Admin Menu API, provides all menu items and dashabord informations for a node or the entire system.
- * 
+ *
  * @author nadar
  */
 class MenuController extends RestController

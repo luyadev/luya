@@ -10,26 +10,26 @@ use yii\helpers\ArrayHelper;
 
 /**
  * Example usage:
- * 
+ *
  * ```php
  * <? $form = CallbackFormWidget::begin(['callback' => 'get-coordinates', 'buttonValue' => 'Verify', 'angularCallbackFunction' => 'function($response) {
- *     
- * console.log($response) 
- * 
+ *
+ * console.log($response)
+ *
  * };']); ?>
- * 
+ *
  * <?= $form->field('firstname'); ?>
  * // equals
  * <?= $this->field('firstname')->textInput(); ?>
- * 
+ *
  * // labels
  * <?= $form->field('firstname', 'Firstname Label')->textInput(); ?>
  * // equals
  * <?= $form->field('firstname')->textInput()->label('Firstname Label'); ?>
- * 
+ *
  * // textarea
  * <?= $form->field('text')->textarea(); ?>
- * 
+ *
  * <? $form::end(); ?>
  * ```
  * @author nadar
@@ -38,7 +38,7 @@ class CallbackFormWidget extends \yii\base\Widget
 {
     /**
      * @var array Options for the Active Form:
-     * 
+     *
      * - params: array, Add additional parameters which will be sent to the callback. ['foo' => 'bar']
      * - buttonClass: string, an optional class for the submit button replaces `btn`.
      * - closeOnSuccess: boolean, if enabled, the active window will close after successfully sendSuccess() response from callback.
@@ -73,7 +73,7 @@ class CallbackFormWidget extends \yii\base\Widget
     public $fieldConfig = [];
     
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \yii\base\Object::init()
      */
@@ -90,7 +90,7 @@ class CallbackFormWidget extends \yii\base\Widget
     
     /**
      * Generate a field based on attribute name and optional label.
-     * 
+     *
      * @param string $attribute The name of the field (which also will sent to the callback as this name)
      * @param string $label Optional Label
      * @param array $options
@@ -113,7 +113,7 @@ class CallbackFormWidget extends \yii\base\Widget
     
     /**
      * Convert the callback to a camlized name.
-     * 
+     *
      * @param unknown $callbackName
      * @return string
      */
@@ -124,7 +124,7 @@ class CallbackFormWidget extends \yii\base\Widget
     
     /**
      * Get the id for a field based on the attribute name
-     * 
+     *
      * @param string $name
      * @return string
      */
@@ -134,7 +134,7 @@ class CallbackFormWidget extends \yii\base\Widget
     }
     
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \yii\base\Widget::run()
      */

@@ -11,7 +11,7 @@ use yii\helpers\Json;
 
 /**
  * Represents an ITEM for the type NavItemPage.
- * 
+ *
  * Sort_index numbers always starts from 0 and not from 1, like a default array behaviour. If a
  * negative sort_index is provided its always the last sort_index item (reason: we dont know the sort key of
  * the "at the end" dropparea).
@@ -132,7 +132,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     protected function ensureInputValues($event)
     {
         // sort index fixture
-        
+
         if (!$this->isNewRecord) {
             $this->_olds = $this->getOldAttributes();
         }
@@ -223,7 +223,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
 
     /**
      * Reindex the page block items in order to get requestd sorting.
-     * 
+     *
      * @param unknown $navItemPageId
      * @param unknown $placeholderVar
      * @param unknown $prevId
@@ -267,7 +267,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     
     /**
      * Default sort on find command.
-     * 
+     *
      * @return ActiveQuery
      */
     public static function find()
@@ -277,7 +277,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     
     /**
      * Get the block for the page block item
-     * 
+     *
      * @return ActiveQuery
      */
     public function getBlock()
@@ -287,7 +287,7 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
     
     /**
      * Get the corresponding page where the block is stored.
-     * 
+     *
      * @return ActiveQuery
      */
     public function getNavItemPage()

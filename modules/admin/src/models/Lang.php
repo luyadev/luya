@@ -7,16 +7,16 @@ use luya\admin\ngrest\base\NgRestModel;
 
 /**
  * Language Model for Frontend/Admin.
- * 
+ *
  * This Model contains all languages from the database table `admin_lang` but also has helper methods
  * to retrieve the curent active language based on several inputs like composition, config values, etc.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Lang extends NgRestModel
 {
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \yii\db\BaseActiveRecord::init()
      */
@@ -43,7 +43,7 @@ class Lang extends NgRestModel
     }
     
     /**
-     * 
+     *
      * @return string
      */
     public static function tableName()
@@ -52,7 +52,7 @@ class Lang extends NgRestModel
     }
     
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \yii\base\Model::rules()
      */
@@ -65,7 +65,7 @@ class Lang extends NgRestModel
     }
     
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \yii\base\Model::scenarios()
      */
@@ -78,7 +78,7 @@ class Lang extends NgRestModel
     }
     
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \yii\base\Model::attributeLabels()
      */
@@ -111,7 +111,7 @@ class Lang extends NgRestModel
     }
     
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\ngrest\NgRestModeInterface::ngRestConfig()
      */
@@ -141,7 +141,7 @@ class Lang extends NgRestModel
     private static $_langInstance = null;
     
     /**
-     * 
+     *
      * @return array
      */
     public static function getDefault()
@@ -156,8 +156,8 @@ class Lang extends NgRestModel
     private static $_langInstanceFindActive = null;
     
     /**
-     * Get the active langauge array 
-     * 
+     * Get the active langauge array
+     *
      * @return array
      */
     public static function findActive()

@@ -12,20 +12,20 @@ use luya\admin\ngrest\render\RenderInterface;
  * $config = new ngrest\Config();
  * $ngrest = new NgRest($config);
  * ```
- * 
+ *
  * find from config
- * 
+ *
  * ```php
  * $config = new NgRest::findConfig($ngRestConfigHash);
  * $ngrest = new NgRest($config);
  * ```
- * 
+ *
  * render from ngrest
- * 
+ *
  * ```php
  * $ngrest->render(new RenderCrud());
  * ```
- * 
+ *
  * @author nadar
  */
 class NgRest

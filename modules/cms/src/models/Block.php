@@ -8,7 +8,7 @@ use luya\admin\ngrest\base\NgRestModel;
 
 /**
  * Block ActiveRecord contains the Block<->Group relation.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Block extends NgRestModel

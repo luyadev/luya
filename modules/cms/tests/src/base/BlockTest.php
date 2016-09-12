@@ -2,7 +2,6 @@
 
 namespace tests\web\cmsadmin\base;
 
-
 use luya\cms\base\Block;
 use cmstests\data\blocks\TestBlock;
 use cmstests\data\blocks\FailureBlock;

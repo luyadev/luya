@@ -6,7 +6,7 @@ use luya\gallery\models\Cat;
 
 /**
  * Controller to get all categories.
- * 
+ *
  * @todo rename to Folder
  * @author Basil Suter <basil@nadar.io>
  */

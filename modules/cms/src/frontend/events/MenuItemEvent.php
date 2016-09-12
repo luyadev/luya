@@ -4,10 +4,10 @@ namespace luya\cms\frontend\events;
 
 /**
  * Event after Menu component is loaded and ready.
- * 
+ *
  * Each Menu Item does have en event which will be trigger after create. You can also access
  * this event in your config like this for instance:
- * 
+ *
  * ```php
  * 'menu' => [
  *     'class' => 'cms\menu\Container',
@@ -19,7 +19,7 @@ namespace luya\cms\frontend\events;
  *     }
  *  ],
  *  ```
- *  
+ *
  * @author nadar
  * @since 1.0.0-beta5
  */

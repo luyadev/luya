@@ -27,7 +27,7 @@ class m150626_084948_admin_search_data extends Migration
     public function safeUp()
     {
     }
-    
+
     public function safeDown()
     {
     }

@@ -7,7 +7,7 @@ use luya\admin\ngrest\base\NgRestModel;
 
 /**
  * Represents the Navigation-Containers.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class NavContainer extends NgRestModel
@@ -58,7 +58,7 @@ class NavContainer extends NgRestModel
     
     /**
      * Relation returns all `cms_nav` rows belongs to this container sort by index without deleted or draf items.
-     * 
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getNavs()

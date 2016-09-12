@@ -9,7 +9,7 @@ use luya\admin\helpers\Image; // temp replaces the yii\imagine\Image
 
 /**
  * Contains all information about filter effects for a single Chain element (like: thumbnail, 200x200).
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class StorageFilterChain extends \yii\db\ActiveRecord

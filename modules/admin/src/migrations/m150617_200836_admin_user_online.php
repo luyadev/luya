@@ -26,7 +26,7 @@ class m150617_200836_admin_user_online extends Migration
     public function safeUp()
     {
     }
-    
+
     public function safeDown()
     {
     }

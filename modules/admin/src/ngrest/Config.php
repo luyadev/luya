@@ -8,9 +8,9 @@ use yii\base\Object;
 
 /**
  * Defines and holds an NgRest Config.
- * 
+ *
  * Example config array to set via `setConfig()`.
- * 
+ *
  * ```php
  * $array = [
  *     'list' => [
@@ -44,7 +44,7 @@ class Config extends Object implements ConfigInterface
     private $_hash = null;
     
     /**
-     * @var boolean Determine whether this ngrest config is runing as inline window mode (a modal dialog with the 
+     * @var boolean Determine whether this ngrest config is runing as inline window mode (a modal dialog with the
      * crud inside) or not. When inline mode is enabled some features like ESC-Keys and URL chaning must be disabled.
      */
     public $inline = false;
@@ -145,17 +145,17 @@ class Config extends Object implements ConfigInterface
     
     /**
      * Get an option by its key from the options pointer. Define options like
-     * 
+     *
      * ```php
      * $configBuilder->options = ['saveCallback' => 'console.log(this)'];
      * ```
-     * 
+     *
      * Get the option parameter
-     * 
+     *
      * ```php
      * $config->getOption('saveCallback');
      * ```
-     * 
+     *
      * @param unknown $key
      * @return boolean
      */

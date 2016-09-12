@@ -11,7 +11,7 @@ use yii\helpers\Json;
 
 /**
  * Nai Api provides tasks to create, modify and delete navigation items and properties of items.
- * 
+ *
  * example.com/admin/api-cms-nav/create-page
  * example.com/admin/api-cms-nav/create-item-page
  * example.com/admin/api-cms-nav/create-module

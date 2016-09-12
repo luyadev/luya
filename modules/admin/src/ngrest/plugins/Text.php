@@ -6,7 +6,7 @@ use luya\admin\ngrest\base\Plugin;
 
 /**
  * Create a text input select for a given field.
- * 
+ *
  * @author nadar
  */
 class Text extends Plugin
@@ -22,7 +22,7 @@ class Text extends Plugin
     public $listOptions = [];
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\ngrest\base\Plugin::renderList()
      */
@@ -32,7 +32,7 @@ class Text extends Plugin
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\ngrest\base\Plugin::renderCreate()
      */
@@ -42,7 +42,7 @@ class Text extends Plugin
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\ngrest\base\Plugin::renderUpdate()
      */

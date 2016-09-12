@@ -6,7 +6,7 @@ use Yii;
 
 /**
  * Admin Menu Data
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class AdminMenu extends \yii\base\Component
@@ -183,7 +183,7 @@ class AdminMenu extends \yii\base\Component
 
     /**
      * Return all informations about a menu point based on the api endpoint name.
-     * 
+     *
      * @param string $api The Api Endpoint
      * @return array|boolean
      */

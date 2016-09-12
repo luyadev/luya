@@ -11,7 +11,7 @@ use luya\helpers\ArrayHelper;
 
 /**
  * Menu Helper to collect Data used in Administration areas.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta8
  */
@@ -21,7 +21,7 @@ class MenuHelper
     
     /**
      * Get all nav data entries with corresponding item content
-     * 
+     *
      * @return array
      */
     public static function getItems()
@@ -43,7 +43,7 @@ class MenuHelper
                 $item['is_editable'] = (int) Yii::$app->adminuser->canRoute('cmsadmin/page/update');
                 $item['toggle_open'] = (int) Yii::$app->adminuser->identity->setting->get('tree.'.$item['id']);
                 
-                // the user have "page edit" permission, now we can check if the this group has more fined tuned permisionss from the 
+                // the user have "page edit" permission, now we can check if the this group has more fined tuned permisionss from the
                 // cms_nav_permissions table or not
                 if ($item['is_editable']) {
                     $permitted = false;
@@ -93,13 +93,13 @@ class MenuHelper
     
     /**
      * Find nav_id inheritances
-     * 
+     *
      * + Get all cms_nav items where is deleted 0 and sort_asc
      * + foreach items
      * + foreach all user groups for this item to check if an inheritance nod exists for this nav_item (self::navGroupInheritanceNode)
      * + Set the interanl check to false, if inherit or internal check is true, set value into $data factory
      * + proceed nodes of the current item with the information form $data factory as inheritation info.
-     * 
+     *
      * @param number $parentNavId
      * @param string $fromInheritNode
      */
@@ -194,7 +194,7 @@ class MenuHelper
     
     /**
      * Get all cms containers
-     * 
+     *
      * @return array
      */
     public static function getContainers()
@@ -210,7 +210,7 @@ class MenuHelper
     
     /**
      * Get all drafts nav items
-     * 
+     *
      * @return array
      */
     public static function getDrafts()

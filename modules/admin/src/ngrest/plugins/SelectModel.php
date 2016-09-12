@@ -6,9 +6,9 @@ use Yii;
 
 /**
  * Create a selection dropdown based on an ActiveRecord Model.
- * 
+ *
  * Example usage:
- * 
+ *
  * ```
  * public function ngrestAttributeTypes()
  * {

@@ -4,20 +4,20 @@ namespace luya\cms\frontend\components;
 
 /**
  * Get page informations (actually its about properties) will be removed on rc1
- * 
+ *
  * Get a property value
- * 
+ *
  * ```php
  * echo Yii::$app->page->getProperty('foobar');
  * ```
- * 
+ *
  * If the property has enabled `i18n = true` in the object you have to collect the active language with
  * help of the I18n helper:
- * 
+ *
  * ```php
  * \admin\helpers\I18n::findCurrent(Yii::$app->page->getProperty('foobar'));
  * ```
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Page extends \yii\base\Component
@@ -39,26 +39,26 @@ class Page extends \yii\base\Component
 
     /**
      * Get a propertie value (by default) or defined the method to invoke from this object.
-     * 
+     *
      * ```php
      * ->getProperty('foobar');
      * ```
-     * 
-     * will return false if not found and will invoke be default the `getValue()` method. You can change the 
+     *
+     * will return false if not found and will invoke be default the `getValue()` method. You can change the
      * default value with the second paramter.
-     * 
+     *
      * ```php
      * ->getProperty('foobar', null);
      * ```
-     * 
+     *
      * will return null if not found otherwhise will invoke `getValue()` method of the property.
-     * 
+     *
      * ```php
      * ->getProperty('foobar', [], 'getImages');
      * ```
-     * 
+     *
      * will return an empty array if not found, otherwhise will invoke the `getImages()` method of this property object..
-     * 
+     *
      * @param string $name The defined name of the property defined in `varName()` of your property.
      * @param string $defaultValue The default value who should be returned when the property could not be found, default is `false`.
      * @param string $invokeMethod The method which should be invoked/called when the property exists, default is `getValue`.

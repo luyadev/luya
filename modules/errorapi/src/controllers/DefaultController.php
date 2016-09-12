@@ -6,7 +6,7 @@ use Yii;
 use luya\errorapi\models\Data;
 
 /**
- * 
+ *
  * @todo create phpunit test for module controller actions
  * @author nadar
  */

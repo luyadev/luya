@@ -13,19 +13,19 @@ use luya\cms\frontend\events\BeforeRenderEvent;
 
 /**
  * Abstract Controller for CMS Controllers.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 abstract class Controller extends \luya\web\Controller
 {
     /**
      * Render the NavItem content and set several view specific data.
-     * 
+     *
      * @param integer $navItemId
      * @param string $appendix
      * @param boolean|intger $setNavItemTypeId To get the content of a version this parameter will change the database value from the nav item Model
-     * to this provided value 
-     * 
+     * to this provided value
+     *
      * @throws NotFoundHttpException
      * @throws MethodNotAllowedHttpException
      */

@@ -8,7 +8,7 @@ use yii\base\InvalidParamException;
 
 /**
  * I18n Encode/Decode helper method
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta6
  */
@@ -30,7 +30,7 @@ class I18n
      *
      * @param string|array $field The value to decode (or if alreay is an array already)
      * @param string $onEmptyValue Defines the value if the language could not be found and a value will be returns, this value will be used.
-     * 
+     *
      * @return array returns an array with decoded field value
      */
     public static function decode($value, $onEmptyValue = '')

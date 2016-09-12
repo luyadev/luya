@@ -11,7 +11,7 @@ use luya\cms\models\NavItemPageBlockItem;
 
 /**
  * CMS Ajax-Block Controller Responder.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class BlockController extends \cms\base\Controller

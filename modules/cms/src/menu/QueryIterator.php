@@ -6,9 +6,9 @@ use Iterator;
 
 /**
  * Iterator class for menu items.
- * 
+ *
  * The main goal is to to createa an object for the item on the current() iteration.
- * 
+ *
  * @since 1.0.0-beta1
  *
  * @author nadar
@@ -33,7 +33,7 @@ class QueryIterator extends \yii\base\Object implements Iterator
     
     /**
      * Iterator get current element, generates a new object for the current item on accessing.s.
-     * 
+     *
      * @return \cms\menu\Item
      */
     public function current()
@@ -43,7 +43,7 @@ class QueryIterator extends \yii\base\Object implements Iterator
 
     /**
      * Iterator get current key.
-     * 
+     *
      * @return string The current key
      */
     public function key()
@@ -53,7 +53,7 @@ class QueryIterator extends \yii\base\Object implements Iterator
 
     /**
      * Iterator go to next element.
-     * 
+     *
      * @return array
      */
     public function next()
@@ -63,7 +63,7 @@ class QueryIterator extends \yii\base\Object implements Iterator
 
     /**
      * Iterator rewind.
-     * 
+     *
      * @return array
      */
     public function rewind()
@@ -73,7 +73,7 @@ class QueryIterator extends \yii\base\Object implements Iterator
 
     /**
      * Iterator valid.
-     * 
+     *
      * @return bool
      */
     public function valid()

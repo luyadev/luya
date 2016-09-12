@@ -6,16 +6,16 @@ use luya\helpers\ArrayHelper;
 
 /**
  * Create a selection based on an assoc array provided via $data attribute.
- * 
+ *
  * Example usage:
- * 
+ *
  * ```
  * public function ngrestAttributeTypes()
  * {
  * 		'genres' => ['selectArray', 'data' => [1 => 'Male', 2 => 'Female']],
  * }
  * ```
- * 
+ *
  * @author nadar
  */
 class SelectArray extends Select

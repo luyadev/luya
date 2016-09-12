@@ -10,7 +10,7 @@ use luya\cms\frontend\base\Controller;
 
 /**
  * CMS Default Rendering
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class DefaultController extends Controller

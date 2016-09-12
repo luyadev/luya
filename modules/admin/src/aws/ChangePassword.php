@@ -9,9 +9,9 @@ use luya\admin\ngrest\base\ActiveWindow;
 
 /**
  * Change Passwort Active Window.
- * 
+ *
  * The model class defined by `className` must implement the `\admin\aws\ChangePasswordInterface`.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class ChangePassword extends ActiveWindow
@@ -22,7 +22,7 @@ class ChangePassword extends ActiveWindow
     
     /**
      * @var string The name of the class should be used to change password
-     * 
+     *
      * ```php
      * $className = 'admin\models\User';
      * ```

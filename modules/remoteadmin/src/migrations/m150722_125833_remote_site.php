@@ -27,7 +27,7 @@ class m150722_125833_remote_site extends Migration
     public function safeUp()
     {
     }
-    
+
     public function safeDown()
     {
     }

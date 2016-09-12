@@ -11,14 +11,14 @@ use luya\admin\ngrest\base\ActiveWindowView;
 
 /**
  * Base class for all ActiveWindow classes.
- * 
+ *
  * An ActiveWindow is basically a custom view which renders your data attached to a row in the CRUD grid table.
- * 
+ *
  * @property integer $itemId The Id of the item
  * @property \admin\ngrest\base\ActiveWindowView $view The view object
  * @property string $name Get the current Active Window Name
  * @property string $hashName Get an unique hased Active Window config name
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 abstract class ActiveWindow extends Object implements ViewContextInterface
@@ -45,7 +45,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     
     /**
      * Initliazier
-     * 
+     *
      * {@inheritDoc}
      * @see \yii\base\Object::init()
      */
@@ -60,7 +60,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     
     /**
      * Get the alias for this ActiveWIndow
-     * 
+     *
      * @return boolean|string
      */
     public function getAlias()
@@ -70,7 +70,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     
     /**
      * Get the Google-Icons name for the current Active Window
-     * 
+     *
      * @return string
      */
     public function getIcon()
@@ -82,7 +82,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     
     /**
      * Get the ActiveWindow name based on its class short name.
-     * 
+     *
      * @return string
      */
     public function getName()
@@ -98,7 +98,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     
     /**
      * Get the folder name where the views for this ActiveWindow should be stored.
-     * 
+     *
      * @return string
      */
     public function getViewFolderName()
@@ -120,7 +120,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     
     /**
      * Get a unique identifier hash based on the name and config values like icon and alias.
-     * 
+     *
      * @return string
      */
     public function getHashName()
@@ -134,7 +134,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     
     /**
      * Return the view path for view context.
-     * 
+     *
      * {@inheritDoc}
      * @see \yii\base\ViewContextInterface::getViewPath()
      */
@@ -153,7 +153,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     
     /**
      * Get the view object to render templates.
-     * 
+     *
      * @return \admin\ngrest\base\ActiveWindowView
      */
     public function getView()
@@ -167,7 +167,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
 
     /**
      * Render a template with its name and params based on the the view folder path.
-     * 
+     *
      * @param string $name The view file to render
      * @param array $params Optional params to assign into the view
      */
@@ -180,7 +180,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     
     /**
      * Set the value of the item Id in where the active window context is initialized.
-     * 
+     *
      * @param intger $itemId The item id context
      * @throws Exception
      * @return intger
@@ -196,7 +196,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
 
     /**
      * Get the item id of the current active window context.
-     * 
+     *
      * @return intger|mixed
      */
     public function getItemId()
@@ -206,7 +206,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     
     /**
      * Send an error message based on an array configuration for ajax responses.
-     * 
+     *
      * @param string $message The error Message
      * @param array $data Optional response data
      * @return array
@@ -218,8 +218,8 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     
     /**
      * Send an success message based on an array configuration for ajax responses.
-     * 
-     * @param string $message The success 
+     *
+     * @param string $message The success
      * @param array $data Optional response data
      * @return array
      */

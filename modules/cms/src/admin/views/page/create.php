@@ -1,5 +1,6 @@
 <?php
 use luya\cms\admin\Module;
+
 ?>
 <div ng-controller="CmsadminCreateController">
     <div class="row">

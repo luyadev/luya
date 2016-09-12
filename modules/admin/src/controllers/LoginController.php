@@ -11,7 +11,7 @@ use luya\admin\base\Controller;
 
 /**
  * Login Controller contains async actions, async token send action and login mechanism.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class LoginController extends Controller

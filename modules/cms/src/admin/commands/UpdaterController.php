@@ -11,7 +11,7 @@ use luya\helpers\StringHelper;
 
 /**
  * This controller is part of the beta6 release and adds the version ability database migrations.
- * 
+ *
  * @author nadar
  */
 class UpdaterController extends Command

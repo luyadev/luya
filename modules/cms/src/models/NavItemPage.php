@@ -14,14 +14,14 @@ use luya\traits\CacheableTrait;
 
 /**
  * Represents the type PAGE for a NavItem.
- * 
+ *
  * @property integer $id
  * @property integer $layout_id
  * @property integer $nav_item_id
  * @property integer $timestamp_create
  * @property integer $create_user_id
  * @property string $version_alias
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class NavItemPage extends NavItemType implements NavItemTypeInterface
@@ -42,7 +42,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
             $event->sender->forceNavItem->updateTimestamp();
         });
         
-        $this->on(self::EVENT_AFTER_UPDATE, function($event) {
+        $this->on(self::EVENT_AFTER_UPDATE, function ($event) {
             $event->sender->forceNavItem->updateTimestamp();
         });
     }
@@ -100,7 +100,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
     
     /**
      * Get the list of version/pages for a specific nav item id
-     * 
+     *
      * @param unknown $navItemId
      */
     public static function getVersionList($navItemId)
@@ -120,7 +120,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
     
     /**
      * Frontend get Content returns the rendered content for this nav item page based on the page logic (placeholders, blocks)
-     * 
+     *
      * {@inheritDoc}
      * @see \luya\cms\base\NavItemType::getContent()
      */
@@ -140,21 +140,21 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
 
     /**
      * Render as the cmslayout placeholder for this model page.
-     * 
+     *
      * If we assume you have a placeholder variable `foobar` in the cmslayout for this page:
-     * 
+     *
      * ```php
      * <div>
      *     <?= $placeholders['foobar']; ?>
      * </div>
      * ```
-     * 
+     *
      * You can access the content of foobar with
-     * 
+     *
      * ```php
      * return Nav::findOne(ID_OF_THE_PAGE)->activeLanguageItem->type->renderPlaceholder('content'));
      * ```
-     * 
+     *
      * @param string $placeholderName The Cmslayout placeholder identifier
      * @return string
      */
@@ -390,7 +390,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
     /**
      * This method is used to force the parent nav item for the corresponding page item. The default
      * implemenation `getNavItem` works the invert way.
-     * 
+     *
      * @return \luya\cms\models\NavItem
      */
     public function getForceNavItem()
@@ -400,7 +400,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
     
     /**
      * Return all page block items for the current corresponding page. Not related to any sortings or placeholders.
-     * 
+     *
      * @return ActiveQuery
      */
     public function getNavItemPageBlockItems()

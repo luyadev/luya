@@ -58,7 +58,6 @@ class CrawlContainer extends \yii\base\Object
     public function verbosePrint($key, $value = null)
     {
         if ($this->verbose) {
-            
             $value = is_array($value) ? print_r($value, true) : $value;
             
             echo $key . ': ' . $value . PHP_EOL;
@@ -178,7 +177,7 @@ class CrawlContainer extends \yii\base\Object
     }
     
     /**
-     * 
+     *
      * @param unknown $file
      * @return boolean true = valid; false = invalid does not match
      */

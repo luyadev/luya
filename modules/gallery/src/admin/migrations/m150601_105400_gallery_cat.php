@@ -26,7 +26,7 @@ class m150601_105400_gallery_cat extends Migration
     public function safeUp()
     {
     }
-    
+
     public function safeDown()
     {
     }

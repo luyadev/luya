@@ -17,7 +17,7 @@ use luya\cms\models\Layout;
 
 /**
  * NavItem Api is cached response method to load data and perform changes of cms nav item.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class NavItemController extends \luya\admin\base\RestController
@@ -105,7 +105,7 @@ class NavItemController extends \luya\admin\base\RestController
     
     /**
      * Create a new cms_nv_item_page for an existing nav_item, this is also known as a "new version" of a page item.
-     * 
+     *
      */
     public function actionCreatePageVersion()
     {

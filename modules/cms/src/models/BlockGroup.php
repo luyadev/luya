@@ -9,7 +9,7 @@ use luya\admin\ngrest\base\NgRestModel;
 
 /**
  * Represents the Block-Group Model where blocks can be stored inside.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class BlockGroup extends NgRestModel

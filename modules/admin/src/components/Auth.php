@@ -9,7 +9,7 @@ use yii\helpers\ArrayHelper;
 
 /**
  * Auth components gives informations about permissions, who can do what.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Auth extends \yii\base\Component
@@ -24,7 +24,7 @@ class Auth extends \yii\base\Component
     
     /**
      * Get Permision from sql table by userId
-     * 
+     *
      * @param integer $userId
      * @return array
      */
@@ -178,7 +178,7 @@ class Auth extends \yii\base\Component
 
     /**
      * Returns the current available auth rules inside the admin_auth table splied into routes and apis.
-     * 
+     *
      * @return array
      */
     public function getDatabaseAuths()
@@ -204,16 +204,16 @@ class Auth extends \yii\base\Component
     /**
      * The method returns all rows which are not provided in $array. If an api/route is in the $data array its a valid rule and will not be
      * prepared to find for deletion. Negativ array behavior.
-     * 
+     *
      * ```php
      * $data = [
      *     'apis' => ['api-admin-test', 'api-admin-foo'],
      *     'routes' => ['route-to-sth', 'foo-bar-bar'],
      * ];
      * ```
-     * 
+     *
      * The above provided data are valid rules.
-     * 
+     *
      * @param array $data array with key apis and routes
      *
      * @return array
@@ -239,7 +239,7 @@ class Auth extends \yii\base\Component
 
     /**
      * Execute the data to delete based on an array containing a key 'id' with the corresponding value from the Database.
-     * 
+     *
      * @param array $data
      *
      * @return bool

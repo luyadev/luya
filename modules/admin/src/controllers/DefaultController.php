@@ -11,7 +11,7 @@ use luya\TagParser;
 
 /**
  * Administration Controller provides, dashboard, logout and index.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class DefaultController extends Controller

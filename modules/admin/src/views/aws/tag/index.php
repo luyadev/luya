@@ -1,5 +1,6 @@
 <?php
 use luya\admin\Module;
+
 ?>
 <div class="row">
     <div class="col s12">

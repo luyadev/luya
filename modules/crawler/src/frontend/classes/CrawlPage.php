@@ -97,7 +97,6 @@ class CrawlPage extends \yii\base\Object
             });
             
             foreach ($links as $key => $item) {
-                
                 if (StringHelper::contains(['@'], $item[1])) {
                     unset($links[$key]);
                     continue;
@@ -155,9 +154,7 @@ class CrawlPage extends \yii\base\Object
         
         $this->verbosePrint('? getTitle(): title tag found', $text);
         if ($this->useH1) {
-            
-            
-            $response = $crawler->filter('h1')->each(function($node, $i) use ($text) {
+            $response = $crawler->filter('h1')->each(function ($node, $i) use ($text) {
                 if (!empty($node->text())) {
                     return self::cleanupString($node->text());
                 }

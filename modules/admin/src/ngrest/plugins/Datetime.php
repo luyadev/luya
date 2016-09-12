@@ -6,16 +6,16 @@ use luya\admin\ngrest\base\Plugin;
 
 /**
  * Date and Time input field
- * 
+ *
  * When dealing with empty datetime values you can configure `emptyMessage` in order to change the display default text in
  * the list view.
- * 
+ *
  * Example empty Date configuration
- * 
+ *
  * ```
  * ['timestamp', ['Datetime', 'emptyMessage' => 'No Date']],
  * ```
- * 
+ *
  * @author nadar
  */
 class Datetime extends Plugin
@@ -27,7 +27,7 @@ class Datetime extends Plugin
     public $emptyMessage = '-';
     
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\ngrest\base\Plugin::renderList()
      */
@@ -40,7 +40,7 @@ class Datetime extends Plugin
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\ngrest\base\Plugin::renderCreate()
      */
@@ -50,7 +50,7 @@ class Datetime extends Plugin
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\ngrest\base\Plugin::renderUpdate()
      */

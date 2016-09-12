@@ -10,7 +10,7 @@ use luya\console\Importer;
 
 /**
  * Storage system importer behavior to cleanup the storage database and folder.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class StorageImporter extends Importer
@@ -30,7 +30,7 @@ class StorageImporter extends Importer
     
     /**
      * Get orphaned files array.
-     * 
+     *
      * 1. get all files from storage folder
      * 2. check each file if available in db tables ('admin_storage_file' and 'admin_storage_image')
      * 3. remove each found entry and return list with all remaining orphaned files
@@ -80,7 +80,7 @@ class StorageImporter extends Importer
 
     /**
      * Mark not found files as deleted.
-     * 
+     *
      * 1. get all files from storage folder
      * 2. check each db entry if not available in file list and set is_deleted = 1
      *
@@ -128,7 +128,6 @@ class StorageImporter extends Importer
         if ($orphanedFileList === false) {
             $log["error"] = "unable to find a storage folder '".Yii::$app->storage->serverPath."' to compare.";
         } else {
-            
             $log["files_missing_in_table"] = count($orphanedFileList);
             
             $this->importer->verbosePrint('Start marking not found storage files as deleted in database.', __METHOD__);

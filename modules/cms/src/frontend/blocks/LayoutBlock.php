@@ -43,7 +43,7 @@ class LayoutBlock extends \luya\cms\base\Block
             'cfgs' => [
                 ['var' => 'leftColumnClasses', 'label' => Module::t('block_layout_left_column_css_class'), 'type' => 'zaa-text'],
                 ['var' => 'rightColumnClasses', 'label' => Module::t('block_layout_right_column_css_class'), 'type' => 'zaa-text'],
-            	['var' => 'rowDivClass', 'label' => Module::t('block_layout_row_column_css_class'), 'type' => 'zaa-text'],
+                ['var' => 'rowDivClass', 'label' => Module::t('block_layout_row_column_css_class'), 'type' => 'zaa-text'],
             ],
             'placeholders' => [
                 ['var' => 'left', 'label' => Module::t('block_layout_placeholders_left')],

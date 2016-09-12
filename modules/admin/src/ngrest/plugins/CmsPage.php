@@ -7,7 +7,7 @@ use luya\admin\ngrest\base\Plugin;
 
 /**
  * Create ability to select a CMS page.
- * 
+ *
  * @author nadar
  */
 class CmsPage extends Plugin

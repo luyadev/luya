@@ -7,20 +7,20 @@ use luya\Exception;
 
 /**
  * CMS Url Helper class extends luya\helpers\Url by CMS routing methods.
- * 
+ *
  * In addition to the luya\helpers\Url method which is extend it also allows you to make url rule calls to
  * the cms specific contents. The CMS URL helper can only be used when the CMS module is loaded and used within
  * your project application.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Url extends \luya\helpers\Url
 {
     /**
      * if the module could not be found (not registered in the cms) the method returns the provided module name.
-     * 
+     *
      * returns only ONE even if there are more! not good structure inside the cms?
-     * 
+     *
      * @param string $moduleName
      *
      * @return string The full_url from links component.
@@ -38,28 +38,28 @@ class Url extends \luya\helpers\Url
 
     /**
      * Helper method to create a route based on the module name and the route and params.
-     * 
+     *
      * Use the route as defined in the modules' $urlRules array in order to generate the URL according
      * to the rules' pattern. Example:
-     * 
+     *
      * ```php
      * Url::toModuleRoute('blog', 'blog/default/index', ['year' => '2016', 'month' => '07']);
      * Url::toModuleRoute('blog', ['/blog/default/index', 'year' => 2016, 'month' => '07]); // is equal
      * ```
-     * 
+     *
      * generates the following URL, assuming the blog module is located on the CMS page /my-super-blog:
-     * 
+     *
      * /my-super-blog/2016/07
-     * 
+     *
      * according to the following URL rule:
-     * 
+     *
      * ```php
      * public $urlRules = [
      *     ['pattern' => 'blog/<year:\d{4}>/<month:\d{2}>', 'route' => 'blog/default/index'],
      * ];
      * ```
-     * 
-     * 
+     *
+     *
      * @param string $moduleName The ID of the module, which should be found inside the nav items.
      * @param string|array $route The route of the module `module/controller/action` or an array like in Url::to with param infos `['/module/controller/action', 'foo' => 'bar']`.
      * @param array  $params The parameters for the url rule. If the route is provided as an array with params the further defined params or overwritten by the array_merge process.

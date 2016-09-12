@@ -15,7 +15,7 @@ use luya\admin\base\RestController;
 
 /**
  * Storage API, provides data from system image, files, filters and folders to build the filemanager, allows create/delete process to manipulate storage data.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class StorageController extends RestController

@@ -9,18 +9,18 @@ use luya\helpers\ArrayHelper;
 
 /**
  * Checkboxes from an ActiveQuery.
- * 
+ *
  * Generates a checkbox selection from an active query interface and returns the
- * models via the ActiveDataProvider. 
- * 
+ * models via the ActiveDataProvider.
+ *
  * An example for the injector config:
- * 
+ *
  * ```php
  * new ActiveQueryCheckboxInjector([
  *     'query' => \newsadmin\models\Article::find()->where(['cat_id' => 1]),
  * ]),
  * ```
- * 
+ *
  * @property \yii\db\ActiveQueryInterface $query The ActiveQuery object
  * @since 1.0.0-rc1
  * @author Basil Suter <basil@nadar.io>
@@ -32,7 +32,7 @@ class ActiveQueryCheckboxInjector extends BaseBlockInjector
     /**
      * Setter method for the active query interface. Define the active query which will be used
      * to retrieve data.
-     * 
+     *
      * @param ActiveQueryInterface $query
      */
     public function setQuery(ActiveQueryInterface $query)
@@ -61,13 +61,13 @@ class ActiveQueryCheckboxInjector extends BaseBlockInjector
     
     private function getExtraAssignData()
     {
-    	$ids = ArrayHelper::getColumn($this->getContextConfigValue($this->varName, []), 'value');
-    	
-    	$provider = new ActiveDataProvider([
-    		'query' => $this->_query->andWhere(['in', 'id', $ids]),
-    	]);
-    	
-    	return $provider->getModels();
+        $ids = ArrayHelper::getColumn($this->getContextConfigValue($this->varName, []), 'value');
+        
+        $provider = new ActiveDataProvider([
+            'query' => $this->_query->andWhere(['in', 'id', $ids]),
+        ]);
+        
+        return $provider->getModels();
     }
     
     /**
@@ -76,7 +76,7 @@ class ActiveQueryCheckboxInjector extends BaseBlockInjector
      */
     public function setup()
     {
-    	// 
+        //
         $this->setContextConfig([
             'var' => $this->varName,
             'type' => 'zaa-checkbox-array',

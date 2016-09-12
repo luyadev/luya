@@ -6,7 +6,7 @@ use yii;
 
 /**
  * Url rule for NgRest Apis
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class UrlRule extends \yii\rest\UrlRule

@@ -1,5 +1,6 @@
 <?php
 use luya\admin\Module;
+
 ?>
 <div ng-controller="ActiveWindowGalleryController">
     <div class="col s8">

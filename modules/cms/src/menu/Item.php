@@ -9,7 +9,7 @@ use luya\cms\models\Nav;
 
 /**
  * Menu item Object.
- * 
+ *
  * Each menu itaration will return in an Item-Object. The Item-Object contains several methods like
  * returning title, url and ids or retrieve depending item iterations like parents or childs. As the
  * Item Object extends the yii\base\Object all getter methods can be access as property.
@@ -37,7 +37,7 @@ use luya\cms\models\Nav;
  * @property array $sibilings Get all sibilings for the current item, this also includes the current item iteself.
  * @property array $teardown Return all parent elemtns **with** the current item.
  * @property array $children Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
- * 
+ *
  * @author nadar
  * @since 1.0.0-beta1
  */
@@ -87,7 +87,7 @@ class Item extends \yii\base\Object
 
     /**
      * Whether the item is hidden or not if hidden items can be retreived (with/without settings).
-     * 
+     *
      * @return boolean
      */
     public function getIsHidden()
@@ -97,7 +97,7 @@ class Item extends \yii\base\Object
     
     /**
      * Override the default hidden state of an item.
-     * 
+     *
      * @param boolean $value True or False depending on the visbility of the item.
      */
     public function setIsHidden($value)
@@ -119,7 +119,7 @@ class Item extends \yii\base\Object
      * Get the Nav-id of the Item, the Nav-Id is not unique but in case of the language
      * container the nav id is unique. The Nav-Id identifier repersents the id coluumn
      * of the cms_nav table.
-     * 
+     *
      * @return int
      */
     public function getNavId()
@@ -131,7 +131,7 @@ class Item extends \yii\base\Object
      * Get the parent_nav_id of the current item. If the current Item-Object belongs to a
      * parent navigation item, the getParentNavId() method returns the getNavId() of the parent
      * item.
-     * 
+     *
      * ```
      * .
      * ├── item (navId 1)
@@ -139,7 +139,7 @@ class Item extends \yii\base\Object
      *     ├── item (navId 3 with parentNavId 2)
      *     └── item (navId 4 with parentNavId 2)
      * ```
-     * 
+     *
      * @return int
      */
     public function getParentNavId()
@@ -149,7 +149,7 @@ class Item extends \yii\base\Object
 
     /**
      * Returns the current Title of the Menu Item.
-     * 
+     *
      * @return string e.g. "Hello World"
      */
     public function getTitle()
@@ -159,7 +159,7 @@ class Item extends \yii\base\Object
     
     /**
      * Override the current title of item.
-     * 
+     *
      * @param string $title The title to override of the existing.
      */
     public function setTitle($title)
@@ -173,7 +173,7 @@ class Item extends \yii\base\Object
      * + 1 = Page with blocks
      * + 2 = Module
      * + 3 = Redirect
-     * 
+     *
      * @return int The type number
      */
     public function getType()
@@ -184,7 +184,7 @@ class Item extends \yii\base\Object
     /**
      * If the type of the item is equals 2 we can detect the module name and returns
      * this information.
-     * 
+     *
      * @return boolean|string The name of the module or false if not found or wrong type
      * @since 1.0.0-beta5
      */
@@ -204,7 +204,7 @@ class Item extends \yii\base\Object
     
     /**
      * Returns the description provided by the cms admin, if any.
-     * 
+     *
      * @return string The description string for this page.
      */
     public function getDescription()
@@ -240,7 +240,7 @@ class Item extends \yii\base\Object
     /**
      * Returns the current alias name of the item (identifier for the url)
      * also (& previous) called rewrite.
-     * 
+     *
      * @return string e.g. "hello-word"
      */
     public function getAlias()
@@ -270,7 +270,7 @@ class Item extends \yii\base\Object
     
     /**
      * Returns an active record object for the admin user who created this page.
-     * 
+     *
      * @return \admin\models\User|boolean Returns an ActiceRecord for the admin user who created the page, if not
      * found the return value is false.
      */
@@ -302,11 +302,11 @@ class Item extends \yii\base\Object
     /**
      * Returns the current item link relative path with composition (language). The
      * path is always relativ to the host.
-     * 
+     *
      * As changed in 1.0.0-beta6, hidden links will be returned from getLink. So if you make a link
      * from a page to a hidden page, the link of the hidden page will be returned and the link
      * will be successfully displayed
-     * 
+     *
      * @return string e.g. "/home/about-us" or with composition "/de/home/about-us"
      */
     public function getLink()
@@ -332,7 +332,7 @@ class Item extends \yii\base\Object
      * Returns a boolean value whether the current item is an active link or not, this
      * is also for all parent elements. If a child item is active, the parent element
      * is activ as well.
-     * 
+     *
      * @return bool
      */
     public function getIsActive()
@@ -342,7 +342,7 @@ class Item extends \yii\base\Object
 
     /**
      * Returns the depth of the navigation tree start with 1. Also known as menu level.
-     * 
+     *
      * @return int
      */
     public function getDepth()
@@ -354,7 +354,7 @@ class Item extends \yii\base\Object
     
     /**
      * Getter method wrapper for `hasParent()`
-     * 
+     *
      * @return boolean
      * @since 1.0.0-beta6
      */
@@ -365,7 +365,7 @@ class Item extends \yii\base\Object
     
     /**
      * Check whether parent element exists or not
-     * 
+     *
      * @return boolean
      */
     public function hasParent()
@@ -375,7 +375,7 @@ class Item extends \yii\base\Object
     
     /**
      * Returns a Item-Object of the parent element, if no parent element exists returns false.
-     * 
+     *
      * @return \cms\menu\Item|bool Returns the parent item-object or false if not exists.
      */
     public function getParent()
@@ -406,7 +406,7 @@ class Item extends \yii\base\Object
 
     /**
      * Get all sibilings for the current item, this also includes the current item iteself.
-     * 
+     *
      * @return array An array with all item-object siblings
      * @since 1.0.0-beta3
      */
@@ -417,7 +417,7 @@ class Item extends \yii\base\Object
     
     /**
      * Return all parent elements **with** the current item.
-     * 
+     *
      * @return array An array with Item-Objects.
      */
     public function getTeardown()
@@ -437,7 +437,7 @@ class Item extends \yii\base\Object
     
     /**
      * Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
-     * 
+     *
      * @return \cms\menu\QueryIterator Returns all children
      */
     public function getChildren()
@@ -451,7 +451,7 @@ class Item extends \yii\base\Object
     
     /**
      * Getter method wrapper for `hasChildren()`
-     * 
+     *
      * @since 1.0.0-beta6
      * @return boolean
      */
@@ -476,7 +476,7 @@ class Item extends \yii\base\Object
      * This method allows you the retrieve a property for an page property. If the property is not found false will be retunrend
      * otherwhise the property object itself will be returned (implements `\admin\base\Property`) so you can retrieve the value of the
      * property by calling your custom method or the default `getValue()` method.
-     * 
+     *
      * @param string $varName The variable name of the property defined inside of the property of the method `varName()`.
      * @since 1.0.0-beta8
      */
@@ -495,23 +495,23 @@ class Item extends \yii\base\Object
 
     /**
      * You can use with() before the following methods:
-     * 
+     *
      * - getParent()
      * - getParents()
      * - getTeardown()
      * - getChildren()
      * - hasChildren().
-     * 
+     *
      * Example use of with in subquery of the current item:
-     * 
+     *
      * ```php
      * if ($item->with(['hidden'])->hasChildren()) {
      *     print_r($item->getChildren());
      * }
      * ```
-     * 
+     *
      * The above example display also hidden pages.
-     * 
+     *
      * @see \cms\menu\Query::with()
      * @return \cms\menu\Item;
      */
@@ -524,14 +524,14 @@ class Item extends \yii\base\Object
     
     /**
      * Unset a value from the `with()` method. Lets assume you want to to get the children with hidden
-     * 
+     *
      * ```php
      * foreach ($item->with('hidden')->children as $child) {
      *     // but get the sibilings without the hidden state
      *     $siblings = $child->without('hidden')->siblings;
      * }
      * ```
-     * 
+     *
      * @param string|array $without Can be a string `hidden` or an array `['hidden']`.
      * @return \cms\menu\Item
      */

@@ -6,9 +6,9 @@ use Yii;
 
 /**
  * CMS UrlRule who catches all calls in order to allow cms oversteering of not previous catched requests of other url rules.
- * 
+ *
  * The CatchAllUrlRule must be the LAST UrlRule of the UrlManager.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class CatchAllUrlRule extends \yii\web\UrlRule

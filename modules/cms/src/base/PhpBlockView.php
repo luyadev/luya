@@ -6,7 +6,7 @@ use luya\web\View;
 
 /**
  * View context helper of php block view file.
- * 
+ *
  * @property \luya\cms\base\Block $context Get the block context.
  * @property integer $index
  * @property boolean $isFirst
@@ -14,7 +14,7 @@ use luya\web\View;
  * @property integer $itemsCount
  * @property boolean $isNextEqual
  * @property boolean $isLastEqual
- * 
+ *
  * @since 1.0.0-beta8
  * @author Basil Suter <basil@nadar.io>
  */

@@ -10,7 +10,7 @@ use luya\cms\admin\Module;
 
 /**
  * Represents the type REDIRECT for a NavItem.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class NavItemRedirect extends NavItemType implements NavItemTypeInterface

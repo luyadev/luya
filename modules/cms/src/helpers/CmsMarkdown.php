@@ -6,7 +6,7 @@ use cebe\markdown\GithubMarkdown;
 
 /**
  * CmsMarkdown disables the auto URL generate feature in order to fix issue with TagParser.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta8
  */

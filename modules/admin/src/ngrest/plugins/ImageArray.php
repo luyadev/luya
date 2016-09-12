@@ -7,7 +7,7 @@ use luya\admin\ngrest\base\Plugin;
 
 /**
  * Mutli Image-Upload selector ability.
- * 
+ *
  * @author nadar
  */
 class ImageArray extends Plugin

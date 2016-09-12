@@ -7,13 +7,13 @@ use luya\helpers\FileHelper;
 
 /**
  * Crawler command to build the index:
- * 
+ *
  * ```
  * ./vendor/bin/luya crawler/crawl
  * ```
- * 
+ *
  * Verbose while crawling
- * 
+ *
  * ```
  * ./vendor/bin/luya crawler/crawl --verbose
  * ```

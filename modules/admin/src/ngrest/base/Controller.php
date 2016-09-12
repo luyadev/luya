@@ -10,9 +10,9 @@ use luya\admin\ngrest\render\RenderCrud;
 
 /**
  * Base Controller for all NgRest Controllers.
- * 
+ *
  * @property admin\ngrest\base\Model $model The model based from the modelClass instance
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Controller extends \luya\admin\base\Controller
@@ -20,7 +20,7 @@ class Controller extends \luya\admin\base\Controller
     /**
      * @var string Defines the related model for the NgRest Controller. The full qualiefied model name
      * is required.
-     * 
+     *
      * ```php
      * public $modelClass = 'admin\models\User';
      * ```

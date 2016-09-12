@@ -10,7 +10,7 @@ use luya\cms\base\NavItemType;
 use luya\cms\admin\Module;
 
 /**
- * Represents the type MODULE for a NavItem. 
+ * Represents the type MODULE for a NavItem.
  *
  * @author Basil Suter <basil@nadar.io>
  */

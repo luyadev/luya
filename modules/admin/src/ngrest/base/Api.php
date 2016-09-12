@@ -16,7 +16,7 @@ use luya\admin\base\RestActiveController;
 
 /**
  * The RestActiveController for all NgRest implementations.
- * 
+ *
  * @property \admin\ngrest\NgRestModeInterface $model Get the model object based on the $modelClass property.
  */
 class Api extends RestActiveController
@@ -109,7 +109,7 @@ class Api extends RestActiveController
             
             $attrs = $value->getAttributes();
             foreach ($value->extraFields() as $field) {
-            	$attrs[$field] = $value->$field;
+                $attrs[$field] = $value->$field;
             }
             
             foreach ($attrs as $k => $v) {

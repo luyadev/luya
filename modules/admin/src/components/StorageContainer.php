@@ -19,50 +19,50 @@ use luya\web\Request;
 
 /**
  * Storage Container for reading, saving and holding files.
- * 
- * Create images, files, manipulate, foreach and get details. The storage container 
+ *
+ * Create images, files, manipulate, foreach and get details. The storage container
  * will be the singleton similar instance containing all the loaded images and files.
- * 
+ *
  * ### files
- * 
+ *
  * ```php
  * Yii::$app->storage->findFiles(['folderId' => 10]);
  * ```
- * 
+ *
  * which is equal to:
- * 
+ *
  * ```php
  * (new \luyaadmin\file\Query())->where(['folder_id' => 10])->all();
  * ```
- * 
+ *
  * to add a new file into the storage system use setFile
- * 
+ *
  * use Yii::$app->storage->addFile() to add a new file
- * 
+ *
  * get a single file an return file object
- * 
+ *
  * ```php
  * Yii::$app->storage->getFile(5);
  * ```
- * 
+ *
  * which is equal to:
- * 
+ *
  * ```php
  * (new \luyaadmin\file\Query())->where(['id' => 10])->one();
  * ```
- * 
- * or 
- * 
+ *
+ * or
+ *
  * ```php
  * (new \luyaadmin\file\Query())->findOne(10);
  * ```
- * 
+ *
  * ### images
- * 
+ *
  * ### filters
- * 
+ *
  * ### folders
- * 
+ *
  * @property string $httpPath Get the http path to the storage folder.
  * @property string $absoluteHttpPath Get the absolute http path to the storage folder.
  * @property string $serverPath Get the server path (for php) to the storage folder.
@@ -70,7 +70,7 @@ use luya\web\Request;
  * @property array $imagesArray An array containg all images
  * @property array $foldersArray An array containing all folders
  * @property array $filtersArray An array with all filters
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class StorageContainer extends Component
@@ -100,7 +100,7 @@ class StorageContainer extends Component
     
     /**
      * Consturctor resolveds Request component from DI container
-     * 
+     *
      * @param \luya\web\Request $request
      * @param array $config
      */
@@ -114,20 +114,20 @@ class StorageContainer extends Component
     
     /**
      * Setter for the http path in order to read online storage files.
-     * 
+     *
      * Sometimes you want to set the http directory of where the files are display in the frontend to read from another
      * server. For example you have a prod and a preprod sytem and when deploying the preprod system the database will
      * be copied into the preprod system from prod. Now all the files are located on the prod system and you will have
      * broke image/file links. To generate the image/file links you can now override the httpPath in your configuration
      * to read all the files from the prod server. For example add this in the `components` section of your config:
-     * 
+     *
      * ```php
      * 'storage' => [
      *     'class' => 'admin\components\StorageContainer',
      *     'httpPath' => 'http://prod.example.com/storage',
      * ]
      * ```
-     * 
+     *
      * @param string $path The location of your storage folder without trailing slash. E.g `http://prod.example.com/storage`
      */
     public function setHttpPath($path)
@@ -137,7 +137,7 @@ class StorageContainer extends Component
     
     /**
      * Get the base path to the storage directory.
-     * 
+     *
      * @return string Get the relative http path to the storage folder if nothing is provided by the setter method `setHttpPath()`.
      */
     public function getHttpPath()
@@ -153,20 +153,20 @@ class StorageContainer extends Component
     
     /**
      * Setter fro the absolute http path in order to read from another storage source.
-     * 
+     *
      * Sometimes you want to set the http directory of where the files are display in the frontend to read from another
      * server. For example you have a prod and a preprod sytem and when deploying the preprod system the database will
      * be copied into the preprod system from prod. Now all the files are located on the prod system and you will have
      * broke image/file links. To generate the image/file links you can now override the httpPath in your configuration
      * to read all the files from the prod server. For example add this in the `components` section of your config:
-     * 
+     *
      * ```php
      * 'storage' => [
      *     'class' => 'admin\components\StorageContainer',
      *     'absoluteHttpPath' => 'http://prod.example.com/storage',
      * ]
      * ```
-     * 
+     *
      * @param string $path The absolute location of your storage folder without trailing slash. E.g `http://prod.example.com/storage`
      */
     public function setAbsoluteHttpPath($path)
@@ -176,7 +176,7 @@ class StorageContainer extends Component
     
     /**
      * Get the base absolute base path to the storage direcotry
-     * 
+     *
      * @return string Get the absolute http path to the storage folder if nothing is provided by the setter method `setAbsoluteHttpPath()`.
      * @since 1.0.0-beta7
      */
@@ -208,7 +208,7 @@ class StorageContainer extends Component
     private $_filesArray = null;
     
     /**
-     * 
+     *
      * @return NULL|mixed|boolean
      */
     public function getFilesArray()
@@ -221,7 +221,7 @@ class StorageContainer extends Component
     }
     
     /**
-     * 
+     *
      * @param unknown $fileId
      * @return boolean|mixed
      */
@@ -233,7 +233,7 @@ class StorageContainer extends Component
     private $_imagesArray = null;
     
     /**
-     * 
+     *
      * @return NULL|mixed|boolean
      */
     public function getImagesArray()
@@ -246,7 +246,7 @@ class StorageContainer extends Component
     }
     
     /**
-     * 
+     *
      * @param unknown $imageId
      * @return boolean|mixed
      */
@@ -257,7 +257,7 @@ class StorageContainer extends Component
     
     /**
      * Find multiples files with an \luyaadmin\file\Query all
-     * 
+     *
      * @param array $args
      */
     public function findFiles(array $args = [])
@@ -275,7 +275,7 @@ class StorageContainer extends Component
     }
     
     /**
-     * 
+     *
      * @param unknown $fileId
      * @return \admin\storage\admin\storage\QueryTrait|\admin\storage\Object
      */
@@ -286,7 +286,7 @@ class StorageContainer extends Component
     
     /**
      * Add a new file based on the source to the file
-     * 
+     *
      * @param string $fileSource Path to the file source where the file should be created from
      * @param string $fileName The name of this file (must contain data type suffix).
      * @param int $folderId The id of the folder where the file should be sorted in
@@ -351,7 +351,7 @@ class StorageContainer extends Component
     }
     
     /**
-     * 
+     *
      * @param array $args
      */
     public function findImages(array $args = [])
@@ -360,7 +360,7 @@ class StorageContainer extends Component
     }
     
     /**
-     * 
+     *
      * @param array $args
      */
     public function findImage(array $args = [])
@@ -369,7 +369,7 @@ class StorageContainer extends Component
     }
     
     /**
-     * 
+     *
      * @param unknown $imageId
      * @return \luya\admin\storage\admin\storage\QueryTrait|\luya\admin\storage\Object
      */
@@ -380,11 +380,11 @@ class StorageContainer extends Component
     
     /**
      * Add a new image based on an existing file information.
-     * 
+     *
      * @param integer $fileId The id of the file where image should be created from.
      * @param integer $filterId The id of the filter which should be applied to, if filter is 0, no filter will be added. Filter can new also be the string name of the filter like `tiny-crop`.
      * @param boolean $throwException Whether the addImage should throw an exception or just return boolean
-     * @return boolean|\admin\image\Item|\Exception 
+     * @return boolean|\admin\image\Item|\Exception
      */
     public function addImage($fileId, $filterId = 0, $throwException = false)
     {
@@ -466,7 +466,7 @@ class StorageContainer extends Component
     private $_foldersArray = null;
     
     /**
-     * 
+     *
      * @return NULL|mixed|boolean
      */
     public function getFoldersArray()
@@ -479,7 +479,7 @@ class StorageContainer extends Component
     }
     
     /**
-     * 
+     *
      * @param unknown $folderId
      * @return boolean|mixed
      */
@@ -489,7 +489,7 @@ class StorageContainer extends Component
     }
     
     /**
-     * 
+     *
      * @param array $args
      */
     public function findFolders(array $args = [])
@@ -498,7 +498,7 @@ class StorageContainer extends Component
     }
     
     /**
-     * 
+     *
      * @param array $args
      */
     public function findFolder(array $args = [])
@@ -507,7 +507,7 @@ class StorageContainer extends Component
     }
     
     /**
-     * 
+     *
      * @param unknown $folderId
      */
     public function getFolder($folderId)
@@ -517,7 +517,7 @@ class StorageContainer extends Component
     
     /**
      * Add new folder
-     * 
+     *
      * @param unknown $folderName
      * @param number $parentFolderId
      * @return fals|folder Id
@@ -539,7 +539,7 @@ class StorageContainer extends Component
     private $_filtersArray = null;
     
     /**
-     * 
+     *
      * @return NULL|mixed|boolean
      */
     public function getFiltersArray()
@@ -552,7 +552,7 @@ class StorageContainer extends Component
     }
     
     /**
-     * 
+     *
      * @param unknown $filterIdentifier
      * @return boolean|mixed
      */
@@ -575,7 +575,7 @@ class StorageContainer extends Component
     
     /**
      * Will force to refresh all container arrays and clean up the cache
-     * 
+     *
      * @since 1.0.0-beta5
      */
     public function flushArrays()
@@ -593,7 +593,7 @@ class StorageContainer extends Component
     /**
      * This method allwos you to generate all thumbnails for the file manager, you can trigger this process when
      * importing or creating several images at once, so the user does not have to create the thumbnails
-     * 
+     *
      * @return void
      * @since 1.0.0-beta6
      */

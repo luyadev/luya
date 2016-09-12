@@ -53,8 +53,8 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     
     /**
      * @var array Defined blocks to hidde from the cmsadmin. Those blocks are not listed in the Page Content blocks overview. You can override this
-     * variable inside your configuration of the cmsadmin. 
-     * 
+     * variable inside your configuration of the cmsadmin.
+     *
      * ```php
      *  'modules' => [
      *      'cmsadmin' => [
@@ -67,16 +67,16 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
      * ```
      *
      * You can define blocks by using the string notation:
-     * 
+     *
      * ```php
      * 'hiddenBlocks' => [
      *     'cmsadmin\blocks\TextBlock',
      *     'cmsadmin\blocks\AudioBlock',
      * ],
      * ```
-     * 
+     *
      * or you can use the object notation with static className method this is more convient as an IDE will auto complet the Input:
-     * 
+     *
      * ```php
      * 'hiddenBlocks' => [
      *     \cmsadmin\blocks\TextBlock::className(),
@@ -118,7 +118,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \luya\base\Module::import()
      */
@@ -134,7 +134,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     
     /**
      * Translations for CMS Module.
-     * 
+     *
      * @param unknown $message
      * @param array $params
      */
@@ -145,7 +145,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     
     /**
      * Get the user id of the logged in user in web appliation context.
-     * 
+     *
      * @todo add isGuest check
      * @return nummeric|0
      */

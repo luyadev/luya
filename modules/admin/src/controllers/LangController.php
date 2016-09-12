@@ -6,7 +6,7 @@ use luya\admin\ngrest\base\Controller;
 
 /**
  * NgRest Language Controller.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class LangController extends Controller

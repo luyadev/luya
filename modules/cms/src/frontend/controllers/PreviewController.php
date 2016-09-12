@@ -11,7 +11,7 @@ use luya\cms\frontend\base\Controller;
 
 /**
  * CMS Preview Rendering
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class PreviewController extends Controller

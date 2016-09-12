@@ -10,7 +10,7 @@ use luya\cms\Menu;
 
 /**
  * Iterator filter to verify valid events
- * 
+ *
  * @author nadar
  * @since 1.0.0-beta5
  */
@@ -18,7 +18,7 @@ class QueryIteratorFilter extends FilterIterator implements Countable
 {
     /**
      * Verifys if an menu item does have valid event response.
-     * 
+     *
      * {@inheritDoc}
      * @see FilterIterator::accept()
      */

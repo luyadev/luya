@@ -7,7 +7,7 @@ use luya\admin\ngrest\base\Plugin;
 
 /**
  * Decimal Input-Form field.
- * 
+ *
  * @author nadar
  */
 class Decimal extends Plugin

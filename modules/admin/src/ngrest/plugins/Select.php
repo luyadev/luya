@@ -7,7 +7,7 @@ use luya\admin\ngrest\base\Plugin;
 
 /**
  * Base class for select dropdowns via Array or Model.
- * 
+ *
  * @author nadar
  */
 abstract class Select extends Plugin
