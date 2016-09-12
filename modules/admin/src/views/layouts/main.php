@@ -552,13 +552,20 @@ $this->beginPage()
         <div ng-if="sidePanelHelp">
             <h1>Help</h1>
             
-             <ul class="collapsible" data-collapsible="accordion">
+             <ul class="collapsible" data-collapsible="accordion" ng-init="tagsOpen=false">
                 <li>
-                  <div class="collapsible-header"><i class="material-icons">filter_drama</i>Tags</div>
-                  <div class="collapsible-body">
+                  <div class="collapsible-header" ng-click="tagsOpen=!tagsOpen"><i class="material-icons">filter_drama</i>Tags</div>
+                  <div class="collapsible-body" ng-show="tagsOpen" style="display:block;">
+                    <ul class="collection with-header">
                     <?php foreach ($this->context->tags as $name => $object): ?>
-                    <p><h3><?= $name; ?></h3><?= Markdown::processParagraph($object->readme()); ?>
+                        <li class="collection-item" ng-mouseenter="isHover['<?=$name;?>']=true" ng-mouseleave="isHover['<?=$name;?>']=false">
+                            <div ng-show="isHover['<?=$name;?>']" style="position:absolute; padding:20px; position:fixed">
+                                <?= Markdown::process($object->readme()); ?>
+                            </div>
+                            <div><?= $name; ?><a click-paste-pusher="<?= $name; ?>[value](sub)" style="cursor: pointer;" class="secondary-content"><i class="material-icons">content_paste</i></a></div>
+                        </li>
                     <?php endforeach; ?>
+                    </ul>
                   </div>
                 </li>
                 <li>

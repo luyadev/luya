@@ -236,6 +236,72 @@ function typeCastValue(value) {
 		}
 	});
 	
+	/**
+	 * ```
+	 * <a href="#" click-paste-pusher="foobar">Test</a>
+	 * ```
+	 */
+	zaa.directive("clickPastePusher", ['$rootScope', '$compile', function($rootScope, $compile) {
+		return {
+			restrict: 'A',
+			replace: false,
+			link: function(scope, element, attrs) {
+				element.bind('click', function() {
+					$rootScope.$broadcast('insertPasteListener', attrs['clickPastePusher']);
+				})
+	        }
+		}
+	}]);
+	
+	/**
+	 * 
+	 * ```
+	 * $rootScope.$broadcast('insertPasteListener', $scope.someInput);
+	 * ```
+	 * 
+	 * ```
+	 * <textarea insert-paste-listener></textarea>
+	 * ```
+	 */
+	zaa.directive('insertPasteListener', ['$rootScope', function($rootScope) {
+		return {
+			restrict: 'A',
+		    link: function(scope, element, attrs) {
+		    	element.bind("focus", function() {
+		    		$rootScope.lastElement = element[0];
+		    		var offCallFn = $rootScope.$on('insertPasteListener', function(e, val) {
+		    			var domElement = $rootScope.lastElement;
+
+				    	if (domElement != element[0] || !domElement) {
+				    		return false;  
+				    	}
+				    	  
+				    	$rootScope.$$listeners.insertPasteListener=[];
+				    	  
+				        if (document.selection) {
+				        	domElement.focus();
+				            var sel = document.selection.createRange();
+				            sel.text = val;
+				            domElement.focus();
+				        } else if (domElement.selectionStart || domElement.selectionStart === 0) {
+				            var startPos = domElement.selectionStart;
+				            var endPos = domElement.selectionEnd;
+				            var scrollTop = domElement.scrollTop;
+				            domElement.value = domElement.value.substring(0, startPos) + val + domElement.value.substring(endPos, domElement.value.length);
+				            domElement.focus();
+				            domElement.selectionStart = startPos + val.length;
+				            domElement.selectionEnd = startPos + val.length;
+				            domElement.scrollTop = scrollTop;
+				        } else {
+				            domElement.value += val;
+				            domElement.focus();
+				        }
+				    });
+		    	});
+		    }
+	  }
+	}]);
+	
 	zaa.factory('CacheReloadService', function($http, $window) {
 		
 		var service = [];
