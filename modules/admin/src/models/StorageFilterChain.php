@@ -88,10 +88,12 @@ class StorageFilterChain extends \yii\db\ActiveRecord
         
         switch ($this->effect->imagine_name) {
             case "crop":
-                Image::crop($loadFromPath, $this->getMethodParam('width'), $this->getMethodParam('height'))->save($imageSavePath, $this->getMethodParam('saveOptions'));
+                $image = Image::crop($loadFromPath, $this->getMethodParam('width'), $this->getMethodParam('height'));
+                Image::autoRotate($image)->save($imageSavePath, $this->getMethodParam('saveOptions'));
                 break;
             case "thumbnail":
-                Image::thumbnail($loadFromPath, $this->getMethodParam('width'), $this->getMethodParam('height'), $this->getMethodParam('mode'))->save($imageSavePath, $this->getMethodParam('saveOptions'));
+                $image = Image::thumbnail($loadFromPath, $this->getMethodParam('width'), $this->getMethodParam('height'), $this->getMethodParam('mode'));
+                Image::autoRotate($image)->save($imageSavePath, $this->getMethodParam('saveOptions'));
                 break;
         }
     }

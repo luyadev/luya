@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7b60a977d02ec648571aa2b5d8d43b2c",
-    "content-hash": "f6cd0dd4421f3b98cc7a83a4e3849b89",
+    "hash": "9f3befef43187ebcd90dcc800b3fdfc0",
+    "content-hash": "3f61e8977f8561faf43591cb9eff409a",
     "packages": [
         {
             "name": "bower-asset/jquery",
@@ -43,12 +43,12 @@
             "version": "3.2.7",
             "source": {
                 "type": "git",
-                "url": "https://github.com/RobinHerbots/Inputmask.git",
+                "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
                 "reference": "5a72c563b502b8e05958a524cdfffafe9987be38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RobinHerbots/Inputmask/zipball/5a72c563b502b8e05958a524cdfffafe9987be38",
+                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/5a72c563b502b8e05958a524cdfffafe9987be38",
                 "reference": "5a72c563b502b8e05958a524cdfffafe9987be38",
                 "shasum": ""
             },
@@ -304,16 +304,16 @@
         },
         {
             "name": "imagine/imagine",
-            "version": "v0.5.0",
+            "version": "v0.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche123/Imagine.git",
-                "reference": "f64ec666baaa800edcbf237db41121a569230709"
+                "reference": "149041d2a1b517107bfe270ca2b1a17aa341715d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/f64ec666baaa800edcbf237db41121a569230709",
-                "reference": "f64ec666baaa800edcbf237db41121a569230709",
+                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/149041d2a1b517107bfe270ca2b1a17aa341715d",
+                "reference": "149041d2a1b517107bfe270ca2b1a17aa341715d",
                 "shasum": ""
             },
             "require": {
@@ -328,6 +328,11 @@
                 "ext-imagick": "to use the Imagick implementation"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.7-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Imagine": "lib/"
@@ -352,7 +357,58 @@
                 "image manipulation",
                 "image processing"
             ],
-            "time": "2013-07-10 17:25:36"
+            "time": "2015-09-19 16:54:05"
+        },
+        {
+            "name": "nadar/yii2-imagine",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nadar/yii2-imagine.git",
+                "reference": "473ae0609dc36f65b0fdf138d22ef4ee41783ab0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nadar/yii2-imagine/zipball/473ae0609dc36f65b0fdf138d22ef4ee41783ab0",
+                "reference": "473ae0609dc36f65b0fdf138d22ef4ee41783ab0",
+                "shasum": ""
+            },
+            "require": {
+                "imagine/imagine": "0.6.*",
+                "yiisoft/yii2": "^2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\imagine\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Antonio Ramirez",
+                    "email": "amigo.cobos@gmail.com"
+                }
+            ],
+            "description": "The Imagine integration for the Yii framework",
+            "keywords": [
+                "helper",
+                "image",
+                "imagine",
+                "yii2"
+            ],
+            "time": "2016-09-12 18:06:19"
         },
         {
             "name": "yiisoft/yii2",
@@ -494,54 +550,6 @@
                 "yii2"
             ],
             "time": "2016-02-06 00:49:24"
-        },
-        {
-            "name": "yiisoft/yii2-imagine",
-            "version": "2.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yiisoft/yii2-imagine.git",
-                "reference": "68ed3d96cd1895035cef3c0e9ce9cf6c2c0c7f1c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-imagine/zipball/68ed3d96cd1895035cef3c0e9ce9cf6c2c0c7f1c",
-                "reference": "68ed3d96cd1895035cef3c0e9ce9cf6c2c0c7f1c",
-                "shasum": ""
-            },
-            "require": {
-                "imagine/imagine": "0.5.*",
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "yii\\imagine\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Antonio Ramirez",
-                    "email": "amigo.cobos@gmail.com"
-                }
-            ],
-            "description": "The Imagine integration for the Yii framework",
-            "keywords": [
-                "helper",
-                "image",
-                "imagine",
-                "yii2"
-            ],
-            "time": "2016-09-04 15:14:08"
         }
     ],
     "packages-dev": [
@@ -756,12 +764,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya.git",
-                "reference": "1eef21356e683aaaf145708cad63629c45b9ddb6"
+                "reference": "76e1f7344ebb84b5e37ce98abf236453d6d2235e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya/zipball/1eef21356e683aaaf145708cad63629c45b9ddb6",
-                "reference": "1eef21356e683aaaf145708cad63629c45b9ddb6",
+                "url": "https://api.github.com/repos/luyadev/luya/zipball/76e1f7344ebb84b5e37ce98abf236453d6d2235e",
+                "reference": "76e1f7344ebb84b5e37ce98abf236453d6d2235e",
                 "shasum": ""
             },
             "require": {
@@ -817,7 +825,7 @@
                 "yii2",
                 "yii2-wrapper"
             ],
-            "time": "2016-09-12 12:52:54"
+            "time": "2016-09-12 13:08:53"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2613,6 +2621,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "nadar/yii2-imagine": 20,
         "luyadev/luya": 20
     },
     "prefer-stable": false,

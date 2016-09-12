@@ -16,7 +16,7 @@
 		"issues" : "https://github.com/luyadev/luya/issues"
 	},
 	"require" : {
-	    "yiisoft/yii2-imagine": "~2.0.0",
+	    "nadar/yii2-imagine": "^2.0@dev",
 	    "flowjs/flow-php-server": "^1.0"
 	},
 	"require-dev" : {

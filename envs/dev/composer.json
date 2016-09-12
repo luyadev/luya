@@ -6,7 +6,7 @@
         "twig/twig" : "~1.0",
         "ext-curl" : "*",
         "curl/curl" : "1.2.1",
-        "yiisoft/yii2-imagine": "^2.0@dev",
+        "nadar/yii2-imagine": "^2.0@dev",
         "phpmailer/phpmailer": "~5.0",
         "fabpot/goutte" : "3.1.*",
         "jakeasmith/http_build_url" : "1.0.0",
