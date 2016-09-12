@@ -2,6 +2,8 @@
 
 namespace luya\admin\assets;
 
+use Yii;
+
 /**
  * BowerVendor Asset contains all files from old bower-asset depencies.
  *
@@ -41,32 +43,38 @@ class BowerVendor extends \luya\web\Asset
         // 'angular-datepicker/datepicker.min.css', // Moved to scss
         'angular-chosen/chosen.min.css',
     ];
-
-    public $js = [
-        // jquery ui
-        'jquery-ui/jquery-ui.min.js',
-        // angular files (official repo)
-        'angular/angular.min.js',
-        'angular-i18n/angular-locale_de-ch.js',
-        //'angular-resource/angular-resource.min.js',
-        // ui router
-        'angular-ui-router/release/angular-ui-router.min.js',
-        // drag&drop (replace with native html5)
-        'angular-dragdrop/src/angular-dragdrop.min.js',
-        // loadingbar
-        'angular-loading-bar/build/loading-bar.min.js',
-        // slugify
-        'angular-slugify/angular-slugify.js',
-        // twig.js
-        'twig.js/twig.min.js',
-        // ng-wig WYSIWYG editor
-        'ng-wig/dist/ng-wig.min.js',
-        // file upload
-        'ng-file-upload/ng-file-upload.min.js',
-        'ng-file-upload/ng-file-upload-shim.min.js',
-
-        'angular-filter.min.js',
-        'angular-datepicker/datepicker.min.js',
-        'angular-chosen/angular-chosen.min.js',
-    ];
+    
+    public function init()
+    {
+        parent::init();
+        
+        // as params are not allowed inside array properties we have located the filling of the $js param into the initalizer.
+        $this->js = [
+            // jquery ui
+            'jquery-ui/jquery-ui.min.js',
+            // angular files (official repo)
+            'angular/angular.min.js',
+            'angular-i18n/angular-locale_'.Yii::$app->luyaLanguage.'.js',
+            //'angular-resource/angular-resource.min.js',
+            // ui router
+            'angular-ui-router/release/angular-ui-router.min.js',
+            // drag&drop (replace with native html5)
+            'angular-dragdrop/src/angular-dragdrop.min.js',
+            // loadingbar
+            'angular-loading-bar/build/loading-bar.min.js',
+            // slugify
+            'angular-slugify/angular-slugify.js',
+            // twig.js
+            'twig.js/twig.min.js',
+            // ng-wig WYSIWYG editor
+            'ng-wig/dist/ng-wig.min.js',
+            // file upload
+            'ng-file-upload/ng-file-upload.min.js',
+            'ng-file-upload/ng-file-upload-shim.min.js',
+    
+            'angular-filter.min.js',
+            'angular-datepicker/datepicker.min.js',
+            'angular-chosen/angular-chosen.min.js',
+        ];
+    }
 }
