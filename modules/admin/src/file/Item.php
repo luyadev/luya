@@ -327,6 +327,16 @@ class Item extends \yii\base\Object
     }
     
     /**
+     * Return boolean value whether the file server source exsits on the server or not.
+     *
+     * @return boolean Whether the file still exists in the storage folder or not.
+     */
+    public function getFileExists()
+    {
+        return file_exists($this->getServerSource());
+    }
+    
+    /**
      * Indicates wether a file is delete from the file system.
      *
      * When a file is deleted from the filesystem, for example by moving into the trash with the filemanager
