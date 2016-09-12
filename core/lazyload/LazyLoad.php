@@ -34,11 +34,15 @@ class LazyLoad extends Widget
      */
     public $height = null;
 
-    public $onlyTags = false;
+    /**
+     * @var boolean Define whether a full image tag should be return or only the attributes. This can be applied when using the lazy loader in background images.
+     */
+    public $attributesOnly = false;
 
-    public $class = 'lazy-image';
-
-    public $additionalClass = '';
+    /**
+     * @var string Additional classes for the lazy load image.
+     */
+    public $class = null;
     
     /**
      * {@inheritDoc}
@@ -66,18 +70,13 @@ class LazyLoad extends Widget
      */
     public function run()
     {
-        $this->class .= " " . $this->additionalClass;
-
-        if($this->onlyTags) {
-            return "class = \"$this->class\"
-                    data-src = \"$this->src\"
-                    data-width = \"$this->width\"
-                    data-height = \"$this->height\"
-                    data-as-background = \"1\"
-            ";
+        $class = 'lazy-image ' . $this->class;
+        
+        if ($this->attributesOnly) {
+            return "class=\"{$class}\" data-src=\"$this->src\" data-width=\"$this->width\" data-height=\"$this->height\" data-as-background=\"1\"";
         }
         
-        $tag = Html::tag('img', '', ['class' => $this->class, 'data-src' => $this->src, 'data-width' => $this->width, 'data-height' => $this->height]);
+        $tag = Html::tag('img', '', ['class' => $class, 'data-src' => $this->src, 'data-width' => $this->width, 'data-height' => $this->height]);
         $tag.= '<noscript><img class="'.$this->class.'" src="'.$this->src.'" /></noscript>';
         return $tag;
     }
