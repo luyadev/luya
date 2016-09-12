@@ -9,26 +9,26 @@ use luya\tag\TagMarkdownParser;
 
 /**
  * TagParser allows you to inject Tags and parse them.
- * 
+ *
  * This is an additional concept to markdown, where you can inject your custom tags to parse. All tags must be an instance
  * of `luya\tag\BaseTag` and implement the `parse($value, $sub)` method in order to convert the input to your tag.
- * 
+ *
  * The identifier of the tag is not related to your tag, so you can configure the same tag as different names with multiple
  * purposes.
- * 
+ *
  * To inject a created tag just use:
- * 
+ *
  * ```
  * TagParser::inject('tagname', ['class' => 'path\to\TagClass']);
  * ```
- * 
+ *
  * To parse text with or without markdown use:
- * 
+ *
  * ```php
  * TagParser::convert('Hello tagname[value](sub)');
  * TagParser::convertWithMarkdown('**Hello** tagname[value](sub)');
  * ```
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-rc1
  */
@@ -42,14 +42,14 @@ class TagParser extends Object
     
     private $tags = [
         'mail' => ['class' => 'luya\tag\tags\MailTag'],
-    	'tel' => ['class' => 'luya\tag\tags\TelTag'],
+        'tel' => ['class' => 'luya\tag\tags\TelTag'],
     ];
     
     private static $_instance = null;
     
     /**
      * Inject a new tag with a given name and a configurable array config.
-     * 
+     *
      * @param string $name The name of the tag on what the tag should be found. Must be [a-z] chars.
      * @param string|array $config The configurable object context can be either a string with a class or a configurable array base on yii\base\Object concept.
      */
@@ -72,7 +72,7 @@ class TagParser extends Object
     /**
      * Convert the CMS-Tags into HTMl-Tags and additional convert GFM Markdown into Html as well. The main purpose
      * of this method to fix the conflict between markdown and tag parser when using urls.
-     * 
+     *
      * @param string $text The content where the CMS-Tags should be found and convert into Html-Tags and Markdown Tags.
      * @return string the COnverted output of $text.
      */

@@ -49,7 +49,7 @@ trait ApplicationTrait
     
     /**
      * @var array Add tags to the TagParser class. Example
-     * 
+     *
      * ```php
      * 'tags' => [
      *     'foobar' => ['class' => '\app\tags\FoobarTag'],
@@ -97,7 +97,7 @@ trait ApplicationTrait
 
     /**
      * Get an array with all modules which are an instance of the `luya\base\Module`.
-     * 
+     *
      * @return array Containing all module objects which are of luya\base\Module.
      */
     public function getApplicationModules()

@@ -34,7 +34,7 @@ class CrudController extends \luya\console\Command
         $apiEndpoint = $this->prompt('Api Endpoint (e.g. api-'.$modulePre.'-'.strtolower($modelName).')');
 
         $sqlSelection = true;
-        while($sqlSelection) {
+        while ($sqlSelection) {
             $sqlTable = $this->prompt('Database Table name (e.g. '.strtolower($modulePre).'_'.Inflector::underscore($modelName).')');
             if (isset($this->getSqlTablesArray()[$sqlTable])) {
                 $sqlSelection = false;

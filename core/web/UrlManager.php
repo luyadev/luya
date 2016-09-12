@@ -13,7 +13,7 @@ use yii\web\BadRequestHttpException;
  *
  * @property boolean|\luya\cms\Menu $menu The menu componet if registered.
  * @property \luya\web\Composition $composition The composition component if registered.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class UrlManager extends \yii\web\UrlManager
@@ -238,9 +238,9 @@ class UrlManager extends \yii\web\UrlManager
     
     /**
      * See if the module of a provided route exists in the luya application list.
-     * 
+     *
      * The module to test must be an instance of `luya\base\Module`.
-     * 
+     *
      * @param unknown $route
      * @return boolean|string
      */

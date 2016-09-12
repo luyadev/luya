@@ -105,7 +105,7 @@ class SetupController extends \luya\console\Command
         }
         
         if (empty($this->langShortCode)) {
-            $this->langShortCode = $this->prompt('Short-Code of the Standard language:', ['required' => true, 'default' => 'en', 'validator' => function($input, &$error) {
+            $this->langShortCode = $this->prompt('Short-Code of the Standard language:', ['required' => true, 'default' => 'en', 'validator' => function ($input, &$error) {
                 if (strlen($input) !== 2) {
                     $error = 'The Short-Code must be 2 chars length only. Examples: de, en, fr, ru';
                     return false;
@@ -231,10 +231,10 @@ class SetupController extends \luya\console\Command
     /**
      * Helper to insert data in database table.
      *
-     * @param string $table
-     * @param string $fields
+     * @param string $table The database table
+     * @param array $fields The array with insert fields
      */
-    private function insert($table, $fields)
+    private function insert($table, array $fields)
     {
         return Yii::$app->db->createCommand()->insert($table, $fields)->execute();
     }

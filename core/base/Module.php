@@ -31,14 +31,14 @@ abstract class Module extends \yii\base\Module
 
     /**
      * @var array An array with Tag class names to inject into the tag parser on luya boot, where key is the identifier and value the create object conifg:
-     * 
+     *
      * ```php
      * [
      *     'link' => 'luya\cms\tags\LinkTag',
      *     'file' => ['class' => 'luya\admin\tags\FileTag'],
      * ]
      * ```
-     * 
+     *
      * As by default the yii2 configurable object you can also pass properties to your tag object in order to configure them.
      */
     public $tags = [];

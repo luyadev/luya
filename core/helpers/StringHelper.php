@@ -35,7 +35,7 @@ class StringHelper extends \yii\helpers\StringHelper
      * Replace only the first occurance found inside the string.
      *
      * The replace first method is *case sensitive*.
-     * 
+     *
      * ```php
      * StringHelper::replaceFirst('abc', '123', 'abc abc abc'); // returns "123 abc abc"
      * ```
@@ -53,13 +53,13 @@ class StringHelper extends \yii\helpers\StringHelper
     
     /**
      * Check whether a char or word exists in a string or not.
-     * 
+     *
      * This method is case sensitive. The need can be an array with multiple chars or words who
      * are going to look up in the haystack string.
-     * 
+     *
      * If an array of needle words is provided the $strict parameter defines whether all need keys must be found
      * in the string to get the `true` response or if just one of the keys are found the response is already `true`.
-     * 
+     *
      * @param string|array $needle The char or word to find in the $haystack. Can be an array to multi find words or char in the string.
      * @param string $haystack The haystack where the $needle string should be looked  up.
      * @param boolean $strict If an array of needles is provided the $strict parameter defines whether all keys must be found ($strict = true) or just one result must be found ($strict = false).
@@ -73,7 +73,6 @@ class StringHelper extends \yii\helpers\StringHelper
         $state = false;
         
         foreach ($needles as $item) {
-            
             $state = (strpos($haystack, $item) !== false);
             
             if ($strict && !$state) {

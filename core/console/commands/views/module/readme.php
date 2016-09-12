@@ -1,5 +1,6 @@
 <?php
 use luya\base\Boot;
+
 ?># <?= $name; ?> 
  
 Date: <?= date("d.m.Y \a\t H:i"); ?> 

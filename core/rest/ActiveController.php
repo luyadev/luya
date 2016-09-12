@@ -41,11 +41,11 @@ abstract class ActiveController extends BaseActiveController
      * @var boolean|Pagination Whether the pagination is enabled for this ActiveController or not
      * by default pagination for rest controllers is disabled. An example of Activate the pagination
      * by setting it to 100 Records per Page:
-     * 
+     *
      * ```php
      * public $pagination = ['pageSize' => 100];
      * ```
-     * 
+     *
      * Or to turn of the pagination which is be default off just set $pagination to false.
      */
     public $pagination = false;
