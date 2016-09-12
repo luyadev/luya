@@ -18,7 +18,7 @@ Search and replace examples:
 
 |search     |replace
 |---        |---
-|`cms\helpers\TagParser`|`luya\cms\helpers\TagParser`
+|`cms\helpers\TagParser`|`luya\TagParser`
 |`cms\helpers\Url`|`luya\cms\helpers\Url`
 |`cmsadmin\base\Block`|`luya\cms\base\TwigBlock`
 |`\admin\ngrest\base\Api`|`\luya\admin\ngrest\base\Api`
