@@ -43,12 +43,12 @@
             "version": "3.2.7",
             "source": {
                 "type": "git",
-                "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
+                "url": "https://github.com/RobinHerbots/Inputmask.git",
                 "reference": "5a72c563b502b8e05958a524cdfffafe9987be38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/5a72c563b502b8e05958a524cdfffafe9987be38",
+                "url": "https://api.github.com/repos/RobinHerbots/Inputmask/zipball/5a72c563b502b8e05958a524cdfffafe9987be38",
                 "reference": "5a72c563b502b8e05958a524cdfffafe9987be38",
                 "shasum": ""
             },
@@ -365,12 +365,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nadar/yii2-imagine.git",
-                "reference": "473ae0609dc36f65b0fdf138d22ef4ee41783ab0"
+                "reference": "f065d0b088d07d89c8a855bbf8d7d2865536f5ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nadar/yii2-imagine/zipball/473ae0609dc36f65b0fdf138d22ef4ee41783ab0",
-                "reference": "473ae0609dc36f65b0fdf138d22ef4ee41783ab0",
+                "url": "https://api.github.com/repos/nadar/yii2-imagine/zipball/f065d0b088d07d89c8a855bbf8d7d2865536f5ab",
+                "reference": "f065d0b088d07d89c8a855bbf8d7d2865536f5ab",
                 "shasum": ""
             },
             "require": {
@@ -408,7 +408,7 @@
                 "imagine",
                 "yii2"
             ],
-            "time": "2016-09-12 18:06:19"
+            "time": "2016-09-12 18:50:44"
         },
         {
             "name": "yiisoft/yii2",
@@ -764,12 +764,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya.git",
-                "reference": "76e1f7344ebb84b5e37ce98abf236453d6d2235e"
+                "reference": "5f6eea3d270f6fb2f95a109685f8501bdf67106a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya/zipball/76e1f7344ebb84b5e37ce98abf236453d6d2235e",
-                "reference": "76e1f7344ebb84b5e37ce98abf236453d6d2235e",
+                "url": "https://api.github.com/repos/luyadev/luya/zipball/5f6eea3d270f6fb2f95a109685f8501bdf67106a",
+                "reference": "5f6eea3d270f6fb2f95a109685f8501bdf67106a",
                 "shasum": ""
             },
             "require": {
@@ -825,7 +825,7 @@
                 "yii2",
                 "yii2-wrapper"
             ],
-            "time": "2016-09-12 13:08:53"
+            "time": "2016-09-12 18:43:46"
         },
         {
             "name": "myclabs/deep-copy",
