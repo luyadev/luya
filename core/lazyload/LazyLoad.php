@@ -42,7 +42,7 @@ class LazyLoad extends Widget
     /**
      * @var string Additional classes for the lazy load image.
      */
-    public $class = null;
+    public $extraClass = null;
     
     /**
      * {@inheritDoc}
@@ -70,7 +70,7 @@ class LazyLoad extends Widget
      */
     public function run()
     {
-        $class = 'lazy-image ' . $this->class;
+        $class = 'lazy-image ' . $this->extraClass;
         
         if ($this->attributesOnly) {
             return "class=\"{$class}\" data-src=\"$this->src\" data-width=\"$this->width\" data-height=\"$this->height\" data-as-background=\"1\"";
