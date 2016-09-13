@@ -30,6 +30,14 @@ Search and replace examples:
 |`\admin\base\Controller`|`\luya\admin\base\Controller`
 |`\admin\ngrest\base\ActiveWindow`|`\luya\admin\ngrest\base\ActiveWindow`
 
+## Update tag for internal links
+The tag for internal links has changed from link[32] (where 32 is the id of the linked page) to menu[32]. To replace all occurrences, you can search and replace within the field `json_config_values`of the table `cms_nav_item_page_block_item` with the following regular expression:
+
+Search for: `link\[([0-9]+)\]`
+Replace with: `menu[$1]`
+
+Be sure to make a backup of the database beforehand!
+
 
 1.0.0-beta8 (11.08.2016)
 -----------
