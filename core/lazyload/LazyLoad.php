@@ -77,7 +77,7 @@ class LazyLoad extends Widget
         }
         
         $tag = Html::tag('img', '', ['class' => $class, 'data-src' => $this->src, 'data-width' => $this->width, 'data-height' => $this->height]);
-        $tag.= '<noscript><img class="'.$this->class.'" src="'.$this->src.'" /></noscript>';
+        $tag.= '<noscript><img class="'.$class.'" src="'.$this->src.'" /></noscript>';
         return $tag;
     }
 }
