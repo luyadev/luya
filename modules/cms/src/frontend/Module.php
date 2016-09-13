@@ -25,6 +25,7 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
 
     public $tags = [
         'menu' => ['class' => 'luya\cms\tags\MenuTag'],
+        'page' => ['class' => 'luya\cms\tags\PageTag'],
     ];
     
     /**
