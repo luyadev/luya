@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ce9fb34b6a210ebd71c7d4ab3dca5f78",
-    "content-hash": "79e201a0ea19250b762a74972834138c",
+    "hash": "4e139b94842eeafb9fc30e9cf68c007e",
+    "content-hash": "ccc1a66abf732050472de06524650612",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -92,12 +92,12 @@
             "version": "3.2.7",
             "source": {
                 "type": "git",
-                "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
+                "url": "https://github.com/RobinHerbots/Inputmask.git",
                 "reference": "5a72c563b502b8e05958a524cdfffafe9987be38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/5a72c563b502b8e05958a524cdfffafe9987be38",
+                "url": "https://api.github.com/repos/RobinHerbots/Inputmask/zipball/5a72c563b502b8e05958a524cdfffafe9987be38",
                 "reference": "5a72c563b502b8e05958a524cdfffafe9987be38",
                 "shasum": ""
             },
@@ -655,16 +655,16 @@
         },
         {
             "name": "ifsnop/mysqldump-php",
-            "version": "v2.1",
+            "version": "v2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ifsnop/mysqldump-php.git",
-                "reference": "701024dd160f15796bed8130c3bdeb26c634785a"
+                "reference": "6c1b84c5b05d862d15ba9ddf92c7d99a3d81e439"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ifsnop/mysqldump-php/zipball/701024dd160f15796bed8130c3bdeb26c634785a",
-                "reference": "701024dd160f15796bed8130c3bdeb26c634785a",
+                "url": "https://api.github.com/repos/ifsnop/mysqldump-php/zipball/6c1b84c5b05d862d15ba9ddf92c7d99a3d81e439",
+                "reference": "6c1b84c5b05d862d15ba9ddf92c7d99a3d81e439",
                 "shasum": ""
             },
             "require": {
@@ -703,7 +703,7 @@
                 "pdo",
                 "sqlite"
             ],
-            "time": "2015-10-19 15:58:11"
+            "time": "2016-09-07 06:56:07"
         },
         {
             "name": "imagine/imagine",
@@ -800,21 +800,21 @@
         },
         {
             "name": "nadar/yii2-imagine",
-            "version": "dev-master",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nadar/yii2-imagine.git",
-                "reference": "473ae0609dc36f65b0fdf138d22ef4ee41783ab0"
+                "reference": "e71458b87153c99471b2a07c749a27d760e47e16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nadar/yii2-imagine/zipball/473ae0609dc36f65b0fdf138d22ef4ee41783ab0",
-                "reference": "473ae0609dc36f65b0fdf138d22ef4ee41783ab0",
+                "url": "https://api.github.com/repos/nadar/yii2-imagine/zipball/e71458b87153c99471b2a07c749a27d760e47e16",
+                "reference": "e71458b87153c99471b2a07c749a27d760e47e16",
                 "shasum": ""
             },
             "require": {
-                "imagine/imagine": "0.6.*",
-                "yiisoft/yii2": "^2.0"
+                "imagine/imagine": "~0.6.0",
+                "yiisoft/yii2": "~2.0.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "~5.0"
@@ -847,7 +847,7 @@
                 "imagine",
                 "yii2"
             ],
-            "time": "2016-09-12 18:06:19"
+            "time": "2016-09-13 07:07:21"
         },
         {
             "name": "paypal/rest-api-sdk-php",
@@ -1626,9 +1626,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "nadar/yii2-imagine": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
