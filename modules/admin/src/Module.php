@@ -4,9 +4,13 @@ namespace luya\admin;
 
 use Yii;
 use luya\web\UrlRule;
-use luya\admin\components\AdminLanguage;
 use luya\console\interfaces\ImportControllerInterface;
 use luya\base\CoreModuleInterface;
+use luya\admin\components\AdminLanguage;
+use luya\admin\components\AdminUser;
+use luya\admin\components\AdminMenu;
+use luya\admin\components\StorageContainer;
+use luya\admin\components\Auth;
 
 class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
@@ -104,16 +108,16 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
                 'class' => AdminLanguage::className(),
             ],
             'adminuser' => [
-                'class' => \luya\admin\components\AdminUser::className(),
+                'class' => AdminUser::className(),
             ],
             'adminmenu' => [
-                'class' => \luya\admin\components\AdminMenu::className(),
+                'class' => AdminMenu::className(),
             ],
             'storage' => [
-                'class' => \luya\admin\components\StorageContainer::className(),
+                'class' => StorageContainer::className(),
             ],
             'auth' => [
-                'class' => \luya\admin\components\Auth::className(),
+                'class' => Auth::className(),
             ],
         ];
     }

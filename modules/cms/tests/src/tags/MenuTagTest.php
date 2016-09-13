@@ -2,8 +2,6 @@
 
 namespace cmstests\src\tags;
 
-use Yii;
-use luya\TagParser;
 use cmstests\CmsFrontendTestCase;
 use luya\cms\tags\MenuTag;
 

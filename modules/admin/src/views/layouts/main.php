@@ -559,9 +559,8 @@ $this->beginPage()
                     <ul class="collection with-header">
                     <?php foreach ($this->context->tags as $name => $object): ?>
                         <li class="collection-item" click-paste-pusher="<?= $object->example(); ?>" style="cursor: pointer;" ng-mouseenter="isHover['<?=$name;?>']=true" ng-mouseleave="isHover['<?=$name;?>']=false">
-                            <div ng-show="isHover['<?=$name;?>']" style="position:absolute;  right:20%; width:400px; padding:10px; position:fixed; background-color:black; color:white; z-index:9999999;">
-                                <h1><?= $name; ?></h1>
-                                <h2><i><?= $object->example(); ?></i></h2>
+                            <div ng-show="isHover['<?=$name;?>']" style="position:absolute;  right:20%; width:400px; position:fixed; background-color:black; color:white; z-index:9999999;">
+                                <h5 style="padding-left:2rem;"><?= $name; ?> <small> - <i><?= $object->example(); ?></i></small></h5>
                                 <?= Markdown::process($object->readme()); ?>
                             </div>
                             <div><?= $name; ?><a class="secondary-content"><i class="material-icons">content_paste</i></a></div>
