@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9f3befef43187ebcd90dcc800b3fdfc0",
-    "content-hash": "3f61e8977f8561faf43591cb9eff409a",
+    "hash": "93ce4cd7172c7ab6d748dfd68e6482b5",
+    "content-hash": "020daf4e6bf5bd1b07db20b9d33ecb44",
     "packages": [
         {
             "name": "bower-asset/jquery",
@@ -361,21 +361,21 @@
         },
         {
             "name": "nadar/yii2-imagine",
-            "version": "dev-master",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nadar/yii2-imagine.git",
-                "reference": "f065d0b088d07d89c8a855bbf8d7d2865536f5ab"
+                "reference": "e71458b87153c99471b2a07c749a27d760e47e16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nadar/yii2-imagine/zipball/f065d0b088d07d89c8a855bbf8d7d2865536f5ab",
-                "reference": "f065d0b088d07d89c8a855bbf8d7d2865536f5ab",
+                "url": "https://api.github.com/repos/nadar/yii2-imagine/zipball/e71458b87153c99471b2a07c749a27d760e47e16",
+                "reference": "e71458b87153c99471b2a07c749a27d760e47e16",
                 "shasum": ""
             },
             "require": {
-                "imagine/imagine": "0.6.*",
-                "yiisoft/yii2": "^2.0"
+                "imagine/imagine": "~0.6.0",
+                "yiisoft/yii2": "~2.0.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "~5.0"
@@ -408,7 +408,7 @@
                 "imagine",
                 "yii2"
             ],
-            "time": "2016-09-12 18:50:44"
+            "time": "2016-09-13 07:07:21"
         },
         {
             "name": "yiisoft/yii2",
@@ -764,12 +764,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya.git",
-                "reference": "5f6eea3d270f6fb2f95a109685f8501bdf67106a"
+                "reference": "5c240ad30b0c2b34b85e3737eab5087edb37355e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya/zipball/5f6eea3d270f6fb2f95a109685f8501bdf67106a",
-                "reference": "5f6eea3d270f6fb2f95a109685f8501bdf67106a",
+                "url": "https://api.github.com/repos/luyadev/luya/zipball/5c240ad30b0c2b34b85e3737eab5087edb37355e",
+                "reference": "5c240ad30b0c2b34b85e3737eab5087edb37355e",
                 "shasum": ""
             },
             "require": {
@@ -825,20 +825,20 @@
                 "yii2",
                 "yii2-wrapper"
             ],
-            "time": "2016-09-12 18:43:46"
+            "time": "2016-09-13 06:53:29"
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.5.2",
+            "version": "1.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "da8529775f14f4fdae33f916eb0cf65f6afbddbc"
+                "reference": "94e5ca3e90aa5b34663780393e10914f7438f991"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/da8529775f14f4fdae33f916eb0cf65f6afbddbc",
-                "reference": "da8529775f14f4fdae33f916eb0cf65f6afbddbc",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/94e5ca3e90aa5b34663780393e10914f7438f991",
+                "reference": "94e5ca3e90aa5b34663780393e10914f7438f991",
                 "shasum": ""
             },
             "require": {
@@ -867,7 +867,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2016-09-06 16:07:05"
+            "time": "2016-09-07 15:34:10"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -2621,7 +2621,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "nadar/yii2-imagine": 20,
         "luyadev/luya": 20
     },
     "prefer-stable": false,
