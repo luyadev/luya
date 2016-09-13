@@ -33,7 +33,7 @@ Search and replace examples:
 ### Update tag for internal links
 The tag for internal links has changed from `link[32]` (where 32 is the id of the linked page) to `menu[32]`. To replace all occurrences, you can search and replace within the field `json_config_values`of the table `cms_nav_item_page_block_item` with the following regular expression:
 
-Search for: `link\[([0-9]+)\]`
+Search for: `link\[([0-9]+)\]`  
 Replace with: `menu[$1]`
 
 Be sure to make a backup of the database beforehand!
