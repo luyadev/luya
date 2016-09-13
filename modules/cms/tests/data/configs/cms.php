@@ -11,6 +11,7 @@ return [
         'cms' => [
             'class' => '\luya\cms\frontend\Module'
         ],
+    	'cmsadmin' => 'luya\cms\admin\Module',
         'CmsUnitModule' => '\cmstests\data\modules\CmsUnitModule',
     ],
     'components' => [
