@@ -9,6 +9,8 @@ use luya\cms\frontend\Module;
 use luya\helpers\ModuleHelper;
 use luya\cms\base\TwigBlock;
 use luya\cms\frontend\blockgroups\DevelopmentGroup;
+use yii\web\NotFoundHttpException;
+use yii\helpers\Json;
 
 /**
  * Module integration Block to render controller and/or actions.
@@ -98,37 +100,30 @@ class ModuleBlock extends TwigBlock
             return;
         }
         
-        try {
-            $ctrl = $this->getCfgValue('moduleController');
-            $action = $this->getCfgValue('moduleAction', 'index');
-            $actionArgs = json_decode($this->getCfgValue('moduleActionArgs'), true);
-            if (empty($actionArgs)) {
-                $actionArgs = [];
-            }
-    
-            // get module
-            $module = Yii::$app->getModule($moduleName);
-            $module->context = 'cms';
-            
-            // start module reflection
-            $reflection = ModuleHelper::reflectionObject($module);
-            $reflection->suffix = $this->getEnvOption('restString');
-    
-            // if a controller has been defined we inject a custom starting route for the
-            // module reflection object.
-            if (!empty($ctrl)) {
-                $reflection->defaultRoute($ctrl, $action, $actionArgs);
-            }
-    
-            $response = $reflection->run();
-            
-            if ($response instanceof Response) {
-                return Yii::$app->end(0, $response);
-            }
-            
-            return $response;
-        } catch (\Exception $err) {
-            throw new Exception('Exception has been throwed in Module Block: ' . $err->getMessage(), 0, $err);
+        $ctrl = $this->getCfgValue('moduleController');
+        $action = $this->getCfgValue('moduleAction', 'index');
+        $actionArgs = Json::decode($this->getCfgValue('moduleActionArgs', '{}'));
+        
+        // get module
+        $module = Yii::$app->getModule($moduleName);
+        $module->context = 'cms';
+        
+        // start module reflection
+        $reflection = ModuleHelper::reflectionObject($module);
+        $reflection->suffix = $this->getEnvOption('restString');
+
+        // if a controller has been defined we inject a custom starting route for the
+        // module reflection object.
+        if (!empty($ctrl)) {
+            $reflection->defaultRoute($ctrl, $action, $actionArgs);
         }
+
+        $response = $reflection->run();
+        
+        if ($response instanceof Response) {
+            return Yii::$app->end(0, $response);
+        }
+        
+        return $response;
     }
 }

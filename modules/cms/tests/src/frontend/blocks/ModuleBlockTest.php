@@ -14,8 +14,6 @@ class ModuleBlockTest extends CmsFrontendTestCase
         $block->setEnvOption('context', 'frontend');
         $block->setVarValues(['moduleName' => 'CmsUnitModule']);
 
-        $twig = Yii::$app->twig->env(new \Twig_Loader_String());
-
         $this->assertEquals('cmsunitmodule/default/index', $block->renderFrontend());
     }
 
@@ -36,5 +34,41 @@ class ModuleBlockTest extends CmsFrontendTestCase
         $block->setVarValues(['moduleName' => 'CmsUnitModule']);
 
         $this->assertEquals('cmsunitmodule/foo/bar', $block->renderFrontend());
+    }
+    
+    public function testCutomControllerFrontendActionArgs()
+    {
+        $block = new ModuleBlock();
+        $block->setEnvOption('context', 'frontend');
+        $block->setVarValues(['moduleName' => 'CmsUnitModule']);
+        $block->setCfgValues(['moduleController' => 'default', 'moduleAction' => 'with-args', 'moduleActionArgs' => '{"param":"paramvalue"}']);
+        $this->assertEquals('paramvalue', $block->renderFrontend());
+    }
+    
+    
+    /**
+     * @expectedException yii\web\NotFoundHttpException
+     */
+    public function testNotFoundException()
+    {
+        $block = new ModuleBlock();
+        $block->setEnvOption('context', 'frontend');
+        $block->setVarValues(['moduleName' => 'CmsUnitModule']);
+        $block->setCfgValues(['moduleController' => 'not-found-controller']);
+        
+        $this->assertSame('asdfsdf', $block->renderFrontend());
+    }
+    
+    /**
+     * @expectedException luya\cms\Exception
+     */
+    public function testBlockWithException()
+    {
+        $block = new ModuleBlock();
+        $block->setEnvOption('context', 'frontend');
+        $block->setVarValues(['moduleName' => 'CmsUnitModule']);
+        $block->setCfgValues(['moduleController' => 'default', 'moduleAction' => 'exception']);
+    
+        $this->assertSame('asdfsdf', $block->renderFrontend());
     }
 }
