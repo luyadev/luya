@@ -3,9 +3,8 @@
 namespace luya\news\admin;
 
 use Yii;
-use luya\base\CoreModuleInterface;
 
-class Module extends \luya\admin\base\Module implements CoreModuleInterface
+class Module extends \luya\admin\base\Module
 {
     public $apis = [
         'api-news-article' => 'luya\news\admin\apis\ArticleController',

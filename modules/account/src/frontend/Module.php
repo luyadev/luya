@@ -3,9 +3,8 @@
 namespace luya\account\frontend;
 
 use Yii;
-use luya\base\CoreModuleInterface;
 
-class Module extends \luya\base\Module implements CoreModuleInterface
+class Module extends \luya\base\Module
 {
     public $urlRules = [
         ['pattern' => 'account/login', 'route' => 'account/default/index'],

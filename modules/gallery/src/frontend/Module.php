@@ -2,14 +2,12 @@
 
 namespace luya\gallery\frontend;
 
-use luya\base\CoreModuleInterface;
-
 /**
  * Gallery Module
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class Module extends \luya\base\Module implements CoreModuleInterface
+class Module extends \luya\base\Module
 {
     /**
      * @var boolean This module does not have view files, so the view are looked up in the application folder.
