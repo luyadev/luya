@@ -114,23 +114,30 @@ class Storage
         ];
     }
     
-    public static function moveFilesToFolder($fileIds, $folderId)
+    public static function moveFilesToFolder(array $fileIds, $folderId)
     {
         foreach ($fileIds as $fileId) {
             static::moveFileToFolder($fileId, $folderId);
         }
-        
-        Yii::$app->storage->flushArrays();
     }
     
+    /**
+     * 
+     * @param string|int $fileId
+     * @param string|int $folderId
+     * @return boolean
+     */
     public static function moveFileToFolder($fileId, $folderId)
     {
         $file = StorageFile::findOne($fileId);
-        $file->folder_id = $folderId;
-    
-        Yii::$app->storage->flushArrays();
         
-        return $file->update(false);
+        if ($file) {
+            $file->updateAttributes(['folder_id' => $folderId]);
+            Yii::$app->storage->flushArrays();
+            return true;
+        }
+        
+        return false;
     }
     
     /**
