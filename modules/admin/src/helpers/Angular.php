@@ -3,6 +3,7 @@
 namespace luya\admin\helpers;
 
 use yii\helpers\Html;
+use yii\helpers\Inflector;
 
 /**
  * Helper Method to create angular tags.
@@ -40,7 +41,7 @@ class Angular
      */
     protected static function injector($type, $ngModel, $label, $options = [], array $mergeOptions = [])
     {
-        return Html::tag($type, null, array_merge($mergeOptions, [
+        return static::directive($type, array_merge($mergeOptions, [
             'model' => $ngModel,
             'label' => $label,
             'options' => $options,
@@ -64,9 +65,9 @@ class Angular
      * @param unknown $ngModel
      * @param array $options
      */
-    public static function directive($name, $ngModel, array $options = [])
+    public static function directive($name, array $options = [])
     {
-        return Html::tag($name, null, array_merge($options, ['ng-model' => $ngModel]));
+        return Html::tag(Inflector::camel2id($name), null, $options);
     }
     
     /**

@@ -47,12 +47,12 @@ class TestPlugin extends \admin\ngrest\base\Plugin
     
     public function renderUpdate($id, $ngModel)
     {
-        return Angular::directive('my-directive', $ngModel, ['data' => $this->getServiceName('data')]);
+        return Angular::directive('my-directive', ['model' => $ngModel, data' => $this->getServiceName('data')]);
     }
     
     public function renderCreate($id, $ngModel)
     {
-        return Angular::directive('my-directive', $ngModel, ['data' => $this->getServiceName('data')]);
+        return Angular::directive('my-directive', ['model' => $ngModel, 'data' => $this->getServiceName('data')]);
     }
     
     public function serviceData()
@@ -73,16 +73,16 @@ zaa.directive("myDirective", function() {
     return {
         restrict: "E",
         scope : {
-            'ngModel' : '=',
+            'model' : '=',
             'data' : '=',
         },
         controller: function($scope, $filter) {
-            $scope.$watch(function() { return $scope.ngModel }, function(n, o) {
+            $scope.$watch(function() { return $scope.model }, function(n, o) {
                 console.log(n, o);
             });
         },
         template : function() {
-            return '<div>{{data | json }} - {{ ngModel }} - <input type="text" ng-model="ngModel" /></div>';
+            return '<div>{{data | json }} - {{ model }} - <input type="text" ng-model="model" /></div>';
         }
     }
 });
