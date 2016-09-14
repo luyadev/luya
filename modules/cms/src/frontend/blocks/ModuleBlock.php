@@ -4,13 +4,11 @@ namespace luya\cms\frontend\blocks;
 
 use Yii;
 use yii\web\Response;
-use luya\cms\Exception;
+use yii\helpers\Json;
 use luya\cms\frontend\Module;
-use luya\helpers\ModuleHelper;
 use luya\cms\base\TwigBlock;
 use luya\cms\frontend\blockgroups\DevelopmentGroup;
-use yii\web\NotFoundHttpException;
-use yii\helpers\Json;
+use luya\base\ModuleReflection;
 
 /**
  * Module integration Block to render controller and/or actions.
@@ -92,11 +90,7 @@ class ModuleBlock extends TwigBlock
 
     private function moduleContent($moduleName)
     {
-        if ($this->isAdminContext() || empty($moduleName) || count($this->getEnvOptions()) === 0) {
-            return;
-        }
-        
-        if (!Yii::$app->hasModule($moduleName)) {
+        if ($this->isAdminContext() || empty($moduleName) || count($this->getEnvOptions()) === 0 || !Yii::$app->hasModule($moduleName)) {
             return;
         }
         
@@ -109,7 +103,7 @@ class ModuleBlock extends TwigBlock
         $module->context = 'cms';
         
         // start module reflection
-        $reflection = ModuleHelper::reflectionObject($module);
+        $reflection = Yii::createObject(['class' => ModuleReflection::className(), 'module' => $module]);
         $reflection->suffix = $this->getEnvOption('restString');
 
         // if a controller has been defined we inject a custom starting route for the

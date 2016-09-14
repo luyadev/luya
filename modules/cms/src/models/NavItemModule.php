@@ -4,10 +4,10 @@ namespace luya\cms\models;
 
 use Yii;
 use luya\cms\Exception;
-use luya\helpers\ModuleHelper;
 use luya\cms\base\NavItemTypeInterface;
 use luya\cms\base\NavItemType;
 use luya\cms\admin\Module;
+use luya\base\ModuleReflection;
 
 /**
  * Represents the type MODULE for a NavItem.
@@ -80,7 +80,7 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
         if ($this->_content == null) {
             $module = $this->getModule();
             
-            $reflection = ModuleHelper::reflectionObject($module);
+            $reflection = Yii::createObject(['class' => ModuleReflection::className(), 'module' => $module]);
             $reflection->suffix = $this->getOption('restString');
             
             $this->_content = $reflection->run();
