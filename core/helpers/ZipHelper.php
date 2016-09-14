@@ -5,9 +5,9 @@ namespace luya\helpers;
 use ZipArchive;
 
 /**
- * Zip Helper methods
+ * Zip Helper class
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class ZipHelper
 {
