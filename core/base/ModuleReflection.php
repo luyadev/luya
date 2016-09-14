@@ -30,7 +30,7 @@ use luya\web\UrlManager;
  * $content = $reflection->run();
  * ```
  *
- * @property luya\base\Module $module The module where the route should be run from.
+ * @property \luya\base\Module $module The module where the route should be run from.
  * @property string $suffix The suffix which should be used to attach to the url rules.
  * 
  * @author Basil Suter <basil@nadar.io>
@@ -38,24 +38,22 @@ use luya\web\UrlManager;
 class ModuleReflection extends Object
 {
     /**
-     * @var luya\web\Request Request object from DI-Container.
+     * @var \luya\web\Request Request object from DI-Container.
      */
     public $request = null;
 
     /**
-     * @var luya\web\UrlManager UrlManager object from DI-Container.
+     * @var \luya\web\UrlManager UrlManager object from DI-Container.
      */
     public $urlManager = null;
     
     /**
-     * @var yii\base\Controller|null The controller paramter is null until the [[run()]] method has been applied.
+     * @var \yii\base\Controller|null The controller paramter is null until the [[run()]] method has been applied.
      */
     public $controller = null;
 
     private $_defaultRoute = null;
 
-    
-    
     /**
      * Class constructor in order to consum from DI Container.
      * 
@@ -201,7 +199,7 @@ class ModuleReflection extends Object
     /**
      * Run the route based on the values.
      * 
-     * @return string|yii\web\Response The response of the action, can be either a string or an object from response.
+     * @return string|\yii\web\Response The response of the action, can be either a string or an object from response.
      * @throws NotFoundHttpException
      */
     public function run()
