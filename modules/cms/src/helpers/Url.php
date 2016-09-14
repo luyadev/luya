@@ -43,8 +43,8 @@ class Url extends \luya\helpers\Url
      * to the rules' pattern. Example:
      *
      * ```php
-     * Url::toModuleRoute('blog', 'blog/default/index', ['year' => '2016', 'month' => '07']);
-     * Url::toModuleRoute('blog', ['/blog/default/index', 'year' => 2016, 'month' => '07]); // is equal
+     * Url::toModuleRoute('blog', ['/blog/default/index', 'year' => 2016, 'month' => '07]); // recommend
+     * Url::toModuleRoute('blog', 'blog/default/index', ['year' => '2016', 'month' => '07']); // equals to above
      * ```
      *
      * generates the following URL, assuming the blog module is located on the CMS page /my-super-blog:
