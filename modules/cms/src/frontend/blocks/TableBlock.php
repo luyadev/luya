@@ -4,10 +4,16 @@ namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
 use luya\TagParser;
+use luya\cms\base\TwigBlock;
 
-class TableBlock extends \luya\cms\base\Block
+/**
+ * Table Block.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
+class TableBlock extends TwigBlock
 {
-    public $module = 'cmsadmin';
+    public $module = 'cms';
     
     public $cacheEnabled = true;
 

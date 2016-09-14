@@ -4,10 +4,16 @@ namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
 use luya\cms\frontend\blockgroups\LayoutGroup;
+use luya\cms\base\TwigBlock;
 
-class LayoutBlock extends \luya\cms\base\Block
+/**
+ * Layout/Grid Block.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
+class LayoutBlock extends TwigBlock
 {
-    public $module = 'cmsadmin';
+    public $module = 'cms';
 
     public $isContainer = true;
 

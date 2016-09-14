@@ -3,10 +3,16 @@
 namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
+use luya\cms\base\TwigBlock;
 
-class SpacingBlock extends \luya\cms\base\Block
+/**
+ * Margin Top/Bottom block with Paragraph.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
+class SpacingBlock extends TwigBlock
 {
-    public $module = 'cmsadmin';
+    public $module = 'cms';
     
     public $cacheEnabled = true;
 

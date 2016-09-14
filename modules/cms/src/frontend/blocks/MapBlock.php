@@ -3,10 +3,16 @@
 namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
+use luya\cms\base\TwigBlock;
 
-class MapBlock extends \luya\cms\base\Block
+/**
+ * Google Maps Block.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
+class MapBlock extends TwigBlock
 {
-    public $module = 'cmsadmin';
+    public $module = 'cms';
     
     public $cacheEnabled = true;
 

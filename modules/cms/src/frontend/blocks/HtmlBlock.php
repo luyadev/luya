@@ -4,10 +4,16 @@ namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
 use luya\cms\frontend\blockgroups\DevelopmentGroup;
+use luya\cms\base\TwigBlock;
 
-class HtmlBlock extends \luya\cms\base\Block
+/**
+ * HTML Block
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
+class HtmlBlock extends TwigBlock
 {
-    public $module = 'cmsadmin';
+    public $module = 'cms';
 
     public $cacheEnabled = true;
     
@@ -15,10 +21,7 @@ class HtmlBlock extends \luya\cms\base\Block
     {
         return 'HTML';
     }
-
-    /**
-     * @todo check correct materialized icon (code)
-     */
+    
     public function icon()
     {
         return 'code';

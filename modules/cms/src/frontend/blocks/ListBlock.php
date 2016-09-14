@@ -4,10 +4,16 @@ namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
 use luya\cms\frontend\blockgroups\TextGroup;
+use luya\cms\base\TwigBlock;
 
-class ListBlock extends \luya\cms\base\Block
+/**
+ * UL/OL list block.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
+class ListBlock extends TwigBlock
 {
-    public $module = 'cmsadmin';
+    public $module = 'cms';
 
     public $cacheEnabled = true;
     

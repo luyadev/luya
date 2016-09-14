@@ -3,11 +3,14 @@
 namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
+use luya\cms\base\TwigBlock;
 
 /**
- * Audio block for SoundCloud-Sources
+ * Audio Block for Soundcloude Service
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
-class AudioBlock extends \luya\cms\base\Block
+class AudioBlock extends TwigBlock
 {
     public $cacheEnabled = true;
     
@@ -18,7 +21,7 @@ class AudioBlock extends \luya\cms\base\Block
 
     public function icon()
     {
-        return 'volume_up'; // choose icon from: http://materializecss.com/icons.html
+        return 'volume_up';
     }
 
     public function config()

@@ -3,11 +3,14 @@
 namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
+use luya\cms\base\TwigBlock;
 
 /**
  * Simple horizontal line block
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
-class LineBlock extends \luya\cms\base\Block
+class LineBlock extends TwigBlock
 {
     public $cacheEnabled = true;
     
@@ -18,7 +21,7 @@ class LineBlock extends \luya\cms\base\Block
 
     public function icon()
     {
-        return 'remove'; // choose icon from: http://materializecss.com/icons.html
+        return 'remove';
     }
 
     public function config()
@@ -46,16 +49,6 @@ class LineBlock extends \luya\cms\base\Block
                     ['value' => '#000', 'label' => Module::t('block_line_linecolor_black')],
                 ], 'initvalue' => '#ccc']
             ],
-        ];
-    }
-
-    /**
-     * Return an array containg all extra vars. Those variables you can access in the Twig Templates via {{extras.*}}.
-     */
-    public function extraVars()
-    {
-        return [
-            // add your custom extra vars here
         ];
     }
 

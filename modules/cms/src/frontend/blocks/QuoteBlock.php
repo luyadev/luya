@@ -4,10 +4,16 @@ namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
 use luya\cms\frontend\blockgroups\TextGroup;
+use luya\cms\base\TwigBlock;
 
-class QuoteBlock extends \luya\cms\base\Block
+/**
+ * Blockquote Block.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
+class QuoteBlock extends TwigBlock
 {
-    public $module = 'cmsadmin';
+    public $module = 'cms';
 
     public $cacheEnabled = true;
     

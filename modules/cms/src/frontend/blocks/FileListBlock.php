@@ -2,12 +2,17 @@
 
 namespace luya\cms\frontend\blocks;
 
-use Yii;
 use luya\cms\frontend\Module;
+use luya\cms\base\TwigBlock;
 
-class FileListBlock extends \luya\cms\base\Block
+/**
+ * File list block.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
+class FileListBlock extends TwigBlock
 {
-    public $module = 'cmsadmin';
+    public $module = 'cms';
 
     public $cacheEnabled = true;
     
@@ -21,9 +26,6 @@ class FileListBlock extends \luya\cms\base\Block
         return 'attachment';
     }
 
-    /**
-     * @todo enabling display of file size when issue #94 is resolved
-     */
     public function config()
     {
         return [

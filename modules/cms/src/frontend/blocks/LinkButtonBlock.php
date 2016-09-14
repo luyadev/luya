@@ -4,11 +4,14 @@ namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
 use Yii;
+use luya\cms\base\TwigBlock;
 
 /**
  * Simple button element with a link function
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
-class LinkButtonBlock extends \luya\cms\base\Block
+class LinkButtonBlock extends TwigBlock
 {
     public $cacheEnabled = true;
 
@@ -61,22 +64,12 @@ class LinkButtonBlock extends \luya\cms\base\Block
         }
         return $data;
     }
-
-    public function getCssClass()
-    {
-        $data = '';
-
-        if ($this->getCfgValue('simpleLink', 0) == 0) {
-            $data = 'btn btn-default';
-        }
-        return $data;
-    }
-
+    
     public function extraVars()
     {
         return [
             'linkTarget' => $this->getLinkTarget(),
-            'cssClass' => $this->getCssClass(),
+            'cssClass' => $this->getCfgValue('simpleLink', 'btn btn-default'),
         ];
     }
 

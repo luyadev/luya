@@ -3,10 +3,16 @@
 namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
+use luya\cms\base\TwigBlock;
 
-class VideoBlock extends \luya\cms\base\Block
+/**
+ * Embed YouTube and Vimeo video Block.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
+class VideoBlock extends TwigBlock
 {
-    public $module = 'cmsadmin';
+    public $module = 'cms';
 
     public $cacheEnabled = true;
 

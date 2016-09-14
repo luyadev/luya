@@ -4,8 +4,14 @@ namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
 use luya\cms\frontend\blockgroups\TextGroup;
+use luya\cms\base\TwigBlock;
 
-class WysiwygBlock extends \luya\cms\base\Block
+/**
+ * WYSIWYG Block with ng-wig.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
+class WysiwygBlock extends TwigBlock
 {
     public $cacheEnabled = true;
     

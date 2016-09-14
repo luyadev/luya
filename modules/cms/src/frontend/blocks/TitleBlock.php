@@ -4,10 +4,16 @@ namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
 use luya\cms\frontend\blockgroups\TextGroup;
+use luya\cms\base\TwigBlock;
 
-class TitleBlock extends \luya\cms\base\Block
+/**
+ * Heading-Title Block.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
+class TitleBlock extends TwigBlock
 {
-    public $module = 'cmsadmin';
+    public $module = 'cms';
     
     public $cacheEnabled = true;
 

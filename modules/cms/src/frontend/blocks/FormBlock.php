@@ -2,31 +2,41 @@
 
 namespace luya\cms\frontend\blocks;
 
-use luya\cms\frontend\Module;
 use Yii;
-use luya\helpers\Url;
 use yii\helpers\Html;
+use luya\helpers\Url;
+use luya\cms\base\TwigBlock;
+use luya\cms\frontend\Module;
 
-class FormBlock extends \luya\cms\base\Block
+/**
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ *
+ */
+class FormBlock extends TwigBlock
 {
-    public $module = 'cmsadmin';
-
-    public $_parser = null;
+    public $module = 'cms';
 
     public $defaultNameLabel = 'Name';
+    
     public $defaultNamePlaceholder = 'Vor- und Nachname';
+    
     public $defaultNameError = 'Bitte geben Sie einen Namen ein';
 
     public $defaultEmailLabel = 'Email';
+    
     public $defaultEmailPlaceholder = 'beispiel@beispiel.ch';
+    
     public $defaultEmailError = 'Bitte geben Sie eine Emailadresse ein';
 
     public $defaultMessageLabel = 'Nachricht';
+    
     public $defaultMessageError = 'Bitte geben Sie eine Nachricht ein';
 
     public $defaultSendLabel = 'Absenden';
 
     public $defaultSendError = 'Leider ist ein Fehler beim Senden der Nachricht aufgetreten.';
+
     public $defaultSendSuccess = 'Vielen Dank! Wir werden uns mit Ihnen in Verbindung setzen.';
 
     public $defaultMailSubject = 'Kontaktanfrage';

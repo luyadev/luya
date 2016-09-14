@@ -4,10 +4,16 @@ namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
 use luya\cms\frontend\blockgroups\DevelopmentGroup;
+use luya\cms\base\TwigBlock;
 
-class DevBlock extends \luya\cms\base\Block
+/**
+ * Development Block in order to print data.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
+class DevBlock extends TwigBlock
 {
-    public $module = 'cmsadmin';
+    public $module = 'cms';
 
     public function name()
     {
@@ -21,8 +27,7 @@ class DevBlock extends \luya\cms\base\Block
 
     public function config()
     {
-        return ['',
-        ];
+        return [];
     }
 
     public function twigFrontend()

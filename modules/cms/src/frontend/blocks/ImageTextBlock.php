@@ -5,10 +5,16 @@ namespace luya\cms\frontend\blocks;
 use Yii;
 use luya\cms\frontend\Module;
 use luya\TagParser;
+use luya\cms\base\TwigBlock;
 
-class ImageTextBlock extends \luya\cms\base\Block
+/**
+ * Image with Text block.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
+class ImageTextBlock extends TwigBlock
 {
-    public $module = 'cmsadmin';
+    public $module = 'cms';
 
     public $cacheEnabled = true;
     
