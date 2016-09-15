@@ -17,6 +17,7 @@ class m160915_081618_create_admin_logger_table extends Migration
             'trace_function' => 'varchar(255)',
             'trace_function_args' => 'text',
             'group_identifier' => 'varchar(255)',
+            'group_identifier_index' => 'int(11)',
             'get' => 'text',
             'post' => 'text',
             'session' => 'text',

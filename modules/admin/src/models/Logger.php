@@ -21,6 +21,7 @@ use yii\helpers\Json;
  * @property string $session
  * @property string $server
  * @property string $group_identifier If provided the group_identifier is used to group multiple logging informations into one trace in order to see what messages should be display togher (trace behavior).
+ * @property integer $group_identifier_index
  */
 class Logger extends \yii\db\ActiveRecord
 {
@@ -47,13 +48,15 @@ class Logger extends \yii\db\ActiveRecord
     {
         return [
             [['time', 'message', 'type'], 'required'],
-            [['time', 'type'], 'integer'],
+            [['time', 'type', 'group_identifier_index'], 'integer'],
             [['message', 'get', 'post', 'session', 'server', 'group_identifier'], 'string'],
             [['trace_file', 'trace_line', 'trace_function', 'trace_function_args'], 'safe'],
         ];
     }
 
-    private static function log($type, $message, $trace, $groupIdentifier = null)
+    private static $identiferIndex = [];
+    
+    private static function log($type, $message, $trace, $groupIdentifier = null, $grouIdentifierIndex = 0)
     {
         $file = 'unknown';
         $line = 'unknown';
@@ -86,6 +89,7 @@ class Logger extends \yii\db\ActiveRecord
             'session' => (isset($_SESSION)) ? Json::encode($_SESSION) : '{}',
             'server' => (isset($_SERVER)) ? Json::encode($_SERVER) : '{}',
             'group_identifier' => $groupIdentifier,
+            'group_identifier_index' => $grouIdentifierIndex,
         ];
         
         return $model->save(false);
@@ -110,6 +114,7 @@ class Logger extends \yii\db\ActiveRecord
             'session' => 'Session',
             'server' => 'Server',
             'group_identifier' => 'Group Identifier',
+            'group_identifier_index' => 'Group Identifier Index',
         ];
     }
     
@@ -125,7 +130,13 @@ class Logger extends \yii\db\ActiveRecord
     
     public static function trace($groupIdentifier, $message)
     {
-        return static::log(self::TYPE_TRACE, $message, debug_backtrace(false, 2), $groupIdentifier);
+        $hash = md5(Json::encode((array) $groupIdentifier));
+        if (isset(self::$identiferIndex[$hash])) {
+            self::$identiferIndex[$hash]++;
+        } else {
+            self::$identiferIndex[$hash] = 1;
+        }
+        return static::log(self::TYPE_TRACE, $message, debug_backtrace(false, 2), $hash, self::$identiferIndex[$hash]);
     }
     
     public static function warning($message)

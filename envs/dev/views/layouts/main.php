@@ -1,7 +1,11 @@
 <?php
 use app\assets\ResourcesAsset;
+use luya\admin\models\Logger;
 
 $this->beginPage();
+
+Logger::trace([__CLASS__, 'ich'], 'bla1');
+Logger::trace([__CLASS__, 'ich'], 'bla2');
 
 ResourcesAsset::register($this);
 ?>
