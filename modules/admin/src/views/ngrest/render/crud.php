@@ -31,7 +31,7 @@ use luya\admin\Module;
 <div ng-controller="<?php echo $config->hash; ?>" ng-init="init()">
     <!-- This fake ui-view is used to render the detail item, which actuals uses the parent scope in the ui router controller. -->
     <div style="visibility:hidden;" ui-view></div>
-    <div>
+    <div ng-if="service">
 
         <div class="tabs">
             <ul>
@@ -177,7 +177,7 @@ use luya\admin\Module;
         </div>
         <!-- /LIST -->
 
-        <div class="card-panel" ng-show="crudSwitchType==1" <?php if (!$config->inline): ?>zaa-esc="closeCreate()"<?php endif; ?>>
+        <div class="card-panel" ng-if="crudSwitchType==1" <?php if (!$config->inline): ?>zaa-esc="closeCreate()"<?php endif; ?>>
 
             <?php if ($canCreate && $config->getPointer('create')): ?>
                 <form name="formCreate" role="form" ng-submit="submitCreate()">
@@ -228,7 +228,7 @@ use luya\admin\Module;
             <?php endif; ?>
         </div>
 
-        <div class="card-panel" ng-show="crudSwitchType==2" <?php if (!$config->inline): ?>zaa-esc="closeUpdate()"<?php endif; ?>>
+        <div class="card-panel" ng-if="crudSwitchType==2" <?php if (!$config->inline): ?>zaa-esc="closeUpdate()"<?php endif; ?>>
             <?php if ($canUpdate && $config->getPointer('update')): ?>
                 <form name="formUpdate" role="form" ng-submit="submitUpdate()">
                     <!-- MODAL CONTENT -->

@@ -339,7 +339,7 @@
 			});
 		};
 		
-		$scope.service = [];
+		$scope.service = false;
 		
 		$scope.resetData = function() {
 			$scope.data.create = angular.copy({});
