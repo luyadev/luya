@@ -4,6 +4,7 @@ namespace luya\admin\models;
 
 use Yii;
 use yii\helpers\Json;
+use yii\base\Arrayable;
 
 /**
  * Logger to store information when working in controllers and actions.
@@ -75,10 +76,14 @@ class Logger extends \yii\db\ActiveRecord
             $fnArgs = !isset($trace[1]['args']) ? : $trace[1]['args'];
         }
         
+        if ($message instanceof Arrayable) {
+            $message = $message->toArray();
+        }
+        
         $model = new self();
         $model->attributes = [
             'time' => time(),
-            'message' => $message,
+            'message' => is_array($message) ? Json::encode($message) : $message,
             'type' => $type,
             'trace_file' => $file,
             'trace_line' => $line,
