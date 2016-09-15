@@ -26,13 +26,13 @@ use yii\base\Arrayable;
  */
 class Logger extends \yii\db\ActiveRecord
 {
-    const TYPE_NOTICE = 1;
+    const TYPE_INFO = 1;
     
-    const TYPE_ERROR = 2;
+    const TYPE_WARNING = 2;
     
-    const TYPE_TRACE = 3;
+    const TYPE_ERROR = 3;
     
-    const TYPE_WARNING = 4;
+    const TYPE_SUCCESS = 4;
     
     /**
      * @inheritdoc
@@ -56,9 +56,39 @@ class Logger extends \yii\db\ActiveRecord
     }
 
     private static $identiferIndex = [];
-    
-    private static function log($type, $message, $trace, $groupIdentifier = null, $grouIdentifierIndex = 0)
+
+    private static $requestIdentifier = null;
+
+    protected static function getRequestIdentifier()
     {
+        if (self::$requestIdentifier === null) {
+            self::$requestIdentifier = uniqid('logger', true);
+        }
+        
+        return self::$requestIdentifier;
+    }
+    
+    private static function getHashArray($message, $groupIdentifier)
+    {
+        $hash = md5(static::getRequestIdentifier() . Json::encode((array) $groupIdentifier));
+        if (isset(self::$identiferIndex[$hash])) {
+            self::$identiferIndex[$hash]++;
+        } else {
+            self::$identiferIndex[$hash] = 1;
+        }
+    
+        $hashIndex =  self::$identiferIndex[$hash];
+    
+        return [
+            'hash' => $hash,
+            'index' => $hashIndex,
+        ];
+    }
+    
+    private static function log($type, $message, $trace, $groupIdentifier)
+    {
+        $hashArray = static::getHashArray($message, $groupIdentifier);
+        
         $file = 'unknown';
         $line = 'unknown';
         $fn = 'unknown';
@@ -93,8 +123,8 @@ class Logger extends \yii\db\ActiveRecord
             'post' => (isset($_POST)) ? Json::encode($_POST) : '{}',
             'session' => (isset($_SESSION)) ? Json::encode($_SESSION) : '{}',
             'server' => (isset($_SERVER)) ? Json::encode($_SERVER) : '{}',
-            'group_identifier' => $groupIdentifier,
-            'group_identifier_index' => $grouIdentifierIndex,
+            'group_identifier' => $hashArray['hash'],
+            'group_identifier_index' => $hashArray['index'],
         ];
         
         return $model->save(false);
@@ -123,29 +153,24 @@ class Logger extends \yii\db\ActiveRecord
         ];
     }
     
-    public static function notice($message)
+    public static function success($message, $groupIdentifier = null)
     {
-        return static::log(self::TYPE_NOTICE, $message, debug_backtrace(false, 2));
+        return static::log(self::TYPE_SUCCESS, $message, debug_backtrace(false, 2), $groupIdentifier);
     }
 
-    public static function error($message)
+    public static function error($message, $groupIdentifier = null)
     {
-        return static::log(self::TYPE_ERROR, $message, debug_backtrace(false, 2));
+        return static::log(self::TYPE_ERROR, $message, debug_backtrace(false, 2), $groupIdentifier);
     }
     
-    public static function trace($groupIdentifier, $message)
+    public static function info($message, $groupIdentifier = null)
     {
-        $hash = md5(Json::encode((array) $groupIdentifier));
-        if (isset(self::$identiferIndex[$hash])) {
-            self::$identiferIndex[$hash]++;
-        } else {
-            self::$identiferIndex[$hash] = 1;
-        }
-        return static::log(self::TYPE_TRACE, $message, debug_backtrace(false, 2), $hash, self::$identiferIndex[$hash]);
+        return static::log(self::TYPE_INFO, $message, debug_backtrace(false, 2), $groupIdentifier);
     }
     
-    public static function warning($message)
+    public static function warning($message, $groupIdentifier = null)
     {
-        return static::log(self::TYPE_WARNING, $message, debug_backtrace(false, 2));
+        
+        return static::log(self::TYPE_WARNING, $message, debug_backtrace(false, 2), $groupIdentifier);
     }
 }
