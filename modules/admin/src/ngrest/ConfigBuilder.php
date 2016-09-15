@@ -27,6 +27,16 @@ class ConfigBuilder implements ConfigBuilderInterface
 
     private $_pointersMap = ['list', 'create', 'update', 'delete', 'aw', 'options'];
     
+    public function __construct($ngRestModelClass)
+    {
+        $this->ngRestModelClass = $ngRestModelClass;
+    }
+    
+    /**
+     * @var string When the ConfigBuilder is created, this property must be fulfilled by the constructor:
+     */
+    public $ngRestModelClass = null;
+    
     /**
      * Maig setter function, defines whether a pointer exists or not, if not existing it will be created.
      *
@@ -191,7 +201,7 @@ class ConfigBuilder implements ConfigBuilderInterface
         }
         
         $object = Yii::createObject($objectType);
-        
+        $objectType['ngRestModelClass'] = $this->ngRestModelClass;
         $this->config[$this->pointer][$object->getHashName()] = [
             'objectConfig' => $objectType,
             'alias' => $object->getAlias(),

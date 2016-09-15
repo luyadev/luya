@@ -5,6 +5,8 @@ namespace luya\admin\models;
 use Yii;
 use yii\helpers\Json;
 use yii\base\Arrayable;
+use luya\admin\ngrest\base\NgRestModel;
+use luya\admin\aws\InfoActiveWindow;
 
 /**
  * Logger to store information when working in controllers and actions.
@@ -24,7 +26,7 @@ use yii\base\Arrayable;
  * @property string $group_identifier If provided the group_identifier is used to group multiple logging informations into one trace in order to see what messages should be display togher (trace behavior).
  * @property integer $group_identifier_index
  */
-class Logger extends \yii\db\ActiveRecord
+class Logger extends NgRestModel
 {
     const TYPE_INFO = 1;
     
@@ -42,6 +44,59 @@ class Logger extends \yii\db\ActiveRecord
         return 'admin_logger';
     }
 
+    public static function ngRestApiEndpoint()
+    {
+        return 'api-admin-logger';
+    }
+    
+    public function ngrestAttributeTypes()
+    {
+        return [
+            'time' => 'datetime',
+            'message' => 'text',
+            'group_identifier' => 'text',
+            'group_identifier_index' => 'number',
+        ];
+    }
+    
+    public function ngrestExtraAttributeTypes()
+    {
+        return [
+            'typeDescription' => 'html',
+        ];
+    }
+    
+    public function getTypeDescription()
+    {
+        switch ($this->type) {
+            case self::TYPE_INFO:
+                return '<span class="badge blue">info</span>';
+            case self::TYPE_WARNING:
+                return '<span class="badge yellow">Warning</span>';
+            case self::TYPE_ERROR:
+                return '<span class="badge red">Error</span>';
+            case self::TYPE_SUCCESS:
+                return '<span class="badge green">success</span>';
+        }
+    }
+    
+    public function extraFields()
+    {
+        return ['typeDescription'];
+    }
+    
+    /**
+     * 
+     * @param $config 
+     */
+    public function ngRestConfig($config)
+    {
+        $config->aw->load(['class' => InfoActiveWindow::className()]);
+        $this->ngRestConfigDefine($config, ['list'], ['group_identifier', 'group_identifier_index', 'typeDescription', 'time', 'message']);
+        
+        $config->delete = true;
+    }
+    
     /**
      * @inheritdoc
      */
@@ -148,8 +203,8 @@ class Logger extends \yii\db\ActiveRecord
             'post' => 'Post',
             'session' => 'Session',
             'server' => 'Server',
-            'group_identifier' => 'Group Identifier',
-            'group_identifier_index' => 'Group Identifier Index',
+            'group_identifier' => 'Request Group',
+            'group_identifier_index' => 'Position',
         ];
     }
     

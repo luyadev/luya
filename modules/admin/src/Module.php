@@ -34,6 +34,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     ];
     
     public $apis = [
+        'api-admin-logger' => 'luya\admin\apis\LoggerController',
         'api-admin-common' => 'luya\admin\apis\CommonController',
         'api-admin-remote' => 'luya\admin\apis\RemoteController',
         'api-admin-storage' => 'luya\admin\apis\StorageController',
@@ -95,6 +96,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
             ->group(Module::t('menu_group_system'))
                 ->itemApi(Module::t('menu_system_item_language'), 'admin-lang-index', 'language', 'api-admin-lang')
                 ->itemApi(Module::t('menu_system_item_tags'), 'admin-tag-index', 'label', 'api-admin-tag')
+                ->itemApi('Logger', 'admin-logger-index', 'label', 'api-admin-logger')
             ->group(Module::t('menu_group_images'))
                 ->itemApi(Module::t('menu_images_item_effects'), 'admin-effect-index', 'blur_circular', 'api-admin-effect')
                 ->itemApi(Module::t('menu_images_item_filters'), 'admin-filter-index', 'adjust', 'api-admin-filter')

@@ -18,7 +18,8 @@ use luya\admin\ngrest\base\ActiveWindowView;
  * @property \admin\ngrest\base\ActiveWindowView $view The view object
  * @property string $name Get the current Active Window Name
  * @property string $hashName Get an unique hased Active Window config name
- *
+ * @property \yii\db\ActiveRecordInterface $model The model evaluated by the `findOne` of the called ng rest model ActiveRecord.
+ * 
  * @author Basil Suter <basil@nadar.io>
  */
 abstract class ActiveWindow extends Object implements ViewContextInterface
@@ -27,6 +28,11 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
      * @var string $suffix The suffix to use for all classes
      */
     protected $suffix = 'ActiveWindow';
+    
+    /**
+     * @var string The class name of the called class where the actice window is bound to.
+     */
+    public $ngRestModelClass = null;
     
     /**
      * @var the module name in where the active window context is loaded, in order to find view files.
@@ -42,6 +48,20 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
      * @var string Optional alias name for the ActiveWindow which renders the Crud-list-Button.
      */
     public $alias = false;
+
+    private $_model = null;
+    
+    /**
+     * @return \yii\db\ActiveRecordInterface Get the model of the called ngrest model ActiveRecord by it's itemId.
+     */
+    public function getModel()
+    {
+        if ($this->_model === null && $this->ngRestModelClass !== null) {
+            $this->_model = $this->ngRestModelClass::findOne($this->itemId);
+        }
+        
+        return $this->_model;
+    }
     
     /**
      * Initliazier

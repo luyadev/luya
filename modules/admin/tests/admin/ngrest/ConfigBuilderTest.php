@@ -11,7 +11,7 @@ class ConfigBuilderTest extends AdminTestCase
 {
     private function getConfig()
     {
-        $config = new ConfigBuilder();
+        $config = new ConfigBuilder('model\class\name');
 
         $config->list->field('create_var_1', 'testlabel in list')->text();
         $config->list->field('list_var_1', 'testlabel')->textarea();
@@ -61,7 +61,7 @@ class ConfigBuilderTest extends AdminTestCase
 
     public function testNgRestConfigAW()
     {
-        $config = new ConfigBuilder();
+        $config = new ConfigBuilder('model\class\name');
         $config->aw->load(['class' => 'luya\admin\aws\ChangePassword', 'alias' => 'Change Password']);
         $cfg = $config->getConfig();
 

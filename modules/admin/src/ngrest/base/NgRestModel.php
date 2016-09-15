@@ -441,7 +441,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     {
         if ($this->_config == null) {
             $config = Yii::createObject(['class' => Config::className(), 'apiEndpoint' => static::ngRestApiEndpoint(), 'primaryKey' => $this->getNgRestPrimaryKey()]);
-            $configBuilder = new ConfigBuilder();
+            $configBuilder = new ConfigBuilder(static::className());
             $this->ngRestConfig($configBuilder);
             $config->setConfig($configBuilder->getConfig());
             foreach ($this->i18n as $fieldName) {
