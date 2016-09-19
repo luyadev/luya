@@ -13,6 +13,7 @@ use yii\base\Arrayable;
 use yii\base\ErrorException;
 use yii\base\InvalidConfigException;
 use luya\admin\base\RestActiveController;
+use luya\helpers\ArrayHelper;
 
 /**
  * The RestActiveController for all NgRest implementations.
@@ -85,6 +86,20 @@ class Api extends RestActiveController
     public function actionSearchProvider()
     {
         return $this->model->genericSearchStateProvider();
+    }
+    
+    public function actionAjaxSearch($ngrestCallType, $fields, $expands = null)
+    {
+        $query = Yii::$app->request->post('query');
+        
+        $data = new ActiveDataProvider(['query' => $this->model->find(), 'pagination' => false]);
+        
+        $rows = [];
+        foreach ($data->getModels() as $model) {
+            $rows[] = $model->toArray(explode(",", $fields), explode(",", $expands));
+        }
+        
+        return ArrayHelper::search($rows, $query);
     }
     
     public function actionFilter($filterName)

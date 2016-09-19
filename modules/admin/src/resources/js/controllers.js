@@ -46,7 +46,7 @@
 		/**
 		 * As we have changed to ng-if some variables need to get pased by an object in order to keep the parent scope, as ng-if create a new scope.
 		 */
-		$scope.config = {filter: '0', groupBy: 0, groupByField: '0'};
+		$scope.config = {filter: '0', groupBy: 0, groupByField: '0', pagerHiddenByAjaxSearch: false};
 		
 		/**
 		 * 0 = list
@@ -102,6 +102,21 @@
 				});
 			}
 		};
+		
+		$scope.$watch('config.searchQuery', function(n, o) {
+			if (n !== undefined && n.length == 0) {
+				$scope.config.searchString = '';
+			} else if (n != o && n.length > 2) {
+				if ($scope.pager) {
+					$http.post($scope.config.apiEndpoint + '/ajax-search?' + $scope.config.apiListQueryString, {query: n}).success(function(response) {
+						$scope.config.pagerHiddenByAjaxSearch = true;
+						$scope.data.list = response;
+					});
+				} else {
+					$scope.config.searchString = n;
+				}
+			}
+		});
 		
 		/* export */
 		

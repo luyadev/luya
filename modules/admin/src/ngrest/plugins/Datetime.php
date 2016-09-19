@@ -33,10 +33,7 @@ class Datetime extends Plugin
      */
     public function renderList($id, $ngModel)
     {
-        return [
-            $this->createTag('span', null, ['ng-show' => $ngModel, 'ng-bind' => $ngModel.'*1000 | date : \'dd.MM.yyyy @ HH:mm\'']),
-            $this->createTag('span', $this->emptyMessage, ['ng-show' => '!'.$ngModel]),
-        ];
+        return $this->createListTag($ngModel);
     }
 
     /**
@@ -57,5 +54,15 @@ class Datetime extends Plugin
     public function renderUpdate($id, $ngModel)
     {
         return $this->renderCreate($id, $ngModel);
+    }
+    
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \luya\admin\ngrest\base\Plugin::onAfterListFind()
+     */
+    public function onAfterListFind($event)
+    {
+        $event->sender->setAttribute($this->name, strftime("%x", $event->sender->getAttribute($this->name))); // %x = Preferred date representation based on locale, without the time	
     }
 }

@@ -435,7 +435,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     /**
      * Build and call the full config object if not build yet for this model.
      *
-     * @return object|mixed
+     * @return \luya\admin\ngrest\Config
      */
     public function getNgRestConfig()
     {

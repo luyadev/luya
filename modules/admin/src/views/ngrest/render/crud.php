@@ -69,7 +69,7 @@ use luya\admin\Module;
                         <div class="col <?php if (!empty($config->filters)): ?>m12 l6<?php else: ?>m6 l8<?php endif; ?>">
                             <div class="input input--text">
                                 <div class="input__field-wrapper">
-                                    <input class="input__field" id="searchString" ng-model="searchString" ng-change="evalSearchString()" type="text" placeholder="<?= Module::t('ngrest_crud_search_text'); ?>" />
+                                    <input class="input__field" ng-model="config.searchQuery" type="text" placeholder="<?= Module::t('ngrest_crud_search_text'); ?>" />
                                 </div>
                             </div>
                         </div>
@@ -117,7 +117,7 @@ use luya\admin\Module;
                 </div>
             </div>
 
-            <div ng-if="pager" style="text-align: center;">
+            <div ng-if="pager && !config.pagerHiddenByAjaxSearch" style="text-align: center;">
                 <ul class="pagination">
                     <li class="waves-effect" ng-class="{'disabled' : pager.currentPage == 1}" ng-click="pagerPrevClick()"><a><i class="material-icons">chevron_left</i></a></li>
                     <li class="waves-effect" ng-repeat="pageId in pager.pages" ng-class="{'active': pageId == pager.currentPage}" ng-click="realoadCrudList(pageId)">
@@ -138,7 +138,7 @@ use luya\admin\Module;
                     <?php endif; ?>
                 </tr>
                 </thead>
-                <tbody ng-repeat="(key, items) in data.list | srcbox:searchString | groupBy: config.groupByField" ng-init="viewToggler[key]=true">
+                <tbody ng-repeat="(key, items) in data.list | srcbox:config.searchString | groupBy: config.groupByField" ng-init="viewToggler[key]=true">
                 <tr ng-if="config.groupBy" class="table__group">
                     <td colspan="100"> <!--ng-click="IS IT THIS?"-->
                         <strong>{{key}}</strong>
@@ -146,7 +146,7 @@ use luya\admin\Module;
                         <i class="material-icons right" ng-click="viewToggler[key]=false" ng-show="viewToggler[key]">keyboard_arrow_down</i>
                     </td>
                 </tr>
-                <tr ng-repeat="(k, item) in items | srcbox:searchString" ng-show="viewToggler[key]" ng-class="{'crud__item-highlight': isHighlighted(item)}">
+                <tr ng-repeat="(k, item) in items | srcbox:config.searchString" ng-show="viewToggler[key]" ng-class="{'crud__item-highlight': isHighlighted(item)}">
                     <?php foreach ($config->getPointer('list') as $item): ?>
                         <?php foreach ($this->context->createElements($item, RenderCrud::TYPE_LIST) as $element): ?>
                             <td ng-hide="config.groupBy && config.groupByField == '<?= $item['name']; ?>'"><?php echo $element['html']; ?></td>
@@ -163,7 +163,7 @@ use luya\admin\Module;
                 </tbody>
             </table>
 
-            <div ng-if="pager" style="text-align: center;">
+            <div ng-if="pager && !config.pagerHiddenByAjaxSearch" style="text-align: center;">
                 <ul class="pagination">
                     <li class="waves-effect" ng-class="{'disabled' : pager.currentPage == 1}" ng-click="pagerPrevClick()"><a><i class="material-icons">chevron_left</i></a></li>
                     <li class="waves-effect" ng-repeat="pageId in pager.pages" ng-class="{'active': pageId == pager.currentPage}" ng-click="realoadCrudList(pageId)">
