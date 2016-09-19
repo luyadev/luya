@@ -88,18 +88,12 @@ class Api extends RestActiveController
         return $this->model->genericSearchStateProvider();
     }
     
-    public function actionAjaxSearch($ngrestCallType, $fields, $expands = null)
+    public function actionFullResponse()
     {
-        $query = Yii::$app->request->post('query');
-        
-        $data = new ActiveDataProvider(['query' => $this->model->find(), 'pagination' => false]);
-        
-        $rows = [];
-        foreach ($data->getModels() as $model) {
-            $rows[] = $model->toArray(explode(",", $fields), explode(",", $expands));
-        }
-        
-        return ArrayHelper::search($rows, $query);
+        return new ActiveDataProvider([
+            'query' => $this->model->find(),
+            'pagination' => false,
+        ]);
     }
     
     public function actionFilter($filterName)

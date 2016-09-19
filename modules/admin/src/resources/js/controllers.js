@@ -46,7 +46,10 @@
 		/**
 		 * As we have changed to ng-if some variables need to get pased by an object in order to keep the parent scope, as ng-if create a new scope.
 		 */
-		$scope.config = {filter: '0', groupBy: 0, groupByField: '0', pagerHiddenByAjaxSearch: false};
+		$scope.config = {
+			filter: '0', groupBy: 0, groupByField: '0', pagerHiddenByAjaxSearch: false, fullSearchContainer: false,
+			minLengthWarning: false
+		};
 		
 		/**
 		 * 0 = list
@@ -104,17 +107,37 @@
 		};
 		
 		$scope.$watch('config.searchQuery', function(n, o) {
+			
+			if (n == o) {
+				return;
+			}
+			
 			if (n !== undefined && n.length == 0) {
-				$scope.config.searchString = '';
-			} else if (n != o && n.length > 2) {
 				if ($scope.pager) {
-					$http.post($scope.config.apiEndpoint + '/ajax-search?' + $scope.config.apiListQueryString, {query: n}).success(function(response) {
+					$scope.config.pagerHiddenByAjaxSearch = false;
+					$scope.loadList();
+				} else {
+					$scope.config.searchString = '';
+					$scope.config.minLengthWarning = false;
+				}
+			} else if (n.length > 2) {
+				$scope.config.minLengthWarning = false;
+				if ($scope.pager) {
+					if ($scope.config.fullSearchContainer) {
+						$scope.data.list = $filter('filter')($scope.config.fullSearchContainer, n);
 						$scope.config.pagerHiddenByAjaxSearch = true;
-						$scope.data.list = response;
-					});
+					} else {
+						$http.post($scope.config.apiEndpoint + '/full-response?' + $scope.config.apiListQueryString, {query: n}).success(function(response) {
+							$scope.config.pagerHiddenByAjaxSearch = true;
+							$scope.config.fullSearchContainer = response;
+							$scope.data.list = $filter('filter')(response, n);
+						});
+					}
 				} else {
 					$scope.config.searchString = n;
 				}
+			} else {
+				$scope.config.minLengthWarning = true;
 			}
 		});
 		

@@ -71,6 +71,10 @@ use luya\admin\Module;
                                 <div class="input__field-wrapper">
                                     <input class="input__field" ng-model="config.searchQuery" type="text" placeholder="<?= Module::t('ngrest_crud_search_text'); ?>" />
                                 </div>
+                                
+                            </div>
+                            <div ng-show="config.minLengthWarning">
+                               <p>The search keyword must at least have 3 chars.</p>
                             </div>
                         </div>
                         <div class="col <?php if (!empty($config->filters)): ?>m6 l3<?php else: ?>m12 l4<?php endif; ?>">
