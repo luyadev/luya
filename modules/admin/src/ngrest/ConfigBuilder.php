@@ -211,7 +211,7 @@ class ConfigBuilder implements ConfigBuilderInterface
         $config['ngRestModelClass'] = $this->ngRestModelClass;
         
         $this->config[$this->pointer][$object->getHashName()] = [
-            'objectConfig' => $objectType,
+            'objectConfig' => $config,
             'alias' => $object->getAlias(),
             'icon' => $object->getIcon(),
         ];
