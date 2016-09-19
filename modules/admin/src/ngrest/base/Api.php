@@ -32,6 +32,11 @@ class Api extends RestActiveController
     public $modelClass = null;
     
     /**
+     * @var boolean Defines whether the automatic pagination should be enabled if more then 200 rows of data stored in this table or not.
+     */
+    public $autoEnablePagination = true;
+    
+    /**
      * {@inheritDoc}
      * @see \yii\rest\ActiveController::init()
      */
@@ -41,6 +46,13 @@ class Api extends RestActiveController
     
         if ($this->modelClass === null) {
             throw new InvalidConfigException("The property `modelClass` must be defined by the Controller.");
+        }
+
+        // pagination is disabled by default, lets verfy if there are more then 400 rows in the table and auto enable
+        if ($this->pagination === false && $this->autoEnablePagination) {
+            if ($this->model->find()->count() > 200) {
+                $this->pagination = ['pageSize' => 100];
+            }
         }
     }
     
