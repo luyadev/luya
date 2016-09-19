@@ -201,7 +201,15 @@ class ConfigBuilder implements ConfigBuilderInterface
         }
         
         $object = Yii::createObject($objectType);
-        $objectType['ngRestModelClass'] = $this->ngRestModelClass;
+        
+        if (is_string($objectType)) {
+            $config['class'] = $objectType;
+        } else {
+            $config = $objectType;
+        }
+        
+        $config['ngRestModelClass'] = $this->ngRestModelClass;
+        
         $this->config[$this->pointer][$object->getHashName()] = [
             'objectConfig' => $objectType,
             'alias' => $object->getAlias(),
