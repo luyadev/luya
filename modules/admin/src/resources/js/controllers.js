@@ -44,6 +44,11 @@
 		$scope.AdminLangService = AdminLangService;
 		
 		/**
+		 * As we have changed to ng-if some variables need to get pased by an object in order to keep the parent scope, as ng-if create a new scope.
+		 */
+		$scope.config = {filter: '0', groupBy: 0, groupByField: '0'};
+		
+		/**
 		 * 0 = list
 		 * 1 = add
 		 * 2 = edit
@@ -62,16 +67,22 @@
 			$scope.crudSwitchType = type;
 		};
 		
-		$scope.currentFilter = "0"; // angular select option does wrong type cast, so we cast 0 as string.
+		$scope.changeGroupByField = function() {
+			if ($scope.config.groupByField == 0) {
+				$scope.config.groupBy = 0;
+			} else {
+				$scope.config.groupBy = 1;
+			}
+		}
 		
 		// ng-change event triggers this method
 		// this method is also used withing after save/update events in order to retrieve current selecter filter data.
 		$scope.realoadCrudList = function(pageId) {
 			LuyaLoading.start();
-			if ($scope.currentFilter == 0) {
+			if ($scope.config.filter == 0) {
 				 $scope.loadList(pageId);
 			} else {
-				var url = $scope.config.apiEndpoint + '/filter?filterName=' + $scope.currentFilter + '&' + $scope.config.apiListQueryString;
+				var url = $scope.config.apiEndpoint + '/filter?filterName=' + $scope.config.filter + '&' + $scope.config.apiListQueryString;
 				if (pageId) {
 					url = url + '&page=' + pageId;
 				}
@@ -118,22 +129,6 @@
 		/* old definitions */
 		
 		$scope.parentController = $scope.$parent;
-		
-		// $scope.orderBy = "+id";
-		
-		// $scope.saveCallback = null;
-		
-		$scope.groupBy = 0;
-		
-		$scope.groupByField = "0"; // angular select option does wrong type cast, so we cast 0 as string.
-		
-		$scope.changeGroupByField = function() {
-			if ($scope.groupByField == 0) {
-				$scope.groupBy = 0;
-			} else {
-				$scope.groupBy = 1;
-			}
-		}
 		
 		$scope.applySaveCallback = function() {
 			if ($scope.saveCallback != 0 && $scope.saveCallback != null && $scope.saveCallback != false) {
@@ -388,8 +383,6 @@
 			list : {},
 			updateId : 0
 		};
-		
-		$scope.config = {};
 	});
 	
 // activeWindowController.js

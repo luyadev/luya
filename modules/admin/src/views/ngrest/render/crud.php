@@ -23,8 +23,8 @@ use luya\admin\Module;
         $scope.orderBy = '<?= $config->getDefaultOrderDirection() . $config->getDefaultOrderField(); ?>';
         $scope.saveCallback = <?= $config->getOption('saveCallback'); ?>;
         <?php if ($config->groupByField): ?>
-        $scope.groupBy = 1;
-        $scope.groupByField = "<?= $config->groupByField; ?>";
+        $scope.config.groupBy = 1;
+        $scope.config.groupByField = "<?= $config->groupByField; ?>";
         <?php endif; ?>
     });
 </script>
@@ -77,7 +77,7 @@ use luya\admin\Module;
                             <div class="input input--select input--vertical input--full-width">
                                 <div class="input__field-wrapper">
                                     <i class="input__select-arrow material-icons">keyboard_arrow_down</i>
-                                    <select class="input__field" ng-change="changeGroupByField()" ng-model="groupByField">
+                                    <select class="input__field" ng-change="changeGroupByField()" ng-model="config.groupByField">
                                         <option value="0">Nach Feld gruppieren</option>
                                         <?php foreach ($config->getPointer('list') as $item): ?>
                                             <option value="<?= $item['name']; ?>"><?= $item['alias']; ?></option>
@@ -91,7 +91,7 @@ use luya\admin\Module;
                                 <div class="input input--select input--vertical input--full-width">
                                     <div class="input__field-wrapper">
                                         <i class="input__select-arrow material-icons">keyboard_arrow_down</i>
-                                        <select class="input__field" ng-change="realoadCrudList()" ng-model="currentFilter">
+                                        <select class="input__field" ng-change="realoadCrudList()" ng-model="config.filter">
                                             <option value="0">Filter auswählen</option>
                                             <?php foreach (array_keys($config->filters) as $name): ?>
                                                 <option value="<?= $name; ?>"><?= $name; ?></option>
@@ -131,15 +131,15 @@ use luya\admin\Module;
                 <thead>
                 <tr>
                     <?php foreach ($config->getPointer('list') as $item): ?>
-                        <th ng-hide="groupBy && groupByField == '<?= $item['name']; ?>'"><?php echo $item['alias']; ?> <i ng-click="changeOrder('<?php echo $item['name']; ?>', '+')" ng-class="{'active-orderby' : isOrderBy('+<?php echo $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeOrder('<?php echo $item['name']; ?>', '-')" ng-class="{'active-orderby' : isOrderBy('-<?php echo $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
+                        <th ng-hide="config.groupBy && config.groupByField == '<?= $item['name']; ?>'"><?php echo $item['alias']; ?> <i ng-click="changeOrder('<?php echo $item['name']; ?>', '+')" ng-class="{'active-orderby' : isOrderBy('+<?php echo $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeOrder('<?php echo $item['name']; ?>', '-')" ng-class="{'active-orderby' : isOrderBy('-<?php echo $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
                     <?php endforeach; ?>
                     <?php if (count($this->context->getButtons()) > 0): ?>
                         <th style="text-align:right;"><span class="grid-data-length">{{data.list.length}} <?= Module::t('ngrest_crud_rows_count'); ?></span></th>
                     <?php endif; ?>
                 </tr>
                 </thead>
-                <tbody ng-repeat="(key, items) in data.list | srcbox:searchString | groupBy: groupByField" ng-init="viewToggler[key]=true">
-                <tr ng-if="groupBy" class="table__group">
+                <tbody ng-repeat="(key, items) in data.list | srcbox:searchString | groupBy: config.groupByField" ng-init="viewToggler[key]=true">
+                <tr ng-if="config.groupBy" class="table__group">
                     <td colspan="100"> <!--ng-click="IS IT THIS?"-->
                         <strong>{{key}}</strong>
                         <i class="material-icons right" ng-click="viewToggler[key]=true" ng-show="!viewToggler[key]">keyboard_arrow_up</i>
@@ -149,7 +149,7 @@ use luya\admin\Module;
                 <tr ng-repeat="(k, item) in items | srcbox:searchString" ng-show="viewToggler[key]" ng-class="{'crud__item-highlight': isHighlighted(item)}">
                     <?php foreach ($config->getPointer('list') as $item): ?>
                         <?php foreach ($this->context->createElements($item, RenderCrud::TYPE_LIST) as $element): ?>
-                            <td ng-hide="groupBy && groupByField == '<?= $item['name']; ?>'"><?php echo $element['html']; ?></td>
+                            <td ng-hide="config.groupBy && config.groupByField == '<?= $item['name']; ?>'"><?php echo $element['html']; ?></td>
                         <?php endforeach; ?>
                     <?php endforeach; ?>
                     <?php if (count($this->context->getButtons()) > 0): ?>
