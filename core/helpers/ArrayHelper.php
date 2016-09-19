@@ -63,4 +63,46 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
         
         return $return;
     }
+    
+    /**
+     * Search trough all keys inside of an array, any occurence will return the rest of the array.
+     * 
+     * ```php
+     * $data  = [
+     *     ['name' => 'Foo Bar', 'id' => 1],
+     *     ['name' => 'Bar Baz', 'id' => 2],
+     * ];
+     * ```
+     * 
+     * Assuming the above array parameter searching for `1` would return:
+     * 
+     * ```php
+     * $data  = [
+     *     ['name' => 'Foo Bar', 'id' => 1],
+     * ];
+     * ```
+     * 
+     * Searching for the string `Bar` would return the the orignal array is bar would be found in both.
+     * 
+     * @param array $array The multidimensional array keys.
+     * @param string $searchText The text you where search inside the rows.
+     * @param boolean $sensitive Whether to use strict sensitive search (true) or case insenstivie search (false).
+     * @return array The modified array depending on the search result hits.
+     */
+    public static function search($array, $searchText, $sensitive = false)
+    {
+        $function = ($sensitive) ? 'strpos' : 'stripos';
+        return array_filter($array, function($item) use ($searchText, $function) {
+            $response = false;
+            foreach ($item as $key => $value) {
+                if ($response) {
+                    continue;
+                }
+                if ($function($value, "$searchText") !== false) {
+                    $response = true;
+                }
+            }            
+            return $response;
+        });
+    }
 }
