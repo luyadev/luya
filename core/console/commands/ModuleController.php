@@ -44,6 +44,7 @@ class ModuleController extends \luya\console\Command
         $folders = [
             'basePath' => $moduleFolder,
             'adminPath' => $moduleFolder . DIRECTORY_SEPARATOR . 'admin',
+            'adminPath' => $moduleFolder . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . 'aws',
             'frontendPath' => $moduleFolder . DIRECTORY_SEPARATOR . 'frontend',
             'blocksPath' => $moduleFolder . DIRECTORY_SEPARATOR . 'frontend' . DIRECTORY_SEPARATOR . 'blocks',
             'blocksPath' => $moduleFolder . DIRECTORY_SEPARATOR . 'frontend' . DIRECTORY_SEPARATOR . 'controllers',
