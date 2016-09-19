@@ -29,17 +29,41 @@ class CrudController extends \luya\console\Command
     {
         $this->outputInfo("Make sure the module is added to your configuration.");
         $module = $this->selectModule(['onlyAdmin' => true, 'hideCore' => true, 'text' => 'Select the Module where the crud should be stored in:']);
-        $modulePre = $new_str = preg_replace('/admin$/', '', $module);
-        $modelName = $this->prompt('Model Name (e.g. Album)');
-        $apiEndpoint = $this->prompt('Api Endpoint (e.g. api-'.$modulePre.'-'.strtolower($modelName).')');
+        $modulePre = preg_replace('/admin$/', '', $module);
+        
+        $modelSelection = true;
+        
+        while ($modelSelection) {
+            $modelName = $this->prompt('Model Name (e.g. Album):', ['required' => true]);
+            
+            $camlizeModelName = Inflector::camelize($modelName);
+            
+            if ($modelName !== $camlizeModelName) {
+                if ($this->confirm("We have camlized the model name to '$camlizeModelName' do you want to continue with this name?")) {
+                    $modelName = $camlizeModelName;
+                    $modelSelection = false;
+                }
+            } else {
+                $modelSelection = false;
+            }
+        }
+        
+        $apiEndpoint = $this->prompt('Api Endpoint:', ['required' => true, 'default' => 'api-'.$modulePre.'-'.strtolower($modelName).'']);
 
         $sqlSelection = true;
         while ($sqlSelection) {
-            $sqlTable = $this->prompt('Database Table name (e.g. '.strtolower($modulePre).'_'.Inflector::underscore($modelName).')');
+            $sqlTable = $this->prompt('Database Table name:', ['required' => true, 'default' => strtolower($modulePre).'_'.Inflector::underscore($modelName)]);
+            
+            if ($sqlTable == '?') {
+                foreach ($this->getSqlTablesArray() as $table) {
+                    $this->outputInfo("- " . $table);
+                }
+            }
+            
             if (isset($this->getSqlTablesArray()[$sqlTable])) {
                 $sqlSelection = false;
             } else {
-                $this->outputError("The selected database '$sqlTable' does not exists in the list of tables.");
+                $this->outputError("The selected database '$sqlTable' does not exists in the list of tables. Type '?' to see all tables.");
             }
         }
 
