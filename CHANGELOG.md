@@ -23,6 +23,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - `#962` Fixed bug where abstract class should not implement static public function in php versions 5.2.0 - 5.6.25.
 - `#958` Fixed bug where datapicke does not reset correctly or wrong insereted dates crash the date/datetime fields.
 - `#836` Fixed bug where importer does delete wrong files.
+- `#989` Fixed bug where redirect and module pages are lost when choosing a container but also choose a subsite from another container.
 - `#709` Removed ApiCmsNavItemPageBlockItem factory and angular resources dependencie.
 
 1.0.0-beta8 (11.08.2016)

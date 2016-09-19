@@ -234,7 +234,15 @@ class NavController extends \luya\admin\base\RestController
     {
         Yii::$app->menu->flushCache();
         $model = new Nav();
-        $create = $model->createModule($this->postArg('parent_nav_id'), $this->postArg('nav_container_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('module_name'), $this->postArg('description'));
+        
+        $parentNavId = $this->postArg('parent_nav_id');
+        $navContainerId = $this->postArg('nav_container_id');
+        
+        if (!empty($parentNavId)) {
+        	$navContainerId = Nav::findOne($parentNavId)->nav_container_id;
+        }
+        
+        $create = $model->createModule($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('module_name'), $this->postArg('description'));
         if ($create !== true) {
             Yii::$app->response->statusCode = 422;
         }
@@ -260,7 +268,15 @@ class NavController extends \luya\admin\base\RestController
     {
         Yii::$app->menu->flushCache();
         $model = new Nav();
-        $create = $model->createRedirect($this->postArg('parent_nav_id'), $this->postArg('nav_container_id'), $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('redirect_type'), $this->postArg('redirect_type_value'), $this->postArg('description'));
+        
+        $parentNavId = $this->postArg('parent_nav_id');
+        $navContainerId = $this->postArg('nav_container_id');
+        
+        if (!empty($parentNavId)) {
+        	$navContainerId = Nav::findOne($parentNavId)->nav_container_id;
+        }
+        
+        $create = $model->createRedirect($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('redirect_type'), $this->postArg('redirect_type_value'), $this->postArg('description'));
         if ($create !== true) {
             Yii::$app->response->statusCode = 422;
         }
