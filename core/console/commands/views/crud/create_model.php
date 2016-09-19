@@ -104,8 +104,8 @@ use Yii;
     /**
      * Define the NgRestConfig for this model with the ConfigBuilder object.
      *
-     * @param \admin\ngrest\ConfigBuilder $config The current active config builder object.
-     * @return \admin\ngrest\ConfigBuilder
+     * @param \luya\admin\ngrest\ConfigBuilder $config The current active config builder object.
+     * @return \luya\admin\ngrest\ConfigBuilder
      */
     public function ngRestConfig($config)
     {
