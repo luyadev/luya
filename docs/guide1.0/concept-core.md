@@ -84,21 +84,20 @@ An example for a configuration file:
 
 ```php
 return [
-    'id' => 'heartbeatgmbh',
-    'siteTitle' => 'Heartbeat GmbH',
-    'luyaLanguage' => 'de',
+    'id' => 'myapp',
+    'siteTitle' => 'My Application',
+    'luyaLanguage' => 'en',
     'basePath' => dirname(__DIR__),
-    
     'components' => [
         'mail' => [
             'password' => '*********',
         ],
-            
         'composition' => [
-            'default' => ['langShortCode' => 'eb'],
+            'default' => [
+                'langShortCode' => 'en'
+            ],
             'hidden' => true,
         ],
-            
         'urlManager' => [
             'rules' => [
                 'home' => 'site/default/index',
