@@ -112,6 +112,8 @@
 				return;
 			}
 			
+			var blockRequest = false;
+			
 			if ($scope.pager) {
 				if (n.length == 0) {
 					$timeout.cancel($scope.searchPromise);
@@ -119,15 +121,22 @@
 					$scope.config.pagerHiddenByAjaxSearch = false;
 				} else {
 					$timeout.cancel($scope.searchPromise);
+					
+					if (blockRequest) {
+						return;
+					}
+					
 					$scope.searchPromise = $timeout(function() {
 						if ($scope.config.fullSearchContainer) {
 							$scope.data.listArray = $filter('filter')($scope.config.fullSearchContainer, n);
 							$scope.config.pagerHiddenByAjaxSearch = true;
 						} else {
+							blockRequest = true;
 							$http.post($scope.config.apiEndpoint + '/full-response?' + $scope.config.apiListQueryString, {query: n}).success(function(response) {
 								$scope.config.pagerHiddenByAjaxSearch = true;
 								$scope.config.fullSearchContainer = response;
 								$scope.data.listArray = $filter('filter')(response, n);
+								blockRequest = false;
 							});
 						}
 					}, 500)
