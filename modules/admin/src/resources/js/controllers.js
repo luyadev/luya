@@ -101,6 +101,7 @@
 					);
 					LuyaLoading.stop();
 					$scope.data.list = response.data;
+					$scope.data.listArray = response.data;
 					$scope.reApplyOrder();
 				});
 			}
@@ -222,15 +223,15 @@
 		
 		$scope.changeOrder = function(field, sort) {
 			$scope.orderBy = sort + field;
-			if ($scope.pager) {
+			if ($scope.pager && !$scope.config.pagerHiddenByAjaxSearch) {
 				$scope.realoadCrudList(1);
 			} else {
-				$scope.data.list = $filter('orderBy')($scope.data.list, sort + field);
+				$scope.data.listArray = $filter('orderBy')($scope.data.listArray, sort + field);
 			}
 		};
 		
 		$scope.reApplyOrder = function() {
-			$scope.data.list = $filter('orderBy')($scope.data.list, $scope.orderBy);
+			$scope.data.listArray = $filter('orderBy')($scope.data.listArray, $scope.orderBy);
 		};
 		
 		$scope.activeWindowReload = function() {
