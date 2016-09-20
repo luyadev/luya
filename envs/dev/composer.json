@@ -36,10 +36,9 @@
             "luya\\news\\" : "../../modules/news/src",
             "luya\\remoteadmin\\" : "../../modules/remoteadmin/src",
             "luya\\styleguide\\" : "../../modules/styleguide/src",
-            
-            "payment\\" : "../../../luya-module-payment/src",
-            "basicauth\\" : "../../../luya-module-basicauth/src",
-            "bootstrap4\\" : "../../../luya-bootstrap4"
+            "luya\\payment\\" : "../../../luya-module-payment/src",
+            "luya\\basicauth\\" : "../../../luya-module-basicauth/src",
+            "luya\\bootstrap4\\" : "../../../luya-bootstrap4/src"
         }
     }
 }
