@@ -132,12 +132,14 @@
 							$scope.data.listArray = $filter('filter')($scope.config.fullSearchContainer, n);
 							$scope.config.pagerHiddenByAjaxSearch = true;
 						} else {
+							LuyaLoading.start();
 							blockRequest = true;
 							$http.post($scope.config.apiEndpoint + '/full-response?' + $scope.config.apiListQueryString, {query: n}).success(function(response) {
 								$scope.config.pagerHiddenByAjaxSearch = true;
 								$scope.config.fullSearchContainer = response;
 								$scope.data.listArray = $filter('filter')(response, n);
 								blockRequest = false;
+								LuyaLoading.stop();
 							});
 						}
 					}, 500)
@@ -146,27 +148,6 @@
 				$scope.config.pagerHiddenByAjaxSearch = false;
 				$scope.data.listArray = $filter('filter')($scope.data.list, n);
 			}
-			
-			/*
-			if (n !== undefined && n.length == 0) {
-				if ($scope.pager) {
-					$scope.config.pagerHiddenByAjaxSearch = false;
-					$scope.data.list = $scope.data.listbackup;
-				} else {
-					$scope.config.searchString = '';
-					$scope.config.minLengthWarning = false;
-				}
-			} else if (n.length > 2) {
-				$scope.config.minLengthWarning = false;
-				if ($scope.pager) {
-					
-				} else {
-					$scope.config.searchString = n;
-				}
-			} else {
-				$scope.config.minLengthWarning = true;
-			}
-			*/
 		});
 		
 		/* export */
