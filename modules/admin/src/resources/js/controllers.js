@@ -112,10 +112,36 @@
 				return;
 			}
 			
+			if ($scope.pager) {
+				if (n.length == 0) {
+					$timeout.cancel($scope.searchPromise);
+					$scope.data.listArray = $scope.data.list;
+					$scope.config.pagerHiddenByAjaxSearch = false;
+				} else {
+					$timeout.cancel($scope.searchPromise);
+					$scope.searchPromise = $timeout(function() {
+						if ($scope.config.fullSearchContainer) {
+							$scope.data.listArray = $filter('filter')($scope.config.fullSearchContainer, n);
+							$scope.config.pagerHiddenByAjaxSearch = true;
+						} else {
+							$http.post($scope.config.apiEndpoint + '/full-response?' + $scope.config.apiListQueryString, {query: n}).success(function(response) {
+								$scope.config.pagerHiddenByAjaxSearch = true;
+								$scope.config.fullSearchContainer = response;
+								$scope.data.listArray = $filter('filter')(response, n);
+							});
+						}
+					}, 500)
+				}
+			} else {
+				$scope.config.pagerHiddenByAjaxSearch = false;
+				$scope.data.listArray = $filter('filter')($scope.data.list, n);
+			}
+			
+			/*
 			if (n !== undefined && n.length == 0) {
 				if ($scope.pager) {
 					$scope.config.pagerHiddenByAjaxSearch = false;
-					$scope.loadList();
+					$scope.data.list = $scope.data.listbackup;
 				} else {
 					$scope.config.searchString = '';
 					$scope.config.minLengthWarning = false;
@@ -123,22 +149,14 @@
 			} else if (n.length > 2) {
 				$scope.config.minLengthWarning = false;
 				if ($scope.pager) {
-					if ($scope.config.fullSearchContainer) {
-						$scope.data.list = $filter('filter')($scope.config.fullSearchContainer, n);
-						$scope.config.pagerHiddenByAjaxSearch = true;
-					} else {
-						$http.post($scope.config.apiEndpoint + '/full-response?' + $scope.config.apiListQueryString, {query: n}).success(function(response) {
-							$scope.config.pagerHiddenByAjaxSearch = true;
-							$scope.config.fullSearchContainer = response;
-							$scope.data.list = $filter('filter')(response, n);
-						});
-					}
+					
 				} else {
 					$scope.config.searchString = n;
 				}
 			} else {
 				$scope.config.minLengthWarning = true;
 			}
+			*/
 		});
 		
 		/* export */
@@ -367,6 +385,7 @@
 					// return data
 					LuyaLoading.stop();
 					$scope.data.list = response.data;
+					$scope.data.listArray = response.data;
 					$scope.reApplyOrder();
 				});
 			});

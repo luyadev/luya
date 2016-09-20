@@ -142,7 +142,7 @@ use luya\admin\Module;
                     <?php endif; ?>
                 </tr>
                 </thead>
-                <tbody ng-repeat="(key, items) in data.list | srcbox:config.searchString | groupBy: config.groupByField" ng-init="viewToggler[key]=true">
+                <tbody ng-repeat="(key, items) in data.listArray | groupBy: config.groupByField" ng-init="viewToggler[key]=true">
                 <tr ng-if="config.groupBy" class="table__group">
                     <td colspan="100"> <!--ng-click="IS IT THIS?"-->
                         <strong>{{key}}</strong>
