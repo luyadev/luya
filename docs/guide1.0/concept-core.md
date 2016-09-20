@@ -121,7 +121,7 @@ class SiteController extends Controller
 {
     public function actionIndex()
     {
-        return $this->redner('index');
+        return $this->render('index');
     }
     
     public function actionContact()

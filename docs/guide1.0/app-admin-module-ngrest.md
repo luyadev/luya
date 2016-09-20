@@ -162,6 +162,18 @@ class MemberController extends \luya\admin\ngrest\base\Api
 }
 ```
 
+By default the pagination (pager) will be enabled if the count of rows is more then 250. You can disabled this behavior by turning of the `$autoEnablePagination`
+
+```php
+public $autoEnablePagination = false;
+```
+
+and you can also force the api to always generate a pagination by setting `$pagination` property as followed:
+
+```php
+public $pagination = ['pageSize' => 100];
+```
+
 ## 3. Api-Endpoint & Authorization
 
 The last part of the ngrest process is the let your application know where your api is located (Yii2 controller namespace) and to make permission entries for the ngrest (who can create, update, delete and see the crud).
