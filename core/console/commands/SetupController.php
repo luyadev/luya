@@ -110,6 +110,7 @@ class SetupController extends \luya\console\Command
                     $error = 'The Short-Code must be 2 chars length only. Examples: de, en, fr, ru';
                     return false;
                 }
+                return true;
             }]);
         }
         
@@ -168,7 +169,6 @@ class SetupController extends \luya\console\Command
             $this->insert('cms_nav_item_page', ['layout_id' => 1, 'create_user_id' => 1, 'timestamp_create' => time(), 'version_alias' => 'Initial', 'nav_item_id' => 1]);
         }
     
-        Config::set('rc1_block_classes_renameing', true);
         Config::set('setup_command_timestamp', time());
     
         return $this->outputSuccess("Setup is finished. You can now login into the Administration-Area with the E-Mail '{$this->email}'.");
