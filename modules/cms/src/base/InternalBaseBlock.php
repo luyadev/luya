@@ -287,9 +287,6 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
     {
         return $this->_cfgValues;
     }
-    
-
-    
 
     /**
      * @return array
@@ -311,6 +308,11 @@ abstract class InternalBaseBlock extends Object implements BlockInterface
     {
         $this->_extraVars = ArrayHelper::merge($this->_extraVars, $this->extraVars());
         return $this->_extraVars;
+    }
+    
+    public function getExtraValue($key, $default = false)
+    {
+        return (isset($this->_extraVars[$key])) ? $this->_extraVars[$key] : $default;
     }
     
     /**

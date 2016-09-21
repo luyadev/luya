@@ -7,7 +7,7 @@ use luya\web\View;
 /**
  * View context helper of php block view file.
  *
- * @property \luya\cms\base\Block $context Get the block context.
+ * @property \luya\cms\base\PhpBlock $context Get the block context.
  * @property integer $index
  * @property boolean $isFirst
  * @property boolean $isLast

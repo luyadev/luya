@@ -25,7 +25,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     public function getView()
     {
         if ($this->_view === null) {
-            $this->_view = Yii::createObject(PhpBlockView::className());
+            $this->_view = Yii::createObject(PhpBlockView::class);
         }
         
         return $this->_view;
