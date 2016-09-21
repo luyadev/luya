@@ -23,5 +23,5 @@
  */
 
 return [
-    // Use the prep.php or local.php config and change the configs to match your prod enviroment settings and added env specific informations (database, caching, etc.)
+    // Use the env-prep.php or env-local.php config and change the configs to match your prod enviroment settings and added env specific informations (database, caching, etc.)
 ];

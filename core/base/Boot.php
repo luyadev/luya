@@ -14,7 +14,7 @@ use luya\helpers\ArrayHelper;
  *
  * Run the Luya/Yii Application based on the current enviroment which is determined trough get_sapi_name(). To run an application
  * a config file with custom Luya/Yii configuration must be provided via `$configFile` property. By default luya will try to find
- * the default config `../configs/server.php`.
+ * the default config `../configs/env.php`.
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -32,7 +32,7 @@ abstract class Boot
     /**
      * @var string The path to the config file, which returns an array containing you configuration.
      */
-    public $configFile = '../configs/server.php';
+    public $configFile = '../configs/env.php';
 
     /**
      * @var luya\web\Application|luya\cli\Application The application object.

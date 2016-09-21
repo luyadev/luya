@@ -19,6 +19,7 @@ In order to run a LUYA core application without modules just create a applicatin
 │   └── .htaccess
 ├── assets
 ├── configs
+│   └── env.php
 ├── controllers
 │   └── SiteController.php
 ├── runtime
@@ -80,7 +81,7 @@ RewriteRule . index.php
 </IfModule>
 ```
 
-An example for a configuration file:
+An example for a configuration file `configs/env.php` (which env.php is the default value used from the `luya\Boot` class):
 
 ```php
 return [

@@ -14,7 +14,7 @@ Um übersetzungen innerhalbt der *Controller* oder *Views* zu erstellen benutzen
 ]
 ```
 
-> Denke Sie daran das Sie alle Komponenten in der `prep.php` und `prod.php` gleichermassen eintragen.
+> Denke Sie daran das Sie alle Komponenten in der `env-prep.php` und `env-prod.php` gleichermassen eintragen.
 
 Nun werden alle *Messages-Source* Dateien die mit dem prefix `app` beginnen in die Übersetzung geladen. Um eine solche *Message-Source* Datei zu erstellen wechseln Sie in ihr Projekt-Verzeichnis und erstellen Sie den Ordner `messages`. Der Inhalt des Messages könnten nun wie folgt aussehen gemäss des *app* prefix beispiels:
 

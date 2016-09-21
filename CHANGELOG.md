@@ -6,12 +6,13 @@ The changelog contains informations about bug fixes, new features or bc breaking
 1.0.0-rc1 (in progress)
 -----------------------
 
+- [#806](https://github.com/luyadev/luya/issues/806) **[BC BREAK]** Renamed to `configs/server.php` to `configs/env.php`, new projects will also have the env prefix for the config names.
 - `#976` **[BC BREAK]** Remove $isCoreModule replace with CoreModuleInterface
 - `#972` **[BC BREAK]** Merged to cms and cmsadmin modules into one folder and changed the namespace to `luya\cms` instead of `cms`/`cmsadmin`.
 - `#973` **[BC BREAK]** Removed `$assets` property from **none admin modules**.
 - `#974` **[BC BREAK]** Removed `$isAdmin` property.
 - `#970` **[BC BREAK]** Deleted, renamed and rearranged LUYA core REST classes and methods.
-- `#983` Added Lazy Load Widget
+- `#983` Added LazyLoad Widget
 - `#979` Added option to enable markdown parsing for table blocks.
 - `#971` Added basic pagination for NgRest Apis.
 - `#956` Added optional image css class and layout css class in block configurations.

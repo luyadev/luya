@@ -13,5 +13,5 @@ defined('YII_ENV') or define('YII_ENV', 'dev');
 defined('YII_DEBUG') or define('YII_DEBUG', false);
 
 $config = [
-    // Use the local.php config and change the configs to match your dev enviroment settings (for Example: Databse name, user and password)
+    // Use the env-local.php config and change the configs to match your dev enviroment settings (for Example: Databse name, user and password)
 ];

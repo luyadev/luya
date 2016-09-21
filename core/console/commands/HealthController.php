@@ -24,7 +24,7 @@ class HealthController extends \luya\console\Command
     ];
 
     public $files = [
-        'configs/server.php',
+        'configs/env.php',
         'public_html/index.php',
     ];
     

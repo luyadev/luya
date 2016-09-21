@@ -13,5 +13,5 @@ defined('YII_ENV') or define('YII_ENV', 'prep');
 defined('YII_DEBUG') or define('YII_DEBUG', false);
 
 return [
-    // Use the dev.php config and change the configs to match your prep enviroment settings (for Example: Databse name, user and password)
+    // Use the env-dev.php config and change the configs to match your prep enviroment settings (for Example: Databse name, user and password)
 ];

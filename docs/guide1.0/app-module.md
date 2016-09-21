@@ -30,7 +30,7 @@ Structure of Modules
 
 ### Use and configure
 
-To integrate a module you have to define it in your config file `prep.php` and / or `prod.php`, depending on which environment your `server.php` is returning, in the modules section:
+To integrate a module you have to define it in your config file `env-prep.php` and / or `env-prod.php`, depending on which environment your `env.php` is returning, in the modules section:
 
 ```php
 $config = [

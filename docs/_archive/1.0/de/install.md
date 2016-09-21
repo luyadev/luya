@@ -39,7 +39,7 @@ Im Terminal kannst du die *dist* Datein wie folgt kopieren:
 
 ```sh
 cp server.php.dist server.php
-cp local.php.dist local.php
+cp env-local.php.dist env-local.php
 ```
 
 Jede Konfigurationsdatei hat eine Funktion:
@@ -47,15 +47,15 @@ Jede Konfigurationsdatei hat eine Funktion:
 |Name          |Beschreibung
 |--------      |-------------
 |server.php    |Diese Datei ist auf .gitignore und inkludiert die aktuelle laufende Umgebung (prep, prod)
-|prep.php      |Steht für *Preproduction*, also dein Lokales System
-|prod.php      |Dies ist die Konfiguration auf dem Server (*Production*) auf dem das System produktiv läuft.
-|local.php     |Dies sind deine Einstellungen von deiner Entwicklungsmaschine enthalten, welche mit der *prep.php* gemerged werden.
+|env-prep.php      |Steht für *Preproduction*, also dein Lokales System
+|env-prod.php      |Dies ist die Konfiguration auf dem Server (*Production*) auf dem das System produktiv läuft.
+|env-local.php     |Dies sind deine Einstellungen von deiner Entwicklungsmaschine enthalten, welche mit der *env-prep.php* gemerged werden.
 
 
 Datenbank
 ----------
 
-Du kannst nun in der *local.php* (welche du aus dem dist file kopiert hast) deine Datenbank Verbindung festlegen. Luya verfügt über eine *bin* Datei welche im Verzeichniss `vendor/bin/` liegt. Auf diese Bind Datei kannst du alle [Konsolen Befehl](luya-console.md) ausführen. So auch der Migration command.
+Du kannst nun in der *env-local.php* (welche du aus dem dist file kopiert hast) deine Datenbank Verbindung festlegen. Luya verfügt über eine *bin* Datei welche im Verzeichniss `vendor/bin/` liegt. Auf diese Bind Datei kannst du alle [Konsolen Befehl](luya-console.md) ausführen. So auch der Migration command.
 
 
 > Wichtig die Datenbank muss vor dem migrate erstellt sein und Mac-User sollten noch den [UNIX-Socket sowie den Datenbanknamen](install-mac.md) setzen.  

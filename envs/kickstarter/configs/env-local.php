@@ -2,7 +2,7 @@
 
 /**
  * This is the base config. It doesn't hold any informations about the database and is only used for local development.
- * Use localdb.php to configure you database.
+ * Use env-local-db.php to configure you database.
  */
 
 /*
@@ -145,4 +145,4 @@ $config = [
 }*/
 
 
-return \yii\helpers\ArrayHelper::merge($config, require('localdb.php'));
+return \yii\helpers\ArrayHelper::merge($config, require('env-local-db.php'));

@@ -30,6 +30,14 @@ Search and replace examples:
 |`\admin\base\Controller`|`\luya\admin\base\Controller`
 |`\admin\ngrest\base\ActiveWindow`|`\luya\admin\ngrest\base\ActiveWindow`
 
+
+* [#970](https://github.com/luyadev/luya/issues/970): Renamed rest classes `luya\rest\BehaviorInterface`, `luya\rest\BehaviorTrait`, `luya\rest\BaseActiveController`
+* `#972`: Renamed all modules to match luya prefix as described from the table above.
+* `#976`: Removed `$isCoreModule` property, replaced width `CoreModuleInterface`.
+* `#974`: Removed `$isAdmin` property, replaced with `AdminModuleInterface`.
+* `#875`: TagParser has been renamed to `luya\TagParser` instead of `cms\helpers\TagParser` and is now a core class.
+* `#806`: Renamed to `configs/server.php` to `configs/env.php`, new projects will also have the env prefix for the config names.
+
 ### Update tag for internal links
 The tag for internal links has changed from `link[32]` (where 32 is the id of the linked page) to `menu[32]`. To replace all occurrences, you can search and replace within the field `json_config_values`of the table `cms_nav_item_page_block_item` with the following regular expression:
 
