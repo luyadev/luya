@@ -37,4 +37,6 @@ interface BlockInterface
     public function config();
     
     public function extraVars();
+    
+    public function addExtraVar($key, $value);
 }

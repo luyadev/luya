@@ -114,3 +114,4 @@ The following Injectors are currently available:
 |Class		|Description
 |---		|---
 |`cms\injector\ActiveQueryCheckboxInjector`|Generate as checkbox selection from an ActiveRecord and assignes selected model rows into the extraVars section.
+|`cms\injectors\LinkInjector`|Generate an ability to select a link and returns the correct url to the link based on the user selection.

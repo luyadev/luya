@@ -18,7 +18,7 @@ use luya\helpers\ArrayHelper;
  * ```php
  * new ActiveQueryCheckboxInjector([
  *     'query' => \newsadmin\models\Article::find()->where(['cat_id' => 1]),
- * ]),
+ * ]);
  * ```
  *
  * @property \yii\db\ActiveQueryInterface $query The ActiveQuery object
