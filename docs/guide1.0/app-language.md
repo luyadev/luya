@@ -6,7 +6,7 @@ LUYA has a strong multi language support as we have focused on multi lingual web
 
 As LUYA is developed as a modular system the languages must be configured in several parts of the system. The multi lingual support works with or without cms but when using the cms (which is mostly the case).
 
-There is component known as [composition component](https://luya.io/api/luya-web-composition.html) which is dealing with the language settings. The component is invoken by the application boot process and changes the base url for the urlManager based on your configuration.
+There is component known as [composition component](concept-composition.md) which is dealing with the language settings. The component is invoken by the application boot process and changes the base url for the urlManager based on your configuration.
 
 You always have to define the default language of your application:
 

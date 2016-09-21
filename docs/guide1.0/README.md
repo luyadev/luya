@@ -11,9 +11,9 @@
 
 ### Key Concepts
 
-+ [LUYA Core](concept-core.md)
-+ [Tags](concept-tags.md)
++ [The Core](concept-core.md)
 + [Composition](concept-composition.md)
++ [Tags](concept-tags.md)
 + [HTML Element](concept-elements.md)
 
 ### Application
@@ -23,6 +23,9 @@
 + [CMS Menu](app-menu.md)
 + [CMS Blocks](app-blocks.md)
 + [CMS Block Types](app-block-types.md)
+  + [Selects](app-block-type-select.md)
+  + [Checkbox](app-block-type-checkbox.md)
+  + [Checkboxes Array](app-block-type-checkbox-array.md)
 + [Storage Filters](app-filters.md)
 + [Storage Filter Effects](app-filter-effects.md)
 + [Create custom Module](app-module.md)
@@ -51,8 +54,8 @@
 + [NgRest Config](ngrest-model.md)
 + [Active Windows](ngrest-activewindow.md)
 + [Plugins](ngrest-plugins.md)
-+ [Plugin Checkbox-Relation](ngrest-plugin-checkboxrelation.md)
-+ [Plugin Selects](ngrest-plugin-select.md)
+  + [Plugin Checkbox-Relation](ngrest-plugin-checkboxrelation.md)
+  + [Plugin Selects](ngrest-plugin-select.md)
 
 ### LUYA CORE
 
