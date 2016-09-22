@@ -13,42 +13,42 @@ $input--date-width: 50px;
 }
 
 .input__label {
-    font-size: $input__label-font-size;
-    line-height: $input__label-font-size + .1;
+    color: $input--label-color;
+    cursor: pointer;
 
     display: inline-block;
 
-    width: $input__label-width;
-    padding-right: $input__label-padding;
+    font-size: $input__label-font-size;
+    line-height: $input__label-font-size + .1;
 
-    cursor: pointer;
+    padding-right: $input__label-padding;
     text-align: right;
     vertical-align: middle;
-    word-wrap: break-word;
+    width: $input__label-width;
 
-    color: $input--label-color;
+    word-wrap: break-word;
 
     .input--vertical & {
         display: block;
 
-        width: 100%;
         margin-top: 10px;
-
         text-align: left;
+
+        width: 100%;
     }
 
     .input--single-checkbox & {
-        width: $input__label-width + 20px;
         height: auto;
         padding: 0 ($input__label-padding + 20px) 0 0;
+        width: $input__label-width + 20px;
 
         &:before {
-            top: 50%;
-
-            margin-top: -9px;
-            margin-left: $input__label-width + 5px;
-
             border-color: $input--label-color;
+
+            margin-left: $input__label-width + 5px;
+            margin-top: -9px;
+
+            top: 50%;
         }
     }
 
@@ -66,20 +66,20 @@ $input--date-width: 50px;
 }
 
 .input__searchfield {
-    transition: .25s ease background-color;
+    background-color: #fff;
 
     border: 1px solid #fafafa;
-    background-color: #fff;
+    transition: .25s ease background-color;
     &:focus {
-        outline: none;
         background-color: rgba(0, 0, 0, .1);
+        outline: none;
     }
 }
 
 input[type='checkbox']:checked + .input__label:before {
-    top: 50%;
-
     margin-top: -13px;
+
+    top: 50%;
 }
 
 .filearray > .input__field-wrapper, .imagearray > .input__field-wrapper {
@@ -88,30 +88,30 @@ input[type='checkbox']:checked + .input__label:before {
 }
 
 .input__field-wrapper {
+    display: inline-block;
     font-size: $input-font-size;
+
     line-height: $input-font-size;
 
-    position: relative;
-
-    display: inline-block;
-
-    width: 100%;
     padding: 5px 0;
 
+    position: relative;
     vertical-align: middle;
 
+    width: 100%;
+
     .input__label + & {
-        width: calc(100% - #{$input__label-width});
         padding: 5px;
+        width: calc(100% - #{$input__label-width});
     }
 
     .input--vertical & {
         display: block;
 
-        width: 100%;
         padding: 5px 0;
-
         text-align: left;
+
+        width: 100%;
     }
 
     .input--hide-label & {
@@ -119,30 +119,30 @@ input[type='checkbox']:checked + .input__label:before {
     }
 
     &.input--column {
+        column-width: 250px;
+        -moz-column-width: 250px;
         -webkit-column-width: 250px;
-           -moz-column-width: 250px;
-                column-width: 250px;
     }
 }
 
 .input .input__field {
+    background-color: #fff;
+    border: 1px solid $input--border-color;
+
     font-size: $input__input-font-size;
-    line-height: $input__input-font-size + .1;
-
-    position: relative;
-    z-index: 10;
-
-    width: 100%;
     height: auto;
+
+    line-height: $input__input-font-size + .1;
     margin: 0;
+    outline: none;
     padding: 10px 10px 7px 10px;
 
+    position: relative;
     transition: .25s ease background-color;
-    vertical-align: middle;
 
-    border: 1px solid $input--border-color;
-    outline: none;
-    background-color: #fff;
+    vertical-align: middle;
+    width: 100%;
+    z-index: 10;
 
     &:focus {
         background-color: $input--border-color;
@@ -150,13 +150,13 @@ input[type='checkbox']:checked + .input__label:before {
 }
 
 .input__divider {
+    color: color('shades', 'black');
+
     display: inline-block;
 
     margin: 0 10px;
 
     vertical-align: bottom;
-
-    color: color('shades', 'black');
 
     &.input__divider--centered {
         vertical-align: middle;
@@ -174,9 +174,9 @@ input[type='checkbox']:checked + .input__label:before {
 
 // Custom date styling
 .input--date {
-    position: relative;
-
     padding-right: 50px;
+
+    position: relative;
 
     .i18n__fields & {
         padding-right: 100px;
@@ -192,40 +192,40 @@ input[type='checkbox']:checked + .input__label:before {
 
     .date-picker-icon {
         position: absolute;
-        top: 0;
         right: -50px;
+        top: 0;
     }
 
     .hour-selection {
-        position: relative;
-
         display: inline-block;
 
-        width: 46%;
         margin-left: 4%;
+
         padding-left: 30px;
+        position: relative;
+        width: 46%;
     }
 
     .hour-selection__icon {
+        left: 0;
         position: absolute;
         top: 5px;
-        left: 0;
     }
 
     .time-divider {
         display: inline-block;
 
-        width: 2%;
-
         text-align: center;
+
+        width: 2%;
     }
 
     .input__field {
+        border: 1px solid $input--border-color !important;
+
         display: block;
 
         text-align: center;
-
-        border: 1px solid $input--border-color !important;
 
         &--hour {
             display: inline-block;
@@ -242,35 +242,38 @@ input[type='checkbox']:checked + .input__label:before {
 
 // Custom behavior for select boxes
 .input--select .input__field {
-    display: inline-block;
+    border: 1px solid $input--border-color !important;
 
-    width: calc(100% - (#{$input__label-width} + 5px));
-    margin-left: 5px;
-
+    border-radius: 0;
     cursor: pointer;
 
-    border: 1px solid $input--border-color !important;
-    border-radius: 0;
+    display: inline-block;
+
+    margin-left: 5px;
+    width: calc(100% - (#{$input__label-width} + 5px));
 }
 
 .input__select-wrapper {
     display: inline-block;
     max-width: 700px;
-    width: calc(100% - (#{$input__label-width} + 5px));
     padding-left: 5px;
+    width: calc(100% - (#{$input__label-width} + 5px));
 
     .input__field {
-        width: 100%;
         margin-left: 0;
+        width: 100%;
     }
 }
 
 // Custom behavior for textareas
 .input--textarea .input__field {
-    height: 100px;
+    font-size: $input__input-font-size;
+    line-height: $input__input-font-size + .1;
+    min-height: 100px;
     padding: 15px 10px;
-
-    resize: vertical;
+    resize: none;
+    transition: 0.1s ease-in-out height;
+    word-wrap: break-word;
 }
 
 [type='checkbox'] + label, [type='radio'] + label {
@@ -282,15 +285,15 @@ input[type='checkbox']:checked + .input__label:before {
 }
 
 .input--full-width .input__field {
-    width: 100%;
     max-width: 100%;
+    width: 100%;
 }
 
 .input__select-arrow {
     position: absolute;
-    z-index: 100;
-    top: 12px;
     right: 0;
+    top: 12px;
+    z-index: 100;
 
     & + .input__field {
         padding-right: 35px;
