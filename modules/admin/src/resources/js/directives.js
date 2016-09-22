@@ -333,6 +333,21 @@
                 "name": "@fieldname",
                 "placeholder": "@placeholder"
             },
+            /*
+            link : function(scope, element) {
+            	var e = element.find('textarea')[0];
+            	var h = angular.element(e).height();
+            	var recalc = function(e, h) {
+            		if (e.scrollHeight > h) {
+            			e.style.height = (e.scrollHeight) + "px";
+            		}
+            	}
+            	scope.$watch('model', function(n, o) {
+            		recalc(e, h);
+            	});
+            	recalc(e, h);
+            },
+            */
             template: function() {
                 return '<div class="input input--textarea" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><textarea id="{{id}}" insert-paste-listener name="{{name}}" ng-model="model" type="text" class="input__field" auto-grow placeholder="{{placeholder}}"></textarea></div></div>';
             }
