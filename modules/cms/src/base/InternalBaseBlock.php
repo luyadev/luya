@@ -8,6 +8,7 @@ use yii\base\Object;
 use luya\helpers\Url;
 use luya\cms\frontend\blockgroups\MainGroup;
 use luya\helpers\ArrayHelper;
+use luya\admin\base\TypesInterface;
 
 /**
  * Base Block for all Cms Blocks.
@@ -15,7 +16,7 @@ use luya\helpers\ArrayHelper;
  * @since 1.0.0-beta8
  * @author Basil Suter <basil@nadar.io>
  */
-abstract class InternalBaseBlock extends Object implements BlockInterface
+abstract class InternalBaseBlock extends Object implements BlockInterface, TypesInterface
 {
     private $_varValues = [];
 

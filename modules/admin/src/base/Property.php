@@ -12,7 +12,7 @@ use yii\base\Component;
  *
  * @author nadar
  */
-abstract class Property extends Component
+abstract class Property extends Component implements TypesInterface
 {
     const EVENT_BEFORE_RENDER = 'EVENT_BEFORE_RENDER';
 
