@@ -32,7 +32,7 @@ interface TypesInterface
 	/**
 	 * @var string
 	 */
-	const TYPE_DECIMAL = 'zaa-deciaml';
+	const TYPE_DECIMAL = 'zaa-decimal';
 	
 	/**
 	 * @var string
