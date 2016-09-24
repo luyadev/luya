@@ -39,7 +39,7 @@ class TestProperty extends \admin\base\Property
     
     public function type()
     {
-        return 'zaa-text';
+        return self::TYPE_TEXT;
     }
 }
 ```

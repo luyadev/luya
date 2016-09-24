@@ -31,7 +31,7 @@ Now you can add a field into the above defined type, this is like a configuratio
 [
     'var' => 'userInputText',
     'label' => 'Form Label for the User',
-    'type' => 'zaa-text',
+    'type' => 'zaa-text', // or as class constant: self::TYPE_TEXT
 ] 
 ```
 
@@ -40,7 +40,7 @@ This would create an input variable with a text input with the label `From Label
 ```php
 return [
     'vars' => [
-        ['var' => 'userInputText', 'label' => 'Description of userInputText', 'type' => 'zaa-text']
+        ['var' => 'userInputText', 'label' => 'Description of userInputText', 'type' => self::TYPE_TEXT]
     ]
 ];
 ```
@@ -48,27 +48,27 @@ return [
 ## Input-Types
 
 
-There are several types you can use to generate your block controllers and inputs:
+There are several types you can use to generate your block controlls. Each class which support those types implements the TypesInterface` where you can use the type names as constant.
 
-|Type Name            |Description
-|---------------------|-----------
-|zaa-text|Create a simple string input text value field.
-|zaa-password|Create a input password field which hides the input value behind * signs
-|zaa-textarea|Create a multirow input element known as textarea
-|zaa-number|Create a numerics values
-|zaa-link|Create a link field for internal and external URLs
-|zaa-wysiwyg|Create a small wysiwg editor
-|[zaa-select](app-block-type-select.md)|Create a select dropdown with options based on the options parameter. The Options item must contain a value and label key
-|zaa-date|Create a datepicker where the user can choose a date, the response inside the block will be a unix timestamp.
-|zaa-datetime|Create a datepicker where the user can choose a date and provide an additional time, the response inside the block will be a unix timestamp.
-|[zaa-checkbox](app-block-type-checkbox.md)|Create a single checkbox (e.g. to define on/off states)
-|[zaa-checkbox-array](app-block-type-checkbox-array.md)|Create an array with checkboxes
-|zaa-file-upload|Create a file upload form and returns the fileId on success
-|zaa-file-array-upload|Create an array with file id and caption string
-|zaa-image-upload|Create a image upload form and return the imageId on success
-|zaa-image-array-upload|Create an asrray with image id an caption string
-|zaa-list-array|Create an array with a key variable `value`
-|zaa-decimal|Create decimal input field with option: `options="{'steps':0.0001}"` to define step size. Default = 0.001.
+|Type Name            |Constante|Description
+|---------------------|---------|-----------
+|zaa-text|TYPE_TEXT|Create a simple string input text value field.
+|zaa-textarea|TYPE_TEXTAREA|Create a multirow input element known as textarea
+|zaa-password|TYPE_PASSWORD|Create a input password field which hides the input value behind * signs
+|zaa-number|TYPE_NUMBER|Create a numerics values
+|zaa-decimal|TYPE_DECIMAL|Create decimal input field with option: `options="{'steps':0.0001}"` to define step size. Default = 0.001.
+|zaa-link|TYPE_LINK|Create a link field for internal and external URLs
+|zaa-wysiwyg|TYPE_WYSIWYG|Create a small wysiwg editor
+|[zaa-select](app-block-type-select.md)|TYPE_SELECT|Create a select dropdown with options based on the options parameter. The Options item must contain a value and label key. Example `[["value" => "v1", "label" => "Value 1"], ["value" => "v2", "label" => "Value 2"]]`.
+|zaa-date|TYPE_DATE|Create a datepicker where the user can choose a date, the response inside the block will be a unix timestamp.
+|zaa-datetime|TYPE_DATETIME|Create a datepicker where the user can choose a date and provide an additional time, the response inside the block will be a unix timestamp.
+|[zaa-checkbox](app-block-type-checkbox.md)|TYPE_CHECKBOX|Create a single checkbox (e.g. to define on/off states)
+|[zaa-checkbox-array](app-block-type-checkbox-array.md)|TYPE_CHECKBOX_ARRAY|Create an array with checkboxes
+|zaa-file-upload|TYPE_FILEUPLOAD|Create a file upload form and returns the fileId on success
+|zaa-file-array-upload|TYPE_FILEUPLOAD_ARRAY|Create an array with file id and caption string
+|zaa-image-upload|TYPE_IMAGEUPLOAD|Create a image upload form and return the imageId on success
+|zaa-image-array-upload|TYPE_IAGEUPLOAD_ARRAY|Create an asrray with image id an caption string
+|zaa-list-array|TYPE_LIST_ARRAY|Create an array with a key variable `value`
 
 ## Injectors
 
