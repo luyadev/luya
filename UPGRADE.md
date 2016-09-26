@@ -32,7 +32,7 @@ Search and replace examples:
 
 
 * [#970](https://github.com/luyadev/luya/issues/970): Renamed rest classes `luya\rest\BehaviorInterface`, `luya\rest\BehaviorTrait`, `luya\rest\BaseActiveController`
-* `#972`: Renamed all modules to match luya prefix as described from the table above.
+* [#972](https://github.com/luyadev/luya/issues/972): Renamed all modules to match luya prefix as described from the table above.
 * `#976`: Removed `$isCoreModule` property, replaced width `CoreModuleInterface`.
 * `#974`: Removed `$isAdmin` property, replaced with `AdminModuleInterface`.
 * `#875`: TagParser has been renamed to `luya\TagParser` instead of `cms\helpers\TagParser` and is now a core class.

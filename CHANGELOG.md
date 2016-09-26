@@ -8,7 +8,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 - [#806](https://github.com/luyadev/luya/issues/806#issuecomment-248597369) **[BC BREAK]** Renamed to `configs/server.php` to `configs/env.php`, new projects will also have the env prefix for the config names.
 - `#976` **[BC BREAK]** Remove $isCoreModule replace with CoreModuleInterface
-- `#972` **[BC BREAK]** Merged to cms and cmsadmin modules into one folder and changed the namespace to `luya\cms` instead of `cms`/`cmsadmin`.
+- [#972](https://github.com/luyadev/luya/issues/972) **[BC BREAK]** Merged to cms and cmsadmin modules into one folder and changed the namespace to `luya\cms` instead of `cms`/`cmsadmin`.
 - `#973` **[BC BREAK]** Removed `$assets` property from **none admin modules**.
 - `#974` **[BC BREAK]** Removed `$isAdmin` property.
 - `#970` **[BC BREAK]** Deleted, renamed and rearranged LUYA core REST classes and methods.
