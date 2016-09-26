@@ -23,6 +23,11 @@ class PreviewController extends Controller
         }
 
         $navItem = NavItem::findOne($itemId);
+        
+        if (!$navItem) {
+            throw new NotFoundHttpException("The requested nav item with id {$itemId} does not exist.");
+        }
+        
         $langShortCode = $navItem->lang->short_code;
 
         Yii::$app->composition['langShortCode'] = $langShortCode;
