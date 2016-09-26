@@ -80,6 +80,11 @@ class Logger extends NgRestModel
         }
     }
     
+    public function ngRestGroupByField()
+    {
+        return 'group_identifier';
+    }
+    
     public function extraFields()
     {
         return ['typeDescription'];
