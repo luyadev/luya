@@ -545,8 +545,6 @@
             },
             controller: function($scope, $filter) {
 
-            	$scope.pickerPreselect = new Date();
-
             	$scope.isNumeric = function(num) {
             	    return !isNaN(num)
             	}
@@ -639,8 +637,6 @@
                 "i18n": "@i18n"
             },
         	controller: function($scope, $filter) {
-
-            	$scope.pickerPreselect = new Date();
 
             	$scope.$watch(function() { return $scope.model }, function(n, o) {
             		
