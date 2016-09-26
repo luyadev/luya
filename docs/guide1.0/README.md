@@ -1,4 +1,4 @@
-+Installation
++ Installation
    + [Setup](install.md)
    + [Setup Mac](install-mac.md)
    + [Setup Windows](install-windows.md)
@@ -27,7 +27,7 @@
   + [Assets](app-assets.md)
   + [Bower Assets](app-assets-bower.md)
   + [Languages](app-language.md)
-+Frontend Module
++ Frontend Module
   + [Frontend Module Intro Guide](app-module-frontend.md)
   + [Layouts](app-module-layouts.md)
   + [Url Rules](app-module-urlrules.md)
