@@ -52,7 +52,7 @@ $config = [
          * you have to make sure the mail component is configured correctly, you can test with console command `./vendor/bin/luya health/mailer`.
          */
         'admin' => [
-            'class' => 'admin\Module',
+            'class' => 'luya\admin\Module',
             'secureLogin' => false, // when enabling secure login, the mail component must be proper configured otherwise the auth token mail will not send.
         ],
         
