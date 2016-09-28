@@ -156,4 +156,9 @@ return [
     'button_create_version' => 'Create Version',
     'button_update_version' => 'Update Version',
     'menu_group_item_env_permission' => 'Page Permissions'
+    
+// rc1
+
+    'page_update_actions_deepcopy_text' => 'Create a copy of this page with all its translations and blocks but only the version which is active in order to save storage capacity.',
+    'page_update_actions_deepcopy_btn' => 'Create Copy',
 ];

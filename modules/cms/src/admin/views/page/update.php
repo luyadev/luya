@@ -265,12 +265,8 @@ use luya\cms\admin\Module;
             <div class="row" ng-if="showActions">
                 <div class="col s12">
                     <div class="card-panel">
-                        <p>
-                            Create a copy of this page with all its translations and blocks but only the version which is active in order to save storage capacity.
-                        </p>
-                        <p>
-                            <button type="button" class="btn" ng-click="createDeepPageCopy()">Create Copy</button>
-                        </p>
+                        <p><?= Module::t('page_update_actions_deepcopy_text'); ?></p>
+                        <p><button type="button" class="btn" ng-click="createDeepPageCopy()"><?= Module::t('page_update_actions_deepcopy_btn'); ?></button></p>
                     </div>
                 </div>
             </div>

@@ -154,5 +154,10 @@ return [
     'block_group_favorites' => 'Favoriten',
     'button_create_version' => 'Version erstellen',
     'button_update_version' => 'Bearbeiten speichern',
-    'menu_group_item_env_permission' => 'Seiten Zugriffsberechtigungen'
+    'menu_group_item_env_permission' => 'Seiten Zugriffsberechtigungen',
+    
+// rc1
+
+    'page_update_actions_deepcopy_text' => 'Erstellen Sie eine kopie der aktuellen Seiten inklusive aller Sprachen und Inhalte. Es wird aber nur die veröffentlichte Version kopiert.',
+    'page_update_actions_deepcopy_btn' => 'Kopie erstellen',
 ];

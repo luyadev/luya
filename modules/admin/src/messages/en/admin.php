@@ -169,7 +169,11 @@ return [
     'dashboard_log_message_add' => 'Added a new row to <b>{container}</b>.',
     'dashboard_log_message_edit' => 'Updated an existing row in <b>{container}</b>.',
 
-    // rc1
+// rc1
     
     'layout_btn_help' => 'Help',
+    'right_panel_support_title' => 'Informations &amp; Help',
+    'right_panel_support_tags_title' => 'Tags',
+    'right_panel_support_support_title' => 'Support',
+    'right_panel_support_support_text' => 'If you have any questions, please contact your webmaster or consult <a target="_blank" href="https://luya.io">luya.io</a>.',
 ];

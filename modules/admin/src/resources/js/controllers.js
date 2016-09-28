@@ -712,24 +712,18 @@
 			CacheReloadService.reload();
 		}
 	
-		$scope.sidePanel = false;
-		
 		$scope.sidePanelUserMenu = false;
 		
 		$scope.sidePanelHelp = false;
 		
 		$scope.toggleHelpPanel = function() {
 			$scope.sidePanelHelp = !$scope.sidePanelHelp;
-			$scope.toggleSidePanel();
+			$scope.sidePanelUserMenu = false;
 		};
 		
 		$scope.toggleUserPanel = function() {
 			$scope.sidePanelUserMenu = !$scope.sidePanelUserMenu;
-			$scope.toggleSidePanel();
-		};
-		
-		$scope.toggleSidePanel = function() {
-			$scope.sidePanel = !$scope.sidePanel;
+			$scope.sidePanelHelp = false;
 		};
 		
 	    $scope.userMenuOpen = false;

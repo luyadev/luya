@@ -172,4 +172,9 @@ return [
 // rc1
 
     'layout_btn_help' => 'Hilfe',
+    'right_panel_support_title' => 'Informationen &amp; Hilfe',
+    'right_panel_support_tags_title' => 'Tags',
+    'right_panel_support_support_title' => 'Hilfe',
+    'right_panel_support_support_text' => 'Bei Fragen wenden Sie sich bitte an den Webmaster, oder besuchen Sie <a target="_blank" href="https://luya.io">luya.io</a>.',
+
 ];

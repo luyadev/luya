@@ -345,7 +345,7 @@ $this->beginPage()
 
 <!-- /ANGULAR SCRIPTS -->
 
-<div class="luya-container ng-cloak" ng-class="{'luya-container--right-panel-active': sidePanel}">
+<div class="luya-container ng-cloak" ng-class="{'luya-container--right-panel-active': sidePanelUserMenu || sidePanelHelp}">
     <div class="toasts" ng-if="toastQueue" ng-repeat="item in toastQueue">
         <div class="toasts__confirm" ng-if="item.type == 'confirm'" zaa-esc="item.close()">
             <div class="toasts__item toasts__item--confirm">
@@ -543,18 +543,17 @@ $this->beginPage()
     <!-- ANGULAR-VIEW -->
     <div class="luya-container__angular-placeholder module-{{currentItem.moduleId}}" ui-view></div>
     <!-- /ANGULAR-VIEW -->
-    <div class="luya-container__right-panel" ng-if="sidePanel">
+    <div class="luya-container__right-panel" ng-if="sidePanelUserMenu || sidePanelHelp">
         <div ng-if="sidePanelUserMenu">
             <h1><?= $user->firstname; ?> <?= $user->lastname; ?></h1>
             <p><?= $user->email; ?></p>
             <p><a href="<?php echo Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="btn red"><?php echo Admin::t('layout_btn_logout'); ?></a></p>
         </div>
         <div ng-if="sidePanelHelp">
-            <h4>Informations &amp; Help</h4>
-            
-             <ul class="collapsible" data-collapsible="accordion" ng-init="tagsOpen=false">
+            <h4><?= Admin::t('right_panel_support_title'); ?></h4>
+            <ul class="collapsible" data-collapsible="accordion" ng-init="tagsOpen=false">
                 <li>
-                  <div class="collapsible-header" ng-click="tagsOpen=!tagsOpen"><i class="material-icons">filter_drama</i>Tags</div>
+                  <div class="collapsible-header" ng-click="tagsOpen=!tagsOpen"><i class="material-icons">filter_drama</i><?= Admin::t('right_panel_support_tags_title'); ?></div>
                   <div class="collapsible-body" ng-show="tagsOpen" style="display:block;">
                     <ul class="collection with-header">
                     <?php foreach ($this->context->tags as $name => $object): ?>
@@ -570,11 +569,10 @@ $this->beginPage()
                   </div>
                 </li>
                 <li>
-                  <div class="collapsible-header" ng-click="supportOpen=!supportOpen"><i class="material-icons">whatshot</i>Support</div>
-                  <div class="collapsible-body" ng-show="supportOpen" style="display:block;"><p>If you have any questions about your product please contact the webmaster.</p></div>
+                  <div class="collapsible-header" ng-click="supportOpen=!supportOpen"><i class="material-icons">whatshot</i><?= Admin::t('right_panel_support_support_title'); ?></div>
+                  <div class="collapsible-body" ng-show="supportOpen" style="display:block;"><p><?= Admin::t('right_panel_support_support_text'); ?></p></div>
                 </li>
-              </ul>
-            
+             </ul>
         </div>
     </div>
 </div> <!-- /.luya-container -->
