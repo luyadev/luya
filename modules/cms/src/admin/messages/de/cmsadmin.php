@@ -158,6 +158,6 @@ return [
     
 // rc1
 
-    'page_update_actions_deepcopy_text' => 'Erstellen Sie eine kopie der aktuellen Seiten inklusive aller Sprachen und Inhalte. Es wird aber nur die veröffentlichte Version kopiert.',
+    'page_update_actions_deepcopy_text' => 'Erstellen Sie eine Kopie der aktuellen Seite mit ihren Inhalten. Es werden dabei alle Sprachen kopiert, aber nur die veröffentlichte Version.',
     'page_update_actions_deepcopy_btn' => 'Kopie erstellen',
 ];
