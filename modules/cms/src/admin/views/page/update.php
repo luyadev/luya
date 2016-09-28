@@ -163,7 +163,7 @@ use luya\cms\admin\Module;
                                     
                                     <!-- ACTIONS -->
                                     <div class="toolbar__group">
-                                        <a ng-click="showActions=!showActions"><i class="material-icons">menu</i></a>
+                                        <a ng-click="showActions=!showActions" class="[ waves-effect waves-blue ][ btn-flat btn--small ][ grey-text text-darken-2 ]"><i class="material-icons">more_vert</i></a>
                                     </div>
                                     <!--  /ACTIONS -->
 
