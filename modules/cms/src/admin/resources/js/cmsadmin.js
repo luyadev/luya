@@ -788,7 +788,7 @@
 	    $scope.toggleSidebar = function() {
 	        $scope.sidebar = !$scope.sidebar;
 	    };
-		
+	    
 		/* app logic */
 		
 		$scope.id = parseInt($stateParams.navId);
@@ -800,6 +800,12 @@
 		$scope.propValues = {};
 		
 		$scope.hasValues = false;
+		
+		$scope.createDeepPageCopy = function() {
+			$http.post('admin/api-cms-nav/deep-page-copy', {navId: $scope.id}).success(function(response) {
+				$scope.menuDataReload();
+			});
+		};
 		
 		$scope.loadNavProperties = function() {
 			$http.get('admin/api-cms-nav/get-properties', { params: {navId: $scope.id}}).success(function(response) {

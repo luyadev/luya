@@ -160,6 +160,12 @@ use luya\cms\admin\Module;
                                         </a>
                                     </div>
                                     <!-- /CONFIG BUTTON -->
+                                    
+                                    <!-- ACTIONS -->
+                                    <div class="toolbar__group">
+                                        <a ng-click="showActions=!showActions"><i class="material-icons">menu</i></a>
+                                    </div>
+                                    <!--  /ACTIONS -->
 
                                     <!-- DELETE BUTTON -->
                                     <div class="toolbar__group toolbar__group--delete">
@@ -255,8 +261,21 @@ use luya\cms\admin\Module;
 
                 </div>
             </div>
+            
+            <div class="row" ng-if="showActions">
+                <div class="col s12">
+                    <div class="card-panel">
+                        <p>
+                            Create a copy of this page with all its translations and blocks but only the version which is active in order to save storage capacity.
+                        </p>
+                        <p>
+                            <button type="button" class="btn" ng-click="createDeepPageCopy()">Create Copy</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-            <div class="row" ng-show="showPropForm">
+            <div class="row" ng-if="showPropForm">
                 <div class="col s12">
                     <div class="card-panel">
                     <h5><?php echo Module::t('view_update_properties_title'); ?></h5>
@@ -291,7 +310,7 @@ use luya\cms\admin\Module;
                 </div>
             </div>
             <div class="row">
-                <div class="col s{{(12/AdminLangService.selection.length)}}" ng-repeat="lang in languagesData" ng-show="AdminLangService.isInSelection(lang.short_code)" ng-controller="NavItemController">
+                <div class="col s{{(12/AdminLangService.selection.length)}}" ng-repeat="lang in languagesData" ng-if="AdminLangService.isInSelection(lang.short_code)" ng-controller="NavItemController">
                     <!-- PAGE -->
                     <div class="page" ng-show="!isTranslated && navData.is_draft == 1">
                         <div class="alert alert--info"><?php echo Module::t('view_update_draft_no_lang_error'); ?></div>
@@ -455,17 +474,11 @@ use luya\cms\admin\Module;
                         <!-- /PAGE__CONTENT--SETTINGS -->
 
                         <!-- PAGE__CONTENT -->
-                        <div class="page__content" ng-show="!settings" ng-switch on="item.nav_item_type">
+                        <div class="page__content" ng-if="!settings" ng-switch on="item.nav_item_type">
                             <div class="row">
                                 <div class="col s12 page__no-padding" ng-switch-when="1">
                                     <!-- Versions -->
                                     <div class="page__versions" ng-controller="PageVersionsController" ng-init="createVersionModalState=true;">
-                                        <!--<div class="page__versions-left">
-                                            <span class="page__versions-title page__versions-title--black">
-                                            <span><?= Module::t('current_version'); ?>:</span>&nbsp;
-                                            <strong>{{ currentVersionInformation.version_alias}}</strong><i class="material-icons" ng-click="editVersionModalState=false">edit</i>
-                                            <i ng-show="currentPageVersion != item.nav_item_type_id" ng-click="removeCurrentVersion()" class="material-icons">delete</i></span>
-                                        </div>-->
                                         <span class="page__versions-label"><?= Module::t('versions_selector'); ?>: </span>
                                         <button class="page__version" ng-class="{'page__version--visible': currentPageVersion == versionItem.id, 'page__version--in-use': versionItem.id == item.nav_item_type_id}" ng-repeat="versionItem in typeData" ng-init="modalState=true" title="{{ versionItem.version_alias }}" ng-click="switchVersion(versionItem.id);">
                                             {{$index+1}}

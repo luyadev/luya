@@ -21,8 +21,16 @@ use luya\cms\admin\Module;
  * about the content, title or alias (link) itself, cause those informations are stored in the the [[\cmsadmin\models\NavItem]] to the corresponding
  * language. So basically the Nav contains the structure and state of the menu/navigation put not content, or titles cause those are related to a language.
  *
- *
  * @property \luya\cms\models\NavItem $activeLanguageItem Returns the NavItem for the current active user language with with the context object nav id.
+ * @property integer $id
+ * @property integer $nav_container_id
+ * @property integer $parent_nav_id
+ * @property integer $sort_index
+ * @property integer $is_deleted
+ * @property integer $is_hidden
+ * @property integer $is_offline
+ * @property integer $is_home
+ * @property integer $is_draft
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -83,6 +91,22 @@ class Nav extends ActiveRecord
         return $this->hasMany(NavItem::className(), ['nav_id' => 'id']);
     }
 
+    /**
+     * @return 
+     */
+    public function createCopy()
+    {
+        $model = new self();
+        $model->attributes = $this->toArray();
+        $model->is_hidden = 1;
+        $model->is_offline = 1;
+        $model->is_home = 0;
+        $model->is_draft = 0;
+        if ($model->save(false)) {
+            return $model;
+        }
+    }
+    
     private $_properties = null;
     
     /**
@@ -133,7 +157,7 @@ class Nav extends ActiveRecord
     
     public function hasGroupPermissionSelected(Group $group)
     {
-        $definition = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $group->id, 'nav_id' => $this->id])->one();
+        $definition = (new Query())->select("id")->from("cms_nav_permission")->where(['group_id' => $group->id, 'nav_id' => $this->id])->one();
         
         if ($definition) {
             return true;
@@ -144,7 +168,7 @@ class Nav extends ActiveRecord
     
     public function isGroupPermissionInheritNode(Group $group)
     {
-        $definition = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $group->id, 'nav_id' => $this->id])->one();
+        $definition = (new Query())->select("inheritance")->from("cms_nav_permission")->where(['group_id' => $group->id, 'nav_id' => $this->id])->one();
         
         if ($definition) {
             return (bool) $definition['inheritance'];

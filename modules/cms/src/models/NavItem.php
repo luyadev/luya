@@ -8,6 +8,7 @@ use yii\base\Exception;
 use yii\helpers\Inflector;
 use luya\cms\admin\Module;
 use luya\admin\base\GenericSearchInterface;
+use yii\db\ActiveRecordInterface;
 
 /**
  * NavItem Model represents a Item bound to Nav and Language, each Nav(Menu) can contain a nav_item for each language.Each
@@ -15,7 +16,20 @@ use luya\admin\base\GenericSearchInterface;
  * nav_item_type_id (pk of the table).
  *
  * @property \luya\cms\models\NavItemPage|\luya\cms\models\NavItemModule\luya\cms\models\NavItemRedirect $type The type object based on the current type id
- *
+ * @property integer $id
+ * @property integer $nav_id
+ * @property integer $lang_id
+ * @property integer $nav_item_type
+ * @property integer $nav_item_type_id
+ * @property integer $create_user_id
+ * @property integer $update_user_id
+ * @property integer $timestamp_create
+ * @property integer $timestamp_update
+ * @property string $title
+ * @property string $alias
+ * @property string $description
+ * @property string $keywords
+ * 
  * @author Basil Suter <basil@nadar.io>
  */
 class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
@@ -433,11 +447,8 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
      * @return bool
      * @throws Exception type not recognized (1,2,3)
      */
-    public function copyTypeContent($targetNavItem)
+    public function copyTypeContent(ActiveRecordInterface $targetNavItem)
     {
-        if (!$targetNavItem instanceof \yii\db\ActiveRecord) {
-            throw new Exception("Target nav item must be an instance of ActiveRecord.");
-        }
         switch ($this->nav_item_type) {
             case 1:
                 return $this->copyPageItem($targetNavItem);

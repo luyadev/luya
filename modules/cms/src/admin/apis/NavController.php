@@ -8,6 +8,7 @@ use luya\cms\models\Property;
 use luya\cms\models\Nav;
 use luya\cms\models\NavItem;
 use yii\helpers\Json;
+use yii\base\InvalidCallException;
 
 /**
  * Nai Api provides tasks to create, modify and delete navigation items and properties of items.
@@ -24,6 +25,37 @@ class NavController extends \luya\admin\base\RestController
     private function postArg($name)
     {
         return Yii::$app->request->post($name, null);
+    }
+    
+    public function actionDeepPageCopy()
+    {
+        $navId = Yii::$app->request->getBodyParam('navId');
+        
+        if (empty($navId)) {
+            throw new InvalidCallException("navId can not be empty.");
+        }
+        
+        $nav = Nav::findOne($navId);
+        
+        if (!$nav) {
+            throw new InvalidCallException("Unable to find the requested model.");
+        }
+        
+        $model = $nav->createCopy();
+        foreach ($nav->navItems as $item) {
+            
+            $newItem = new NavItem();
+            $newItem->attributes = $item->toArray();
+            $newItem->nav_id = $model->id;
+            $newItem->parent_nav_id = $model->parent_nav_id;
+            $newItem->title = $item->title . ' (copy)';
+            $newItem->alias = $item->alias . '-' . time();
+            if ($newItem->save() && !empty($newItem->nav_item_type_id)) {
+                $item->copyTypeContent($newItem);
+            }
+        }
+        
+        return true;
     }
     
     public function actionSaveCatToggle()
