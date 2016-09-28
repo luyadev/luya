@@ -139,7 +139,7 @@ class Nav extends ActiveRecord
     
     public function hasGroupPermission(Group $group)
     {
-        $definitions = (new Query())->select("*")->from("cms_nav_permission")->where(['group_id' => $group->id])->all();
+        $definitions = (new Query())->select("nav_id")->from("cms_nav_permission")->where(['group_id' => $group->id])->all();
         
         // the group has no permission defined, this means he can access ALL cms pages
         if (count($definitions) == 0) {
@@ -157,7 +157,7 @@ class Nav extends ActiveRecord
     
     public function hasGroupPermissionSelected(Group $group)
     {
-        $definition = (new Query())->select("id")->from("cms_nav_permission")->where(['group_id' => $group->id, 'nav_id' => $this->id])->one();
+        $definition = (new Query())->select("inheritance")->from("cms_nav_permission")->where(['group_id' => $group->id, 'nav_id' => $this->id])->one();
         
         if ($definition) {
             return true;
