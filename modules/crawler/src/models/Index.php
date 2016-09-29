@@ -52,7 +52,7 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
         }
     }
 
-    public static function searchByQuery($query, $languageInfo)
+    public static function searchByQuery($query, $languageInfo, $returnQuery = false)
     {
         $query = trim(htmlentities($query, ENT_QUOTES));
         
@@ -79,7 +79,13 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
         }
         
         
-        $result = self::find()->where(['in', 'id', $ids])->all();
+        $activeQuery = self::find()->where(['in', 'id', $ids]);
+        
+        if ($returnQuery) {
+            return $activeQuery;
+        }
+        
+        $result = $activeQuery->all();
         
         $searchData = new SearchData();
         $searchData->attributes = [
