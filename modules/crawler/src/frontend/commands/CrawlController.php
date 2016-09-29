@@ -62,7 +62,7 @@ class CrawlController extends \luya\console\Command
             
             return $this->outputSuccess(PHP_EOL . 'Crawler finished in ' . $timeElapsed . ' min.');
         } catch (\Exception $e) {
-            return $this->outputError($e->getMessage());
+            return $this->outputError('Exception in file "'.$e->getFile() . '" on line #' . $e->getLine() . ': ' . $e->getMessage());
         }
     }
 }

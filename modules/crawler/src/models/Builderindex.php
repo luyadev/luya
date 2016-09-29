@@ -24,9 +24,9 @@ class Builderindex extends \luya\admin\ngrest\base\NgRestModel
     public function scenarios()
     {
         return [
-            'restcreate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page'],
-            'restupdate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page'],
-            'default' => ['url', 'content', 'title', 'language_info', 'content_hash', 'is_dublication', 'url_found_on_page'],
+            'restcreate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page', 'group'],
+            'restupdate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page', 'group'],
+            'default' => ['url', 'content', 'title', 'language_info', 'content_hash', 'is_dublication', 'url_found_on_page', 'group'],
         ];
     }
 

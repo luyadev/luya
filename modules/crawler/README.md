@@ -90,8 +90,8 @@ $.ajax({
 });
 ```
 
-Crawler Settings
-------------------
+## Crawler Settings
+
 
 Set the language in your html markup
 
@@ -117,3 +117,11 @@ Ignore a page complet:
 	<p>The full page will be ignored by the crawler.</p>
 </div>
 ```
+
+Sometimes you want to group your results by a section of a page, in order to let crawler know about the group/section of your current page just use the `CRAWL_GROUP` tag:
+
+```html
+<!-- [CRAWL_GROUP]api[/CRAWL_GROUP] -->
+```
+
+Where the above example `api` could be anything you want to let the crawler know for this section. Now you can group your results by the `group` field.

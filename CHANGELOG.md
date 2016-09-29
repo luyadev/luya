@@ -12,6 +12,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - `#973` **[BC BREAK]** Removed `$assets` property from **none admin modules**.
 - `#974` **[BC BREAK]** Removed `$isAdmin` property.
 - `#970` **[BC BREAK]** Deleted, renamed and rearranged LUYA core REST classes and methods.
+- `#995` Added Grouping/Section ability to for the crawler.
 - `#830` Added Textarea auto height plugin
 - `#983` Added LazyLoad Widget
 - `#979` Added option to enable markdown parsing for table blocks.

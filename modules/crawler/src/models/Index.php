@@ -18,9 +18,9 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
     public function scenarios()
     {
         return [
-            'default' => ['url', 'content', 'title', 'language_info', 'added_to_index', 'last_update', 'url_found_on_page'],
-            'restcreate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page', 'last_update', 'url_found_on_page', 'added_to_index'],
-            'restupdate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page', 'last_update', 'url_found_on_page', 'added_to_index'],
+            'default' => ['url', 'content', 'title', 'language_info', 'added_to_index', 'last_update', 'url_found_on_page', 'group'],
+            'restcreate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page', 'last_update', 'url_found_on_page', 'added_to_index', 'group'],
+            'restupdate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page', 'last_update', 'url_found_on_page', 'added_to_index', 'group'],
         ];
     }
 

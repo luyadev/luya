@@ -251,6 +251,7 @@ class CrawlContainer extends \yii\base\Object
                 // update the urls content
                 $model = Builderindex::findUrl($url);
                 $model->content = $this->getCrawler($url)->getContent();
+                $model->group = $this->getCrawler($url)->getGroup();
                 $model->title = $this->getCrawler($url)->getTitle();
                 $model->crawled = 1;
                 $model->status_code = 1;
@@ -277,6 +278,7 @@ class CrawlContainer extends \yii\base\Object
             } else {
                 if ($model->crawled !== 1) {
                     $model->content = $this->getCrawler($url)->getContent();
+                    $model->group = $this->getCrawler($url)->getGroup();
                     $model->crawled = 1;
                     $model->status_code = 1;
                     $model->last_indexed = time();

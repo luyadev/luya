@@ -63,7 +63,12 @@ class CrawlPage extends \yii\base\Object
         if ($this->_crawler === null) {
             try {
                 $this->client = new Client();
-                $this->_crawler = $this->client->request('GET', $this->pageUrl);
+                $this->_crawler = $this->client->request('GET', $this->pageUrl);                
+                if ($this->client->getInternalResponse()->getStatus() !== 200) {
+                    $this->verbosePrint("[!] " .$this->pageUrl, "Response Status is not 200");
+                    $this->_crawler = false;
+                }
+                
             } catch (\Exception $e) {
                 $this->_crawler = false;
             }
@@ -169,16 +174,30 @@ class CrawlPage extends \yii\base\Object
         return $text;
     }
 
-    private function tempGetContent($url)
+    private $_curlResponse = null;
+    
+    private function getCurlResponseContent($url)
     {
-        try {
+        if ($this->_curlResponse === null) {
             $curl = new \Curl\Curl();
             $curl->get($url);
             $content = $curl->response;
-    
+            
             if ($curl->error) {
                 $this->verbosePrint('Curl error message for url ' . $url, $curl->error_message);
+                $this->_curlResponse = false;
+            } else {
+                $this->_curlResponse = $content;
             }
+        }
+        
+        return $this->_curlResponse;
+    }
+    
+    private function tempGetContent($url)
+    {
+        try {
+            $content = $this->getCurlResponseContent($url);
             
             if (empty($content)) {
                 $this->verbosePrint('The curl get process returns in empty response', $url);
@@ -238,6 +257,25 @@ class CrawlPage extends \yii\base\Object
         }
     }
 
+    public function getGroup()
+    {
+        try {
+            $content = $this->getCurlResponseContent($this->baseUrl);
+            
+            preg_match_all("/\[CRAWL_GROUP\](.*?)\[\/CRAWL_GROUP\]/", $content, $results);
+            
+            if (!empty($results) && isset($results[1]) && isset($results[1][0])) {
+                $this->verbosePrint("[+] CRAWL_GROUP information found", $results[1][0]);
+                return $results[1][0];
+            }
+            
+            return null;
+            
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+    
     public function getContent()
     {
         try {
