@@ -13,4 +13,5 @@ trigger_error("luya\cms\TagParser deprecated use luya\TagParser instead.", E_USE
  * @deprecated
  */
 class TagParser extends BaseTagParser
-{}
+{
+}

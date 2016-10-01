@@ -15,7 +15,7 @@ class MenuTag extends BaseTag
 {
     public function example()
     {
-        return 'menu[123](Go to Page 123)';    
+        return 'menu[123](Go to Page 123)';
     }
     
     public function readme()
@@ -30,7 +30,6 @@ EOT;
         $menuItem = Yii::$app->menu->find()->where(['nav_id' => $value])->with('hidden')->one();
         
         if ($menuItem) {
-
             $alias = (empty($sub)) ? $menuItem->title : $sub;
             
             return Html::a($alias, $menuItem->link, ['label' => $alias]);

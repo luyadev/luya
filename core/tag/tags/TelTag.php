@@ -10,7 +10,7 @@ class TelTag extends BaseTag
 {
     public function example()
     {
-        return 'tel[+41 123 45 65](Call us!)';    
+        return 'tel[+41 123 45 65](Call us!)';
     }
     
     public function readme()

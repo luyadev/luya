@@ -43,7 +43,6 @@ class NavController extends \luya\admin\base\RestController
         
         $model = $nav->createCopy();
         foreach ($nav->navItems as $item) {
-            
             $newItem = new NavItem();
             $newItem->attributes = $item->toArray();
             $newItem->nav_id = $model->id;
@@ -271,7 +270,7 @@ class NavController extends \luya\admin\base\RestController
         $navContainerId = $this->postArg('nav_container_id');
         
         if (!empty($parentNavId)) {
-        	$navContainerId = Nav::findOne($parentNavId)->nav_container_id;
+            $navContainerId = Nav::findOne($parentNavId)->nav_container_id;
         }
         
         $create = $model->createModule($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('module_name'), $this->postArg('description'));
@@ -305,7 +304,7 @@ class NavController extends \luya\admin\base\RestController
         $navContainerId = $this->postArg('nav_container_id');
         
         if (!empty($parentNavId)) {
-        	$navContainerId = Nav::findOne($parentNavId)->nav_container_id;
+            $navContainerId = Nav::findOne($parentNavId)->nav_container_id;
         }
         
         $create = $model->createRedirect($parentNavId, $navContainerId, $this->postArg('lang_id'), $this->postArg('title'), $this->postArg('alias'), $this->postArg('redirect_type'), $this->postArg('redirect_type_value'), $this->postArg('description'));

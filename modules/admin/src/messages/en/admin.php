@@ -170,7 +170,7 @@ return [
     'dashboard_log_message_edit' => 'Updated an existing row in <b>{container}</b>.',
 
 // rc1
-    
+
     'layout_btn_help' => 'Help',
     'right_panel_support_title' => 'Informations &amp; Help',
     'right_panel_support_tags_title' => 'Tags',

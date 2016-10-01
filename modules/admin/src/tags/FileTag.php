@@ -10,7 +10,7 @@ class FileTag extends BaseTag
 {
     public function example()
     {
-        return 'file[123](Open Me!)';    
+        return 'file[123](Open Me!)';
     }
     
     public function readme()

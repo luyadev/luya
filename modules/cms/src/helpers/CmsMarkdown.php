@@ -13,4 +13,5 @@ trigger_error("luya\cms\CmsMarkdown deprecated use luya\TagMarkdownParser instea
  * @deprecated
  */
 class CmsMarkdown extends TagMarkdownParser
-{}
+{
+}

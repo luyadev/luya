@@ -92,7 +92,7 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
     public static function search($array, $searchText, $sensitive = false)
     {
         $function = ($sensitive) ? 'strpos' : 'stripos';
-        return array_filter($array, function($item) use ($searchText, $function) {
+        return array_filter($array, function ($item) use ($searchText, $function) {
             $response = false;
             foreach ($item as $key => $value) {
                 if ($response) {
@@ -101,7 +101,7 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
                 if ($function($value, "$searchText") !== false) {
                     $response = true;
                 }
-            }            
+            }
             return $response;
         });
     }

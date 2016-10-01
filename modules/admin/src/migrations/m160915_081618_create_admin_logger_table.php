@@ -27,6 +27,6 @@ class m160915_081618_create_admin_logger_table extends Migration
 
     public function safeDown()
     {
-        $this->dropTable('admin_logger');   
+        $this->dropTable('admin_logger');
     }
 }

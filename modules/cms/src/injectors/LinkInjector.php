@@ -28,12 +28,12 @@ class LinkInjector extends BaseBlockInjector
      */
     public function setup()
     {
-       $this->setContextConfig([
+        $this->setContextConfig([
            'var' => $this->varName,
            'type' => 'zaa-link',
            'label' => $this->varLabel,
        ]);
        
-       $this->context->addExtraVar($this->varName, $this->getLinkUrl());
+        $this->context->addExtraVar($this->varName, $this->getLinkUrl());
     }
 }

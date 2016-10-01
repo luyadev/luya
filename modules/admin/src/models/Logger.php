@@ -230,7 +230,6 @@ class Logger extends NgRestModel
     
     public static function warning($message, $groupIdentifier = null)
     {
-        
         return static::log(self::TYPE_WARNING, $message, debug_backtrace(false, 2), $groupIdentifier);
     }
 }

@@ -15,7 +15,7 @@ class MailTag extends BaseTag
 {
     public function example()
     {
-        return 'mail[info@luya.io](Mail us!)'; 
+        return 'mail[info@luya.io](Mail us!)';
     }
     
     public function readme()

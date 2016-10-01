@@ -9,22 +9,22 @@ use luya\admin\ngrest\base\ActiveWindow;
  */
 class InfoActiveWindow extends ActiveWindow
 {
-	public $module = '@admin';
-	
-	public $alias = 'Detail';
-	
-	public $icon = 'zoom_in';
-	
-	/**
-	 * Renders the index file of the ActiveWindow.
-	 *
-	 * @return string The render index file.
-	 */
-	public function index()
-	{
-		return $this->render('index', [
-			'id' => $this->itemId,
-		    'data' => $this->model->toArray(),
-		]);
-	}
+    public $module = '@admin';
+    
+    public $alias = 'Detail';
+    
+    public $icon = 'zoom_in';
+    
+    /**
+     * Renders the index file of the ActiveWindow.
+     *
+     * @return string The render index file.
+     */
+    public function index()
+    {
+        return $this->render('index', [
+            'id' => $this->itemId,
+            'data' => $this->model->toArray(),
+        ]);
+    }
 }
