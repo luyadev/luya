@@ -221,7 +221,7 @@ abstract class Module extends \yii\base\Module
         try { // https://github.com/yiisoft/yii2/blob/master/framework/base/Module.php#L233
             $files = [];
             foreach (FileHelper::findFiles($this->controllerPath) as $file) {
-                $value = ltrim(str_replace([$this->controllerPath, 'Controller.php'], '', $file), '/');
+                $value = ltrim(str_replace([$this->controllerPath, 'Controller.php'], '', $file), DIRECTORY_SEPARATOR);
                 $files[Inflector::camel2id($value)] = $file;
             }
             return $files;
