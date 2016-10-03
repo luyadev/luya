@@ -19,6 +19,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - `#971` Added basic pagination for NgRest Apis.
 - `#956` Added optional image css class and layout css class in block configurations.
 - `#959` Added block injectors to simplify relations, links and other helpfull tools to make less complex blocks.
+- `#998` Added the gii model generator to build the model rules() for the crud generator command crud/create.
 - `#965` Fixed bug where cms pages are lost while creating when selecting a container but choose a sub page not from the related container.
 - `#957` Fixed bug where cms admin container movement lost container_id reference of children elements.
 - `#963` Fixed bug where caching if block is not reseted correctly.
