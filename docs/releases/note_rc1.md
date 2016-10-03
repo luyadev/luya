@@ -1,6 +1,6 @@
-# RC1 Release
+We are proud to anounce the first release candidate of the LUYA system. We have been working very hard in the last few weeks to release this version. Below the most significant changes and introductions.
 
-`4.10.2016`
+> Attention: If you want to upgrade to the newest release candidate there are a few breaking changes you have to take care of. But as now we have made a stable, reliable platform for the upcoming release candidates and the final release!
 
 + 2 times faster administration area!
 + Added the ability to define a GROUP within the crawler.
@@ -15,3 +15,8 @@
 + Dropped the requirement of two composer packages in cms, news, crawler modules, the are now splitted inside the module in folders.
 + Speedup the composer update process by removing very old depencies which still required bower depencies.
 + tons of bugs and small improvments
+
+Please check the full [Changelog]() and even more import the [Upgrading]() Guide. If you have any problem or question regarding the upgrade process don't hesitate to contact us on [Gitter]() or create an [Issue on GitHub]().
+
+4th, October 2016
+the LUYA developer team
