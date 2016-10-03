@@ -8,18 +8,12 @@ use yii\helpers\Inflector;
 use luya\Boot;
 
 /**
- * NgRest Crud console commands.
+ * Console command to create a NgRest Crud with Controller, Api and Model based on a SQL Table.
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class CrudController extends \luya\console\Command
-{
-    private function getSqlTablesArray()
-    {
-        $names = Yii::$app->db->schema->tableNames;
-        
-        return array_combine($names, $names);
-    }
+class CrudController extends BaseCrudController
+{	
     /**
      * Create Ng-Rest-Model, Controller and Api for an existing Database-Table.
      *
@@ -213,6 +207,7 @@ class CrudController extends \luya\console\Command
                         'extended' => $extended,
                         'textFields' => $textFields,
                         'properties' => $properties,
+                    	'rules' => $this->generateRules($shema),
                     ]);
                     
                     break;
@@ -246,4 +241,6 @@ class CrudController extends \luya\console\Command
 
         return 0;
     }
+    
+    
 }

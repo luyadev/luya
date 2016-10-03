@@ -53,8 +53,9 @@ use Yii;
     public function rules()
     {
         return [
-             [['<?= implode($fieldNames, "', '"); ?>'], 'required'],
-        ];
+        <?php foreach($rules as $rule): ?>
+    <?=$rule?>,
+        <?php endforeach; ?>];
     }
     
     // ngrest base model methods
