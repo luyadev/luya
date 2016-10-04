@@ -14,12 +14,13 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - `#970` **[BC BREAK]** Deleted, renamed and rearranged LUYA core REST classes and methods.
 - `#995` Added Grouping/Section ability to for the crawler.
 - `#830` Added Textarea auto height plugin
-- `#983` Added LazyLoad Widget
+- `#983` Added LazyLoad Widget to the LUYA core features.
 - `#979` Added option to enable markdown parsing for table blocks.
 - `#971` Added basic pagination for NgRest Apis.
 - `#956` Added optional image css class and layout css class in block configurations.
 - `#959` Added block injectors to simplify relations, links and other helpfull tools to make less complex blocks.
 - `#998` Added the gii model generator to build the model rules() for the crud generator command crud/create.
+- `#994` Added ability to copy an existing page with all its languages and blocks.
 - `#965` Fixed bug where cms pages are lost while creating when selecting a container but choose a sub page not from the related container.
 - `#957` Fixed bug where cms admin container movement lost container_id reference of children elements.
 - `#963` Fixed bug where caching if block is not reseted correctly.
