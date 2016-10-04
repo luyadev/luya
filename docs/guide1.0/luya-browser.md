@@ -1,7 +1,6 @@
-Browser Support
------------------
+# Browser Support
 
-*LUYA ADMIN* ist currently supported by the following operating systems and browsers:
+*LUYA ADMIN* is currently supported by the following operating systems and browsers:
 
 Mac OSX Lion and up
 ----------------
