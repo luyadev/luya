@@ -1,0 +1,70 @@
+.help-overlay {
+    background-color: color('blue', 'base');
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: color('shades', 'white');
+
+    margin-right: -5px;
+    padding: 20px;
+    position: fixed;
+    right: 20%;
+    width: 400px;
+    z-index: 100000;
+
+    &:after {
+        border-bottom: 10px solid transparent;
+        border-left: 10px solid color('blue', 'base');
+        border-top: 10px solid transparent;
+        content: "";
+        display: block;
+        height: 0;
+        position: absolute;
+        right: -10px;
+        top: 0;
+        width: 0;
+    }
+}
+
+.help-overlay__title {
+    background-color: color('blue', 'base');
+    display: inline-block;
+    font-size: 24px;
+    left: 0;
+    line-height: 24px;
+    margin: 0;
+    padding: 8px 20px 5px;
+    position: absolute;
+    text-transform: uppercase;
+    top: -37px;
+}
+
+.help-overlay__example-code {
+    background-color: color('shades', 'white');
+    color: color('shades', 'black');
+    display: block;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.help-overlay__description {
+    display: block;
+    padding: 20px 0 0;
+
+    p {
+        padding: 0;
+
+        & + p {
+            margin-top: 5px;
+        }
+    }
+
+    ul, ol {
+        padding-left: 20px;
+    }
+
+    ul, ul li {
+        list-style: circle;
+    }
+    ol, ol li {
+        list-style: decimal;
+    }
+}
