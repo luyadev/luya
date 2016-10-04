@@ -13,7 +13,7 @@ interface TagInterface
     /**
      * Provide a single example tag which is used as value when clicking on an tag in the administration interface
      * in order to insert the tag at the texteditor location.
-     * 
+     *
      * @return string The example string like `mail[info@luya.io](Mail us!)`.
      */
     public function example();

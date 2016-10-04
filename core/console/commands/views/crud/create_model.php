@@ -53,7 +53,7 @@ use Yii;
     public function rules()
     {
         return [
-        <?php foreach($rules as $rule): ?>
+        <?php foreach ($rules as $rule): ?>
     <?=$rule?>,
         <?php endforeach; ?>];
     }

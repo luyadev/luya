@@ -13,7 +13,7 @@ use luya\Boot;
  * @author Basil Suter <basil@nadar.io>
  */
 class CrudController extends BaseCrudController
-{	
+{
     /**
      * Create Ng-Rest-Model, Controller and Api for an existing Database-Table.
      *
@@ -207,7 +207,7 @@ class CrudController extends BaseCrudController
                         'extended' => $extended,
                         'textFields' => $textFields,
                         'properties' => $properties,
-                    	'rules' => $this->generateRules($shema),
+                        'rules' => $this->generateRules($shema),
                     ]);
                     
                     break;
@@ -241,6 +241,4 @@ class CrudController extends BaseCrudController
 
         return 0;
     }
-    
-    
 }

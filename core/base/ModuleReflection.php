@@ -13,26 +13,26 @@ use luya\web\UrlManager;
  * Run any route inside the provided module.
  *
  * In order to run a module reflection route You have to instantiate the module via the Yii::createObject method
- * 
+ *
  * ```php
  * $reflection = Yii::createObject(['class' => ModuleReflection::className(), 'module' => $module]);
  * ```
- * 
+ *
  * Now you can pass optional parameters before the run process, for example to define what controller action you may run:
- * 
+ *
  * ```php
  * $reflection->defaultRoute("my-controller", "the-action", ['param1' => 'foo']);
  * ```
- * 
+ *
  * Now in order to return the content of the modules route execute the run method:
- * 
+ *
  * ```php
  * $content = $reflection->run();
  * ```
  *
  * @property \luya\base\Module $module The module where the route should be run from.
  * @property string $suffix The suffix which should be used to attach to the url rules.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class ModuleReflection extends Object
@@ -56,7 +56,7 @@ class ModuleReflection extends Object
 
     /**
      * Class constructor in order to consum from DI Container.
-     * 
+     *
      * @param Request $request
      * @param UrlManager $urlManager
      * @param array $config
@@ -69,7 +69,7 @@ class ModuleReflection extends Object
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \yii\base\Object::init()
      */
@@ -87,7 +87,7 @@ class ModuleReflection extends Object
     
     /**
      * Setter for the module property.
-     * 
+     *
      * @param Module $module
      */
     public function setModule(Module $module)
@@ -97,7 +97,7 @@ class ModuleReflection extends Object
     
     /**
      * Getter for the module property.
-     * 
+     *
      * @return \luya\base\Module
      */
     public function getModule()
@@ -109,7 +109,7 @@ class ModuleReflection extends Object
     
     /**
      * Setter for the suffix property.
-     * 
+     *
      * @param string $suffix
      */
     public function setSuffix($suffix)
@@ -120,7 +120,7 @@ class ModuleReflection extends Object
 
     /**
      * Getter for the suffix property.
-     * 
+     *
      * @return string
      */
     public function getSuffix()
@@ -130,7 +130,7 @@ class ModuleReflection extends Object
 
     /**
      * Determine the default route based on current defaultRoutes or parsedRequested by the UrlManager.
-     * 
+     *
      * @return array
      */
     public function getRequestRoute()
@@ -167,7 +167,7 @@ class ModuleReflection extends Object
 
     /**
      * Inject a defaultRoute.
-     * 
+     *
      * @param string $controller
      * @param string $action
      * @param array $args
@@ -182,7 +182,7 @@ class ModuleReflection extends Object
     
     /**
      * Returns the url rule parameters which are taken from the requested route.
-     * 
+     *
      * @return array
      */
     public function getUrlRule()
@@ -198,7 +198,7 @@ class ModuleReflection extends Object
 
     /**
      * Run the route based on the values.
-     * 
+     *
      * @return string|\yii\web\Response The response of the action, can be either a string or an object from response.
      * @throws NotFoundHttpException
      */

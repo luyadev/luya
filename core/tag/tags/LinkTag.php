@@ -9,7 +9,7 @@ use yii\helpers\Html;
 
 /**
  * Generate links for internal and external pages.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class LinkTag extends BaseTag
