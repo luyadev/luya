@@ -1,7 +1,7 @@
 We are proud to announce the first release candidate of LUYA after weeks of intensive work. These are the most significant changes and additions:
 
 + The administration is loading at least twice as fast as before
-+ Composer update has been sped up significantly by removing old dependencies (including bower dependencies)
++ Composer update has been speed up significantly by removing old dependencies (including bower dependencies)
 + Core classes and modules have been reorganized to optimize system architecture
 + Configuration file naming has been changed to improve clarity
 + cms, news and crawler modules now combine admin and frontend submodules so that only one composer package is required
