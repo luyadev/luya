@@ -3,6 +3,9 @@ LUYA UPGRADE
 
 This document will help you upgrading from a LUYA Version into another.
 
+1.0.0-RC2 (in progress)
+-----------------------
+
 1.0.0-RC1 (04.10.2016)
 -----------
 
