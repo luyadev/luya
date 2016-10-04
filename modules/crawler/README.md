@@ -17,14 +17,14 @@ or add it directly to your composer.json file:
 "luyadev/luya-module-crawler" : "^1.0@dev"
 ```
 
-Add the module to your configuration (config):
+Add the modules to your configuration (config) in the modules section:
 
 ```php
 'crawler' => [
-    'class' => 'crawler\Module',
+    'class' => 'luya\crawler\frontend\Module',
     'baseUrl' => 'http://luya.io',
 ],
-'crawleradmin' => 'crawleradmin\Module',
+'crawleradmin' => 'luya\crawler\admin\Module',
 ```
 
 Where `baseUrl` is the domain you want to crawler all informations.
@@ -48,11 +48,12 @@ To execute the command (and run the crawler proccess) use the crawler command `c
 
 ### Statistic Command
  
- You can also get statistic Results enabling a cronjob executing each week:
+You can also get statistic Results enabling a cronjob executing each week:
  
- ```sh
- ./vendor/bin/luya crawler/statistic
- ```
+```
+./vendor/bin/luya crawler/statistic
+```
+
 
 Create search form
 ------------------
@@ -89,8 +90,8 @@ $.ajax({
 });
 ```
 
-Crawler Settings
-------------------
+## Crawler Settings
+
 
 Set the language in your html markup
 
@@ -104,7 +105,7 @@ Partial ignore a content from the crawler:
 <div>
 	<!-- [CRAWL_IGNORE] -->
 	<p>The crawler will never see and store this information</p>
-	<!-- [/CRAWL IGNORE] -->
+	<!-- [/CRAWL_IGNORE] -->
 </div>
 ```
 
@@ -116,3 +117,11 @@ Ignore a page complet:
 	<p>The full page will be ignored by the crawler.</p>
 </div>
 ```
+
+Sometimes you want to group your results by a section of a page, in order to let crawler know about the group/section of your current page just use the `CRAWL_GROUP` tag:
+
+```html
+<!-- [CRAWL_GROUP]api[/CRAWL_GROUP] -->
+```
+
+Where the above example `api` could be anything you want to let the crawler know for this section. Now you can group your results by the `group` field.

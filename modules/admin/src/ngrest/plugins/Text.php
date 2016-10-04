@@ -1,13 +1,15 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
+
+use luya\admin\ngrest\base\Plugin;
 
 /**
  * Create a text input select for a given field.
- * 
+ *
  * @author nadar
  */
-class Text extends \admin\ngrest\base\Plugin
+class Text extends Plugin
 {
     /**
      * @var string Define a HTML placeholder attribute.
@@ -20,7 +22,7 @@ class Text extends \admin\ngrest\base\Plugin
     public $listOptions = [];
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\ngrest\base\Plugin::renderList()
      */
@@ -30,7 +32,7 @@ class Text extends \admin\ngrest\base\Plugin
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\ngrest\base\Plugin::renderCreate()
      */
@@ -40,7 +42,7 @@ class Text extends \admin\ngrest\base\Plugin
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\ngrest\base\Plugin::renderUpdate()
      */

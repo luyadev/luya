@@ -4,21 +4,9 @@
  */
 .luya-container {
 
-	// Display & Dimensions
-	display: block;
-	width: 100%;
-	height: calc(100% - #{$navbar-height});
-
-	@media #{$small-and-down} {
-		height: calc(100% - #{$navbar-height-mobile});
-	}
-}
-
-
-/**
- * #LUYA-CONTAINER__ANGULAR-PLACEHOLDER
- */
-.luya-container__angular-placeholder {
-	height: 100%;
-	width: 100%;
+    // Display & Dimensions
+    display: block;
+    height: 100%;
+    position: relative;
+    width: 100%;
 }

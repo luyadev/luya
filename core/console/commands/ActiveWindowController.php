@@ -8,7 +8,7 @@ use luya\helpers\FileHelper;
 
 /**
  * Command to create ActiveWindow classes.
- * 
+ *
  * @author nadar
  * @since 1.0.0-beta4
  */

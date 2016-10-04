@@ -1,13 +1,15 @@
 <?php
 
-namespace admin\filters;
+namespace luya\admin\filters;
+
+use luya\admin\base\Filter;
 
 /**
  * Admin Module default Filter: Small Landscape (150x50)
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class SmallLandscape extends \admin\base\Filter
+class SmallLandscape extends Filter
 {
     public static function identifier()
     {

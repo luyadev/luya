@@ -4,22 +4,22 @@ namespace luya\console\commands;
 
 use Yii;
 use Exception;
-use admin\models\Config;
+use luya\admin\models\Config;
 use luya\console\Command;
 use luya\console\interfaces\ImportControllerInterface;
 
 /**
  * Import controller runs the module defined importer classes.
- * 
+ *
  * The importer classes are defined inthe modules `import()` methods which inherits this class. To run
  * the importer class you have execute:
- * 
+ *
  * ```
  * ./vendor/bin/luya import
  * ```
- * 
+ *
  * Each of the importer classes must extend the luya\console\Importer class.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class ImportController extends Command implements ImportControllerInterface
@@ -76,7 +76,7 @@ class ImportController extends Command implements ImportControllerInterface
 
     /**
      * Get directory files for specific folder
-     * 
+     *
      * {@inheritDoc}
      * @see \luya\console\interfaces\ImportControllerInterface::getDirectoryFiles()
      */
@@ -97,7 +97,7 @@ class ImportController extends Command implements ImportControllerInterface
 
     /**
      * Add Log entrie for a specific section
-     * 
+     *
      * {@inheritDoc}
      * @see \luya\console\interfaces\ImportControllerInterface::addLog()
      */
@@ -108,7 +108,7 @@ class ImportController extends Command implements ImportControllerInterface
     
     /**
      * Return the log array data.
-     * 
+     *
      * @return array
      */
     private function getLog()
@@ -118,7 +118,7 @@ class ImportController extends Command implements ImportControllerInterface
 
     /**
      * Run the import process.
-     * 
+     *
      * @return number
      */
     public function actionIndex()
@@ -166,7 +166,13 @@ class ImportController extends Command implements ImportControllerInterface
                 $this->outputInfo(PHP_EOL . $section . ":");
                 foreach ($value as $k => $v) {
                     if (is_array($v)) {
-                        $this->output(print_r($v, true));
+                        foreach ($v as $kk => $kv) {
+                            if (is_array($kv)) {
+                                $this->output(" - {$kk}: " . print_r($kv, true));
+                            } else {
+                                $this->output(" - {$kk}: {$kv}");
+                            }
+                        }
                     } else {
                         $this->output(" - " . $v);
                     }

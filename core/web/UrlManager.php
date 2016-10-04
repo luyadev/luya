@@ -8,11 +8,11 @@ use yii\web\BadRequestHttpException;
 
 /**
  * Extended LUYA UrlManager
- * 
+ *
  * UrlManger extends the Yii2 Url Manager by resolving composition informations while parseRequest and provides other helper methods.
- * 
- * @todo see http://www.yiiframework.com/doc-2.0/guide-runtime-routing.html#adding-rules-dynamically
- * @todo change to public $ruleConfig = ['class' => 'yii\web\UrlRule'];
+ *
+ * @property boolean|\luya\cms\Menu $menu The menu componet if registered.
+ * @property \luya\web\Composition $composition The composition component if registered.
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -34,7 +34,7 @@ class UrlManager extends \yii\web\UrlManager
 
     /**
      * Extend functionality of parent::parseRequest() by verify and resolve the composition informations.
-     * 
+     *
      * {@inheritDoc}
      * @see \yii\web\UrlManager::parseRequest()
      */
@@ -73,7 +73,7 @@ class UrlManager extends \yii\web\UrlManager
 
     /**
      * Extend functionality of parent::addRules by the ability to add composition routes.
-     * 
+     *
      * {@inheritDoc}
      * @see \yii\web\UrlManager::addRules()
      */
@@ -95,8 +95,8 @@ class UrlManager extends \yii\web\UrlManager
 
     /**
      * Get the menu component if its registered in the current applications.
-     * 
-     * @return boolean|\cms\menu\Container
+     *
+     * @return boolean|\luya\cms\Menu
      */
     public function getMenu()
     {
@@ -114,7 +114,7 @@ class UrlManager extends \yii\web\UrlManager
 
     /**
      * Get the composition component
-     * 
+     *
      * @return \luya\web\Composition
      */
     public function getComposition()
@@ -128,7 +128,7 @@ class UrlManager extends \yii\web\UrlManager
 
     /**
      * Prepand the base url to an existing route
-     * 
+     *
      * @param string $route The route where the base url should be prepend to.
      * @return string
      */
@@ -139,7 +139,7 @@ class UrlManager extends \yii\web\UrlManager
 
     /**
      * Remove the base url from a route
-     * 
+     *
      * @param string $route The route where the baseUrl should be removed from.
      * @return mixed
      */
@@ -150,7 +150,7 @@ class UrlManager extends \yii\web\UrlManager
 
     /**
      * Extend createUrl method by verify its context implementation to add cms urls prepand to the requested createurl params.
-     * 
+     *
      * {@inheritDoc}
      * @see \yii\web\UrlManager::createUrl()
      */
@@ -167,7 +167,7 @@ class UrlManager extends \yii\web\UrlManager
 
     /**
      * Create an url for a menu item.
-     * 
+     *
      * @param string|array $params Use a string to represent a route (e.g. `site/index`), or an array to represent a route with query parameters (e.g. `['site/index', 'param1' => 'value1']`).
      * @param integer $navItemId The nav item Id
      * @param null|\luya\web\Composition $composition Optional other composition config instead of using the default composition
@@ -187,7 +187,7 @@ class UrlManager extends \yii\web\UrlManager
 
     /**
      * Yii2 createUrl base implementation extends the prepand of the comosition
-     * 
+     *
      * @param string|array $params An array with params or not (e.g. `['module/controller/action', 'param1' => 'value1']`)
      * @param null|object $composition Composition instance to change the route behavior
      * @return string
@@ -218,7 +218,7 @@ class UrlManager extends \yii\web\UrlManager
     
     /**
      * Create absolute urls
-     * 
+     *
      * @param string|array $params
      * @param bool $scheme
      * @return string
@@ -236,29 +236,33 @@ class UrlManager extends \yii\web\UrlManager
         return $url;
     }
     
+    /**
+     * See if the module of a provided route exists in the luya application list.
+     *
+     * The module to test must be an instance of `luya\base\Module`.
+     *
+     * @param unknown $route
+     * @return boolean|string
+     */
     private function findModuleInRoute($route)
     {
         $parts = array_values(array_filter(explode('/', $route)));
     
-        if (isset($parts[0])) {
-            if (array_key_exists($parts[0], Yii::$app->getApplicationModules())) {
-                return $parts[0];
-            }
+        if (isset($parts[0]) && array_key_exists($parts[0], Yii::$app->getApplicationModules())) {
+            return $parts[0];
         }
     
         return false;
     }
     
-    private function urlReplaceModule($url, $navItemId, \luya\web\Composition $composition)
+    private function urlReplaceModule($url, $navItemId, Composition $composition)
     {
-        $route = $this->removeBaseUrl($url);
-        $route = $composition->removeFrom($route);
+        $route = $composition->removeFrom($this->removeBaseUrl($url));
         $module = $this->findModuleInRoute($route);
     
-        if (!$module) {
+        if ($module === false || $this->menu === false) {
             return $url;
         }
-    
     
         $item = $this->menu->find()->where(['id' => $navItemId])->with('hidden')->lang($composition['langShortCode'])->one();
     
@@ -274,8 +278,6 @@ class UrlManager extends \yii\web\UrlManager
             }
         }
     
-        $replaceRoute = preg_replace("/$module/", rtrim($item->link, '/'), ltrim($route, '/'), 1);
-    
-        return $replaceRoute;
+        return preg_replace("/$module/", rtrim($item->link, '/'), ltrim($route, '/'), 1);
     }
 }

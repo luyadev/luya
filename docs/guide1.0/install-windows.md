@@ -9,20 +9,22 @@ First of all you have to install the global `fxp/composer-asset-plugin` plugin, 
 composer global require "fxp/composer-asset-plugin:^1.0.0"
 ```
 
+> Since version 1.2 of the fxp/composer-asset-plugin which is required by Yii2 do not forget to set `"asset-pattern-skip-version": "(-build|-patch)"` in your `extras` section of your composer.json. Otherwise the composer update command will take almost forever.
+
 After that, we execute the composer `create-project` to checkout the **luya-kickstarter** project (a basic project you can start with out of the box).
 
 ```sh
-composer create-project luyadev/luya-kickstarter:1.0.0-beta7
+composer create-project luyadev/luya-kickstarter:1.0.0-beta8
 ```
 
 This above command will create a folder (inside of your current folder where the `composer create-project` command was execute) named __luya-kickstarter__. After the command is finished go into the **configs** folder inside your application and copy the dist template files to original php files.
 
 ```sh
-copy server.php.dist server.php
-copy localdb.php.dist localdb.php
+copy env.php.dist env.php
+copy env-local-db.php.dist env-local-db.php
 ```
 
-Now change the database connection inside the `configs/localdb.php` file to fit your mysql servers configuration. You should open all config files once to change values and understand the behavior. After successfully setting up your database connection, you have to reopen your Command Prompt and change into your project directory and excute the console command at `public_html` folder.
+Now change the database connection inside the `configs/env-local-db.php` file to fit your mysql servers configuration. You should open all config files once to change values and understand the behavior. After successfully setting up your database connection, you have to reopen your Command Prompt and change into your project directory and excute the console command at `public_html` folder.
 
 > `php` command is available if you already add your php.exe path on your system environment variable
 

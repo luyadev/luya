@@ -5,18 +5,16 @@ namespace luya\console;
 use Yii;
 use yii\helpers\Console;
 use yii\console\Exception;
+use luya\traits\ApplicationTrait;
 
 /**
  * Luya CLI Application.
- * 
+ *
  * @author nadar
  */
 class Application extends \yii\console\Application
 {
-    /*
-     * Use the application trait, providing shared methods and properties.
-     */
-    use \luya\traits\Application;
+    use ApplicationTrait;
 
     /**
      * @var bool Mute the Applications ouput, this is used to make application
@@ -52,13 +50,13 @@ class Application extends \yii\console\Application
      * In addition to the default behavior of runAction, the console command
      * will strip the first element of the route and threat it as a module
      * changed the controller namespace to run the commands.
-     * 
+     *
      * ```
      * ./vendor/bin/luya <module>/<commandController>/<commandAction>
      * ```
-     * 
+     *
      * Will run all controllers located in the `commands` folder of a module.
-     * 
+     *
      * {@inheritDoc}
      * @see \yii\console\Application::runAction()
      * @since 1.0.0-beta6

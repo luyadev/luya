@@ -4,8 +4,8 @@ namespace app\modules\data\commands;
 
 use Yii;
 use luya\console\Command;
-use cmsadmin\models\Nav;
-use cmsadmin\models\NavItem;
+use luya\cms\models\Nav;
+use luya\cms\models\NavItem;
 
 class SetupController extends Command
 {

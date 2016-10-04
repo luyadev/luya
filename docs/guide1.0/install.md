@@ -12,22 +12,24 @@ First of all you have to install the global `fxp/composer-asset-plugin` plugin, 
 composer global require "fxp/composer-asset-plugin:^1.0.0"
 ```
 
+> Since version 1.2 of the fxp/composer-asset-plugin which is required by Yii2 do not forget to set `"asset-pattern-skip-version": "(-build|-patch)"` in your `extras` section of your composer.json. Otherwise the composer update command will take almost forever.
+
 After setting up composer, we execute the composer `create-project` command to checkout the **luya-kickstarter** application, an *out of the box* setup you can directly run your website. We recommend to run the `create-project` command directly from your htdocs/webserver folder:
 
 ```sh
-composer create-project luyadev/luya-kickstarter:1.0.0-beta7
+composer create-project luyadev/luya-kickstarter:1.0.0-beta8
 ```
 
 > Note: During the installation Composer may ask for your Github login credentials. This is normal because Composer needs to get enough API rate-limit to retrieve the dependent package information from Github. For more details, please refer to the [Composer documentation](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens).
 
-The `crate-project` command will create a folder (inside of your current folder where the `composer create-project` command was execute) named **luya-kickstarter**. After the command is finished go into the **configs** folder inside the application and copy the dist template files to original php files.
+The `create-project` command will create a folder (inside of your current folder where the `composer create-project` command was execute) named **luya-kickstarter**. After the command is finished go into the **configs** folder inside the application and copy the dist template files to original php files.
 
 ```sh
-cp server.php.dist server.php
-cp localdb.php.dist localdb.php
+cp env.php.dist env.php
+cp env-local-db.php.dist env-local-db.php
 ```
 
-Now change the database connection inside the `configs/localdb.php` file to fit your mysql servers configuration. You should open all config files once to change values and understand the behavior. In order to understand the config files read more in the [environemnt configs section](install-configs.md). After successfully setting up your database connection, you have to reopen your Terminal and change into your project project directory and excute the **luya** binary files which has been installed into your vendor folder by composer.
+Now change the database connection inside the `configs/env-local-db.php` file to fit your mysql servers configuration. You should open all config files once to change values and understand the behavior. In order to understand the config files read more in the [environemnt configs section](install-configs.md). After successfully setting up your database connection, you have to reopen your Terminal and change into your project project directory and excute the **luya** binary files which has been installed into your vendor folder by composer.
 
 Run the migration files with the [migrate console command](luya-console.md):
 

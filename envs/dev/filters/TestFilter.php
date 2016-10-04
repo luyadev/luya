@@ -2,7 +2,7 @@
 
 namespace app\filters;
 
-use admin\base\Filter;
+use luya\admin\base\Filter;
 use Imagine\Image\ManipulatorInterface;
 
 class TestFilter extends Filter

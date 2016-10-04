@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\ngrest\base;
+namespace luya\admin\ngrest\base;
 
 use Yii;
 use luya\helpers\FileHelper;
@@ -9,15 +9,65 @@ use yii\helpers\Inflector;
 use yii\base\InvalidCallException;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
+use yii\base\Arrayable;
+use yii\base\ErrorException;
+use yii\base\InvalidConfigException;
+use luya\admin\base\RestActiveController;
+use luya\helpers\ArrayHelper;
 
 /**
- * Wrapper for yii2 basic rest controller used with a model class. The wrapper is made to
- * change behaviours and overwrite the indexAction.
+ * The RestActiveController for all NgRest implementations.
  *
- * usage like described in the yii2 guide.
+ * @property \admin\ngrest\NgRestModeInterface $model Get the model object based on the $modelClass property.
  */
-class Api extends \admin\base\RestActiveController
+class Api extends RestActiveController
 {
+    /**
+     * @var string Defines the related model for the NgRest Controller. The full qualiefied model name
+     * is required.
+     *
+     * ```php
+     * public $modelClass = 'admin\models\User';
+     * ```
+     */
+    public $modelClass = null;
+    
+    /**
+     * @var boolean Defines whether the automatic pagination should be enabled if more then 200 rows of data stored in this table or not.
+     */
+    public $autoEnablePagination = true;
+    
+    /**
+     * {@inheritDoc}
+     * @see \yii\rest\ActiveController::init()
+     */
+    public function init()
+    {
+        parent::init();
+    
+        if ($this->modelClass === null) {
+            throw new InvalidConfigException("The property `modelClass` must be defined by the Controller.");
+        }
+
+        // pagination is disabled by default, lets verfy if there are more then 400 rows in the table and auto enable
+        if ($this->pagination === false && $this->autoEnablePagination) {
+            if ($this->model->find()->count() > 200) {
+                $this->pagination = ['pageSize' => 100];
+            }
+        }
+    }
+    
+    private $_model = null;
+    
+    public function getModel()
+    {
+        if ($this->_model === null) {
+            $this->_model = Yii::createObject($this->modelClass);
+        }
+    
+        return $this->_model;
+    }
+    
     public function actionServices()
     {
         return $this->model->getNgrestServices();
@@ -38,6 +88,14 @@ class Api extends \admin\base\RestActiveController
         return $this->model->genericSearchStateProvider();
     }
     
+    public function actionFullResponse()
+    {
+        return new ActiveDataProvider([
+            'query' => $this->model->find(),
+            'pagination' => false,
+        ]);
+    }
+    
     public function actionFilter($filterName)
     {
         $model = $this->model;
@@ -50,6 +108,7 @@ class Api extends \admin\base\RestActiveController
 
         return new ActiveDataProvider([
             'query' => $model->ngRestFilters()[$filterName],
+            'pagination' => $this->pagination,
         ]);
     }
     
@@ -68,9 +127,19 @@ class Api extends \admin\base\RestActiveController
         
         foreach ($this->model->find()->all() as $key => $value) {
             $row = [];
-            foreach ($value->getAttributes() as $k => $v) {
+            
+            $attrs = $value->getAttributes();
+            foreach ($value->extraFields() as $field) {
+                $attrs[$field] = $value->$field;
+            }
+            
+            foreach ($attrs as $k => $v) {
                 if (is_object($v)) {
-                    continue;
+                    if ($v instanceof Arrayable) {
+                        $v = $v->toArray();
+                    } else {
+                        continue;
+                    }
                 }
                 
                 if ($i === 0) {
@@ -78,12 +147,26 @@ class Api extends \admin\base\RestActiveController
                 }
                 
                 if (is_array($v)) {
-                    $v = implode(",", $v);
+                    $tv = [];
+                    foreach ($v as $kk => $vv) {
+                        if (is_object($vv)) {
+                            if ($vv instanceof Arrayable) {
+                                $tv[] = implode(" | ", $vv->toArray());
+                            } else {
+                                continue;
+                            }
+                        } elseif (is_array($vv)) {
+                            $tv[] = implode(" | ", $vv);
+                        } else {
+                            $tv[] = $vv;
+                        }
+                    }
+                 
+                    $v = implode(" - ", $tv);
                 }
                 
                 $row[] = '"'. str_replace('"', '\"', $v) .'"';
             }
-            
             
             if ($i=== 0) {
                 $tempData.= implode(",", $header) . "\n";
@@ -94,13 +177,16 @@ class Api extends \admin\base\RestActiveController
         
         $key = uniqid('ngre', true);
         
-        FileHelper::writeFile('@runtime/'.$key.'.tmp', $tempData);
+        $store = FileHelper::writeFile('@runtime/'.$key.'.tmp', $tempData);
         
-        Yii::$app->session->set('tempNgRestFileName', Inflector::slug($this->model->tableName()));
-        Yii::$app->session->set('tempNgRestKey', $key);
+        if ($store) {
+            Yii::$app->session->set('tempNgRestFileName', Inflector::slug($this->model->tableName()));
+            Yii::$app->session->set('tempNgRestKey', $key);
+            return [
+                'url' => Url::toRoute(['/admin/ngrest/export-download', 'key' => base64_encode($key)]),
+            ];
+        }
         
-        return [
-            'url' => Url::toRoute(['/admin/ngrest/export-download', 'key' => base64_encode($key)]),
-        ];
+        throw new ErrorException("Unable to write the temporary file for the csv export. Make sure the runtime folder is writeable.");
     }
 }

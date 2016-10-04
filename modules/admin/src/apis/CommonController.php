@@ -1,10 +1,12 @@
 <?php
 
-namespace admin\apis;
+namespace luya\admin\apis;
 
+use luya\traits\CacheableTrait;
 use Yii;
-use admin\models\Property;
-use admin\models\Lang;
+use luya\admin\models\Property;
+use luya\admin\models\Lang;
+use luya\admin\base\RestController;
 
 /**
  * Delivers default values for the specifing table. It means it does not return a key numeric array,
@@ -12,8 +14,10 @@ use admin\models\Lang;
  *
  * @author nadar
  */
-class CommonController extends \admin\base\RestController
+class CommonController extends RestController
 {
+    use CacheableTrait;
+    
     public function actionDataLanguages()
     {
         return Lang::find()->asArray()->all();
@@ -74,5 +78,13 @@ class CommonController extends \admin\base\RestController
     public function actionGetFilemanagerFolderState()
     {
         return Yii::$app->adminuser->identity->setting->get('filemanagerFolderId', 0);
+    }
+
+    public function actionFilemanagerFoldertreeHistory()
+    {
+        $this->deleteHasCache('storageApiDataFolders');
+
+        $data = Yii::$app->request->getBodyParam('data');
+        Yii::$app->adminuser->identity->setting->set('foldertree.'.$data['id'], (int) $data['toggle_open']);
     }
 }

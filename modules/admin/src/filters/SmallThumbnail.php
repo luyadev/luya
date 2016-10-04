@@ -1,13 +1,15 @@
 <?php
 
-namespace admin\filters;
+namespace luya\admin\filters;
+
+use luya\admin\base\Filter;
 
 /**
  * Admin Module default Filter: Small Thumbail (100xnull)
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class SmallThumbnail extends \admin\base\Filter
+class SmallThumbnail extends Filter
 {
     public static function identifier()
     {

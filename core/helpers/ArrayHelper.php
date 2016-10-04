@@ -4,14 +4,14 @@ namespace luya\helpers;
 
 /**
  * Extend the Yii Array Helper class
- * 
+ *
  * @author nadar
  */
 class ArrayHelper extends \yii\helpers\BaseArrayHelper
 {
     /**
      * Create an object from an array.
-     * 
+     *
      * @param array $array
      * @return object
      */
@@ -22,7 +22,7 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
 
     /**
      * Prepend an assoc array item as first entry for a given array.
-     * 
+     *
      * @param array $arr The array where the value should be prepend
      * @param string $key The new array key
      * @param mix $val The value for the new key
@@ -37,9 +37,9 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
     
     /**
      * TypeCast values from a mixed array source. numeric values will be casted as integer.
-     * 
+     *
      * This method is often used to convert corect json respons arrays
-     * 
+     *
      * @param array $array The array which should be type casted
      * @return array An array with type casted values
      */
@@ -62,5 +62,47 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
         }
         
         return $return;
+    }
+    
+    /**
+     * Search trough all keys inside of an array, any occurence will return the rest of the array.
+     *
+     * ```php
+     * $data  = [
+     *     ['name' => 'Foo Bar', 'id' => 1],
+     *     ['name' => 'Bar Baz', 'id' => 2],
+     * ];
+     * ```
+     *
+     * Assuming the above array parameter searching for `1` would return:
+     *
+     * ```php
+     * $data  = [
+     *     ['name' => 'Foo Bar', 'id' => 1],
+     * ];
+     * ```
+     *
+     * Searching for the string `Bar` would return the the orignal array is bar would be found in both.
+     *
+     * @param array $array The multidimensional array keys.
+     * @param string $searchText The text you where search inside the rows.
+     * @param boolean $sensitive Whether to use strict sensitive search (true) or case insenstivie search (false).
+     * @return array The modified array depending on the search result hits.
+     */
+    public static function search($array, $searchText, $sensitive = false)
+    {
+        $function = ($sensitive) ? 'strpos' : 'stripos';
+        return array_filter($array, function ($item) use ($searchText, $function) {
+            $response = false;
+            foreach ($item as $key => $value) {
+                if ($response) {
+                    continue;
+                }
+                if ($function($value, "$searchText") !== false) {
+                    $response = true;
+                }
+            }
+            return $response;
+        });
     }
 }

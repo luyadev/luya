@@ -1,17 +1,22 @@
 <?php
 
-namespace admin;
+namespace luya\admin;
 
 use Yii;
 use luya\web\UrlRule;
-use admin\components\AdminLanguage;
 use luya\console\interfaces\ImportControllerInterface;
+use luya\base\CoreModuleInterface;
+use luya\admin\components\AdminLanguage;
+use luya\admin\components\AdminUser;
+use luya\admin\components\AdminMenu;
+use luya\admin\components\StorageContainer;
+use luya\admin\components\Auth;
 
-class Module extends \admin\base\Module
+class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
     /**
      * This event gets trigger before some trys to download a file.
-     * 
+     *
      * @var string Event Name
      */
     const EVENT_BEFORE_FILE_DOWNLOAD = 'EVENT_BEFORE_FILE_DOWNLOAD';
@@ -24,33 +29,36 @@ class Module extends \admin\base\Module
      */
     public $secureLogin = false;
 
-    public $isCoreModule = true;
-
+    public $tags = [
+        'file' => ['class' => 'luya\admin\tags\FileTag'],
+    ];
+    
     public $apis = [
-        'api-admin-common' => 'admin\apis\CommonController',
-        'api-admin-remote' => 'admin\apis\RemoteController',
-        'api-admin-storage' => 'admin\apis\StorageController',
-        'api-admin-menu' => 'admin\apis\MenuController',
-        'api-admin-timestamp' => 'admin\apis\TimestampController',
-        'api-admin-search' => 'admin\apis\SearchController',
-        'api-admin-user' => 'admin\apis\UserController', // protected by auth()
-        'api-admin-group' => 'admin\apis\GroupController', // protected by auth()
-        'api-admin-lang' => 'admin\apis\LangController', // protected by auth()
-        'api-admin-effect' => 'admin\apis\EffectController', // protected by auth()
-        'api-admin-filter' => 'admin\apis\FilterController', // protected by auth()
-        'api-admin-tag' => 'admin\apis\TagController',
+        'api-admin-logger' => 'luya\admin\apis\LoggerController',
+        'api-admin-common' => 'luya\admin\apis\CommonController',
+        'api-admin-remote' => 'luya\admin\apis\RemoteController',
+        'api-admin-storage' => 'luya\admin\apis\StorageController',
+        'api-admin-menu' => 'luya\admin\apis\MenuController',
+        'api-admin-timestamp' => 'luya\admin\apis\TimestampController',
+        'api-admin-search' => 'luya\admin\apis\SearchController',
+        'api-admin-user' => 'luya\admin\apis\UserController', // protected by auth()
+        'api-admin-group' => 'luya\admin\apis\GroupController', // protected by auth()
+        'api-admin-lang' => 'luya\admin\apis\LangController', // protected by auth()
+        'api-admin-effect' => 'luya\admin\apis\EffectController', // protected by auth()
+        'api-admin-filter' => 'luya\admin\apis\FilterController', // protected by auth()
+        'api-admin-tag' => 'luya\admin\apis\TagController',
     ];
 
     public $urlRules = [
-        ['class' => 'admin\components\UrlRule'],
+        ['class' => 'luya\admin\components\UrlRule'],
         ['pattern' => 'file/<id:\d+>/<hash:\w+>/<fileName:(.*?)+>', 'route' => 'admin/file/download', 'position' => UrlRule::POSITION_BEFORE_LUYA],
         ['pattern' => 'admin', 'route' => 'admin/default/index', 'position' => UrlRule::POSITION_BEFORE_LUYA],
         ['pattern' => 'admin/login', 'route' => 'admin/login/index', 'position' => UrlRule::POSITION_BEFORE_LUYA],
     ];
 
     public $assets = [
-        'admin\assets\Main',
-        'admin\assets\Flow',
+        'luya\admin\assets\Main',
+        'luya\admin\assets\Flow',
     ];
 
     public $registerJsTranslation = [
@@ -88,6 +96,7 @@ class Module extends \admin\base\Module
             ->group(Module::t('menu_group_system'))
                 ->itemApi(Module::t('menu_system_item_language'), 'admin-lang-index', 'language', 'api-admin-lang')
                 ->itemApi(Module::t('menu_system_item_tags'), 'admin-tag-index', 'label', 'api-admin-tag')
+                ->itemApi('Logger', 'admin-logger-index', 'label', 'api-admin-logger')
             ->group(Module::t('menu_group_images'))
                 ->itemApi(Module::t('menu_images_item_effects'), 'admin-effect-index', 'blur_circular', 'api-admin-effect')
                 ->itemApi(Module::t('menu_images_item_filters'), 'admin-filter-index', 'adjust', 'api-admin-filter')
@@ -101,16 +110,16 @@ class Module extends \admin\base\Module
                 'class' => AdminLanguage::className(),
             ],
             'adminuser' => [
-                'class' => \admin\components\AdminUser::className(),
+                'class' => AdminUser::className(),
             ],
             'adminmenu' => [
-                'class' => \admin\components\AdminMenu::className(),
+                'class' => AdminMenu::className(),
             ],
             'storage' => [
-                'class' => \admin\components\StorageContainer::className(),
+                'class' => StorageContainer::className(),
             ],
             'auth' => [
-                'class' => \admin\components\Auth::className(),
+                'class' => Auth::className(),
             ],
         ];
     }
@@ -128,10 +137,10 @@ class Module extends \admin\base\Module
     public function import(ImportControllerInterface $import)
     {
         return [
-            '\\admin\\importers\\AuthImporter',
-            '\\admin\\importers\\FilterImporter',
-            '\\admin\\importers\\PropertyImporter',
-            '\\admin\\importers\\StorageImporter',
+            '\\luya\\admin\\importers\\AuthImporter',
+            '\\luya\\admin\\importers\\FilterImporter',
+            '\\luya\\admin\\importers\\PropertyImporter',
+            '\\luya\\admin\\importers\\StorageImporter',
         ];
     }
     

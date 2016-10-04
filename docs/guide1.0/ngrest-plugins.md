@@ -36,23 +36,23 @@ Sometimes you really want to have project specific input behavior. To achieve th
 
 namespace myadminmodule\plugins;
 
-use admin\helpers\Angular;
+use luya\admin\helpers\Angular;
 
 class TestPlugin extends \admin\ngrest\base\Plugin
 {
     public function renderList($id, $ngModel)
     {
-        $this->renderList($id, $ngModel);
+        $this->createListTag($id, $ngModel);
     }
     
     public function renderUpdate($id, $ngModel)
     {
-        return Angular::directive('my-directive', $ngModel, ['data' => $this->getServiceName('data')]);
+        return Angular::directive('my-directive', ['model' => $ngModel, data' => $this->getServiceName('data')]);
     }
     
     public function renderCreate($id, $ngModel)
     {
-        return Angular::directive('my-directive', $ngModel, ['data' => $this->getServiceName('data')]);
+        return Angular::directive('my-directive', ['model' => $ngModel, 'data' => $this->getServiceName('data')]);
     }
     
     public function serviceData()
@@ -73,16 +73,16 @@ zaa.directive("myDirective", function() {
     return {
         restrict: "E",
         scope : {
-            'ngModel' : '=',
+            'model' : '=',
             'data' : '=',
         },
         controller: function($scope, $filter) {
-            $scope.$watch(function() { return $scope.ngModel }, function(n, o) {
+            $scope.$watch(function() { return $scope.model }, function(n, o) {
                 console.log(n, o);
             });
         },
         template : function() {
-            return '<div>{{data | json }} - {{ ngModel }} - <input type="text" ng-model="ngModel" /></div>';
+            return '<div>{{data | json }} - {{ model }} - <input type="text" ng-model="model" /></div>';
         }
     }
 });
@@ -91,7 +91,7 @@ zaa.directive("myDirective", function() {
 Now in order to use the custom `TestPlugin` in your [NgRest Config Model](ngrest-model.md) cast ean extra Field which takes care of getting (list) and setting (update/create) the value in your `admin\ngrest\base\Model` ActiveRecord class model.
 
 ```php
-class Product extends \admin\ngrest\base\Model
+class Product extends \luya\admin\ngrest\base\NgRestModel
 {
     // ... 
     

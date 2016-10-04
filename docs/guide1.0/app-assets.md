@@ -51,7 +51,6 @@ $asset = MyTestAsset::register($this); // $this represents the view object
 ```
 
 ### Publish Options
----------------
 
 To ensure a minimal footprint and to avoid issues with node packages inside the resource folder, it's recommended to manually select the folders to be published.
 For example in the LUYA kickstarter project, you'll find both the 'boostrap' and the 'css' folder in the publish options:

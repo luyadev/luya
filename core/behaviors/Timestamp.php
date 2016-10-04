@@ -7,7 +7,7 @@ use yii\db\ActiveRecord;
 
 /**
  * Very basic behavior implementation of unix time() set for defined insert and/or update fields.
- * 
+ *
  * @author nadar
  * @since 1.0.0-beta5
  */

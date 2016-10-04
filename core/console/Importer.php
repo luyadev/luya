@@ -6,23 +6,23 @@ use luya\console\interfaces\ImportControllerInterface;
 
 /**
  * Base class for all Importer classes.
- * 
+ *
  * Abstract importer class provides basic funcionality to access the
  * helper class via `getImporter()`. Each importer class must have run()
  * method where the basic logic of the class will be executed.
- * 
+ *
  * ```php
  * class XyzImporter extends \luya\console\Importer
  * {
  *     public function run()
  *     {
  *         $this->addLog('XyzImporter have been started');
- *         
+ *
  *         // importer logic goes here
  *     }
  * }
  * ```
- * 
+ *
  * @property \luya\console\interfaces\ImportControllerInterface $importer Importer Object
  * @author Basil Suter <basil@nadar.io>
  */
@@ -48,7 +48,7 @@ abstract class Importer extends \yii\base\Object
 
     /**
      * Class constructor containing the importer object from where its called.
-     * 
+     *
      * @param \luya\console\interfaces\ImportControllerInterface $importer Import Object `\luya\commands\ImportController`.
      */
     public function __construct(ImportControllerInterface $importer, $config = [])
@@ -59,7 +59,7 @@ abstract class Importer extends \yii\base\Object
 
     /**
      * Returns the import object to use the importers methods.
-     * 
+     *
      * @return object Import \luya\console\interfaces\ImportControllerInterface
      */
     public function getImporter()
@@ -69,11 +69,11 @@ abstract class Importer extends \yii\base\Object
 
     /**
      * Add something to the output. Wrapper method from importer.
-     * 
+     *
      * ```php
      * $this->addLog('block', 'new block <ID> have been found and added to database');
      * ```
-     * 
+     *
      * @param string $section
      * @param string $value
      * @todo trigger deprecated section call

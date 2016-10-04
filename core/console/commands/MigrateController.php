@@ -9,7 +9,7 @@ use yii\console\Exception;
 
 /**
  * Extended Yii2 Migration-Tool to run Database migrations.
- * 
+ *
  * @see https://github.com/yiisoft/yii2/issues/384
  * @author nadar
  */
@@ -78,7 +78,7 @@ class MigrateController extends \yii\console\controllers\MigrateController
 
     /**
      * Create new migration, first param the name, second param the module where the migration should be put in.
-     * 
+     *
      * @param string $name The name of the migration
      * @param string|boolean $module The module name where the migration should be placed in.
      * @todo replace module param with user teminal selection.

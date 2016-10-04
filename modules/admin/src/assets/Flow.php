@@ -1,12 +1,12 @@
 <?php
 
-namespace admin\assets;
+namespace luya\admin\assets;
 
 use luya\web\Asset;
 
 /**
  * Asset files for the Flow Uploader
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Flow extends Asset
@@ -18,6 +18,6 @@ class Flow extends Asset
     ];
     
     public $depends = [
-        'admin\assets\Main',
+        'luya\admin\assets\Main',
     ];
 }

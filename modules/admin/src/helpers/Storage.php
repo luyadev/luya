@@ -1,11 +1,11 @@
 <?php
 
-namespace admin\helpers;
+namespace luya\admin\helpers;
 
 use Exception;
 use Yii;
-use admin\models\StorageFile;
-use admin\models\StorageImage;
+use luya\admin\models\StorageFile;
+use luya\admin\models\StorageImage;
 
 class Storage
 {
@@ -36,7 +36,7 @@ class Storage
     }
     
     /**
-     * 
+     *
      * @param integer $fileId The file id to delete
      * @param boolean $cleanup If cleanup is enabled, also all images will be deleted, this is by default turned off because
      * casual you want to remove the large source file but not the images where used in several tables and situations.
@@ -60,7 +60,7 @@ class Storage
     }
     
     /**
-     * 
+     *
      * @param integer $imageId
      * @param boolean $cleanup If cleanup is enabled, all other images will be deleted, the source file will be deleted to
      * if clean is disabled, only the provided $imageId will be removed.
@@ -90,7 +90,7 @@ class Storage
     }
     
     /**
-     * 
+     *
      * @param string $filePath
      * @return array
      */
@@ -114,27 +114,34 @@ class Storage
         ];
     }
     
-    public static function moveFilesToFolder($fileIds, $folderId)
+    public static function moveFilesToFolder(array $fileIds, $folderId)
     {
         foreach ($fileIds as $fileId) {
             static::moveFileToFolder($fileId, $folderId);
         }
-        
-        Yii::$app->storage->flushArrays();
-    }
-    
-    public static function moveFileToFolder($fileId, $folderId)
-    {
-        $file = StorageFile::findOne($fileId);
-        $file->folder_id = $folderId;
-    
-        Yii::$app->storage->flushArrays();
-        
-        return $file->update(false);
     }
     
     /**
      * 
+     * @param string|int $fileId
+     * @param string|int $folderId
+     * @return boolean
+     */
+    public static function moveFileToFolder($fileId, $folderId)
+    {
+        $file = StorageFile::findOne($fileId);
+        
+        if ($file) {
+            $file->updateAttributes(['folder_id' => $folderId]);
+            Yii::$app->storage->flushArrays();
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     *
      * @param array $fileArray Its an entry of the files array like $_FILEs['logo_image'];
      * @param number $toFolder
      * @param string $isHidden
@@ -195,11 +202,11 @@ class Storage
     }
     
     /**
-     * 
+     *
      * @param array $filesArray Use $_FILES
      * @param number $toFolder
      * @param string $isHidden
-     * 
+     *
      * @todo what happen if $files does have more then one entry, as the response is limit to 1
      */
     public static function uploadFromFiles(array $filesArray, $toFolder = 0, $isHidden = false)

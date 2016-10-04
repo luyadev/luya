@@ -2,6 +2,8 @@
 
 namespace luya\web;
 
+use luya\traits\ApplicationTrait;
+
 /**
  * Luya Web Application.
  *
@@ -12,7 +14,7 @@ namespace luya\web;
  */
 class Application extends \yii\web\Application
 {
-    use \luya\traits\Application;
+    use ApplicationTrait;
 
     /**
      * {@inheritdoc}

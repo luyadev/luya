@@ -1,23 +1,23 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
 
-use admin\ngrest\base\Plugin;
+use luya\admin\ngrest\base\Plugin;
 use yii\helpers\Json;
 use luya\helpers\ArrayHelper;
 use luya\helpers\StringHelper;
 
 /**
  * Create a checkbox list with selection based on an array with key value pairing.
- * 
+ *
  * Example usage:
- * 
+ *
  * ```
  * public function ngrestAttributeTypes()
  * {
  * 		'genres' => ['checkboxList', 'data' => [1 => 'Male', 2 => 'Female']],
  * }
- * 
+ *
  * @todo testing and complete find and save events.
  * @author nadar
  */

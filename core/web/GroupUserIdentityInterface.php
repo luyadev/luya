@@ -6,7 +6,7 @@ use yii\web\IdentityInterface;
 
 /**
  * The identity interface for group users
- * 
+ *
  * @author nadar
  */
 interface GroupUserIdentityInterface extends IdentityInterface
@@ -14,7 +14,7 @@ interface GroupUserIdentityInterface extends IdentityInterface
     /**
      * Returns an array with croup alias allowed for the current user. Example implementation
      * could look like this.
-     * 
+     *
      * ```php
      * public function authGroups()
      * {
@@ -23,7 +23,7 @@ interface GroupUserIdentityInterface extends IdentityInterface
      *     ];
      * }
      * ```
-     * 
+     *
      * @return array An array contains the allowed groups for this user.
      */
     public function authGroups();

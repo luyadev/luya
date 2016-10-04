@@ -22,12 +22,12 @@ Working environment
 
 After successfull clone into your webserver or local computer you will find a folder `envs/dev` in your *LUYA* fork project. This is the working environment you can test all functions and modules directly against the *LUYA* source code (even of the modules).
 
-Now the envs/dev environment needs to be configured. To do so, go into the configs folder `envs/dev/configs` and copy the file `server.php.dist` to `server.php` and modify all the components and modules to fit your needs. The most important will be the *Database Component* you have to configure matching your server settings.
+Now the envs/dev environment needs to be configured. To do so, go into the configs folder `envs/dev/configs` and copy the file `env.php.dist` to `env.php` and modify all the components and modules to fit your needs. The most important will be the *Database Component* you have to configure matching your server settings.
 
 ```sh
-cp  server.php.dist server.php
+cp  env.php.dist env.php
 ```
-> Make sure your database information and setting are correctly configured in `configs/server.php`.
+> Make sure your database information and setting are correctly configured in `configs/env.php`.
 
 As we assume you have [installed composer](install.md) already on your computer now you can run `composer install` inside of your `envs/dev` folder, this will install all required depenencies and create the psr4 mappings to the local *LUYA* library files (src, modules, etc.).
 

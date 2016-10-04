@@ -3,7 +3,36 @@ LUYA CHANGELOG
 
 The changelog contains informations about bug fixes, new features or bc breaking code related to a GitHub issue. In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-1.0.0-beta8 (in progress)
+1.0.0-rc1 (in progress)
+-----------------------
+
+- [#806](https://github.com/luyadev/luya/issues/806#issuecomment-248597369) **[BC BREAK]** Renamed to `configs/server.php` to `configs/env.php`, new projects will also have the env prefix for the config names.
+- `#976` **[BC BREAK]** Remove $isCoreModule replace with CoreModuleInterface
+- [#972](https://github.com/luyadev/luya/issues/972) **[BC BREAK]** Merged to cms and cmsadmin modules into one folder and changed the namespace to `luya\cms` instead of `cms`/`cmsadmin`.
+- `#973` **[BC BREAK]** Removed `$assets` property from **none admin modules**.
+- `#974` **[BC BREAK]** Removed `$isAdmin` property.
+- `#970` **[BC BREAK]** Deleted, renamed and rearranged LUYA core REST classes and methods.
+- `#995` Added Grouping/Section ability to for the crawler.
+- `#830` Added Textarea auto height plugin
+- `#983` Added LazyLoad Widget to the LUYA core features.
+- `#979` Added option to enable markdown parsing for table blocks.
+- `#971` Added basic pagination for NgRest Apis.
+- `#956` Added optional image css class and layout css class in block configurations.
+- `#959` Added block injectors to simplify relations, links and other helpfull tools to make less complex blocks.
+- `#998` Added the gii model generator to build the model rules() for the crud generator command crud/create.
+- `#994` Added ability to copy an existing page with all its languages and blocks.
+- `#965` Fixed bug where cms pages are lost while creating when selecting a container but choose a sub page not from the related container.
+- `#957` Fixed bug where cms admin container movement lost container_id reference of children elements.
+- `#963` Fixed bug where caching if block is not reseted correctly.
+- `#836` Fixed bug where storage importer removes all files.
+- `#958` Fixed bug where date pickers does not work in block context but in crud context.
+- `#962` Fixed bug where abstract class should not implement static public function in php versions 5.2.0 - 5.6.25.
+- `#958` Fixed bug where datapicke does not reset correctly or wrong insereted dates crash the date/datetime fields.
+- `#836` Fixed bug where importer does delete wrong files.
+- `#989` Fixed bug where redirect and module pages are lost when choosing a container but also choose a subsite from another container.
+- `#709` Removed ApiCmsNavItemPageBlockItem factory and angular resources dependencie.
+
+1.0.0-beta8 (11.08.2016)
 -------------------------
 
 - `#940` **[BC BREAK]** Making filter class method `identifier()` static to allow IDE Automplete usage of filters. 

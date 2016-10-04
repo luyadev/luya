@@ -1,4 +1,5 @@
 <?php
+define('YII_DEBUG', true);
 $_SERVER['HTTP_HOST'] = 'localhost';
 $_SERVER['SERVER_NAME'] = 'localhost';
 $_SERVER['DOCUMENT_ROOT'] = '/var/www';

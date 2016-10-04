@@ -2,6 +2,7 @@
 
 namespace luya\base;
 
+use Yii;
 use Exception;
 use ReflectionClass;
 use luya\web\Application as WebApplication;
@@ -10,12 +11,12 @@ use luya\helpers\ArrayHelper;
 
 /**
  * Luya Boot Wrapper.
- * 
+ *
  * Run the Luya/Yii Application based on the current enviroment which is determined trough get_sapi_name(). To run an application
  * a config file with custom Luya/Yii configuration must be provided via `$configFile` property. By default luya will try to find
- * the default config `../configs/server.php`.
+ * the default config `../configs/env.php`.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 abstract class Boot
 {
@@ -26,12 +27,12 @@ abstract class Boot
      *
      * @var string
      */
-    const VERSION = '1.0.0-beta8-dev';
+    const VERSION = '1.0.0-RC1-dev';
     
     /**
      * @var string The path to the config file, which returns an array containing you configuration.
      */
-    public $configFile = '../configs/server.php';
+    public $configFile = '../configs/env.php';
 
     /**
      * @var luya\web\Application|luya\cli\Application The application object.
@@ -45,7 +46,7 @@ abstract class Boot
     public $mockOnly = false;
 
     /**
-     * @var string Path to the Yii.php file.    
+     * @var string Path to the Yii.php file.
      */
     private $_baseYiiFile = null;
 
@@ -133,7 +134,7 @@ abstract class Boot
 
     /**
      * Run Web-Application based on the provided config file.
-     * 
+     *
      * @return string|void Returns the Yii Application run() method if mock is disabled. Otherwise returns void
      */
     public function applicationWeb()
@@ -145,22 +146,22 @@ abstract class Boot
             return $this->app->run();
         }
     }
-
+    
     /**
      * Returns the path to luya core files
-     * 
+     *
      * @return string The base path to the luya core folder.
      */
-    public static function getLuyaBasePath()
+    public function getCoreBasePath()
     {
-        $reflector = new ReflectionClass(get_called_class());
+        $reflector = new ReflectionClass(get_class($this));
         return dirname($reflector->getFileName());
     }
     
     /**
      * Helper method to check whether the provided Yii Base file exists, if yes include and
      * return the file.
-     * 
+     *
      * @return bool Return value based on require_once command.
      *
      * @throws Exception Throws Exception if the YiiBase file does not exists.
@@ -168,7 +169,9 @@ abstract class Boot
     private function includeYii()
     {
         if (file_exists($this->_baseYiiFile)) {
-            return require_once $this->_baseYiiFile;
+            $require = require_once($this->_baseYiiFile);
+            Yii::setAlias('@luya', $this->getCoreBasePath());
+            return $require;
         }
 
         throw new Exception("YiiBase file does not exits '".$this->_baseYiiFile."'.");

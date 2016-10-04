@@ -1,13 +1,16 @@
 {
     "require": {
-        "yiisoft/yii2": "~2.0.0",
-        "twig/twig" : "~1.0",
-        "ext-curl" : "*",
-        "curl/curl" : "1.2.1",
-        "yiisoft/yii2-imagine": "~2.0.0",
-        "phpmailer/phpmailer": "~5.0"
+        "php": ">=5.5.0",
+        "yiisoft/yii2": "2.0.9",
+        "twig/twig" : "^1.24",
+        "curl/curl" : "^1.3",
+        "phpmailer/phpmailer": "^5.2",
+        "imagine/imagine": "0.5.*",
+        "cebe/markdown": "~1.0.0 | ~1.1.0",
+        "flowjs/flow-php-server": "^1.0"
     },
     "extra": {
+        "asset-pattern-skip-version": "(-build|-patch)",
         "asset-installer-paths": {
             "bower-asset-library": "vendor/bower"
         }

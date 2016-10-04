@@ -1,15 +1,16 @@
 <?php
 
-namespace admin\ngrest;
+namespace luya\admin\ngrest;
 
 use Exception;
 use luya\helpers\ArrayHelper;
+use yii\base\Object;
 
 /**
  * Defines and holds an NgRest Config.
- * 
+ *
  * Example config array to set via `setConfig()`.
- * 
+ *
  * ```php
  * $array = [
  *     'list' => [
@@ -32,7 +33,7 @@ use luya\helpers\ArrayHelper;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
+class Config extends Object implements ConfigInterface
 {
     private $_config = [];
 
@@ -43,7 +44,7 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
     private $_hash = null;
     
     /**
-     * @var boolean Determine whether this ngrest config is runing as inline window mode (a modal dialog with the 
+     * @var boolean Determine whether this ngrest config is runing as inline window mode (a modal dialog with the
      * crud inside) or not. When inline mode is enabled some features like ESC-Keys and URL chaning must be disabled.
      */
     public $inline = false;
@@ -116,9 +117,9 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
         return array_key_exists($pointer, $this->_config);
     }
 
-    public function getPointer($pointer)
+    public function getPointer($pointer, $defaultValue = false)
     {
-        return ($this->hasPointer($pointer)) ? $this->_config[$pointer] : false;
+        return ($this->hasPointer($pointer)) ? $this->_config[$pointer] : $defaultValue;
     }
 
     public function hasField($pointer, $field)
@@ -144,17 +145,17 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
     
     /**
      * Get an option by its key from the options pointer. Define options like
-     * 
+     *
      * ```php
      * $configBuilder->options = ['saveCallback' => 'console.log(this)'];
      * ```
-     * 
+     *
      * Get the option parameter
-     * 
+     *
      * ```php
      * $config->getOption('saveCallback');
      * ```
-     * 
+     *
      * @param unknown $key
      * @return boolean
      */
@@ -256,6 +257,17 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
         return $this->_extraFields;
     }
 
+    public function getPointerExtraFields($pointer)
+    {
+        $extraFields = [];
+        foreach ($this->getPointer($pointer, []) as $field) {
+            if (isset($field['extraField']) && $field['extraField']) {
+                $extraFields[] = $field['name'];
+            }
+        }
+        return $extraFields;
+    }
+
     public function onFinish()
     {
         if (!$this->hasField('list', $this->primaryKey)) {
@@ -263,7 +275,7 @@ class Config extends \yii\base\Object implements \admin\ngrest\interfaces\Config
                 'name' => $this->primaryKey,
                 'alias' => 'ID',
                 'type' => [
-                    'class' => '\admin\ngrest\plugins\Text',
+                    'class' => 'luya\admin\ngrest\plugins\Text',
                     'args' => [],
                 ],
             ]);

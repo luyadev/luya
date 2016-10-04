@@ -25,8 +25,9 @@ composer.phar
 #/public_html/storage
 
 # project config
-/configs/localdb.php
+/configs/env-local-db.php
 /configs/server.php
+/configs/env.php
 
 # SASS
 /resources/.sass-cache

@@ -1,9 +1,9 @@
 <?php
 
-namespace admin\models;
+namespace luya\admin\models;
 
 use Yii;
-use admin\models\StorageFile;
+use luya\admin\models\StorageFile;
 
 class StorageImage extends \yii\db\ActiveRecord
 {

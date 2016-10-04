@@ -1,17 +1,17 @@
 <?php
 
-namespace admin\folder;
+namespace luya\admin\folder;
 
 use Yii;
 
 /**
  * @property object $storage The storage component
- * 
+ *
  * @author nadar
  */
 class Query extends \yii\base\Object
 {
-    use \admin\storage\QueryTrait;
+    use \luya\admin\storage\QueryTrait;
     
     private $_storage = null;
     

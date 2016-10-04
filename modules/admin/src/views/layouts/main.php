@@ -1,6 +1,7 @@
 <?php
-use \admin\Module as Admin;
-use \luya\helpers\Url;
+use luya\admin\Module as Admin;
+use luya\helpers\Url;
+use yii\helpers\Markdown;
 
 $user = Yii::$app->adminuser->getIdentity();
 $this->beginPage()
@@ -9,25 +10,19 @@ $this->beginPage()
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title><?php echo Yii::$app->siteTitle; ?> // {{currentItem.alias}}</title>
-    <meta name="description" content="">
+    <title><?php echo Yii::$app->siteTitle; ?> &rsaquo; {{currentItem.alias}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="<?php echo Url::base(true); ?>/admin" />
     <style type="text/css">
-        [ng:cloak],
-        [ng-cloak],
-        [data-ng-cloak],
-        [x-ng-cloak],
-        .ng-cloak,
-        .x-ng-cloak {
-            display: none !important;
-        }
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  			display: none !important;
+		}
     </style>
     <?php $this->head(); ?>
 </head>
 <body ng-cloak flow-prevent-drop>
 <?php $this->beginBody(); ?>
-<div class="loading-overlay" ng-show="LuyaLoading.getState()">
+<div class="loading-overlay" ng-if="LuyaLoading.getState()">
     <div class="loading-overlay__content">
         <h3 class="loading-overlay__title">
             {{LuyaLoading.getStateMessage()}}
@@ -54,7 +49,7 @@ $this->beginPage()
             </button>
             <div class="modal-content" ng-transclude></div>
         </div>
-        <div class="modal__background"></div>
+        <div class="modal__background" ng-click="isModalHidden = true" style="cursor:pointer;"></div>
     </div>
 </script>
 
@@ -83,7 +78,9 @@ $this->beginPage()
         <span class="fileupload__reset" ng-click="reset()" ng-show="fileinfo!=null"><i class="material-icons">remove_circle</i></span>
         <span class="fileupload__path" ng-bind="fileinfo.name"></span>
 
+        <div ng-if="!modal">
         <modal is-modal-hidden="modal"><storage-file-manager selection="true" /></modal>
+        </div>
     </div>
 </script>
 
@@ -121,58 +118,64 @@ $this->beginPage()
 
 <script type="text/ng-template" id="reverseFolders">
 
+    <i class="material-icons treeview__toggler filemanager__folder-toggleicon" ng-click="toggleFolderItem(folder)" ng-hide="folder.subfolder==0" ng-class="{'treeview__toggler--subnav-closed': folder.toggle_open!=1}">arrow_drop_down</i>
     <div class="filemanager__folder-button" ng-click="changeCurrentFolderId(folder.id)">
-        <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default">folder_open</i>
-        <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active">folder</i>
+        <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default"></i>
+        <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active"></i>
 
-                        <span class="filemanager__folder-name">
+                        <span class="filemanager__folder-name" ng-hide="folderUpdateForm && currentFolderId==folder.id">
                             {{folder.name }}                                            
                         </span>
 
-                        <i class="material-icons filemanager__edit-icon" ng-show="currentFolderId==folder.id" ng-click="toggleFolderMode('edit')">mode_edit</i>
-                        <i class="material-icons filemanager__delete-icon" ng-show="currentFolderId==folder.id" ng-click="toggleFolderMode('remove')">delete</i>
+                        <i class="material-icons filemanager__edit-icon" ng-click="toggleFolderMode('edit')">mode_edit</i>
+                        <i class="material-icons filemanager__delete-icon" ng-click="toggleFolderMode('remove')">delete</i>
                         
-                        <span ng-show="folderUpdateForm && currentFolderId==folder.id">
+                        <span ng-if="folderUpdateForm && currentFolderId==folder.id">
                             <input type="text" ng-model="folder.name" class="filemanager__file-dialog__input"/>
                             <div class="filemanager__file-dialog">
                                 <span><?php echo Admin::t('layout_filemanager_save_dir'); ?></span>
-                                <span class="btn-floating white">
-                                    <i class="material-icons filemanager__file-dialog__icon" ng-click="updateFolder(folder)">check</i>
-                                </span>
-                                <span class="btn-floating white">
-                                    <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="toggleFolderMode(false)">add</i>
-                                </span>
+                                <div class="filemanager__file-dialog--buttons">
+                                    <span class="btn-floating white">
+                                        <i class="material-icons filemanager__file-dialog__icon" ng-click="updateFolder(folder)">check</i>
+                                    </span>
+                                    <span class="btn-floating white">
+                                        <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="toggleFolderMode(false)">add</i>
+                                    </span>
+                                </div>                                
                             </div>
                         </span>
                         <i class="material-icons filemanager__file-move-icon" ng-click="moveFilesTo(folder.id)" ng-show="showFoldersToMove && currentFolderId != folder.id">keyboard_return</i>
-                        <span ng-show="folderDeleteForm && currentFolderId==folder.id">
+                        <span ng-if="folderDeleteForm && currentFolderId==folder.id">
                             <div class="filemanager__file-dialog">
                                 <span><?php echo Admin::t('layout_filemanager_remove_dir'); ?></span>
-                                <span class="btn-floating white">
-                                    <i class="material-icons filemanager__file-dialog__icon" ng-click="checkEmptyFolder(folder)">check</i>
-                                </span>
-                                <span class="btn-floating white">
-                                    <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="toggleFolderMode(false)">add</i>
-                                </span>
-
+                                <div class="filemanager__file-dialog--buttons">
+                                    <span class="btn-floating white">
+                                        <i class="material-icons filemanager__file-dialog__icon" ng-click="checkEmptyFolder(folder)">check</i>
+                                    </span>
+                                    <span class="btn-floating white">
+                                        <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="toggleFolderMode(false)">add</i>
+                                    </span>
+                                </div>
                             </div>
                         </span>
 
-                        <span ng-show="folderDeleteConfirmForm && currentFolderId==folder.id">
+                        <span ng-if="folderDeleteConfirmForm && currentFolderId==folder.id">
                             <div class="filemanager__file-dialog">
                                 <span><?php echo Admin::t('layout_filemanager_remove_dir_not_empty'); ?></span>
-                                <span class="btn-floating white">
-                                    <i class="material-icons filemanager__file-dialog__icon" ng-click="deleteFolder(folder)">check</i>
-                                </span>
-                                <span class="btn-floating white">
-                                    <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="toggleFolderMode(false)">add</i>
-                                </span>
+                                <div class="filemanager__file-dialog--buttons">
+                                    <span class="btn-floating white">
+                                        <i class="material-icons filemanager__file-dialog__icon" ng-click="deleteFolder(folder)">check</i>
+                                    </span>
+                                    <span class="btn-floating white">
+                                        <i class="material-icons filemanager__file-dialog__icon filemanager__cancel-icon" ng-click="toggleFolderMode(false)">add</i>
+                                    </span>
+                                </div>
                             </div>
                         </span>
 
         <!-- mdi-mdi-action-highlight-remove -->
     </div>
-    <ul class="filemanager__folders" >
+    <ul class="filemanager__folders" ng-show="folder.toggle_open==1">
         <li class="filemanager__folder"  ng-class="{'filemanager__folder--active' : currentFolderId == folder.id, 'filemanager__folder--has-subfolders': folder.__items.length > 0}" ng-repeat="folder in foldersData | filemanagerdirsfilter:folder.id"  ng-include="'reverseFolders'"></li>
     </ul>
 </script>
@@ -202,10 +205,9 @@ $this->beginPage()
 
             <!-- FOLDER LIST -->
             <ul class="filemanager__folders">
-                <li class="filemanager__folder" ng-class="{'filemanager__folder--active' : currentFolderId == 0 }">
+                <li class="filemanager__folder filemanager__folder--root" ng-class="{'filemanager__folder--active' : currentFolderId == 0 }">
                     <div class="filemanager__folder-button folder-root" ng-click="changeCurrentFolderId(0)">
-                        <i class="material-icons filemanager__folder-icon filemanager__folder-icon--default">folder_open</i>
-                        <i class="material-icons filemanager__folder-icon filemanager__folder-icon--active">folder</i>
+                        <i class="material-icons filemanager__folder-icon filemanager__folder-icon--root"></i>
                         <span class="filemanager__folder-name"><?php echo Admin::t('layout_filemanager_root_dir'); ?></span>
                     </div>
                     <ul class="filemanager__folders">
@@ -279,7 +281,7 @@ $this->beginPage()
                 </tbody>
             </table>
             </div>
-            <div class="col s4" ng-show="fileDetail">
+            <div class="col s4" ng-if="fileDetail">
                 <div class="filemanager__detail-wrapper">
                     <h4>{{ fileDetail.name }}</h4>
                     <table class="filemanager__table striped">
@@ -343,14 +345,14 @@ $this->beginPage()
 
 <!-- /ANGULAR SCRIPTS -->
 
-<div class="luya-container ng-cloak">
-    <div class="toasts" ng-repeat="item in toastQueue">
+<div class="luya-container ng-cloak" ng-class="{'luya-container--right-panel-active': sidePanelUserMenu || sidePanelHelp}">
+    <div class="toasts" ng-if="toastQueue" ng-repeat="item in toastQueue">
         <div class="toasts__confirm" ng-if="item.type == 'confirm'" zaa-esc="item.close()">
             <div class="toasts__item toasts__item--confirm">
                 <p>{{item.message}}</p>
                 <div class="toasts__item-buttons">
-                    <button type="button" class="btn btn--small grey" ng-click="item.close()">Abbrechen</button>
-                    <button type="button" class="btn btn--small red" ng-click="item.click()">Ja</button>
+                    <button type="button" class="btn btn--small grey" ng-click="item.close()"><?php echo Admin::t('button_abort'); ?></button>
+                    <button type="button" class="btn btn--small red" ng-click="item.click()"><?php echo Admin::t('button_confirm'); ?></button>
                 </div>
             </div>
         </div>
@@ -375,7 +377,7 @@ $this->beginPage()
                 </ul>
 
                 <ul class="right navbar__right hide-on-small-only">
-                    <li ng-click="reload()" style="cursor: pointer;">
+                    <li ng-click="reload()" >
                         <div class="navbar__button">
                             <i class="material-icons">replay</i>
                             <p class="icon__spawn-text"><?php echo Admin::t('layout_btn_reload'); ?></p>
@@ -395,6 +397,12 @@ $this->beginPage()
                             <p class="icon__spawn-text"><?php echo Admin::t('layout_btn_useronline'); ?></p>
                         </div>
                     </li>
+                    <li ng-click="toggleHelpPanel()" >
+                        <div class="navbar__button">
+                            <i class="material-icons">help_outline</i>
+                            <p class="icon__spawn-text"><?php echo Admin::t('layout_btn_help'); ?></p>
+                        </div>
+                    </li>
                     <li>
                         <div class="navbar__button navbar__button--redhighlight">
                             <a href="<?php echo Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="navbar__button__anchor">
@@ -404,7 +412,7 @@ $this->beginPage()
                         </div>
                     </li>
                     <li>
-                        <div class="navbar__button">
+                        <div class="navbar__button" ng-click="toggleUserPanel()">
                             <i class="material-icons left">account_circle</i><strong><?php echo $user->firstname; ?></strong><!-- NO WHITESPACE
                                     --><p class="icon__spawn-text"><?php echo Admin::t('layout_btn_profile'); ?></p>
                         </div>
@@ -428,7 +436,7 @@ $this->beginPage()
         </nav>
     </div> <!-- /navbar-fixed -->
 
-    <div ng-show="showDebugContainer" class="debug-container">
+    <div ng-if="showDebugContainer" class="debug-container">
         <table class="bordered">
             <thead>
             <tr>
@@ -456,7 +464,7 @@ $this->beginPage()
         </table>
     </div>
 
-    <div ng-show="showOnlineContainer" class="useronline__modal">
+    <div ng-if="showOnlineContainer" class="useronline__modal">
         <table>
             <thead>
             <tr>
@@ -535,7 +543,41 @@ $this->beginPage()
     <!-- ANGULAR-VIEW -->
     <div class="luya-container__angular-placeholder module-{{currentItem.moduleId}}" ui-view></div>
     <!-- /ANGULAR-VIEW -->
+    <div class="luya-container__right-panel" ng-if="sidePanelUserMenu || sidePanelHelp">
+        <div ng-if="sidePanelUserMenu">
+            <h1><?= $user->firstname; ?> <?= $user->lastname; ?></h1>
+            <p><?= $user->email; ?></p>
+            <p><a href="<?php echo Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="btn red"><?php echo Admin::t('layout_btn_logout'); ?></a></p>
+        </div>
+        <div ng-if="sidePanelHelp">
+            <h4><?= Admin::t('right_panel_support_title'); ?></h4>
+            <ul class="collapsible" data-collapsible="accordion" ng-init="tagsOpen=false">
+                <li>
+                  <div class="collapsible-header" ng-click="tagsOpen=!tagsOpen"><i class="material-icons">filter_drama</i><?= Admin::t('right_panel_support_tags_title'); ?></div>
+                  <div class="collapsible-body" ng-show="tagsOpen" style="display:block;">
+                    <ul class="collection with-header">
+                    <?php foreach ($this->context->tags as $name => $object): ?>
+                        <li class="collection-item" click-paste-pusher="<?= $object->example(); ?>" style="cursor: pointer;" ng-mouseenter="isHover['<?=$name;?>']=true" ng-mouseleave="isHover['<?=$name;?>']=false">
 
+                            <div class="help-overlay" ng-show="isHover['<?=$name;?>']">
+                                <h3 class="help-overlay__title"><?= $name; ?></h3>
+                                <code class="help-overlay__example-code"><?= $object->example(); ?></code>
+                                <div class="help-overlay__description"><?= Markdown::process($object->readme()); ?></div>
+                            </div>
+
+                            <div><?= $name; ?><a class="secondary-content"><i class="material-icons">content_paste</i></a></div>
+                        </li>
+                    <?php endforeach; ?>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <div class="collapsible-header" ng-click="supportOpen=!supportOpen"><i class="material-icons">whatshot</i><?= Admin::t('right_panel_support_support_title'); ?></div>
+                  <div class="collapsible-body" ng-show="supportOpen" style="display:block;"><p><?= Admin::t('right_panel_support_support_text'); ?></p></div>
+                </li>
+             </ul>
+        </div>
+    </div>
 </div> <!-- /.luya-container -->
 <?php $this->endBody() ?>
 </body>

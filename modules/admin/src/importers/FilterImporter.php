@@ -1,9 +1,9 @@
 <?php
 
-namespace admin\importers;
+namespace luya\admin\importers;
 
-use admin\models\StorageEffect;
-use admin\models\StorageFilter;
+use luya\admin\models\StorageEffect;
+use luya\admin\models\StorageFilter;
 use luya\console\Importer;
 
 class FilterImporter extends Importer

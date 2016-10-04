@@ -4,7 +4,7 @@ Um *LUYA* auf einem Mac OSX mit dem Webserver *MAMP* oder *XAMPP* zu installiere
 
 Datenbank DSN
 -------------
-Bei der Datenbankverbindung in der *local.php* Konfigurations-Datei muss beim DSN den `unix_socket` gesetzt werden.
+Bei der Datenbankverbindung in der *env-local.php* Konfigurations-Datei muss beim DSN den `unix_socket` gesetzt werden.
 
 für **MAMP**:
 

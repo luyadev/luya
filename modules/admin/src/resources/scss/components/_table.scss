@@ -1,3 +1,7 @@
+table {
+    font-size: 14px;
+}
+
 .grid-sort-btn {
     cursor: pointer;
     display: inline-block;
@@ -29,6 +33,7 @@
 
     & ~ tr {
         border-left: 2px solid color('grey', 'base');
+
         td:last-child {
             border-right: 2px solid color('grey', 'base');
         }

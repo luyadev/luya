@@ -2,7 +2,7 @@
 
 namespace ngresttest;
 
-class Module extends \admin\base\Module
+class Module extends \luya\admin\base\Module
 {
     public $apis = [
         'api-ngresttest-table' => 'ngresttest\apis\TableController',

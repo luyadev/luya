@@ -40,7 +40,7 @@ Controller Berechtiungen Ausschalten
 Sie können innerhalb eines Controllers die Eigenschaft `disablePermissionCheck` auf `true` stellen um jeglich Prüfung von Berechtigungen **auszuschalten**, es wird jedoch geprüft ob eine Benutzer eingeloggt ist:
 
 ```php
-class MyTestController extends \admin\base\Controller
+class MyTestController extends \luya\admin\base\Controller
 {
     
     public $disablePermissionCheck = true;

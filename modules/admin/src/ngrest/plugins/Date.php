@@ -1,22 +1,24 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
+
+use luya\admin\ngrest\base\Plugin;
 
 /**
  * Data input field
- * 
+ *
  * When dealing with empty time values you can configure `emptyMessage` in order to change the display default text in
  * the list view.
- * 
+ *
  * Example empty Date configuration
- * 
+ *
  * ```
  * ['timestamp', ['Date', 'emptyMessage' => 'No Date']],
  * ```
- * 
+ *
  * @author nadar
  */
-class Date extends \admin\ngrest\base\Plugin
+class Date extends Plugin
 {
     /**
      * @var string This text will be displayed in the list overview when no date has been slected
@@ -25,7 +27,7 @@ class Date extends \admin\ngrest\base\Plugin
     public $emptyMessage = '-';
     
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\ngrest\base\Plugin::renderList()
      */
@@ -38,7 +40,7 @@ class Date extends \admin\ngrest\base\Plugin
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\ngrest\base\Plugin::renderCreate()
      */
@@ -48,7 +50,7 @@ class Date extends \admin\ngrest\base\Plugin
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \admin\ngrest\base\Plugin::renderUpdate()
      */

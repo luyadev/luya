@@ -1,14 +1,14 @@
 <?php
 
-namespace admin\models;
+namespace luya\admin\models;
 
 use Yii;
 
 /**
  * ADMIN PROPERTY
- * 
+ *
  * Base classes for CMS properties which are set by import process.
- * 
+ *
  * @author nadar
  */
 class Property extends \yii\db\ActiveRecord

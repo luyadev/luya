@@ -316,7 +316,7 @@
                 "placeholder": "@placeholder"
             },
             template: function() {
-                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" maxlength="255" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /></div></div>';
+                return '<div class="input input--text" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><input id="{{id}}" insert-paste-listener maxlength="255" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}" /></div></div>';
             }
         }
     });
@@ -349,7 +349,7 @@
             },
             */
             template: function() {
-                return '<div class="input input--textarea" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><textarea id="{{id}}" name="{{name}}" ng-model="model" type="text" class="input__field" placeholder="{{placeholder}}"></textarea></div></div>';
+                return '<div class="input input--textarea" ng-class="{\'input--hide-label\': i18n}"><label class="input__label" for="{{id}}">{{label}}</label><div class="input__field-wrapper"><textarea id="{{id}}" insert-paste-listener name="{{name}}" ng-model="model" type="text" class="input__field" auto-grow placeholder="{{placeholder}}"></textarea></div></div>';
             }
         }
     });
@@ -389,7 +389,7 @@
             link: function(scope) {
                 $timeout(function(){
                     scope.$watch(function() { return scope.model }, function(n, o) {
-                        if (n === undefined && o === undefined) {
+                        if (n == undefined || n == null || n == '') {
                             if (jQuery.isNumeric(scope.initvalue)) {
                                 scope.initvalue = typeCastValue(scope.initvalue);
                             }
@@ -545,10 +545,12 @@
             },
             controller: function($scope, $filter) {
 
-            	$scope.pickerPreselect = new Date();
-
+            	$scope.isNumeric = function(num) {
+            	    return !isNaN(num)
+            	}
+            	
             	$scope.$watch(function() { return $scope.model }, function(n, o) {
-            		if (n != o && n != null && n !== undefined) {
+            		if (n != null && n != undefined) {
             			var datep = new Date(n*1000);
             			$scope.pickerPreselect = datep;
             			$scope.date = $filter('date')(datep, 'dd.MM.yyyy');
@@ -561,7 +563,15 @@
             	});
 
             	$scope.refactor = function(n) {
-            		if (n == 'Invalid Date' || n == "") {
+            		if (!$scope.isNumeric($scope.hour) || $scope.hour == '') {
+						$scope.hour = "0";
+					}
+					
+					if (!$scope.isNumeric($scope.min)  || $scope.min == '') {
+						$scope.min = "0";
+					}
+            		
+            		if (n == 'Invalid Date' || n == "" || n == 'NaN') {
         				$scope.date = null;
         				$scope.model = null;
         			} else {
@@ -615,91 +625,6 @@
         }
     });
 
-    /*
-     * Original Version without Datepicker
-    zaa.directive("zaaDatetime", function() {
-        return {
-            restrict: "E",
-            scope: {
-                "model": "=",
-                "options": "=",
-                "label": "@label",
-                "id": "@fieldid",
-                "name": "@fieldname",
-                "i18n": "@i18n"
-            },
-            controller: function($scope, $timeout) {
-
-                var date = new Date();
-
-                $scope.slicer = function(value) {
-                    return ('0' + value).slice(-2);
-                };
-
-                $scope.placeholders = {
-                    "day": $scope.slicer(date.getDate()),
-                    "month": $scope.slicer(date.getMonth() + 1),
-                    "year": date.getFullYear(),
-                    "hour": $scope.slicer(date.getHours()),
-                    "minute": $scope.slicer(date.getMinutes())
-                };
-
-                $scope.reform = function() {
-                    if ($scope.year != null && $scope.month != null && $scope.day != null && $scope.hour != null && $scope.min != null) {
-                        var date = new Date(parseInt($scope.year, 10), parseInt(($scope.month-1), 10), parseInt($scope.day, 10), parseInt($scope.hour, 10), parseInt($scope.min, 10));
-                        var mil = date.getTime();
-                        $scope.model = (mil/1000);
-                    }
-                };
-
-                $scope.now = function() {
-                    var date = new Date();
-                    $scope.day = $scope.slicer(date.getDate());
-                    $scope.month = $scope.slicer(date.getMonth() + 1);
-                    $scope.year = date.getFullYear();
-                    $scope.min = $scope.slicer(date.getMinutes());
-                    $scope.hour = $scope.slicer(date.getHours());
-                    $scope.reform();
-                };
-
-                $scope.$watch(function() { return $scope.model }, function(n, o) {
-                	console.log('watch', n);
-                    if (n !== undefined && n != null) {
-                    	console.log('datetime', n);
-                        var date = new Date(n*1000);
-                        $scope.day = $scope.slicer(date.getDate());
-                        $scope.month = $scope.slicer(date.getMonth() + 1);
-                        $scope.year = date.getFullYear();
-                        $scope.min = $scope.slicer(date.getMinutes());
-                        $scope.hour = $scope.slicer(date.getHours());
-                    }
-                });
-
-                $scope.init = function() {
-                	console.log('init', $scope.model);
-                }
-
-                $timeout(function() {
-                	$scope.init();
-                });
-            },
-            template: function() {
-                return '<div class="input input--date"  ng-class="{\'input--hide-label\': i18n}">' +
-                        '<label class="input__label">{{label}}</label>' +
-                        '<div class="input__field-wrapper">' +
-                                '<input ng-blur="reform()" type="text" ng-model="day" placeholder="{{placeholders.day}}" class="input__field" /><span class="input__divider">.</span>' +
-                                '<input ng-blur="reform()" type="text" ng-model="month" placeholder="{{placeholders.month}}" class="input__field" /><span class="input__divider">.</span>' +
-                                '<input ng-blur="reform()" type="text" ng-model="year" placeholder="{{placeholders.year}}" class="input__field" style="width:100px;" /><span class="input__divider input__divider--centered input__divider--icon"><i class="material-icons">access_time</i></span>' +
-                                '<input ng-blur="reform()" type="text" ng-model="hour" placeholder="{{placeholders.hour}}" class="input__field" /><span class="input__divider input__divider--centered">:</span>' +
-                                '<input ng-blur="reform()" type="text" ng-model="min" placeholder="{{placeholders.minute}}" class="input__field" />' +
-                                '<button class="input__button btn btn--small grey darken-1" type="button" ng-click="now()">' + i18n['js_dir_set_date'] + '</button>' +
-                            '</div>' +
-                       '</div>';
-            }
-        }
-    });
-	*/
-
     zaa.directive("zaaDate", function() {
         return {
             restrict: "E",
@@ -713,10 +638,9 @@
             },
         	controller: function($scope, $filter) {
 
-            	$scope.pickerPreselect = new Date();
-
             	$scope.$watch(function() { return $scope.model }, function(n, o) {
-            		if (n != o && n != null && n !== undefined) {
+            		
+            		if (n != null && n != undefined) {
             			var datep = new Date(n*1000);
             			$scope.pickerPreselect = datep;
             			$scope.date = $filter('date')(datep, 'dd.MM.yyyy');
@@ -764,77 +688,6 @@
             }
         }
     });
-
-    /**
-     * Original zaaDate directive before datepicker implementation
-     *
-    zaa.directive("zaaDate", function() {
-        return {
-            restrict: "E",
-            scope: {
-                "model": "=",
-                "options": "=",
-                "label": "@label",
-                "id": "@fieldid",
-                "name": "@fieldname",
-                "i18n": "@i18n"
-            },
-            controller: function($scope) {
-
-                var date = new Date();
-
-                $scope.slicer = function(value) {
-                    return ('0' + value).slice(-2);
-                };
-
-                $scope.placeholders = {
-                    "day": $scope.slicer(date.getDate()),
-                    "month": $scope.slicer(date.getMonth() + 1),
-                    "year": date.getFullYear()
-                };
-
-                $scope.reform = function() {
-                    if ($scope.year != null && $scope.month != null && $scope.day != null) {
-                        var date = new Date(parseInt($scope.year, 10), parseInt(($scope.month-1), 10), parseInt($scope.day, 10));
-                        var mil = date.getTime();
-                        $scope.model = (mil/1000);
-                    }
-                };
-
-                $scope.today = function() {
-                    var date = new Date();
-                    $scope.day = $scope.slicer(date.getDate()),
-                    $scope.month = $scope.slicer(date.getMonth() + 1);
-                    $scope.year = date.getFullYear();
-                    $scope.reform();
-                };
-
-                $scope.$watch(function() { return $scope.model }, function(n, o) {
-                    if (n !== undefined && n != null) {
-                    	console.log('date', n);
-                        var date = new Date(n*1000);
-                        $scope.day = $scope.slicer(date.getDate()),
-                        $scope.month = $scope.slicer(date.getMonth() + 1);
-                        $scope.year = date.getFullYear();
-                    }
-                });
-
-
-            },
-            template: function() {
-                return '<div class="input input--date" ng-class="{\'input--hide-label\': i18n}">' +
-                            '<label class="input__label">{{label}}</label>' +
-                            '<div class="input__field-wrapper">' +
-                                '<input ng-blur="reform()" type="text" ng-model="day" placeholder="{{placeholders.day}}" class="input__field" /><span class="input__divider">.</span>' +
-                                '<input ng-blur="reform()" type="text" ng-model="month" placeholder="{{placeholders.month}}" class="input__field" /><span class="input__divider">.</span>' +
-                                '<input ng-blur="reform()" type="text" ng-model="year" placeholder="{{placeholders.year}}" class="input__field" style="width:100px;" />' +
-                                '<button class="input__button btn btn--small grey darken-1" type="button" ng-click="today()">' + i18n['js_dir_set_date'] + '</button>' +
-                            '</div>'
-                        '</div>';
-            }
-        }
-    });
-    */
 
     zaa.directive("zaaTable", function() {
         return {
@@ -1308,7 +1161,7 @@
 
                 scope.$watch(function() { return scope.ngModel }, function(n, o) {
                     if (n != 0 && n != null && n !== undefined) {
-                        var filtering = $filter('filter')(scope.filesData, {id: n}, true);
+                        var filtering = $filter('filter')(scope.filesData, {id: n});
                         if (filtering && filtering.length == 1) {
                             scope.fileinfo = filtering[0];
                         }
@@ -1346,7 +1199,7 @@
 
                 $scope.$watch('fileId', function(n, o) {
                     if (n != 0 && n != null && n !== undefined) {
-                    	var filtering = $filter('filter')($scope.filesData, {id: n}, true);
+                    	var filtering = $filter('filter')($scope.filesData, {id: n});
                         if (filtering && filtering.length == 1) {
                         	$scope.fileinfo = filtering[0];
                         }
@@ -1787,6 +1640,15 @@
                     $scope.currentFolderId = folderId;
                     ServiceFoldersDirecotryId.folderId = folderId;
                     $http.post('admin/api-admin-common/save-filemanager-folder-state', {folderId : folderId});
+                };
+
+                $scope.toggleFolderItem = function(data) {
+                    if (data.toggle_open == undefined) {
+                        data['toggle_open'] = 1;
+                    } else {
+                        data['toggle_open'] = !data.toggle_open;
+                    }
+                    $http.post('admin/api-admin-common/filemanager-foldertree-history', {data : data});
                 };
 
                 $scope.folderUpdateForm = false;

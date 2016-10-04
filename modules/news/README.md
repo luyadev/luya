@@ -4,23 +4,17 @@ The news module will provided you a basic news system with categories and tags.
 
 ## Installation
 
-In order to install the news module you have to require the `luyadev/luya-module-news` and `luyadev/luya-module-newsadmin`. To add the modules to your composer run:
+In order to install the news module you have to require the `luyadev/luya-module-news`. To add the modules to your composer run:
 
 ```sh
 composer require luyadev/luya-module-news:^1.0@dev
 ```
 
-and for the administration module
-
-```sh
-composer require luyadev/luya-module-newsadmin:^1.0@dev
-```
-
 This will add the packages to your composer.json and run the update command. So now you have the modules in your vendor folder. Now you have the configure them in your configration (the `configs` folder) file:
 
 ```php
-'news' => 'news\Module',
-'newsadmin' => 'newsadmin\Module',
+'news' => 'luya\news\frontend\Module',
+'newsadmin' => 'luya\news\admin\Module',
 ```
 
 The modules are now available in your project. Now you have to run the migration and import command and you will be able to access the news administration to add news articles.

@@ -8,25 +8,58 @@ use yii\helpers\Inflector;
 use luya\Boot;
 
 /**
- * NgRest Crud console commands.
- * 
+ * Console command to create a NgRest Crud with Controller, Api and Model based on a SQL Table.
+ *
  * @author Basil Suter <basil@nadar.io>
  */
-class CrudController extends \luya\console\Command
+class CrudController extends BaseCrudController
 {
     /**
      * Create Ng-Rest-Model, Controller and Api for an existing Database-Table.
-     * 
+     *
      * @return number
      */
     public function actionCreate()
     {
-        $module = $this->prompt('Module Name (e.g. galleryadmin):');
-        $modulePre = $new_str = preg_replace('/admin$/', '', $module);
-        $modelName = $this->prompt('Model Name (e.g. Album)');
-        $apiEndpoint = $this->prompt('Api Endpoint (e.g. api-'.$modulePre.'-'.strtolower($modelName).')');
+        $this->outputInfo("Make sure the module is added to your configuration.");
+        $module = $this->selectModule(['onlyAdmin' => true, 'hideCore' => true, 'text' => 'Select the Module where the crud should be stored in:']);
+        $modulePre = preg_replace('/admin$/', '', $module);
+        
+        $modelSelection = true;
+        
+        while ($modelSelection) {
+            $modelName = $this->prompt('Model Name (e.g. Album):', ['required' => true]);
+            
+            $camlizeModelName = Inflector::camelize($modelName);
+            
+            if ($modelName !== $camlizeModelName) {
+                if ($this->confirm("We have camlized the model name to '$camlizeModelName' do you want to continue with this name?")) {
+                    $modelName = $camlizeModelName;
+                    $modelSelection = false;
+                }
+            } else {
+                $modelSelection = false;
+            }
+        }
+        
+        $apiEndpoint = $this->prompt('Api Endpoint:', ['required' => true, 'default' => 'api-'.$modulePre.'-'.strtolower($modelName).'']);
 
-        $sqlTable = $this->prompt('Database Table name (e.g. '.strtolower($modulePre).'_'.Inflector::underscore($modelName).')');
+        $sqlSelection = true;
+        while ($sqlSelection) {
+            $sqlTable = $this->prompt('Database Table name:', ['required' => true, 'default' => strtolower($modulePre).'_'.Inflector::underscore($modelName)]);
+            
+            if ($sqlTable == '?') {
+                foreach ($this->getSqlTablesArray() as $table) {
+                    $this->outputInfo("- " . $table);
+                }
+            }
+            
+            if (isset($this->getSqlTablesArray()[$sqlTable])) {
+                $sqlSelection = false;
+            } else {
+                $this->outputError("The selected database '$sqlTable' does not exists in the list of tables. Type '?' to see all tables.");
+            }
+        }
 
         if (!$this->confirm("Create '$modelName' controller, api & model based on sql table '$sqlTable' in module '$module' for api endpoint '$apiEndpoint'?")) {
             return $this->outputError('Crud creation aborted.');
@@ -174,6 +207,7 @@ class CrudController extends \luya\console\Command
                         'extended' => $extended,
                         'textFields' => $textFields,
                         'properties' => $properties,
+                        'rules' => $this->generateRules($shema),
                     ]);
                     
                     break;

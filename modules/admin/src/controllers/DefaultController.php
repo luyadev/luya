@@ -1,18 +1,20 @@
 <?php
 
-namespace admin\controllers;
+namespace luya\admin\controllers;
 
 use Yii;
-use admin\Module;
+use luya\admin\Module;
 use luya\helpers\Url;
 use yii\helpers\Json;
+use luya\admin\base\Controller;
+use luya\TagParser;
 
 /**
  * Administration Controller provides, dashboard, logout and index.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
-class DefaultController extends \admin\base\Controller
+class DefaultController extends Controller
 {
     public $disablePermissionCheck = true;
 
@@ -48,5 +50,10 @@ class DefaultController extends \admin\base\Controller
         }
 
         return '<span style="color:red;">'.Module::t('debug_state_off').'</span>';
+    }
+    
+    public function getTags()
+    {
+        return TagParser::getInstantiatedTagObjects();
     }
 }

@@ -1,7 +1,7 @@
 LUYA
 ====
 
-> 20, June 2016: We have released the next beta Version of LUYA: **1.0.0-beta7**.
+> 11, August 2016: We have released the next beta of LUYA: [1.0.0-beta8](https://github.com/luyadev/luya/blob/master/docs/releases/note_beta8.md).
 
 The [Yii 2 PHP Framework](https://github.com/yiisoft/yii2) wrapper which provides out of the box functions like an **administration interface**, a beautiful looking **content management system**, **payment** modules, **agency workflows** and other tools to develop your website pretty fast!
 
@@ -12,7 +12,7 @@ The [Yii 2 PHP Framework](https://github.com/yiisoft/yii2) wrapper which provide
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-core/downloads)](https://packagist.org/packages/luyadev/luya-core)
 [![Join the chat at https://gitter.im/zephir/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/luyadev/luya)
 
-![Luya Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/luya-beta5.png)
+![Luya Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/luya-beta8.png)
 
 **ATTENTION: We have MOVED all repositories to the new HQ of LUYA, `luyadev` instead of `zephir`. In order to update your packages, remove `zephir` and replace with `luyadev` in your composer require section. The old packages will still work for a while.**
 
@@ -45,7 +45,7 @@ We are always looking for people who share their thoughts, code and problems wit
 #### ROADMAP
 
 + ✓ beta7 release (June 2016)
-+ beta8 release (August 2016) - Last NEW features will be implemented (cms permissions).
++ ✓ beta8 release (August 2016) - Last NEW features will be implemented (cms permissions).
 + rc1 release (unknown) - PHP Code Documentations and Guides updates.
 + rc2 release (unknown) - Moving admin and frontend modules into one repository, remove subsplit process and make modules independent.
 + version 1.0.0 (towards the end of year 2016) - First stable release of LUYA *yay*.
@@ -53,7 +53,7 @@ We are always looking for people who share their thoughts, code and problems wit
 #### Unit Test
 
 1. Create Database (example luya_phpunit)
-2. Insert Database dump from `tests/data/sql/1.0.0-beta7.sql`
+2. Insert Database dump from `tests/data/sql/1.0.0-beta8.sql`
 3. Rename phpunit.xml.dist to phpunit.xml
 4. Change dsn, username and passwort in phpunit.xml
 5. Ensure you have installed current composer packages `composer install` with dev packages.

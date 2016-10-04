@@ -1,4 +1,7 @@
-<?php $this->beginPage(); ?>
+<?php
+use app\assets\ResourcesAsset;
+ResourcesAsset::register($this);
+?>
 <html>
     <head>
         <title>Luya &mdash; <?php echo $this->title; ?></title>
@@ -28,7 +31,6 @@
                     <?php endforeach; ?>
                 </ol>
             </div>
-        
             <div class="row">
                 <div class="col-md-3" id="nav" style="min-height:500px;">
                     <ul>

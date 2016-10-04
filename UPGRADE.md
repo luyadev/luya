@@ -3,7 +3,51 @@ LUYA UPGRADE
 
 This document will help you upgrading from a LUYA Version into another.
 
-1.0.0-beta8 (in progress)
+1.0.0-rc1 (in progress)
+-----------
+
+As part of this release all module will be renamed. Frontend and admin module will be merged together. All module classes will get the prefix `luya`. So in order to upgrade your current modules, filters, blocks, blockgroups, models, etc. you have to rename a lot of classes of your project files:
+
+|old    |new
+|---    |---
+|`cmsadmin\...`|`luya\cms\admin\...`
+|`cms\...`|`luya\cms\frontend\...`
+|`admin\...`|`luya\admin\...`
+
+Search and replace examples:
+
+|search     |replace
+|---        |---
+|`cms\helpers\TagParser`|`luya\TagParser`
+|`cms\helpers\Url`|`luya\cms\helpers\Url`
+|`cmsadmin\base\Block`|`luya\cms\base\TwigBlock`
+|`\admin\ngrest\base\Api`|`\luya\admin\ngrest\base\Api`
+|`\admin\Module`|`\luya\admin\Module`
+|`\admin\ngrest\base\Model`|`\luya\admin\ngrest\base\NgRestModel`
+|`\admin\ngrest\base\Controller`|`\luya\admin\ngrest\base\Controller`
+|`\admin\base\Filter`|`\luya\admin\base\Filter`
+|`\admin\base\RestController`|`\luya\admin\base\RestController`
+|`\admin\base\Controller`|`\luya\admin\base\Controller`
+|`\admin\ngrest\base\ActiveWindow`|`\luya\admin\ngrest\base\ActiveWindow`
+
+
+* [#970](https://github.com/luyadev/luya/issues/970): Renamed rest classes `luya\rest\BehaviorInterface`, `luya\rest\BehaviorTrait`, `luya\rest\BaseActiveController`
+* [#972](https://github.com/luyadev/luya/issues/972): Renamed all modules to match luya prefix as described from the table above.
+* `#976`: Removed `$isCoreModule` property, replaced width `CoreModuleInterface`.
+* `#974`: Removed `$isAdmin` property, replaced with `AdminModuleInterface`.
+* `#875`: TagParser has been renamed to `luya\TagParser` instead of `cms\helpers\TagParser` and is now a core class.
+* [#806](https://github.com/luyadev/luya/issues/806#issuecomment-248597369): Renamed to `configs/server.php` to `configs/env.php`, new projects will also have the env prefix for the config names.
+
+### Update tag for internal links
+The tag for internal links has changed from `link[32]` (where 32 is the id of the linked page) to `menu[32]`. To replace all occurrences, you can search and replace within the field `json_config_values`of the table `cms_nav_item_page_block_item` with the following regular expression:
+
+Search for: `link\[([0-9]+)\]`  
+Replace with: `menu[$1]`
+
+Be sure to make a backup of the database beforehand!
+
+
+1.0.0-beta8 (11.08.2016)
 -----------
 
 * [#940](https://github.com/luyadev/luya/issues/940): The `admin\base\Filter` class for all filters requers now a **public static identifier()** method instead of a *none static* method.

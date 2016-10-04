@@ -1,5 +1,7 @@
 .modal {
     background-color: #fff;
+    border-radius: 7px;
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     display: block;
     left: 5%;
     max-height: 90%;
@@ -24,8 +26,8 @@
 
 .modal__close {
     position: absolute;
+    top: 4px;
     right: 5px;
-    top: 5px;
 }
 
 .modal--bottom-sheet {

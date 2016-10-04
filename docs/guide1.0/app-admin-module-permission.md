@@ -41,7 +41,7 @@ Disable controller permission
 Inside of each `luya\web\Controller` abstracted class you can disable the permission check be enabling(overriding) the property `public $disablePermissionCheck = true;`. This means all **logged in users** can access this controller, but guest (nog logged in users) are still not allowed to see this controller.
 
 ```php
-class MyTestController extends \admin\base\Controller
+class MyTestController extends \luya\admin\base\Controller
 {
     public $disablePermissionCheck = true;
     

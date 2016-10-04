@@ -1,10 +1,10 @@
 <?php
 
-namespace cms;
+namespace luya\cms;
 
 /**
  * Exception wrapper for yii\base\Exception, represents a generic exception for all purposes.
- * 
+ *
  * @author nadar
  * @since 1.0.0-beta5
  */

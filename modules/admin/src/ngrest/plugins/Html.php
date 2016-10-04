@@ -1,18 +1,19 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
 
 use luya\Exception;
+use luya\admin\ngrest\base\Plugin;
 
 /**
  * Renders HTML in List View. Update/Create are disabled.
- * 
+ *
  * This will bind the Api Response as trusted html and allow the html injection.
- * 
+ *
  * @since 1.0.0-beta7
  * @author Basil Suter <basil@nadar.io>
  */
-class Html extends \admin\ngrest\base\Plugin
+class Html extends Plugin
 {
     /**
      * {@inheritDoc}

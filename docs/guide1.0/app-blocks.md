@@ -54,8 +54,15 @@ class TextTransformBlock extends \cmsadmin\base\PhpBlock
 As we have switched to PHPBlock by default (in beta8) you now have to create also a view file, which is located in the view folder of your project: `app/views/blocks/`. The view file itself does have the same name is the class name of your block: `TextTransformBlock.php`. In your example from above the view file could look like this:
 
 ```php
-<p>Uppercase Text: <?= $extras['textTransformed'];?></p>
-<p>Original Text: <?= $vars['mytext']; ?></p>
+<?php
+/**
+ * @var $this \luya\cms\base\PhpBlockView
+ */
+?>
+
+<?php if ($this->context->getVarValue('mytext')): ?>
+    <h1><?= $this->context->getExtraValue('textTransformed'); ?></h1>
+<?php endif; ?>
 ```
 
 #### Register and import

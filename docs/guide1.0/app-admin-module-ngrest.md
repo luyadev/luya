@@ -34,7 +34,7 @@ Lets have close look at what you model should look like, in our member example o
 <?php
 namespace teamadmin\models;
 
-class Member extends \admin\ngrest\base\Model
+class Member extends \luya\admin\ngrest\base\NgRestModel
 {
     /**
      * Yii2 related ActiveRecord code
@@ -142,7 +142,7 @@ Example of an ngrest controller (which are located in `<module>/controllers`):
 <?php
 namespace teamadmin\controllers;
 
-class MemberController extends \admin\ngrest\base\Controller
+class MemberController extends \luya\admin\ngrest\base\Controller
 {
     public $modelClass = 'teamadmin\models\Member';
 }
@@ -156,10 +156,22 @@ Example of an api controller (which are located in `<module>/apis`):
 <?php
 namespace news\apis;
 
-class MemberController extends \admin\ngrest\base\Api
+class MemberController extends \luya\admin\ngrest\base\Api
 {
     public $modelClass = 'teamadmin\models\Member';
 }
+```
+
+By default the pagination (pager) will be enabled if the count of rows is more then 250. You can disabled this behavior by turning of the `$autoEnablePagination`
+
+```php
+public $autoEnablePagination = false;
+```
+
+and you can also force the api to always generate a pagination by setting `$pagination` property as followed:
+
+```php
+public $pagination = ['pageSize' => 100];
 ```
 
 ## 3. Api-Endpoint & Authorization

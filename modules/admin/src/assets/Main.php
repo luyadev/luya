@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\assets;
+namespace luya\admin\assets;
 
 /**
  * Main Asset contains all administration area depending files and should be a dependency for all other assets.
@@ -25,8 +25,8 @@ class Main extends \luya\web\Asset
     ];
 
     public $depends = [
-        'admin\assets\Jquery',
-        'admin\assets\BowerVendor',
+        'luya\admin\assets\Jquery',
+        'luya\admin\assets\BowerVendor',
     ];
 
     /*

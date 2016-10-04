@@ -1,24 +1,24 @@
 <?php
 
-namespace cms\widgets;
+namespace luya\cms\widgets;
 
 use Yii;
-use admin\models\Lang;
+use luya\admin\models\Lang;
 use luya\web\Composition;
 
 /**
  * Language Switcher for CMS
- * 
+ *
  * This widget will find all registered languages and display the corresponding like to the
  * provided languages, if there as no like it will link to the home page of this language. The
- * language switcher can event detect composition url rules for other languages based on the 
+ * language switcher can event detect composition url rules for other languages based on the
  * current menu item.
- * 
+ *
  * You can always extend from this class and other proprties you can access trough the `$this->context`
  * variable inside your view.
- * 
+ *
  * The following code is an example of how the template for this widget could look like:
- * 
+ *
  * ```html
  * <div class="langnav">
  *   <ul class="langnav__list">
@@ -30,7 +30,7 @@ use luya\web\Composition;
  *   </ul>
  * </div>
  * ```
- * 
+ *
  * @author nadar
  * @since 1.0.0-beta5
  */
@@ -47,9 +47,8 @@ class LanguageSwitcher extends \luya\base\Widget
         
         $items = [];
         
-        
         // Loop through all languages
-        foreach (Lang::find()->asArray()->all() as $lang) {
+        foreach (Yii::$app->adminLanguage->getLanguages() as $lang) {
             // Find item of current link with the lang
             $item = Yii::$app->menu->find()->where(['nav_id' => $current->navId])->lang($lang['short_code'])->with('hidden')->one();
         
@@ -85,7 +84,7 @@ class LanguageSwitcher extends \luya\base\Widget
         
         return $this->render('index', [
             'items' => $items,
-            'currentLanguage' => Lang::find()->where(['short_code' => $currentLang])->asArray()->one(),
+            'currentLanguage' => Yii::$app->adminLanguage->getLanguageByShortCode($currentLang),
         ]);
     }
 }

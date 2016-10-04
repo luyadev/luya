@@ -21,6 +21,25 @@ In order to test your configurations you can run the console command `health/mai
 ./vendor/bin/luya health/mailer
 ```
 
+## Define a Mail Template
+
+In order to define a HTML template for your mails, add `'layout' => '@app/views/maillayout.php'` to the mail component's configuration above.
+
+Example template:
+
+```php
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>My App</title>
+</head>
+<body>
+<?= $content; ?>
+</body>
+</html>
+```
+
 ## Compose new E-Mail
 
 To quickly send an email in one line you can use the object chain mode like the example below:

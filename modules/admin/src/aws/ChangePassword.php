@@ -1,19 +1,20 @@
 <?php
 
-namespace admin\aws;
+namespace luya\admin\aws;
 
 use Yii;
-use admin\Module;
+use luya\admin\Module;
 use luya\Exception;
+use luya\admin\ngrest\base\ActiveWindow;
 
 /**
  * Change Passwort Active Window.
- * 
+ *
  * The model class defined by `className` must implement the `\admin\aws\ChangePasswordInterface`.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
-class ChangePassword extends \admin\ngrest\base\ActiveWindow
+class ChangePassword extends ActiveWindow
 {
     public $module = 'admin';
 
@@ -21,7 +22,7 @@ class ChangePassword extends \admin\ngrest\base\ActiveWindow
     
     /**
      * @var string The name of the class should be used to change password
-     * 
+     *
      * ```php
      * $className = 'admin\models\User';
      * ```

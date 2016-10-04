@@ -3,10 +3,12 @@
 namespace luya\web;
 
 use yii\helpers\ArrayHelper;
+use luya\base\AdminModuleInterface;
+use luya\TagParser;
 
 /**
  * LUYA base bootstrap class which will be called during the bootstraping process.
- * 
+ *
  * @author nadar
  */
 class Bootstrap extends \luya\base\Bootstrap
@@ -26,19 +28,21 @@ class Bootstrap extends \luya\base\Bootstrap
      */
     public function beforeRun($app)
     {
+        foreach ($app->tags as $name => $config) {
+            TagParser::inject($name, $config);
+        }
+        
         foreach ($this->getModules() as $id => $module) {
-            foreach ($module->urlRules as $k => $v) {
-                if (isset($v['position'])) {
-                    $pos = $v['position'];
-                } else {
-                    $pos = \luya\web\UrlRule::POSITION_AFTER_LUYA;
-                }
-                
-                $this->_urlRules[$pos][] = $v;
+            foreach ($module->urlRules as $rule) {
+                $this->_urlRules[(isset($rule['position'])) ? $rule['position'] : UrlRule::POSITION_AFTER_LUYA][] = $rule;
             }
 
             foreach ($module->apis as $alias => $class) {
                 $this->_apis[$alias] = $class;
+            }
+            
+            foreach ($module->tags as $name => $config) {
+                TagParser::inject($name, $config);
             }
         }
     }
@@ -47,7 +51,7 @@ class Bootstrap extends \luya\base\Bootstrap
     {
         // start the module now
         foreach ($this->getModules() as $id => $module) {
-            if ($module->isAdmin) {
+            if ($module instanceof AdminModuleInterface) {
                 $this->_adminAssets = ArrayHelper::merge($module->assets, $this->_adminAssets);
                 $this->_adminMenus = ArrayHelper::merge($module->getMenu(), $this->_adminMenus);
                 $this->_jsTranslations[$id] = $module->registerJsTranslation;

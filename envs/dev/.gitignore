@@ -17,10 +17,11 @@ composer.phar
 #/public_html/storage
 
 # project config
-/configs/local.php
+/configs/env-local.php
 /configs/server.php
+/configs/env.php
 
-/config/local.php
+/config/env-local.php
 /config/server.php
 # eclipse
 .buildpath

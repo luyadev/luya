@@ -1,21 +1,17 @@
 <?php
 
-namespace cms\helpers;
+namespace luya\cms\helpers;
 
-use cebe\markdown\GithubMarkdown;
+use luya\tag\TagMarkdownParser;
+
+trigger_error("luya\cms\CmsMarkdown deprecated use luya\TagMarkdownParser instead.", E_USER_DEPRECATED);
 
 /**
- * CmsMarkdown disables the auto URL generate feature in order to fix issue with TagParser.
+ * CmsMarkdownParser
  * 
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0-beta8
+ * @deprecated
  */
-class CmsMarkdown extends GithubMarkdown
+class CmsMarkdown extends TagMarkdownParser
 {
-    public $enableNewlines = true;
-    
-    protected function parseUrl($markdown)
-    {
-        return;
-    }
 }

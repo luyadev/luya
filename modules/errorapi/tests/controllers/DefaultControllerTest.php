@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\web\errorapi\controllers;
+namespace tests\web\luya\errorapi\controllers;
 
 use Yii;
 

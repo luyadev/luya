@@ -55,7 +55,7 @@ There is also a twig function which allows you to retrieve the content like in Y
 t('app', 'title_top')
 ```
 
-### Placholders as Parameters
+### Placeholders as Parameters
 
 Sometimes you may want to add a placeholder you can fill up with specific content. You can use a key for the placholder or using the array keys:
 
@@ -72,8 +72,22 @@ The first example `today` could be used like this:
 echo Yii::t('app', 'today', time());
 ```
 
-while the second example needs a speicifc key `date` as parameter:
+While the second example needs a speicifc key `date` as parameter:
 
 ```php
 echo Yii::t('app', 'tomorrow', ['date' => time()]);
 ```
+
+#### Conditions with parameters
+
+Sometimes you want to change the output inside the translation file based on input paremter values, lets assume the variables $slots has been assigend with the amount of left seats:
+
+```
+{slots, plural,=1{Only 1 place} =2{Only 2 places} other{Places}} available
+```
+
+Lets see what happens when the value of `$slots` is:
+
++ **1** = Only 1 place available
++ **2** = Only 2 places available
++ **3** = Places available

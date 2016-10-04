@@ -4,21 +4,21 @@ namespace luya\console\commands;
 
 use Yii;
 use yii\console\Exception;
-use admin\models\Config;
-use admin\models\User;
-use admin\models\Group;
+use luya\admin\models\Config;
+use luya\admin\models\User;
+use luya\admin\models\Group;
 
 /**
  * Setup the Administration Interface.
- * 
+ *
  * You can also use the parameters to run the setup command for example.
- * 
+ *
  * ```
  * setup --email=foo@bar.com --password=test --firstname=John --lastname=Doe --interactive=0
  * ```
- * 
+ *
  * This will perform the Setup task silent and does not prompt any questions.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class SetupController extends \luya\console\Command
@@ -49,6 +49,16 @@ class SetupController extends \luya\console\Command
     public $interactive = true;
     
     /**
+     * @var string The name of the default language e.g. English
+     */
+    public $langName = null;
+    
+    /**
+     * @var string The short code of the language e.g. en
+     */
+    public $langShortCode = null;
+    
+    /**
      * {@inheritDoc}
      * @see \luya\console\Command::options()
      */
@@ -61,7 +71,7 @@ class SetupController extends \luya\console\Command
      * Setup the administration area.
      *
      * This action of setup will add a new user, group, languaga, permissions and default homepage and container.
-     * 
+     *
      * @return boolean
      */
     public function actionIndex()
@@ -75,21 +85,35 @@ class SetupController extends \luya\console\Command
         }
     
         if (empty($this->email)) {
-            $this->email = $this->prompt('User E-Mail:');
+            $this->email = $this->prompt('User E-Mail:', ['required' => true]);
         }
     
         if (empty($this->password)) {
-            $this->password = $this->prompt('User Password:');
+            $this->password = $this->prompt('User Password:', ['required' => true]);
         }
     
         if (empty($this->firstname)) {
-            $this->firstname = $this->prompt('Firstname:');
+            $this->firstname = $this->prompt('Firstname:', ['required' => true]);
         }
     
         if (empty($this->lastname)) {
-            $this->lastname = $this->prompt('Lastname:');
+            $this->lastname = $this->prompt('Lastname:', ['required' => true]);
         }
     
+        if (empty($this->langName)) {
+            $this->langName = $this->prompt('Standard language:', ['required' => true, 'default' => 'English']);
+        }
+        
+        if (empty($this->langShortCode)) {
+            $this->langShortCode = $this->prompt('Short-Code of the Standard language:', ['required' => true, 'default' => 'en', 'validator' => function ($input, &$error) {
+                if (strlen($input) !== 2) {
+                    $error = 'The Short-Code must be 2 chars length only. Examples: de, en, fr, ru';
+                    return false;
+                }
+                return true;
+            }]);
+        }
+        
         if ($this->interactive) {
             if ($this->confirm("Confirm your login details in order to proceed with the Setup. E-Mail: {$this->email} Password: {$this->password} - Are those informations correct?") !== true) {
                 return $this->outputError('Abort by user.');
@@ -133,8 +157,8 @@ class SetupController extends \luya\console\Command
         }
     
         $this->insert('admin_lang', [
-            'name' => 'English',
-            'short_code' => 'en',
+            'name' => $this->langName,
+            'short_code' => $this->langShortCode,
             'is_default' => 1,
         ]);
     
@@ -152,7 +176,7 @@ class SetupController extends \luya\console\Command
     
     /**
      * Create a new user and append them to an existing group.
-     * 
+     *
      * @return booelan
      */
     public function actionUser()
@@ -206,11 +230,11 @@ class SetupController extends \luya\console\Command
     
     /**
      * Helper to insert data in database table.
-     * 
-     * @param string $table
-     * @param string $fields
+     *
+     * @param string $table The database table
+     * @param array $fields The array with insert fields
      */
-    private function insert($table, $fields)
+    private function insert($table, array $fields)
     {
         return Yii::$app->db->createCommand()->insert($table, $fields)->execute();
     }

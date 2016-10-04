@@ -17,9 +17,14 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"news\\" : "src"
+			"luya\\news\\" : "src/"
 		}
 	},
+	"autoload-dev" : {
+       "psr-4" : {
+           "newstests\\" : "tests/"
+       }
+    },
 	"extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"

@@ -6,6 +6,9 @@ return [
     'remoteToken' => 'testtoken',
     'basePath' => dirname(__DIR__),
     'defaultRoute' => 'unitmodule',
+    'aliases' => [
+        '@runtime' => dirname(__DIR__) . '/runtime',
+    ],
     'modules' => [
         'unitmodule' => [
             'class' => '\luyatests\data\modules\unitmodule\Module',

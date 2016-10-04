@@ -1,5 +1,6 @@
 <?php
-use admin\ngrest\render\RenderCrud;
+use luya\admin\ngrest\render\RenderCrud;
+use luya\admin\Module;
 
 ?>
 <script>
@@ -35,17 +36,17 @@ use admin\ngrest\render\RenderCrud;
         <div class="tabs">
             <ul>
                 <li class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==0}">
-                    <a class="tabs__anchor" ng-click="switchTo(0, true)"><i class="material-icons tabs__icon">menu</i> <?php echo \admin\Module::t('ngrest_crud_btn_list'); ?></a>
+                    <a class="tabs__anchor" ng-click="switchTo(0, true)"><i class="material-icons tabs__icon">menu</i> <?= Module::t('ngrest_crud_btn_list'); ?></a>
                 </li>
 
                 <?php if ($canCreate && $config->getPointer('create')): ?>
                     <li class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==1}">
-                        <a class="tabs__anchor" style="" ng-click="switchTo(1)"><i class="material-icons tabs__icon">add_box</i> <?php echo \admin\Module::t('ngrest_crud_btn_add'); ?></a>
+                        <a class="tabs__anchor" style="" ng-click="switchTo(1)"><i class="material-icons tabs__icon">add_box</i> <?= Module::t('ngrest_crud_btn_add'); ?></a>
                     </li>
                 <?php endif; ?>
                 
                 <li ng-show="crudSwitchType==2" class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==2}">
-                    <a class="tabs__anchor" ng-click="switchTo(0, true)"><i class="material-icons tabs__icon">cancel</i> <?php echo \admin\Module::t('ngrest_crud_btn_close'); ?></a>
+                    <a class="tabs__anchor" ng-click="switchTo(0, true)"><i class="material-icons tabs__icon">cancel</i> <?= Module::t('ngrest_crud_btn_close'); ?></a>
                 </li>
             </ul>
         </div>
@@ -68,7 +69,7 @@ use admin\ngrest\render\RenderCrud;
                         <div class="col <?php if (!empty($config->filters)): ?>m12 l6<?php else: ?>m6 l8<?php endif; ?>">
                             <div class="input input--text">
                                 <div class="input__field-wrapper">
-                                    <input class="input__field" id="searchString" ng-model="searchString" ng-change="evalSearchString()" type="text" placeholder="<?php echo \admin\Module::t('ngrest_crud_search_text'); ?>" />
+                                    <input class="input__field" id="searchString" ng-model="searchString" ng-change="evalSearchString()" type="text" placeholder="<?= Module::t('ngrest_crud_search_text'); ?>" />
                                 </div>
                             </div>
                         </div>
@@ -106,15 +107,26 @@ use admin\ngrest\render\RenderCrud;
                 <div class="button-right__right">
                     <div>
                         <button type="button" ng-show="!exportDownloadButton && !exportLoading" ng-click="exportData()" class="btn cyan btn--small" style="width: 100%;">
-                            <i class="material-icons left">unarchive</i> <?= \admin\Module::t('ngrest_crud_csv_export_btn'); ?>
+                            <i class="material-icons left">unarchive</i> <?= Module::t('ngrest_crud_csv_export_btn'); ?>
                         </button>
                         <div ng-show="exportLoading" class="btn disabled btn--small center" style="width: 100%;"><i class="material-icons spin">cached</i></div>
                         <div ng-show="exportDownloadButton">
-                            <button ng-click="exportDownload()" class="btn light-green btn--small" type="button" style="width: 100%;"><i class="material-icons left">file_download</i> <?= \admin\Module::t('ngrest_crud_csv_export_btn_dl'); ?></button>
+                            <button ng-click="exportDownload()" class="btn light-green btn--small" type="button" style="width: 100%;"><i class="material-icons left">file_download</i> <?= Module::t('ngrest_crud_csv_export_btn_dl'); ?></button>
                         </div>
                     </div>
                 </div>
             </div>
+            
+            <div ng-if="pager" style="text-align: center;">
+                <ul class="pagination">
+                    <li class="waves-effect" ng-class="{'disabled' : pager.currentPage == 1}" ng-click="pagerPrevClick()"><a><i class="material-icons">chevron_left</i></a></li>
+                    <li class="waves-effect" ng-repeat="pageId in pager.pages" ng-class="{'active': pageId == pager.currentPage}" ng-click="realoadCrudList(pageId)">
+                        <a>{{pageId}}</a>
+                    </li> 
+                    <li class="waves-effect" ng-class="{'disabled' : pager.currentPage == pager.pageCount}" ng-click="pagerNextClick()"><a><i class="material-icons">chevron_right</i></a></li>
+                </ul>
+            </div>
+            
             <table class="striped responsive-table hoverable">
                 <thead>
                     <tr>
@@ -122,7 +134,7 @@ use admin\ngrest\render\RenderCrud;
                             <th ng-hide="groupBy && groupByField == '<?= $item['name']; ?>'"><?php echo $item['alias']; ?> <i ng-click="changeOrder('<?php echo $item['name']; ?>', '+')" ng-class="{'active-orderby' : isOrderBy('+<?php echo $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeOrder('<?php echo $item['name']; ?>', '-')" ng-class="{'active-orderby' : isOrderBy('-<?php echo $item['name']; ?>') }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
                         <?php endforeach; ?>
                         <?php if (count($this->context->getButtons()) > 0): ?>
-                            <th style="text-align:right;"><span class="grid-data-length">{{data.list.length}} <?php echo \admin\Module::t('ngrest_crud_rows_count'); ?></span></th>
+                            <th style="text-align:right;"><span class="grid-data-length">{{data.list.length}} <?= Module::t('ngrest_crud_rows_count'); ?></span></th>
                         <?php endif; ?>
                     </tr>
                 </thead>
@@ -143,14 +155,25 @@ use admin\ngrest\render\RenderCrud;
                         <?php if (count($this->context->getButtons()) > 0): ?>
                         <td style="text-align:right;">
                             <?php foreach ($this->context->getButtons() as $item): ?>
-                            <a class="waves-effect waves-light btn-flat btn--bordered" ng-click="<?php echo $item['ngClick']; ?>"><i class="material-icons<?php if (!empty($item['label'])): ?> left<?php endif; ?>"><?php echo $item['icon']; ?></i><?php echo $item['label']; ?></a>
+                                <a class="crud__button waves-effect waves-light btn-flat btn--bordered" ng-click="<?php echo $item['ngClick']; ?>"><i class="material-icons<?php if (!empty($item['label'])): ?> left<?php endif; ?>"><?php echo $item['icon']; ?></i><?php echo $item['label']; ?></a>
                             <?php endforeach; ?>
                         </td>
                         <?php endif; ?>
                     </tr>
                 </tbody>
             </table>
-            <div ng-show="data.list.length == 0" class="alert alert--info"><?php echo \admin\Module::t('ngrest_crud_empty_row'); ?></div>
+            
+            <div ng-if="pager" style="text-align: center;">
+                <ul class="pagination">
+                    <li class="waves-effect" ng-class="{'disabled' : pager.currentPage == 1}" ng-click="pagerPrevClick()"><a><i class="material-icons">chevron_left</i></a></li>
+                    <li class="waves-effect" ng-repeat="pageId in pager.pages" ng-class="{'active': pageId == pager.currentPage}" ng-click="realoadCrudList(pageId)">
+                        <a>{{pageId}}</a>
+                    </li> 
+                    <li class="waves-effect" ng-class="{'disabled' : pager.currentPage == pager.pageCount}" ng-click="pagerNextClick()"><a><i class="material-icons">chevron_right</i></a></li>
+                </ul>
+            </div>
+            
+            <div ng-show="data.list.length == 0" class="alert alert--info"><?= Module::t('ngrest_crud_empty_row'); ?></div>
         </div>
         <!-- /LIST -->
     
@@ -163,7 +186,7 @@ use admin\ngrest\render\RenderCrud;
                     <div class="modal__content">
                         <?php foreach ($this->context->forEachGroups(RenderCrud::TYPE_CREATE) as $key => $group): ?>
                             <?php if (!$group['is_default']): ?>
-                            <div class="form-group" ng-init="groupToggler[<?= $key; ?>] = <?= (int) $group['collapsed']; ?>">
+                            <div class="form-group" ng-init="groupToggler[<?= $key; ?>] = <?= (int) !$group['collapsed']; ?>">
                                 <p class="form-group__title" ng-click="groupToggler[<?= $key; ?>] = !groupToggler[<?= $key; ?>]">
                                     <?= $group['name']; ?>
                                     <span class="material-icons right" ng-show="groupToggler[<?= $key; ?>]">keyboard_arrow_up</span>
@@ -191,10 +214,10 @@ use admin\ngrest\render\RenderCrud;
                             <div class="col s12">
                                 <div class="right">
                                     <button class="btn waves-effect waves-light" type="submit" ng-disabled="createForm.$invalid">
-                                        <?php echo \admin\Module::t('ngrest_crud_btn_create'); ?> <i class="material-icons right">check</i>
+                                        <?= Module::t('ngrest_crud_btn_create'); ?> <i class="material-icons right">check</i>
                                     </button>
                                     <button class="btn waves-effect waves-light red" type="button" ng-click="closeCreate()">
-                                        <i class="material-icons left">cancel</i> <?php echo \admin\Module::t('button_abort'); ?>
+                                        <i class="material-icons left">cancel</i> <?= Module::t('button_abort'); ?>
                                     </button>
                                 </div>
                             </div>
@@ -212,7 +235,7 @@ use admin\ngrest\render\RenderCrud;
                     <div class="modal__content">
                         <?php foreach ($this->context->forEachGroups(RenderCrud::TYPE_UPDATE) as $key => $group): ?>
                             <?php if (!$group['is_default']): ?>
-                            <div ng-init="groupToggler[<?= $key; ?>] = <?= (int) $group['collapsed']; ?>">
+                            <div ng-init="groupToggler[<?= $key; ?>] = <?= (int) !$group['collapsed']; ?>">
                             <h5 ng-click="groupToggler[<?= $key; ?>] = !groupToggler[<?= $key; ?>]"><?= $group['name']; ?> +/- Toggler</h5>
                             <div style="border:1px solid #F0F0F0; margin-bottom:20px;" ng-show="groupToggler[<?= $key; ?>]">
                             <?php endif; ?>
@@ -237,10 +260,10 @@ use admin\ngrest\render\RenderCrud;
                             <div class="col s12">
                                 <div class="right">
                                     <button class="btn waves-effect waves-light" type="submit" ng-disabled="updateForm.$invalid">
-                                        <?php echo \admin\Module::t('button_save'); ?> <i class="material-icons right">check</i>
+                                        <?= Module::t('button_save'); ?> <i class="material-icons right">check</i>
                                     </button>
                                     <button class="btn waves-effect waves-light red" type="button" ng-click="closeUpdate()">
-                                        <i class="material-icons left">cancel</i> <?php echo \admin\Module::t('button_abort'); ?>
+                                        <i class="material-icons left">cancel</i> <?= Module::t('button_abort'); ?>
                                     </button>
                                 </div>
                             </div>

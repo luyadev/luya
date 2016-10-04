@@ -1,14 +1,14 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
 
 use Yii;
 
 /**
  * Create a selection dropdown based on an ActiveRecord Model.
- * 
+ *
  * Example usage:
- * 
+ *
  * ```
  * public function ngrestAttributeTypes()
  * {
@@ -18,7 +18,7 @@ use Yii;
  *
  * @author nadar
  */
-class SelectModel extends \admin\ngrest\plugins\Select
+class SelectModel extends Select
 {
     public $modelClass = null;
     

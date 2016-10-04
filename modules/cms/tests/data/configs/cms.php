@@ -7,9 +7,12 @@ return [
     'basePath' => dirname(__DIR__),
     'defaultRoute' => 'cms',
     'modules' => [
+        'admin' => 'luya\admin\Module',
         'cms' => [
-            'class' => 'cms\Module'
+            'class' => '\luya\cms\frontend\Module'
         ],
+        'cmsadmin' => 'luya\cms\admin\Module',
+        'CmsUnitModule' => '\cmstests\data\modules\CmsUnitModule',
     ],
     'components' => [
         'request' => [

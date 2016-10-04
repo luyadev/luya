@@ -1,13 +1,15 @@
 <?php
 
-namespace admin\filters;
+namespace luya\admin\filters;
+
+use luya\admin\base\Filter;
 
 /**
  * Admin Module default Filter: Medium Thumbnail (300xnull)
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class MediumThumbnail extends \admin\base\Filter
+class MediumThumbnail extends Filter
 {
     public static function identifier()
     {

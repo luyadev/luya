@@ -3,6 +3,7 @@
 return [
     'language_name' => 'English',
     'button_save' => 'Save',
+    'button_confirm' => 'Yes',
     'button_abort' => 'Cancel',
     'button_send' => 'Send',
     'login_pre_title' => 'Login for {title}',
@@ -31,7 +32,7 @@ return [
     'layout_debug_table_value' => 'Value',
     'layout_filemanager_save_dir' => 'Save?',
     'layout_filemanager_remove_dir' => 'Delete directory?',
-    'layout_filemanager_remove_dir_not_empty' => 'The directory is not empty - delete anyway?',
+    'layout_filemanager_remove_dir_not_empty' => 'The directory is not empty.<br/>Delete it anyway?',
     'layout_filemanager_remove_selected_files' => 'Delete marked files',
     'layout_filemanager_move_selected_files' => 'Move to',
     'layout_filemanager_upload_error' => 'Error while uploading file',
@@ -146,7 +147,7 @@ return [
 // added translations in 1.0.0-beta7
 
     'login_securetoken_mail_subject' => 'LUYA Security code',
-    'login_securetoken_mail' => '<h1>LUYA Security code</h1><p>Use the following security code to login into your administration interface on {url}:</p><p><strong>{token}</strong></p>',
+    'login_securetoken_mail' => '<h1>LUYA Security code</h1><p>Use the following security code to login into your administration interface on {url}:</p><span style="font-size:22px; letter-spacing:2px; padding:5px 10px; display:inline-block; background-color:#F0F0F0;">{token}</span>',
     'login_async_token_error' => 'The provided security code is wrong.',
     'login_async_token_globalerror' => 'A Server Error occured, please contact your Site administrator.',
     'ngrest_crud_csv_export_btn' => 'Generate CSV',
@@ -167,4 +168,12 @@ return [
     'aws_tag_list' => 'List of all entries',
     'dashboard_log_message_add' => 'Added a new row to <b>{container}</b>.',
     'dashboard_log_message_edit' => 'Updated an existing row in <b>{container}</b>.',
+
+// rc1
+
+    'layout_btn_help' => 'Help',
+    'right_panel_support_title' => 'Informations &amp; Help',
+    'right_panel_support_tags_title' => 'Tags',
+    'right_panel_support_support_title' => 'Support',
+    'right_panel_support_support_text' => 'If you have any questions, please contact your webmaster or consult <a target="_blank" href="https://luya.io">luya.io</a>.',
 ];

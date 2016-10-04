@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\aws;
+namespace luya\admin\aws;
 
 use Yii;
 use yii\base\InvalidConfigException;
@@ -8,16 +8,17 @@ use Flow\Config;
 use Flow\Request;
 use Flow\File;
 use luya\helpers\FileHelper;
-use admin\helpers\Storage;
+use luya\admin\helpers\Storage;
+use luya\admin\ngrest\base\ActiveWindow;
 
 /**
  * Flow Uploader ActiveWindow enables multi image upload with chunck ability.
- * 
- * The Flow ActiveWindow will not store any data in the filemanager as its thought to be used in large image upload 
+ *
+ * The Flow ActiveWindow will not store any data in the filemanager as its thought to be used in large image upload
  * scenarios like galleries, event the image are chuncked into parts in order to enable large image uploads.
- * 
+ *
  * Example use:
- * 
+ *
  * ```
  * public function ngRestConfig($config)
  * {
@@ -25,17 +26,17 @@ use admin\helpers\Storage;
  *     $config->aw->load(['class' => FlowActiveWindow, 'modelClass' => self::className()]);
  * }
  * ```
- * 
- * The property `modelClass` must be defined and the defined model class must implement the interface `FlowActiveWindowInterface` 
+ *
+ * The property `modelClass` must be defined and the defined model class must implement the interface `FlowActiveWindowInterface`
  * in order to perfom all tasks defined in the FlowActiveWindow. There is also a helper Trait you can include in order to do
  * the basic jobs of such a image relation table.
- * 
- * 
+ *
+ *
  * [[\admin\aw\FlowActiveWindowTrait]]
- * 
+ *
  * @since 1.0.0-beta7
  */
-class FlowActiveWindow extends \admin\ngrest\base\ActiveWindow
+class FlowActiveWindow extends ActiveWindow
 {
     public $module = '@admin';
     

@@ -1,24 +1,25 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
 
 use luya\helpers\ArrayHelper;
+use luya\admin\ngrest\base\Plugin;
 
 /**
  * Create a HTML5 number-tag.
- * 
+ *
  * You can optional set a placeholder value to guide your users, or an init value which will be assigned
  * to the angular model if nothing is set.
- * 
+ *
  * Example for default init Value
- * 
+ *
  * ```php
  * 'sort_index' => ['number', 'initValue' => 1000],
  * ```
- * 
+ *
  * @author nadar
  */
-class Number extends \admin\ngrest\base\Plugin
+class Number extends Plugin
 {
     /**
      * @var integer The default init value for this field

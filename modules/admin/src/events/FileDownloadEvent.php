@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\events;
+namespace luya\admin\events;
 
 class FileDownloadEvent extends \yii\base\Event
 {

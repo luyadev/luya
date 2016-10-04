@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\ngrest;
+namespace luya\admin\ngrest;
 
 use Yii;
 use luya\Exception;
@@ -8,16 +8,16 @@ use luya\helpers\ArrayHelper;
 
 /**
  * Config Builder class to make the NgRest Configs
- * 
- * @property \admin\ngrest\ConfigBuilder $list Set the pointer to list and return the ConfigBuilder for this pointer.
- * @property \admin\ngrest\ConfigBuilder $create Set the pointer to create and return the ConfigBuilder for this pointer.
- * @property \admin\ngrest\ConfigBuilder $update Set the pointer to update and return the ConfigBuilder for this pointer.
- * @property \admin\ngrest\ConfigBuilder $aw Set the pointer to aw and return the ConfigBuilder for this pointer.
+ *
+ * @property \luya\admin\ngrest\ConfigBuilder $list Set the pointer to list and return the ConfigBuilder for this pointer.
+ * @property \luya\admin\ngrest\ConfigBuilder $create Set the pointer to create and return the ConfigBuilder for this pointer.
+ * @property \luya\admin\ngrest\ConfigBuilder $update Set the pointer to update and return the ConfigBuilder for this pointer.
+ * @property \luya\admin\ngrest\ConfigBuilder $aw Set the pointer to aw and return the ConfigBuilder for this pointer.
  * @property boolean $delete Define whether the delete button is availabe or not
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
-class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
+class ConfigBuilder implements ConfigBuilderInterface
 {
     protected $pointer = null;
 
@@ -27,9 +27,19 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
 
     private $_pointersMap = ['list', 'create', 'update', 'delete', 'aw', 'options'];
     
+    public function __construct($ngRestModelClass)
+    {
+        $this->ngRestModelClass = $ngRestModelClass;
+    }
+    
+    /**
+     * @var string When the ConfigBuilder is created, this property must be fulfilled by the constructor:
+     */
+    public $ngRestModelClass = null;
+    
     /**
      * Maig setter function, defines whether a pointer exists or not, if not existing it will be created.
-     * 
+     *
      * @param string $key
      * @param mixed $value
      */
@@ -45,7 +55,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
      *
      * @param string $key
      * @throws Exception
-     * @return \admin\ngrest\ConfigBuilder
+     * @return \luya\admin\ngrest\ConfigBuilder
      */
     public function __get($key)
     {
@@ -63,20 +73,20 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
 
     /**
      * Assign a Plugin to a pointer['field']. Example of using plugin
-     * 
+     *
      * ```php
      * ->create->field('mytext')->textarea(['placeholer' => 'example']);
      * ```
-     * 
+     *
      * this will call
-     * 
+     *
      * ```php
      * $this->addPlugin('textarea', ['placeholder' => 'example']);
      * ```
-     * 
+     *
      * @param unknown $name
      * @param unknown $args
-     * @return \admin\ngrest\ConfigBuilder
+     * @return \luya\admin\ngrest\ConfigBuilder
      */
     public function __call($name, $args)
     {
@@ -91,23 +101,23 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
     
     /**
      * Use the admin ngrest plugin base namespace as default
-     * 
+     *
      * @param unknown $name
      * @return string
      * @since 1.0.0-beta8
      */
     public function prepandAdminPlugin($name)
     {
-        return '\\admin\\ngrest\\plugins\\'.ucfirst($name);
+        return '\\luya\\admin\\ngrest\\plugins\\'.ucfirst($name);
     }
     
     /**
      * Add a Plugin to the current field pointer plugins array.
-     * 
+     *
      * @todo rename to addType
      * @param string $name The name of the ngrest\plugin
      * @param array $args
-     * @return \admin\ngrest\ConfigBuilder
+     * @return \luya\admin\ngrest\ConfigBuilder
      * @since 1.0.0-beta4
      */
     public function addPlugin($name, array $args)
@@ -120,11 +130,11 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
 
     /**
      * Define a field.
-     * 
+     *
      * @param string $name
      * @param string $alias
      * @param boolean $i18n
-     * @return \admin\ngrest\ConfigBuilder
+     * @return \luya\admin\ngrest\ConfigBuilder
      */
     public function field($name, $alias = null, $i18n = false)
     {
@@ -143,11 +153,11 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
 
     /**
      * Define an extra field.
-     * 
+     *
      * @param string $name
      * @param string $alias
      * @param boolean $i18n
-     * @return \admin\ngrest\ConfigBuilder
+     * @return \luya\admin\ngrest\ConfigBuilder
      */
     public function extraField($name, $alias, $i18n = false)
     {
@@ -181,7 +191,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
      * - a string: representing the class name of the object to be created
      * - a configuration array: the array must contain a `class` element which is treated as the object class,
      *   and the rest of the name-value pairs will be used to initialize the corresponding object properties
-     *   
+     *
      * @since 1.0.0-beta4
      */
     public function load($objectType)
@@ -192,8 +202,16 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
         
         $object = Yii::createObject($objectType);
         
+        if (is_string($objectType)) {
+            $config['class'] = $objectType;
+        } else {
+            $config = $objectType;
+        }
+        
+        $config['ngRestModelClass'] = $this->ngRestModelClass;
+        
         $this->config[$this->pointer][$object->getHashName()] = [
-            'objectConfig' => $objectType,
+            'objectConfig' => $config,
             'alias' => $object->getAlias(),
             'icon' => $object->getIcon(),
         ];
@@ -204,7 +222,7 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
     /**
      * Copy from a pointer into another with optional removal of fields, the copie will applied
      * to the current active pointer.
-     * 
+     *
      * @param string $key The pointer to copy from
      * @param array $removeFields
      */
@@ -222,9 +240,9 @@ class ConfigBuilder implements \admin\ngrest\interfaces\ConfigBuilder
 
     /**
      * Return the NgRest Config
-     * 
+     *
      * {@inheritDoc}
-     * @see \admin\ngrest\interfaces\ConfigBuilder::getConfig()
+     * @see \luya\admin\ngrest\interfaces\ConfigBuilder::getConfig()
      */
     public function getConfig()
     {

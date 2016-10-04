@@ -3,6 +3,7 @@
 return [
     'language_name' => 'Deutsch',
     'button_save' => 'Speichern',
+    'button_confirm' => 'Ja',
     'button_abort' => 'Abbrechen',
     'button_send' => 'Senden',
     'login_pre_title' => 'Anmeldung für {title}',
@@ -31,7 +32,7 @@ return [
     'layout_debug_table_value' => 'Wert',
     'layout_filemanager_save_dir' => 'Speichern?',
     'layout_filemanager_remove_dir' => 'Verzeichniss löschen?',
-    'layout_filemanager_remove_dir_not_empty' => 'Das Verzeichnis ist nicht leer - trotzdem löschen?',
+    'layout_filemanager_remove_dir_not_empty' => 'Das Verzeichnis ist nicht leer.<br/>Trotzdem löschen?',
     'layout_filemanager_remove_selected_files' => 'markierte Dateien löschen',
     'layout_filemanager_move_selected_files' => 'Verschieben nach',
     'layout_filemanager_upload_error' => 'Fehler beim Hochladen der Datei',
@@ -146,7 +147,7 @@ return [
 // added translations in 1.0.0-beta7
 
     'login_securetoken_mail_subject' => 'LUYA Sicherheitscode',
-    'login_securetoken_mail' => '<h1>LUYA Sicherheitscode</h1><p>Verwenden Sie den folgenden Sicherheitscode für den Zugriff auf die Administration der Website {url}:</p><p><strong>{token}</strong></p>',
+    'login_securetoken_mail' => '<h1>LUYA Sicherheitscode</h1><p>Verwenden Sie den folgenden Sicherheitscode für den Zugriff auf die Administration der Website {url}:</p><span style="font-size:22px; letter-spacing:2px; padding:5px 10px; display:inline-block; background-color:#F0F0F0;">{token}</span>',
     'login_async_token_error' => 'Der eingegeben Sicherheitscode ist falsch',
     'login_async_token_globalerror' => 'Ein Globaler-Fehler ist enstanden. Bitte kontaktieren Sie Ihren Seitenbetreiber.',
     'ngrest_crud_csv_export_btn' => 'CSV generieren',
@@ -167,4 +168,13 @@ return [
     'aws_tag_list' => 'Liste aller Einträge',
     'dashboard_log_message_add' => 'Einen Datensatz zu <b>{container}</b> hinzugefügt.',
     'dashboard_log_message_edit' => 'Einen Datensatz in <b>{container}</b> bearbeitet.',
+    
+// rc1
+
+    'layout_btn_help' => 'Hilfe',
+    'right_panel_support_title' => 'Informationen &amp; Hilfe',
+    'right_panel_support_tags_title' => 'Tags',
+    'right_panel_support_support_title' => 'Hilfe',
+    'right_panel_support_support_text' => 'Bei Fragen wenden Sie sich bitte an den Webmaster, oder besuchen Sie <a target="_blank" href="https://luya.io">luya.io</a>.',
+
 ];

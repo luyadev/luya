@@ -1,10 +1,10 @@
 <?php
 
-namespace admin\base;
+namespace luya\admin\base;
 
 use Yii;
 use yii\filters\AccessControl;
-use admin\models\UserOnline;
+use luya\admin\models\UserOnline;
 
 /**
  * Base controller for all Admin-Module controllers.

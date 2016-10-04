@@ -1,8 +1,4 @@
-# LUYA 1.0.0-beta8
-
 Today (11. August 2016) beta 8 of the Yii2-based content management system LUYA was released after several weeks' work! The new version provides many important additions and improvements, including:
-
-### important additions and improvements:
 
 - page permissions allow to restrict the pages a group of backend users can edit (permissions can be granted for individual pages as well as sections)
 - status data can now be stored in user settings, like the collapsing of the page tree or the last location in the file manager (which are now remembered by LUYA)
@@ -26,3 +22,8 @@ Today (11. August 2016) beta 8 of the Yii2-based content management system LUYA 
 - a complete overhaul of the administration based on Angular 2 and Bootstrap 4
 
 And, the most important thing of all, a new LUYA logo will be unveiled soon.  ;-)
+
+### Links
+
++ [How to Install](https://luya.io/guide/install)
++ [How to upgrade existing LUYA Version](https://luya.io/guide/install-upgrade)

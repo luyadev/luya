@@ -1,15 +1,15 @@
 <?php
 
-namespace admin\image;
+namespace luya\admin\image;
 
 /**
  * Iterator class for file items.
- * 
+ *
  * @since 1.0.0-beta2
  *
  * @author nadar
  */
-class Iterator extends \admin\storage\IteratorAbstract
+class Iterator extends \luya\admin\storage\IteratorAbstract
 {
     /**
      * Iterator get current element, generates a new object for the current item on access.

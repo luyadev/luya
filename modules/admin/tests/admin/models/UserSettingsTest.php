@@ -3,7 +3,7 @@
 namespace admintests\models;
 
 use admintests\AdminTestCase;
-use admin\models\UserSetting;
+use luya\admin\models\UserSetting;
 
 class UserSettingsTest extends AdminTestCase
 {
@@ -66,6 +66,12 @@ class UserSettingsTest extends AdminTestCase
         $this->assertFalse($model->has('one.two.three'));
         $this->assertFalse($model->has('one.two'));
         $this->assertFalse($model->has('one'));
+    }
+    
+    public function testUnsetRemoveElement()
+    {
+        $model = new UserSetting();
+        $this->assertFalse($model->remove('not_exists'));
     }
     
     public function testArraySetterArrayAccess()

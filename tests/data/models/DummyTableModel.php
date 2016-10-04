@@ -2,7 +2,7 @@
 
 namespace luyatests\data\models;
 
-class DummyTableModel extends \admin\ngrest\base\Model
+class DummyTableModel extends \luya\admin\ngrest\base\NgRestModel
 {
     public static function tableName()
     {

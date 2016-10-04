@@ -7,9 +7,9 @@ use luya\helpers\Url;
 
 /**
  * LUYA web view wrapper.
- * 
+ *
  * Implements additional helper methods to the Yii web controller.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class View extends \yii\web\View
@@ -37,7 +37,7 @@ class View extends \yii\web\View
     
     /**
      * Get the url source for an asset.
-     * 
+     *
      * @todo verify there is already a yii-way solution
      * @param string $assetName
      * @return string
@@ -49,7 +49,7 @@ class View extends \yii\web\View
 
     /**
      * Removes redundant whitespaces (>1) and new lines (>1).
-     * 
+     *
      * @param string $content input string
      * @return string compressed string
      */
@@ -59,7 +59,7 @@ class View extends \yii\web\View
     }
 
     /**
-     * Generate urls helper method. 
+     * Generate urls helper method.
      *
      * @param string $route The route to create `module/controller/action`.
      * @param array $params Optional parameters passed as key value pairing.

@@ -54,4 +54,29 @@ class ArrayHelperTest extends LuyaWebTestCase
         $this->assertSame(3, $typecasted['sub'][3]);
         $this->assertSame('string', $typecasted['sub'][4]);
     }
+    
+    public function testSearch()
+    {
+        $data = [
+            [
+                'name' => 'Foo Bar',
+                'description' => 'same',
+                'id' => 1,
+            ],
+            [
+                'name' => 'Baz foo',
+                'description' => 'same',
+                'id' => 2,
+            ]
+        ];
+        
+        $this->assertSame(1, count(ArrayHelper::search($data, '1')));
+        $this->assertSame(1, count(ArrayHelper::search($data, 1)));
+        $this->assertSame(2, count(ArrayHelper::search($data, 'FOO')));
+        $this->assertSame(2, count(ArrayHelper::search($data, 'foo')));
+        $this->assertSame(2, count(ArrayHelper::search($data, 'Foo')));
+        $this->assertSame(2, count(ArrayHelper::search($data, 'fo')));
+        
+        $this->assertSame(1, count(ArrayHelper::search($data, 'Foo', true)));
+    }
 }

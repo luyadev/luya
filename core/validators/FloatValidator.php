@@ -7,7 +7,7 @@ use yii\validators\Validator;
 
 /**
  * Float Validator
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @author Martin Petrasch <martin.petrasch@zephir.ch>
  * @since 1.0.0-beta8

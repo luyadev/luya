@@ -27,7 +27,7 @@ class m150615_094744_admin_user_login extends Migration
     public function safeUp()
     {
     }
-    
+
     public function safeDown()
     {
     }

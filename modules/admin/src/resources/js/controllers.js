@@ -13,7 +13,9 @@
 				
 				$scope.init = function() {
 					if (!$scope.crud.config.inline) {
-						$scope.crud.toggleUpdate($stateParams.id);
+						if ($scope.crud.data.updateId != $stateParams.id) {
+							$scope.crud.toggleUpdate($stateParams.id);
+						}
 					}
 				}
 				
@@ -42,6 +44,14 @@
 		$scope.AdminLangService = AdminLangService;
 		
 		/**
+		 * As we have changed to ng-if some variables need to get pased by an object in order to keep the parent scope, as ng-if create a new scope.
+		 */
+		$scope.config = {
+			filter: '0', groupBy: 0, groupByField: '0', pagerHiddenByAjaxSearch: false, fullSearchContainer: false,
+			minLengthWarning: false
+		};
+		
+		/**
 		 * 0 = list
 		 * 1 = add
 		 * 2 = edit
@@ -53,29 +63,92 @@
 				$scope.resetData();
 			}
 			if (type == 0 || type == 1) {
-				if (!$scope.inline) {
+				if (!$scope.config.inline) {
 					$state.go('default.route');
 				}
 			}
 			$scope.crudSwitchType = type;
 		};
 		
-		$scope.currentFilter = "0"; // angular select option does wrong type cast, so we cast 0 as string.
+		$scope.changeGroupByField = function() {
+			if ($scope.config.groupByField == 0) {
+				$scope.config.groupBy = 0;
+			} else {
+				$scope.config.groupBy = 1;
+			}
+		}
 		
 		// ng-change event triggers this method
 		// this method is also used withing after save/update events in order to retrieve current selecter filter data.
-		$scope.realoadCrudList = function() {
+		$scope.realoadCrudList = function(pageId) {
 			LuyaLoading.start();
-			if ($scope.currentFilter == 0) {
-				 $scope.loadList();
+			if ($scope.config.filter == 0) {
+				 $scope.loadList(pageId);
 			} else {
-				$http.get($scope.config.apiEndpoint + '/filter?filterName=' + $scope.currentFilter + '&' + $scope.config.apiListQueryString).success(function(data) {
+				var url = $scope.config.apiEndpoint + '/filter?filterName=' + $scope.config.filter + '&' + $scope.config.apiListQueryString;
+				if (pageId) {
+					url = url + '&page=' + pageId;
+				}
+				if ($scope.orderBy) {
+					url = url + '&sort=' + $scope.orderBy.replace("+", "");
+				}
+				$http.get(url).then(function(response) {
+					$scope.setPagination(
+						response.headers('X-Pagination-Current-Page'),
+						response.headers('X-Pagination-Page-Count'),
+						response.headers('X-Pagination-Per-Page'),
+						response.headers('X-Pagination-Total-Count')
+					);
 					LuyaLoading.stop();
-					$scope.data.list = data;
+					$scope.data.list = response.data;
+					$scope.data.listArray = response.data;
 					$scope.reApplyOrder();
 				});
 			}
 		};
+		
+		$scope.$watch('config.searchQuery', function(n, o) {
+			
+			if (n == o) {
+				return;
+			}
+			
+			var blockRequest = false;
+			
+			if ($scope.pager) {
+				if (n.length == 0) {
+					$timeout.cancel($scope.searchPromise);
+					$scope.data.listArray = $scope.data.list;
+					$scope.config.pagerHiddenByAjaxSearch = false;
+				} else {
+					$timeout.cancel($scope.searchPromise);
+					
+					if (blockRequest) {
+						return;
+					}
+					
+					$scope.searchPromise = $timeout(function() {
+						if ($scope.config.fullSearchContainer) {
+							$scope.data.listArray = $filter('filter')($scope.config.fullSearchContainer, n);
+							$scope.config.pagerHiddenByAjaxSearch = true;
+						} else {
+							LuyaLoading.start();
+							blockRequest = true;
+							$http.post($scope.config.apiEndpoint + '/full-response?' + $scope.config.apiListQueryString, {query: n}).success(function(response) {
+								$scope.config.pagerHiddenByAjaxSearch = true;
+								$scope.config.fullSearchContainer = response;
+								$scope.data.listArray = $filter('filter')(response, n);
+								blockRequest = false;
+								LuyaLoading.stop();
+							});
+						}
+					}, 500)
+				}
+			} else {
+				$scope.config.pagerHiddenByAjaxSearch = false;
+				$scope.data.listArray = $filter('filter')($scope.data.list, n);
+			}
+		});
 		
 		/* export */
 		
@@ -104,22 +177,6 @@
 		
 		$scope.parentController = $scope.$parent;
 		
-		// $scope.orderBy = "+id";
-		
-		// $scope.saveCallback = null;
-		
-		$scope.groupBy = 0;
-		
-		$scope.groupByField = "0"; // angular select option does wrong type cast, so we cast 0 as string.
-		
-		$scope.changeGroupByField = function() {
-			if ($scope.groupByField == 0) {
-				$scope.groupBy = 0;
-			} else {
-				$scope.groupBy = 1;
-			}
-		}
-		
 		$scope.applySaveCallback = function() {
 			if ($scope.saveCallback != 0 && $scope.saveCallback != null && $scope.saveCallback != false) {
 				$injector.invoke($scope.saveCallback, this);
@@ -147,11 +204,15 @@
 		
 		$scope.changeOrder = function(field, sort) {
 			$scope.orderBy = sort + field;
-			$scope.data.list = $filter('orderBy')($scope.data.list, sort + field);
+			if ($scope.pager && !$scope.config.pagerHiddenByAjaxSearch) {
+				$scope.realoadCrudList(1);
+			} else {
+				$scope.data.listArray = $filter('orderBy')($scope.data.listArray, sort + field);
+			}
 		};
 		
 		$scope.reApplyOrder = function() {
-			$scope.data.list = $filter('orderBy')($scope.data.list, $scope.orderBy);
+			$scope.data.listArray = $filter('orderBy')($scope.data.listArray, $scope.orderBy);
 		};
 		
 		$scope.activeWindowReload = function() {
@@ -210,13 +271,13 @@
 		
 		$scope.toggleUpdate = function(id) {
 			$scope.resetData();
-			$scope.data.updateId = id;
 			$http.get($scope.config.apiEndpoint + '/'+id+'?' + $scope.config.apiUpdateQueryString).success(function(data) {
 				$scope.data.update = data;
 				$scope.switchTo(2);
-				if (!$scope.inline) {
+				if (!$scope.config.inline) {
 					$state.go('default.route.detail', {id : id});
 				}
+				$scope.data.updateId = id;
 			}).error(function(data) {
 				AdminToastService.error(i18n['js_ngrest_error'], 2000);
 			});
@@ -230,14 +291,14 @@
 			$scope.switchTo(0, true);
 		};
 		
-		$scope.activeWindowModal = false;
+		$scope.activeWindowModal = true;
 		
 		$scope.openActiveWindow = function() {
-			$scope.activeWindowModal = true;
+			$scope.activeWindowModal = false;
 		};
 		
 		$scope.closeActiveWindow = function() {
-			$scope.activeWindowModal = false;
+			$scope.activeWindowModal = true;
 		};
 		
 		$scope.highlightId = 0;
@@ -258,7 +319,12 @@
 		
 		$scope.submitUpdate = function () {
 			$http.put($scope.config.apiEndpoint + '/' + $scope.data.updateId, angular.toJson($scope.data.update, true)).success(function(data) {
-				$scope.realoadCrudList();
+				if ($scope.pager) {
+					$scope.realoadCrudList($scope.pager.currentPage);
+				} else {
+					$scope.realoadCrudList();
+				}
+				
 				$scope.applySaveCallback();
 				AdminToastService.success(i18n['js_ngrest_rm_update'], 2000);
 				$scope.switchTo(0, true);
@@ -288,23 +354,74 @@
 			});
 		}
 		
-		$scope.loadList = function() {
+		$scope.loadList = function(pageId) {
 			LuyaLoading.start();
 			$http.get($scope.config.apiEndpoint + '/services').success(function(serviceResponse) {
 				$scope.service = serviceResponse;
-				$http.get($scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString).success(function(data) {
+				var url = $scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString;
+				if (pageId !== undefined) {
+					url = url + '&page=' + pageId;
+				}
+				if ($scope.orderBy) {
+					url = url + '&sort=' + $scope.orderBy.replace("+", "");
+				}
+				$http.get(url).then(function(response) {
+					$scope.setPagination(
+						response.headers('X-Pagination-Current-Page'),
+						response.headers('X-Pagination-Page-Count'),
+						response.headers('X-Pagination-Per-Page'),
+						response.headers('X-Pagination-Total-Count')
+					);
+
+					// return data
 					LuyaLoading.stop();
-					$scope.data.list = data;
+					$scope.data.list = response.data;
+					$scope.data.listArray = response.data;
 					$scope.reApplyOrder();
 				});
 			});
 		};
 		
-		$scope.service = [];
+		$scope.service = false;
 		
 		$scope.resetData = function() {
 			$scope.data.create = angular.copy({});
 			$scope.data.update = angular.copy({});
+		}
+		
+		$scope.pagerPrevClick = function() {
+			if ($scope.pager.currentPage != 1) {
+				$scope.realoadCrudList(parseInt($scope.pager.currentPage)-1);
+			}
+		};
+		
+		$scope.pagerNextClick = function() {
+			if ($scope.pager.currentPage != $scope.pager.pageCount) {
+				$scope.realoadCrudList(parseInt($scope.pager.currentPage)+1);
+			}
+		};
+		
+		$scope.pager = false;
+		
+		$scope.setPagination = function(currentPage, pageCount, perPage, totalItems) {
+			if (currentPage != null && pageCount != null && perPage != null && totalItems != null) {
+				
+				var i = 1;
+				var urls = [];
+				for (i = 1; i <= pageCount; i++) {
+					urls.push(i);
+				}
+				
+				$scope.pager = {
+					'currentPage': currentPage,
+					'pageCount': pageCount,
+					'perPage': perPage,
+					'totalItems': totalItems,
+					'pages': urls,
+				};
+			} else {
+				$scope.pager = false;
+			}
 		}
 		
 		$scope.data = {
@@ -314,8 +431,6 @@
 			list : {},
 			updateId : 0
 		};
-		
-		$scope.config = {};
 	});
 	
 // activeWindowController.js
@@ -596,6 +711,20 @@
 		$scope.reload = function() {
 			CacheReloadService.reload();
 		}
+	
+		$scope.sidePanelUserMenu = false;
+		
+		$scope.sidePanelHelp = false;
+		
+		$scope.toggleHelpPanel = function() {
+			$scope.sidePanelHelp = !$scope.sidePanelHelp;
+			$scope.sidePanelUserMenu = false;
+		};
+		
+		$scope.toggleUserPanel = function() {
+			$scope.sidePanelUserMenu = !$scope.sidePanelUserMenu;
+			$scope.sidePanelHelp = false;
+		};
 		
 	    $scope.userMenuOpen = false;
 	

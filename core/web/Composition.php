@@ -10,11 +10,11 @@ use luya\web\CompositionAfterSetEvent;
 
 /**
  * LUYA Composition Component to provide i18n/language handling.
- * 
+ *
  * @property string $full Return `getFull()` method represents full composition
  * @property string $defaultLangShortCode Return default defined language shord code
  * @property string $language Return wrapper of getKey('langShortCode')
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Composition extends Component implements \ArrayAccess
@@ -44,7 +44,7 @@ class Composition extends Component implements \ArrayAccess
      * @var array Can override the localisation value used for php internal `setlocale()` method for specific language. For example
      * the language is de but the it should use the locale charset `de_CH.utf` (locale -a will return all locales installed on the server)
      * you can define them inside an array where key is the language and value the locale value to be used.
-     * 
+     *
      * ```php
      * public $local = [
      *    'de' => 'de_CH.utf',
@@ -60,7 +60,7 @@ class Composition extends Component implements \ArrayAccess
      * The fullqualified composer key will be stored in `$request->get('urlPrefixCompositionKey')`.
      *
      * Examples of how to use urlPrefixComposition
-     * 
+     *
      * ```php
      * $urlPrefixComposition = '<langShortCode:[a-z]{2}>/<countryShortCode:[a-z]{2}>'; // de/ch; fr/ch
      * ```
@@ -75,16 +75,16 @@ class Composition extends Component implements \ArrayAccess
     /**
      * Define the default behavior for differnet host info schemas, if the host info is not found
      * the default behvaior via `$default` will be used.
-     * 
+     *
      * @var array An array where the key is the host info and value the array with the default configuration .e.g.
-     * 
+     *
      * ```
      * 'hostInfoMapping' => [
      *     'http://mydomain.com' => ['langShortCode' => 'en'],
      *     'http://meinedomain.de' => ['langShortCode' => 'de'],
      * ],
      * ```
-     * 
+     *
      * The above configuration must be defined in your compostion componeont configuration in your config file.
      */
     public $hostInfoMapping = [];
@@ -96,9 +96,9 @@ class Composition extends Component implements \ArrayAccess
     
     private $_compositionKeys = [];
 
-    /**    
+    /**
      * Class constructor, to get data from DiContainer.
-     * 
+     *
      * @param \luya\web\Request $request
      * @param array             $config
      */
@@ -110,7 +110,7 @@ class Composition extends Component implements \ArrayAccess
 
     /**
      * Return the the default langt short code.
-     * 
+     *
      * @return string
      */
     public function getDefaultLangShortCode()
@@ -138,7 +138,7 @@ class Composition extends Component implements \ArrayAccess
         $this->on(self::EVENT_AFTER_SET, [$this, 'eventAfterSet']);
         // resolved data
         $resolve = $this->getResolvedPathInfo($this->request);
-        // set initializer comosition 
+        // set initializer comosition
         foreach ($resolve['compositionKeys'] as $key => $value) {
             $this->setKey($key, $value);
         }
@@ -149,7 +149,7 @@ class Composition extends Component implements \ArrayAccess
      * This event will method will triggere after setKey method is proccessed. The
      * main purpose of this function to change the localisation based on the required
      * key 'langShortCode'.
-     * 
+     *
      * @param luya\web\CompositionAfterSetEvent $event
      */
     public function eventAfterSet($event)
@@ -165,7 +165,7 @@ class Composition extends Component implements \ArrayAccess
      *
      * @param \yii\web\Request $request
      * @return array An array containing the route and the resolvedValues. Example array output when request path is `de/hello/world`:
-     * 
+     *
      * ```php
      * [
      *     'route' => 'hello/world',
@@ -263,7 +263,7 @@ class Composition extends Component implements \ArrayAccess
     
     /**
      * create a route but ensures if composition is hidden anywho.
-     * 
+     *
      * @param array $overrideKeys
      * @return string
      */
@@ -275,7 +275,7 @@ class Composition extends Component implements \ArrayAccess
     /**
      * Create compositon route based on the provided keys (to override), if no keys provided
      * all the default values will be used.
-     * 
+     *
      * @param array $overrideKeys
      * @return string
      */
@@ -320,7 +320,7 @@ class Composition extends Component implements \ArrayAccess
 
     /**
      * Remove the composition full parterns from a given route
-     * 
+     *
      * @param string $route
      * @return string route cleanup from the compositon pattern (without).
      */

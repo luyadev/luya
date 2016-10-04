@@ -1,49 +1,50 @@
 <?php
 
-namespace admin\ngrest\plugins;
+namespace luya\admin\ngrest\plugins;
 
 use Yii;
-use admin\ngrest\base\Model;
+use luya\admin\ngrest\base\NgRestModel;
+use luya\admin\ngrest\base\Plugin;
 
 /**
  * Create multi select input for a relation table.
- * 
+ *
  * Example usage:
- * 
+ *
  * Define an extra propertie:
- * 
+ *
  * ```php
- * 
+ *
  * public $groups = [];
- * 
+ *
  * public function extraFields()
  * {
  *     return ['groups'];
  * }
- * 
+ *
  * ```
- * 
+ *
  * configure the extra field with `ngrestExtraAttributeTypes`:
- * 
+ *
  * ```php
  * public function ngrestExtraAttributeTypes()
  * {
  *      'groups' => [
- *          'checkboxRelation', 
- *       	'model' => User::className(), 
- *       	'refJoinTable' => 'admin_user_group', 
- *       	'refModelPkId' => 'group_id', 
- *       	'refJoinPkId' => 'user_id', 
- *       	'labelFields' => ['firstname', 'lastname', 'email'], 
+ *          'checkboxRelation',
+ *       	'model' => User::className(),
+ *       	'refJoinTable' => 'admin_user_group',
+ *       	'refModelPkId' => 'group_id',
+ *       	'refJoinPkId' => 'user_id',
+ *       	'labelFields' => ['firstname', 'lastname', 'email'],
  *       	'labelTemplate' =>  '%s %s (%s)'
  *       ],
  * }
  * ```
- * 
- * @property string|object $model 
+ *
+ * @property string|object $model
  * @author nadar
  */
-class CheckboxRelation extends \admin\ngrest\base\Plugin
+class CheckboxRelation extends Plugin
 {
     private $_model;
     
@@ -61,8 +62,8 @@ class CheckboxRelation extends \admin\ngrest\base\Plugin
     {
         parent::init();
         
-        $this->addEvent(Model::EVENT_AFTER_INSERT, [$this, 'afterSaveEvent']);
-        $this->addEvent(Model::EVENT_AFTER_UPDATE, [$this, 'afterSaveEvent']);
+        $this->addEvent(NgRestModel::EVENT_AFTER_INSERT, [$this, 'afterSaveEvent']);
+        $this->addEvent(NgRestModel::EVENT_AFTER_UPDATE, [$this, 'afterSaveEvent']);
     }
     
     public function setModel($className)

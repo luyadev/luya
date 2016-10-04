@@ -1,6 +1,6 @@
 <?php
 
-namespace admin\importers;
+namespace luya\admin\importers;
 
 use Yii;
 use luya\console\Importer;

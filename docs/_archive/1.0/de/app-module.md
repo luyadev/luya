@@ -9,7 +9,7 @@ Ein Projekt Modul kann viele Aufgaben übernehmen. Es kann Datenbank-Logik über
 
 Einbinden
 ---------
-Um ein Modul einzubinden öffnen Sie die aktuelle Konfiguration (`prep.php` oder `prod.php`) und erweitern den `modules` Abschnitt um ihr Modul:
+Um ein Modul einzubinden öffnen Sie die aktuelle Konfiguration (`env-prep.php` oder `env-prod.php`) und erweitern den `modules` Abschnitt um ihr Modul:
 
 ```php
 $config = [

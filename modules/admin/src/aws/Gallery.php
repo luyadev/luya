@@ -1,14 +1,15 @@
 <?php
 
-namespace admin\aws;
+namespace luya\admin\aws;
 
 use Yii;
+use luya\admin\ngrest\base\ActiveWindow;
 
 /**
  * Create an Active Window where you can select Images and store them into a Ref Table.
  *
  * Usage example of registering Gallery Active Window:
- * 
+ *
  * ```php
  * $config->aw->load([
  *     'class' => 'admin\aws\Gallery',
@@ -20,7 +21,7 @@ use Yii;
  * ```
  *
  * The above example would required the following migration code for the ref table:
- * 
+ *
  * ```php
  * $this->createTable("gallery_album_image", [
  *     "image_id" => "int(11) NOT NULL default 0",
@@ -30,7 +31,7 @@ use Yii;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class Gallery extends \admin\ngrest\base\ActiveWindow
+class Gallery extends ActiveWindow
 {
     public $refTableName = null;
 
