@@ -5,6 +5,7 @@ namespace luya\console\commands;
 use Yii;
 use luya\console\Command;
 use yii\db\Schema;
+use yii\helpers\Inflector;
 
 /**
  * Base Crud Controller
@@ -16,6 +17,10 @@ use yii\db\Schema;
  */
 abstract class BaseCrudController extends Command
 {
+    public $useSchemaName = true;
+    
+    public $generateLabelsFromComments = false;
+    
 	public function getSqlTablesArray()
 	{
 		$names = Yii::$app->db->schema->tableNames;
