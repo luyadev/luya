@@ -1,7 +1,7 @@
 Upgrading Luya
 ==============
 
-This page describes how to update an existing luya instance to the newest version. The current version of LUYA is `1.0.0-beta8`.
+This page describes how to update an existing luya instance to the newest version. The current version of LUYA is `1.0.0-RC1`.
 
 ### Composer
 
@@ -9,9 +9,9 @@ change the luya versions for each modules and luya itself in you your composer.j
 
 ```
 "require": {
-    "luyadev/luya-core" : "1.0.0-rc1",
-    "luyadev/luya-module-cms" : "1.0.0-rc1",
-    "luyadev/luya-module-admin" : "1.0.0-rc1"
+    "luyadev/luya-core" : "1.0.0-RC1",
+    "luyadev/luya-module-cms" : "1.0.0-RC1",
+    "luyadev/luya-module-admin" : "1.0.0-RC1"
 }
 ```
 
@@ -23,7 +23,7 @@ composer update
 
 Now you got a new composer lock file, which can be used for other team members to install the new luya version.
 
-> If you get a composer update error, make sure you have set `"minimum-stability" : "beta"`.
+> If you get a composer update error, make sure you have set `"minimum-stability" : "RC"`.
 
 ### Console
 

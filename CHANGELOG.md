@@ -3,7 +3,7 @@ LUYA CHANGELOG
 
 The changelog contains informations about bug fixes, new features or bc breaking code related to a GitHub issue. In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-1.0.0-rc1 (in progress)
+1.0.0-RC1 (04.10.2016)
 -----------------------
 
 - [#806](https://github.com/luyadev/luya/issues/806#issuecomment-248597369) **[BC BREAK]** Renamed to `configs/server.php` to `configs/env.php`, new projects will also have the env prefix for the config names.

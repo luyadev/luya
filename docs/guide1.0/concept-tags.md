@@ -1,6 +1,6 @@
 # Tags concept
 
-> since 1.0.0-rc1
+> since 1.0.0-RC1
 
 The LUYA tags are a very strong usefull bb code similiar tag parsing concept. You can just add your own tag within an application or ship them directly with modules. The basic idea behind the tag parser is to enhance the Makrkdown syntax by your custom ideas.
 

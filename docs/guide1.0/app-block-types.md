@@ -72,7 +72,7 @@ There are several types you can use to generate your block controlls. Each class
 
 ## Injectors
 
-> Injectors are available since 1.0.0-rc1
+> Injectors are available since 1.0.0-RC1
 
 A very common scenario is to collect data from an active record model, display the items and select them (via select or checkbox for example) and then access the selected model rows via extraVars. To achieve this a lot of code is required inside your blocks, which is good to understand what and why things happens. But if you need to get results quickly injectors are going to help you manage this kind of tasks.
 

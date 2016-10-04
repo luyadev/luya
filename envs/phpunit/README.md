@@ -10,4 +10,4 @@ This environment exists to build the sql files for new releases based on a clean
 5. `php index.php import`
 6. `php index.php setup --email=test@luya.io --password=luyaio --firstname=John --lastname=Doe --interactive=0`
 7. `php index.php data/setup`
-8. Export the generate Database `luya_env_phpunit`
+8. Export the generate Database `luya_env_phpunit` rename to 1.0.0-RC1.sql

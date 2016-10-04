@@ -3,7 +3,7 @@ LUYA UPGRADE
 
 This document will help you upgrading from a LUYA Version into another.
 
-1.0.0-rc1 (in progress)
+1.0.0-RC1 (04.10.2016)
 -----------
 
 As part of this release all module will be renamed. Frontend and admin module will be merged together. All module classes will get the prefix `luya`. So in order to upgrade your current modules, filters, blocks, blockgroups, models, etc. you have to rename a lot of classes of your project files:
