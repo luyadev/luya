@@ -1,22 +1,24 @@
-We are proud to anounce the first release candidate of the LUYA system. We have been working very hard in the last few weeks to release this version. Below the most significant changes and introductions.
+We are proud to announce the first release candidate of LUYA after weeks of intensive work. These are the most significant changes and additions:
 
-> Attention: If you want to upgrade to the newest release candidate there are a few breaking changes you have to take care of. But as now we have made a stable, reliable platform for the upcoming release candidates and the final release!
++ The administration is loading at least twice as fast as before
++ Composer update has been sped up significantly by removing old depencies (including bower depencies)
++ Core classes and modules have been organized in an optimized structure
++ Configuration files are named differently to improve clarity
++ cms, news and crawler modules now combine admin and frontend submodules so that only one composer package is required
++ Introduced tag mechanism to allow for special codes in text fields that are parsed and replaced with any thinkable type of content
++ Introduced block injectors that allow to inject related and preprocessed data into a CMS block (the link inspector, as an example, can provide an URL based on a link value stored within a block)
++ Introduced the Lazyload widget that allows to load images only when they scroll into view
++ CMS pages can now be copied with all their blocks and languages
++ textareas do now automatically resize their height according to their content
++ NgRest Crud lists automatically activate pagination when there are more than 250 rows (this behavior can be configured)
++ Search results can now be grouped by content type (this is configured adding CRAWL_GROUP meta information to the source code)
++ Tons of bug fixes and small improvements
 
-+ 2 times faster administration area!
-+ Added the ability to define a GROUP within the crawler.
-+ All Textareas does now auto resize the height based on its content.
-+ Ability to full copy a page (with all its languages and pages)
-+ Brand new Lazyload widget allows you to lazy load images.
-+ NgRest Crud lists enables a pagination when there are more then 250 rows to display you can also configure and disable this behavior.
-+ Introducing Block Injectors ...
-+ Introducing the Tags mechanism ...
-+ Changed the concept of how to name configuration files.
-+ Completle rearranged all core classes and modules.
-+ Dropped the requirement of two composer packages in cms, news, crawler modules, the are now splitted inside the module in folders.
-+ Speedup the composer update process by removing very old depencies which still required bower depencies.
-+ tons of bugs and small improvments
+> Attention: If you want to upgrade to the first release candidate, there are a few breaking changes you have to take care of. With these changes we now have a stable and reliable foundation for the upcoming release candidates and the final release.
 
-Please check the full [Changelog]() and even more import the [Upgrading]() Guide. If you have any problem or question regarding the upgrade process don't hesitate to contact us on [Gitter]() or create an [Issue on GitHub]().
+Please check the full [Changelog]() and the [Upgrading]() Guide.
 
-4th, October 2016
-the LUYA developer team
+If you have any problems or questions regarding the upgrade process, don't hesitate to contact us on [Gitter]() or to create an [Issue on GitHub]().
+
+4 October 2016
+LUYA developer team
