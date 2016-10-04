@@ -157,4 +157,10 @@ return [
     'block_group_basic_elements' => 'Общие',
     'block_group_project_elements' => 'Проект',
     'block_group_text_elements' => 'Текста',
+
+    // rc1
+    'block_table_enable_markdown' => 'Включить Markdown разметку',
+    'block_layout_row_column_css_class' => 'CSS классы для div шаблона',
+    'block_image_cfg_css_class' => 'CSS классы для изображений',
+    'block_cfg_additonal_css_class' => 'CSS классы',
 ];

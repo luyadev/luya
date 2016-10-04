@@ -169,4 +169,14 @@ return [
     'aws_tag_list' => 'Список всех записей',
     'dashboard_log_message_add' => 'Добавить новую строку в <b>{container}</b>.',
     'dashboard_log_message_edit' => 'Обновить существующую строку в <b>{container}</b>.',
+
+    // rc1
+
+    'layout_btn_help' => 'Помощь',
+    'right_panel_support_title' => 'Информация &amp; помощь',
+    'right_panel_support_tags_title' => 'Теги',
+    'right_panel_support_support_title' => 'Поддержка',
+    'right_panel_support_support_text' => 'Если у вас возникли вопросы, то обратитесь к своему вебмастеру или проконсультируйтесь на <a target="_blank" href="https://luya.io">luya.io</a>.',
 ];
+
+

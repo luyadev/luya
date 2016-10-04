@@ -155,5 +155,10 @@ return [
     'block_group_favorites' => 'Избранные',
     'button_create_version' => 'Создать версию',
     'button_update_version' => 'Обновить версию',
-    'menu_group_item_env_permission' => 'Страница прав'
+    'menu_group_item_env_permission' => 'Страница прав',
+
+    // rc1
+
+    'page_update_actions_deepcopy_text' => 'Создать копию текущей страницы вместе с контентом. Все языки будут скопированы, но только опубликованные версии.',
+    'page_update_actions_deepcopy_btn' => 'Создать копию',
 ];
