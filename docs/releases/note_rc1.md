@@ -1,4 +1,4 @@
-We are proud to announce the first release candidate of LUYA after weeks of intensive work. These are the most significant changes and additions:
+We are proud to announce the first release candidate (1.0.0-RC1) of LUYA after weeks of intensive work. These are the most significant changes and additions:
 
 + The administration is loading at least twice as fast as before
 + Composer update has been speed up significantly by removing old dependencies (including bower dependencies)
