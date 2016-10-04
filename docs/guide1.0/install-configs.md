@@ -1,7 +1,7 @@
 Configurations
 ===========
 
-LUYA includes, since `1.0.0-beta6`, several configuration files.  These configuration files are used to configure the project for several environments.
+LUYA includes, several configuration files.  These configuration files are used to configure the project for several environments.
 Below are all these configs and environments explained.
 
 ## Overview

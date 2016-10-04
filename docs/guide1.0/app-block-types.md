@@ -81,7 +81,7 @@ Injectors can, as the name already says, inject data into your `config()` method
 Lets assume we have news articles from an ActiveRecord model you want to select insdie the administration area and return the selected model rows, now you can defined via the `injectors()` method a new injector:
 
 ```php
-class MyBlock extends \cmsadmin\base\PhpBlock
+class MyBlock extends \luya\cms\base\PhpBlock
 {
 	// ...
 	

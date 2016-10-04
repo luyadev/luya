@@ -77,7 +77,7 @@ return [
          * you have to make sure the mail component is configured correctly, you can test with console command `./vendor/bin/luya health/mailer`.
          */
         'admin' => [
-            'class' => 'admin\Module',
+            'class' => 'luya\admin\Module',
             'secureLogin' => false, // when enabling secure login, the mail component must be proper configured otherwise the auth token mail will not send.
         ],
         
@@ -85,17 +85,14 @@ return [
          * You can use the cms module if you like.
          */
         'cms' => [
-            'class' => 'cms\Module',
-            'assets' => [
-                'app\assets\ResourcesAsset'
-            ],
+            'class' => 'luya\cms\frontend\Module',
             'enableCompression' => true, // compressing the cms output (removing white spaces and newlines)
         ],
         
         /*
          * This is the administration module for the `cms` module.
          */
-        'cmsadmin' => 'cmsadmin\Module',
+        'cmsadmin' => 'luya\cms\admin\Module',
         
     ],
     'components' => [
@@ -164,9 +161,7 @@ In order to get latest development build (dev-master) for the luya modules and c
         "luyadev/luya-core" : "^1.0@dev",
         "luyadev/luya-module-admin" : "^1.0@dev",
         "luyadev/luya-module-cms" : "^1.0@dev",
-        "luyadev/luya-module-cmsadmin" : "^1.0@dev",
         "luyadev/luya-module-crawler" : "^1.0@dev",
-        "luyadev/luya-module-crawleradmin" : "^1.0@dev",
         "luyadev/luya-module-payment" : "^1.0@dev",
         "luyadev/luya-module-exporter" : "^1.0@dev",
         "luyadev/luya-deployer" : "^1.0@dev"

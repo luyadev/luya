@@ -9,15 +9,13 @@ With those few steps you can install *LUYA* on your Webserver. To install *LUYA*
 First of all you have to install the global `fxp/composer-asset-plugin` plugin, which is required by Yii to install bower packages via composer. To global install the plugin open your Terminal and run the following code:
 
 ```sh
-composer global require "fxp/composer-asset-plugin:^1.0.0"
+composer global require "fxp/composer-asset-plugin:~1.2"
 ```
-
-> Since version 1.2 of the fxp/composer-asset-plugin which is required by Yii2 do not forget to set `"asset-pattern-skip-version": "(-build|-patch)"` in your `extras` section of your composer.json. Otherwise the composer update command will take almost forever.
 
 After setting up composer, we execute the composer `create-project` command to checkout the **luya-kickstarter** application, an *out of the box* setup you can directly run your website. We recommend to run the `create-project` command directly from your htdocs/webserver folder:
 
 ```sh
-composer create-project luyadev/luya-kickstarter:1.0.0-beta8
+composer create-project luyadev/luya-kickstarter:1.0.0-rc1
 ```
 
 > Note: During the installation Composer may ask for your Github login credentials. This is normal because Composer needs to get enough API rate-limit to retrieve the dependent package information from Github. For more details, please refer to the [Composer documentation](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens).
@@ -85,7 +83,6 @@ Maybe you like to test the newest features of LUYA, so you can use the fowllowin
 "require": {
     "luyadev/luya-core" : "^1.0@dev",
     "luyadev/luya-module-admin" : "^1.0@dev",
-    "luyadev/luya-module-cms" : "^1.0@dev",
-    "luyadev/luya-module-cmsadmin" : "^1.0@dev"
+    "luyadev/luya-module-cms" : "^1.0@dev"
 }
 ```

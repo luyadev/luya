@@ -81,8 +81,8 @@ Example response for multiple importer classes:
 public function import(\luya\console\interfaces\ImportController $import)
 {
     return [
-        '\\cmsadmin\\importers\\BlockImporter',
-        '\\cmsadmin\\importers\\CmslayoutImporter',
+        '\\luya\\cms\\importers\\BlockImporter',
+        '\\luya\\cms\\importers\\CmslayoutImporter',
     ];
 }
 ```

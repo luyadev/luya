@@ -8,7 +8,7 @@ What are Blocks? Blocks are elements used in the CMS Module to display and confi
 
 You can add blocks to your project application or you can also add them to a module, in any case the folder name where the blocks are stored must named as **blocks**. Additionaly blocks should have the suffix `Block`. For example we build a block `TextTransformBlock` and store it in `app/blocks` or `app/modules/yourmodule/blocks`.
 
-> In 1.0.0-beta8 the new *PHP BLOCKS* are introduced. This allows you to use PHP Views instead of TWIG Templates. In order to use The new PHPBlocks you can extend the block from `cmsadmin\base\PhpBlock`. PhpBlocks does automatically requires a view file and the `twigAdmin()` is replaced by `admin()` method.
+> In 1.0.0-beta8 the new *PHP BLOCKS* are introduced. This allows you to use PHP Views instead of TWIG Templates. In order to use The new PHPBlocks you can extend the block from `luyya\cms\base\PhpBlock`. PhpBlocks does automatically requires a view file and the `twigAdmin()` is replaced by `admin()` method.
 
 This is what the `TextTransformBlock` could looke like in your code:
 
@@ -16,7 +16,7 @@ This is what the `TextTransformBlock` could looke like in your code:
 <?php
 namespace app\blocks;
 
-class TextTransformBlock extends \cmsadmin\base\PhpBlock
+class TextTransformBlock extends \luya\cms\base\PhpBlock
 {
     public function icon()
     {
@@ -90,7 +90,7 @@ This will add or update the block into the cms system. If you rename the block o
 When you add a block inside of a module you have to define the `$module` properties, this is will make sure the view files are found in the correct folder. This way you can redistributed blocks with your own package for other users.
 
 ```php
-class TestBlock extends \cmsadmin\base\Block
+class TestBlock extends \luya\cms\base\PhpBlock
 {
     public $module = 'mymodule';
 }
@@ -98,14 +98,14 @@ class TestBlock extends \cmsadmin\base\Block
 
 #### Override default blocks
 
-Sometimes you just want to change the default behavior/template of systems blocks, you can always override all blocks provided from the system by adding a twig template with the name of the block in your project application views folder. Assuming you want to override the **template** of the `TextBlock` which is provided by default from the LUYA cms core. To do so go into your application view folder `views/blocks` and add a twig template with the name of the block, in this case `TextBlock.twig` now the system will pick and render this template first. In addition to this method you could also make a custom block and extend from the existing Text block. `class MyTextBlock extends \cmsadmin\blocks\TextBlock` and override the `twigFrontend()` method so you have your own output.
+Sometimes you just want to change the default behavior/template of systems blocks, you can always override all blocks provided from the system by adding a twig template with the name of the block in your project application views folder. Assuming you want to override the **template** of the `TextBlock` which is provided by default from the LUYA cms core. To do so go into your application view folder `views/blocks` and add a twig template with the name of the block, in this case `TextBlock.twig` now the system will pick and render this template first. In addition to this method you could also make a custom block and extend from the existing Text block. `class MyTextBlock extends \luya\cms\frontend\blocks\TextBlock` and override the `twigFrontend()` method so you have your own output.
 
 ## Caching
 
 To speed up your system you can enable the cache for each block, to enable the caching you have to define a [caching component](http://www.yiiframework.com/doc-2.0/guide-caching-data.html#cache-components) in your config. By default block caching is disabled for all blocks.
 
 ```php
-class MyTestBlock extends \cmsadmin\base\Block
+class MyTestBlock extends \luya\cms\base\PhpBlock
 {
     public $cacheEnabled = true;
 }
@@ -132,7 +132,7 @@ the following keys are available:
 + *id* Return the unique identifier from the cms context
 + *blockId* Returns the id of this block (unique identifier)
 + *context* Returns frontend or backend to find out in which context you are.
-+ *pageObject* Returns the `cmsadmin\models\NavItem` Object where you can run `getNav()` to retrievew the Nav Object.
++ *pageObject* Returns the `luya\cms\models\NavItem` Object where you can run `getNav()` to retrievew the Nav Object.
 + *isFirst* Returns whether this block is the first in its placeholder or not.
 + *isLast* Return whether his block is the last in its placeholder or not.
 + *index* Returns the number of the index/poisition within this placheholder.
@@ -203,7 +203,7 @@ To add new blockgroups create folder in your `@app` namespace, or inside a modul
 <?php
 namespace app\blockgroups;
 
-class MySuperGroup extends \cmsadmin\base\BlockGroup
+class MySuperGroup extends \luya\cms\base\BlockGroup
 {
     public function identifier()
     {
@@ -235,7 +235,7 @@ public function getBlockGroup()
 
 You can also use one of the predefined group block class:
 
-+ `\cmsadmin\blockgroups\MainGroup::className()` (this is default group for all blocks)
-+ `\cmsadmin\blockgroups\LayoutGroup::className()`
-+ `\cmsadmin\blockgroups\ProjectGroup::className()`
-+ `\cmsadmin\blockgroups\DevelopmentGroup::className()`
++ `\luya\cms\blockgroups\MainGroup::className()` (this is default group for all blocks)
++ `\luya\cms\blockgroups\LayoutGroup::className()`
++ `\luya\cms\blockgroups\ProjectGroup::className()`
++ `\luya\cms\blockgroups\DevelopmentGroup::className()`

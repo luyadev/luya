@@ -97,8 +97,6 @@ Yii::$app->page->properties;
 
 ### in Menus
 
-> since 1.0.0-beta8
-
 A very common scenario is to add properties to an existing menu item like an image which should be used for the navigation instead of text. To collect the property for a menu item the menu component does have a `getProperty($varName)` method on each item. For example collecting the menu and retrieving the page property `navImage` could be done as followed:
 
 ```php

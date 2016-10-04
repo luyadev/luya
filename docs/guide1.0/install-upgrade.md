@@ -3,18 +3,15 @@ Upgrading Luya
 
 This page describes how to update an existing luya instance to the newest version. The current version of LUYA is `1.0.0-beta8`.
 
-> Since version 1.2 of the fxp/composer-asset-plugin which is required by Yii2 do not forget to set `"asset-pattern-skip-version": "(-build|-patch)"` in your `extras` section of your composer.json. Otherwise the composer update command will take almost forever.
-
 ### Composer
 
 change the luya versions for each modules and luya itself in you your composer.json
 
 ```
 "require": {
-    "luyadev/luya-core" : "1.0.0-beta8",
-    "luyadev/luya-module-cms" : "1.0.0-beta8",
-    "luyadev/luya-module-cmsadmin" : "1.0.0-beta8",
-    "luyadev/luya-module-admin" : "1.0.0-beta8"
+    "luyadev/luya-core" : "1.0.0-rc1",
+    "luyadev/luya-module-cms" : "1.0.0-rc1",
+    "luyadev/luya-module-admin" : "1.0.0-rc1"
 }
 ```
 
