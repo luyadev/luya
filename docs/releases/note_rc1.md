@@ -16,7 +16,7 @@ We are proud to announce the first release candidate (1.0.0-RC1) of LUYA after w
 
 > Attention: If you want to upgrade to the first release candidate, there are a few breaking changes you have to take care of. With these changes done, we now have a stable and reliable foundation for the upcoming release candidates and the final release.
 
-Please check the full [Changelog](https://github.com/luyadev/luya/blob/master/CHANGELOG.md) and the [Upgrading](https://github.com/luyadev/luya/blob/master/UPGRADE.md) Guide.
+Please check the full [Changelog](https://github.com/luyadev/luya/blob/master/CHANGELOG.md) and the [Upgrading](https://luya.io/guide/install-upgrade) Guide.
 
 If you have any problems or questions regarding the upgrade process, don't hesitate to contact us on [Gitter](gitter.im/luyadev/luya) or to create an [Issue on GitHub](https://github.com/luyadev/luya/issues).
 
