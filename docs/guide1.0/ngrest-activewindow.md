@@ -134,7 +134,7 @@ zaa.bootstrap.register('InlineController', function($scope, $controller) {
 
 After the the Active Window response from function `addToList` has recieved, the active window well be reloaded. This is just a very quick integration example and does not give the user a true angular experience, but let you create solutions in a very quick time.
 
-#@ Existing Reusable Active Windows
+## Existing Reusable Active Windows
 
 The admin module of LUYA provides some basic reusable active windows you can reuse and work with them out of the box, just attach them to your ngrest config and maybe change some properties.
 
