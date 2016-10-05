@@ -23,14 +23,17 @@ composer update
 
 Now you got a new composer lock file, which can be used for other team members to install the new luya version.
 
-> If you get a composer update error, make sure you have set `"minimum-stability" : "RC"`.
-
 ### Console
 
 After updating composer, excecute the following command to upgrade the Database.
 
 ```sh
 ./vendor/bin/luya migrate
+```
+For the RC1 upgrade, you have to run the block updater command:
+
+```sh
+./vendor/bin/luya cmsadmin/updater/classes
 ```
 
 Now refresh all existing importer components with the import commmand:
