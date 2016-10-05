@@ -17,7 +17,7 @@ A very example basic class with the name *TestActiveWindow* just renders an inde
 ```php
 namespace mymodule\aws;
 
-class TestActiveWindow extends \admin\ngrest\base\ActiveWindow
+class TestActiveWindow extends \luya\admin\ngrest\base\ActiveWindow
 {
     public $module = 'mymodule';
     
@@ -44,14 +44,14 @@ Wokring with callbacks
 + To return successfull data use `sendSuccess($message)`.
 + To return error data use `sendError($message)`.
 
-# Attaching the Class
+## Attaching the Class
 
 In order to add an Active Window into your NgRest config, you have to add the class to the `aw` pointer of your config and use the `load` method to bind the class to the aw pointer. As the Active Window contains the yii\base\Object as extend class you can configure all public properties while loading the class. Below an example of how to load an Active Window class and defined `alias` and `icon` public properties. The alias and icon probierts does exist in every Active Window an can always be overwritten.
 
 ```php
 public function ngRestConfig($config)
 {
-    $config->aw->load(['class' => \admin\aws\TestActiveWindow::className(), 'alias' => 'My Window Alias', 'icon' => 'extension']);
+    $config->aw->load(['class' => \luya\admin\aws\TestActiveWindow::className(), 'alias' => 'My Window Alias', 'icon' => 'extension']);
     
     // ...
     
@@ -59,18 +59,18 @@ public function ngRestConfig($config)
 }
 ```
 
-# View Files
+### View Files
 
 To render view files you can run the method `$this->render()` inside your active window class. The render method will lookup for php view file based on the base path of your `$module` propertie. Lets assume we run `$this->render('index')` and have defined `admin` as your `$module` propertie and your Active Window name is `TestActiveWindow` this will try to find the view file under the path `@admin/views/aws/test/index.php`. 
 
-#### How to make Button
+### How to make Button
 
 In order to create a button with a callback we use the helper method `$this->callbackButton`. Example view File
 
 ```php
 <?php
 /*
- * @var $this \admin\ngrest\base\ActiveWindowView
+ * @var $this \luya\admin\ngrest\base\ActiveWindowView
  */
 
 echo $this->callbackButton('My Button', 'hello-world', ['params' => ['name' => 'John Doe']]);
@@ -85,7 +85,7 @@ public function callbackHelloWolrd($name)
 }
 ```
 
-#### Generate a Form
+### Generate a Form
 
 You can also use the callback from widget to create a form sending data to a callback
 
@@ -106,7 +106,7 @@ public function callbackPostData($firstname, $lastname)
 }
 ```
 
-#### Angular in View files
+### Angular in View files
 
 As the administration interface is written in angular you can aso create inline Angular Controllers and interact with your Active Window class.
 
@@ -134,14 +134,14 @@ zaa.bootstrap.register('InlineController', function($scope, $controller) {
 
 After the the Active Window response from function `addToList` has recieved, the active window well be reloaded. This is just a very quick integration example and does not give the user a true angular experience, but let you create solutions in a very quick time.
 
-# Existing Reusable Active Windows
+#@ Existing Reusable Active Windows
 
 The admin module of LUYA provides some basic reusable active windows you can reuse and work with them out of the box, just attach them to your ngrest config and maybe change some properties.
 
 |Name   |Class |Public Properties
 |--     |--     |--
-|Tag    |`admin\aws\TagActiveWindow`|<ul><li>$tableName</li></ul>
-|Gallery|`admin\aws\Gallery`|<ul><li>$refTableName</li><li>$imageIdFieldName</li><li>$refFieldName</li></ul>
-|ChangePassword|`admin\aws\ChangePassword`|<ul><li>$className</li></ul>
-|CoordinatesActiveWindow|`admin\aws\CoordinatesActiveWindow`|<ul><li>$ampsApikey</li></ul>
-|FlowActiveWindow|`admin\aws\FlowActiveWindow`|<ul><li>$modelClass</li></ul>
+|Tag    |`luya\admin\aws\TagActiveWindow`|<ul><li>$tableName</li></ul>
+|Gallery|`luya\admin\aws\Gallery`|<ul><li>$refTableName</li><li>$imageIdFieldName</li><li>$refFieldName</li></ul>
+|ChangePassword|`luya\admin\aws\ChangePassword`|<ul><li>$className</li></ul>
+|CoordinatesActiveWindow|`luya\admin\aws\CoordinatesActiveWindow`|<ul><li>$ampsApikey</li></ul>
+|FlowActiveWindow|`luya\admin\aws\FlowActiveWindow`|<ul><li>$modelClass</li></ul>
