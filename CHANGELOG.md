@@ -6,6 +6,15 @@ The changelog contains informations about bug fixes, new features or bc breaking
 1.0.0-RC2 (in progress)
 -----------------------
 
+### Added
+
+### Changed
+
+### Fixed
+
+- [#1002](https://github.com/luyadev/luya/issues/1002) Override the core commands method in the console application in order the provide the ability to use controllerMap variable for configurations in the applcation.
+
+
 1.0.0-RC1 (04.10.2016)
 -----------------------
 

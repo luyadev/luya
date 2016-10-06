@@ -23,19 +23,30 @@ class Application extends \yii\console\Application
      */
     public $mute = false;
 
-    public $controllerMap = [
-        'migrate' => '\luya\console\commands\MigrateController',
-        'crud' => '\luya\console\commands\CrudController',
-        'module' => '\luya\console\commands\ModuleController',
-        'command' => '\luya\console\commands\CommandController',
-        'import' => '\luya\console\commands\ImportController',
-        'setup' => '\luya\console\commands\SetupController',
-        'health' => '\luya\console\commands\HealthController',
-        'block' => '\luya\console\commands\BlockController',
-        'storage' => '\luya\console\commands\StorageController',
-        'aw' => '\luya\console\commands\ActiveWindowController',
-    ];
-
+    public function coreCommands()
+    {
+    	return [
+    		// yii default commands
+    		'asset' => 'yii\console\controllers\AssetController',
+    		'cache' => 'yii\console\controllers\CacheController',
+    		'fixture' => 'yii\console\controllers\FixtureController',
+    		'help' => 'yii\console\controllers\HelpController',
+    		'message' => 'yii\console\controllers\MessageController',
+    		'serve' => 'yii\console\controllers\ServeController',
+    		// luya default commands
+    		'migrate' => 'luya\console\commands\MigrateController',
+	        'crud' => 'luya\console\commands\CrudController',
+	        'module' => 'luya\console\commands\ModuleController',
+	        'command' => 'luya\console\commands\CommandController',
+	        'import' => 'luya\console\commands\ImportController',
+	        'setup' => 'luya\console\commands\SetupController',
+	        'health' => 'luya\console\commands\HealthController',
+	        'block' => 'luya\console\commands\BlockController',
+	        'storage' => 'luya\console\commands\StorageController',
+	        'aw' => 'luya\console\commands\ActiveWindowController',
+    	];
+    }
+    
     /**
      * {@inheritdoc}
      */
