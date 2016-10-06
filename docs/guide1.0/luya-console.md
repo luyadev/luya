@@ -69,4 +69,12 @@ to execute the `actionBar()` we have to change the route for the noify controlle
 ./vendor/bin/luya yourmodule/notify/bar
 ```
 
+If you want to create a command without a module you can just add the the Command controller into the `commands` folder of your application and the add the the controller to your `controllerMap` of your configuration like the example below:
 
+```php
+'controllerMap' => [
+	'sync' => 'app\commands\SyncController',
+],
+```
+
+Now you could run the sync command like all other commands with `./vendor/bin/luya sync`.
