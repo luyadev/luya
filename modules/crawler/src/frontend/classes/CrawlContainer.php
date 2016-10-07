@@ -24,7 +24,7 @@ class CrawlContainer extends \yii\base\Object
     
     public $doNotFollowExtensions = false;
     
-    public $useH1 = true;
+    public $useH1 = false;
     
     private $_crawlers = [];
     

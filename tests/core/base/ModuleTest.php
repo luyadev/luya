@@ -3,8 +3,9 @@
 namespace luyatests\core\base;
 
 use Yii;
+use luyatests\LuyaWebTestCase;
 
-class ModuleTest extends \luyatests\LuyaWebTestCase
+class ModuleTest extends LuyaWebTestCase
 {
 
     public function testResolveRoute()
@@ -21,5 +22,14 @@ class ModuleTest extends \luyatests\LuyaWebTestCase
         $this->assertEquals('cms', $module->resolveRoute('cms'));
         $this->assertEquals('cms/default', $module->resolveRoute('cms/default'));
         $this->assertEquals('cms/default/index', $module->resolveRoute('cms/default/index'));
+    }
+    
+    public function testGetControllerFiles()
+    {
+    	var_dump(Yii::$aliases);
+    	$module = Yii::$app->getModule('urlmodule');
+    
+    	var_dump($module->getControllerPath());
+    	exit;
     }
 }

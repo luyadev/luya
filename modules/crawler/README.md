@@ -125,3 +125,9 @@ Sometimes you want to group your results by a section of a page, in order to let
 ```
 
 Where the above example `api` could be anything you want to let the crawler know for this section. Now you can group your results by the `group` field.
+
+If you want to make sure to always use your customized title you can use the CRAWL_TITLE tag to ensure your title for the page:
+
+```html
+<!-- [CRAWL_TITLE]My Title[/CRAWL_TITLE] -->
+```
