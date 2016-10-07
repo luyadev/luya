@@ -25,7 +25,7 @@ Example property for creation of a textfield wich can be attached somewhere in y
 
 namespace app\properties;
 
-class TestProperty extends \admin\base\Property
+class TestProperty extends \luya\admin\base\Property
 {
     public function varName()
     {
@@ -136,7 +136,7 @@ public function beforeRender($event)
 {
 	if ($this->thisMethodReturnsFalseWhyEver()) {
 		Yii::$app->response->redirect('https://luya.io');
-    	$event->isValid = false;
+    		$event->isValid = false;
 	}
 }
 ```
