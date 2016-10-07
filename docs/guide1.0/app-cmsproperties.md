@@ -68,33 +68,6 @@ You can access the properties in
 
 > If you access a property but the properties has not been append to this page you will get the `defaultValue` defined from your block object.
 
-### in Blocks
-
-```php
-$this->getEnvOption('pageObject')->nav->getProperty('foobar');
-```
-
-Get all properties for this page
-
-```php
-$this->getEnvOption('pageObject)->nav->properties;
-```
-
-### in Layouts
-
-There is a page component `Yii::$app->page` which will be registered when using the same, the page component contains information about your current page.
-
-
-```php
-Yii::$app->page->getProperty('my-prop');
-```
-
-get all properties
-
-```php
-Yii::$app->page->properties;
-```
-
 ### in Menus
 
 A very common scenario is to add properties to an existing menu item like an image which should be used for the navigation instead of text. To collect the property for a menu item the menu component does have a `getProperty($varName)` method on each item. For example collecting the menu and retrieving the page property `navImage` could be done as followed:
@@ -114,6 +87,25 @@ A very common scenario is to add properties to an existing menu item like an ima
 
 This method allows you find and evaluate properties for menu items and allows you also to use `Yii::$app->menu->current->getProperty('xyz')` instead of using `Yii::$app->page->getProperty('xyz')`.
 
+### in Layouts
+
+In the layout you can always get the current propertys based on the current active menu item.
+
+```php
+Yii::$app->menu->current->getProperty('my-prop');
+```
+
+### in Blocks
+
+```php
+$this->getEnvOption('pageObject')->nav->getProperty('foobar');
+```
+
+Get all properties for this page
+
+```php
+$this->getEnvOption('pageObject)->nav->properties;
+```
 
 Events
 ------
