@@ -23,6 +23,17 @@ class CommonController extends RestController
         return Lang::find()->asArray()->all();
     }
     
+    public function actionChangeLanguage()
+    {
+    	$lang = Yii::$app->request->getBodyParam('lang');
+    	
+    	if (!empty($lang)) {
+    		return Yii::$app->adminuser->identity->setting->set('luyadminlanguage', $lang);
+    	}
+    	
+    	return false;
+    }
+    
     public function actionDataProperties()
     {
         $data = [];
