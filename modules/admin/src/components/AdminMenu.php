@@ -110,13 +110,19 @@ class AdminMenu extends \yii\base\Component
                 }
             }
             
+            try {
+            	$alias = Yii::t($item['moduleId'], $item['alias'], [], Yii::$app->luyaLanguage);
+            } catch (\Exception $err) {
+            	$alias = $item['alias'];
+            }
+            
             // ok we have passed all the tests, lets make an entry
             $responseData[] = [
                 'moduleId' => $item['moduleId'],
                 'id' => $index,
                 'template' => $item['template'],
                 'routing' => $item['routing'],
-                'alias' => Yii::t($item['moduleId'], $item['alias'], [], Yii::$app->luyaLanguage),
+                'alias' => $alias,
                 'icon' => $item['icon'],
                 'searchModelClass' => $item['searchModelClass'],
             ];
@@ -132,15 +138,24 @@ class AdminMenu extends \yii\base\Component
         if (array_key_exists($nodeId, $this->_items)) {
             return $this->_items[$nodeId];
         }
+        
         $data = $this->getNodeData($nodeId);
-
         if (isset($data['groups'])) {
             foreach ($data['groups'] as $groupName => $groupItem) {
+            	
+            	try {
+            		$data['groups'][$groupName]['name'] = Yii::t($data['moduleId'], $groupItem['name'], [], Yii::$app->luyaLanguage);
+            	} catch (\Exception $e) {
+            		
+            	}
+            	
                 foreach ($groupItem['items'] as $groupItemKey => $groupItemEntry) {
+                	
                     if ($groupItemEntry['permissionIsRoute']) {
                         // when true, set permissionGranted to true
                         if (!Yii::$app->auth->matchRoute($this->getUserId(), $groupItemEntry['route'])) {
                             unset($data['groups'][$groupName]['items'][$groupItemKey]);
+                            continue;
                         } else {
                             /* fixed bug #51 */
                             $data['groups'][$groupName]['items'][$groupItemKey]['route'] = str_replace('/', '-', $data['groups'][$groupName]['items'][$groupItemKey]['route']);
@@ -149,10 +164,18 @@ class AdminMenu extends \yii\base\Component
                         // when true, set permissionGranted to true
                         if (!Yii::$app->auth->matchApi($this->getUserId(), $groupItemEntry['permssionApiEndpoint'])) {
                             unset($data['groups'][$groupName]['items'][$groupItemKey]);
+                            continue;
                         }
                     } else {
                         throw new \Exception('Menu item detected without permission entry');
                     }
+                    try { 
+                    	$alias = Yii::t($data['moduleId'], $data['groups'][$groupName]['items'][$groupItemKey]['alias'], [], Yii::$app->luyaLanguage);
+                    } catch(\Exception $err) {
+                    	$alias = $data['groups'][$groupName]['items'][$groupItemKey]['alias'];
+                    }
+                    
+                    $data['groups'][$groupName]['items'][$groupItemKey]['alias'] = $alias;
                 }
             }
         }
@@ -171,6 +194,7 @@ class AdminMenu extends \yii\base\Component
                     foreach ($value as $group => $groupValue) {
                         foreach ($groupValue['items'] as $array) {
                             $array['module'] = $node;
+                            var_dump($groupValue);
                             $data[] = $array;
                         }
                     }
