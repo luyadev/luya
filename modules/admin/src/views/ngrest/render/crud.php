@@ -74,7 +74,7 @@ use luya\admin\Module;
                                 
                             </div>
                             <div ng-show="config.minLengthWarning">
-                               <p>The search keyword must at least have 3 chars.</p>
+                               <p><?= Module::t('ngrest_crud_ajax_search_length')?></p>
                             </div>
                         </div>
                         <div class="col <?php if (!empty($config->filters)): ?>m6 l3<?php else: ?>m12 l4<?php endif; ?>">
@@ -82,7 +82,7 @@ use luya\admin\Module;
                                 <div class="input__field-wrapper">
                                     <i class="input__select-arrow material-icons">keyboard_arrow_down</i>
                                     <select class="input__field" ng-change="changeGroupByField()" ng-model="config.groupByField">
-                                        <option value="0">Nach Feld gruppieren</option>
+                                        <option value="0"><?= Module::t('ngrest_crud_group_prompt'); ?></option>
                                         <?php foreach ($config->getPointer('list') as $item): ?>
                                             <option value="<?= $item['name']; ?>"><?= $item['alias']; ?></option>
                                         <?php endforeach; ?>
@@ -96,7 +96,7 @@ use luya\admin\Module;
                                     <div class="input__field-wrapper">
                                         <i class="input__select-arrow material-icons">keyboard_arrow_down</i>
                                         <select class="input__field" ng-change="realoadCrudList()" ng-model="config.filter">
-                                            <option value="0">Filter auswählen</option>
+                                            <option value="0"><?= Module::t('ngrest_crud_filter_prompt'); ?></option>
                                             <?php foreach (array_keys($config->filters) as $name): ?>
                                                 <option value="<?= $name; ?>"><?= $name; ?></option>
                                             <?php endforeach; ?>

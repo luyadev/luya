@@ -327,7 +327,7 @@ use luya\cms\admin\Module;
                                 <div class="card-panel">
                                     <h5><?php echo Module::t('view_index_add_page_from_language'); ?></h5>
                                     <p><?php echo Module::t('view_index_add_page_from_language_info'); ?></p>
-                                    <p><button ng-click="loadItems()" ng-show="!isOpen" class="btn">Ja</button></p>
+                                    <p><button ng-click="loadItems()" ng-show="!isOpen" class="btn"><?= Module::t('view_index_yes'); ?></button></p>
                                     <div ng-show="isOpen">
                                         <hr />
                                         <ul>

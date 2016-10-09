@@ -103,7 +103,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
             ->group('menu_group_system')
                 ->itemApi('menu_system_item_language', 'admin-lang-index', 'language', 'api-admin-lang')
                 ->itemApi('menu_system_item_tags', 'admin-tag-index', 'label', 'api-admin-tag')
-                ->itemApi('Logger', 'admin-logger-index', 'label', 'api-admin-logger')
+                ->itemApi('menu_system_logger', 'admin-logger-index', 'label', 'api-admin-logger')
             ->group('menu_group_images')
                 ->itemApi('menu_images_item_effects', 'admin-effect-index', 'blur_circular', 'api-admin-effect')
                 ->itemApi('menu_images_item_filters', 'admin-filter-index', 'adjust', 'api-admin-filter')

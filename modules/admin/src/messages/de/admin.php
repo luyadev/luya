@@ -177,4 +177,10 @@ return [
     'right_panel_support_support_title' => 'Hilfe',
     'right_panel_support_support_text' => 'Bei Fragen wenden Sie sich bitte an den Webmaster, oder besuchen Sie <a target="_blank" href="https://luya.io">luya.io</a>.',
 
+// rc2
+
+	'ngrest_crud_group_prompt' => 'Nach Feld gruppieren',
+	'ngrest_crud_filter_prompt' => 'Filter auswählen',
+	'ngrest_crud_ajax_search_length' => 'Der Suchbegriff muss mindestens 3 Zeichen lang sein.',
+	'menu_system_logger' => 'Logger',
 ];
