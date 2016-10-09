@@ -26,6 +26,12 @@ class AdminUser extends \yii\web\User
     {
         parent::init();
         $this->on(self::EVENT_BEFORE_LOGOUT, [$this, 'onBeforeLogout']);
+        $this->on(self::EVENT_AFTER_LOGIN, [$this, 'onAfterLogin']);
+    }
+    
+    public function onAfterLogin()
+    {
+    	Yii::$app->luyaLanguage = $this->identity->setting->get('luyadminlanguage', Yii::$app->luyaLanguage);
     }
 
     public function onBeforeLogout()

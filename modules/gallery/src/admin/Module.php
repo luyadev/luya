@@ -13,10 +13,10 @@ class Module extends \luya\admin\base\Module
 
     public function getMenu()
     {
-        return $this->node(Module::t('gallery'), 'photo_album')
-            ->group(Module::t('gallery_administrate'))
-                ->itemApi(Module::t('album'), 'galleryadmin-album-index', 'camera', 'api-gallery-album')
-                ->itemApi(Module::t('cat'), 'galleryadmin-cat-index', 'collections', 'api-gallery-cat')
+        return $this->node('gallery', 'photo_album')
+            ->group('gallery_administrate')
+                ->itemApi('album', 'galleryadmin-album-index', 'camera', 'api-gallery-album')
+                ->itemApi('cat', 'galleryadmin-cat-index', 'collections', 'api-gallery-cat')
         ->menu();
     }
 

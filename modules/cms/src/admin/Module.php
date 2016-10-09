@@ -89,15 +89,15 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     public function getMenu()
     {
         return $this
-            ->nodeRoute(static::t('menu_node_cms'), 'content_copy', 'cmsadmin-default-index', 'cmsadmin/default/index', 'luya\cms\models\NavItem')
-            ->node(static::t('menu_node_cmssettings'), 'settings')
-                ->group(static::t('menu_group_env'))
-                    ->itemRoute(static::t('menu_group_item_env_permission'), "cmsadmin/permission/index", 'gavel')
-                    ->itemApi(static::t('menu_group_item_env_container'), 'cmsadmin-navcontainer-index', 'label_outline', 'api-cms-navcontainer')
-                    ->itemApi(static::t('menu_group_item_env_layouts'), 'cmsadmin-layout-index', 'view_quilt', 'api-cms-layout')
-                ->group(static::t('menu_group_elements'))
-                    ->itemApi(static::t('menu_group_item_elements_group'), 'cmsadmin-blockgroup-index', 'view_module', 'api-cms-blockgroup')
-                    ->itemApi(static::t('menu_group_item_elements_blocks'), 'cmsadmin-block-index', 'format_align_left', 'api-cms-block')
+            ->nodeRoute('menu_node_cms', 'content_copy', 'cmsadmin-default-index', 'cmsadmin/default/index', 'luya\cms\models\NavItem')
+            ->node('menu_node_cmssettings', 'settings')
+                ->group('menu_group_env')
+                    ->itemRoute('menu_group_item_env_permission', "cmsadmin/permission/index", 'gavel')
+                    ->itemApi('menu_group_item_env_container', 'cmsadmin-navcontainer-index', 'label_outline', 'api-cms-navcontainer')
+                    ->itemApi('menu_group_item_env_layouts', 'cmsadmin-layout-index', 'view_quilt', 'api-cms-layout')
+                ->group('menu_group_elements')
+                    ->itemApi('menu_group_item_elements_group', 'cmsadmin-blockgroup-index', 'view_module', 'api-cms-blockgroup')
+                    ->itemApi('menu_group_item_elements_blocks', 'cmsadmin-block-index', 'format_align_left', 'api-cms-block')
             ->menu();
     }
 

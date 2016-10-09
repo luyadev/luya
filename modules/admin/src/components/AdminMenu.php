@@ -109,14 +109,14 @@ class AdminMenu extends \yii\base\Component
                     continue;
                 }
             }
-
+            
             // ok we have passed all the tests, lets make an entry
             $responseData[] = [
                 'moduleId' => $item['moduleId'],
                 'id' => $index,
                 'template' => $item['template'],
                 'routing' => $item['routing'],
-                'alias' => $item['alias'],
+                'alias' => Yii::t($item['moduleId'], $item['alias'], [], Yii::$app->luyaLanguage),
                 'icon' => $item['icon'],
                 'searchModelClass' => $item['searchModelClass'],
             ];

@@ -14,10 +14,10 @@ class Module extends \luya\admin\base\Module
 
     public function getMenu()
     {
-        return $this->node(Module::t('crawler'), 'find_in_page')
-            ->group(Module::t('crawler_indexing'))
-                ->itemApi(Module::t('crawler_index'), 'crawleradmin-index-index', 'list', 'api-crawler-index')
-                //->itemApi(Module::t('crawler_builderindex'), 'crawleradmin-builderindex-index', 'visibility_off', 'api-crawler-builderindex')
+        return $this->node('crawler', 'find_in_page')
+            ->group('crawler_indexing')
+                ->itemApi('crawler_index', 'crawleradmin-index-index', 'list', 'api-crawler-index')
+                //->itemApi('crawler_builderindex'), 'crawleradmin-builderindex-index', 'visibility_off', 'api-crawler-builderindex')
             ->group('Anylatics')
             ->itemApi('Searchdata', 'crawleradmin-searchdata-index', 'label', 'api-crawler-searchdata')
         ->menu();

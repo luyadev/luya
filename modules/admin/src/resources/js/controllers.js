@@ -702,7 +702,7 @@
 	
 	// LayoutMenuController.js
 	
-	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, CacheReloadService, LuyaLoading, AdminToastService) {
+	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, $window, CacheReloadService, LuyaLoading, AdminToastService) {
 	
 		$scope.LuyaLoading = LuyaLoading;
 		
@@ -711,6 +711,12 @@
 		$scope.reload = function() {
 			CacheReloadService.reload();
 		}
+		
+		$scope.updateUserProfile = function(profile) {
+			$http.post('admin/api-admin-common/change-language', {lang: profile.lang }).success(function(response) {
+				$window.location.reload();
+			});
+		};
 	
 		$scope.sidePanelUserMenu = false;
 		

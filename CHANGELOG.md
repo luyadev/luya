@@ -9,6 +9,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 ### Added
 
 - [#1003](https://github.com/luyadev/luya/issues/1003) The crawler tag CRAWL_TITLE has been added to ensure a customization of the titles.
+- [#1008](https://github.com/luyadev/luya/issues/1008) Administration interface language can be changed and stored in the user settings.
 
 ### Changed
 

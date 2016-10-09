@@ -68,14 +68,21 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     ];
     
     public $moduleMenus = [];
-
+    
     private $_jsTranslations = [];
     
+    /**
+     * @return array
+     */
     public function getJsTranslations()
     {
         return $this->_jsTranslations;
     }
     
+    /**
+     * 
+     * @param array $translations
+     */
     public function setJsTranslations(array $translations)
     {
         foreach ($translations as $module => $data) {
@@ -88,18 +95,18 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     public function getMenu()
     {
         return $this
-        ->nodeRoute(Module::t('menu_node_filemanager'), 'folder_open', 'admin-storage-index', 'admin/storage/index')
-        ->node(Module::t('menu_node_system'), 'layers')
-            ->group(Module::t('menu_group_access'))
-                ->itemApi(Module::t('menu_access_item_user'), 'admin-user-index', 'person', 'api-admin-user')
-                ->itemApi(Module::t('menu_access_item_group'), 'admin-group-index', 'group', 'api-admin-group')
-            ->group(Module::t('menu_group_system'))
-                ->itemApi(Module::t('menu_system_item_language'), 'admin-lang-index', 'language', 'api-admin-lang')
-                ->itemApi(Module::t('menu_system_item_tags'), 'admin-tag-index', 'label', 'api-admin-tag')
+        ->nodeRoute('menu_node_filemanager', 'folder_open', 'admin-storage-index', 'admin/storage/index')
+        ->node('menu_node_system', 'layers')
+            ->group('menu_group_access')
+                ->itemApi('menu_access_item_user', 'admin-user-index', 'person', 'api-admin-user')
+                ->itemApi('menu_access_item_group', 'admin-group-index', 'group', 'api-admin-group')
+            ->group('menu_group_system')
+                ->itemApi('menu_system_item_language', 'admin-lang-index', 'language', 'api-admin-lang')
+                ->itemApi('menu_system_item_tags', 'admin-tag-index', 'label', 'api-admin-tag')
                 ->itemApi('Logger', 'admin-logger-index', 'label', 'api-admin-logger')
-            ->group(Module::t('menu_group_images'))
-                ->itemApi(Module::t('menu_images_item_effects'), 'admin-effect-index', 'blur_circular', 'api-admin-effect')
-                ->itemApi(Module::t('menu_images_item_filters'), 'admin-filter-index', 'adjust', 'api-admin-filter')
+            ->group('menu_group_images')
+                ->itemApi('menu_images_item_effects', 'admin-effect-index', 'blur_circular', 'api-admin-effect')
+                ->itemApi('menu_images_item_filters', 'admin-filter-index', 'adjust', 'api-admin-filter')
         ->menu();
     }
 

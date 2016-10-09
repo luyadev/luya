@@ -545,9 +545,22 @@ $this->beginPage()
     <!-- /ANGULAR-VIEW -->
     <div class="luya-container__right-panel" ng-if="sidePanelUserMenu || sidePanelHelp">
         <div ng-if="sidePanelUserMenu">
+        	<p><a href="<?php echo Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="btn red"><?php echo Admin::t('layout_btn_logout'); ?></a></p>
             <h1><?= $user->firstname; ?> <?= $user->lastname; ?></h1>
             <p><?= $user->email; ?></p>
-            <p><a href="<?php echo Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="btn red"><?php echo Admin::t('layout_btn_logout'); ?></a></p>
+            <form ng-submit="updateUserProfile(profile)" method="post" ng-init="profile.lang='<?=Yii::$app->luyaLanguage;?>'">
+	            <div class="input input--select input--vertical">
+	    			<label class="input__label" for="[input-id]">Interface Language</label>
+		            <select class="input__field-wrapper" ng-model="profile.lang">
+		            	<option value="de" <?php if (Yii::$app->luyaLanguage == 'de'): ?>selected<?php endif; ?>>Deutsch</option>
+		            	<option value="en" <?php if (Yii::$app->luyaLanguage == 'en'): ?>selected<?php endif; ?>>English</option>
+		            	<option value="ru" <?php if (Yii::$app->luyaLanguage == 'ru'): ?>selected<?php endif; ?>>Pусский</option>
+		            	<option value="es" <?php if (Yii::$app->luyaLanguage == 'es'): ?>selected<?php endif; ?>>Español</option>
+		            	<option value="fr" <?php if (Yii::$app->luyaLanguage == 'fr'): ?>selected<?php endif; ?>>Français</option>
+		            </select>
+	            </div>
+	            <input type="submit" value="Submit" class="btn" />
+            </form>
         </div>
         <div ng-if="sidePanelHelp">
             <h4><?= Admin::t('right_panel_support_title'); ?></h4>

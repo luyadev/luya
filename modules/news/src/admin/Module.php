@@ -15,11 +15,11 @@ class Module extends \luya\admin\base\Module
     public function getMenu()
     {
         return $this
-        ->node(Module::t('news'), 'local_library')
-            ->group(Module::t('news_administrate'))
-                ->itemApi(Module::t('article'), 'newsadmin-article-index', 'edit', 'api-news-article')
-                ->itemApi(Module::t('cat'), 'newsadmin-cat-index', 'bookmark_border', 'api-news-cat')
-                ->itemApi(Module::t('tag'), 'newsadmin-tag-index', 'label_outline', 'api-news-tag')
+        ->node('news', 'local_library')
+            ->group('news_administrate')
+                ->itemApi('article', 'newsadmin-article-index', 'edit', 'api-news-article')
+                ->itemApi('cat', 'newsadmin-cat-index', 'bookmark_border', 'api-news-cat')
+                ->itemApi('tag', 'newsadmin-tag-index', 'label_outline', 'api-news-tag')
         ->menu();
     }
 
