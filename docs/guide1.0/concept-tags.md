@@ -2,13 +2,13 @@
 
 > since 1.0.0-RC1
 
-The LUYA tags are a very strong usefull bb code similiar tag parsing concept. You can just add your own tag within an application or ship them directly with modules. The basic idea behind the tag parser is to enhance the Makrkdown syntax by your custom ideas.
+The LUYA tags are a very strong usefull bb code similiar tag parsing concept. You can just add your own tag within an application or ship them directly with modules. The basic idea behind the tag parser is to enhance the Makrkdown syntax by your customized tags.
 
-Lets assume you want to create a [Bootstrap Tooltip](http://getbootstrap.com/javascript/#tooltips) right at the fingertips of all contents in all modules or views. As the [Elements](concept-elements.md) is thought to be a tool for the developer itself, the tag differs from this idea.
+Lets assume you want to create a [Bootstrap Tooltip](http://getbootstrap.com/javascript/#tooltips) right at the fingertips of all contents in all modules or views. As the [Elements](concept-elements.md) is thought to be a tool for the developer itself, the tag differs from this idea. It can be easily used by all editors of the administration area.
 
-## Create the Tooltip Tag
+## Create a Tag
 
-Create a new TooltipTag with a PHP file somewhere you might think its a good location, we recommend to store them `app/tags`:
+As mentioned above, we create a new TooltipTag with a PHP file somewhere you might think its a good location, we recommend to store them in the `app/tags` folder:
 
 ```php
 namespace app\tags;
@@ -31,7 +31,7 @@ class TooltipTag extends BaseTag
 }
 ```
 
-When your Tag is read you have to inject them to the `luya\TagParser`. In order to inject the above created Tag add the `$tags` propertie to you application config:
+When your Tag is read you have to inject them to the `luya\TagParser`. In order to inject the above created Tag add the `$tags` propertie to your application config:
 
 ```php
 return [
@@ -44,12 +44,12 @@ return [
 ];
 ```
 
-So now you have registered your tag under the name **tooltip**. As now you can access the Tag within every CMS or CRUD situation by just call:
+Now you have registered the tag under the name **tooltip**. As now you can access the Tag within every CMS or CRUD situation by just call:
 
 ```
 I am tooltip[John Doe](This showns when hover, over me).
 ```
 
-## Parse your Text
+## Parse Text
 
 Sometimes you are not in a context where the parsing is enabled, so you can parser your content by using the `luya\TagParser::convert($text)` or even directly with markdown integration `luya\TagParser::convertWithMarkdown($text)` this enables you to parse tags even in your controllers or views.
