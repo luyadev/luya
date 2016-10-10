@@ -40,13 +40,12 @@
     		transclude: false,
     		scope: {
     			"api": "@api",
-    			"where": "@where"
+    			"where": "@where",
+    			"id": "@id",
     		},
     		controller: function($scope) {
-
     			$scope.content = null;
-    			console.log($scope.where);
-    			$http.get($scope.api+'/?inline=1&relation=1&'+ $scope.where).then(function(response) {
+    			$http.get($scope.api+'/?inline=1&relation='+$scope.id+'&field='+$scope.where).then(function(response) {
 					$scope.content = $sce.trustAsHtml(response.data);
     			});
     		},

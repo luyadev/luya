@@ -93,8 +93,8 @@ class RenderCrud extends Render implements RenderInterface
             
             foreach ($this->config->relations as $name => $cfg) {
             	$buttons[] = [
-            		'ngClick' => 'loadRelation(item.'.$this->config->primaryKey.', \''.$cfg['api'].'\', \''.http_build_query($cfg['where']).'\')',
-            		'icon' => '',
+            		'ngClick' => 'loadRelation(item.'.$this->config->primaryKey.', \''.$cfg['api'].'\', \''.$cfg['where'].'\')',
+            		'icon' => 'chrome_reader_mode',
             		'label' => $name,
             	];
             }

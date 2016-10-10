@@ -68,7 +68,15 @@
 				}
 			}
 			$scope.crudSwitchType = type;
+			
+			if (type !== 4) {
+				angular.forEach($scope.relationItems, function(value) {
+					value.active = false;
+				});
+			}
 		};
+		
+		$scope.relationCall = false;
 		
 		$scope.changeGroupByField = function() {
 			if ($scope.config.groupByField == 0) {
@@ -81,7 +89,6 @@
 		$scope.relationItems = [];
 		
 		$scope.loadRelation = function(id, api, where) {
-			console.log(where);
 			$scope.relationItems.push({'active': true, 'api': api, 'id': id, 'where': where});
 			$scope.switchTo(4);
 		}
@@ -366,7 +373,14 @@
 			LuyaLoading.start();
 			$http.get($scope.config.apiEndpoint + '/services').success(function(serviceResponse) {
 				$scope.service = serviceResponse;
-				var url = $scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString;
+				console.log($scope.relationCall);
+				if ($scope.relationCall) {
+					var url = $scope.config.apiEndpoint + '/relationcall/?' + $scope.config.apiListQueryString;
+					url = url + '&field=' + $scope.relationCall.field + '&id=' + $scope.relationCall.id;
+				} else {
+					var url = $scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString;
+				}
+				
 				if (pageId !== undefined) {
 					url = url + '&page=' + pageId;
 				}

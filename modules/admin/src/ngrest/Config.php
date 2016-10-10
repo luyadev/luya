@@ -63,6 +63,8 @@ class Config extends Object implements ConfigInterface
 
     public $primaryKey = null; /* @todo not sure yet if right place to impelment about config */
 
+    public $relationCall = false;
+    
     public function getDefaultOrderField()
     {
         if ($this->defaultOrder === null) {

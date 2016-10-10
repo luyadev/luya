@@ -55,8 +55,8 @@ class Controller extends \luya\admin\base\Controller
 
         return $this->_model;
     }
-
-    public function actionIndex($inline = false, $relation = false)
+    
+    public function actionIndex($inline = false, $relation = false, $field = false)
     {
         $apiEndpoint = $this->model->ngRestApiEndpoint();
 
@@ -81,6 +81,10 @@ class Controller extends \luya\admin\base\Controller
         $config->attributeGroups = $this->model->ngRestAttributeGroups();
         $config->groupByField = $this->model->ngRestGroupByField();
         $config->relations = $this->model->ngRestRelation();
+        
+        if ($relation && $field) {
+        	$config->relationCall = ['id' => $relation, 'field' => $field];
+        }
         $ngrest = new NgRest($config);
 
         $crud = new RenderCrud();

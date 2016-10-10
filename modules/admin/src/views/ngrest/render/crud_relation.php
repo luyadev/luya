@@ -1,6 +1,7 @@
 <?php
 use luya\admin\ngrest\render\RenderCrud;
 use luya\admin\Module;
+use yii\helpers\Json;
 
 ?>
 <script>
@@ -22,6 +23,7 @@ use luya\admin\Module;
         $scope.config.inline = <?= (int) $config->inline; ?>;
         $scope.orderBy = '<?= $config->getDefaultOrderDirection() . $config->getDefaultOrderField(); ?>';
         $scope.saveCallback = <?= $config->getOption('saveCallback'); ?>;
+        $scope.relationCall = <?= Json::htmlEncode($config->relationCall); ?>
         <?php if ($config->groupByField): ?>
         $scope.config.groupBy = 1;
         $scope.config.groupByField = "<?= $config->groupByField; ?>";

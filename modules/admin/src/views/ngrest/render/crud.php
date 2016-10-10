@@ -49,9 +49,8 @@ use luya\admin\Module;
                     <a class="tabs__anchor" ng-click="switchTo(0, true)"><i class="material-icons tabs__icon">cancel</i> <?= Module::t('ngrest_crud_btn_close'); ?></a>
                 </li>
                 
-                
                 <li ng-repeat="btn in relationItems" class="tabs__item" ng-class="{'tabs__item--active' : btn.active}">
-                	<a class="tabs__anchor" ng-click="btn.active=true; switchTo(4)">#{{btn.id}} {{btn.api}}</a>
+                	<a class="tabs__anchor" ng-click="btn.active=true; switchTo(4)"><i class="material-icons tabs__icon">chrome_reader_mode</i> #{{btn.id}} {{btn.api}}</a>
                 </li>
             </ul>
         </div>
@@ -65,7 +64,7 @@ use luya\admin\Module;
         </div>
 		
 		<div class="card-panel" ng-repeat="btn in relationItems" ng-if="btn.active">
-			<crud-relation-loader api="{{btn.api}}" where="{{btn.where}}"></crud-relation-loader>
+			<crud-relation-loader api="{{btn.api}}" where="{{btn.where}}" id="{{btn.id}}"></crud-relation-loader>
 		</div>
         
         <!-- LIST -->

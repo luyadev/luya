@@ -96,6 +96,14 @@ class Api extends RestActiveController
         ]);
     }
     
+    public function actionRelationcall($field, $id)
+    {
+    	return new ActiveDataProvider([
+            'query' => $this->model->find()->andWhere([$field => $id]),
+            'pagination' => false,
+        ]);
+    }
+    
     public function actionFilter($filterName)
     {
         $model = $this->model;
