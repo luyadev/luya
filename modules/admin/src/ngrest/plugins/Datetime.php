@@ -34,7 +34,7 @@ class Datetime extends Plugin
     public function renderList($id, $ngModel)
     {
         return [
-            $this->createTag('span', null, ['ng-show' => $ngModel, 'ng-bind' => $ngModel.'*1000 | date : \'dd.MM.yyyy @ HH:mm\'']),
+            $this->createTag('span', null, ['ng-show' => $ngModel, 'ng-bind' => $ngModel.'*1000 | date : \'short\'']),
             $this->createTag('span', $this->emptyMessage, ['ng-show' => '!'.$ngModel]),
         ];
     }
