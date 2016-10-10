@@ -24,12 +24,11 @@ class ModuleTest extends LuyaWebTestCase
         $this->assertEquals('cms/default/index', $module->resolveRoute('cms/default/index'));
     }
     
+    /*
     public function testGetControllerFiles()
     {
-    	var_dump(Yii::$aliases);
-    	$module = Yii::$app->getModule('urlmodule');
-    
-    	var_dump($module->getControllerPath());
-    	exit;
+    	$module = Yii::$app->getModule('app');
+    	$module->getControllerPath();
     }
+    */
 }
