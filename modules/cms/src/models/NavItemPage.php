@@ -11,6 +11,7 @@ use luya\cms\base\NavItemType;
 use luya\cms\base\NavItemTypeInterface;
 use luya\cms\admin\Module;
 use luya\traits\CacheableTrait;
+use yii\base\ViewContextInterface;
 
 /**
  * Represents the type PAGE for a NavItem.
@@ -24,7 +25,7 @@ use luya\traits\CacheableTrait;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class NavItemPage extends NavItemType implements NavItemTypeInterface
+class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewContextInterface
 {
     use CacheableTrait;
 
@@ -47,10 +48,15 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
         });
     }
 
+    /**
+     * Get the view object to render the templates.
+     * 
+     * @return \yii\base\View|\yii\web\View|\luya\web\View
+     */
     public function getView()
     {
         if ($this->_view === null) {
-            $this->_view = new View();
+            $this->_view = Yii::$app->getView();
         }
         
         return $this->_view;
@@ -119,6 +125,16 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
     }
     
     /**
+     * The folder where all cmslayouts are stored.
+     *
+     * @see \yii\base\ViewContextInterface::getViewPath()
+     */
+    public function getViewPath()
+    {
+    	return '@app/views/cmslayouts';
+    }
+    
+    /**
      * Frontend get Content returns the rendered content for this nav item page based on the page logic (placeholders, blocks)
      *
      * {@inheritDoc}
@@ -127,12 +143,12 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface
     public function getContent()
     {
         if ($this->layout) {
-            $layoutFile = Yii::getAlias('@app/views/cmslayouts/' . $this->layout->view_file);
+            $layoutFile = $this->layout->view_file;
             $placholders = [];
             foreach ($this->layout->getJsonConfig('placeholders') as $item) {
                 $placholders[$item['var']] = $this->renderPlaceholder($item['var']);
             }
-            return $this->getView()->renderPhpFile($layoutFile, ['placeholders' => $placholders]);
+            return $this->getView()->render($layoutFile, ['placeholders' => $placholders], $this);
         }
         
         throw new Exception("Could not find the requested cms layout id '".$this->layout_id."' for nav item page id '". $this->id . "'. Make sure your page does not have an old inactive/deleted cms layout selected.");
