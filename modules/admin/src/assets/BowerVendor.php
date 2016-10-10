@@ -48,13 +48,19 @@ class BowerVendor extends \luya\web\Asset
     {
         parent::init();
         
+        $lang = Yii::$app->luyaLanguage;
+        
+        if (!Yii::$app->adminuser->isGuest) {
+        	$lang = Yii::$app->adminuser->identity->setting->get('luyadminlanguage', Yii::$app->luyaLanguage);
+        }
+        
         // as params are not allowed inside array properties we have located the filling of the $js param into the initalizer.
         $this->js = [
             // jquery ui
             'jquery-ui/jquery-ui.min.js',
             // angular files (official repo)
             'angular/angular.min.js',
-            'angular-i18n/angular-locale_'.Yii::$app->luyaLanguage.'.js',
+            'angular-i18n/angular-locale_'.$lang.'.js',
             //'angular-resource/angular-resource.min.js',
             // ui router
             'angular-ui-router/release/angular-ui-router.min.js',
