@@ -55,6 +55,8 @@ class Config extends Object implements ConfigInterface
     
     public $attributeGroups = false;
     
+    public $relations = [];
+    
     public $groupByField = false;
     
     public $apiEndpoint = null;

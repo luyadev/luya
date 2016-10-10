@@ -11,7 +11,7 @@ use luya\admin\ngrest\render\RenderCrud;
 /**
  * Base Controller for all NgRest Controllers.
  *
- * @property admin\ngrest\base\Model $model The model based from the modelClass instance
+ * @property luya\admin\ngrest\base\Model $model The model based from the modelClass instance
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -56,7 +56,7 @@ class Controller extends \luya\admin\base\Controller
         return $this->_model;
     }
 
-    public function actionIndex($inline = false)
+    public function actionIndex($inline = false, $relation = false)
     {
         $apiEndpoint = $this->model->ngRestApiEndpoint();
 
@@ -64,7 +64,7 @@ class Controller extends \luya\admin\base\Controller
 
         if ($configClass) {
             // todo
-            // $class = Yii::createObject($configClass, ['apiEndpoint' => '', 'primaryKey' => '..'
+            // $class = Yii::createObject($configClass, ['apiEndpoint' => '', 'primaryKey' => '..']);
             // build config based on the defined config class
             $config = false;
         } else {
@@ -75,15 +75,18 @@ class Controller extends \luya\admin\base\Controller
             throw new Exception("Provided NgRest config for controller '' is invalid.");
         }
         
-        
         $config->inline = (bool) $inline;
         $config->filters = $this->model->ngRestFilters();
         $config->defaultOrder = $this->model->ngRestListOrder();
         $config->attributeGroups = $this->model->ngRestAttributeGroups();
         $config->groupByField = $this->model->ngRestGroupByField();
-        
+        $config->relations = $this->model->ngRestRelation();
         $ngrest = new NgRest($config);
 
-        return $ngrest->render(new RenderCrud());
+        $crud = new RenderCrud();
+        if ($relation) {
+        	$crud->viewFile = '@admin/views/ngrest/render/crud_relation.php';
+        }
+        return $ngrest->render($crud);
     }
 }

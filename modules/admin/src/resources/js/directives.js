@@ -32,6 +32,29 @@
     		}
     	}
     });
+    
+    zaa.directive("crudRelationLoader", function($http, $sce) {
+    	return {
+    		restrict: "E",
+    		replace: true,
+    		transclude: false,
+    		scope: {
+    			"api": "@api",
+    			"where": "@where"
+    		},
+    		controller: function($scope) {
+
+    			$scope.content = null;
+    			console.log($scope.where);
+    			$http.get($scope.api+'/?inline=1&relation=1&'+ $scope.where).then(function(response) {
+					$scope.content = $sce.trustAsHtml(response.data);
+    			});
+    		},
+    		template: function() {
+    			return '<div compile-html ng-bind-html="content"></div>';
+    		}
+    	}
+    })
 
     // form.js
 

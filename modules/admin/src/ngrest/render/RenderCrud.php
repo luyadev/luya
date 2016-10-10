@@ -8,6 +8,7 @@ use luya\admin\components\Auth;
 use luya\admin\models\Lang;
 use luya\admin\ngrest\NgRest;
 use luya\admin\ngrest\base\Render;
+use yii\helpers\Json;
 
 /**
  * @author nadar
@@ -89,6 +90,14 @@ class RenderCrud extends Render implements RenderInterface
     {
         if ($this->_buttons === null) {
             $buttons = [];
+            
+            foreach ($this->config->relations as $name => $cfg) {
+            	$buttons[] = [
+            		'ngClick' => 'loadRelation(item.'.$this->config->primaryKey.', \''.$cfg['api'].'\', \''.http_build_query($cfg['where']).'\')',
+            		'icon' => '',
+            		'label' => $name,
+            	];
+            }
             
             if ($this->can(Auth::CAN_UPDATE)) {
                 // get all activeWindows assign to the crud

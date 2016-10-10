@@ -3,3 +3,5 @@
 		<?= $placeholders['content']; ?>
 	</div>
 </div>
+
+<?= $this->render('_internal.php'); ?>

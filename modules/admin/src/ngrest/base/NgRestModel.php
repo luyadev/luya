@@ -147,6 +147,16 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
     
     /**
+     * Define your relations in order to access the relation data and manage them directly in the same view.
+     *
+     * @return boolean
+     */
+    public function ngRestRelation()
+    {
+    	return [];
+    }
+    
+    /**
      * The NgRestFind is used when performing the crud list index overivew. You
      * can override this method in order to hide data from the ngRestFind command
      * which populates all data from the database.

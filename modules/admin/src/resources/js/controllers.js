@@ -78,6 +78,14 @@
 			}
 		}
 		
+		$scope.relationItems = [];
+		
+		$scope.loadRelation = function(id, api, where) {
+			console.log(where);
+			$scope.relationItems.push({'active': true, 'api': api, 'id': id, 'where': where});
+			$scope.switchTo(4);
+		}
+		
 		// ng-change event triggers this method
 		// this method is also used withing after save/update events in order to retrieve current selecter filter data.
 		$scope.realoadCrudList = function(pageId) {
