@@ -149,7 +149,22 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     /**
      * Define your relations in order to access the relation data and manage them directly in the same view.
      *
-     * @return boolean
+     * Example of how to use two relation buttons based on models which as to be ngrest model as well with apis!
+     * 
+     * ```php
+     * public function ngRestRelation()
+     * {
+     * 	   return [
+     * 	       'Reservations' => ['api' => \app\models\Orders::ngRestApiEndpoint(), 'where' => ['order_id' => '{{id}}', 'is_reservation' => 0]],
+	 *         'Sales' => ['api' => \app\models\Orders::ngRestApiEndpoint(), 'where' => ['order_id' => '{{id}}', 'is_reservation' => 1]]
+     *	   ];
+     * }
+     * ```
+     *
+     * The above example assumes the model where you add those relations is the the table where `order_id` is the primary key. So its like a `hasMany`
+     * relation based on this table.
+     *
+     * @return array
      */
     public function ngRestRelation()
     {
