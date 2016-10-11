@@ -1,6 +1,7 @@
 <?php
 use luya\admin\ngrest\render\RenderCrud;
 use luya\admin\Module;
+use yii\helpers\Json;
 
 ?>
 <script>
@@ -22,6 +23,7 @@ use luya\admin\Module;
         $scope.config.inline = <?= (int) $config->inline; ?>;
         $scope.orderBy = '<?= $config->getDefaultOrderDirection() . $config->getDefaultOrderField(); ?>';
         $scope.saveCallback = <?= $config->getOption('saveCallback'); ?>;
+        $scope.relationCall = <?= Json::htmlEncode($config->relationCall); ?>
         <?php if ($config->groupByField): ?>
         $scope.config.groupBy = 1;
         $scope.config.groupByField = "<?= $config->groupByField; ?>";
@@ -32,102 +34,13 @@ use luya\admin\Module;
     <!-- This fake ui-view is used to render the detail item, which actuals uses the parent scope in the ui router controller. -->
     <div style="visibility:hidden;" ui-view></div>
     <div ng-if="service">
-
-        <div class="tabs">
-            <ul>
-                <li class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==0}">
-                    <a class="tabs__anchor" ng-click="switchTo(0, true)"><i class="material-icons tabs__icon">menu</i> <?= Module::t('ngrest_crud_btn_list'); ?></a>
-                </li>
-
-                <?php if ($canCreate && $config->getPointer('create')): ?>
-                    <li class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==1}">
-                        <a class="tabs__anchor" style="" ng-click="switchTo(1)"><i class="material-icons tabs__icon">add_box</i> <?= Module::t('ngrest_crud_btn_add'); ?></a>
-                    </li>
-                <?php endif; ?>
-
-                <li ng-show="crudSwitchType==2" class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==2}">
-                    <a class="tabs__anchor" ng-click="switchTo(0, true)"><i class="material-icons tabs__icon">cancel</i> <?= Module::t('ngrest_crud_btn_close'); ?></a>
-                </li>
-                
-                <li ng-repeat="btn in tabService.tabs" class="tabs__item" ng-class="{'tabs__item--active' : btn.active}">
-                	<a class="tabs__anchor" ng-click="switchToTab(btn)"><i class="material-icons tabs__icon">chrome_reader_mode</i> {{btn.name}} #{{btn.id}}</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="langswitch crud__langswitch" ng-if="crudSwitchType!==0">
-            <a ng-repeat="lang in AdminLangService.data" ng-click="AdminLangService.toggleSelection(lang)" ng-class="{'langswitch__item--active' : AdminLangService.isInSelection(lang.short_code)}" class="langswitch__item [ waves-effect waves-blue ][ btn-flat btn--small btn--bold ] ng-binding ng-scope">
-                <span class="flag flag--{{lang.short_code}}">
-                    <span class="flag__fallback">{{lang.name}}</span>
-                </span>
-            </a>
-        </div>
-		
-		<div class="card-panel" ng-repeat="btn in tabService.tabs" ng-if="btn.active">
-			<crud-relation-loader api="{{btn.api}}" where="{{btn.where}}" id="{{btn.id}}"></crud-relation-loader>
-		</div>
+        
+        <?php if ($canCreate && $config->getPointer('create')): ?>
+            <button type="button" ng-click="switchTo(1)" class="btn"><i class="material-icons tabs__icon">add_box</i> <?= Module::t('ngrest_crud_btn_add'); ?></button>
+        <?php endif; ?>
         
         <!-- LIST -->
-        <div class="card-panel" ng-show="crudSwitchType==0">
-
-            <div class="button-right" style="margin-bottom:30px;">
-
-                <div class="button-right__left">
-                    <div class="row">
-                        <div class="col <?php if (!empty($config->filters)): ?>m12 l6<?php else: ?>m6 l8<?php endif; ?>">
-                            <div class="input input--text">
-                                <div class="input__field-wrapper">
-                                    <input class="input__field" ng-model="config.searchQuery" type="text" placeholder="<?= Module::t('ngrest_crud_search_text'); ?>" />
-                                </div>
-                                
-                            </div>
-                            <div ng-show="config.minLengthWarning">
-                               <p><?= Module::t('ngrest_crud_ajax_search_length')?></p>
-                            </div>
-                        </div>
-                        <div class="col <?php if (!empty($config->filters)): ?>m6 l3<?php else: ?>m12 l4<?php endif; ?>">
-                            <div class="input input--select input--vertical input--full-width">
-                                <div class="input__field-wrapper">
-                                    <i class="input__select-arrow material-icons">keyboard_arrow_down</i>
-                                    <select class="input__field" ng-change="changeGroupByField()" ng-model="config.groupByField">
-                                        <option value="0"><?= Module::t('ngrest_crud_group_prompt'); ?></option>
-                                        <?php foreach ($config->getPointer('list') as $item): ?>
-                                            <option value="<?= $item['name']; ?>"><?= $item['alias']; ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <?php if (!empty($config->filters)): ?>
-                            <div class="col m6 l3">
-                                <div class="input input--select input--vertical input--full-width">
-                                    <div class="input__field-wrapper">
-                                        <i class="input__select-arrow material-icons">keyboard_arrow_down</i>
-                                        <select class="input__field" ng-change="realoadCrudList()" ng-model="config.filter">
-                                            <option value="0"><?= Module::t('ngrest_crud_filter_prompt'); ?></option>
-                                            <?php foreach (array_keys($config->filters) as $name): ?>
-                                                <option value="<?= $name; ?>"><?= $name; ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
-
-                <div class="button-right__right">
-                    <div>
-                        <button type="button" ng-show="!exportDownloadButton && !exportLoading" ng-click="exportData()" class="btn cyan btn--small" style="width: 100%;">
-                            <i class="material-icons left">unarchive</i> <?= Module::t('ngrest_crud_csv_export_btn'); ?>
-                        </button>
-                        <div ng-show="exportLoading" class="btn disabled btn--small center" style="width: 100%;"><i class="material-icons spin">cached</i></div>
-                        <div ng-show="exportDownloadButton">
-                            <button ng-click="exportDownload()" class="btn light-green btn--small" type="button" style="width: 100%;"><i class="material-icons left">file_download</i> <?= Module::t('ngrest_crud_csv_export_btn_dl'); ?></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div ng-show="crudSwitchType==0">
 
             <div ng-if="pager && !config.pagerHiddenByAjaxSearch" style="text-align: center;">
                 <ul class="pagination">
@@ -189,7 +102,7 @@ use luya\admin\Module;
         </div>
         <!-- /LIST -->
 
-        <div class="card-panel" ng-if="crudSwitchType==1" <?php if (!$config->inline): ?>zaa-esc="closeCreate()"<?php endif; ?>>
+        <div ng-if="crudSwitchType==1">
 
             <?php if ($canCreate && $config->getPointer('create')): ?>
                 <form name="formCreate" role="form" ng-submit="submitCreate()">
@@ -240,7 +153,7 @@ use luya\admin\Module;
             <?php endif; ?>
         </div>
 
-        <div class="card-panel" ng-if="crudSwitchType==2" <?php if (!$config->inline): ?>zaa-esc="closeUpdate()"<?php endif; ?>>
+        <div ng-if="crudSwitchType==2" <?php if (!$config->inline): ?>zaa-esc="closeUpdate()"<?php endif; ?>>
             <?php if ($canUpdate && $config->getPointer('update')): ?>
                 <form name="formUpdate" role="form" ng-submit="submitUpdate()">
                     <!-- MODAL CONTENT -->

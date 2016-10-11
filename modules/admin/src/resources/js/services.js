@@ -285,6 +285,23 @@ zaa.factory("ServicePropertiesData", function($http, $q, $rootScope) {
 	return service;
 });
 
+zaa.factory("CrudTabService", function() {
+	
+	var service = [];
+	
+	service.tabs = [];
+	
+	service.addTab = function(id, api, where, name) {
+		service.tabs.push({id: id, api: api, where: where, active: false, name: name});
+	};
+	
+	service.clear = function() {
+		service.tabs = [];
+	}
+	
+	return service;
+});
+
 /*
  
  language service with selections

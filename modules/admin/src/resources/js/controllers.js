@@ -32,7 +32,7 @@
 	 * 
 	 * + bool $config.inline Determines whether this crud is in inline mode orno
 	 */
-	zaa.controller("CrudController", function($scope, $filter, $http, $sce, $state, $timeout, $injector, AdminLangService, LuyaLoading, AdminToastService) {
+	zaa.controller("CrudController", function($scope, $filter, $http, $sce, $state, $timeout, $injector, AdminLangService, LuyaLoading, AdminToastService, CrudTabService) {
 		
 		LuyaLoading.start();
 		
@@ -42,6 +42,8 @@
 		 * 6.10.2015: remove dialogs, add variable toggler to display. added ngSwitch
 		 */
 		$scope.AdminLangService = AdminLangService;
+		
+		$scope.tabService = CrudTabService;
 		
 		/**
 		 * As we have changed to ng-if some variables need to get pased by an object in order to keep the parent scope, as ng-if create a new scope.
@@ -58,7 +60,23 @@
 		 */
 		$scope.crudSwitchType = 0;
 		
+		$scope.switchToTab = function(tab) {
+			angular.forEach($scope.tabService.tabs, function(item) {
+				item.active = false;
+			});
+			
+			tab.active = true;
+			
+			$scope.switchTo(4);
+		};
+		
 		$scope.switchTo = function(type, reset) {
+			
+			if ($scope.relationCall) {
+				$scope.crudSwitchType = type;
+				return;
+			}
+			
 			if (reset) {
 				$scope.resetData();
 			}
@@ -68,7 +86,15 @@
 				}
 			}
 			$scope.crudSwitchType = type;
+			
+			if (type !== 4) {
+				angular.forEach($scope.tabService.tabs, function(item) {
+					item.active = false;
+				});
+			}
 		};
+		
+		$scope.relationCall = false;
 		
 		$scope.changeGroupByField = function() {
 			if ($scope.config.groupByField == 0) {
@@ -77,6 +103,15 @@
 				$scope.config.groupBy = 1;
 			}
 		}
+		
+		$scope.relationItems = [];
+		
+		/*
+		$scope.loadRelation = function(id, api, where) {
+			$scope.relationItems.push({'active': true, 'api': api, 'id': id, 'where': where});
+			$scope.switchTo(4);
+		}
+		*/
 		
 		// ng-change event triggers this method
 		// this method is also used withing after save/update events in order to retrieve current selecter filter data.
@@ -338,6 +373,11 @@
 		};
 		
 		$scope.submitCreate = function() {
+			
+			if ($scope.relationCall) {
+				//$scope.data.create[$scope.relationCall.field] = parseInt($scope.relationCall.id);
+			}
+			
 			$http.post($scope.config.apiEndpoint, angular.toJson($scope.data.create, true)).success(function(data) {
 				$scope.realoadCrudList();
 				$scope.applySaveCallback();
@@ -358,7 +398,13 @@
 			LuyaLoading.start();
 			$http.get($scope.config.apiEndpoint + '/services').success(function(serviceResponse) {
 				$scope.service = serviceResponse;
-				var url = $scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString;
+				if ($scope.relationCall) {
+					var url = $scope.config.apiEndpoint + '/relation-call/?' + $scope.config.apiListQueryString;
+					url = url + '&where=' + $scope.relationCall.where + '&id=' + $scope.relationCall.id;
+				} else {
+					var url = $scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString;
+				}
+				
 				if (pageId !== undefined) {
 					url = url + '&page=' + pageId;
 				}
@@ -615,7 +661,7 @@
 	
 // DefaultController.js.
 	
-	zaa.controller("DefaultController", function ($scope, $http, $state, $stateParams) {
+	zaa.controller("DefaultController", function ($scope, $http, $state, $stateParams, CrudTabService) {
 		
 		$scope.moduleId = $state.params.moduleId;
 		
@@ -675,6 +721,9 @@
 			var id = item.route;
 			
 			var res = id.split("-");
+			
+			CrudTabService.clear();
+			
 			$state.go('default.route', { moduleRouteId : res[0], controllerId : res[1], actionId : res[2]});
 		};
 		

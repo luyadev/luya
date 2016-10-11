@@ -8,6 +8,8 @@ use luya\admin\components\Auth;
 use luya\admin\models\Lang;
 use luya\admin\ngrest\NgRest;
 use luya\admin\ngrest\base\Render;
+use yii\helpers\Json;
+use yii\base\InvalidConfigException;
 
 /**
  * @author nadar
@@ -89,6 +91,23 @@ class RenderCrud extends Render implements RenderInterface
     {
         if ($this->_buttons === null) {
             $buttons = [];
+            
+            foreach ($this->config->relations as $name => $cfg) {
+
+                $api = Yii::$app->adminmenu->getApiDetail($cfg['api']);
+                
+                if (!$api) {
+                    throw new InvalidConfigException("The configured api relation '{$cfg['api']}' does not exists in the menu elements.");
+                }
+                
+                $node = str_replace("-", "/", $api['route']);
+                
+            	$buttons[] = [
+            		'ngClick' => 'tabService.addTab(item.'.$this->config->primaryKey.', \''.$node.'\', \''.base64_encode(Json::encode($cfg['where'])).'\', \''.$name.'\')',
+            		'icon' => 'chrome_reader_mode',
+            		'label' => $name,
+            	];
+            }
             
             if ($this->can(Auth::CAN_UPDATE)) {
                 // get all activeWindows assign to the crud
