@@ -1,7 +1,6 @@
-LUYA
-====
+<div style="text-align:center;"><img src="https://luya.io/img/luya_logo_flat_icon.png" /></div>
 
-> 4, October 2016: We have released the next beta of LUYA: [1.0.0-RC1](https://github.com/luyadev/luya/blob/master/docs/releases/note_rc1.md).
+> 4, October 2016: We have released the first release candidate of LUYA: [1.0.0-RC1](https://luya.io/news/first-release-candidate-1-0-0-rc1).
 
 The [Yii 2 PHP Framework](https://github.com/yiisoft/yii2) wrapper which provides out of the box functions like an **administration interface**, a beautiful looking **content management system**, **payment** modules, **agency workflows** and other tools to develop your website pretty fast!
 
