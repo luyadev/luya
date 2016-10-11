@@ -14,6 +14,7 @@ use yii\base\ErrorException;
 use yii\base\InvalidConfigException;
 use luya\admin\base\RestActiveController;
 use luya\helpers\ArrayHelper;
+use yii\helpers\Json;
 
 /**
  * The RestActiveController for all NgRest implementations.
@@ -96,10 +97,18 @@ class Api extends RestActiveController
         ]);
     }
     
-    public function actionRelationcall($field, $id)
+    public function actionRelationCall($where, $id)
     {
+        
+        $where = Json::decode(base64_decode($where));
+        
+        array_walk($where, function(&$item, $key) use ($id) {
+           $item = str_replace("{{id}}", $id, $item); 
+        });
+        
+        
     	return new ActiveDataProvider([
-            'query' => $this->model->find()->andWhere([$field => $id]),
+            'query' => $this->model->find()->andWhere($where),
             'pagination' => false,
         ]);
     }

@@ -35,7 +35,9 @@ use yii\helpers\Json;
     <div style="visibility:hidden;" ui-view></div>
     <div ng-if="service">
         
-        <button type="button" ng-click="switchTo(1)" class="btn">Add New</button>
+        <?php if ($canCreate && $config->getPointer('create')): ?>
+            <button type="button" ng-click="switchTo(1)" class="btn"><i class="material-icons tabs__icon">add_box</i> <?= Module::t('ngrest_crud_btn_add'); ?></button>
+        <?php endif; ?>
         
         <!-- LIST -->
         <div ng-show="crudSwitchType==0">
@@ -100,7 +102,7 @@ use yii\helpers\Json;
         </div>
         <!-- /LIST -->
 
-        <div ng-if="crudSwitchType==1" <?php if (!$config->inline): ?>zaa-esc="closeCreate()"<?php endif; ?>>
+        <div ng-if="crudSwitchType==1">
 
             <?php if ($canCreate && $config->getPointer('create')): ?>
                 <form name="formCreate" role="form" ng-submit="submitCreate()">

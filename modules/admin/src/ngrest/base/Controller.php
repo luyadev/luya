@@ -83,7 +83,7 @@ class Controller extends \luya\admin\base\Controller
         $config->relations = $this->model->ngRestRelation();
         
         if ($relation && $field) {
-        	$config->relationCall = ['id' => $relation, 'field' => $field];
+        	$config->relationCall = ['id' => $relation, 'where' => $field];
         }
         $ngrest = new NgRest($config);
 
