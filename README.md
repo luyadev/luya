@@ -1,4 +1,6 @@
-<div style="text-align:center;"><img src="https://luya.io/img/luya_logo_flat_icon.png" /></div>
+<p align="center">
+  <img src="https://luya.io/img/luya_logo_flat_icon.png" alt="LUYA Logo"/>
+</p>
 
 > 4, October 2016: We have released the first release candidate of LUYA: [1.0.0-RC1](https://luya.io/news/first-release-candidate-1-0-0-rc1).
 
