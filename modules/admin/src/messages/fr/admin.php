@@ -16,7 +16,7 @@ return [
     'layout_debug_php_ini_upload_max_file' => 'PHP upload_max_filesize',
     /** End::No translation **/
 
-    'language_name' => 'Anglais',
+    'language_name' => 'Français',
     'button_save' => 'Enregistrer',
     'button_confirm' => 'Oui',
     'button_abort' => 'Annuler',
