@@ -91,7 +91,7 @@ class MyBlock extends \luya\cms\base\PhpBlock
 	        'newsData' => new cms\injector\ActiveQueryCheckboxInjector([
 	            'query' => \news\models\Article::find(),
 	            'type' => self::VAR_INJECTOR,
-	        ]);
+	        ])
 	    ];
 	}
 	
