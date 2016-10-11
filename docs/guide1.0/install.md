@@ -12,7 +12,7 @@ First of all you have to install the global `fxp/composer-asset-plugin` plugin, 
 composer global require "fxp/composer-asset-plugin:~1.2"
 ```
 
-After setting up composer, we execute the composer `create-project` command to checkout the **luya-kickstarter** application, an *out of the box* setup you can directly run your website. We recommend to run the `create-project` command directly from your htdocs/webserver folder:
+After setting up composer, we execute the composer `create-project` command to checkout the **luya-kickstarter** application, an *out of the box* setup enabling you to directly run your website. We recommend to run the `create-project` command directly from your htdocs/webserver folder:
 
 ```sh
 composer create-project luyadev/luya-kickstarter:1.0.0-RC1
@@ -41,7 +41,7 @@ Build and import all filesystem configurations into the database with the [impor
 ./vendor/bin/luya import
 ```
 
-At least we execute the [setup console command](luya-console.md) which is going to setup an user, group and permissions:
+At last we execute the [setup console command](luya-console.md) which is going to setup a user, group and permissions:
 
 ```sh
 ./vendor/bin/luya setup
@@ -49,7 +49,7 @@ At least we execute the [setup console command](luya-console.md) which is going 
 
 The setup proccess will ask you for an email and password to store your personal login data inside the database (of course the password will be encrypted).
 
-> `./vendor/bin/luya health` will make a small check if several directorys are readable and exist.
+> `./vendor/bin/luya health` will make a small check if several directories exist and readable/writable.
 
 You can now log in into your administration interface `http://localhost/luya-kickstarter/admin` (depending on where you have located the luya files). When you have successfull logged into the administration area, navigate to **System** -> **Groups** and click **Authorizations**. This will open an Active Window where you can enable all permissions for your Group.
 
@@ -57,7 +57,7 @@ You can now log in into your administration interface `http://localhost/luya-kic
 
 ## Problems
 
-There are few things people stumple upon mostly.
+There are few things people stumble upon mostly.
 
 ### Language
 
@@ -71,7 +71,7 @@ As Yii2 requies the `fxp/composer-asset-plugin` make sure you have at least vers
 
 ### Ask us!
 
-When you have Problems with installing *LUYA* or have unexpected errors or strange behaviors, let us know and [Issue on GitHub](https://github.com/luyadev/luya/issues) or [Join the Gitter Chat](https://gitter.im/luyadev/luya) we love your Feedback!
+When you have problems with installing *LUYA* or have unexpected errors or strange behaviors, let us know by creating an [issue on GitHub](https://github.com/luyadev/luya/issues) or [Join the Gitter Chat](https://gitter.im/luyadev/luya) we would loved to have your Feedback!
 
 [![Join the chat at https://gitter.im/luyadev/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/luyadev/luya?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
