@@ -87,7 +87,7 @@ class Article extends \luya\admin\ngrest\base\NgRestModel
     public function getDetailUrl($contextNavItemId = null)
     {
         if ($contextNavItemId) {
-            return \cms\helpers\Url::toMenuItem($contextNavItemId, 'news/default/detail', ['id' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
+            return \luya\cms\helpers\Url::toMenuItem($contextNavItemId, 'news/default/detail', ['id' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
         }
 
         return \luya\helpers\Url::toManager('news/default/detail', ['id' => $this->id, 'title' => \yii\helpers\Inflector::slug($this->title)]);
