@@ -31,6 +31,8 @@ Now change the database connection inside the `configs/env-local-db.php` file to
 
 Run the migration files with the [migrate console command](luya-console.md):
 
+> Note: If the migration process failed, try to replace localhost with 127.0.0.1 in the database DNS configuration `(env-local-db.php)` which is located in the  configs folder.
+
 ```sh
 ./vendor/bin/luya migrate
 ```
