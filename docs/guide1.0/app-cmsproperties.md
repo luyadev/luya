@@ -1,24 +1,22 @@
-CMS Page Properties
-========================
+# CMS Page Properties
 
-What are properties?
---------------------
+Page properties are personalised styles you want to apply to specific pages. 
 
-As the name already says, those are properties you can attach to a page you want. For example if you like to use different colors on different pages you can create a color property where the user can select a specific color for each page. Once the property is set you can use them in your view files for blocks or layouts.
+For example, if you want to use different colors on different pages, you can create a color property where the user can select a specific color for each page. Once the property is set you can use them in your view files for [Blocks](https://luya.io/guide/app-blocks) or [Layouts](https://luya.io/guide/app-cmslayouts) components.
 
-Example use cases:
+Use cases:
 
 + Background image
 + Colors, css properties for contents
 + Specific meta informations
-+ Protected a page
++ Protecting a page
 
-Create a new property
+Creating a new property
 ------------------------
 
-All properties must be in a folder called `properties` and must contain the suffix `Property`, LUYA will automatically detect and setup all properties when you run the [import](luya-console.md) command. You can create the properties folder inside your app namespace or inside a module so you can create reusable modules with properties which will be attached automatically.
+All properties must be in a folder called `properties` and must contain the suffix `Property`. LUYA will automatically detect and setup all properties when you run the [import](luya-console.md) command. You can either create the properties folder inside your application or module folder to enable reusable modules with properties which will be attached automatically.
 
-Example property for creation of a textfield wich can be attached somewhere in your view files:
+Example of a property for creating a textfield wich can be attached somewhere in your view files:
 
 ```php
 <?php
@@ -46,7 +44,6 @@ class TestProperty extends \luya\admin\base\Property
 
 After running the import command you will see the property in the CMS admin.
 
-
 ### Class methods
 
 |methode	|Optional	|Description
@@ -57,7 +54,7 @@ After running the import command you will see the property in the CMS admin.
 |options	|yes	|If the variable type does have options you have to define them in this method.
 |defaultValue|yes	|This will be the initvalue of the variable, default is `false`.
 
-Access the property
+Accessing the property
 ---------------------------
 
 You can access the properties in
