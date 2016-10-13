@@ -2,7 +2,7 @@
 
 Page properties are personalised styles you want to apply to specific pages. 
 
-For example, if you want to use different colors on different pages, you can create a color property where the user can select a specific color for each page. Once the property is set you can use them in your view files for [Blocks](https://luya.io/guide/app-blocks) or [Layouts](https://luya.io/guide/app-cmslayouts) components.
+For example, if you want to use different colors on different pages, you can create a color property where the user can select a specific color for each page. Once the property is set you can use them in your view files for [Blocks](app-blocks.md) or [Layouts](app-cmslayouts.md) components.
 
 Use cases:
 
