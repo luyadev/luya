@@ -1,14 +1,16 @@
 # CMS Blocks
 
-What are Blocks? Blocks are elements used in the CMS Module to display and configure data. Blocks are dropped into the placeholders of an [CMS Layout](app-cmslayouts.md). An easy example of a block could be a paragraph tag where the user can add the content. LUYA CMS Modules ships with some default blocks, but you can always create your own elements.
+Blocks are elements used in the CMS Module to display and configure data. Blocks are dropped into the placeholders of a [CMS Layout](app-cmslayouts.md). An example of a Block could be a paragraph tag where the user can add the content. LUYA CMS Module is shipped with some default Blocks, but you can create your own elements.
 
 ## Create a new Block
 
-> use `./vendor/bin/luya block/create` console command to generate a block.
+> use `./vendor/bin/luya block/create` console command to generate a Block.
 
-You can add blocks to your project application or you can also add them to a module, in any case the folder name where the blocks are stored must named as **blocks**. Additionaly blocks should have the suffix `Block`. For example we build a block `TextTransformBlock` and store it in `app/blocks` or `app/modules/yourmodule/blocks`.
+You can add Blocks to your application or to a module. In either case, the folder where the blocks are stored must be named as **blocks**. Additionaly blocks should have the suffix `Block`. 
 
-> In 1.0.0-beta8 the new *PHP BLOCKS* are introduced. This allows you to use PHP Views instead of TWIG Templates. In order to use The new PHPBlocks you can extend the block from `luyya\cms\base\PhpBlock`. PhpBlocks does automatically requires a view file and the `twigAdmin()` is replaced by `admin()` method.
+For example, we create a Block `TextTransformBlock` and store it in `app/blocks` or `app/modules/yourmodule/blocks`.
+
+> In 1.0.0-beta8 the new *PHP BLOCKS* was introduced. This allows you to use PHP Views instead of TWIG Templates. In order to use The new PHPBlocks you can extend the block from `luyya\cms\base\PhpBlock`. PhpBlocks does automatically requires a view file and the `twigAdmin()` is replaced by `admin()` method.
 
 This is what the `TextTransformBlock` could looke like in your code:
 
@@ -51,7 +53,9 @@ class TextTransformBlock extends \luya\cms\base\PhpBlock
 }
 ```
 
-As we have switched to PHPBlock by default (in beta8) you now have to create also a view file, which is located in the view folder of your project: `app/views/blocks/`. The view file itself does have the same name is the class name of your block: `TextTransformBlock.php`. In your example from above the view file could look like this:
+As we have switched to PHPBlock by default (in beta8) you now have to create also a view file, which is located in the view folder of your application: `app/views/blocks/`. The view itself must have the same name as the class name of your block: `TextTransformBlock.php`. 
+
+In the example above, the view file should looke like this:
 
 ```php
 <?php
@@ -67,13 +71,13 @@ As we have switched to PHPBlock by default (in beta8) you now have to create als
 
 #### Register and import
 
-After creating the Block in your project you have to *Import* block into your system. The reason behind the import process is to avoid rely on database structure and to work with php files you can also check into version controller system. Run the [Import Command](luya-console.md):
+After creating a Block, you have to *Import* it into your application. The reason behind the import process is to avoid rely on database structure and to work with php files you can also check into version controller system. Run the [Import Command](luya-console.md):
 
 ```sh
 ./vendor/bin/luya import
 ```
 
-This will add or update the block into the cms system. If you rename the block or remove a block from the filesytem, the old block will be deleted from your database.
+This will add or update the Block into the CMS system. If you rename or remove a Block from your application, the old block will be deleted from your database.
 
 #### Methods in detail
 
@@ -87,7 +91,7 @@ This will add or update the block into the cms system. If you rename the block o
 
 ### Module blocks
 
-When you add a block inside of a module you have to define the `$module` properties, this is will make sure the view files are found in the correct folder. This way you can redistributed blocks with your own package for other users.
+When you add a Block inside of a module you have to define the `$module` properties, this is will make sure the view file are found in the correct folder. This way, you can redistributed Blocks with your own package to other users.
 
 ```php
 class TestBlock extends \luya\cms\base\PhpBlock
