@@ -84,6 +84,7 @@ RewriteRule . index.php
 An example for a configuration file `configs/env.php` (which env.php is the default value used from the `luya\Boot` class):
 
 ```php
+<?php
 return [
     'id' => 'myapp',
     'siteTitle' => 'My Application',
