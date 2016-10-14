@@ -144,16 +144,12 @@ use yii\helpers\Html;
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
 <body>
-<?php $this->beginBody() ?>
-    <header>My Company</header>
+<?php $this->beginBody(); ?>
     <?= $content ?>
-    <footer>&copy; 2014 by My Company</footer>
 <?php $this->endBody() ?>
 </body>
 </html>
