@@ -15,9 +15,9 @@ In order to run a LUYA core application without modules just create a applicatin
 .
 ├── composer.json
 ├── public_html
+│   ├── assets
 │   ├── index.php
 │   └── .htaccess
-├── assets
 ├── configs
 │   └── env.php
 ├── controllers
