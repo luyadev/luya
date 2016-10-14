@@ -10,7 +10,6 @@ In other words i means you can also use LUYA to build an application without adm
 
 In order to run a LUYA core application without modules just create a applicatin with the following structure:
 
-
 ```
 .
 ├── composer.json
@@ -110,8 +109,7 @@ return [
 ];
 ```
 
-Example content for the `SiteController.php`
-
+Example content for the `SiteController.php`:
 
 ```php
 <?php
@@ -131,4 +129,33 @@ class SiteController extends Controller
         return $this->render('contact');
     }
 }
+```
+
+Example content for the layout file `views/layouts/main.php`:
+
+```php
+<?php
+use yii\helpers\Html;
+
+/* @var $this yii\web\View */
+/* @var $content string */
+?>
+<?php $this->beginPage() ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <?= Html::csrfMetaTags() ?>
+    <title><?= Html::encode($this->title) ?></title>
+    <?php $this->head() ?>
+</head>
+<body>
+<?php $this->beginBody() ?>
+    <header>My Company</header>
+    <?= $content ?>
+    <footer>&copy; 2014 by My Company</footer>
+<?php $this->endBody() ?>
+</body>
+</html>
+<?php $this->endPage() ?>
 ```
