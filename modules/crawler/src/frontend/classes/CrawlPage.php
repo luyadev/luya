@@ -90,6 +90,12 @@ class CrawlPage extends \yii\base\Object
 	            return '';
 	        }
 	        
+	        $crawler->filter('script')->each(function (Crawler $crawler) {
+	        	foreach ($crawler as $node) {
+	        		$node->parentNode->removeChild($node);
+	        	}
+	        });
+	        
 	        return $crawler->filter('body')->html();
     	} catch (\Exception $e) {
     		return '';

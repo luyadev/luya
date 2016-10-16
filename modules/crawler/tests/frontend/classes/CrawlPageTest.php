@@ -66,5 +66,10 @@ class CrawlPageTest extends \PHPUnit_Framework_TestCase
 		$this->assertSame('Heading 1', $this->object->getContent());
 	}
 
+	public function testRemoveScriptTagsInContent()
+	{
+		$this->object->setCrawler(new Crawler('1<script>2</script>3'));
+		$this->assertSame('13', $this->object->getContent());
+	}
 	
 }
