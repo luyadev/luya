@@ -208,14 +208,14 @@ class CrawlPage extends \yii\base\Object
     		return null;
     	}
     	
-    	$response = $crawler->filter('h1')->each(function ($node, $i) use ($text) {
+    	$response = $crawler->filter('h1')->each(function ($node, $i) {
     		if (!empty($node->text())) {
     			return self::cleanupString($node->text());
     		}
     	});
     	
     	if (!empty($response) && isset($response[0])) {
-    		$this->verbosePrint('? getTitle(): h1 tag found', $text);
+    		$this->verbosePrint('? getTitle(): h1 tag found', $response[0]);
     		return $response[0];
     	}
     		

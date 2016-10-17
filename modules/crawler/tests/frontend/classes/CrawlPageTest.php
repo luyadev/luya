@@ -19,7 +19,7 @@ class CrawlPageTest extends \PHPUnit_Framework_TestCase
 		    'basePath' => dirname(__DIR__),
 		]);
 		$this->app->mockOnly = true;
-		$this->app->setYiiPath('../../vendor/yiisoft/yii2/Yii.php');
+		$this->app->setYiiPath(__DIR__.'/../../../vendor/yiisoft/yii2/Yii.php');
 		$this->app->applicationWeb();
 		
 		$this->object = new CrawlPage(['baseUrl' => 'http://localhost', 'pageUrl' => 'http://localhost', 'verbose' => false, 'useH1' => false]);
