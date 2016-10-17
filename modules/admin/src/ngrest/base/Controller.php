@@ -56,35 +56,45 @@ class Controller extends \luya\admin\base\Controller
         return $this->_model;
     }
     
-    public function actionIndex($inline = false, $relation = false, $field = false)
+    public function actionIndex($inline = false, $relation = false, $arrayIndex = false, $modelClass = false)
     {
         $apiEndpoint = $this->model->ngRestApiEndpoint();
 
+        $config = $this->model->getNgRestConfig();
+        
+        /*
+        // partial concept integration for
         $configClass = $this->module->getLinkedNgRestConfig($apiEndpoint);
 
         if ($configClass) {
-            // todo
             // $class = Yii::createObject($configClass, ['apiEndpoint' => '', 'primaryKey' => '..']);
-            // build config based on the defined config class
             $config = false;
         } else {
             $config = $this->model->getNgRestConfig();
         }
+        */
 
         if (!$config) {
             throw new Exception("Provided NgRest config for controller '' is invalid.");
         }
         
-        $config->inline = (bool) $inline;
+        if ($relation && $arrayIndex !== false && $modelClass !== false) {
+        	$config->relationCall = ['id' => $relation, 'arrayIndex' => $arrayIndex, 'modelClass' => $modelClass];
+        }
+
+        // apply config informations
         $config->filters = $this->model->ngRestFilters();
         $config->defaultOrder = $this->model->ngRestListOrder();
         $config->attributeGroups = $this->model->ngRestAttributeGroups();
         $config->groupByField = $this->model->ngRestGroupByField();
-        $config->relations = $this->model->ngRestRelation();
         
-        if ($relation && $field) {
-        	$config->relationCall = ['id' => $relation, 'where' => $field];
+        $rel = [];
+        foreach ($this->model->ngRestRelation() as $key => $item) {
+            $rel[] = ['label' => $item['label'], 'apiEndpoint' => $item['apiEndpoint'], 'arrayIndex' => $key, 'modelClass' => base64_encode($this->model->className())];
         }
+
+        $config->relations = $rel;
+        
         $ngrest = new NgRest($config);
 
         $crud = new RenderCrud();

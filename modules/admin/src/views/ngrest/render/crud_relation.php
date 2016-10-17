@@ -20,7 +20,7 @@ use yii\helpers\Json;
         $scope.config.ngrestConfigHash = '<?php echo $config->hash; ?>';
         $scope.config.activeWindowCallbackUrl = '<?php echo $activeWindowCallbackUrl; ?>';
         $scope.config.pk = '<?php echo $this->context->getPrimaryKey(); ?>';
-        $scope.config.inline = <?= (int) $config->inline; ?>;
+        $scope.config.inline = 1;
         $scope.orderBy = '<?= $config->getDefaultOrderDirection() . $config->getDefaultOrderField(); ?>';
         $scope.saveCallback = <?= $config->getOption('saveCallback'); ?>;
         $scope.relationCall = <?= Json::htmlEncode($config->relationCall); ?>
@@ -105,6 +105,11 @@ use yii\helpers\Json;
         <div ng-if="crudSwitchType==1">
 
             <?php if ($canCreate && $config->getPointer('create')): ?>
+            
+                <button class="btn waves-effect waves-light" type="submit" ng-disabled="createForm.$invalid">
+                    <?= Module::t('ngrest_crud_btn_create'); ?> <i class="material-icons right">check</i>
+                </button>
+            
                 <form name="formCreate" role="form" ng-submit="submitCreate()">
 
                     <!-- MODAL CONTENT -->
@@ -155,6 +160,11 @@ use yii\helpers\Json;
 
         <div ng-if="crudSwitchType==2" <?php if (!$config->inline): ?>zaa-esc="closeUpdate()"<?php endif; ?>>
             <?php if ($canUpdate && $config->getPointer('update')): ?>
+            
+                <button class="btn waves-effect waves-light red" type="button" ng-click="closeUpdate()">
+                    <i class="material-icons left">cancel</i> <?= Module::t('button_abort'); ?>
+                </button>
+            
                 <form name="formUpdate" role="form" ng-submit="submitUpdate()">
                     <!-- MODAL CONTENT -->
                     <div class="modal__content">

@@ -49,8 +49,8 @@ use luya\admin\Module;
                     <a class="tabs__anchor" ng-click="switchTo(0, true)"><i class="material-icons tabs__icon">cancel</i> <?= Module::t('ngrest_crud_btn_close'); ?></a>
                 </li>
                 
-                <li ng-repeat="btn in tabService.tabs" class="tabs__item" ng-class="{'tabs__item--active' : btn.active}">
-                	<a class="tabs__anchor" ng-click="switchToTab(btn)"><i class="material-icons tabs__icon">chrome_reader_mode</i> {{btn.name}} #{{btn.id}}</a>
+                <li ng-repeat="(index,btn) in tabService.tabs" class="tabs__item" ng-class="{'tabs__item--active' : btn.active}">
+                	<a class="tabs__anchor"><i class="material-icons tabs__icon" ng-click="closeTab(btn, index)">cancel</i> <span ng-click="switchToTab(btn)">{{btn.name}} #{{btn.id}}</span></a>
                 </li>
             </ul>
         </div>
@@ -64,7 +64,7 @@ use luya\admin\Module;
         </div>
 		
 		<div class="card-panel" ng-repeat="btn in tabService.tabs" ng-if="btn.active">
-			<crud-relation-loader api="{{btn.api}}" where="{{btn.where}}" id="{{btn.id}}"></crud-relation-loader>
+			<crud-relation-loader api="{{btn.api}}" array-index="{{btn.arrayIndex}}" model-class="{{btn.modelClass}}" id="{{btn.id}}"></crud-relation-loader>
 		</div>
         
         <!-- LIST -->

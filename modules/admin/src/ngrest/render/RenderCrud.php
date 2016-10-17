@@ -92,9 +92,9 @@ class RenderCrud extends Render implements RenderInterface
         if ($this->_buttons === null) {
             $buttons = [];
             
-            foreach ($this->config->relations as $name => $cfg) {
+            foreach ($this->config->relations as $rel) {
 
-                $api = Yii::$app->adminmenu->getApiDetail($cfg['api']);
+                $api = Yii::$app->adminmenu->getApiDetail($rel['apiEndpoint']);
                 
                 if (!$api) {
                     throw new InvalidConfigException("The configured api relation '{$cfg['api']}' does not exists in the menu elements.");
@@ -103,9 +103,9 @@ class RenderCrud extends Render implements RenderInterface
                 $node = str_replace("-", "/", $api['route']);
                 
             	$buttons[] = [
-            		'ngClick' => 'tabService.addTab(item.'.$this->config->primaryKey.', \''.$node.'\', \''.base64_encode(Json::encode($cfg['where'])).'\', \''.$name.'\')',
+            		'ngClick' => 'tabService.addTab(item.'.$this->config->primaryKey.', \''.$node.'\', \''.$rel['arrayIndex'].'\', \''.$rel['label'].'\', \''.$rel['modelClass'].'\')',
             		'icon' => 'chrome_reader_mode',
-            		'label' => $name,
+            		'label' => $rel['label'],
             	];
             }
             

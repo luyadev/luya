@@ -291,13 +291,17 @@ zaa.factory("CrudTabService", function() {
 	
 	service.tabs = [];
 	
-	service.addTab = function(id, api, where, name) {
-		service.tabs.push({id: id, api: api, where: where, active: false, name: name});
+	service.remove = function(index) {
+		service.tabs.splice(index, 1);
+	};
+	
+	service.addTab = function(id, api, arrayIndex, name, modelClass) {
+		service.tabs.push({id: id, api: api, arrayIndex: arrayIndex, active: false, name: name, modelClass:modelClass});
 	};
 	
 	service.clear = function() {
 		service.tabs = [];
-	}
+	};
 	
 	return service;
 });

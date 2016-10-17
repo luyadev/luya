@@ -97,18 +97,19 @@ class Api extends RestActiveController
         ]);
     }
     
-    public function actionRelationCall($where, $id)
+    public function actionRelationCall($arrayIndex, $id, $modelClass)
     {
+        $modelClass = base64_decode($modelClass);
+        $model = $modelClass::findOne($id);
         
-        $where = Json::decode(base64_decode($where));
+        if (!$model) {
+            throw new InvalidCallException("unable to resolve relation call model.");   
+        }
         
-        array_walk($where, function(&$item, $key) use ($id) {
-           $item = str_replace("{{id}}", $id, $item); 
-        });
-        
+        $func = $model->ngRestRelation()[$arrayIndex]['dataProvider'];
         
     	return new ActiveDataProvider([
-            'query' => $this->model->find()->andWhere($where),
+    	    'query' => $func,
             'pagination' => false,
         ]);
     }
