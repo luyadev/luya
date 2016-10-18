@@ -303,7 +303,12 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     public function getNgRestPrimaryKey()
     {
         if ($this->_ngRestPrimaryKey === null) {
-            $this->_ngRestPrimaryKey = $this->getTableSchema()->primaryKey[0];
+            $keys = static::primaryKey();
+            if (!isset($keys[0])) {
+                throw new InvalidConfigException("The NgRestModel '".__CLASS__."' requires at least one primaryKey in order to work.");
+            }
+            
+            $this->_ngRestPrimaryKey = $keys[0];
         }
 
         return $this->_ngRestPrimaryKey;
