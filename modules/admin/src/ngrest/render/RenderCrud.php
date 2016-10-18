@@ -97,7 +97,7 @@ class RenderCrud extends Render implements RenderInterface
                 $api = Yii::$app->adminmenu->getApiDetail($rel['apiEndpoint']);
                 
                 if (!$api) {
-                    throw new InvalidConfigException("The configured api relation '{$cfg['api']}' does not exists in the menu elements.");
+                    throw new InvalidConfigException("The configured api relation '{$rel['apiEndpoint']}' does not exists in the menu elements. Maybe you have no permissions to access this API.");
                 }
                 
                 $node = str_replace("-", "/", $api['route']);
