@@ -8,6 +8,8 @@ use yii\helpers\StringHelper;
 use yii\base\ViewContextInterface;
 use yii\base\Object;
 use luya\admin\ngrest\base\ActiveWindowView;
+use yii\helpers\Inflector;
+use luya\helpers\Url;
 
 /**
  * Base class for all ActiveWindow classes.
@@ -76,6 +78,44 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
         if ($this->module === null) {
             throw new Exception('The ActiveWindow property \'module\' of '.get_called_class().' can not be null. You have to defined the module in where the ActiveWindow is defined. For example `public $module = \'@admin\';`');
         }
+    }
+    
+    private $_configHash = null;
+    
+    public function setConfigHash($hash)
+    {
+        $this->_configHash = $hash;
+    }
+    
+    public function getConfigHash()
+    {
+        return $this->_configHash;
+    }
+    
+    private $_activeWindowHash = null;
+    
+    public function setActiveWindowHash($hash)
+    {
+        $this->_activeWindowHash = $hash;
+    }
+    
+    public function getActiveWindowHash()
+    {
+        return $this->_activeWindowHash;
+    }
+    
+    /**
+     * Create an absolute link to a callback.
+     * 
+     * This method is commonly used when returing data directly to the browser, there for the abolute url to a callback is required. Only logged in
+     * users can view the callback url, but there is no other security about callbacks.
+     * 
+     * @param string $callback The name of the callback without the callback prefix exmaple `createPdf` if the callback is `callbackCreatePdf()`.
+     * @return string The absolute url to the callback.
+     */
+    public function createCallbackUrl($callback)
+    {
+        return Url::to(['/admin/ngrest/callback', 'activeWindowCallback' => Inflector::camel2id($callback),'ngrestConfigHash' => $this->getConfigHash(),'activeWindowHash' => $this->getActiveWindowHash()], true);
     }
     
     /**

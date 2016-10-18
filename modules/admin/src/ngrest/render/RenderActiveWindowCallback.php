@@ -27,6 +27,8 @@ class RenderActiveWindowCallback extends Render implements RenderInterface
         
         $obj = Yii::createObject($activeWindows[$activeWindowHash]['objectConfig']);
         $obj->setItemId(Yii::$app->session->get($activeWindowHash));
+        $obj->setConfigHash($this->config->getHash());
+        $obj->setActiveWindowHash($activeWindowHash);
 
         $function = 'callback'.Inflector::id2camel($activeWindowCallback);
 
