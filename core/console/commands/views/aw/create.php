@@ -15,7 +15,7 @@ namespace <?php echo $namespace; ?>;
 /**
  * Active Window created at <?php echo date("d.m.Y H:i"); ?> on LUYA Version <?php echo $luya; ?>.
  */
-class <?php echo $className; ?> extends \admin\ngrest\base\ActiveWindow
+class <?php echo $className; ?> extends \luya\admin\ngrest\base\ActiveWindow
 {
 	public $module = '@<?php echo $moduleId; ?>';
 	
