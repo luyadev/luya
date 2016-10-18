@@ -63,6 +63,9 @@ class GroupAuth extends ActiveWindow
         foreach ($data as $k => $v) {
             $data[$k]['is_head'] = ($last !== $v['module_name']) ? 1 : 0;
             $data[$k]['group_alias'] = ucfirst($v['module_name']);
+            try {
+                $data[$k]['alias_name'] = Yii::t($v['module_name'], $v['alias_name'], [], Yii::$app->luyaLanguage);
+            } catch (\Exception $e) {}
             $last = $v['module_name'];
         }
 
