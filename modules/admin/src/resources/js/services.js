@@ -291,8 +291,15 @@ zaa.factory("CrudTabService", function() {
 	
 	service.tabs = [];
 	
-	service.remove = function(index) {
+	service.remove = function(index, $scope) {
 		service.tabs.splice(index, 1);
+		
+		if (service.tabs.length > 0) {
+			var lastTab = service.tabs.slice(-1)[0];
+			lastTab.active = true;
+		} else {
+			$scope.switchTo(0);
+		}
 	};
 	
 	service.addTab = function(id, api, arrayIndex, name, modelClass) {

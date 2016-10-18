@@ -71,7 +71,7 @@
 		};
 		
 		$scope.closeTab = function(tab, index) {
-			$scope.tabService.remove(index);
+			$scope.tabService.remove(index, $scope);
 		};
 		
 		$scope.switchTo = function(type, reset) {
