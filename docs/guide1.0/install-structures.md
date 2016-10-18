@@ -150,6 +150,11 @@ return [
 ];
 ```
 
+Changing root directory
+------------
+
+The `public_html` folder is the root directory. It contains the application bootstrap file. If you want to reflect your web server directory structure, you can rename the `public_html` folder to whatever you want to. For example: `www` or `web`. You just need to update your configuration by adding the `webrootDirectory` config. Here an example of how it should look like this : `'webrootDirectory' => 'www'`
+
 Composer Dev
 ------------
 
