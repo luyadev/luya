@@ -8,7 +8,7 @@ The exporter module allows you to easy download the full database and storage da
 Add to your composer.json:
 
 ```
-"luyadev/luya-module-exporter" : "1.0.0-beta8",
+"luyadev/luya-module-exporter" : "^1.0@dev",
 ```
 
 Add the module to your application config:
