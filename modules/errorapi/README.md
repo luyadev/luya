@@ -7,7 +7,7 @@ With the Error Api module, you can send all exceptions to your personal Error Ap
 
 ### Module setup
 
-add this line to your composer.json
+add this line to your composer.json and run the `composer install` command
 
 ```
 "luyadev/luya-module-errorapi" : "^1.0@dev",
@@ -32,7 +32,7 @@ Defined the email of the recipient for the exceptions and configure the slack ch
 
 ### Website setup
 
-ITo enable the error api for your website, you need to configure the default LUYA error handler in the component section of your config file :
+To enable the error api for your website, you need to configure the default LUYA error handler in the component section of your config file :
 
 ```
 'components' => [
@@ -44,3 +44,9 @@ ITo enable the error api for your website, you need to configure the default LUY
 	],
 ]
 ```
+
+### Finalising the installation
+
+Finally, to see the Error API Module in action, you need to run `./vendor/bin/luya migrate` and `./vendor/bin/luya import` commands and you're all set to receive errors and exceptions that occurred from your customer's website.
+
+> It is very important to run the `./vendor/bin/luya migrate` and `./vendor/bin/luya import` commands in order for these changes to take effect.
