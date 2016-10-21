@@ -15,6 +15,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Changed
 
+- [#1043](https://github.com/luyadev/luya/issues/1043) Upgrade to 2.0.10 version of the Yii Framework.
 
 ### Fixed
 
