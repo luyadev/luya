@@ -12,6 +12,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1008](https://github.com/luyadev/luya/issues/1008) Administration interface language can be changed and stored in the user settings.
 - [#1014](https://github.com/luyadev/luya/issues/1014) NgRest Crud has a new possibility to work with relation data via the `ngRestRelation()` method inside the NgRestModel. This allows you to open relation data in new tabs.
 - [#1038](https://github.com/luyadev/luya/issues/1038) Method `createCallbackUrl($callback)` added for ActiveWindows in order to get the absolut url for a callback, this is usefull when creating callbacks which can return a pdf for example.
+- [#1007](https://github.com/luyadev/luya/issues/1007) French translations available for all core modules.
 
 ### Changed
 
