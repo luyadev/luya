@@ -22,6 +22,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 - [#1002](https://github.com/luyadev/luya/issues/1002) Override the core commands method in the console application in order the provide the ability to use controllerMap variable for configurations in the applcation.
 - [#1011](https://github.com/luyadev/luya/issues/1011) The ViewContext implementation for cmslayout rendering allows you now to render other templates inside a cmslayout.
+- [#1044](https://github.com/luyadev/luya/issues/1044) Changing the cms permission force menu reload in order to fix bug with old menu permissions.
 
 1.0.0-RC1 (04.10.2016)
 -----------------------
