@@ -139,7 +139,7 @@ use luya\cms\admin\Module;
 </script>
 <!-- /UPDATE REDIRECT FORM -->
 
-<div ng-controller="NavController" ng-if="!isDeleted">
+<div ng-controller="NavController" ng-show="!isDeleted">
 
     <div class="cms">
         <div class="cms__pages">
