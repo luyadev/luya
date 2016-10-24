@@ -222,10 +222,9 @@ class CrudController extends BaseCrudController
 
         $getMenu = 'public function getMenu()
 {
-    return $this->node(\''.Inflector::humanize($modelName).'\', \'extension\') // instead of extension, choose icon from https://design.google.com/icons/
+    return (new \luya\admin\components\AdminMenuBuilder($this))->node(\''.Inflector::humanize($modelName).'\', \'extension\') // instead of extension and label, choose icon from https://design.google.com/icons/
         ->group(\'GROUP\')
-            ->itemApi(\''.Inflector::humanize($modelName).'\', \''.$data['api']['route'].'\', \'label\', \''.$apiEndpoint.'\') // instead of label, choose icon from https://design.google.com/icons/
-    ->menu();
+            ->itemApi(\''.Inflector::humanize($modelName).'\', \''.$data['api']['route'].'\', \'label\', \''.$apiEndpoint.'\');
 }
             ';
 

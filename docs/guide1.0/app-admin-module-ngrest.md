@@ -207,11 +207,10 @@ The store the permission informations of your newly created ngrest crud you have
 ```php
 public function getMenu()
 {
-    return $this
+    return (new \luya\admin\components\AdminMenuBuilder($this))
     ->node("Team Admin", "account")
         ->group("Manager")
-            ->itemApi("Members", "teamadmin-member-index", "extension", "api-teamadmin-member")
-    ->menu();
+            ->itemApi("Members", "teamadmin-member-index", "extension", "api-teamadmin-member");
 }
 ```
 
