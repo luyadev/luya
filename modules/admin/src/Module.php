@@ -12,7 +12,16 @@ use luya\admin\components\AdminMenu;
 use luya\admin\components\StorageContainer;
 use luya\admin\components\Auth;
 use luya\admin\components\AdminMenuBuilder;
+use luya\admin\importers\AuthImporter;
+use luya\admin\importers\FilterImporter;
+use luya\admin\importers\PropertyImporter;
+use luya\admin\importers\StorageImporter;
 
+/**
+ * Admin Module
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
     /**
@@ -69,6 +78,16 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     ];
     
     public $moduleMenus = [];
+    
+    public $translations = [
+        [
+            'prefix' => 'admin*',
+            'basePath' => '@admin/messages',
+            'fileMap' => [
+                'admin' => 'admin.php',
+            ],
+        ],
+    ];
     
     private $_jsTranslations = [];
     
@@ -130,24 +149,14 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
             ],
         ];
     }
-    
-    public $translations = [
-        [
-            'prefix' => 'admin*',
-            'basePath' => '@admin/messages',
-            'fileMap' => [
-                'admin' => 'admin.php',
-            ],
-        ],
-    ];
 
     public function import(ImportControllerInterface $import)
     {
         return [
-            '\\luya\\admin\\importers\\AuthImporter',
-            '\\luya\\admin\\importers\\FilterImporter',
-            '\\luya\\admin\\importers\\PropertyImporter',
-            '\\luya\\admin\\importers\\StorageImporter',
+            AuthImporter::class,
+            FilterImporter::class,
+            PropertyImporter::class,
+            StorageImporter::class,
         ];
     }
     
