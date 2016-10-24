@@ -4,6 +4,7 @@ namespace luya\admin\components;
 
 use yii\base\Object;
 use luya\base\AdminModuleInterface;
+use luya\admin\base\GenericSearchInterface;
 
 /**
  * Builder class for the Administration Menu/Navigation.
@@ -57,6 +58,14 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
         parent::__construct($config);
     }
     
+    /**
+     * The node is the menu entry in the TOP navigation of the luya administration interface.
+     * 
+     * @param string $name The name of the node, all names will process trough the `Yii::t` function with its module name as prefix.
+     * @param string $icon The icon name based on the google icons font see https://design.google.com/icons/.
+     * @param string $template Whether to use a custom template or not.
+     * @return \luya\admin\components\AdminMenuBuilder
+     */
     public function node($name, $icon, $template = false)
     {
         $this->_pointers['node'] = $name;
@@ -74,6 +83,16 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
         return $this;
     }
     
+    /**
+     * A node which is a custom route to open, nodes are the the top menu of the luya administration interfaces.
+     * 
+     * @param string $name The name of the node, all names will process trough the `Yii::t` function with its module name as prefix.
+     * @param string $icon The icon name based on the google icons font see https://design.google.com/icons/.
+     * @param string $template Whether to use a custom template or not.
+     * @param string $route The route to the template which is going to be render by angular, example `cmsadmin/default/index`.
+     * @param string $searchModelClass The path to the model to search inside the admin global search, must implement the {{luya\admin\base\GenericSearchInterface}}.
+     * @return \luya\admin\components\AdminMenuBuilder
+     */
     public function nodeRoute($name, $icon, $template, $route, $searchModelClass = null)
     {
         $this->_pointers['node'] = $name;
@@ -93,6 +112,12 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
         return $this;
     }
     
+    /**
+     * Add a group, all items (api or route) must be child items of a group. The group is the title in the left menu of the admin interface.
+     * 
+     * @param string $name The name of the group.
+     * @return \luya\admin\components\AdminMenuBuilder
+     */
     public function group($name)
     {
         $this->_pointers['group'] = $name;
@@ -101,6 +126,15 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
         return $this;
     }
     
+    /**
+     * Add an item to a group. API items are based on the ngrest crud concept.
+     * 
+     * @param string $name The name of the Api (displayed as menu point in the left navigation), all names run through the `Yii::t()` method prefixed with the module id.
+     * @param string $route The api route to the ngrest controller `cmsadmin-navcontainer-index`.
+     * @param string $icon The icon name based on the google icons font see https://design.google.com/icons/.
+     * @param string $apiEndpoint The api endpoint defined in the NgRestModel::ngRestApiEndpoint `api-cms-navcontainer`.
+     * @return \luya\admin\components\AdminMenuBuilder
+     */
     public function itemApi($name, $route, $icon, $apiEndpoint)
     {
         $this->_menu[$this->_pointers['node']]['groups'][$this->_pointers['group']]['items'][] = [
@@ -118,6 +152,15 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
         return $this;
     }
     
+    /**
+     * Add an item to a group. Route items opens a angular view.
+     * 
+     * @param string $name The name of the Api (displayed as menu point in the left navigation), all names run through the `Yii::t()` method prefixed with the module id.
+     * @param string $route The route to the template `cmsadmin/permission/index`.
+     * @param string $icon The icon name based on the google icons font see https://design.google.com/icons/.
+     * @param string $searchModelClass The search model must implement the {{luya\admin\base\GenericSearchInterface}}. 
+     * @return \luya\admin\components\AdminMenuBuilder
+     */
     public function itemRoute($name, $route, $icon, $searchModelClass = null)
     {
         $this->_menu[$this->_pointers['node']]['groups'][$this->_pointers['group']]['items'][] = [
@@ -138,6 +181,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     /**
      * {@inheritDoc}
      * @see \luya\admin\components\AdminMenuBuilderInterface::menu()
+     * @return array
      */
     public function menu()
     {
