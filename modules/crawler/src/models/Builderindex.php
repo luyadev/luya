@@ -26,7 +26,7 @@ class Builderindex extends \luya\admin\ngrest\base\NgRestModel
         return [
             'restcreate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page', 'group'],
             'restupdate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page', 'group'],
-            'default' => ['url', 'content', 'title', 'language_info', 'content_hash', 'is_dublication', 'url_found_on_page', 'group'],
+            'default' => ['url', 'content', 'title', 'language_info', 'content_hash', 'is_dublication', 'url_found_on_page', 'group', 'description'],
         ];
     }
 

@@ -21,6 +21,8 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1046](https://github.com/luyadev/luya/issues/1046) Hide menu items in the administration in order to enable crud relations with permissions but hide the menu point of the ngrest crud inside the admin interface.
 - [#1037](https://github.com/luyadev/luya/issues/1037) Image property abstract class to allow short and faster implementation of image properties.
 - [#1004](https://github.com/luyadev/luya/issues/1004) CMS Page field to set a custom page title tag in order to add SEO optimized titles.
+- [#1048](https://github.com/luyadev/luya/issues/1048) Crawler stores meta description infos into a seperat field in order to display description in search results.
+- [#1047](https://github.com/luyadev/luya/issues/1047) Title, Keyword and Description are now part of the Crawlers contnet, as the content is where the search field is look for the search query.
 
 ### Fixed
 

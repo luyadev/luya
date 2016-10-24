@@ -63,13 +63,34 @@ class CrawlPageTest extends \PHPUnit_Framework_TestCase
 		
 		$this->assertSame('Heading 1', CrawlPage::cleanupString($this->object->getCrawlerHtml()));
 
-		$this->assertSame('Heading 1', $this->object->getContent());
+		$this->assertSame('Heading 1  Title', $this->object->getContent());
 	}
 
 	public function testRemoveScriptTagsInContent()
 	{
 		$this->object->setCrawler(new Crawler('1<script>2</script>3'));
-		$this->assertSame('13', $this->object->getContent());
+	
+		$this->assertSame('<p>13</p>', $this->object->getCrawlerHtml());
 	}
 	
+	public function testGetMetaDescription()
+	{
+	    $this->object->setCrawler(new Crawler(file_get_contents('tests/data/metatest.html')));
+	    
+	    $this->assertSame('a', $this->object->getMetaDescription());
+	}
+	
+	public function testGetMetaKeywords()
+	{
+	    $this->object->setCrawler(new Crawler(file_get_contents('tests/data/metatest.html')));
+	     
+	    $this->assertSame('c d', $this->object->getMetaKeywords());
+	}
+	
+	public function testGetTitleTag()
+	{
+	    $this->object->setCrawler(new Crawler(file_get_contents('tests/data/metatest.html')));
+	    
+	    $this->assertSame('Title', $this->object->getTitleTag());
+	}
 }

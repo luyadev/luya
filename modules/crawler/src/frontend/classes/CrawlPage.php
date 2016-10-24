@@ -171,6 +171,23 @@ class CrawlPage extends \yii\base\Object
         
         return $crawler->filterXPath('//html')->attr('lang');
     }
+    
+    public function getTitleTag()
+    {
+        $crawler = $this->getCrawler();
+        
+        if (!$crawler) {
+            return null;
+        }
+        
+        $text = $crawler->filterXPath('//title')->text();
+        
+        if (!empty($text)) {
+            return $text;
+        }
+        
+        return null;
+    }
 
     public function getTitle()
     {
@@ -186,7 +203,7 @@ class CrawlPage extends \yii\base\Object
         	return $tag;
         }
         
-        $text =  $crawler->filterXPath('//title')->text();
+        $text = $this->getTitleTag();
         
         $this->verbosePrint('? getTitle(): title tag found', $text);
         if ($this->useH1) {
@@ -198,6 +215,40 @@ class CrawlPage extends \yii\base\Object
         }
         
         return $text;
+    }
+    
+    public function getMetaKeywords()
+    {
+        $crawler = $this->getCrawler();
+        
+        if (!$crawler) {
+            return null;
+        }
+        
+        $descriptions = $crawler->filterXPath("//meta[@name='keywords']")->extract(['content']);
+        
+        if (isset($descriptions[0])) {
+            return str_replace(",", " ", $descriptions[0]);
+        }
+        
+        return null;
+    }
+    
+    public function getMetaDescription()
+    {
+        $crawler = $this->getCrawler();
+        
+        if (!$crawler) {
+            return null;
+        }
+        
+        $descriptions = $crawler->filterXPath("//meta[@name='description']")->extract(['content']);
+        
+        if (isset($descriptions[0])) {
+            return self::cleanupString($descriptions[0]);
+        }
+        
+        return null;
     }
     
     public function getTitleH1()
@@ -278,6 +329,10 @@ class CrawlPage extends \yii\base\Object
                         $bodyContent = str_replace($ignorPartial, '', $bodyContent);
                     }
                 }
+                
+                $bodyContent .= $this->getMetaDescription();
+                $bodyContent .= $this->getMetaKeywords();
+                $bodyContent .= $this->getTitleTag();
             }
             
             return $bodyContent;

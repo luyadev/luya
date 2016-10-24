@@ -64,6 +64,12 @@ class CrawlContainer extends \yii\base\Object
         }
     }
 
+    /**
+     * Get the crawl page object based on its ulr.
+     * 
+     * @param string $url The crawler object.
+     * @return \luya\crawler\frontend\classes\CrawlPage
+     */
     protected function getCrawler($url)
     {
         if (!array_key_exists($url, $this->_crawlers)) {
@@ -253,6 +259,7 @@ class CrawlContainer extends \yii\base\Object
                 $model->content = $this->getCrawler($url)->getContent();
                 $model->group = $this->getCrawler($url)->getGroup();
                 $model->title = $this->getCrawler($url)->getTitle();
+                $model->description = $this->getCrawler($url)->getMetaDescription();
                 $model->crawled = 1;
                 $model->status_code = 1;
                 $model->last_indexed = time();
@@ -283,6 +290,7 @@ class CrawlContainer extends \yii\base\Object
                     $model->status_code = 1;
                     $model->last_indexed = time();
                     $model->title = $this->getCrawler($url)->getTitle();
+                    $model->description = $this->getCrawler($url)->getMetaDescription();
                     $model->language_info = $this->getCrawler($url)->getLanguageInfo();
                     $model->save(false);
     
