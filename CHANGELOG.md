@@ -6,6 +6,11 @@ The changelog contains informations about bug fixes, new features or bc breaking
 1.0.0-RC2 (in progress)
 -----------------------
 
+### Changed
+
+- [#1045](https://github.com/luyadev/luya/issues/1045) Admin modules `getMenu()` method must return an `luya\admin\components\AdminMenuBuilder` object instead of an array. A deprecated message is triggered when using the old menu builder functions.
+- [#1043](https://github.com/luyadev/luya/issues/1043) Upgrade to 2.0.10 version of the Yii Framework.
+
 ### Added
 
 - [#1003](https://github.com/luyadev/luya/issues/1003) The crawler tag CRAWL_TITLE has been added to ensure a customization of the titles.
@@ -13,10 +18,6 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1014](https://github.com/luyadev/luya/issues/1014) NgRest Crud has a new possibility to work with relation data via the `ngRestRelation()` method inside the NgRestModel. This allows you to open relation data in new tabs.
 - [#1038](https://github.com/luyadev/luya/issues/1038) Method `createCallbackUrl($callback)` added for ActiveWindows in order to get the absolut url for a callback, this is usefull when creating callbacks which can return a pdf for example.
 - [#1007](https://github.com/luyadev/luya/issues/1007) French translations available for all core modules.
-
-### Changed
-
-- [#1043](https://github.com/luyadev/luya/issues/1043) Upgrade to 2.0.10 version of the Yii Framework.
 
 ### Fixed
 

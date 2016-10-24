@@ -3,6 +3,7 @@
 namespace luya\admin\components;
 
 use Yii;
+use luya\helpers\ArrayHelper;
 
 /**
  * Admin Menu Data
@@ -27,7 +28,17 @@ class AdminMenu extends \yii\base\Component
     public function getMenu()
     {
         if ($this->_menu === null) {
-            $this->_menu = Yii::$app->getModule('admin')->moduleMenus;
+            $menu = [];
+            $menus = Yii::$app->getModule('admin')->moduleMenus;
+            foreach ($menus as $k => $v) {
+                if (is_object($v) && $v instanceof AdminMenuBuilderInterface) {
+                    $data = $v->menu();
+                } else {
+                    $data = $v;
+                }
+                $menu = ArrayHelper::merge($data, $menu);
+            }
+            $this->_menu = $menu;
         }
 
         return $this->_menu;

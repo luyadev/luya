@@ -14,6 +14,8 @@ class CrudControllerTest extends LuyaConsoleTestCase
         
         $testShema = Yii::$app->db->getTableSchema('admin_user', true);
         
+        $this->assertNotNull($testShema);
+        
         $this->assertSame(7, count($ctrl->generateRules($testShema)));
         $this->assertSame(13, count($ctrl->generateLabels($testShema)));
     }

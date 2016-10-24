@@ -11,6 +11,7 @@ use luya\admin\components\AdminUser;
 use luya\admin\components\AdminMenu;
 use luya\admin\components\StorageContainer;
 use luya\admin\components\Auth;
+use luya\admin\components\AdminMenuBuilder;
 
 class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
@@ -94,20 +95,19 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     
     public function getMenu()
     {
-        return $this
-        ->nodeRoute('menu_node_filemanager', 'folder_open', 'admin-storage-index', 'admin/storage/index')
-        ->node('menu_node_system', 'layers')
-            ->group('menu_group_access')
-                ->itemApi('menu_access_item_user', 'admin-user-index', 'person', 'api-admin-user')
-                ->itemApi('menu_access_item_group', 'admin-group-index', 'group', 'api-admin-group')
-            ->group('menu_group_system')
-                ->itemApi('menu_system_item_language', 'admin-lang-index', 'language', 'api-admin-lang')
-                ->itemApi('menu_system_item_tags', 'admin-tag-index', 'label', 'api-admin-tag')
-                ->itemApi('menu_system_logger', 'admin-logger-index', 'label', 'api-admin-logger')
-            ->group('menu_group_images')
-                ->itemApi('menu_images_item_effects', 'admin-effect-index', 'blur_circular', 'api-admin-effect')
-                ->itemApi('menu_images_item_filters', 'admin-filter-index', 'adjust', 'api-admin-filter')
-        ->menu();
+        return (new AdminMenuBuilder($this))
+            ->nodeRoute('menu_node_filemanager', 'folder_open', 'admin-storage-index', 'admin/storage/index')
+            ->node('menu_node_system', 'layers')
+                ->group('menu_group_access')
+                    ->itemApi('menu_access_item_user', 'admin-user-index', 'person', 'api-admin-user')
+                    ->itemApi('menu_access_item_group', 'admin-group-index', 'group', 'api-admin-group')
+                ->group('menu_group_system')
+                    ->itemApi('menu_system_item_language', 'admin-lang-index', 'language', 'api-admin-lang')
+                    ->itemApi('menu_system_item_tags', 'admin-tag-index', 'label', 'api-admin-tag')
+                    ->itemApi('menu_system_logger', 'admin-logger-index', 'label', 'api-admin-logger')
+                ->group('menu_group_images')
+                    ->itemApi('menu_images_item_effects', 'admin-effect-index', 'blur_circular', 'api-admin-effect')
+                    ->itemApi('menu_images_item_filters', 'admin-filter-index', 'adjust', 'api-admin-filter');
     }
 
     public function registerComponents()

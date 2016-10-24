@@ -36,7 +36,7 @@ class Bootstrap extends \luya\base\Bootstrap
             foreach ($module->urlRules as $rule) {
                 $this->_urlRules[(isset($rule['position'])) ? $rule['position'] : UrlRule::POSITION_AFTER_LUYA][] = $rule;
             }
-
+            
             foreach ($module->apis as $alias => $class) {
                 $this->_apis[$alias] = $class;
             }
@@ -49,18 +49,17 @@ class Bootstrap extends \luya\base\Bootstrap
 
     public function run($app)
     {
-        // start the module now
-        foreach ($this->getModules() as $id => $module) {
-            if ($module instanceof AdminModuleInterface) {
-                $this->_adminAssets = ArrayHelper::merge($module->assets, $this->_adminAssets);
-                $this->_adminMenus = ArrayHelper::merge($module->getMenu(), $this->_adminMenus);
-                $this->_jsTranslations[$id] = $module->registerJsTranslation;
-            }
-        }
-
         if (!$app->request->getIsConsoleRequest()) {
             if ($this->hasModule('admin') && $app->request->isAdmin()) {
-                //$app->getModule('admin')->controllerMap = $this->_apis;
+                
+                foreach ($this->getModules() as $id => $module) {
+                    if ($module instanceof AdminModuleInterface) {
+                        $this->_adminAssets = ArrayHelper::merge($module->assets, $this->_adminAssets);
+                        $this->_adminMenus[$module->id] = $module->getMenu();
+                        $this->_jsTranslations[$id] = $module->registerJsTranslation;
+                    }
+                }
+                
                 $app->getModule('admin')->assets = ArrayHelper::merge($this->_adminAssets, $app->getModule('admin')->assets);
                 $app->getModule('admin')->controllerMap = $this->_apis;
                 $app->getModule('admin')->moduleMenus = $this->_adminMenus;
