@@ -161,4 +161,5 @@ return [
 
     'page_update_actions_deepcopy_text' => 'Create a copy of the current page with all its contents. All languages will be copied, but only the published version.',
     'page_update_actions_deepcopy_btn' => 'Create Copy',
+    'model_navitem_title_tag_label' => 'Title Tag (SEO)',
 ];

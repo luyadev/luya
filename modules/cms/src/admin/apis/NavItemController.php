@@ -243,6 +243,7 @@ class NavItemController extends \luya\admin\base\RestController
         $model->alias = Yii::$app->request->post('alias', false);
         $model->description = Yii::$app->request->post('description', null);
         $model->keywords = Yii::$app->request->post('keywords');
+        $model->title_tag = Yii::$app->request->post('title_tag');
 
         // make sure the currently provided informations are valid (like title);
         if (!$model->validate()) {

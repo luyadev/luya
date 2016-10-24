@@ -29,6 +29,7 @@ use yii\db\ActiveRecordInterface;
  * @property string $alias
  * @property string $description
  * @property string $keywords
+ * @property string $title_tag
  * 
  * @author Basil Suter <basil@nadar.io>
  */
@@ -90,7 +91,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     {
         return [
             [['lang_id', 'title', 'alias', 'nav_item_type'], 'required'],
-            [['nav_id', 'description', 'keywords', 'nav_item_type_id'], 'safe'],
+            [['nav_id', 'description', 'keywords', 'nav_item_type_id', 'title_tag'], 'safe'],
         ];
     }
 
@@ -103,21 +104,9 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
         return [
             'title' => Module::t('model_navitem_title_label'),
             'alias' => Module::t('model_navitem_alias_label'),
+            'title_tag' => Module::t('model_navitem_title_tag_label'),
         ];
     }
-
-    /**
-     * {@inheritDoc}
-     * @see \yii\base\Model::scenarios()
-     */
-    /*
-    public function scenarios()
-    {
-        return [
-            'default' => ['title', 'alias', 'nav_item_type', 'nav_id', 'lang_id', 'description', 'keywords'],
-        ];
-    }
-    */
 
     public function slugifyAlias()
     {

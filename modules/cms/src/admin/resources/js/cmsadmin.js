@@ -964,13 +964,14 @@
 		
 		$scope.errors = [];
 
-		$scope.save = function(itemCopy, typeDataCopy) {
+		$scope.updateNavItemData = function(itemCopy, typeDataCopy) {
 			$scope.errors = [];
 			var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 			var navItemId = itemCopy.id;
 
 			typeDataCopy.title = itemCopy.title;
 			typeDataCopy.alias = itemCopy.alias;
+			typeDataCopy.title_tag = itemCopy.title_tag;
 			typeDataCopy.description = itemCopy.description;
 			typeDataCopy.keywords = itemCopy.keywords;
 			$http.post(

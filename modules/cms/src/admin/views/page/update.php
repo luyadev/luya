@@ -411,6 +411,14 @@ use luya\cms\admin\Module;
                             </div>
                             <div class="row">
                                 <div class="input input--text col s12">
+                                    <label class="input__label"><?php echo Module::t('model_navitem_title_tag_label'); ?></label>
+                                    <div class="input__field-wrapper">
+                                        <input type="text" class="input__field validate" ng-model="itemCopy.title_tag" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input input--text col s12">
                                     <label class="input__label"><?php echo Module::t('view_index_page_meta_description'); ?></label>
                                     <div class="input__field-wrapper">
                                         <textarea class="input__field validate" ng-model="itemCopy.description"></textarea>
@@ -454,7 +462,7 @@ use luya\cms\admin\Module;
                                     <div class="col s12">
                                         <div class="right">
                                             <button class="btn waves-effect waves-light red" type="button" ng-click="toggleSettings()"><?php echo Module::t('btn_abort'); ?> <i class="material-icons left">cancel</i></button>
-                                            <button class="btn waves-effect waves-light" type="button" ng-click="save(itemCopy, typeDataCopy)"><?php echo Module::t('btn_save'); ?> <i class="material-icons right">check</i></button>
+                                            <button class="btn waves-effect waves-light" type="button" ng-click="updateNavItemData(itemCopy, typeDataCopy)"><?php echo Module::t('btn_save'); ?> <i class="material-icons right">check</i></button>
                                         </div>
                                     </div>
                                 </div>

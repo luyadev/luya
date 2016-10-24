@@ -20,6 +20,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1007](https://github.com/luyadev/luya/issues/1007) French translations available for all core modules.
 - [#1046](https://github.com/luyadev/luya/issues/1046) Hide menu items in the administration in order to enable crud relations with permissions but hide the menu point of the ngrest crud inside the admin interface.
 - [#1037](https://github.com/luyadev/luya/issues/1037) Image property abstract class to allow short and faster implementation of image properties.
+- [#1004](https://github.com/luyadev/luya/issues/1004) CMS Page field to set a custom page title tag in order to add SEO optimized titles.
 
 ### Fixed
 
