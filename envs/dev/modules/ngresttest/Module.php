@@ -2,6 +2,8 @@
 
 namespace ngresttest;
 
+use luya\admin\components\AdminMenuBuilder;
+
 class Module extends \luya\admin\base\Module
 {
     public $apis = [
@@ -10,9 +12,8 @@ class Module extends \luya\admin\base\Module
     
     public function getMenu()
     {
-        return $this->node('Table', 'extension') // instead of extension, choose icon from https://design.google.com/icons/
+        return (new AdminMenuBuilder($this))->node('Table', 'extension') // instead of extension, choose icon from https://design.google.com/icons/
             ->group('GROUP')
-                ->itemApi('Table', 'ngresttest-table-index', 'label', 'api-ngresttest-table') // instead of label, choose icon from https://design.google.com/icons/
-        ->menu();
+                ->itemApi('Table', 'ngresttest-table-index', 'label', 'api-ngresttest-table');
     }
 }

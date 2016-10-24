@@ -3,6 +3,7 @@
 namespace luya\crawler\admin;
 
 use Yii;
+use luya\admin\components\AdminMenuBuilder;
 
 class Module extends \luya\admin\base\Module
 {
@@ -11,17 +12,6 @@ class Module extends \luya\admin\base\Module
         'api-crawler-index' => 'luya\crawler\admin\apis\IndexController',
         'api-crawler-searchdata' => 'luya\crawler\admin\apis\SearchdataController',
     ];
-
-    public function getMenu()
-    {
-        return $this->node('crawler', 'find_in_page')
-            ->group('crawler_indexing')
-                ->itemApi('crawler_index', 'crawleradmin-index-index', 'list', 'api-crawler-index')
-                //->itemApi('crawler_builderindex'), 'crawleradmin-builderindex-index', 'visibility_off', 'api-crawler-builderindex')
-            ->group('Anylatics')
-            ->itemApi('Searchdata', 'crawleradmin-searchdata-index', 'label', 'api-crawler-searchdata')
-        ->menu();
-    }
 
     public $translations = [
         [
@@ -32,6 +22,15 @@ class Module extends \luya\admin\base\Module
             ],
         ],
     ];
+    
+    public function getMenu()
+    {
+        return (new AdminMenuBuilder($this))->node('crawler', 'find_in_page')
+        ->group('crawler_indexing')
+        ->itemApi('crawler_index', 'crawleradmin-index-index', 'list', 'api-crawler-index')
+        ->group('Anylatics')
+        ->itemApi('Searchdata', 'crawleradmin-searchdata-index', 'label', 'api-crawler-searchdata');
+    }
 
     public static function t($message, array $params = [])
     {

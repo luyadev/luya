@@ -14,4 +14,11 @@ namespace luya\base;
  */
 interface AdminModuleInterface
 {
+    /**
+     * The menu object from the {{\luya\admin\components\AdminMenuBuilder}} class in order to store and build the administration
+     * module menu elements.
+     * 
+     * @return array|\luya\admin\components\AdminMenuBuilderInterface
+     */
+    public function getMenu();
 }

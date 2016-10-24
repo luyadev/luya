@@ -9,6 +9,7 @@ use luya\cms\admin\importers\BlockImporter;
 use luya\cms\admin\importers\CmslayoutImporter;
 use luya\cms\admin\importers\PropertyConsistencyImporter;
 use luya\base\CoreModuleInterface;
+use luya\admin\components\AdminMenuBuilder;
 
 class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
@@ -88,7 +89,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     
     public function getMenu()
     {
-        return $this
+        return (new AdminMenuBuilder($this))
             ->nodeRoute('menu_node_cms', 'content_copy', 'cmsadmin-default-index', 'cmsadmin/default/index', 'luya\cms\models\NavItem')
             ->node('menu_node_cmssettings', 'settings')
                 ->group('menu_group_env')
@@ -97,8 +98,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
                     ->itemApi('menu_group_item_env_layouts', 'cmsadmin-layout-index', 'view_quilt', 'api-cms-layout')
                 ->group('menu_group_elements')
                     ->itemApi('menu_group_item_elements_group', 'cmsadmin-blockgroup-index', 'view_module', 'api-cms-blockgroup')
-                    ->itemApi('menu_group_item_elements_blocks', 'cmsadmin-block-index', 'format_align_left', 'api-cms-block')
-            ->menu();
+                    ->itemApi('menu_group_item_elements_blocks', 'cmsadmin-block-index', 'format_align_left', 'api-cms-block');
     }
 
     public function extendPermissionApis()

@@ -3,6 +3,7 @@
 namespace luya\gallery\admin;
 
 use Yii;
+use luya\admin\components\AdminMenuBuilder;
 
 class Module extends \luya\admin\base\Module
 {
@@ -10,15 +11,6 @@ class Module extends \luya\admin\base\Module
         'api-gallery-album' => 'luya\gallery\admin\apis\AlbumController',
         'api-gallery-cat' => 'luya\gallery\admin\apis\CatController',
     ];
-
-    public function getMenu()
-    {
-        return $this->node('gallery', 'photo_album')
-            ->group('gallery_administrate')
-                ->itemApi('album', 'galleryadmin-album-index', 'camera', 'api-gallery-album')
-                ->itemApi('cat', 'galleryadmin-cat-index', 'collections', 'api-gallery-cat')
-        ->menu();
-    }
 
     public $translations = [
         [
@@ -29,6 +21,14 @@ class Module extends \luya\admin\base\Module
             ],
         ],
     ];
+    
+    public function getMenu()
+    {
+        return (new AdminMenuBuilder($this))->node('gallery', 'photo_album')
+            ->group('gallery_administrate')
+                ->itemApi('album', 'galleryadmin-album-index', 'camera', 'api-gallery-album')
+                ->itemApi('cat', 'galleryadmin-cat-index', 'collections', 'api-gallery-cat');
+    }
 
     public static function t($message, array $params = [])
     {
