@@ -216,6 +216,23 @@ public function ngRestConfig($config)
 }
 ```
 
+## Crud Relation Tabs
+
+Sometimes its usefull and common to directly manage relational data inside the current ngrest crud. Therefore we have created something called `ngRestRelations()`. Inside this method you can define relations which are also based on the NgRest concept.
+
+```php
+public function ngRestRelation()
+{
+    return [
+        ['label' => 'The Label', 'apiEndpoint' => \path\to\ngRest\Model::ngRestApiEndpoint(), 'dataProvider' => $this->getSales()],
+    ];
+}
+```
+
+The above example will use the `getSales()` method of the current model where you are implementing this relation. The `getSales()` must return an {{yii\db\QueryInterface}} Object, for example you can use `$this->hasMany(Model, ['key' => 'rel'])` or `new \yii\db\Query()`.
+
+> Tip: If you generate an NgRest model for a relation which is not used in any other situations you can hide those items from the menu, but not from the permission system. To hide en element add the hiddenInMenu option in the `getMenu()` method of the module as following: `itemApi('name', 'route', 'icon', 'api', ['hiddenInMenu' => true])`.
+
 ## Soft Deletion 
 
 We have also added a soft delete trait which is going to override the default implementation of the `delete` method. When enabled and configure, the soft delete trait will only mark the datarecord to `is_deleted = 1` instead of removing it from the database.

@@ -152,21 +152,20 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      * Example of how to use two relation buttons based on models which as to be ngrest model as well with apis!
      * 
      * ```php
-     * public function ngRestRelation()
+     * public function ngRestRelations()
      * {
      * 	   return [
-     * 	       'Reservations' => ['api' => \app\models\Orders::ngRestApiEndpoint(), 'where' => ['order_id' => '{{id}}', 'is_reservation' => 0]],
-	 *         'Sales' => ['api' => \app\models\Orders::ngRestApiEndpoint(), 'where' => ['order_id' => '{{id}}', 'is_reservation' => 1]]
-     *	   ];
+     *          ['label' => 'The Label', 'apiEndpoint' => \path\to\ngRest\Model::ngRestApiEndpoint(), 'dataProvider' => $this->getSales()],
+     *     ];
      * }
      * ```
      *
-     * The above example assumes the model where you add those relations is the the table where `order_id` is the primary key. So its like a `hasMany`
-     * relation based on this table.
+     * The above example will use the `getSales()` method of the current model where you are implementing this relation. The `getSales()` must return
+     * an {{yii\db\QueryInterface}} Object, for example you can use `$this->hasMany(Model, ['key' => 'rel'])` or `new \yii\db\Query()`.
      *
      * @return array
      */
-    public function ngRestRelation()
+    public function ngRestRelations()
     {
     	return [];
     }

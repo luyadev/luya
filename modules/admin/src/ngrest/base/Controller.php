@@ -89,7 +89,7 @@ class Controller extends \luya\admin\base\Controller
         $config->groupByField = $this->model->ngRestGroupByField();
         
         $rel = [];
-        foreach ($this->model->ngRestRelation() as $key => $item) {
+        foreach ($this->model->ngRestRelations() as $key => $item) {
             $rel[] = ['label' => $item['label'], 'apiEndpoint' => $item['apiEndpoint'], 'arrayIndex' => $key, 'modelClass' => base64_encode($this->model->className())];
         }
 
