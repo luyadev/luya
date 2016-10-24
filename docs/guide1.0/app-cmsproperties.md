@@ -11,8 +11,8 @@ Use cases:
 + Specific meta informations
 + Protecting a page
 
-Creating a new property
-------------------------
+## Creating a new property
+
 
 All properties must be in a folder called `properties` and must contain the suffix `Property`. LUYA will automatically detect and setup all properties when you run the [import](luya-console.md) command. You can either create the properties folder inside your application or module folder to enable reusable modules with properties which will be attached automatically.
 
@@ -42,30 +42,50 @@ class TestProperty extends \luya\admin\base\Property
 }
 ```
 
-After running the import command you will see the property in the CMS admin.
+After running the import command you will see the property in the CMS admin. Below a table of the explained methods in order to have a better understanding of what methods are used for:
 
-### Class methods
-
-|methode	|Optional	|Description
-|---		|---		|---
+|Method	|Optional	|Description
+|---		|---	|---
 |varName	|no		|The name of the variable, under this name you can access the property later
 |label		|no		|The human readable name of the property. This will be visibile for administration users.
 |type		|no		|Choose the type of your variable [available types](app-block-types.md).
 |options	|yes	|If the variable type does have options you have to define them in this method.
 |defaultValue|yes	|This will be the initvalue of the variable, default is `false`.
 
-Accessing the property
----------------------------
+We are also have a set of predefined propertys you can extend from, this i cause some blocks have to override the `getValue()` method in order to change the value output, as this is common scenario we have built classes you can abstract from.
+
+#### luya\admin\base\ImageProperty
+
+The image property is often used to return upload an image and return the path for, so you can abstract your property from `luya\admin\base\ImageProperty` like the example below:
+
+```php
+class MyImage extends \luya\admin\base\ImageProperty
+{
+    public function varName()
+    {
+        return 'myImage';
+    }
+    
+    public function label()
+    {
+        return 'My Image';
+    }
+}
+```
+
+In order to get use the above MyImage property just run: `<img src="<?= $item->getProperty('myImage')->getValue(); ?>" />`.
+
+## Get the Proprety value
 
 You can access the properties in
 
-+ [Blocks](app-blocks.md)
-+ Layouts
-+ [Menus](app-menu.md)
++ [CMS Blocks](app-blocks.md)
++ [CMS Layouts](app-cmslayouts.md) or Layouts
++ [Menus Item](app-menu.md)
 
 > If you access a property but the properties has not been append to this page you will get the `defaultValue` defined from your block object.
 
-### in Menus
+#### in Menus
 
 A very common scenario is to add properties to an existing menu item like an image which should be used for the navigation instead of text. To collect the property for a menu item the menu component does have a `getProperty($varName)` method on each item. For example collecting the menu and retrieving the page property `navImage` could be done as followed:
 
@@ -84,7 +104,7 @@ A very common scenario is to add properties to an existing menu item like an ima
 
 This method allows you find and evaluate properties for menu items and allows you also to use `Yii::$app->menu->current->getProperty('xyz')` instead of using `Yii::$app->page->getProperty('xyz')`.
 
-### in Layouts
+#### in Layouts
 
 In the layout you can always get the current propertys based on the current active menu item.
 
@@ -92,7 +112,7 @@ In the layout you can always get the current propertys based on the current acti
 Yii::$app->menu->current->getProperty('my-prop');
 ```
 
-### in Blocks
+#### in Blocks
 
 ```php
 $this->getEnvOption('pageObject')->nav->getProperty('foobar');
@@ -104,8 +124,7 @@ Get all properties for this page
 $this->getEnvOption('pageObject)->nav->properties;
 ```
 
-Events
-------
+## Events
 
 You can use events inside your block to modified the behavior of your page:
 
@@ -113,7 +132,7 @@ You can use events inside your block to modified the behavior of your page:
 |---  | ---
 |EVENT_BEFORE_RENDER    |This event will be triggered before the page get render, you can set `$event->isValid` to false to prevent the system from further outputs.
 
-### Example of EVENT_BEFORE_RENDER
+#### Example of EVENT_BEFORE_RENDER
 
 ```php
 public function init()

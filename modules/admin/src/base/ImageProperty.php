@@ -11,6 +11,25 @@ use Yii;
  * response of the method `getValue()` is the **source** to the file. If no image is provided or it can not be loaded the
  * response is false.
  * 
+ * Usage Example
+ * 
+ * ```php
+ * class MyImage extends \luya\admin\base\ImageProperty
+ * {
+ *     public function varName()
+ *     {
+ *         return 'myImage';
+ *     }
+ *   
+ *     public function label()
+ *     {
+ *         return 'My Image';
+ *     }
+ * }
+ * ```
+ * 
+ * In order to get use the above MyImage property just run: `<img src="<?= $item->getProperty('myImage')->getValue(); ?>" />`.
+ * 
  * @author Basil Suter <basil@nadar.io>
  */
 abstract class ImageProperty extends Property

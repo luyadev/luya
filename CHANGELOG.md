@@ -19,6 +19,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1038](https://github.com/luyadev/luya/issues/1038) Method `createCallbackUrl($callback)` added for ActiveWindows in order to get the absolut url for a callback, this is usefull when creating callbacks which can return a pdf for example.
 - [#1007](https://github.com/luyadev/luya/issues/1007) French translations available for all core modules.
 - [#1046](https://github.com/luyadev/luya/issues/1046) Hide menu items in the administration in order to enable crud relations with permissions but hide the menu point of the ngrest crud inside the admin interface.
+- [#1037](https://github.com/luyadev/luya/issues/1037) Image property abstract class to allow short and faster implementation of image properties.
 
 ### Fixed
 
