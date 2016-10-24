@@ -41,9 +41,9 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     
     private $_pointers = [];
     
-    private $_permissionApis = [];
+    public $permissionApis = [];
     
-    private $_permissionRoutes = [];
+    public $permissionRoutes = [];
     
     protected $moduleContext = null;
     
@@ -88,7 +88,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
             'searchModelClass' => $searchModelClass,
         ];
     
-        $this->_permissionRoutes[] = ['route' => $route, 'alias' => $name];
+        $this->permissionRoutes[] = ['route' => $route, 'alias' => $name];
     
         return $this;
     }
@@ -113,7 +113,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
             'searchModelClass' => false,
         ];
     
-        $this->_permissionApis[] = ['api' => $apiEndpoint, 'alias' => $name];
+        $this->permissionApis[] = ['api' => $apiEndpoint, 'alias' => $name];
     
         return $this;
     }
@@ -130,7 +130,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
             'searchModelClass' => $searchModelClass,
         ];
     
-        $this->_permissionRoutes[] = ['route' => $route, 'alias' => $name];
+        $this->permissionRoutes[] = ['route' => $route, 'alias' => $name];
     
         return $this;
     }

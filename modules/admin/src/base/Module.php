@@ -6,11 +6,12 @@ use yii\helpers\ArrayHelper;
 use luya\base\AdminModuleInterface;
 
 /**
- * Admin-Module class.
- *
- * @todo move node(), nodeRoute(), group(), itemApi(), itemRoute() into a seperate class.
- *
- * @author nadar
+ * The base Admin Module for all administration modules.
+ * 
+ * Each administration module of LUYA must implemented this class. This class provides the ability to 
+ * store menu data, register translations.
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
 class Module extends \luya\base\Module implements AdminModuleInterface
 {
@@ -75,35 +76,86 @@ class Module extends \luya\base\Module implements AdminModuleInterface
     }
 
     /**
-     * @return array|\luya\admin\components\AdminMenuBuilder Get an array or an instance of the AdminMenuBuilderClass.
+     * {@inheritDoc}
+     * @see \luya\base\AdminModuleInterface::getMenu()
      */
     public function getMenu()
     {
         return [];
     }
-
+    
+    /**
+     * Extend the permission apis with none menu based items.
+     * 
+     * Example return:
+     * 
+     * ```php
+     * return [
+     *     ['api' => 'api-cms-moveblock', 'alias' => 'Move blocks'],
+     * ];
+     * ```
+     * 
+     * @return array An array with an array with keys `api` and `alias`.
+     */
     public function extendPermissionApis()
     {
         return [];
     }
 
+    /**
+     * Extend the permission route with a none menu route the set permissions.
+     * 
+     * Example return:
+     * 
+     * ```php
+     * public function extendPermissionRoutes()
+     * {
+     *     return [
+     *         ['route' => 'cmsadmin/page/create', 'alias' => 'Page Create'],
+     *         ['route' => 'cmsadmin/page/update', 'alias' => 'Page Edit'],
+     *     ];
+     * }
+     * ```
+     */
     public function extendPermissionRoutes()
     {
         return [];
     }
 
+    /**
+     * Get an array with all api routes based on the menu builder.
+     * 
+     * @return array
+     */
     public function getAuthApis()
     {
-        $this->getMenu();
-
-        return ArrayHelper::merge($this->extendPermissionApis(), $this->_permissionApis);
+        $menu = $this->getMenu();
+        
+        if (is_object($menu)) {
+            $perm = $menu->permissionApis;
+        } else {
+            $perm = $this->_permissionApis;
+        }
+        
+        return ArrayHelper::merge($this->extendPermissionApis(), $perm);
     }
 
+    /**
+     * Get an array with all routes based on the menu builder.
+     * 
+     * @return array
+     */
     public function getAuthRoutes()
     {
-        $this->getMenu();
+        $menu = $this->getMenu();
+        
+        if (is_object($menu)) {
+            $perm = $menu->permissionRoutes;
+        } else {
+            $perm = $this->_permissionRoutes;
+        }
 
-        return ArrayHelper::merge($this->extendPermissionRoutes(), $this->_permissionRoutes);
+        return ArrayHelper::merge($this->extendPermissionRoutes(), $perm);
     }
     
     // THE CODE BELOW WILL BE REMOVED IN 1.0.0 AND IS MAKRED AS DEPRECATED
