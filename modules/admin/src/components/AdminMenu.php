@@ -186,6 +186,8 @@ class AdminMenu extends \yii\base\Component
                     	$alias = $data['groups'][$groupName]['items'][$groupItemKey]['alias'];
                     }
                     
+                    $data['groups'][$groupName]['items'][$groupItemKey]['hiddenInMenu'] = AdminMenuBuilder::getOptionValue($groupItemEntry, 'hiddenInMenu', false);
+                    
                     $data['groups'][$groupName]['items'][$groupItemKey]['alias'] = $alias;
                 }
             }

@@ -42,11 +42,25 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     
     private $_pointers = [];
     
+    /**
+     * @var array The available options for itemApi and itemRoute.
+     */
+    protected static $options = ['hiddenInMenu'];
+    
+    /**
+     * @var \luya\base\AdminModuleInterface The context on what the menu is running.
+     */
+    protected $moduleContext = null;
+    
+    /**
+     * @var array List of all permission APIs.
+     */
     public $permissionApis = [];
     
+    /**
+     * @var array List of all permission Routes.
+     */
     public $permissionRoutes = [];
-    
-    protected $moduleContext = null;
     
     /**
      * @param \luya\base\AdminModuleInterface $module
@@ -133,9 +147,10 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
      * @param string $route The api route to the ngrest controller `cmsadmin-navcontainer-index`.
      * @param string $icon The icon name based on the google icons font see https://design.google.com/icons/.
      * @param string $apiEndpoint The api endpoint defined in the NgRestModel::ngRestApiEndpoint `api-cms-navcontainer`.
+     * @param array $options An array with options you can provided and read inside the admin menu component. See {{\luya\admin\components\AdminMenuBuilder::verifyOptions}} for detail list and informations.
      * @return \luya\admin\components\AdminMenuBuilder
      */
-    public function itemApi($name, $route, $icon, $apiEndpoint)
+    public function itemApi($name, $route, $icon, $apiEndpoint, array $options = [])
     {
         $this->_menu[$this->_pointers['node']]['groups'][$this->_pointers['group']]['items'][] = [
             'alias' => $name,
@@ -145,6 +160,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
             'permissionIsRoute' => false,
             'permissionIsApi' => true,
             'searchModelClass' => false,
+            'options' => $this->verifyOptions($options),
         ];
     
         $this->permissionApis[] = ['api' => $apiEndpoint, 'alias' => $name];
@@ -159,9 +175,10 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
      * @param string $route The route to the template `cmsadmin/permission/index`.
      * @param string $icon The icon name based on the google icons font see https://design.google.com/icons/.
      * @param string $searchModelClass The search model must implement the {{luya\admin\base\GenericSearchInterface}}. 
+     * @param array $options An array with options you can provided and read inside the admin menu component. See {{\luya\admin\components\AdminMenuBuilder::verifyOptions}} for detail list and informations.
      * @return \luya\admin\components\AdminMenuBuilder
      */
-    public function itemRoute($name, $route, $icon, $searchModelClass = null)
+    public function itemRoute($name, $route, $icon, $searchModelClass = null, array $options = [])
     {
         $this->_menu[$this->_pointers['node']]['groups'][$this->_pointers['group']]['items'][] = [
             'alias' => $name,
@@ -171,11 +188,33 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
             'permissionIsRoute' => true,
             'permissionIsApi' => false,
             'searchModelClass' => $searchModelClass,
+            'options' => $this->verifyOptions($options),
         ];
     
         $this->permissionRoutes[] = ['route' => $route, 'alias' => $name];
     
         return $this;
+    }
+    
+    /**
+     * Verify the additional options of an itemRoute or itemApi item.
+     * 
+     * The following options are currently supported
+     * 
+     * - hiddenInMenu: If set to true the item will be hidden in the left menu, this is usefull when creating ngrest crud's for crud-realtion views.
+     * 
+     * @param array $options The options to verify
+     * @return array The verified allowed options.
+     */
+    protected function verifyOptions(array $options = [])
+    {
+        foreach ($options as $key => $value) {
+            if (!in_array($key, static::$options)) {
+                unset($options[$key]);
+            }
+        }
+        
+        return $options;
     }
     
     /**
@@ -186,5 +225,22 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     public function menu()
     {
         return $this->_menu;
+    }
+    
+    /**
+     * Helper method to get then value of an options inside an item.
+     * 
+     * @param array $item The item where the option key persists.
+     * @param string $optionName The name of the option to get.
+     * @param string $defaultValue The default value if the option is not available for this item.
+     * @return mixed
+     */
+    static public function getOptionValue(array $item, $optionName, $defaultValue = false)
+    {
+        if (!isset($item['options'])) {
+            return $defaultValue;
+        }
+        
+        return (isset($item['options'][$optionName])) ? $item['options'][$optionName] : $defaultValue;
     }
 }
