@@ -571,12 +571,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya.git",
-                "reference": "9bbac7dd860292717ea5471fa0f5e68d2bbc758e"
+                "reference": "eeeca42bddc5d2d922da55f394392cf2abd7c915"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya/zipball/9bbac7dd860292717ea5471fa0f5e68d2bbc758e",
-                "reference": "9bbac7dd860292717ea5471fa0f5e68d2bbc758e",
+                "url": "https://api.github.com/repos/luyadev/luya/zipball/eeeca42bddc5d2d922da55f394392cf2abd7c915",
+                "reference": "eeeca42bddc5d2d922da55f394392cf2abd7c915",
                 "shasum": ""
             },
             "require": {
@@ -632,7 +632,7 @@
                 "yii2",
                 "yii2-wrapper"
             ],
-            "time": "2016-10-24 11:33:32"
+            "time": "2016-10-25 14:02:17"
         },
         {
             "name": "luyadev/luya-module-admin",
@@ -640,12 +640,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "ce4b6d3a60bec61c573527cd2496e4f1386f4602"
+                "reference": "9da3fb871a6523fd488bdb3f18ed0ca97a3e6e92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/ce4b6d3a60bec61c573527cd2496e4f1386f4602",
-                "reference": "ce4b6d3a60bec61c573527cd2496e4f1386f4602",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/9da3fb871a6523fd488bdb3f18ed0ca97a3e6e92",
+                "reference": "9da3fb871a6523fd488bdb3f18ed0ca97a3e6e92",
                 "shasum": ""
             },
             "require": {
@@ -694,7 +694,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2016-10-24 11:33:32"
+            "time": "2016-10-25 09:59:19"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1303,16 +1303,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.6.1",
+            "version": "5.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "60c32c5b5e79c2248001efa2560f831da11cc2d7"
+                "reference": "cd13b23ac5a519a4708e00736c26ee0bb28b2e01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/60c32c5b5e79c2248001efa2560f831da11cc2d7",
-                "reference": "60c32c5b5e79c2248001efa2560f831da11cc2d7",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/cd13b23ac5a519a4708e00736c26ee0bb28b2e01",
+                "reference": "cd13b23ac5a519a4708e00736c26ee0bb28b2e01",
                 "shasum": ""
             },
             "require": {
@@ -1381,7 +1381,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-10-07 13:03:26"
+            "time": "2016-10-25 07:40:25"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
