@@ -9,11 +9,11 @@ use luya\admin\models\StorageImage;
 
 /**
  * Helper class to handle remove, upload and moving of storage files.
- * 
+ *
  * The class provides common functions in order to work with the Storage component. This helper method will only work
  * if the {{luya\admin\components\StorageContainer}} component is registered which is by default the case when the LUYA
  * admin module is provided.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Storage
@@ -34,7 +34,7 @@ class Storage
     
     /**
      * Get the upload error message from a given $_FILES error code id.
-     * 
+     *
      * @param integer $errorId
      * @return string
      */
@@ -45,7 +45,7 @@ class Storage
     
     /**
      * Create a file hash from the name (not the content).
-     * 
+     *
      * Warning
      * Because PHP's integer type is signed many crc32 checksums will result in negative integers on 32bit platforms. On 64bit installations all crc32() results will be positive integers though.
      * So you need to use the "%u" formatter of sprintf() or printf() to get the string representation of the unsigned crc32() checksum in decimal format.
@@ -59,7 +59,7 @@ class Storage
     
     /**
      * Remove a file from the storage system.
-     * 
+     *
      * @param integer $fileId The file id to delete
      * @param boolean $cleanup If cleanup is enabled, also all images will be deleted, this is by default turned off because
      * casual you want to remove the large source file but not the images where used in several tables and situations.
@@ -84,7 +84,7 @@ class Storage
     
     /**
      * Remove an image from the storage system.
-     * 
+     *
      * @param integer $imageId
      * @param boolean $cleanup If cleanup is enabled, all other images will be deleted, the source file will be deleted to
      * if clean is disabled, only the provided $imageId will be removed.
@@ -115,7 +115,7 @@ class Storage
     
     /**
      * Get the image resolution of a given file path.
-     * 
+     *
      * @param string $filePath
      * @return array
      */
@@ -141,7 +141,7 @@ class Storage
     
     /**
      * Move an array of storage fileIds to another folder.
-     * 
+     *
      * @param array $fileIds
      * @param unknown $folderId
      */
@@ -154,7 +154,7 @@ class Storage
     
     /**
      * Move a storage file to another folder.
-     * 
+     *
      * @param string|int $fileId
      * @param string|int $folderId
      * @return boolean
@@ -174,9 +174,9 @@ class Storage
     
     /**
      * Replace the source of a file on the webeserver based on new and old source path informations.
-     * 
+     *
      * The replaced file will have the name of the $oldFileSource but the file will be the content of the $newFileSource.
-     * 
+     *
      * @param string $oldFileSource The path to the old file which should be replace by the new file. e.g `path/to/old.jpp`
      * @param string $newfile The path to the new file which is going to have the same name as the old file e.g. `path/of/new.jpg`.
      * @return boolean Whether moving was successfull or not.
@@ -195,13 +195,13 @@ class Storage
     
     /**
      * Add File to the storage container by providing the $_FILES array name.
-     * 
+     *
      * Example usage:
-     * 
+     *
      * ```php
      * $return = Storage::uploadFromFileArray($_FILES['image'], 0, true);
      * ```
-     * 
+     *
      * @param array $fileArray Its an entry of the files array like $_FILES['logo_image'];
      * @param number $toFolder
      * @param string $isHidden
@@ -220,13 +220,13 @@ class Storage
     
     /**
      * Add Files to storage component by just providing $_FILES array, used for multi file storage.
-     * 
+     *
      * Example usage:
-     * 
+     *
      * ```php
      * $return = Storage::uploadFromFiles($_FILES, 0, true);
      * ```
-     * 
+     *
      * @todo what happen if $files does have more then one entry, as the response is limit to 1
      * @param array $filesArray Use $_FILES
      * @param number $toFolder
@@ -291,6 +291,4 @@ class Storage
         
         return ['upload' => false, 'message' => 'no files selected or empty files list.', 'file_id' => 0];
     }
-    
-    
 }

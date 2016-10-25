@@ -92,7 +92,7 @@ class Nav extends ActiveRecord
     }
 
     /**
-     * @return 
+     * @return
      */
     public function createCopy()
     {

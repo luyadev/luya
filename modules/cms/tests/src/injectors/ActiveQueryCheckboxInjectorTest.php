@@ -2,7 +2,6 @@
 
 namespace cmstests\src\injectors;
 
-
 use cmstests\CmsFrontendTestCase;
 use luya\cms\injectors\ActiveQueryCheckboxInjector;
 use cmstests\data\blocks\UnitTestBlock;

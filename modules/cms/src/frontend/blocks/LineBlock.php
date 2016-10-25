@@ -7,7 +7,7 @@ use luya\cms\base\TwigBlock;
 
 /**
  * Simple horizontal line block
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class LineBlock extends TwigBlock

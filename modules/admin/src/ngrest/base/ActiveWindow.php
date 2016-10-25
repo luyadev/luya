@@ -21,7 +21,7 @@ use luya\helpers\Url;
  * @property string $name Get the current Active Window Name
  * @property string $hashName Get an unique hased Active Window config name
  * @property \yii\db\ActiveRecordInterface $model The model evaluated by the `findOne` of the called ng rest model ActiveRecord.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 abstract class ActiveWindow extends Object implements ViewContextInterface
@@ -106,16 +106,16 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     
     /**
      * Create an absolute link to a callback.
-     * 
+     *
      * This method is commonly used when returing data directly to the browser, there for the abolute url to a callback is required. Only logged in
      * users can view the callback url, but there is no other security about callbacks.
-     * 
+     *
      * @param string $callback The name of the callback without the callback prefix exmaple `createPdf` if the callback is `callbackCreatePdf()`.
      * @return string The absolute url to the callback.
      */
     public function createCallbackUrl($callback)
     {
-        return Url::to(['/admin/ngrest/callback', 'activeWindowCallback' => Inflector::camel2id($callback),'ngrestConfigHash' => $this->getConfigHash(),'activeWindowHash' => $this->getActiveWindowHash()], true);
+        return Url::to(['/admin/ngrest/callback', 'activeWindowCallback' => Inflector::camel2id($callback), 'ngrestConfigHash' => $this->getConfigHash(), 'activeWindowHash' => $this->getActiveWindowHash()], true);
     }
     
     /**

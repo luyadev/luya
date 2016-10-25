@@ -7,10 +7,10 @@ use luya\base\AdminModuleInterface;
 
 /**
  * The base Admin Module for all administration modules.
- * 
- * Each administration module of LUYA must implemented this class. This class provides the ability to 
+ *
+ * Each administration module of LUYA must implemented this class. This class provides the ability to
  * store menu data, register translations.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Module extends \luya\base\Module implements AdminModuleInterface
@@ -45,7 +45,7 @@ class Module extends \luya\base\Module implements AdminModuleInterface
      *     ]
      * ];
      * ```
-     * 
+     *
      * The above example will override the api-admin-user ngrest config with your project specific config.
      */
     public $ngrestConfigLinker = [];
@@ -86,15 +86,15 @@ class Module extends \luya\base\Module implements AdminModuleInterface
     
     /**
      * Extend the permission apis with none menu based items.
-     * 
+     *
      * Example return:
-     * 
+     *
      * ```php
      * return [
      *     ['api' => 'api-cms-moveblock', 'alias' => 'Move blocks'],
      * ];
      * ```
-     * 
+     *
      * @return array An array with an array with keys `api` and `alias`.
      */
     public function extendPermissionApis()
@@ -104,9 +104,9 @@ class Module extends \luya\base\Module implements AdminModuleInterface
 
     /**
      * Extend the permission route with a none menu route the set permissions.
-     * 
+     *
      * Example return:
-     * 
+     *
      * ```php
      * public function extendPermissionRoutes()
      * {
@@ -124,7 +124,7 @@ class Module extends \luya\base\Module implements AdminModuleInterface
 
     /**
      * Get an array with all api routes based on the menu builder.
-     * 
+     *
      * @return array
      */
     public function getAuthApis()
@@ -142,7 +142,7 @@ class Module extends \luya\base\Module implements AdminModuleInterface
 
     /**
      * Get an array with all routes based on the menu builder.
-     * 
+     *
      * @return array
      */
     public function getAuthRoutes()
@@ -159,7 +159,7 @@ class Module extends \luya\base\Module implements AdminModuleInterface
     }
     
     // THE CODE BELOW WILL BE REMOVED IN 1.0.0 AND IS MAKRED AS DEPRECATED
-    
+
     private $_menu = [];
     
     private $_pointers = [];

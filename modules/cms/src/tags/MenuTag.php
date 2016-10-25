@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 /**
  * Menu links tag
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class MenuTag extends BaseTag

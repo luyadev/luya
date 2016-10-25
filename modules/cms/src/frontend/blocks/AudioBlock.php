@@ -8,7 +8,7 @@ use luya\cms\frontend\blockgroups\MediaGroup;
 
 /**
  * Audio Block for Soundcloude Service
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class AudioBlock extends TwigBlock

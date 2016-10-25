@@ -8,7 +8,7 @@ trigger_error("luya\cms\CmsMarkdown deprecated use luya\TagMarkdownParser instea
 
 /**
  * CmsMarkdownParser
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @deprecated
  */

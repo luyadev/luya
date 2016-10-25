@@ -8,7 +8,7 @@ use luya\cms\base\TwigBlock;
 
 /**
  * UL/OL list block.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class ListBlock extends TwigBlock

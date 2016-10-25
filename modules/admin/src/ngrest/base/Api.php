@@ -103,13 +103,13 @@ class Api extends RestActiveController
         $model = $modelClass::findOne($id);
         
         if (!$model) {
-            throw new InvalidCallException("unable to resolve relation call model.");   
+            throw new InvalidCallException("unable to resolve relation call model.");
         }
         
         $func = $model->ngRestRelations()[$arrayIndex]['dataProvider'];
         
-    	return new ActiveDataProvider([
-    	    'query' => $func,
+        return new ActiveDataProvider([
+            'query' => $func,
             'pagination' => false,
         ]);
     }

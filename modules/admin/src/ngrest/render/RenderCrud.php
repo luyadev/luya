@@ -93,7 +93,6 @@ class RenderCrud extends Render implements RenderInterface
             $buttons = [];
             
             foreach ($this->config->relations as $rel) {
-
                 $api = Yii::$app->adminmenu->getApiDetail($rel['apiEndpoint']);
                 
                 if (!$api) {
@@ -102,11 +101,11 @@ class RenderCrud extends Render implements RenderInterface
                 
                 $node = str_replace("-", "/", $api['route']);
                 
-            	$buttons[] = [
-            		'ngClick' => 'tabService.addTab(item.'.$this->config->primaryKey.', \''.$node.'\', \''.$rel['arrayIndex'].'\', \''.$rel['label'].'\', \''.$rel['modelClass'].'\')',
-            		'icon' => 'chrome_reader_mode',
-            		'label' => $rel['label'],
-            	];
+                $buttons[] = [
+                    'ngClick' => 'tabService.addTab(item.'.$this->config->primaryKey.', \''.$node.'\', \''.$rel['arrayIndex'].'\', \''.$rel['label'].'\', \''.$rel['modelClass'].'\')',
+                    'icon' => 'chrome_reader_mode',
+                    'label' => $rel['label'],
+                ];
             }
             
             if ($this->can(Auth::CAN_UPDATE)) {

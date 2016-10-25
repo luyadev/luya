@@ -178,5 +178,3 @@ return [
     'right_panel_support_support_title' => 'Поддержка',
     'right_panel_support_support_text' => 'Если у вас возникли вопросы, то обратитесь к своему вебмастеру или проконсультируйтесь на <a target="_blank" href="https://luya.io">luya.io</a>.',
 ];
-
-

@@ -50,7 +50,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
 
     /**
      * Get the view object to render the templates.
-     * 
+     *
      * @return \yii\base\View|\yii\web\View|\luya\web\View
      */
     public function getView()
@@ -131,7 +131,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
      */
     public function getViewPath()
     {
-    	return '@app/views/cmslayouts';
+        return '@app/views/cmslayouts';
     }
     
     /**

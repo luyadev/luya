@@ -77,21 +77,21 @@ abstract class Boot
     /**
      * This method allows you to directly inject a configuration array instead of using the config file
      * method.
-     * 
+     *
      * This method is commonly used when running php unit tests which do not require an additional file.
-     * 
+     *
      * ```php
      * $app = new Boot();
      * $app->setConfigArray([
      *     // ...
      * ]);
      * ```
-     * 
+     *
      * @param array $config The configuration array for the application.
      */
     public function setConfigArray(array $config)
     {
-    	$this->_configArray = $config;
+        $this->_configArray = $config;
     }
     
     /**
@@ -103,24 +103,24 @@ abstract class Boot
      */
     public function getConfigArray()
     {
-    	if ($this->_configArray === null) {
-	        if (!file_exists($this->configFile)) {
-	            throw new Exception("Unable to load the config file '".$this->configFile."'.");
-	        }
-	
-	        $config = require $this->configFile;
-	
-	        if (!is_array($config)) {
-	            throw new Exception("config file '".$this->configFile."' found but no array returning.");
-	        }
-	
-	        // adding default configuration timezone if not set
-	        if (!array_key_exists('timezone', $config)) {
-	            $config['timezone'] = 'Europe/Berlin';
-	        }
-	     
-	        $this->_configArray = $config;
-    	}
+        if ($this->_configArray === null) {
+            if (!file_exists($this->configFile)) {
+                throw new Exception("Unable to load the config file '".$this->configFile."'.");
+            }
+    
+            $config = require $this->configFile;
+    
+            if (!is_array($config)) {
+                throw new Exception("config file '".$this->configFile."' found but no array returning.");
+            }
+    
+            // adding default configuration timezone if not set
+            if (!array_key_exists('timezone', $config)) {
+                $config['timezone'] = 'Europe/Berlin';
+            }
+         
+            $this->_configArray = $config;
+        }
 
         return $this->_configArray;
     }

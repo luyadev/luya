@@ -9,7 +9,7 @@ use luya\cms\base\TwigBlock;
 
 /**
  * Paragraph Text Block.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class TextBlock extends TwigBlock

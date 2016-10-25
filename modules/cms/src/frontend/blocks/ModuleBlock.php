@@ -12,7 +12,7 @@ use luya\base\ModuleReflection;
 
 /**
  * Module integration Block to render controller and/or actions.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class ModuleBlock extends TwigBlock

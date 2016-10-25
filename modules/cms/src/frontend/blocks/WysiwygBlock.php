@@ -8,7 +8,7 @@ use luya\cms\base\TwigBlock;
 
 /**
  * WYSIWYG Block with ng-wig.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class WysiwygBlock extends TwigBlock

@@ -91,8 +91,8 @@ class Logger extends NgRestModel
     }
     
     /**
-     * 
-     * @param $config 
+     *
+     * @param $config
      */
     public function ngRestConfig($config)
     {

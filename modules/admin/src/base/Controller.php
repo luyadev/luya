@@ -42,10 +42,9 @@ class Controller extends \luya\web\Controller
                 'actions' => [], // apply to all actions by default
                 'roles' => ['@'],
                 'matchCallback' => function ($rule, $action) {
-                
-                	if (!Yii::$app->adminuser->isGuest) {
-                		Yii::$app->luyaLanguage = Yii::$app->adminuser->identity->setting->get('luyadminlanguage', Yii::$app->luyaLanguage);
-                	}
+                    if (!Yii::$app->adminuser->isGuest) {
+                        Yii::$app->luyaLanguage = Yii::$app->adminuser->identity->setting->get('luyadminlanguage', Yii::$app->luyaLanguage);
+                    }
                 
                     // see if a controller property has been defined to disabled the permission checks
                     if ($action->controller->disablePermissionCheck) {

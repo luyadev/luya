@@ -8,7 +8,7 @@ use Doctrine\Instantiator\Exception\InvalidArgumentException;
 
 /**
  * Page content tag.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class PageTag extends BaseTag

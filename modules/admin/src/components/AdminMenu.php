@@ -122,9 +122,9 @@ class AdminMenu extends \yii\base\Component
             }
             
             try {
-            	$alias = Yii::t($item['moduleId'], $item['alias'], [], Yii::$app->luyaLanguage);
+                $alias = Yii::t($item['moduleId'], $item['alias'], [], Yii::$app->luyaLanguage);
             } catch (\Exception $err) {
-            	$alias = $item['alias'];
+                $alias = $item['alias'];
             }
             
             // ok we have passed all the tests, lets make an entry
@@ -153,15 +153,12 @@ class AdminMenu extends \yii\base\Component
         $data = $this->getNodeData($nodeId);
         if (isset($data['groups'])) {
             foreach ($data['groups'] as $groupName => $groupItem) {
-            	
-            	try {
-            		$data['groups'][$groupName]['name'] = Yii::t($data['moduleId'], $groupItem['name'], [], Yii::$app->luyaLanguage);
-            	} catch (\Exception $e) {
-            		
-            	}
-            	
+                try {
+                    $data['groups'][$groupName]['name'] = Yii::t($data['moduleId'], $groupItem['name'], [], Yii::$app->luyaLanguage);
+                } catch (\Exception $e) {
+                }
+                
                 foreach ($groupItem['items'] as $groupItemKey => $groupItemEntry) {
-                	
                     if ($groupItemEntry['permissionIsRoute']) {
                         // when true, set permissionGranted to true
                         if (!Yii::$app->auth->matchRoute($this->getUserId(), $groupItemEntry['route'])) {
@@ -180,10 +177,10 @@ class AdminMenu extends \yii\base\Component
                     } else {
                         throw new \Exception('Menu item detected without permission entry');
                     }
-                    try { 
-                    	$alias = Yii::t($data['moduleId'], $data['groups'][$groupName]['items'][$groupItemKey]['alias'], [], Yii::$app->luyaLanguage);
-                    } catch(\Exception $err) {
-                    	$alias = $data['groups'][$groupName]['items'][$groupItemKey]['alias'];
+                    try {
+                        $alias = Yii::t($data['moduleId'], $data['groups'][$groupName]['items'][$groupItemKey]['alias'], [], Yii::$app->luyaLanguage);
+                    } catch (\Exception $err) {
+                        $alias = $data['groups'][$groupName]['items'][$groupItemKey]['alias'];
                     }
                     
                     $data['groups'][$groupName]['items'][$groupItemKey]['hiddenInMenu'] = AdminMenuBuilder::getOptionValue($groupItemEntry, 'hiddenInMenu', false);

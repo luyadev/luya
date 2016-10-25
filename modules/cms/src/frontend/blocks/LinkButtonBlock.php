@@ -8,7 +8,7 @@ use luya\cms\base\TwigBlock;
 
 /**
  * Simple button element with a link function
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class LinkButtonBlock extends TwigBlock

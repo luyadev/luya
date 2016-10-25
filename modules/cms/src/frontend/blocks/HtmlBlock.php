@@ -8,7 +8,7 @@ use luya\cms\base\TwigBlock;
 
 /**
  * HTML Block
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class HtmlBlock extends TwigBlock

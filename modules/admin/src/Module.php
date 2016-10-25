@@ -19,7 +19,7 @@ use luya\admin\importers\StorageImporter;
 
 /**
  * Admin Module
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Module extends \luya\admin\base\Module implements CoreModuleInterface
@@ -100,7 +100,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     }
     
     /**
-     * 
+     *
      * @param array $translations
      */
     public function setJsTranslations(array $translations)

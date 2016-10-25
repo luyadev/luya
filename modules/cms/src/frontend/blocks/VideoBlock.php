@@ -8,7 +8,7 @@ use luya\cms\frontend\blockgroups\MediaGroup;
 
 /**
  * Embed YouTube and Vimeo video Block.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class VideoBlock extends TwigBlock

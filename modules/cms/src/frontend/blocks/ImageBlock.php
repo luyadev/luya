@@ -10,7 +10,7 @@ use luya\cms\frontend\blockgroups\MediaGroup;
 
 /**
  * Display Block
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class ImageBlock extends TwigBlock

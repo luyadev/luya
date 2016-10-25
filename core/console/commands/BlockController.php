@@ -12,7 +12,7 @@ use luya\helpers\FileHelper;
  * Block console commands.
  *
  * @property string $blockName The name of the block getter/setters stored.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class BlockController extends \luya\console\Command
@@ -61,12 +61,12 @@ class BlockController extends \luya\console\Command
     
     /**
      * Setter method for $blockName, ensure the correct block name.
-     * 
+     *
      * @param string $name The name of the block.
      */
     public function setBlockName($name)
     {
-        if (!StringHelper::endsWith($name, 'Block'))  {
+        if (!StringHelper::endsWith($name, 'Block')) {
             $name .= 'Block';
         }
         
@@ -75,7 +75,7 @@ class BlockController extends \luya\console\Command
     
     /**
      * Getter method fro $blockName.
-     * 
+     *
      * @return string Get the ensured block name.
      */
     public function getBlockName()
@@ -95,7 +95,7 @@ class BlockController extends \luya\console\Command
     
     /**
      * Get an array with all modules where you can generate blocks for.
-     * 
+     *
      * @return array
      */
     private function getModuleProposal()
@@ -355,6 +355,4 @@ class BlockController extends \luya\console\Command
         
         return $this->outputError("Error while creating block '$filePath'");
     }
-
-    
 }

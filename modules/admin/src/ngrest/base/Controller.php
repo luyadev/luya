@@ -79,7 +79,7 @@ class Controller extends \luya\admin\base\Controller
         }
         
         if ($relation && $arrayIndex !== false && $modelClass !== false) {
-        	$config->relationCall = ['id' => $relation, 'arrayIndex' => $arrayIndex, 'modelClass' => $modelClass];
+            $config->relationCall = ['id' => $relation, 'arrayIndex' => $arrayIndex, 'modelClass' => $modelClass];
         }
 
         // apply config informations
@@ -99,7 +99,7 @@ class Controller extends \luya\admin\base\Controller
 
         $crud = new RenderCrud();
         if ($relation) {
-        	$crud->viewFile = '@admin/views/ngrest/render/crud_relation.php';
+            $crud->viewFile = '@admin/views/ngrest/render/crud_relation.php';
         }
         return $ngrest->render($crud);
     }

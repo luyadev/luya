@@ -9,7 +9,7 @@ use luya\cms\base\TwigBlock;
 use luya\cms\frontend\Module;
 
 /**
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  *
  */

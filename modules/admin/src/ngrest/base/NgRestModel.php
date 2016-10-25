@@ -150,7 +150,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      * Define your relations in order to access the relation data and manage them directly in the same view.
      *
      * Example of how to use two relation buttons based on models which as to be ngrest model as well with apis!
-     * 
+     *
      * ```php
      * public function ngRestRelations()
      * {
@@ -167,7 +167,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      */
     public function ngRestRelations()
     {
-    	return [];
+        return [];
     }
     
     /**

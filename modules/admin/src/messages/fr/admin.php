@@ -155,7 +155,7 @@ return [
     'login_async_token_globalerror' => 'Une erreur de serveur est survenue, veuillez contacter l\'administrateur du site !',
     'ngrest_crud_csv_export_btn' => 'Générer CSV',
     'ngrest_crud_csv_export_btn_dl' => 'Télécharger CSV',
-    'layout_filemanager_search_text' => 'Saissisez votre recherche', 
+    'layout_filemanager_search_text' => 'Saissisez votre recherche',
     'layout_filemanager_file_captions' => 'Légende du fichier',
     'layout_filemanager_file_captions_save_btn' => 'Enregistrer',
     'mode_user_title' => 'Titre',

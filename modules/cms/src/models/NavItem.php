@@ -30,7 +30,7 @@ use yii\db\ActiveRecordInterface;
  * @property string $description
  * @property string $keywords
  * @property string $title_tag
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface

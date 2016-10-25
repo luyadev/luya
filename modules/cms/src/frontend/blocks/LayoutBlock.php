@@ -8,7 +8,7 @@ use luya\cms\base\TwigBlock;
 
 /**
  * Layout/Grid Block.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class LayoutBlock extends TwigBlock

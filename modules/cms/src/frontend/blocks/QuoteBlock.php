@@ -8,7 +8,7 @@ use luya\cms\base\TwigBlock;
 
 /**
  * Blockquote Block.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class QuoteBlock extends TwigBlock

@@ -8,12 +8,12 @@ use luya\admin\base\GenericSearchInterface;
 
 /**
  * Builder class for the Administration Menu/Navigation.
- * 
+ *
  * This class is used to build the admin menu/navigation for all admin modules and is called in the `getMenu()` method of each
  * admin module class.
- * 
+ *
  * Example of how to use the AdminMenuBuilder class inside the `getMenu()` method of an Admin Module:
- * 
+ *
  * ```php
  * public function getMenu()
  * {
@@ -31,8 +31,8 @@ use luya\admin\base\GenericSearchInterface;
  *                 ->itemApi('menu_images_item_effects', 'admin-effect-index', 'blur_circular', 'api-admin-effect')
  *                 ->itemApi('menu_images_item_filters', 'admin-filter-index', 'adjust', 'api-admin-filter');
  * }
- * ```  
- * 
+ * ```
+ *
  * @since 1.0.0-RC2
  * @author Basil Suter <basil@nadar.io>
  */
@@ -74,7 +74,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     
     /**
      * The node is the menu entry in the TOP navigation of the luya administration interface.
-     * 
+     *
      * @param string $name The name of the node, all names will process trough the `Yii::t` function with its module name as prefix.
      * @param string $icon The icon name based on the google icons font see https://design.google.com/icons/.
      * @param string $template Whether to use a custom template or not.
@@ -99,7 +99,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     
     /**
      * A node which is a custom route to open, nodes are the the top menu of the luya administration interfaces.
-     * 
+     *
      * @param string $name The name of the node, all names will process trough the `Yii::t` function with its module name as prefix.
      * @param string $icon The icon name based on the google icons font see https://design.google.com/icons/.
      * @param string $template Whether to use a custom template or not.
@@ -128,7 +128,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     
     /**
      * Add a group, all items (api or route) must be child items of a group. The group is the title in the left menu of the admin interface.
-     * 
+     *
      * @param string $name The name of the group.
      * @return \luya\admin\components\AdminMenuBuilder
      */
@@ -142,7 +142,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     
     /**
      * Add an item to a group. API items are based on the ngrest crud concept.
-     * 
+     *
      * @param string $name The name of the Api (displayed as menu point in the left navigation), all names run through the `Yii::t()` method prefixed with the module id.
      * @param string $route The api route to the ngrest controller `cmsadmin-navcontainer-index`.
      * @param string $icon The icon name based on the google icons font see https://design.google.com/icons/.
@@ -170,11 +170,11 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     
     /**
      * Add an item to a group. Route items opens a angular view.
-     * 
+     *
      * @param string $name The name of the Api (displayed as menu point in the left navigation), all names run through the `Yii::t()` method prefixed with the module id.
      * @param string $route The route to the template `cmsadmin/permission/index`.
      * @param string $icon The icon name based on the google icons font see https://design.google.com/icons/.
-     * @param string $searchModelClass The search model must implement the {{luya\admin\base\GenericSearchInterface}}. 
+     * @param string $searchModelClass The search model must implement the {{luya\admin\base\GenericSearchInterface}}.
      * @param array $options An array with options you can provided and read inside the admin menu component. See {{\luya\admin\components\AdminMenuBuilder::verifyOptions}} for detail list and informations.
      * @return \luya\admin\components\AdminMenuBuilder
      */
@@ -198,11 +198,11 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     
     /**
      * Verify the additional options of an itemRoute or itemApi item.
-     * 
+     *
      * The following options are currently supported
-     * 
+     *
      * - hiddenInMenu: If set to true the item will be hidden in the left menu, this is usefull when creating ngrest crud's for crud-realtion views.
-     * 
+     *
      * @param array $options The options to verify
      * @return array The verified allowed options.
      */
@@ -229,13 +229,13 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     
     /**
      * Helper method to get then value of an options inside an item.
-     * 
+     *
      * @param array $item The item where the option key persists.
      * @param string $optionName The name of the option to get.
      * @param string $defaultValue The default value if the option is not available for this item.
      * @return mixed
      */
-    static public function getOptionValue(array $item, $optionName, $defaultValue = false)
+    public static function getOptionValue(array $item, $optionName, $defaultValue = false)
     {
         if (!isset($item['options'])) {
             return $defaultValue;

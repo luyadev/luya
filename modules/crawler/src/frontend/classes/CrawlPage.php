@@ -59,7 +59,7 @@ class CrawlPage extends \yii\base\Object
 
     public function setCrawler(Crawler $crawler)
     {
-    	$this->_crawler = $crawler;
+        $this->_crawler = $crawler;
     }
     
     public function getCrawler()
@@ -67,12 +67,11 @@ class CrawlPage extends \yii\base\Object
         if ($this->_crawler === null) {
             try {
                 $this->client = new Client();
-                $this->_crawler = $this->client->request('GET', $this->pageUrl);                
+                $this->_crawler = $this->client->request('GET', $this->pageUrl);
                 if ($this->client->getInternalResponse()->getStatus() !== 200) {
                     $this->verbosePrint("[!] " .$this->pageUrl, "Response Status is not 200");
                     $this->_crawler = false;
                 }
-                
             } catch (\Exception $e) {
                 $this->_crawler = false;
             }
@@ -83,23 +82,23 @@ class CrawlPage extends \yii\base\Object
     
     public function getCrawlerHtml()
     {
-    	try {
-	    	$crawler = $this->getCrawler();
-	        
-	        if (!$crawler) {
-	            return '';
-	        }
-	        
-	        $crawler->filter('script')->each(function (Crawler $crawler) {
-	        	foreach ($crawler as $node) {
-	        		$node->parentNode->removeChild($node);
-	        	}
-	        });
-	        
-	        return $crawler->filter('body')->html();
-    	} catch (\Exception $e) {
-    		return '';
-    	}
+        try {
+            $crawler = $this->getCrawler();
+            
+            if (!$crawler) {
+                return '';
+            }
+            
+            $crawler->filter('script')->each(function (Crawler $crawler) {
+                foreach ($crawler as $node) {
+                    $node->parentNode->removeChild($node);
+                }
+            });
+            
+            return $crawler->filter('body')->html();
+        } catch (\Exception $e) {
+            return '';
+        }
     }
 
     public function getContentType()
@@ -200,7 +199,7 @@ class CrawlPage extends \yii\base\Object
         $tag = $this->getTitleCrawlerTag();
         
         if (!empty($tag)) {
-        	return $tag;
+            return $tag;
         }
         
         $text = $this->getTitleTag();
@@ -210,7 +209,7 @@ class CrawlPage extends \yii\base\Object
             $h1 = $this->getTitleH1();
             
             if (!empty($h1)) {
-            	return $h1;
+                return $h1;
             }
         }
         
@@ -253,63 +252,61 @@ class CrawlPage extends \yii\base\Object
     
     public function getTitleH1()
     {
-    	$crawler = $this->getCrawler();
-    	
-    	if (!$crawler) {
-    		return null;
-    	}
-    	
-    	$response = $crawler->filter('h1')->each(function ($node, $i) {
-    		if (!empty($node->text())) {
-    			return self::cleanupString($node->text());
-    		}
-    	});
-    	
-    	if (!empty($response) && isset($response[0])) {
-    		$this->verbosePrint('? getTitle(): h1 tag found', $response[0]);
-    		return $response[0];
-    	}
-    		
-    	return null;
+        $crawler = $this->getCrawler();
+        
+        if (!$crawler) {
+            return null;
+        }
+        
+        $response = $crawler->filter('h1')->each(function ($node, $i) {
+            if (!empty($node->text())) {
+                return self::cleanupString($node->text());
+            }
+        });
+        
+        if (!empty($response) && isset($response[0])) {
+            $this->verbosePrint('? getTitle(): h1 tag found', $response[0]);
+            return $response[0];
+        }
+            
+        return null;
     }
     
     public function getTitleCrawlerTag()
     {
-    	$content = $this->getCrawlerHtml();
-    	
-    	preg_match_all("/\[CRAWL_TITLE\](.*?)\[\/CRAWL_TITLE\]/", $content, $results);
-    	
-    	if (!empty($results) && isset($results[1]) && isset($results[1][0])) {
-    		$this->verbosePrint("[+] CRAWL_TITLE FOUND", $results[1][0]);
-    		return $results[1][0];
-    	}
-    	
-    	return false;
+        $content = $this->getCrawlerHtml();
+        
+        preg_match_all("/\[CRAWL_TITLE\](.*?)\[\/CRAWL_TITLE\]/", $content, $results);
+        
+        if (!empty($results) && isset($results[1]) && isset($results[1][0])) {
+            $this->verbosePrint("[+] CRAWL_TITLE FOUND", $results[1][0]);
+            return $results[1][0];
+        }
+        
+        return false;
     }
     
     public function getGroup()
     {
-    	try {
-    		$content = $this->getCrawlerHtml();
+        try {
+            $content = $this->getCrawlerHtml();
     
-    		preg_match_all("/\[CRAWL_GROUP\](.*?)\[\/CRAWL_GROUP\]/", $content, $results);
+            preg_match_all("/\[CRAWL_GROUP\](.*?)\[\/CRAWL_GROUP\]/", $content, $results);
     
-    		if (!empty($results) && isset($results[1]) && isset($results[1][0])) {
-    			$this->verbosePrint("[+] CRAWL_GROUP information found", $results[1][0]);
-    			return $results[1][0];
-    		}
+            if (!empty($results) && isset($results[1]) && isset($results[1][0])) {
+                $this->verbosePrint("[+] CRAWL_GROUP information found", $results[1][0]);
+                return $results[1][0];
+            }
     
-    		return '';
-    
-    	} catch (\Exception $e) {
-    		return '';
-    	}
+            return '';
+        } catch (\Exception $e) {
+            return '';
+        }
     }
 
     private function tempGetContent()
     {
         try {
-            
             $bodyContent = preg_replace('/\s+/', ' ', $this->getCrawlerHtml());
             
             // find crawl full ignore

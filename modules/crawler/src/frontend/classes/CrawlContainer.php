@@ -66,7 +66,7 @@ class CrawlContainer extends \yii\base\Object
 
     /**
      * Get the crawl page object based on its ulr.
-     * 
+     *
      * @param string $url The crawler object.
      * @return \luya\crawler\frontend\classes\CrawlPage
      */

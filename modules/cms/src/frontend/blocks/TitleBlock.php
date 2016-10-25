@@ -8,7 +8,7 @@ use luya\cms\base\TwigBlock;
 
 /**
  * Heading-Title Block.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class TitleBlock extends TwigBlock

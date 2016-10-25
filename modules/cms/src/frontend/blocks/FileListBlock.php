@@ -7,7 +7,7 @@ use luya\cms\base\TwigBlock;
 
 /**
  * File list block.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class FileListBlock extends TwigBlock

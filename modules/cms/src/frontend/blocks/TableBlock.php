@@ -8,7 +8,7 @@ use luya\cms\base\TwigBlock;
 
 /**
  * Table Block.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class TableBlock extends TwigBlock

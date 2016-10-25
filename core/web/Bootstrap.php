@@ -51,7 +51,6 @@ class Bootstrap extends \luya\base\Bootstrap
     {
         if (!$app->request->getIsConsoleRequest()) {
             if ($this->hasModule('admin') && $app->request->isAdmin()) {
-                
                 foreach ($this->getModules() as $id => $module) {
                     if ($module instanceof AdminModuleInterface) {
                         $this->_adminAssets = ArrayHelper::merge($module->assets, $this->_adminAssets);

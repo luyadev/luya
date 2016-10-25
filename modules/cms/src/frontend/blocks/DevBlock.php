@@ -8,7 +8,7 @@ use luya\cms\base\TwigBlock;
 
 /**
  * Development Block in order to print data.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class DevBlock extends TwigBlock

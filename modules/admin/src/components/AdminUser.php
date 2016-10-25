@@ -31,7 +31,7 @@ class AdminUser extends \yii\web\User
     
     public function onAfterLogin()
     {
-    	Yii::$app->luyaLanguage = $this->identity->setting->get('luyadminlanguage', Yii::$app->luyaLanguage);
+        Yii::$app->luyaLanguage = $this->identity->setting->get('luyadminlanguage', Yii::$app->luyaLanguage);
     }
 
     public function onBeforeLogout()

@@ -51,7 +51,7 @@ class BowerVendor extends \luya\web\Asset
         $lang = Yii::$app->luyaLanguage;
         
         if (!Yii::$app->adminuser->isGuest) {
-        	$lang = Yii::$app->adminuser->identity->setting->get('luyadminlanguage', Yii::$app->luyaLanguage);
+            $lang = Yii::$app->adminuser->identity->setting->get('luyadminlanguage', Yii::$app->luyaLanguage);
         }
         
         // as params are not allowed inside array properties we have located the filling of the $js param into the initalizer.
