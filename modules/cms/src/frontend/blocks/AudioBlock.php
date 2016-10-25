@@ -4,6 +4,7 @@ namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
 use luya\cms\base\TwigBlock;
+use luya\cms\frontend\blockgroups\MediaGroup;
 
 /**
  * Audio Block for Soundcloude Service
@@ -19,6 +20,11 @@ class AudioBlock extends TwigBlock
         return Module::t('block_audio_name');
     }
 
+    public function getBlockGroup()
+    {
+        return MediaGroup::class;
+    }
+    
     public function icon()
     {
         return 'volume_up';

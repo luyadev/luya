@@ -19,6 +19,6 @@ class ProjectGroup extends BlockGroup
     
     public function getPosition()
     {
-        return 70;
+        return 64;
     }
 }

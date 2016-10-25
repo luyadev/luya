@@ -6,6 +6,7 @@ use Yii;
 use luya\cms\frontend\Module;
 use luya\TagParser;
 use luya\cms\base\TwigBlock;
+use luya\cms\frontend\blockgroups\MediaGroup;
 
 /**
  * Image with Text block.
@@ -25,6 +26,11 @@ class ImageTextBlock extends TwigBlock
     public function name()
     {
         return Module::t('block_image_text_name');
+    }
+    
+    public function getBlockGroup()
+    {
+        return MediaGroup::class;
     }
 
     public function icon()
