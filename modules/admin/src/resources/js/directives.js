@@ -1538,6 +1538,33 @@
                 $scope.foldersDirecotryIdReload = function() {
                 	return ServiceFoldersDirecotryId.load(true);
                 }
+                
+                // file replace logic
+
+                
+                $scope.replaceFile = function(file, errorFiles) {
+                	$scope.replaceFiled = file;
+                	
+                	if (!file) {
+                		return;
+                	}
+                	
+                	LuyaLoading.start();
+                	file.upload = Upload.upload({
+                		url: 'admin/api-admin-storage/file-replace',
+                        data: {file: file, fileId: $scope.fileDetail.id}
+                    });
+                	
+                	file.upload.then(function (response) {
+                        $timeout(function () {
+                            file.result = response.data;
+                            $scope.filesDataReload().then(function() {
+                            	LuyaLoading.stop();
+                            	AdminToastService.success('the file has been replaced successfull.', 4000);
+                            });
+                        });
+                    });
+                };
 
                 // upload logic
 

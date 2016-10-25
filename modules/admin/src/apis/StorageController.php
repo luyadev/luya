@@ -147,16 +147,25 @@ class StorageController extends RestController
         return Yii::$app->storage->filtersArray;
     }
     
-    private $_uploaderErrors = [
-        0 => 'There is no error, the file uploaded with success',
-        1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
-        2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
-        3 => 'The uploaded file was only partially uploaded',
-        4 => 'No file was uploaded',
-        6 => 'Missing a temporary folder',
-        7 => 'Failed to write file to disk.',
-        8 => 'A PHP extension stopped the file upload.',
-    ];
+    public function actionFileReplace()
+    {
+        $fileId = Yii::$app->request->post('fileId', false);
+        $raw = $_FILES['file'];
+        /** @var $file \luya\admin\file\Item */
+        if ($file = Yii::$app->storage->getFile($fileId)) {
+            $serverSource = $file->getServerSource();
+            if (is_uploaded_file($raw['tmp_name'])) {
+                if (Storage::replaceFile($serverSource, $raw['tmp_name'])) {
+                    foreach (Yii::$app->storage->findImages(['file_id' => $file->id]) as $img) {
+                        Storage::removeImage($img->id, false);
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
     
     /**
      * <URL>/admin/api-admin-storage/files-upload.
@@ -171,7 +180,7 @@ class StorageController extends RestController
     {
         foreach ($_FILES as $k => $file) {
             if ($file['error'] !== UPLOAD_ERR_OK) {
-                return ['upload' => false, 'message' => $this->_uploaderErrors[$file['error']]];
+                return ['upload' => false, 'message' => Storage::getUploadErrorMessage($file['error'])];
             }
             try {
                 $file = Yii::$app->storage->addFile($file['tmp_name'], $file['name'], Yii::$app->request->post('folderId', 0));

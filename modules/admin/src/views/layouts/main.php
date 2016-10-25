@@ -281,7 +281,7 @@ $this->beginPage()
                 </tbody>
             </table>
             </div>
-            <div class="col s4" ng-if="fileDetail">
+            <div class="col s4" ng-show="fileDetail">
                 <div class="filemanager__detail-wrapper">
                     <h4>{{ fileDetail.name }}</h4>
                     <table class="filemanager__table striped">
@@ -303,6 +303,12 @@ $this->beginPage()
                         </tr>
                         <tr>
                             <td><i><?php echo Admin::t('layout_filemanager_detail_download'); ?></i></td><td><a ng-href="{{fileDetail.source}}" target="_blank" class="btn btn-floating"><i class="material-icons">cloud_download</i></a></td>
+                        </tr>
+                        <tr>
+                            <td><i>Replace File</i></td>
+                            <td>
+                                <button type="file" ngf-keep="false" ngf-select="replaceFile($file, $invalidFiles)">Replace FIle</button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
