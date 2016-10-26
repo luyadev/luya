@@ -313,8 +313,6 @@
 			$http.get($scope.config.apiEndpoint + '/'+id+'?' + $scope.config.apiUpdateQueryString).success(function(data) {
 				$scope.data.update = data;
 				
-				console.log($scope.config.inline, $scope.relationCall);
-				
 				if ($scope.relationCall) {
 					
 					$scope.crudSwitchType = 2;
