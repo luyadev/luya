@@ -28,6 +28,11 @@ class MenuController extends RestController
         $data = Yii::$app->adminmenu->getNodeData($nodeId);
         $accessList = [];
 
+        // verify if no permissions has ben seet for this know or no groups are available trough permissions issues.
+   		if (!isset($data['groups'])) {
+        	return [];
+        }
+        
         foreach ($data['groups'] as $groupkey => $groupvalue) {
             foreach ($groupvalue['items'] as $row) {
                 if ($row['permissionIsApi']) {
