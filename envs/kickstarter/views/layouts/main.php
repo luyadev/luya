@@ -1,14 +1,17 @@
 <?php
+use app\assets\ResourcesAsset;
 /**
  * @var \luya\web\View $this
  */
-
-\app\assets\ResourcesAsset::register($this);
-
+ResourcesAsset::register($this);
 $this->beginPage();
 ?>
-<html>
+<html lang="<?= Yii::$app->composition->language; ?>">
     <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>LUYA &mdash; <?php echo $this->title; ?></title>
         <?php $this->head() ?>
     </head>
