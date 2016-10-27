@@ -149,5 +149,7 @@ return [
     /* rc1 */
     'page_update_actions_deepcopy_text' => 'Créer une copie de la page en cours comprenant son contenu. Toutes les langues seront copiés mais, seulement la version publiée sera visible.',
     'page_update_actions_deepcopy_btn' => 'Créer une copie',
+    
+// rc2
     'model_navitem_title_tag_label' => 'Titre (SEO)',
 ];
