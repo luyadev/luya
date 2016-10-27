@@ -160,5 +160,7 @@ return [
 
     'page_update_actions_deepcopy_text' => 'Erstellen Sie eine Kopie der aktuellen Seite mit ihren Inhalten. Es werden dabei alle Sprachen kopiert, aber nur die veröffentlichte Version.',
     'page_update_actions_deepcopy_btn' => 'Kopie erstellen',
+    
+// rc2
     'model_navitem_title_tag_label' => 'Titel Tag (SEO)',
 ];
