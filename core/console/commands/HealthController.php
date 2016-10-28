@@ -49,8 +49,8 @@ class HealthController extends \luya\console\Command
         $this->output('The directory the health commands is applying to: ' . Yii::getAlias('@app'));
         
         foreach ($this->folders as $folder => $writable) {
+            $mode = ($writable) ? 0777 : 0775;
             if (!file_exists($folder)) {
-                $mode = ($writable) ? 0777 : 0775;
                 if (FileHelper::createDirectory($folder, $mode)) {
                     $this->outputSuccess("$folder: successfully created directory");
                 } else {
