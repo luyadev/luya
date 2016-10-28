@@ -1592,8 +1592,29 @@
                     }
                 })
 
+                $scope.pasteUpload = function(e) {
+                	
+                    for (var i = 0 ; i < e.originalEvent.clipboardData.items.length ; i++) {
+                        var item = e.originalEvent.clipboardData.items[i];
+                        
+                        if (item.kind == 'file') {
+                        	LuyaLoading.start(i18n['js_dir_upload_wait']);
+	                        Upload.upload({
+	                            url: 'admin/api-admin-storage/files-upload',
+	                            fields: {'folderId': $scope.currentFolderId},
+	                            file: item.getAsFile()
+	                        }).then(function(response) {
+	                        	$scope.filesDataReload().then(function() {
+	                            	AdminToastService.success(i18n['js_dir_manager_upload_image_ok'], 2000);
+	                                LuyaLoading.stop();
+	                            });
+	                        })
+                        }
+                    }
+                }
+                
                 $scope.uploadUsingUpload = function(file) {
-                    file.upload = Upload.upload({
+                	file.upload = Upload.upload({
                         url: 'admin/api-admin-storage/files-upload',
                         fields: {'folderId': $scope.currentFolderId},
                         file: file

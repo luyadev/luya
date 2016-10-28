@@ -299,6 +299,11 @@ class StorageContainer extends Component
             throw new Exception("Unable to create file where file source and/or file name is empty.");
         }
         
+        if ($fileName == 'blob') {
+        	$ext = FileHelper::getExtensionsByMimeType(FileHelper::getMimeType($fileSource));
+        	$fileName = 'paste-'.date("Y-m-d-H-i").'.'.$ext[0];
+        }
+        
         $fileInfo = FileHelper::getFileInfo($fileName);
         
         $baseName = Inflector::slug($fileInfo->name, '-');
@@ -346,7 +351,6 @@ class StorageContainer extends Component
                 return $this->getFile($model->id);
             }
         }
-        
         return false;
     }
     

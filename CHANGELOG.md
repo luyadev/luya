@@ -26,6 +26,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1049](https://github.com/luyadev/luya/issues/1049) Admin Filemanager supports replacement of files therefore the angular file upload component has been updated.
 - [#1051](https://github.com/luyadev/luya/issues/1051) Added new Meida block group, changed default positioning for standard groups, make block creator usage of Project block group by default.
 - [#1057](https://github.com/luyadev/luya/issues/1057) PHP Block CMS View class provides more and better helper methods in order to retrieve config contents.
+- [#1060](https://github.com/luyadev/luya/issues/1060) Filemanager Drag&Drop and Copy&Paste of files enabled (Chrome, Firefox and HTML5 Browsers only).
 
 ### Fixed
 

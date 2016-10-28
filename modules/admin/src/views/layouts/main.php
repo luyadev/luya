@@ -17,6 +17,10 @@ $this->beginPage()
         [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   			display: none !important;
 		}
+		
+		.dragover {
+		    border: 5px dashed #2196F3;
+		}
     </style>
     <?php $this->head(); ?>
 </head>
@@ -183,7 +187,7 @@ $this->beginPage()
 <!-- FILEMANAGER -->
 <script type="text/ng-template" id="storageFileManager">
 
-    <div class="filemanager">
+    <div class="filemanager" ng-paste="pasteUpload($event)">
 
         <!-- TREE -->
         <div class="filemanager__tree">
@@ -224,7 +228,7 @@ $this->beginPage()
 
             <div class="filemanager__toolbar filemanager__toolbar--top">
 
-                <label class="floating-button-label left" ngf-select ngf-multiple="true" ng-model="uploadingfiles">
+                <label class="floating-button-label left" ngf-enable-firefox-paste="true" ngf-drag-over-class="'dragover'" ngf-drop ngf-select ngf-multiple="true" ng-model="uploadingfiles">
                             <span class="btn-floating">
                                 <i class="material-icons">file_upload</i>
                             </span>
@@ -332,13 +336,6 @@ $this->beginPage()
         <!-- FILES & FOLDERS -->
 
         <div class="filemanager__toolbar filemanager__toolbar--bottom">
-
-            <label class="floating-button-label left" ngf-select ngf-multiple="true" ng-model="uploadingfiles">
-                        <span class="btn-floating">
-                            <i class="material-icons">file_upload</i>
-                        </span>
-                <span class="floating-button-label__label"><?php echo Admin::t('layout_filemanager_upload_files'); ?></span>
-            </label>
 
             <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?php echo Admin::t('layout_filemanager_remove_selected_files'); ?></button>
             <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove"><?php echo Admin::t('layout_filemanager_move_selected_files'); ?></button>

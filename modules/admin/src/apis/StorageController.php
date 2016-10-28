@@ -183,9 +183,11 @@ class StorageController extends RestController
                 return ['upload' => false, 'message' => Storage::getUploadErrorMessage($file['error'])];
             }
             try {
-                $file = Yii::$app->storage->addFile($file['tmp_name'], $file['name'], Yii::$app->request->post('folderId', 0));
-                if ($file) {
+                $response = Yii::$app->storage->addFile($file['tmp_name'], $file['name'], Yii::$app->request->post('folderId', 0));
+                if ($response) {
                     return ['upload' => true, 'message' => Module::t('api_storage_file_upload_succes')];
+                } else {
+                	return ['upload' => false, 'message', 'Error while storing your image in the storage component.'];
                 }
             } catch (Exception $err) {
                 return ['upload' => false, 'message' => Module::t('api_sotrage_file_upload_error', ['error' => $err->getMessage()])];
