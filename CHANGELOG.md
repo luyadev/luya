@@ -25,6 +25,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1047](https://github.com/luyadev/luya/issues/1047) Title, Keyword and Description are now part of the Crawlers contnet, as the content is where the search field is look for the search query.
 - [#1049](https://github.com/luyadev/luya/issues/1049) Admin Filemanager supports replacement of files therefore the angular file upload component has been updated.
 - [#1051](https://github.com/luyadev/luya/issues/1051) Added new Meida block group, changed default positioning for standard groups, make block creator usage of Project block group by default.
+- [#1057](https://github.com/luyadev/luya/issues/1057) PHP Block CMS View class provides more and better helper methods in order to retrieve config contents.
 
 ### Fixed
 

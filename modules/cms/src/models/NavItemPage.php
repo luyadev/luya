@@ -183,6 +183,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     {
         $string = '';
         $i = 0;
+        $equalIndex = 1;
         $placeholders = $this->getPlaceholders($navItemPageId, $placeholderVar, $prevId);
         $blocksCount = count($placeholders);
         // foreach all placeholders but preserve varaibles above to make calculations
@@ -223,6 +224,14 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     $blockObject->setEnvOption('isLast', ($i == $blocksCount));
                     $blockObject->setEnvOption('isPrevEqual', array_key_exists($prev, $placeholders) && $placeholder['block_id'] == $placeholders[$prev]['block_id']);
                     $blockObject->setEnvOption('isNextEqual', array_key_exists($next, $placeholders) && $placeholder['block_id'] == $placeholders[$next]['block_id']);
+                    
+                    if (!$blockObject->getEnvOption('isPrevEqual')) {
+                    	$equalIndex = 1;
+                    } else {
+                    	$equalIndex++;
+                    }
+                    $blockObject->setEnvOption('equalIndex', $equalIndex);
+                    
                     // render sub placeholders and set into object
                     $insertedHolders = [];
                     foreach ($blockObject->getPlaceholders() as $item) {

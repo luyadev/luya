@@ -64,10 +64,12 @@ In the example above, the view file should looke like this:
  */
 ?>
 
-<?php if ($this->context->getVarValue('mytext')): ?>
-    <h1><?= $this->context->getExtraValue('textTransformed'); ?></h1>
+<?php if ($this->varValue('mytext')): ?>
+    <h1><?= $this->extraValue('textTransformed'); ?></h1>
 <?php endif; ?>
 ```
+
+Check the {{\luya\cms\base\PhpBlockView}} for full method reference to use inside the php block view.
 
 #### Register and import
 
@@ -133,16 +135,17 @@ $this->getEnvOption($key, $defaultValue);
 
 the following keys are available:
 
-+ *id* Return the unique identifier from the cms context
-+ *blockId* Returns the id of this block (unique identifier)
-+ *context* Returns frontend or backend to find out in which context you are.
-+ *pageObject* Returns the `luya\cms\models\NavItem` Object where you can run `getNav()` to retrievew the Nav Object.
-+ *isFirst* Returns whether this block is the first in its placeholder or not.
-+ *isLast* Return whether his block is the last in its placeholder or not.
-+ *index* Returns the number of the index/poisition within this placheholder.
-+ *itemsCount* Returns the number of items inside this placeholder.
-+ *isPrevEqual* Returns whether the previous item is of the same origin (block type, like text block) as the current.
-+ *isNextEqual* Returns whether the next item is of the same origin (block type, like text block) as the current.
++ **id**: Return the unique identifier from the cms context
++ **blockId**: Returns the id of this block (unique identifier)
++ **context**: Returns frontend or backend to find out in which context you are.
++ **pageObject**: Returns the `luya\cms\models\NavItem` Object where you can run `getNav()` to retrievew the Nav Object.
++ **isFirst**: Returns whether this block is the first in its placeholder or not.
++ **isLast**: Return whether his block is the last in its placeholder or not.
++ **index**: Returns the number of the index/position within this placheholder.
++ **itemsCount**: Returns the number of items inside this placeholder.
++ **isPrevEqual**: Returns whether the previous item is of the same origin (block type, like text block) as the current.
++ **isNextEqual**: Returns whether the next item is of the same origin (block type, like text block) as the current.
++ **equalIndex**: Get the current index/position of this element within the list of *same* elements.
 
 #### Properties from CMS Page
 
