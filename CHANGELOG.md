@@ -34,6 +34,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1011](https://github.com/luyadev/luya/issues/1011) The ViewContext implementation for cmslayout rendering allows you now to render other templates inside a cmslayout.
 - [#1044](https://github.com/luyadev/luya/issues/1044) Changing the cms permission force menu reload in order to fix bug with old menu permissions.
 - [#1013](https://github.com/luyadev/luya/issues/1013) Delete a cms page displays blank page and reloads menu, fixed bug where page was still visible.
+- [#1061](https://github.com/luyadev/luya/issues/1061) CMS Page properties with overriden default implementation returns wrong administration api value. 
 
 1.0.0-RC1 (04.10.2016)
 -----------------------

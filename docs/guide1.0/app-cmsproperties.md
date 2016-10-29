@@ -73,7 +73,9 @@ class MyImage extends \luya\admin\base\ImageProperty
 }
 ```
 
-In order to get use the above MyImage property just run: `<img src="<?= $item->getProperty('myImage')->getValue(); ?>" />`.
+In order to get use the above MyImage property just run: `<img src="<?= $item->getProperty('myImage'); ?>" />`.
+
+> As the `$item->getProperty` method returns the Property, as the all propertys implement the `__toString()` they will return the `getValue()` method by default.
 
 ## Get the Proprety value
 
@@ -95,7 +97,7 @@ A very common scenario is to add properties to an existing menu item like an ima
 	<a href="<?= $item->link; ?>">
 		<?php /* now depending on the if the property `navImage` is set for this page item we can access this property object. */
 		if ($item->getProperty('navImage')): ?>
-		<img src="<?= $item->getProperty('navImage')->getValue(); ?>" />
+		<img src="<?= $item->getProperty('navImage'); ?>" /> // equals to: <img src="<?= $item->getProperty('navImage')->getValue(); ?>" />
 		<? endif; ?>
 	</a>
 </li>

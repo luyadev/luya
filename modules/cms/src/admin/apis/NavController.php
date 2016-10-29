@@ -85,7 +85,7 @@ class NavController extends \luya\admin\base\RestController
             $object = \luya\admin\models\Property::findOne($row['admin_prop_id']);
             $blockObject = $object->createObject($row['value']);
             
-            $value = $blockObject->getValue();
+            $value = $blockObject->getAdminValue();
             
             $row['value'] = (is_numeric($value)) ? (int) $value : $value;
              
