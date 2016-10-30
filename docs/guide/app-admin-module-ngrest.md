@@ -3,13 +3,13 @@ Admin Modul NgRest CRUD
 
 One of the most powerfull tools in *LUYA*, is the **ANGULAR CRUD** surface, its combines *Angular*, *RESTful*, *CRUD* and *Active Record* in a very elegant and powerfull way. So in a more understable sentence **Generate administration formulars to create, update, delete and list your data very fast and elegant**. It creates an API you can talk trough Angular and you can configure it like an ActiveRecord and also use it like an Active Record Model in your application. Here is an example of an NgRest Crud for Administration Users:
 
-![ngrest-crud-example](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/ngrest-crud-example.jpg "NgRest Crud Example")
+![ngrest-crud-example](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/ngrest-crud-example.jpg "NgRest Crud Example")
 
 The word *NgRest* is explained as follows: A**Ng**ular**Rest** (Representational State Transfer)
 
 > In order to create your own *NgRest* quickly and not understanding the details under the hood, you can create a migration with your data table, create an admin module and the run `./vendor/bin/luya crud/create`.
 
-![ngrest-crud](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/ngrest-crud.png "NgRest Image")
+![ngrest-crud](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/ngrest-crud.png "NgRest Image")
 
 #### Steps to understand and create an NgRest Crud
 

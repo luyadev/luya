@@ -2,11 +2,11 @@
 
 An *NgRest ActiveWindow* is a concept to attach a modal window into an [Ng Rest Crud List](app-admin-module-ngrest.md). The Active Window is always bound to an **ID** of an item and is represented as a button with an icon and/or an alias. An example of a Button in the crud list:
 
-![button](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/aw_button.png "Active Window Button")
+![button](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/aw_button.png "Active Window Button")
 
 An example of an active window (Change Password) when clicked:
 
-![overlay-window](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/aw_window.png "Active Window Overlay")
+![overlay-window](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/aw_window.png "Active Window Overlay")
 
 ### Create an Active Window
 
