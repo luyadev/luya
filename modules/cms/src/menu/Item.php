@@ -13,6 +13,8 @@ use luya\cms\models\Nav;
  * Each menu itaration will return in an Item-Object. The Item-Object contains several methods like
  * returning title, url and ids or retrieve depending item iterations like parents or childs. As the
  * Item Object extends the yii\base\Object all getter methods can be access as property.
+ * 
+ * Read more in the [[app-menu.md]] Guide.
  *
  * @property integer $id Returns Unique identifier of item, represents data record of cms_nav_item table.
  * @property boolean $isHidden Returns boolean state of visbility.
@@ -38,7 +40,7 @@ use luya\cms\models\Nav;
  * @property array $teardown Return all parent elemtns **with** the current item.
  * @property array $children Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta1
  */
 class Item extends \yii\base\Object

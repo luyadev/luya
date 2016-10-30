@@ -22,6 +22,8 @@ use luya\cms\menu\InjectItem;
  * is designed to run in "singleton" mode. The menu component provides also basic find methods like findAll,
  * findOne to return specific data via the Query class. The menu components resolves also the current item
  * based on the current request object.
+ * 
+ * Read more in the [[app-menu.md]] Guide.
  *
  * ### findAll()
  *
@@ -80,8 +82,7 @@ use luya\cms\menu\InjectItem;
  * ```
  *
  * @since 1.0.0-beta1
- *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Menu extends Component implements ArrayAccess
 {

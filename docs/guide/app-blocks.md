@@ -10,7 +10,7 @@ You can add Blocks to your application or to a module. In either case, the folde
 
 For example, we create a Block `TextTransformBlock` and store it in `app/blocks` or `app/modules/yourmodule/blocks`.
 
-> In 1.0.0-beta8 the new *PHP BLOCKS* was introduced. This allows you to use PHP Views instead of TWIG Templates. In order to use The new PHPBlocks you can extend the block from `luyya\cms\base\PhpBlock`. PhpBlocks does automatically requires a view file and the `twigAdmin()` is replaced by `admin()` method.
+> In 1.0.0-beta8 the new *PHP BLOCKS* was introduced. This allows you to use PHP Views instead of TWIG Templates. In order to use The new PHPBlocks you can extend the block from {{\luya\cms\base\PhpBlock}}. PhpBlocks does automatically requires a view file and the `twigAdmin()` is replaced by `admin()` method.
 
 This is what the `TextTransformBlock` could looke like in your code:
 
@@ -104,7 +104,7 @@ class TestBlock extends \luya\cms\base\PhpBlock
 
 #### Override default blocks
 
-Sometimes you just want to change the default behavior/template of systems blocks, you can always override all blocks provided from the system by adding a twig template with the name of the block in your project application views folder. Assuming you want to override the **template** of the `TextBlock` which is provided by default from the LUYA cms core. To do so go into your application view folder `views/blocks` and add a twig template with the name of the block, in this case `TextBlock.twig` now the system will pick and render this template first. In addition to this method you could also make a custom block and extend from the existing Text block. `class MyTextBlock extends \luya\cms\frontend\blocks\TextBlock` and override the `twigFrontend()` method so you have your own output.
+> Overriding blocks is removed from the guide, as its encountert as a misfit practice.
 
 ## Caching
 
@@ -138,7 +138,7 @@ the following keys are available:
 + **id**: Return the unique identifier from the cms context
 + **blockId**: Returns the id of this block (unique identifier)
 + **context**: Returns frontend or backend to find out in which context you are.
-+ **pageObject**: Returns the `luya\cms\models\NavItem` Object where you can run `getNav()` to retrievew the Nav Object.
++ **pageObject**: Returns the {{\luya\cms\models\NavItem}} Object where you can run \luya\cms\models\NavItem::getNav}} to retrievew the Nav Object.
 + **isFirst**: Returns whether this block is the first in its placeholder or not.
 + **isLast**: Return whether his block is the last in its placeholder or not.
 + **index**: Returns the number of the index/position within this placheholder.
@@ -175,7 +175,7 @@ class TestBlock extends \cmsadmin\base\Block
 
 To implement ajax inside a block the following concept is used:
 
-+ `createAjaxLink()`: Create the link to the callback, this url must be used for your ajax requests.
++ {{\luya\cms\base\InternalBaseBlock::createAjaxLink()}}: Create the link to the callback, this url must be used for your ajax requests.
 + `callback...()`: Define a callbacked, you have to prefix the method with *callback*.
 
 Create a callback and define all parameters. The callback is what the url returns to your javascript, can be html or json.
@@ -242,7 +242,9 @@ public function getBlockGroup()
 
 You can also use one of the predefined group block class:
 
-+ `\luya\cms\blockgroups\MainGroup::className()` (this is default group for all blocks)
-+ `\luya\cms\blockgroups\LayoutGroup::className()`
-+ `\luya\cms\blockgroups\ProjectGroup::className()`
-+ `\luya\cms\blockgroups\DevelopmentGroup::className()`
++ {{\luya\cms\frontend\blockgroups\MainGroup}} (this is default group for all blocks)
++ {{\luya\cms\frontend\blockgroups\LayoutGroup}}
++ {{{luya\cms\frontend\blockgroups\ProjectGroup}}
++ {{\luya\cms\frontend\blockgroups\DevelopmentGroup}}
++ {{\luya\cms\frontend\blockgroups\MediaGroup}}
++ {{\luya\cms\frontend\blockgroups\TextGroup}}

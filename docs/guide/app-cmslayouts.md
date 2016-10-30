@@ -23,6 +23,8 @@ You can now add html content to the new cmslayout file *2columns.php* but the mo
 
 You have now created a new cms layout which will be available after the import process.
 
+> Info: Files starting with *.* or *_* will be ignored. Cmslayouts in subfolders will also be ignored.
+
 ## Import and Use
 
 To enable the new cmslayout file, or after updating an existing layout file, you have to run the `import` command from the Terminal.

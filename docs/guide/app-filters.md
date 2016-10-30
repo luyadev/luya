@@ -90,7 +90,7 @@ or you can use the filter name directly, this is less recommend as if the filter
 
 the filter must be exact name like the method identifier() returns from the filter class.
 
-> The applyFilter returns the new genearted {{\luya\admin\image\Item}} Object where you can access other methods and informations.
+> The {{luya\admin\image\Item::applyFilter}} returns the new generated {{\luya\admin\image\Item}} Object where you can access other methods and informations.
 
 
 ### apply filter in twig view

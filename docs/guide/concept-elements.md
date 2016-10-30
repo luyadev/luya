@@ -1,6 +1,6 @@
 # Html Element Component
 
-The basic idea behind the *HTML Element Component* is based on a behavior known from *Angular Directives*. In a huge web project you have several html parts you may have to use an several locations but with different contents. Lets assume you have a Teaser-Box which contains a title and a picture, so the variables are the picture and the title, but the html base will be the same on all pages.
+The basic idea behind the {{\luya\web\Element}} component is based on a behavior known from *Angular Directives*. In a huge web project you have several html parts you may have to use an several locations but with different contents. Lets assume you have a Teaser-Box which contains a title and a picture, so the variables are the picture and the title, but the html base will be the same on all pages.
 
 Casual Example of an html partial you may reuse in different pages with different content.
 
@@ -115,6 +115,4 @@ return [
 ]
 ```
 
-When you have successfull configure the styleguide module you can access it trough the url:
-
-(http://mywebsite.com/styleguide)[http://mywebsite.com/styleguide]
+When you have successfull configure the styleguide module you can access it trough the url: `mywebsite.com/styleguide`

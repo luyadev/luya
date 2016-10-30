@@ -6,7 +6,7 @@ An Admin-Module provides the ability to quickly create an adminstration section 
 Some features available in the Admin Modules:
 
 + [NgRest, CRUD system based on Angular and Yii2](app-admin-module-ngrest.md)
-+ [Storage system](https://luya.io/api/admin-components-storagecontainer.html)
++ {{luya\admin\components\StorageContainer}}
 + Image filters and effects
 + Apis
 + Permissions

@@ -80,7 +80,7 @@ RewriteRule . index.php
 </IfModule>
 ```
 
-An example for a configuration file `configs/env.php` (which env.php is the default value used from the `luya\Boot` class):
+An example for a configuration file `configs/env.php` (which env.php is the default value used from the {{luya\Boot}} class):
 
 ```php
 <?php

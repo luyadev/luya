@@ -48,7 +48,7 @@ return [
 ## Input-Types
 
 
-There are several types you can use to generate your block controlls. Each class which support those types implements the TypesInterface` where you can use the type names as constant.
+There are several types you can use to generate your block controlls. Each class which support those types implements the {{\luya\admin\base\TypesInterface}} where you can use the type names as constant.
 
 |Type Name            |Constante|Description
 |---------------------|---------|-----------
