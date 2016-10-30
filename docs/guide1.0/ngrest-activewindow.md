@@ -112,7 +112,7 @@ As the administration interface is written in angular you can aso create inline 
 
 The below view file shows an Angular Controller which collectis data from the the controller assigned into the view, but uses ng-repeat to display and render the data.
 
-```
+```php
 <script>
 zaa.bootstrap.register('InlineController', function($scope, $controller) {
 
@@ -140,8 +140,8 @@ The admin module of LUYA provides some basic reusable active windows you can reu
 
 |Name   |Class |Public Properties
 |--     |--     |--
-|Tag    |`luya\admin\aws\TagActiveWindow`|<ul><li>$tableName</li></ul>
-|Gallery|`luya\admin\aws\Gallery`|<ul><li>$refTableName</li><li>$imageIdFieldName</li><li>$refFieldName</li></ul>
-|ChangePassword|`luya\admin\aws\ChangePassword`|<ul><li>$className</li></ul>
-|CoordinatesActiveWindow|`luya\admin\aws\CoordinatesActiveWindow`|<ul><li>$ampsApikey</li></ul>
-|FlowActiveWindow|`luya\admin\aws\FlowActiveWindow`|<ul><li>$modelClass</li></ul>
+|Tag    |{{\luya\admin\aws\TagActiveWindow}}|<ul><li>$tableName</li></ul>
+|Gallery|{{\luya\admin\aws\Gallery}}|<ul><li>$refTableName</li><li>$imageIdFieldName</li><li>$refFieldName</li></ul>
+|ChangePassword|{{\luya\admin\aws\ChangePassword}}|<ul><li>$className</li></ul>
+|CoordinatesActiveWindow|{{\luya\admin\aws\CoordinatesActiveWindow}}|<ul><li>$ampsApikey</li></ul>
+|FlowActiveWindow|{{\luya\admin\aws\FlowActiveWindow}}|<ul><li>$modelClass</li></ul>

@@ -42,21 +42,13 @@ class TestProperty extends \luya\admin\base\Property
 }
 ```
 
-After running the import command you will see the property in the CMS admin. Below a table of the explained methods in order to have a better understanding of what methods are used for:
-
-|Method	|Optional	|Description
-|---		|---	|---
-|varName	|no		|The name of the variable, under this name you can access the property later
-|label		|no		|The human readable name of the property. This will be visibile for administration users.
-|type		|no		|Choose the type of your variable [available types](app-block-types.md).
-|options	|yes	|If the variable type does have options you have to define them in this method.
-|defaultValue|yes	|This will be the initvalue of the variable, default is `false`.
+After running the import command you will see the property in the CMS admin. In order to understand the methods used in details refer to the API Guide {{\luya\admin\base\Property}}.
 
 We are also have a set of predefined propertys you can extend from, this i cause some blocks have to override the `getValue()` method in order to change the value output, as this is common scenario we have built classes you can abstract from.
 
 #### luya\admin\base\ImageProperty
 
-The image property is often used to return upload an image and return the path for, so you can abstract your property from `luya\admin\base\ImageProperty` like the example below:
+The image property is often used to return upload an image and return the path for, so you can abstract your property from {{\luya\admin\base\ImageProperty}} like the example below:
 
 ```php
 class MyImage extends \luya\admin\base\ImageProperty

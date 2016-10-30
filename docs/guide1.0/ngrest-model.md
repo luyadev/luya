@@ -235,7 +235,7 @@ The above example will use the `getSales()` method of the current model where yo
 
 ## Soft Deletion 
 
-We have also added a soft delete trait which is going to override the default implementation of the `delete` method. When enabled and configure, the soft delete trait will only mark the datarecord to `is_deleted = 1` instead of removing it from the database.
+We have also added a soft delete trait {{\luya\admin\traits\SoftDeleteTrait}} which is going to override the default implementation of the `delete` method. When enabled and configure, the soft delete trait will only mark the datarecord to `is_deleted = 1` instead of removing it from the database.
 
 ```php
 use luya\admin\traits\SoftDeleteTrait;
