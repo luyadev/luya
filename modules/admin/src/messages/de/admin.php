@@ -183,4 +183,5 @@ return [
     'ngrest_crud_filter_prompt' => 'Filter auswählen',
     'ngrest_crud_ajax_search_length' => 'Der Suchbegriff muss mindestens 3 Zeichen lang sein.',
     'menu_system_logger' => 'Logger',
+	'layout_filemanager_detail_replace_file' => 'Datei ersetzen',
 ];

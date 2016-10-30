@@ -176,4 +176,5 @@ return [
     'right_panel_support_tags_title' => 'Tags',
     'right_panel_support_support_title' => 'Support',
     'right_panel_support_support_text' => 'If you have any questions, please contact your webmaster or consult <a target="_blank" href="https://luya.io">luya.io</a>.',
+	'layout_filemanager_detail_replace_file' => 'Replace File',
 ];

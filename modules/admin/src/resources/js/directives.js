@@ -1559,6 +1559,11 @@
                         $timeout(function () {
                             file.result = response.data;
                             $scope.filesDataReload().then(function() {
+                            	var fileref = $filter('findidfilter')($scope.filesData, $scope.fileDetail.id, true);
+                            	var random = (new Date()).toString();
+                            	fileref.thumbnail.source = fileref.thumbnail.source + "?cb=" + random;
+                            	fileref.thumbnailMedium.source = fileref.thumbnailMedium.source + "?cb=" + random;
+                            	$scope.fileDetail.thumbnailMedium.source = fileref.thumbnailMedium.source + "?cb=" + random;
                             	LuyaLoading.stop();
                             	AdminToastService.success('the file has been replaced successfull.', 4000);
                             });
