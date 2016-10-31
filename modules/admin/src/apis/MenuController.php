@@ -29,8 +29,8 @@ class MenuController extends RestController
         $accessList = [];
 
         // verify if no permissions has ben seet for this know or no groups are available trough permissions issues.
-   		if (!isset($data['groups'])) {
-        	return [];
+        if (!isset($data['groups'])) {
+            return [];
         }
         
         foreach ($data['groups'] as $groupkey => $groupvalue) {

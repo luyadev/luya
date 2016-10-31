@@ -12,7 +12,7 @@ use luya\tag\TagMarkdownParser;
  *
  * This is an additional concept to markdown, where you can inject your custom tags to parse. All tags must be an instance
  * of `luya\tag\BaseTag` and implement the `parse($value, $sub)` method in order to convert the input to your tag.
- * 
+ *
  * Read more in the Guide [[concept-tags.md]].
  *
  * The identifier of the tag is not related to your tag, so you can configure the same tag as different names with multiple

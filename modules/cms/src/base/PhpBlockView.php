@@ -21,11 +21,11 @@ use luya\web\View;
  */
 class PhpBlockView extends View
 {
-	/**
-	 * Get the current index number of the block inside the current placeholder.
-	 * 
-	 * @return integer
-	 */
+    /**
+     * Get the current index number of the block inside the current placeholder.
+     *
+     * @return integer
+     */
     public function getIndex()
     {
         return $this->context->getEnvOption('index');
@@ -33,7 +33,7 @@ class PhpBlockView extends View
     
     /**
      * Whether this is the first block element inside this placeholder or not.
-     * 
+     *
      * @return boolean
      */
     public function getIsFirst()
@@ -43,7 +43,7 @@ class PhpBlockView extends View
     
     /**
      * Whether this is the last block element inside this placeholder or not.
-     * 
+     *
      * @return boolean
      */
     public function getIsLast()
@@ -53,7 +53,7 @@ class PhpBlockView extends View
     
     /**
      * Returns the number of items inside this placeholder.
-     * 
+     *
      * @return integer
      */
     public function getItemsCount()
@@ -63,9 +63,9 @@ class PhpBlockView extends View
     
     /**
      * Whether the next element (the element after the current element) is the same or not.
-     * 
+     *
      * If there is no next element, false will be returned.
-     * 
+     *
      * @return boolean
      */
     public function getIsNextEqual()
@@ -75,9 +75,9 @@ class PhpBlockView extends View
     
     /**
      * Whether the previous element (the element before the current element) is the same or not.
-     * 
+     *
      * If there is no previous element, false will be returned.
-     * 
+     *
      * @return boolean
      */
     public function getIsPrevEqual()
@@ -87,84 +87,84 @@ class PhpBlockView extends View
     
     /**
      * Get the index number within the equal elements.
-     * 
+     *
      * If the list of elements are the same after each other, the equal index counter +1.
-     * 
+     *
      * @return integer
      */
     public function getEqualIndex()
     {
-    	return $this->context->getEnvOption('equalIndex');
+        return $this->context->getEnvOption('equalIndex');
     }
     
     /**
      * Get a block environment value.
-     * 
+     *
      * + **id**: Return the unique identifier from the cms context
-	 * + **blockId**: Returns the id of this block (unique identifier)
-	 * + **context**: Returns frontend or backend to find out in which context you are.
-	 * + **pageObject**: Returns the `luya\cms\models\NavItem` Object where you can run `getNav()` to retrievew the Nav Object.
-	 * + **isFirst**: Returns whether this block is the first in its placeholder or not.
-	 * + **isLast**: Return whether his block is the last in its placeholder or not.
-	 * + **index**: Returns the number of the index/position within this placheholder.
-	 * + **itemsCount**: Returns the number of items inside this placeholder.
-	 * + **isPrevEqual**: Returns whether the previous item is of the same origin (block type, like text block) as the current.
-	 * + **isNextEqual**: Returns whether the next item is of the same origin (block type, like text block) as the current.
-	 * + **equalIndex**: Get the current index/position of this element within the list of *same* elements.
-	 *
+     * + **blockId**: Returns the id of this block (unique identifier)
+     * + **context**: Returns frontend or backend to find out in which context you are.
+     * + **pageObject**: Returns the `luya\cms\models\NavItem` Object where you can run `getNav()` to retrievew the Nav Object.
+     * + **isFirst**: Returns whether this block is the first in its placeholder or not.
+     * + **isLast**: Return whether his block is the last in its placeholder or not.
+     * + **index**: Returns the number of the index/position within this placheholder.
+     * + **itemsCount**: Returns the number of items inside this placeholder.
+     * + **isPrevEqual**: Returns whether the previous item is of the same origin (block type, like text block) as the current.
+     * + **isNextEqual**: Returns whether the next item is of the same origin (block type, like text block) as the current.
+     * + **equalIndex**: Get the current index/position of this element within the list of *same* elements.
+     *
      * @param string $key The key identifier of the context variable.
      * @param mixed $defaultvalue If the env value is not found this value will be returned.
      * @return mixed
      */
     public function env($key, $defaultvalue = null)
     {
-    	return $this->context->getEnvOption($key, $defaultvalue);
+        return $this->context->getEnvOption($key, $defaultvalue);
     }
     
     /**
      * Get the content of a placeholder.
-     * 
+     *
      * @param string $placeholder The name of the placeholder to return, defined as `varName` inside the `config()` method of the placeholders section.
      * @return string
      */
     public function placeholderValue($placeholder)
     {
-    	return $this->context->getPlacholderValue($placeholder);
+        return $this->context->getPlacholderValue($placeholder);
     }
     
     /**
      * The the content value of a var.
-     * 
+     *
      * @param string $key The name of the var value to return, defined as `varName` inside the `config()` method of the vars section.
      * @param string $defaultValue Env value is not found this value will be returned.
      * @return mixed
      */
     public function varValue($key, $defaultValue = null)
     {
-    	return $this->context->getVarValue($key, $defaultValue);
+        return $this->context->getVarValue($key, $defaultValue);
     }
     
     /**
      * Get the content of a cfg.
-     * 
+     *
      * @param string $key The name of the cfg value to return, defined as `varName` inside the `config()` method of the cfgs section.
      * @param string $defaultValue Env value is not found this value will be returned.
      * @return mixed
      */
     public function cfgValue($key, $defaultValue = null)
     {
-   		return $this->context->getCfgValue($key, $defaultValue);	
+        return $this->context->getCfgValue($key, $defaultValue);
     }
     
     /**
      * Get the value of an extra var.
-     * 
+     *
      * @param string $key The name of the extra var to return, defined as key inside the `extraVars()` method return array.
      * @param string $defaultValue Env value is not found this value will be returned.
      * @return mixed
      */
     public function extraValue($key, $defaultValue = null)
     {
-    	return $this->context->getExtraValue($key, $defaultValue);
+        return $this->context->getExtraValue($key, $defaultValue);
     }
 }

@@ -373,7 +373,7 @@ class Nav extends ActiveRecord
     // @todo make static, moved to helper class?
 
     /**
-     * 
+     *
      * @param unknown $title
      * @param unknown $langId
      * @return boolean
@@ -464,7 +464,7 @@ class Nav extends ActiveRecord
     }
 
     /**
-     * 
+     *
      * @param unknown $parentNavId
      * @param unknown $navContainerId
      * @param unknown $langId
@@ -553,7 +553,7 @@ class Nav extends ActiveRecord
     }
 
     /**
-     * 
+     *
      * @param unknown $parentNavId
      * @param unknown $navContainerId
      * @param unknown $langId
@@ -620,7 +620,7 @@ class Nav extends ActiveRecord
     }
 
     /**
-     * 
+     *
      * @param unknown $navId
      * @param unknown $langId
      * @param unknown $title
@@ -669,7 +669,7 @@ class Nav extends ActiveRecord
     }
 
     /**
-     * 
+     *
      * @param unknown $parentNavId
      * @param unknown $navContainerId
      * @param unknown $langId
@@ -728,7 +728,7 @@ class Nav extends ActiveRecord
     }
 
     /**
-     * 
+     *
      * @param unknown $parentNavId
      * @param unknown $navContainerId
      * @param unknown $langId
@@ -788,7 +788,7 @@ class Nav extends ActiveRecord
     }
 
     /**
-     * 
+     *
      * @param unknown $navId
      * @param unknown $langId
      * @param unknown $title
@@ -835,7 +835,7 @@ class Nav extends ActiveRecord
     }
 
     /**
-     * 
+     *
      * @param unknown $navId
      * @param unknown $langId
      * @param unknown $title

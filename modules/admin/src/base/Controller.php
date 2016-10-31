@@ -25,9 +25,9 @@ class Controller extends \luya\web\Controller
 
     /**
      * Returns the rules for the AccessControl filter behavior.
-     * 
+     *
      * The rules are applied as following:
-     * 
+     *
      * + Must be logged in.
      * + Apply to all actions.
      * + Ignore if disabledPermissionCheck is enabled.

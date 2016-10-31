@@ -11,13 +11,13 @@ use yii\helpers\Inflector;
 
 /**
  * Import cmslayout files from the folder and analyise placeholders.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class CmslayoutImporter extends Importer
 {
-	public $ignorePrefix = ['_', '.'];
-	
+    public $ignorePrefix = ['_', '.'];
+    
     private function verifyVariable($chars)
     {
         if (preg_match('/[^a-zA-Z0-9]+/', $chars, $matches)) {
@@ -29,7 +29,7 @@ class CmslayoutImporter extends Importer
     
     public function generateReadableName($name)
     {
-    	return Inflector::humanize(Inflector::camel2words($name));
+        return Inflector::humanize(Inflector::camel2words($name));
     }
     
     public function run()
@@ -37,17 +37,16 @@ class CmslayoutImporter extends Importer
         $cmslayouts = Yii::getAlias('@app/views/cmslayouts');
         $layoutFiles = [];
         if (file_exists($cmslayouts)) {
-        	$files = FileHelper::findFiles($cmslayouts, ['recursive' => false, 'filter' => function($path)  {
-        		return !in_array(substr(basename($path), 0, 1), $this->ignorePrefix);
+            $files = FileHelper::findFiles($cmslayouts, ['recursive' => false, 'filter' => function ($path) {
+                return !in_array(substr(basename($path), 0, 1), $this->ignorePrefix);
             }]);
             foreach ($files as $file) {
-            	
-            	$fileinfo = FileHelper::getFileInfo($file);
-            	
-            	$fileBaseName = $fileinfo->name . '.' . $fileinfo->extension;
-            	
-            	$readableFileName = $this->generateReadableName($fileinfo->name);
-            	
+                $fileinfo = FileHelper::getFileInfo($file);
+                
+                $fileBaseName = $fileinfo->name . '.' . $fileinfo->extension;
+                
+                $readableFileName = $this->generateReadableName($fileinfo->name);
+                
                 $oldTwigName = $fileinfo->name . '.twig';
                 if ($fileinfo->extension !== 'php') {
                     throw new Exception("layout file '$file': Since 1.0.0-beta6, cms layouts must be a php file with '<?= \$placeholders['content']; ?>' instead of a twig '{{placeholders.content}}'");
@@ -75,17 +74,17 @@ class CmslayoutImporter extends Importer
                 if ($layoutItem) {
                     $match = $this->comparePlaceholders($_placeholders, json_decode($layoutItem->json_config, true));
                     if ($match) {
-                    	$layoutItem->updateAttributes([
-                    		'name' => $readableFileName,
-                    		'view_file' => $fileBaseName,
-                    	]);
+                        $layoutItem->updateAttributes([
+                            'name' => $readableFileName,
+                            'view_file' => $fileBaseName,
+                        ]);
                     } else {
-                    	$layoutItem->updateAttributes([
-                    		'name' => $readableFileName,
-                    		'view_file' => $fileBaseName,
-                    		'json_config' => json_encode($_placeholders),
-                    	]);
-                    	$this->addLog('existing cmslayout '.$readableFileName.' updated');
+                        $layoutItem->updateAttributes([
+                            'name' => $readableFileName,
+                            'view_file' => $fileBaseName,
+                            'json_config' => json_encode($_placeholders),
+                        ]);
+                        $this->addLog('existing cmslayout '.$readableFileName.' updated');
                     }
                 } else {
                     // add item into the database table

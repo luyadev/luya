@@ -226,9 +226,9 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     $blockObject->setEnvOption('isNextEqual', array_key_exists($next, $placeholders) && $placeholder['block_id'] == $placeholders[$next]['block_id']);
                     
                     if (!$blockObject->getEnvOption('isPrevEqual')) {
-                    	$equalIndex = 1;
+                        $equalIndex = 1;
                     } else {
-                    	$equalIndex++;
+                        $equalIndex++;
                     }
                     $blockObject->setEnvOption('equalIndex', $equalIndex);
                     

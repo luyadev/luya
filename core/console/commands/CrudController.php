@@ -45,7 +45,7 @@ class CrudController extends BaseCrudController
     
     /**
      * Get the $moduleName without admin suffix (if any).
-     * 
+     *
      * @return mixed Return the module name without admin suffix.
      */
     public function getModuleNameWithoutAdminSuffix()
@@ -177,7 +177,7 @@ class CrudController extends BaseCrudController
             'labels' => $this->generateLabels($schema),
             'properties' => $properties,
             'ngrestFieldConfig' => $ngrestFieldConfig,
-        	'i18nFields' => $i18nFields,
+            'i18nFields' => $i18nFields,
         ]);
     }
 
@@ -243,11 +243,11 @@ class CrudController extends BaseCrudController
         }
 
         if ($this->enableI18n === null) {
-        	$this->enableI18n = $this->confirm("Would you like to enable i18n field input for text fields? Only required for multilingual pages.");
+            $this->enableI18n = $this->confirm("Would you like to enable i18n field input for text fields? Only required for multilingual pages.");
         }
 
         // api content
-        
+
         $files['api'] = [
             'path' => $this->getBasePath() . DIRECTORY_SEPARATOR . 'apis',
             'fileName' => $this->getModelNameCamlized() . 'Controller.php',
@@ -255,7 +255,7 @@ class CrudController extends BaseCrudController
         ];
         
         // controller
-        
+
         $files['controller'] = [
             'path' =>  $this->getBasePath() . DIRECTORY_SEPARATOR . 'controllers',
             'fileName' => $this->getModelNameCamlized() . 'Controller.php',
@@ -263,7 +263,7 @@ class CrudController extends BaseCrudController
         ];
         
         // model
-        
+
         $files['model'] = [
             'path' =>  $this->getBasePath() . DIRECTORY_SEPARATOR . 'models',
             'fileName' => $this->getModelNameCamlized() . '.php',
@@ -272,7 +272,7 @@ class CrudController extends BaseCrudController
                 $this->getModelNameCamlized(),
                 $this->apiEndpoint,
                 $this->getDbTableShema(),
-            	$this->enableI18n
+                $this->enableI18n
              ),
         ];
         

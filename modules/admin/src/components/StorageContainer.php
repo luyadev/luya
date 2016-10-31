@@ -300,8 +300,8 @@ class StorageContainer extends Component
         }
         
         if ($fileName == 'blob') {
-        	$ext = FileHelper::getExtensionsByMimeType(FileHelper::getMimeType($fileSource));
-        	$fileName = 'paste-'.date("Y-m-d-H-i").'.'.$ext[0];
+            $ext = FileHelper::getExtensionsByMimeType(FileHelper::getMimeType($fileSource));
+            $fileName = 'paste-'.date("Y-m-d-H-i").'.'.$ext[0];
         }
         
         $fileInfo = FileHelper::getFileInfo($fileName);

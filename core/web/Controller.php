@@ -13,7 +13,7 @@ use luya\base\AdminModuleInterface;
 abstract class Controller extends \yii\web\Controller
 {
     /**
-     * @var array skips defined assets from the module base, you can not skip assets which are registered in the local asset variable. To Skip 
+     * @var array skips defined assets from the module base, you can not skip assets which are registered in the local asset variable. To Skip
      * all the assets from the module ($this->module->assets) you can use skipAssets = ["*"];.
      */
     public $skipModuleAssets = [];
