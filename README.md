@@ -22,7 +22,7 @@ The [Yii 2 PHP Framework](https://github.com/yiisoft/yii2) wrapper which provide
 We have a made an absolut easy to understand *STEP-BY-STEP* Guide to install LUYA:
 
 + [How to install LUYA](https://luya.io)
-+ [LUYA Video Tutorials](https://luya.io/video-tutorials)
++ [LUYA Video Tutorials](https://luya.io/videos)
 + [How to upgrade current LUYA website](https://luya.io/guide/install-upgrade)
 
 Other helpfull informations
@@ -32,7 +32,7 @@ Other helpfull informations
 
 ## Questions and Problems
 
-If you have any questions or problems, don't hesitate to create a [new issue](https://github.com/zephir/luya/issues/new) on the project repository.
+If you have any questions or problems, don't hesitate to create a [new issue](https://github.com/luyadev/luya/issues/new) on the project repository.
 
 + [Issues on GitHub](https://github.com/luyadev/luya/issues)
 + [Ask us in Gitter](https://gitter.im/luyadev/luya)
@@ -41,7 +41,7 @@ If you have any questions or problems, don't hesitate to create a [new issue](ht
 
 We are always looking for people who share their thoughts, code and problems with us. Below the links to the contribution guides:
 
-[Help us building LUYA](https://luya.io/en/guide/luya-collaboration)
+[Help us building LUYA](https://luya.io/guide/luya-collaboration)
 
 #### ROADMAP
 
