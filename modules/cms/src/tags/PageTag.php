@@ -4,7 +4,7 @@ namespace luya\cms\tags;
 
 use luya\tag\BaseTag;
 use luya\cms\models\Nav;
-use Doctrine\Instantiator\Exception\InvalidArgumentException;
+use luya\cms\models\NavItem;
 
 /**
  * Page content tag.
@@ -27,7 +27,14 @@ class PageTag extends BaseTag
     {
         $page = Nav::findOne($value);
         
+        // verify if the page is of type content
+        
         if ($page) {
+            
+            if ($page->activeLanguageItem->nav_item_type !== NavItem::TYPE_PAGE) {
+                return null;
+            }
+            
             if (empty($sub)) {
                 return $page->activeLanguageItem->getContent();
             } else {
@@ -35,6 +42,6 @@ class PageTag extends BaseTag
             }
         }
         
-        throw new InvalidArgumentException("The provided pageId or placeholder does not exists.");
+        return null;
     }
 }

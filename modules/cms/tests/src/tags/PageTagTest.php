@@ -19,12 +19,9 @@ class PageTagTest extends CmsFrontendTestCase
         $this->assertSame('', $tag->parse(1, 'content'));
     }
     
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testContentNotFoundException()
     {
         $tag = new PageTag();
-        $tag->parse(9999, 'content');
+        $this->assertNull($tag->parse(9999, 'content'));
     }
 }
