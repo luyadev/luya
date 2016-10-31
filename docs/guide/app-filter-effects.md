@@ -18,7 +18,7 @@ Each chain effect can have several arguments which changes the behavior of the e
 
 The most powerfull and commonly used effect is thumbnail.
 
-|Option     |Requied    |Description
+|Option     |Required   |Description
 |---        |---        |---
 |width      |yes        |The width in pixels to create the thumbnail, can be null to auto calculate the size to keep the ratio.
 |height     |yes        |The height in pixels to create the thumbnail, can be null to auto calculate the size to keep the ratio.
