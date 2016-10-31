@@ -5,15 +5,185 @@ namespace luya\console\commands;
 use Yii;
 use yii\helpers\Console;
 use yii\helpers\Inflector;
+use yii\db\TableSchema;
 use luya\Boot;
+use luya\helpers\FileHelper;
 
 /**
  * Console command to create a NgRest Crud with Controller, Api and Model based on a SQL Table.
  *
+ * @property string $moduleNameWithoutAdminSuffix Get the $moduleName without admin suffix (if any).
  * @author Basil Suter <basil@nadar.io>
  */
 class CrudController extends BaseCrudController
 {
+    /**
+     * @var string The name of the module which should be used in order to generate the crud structure e.g `cmsadmin`.
+     */
+    public $moduleName = null;
+    
+    /**
+     * @var string The name of the model in camelcase notation e.g `NavItem`.
+     */
+    public $modelName = null;
+    
+    /**
+     * @var string The name of the API endpoint based on the modelName und moduleName selections e.g `api-cms-navitem`.
+     */
+    public $apiEndpoint = null;
+    
+    /**
+     * @var string The name of the corresponding model database table e.g. `cms_navitem`.
+     */
+    public $dbTableName = null;
+    
+    /**
+     * Get the $moduleName without admin suffix (if any).
+     * 
+     * @return mixed Return the module name without admin suffix.
+     */
+    public function getModuleNameWithoutAdminSuffix()
+    {
+        return preg_replace('/admin$/', '', $this->moduleName);
+    }
+    
+    public function getModelNameLower()
+    {
+        return strtolower($this->modelName);
+    }
+    
+    public function getModelNameCamlized()
+    {
+        return Inflector::camelize($this->modelName);
+    }
+    
+    public function getModelNamespace()
+    {
+        return $this->getNamespace() . '\\models\\' . $this->getModelNameCamlized();
+    }
+    
+    public function getApiEndpointSuggestion()
+    {
+        return 'api-'.$this->getModuleNameWithoutAdminSuffix().'-'.$this->getModelNameLower();
+    }
+    
+    public function getDatabaseNameSuggestion()
+    {
+        return strtolower($this->getModuleNameWithoutAdminSuffix().'_'.Inflector::underscore($this->modelName));
+    }
+    
+    private $_dbTableShema = null;
+    
+    public function getDbTableShema()
+    {
+        if ($this->_dbTableShema === null) {
+            $this->_dbTableShema = Yii::$app->db->getTableSchema($this->dbTableName, true);
+        }
+        
+        return $this->_dbTableShema;
+    }
+    
+    public function getModule()
+    {
+        return Yii::$app->getModule($this->moduleName);
+    }
+    
+    public function getBasePath()
+    {
+        return $this->getModule()->basePath;
+    }
+    
+    public function getNamespace()
+    {
+        return $this->getModule()->getNamespace();
+    }
+    
+    public function getSummaryControllerRoute()
+    {
+        return strtolower($this->moduleName).'-'.$this->getModelNameLower().'-index';
+    }
+    
+    public function generateApiContent($fileNamespace, $className, $modelClass)
+    {
+        return $this->view->render('@luya/console/commands/views/crud/create_api.php', [
+            'namespace' => $fileNamespace,
+            'className' => $className,
+            'modelClass' =>  $modelClass,
+            'luyaVersion' => Boot::VERSION,
+        ]);
+    }
+    
+    public function generateControllerContent($fileNamespace, $className, $modelClass)
+    {
+        return $this->view->render('@luya/console/commands/views/crud/create_controller.php', [
+            'namespace' => $fileNamespace,
+            'className' => $className,
+            'modelClass' =>  $modelClass,
+            'luyaVersion' => Boot::VERSION,
+        ]);
+    }
+    
+    public function generateModelContent($fileNamepsace, $className, $apiEndpoint, TableSchema $schema)
+    {
+        $dbTableName = $schema->fullName;
+        
+        $fields = [];
+        $textfields = [];
+        $properties = [];
+        $ngrestFieldConfig = [];
+        foreach ($schema->columns as $k => $v) {
+            $properties[$v->name] = $v->type;
+            if ($v->isPrimaryKey) {
+                continue;
+            }
+            $fields[] = $v->name;
+            
+            if ($v->phpType == 'string') {
+                $textfields[] = $v->name;
+            }
+            
+            if ($v->type == 'text') {
+                $ngrestFieldConfig[$v->name] = 'textarea';
+            }
+            if ($v->type == 'string') {
+                $ngrestFieldConfig[$v->name] = 'text';
+            }
+            if ($v->type == 'integer' || $v->type == 'bigint' || $v->type == 'smallint') {
+                $ngrestFieldConfig[$v->name] = 'number';
+            }
+            if ($v->type == 'decimal') {
+                $ngrestFieldConfig[$v->name] = 'decimal';
+            }
+            if ($v->type == 'boolean') {
+                $ngrestFieldConfig[$v->name] = 'toggleStatus';
+            }
+        };
+        
+        return $this->view->render('@luya/console/commands/views/crud/create_model.php', [
+            'namespace' => $fileNamepsace,
+            'className' => $className,
+            'luyaVersion' => Boot::VERSION,
+            'apiEndpoint' => $apiEndpoint,
+            'dbTableName' => $dbTableName,
+            'fields' => $fields,
+            'textFields' => $textfields,
+            'rules' => $this->generateRules($schema),
+            'labels' => $this->generateLabels($schema),
+            'properties' => $properties,
+            'ngrestFieldConfig' => $ngrestFieldConfig
+        ]);
+    }
+
+    public function generateBuildSummery($apiEndpoint, $apiClassPath, $humanizeModelName, $controllerRoute)
+    {
+        return $this->view->render('@luya/console/commands/views/crud/build_summary.php', [
+            'apiEndpoint' => $apiEndpoint,
+            'apiClassPath' => $apiClassPath,
+            'humanizeModelName' => $humanizeModelName,
+            'controllerRoute' => $controllerRoute,
+        ]);
+    }
+    
     /**
      * Create Ng-Rest-Model, Controller and Api for an existing Database-Table.
      *
@@ -21,64 +191,122 @@ class CrudController extends BaseCrudController
      */
     public function actionCreate()
     {
-        $this->outputInfo("Make sure the module is added to your configuration.");
-        $module = $this->selectModule(['onlyAdmin' => true, 'hideCore' => true, 'text' => 'Select the Module where the crud should be stored in:']);
-        $modulePre = preg_replace('/admin$/', '', $module);
+        if ($this->moduleName === null) {
+            Console::clearScreenBeforeCursor();
+            $this->moduleName = $this->selectModule(['onlyAdmin' => true, 'hideCore' => true, 'text' => 'Select the Module where the CRUD files should be saved:']);
+        }
+
+        // $module = ;
+        // $modulePre = preg_replace('/admin$/', '', $module);
         
-        $modelSelection = true;
-        
-        while ($modelSelection) {
-            $modelName = $this->prompt('Model Name (e.g. Album):', ['required' => true]);
-            
-            $camlizeModelName = Inflector::camelize($modelName);
-            
-            if ($modelName !== $camlizeModelName) {
-                if ($this->confirm("We have camlized the model name to '$camlizeModelName' do you want to continue with this name?")) {
-                    $modelName = $camlizeModelName;
+        if ($this->modelName === null) {
+            $modelSelection = true;
+            while ($modelSelection) {
+                $modelName = $this->prompt('Model Name (e.g. Album):', ['required' => true]);
+                $camlizeModelName = Inflector::camelize($modelName);
+                if ($modelName !== $camlizeModelName) {
+                    if ($this->confirm("We have camlized the model name to '$camlizeModelName' do you want to continue with this name?")) {
+                        $modelName = $camlizeModelName;
+                        $modelSelection = false;
+                    }
+                } else {
                     $modelSelection = false;
                 }
-            } else {
-                $modelSelection = false;
+                $this->modelName = $modelName;
             }
         }
         
-        $apiEndpoint = $this->prompt('Api Endpoint:', ['required' => true, 'default' => 'api-'.$modulePre.'-'.strtolower($modelName).'']);
+        // $modelName
+        
+        
+        // $apiEndpoint
+        
+        if ($this->apiEndpoint === null) {
+            $this->apiEndpoint = $this->prompt('Api Endpoint:', ['required' => true, 'default' => $this->getApiEndpointSuggestion()]);
+        }
 
-        $sqlSelection = true;
-        while ($sqlSelection) {
-            $sqlTable = $this->prompt('Database Table name:', ['required' => true, 'default' => strtolower($modulePre).'_'.Inflector::underscore($modelName)]);
-            
-            if ($sqlTable == '?') {
-                foreach ($this->getSqlTablesArray() as $table) {
-                    $this->outputInfo("- " . $table);
+        
+        // $sqlTable
+        if ($this->dbTableName === null) {
+            $sqlSelection = true;
+            while ($sqlSelection) {
+                $sqlTable = $this->prompt('Database Table name for the Model:', ['required' => true, 'default' => $this->getDatabaseNameSuggestion()]);
+                if ($sqlTable == '?') {
+                    foreach ($this->getSqlTablesArray() as $table) {
+                        $this->outputInfo("- " . $table);
+                    }
+                }
+                if (isset($this->getSqlTablesArray()[$sqlTable])) {
+                    $this->dbTableName = $sqlTable;
+                    $sqlSelection = false;
+                } else {
+                    $this->outputError("The selected database '$sqlTable' does not exists in the list of tables. Type '?' to see all tables.");
                 }
             }
-            
-            if (isset($this->getSqlTablesArray()[$sqlTable])) {
-                $sqlSelection = false;
-            } else {
-                $this->outputError("The selected database '$sqlTable' does not exists in the list of tables. Type '?' to see all tables.");
-            }
         }
 
-        if (!$this->confirm("Create '$modelName' controller, api & model based on sql table '$sqlTable' in module '$module' for api endpoint '$apiEndpoint'?")) {
-            return $this->outputError('Crud creation aborted.');
-        }
+        //$shema = Yii::$app->db->getTableSchema($sqlTable, true);
 
-        $shema = Yii::$app->db->getTableSchema($sqlTable, true);
-
+        /*
         if (!$shema) {
             return $this->outputError("Could not read informations from database table '$sqlTable', table does not exist.");
         }
+        */
 
-        $yiiModule = Yii::$app->getModule($module);
+        // api content
+        
+        $files['api'] = [
+            'path' => $this->getBasePath() . DIRECTORY_SEPARATOR . 'apis',
+            'fileName' => $this->getModelNameCamlized() . 'Controller.php',
+            'content' => $this->generateApiContent($this->getNamespace() . '\\apis', $this->getModelNameCamlized() . 'Controller', $this->getModelNamespace()),
+        ];
+        
+        // controller
+        
+        $files['controller'] = [
+            'path' =>  $this->getBasePath() . DIRECTORY_SEPARATOR . 'controllers',
+            'fileName' => $this->getModelNameCamlized() . 'Controller.php',
+            'content' => $this->generateControllerContent($this->getNamespace() . '\\controllers', $this->getModelNameCamlized() . 'Controller', $this->getModelNamespace()),
+        ];
+        
+        // model
+        
+        $files['model'] = [
+            'path' =>  $this->getBasePath() . DIRECTORY_SEPARATOR . 'models',
+            'fileName' => $this->getModelNameCamlized() . '.php',
+            'content' => $this->generateModelContent(
+                $this->getNamespace() . '\\models',
+                $this->getModelNameCamlized(),
+                $this->apiEndpoint,
+                $this->getDbTableShema()
+             ),
+        ];
+        
+        foreach ($files as $file) {
+            FileHelper::createDirectory($file['path']);
+            if (file_exists($file['path'] . DIRECTORY_SEPARATOR . $file['fileName'])) {
+                if (!$this->confirm("The File '{$file['fileName']}' already exists, do you want to override the existing file?")) {
+                    continue;
+                }
+            }
+            
+            if (FileHelper::writeFile($file['path'] . DIRECTORY_SEPARATOR . $file['fileName'], $file['content'])) {
+                $this->outputSuccess("Wrote file '{$file['fileName']}'.");
+            } else {
+                $this->outputError("Error while writing file '{$file['fileName']}'.");
+            }
+        }
+        
+        return $this->outputSuccess($this->generateBuildSummery($this->apiEndpoint, $this->getNamespace() . '\\apis\\' . $this->getModelNameCamlized(), $this->getModelNameCamlized(), $this->getSummaryControllerRoute()));
+        /*
+       // $yiiModule = Yii::$app->getModule($module);
 
-        $basePath = $yiiModule->basePath;
+        //$basePath = $yiiModule->basePath;
 
-        $ns = $yiiModule->getNamespace();
+        //$ns = $yiiModule->getNamespace();
 
-        $modelName = ucfirst($modelName);
-        $fileName = ucfirst(strtolower($modelName));
+        //$modelName = ucfirst($modelName);
+       // $fileName = ucfirst(strtolower($modelName));
 
         $modelNs = '\\'.$ns.'\\models\\'.$modelName;
         $data = [
@@ -122,8 +350,6 @@ class CrudController extends BaseCrudController
                 $extended = false;
             }
             
-            $content = '<?php'.PHP_EOL.PHP_EOL;
-            $content .= 'namespace '.$item['ns'].';'.PHP_EOL.PHP_EOL;
             switch ($name) {
 
                 case 'api':
@@ -239,5 +465,6 @@ class CrudController extends BaseCrudController
         echo PHP_EOL;
 
         return 0;
+        */
     }
 }

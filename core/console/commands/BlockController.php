@@ -263,6 +263,7 @@ class BlockController extends \luya\console\Command
     public function actionCreate()
     {
         if (empty($this->type)) {
+            Console::clearScreenBeforeCursor();
             $this->type = $this->select('Do you want to create an app or module Block?', [
                 self::TYPE_APP => 'Creates a project block inside your @app Namespace (casual).',
                 self::TYPE_MODULE => 'Creating a block inside a later specified Module.',

@@ -1,23 +1,11 @@
 <?php
-/**
- * @var $className
- * @var $modelClass
- * @var $namespace
- * @var $luyaVersion
- * @var $sqlTable
- * @var $fieldNames
- * @var $allFieldNames
- * @var $textFields
- * @var $textareaFields
- * @var $i18n
- */
-
 echo "<?php\n";
 ?>
 
 namespace <?= $namespace; ?>;
 
 use Yii;
+use luya\admin\ngrest\base\NgRestModel;
 
 /**
  * NgRest Model created at <?= date("d.m.Y H:i"); ?> on LUYA Version <?= $luyaVersion; ?>.
@@ -25,15 +13,14 @@ use Yii;
 <?php foreach ($properties as $name => $type): ?> * @property <?= $type; ?> $<?= $name . PHP_EOL; ?>
 <?php endforeach;?>
  */
-<?php if (!$extended): ?>abstract <?php endif; ?>class <?= $className; ?> extends \luya\admin\ngrest\base\NgRestModel
+class <?= $className; ?> extends NgRestModel
 {
-    <?php if ($extended): ?>
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '<?= $sqlTable; ?>';
+        return '<?= $dbTableName; ?>';
     }
     
     /**
@@ -42,8 +29,8 @@ use Yii;
     public function attributeLabels()
     {
         return [
-        <?php foreach ($allFieldNames as $name): ?>
-    '<?= $name; ?>' => Yii::t('app', '<?= \yii\helpers\Inflector::humanize($name); ?>'),
+        <?php foreach ($labels as $key => $label): ?>
+    '<?= $key; ?>' => Yii::t('app', '<?=$label?>'),
         <?php endforeach; ?>];
     }
     
@@ -58,8 +45,7 @@ use Yii;
         <?php endforeach; ?>];
     }
     
-    // ngrest base model methods
-    <?php endif; ?>/**
+    /**
      * @var An array containing all fields which should be transformed to multilingual fields and stored as json in the database.
      */
     public $i18n = ['<?= implode("', '", $textFields); ?>'];
@@ -70,8 +56,8 @@ use Yii;
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios['restcreate'] = ['<?= implode("', '", $allFieldNames); ?>'];
-        $scenarios['restupdate'] = ['<?= implode("', '", $allFieldNames); ?>'];
+        $scenarios['restcreate'] = ['<?= implode("', '", $fields); ?>'];
+        $scenarios['restupdate'] = ['<?= implode("', '", $fields); ?>'];
         return $scenarios;
     }
     
@@ -97,7 +83,7 @@ use Yii;
     public function ngrestAttributeTypes()
     {
         return [
-        <?php foreach ($fieldConfigs as $name => $type): ?>
+        <?php foreach ($ngrestFieldConfig as $name => $type): ?>
     '<?=$name; ?>' => '<?= $type;?>',
         <?php endforeach; ?>];
     }
@@ -111,8 +97,8 @@ use Yii;
     public function ngRestConfig($config)
     {
         // define fields for types based from ngrestAttributeTypes
-        $this->ngRestConfigDefine($config, 'list', ['<?= implode($fieldNames, "', '"); ?>']);
-        $this->ngRestConfigDefine($config, ['create', 'update'], ['<?= implode($fieldNames, "', '"); ?>']);
+        $this->ngRestConfigDefine($config, 'list', ['<?= implode($fields, "', '"); ?>']);
+        $this->ngRestConfigDefine($config, ['create', 'update'], ['<?= implode($fields, "', '"); ?>']);
         
         // enable or disable ability to delete;
         $config->delete = false; 
