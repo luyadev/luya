@@ -129,12 +129,12 @@ class TestModel extends NgRestModel
             [['email'], 'unique'],
         ];
     }
-    
+
     /**
      * @var An array containing all fields which should be transformed to multilingual fields and stored as json in the database.
      */
     public $i18n = ['firstname', 'lastname', 'email', 'password', 'password_salt', 'auth_token', 'secure_token', 'settings'];
-    
+
     /**
      * @inheritdoc
      */
@@ -202,12 +202,14 @@ class TestModel extends NgRestModel
     }
 }
 EOT;
-        $this->assertSame($model, $ctrl->generateModelContent(
+        $c = $ctrl->generateModelContent(
             'file\\namespace',
             'TestModel',
             'api-endpoint-name',
-            Yii::$app->db->getTableSchema('admin_user', true)
-        ));
+            Yii::$app->db->getTableSchema('admin_user', true),
+        	true
+        );
+        $this->assertSame($model, $c);
         
 		$sum = <<<'EOT'
 public $apis = [

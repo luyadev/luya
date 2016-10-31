@@ -44,12 +44,14 @@ class <?= $className; ?> extends NgRestModel
     <?=$rule?>,
         <?php endforeach; ?>];
     }
-    
+
+<?php if ($i18nFields): ?>
     /**
      * @var An array containing all fields which should be transformed to multilingual fields and stored as json in the database.
      */
     public $i18n = ['<?= implode("', '", $textFields); ?>'];
-    
+
+<?php endif;?>
     /**
      * @inheritdoc
      */

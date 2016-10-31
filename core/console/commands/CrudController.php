@@ -37,6 +37,12 @@ class CrudController extends BaseCrudController
      */
     public $dbTableName = null;
     
+    
+    /**
+     * @var boolean Whether the i18n text fields will be casted or not.
+     */
+    public $enableI18n = null;
+    
     /**
      * Get the $moduleName without admin suffix (if any).
      * 
@@ -123,7 +129,7 @@ class CrudController extends BaseCrudController
         ]);
     }
     
-    public function generateModelContent($fileNamepsace, $className, $apiEndpoint, TableSchema $schema)
+    public function generateModelContent($fileNamepsace, $className, $apiEndpoint, TableSchema $schema, $i18nFields)
     {
         $dbTableName = $schema->fullName;
         
@@ -170,7 +176,8 @@ class CrudController extends BaseCrudController
             'rules' => $this->generateRules($schema),
             'labels' => $this->generateLabels($schema),
             'properties' => $properties,
-            'ngrestFieldConfig' => $ngrestFieldConfig
+            'ngrestFieldConfig' => $ngrestFieldConfig,
+        	'i18nFields' => $i18nFields,
         ]);
     }
 
@@ -195,9 +202,6 @@ class CrudController extends BaseCrudController
             Console::clearScreenBeforeCursor();
             $this->moduleName = $this->selectModule(['onlyAdmin' => true, 'hideCore' => true, 'text' => 'Select the Module where the CRUD files should be saved:']);
         }
-
-        // $module = ;
-        // $modulePre = preg_replace('/admin$/', '', $module);
         
         if ($this->modelName === null) {
             $modelSelection = true;
@@ -216,17 +220,10 @@ class CrudController extends BaseCrudController
             }
         }
         
-        // $modelName
-        
-        
-        // $apiEndpoint
-        
         if ($this->apiEndpoint === null) {
             $this->apiEndpoint = $this->prompt('Api Endpoint:', ['required' => true, 'default' => $this->getApiEndpointSuggestion()]);
         }
 
-        
-        // $sqlTable
         if ($this->dbTableName === null) {
             $sqlSelection = true;
             while ($sqlSelection) {
@@ -245,13 +242,9 @@ class CrudController extends BaseCrudController
             }
         }
 
-        //$shema = Yii::$app->db->getTableSchema($sqlTable, true);
-
-        /*
-        if (!$shema) {
-            return $this->outputError("Could not read informations from database table '$sqlTable', table does not exist.");
+        if ($this->enableI18n === null) {
+        	$this->enableI18n = $this->confirm("Would you like to enable i18n field input for text fields? Only required for multilingual pages.");
         }
-        */
 
         // api content
         
@@ -278,7 +271,8 @@ class CrudController extends BaseCrudController
                 $this->getNamespace() . '\\models',
                 $this->getModelNameCamlized(),
                 $this->apiEndpoint,
-                $this->getDbTableShema()
+                $this->getDbTableShema(),
+            	$this->enableI18n
              ),
         ];
         
@@ -298,173 +292,5 @@ class CrudController extends BaseCrudController
         }
         
         return $this->outputSuccess($this->generateBuildSummery($this->apiEndpoint, $this->getNamespace() . '\\apis\\' . $this->getModelNameCamlized() . 'Controller', $this->getModelNameCamlized(), $this->getSummaryControllerRoute()));
-        /*
-       // $yiiModule = Yii::$app->getModule($module);
-
-        //$basePath = $yiiModule->basePath;
-
-        //$ns = $yiiModule->getNamespace();
-
-        //$modelName = ucfirst($modelName);
-       // $fileName = ucfirst(strtolower($modelName));
-
-        $modelNs = '\\'.$ns.'\\models\\'.$modelName;
-        $data = [
-            'api' => [
-                'folder' => 'apis',
-                'ns' => $ns.'\\apis',
-                'file' => $fileName.'Controller.php',
-                'class' => $fileName.'Controller',
-                'route' => strtolower($module).'-'.strtolower($modelName).'-index',
-            ],
-            'controller' => [
-                'folder' => 'controllers',
-                'ns' => $ns.'\\controllers',
-                'file' => $fileName.'Controller.php',
-                'class' => $fileName.'Controller',
-            ],
-            'model' => [
-                'folder' => 'models',
-                'ns' => $ns.'\\models',
-                'file' => $modelName.'.php',
-                'class' => $modelName,
-            ],
-        ];
-        $apiClass = null;
-        foreach ($data as $name => $item) {
-            $folder = $basePath.DIRECTORY_SEPARATOR.$item['folder'];
-
-            if (!file_exists($folder)) {
-                mkdir($folder);
-            }
-
-            $extended = true;
-            
-            if (file_exists($folder.DIRECTORY_SEPARATOR.$item['file'])) {
-                if ($name == 'model') {
-                    $this->outputInfo("Mode '".$item['file']."' exists already. Created an abstract NgRest model where you can extend from.");
-                } else {
-                    $this->outputInfo("File '".$item['file']."' exists already, created a .copy file instead.");
-                }
-                $item['file'] = $item['file'].'.copy';
-                $extended = false;
-            }
-            
-            switch ($name) {
-
-                case 'api':
-                    $content = $this->view->render('@luya/console/commands/views/crud/create_api.php', [
-                        'className' => $item['class'],
-                        'modelClass' => $modelNs,
-                        'namespace' => $item['ns'],
-                        'luyaVersion' => Boot::VERSION,
-                    ]);
-                    break;
-
-                case 'controller':
-                    $content = $this->view->render('@luya/console/commands/views/crud/create_controller.php', [
-                        'className' => $item['class'],
-                        'modelClass' => $modelNs,
-                        'namespace' => $item['ns'],
-                        'luyaVersion' => Boot::VERSION,
-                    ]);
-                    break;
-
-                case 'model':
-
-                    if (!$extended) {
-                        $modelName = $modelName . 'NgRest';
-                        $item['file'] = $modelName . '.php';
-                        $item['class'] = $modelName;
-                    }
-                    
-                    $names = [];
-                    $allfields = [];
-                    $fieldConfigs = [];
-                    $textFields = [];
-                    $i18n = [];
-                    foreach ($shema->columns as $k => $v) {
-                        if ($v->isPrimaryKey) {
-                            continue;
-                        }
-                        
-                        $allfields[] = $v->name;
-                        $properties[$v->name] = $v->type;
-                        
-                        if ($v->type == 'text') {
-                            $fieldConfigs[$v->name] = 'textarea';
-                            $i18n[] = $v->name;
-                            $names[] = $v->name;
-                            $textFields[] = $v->name;
-                        }
-                        if ($v->type == 'string') {
-                            $fieldConfigs[$v->name] = 'text';
-                            $i18n[] = $v->name;
-                            $names[] = $v->name;
-                            $textFields[] = $v->name;
-                        }
-                        if ($v->type == 'integer' || $v->type == 'bigint' || $v->type == 'smallint') {
-                            $fieldConfigs[$v->name] = 'number';
-                            $names[] = $v->name;
-                        }
-                        
-                        if ($v->type == 'decimal') {
-                            $fieldConfigs[$v->name] = 'decimal';
-                            $names[] = $v->name;
-                        }
-                        
-                        if ($v->type == 'boolean') {
-                            $fieldConfigs[$v->name] = 'toggleStatus';
-                            $names[] = $v->name;
-                        }
-                    }
-                    
-                    $content = $this->view->render('@luya/console/commands/views/crud/create_model.php', [
-                        'className' => $item['class'],
-                        'modelClass' => $modelNs,
-                        'namespace' => $item['ns'],
-                        'luyaVersion' => Boot::VERSION,
-                        'apiEndpoint' => $apiEndpoint,
-                        'sqlTable' => $sqlTable,
-                        'fieldNames' => $names,
-                        'allFieldNames' => $allfields,
-                        'fieldConfigs' => $fieldConfigs,
-                        'i18n' => $i18n,
-                        'extended' => $extended,
-                        'textFields' => $textFields,
-                        'properties' => $properties,
-                        'rules' => $this->generateRules($shema),
-                    ]);
-                    
-                    break;
-            }
-
-            
-            
-            if (file_put_contents($folder.DIRECTORY_SEPARATOR.$item['file'], $content)) {
-                echo $this->ansiFormat('- File '.$folder.DIRECTORY_SEPARATOR.$item['file'].' created.', Console::FG_GREEN).PHP_EOL;
-            }
-        }
-
-        $getMenu = 'public function getMenu()
-{
-    return (new \luya\admin\components\AdminMenuBuilder($this))->node(\''.Inflector::humanize($modelName).'\', \'extension\') // instead of extension and label, choose icon from https://design.google.com/icons/
-        ->group(\'GROUP\')
-            ->itemApi(\''.Inflector::humanize($modelName).'\', \''.$data['api']['route'].'\', \'label\', \''.$apiEndpoint.'\');
-}
-            ';
-
-        $mname = $this->ansiFormat($basePath.'/Module.php', Console::BOLD);
-        $a = $this->ansiFormat('$apis', Console::BOLD);
-        echo PHP_EOL.'Modify the '.$a.' var in '.$mname.' like below:'.PHP_EOL.PHP_EOL;
-        echo $this->ansiFormat('public $apis = [
-    \''.$apiEndpoint.'\' => \''.$data['api']['ns'].'\\'.$data['api']['class'].'\',
-];', Console::FG_YELLOW);
-        echo PHP_EOL.PHP_EOL.'Update the getMenu() method like below:'.PHP_EOL.PHP_EOL;
-        echo $this->ansiFormat($getMenu, Console::FG_YELLOW);
-        echo PHP_EOL;
-
-        return 0;
-        */
     }
 }
