@@ -6,6 +6,9 @@ This document will help you upgrading from a LUYA Version into another.
 1.0.0-RC2 (in progress)
 -----------------------
 
+- [#1045](https://github.com/luyadev/luya/issues/1045) Admin modules `getMenu()` method must return an `luya\admin\components\AdminMenuBuilder` object instead of an array. A deprecated message is triggered when using the old menu builder functions.
++ [#1067](https://github.com/luyadev/luya/issues/1067) The itemApi routes newls uses `/` (slashes) as delmiter instead of `-`: Old: `itemApi('label', 'admin-user-index')` new `itemApi('label', 'admin/user/index')` in your Module.php
+
 1.0.0-RC1 (04.10.2016)
 -----------
 
