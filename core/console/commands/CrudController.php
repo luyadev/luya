@@ -100,7 +100,7 @@ class CrudController extends BaseCrudController
     
     public function getSummaryControllerRoute()
     {
-        return strtolower($this->moduleName).'-'.$this->getModelNameLower().'-index';
+        return strtolower($this->moduleName).'/'.Inflector::camel2id($this->getModelNameCamlized()).'/index';
     }
     
     public function generateApiContent($fileNamespace, $className, $modelClass)
@@ -297,7 +297,7 @@ class CrudController extends BaseCrudController
             }
         }
         
-        return $this->outputSuccess($this->generateBuildSummery($this->apiEndpoint, $this->getNamespace() . '\\apis\\' . $this->getModelNameCamlized(), $this->getModelNameCamlized(), $this->getSummaryControllerRoute()));
+        return $this->outputSuccess($this->generateBuildSummery($this->apiEndpoint, $this->getNamespace() . '\\apis\\' . $this->getModelNameCamlized() . 'Controller', $this->getModelNameCamlized(), $this->getSummaryControllerRoute()));
         /*
        // $yiiModule = Yii::$app->getModule($module);
 
