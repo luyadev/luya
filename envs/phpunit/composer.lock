@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1f5d9d9fd5bfea53be14099c9e4db01f",
-    "content-hash": "155234ffcc8b9c89827509e1f92123eb",
+    "hash": "7f92b5a212396bae91e6dd74f9360d7e",
+    "content-hash": "f94478ea60399c209d0d6208789c61c9",
     "packages": [
         {
             "name": "bower-asset/jquery",
@@ -208,16 +208,16 @@
         },
         {
             "name": "curl/curl",
-            "version": "1.4.0",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-mod/curl.git",
-                "reference": "38fc139f0e73149911a5765249e9900b9c70d5fc"
+                "reference": "7865e81196569c159fb5f30a17cb6c47faccc0c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-mod/curl/zipball/38fc139f0e73149911a5765249e9900b9c70d5fc",
-                "reference": "38fc139f0e73149911a5765249e9900b9c70d5fc",
+                "url": "https://api.github.com/repos/php-mod/curl/zipball/7865e81196569c159fb5f30a17cb6c47faccc0c4",
+                "reference": "7865e81196569c159fb5f30a17cb6c47faccc0c4",
                 "shasum": ""
             },
             "require": {
@@ -259,7 +259,7 @@
                 "curl",
                 "dot"
             ],
-            "time": "2016-06-04 18:16:12"
+            "time": "2016-10-20 18:16:32"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -527,16 +527,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.26.0",
+            "version": "v1.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "81c2b5fd36581370c7731387f05dcdb577050513"
+                "reference": "3c6c0033fd3b5679c6e1cb60f4f9766c2b424d97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/81c2b5fd36581370c7731387f05dcdb577050513",
-                "reference": "81c2b5fd36581370c7731387f05dcdb577050513",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3c6c0033fd3b5679c6e1cb60f4f9766c2b424d97",
+                "reference": "3c6c0033fd3b5679c6e1cb60f4f9766c2b424d97",
                 "shasum": ""
             },
             "require": {
@@ -549,7 +549,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.26-dev"
+                    "dev-master": "1.27-dev"
                 }
             },
             "autoload": {
@@ -584,20 +584,20 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-10-02 16:19:13"
+            "time": "2016-10-25 19:17:17"
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.9",
+            "version": "2.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "2b75151ea60e1fd820046416eee2e89c3dda1133"
+                "reference": "5bfcb7a6dfa9771e2248eb8c4448613330f343ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/2b75151ea60e1fd820046416eee2e89c3dda1133",
-                "reference": "2b75151ea60e1fd820046416eee2e89c3dda1133",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/5bfcb7a6dfa9771e2248eb8c4448613330f343ff",
+                "reference": "5bfcb7a6dfa9771e2248eb8c4448613330f343ff",
                 "shasum": ""
             },
             "require": {
@@ -678,7 +678,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-07-11 13:36:42"
+            "time": "2016-10-20 12:02:50"
         },
         {
             "name": "yiisoft/yii2-composer",

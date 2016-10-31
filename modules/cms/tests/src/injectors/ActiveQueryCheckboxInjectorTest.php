@@ -37,7 +37,7 @@ class ActiveQueryCheckboxInjectorTest extends CmsFrontendTestCase
         
         $items = $v['options']['items'];
         
-        $this->assertSame(13, count($items));
+        $this->assertNotEmpty(count($items));
         
         $item1 = $v['options']['items'][0];
         
@@ -59,7 +59,7 @@ class ActiveQueryCheckboxInjectorTest extends CmsFrontendTestCase
     
         $items = $v['options']['items'];
     
-        $this->assertSame(13, count($items));
+        $this->assertNotEmpty(count($items));
     
         $item1 = $v['options']['items'][0];
     

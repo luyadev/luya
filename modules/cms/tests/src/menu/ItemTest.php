@@ -29,7 +29,7 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(0, count($obj->parents));
         $this->assertEquals(1, count($obj->teardown));
         $this->assertEquals(0, count($obj->children));
-        $this->assertEquals(7, count($obj->siblings));
+        $this->assertEquals(11, count($obj->siblings));
         $this->assertFalse($obj->hasChildren());
     }
     
@@ -125,8 +125,8 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(0, count((new Query())->where(['nav_id' => 1])->lang('en')->one()->parents));
         //$this->assertEquals(0, count((new Query())->where(['nav_id' => 1])->lang('de')->one()->parents));
 
-        $this->assertEquals(7, count((new Query())->where(['nav_id' => 1])->lang('en')->one()->siblings));
-        //$this->assertEquals(7, count((new Query())->where(['nav_id' => 1])->lang('de')->one()->siblings));
+        $this->assertEquals(11, count((new Query())->where(['nav_id' => 1])->lang('en')->one()->siblings));
+        //$this->assertEquals(11, count((new Query())->where(['nav_id' => 1])->lang('de')->one()->siblings));
 
         $this->assertEquals(1, count((new Query())->where(['nav_id' => 1])->lang('en')->one()->teardown));
         //$this->assertEquals(1, count((new Query())->where(['nav_id' => 1])->lang('de')->one()->teardown));
@@ -155,8 +155,8 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(0, count((new Query())->where(['nav_id' => 3])->lang('en')->one()->parents));
         //$this->assertEquals(0, count((new Query())->where(['nav_id' => 3])->lang('de')->one()->parents));
 
-        $this->assertEquals(7, count((new Query())->where(['nav_id' => 3])->lang('en')->one()->siblings));
-        //$this->assertEquals(7, count((new Query())->where(['nav_id' => 3])->lang('de')->one()->siblings));
+        $this->assertEquals(11, count((new Query())->where(['nav_id' => 3])->lang('en')->one()->siblings));
+        //$this->assertEquals(11, count((new Query())->where(['nav_id' => 3])->lang('de')->one()->siblings));
 
         $this->assertEquals(1, count((new Query())->where(['nav_id' => 3])->lang('en')->one()->teardown));
         //$this->assertEquals(1, count((new Query())->where(['nav_id' => 3])->lang('de')->one()->teardown));
@@ -170,8 +170,8 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(0, count((new Query())->where(['nav_id' => 1])->one()->parents));
         $this->assertEquals(0, count(Yii::$app->menu->findOne(['nav_id' => 1])->parents));
     
-        $this->assertEquals(7, count((new Query())->where(['nav_id' => 1])->lang('en')->one()->siblings));
-        //$this->assertEquals(7, count((new Query())->where(['nav_id' => 1])->lang('de')->one()->siblings));
+        $this->assertEquals(11, count((new Query())->where(['nav_id' => 1])->lang('en')->one()->siblings));
+        //$this->assertEquals(11, count((new Query())->where(['nav_id' => 1])->lang('de')->one()->siblings));
 
         $this->assertEquals(1, count((new Query())->where(['nav_id' => 1])->lang('en')->one()->teardown));
         //$this->assertEquals(1, count((new Query())->where(['nav_id' => 1])->lang('de')->one()->teardown));
@@ -200,8 +200,8 @@ class ItemTest extends CmsFrontendTestCase
         $this->assertEquals(0, count((new Query())->where(['nav_id' => 3])->lang('en')->one()->parents));
         //$this->assertEquals(0, count((new Query())->where(['nav_id' => 3])->lang('de')->one()->parents));
 
-        $this->assertEquals(7, count((new Query())->where(['nav_id' => 3])->lang('en')->one()->siblings));
-        //$this->assertEquals(7, count((new Query())->where(['nav_id' => 3])->lang('de')->one()->siblings));
+        $this->assertEquals(11, count((new Query())->where(['nav_id' => 3])->lang('en')->one()->siblings));
+        //$this->assertEquals(11, count((new Query())->where(['nav_id' => 3])->lang('de')->one()->siblings));
 
         $this->assertEquals(1, count((new Query())->where(['nav_id' => 3])->lang('en')->one()->teardown));
         //$this->assertEquals(1, count((new Query())->where(['nav_id' => 3])->lang('de')->one()->teardown));
