@@ -28,10 +28,10 @@ class SetupController extends Command
     ];
     
     public $redirects = [
-        ['alias' => 'redirect-1', 'title' => 'Redirect to Page 1', 'parent' => 0, 'type' => '1', 'typeValue' => 2],
-        ['alias' => 'redirect-2', 'title' => 'Redirect to Page 2', 'parent' => 0, 'type' => '1', 'typeValue' => 3],
-        ['alias' => 'redirect-3', 'title' => 'Redirect to Sub Page 2', 'parent' => 0, 'type' => '1', 'typeValue' => 8],
-        ['alias' => 'redirect-4', 'title' => 'Redirect to luya.io', 'parent' => 0, 'type' => '2', 'typeValue' => 'https://luya.io'],
+        ['alias' => 'redirect-1', 'title' => 'Redirect to Page 1', 'parent' => 0, 'type' => '1', 'typeValue' => 2], // nav_item.id = 14
+        ['alias' => 'redirect-2', 'title' => 'Redirect to Page 2', 'parent' => 0, 'type' => '1', 'typeValue' => 3], // nav_item.id = 15
+        ['alias' => 'redirect-3', 'title' => 'Redirect to Sub Page 2', 'parent' => 0, 'type' => '1', 'typeValue' => 8], // nav_item.id = 16
+        ['alias' => 'redirect-4', 'title' => 'Redirect to luya.io', 'parent' => 0, 'type' => '2', 'typeValue' => 'https://luya.io'], // nav_item.id = 17
     ];
     
     public $modules = [
