@@ -26,10 +26,10 @@ public function getMenu()
     return (new \luya\admin\components\AdminMenuBuilder($this))
     ->node('Administration', 'mdi-navigation-apps')
         ->group('Zugriff')
-            ->itemApi('Benutzer', 'admin-user-index', 'mdi-action-account-circle', 'api-admin-user')
-            ->itemApi('Gruppen', 'admin-group-index', 'mdi-action-account-child', 'api-admin-group')
+            ->itemApi('Users', 'admin/user/index', 'mdi-action-account-circle', 'api-admin-user')
+            ->itemApi('Groups', 'admin/group/index', 'mdi-action-account-child', 'api-admin-group')
         ->group('System')
-            ->itemApi('Sprachen', 'admin-lang-index', 'mdi-action-language', 'api-admin-lang');
+            ->itemApi('Languages', 'admin/lang/index', 'mdi-action-language', 'api-admin-lang');
 }
 ```
 

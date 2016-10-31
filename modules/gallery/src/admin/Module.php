@@ -26,8 +26,8 @@ class Module extends \luya\admin\base\Module
     {
         return (new AdminMenuBuilder($this))->node('gallery', 'photo_album')
             ->group('gallery_administrate')
-                ->itemApi('album', 'galleryadmin-album-index', 'camera', 'api-gallery-album')
-                ->itemApi('cat', 'galleryadmin-cat-index', 'collections', 'api-gallery-cat');
+                ->itemApi('album', 'galleryadmin/album/index', 'camera', 'api-gallery-album')
+                ->itemApi('cat', 'galleryadmin/cat/index', 'collections', 'api-gallery-cat');
     }
 
     public static function t($message, array $params = [])

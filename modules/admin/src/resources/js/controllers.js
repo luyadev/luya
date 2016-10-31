@@ -729,7 +729,6 @@
 			$scope.currentItem = item;
 			
 			var id = item.route;
-			
 			var res = id.split("/");
 			CrudTabService.clear();
 			
@@ -817,7 +816,7 @@
 				
 			} else {
 				$scope.click(itemConfig.menuItem.module).then(function() {
-					var res = itemConfig.menuItem.route.split("-");
+					var res = itemConfig.menuItem.route.split("/");
 					$state.go('default.route', { moduleRouteId : res[0], controllerId : res[1], actionId : res[2]}).then(function() {
 						if (itemConfig.stateProvider) {
 							var params = {};

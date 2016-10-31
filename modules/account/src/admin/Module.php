@@ -15,6 +15,6 @@ class Module extends \luya\admin\base\Module
         return (new AdminMenuBuilder($this))
         ->node('Accounts', 'supervisor_account')
             ->group('Übersicht')
-                ->itemApi('Benutzer', 'accountadmin-user-index', 'account_circle', 'api-account-user');
+                ->itemApi('Benutzer', 'accountadmin/user/index', 'account_circle', 'api-account-user');
     }
 }

@@ -21,15 +21,15 @@ use luya\admin\base\GenericSearchInterface;
  *         ->nodeRoute('menu_node_filemanager', 'folder_open', 'admin-storage-index', 'admin/storage/index')
  *         ->node('menu_node_system', 'layers')
  *             ->group('menu_group_access')
- *                 ->itemApi('menu_access_item_user', 'admin-user-index', 'person', 'api-admin-user')
- *                 ->itemApi('menu_access_item_group', 'admin-group-index', 'group', 'api-admin-group')
+ *                 ->itemApi('menu_access_item_user', 'admin/user/index', 'person', 'api-admin-user')
+ *                 ->itemApi('menu_access_item_group', 'admin/group/index', 'group', 'api-admin-group')
  *             ->group('menu_group_system')
- *                 ->itemApi('menu_system_item_language', 'admin-lang-index', 'language', 'api-admin-lang')
- *                 ->itemApi('menu_system_item_tags', 'admin-tag-index', 'label', 'api-admin-tag')
- *                 ->itemApi('menu_system_logger', 'admin-logger-index', 'label', 'api-admin-logger')
+ *                 ->itemApi('menu_system_item_language', 'admin/lang/index', 'language', 'api-admin-lang')
+ *                 ->itemApi('menu_system_item_tags', 'admin/tag/index', 'label', 'api-admin-tag')
+ *                 ->itemApi('menu_system_logger', 'admin/logger/index', 'label', 'api-admin-logger')
  *             ->group('menu_group_images')
- *                 ->itemApi('menu_images_item_effects', 'admin-effect-index', 'blur_circular', 'api-admin-effect')
- *                 ->itemApi('menu_images_item_filters', 'admin-filter-index', 'adjust', 'api-admin-filter');
+ *                 ->itemApi('menu_images_item_effects', 'admin/effect/index', 'blur_circular', 'api-admin-effect')
+ *                 ->itemApi('menu_images_item_filters', 'admin/filter/index', 'adjust', 'api-admin-filter');
  * }
  * ```
  *
@@ -144,7 +144,7 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
      * Add an item to a group. API items are based on the ngrest crud concept.
      *
      * @param string $name The name of the Api (displayed as menu point in the left navigation), all names run through the `Yii::t()` method prefixed with the module id.
-     * @param string $route The api route to the ngrest controller `cmsadmin-navcontainer-index`.
+     * @param string $route The api route to the ngrest controller `cmsadmin/navcontainer/index`.
      * @param string $icon The icon name based on the google icons font see https://design.google.com/icons/.
      * @param string $apiEndpoint The api endpoint defined in the NgRestModel::ngRestApiEndpoint `api-cms-navcontainer`.
      * @param array $options An array with options you can provided and read inside the admin menu component. See {{\luya\admin\components\AdminMenuBuilder::verifyOptions}} for detail list and informations.

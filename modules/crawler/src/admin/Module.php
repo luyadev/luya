@@ -27,9 +27,9 @@ class Module extends \luya\admin\base\Module
     {
         return (new AdminMenuBuilder($this))->node('crawler', 'find_in_page')
         ->group('crawler_indexing')
-        ->itemApi('crawler_index', 'crawleradmin-index-index', 'list', 'api-crawler-index')
+        ->itemApi('crawler_index', 'crawleradmin/index/index', 'list', 'api-crawler-index')
         ->group('Anylatics')
-        ->itemApi('Searchdata', 'crawleradmin-searchdata-index', 'label', 'api-crawler-searchdata');
+        ->itemApi('Searchdata', 'crawleradmin/searchdata/index', 'label', 'api-crawler-searchdata');
     }
 
     public static function t($message, array $params = [])

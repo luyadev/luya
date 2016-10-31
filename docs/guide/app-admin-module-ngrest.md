@@ -210,7 +210,7 @@ public function getMenu()
     return (new \luya\admin\components\AdminMenuBuilder($this))
     ->node("Team Admin", "account")
         ->group("Manager")
-            ->itemApi("Members", "teamadmin-member-index", "extension", "api-teamadmin-member");
+            ->itemApi("Members", "teamadmin/member/index", "extension", "api-teamadmin-member");
 }
 ```
 

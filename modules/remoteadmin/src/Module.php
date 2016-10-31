@@ -15,6 +15,6 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         return (new AdminMenuBuilder($this))->node('Remote', 'dashboard')
             ->group('Daten')
                 ->itemRoute('Status', 'remoteadmin/status/index', 'device_hub')
-                ->itemApi('Seiten', 'remoteadmin-site-index', 'cloud', 'api-remote-site');
+                ->itemApi('Seiten', 'remoteadmin/site/index', 'cloud', 'api-remote-site');
     }
 }

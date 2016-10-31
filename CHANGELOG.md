@@ -8,6 +8,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Changed
 
+- [#1067](https://github.com/luyadev/luya/issues/1067) Admin Module Menu: itemApi() routes are now separeted by slashes instead of dashes. As this supports native Yii handling. 
 - [#1045](https://github.com/luyadev/luya/issues/1045) Admin modules `getMenu()` method must return an `luya\admin\components\AdminMenuBuilder` object instead of an array. A deprecated message is triggered when using the old menu builder functions.
 - [#1043](https://github.com/luyadev/luya/issues/1043) Upgrade to 2.0.10 version of the Yii Framework.
 

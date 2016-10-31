@@ -28,9 +28,9 @@ class Module extends \luya\admin\base\Module
         return (new AdminMenuBuilder($this))
             ->node('news', 'local_library')
                 ->group('news_administrate')
-                    ->itemApi('article', 'newsadmin-article-index', 'edit', 'api-news-article')
-                    ->itemApi('cat', 'newsadmin-cat-index', 'bookmark_border', 'api-news-cat')
-                    ->itemApi('tag', 'newsadmin-tag-index', 'label_outline', 'api-news-tag');
+                    ->itemApi('article', 'newsadmin/article/index', 'edit', 'api-news-article')
+                    ->itemApi('cat', 'newsadmin/cat/index', 'bookmark_border', 'api-news-cat')
+                    ->itemApi('tag', 'newsadmin/tag/index', 'label_outline', 'api-news-tag');
     }
 
     public static function t($message, array $params = [])
