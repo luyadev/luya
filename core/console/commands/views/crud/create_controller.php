@@ -12,7 +12,7 @@ echo "<?php\n";
 namespace <?php echo $namespace; ?>;
 
 /**
- * NgRest API created at <?php echo date("d.m.Y H:i"); ?> on LUYA Version <?php echo $luyaVersion; ?>.
+ * NgRest Controller created with LUYA Version <?php echo $luyaVersion; ?>.
  */
 class <?php echo $className; ?> extends \luya\admin\ngrest\base\Controller
 {
