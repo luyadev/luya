@@ -11,12 +11,15 @@ use luya\admin\ngrest\base\NgRestModel;
  * This Model contains all languages from the database table `admin_lang` but also has helper methods
  * to retrieve the curent active language based on several inputs like composition, config values, etc.
  *
+ * @property integer $id
+ * @property string $name
+ * @property string $short_code
+ * @property integer $is_default
  * @author Basil Suter <basil@nadar.io>
  */
 class Lang extends NgRestModel
 {
     /**
-     *
      * {@inheritDoc}
      * @see \yii\db\BaseActiveRecord::init()
      */

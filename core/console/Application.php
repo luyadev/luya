@@ -88,7 +88,7 @@ class Application extends \yii\console\Application
                     // action response
                     return $module->runAction(implode("/", $partial), $params);
                 } catch (\Exception $e) {
-                    throw new Exception("Exception in route \"$route\": \"{$e->getMessage()}\" in file \"{$e->getFile()}\".", 0, $e);
+                    throw new Exception("Exception in route \"$route\": \"{$e->getMessage()}\" in file \"{$e->getFile()}\" on line {$e->getLine()}.", 0, $e);
                 }
             }
         }

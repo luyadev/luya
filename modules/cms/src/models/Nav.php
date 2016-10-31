@@ -372,6 +372,12 @@ class Nav extends ActiveRecord
     // create methods
     // @todo make static, moved to helper class?
 
+    /**
+     * 
+     * @param unknown $title
+     * @param unknown $langId
+     * @return boolean
+     */
     public function createDraft($title, $langId)
     {
         $_errors = [];
@@ -457,6 +463,18 @@ class Nav extends ActiveRecord
         return $sourceNavItem->copyTypeContent($navItem);
     }
 
+    /**
+     * 
+     * @param unknown $parentNavId
+     * @param unknown $navContainerId
+     * @param unknown $langId
+     * @param unknown $title
+     * @param unknown $alias
+     * @param unknown $description
+     * @param unknown $fromDraftNavId
+     * @param string $isDraft
+     * @return boolean
+     */
     public function createPageFromDraft($parentNavId, $navContainerId, $langId, $title, $alias, $description, $fromDraftNavId, $isDraft = false)
     {
         if (!$isDraft && empty($isDraft) && !is_numeric($isDraft)) {
@@ -534,6 +552,18 @@ class Nav extends ActiveRecord
         return true;
     }
 
+    /**
+     * 
+     * @param unknown $parentNavId
+     * @param unknown $navContainerId
+     * @param unknown $langId
+     * @param unknown $title
+     * @param unknown $alias
+     * @param unknown $layoutId
+     * @param unknown $description
+     * @param string $isDraft
+     * @return boolean
+     */
     public function createPage($parentNavId, $navContainerId, $langId, $title, $alias, $layoutId, $description, $isDraft = false)
     {
         $_errors = [];
@@ -589,6 +619,16 @@ class Nav extends ActiveRecord
         return $navItemId;
     }
 
+    /**
+     * 
+     * @param unknown $navId
+     * @param unknown $langId
+     * @param unknown $title
+     * @param unknown $alias
+     * @param unknown $layoutId
+     * @param unknown $description
+     * @return boolean
+     */
     public function createPageItem($navId, $langId, $title, $alias, $layoutId, $description)
     {
         $_errors = [];
@@ -628,6 +668,17 @@ class Nav extends ActiveRecord
         return $navItemId;
     }
 
+    /**
+     * 
+     * @param unknown $parentNavId
+     * @param unknown $navContainerId
+     * @param unknown $langId
+     * @param unknown $title
+     * @param unknown $alias
+     * @param unknown $moduleName
+     * @param unknown $description
+     * @return boolean
+     */
     public function createModule($parentNavId, $navContainerId, $langId, $title, $alias, $moduleName, $description)
     {
         $_errors = [];
@@ -676,6 +727,18 @@ class Nav extends ActiveRecord
         return $navItemId;
     }
 
+    /**
+     * 
+     * @param unknown $parentNavId
+     * @param unknown $navContainerId
+     * @param unknown $langId
+     * @param unknown $title
+     * @param unknown $alias
+     * @param unknown $redirectType The type of redirect (1 = page, 2 = URL, 3 = Link to File)
+     * @param unknown $redirectTypeValue Depending on the type (1 = cms_nav.id, 2 = http://luya.io)
+     * @param unknown $description
+     * @return boolean
+     */
     public function createRedirect($parentNavId, $navContainerId, $langId, $title, $alias, $redirectType, $redirectTypeValue, $description)
     {
         $_errors = [];
@@ -724,6 +787,16 @@ class Nav extends ActiveRecord
         return $navItemId;
     }
 
+    /**
+     * 
+     * @param unknown $navId
+     * @param unknown $langId
+     * @param unknown $title
+     * @param unknown $alias
+     * @param unknown $moduleName
+     * @param unknown $description
+     * @return boolean
+     */
     public function createModuleItem($navId, $langId, $title, $alias, $moduleName, $description)
     {
         $_errors = [];
@@ -761,6 +834,17 @@ class Nav extends ActiveRecord
         return $navItemId;
     }
 
+    /**
+     * 
+     * @param unknown $navId
+     * @param unknown $langId
+     * @param unknown $title
+     * @param unknown $alias
+     * @param unknown $redirectType The type of redirect (1 = page, 2 = URL, 3 = Link to File)
+     * @param unknown $redirectTypeValue Depending on the type (1 = cms_nav.id, 2 = http://luya.io)
+     * @param unknown $description
+     * @return boolean
+     */
     public function createRedirectItem($navId, $langId, $title, $alias, $redirectType, $redirectTypeValue, $description)
     {
         $_errors = [];
