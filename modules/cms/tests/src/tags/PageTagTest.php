@@ -19,6 +19,19 @@ class PageTagTest extends CmsFrontendTestCase
         $this->assertSame('', $tag->parse(1, 'content'));
     }
     
+    
+    public function testRedirectWrongItemTypeResponse()
+    {
+        $tag = new PageTag();
+        $this->assertNull($tag->parse(14, 'content'));
+    }
+    
+    public function testRedirectWrongItemTypeResponseWithoutPlaceholder()
+    {
+        $tag = new PageTag();
+        $this->assertNull($tag->parse(14, null));
+    }
+    
     public function testContentNotFoundException()
     {
         $tag = new PageTag();
