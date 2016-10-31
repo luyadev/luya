@@ -166,7 +166,7 @@ class AdminMenu extends \yii\base\Component
                             continue;
                         } else {
                             /* fixed bug #51 */
-                            $data['groups'][$groupName]['items'][$groupItemKey]['route'] = str_replace('/', '-', $data['groups'][$groupName]['items'][$groupItemKey]['route']);
+                            $data['groups'][$groupName]['items'][$groupItemKey]['route'] = $data['groups'][$groupName]['items'][$groupItemKey]['route'];
                         }
                     } elseif ($groupItemEntry['permissionIsApi']) {
                         // when true, set permissionGranted to true

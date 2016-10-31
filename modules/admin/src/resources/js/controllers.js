@@ -716,7 +716,7 @@
 			if (!$scope.currentItem) {
 				if ($state.current.name == 'default.route' || $state.current.name == 'default.route.detail') {
 					var params = [$stateParams.moduleRouteId, $stateParams.controllerId, $stateParams.actionId];
-					var route = params.join("-");
+					var route = params.join("/");
 					if ($scope.itemRoutes.indexOf(route)) {
 						$scope.currentItem = $scope.itemRoutes[route];
 						$scope.currentItem.route = route;
@@ -730,8 +730,7 @@
 			
 			var id = item.route;
 			
-			var res = id.split("-");
-			
+			var res = id.split("/");
 			CrudTabService.clear();
 			
 			$state.go('default.route', { moduleRouteId : res[0], controllerId : res[1], actionId : res[2]});
