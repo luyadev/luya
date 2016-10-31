@@ -164,9 +164,6 @@ class AdminMenu extends \yii\base\Component
                         if (!Yii::$app->auth->matchRoute($this->getUserId(), $groupItemEntry['route'])) {
                             unset($data['groups'][$groupName]['items'][$groupItemKey]);
                             continue;
-                        } else {
-                            /* fixed bug #51 */
-                            $data['groups'][$groupName]['items'][$groupItemKey]['route'] = $data['groups'][$groupName]['items'][$groupItemKey]['route'];
                         }
                     } elseif ($groupItemEntry['permissionIsApi']) {
                         // when true, set permissionGranted to true
