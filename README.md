@@ -1,8 +1,9 @@
 <p align="center">
   <img src="https://luya.io/img/luya_logo_flat_icon.png" alt="LUYA Logo"/>
+  
+  > 4, October 2016: We have released the first release candidate of LUYA: [1.0.0-RC1](https://luya.io/news/first-release-candidate-1-0-0-rc1).
+  
 </p>
-
-> 4, October 2016: We have released the first release candidate of LUYA: [1.0.0-RC1](https://luya.io/news/first-release-candidate-1-0-0-rc1).
 
 The [Yii 2 PHP Framework](https://github.com/yiisoft/yii2) wrapper which provides out of the box functions like an **administration interface**, a beautiful looking **content management system**, **payment** modules, **agency workflows** and other tools to develop your website pretty fast!
 
@@ -13,7 +14,7 @@ The [Yii 2 PHP Framework](https://github.com/yiisoft/yii2) wrapper which provide
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-core/downloads)](https://packagist.org/packages/luyadev/luya-core)
 [![Join the chat at https://gitter.im/zephir/luya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/luyadev/luya)
 
-![Luya Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide1.0/img/luya-beta8.png)
+![Luya Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-beta8.png)
 
 **ATTENTION: We have MOVED all repositories to the new HQ of LUYA, `luyadev` instead of `zephir`. In order to update your packages, remove `zephir` and replace with `luyadev` in your composer require section. The old packages will still work for a while.**
 
@@ -47,9 +48,9 @@ We are always looking for people who share their thoughts, code and problems wit
 
 + ✓ beta7 release (June 2016)
 + ✓ beta8 release (August 2016) - Last NEW features will be implemented (cms permissions).
-+ ✓ rc1 release (October 2016) - PHP Code Documentations and Guides updates.
-+ rc2 release (December) - Moving admin and frontend modules into one repository, remove subsplit process and make modules independent.
-+ version 1.0.0 (towards the end of year 2016) - First stable release of LUYA *yay*.
++ ✓ rc1 release (October 2016) - Merge admin and frontend modules into each other. Add luya vendor namespace prefix to all modules.
++ rc2 release (end of November 2016) - Bug fixes, PHP Doc and Guide improvements, basic features implementation.
++ version 1.0.0 (Januar 2017) - First stable release of LUYA.
 
 #### Unit Test
 
