@@ -24,10 +24,13 @@ class Controller extends \luya\web\Controller
     public $disablePermissionCheck = false;
 
     /**
-     * Returns the default behavior for the AccessControl filter:
+     * Returns the rules for the AccessControl filter behavior.
+     * 
+     * The rules are applied as following:
+     * 
      * + Must be logged in.
-     * + apply to all actions.
-     * + ignore if disabledPermissionCheck is enabled.
+     * + Apply to all actions.
+     * + Ignore if disabledPermissionCheck is enabled.
      * + Check permission with `\admin\components\Auth::matchRoute()`.
      * + By default not logged in users.
      *

@@ -13,8 +13,8 @@ use luya\base\AdminModuleInterface;
 abstract class Controller extends \yii\web\Controller
 {
     /**
-     * @var array skips defined assets from the module base, you can not skip assets which are registered in the local asset variable. To Skip
-     *            all the assets from the module ($this->module->assets) you can use skipAssets = ["*"];.
+     * @var array skips defined assets from the module base, you can not skip assets which are registered in the local asset variable. To Skip 
+     * all the assets from the module ($this->module->assets) you can use skipAssets = ["*"];.
      */
     public $skipModuleAssets = [];
 
@@ -90,7 +90,7 @@ abstract class Controller extends \yii\web\Controller
     }
 
     /**
-     * Returns the path for layout files when using `renderLayout()` method. Those module layouts are located in @app/views.
+     * Returns the path for layout files when using {{\luya\web\Controller::renderLayout}} method. Those module layouts are located in @app/views folder.
      *
      * @return string The path to the layout for the current Module.
      */
