@@ -227,4 +227,127 @@ EOT;
         $this->assertSame($sum, $ctrl->generateBuildSummery('api-endpoit-name', '\\path\\to\\api\\Model', 'AdminUser', 'module/admin-user/index'));
         
     }
+    
+    public function testModelWithoutI18n()
+    {
+        $ctrl = new CrudController('id', Yii::$app);
+        
+        $c = $ctrl->generateModelContent(
+            'file\\namespace',
+            'TestModel',
+            'api-endpoint-name',
+            Yii::$app->db->getTableSchema('admin_lang', true),
+            false
+        );
+        
+        $model = <<<'EOT'
+<?php
+
+namespace file\namespace;
+
+use Yii;
+use luya\admin\ngrest\base\NgRestModel;
+
+/**
+ * NgRest Model created with LUYA Version 1.0.0-RC2-dev.
+ *
+ * @property integer $id
+ * @property string $name
+ * @property string $short_code
+ * @property smallint $is_default
+ */
+class TestModel extends NgRestModel
+{
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'admin_lang';
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app', 'ID'),
+            'name' => Yii::t('app', 'Name'),
+            'short_code' => Yii::t('app', 'Short Code'),
+            'is_default' => Yii::t('app', 'Is Default'),
+        ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['is_default'], 'integer'],
+            [['name', 'short_code'], 'string', 'max' => 255],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios['restcreate'] = ['name', 'short_code', 'is_default'];
+        $scenarios['restupdate'] = ['name', 'short_code', 'is_default'];
+        return $scenarios;
+    }
+    
+    /**
+     * @return array An array containing all field which can be lookedup during the admin search process.
+     */
+    public function genericSearchFields()
+    {
+        return ['name', 'short_code'];
+    }
+    
+    /**
+     * @return string Defines the api endpoint for the angular calls
+     */
+    public static function ngRestApiEndpoint()
+    {
+        return 'api-endpoint-name';
+    }
+    
+    /**
+     * @return array An array define the field types of each field
+     */
+    public function ngrestAttributeTypes()
+    {
+        return [
+            'name' => 'text',
+            'short_code' => 'text',
+            'is_default' => 'number',
+        ];
+    }
+    
+    /**
+     * Define the NgRestConfig for this model with the ConfigBuilder object.
+     *
+     * @param \luya\admin\ngrest\ConfigBuilder $config The current active config builder object.
+     * @return \luya\admin\ngrest\ConfigBuilder
+     */
+    public function ngRestConfig($config)
+    {
+        // define fields for types based from ngrestAttributeTypes
+        $this->ngRestConfigDefine($config, 'list', ['name', 'short_code', 'is_default']);
+        $this->ngRestConfigDefine($config, ['create', 'update'], ['name', 'short_code', 'is_default']);
+        
+        // enable or disable ability to delete;
+        $config->delete = false; 
+        
+        return $config;
+    }
+}
+EOT;
+        $this->assertSame($model, $c);
+    }
 }
