@@ -8,7 +8,8 @@ echo "<?php\n";
 namespace <?= $namespace; ?>;
 
 use luya\cms\base\PhpBlock;
-use luya\cms\frontend\blockgroups\ProjectGroup;   
+use luya\cms\frontend\blockgroups\ProjectGroup;
+use luya\cms\helpers\BlockHelper;
 
 /**
  * <?= $name; ?>.

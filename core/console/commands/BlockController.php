@@ -134,8 +134,8 @@ class BlockController extends \luya\console\Command
     private function getVariableTypesOptions()
     {
         return [
-            'select' => "[['value' => 1, 'label' => 'Label for Value 1']]",
-            'checkbox-array' => "['items' => [['value' => 1, 'label' => 'Label for Value 1']]]",
+            'select' => "BlockHelper::selectArrayOption([1 => 'Label for 1'])",
+            'checkbox-array' => "BlockHelper::checkboxArrayOption([1 => 'Label for 1')",
             'image-upload' => "['no_filter' => false]",
             'image-array-upload' => "['no_filter' => false]",
         ];
@@ -145,16 +145,16 @@ class BlockController extends \luya\console\Command
     {
         $info = [
             'image-upload' => function ($varName) use ($func) {
-                return '$this->zaaImageUpload($this->'.$func.'(\''.$varName.'\'), false, true),';
+                return 'BlockHelper::imageUpload($this->'.$func.'(\''.$varName.'\'), false, true),';
             },
             'image-array-upload' => function ($varName) use ($func) {
-                return '$this->zaaImageArrayUpload($this->'.$func.'(\''.$varName.'\'), false, true),';
+                return 'BlockHelper::imageArrayUpload($this->'.$func.'(\''.$varName.'\'), false, true),';
             },
             'file-upload' => function ($varName) use ($func) {
-                return '$this->zaaFileUpload($this->'.$func.'(\''.$varName.'\'), true),';
+                return 'BlockHelper::fileUpload($this->'.$func.'(\''.$varName.'\'), true),';
             },
             'file-array-upload' => function ($varName) use ($func) {
-                return '$this->zaaFileArrayUpload($this->'.$func.'(\''.$varName.'\'), true),';
+                return 'BlockHelper::fileArrayUpload($this->'.$func.'(\''.$varName.'\'), true),';
             },
             'cms-page' => function ($varName) use ($func) {
                 return 'Yii::$app->menu->findOne([\'nav_id\' => $this->'.$func.'(\''.$varName.'\', 0)]),';

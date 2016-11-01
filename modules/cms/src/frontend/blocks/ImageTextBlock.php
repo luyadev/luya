@@ -7,6 +7,7 @@ use luya\cms\frontend\Module;
 use luya\TagParser;
 use luya\cms\base\TwigBlock;
 use luya\cms\frontend\blockgroups\MediaGroup;
+use luya\cms\helpers\BlockHelper;
 
 /**
  * Image with Text block.
@@ -116,7 +117,7 @@ class ImageTextBlock extends TwigBlock
     {
         return [
             'imageSource' => $this->getImageSource(),
-            'imageAdmin' => $this->zaaImageUpload($this->getVarValue('imageId'), 'medium-thumbnail'),
+            'imageAdmin' => BlockHelper::imageUpload($this->getVarValue('imageId'), 'medium-thumbnail'),
             //'imageAdmin' => ($image = Yii::$app->storage->getImage($this->getVarValue('imageId'))) ? $image->applyFilter('medium-thumbnail')->toArray() : false,
             'imagePosition' => $this->getVarValue('imagePosition', 'left'),
             'imageWidth' => $this->getImageSource() ? @getimagesize($this->getImageSource())[0] : 0,

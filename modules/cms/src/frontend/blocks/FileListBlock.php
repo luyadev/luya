@@ -4,6 +4,7 @@ namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
 use luya\cms\base\TwigBlock;
+use luya\cms\helpers\BlockHelper;
 
 /**
  * File list block.
@@ -45,7 +46,7 @@ class FileListBlock extends TwigBlock
     public function extraVars()
     {
         return [
-            'fileList' => $this->zaaFileArrayUpload($this->getVarValue('files')),
+            'fileList' => BlockHelper::fileArrayUpload($this->getVarValue('files')),
         ];
     }
 

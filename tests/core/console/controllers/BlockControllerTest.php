@@ -24,7 +24,8 @@ $tpl = <<<'EOT'
 namespace app\blocks;
 
 use luya\cms\base\PhpBlock;
-use luya\cms\frontend\blockgroups\ProjectGroup;   
+use luya\cms\frontend\blockgroups\ProjectGroup;
+use luya\cms\helpers\BlockHelper;
 
 /**
  * My Test Block.
@@ -134,7 +135,8 @@ EOT;
 namespace luyatests\data\modules\consolemodule\blocks;
 
 use luya\cms\base\PhpBlock;
-use luya\cms\frontend\blockgroups\ProjectGroup;   
+use luya\cms\frontend\blockgroups\ProjectGroup;
+use luya\cms\helpers\BlockHelper;
 
 /**
  * My Test Block.

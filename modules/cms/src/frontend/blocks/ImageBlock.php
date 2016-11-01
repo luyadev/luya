@@ -7,6 +7,7 @@ use luya\cms\frontend\Module;
 use luya\TagParser;
 use luya\cms\base\TwigBlock;
 use luya\cms\frontend\blockgroups\MediaGroup;
+use luya\cms\helpers\BlockHelper;
 
 /**
  * Display Block
@@ -83,8 +84,8 @@ class ImageBlock extends TwigBlock
         }
 
         return [
-            'image' => $this->zaaImageUpload($this->getVarValue('imageId')),
-            'imageAdmin' => $this->zaaImageUpload($this->getVarValue('imageId', 'medium-thumbnail')),
+            'image' => BlockHelper::imageUpload($this->getVarValue('imageId')),
+            'imageAdmin' => BlockHelper::imageUpload($this->getVarValue('imageId', 'medium-thumbnail')),
             'text' => $this->getText(),
             'link' => $link,
             'linkIsExternal' => $linkIsExternal

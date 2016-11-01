@@ -9,6 +9,7 @@ use luya\helpers\Url;
 use luya\helpers\ArrayHelper;
 use luya\admin\base\TypesInterface;
 use luya\cms\frontend\blockgroups\MainGroup;
+use luya\cms\helpers\BlockHelper;
 
 /**
  * Concret Block implementation based on BlockInterface.
@@ -484,34 +485,28 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      * Create the options array for a zaa-select field based on an key value pairing
      * array.
      *
+     * @deprecated Will be removed in 1.0.0
      * @param array $options The key value array pairing the select array should be created from.
      * @since 1.0.0-beta5
      */
     protected function zaaSelectArrayOption(array $options)
     {
-        $transform = [];
-        foreach ($options as $key => $value) {
-            $transform[] = ['value' => $key, 'label' => $value];
-        }
-        
-        return $transform;
+        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\cms\helpers\BlockHelper::selectArrayOption() instead.', E_USER_DEPRECATED);
+        return BlockHelper::selectArrayOption($options);
     }
     
     /**
      * Create the Options list in the config for a zaa-checkbox-array based on an
      * key => value pairing array.
      *
+     * @deprecated Will be removed in 1.0.0
      * @param array $options The array who cares the options with items
      * @since 1.0.0-beta5
      */
     protected function zaaCheckboxArrayOption(array $options)
     {
-        $transform = [];
-        foreach ($options as $key => $value) {
-            $transform[] = ['value' => $key, 'label' => $value];
-        }
-        
-        return ['items' => $transform];
+        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\cms\helpers\BlockHelper::checkboxArrayOption() instead.', E_USER_DEPRECATED);
+        return BlockHelper::checkboxArrayOption($options);
     }
     
     /**
@@ -527,6 +522,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      * 'imageFiltered' => $this->zaaImageUpload($this->getVarValue('myImage'), 'small-thumbnail'),
      * ```
      *
+     * @deprecated Will be removed in 1.0.0
      * @param string|int $value Provided the value
      * @param boolean|string $applyFilter To apply a filter insert the identifier of the filter.
      * @param boolean $returnObject Whether the storage object should be returned or an array.
@@ -534,31 +530,8 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      */
     protected function zaaImageUpload($value, $applyFilter = false, $returnObject = false)
     {
-        if (empty($value)) {
-            return false;
-        }
-        
-        $image = Yii::$app->storage->getImage($value);
-        
-        if (!$image) {
-            return false;
-        }
-        
-        if ($applyFilter && is_string($applyFilter)) {
-            $filter = $image->applyFilter($applyFilter);
-            
-            if ($filter) {
-                if ($returnObject) {
-                    return $filter;
-                }
-                return $filter->toArray();
-            }
-        }
-        
-        if ($returnObject) {
-            return $image;
-        }
-        return $image->toArray();
+        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\cms\helpers\BlockHelper::imageUpload() instead.', E_USER_DEPRECATED);
+        return BlockHelper::imageUpload($value, $applyFilter, $returnObject);
     }
     
     /**
@@ -568,24 +541,15 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      * 'file' => $this->zaaFileUpload($this->getVarValue('myFile')),
      * ```
      *
+     * @deprecated Will be removed in 1.0.0
      * @param string|int $value Provided the value
      * @param boolean $returnObject Whether the storage object should be returned or an array.
      * @return boolean|array Returns false when not found, returns an array with all data for the image on success.
      */
     protected function zaaFileUpload($value, $returnObject = false)
     {
-        if (!empty($value)) {
-            $file = Yii::$app->storage->getFile($value);
-            
-            if ($file) {
-                if ($returnObject) {
-                    return $file;
-                }
-                return $file->toArray();
-            }
-        }
-        
-        return false;
+        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\cms\helpers\BlockHelper::fileUpload() instead.', E_USER_DEPRECATED);
+        return BlockHelper::fileUpload($value, $returnObject);
     }
     
     /**
@@ -597,26 +561,15 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      *
      * Each array item will have all file query item data and a caption key.
      *
+     * @deprecated Will be removed in 1.0.0
      * @param string|int $value The specific var or cfg fieldvalue.
      * @param boolean $returnObject Whether the storage object should be returned or an array.
      * @return array Returns an array in any case, even an empty array.
      */
     protected function zaaFileArrayUpload($value, $returnObject = false)
     {
-        if (!empty($value) && is_array($value)) {
-            $data = [];
-            foreach ($value as $key => $item) {
-                $file = $this->zaaFileUpload($item['fileId'], true);
-                if ($file) {
-                    $file->caption = $item['caption'];
-                    $data[$key] = ($returnObject) ? $file : $file->toArray();
-                }
-            }
-            
-            return $data;
-        }
-        
-        return [];
+        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\cms\helpers\BlockHelper::fileArrayUpload() instead.', E_USER_DEPRECATED);
+        return BlockHelper::fileArrayUpload($value, $returnObject);
     }
 
     /**
@@ -628,6 +581,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      *
      * Each array item will have all file query item data and a caption key.
      *
+     * @deprecated Will be removed in 1.0.0
      * @param string|int $value The specific var or cfg fieldvalue.
      * @param boolean|string $applyFilter To apply a filter insert the identifier of the filter.
      * @param boolean $returnObject Whether the storage object should be returned or an array.
@@ -635,21 +589,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      */
     protected function zaaImageArrayUpload($value, $applyFilter = false, $returnObject = false)
     {
-        if (!empty($value) && is_array($value)) {
-            $data = [];
-            
-            foreach ($value as $key => $item) {
-                $image = $this->zaaImageUpload($item['imageId'], $applyFilter, true);
-                if ($image) {
-                    $image->caption = $item['caption'];
-                    
-                    $data[$key] = ($returnObject) ? $image : $image->toArray();
-                }
-            }
-            
-            return $data;
-        }
-        
-        return [];
+        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\cms\helpers\BlockHelper::imageArrayUpload() instead.', E_USER_DEPRECATED);
+        return BlockHelper::imageArrayUpload($value, $applyFilter, $returnObject);
     }
 }

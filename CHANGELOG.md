@@ -8,8 +8,9 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Changed
 
-- [#1067](https://github.com/luyadev/luya/issues/1067) Admin Module Menu: itemApi() routes are now separeted by slashes instead of dashes. As this supports native Yii handling. 
-- [#1045](https://github.com/luyadev/luya/issues/1045) Admin modules `getMenu()` method must return an `luya\admin\components\AdminMenuBuilder` object instead of an array. A deprecated message is triggered when using the old menu builder functions.
+- [#1068](https://github.com/luyadev/luya/issues/1068) [BC BREAK] Cms Block zaa() helper methods moved to \luya\cms\helpers\BlockHelper and marked methods as deprecated.
+- [#1067](https://github.com/luyadev/luya/issues/1067) [BC BREAK] Admin Module Menu: itemApi() routes are now separeted by slashes instead of dashes. As this supports native Yii handling. 
+- [#1045](https://github.com/luyadev/luya/issues/1045) [BC BREAK] Admin modules `getMenu()` method must return an `luya\admin\components\AdminMenuBuilder` object instead of an array. A deprecated message is triggered when using the old menu builder functions.
 - [#1066](https://github.com/luyadev/luya/issues/1066) NgRestModel methods renamed: `ngrestExtraAttributeTypes` to `ngRestExtraAttributeTypes` and `ngrestAttributeTypes` to `ngRestAttributeTypes`.
 - [#1043](https://github.com/luyadev/luya/issues/1043) Upgrade to 2.0.10 version of the Yii Framework.
 
