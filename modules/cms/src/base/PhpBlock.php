@@ -32,6 +32,17 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     }
     
     /**
+     * Get relative view path ofr rendering view files.
+     * 
+     * @see \yii\base\ViewContextInterface
+     * @return string the view path that may be prefixed to a relative view name.
+     */
+    public function getViewPath()
+    {
+        return $this->ensureModule() . '/views/blocks';
+    }
+    
+    /**
      * {@inheritDoc}
      * @see \luya\cms\base\PhpBlockInterface::frontend()
      */

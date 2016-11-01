@@ -6,8 +6,9 @@ use luya\cms\base\Block;
 use cmstests\data\blocks\TestBlock;
 use cmstests\data\blocks\FailureBlock;
 use cmstests\CmsFrontendTestCase;
+use luya\cms\base\TwigBlock;
 
-class GetterSetter extends Block
+class GetterSetter extends TwigBlock
 {
     public function extraVars()
     {

@@ -4,13 +4,29 @@ namespace luya\cms\base;
 
 use Exception;
 
+/**
+ * Config Element abstraction.
+ * 
+ * In order to make sure all config() elements has same values, this class implement
+ * check routines for
+ * 
+ * + {{\luya\cms\base\BlockCfg}}
+ * + {{\luya\cms\base\BlockVar}}
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ */
 abstract class BlockConfigElement
 {
     public $item = [];
 
     protected $id = null;
 
-    public function __construct($item)
+    /**
+     * 
+     * @param array $item The element config with all fields.
+     * @throws Exception
+     */
+    public function __construct(array $item)
     {
         $this->item = $item;
         if (!$this->has(['var', 'label', 'type'])) {
@@ -43,5 +59,10 @@ abstract class BlockConfigElement
         return $this->item[$key];
     }
 
+    /**
+     * Extract the data from the element.
+     * 
+     * @return array
+     */
     abstract public function toArray();
 }

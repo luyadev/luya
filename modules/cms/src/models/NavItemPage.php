@@ -202,10 +202,10 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                 
                 // see if its a valid block object
                 if ($blockObject) {
-                    if (count($blockObject->assets) > 0) {
+                    if (count($blockObject->getAssets()) > 0) {
                         $controllerObject = $this->getOption('cmsControllerObject');
                         if ($controllerObject) {
-                            foreach ($blockObject->assets as $assetClassName) {
+                            foreach ($blockObject->getAssets() as $assetClassName) {
                                 $controllerObject->registerAsset($assetClassName);
                             }
                         }
@@ -222,10 +222,11 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     $blockObject->setEnvOption('itemsCount', $blocksCount);
                     $blockObject->setEnvOption('isFirst', ($i == 1));
                     $blockObject->setEnvOption('isLast', ($i == $blocksCount));
-                    $blockObject->setEnvOption('isPrevEqual', array_key_exists($prev, $placeholders) && $placeholder['block_id'] == $placeholders[$prev]['block_id']);
+                    $prevIsEqual = array_key_exists($prev, $placeholders) && $placeholder['block_id'] == $placeholders[$prev]['block_id'];
+                    $blockObject->setEnvOption('isPrevEqual', $prevIsEqual);
                     $blockObject->setEnvOption('isNextEqual', array_key_exists($next, $placeholders) && $placeholder['block_id'] == $placeholders[$next]['block_id']);
                     
-                    if (!$blockObject->getEnvOption('isPrevEqual')) {
+                    if (!$prevIsEqual) {
                         $equalIndex = 1;
                     } else {
                         $equalIndex++;
@@ -241,8 +242,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     // output buffer the rendered frontend method of the block
                     $blockResponse = $blockObject->renderFrontend();
                     
-                    if ($blockObject->cacheEnabled) {
-                        $this->setHasCache($cacheKey, $blockResponse, null, $blockObject->cacheExpiration);
+                    if ($blockObject->getIsCacheEnabled()) {
+                        $this->setHasCache($cacheKey, $blockResponse, null, $blockObject->getCacheExpirationTime());
                     }
                 }
             }
@@ -369,7 +370,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     
         return [
             'is_dirty' => (int) $blockItem['is_dirty'],
-            'is_container' => (int) $blockObject->isContainer,
+            'is_container' => (int) $blockObject->getIsContainer(),
             'id' => $blockItem['id'],
             'is_hidden' => $blockItem['is_hidden'],
             'name' => $blockObject->name(),

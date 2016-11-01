@@ -3,21 +3,34 @@
 namespace luya\cms\base;
 
 use Yii;
-use yii\helpers\Inflector;
 use yii\base\Object;
+use yii\helpers\Inflector;
 use luya\helpers\Url;
-use luya\cms\frontend\blockgroups\MainGroup;
 use luya\helpers\ArrayHelper;
 use luya\admin\base\TypesInterface;
+use luya\cms\frontend\blockgroups\MainGroup;
 
 /**
- * Base Block for all Cms Blocks.
- *
+ * Concret Block implementation based on BlockInterface.
+ * 
+ * This is an use case for the block implemenation as InternBaseBlock fro
+ * two froms of implementations.
+ * 
+ * + {{\luya\cms\base\PhpBlock}}
+ * + {{\luya\cms\base\TwigBlock}}
+ * 
  * @since 1.0.0-beta8
  * @author Basil Suter <basil@nadar.io>
  */
 abstract class InternalBaseBlock extends Object implements BlockInterface, TypesInterface
 {
+    /**
+     * Returns the configuration array.
+     *
+     * @return array
+     */
+    abstract public function config();
+    
     private $_varValues = [];
 
     private $_cfgValues = [];
@@ -73,6 +86,43 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      * ```
      */
     public $assets = [];
+    
+    /**
+     * Whether cache is enabled for this block or not.
+     *
+     * @return boolean
+     */
+    public function getIsCacheEnabled()
+    {
+        return $this->cacheEnabled;
+    }
+    
+    /**
+     * The time of cache expiration
+     */
+    public function getCacheExpirationTime()
+    {
+        return $this->cacheExpiration;
+    }
+    
+    /**
+     * Whether is an container element or not.
+     */
+    public function getIsContainer()
+    {
+        return $this->isContainer;
+    }
+    
+    /**
+     * Return an array of assets
+     *
+     * @todo remove in rc1
+     * @return array
+     */
+    public function getAssets()
+    {
+        return $this->assets;
+    }
     
     /**
      * Contains the class name for the block group class
@@ -284,6 +334,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
         return (array_key_exists($key, $this->_cfgValues)) ? $this->_cfgValues[$key] : $default;
     }
 
+    
     /**
      * Sets the config values.
      *
@@ -399,9 +450,9 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     }
     
     /**
-     * Returns the name of the twig file to be rendered.
+     * Returns the name of the twig or php file to be rendered.
      *
-     * @return string The name of the twig file (example.twig)
+     * @return string The name of the twig or php file (example.twig, example.php)
      */
     public function getViewFileName($extension)
     {
@@ -427,11 +478,6 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
         }
         
         return $moduleName;
-    }
-    
-    public function getViewPath()
-    {
-        return $this->ensureModule() . '/views/blocks';
     }
     
     /**
