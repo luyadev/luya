@@ -20,7 +20,7 @@ use luya\admin\Module;
         $scope.config.activeWindowCallbackUrl = '<?php echo $activeWindowCallbackUrl; ?>';
         $scope.config.pk = '<?php echo $this->context->getPrimaryKey(); ?>';
         $scope.config.inline = <?= (int) $config->inline; ?>;
-        $scope.orderBy = '<?= $config->getDefaultOrderDirection() . $config->getDefaultOrderField(); ?>';
+        $scope.config.orderBy = '<?= $config->getDefaultOrderDirection() . $config->getDefaultOrderField(); ?>';
         $scope.saveCallback = <?= $config->getOption('saveCallback'); ?>;
         <?php if ($config->groupByField): ?>
         $scope.config.groupBy = 1;

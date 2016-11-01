@@ -85,6 +85,13 @@ class Controller extends \luya\admin\base\Controller
         // apply config informations
         $config->filters = $this->model->ngRestFilters();
         $config->defaultOrder = $this->model->ngRestListOrder();
+        
+        $userSortSettings = Yii::$app->adminuser->identity->setting->get('ngrestorder.admin/'.$apiEndpoint, false);
+        
+        if ($userSortSettings && is_array($userSortSettings)) {
+        	$config->defaultOrder = [$userSortSettings['field'] => $userSortSettings['sort']];
+        }
+        
         $config->attributeGroups = $this->model->ngRestAttributeGroups();
         $config->groupByField = $this->model->ngRestGroupByField();
         

@@ -36,6 +36,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1063](https://github.com/luyadev/luya/issues/1063) Cleanup the block interface in order to make concret block implementations.
 - [#1059](https://github.com/luyadev/luya/issues/1059) Block Generator also generates the view file of the PHPBlock in the depending view folder.
 - [#999](https://github.com/luyadev/luya/issues/999) Rewritten the CRUD generator and added ability to disable i18n fiel generation.
+- [#991](https://github.com/luyadev/luya/issues/991) User settings stores CRUD orderBy state in database for each ngrest crud setup.
 
 ### Fixed
 

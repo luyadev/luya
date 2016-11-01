@@ -128,8 +128,8 @@
 				if (pageId) {
 					url = url + '&page=' + pageId;
 				}
-				if ($scope.orderBy) {
-					url = url + '&sort=' + $scope.orderBy.replace("+", "");
+				if ($scope.config.orderBy) {
+					url = url + '&sort=' + $scope.config.orderBy.replace("+", "");
 				}
 				$http.get(url).then(function(response) {
 					$scope.setPagination(
@@ -234,7 +234,7 @@
 		};
 		
 		$scope.isOrderBy = function(field) {
-			if (field == $scope.orderBy) {
+			if (field == $scope.config.orderBy) {
 				return true;
 			}
 			
@@ -242,7 +242,10 @@
 		};
 		
 		$scope.changeOrder = function(field, sort) {
-			$scope.orderBy = sort + field;
+			$scope.config.orderBy = sort + field;
+			
+			$http.post('admin/api-admin-common/ngrest-order', {'apiEndpoint' : $scope.config.apiEndpoint, sort: sort, field: field});
+			
 			if ($scope.pager && !$scope.config.pagerHiddenByAjaxSearch) {
 				$scope.realoadCrudList(1);
 			} else {
@@ -251,7 +254,7 @@
 		};
 		
 		$scope.reApplyOrder = function() {
-			$scope.data.listArray = $filter('orderBy')($scope.data.listArray, $scope.orderBy);
+			$scope.data.listArray = $filter('orderBy')($scope.data.listArray, $scope.config.orderBy);
 		};
 		
 		$scope.activeWindowReload = function() {
@@ -397,17 +400,19 @@
 				$scope.printErrors(data);
 			});
 		};
-	
-		$scope.loadService = function() {
-			$http.get($scope.config.apiEndpoint + '/services').success(function(serviceResponse) {
-				$scope.service = serviceResponse;
-			});
-		}
+		
+		$scope.evalSettings = function(settings) {
+			if (settings.hasOwnProperty('order')) {
+				$scope.config.orderBy = settings['order'];
+			}
+		};
 		
 		$scope.loadList = function(pageId) {
 			LuyaLoading.start();
 			$http.get($scope.config.apiEndpoint + '/services').success(function(serviceResponse) {
-				$scope.service = serviceResponse;
+				
+				$scope.service = serviceResponse.service;
+				$scope.evalSettings(serviceResponse._settings);
 				if ($scope.relationCall) {
 					var url = $scope.config.apiEndpoint + '/relation-call/?' + $scope.config.apiListQueryString;
 					url = url + '&arrayIndex=' + $scope.relationCall.arrayIndex + '&id=' + $scope.relationCall.id + '&modelClass=' + $scope.relationCall.modelClass;
@@ -418,8 +423,8 @@
 				if (pageId !== undefined) {
 					url = url + '&page=' + pageId;
 				}
-				if ($scope.orderBy) {
-					url = url + '&sort=' + $scope.orderBy.replace("+", "");
+				if ($scope.config.orderBy) {
+					url = url + '&sort=' + $scope.config.orderBy.replace("+", "");
 				}
 				$http.get(url).then(function(response) {
 					$scope.setPagination(

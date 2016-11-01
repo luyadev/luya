@@ -69,6 +69,11 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         return 'api-admin-user';
     }
     
+    public function ngRestListOrder()
+    {
+    	return ['firstname' => SORT_ASC];
+    }
+    
     public function ngRestAttributeTypes()
     {
         return [

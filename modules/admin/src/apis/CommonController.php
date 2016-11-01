@@ -18,6 +18,21 @@ class CommonController extends RestController
 {
     use CacheableTrait;
     
+    public function actionNgrestOrder()
+    {
+    	$apiEndpoint = Yii::$app->request->getBodyParam('apiEndpoint');
+    	$sort = Yii::$app->request->getBodyParam('sort');
+    	$field = Yii::$app->request->getBodyParam('field');
+    	
+    	if ($sort == '-') {
+    		$sort = SORT_DESC;
+    	} else {
+    		$sort = SORT_ASC;
+    	}
+    	
+    	return Yii::$app->adminuser->identity->setting->set('ngrestorder.'.$apiEndpoint, ['sort' => $sort, 'field' => $field]);
+    }
+    
     public function actionDataLanguages()
     {
         return Lang::find()->asArray()->all();

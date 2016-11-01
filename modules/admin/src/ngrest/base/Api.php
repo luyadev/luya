@@ -71,7 +71,23 @@ class Api extends RestActiveController
     
     public function actionServices()
     {
-        return $this->model->getNgrestServices();
+    	$settings = [];
+    	$apiEndpoint = $this->model->ngRestApiEndpoint();
+    	$userSortSettings = Yii::$app->adminuser->identity->setting->get('ngrestorder.admin/'.$apiEndpoint, false);
+    	
+    	if ($userSortSettings && is_array($userSortSettings)) {
+    		
+    		if ($userSortSettings['sort'] == SORT_DESC) {
+    			$order = '-'.$userSortSettings['field'];
+    		} else {
+    			$order = '+'.$userSortSettings['field'];
+    		}
+    		
+    		$settings['order'] = $order;
+    		
+    	}
+    	
+        return ['service' => $this->model->getNgrestServices(), '_settings' => $settings];
     }
 
     public function actionSearch($query)
