@@ -93,6 +93,8 @@ class BlockController extends \luya\console\Command
      */
     public $phpdoc = [];
     
+    public $viewFileDoc = [];
+    
     /**
      * Get an array with all modules where you can generate blocks for.
      *
@@ -229,6 +231,7 @@ class BlockController extends \luya\console\Command
     
         if ($extra) {
             $this->phpdoc[] = '{{extras.'.$v['var'].'}}';
+            $this->viewFileDoc[] = '$this->extraValue(\''.$v['var'].'\');';
             $this->extras[] = $extra;
         }
     
@@ -253,6 +256,15 @@ class BlockController extends \luya\console\Command
         }
         
         return Yii::$app->getModule($this->moduleName)->getBasePath();
+    }
+    
+    public function generateViewFile($blockClassName)
+    {
+        sort($this->viewFileDoc);
+        return $this->view->render('@luya/console/commands/views/block/create_block_view.php', [
+            'blockClassName' => $blockClassName,
+            'phpdoc' => $this->viewFileDoc,
+        ]);
     }
     
     /**
@@ -303,6 +315,7 @@ class BlockController extends \luya\console\Command
                 while ($doVars) {
                     $item = $this->varCreator('Variabel (vars) #'.$i, 'var');
                     $this->phpdoc[] = '{{vars.'.$item['var'].'}}';
+                    $this->viewFileDoc[] = '$this->varValue(\''.$item['var'].'\');';
                     $this->config['vars'][] = $item;
                     $doVars = $this->confirm('Add one more?', false);
                     ++$i;
@@ -312,6 +325,7 @@ class BlockController extends \luya\console\Command
                 while ($doCfgs) {
                     $item = $this->varCreator('Configration (cfgs) #'.$i, 'cfg');
                     $this->phpdoc[] = '{{cfgs.'.$item['var'].'}}';
+                    $this->viewFileDoc[] = '$this->cfgValue(\''.$item['var'].'\');';
                     $this->config['cfgs'][] = $item;
                     $doCfgs = $this->confirm('Add one more?', false);
                     ++$i;
@@ -321,6 +335,7 @@ class BlockController extends \luya\console\Command
                 while ($doPlaceholders) {
                     $item = $this->placeholderCreator('Placeholder (placeholders) #'.$i);
                     $this->phpdoc[] = '{{placeholders.'.$item['var'].'}}';
+                    $this->viewFileDoc[] = '$this->placeholderValue(\''.$item['var'].'\');';
                     $this->config['placeholders'][] = $item;
                     $doPlaceholders = $this->confirm('Add one more?', false);
                     ++$i;
@@ -351,7 +366,16 @@ class BlockController extends \luya\console\Command
         }
         
         if (FileHelper::createDirectory($folder) && FileHelper::writeFile($filePath, $content)) {
-            return $this->outputSuccess("Block '$filePath' has been created.");
+            
+            // generate view file based on block object view context
+            $object = Yii::createObject(['class' => $this->getFileNamespace() . '\\' . $this->blockName]);
+            $viewsFolder = Yii::getAlias($object->getViewPath());
+            $viewFilePath = $viewsFolder . DIRECTORY_SEPARATOR . $object->getViewFileName('php');
+            if (FileHelper::createDirectory($viewsFolder) && FileHelper::writeFile($viewFilePath, $this->generateViewFile($this->blockName))) {
+                $this->outputInfo('View file for the block has been created: ' . $viewFilePath);
+            }
+            
+            return $this->outputSuccess("Block {$this->blockName} has been created: " . $filePath);
         }
         
         return $this->outputError("Error while creating block '$filePath'");

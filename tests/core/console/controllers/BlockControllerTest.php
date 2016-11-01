@@ -239,4 +239,31 @@ EOT;
         $ctrl->dryRun = true;
         $this->assertEquals($this->getHtml($tpl), $this->getHtml($ctrl->actionCreate()));
     }
+
+    public function testBlockViewFileContent()
+    {
+        $ctrl = new BlockController('id', Yii::$app);
+        $ctrl->viewFileDoc = [
+            '$this->varValue(\'foo\');', '$this->varValue(\'foo\');', '$this->extraValue(\'foo\');', '$this->cfgValue(\'foo\');', 
+        ];
+        
+        $view = <<<'EOT'
+<?php
+
+use Yii;
+
+/**
+ * View file for block: MySuperBlock 
+ *
+ * @param $this->cfgValue('foo');
+ * @param $this->extraValue('foo');
+ * @param $this->varValue('foo');
+ * @param $this->varValue('foo');
+ *
+ * @var $this \luya\cms\base\PhpBlockView
+ */
+?>
+EOT;
+        $this->assertSame($view, $ctrl->generateViewFile('MySuperBlock'));
+    }
 }

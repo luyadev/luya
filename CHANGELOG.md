@@ -31,6 +31,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1057](https://github.com/luyadev/luya/issues/1057) PHP Block CMS View class provides more and better helper methods in order to retrieve config contents.
 - [#1060](https://github.com/luyadev/luya/issues/1060) Filemanager Drag&Drop and Copy&Paste of files enabled (Chrome, Firefox and HTML5 Browsers only).
 - [#1063](https://github.com/luyadev/luya/issues/1063) Cleanup the block interface in order to make concret block implementations.
+- [#1059](https://github.com/luyadev/luya/issues/1059) Block Generator also generates the view file of the PHPBlock in the depending view folder.
 - [#999](https://github.com/luyadev/luya/issues/999) Rewritten the CRUD generator and added ability to disable i18n fiel generation.
 
 ### Fixed
