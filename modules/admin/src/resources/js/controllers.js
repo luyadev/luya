@@ -401,11 +401,27 @@
 			});
 		};
 		
+		$scope.blockFilterSeriveReload = false;
+		
 		$scope.evalSettings = function(settings) {
 			if (settings.hasOwnProperty('order')) {
 				$scope.config.orderBy = settings['order'];
 			}
+			
+			if (!$scope.blockFilterSeriveReload) {
+				if (settings.hasOwnProperty('filterName')) {
+					$scope.config.filter = settings['filterName'];
+				}
+			}
 		};
+		
+		$scope.$watch('config.filter', function(n, o) {
+			if (n != o && n != undefined) {
+				$scope.blockFilterSeriveReload = true;
+				$http.post('admin/api-admin-common/ngrest-filter', {'apiEndpoint' : $scope.config.apiEndpoint, 'filterName': $scope.config.filter});
+				$scope.realoadCrudList();
+			}
+		})
 		
 		$scope.loadList = function(pageId) {
 			LuyaLoading.start();

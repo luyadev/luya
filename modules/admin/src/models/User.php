@@ -85,6 +85,13 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         ];
     }
     
+    public function ngRestFilters()
+    {
+    	return [
+    		'Removed' => self::find()->where(['is_deleted' => 1]),
+    	];
+    }
+    
     public function ngRestExtraAttributeTypes()
     {
         return [

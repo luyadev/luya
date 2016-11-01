@@ -103,7 +103,7 @@ use luya\admin\Module;
                                 <div class="input input--select input--vertical input--full-width">
                                     <div class="input__field-wrapper">
                                         <i class="input__select-arrow material-icons">keyboard_arrow_down</i>
-                                        <select class="input__field" ng-change="realoadCrudList()" ng-model="config.filter">
+                                        <select class="input__field" ng-model="config.filter">
                                             <option value="0"><?= Module::t('ngrest_crud_filter_prompt'); ?></option>
                                             <?php foreach (array_keys($config->filters) as $name): ?>
                                                 <option value="<?= $name; ?>"><?= $name; ?></option>

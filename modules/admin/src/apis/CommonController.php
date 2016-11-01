@@ -18,6 +18,14 @@ class CommonController extends RestController
 {
     use CacheableTrait;
     
+    public function actionNgrestFilter()
+    {
+    	$apiEndpoint = Yii::$app->request->getBodyParam('apiEndpoint');
+    	$filterName = Yii::$app->request->getBodyParam('filterName');
+    	
+    	return Yii::$app->adminuser->identity->setting->set('ngrestfilter.'.$apiEndpoint, $filterName);
+    }
+    
     public function actionNgrestOrder()
     {
     	$apiEndpoint = Yii::$app->request->getBodyParam('apiEndpoint');

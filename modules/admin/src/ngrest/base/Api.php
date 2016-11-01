@@ -87,6 +87,11 @@ class Api extends RestActiveController
     		
     	}
     	
+    	$userFilter = Yii::$app->adminuser->identity->setting->get('ngrestfilter.admin/'.$apiEndpoint, false);
+    	if ($userFilter) {
+    		$settings['filterName'] = $userFilter;
+    	}
+    	
         return ['service' => $this->model->getNgrestServices(), '_settings' => $settings];
     }
 
