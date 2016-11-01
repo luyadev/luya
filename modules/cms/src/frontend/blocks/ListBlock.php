@@ -58,7 +58,7 @@ class ListBlock extends TwigBlock
         return '{% if vars.elements is empty%}<span class="block__empty-text">' . Module::t('block_list_no_content') . '</span>{% else %}<{{ extras.listType }}>{% for row in vars.elements if row.value is not empty %}<li>{{ row.value }}</li>{% endfor %}</{{ extras.listType }}>{% endif %}';
     }
     
-    public function getBlockGroup()
+    public function blockGroup()
     {
         return TextGroup::className();
     }

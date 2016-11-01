@@ -61,7 +61,7 @@ class BlockImporter extends Importer
     
     private function getBlockGroupId($blockObject)
     {
-        $groupClassName = $blockObject->getBlockGroup();
+        $groupClassName = $blockObject->blockGroup();
         
         $identifier = Yii::createObject(['class' => $groupClassName])->identifier();
         

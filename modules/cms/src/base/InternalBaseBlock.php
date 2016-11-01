@@ -108,7 +108,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      * @return string The classname on which the block should be stored in.
      * @since 1.0.0-beta6
      */
-    public function getBlockGroup()
+    public function blockGroup()
     {
         return MainGroup::className();
     }
@@ -344,7 +344,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     private $_extraVars = [];
     
     // access from outside
-    public function extraVarsOutput()
+    public function extraVarsExport()
     {
         $this->_extraVars = ArrayHelper::merge($this->_extraVars, $this->extraVars());
         return $this->_extraVars;
@@ -370,7 +370,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     /**
      * @return array
      */
-    public function getVars()
+    public function getVarsExport()
     {
         $config = $this->config();
         
@@ -391,7 +391,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     /**
      * @return array
      */
-    public function getPlaceholders()
+    public function getPlaceholdersExport()
     {
         return (array_key_exists('placeholders', $this->config())) ? $this->config()['placeholders'] : [];
     }
@@ -401,7 +401,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     /**
      * @return array
      */
-    public function getCfgs()
+    public function getCfgsExport()
     {
         $config = $this->config();
         
@@ -417,14 +417,6 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     public function addCfg(array $cfgConfig)
     {
         $this->_cfgs[] = (new BlockCfg($cfgConfig))->toArray();
-    }
-
-    /**
-     * @return string
-     */
-    public function getFullName()
-    {
-        return ($this->icon() === null) ? $this->name() : '<i class="material-icons">'.$this->icon().'</i> <span>'.$this->name().'</span>';
     }
     
     /**

@@ -46,7 +46,7 @@ class HtmlBlock extends TwigBlock
         return '{% if vars.html is empty %}<span class="block__empty-text">' . Module::t('block_html_no_content') . '</span>{% else %}{{ vars.html | raw }}{% endif %}';
     }
     
-    public function getBlockGroup()
+    public function blockGroup()
     {
         return DevelopmentGroup::className();
     }

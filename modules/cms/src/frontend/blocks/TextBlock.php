@@ -74,7 +74,7 @@ class TextBlock extends TwigBlock
         '{% elseif vars.content is not empty and vars.textType == 1 %}{{ extras.text }}{% elseif vars.content is not empty %}{{ extras.text|nl2br }}{% endif %}</p>';
     }
 
-    public function getBlockGroup()
+    public function blockGroup()
     {
         return TextGroup::className();
     }

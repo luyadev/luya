@@ -25,7 +25,7 @@ class ImageBlock extends TwigBlock
         return Module::t('block_image_name');
     }
     
-    public function getBlockGroup()
+    public function blockGroup()
     {
         return MediaGroup::class;
     }

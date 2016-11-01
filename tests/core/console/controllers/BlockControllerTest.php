@@ -50,7 +50,7 @@ class MyTestBlock extends PhpBlock
      */
     public $cacheExpiration = 3600;
 
-    public function getBlockGroup()
+    public function blockGroup()
     {
         return ProjectGroup::class;
     }
@@ -163,7 +163,7 @@ class MyTestBlock extends PhpBlock
      */
     public $cacheExpiration = 3600;
 
-    public function getBlockGroup()
+    public function blockGroup()
     {
         return ProjectGroup::class;
     }

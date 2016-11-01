@@ -60,22 +60,13 @@ class ConcretImplementationBlock implements BlockInterface
      *
      * @return \luya\cms\base\BlockGroup
      */
-    public function getBlockGroup()
+    public function blockGroup()
     {
         return DevelopmentGroup::class;
     }
     
     // getters & setters from outside
     
-    /**
-     * The the full name based on icon() and name() concated.
-     *
-     * @return string
-     */
-    public function getFullName()
-    {
-        return $this->name();
-    }
     
     /**
      * Returns an array with additional help informations for specific field (var or cfg).
@@ -141,7 +132,7 @@ class ConcretImplementationBlock implements BlockInterface
      *
      * @return array
      */
-    public function extraVarsOutput()
+    public function extraVarsExport()
     {
         return ['foo' => 'bar'];
     }
@@ -151,7 +142,7 @@ class ConcretImplementationBlock implements BlockInterface
      *
      * @return array
      */
-    public function getVars()
+    public function getVarsExport()
     {
         return [];
     }
@@ -161,7 +152,7 @@ class ConcretImplementationBlock implements BlockInterface
      *
      * @return array
      */
-    public function getCfgs()
+    public function getCfgsExport()
     {
         return [];
     }
@@ -171,7 +162,7 @@ class ConcretImplementationBlock implements BlockInterface
      *
      * @return array
      */
-    public function getPlaceholders()
+    public function getPlaceholdersExport()
     {
         return [];
     }

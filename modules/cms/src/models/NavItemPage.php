@@ -227,7 +227,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     
                     // render sub placeholders and set into object
                     $insertedHolders = [];
-                    foreach ($blockObject->getPlaceholders() as $item) {
+                    foreach ($blockObject->getPlaceholdersExport() as $item) {
                         $insertedHolders[$item['var']] = $this->renderPlaceholderRecursive($navItemPageId, $item['var'], $placeholder['id']);
                     }
                     $blockObject->setPlaceholderValues($insertedHolders);
@@ -340,7 +340,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     
         $placeholders = [];
     
-        foreach ($blockObject->getPlaceholders() as $pk => $pv) {
+        foreach ($blockObject->getPlaceholdersExport() as $pk => $pv) {
             $pv['nav_item_page_id'] = $blockItem['nav_item_page_id'];
             $pv['prev_id'] = $blockItem['id'];
             $placeholderVar = $pv['var'];
@@ -367,11 +367,11 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             'is_hidden' => $blockItem['is_hidden'],
             'name' => $blockObject->name(),
             'icon' => $blockObject->icon(),
-            'full_name' => $blockObject->getFullName(),
+            'full_name' => ($blockObject->icon() === null) ? $blockObject->name() : '<i class="material-icons">'.$blockObject->icon().'</i> <span>'.$blockObject->name().'</span>',
             'twig_admin' => $blockObject->renderAdmin(),
-            'vars' => $blockObject->getVars(),
-            'cfgs' => $blockObject->getCfgs(),
-            'extras' => $blockObject->extraVarsOutput(),
+            'vars' => $blockObject->getVarsExport(),
+            'cfgs' => $blockObject->getCfgsExport(),
+            'extras' => $blockObject->extraVarsExport(),
             'values' => $blockItem['json_config_values'],
             'field_help' => $blockObject->getFieldHelp(),
             'cfgvalues' => $blockItem['json_config_cfg_values'], // add: t1_json_config_cfg_values

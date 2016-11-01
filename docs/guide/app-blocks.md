@@ -229,10 +229,10 @@ class MySuperGroup extends \luya\cms\base\BlockGroup
 
 > The position of the block will start from lower to higher, means 1 will be at the top of the groups list in the administration and even higher will be more at the bottom.
 
-the folder will be created on import. Now blocks can belong to this folder, to do so override the `getBlockGroup` method of your block:
+the folder will be created on import. Now blocks can belong to this folder, to do so override the {{\luya\cms\base\BlockInterface::blockGroup}} method of your block:
 
 ```php
-public function getBlockGroup()
+public function blockGroup()
 {
     return \app\blockgroups\MySuperGroup::className();
 }

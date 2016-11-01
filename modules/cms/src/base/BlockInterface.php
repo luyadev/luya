@@ -44,16 +44,9 @@ interface BlockInterface
      *
      * @return \luya\cms\base\BlockGroup
      */
-    public function getBlockGroup();
+    public function blockGroup();
     
     // getters & setters from outside
-    
-    /**
-     * The the full name based on icon() and name() concated.
-     *
-     * @return string
-     */
-    public function getFullName();
     
     /**
      * Returns an array with additional help informations for specific field (var or cfg).
@@ -96,28 +89,28 @@ interface BlockInterface
      * 
      * @return array
      */
-    public function extraVarsOutput();
+    public function extraVarsExport();
    
     /**
      * Returns all config vars element of key value pairing to pass to the API and frontend.
      * 
      * @return array
      */
-    public function getVars();
+    public function getVarsExport();
    
     /**
      * Returns all config cfgs element of key value pairing to pass to the API and frontend.
      *
      * @return array
      */
-    public function getCfgs();
+    public function getCfgsExport();
     
     /**
      * Returns all config placeholders element of key value pairing to pass to the API and frontend.
      * 
      * @return array
      */
-    public function getPlaceholders();
+    public function getPlaceholdersExport();
 
     /**
      * Whether cache is enabled for this block or not.

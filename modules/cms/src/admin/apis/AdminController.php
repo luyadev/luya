@@ -31,13 +31,13 @@ class AdminController extends \luya\admin\base\RestController
                 }
                 
                 if ($groupPosition == null) {
-                    $groupObject = Yii::createObject($obj->getBlockGroup());
+                    $groupObject = Yii::createObject($obj->blockGroup());
                     $groupPosition = $groupObject->getPosition();
                 }
                 $blocks[] = [
                     'id' => $block['id'],
                     'name' => $obj->name(),
-                    'full_name' => $obj->getFullName(),
+                    'full_name' => ($obj->icon() === null) ? $obj->name() : '<i class="material-icons">'.$obj->icon().'</i> <span>'.$obj->name().'</span>',
                     'favorized' => array_key_exists($block['id'], $favs),
                 ];
             }

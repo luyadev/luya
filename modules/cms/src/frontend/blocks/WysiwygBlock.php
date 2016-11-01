@@ -51,7 +51,7 @@ class WysiwygBlock extends TwigBlock
         return '{% if vars.content is empty %}<span class="block__empty-text">' . Module::t('block_wysiwyg_no_content') . '</span>{% else %}{{ vars.content }}{% endif %}';
     }
     
-    public function getBlockGroup()
+    public function blockGroup()
     {
         return TextGroup::className();
     }

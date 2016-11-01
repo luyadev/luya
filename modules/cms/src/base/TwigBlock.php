@@ -24,7 +24,7 @@ abstract class TwigBlock extends InternalBaseBlock implements TwigBlockInterface
             'vars' => $this->getVarValues(),
             'cfgs' => $this->getCfgValues(),
             'placeholders' => $this->getPlaceholderValues(),
-            'extras' => $this->extraVarsOutput(),
+            'extras' => $this->extraVarsExport(),
         ]);
     }
     

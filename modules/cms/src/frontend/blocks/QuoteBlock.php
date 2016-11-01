@@ -46,7 +46,7 @@ class QuoteBlock extends TwigBlock
         return '{% if vars.content is not empty %}<blockquote>{{ vars.content }}</blockquote>{% else %}<span class="block__empty-text">' . Module::t('block_quote_no_content') . '</span>{% endif %}';
     }
     
-    public function getBlockGroup()
+    public function blockGroup()
     {
         return TextGroup::className();
     }

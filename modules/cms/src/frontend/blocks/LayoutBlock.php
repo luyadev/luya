@@ -76,7 +76,7 @@ class LayoutBlock extends TwigBlock
         return '';
     }
     
-    public function getBlockGroup()
+    public function blockGroup()
     {
         return LayoutGroup::className();
     }

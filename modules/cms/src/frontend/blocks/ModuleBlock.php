@@ -83,7 +83,7 @@ class ModuleBlock extends TwigBlock
         return '{{extras.moduleContent}}';
     }
     
-    public function getBlockGroup()
+    public function blockGroup()
     {
         return DevelopmentGroup::className();
     }

@@ -42,7 +42,7 @@ class <?= $className; ?> extends PhpBlock
     public $cacheExpiration = 3600;
 
 <?php endif; ?>
-    public function getBlockGroup()
+    public function blockGroup()
     {
         return ProjectGroup::class;
     }

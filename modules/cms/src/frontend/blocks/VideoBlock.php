@@ -27,7 +27,7 @@ class VideoBlock extends TwigBlock
         return 'videocam';
     }
     
-    public function getBlockGroup()
+    public function blockGroup()
     {
         return MediaGroup::class;
     }

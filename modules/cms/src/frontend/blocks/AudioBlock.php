@@ -20,7 +20,7 @@ class AudioBlock extends TwigBlock
         return Module::t('block_audio_name');
     }
 
-    public function getBlockGroup()
+    public function blockGroup()
     {
         return MediaGroup::class;
     }
