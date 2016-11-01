@@ -176,5 +176,12 @@ return [
     'right_panel_support_tags_title' => 'Tags',
     'right_panel_support_support_title' => 'Support',
     'right_panel_support_support_text' => 'If you have any questions, please contact your webmaster or consult <a target="_blank" href="https://luya.io">luya.io</a>.',
-    'layout_filemanager_detail_replace_file' => 'Replace File',
+
+// rc2
+
+	'ngrest_crud_group_prompt' => 'Group by field',
+	'ngrest_crud_filter_prompt' => 'Select Filter',
+	'ngrest_crud_ajax_search_length' => 'The search query must be at least 3 chars.',
+	'menu_system_logger' => 'Logging',
+	'layout_filemanager_detail_replace_file' => 'Replace file',
 ];
