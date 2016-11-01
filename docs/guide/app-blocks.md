@@ -159,17 +159,15 @@ If there is a property defined you will get the property object otherwhise retur
 
 ## Using assets in Blocks
 
-Blocks can have [Assets (CSS&JS)](app-assets.md). To register an asset use `public $assets = []` and define all assets you want to auto register. Assets will only regsitered in frontend context and are **not available** in the administration area.
+Sometimes your block should also register some css or js files, therfore you can access the global {{\luya\web\View}} Object inside of your PHP view template. Its like registering other assets, by the difference that you are accessing the global scope view instead of the view on `$this`. An example of how to integrate an asset file:
+
+Assuming the blow code is the PHP View of your Block:
 
 ```php
-class TestBlock extends \cmsadmin\base\Block
-{
-    public $assets = [
-        'apps\assets\TestBlockAsset',
-        'apps\assets\TestBlockZweitesAsset',
-    ];
-}
+MyBlockAsset::register($this->appView);
 ```
+
+Now your [[app-assets.md]] is registered in the appliation view object.
 
 ## Ajax Requests in Block
 

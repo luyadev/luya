@@ -2,6 +2,7 @@
 
 namespace luya\cms\base;
 
+use Yii;
 use luya\web\View;
 
 /**
@@ -15,6 +16,7 @@ use luya\web\View;
  * @property boolean $isNextEqual Whether the next element (the element after the current element) is the same or not.
  * @property boolean $isLastEqual Whether the previous element (the element before the current element) is the same or not.
  * @property integer $equalIndex Get the index number within the equal elements.
+ * @property \luya\web\View $appView The application view object in order to register data to the layout view.
  *
  * @since 1.0.0-beta8
  * @author Basil Suter <basil@nadar.io>
@@ -166,5 +168,25 @@ class PhpBlockView extends View
     public function extraValue($key, $defaultValue = null)
     {
         return $this->context->getExtraValue($key, $defaultValue);
+    }
+    
+    /**
+     * The Application View Object to Register Data.
+     * 
+     * As the PhpBlockView is an own instance, registered assets files would not be available. In order to assign
+     * meta keywords, add essets the application view object is required, therfore this getter method will
+     * give you access.
+     * 
+     * Example of registering an asset from the block view:
+     * 
+     * ```php
+     * MyBlockAsset::register($this->appView);
+     * ```
+     * 
+     * @return \luya\web\View The global application View Object which is also the same as the layout or cmslayout.
+     */
+    public function getAppView()
+    {
+        return Yii::$app->getView();
     }
 }

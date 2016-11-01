@@ -202,14 +202,6 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                 
                 // see if its a valid block object
                 if ($blockObject) {
-                    if (count($blockObject->getAssets()) > 0) {
-                        $controllerObject = $this->getOption('cmsControllerObject');
-                        if ($controllerObject) {
-                            foreach ($blockObject->getAssets() as $assetClassName) {
-                                $controllerObject->registerAsset($assetClassName);
-                            }
-                        }
-                    }
                     // insert var and cfg values from database
                     $blockObject->setVarValues($this->jsonToArray($placeholder['json_config_values']));
                     $blockObject->setCfgValues($this->jsonToArray($placeholder['json_config_cfg_values']));

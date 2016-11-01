@@ -75,18 +75,6 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      * added automatically.
      */
     public $module = 'app';
-
-    /**
-     * @var array Define a list of assets to be insert in the frontend context. The assets will be ignored in
-     * admin context. Example usage of assets property:
-     *
-     * ```php
-     * public $assets = [
-     *     'app\assets\MyAjaxBlockAsset',
-     * ];
-     * ```
-     */
-    public $assets = [];
     
     /**
      * Whether cache is enabled for this block or not.
@@ -112,17 +100,6 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     public function getIsContainer()
     {
         return $this->isContainer;
-    }
-    
-    /**
-     * Return an array of assets
-     *
-     * @todo remove in rc1
-     * @return array
-     */
-    public function getAssets()
-    {
-        return $this->assets;
     }
     
     /**

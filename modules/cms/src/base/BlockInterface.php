@@ -135,12 +135,4 @@ interface BlockInterface
      * Whether is an container element or not.
      */
     public function getIsContainer();
-    
-    /**
-     * Return an array of assets
-     * 
-     * @todo remove in rc1
-     * @return array
-     */
-    public function getAssets();
 }

@@ -201,15 +201,4 @@ class ConcreptImplementationBlock implements BlockInterface
     {
         return false;
     }
-    
-    /**
-     * Return an array of assets
-     *
-     * @todo remove in rc1
-     * @return array
-     */
-    public function getAssets()
-    {
-        return [];
-    }
 }
