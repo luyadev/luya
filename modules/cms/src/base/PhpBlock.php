@@ -48,12 +48,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
      */
     public function frontend()
     {
-        return $this->view->render($this->getViewFileName('php'), [
-            'vars' => $this->getVarValues(),
-            'cfgs' => $this->getCfgValues(),
-            'placeholders' => $this->getPlaceholderValues(),
-            'extras' => $this->extraVarsOutput(),
-        ], $this);
+        return $this->view->render($this->getViewFileName('php'), [], $this);
     }
     
     /**
