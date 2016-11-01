@@ -8,7 +8,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Changed
 
-- [#1058](https://github.com/luyadev/luya/issues/1058) [BC BREAK] Removed all massive assigned vars, cfgs, extras and placeholders from the view.
+- [#1058](https://github.com/luyadev/luya/issues/1058) [BC BREAK] Removed all massive assigned vars, cfgs, extras and placeholders from the PHP Block view.
 - [#1069](https://github.com/luyadev/luya/issues/1069) [BC BREAK] Removed CMS Block assets propertie in order to reduce RAM usage and follow Yii guidelines in order to register assets.
 - [#1068](https://github.com/luyadev/luya/issues/1068) [BC BREAK] Cms Block zaa() helper methods moved to \luya\cms\helpers\BlockHelper and marked methods as deprecated.
 - [#1067](https://github.com/luyadev/luya/issues/1067) [BC BREAK] Admin Module Menu: itemApi() routes are now separeted by slashes instead of dashes. As this supports native Yii handling. 

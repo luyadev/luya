@@ -6,6 +6,10 @@ This document will help you upgrading from a LUYA Version into another.
 1.0.0-RC2 (in progress)
 -----------------------
 
+The issues below can lead into problems when upgrading to 1.0.0-RC2. More detailed informations about the breaking changes can be found in the issue detail text!
+
++ [#1058](https://github.com/luyadev/luya/issues/1058) [BC BREAK] Removed all massive assigned vars, cfgs, extras and placeholders from the PHP Block view.
++ [#1069](https://github.com/luyadev/luya/issues/1069) [BC BREAK] Removed CMS Block assets propertie in order to reduce RAM usage and follow Yii guidelines in order to register assets.
 + [#1068](https://github.com/luyadev/luya/issues/1068) Cms Block zaa() helper methods moved to \luya\cms\helpers\BlockHelper and marked methods as deprecated.
 + [#1045](https://github.com/luyadev/luya/issues/1045) Admin modules `getMenu()` method must return an `luya\admin\components\AdminMenuBuilder` object instead of an array. A deprecated message is triggered when using the old menu builder functions.
 + [#1067](https://github.com/luyadev/luya/issues/1067) The itemApi routes newls uses `/` (slashes) as delmiter instead of `-`: Old: `itemApi('label', 'admin-user-index')` new `itemApi('label', 'admin/user/index')` in your Module.php
