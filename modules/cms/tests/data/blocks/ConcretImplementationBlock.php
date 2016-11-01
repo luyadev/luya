@@ -132,7 +132,7 @@ class ConcretImplementationBlock implements BlockInterface
      *
      * @return array
      */
-    public function extraVarsExport()
+    public function getExtraVarsExport()
     {
         return ['foo' => 'bar'];
     }

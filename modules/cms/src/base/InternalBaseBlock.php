@@ -344,7 +344,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     private $_extraVars = [];
     
     // access from outside
-    public function extraVarsExport()
+    public function getExtraVarsExport()
     {
         $this->_extraVars = ArrayHelper::merge($this->_extraVars, $this->extraVars());
         return $this->_extraVars;

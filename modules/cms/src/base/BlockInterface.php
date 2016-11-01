@@ -89,7 +89,7 @@ interface BlockInterface
      * 
      * @return array
      */
-    public function extraVarsExport();
+    public function getExtraVarsExport();
    
     /**
      * Returns all config vars element of key value pairing to pass to the API and frontend.
