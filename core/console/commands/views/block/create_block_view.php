@@ -1,9 +1,6 @@
 <?php
 echo "<?php\n";
 ?>
-
-use Yii;
-
 /**
  * View file for block: <?= $blockClassName; ?> 
  *

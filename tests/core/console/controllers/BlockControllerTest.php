@@ -249,9 +249,6 @@ EOT;
         
         $view = <<<'EOT'
 <?php
-
-use Yii;
-
 /**
  * View file for block: MySuperBlock 
  *
