@@ -89,28 +89,28 @@ interface BlockInterface
      * 
      * @return array
      */
-    public function getExtraVarsExport();
+    public function getExtraVarValues();
    
     /**
-     * Returns all config vars element of key value pairing to pass to the API and frontend.
+     * Returns all config vars element of key value pairing to pass to the Admin ANGULAR API
      * 
      * @return array
      */
-    public function getVarsExport();
+    public function getConfigVarsExport();
    
     /**
-     * Returns all config cfgs element of key value pairing to pass to the API and frontend.
+     * Returns all config cfgs element of key value pairing to pass to the Admin ANGULAR API
      *
      * @return array
      */
-    public function getCfgsExport();
+    public function getConfigCfgsExport();
     
     /**
-     * Returns all config placeholders element of key value pairing to pass to the API and frontend.
+     * Returns all config placeholders element of key value pairing to pass to the Admin ANGULAR API
      * 
      * @return array
      */
-    public function getPlaceholdersExport();
+    public function getConfigPlaceholdersExport();
 
     /**
      * Whether cache is enabled for this block or not.

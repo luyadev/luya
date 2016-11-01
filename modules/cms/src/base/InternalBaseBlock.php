@@ -344,7 +344,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     private $_extraVars = [];
     
     // access from outside
-    public function getExtraVarsExport()
+    public function getExtraVarValues()
     {
         $this->_extraVars = ArrayHelper::merge($this->_extraVars, $this->extraVars());
         return $this->_extraVars;
@@ -370,7 +370,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     /**
      * @return array
      */
-    public function getVarsExport()
+    public function getConfigVarsExport()
     {
         $config = $this->config();
         
@@ -391,7 +391,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     /**
      * @return array
      */
-    public function getPlaceholdersExport()
+    public function getConfigPlaceholdersExport()
     {
         return (array_key_exists('placeholders', $this->config())) ? $this->config()['placeholders'] : [];
     }
@@ -401,7 +401,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     /**
      * @return array
      */
-    public function getCfgsExport()
+    public function getConfigCfgsExport()
     {
         $config = $this->config();
         

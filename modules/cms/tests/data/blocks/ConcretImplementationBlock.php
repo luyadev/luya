@@ -132,7 +132,7 @@ class ConcretImplementationBlock implements BlockInterface
      *
      * @return array
      */
-    public function getExtraVarsExport()
+    public function getExtraVarValues()
     {
         return ['foo' => 'bar'];
     }
@@ -142,7 +142,7 @@ class ConcretImplementationBlock implements BlockInterface
      *
      * @return array
      */
-    public function getVarsExport()
+    public function getConfigVarsExport()
     {
         return [];
     }
@@ -152,7 +152,7 @@ class ConcretImplementationBlock implements BlockInterface
      *
      * @return array
      */
-    public function getCfgsExport()
+    public function getConfigCfgsExport()
     {
         return [];
     }
@@ -162,7 +162,7 @@ class ConcretImplementationBlock implements BlockInterface
      *
      * @return array
      */
-    public function getPlaceholdersExport()
+    public function getConfigPlaceholdersExport()
     {
         return [];
     }

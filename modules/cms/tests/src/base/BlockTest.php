@@ -57,7 +57,7 @@ class BlockTest extends CmsFrontendTestCase
         $this->assertEquals('TestBlock.twig', $block->getViewFileName('twig'));
         $this->assertEquals('twig-frontend', $block->renderFrontend());
 
-        foreach ($block->getVarsExport() as $var) {
+        foreach ($block->getConfigVarsExport() as $var) {
             $this->assertArrayHasKey('id', $var);
             $this->assertArrayHasKey('var', $var);
             $this->assertArrayHasKey('label', $var);
@@ -67,7 +67,7 @@ class BlockTest extends CmsFrontendTestCase
             $this->assertArrayHasKey('initvalue', $var);
         }
 
-        foreach ($block->getCfgsExport() as $var) {
+        foreach ($block->getConfigCfgsExport() as $var) {
             $this->assertArrayHasKey('id', $var);
             $this->assertArrayHasKey('var', $var);
             $this->assertArrayHasKey('label', $var);
@@ -99,7 +99,7 @@ class BlockTest extends CmsFrontendTestCase
     {
         $block = new FailureBlock();
         // will throw Exception:  Required attributes in config var element is missing. var, label and type are required.
-        $block->getVarsExport();
+        $block->getConfigVarsExport();
     }
 
     public function testGetterSetter()

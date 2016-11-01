@@ -131,7 +131,7 @@ class ConcreptImplementationBlock implements BlockInterface
      *
      * @return array
      */
-    public function getExtraVarsExport()
+    public function getExtraVarValues()
     {
         return ['foo' => 'bar'];
     }
@@ -141,7 +141,7 @@ class ConcreptImplementationBlock implements BlockInterface
      *
      * @return array
      */
-    public function getVarsExport()
+    public function getConfigVarsExport()
     {
         return [];
     }
@@ -151,7 +151,7 @@ class ConcreptImplementationBlock implements BlockInterface
      *
      * @return array
      */
-    public function getCfgsExport()
+    public function getConfigCfgsExport()
     {
         return [];
     }
@@ -161,7 +161,7 @@ class ConcreptImplementationBlock implements BlockInterface
      *
      * @return array
      */
-    public function getPlaceholdersExport()
+    public function getConfigPlaceholdersExport()
     {
         return [];
     }

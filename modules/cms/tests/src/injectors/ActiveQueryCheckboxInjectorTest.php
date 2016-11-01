@@ -28,7 +28,7 @@ class ActiveQueryCheckboxInjectorTest extends CmsFrontendTestCase
         $injector = new ActiveQueryCheckboxInjector(['query' => NavItem::find(), 'varName' => 'test', 'varLabel' => 'test label', 'context' => $block]);
         $injector->setup();
         
-        $vars = $block->getVarsExport();
+        $vars = $block->getConfigVarsExport();
         
         $v = $vars[0];
         
@@ -50,7 +50,7 @@ class ActiveQueryCheckboxInjectorTest extends CmsFrontendTestCase
         $injector = new ActiveQueryCheckboxInjector(['query' => NavItem::find()->select(['title']), 'varName' => 'test', 'varLabel' => 'test label', 'context' => $block]);
         $injector->setup();
     
-        $vars = $block->getVarsExport();
+        $vars = $block->getConfigVarsExport();
     
         $v = $vars[0];
     

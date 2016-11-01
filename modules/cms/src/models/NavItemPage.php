@@ -227,7 +227,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
                     
                     // render sub placeholders and set into object
                     $insertedHolders = [];
-                    foreach ($blockObject->getPlaceholdersExport() as $item) {
+                    foreach ($blockObject->getConfigPlaceholdersExport() as $item) {
                         $insertedHolders[$item['var']] = $this->renderPlaceholderRecursive($navItemPageId, $item['var'], $placeholder['id']);
                     }
                     $blockObject->setPlaceholderValues($insertedHolders);
@@ -340,7 +340,7 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     
         $placeholders = [];
     
-        foreach ($blockObject->getPlaceholdersExport() as $pk => $pv) {
+        foreach ($blockObject->getConfigPlaceholdersExport() as $pk => $pv) {
             $pv['nav_item_page_id'] = $blockItem['nav_item_page_id'];
             $pv['prev_id'] = $blockItem['id'];
             $placeholderVar = $pv['var'];
@@ -369,9 +369,9 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
             'icon' => $blockObject->icon(),
             'full_name' => ($blockObject->icon() === null) ? $blockObject->name() : '<i class="material-icons">'.$blockObject->icon().'</i> <span>'.$blockObject->name().'</span>',
             'twig_admin' => $blockObject->renderAdmin(),
-            'vars' => $blockObject->getVarsExport(),
-            'cfgs' => $blockObject->getCfgsExport(),
-            'extras' => $blockObject->getExtraVarsExport(),
+            'vars' => $blockObject->getConfigVarsExport(),
+            'cfgs' => $blockObject->getConfigCfgsExport(),
+            'extras' => $blockObject->getExtraVarValues(),
             'values' => $blockItem['json_config_values'],
             'field_help' => $blockObject->getFieldHelp(),
             'cfgvalues' => $blockItem['json_config_cfg_values'], // add: t1_json_config_cfg_values
