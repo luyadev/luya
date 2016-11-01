@@ -66,7 +66,7 @@ class Cat extends \luya\admin\ngrest\base\NgRestModel
         return 'api-gallery-cat';
     }
 
-    public function ngrestAttributeTypes()
+    public function ngRestAttributeTypes()
     {
         return [
             'title' => 'text',

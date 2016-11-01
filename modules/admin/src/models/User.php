@@ -69,7 +69,7 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         return 'api-admin-user';
     }
     
-    public function ngrestAttributeTypes()
+    public function ngRestAttributeTypes()
     {
         return [
             'title' => ['selectArray', 'data' => static::getTitles(), 'initValue' => 0],
@@ -80,7 +80,7 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         ];
     }
     
-    public function ngrestExtraAttributeTypes()
+    public function ngRestExtraAttributeTypes()
     {
         return [
             'lastloginTimestamp' => 'datetime',

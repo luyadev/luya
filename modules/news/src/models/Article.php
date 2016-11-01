@@ -49,7 +49,7 @@ class Article extends \luya\admin\ngrest\base\NgRestModel
         ];
     }
     
-    public function ngrestAttributeTypes()
+    public function ngRestAttributeTypes()
     {
         return [
             'title' => 'text',

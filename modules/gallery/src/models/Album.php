@@ -88,7 +88,7 @@ class Album extends \luya\admin\ngrest\base\NgRestModel
         return 'api-gallery-album';
     }
 
-    public function ngrestAttributeTypes()
+    public function ngRestAttributeTypes()
     {
         return [
             'title' => 'text',

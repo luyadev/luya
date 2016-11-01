@@ -69,7 +69,7 @@ class Group extends NgRestModel
         ];
     }
     
-    public function ngrestAttributeTypes()
+    public function ngRestAttributeTypes()
     {
         return [
             'name' => 'text',
@@ -77,7 +77,7 @@ class Group extends NgRestModel
         ];
     }
     
-    public function ngrestExtraAttributeTypes()
+    public function ngRestExtraAttributeTypes()
     {
         return [
             'users' => [

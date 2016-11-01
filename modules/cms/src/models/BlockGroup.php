@@ -34,7 +34,7 @@ class BlockGroup extends NgRestModel
         ];
     }
     
-    public function ngrestAttributeTypes()
+    public function ngRestAttributeTypes()
     {
         return [
             'name' => 'text',

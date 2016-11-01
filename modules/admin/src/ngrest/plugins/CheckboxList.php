@@ -13,7 +13,7 @@ use luya\helpers\StringHelper;
  * Example usage:
  *
  * ```
- * public function ngrestAttributeTypes()
+ * public function ngRestAttributeTypes()
  * {
  * 		'genres' => ['checkboxList', 'data' => [1 => 'Male', 2 => 'Female']],
  * }

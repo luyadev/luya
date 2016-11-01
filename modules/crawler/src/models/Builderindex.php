@@ -53,7 +53,7 @@ class Builderindex extends \luya\admin\ngrest\base\NgRestModel
         return 'api-crawler-builderindex';
     }
     
-    public function ngrestAttributeTypes()
+    public function ngRestAttributeTypes()
     {
         return [
             'url' => 'text',

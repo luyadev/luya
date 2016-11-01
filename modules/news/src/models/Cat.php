@@ -50,7 +50,7 @@ class Cat extends \luya\admin\ngrest\base\NgRestModel
         return ['title' => Module::t('cat_title')];
     }
 
-    public function ngrestAttributeTypes()
+    public function ngRestAttributeTypes()
     {
         return [
             'title' => 'text',

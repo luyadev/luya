@@ -104,7 +104,7 @@ class Lang extends NgRestModel
         return 'api-admin-lang';
     }
 
-    public function ngrestAttributeTypes()
+    public function ngRestAttributeTypes()
     {
         return [
             'name' => 'text',

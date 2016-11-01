@@ -163,7 +163,7 @@ class Index extends \luya\admin\ngrest\base\NgRestModel
         return 'api-crawler-index';
     }
 
-    public function ngrestAttributeTypes()
+    public function ngRestAttributeTypes()
     {
         return [
             'url' => 'text',

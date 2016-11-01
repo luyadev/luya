@@ -24,10 +24,10 @@ use luya\admin\ngrest\base\Plugin;
  *
  * ```
  *
- * configure the extra field with `ngrestExtraAttributeTypes`:
+ * configure the extra field with `ngRestExtraAttributeTypes`:
  *
  * ```php
- * public function ngrestExtraAttributeTypes()
+ * public function ngRestExtraAttributeTypes()
  * {
  *      'groups' => [
  *          'checkboxRelation',

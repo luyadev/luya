@@ -49,7 +49,7 @@ class Logger extends NgRestModel
         return 'api-admin-logger';
     }
     
-    public function ngrestAttributeTypes()
+    public function ngRestAttributeTypes()
     {
         return [
             'time' => 'datetime',
@@ -59,7 +59,7 @@ class Logger extends NgRestModel
         ];
     }
     
-    public function ngrestExtraAttributeTypes()
+    public function ngRestExtraAttributeTypes()
     {
         return [
             'typeDescription' => 'html',

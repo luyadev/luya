@@ -165,7 +165,7 @@ class TestModel extends NgRestModel
     /**
      * @return array An array define the field types of each field
      */
-    public function ngrestAttributeTypes()
+    public function ngRestAttributeTypes()
     {
         return [
             'firstname' => 'text',
@@ -320,7 +320,7 @@ class TestModel extends NgRestModel
     /**
      * @return array An array define the field types of each field
      */
-    public function ngrestAttributeTypes()
+    public function ngRestAttributeTypes()
     {
         return [
             'name' => 'text',

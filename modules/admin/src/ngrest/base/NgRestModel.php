@@ -337,7 +337,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      * Define the field types for ngrest, to use `ngRestConfigDefine()`. The definition can contain properties, but does not have to.
      *
      * ```php
-     * ngrestAttributeTypes()
+     * ngRestAttributeTypes()
      * {
      *     return [
      *         'firstname' => 'text',
@@ -352,20 +352,20 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      * ```
      *
      * @return array
-     * @since 1.0.0-beta4
+     * @since 1.0.0-RC1
      */
-    public function ngrestAttributeTypes()
+    public function ngRestAttributeTypes()
     {
         return [];
     }
 
     /**
-     * Same as ngrestAttributeTypes() but used `extraField` instead of `field`
+     * Same as ngRestAttributeTypes() but used for extraField instead of field.
      *
      * @return array
-     * @since 1.0.0-beta6
+     * @since 1.0.0-RC2
      */
-    public function ngrestExtraAttributeTypes()
+    public function ngRestExtraAttributeTypes()
     {
         return [];
     }
@@ -399,14 +399,14 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      *
      * @param \luya\admin\ngrest\ConfigBuilder $config The config which the defintion should be append
      * @param string|array $assignedType This can be a string with a type or an array with multiple types
-     * @param array $fields An array with fields assign to types type based on the an `ngrestAttributeTypes` defintion.
+     * @param array $fields An array with fields assign to types type based on the an `ngRestAttributeTypes` defintion.
      * @throws \yii\base\InvalidConfigException
      * @since 1.0.0-beta4
      */
     public function ngRestConfigDefine(ConfigBuilder $config, $assignedType, array $fields)
     {
-        $types = $this->ngrestAttributeTypes();
-        $extraTypes = $this->ngrestExtraAttributeTypes();
+        $types = $this->ngRestAttributeTypes();
+        $extraTypes = $this->ngRestExtraAttributeTypes();
         
         $scenarios = $this->scenarios();
         
@@ -426,7 +426,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
             
             foreach ($fields as $field) {
                 if (!isset($types[$field]) && !isset($extraTypes[$field])) {
-                    throw new InvalidConfigException("The ngrest attribue '$field' does not exists in ngrestAttributeTypes() nor in ngrestExtraAttributeTypes() method.");
+                    throw new InvalidConfigException("The ngrest attribue '$field' does not exists in ngRestAttributeTypes() nor in ngRestExtraAttributeTypes() method.");
                 }
                 
                 if ($scenario && !in_array($field, $scenarioFields)) {

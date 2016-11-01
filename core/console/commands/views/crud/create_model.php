@@ -82,7 +82,7 @@ class <?= $className; ?> extends NgRestModel
     /**
      * @return array An array define the field types of each field
      */
-    public function ngrestAttributeTypes()
+    public function ngRestAttributeTypes()
     {
         return [
         <?php foreach ($ngrestFieldConfig as $name => $type): ?>
