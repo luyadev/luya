@@ -116,7 +116,7 @@ class TagParser extends Object
     private function instantiatTag($tag)
     {
         if (!$this->hasTag($tag)) {
-            throw new Exception("Wowo tag not found!");
+            throw new Exception("Unable to find requested TagParser tag '{$tag}'.");
         }
         
         if (!is_object($this->tags[$tag])) {
