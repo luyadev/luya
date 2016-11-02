@@ -20,4 +20,9 @@ class PhpTestBlock extends PhpBlock
     {
         return 'admin';
     }
+    
+    public function extraVars()
+    {
+    	return ['foo' => 'bar'];
+    }
 }
