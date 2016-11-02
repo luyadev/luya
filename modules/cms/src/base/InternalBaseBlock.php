@@ -350,8 +350,14 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
         return $this->_extraVars;
     }
     
+    private $_assignExtraVars = false;
+    
     public function getExtraValue($key, $default = false)
     {
+    	if (!$this->_assignExtraVars) {
+    		$this->getExtraVarValues();
+    		$this->_assignExtraVars = true;
+    	}
         return (isset($this->_extraVars[$key])) ? $this->_extraVars[$key] : $default;
     }
     
