@@ -109,8 +109,9 @@ Admin Design compile
 
 To compile the styles you have to install the following tools and plugins:
 
-* [Compass](http://compass-style.org/install/) (gem install compass)
-* [Autoprefixer-rails](autoprefixer-rails) (gem install autoprefixer-rails)
+(If ruby is not installed, run `sudo apt-get install ruby` on linux systems)
+* [Compass](http://compass-style.org/install/) (gem install compass) (Linux: `sudo apt-get install ruby-compass`)
+* [Autoprefixer-rails](autoprefixer-rails) (gem install autoprefixer-rails) (Linux: `sudo apt-get install ruby-autoprefixer-rails`)
 
 > If you have not enough rights to run the command use *sudo* to run the commands, or change the permissions in the install directory of ruby.
 
