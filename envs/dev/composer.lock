@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8f1d433ea4e47346de0119f68f36304a",
-    "content-hash": "2cf5f48570cb2df54ae6157c2e7e0134",
+    "hash": "e388ca0c136e2e2b5a14668d3d495545",
+    "content-hash": "7b0cf0c713f7dcad32899ab8d427c9f5",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -799,57 +799,6 @@
             "time": "2014-11-17 16:24:50"
         },
         {
-            "name": "nadar/yii2-imagine",
-            "version": "2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nadar/yii2-imagine.git",
-                "reference": "e71458b87153c99471b2a07c749a27d760e47e16"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nadar/yii2-imagine/zipball/e71458b87153c99471b2a07c749a27d760e47e16",
-                "reference": "e71458b87153c99471b2a07c749a27d760e47e16",
-                "shasum": ""
-            },
-            "require": {
-                "imagine/imagine": "~0.6.0",
-                "yiisoft/yii2": "~2.0.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~5.0"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "yii\\imagine\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Antonio Ramirez",
-                    "email": "amigo.cobos@gmail.com"
-                }
-            ],
-            "description": "The Imagine integration for the Yii framework",
-            "keywords": [
-                "helper",
-                "image",
-                "imagine",
-                "yii2"
-            ],
-            "time": "2016-09-13 07:07:21"
-        },
-        {
             "name": "paypal/rest-api-sdk-php",
             "version": "v1.6.4",
             "source": {
@@ -1047,7 +996,7 @@
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v3.1.5",
+            "version": "v3.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
@@ -1104,7 +1053,7 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v3.1.5",
+            "version": "v3.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
@@ -1157,16 +1106,16 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v3.1.5",
+            "version": "v3.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "bb7395e8b1db3654de82b9f35d019958276de4d7"
+                "reference": "59eee3c76eb89f21857798620ebdad7a05ad14f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/bb7395e8b1db3654de82b9f35d019958276de4d7",
-                "reference": "bb7395e8b1db3654de82b9f35d019958276de4d7",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/59eee3c76eb89f21857798620ebdad7a05ad14f4",
+                "reference": "59eee3c76eb89f21857798620ebdad7a05ad14f4",
                 "shasum": ""
             },
             "require": {
@@ -1209,7 +1158,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2016-08-05 08:37:39"
+            "time": "2016-10-18 15:46:07"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1272,16 +1221,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.26.1",
+            "version": "v1.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "a09d8ee17ac1cfea29ed60c83960ad685c6a898d"
+                "reference": "3c6c0033fd3b5679c6e1cb60f4f9766c2b424d97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/a09d8ee17ac1cfea29ed60c83960ad685c6a898d",
-                "reference": "a09d8ee17ac1cfea29ed60c83960ad685c6a898d",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3c6c0033fd3b5679c6e1cb60f4f9766c2b424d97",
+                "reference": "3c6c0033fd3b5679c6e1cb60f4f9766c2b424d97",
                 "shasum": ""
             },
             "require": {
@@ -1294,7 +1243,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.26-dev"
+                    "dev-master": "1.27-dev"
                 }
             },
             "autoload": {
@@ -1329,7 +1278,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-10-05 18:57:41"
+            "time": "2016-10-25 19:17:17"
         },
         {
             "name": "yiisoft/yii2",
@@ -1621,6 +1570,54 @@
                 "yii2"
             ],
             "time": "2016-03-18 14:09:46"
+        },
+        {
+            "name": "yiisoft/yii2-imagine",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-imagine.git",
+                "reference": "59dcd0b43c2b0e5495c7e5c0320e2cbc1cd57411"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-imagine/zipball/59dcd0b43c2b0e5495c7e5c0320e2cbc1cd57411",
+                "reference": "59dcd0b43c2b0e5495c7e5c0320e2cbc1cd57411",
+                "shasum": ""
+            },
+            "require": {
+                "imagine/imagine": "~0.6.0",
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\imagine\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Antonio Ramirez",
+                    "email": "amigo.cobos@gmail.com"
+                }
+            ],
+            "description": "The Imagine integration for the Yii framework",
+            "keywords": [
+                "helper",
+                "image",
+                "imagine",
+                "yii2"
+            ],
+            "time": "2016-11-03 19:28:39"
         }
     ],
     "packages-dev": [],

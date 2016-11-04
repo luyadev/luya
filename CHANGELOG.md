@@ -46,6 +46,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1013](https://github.com/luyadev/luya/issues/1013) Delete a cms page displays blank page and reloads menu, fixed bug where page was still visible.
 - [#1061](https://github.com/luyadev/luya/issues/1061) CMS Page properties with overriden default implementation returns wrong administration api value. 
 - [#1062](https://github.com/luyadev/luya/issues/1062) CMS Layout files will ignore prefixed files with . and _ and folders inside the cmslayout folder.
+- [#987](https://github.com/luyadev/luya/issues/987) Fixed issue with image auto rotate and moved to imagine extension version ~2.1.0
 
 1.0.0-RC1 (04.10.2016)
 -----------------------
