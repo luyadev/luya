@@ -548,20 +548,32 @@ $this->beginPage()
     <div class="luya-container__right-panel" ng-if="sidePanelUserMenu || sidePanelHelp">
         <div ng-if="sidePanelUserMenu">
         	<p><a href="<?php echo Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="btn red"><?php echo Admin::t('layout_btn_logout'); ?></a></p>
-            <h1><?= $user->firstname; ?> <?= $user->lastname; ?></h1>
-            <p><?= $user->email; ?></p>
+            
             <form ng-submit="updateUserProfile(profile)" method="post" ng-init="profile.lang='<?=Yii::$app->luyaLanguage;?>'">
-	            <div class="input input--select input--vertical">
-	    			<label class="input__label" for="[input-id]">Interface Language</label>
-		            <select class="input__field-wrapper" ng-model="profile.lang">
-		            	<option value="de" <?php if (Yii::$app->luyaLanguage == 'de'): ?>selected<?php endif; ?>>Deutsch</option>
-		            	<option value="en" <?php if (Yii::$app->luyaLanguage == 'en'): ?>selected<?php endif; ?>>English</option>
-		            	<option value="ru" <?php if (Yii::$app->luyaLanguage == 'ru'): ?>selected<?php endif; ?>>Pусский</option>
-		            	<option value="es" <?php if (Yii::$app->luyaLanguage == 'es'): ?>selected<?php endif; ?>>Español</option>
-		            	<option value="fr" <?php if (Yii::$app->luyaLanguage == 'fr'): ?>selected<?php endif; ?>>Français</option>
-		            </select>
-	            </div>
-	            <input type="submit" value="Submit" class="btn" />
+	           
+	           	<table class="bordered">
+	            	<tr>
+	            		<td><?= $user->firstname; ?> <?= $user->lastname; ?></td>
+	            	</tr>
+	            	<tr>
+	            		<td><?= $user->email; ?></td>
+	            	</tr>
+	            	<tr>
+	            		<td>
+		            		<div class="input input--select input--vertical">
+				    			<label class="input__label" for="layout-changer" style="margin-bottom:5px;"><?= Admin::t('layout_rightbar_languagelabel')?></label>
+					            <select id="layout-changer" class="input__field-wrapper" ng-model="profile.lang">
+					            	<option value="de" <?php if (Yii::$app->luyaLanguage == 'de'): ?>selected<?php endif; ?>>Deutsch</option>
+					            	<option value="en" <?php if (Yii::$app->luyaLanguage == 'en'): ?>selected<?php endif; ?>>English</option>
+					            	<option value="ru" <?php if (Yii::$app->luyaLanguage == 'ru'): ?>selected<?php endif; ?>>Pусский</option>
+					            	<!-- <option value="es" <?php if (Yii::$app->luyaLanguage == 'es'): ?>selected<?php endif; ?>>Español</option> -->
+					            	<option value="fr" <?php if (Yii::$app->luyaLanguage == 'fr'): ?>selected<?php endif; ?>>Français</option>
+					            </select>
+				            </div>
+	            		</td>
+	            	</tr>
+            	</table>
+	            <input style="margin-top:20px;" type="submit" value="<?= Admin::t('layout_rightbar_savebtn'); ?>" class="btn" />
             </form>
         </div>
         <div ng-if="sidePanelHelp">

@@ -184,4 +184,6 @@ return [
     'ngrest_crud_ajax_search_length' => 'Der Suchbegriff muss mindestens 3 Zeichen lang sein.',
     'menu_system_logger' => 'Logger',
     'layout_filemanager_detail_replace_file' => 'Datei ersetzen',
+	'layout_rightbar_languagelabel' => 'Oberflächen Sprache',
+	'layout_rightbar_savebtn' => 'Speichern'
 ];

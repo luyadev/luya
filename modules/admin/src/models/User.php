@@ -234,6 +234,11 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
 
         return true;
     }
+    
+    public function getTitleNamed()
+    {
+    	return self::getTitles()[$this->title];
+    }
 
     public static function getTitles()
     {
@@ -244,14 +249,12 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
     {
         $fields = parent::fields();
         unset($fields['password'], $fields['password_salt'], $fields['auth_token'], $fields['is_deleted']);
-
         return $fields;
     }
 
     public function getGroups()
     {
-        return $this->hasMany(Group::className(), ['id' => 'group_id'])
-        ->viaTable('admin_user_group', ['user_id' => 'id']);
+        return $this->hasMany(Group::className(), ['id' => 'group_id'])->viaTable('admin_user_group', ['user_id' => 'id']);
     }
 
     public function extraFields()

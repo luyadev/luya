@@ -184,4 +184,6 @@ return [
 	'ngrest_crud_ajax_search_length' => 'The search query must be at least 3 chars.',
 	'menu_system_logger' => 'Logging',
 	'layout_filemanager_detail_replace_file' => 'Replace file',
+	'layout_rightbar_languagelabel' => 'Interface Language',
+	'layout_rightbar_savebtn' => 'Save'
 ];
