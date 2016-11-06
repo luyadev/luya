@@ -101,7 +101,7 @@ class ImageBlock extends TwigBlock
                             <a class="text-teaser" href="{{ extras.link }}"{% if extras.linkIsExternal %} target="_blank"{% endif %}>
                         {% endif %}
                         
-                            <img class="img-responsive {{cfgs.cssClass}}" src="{{extras.image.source}}" {% if vars.caption is not empty %}alt="{{vars.caption}}" title="{{vars.caption}}"{% endif %}{% if cfgs.width %} width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} border="0" />
+                            <img class="img-responsive {{cfgs.cssClass}}" src="{{extras.image.source}}" {% if vars.caption is not empty %}alt="{{vars.caption}}" title="{{vars.caption}}"{% endif %}{% if cfgs.width %} width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} />
                             
                         {% if extras.link %}
                             </a>
