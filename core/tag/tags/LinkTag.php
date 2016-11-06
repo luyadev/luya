@@ -36,6 +36,6 @@ class LinkTag extends BaseTag
         $value = Url::ensureHttp($value);
         $label = empty($sub) ? $value : $sub;
         
-        return Html::a($label, $value, ['class' => $external ? 'link-external' : 'link-internal', 'label' => $label, 'target' => $external ? '_blank' : null]);
+        return Html::a($label, $value, ['class' => $external ? 'link-external' : 'link-internal', 'target' => $external ? '_blank' : null]);
     }
 }

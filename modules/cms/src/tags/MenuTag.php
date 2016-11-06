@@ -32,7 +32,7 @@ EOT;
         if ($menuItem) {
             $alias = (empty($sub)) ? $menuItem->title : $sub;
             
-            return Html::a($alias, $menuItem->link, ['label' => $alias]);
+            return Html::a($alias, $menuItem->link);
         }
         
         return false;
