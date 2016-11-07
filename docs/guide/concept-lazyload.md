@@ -4,16 +4,34 @@ In order to reduce server load and speed up page request LUYA is shipped with a 
 
 ## How to use
 
-Basic Description.
-
-### Image Tag
-
-IMG
+```php
+<?= LazyLoad::widget([
+    'src' =>  $this->publicHtml . '/path/to/image',
+    'width' => 'the-image-width-in-px',
+    'height' => 'the-image-height-in-px',
+    'extraClass' => 'custom-classes']); ?>
+```
 
 ### Working with Background Images
 
-BG-IMG
+```php
+<?= LazyLoad::widget([
+    'attributesOnly' => true,
+    'src' =>  $this->publicHtml . '/path/to/image',
+    'width' => 'the-image-width-in-px',
+    'height' => 'the-image-height-in-px',
+    'extraClass' => 'custom-classes']); ?>
+```
 
 ## Using LazyLoader with Storage Component
 
-Show an example how to provide the lazyload data from the storage componenet.
+Using the lazyloader with a storage component {{\luya\admin\image\Item}}:
+
+```
+$image = Yii::$app->storage->getImage(123);
+<?= LazyLoad::widget([
+    'src' => $image->source,
+    'width' => $image->resolutionWidth,
+    'height' => $image->resolutionHeight,
+]) ?>
+```
