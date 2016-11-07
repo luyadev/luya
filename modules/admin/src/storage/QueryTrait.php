@@ -66,26 +66,30 @@ trait QueryTrait
     /**
      * Return an array with all item values provided for this query method.
      *
-     * @return array
+     * @return array The array with all values for this query index by its key.
      */
     abstract public function getDataProvider();
     
     /**
-     * Return the item for the specificy key item. If not found, false must be returned.
-     * @param integer $id
+     * Return the a single item by its key. If not found, false must be returned.
+     * 
+     * @param integer $id The requested key identifier.
      * @return array|boolean Returns the item array or false if not found.
      */
     abstract public function getItemDataProvider($id);
     
     /**
-     *
+     * Create an item object which implements {{\luya\admin\storage\ItemTrait}}.
+     * 
      * @param array $itemArray
+     * @return \luya\admin\storage\ItemTrait The item object implementing the ItemTrait.
      */
     abstract public function createItem(array $itemArray);
     
     /**
-     *
-     * @param array $data
+     * Create the iterator object which extends from {{\luya\admin\storage\IteratorAbstract}}.
+     * @param array $data The data to pass to the Iterator.
+     * @return \luya\admin\storage\IteratorAbstract An iterator object extends from IteratorAbstract class.
      */
     abstract public function createIteratorObject(array $data);
     
