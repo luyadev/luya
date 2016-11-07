@@ -7,7 +7,7 @@ use luya\helpers\Url;
 use yii\web\BadRequestHttpException;
 
 /**
- * Extended LUYA UrlManager
+ * Extended LUYA UrlManager.
  *
  * UrlManger extends the Yii2 Url Manager by resolving composition informations while parseRequest and provides other helper methods.
  *
@@ -18,15 +18,27 @@ use yii\web\BadRequestHttpException;
  */
 class UrlManager extends \yii\web\UrlManager
 {
+	/**
+	 * @var boolean Pretty urls are enabled by default and can not be turned off in luya cms context.
+	 */
     public $enablePrettyUrl = true;
 
+    /**
+     * @var boolean As mod rewrite is required by a LUYA cms instance the script name must be turned off by default.
+     */
     public $showScriptName = false;
 
-    public $ruleConfig = ['class' => '\luya\web\UrlRule'];
+    /**
+     * @var array The default url rule configuration uses the {{\luya\web\UrlRule}} class.
+     */
+    public $ruleConfig = ['class' => 'luya\web\UrlRule'];
 
+    /**
+     * @var integer In order to build urls, the nav item id from cms module can be stored in the UrlManager as `$contextNavItemId`.
+     * 
+     * This context setter is called in {{\luya\cms\frontend\base::renderItem}} method and is used when calling {{\luya\web\UrlManager::createUrl}} method.
+     */
     public $contextNavItemId = null;
-
-    private $_contextNavItemId = false;
 
     private $_menu = null;
 
@@ -37,6 +49,7 @@ class UrlManager extends \yii\web\UrlManager
      *
      * {@inheritDoc}
      * @see \yii\web\UrlManager::parseRequest()
+     * @param \luya\web\Request $request The request component.
      */
     public function parseRequest($request)
     {
@@ -70,12 +83,13 @@ class UrlManager extends \yii\web\UrlManager
         // return new parsted request route
         return $parsedRequest;
     }
-
+    
     /**
      * Extend functionality of parent::addRules by the ability to add composition routes.
      *
-     * {@inheritDoc}
      * @see \yii\web\UrlManager::addRules()
+     * @param array $rules An array wil rules
+     * @param boolean $append Append to the end of the rules or not.
      */
     public function addRules($rules, $append = true)
     {
@@ -95,8 +109,10 @@ class UrlManager extends \yii\web\UrlManager
 
     /**
      * Get the menu component if its registered in the current applications.
+     * 
+     * The menu component is only registered when the cms module is registered.
      *
-     * @return boolean|\luya\cms\Menu
+     * @return boolean|\luya\cms\Menu The menu component object or false if not available.
      */
     public function getMenu()
     {
@@ -115,7 +131,7 @@ class UrlManager extends \yii\web\UrlManager
     /**
      * Get the composition component
      *
-     * @return \luya\web\Composition
+     * @return \luya\web\Composition Get the composition component to resolve multi lingual handling.
      */
     public function getComposition()
     {
@@ -130,7 +146,7 @@ class UrlManager extends \yii\web\UrlManager
      * Prepand the base url to an existing route
      *
      * @param string $route The route where the base url should be prepend to.
-     * @return string
+     * @return string The route with prepanded baseUrl.
      */
     public function prependBaseUrl($route)
     {
@@ -151,8 +167,34 @@ class UrlManager extends \yii\web\UrlManager
     /**
      * Extend createUrl method by verify its context implementation to add cms urls prepand to the requested createurl params.
      *
-     * {@inheritDoc}
+     * From the original create url function of Yii:
+     * 
+     * You may specify the route as a string, e.g., `site/index`. You may also use an array
+     * if you want to specify additional query parameters for the URL being created. The
+     * array format must be:
+     *
+     * ```php
+     * // generates: /index.php?r=site%2Findex&param1=value1&param2=value2
+     * ['site/index', 'param1' => 'value1', 'param2' => 'value2']
+     * ```
+     *
+     * If you want to create a URL with an anchor, you can use the array format with a `#` parameter.
+     * For example,
+     *
+     * ```php
+     * // generates: /index.php?r=site%2Findex&param1=value1#name
+     * ['site/index', 'param1' => 'value1', '#' => 'name']
+     * ```
+     *
+     * The URL created is a relative one. Use [[createAbsoluteUrl()]] to create an absolute URL.
+     *
+     * Note that unlike [[\yii\helpers\Url::toRoute()]], this method always treats the given route
+     * as an absolute route.
+     *
      * @see \yii\web\UrlManager::createUrl()
+     * @param string|array $params use a string to represent a route (e.g. `site/index`),
+     * or an array to represent a route with query parameters (e.g. `['site/index', 'param1' => 'value1']`).
+     * @return string the created URL.
      */
     public function createUrl($params)
     {
@@ -217,11 +259,11 @@ class UrlManager extends \yii\web\UrlManager
     }
     
     /**
-     * Create absolute urls
+     * Create absolute url from the given route params.
      *
-     * @param string|array $params
-     * @param boolean $scheme
-     * @return string
+     * @param string|array $params The see createUrl
+     * @param boolean $scheme Whether to use absolute scheme path or not.
+     * @return string The created url
      */
     public function internalCreateAbsoluteUrl($params, $scheme = null)
     {
@@ -255,6 +297,14 @@ class UrlManager extends \yii\web\UrlManager
         return false;
     }
     
+    /**
+     * 
+     * @param unknown $url
+     * @param unknown $navItemId
+     * @param Composition $composition
+     * @throws BadRequestHttpException
+     * @return unknown|mixed
+     */
     private function urlReplaceModule($url, $navItemId, Composition $composition)
     {
         $route = $composition->removeFrom($this->removeBaseUrl($url));

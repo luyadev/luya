@@ -18,7 +18,19 @@ use luya\admin\importers\PropertyImporter;
 use luya\admin\importers\StorageImporter;
 
 /**
- * Admin Module
+ * Admin Module.
+ * 
+ * The Admin Module provides options to configure. In order to add the Admin module to your config use:
+ * 
+ * ```php
+ * 'modules' => [
+ *     // ...
+ *     'admin' => [
+ *         'class' => 'luya\admin\Module',
+ *         'secureLogin' => true,
+ *     ]
+ * ]
+ * ```
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -32,17 +44,23 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     const EVENT_BEFORE_FILE_DOWNLOAD = 'EVENT_BEFORE_FILE_DOWNLOAD';
     
     /**
-     * @var bool Enables a two-way factor auth system before logging into the admin
+     * @var boolean Enables a two-way factor auth system before logging into the admin
      * panel. If the system is not able to send mails (No configuration or missconfiguration)
      * then you are not able to login anymore. You should test the mail system before enabling
      * secureLogin. To test your smtp connection you can use `./vendor/bin/luya health/mailer`
      */
     public $secureLogin = false;
 
+    /**
+     * @var array A configuration array with all tags shipped by default with the admin module.
+     */
     public $tags = [
         'file' => ['class' => 'luya\admin\tags\FileTag'],
     ];
     
+    /**
+     * @var array The available api endpoints within the admin module.
+     */
     public $apis = [
         'api-admin-logger' => 'luya\admin\apis\LoggerController',
         'api-admin-common' => 'luya\admin\apis\CommonController',
@@ -51,14 +69,17 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         'api-admin-menu' => 'luya\admin\apis\MenuController',
         'api-admin-timestamp' => 'luya\admin\apis\TimestampController',
         'api-admin-search' => 'luya\admin\apis\SearchController',
-        'api-admin-user' => 'luya\admin\apis\UserController', // protected by auth()
-        'api-admin-group' => 'luya\admin\apis\GroupController', // protected by auth()
-        'api-admin-lang' => 'luya\admin\apis\LangController', // protected by auth()
-        'api-admin-effect' => 'luya\admin\apis\EffectController', // protected by auth()
-        'api-admin-filter' => 'luya\admin\apis\FilterController', // protected by auth()
+        'api-admin-user' => 'luya\admin\apis\UserController', 
+        'api-admin-group' => 'luya\admin\apis\GroupController', 
+        'api-admin-lang' => 'luya\admin\apis\LangController', 
+        'api-admin-effect' => 'luya\admin\apis\EffectController', 
+        'api-admin-filter' => 'luya\admin\apis\FilterController', 
         'api-admin-tag' => 'luya\admin\apis\TagController',
     ];
 
+    /**
+     * @var array Url rules used by the administration application.
+     */
     public $urlRules = [
         ['class' => 'luya\admin\components\UrlRule'],
         ['pattern' => 'file/<id:\d+>/<hash:\w+>/<fileName:(.*?)+>', 'route' => 'admin/file/download', 'position' => UrlRule::POSITION_BEFORE_LUYA],
@@ -66,19 +87,31 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         ['pattern' => 'admin/login', 'route' => 'admin/login/index', 'position' => UrlRule::POSITION_BEFORE_LUYA],
     ];
 
+    /**
+     * @var array Administration asset bundles.
+     */
     public $assets = [
         'luya\admin\assets\Main',
         'luya\admin\assets\Flow',
     ];
 
+    /**
+     * @var array The translations keys which will be passed to the admin javascript translator to access from js scripts.
+     */
     public $registerJsTranslation = [
         'js_ngrest_rm_page', 'js_ngrest_rm_confirm', 'js_ngrest_error', 'js_ngrest_rm_update', 'js_ngrest_rm_success', 'js_tag_exists', 'js_tag_success', 'js_admin_reload', 'js_dir_till', 'js_dir_set_date', 'js_dir_table_add_row', 'js_dir_table_add_column', 'js_dir_image_description',
         'js_dir_no_selection', 'js_dir_image_upload_ok', 'js_dir_image_filter_error', 'js_dir_upload_wait', 'js_dir_manager_upload_image_ok', 'js_dir_manager_rm_file_confirm', 'js_dir_manager_rm_file_ok', 'js_zaa_server_proccess',
         'ngrest_select_no_selection',
     ];
     
+    /**
+     * @var array This property is used by the {{luya\web\Bootstrap::run}} method in order to set the collected menu items forom all admin modules and build the menu.
+     */
     public $moduleMenus = [];
     
+    /**
+     * @var array Registering translation files for the admin module.
+     */
     public $translations = [
         [
             'prefix' => 'admin*',
@@ -92,7 +125,9 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     private $_jsTranslations = [];
     
     /**
-     * @return array
+     * Getter method for the js translations array.
+     * 
+     * @return array An array with all translated messages to store in the and access from the admin js scripts.
      */
     public function getJsTranslations()
     {
@@ -100,7 +135,8 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     }
     
     /**
-     *
+     * Setter for js translations files.
+     * 
      * @param array $translations
      */
     public function setJsTranslations(array $translations)
@@ -112,6 +148,12 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         }
     }
     
+    /**
+     * Get the admin module interface menu.
+     * 
+     * @see \luya\admin\base\Module::getMenu()
+     * @return \luya\admin\components\AdminMenuBuilderInterface Get the menu builder object.
+     */
     public function getMenu()
     {
         return (new AdminMenuBuilder($this))
@@ -129,6 +171,11 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
                     ->itemApi('menu_images_item_filters', 'admin/filter/index', 'adjust', 'api-admin-filter');
     }
 
+    /**
+     * Registering applicat components on application bootstraping proccess.
+     * 
+     * @return array An array where the key is the application component name and value the configuration.
+     */
     public function registerComponents()
     {
         return [
@@ -150,6 +197,12 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         ];
     }
 
+    /**
+     * Setup the admin importer classes.
+     * 
+     * @param \uya\console\interfaces\ImportControllerInterface $import The import controller interface.
+     * @return array An array with all importer classes.
+     */
     public function import(ImportControllerInterface $import)
     {
         return [
@@ -160,6 +213,13 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         ];
     }
     
+    /**
+     * Admin Module translation helper.
+     * 
+     * @param string $message The message key to translation
+     * @param array $params Optional parameters to pass to the translation.
+     * @return string The translated message.
+     */
     public static function t($message, array $params = [])
     {
         return Yii::t('admin', $message, $params, Yii::$app->luyaLanguage);

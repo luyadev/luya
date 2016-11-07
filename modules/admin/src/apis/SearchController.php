@@ -3,7 +3,7 @@
 namespace luya\admin\apis;
 
 use Yii;
-use Exception;
+use luya\Exception;
 use luya\admin\models\SearchData;
 use luya\admin\base\RestController;
 use luya\admin\base\GenericSearchInterface;
@@ -15,6 +15,15 @@ use luya\admin\base\GenericSearchInterface;
  */
 class SearchController extends RestController
 {
+	/**
+	 * Administration Global search provider.
+	 * 
+	 * This method returns all node items with an search model class or a generic search interface instance and returns its data.
+	 * 
+	 * @param string $query The query to search for.
+	 * @throws luya\Exception
+	 * @return array
+	 */
     public function actionIndex($query)
     {
         $search = [];

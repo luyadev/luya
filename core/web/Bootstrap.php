@@ -47,6 +47,11 @@ class Bootstrap extends \luya\base\Bootstrap
         }
     }
 
+    /**
+     * Invokes the bootstraping process.
+     * 
+     * @see \luya\base\Bootstrap::run()
+     */
     public function run($app)
     {
         if (!$app->request->getIsConsoleRequest()) {

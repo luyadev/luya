@@ -11,5 +11,8 @@ use luya\admin\ngrest\base\Api;
  */
 class LangController extends Api
 {
+	/**
+	 * @var string The path to the language model.
+	 */
     public $modelClass = 'luya\admin\models\Lang';
 }

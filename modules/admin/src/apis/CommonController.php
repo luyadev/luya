@@ -2,22 +2,29 @@
 
 namespace luya\admin\apis;
 
-use luya\traits\CacheableTrait;
 use Yii;
+use luya\traits\CacheableTrait;
 use luya\admin\models\Property;
 use luya\admin\models\Lang;
 use luya\admin\base\RestController;
 
 /**
+ * Common Admin API Tasks.
+ * 
  * Delivers default values for the specifing table. It means it does not return a key numeric array,
  * it does only return 1 assoc array wich reperents the default row.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class CommonController extends RestController
 {
     use CacheableTrait;
     
+    /**
+     * Set the lastest ngrest filter selection in the User Settings.
+     * 
+     * @return boolean
+     */
     public function actionNgrestFilter()
     {
     	$apiEndpoint = Yii::$app->request->getBodyParam('apiEndpoint');
@@ -26,6 +33,11 @@ class CommonController extends RestController
     	return Yii::$app->adminuser->identity->setting->set('ngrestfilter.'.$apiEndpoint, $filterName);
     }
     
+    /**
+     * Set the lastest ngrest curd list order direction in the User Settings.
+     * 
+     * @return boolean
+     */
     public function actionNgrestOrder()
     {
     	$apiEndpoint = Yii::$app->request->getBodyParam('apiEndpoint');
@@ -41,11 +53,21 @@ class CommonController extends RestController
     	return Yii::$app->adminuser->identity->setting->set('ngrestorder.'.$apiEndpoint, ['sort' => $sort, 'field' => $field]);
     }
     
+    /**
+     * Get all available languages from the database as array.
+     * 
+     * @return array The available languages.
+     */
     public function actionDataLanguages()
     {
         return Lang::find()->asArray()->all();
     }
     
+    /**
+     * Change the language admin interface and store in user settings.
+     * 
+     * @return boolean
+     */
     public function actionChangeLanguage()
     {
         $lang = Yii::$app->request->getBodyParam('lang');
@@ -57,6 +79,11 @@ class CommonController extends RestController
         return false;
     }
     
+    /**
+     * Get all available administration regisetered properties.
+     * 
+     * @return array Get all properties.
+     */
     public function actionDataProperties()
     {
         $data = [];
@@ -76,6 +103,11 @@ class CommonController extends RestController
         return $data;
     }
     
+    /**
+     * Triggerable action to flush the application cache and force user reload.
+     * 
+     * @return boolean
+     */
     public function actionCache()
     {
         if (Yii::$app->has('cache')) {
@@ -89,6 +121,11 @@ class CommonController extends RestController
         return true;
     }
     
+    /**
+     * Get a list with all frontend modules, which is used in several dropdowns in the admin ui.
+     * 
+     * @return array An array with all frontend modules.
+     */
     public function actionDataModules()
     {
         $data = [];
@@ -98,6 +135,11 @@ class CommonController extends RestController
         return $data;
     }
 
+    /**
+     * Save the last selected filemanager folder in the user settings.
+     * 
+     * @return boolean
+     */
     public function actionSaveFilemanagerFolderState()
     {
         $folderId = Yii::$app->request->getBodyParam('folderId');
@@ -109,11 +151,21 @@ class CommonController extends RestController
         }
     }
     
+    /**
+     * Return the latest selected filemanager from the user settings.
+     * 
+     * @return integer The folder id.
+     */
     public function actionGetFilemanagerFolderState()
     {
         return Yii::$app->adminuser->identity->setting->get('filemanagerFolderId', 0);
     }
 
+    /**
+     * Store the open and closed folders from the filemanager tree in the user settings.
+     * 
+     * @return booelan
+     */
     public function actionFilemanagerFoldertreeHistory()
     {
         $this->deleteHasCache('storageApiDataFolders');

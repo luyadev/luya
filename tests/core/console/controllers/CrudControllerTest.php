@@ -30,7 +30,7 @@ namespace file\namespace;
 class TestModel extends \luya\admin\ngrest\base\Api
 {
     /**
-     * @var string $modelClass The path to the model which is the provider for the rules and fields.
+     * @var string The path to the model which is the provider for the rules and fields.
      */
     public $modelClass = '\path\to\model';
 }
@@ -49,7 +49,7 @@ namespace file\namespace;
 class TestModel extends \luya\admin\ngrest\base\Controller
 {
     /**
-     * @var string $modelClass The path to the model which is the provider for the rules and fields.
+     * @var string The path to the model which is the provider for the rules and fields.
      */
     public $modelClass = '\path\to\model';
 }

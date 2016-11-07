@@ -9,7 +9,7 @@ use luya\helpers\Url;
 use luya\web\CompositionAfterSetEvent;
 
 /**
- * LUYA Composition Component to provide i18n/language handling.
+ * Composition provides multi lingual handling and detection.
  *
  * @property string $full Return `getFull()` method represents full composition
  * @property string $defaultLangShortCode Return default defined language shord code
@@ -73,10 +73,9 @@ class Composition extends Component implements \ArrayAccess
     public $default = ['langShortCode' => 'en'];
 
     /**
-     * Define the default behavior for differnet host info schemas, if the host info is not found
+     * @var array Define the default behavior for differnet host info schemas, if the host info is not found
      * the default behvaior via `$default` will be used.
-     *
-     * @var array An array where the key is the host info and value the array with the default configuration .e.g.
+     * An array where the key is the host info and value the array with the default configuration .e.g.
      *
      * ```
      * 'hostInfoMapping' => [
@@ -99,8 +98,8 @@ class Composition extends Component implements \ArrayAccess
     /**
      * Class constructor, to get data from DiContainer.
      *
-     * @param \luya\web\Request $request
-     * @param array             $config
+     * @param \luya\web\Request $request Request componet resolved from Depency Manager 
+     * @param array $config The object configuration array
      */
     public function __construct(\luya\web\Request $request, array $config = [])
     {
@@ -150,7 +149,7 @@ class Composition extends Component implements \ArrayAccess
      * main purpose of this function to change the localisation based on the required
      * key 'langShortCode'.
      *
-     * @param luya\web\CompositionAfterSetEvent $event
+     * @param \luya\web\CompositionAfterSetEvent $event The event object.
      */
     public function eventAfterSet($event)
     {
@@ -213,7 +212,7 @@ class Composition extends Component implements \ArrayAccess
      * Set a new composition key and value in composition array. If the key already exists, it will
      * be overwritten. The setKey method triggers the CompositionAfterSetEvent class.
      *
-     * @param string $key   The key in the array, e.g. langShortCode
+     * @param string $key The key in the array, e.g. langShortCode
      * @param string $value The value coresponding to the key e.g. de
      */
     public function setKey($key, $value)
@@ -254,7 +253,7 @@ class Composition extends Component implements \ArrayAccess
     /**
      * Return a path like string with all composition with trailing slash e.g. us/e.
      *
-     * @return void|string
+     * @return string
      */
     public function getFull()
     {
@@ -359,20 +358,32 @@ class Composition extends Component implements \ArrayAccess
     /**
      * Wrapper for `getKey('langShortCode')` to load language to set php env settings.
      *
-     * @return string|bool
+     * @return string|boolean Get the language value from the langShortCode key, false if not set.
      */
     public function getLanguage()
     {
         return $this->getKey('langShortCode');
     }
 
-    // ArrayAccess implentation
-
+    /**
+     * ArrayAccess offset exists.
+     * 
+     * @see ArrayAccess::offsetExists()
+     * @return boolean
+     */
     public function offsetExists($offset)
     {
         return isset($this->_composition[$offset]);
     }
 
+    /**
+     * ArrayAccess set value to array.
+     * 
+     * @see ArrayAccess::offsetSet()
+     * @param string $offset The key of the array
+     * @param mixed $value The value for the offset key.
+     * @throws \luya\Exception
+     */
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -381,11 +392,27 @@ class Composition extends Component implements \ArrayAccess
         $this->setKey($offset, $value);
     }
 
+    /**
+     * ArrayAccess get the value for a key.
+     * 
+     * @see ArrayAccess::offsetGet()
+     * @param string $offset The key to get from the array.
+     * @return mixed The value for the offset key from the array.
+     */
     public function offsetGet($offset)
     {
         return $this->getKey($offset, null);
     }
 
+    /**
+     * ArrayAccess unset key.
+     * 
+     * Unsetting data via array access is not allowed.
+     * 
+     * @see ArrayAccess::offsetUnset()
+     * @param string $offset The key to unset from the array.
+     * @throws \luya\Exception
+     */
     public function offsetUnset($offset)
     {
         throw new Exception('Deleting keys in Composition is not allowed.');

@@ -3,32 +3,46 @@
 namespace luya\admin\apis;
 
 use Yii;
-use Exception;
+use luya\Boot;
+use luya\Exception;
 use luya\admin\models\UserOnline;
 use luya\rest\Controller;
 
 /**
  * Remove API, allows to collect system data with a valid $token.
+ * 
+ * The remote api can only access with the oken but is not secured by a loggged in user.
  *
  * @author Basil Suter <basil@nadar.io>
  */
 class RemoteController extends Controller
 {
+	/**
+	 * Disabled the auth methods.
+	 * 
+	 * @return boolean When false the authentication is disabled.
+	 */
     public function userAuthClass()
     {
         return false;
     }
 
+    /**
+     * Retrieve administration informations if the token is valid.
+     * 
+     * @param string $token The sha1 encrypted access token.
+     * @throws luya\Exception If invalid token.
+     * @return array
+     */
     public function actionIndex($token)
     {
         if (empty(Yii::$app->remoteToken) || sha1(Yii::$app->remoteToken) !== $token) {
-            throw new Exception('Wrong token');
-            exit;
+            throw new Exception('The provided remote token is wrong.');
         }
 
         return [
             'yii_version' => Yii::getVersion(),
-            'luya_version' => \luya\Boot::VERSION,
+            'luya_version' => Boot::VERSION,
             'app_title' => Yii::$app->siteTitle,
             'app_debug' => (int) YII_DEBUG,
             'app_env' => YII_ENV,

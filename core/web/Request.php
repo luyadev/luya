@@ -5,18 +5,27 @@ namespace luya\web;
 use Yii;
 
 /**
- * Luya Request Component to provide a differentiation for frontend/admin context.
+ * Request Component.
+ * 
+ * Extending the {{yii\web\Request}} class by predefine values and add ability to verify whether the request is in admin context or not.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Request extends \yii\web\Request
 {
     /**
-     * @var bool force web request to enable unit tests with simulated web requests
+     * @var boolean Force web request to enable unit tests with simulated web requests
      */
     public $forceWebRequest = false;
 
-    public $cookieValidationKey = '{W\T$saJvYG]VaqK2Tq^CkZ+3,.p$yaTWQ<@F4G%Lx[F/WEqM*';
+    /**
+     * @var string The validation cookie for cookies, should be overwritten in your configuration.
+     * 
+     * The cookie validation key is generated randomly or by any new release but should be overriten in your config.
+     * 
+     * http://randomkeygen.com using a 504-bit WPA Key
+     */
+    public $cookieValidationKey = '(`1gq(|TI2Zxx7zZH<Zk052a9a$@l2EtD9wT`lkTO@7uy{cPaJt4y70mxh4q(3';
     
     public $parsers = [
         'application/json' => 'yii\web\JsonParser',
@@ -24,8 +33,10 @@ class Request extends \yii\web\Request
 
     /**
      * Resolve the current url request and check if admin context.
+     * 
+     * This is mostly used in order to bootstrap more modules and application logic in admin context.
      *
-     * @return bool if admin context available?
+     * @return boolean If the current request is in admin context return value is true, otherwise false.
      */
     public function isAdmin()
     {
@@ -34,7 +45,6 @@ class Request extends \yii\web\Request
         }
 
         $resolver = Yii::$app->composition->getResolvedPathInfo($this);
-
         $pathInfo = $resolver['route'];
         $parts = explode('/', $pathInfo);
         $first = reset($parts);

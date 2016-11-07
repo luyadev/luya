@@ -11,5 +11,8 @@ use luya\admin\ngrest\base\Api;
  */
 class UserController extends Api
 {
+	/**
+	 * @var string Path to the user model class.
+	 */
     public $modelClass = 'luya\admin\models\User';
 }

@@ -3,18 +3,22 @@
 namespace luya\admin\apis;
 
 use Yii;
-use Exception;
+use luya\Exception;
 use luya\admin\helpers\Storage;
 use luya\admin\models\StorageFile;
 use luya\admin\models\StorageFolder;
 use luya\admin\Module;
 use luya\traits\CacheableTrait;
-use yii\caching\DbDependency;
 use luya\admin\helpers\I18n;
 use luya\admin\base\RestController;
+use yii\caching\DbDependency;
 
 /**
+ * Filemanager and Storage API.
+ * 
  * Storage API, provides data from system image, files, filters and folders to build the filemanager, allows create/delete process to manipulate storage data.
+ *
+ * The storage controller is used to make the luya angular file manager work with the {{luya\admin\component\StorageContainer}}.
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -22,8 +26,9 @@ class StorageController extends RestController
 {
     use CacheableTrait;
     
-    // new beta2 controller meethods
-
+	/**
+	 * Flush the storage caching data.
+	 */
     protected function flushApiCache()
     {
         Yii::$app->storage->flushArrays();
@@ -34,6 +39,11 @@ class StorageController extends RestController
     
     // DATA READERS
 
+    /**
+     * Get all folders from the storage component.
+     *
+     * @return array
+     */
     public function actionDataFolders()
     {
         $cache = $this->getHasCache('storageApiDataFolders');
@@ -54,6 +64,11 @@ class StorageController extends RestController
         return $cache;
     }
     
+    /**
+     * Get all files from the storage container.
+     *
+     * @return array
+     */
     public function actionDataFiles()
     {
         $cache = $this->getHasCache('storageApiDataFiles');
@@ -89,6 +104,11 @@ class StorageController extends RestController
         return $cache;
     }
     
+    /**
+     * Get all images from the storage container.
+     * 
+     * @return array
+     */
     public function actionDataImages()
     {
         $cache = $this->getHasCache('storageApiDataImages');
@@ -109,6 +129,11 @@ class StorageController extends RestController
     
     // ACTIONS
 
+    /**
+     * Update the caption of storage file.
+     * 
+     * @return boolean
+     */
     public function actionFilemanagerUpdateCaption()
     {
         $fileId = Yii::$app->request->post('id', false);
@@ -130,6 +155,11 @@ class StorageController extends RestController
         return false;
     }
     
+    /**
+     * Upload an image to the filemanager.
+     * 
+     * @return array
+     */
     public function actionImageUpload()
     {
         try {
@@ -142,11 +172,21 @@ class StorageController extends RestController
         }
     }
     
+    /**
+     * Get all available registered filters.
+     * 
+     * @return array
+     */
     public function actionDataFilters()
     {
         return Yii::$app->storage->filtersArray;
     }
     
+    /**
+     * Action to replace a current file with a new.
+     * 
+     * @return boolean
+     */
     public function actionFileReplace()
     {
         $fileId = Yii::$app->request->post('fileId', false);
@@ -168,13 +208,9 @@ class StorageController extends RestController
     
     
     /**
-     * <URL>/admin/api-admin-storage/files-upload.
-     *
-     * @todo change post_max_size = 20M
-     * @todo change upload_max_filesize = 20M
-     * @todo http://php.net/manual/en/features.file-upload.errors.php
-     *
-     * @return array|json Key represents the uploaded file name, value represents the id in the database.
+     * Upload a new file from $_FILES array.
+     * 
+     * @return array An array with upload and message key.
     */
     public function actionFilesUpload()
     {
@@ -197,6 +233,11 @@ class StorageController extends RestController
         return ['upload' => false, 'message' => Module::t('api_sotrage_file_upload_empty_error')];
     }
     
+    /**
+     * Move files into another folder.
+     *
+     * @return boolean
+     */
     public function actionFilemanagerMoveFiles()
     {
         $toFolderId = Yii::$app->request->post('toFolderId', 0);
@@ -207,6 +248,12 @@ class StorageController extends RestController
         return $response;
     }
     
+    /**
+     * Remove files from the storage component.
+     * 
+     * @todo make permission check.
+     * @return boolean
+     */
     public function actionFilemanagerRemoveFiles()
     {
         foreach (Yii::$app->request->post('ids', []) as $id) {
@@ -218,11 +265,10 @@ class StorageController extends RestController
     }
     
     /**
-     * check if a folder is empty (no subfolders/no files).
+     * Check whether a folder is empty or not in order to delete this folder.
      *
-     * @param integer $folderId
-     *
-     * @return bool
+     * @param integer $folderId The folder id to check whether it has files or not.
+     * @return boolean
      */
     public function actionIsFolderEmpty($folderId)
     {
@@ -241,9 +287,9 @@ class StorageController extends RestController
      * 2. get all included files and delete them
      * 3. delete folder
      *
-     * @param integer $folderId
+     * @param integer $folderId The folder to delete.
      * @todo move to storage helpers?
-     * @return bool
+     * @return boolean
      */
     public function actionFolderDelete($folderId)
     {
@@ -271,6 +317,12 @@ class StorageController extends RestController
         return $model->update();
     }
     
+    /**
+     * Update the folder model data.
+     * 
+     * @param integer $folderId The folder id.
+     * @return boolean
+     */
     public function actionFolderUpdate($folderId)
     {
         $model = StorageFolder::findOne($folderId);
@@ -284,6 +336,11 @@ class StorageController extends RestController
         return $model->update();
     }
     
+    /**
+     * Create a new folder pased on post data.
+     * 
+     * @return boolean
+     */
     public function actionFolderCreate()
     {
         $folderName = Yii::$app->request->post('folderName', null);

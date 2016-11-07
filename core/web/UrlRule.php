@@ -12,7 +12,7 @@ namespace luya\web;
  * public $ruleConfig = ['class' => '\luya\web\UrlRule'];
  * ```
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class UrlRule extends \yii\web\UrlRule
 {

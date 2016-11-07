@@ -11,5 +11,8 @@ use luya\admin\ngrest\base\Api;
  */
 class EffectController extends Api
 {
+	/**
+	 * @var string The path to the StorageEffect model.
+	 */
     public $modelClass = 'luya\admin\models\StorageEffect';
 }

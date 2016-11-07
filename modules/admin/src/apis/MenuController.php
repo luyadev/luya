@@ -9,20 +9,37 @@ use luya\admin\base\RestController;
 /**
  * Admin Menu API, provides all menu items and dashabord informations for a node or the entire system.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class MenuController extends RestController
 {
+	/**
+	 * The index action of the menu api returns all available modules which is the top menu know as node.
+	 * 
+	 * @return array
+	 */
     public function actionIndex()
     {
         return Yii::$app->adminmenu->getModules();
     }
 
+    /**
+     * The items action returns all items for a given node.
+     * 
+     * @param integer $nodeId The id of the node to find all items from.
+     * @return array
+     */
     public function actionItems($nodeId)
     {
         return Yii::$app->adminmenu->getModuleItems($nodeId);
     }
 
+    /**
+     * Get all dashabord items for a given node.
+     * 
+     * @param integer $nodeId The id of the node to find all items from.
+     * @return array
+     */
     public function actionDashboard($nodeId)
     {
         $data = Yii::$app->adminmenu->getNodeData($nodeId);
