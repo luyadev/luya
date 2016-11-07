@@ -3,7 +3,9 @@
 namespace luya\helpers;
 
 /**
- * String Helper additional to Yii base String Helper
+ * String Helpers.
+ * 
+ * This class extends the {{yii\helpers\StringHelper}} class by some helpful methods.
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta7
@@ -11,10 +13,12 @@ namespace luya\helpers;
 class StringHelper extends \yii\helpers\StringHelper
 {
     /**
-     * TypeCast a string to its specific type, arrays will passed to arrayhelper::typeCast method.
+     * TypeCast a string to its specific types.
+     * 
+     * Arrays will passed to to the {{luya\helpers\ArrayHelper::typeCast}} class.
      *
-     * @param mixed $string The input string to typecase
-     * @return mixed The typecased value
+     * @param mixed $string The input string to type cast. Arrays will be passted to {{luya\helpers\ArrayHelper::typeCast}}.
+     * @return mixed The new type casted value, if the input is an array the output is the typecasted array.
      */
     public static function typeCast($string)
     {
@@ -40,10 +44,10 @@ class StringHelper extends \yii\helpers\StringHelper
      * StringHelper::replaceFirst('abc', '123', 'abc abc abc'); // returns "123 abc abc"
      * ```
      *
-     * @param string $search The string you want to find
-     * @param string $replace The string you want to replace the first occurrence with.
+     * @param string $search Search string to look for.
+     * @param string $replace Replacement value for the first found occurrence.
      * @param string $subject The string you want to look up to replace the first element.
-     * @return mixed
+     * @return mixed Replaced string
      * @since 1.0.0-rc1
      */
     public static function replaceFirst($search, $replace, $subject)
