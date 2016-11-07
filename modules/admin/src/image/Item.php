@@ -3,6 +3,7 @@
 namespace luya\admin\image;
 
 use Yii;
+use luya\admin\storage\ItemTrait;
 
 /**
  * Image Item Detail Object.
@@ -24,7 +25,7 @@ use Yii;
  */
 class Item extends \yii\base\Object
 {
-    use \luya\admin\storage\ItemTrait;
+    use ItemTrait;
     
     private $_file = null;
     
@@ -152,7 +153,7 @@ class Item extends \yii\base\Object
     /**
      * Get image depending file object where the image was create from, its like the original Source
      *
-     * @return \admin\file\Item
+     * @return \luya\admin\file\Item
      */
     public function getFile()
     {
@@ -167,7 +168,7 @@ class Item extends \yii\base\Object
      * Apply a new filter for the original ussed file and return the new created image object.
      *
      * @param string $filterName The name of a filter like `tiny-thumbnail` or a custom filter you have defined in your filters list.
-     * @return boolean|\admin\image\Item Returns boolean or image item object if its found.
+     * @return boolean|\luya\admin\image\Item Returns boolean or image item object if its found.
      */
     public function applyFilter($filterName)
     {

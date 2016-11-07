@@ -6,6 +6,7 @@ use Yii;
 use luya\helpers\Url;
 use luya\helpers\FileHelper;
 use luya\admin\helpers\I18n;
+use luya\admin\storage\ItemTrait;
 
 /**
  * Storage File Item
@@ -35,7 +36,7 @@ use luya\admin\helpers\I18n;
  */
 class Item extends \yii\base\Object
 {
-    use \luya\admin\storage\ItemTrait;
+    use ItemTrait;
     
     private $_imageMimeTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg', 'image/bmp', '	image/tiff'];
     
@@ -100,7 +101,7 @@ class Item extends \yii\base\Object
     /**
      * Get the Folder Object where the file is stored in.
      *
-     * @return \admin\folder\Item The folder object
+     * @return \luya\admin\folder\Item The folder object
      */
     public function getFolder()
     {

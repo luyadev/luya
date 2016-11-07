@@ -3,10 +3,11 @@
 namespace luya\admin\folder;
 
 use Yii;
+use luya\admin\storage\ItemTrait;
 
 class Item extends \yii\base\Object
 {
-    use \luya\admin\storage\ItemTrait;
+    use ItemTrait;
     
     public function getId()
     {
@@ -33,6 +34,11 @@ class Item extends \yii\base\Object
         return ((new \luya\admin\folder\Query())->where(['is_deleted' => 0, 'parent_id' => $this->getId()])->count() > 0 ? true: false);
     }
     
+    /**
+     * Get the parent folder object.
+     * 
+     * @return boolean|\luya\admin\folder\Item The item object or false if not found.
+     */
     public function getParent()
     {
         return (!empty($this->getParentId())) ? Yii::$app->storage->getFolder($this->getParentId()) : false;

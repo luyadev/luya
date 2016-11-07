@@ -3,22 +3,26 @@
 namespace luya\admin\file;
 
 use Yii;
+use luya\admin\storage\QueryTrait;
 
 /**
- * @property object $storage The storage component
- *
- * @author nadar
+ * Storage Files Querying.
+ * 
+ * See the {{\luya\admin\storage\QueryTrait}} for more informations.
+ * 
+ * @property \luya\admin\components\StorageContainer $storage The storage component
+ * @author Basil Suter <basil@nadar.io>
  */
 class Query extends \yii\base\Object
 {
-    use \luya\admin\storage\QueryTrait;
+    use QueryTrait;
     
     private $_storage = null;
     
     /**
      * Singleton behavior for storage component getter.
      *
-     * @return \admin\components\StorageContainer
+     * @return \luya\admin\components\StorageContainer
      */
     public function getStorage()
     {
