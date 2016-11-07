@@ -150,13 +150,16 @@ class Log extends \yii\db\ActiveRecord
     }
 
     /**
-     * add new log entry.
-     *
-     * @param int    $type    The type of add
-     *                        + 1 = insertion
-     *                        + 2 = update
-     *                        + 3 = deletion
-     * @param string $message
+     * 
+     * @param integer $type Types of message:
+     * + 1 = insertion
+     * + 2 = update
+     * + 3 = deletion
+     * @param array $message
+     * @param string $tableName
+     * @param integer $rowId
+     * @param array $additionalData
+     * @return boolean
      */
     public static function add($type, array $message, $tableName, $rowId = 0, array $additionalData = [])
     {

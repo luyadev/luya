@@ -189,7 +189,7 @@ class UrlManager extends \yii\web\UrlManager
      * Yii2 createUrl base implementation extends the prepand of the comosition
      *
      * @param string|array $params An array with params or not (e.g. `['module/controller/action', 'param1' => 'value1']`)
-     * @param null|object $composition Composition instance to change the route behavior
+     * @param null|\luya\web\Composition $composition Composition instance to change the route behavior
      * @return string
      */
     public function internalCreateUrl($params, $composition = null)
@@ -220,7 +220,7 @@ class UrlManager extends \yii\web\UrlManager
      * Create absolute urls
      *
      * @param string|array $params
-     * @param bool $scheme
+     * @param boolean $scheme
      * @return string
      */
     public function internalCreateAbsoluteUrl($params, $scheme = null)
@@ -241,7 +241,7 @@ class UrlManager extends \yii\web\UrlManager
      *
      * The module to test must be an instance of `luya\base\Module`.
      *
-     * @param unknown $route
+     * @param string $route
      * @return boolean|string
      */
     private function findModuleInRoute($route)

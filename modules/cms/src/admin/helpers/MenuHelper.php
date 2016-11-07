@@ -100,7 +100,7 @@ class MenuHelper
      * + Set the interanl check to false, if inherit or internal check is true, set value into $data factory
      * + proceed nodes of the current item with the information form $data factory as inheritation info.
      *
-     * @param number $parentNavId
+     * @param integer $parentNavId
      * @param string $fromInheritNode
      */
     private static function loadInheritanceData($parentNavId = 0, $fromInheritNode = false)

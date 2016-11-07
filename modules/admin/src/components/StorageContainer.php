@@ -332,7 +332,7 @@ class StorageContainer extends Component
      * When using the $_FILES array you can also make usage of the file helper methods:
      * 
      * + {{luya\admin\helpers\Storage::uploadFromFiles}}
-     * + {{luya\admin\helpers\Storage::::uploadFromFileArray}}
+     * + {{luya\admin\helpers\Storage::uploadFromFileArray}}
      * 
      * When not using the $_FILES array:
      * 
@@ -342,7 +342,7 @@ class StorageContainer extends Component
      *
      * @param string $fileSource Path to the file source where the file should be created from
      * @param string $fileName The name of this file (must contain data type suffix).
-     * @param int $folderId The id of the folder where the file should be stored in.
+     * @param integer $folderId The id of the folder where the file should be stored in.
      * @param boolean $isHidden Should the file visible in the filemanager or not.
      * @return \luya\admin\file\Item|\luya\Exception|boolean Returns the item object, if an error happens an exception is thrown.
      */

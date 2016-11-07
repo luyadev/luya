@@ -100,7 +100,7 @@ class Menu extends Component implements ArrayAccess
      */
     public $request = null;
     
-    public $cachePrefix = 'MenuContainerCache';
+    private $_cachePrefix = 'MenuContainerCache';
     
     private $_currentUrlRule = null;
     
@@ -131,11 +131,20 @@ class Menu extends Component implements ArrayAccess
         parent::__construct($config);
     }
     
+    /**
+     * Set url rules for the current page item in order to retrieve at another point of the appliation when building language links.
+     * 
+     * @param array $rule
+     */
     public function setCurrentUrlRule(array $rule)
     {
         $this->_currentUrlRule = $rule;
     }
-    
+
+    /**
+     * Get the url rules for the current menu item.
+     * @return array
+     */
     public function getCurrentUrlRule()
     {
         return $this->_currentUrlRule;
@@ -145,7 +154,6 @@ class Menu extends Component implements ArrayAccess
      * ArrayAccess check if the offset key exists in the language array.
      *
      * @param string $offset Language short code the verify
-     *
      * @return bool
      */
     public function offsetExists($offset)
@@ -180,8 +188,7 @@ class Menu extends Component implements ArrayAccess
      * ArrayAccess offsetSet is not implemented in singleton component.
      *
      * @param string $offset
-     *
-     * @throws Exception Always throws exception as this method is not implemented.
+     * @throws \luya\cms\Exception Always throws exception as this method is not implemented.
      */
     public function offsetUnset($offset)
     {
@@ -191,7 +198,7 @@ class Menu extends Component implements ArrayAccess
     /**
      * Get the composition component if not yet loaded.
      *
-     * @return luya\web\Composition Object with composition informationes.
+     * @return \luya\web\Composition Object with composition informationes.
      */
     public function getComposition()
     {
@@ -207,7 +214,6 @@ class Menu extends Component implements ArrayAccess
      * when using the ArrayAccess offsetGet() method.
      *
      * @param string $langShortCode A languag short code which have to access in $this->getLanguages().
-     *
      * @return array An array containing all items in theyr keys for the provided language short code.
      */
     public function getLanguageContainer($langShortCode)
@@ -224,8 +230,7 @@ class Menu extends Component implements ArrayAccess
      * Get languag information for a specific language short code.
      *
      * @param string $shortCode E.g. de or en
-     *
-     * @return array|false If the shortCode exists an array with informations as returned, otherwise false.
+     * @return array|boolean If the shortCode exists an array with informations as returned, otherwise false.
      */
     public function getLanguage($shortCode)
     {
@@ -261,7 +266,9 @@ class Menu extends Component implements ArrayAccess
     }
 
     /**
-     * Returns the parts of the rules who do not belong to the current active menu item link. For instance the current menu link is `/de/company/news` where this
+     * Returns the parts of the rules who do not belong to the current active menu item link.
+     * 
+     * For instance the current menu link is `/de/company/news` where this
      * page is declared as a module with urlRules, controllers and actions. If the url path is `/de/company/news/detail/my-first-news` the
      * appendix would be `detail/my-first-news`.
      *
@@ -280,7 +287,7 @@ class Menu extends Component implements ArrayAccess
      * Ability to override the current item in order to make real preview urls (as when resolver does
      * not work of changed urls).
      *
-     * @param \cms\menu\Item $item The current item object
+     * @param \luya\cms\menu\Item $item The current item object
      * @since 1.0.0-beta6
      */
     public function setCurrent(Item $item)
@@ -291,7 +298,7 @@ class Menu extends Component implements ArrayAccess
     /**
      * Get the current menu item resolved by active language (from composition).
      *
-     * @return \cms\menu\Item An item-object for the current active item.
+     * @return \luya\cms\menu\Item An item-object for the current active item.
      */
     public function getCurrent()
     {
@@ -310,7 +317,7 @@ class Menu extends Component implements ArrayAccess
      * siblings/children calculation, this can be case when you have several contains do not want to use the "current" Item
      * as base calucation, because getCurrent() could be in another container so it would get you all level container items for
      * this container.
-     * @return boolean|array QueryIterator with data
+     * @return boolean|\luya\cms\menu\QueryIterator All siblings or children items.
      */
     public function getLevelContainer($level, Item $baseItem = null)
     {
@@ -343,9 +350,8 @@ class Menu extends Component implements ArrayAccess
      * Get the current item for specified level/depth. Menus always start on level/depth 1. This works
      * only in reversed order, to get the parent level from a child!
      *
-     * @param int $level Level menu starts with 1
-     *
-     * @return \luya\cms\menu\Item An item-object for the specific level current.
+     * @param integer $level Level menu starts with 1
+     * @return \luya\cms\menu\Item|boolean An item-object for the specific level current, false otherwise.
      */
     public function getLevelCurrent($level)
     {
@@ -361,9 +367,10 @@ class Menu extends Component implements ArrayAccess
     }
     
     /**
-     * currentLevel() is deprecated, use getLevelCurrent().
+     * deprecated currentLevel()
      *
-     * @param int $level
+     * @deprecated 1.0.0 As getLevelCurrent() replaces this function.
+     * @param integer $level
      */
     public function currentLevel($level)
     {
@@ -373,7 +380,7 @@ class Menu extends Component implements ArrayAccess
     }
 
     /**
-     * Return the home site for the current resolved language resolved by \luya\web\Composition component.
+     * Return the home site for the current resolved language resolved by {{luya\web\Composition}} component.
      *
      * @return \luya\cms\menu\Item An item-object for the home item for the current resolved language.
      */
@@ -398,7 +405,7 @@ class Menu extends Component implements ArrayAccess
      *
      * @param array $where See \luya\cms\menu\Query::where()
      * @see \luya\cms\menu\Query::where()
-     * @return  \luya\cms\menu\QueryIterator
+     * @return \luya\cms\menu\QueryIterator
      */
     public function findAll(array $where)
     {
@@ -498,7 +505,7 @@ class Menu extends Component implements ArrayAccess
     /**
      * load all navigation items for a specific language id.
      *
-     * @param int $langId
+     * @param integer $langId
      */
     private function getNavData($langId)
     {
@@ -569,7 +576,7 @@ class Menu extends Component implements ArrayAccess
      */
     private function loadLanguageContainer($langShortCode)
     {
-        $cacheKey = $this->cachePrefix.$langShortCode;
+        $cacheKey = $this->_cachePrefix.$langShortCode;
         
         $languageContainer = $this->getHasCache($cacheKey);
         
@@ -637,7 +644,7 @@ class Menu extends Component implements ArrayAccess
     public function flushCache()
     {
         foreach ($this->getLanguages() as $lang) {
-            $this->deleteHasCache($this->cachePrefix . $lang['short_code']);
+            $this->deleteHasCache($this->_cachePrefix . $lang['short_code']);
         }
     }
 }

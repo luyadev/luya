@@ -220,7 +220,7 @@ class StorageController extends RestController
     /**
      * check if a folder is empty (no subfolders/no files).
      *
-     * @param int $folderId
+     * @param integer $folderId
      *
      * @return bool
      */
@@ -241,7 +241,7 @@ class StorageController extends RestController
      * 2. get all included files and delete them
      * 3. delete folder
      *
-     * @param int $folderId
+     * @param integer $folderId
      * @todo move to storage helpers?
      * @return bool
      */

@@ -44,7 +44,7 @@ class UserOnline extends \yii\db\ActiveRecord
     }
 
     /**
-     * @param int $maxIdleTime Default value in seconds is a half hour (30 * 60) = 1800
+     * @param integer $maxIdleTime Default value in seconds is a half hour (30 * 60) = 1800
      */
     public static function clearList($maxIdleTime = 1800)
     {

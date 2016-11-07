@@ -200,19 +200,26 @@ class Storage
      *
      * ```php
      * $return = Storage::uploadFromFileArray($_FILES['image'], 0, true);
+     * ``
+     * 
+     * Example response
+     * 
+     * ```php
+     * ['error' => false, 'message' => 'file uploaded succesfully', 'file_id' => 123], // success response example
+     * ['error' => true, 'message' => 'No file was uploaded.', 'file_id' => 0], // error response example
      * ```
      *
-     * @param array $fileArray Its an entry of the files array like $_FILES['logo_image'];
-     * @param number $toFolder
-     * @param string $isHidden
-     * @return array
+     * @param array $fileArray Its an entry of the files array like $_FILES['logo_image'].
+     * @param integer $toFolder The id of the folder the file should be uploaded to, see {{luya\storage\component\StorageContainer::findFolders}}
+     * @param string $isHidden Whether the file should be hidden or not.
+     * @return array An array with key `upload`, `message` and `file_id`. When upload is false, an error occured otherwise true. The message key contains the error messages. If no error happend `file_id` will contain the new uploaded file id.
      */
     public static function uploadFromFileArray(array $fileArray, $toFolder = 0, $isHidden = false)
     {
         $files = self::extractFilesDataFromFilesArray($fileArray);
         
         if (count($files) !== 1) {
-            return ['upload' => false, 'message' => 'no image found'];
+            return ['upload' => false, 'message' => 'no image found', 'file_id' => 0];
         }
         
         return self::verifyAndSaveFile($files[0], $toFolder, $isHidden);
@@ -226,12 +233,19 @@ class Storage
      * ```php
      * $return = Storage::uploadFromFiles($_FILES, 0, true);
      * ```
+     * 
+     * Example response
+     * 
+     * ```php
+     * ['error' => false, 'message' => 'file uploaded succesfully', 'file_id' => 123], // success response example
+     * ['error' => true, 'message' => 'No file was uploaded.', 'file_id' => 0], // error response example
+     * ```
      *
      * @todo what happen if $files does have more then one entry, as the response is limit to 1
-     * @param array $filesArray Use $_FILES
-     * @param number $toFolder
-     * @param string $isHidden
-     * @return array
+     * @param array $filesArray Use $_FILES array.
+     * @param integer $toFolder The id of the folder the file should be uploaded to, see {{luya\storage\component\StorageContainer::findFolders}}
+     * @param string $isHidden Whether the file should be hidden or not.
+     * @return array An array with key `upload`, `message` and `file_id`. When upload is false, an error occured otherwise true. The message key contains the error messages. If no error happend `file_id` will contain the new uploaded file id.
      */
     public static function uploadFromFiles(array $filesArray, $toFolder = 0, $isHidden = false)
     {
@@ -286,7 +300,7 @@ class Storage
                 return ['upload' => true, 'message' => 'file uploaded succesfully', 'file_id' => $file->id];
             }
         } catch (Exception $err) {
-            return ['upload' => false, 'message' => $err->getMessage()];
+            return ['upload' => false, 'message' => $err->getMessage(), 'file_id' => 0];
         }
         
         return ['upload' => false, 'message' => 'no files selected or empty files list.', 'file_id' => 0];
