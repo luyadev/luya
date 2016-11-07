@@ -11,9 +11,9 @@ use luya\Exception;
  * 
  * The below examples are wrote for file query but are are working for all classes implementing the QueryTrait like:
  * 
- * + {{\luya\admin\file\Query}}
- * + {{\luya\admin\image\Query}}
- * + {{\luya\admin\folder\Query}} 
+ * + Files: {{\luya\admin\file\Query}}
+ * + Images: {{\luya\admin\image\Query}}
+ * + Folders: {{\luya\admin\folder\Query}} 
  * 
  * ### All vs. One
  * 
