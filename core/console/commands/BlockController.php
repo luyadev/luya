@@ -93,6 +93,9 @@ class BlockController extends \luya\console\Command
      */
     public $phpdoc = [];
     
+    /**
+     * @var array Am array with additional docblocks messages to render inside the view file.
+     */
     public $viewFileDoc = [];
     
     /**
@@ -240,6 +243,11 @@ class BlockController extends \luya\console\Command
         return $v;
     }
     
+    /**
+     * Get the file namespace based on its type.
+     *
+     * @return string The full qualified namespace based on the type
+     */
     protected function getFileNamespace()
     {
         if ($this->type == self::TYPE_APP) {
@@ -249,6 +257,11 @@ class BlockController extends \luya\console\Command
         return Yii::$app->getModule($this->moduleName)->getNamespace()  . '\\blocks';
     }
 
+    /**
+     * Get the full base path to the folder of the module
+     *
+     * @return string The full path to the module folder.
+     */
     protected function getFileBasePath()
     {
         if ($this->type == self::TYPE_APP) {
@@ -258,6 +271,12 @@ class BlockController extends \luya\console\Command
         return Yii::$app->getModule($this->moduleName)->getBasePath();
     }
     
+    /**
+     * Generate the view file for the block.
+     *
+     * @param string $blockClassName The name of the block class.
+     * @return string The rendered view file.
+     */
     public function generateViewFile($blockClassName)
     {
         sort($this->viewFileDoc);

@@ -13,8 +13,9 @@ use yii\helpers\Console;
  */
 class HealthController extends \luya\console\Command
 {
-    public $verbose = false;
-    
+    /**
+     * @var array An array with all folders to check where the value for the key is whether it should be writeable or not.
+     */
     public $folders = [
         'public_html/assets' => true,
         'public_html/storage' => true,
@@ -23,20 +24,18 @@ class HealthController extends \luya\console\Command
         'runtime' => true,
     ];
 
+    /**
+     * @var array An array with files to check if they exists or not.
+     */
     public $files = [
         'configs/env.php',
         'public_html/index.php',
     ];
     
-    public function options($actionId)
-    {
-        return ['verbose'];
-    }
-
     /**
      * Create all required directories an check whether they are writeable or not.
      *
-     * @return number
+     * @return string The action output.
      */
     public function actionIndex()
     {
@@ -89,7 +88,7 @@ class HealthController extends \luya\console\Command
     /**
      * Test Mail-Component (Use --verbose=1 to enable smtp debug output)
      *
-     * @return bool|null
+     * @return boolean Whether successfull or not.
      * @throws Exception On smtp failure
      */
     public function actionMailer()

@@ -37,7 +37,6 @@ class CrudController extends BaseCrudController
      */
     public $dbTableName = null;
     
-    
     /**
      * @var boolean Whether the i18n text fields will be casted or not.
      */
@@ -53,26 +52,51 @@ class CrudController extends BaseCrudController
         return preg_replace('/admin$/', '', $this->moduleName);
     }
     
+    /**
+     * Get the model name in lower case.
+     *
+     * @return string Model name in lower case
+     */
     public function getModelNameLower()
     {
         return strtolower($this->modelName);
     }
     
+    /**
+     * Get the camlized model name.
+     *
+     * @return string Camlized model name
+     */
     public function getModelNameCamlized()
     {
         return Inflector::camelize($this->modelName);
     }
     
+    /**
+     * Get the namepsace to the model.
+     *
+     * @return string The full namepsace with model name itself.
+     */
     public function getModelNamespace()
     {
         return $this->getNamespace() . '\\models\\' . $this->getModelNameCamlized();
     }
     
+    /**
+     * Generate a suggestion for the api endpoint.
+     *
+     * @return string Api endpoint suggestion
+     */
     public function getApiEndpointSuggestion()
     {
         return 'api-'.$this->getModuleNameWithoutAdminSuffix().'-'.$this->getModelNameLower();
     }
     
+    /**
+     * Generate a suggestion for the database table name.
+     *
+     * @return string The database table suggestion.
+     */
     public function getDatabaseNameSuggestion()
     {
         return strtolower($this->getModuleNameWithoutAdminSuffix().'_'.Inflector::underscore($this->modelName));
@@ -80,6 +104,11 @@ class CrudController extends BaseCrudController
     
     private $_dbTableShema = null;
     
+    /**
+     * Get the database table schema.
+     *
+     * @return \yii\db\TableSchema The schmema object
+     */
     public function getDbTableShema()
     {
         if ($this->_dbTableShema === null) {
@@ -89,26 +118,56 @@ class CrudController extends BaseCrudController
         return $this->_dbTableShema;
     }
     
+    /**
+     * The module object.
+     *
+     * @return \luya\base\Modue The module object itself, could be the application object as well.
+     */
     public function getModule()
     {
         return Yii::$app->getModule($this->moduleName);
     }
     
+    /**
+     * Get the base path of the module.
+     *
+     * @return string The module basepath.
+     */
     public function getBasePath()
     {
         return $this->getModule()->basePath;
     }
     
+    /**
+     * Get the namepsace of the module.
+     *
+     * see {{luya\base\Module::getNamespace}}.
+     *
+     * @return string The module namespace.
+     */
     public function getNamespace()
     {
         return $this->getModule()->getNamespace();
     }
     
+    /**
+     * Get the controller route for the summary.
+     *
+     * @return string The summary route like module/controller/action
+     */
     public function getSummaryControllerRoute()
     {
         return strtolower($this->moduleName).'/'.Inflector::camel2id($this->getModelNameCamlized()).'/index';
     }
     
+    /**
+     * Generate the api file content based on its view file.
+     *
+     * @param string $fileNamespace
+     * @param string $className
+     * @param string $modelClass
+     * @return string
+     */
     public function generateApiContent($fileNamespace, $className, $modelClass)
     {
         return $this->view->render('@luya/console/commands/views/crud/create_api.php', [
@@ -119,6 +178,13 @@ class CrudController extends BaseCrudController
         ]);
     }
     
+    /**
+     * Generate the controller view file based on its view file.
+     * @param string $fileNamespace
+     * @param string $className
+     * @param string $modelClass
+     * @return string
+     */
     public function generateControllerContent($fileNamespace, $className, $modelClass)
     {
         return $this->view->render('@luya/console/commands/views/crud/create_controller.php', [
@@ -129,6 +195,16 @@ class CrudController extends BaseCrudController
         ]);
     }
     
+    /**
+     * Generate the model content based on its view file.
+     *
+     * @param string $fileNamepsace
+     * @param string $className
+     * @param string $apiEndpoint
+     * @param TableSchema $schema
+     * @param string $i18nFields
+     * @return string
+     */
     public function generateModelContent($fileNamepsace, $className, $apiEndpoint, TableSchema $schema, $i18nFields)
     {
         $dbTableName = $schema->fullName;
@@ -181,6 +257,15 @@ class CrudController extends BaseCrudController
         ]);
     }
 
+    /**
+     * Generate the block build summary based on its view file.
+     *
+     * @param string $apiEndpoint
+     * @param string $apiClassPath
+     * @param string $humanizeModelName
+     * @param string $controllerRoute
+     * @return string
+     */
     public function generateBuildSummery($apiEndpoint, $apiClassPath, $humanizeModelName, $controllerRoute)
     {
         return $this->view->render('@luya/console/commands/views/crud/build_summary.php', [

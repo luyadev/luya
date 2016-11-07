@@ -14,8 +14,17 @@ use Yii;
  */
 class DynamicModel extends \yii\base\DynamicModel
 {
+    /**
+     * @var array Assignable attributes by array where key is the label key value the label for the key.
+     */
     public $attributeLabels = [];
     
+    /**
+     * In addition to the attributeLabels() values can also be be passed by propertie and run trough Yii::t process.
+     *
+     * {@inheritDoc}
+     * @see \yii\base\Model::attributeLabels()
+     */
     public function attributeLabels()
     {
         $labels = [];

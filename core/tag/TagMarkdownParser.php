@@ -12,6 +12,9 @@ use cebe\markdown\GithubMarkdown;
  */
 class TagMarkdownParser extends GithubMarkdown
 {
+    /**
+     * @var boolean Enabled the newline generation by default for the tag markdown parser class.
+     */
     public $enableNewlines = true;
     
     /**

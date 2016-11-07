@@ -30,8 +30,13 @@ class ImportController extends Command implements ImportControllerInterface
 
     private $_scanFolders = ['blocks', 'filters', 'properties', 'blockgroups'];
 
+    /**
+     * Initializer
+     */
     public function init()
     {
+        parent::init();
+        
         // foreach scanFolders of all modules
         foreach (Yii::$app->modules as $id => $module) {
             if ($module instanceof \luya\base\Module) {

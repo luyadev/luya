@@ -84,6 +84,13 @@ class TagParser extends Object
         return (new TagMarkdownParser())->parse(static::convert($text));
     }
     
+    /**
+     * Generate the instance for all registered tags.
+     *
+     * The main purpose of this method is to return all tag objects in admin context to provide help informations from the tags.
+     *
+     * @return array An array with all tag object available.
+     */
     public static function getInstantiatedTagObjects()
     {
         $context = static::getInstance();

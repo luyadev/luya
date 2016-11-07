@@ -24,27 +24,27 @@ use luya\admin\models\Group;
 class SetupController extends \luya\console\Command
 {
     /**
-     * @var string $email
+     * @var string The email of the user to create.
      */
     public $email = null;
     
     /**
-     * @var string $password
+     * @var string The blank password of the user to create.
      */
     public $password = null;
     
     /**
-     * @var string $firstname
+     * @var string The firstname of the user to create.
      */
     public $firstname = null;
     
     /**
-     * @var string $lastname
+     * @var string The lastname of the user to create.
      */
     public $lastname = null;
     
     /**
-     * @var booelan|integer
+     * @var string Whether the setup is interactive or not.
      */
     public $interactive = true;
     
@@ -177,7 +177,7 @@ class SetupController extends \luya\console\Command
     /**
      * Create a new user and append them to an existing group.
      *
-     * @return booelan
+     * @return boolean
      */
     public function actionUser()
     {

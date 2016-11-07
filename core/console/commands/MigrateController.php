@@ -15,10 +15,21 @@ use yii\console\Exception;
  */
 class MigrateController extends \yii\console\controllers\MigrateController
 {
+    /**
+     * @var array Directory where the migrations should be looked up
+     */
     public $migrationFileDirs = array();
 
+    /**
+     * @var array Module migration directories
+     */
     public $moduleMigrationDirectories = array();
 
+    /**
+     * initModuleMigrationDirectories beforing runing the action.
+     *
+     * @see \yii\console\controllers\MigrateController::beforeAction()
+     */
     public function beforeAction($action)
     {
         if (parent::beforeAction($action)) {
@@ -47,6 +58,11 @@ class MigrateController extends \yii\console\controllers\MigrateController
         return $this->moduleMigrationDirectories[$module];
     }
 
+    /**
+     * Create a migration based on its class name.
+     *
+     * @see \yii\console\controllers\MigrateController::createMigration()
+     */
     protected function createMigration($class)
     {
         $orig = $this->migrationPath . DIRECTORY_SEPARATOR . $class . '.php';

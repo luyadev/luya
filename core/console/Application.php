@@ -23,6 +23,13 @@ class Application extends \yii\console\Application
      */
     public $mute = false;
 
+    /**
+     * Provides an array with all LUYA core commands.
+     *
+     * Instead of overriding the core command application and merged the value we directly copied them.
+     *
+     * @see \yii\console\Application::coreCommands()
+     */
     public function coreCommands()
     {
         return [

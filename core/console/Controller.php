@@ -30,8 +30,8 @@ abstract class Controller extends \yii\console\Controller
      * Helper method for writting console application output, include before and after wrappers.
      *
      * @param string $message The message which is displayed
-     * @param string $color   A color from \yii\helpers\Console::FG_GREEN;
-     * @param return void
+     * @param string $color A color from {{\yii\helpers\Console}} color constants.
+     * @param return $color the ansi formated text via echo when muted is disabled.
      */
     protected function output($message, $color = null)
     {

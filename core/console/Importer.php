@@ -71,12 +71,10 @@ abstract class Importer extends \yii\base\Object
      * Add something to the output. Wrapper method from importer.
      *
      * ```php
-     * $this->addLog('block', 'new block <ID> have been found and added to database');
+     * $this->addLog('new block <ID> have been found and added to database');
      * ```
      *
-     * @param string $section
-     * @param string $value
-     * @todo trigger deprecated section call
+     * @param string $value The value to be written for the log output.
      */
     public function addLog($value)
     {

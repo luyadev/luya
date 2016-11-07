@@ -6,6 +6,8 @@ use yii\base\Behavior;
 use yii\db\ActiveRecord;
 
 /**
+ * Timestamp Behavior.
+ *
  * Very basic behavior implementation of unix time() set for defined insert and/or update fields.
  *
  * @author nadar
@@ -13,10 +15,21 @@ use yii\db\ActiveRecord;
  */
 class Timestamp extends Behavior
 {
+    /**
+     * @var array An array with all fields where the timestamp should be applied to on insert.
+     */
     public $insert = [];
     
+    /**
+     * @var array An array with all fields where the timestamp should be applied to on update.
+     */
     public $update = [];
     
+    /**
+     * Register event handlers before insert and update.
+     *
+     * @see \yii\base\Behavior::events()
+     */
     public function events()
     {
         return [
@@ -25,6 +38,11 @@ class Timestamp extends Behavior
         ];
     }
     
+    /**
+     * Insert the timestamp for all provided fields.
+     *
+     * @param \yii\base\Event $event Event object from Active Record.
+     */
     public function beforeInsert($event)
     {
         foreach ($this->insert as $field) {
@@ -32,6 +50,11 @@ class Timestamp extends Behavior
         }
     }
     
+    /**
+     * Update the timestamp for all provided fields.
+     *
+     * @param \yii\base\Event $event Event object from Active Record.
+     */
     public function beforeUpdate($event)
     {
         foreach ($this->update as $field) {

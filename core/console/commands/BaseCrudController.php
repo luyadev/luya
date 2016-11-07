@@ -17,10 +17,21 @@ use yii\helpers\Inflector;
  */
 abstract class BaseCrudController extends Command
 {
+    /**
+     * @var boolean Whether to use schem name or not
+     */
     public $useSchemaName = true;
     
+    /**
+     * @var boolean Whether to generate labels from comments or not.
+     */
     public $generateLabelsFromComments = false;
     
+    /**
+     * Get the sql tables from the current database connection
+     *
+     * @return array An array with all sql tables.
+     */
     public function getSqlTablesArray()
     {
         $names = Yii::$app->db->schema->tableNames;

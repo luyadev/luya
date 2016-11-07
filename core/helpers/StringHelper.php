@@ -4,7 +4,7 @@ namespace luya\helpers;
 
 /**
  * String Helpers.
- * 
+ *
  * This class extends the {{yii\helpers\StringHelper}} class by some helpful methods.
  *
  * @author Basil Suter <basil@nadar.io>
@@ -14,7 +14,7 @@ class StringHelper extends \yii\helpers\StringHelper
 {
     /**
      * TypeCast a string to its specific types.
-     * 
+     *
      * Arrays will passed to to the {{luya\helpers\ArrayHelper::typeCast}} class.
      *
      * @param mixed $string The input string to type cast. Arrays will be passted to {{luya\helpers\ArrayHelper::typeCast}}.
