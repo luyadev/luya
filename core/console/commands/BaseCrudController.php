@@ -6,6 +6,7 @@ use Yii;
 use luya\console\Command;
 use yii\db\Schema;
 use yii\helpers\Inflector;
+use yii\base\NotSupportedException;
 
 /**
  * Base Crud Controller
@@ -21,6 +22,16 @@ abstract class BaseCrudController extends Command
      * @var boolean Whether to use schem name or not
      */
     public $useSchemaName = true;
+    
+    /**
+     * @var array A list of class names.
+     */
+    protected $classNames;
+    
+    /**
+     * @var array A list of table names.
+     */
+    protected $tableNames;
     
     /**
      * @var boolean Whether to generate labels from comments or not.

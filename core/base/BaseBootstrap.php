@@ -3,13 +3,14 @@
 namespace luya\base;
 
 use Yii;
+use yii\base\BootstrapInterface;
 
 /**
  * Base class for luya bootsrapping proccess.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
-abstract class Bootstrap implements \yii\base\BootstrapInterface
+abstract class BaseBootstrap implements BootstrapInterface
 {
     /**
      * @var array Readonly variable contains all module Objects.

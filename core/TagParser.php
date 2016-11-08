@@ -58,7 +58,7 @@ class TagParser extends Object
      */
     public static function inject($name, $config)
     {
-        static::getInstance()->addTag($name, $config);
+        self::getInstance()->addTag($name, $config);
     }
     
     /**
@@ -69,7 +69,7 @@ class TagParser extends Object
      */
     public static function convert($text)
     {
-        return static::getInstance()->processText($text);
+        return self::getInstance()->processText($text);
     }
     
     /**
@@ -93,7 +93,7 @@ class TagParser extends Object
      */
     public static function getInstantiatedTagObjects()
     {
-        $context = static::getInstance();
+        $context = self::getInstance();
         foreach ($context->tags as $key => $config) {
             $context->instantiatTag($key);
         }

@@ -143,8 +143,7 @@ abstract class Module extends \yii\base\Module
      *
      * the *@app* namespace views will be looked up for view files
      *
-     * @return string;
-     *
+     * @return string
      * @see \yii\base\Module::getLayoutPath()
      */
     public function getLayoutPath()
@@ -181,7 +180,7 @@ abstract class Module extends \yii\base\Module
     /**
      * register a component to the application. id => definition. All components will be registered during bootstrap process.
      *
-     * @return array:
+     * @return array
      */
     public function registerComponents()
     {
@@ -191,7 +190,7 @@ abstract class Module extends \yii\base\Module
     /**
      * Define a last of importer class with an array or run code directily with the import() method.
      *
-     * @param ImportControllerInterface $importer
+     * @param \luya\console\interfaces\ImportControllerInterface $importer The importer controller class which will be invoke to the import method.
      * @return boolean|array
      */
     public function import(ImportControllerInterface $importer)

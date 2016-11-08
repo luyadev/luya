@@ -60,7 +60,7 @@ trait CacheableTrait
     public $cacheExpiration = 86400;
 
     /**
-     * @var null|bollean store the cacheable state
+     * @var boolean Whether the caching is enabled or disabled.
      */
     private $_cachable = null;
     

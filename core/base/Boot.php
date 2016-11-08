@@ -3,14 +3,14 @@
 namespace luya\base;
 
 use Yii;
-use Exception;
 use ReflectionClass;
+use luya\Exception;
 use luya\web\Application as WebApplication;
 use luya\console\Application as ConsoleApplication;
 use luya\helpers\ArrayHelper;
 
 /**
- * Luya Boot Wrapper.
+ * LUYA Boot wrapper.
  *
  * Run the Luya/Yii Application based on the current enviroment which is determined trough get_sapi_name(). To run an application
  * a config file with custom Luya/Yii configuration must be provided via `$configFile` property. By default luya will try to find
@@ -21,11 +21,7 @@ use luya\helpers\ArrayHelper;
 abstract class Boot
 {
     /**
-     * The current luya version.
-     *
-     * @link https://github.com/zephir/luya/blob/master/CHANGELOG.md
-     *
-     * @var string
+     * @var string The current LUYA version (see: https://github.com/luyadev/luya/blob/master/CHANGELOG.md)
      */
     const VERSION = '1.0.0-RC2-dev';
     
@@ -35,13 +31,12 @@ abstract class Boot
     public $configFile = '../configs/env.php';
 
     /**
-     * @var luya\web\Application|luya\cli\Application The application object.
+     * @var \luya\web\Application|\luya\cli\Application The application object.
      */
     public $app = null;
 
     /**
-     * @var bool When enabled the boot process will not return/echo something, but the variabled will contain
-     *           the Application object.
+     * @var bool When enabled the boot process will not return/echo something, but the variabled will contain the Application object.
      */
     public $mockOnly = false;
 
@@ -97,8 +92,7 @@ abstract class Boot
     /**
      * Get the config array from the configFile path with the predefined values.
      *
-     * @throws Exception Throws exception if the config file does not exists.
-     *
+     * @throws \luya\Exception Throws exception if the config file does not exists.
      * @return array The array which will be injected into the Application Constructor.
      */
     public function getConfigArray()
@@ -141,6 +135,8 @@ abstract class Boot
 
     /**
      * Run Cli-Application based on the provided config file.
+     * 
+     * @return string|integer
      */
     public function applicationConsole()
     {
@@ -161,7 +157,7 @@ abstract class Boot
     /**
      * Run Web-Application based on the provided config file.
      *
-     * @return string|void Returns the Yii Application run() method if mock is disabled. Otherwise returns void
+     * @return string Returns the Yii Application run() method if mock is disabled. Otherwise returns void
      */
     public function applicationWeb()
     {

@@ -298,12 +298,13 @@ class UrlManager extends \yii\web\UrlManager
     }
     
     /**
+     * Replace the url with the current module context.
      * 
-     * @param unknown $url
-     * @param unknown $navItemId
-     * @param Composition $composition
-     * @throws BadRequestHttpException
-     * @return unknown|mixed
+     * @param string $url The url to replace
+     * @param integer $navItemId The navigation item where the context url to be found.
+     * @param \luya\web\Composition $composition Composition component object to resolve language context.
+     * @throws \yii\web\BadRequestHttpException
+     * @return string The replaced string.
      */
     private function urlReplaceModule($url, $navItemId, Composition $composition)
     {

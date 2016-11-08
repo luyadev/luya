@@ -116,7 +116,7 @@ abstract class Command extends \luya\console\Controller
     {
         $name = Inflector::camelize($string);
     
-        if ($suffix && StringHelper::endsWith($name, $suffix, false)) {
+        if ($suffix !== false && StringHelper::endsWith($name, $suffix, false)) {
             $name = substr($name, 0, -(strlen($suffix)));
         }
     

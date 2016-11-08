@@ -202,10 +202,11 @@ class BlockController extends \luya\console\Command
     }
     
     /**
+     * Create a variable based of user input.
      *
-     * @param unknown $prefix
-     * @param string $type 'var', 'cfg'
-     * @return multitype:string Ambigous <string, array>
+     * @param string $prefix
+     * @param string $typeCast 'var', 'cfg'
+     * @return array
      */
     private function varCreator($prefix, $typeCast)
     {
@@ -232,7 +233,7 @@ class BlockController extends \luya\console\Command
     
         $extra = $this->getExtraVarDef($type, $v['var'], $func);
     
-        if ($extra) {
+        if ($extra !== false) {
             $this->phpdoc[] = '{{extras.'.$v['var'].'}}';
             $this->viewFileDoc[] = '$this->extraValue(\''.$v['var'].'\');';
             $this->extras[] = $extra;

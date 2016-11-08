@@ -201,8 +201,8 @@ class CrudController extends BaseCrudController
      * @param string $fileNamepsace
      * @param string $className
      * @param string $apiEndpoint
-     * @param TableSchema $schema
-     * @param string $i18nFields
+     * @param \yii\db\TableSchema $schema
+     * @param boolean $i18nFields
      * @return string
      */
     public function generateModelContent($fileNamepsace, $className, $apiEndpoint, TableSchema $schema, $i18nFields)
@@ -331,6 +331,8 @@ class CrudController extends BaseCrudController
             $this->enableI18n = $this->confirm("Would you like to enable i18n field input for text fields? Only required for multilingual pages.");
         }
 
+        $files = [];
+        
         // api content
 
         $files['api'] = [
