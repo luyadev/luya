@@ -34,6 +34,11 @@ abstract class BaseCrudController extends Command
     protected $tableNames;
     
     /**
+     * @var string The name of the table.
+     */
+    public $tableName;
+    
+    /**
      * @var boolean Whether to generate labels from comments or not.
      */
     public $generateLabelsFromComments = false;

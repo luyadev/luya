@@ -3,7 +3,6 @@
 namespace luya\web;
 
 use luya\base\Module;
-use luya\base\AdminModuleInterface;
 
 /**
  * Base class for all controllers in luya application Modules.

@@ -31,7 +31,7 @@ abstract class Boot
     public $configFile = '../configs/env.php';
 
     /**
-     * @var \luya\web\Application|\luya\cli\Application The application object.
+     * @var \luya\web\Application|\luya\console\Application The application object.
      */
     public $app = null;
 
