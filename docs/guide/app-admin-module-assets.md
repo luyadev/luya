@@ -1,8 +1,6 @@
-Admin Assets
-==================
+# Admin Assets
 
 This section describes how to add assets (css or javascript) files to your administration module, to make sure are depending and initializing your files at the right point, all your custom assets should depend on the `admin\assets\Main` packaged.
-
 
 ### Example Bundle
 
@@ -32,17 +30,36 @@ class MyAdminAsset extends \luya\web\Asset
 
 ### Embed the asset
 
-To emebed the above created example asset file stored in your admin module you hav to add the asset bundle into your `$assets` array config of the belonging `Module.php` file as shown below:
+To embed the above created example asset file stored in your admin module you hav to add the asset bundle into the {{\luya\ase\AdminModuleInterface::getAdminAssets}} method of the belonging `Module.php` file as shown below:
 
 ```php
 <?php
 namespace app\modules\myadmin;
 
-class Module extends \admin\base\Module
+class Module extends \luya\admin\base\Module
 {
-    public $assets = [
-        'app\modules\myadmin\assets\MyAdminAsset'
-    ];
-
+    /**
+     * Returns all Asset files to registered in the administration interfaces.
+     * 
+     * As the adminstration UI is written in angular, the assets must be pre assigned to the adminisration there for the `getAdminAssets()` method exists.
+     * 
+     * ```php
+     * public function getAdminAssets()
+     * {
+     *     return [
+     *          'luya\admin\assets\Main',
+     *          'luya\admin\assets\Flow',
+     *     ];
+     * }
+     * ```
+     * 
+     * @return array An array with with assets files where the array has no key and the value is the path to the asset class.
+     */
+    public function getAdminAssets()
+    {
+        return [
+            'app\modules\myadmin\assets\MyAdminAsset'
+        ];
+    }
 }
 ```

@@ -31,7 +31,6 @@
   + [Frontend Module Intro Guide](app-module-frontend.md)
   + [Layouts](app-module-layouts.md)
   + [Url Rules](app-module-urlrules.md)
-  + [Assets](app-module-assets.md)
 + Administration Module
   + [Admin Module Intro Guide](app-admin-module.md)
   + [NgRest Crud Concept](app-admin-module-ngrest.md)

@@ -13,40 +13,6 @@ use luya\base\AdminModuleInterface;
 abstract class Controller extends \yii\web\Controller
 {
     /**
-     * @var array skips defined assets from the module base, you can not skip assets which are registered in the local asset variable. To Skip
-     * all the assets from the module ($this->module->assets) you can use skipAssets = ["*"];.
-     */
-    public $skipModuleAssets = [];
-
-    /**
-     * @var array Defined assets where should be assigned into the view for this controller. The class name of the Asset (e.g. "\admin\asset\BowerAsset")
-     */
-    public $assets = [];
-
-    /**
-     * Yii initializer. Find assets to register, and add them into the view if they are not ignore by $skipModuleAssets.
-     */
-    public function init()
-    {
-        // call parent
-        parent::init();
-        
-        if ($this->module instanceof AdminModuleInterface) {
-            // get asset bundles which are defined in the module and register them into the view
-            foreach ($this->module->assets as $class) {
-                if (!in_array($class, $this->skipModuleAssets) && !in_array('*', $this->skipModuleAssets)) {
-                    // autoload $class and register with current view
-                    $this->registerAsset($class);
-                }
-            }
-            // get controller based assets
-            foreach ($this->assets as $class) {
-                $this->registerAsset($class);
-            }
-        }
-    }
-
-    /**
      * Helper method for registring an asset into the view.
      *
      * @param string $className The asset class to register, example `app\asset\MyTestAsset`.

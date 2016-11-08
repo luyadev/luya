@@ -23,6 +23,7 @@ class Controller extends \luya\web\Controller
      */
     public $disablePermissionCheck = false;
 
+    
     /**
      * Returns the rules for the AccessControl filter behavior.
      *

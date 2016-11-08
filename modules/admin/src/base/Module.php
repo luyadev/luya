@@ -50,19 +50,53 @@ class Module extends \luya\base\Module implements AdminModuleInterface
      */
     public $ngrestConfigLinker = [];
 
-    /**
-     * @var array Each module can have assets, all module controllers will register those assets in the view.. Valid class name to the asset e.g.
-     *
-     * ```php
-     * public $assets = ['\app\assets\TestAsset'];
-     * ```
-     */
-    public $assets = [];
     
     /**
-     * @var array Register translations from admin modules, to make them available in javascript files trough the `i18n['yourTranslation']` object.
+     * Returns all Asset files to registered in the administration interfaces.
+     *
+     * As the adminstration UI is written in angular, the assets must be pre assigned to the adminisration there for the `getAdminAssets()` method exists.
+     *
+     * ```php
+     * public function getAdminAssets()
+     * {
+     *     return [
+     *          'luya\admin\assets\Main',
+     *          'luya\admin\assets\Flow',
+     *     ];
+     * }
+     * ```
+     *
+     * @return array An array with with assets files where the array has no key and the value is the path to the asset class.
      */
-    public $registerJsTranslation = [];
+    public function getAdminAssets()
+    {
+        return [];
+    }
+    
+    /**
+     * Returns all message identifier for the current module which should be assigned to the javascript admin interface.
+     *
+     * As the administration UI is written in angular, translations must also be available in different javascript section of the page.
+     *
+     * The response array of this method returns all messages keys which will be assigned:
+     *
+     * Example:
+     *
+     * ```php
+     * public function getJsTranslationMessages()
+     * {
+     *     return ['js_ngrest_rm_page', 'js_ngrest_rm_confirm', 'js_ngrest_error'],
+     * }
+     * ```
+     *
+     * Assuming the aboved keys are also part of the translation messages files.
+     *
+     * @return array An array with values of the message keys based on the Yii translation system.
+     */
+    public function getJsTranslationMessages()
+    {
+        return [];
+    }
     
     /**
      * Checks if a config exist in the linked property based on the provided `$apiEndpoint`.

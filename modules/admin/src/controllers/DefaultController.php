@@ -17,6 +17,20 @@ use luya\TagParser;
 class DefaultController extends Controller
 {
     public $disablePermissionCheck = true;
+    
+    /**
+     * Yii initializer. Find assets to register, and add them into the view if they are not ignore by $skipModuleAssets.
+     */
+    public function init()
+    {
+        // call parent
+        parent::init();
+    
+        // get controller based assets
+        foreach ($this->module->assets as $class) {
+            $this->registerAsset($class);
+        }
+    }
 
     public function actionIndex()
     {

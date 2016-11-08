@@ -88,21 +88,9 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     ];
 
     /**
-     * @var array Administration asset bundles.
+     * @var array This property is used by the {{luya\web\Bootstrap::run}} method in order to set the collected asset files to assign.
      */
-    public $assets = [
-        'luya\admin\assets\Main',
-        'luya\admin\assets\Flow',
-    ];
-
-    /**
-     * @var array The translations keys which will be passed to the admin javascript translator to access from js scripts.
-     */
-    public $registerJsTranslation = [
-        'js_ngrest_rm_page', 'js_ngrest_rm_confirm', 'js_ngrest_error', 'js_ngrest_rm_update', 'js_ngrest_rm_success', 'js_tag_exists', 'js_tag_success', 'js_admin_reload', 'js_dir_till', 'js_dir_set_date', 'js_dir_table_add_row', 'js_dir_table_add_column', 'js_dir_image_description',
-        'js_dir_no_selection', 'js_dir_image_upload_ok', 'js_dir_image_filter_error', 'js_dir_upload_wait', 'js_dir_manager_upload_image_ok', 'js_dir_manager_rm_file_confirm', 'js_dir_manager_rm_file_ok', 'js_zaa_server_proccess',
-        'ngrest_select_no_selection',
-    ];
+    public $assets = [];
     
     /**
      * @var array This property is used by the {{luya\web\Bootstrap::run}} method in order to set the collected menu items forom all admin modules and build the menu.
@@ -122,6 +110,60 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         ],
     ];
     
+    /**
+     * Returns all Asset files to registered in the administration interfaces.
+     *
+     * As the adminstration UI is written in angular, the assets must be pre assigned to the adminisration there for the `getAdminAssets()` method exists.
+     *
+     * ```php
+     * public function getAdminAssets()
+     * {
+     *     return [
+     *          'luya\admin\assets\Main',
+     *          'luya\admin\assets\Flow',
+     *     ];
+     * }
+     * ```
+     *
+     * @return array An array with with assets files where the array has no key and the value is the path to the asset class.
+     */
+    public function getAdminAssets()
+    {
+        return [
+            'luya\admin\assets\Main',
+            'luya\admin\assets\Flow',
+        ];
+    }
+
+    /**
+     * Returns all message identifier for the current module which should be assigned to the javascript admin interface.
+     *
+     * As the administration UI is written in angular, translations must also be available in different javascript section of the page.
+     *
+     * The response array of this method returns all messages keys which will be assigned:
+     *
+     * Example:
+     *
+     * ```php
+     * public function getJsTranslationMessages()
+     * {
+     *     return ['js_ngrest_rm_page', 'js_ngrest_rm_confirm', 'js_ngrest_error'],
+     * }
+     * ```
+     *
+     * Assuming the aboved keys are also part of the translation messages files.
+     *
+     * @return array An array with values of the message keys based on the Yii translation system.
+     */
+    public function getJsTranslationMessages()
+    {
+        return [
+            'js_ngrest_rm_page', 'js_ngrest_rm_confirm', 'js_ngrest_error', 'js_ngrest_rm_update', 'js_ngrest_rm_success', 'js_tag_exists', 'js_tag_success', 'js_admin_reload', 'js_dir_till', 'js_dir_set_date', 'js_dir_table_add_row', 'js_dir_table_add_column', 'js_dir_image_description',
+            'js_dir_no_selection', 'js_dir_image_upload_ok', 'js_dir_image_filter_error', 'js_dir_upload_wait', 'js_dir_manager_upload_image_ok', 'js_dir_manager_rm_file_confirm', 'js_dir_manager_rm_file_ok', 'js_zaa_server_proccess',
+            'ngrest_select_no_selection',
+        ];
+    }
+    
     private $_jsTranslations = [];
     
     /**
@@ -136,6 +178,8 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     
     /**
      * Setter for js translations files.
+     * 
+     * This setter method is used by the {{luya\web\Bootstrap::run}} to assign all js transaltion files from the admin modules.
      * 
      * @param array $translations
      */

@@ -61,13 +61,13 @@ class Bootstrap extends BaseBootstrap
             if ($this->hasModule('admin') && $app->request->isAdmin()) {
                 foreach ($this->getModules() as $id => $module) {
                     if ($module instanceof AdminModuleInterface) {
-                        $this->_adminAssets = ArrayHelper::merge($module->assets, $this->_adminAssets);
+                        $this->_adminAssets = ArrayHelper::merge($module->getAdminAssets(), $this->_adminAssets);
                         $this->_adminMenus[$module->id] = $module->getMenu();
-                        $this->_jsTranslations[$id] = $module->registerJsTranslation;
+                        $this->_jsTranslations[$id] = $module->getJsTranslationMessages();
                     }
                 }
                 
-                $app->getModule('admin')->assets = ArrayHelper::merge($this->_adminAssets, $app->getModule('admin')->assets);
+                $app->getModule('admin')->assets = $this->_adminAssets;
                 $app->getModule('admin')->controllerMap = $this->_apis;
                 $app->getModule('admin')->moduleMenus = $this->_adminMenus;
                 $app->getModule('admin')->setJsTranslations($this->_jsTranslations);

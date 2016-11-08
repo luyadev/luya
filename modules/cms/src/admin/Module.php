@@ -31,17 +31,60 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         'api-cms-navitemblock' => 'luya\cms\admin\apis\NavItemBlockController',
     ];
 
-    public $assets = [
-        'luya\cms\admin\assets\Main',
-    ];
     
-    public $registerJsTranslation = [
-        'js_added_translation_ok', 'js_added_translation_error', 'js_page_add_exists', 'js_page_property_refresh', 'js_page_confirm_delete', 'js_page_delete_error_cause_redirects', 'js_state_online', 'js_state_offline',
-        'js_state_hidden', 'js_state_visible', 'js_state_is_home', 'js_state_is_not_home', 'js_page_item_update_ok', 'js_page_block_update_ok', 'js_page_block_remove_ok', 'js_page_block_visbility_change', 'js_page_block_delete_confirm',
-        'js_version_update_success', 'js_version_error_empty_fields', 'js_version_create_success', 'js_version_delete_confirm', 'js_version_delete_confirm_success',
-        'view_index_page_success'
-    ];
-
+    /**
+     * Returns all Asset files to registered in the administration interfaces.
+     *
+     * As the adminstration UI is written in angular, the assets must be pre assigned to the adminisration there for the `getAdminAssets()` method exists.
+     *
+     * ```php
+     * public function getAdminAssets()
+     * {
+     *     return [
+     *          'luya\admin\assets\Main',
+     *          'luya\admin\assets\Flow',
+     *     ];
+     * }
+     * ```
+     *
+     * @return array An array with with assets files where the array has no key and the value is the path to the asset class.
+     */
+    public function getAdminAssets()
+    {
+        return  [
+            'luya\cms\admin\assets\Main',
+        ];
+    }
+    
+    /**
+     * Returns all message identifier for the current module which should be assigned to the javascript admin interface.
+     *
+     * As the administration UI is written in angular, translations must also be available in different javascript section of the page.
+     *
+     * The response array of this method returns all messages keys which will be assigned:
+     *
+     * Example:
+     *
+     * ```php
+     * public function getJsTranslationMessages()
+     * {
+     *     return ['js_ngrest_rm_page', 'js_ngrest_rm_confirm', 'js_ngrest_error'],
+     * }
+     * ```
+     *
+     * Assuming the aboved keys are also part of the translation messages files.
+     *
+     * @return array An array with values of the message keys based on the Yii translation system.
+     */
+    public function getJsTranslationMessages()
+    {
+        return [
+            'js_added_translation_ok', 'js_added_translation_error', 'js_page_add_exists', 'js_page_property_refresh', 'js_page_confirm_delete', 'js_page_delete_error_cause_redirects', 'js_state_online', 'js_state_offline',
+            'js_state_hidden', 'js_state_visible', 'js_state_is_home', 'js_state_is_not_home', 'js_page_item_update_ok', 'js_page_block_update_ok', 'js_page_block_remove_ok', 'js_page_block_visbility_change', 'js_page_block_delete_confirm',
+            'js_version_update_success', 'js_version_error_empty_fields', 'js_version_create_success', 'js_version_delete_confirm', 'js_version_delete_confirm_success',
+            'view_index_page_success',
+        ];
+    }
     public $translations = [
         [
             'prefix' => 'cmsadmin*',
