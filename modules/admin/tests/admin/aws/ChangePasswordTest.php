@@ -12,7 +12,7 @@ class ChangePasswordTest extends AdminTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->aws = Yii::createObject(['class' => 'luya\admin\aws\ChangePassword', 'className' => 'admin\models\User']);
+        $this->aws = Yii::createObject(['class' => 'luya\admin\aws\ChangePassword']);
     }
 
     public function testIndex()

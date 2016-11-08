@@ -571,12 +571,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya.git",
-                "reference": "b9198c8884e600c2b3ed028b4997a67cbaaa7203"
+                "reference": "1deb9a4020ab3de66f77638f329b410a901b8274"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya/zipball/b9198c8884e600c2b3ed028b4997a67cbaaa7203",
-                "reference": "b9198c8884e600c2b3ed028b4997a67cbaaa7203",
+                "url": "https://api.github.com/repos/luyadev/luya/zipball/1deb9a4020ab3de66f77638f329b410a901b8274",
+                "reference": "1deb9a4020ab3de66f77638f329b410a901b8274",
                 "shasum": ""
             },
             "require": {
@@ -632,7 +632,7 @@
                 "yii2",
                 "yii2-wrapper"
             ],
-            "time": "2016-11-06 20:44:41"
+            "time": "2016-11-08 13:10:47"
         },
         {
             "name": "luyadev/luya-module-admin",
@@ -640,12 +640,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "7502cafe278ebbf753c24046e1bccfabb5f33de4"
+                "reference": "e86a89cb86e5a28c9607437d2f959d1c084eba70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/7502cafe278ebbf753c24046e1bccfabb5f33de4",
-                "reference": "7502cafe278ebbf753c24046e1bccfabb5f33de4",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/e86a89cb86e5a28c9607437d2f959d1c084eba70",
+                "reference": "e86a89cb86e5a28c9607437d2f959d1c084eba70",
                 "shasum": ""
             },
             "require": {
@@ -694,7 +694,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2016-11-06 20:44:41"
+            "time": "2016-11-08 13:05:21"
         },
         {
             "name": "myclabs/deep-copy",
@@ -737,57 +737,6 @@
                 "object graph"
             ],
             "time": "2016-10-31 17:19:45"
-        },
-        {
-            "name": "nadar/yii2-imagine",
-            "version": "2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nadar/yii2-imagine.git",
-                "reference": "e71458b87153c99471b2a07c749a27d760e47e16"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nadar/yii2-imagine/zipball/e71458b87153c99471b2a07c749a27d760e47e16",
-                "reference": "e71458b87153c99471b2a07c749a27d760e47e16",
-                "shasum": ""
-            },
-            "require": {
-                "imagine/imagine": "~0.6.0",
-                "yiisoft/yii2": "~2.0.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~5.0"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "yii\\imagine\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Antonio Ramirez",
-                    "email": "amigo.cobos@gmail.com"
-                }
-            ],
-            "description": "The Imagine integration for the Yii framework",
-            "keywords": [
-                "helper",
-                "image",
-                "imagine",
-                "yii2"
-            ],
-            "time": "2016-09-13 07:07:21"
         },
         {
             "name": "phpdocumentor/reflection-common",
