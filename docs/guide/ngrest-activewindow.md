@@ -70,9 +70,7 @@ In order to create a button with a callback we use the helper method `$this->cal
 ```php
 <?php
 
-/**
- * @var $this \luya\admin\ngrest\base\ActiveWindowView
- */
+/* @var $this \luya\admin\ngrest\base\ActiveWindowView */
 
 echo $this->callbackButton('My Button', 'hello-world', ['params' => ['name' => 'John Doe']]);
 ```
@@ -94,10 +92,9 @@ You can also use the callback from widget to create a form sending data to a cal
 <?php
 use luya\admin\ngrest\aw\CallbackFormWidget;
 
-/**
- * @var $this \luya\admin\ngrest\base\ActiveWindowView
- * @var $form luya\admin\ngrest\aw\CallbackFormWidget
- */
+/* @var $this \luya\admin\ngrest\base\ActiveWindowView */
+/* @var $this \luya\admin\ngrest\aw\CallbackFormWidget */ 
+
 ?>
 <div>
     <? $form = CallbackFormWidget::begin(['callback' => 'post-data', 'buttonValue' => 'Submit']); ?>
