@@ -7,6 +7,7 @@ use Yii;
 /**
  * Represents a CMS Block with Twig views.
  *
+ * @deprecated 1.0.0-RC2 Marked as deprecated and will be removed on 1.0.0 release.
  * @since 1.0.0-beta8
  * @author Basil Suter <basil@nadar.io>
  */
@@ -20,7 +21,7 @@ abstract class TwigBlock extends InternalBaseBlock implements TwigBlockInterface
     public function renderFrontend()
     {
         $this->injectorSetup();
-        return Yii::$app->twig->stringEnv->render($this->getTwigFrontendContent(), [
+        return Yii::$app->twig->getTemplateEnv($this->getTwigFrontendContent())->render([
             'vars' => $this->getVarValues(),
             'cfgs' => $this->getCfgValues(),
             'placeholders' => $this->getPlaceholderValues(),
