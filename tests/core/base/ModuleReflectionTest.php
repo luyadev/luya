@@ -35,7 +35,7 @@ class ModuleReflectionTest extends \luyatests\LuyaWebTestCase
         
         $content = $ref->run();
 
-        $this->assertEquals(5, count($content));
+        $this->assertEquals(4, count($content));
 
         $this->assertEquals('unit-test', $content['id']);
         $this->assertEquals('unitmodule', $content['module']);
