@@ -21,7 +21,7 @@ abstract class TwigBlock extends InternalBaseBlock implements TwigBlockInterface
     public function renderFrontend()
     {
         $this->injectorSetup();
-        return Yii::$app->twig->getTemplateEnv($this->getTwigFrontendContent())->render([
+        return Yii::$app->twig->stringEnv->render($this->getTwigFrontendContent(), [
             'vars' => $this->getVarValues(),
             'cfgs' => $this->getCfgValues(),
             'placeholders' => $this->getPlaceholderValues(),
