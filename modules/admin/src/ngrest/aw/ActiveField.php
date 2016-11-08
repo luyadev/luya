@@ -14,7 +14,7 @@ use yii\helpers\Html;
 class ActiveField extends Object
 {
     /**
-     * @var \admin\ngrest\aw\CallbackFormWidget The form widget object
+     * @var \luya\admin\ngrest\aw\CallbackFormWidget The form widget object
      */
     public $form = null;
     
@@ -61,7 +61,7 @@ class ActiveField extends Object
      * Text input field
      *
      * @param array $options Optional data for the text input array.
-     * @return \admin\ngrest\aw\ActiveField
+     * @return \luya\admin\ngrest\aw\ActiveField
      */
     public function textInput(array $options = [])
     {
@@ -76,10 +76,28 @@ class ActiveField extends Object
     }
     
     /**
+     * Passwword input field
+     *
+     * @param array $options Optional data for the text input array.
+     * @return \luya\admin\ngrest\aw\ActiveField
+     */
+    public function passwordInput(array $options = [])
+    {
+        $this->parts['{input}'] = Html::passwordInput($this->attribute, $this->value, [
+            'class' => 'input__field',
+            'id' => $this->form->getFieldId($this->attribute),
+            'ng-model' => 'params.'.$this->attribute,
+        ]);
+        $this->parts['{class}'] = 'input input--text input--vertical';
+    
+        return $this;
+    }
+    
+    /**
      * Create text area
      *
      * @param array $options Optional data for the textarea input
-     * @return \admin\ngrest\aw\ActiveField
+     * @return \luya\admin\ngrest\aw\ActiveField
      */
     public function textarea(array $options = [])
     {

@@ -12,10 +12,21 @@ use luya\admin\ngrest\base\ActiveWindow;
  */
 class GroupAuth extends ActiveWindow
 {
+    /**
+     * @var string The name of the module where the active windows is located in order to finde the view path.
+     */
     public $module = 'admin';
 
+    /**
+     * @var string The icon name from goolges material icon set (https://material.io/icons/)
+     */
     public $icon = 'verified_user';
     
+    /**
+     * The default action which is going to be requested when clicking the ActiveWindow.
+     *
+     * @return string The response string, render and displayed trough the angular ajax request.
+     */
     public function index()
     {
         return $this->render('index');

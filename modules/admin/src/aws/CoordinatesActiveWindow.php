@@ -13,10 +13,19 @@ use luya\admin\ngrest\base\ActiveWindow;
  */
 class CoordinatesActiveWindow extends ActiveWindow
 {
+    /**
+     * @var string The name of the module where the active windows is located in order to finde the view path.
+     */
     public $module = '@admin';
     
+    /**
+     * @var string The name of of the ActiveWindow. This is displayed in the CRUD list.
+     */
     public $alias = 'Coordinates';
     
+    /**
+     * @var string The icon name from goolges material icon set (https://material.io/icons/)
+     */
     public $icon = 'pin_drop';
     
     /**

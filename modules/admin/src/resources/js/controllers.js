@@ -618,35 +618,6 @@
 		
 	});
 	
-	zaa.controller("ActiveWindowChangePassword", function($scope) {
-		
-		$scope.crud = $scope.$parent;
-		
-		$scope.init = function() {
-			$scope.errorMessage = [];
-			$scope.error = false;
-			$scope.submitted = false;
-			$scope.transport = [];
-			$scope.newpass = null;
-			$scope.newpasswd = null;
-		};
-		
-		$scope.$watch(function() { return $scope.crud.data.aw.itemId }, function(n, o) {
-			$scope.init();
-		});
-		
-		$scope.submit = function() {
-			$scope.crud.sendActiveWindowCallback('save', {'newpass' : $scope.newpass, 'newpasswd' : $scope.newpasswd}).then(function(response) {
-				$scope.submitted = true;
-				$scope.error = response.data.error;
-				$scope.transport = response.data.message;
-				if ($scope.error) {
-					$scope.errorMessage = response.data.message;
-				}
-			})
-		};
-	});
-	
 	zaa.controller("ActiveWindowGroupAuth", function($scope, $http, CacheReloadService) {
 		
 		$scope.crud = $scope.$parent; // {{ data.aw.itemId }}

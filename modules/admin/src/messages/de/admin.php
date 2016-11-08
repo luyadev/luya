@@ -185,5 +185,7 @@ return [
     'menu_system_logger' => 'Logger',
     'layout_filemanager_detail_replace_file' => 'Datei ersetzen',
 	'layout_rightbar_languagelabel' => 'Oberflächen Sprache',
-	'layout_rightbar_savebtn' => 'Speichern'
+	'layout_rightbar_savebtn' => 'Speichern',
+    'aws_changepassword_notequal' => 'Das neue Passwort muss mit der Wiederholung übereinstimmen.',
+    'aws_changeapssword_minchar' => 'Das neue Passwort muss mindiestnes {min} Zeichen enthalten.',
 ];

@@ -69,7 +69,8 @@ In order to create a button with a callback we use the helper method `$this->cal
 
 ```php
 <?php
-/*
+
+/**
  * @var $this \luya\admin\ngrest\base\ActiveWindowView
  */
 
@@ -90,11 +91,21 @@ public function callbackHelloWolrd($name)
 You can also use the callback from widget to create a form sending data to a callback
 
 ```php
-<? $form = CallbackFormWidget::begin(['callback' => 'post-data', 'buttonValue' => 'Submit']); ?>
-<?= $form->field('firstname', 'Firstname'); ?>
-<?= $form->field('lastname', 'Lastname:'); ?>
-<?= $form->field('message')->textarea(); ?>
-<? $form::end(); ?>
+<?php
+use luya\admin\ngrest\aw\CallbackFormWidget;
+
+/**
+ * @var $this \luya\admin\ngrest\base\ActiveWindowView
+ * @var $form luya\admin\ngrest\aw\CallbackFormWidget
+ */
+?>
+<div>
+    <? $form = CallbackFormWidget::begin(['callback' => 'post-data', 'buttonValue' => 'Submit']); ?>
+    <?= $form->field('firstname', 'Firstname'); ?>
+    <?= $form->field('password', 'Password')->passwordInput(); ?>
+    <?= $form->field('message', 'Message')->textarea(); ?>
+    <? $form::end(); ?>
+</div>
 ```
 
 The corresponding callback should look like this:

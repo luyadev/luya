@@ -101,7 +101,7 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
     
     public function ngRestConfig($config)
     {
-        $config->aw->load(['class' => ChangePassword::className(), 'className' => User::className()]);
+        $config->aw->load(['class' => ChangePassword::className()]);
         
         $this->ngRestConfigDefine($config, 'list', ['firstname', 'lastname', 'email', 'lastloginTimestamp']);
         $this->ngRestConfigDefine($config, 'create', ['title', 'firstname', 'lastname', 'email', 'password']);
@@ -200,13 +200,6 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
 
     public function changePassword($newpass, $newpasswd)
     {
-        if (strlen($newpass) < 8) {
-            return $this->addError('newpass', 'Das neue Passwort muss mindestens 8 Zeichen lang sein.');
-        }
-        if ($newpass !== $newpasswd) {
-            return $this->addError('newpasswd', 'Das neue Passwort muss mit der Wiederholung übereinstimmen.');
-        }
-
         $this->password = $newpass;
 
         if ($this->encodePassword()) {

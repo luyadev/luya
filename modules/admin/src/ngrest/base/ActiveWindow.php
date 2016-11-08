@@ -3,12 +3,12 @@
 namespace luya\admin\ngrest\base;
 
 use Yii;
-use luya\Exception;
+use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 use yii\base\ViewContextInterface;
 use yii\base\Object;
 use luya\admin\ngrest\base\ActiveWindowView;
-use yii\helpers\Inflector;
+use luya\Exception;
 use luya\helpers\Url;
 
 /**
@@ -42,12 +42,12 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     public $module = null;
     
     /**
-     * @var string Google-Icon name
+     * @var string The icon name from goolges material icon set (https://material.io/icons/)
      */
     public $icon = 'extension';
     
     /**
-     * @var string Optional alias name for the ActiveWindow which renders the Crud-list-Button.
+     * @var string The name of of the ActiveWindow. This is displayed in the CRUD list.
      */
     public $alias = false;
 
@@ -241,9 +241,9 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     /**
      * Set the value of the item Id in where the active window context is initialized.
      *
-     * @param intger $itemId The item id context
-     * @throws Exception
-     * @return intger
+     * @param integer $itemId The item id context
+     * @throws \luya\Exception
+     * @return integer
      */
     public function setItemId($itemId)
     {
@@ -257,7 +257,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     /**
      * Get the item id of the current active window context.
      *
-     * @return intger|mixed
+     * @return integer
      */
     public function getItemId()
     {

@@ -27,6 +27,9 @@ class Request extends \yii\web\Request
      */
     public $cookieValidationKey = '(`1gq(|TI2Zxx7zZH<Zk052a9a$@l2EtD9wT`lkTO@7uy{cPaJt4y70mxh4q(3';
     
+    /**
+     * @var array A list of default available parsers.
+     */
     public $parsers = [
         'application/json' => 'yii\web\JsonParser',
     ];

@@ -37,8 +37,6 @@ abstract class TwigBlock extends InternalBaseBlock implements TwigBlockInterface
     
     /* protected and privates */
     
-    
-    
     /**
      * Returns the content of the frontend twig file.
      *
