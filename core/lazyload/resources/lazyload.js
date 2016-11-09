@@ -63,6 +63,12 @@
                     );
                 }
             });
+
+            $loadImage.on('error', function() {
+                $('#' + settings.imageIdentifierPrefix + image.id).css('cursor', 'default').find('.loader').replaceWith(
+                    '<span style="position: absolute; left: 0; right: 0; top: 50%; font-size: 40px; line-height: 40px; margin-top: -20px; text-align: center; opacity: .3;">?</span>'
+                );
+            });
         });
     };
 
