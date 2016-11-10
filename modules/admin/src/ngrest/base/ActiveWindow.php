@@ -24,7 +24,7 @@ use luya\helpers\Url;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-abstract class ActiveWindow extends Object implements ViewContextInterface
+abstract class ActiveWindow extends Object implements ViewContextInterface, ActiveWindowInterface
 {
     /**
      * @var string $suffix The suffix to use for all classes
