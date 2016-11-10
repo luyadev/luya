@@ -17,7 +17,7 @@ use luya\helpers\Url;
  * An ActiveWindow is basically a custom view which renders your data attached to a row in the CRUD grid table.
  *
  * @property integer $itemId The Id of the item
- * @property \admin\ngrest\base\ActiveWindowView $view The view object
+ * @property \luya\admin\ngrest\base\ActiveWindowView $view The view object
  * @property string $name Get the current Active Window Name
  * @property string $hashName Get an unique hased Active Window config name
  * @property \yii\db\ActiveRecordInterface $model The model evaluated by the `findOne` of the called ng rest model ActiveRecord.
@@ -54,6 +54,8 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
     private $_model = null;
     
     /**
+     * Get the model object from where the Active Window is attached to.
+     * 
      * @return \yii\db\ActiveRecordInterface Get the model of the called ngrest model ActiveRecord by it's itemId.
      */
     public function getModel()
@@ -226,7 +228,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
     /**
      * Get the view object to render templates.
      *
-     * @return \admin\ngrest\base\ActiveWindowView
+     * @return \luya\admin\ngrest\base\ActiveWindowView
      */
     public function getView()
     {
