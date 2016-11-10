@@ -261,7 +261,7 @@
                 "name": "@fieldname"
             },
             template: function() {
-                return '<textarea ng-wig="model" buttons="bold, italic, link, list1, list2" name="{{name}}"></textarea>';
+                return '<ng-wig ng-disabled="false" ng-model="model" buttons="bold, italic, link, list1, list2" name="{{name}}"></ng-wig>';
             }
         }
     });
