@@ -66,10 +66,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     }
     
     /**
-     * Initliazier
-     *
-     * {@inheritDoc}
-     * @see \yii\base\Object::init()
+     * @inheritdoc
      */
     public function init()
     {
@@ -82,11 +79,19 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     
     private $_configHash = null;
     
+    /**
+     * @inheritdoc
+     */
     public function setConfigHash($hash)
     {
         $this->_configHash = $hash;
     }
     
+    /**
+     * Return the config hash name from the setter method.
+     * 
+     * @return string
+     */
     public function getConfigHash()
     {
         return $this->_configHash;
@@ -94,11 +99,18 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     
     private $_activeWindowHash = null;
     
+    /**
+     * @inheritdoc
+     */
     public function setActiveWindowHash($hash)
     {
         $this->_activeWindowHash = $hash;
     }
     
+    /**
+     * Get the active window hash from the setter method.
+     * @return string
+     */
     public function getActiveWindowHash()
     {
         return $this->_activeWindowHash;
@@ -239,11 +251,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     private $_itemId = null;
     
     /**
-     * Set the value of the item Id in where the active window context is initialized.
-     *
-     * @param integer $itemId The item id context
-     * @throws \luya\Exception
-     * @return integer
+     * @inheritdoc
      */
     public function setItemId($itemId)
     {
@@ -255,9 +263,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface
     }
 
     /**
-     * Get the item id of the current active window context.
-     *
-     * @return integer
+     * @inheritdoc
      */
     public function getItemId()
     {

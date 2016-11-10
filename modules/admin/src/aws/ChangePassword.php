@@ -10,7 +10,9 @@ use luya\admin\ngrest\base\ActiveWindow;
 /**
  * Change Passwort Active Window.
  *
- * The model class defined by `className` must implement the {{\luya\admin\aws\ChangePasswordInterface}}.
+ * This Change Password ActiveWindow allows you to enter a new password and a password repetition which is going to call the {{\luya\admin\aws\ChangePasswordInterface::changePassword}} in order to change the password of an user or other models.
+ *
+ * The model where you apply the ChangePassword ActiveWindow must implement the {{\luya\admin\aws\ChangePasswordInterface}}.
  *
  * @author Basil Suter <basil@nadar.io>
  */
