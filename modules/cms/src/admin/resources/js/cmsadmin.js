@@ -187,7 +187,13 @@
 				
 				$scope.aliasSuggestion = function() {
 					$scope.data.alias = Slug.slugify($scope.data.title);
-				}
+				};
+				
+				$scope.$watch('data.alias', function(n, o) {
+					if (n!=o && n!=null) {
+						$scope.data.alias = Slug.slugify(n);
+					}
+				});
 				
 				$scope.exec = function () {
 					$scope.controller.save().then(function(response) {
@@ -910,7 +916,7 @@
 	 * @param $scope.lang
 	 *            from ng-repeat
 	 */
-	zaa.controller("NavItemController", function($scope, $http, $timeout, ServiceMenuData, AdminLangService, AdminToastService, ServiceLiveEditMode) {
+	zaa.controller("NavItemController", function($scope, $http, $timeout, Slug, ServiceMenuData, AdminLangService, AdminToastService, ServiceLiveEditMode) {
 		
 		$scope.loaded = false;
 		
@@ -998,6 +1004,12 @@
 			$scope.reset();
 			$scope.settings = !$scope.settings;
 		};
+		
+		$scope.$watch('itemCopy.alias', function(n, o) {
+			if (n!=o && n!=null) {
+				$scope.itemCopy.alias = Slug.slugify(n);
+			}
+		});
 	
 		$scope.typeDataCopy = [];
 		

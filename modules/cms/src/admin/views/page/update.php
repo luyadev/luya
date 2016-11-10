@@ -381,7 +381,7 @@ use luya\cms\admin\Module;
                                             <a ng-click="openLiveUrl(item.id, currentPageVersion)" ng-show="liveEditState" class="right"><i class="material-icons [ waves-effect waves-blue ]">open_in_new</i></a>
                                         </span>
                                         <span ng-hide="!settings">
-                                            <a ng-click="toggleSettings()"  class="right"><i class="material-icons">close</i></a>
+                                            <a ng-click="toggleSettings()" style="cursor:pointer;" class="right"><i class="material-icons">close</i></a>
                                         </span>
                                     </h4>
                                     <p>{{lang.name}}</p>
