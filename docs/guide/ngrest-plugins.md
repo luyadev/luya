@@ -47,7 +47,7 @@ class TestPlugin extends \admin\ngrest\base\Plugin
     
     public function renderUpdate($id, $ngModel)
     {
-        return Angular::directive('my-directive', ['model' => $ngModel, data' => $this->getServiceName('data')]);
+        return Angular::directive('my-directive', ['model' => $ngModel, 'data' => $this->getServiceName('data')]);
     }
     
     public function renderCreate($id, $ngModel)
