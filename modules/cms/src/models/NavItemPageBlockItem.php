@@ -40,11 +40,17 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
 
     use CacheableTrait;
     
+    /**
+	 * @inheritdoc
+	 */
     public static function tableName()
     {
         return 'cms_nav_item_page_block_item';
     }
 
+    /**
+	 * @inheritdoc
+	 */
     public function init()
     {
         parent::init();
@@ -89,6 +95,9 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         ];
     }
     
+    /**
+	 * @inheritdoc
+	 */
     public function scenarios()
     {
         $scene = parent::scenarios();
@@ -120,6 +129,9 @@ class NavItemPageBlockItem extends \yii\db\ActiveRecord
         ];
     }
     
+    /**
+	 * @inheritdoc
+	 */
     public function fields()
     {
         $fields = parent::fields();

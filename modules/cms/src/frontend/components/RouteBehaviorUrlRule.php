@@ -21,9 +21,8 @@ class RouteBehaviorUrlRule extends \yii\web\UrlRule
     public $mode = UrlRule::PARSING_ONLY;
     
     /**
-     * {@inheritDoc}
-     * @see \yii\web\UrlRule::parseRequest()
-     */
+	 * @inheritdoc
+	 */
     public function parseRequest($manager, $request)
     {
         // return the custom route

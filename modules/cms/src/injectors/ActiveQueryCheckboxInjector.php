@@ -71,9 +71,8 @@ class ActiveQueryCheckboxInjector extends BaseBlockInjector
     }
     
     /**
-     * {@inheritDoc}
-     * @see \cms\base\BaseBlockInjector::setup()
-     */
+	 * @inheritdoc
+	 */
     public function setup()
     {
         //

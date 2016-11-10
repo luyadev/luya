@@ -69,10 +69,8 @@ class ModuleReflection extends Object
     }
 
     /**
-     *
-     * {@inheritDoc}
-     * @see \yii\base\Object::init()
-     */
+	 * @inheritdoc
+	 */
     public function init()
     {
         if ($this->module === null) {

@@ -33,9 +33,8 @@ class Controller extends \luya\admin\base\Controller
     public $disablePermissionCheck = true;
 
     /**
-     * {@inheritDoc}
-     * @see \luya\web\Controller::init()
-     */
+	 * @inheritdoc
+	 */
     public function init()
     {
         parent::init();

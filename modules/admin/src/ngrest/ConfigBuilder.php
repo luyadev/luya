@@ -239,11 +239,8 @@ class ConfigBuilder implements ConfigBuilderInterface
     }
 
     /**
-     * Return the NgRest Config
-     *
-     * {@inheritDoc}
-     * @see \luya\admin\ngrest\interfaces\ConfigBuilder::getConfig()
-     */
+	 * @inheritdoc
+	 */
     public function getConfig()
     {
         return $this->config;

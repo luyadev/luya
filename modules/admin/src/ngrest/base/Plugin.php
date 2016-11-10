@@ -66,9 +66,8 @@ abstract class Plugin extends Component
     abstract public function renderUpdate($id, $ngModel);
     
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Object::init()
-     */
+	 * @inheritdoc
+	 */
     public function init()
     {
         // call parent initializer

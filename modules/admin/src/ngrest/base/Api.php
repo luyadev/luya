@@ -39,9 +39,8 @@ class Api extends RestActiveController
     public $autoEnablePagination = true;
     
     /**
-     * {@inheritDoc}
-     * @see \yii\rest\ActiveController::init()
-     */
+	 * @inheritdoc
+	 */
     public function init()
     {
         parent::init();

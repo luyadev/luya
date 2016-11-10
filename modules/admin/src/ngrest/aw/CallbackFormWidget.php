@@ -76,10 +76,8 @@ class CallbackFormWidget extends \yii\base\Widget
     public $fieldConfig = [];
     
     /**
-     *
-     * {@inheritDoc}
-     * @see \yii\base\Object::init()
-     */
+	 * @inheritdoc
+	 */
     public function init()
     {
         parent::init();
@@ -137,10 +135,8 @@ class CallbackFormWidget extends \yii\base\Widget
     }
     
     /**
-     *
-     * {@inheritDoc}
-     * @see \yii\base\Widget::run()
-     */
+	 * @inheritdoc
+	 */
     public function run()
     {
         $content = ob_get_clean();

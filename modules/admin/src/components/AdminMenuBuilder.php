@@ -218,10 +218,8 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     }
     
     /**
-     * {@inheritDoc}
-     * @see \luya\admin\components\AdminMenuBuilderInterface::menu()
-     * @return array
-     */
+	 * @inheritdoc
+	 */
     public function menu()
     {
         return $this->_menu;

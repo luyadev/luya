@@ -106,12 +106,8 @@ abstract class Module extends \yii\base\Module
     public $translations = [];
 
     /**
-     * The Luya-Module initializer is looking for defined requiredComponents.
-     *
-     * @throws \Exception
-     *
-     * @see \yii\base\Module::init()
-     */
+	 * @inheritdoc
+	 */
     public function init()
     {
         parent::init();

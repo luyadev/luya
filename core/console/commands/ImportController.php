@@ -80,11 +80,8 @@ class ImportController extends Command implements ImportControllerInterface
     }
 
     /**
-     * Get directory files for specific folder
-     *
-     * {@inheritDoc}
-     * @see \luya\console\interfaces\ImportControllerInterface::getDirectoryFiles()
-     */
+	 * @inheritdoc
+	 */
     public function getDirectoryFiles($folderName)
     {
         // create array
@@ -101,11 +98,8 @@ class ImportController extends Command implements ImportControllerInterface
     }
 
     /**
-     * Add Log entrie for a specific section
-     *
-     * {@inheritDoc}
-     * @see \luya\console\interfaces\ImportControllerInterface::addLog()
-     */
+	 * @inheritdoc
+	 */
     public function addLog($section, $value)
     {
         $this->_log[$section][] = $value;

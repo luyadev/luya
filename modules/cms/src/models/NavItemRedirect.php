@@ -24,20 +24,25 @@ class NavItemRedirect extends NavItemType implements NavItemTypeInterface
 
     const TYPE_LINK_TO_FILE = 3;
 
+    /**
+	 * @inheritdoc
+	 */
     public static function tableName()
     {
         return 'cms_nav_item_redirect';
     }
 
     /**
-     * {@InheritDoc}
-     * @see \luya\cms\base\NavItemType::getNumericType()
-     */
+	 * @inheritdoc
+	 */
     public static function getNummericType()
     {
         return NavItem::TYPE_REDIRECT;
     }
     
+    /**
+	 * @inheritdoc
+	 */
     public function rules()
     {
         return [
@@ -45,6 +50,9 @@ class NavItemRedirect extends NavItemType implements NavItemTypeInterface
         ];
     }
 
+    /**
+	 * @inheritdoc
+	 */
     public function attributeLabels()
     {
         return [

@@ -43,9 +43,8 @@ abstract class Command extends \luya\console\Controller
     }
     
     /**
-     * {@inheritDoc}
-     * @see \luya\console\Controller::options()
-     */
+	 * @inheritdoc
+	 */
     public function options($actionID)
     {
         return ['verbose', 'interactive'];

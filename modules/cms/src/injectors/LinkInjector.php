@@ -33,10 +33,8 @@ class LinkInjector extends BaseBlockInjector
     }
     
     /**
-     *
-     * {@inheritDoc}
-     * @see \luya\cms\base\BaseBlockInjector::setup()
-     */
+	 * @inheritdoc
+	 */
     public function setup()
     {
         $this->setContextConfig([

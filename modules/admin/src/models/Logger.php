@@ -37,18 +37,24 @@ class Logger extends NgRestModel
     const TYPE_SUCCESS = 4;
     
     /**
-     * @inheritdoc
-     */
+	 * @inheritdoc
+	 */
     public static function tableName()
     {
         return 'admin_logger';
     }
 
+    /**
+	 * @inheritdoc
+	 */
     public static function ngRestApiEndpoint()
     {
         return 'api-admin-logger';
     }
     
+    /**
+	 * @inheritdoc
+	 */
     public function ngRestAttributeTypes()
     {
         return [
@@ -59,6 +65,9 @@ class Logger extends NgRestModel
         ];
     }
     
+    /**
+	 * @inheritdoc
+	 */
     public function ngRestExtraAttributeTypes()
     {
         return [
@@ -85,15 +94,17 @@ class Logger extends NgRestModel
         return 'group_identifier';
     }
     
+    /**
+	 * @inheritdoc
+	 */
     public function extraFields()
     {
         return ['typeDescription'];
     }
     
     /**
-     *
-     * @param $config
-     */
+	 * @inheritdoc
+	 */
     public function ngRestConfig($config)
     {
         $config->aw->load(['class' => InfoActiveWindow::className()]);
@@ -103,8 +114,8 @@ class Logger extends NgRestModel
     }
     
     /**
-     * @inheritdoc
-     */
+	 * @inheritdoc
+	 */
     public function rules()
     {
         return [

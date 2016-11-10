@@ -20,9 +20,8 @@ class CatchAllUrlRule extends \yii\web\UrlRule
     public $encodeParams = false;
     
     /**
-     * {@inheritDoc}
-     * @see \yii\web\UrlRule::parseRequest()
-     */
+	 * @inheritdoc
+	 */
     public function parseRequest($manager, $request)
     {
         // add trace info

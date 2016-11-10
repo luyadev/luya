@@ -48,6 +48,7 @@ class UrlManager extends \yii\web\UrlManager
      * Extend functionality of parent::parseRequest() by verify and resolve the composition informations.
      *
      * {@inheritDoc}
+     * 
      * @see \yii\web\UrlManager::parseRequest()
      * @param \luya\web\Request $request The request component.
      */

@@ -18,6 +18,7 @@ class IndexAction extends \yii\rest\IndexAction
      * Prepare the data models based on the ngrest find query.
      *
      * {@inheritDoc}
+     * 
      * @see \yii\rest\IndexAction::prepareDataProvider()
      */
     protected function prepareDataProvider()

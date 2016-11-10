@@ -59,9 +59,8 @@ class SetupController extends \luya\console\Command
     public $langShortCode = null;
     
     /**
-     * {@inheritDoc}
-     * @see \luya\console\Command::options()
-     */
+	 * @inheritdoc
+	 */
     public function options($actionID)
     {
         return ['email', 'password', 'firstname', 'lastname', 'interactive'];

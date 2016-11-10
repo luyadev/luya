@@ -56,10 +56,8 @@ class FlowActiveWindow extends ActiveWindow
     public $modelClass = null;
     
     /**
-     * 
-     * {@inheritDoc}
-     * @see \luya\admin\ngrest\base\ActiveWindow::init()
-     */
+	 * @inheritdoc
+	 */
     public function init()
     {
         parent::init();

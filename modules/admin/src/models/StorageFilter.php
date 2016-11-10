@@ -15,16 +15,16 @@ use luya\admin\ngrest\base\NgRestModel;
 class StorageFilter extends NgRestModel
 {
     /**
-     * {@inheritdoc}
-     */
+	 * @inheritdoc
+	 */
     public static function tableName()
     {
         return 'admin_storage_filter';
     }
 
     /**
-     * {@inheritdoc}
-     */
+	 * @inheritdoc
+	 */
     public function rules()
     {
         return [
@@ -32,6 +32,9 @@ class StorageFilter extends NgRestModel
         ];
     }
 
+    /**
+	 * @inheritdoc
+	 */
     public function scenarios()
     {
         return [
@@ -48,6 +51,9 @@ class StorageFilter extends NgRestModel
         }
     }
     
+    /**
+	 * @inheritdoc
+	 */
     public function beforeDelete()
     {
         if (parent::beforeDelete()) {
@@ -75,11 +81,17 @@ class StorageFilter extends NgRestModel
 
     // ngrest
 
+    /**
+	 * @inheritdoc
+	 */
     public static function ngRestApiEndpoint()
     {
         return 'api-admin-filter';
     }
 
+    /**
+	 * @inheritdoc
+	 */
     public function ngRestConfig($config)
     {
         $config->list->field('name', 'Name')->text();

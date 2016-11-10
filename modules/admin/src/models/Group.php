@@ -19,16 +19,16 @@ class Group extends NgRestModel
     use SoftDeleteTrait;
 
     /**
-     * {@inheritdoc}
-     */
+	 * @inheritdoc
+	 */
     public static function tableName()
     {
         return 'admin_group';
     }
 
     /**
-     * {@inheritdoc}
-     */
+	 * @inheritdoc
+	 */
     public function rules()
     {
         return [

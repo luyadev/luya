@@ -35,9 +35,8 @@ class CoordinatesActiveWindow extends ActiveWindow
     public $mapsApiKey = null;
     
     /**
-     * {@inheritDoc}
-     * @see \admin\ngrest\base\ActiveWindow::init()
-     */
+	 * @inheritdoc
+	 */
     public function init()
     {
         if ($this->mapsApiKey === null) {

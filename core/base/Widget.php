@@ -20,7 +20,9 @@ class Widget extends \yii\base\Widget
      * Find view paths in application folder.
      *
      * {@inheritDoc}
+     * 
      * @see \yii\base\Widget::getViewPath()
+     * @return string
      */
     public function getViewPath()
     {

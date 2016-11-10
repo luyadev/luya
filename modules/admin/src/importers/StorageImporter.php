@@ -115,9 +115,8 @@ class StorageImporter extends Importer
     }
 
     /**
-     * {@inheritDoc}
-     * @see \luya\console\Importer::run()
-     */
+	 * @inheritdoc
+	 */
     public function run()
     {
         $log = [];

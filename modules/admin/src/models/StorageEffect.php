@@ -14,16 +14,16 @@ use luya\admin\ngrest\base\NgRestModel;
 class StorageEffect extends NgRestModel
 {
     /**
-     * {@inheritdoc}
-     */
+	 * @inheritdoc
+	 */
     public static function tableName()
     {
         return 'admin_storage_effect';
     }
 
     /**
-     * {@inheritdoc}
-     */
+	 * @inheritdoc
+	 */
     public function rules()
     {
         return [
@@ -31,6 +31,9 @@ class StorageEffect extends NgRestModel
         ];
     }
 
+    /**
+	 * @inheritdoc
+	 */
     public function scenarios()
     {
         return [
@@ -42,11 +45,17 @@ class StorageEffect extends NgRestModel
 
     // ngrest
 
+    /**
+	 * @inheritdoc
+	 */
     public static function ngRestApiEndpoint()
     {
         return 'api-admin-effect';
     }
 
+    /**
+	 * @inheritdoc
+	 */
     public function ngRestConfig($config)
     {
         $config->list->field('name', 'Name')->text();

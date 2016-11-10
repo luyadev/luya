@@ -43,6 +43,9 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
 
     public $parent_nav_id = null;
 
+    /**
+	 * @inheritdoc
+	 */
     public function init()
     {
         parent::init();
@@ -75,18 +78,16 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     }
 
     /**
-     * {@inheritDoc}
-     * @see \yii\db\ActiveRecord::tableName()
-     */
+	 * @inheritdoc
+	 */
     public static function tableName()
     {
         return 'cms_nav_item';
     }
     
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Model::rules()
-     */
+	 * @inheritdoc
+	 */
     public function rules()
     {
         return [
@@ -96,9 +97,8 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     }
 
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Model::attributeLabels()
-     */
+	 * @inheritdoc
+	 */
     public function attributeLabels()
     {
         return [
@@ -259,27 +259,24 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     /* GenericSearchInterface */
 
     /**
-     * {@inheritDoc}
-     * @see \admin\base\GenericSearchInterface::genericSearchFields()
-     */
+	 * @inheritdoc
+	 */
     public function genericSearchFields()
     {
         return ['title', 'alias', 'nav_id'];
     }
     
     /**
-     * {@inheritDoc}
-     * @see \admin\base\GenericSearchInterface::genericSearchHiddenFields()
-     */
+	 * @inheritdoc
+	 */
     public function genericSearchHiddenFields()
     {
         return [];
     }
 
     /**
-     * {@inheritDoc}
-     * @see \admin\base\GenericSearchInterface::genericSearch()
-     */
+	 * @inheritdoc
+	 */
     public function genericSearch($searchQuery)
     {
         $query = self::find();
@@ -296,6 +293,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
      * and jump/linking in the search results container.
      *
      * {@inheritDoc}
+     * 
      * @see \admin\base\GenericSearchInterface::genericSearchStateProvider()
      */
     public function genericSearchStateProvider()

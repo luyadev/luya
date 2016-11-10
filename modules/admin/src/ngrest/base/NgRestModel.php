@@ -48,9 +48,8 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     protected $ngRestServiceArray = [];
     
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Component::behaviors()
-     */
+	 * @inheritdoc
+	 */
     public function behaviors()
     {
         return [
@@ -194,9 +193,8 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
 
     /**
-     * {@inheritDoc}
-     * @see \yii\db\BaseActiveRecord::afterFind()
-     */
+	 * @inheritdoc
+	 */
     public function afterFind()
     {
         if ($this->getNgRestCallType()) {
@@ -212,9 +210,8 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
 
     /**
-     * {@inheritDoc}
-     * @see \admin\base\GenericSearchInterface::genericSearchFields()
-     */
+	 * @inheritdoc
+	 */
     public function genericSearchFields()
     {
         $fields = [];
@@ -228,20 +225,16 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
     
     /**
-     * {@inheritDoc}
-     * @see \admin\base\GenericSearchInterface::genericSearchHiddenFields()
-     */
+	 * @inheritdoc
+	 */
     public function genericSearchHiddenFields()
     {
         return [];
     }
     
     /**
-     * Current Ng-Rest item does not have a detail view.
-     *
-     * {@inheritDoc}
-     * @see \admin\base\GenericSearchInterface::genericSearchStateProvider()
-     */
+	 * @inheritdoc
+	 */
     public function genericSearchStateProvider()
     {
         return [
@@ -253,10 +246,8 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
 
     /**
-     * @param string $searchQuery a search string
-     * {@inheritDoc}
-     * @see \admin\base\GenericSearchInterface::genericSearch()
-     */
+	 * @inheritdoc
+	 */
     public function genericSearch($searchQuery)
     {
         $fields = $this->genericSearchFields();

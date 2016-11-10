@@ -43,18 +43,16 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     }
     
     /**
-     * {@inheritDoc}
-     * @see \luya\cms\base\PhpBlockInterface::frontend()
-     */
+	 * @inheritdoc
+	 */
     public function frontend()
     {
         return $this->view->render($this->getViewFileName('php'), [], $this);
     }
     
     /**
-     * {@inheritDoc}
-     * @see \luya\cms\base\BlockInterface::renderFrontend()
-     */
+	 * @inheritdoc
+	 */
     public function renderFrontend()
     {
         $this->injectorSetup();
@@ -62,9 +60,8 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     }
     
     /**
-     * {@inheritDoc}
-     * @see \luya\cms\base\BlockInterface::renderAdmin()
-     */
+	 * @inheritdoc
+	 */
     public function renderAdmin()
     {
         $this->injectorSetup();

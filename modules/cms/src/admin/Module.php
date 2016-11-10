@@ -161,10 +161,8 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     }
 
     /**
-     *
-     * {@inheritDoc}
-     * @see \luya\base\Module::import()
-     */
+	 * @inheritdoc
+	 */
     public function import(ImportControllerInterface $import)
     {
         return [

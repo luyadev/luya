@@ -110,10 +110,8 @@ class Module extends \luya\base\Module implements AdminModuleInterface
     }
 
     /**
-     * {@inheritDoc}
-     * @see \luya\base\AdminModuleInterface::getMenu()
-     * @return array|\luya\admin\components\AdminMenuBuilderInterface Get the menu builder object or an empty array.
-     */
+	 * @inheritdoc
+	 */
     public function getMenu()
     {
         return [];

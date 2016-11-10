@@ -35,10 +35,8 @@ class TagActiveWindow extends ActiveWindow
     public $tableName = null;
 
     /**
-     * 
-     * {@inheritDoc}
-     * @see \luya\admin\ngrest\base\ActiveWindow::init()
-     */
+	 * @inheritdoc
+	 */
     public function init()
     {
         parent::init();

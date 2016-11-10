@@ -37,18 +37,16 @@ use luya\cms\admin\Module;
 class Nav extends ActiveRecord
 {
     /**
-     * {@inheritDoc}
-     * @see \yii\db\BaseActiveRecord::tableName()
-     */
+	 * @inheritdoc
+	 */
     public static function tableName()
     {
         return 'cms_nav';
     }
 
     /**
-     * {@inheritDoc}
-     * @see \yii\db\BaseActiveRecord::init()
-     */
+	 * @inheritdoc
+	 */
     public function init()
     {
         parent::init();
@@ -59,9 +57,8 @@ class Nav extends ActiveRecord
     }
 
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Model::rules()
-     */
+	 * @inheritdoc
+	 */
     public function rules()
     {
         return [

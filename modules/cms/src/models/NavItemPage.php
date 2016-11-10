@@ -31,6 +31,9 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
 
     private $_view = null;
 
+    /**
+	 * @inheritdoc
+	 */
     public function init()
     {
         parent::init();
@@ -63,19 +66,24 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     }
     
     /**
-     * {@InheritDoc}
-     * @see \luya\cms\base\NavItemType::getNumericType()
-     */
+	 * @inheritdoc
+	 */
     public static function getNummericType()
     {
         return NavItem::TYPE_PAGE;
     }
     
+    /**
+	 * @inheritdoc
+	 */
     public static function tableName()
     {
         return 'cms_nav_item_page';
     }
 
+    /**
+	 * @inheritdoc
+	 */
     public function rules()
     {
         return [
@@ -85,6 +93,9 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         ];
     }
 
+    /**
+	 * @inheritdoc
+	 */
     public function attributeLabels()
     {
         return [
@@ -97,6 +108,9 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         return $this->hasOne(Layout::className(), ['id' => 'layout_id']);
     }
     
+    /**
+	 * @inheritdoc
+	 */
     public function extraFields()
     {
         return [
@@ -114,6 +128,9 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
         return self::find()->where(['nav_item_id' => $navItemId])->indexBy('id')->orderBy(['id' => SORT_ASC])->all();
     }
 
+    /**
+	 * @inheritdoc
+	 */
     public function fields()
     {
         $fields = parent::fields();

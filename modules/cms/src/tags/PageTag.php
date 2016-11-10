@@ -24,18 +24,16 @@ use luya\cms\models\NavItem;
 class PageTag extends BaseTag
 {
     /**
-     * {@inheritDoc}
-     * @see \luya\tag\TagInterface::example()
-     */
+	 * @inheritdoc
+	 */
     public function example()
     {
         return 'page[1](placeholder)';
     }
     
     /**
-     * {@inheritDoc}
-     * @see \luya\tag\TagInterface::readme()
-     */
+	 * @inheritdoc
+	 */
     public function readme()
     {
         return 'Get the content of a full page or just a placeholder of the page. The first param is the page it (which you get by hovering over the menu tree in the administration area) `page[1]` if you just want to get the content of a placeholder of the cmslayout used the second parameter `page[1](placeholderName)`.';

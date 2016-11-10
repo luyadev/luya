@@ -23,7 +23,9 @@ class DynamicModel extends \yii\base\DynamicModel
      * In addition to the attributeLabels() values can also be be passed by propertie and run trough Yii::t process.
      *
      * {@inheritDoc}
+     * 
      * @see \yii\base\Model::attributeLabels()
+     * @return array
      */
     public function attributeLabels()
     {
