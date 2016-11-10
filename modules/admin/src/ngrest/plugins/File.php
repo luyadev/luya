@@ -12,24 +12,24 @@ use luya\admin\ngrest\base\Plugin;
 class File extends Plugin
 {
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function renderList($id, $ngModel)
     {
         return $this->createTag('storage-file-display', null, ['file-id' => "{{{$ngModel}}}"]);
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function renderCreate($id, $ngModel)
     {
         return $this->createFormTag('zaa-file-upload', $id, $ngModel);
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function renderUpdate($id, $ngModel)
     {
         return $this->renderCreate($id, $ngModel);

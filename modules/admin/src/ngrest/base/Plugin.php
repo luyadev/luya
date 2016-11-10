@@ -66,8 +66,8 @@ abstract class Plugin extends Component
     abstract public function renderUpdate($id, $ngModel);
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function init()
     {
         // call parent initializer

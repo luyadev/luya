@@ -38,32 +38,32 @@ class Textarea extends Plugin
     public $markdown = false;
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function renderList($id, $ngModel)
     {
         return $this->createListTag($ngModel);
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function renderCreate($id, $ngModel)
     {
         return $this->createFormTag('zaa-textarea', $id, $ngModel, ['placeholder' => $this->placeholder]);
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function renderUpdate($id, $ngModel)
     {
         return $this->renderCreate($id, $ngModel);
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function onAfterFind($event)
     {
         if ($this->nl2br) {

@@ -15,10 +15,10 @@ use yii\caching\DbDependency;
 
 /**
  * Filemanager and Storage API.
- * 
+ *
  * Storage API, provides data from system image, files, filters and folders to build the filemanager, allows create/delete process to manipulate storage data.
  *
- * The storage controller is used to make the luya angular file manager work with the {{luya\admin\component\StorageContainer}}.
+ * The storage controller is used to make the luya angular file manager work with the {{luya\admin\components\StorageContainer}}.
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -26,9 +26,9 @@ class StorageController extends RestController
 {
     use CacheableTrait;
     
-	/**
-	 * Flush the storage caching data.
-	 */
+    /**
+     * Flush the storage caching data.
+     */
     protected function flushApiCache()
     {
         Yii::$app->storage->flushArrays();
@@ -106,7 +106,7 @@ class StorageController extends RestController
     
     /**
      * Get all images from the storage container.
-     * 
+     *
      * @return array
      */
     public function actionDataImages()
@@ -131,7 +131,7 @@ class StorageController extends RestController
 
     /**
      * Update the caption of storage file.
-     * 
+     *
      * @return boolean
      */
     public function actionFilemanagerUpdateCaption()
@@ -157,7 +157,7 @@ class StorageController extends RestController
     
     /**
      * Upload an image to the filemanager.
-     * 
+     *
      * @return array
      */
     public function actionImageUpload()
@@ -174,7 +174,7 @@ class StorageController extends RestController
     
     /**
      * Get all available registered filters.
-     * 
+     *
      * @return array
      */
     public function actionDataFilters()
@@ -184,7 +184,7 @@ class StorageController extends RestController
     
     /**
      * Action to replace a current file with a new.
-     * 
+     *
      * @return boolean
      */
     public function actionFileReplace()
@@ -209,7 +209,7 @@ class StorageController extends RestController
     
     /**
      * Upload a new file from $_FILES array.
-     * 
+     *
      * @return array An array with upload and message key.
     */
     public function actionFilesUpload()
@@ -250,7 +250,7 @@ class StorageController extends RestController
     
     /**
      * Remove files from the storage component.
-     * 
+     *
      * @todo make permission check.
      * @return boolean
      */
@@ -319,7 +319,7 @@ class StorageController extends RestController
     
     /**
      * Update the folder model data.
-     * 
+     *
      * @param integer $folderId The folder id.
      * @return boolean
      */
@@ -338,7 +338,7 @@ class StorageController extends RestController
     
     /**
      * Create a new folder pased on post data.
-     * 
+     *
      * @return boolean
      */
     public function actionFolderCreate()

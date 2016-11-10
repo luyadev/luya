@@ -55,7 +55,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
     
     /**
      * Get the model object from where the Active Window is attached to.
-     * 
+     *
      * @return \yii\db\ActiveRecordInterface Get the model of the called ngrest model ActiveRecord by it's itemId.
      */
     public function getModel()
@@ -91,7 +91,7 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
     
     /**
      * Return the config hash name from the setter method.
-     * 
+     *
      * @return string
      */
     public function getConfigHash()

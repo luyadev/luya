@@ -7,9 +7,9 @@ use luya\admin\storage\QueryTrait;
 
 /**
  * Storage Images Querying.
- * 
+ *
  * See the {{\luya\admin\storage\QueryTrait}} for more informations.
- * 
+ *
  * @property \luya\admin\components\StorageContainer $storage The storage component
  * @author Basil Suter <basil@nadar.io>
  */

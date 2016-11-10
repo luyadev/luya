@@ -33,8 +33,8 @@ class Controller extends \luya\admin\base\Controller
     public $disablePermissionCheck = true;
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -88,7 +88,7 @@ class Controller extends \luya\admin\base\Controller
         $userSortSettings = Yii::$app->adminuser->identity->setting->get('ngrestorder.admin/'.$apiEndpoint, false);
         
         if ($userSortSettings && is_array($userSortSettings)) {
-        	$config->defaultOrder = [$userSortSettings['field'] => $userSortSettings['sort']];
+            $config->defaultOrder = [$userSortSettings['field'] => $userSortSettings['sort']];
         }
         
         $config->attributeGroups = $this->model->ngRestAttributeGroups();

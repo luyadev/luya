@@ -273,7 +273,7 @@ class Item extends \yii\base\Object
     /**
      * Returns an active record object for the admin user who created this page.
      *
-     * @return \admin\models\User|boolean Returns an ActiceRecord for the admin user who created the page, if not
+     * @return \luya\admin\models\User|boolean Returns an ActiceRecord for the admin user who created the page, if not
      * found the return value is false.
      */
     public function getUserCreated()
@@ -284,7 +284,7 @@ class Item extends \yii\base\Object
     /**
      * Returns an active record object for the admin user who last time updated this page.
      *
-     * @return \admin\models\User|boolean Returns an ActiceRecord for the admin user who last time updated this page, if not
+     * @return \luya\admin\models\User|boolean Returns an ActiceRecord for the admin user who last time updated this page, if not
      * found the return value is false.
      */
     public function getUserUpdated()
@@ -378,7 +378,7 @@ class Item extends \yii\base\Object
     /**
      * Returns a Item-Object of the parent element, if no parent element exists returns false.
      *
-     * @return \cms\menu\Item|bool Returns the parent item-object or false if not exists.
+     * @return \luya\cms\menu\Item|bool Returns the parent item-object or false if not exists.
      */
     public function getParent()
     {
@@ -440,7 +440,7 @@ class Item extends \yii\base\Object
     /**
      * Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
      *
-     * @return \cms\menu\QueryIterator Returns all children
+     * @return \luya\cms\menu\QueryIterator Returns all children
      */
     public function getChildren()
     {
@@ -514,8 +514,8 @@ class Item extends \yii\base\Object
      *
      * The above example display also hidden pages.
      *
-     * @see \cms\menu\Query::with()
-     * @return \cms\menu\Item;
+     * @see \luya\cms\menu\Query::with()
+     * @return \luya\cms\menu\Item;
      */
     public function with($with)
     {
@@ -535,7 +535,7 @@ class Item extends \yii\base\Object
      * ```
      *
      * @param string|array $without Can be a string `hidden` or an array `['hidden']`.
-     * @return \cms\menu\Item
+     * @return \luya\cms\menu\Item
      */
     public function without($without)
     {

@@ -27,8 +27,8 @@ class Datetime extends Plugin
     public $emptyMessage = '-';
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function renderList($id, $ngModel)
     {
         return [
@@ -38,16 +38,16 @@ class Datetime extends Plugin
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function renderCreate($id, $ngModel)
     {
         return $this->createFormTag('zaa-datetime', $id, $ngModel);
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function renderUpdate($id, $ngModel)
     {
         return $this->renderCreate($id, $ngModel);

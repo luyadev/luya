@@ -110,8 +110,8 @@ class Module extends \luya\base\Module implements AdminModuleInterface
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function getMenu()
     {
         return [];

@@ -172,17 +172,17 @@ class PhpBlockView extends View
     
     /**
      * The Application View Object to Register Data.
-     * 
+     *
      * As the PhpBlockView is an own instance, registered assets files would not be available. In order to assign
      * meta keywords, add essets the application view object is required, therfore this getter method will
      * give you access.
-     * 
+     *
      * Example of registering an asset from the block view:
-     * 
+     *
      * ```php
      * MyBlockAsset::register($this->appView);
      * ```
-     * 
+     *
      * @return \luya\web\View The global application View Object which is also the same as the layout or cmslayout.
      */
     public function getAppView()

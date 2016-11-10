@@ -153,32 +153,32 @@ class UserSetting extends Object implements \ArrayAccess
     // ArrayAccess
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function offsetSet($offset, $value)
     {
         return $this->set($offset, $value);
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function offsetExists($offset)
     {
         return $this->has($offset);
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function offsetUnset($offset)
     {
         return $this->remove($offset);
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function offsetGet($offset)
     {
         return $this->get($offset);

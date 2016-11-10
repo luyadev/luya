@@ -32,8 +32,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     private $_view = null;
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -66,24 +66,24 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public static function getNummericType()
     {
         return NavItem::TYPE_PAGE;
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'cms_nav_item_page';
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
@@ -94,8 +94,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [
@@ -109,8 +109,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function extraFields()
     {
         return [
@@ -129,8 +129,8 @@ class NavItemPage extends NavItemType implements NavItemTypeInterface, ViewConte
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function fields()
     {
         $fields = parent::fields();

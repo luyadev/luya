@@ -10,7 +10,7 @@ use luya\admin\base\RestController;
 
 /**
  * Common Admin API Tasks.
- * 
+ *
  * Delivers default values for the specifing table. It means it does not return a key numeric array,
  * it does only return 1 assoc array wich reperents the default row.
  *
@@ -22,40 +22,40 @@ class CommonController extends RestController
     
     /**
      * Set the lastest ngrest filter selection in the User Settings.
-     * 
+     *
      * @return boolean
      */
     public function actionNgrestFilter()
     {
-    	$apiEndpoint = Yii::$app->request->getBodyParam('apiEndpoint');
-    	$filterName = Yii::$app->request->getBodyParam('filterName');
-    	
-    	return Yii::$app->adminuser->identity->setting->set('ngrestfilter.'.$apiEndpoint, $filterName);
+        $apiEndpoint = Yii::$app->request->getBodyParam('apiEndpoint');
+        $filterName = Yii::$app->request->getBodyParam('filterName');
+        
+        return Yii::$app->adminuser->identity->setting->set('ngrestfilter.'.$apiEndpoint, $filterName);
     }
     
     /**
      * Set the lastest ngrest curd list order direction in the User Settings.
-     * 
+     *
      * @return boolean
      */
     public function actionNgrestOrder()
     {
-    	$apiEndpoint = Yii::$app->request->getBodyParam('apiEndpoint');
-    	$sort = Yii::$app->request->getBodyParam('sort');
-    	$field = Yii::$app->request->getBodyParam('field');
-    	
-    	if ($sort == '-') {
-    		$sort = SORT_DESC;
-    	} else {
-    		$sort = SORT_ASC;
-    	}
-    	
-    	return Yii::$app->adminuser->identity->setting->set('ngrestorder.'.$apiEndpoint, ['sort' => $sort, 'field' => $field]);
+        $apiEndpoint = Yii::$app->request->getBodyParam('apiEndpoint');
+        $sort = Yii::$app->request->getBodyParam('sort');
+        $field = Yii::$app->request->getBodyParam('field');
+        
+        if ($sort == '-') {
+            $sort = SORT_DESC;
+        } else {
+            $sort = SORT_ASC;
+        }
+        
+        return Yii::$app->adminuser->identity->setting->set('ngrestorder.'.$apiEndpoint, ['sort' => $sort, 'field' => $field]);
     }
     
     /**
      * Get all available languages from the database as array.
-     * 
+     *
      * @return array The available languages.
      */
     public function actionDataLanguages()
@@ -65,7 +65,7 @@ class CommonController extends RestController
     
     /**
      * Change the language admin interface and store in user settings.
-     * 
+     *
      * @return boolean
      */
     public function actionChangeLanguage()
@@ -81,7 +81,7 @@ class CommonController extends RestController
     
     /**
      * Get all available administration regisetered properties.
-     * 
+     *
      * @return array Get all properties.
      */
     public function actionDataProperties()
@@ -105,7 +105,7 @@ class CommonController extends RestController
     
     /**
      * Triggerable action to flush the application cache and force user reload.
-     * 
+     *
      * @return boolean
      */
     public function actionCache()
@@ -123,7 +123,7 @@ class CommonController extends RestController
     
     /**
      * Get a list with all frontend modules, which is used in several dropdowns in the admin ui.
-     * 
+     *
      * @return array An array with all frontend modules.
      */
     public function actionDataModules()
@@ -137,7 +137,7 @@ class CommonController extends RestController
 
     /**
      * Save the last selected filemanager folder in the user settings.
-     * 
+     *
      * @return boolean
      */
     public function actionSaveFilemanagerFolderState()
@@ -153,7 +153,7 @@ class CommonController extends RestController
     
     /**
      * Return the latest selected filemanager from the user settings.
-     * 
+     *
      * @return integer The folder id.
      */
     public function actionGetFilemanagerFolderState()
@@ -163,7 +163,7 @@ class CommonController extends RestController
 
     /**
      * Store the open and closed folders from the filemanager tree in the user settings.
-     * 
+     *
      * @return booelan
      */
     public function actionFilemanagerFoldertreeHistory()

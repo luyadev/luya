@@ -66,7 +66,7 @@ class ConcretImplementationBlock implements BlockInterface
     }
     
     // getters & setters from outside
-    
+
     
     /**
      * Returns an array with additional help informations for specific field (var or cfg).

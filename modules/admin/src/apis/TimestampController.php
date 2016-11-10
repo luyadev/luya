@@ -13,11 +13,11 @@ use luya\admin\base\RestController;
  */
 class TimestampController extends RestController
 {
-	/**
-	 * The timestamp action provider informations about currenct only users and if the ui needs to be refreshed.
-	 *
-	 * @return array
-	 */
+    /**
+     * The timestamp action provider informations about currenct only users and if the ui needs to be refreshed.
+     *
+     * @return array
+     */
     public function actionIndex()
     {
         // clear user online list

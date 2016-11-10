@@ -45,8 +45,8 @@ class LazyLoad extends Widget
     public $extraClass = null;
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -64,8 +64,8 @@ class LazyLoad extends Widget
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function run()
     {
         $class = 'lazy-image ' . $this->extraClass;

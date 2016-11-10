@@ -18,9 +18,9 @@ use yii\web\BadRequestHttpException;
  */
 class UrlManager extends \yii\web\UrlManager
 {
-	/**
-	 * @var boolean Pretty urls are enabled by default and can not be turned off in luya cms context.
-	 */
+    /**
+     * @var boolean Pretty urls are enabled by default and can not be turned off in luya cms context.
+     */
     public $enablePrettyUrl = true;
 
     /**
@@ -35,8 +35,8 @@ class UrlManager extends \yii\web\UrlManager
 
     /**
      * @var integer In order to build urls, the nav item id from cms module can be stored in the UrlManager as `$contextNavItemId`.
-     * 
-     * This context setter is called in {{\luya\cms\frontend\base::renderItem}} method and is used when calling {{\luya\web\UrlManager::createUrl}} method.
+     *
+     * This context setter is called in {{luya\cms\frontend\base\Controller::renderItem}} method and is used when calling {{\luya\web\UrlManager::createUrl}} method.
      */
     public $contextNavItemId = null;
 
@@ -48,7 +48,7 @@ class UrlManager extends \yii\web\UrlManager
      * Extend functionality of parent::parseRequest() by verify and resolve the composition informations.
      *
      * {@inheritDoc}
-     * 
+     *
      * @see \yii\web\UrlManager::parseRequest()
      * @param \luya\web\Request $request The request component.
      */
@@ -110,7 +110,7 @@ class UrlManager extends \yii\web\UrlManager
 
     /**
      * Get the menu component if its registered in the current applications.
-     * 
+     *
      * The menu component is only registered when the cms module is registered.
      *
      * @return boolean|\luya\cms\Menu The menu component object or false if not available.
@@ -169,7 +169,7 @@ class UrlManager extends \yii\web\UrlManager
      * Extend createUrl method by verify its context implementation to add cms urls prepand to the requested createurl params.
      *
      * From the original create url function of Yii:
-     * 
+     *
      * You may specify the route as a string, e.g., `site/index`. You may also use an array
      * if you want to specify additional query parameters for the URL being created. The
      * array format must be:
@@ -300,7 +300,7 @@ class UrlManager extends \yii\web\UrlManager
     
     /**
      * Replace the url with the current module context.
-     * 
+     *
      * @param string $url The url to replace
      * @param integer $navItemId The navigation item where the context url to be found.
      * @param \luya\web\Composition $composition Composition component object to resolve language context.

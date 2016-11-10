@@ -11,7 +11,7 @@ use Iterator;
  *
  * @since 1.0.0-beta1
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class QueryIterator extends \yii\base\Object implements Iterator
 {
@@ -27,14 +27,14 @@ class QueryIterator extends \yii\base\Object implements Iterator
     public $lang = null;
 
     /**
-     * @see \cms\menu\Query::with()
+     * @see \luya\cms\menu\Query::with()
      */
     public $with = [];
     
     /**
      * Iterator get current element, generates a new object for the current item on accessing.s.
      *
-     * @return \cms\menu\Item
+     * @return \luya\cms\menu\Item
      */
     public function current()
     {

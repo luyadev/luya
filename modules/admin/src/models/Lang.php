@@ -20,8 +20,8 @@ use luya\admin\ngrest\base\NgRestModel;
 class Lang extends NgRestModel
 {
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -45,16 +45,16 @@ class Lang extends NgRestModel
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'admin_lang';
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
@@ -64,8 +64,8 @@ class Lang extends NgRestModel
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function scenarios()
     {
         return [
@@ -75,8 +75,8 @@ class Lang extends NgRestModel
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [
@@ -87,16 +87,16 @@ class Lang extends NgRestModel
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public static function ngRestApiEndpoint()
     {
         return 'api-admin-lang';
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function ngRestAttributeTypes()
     {
         return [
@@ -107,8 +107,8 @@ class Lang extends NgRestModel
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function ngRestConfig($config)
     {
         $this->ngRestConfigDefine($config, ['list', 'create', 'update'], ['name', 'short_code', 'is_default']);

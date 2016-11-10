@@ -33,7 +33,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     
     /**
      * Get relative view path ofr rendering view files.
-     * 
+     *
      * @see \yii\base\ViewContextInterface
      * @return string the view path that may be prefixed to a relative view name.
      */
@@ -43,16 +43,16 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function frontend()
     {
         return $this->view->render($this->getViewFileName('php'), [], $this);
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function renderFrontend()
     {
         $this->injectorSetup();
@@ -60,8 +60,8 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function renderAdmin()
     {
         $this->injectorSetup();

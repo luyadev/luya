@@ -22,24 +22,24 @@ class Text extends Plugin
     public $listOptions = [];
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function renderList($id, $ngModel)
     {
         return $this->createListTag($ngModel, $this->listOptions);
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function renderCreate($id, $ngModel)
     {
         return $this->createFormTag('zaa-text', $id, $ngModel, ['placeholder' => $this->placeholder]);
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function renderUpdate($id, $ngModel)
     {
         return $this->renderCreate($id, $ngModel);

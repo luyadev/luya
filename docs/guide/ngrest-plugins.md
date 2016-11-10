@@ -23,7 +23,7 @@ An NgRest Plugin is like the type of an input. You can create selects, date pick
 |datetime 			|integer |Datepicker to choose date, month, year hour and minute. Returns the unix timestamp of the selection.
 |decimal            |float	|Creates a decimal input field. First parameter defines optional step size. Default = 0.001
 |number				|integer |Input field where only numbers are allowed.
-|cmsPage			|\cms\menu\Item |Cms Page selection and returns the menu component item.
+|cmsPage			|{{luya\cms\menu\Item}}|Cms Page selection and returns the menu component item.
 
 > Check the class reference/api guide to find out more about configuration options of the plugins.
 

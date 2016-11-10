@@ -21,64 +21,64 @@ use luya\web\Request;
  * Storage Container for reading, saving and holding files.
  *
  * Create images, files, manipulate, foreach and get details. The storage container will be the singleton similar instance containing all the loaded images and files.
- * 
+ *
  * As files, images and folders implement the same traits you can also read more about enhanced usage:
- * 
+ *
  * + Querying Data with {{\luya\admin\storage\QueryTrait}}
  * + Where conditions {{\luya\admin\storage\QueryTrait::where}}
  *
  * ## Handling Files
  *
  * First adding a new file to the Storage system using the {{\luya\admin\components\StorageContainer::addFile}} method.
- * 
+ *
  * ```php
  * Yii::$app->storage->addFile('/the/path/to/File.jpg', 'File.jpg', 0, 1);
  * ```
- * 
+ *
  * The response of the add file method is an {{\luya\admin\file\Item}} Object.
- * 
+ *
  * Get an array of files based on search parameters (When not passing any arguments all files would be returned.):
- * 
+ *
  * ```php
  * Yii::$app->storage->findFiles(['is_hidden' => 0, 'is_deleted' => 0]);
  * ```
- * 
+ *
  * In order to get a single file object based on its ID use:
  *
  * ```php
  * Yii::$app->storage->getFile(5);
  * ```
- * 
+ *
  * To find a file based on other where arguments instead of the id use findFile:
- * 
+ *
  * ```php
  * Yii::$app->storage->findFile(['name' => 'MyFile.jpg']);
  * ```
  *
  * ### Handling Images
- * 
+ *
  * An image object is always based on the {{\luya\admin\file\Item}} object and a {{luya\admin\base\Filter}}. In order to add an image you already need a fileId and filterId. If the filterId is 0, it means no additional filter will be applied.
- * 
+ *
  * ```php
  * Yii::$app->storage->addImage(123, 0); // create an image from file object id 123 without filter.
  * ```
- * 
+ *
  * The newly created image will return a {{luya\admin\image\Item}} object.
- * 
+ *
  * In order to find one image:
- * 
+ *
  * ```php
  * Yii::$app->storage->findImage(['id' => 123]);
  * ```
- * 
+ *
  * or find one image by its ID:
- * 
+ *
  * ```php
  * Yii::$app->storage->getImage(123);
  * ```
- * 
+ *
  * To get an array of images based on where conditions use:
- * 
+ *
  * ```php
  * Yii::$app->storage->findImages(['file_id' => 1, 'filter_id' => 0]);
  * ```
@@ -229,9 +229,9 @@ class StorageContainer extends Component
     
     /**
      * Get all storage files as an array from database.
-     * 
+     *
      * This method is used to retrieve all files from the database and indexed by file key.
-     * 
+     *
      * @return array An array with all storage files indexed by the file id.
      */
     public function getFilesArray()
@@ -245,7 +245,7 @@ class StorageContainer extends Component
     
     /**
      * Get a single file by file id from the files array.
-     * 
+     *
      * @param integer $fileId The file id to find.
      * @return boolean|array The file array or false if not found.
      */
@@ -258,9 +258,9 @@ class StorageContainer extends Component
     
     /**
      * Get all storage images as an array from database.
-     * 
+     *
      * This method is used to retrieve all images from the database and indexed by image key.
-     * 
+     *
      * @return array An array with all storage images indexed by the image id.
      */
     public function getImagesArray()
@@ -274,7 +274,7 @@ class StorageContainer extends Component
     
     /**
      * Get a single image by image id from the files array.
-     * 
+     *
      * @param integer $imageId The image id to find.
      * @return boolean|array The image array or false if not found.
      */
@@ -287,9 +287,9 @@ class StorageContainer extends Component
      * Get an array with all files based on a where condition.
      *
      * This method returns an array with files matching there $args array condition. If no argument is provided all files will be returned.
-     * 
+     *
      * See {{\luya\admin\storage\QueryTrait::where}} for condition informations.
-     * 
+     *
      * @param array $args An array with conditions to match e.g. `['is_hidden' => 1, 'is_deleted' => 0]`.
      * @return \luya\admin\file\Iterator An iterator object containing all files found for the condition provided.
      */
@@ -300,11 +300,11 @@ class StorageContainer extends Component
     
     /**
      * Get a single file based on a where condition.
-     * 
+     *
      * This method returns a single file matching the where condition, if the multiple results match the condition the first one will be picked.
-     * 
+     *
      * See {{\luya\admin\storage\QueryTrait::where}} for condition informations.
-     * 
+     *
      * @param array $args An array with conditions to match e.g. `['is_hidden' => 1, 'is_deleted' => 0]`.
      * @return \luya\admin\file\Item The file item object.
      */
@@ -315,9 +315,9 @@ class StorageContainer extends Component
     
     /**
      * Get a single file based on the the ID.
-     * 
+     *
      * If not found false is returned.
-     * 
+     *
      * @param integer $fileId The requested storage file id.
      * @return \luya\admin\file\Item|boolean The file object or false if not found.
      */
@@ -328,14 +328,14 @@ class StorageContainer extends Component
     
     /**
      * Add a new file based on the source to the storage system.
-     * 
+     *
      * When using the $_FILES array you can also make usage of the file helper methods:
-     * 
+     *
      * + {{luya\admin\helpers\Storage::uploadFromFiles}}
      * + {{luya\admin\helpers\Storage::uploadFromFileArray}}
-     * 
+     *
      * When not using the $_FILES array:
-     * 
+     *
      * ```php
      * Yii::$app->storage->addFile('/the/path/to/File.jpg', 'File.jpg', 0, 1);
      * ```
@@ -411,9 +411,9 @@ class StorageContainer extends Component
      * Get an array with all images based on a where condition.
      *
      * This method returns an array with images matching there $args array condition. If no argument is provided all images will be returned.
-     * 
+     *
      * See {{\luya\admin\storage\QueryTrait::where}} for condition informations.
-     * 
+     *
      * @param array $args An array with conditions to match e.g. `['is_hidden' => 1, 'is_deleted' => 0]`.
      * @return \luya\admin\image\Iterator An iterator object containing all image found for the condition provided.
      */
@@ -424,11 +424,11 @@ class StorageContainer extends Component
     
     /**
      * Get a single image based on a where condition.
-     * 
+     *
      * This method returns a single image matching the where condition, if the multiple results match the condition the first one will be picked.
-     * 
+     *
      * See {{\luya\admin\storage\QueryTrait::where}} for condition informations.
-     * 
+     *
      * @param array $args An array with conditions to match e.g. `['is_hidden' => 1, 'is_deleted' => 0]`.
      * @return \luya\admin\image\Item The file item object.
      */
@@ -439,9 +439,9 @@ class StorageContainer extends Component
     
     /**
      * Get a single image based on the the ID.
-     * 
+     *
      * If not found false is returned.
-     * 
+     *
      * @param integer $imageId The requested storage image id.
      * @return \luya\admin\image\Item|boolean The image object or false if not found.
      */
@@ -452,13 +452,13 @@ class StorageContainer extends Component
     
     /**
      * Add a new image based an existing file Id.
-     * 
+     *
      * The storage system uses the same file base, for images and files. The difference between a file and an image is the filter which is applied.
-     * 
+     *
      * Only files of the type image can be used (or added) as an image.
-     * 
+     *
      * An image object is always based on the {{\luya\admin\file\Item}} object and a {{luya\admin\base\Filter}}.
-     * 
+     *
      * ```php
      * Yii::$app->storage->addImage(123, 0); // create an image from file object id 123 without filter.
      * ```
@@ -549,9 +549,9 @@ class StorageContainer extends Component
     
     /**
      * Get all storage folders as an array from database.
-     * 
+     *
      * This method is used to retrieve all folders from the database and indexed by folder key.
-     * 
+     *
      * @return array An array with all storage folders indexed by the folder id.
      */
     public function getFoldersArray()
@@ -565,7 +565,7 @@ class StorageContainer extends Component
     
     /**
      * Get a single folder by folder id from the folders array.
-     * 
+     *
      * @param integer $folderId The folder id to find.
      * @return boolean|array The folder array or false if not found.
      */
@@ -578,9 +578,9 @@ class StorageContainer extends Component
      * Get an array with all folders based on a where condition.
      *
      * If no argument is provided all images will be returned.
-     * 
+     *
      * See {{\luya\admin\storage\QueryTrait::where}} for condition informations.
-     * 
+     *
      * @param array $args An array with conditions to match e.g. `['is_hidden' => 1, 'is_deleted' => 0]`.
      * @return \luya\admin\folder\Iterator An iterator object containing all image found for the condition provided.
      */
@@ -591,11 +591,11 @@ class StorageContainer extends Component
     
     /**
      * Get a single folder based on a where condition.
-     * 
+     *
      * This method returns a single fpöder matching the where condition, if the multiple results match the condition the first one will be picked.
-     * 
+     *
      * See {{\luya\admin\storage\QueryTrait::where}} for condition informations.
-     * 
+     *
      * @param array $args An array with conditions to match e.g. `['is_hidden' => 1, 'is_deleted' => 0]`.
      * @return \luya\admin\folder\Item The folder item object.
      */
@@ -606,9 +606,9 @@ class StorageContainer extends Component
     
     /**
      * Get a single folder based on the the ID.
-     * 
+     *
      * If not found false is returned.
-     * 
+     *
      * @param integer $folderId The requested storage folder id.
      * @return \luya\admin\folder\Item|boolean The folder object or false if not found.
      */
@@ -642,9 +642,9 @@ class StorageContainer extends Component
     
     /**
      * Get all storage filters as an array from database.
-     * 
+     *
      * This method is used to retrieve all filters from the database and indexed by filter identifier key.
-     * 
+     *
      * @return array An array with all storage filters indexed by the filter identifier.
      */
     public function getFiltersArray()
@@ -658,7 +658,7 @@ class StorageContainer extends Component
     
     /**
      * Get a single filter by filter identifier from the filters array.
-     * 
+     *
      * @param integer $filterIdentifier The filter identifier to find use {{luya\admin\base\Filter::identifier}} method.
      * @return boolean|array The filter array or false if not found.
      */
@@ -669,7 +669,7 @@ class StorageContainer extends Component
     
     /**
      * Caching helper method.
-     * 
+     *
      * @param \yii\db\Query $query
      * @param string|array $key
      * @return mixed|boolean

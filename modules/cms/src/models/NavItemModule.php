@@ -17,24 +17,24 @@ use luya\base\ModuleReflection;
 class NavItemModule extends NavItemType implements NavItemTypeInterface
 {
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public static function getNummericType()
     {
         return NavItem::TYPE_MODULE;
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'cms_nav_item_module';
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
@@ -66,8 +66,8 @@ class NavItemModule extends NavItemType implements NavItemTypeInterface
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [

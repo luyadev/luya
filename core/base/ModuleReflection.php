@@ -69,8 +69,8 @@ class ModuleReflection extends Object
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function init()
     {
         if ($this->module === null) {

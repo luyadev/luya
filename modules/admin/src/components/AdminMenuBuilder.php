@@ -218,8 +218,8 @@ class AdminMenuBuilder extends Object implements AdminMenuBuilderInterface
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function menu()
     {
         return $this->_menu;

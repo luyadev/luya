@@ -35,8 +35,8 @@ class TagActiveWindow extends ActiveWindow
     public $tableName = null;
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();

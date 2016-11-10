@@ -25,24 +25,24 @@ class NavItemRedirect extends NavItemType implements NavItemTypeInterface
     const TYPE_LINK_TO_FILE = 3;
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'cms_nav_item_redirect';
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public static function getNummericType()
     {
         return NavItem::TYPE_REDIRECT;
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
@@ -51,8 +51,8 @@ class NavItemRedirect extends NavItemType implements NavItemTypeInterface
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [

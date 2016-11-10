@@ -201,16 +201,16 @@ class Storage
      * ```php
      * $return = Storage::uploadFromFileArray($_FILES['image'], 0, true);
      * ``
-     * 
+     *
      * Example response
-     * 
+     *
      * ```php
      * ['error' => false, 'message' => 'file uploaded succesfully', 'file_id' => 123], // success response example
      * ['error' => true, 'message' => 'No file was uploaded.', 'file_id' => 0], // error response example
      * ```
      *
      * @param array $fileArray Its an entry of the files array like $_FILES['logo_image'].
-     * @param integer $toFolder The id of the folder the file should be uploaded to, see {{luya\storage\component\StorageContainer::findFolders}}
+     * @param integer $toFolder The id of the folder the file should be uploaded to, see {{luya\admin\components\StorageContainer::findFolders}}
      * @param string $isHidden Whether the file should be hidden or not.
      * @return array An array with key `upload`, `message` and `file_id`. When upload is false, an error occured otherwise true. The message key contains the error messages. If no error happend `file_id` will contain the new uploaded file id.
      */
@@ -233,9 +233,9 @@ class Storage
      * ```php
      * $return = Storage::uploadFromFiles($_FILES, 0, true);
      * ```
-     * 
+     *
      * Example response
-     * 
+     *
      * ```php
      * ['error' => false, 'message' => 'file uploaded succesfully', 'file_id' => 123], // success response example
      * ['error' => true, 'message' => 'No file was uploaded.', 'file_id' => 0], // error response example
@@ -243,7 +243,7 @@ class Storage
      *
      * @todo what happen if $files does have more then one entry, as the response is limit to 1
      * @param array $filesArray Use $_FILES array.
-     * @param integer $toFolder The id of the folder the file should be uploaded to, see {{luya\storage\component\StorageContainer::findFolders}}
+     * @param integer $toFolder The id of the folder the file should be uploaded to, see {{luya\admin\components\StorageContainer::findFolders}}
      * @param string $isHidden Whether the file should be hidden or not.
      * @return array An array with key `upload`, `message` and `file_id`. When upload is false, an error occured otherwise true. The message key contains the error messages. If no error happend `file_id` will contain the new uploaded file id.
      */

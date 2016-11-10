@@ -2,7 +2,6 @@
 
 namespace cmstests\data\blocks;
 
-
 use luya\cms\base\TwigBlock;
 
 class TwigTestBlock extends TwigBlock

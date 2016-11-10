@@ -39,8 +39,8 @@ class Api extends RestActiveController
     public $autoEnablePagination = true;
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -70,27 +70,25 @@ class Api extends RestActiveController
     
     public function actionServices()
     {
-    	$settings = [];
-    	$apiEndpoint = $this->model->ngRestApiEndpoint();
-    	$userSortSettings = Yii::$app->adminuser->identity->setting->get('ngrestorder.admin/'.$apiEndpoint, false);
-    	
-    	if ($userSortSettings && is_array($userSortSettings)) {
-    		
-    		if ($userSortSettings['sort'] == SORT_DESC) {
-    			$order = '-'.$userSortSettings['field'];
-    		} else {
-    			$order = '+'.$userSortSettings['field'];
-    		}
-    		
-    		$settings['order'] = $order;
-    		
-    	}
-    	
-    	$userFilter = Yii::$app->adminuser->identity->setting->get('ngrestfilter.admin/'.$apiEndpoint, false);
-    	if ($userFilter) {
-    		$settings['filterName'] = $userFilter;
-    	}
-    	
+        $settings = [];
+        $apiEndpoint = $this->model->ngRestApiEndpoint();
+        $userSortSettings = Yii::$app->adminuser->identity->setting->get('ngrestorder.admin/'.$apiEndpoint, false);
+        
+        if ($userSortSettings && is_array($userSortSettings)) {
+            if ($userSortSettings['sort'] == SORT_DESC) {
+                $order = '-'.$userSortSettings['field'];
+            } else {
+                $order = '+'.$userSortSettings['field'];
+            }
+            
+            $settings['order'] = $order;
+        }
+        
+        $userFilter = Yii::$app->adminuser->identity->setting->get('ngrestfilter.admin/'.$apiEndpoint, false);
+        if ($userFilter) {
+            $settings['filterName'] = $userFilter;
+        }
+        
         return ['service' => $this->model->getNgrestServices(), '_settings' => $settings];
     }
 

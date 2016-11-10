@@ -55,8 +55,8 @@ class Application extends \yii\console\Application
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function coreComponents()
     {
         return array_merge($this->luyaCoreComponents(), [
@@ -76,7 +76,7 @@ class Application extends \yii\console\Application
      * Will run all controllers located in the `commands` folder of a module.
      *
      * {@inheritDoc}
-     * 
+     *
      * @see \yii\console\Application::runAction()
      * @since 1.0.0-beta6
      */

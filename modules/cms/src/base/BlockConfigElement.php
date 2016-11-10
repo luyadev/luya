@@ -6,13 +6,13 @@ use Exception;
 
 /**
  * Config Element abstraction.
- * 
+ *
  * In order to make sure all config() elements has same values, this class implement
  * check routines for
- * 
+ *
  * + {{\luya\cms\base\BlockCfg}}
  * + {{\luya\cms\base\BlockVar}}
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 abstract class BlockConfigElement
@@ -22,7 +22,7 @@ abstract class BlockConfigElement
     protected $id = null;
 
     /**
-     * 
+     *
      * @param array $item The element config with all fields.
      * @throws Exception
      */
@@ -61,7 +61,7 @@ abstract class BlockConfigElement
 
     /**
      * Extract the data from the element.
-     * 
+     *
      * @return array
      */
     abstract public function toArray();

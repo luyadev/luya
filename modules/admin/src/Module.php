@@ -19,9 +19,9 @@ use luya\admin\importers\StorageImporter;
 
 /**
  * Admin Module.
- * 
+ *
  * The Admin Module provides options to configure. In order to add the Admin module to your config use:
- * 
+ *
  * ```php
  * 'modules' => [
  *     // ...
@@ -69,11 +69,11 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
         'api-admin-menu' => 'luya\admin\apis\MenuController',
         'api-admin-timestamp' => 'luya\admin\apis\TimestampController',
         'api-admin-search' => 'luya\admin\apis\SearchController',
-        'api-admin-user' => 'luya\admin\apis\UserController', 
-        'api-admin-group' => 'luya\admin\apis\GroupController', 
-        'api-admin-lang' => 'luya\admin\apis\LangController', 
-        'api-admin-effect' => 'luya\admin\apis\EffectController', 
-        'api-admin-filter' => 'luya\admin\apis\FilterController', 
+        'api-admin-user' => 'luya\admin\apis\UserController',
+        'api-admin-group' => 'luya\admin\apis\GroupController',
+        'api-admin-lang' => 'luya\admin\apis\LangController',
+        'api-admin-effect' => 'luya\admin\apis\EffectController',
+        'api-admin-filter' => 'luya\admin\apis\FilterController',
         'api-admin-tag' => 'luya\admin\apis\TagController',
     ];
 
@@ -168,7 +168,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     
     /**
      * Getter method for the js translations array.
-     * 
+     *
      * @return array An array with all translated messages to store in the and access from the admin js scripts.
      */
     public function getJsTranslations()
@@ -178,9 +178,9 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     
     /**
      * Setter for js translations files.
-     * 
+     *
      * This setter method is used by the {{luya\web\Bootstrap::run}} to assign all js transaltion files from the admin modules.
-     * 
+     *
      * @param array $translations
      */
     public function setJsTranslations(array $translations)
@@ -194,7 +194,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     
     /**
      * Get the admin module interface menu.
-     * 
+     *
      * @see \luya\admin\base\Module::getMenu()
      * @return \luya\admin\components\AdminMenuBuilderInterface Get the menu builder object.
      */
@@ -217,7 +217,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
 
     /**
      * Registering applicat components on application bootstraping proccess.
-     * 
+     *
      * @return array An array where the key is the application component name and value the configuration.
      */
     public function registerComponents()
@@ -243,7 +243,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
 
     /**
      * Setup the admin importer classes.
-     * 
+     *
      * @param \uya\console\interfaces\ImportControllerInterface $import The import controller interface.
      * @return array An array with all importer classes.
      */
@@ -259,7 +259,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     
     /**
      * Admin Module translation helper.
-     * 
+     *
      * @param string $message The message key to translation
      * @param array $params Optional parameters to pass to the translation.
      * @return string The translated message.

@@ -16,24 +16,24 @@ use luya\admin\ngrest\base\Plugin;
 class Html extends Plugin
 {
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function renderList($id, $ngModel)
     {
         return $this->createTag('div', null, ['ng-bind-html' => $ngModel . ' | trustAsUnsafe']);
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function renderCreate($id, $ngModel)
     {
         throw new Exception("HTML Plugin does not support create form.");
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function renderUpdate($id, $ngModel)
     {
         throw new Exception("HTML Plugin does not support update form.");

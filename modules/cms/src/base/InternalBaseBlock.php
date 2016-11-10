@@ -13,13 +13,13 @@ use luya\cms\helpers\BlockHelper;
 
 /**
  * Concret Block implementation based on BlockInterface.
- * 
+ *
  * This is an use case for the block implemenation as InternBaseBlock fro
  * two froms of implementations.
- * 
+ *
  * + {{\luya\cms\base\PhpBlock}}
  * + {{\luya\cms\base\TwigBlock}}
- * 
+ *
  * @since 1.0.0-beta8
  * @author Basil Suter <basil@nadar.io>
  */
@@ -354,10 +354,10 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     
     public function getExtraValue($key, $default = false)
     {
-    	if (!$this->_assignExtraVars) {
-    		$this->getExtraVarValues();
-    		$this->_assignExtraVars = true;
-    	}
+        if (!$this->_assignExtraVars) {
+            $this->getExtraVarValues();
+            $this->_assignExtraVars = true;
+        }
         return (isset($this->_extraVars[$key])) ? $this->_extraVars[$key] : $default;
     }
     

@@ -10,7 +10,7 @@ use yii\helpers\ArrayHelper;
 
 /**
  * ActiveWindow Callback Form Widget.
- * 
+ *
  * Example usage:
  *
  * ```php
@@ -34,7 +34,7 @@ use yii\helpers\ArrayHelper;
  *
  * <? $form::end(); ?>
  * ```
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class CallbackFormWidget extends \yii\base\Widget
@@ -76,8 +76,8 @@ class CallbackFormWidget extends \yii\base\Widget
     public $fieldConfig = [];
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -135,8 +135,8 @@ class CallbackFormWidget extends \yii\base\Widget
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function run()
     {
         $content = ob_get_clean();

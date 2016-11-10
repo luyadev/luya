@@ -37,7 +37,7 @@ trait RestBehaviorsTrait
 
     /**
      * Remove not used behaviors from parent behaviors.
-     * 
+     *
      * @return array The list of behvaiors.
      */
     public function behaviors()

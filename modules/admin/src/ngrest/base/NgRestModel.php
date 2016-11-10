@@ -48,8 +48,8 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     protected $ngRestServiceArray = [];
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
@@ -193,8 +193,8 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function afterFind()
     {
         if ($this->getNgRestCallType()) {
@@ -210,8 +210,8 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function genericSearchFields()
     {
         $fields = [];
@@ -225,16 +225,16 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function genericSearchHiddenFields()
     {
         return [];
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function genericSearchStateProvider()
     {
         return [
@@ -246,8 +246,8 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function genericSearch($searchQuery)
     {
         $fields = $this->genericSearchFields();

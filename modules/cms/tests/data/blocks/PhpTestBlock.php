@@ -23,6 +23,6 @@ class PhpTestBlock extends PhpBlock
     
     public function extraVars()
     {
-    	return ['foo' => 'bar'];
+        return ['foo' => 'bar'];
     }
 }

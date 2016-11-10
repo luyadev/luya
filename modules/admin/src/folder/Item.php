@@ -36,7 +36,7 @@ class Item extends \yii\base\Object
     
     /**
      * Get the parent folder object.
-     * 
+     *
      * @return boolean|\luya\admin\folder\Item The item object or false if not found.
      */
     public function getParent()

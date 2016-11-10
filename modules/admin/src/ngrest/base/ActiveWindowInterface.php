@@ -25,16 +25,16 @@ interface ActiveWindowInterface
 
     /**
      * Set the current configratuion hash name to the ActiveWindow.
-     * 
+     *
      * Setting the the hash happens in the {{luya\admin\ngrest\render\RenderActiveWindow::render}} method.
-     * 
+     *
      * @param string $hash The hash name of the current active config.
      */
     public function setConfigHash($hash);
     
     /**
      * Set the hash of the current active window which is calculated by the ActiveWindow.
-     * 
+     *
      * Setting the the hash happens in the {{luya\admin\ngrest\render\RenderActiveWindow::render}} method.
      * @param unknown $hash
      */
@@ -42,7 +42,7 @@ interface ActiveWindowInterface
     
     /**
      * The default action which is going to be requested when clicking the active window.
-     * 
+     *
      * @return string The response string, render and displayed trough the angular ajax request.
      */
     public function index();

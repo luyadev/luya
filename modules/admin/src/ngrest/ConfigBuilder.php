@@ -239,8 +239,8 @@ class ConfigBuilder implements ConfigBuilderInterface
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function getConfig()
     {
         return $this->config;

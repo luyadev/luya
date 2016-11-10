@@ -13,11 +13,11 @@ use luya\admin\base\RestController;
  */
 class MenuController extends RestController
 {
-	/**
-	 * The index action of the menu api returns all available modules which is the top menu know as node.
-	 * 
-	 * @return array
-	 */
+    /**
+     * The index action of the menu api returns all available modules which is the top menu know as node.
+     *
+     * @return array
+     */
     public function actionIndex()
     {
         return Yii::$app->adminmenu->getModules();
@@ -25,7 +25,7 @@ class MenuController extends RestController
 
     /**
      * The items action returns all items for a given node.
-     * 
+     *
      * @param integer $nodeId The id of the node to find all items from.
      * @return array
      */
@@ -36,7 +36,7 @@ class MenuController extends RestController
 
     /**
      * Get all dashabord items for a given node.
-     * 
+     *
      * @param integer $nodeId The id of the node to find all items from.
      * @return array
      */

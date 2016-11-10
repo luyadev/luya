@@ -80,8 +80,8 @@ class ImportController extends Command implements ImportControllerInterface
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function getDirectoryFiles($folderName)
     {
         // create array
@@ -98,8 +98,8 @@ class ImportController extends Command implements ImportControllerInterface
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function addLog($section, $value)
     {
         $this->_log[$section][] = $value;

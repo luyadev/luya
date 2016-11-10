@@ -26,9 +26,9 @@ use yii\base\InvalidParamException;
  */
 class Log extends \yii\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -75,8 +75,8 @@ class Log extends \yii\db\ActiveRecord
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'cms_log';
@@ -102,8 +102,8 @@ class Log extends \yii\db\ActiveRecord
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
@@ -159,7 +159,7 @@ class Log extends \yii\db\ActiveRecord
     }
 
     /**
-     * 
+     *
      * @param integer $type Types of message:
      * + 1 = insertion
      * + 2 = update

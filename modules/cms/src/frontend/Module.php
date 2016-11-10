@@ -53,8 +53,8 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
     public $enableTagParsing = true;
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function registerComponents()
     {
         return [
@@ -65,8 +65,8 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function bootstrap($app)
     {
         $app->on(Application::EVENT_BEFORE_REQUEST, function ($event) {

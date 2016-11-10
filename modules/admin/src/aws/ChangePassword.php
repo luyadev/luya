@@ -46,9 +46,9 @@ class ChangePassword extends ActiveWindow
 
     /**
      * The method which is going to change the password on the current model.
-     * 
+     *
      * The implementation of this must make sure if the $newPassword and $newPasswordRepetition are equals!
-     * 
+     *
      * @param string $newPassword The new password which must be set.
      * @param string $newPasswordRepetition The repeation in order to check whether does inputs are equal or not.
      * @throws \luya\Exception

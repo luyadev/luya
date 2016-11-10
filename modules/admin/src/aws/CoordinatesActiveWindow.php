@@ -35,8 +35,8 @@ class CoordinatesActiveWindow extends ActiveWindow
     public $mapsApiKey = null;
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function init()
     {
         if ($this->mapsApiKey === null) {

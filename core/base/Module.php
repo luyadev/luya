@@ -106,8 +106,8 @@ abstract class Module extends \yii\base\Module
     public $translations = [];
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();

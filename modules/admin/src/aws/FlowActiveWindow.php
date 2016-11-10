@@ -56,8 +56,8 @@ class FlowActiveWindow extends ActiveWindow
     public $modelClass = null;
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();

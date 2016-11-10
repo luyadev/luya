@@ -11,8 +11,8 @@ use luya\admin\ngrest\base\Api;
  */
 class FilterController extends Api
 {
-	/**
-	 * @var string The path to the StorageFilter model.
-	 */
+    /**
+     * @var string The path to the StorageFilter model.
+     */
     public $modelClass = 'luya\admin\models\StorageFilter';
 }

@@ -98,7 +98,7 @@ class Composition extends Component implements \ArrayAccess
     /**
      * Class constructor, to get data from DiContainer.
      *
-     * @param \luya\web\Request $request Request componet resolved from Depency Manager 
+     * @param \luya\web\Request $request Request componet resolved from Depency Manager
      * @param array $config The object configuration array
      */
     public function __construct(\luya\web\Request $request, array $config = [])
@@ -367,7 +367,7 @@ class Composition extends Component implements \ArrayAccess
 
     /**
      * ArrayAccess offset exists.
-     * 
+     *
      * @see ArrayAccess::offsetExists()
      * @return boolean
      */
@@ -378,7 +378,7 @@ class Composition extends Component implements \ArrayAccess
 
     /**
      * ArrayAccess set value to array.
-     * 
+     *
      * @see ArrayAccess::offsetSet()
      * @param string $offset The key of the array
      * @param mixed $value The value for the offset key.
@@ -394,7 +394,7 @@ class Composition extends Component implements \ArrayAccess
 
     /**
      * ArrayAccess get the value for a key.
-     * 
+     *
      * @see ArrayAccess::offsetGet()
      * @param string $offset The key to get from the array.
      * @return mixed The value for the offset key from the array.
@@ -406,9 +406,9 @@ class Composition extends Component implements \ArrayAccess
 
     /**
      * ArrayAccess unset key.
-     * 
+     *
      * Unsetting data via array access is not allowed.
-     * 
+     *
      * @see ArrayAccess::offsetUnset()
      * @param string $offset The key to unset from the array.
      * @throws \luya\Exception

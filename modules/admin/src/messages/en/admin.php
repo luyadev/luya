@@ -179,13 +179,13 @@ return [
 
 // rc2
 
-	'ngrest_crud_group_prompt' => 'Group by field',
-	'ngrest_crud_filter_prompt' => 'Select Filter',
-	'ngrest_crud_ajax_search_length' => 'The search query must be at least 3 chars.',
-	'menu_system_logger' => 'Logging',
-	'layout_filemanager_detail_replace_file' => 'Replace file',
-	'layout_rightbar_languagelabel' => 'Interface Language',
-	'layout_rightbar_savebtn' => 'Save',
+    'ngrest_crud_group_prompt' => 'Group by field',
+    'ngrest_crud_filter_prompt' => 'Select Filter',
+    'ngrest_crud_ajax_search_length' => 'The search query must be at least 3 chars.',
+    'menu_system_logger' => 'Logging',
+    'layout_filemanager_detail_replace_file' => 'Replace file',
+    'layout_rightbar_languagelabel' => 'Interface Language',
+    'layout_rightbar_savebtn' => 'Save',
     'aws_changepassword_notequal' => 'The new password and the password repeation are not equal.',
     'aws_changeapssword_minchar' => 'The new password must have at least {min} characters.',
 ];

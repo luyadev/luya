@@ -8,47 +8,47 @@ use luya\Exception;
  * Query Data from Files, Filters and Images.
  *
  * Usage examples which is valid for all classes implementing the QueryTrait.
- * 
+ *
  * The below examples are wrote for file query but are are working for all classes implementing the QueryTrait like:
- * 
+ *
  * + Files: {{\luya\admin\file\Query}}
  * + Images: {{\luya\admin\image\Query}}
- * + Folders: {{\luya\admin\folder\Query}} 
- * 
+ * + Folders: {{\luya\admin\folder\Query}}
+ *
  * ### All vs. One
- * 
+ *
  * ```php
  * return (new \luya\admin\file\Query())->where($args)->one();
  * ```
- * 
+ *
  * ```php
  * return (new \luya\admin\file\Query())->findOne($fileId);
  * ```
- * 
+ *
  * ```php
  * return (new \luya\admin\file\Query())->where($args)->all();
  * ```
- * 
+ *
  * ### Counting
- * 
+ *
  * ```php
  * return (new \luya\admin\file\Query())->where($args)->count();
  * ```
  *
  * ### Customized where condition
- * 
+ *
  * All QueryTrait classes can use different where notations:
- * 
+ *
  * ```php
  * return (new \luya\admin\file\Query())->where(['>', 'id', 1])->andWHere(['<', 'id', 3])->all();
  * ```
- * 
+ *
  * ### Offsets and Limits
- * 
+ *
  * ```php
  * return (new \luya\admin\file\Query())->where($args)->offset(5)->limit(10)->all();
  * ```
- * 
+ *
  * See the {{\luya\admin\storage\QueryTrait::where}} for more details.
  *
  * @author Basil Suter <basil@nadar.io>
@@ -72,7 +72,7 @@ trait QueryTrait
     
     /**
      * Return the a single item by its key. If not found, false must be returned.
-     * 
+     *
      * @param integer $id The requested key identifier.
      * @return array|boolean Returns the item array or false if not found.
      */
@@ -80,7 +80,7 @@ trait QueryTrait
     
     /**
      * Create an item object which implements {{\luya\admin\storage\ItemTrait}}.
-     * 
+     *
      * @param array $itemArray
      * @return \luya\admin\storage\ItemTrait The item object implementing the ItemTrait.
      */
@@ -294,7 +294,7 @@ trait QueryTrait
     
     /**
      * Find One based on the where condition.
-     * 
+     *
      * If there are several items, it just takes the first one and does not throw an exception.
      *
      * @return \luya\admin\image\Item|\luya\admin\file\Item|\luya\admin\folder\Item

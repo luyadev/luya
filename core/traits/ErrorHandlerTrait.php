@@ -70,8 +70,8 @@ trait ErrorHandlerTrait
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function renderException($exception)
     {
         if ($exception instanceof NotFoundHttpException || !$this->transferException) {

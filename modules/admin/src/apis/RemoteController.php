@@ -10,18 +10,18 @@ use luya\rest\Controller;
 
 /**
  * Remove API, allows to collect system data with a valid $token.
- * 
+ *
  * The remote api can only access with the oken but is not secured by a loggged in user.
  *
  * @author Basil Suter <basil@nadar.io>
  */
 class RemoteController extends Controller
 {
-	/**
-	 * Disabled the auth methods.
-	 * 
-	 * @return boolean When false the authentication is disabled.
-	 */
+    /**
+     * Disabled the auth methods.
+     *
+     * @return boolean When false the authentication is disabled.
+     */
     public function userAuthClass()
     {
         return false;
@@ -29,7 +29,7 @@ class RemoteController extends Controller
 
     /**
      * Retrieve administration informations if the token is valid.
-     * 
+     *
      * @param string $token The sha1 encrypted access token.
      * @throws luya\Exception If invalid token.
      * @return array

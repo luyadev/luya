@@ -133,7 +133,7 @@ class Menu extends Component implements ArrayAccess
     
     /**
      * Set url rules for the current page item in order to retrieve at another point of the appliation when building language links.
-     * 
+     *
      * @param array $rule
      */
     public function setCurrentUrlRule(array $rule)
@@ -267,7 +267,7 @@ class Menu extends Component implements ArrayAccess
 
     /**
      * Returns the parts of the rules who do not belong to the current active menu item link.
-     * 
+     *
      * For instance the current menu link is `/de/company/news` where this
      * page is declared as a module with urlRules, controllers and actions. If the url path is `/de/company/news/detail/my-first-news` the
      * appendix would be `detail/my-first-news`.

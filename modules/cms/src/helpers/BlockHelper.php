@@ -6,13 +6,13 @@ use Yii;
 
 /**
  * Helper methods for CMS Blocks.
- * 
+ *
  * As before those options has been stored in the {{\luya\cms\base\InternalBaseBlock}} they
  * are now located as static helper methods here.
- * 
+ *
  * The helper methods are basically tasks you are using a lot when dealing with block extra
  * value output or configuration of a block element like vars, cfgs.
- * 
+ *
  * @since 1.0.0-RC2
  * @author Basil Suter <basil@nadar.io>
  */

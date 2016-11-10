@@ -4,15 +4,15 @@ namespace luya\cms\base;
 
 /**
  * Interface for all Blocks.
- * 
+ *
  * The below methods are required in order to create your own block abstraction layer.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 interface BlockInterface
 {
     // block methods defintions implementations
-    
+
     /**
      * Get the name of the block in order to display in administration context.
      */
@@ -20,7 +20,7 @@ interface BlockInterface
     
     /**
      * Returns the icon based on material icon names
-     * 
+     *
      * @return string
      */
     public function icon();
@@ -47,7 +47,7 @@ interface BlockInterface
     public function blockGroup();
     
     // getters & setters from outside
-    
+
     /**
      * Returns an array with additional help informations for specific field (var or cfg).
      *
@@ -57,7 +57,7 @@ interface BlockInterface
     
     /**
      * Set an environment option informations to the block with key value pairing.
-     * 
+     *
      * @param string $key The identifier key.
      * @param mixed $value The value for the key.
      */
@@ -65,7 +65,7 @@ interface BlockInterface
     
     /**
      * Set the values for element vars with an array key value binding.
-     * 
+     *
      * @param array $values An array where key is the name of the var-element and value the content.
      */
     public function setVarValues(array $values);
@@ -86,14 +86,14 @@ interface BlockInterface
     
     /**
      * Returns an array of key value pairing with additional informations to pass to the API and frontend.
-     * 
+     *
      * @return array
      */
     public function getExtraVarValues();
    
     /**
      * Returns all config vars element of key value pairing to pass to the Admin ANGULAR API
-     * 
+     *
      * @return array
      */
     public function getConfigVarsExport();
@@ -107,14 +107,14 @@ interface BlockInterface
     
     /**
      * Returns all config placeholders element of key value pairing to pass to the Admin ANGULAR API
-     * 
+     *
      * @return array
      */
     public function getConfigPlaceholdersExport();
 
     /**
      * Whether cache is enabled for this block or not.
-     * 
+     *
      * @return boolean
      */
     public function getIsCacheEnabled();

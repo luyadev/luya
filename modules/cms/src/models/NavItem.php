@@ -44,8 +44,8 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     public $parent_nav_id = null;
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -78,16 +78,16 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'cms_nav_item';
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
@@ -97,8 +97,8 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [
@@ -259,24 +259,24 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     /* GenericSearchInterface */
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function genericSearchFields()
     {
         return ['title', 'alias', 'nav_id'];
     }
     
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function genericSearchHiddenFields()
     {
         return [];
     }
 
     /**
-	 * @inheritdoc
-	 */
+     * @inheritdoc
+     */
     public function genericSearch($searchQuery)
     {
         $query = self::find();
@@ -293,7 +293,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
      * and jump/linking in the search results container.
      *
      * {@inheritDoc}
-     * 
+     *
      * @see \admin\base\GenericSearchInterface::genericSearchStateProvider()
      */
     public function genericSearchStateProvider()

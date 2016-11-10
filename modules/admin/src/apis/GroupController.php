@@ -11,8 +11,8 @@ use luya\admin\ngrest\base\Api;
  */
 class GroupController extends Api
 {
-	/**
-	 * @var string The path to the group model.
-	 */
+    /**
+     * @var string The path to the group model.
+     */
     public $modelClass = 'luya\admin\models\Group';
 }

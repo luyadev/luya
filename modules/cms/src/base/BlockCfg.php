@@ -4,7 +4,7 @@ namespace luya\cms\base;
 
 /**
  * Block CFG variables ensurence.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class BlockCfg extends BlockConfigElement

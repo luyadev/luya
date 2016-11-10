@@ -26,7 +26,7 @@ class Bootstrap extends BaseBootstrap
     
     /**
      * Before bootstrap run process.
-     * 
+     *
      * @see \luya\base\BaseBootstrap::beforeRun()
      */
     public function beforeRun($app)
@@ -52,7 +52,7 @@ class Bootstrap extends BaseBootstrap
 
     /**
      * Invokes the bootstraping process.
-     * 
+     *
      * @see \luya\base\BaseBootstrap::run()
      */
     public function run($app)

@@ -71,7 +71,7 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
     
     public function ngRestListOrder()
     {
-    	return ['firstname' => SORT_ASC];
+        return ['firstname' => SORT_ASC];
     }
     
     public function ngRestAttributeTypes()
@@ -87,9 +87,9 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
     
     public function ngRestFilters()
     {
-    	return [
-    		'Removed' => self::find()->where(['is_deleted' => 1]),
-    	];
+        return [
+            'Removed' => self::find()->where(['is_deleted' => 1]),
+        ];
     }
     
     public function ngRestExtraAttributeTypes()
@@ -230,7 +230,7 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
     
     public function getTitleNamed()
     {
-    	return self::getTitles()[$this->title];
+        return self::getTitles()[$this->title];
     }
 
     public static function getTitles()

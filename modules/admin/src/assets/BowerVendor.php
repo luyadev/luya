@@ -29,7 +29,7 @@ use Yii;
  * ```json
  * "bower-asset/jquery" : "2.2.0",
  * ```
- * 
+ *
  * This makes the speed for downloading and installing luya much faster. There is now also a good way to compress all those
  * files into a single file which reduces the number of admin requests on load (TBD).
  *
@@ -52,7 +52,7 @@ class BowerVendor extends \luya\web\Asset
     
     /**
      * As params are not allowed inside array properties we have located the filling of the $js param into the initalizer.
-     * 
+     *
      * @see \yii\web\AssetBundle::init()
      */
     public function init()

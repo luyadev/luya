@@ -135,7 +135,7 @@ abstract class Boot
 
     /**
      * Run Cli-Application based on the provided config file.
-     * 
+     *
      * @return string|integer
      */
     public function applicationConsole()
