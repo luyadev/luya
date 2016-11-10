@@ -32,7 +32,7 @@ use luya\cms\admin\Module;
                 </div>
             </div>
             <div class="block__body block-styles" ng-click="toggleEdit()" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
-            <form class="block__edit" ng-if="edit || config">
+            <form class="block__edit" ng-if="edit || config" ng-submit="save()">
                 <div class="block__edit-content">
                     <div class="row" ng-repeat="field in block.vars">
                         <div class="block__help help help--is-right-aligned" ng-if="hasInfo(field.var)">
@@ -61,8 +61,8 @@ use luya\cms\admin\Module;
                     <div class="row">
                         <div class="col s12">
                             <div class="right">
-                            <button class="[ waves-effect waves-light ] btn btn--small red" ng-click="toggleBlockSettings()"><i class="material-icons left">cancel</i><?php echo Module::t('view_update_btn_cancel'); ?></button>
-                                <button class="[ waves-effect waves-light ] btn btn--small" ng-click="save()"><i class="material-icons left">done</i><?php echo Module::t('view_update_btn_save'); ?></button>
+                            	<button class="[ waves-effect waves-light ] btn btn--small red" type="button" ng-click="toggleBlockSettings()"><i class="material-icons left">cancel</i><?php echo Module::t('view_update_btn_cancel'); ?></button>
+                                <button class="[ waves-effect waves-light ] btn btn--small" type="submit"><i class="material-icons left">done</i><?php echo Module::t('view_update_btn_save'); ?></button>
                             </div>
                         </div>
                     </div>
@@ -391,8 +391,7 @@ use luya\cms\admin\Module;
                         <!-- /PAGE__HEADER -->
 
                         <!-- PAGE__CONTENT--SETTINGS-->
-                        <form class="page__content page__content--settings" ng-show="settings" ng-switch on="itemCopy.nav_item_type">
-
+                        <form class="page__content page__content--settings" ng-show="settings" ng-submit="updateNavItemData(itemCopy, typeDataCopy)" ng-switch on="itemCopy.nav_item_type">
                             <div class="row">
                                 <div class="input input--text col s12">
                                     <label class="input__label"><?php echo Module::t('view_index_page_title'); ?></label>
@@ -462,7 +461,7 @@ use luya\cms\admin\Module;
                                     <div class="col s12">
                                         <div class="right">
                                             <button class="btn waves-effect waves-light red" type="button" ng-click="toggleSettings()"><?php echo Module::t('btn_abort'); ?> <i class="material-icons left">cancel</i></button>
-                                            <button class="btn waves-effect waves-light" type="button" ng-click="updateNavItemData(itemCopy, typeDataCopy)"><?php echo Module::t('btn_save'); ?> <i class="material-icons right">check</i></button>
+                                            <button class="btn waves-effect waves-light" type="submit"><?php echo Module::t('btn_save'); ?> <i class="material-icons right">check</i></button>
                                         </div>
                                     </div>
                                 </div>
