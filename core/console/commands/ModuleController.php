@@ -5,6 +5,7 @@ namespace luya\console\commands;
 use Yii;
 use yii\helpers\Console;
 use luya\helpers\FileHelper;
+use yii\helpers\Inflector;
 
 /**
  * Command to create LUYA modules.
@@ -13,6 +14,70 @@ use luya\helpers\FileHelper;
  */
 class ModuleController extends \luya\console\Command
 {
+	/**
+	 * Humanize the class name
+	 * 
+	 * @return string The humanized name.
+	 */
+	public function humanizeName($name)
+	{
+		return $name = Inflector::humanize(Inflector::camel2words($name));
+	}
+	
+	/**
+	 * Render the readme template.
+	 * 
+	 * @param string $folders
+	 * @param string $name
+	 * @param string $ns
+	 * @return string
+	 */
+	public function renderReadme($folders, $name, $ns)
+	{
+		return $this->view->render('@luya/console/commands/views/module/readme.php', [
+			'folders' => $folders,
+			'name' => $name,
+			'humanName' => $this->humanizeName($name),
+			'ns' => $ns,
+		]);
+	}
+	
+	/**
+	 * Render the admin template.
+	 * 
+	 * @param string $folders
+	 * @param string $name
+	 * @param string $ns
+	 * @return string
+	 */
+	public function renderAdmin($folders, $name, $ns)
+	{
+		return $this->view->render('@luya/console/commands/views/module/adminmodule.php', [
+			'folders' => $folders,
+			'name' => $this->humanizeName($name),
+			'ns' => $ns,
+			'luyaText' => $this->getGeneratorText('module/create'),
+		]);
+	}
+	
+	/**
+	 * Render the frontend template.
+	 * 
+	 * @param string $folders
+	 * @param string $name
+	 * @param string $ns
+	 * @return string
+	 */
+	public function renderFrontend($folders, $name, $ns)
+	{
+		return $this->view->render('@luya/console/commands/views/module/frontendmodule.php', [
+			'folders' => $folders,
+			'name' => $this->humanizeName($name),
+			'ns' => $ns,
+			'luyaText' => $this->getGeneratorText('module/create'),
+		]);
+	}
+	
     /**
      * Create a new frontend/admin module.
      *
@@ -52,16 +117,16 @@ class ModuleController extends \luya\console\Command
             'modelsPath' => $moduleFolder . DIRECTORY_SEPARATOR . 'models',
         ];
 
-        $vars = ['folders' => $folders, 'name' => $moduleName, 'ns' => 'app\\modules\\'.$moduleName];
+        $ns = 'app\\modules\\'.$moduleName;
         
         foreach ($folders as $folder) {
             FileHelper::createDirectory($folder);
         }
         
         $contents = [
-            $moduleFolder. DIRECTORY_SEPARATOR . 'README.md' => $this->view->render('@luya/console/commands/views/module/readme.php', $vars),
-            $moduleFolder. DIRECTORY_SEPARATOR . 'admin/Module.php' => $this->view->render('@luya/console/commands/views/module/adminmodule.php', $vars),
-            $moduleFolder. DIRECTORY_SEPARATOR . 'frontend/Module.php' => $this->view->render('@luya/console/commands/views/module/frontendmodule.php', $vars),
+            $moduleFolder. DIRECTORY_SEPARATOR . 'README.md' => $this->renderReadme($folders, $name, $ns),
+            $moduleFolder. DIRECTORY_SEPARATOR . 'admin/Module.php' => $this->renderAdmin($folders, $name, $ns),
+            $moduleFolder. DIRECTORY_SEPARATOR . 'frontend/Module.php' => $this->renderFrontend($folders, $name, $ns),
         ];
         
         foreach ($contents as $fileName => $content) {

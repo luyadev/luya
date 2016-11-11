@@ -1,36 +1,43 @@
 <?php
-/**
- * @var $className
- * @var $namespace
- * @var $luya
- * @var $moduleId
- * @var $alias
- */
 
-echo "<?php\n";
-?>
+namespace luyatests\core\console\controllers;
 
-namespace <?= $namespace; ?>;
+use Yii;
+use luyatests\LuyaConsoleTestCase;
+use luya\console\commands\ActiveWindowController;
+
+class ActiveWindowControllerTest extends LuyaConsoleTestCase
+{
+	public function testPhpViewRenderContent()
+	{
+		$ctrl = new ActiveWindowController('id', Yii::$app);
+		
+		$content = $ctrl->renderWindowClassView('MeinTestActiveWindow', 'path\\to\\aws', 'cmsadmin');
+		
+$tpl = <<<'EOT'
+<?php
+
+namespace path\to\aws;
 
 use Yii;
 use luya\admin\ngrest\base\ActiveWindow;
 
 /**
- * <?= $alias; ?>.
+ * Mein Test Active Window.
  *
- * <?= $luyaText; ?> 
+ * File has been created with `aw/create` command on LUYA version 1.0.0-RC2-dev. 
  */
-class <?= $className; ?> extends ActiveWindow
+class MeinTestActiveWindow extends ActiveWindow
 {
     /**
      * @var string The name of the module where the ActiveWindow is located in order to finde the view path.
      */
-    public $module = '@<?= $moduleId; ?>';
+    public $module = '@cmsadmin';
 	
     /**
      * @var string The name of of the ActiveWindow. This is displayed in the CRUD list.
      */
-    public $alias = '<?= $alias; ?>';
+    public $alias = 'Mein Test Active Window';
 	
     /**
      * @var string The icon name from goolges material icon set (https://material.io/icons/)
@@ -48,4 +55,9 @@ class <?= $className; ?> extends ActiveWindow
             'id' => $this->itemId,
         ]);
     }
+}
+EOT;
+		
+		$this->assertSame($tpl, $content);
+	}
 }

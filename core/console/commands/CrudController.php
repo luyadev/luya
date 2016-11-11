@@ -170,11 +170,13 @@ class CrudController extends BaseCrudController
      */
     public function generateApiContent($fileNamespace, $className, $modelClass)
     {
+    	$alias = Inflector::humanize(Inflector::camel2words($className));
         return $this->view->render('@luya/console/commands/views/crud/create_api.php', [
             'namespace' => $fileNamespace,
             'className' => $className,
             'modelClass' =>  $modelClass,
-            'luyaVersion' => Boot::VERSION,
+            'luyaVersion' => $this->getGeneratorText('crud/create'),
+        	'alias' => $alias,
         ]);
     }
     
@@ -187,11 +189,13 @@ class CrudController extends BaseCrudController
      */
     public function generateControllerContent($fileNamespace, $className, $modelClass)
     {
+    	$alias = Inflector::humanize(Inflector::camel2words($className));
         return $this->view->render('@luya/console/commands/views/crud/create_controller.php', [
             'namespace' => $fileNamespace,
             'className' => $className,
             'modelClass' =>  $modelClass,
-            'luyaVersion' => Boot::VERSION,
+            'luyaVersion' => $this->getGeneratorText('crud/create'),
+        	'alias' => $alias,
         ]);
     }
     
@@ -207,6 +211,7 @@ class CrudController extends BaseCrudController
      */
     public function generateModelContent($fileNamepsace, $className, $apiEndpoint, TableSchema $schema, $i18nFields)
     {
+    	$alias = Inflector::humanize(Inflector::camel2words($className));
         $dbTableName = $schema->fullName;
         
         $fields = [];
@@ -244,7 +249,7 @@ class CrudController extends BaseCrudController
         return $this->view->render('@luya/console/commands/views/crud/create_model.php', [
             'namespace' => $fileNamepsace,
             'className' => $className,
-            'luyaVersion' => Boot::VERSION,
+            'luyaVersion' => $this->getGeneratorText('crud/create'),
             'apiEndpoint' => $apiEndpoint,
             'dbTableName' => $dbTableName,
             'fields' => $fields,
@@ -254,6 +259,7 @@ class CrudController extends BaseCrudController
             'properties' => $properties,
             'ngrestFieldConfig' => $ngrestFieldConfig,
             'i18nFields' => $i18nFields,
+        	'alias' => $alias,
         ]);
     }
 

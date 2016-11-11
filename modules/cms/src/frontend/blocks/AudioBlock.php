@@ -13,23 +13,38 @@ use luya\cms\frontend\blockgroups\MediaGroup;
  */
 class AudioBlock extends TwigBlock
 {
+	/**
+     * @inheritDoc
+     */
     public $cacheEnabled = true;
     
+    /**
+     * @inheritDoc
+     */
     public function name()
     {
         return Module::t('block_audio_name');
     }
 
+    /**
+     * @inheritDoc
+     */
     public function blockGroup()
     {
         return MediaGroup::class;
     }
     
+    /**
+     * @inheritDoc
+     */
     public function icon()
     {
         return 'volume_up';
     }
 
+    /**
+     * @inheritDoc
+     */
     public function config()
     {
         return [
@@ -39,6 +54,9 @@ class AudioBlock extends TwigBlock
         ];
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getFieldHelp()
     {
         return [
@@ -47,8 +65,7 @@ class AudioBlock extends TwigBlock
     }
 
     /**
-     * Available twig variables:
-     * @param {{vars.soundUrl}}
+     * @inheritDoc
      */
     public function twigFrontend()
     {
@@ -56,8 +73,7 @@ class AudioBlock extends TwigBlock
     }
 
     /**
-     * Available twig variables:
-     * @param {{vars.soundUrl}}
+     * @inheritDoc
      */
     public function twigAdmin()
     {

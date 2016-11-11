@@ -30,7 +30,7 @@ use luya\cms\helpers\BlockHelper;
 /**
  * My Test Block.
  *
- * Block created with block/create command on LUYA version 1.0.0-RC2-dev.
+ * File has been created with `block/create` command on LUYA version 1.0.0-RC2-dev. 
  */
 class MyTestBlock extends PhpBlock
 {
@@ -50,21 +50,33 @@ class MyTestBlock extends PhpBlock
      */
     public $cacheExpiration = 3600;
 
+    /**
+     * @inheritDoc
+     */
     public function blockGroup()
     {
         return ProjectGroup::class;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function name()
     {
         return 'My Test Block';
     }
     
+    /**
+     * @inheritDoc
+     */
     public function icon()
     {
         return 'extension'; // see the list of icons on: https://design.google.com/icons/
     }
-    
+ 
+    /**
+     * @inheritDoc
+     */
     public function config()
     {
         return [
@@ -83,6 +95,9 @@ class MyTestBlock extends PhpBlock
         ];
     }
     
+    /**
+     * @inheritDoc
+     */
     public function extraVars()
     {
         return [
@@ -91,6 +106,8 @@ class MyTestBlock extends PhpBlock
     }
 
     /**
+     * {@inheritDoc} 
+     *
      * @param {{extras.barfoo}}
      * @param {{extras.foobar}}
      * @param {{vars.bar}}
@@ -141,10 +158,13 @@ use luya\cms\helpers\BlockHelper;
 /**
  * My Test Block.
  *
- * Block created with block/create command on LUYA version 1.0.0-RC2-dev.
+ * File has been created with `block/create` command on LUYA version 1.0.0-RC2-dev. 
  */
 class MyTestBlock extends PhpBlock
 {
+    /**
+     * @var string The module where this block belongs to in order to find the view files.
+     */
     public $module = 'consolemodule';
 
     /**
@@ -163,21 +183,33 @@ class MyTestBlock extends PhpBlock
      */
     public $cacheExpiration = 3600;
 
+    /**
+     * @inheritDoc
+     */
     public function blockGroup()
     {
         return ProjectGroup::class;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function name()
     {
         return 'My Test Block';
     }
     
+    /**
+     * @inheritDoc
+     */
     public function icon()
     {
         return 'extension'; // see the list of icons on: https://design.google.com/icons/
     }
-    
+ 
+    /**
+     * @inheritDoc
+     */
     public function config()
     {
         return [
@@ -196,6 +228,9 @@ class MyTestBlock extends PhpBlock
         ];
     }
     
+    /**
+     * @inheritDoc
+     */
     public function extraVars()
     {
         return [
@@ -204,6 +239,8 @@ class MyTestBlock extends PhpBlock
     }
 
     /**
+     * {@inheritDoc} 
+     *
      * @param {{extras.foobar}}
      * @param {{vars.bar}}
      * @param {{vars.foo}}
@@ -251,6 +288,8 @@ EOT;
 <?php
 /**
  * View file for block: MySuperBlock 
+ *
+ * File has been created with `block/create` command on LUYA version 1.0.0-RC2-dev. 
  *
  * @param $this->cfgValue('foo');
  * @param $this->extraValue('foo');

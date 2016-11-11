@@ -1,6 +1,5 @@
 <?php
 use luya\console\commands\BlockController;
-use luya\Boot;
 
 echo "<?php\n";
 ?>
@@ -14,11 +13,14 @@ use luya\cms\helpers\BlockHelper;
 /**
  * <?= $name; ?>.
  *
- * Block created with block/create command on LUYA version <?= Boot::VERSION; ?>.
+ * <?= $luyaText; ?> 
  */
 class <?= $className; ?> extends PhpBlock
 {
 <?php if ($type == BlockController::TYPE_MODULE): ?>
+    /**
+     * @var string The module where this block belongs to in order to find the view files.
+     */
     public $module = '<?= $module; ?>';
 
 <?php endif; ?>
@@ -42,21 +44,33 @@ class <?= $className; ?> extends PhpBlock
     public $cacheExpiration = 3600;
 
 <?php endif; ?>
+    /**
+     * @inheritDoc
+     */
     public function blockGroup()
     {
         return ProjectGroup::class;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function name()
     {
         return '<?= $name; ?>';
     }
     
+    /**
+     * @inheritDoc
+     */
     public function icon()
     {
         return 'extension'; // see the list of icons on: https://design.google.com/icons/
     }
-    
+ 
+    /**
+     * @inheritDoc
+     */
     public function config()
     {
         return [
@@ -85,6 +99,9 @@ class <?= $className; ?> extends PhpBlock
     }
     
 <?php if (!empty($extras)): ?>
+    /**
+     * @inheritDoc
+     */
     public function extraVars()
     {
         return [
@@ -97,6 +114,8 @@ class <?= $className; ?> extends PhpBlock
 
 <?php endif; ?>
     /**
+     * {@inheritDoc} 
+     *
 <?php foreach ($phpdoc as $doc): ?>
      * @param <?= $doc; ?>
 

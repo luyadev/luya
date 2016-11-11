@@ -284,6 +284,7 @@ class BlockController extends \luya\console\Command
         return $this->view->render('@luya/console/commands/views/block/create_block_view.php', [
             'blockClassName' => $blockClassName,
             'phpdoc' => $this->viewFileDoc,
+        	'luyaText' => $this->getGeneratorText('block/create'),
         ]);
     }
     
@@ -379,6 +380,7 @@ class BlockController extends \luya\console\Command
             'config' => $this->config,
             'phpdoc' => $this->phpdoc,
             'extras' => $this->extras,
+        	'luyaText' => $this->getGeneratorText('block/create'),
         ]);
 
         if ($this->dryRun) {

@@ -25,7 +25,9 @@ class CrudControllerTest extends LuyaConsoleTestCase
 namespace file\namespace;
 
 /**
- * NgRest API created with LUYA Version 1.0.0-RC2-dev.
+ * Test Model.
+ * 
+ * File has been created with `crud/create` command on LUYA version 1.0.0-RC2-dev. 
  */
 class TestModel extends \luya\admin\ngrest\base\Api
 {
@@ -44,7 +46,9 @@ EOT;
 namespace file\namespace;
 
 /**
- * NgRest Controller created with LUYA Version 1.0.0-RC2-dev.
+ * Test Model.
+ * 
+ * File has been created with `crud/create` command on LUYA version 1.0.0-RC2-dev. 
  */
 class TestModel extends \luya\admin\ngrest\base\Controller
 {
@@ -66,7 +70,9 @@ use Yii;
 use luya\admin\ngrest\base\NgRestModel;
 
 /**
- * NgRest Model created with LUYA Version 1.0.0-RC2-dev.
+ * Test Model.
+ * 
+ * File has been created with `crud/create` command on LUYA version 1.0.0-RC2-dev. 
  *
  * @property integer $id
  * @property string $firstname
@@ -249,7 +255,9 @@ use Yii;
 use luya\admin\ngrest\base\NgRestModel;
 
 /**
- * NgRest Model created with LUYA Version 1.0.0-RC2-dev.
+ * Test Model.
+ * 
+ * File has been created with `crud/create` command on LUYA version 1.0.0-RC2-dev. 
  *
  * @property integer $id
  * @property string $name

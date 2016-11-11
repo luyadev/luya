@@ -1,9 +1,9 @@
 <?php
 use luya\base\Boot;
 
-?># <?= $name; ?> 
+?># <?= $humanName; ?> Module
  
-Date: <?= date("d.m.Y \a\t H:i"); ?> 
+Date: <?= date("d.m.Y @ H:i"); ?> 
 LUYA: <?= Boot::VERSION; ?> 
 
 ## Installation

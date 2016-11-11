@@ -8,7 +8,9 @@ use Yii;
 use luya\admin\ngrest\base\NgRestModel;
 
 /**
- * NgRest Model created with LUYA Version <?php echo $luyaVersion; ?>.
+ * <?= $alias; ?>.
+ * 
+ * <?=$luyaVersion; ?> 
  *
 <?php foreach ($properties as $name => $type): ?> * @property <?= $type; ?> $<?= $name . PHP_EOL; ?>
 <?php endforeach;?>
