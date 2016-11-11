@@ -39,6 +39,7 @@ class ModuleController extends \luya\console\Command
 			'name' => $name,
 			'humanName' => $this->humanizeName($name),
 			'ns' => $ns,
+			'luyaText' => $this->getGeneratorText('module/create'),
 		]);
 	}
 	
