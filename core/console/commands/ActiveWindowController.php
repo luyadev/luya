@@ -24,7 +24,6 @@ class ActiveWindowController extends \luya\console\Command
      *
      * @param string $className
      * @param string $namepsace
-     * @param string $luya
      * @param string $moduleId
      * @return string
      */
