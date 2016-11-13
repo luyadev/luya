@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e388ca0c136e2e2b5a14668d3d495545",
-    "content-hash": "7b0cf0c713f7dcad32899ab8d427c9f5",
+    "hash": "a448e2d70873bac732b848a458e83d51",
+    "content-hash": "62e4725a2f121689aeb08671b2e5fd9b",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -1473,21 +1473,21 @@
         },
         {
             "name": "yiisoft/yii2-debug",
-            "version": "2.0.6",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-debug.git",
-                "reference": "55ed2e853ed8050a34415f63a4da84f88a56f895"
+                "reference": "ff1817cbdc2b615f3c2e3a3ff24e9b1ea4c4377a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/55ed2e853ed8050a34415f63a4da84f88a56f895",
-                "reference": "55ed2e853ed8050a34415f63a4da84f88a56f895",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/ff1817cbdc2b615f3c2e3a3ff24e9b1ea4c4377a",
+                "reference": "ff1817cbdc2b615f3c2e3a3ff24e9b1ea4c4377a",
                 "shasum": ""
             },
             "require": {
-                "yiisoft/yii2": ">=2.0.4",
-                "yiisoft/yii2-bootstrap": "*"
+                "yiisoft/yii2": "~2.0.4",
+                "yiisoft/yii2-bootstrap": "~2.0.0"
             },
             "type": "yii2-extension",
             "extra": {
@@ -1516,7 +1516,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2016-03-17 03:50:19"
+            "time": "2016-11-12 13:42:24"
         },
         {
             "name": "yiisoft/yii2-gii",
@@ -1623,7 +1623,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "yiisoft/yii2-debug": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
