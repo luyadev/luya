@@ -1,9 +1,11 @@
 <?php
 use app\assets\ResourcesAsset;
-/**
- * @var \luya\web\View $this
- */
+
 ResourcesAsset::register($this);
+
+/* @var $this luya\web\View */
+/* @var $content string */
+
 $this->beginPage();
 ?>
 <html lang="<?= Yii::$app->composition->language; ?>">
