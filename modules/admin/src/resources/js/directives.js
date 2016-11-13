@@ -1715,7 +1715,7 @@
                 $scope.changeCurrentFolderId = function(folderId) {
                     $scope.currentFolderId = folderId;
                     ServiceFoldersDirecotryId.folderId = folderId;
-                    $http.post('admin/api-admin-common/save-filemanager-folder-state', {folderId : folderId});
+                    $http.post('admin/api-admin-common/save-filemanager-folder-state', {folderId : folderId}, {ignoreLoadingBar: true});
                 };
 
                 $scope.toggleFolderItem = function(data) {
@@ -1724,7 +1724,7 @@
                     } else {
                         data['toggle_open'] = !data.toggle_open;
                     }
-                    $http.post('admin/api-admin-common/filemanager-foldertree-history', {data : data});
+                    $http.post('admin/api-admin-common/filemanager-foldertree-history', {data : data}, {ignoreLoadingBar: true});
                 };
 
                 $scope.folderUpdateForm = false;

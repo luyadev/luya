@@ -244,7 +244,7 @@
 		$scope.changeOrder = function(field, sort) {
 			$scope.config.orderBy = sort + field;
 			
-			$http.post('admin/api-admin-common/ngrest-order', {'apiEndpoint' : $scope.config.apiEndpoint, sort: sort, field: field});
+			$http.post('admin/api-admin-common/ngrest-order', {'apiEndpoint' : $scope.config.apiEndpoint, sort: sort, field: field}, { ignoreLoadingBar: true });
 			
 			if ($scope.pager && !$scope.config.pagerHiddenByAjaxSearch) {
 				$scope.realoadCrudList(1);
@@ -418,7 +418,7 @@
 		$scope.$watch('config.filter', function(n, o) {
 			if (n != o && n != undefined) {
 				$scope.blockFilterSeriveReload = true;
-				$http.post('admin/api-admin-common/ngrest-filter', {'apiEndpoint' : $scope.config.apiEndpoint, 'filterName': $scope.config.filter});
+				$http.post('admin/api-admin-common/ngrest-filter', {'apiEndpoint' : $scope.config.apiEndpoint, 'filterName': $scope.config.filter}, { ignoreLoadingBar: true });
 				$scope.realoadCrudList();
 			}
 		})

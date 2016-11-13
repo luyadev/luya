@@ -605,7 +605,7 @@
 				data['toggle_open'] = !data.toggle_open;
 			}
 			
-			$http.post('admin/api-cms-nav/tree-history', {data: data}).then(function(response) {});
+			$http.post('admin/api-cms-nav/tree-history', {data: data}, {ignoreLoadingBar: true});
 			
 		};
 		
@@ -633,7 +633,7 @@
 				$scope.hiddenCats[catId] = 1;
 			}
 			
-			$http.post('admin/api-cms-nav/save-cat-toggle', {catId: catId, state: $scope.hiddenCats[catId]});
+			$http.post('admin/api-cms-nav/save-cat-toggle', {catId: catId, state: $scope.hiddenCats[catId]}, {ignoreLoadingBar: true});
 		};
 		
 		$scope.toggleIsHidden = function(catId) {
@@ -1435,7 +1435,7 @@
 				group.toggle_open = !group.toggle_open;
 			}
 			
-			$http.post('admin/api-cms-block/toggle-group', {group: group});
+			$http.post('admin/api-cms-block/toggle-group', {group: group}, {ignoreLoadingBar: true});
 		}
 		
 		// controller logic
