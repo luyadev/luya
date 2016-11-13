@@ -41,6 +41,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Fixed
 
+- [#1072](https://github.com/luyadev/luya/issues/1072) Admin services will not force reload on each click when array is empty.
 - [#1078](https://github.com/luyadev/luya/issues/1078) Fixed bug where cms block press enter does not save values but closes block form visbility.
 - [#1002](https://github.com/luyadev/luya/issues/1002) Override the core commands method in the console application in order the provide the ability to use controllerMap variable for configurations in the applcation.
 - [#1011](https://github.com/luyadev/luya/issues/1011) The ViewContext implementation for cmslayout rendering allows you now to render other templates inside a cmslayout.

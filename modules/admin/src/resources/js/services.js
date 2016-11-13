@@ -126,11 +126,11 @@ $scope.imagesDataReload = function() {
 zaa.factory("ServiceImagesData", function($http, $q, $rootScope) {
 	var service = [];
 	
-	service.data = [];
+	service.data = null;
 	
 	service.load = function(forceReload) {
 		return $q(function(resolve, reject) {
-			if (service.data.length > 0 && forceReload !== true) {
+			if (service.data !== null && forceReload !== true) {
 				resolve(service.data);
 			} else {
 				$http.get("admin/api-admin-storage/data-images").success(function(response) {
@@ -161,11 +161,11 @@ $scope.filesDataReload = function() {
 zaa.factory("ServiceFilesData", function($http, $q, $rootScope) {
 	var service = [];
 	
-	service.data = [];
+	service.data = null;
 	
 	service.load = function(forceReload) {
 		return $q(function(resolve, reject) {
-			if (service.data.length > 0 && forceReload !== true) {
+			if (service.data !== null && forceReload !== true) {
 				resolve(service.data);
 			} else {
 				$http.get("admin/api-admin-storage/data-files").success(function(response) {
@@ -266,11 +266,11 @@ $scope.propertiesDataReload = function() {
 zaa.factory("ServicePropertiesData", function($http, $q, $rootScope) {
 	var service = [];
 	
-	service.data = [];
+	service.data = null;
 	
 	service.load = function(forceReload) {
 		return $q(function(resolve, reject) {
-			if (service.data.length > 0 && forceReload !== true) {
+			if (service.data !== null && forceReload !== true) {
 				resolve(service.data);
 			} else {
 				$http.get("admin/api-admin-common/data-properties").success(function(response) {
