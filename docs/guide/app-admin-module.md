@@ -1,11 +1,11 @@
 Project Admin-Modul
 ==================
 
-An Admin-Module provides the ability to quickly create an adminstration section for your data. The LUYA Crud System is Called [NgRest](app-admin-module-ngrest.md).
+An Admin-Module provides the ability to quickly create an adminstration section for your data. The LUYA Crud System is Called [NgRest](ngrest-concept.md).
 
 Some features available in the Admin Modules:
 
-+ [NgRest, CRUD system based on Angular and Yii2](app-admin-module-ngrest.md)
++ [NgRest, CRUD system based on Angular and Yii2](ngrest-concept.md)
 + {{luya\admin\components\StorageContainer}}
 + Image filters and effects
 + Apis

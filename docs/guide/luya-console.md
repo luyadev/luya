@@ -21,7 +21,7 @@ Where *command* is one of the following commands below:
 |`setup/user`|Create a new user for the *LUYA* Admin from command line.
 |`health`|Tests all basic directory if they are writeable and existing.
 |`health/mailer`|Check if you mailer component is working and can send mails.
-|`crud/create`|Create new [NgRest CRUD](app-admin-module-ngrest.md) with a wizzard.
+|`crud/create`|Create new [NgRest CRUD](ngrest-concept.md) with a wizzard.
 |`module/create`|Create new [frontend/admin module](app-module.md) with a wizzard.
 |`block/create`|Create new [CMS content blocks](app-blocks.md) with a wizzard.
 |`storage/cleanup`|Cleanup not existing files compare file system and database.
