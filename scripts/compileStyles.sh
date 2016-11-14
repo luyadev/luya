@@ -16,7 +16,7 @@ echo $SCRIPTS_PATH
 BASE_PATH="modules/"
 ASSETS_PATH="resources/"
 
-PATHS=( "admin/src/" "cmsadmin/src/" )
+PATHS=( "admin/src/" "cms/src/admin/" )
 
 startCompass() {
     stopCompass
