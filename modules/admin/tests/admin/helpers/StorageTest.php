@@ -8,6 +8,7 @@ use luya\admin\helpers\Storage;
 
 class StorageTest extends AdminTestCase
 {
+    /*
     public function testSuccessUploadFromFiles()
     {
         $files[] = ['tmp_name' => Yii::getAlias('@data/image.jpg'), 'name' => 'image.jpg', 'type' => 'image/jpg', 'error' => 0, 'size' => 123];
@@ -16,6 +17,7 @@ class StorageTest extends AdminTestCase
         
         $this->assertTrue($response['upload']);
     }
+    */
     
     public function testErrorUploadFromFiles()
     {
