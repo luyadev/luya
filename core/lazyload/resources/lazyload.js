@@ -38,6 +38,8 @@
     };
 
     var loadVisibleImages = function() {
+        $('.lazy-image').show();
+
         var visibleImages = getVisibleImages();
 
         $(visibleImages).each( function() {
@@ -55,31 +57,36 @@
                         backgroundImage: 'url(' + image.sources.default + ')'
                     });
                     $('#' + settings.imageIdentifierPrefix + image.id).replaceWith(
-                        $html
+                        $html.attr('id', settings.imageIdentifierPrefix + image.id)
                     );
                 } else {
                     $('#' + settings.imageIdentifierPrefix + image.id).replaceWith(
-                        $loadImage
+                        $loadImage.attr('id', settings.imageIdentifierPrefix + image.id)
                     );
                 }
+
+                $(document).trigger("lazyimage-loaded", {type: 'success', imageId: '#' + settings.imageIdentifierPrefix + image.id});
             });
 
             $loadImage.on('error', function() {
+                delete images[image.id];
+
                 $('#' + settings.imageIdentifierPrefix + image.id).css('cursor', 'default').find('.loader').replaceWith(
-                    '<span style="position: absolute; left: 0; right: 0; top: 50%; font-size: 40px; line-height: 40px; margin-top: -20px; text-align: center; opacity: .3;">?</span>'
+                    '<span style="position: absolute; left: 0; right: 0; top: 50%; font-size: 40px; line-height: 40px; margin-top: -20px; text-align: center; opacity: .2;">?</span>'
                 );
+                $('#' + settings.imageIdentifierPrefix + image.id).show();
+
+                $(document).trigger("lazyimage-loaded", {type: 'error', imageId: '#' + settings.imageIdentifierPrefix + image.id});
             });
         });
     };
 
     $.fn.lazyLoad = function( options ) {
-
         if(options == 'refresh') {
             if(typeof arguments[1] !== 'undefined') {
                 settings = $.extend(settings, arguments[1] );
             }
 
-            console.log("refresh", images);
             loadVisibleImages();
             return true;
         }
@@ -87,13 +94,13 @@
         settings = $.extend(settings, options );
 
         /**
-         * Fill the images array and replace the images with
+         * Fill the images array and replace the images with placeholders (aspect ratio)
          */
         this.each( function(index) {
             var imageWidth = $(this).attr('data-width')
-                imageHeight = $(this).attr('data-height')
-                imageAspectRatio = settings.defaultAspectRatio
-                imageAsBackground = $(this).attr('data-as-background');
+            imageHeight = $(this).attr('data-height')
+            imageAspectRatio = settings.defaultAspectRatio
+            imageAsBackground = $(this).attr('data-as-background');
 
             if(imageWidth && imageHeight) {
                 imageAspectRatio = imageHeight / imageWidth;
