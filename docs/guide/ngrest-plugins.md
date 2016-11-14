@@ -11,7 +11,7 @@ An NgRest Plugin is like the type of an input. You can create selects, date pick
 |textarea		  	|{{\luya\admin\ngrest\plugins\Textarea}}|string		|Textarea input type field.
 |password			|{{\luya\admin\ngrest\plugins\Password}}|string		|Input type password field.
 |[selectArray](ngrest-plugin-select.md) |{{\luya\admin\ngrest\plugins\SelectArray}}|string	|Select Dropdown with options from input configuration.
-|[selectModel](ngrest-plugin-select.md) |{{\luya\admin\ngrest\plugins\SelectModel}}||string	|Select Dropdown with options given from an Active Record Model class.
+|[selectModel](ngrest-plugin-select.md) |{{\luya\admin\ngrest\plugins\SelectModel}}|string	|Select Dropdown with options given from an Active Record Model class.
 |toggleStatus       |{{\luya\admin\ngrest\plugins\ToggleStatus}}|integer/string	|Create checkbox where you can toggle on or off.
 |image				|{{\luya\admin\ngrest\plugins\Image}}|integer	|Create an image upload and returns the imageId from storage system.
 |imageArray			|{{\luya\admin\ngrest\plugins\ImageArray}}|array		|Creates an uploader for multiple images and returns an array with the image ids from the storage system.
