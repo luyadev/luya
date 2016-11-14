@@ -6,7 +6,7 @@ use Yii;
 use luya\admin\ngrest\base\Plugin;
 
 /**
- * Single File-Upload.
+ * Type File Upload.
  * 
  * Usage example inside your {{luya\admin\ngrest\base\NgRestModel::ngRestAttributeTypes}} method:
  * 

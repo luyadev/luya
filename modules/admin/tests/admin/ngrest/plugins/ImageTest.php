@@ -3,12 +3,12 @@
 namespace admintests\admin\ngrest\plugins;
 
 use admintests\AdminTestCase;
-use luya\admin\ngrest\plugins\File;
 use yii\base\Model;
 use yii\base\Event;
 use admintests\data\fixtures\UserFixture;
+use luya\admin\ngrest\plugins\Image;
 
-class FileTest extends AdminTestCase
+class ImageTest extends AdminTestCase
 {
     public function testFileObject()
     {
@@ -19,11 +19,11 @@ class FileTest extends AdminTestCase
         
         $event->sender = $user;
         
-        $plugin = new File([
+        $plugin = new Image([
             'alias' => 'alias',
             'name' => 'id',
             'i18n' => false,
-            'fileItem' => true,
+            'imageItem' => true,
         ]);
         
         $plugin->onFind($event);
@@ -40,11 +40,11 @@ class FileTest extends AdminTestCase
     
         $event->sender = $user;
     
-        $plugin = new File([
+        $plugin = new Image([
             'alias' => 'alias',
             'name' => 'id',
             'i18n' => false,
-            'fileItem' => false,
+            'imageItem' => false,
         ]);
     
         $plugin->onFind($event);
@@ -61,11 +61,11 @@ class FileTest extends AdminTestCase
         $user->id = '{"en": 1, "de": 2}';
         $event->sender = $user;
     
-        $plugin = new File([
+        $plugin = new Image([
             'alias' => 'alias',
             'name' => 'id',
             'i18n' => true,
-            'fileItem' => true,
+            'imageItem' => true,
         ]);
     
         $plugin->onFind($event);
@@ -82,11 +82,11 @@ class FileTest extends AdminTestCase
         $user->id = '{"en": 1, "de": 2}';
         $event->sender = $user;
     
-        $plugin = new File([
+        $plugin = new Image([
             'alias' => 'alias',
             'name' => 'id',
             'i18n' => true,
-            'fileItem' => false,
+            'imageItem' => false,
         ]);
     
         $plugin->onFind($event);

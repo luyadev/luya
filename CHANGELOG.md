@@ -38,6 +38,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1059](https://github.com/luyadev/luya/issues/1059) Block Generator also generates the view file of the PHPBlock in the depending view folder.
 - [#999](https://github.com/luyadev/luya/issues/999) Rewritten the CRUD generator and added ability to disable i18n fiel generation.
 - [#991](https://github.com/luyadev/luya/issues/991) User settings stores CRUD orderBy state in database for each ngrest crud setup.
+- [#919](https://github.com/luyadev/luya/issues/919) Added new option for image, imageArray, file and fileArray ngrest plugins in order to return an iterator or item object instead of database values.
 
 ### Fixed
 
