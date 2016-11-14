@@ -12,7 +12,7 @@ use luya\admin\helpers\I18n;
 use luya\helpers\ArrayHelper;
 
 /**
- * Base class for all NgRest Plugins
+ * Base class for NgRest Plugins.
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -167,10 +167,10 @@ abstract class Plugin extends Component
     /**
      * Wrapper for Yii Html::tag method
      *
-     * @param string $name
-     * @param string $content
-     * @param array $options
-     * @return string
+     * @param string $name The name of the tag
+     * @param string $content The value inside the tag.
+     * @param array $options Options to passed to the tag generator.
+     * @return string The generated html string tag.
      */
     public function createTag($name, $content, array $options = [])
     {
@@ -180,11 +180,11 @@ abstract class Plugin extends Component
     /**
      * Helper method to create a form tag based on current object.
      *
-     * @param string $name
-     * @param string $id
-     * @param string $ngModel
-     * @param array $options
-     * @return string
+     * @param string $name Name of the form tag.
+     * @param string $id The id tag of the tag.
+     * @param string $ngModel The ngrest model name of the tag.
+     * @param array $options Options to passes to the tag creator.
+     * @return string The generated tag content.
      */
     public function createFormTag($name, $id, $ngModel, array $options = [])
     {
@@ -194,6 +194,7 @@ abstract class Plugin extends Component
     /**
      * Helper method to create a span tag with the ng-model in angular context for the crud overview
      * @param string $ngModel
+     * @param array $options An array with options to pass to the list tag
      * @return string
      */
     public function createListTag($ngModel, array $options = [])
@@ -276,7 +277,7 @@ abstract class Plugin extends Component
     /**
      * This event will be triger before `onListFind`.
      *
-     * @param unknown $event
+     * @param \luya\admin\ngrest\base\NgRestModel::EVENT_AFTER_NGREST_FIND $event The NgRestModel after ngrest find event.
      * @return boolean
      */
     public function onBeforeListFind($event)
@@ -287,7 +288,7 @@ abstract class Plugin extends Component
     /**
      * This event is only trigger when returning the ngrest crud list data. If the property of this plugin inside the model, the event will not be triggered.
      *
-     * @param \admin\ngrest\base\Model::EVENT_AFTER_NGREST_FIND $event
+     * @param \luya\admin\ngrest\base\NgRestModel::EVENT_AFTER_NGREST_FIND $event The NgRestModel after ngrest find event.
      */
     public function onListFind($event)
     {
@@ -302,7 +303,7 @@ abstract class Plugin extends Component
     /**
      * This event will be triggered after `onListFind`.
      *
-     * @param unknown $event
+     * @param \luya\admin\ngrest\base\NgRestModel::EVENT_AFTER_NGREST_FIND $event The NgRestModel after ngrest find event.
      * @return boolean
      */
     public function onAfterListFind($event)
@@ -314,7 +315,8 @@ abstract class Plugin extends Component
 
     /**
      * This event will be trigger before `onFind`.
-     * @param unknown $event
+     *
+     * @param \yii\base\Event $event An event that is triggered after the record is created and populated with query result.
      * @return boolean
      */
     public function onBeforeFind($event)
@@ -324,7 +326,8 @@ abstract class Plugin extends Component
     
     /**
      * ActiveRecord afterFind event. If the property of this plugin inside the model, the event will not be triggered.
-     * @param unknown $event
+     * 
+     * @param \yii\base\Event $event An event that is triggered after the record is created and populated with query result.
      */
     public function onFind($event)
     {
@@ -339,7 +342,8 @@ abstract class Plugin extends Component
     
     /**
      * This event will be trigger after `onFind`.
-     * @param unknown $event
+     * 
+     * @param \yii\base\Event $event An event that is triggered after the record is created and populated with query result.
      * @return boolean
      */
     public function onAfterFind($event)
@@ -352,7 +356,7 @@ abstract class Plugin extends Component
     /**
      * This event will be triggered before `onExpandFind`.
      *
-     * @param unknown $event
+     * @param \luya\admin\ngrest\base\NgRestModel::EVENT_AFTER_NGREST_UPDATE_FIND $event NgRestModel event EVENT_AFTER_NGREST_UPDATE_FIND.
      * @return boolean
      */
     public function onBeforeExpandFind($event)
@@ -362,7 +366,7 @@ abstract class Plugin extends Component
     
     /**
      * NgRest Model crud list/overview event after find. If the property of this plugin inside the model, the event will not be triggered.
-     * @param unknown $event
+     * @param \luya\admin\ngrest\base\NgRestModel::EVENT_AFTER_NGREST_UPDATE_FIND $event NgRestModel event EVENT_AFTER_NGREST_UPDATE_FIND.
      */
     public function onExpandFind($event)
     {
@@ -378,7 +382,7 @@ abstract class Plugin extends Component
     /**
      * This event will be triggered after `onExpandFind`.
      *
-     * @param unknown $event
+     * @param \luya\admin\ngrest\base\NgRestModel::EVENT_AFTER_NGREST_UPDATE_FIND $event NgRestModel event EVENT_AFTER_NGREST_UPDATE_FIND.
      * @return boolean
      */
     public function onAfterExpandFind($event)
@@ -391,7 +395,7 @@ abstract class Plugin extends Component
     /**
      * This event will be triggered before `onCollectServiceData`.
      *
-     * @param unknown $event
+     * @param \luya\admin\ngrest\base\NgRestModel::EVENT_SERVICE_NGREST $event NgRestModel event EVENT_SERVICE_NGREST.
      * @return boolean
      */
     public function onBeforeCollectServiceData($event)
@@ -400,8 +404,9 @@ abstract class Plugin extends Component
     }
     
     /**
-     *
-     * @param unknown $event
+     * The ngrest services collector.
+     * 
+     * @param \luya\admin\ngrest\base\NgRestModel::EVENT_SERVICE_NGREST $event NgRestModel event EVENT_SERVICE_NGREST.
      */
     public function onCollectServiceData($event)
     {
@@ -414,10 +419,11 @@ abstract class Plugin extends Component
     }
 
     /**
-     * Check wehther the current plugin attribute is writeable in the Model class or not. If not writeable some events will be stopped from
+     * Check whether the current plugin attribute is writeable in the Model class or not. If not writeable some events will be stopped from
      * further processing. This is mainly used when adding extraFields to the grid list view.
      *
-     * @param object $event The current event object
+     * @param \yii\base\Event $event The current base event object.
+     * @return boolean Whether the current plugin attribute is writeable or not.
      */
     protected function isAttributeWriteable($event)
     {
