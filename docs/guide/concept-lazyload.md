@@ -17,10 +17,12 @@ $(document).on("lazyimage-loaded", function(e, response) {
 
 ```php
 <?= LazyLoad::widget([
-    'src' =>  $this->publicHtml . '/path/to/image',
-    'width' => 'the-image-width-in-px',
-    'height' => 'the-image-height-in-px',
-    'extraClass' => 'custom-classes']); ?>
+        'src' =>  $this->publicHtml . '/path/to/image',
+        'width' => 'the-image-width-in-px',
+        'height' => 'the-image-height-in-px',
+        'extraClass' => 'custom-classes'
+    ]); 
+?>
 ```
 
 > The basic usage already provides a no-script fallback.
@@ -33,25 +35,27 @@ To use the lazyloader with a background image, for example on a DIV, you just ha
 
 ```php
 <div <?= LazyLoad::widget([
-    'attributesOnly' => true,
-    'src' =>  $this->publicHtml . '/path/to/image',
-    'width' => 'the-image-width-in-px',
-    'height' => 'the-image-height-in-px',
-    'extraClass' => 'custom-classes']); ?> ></div>
+        'attributesOnly' => true,
+        'src' =>  $this->publicHtml . '/path/to/image',
+        'width' => 'the-image-width-in-px',
+        'height' => 'the-image-height-in-px',
+        'extraClass' => 'custom-classes'
+    ]); ?> >
+</div>
     
-    <!-- Fallback for no-js -->
-    <noscript><div style="background-image: url(<?= $extras['image']->source ?>);"></div></noscript>
+<!-- Fallback for no-js -->
+<noscript><div style="background-image: url(<?= $extras['image']->source ?>);"></div></noscript>
 ```
 
 ## Using LazyLoader with Storage Component
 
 Using the lazyloader with a storage component {{\luya\admin\image\Item}} is easier because you can automatically get the width and height from the storage component:
 
-```
+```php
 $image = Yii::$app->storage->getImage(123);
 <?= LazyLoad::widget([
     'src' => $image->source,
     'width' => $image->resolutionWidth,
     'height' => $image->resolutionHeight,
-]) ?>
+]); ?>
 ```
