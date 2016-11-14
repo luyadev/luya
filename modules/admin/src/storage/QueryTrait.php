@@ -42,6 +42,12 @@ use luya\Exception;
  * ```php
  * return (new \luya\admin\file\Query())->where(['>', 'id', 1])->andWHere(['<', 'id', 3])->all();
  * ```
+ * 
+ * In condition in order to get mutiple columns of a file.
+ * 
+ * ```php
+ * return (new \luya\admin\file\Query())->where(['in', 'id', [1, 3]])->all();
+ * ```
  *
  * ### Offsets and Limits
  *
@@ -202,21 +208,21 @@ trait QueryTrait
      * where(['operator', 'field', 'value']);
      * ```
      *
-     * Allowed operators
+     * Available Operators:
+     * 
      * + **<** expression where field is smaller then value.
      * + **>** expression where field is bigger then value.
      * + **=** expression where field is equal value.
      * + **<=** expression where field is small or equal then value.
      * + **>=** expression where field is bigger or equal then value.
      * + **==** expression where field is equal to the value and even the type must be equal.
+     * + **in** expression where an value array can be passed to get all values from this field type e.g. `['in', 'id', [1,3,4]]`.
      *
-     * Only one operator speific argument can be provided, to chain another expression
-     * use the `andWhere()` method.
+     * Only one operator speific argument can be provided, to chain another expression use the `andWhere()` method.
      *
      * Multi Dimension Filtering:
      *
-     * The most common case for filtering items is the equal expression combined with
-     * add statements.
+     * The most common case for filtering items is the equal expression combined with add statements.
      *
      * For example the following expression
      *
