@@ -596,7 +596,9 @@
 
 		$scope.menuDataReload = function() {
 			return ServiceMenuData.load(true);
-		}
+		};
+		
+		// controller logic
 		
 		$scope.toggleItem = function(data) {
 			if (data.toggle_open == undefined) {
@@ -622,9 +624,13 @@
 	    	}
 	    	
 	    	return false;
-	    }
+	    };
 	    
-    	$scope.hiddenCats = $scope.menuData.hiddenCats;
+	    $scope.$watch('menuData', function (n, o) {
+	    	if (n!=o) {
+	    		$scope.hiddenCats = n.hiddenCats;
+	    	}
+	    });
 		
 		$scope.toggleCat = function(catId) {
 			if (catId in $scope.hiddenCats) {
@@ -649,7 +655,7 @@
 			}
 			
 			return false;
-		}
+		};
 	    
 	});
 	
