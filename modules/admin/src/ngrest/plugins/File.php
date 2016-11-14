@@ -2,15 +2,39 @@
 
 namespace luya\admin\ngrest\plugins;
 
+use Yii;
 use luya\admin\ngrest\base\Plugin;
 
 /**
- * Single File-Upload
+ * Single File-Upload.
+ * 
+ * Usage example inside your {{luya\admin\ngrest\base\NgRestModel::ngRestAttributeTypes}} method:
+ * 
+ * ```php
+ * return [
+ *     'myfile' => 'file',
+ * ];
+ * ```
+ * 
+ * If you like to get the {{luya\admin\file\Item}} object directly from the {{luya\admin\components\StorageContainer}} component just enable `$fileItem`.
+ * 
+ * ```php
+ * return [
+ *     'myfile' => ['file', 'fileItem' => true],
+ * ];
+ * ```
+ * 
+ * Now when accessing the `$myfile` variabled defined from above the {{luya\admin\file\Item}} will be returned ottherwise false.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class File extends Plugin
 {
+    /**
+     * @var boolean Whether to return a {{luya\admin\file\Item}} instead of the numeric file id value from the database.
+     */
+    public $fileItem = false;
+    
     /**
      * @inheritdoc
      */
@@ -33,5 +57,15 @@ class File extends Plugin
     public function renderUpdate($id, $ngModel)
     {
         return $this->renderCreate($id, $ngModel);
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function onAfterFind($event)
+    {
+        if ($this->fileItem) {
+            $event->sender->setAttribute($this->name, Yii::$app->storage->getFile($event->sender->getAttribute($this->name)));
+        }
     }
 }

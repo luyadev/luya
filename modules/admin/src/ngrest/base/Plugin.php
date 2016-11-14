@@ -74,7 +74,7 @@ abstract class Plugin extends Component
         parent::init();
         
         if ($this->name === null || $this->alias === null || $this->i18n === null) {
-            throw new Exception("Plugin attributes id, name, alias, ngModel and i18n must be configured.");
+            throw new Exception("Plugin attributes name, alias and i18n must be configured.");
         }
         
         $this->addEvent(NgRestModel::EVENT_BEFORE_VALIDATE, 'onSave');

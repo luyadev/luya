@@ -15,7 +15,7 @@ use luya\admin\storage\ItemTrait;
  * @property array $captionArray Contains the captions for all languages
  * @property integer $id The File id
  * @property integer $folderId The id of the folder the file is stored in.
- * @property \admin\folder\Item $folder Get the folder item object.
+ * @property \luya\admin\folder\Item $folder Get the folder item object.
  * @property string $name Get the original file name of the file.
  * @property string $systemFileName The new file name inside the storage folder.
  * @property string $mimeType The MIME type of the file while uploading.
@@ -71,7 +71,7 @@ class Item extends \yii\base\Object
     /**
      * Get the array with all captions from the filemanager global "captions" definition for all provided languages
      *
-     * @return array
+     * @return array Get the array with all captions from the filemanager global "captions" definition for all provided languages
      */
     public function getCaptionArray()
     {
@@ -81,7 +81,7 @@ class Item extends \yii\base\Object
     /**
      * Get the ID of the file (File-Id) and has nothing incommon with the image id.
      *
-     * @return integer
+     * @return integer The id of the file from the database.
      */
     public function getId()
     {
@@ -91,7 +91,7 @@ class Item extends \yii\base\Object
     /**
      * Get the Id of the folder fhe file is stored in.
      *
-     * @return integer
+     * @return integer The id of the folder where the file is located.
      */
     public function getFolderId()
     {
