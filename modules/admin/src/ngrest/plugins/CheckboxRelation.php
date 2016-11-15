@@ -5,6 +5,7 @@ namespace luya\admin\ngrest\plugins;
 use Yii;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\ngrest\base\Plugin;
+use luya\rest\ActiveController;
 
 /**
  * Create multi select input for a relation table.
@@ -41,23 +42,46 @@ use luya\admin\ngrest\base\Plugin;
  * }
  * ```
  *
- * @property string|object $model
- * @author nadar
+ * @property \yii\db\ActiveRecord $model The model object
+ * @author Basil Suter <basil@nadar.io>
  */
 class CheckboxRelation extends Plugin
 {
     private $_model;
     
+    /**
+     * @var string The reference table table name e.g. `admin_user_groupadmin_user_group`.
+     */
     public $refJoinTable = null;
 
+    /**
+     * @var string The reference table model field name e.g `group_id`.
+     */
     public $refModelPkId = null;
 
+    /**
+     * @var string The reference table poin field name e.g. `user_id`.
+     */
     public $refJoinPkId = null;
 
+    /**
+     * @var array A list of fields which should be used for the display template.
+     */
     public $labelFields = null;
 
+    /**
+     * @var string The template which is sued for the label fields like the sprinf command e.g. `%s %s (%s)`.
+     */
     public $labelTemplate = null;
 
+    /**
+     * @var boolean Whether the checkbox plugin should only trigger for the restcreate and restupdate events or for all SAVE/UPDATE events.
+     */
+    public $onlyRestScenarios = false;
+
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -115,12 +139,17 @@ class CheckboxRelation extends Plugin
         return ['items' => $items];
     }
     
-
+    /**
+     * @inheritdoc
+     */
     public function renderList($id, $ngModel)
     {
         return $this->createListTag($ngModel);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function renderCreate($id, $ngModel)
     {
         return [
@@ -129,16 +158,25 @@ class CheckboxRelation extends Plugin
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function renderUpdate($id, $ngModel)
     {
         return $this->renderCreate($id, $ngModel);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function serviceData()
     {
         return ['relationdata' => $this->getOptionsData()];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function onBeforeExpandFind($event)
     {
         $data = [];
@@ -148,19 +186,34 @@ class CheckboxRelation extends Plugin
         $event->sender->{$this->name} = $data;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function onBeforeListFind($event)
     {
         $event->sender->{$this->name} = $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $event->sender->id])->all();
     }
     
+    /**
+     * @inheritdoc
+     */
     public function onBeforeFind($event)
     {
         $event->sender->{$this->name} = $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $event->sender->id])->all();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function afterSaveEvent($event)
     {
-        $this->setRelation($event->sender->{$this->name}, $this->refJoinTable, $this->refModelPkId, $this->refJoinPkId, $event->sender->id);
+    	if ($this->onlyRestScenarios) {
+    		if ($event->sender->scenario == ActiveController::SCENARIO_RESTCREATE || $event->sender->scenario == ActiveController::SCENARIO_RESTUPDATE) {
+    			$this->setRelation($event->sender->{$this->name}, $this->refJoinTable, $this->refModelPkId, $this->refJoinPkId, $event->sender->id);
+    		}
+    	} else {
+    		$this->setRelation($event->sender->{$this->name}, $this->refJoinTable, $this->refModelPkId, $this->refJoinPkId, $event->sender->id);
+    	}
     }
     
     /**
