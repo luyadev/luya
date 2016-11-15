@@ -27,7 +27,7 @@ class ModuleController extends \luya\console\Command
 	/**
 	 * Render the readme template.
 	 * 
-	 * @param string $folders
+	 * @param array $folders
 	 * @param string $name
 	 * @param string $ns
 	 * @return string
@@ -46,7 +46,7 @@ class ModuleController extends \luya\console\Command
 	/**
 	 * Render the admin template.
 	 * 
-	 * @param string $folders
+	 * @param array $folders
 	 * @param string $name
 	 * @param string $ns
 	 * @return string
@@ -64,7 +64,7 @@ class ModuleController extends \luya\console\Command
 	/**
 	 * Render the frontend template.
 	 * 
-	 * @param string $folders
+	 * @param array $folders
 	 * @param string $name
 	 * @param string $ns
 	 * @return string
