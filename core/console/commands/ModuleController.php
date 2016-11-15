@@ -125,9 +125,9 @@ class ModuleController extends \luya\console\Command
         }
         
         $contents = [
-            $moduleFolder. DIRECTORY_SEPARATOR . 'README.md' => $this->renderReadme($folders, $name, $ns),
-            $moduleFolder. DIRECTORY_SEPARATOR . 'admin/Module.php' => $this->renderAdmin($folders, $name, $ns),
-            $moduleFolder. DIRECTORY_SEPARATOR . 'frontend/Module.php' => $this->renderFrontend($folders, $name, $ns),
+            $moduleFolder. DIRECTORY_SEPARATOR . 'README.md' => $this->renderReadme($folders, $moduleName, $ns),
+            $moduleFolder. DIRECTORY_SEPARATOR . 'admin/Module.php' => $this->renderAdmin($folders, $moduleName, $ns),
+            $moduleFolder. DIRECTORY_SEPARATOR . 'frontend/Module.php' => $this->renderFrontend($folders, $moduleName, $ns),
         ];
         
         foreach ($contents as $fileName => $content) {
