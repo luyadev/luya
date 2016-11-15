@@ -22,8 +22,7 @@
 	"require-dev" : {
 		"phpunit/phpunit" : "~5.0",
 		"luyadev/luya" : "^1.0@dev",
-		"satooshi/php-coveralls": "~1.0",
-		"yiisoft/yii2-codeception": "~2.0.0"
+		"satooshi/php-coveralls": "~1.0"
 	},
 	"autoload" : {
 		"psr-4" : {
