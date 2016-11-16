@@ -1,4 +1,4 @@
-(function ( $ ) {
+(function ($) {
 
     // Used to store the images
     var images = [];
@@ -12,17 +12,17 @@
         imageIdentifierPrefix: 'lazy-image-'
     };
 
-    var viewportChanged = false;
+    var viewportChanged = true;
     var touchScrolling = false;
 
-    var getVisibleImages = function() {
-        return $.grep(images, function( image ) {
-            if(typeof image == 'undefined')
+    var getVisibleImages = function () {
+        return $.grep(images, function (image) {
+            if (typeof image == 'undefined')
                 return false;
 
             var $image = $('#' + settings.imageIdentifierPrefix + image.id);
 
-            if($image.length <= 0)
+            if ($image.length <= 0)
                 return false;
 
             var docViewTop = $(window).scrollTop() - 200 - settings.threshold;
@@ -37,22 +37,22 @@
         });
     };
 
-    var loadVisibleImages = function() {
+    var loadVisibleImages = function () {
         $('.lazy-image').show();
 
         var visibleImages = getVisibleImages();
 
-        $(visibleImages).each( function() {
+        $(visibleImages).each(function () {
             var $loadImage = $('<img/>', {
                 src: this.sources.default,
                 class: this.class,
             });
 
             var image = this;
-            $loadImage.on('load', function() {
+            $loadImage.on('load', function () {
                 delete images[image.id];
 
-                if(image.asBackground) {
+                if (image.asBackground) {
                     var $html = $(image.html).css({
                         backgroundImage: 'url(' + image.sources.default + ')'
                     });
@@ -65,10 +65,13 @@
                     );
                 }
 
-                $(document).trigger("lazyimage-loaded", {type: 'success', imageId: '#' + settings.imageIdentifierPrefix + image.id});
+                $(document).trigger("lazyimage-loaded", {
+                    type: 'success',
+                    imageId: '#' + settings.imageIdentifierPrefix + image.id
+                });
             });
 
-            $loadImage.on('error', function() {
+            $loadImage.on('error', function () {
                 delete images[image.id];
 
                 $('#' + settings.imageIdentifierPrefix + image.id).css('cursor', 'default').find('.loader').replaceWith(
@@ -76,33 +79,36 @@
                 );
                 $('#' + settings.imageIdentifierPrefix + image.id).show();
 
-                $(document).trigger("lazyimage-loaded", {type: 'error', imageId: '#' + settings.imageIdentifierPrefix + image.id});
+                $(document).trigger("lazyimage-loaded", {
+                    type: 'error',
+                    imageId: '#' + settings.imageIdentifierPrefix + image.id
+                });
             });
         });
     };
 
-    $.fn.lazyLoad = function( options ) {
-        if(options == 'refresh') {
-            if(typeof arguments[1] !== 'undefined') {
-                settings = $.extend(settings, arguments[1] );
+    $.fn.lazyLoad = function (options) {
+        if (options == 'refresh') {
+            if (typeof arguments[1] !== 'undefined') {
+                settings = $.extend(settings, arguments[1]);
             }
 
             loadVisibleImages();
             return true;
         }
 
-        settings = $.extend(settings, options );
+        settings = $.extend(settings, options);
 
         /**
          * Fill the images array and replace the images with placeholders (aspect ratio)
          */
-        this.each( function(index) {
-            var imageWidth = $(this).attr('data-width')
-            imageHeight = $(this).attr('data-height')
-            imageAspectRatio = settings.defaultAspectRatio
-            imageAsBackground = $(this).attr('data-as-background');
+        this.each(function (index) {
+            var imageWidth = $(this).attr('data-width'),
+                imageHeight = $(this).attr('data-height'),
+                imageAspectRatio = settings.defaultAspectRatio,
+                imageAsBackground = $(this).attr('data-as-background');
 
-            if(imageWidth && imageHeight) {
+            if (imageWidth && imageHeight) {
                 imageAspectRatio = imageHeight / imageWidth;
             }
 
@@ -125,7 +131,7 @@
             }).css({
                 position: 'relative'
             }).append($('<div/>').css({
-                'height' : 0,
+                'height': 0,
                 'padding-bottom': imageAspectRatio * 100 + '%'
             })).append($(settings.loaderHtml));
 
@@ -134,19 +140,19 @@
 
         loadVisibleImages();
 
-        setInterval( function() {
-            if(viewportChanged == true || touchScrolling == true) {
+        setInterval(function () {
+            if (viewportChanged == true || touchScrolling == true) {
                 loadVisibleImages();
                 viewportChanged = false;
             }
         }, 250);
-        $(document).on('touchmove', function() {
+        $(document).on('touchmove', function () {
             touchScrolling = true;
         });
-        $(window).on('scroll resize', function() {
+        $(window).on('scroll resize', function () {
             viewportChanged = true;
             touchScrolling = false;
         });
     };
 
-}( jQuery ));
+}(jQuery));
