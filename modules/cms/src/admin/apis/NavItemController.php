@@ -250,6 +250,8 @@ class NavItemController extends \luya\admin\base\RestController
             return $this->sendModelError($model);
         }
       
+        Yii::$app->menu->flushCache();
+        
         if ($model->nav_item_type == $navItemType) {
             $typeModel = $model->getType();
             // lets just update the type data
