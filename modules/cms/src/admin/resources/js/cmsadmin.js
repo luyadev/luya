@@ -626,10 +626,10 @@
 	    	return false;
 	    };
 	    
+	    $scope.hiddenCats = [];
+	    
 	    $scope.$watch('menuData', function (n, o) {
-	    	if (n!=o) {
-	    		$scope.hiddenCats = n.hiddenCats;
-	    	}
+	    	$scope.hiddenCats = n.hiddenCats;
 	    });
 		
 		$scope.toggleCat = function(catId) {
