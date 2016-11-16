@@ -97,6 +97,12 @@ return [
     'aws_changepassword_succes' => 'Пароль успешно изменен.',
     'aws_changepassword_new_pass' => 'Новый пароль',
     'aws_changepassword_new_pass_retry' => 'Повторите пароль',
+	'view_index_redirect_type' => 'Тип переадресации',
+	'view_index_redirect_internal' => 'Внутреняя страница',
+	'view_index_redirect_external' => 'Внешний URL-адрес',
+	'view_index_redirect_internal_select' => 'Выберите внутреннюю страницу на которую следует направить пользователя.',
+	'view_index_redirect_external_link' => 'Внешняя ссылка',
+	'view_index_redirect_external_link_help' => 'Внешние ссылки начинаются с http:// или https://',
 
 // added translation in 1.0.0-beta3:
 

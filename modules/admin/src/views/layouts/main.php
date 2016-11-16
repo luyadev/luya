@@ -57,6 +57,38 @@ $this->beginPage()
     </div>
 </script>
 
+<!-- UPDATE REDIRECT FORM -->
+<script type="text/ng-template" id="updateformredirect.html">
+    <div class="row">
+        <div class="input input--radios col s12">
+            <label class="input__label"><?= Admin::t('view_index_redirect_type'); ?></label>
+            <div class="input__field-wrapper">
+                <input type="radio" ng-model="data.type" value="1"><label ng-click="data.type = 1"><?= Admin::t('view_index_redirect_internal'); ?></label> <br />
+                <input type="radio" ng-model="data.type" value="2"><label ng-click="data.type = 2"><?= Admin::t('view_index_redirect_external'); ?></label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-switch on="data.type">
+        <div class="col s12" ng-switch-when="1">
+            <p><?= Admin::t('view_index_redirect_internal_select'); ?></p>
+            <menu-dropdown class="menu-dropdown" nav-id="data.value" />
+        </div>
+
+        <div class="col s12" ng-switch-when="2">
+
+            <div class="input input--text col s12">
+                <label class="input__label"><?= Admin::t('view_index_redirect_external_link'); ?></label>
+                <div class="input__field-wrapper">
+                    <input name="text" type="text" class="input__field" ng-model="data.value" placeholder="http://" />
+                    <small><?= Admin::t('view_index_redirect_external_link_help'); ?></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<!-- /UPDATE REDIRECT FORM -->
+
 <script type="text/ng-template" id="menuDropdownReverse">
 
     <div class="input">

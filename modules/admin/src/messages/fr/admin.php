@@ -39,8 +39,6 @@ return [
     'menu_images_item_effects' => 'Effets',
     'menu_images_item_filters' => 'Filtres',
     'dashboard_title' => 'Bienvenue !',
-
-
     'dashboard_text' => 'Vous pouvez basculer entre les modules dans le menu principal en haut de la page. <br /> La navigation de gauche vous donne accès aux fonctionnalités du module sélectionné.',
     'layout_select_file' => 'Choisir le fichier',
     'layout_deleted_file' => 'Vous ne pouvez pas appliquer de filtre, car le fichier source a été supprimé. Télécharger ou choisir un nouveau fichier pour appliquer un filtre.',
@@ -53,7 +51,6 @@ return [
     'layout_filemanager_remove_selected_files' => 'Supprimer les fichiers selectionnés',
     'layout_filemanager_move_selected_files' => 'Déplacer dans',
     'layout_filemanager_upload_error' => 'Erreur lors du chargement du fichier',
-    
     'layout_filemanager_col_name' => 'Nom',
     'layout_filemanager_col_type' => 'Type',
     'layout_filemanager_col_date' => 'Date de création',
@@ -72,7 +69,6 @@ return [
     'layout_debug_id' => 'ID',
     'layout_debug_sitetitle' => 'Titre du site',
     'layout_debug_remotetoken' => 'Jeton à distance',
-
     'layout_search_min_letters' => 'Saissisez votre recherche en entrant au moins <b>trois lettres</b>',
     'layout_search_no_results' => 'Aucun résultat',
     'layout_filemanager_upload_files' => 'Ajouter un fichier',
@@ -96,7 +92,6 @@ return [
     'ngrest_crud_search_text' => 'Saissisez votre recherche',
     'ngrest_crud_rows_count' => 'Entrées',
     'ngrest_crud_btn_create' => 'Créer',
-
     'api_storage_image_upload_error' => 'L\'erreur suivante est survenue lors du chargement d\'une image \'{error}\'.',
     'api_storage_file_upload_success' => 'Les fichiers ont été téléchargés avec succès',
     'api_sotrage_file_upload_error' => 'L\'erreur suivante est survenue lors du chargement d\'un fichier \'{error}\'.',
@@ -105,6 +100,12 @@ return [
     'aws_changepassword_succes' => 'Le mot de passe a été crypté et sauvegardé avec succès',
     'aws_changepassword_new_pass' => 'Nouveau mot de passe',
     'aws_changepassword_new_pass_retry' => 'Répétition du nouveau mot de passe',
+	'view_index_redirect_type' => 'Type de renvoi',
+	'view_index_redirect_internal' => 'Page interne',
+	'view_index_redirect_external' => 'Page externe',
+	'view_index_redirect_internal_select' => 'Choisissez la page interne pour la redirection',
+	'view_index_redirect_external_link' => 'Lien externe',
+	'view_index_redirect_external_link_help' => 'Lien externe commençant avec http:// or https://',
 
     /* Added translation in 1.0.0-beta3 */
     'model_loginform_email_label' => 'Email',
