@@ -24,7 +24,7 @@ An NgRest Plugin is like the type of an input. You can create selects, date pick
 |decimal            |{{\luya\admin\ngrest\plugins\Decimal}}|float	|Creates a decimal input field. First parameter defines optional step size. Default = 0.001
 |number				|{{\luya\admin\ngrest\plugins\Number}}|integer |Input field where only numbers are allowed.
 |cmsPage			|{{\luya\admin\ngrest\plugins\CmsPage}}|{{luya\cms\menu\Item}}|Cms Page selection and returns the menu component item.
-
+|link               |{{\luya\admin\ngrest\plugins\CmsPage}}|string|Select an internal page or enter an external link, the database field must be a varchar field in order to store informations and the cms module is required.
 ## Create a custom project Plugin
 
 Sometimes you really want to have project specific input behavior. To achieve this you have to create your own custom NgRest Plugin. First create a Plugin class:
