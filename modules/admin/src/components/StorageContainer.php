@@ -251,7 +251,7 @@ class StorageContainer extends Component
      */
     public function getFilesArrayItem($fileId)
     {
-        return (isset($this->getFilesArray()[$fileId])) ? $this->getFilesArray()[$fileId] : false;
+        return (isset($this->filesArray[$fileId])) ? $this->filesArray[$fileId] : false;
     }
     
     private $_imagesArray = null;
@@ -280,7 +280,7 @@ class StorageContainer extends Component
      */
     public function getImagesArrayItem($imageId)
     {
-        return (isset($this->getImagesArray()[$imageId])) ? $this->getImagesArray()[$imageId] : false;
+        return (isset($this->imagesArray[$imageId])) ? $this->imagesArray[$imageId] : false;
     }
     
     /**
