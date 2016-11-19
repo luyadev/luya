@@ -15,8 +15,6 @@ The [Yii 2 PHP Framework](https://github.com/yiisoft/yii2) wrapper which provide
 
 ![Luya Admin](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/luya-beta8.png)
 
-**ATTENTION: We have MOVED all repositories to the new HQ of LUYA, `luyadev` instead of `zephir`. In order to update your packages, remove `zephir` and replace with `luyadev` in your composer require section. The old packages will still work for a while.**
-
 ## Installation
 
 We have a made an absolut easy to understand *STEP-BY-STEP* Guide to install LUYA:
