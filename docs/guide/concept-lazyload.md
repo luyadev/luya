@@ -2,17 +2,6 @@
 
 To reduce server load and speed up page requests, LUYA is shipped with a built in {{\luya\lazyload\LazyLoad}} Widget.
 
-## Event
-
-Each image loaded will trigger an event `lazyimage-loaded` on the `document`.
-The event provides an object with the imageId (ID selector) and the type of the event (`success` or `error`).
-
-```
-$(document).on("lazyimage-loaded", function(e, response) {
-    $(response.imageId).doStuff();
-});
-```
-
 ## Basic usage
 
 ```php
@@ -45,6 +34,17 @@ To use the lazyloader with a background image, for example on a DIV, you just ha
     
 <!-- Fallback for no-js -->
 <noscript><div style="background-image: url(<?= $extras['image']->source ?>);"></div></noscript>
+```
+
+## Event
+
+Each image loaded will trigger an event `lazyimage-loaded` on the `document`.
+The event provides an object with the imageId (ID selector) and the type of the event (`success` or `error`).
+
+```
+$(document).on("lazyimage-loaded", function(e, response) {
+    $(response.imageId).doStuff();
+});
 ```
 
 ## Using LazyLoader with Storage Component
