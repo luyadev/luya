@@ -77,7 +77,7 @@ abstract class Plugin extends Component
             throw new Exception("Plugin attributes name, alias and i18n must be configured.");
         }
         
-        $this->addEvent(NgRestModel::EVENT_AFTER_VALIDATE, 'onSave');
+        $this->addEvent(NgRestModel::EVENT_BEFORE_VALIDATE, 'onSave');
         $this->addEvent(NgRestModel::EVENT_AFTER_FIND, 'onFind');
         $this->addEvent(NgRestModel::EVENT_AFTER_NGREST_FIND, 'onListFind');
         $this->addEvent(NgRestModel::EVENT_AFTER_NGREST_UPDATE_FIND, 'onExpandFind');
@@ -258,7 +258,9 @@ abstract class Plugin extends Component
     }
     
      /**
-     * This event will be triggered `onSave` event. If the property of this plugin inside the model, the event will not be triggered.
+     * This event will be triggered `onSave` event. If the model property is not writeable the event will not trigger.
+     * 
+     * If the beforeSave method returns true and i18n is enabled, the value will be json encoded.
      *
      * @param \yii\db\AfterSaveEvent $event AfterSaveEvent represents the information available in yii\db\ActiveRecord::EVENT_AFTER_INSERT and yii\db\ActiveRecord::EVENT_AFTER_UPDATE.
      * @return void
