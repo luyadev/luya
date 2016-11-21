@@ -3,7 +3,6 @@
 namespace luya\admin\ngrest\plugins;
 
 use luya\admin\ngrest\base\Plugin;
-use yii\helpers\Json;
 use luya\helpers\ArrayHelper;
 use luya\helpers\StringHelper;
 
@@ -62,7 +61,23 @@ class CheckboxList extends Plugin
     {
         // if its not i18n casted field we have to serialize the the file array as json and abort further event excution.
         if (!$this->i18n) {
-            $event->sender->setAttribute($this->name, $this->i18nFieldEncode($event->sender->getAttribute($this->name)));
+        	// as it could be an assigned array from the frontend model assigne via a form, we verify if the array contains a value key.
+        	$value = $event->sender->getAttribute($this->name);
+        	
+        	$data = [];
+        	if (is_array($value)) {
+        		foreach ($value as $key => $row) {
+        			if (!is_array($row)) {
+        				$data[] = ['value' => $row];
+        			} else {
+        				$data[] = $row;
+        			}
+        		}
+        	} else {
+        		$data = $value;
+        	}
+        	
+            $event->sender->setAttribute($this->name, $this->i18nFieldEncode($data));
             return false;
         }
     
