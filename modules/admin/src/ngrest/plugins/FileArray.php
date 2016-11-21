@@ -119,7 +119,7 @@ class FileArray extends Plugin
     }
     
     /**
-     * Parse an array with fileId and caption into an \luya\admin\file\Iterator object.
+     * Parse an array with fileId and caption into an {{\luya\admin\file\Iterator}} object.
      * 
      * @param array $values The array with key 'fileId' like `[['fileId' => 1, 'caption' => 'test']]`.
      * @return \luya\admin\file\Iterator The iterator object from the parsed values or an empty array if empty.
