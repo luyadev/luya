@@ -77,7 +77,7 @@ abstract class Plugin extends Component
             throw new Exception("Plugin attributes name, alias and i18n must be configured.");
         }
         
-        $this->addEvent(NgRestModel::EVENT_BEFORE_VALIDATE, 'onSave');
+        $this->addEvent(NgRestModel::EVENT_AFTER_VALIDATE, 'onSave');
         $this->addEvent(NgRestModel::EVENT_AFTER_FIND, 'onFind');
         $this->addEvent(NgRestModel::EVENT_AFTER_NGREST_FIND, 'onListFind');
         $this->addEvent(NgRestModel::EVENT_AFTER_NGREST_UPDATE_FIND, 'onExpandFind');
