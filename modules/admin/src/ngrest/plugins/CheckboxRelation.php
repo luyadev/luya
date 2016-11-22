@@ -8,41 +8,42 @@ use luya\admin\ngrest\base\Plugin;
 use luya\rest\ActiveController;
 
 /**
- * Create multi select input for a relation table.
+ * Checkbox Selector via relation table.
  *
- * Example usage:
- *
- * Define an extra propertie:
+ * The checkbox relation plugin provides an easy way to provde a checkbox selection from a via relation table.
+ * 
+ * In order to implement the checkboxRealtion plugin you have to prepare your {{\luya\admin\ngrest\base\NgRestModel}} as following:
  *
  * ```php
- *
  * public $groups = [];
  *
  * public function extraFields()
  * {
  *     return ['groups'];
  * }
- *
  * ```
  *
- * configure the extra field with `ngRestExtraAttributeTypes`:
+ * Configure the extra field with {{\luya\admin\ngrest\base\NgRestModel::ngRestExtraAttributeTypes}}:
  *
  * ```php
  * public function ngRestExtraAttributeTypes()
  * {
- *      'groups' => [
- *          'checkboxRelation',
- *       	'model' => User::className(),
- *       	'refJoinTable' => 'admin_user_group',
- *       	'refModelPkId' => 'group_id',
- *       	'refJoinPkId' => 'user_id',
- *       	'labelFields' => ['firstname', 'lastname', 'email'],
- *       	'labelTemplate' =>  '%s %s (%s)'
- *       ],
+ *     'groups' => [
+ *         'checkboxRelation',
+ *         'model' => User::className(),
+ *         'refJoinTable' => 'admin_user_group',
+ *         'refModelPkId' => 'group_id',
+ *         'refJoinPkId' => 'user_id',
+ *         'labelFields' => ['firstname', 'lastname', 'email'],
+ *         'labelTemplate' =>  '%s %s (%s)'
+ *     ],
  * }
  * ```
  *
- * @property \yii\db\ActiveRecord $model The model object
+ * You can also access getter fields from the $model class in order to display such informations in the checkbox selection. Assuming you have a `getMyName` method in the
+ * $model object you can use it in the `labelFields` as `myName`.
+ * 
+ * @property \luya\admin\ngrest\base\NgRestModel $model The model object
  * @author Basil Suter <basil@nadar.io>
  */
 class CheckboxRelation extends Plugin
@@ -125,7 +126,7 @@ class CheckboxRelation extends Plugin
 
         $select = $this->labelFields;
         $select[] = $pkName;
-        foreach ($this->model->find()->select($select)->all() as $item) {
+        foreach ($this->model->find()->all() as $item) {
             $array = $item->getAttributes($select);
             unset($array[$pkName]);
             if ($this->labelTemplate) {
@@ -217,14 +218,15 @@ class CheckboxRelation extends Plugin
     }
     
     /**
-     * @param array $value          The valued which is provided from the setter method
-     * @param string $viaTableName   Example viaTable name: news_article_tag
-     * @param string $localTableId   The name of the field inside the viaTable which represents the match against the local table, example: article_id
+     * Set the relation data based on the configuration.
+     * 
+     * @param array $value The valued which is provided from the setter method
+     * @param string $viaTableName Example viaTable name: news_article_tag
+     * @param string $localTableId The name of the field inside the viaTable which represents the match against the local table, example: article_id
      * @param string $foreignTableId The name of the field inside the viaTable which represents the match against the foreign table, example: tag_id
-     *
-     * @return bool
+     * @return boolean Whether updating the database was successfull or not.
      */
-    public function setRelation(array $value, $viaTableName, $localTableId, $foreignTableId, $activeRecordId)
+    protected function setRelation(array $value, $viaTableName, $localTableId, $foreignTableId, $activeRecordId)
     {
         Yii::$app->db->createCommand()->delete($viaTableName, [$localTableId => $activeRecordId])->execute();
         $batch = [];
