@@ -40,9 +40,9 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
 
     private $_envOptions = [];
 
-    const VAR_INJECTOR = 'var';
+    const INJECTOR_VAR = 'var';
     
-    const CFG_INJECTOR = 'cfg';
+    const INJECTOR_CFG = 'cfg';
 
     protected function injectorSetup()
     {
@@ -124,7 +124,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      *     return [
      *         'foobar' => new cms\injector\ActiveQueryCheckbox([
      *             'query' => MyModel::find()->where(['id' => 1]),
-     *             'type' => self::VAR_INJECTOR, // could be self::CFG_INJECTOR
+     *             'type' => self::INJECTOR_VAR, // could be self::INJECTOR_CFG
      *         ]);
      *     ];
      * }

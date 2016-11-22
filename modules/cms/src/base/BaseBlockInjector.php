@@ -46,7 +46,7 @@ abstract class BaseBlockInjector extends Object
     /**
      * @var string The type of variable is used for the inject. can be either var or cfg.
      */
-    public $type = InternalBaseBlock::VAR_INJECTOR;
+    public $type = InternalBaseBlock::INJECTOR_VAR;
     
     private $_context = null;
     
@@ -78,11 +78,11 @@ abstract class BaseBlockInjector extends Object
      */
     public function getContextConfigValue($varName, $defaultValue = null)
     {
-        if ($this->type == InternalBaseBlock::VAR_INJECTOR) {
+        if ($this->type == InternalBaseBlock::INJECTOR_VAR) {
             return $this->context->getVarValue($varName, $defaultValue);
         }
         
-        if ($this->type == InternalBaseBlock::CFG_INJECTOR) {
+        if ($this->type == InternalBaseBlock::INJECTOR_CFG) {
             return $this->context->getCfgValue($varName, $defaultValue);
         }
             
@@ -97,11 +97,11 @@ abstract class BaseBlockInjector extends Object
      */
     public function setContextConfig(array $config)
     {
-        if ($this->type == InternalBaseBlock::VAR_INJECTOR) {
+        if ($this->type == InternalBaseBlock::INJECTOR_VAR) {
             return $this->context->addVar($config);
         }
          
-        if ($this->type == InternalBaseBlock::CFG_INJECTOR) {
+        if ($this->type == InternalBaseBlock::INJECTOR_CFG) {
             return $this->context->addCfg($config);
         }
         
