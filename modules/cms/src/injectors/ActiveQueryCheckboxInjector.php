@@ -43,10 +43,11 @@ class ActiveQueryCheckboxInjector extends BaseBlockInjector
     private $_query = null;
     
     /**
-     * Setter method for the active query interface. Define the active query which will be used
-     * to retrieve data.
+     * Setter method for the active query interface. 
+     * 
+     * Define the active query which will be used to retrieve data must be an instance of {{\yii\db\ActiveQueryInterface}}.
      *
-     * @param ActiveQueryInterface $query
+     * @param \yii\db\ActiveQueryInterface $query The query provider for the {{yii\data\ActiveDataProvider}}.
      */
     public function setQuery(ActiveQueryInterface $query)
     {
@@ -62,7 +63,7 @@ class ActiveQueryCheckboxInjector extends BaseBlockInjector
         $data = [];
         foreach ($provider->getModels() as $model) {
             $labels = [];
-            foreach ($model->getAttributes() as $value) {
+            foreach ($model->getAttributes($this->_query->select) as $value) {
                 if (is_string($value)) {
                     $labels[] = $value;
                 }
