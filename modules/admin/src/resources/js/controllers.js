@@ -423,10 +423,18 @@
 			}
 		})
 		
+		/**
+		 * This method is triggerd by the crudLoader directive to reload service data.
+		 */
+		$scope.loadService = function() {
+			$http.get($scope.config.apiEndpoint + '/services').success(function(serviceResponse) {
+				$scope.service = serviceResponse.service;
+			});
+		};
+		
 		$scope.loadList = function(pageId) {
 			LuyaLoading.start();
 			$http.get($scope.config.apiEndpoint + '/services').success(function(serviceResponse) {
-				
 				$scope.service = serviceResponse.service;
 				$scope.evalSettings(serviceResponse._settings);
 				if ($scope.relationCall) {
