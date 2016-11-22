@@ -4,6 +4,7 @@ namespace luya\admin\ngrest\plugins;
 
 use Yii;
 use luya\admin\ngrest\base\Plugin;
+use luya\cms\helpers\Url;
 
 /**
  * Internal or External Link Plugin.
@@ -11,6 +12,12 @@ use luya\admin\ngrest\base\Plugin;
  * In order to use this plugin the {{luya\cms\admin\Module}} is required in your application.
  * 
  * Its recommend to use the type varchar for the field where the Link plugin is applied.
+ * 
+ * The value of the field is a {{luya\web\LinkInterface}} there for you can access the `getHref` and `getTarget` methods in order to generate the link:
+ * 
+ * ```php
+ * <a href="<?= $model->link->getHref(); ?>" target="<?= $model->link->getTarget(); ?>>">Go There</a>
+ * ```
  * 
  * @since 1.0.0-RC2
  * @author Basil Suter <basil@nadar.io>
@@ -98,15 +105,6 @@ class Link extends Plugin
 	 */
 	protected function generateLinkObject(array $config)
 	{
-	    if (!isset($config['type'])) {
-	        return null;
-	    }
-	    
-		switch ($config['type']) {
-			case 1:
-				return Yii::$app->menu->findOne(['id' => $config['value']])->link;
-			case 2:
-				return $config['value'];
-		}
+	    return Url::generateLinkObject($config);
 	}
 }

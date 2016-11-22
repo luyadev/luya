@@ -6,6 +6,9 @@ use Yii;
 use luya\cms\Exception;
 use luya\admin\models\User;
 use luya\cms\models\Nav;
+use yii\base\Object;
+use luya\web\LinkInterface;
+use luya\web\LinkTrait;
 
 /**
  * Menu item Object.
@@ -43,8 +46,10 @@ use luya\cms\models\Nav;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta1
  */
-class Item extends \yii\base\Object
+class Item extends Object implements LinkInterface
 {
+    use LinkTrait;
+    
     /**
      * @var array The item property containing the informations with key  value parinings. This property will be assigned when creating the
      * Item-Object.
@@ -62,6 +67,16 @@ class Item extends \yii\base\Object
      */
     private $_with = [];
 
+    public function getHref()
+    {
+        return $this->getLink();
+    }
+    
+    public function getTarget()
+    {
+        return '_self';
+    }
+    
     /**
      * Item-Object initiliazer, verify if the itemArray property is empty.
      *

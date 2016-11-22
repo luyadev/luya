@@ -2,12 +2,12 @@
 
 namespace cmstests\src\helpers;
 
-use Yii;
-use cms\helpers\Url;
+use luya\cms\helpers\Url;
 use cmstests\CmsFrontendTestCase;
 
 class UrlTest extends CmsFrontendTestCase
 {
+    /*
     public function testToModuleFromOldLuyaBaseTest()
     {
         Yii::$app->request->baseUrl = '';
@@ -31,5 +31,22 @@ class UrlTest extends CmsFrontendTestCase
         Yii::$app->request->scriptUrl = '';
 
         $this->assertEquals('/en/news-module/1/foo-bar', Url::toModuleRoute('news', 'news/default/detail', ['id' => 1, 'title' => 'foo-bar']));
+    }
+    */
+    
+    public function testInternalGenerateLinkObject()
+    {
+        $url = Url::generateLinkObject(['type' => 1, 'value' => 2]);
+        $this->assertInstanceOf('luya\web\LinkInterface', $url);
+        
+        $this->assertSame('_self', $url->getTarget());
+    }
+    
+    public function testExternalGenerateLinkObject()
+    {
+        $url = Url::generateLinkObject(['type' => 2, 'value' => 'https://luya.io']);
+        $this->assertInstanceOf('luya\web\LinkInterface', $url);
+    
+        $this->assertSame('_blank', $url->getTarget());
     }
 }
