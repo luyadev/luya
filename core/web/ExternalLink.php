@@ -11,11 +11,15 @@ use yii\base\InvalidConfigException;
  *
  * @property string $href The external href link will be http ensured on set.
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0-RC2
  */
 class ExternalLink extends Object implements LinkInterface
 {
     use LinkTrait;
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -27,16 +31,27 @@ class ExternalLink extends Object implements LinkInterface
     
     private $_href = null;
     
+    /**
+     * Set the href value for an external link resource.
+     * 
+     * @param string $href The external link href value, the http protcol will be ensured.
+     */
     public function setHref($href)
     {
         $this->_href = Url::ensureHttp($href);
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getHref()
     {
         return $this->_href;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getTarget()
     {
         return '_blank';

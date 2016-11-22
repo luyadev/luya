@@ -67,11 +67,17 @@ class Item extends Object implements LinkInterface
      */
     private $_with = [];
 
+    /**
+     * @inheritdoc
+     */
     public function getHref()
     {
         return $this->getLink();
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getTarget()
     {
         return '_self';
