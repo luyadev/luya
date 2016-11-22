@@ -124,6 +124,11 @@
 			},
 			templateUrl : 'updateformredirect.html',
 			controller : function($scope) {
+				$scope.$watch(function() { return $scope.data }, function(n, o) {
+					if (angular.isArray(n)) {
+						$scope.data = {};
+					}
+				});
 			}
 		}
 	});

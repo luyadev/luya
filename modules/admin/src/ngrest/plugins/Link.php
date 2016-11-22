@@ -74,8 +74,8 @@ class Link extends Plugin
 	public function onBeforeFind($event)
 	{
 		if (!$this->i18n) {
-			$event->sender->setAttribute($this->name, $this->jsonDecode($event->sender->getAttribute($this->name)));
-			$event->sender->setAttribute($this->name, $this->generateLinkObject($event->sender->getAttribute($this->name)));
+			$value = $this->jsonDecode($event->sender->getAttribute($this->name));
+			$event->sender->setAttribute($this->name, $this->generateLinkObject($value));
 			return false;
 		}
 	
@@ -98,6 +98,10 @@ class Link extends Plugin
 	 */
 	protected function generateLinkObject(array $config)
 	{
+	    if (!isset($config['type'])) {
+	        return null;
+	    }
+	    
 		switch ($config['type']) {
 			case 1:
 				return Yii::$app->menu->findOne(['id' => $config['value']])->link;

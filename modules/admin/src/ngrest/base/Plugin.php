@@ -117,10 +117,10 @@ abstract class Plugin extends Component
     }
     
     /**
-     * Json decode value but verifys if its empty, cause this can thrown an json decode exception.
+     * Decodes the given JSON string into a PHP data structure and verifys if its empty, cause this can thrown an json decode exception.
      *
-     * @param string $value The string to encode
-     * @return mixed
+     * @param string $value The string to decode from json to php.
+     * @return array The PHP array.
      */
     public function jsonDecode($value)
     {
