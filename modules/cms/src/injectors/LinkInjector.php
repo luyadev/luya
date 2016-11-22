@@ -13,6 +13,17 @@ use luya\cms\base\BaseBlockInjector;
  * ```php
  * new LinkInjector();
  * ```
+ * 
+ * In order to configure the LinkInjector used the {{\luya\cms\base\InternalBaseBlock::injectors}} method:
+ * 
+ * ```php
+ * public function injectors()
+ * {
+ *     return [
+ *	       'theLink' => new \luya\cms\injectors\LinkInjector()
+ *	   ];
+ * }
+ * ```
  *
  * @author Basil Suter <basil@nadar.io>
  */

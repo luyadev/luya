@@ -20,7 +20,20 @@ use luya\helpers\ArrayHelper;
  *     'query' => \newsadmin\models\Article::find()->where(['cat_id' => 1]),
  * ]);
  * ```
- *
+ * 
+ * In order to configure the ActiveQueryCheckboxInjector used the {{\luya\cms\base\InternalBaseBlock::injectors}} method:
+ * 
+ * ```php
+ * public function injectors()
+ * {
+ *     return [
+ *	       'theData' => new ActiveQueryCheckboxInjector([
+ *             'query' => News::find()->select(['title'])->where(['is_deleted' => 0]),
+ *         ]);
+ *	   ];
+ * }
+ * ```
+ * 
  * @property \yii\db\ActiveQueryInterface $query The ActiveQuery object
  * @since 1.0.0-rc1
  * @author Basil Suter <basil@nadar.io>

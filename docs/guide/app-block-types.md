@@ -88,8 +88,8 @@ class MyBlock extends \luya\cms\base\PhpBlock
 	public function injectors()
 	{
 	    return [
-	        'newsData' => new cms\injector\ActiveQueryCheckboxInjector([
-	            'query' => \news\models\Article::find(),
+	        'newsData' => new \luya\cms\injectors\ActiveQueryCheckboxInjector([
+	            'query' => \luya\news\models\Article::find(),
 	            'type' => self::VAR_INJECTOR,
 	        ])
 	    ];
@@ -104,7 +104,7 @@ Now the generated injector ActiveQueryCheckboxInjector is going to grab all info
 For example your view file could now look like this:
 
 ```php
-foreach ($extras['newsData'] as $model) {
+foreach ($this->extraValue('newsData') as $model) {
 	echo $model->title; // assuming title is an attribute of the Article model defined in the query part of the injector.
 }
 ```
@@ -113,5 +113,5 @@ The following Injectors are currently available:
 
 |Class		|Description
 |---		|---
-|`cms\injector\ActiveQueryCheckboxInjector`|Generate as checkbox selection from an ActiveRecord and assignes selected model rows into the extraVars section. In order to select only a specific fields add the `select()` to the ActiveRecord find ActiveQuery.
-|`cms\injectors\LinkInjector`|Generate an ability to select a link and returns the correct url to the link based on the user selection.
+|{{\luya\cms\injectors\ActiveQueryCheckboxInjector}}|Generate as checkbox selection from an ActiveRecord and assignes selected model rows into the extraVars section. In order to select only a specific fields add the `select()` to the ActiveRecord find ActiveQuery.
+|{{\luya\cms\injectors\LinkInjector}}|Generate an ability to select a link and returns the correct url to the link based on the user selection.
