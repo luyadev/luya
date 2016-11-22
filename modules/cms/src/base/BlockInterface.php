@@ -52,7 +52,7 @@ interface BlockInterface
      * Returns an array with additional help informations for specific field (var or cfg).
      *
      * The returning array must contain a key where is the field name and a value to display, Example:
-     * 
+     *
      * ```php
      *  return [
      *      'content' => 'An explain example of what this var does it where its displayed.',

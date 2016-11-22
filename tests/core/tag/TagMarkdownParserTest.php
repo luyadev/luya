@@ -2,11 +2,10 @@
 
 namespace luyatests\core\tag;
 
-
 use luyatests\LuyaWebTestCase;
 use luya\tag\TagMarkdownParser;
 
-class CmsMarkdownTest extends LuyaWebTestCase
+class TagMarkdownParserTest extends LuyaWebTestCase
 {
     public function testNewline()
     {

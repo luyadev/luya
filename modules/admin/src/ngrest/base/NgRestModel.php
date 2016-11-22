@@ -316,7 +316,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     
     /**
      * Triggers the event service event and returns the resolved data.
-     * 
+     *
      * @return mixed The service data.
      */
     public function getNgrestServices()
@@ -328,7 +328,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     
     /**
      * Define the field types for ngrest, to use `ngRestConfigDefine()`.
-     * 
+     *
      * The definition can contain properties, but does not have to.
      *
      * ```php

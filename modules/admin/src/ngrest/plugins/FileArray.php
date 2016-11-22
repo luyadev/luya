@@ -10,21 +10,21 @@ use luya\admin\file\Query;
  * Type Multiple Files Upload.
  *
  * Usage example inside your {{luya\admin\ngrest\base\NgRestModel::ngRestAttributeTypes}} method:
- * 
+ *
  * ```php
  * return [
  *     'myfiles' => 'fileArray',
  * ];
  * ```
- * 
+ *
  * If you like to get the {{luya\admin\file\Iterator}} object directly from the {{luya\admin\components\StorageContainer}} component just enable `$fileIterator`.
- * 
+ *
  * ```php
  * return [
  *     'myfiles' => ['fileArray', 'fileIterator' => true],
  * ];
  * ```
- * 
+ *
  * Now when accessing the `$myfiles` variabled defined from above the {{luya\admin\file\Iterator}} will be returned ottherwise false.
  *
  * @author Basil Suter <basil@nadar.io>
@@ -115,12 +115,12 @@ class FileArray extends Plugin
     {
         if ($this->fileIterator) {
             $event->sender->setAttribute($this->name, $this->parseFileIteration($event->sender->getAttribute($this->name)));
-        }        
+        }
     }
     
     /**
      * Parse an array with fileId and caption into an {{\luya\admin\file\Iterator}} object.
-     * 
+     *
      * @param array $values The array with key 'fileId' like `[['fileId' => 1, 'caption' => 'test']]`.
      * @return \luya\admin\file\Iterator The iterator object from the parsed values or an empty array if empty.
      */

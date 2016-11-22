@@ -12,9 +12,9 @@ class ImportControllerTest extends \luyatests\LuyaConsoleTestCase
         Yii::$app->request->setParams([
             'exec/import',
         ]);
-        
+
         $this->assertEquals(1, Yii::$app->run());
-        
+
     }
     */
 

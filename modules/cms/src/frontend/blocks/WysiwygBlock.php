@@ -13,7 +13,7 @@ use luya\cms\base\TwigBlock;
  */
 class WysiwygBlock extends TwigBlock
 {
-	/**
+    /**
      * @inheritDoc
      */
     public $cacheEnabled = true;

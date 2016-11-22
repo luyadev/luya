@@ -7,27 +7,27 @@ use luya\admin\ngrest\base\Plugin;
 
 /**
  * Type Image Upload.
- * 
+ *
  * Usage example inside your {{luya\admin\ngrest\base\NgRestModel::ngRestAttributeTypes}} method:
- * 
+ *
  * ```php
  * return [
  *     'myimage' => 'image',
  * ];
  * ```
- * 
+ *
  * If you like to get the {{luya\admin\image\Item}} object directly from the {{luya\admin\components\StorageContainer}} component just enable `$imageItem`.
- * 
+ *
  * ```php
  * return [
  *     'myimage' => ['image', 'imageItem' => true],
  * ];
  * ```
- * 
+ *
  * Now when accessing the `$myimage` variabled defined from above the {{luya\admin\image\Item}} will be returned ottherwise false.
- * 
+ *
  * If the user should not have the ability to selecte a filter enable `$noFilters`.
- * 
+ *
  * ```php
  * return [
  *     'myimage' => ['noFilters' => true],

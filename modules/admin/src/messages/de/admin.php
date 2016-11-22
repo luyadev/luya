@@ -97,12 +97,12 @@ return [
     'aws_changepassword_succes' => 'Dein neues Passwort wurde erfolgreich verschlüsselt und angepasst.',
     'aws_changepassword_new_pass' => 'Neues Passwort',
     'aws_changepassword_new_pass_retry' => 'Neues Passwort wiederholen',
-	'view_index_redirect_type' => 'Art der Weiterleitung',
-	'view_index_redirect_internal' => 'Interne-Seite',
-	'view_index_redirect_external' => 'Externe URL',
-	'view_index_redirect_internal_select' => 'Wählen Sie die interne Seite, auf die weitergeleitet werden soll.',
-	'view_index_redirect_external_link' => 'Externer Link',
-	'view_index_redirect_external_link_help' => 'Externe Links beginnen mit http:// oder https://',
+    'view_index_redirect_type' => 'Art der Weiterleitung',
+    'view_index_redirect_internal' => 'Interne-Seite',
+    'view_index_redirect_external' => 'Externe URL',
+    'view_index_redirect_internal_select' => 'Wählen Sie die interne Seite, auf die weitergeleitet werden soll.',
+    'view_index_redirect_external_link' => 'Externer Link',
+    'view_index_redirect_external_link_help' => 'Externe Links beginnen mit http:// oder https://',
 
 // added translation in 1.0.0-beta3:
 

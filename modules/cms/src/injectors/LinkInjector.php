@@ -14,9 +14,9 @@ use luya\cms\helpers\Url;
  * ```php
  * new LinkInjector();
  * ```
- * 
+ *
  * In order to configure the LinkInjector used the {{\luya\cms\base\InternalBaseBlock::injectors}} method:
- * 
+ *
  * ```php
  * public function injectors()
  * {
@@ -25,9 +25,9 @@ use luya\cms\helpers\Url;
  *	   ];
  * }
  * ```
- * 
+ *
  * The value of the `$this->extraValue('theLink')` is a {{luya\web\LinkInterface}} therefor you can access the `getHref` and `getTarget` methods in order to generate the link:
- * 
+ *
  * ```php
  * <a href="<?= $this->extraValue('link')?>" target="<?= $this->extraValue('link')->getTarget(); ?>">Go There</a>
  * ```

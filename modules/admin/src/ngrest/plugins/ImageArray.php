@@ -11,21 +11,21 @@ use luya\helpers\ArrayHelper;
  * Type Multiple Image Upload.
  *
  * Usage example inside your {{luya\admin\ngrest\base\NgRestModel::ngRestAttributeTypes}} method:
- * 
+ *
  * ```php
  * return [
  *     'myimages' => 'imageArray',
  * ];
  * ```
- * 
+ *
  * If you like to get the {{luya\admin\image\Iterator}} object directly from the {{luya\admin\components\StorageContainer}} component just enable `$imageIterator`.
- * 
+ *
  * ```php
  * return [
  *     'myimages' => ['imageArray', 'imageIterator' => true],
  * ];
  * ```
- * 
+ *
  * Now when accessing the `$myimages` variabled defined from above the {{luya\admin\image\Iterator}} will be returned ottherwise false.
  *
  * @author Basil Suter <basil@nadar.io>

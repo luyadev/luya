@@ -8,7 +8,7 @@ use yii\base\InvalidConfigException;
 
 /**
  * Generate External Link object.
- * 
+ *
  * @property string $href The external href link will be http ensured on set.
  * @author Basil Suter <basil@nadar.io>
  */

@@ -116,7 +116,7 @@ class StorageController extends RestController
         if ($cache === false) {
             $images = [];
             foreach (Yii::$app->storage->findImages() as $image) {
-            	if (!empty($image->file) && !$image->file->isHidden && !$image->file->isDeleted) {
+                if (!empty($image->file) && !$image->file->isHidden && !$image->file->isDeleted) {
                     $images[] = $image->toArray();
                 }
             }

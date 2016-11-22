@@ -97,12 +97,12 @@ return [
     'aws_changepassword_succes' => 'Contraseña cambiada con éxito.',
     'aws_changepassword_new_pass' => 'Nueva contraseña',
     'aws_changepassword_new_pass_retry' => 'Repetir nueva contraseña',
-	'view_index_redirect_type' => 'Tipo de redirección',
-	'view_index_redirect_internal' => 'Página interna',
-	'view_index_redirect_external' => 'URL externa',
-	'view_index_redirect_internal_select' => 'Seleccione la página interna en la que se debe enviar al usuario.',
-	'view_index_redirect_external_link' => 'Enlace externo',
-	'view_index_redirect_external_link_help' => 'Enlaces externos comienzan con http:// ó https://',
+    'view_index_redirect_type' => 'Tipo de redirección',
+    'view_index_redirect_internal' => 'Página interna',
+    'view_index_redirect_external' => 'URL externa',
+    'view_index_redirect_internal_select' => 'Seleccione la página interna en la que se debe enviar al usuario.',
+    'view_index_redirect_external_link' => 'Enlace externo',
+    'view_index_redirect_external_link_help' => 'Enlaces externos comienzan con http:// ó https://',
 
 // added translation in 1.0.0-beta3:
 

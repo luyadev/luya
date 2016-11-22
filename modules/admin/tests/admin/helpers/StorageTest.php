@@ -12,9 +12,9 @@ class StorageTest extends AdminTestCase
     public function testSuccessUploadFromFiles()
     {
         $files[] = ['tmp_name' => Yii::getAlias('@data/image.jpg'), 'name' => 'image.jpg', 'type' => 'image/jpg', 'error' => 0, 'size' => 123];
-        
+
         $response = Storage::uploadFromFiles($files);
-        
+
         $this->assertTrue($response['upload']);
     }
     */
@@ -25,7 +25,6 @@ class StorageTest extends AdminTestCase
     
         $response = Storage::uploadFromFiles($files);
     
-       $this->assertFalse($response['upload']);
-    
+        $this->assertFalse($response['upload']);
     }
 }

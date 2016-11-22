@@ -104,7 +104,7 @@ class Url extends \luya\helpers\Url
     
     /**
      * Generate a link object based on the configuration (array).
-     * 
+     *
      * @param string|array $config The configuration array to build the object
      * @return \luya\web\LinkInterface|false Returns a linkable resource object or false if configuration is wrong.
      */

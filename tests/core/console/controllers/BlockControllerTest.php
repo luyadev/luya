@@ -17,8 +17,8 @@ class BlockControllerTest extends LuyaConsoleTestCase
     }
     
     public function testAppBlock()
-    {        
-$tpl = <<<'EOT'
+    {
+        $tpl = <<<'EOT'
 <?php
 
 namespace app\blocks;
@@ -281,7 +281,7 @@ EOT;
     {
         $ctrl = new BlockController('id', Yii::$app);
         $ctrl->viewFileDoc = [
-            '$this->varValue(\'foo\');', '$this->varValue(\'foo\');', '$this->extraValue(\'foo\');', '$this->cfgValue(\'foo\');', 
+            '$this->varValue(\'foo\');', '$this->varValue(\'foo\');', '$this->extraValue(\'foo\');', '$this->cfgValue(\'foo\');',
         ];
         
         $view = <<<'EOT'

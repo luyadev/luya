@@ -7,7 +7,6 @@ use luyatests\LuyaWebTestCase;
 
 class ModuleTest extends LuyaWebTestCase
 {
-
     public function testResolveRoute()
     {
         $module = Yii::$app->getModule('urlmodule');

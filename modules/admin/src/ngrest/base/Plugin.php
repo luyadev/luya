@@ -259,7 +259,7 @@ abstract class Plugin extends Component
     
      /**
      * This event will be triggered `onSave` event. If the model property is not writeable the event will not trigger.
-     * 
+     *
      * If the beforeSave method returns true and i18n is enabled, the value will be json encoded.
      *
      * @param \yii\db\AfterSaveEvent $event AfterSaveEvent represents the information available in yii\db\ActiveRecord::EVENT_AFTER_INSERT and yii\db\ActiveRecord::EVENT_AFTER_UPDATE.
@@ -328,7 +328,7 @@ abstract class Plugin extends Component
     
     /**
      * ActiveRecord afterFind event. If the property of this plugin inside the model, the event will not be triggered.
-     * 
+     *
      * @param \yii\base\Event $event An event that is triggered after the record is created and populated with query result.
      */
     public function onFind($event)
@@ -344,7 +344,7 @@ abstract class Plugin extends Component
     
     /**
      * This event will be trigger after `onFind`.
-     * 
+     *
      * @param \yii\base\Event $event An event that is triggered after the record is created and populated with query result.
      * @return boolean
      */
@@ -407,7 +407,7 @@ abstract class Plugin extends Component
     
     /**
      * The ngrest services collector.
-     * 
+     *
      * @param \luya\admin\ngrest\base\NgRestModel::EVENT_SERVICE_NGREST $event NgRestModel event EVENT_SERVICE_NGREST.
      */
     public function onCollectServiceData($event)

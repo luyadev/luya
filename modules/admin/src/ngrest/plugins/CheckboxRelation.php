@@ -11,7 +11,7 @@ use luya\rest\ActiveController;
  * Checkbox Selector via relation table.
  *
  * The checkbox relation plugin provides an easy way to provde a checkbox selection from a via relation table.
- * 
+ *
  * In order to implement the checkboxRealtion plugin you have to prepare your {{\luya\admin\ngrest\base\NgRestModel}} as following:
  *
  * ```php
@@ -42,7 +42,7 @@ use luya\rest\ActiveController;
  *
  * You can also access getter fields from the $model class in order to display such informations in the checkbox selection. Assuming you have a `getMyName` method in the
  * $model object you can use it in the `labelFields` as `myName`.
- * 
+ *
  * @property \luya\admin\ngrest\base\NgRestModel $model The model object
  * @author Basil Suter <basil@nadar.io>
  */
@@ -208,18 +208,18 @@ class CheckboxRelation extends Plugin
      */
     public function afterSaveEvent($event)
     {
-    	if ($this->onlyRestScenarios) {
-    		if ($event->sender->scenario == ActiveController::SCENARIO_RESTCREATE || $event->sender->scenario == ActiveController::SCENARIO_RESTUPDATE) {
-    			$this->setRelation($event->sender->{$this->name}, $this->refJoinTable, $this->refModelPkId, $this->refJoinPkId, $event->sender->id);
-    		}
-    	} else {
-    		$this->setRelation($event->sender->{$this->name}, $this->refJoinTable, $this->refModelPkId, $this->refJoinPkId, $event->sender->id);
-    	}
+        if ($this->onlyRestScenarios) {
+            if ($event->sender->scenario == ActiveController::SCENARIO_RESTCREATE || $event->sender->scenario == ActiveController::SCENARIO_RESTUPDATE) {
+                $this->setRelation($event->sender->{$this->name}, $this->refJoinTable, $this->refModelPkId, $this->refJoinPkId, $event->sender->id);
+            }
+        } else {
+            $this->setRelation($event->sender->{$this->name}, $this->refJoinTable, $this->refModelPkId, $this->refJoinPkId, $event->sender->id);
+        }
     }
     
     /**
      * Set the relation data based on the configuration.
-     * 
+     *
      * @param array $value The valued which is provided from the setter method
      * @param string $viaTableName Example viaTable name: news_article_tag
      * @param string $localTableId The name of the field inside the viaTable which represents the match against the local table, example: article_id

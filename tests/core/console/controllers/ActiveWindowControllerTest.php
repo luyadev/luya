@@ -8,13 +8,13 @@ use luya\console\commands\ActiveWindowController;
 
 class ActiveWindowControllerTest extends LuyaConsoleTestCase
 {
-	public function testPhpViewRenderContent()
-	{
-		$ctrl = new ActiveWindowController('id', Yii::$app);
-		
-		$content = $ctrl->renderWindowClassView('MeinTestActiveWindow', 'path\\to\\aws', 'cmsadmin');
-		
-$tpl = <<<'EOT'
+    public function testPhpViewRenderContent()
+    {
+        $ctrl = new ActiveWindowController('id', Yii::$app);
+        
+        $content = $ctrl->renderWindowClassView('MeinTestActiveWindow', 'path\\to\\aws', 'cmsadmin');
+        
+        $tpl = <<<'EOT'
 <?php
 
 namespace path\to\aws;
@@ -57,7 +57,7 @@ class MeinTestActiveWindow extends ActiveWindow
     }
 }
 EOT;
-		
-		$this->assertSame($tpl, $content);
-	}
+        
+        $this->assertSame($tpl, $content);
+    }
 }

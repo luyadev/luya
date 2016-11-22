@@ -29,8 +29,8 @@ class ActiveWindowController extends \luya\console\Command
      */
     public function renderWindowClassView($className, $namespace, $moduleId)
     {
-    	$alias = Inflector::humanize(Inflector::camel2words($className));
-    	return $this->view->render('@luya/console/commands/views/aw/create.php', [
+        $alias = Inflector::humanize(Inflector::camel2words($className));
+        return $this->view->render('@luya/console/commands/views/aw/create.php', [
             'className' => $className,
             'namespace' => $namespace,
             'luyaText' => $this->getGeneratorText('aw/create'),

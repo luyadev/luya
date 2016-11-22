@@ -6,7 +6,7 @@ use luyatests\LuyaWebTestCase;
 use luya\TagParser;
 use luya\tag\tags\LinkTag;
 
-class TagParserTeste extends LuyaWebTestCase
+class TagParserTest extends LuyaWebTestCase
 {
     public function testInvalidContent()
     {

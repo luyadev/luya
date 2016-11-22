@@ -14,71 +14,71 @@ use yii\helpers\Inflector;
  */
 class ModuleController extends \luya\console\Command
 {
-	/**
-	 * Humanize the class name
-	 * 
-	 * @return string The humanized name.
-	 */
-	public function humanizeName($name)
-	{
-		return $name = Inflector::humanize(Inflector::camel2words($name));
-	}
-	
-	/**
-	 * Render the readme template.
-	 * 
-	 * @param array $folders
-	 * @param string $name
-	 * @param string $ns
-	 * @return string
-	 */
-	public function renderReadme($folders, $name, $ns)
-	{
-		return $this->view->render('@luya/console/commands/views/module/readme.php', [
-			'folders' => $folders,
-			'name' => $name,
-			'humanName' => $this->humanizeName($name),
-			'ns' => $ns,
-			'luyaText' => $this->getGeneratorText('module/create'),
-		]);
-	}
-	
-	/**
-	 * Render the admin template.
-	 * 
-	 * @param array $folders
-	 * @param string $name
-	 * @param string $ns
-	 * @return string
-	 */
-	public function renderAdmin($folders, $name, $ns)
-	{
-		return $this->view->render('@luya/console/commands/views/module/adminmodule.php', [
-			'folders' => $folders,
-			'name' => $this->humanizeName($name),
-			'ns' => $ns,
-			'luyaText' => $this->getGeneratorText('module/create'),
-		]);
-	}
-	
-	/**
-	 * Render the frontend template.
-	 * 
-	 * @param array $folders
-	 * @param string $name
-	 * @param string $ns
-	 * @return string
-	 */
-	public function renderFrontend($folders, $name, $ns)
-	{
-		return $this->view->render('@luya/console/commands/views/module/frontendmodule.php', [
-			'folders' => $folders,
-			'name' => $this->humanizeName($name),
-			'ns' => $ns,
-			'luyaText' => $this->getGeneratorText('module/create'),
-		]);
-	}
-	
+    /**
+     * Humanize the class name
+     *
+     * @return string The humanized name.
+     */
+    public function humanizeName($name)
+    {
+        return $name = Inflector::humanize(Inflector::camel2words($name));
+    }
+    
+    /**
+     * Render the readme template.
+     *
+     * @param array $folders
+     * @param string $name
+     * @param string $ns
+     * @return string
+     */
+    public function renderReadme($folders, $name, $ns)
+    {
+        return $this->view->render('@luya/console/commands/views/module/readme.php', [
+            'folders' => $folders,
+            'name' => $name,
+            'humanName' => $this->humanizeName($name),
+            'ns' => $ns,
+            'luyaText' => $this->getGeneratorText('module/create'),
+        ]);
+    }
+    
+    /**
+     * Render the admin template.
+     *
+     * @param array $folders
+     * @param string $name
+     * @param string $ns
+     * @return string
+     */
+    public function renderAdmin($folders, $name, $ns)
+    {
+        return $this->view->render('@luya/console/commands/views/module/adminmodule.php', [
+            'folders' => $folders,
+            'name' => $this->humanizeName($name),
+            'ns' => $ns,
+            'luyaText' => $this->getGeneratorText('module/create'),
+        ]);
+    }
+    
+    /**
+     * Render the frontend template.
+     *
+     * @param array $folders
+     * @param string $name
+     * @param string $ns
+     * @return string
+     */
+    public function renderFrontend($folders, $name, $ns)
+    {
+        return $this->view->render('@luya/console/commands/views/module/frontendmodule.php', [
+            'folders' => $folders,
+            'name' => $this->humanizeName($name),
+            'ns' => $ns,
+            'luyaText' => $this->getGeneratorText('module/create'),
+        ]);
+    }
+    
     /**
      * Create a new frontend/admin module.
      *

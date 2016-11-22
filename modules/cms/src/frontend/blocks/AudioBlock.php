@@ -13,7 +13,7 @@ use luya\cms\frontend\blockgroups\MediaGroup;
  */
 class AudioBlock extends TwigBlock
 {
-	/**
+    /**
      * @inheritDoc
      */
     public $cacheEnabled = true;

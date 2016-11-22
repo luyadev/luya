@@ -8,12 +8,12 @@ use luya\console\commands\ModuleController;
 
 class ModuleControllerTest extends LuyaConsoleTestCase
 {
-	public function testRenderAdmin()
-	{
-		$ctrl = new ModuleController('module', Yii::$app);
-		
-		$content = $ctrl->renderAdmin([], 'foo', 'app\\modules');
-$tpl = <<<'EOT'
+    public function testRenderAdmin()
+    {
+        $ctrl = new ModuleController('module', Yii::$app);
+        
+        $content = $ctrl->renderAdmin([], 'foo', 'app\\modules');
+        $tpl = <<<'EOT'
 <?php
 
 namespace app\modules\admin;
@@ -28,15 +28,15 @@ class Module extends \luya\admin\base\Module
 
 }
 EOT;
-		$this->assertSame($tpl, $content);
-	}
-	
-	public function testRenderFrontend()
-	{
-		$ctrl = new ModuleController('module', Yii::$app);
-		
-		$content = $ctrl->renderFrontend([], 'foo', 'app\\modules');
-$tpl = <<<'EOT'
+        $this->assertSame($tpl, $content);
+    }
+    
+    public function testRenderFrontend()
+    {
+        $ctrl = new ModuleController('module', Yii::$app);
+        
+        $content = $ctrl->renderFrontend([], 'foo', 'app\\modules');
+        $tpl = <<<'EOT'
 <?php
 
 namespace app\modules\frontend;
@@ -51,15 +51,15 @@ class Module extends \luya\base\Module
 
 }
 EOT;
-		$this->assertSame($tpl, $content);
-	}
-	
-	public function testRenderReadme()
-	{
-		$ctrl = new ModuleController('module', Yii::$app);
-		
-		$content = $ctrl->renderReadme([], 'foo', 'app\\modules');
-$tpl = <<<'EOT'
+        $this->assertSame($tpl, $content);
+    }
+    
+    public function testRenderReadme()
+    {
+        $ctrl = new ModuleController('module', Yii::$app);
+        
+        $content = $ctrl->renderReadme([], 'foo', 'app\\modules');
+        $tpl = <<<'EOT'
 # Foo Module
  
 File has been created with `module/create` command on LUYA version 1.0.0-RC2-dev. 
@@ -79,6 +79,6 @@ return [
 ];
 ```
 EOT;
-		$this->assertSame($tpl, $content);
-	}
+        $this->assertSame($tpl, $content);
+    }
 }

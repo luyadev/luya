@@ -42,9 +42,9 @@ use luya\Exception;
  * ```php
  * return (new \luya\admin\file\Query())->where(['>', 'id', 1])->andWHere(['<', 'id', 3])->all();
  * ```
- * 
+ *
  * In condition in order to get mutiple columns of a file.
- * 
+ *
  * ```php
  * return (new \luya\admin\file\Query())->where(['in', 'id', [1, 3]])->all();
  * ```
@@ -209,7 +209,7 @@ trait QueryTrait
      * ```
      *
      * Available Operators:
-     * 
+     *
      * + **<** expression where field is smaller then value.
      * + **>** expression where field is bigger then value.
      * + **=** expression where field is equal value.

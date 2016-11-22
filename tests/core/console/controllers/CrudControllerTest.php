@@ -213,11 +213,11 @@ EOT;
             'TestModel',
             'api-endpoint-name',
             Yii::$app->db->getTableSchema('admin_user', true),
-        	true
+            true
         );
         $this->assertSame($model, $c);
         
-		$sum = <<<'EOT'
+        $sum = <<<'EOT'
 public $apis = [
     'api-endpoit-name' => '\path\to\api\Model',
 ];
@@ -231,7 +231,6 @@ public function getMenu()
 }
 EOT;
         $this->assertSame($sum, $ctrl->generateBuildSummery('api-endpoit-name', '\\path\\to\\api\\Model', 'AdminUser', 'module/admin-user/index'));
-        
     }
     
     public function testModelWithoutI18n()
