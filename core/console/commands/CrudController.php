@@ -77,9 +77,9 @@ class CrudController extends BaseCrudController
      *
      * @return string The full namepsace with model name itself.
      */
-    public function getModelNamespace()
+    public function getAbsoluteModelNamespace()
     {
-        return $this->getNamespace() . '\\models\\' . $this->getModelNameCamlized();
+        return $this->getModelNamespace() . '\\models\\' . $this->getModelNameCamlized();
     }
     
     /**
@@ -135,8 +135,30 @@ class CrudController extends BaseCrudController
      */
     public function getBasePath()
     {
-        return $this->getModule()->basePath;
+    	return $this->getModule()->basePath;
     }
+    
+    private $_modelBasePath = null;
+    
+    /**
+     * Get the base path of the module.
+     *
+     * @return string The module basepath.
+     */
+    public function getModelBasePath()
+    {
+    	if ($this->_modelBasePath === null) {
+    		return $this->getModule()->basePath;
+    	}
+    
+    	return $this->_modelBasePath;
+    }
+    
+    public function setModelBasePath($path)
+    {
+    	$this->_modelBasePath = $path;
+    }
+    
     
     /**
      * Get the namepsace of the module.
@@ -147,7 +169,23 @@ class CrudController extends BaseCrudController
      */
     public function getNamespace()
     {
-        return $this->getModule()->getNamespace();
+    	return $this->getModule()->getNamespace();
+    }
+    
+    private $_modelNamespace = null;
+    
+    public function getModelNamespace()
+    {
+    	if ($this->_modelNamespace === null) {
+    		return $this->getModule()->getNamespace();
+    	}
+    	 
+    	return $this->_modelNamespace;
+    }
+    
+    public function setModelNamespace($ns)
+    {
+    	$this->_modelNamespace = $ns;
     }
     
     /**
@@ -158,6 +196,22 @@ class CrudController extends BaseCrudController
     public function getSummaryControllerRoute()
     {
         return strtolower($this->moduleName).'/'.Inflector::camel2id($this->getModelNameCamlized()).'/index';
+    }
+    
+    public function ensureBasePathAndNamespace()
+    {
+    	$nsItems = explode('\\', $this->getNamespace());
+    	// if there are more namespace paths then one, it means there is space for a sub folder models
+    	if (count($nsItems) > 1) {
+    		$items = explode(DIRECTORY_SEPARATOR, $this->getBasePath());
+    		$last = array_pop($items);
+    		// as now we assume we change directory to a subfolder, the removed folder name must be "admin".
+    		if ($last == 'admin') {
+    			array_pop($nsItems);
+    			$this->modelNamespace = implode('\\', $nsItems);
+    			$this->modelBasePath = implode(DIRECTORY_SEPARATOR, $items);
+    		}
+    	}
     }
     
     /**
@@ -337,6 +391,8 @@ class CrudController extends BaseCrudController
             $this->enableI18n = $this->confirm("Would you like to enable i18n field input for text fields? Only required for multilingual pages.");
         }
 
+        $this->ensureBasePathAndNamespace();
+        
         $files = [];
         
         // api content
@@ -344,7 +400,7 @@ class CrudController extends BaseCrudController
         $files['api'] = [
             'path' => $this->getBasePath() . DIRECTORY_SEPARATOR . 'apis',
             'fileName' => $this->getModelNameCamlized() . 'Controller.php',
-            'content' => $this->generateApiContent($this->getNamespace() . '\\apis', $this->getModelNameCamlized() . 'Controller', $this->getModelNamespace()),
+            'content' => $this->generateApiContent($this->getNamespace() . '\\apis', $this->getModelNameCamlized() . 'Controller', $this->getAbsoluteModelNamespace()),
         ];
         
         // controller
@@ -352,16 +408,16 @@ class CrudController extends BaseCrudController
         $files['controller'] = [
             'path' =>  $this->getBasePath() . DIRECTORY_SEPARATOR . 'controllers',
             'fileName' => $this->getModelNameCamlized() . 'Controller.php',
-            'content' => $this->generateControllerContent($this->getNamespace() . '\\controllers', $this->getModelNameCamlized() . 'Controller', $this->getModelNamespace()),
+            'content' => $this->generateControllerContent($this->getNamespace() . '\\controllers', $this->getModelNameCamlized() . 'Controller', $this->getAbsoluteModelNamespace()),
         ];
         
         // model
 
         $files['model'] = [
-            'path' =>  $this->getBasePath() . DIRECTORY_SEPARATOR . 'models',
+            'path' =>  $this->getModelBasePath() . DIRECTORY_SEPARATOR . 'models',
             'fileName' => $this->getModelNameCamlized() . '.php',
             'content' => $this->generateModelContent(
-                $this->getNamespace() . '\\models',
+                $this->getModelNamespace() . '\\models',
                 $this->getModelNameCamlized(),
                 $this->apiEndpoint,
                 $this->getDbTableShema(),

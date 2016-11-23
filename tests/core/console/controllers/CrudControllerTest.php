@@ -8,7 +8,21 @@ use luya\console\commands\CrudController;
 
 class CrudControllerTest extends LuyaConsoleTestCase
 {
-    public function testAssertsion()
+	public function testFindModelFolderIsModelFolderAvailable()
+	{
+		$ctrl = new CrudController('id', Yii::$app);
+	
+		$testShema = Yii::$app->db->getTableSchema('admin_user', true);
+		$ctrl->moduleName = 'crudmodulefolderadmin';
+		
+		
+		$ctrl->ensureBasePathAndNamespace();
+		
+		$this->assertNotEquals($ctrl->basePath, $ctrl->modelBasePath);
+		$this->assertNotEquals($ctrl->namespace, $ctrl->modelNamespace);
+	}
+	
+	public function testAssertsion()
     {
         $ctrl = new CrudController('id', Yii::$app);
         

@@ -38,6 +38,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1060](https://github.com/luyadev/luya/issues/1060) Filemanager Drag&Drop and Copy&Paste of files enabled (Chrome, Firefox and HTML5 Browsers only).
 - [#1063](https://github.com/luyadev/luya/issues/1063) Cleanup the block interface in order to make concret block implementations.
 - [#1059](https://github.com/luyadev/luya/issues/1059) Block Generator also generates the view file of the PHPBlock in the depending view folder.
+- [#1000](https://github.com/luyadev/luya/issues/1000) The CRUD generator will store the model in the shared models folder if available.
 - [#999](https://github.com/luyadev/luya/issues/999) Rewritten the CRUD generator and added ability to disable i18n fiel generation.
 - [#991](https://github.com/luyadev/luya/issues/991) User settings stores CRUD orderBy state in database for each ngrest crud setup.
 - [#919](https://github.com/luyadev/luya/issues/919) Added new option for image, imageArray, file and fileArray ngrest plugins in order to return an iterator or item object instead of database values.
