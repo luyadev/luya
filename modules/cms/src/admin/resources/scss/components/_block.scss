@@ -12,6 +12,11 @@
 	border-bottom: 0 solid transparent;
 	border-right: 0 solid transparent;
 	min-height: 50px;
+	border:1px solid #fbfbfb;
+
+ 	&:hover:not(.block--is-container) {
+ 		border:1px solid #9E9E9E;	
+ 	}
 
 	&:hover > .block__toolbar,
 	&.block--edit .block__toolbar,
