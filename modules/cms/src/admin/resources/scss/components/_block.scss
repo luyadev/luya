@@ -14,7 +14,7 @@
 	min-height: 50px;
 	border:1px solid #fbfbfb;
 
- 	&:hover:not(.block--is-container) {
+ 	&:hover:not(.block--is-container):not(.block--edit) {
  		border:1px solid #9E9E9E;	
  	}
 
