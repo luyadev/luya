@@ -27,5 +27,5 @@ Please check the full [Changelog](https://github.com/luyadev/luya/blob/master/CH
 If you have any problems or questions regarding the upgrade process, don't hesitate to contact us on [Gitter](gitter.im/luyadev/luya) or to create an [Issue on GitHub](https://github.com/luyadev/luya/issues).
 
 X Novemeber 2016  
-LUYA developer team
+LUYA developer team 
 [luya.io](https://luya.io)
