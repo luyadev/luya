@@ -18,7 +18,7 @@ The final release is around the edge! But for now, the release candidate 2 has i
 
 Those are just a few things we have done in this release. We have also strongly improved all phpdocs as well the luya.io website.
 
-**We are looking for people how like to translate the administration area in other languages, just drop us a message on [Twitter](https://twitter.com/luyadev), [Gitter](gitter.im/luyadev/luya) or create an [issue on github]((https://github.com/luyadev/luya/issues)!**
+**We are looking for people how like to translate the administration area in other languages, just drop us a message on [Twitter](https://twitter.com/luyadev), [Gitter](gitter.im/luyadev/luya) or create an [issue on github](https://github.com/luyadev/luya/issues)!**
 
 > Attention: If you want to upgrade to the second release candidate, there are a few breaking changes you have to take care of. With these changes done, we now have a stable and reliable foundation for the upcoming final release.
 
