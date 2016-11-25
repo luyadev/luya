@@ -1,4 +1,4 @@
-The last release candiate before the final release.
+The final release is around the edge! But for now, the release candidate 2 has improved a few things and fixed a lot of bugs.
 
 + The language of the administration can now be stored for each user individual.
 + New admin language FRENCH is available, spanish is also almost done. Now Available: German, English, Russian, French and Spanish.
@@ -18,11 +18,11 @@ The last release candiate before the final release.
 
 Those are just a few things we have done in this release. We have also strongly improved all phpdocs as well the luya.io website.
 
-**We are looking for people how like to translate the administration area in other languages, just drop us a message on twitter, gitter or create an issue on github!**
+**We are looking for people how like to translate the administration area in other languages, just drop us a message on [Twitter](https://twitter.com/luyadev), [Gitter](gitter.im/luyadev/luya) or create an [issue on github]((https://github.com/luyadev/luya/issues)!**
 
-> Attention: If you want to upgrade to the first release candidate, there are a few breaking changes you have to take care of. With these changes done, we now have a stable and reliable foundation for the upcoming release candidates and the final release.
+> Attention: If you want to upgrade to the second release candidate, there are a few breaking changes you have to take care of. With these changes done, we now have a stable and reliable foundation for the upcoming final release.
 
-Please check the full [Changelog](https://github.com/luyadev/luya/blob/master/CHANGELOG.md) and the [Upgrading](https://luya.io/guide/install-upgrade) Guide.
+Please check the full [Changelog](https://github.com/luyadev/luya/blob/master/CHANGELOG.md) and the [Upgrading](https://luya.io/guide/install-upgrade) Guide where you can see all breaking changes.
 
 If you have any problems or questions regarding the upgrade process, don't hesitate to contact us on [Gitter](gitter.im/luyadev/luya) or to create an [Issue on GitHub](https://github.com/luyadev/luya/issues).
 
