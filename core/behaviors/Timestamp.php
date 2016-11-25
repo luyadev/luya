@@ -8,9 +8,17 @@ use yii\db\ActiveRecord;
 /**
  * Timestamp Behavior.
  *
- * Very basic behavior implementation of unix time() set for defined insert and/or update fields.
+ * Set the unix timestamp for given update and/or insert fields.
  *
- * @author nadar
+ * ```php
+ * 'timestamp' => [
+ *     'class' => \luya\behaviors\Timestamp::class,
+ *     'insert' => ['last_update'],
+ *     'update' => ['last_update'],
+ * ]
+ * ```
+ *
+ * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta5
  */
 class Timestamp extends Behavior
