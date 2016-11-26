@@ -18,6 +18,7 @@ namespace luya\cms\frontend\components;
  * \admin\helpers\I18n::findCurrent(Yii::$app->page->getProperty('foobar'));
  * ```
  *
+ * @deprecated 1.0.0-RC2 Marked as deprecated and will be removed on 1.0.0 release.
  * @author Basil Suter <basil@nadar.io>
  */
 class Page extends \yii\base\Component
@@ -63,6 +64,7 @@ class Page extends \yii\base\Component
      * @param string $defaultValue The default value who should be returned when the property could not be found, default is `false`.
      * @param string $invokeMethod The method which should be invoked/called when the property exists, default is `getValue`.
      * @return mixed Returns the value from the `$defaultValue` if not found, otherwhise the return value from the invoken property method.
+     * @deprecated 1.0.0-RC2 Marked as deprecated and will be removed on 1.0.0 release.
      */
     public function getProperty($name, $defaultValue = false, $invokeMethod = 'getValue')
     {
@@ -75,11 +77,22 @@ class Page extends \yii\base\Component
         return $defaultValue;
     }
     
+    /**
+     * 
+     * @param unknown $name
+     * @return mixed
+     * @deprecated 1.0.0-RC2 Marked as deprecated and will be removed on 1.0.0 release.
+     */
     public function getPropertyObject($name)
     {
         return $this->getPropertyInstanceObject($name);
     }
     
+    /**
+     * 
+     * @return unknown
+     * @deprecated 1.0.0-RC2 Marked as deprecated and will be removed on 1.0.0 release.
+     */
     public function getProperties()
     {
         if ($this->_properties === null) {

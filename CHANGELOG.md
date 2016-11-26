@@ -15,6 +15,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 - [#1067](https://github.com/luyadev/luya/issues/1067) **[BC BREAK]** Admin Module Menu: itemApi() routes are now separeted by slashes instead of dashes. As this supports native Yii handling. 
 - [#1045](https://github.com/luyadev/luya/issues/1045) **[BC BREAK]** Admin modules `getMenu()` method must return an `luya\admin\components\AdminMenuBuilder` object instead of an array. A deprecated message is triggered when using the old menu builder functions.
 - [#1075](https://github.com/luyadev/luya/issues/1075) **[BC BREAK]** Frontend and Admin Controller and Module assets can not be stored in the `$assets` property of a module or controller any more.
+- [#1086](https://github.com/luyadev/luya/issues/1086) Mark $page component as deprecated as properties can be accessed trough the menu component.
 - [#1066](https://github.com/luyadev/luya/issues/1066) NgRestModel methods renamed: `ngrestExtraAttributeTypes` to `ngRestExtraAttributeTypes` and `ngrestAttributeTypes` to `ngRestAttributeTypes`.
 - [#1043](https://github.com/luyadev/luya/issues/1043) Upgrade to 2.0.10 version of the Yii Framework.
 
