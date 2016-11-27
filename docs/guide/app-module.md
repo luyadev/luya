@@ -2,10 +2,10 @@
 
 A very important behvaior in *LUYA* projects are **modules**. You can always use modules to put your own custom and reusable logic inside. For instance you can put database logic inside of the via ActiveRecord models. A module can also provided informations for other module, for example [CMS Blocks](app-blocks.md). There are two different types of Modules:
 
-+ [Admin](app-admin-module.md) - Contains Models, Migrations Administration, [NgRest Crud](app-admin-module-ngrest).
++ [Admin](app-admin-module.md) - Contains Models, Migrations Administration, [NgRest Crud](ngrest-concept.md).
 + [Frontend](app-module-frontend.md) - Contains controllers and views, logic for frontend implementations.
 
-> In order to create your custom modules you can run the [Console Command](app-console.md) `module/create` wizzard.
+> In order to create your custom modules you can run the [Console Command](luya-console.md) `module/create` wizzard.
 
 Structure of Modules
 
@@ -64,7 +64,7 @@ The *Admin* Module `modules/teamadmin/Module.php`:
 <?php
 namespace app\modules\teamadmin;
 
-class Module extends \admin\base\Module
+class Module extends \luya\admin\base\Module
 {
 
 }

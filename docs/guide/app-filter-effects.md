@@ -2,7 +2,7 @@
 
 The name effect is maybe a little bit confusing, as `crop` or `thumbnail` does not sound like a effect at all, but there are other things which are effects. Actually an effect is an array item in the `chain()` method of a [Filter](app-filters.md).
 
-Each chain effect can have several arguments which changes the behavior of the effect. Since we have integrated the (Yii2 Imagine Extension)[https://github.com/yiisoft/yii2-imagine] the arguments to passed are equals to the supported methods in the extension and the thumbnail behavior has been strongly improved in order to calculate images based on values without doing the math on your own.
+Each chain effect can have several arguments which changes the behavior of the effect. Since we have integrated the [Yii 2 Imagine Extension](https://github.com/yiisoft/yii2-imagine) the arguments to passed are equals to the supported methods in the extension and the thumbnail behavior has been strongly improved in order to calculate images based on values without doing the math on your own.
 
 ## Available Effects
 
@@ -10,9 +10,6 @@ Each chain effect can have several arguments which changes the behavior of the e
 |---        |---
 |thumbnail  |Create a thumbnail based on the height/width or calulate missing heigt/widths. You can also directly crop images with the thumbnail effect.
 |crop       |Crop an image to defined size on the given point/location of the image
-|watermwark |@TBD
-|frame      |@TBD
-|text       |@TBD
 
 ### Thumbnail
 
@@ -92,15 +89,3 @@ Crop the image to 500x500 pixel but start on 10,10 cordinates.
     'saveOptions' => ['quality' => 80]]
 ]
 ```
-
-### Watermark
-
-@TBD
-
-### Frame
-
-@TBD
-
-### Text
-
-@TBD

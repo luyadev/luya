@@ -1,19 +1,19 @@
 # Image Filters
 
-With *Filters* you can modify, crop, resize use effects on any image provided from the storage component. To add a filter just create a filter class within the `filters` directory of your project or module and run the import command to add the filter into the system. When you change the effect chain of your filter you have to run the import command again in ordner to update all the images which are using your filter.
+With *Filters* you can modify, crop, resize or use effects on any image provided from the storage component. To add a filter just create a filter class within the `filters` directory of your project or module and run the import command to add the filter into the system. When you change the effect chain of your filter you have to run the import command again in ordner to update all the images which are using your filter.
 
 The basic concept behind filter classes, is to track filters in VCS system, so you can add a filter and push it into git, and your project members does have the same environement as you.
 
 ## Create a new filter
 
-To create a filter add a new file with the suffix `Filter` in your luya project root folder or module folder `filters` and run the import command.
+To create a filer file extended from the {{\luya\admin\base\Filter}} add a new file with the suffix `Filter` in your LUYA project root folder or module folder `filters` and run the import command.
 
 ```php
 <?php
 
 namespace app\filters;
 
-class MyFilter extends \admin\base\Filter
+class MyFilter extends \luya\admin\base\Filter
 {    
     public static function identifier()
     {
@@ -37,7 +37,7 @@ class MyFilter extends \admin\base\Filter
 }
 ```
 
-You can chain several effects (behaviors) in the `chain()` method, by adding them as an array. So if you like to make a thumbnail and crop it afterwards your chain could look like this:
+You can also chain several effects (behaviors) in the `chain()` method, by adding them as an array. So if you like to make a thumbnail and crop it afterwards your chain could look like this:
 
 ```php
 public function chain()
@@ -46,6 +46,7 @@ public function chain()
         [self::EFFECT_THUMBNAIL, [
             'width' => 600,
             'height' => null,
+            'type' => \Imagine\Image\ManipulatorInterface::THUMBNAIL_INSET,
         ]],
         [self::EFFECT_CROP, [
             'width' => 400,
@@ -55,12 +56,11 @@ public function chain()
 }
 ```
 
-[Read more about effects in the chain](app-filter-effects.md)
+In order to read more about the differnt fileters and chain visit the [[app-filter-effects.md]] section.
 
-As you  can see the effect thumbnail usees the INSET Type, this is as the filter image manipulation system is based on [Imagine Libraray](http://imagine.readthedocs.org).
+As you can see the effect thumbnail use the Imagine\Image\ManipulatorInterface::THUMBNAIL_INSET mode, this is as the filter image manipulation system is based on the [Imagine Library](https://github.com/avalanche123/Imagine).
 
-Using Filters
--------------
+## Using the Filters
 
 You can apply filters directly inside the view scripts to an image. In our examples we have static image number *139* which would be id in the admin_storage_table and we use the above created filter identifier *my-filter*.
 
