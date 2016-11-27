@@ -1,6 +1,6 @@
 # CMS Page Properties
 
-Page properties are personalised styles you want to apply to specific pages. 
+Page properties are personalised settings you can apply to specific pages. 
 
 For example, if you want to use different colors on different pages, you can create a color property where the user can select a specific color for each page. Once the property is set you can use them in your view files for [Blocks](app-blocks.md) or [Layouts](app-cmslayouts.md) components.
 
@@ -136,10 +136,10 @@ public function init()
 
 public function beforeRender($event)
 {
-	if ($this->thisMethodReturnsFalseWhyEver()) {
-		Yii::$app->response->redirect('https://luya.io');
-    		$event->isValid = false;
-	}
+    if ($this->thisMethodReturnsFalseWhyEver()) {
+        Yii::$app->response->redirect('https://luya.io');
+        $event->isValid = false;
+    }
 }
 ```
 
