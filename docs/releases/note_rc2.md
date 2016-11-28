@@ -1,11 +1,11 @@
 The final release of LUYA is around the corner! But for now, release candidate 2 has improved several things and fixed many bugs.
 
-+ The administration now speaks French, too! It is now available in the following languages: German, English, Russian, French and Spanish (which is still missing some translations).
++ The administration now speaks French, too! It is available in the following languages: German, English, Russian, French and Spanish (which is still missing some translations).
 + The language of the administration can now be stored for each user individually.
 + Relational data can now be opened in new tabs in the NgRest CRUD view.
 + In the CMS there is a new page setting "SEO Title" allowing to define a custom title tag for the current page for SEO optimisations.
-+ The administration module is faster due to asset file removements.
-+ It is now possible to replace files in the filemanager without the file path changing (so that links to the files keep working).
++ The administration module is faster due to asset files removed.
++ It is now possible to replace a file in the filemanager without its URL changing (so that links to the file keep working).
 + Files can now be dragged & dropped as well as copied & pasted to the filemenager. (Keep in mind that images and files pasted from the clipboard will receive a generic name).
 + Scaffolding became much more powerful when creating blocks, modules and executing CRUD commands. Try it out!
 + The CRUD view remembers the sorting of lists and the application of filters by storing them in the user settings.
@@ -16,7 +16,7 @@ The final release of LUYA is around the corner! But for now, release candidate 2
 + The ngrest plugins for image, imageArray, file and fileArray have now an option in order to directly return the file/image or iterator object.
 + Blocks and other forms can now be submitted with the "Enter" key.
 
-These are just a few of the changes with this release. We have also put a lot of work into the documentation as well the luya.io website.
+These are just a few of the changes with this release. We also put a lot of work into the documentation as well the luya.io website.
 
 **We are looking for people who like to translate the administration area to other languages – please drop us a message on [Twitter](https://twitter.com/luyadev), [Gitter](gitter.im/luyadev/luya) or create an [issue on github](https://github.com/luyadev/luya/issues)!**
 
