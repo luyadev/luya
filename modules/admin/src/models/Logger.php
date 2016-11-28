@@ -10,6 +10,48 @@ use luya\admin\aws\InfoActiveWindow;
 
 /**
  * Logger to store information when working in controllers and actions.
+ * 
+ * Sometimes its usefull to trace data from an action or controller in order to find out what happens an critical areas runing trough the system.
+ * 
+ * An example of how to use the logger inside an order action:
+ * 
+ * ```php
+ * public function actionPaymentOrder($id)
+ * {
+ *     Logger::info('loading the payment model: ' . $id);
+ *     
+ *     $model = MyModel::findOne($id);
+ *     
+ *     if (!$model) {
+ *         Logger::error('Unable to find the model id: ' . $id);
+ *         throw new \Exception("abort");
+ *     }
+ *     
+ *     if ($model->amount < 0) {
+ *         Logger::warning('Maybe something is wrong with model is amount is less then 0');
+ *     }
+ *     
+ *     if ($model->save()) {
+ *         Logger::success("The model has been saved and validatet successfull");
+ *     }
+ * }
+ * ```
+ * 
+ * If there are multiple log informations on the same site and you like to seperate them use the group attribute.
+ * 
+ * ```
+ * public function actionLogin()
+ * {
+ *     Yii::$app->user->login();
+ *     Logger('User is logging in', 'user');
+ *     
+ *     Yii::$app->user->addToBasket('Product 1');
+ *     Logger('Add Product to users Cart', 'basket');
+ *     
+ *     Logger('Redirect the user to basket', 'user');
+ *     Yii::$app->user->redirect();
+ * }
+ * ```
  *
  * @property integer $id
  * @property integer $time
@@ -28,12 +70,24 @@ use luya\admin\aws\InfoActiveWindow;
  */
 class Logger extends NgRestModel
 {
+    /**
+     * @var integer Type level info.
+     */
     const TYPE_INFO = 1;
     
+    /**
+     * @var integer Type level warning.
+     */
     const TYPE_WARNING = 2;
     
+    /**
+     * @var integer Type level error.
+     */
     const TYPE_ERROR = 3;
     
+    /**
+     * @var integer Type level success.
+     */
     const TYPE_SUCCESS = 4;
     
     /**
@@ -71,11 +125,16 @@ class Logger extends NgRestModel
     public function ngRestExtraAttributeTypes()
     {
         return [
-            'typeDescription' => 'html',
+            'typeBadge' => 'html',
         ];
     }
     
-    public function getTypeDescription()
+    /**
+     * Get the html badge for a status type in order to display inside the admin module.
+     * 
+     * @return string Type value evaluated as a badge.
+     */
+    public function getTypeBadge()
     {
         switch ($this->type) {
             case self::TYPE_INFO:
@@ -99,7 +158,7 @@ class Logger extends NgRestModel
      */
     public function extraFields()
     {
-        return ['typeDescription'];
+        return ['typeBadge'];
     }
     
     /**
@@ -108,8 +167,7 @@ class Logger extends NgRestModel
     public function ngRestConfig($config)
     {
         $config->aw->load(['class' => InfoActiveWindow::className()]);
-        $this->ngRestConfigDefine($config, ['list'], ['message', 'typeDescription', 'time', 'group_identifier', 'group_identifier_index']);
-        
+        $this->ngRestConfigDefine($config, ['list'], ['message', 'typeBadge', 'time', 'group_identifier', 'group_identifier_index']);
         $config->delete = true;
     }
     
@@ -130,7 +188,7 @@ class Logger extends NgRestModel
 
     private static $requestIdentifier = null;
 
-    protected static function getRequestIdentifier()
+    private static function getRequestIdentifier()
     {
         if (self::$requestIdentifier === null) {
             self::$requestIdentifier = uniqid('logger', true);
@@ -224,21 +282,49 @@ class Logger extends NgRestModel
         ];
     }
     
+    /**
+     * Log a success message.
+     * 
+     * @param string $message The message to log for this current request event.
+     * @param string $groupIdentifier If multiple logger events are in the same action and you want to seperate them, define an additional group identifier.
+     * @return boolean
+     */
     public static function success($message, $groupIdentifier = null)
     {
         return static::log(self::TYPE_SUCCESS, $message, debug_backtrace(false, 2), $groupIdentifier);
     }
 
+    /**
+     * Log an error message.
+     * 
+     * @param string $message The message to log for this current request event.
+     * @param string $groupIdentifier If multiple logger events are in the same action and you want to seperate them, define an additional group identifier.
+     * @return boolean
+     */
     public static function error($message, $groupIdentifier = null)
     {
         return static::log(self::TYPE_ERROR, $message, debug_backtrace(false, 2), $groupIdentifier);
     }
     
+    /**
+     * Log an info message.
+     * 
+     * @param string $message The message to log for this current request event.
+     * @param string $groupIdentifier If multiple logger events are in the same action and you want to seperate them, define an additional group identifier.
+     * @return boolean
+     */
     public static function info($message, $groupIdentifier = null)
     {
         return static::log(self::TYPE_INFO, $message, debug_backtrace(false, 2), $groupIdentifier);
     }
     
+    /**
+     * Log a warning message.
+     * 
+     * @param string $message The message to log for this current request event.
+     * @param string $groupIdentifier If multiple logger events are in the same action and you want to seperate them, define an additional group identifier.
+     * @return boolean
+     */
     public static function warning($message, $groupIdentifier = null)
     {
         return static::log(self::TYPE_WARNING, $message, debug_backtrace(false, 2), $groupIdentifier);
