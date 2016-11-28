@@ -279,7 +279,7 @@ class Mail extends \yii\base\Component
      * ```
      *
      * @return \luya\components\Mail
-     * @since 1.0.0-beta4
+     * @since 1.0.0-RC2
      * @param array $emails An array with email addresses or name => email paring to use names.
      */
     public function ccAddresses(array $emails)
@@ -325,7 +325,7 @@ class Mail extends \yii\base\Component
      * ```
      *
      * @return \luya\components\Mail
-     * @since 1.0.0-beta4
+     * @since 1.0.0-RC2
      * @param array $emails An array with email addresses or name => email paring to use names.
      */
     public function bccAddresses(array $emails)
