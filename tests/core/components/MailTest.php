@@ -52,6 +52,34 @@ class MailTest extends \luyatests\LuyaWebTestCase
         $this->assertSame('arraywithname@example.com', $mailerTo[3][0]);
         $this->assertSame('Jane Doe', $mailerTo[3][1]);
     }
+
+    public function testCcAddresses()
+    {
+        $mail = new Mail();
+        $mail->ccAddresses(['foo@bar.com', 'John Doe' => 'john.doe@notamail.com']);
+
+        $mailerBcc = $mail->mailer->getCcAddresses();
+
+        $this->assertSame('foo@bar.com', $mailerBcc[0][0]);
+        $this->assertSame('foo@bar.com', $mailerBcc[0][1]);
+
+        $this->assertSame('john.doe@notamail.com', $mailerBcc[1][0]);
+        $this->assertSame('John Doe', $mailerBcc[1][1]);
+    }
+
+    public function testBccAddresses()
+    {
+        $mail = new Mail();
+        $mail->bccAddresses(['foo@bar.com', 'John Doe' => 'john.doe@notamail.com']);
+
+        $mailerBcc = $mail->mailer->getBccAddresses();
+
+        $this->assertSame('foo@bar.com', $mailerBcc[0][0]);
+        $this->assertSame('foo@bar.com', $mailerBcc[0][1]);
+
+        $this->assertSame('john.doe@notamail.com', $mailerBcc[1][0]);
+        $this->assertSame('John Doe', $mailerBcc[1][1]);
+    }
     
     public function testLayoutWrapper()
     {

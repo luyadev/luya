@@ -1,6 +1,6 @@
 # LUYA Mail Component
 
-LUYA is shipped with a `mail` component who is using the PHPMailer. You can access the mail component with `Yii::$app->mail` and start sending mails. To configure the component u can override class properties in your config like this:
+LUYA is shipped with a {{luya\components\Mail}} component who is using the PHPMailer. You can access the mail component with `Yii::$app->mail` and start sending mails. To configure the component u can override class properties in your config like this:
 
 ```php
 'components' => [
@@ -52,6 +52,13 @@ You can also use the method `adresses` with an array of all E-Mail adresse you w
 
 ```php
 Yii::$app->mail->compose('Subject', '<p>Html</p>')->adresses(['john@doe.com', 'Jane Doe' => 'jane@doe.com'])->send();
+```
+
+In order to add cc or bcc recipients you can use similar functions to {{\luya\components\Mail::addresses}}.
+
+```php
+bccAddresses(['john@doe.com', 'Jane Doe' => 'jane@doe.com'])
+ccAddresses(['john@doe.com', 'Jane Doe' => 'jane@doe.com'])
 ```
 
 The response value of `$mail` (actually its the response of the method `send()`) is a boolean value. If something happens wrong during the send process, you can access the error inside the component like following:

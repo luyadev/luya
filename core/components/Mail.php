@@ -206,9 +206,9 @@ class Mail extends \yii\base\Component
     }
     
     /**
-     * Add multiple adresses into the mailer object.
+     * Add multiple addresses into the mailer object.
      *
-     * If no key is used, the name is going to be ignore, if a string key is availabe it represents the name.
+     * If no key is used, the name is going to be ignored, if a string key is available it represents the name.
      *
      * ```php
      * adresses(['foo@example.com', 'bar@example.com']);
@@ -250,15 +250,107 @@ class Mail extends \yii\base\Component
     }
     
     /**
-     * Add a single addresse with optional name
+     * Add a single address with optional name
      *
-     * @param string $email The email adresse e.g john@example.com
-     * @param string $name The name for the adresse e.g John Doe
+     * @param string $email The email address e.g. john@example.com
+     * @param string $name The name for the address e.g. John Doe
      * @return \luya\components\Mail
      */
     public function address($email, $name = null)
     {
         $this->getMailer()->addAddress($email, (empty($name)) ? $email : $name);
+
+        return $this;
+    }
+
+    /**
+     * Add multiple CC addresses into the mailer object.
+     *
+     * If no key is used, the name is going to be ignored, if a string key is available it represents the name.
+     *
+     * ```php
+     * ccAddresses(['foo@example.com', 'bar@example.com']);
+     * ```
+     *
+     * or with names
+     *
+     * ```php
+     * ccAddresses(['John Doe' => 'john.doe@example.com', 'Jane Doe' => 'jane.doe@example.com']);
+     * ```
+     *
+     * @return \luya\components\Mail
+     * @since 1.0.0-RC2
+     * @param array $emails An array with email addresses or name => email paring to use names.
+     */
+    public function ccAddresses(array $emails)
+    {
+        foreach ($emails as $name => $mail) {
+            if (is_int($name)) {
+                $this->ccAddress($mail);
+            } else {
+                $this->ccAddress($mail, $name);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add a single CC address with optional name
+     *
+     * @param string $email The email address e.g. john@example.com
+     * @param string $name The name for the address e.g. John Doe
+     * @return \luya\components\Mail
+     */
+    public function ccAddress($email, $name = null)
+    {
+        $this->getMailer()->addCC($email, (empty($name)) ? $email : $name);
+
+        return $this;
+    }
+
+    /**
+     * Add multiple BCC addresses into the mailer object.
+     *
+     * If no key is used, the name is going to be ignored, if a string key is available it represents the name.
+     *
+     * ```php
+     * bccAddresses(['foo@example.com', 'bar@example.com']);
+     * ```
+     *
+     * or with names
+     *
+     * ```php
+     * bccAddresses(['John Doe' => 'john.doe@example.com', 'Jane Doe' => 'jane.doe@example.com']);
+     * ```
+     *
+     * @return \luya\components\Mail
+     * @since 1.0.0-RC2
+     * @param array $emails An array with email addresses or name => email paring to use names.
+     */
+    public function bccAddresses(array $emails)
+    {
+        foreach ($emails as $name => $mail) {
+            if (is_int($name)) {
+                $this->bccAddress($mail);
+            } else {
+                $this->bccAddress($mail, $name);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add a single BCC address with optional name
+     *
+     * @param string $email The email address e.g. john@example.com
+     * @param string $name The name for the address e.g. John Doe
+     * @return \luya\components\Mail
+     */
+    public function bccAddress($email, $name = null)
+    {
+        $this->getMailer()->addBCC($email, (empty($name)) ? $email : $name);
 
         return $this;
     }
