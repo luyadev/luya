@@ -173,27 +173,27 @@
 <script type="text/ng-template" id="createformredirect.html">
     <div class="row">
         <div class="input input--radios col s12">
-            <label class="input__label"><?php echo \luya\cms\admin\Module::t('view_index_redirect_type'); ?></label>
+            <label class="input__label"><?php echo \luya\admin\Module::t('view_index_redirect_type'); ?></label>
             <div class="input__field-wrapper">
-                <input type="radio" ng-model="data.redirect_type" value="1"><label ng-click="data.redirect_type = 1"><?php echo \luya\cms\admin\Module::t('view_index_redirect_internal'); ?></label> <br />
-                <input type="radio" ng-model="data.redirect_type" value="2"><label ng-click="data.redirect_type = 2"><?php echo \luya\cms\admin\Module::t('view_index_redirect_external'); ?></label>
+                <input type="radio" ng-model="data.redirect_type" value="1"><label ng-click="data.redirect_type = 1"><?php echo \luya\admin\Module::t('view_index_redirect_internal'); ?></label> <br />
+                <input type="radio" ng-model="data.redirect_type" value="2"><label ng-click="data.redirect_type = 2"><?php echo \luya\admin\Module::t('view_index_redirect_external'); ?></label>
             </div>
         </div>
     </div>
 
     <div class="row">
         <div class="col s12" ng-show="data.redirect_type==1">
-            <p><?php echo \luya\cms\admin\Module::t('view_index_redirect_internal_select'); ?></p>
+            <p><?php echo \luya\admin\Module::t('view_index_redirect_internal_select'); ?></p>
             <menu-dropdown class="menu-dropdown" nav-id="data.redirect_type_value" />
         </div>
 
         <div class="col s12" ng-show="data.redirect_type==2">
 
             <div class="input input--text col s12">
-                <label class="input__label"><?php echo \luya\cms\admin\Module::t('view_index_redirect_external_link'); ?></label>
+                <label class="input__label"><?php echo \luya\admin\Module::t('view_index_redirect_external_link'); ?></label>
                 <div class="input__field-wrapper">
                     <input name="text" type="text" class="input__field" ng-model="data.redirect_type_value" placeholder="http://" />
-                    <small><?php echo \luya\cms\admin\Module::t('view_index_redirect_external_link_help'); ?></small>
+                    <small><?php echo \luya\admin\Module::t('view_index_redirect_external_link_help'); ?></small>
                 </div>
             </div>
         </div>
