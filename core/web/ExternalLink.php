@@ -33,7 +33,7 @@ class ExternalLink extends Object implements LinkInterface
     
     /**
      * Set the href value for an external link resource.
-     * 
+     *
      * @param string $href The external link href value, the http protcol will be ensured.
      */
     public function setHref($href)

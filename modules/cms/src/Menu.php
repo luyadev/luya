@@ -143,7 +143,7 @@ class Menu extends Component implements ArrayAccess
 
     /**
      * Get the url rules for the current menu item.
-     * 
+     *
      * @return array
      */
     public function getCurrentUrlRule()

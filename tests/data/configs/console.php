@@ -14,7 +14,7 @@ return [
         'consolemodule' => [
             'class' => 'luyatests\data\modules\consolemodule\Module',
         ],
-    	'crudmodulefolderadmin' => 'luyatests\data\modules\crudmodulefolder\admin\Module',
+        'crudmodulefolderadmin' => 'luyatests\data\modules\crudmodulefolder\admin\Module',
     ],
     'components' => [
         'db' => [

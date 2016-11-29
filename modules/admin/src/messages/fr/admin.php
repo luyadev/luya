@@ -181,7 +181,7 @@ return [
     'right_panel_support_support_text' => 'Pour toute question, contacter le Webmaster ou consulter la page <a target="_blank" href="https://luya.io">luya.io</a>.',
     
 // rc2
-    
+
     'ngrest_crud_group_prompt' => 'Groupe par champ',
     'ngrest_crud_filter_prompt' => 'Sélectionner un filtre',
     'ngrest_crud_ajax_search_length' => 'La requête de recherche doit comporter au moins 3 caractères.',

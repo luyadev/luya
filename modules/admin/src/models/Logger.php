@@ -10,44 +10,44 @@ use luya\admin\aws\InfoActiveWindow;
 
 /**
  * Logger to store information when working in controllers and actions.
- * 
+ *
  * Sometimes its usefull to trace data from an action or controller in order to find out what happens an critical areas runing trough the system.
- * 
+ *
  * An example of how to use the logger inside an order action:
- * 
+ *
  * ```php
  * public function actionPaymentOrder($id)
  * {
  *     Logger::info('loading the payment model: ' . $id);
- *     
+ *
  *     $model = MyModel::findOne($id);
- *     
+ *
  *     if (!$model) {
  *         Logger::error('Unable to find the model id: ' . $id);
  *         throw new \Exception("abort");
  *     }
- *     
+ *
  *     if ($model->amount < 0) {
  *         Logger::warning('Maybe something is wrong with model is amount is less then 0');
  *     }
- *     
+ *
  *     if ($model->save()) {
  *         Logger::success("The model has been saved and validatet successfull");
  *     }
  * }
  * ```
- * 
+ *
  * If there are multiple log informations on the same site and you like to seperate them use the group attribute.
- * 
+ *
  * ```
  * public function actionLogin()
  * {
  *     Yii::$app->user->login();
  *     Logger('User is logging in', 'user');
- *     
+ *
  *     Yii::$app->user->addToBasket('Product 1');
  *     Logger('Add Product to users Cart', 'basket');
- *     
+ *
  *     Logger('Redirect the user to basket', 'user');
  *     Yii::$app->user->redirect();
  * }
@@ -131,7 +131,7 @@ class Logger extends NgRestModel
     
     /**
      * Get the html badge for a status type in order to display inside the admin module.
-     * 
+     *
      * @return string Type value evaluated as a badge.
      */
     public function getTypeBadge()
@@ -284,7 +284,7 @@ class Logger extends NgRestModel
     
     /**
      * Log a success message.
-     * 
+     *
      * @param string $message The message to log for this current request event.
      * @param string $groupIdentifier If multiple logger events are in the same action and you want to seperate them, define an additional group identifier.
      * @return boolean
@@ -296,7 +296,7 @@ class Logger extends NgRestModel
 
     /**
      * Log an error message.
-     * 
+     *
      * @param string $message The message to log for this current request event.
      * @param string $groupIdentifier If multiple logger events are in the same action and you want to seperate them, define an additional group identifier.
      * @return boolean
@@ -308,7 +308,7 @@ class Logger extends NgRestModel
     
     /**
      * Log an info message.
-     * 
+     *
      * @param string $message The message to log for this current request event.
      * @param string $groupIdentifier If multiple logger events are in the same action and you want to seperate them, define an additional group identifier.
      * @return boolean
@@ -320,7 +320,7 @@ class Logger extends NgRestModel
     
     /**
      * Log a warning message.
-     * 
+     *
      * @param string $message The message to log for this current request event.
      * @param string $groupIdentifier If multiple logger events are in the same action and you want to seperate them, define an additional group identifier.
      * @return boolean

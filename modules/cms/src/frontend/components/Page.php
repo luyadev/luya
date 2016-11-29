@@ -78,7 +78,7 @@ class Page extends \yii\base\Component
     }
     
     /**
-     * 
+     *
      * @param unknown $name
      * @return mixed
      * @deprecated 1.0.0-RC2 Marked as deprecated and will be removed on 1.0.0 release.
@@ -89,7 +89,7 @@ class Page extends \yii\base\Component
     }
     
     /**
-     * 
+     *
      * @return unknown
      * @deprecated 1.0.0-RC2 Marked as deprecated and will be removed on 1.0.0 release.
      */

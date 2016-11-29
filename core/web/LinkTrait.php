@@ -4,7 +4,7 @@ namespace luya\web;
 
 /**
  * Link resources Trait Integrator.
- * 
+ *
  * Implementation of this trait will allow to echo the object in order to return the href of the link.
  *
  * @author Basil Suter <basil@nadar.io>

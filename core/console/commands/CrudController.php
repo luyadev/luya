@@ -135,7 +135,7 @@ class CrudController extends BaseCrudController
      */
     public function getBasePath()
     {
-    	return $this->getModule()->basePath;
+        return $this->getModule()->basePath;
     }
     
     private $_modelBasePath = null;
@@ -147,16 +147,16 @@ class CrudController extends BaseCrudController
      */
     public function getModelBasePath()
     {
-    	if ($this->_modelBasePath === null) {
-    		return $this->getModule()->basePath;
-    	}
+        if ($this->_modelBasePath === null) {
+            return $this->getModule()->basePath;
+        }
     
-    	return $this->_modelBasePath;
+        return $this->_modelBasePath;
     }
     
     public function setModelBasePath($path)
     {
-    	$this->_modelBasePath = $path;
+        $this->_modelBasePath = $path;
     }
     
     
@@ -169,23 +169,23 @@ class CrudController extends BaseCrudController
      */
     public function getNamespace()
     {
-    	return $this->getModule()->getNamespace();
+        return $this->getModule()->getNamespace();
     }
     
     private $_modelNamespace = null;
     
     public function getModelNamespace()
     {
-    	if ($this->_modelNamespace === null) {
-    		return $this->getModule()->getNamespace();
-    	}
-    	 
-    	return $this->_modelNamespace;
+        if ($this->_modelNamespace === null) {
+            return $this->getModule()->getNamespace();
+        }
+         
+        return $this->_modelNamespace;
     }
     
     public function setModelNamespace($ns)
     {
-    	$this->_modelNamespace = $ns;
+        $this->_modelNamespace = $ns;
     }
     
     /**
@@ -200,18 +200,18 @@ class CrudController extends BaseCrudController
     
     public function ensureBasePathAndNamespace()
     {
-    	$nsItems = explode('\\', $this->getNamespace());
-    	// if there are more namespace paths then one, it means there is space for a sub folder models
-    	if (count($nsItems) > 1) {
-    		$items = explode(DIRECTORY_SEPARATOR, $this->getBasePath());
-    		$last = array_pop($items);
-    		// as now we assume we change directory to a subfolder, the removed folder name must be "admin".
-    		if ($last == 'admin') {
-    			array_pop($nsItems);
-    			$this->modelNamespace = implode('\\', $nsItems);
-    			$this->modelBasePath = implode(DIRECTORY_SEPARATOR, $items);
-    		}
-    	}
+        $nsItems = explode('\\', $this->getNamespace());
+        // if there are more namespace paths then one, it means there is space for a sub folder models
+        if (count($nsItems) > 1) {
+            $items = explode(DIRECTORY_SEPARATOR, $this->getBasePath());
+            $last = array_pop($items);
+            // as now we assume we change directory to a subfolder, the removed folder name must be "admin".
+            if ($last == 'admin') {
+                array_pop($nsItems);
+                $this->modelNamespace = implode('\\', $nsItems);
+                $this->modelBasePath = implode(DIRECTORY_SEPARATOR, $items);
+            }
+        }
     }
     
     /**
