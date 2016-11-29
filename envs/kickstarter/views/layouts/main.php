@@ -30,7 +30,7 @@ $this->beginPage();
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                 <?php foreach (Yii::$app->menu->find()->where(['parent_nav_id' => 0, 'container' => 'default'])->all() as $item): ?>
-                    <li <?php if($item->isActive): ?>class="active"<?php endif;?>>
+                    <li <?php if ($item->isActive): ?>class="active"<?php endif;?>>
                         <a href="<?= $item->link; ?>"><?= $item->title; ?></a>
                     </li>
                 <?php endforeach; ?>

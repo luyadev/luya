@@ -19,7 +19,7 @@ class TestProperty extends Property
     public function varName()
     {
         return 'test';
-    }    
+    }
     
     public function label()
     {

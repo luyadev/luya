@@ -4,8 +4,8 @@ namespace ngresttest\apis;
 
 /**
  * Table Controller.
- * 
- * File has been created with `crud/create` command on LUYA version 1.0.0-RC2-dev. 
+ *
+ * File has been created with `crud/create` command on LUYA version 1.0.0-RC2-dev.
  */
 class TableController extends \luya\admin\ngrest\base\Api
 {

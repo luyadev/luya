@@ -7,7 +7,7 @@ class ResourcesAsset extends \luya\web\Asset
     public $sourcePath = '@app/resources';
     
     public $js = [
-    	'//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',
+        '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',
     ];
     
     public $css = [
@@ -18,10 +18,10 @@ class ResourcesAsset extends \luya\web\Asset
     ];
     
     public $publishOptions = [
-    	'only' => [
-    		'css/*',
-    	    'js/*',
-    	]
+        'only' => [
+            'css/*',
+            'js/*',
+        ]
     ];
     
     public $depends = [

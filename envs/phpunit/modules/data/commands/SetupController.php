@@ -18,7 +18,7 @@ class SetupController extends Command
         ['alias' => 'page4', 'title' => 'Page 4', 'parent' => 0], // nav_item.id = 5
         ['alias' => 'page5', 'title' => 'Page 5', 'parent' => 0], // nav_item.id = 6
         ['alias' => 'page6', 'title' => 'Page 6', 'parent' => 0], // nav_item.id = 7
-        
+
         ['alias' => 'p1-page1', 'title' => 'Page 1', 'parent' => 2], // nav_item.id = 8
         ['alias' => 'p1-page2', 'title' => 'Page 2', 'parent' => 2], // nav_item.id = 9
         ['alias' => 'p1-page3', 'title' => 'Page 3', 'parent' => 2], // nav_item.id = 10
@@ -66,6 +66,5 @@ class SetupController extends Command
                 }
             }
         }
-        
     }
 }

@@ -7,8 +7,8 @@ use luya\admin\ngrest\base\NgRestModel;
 
 /**
  * Table.
- * 
- * File has been created with `crud/create` command on LUYA version 1.0.0-RC2-dev. 
+ *
+ * File has been created with `crud/create` command on LUYA version 1.0.0-RC2-dev.
  *
  * @property integer $id
  * @property text $image
@@ -205,7 +205,7 @@ class Table extends NgRestModel
         $this->ngRestConfigDefine($config, ['create', 'update'], ['image']);
         
         // enable or disable ability to delete;
-        $config->delete = false; 
+        $config->delete = false;
         
         return $config;
     }

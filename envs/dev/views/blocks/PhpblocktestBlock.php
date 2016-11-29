@@ -1,4 +1,4 @@
 #<?= $this->context->getEnvOption('index'); ?>: 
-IsPreviousEqual: <? var_dump($this->context->getEnvOption('isPrevEqual')); ?>
-IsNextEqual: <? var_dump($this->context->getEnvOption('isNextEqual')); ?>
+IsPreviousEqual: <?php var_dump($this->context->getEnvOption('isPrevEqual')); ?>
+IsNextEqual: <?php var_dump($this->context->getEnvOption('isNextEqual')); ?>
 <hr />

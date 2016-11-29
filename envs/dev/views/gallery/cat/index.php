@@ -1,4 +1,4 @@
-<? foreach($catData as $item): ?>
+<?php foreach ($catData as $item): ?>
 
     <div class="row" style="margin-bottom:40px;">
         <div class="col-md-4">
@@ -14,4 +14,4 @@
         </div>
     </div>
 
-<? endforeach; ?>
+<?php endforeach; ?>

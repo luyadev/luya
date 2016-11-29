@@ -30,9 +30,9 @@ $config = [
     'luyaLanguage' => 'en',
     
     /*
-     * Let the application know which module should be executed by default (if no url is set). This module must be included 
+     * Let the application know which module should be executed by default (if no url is set). This module must be included
      * in the modules section. In the most cases you are using the cms as default handler for your website. But the concept
-     * of LUYA is also that you can use the Website without the CMS module! 
+     * of LUYA is also that you can use the Website without the CMS module!
      */
     'defaultRoute' => 'cms',
     
@@ -47,7 +47,7 @@ $config = [
          * If you have other administration module (like cmsadmin) then you going to need this module. The Admin module provides
          * a lot of functionalitiy like storage system etc. But the basic concept of LUYA is also that you can use LUYA without the
          * admin module.
-         * 
+         *
          * @secureLogin: (boolean) This will activated a two-way authentification method where u get a token sent by mail, for this feature
          * you have to make sure the mail component is configured correctly, you can test with console command `./vendor/bin/luya health/mailer`.
          */
@@ -99,7 +99,7 @@ $config = [
         /*
          * The composition component handles your languages and they way your urls will look like. The composition componentn will
          * automatically add the language prefix you have defined in `default` to your url (the language part in the url "example.com/EN/homepage").
-         * 
+         *
          * hidden: (boolean) If this website is not multilingual you can hidde the composition, other whise you have to enable this.
          */
         'composition' => [
@@ -111,7 +111,7 @@ $config = [
          * When you are enabling the cache, luya will cache cms blocks and speed up the system in different ways. In the prep config
          * we use the DummyCache to "fake" the caching behavior, but actually nothing gets cached, when your in production you should
          * use caching which matches your hosting environment. In most cases yii\caching\FileCache will result in fast website.
-         * 
+         *
          * http://www.yiiframework.com/doc-2.0/guide-caching-data.html#cache-apis
          */
         'cache' => [
