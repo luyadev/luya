@@ -23,7 +23,7 @@ abstract class Boot
     /**
      * @var string The current LUYA version (see: https://github.com/luyadev/luya/blob/master/CHANGELOG.md)
      */
-    const VERSION = '1.0.0-RC2-dev';
+    const VERSION = '1.0.0-RC2';
     
     /**
      * @var string The path to the config file, which returns an array containing you configuration.
