@@ -32,6 +32,7 @@
   + [Page Properties](app-cmsproperties.md)
 + Frontend Module
   + [About Frontend Modules](app-module-frontend.md)
+  + [Working with Forms](app-module-forms.md)
   + [Layouts](app-module-layouts.md)
   + [Url Rules](app-module-urlrules.md)
 + Administration Module
