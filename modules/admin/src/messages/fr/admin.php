@@ -182,13 +182,13 @@ return [
     
 // rc2
     
-    'ngrest_crud_group_prompt' => 'Group by field',
-    'ngrest_crud_filter_prompt' => 'Select Filter',
-    'ngrest_crud_ajax_search_length' => 'The search query must be at least 3 chars.',
-    'menu_system_logger' => 'Logging',
-    'layout_filemanager_detail_replace_file' => 'Replace file',
-    'layout_rightbar_languagelabel' => 'Interface Language',
-    'layout_rightbar_savebtn' => 'Save',
-    'aws_changepassword_notequal' => 'The new password and the password repeation are not equal.',
-    'aws_changeapssword_minchar' => 'The new password must have at least {min} characters.',
+    'ngrest_crud_group_prompt' => 'Groupe par champ',
+    'ngrest_crud_filter_prompt' => 'Sélectionner un filtre',
+    'ngrest_crud_ajax_search_length' => 'La requête de recherche doit comporter au moins 3 caractères.',
+    'menu_system_logger' => 'Logger',
+    'layout_filemanager_detail_replace_file' => 'Remplacer le fichier',
+    'layout_rightbar_languagelabel' => 'Interface Langue',
+    'layout_rightbar_savebtn' => 'Enregistrer',
+    'aws_changepassword_notequal' => 'Le nouveau mot de passe et la répétition du mot de passe ne sont pas égaux.',
+    'aws_changeapssword_minchar' => 'Le nouveau mot de passe doit contenir au moins {min} caractères.',
 ];

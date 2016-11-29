@@ -192,6 +192,6 @@ return [
     'layout_filemanager_detail_replace_file' => 'Replace file',
     'layout_rightbar_languagelabel' => 'Interface Language',
     'layout_rightbar_savebtn' => 'Save',
-    'aws_changepassword_notequal' => 'The new password and the password repeation are not equal.',
+    'aws_changepassword_notequal' => 'The new password and the password repetition are not equal.',
     'aws_changeapssword_minchar' => 'The new password must have at least {min} characters.',
 ];
