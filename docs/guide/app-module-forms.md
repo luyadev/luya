@@ -37,7 +37,7 @@ File: `views/controller/index.php`
     <p>Thank you for your request</p>
 <? else: ?>
         
-    <? $form = ActiveForm::begin(); ?> <!-- start of form -->
+    <? $form = \yii\widgets\ActiveForm::begin(); ?> <!-- start of form -->
 
     <?= $form->field($model, 'field1'); ?> <!-- example field definition -->
     <?= $form->field($model, 'field2'); ?> <!-- example field definition -->
@@ -45,7 +45,7 @@ File: `views/controller/index.php`
 
     <?= yii\helpers\Html::submitButton('Verify', ['class' => 'button']) ?>
 
-    <? ActiveForm::end(); ?> <!-- end of form -->
+    <? \yii\widgets\ActiveForm::end(); ?> <!-- end of form -->
 
 <? endif; ?>
 ```
