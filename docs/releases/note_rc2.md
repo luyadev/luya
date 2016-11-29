@@ -26,6 +26,6 @@ Please check the full [Changelog](https://github.com/luyadev/luya/blob/master/CH
 
 If you have any problems or questions regarding the upgrade process, don't hesitate to contact us on [Gitter](https://gitter.im/luyadev/luya) or to create an [Issue on GitHub](https://github.com/luyadev/luya/issues).
 
-28 Novemeber 2016  
+29 Novemeber 2016  
 LUYA developer team  
 [luya.io](https://luya.io)
