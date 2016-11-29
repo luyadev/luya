@@ -18,13 +18,13 @@ The final release of LUYA is around the corner! But for now, release candidate 2
 
 These are just a few of the changes with this release. We also put a lot of work into the documentation as well the luya.io website.
 
-**We are looking for people who like to translate the administration area to other languages – please drop us a message on [Twitter](https://twitter.com/luyadev), [Gitter](gitter.im/luyadev/luya) or create an [issue on github](https://github.com/luyadev/luya/issues)!**
+**We are looking for people who like to translate the administration area to other languages – please drop us a message on [Twitter](https://twitter.com/luyadev), [Gitter](https://gitter.im/luyadev/luya) or create an [issue on github](https://github.com/luyadev/luya/issues)!**
 
 > Attention: If you want to upgrade to the second release candidate, there are a few breaking changes you have to take care of. With these changes done, we now have a stable and reliable foundation for the upcoming final release.
 
 Please check the full [Changelog](https://github.com/luyadev/luya/blob/master/CHANGELOG.md) and the [Upgrading Guide](https://luya.io/guide/install-upgrade) where you can see all breaking changes.
 
-If you have any problems or questions regarding the upgrade process, don't hesitate to contact us on [Gitter](gitter.im/luyadev/luya) or to create an [Issue on GitHub](https://github.com/luyadev/luya/issues).
+If you have any problems or questions regarding the upgrade process, don't hesitate to contact us on [Gitter](https://gitter.im/luyadev/luya) or to create an [Issue on GitHub](https://github.com/luyadev/luya/issues).
 
 28 Novemeber 2016  
 LUYA developer team  
