@@ -1,7 +1,7 @@
 # Working with Forms
 
 This example shows how to use a [ActiveForm](http://www.yiiframework.com/doc-2.0/yii-widgets-activeform.html) in a controller.  
-It uses a [NgRest Model](ngrest-model.md) with a extra field `success` besides its project specific structure.
+It uses a [NgRest Model](ngrest-model.md).
 
 ```php
 public function actionIndex()
@@ -12,15 +12,15 @@ public function actionIndex()
     if($model->load(Yii::$app->request->post()) && $model->validate()) {
         // All data submitted is valid
         // Do stuff with the data
-        // Set success to true if everything worked
-        $model->success = true;
         
         // Save the model
-        $model->save();
+        if ($model->save()) {
+            Yii::$app->session->setFlash('success');
 
-        // Now you could redirect to a success page or
-        // print a success message in the index view
-        // return $this->redirect(['/module/controller/index']);
+            // Now you could redirect to a success page or
+            // print a success message in the index view
+            // return $this->redirect(['/module/controller/index']);
+        }
     }
 
     return $this->render('index', [
@@ -33,7 +33,7 @@ The corresponding view file could look like this:
 File: `views/controller/index.php`
 
 ```php
-<? if($model->success == true): ?>
+<? if(Yii::$app->session->getFlash('success'): ?>
     <p>Thank you for your request</p>
 <? else: ?>
         
