@@ -155,4 +155,7 @@ return [
 
     'page_update_actions_deepcopy_text' => 'Создать копию текущей страницы вместе с контентом. Все языки будут скопированы, но только опубликованные версии.',
     'page_update_actions_deepcopy_btn' => 'Создать копию',
+
+    // rc2
+    'model_navitem_title_tag_label' => 'Название тегов (SEO)',
 ];
