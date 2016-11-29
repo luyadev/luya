@@ -165,5 +165,5 @@ return [
       'block_cfg_additonal_css_class' => 'Clases CSS',
 
       // rc2
-      'block_group_media_group' =>  'Media',
+      'block_group_media_group' =>  'Medio',
 ];

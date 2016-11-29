@@ -104,7 +104,7 @@ return [
     'view_index_redirect_external_link' => 'Enlace externo',
     'view_index_redirect_external_link_help' => 'Enlaces externos comienzan con http:// ó https://',
 
-// added translation in 1.0.0-beta3:
+// 1.0.0-beta3:
 
     'model_loginform_email_label' => 'Email',
     'model_loginform_password_label' => 'Contraseña',
@@ -132,11 +132,11 @@ return [
     'js_dir_manager_rm_file_ok' => 'El archivo se eliminó correctamente.',
     'js_zaa_server_proccess' => 'El servidor esta procesando los datos. Por favor espere',
 
-// added translation in 1.0.0-beta4:
+// 1.0.0-beta4:
 
     'ngrest_crud_empty_row' => 'No se añadió datos en esta tabla todavía.',
 
-// added translation in 1.0.0-beta5:
+// 1.0.0-beta5:
 
     'aws_gallery_empty' => 'Por favor seleccione algunas imágenes de la izquierda para añadir en el álbum de la galería.',
     'aws_gallery_images' => 'Galería de imágenes',
@@ -144,13 +144,13 @@ return [
     'layout_useronline_mail' => 'E-Mail',
     'layout_useronline_inactivesince' => 'Inactivo desde',
 
-// added translations in 1.0.0-beta6
+// 1.0.0-beta6
 
     'layout_debug_caching' => 'Almacenamiento caché',
     'debug_state_on' => 'Encedido',
     'debug_state_off' => 'Apagado',
 
-// added translations in 1.0.0-beta7
+// 1.0.0-beta7
 
     'login_securetoken_mail_subject' => 'Código de Seguridad LUYA',
     'login_securetoken_mail' => '<h1>Código de Seguridad LUYA</h1><p>Use el siguiente código de seguridad para acceder a su interfaz de administración de {url}:</p><span style="font-size:22px; letter-spacing:2px; padding:5px 10px; display:inline-block; background-color:#F0F0F0;">{token}</span>',
@@ -167,7 +167,8 @@ return [
     'mode_user_email' => 'E-Mail',
     'mode_user_password' => 'Contraseña',
 
-// added translations in 1.0.0-beta8
+// 1.0.0-beta8
+
     'aws_tag_new' => 'Añadir nueva entrada',
     'aws_tag_add' => 'Añadir',
     'aws_tag_search' => 'Buscar entradas',
@@ -185,14 +186,13 @@ return [
 
 // rc2
 
-    'ngrest_crud_group_prompt' => 'Group by field',
-    'ngrest_crud_filter_prompt' => 'Select Filter',
-    'ngrest_crud_ajax_search_length' => 'The search query must be at least 3 chars.',
-    'menu_system_logger' => 'Logging',
-    'layout_filemanager_detail_replace_file' => 'Replace file',
-    'layout_rightbar_languagelabel' => 'Interface Language',
-    'layout_rightbar_savebtn' => 'Save',
-    'aws_changepassword_notequal' => 'The new password and the password repeation are not equal.',
-    'aws_changeapssword_minchar' => 'The new password must have at least {min} characters.',
-
+    'ngrest_crud_group_prompt' => 'Agrupar por campo',
+    'ngrest_crud_filter_prompt' => 'Seleccione filtro',
+    'ngrest_crud_ajax_search_length' => 'La consulta de búsqueda debe tener al menos 3 caracteres.',
+    'menu_system_logger' => 'Log',
+    'layout_filemanager_detail_replace_file' => 'Reemplazar archivo',
+    'layout_rightbar_languagelabel' => 'Idioma de interfaz',
+    'layout_rightbar_savebtn' => 'Guardar',
+    'aws_changepassword_notequal' => 'La nueva contraseña y la repetición de contraseña no son iguales.',
+    'aws_changeapssword_minchar' => 'La nueva contraseña debe tener al menos {min} caracteres.',
 ];
