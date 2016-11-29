@@ -3,7 +3,7 @@ use luya\cms\admin\Module;
 
 ?>
 <script>
-    zaa.bootstrap.register('PermissionController', function($scope, $http) {
+    zaa.bootstrap.register('PermissionController', function($scope, $http, ServiceMenuData) {
 
     	$scope.$on('service:MenuData', function(event, data) {
     		$scope.loadPermissions();
@@ -20,39 +20,43 @@ use luya\cms\admin\Module;
     		});
     	};
 
+    	$scope.reloadMenuData = function() {
+    		ServiceMenuData.load(true);
+    	};
+
         $scope.deletePermission = function(navId, groupId) {
         	// delete request
             $http.post('admin/api-cms-menu/data-permission-delete', {navId: navId, groupId: groupId}).then(function() {
-                $scope.loadPermissions();
+                $scope.reloadMenuData();
             });
         };
 
         $scope.insertPermission = function(navId, groupId) {
         	$http.post('admin/api-cms-menu/data-permission-insert', {navId: navId, groupId: groupId}).then(function() {
-        	    $scope.loadPermissions();
+        	    $scope.reloadMenuData();
         	});
         };
 
         $scope.deleteInheritance = function(navId, groupId) {
         	$http.post('admin/api-cms-menu/data-permission-delete-inheritance', {navId: navId, groupId: groupId}).then(function() {
-        		$scope.loadPermissions();
+        		$scope.reloadMenuData();
             });
         };
 
         $scope.insertInheritance = function(navId, groupId) {
         	$http.post('admin/api-cms-menu/data-permission-insert-inheritance', {navId: navId, groupId: groupId}).then(function() {
-        		$scope.loadPermissions();
+        		$scope.reloadMenuData();
             });
         };
 
         $scope.grantFullPermission = function(groupId) {
             $http.post('admin/api-cms-menu/data-permission-grant-group', {groupId: groupId}).then(function() {
-                $scope.loadPermissions();
+                $scope.reloadMenuData();
             });
         }
 
         $scope.init = function() {
-            $scope.loadPermissions();
+            $scope.reloadMenuData();
         };
 
         $scope.init();

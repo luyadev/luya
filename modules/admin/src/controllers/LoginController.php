@@ -18,10 +18,6 @@ class LoginController extends Controller
 {
     public $layout = '@admin/views/layouts/nosession';
 
-    public $skipModuleAssets = ['*'];
-
-    public $assets = ["\luya\admin\assets\Login"];
-
     public function getRules()
     {
         return [
@@ -35,6 +31,7 @@ class LoginController extends Controller
 
     public function actionIndex()
     {
+        $this->registerAsset('\luya\admin\assets\Login');
         // redirect logged in users
         if (!Yii::$app->adminuser->isGuest) {
             return $this->redirect(['/admin/default/index']);

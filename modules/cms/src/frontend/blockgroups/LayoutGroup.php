@@ -19,6 +19,6 @@ class LayoutGroup extends BlockGroup
     
     public function getPosition()
     {
-        return 80;
+        return 67;
     }
 }

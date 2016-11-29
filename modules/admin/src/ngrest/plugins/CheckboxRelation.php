@@ -5,59 +5,84 @@ namespace luya\admin\ngrest\plugins;
 use Yii;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\ngrest\base\Plugin;
+use luya\rest\ActiveController;
 
 /**
- * Create multi select input for a relation table.
+ * Checkbox Selector via relation table.
  *
- * Example usage:
+ * The checkbox relation plugin provides an easy way to provde a checkbox selection from a via relation table.
  *
- * Define an extra propertie:
+ * In order to implement the checkboxRealtion plugin you have to prepare your {{\luya\admin\ngrest\base\NgRestModel}} as following:
  *
  * ```php
- *
  * public $groups = [];
  *
  * public function extraFields()
  * {
  *     return ['groups'];
  * }
- *
  * ```
  *
- * configure the extra field with `ngrestExtraAttributeTypes`:
+ * Configure the extra field with {{\luya\admin\ngrest\base\NgRestModel::ngRestExtraAttributeTypes}}:
  *
  * ```php
- * public function ngrestExtraAttributeTypes()
+ * public function ngRestExtraAttributeTypes()
  * {
- *      'groups' => [
- *          'checkboxRelation',
- *       	'model' => User::className(),
- *       	'refJoinTable' => 'admin_user_group',
- *       	'refModelPkId' => 'group_id',
- *       	'refJoinPkId' => 'user_id',
- *       	'labelFields' => ['firstname', 'lastname', 'email'],
- *       	'labelTemplate' =>  '%s %s (%s)'
- *       ],
+ *     'groups' => [
+ *         'checkboxRelation',
+ *         'model' => User::className(),
+ *         'refJoinTable' => 'admin_user_group',
+ *         'refModelPkId' => 'group_id',
+ *         'refJoinPkId' => 'user_id',
+ *         'labelFields' => ['firstname', 'lastname', 'email'],
+ *         'labelTemplate' =>  '%s %s (%s)'
+ *     ],
  * }
  * ```
  *
- * @property string|object $model
- * @author nadar
+ * You can also access getter fields from the $model class in order to display such informations in the checkbox selection. Assuming you have a `getMyName` method in the
+ * $model object you can use it in the `labelFields` as `myName`.
+ *
+ * @property \luya\admin\ngrest\base\NgRestModel $model The model object
+ * @author Basil Suter <basil@nadar.io>
  */
 class CheckboxRelation extends Plugin
 {
     private $_model;
     
+    /**
+     * @var string The reference table table name e.g. `admin_user_groupadmin_user_group`.
+     */
     public $refJoinTable = null;
 
+    /**
+     * @var string The reference table model field name e.g `group_id`.
+     */
     public $refModelPkId = null;
 
+    /**
+     * @var string The reference table poin field name e.g. `user_id`.
+     */
     public $refJoinPkId = null;
 
+    /**
+     * @var array A list of fields which should be used for the display template.
+     */
     public $labelFields = null;
 
+    /**
+     * @var string The template which is sued for the label fields like the sprinf command e.g. `%s %s (%s)`.
+     */
     public $labelTemplate = null;
 
+    /**
+     * @var boolean Whether the checkbox plugin should only trigger for the restcreate and restupdate events or for all SAVE/UPDATE events.
+     */
+    public $onlyRestScenarios = false;
+
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -101,7 +126,7 @@ class CheckboxRelation extends Plugin
 
         $select = $this->labelFields;
         $select[] = $pkName;
-        foreach ($this->model->find()->select($select)->all() as $item) {
+        foreach ($this->model->find()->all() as $item) {
             $array = $item->getAttributes($select);
             unset($array[$pkName]);
             if ($this->labelTemplate) {
@@ -115,12 +140,17 @@ class CheckboxRelation extends Plugin
         return ['items' => $items];
     }
     
-
+    /**
+     * @inheritdoc
+     */
     public function renderList($id, $ngModel)
     {
         return $this->createListTag($ngModel);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function renderCreate($id, $ngModel)
     {
         return [
@@ -129,16 +159,25 @@ class CheckboxRelation extends Plugin
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function renderUpdate($id, $ngModel)
     {
         return $this->renderCreate($id, $ngModel);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function serviceData()
     {
         return ['relationdata' => $this->getOptionsData()];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function onBeforeExpandFind($event)
     {
         $data = [];
@@ -148,30 +187,46 @@ class CheckboxRelation extends Plugin
         $event->sender->{$this->name} = $data;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function onBeforeListFind($event)
     {
         $event->sender->{$this->name} = $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $event->sender->id])->all();
     }
     
+    /**
+     * @inheritdoc
+     */
     public function onBeforeFind($event)
     {
         $event->sender->{$this->name} = $this->model->find()->leftJoin($this->refJoinTable, $this->model->tableName().'.id='.$this->refJoinTable.'.'.$this->refJoinPkId)->where([$this->refJoinTable.'.'.$this->refModelPkId => $event->sender->id])->all();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function afterSaveEvent($event)
     {
-        $this->setRelation($event->sender->{$this->name}, $this->refJoinTable, $this->refModelPkId, $this->refJoinPkId, $event->sender->id);
+        if ($this->onlyRestScenarios) {
+            if ($event->sender->scenario == ActiveController::SCENARIO_RESTCREATE || $event->sender->scenario == ActiveController::SCENARIO_RESTUPDATE) {
+                $this->setRelation($event->sender->{$this->name}, $this->refJoinTable, $this->refModelPkId, $this->refJoinPkId, $event->sender->id);
+            }
+        } else {
+            $this->setRelation($event->sender->{$this->name}, $this->refJoinTable, $this->refModelPkId, $this->refJoinPkId, $event->sender->id);
+        }
     }
     
     /**
-     * @param array $value          The valued which is provided from the setter method
-     * @param string $viaTableName   Example viaTable name: news_article_tag
-     * @param string $localTableId   The name of the field inside the viaTable which represents the match against the local table, example: article_id
-     * @param string $foreignTableId The name of the field inside the viaTable which represents the match against the foreign table, example: tag_id
+     * Set the relation data based on the configuration.
      *
-     * @return bool
+     * @param array $value The valued which is provided from the setter method
+     * @param string $viaTableName Example viaTable name: news_article_tag
+     * @param string $localTableId The name of the field inside the viaTable which represents the match against the local table, example: article_id
+     * @param string $foreignTableId The name of the field inside the viaTable which represents the match against the foreign table, example: tag_id
+     * @return boolean Whether updating the database was successfull or not.
      */
-    public function setRelation(array $value, $viaTableName, $localTableId, $foreignTableId, $activeRecordId)
+    protected function setRelation(array $value, $viaTableName, $localTableId, $foreignTableId, $activeRecordId)
     {
         Yii::$app->db->createCommand()->delete($viaTableName, [$localTableId => $activeRecordId])->execute();
         $batch = [];

@@ -3,20 +3,21 @@
 namespace luya\console;
 
 use Yii;
+use luya\base\BaseBootstrap;
 
 /**
  * Luya CLI Bootsrap.
  *
  * @author nadar
  */
-class Bootstrap extends \luya\base\Bootstrap
+class Bootstrap extends BaseBootstrap
 {
     /**
      * Add missing alias names @web and @webroot.
      *
      * @param object $app Luya CLI Application Object
      *
-     * @see \luya\base\Bootstrap::beforeRun()
+     * @see \luya\base\BaseBootstrap::beforeRun()
      */
     public function beforeRun($app)
     {
@@ -27,7 +28,7 @@ class Bootstrap extends \luya\base\Bootstrap
     /**
      * The run method must be implemented by defintion.
      *
-     * @see \luya\base\Bootstrap::run()
+     * @see \luya\base\BaseBootstrap::run()
      */
     public function run($app)
     {

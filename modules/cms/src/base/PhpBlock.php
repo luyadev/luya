@@ -32,22 +32,26 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     }
     
     /**
-     * {@inheritDoc}
-     * @see \luya\cms\base\PhpBlockInterface::frontend()
+     * Get relative view path ofr rendering view files.
+     *
+     * @see \yii\base\ViewContextInterface
+     * @return string the view path that may be prefixed to a relative view name.
      */
-    public function frontend()
+    public function getViewPath()
     {
-        return $this->view->render($this->getViewFileName('php'), [
-            'vars' => $this->getVarValues(),
-            'cfgs' => $this->getCfgValues(),
-            'placeholders' => $this->getPlaceholderValues(),
-            'extras' => $this->extraVarsOutput(),
-        ], $this);
+        return $this->ensureModule() . '/views/blocks';
     }
     
     /**
-     * {@inheritDoc}
-     * @see \luya\cms\base\BlockInterface::renderFrontend()
+     * @inheritdoc
+     */
+    public function frontend()
+    {
+        return $this->view->render($this->getViewFileName('php'), [], $this);
+    }
+    
+    /**
+     * @inheritdoc
      */
     public function renderFrontend()
     {
@@ -56,8 +60,7 @@ abstract class PhpBlock extends InternalBaseBlock implements PhpBlockInterface, 
     }
     
     /**
-     * {@inheritDoc}
-     * @see \luya\cms\base\BlockInterface::renderAdmin()
+     * @inheritdoc
      */
     public function renderAdmin()
     {

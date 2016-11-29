@@ -10,7 +10,7 @@ use luya\helpers\ArrayHelper;
  * Example usage:
  *
  * ```
- * public function ngrestAttributeTypes()
+ * public function ngRestAttributeTypes()
  * {
  * 		'genres' => ['selectArray', 'data' => [1 => 'Male', 2 => 'Female']],
  * }

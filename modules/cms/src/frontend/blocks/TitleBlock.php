@@ -8,7 +8,7 @@ use luya\cms\base\TwigBlock;
 
 /**
  * Heading-Title Block.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class TitleBlock extends TwigBlock
@@ -64,7 +64,7 @@ class TitleBlock extends TwigBlock
         return '{% if vars.content is not empty %}<{{extras.headingType}}>{{ vars.content }}</{{extras.headingType}}>{% else %}<span class="block__empty-text">' . Module::t('block_title_no_content') . '</span>{% endif %}';
     }
     
-    public function getBlockGroup()
+    public function blockGroup()
     {
         return TextGroup::className();
     }

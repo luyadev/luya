@@ -1,14 +1,16 @@
-Error API
+Error API Module
 =========
 
-To create strong and secure website its important to know all exceptions before your customer knows the exceptions and to make sure the exception happends only once. For this we provide the Error Api module where you can send all exceptions to your personal Error Api. If an exception happens on the customers website you will get a mail with the full stack and a slack notification (if configured).
+For a strong and secure website, it is important to get access to all the errors and exceptions that occur in the background before your customer complain and make sure that it only happens once.
 
-### install
+With the Error Api module, you can send all exceptions to your personal Error Api and get notify by email or Slack. If an exception occurs on the customer website, you will be notified with the full error stack and a slack notification will be sent (if configured).
 
-add to your composer.json
+### Module setup
+
+add this line to your composer.json and run the `composer install` command
 
 ```
-"luyadev/luya-module-errorapi" : "1.0.0-beta8",
+"luyadev/luya-module-errorapi" : "^1.0@dev",
 ```
 
 add the module to your application config:
@@ -17,18 +19,20 @@ add the module to your application config:
 'modules' => [
 	// ...
 	'errorapi' => [
-	    'class' => 'luya\luya\errorapi\Module',
+	    'class' => 'luya\errorapi\Module',
 	    'recipient' => ['errors@example.com'],
 	    'slackToken' => 'YOUR_SECRET_SLACK_TOKEN',
 	],
 ]
 ```
 
-Defined the recipients of the exception mail and configuration the slack channel, if you like to (removing the slack part will disabled slack notification).
+Defined the email of the recipient for the exceptions and configure the slack channel if needed to. 
 
-### setup your website
+> Removing the slack part will disabled slack notifications.
 
-In order to enable the above created error api for your website you just have to configure the default LUYA error handler in the config file in the component section of your Project:
+### Website setup
+
+To enable the error api for your website, you need to configure the default LUYA error handler in the component section of your config file :
 
 ```
 'components' => [
@@ -40,3 +44,9 @@ In order to enable the above created error api for your website you just have to
 	],
 ]
 ```
+
+### Finalising the installation
+
+Finally, to see the Error API Module in action, you need to run `./vendor/bin/luya migrate` and `./vendor/bin/luya import` commands and you're all set to receive errors and exceptions that occurred from your customer's website.
+
+> It is very important to run the `./vendor/bin/luya migrate` and `./vendor/bin/luya import` commands in order for these changes to take effect.

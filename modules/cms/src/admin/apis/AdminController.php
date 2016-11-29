@@ -26,18 +26,18 @@ class AdminController extends \luya\admin\base\RestController
             $groupPosition = null;
             foreach (Block::find()->where(['group_id' => $group['id']])->all() as $block) {
                 $obj = Block::objectId($block['id'], 0, 'admin');
-                if (!$obj || in_array($obj->className(), Yii::$app->getModule('cmsadmin')->hiddenBlocks)) {
+                if (!$obj || in_array(get_class($obj), Yii::$app->getModule('cmsadmin')->hiddenBlocks)) {
                     continue;
                 }
                 
                 if ($groupPosition == null) {
-                    $groupObject = Yii::createObject($obj->getBlockGroup());
+                    $groupObject = Yii::createObject($obj->blockGroup());
                     $groupPosition = $groupObject->getPosition();
                 }
                 $blocks[] = [
                     'id' => $block['id'],
                     'name' => $obj->name(),
-                    'full_name' => $obj->getFullName(),
+                    'full_name' => ($obj->icon() === null) ? $obj->name() : '<i class="material-icons">'.$obj->icon().'</i> <span>'.$obj->name().'</span>',
                     'favorized' => array_key_exists($block['id'], $favs),
                 ];
             }

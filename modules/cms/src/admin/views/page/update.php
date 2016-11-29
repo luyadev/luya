@@ -32,7 +32,7 @@ use luya\cms\admin\Module;
                 </div>
             </div>
             <div class="block__body block-styles" ng-click="toggleEdit()" ng-bind-html="renderTemplate(block.twig_admin, data, cfgdata, block, block.extras)"></div>
-            <form class="block__edit" ng-if="edit || config">
+            <form class="block__edit" ng-if="edit || config" ng-submit="save()">
                 <div class="block__edit-content">
                     <div class="row" ng-repeat="field in block.vars">
                         <div class="block__help help help--is-right-aligned" ng-if="hasInfo(field.var)">
@@ -61,8 +61,8 @@ use luya\cms\admin\Module;
                     <div class="row">
                         <div class="col s12">
                             <div class="right">
-                            <button class="[ waves-effect waves-light ] btn btn--small red" ng-click="toggleBlockSettings()"><i class="material-icons left">cancel</i><?php echo Module::t('view_update_btn_cancel'); ?></button>
-                                <button class="[ waves-effect waves-light ] btn btn--small" ng-click="save()"><i class="material-icons left">done</i><?php echo Module::t('view_update_btn_save'); ?></button>
+                            	<button class="[ waves-effect waves-light ] btn btn--small red" type="button" ng-click="toggleBlockSettings()"><i class="material-icons left">cancel</i><?php echo Module::t('view_update_btn_cancel'); ?></button>
+                                <button class="[ waves-effect waves-light ] btn btn--small" type="submit"><i class="material-icons left">done</i><?php echo Module::t('view_update_btn_save'); ?></button>
                             </div>
                         </div>
                     </div>
@@ -107,39 +107,7 @@ use luya\cms\admin\Module;
 </script>
 <!-- /UPDATE MODULE FORM -->
 
-<!-- UPDATE REDIRECT FORM -->
-<script type="text/ng-template" id="updateformredirect.html">
-    <div class="row">
-        <div class="input input--radios col s12">
-            <label class="input__label"><?php echo Module::t('view_index_redirect_type'); ?></label>
-            <div class="input__field-wrapper">
-                <input type="radio" ng-model="data.type" value="1"><label ng-click="data.type = 1"><?php echo Module::t('view_index_redirect_internal'); ?></label> <br />
-                <input type="radio" ng-model="data.type" value="2"><label ng-click="data.type = 2"><?php echo Module::t('view_index_redirect_external'); ?></label>
-            </div>
-        </div>
-    </div>
-
-    <div class="row" ng-switch on="data.type">
-        <div class="col s12" ng-switch-when="1">
-            <p><?php echo Module::t('view_index_redirect_internal_select'); ?></p>
-            <menu-dropdown class="menu-dropdown" nav-id="data.value" />
-        </div>
-
-        <div class="col s12" ng-switch-when="2">
-
-            <div class="input input--text col s12">
-                <label class="input__label"><?php echo Module::t('view_index_redirect_external_link'); ?></label>
-                <div class="input__field-wrapper">
-                    <input name="text" type="text" class="input__field" ng-model="data.value" placeholder="http://" />
-                    <small><?php echo Module::t('view_index_redirect_external_link_help'); ?></small>
-                </div>
-            </div>
-        </div>
-    </div>
-</script>
-<!-- /UPDATE REDIRECT FORM -->
-
-<div ng-controller="NavController" ng-if="!isDeleted">
+<div ng-controller="NavController" ng-show="!isDeleted">
 
     <div class="cms">
         <div class="cms__pages">
@@ -327,7 +295,7 @@ use luya\cms\admin\Module;
                                 <div class="card-panel">
                                     <h5><?php echo Module::t('view_index_add_page_from_language'); ?></h5>
                                     <p><?php echo Module::t('view_index_add_page_from_language_info'); ?></p>
-                                    <p><button ng-click="loadItems()" ng-show="!isOpen" class="btn">Ja</button></p>
+                                    <p><button ng-click="loadItems()" ng-show="!isOpen" class="btn"><?= Module::t('view_index_yes'); ?></button></p>
                                     <div ng-show="isOpen">
                                         <hr />
                                         <ul>
@@ -381,7 +349,7 @@ use luya\cms\admin\Module;
                                             <a ng-click="openLiveUrl(item.id, currentPageVersion)" ng-show="liveEditState" class="right"><i class="material-icons [ waves-effect waves-blue ]">open_in_new</i></a>
                                         </span>
                                         <span ng-hide="!settings">
-                                            <a ng-click="toggleSettings()"  class="right"><i class="material-icons">close</i></a>
+                                            <a ng-click="toggleSettings()" style="cursor:pointer;" class="right"><i class="material-icons">close</i></a>
                                         </span>
                                     </h4>
                                     <p>{{lang.name}}</p>
@@ -391,8 +359,7 @@ use luya\cms\admin\Module;
                         <!-- /PAGE__HEADER -->
 
                         <!-- PAGE__CONTENT--SETTINGS-->
-                        <form class="page__content page__content--settings" ng-show="settings" ng-switch on="itemCopy.nav_item_type">
-
+                        <form class="page__content page__content--settings" ng-show="settings" ng-submit="updateNavItemData(itemCopy, typeDataCopy)" ng-switch on="itemCopy.nav_item_type">
                             <div class="row">
                                 <div class="input input--text col s12">
                                     <label class="input__label"><?php echo Module::t('view_index_page_title'); ?></label>
@@ -406,6 +373,14 @@ use luya\cms\admin\Module;
                                     <label class="input__label"><?php echo Module::t('view_index_page_alias'); ?></label>
                                     <div class="input__field-wrapper">
                                         <input type="text" class="input__field validate" ng-model="itemCopy.alias" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input input--text col s12">
+                                    <label class="input__label"><?php echo Module::t('model_navitem_title_tag_label'); ?></label>
+                                    <div class="input__field-wrapper">
+                                        <input type="text" class="input__field validate" ng-model="itemCopy.title_tag" />
                                     </div>
                                 </div>
                             </div>
@@ -454,7 +429,7 @@ use luya\cms\admin\Module;
                                     <div class="col s12">
                                         <div class="right">
                                             <button class="btn waves-effect waves-light red" type="button" ng-click="toggleSettings()"><?php echo Module::t('btn_abort'); ?> <i class="material-icons left">cancel</i></button>
-                                            <button class="btn waves-effect waves-light" type="button" ng-click="save(itemCopy, typeDataCopy)"><?php echo Module::t('btn_save'); ?> <i class="material-icons right">check</i></button>
+                                            <button class="btn waves-effect waves-light" type="submit"><?php echo Module::t('btn_save'); ?> <i class="material-icons right">check</i></button>
                                         </div>
                                     </div>
                                 </div>

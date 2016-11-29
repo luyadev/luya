@@ -11,7 +11,7 @@ use luya\admin\ngrest\render\RenderCrud;
 /**
  * Base Controller for all NgRest Controllers.
  *
- * @property admin\ngrest\base\Model $model The model based from the modelClass instance
+ * @property luya\admin\ngrest\base\Model $model The model based from the modelClass instance
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -33,8 +33,7 @@ class Controller extends \luya\admin\base\Controller
     public $disablePermissionCheck = true;
 
     /**
-     * {@inheritDoc}
-     * @see \luya\web\Controller::init()
+     * @inheritdoc
      */
     public function init()
     {
@@ -55,35 +54,59 @@ class Controller extends \luya\admin\base\Controller
 
         return $this->_model;
     }
-
-    public function actionIndex($inline = false)
+    
+    public function actionIndex($inline = false, $relation = false, $arrayIndex = false, $modelClass = false)
     {
         $apiEndpoint = $this->model->ngRestApiEndpoint();
 
+        $config = $this->model->getNgRestConfig();
+        
+        /*
+        // partial concept integration for
         $configClass = $this->module->getLinkedNgRestConfig($apiEndpoint);
 
         if ($configClass) {
-            // todo
-            // $class = Yii::createObject($configClass, ['apiEndpoint' => '', 'primaryKey' => '..'
-            // build config based on the defined config class
+            // $class = Yii::createObject($configClass, ['apiEndpoint' => '', 'primaryKey' => '..']);
             $config = false;
         } else {
             $config = $this->model->getNgRestConfig();
         }
+        */
 
         if (!$config) {
             throw new Exception("Provided NgRest config for controller '' is invalid.");
         }
         
-        
-        $config->inline = (bool) $inline;
+        if ($relation && $arrayIndex !== false && $modelClass !== false) {
+            $config->relationCall = ['id' => $relation, 'arrayIndex' => $arrayIndex, 'modelClass' => $modelClass];
+        }
+
+        // apply config informations
         $config->filters = $this->model->ngRestFilters();
         $config->defaultOrder = $this->model->ngRestListOrder();
+        
+        $userSortSettings = Yii::$app->adminuser->identity->setting->get('ngrestorder.admin/'.$apiEndpoint, false);
+        
+        if ($userSortSettings && is_array($userSortSettings)) {
+            $config->defaultOrder = [$userSortSettings['field'] => $userSortSettings['sort']];
+        }
+        
         $config->attributeGroups = $this->model->ngRestAttributeGroups();
         $config->groupByField = $this->model->ngRestGroupByField();
         
+        $rel = [];
+        foreach ($this->model->ngRestRelations() as $key => $item) {
+            $rel[] = ['label' => $item['label'], 'apiEndpoint' => $item['apiEndpoint'], 'arrayIndex' => $key, 'modelClass' => base64_encode($this->model->className())];
+        }
+
+        $config->relations = $rel;
+        
         $ngrest = new NgRest($config);
 
-        return $ngrest->render(new RenderCrud());
+        $crud = new RenderCrud();
+        if ($relation) {
+            $crud->viewFile = '@admin/views/ngrest/render/crud_relation.php';
+        }
+        return $ngrest->render($crud);
     }
 }

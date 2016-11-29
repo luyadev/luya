@@ -7,9 +7,9 @@ echo "<?php\n";
 namespace <?= $ns ?>\frontend;
 
 /**
- * Frontend module of <?= $name; ?>.
+ * <?= $name; ?> Admin Module.
  *
- * Created with LUYA Version <?= Boot::VERSION; ?> at <?= date("d.m.Y"); ?> 
+ * <?= $luyaText; ?> 
  */
 class Module extends \luya\base\Module
 {

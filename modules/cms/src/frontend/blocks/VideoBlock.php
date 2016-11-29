@@ -4,10 +4,11 @@ namespace luya\cms\frontend\blocks;
 
 use luya\cms\frontend\Module;
 use luya\cms\base\TwigBlock;
+use luya\cms\frontend\blockgroups\MediaGroup;
 
 /**
  * Embed YouTube and Vimeo video Block.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class VideoBlock extends TwigBlock
@@ -24,6 +25,11 @@ class VideoBlock extends TwigBlock
     public function icon()
     {
         return 'videocam';
+    }
+    
+    public function blockGroup()
+    {
+        return MediaGroup::class;
     }
 
     public function config()

@@ -70,7 +70,7 @@ trait ErrorHandlerTrait
     }
     
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function renderException($exception)
     {

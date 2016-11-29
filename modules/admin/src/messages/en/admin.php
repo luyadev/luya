@@ -97,6 +97,12 @@ return [
     'aws_changepassword_succes' => 'The password have been encrypted and stored successful.',
     'aws_changepassword_new_pass' => 'New password',
     'aws_changepassword_new_pass_retry' => 'New passwort repeat',
+    'view_index_redirect_type' => 'Forwarding type',
+    'view_index_redirect_internal' => 'Internal page',
+    'view_index_redirect_external' => 'External URL',
+    'view_index_redirect_internal_select' => 'Choose the internal page that should be forwarded to.',
+    'view_index_redirect_external_link' => 'External link',
+    'view_index_redirect_external_link_help' => 'External links start with http:// or https://',
 
 // added translation in 1.0.0-beta3:
 
@@ -176,4 +182,16 @@ return [
     'right_panel_support_tags_title' => 'Tags',
     'right_panel_support_support_title' => 'Support',
     'right_panel_support_support_text' => 'If you have any questions, please contact your webmaster or consult <a target="_blank" href="https://luya.io">luya.io</a>.',
+
+// rc2
+
+    'ngrest_crud_group_prompt' => 'Group by field',
+    'ngrest_crud_filter_prompt' => 'Select Filter',
+    'ngrest_crud_ajax_search_length' => 'The search query must be at least 3 chars.',
+    'menu_system_logger' => 'Logging',
+    'layout_filemanager_detail_replace_file' => 'Replace file',
+    'layout_rightbar_languagelabel' => 'Interface Language',
+    'layout_rightbar_savebtn' => 'Save',
+    'aws_changepassword_notequal' => 'The new password and the password repeation are not equal.',
+    'aws_changeapssword_minchar' => 'The new password must have at least {min} characters.',
 ];

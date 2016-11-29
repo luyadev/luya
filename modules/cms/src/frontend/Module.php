@@ -25,7 +25,7 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
 
     public $tags = [
         'menu' => ['class' => 'luya\cms\tags\MenuTag'],
-        'page' => ['class' => 'luya\cms\tags\PageTag'],
+        'page' => ['class' => 'luya\cms\tags\PageTag'], // marked as deprecated for 1.0.0
     ];
     
     /**
@@ -53,9 +53,7 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
     public $enableTagParsing = true;
     
     /**
-     *
-     * {@inheritDoc}
-     * @see \luya\base\Module::registerComponents()
+     * @inheritdoc
      */
     public function registerComponents()
     {
@@ -66,6 +64,9 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function bootstrap($app)
     {
         $app->on(Application::EVENT_BEFORE_REQUEST, function ($event) {

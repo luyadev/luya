@@ -55,12 +55,16 @@ class Config extends Object implements ConfigInterface
     
     public $attributeGroups = false;
     
+    public $relations = [];
+    
     public $groupByField = false;
     
     public $apiEndpoint = null;
 
     public $primaryKey = null; /* @todo not sure yet if right place to impelment about config */
 
+    public $relationCall = false;
+    
     public function getDefaultOrderField()
     {
         if ($this->defaultOrder === null) {

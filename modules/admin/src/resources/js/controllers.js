@@ -32,7 +32,7 @@
 	 * 
 	 * + bool $config.inline Determines whether this crud is in inline mode orno
 	 */
-	zaa.controller("CrudController", function($scope, $filter, $http, $sce, $state, $timeout, $injector, AdminLangService, LuyaLoading, AdminToastService) {
+	zaa.controller("CrudController", function($scope, $filter, $http, $sce, $state, $timeout, $injector, AdminLangService, LuyaLoading, AdminToastService, CrudTabService) {
 		
 		LuyaLoading.start();
 		
@@ -42,6 +42,8 @@
 		 * 6.10.2015: remove dialogs, add variable toggler to display. added ngSwitch
 		 */
 		$scope.AdminLangService = AdminLangService;
+		
+		$scope.tabService = CrudTabService;
 		
 		/**
 		 * As we have changed to ng-if some variables need to get pased by an object in order to keep the parent scope, as ng-if create a new scope.
@@ -58,7 +60,27 @@
 		 */
 		$scope.crudSwitchType = 0;
 		
+		$scope.switchToTab = function(tab) {
+			angular.forEach($scope.tabService.tabs, function(item) {
+				item.active = false;
+			});
+			
+			tab.active = true;
+			
+			$scope.switchTo(4);
+		};
+		
+		$scope.closeTab = function(tab, index) {
+			$scope.tabService.remove(index, $scope);
+		};
+		
 		$scope.switchTo = function(type, reset) {
+			
+			if ($scope.relationCall) {
+				$scope.crudSwitchType = type;
+				return;
+			}
+			
 			if (reset) {
 				$scope.resetData();
 			}
@@ -68,7 +90,15 @@
 				}
 			}
 			$scope.crudSwitchType = type;
+			
+			if (type !== 4) {
+				angular.forEach($scope.tabService.tabs, function(item) {
+					item.active = false;
+				});
+			}
 		};
+		
+		$scope.relationCall = false;
 		
 		$scope.changeGroupByField = function() {
 			if ($scope.config.groupByField == 0) {
@@ -77,6 +107,15 @@
 				$scope.config.groupBy = 1;
 			}
 		}
+		
+		$scope.relationItems = [];
+		
+		/*
+		$scope.loadRelation = function(id, api, where) {
+			$scope.relationItems.push({'active': true, 'api': api, 'id': id, 'where': where});
+			$scope.switchTo(4);
+		}
+		*/
 		
 		// ng-change event triggers this method
 		// this method is also used withing after save/update events in order to retrieve current selecter filter data.
@@ -89,8 +128,8 @@
 				if (pageId) {
 					url = url + '&page=' + pageId;
 				}
-				if ($scope.orderBy) {
-					url = url + '&sort=' + $scope.orderBy.replace("+", "");
+				if ($scope.config.orderBy) {
+					url = url + '&sort=' + $scope.config.orderBy.replace("+", "");
 				}
 				$http.get(url).then(function(response) {
 					$scope.setPagination(
@@ -195,7 +234,7 @@
 		};
 		
 		$scope.isOrderBy = function(field) {
-			if (field == $scope.orderBy) {
+			if (field == $scope.config.orderBy) {
 				return true;
 			}
 			
@@ -203,7 +242,10 @@
 		};
 		
 		$scope.changeOrder = function(field, sort) {
-			$scope.orderBy = sort + field;
+			$scope.config.orderBy = sort + field;
+			
+			$http.post('admin/api-admin-common/ngrest-order', {'apiEndpoint' : $scope.config.apiEndpoint, sort: sort, field: field}, { ignoreLoadingBar: true });
+			
 			if ($scope.pager && !$scope.config.pagerHiddenByAjaxSearch) {
 				$scope.realoadCrudList(1);
 			} else {
@@ -212,7 +254,7 @@
 		};
 		
 		$scope.reApplyOrder = function() {
-			$scope.data.listArray = $filter('orderBy')($scope.data.listArray, $scope.orderBy);
+			$scope.data.listArray = $filter('orderBy')($scope.data.listArray, $scope.config.orderBy);
 		};
 		
 		$scope.activeWindowReload = function() {
@@ -273,7 +315,13 @@
 			$scope.resetData();
 			$http.get($scope.config.apiEndpoint + '/'+id+'?' + $scope.config.apiUpdateQueryString).success(function(data) {
 				$scope.data.update = data;
-				$scope.switchTo(2);
+				
+				if ($scope.relationCall) {
+					
+					$scope.crudSwitchType = 2;
+				} else {
+					$scope.switchTo(2);
+				}
 				if (!$scope.config.inline) {
 					$state.go('default.route.detail', {id : id});
 				}
@@ -338,6 +386,11 @@
 		};
 		
 		$scope.submitCreate = function() {
+			
+			if ($scope.relationCall) {
+				//$scope.data.create[$scope.relationCall.field] = parseInt($scope.relationCall.id);
+			}
+			
 			$http.post($scope.config.apiEndpoint, angular.toJson($scope.data.create, true)).success(function(data) {
 				$scope.realoadCrudList();
 				$scope.applySaveCallback();
@@ -347,23 +400,55 @@
 				$scope.printErrors(data);
 			});
 		};
-	
+		
+		$scope.blockFilterSeriveReload = false;
+		
+		$scope.evalSettings = function(settings) {
+			if (settings.hasOwnProperty('order')) {
+				$scope.config.orderBy = settings['order'];
+			}
+			
+			if (!$scope.blockFilterSeriveReload) {
+				if (settings.hasOwnProperty('filterName')) {
+					$scope.config.filter = settings['filterName'];
+				}
+			}
+		};
+		
+		$scope.$watch('config.filter', function(n, o) {
+			if (n != o && n != undefined) {
+				$scope.blockFilterSeriveReload = true;
+				$http.post('admin/api-admin-common/ngrest-filter', {'apiEndpoint' : $scope.config.apiEndpoint, 'filterName': $scope.config.filter}, { ignoreLoadingBar: true });
+				$scope.realoadCrudList();
+			}
+		})
+		
+		/**
+		 * This method is triggerd by the crudLoader directive to reload service data.
+		 */
 		$scope.loadService = function() {
 			$http.get($scope.config.apiEndpoint + '/services').success(function(serviceResponse) {
-				$scope.service = serviceResponse;
+				$scope.service = serviceResponse.service;
 			});
-		}
+		};
 		
 		$scope.loadList = function(pageId) {
 			LuyaLoading.start();
 			$http.get($scope.config.apiEndpoint + '/services').success(function(serviceResponse) {
-				$scope.service = serviceResponse;
-				var url = $scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString;
+				$scope.service = serviceResponse.service;
+				$scope.evalSettings(serviceResponse._settings);
+				if ($scope.relationCall) {
+					var url = $scope.config.apiEndpoint + '/relation-call/?' + $scope.config.apiListQueryString;
+					url = url + '&arrayIndex=' + $scope.relationCall.arrayIndex + '&id=' + $scope.relationCall.id + '&modelClass=' + $scope.relationCall.modelClass;
+				} else {
+					var url = $scope.config.apiEndpoint + '/?' + $scope.config.apiListQueryString;
+				}
+				
 				if (pageId !== undefined) {
 					url = url + '&page=' + pageId;
 				}
-				if ($scope.orderBy) {
-					url = url + '&sort=' + $scope.orderBy.replace("+", "");
+				if ($scope.config.orderBy) {
+					url = url + '&sort=' + $scope.config.orderBy.replace("+", "");
 				}
 				$http.get(url).then(function(response) {
 					$scope.setPagination(
@@ -541,35 +626,6 @@
 		
 	});
 	
-	zaa.controller("ActiveWindowChangePassword", function($scope) {
-		
-		$scope.crud = $scope.$parent;
-		
-		$scope.init = function() {
-			$scope.errorMessage = [];
-			$scope.error = false;
-			$scope.submitted = false;
-			$scope.transport = [];
-			$scope.newpass = null;
-			$scope.newpasswd = null;
-		};
-		
-		$scope.$watch(function() { return $scope.crud.data.aw.itemId }, function(n, o) {
-			$scope.init();
-		});
-		
-		$scope.submit = function() {
-			$scope.crud.sendActiveWindowCallback('save', {'newpass' : $scope.newpass, 'newpasswd' : $scope.newpasswd}).then(function(response) {
-				$scope.submitted = true;
-				$scope.error = response.data.error;
-				$scope.transport = response.data.message;
-				if ($scope.error) {
-					$scope.errorMessage = response.data.message;
-				}
-			})
-		};
-	});
-	
 	zaa.controller("ActiveWindowGroupAuth", function($scope, $http, CacheReloadService) {
 		
 		$scope.crud = $scope.$parent; // {{ data.aw.itemId }}
@@ -615,7 +671,7 @@
 	
 // DefaultController.js.
 	
-	zaa.controller("DefaultController", function ($scope, $http, $state, $stateParams) {
+	zaa.controller("DefaultController", function ($scope, $http, $state, $stateParams, CrudTabService) {
 		
 		$scope.moduleId = $state.params.moduleId;
 		
@@ -660,7 +716,7 @@
 			if (!$scope.currentItem) {
 				if ($state.current.name == 'default.route' || $state.current.name == 'default.route.detail') {
 					var params = [$stateParams.moduleRouteId, $stateParams.controllerId, $stateParams.actionId];
-					var route = params.join("-");
+					var route = params.join("/");
 					if ($scope.itemRoutes.indexOf(route)) {
 						$scope.currentItem = $scope.itemRoutes[route];
 						$scope.currentItem.route = route;
@@ -673,8 +729,9 @@
 			$scope.currentItem = item;
 			
 			var id = item.route;
+			var res = id.split("/");
+			CrudTabService.clear();
 			
-			var res = id.split("-");
 			$state.go('default.route', { moduleRouteId : res[0], controllerId : res[1], actionId : res[2]});
 		};
 		
@@ -702,7 +759,7 @@
 	
 	// LayoutMenuController.js
 	
-	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, CacheReloadService, LuyaLoading, AdminToastService) {
+	zaa.controller("LayoutMenuController", function ($scope, $http, $state, $location, $timeout, $window, CacheReloadService, LuyaLoading, AdminToastService) {
 	
 		$scope.LuyaLoading = LuyaLoading;
 		
@@ -711,6 +768,12 @@
 		$scope.reload = function() {
 			CacheReloadService.reload();
 		}
+		
+		$scope.updateUserProfile = function(profile) {
+			$http.post('admin/api-admin-common/change-language', {lang: profile.lang }).success(function(response) {
+				$window.location.reload();
+			});
+		};
 	
 		$scope.sidePanelUserMenu = false;
 		
@@ -753,7 +816,7 @@
 				
 			} else {
 				$scope.click(itemConfig.menuItem.module).then(function() {
-					var res = itemConfig.menuItem.route.split("-");
+					var res = itemConfig.menuItem.route.split("/");
 					$state.go('default.route', { moduleRouteId : res[0], controllerId : res[1], actionId : res[2]}).then(function() {
 						if (itemConfig.stateProvider) {
 							var params = {};

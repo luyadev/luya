@@ -4,8 +4,9 @@ namespace luyatests\core;
 
 use luyatests\LuyaWebTestCase;
 use luya\TagParser;
+use luya\tag\tags\LinkTag;
 
-class TagParserTeste extends LuyaWebTestCase
+class TagParserTest extends LuyaWebTestCase
 {
     public function testInvalidContent()
     {
@@ -16,5 +17,21 @@ class TagParserTeste extends LuyaWebTestCase
         $this->assertSame('string', TagParser::convert('string'));
         $this->assertSame([], TagParser::convert([]));
         $this->assertSame('', TagParser::convert(''));
+    }
+    
+    public function testContentWithMarkdown()
+    {
+        $this->assertSame('<p>foo</p>', trim(TagParser::convertWithMarkdown('foo')));
+    }
+    
+    public function testInjectTag()
+    {
+        TagParser::inject('foo', ['class' => LinkTag::class]);
+        
+        $tags = TagParser::getInstantiatedTagObjects();
+        
+        $this->arrayHasKey('foo', $tags);
+        
+        $this->assertInstanceOf('luya\tag\tags\LinkTag', $tags['foo']);
     }
 }

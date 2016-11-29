@@ -8,7 +8,7 @@ trigger_error("luya\cms\TagParser deprecated use luya\TagParser instead.", E_USE
 
 /**
  * CMS Tag Parser
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @deprecated
  */

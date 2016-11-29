@@ -10,7 +10,7 @@ use Yii;
  * Example usage:
  *
  * ```
- * public function ngrestAttributeTypes()
+ * public function ngRestAttributeTypes()
  * {
  * 		'genres' => ['selectModel', 'modelClass' => path\to\Genres::className(), 'valueField' => 'id', 'labelField' => 'title']],
  * }

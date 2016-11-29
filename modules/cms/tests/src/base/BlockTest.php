@@ -6,8 +6,9 @@ use luya\cms\base\Block;
 use cmstests\data\blocks\TestBlock;
 use cmstests\data\blocks\FailureBlock;
 use cmstests\CmsFrontendTestCase;
+use luya\cms\base\TwigBlock;
 
-class GetterSetter extends Block
+class GetterSetter extends TwigBlock
 {
     public function extraVars()
     {
@@ -55,9 +56,8 @@ class BlockTest extends CmsFrontendTestCase
 
         $this->assertEquals('TestBlock.twig', $block->getViewFileName('twig'));
         $this->assertEquals('twig-frontend', $block->renderFrontend());
-        $this->assertEquals('<i class="material-icons">test-icon</i> <span>Test</span>', $block->getFullName());
 
-        foreach ($block->getVars() as $var) {
+        foreach ($block->getConfigVarsExport() as $var) {
             $this->assertArrayHasKey('id', $var);
             $this->assertArrayHasKey('var', $var);
             $this->assertArrayHasKey('label', $var);
@@ -67,7 +67,7 @@ class BlockTest extends CmsFrontendTestCase
             $this->assertArrayHasKey('initvalue', $var);
         }
 
-        foreach ($block->getCfgs() as $var) {
+        foreach ($block->getConfigCfgsExport() as $var) {
             $this->assertArrayHasKey('id', $var);
             $this->assertArrayHasKey('var', $var);
             $this->assertArrayHasKey('label', $var);
@@ -99,7 +99,7 @@ class BlockTest extends CmsFrontendTestCase
     {
         $block = new FailureBlock();
         // will throw Exception:  Required attributes in config var element is missing. var, label and type are required.
-        $block->getVars();
+        $block->getConfigVarsExport();
     }
 
     public function testGetterSetter()

@@ -16,8 +16,7 @@ use luya\admin\ngrest\base\Plugin;
 class Html extends Plugin
 {
     /**
-     * {@inheritDoc}
-     * @see \admin\ngrest\base\Plugin::renderList()
+     * @inheritdoc
      */
     public function renderList($id, $ngModel)
     {
@@ -25,8 +24,7 @@ class Html extends Plugin
     }
 
     /**
-     * {@inheritDoc}
-     * @see \admin\ngrest\base\Plugin::renderCreate()
+     * @inheritdoc
      */
     public function renderCreate($id, $ngModel)
     {
@@ -34,8 +32,7 @@ class Html extends Plugin
     }
 
     /**
-     * {@inheritDoc}
-     * @see \admin\ngrest\base\Plugin::renderUpdate()
+     * @inheritdoc
      */
     public function renderUpdate($id, $ngModel)
     {

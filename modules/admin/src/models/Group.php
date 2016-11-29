@@ -19,7 +19,7 @@ class Group extends NgRestModel
     use SoftDeleteTrait;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function tableName()
     {
@@ -27,7 +27,7 @@ class Group extends NgRestModel
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function rules()
     {
@@ -69,7 +69,7 @@ class Group extends NgRestModel
         ];
     }
     
-    public function ngrestAttributeTypes()
+    public function ngRestAttributeTypes()
     {
         return [
             'name' => 'text',
@@ -77,7 +77,7 @@ class Group extends NgRestModel
         ];
     }
     
-    public function ngrestExtraAttributeTypes()
+    public function ngRestExtraAttributeTypes()
     {
         return [
             'users' => [

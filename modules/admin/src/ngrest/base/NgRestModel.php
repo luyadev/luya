@@ -48,8 +48,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     protected $ngRestServiceArray = [];
     
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Component::behaviors()
+     * @inheritdoc
      */
     public function behaviors()
     {
@@ -147,6 +146,30 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
     
     /**
+     * Define your relations in order to access the relation data and manage them directly in the same view.
+     *
+     * Example of how to use two relation buttons based on models which as to be ngrest model as well with apis!
+     *
+     * ```php
+     * public function ngRestRelations()
+     * {
+     * 	   return [
+     *          ['label' => 'The Label', 'apiEndpoint' => \path\to\ngRest\Model::ngRestApiEndpoint(), 'dataProvider' => $this->getSales()],
+     *     ];
+     * }
+     * ```
+     *
+     * The above example will use the `getSales()` method of the current model where you are implementing this relation. The `getSales()` must return
+     * an {{yii\db\QueryInterface}} Object, for example you can use `$this->hasMany(Model, ['key' => 'rel'])` or `new \yii\db\Query()`.
+     *
+     * @return array
+     */
+    public function ngRestRelations()
+    {
+        return [];
+    }
+    
+    /**
      * The NgRestFind is used when performing the crud list index overivew. You
      * can override this method in order to hide data from the ngRestFind command
      * which populates all data from the database.
@@ -170,8 +193,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
 
     /**
-     * {@inheritDoc}
-     * @see \yii\db\BaseActiveRecord::afterFind()
+     * @inheritdoc
      */
     public function afterFind()
     {
@@ -188,8 +210,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
 
     /**
-     * {@inheritDoc}
-     * @see \admin\base\GenericSearchInterface::genericSearchFields()
+     * @inheritdoc
      */
     public function genericSearchFields()
     {
@@ -204,8 +225,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
     
     /**
-     * {@inheritDoc}
-     * @see \admin\base\GenericSearchInterface::genericSearchHiddenFields()
+     * @inheritdoc
      */
     public function genericSearchHiddenFields()
     {
@@ -213,10 +233,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
     
     /**
-     * Current Ng-Rest item does not have a detail view.
-     *
-     * {@inheritDoc}
-     * @see \admin\base\GenericSearchInterface::genericSearchStateProvider()
+     * @inheritdoc
      */
     public function genericSearchStateProvider()
     {
@@ -229,9 +246,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
 
     /**
-     * @param string $searchQuery a search string
-     * {@inheritDoc}
-     * @see \admin\base\GenericSearchInterface::genericSearch()
+     * @inheritdoc
      */
     public function genericSearch($searchQuery)
     {
@@ -278,7 +293,12 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     public function getNgRestPrimaryKey()
     {
         if ($this->_ngRestPrimaryKey === null) {
-            $this->_ngRestPrimaryKey = $this->getTableSchema()->primaryKey[0];
+            $keys = static::primaryKey();
+            if (!isset($keys[0])) {
+                throw new InvalidConfigException("The NgRestModel '".__CLASS__."' requires at least one primaryKey in order to work.");
+            }
+            
+            $this->_ngRestPrimaryKey = $keys[0];
         }
 
         return $this->_ngRestPrimaryKey;
@@ -295,7 +315,9 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
     
     /**
+     * Triggers the event service event and returns the resolved data.
      *
+     * @return mixed The service data.
      */
     public function getNgrestServices()
     {
@@ -305,10 +327,12 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     }
     
     /**
-     * Define the field types for ngrest, to use `ngRestConfigDefine()`. The definition can contain properties, but does not have to.
+     * Define the field types for ngrest, to use `ngRestConfigDefine()`.
+     *
+     * The definition can contain properties, but does not have to.
      *
      * ```php
-     * ngrestAttributeTypes()
+     * ngRestAttributeTypes()
      * {
      *     return [
      *         'firstname' => 'text',
@@ -323,20 +347,21 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      * ```
      *
      * @return array
-     * @since 1.0.0-beta4
+     * @since 1.0.0-RC1
      */
-    public function ngrestAttributeTypes()
+    public function ngRestAttributeTypes()
     {
         return [];
     }
 
     /**
-     * Same as ngrestAttributeTypes() but used `extraField` instead of `field`
+     * Same as ngRestAttributeTypes() but used for extraField instead of field.
      *
+     * @see ngRestAttributeTypes()
      * @return array
-     * @since 1.0.0-beta6
+     * @since 1.0.0-RC2
      */
-    public function ngrestExtraAttributeTypes()
+    public function ngRestExtraAttributeTypes()
     {
         return [];
     }
@@ -370,14 +395,14 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
      *
      * @param \luya\admin\ngrest\ConfigBuilder $config The config which the defintion should be append
      * @param string|array $assignedType This can be a string with a type or an array with multiple types
-     * @param array $fields An array with fields assign to types type based on the an `ngrestAttributeTypes` defintion.
+     * @param array $fields An array with fields assign to types type based on the an `ngRestAttributeTypes` defintion.
      * @throws \yii\base\InvalidConfigException
      * @since 1.0.0-beta4
      */
     public function ngRestConfigDefine(ConfigBuilder $config, $assignedType, array $fields)
     {
-        $types = $this->ngrestAttributeTypes();
-        $extraTypes = $this->ngrestExtraAttributeTypes();
+        $types = $this->ngRestAttributeTypes();
+        $extraTypes = $this->ngRestExtraAttributeTypes();
         
         $scenarios = $this->scenarios();
         
@@ -397,7 +422,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
             
             foreach ($fields as $field) {
                 if (!isset($types[$field]) && !isset($extraTypes[$field])) {
-                    throw new InvalidConfigException("The ngrest attribue '$field' does not exists in ngrestAttributeTypes() nor in ngrestExtraAttributeTypes() method.");
+                    throw new InvalidConfigException("The ngrest attribue '$field' does not exists in ngRestAttributeTypes() nor in ngRestExtraAttributeTypes() method.");
                 }
                 
                 if ($scenario && !in_array($field, $scenarioFields)) {
@@ -440,13 +465,14 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
     public function getNgRestConfig()
     {
         if ($this->_config == null) {
-            $config = Yii::createObject(['class' => Config::className(), 'apiEndpoint' => static::ngRestApiEndpoint(), 'primaryKey' => $this->getNgRestPrimaryKey()]);
-            $configBuilder = new ConfigBuilder(static::className());
+            $config = Yii::createObject(['class' => Config::class, 'apiEndpoint' => static::ngRestApiEndpoint(), 'primaryKey' => $this->getNgRestPrimaryKey()]);
+            $configBuilder = new ConfigBuilder(static::class);
             $this->ngRestConfig($configBuilder);
             $config->setConfig($configBuilder->getConfig());
             foreach ($this->i18n as $fieldName) {
                 $config->appendFieldOption($fieldName, 'i18n', true);
             }
+            
             $this->_config = $config;
         }
 

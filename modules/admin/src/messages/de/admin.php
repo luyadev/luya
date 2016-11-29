@@ -97,6 +97,12 @@ return [
     'aws_changepassword_succes' => 'Dein neues Passwort wurde erfolgreich verschlüsselt und angepasst.',
     'aws_changepassword_new_pass' => 'Neues Passwort',
     'aws_changepassword_new_pass_retry' => 'Neues Passwort wiederholen',
+    'view_index_redirect_type' => 'Art der Weiterleitung',
+    'view_index_redirect_internal' => 'Interne-Seite',
+    'view_index_redirect_external' => 'Externe URL',
+    'view_index_redirect_internal_select' => 'Wählen Sie die interne Seite, auf die weitergeleitet werden soll.',
+    'view_index_redirect_external_link' => 'Externer Link',
+    'view_index_redirect_external_link_help' => 'Externe Links beginnen mit http:// oder https://',
 
 // added translation in 1.0.0-beta3:
 
@@ -177,4 +183,15 @@ return [
     'right_panel_support_support_title' => 'Hilfe',
     'right_panel_support_support_text' => 'Bei Fragen wenden Sie sich bitte an den Webmaster, oder besuchen Sie <a target="_blank" href="https://luya.io">luya.io</a>.',
 
+// rc2
+
+    'ngrest_crud_group_prompt' => 'Nach Feld gruppieren',
+    'ngrest_crud_filter_prompt' => 'Filter auswählen',
+    'ngrest_crud_ajax_search_length' => 'Der Suchbegriff muss mindestens 3 Zeichen lang sein.',
+    'menu_system_logger' => 'Logger',
+    'layout_filemanager_detail_replace_file' => 'Datei ersetzen',
+    'layout_rightbar_languagelabel' => 'Oberflächen Sprache',
+    'layout_rightbar_savebtn' => 'Speichern',
+    'aws_changepassword_notequal' => 'Das neue Passwort muss mit der Wiederholung übereinstimmen.',
+    'aws_changeapssword_minchar' => 'Das neue Passwort muss mindiestnes {min} Zeichen enthalten.',
 ];

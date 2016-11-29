@@ -9,33 +9,33 @@ namespace luya\admin\assets;
  */
 class Main extends \luya\web\Asset
 {
+    /**
+     * @var string The path to the folder where the files of this asset are located.
+     */
     public $sourcePath = '@admin/resources';
 
+    /**
+     * @var array A list of css style documents located in the $sourcePath folder.
+     */
     public $css = [
         'css/admin.css',
     ];
 
+    /**
+     * @var array A list of javascript files located in the $sourcePath folder.
+     */
     public $js = [
-        //'js/libs/ResizeSensor.js',
-        //'js/libs/ElementQueries.js',
         'js/zaa.js',
         'js/services.js',
         'js/directives.js',
         'js/controllers.js',
     ];
 
+    /**
+     * @var array A list of asset files on where this asset file depends on, it means the current files will be included after the depending files.
+     */
     public $depends = [
         'luya\admin\assets\Jquery',
         'luya\admin\assets\BowerVendor',
     ];
-
-    /*
-    public $publishOptions = [
-        'only' => [
-            'js/*',
-            'css/*',
-            'fonts/*',
-        ]
-    ];
-    */
 }

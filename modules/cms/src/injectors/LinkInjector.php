@@ -4,27 +4,47 @@ namespace luya\cms\injectors;
 
 use Yii;
 use luya\cms\base\BaseBlockInjector;
+use luya\cms\helpers\Url;
 
+/**
+ * Link Injector to generate links.
+ *
+ * Ability to select a link in the administration interface and return the path to the link indipendent from internal or external links.
+ *
+ * ```php
+ * new LinkInjector();
+ * ```
+ *
+ * In order to configure the LinkInjector used the {{\luya\cms\base\InternalBaseBlock::injectors}} method:
+ *
+ * ```php
+ * public function injectors()
+ * {
+ *     return [
+ *	       'theLink' => new \luya\cms\injectors\LinkInjector()
+ *	   ];
+ * }
+ * ```
+ *
+ * The value of the `$this->extraValue('theLink')` is a {{luya\web\LinkInterface}} therefor you can access the `getHref` and `getTarget` methods in order to generate the link:
+ *
+ * ```php
+ * <a href="<?= $this->extraValue('link')?>" target="<?= $this->extraValue('link')->getTarget(); ?>">Go There</a>
+ * ```
+ *
+ * @author Basil Suter <basil@nadar.io>
+ */
 class LinkInjector extends BaseBlockInjector
 {
     private function getLinkUrl()
     {
         $content = $this->getContextConfigValue($this->varName);
     
-        if (!empty($content) && isset($content['type'])) {
-            switch ($content['type']) {
-                case 1:
-                    return Yii::$app->menu->findOne(['id' => $content['value']])->link;
-                case 2:
-                    return $content['value'];
-            }
-        }
+        return Url::generateLinkObject($content);
     }
     
     /**
-     * 
-     * {@inheritDoc}
-     * @see \luya\cms\base\BaseBlockInjector::setup()
+     * @inheritdoc
      */
     public function setup()
     {

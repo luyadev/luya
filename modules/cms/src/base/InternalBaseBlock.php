@@ -3,21 +3,35 @@
 namespace luya\cms\base;
 
 use Yii;
-use yii\helpers\Inflector;
 use yii\base\Object;
+use yii\helpers\Inflector;
 use luya\helpers\Url;
-use luya\cms\frontend\blockgroups\MainGroup;
 use luya\helpers\ArrayHelper;
 use luya\admin\base\TypesInterface;
+use luya\cms\frontend\blockgroups\MainGroup;
+use luya\cms\helpers\BlockHelper;
 
 /**
- * Base Block for all Cms Blocks.
+ * Concret Block implementation based on BlockInterface.
+ *
+ * This is an use case for the block implemenation as InternBaseBlock fro
+ * two froms of implementations.
+ *
+ * + {{\luya\cms\base\PhpBlock}}
+ * + {{\luya\cms\base\TwigBlock}}
  *
  * @since 1.0.0-beta8
  * @author Basil Suter <basil@nadar.io>
  */
 abstract class InternalBaseBlock extends Object implements BlockInterface, TypesInterface
 {
+    /**
+     * Returns the configuration array.
+     *
+     * @return array
+     */
+    abstract public function config();
+    
     private $_varValues = [];
 
     private $_cfgValues = [];
@@ -26,9 +40,9 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
 
     private $_envOptions = [];
 
-    const VAR_INJECTOR = 'var';
+    const INJECTOR_VAR = 'var';
     
-    const CFG_INJECTOR = 'cfg';
+    const INJECTOR_CFG = 'cfg';
 
     protected function injectorSetup()
     {
@@ -61,18 +75,32 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      * added automatically.
      */
     public $module = 'app';
-
+    
     /**
-     * @var array Define a list of assets to be insert in the frontend context. The assets will be ignored in
-     * admin context. Example usage of assets property:
+     * Whether cache is enabled for this block or not.
      *
-     * ```php
-     * public $assets = [
-     *     'app\assets\MyAjaxBlockAsset',
-     * ];
-     * ```
+     * @return boolean
      */
-    public $assets = [];
+    public function getIsCacheEnabled()
+    {
+        return $this->cacheEnabled;
+    }
+    
+    /**
+     * The time of cache expiration
+     */
+    public function getCacheExpirationTime()
+    {
+        return $this->cacheExpiration;
+    }
+    
+    /**
+     * Whether is an container element or not.
+     */
+    public function getIsContainer()
+    {
+        return $this->isContainer;
+    }
     
     /**
      * Contains the class name for the block group class
@@ -80,7 +108,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      * @return string The classname on which the block should be stored in.
      * @since 1.0.0-beta6
      */
-    public function getBlockGroup()
+    public function blockGroup()
     {
         return MainGroup::className();
     }
@@ -96,7 +124,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      *     return [
      *         'foobar' => new cms\injector\ActiveQueryCheckbox([
      *             'query' => MyModel::find()->where(['id' => 1]),
-     *             'type' => self::VAR_INJECTOR, // could be self::CFG_INJECTOR
+     *             'type' => self::INJECTOR_VAR, // could be self::INJECTOR_CFG
      *         ]);
      *     ];
      * }
@@ -232,6 +260,16 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     {
         return $this->_placeholderValues;
     }
+    
+    /**
+     *
+     * @param unknown $placholder
+     * @return boolean
+     */
+    public function getPlacholderValue($placholder)
+    {
+        return (isset($this->getPlaceholderValues()[$placholder])) ? $this->getPlaceholderValues()[$placholder] : false;
+    }
 
     /**
      * User method to get the values inside the class.
@@ -274,6 +312,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
         return (array_key_exists($key, $this->_cfgValues)) ? $this->_cfgValues[$key] : $default;
     }
 
+    
     /**
      * Sets the config values.
      *
@@ -305,14 +344,20 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     private $_extraVars = [];
     
     // access from outside
-    public function extraVarsOutput()
+    public function getExtraVarValues()
     {
         $this->_extraVars = ArrayHelper::merge($this->_extraVars, $this->extraVars());
         return $this->_extraVars;
     }
     
+    private $_assignExtraVars = false;
+    
     public function getExtraValue($key, $default = false)
     {
+        if (!$this->_assignExtraVars) {
+            $this->getExtraVarValues();
+            $this->_assignExtraVars = true;
+        }
         return (isset($this->_extraVars[$key])) ? $this->_extraVars[$key] : $default;
     }
     
@@ -331,7 +376,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     /**
      * @return array
      */
-    public function getVars()
+    public function getConfigVarsExport()
     {
         $config = $this->config();
         
@@ -352,7 +397,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     /**
      * @return array
      */
-    public function getPlaceholders()
+    public function getConfigPlaceholdersExport()
     {
         return (array_key_exists('placeholders', $this->config())) ? $this->config()['placeholders'] : [];
     }
@@ -362,7 +407,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     /**
      * @return array
      */
-    public function getCfgs()
+    public function getConfigCfgsExport()
     {
         $config = $this->config();
         
@@ -379,19 +424,11 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
     {
         $this->_cfgs[] = (new BlockCfg($cfgConfig))->toArray();
     }
-
-    /**
-     * @return string
-     */
-    public function getFullName()
-    {
-        return ($this->icon() === null) ? $this->name() : '<i class="material-icons">'.$this->icon().'</i> <span>'.$this->name().'</span>';
-    }
     
     /**
-     * Returns the name of the twig file to be rendered.
+     * Returns the name of the twig or php file to be rendered.
      *
-     * @return string The name of the twig file (example.twig)
+     * @return string The name of the twig or php file (example.twig, example.php)
      */
     public function getViewFileName($extension)
     {
@@ -419,43 +456,32 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
         return $moduleName;
     }
     
-    public function getViewPath()
-    {
-        return $this->ensureModule() . '/views/blocks';
-    }
-    
     /**
      * Create the options array for a zaa-select field based on an key value pairing
      * array.
      *
+     * @deprecated Will be removed in 1.0.0
      * @param array $options The key value array pairing the select array should be created from.
      * @since 1.0.0-beta5
      */
     protected function zaaSelectArrayOption(array $options)
     {
-        $transform = [];
-        foreach ($options as $key => $value) {
-            $transform[] = ['value' => $key, 'label' => $value];
-        }
-        
-        return $transform;
+        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\cms\helpers\BlockHelper::selectArrayOption() instead.', E_USER_DEPRECATED);
+        return BlockHelper::selectArrayOption($options);
     }
     
     /**
      * Create the Options list in the config for a zaa-checkbox-array based on an
      * key => value pairing array.
      *
+     * @deprecated Will be removed in 1.0.0
      * @param array $options The array who cares the options with items
      * @since 1.0.0-beta5
      */
     protected function zaaCheckboxArrayOption(array $options)
     {
-        $transform = [];
-        foreach ($options as $key => $value) {
-            $transform[] = ['value' => $key, 'label' => $value];
-        }
-        
-        return ['items' => $transform];
+        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\cms\helpers\BlockHelper::checkboxArrayOption() instead.', E_USER_DEPRECATED);
+        return BlockHelper::checkboxArrayOption($options);
     }
     
     /**
@@ -471,6 +497,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      * 'imageFiltered' => $this->zaaImageUpload($this->getVarValue('myImage'), 'small-thumbnail'),
      * ```
      *
+     * @deprecated Will be removed in 1.0.0
      * @param string|int $value Provided the value
      * @param boolean|string $applyFilter To apply a filter insert the identifier of the filter.
      * @param boolean $returnObject Whether the storage object should be returned or an array.
@@ -478,31 +505,8 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      */
     protected function zaaImageUpload($value, $applyFilter = false, $returnObject = false)
     {
-        if (empty($value)) {
-            return false;
-        }
-        
-        $image = Yii::$app->storage->getImage($value);
-        
-        if (!$image) {
-            return false;
-        }
-        
-        if ($applyFilter && is_string($applyFilter)) {
-            $filter = $image->applyFilter($applyFilter);
-            
-            if ($filter) {
-                if ($returnObject) {
-                    return $filter;
-                }
-                return $filter->toArray();
-            }
-        }
-        
-        if ($returnObject) {
-            return $image;
-        }
-        return $image->toArray();
+        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\cms\helpers\BlockHelper::imageUpload() instead.', E_USER_DEPRECATED);
+        return BlockHelper::imageUpload($value, $applyFilter, $returnObject);
     }
     
     /**
@@ -512,24 +516,15 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      * 'file' => $this->zaaFileUpload($this->getVarValue('myFile')),
      * ```
      *
+     * @deprecated Will be removed in 1.0.0
      * @param string|int $value Provided the value
      * @param boolean $returnObject Whether the storage object should be returned or an array.
      * @return boolean|array Returns false when not found, returns an array with all data for the image on success.
      */
     protected function zaaFileUpload($value, $returnObject = false)
     {
-        if (!empty($value)) {
-            $file = Yii::$app->storage->getFile($value);
-            
-            if ($file) {
-                if ($returnObject) {
-                    return $file;
-                }
-                return $file->toArray();
-            }
-        }
-        
-        return false;
+        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\cms\helpers\BlockHelper::fileUpload() instead.', E_USER_DEPRECATED);
+        return BlockHelper::fileUpload($value, $returnObject);
     }
     
     /**
@@ -541,26 +536,15 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      *
      * Each array item will have all file query item data and a caption key.
      *
+     * @deprecated Will be removed in 1.0.0
      * @param string|int $value The specific var or cfg fieldvalue.
      * @param boolean $returnObject Whether the storage object should be returned or an array.
      * @return array Returns an array in any case, even an empty array.
      */
     protected function zaaFileArrayUpload($value, $returnObject = false)
     {
-        if (!empty($value) && is_array($value)) {
-            $data = [];
-            foreach ($value as $key => $item) {
-                $file = $this->zaaFileUpload($item['fileId'], true);
-                if ($file) {
-                    $file->caption = $item['caption'];
-                    $data[$key] = ($returnObject) ? $file : $file->toArray();
-                }
-            }
-            
-            return $data;
-        }
-        
-        return [];
+        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\cms\helpers\BlockHelper::fileArrayUpload() instead.', E_USER_DEPRECATED);
+        return BlockHelper::fileArrayUpload($value, $returnObject);
     }
 
     /**
@@ -572,6 +556,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      *
      * Each array item will have all file query item data and a caption key.
      *
+     * @deprecated Will be removed in 1.0.0
      * @param string|int $value The specific var or cfg fieldvalue.
      * @param boolean|string $applyFilter To apply a filter insert the identifier of the filter.
      * @param boolean $returnObject Whether the storage object should be returned or an array.
@@ -579,21 +564,7 @@ abstract class InternalBaseBlock extends Object implements BlockInterface, Types
      */
     protected function zaaImageArrayUpload($value, $applyFilter = false, $returnObject = false)
     {
-        if (!empty($value) && is_array($value)) {
-            $data = [];
-            
-            foreach ($value as $key => $item) {
-                $image = $this->zaaImageUpload($item['imageId'], $applyFilter, true);
-                if ($image) {
-                    $image->caption = $item['caption'];
-                    
-                    $data[$key] = ($returnObject) ? $image : $image->toArray();
-                }
-            }
-            
-            return $data;
-        }
-        
-        return [];
+        trigger_error('Deprecated method '.__METHOD__.' in '.get_called_class().', use \luya\cms\helpers\BlockHelper::imageArrayUpload() instead.', E_USER_DEPRECATED);
+        return BlockHelper::imageArrayUpload($value, $applyFilter, $returnObject);
     }
 }

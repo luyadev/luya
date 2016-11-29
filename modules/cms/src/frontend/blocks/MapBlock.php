@@ -7,7 +7,7 @@ use luya\cms\base\TwigBlock;
 
 /**
  * Google Maps Block.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class MapBlock extends TwigBlock

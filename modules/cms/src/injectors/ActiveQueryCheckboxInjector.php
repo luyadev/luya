@@ -21,6 +21,19 @@ use luya\helpers\ArrayHelper;
  * ]);
  * ```
  *
+ * In order to configure the ActiveQueryCheckboxInjector used the {{\luya\cms\base\InternalBaseBlock::injectors}} method:
+ *
+ * ```php
+ * public function injectors()
+ * {
+ *     return [
+ *	       'theData' => new ActiveQueryCheckboxInjector([
+ *             'query' => News::find()->select(['title'])->where(['is_deleted' => 0]),
+ *         ]);
+ *	   ];
+ * }
+ * ```
+ *
  * @property \yii\db\ActiveQueryInterface $query The ActiveQuery object
  * @since 1.0.0-rc1
  * @author Basil Suter <basil@nadar.io>
@@ -30,10 +43,11 @@ class ActiveQueryCheckboxInjector extends BaseBlockInjector
     private $_query = null;
     
     /**
-     * Setter method for the active query interface. Define the active query which will be used
-     * to retrieve data.
+     * Setter method for the active query interface.
      *
-     * @param ActiveQueryInterface $query
+     * Define the active query which will be used to retrieve data must be an instance of {{\yii\db\ActiveQueryInterface}}.
+     *
+     * @param \yii\db\ActiveQueryInterface $query The query provider for the {{yii\data\ActiveDataProvider}}.
      */
     public function setQuery(ActiveQueryInterface $query)
     {
@@ -49,7 +63,7 @@ class ActiveQueryCheckboxInjector extends BaseBlockInjector
         $data = [];
         foreach ($provider->getModels() as $model) {
             $labels = [];
-            foreach ($model->getAttributes() as $value) {
+            foreach ($model->getAttributes($this->_query->select) as $value) {
                 if (is_string($value)) {
                     $labels[] = $value;
                 }
@@ -71,8 +85,7 @@ class ActiveQueryCheckboxInjector extends BaseBlockInjector
     }
     
     /**
-     * {@inheritDoc}
-     * @see \cms\base\BaseBlockInjector::setup()
+     * @inheritdoc
      */
     public function setup()
     {

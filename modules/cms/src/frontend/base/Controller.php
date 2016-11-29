@@ -23,7 +23,7 @@ abstract class Controller extends \luya\web\Controller
      *
      * @param integer $navItemId
      * @param string $appendix
-     * @param boolean|intger $setNavItemTypeId To get the content of a version this parameter will change the database value from the nav item Model
+     * @param boolean|integer $setNavItemTypeId To get the content of a version this parameter will change the database value from the nav item Model
      * to this provided value
      *
      * @throws NotFoundHttpException
@@ -69,7 +69,6 @@ abstract class Controller extends \luya\web\Controller
         }
         
         $typeModel->setOptions([
-            'cmsControllerObject' => $this,
             'navItemId' => $navItemId,
             'restString' => $appendix,
         ]);
@@ -93,7 +92,11 @@ abstract class Controller extends \luya\web\Controller
         }
         
         if ($this->view->title === null) {
-            $this->view->title = $model->title;
+            if (empty($model->title_tag)) {
+                $this->view->title = $model->title;
+            } else {
+                $this->view->title = $model->title_tag;
+            }
         }
         
         $this->view->registerMetaTag(['name' => 'og:title', 'content' => $this->view->title], 'fbTitle');

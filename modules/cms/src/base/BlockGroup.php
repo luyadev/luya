@@ -7,6 +7,10 @@ use yii\base\Object;
 /**
  * Base class for all Block Groups.
  *
+ * A block group contains informations about the container where a block can be grouped. This is
+ * only important for the cms administration interface in order to group the blocks into containers
+ * and has no affect to frontend implementations.
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 abstract class BlockGroup extends Object

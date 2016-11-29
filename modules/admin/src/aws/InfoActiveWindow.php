@@ -5,14 +5,23 @@ namespace luya\admin\aws;
 use luya\admin\ngrest\base\ActiveWindow;
 
 /**
- * Active Window created at 15.09.2016 14:35 on LUYA Version 1.0.0-RC1-dev.
+ * Diplay Detail informations about an ActiveRecord model.
  */
 class InfoActiveWindow extends ActiveWindow
 {
+    /**
+     * @var string The name of the module where the active windows is located in order to finde the view path.
+     */
     public $module = '@admin';
     
+    /**
+     * @var string The name of of the ActiveWindow. This is displayed in the CRUD list.
+     */
     public $alias = 'Detail';
     
+    /**
+     * @var string The icon name from goolges material icon set (https://material.io/icons/)
+     */
     public $icon = 'zoom_in';
     
     /**

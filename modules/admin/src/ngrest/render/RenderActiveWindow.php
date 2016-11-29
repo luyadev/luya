@@ -17,8 +17,11 @@ class RenderActiveWindow extends Render implements RenderInterface
     public function render()
     {
         if (($activeWindow = $this->findActiveWindow($this->activeWindowHash)) !== false) {
+            /** @var $object \luya\admin\ngrest\base\ActiveWindow */
             $object = Yii::createObject($activeWindow['objectConfig']);
             $object->setItemId($this->_itemId);
+            $object->setConfigHash($this->config->getHash());
+            $object->setActiveWindowHash($this->activeWindowHash);
             Yii::$app->session->set($this->activeWindowHash, $this->_itemId);
             return $object->index();
         }

@@ -43,8 +43,7 @@ abstract class Command extends \luya\console\Controller
     }
     
     /**
-     * {@inheritDoc}
-     * @see \luya\console\Controller::options()
+     * @inheritdoc
      */
     public function options($actionID)
     {
@@ -116,7 +115,7 @@ abstract class Command extends \luya\console\Controller
     {
         $name = Inflector::camelize($string);
     
-        if ($suffix && StringHelper::endsWith($name, $suffix, false)) {
+        if ($suffix !== false && StringHelper::endsWith($name, $suffix, false)) {
             $name = substr($name, 0, -(strlen($suffix)));
         }
     
@@ -132,5 +131,16 @@ abstract class Command extends \luya\console\Controller
     public function getLuyaVersion()
     {
         return \luya\Boot::VERSION;
+    }
+    
+    /**
+     * Generates the LUYA text which all generator files should include.
+     *
+     * @param string $command The command which is used like `crud/create` or `aw/create`.
+     * @return string The text to insert.
+     */
+    public function getGeneratorText($command)
+    {
+        return 'File has been created with `'.$command.'` command on LUYA version '.$this->getLuyaVersion().'.';
     }
 }

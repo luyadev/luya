@@ -7,7 +7,7 @@ use luya\cms\base\TwigBlock;
 
 /**
  * Margin Top/Bottom block with Paragraph.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class SpacingBlock extends TwigBlock

@@ -20,7 +20,7 @@ use luya\admin\Module;
         $scope.config.activeWindowCallbackUrl = '<?php echo $activeWindowCallbackUrl; ?>';
         $scope.config.pk = '<?php echo $this->context->getPrimaryKey(); ?>';
         $scope.config.inline = <?= (int) $config->inline; ?>;
-        $scope.orderBy = '<?= $config->getDefaultOrderDirection() . $config->getDefaultOrderField(); ?>';
+        $scope.config.orderBy = '<?= $config->getDefaultOrderDirection() . $config->getDefaultOrderField(); ?>';
         $scope.saveCallback = <?= $config->getOption('saveCallback'); ?>;
         <?php if ($config->groupByField): ?>
         $scope.config.groupBy = 1;
@@ -48,6 +48,10 @@ use luya\admin\Module;
                 <li ng-show="crudSwitchType==2" class="tabs__item" ng-class="{'tabs__item--active' : crudSwitchType==2}">
                     <a class="tabs__anchor" ng-click="switchTo(0, true)"><i class="material-icons tabs__icon">cancel</i> <?= Module::t('ngrest_crud_btn_close'); ?></a>
                 </li>
+                
+                <li ng-repeat="(index,btn) in tabService.tabs" class="tabs__item" ng-class="{'tabs__item--active' : btn.active}">
+                	<a class="tabs__anchor"><i class="material-icons tabs__icon" ng-click="closeTab(btn, index)">cancel</i> <span ng-click="switchToTab(btn)">{{btn.name}} #{{btn.id}}</span></a>
+                </li>
             </ul>
         </div>
 
@@ -58,7 +62,11 @@ use luya\admin\Module;
                 </span>
             </a>
         </div>
-
+		
+		<div class="card-panel" ng-repeat="btn in tabService.tabs" ng-if="btn.active">
+			<crud-relation-loader api="{{btn.api}}" array-index="{{btn.arrayIndex}}" model-class="{{btn.modelClass}}" id="{{btn.id}}"></crud-relation-loader>
+		</div>
+        
         <!-- LIST -->
         <div class="card-panel" ng-show="crudSwitchType==0">
 
@@ -74,7 +82,7 @@ use luya\admin\Module;
                                 
                             </div>
                             <div ng-show="config.minLengthWarning">
-                               <p>The search keyword must at least have 3 chars.</p>
+                               <p><?= Module::t('ngrest_crud_ajax_search_length')?></p>
                             </div>
                         </div>
                         <div class="col <?php if (!empty($config->filters)): ?>m6 l3<?php else: ?>m12 l4<?php endif; ?>">
@@ -82,7 +90,7 @@ use luya\admin\Module;
                                 <div class="input__field-wrapper">
                                     <i class="input__select-arrow material-icons">keyboard_arrow_down</i>
                                     <select class="input__field" ng-change="changeGroupByField()" ng-model="config.groupByField">
-                                        <option value="0">Nach Feld gruppieren</option>
+                                        <option value="0"><?= Module::t('ngrest_crud_group_prompt'); ?></option>
                                         <?php foreach ($config->getPointer('list') as $item): ?>
                                             <option value="<?= $item['name']; ?>"><?= $item['alias']; ?></option>
                                         <?php endforeach; ?>
@@ -95,8 +103,8 @@ use luya\admin\Module;
                                 <div class="input input--select input--vertical input--full-width">
                                     <div class="input__field-wrapper">
                                         <i class="input__select-arrow material-icons">keyboard_arrow_down</i>
-                                        <select class="input__field" ng-change="realoadCrudList()" ng-model="config.filter">
-                                            <option value="0">Filter auswählen</option>
+                                        <select class="input__field" ng-model="config.filter">
+                                            <option value="0"><?= Module::t('ngrest_crud_filter_prompt'); ?></option>
                                             <?php foreach (array_keys($config->filters) as $name): ?>
                                                 <option value="<?= $name; ?>"><?= $name; ?></option>
                                             <?php endforeach; ?>

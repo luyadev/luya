@@ -126,11 +126,11 @@ $scope.imagesDataReload = function() {
 zaa.factory("ServiceImagesData", function($http, $q, $rootScope) {
 	var service = [];
 	
-	service.data = [];
+	service.data = null;
 	
 	service.load = function(forceReload) {
 		return $q(function(resolve, reject) {
-			if (service.data.length > 0 && forceReload !== true) {
+			if (service.data !== null && forceReload !== true) {
 				resolve(service.data);
 			} else {
 				$http.get("admin/api-admin-storage/data-images").success(function(response) {
@@ -161,11 +161,11 @@ $scope.filesDataReload = function() {
 zaa.factory("ServiceFilesData", function($http, $q, $rootScope) {
 	var service = [];
 	
-	service.data = [];
+	service.data = null;
 	
 	service.load = function(forceReload) {
 		return $q(function(resolve, reject) {
-			if (service.data.length > 0 && forceReload !== true) {
+			if (service.data !== null && forceReload !== true) {
 				resolve(service.data);
 			} else {
 				$http.get("admin/api-admin-storage/data-files").success(function(response) {
@@ -266,11 +266,11 @@ $scope.propertiesDataReload = function() {
 zaa.factory("ServicePropertiesData", function($http, $q, $rootScope) {
 	var service = [];
 	
-	service.data = [];
+	service.data = null;
 	
 	service.load = function(forceReload) {
 		return $q(function(resolve, reject) {
-			if (service.data.length > 0 && forceReload !== true) {
+			if (service.data !== null && forceReload !== true) {
 				resolve(service.data);
 			} else {
 				$http.get("admin/api-admin-common/data-properties").success(function(response) {
@@ -280,6 +280,34 @@ zaa.factory("ServicePropertiesData", function($http, $q, $rootScope) {
 				})
 			}
 		});
+	};
+	
+	return service;
+});
+
+zaa.factory("CrudTabService", function() {
+	
+	var service = [];
+	
+	service.tabs = [];
+	
+	service.remove = function(index, $scope) {
+		service.tabs.splice(index, 1);
+		
+		if (service.tabs.length > 0) {
+			var lastTab = service.tabs.slice(-1)[0];
+			lastTab.active = true;
+		} else {
+			$scope.switchTo(0);
+		}
+	};
+	
+	service.addTab = function(id, api, arrayIndex, name, modelClass) {
+		service.tabs.push({id: id, api: api, arrayIndex: arrayIndex, active: false, name: name, modelClass:modelClass});
+	};
+	
+	service.clear = function() {
+		service.tabs = [];
 	};
 	
 	return service;

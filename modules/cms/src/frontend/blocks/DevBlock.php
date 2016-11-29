@@ -8,7 +8,7 @@ use luya\cms\base\TwigBlock;
 
 /**
  * Development Block in order to print data.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class DevBlock extends TwigBlock
@@ -40,7 +40,7 @@ class DevBlock extends TwigBlock
         return '';
     }
     
-    public function getBlockGroup()
+    public function blockGroup()
     {
         return DevelopmentGroup::className();
     }

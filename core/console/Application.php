@@ -23,21 +23,39 @@ class Application extends \yii\console\Application
      */
     public $mute = false;
 
-    public $controllerMap = [
-        'migrate' => '\luya\console\commands\MigrateController',
-        'crud' => '\luya\console\commands\CrudController',
-        'module' => '\luya\console\commands\ModuleController',
-        'command' => '\luya\console\commands\CommandController',
-        'import' => '\luya\console\commands\ImportController',
-        'setup' => '\luya\console\commands\SetupController',
-        'health' => '\luya\console\commands\HealthController',
-        'block' => '\luya\console\commands\BlockController',
-        'storage' => '\luya\console\commands\StorageController',
-        'aw' => '\luya\console\commands\ActiveWindowController',
-    ];
-
     /**
-     * {@inheritdoc}
+     * Provides an array with all LUYA core commands.
+     *
+     * Instead of overriding the core command application and merged the value we directly copied them.
+     *
+     * @see \yii\console\Application::coreCommands()
+     */
+    public function coreCommands()
+    {
+        return [
+            // yii default commands
+            'asset' => 'yii\console\controllers\AssetController',
+            'cache' => 'yii\console\controllers\CacheController',
+            'fixture' => 'yii\console\controllers\FixtureController',
+            'help' => 'yii\console\controllers\HelpController',
+            'message' => 'yii\console\controllers\MessageController',
+            'serve' => 'yii\console\controllers\ServeController',
+            // luya default commands
+            'migrate' => 'luya\console\commands\MigrateController',
+            'crud' => 'luya\console\commands\CrudController',
+            'module' => 'luya\console\commands\ModuleController',
+            'command' => 'luya\console\commands\CommandController',
+            'import' => 'luya\console\commands\ImportController',
+            'setup' => 'luya\console\commands\SetupController',
+            'health' => 'luya\console\commands\HealthController',
+            'block' => 'luya\console\commands\BlockController',
+            'storage' => 'luya\console\commands\StorageController',
+            'aw' => 'luya\console\commands\ActiveWindowController',
+        ];
+    }
+    
+    /**
+     * @inheritdoc
      */
     public function coreComponents()
     {
@@ -58,6 +76,7 @@ class Application extends \yii\console\Application
      * Will run all controllers located in the `commands` folder of a module.
      *
      * {@inheritDoc}
+     *
      * @see \yii\console\Application::runAction()
      * @since 1.0.0-beta6
      */
@@ -77,7 +96,7 @@ class Application extends \yii\console\Application
                     // action response
                     return $module->runAction(implode("/", $partial), $params);
                 } catch (\Exception $e) {
-                    throw new Exception("Exception in route \"$route\": \"{$e->getMessage()}\" in file \"{$e->getFile()}\".", 0, $e);
+                    throw new Exception("Exception in route \"$route\": \"{$e->getMessage()}\" in file \"{$e->getFile()}\" on line {$e->getLine()}.", 0, $e);
                 }
             }
         }

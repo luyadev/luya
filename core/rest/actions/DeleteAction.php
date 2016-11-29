@@ -16,6 +16,11 @@ use yii\web\ServerErrorHttpException;
  */
 class DeleteAction extends \yii\rest\DeleteAction
 {
+    /**
+     * Run the delete action with enhanced error checking methods.
+     *
+     * @see \yii\rest\DeleteAction::run()
+     */
     public function run($id)
     {
         $model = $this->findModel($id);

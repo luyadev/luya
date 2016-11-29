@@ -6,6 +6,7 @@ use Yii;
 use luya\console\Command;
 use yii\db\Schema;
 use yii\helpers\Inflector;
+use yii\base\NotSupportedException;
 
 /**
  * Base Crud Controller
@@ -17,10 +18,36 @@ use yii\helpers\Inflector;
  */
 abstract class BaseCrudController extends Command
 {
+    /**
+     * @var boolean Whether to use schem name or not
+     */
     public $useSchemaName = true;
     
+    /**
+     * @var array A list of class names.
+     */
+    protected $classNames;
+    
+    /**
+     * @var array A list of table names.
+     */
+    protected $tableNames;
+    
+    /**
+     * @var string The name of the table.
+     */
+    public $tableName;
+    
+    /**
+     * @var boolean Whether to generate labels from comments or not.
+     */
     public $generateLabelsFromComments = false;
     
+    /**
+     * Get the sql tables from the current database connection
+     *
+     * @return array An array with all sql tables.
+     */
     public function getSqlTablesArray()
     {
         $names = Yii::$app->db->schema->tableNames;

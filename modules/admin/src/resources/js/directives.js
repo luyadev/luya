@@ -32,6 +32,29 @@
     		}
     	}
     });
+    
+    zaa.directive("crudRelationLoader", function($http, $sce) {
+    	return {
+    		restrict: "E",
+    		replace: true,
+    		transclude: false,
+    		scope: {
+    			"api": "@api",
+    			"arrayIndex": "@arrayIndex",
+    			"modelClass" : "@modelClass",
+    			"id": "@id",
+    		},
+    		controller: function($scope) {
+    			$scope.content = null;
+    			$http.get($scope.api+'/?inline=1&relation='+$scope.id+'&arrayIndex='+$scope.arrayIndex+'&modelClass='+$scope.modelClass).then(function(response) {
+					$scope.content = $sce.trustAsHtml(response.data);
+    			});
+    		},
+    		template: function() {
+    			return '<div compile-html ng-bind-html="content"></div>';
+    		}
+    	}
+    })
 
     // form.js
 
@@ -238,7 +261,7 @@
                 "name": "@fieldname"
             },
             template: function() {
-                return '<textarea ng-wig="model" buttons="bold, italic, link, list1, list2" name="{{name}}"></textarea>';
+                return '<ng-wig ng-disabled="false" ng-model="model" buttons="bold, italic, link, list1, list2" name="{{name}}"></ng-wig>';
             }
         }
     });
@@ -1515,6 +1538,38 @@
                 $scope.foldersDirecotryIdReload = function() {
                 	return ServiceFoldersDirecotryId.load(true);
                 }
+                
+                // file replace logic
+
+                
+                $scope.replaceFile = function(file, errorFiles) {
+                	$scope.replaceFiled = file;
+                	
+                	if (!file) {
+                		return;
+                	}
+                	
+                	LuyaLoading.start();
+                	file.upload = Upload.upload({
+                		url: 'admin/api-admin-storage/file-replace',
+                        data: {file: file, fileId: $scope.fileDetail.id}
+                    });
+                	
+                	file.upload.then(function (response) {
+                        $timeout(function () {
+                            file.result = response.data;
+                            $scope.filesDataReload().then(function() {
+                            	var fileref = $filter('findidfilter')($scope.filesData, $scope.fileDetail.id, true);
+                            	var random = (new Date()).toString();
+                            	fileref.thumbnail.source = fileref.thumbnail.source + "?cb=" + random;
+                            	fileref.thumbnailMedium.source = fileref.thumbnailMedium.source + "?cb=" + random;
+                            	$scope.fileDetail.thumbnailMedium.source = fileref.thumbnailMedium.source + "?cb=" + random;
+                            	LuyaLoading.stop();
+                            	AdminToastService.success('the file has been replaced successfull.', 4000);
+                            });
+                        });
+                    });
+                };
 
                 // upload logic
 
@@ -1542,8 +1597,29 @@
                     }
                 })
 
+                $scope.pasteUpload = function(e) {
+                	
+                    for (var i = 0 ; i < e.originalEvent.clipboardData.items.length ; i++) {
+                        var item = e.originalEvent.clipboardData.items[i];
+                        
+                        if (item.kind == 'file') {
+                        	LuyaLoading.start(i18n['js_dir_upload_wait']);
+	                        Upload.upload({
+	                            url: 'admin/api-admin-storage/files-upload',
+	                            fields: {'folderId': $scope.currentFolderId},
+	                            file: item.getAsFile()
+	                        }).then(function(response) {
+	                        	$scope.filesDataReload().then(function() {
+	                            	AdminToastService.success(i18n['js_dir_manager_upload_image_ok'], 2000);
+	                                LuyaLoading.stop();
+	                            });
+	                        })
+                        }
+                    }
+                }
+                
                 $scope.uploadUsingUpload = function(file) {
-                    file.upload = Upload.upload({
+                	file.upload = Upload.upload({
                         url: 'admin/api-admin-storage/files-upload',
                         fields: {'folderId': $scope.currentFolderId},
                         file: file
@@ -1639,7 +1715,7 @@
                 $scope.changeCurrentFolderId = function(folderId) {
                     $scope.currentFolderId = folderId;
                     ServiceFoldersDirecotryId.folderId = folderId;
-                    $http.post('admin/api-admin-common/save-filemanager-folder-state', {folderId : folderId});
+                    $http.post('admin/api-admin-common/save-filemanager-folder-state', {folderId : folderId}, {ignoreLoadingBar: true});
                 };
 
                 $scope.toggleFolderItem = function(data) {
@@ -1648,7 +1724,7 @@
                     } else {
                         data['toggle_open'] = !data.toggle_open;
                     }
-                    $http.post('admin/api-admin-common/filemanager-foldertree-history', {data : data});
+                    $http.post('admin/api-admin-common/filemanager-foldertree-history', {data : data}, {ignoreLoadingBar: true});
                 };
 
                 $scope.folderUpdateForm = false;

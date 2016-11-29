@@ -96,7 +96,6 @@ class ElementTest extends \luyatests\LuyaWebTestCase
     {
         $element = new \luya\web\Element();
         $element->addElement('name', function () use ($element) {
-
         });
 
         $names = $element->getNames();

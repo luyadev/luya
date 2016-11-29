@@ -17,6 +17,10 @@ $this->beginPage()
         [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   			display: none !important;
 		}
+		
+		.dragover {
+		    border: 5px dashed #2196F3;
+		}
     </style>
     <?php $this->head(); ?>
 </head>
@@ -52,6 +56,38 @@ $this->beginPage()
         <div class="modal__background" ng-click="isModalHidden = true" style="cursor:pointer;"></div>
     </div>
 </script>
+
+<!-- UPDATE REDIRECT FORM -->
+<script type="text/ng-template" id="updateformredirect.html">
+    <div class="row">
+        <div class="input input--radios col s12">
+            <label class="input__label"><?= Admin::t('view_index_redirect_type'); ?></label>
+            <div class="input__field-wrapper">
+                <input type="radio" ng-model="data.type" value="1"><label ng-click="data.type = 1"><?= Admin::t('view_index_redirect_internal'); ?></label> <br />
+                <input type="radio" ng-model="data.type" value="2"><label ng-click="data.type = 2"><?= Admin::t('view_index_redirect_external'); ?></label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-switch on="data.type">
+        <div class="col s12" ng-switch-when="1">
+            <p><?= Admin::t('view_index_redirect_internal_select'); ?></p>
+            <menu-dropdown class="menu-dropdown" nav-id="data.value" />
+        </div>
+
+        <div class="col s12" ng-switch-when="2">
+
+            <div class="input input--text col s12">
+                <label class="input__label"><?= Admin::t('view_index_redirect_external_link'); ?></label>
+                <div class="input__field-wrapper">
+                    <input name="text" type="text" class="input__field" ng-model="data.value" placeholder="http://" />
+                    <small><?= Admin::t('view_index_redirect_external_link_help'); ?></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<!-- /UPDATE REDIRECT FORM -->
 
 <script type="text/ng-template" id="menuDropdownReverse">
 
@@ -183,7 +219,7 @@ $this->beginPage()
 <!-- FILEMANAGER -->
 <script type="text/ng-template" id="storageFileManager">
 
-    <div class="filemanager">
+    <div class="filemanager" ng-paste="pasteUpload($event)">
 
         <!-- TREE -->
         <div class="filemanager__tree">
@@ -224,7 +260,7 @@ $this->beginPage()
 
             <div class="filemanager__toolbar filemanager__toolbar--top">
 
-                <label class="floating-button-label left" ngf-select ngf-multiple="true" ng-model="uploadingfiles">
+                <label class="floating-button-label left" ngf-enable-firefox-paste="true" ngf-drag-over-class="'dragover'" ngf-drop ngf-select ngf-multiple="true" ng-model="uploadingfiles">
                             <span class="btn-floating">
                                 <i class="material-icons">file_upload</i>
                             </span>
@@ -254,9 +290,9 @@ $this->beginPage()
                         <i class="material-icons clickable" ng-click="toggleSelectionAll()">done_all</i>
                     </th>
                     <th></th>
-                    <th><?php echo Admin::t('layout_filemanager_col_name'); ?><i ng-click="changeSortField('name')" ng-class="{'active-orderby' : sortField == 'name' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-name')" ng-class="{'active-orderby' : sortField == '-name' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
-                    <th><?php echo Admin::t('layout_filemanager_col_type'); ?><i ng-click="changeSortField('extension')" ng-class="{'active-orderby' : sortField == 'extension' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-extension')" ng-class="{'active-orderby' : sortField == '-extension' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
-                    <th><?php echo Admin::t('layout_filemanager_col_date'); ?><i ng-click="changeSortField('uploadTimestamp')" ng-class="{'active-orderby' : sortField == 'uploadTimestamp' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-uploadTimestamp')" ng-class="{'active-orderby' : sortField == '-uploadTimestamp' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
+                    <th><?= Admin::t('layout_filemanager_col_name'); ?><i ng-click="changeSortField('name')" ng-class="{'active-orderby' : sortField == 'name' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-name')" ng-class="{'active-orderby' : sortField == '-name' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
+                    <th><?= Admin::t('layout_filemanager_col_type'); ?><i ng-click="changeSortField('extension')" ng-class="{'active-orderby' : sortField == 'extension' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-extension')" ng-class="{'active-orderby' : sortField == '-extension' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
+                    <th><?= Admin::t('layout_filemanager_col_date'); ?><i ng-click="changeSortField('uploadTimestamp')" ng-class="{'active-orderby' : sortField == 'uploadTimestamp' }" class="material-icons grid-sort-btn">keyboard_arrow_up</i> <i ng-click="changeSortField('-uploadTimestamp')" ng-class="{'active-orderby' : sortField == '-uploadTimestamp' }" class="material-icons grid-sort-btn">keyboard_arrow_down</i></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -273,7 +309,7 @@ $this->beginPage()
                     </td>
                     <td ng-click="toggleSelection(file)">{{file.name}}</td>
                     <td class="filemanager__lighten">{{file.extension}}</td>
-                    <td class="filemanager__lighten">{{file.uploadTimestamp * 1000 | date:"dd.MM.yyyy, HH:mm"}} Uhr</td>
+                    <td class="filemanager__lighten">{{file.uploadTimestamp * 1000 | date:"short"}}</td>
                     <td class="filemanager__lighten" ng-click="openFileDetail(file)"><i class="material-icons">zoom_in</i></td>
                 </tr>
                 <!-- /FILES -->
@@ -281,7 +317,7 @@ $this->beginPage()
                 </tbody>
             </table>
             </div>
-            <div class="col s4" ng-if="fileDetail">
+            <div class="col s4" ng-show="fileDetail">
                 <div class="filemanager__detail-wrapper">
                     <h4>{{ fileDetail.name }}</h4>
                     <table class="filemanager__table striped">
@@ -302,7 +338,12 @@ $this->beginPage()
                             <td><i><?php echo Admin::t('layout_filemanager_detail_id'); ?></i></td><td> {{ fileDetail.id }}</td>
                         </tr>
                         <tr>
-                            <td><i><?php echo Admin::t('layout_filemanager_detail_download'); ?></i></td><td><a ng-href="{{fileDetail.source}}" target="_blank" class="btn btn-floating"><i class="material-icons">cloud_download</i></a></td>
+                            <td colspan="2"><a ng-href="{{fileDetail.source}}" target="_blank" class="btn btn--small"><?= Admin::t('layout_filemanager_detail_download'); ?></a></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <button type="button" class="btn btn--small" type="file" ngf-keep="false" ngf-select="replaceFile($file, $invalidFiles)"><?= Admin::t('layout_filemanager_detail_replace_file'); ?></button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -326,13 +367,6 @@ $this->beginPage()
         <!-- FILES & FOLDERS -->
 
         <div class="filemanager__toolbar filemanager__toolbar--bottom">
-
-            <label class="floating-button-label left" ngf-select ngf-multiple="true" ng-model="uploadingfiles">
-                        <span class="btn-floating">
-                            <i class="material-icons">file_upload</i>
-                        </span>
-                <span class="floating-button-label__label"><?php echo Admin::t('layout_filemanager_upload_files'); ?></span>
-            </label>
 
             <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="removeFiles()"><b>{{selectedFiles.length}}</b> <?php echo Admin::t('layout_filemanager_remove_selected_files'); ?></button>
             <button type="button" class="btn btn--small right" ng-show="selectedFiles.length > 0" ng-click="showFoldersToMove=!showFoldersToMove"><?php echo Admin::t('layout_filemanager_move_selected_files'); ?></button>
@@ -545,9 +579,34 @@ $this->beginPage()
     <!-- /ANGULAR-VIEW -->
     <div class="luya-container__right-panel" ng-if="sidePanelUserMenu || sidePanelHelp">
         <div ng-if="sidePanelUserMenu">
-            <h1><?= $user->firstname; ?> <?= $user->lastname; ?></h1>
-            <p><?= $user->email; ?></p>
-            <p><a href="<?php echo Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="btn red"><?php echo Admin::t('layout_btn_logout'); ?></a></p>
+        	<p><a href="<?php echo Yii::$app->urlManager->createUrl(['admin/default/logout']); ?>" class="btn red"><?php echo Admin::t('layout_btn_logout'); ?></a></p>
+            
+            <form ng-submit="updateUserProfile(profile)" method="post" ng-init="profile.lang='<?=Yii::$app->luyaLanguage;?>'">
+	           
+	           	<table class="bordered">
+	            	<tr>
+	            		<td><?= $user->firstname; ?> <?= $user->lastname; ?></td>
+	            	</tr>
+	            	<tr>
+	            		<td><?= $user->email; ?></td>
+	            	</tr>
+	            	<tr>
+	            		<td>
+		            		<div class="input input--select input--vertical">
+				    			<label class="input__label" for="layout-changer" style="margin-bottom:5px;"><?= Admin::t('layout_rightbar_languagelabel')?></label>
+					            <select id="layout-changer" class="input__field-wrapper" ng-model="profile.lang">
+					            	<option value="de" <?php if (Yii::$app->luyaLanguage == 'de'): ?>selected<?php endif; ?>>Deutsch</option>
+					            	<option value="en" <?php if (Yii::$app->luyaLanguage == 'en'): ?>selected<?php endif; ?>>English</option>
+					            	<option value="ru" <?php if (Yii::$app->luyaLanguage == 'ru'): ?>selected<?php endif; ?>>Pусский</option>
+					            	<!-- <option value="es" <?php if (Yii::$app->luyaLanguage == 'es'): ?>selected<?php endif; ?>>Español</option> -->
+					            	<option value="fr" <?php if (Yii::$app->luyaLanguage == 'fr'): ?>selected<?php endif; ?>>Français</option>
+					            </select>
+				            </div>
+	            		</td>
+	            	</tr>
+            	</table>
+	            <input style="margin-top:20px;" type="submit" value="<?= Admin::t('layout_rightbar_savebtn'); ?>" class="btn" />
+            </form>
         </div>
         <div ng-if="sidePanelHelp">
             <h4><?= Admin::t('right_panel_support_title'); ?></h4>

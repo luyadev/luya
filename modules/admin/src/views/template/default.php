@@ -11,7 +11,7 @@
             </div>
             <div ng-repeat="item in items" class="submenu__group">
                 <h5 class="sidebar__group-title" ng-if="item.items.length !== 0">{{item.name}}</h5>
-                <div class="submenu__item sidebar__button" ng-repeat="sub in item.items" ng-class="{'sidebar__button--active' : sub.route == currentItem.route }" ng-click="click(sub)">
+                <div class="submenu__item sidebar__button" ng-repeat="sub in item.items" ng-hide="sub.hiddenInMenu" ng-class="{'sidebar__button--active' : sub.route == currentItem.route }" ng-click="click(sub)">
                     <div class="sidebar__icon-holder">
                         <i class="material-icons sidebar__icon">{{sub.icon}}</i>
                     </div>

@@ -4,7 +4,7 @@ namespace luya\admin\base;
 
 /**
  * TypesInterface represents all possible types for properties or blocks.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 interface TypesInterface

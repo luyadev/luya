@@ -163,4 +163,7 @@ return [
     'block_layout_row_column_css_class' => 'CSS-KLassen für Layout Div',
     'block_image_cfg_css_class' => 'CSS Klassen für das Bild',
     'block_cfg_additonal_css_class' => 'CSS Klasse',
+    
+    // rc2
+    'block_group_media_group' => 'Medien',
 ];

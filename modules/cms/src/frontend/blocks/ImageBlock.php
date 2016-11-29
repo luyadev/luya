@@ -6,10 +6,12 @@ use Yii;
 use luya\cms\frontend\Module;
 use luya\TagParser;
 use luya\cms\base\TwigBlock;
+use luya\cms\frontend\blockgroups\MediaGroup;
+use luya\cms\helpers\BlockHelper;
 
 /**
  * Display Block
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class ImageBlock extends TwigBlock
@@ -21,6 +23,11 @@ class ImageBlock extends TwigBlock
     public function name()
     {
         return Module::t('block_image_name');
+    }
+    
+    public function blockGroup()
+    {
+        return MediaGroup::class;
     }
 
     public function icon()
@@ -77,8 +84,8 @@ class ImageBlock extends TwigBlock
         }
 
         return [
-            'image' => $this->zaaImageUpload($this->getVarValue('imageId')),
-            'imageAdmin' => $this->zaaImageUpload($this->getVarValue('imageId', 'medium-thumbnail')),
+            'image' => BlockHelper::imageUpload($this->getVarValue('imageId')),
+            'imageAdmin' => BlockHelper::imageUpload($this->getVarValue('imageId', 'medium-thumbnail')),
             'text' => $this->getText(),
             'link' => $link,
             'linkIsExternal' => $linkIsExternal
@@ -94,7 +101,7 @@ class ImageBlock extends TwigBlock
                             <a class="text-teaser" href="{{ extras.link }}"{% if extras.linkIsExternal %} target="_blank"{% endif %}>
                         {% endif %}
                         
-                            <img class="img-responsive {{cfgs.cssClass}}" src="{{extras.image.source}}" {% if vars.caption is not empty %}alt="{{vars.caption}}" title="{{vars.caption}}"{% endif %}{% if cfgs.width %} width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} border="0" />
+                            <img class="img-responsive {{cfgs.cssClass}}" src="{{extras.image.source}}" {% if vars.caption is not empty %}alt="{{vars.caption}}" title="{{vars.caption}}"{% endif %}{% if cfgs.width %} width="{{cfgs.width}}"{% endif %}{% if cfgs.height %} height="{{cfgs.height}}"{% endif %} />
                             
                         {% if extras.link %}
                             </a>

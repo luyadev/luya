@@ -19,6 +19,6 @@ class MainGroup extends BlockGroup
     
     public function getPosition()
     {
-        return 90;
+        return 66;
     }
 }

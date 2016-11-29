@@ -9,10 +9,11 @@ use luya\cms\frontend\Module;
 use luya\cms\base\TwigBlock;
 use luya\cms\frontend\blockgroups\DevelopmentGroup;
 use luya\base\ModuleReflection;
+use luya\cms\helpers\BlockHelper;
 
 /**
  * Module integration Block to render controller and/or actions.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class ModuleBlock extends TwigBlock
@@ -36,7 +37,7 @@ class ModuleBlock extends TwigBlock
                 ['var' => 'moduleName', 'label' => Module::t('block_module_modulename_label'), 'type' => 'zaa-select', 'options' => $this->getModuleNames()],
             ],
             'cfgs' => [
-                ['var' => 'moduleController', 'label' => Module::t('block_module_modulecontroller_label'), 'type' => 'zaa-select', 'options' => $this->zaaSelectArrayOption($this->getControllerClasses())],
+                ['var' => 'moduleController', 'label' => Module::t('block_module_modulecontroller_label'), 'type' => 'zaa-select', 'options' => BlockHelper::selectArrayOption($this->getControllerClasses())],
                 ['var' => 'moduleAction', 'label' => Module::t('block_module_moduleaction_label'), 'type' => 'zaa-text'],
                 ['var' => 'moduleActionArgs', 'label' => Module::t('block_module_moduleactionargs_label'), 'type' => 'zaa-text'],
             ],
@@ -83,7 +84,7 @@ class ModuleBlock extends TwigBlock
         return '{{extras.moduleContent}}';
     }
     
-    public function getBlockGroup()
+    public function blockGroup()
     {
         return DevelopmentGroup::className();
     }

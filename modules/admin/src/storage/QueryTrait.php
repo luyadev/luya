@@ -5,7 +5,57 @@ namespace luya\admin\storage;
 use luya\Exception;
 
 /**
- * Querying data for file, image and filter items.
+ * Query Data from Files, Filters and Images.
+ *
+ * Usage examples which is valid for all classes implementing the QueryTrait.
+ *
+ * The below examples are wrote for file query but are are working for all classes implementing the QueryTrait like:
+ *
+ * + Files: {{\luya\admin\file\Query}}
+ * + Images: {{\luya\admin\image\Query}}
+ * + Folders: {{\luya\admin\folder\Query}}
+ *
+ * ### All vs. One
+ *
+ * ```php
+ * return (new \luya\admin\file\Query())->where($args)->one();
+ * ```
+ *
+ * ```php
+ * return (new \luya\admin\file\Query())->findOne($fileId);
+ * ```
+ *
+ * ```php
+ * return (new \luya\admin\file\Query())->where($args)->all();
+ * ```
+ *
+ * ### Counting
+ *
+ * ```php
+ * return (new \luya\admin\file\Query())->where($args)->count();
+ * ```
+ *
+ * ### Customized where condition
+ *
+ * All QueryTrait classes can use different where notations:
+ *
+ * ```php
+ * return (new \luya\admin\file\Query())->where(['>', 'id', 1])->andWHere(['<', 'id', 3])->all();
+ * ```
+ *
+ * In condition in order to get mutiple columns of a file.
+ *
+ * ```php
+ * return (new \luya\admin\file\Query())->where(['in', 'id', [1, 3]])->all();
+ * ```
+ *
+ * ### Offsets and Limits
+ *
+ * ```php
+ * return (new \luya\admin\file\Query())->where($args)->offset(5)->limit(10)->all();
+ * ```
+ *
+ * See the {{\luya\admin\storage\QueryTrait::where}} for more details.
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -22,26 +72,30 @@ trait QueryTrait
     /**
      * Return an array with all item values provided for this query method.
      *
-     * @return array
+     * @return array The array with all values for this query index by its key.
      */
     abstract public function getDataProvider();
     
     /**
-     * Return the item for the specificy key item. If not found, false must be returned.
-     * @param integer $id
+     * Return the a single item by its key. If not found, false must be returned.
+     *
+     * @param integer $id The requested key identifier.
      * @return array|boolean Returns the item array or false if not found.
      */
     abstract public function getItemDataProvider($id);
     
     /**
+     * Create an item object which implements {{\luya\admin\storage\ItemTrait}}.
      *
      * @param array $itemArray
+     * @return \luya\admin\storage\ItemTrait The item object implementing the ItemTrait.
      */
     abstract public function createItem(array $itemArray);
     
     /**
-     *
-     * @param array $data
+     * Create the iterator object which extends from {{\luya\admin\storage\IteratorAbstract}}.
+     * @param array $data The data to pass to the Iterator.
+     * @return \luya\admin\storage\IteratorAbstract An iterator object extends from IteratorAbstract class.
      */
     abstract public function createIteratorObject(array $data);
     
@@ -52,7 +106,7 @@ trait QueryTrait
      * @param unknown $field
      * @return boolean
      */
-    protected function arrayFilter($value, $field)
+    private function arrayFilter($value, $field)
     {
         foreach ($this->_where as $expression) {
             if ($expression['field'] == $field) {
@@ -83,7 +137,7 @@ trait QueryTrait
      *
      * @return array
      */
-    protected function filter()
+    private function filter()
     {
         $containerData = $this->getDataProvider();
         $whereExpression = $this->_where;
@@ -117,7 +171,7 @@ trait QueryTrait
      * Set a limition for the amount of results.
      *
      * @param integer $count The number of rows to return
-     * @return \admin\storage\QueryTrait
+     * @return \luya\admin\storage\QueryTrait
      */
     public function limit($count)
     {
@@ -134,7 +188,7 @@ trait QueryTrait
      * with the limit() function.
      *
      * @param integer $offset Defines the amount of offset start position.
-     * @return \admin\storage\QueryTrait
+     * @return \luya\admin\storage\QueryTrait
      */
     public function offset($offset)
     {
@@ -154,21 +208,21 @@ trait QueryTrait
      * where(['operator', 'field', 'value']);
      * ```
      *
-     * Allowed operators
+     * Available Operators:
+     *
      * + **<** expression where field is smaller then value.
      * + **>** expression where field is bigger then value.
      * + **=** expression where field is equal value.
      * + **<=** expression where field is small or equal then value.
      * + **>=** expression where field is bigger or equal then value.
      * + **==** expression where field is equal to the value and even the type must be equal.
+     * + **in** expression where an value array can be passed to get all values from this field type e.g. `['in', 'id', [1,3,4]]`.
      *
-     * Only one operator speific argument can be provided, to chain another expression
-     * use the `andWhere()` method.
+     * Only one operator speific argument can be provided, to chain another expression use the `andWhere()` method.
      *
      * Multi Dimension Filtering:
      *
-     * The most common case for filtering items is the equal expression combined with
-     * add statements.
+     * The most common case for filtering items is the equal expression combined with add statements.
      *
      * For example the following expression
      *
@@ -191,7 +245,7 @@ trait QueryTrait
      * This will only appaend the first condition where id is bigger then 1 and ignore the second one
      *
      * @param array $args The where defintion can be either an key-value pairing or a condition representen as array.
-     * @return \admin\storage\QueryTrait
+     * @return \luya\admin\storage\QueryTrait
      */
     public function where(array $args)
     {
@@ -214,9 +268,10 @@ trait QueryTrait
      * Add another where statement to the existing, this is the case when using compare operators, as then only
      * one where definition can bet set.
      *
-     * @see \admin\storage\QueryTrait->where()
-     * @param array $args
-     * @return \admin\storage\QueryTrait
+     * See {{luya\admin\storage\QueryTrait::where}}
+     *
+     * @param array $args The where defintion can be either an key-value pairing or a condition representen as array.
+     * @return \luya\admin\storage\QueryTrait
      */
     public function andWhere(array $args)
     {
@@ -224,9 +279,9 @@ trait QueryTrait
     }
     
     /**
-     * Find All
+     * Find all elementes based on the where filter.
      *
-     * @return admin\storage\IteratorAbstract|Object
+     * @return \luya\admin\storage\IteratorAbstract
      */
     public function all()
     {
@@ -244,9 +299,11 @@ trait QueryTrait
     }
     
     /**
-     * Find One, if there are several items, it just takes the first one and does not throw an exception.
+     * Find One based on the where condition.
      *
-     * @return admin\storage\QueryTrait|Object
+     * If there are several items, it just takes the first one and does not throw an exception.
+     *
+     * @return \luya\admin\image\Item|\luya\admin\file\Item|\luya\admin\folder\Item
      */
     public function one()
     {
@@ -256,10 +313,10 @@ trait QueryTrait
     }
     
     /**
-     * FindOne returns the specific item id
+     * FindOne with the specific ID.
      *
-     * @param int $id The specific item id
-     * @return admin\storage\QueryTrait|Object
+     * @param integer $id The specific item id
+     * @return \luya\admin\image\Item|\luya\admin\file\Item|\luya\admin\folder\Item
      */
     public function findOne($id)
     {

@@ -14,26 +14,26 @@ use Exception;
  * Basic example of making a menu selection:
  *
  * ```php
- * $items = (new \cms\menu\Query())->where(['parent_nav_id' => 0])->all();
+ * $items = (new \luya\cms\menu\Query())->where(['parent_nav_id' => 0])->all();
  * ```
  *
  * By default the Menu Query will get the default language, or the current active language. To force
  * a specific language use the `lang()` method in your query chain:
  *
  * ```php
- * $items = (new \cms\menu\Query())->where(['parent_nav_id' => 0])->lang('en')->all();
+ * $items = (new \luya\cms\menu\Query())->where(['parent_nav_id' => 0])->lang('en')->all();
  * ```
  *
  * You can also find one element instead of all
  *
  * ```php
- * $item = (new \cms\menu\Query())->where(['id' => 1])->one();
+ * $item = (new \luya\cms\menu\Query())->where(['id' => 1])->one();
  * ```
  *
  * To include hidden pages to your selection use with:
  *
  * ```php
- * $items = (new \cms\menu\Query())->where(['parent_nav_id' => 0])->with(['hidden'])->all();
+ * $items = (new \luya\cms\menu\Query())->where(['parent_nav_id' => 0])->with(['hidden'])->all();
  * ```
  *
  * Attention: When you append the `with['hidden']` state, the visibility of the item will be overriden, even when you
@@ -42,7 +42,7 @@ use Exception;
  *
  * @property object $menu Contains menu Object.
  * @since 1.0.0-beta1
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Query extends \yii\base\Object
 {
@@ -63,7 +63,7 @@ class Query extends \yii\base\Object
     /**
      * Getter method to return menu component
      *
-     * @return \cms\menu\Container Menu Container object
+     * @return \luya\cms\Menu Menu Container object
      */
     public function getMenu()
     {
@@ -120,7 +120,7 @@ class Query extends \yii\base\Object
      * This will only appaend the first condition where id is bigger then 1 and ignore the second one
      *
      * @param array $args The where defintion can be either an key-value pairing or a condition representen as array.
-     * @return \cms\menu\Query
+     * @return \luya\cms\menu\Query
      */
     public function where(array $args)
     {
@@ -143,7 +143,7 @@ class Query extends \yii\base\Object
      * Add another where statement to the existing, this is the case when using compare operators, as then only
      * one where definition can bet set.
      *
-     * @see \cms\menu\Query->where()
+     * @see \luya\cms\menu\Query->where()
      * @param array $args
      */
     public function andWhere(array $args)
@@ -157,7 +157,7 @@ class Query extends \yii\base\Object
      * or the default language if no information is presented.
      *
      * @param string $langShortCode Language Short Code e.g. de or en
-     * @return \cms\menu\Query
+     * @return \luya\cms\menu\Query
      */
     public function lang($langShortCode)
     {
@@ -169,7 +169,7 @@ class Query extends \yii\base\Object
     /**
      * @param string|array $with can be a string  containg "hidden" or an array with multiple patters
      * for example `['hidden']`. Further with statements upcoming.
-     * @return \cms\menu\Query
+     * @return \luya\cms\menu\Query
      */
     public function with($types)
     {
@@ -201,7 +201,7 @@ class Query extends \yii\base\Object
      * Set a limition for the amount of results.
      *
      * @param integer $count The number of rows to return
-     * @return \cms\menu\Query
+     * @return \luya\cms\menu\Query
      */
     public function limit($count)
     {
@@ -218,7 +218,7 @@ class Query extends \yii\base\Object
      * with the limit() function.
      *
      * @param integer $offset Defines the amount of offset start position.
-     * @return \cms\menu\Query
+     * @return \luya\cms\menu\Query
      */
     public function offset($offset)
     {
@@ -234,7 +234,7 @@ class Query extends \yii\base\Object
      * just pick the first row from the filtered result and return the item object. If the filtering
      * based on the query settings does not return any result, the return will be false.
      *
-     * @return \cms\menu\Item|boolean Returns the Item object or false if nothing found.
+     * @return \luya\cms\menu\Item|boolean Returns the Item object or false if nothing found.
      */
     public function one()
     {
@@ -251,7 +251,7 @@ class Query extends \yii\base\Object
      * Retrieve all found rows based on the filtering options and returns the the QueryIterator object
      * which is represents an array.
      *
-     * @return \cms\menu\QueryIterator Returns the QueryIterator object.
+     * @return \luya\cms\menu\QueryIterator Returns the QueryIterator object.
      */
     public function all()
     {
@@ -274,7 +274,7 @@ class Query extends \yii\base\Object
      *
      * @param array $data The filtere results where the iterator object should be created with
      * @param string $langContext The language short code context, if any.
-     * @return \cms\menu\QueryIterator
+     * @return \luya\cms\menu\QueryIterator
      */
     public static function createArrayIterator(array $data, $langContext, $with)
     {
@@ -287,7 +287,7 @@ class Query extends \yii\base\Object
      *
      * @param array $itemArray The item array data for the object
      * @param string  $langContext The language short code context, if any.
-     * @return \cms\menu\Item
+     * @return \luya\cms\menu\Item
      */
     public static function createItemObject(array $itemArray, $langContext)
     {

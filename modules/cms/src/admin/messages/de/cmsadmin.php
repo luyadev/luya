@@ -22,12 +22,6 @@ return [
     'view_index_page_layout' => 'Layout auswahl',
     'view_index_page_btn_save' => 'Neue Seite speichern',
     'view_index_module_select' => 'Modul Name',
-    'view_index_redirect_type' => 'Art der Weiterleitung',
-    'view_index_redirect_internal' => 'Interne-Seite',
-    'view_index_redirect_external' => 'Externe URL',
-    'view_index_redirect_internal_select' => 'Wählen Sie die interne Seite, auf die weitergeleitet werden soll.',
-    'view_index_redirect_external_link' => 'Externer Link',
-    'view_index_redirect_external_link_help' => 'Externe Links beginnen mit http:// oder https://',
     'view_index_sidebar_new_page' => 'Neue Seite erstellen',
     'view_index_sidebar_drafts' => 'Vorlagen',
     'view_index_sidebar_move' => 'Verschieben',
@@ -160,4 +154,7 @@ return [
 
     'page_update_actions_deepcopy_text' => 'Erstellen Sie eine Kopie der aktuellen Seite mit ihren Inhalten. Es werden dabei alle Sprachen kopiert, aber nur die veröffentlichte Version.',
     'page_update_actions_deepcopy_btn' => 'Kopie erstellen',
+    
+// rc2
+    'model_navitem_title_tag_label' => 'Titel Tag (SEO)',
 ];

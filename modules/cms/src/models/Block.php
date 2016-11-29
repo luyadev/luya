@@ -25,7 +25,7 @@ class Block extends NgRestModel
         return 'cms_block';
     }
     
-    public function ngrestAttributeTypes()
+    public function ngRestAttributeTypes()
     {
         return [
             'group_id' => ['selectModel', 'modelClass' => BlockGroup::className(), 'valueField' => 'id', 'labelField' => 'name'],

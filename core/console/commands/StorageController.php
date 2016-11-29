@@ -27,7 +27,6 @@ class StorageController extends \luya\console\Command
             foreach ($fileList as $fileName) {
                 $this->output($fileName);
             }
-            //$this->output(print_r($fileList, true));
             $this->outputInfo(count($fileList) . " files to remove.");
         }
 

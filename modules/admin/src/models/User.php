@@ -69,7 +69,12 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         return 'api-admin-user';
     }
     
-    public function ngrestAttributeTypes()
+    public function ngRestListOrder()
+    {
+        return ['firstname' => SORT_ASC];
+    }
+    
+    public function ngRestAttributeTypes()
     {
         return [
             'title' => ['selectArray', 'data' => static::getTitles(), 'initValue' => 0],
@@ -80,7 +85,14 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
         ];
     }
     
-    public function ngrestExtraAttributeTypes()
+    public function ngRestFilters()
+    {
+        return [
+            'Removed' => self::find()->where(['is_deleted' => 1]),
+        ];
+    }
+    
+    public function ngRestExtraAttributeTypes()
     {
         return [
             'lastloginTimestamp' => 'datetime',
@@ -89,7 +101,7 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
     
     public function ngRestConfig($config)
     {
-        $config->aw->load(['class' => ChangePassword::className(), 'className' => User::className()]);
+        $config->aw->load(['class' => ChangePassword::className()]);
         
         $this->ngRestConfigDefine($config, 'list', ['firstname', 'lastname', 'email', 'lastloginTimestamp']);
         $this->ngRestConfigDefine($config, 'create', ['title', 'firstname', 'lastname', 'email', 'password']);
@@ -188,13 +200,6 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
 
     public function changePassword($newpass, $newpasswd)
     {
-        if (strlen($newpass) < 8) {
-            return $this->addError('newpass', 'Das neue Passwort muss mindestens 8 Zeichen lang sein.');
-        }
-        if ($newpass !== $newpasswd) {
-            return $this->addError('newpasswd', 'Das neue Passwort muss mit der Wiederholung übereinstimmen.');
-        }
-
         $this->password = $newpass;
 
         if ($this->encodePassword()) {
@@ -222,6 +227,11 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
 
         return true;
     }
+    
+    public function getTitleNamed()
+    {
+        return self::getTitles()[$this->title];
+    }
 
     public static function getTitles()
     {
@@ -232,14 +242,12 @@ class User extends NgRestModel implements IdentityInterface, ChangePasswordInter
     {
         $fields = parent::fields();
         unset($fields['password'], $fields['password_salt'], $fields['auth_token'], $fields['is_deleted']);
-
         return $fields;
     }
 
     public function getGroups()
     {
-        return $this->hasMany(Group::className(), ['id' => 'group_id'])
-        ->viaTable('admin_user_group', ['user_id' => 'id']);
+        return $this->hasMany(Group::className(), ['id' => 'group_id'])->viaTable('admin_user_group', ['user_id' => 'id']);
     }
 
     public function extraFields()

@@ -14,7 +14,7 @@ class Iterator extends \luya\admin\storage\IteratorAbstract
     /**
      * Iterator get current element, generates a new object for the current item on access.
      *
-     * @return \cms\menu\Item
+     * @return \luya\admin\image\Item
      */
     public function current()
     {

@@ -7,7 +7,6 @@ use luya\helpers\Url;
 
 class UrlTest extends \luyatests\LuyaWebTestCase
 {
-
     public function testTrailing()
     {
         Yii::$app->composition->hidden = true;

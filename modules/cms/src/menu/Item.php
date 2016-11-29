@@ -6,6 +6,9 @@ use Yii;
 use luya\cms\Exception;
 use luya\admin\models\User;
 use luya\cms\models\Nav;
+use yii\base\Object;
+use luya\web\LinkInterface;
+use luya\web\LinkTrait;
 
 /**
  * Menu item Object.
@@ -13,6 +16,8 @@ use luya\cms\models\Nav;
  * Each menu itaration will return in an Item-Object. The Item-Object contains several methods like
  * returning title, url and ids or retrieve depending item iterations like parents or childs. As the
  * Item Object extends the yii\base\Object all getter methods can be access as property.
+ *
+ * Read more in the [[app-menu.md]] Guide.
  *
  * @property integer $id Returns Unique identifier of item, represents data record of cms_nav_item table.
  * @property boolean $isHidden Returns boolean state of visbility.
@@ -38,11 +43,13 @@ use luya\cms\models\Nav;
  * @property array $teardown Return all parent elemtns **with** the current item.
  * @property array $children Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta1
  */
-class Item extends \yii\base\Object
+class Item extends Object implements LinkInterface
 {
+    use LinkTrait;
+    
     /**
      * @var array The item property containing the informations with key  value parinings. This property will be assigned when creating the
      * Item-Object.
@@ -60,6 +67,22 @@ class Item extends \yii\base\Object
      */
     private $_with = [];
 
+    /**
+     * @inheritdoc
+     */
+    public function getHref()
+    {
+        return $this->getLink();
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getTarget()
+    {
+        return '_self';
+    }
+    
     /**
      * Item-Object initiliazer, verify if the itemArray property is empty.
      *
@@ -271,7 +294,7 @@ class Item extends \yii\base\Object
     /**
      * Returns an active record object for the admin user who created this page.
      *
-     * @return \admin\models\User|boolean Returns an ActiceRecord for the admin user who created the page, if not
+     * @return \luya\admin\models\User|boolean Returns an ActiceRecord for the admin user who created the page, if not
      * found the return value is false.
      */
     public function getUserCreated()
@@ -282,7 +305,7 @@ class Item extends \yii\base\Object
     /**
      * Returns an active record object for the admin user who last time updated this page.
      *
-     * @return \admin\models\User|boolean Returns an ActiceRecord for the admin user who last time updated this page, if not
+     * @return \luya\admin\models\User|boolean Returns an ActiceRecord for the admin user who last time updated this page, if not
      * found the return value is false.
      */
     public function getUserUpdated()
@@ -376,7 +399,7 @@ class Item extends \yii\base\Object
     /**
      * Returns a Item-Object of the parent element, if no parent element exists returns false.
      *
-     * @return \cms\menu\Item|bool Returns the parent item-object or false if not exists.
+     * @return \luya\cms\menu\Item|bool Returns the parent item-object or false if not exists.
      */
     public function getParent()
     {
@@ -438,7 +461,7 @@ class Item extends \yii\base\Object
     /**
      * Get all children of the current item. Children means going the depth/menulevel down e.g. from 1 to 2.
      *
-     * @return \cms\menu\QueryIterator Returns all children
+     * @return \luya\cms\menu\QueryIterator Returns all children
      */
     public function getChildren()
     {
@@ -512,8 +535,8 @@ class Item extends \yii\base\Object
      *
      * The above example display also hidden pages.
      *
-     * @see \cms\menu\Query::with()
-     * @return \cms\menu\Item;
+     * @see \luya\cms\menu\Query::with()
+     * @return \luya\cms\menu\Item;
      */
     public function with($with)
     {
@@ -533,7 +556,7 @@ class Item extends \yii\base\Object
      * ```
      *
      * @param string|array $without Can be a string `hidden` or an array `['hidden']`.
-     * @return \cms\menu\Item
+     * @return \luya\cms\menu\Item
      */
     public function without($without)
     {

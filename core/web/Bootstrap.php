@@ -5,13 +5,14 @@ namespace luya\web;
 use yii\helpers\ArrayHelper;
 use luya\base\AdminModuleInterface;
 use luya\TagParser;
+use luya\base\BaseBootstrap;
 
 /**
  * LUYA base bootstrap class which will be called during the bootstraping process.
  *
  * @author nadar
  */
-class Bootstrap extends \luya\base\Bootstrap
+class Bootstrap extends BaseBootstrap
 {
     private $_apis = [];
 
@@ -24,7 +25,9 @@ class Bootstrap extends \luya\base\Bootstrap
     private $_jsTranslations = [];
     
     /**
-     * @todo see if the api already exstis, api urls must be unique (otherwise the auth process will not work anymore)
+     * Before bootstrap run process.
+     *
+     * @see \luya\base\BaseBootstrap::beforeRun()
      */
     public function beforeRun($app)
     {
@@ -36,7 +39,7 @@ class Bootstrap extends \luya\base\Bootstrap
             foreach ($module->urlRules as $rule) {
                 $this->_urlRules[(isset($rule['position'])) ? $rule['position'] : UrlRule::POSITION_AFTER_LUYA][] = $rule;
             }
-
+            
             foreach ($module->apis as $alias => $class) {
                 $this->_apis[$alias] = $class;
             }
@@ -47,21 +50,24 @@ class Bootstrap extends \luya\base\Bootstrap
         }
     }
 
+    /**
+     * Invokes the bootstraping process.
+     *
+     * @see \luya\base\BaseBootstrap::run()
+     */
     public function run($app)
     {
-        // start the module now
-        foreach ($this->getModules() as $id => $module) {
-            if ($module instanceof AdminModuleInterface) {
-                $this->_adminAssets = ArrayHelper::merge($module->assets, $this->_adminAssets);
-                $this->_adminMenus = ArrayHelper::merge($module->getMenu(), $this->_adminMenus);
-                $this->_jsTranslations[$id] = $module->registerJsTranslation;
-            }
-        }
-
         if (!$app->request->getIsConsoleRequest()) {
             if ($this->hasModule('admin') && $app->request->isAdmin()) {
-                //$app->getModule('admin')->controllerMap = $this->_apis;
-                $app->getModule('admin')->assets = ArrayHelper::merge($this->_adminAssets, $app->getModule('admin')->assets);
+                foreach ($this->getModules() as $id => $module) {
+                    if ($module instanceof AdminModuleInterface) {
+                        $this->_adminAssets = ArrayHelper::merge($module->getAdminAssets(), $this->_adminAssets);
+                        $this->_adminMenus[$module->id] = $module->getMenu();
+                        $this->_jsTranslations[$id] = $module->getJsTranslationMessages();
+                    }
+                }
+                
+                $app->getModule('admin')->assets = $this->_adminAssets;
                 $app->getModule('admin')->controllerMap = $this->_apis;
                 $app->getModule('admin')->moduleMenus = $this->_adminMenus;
                 $app->getModule('admin')->setJsTranslations($this->_jsTranslations);

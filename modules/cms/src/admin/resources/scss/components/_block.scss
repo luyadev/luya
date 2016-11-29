@@ -12,6 +12,11 @@
 	border-bottom: 0 solid transparent;
 	border-right: 0 solid transparent;
 	min-height: 50px;
+	border:1px solid #fbfbfb;
+
+ 	&:hover:not(.block--is-container):not(.block--edit) {
+ 		border:1px solid #9E9E9E;	
+ 	}
 
 	&:hover > .block__toolbar,
 	&.block--edit .block__toolbar,
@@ -201,9 +206,9 @@
 	}
 
 	#{$selector} {
-		border-left: 4px solid #{$color};
-		border-bottom: 4px solid #{$color};
-		border-right: 4px solid #{$color};
+		//border-left: 4px solid #{$color};
+		//border-bottom: 4px solid #{$color};
+		//border-right: 4px solid #{$color};
 
 
 		> .block__toolbar {

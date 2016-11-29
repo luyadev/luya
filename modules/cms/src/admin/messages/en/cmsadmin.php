@@ -22,12 +22,6 @@ return [
     'view_index_page_layout' => 'Layout selection',
     'view_index_page_btn_save' => 'Save new page',
     'view_index_module_select' => 'Module name',
-    'view_index_redirect_type' => 'Forwarding type',
-    'view_index_redirect_internal' => 'Internal page',
-    'view_index_redirect_external' => 'External URL',
-    'view_index_redirect_internal_select' => 'Choose the internal page that should be forwarded to.',
-    'view_index_redirect_external_link' => 'External link',
-    'view_index_redirect_external_link_help' => 'External links start with http:// or https://',
     'view_index_sidebar_new_page' => 'Create new page',
     'view_index_sidebar_drafts' => 'Templates',
     'view_index_sidebar_move' => 'Move',
@@ -161,4 +155,7 @@ return [
 
     'page_update_actions_deepcopy_text' => 'Create a copy of the current page with all its contents. All languages will be copied, but only the published version.',
     'page_update_actions_deepcopy_btn' => 'Create Copy',
+    
+// rc2
+    'model_navitem_title_tag_label' => 'Title Tag (SEO)',
 ];

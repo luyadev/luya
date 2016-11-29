@@ -17,7 +17,7 @@ class Application extends \yii\web\Application
     use ApplicationTrait;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function coreComponents()
     {

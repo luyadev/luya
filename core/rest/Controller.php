@@ -6,6 +6,7 @@ use Yii;
 use luya\traits\RestBehaviorsTrait;
 use yii\rest\Controller as BaseController;
 use yii\db\ActiveRecordInterface;
+use yii\base\Model;
 
 /**
  * Basic Rest Controller class
@@ -33,7 +34,7 @@ class Controller extends BaseController
      * @throws ServerErrorHttpException
      * @return array
      */
-    public function sendModelError(ActiveRecordInterface $model)
+    public function sendModelError(Model $model)
     {
         if (!$model->hasErrors()) {
             throw new ServerErrorHttpException('Object error for unknown reason.');

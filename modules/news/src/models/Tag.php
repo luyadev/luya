@@ -16,7 +16,7 @@ class Tag extends \luya\admin\ngrest\base\NgRestModel
         return ['title' => Module::t('tag_title')];
     }
 
-    public function ngrestAttributeTypes()
+    public function ngRestAttributeTypes()
     {
         return [
             'title' => 'text',

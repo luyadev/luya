@@ -23,7 +23,7 @@
  * ================================================== */
 
 #luya-cms-toolbar {
-    background-color: #2196F3;
+    background-color: #FFF;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
     height: 50px;
     position: relative;
@@ -50,7 +50,7 @@
 }
 
 .luya-cms-toolbar__logo a {
-    color: #fff;
+    color: #333;
     text-decoration: none
 }
 
@@ -74,7 +74,7 @@
  * ================================================== */
 
 .luya-cms-toolbar__button {
-    color: #fff;
+    color: #ff9058;
     display: inline-block;
     font-size: 14px;
     line-height: 1;
@@ -84,13 +84,10 @@
     float: left;
 }
 
-.luya-cms-toolbar__button--info {
-    margin-right: 5px;
-}
 
 .luya-cms-toolbar__button a,
 .luya-cms-toolbar__button .luya-cms-toolbar__button-text {
-    color: #fff;
+    color: #333;
     display: block;
     height: 100%;
     padding: 12px 25px;
@@ -101,9 +98,8 @@
 
 .luya-cms-toolbar__button a:hover,
 .luya-cms-toolbar__button a.open {
-    background-color: #fff;
-    box-shadow: inset 2px 2px 5px 1px rgba(0, 0, 0, .1);
-    color: #2196F3;
+    background-color: #ff9058;
+    color: #FFF;
 }
 
 .luya-cms-toolbar__button--info {
@@ -175,7 +171,7 @@
  * ================================================== */
 
 .luya-cms-toolbar-container__toggler {
-    background-color: #2196F3;
+    background-color: #ff9058;
     border-radius: 0 0 5px 5px;
     bottom: 0;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);

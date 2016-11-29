@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 /**
  * Menu links tag
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class MenuTag extends BaseTag
@@ -32,7 +32,7 @@ EOT;
         if ($menuItem) {
             $alias = (empty($sub)) ? $menuItem->title : $sub;
             
-            return Html::a($alias, $menuItem->link, ['label' => $alias]);
+            return Html::a($alias, $menuItem->link);
         }
         
         return false;

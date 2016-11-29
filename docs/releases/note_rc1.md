@@ -1,4 +1,4 @@
-We are proud to announce the first release candidate of LUYA after weeks of intensive work. These are the most significant changes and additions:
+We are proud to announce the first release candidate (1.0.0-RC1) of LUYA after weeks of intensive work. These are the most significant changes and additions:
 
 + The administration is loading at least twice as fast as before
 + Composer update has been speed up significantly by removing old dependencies (including bower dependencies)
@@ -16,9 +16,9 @@ We are proud to announce the first release candidate of LUYA after weeks of inte
 
 > Attention: If you want to upgrade to the first release candidate, there are a few breaking changes you have to take care of. With these changes done, we now have a stable and reliable foundation for the upcoming release candidates and the final release.
 
-Please check the full [Changelog]() and the [Upgrading]() Guide.
+Please check the full [Changelog](https://github.com/luyadev/luya/blob/master/CHANGELOG.md) and the [Upgrading](https://luya.io/guide/install-upgrade) Guide.
 
-If you have any problems or questions regarding the upgrade process, don't hesitate to contact us on [Gitter]() or to create an [Issue on GitHub]().
+If you have any problems or questions regarding the upgrade process, don't hesitate to contact us on [Gitter](gitter.im/luyadev/luya) or to create an [Issue on GitHub](https://github.com/luyadev/luya/issues).
 
 4 October 2016  
 LUYA developer team

@@ -29,7 +29,8 @@ use yii\db\ActiveRecordInterface;
  * @property string $alias
  * @property string $description
  * @property string $keywords
- * 
+ * @property string $title_tag
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
@@ -42,6 +43,9 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
 
     public $parent_nav_id = null;
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -74,8 +78,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     }
 
     /**
-     * {@inheritDoc}
-     * @see \yii\db\ActiveRecord::tableName()
+     * @inheritdoc
      */
     public static function tableName()
     {
@@ -83,41 +86,27 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     }
     
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Model::rules()
+     * @inheritdoc
      */
     public function rules()
     {
         return [
             [['lang_id', 'title', 'alias', 'nav_item_type'], 'required'],
-            [['nav_id', 'description', 'keywords', 'nav_item_type_id'], 'safe'],
+            [['nav_id', 'description', 'keywords', 'nav_item_type_id', 'title_tag'], 'safe'],
         ];
     }
 
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Model::attributeLabels()
+     * @inheritdoc
      */
     public function attributeLabels()
     {
         return [
             'title' => Module::t('model_navitem_title_label'),
             'alias' => Module::t('model_navitem_alias_label'),
+            'title_tag' => Module::t('model_navitem_title_tag_label'),
         ];
     }
-
-    /**
-     * {@inheritDoc}
-     * @see \yii\base\Model::scenarios()
-     */
-    /*
-    public function scenarios()
-    {
-        return [
-            'default' => ['title', 'alias', 'nav_item_type', 'nav_id', 'lang_id', 'description', 'keywords'],
-        ];
-    }
-    */
 
     public function slugifyAlias()
     {
@@ -270,8 +259,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     /* GenericSearchInterface */
 
     /**
-     * {@inheritDoc}
-     * @see \admin\base\GenericSearchInterface::genericSearchFields()
+     * @inheritdoc
      */
     public function genericSearchFields()
     {
@@ -279,8 +267,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     }
     
     /**
-     * {@inheritDoc}
-     * @see \admin\base\GenericSearchInterface::genericSearchHiddenFields()
+     * @inheritdoc
      */
     public function genericSearchHiddenFields()
     {
@@ -288,8 +275,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
     }
 
     /**
-     * {@inheritDoc}
-     * @see \admin\base\GenericSearchInterface::genericSearch()
+     * @inheritdoc
      */
     public function genericSearch($searchQuery)
     {
@@ -307,6 +293,7 @@ class NavItem extends \yii\db\ActiveRecord implements GenericSearchInterface
      * and jump/linking in the search results container.
      *
      * {@inheritDoc}
+     *
      * @see \admin\base\GenericSearchInterface::genericSearchStateProvider()
      */
     public function genericSearchStateProvider()

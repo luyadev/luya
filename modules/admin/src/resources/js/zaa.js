@@ -37,11 +37,13 @@ function typeCastValue(value) {
 (function() {
 	"use strict";
 
-	zaa.config(function ($httpProvider, $stateProvider, $controllerProvider) {
+	zaa.config(function ($httpProvider, $stateProvider, $controllerProvider, $urlMatcherFactoryProvider) {
 		$httpProvider.interceptors.push("authInterceptor");
 
 		zaa.bootstrap = $controllerProvider;
 
+		$urlMatcherFactoryProvider.strictMode(false)
+		
 		$stateProvider
 			.state("default", {
 				url: "/default/:moduleId",
@@ -62,8 +64,7 @@ function typeCastValue(value) {
 			.state("custom", {
 				url: "/template/:templateId",
 				templateUrl: function($stateParams) {
-					var res = $stateParams.templateId.split("-");
-					return res[0] + "/" + res[1] + "/" + res[2];
+					return $stateParams.templateId;
 				},
 				resolve : {
 					adminServiceResolver: adminServiceResolver,

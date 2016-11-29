@@ -11,14 +11,16 @@ use luya\admin\ngrest\base\NgRestModel;
  * This Model contains all languages from the database table `admin_lang` but also has helper methods
  * to retrieve the curent active language based on several inputs like composition, config values, etc.
  *
+ * @property integer $id
+ * @property string $name
+ * @property string $short_code
+ * @property integer $is_default
  * @author Basil Suter <basil@nadar.io>
  */
 class Lang extends NgRestModel
 {
     /**
-     *
-     * {@inheritDoc}
-     * @see \yii\db\BaseActiveRecord::init()
+     * @inheritdoc
      */
     public function init()
     {
@@ -43,8 +45,7 @@ class Lang extends NgRestModel
     }
     
     /**
-     *
-     * @return string
+     * @inheritdoc
      */
     public static function tableName()
     {
@@ -52,9 +53,7 @@ class Lang extends NgRestModel
     }
     
     /**
-     *
-     * {@inheritDoc}
-     * @see \yii\base\Model::rules()
+     * @inheritdoc
      */
     public function rules()
     {
@@ -65,9 +64,7 @@ class Lang extends NgRestModel
     }
     
     /**
-     *
-     * {@inheritDoc}
-     * @see \yii\base\Model::scenarios()
+     * @inheritdoc
      */
     public function scenarios()
     {
@@ -78,9 +75,7 @@ class Lang extends NgRestModel
     }
     
     /**
-     *
-     * {@inheritDoc}
-     * @see \yii\base\Model::attributeLabels()
+     * @inheritdoc
      */
     public function attributeLabels()
     {
@@ -92,16 +87,17 @@ class Lang extends NgRestModel
     }
     
     /**
-     *
-     * {@inheritDoc}
-     * @see \admin\ngrest\NgRestModeInterface::ngRestApiEndpoint()
+     * @inheritdoc
      */
     public static function ngRestApiEndpoint()
     {
         return 'api-admin-lang';
     }
 
-    public function ngrestAttributeTypes()
+    /**
+     * @inheritdoc
+     */
+    public function ngRestAttributeTypes()
     {
         return [
             'name' => 'text',
@@ -111,9 +107,7 @@ class Lang extends NgRestModel
     }
     
     /**
-     *
-     * {@inheritDoc}
-     * @see \admin\ngrest\NgRestModeInterface::ngRestConfig()
+     * @inheritdoc
      */
     public function ngRestConfig($config)
     {

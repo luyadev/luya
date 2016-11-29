@@ -153,9 +153,7 @@ class UserSetting extends Object implements \ArrayAccess
     // ArrayAccess
 
     /**
-     *
-     * {@inheritDoc}
-     * @see ArrayAccess::offsetSet()
+     * @inheritdoc
      */
     public function offsetSet($offset, $value)
     {
@@ -163,9 +161,7 @@ class UserSetting extends Object implements \ArrayAccess
     }
 
     /**
-     *
-     * {@inheritDoc}
-     * @see ArrayAccess::offsetExists()
+     * @inheritdoc
      */
     public function offsetExists($offset)
     {
@@ -173,9 +169,7 @@ class UserSetting extends Object implements \ArrayAccess
     }
 
     /**
-     *
-     * {@inheritDoc}
-     * @see ArrayAccess::offsetUnset()
+     * @inheritdoc
      */
     public function offsetUnset($offset)
     {
@@ -183,9 +177,7 @@ class UserSetting extends Object implements \ArrayAccess
     }
 
     /**
-     *
-     * {@inheritDoc}
-     * @see ArrayAccess::offsetGet()
+     * @inheritdoc
      */
     public function offsetGet($offset)
     {

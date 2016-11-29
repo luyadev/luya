@@ -86,10 +86,15 @@ class FileHelper extends \yii\helpers\BaseFileHelper
     public static function writeFile($fileName, $content)
     {
         try {
-            return file_put_contents(Yii::getAlias($fileName), $content);
+            $response = file_put_contents(Yii::getAlias($fileName), $content);
+            if ($response === false) {
+                return false;
+            }
         } catch (Exception $error) {
             return false;
         }
+        
+        return true;
     }
     
     /**

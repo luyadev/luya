@@ -124,6 +124,11 @@
 			},
 			templateUrl : 'updateformredirect.html',
 			controller : function($scope) {
+				$scope.$watch(function() { return $scope.data }, function(n, o) {
+					if (angular.isArray(n)) {
+						$scope.data = {};
+					}
+				});
 			}
 		}
 	});
@@ -187,7 +192,13 @@
 				
 				$scope.aliasSuggestion = function() {
 					$scope.data.alias = Slug.slugify($scope.data.title);
-				}
+				};
+				
+				$scope.$watch('data.alias', function(n, o) {
+					if (n!=o && n!=null) {
+						$scope.data.alias = Slug.slugify(n);
+					}
+				});
 				
 				$scope.exec = function () {
 					$scope.controller.save().then(function(response) {
@@ -590,7 +601,9 @@
 
 		$scope.menuDataReload = function() {
 			return ServiceMenuData.load(true);
-		}
+		};
+		
+		// controller logic
 		
 		$scope.toggleItem = function(data) {
 			if (data.toggle_open == undefined) {
@@ -599,7 +612,7 @@
 				data['toggle_open'] = !data.toggle_open;
 			}
 			
-			$http.post('admin/api-cms-nav/tree-history', {data: data}).then(function(response) {});
+			$http.post('admin/api-cms-nav/tree-history', {data: data}, {ignoreLoadingBar: true});
 			
 		};
 		
@@ -616,9 +629,13 @@
 	    	}
 	    	
 	    	return false;
-	    }
+	    };
 	    
-    	$scope.hiddenCats = $scope.menuData.hiddenCats;
+	    $scope.hiddenCats = [];
+	    
+	    $scope.$watch('menuData', function (n, o) {
+	    	$scope.hiddenCats = n.hiddenCats;
+	    });
 		
 		$scope.toggleCat = function(catId) {
 			if (catId in $scope.hiddenCats) {
@@ -627,7 +644,7 @@
 				$scope.hiddenCats[catId] = 1;
 			}
 			
-			$http.post('admin/api-cms-nav/save-cat-toggle', {catId: catId, state: $scope.hiddenCats[catId]});
+			$http.post('admin/api-cms-nav/save-cat-toggle', {catId: catId, state: $scope.hiddenCats[catId]}, {ignoreLoadingBar: true});
 		};
 		
 		$scope.toggleIsHidden = function(catId) {
@@ -643,7 +660,7 @@
 			}
 			
 			return false;
-		}
+		};
 	    
 	});
 	
@@ -910,7 +927,7 @@
 	 * @param $scope.lang
 	 *            from ng-repeat
 	 */
-	zaa.controller("NavItemController", function($scope, $http, $timeout, ServiceMenuData, AdminLangService, AdminToastService, ServiceLiveEditMode) {
+	zaa.controller("NavItemController", function($scope, $http, $timeout, Slug, ServiceMenuData, AdminLangService, AdminToastService, ServiceLiveEditMode) {
 		
 		$scope.loaded = false;
 		
@@ -964,13 +981,14 @@
 		
 		$scope.errors = [];
 
-		$scope.save = function(itemCopy, typeDataCopy) {
+		$scope.updateNavItemData = function(itemCopy, typeDataCopy) {
 			$scope.errors = [];
 			var headers = {"headers" : { "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" }};
 			var navItemId = itemCopy.id;
 
 			typeDataCopy.title = itemCopy.title;
 			typeDataCopy.alias = itemCopy.alias;
+			typeDataCopy.title_tag = itemCopy.title_tag;
 			typeDataCopy.description = itemCopy.description;
 			typeDataCopy.keywords = itemCopy.keywords;
 			$http.post(
@@ -997,6 +1015,12 @@
 			$scope.reset();
 			$scope.settings = !$scope.settings;
 		};
+		
+		$scope.$watch('itemCopy.alias', function(n, o) {
+			if (n!=o && n!=null) {
+				$scope.itemCopy.alias = Slug.slugify(n);
+			}
+		});
 	
 		$scope.typeDataCopy = [];
 		
@@ -1422,7 +1446,7 @@
 				group.toggle_open = !group.toggle_open;
 			}
 			
-			$http.post('admin/api-cms-block/toggle-group', {group: group});
+			$http.post('admin/api-cms-block/toggle-group', {group: group}, {ignoreLoadingBar: true});
 		}
 		
 		// controller logic

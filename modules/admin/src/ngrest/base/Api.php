@@ -14,6 +14,7 @@ use yii\base\ErrorException;
 use yii\base\InvalidConfigException;
 use luya\admin\base\RestActiveController;
 use luya\helpers\ArrayHelper;
+use yii\helpers\Json;
 
 /**
  * The RestActiveController for all NgRest implementations.
@@ -38,8 +39,7 @@ class Api extends RestActiveController
     public $autoEnablePagination = true;
     
     /**
-     * {@inheritDoc}
-     * @see \yii\rest\ActiveController::init()
+     * @inheritdoc
      */
     public function init()
     {
@@ -70,7 +70,26 @@ class Api extends RestActiveController
     
     public function actionServices()
     {
-        return $this->model->getNgrestServices();
+        $settings = [];
+        $apiEndpoint = $this->model->ngRestApiEndpoint();
+        $userSortSettings = Yii::$app->adminuser->identity->setting->get('ngrestorder.admin/'.$apiEndpoint, false);
+        
+        if ($userSortSettings && is_array($userSortSettings)) {
+            if ($userSortSettings['sort'] == SORT_DESC) {
+                $order = '-'.$userSortSettings['field'];
+            } else {
+                $order = '+'.$userSortSettings['field'];
+            }
+            
+            $settings['order'] = $order;
+        }
+        
+        $userFilter = Yii::$app->adminuser->identity->setting->get('ngrestfilter.admin/'.$apiEndpoint, false);
+        if ($userFilter) {
+            $settings['filterName'] = $userFilter;
+        }
+        
+        return ['service' => $this->model->getNgrestServices(), '_settings' => $settings];
     }
 
     public function actionSearch($query)
@@ -92,6 +111,23 @@ class Api extends RestActiveController
     {
         return new ActiveDataProvider([
             'query' => $this->model->find(),
+            'pagination' => false,
+        ]);
+    }
+    
+    public function actionRelationCall($arrayIndex, $id, $modelClass)
+    {
+        $modelClass = base64_decode($modelClass);
+        $model = $modelClass::findOne($id);
+        
+        if (!$model) {
+            throw new InvalidCallException("unable to resolve relation call model.");
+        }
+        
+        $func = $model->ngRestRelations()[$arrayIndex]['dataProvider'];
+        
+        return new ActiveDataProvider([
+            'query' => $func,
             'pagination' => false,
         ]);
     }

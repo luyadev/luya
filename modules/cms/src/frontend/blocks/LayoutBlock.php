@@ -8,7 +8,7 @@ use luya\cms\base\TwigBlock;
 
 /**
  * Layout/Grid Block.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class LayoutBlock extends TwigBlock
@@ -76,7 +76,7 @@ class LayoutBlock extends TwigBlock
         return '';
     }
     
-    public function getBlockGroup()
+    public function blockGroup()
     {
         return LayoutGroup::className();
     }

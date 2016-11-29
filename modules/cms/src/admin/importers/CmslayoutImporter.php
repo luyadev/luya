@@ -7,9 +7,17 @@ use luya\Exception;
 use luya\helpers\FileHelper;
 use luya\cms\models\Layout;
 use luya\console\Importer;
+use yii\helpers\Inflector;
 
+/**
+ * Import cmslayout files from the folder and analyise placeholders.
+ *
+ * @author Basil Suter <basil@nadar.io>
+ */
 class CmslayoutImporter extends Importer
 {
+    public $ignorePrefix = ['_', '.'];
+    
     private function verifyVariable($chars)
     {
         if (preg_match('/[^a-zA-Z0-9]+/', $chars, $matches)) {
@@ -19,26 +27,35 @@ class CmslayoutImporter extends Importer
         return true;
     }
     
+    public function generateReadableName($name)
+    {
+        return Inflector::humanize(Inflector::camel2words($name));
+    }
+    
     public function run()
     {
         $cmslayouts = Yii::getAlias('@app/views/cmslayouts');
         $layoutFiles = [];
         if (file_exists($cmslayouts)) {
-            foreach (scandir($cmslayouts) as $file) {
-                if ($file == '.' || $file == '..') {
-                    continue;
-                }
-                
+            $files = FileHelper::findFiles($cmslayouts, ['recursive' => false, 'filter' => function ($path) {
+                return !in_array(substr(basename($path), 0, 1), $this->ignorePrefix);
+            }]);
+            foreach ($files as $file) {
                 $fileinfo = FileHelper::getFileInfo($file);
+                
+                $fileBaseName = $fileinfo->name . '.' . $fileinfo->extension;
+                
+                $readableFileName = $this->generateReadableName($fileinfo->name);
+                
                 $oldTwigName = $fileinfo->name . '.twig';
                 if ($fileinfo->extension !== 'php') {
                     throw new Exception("layout file '$file': Since 1.0.0-beta6, cms layouts must be a php file with '<?= \$placeholders['content']; ?>' instead of a twig '{{placeholders.content}}'");
                 }
                 
-                $layoutFiles[] = $file;
+                $layoutFiles[] = $fileBaseName;
                 $layoutFiles[] = $oldTwigName;
 
-                $content = file_get_contents($cmslayouts.DIRECTORY_SEPARATOR.$file);
+                $content = file_get_contents($file);
                 
                 preg_match_all("/placeholders\[[\'\"](.*?)[\'\"]\]/", $content, $results);
                 
@@ -47,43 +64,39 @@ class CmslayoutImporter extends Importer
                     if (!$this->verifyVariable($holderName)) {
                         throw new Exception("Wrong variable name detected '".$holderName."'. Special chars are not allowed in placeholder variables, allowed chars are a-zA-Z0-9");
                     }
-                    $_placeholders[] = ['label' => $holderName, 'var' => $holderName];
+                    $_placeholders[] = ['label' => $this->generateReadableName($holderName), 'var' => $holderName];
                 }
                 
                 $_placeholders = ['placeholders' => $_placeholders];
                 
-                $layoutItem = Layout::find()->where(['or', ['view_file' => $file], ['view_file' =>  $oldTwigName]])->one();
+                $layoutItem = Layout::find()->where(['or', ['view_file' => $fileBaseName], ['view_file' =>  $oldTwigName]])->one();
                 
                 if ($layoutItem) {
                     $match = $this->comparePlaceholders($_placeholders, json_decode($layoutItem->json_config, true));
                     if ($match) {
-                        $layoutItem->scenario = 'restupdate';
-                        $layoutItem->setAttributes([
-                            'name' => ucfirst($file),
-                            'view_file' => $file,
+                        $layoutItem->updateAttributes([
+                            'name' => $readableFileName,
+                            'view_file' => $fileBaseName,
                         ]);
-                        $layoutItem->save();
-                        continue;
+                    } else {
+                        $layoutItem->updateAttributes([
+                            'name' => $readableFileName,
+                            'view_file' => $fileBaseName,
+                            'json_config' => json_encode($_placeholders),
+                        ]);
+                        $this->addLog('existing cmslayout '.$readableFileName.' updated');
                     }
-                    $layoutItem->scenario = 'restupdate';
-                    $layoutItem->setAttributes([
-                        'name' => ucfirst($file),
-                        'view_file' => $file,
-                        'json_config' => json_encode($_placeholders),
-                    ]);
-                    $layoutItem->save();
-                    $this->addLog('existing cmslayout '.$file.' updated');
                 } else {
                     // add item into the database table
                     $data = new Layout();
                     $data->scenario = 'restcreate';
                     $data->setAttributes([
-                        'name' => ucfirst($file),
-                        'view_file' => $file,
+                        'name' => $readableFileName,
+                        'view_file' => $fileBaseName,
                         'json_config' => json_encode($_placeholders),
                     ]);
-                    $data->save();
-                    $this->addLog('new cmslayout '.$file.' found and added to database.');
+                    $data->save(false);
+                    $this->addLog('new cmslayout '.$readableFileName.' found and added to database.');
                 }
             }
 
