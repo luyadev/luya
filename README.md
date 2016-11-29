@@ -19,9 +19,9 @@ The [Yii 2 PHP Framework](https://github.com/yiisoft/yii2) wrapper which provide
 
 We have a made an absolut easy to understand *STEP-BY-STEP* Guide to install LUYA:
 
-+ [How to install LUYA](https://luya.io)
-+ [LUYA Video Tutorials](https://luya.io/videos)
-+ [How to upgrade current LUYA website](https://luya.io/guide/install-upgrade)
++ [How to install](https://luya.io)
++ [Video Tutorials](https://luya.io/videos)
++ [How to upgrade current website](https://luya.io/guide/install-upgrade)
 
 Other helpfull informations
 

@@ -1,5 +1,6 @@
 <?php
 use app\assets\ResourcesAsset;
+use luya\helpers\Url;
 
 ResourcesAsset::register($this);
 
@@ -38,7 +39,7 @@ $this->beginPage();
         <div style="padding:20px; background-color:#9ccc65; margin-top:20px;" class="container">
             <div>
                 <?php echo Yii::t('app', 'kickstarter_success'); ?>
-                <?php echo Yii::t('app', 'kickstarter_admin_link', ['link' => \luya\helpers\Url::toInternal(['admin/default/index']), true]); ?>
+                <?php echo Yii::t('app', 'kickstarter_admin_link', ['link' => Url::toInternal(['admin/default/index']), true]); ?>
             </div>
         </div>
         
