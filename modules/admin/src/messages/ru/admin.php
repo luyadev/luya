@@ -183,4 +183,18 @@ return [
     'right_panel_support_tags_title' => 'Теги',
     'right_panel_support_support_title' => 'Поддержка',
     'right_panel_support_support_text' => 'Если у вас возникли вопросы, то обратитесь к своему вебмастеру или проконсультируйтесь на <a target="_blank" href="https://luya.io">luya.io</a>.',
+
+    // rc2
+
+    'ngrest_crud_group_prompt' => 'Группировка по полю',
+    'ngrest_crud_filter_prompt' => 'Выбрать фильтер',
+    'ngrest_crud_ajax_search_length' => 'Поисковый запрос должен быть не менее 3 символов.',
+    'menu_system_logger' => 'Логирование',
+    'layout_filemanager_detail_replace_file' => 'Заменить файл',
+    'layout_rightbar_languagelabel' => 'Язык интерфейса',
+    'layout_rightbar_savebtn' => 'Сохранить',
+    'aws_changepassword_notequal' => 'Пароли не совпадают.',
+    'aws_changeapssword_minchar' => 'Пароль должен иметь минимум {min} символа.',
 ];
+
+

@@ -163,4 +163,7 @@ return [
     'block_layout_row_column_css_class' => 'CSS классы для div шаблона',
     'block_image_cfg_css_class' => 'CSS классы для изображений',
     'block_cfg_additonal_css_class' => 'CSS классы',
+
+    // rc2
+    'block_group_media_group' => 'Медиа',
 ];
