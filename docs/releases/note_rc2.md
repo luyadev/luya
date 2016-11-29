@@ -1,6 +1,6 @@
 The final release of LUYA is around the corner! But for now, release candidate 2 has improved several things and fixed many bugs.
 
-+ The administration now speaks French, too! It is available in the following languages: German, English, Russian, French and Spanish (which is still missing some translations).
++ The administration now speaks French and Spanish, too! It is available in the following languages: German, English, Russian, French and Spanish.
 + The language of the administration can now be stored for each user individually.
 + Relational data can now be opened in new tabs in the NgRest CRUD view.
 + In the CMS there is a new page setting "SEO Title" allowing to define a custom title tag for the current page for SEO optimisations.
