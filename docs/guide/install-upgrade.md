@@ -1,17 +1,18 @@
-Upgrading Luya
-==============
+# Upgrading LUYA
 
-This page describes how to update an existing luya instance to the newest version. The current version of LUYA is `1.0.0-RC1`.
+This page describes how to update an existing luya instance to the newest version. The current version of LUYA is `1.0.0-RC2`.
+
+> **Before upgrading, [read the Backward compatibility breaks Guide](https://github.com/luyadev/luya/blob/master/UPGRADE.md)**
 
 ### Composer
 
-change the luya versions for each modules and luya itself in you your composer.json
+change the LUYA versions for each modules and luya itself in you your composer.json
 
-```
+```json
 "require": {
-    "luyadev/luya-core" : "1.0.0-RC1",
-    "luyadev/luya-module-cms" : "1.0.0-RC1",
-    "luyadev/luya-module-admin" : "1.0.0-RC1"
+    "luyadev/luya-core" : "1.0.0-RC2",
+    "luyadev/luya-module-cms" : "1.0.0-RC2",
+    "luyadev/luya-module-admin" : "1.0.0-RC2"
 }
 ```
 
@@ -29,11 +30,6 @@ After updating composer, excecute the following command to upgrade the Database.
 
 ```sh
 ./vendor/bin/luya migrate
-```
-For the RC1 upgrade, you have to run the block updater command:
-
-```sh
-./vendor/bin/luya cmsadmin/updater/classes
 ```
 
 Now refresh all existing importer components with the import commmand:

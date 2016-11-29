@@ -1,7 +1,5 @@
 # Tags
 
-> since 1.0.0-RC1
-
 The LUYA tags are a very strong usefull bb code similiar tag parsing concept. You can just add your own tag within an application or ship them directly with modules. The basic idea behind the tag parser is to enhance the Makrkdown syntax by your customized tags.
 
 Lets assume you want to create a [Bootstrap Tooltip](http://getbootstrap.com/javascript/#tooltips) right at the fingertips of all contents in all modules or views. As the [Elements](concept-elements.md) is thought to be a tool for the developer itself, the tag differs from this idea. It can be easily used by all editors of the administration area.
