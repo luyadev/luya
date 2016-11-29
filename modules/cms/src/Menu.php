@@ -81,6 +81,7 @@ use luya\cms\menu\InjectItem;
  * $homeItem = Yii::$app->menu->home;
  * ```
  *
+ * @property array $currentUrlRule Get the url rules for the current menu item.
  * @since 1.0.0-beta1
  * @author Basil Suter <basil@nadar.io>
  */
@@ -96,7 +97,7 @@ class Menu extends Component implements ArrayAccess
     const EVENT_AFTER_LOAD = 'eventAfterLoad';
     
     /**
-     * @var luya\web\Request Request object
+     * @var \luya\web\Request Request object
      */
     public $request = null;
     
@@ -121,9 +122,8 @@ class Menu extends Component implements ArrayAccess
     /**
      * Class constructor to DI the request object.
      *
-     * @param \luya\web\Request            $request
-     * @param \luya\components\Composition $composition
-     * @param array                        $config
+     * @param \luya\web\Request $request The request object resolved by DI.
+     * @param array $config
      */
     public function __construct(\luya\web\Request $request, array $config = [])
     {
@@ -143,6 +143,7 @@ class Menu extends Component implements ArrayAccess
 
     /**
      * Get the url rules for the current menu item.
+     * 
      * @return array
      */
     public function getCurrentUrlRule()

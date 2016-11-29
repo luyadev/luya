@@ -40,7 +40,7 @@ use Exception;
  * change them with event inject. So take care of using with hidden when protecting items for beeing seen by guest users
  * (in example of protected several items for not logged in users).
  *
- * @property object $menu Contains menu Object.
+ * @property \luya\cms\Menu $menu Application menu component object.
  * @since 1.0.0-beta1
  * @author Basil Suter <basil@nadar.io>
  */
