@@ -35,10 +35,13 @@ Example template:
     <title>My App</title>
 </head>
 <body>
+<img src="<?= luya\helpers\Url::base(true); ?>/images/logo.png" />
 <?= $content; ?>
 </body>
 </html>
 ```
+
+{{\luya\helpers\Url::base}} can be used to get the absolute server URL.
 
 ## Compose new E-Mail
 
