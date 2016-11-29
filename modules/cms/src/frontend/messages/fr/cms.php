@@ -163,4 +163,7 @@ return [
     'block_layout_row_column_css_class' => 'Classes CSS pour la mise en page des <div>',
     'block_image_cfg_css_class' => 'Classes CSS de l\'image',
     'block_cfg_additonal_css_class' => 'Classes CSS',
+    
+    // rc2
+    'block_group_media_group' => 'Media',
 ];
