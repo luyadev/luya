@@ -25,7 +25,7 @@ $config = [
     'siteTitle' => 'My Project',
     
     /*
-     * Set the administration area language. Available language short codes: "en", "de" and "ru"
+     * Set the administration area language. Available language short codes: "en", "de", "fr", "es" and "ru"
      */
     'luyaLanguage' => 'en',
     
