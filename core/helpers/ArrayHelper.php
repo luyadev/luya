@@ -25,7 +25,7 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
      *
      * @param array $arr The array where the value should be prepend
      * @param string $key The new array key
-     * @param mix $val The value for the new key
+     * @param mixed $val The value for the new key
      * @return array
      */
     public static function arrayUnshiftAssoc(&$arr, $key, $val)
