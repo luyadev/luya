@@ -6,9 +6,9 @@ use luya\Exception;
 use ReflectionMethod;
 
 /**
- * ObjectHelper to provied helper methods with class objects.
+ * Helpers when working with Objects.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class ObjectHelper
 {
