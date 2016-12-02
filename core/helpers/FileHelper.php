@@ -102,7 +102,7 @@ class FileHelper extends \yii\helpers\BaseFileHelper
      * will auto alias encode by Yii::getAlias function.
      *
      * @since 1.0.0-beta7
-     * @param sring $fileName The path to the file to get the content
+     * @param string $fileName The path to the file to get the content
      * @return string|boolean
      */
     public static function getFileContent($fileName)
