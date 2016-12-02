@@ -2,7 +2,7 @@
 
 namespace luya\helpers;
 
-use Exception;
+use luya\Exception;
 use ReflectionMethod;
 
 /**
@@ -24,20 +24,18 @@ class ObjectHelper
     }
     
     /**
-     * Call a class method with arguments and verify the arguments if they are in the list of
-     * method arguments or not.
+     * Call a method and ensure arguments.
      *
+     * Call a class method with arguments and verify the arguments if they are in the list of method arguments or not.
+     *
+     * ```php
+     * ObjectHelper::callMethodSanitizeArguments(new MyClass(), 'methodToCall', ['paramName' => 'paramValue']);
      * ```
-     * $response = ObjectHelper::callMethodSanitizeArguments((new MyClass()), 'methodToGet', ['paramName' => 'paramValue']);
-     * ```
      *
-     * @param object $object        The class object where the method must be found.
-     * @param string $method        The class method to call inside the object
-     * @param array  $argumentsList A massiv assigned list of array items, where the key is bind
-     *                              to the method argument and the value to be passed in the method on call.
-     *
-     * @throws Exception Throws an exception if a argument coult not be found.
-     *
+     * @param object $object The class object where the method must be found.
+     * @param string $method The class method to call inside the object.
+     * @param array  $argumentsList A massiv assigned list of array items, where the key is bind to the method argument and the value to be passed in the method on call.
+     * @throws \luya\Exception Throws an exception if a argument coult not be found.
      * @return object
      */
     public static function callMethodSanitizeArguments($object, $method, array $argumentsList = [])
