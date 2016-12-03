@@ -2,7 +2,6 @@
 
 namespace luya\admin\aws;
 
-use Yii;
 use luya\Exception;
 use luya\admin\Module;
 use luya\admin\ngrest\base\ActiveWindow;
@@ -49,8 +48,8 @@ class ChangePassword extends ActiveWindow
      *
      * The implementation of this must make sure if the $newPassword and $newPasswordRepetition are equals!
      *
-     * @param string $newPassword The new password which must be set.
-     * @param string $newPasswordRepetition The repeation in order to check whether does inputs are equal or not.
+     * @param string $newpass The new password which must be set.
+     * @param string $newpasswd The repeation in order to check whether does inputs are equal or not.
      * @throws \luya\Exception
      */
     public function callbackSave($newpass, $newpasswd)

@@ -22,9 +22,9 @@ class ActiveWindowController extends \luya\console\Command
     /**
      * Render the view file with its parameters.
      *
-     * @param string $className
-     * @param string $namepsace
-     * @param string $moduleId
+     * @param string $className The class name to use.
+     * @param string $namespace The namespace for the file.
+     * @param string $moduleId The module identifier.
      * @return string
      */
     public function renderWindowClassView($className, $namespace, $moduleId)

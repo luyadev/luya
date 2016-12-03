@@ -2,10 +2,10 @@
 
 namespace luya\admin\base;
 
-use Exception;
 use luya\admin\models\StorageFilter;
 use luya\admin\models\StorageEffect;
 use luya\admin\models\StorageFilterChain;
+use luya\Exception;
 use yii\helpers\Json;
 use yii\base\Object;
 
@@ -88,7 +88,7 @@ abstract class Filter extends Object implements FilterInterface
      * Find the model based on the identifier. If the identifier does not exists in the database, create
      * new record in the database.
      *
-     * @return object \admin\models\StorageFilter
+     * @return object \luya\admin\models\StorageFilter
      */
     public function findModel()
     {
@@ -117,7 +117,7 @@ abstract class Filter extends Object implements FilterInterface
      * + EFFECT_THUMBNAIL
      * + EFFECT_CROP
      * @return array Contain an array with the effect properties.
-     * @throws Exception
+     * @throws \luya\Exception
      */
     public function findEffect($effectIdentifier)
     {
@@ -134,8 +134,8 @@ abstract class Filter extends Object implements FilterInterface
     /**
      * Get an array with all the effect param options, based on the effect params defintion.
      *
-     * @param array $effectParamsDefintion
-     * @throws Exception When the vars key does not exists in the effect definition.
+     * @param array $effectParams
+     * @throws \luya\Exception When the vars key does not exists in the effect definition.
      * @return array
      */
     public function getEffectParamsList($effectParams)
@@ -157,8 +157,9 @@ abstract class Filter extends Object implements FilterInterface
     /**
      * Returns a parsed effect chain for the current Filter. The method verifys if the provieded effect
      * parameters are available in the effect defintions of luya.
+     *
      * @return array Each row of the array must have "effect_id" and "effect_json_values" key.
-     * @throws Exception When effect option could be found in the effect defintions.
+     * @throws \luya\Exception When effect option could be found in the effect defintions.
      */
     public function getChain()
     {
