@@ -7,7 +7,7 @@ In order to make a Link somewhere inside the Guide or PHPDoc to a PHP Class use:
 
 In order to make links from the API PHPdocs to the Guide use:
 
-+ `[[concept-tags.md]]` where the markdown file is a file located in https://github.com/luyadev/luya/tree/master/docs/guide.
++ `[[concept-tags.md]]` where the markdown file is a file located in `/docs/guide` folder..
 
 To refer to inherite methods use:
 
