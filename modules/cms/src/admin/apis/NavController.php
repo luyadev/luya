@@ -18,7 +18,7 @@ use yii\base\InvalidCallException;
  * example.com/admin/api-cms-nav/create-module
  * example.com/admin/api-cms-nav/create-item-module.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class NavController extends \luya\admin\base\RestController
 {

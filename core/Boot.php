@@ -12,7 +12,7 @@ if (!version_compare(PHP_VERSION, '5.5.0', '>=')) {
 /**
  * The LUYA boot class to startup the application
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Boot extends \luya\base\Boot
 {

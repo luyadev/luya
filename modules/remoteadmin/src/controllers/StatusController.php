@@ -7,8 +7,7 @@ use luya\remoteadmin\models\Site;
 
 /**
  * @see packages api https://packagist.org/apidoc
- * @author nadar
- *
+ * @author Basil Suter <basil@nadar.io>
  */
 class StatusController extends \luya\admin\base\Controller
 {

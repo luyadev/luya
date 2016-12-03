@@ -16,7 +16,7 @@ use Yii;
  * }
  * ```
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class SelectModel extends Select
 {

@@ -7,7 +7,7 @@ use luya\traits\ErrorHandlerTrait;
 /**
  * LUYA ErrorHandler wrapper with error handler trait
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class ErrorHandler extends \yii\web\ErrorHandler
 {

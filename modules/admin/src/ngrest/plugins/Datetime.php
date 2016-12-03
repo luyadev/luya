@@ -16,7 +16,7 @@ use luya\admin\ngrest\base\Plugin;
  * ['timestamp', ['Datetime', 'emptyMessage' => 'No Date']],
  * ```
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Datetime extends Plugin
 {

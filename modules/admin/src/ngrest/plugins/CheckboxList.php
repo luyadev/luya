@@ -18,7 +18,7 @@ use luya\helpers\StringHelper;
  * }
  *
  * @todo testing and complete find and save events.
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class CheckboxList extends Plugin
 {

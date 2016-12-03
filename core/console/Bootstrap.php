@@ -8,7 +8,7 @@ use luya\base\BaseBootstrap;
 /**
  * Luya CLI Bootsrap.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Bootstrap extends BaseBootstrap
 {

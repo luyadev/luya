@@ -26,7 +26,7 @@ use luya\admin\ngrest\render\RenderInterface;
  * $ngrest->render(new RenderCrud());
  * ```
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class NgRest
 {

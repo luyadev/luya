@@ -8,7 +8,7 @@ use luya\admin\ngrest\base\Plugin;
 /**
  * Render Colorized overview
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Color extends Plugin
 {

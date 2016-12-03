@@ -8,7 +8,7 @@ use luya\admin\ngrest\base\Plugin;
 /**
  * Create a list element with self adding text inputs and responses as array.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta6
  */
 class TextArray extends Plugin

@@ -10,7 +10,7 @@ use luya\traits\ApplicationTrait;
 /**
  * Luya CLI Application.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Application extends \yii\console\Application
 {

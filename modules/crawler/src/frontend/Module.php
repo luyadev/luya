@@ -16,7 +16,7 @@ namespace luya\crawler\frontend;
  *
  * @link https://github.com/FriendsOfPHP/Goutte
  * @link http://api.symfony.com/2.7/Symfony/Component/DomCrawler.html
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Module extends \luya\base\Module
 {

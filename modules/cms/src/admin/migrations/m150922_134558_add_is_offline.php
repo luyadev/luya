@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * @todo next version remove and replace inside the base tabl cms_nav (add column to base table)
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class m150922_134558_add_is_offline extends Migration
 {

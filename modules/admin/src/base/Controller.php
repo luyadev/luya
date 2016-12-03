@@ -9,7 +9,7 @@ use luya\admin\models\UserOnline;
 /**
  * Base controller for all Admin-Module controllers.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Controller extends \luya\web\Controller
 {

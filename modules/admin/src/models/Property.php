@@ -9,7 +9,7 @@ use Yii;
  *
  * Base classes for CMS properties which are set by import process.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Property extends \yii\db\ActiveRecord
 {

@@ -10,7 +10,7 @@ use luya\base\BaseBootstrap;
 /**
  * LUYA base bootstrap class which will be called during the bootstraping process.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Bootstrap extends BaseBootstrap
 {

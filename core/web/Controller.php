@@ -7,7 +7,7 @@ use luya\base\Module;
 /**
  * Base class for all controllers in luya application Modules.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 abstract class Controller extends \yii\web\Controller
 {

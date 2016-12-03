@@ -12,7 +12,7 @@ use yii\helpers\Json;
 use yii\base\InvalidConfigException;
 
 /**
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class RenderCrud extends Render implements RenderInterface
 {

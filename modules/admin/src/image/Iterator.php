@@ -7,7 +7,7 @@ namespace luya\admin\image;
  *
  * @since 1.0.0-beta2
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Iterator extends \luya\admin\storage\IteratorAbstract
 {

@@ -18,7 +18,7 @@ use luya\helpers\FileHelper;
  * ./vendor/bin/luya crawler/crawl --verbose
  * ```
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class CrawlController extends \luya\console\Command
 {

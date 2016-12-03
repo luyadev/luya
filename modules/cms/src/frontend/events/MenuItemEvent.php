@@ -20,7 +20,7 @@ namespace luya\cms\frontend\events;
  *  ],
  *  ```
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta5
  */
 class MenuItemEvent extends \yii\base\Event

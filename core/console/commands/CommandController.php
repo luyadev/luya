@@ -14,7 +14,7 @@ namespace luya\console\commands;
  * where the route is part of the controller/action as Yii2 routes concept.
  *
  * @todo remove/delete in beta7
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class CommandController extends \luya\console\Command
 {

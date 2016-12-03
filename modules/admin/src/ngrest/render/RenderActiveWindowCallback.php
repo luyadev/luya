@@ -10,7 +10,7 @@ use luya\admin\ngrest\base\Render;
 
 /**
  * @todo sanitize post (\yii\helpers\HtmlPurifier::process(...)
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class RenderActiveWindowCallback extends Render implements RenderInterface
 {

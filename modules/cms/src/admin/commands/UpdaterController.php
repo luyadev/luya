@@ -12,7 +12,7 @@ use luya\helpers\StringHelper;
 /**
  * This controller is part of the beta6 release and adds the version ability database migrations.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class UpdaterController extends Command
 {

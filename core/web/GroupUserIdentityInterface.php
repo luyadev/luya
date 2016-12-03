@@ -7,7 +7,7 @@ use yii\web\IdentityInterface;
 /**
  * The identity interface for group users
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 interface GroupUserIdentityInterface extends IdentityInterface
 {

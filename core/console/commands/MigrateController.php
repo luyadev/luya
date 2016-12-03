@@ -11,7 +11,7 @@ use yii\console\Exception;
  * Extended Yii2 Migration-Tool to run Database migrations.
  *
  * @see https://github.com/yiisoft/yii2/issues/384
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class MigrateController extends \yii\console\controllers\MigrateController
 {

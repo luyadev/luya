@@ -6,7 +6,7 @@ use yii\base\Component;
 use luya\admin\models\Lang;
 
 /**
- * Admin Language component to make singelton similiar pattern to collect langauges and active language.
+ * Admin Language component to make singelton similiar pattern to collect language and active language.
  *
  * @author Basil Suter <basil@nadar.io>
  */

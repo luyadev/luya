@@ -96,7 +96,7 @@ use yii\base\InvalidConfigException;
  * }
  * ```
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class GroupUser extends \yii\web\User
 {

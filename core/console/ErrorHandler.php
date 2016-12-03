@@ -7,7 +7,7 @@ use luya\traits\ErrorHandlerTrait;
 /**
  * Luya CLI ErrorHandler.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class ErrorHandler extends \yii\console\ErrorHandler
 {

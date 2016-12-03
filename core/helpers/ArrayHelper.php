@@ -5,7 +5,7 @@ namespace luya\helpers;
 /**
  * Extend the Yii Array Helper class
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class ArrayHelper extends \yii\helpers\BaseArrayHelper
 {

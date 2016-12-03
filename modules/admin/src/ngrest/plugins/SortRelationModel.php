@@ -14,7 +14,7 @@ namespace luya\admin\ngrest\plugins;
  * }
  * ```
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class SortRelationModel extends SortRelation
 {

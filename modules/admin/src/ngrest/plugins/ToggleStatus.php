@@ -18,7 +18,7 @@ use luya\admin\ngrest\base\Plugin;
  *
  * Now the checkbox is set the 1 by default (which is equals to $trueValue).
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class ToggleStatus extends Plugin
 {

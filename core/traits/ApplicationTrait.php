@@ -13,7 +13,7 @@ use luya\base\CoreModuleInterface;
  * @property string $luyaLanguage Admin Interface language
  * @property string $webroot Returns the webroot directory event for console commands.
  * @property \luya\components\Mail $mail Get luya mail component
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 trait ApplicationTrait
 {

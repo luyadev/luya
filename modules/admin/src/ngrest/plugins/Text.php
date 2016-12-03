@@ -7,7 +7,7 @@ use luya\admin\ngrest\base\Plugin;
 /**
  * Create a text input select for a given field.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class Text extends Plugin
 {

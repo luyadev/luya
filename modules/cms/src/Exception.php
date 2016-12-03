@@ -5,7 +5,7 @@ namespace luya\cms;
 /**
  * Exception wrapper for yii\base\Exception, represents a generic exception for all purposes.
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta5
  */
 class Exception extends \luya\Exception

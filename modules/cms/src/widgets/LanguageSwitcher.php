@@ -31,7 +31,7 @@ use luya\web\Composition;
  * </div>
  * ```
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-beta5
  */
 class LanguageSwitcher extends \luya\base\Widget

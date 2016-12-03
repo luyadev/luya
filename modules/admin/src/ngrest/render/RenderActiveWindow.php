@@ -6,7 +6,7 @@ use Yii;
 use luya\admin\ngrest\base\Render;
 
 /**
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class RenderActiveWindow extends Render implements RenderInterface
 {

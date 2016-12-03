@@ -16,7 +16,7 @@ use luya\helpers\ArrayHelper;
  * }
  * ```
  *
- * @author nadar
+ * @author Basil Suter <basil@nadar.io>
  */
 class SelectArray extends Select
 {
