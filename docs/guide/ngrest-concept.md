@@ -220,4 +220,4 @@ The Icons `account` and `extension` are choosem from the google material icons: 
 
 Run `./vendor/bin/luya import`, open the administration area and allocate the new menu items to a group. 
 
-**Don't forget to set the correct privileges in ```System > User > Authorizations``` otherwise you won't see the created menu items!**
+> Don't forget to set the correct privileges in `System > User > Authorizations` otherwise you won't see the created menu items!
