@@ -7,6 +7,25 @@ use yii\validators\Validator;
 
 /**
  * Float Validator.
+ * 
+ * A validation rule to verify whether a value is a float or numeric value.
+ * 
+ * ```php
+ * public function rules()
+ * {
+ *     return [
+ *         [['price', 'weight'], \luya\validators\FloatValidator::class],
+ *     ]
+ * }
+ * ```
+ * 
+ * The following values are valid:
+ * 
+ * + `'123'`
+ * + `'123.00'`
+ * + `123`
+ * + `123.00`
+ * + `0.10`
  *
  * @author Basil Suter <basil@nadar.io>
  * @author Martin Petrasch <martin.petrasch@zephir.ch>
