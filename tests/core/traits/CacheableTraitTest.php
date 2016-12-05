@@ -32,5 +32,15 @@ class CacheableTraitTest extends LuyaWebTestCase
         $this->assertTrue($cache->setHasCache('baz', 'bar', ['class' => 'yii\caching\FileDependency', 'fileName' => 'foobar.txt']));
         $this->assertTrue($cache->setHasCache('qux', 'bar', (new FileDependency(['fileName' => 'foobar.txt']))));
         $this->assertTrue($cache->deleteHasCache('foo'));
+        $this->assertFalse($cache->getHasCache('foo'));
+    }
+    
+    public function testCacheableArrayKeys()
+    {
+        Yii::$app->set('cache', ['class' => 'yii\caching\DummyCache']);
+        $cache = new CacheStub();
+        $this->assertTrue($cache->setHasCache(['cache', 'bar'], 'bar'));
+        $this->assertTrue($cache->deleteHasCache(['cache', 'bar']));
+        $this->assertFalse($cache->getHasCache(['cache', 'bar']));
     }
 }
