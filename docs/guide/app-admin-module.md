@@ -7,7 +7,7 @@ Some features available in the Admin Modules:
 + [NgRest, CRUD system based on Angular and Yii2](ngrest-concept.md)
 + {{luya\admin\components\StorageContainer}}
 + Apis
-+ [Permissions)(app-admin-module-permission.md)
++ [Permissions](app-admin-module-permission.md)
 
 You can use the [Console Command](app-console.md) `module/create` to scaffold quickly all the required folders and files.
 
