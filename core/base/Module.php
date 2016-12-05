@@ -8,6 +8,7 @@ use luya\helpers\FileHelper;
 use yii\helpers\Inflector;
 use luya\console\interfaces\ImportControllerInterface;
 use yii\base\InvalidParamException;
+use yii\base\InvalidConfigException;
 
 /**
  * Base Module class for all LUYA Modules.
@@ -114,7 +115,7 @@ abstract class Module extends \yii\base\Module
         // verify all the components
         foreach ($this->requiredComponents as $component) {
             if (!Yii::$app->has($component)) {
-                throw new Exception(sprintf('The required component "%s" is not registered in the configuration file', $component));
+                throw new InvalidConfigException(sprintf('The required component "%s" is not registered in the configuration file', $component));
             }
         }
         $this->registerTranslations();
