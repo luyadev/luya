@@ -1,18 +1,16 @@
-Project Admin-Modul
-==================
+# Admin Modules
 
-An Admin-Module provides the ability to quickly create an adminstration section for your data. The LUYA Crud System is Called [NgRest](ngrest-concept.md).
+An Admin Module provides the ability to quickly create an adminstration section for your data. The LUYA Crud system is called [NgRest CRUD](ngrest-concept.md).
 
 Some features available in the Admin Modules:
 
 + [NgRest, CRUD system based on Angular and Yii2](ngrest-concept.md)
 + {{luya\admin\components\StorageContainer}}
-+ Image filters and effects
 + Apis
-+ Permissions
++ [Permissions)(app-admin-module-permission.md)
 
-> You can use the [Console Command](app-console.md) `module/create` to create a frontend or an admin module.
+You can use the [Console Command](app-console.md) `module/create` to scaffold quickly all the required folders and files.
 
-### Controller views
+### Controller View
 
-Inside an administration module you shoud always use `renderPartial()` method, as there is no layout views because you are in an Angular context.
+Inside an administration modules controller, you have to use `renderPartial()` method when rendering views, as there is no layout views because you are in an Angular context.
