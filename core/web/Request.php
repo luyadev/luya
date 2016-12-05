@@ -9,6 +9,8 @@ use Yii;
  *
  * Extending the {{yii\web\Request}} class by predefine values and add ability to verify whether the request is in admin context or not.
  *
+ * @property boolean $isAdmin Whether the request is admin or not.
+ * 
  * @author Basil Suter <basil@nadar.io>
  */
 class Request extends \yii\web\Request
@@ -33,29 +35,45 @@ class Request extends \yii\web\Request
     public $parsers = [
         'application/json' => 'yii\web\JsonParser',
     ];
+    
+    private $_isAdmin = null;
+    
+    /**
+     * Setter method to force isAdmin request.
+     * 
+     * @param boolean $state Whether its an admin request or not
+     */
+    public function setIsAdmin($state)
+    {
+        $this->_isAdmin = $state;
+    }
 
     /**
-     * Resolve the current url request and check if admin context.
+     * Getter method resolves the current url request and check if admin context.
      *
      * This is mostly used in order to bootstrap more modules and application logic in admin context.
      *
      * @return boolean If the current request is in admin context return value is true, otherwise false.
      */
-    public function isAdmin()
+    public function getIsAdmin()
     {
-        if ($this->getIsConsoleRequest() && !$this->forceWebRequest) {
-            return false;
+        if ($this->_isAdmin === null) {
+            if ($this->getIsConsoleRequest() && !$this->forceWebRequest) {
+                $this->_isAdmin = false;
+            } else {
+                $resolver = Yii::$app->composition->getResolvedPathInfo($this);
+                $pathInfo = $resolver['route'];
+                $parts = explode('/', $pathInfo);
+                $first = reset($parts);
+                
+                if (preg_match('/admin/i', $first, $results)) {
+                    $this->_isAdmin = true;
+                } else {
+                    $this->_isAdmin = false;   
+                }
+            }
         }
-
-        $resolver = Yii::$app->composition->getResolvedPathInfo($this);
-        $pathInfo = $resolver['route'];
-        $parts = explode('/', $pathInfo);
-        $first = reset($parts);
         
-        if (preg_match('/admin/i', $first, $results)) {
-            return true;
-        }
-
-        return false;
+        return $this->_isAdmin;
     }
 }

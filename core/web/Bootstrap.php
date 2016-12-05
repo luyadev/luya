@@ -58,7 +58,7 @@ class Bootstrap extends BaseBootstrap
     public function run($app)
     {
         if (!$app->request->getIsConsoleRequest()) {
-            if ($this->hasModule('admin') && $app->request->isAdmin()) {
+            if ($this->hasModule('admin') && $app->request->isAdmin) {
                 foreach ($this->getModules() as $id => $module) {
                     if ($module instanceof AdminModuleInterface) {
                         $this->_adminAssets = ArrayHelper::merge($module->getAdminAssets(), $this->_adminAssets);

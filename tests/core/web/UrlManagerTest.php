@@ -71,22 +71,22 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
     public function testRequestComponent()
     {
         $request = new Request();
-        $this->assertEquals(false, $request->isAdmin());
+        $this->assertEquals(false, $request->isAdmin);
 
         $request = new Request();
         $request->forceWebRequest = true;
         $request->pathInfo = 'admin';
-        $this->assertEquals(true, $request->isAdmin());
+        $this->assertEquals(true, $request->isAdmin);
 
         $request = new Request();
         $request->forceWebRequest = true;
         $request->pathInfo = 'de/admin';
-        $this->assertEquals(true, $request->isAdmin());
+        $this->assertEquals(true, $request->isAdmin);
 
         $request = new Request();
         $request->forceWebRequest = true;
         $request->pathInfo = 'de/foo/admin';
-        $this->assertEquals(false, $request->isAdmin());
+        $this->assertEquals(false, $request->isAdmin);
     }
 
     public function testHiddenDefaultComposition()

@@ -85,7 +85,7 @@ class Module extends \luya\base\Module implements BootstrapInterface, CoreModule
     public function bootstrap($app)
     {
         $app->on(Application::EVENT_BEFORE_REQUEST, function ($event) {
-            if (!$event->sender->request->isConsoleRequest && !$event->sender->request->isAdmin()) {
+            if (!$event->sender->request->isConsoleRequest && !$event->sender->request->isAdmin) {
                 $event->sender->urlManager->addRules([
                     ['class' => 'luya\cms\frontend\components\RouteBehaviorUrlRule'],
                     ['class' => 'luya\cms\frontend\components\CatchAllUrlRule'],
