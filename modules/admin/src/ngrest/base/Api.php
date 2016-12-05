@@ -3,18 +3,18 @@
 namespace luya\admin\ngrest\base;
 
 use Yii;
-use luya\helpers\FileHelper;
-use luya\helpers\Url;
 use yii\helpers\Inflector;
-use yii\base\InvalidCallException;
-use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
+use yii\helpers\Json;
+use yii\base\InvalidCallException;
 use yii\base\Arrayable;
 use yii\base\ErrorException;
 use yii\base\InvalidConfigException;
-use luya\admin\base\RestActiveController;
+use yii\data\ActiveDataProvider;
 use luya\helpers\ArrayHelper;
-use yii\helpers\Json;
+use luya\helpers\FileHelper;
+use luya\helpers\Url;
+use luya\admin\base\RestActiveController;
 
 /**
  * The RestActiveController for all NgRest implementations.
@@ -23,6 +23,17 @@ use yii\helpers\Json;
  */
 class Api extends RestActiveController
 {
+    /**
+     * @inheritdoc
+     */
+    public function actions()
+    {
+        $actions = parent::actions();
+        $actions['index']['class'] = 'luya\admin\ngrest\base\actions\IndexAction';
+        $actions['delete']['class'] = 'luya\admin\ngrest\base\actions\DeleteAction';
+        return $actions;
+    }
+    
     /**
      * @var string Defines the related model for the NgRest Controller. The full qualiefied model name
      * is required.

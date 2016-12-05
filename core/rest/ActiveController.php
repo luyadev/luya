@@ -6,10 +6,13 @@ use luya\traits\RestBehaviorsTrait;
 use yii\rest\ActiveController as BaseActiveController;
 
 /**
- * Base Class for all Rest ActiveControllers
- *
- * This base class extends the yii2 ActiveController by implementing the RestBehaviorsTrait which
- * override all behavior classes by luya behavior class names.
+ * Active Rest Controller.
+ * 
+ * In order to run a ActiveController a `$modelClass` property must be set.
+ * 
+ * The {{luya\rest\ActiveController}} extends the Yii 2 {{\yii\rest\ActiveController}} by disabled the pagination and provided customized rest actions.
+ * 
+ * See the {{luya\traits\RestBehaviorsTrait}} documentation in order to read more about the default enabled behaviors and protection settings.
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -38,42 +41,29 @@ abstract class ActiveController extends BaseActiveController
     public $updateScenario = self::SCENARIO_RESTUPDATE;
 
     /**
-     * @var boolean|Pagination Whether the pagination is enabled for this ActiveController or not
-     * by default pagination for rest controllers is disabled. An example of Activate the pagination
-     * by setting it to 100 Records per Page:
+     * @var boolean|array|\yii\data\Pagination Whether the pagination is enabled for this ActiveController or not by default pagination for rest controllers is disabled. 
+     * 
+     * An example of activatedpagination by setting it to 100 Records per Page:
      *
      * ```php
      * public $pagination = ['pageSize' => 100];
      * ```
      *
      * Or to turn of the pagination which is be default off just set $pagination to false.
+     *
+     * @see \yii\data\Pagination
      */
     public $pagination = false;
     
     /**
-     * Override the base actions in order to support some enhancements of actions
-     * by default for all active controllers.
-     * @see \yii\rest\ActiveController::actions()
-     */
-    public function actions()
-    {
-        $actions = parent::actions();
-        $actions['index']['class'] = '\luya\rest\actions\IndexAction';
-        $actions['delete']['class'] = '\luya\rest\actions\DeleteAction';
-        return $actions;
-    }
-    
-    /**
-     * If a user should not get access to the rest api, an ForbittendHttpException
-     * must be thrown:.
+     * If a user should not get access to the rest api, an ForbiddenHttpException must be thrown:
      *
      * ```php
      * throw new \yii\web\ForbiddenHttpException
      * ```
      *
-     * To make access restrictions checks in your Rest controller you have to override
-     * this method, otherwise there is no access check.
-     *
+     * To make access restrictions checks in your Rest controller you have to override this method, otherwise there is no access check.
+     * {@inheritDoc}
      * @see \yii\rest\ActiveController::checkAccess()
      */
     public function checkAccess($action, $model = null, $params = [])

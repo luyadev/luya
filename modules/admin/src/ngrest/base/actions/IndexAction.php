@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\rest\actions;
+namespace luya\admin\ngrest\base\actions;
 
 /**
  * IndexAction for REST implementation.
@@ -10,7 +10,6 @@ namespace luya\rest\actions;
  * provided from the luya\rest\ActiveController.
  *
  * @author Basil Suter <basil@nadar.io>
- * @todo Verify if this should be moved to administration module as its ngrest find specific task.
  */
 class IndexAction extends \yii\rest\IndexAction
 {

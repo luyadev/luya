@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\rest\actions;
+namespace luya\admin\ngrest\base\actions;
 
 use Yii;
 use yii\web\ServerErrorHttpException;
@@ -31,7 +31,7 @@ class DeleteAction extends \yii\rest\DeleteAction
 
         if ($model->delete() === false) {
             
-            // custom implementation of LUYA in order to throw more informations when delete errors haapens.
+            // custom implementation of LUYA in order to throw more informations when delete errors happen.
             if ($model->hasErrors()) {
                 Yii::$app->getResponse()->setStatusCode(500);
                 return $model->getErrors();

@@ -76,7 +76,7 @@ class FloatValidatorTest extends LuyaWebTestCase
         $this->assertEmpty($model->getErrors());
     }
     
-    public function testZeorFloatValue()
+    public function testZeroFloatValue()
     {
         $model = new StubModel();
         $model->value = 0.23;
