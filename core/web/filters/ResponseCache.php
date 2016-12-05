@@ -83,9 +83,9 @@ class ResponseCache extends ActionFilter
     public $duration = 0;
     
     /**
-     * @var array|Dependency the dependency that the cached content depends on.
+     * @var array|\yii\caching\Dependency The dependency that the cached content depends on.
+     * 
      * This can be either a [[Dependency]] object or a configuration array for creating the dependency object.
-     * For example,
      *
      * ```php
      * [
@@ -116,10 +116,7 @@ class ResponseCache extends ActionFilter
     public $actions = [];
     
     /**
-     * This method will be applied before the action runs in order to determine whether this action should be cached or not.
-     *
-     * {@inheritDoc}
-     * @see \yii\base\ActionFilter::beforeAction()
+     * @inheritdoc
      */
     public function beforeAction($action)
     {
@@ -144,7 +141,6 @@ class ResponseCache extends ActionFilter
      * Will be executed after the Response Object has send its content.
      *
      * @param \yii\web\ResponseEvent $event
-     * @return void
      */
     public function cacheResponseContent($event)
     {
