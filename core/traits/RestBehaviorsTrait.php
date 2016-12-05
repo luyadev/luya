@@ -2,6 +2,7 @@
 
 namespace luya\traits;
 
+use Yii;
 use yii\web\Response;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\QueryParamAuth;
@@ -10,23 +11,39 @@ use yii\filters\ContentNegotiator;
 use luya\rest\UserBehaviorInterface;
 
 /**
- * Rest Behavior Trait to implement basic Rest behaviors.
+ * Rest Behaviors Trait.
  *
- * The RestBehaviorTraits is going to override the default behaviors of rest controllers based on yii2. If the implementation class
- * itself has the user behavior interface the user restrication is enabled.
+ * This class overrides the default behaviors method of {{yii\rest\Controller}} controllers.
  *
+ * The following changes are differ to the base implementation:
+ * 
+ * + If {{luya\rest\UserBehaviorInterface}} is **not** implemented, the `authenticator` behavior ({{yii\filters\auth\CompositeAuth}}) is removed.
+ * + If {{luya\rest\UserBehaviorInterface}} **is** implemented, the `authenticator` behavior ({{yii\filters\auth\CompositeAuth}}) is enabled.
+ * + If {{luya\rest\UserBehaviorInterface}} **is** implemented, the `contentNegotiator` behavior ({{yii\filters\ContentNegotiator}}) is enabled.
+ * + The `rateLimiter` behavior filter is **removed** by default.
+ * 
+ * Read the {{luya\rest\UserBehaviorInterface}} about the configuration ability to protect the controller.
+ * 
  * @author Basil Suter <basil@nadar.io>
  */
 trait RestBehaviorsTrait
 {
+    /**
+     * Whether the rest controller is protected or not.
+     * 
+     * @return boolean|\yii\web\User
+     */
     private function getUserAuthClass()
     {
         if ($this instanceof UserBehaviorInterface) {
             $class = $this->userAuthClass();
+            
+            if (!$class) { // return false;
+                return false;
+            }
+            
             if (!is_object($class)) {
-                if (is_string($class)) {
-                    $class = new $class();
-                }
+                return Yii::createObject($class);
             }
     
             return $class;
@@ -36,9 +53,15 @@ trait RestBehaviorsTrait
     }
 
     /**
-     * Remove not used behaviors from parent behaviors.
-     *
-     * @return array The list of behvaiors.
+     * Override the default {{yii\rest\Controller::behaviors}} method.
+     * The following changes are differ to the base implementation:
+     * 
+     * + If {{luya\rest\UserBehaviorInterface}} is **not** implemented, the `authenticator` behavior ({{yii\filters\auth\CompositeAuth}}) is removed.
+     * + If {{luya\rest\UserBehaviorInterface}} **is** implemented, the `authenticator` behavior ({{yii\filters\auth\CompositeAuth}}) is enabled.
+     * + If {{luya\rest\UserBehaviorInterface}} **is** implemented, the `contentNegotiator` behavior ({{yii\filters\ContentNegotiator}}) is enabled.
+     * + The `rateLimiter` behavior filter is **removed** by default.
+     * 
+     * @return array Returns an array with regiered behavior filters based on the implementation type.
      */
     public function behaviors()
     {

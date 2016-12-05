@@ -5,18 +5,36 @@ namespace luya\rest;
 /**
  * REST User Behavior Interface.
  *
- * This interfaces defines the implementation class of the user components which is going to be used if the
- * rest class has the `luya\traits\RestBehaviorsTrait` implemented.
+ * The iplementation of the UserBeavhiorInterface should come along with the {{luya\traits\RestBehaviorsTrait}}.
+ * 
+ * An example integration:
+ * 
+ * ```php
+ * class MyRestController extends \luya\rest\Controller implements \luya\rest\UserBehaviorInterface
+ * {
+ *     use \luya\traits\RestBehaviorTrait; // Use is already done by the \luya\rest\Controller class.
+ *     
+ *     public function userAuthClass()
+ *     {
+ *         return \app\models\User::class;
+ *     }
+ *     
+ *     // Is action is now secured by the `app\models\User` model.
+ *     public function actionIndex()
+ *     {
+ *         return ['foo' => 'bar'];
+ *     }
+ * }
+ * ```
  *
  * @author Basil Suter <basil@nadar.io>
  */
 interface UserBehaviorInterface
 {
     /**
-     * Returns the class object for the authentication of the rest api. If the return value is false the
-     * authentication is disabled for the whole rest controller.
+     * Returns the class object for the authentication of the rest api. If the return value is false the authentication is disabled for the whole rest controller.
      *
-     * return a user object:
+     * return a user object (based on {{yii\web\User}}):
      *
      * ```php
      * return Yii::$app->adminuser;
@@ -25,16 +43,16 @@ interface UserBehaviorInterface
      * return a class string will create a new object from this class string:
      *
      * ```php
-     * return \admin\components\User::className();
+     * return \luya\admin\components\AdminUser::class;
      * ```
      *
-     * return false will disabled the authentication proccess for this rest controller
+     * return false will disabled the authentication proccess for this rest controller:
      *
      * ```php
      * return false;
      * ```
      *
-     * @return bool|string|object user object, class name, false to disabled the authentication.
+     * @return boolean|string|\yii\web\User If `false` is returned the protection is disabled, if a string is provided this will be threated as className to create the User object.
      */
     public function userAuthClass();
 }
