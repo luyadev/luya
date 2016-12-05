@@ -40,12 +40,25 @@ class RestBehaviorsTraitTestStubWithUserBehaviorObject extends Controller implem
     }
 }
 
+class RestBehaviorsTraitTestStubWithoutUser extends Controller
+{
+}
+
 class RestBehaviorsTraitTest extends LuyaWebTestCase
 {
     public function testFalseUserAuthClass()
     {
         $controller = new RestBehaviorsTraitTestStubWithUserBehaviorFalse('controller', Yii::$app);
         
+        $this->assertArrayHasKey('verbFilter', $controller->behaviors());
+        $this->assertArrayHasKey('contentNegotiator', $controller->behaviors());
+        $this->assertArrayNotHasKey('authenticator', $controller->behaviors());
+    }
+    
+    public function testWithoutUserAuthClass()
+    {
+        $controller = new RestBehaviorsTraitTestStubWithoutUser('controller', Yii::$app);
+    
         $this->assertArrayHasKey('verbFilter', $controller->behaviors());
         $this->assertArrayHasKey('contentNegotiator', $controller->behaviors());
         $this->assertArrayNotHasKey('authenticator', $controller->behaviors());
