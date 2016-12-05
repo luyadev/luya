@@ -10,6 +10,9 @@ class LinkTagTest extends LuyaWebTestCase
     public function testLinkParser()
     {
         $link = new LinkTag();
+
+        $this->assertNotNull($link->readme());
+        $this->assertNotNull($link->example());
         
         $this->assertSame('<a class="link-external" href="http://none" target="_blank">http://none</a>', $link->parse('none', null));
         $this->assertSame('<a class="link-internal" href="http://localhost/luya/envs/dev/public_html/luya.io">http://localhost/luya/envs/dev/public_html/luya.io</a>', $link->parse('//luya.io', null));
