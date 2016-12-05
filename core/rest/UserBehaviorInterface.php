@@ -16,7 +16,7 @@ namespace luya\rest;
  *     
  *     public function userAuthClass()
  *     {
- *         return \app\models\User::class;
+ *         return Yii::$app->user;
  *     }
  *     
  *     // Is action is now secured by the `app\models\User` model.
@@ -50,6 +50,15 @@ interface UserBehaviorInterface
      *
      * ```php
      * return false;
+     * ```
+     * 
+     * It can also be an array with configurations:
+     * 
+     * ```php
+     * return [
+     *     'class' => 'app\models\User',
+     *     'property1' => 'value',
+     * ];
      * ```
      *
      * @return boolean|string|\yii\web\User If `false` is returned the protection is disabled, if a string is provided this will be threated as className to create the User object.
