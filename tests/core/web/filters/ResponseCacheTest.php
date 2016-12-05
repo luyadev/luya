@@ -25,6 +25,7 @@ class StubBehaviorController extends Controller
             'rspcache' => [
                 'class' => ResponseCache::className(),
                 'actions' => ['foobar'],
+                'variations' => ['bar' => 'foo']
             ],
         ];
     }
@@ -83,7 +84,9 @@ class ResponseCacheTest extends LuyaWebTestCase
         Yii::$app->set('cache', ['class' => UnitCache::className()]);
         $controller = new StubBehaviorController('fooctrl', Yii::$app);
         $controller->runAction('foobar');
-        Yii::$app->response->send();
-        $this->assertSame('FooBarContent', Yii::$app->cache->data['1c0df0a894101ab12bd0535c3dc11a11']);
+        
+        Yii::$app->response->trigger('afterSend');
+        
+        $this->assertSame('FooBarContent', Yii::$app->cache->data['032b8391b2fab93f9dca5e5cd08cbe9b']);
     }
 }
