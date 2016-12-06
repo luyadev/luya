@@ -1,6 +1,6 @@
 <?php
 
-namespace styleguide;
+namespace luya\styleguide;
 
 use luya\base\CoreModuleInterface;
 
