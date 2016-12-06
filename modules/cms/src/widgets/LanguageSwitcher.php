@@ -36,6 +36,8 @@ use luya\web\Composition;
  */
 class LanguageSwitcher extends \luya\base\Widget
 {
+    public $useAppViewPath = true;
+    
     public function run()
     {
         $currentLang = Yii::$app->composition['langShortCode'];

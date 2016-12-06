@@ -8,11 +8,13 @@ use yii\helpers\Html;
 use luya\web\View;
 
 /**
- * Generate images with LazyLoad Tags
+ * Image Lazy Loader.
  *
  * ```php
  * <?= LazyLoad::widget(['src' => 'http://www.zephir.ch/img/zephir-logo.png']); ?>
  * ```
+ *
+ * In order to read more visit the [[concept-lazyload.md]] Guide section.
  *
  * @author Basil Suter <basil@nadar.io>
  * @author Marc Stampfli <marc.stampfli@zephir.ch>
