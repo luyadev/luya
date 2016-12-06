@@ -108,8 +108,11 @@ return [
     'modules' => [
         // ...
         'styleguide' => [
-            'class' => 'styleguide/Module',
+            'class' => 'luya\styleguide\Module',
             'password' => 'myguide',
+            'assetFiles' => [
+                'app\assets\ResourcesAsset',
+            ],
         ]
     ]
 ]
