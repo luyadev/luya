@@ -33,7 +33,7 @@ class DefaultController extends \luya\web\Controller
             $containers[] = [
                 'name' => $name,
                 'args' => $params,
-                'html' => Yii::$app->element->run($name, $params),
+                'html' => Yii::$app->element->getElement($name, $params),
             ];
         }
         
