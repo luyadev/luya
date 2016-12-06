@@ -5,15 +5,22 @@ namespace luya\tag;
 use cebe\markdown\GithubMarkdown;
 
 /**
- * TagParserMarkdown disables the auto URL generate feature in order to fix issue with TagParser.
- *
+ * Tag Parser Markdown.
+ * 
+ * In order to fix conflicts with the TagParser the auto enabled url parser is disabled. This means the following will not genereate a link tag:
+ * 
+ * + http://luya.io
+ * + www.luya.io
+ * 
+ * Otherwise those values would be automatiaclly converted to html link tags (<a href="www.luya.io">www.luya.io</a>).
+ * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-rc1
  */
 class TagMarkdownParser extends GithubMarkdown
 {
     /**
-     * @var boolean Enabled the newline generation by default for the tag markdown parser class.
+     * @var boolean To convert all newlines to <br/>-tags. By default only newlines with two preceding spaces are converted to <br/>-tags.
      */
     public $enableNewlines = true;
     

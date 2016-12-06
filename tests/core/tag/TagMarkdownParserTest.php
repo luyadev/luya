@@ -27,10 +27,11 @@ class TagMarkdownParserTest extends LuyaWebTestCase
     {
         $parser = new TagMarkdownParser();
         $parser->enableNewlines = false;
-        $this->assertSame('luya.io', 'luya.io');
-        $this->assertSame('www.luya.io', 'www.luya.io');
-        $this->assertSame('http://www.luya.io', 'http://www.luya.io');
-        $this->assertSame('https://www.luya.io', 'https://www.luya.io');
+        $this->assertSame('luya.io', $parser->parseParagraph('luya.io'));
+        $this->assertSame('www.luya.io', $parser->parseParagraph('www.luya.io'));
+        $this->assertSame('http://www.luya.io', $parser->parseParagraph('http://www.luya.io'));
+        $this->assertSame('https://www.luya.io', $parser->parseParagraph('https://www.luya.io'));
+        $this->assertSame('<a href="https://luya.io">link</a>', $parser->parseParagraph('[link](https://luya.io)'));
     }
     
     private function rnl($content)
