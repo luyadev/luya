@@ -26,6 +26,11 @@ class TagMarkdownParser extends GithubMarkdown
     
     /**
      * Disable the url parsing of markdown.
+     * 
+     *  * + http://luya.io
+     * + www.luya.io
+     *
+     * Will not be parsed to an a tag.
      *
      * @param string $markdown
      */

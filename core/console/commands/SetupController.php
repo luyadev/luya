@@ -13,8 +13,8 @@ use luya\admin\models\Group;
  *
  * You can also use the parameters to run the setup command for example.
  *
- * ```
- * setup --email=foo@bar.com --password=test --firstname=John --lastname=Doe --interactive=0
+ * ```php
+ * ./vendor/bin/luya setup --email=foo@bar.com --password=test --firstname=John --lastname=Doe --interactive=0
  * ```
  *
  * This will perform the Setup task silent and does not prompt any questions.
@@ -80,7 +80,7 @@ class SetupController extends \luya\console\Command
         }
     
         if (Config::has('setup_command_timestamp')) {
-            return $this->outputError('The setup process already have been started on the '.date('d.m.Y H:i', Config::get('setup_command_timestamp')).'. If you want to reinstall your luya project. Drop all tables from your Database, run the migrate command, run the import command and then re-run the setup command');
+            return $this->outputError('The setup process already have been executed at '.date('d.m.Y H:i', Config::get('setup_command_timestamp')).'. If you like to reinstall your application. Drop all tables from your Database, run the migrate and import command and then re-run the setup command.');
         }
     
         if (empty($this->email)) {

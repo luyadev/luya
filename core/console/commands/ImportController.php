@@ -110,7 +110,7 @@ class ImportController extends Command implements ImportControllerInterface
      *
      * @return array
      */
-    private function getLog()
+    public function getLog()
     {
         return $this->_log;
     }

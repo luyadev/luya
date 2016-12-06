@@ -1,6 +1,6 @@
 <?php
 
-namespace luyatests\core\console\controllers;
+namespace luyatests\core\console\commands;
 
 use Yii;
 use luyatests\LuyaConsoleTestCase;
