@@ -12,6 +12,8 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Added
 
+- [#1006](https://github.com/luyadev/luya/issues/1006) Added spanish translations to all luya core modules and administration interface.
+
 ### Fixed
 
 - [#1097](https://github.com/luyadev/luya/issues/1097) Removed unused codes from the UrlManager parseRequest() method.
