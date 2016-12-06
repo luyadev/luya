@@ -4,7 +4,6 @@ namespace luya;
 
 use Yii;
 use yii\base\Object;
-use luya\Exception;
 use luya\tag\TagMarkdownParser;
 
 /**
@@ -122,10 +121,6 @@ class TagParser extends Object
 
     private function instantiatTag($tag)
     {
-        if (!$this->hasTag($tag)) {
-            throw new Exception("Unable to find requested TagParser tag '{$tag}'.");
-        }
-        
         if (!is_object($this->tags[$tag])) {
             $this->tags[$tag] = Yii::createObject($this->tags[$tag]);
             Yii::trace('tag parser object generated for:'. $tag, __CLASS__);
