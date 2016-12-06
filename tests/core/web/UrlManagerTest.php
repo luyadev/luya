@@ -5,6 +5,7 @@ namespace luyatests\core\web;
 use Yii;
 use luya\web\UrlManager;
 use luya\web\Request;
+use luyatests\data\classes\UnitMenu;
 
 /**
  * @author nadar
@@ -203,5 +204,54 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
         $urlManager = Yii::$app->urlManager;
         $urlManager->contextNavItemId = 1;
         $this->assertEquals('/luya/envs/dev/public_html/en/urlmodule/bar', $urlManager->createUrl(['/urlmodule/bar/index']));
+    }
+    
+    public function testCreateMenuItemUrl()
+    {
+        Yii::$app->set('menu', ['class' => UnitMenu::class]);
+        $urlManager = new UrlManager();
+        $menu = $urlManager->getMenu();
+        $this->assertNotFalse($menu);
+        
+        $r = $urlManager->createMenuItemUrl(['unitmodule/controller/action'], 3);
+       
+        $this->assertSame('this-is-a-cms-link/controller/action', $r);
+    }
+    
+    public function testCreateMenuItemUrlRedirectType2()
+    {
+        Yii::$app->set('menu', ['class' => UnitMenu::class]);
+        $urlManager = new UrlManager();
+        $menu = $urlManager->getMenu();
+        $this->assertNotFalse($menu);
+    
+        $r = $urlManager->createMenuItemUrl(['unitmodule/controller/action'], 2);
+         
+        $this->assertSame('this-is-a-module-type-page/controller/action', $r);
+    }
+    
+    public function testCreateMenuItemUrlWithException()
+    {
+        Yii::$app->set('menu', ['class' => UnitMenu::class]);
+        $urlManager = new UrlManager();
+        $menu = $urlManager->getMenu();
+        $this->assertNotFalse($menu);
+    
+        $this->expectException('yii\web\BadRequestHttpException');
+        $r = $urlManager->createMenuItemUrl(['unitmodule/controller/action'], 1);
+         
+        $this->assertSame('this-is-a-cms-link/controller/action', $r);
+    }
+    
+    public function testCreateMenuItemUrlButUnableToFindModuleInRoute()
+    {
+        Yii::$app->set('menu', ['class' => UnitMenu::class]);
+        $urlManager = new UrlManager();
+        $menu = $urlManager->getMenu();
+        $this->assertNotFalse($menu);
+    
+        $r = $urlManager->createMenuItemUrl(['moduledoesnotexists/controller/action'], 3);
+         
+        $this->assertContains('moduledoesnotexists/controller/action', $r);
     }
 }
