@@ -5,6 +5,34 @@ namespace luyatests\core;
 use luyatests\LuyaWebTestCase;
 use luya\TagParser;
 use luya\tag\tags\LinkTag;
+use luya\tag\BaseTag;
+
+class TestTag extends BaseTag
+{
+    public function name()
+    {
+        return 'testtag';
+    }
+    
+    public function example()
+    {
+        return 'testtag';
+    }
+    
+    public function readme()
+    {
+        return 'testtag';
+    }
+    
+    public function parse($value, $sub)
+    {
+        if (empty($sub)) {
+            return $value;
+        }
+        
+        return $value . '|'. $sub;
+    }
+}
 
 class TagParserTest extends LuyaWebTestCase
 {
@@ -33,5 +61,13 @@ class TagParserTest extends LuyaWebTestCase
         $this->arrayHasKey('foo', $tags);
         
         $this->assertInstanceOf('luya\tag\tags\LinkTag', $tags['foo']);
+    }
+    
+    public function testProcessText()
+    {
+        TagParser::inject('test', ['class' => TestTag::class]);
+        $this->assertSame('value', TagParser::convert('test[value]'));
+        $this->assertSame('test[]', TagParser::convert('test[]'));
+        $this->assertSame('value|sub', TagParser::convert('test[value](sub)'));
     }
 }
