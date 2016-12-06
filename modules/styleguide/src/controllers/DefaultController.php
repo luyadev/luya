@@ -36,6 +36,14 @@ class DefaultController extends \luya\web\Controller
                 'html' => Yii::$app->element->run($name, $params),
             ];
         }
+        
+        // call parent
+        parent::init();
+        
+        // get controller based assets
+        foreach ($this->module->assetFiles as $class) {
+            $this->registerAsset($class);
+        }
 
         return $this->render('index', [
             'containers' => $containers,
