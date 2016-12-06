@@ -61,27 +61,23 @@ class UrlManager extends \yii\web\UrlManager
         
         $parsedRequest = parent::parseRequest($request);
 
-        if ($this->getComposition()->hidden) {
+        // if enableStrictParsing is enabled and the route is not found, $parsedRequest will return `false`.
+        if ($this->getComposition()->hidden || $parsedRequest === false) {
             return $parsedRequest;
         }
-        // temp write variables
+        
         $composition = $this->getComposition()->full;
         $length = strlen($composition);
         $route = $parsedRequest[0];
-        // route matches composition exactly, so we have to remove the composition informations
-        if ($route === $composition) {
-            $parsedRequest[0] = false;
-        // now see if the composition (+1 as we add add trailing slash at the end) matches the cutted route request part, if so its composition prefix, remove it.
-        } elseif (substr($route, 0, $length+1) == $composition.'/') {
+        
+        
+        if (substr($route, 0, $length+1) == $composition.'/') {
             $parsedRequest[0] = substr($parsedRequest[0], $length);
         }
-        // fix broken request urls
-        if ($parsedRequest[0] === false || $parsedRequest[0] == '/') {
-            $parsedRequest[0] = '';
-        }
-        // ltrim all request to fix request routes
+        
+        // remove start trailing slashes from route.
         $parsedRequest[0] = ltrim($parsedRequest[0], '/');
-        // return new parsted request route
+        
         return $parsedRequest;
     }
     

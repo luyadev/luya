@@ -48,6 +48,56 @@ class UrlManagerTest extends \luyatests\LuyaWebTestCase
         $this->assertEquals('1', $r[1]['id']);
         $this->assertEquals('foo-bar', $r[1]['title']);
     }
+    
+    public function testRouteEqualCompositionParseRequest()
+    {
+        $urlManager = new UrlManager();
+        
+        $request = new Request();
+        $request->pathInfo = 'en/en';
+        
+        $route = $urlManager->parseRequest($request);
+        
+        $this->assertSame('en', $route[0]);
+    }
+    
+    public function testLtrimInsideParseRequest()
+    {
+        $string = '//test';
+        $this->assertSame('test', ltrim($string, '/'));
+        $string = '/test';
+        $this->assertSame('test', ltrim($string, '/'));
+        $string = '//';
+        $this->assertSame('', ltrim($string, '/'));
+        $string = '/';
+        $this->assertSame('', ltrim($string, '/'));
+    }
+    
+    public function testRequestWithTrailingSlashOnly()
+    {
+        $urlManager = new UrlManager();
+        
+        $request = new Request();
+        $request->pathInfo = '/en////foobar//';
+        
+        $route = $urlManager->parseRequest($request);
+        
+        $this->assertSame('foobar//', $route[0]);
+    }
+    
+    public function testEnableStrictParsingRequest()
+    {
+        $urlManager = new UrlManager();
+        $urlManager->enableStrictParsing = true;
+        
+        $request = new Request();
+        $request->pathInfo = 'en/en';
+    
+        $route = $urlManager->parseRequest($request);
+        
+        $this->assertFalse($route);
+    
+    }
 
     public function testCompositionRequest()
     {

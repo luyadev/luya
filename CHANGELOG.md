@@ -6,6 +6,13 @@ The changelog contains informations about bug fixes, new features or bc breaking
 1.0.0 (in progress)
 -------------------
 
+### Changed
+
+### Added
+
+### Fixed
+
+- [#1097](https://github.com/luyadev/luya/issues/1097) Removed unused codes from the UrlManager parseRequest() method.
 
 1.0.0-RC2 (29. Nov 2016)
 -----------------------
