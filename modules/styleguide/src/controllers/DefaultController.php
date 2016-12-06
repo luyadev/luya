@@ -37,9 +37,6 @@ class DefaultController extends \luya\web\Controller
             ];
         }
         
-        // call parent
-        parent::init();
-        
         // get controller based assets
         foreach ($this->module->assetFiles as $class) {
             $this->registerAsset($class);
