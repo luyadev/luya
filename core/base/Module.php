@@ -186,9 +186,32 @@ abstract class Module extends \yii\base\Module
 
     /**
      * Define a last of importer class with an array or run code directily with the import() method.
+     * 
+     * Can be either an array with classes:
+     * 
+     * ```php
+     * public function import(ImportControllerInterface $importer)
+     * {
+     *     return [
+     *         'path\to\class\Import',
+     *         MyImporterClass::className(),
+     *     ];
+     * }
+     * ```
+     * 
+     * Or a direct functional call which executes importer things:
+     * 
+     * ```php
+     * public function import(ImportControllerInterface $importer)
+     * {
+     *     foreach ($importer->getDirectoryFiles('blocks') as $block) {
+     *         // do something with block file.
+     *     }
+     * }
+     * ```
      *
      * @param \luya\console\interfaces\ImportControllerInterface $importer The importer controller class which will be invoke to the import method.
-     * @return boolean|array
+     * @return boolean|array If an array is returned it must contain object class to created extending from {{luya\console\Command}}.
      */
     public function import(ImportControllerInterface $importer)
     {

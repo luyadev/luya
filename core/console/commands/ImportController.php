@@ -7,18 +7,18 @@ use Exception;
 use luya\admin\models\Config;
 use luya\console\Command;
 use luya\console\interfaces\ImportControllerInterface;
+use luya\base\Module;
 
 /**
  * Import controller runs the module defined importer classes.
  *
- * The importer classes are defined inthe modules `import()` methods which inherits this class. To run
- * the importer class you have execute:
+ * The importer classes are defined inthe modules `import()` methods which inherits this class.
  *
- * ```
+ * ```sh
  * ./vendor/bin/luya import
  * ```
  *
- * Each of the importer classes must extend the luya\console\Importer class.
+ * Each of the importer classes must extend the {{\luya\console\Importer}} class.
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -31,18 +31,16 @@ class ImportController extends Command implements ImportControllerInterface
     private $_scanFolders = ['blocks', 'filters', 'properties', 'blockgroups'];
 
     /**
-     * Initializer
+     * @inheritdoc
      */
     public function init()
     {
         parent::init();
         
         // foreach scanFolders of all modules
-        foreach (Yii::$app->modules as $id => $module) {
-            if ($module instanceof \luya\base\Module) {
-                foreach ($this->_scanFolders as $folderName) {
-                    $this->addToDirectory($module->getBasePath().DIRECTORY_SEPARATOR.$folderName, $folderName, '\\'.$module->getNamespace().'\\'.$folderName, $module->id);
-                }
+        foreach (Yii::$app->getApplicationModules() as $id => $module) {
+            foreach ($this->_scanFolders as $folderName) {
+                $this->addToDirectory($module->getBasePath().DIRECTORY_SEPARATOR.$folderName, $folderName, '\\'.$module->getNamespace().'\\'.$folderName, $module->id);
             }
         }
         // foreach scanFolder inside the app namespace
@@ -78,13 +76,12 @@ class ImportController extends Command implements ImportControllerInterface
             ];
         }
     }
-
+    
     /**
      * @inheritdoc
      */
     public function getDirectoryFiles($folderName)
     {
-        // create array
         $files = [];
         if (array_key_exists($folderName, $this->_dirs)) {
             foreach ($this->_dirs[$folderName] as $folder) {
@@ -93,7 +90,7 @@ class ImportController extends Command implements ImportControllerInterface
                 }
             }
         }
-        // return files
+        
         return $files;
     }
 
@@ -106,7 +103,7 @@ class ImportController extends Command implements ImportControllerInterface
     }
     
     /**
-     * Return the log array data.
+     * Get all log data.
      *
      * @return array
      */
@@ -116,6 +113,37 @@ class ImportController extends Command implements ImportControllerInterface
     }
 
     /**
+     * Get all importer objects with the assigned queue position.
+     * 
+     * @return array If no importer objects are provided the array will is returned empty.
+     */
+    public function buildImporterQueue()
+    {
+        $queue = [];
+        foreach (Yii::$app->getApplicationModules() as $id => $module) {
+            $response = $module->import($this);
+            
+            // if there response is an array, the it will be added to the queue
+            if (is_array($response)) {
+                foreach ($response as $class) {
+                    $object = new $class($this);
+                    $position = $object->queueListPosition;
+                    while (true) {
+                        if (!array_key_exists($position, $queue)) {
+                            break;
+                        }
+                        ++$position;
+                    }
+                    $queue[$position] = $object;
+                }
+            }
+        }
+        
+        ksort($queue);
+        return $queue;
+    }
+    
+    /**
      * Run the import process.
      *
      * @return number
@@ -123,43 +151,17 @@ class ImportController extends Command implements ImportControllerInterface
     public function actionIndex()
     {
         try {
-            $queue = [];
-            $this->verbosePrint('Run import index', __METHOD__);
-            foreach (Yii::$app->getModules() as $id => $module) {
-                if ($module instanceof \luya\base\Module) {
-                    $this->verbosePrint('collect module importers from module: ' . $id, __METHOD__);
-                    $response = $module->import($this);
-                    if (is_array($response)) { // importer returns an array with class names
-                        foreach ($response as $class) {
-                            $this->verbosePrint("add object '$class' to queue list", __METHOD__);
-                            $obj = new $class($this);
-                            $prio = $obj->queueListPosition;
-                            while (true) {
-                                if (!array_key_exists($prio, $queue)) {
-                                    break;
-                                }
-                                ++$prio;
-                            }
-                            $queue[$prio] = $obj;
-                        }
-                    }
-                }
-            }
-    
-            ksort($queue);
+            $queue = $this->buildImporterQueue();
     
             foreach ($queue as $pos => $object) {
-                $this->verbosePrint("run object '" .$object->className() . " on pos $pos.", __METHOD__);
-                $objectResponse = $object->run();
-                $this->verbosePrint("run object response: " . var_export($objectResponse, true), __METHOD__);
+                $this->verbosePrint("Run importer object '{$object->className()}' on position '{$pos}'.", __METHOD__);
+                $object->run();
             }
     
             if (Yii::$app->hasModule('admin')) {
                 Config::set('last_import_timestamp', time());
                 Yii::$app->db->createCommand()->update('admin_user', ['force_reload' => 1])->execute();
             }
-    
-            $this->verbosePrint('importer finished, get log output: ' . var_export($this->getLog(), true), __METHOD__);
             
             foreach ($this->getLog() as $section => $value) {
                 $this->outputInfo(PHP_EOL . $section . ":");
