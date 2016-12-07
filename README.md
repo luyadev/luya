@@ -2,7 +2,7 @@
   <img src="https://luya.io/img/luya_logo_flat_icon.png" alt="LUYA Logo"/>
 </p>
 
-> 29, November 2016: We have released the first release candidate of LUYA: [1.0.0-RC2](https://luya.io/news/second-release-candidate-1-0-0-rc2).
+> 29, November 2016: We have released the last release candidate of LUYA: [1.0.0-RC2](https://luya.io/news/second-release-candidate-1-0-0-rc2).
 
 The [Yii 2 PHP Framework](https://github.com/yiisoft/yii2) wrapper which provides out of the box functions like an **administration interface**, a beautiful looking **content management system**, **payment** modules, **agency workflows** and other tools to develop your website pretty fast!
 
