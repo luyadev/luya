@@ -63,7 +63,7 @@ public function ngRestConfig($config)
 
 To render view files you can run the method `$this->render()` inside your active window class. The render method will lookup for php view file based on the base path of your `$module` propertie. Lets assume we run `$this->render('index')` and have defined `admin` as your `$module` propertie and your Active Window name is `TestActiveWindow` this will try to find the view file under the path `@admin/views/aws/test/index.php`. 
 
-### How to make Button
+### How to make a Button
 
 In order to create a button with a callback we use the helper method `$this->callbackButton`. Example view File
 
