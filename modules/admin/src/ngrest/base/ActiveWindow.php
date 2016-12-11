@@ -255,10 +255,10 @@ abstract class ActiveWindow extends Object implements ViewContextInterface, Acti
     /**
      * @inheritdoc
      */
-    public function setItemId($itemId)
+    public function setItemId($id)
     {
-        if (is_int($itemId)) {
-            return $this->_itemId = $itemId;
+        if (is_int($id)) {
+            return $this->_itemId = $id;
         }
         
         throw new Exception("Unable to set active window item id, item id value must be integer.");

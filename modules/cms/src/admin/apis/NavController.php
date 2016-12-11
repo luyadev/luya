@@ -217,9 +217,9 @@ class NavController extends \luya\admin\base\RestController
     }
 
     /**
-     * creates a new nav entry for the type page (nav_id will be created.
+     * Create a new nav entry for the type page (nav_id will be created.
      *
-     * @param array $_POST:
+     * This methods is execute via post.
      */
     public function actionCreatePage()
     {

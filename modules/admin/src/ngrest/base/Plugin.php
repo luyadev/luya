@@ -130,9 +130,11 @@ abstract class Plugin extends Component
     // I18N HELPERS
 
     /**
-     * Encode from PHP to Json
+     * Encode from PHP to Json.
+     * 
+     * See {{luya\admin\helpers\I18n::encode}}
      *
-     * @param string|array $field
+     * @param string|array $value
      * @return string Returns a string
      */
     public function i18nFieldEncode($value)
@@ -141,9 +143,11 @@ abstract class Plugin extends Component
     }
     
     /**
-     * Decode from Json to PHP
+     * Decode from Json to PHP.
+     * 
+     * See {{luya\admin\helpers\I18n::decode}}
      *
-     * @param string|array $field The value to decode (or if alreay is an array already)
+     * @param string|array $value The value to decode (or if alreay is an array already)
      * @param string $onEmptyValue Defines the value if the language could not be found and a value will be returns, this value will be used.
      * @return array returns an array with decoded field value
      */
@@ -153,7 +157,10 @@ abstract class Plugin extends Component
     }
     
     /**
-     *
+     * Encode the current value from a language array.
+     * 
+     * See {{luya\admin\helpers\I18n::findCurrent}}
+     * 
      * @param array $fieldValues
      * @return string|unknown
      */

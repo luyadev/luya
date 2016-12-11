@@ -163,7 +163,7 @@ class Module extends \luya\admin\base\Module implements CoreModuleInterface
     /**
      * @inheritdoc
      */
-    public function import(ImportControllerInterface $import)
+    public function import(ImportControllerInterface $importer)
     {
         return [
             BlockGroupImporter::className(),

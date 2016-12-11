@@ -19,7 +19,7 @@ interface ActiveWindowInterface
     /**
      * Set the value of the item Id in where the active window context is initialized.
      *
-     * @param integer $itemId The item id context
+     * @param integer $id The item id context
      */
     public function setItemId($id);
 

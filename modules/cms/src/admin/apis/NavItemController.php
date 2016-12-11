@@ -226,8 +226,8 @@ class NavItemController extends \luya\admin\base\RestController
     /**
      * check old entries - delete if obsolete (changed type) and add new entry to the appropriate cms_nav_item_(page/module/redirect).
      *
-     * @param integer The id of the nav_item item which should be changed
-     * @param integer The NEW type of content for the above nav_item.id
+     * @param integer $navItemId The id of the nav_item item which should be changed
+     * @param integer $navItemType The NEW type of content for the above nav_item.id
      * @return array|bool
      */
     public function actionUpdatePageItem($navItemId, $navItemType)

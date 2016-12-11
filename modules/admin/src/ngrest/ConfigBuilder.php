@@ -186,10 +186,9 @@ class ConfigBuilder implements ConfigBuilderInterface
      *
      * ```
      *
-     * @param string|array $type the object type. This can be specified in one of the following forms:
-     *
-     * - a string: representing the class name of the object to be created
-     * - a configuration array: the array must contain a `class` element which is treated as the object class,
+     * @param string|array $objectType the object type. This can be specified in one of the following forms:
+     * + a string: representing the class name of the object to be created
+     * + a configuration array: the array must contain a `class` element which is treated as the object class,
      *   and the rest of the name-value pairs will be used to initialize the corresponding object properties
      *
      * @since 1.0.0-beta4

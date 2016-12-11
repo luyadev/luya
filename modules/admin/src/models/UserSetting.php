@@ -153,7 +153,10 @@ class UserSetting extends Object implements \ArrayAccess
     // ArrayAccess
 
     /**
-     * @inheritdoc
+     * Setter method for ArrayAccess.
+     * 
+     * @param string $offset The offset key
+     * @param midex $value The offset value
      */
     public function offsetSet($offset, $value)
     {
@@ -161,7 +164,10 @@ class UserSetting extends Object implements \ArrayAccess
     }
 
     /**
-     * @inheritdoc
+     * Exists method for ArrayAccess.
+     * 
+     * @param string $offset The offset key
+     * @return boolean Whether the offset key exists in the array or not.
      */
     public function offsetExists($offset)
     {
@@ -169,7 +175,9 @@ class UserSetting extends Object implements \ArrayAccess
     }
 
     /**
-     * @inheritdoc
+     * Unset method for ArrayAccess.
+     * 
+     * @param string $offset The offset key
      */
     public function offsetUnset($offset)
     {
@@ -177,7 +185,11 @@ class UserSetting extends Object implements \ArrayAccess
     }
 
     /**
-     * @inheritdoc
+     * Getter method for ArrayAccess.
+     * 
+     * @param string $offset The offset key
+     * @param midex $value The offset value
+     * @return mixed The value when accessing the array.
      */
     public function offsetGet($offset)
     {

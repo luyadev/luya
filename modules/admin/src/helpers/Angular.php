@@ -61,8 +61,7 @@ class Angular
      * <my-input ng-model="name"></my-input>
      * ```
      *
-     * @param string $name The name
-     * @param string $ngModel The name of the ng model which should be used for data binding.
+     * @param string $name The name for the generated direcitve tag which will be converted from camelcase to id notation.
      * @param array $options An array with optional properties for the tag creation, where key is the property name and value its content.
      */
     public static function directive($name, array $options = [])

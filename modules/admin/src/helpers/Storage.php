@@ -44,13 +44,13 @@ class Storage
     }
     
     /**
-     * Create a file hash from the name (not the content).
+     * Create a unique file hash from the file name.
      *
      * Warning
      * Because PHP's integer type is signed many crc32 checksums will result in negative integers on 32bit platforms. On 64bit installations all crc32() results will be positive integers though.
      * So you need to use the "%u" formatter of sprintf() or printf() to get the string representation of the unsigned crc32() checksum in decimal format.
      *
-     * @var string
+     * @var string $fileName The file name which should be hashed
      */
     public static function createFileHash($fileName)
     {
@@ -178,7 +178,7 @@ class Storage
      * The replaced file will have the name of the $oldFileSource but the file will be the content of the $newFileSource.
      *
      * @param string $oldFileSource The path to the old file which should be replace by the new file. e.g `path/to/old.jpp`
-     * @param string $newfile The path to the new file which is going to have the same name as the old file e.g. `path/of/new.jpg`.
+     * @param string $newFileSource The path to the new file which is going to have the same name as the old file e.g. `path/of/new.jpg`.
      * @return boolean Whether moving was successfull or not.
      */
     public static function replaceFile($oldFileSource, $newFileSource)

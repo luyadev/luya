@@ -258,7 +258,7 @@ class Nav extends ActiveRecord
      * Additional this checks for matching language contexts when comparing aliases.
      *
      * @param $currentNavId
-     * @param $targetNav
+     * @param $parentNavId
      * @return boolean|mixed returns `true` if no duplication has been found, otherwhise returns an array with the duplicated existing item.
      */
     public static function checkDuplicateAlias($currentNavId, $parentNavId)

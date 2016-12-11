@@ -167,7 +167,7 @@ class Query extends \yii\base\Object
     }
 
     /**
-     * @param string|array $with can be a string  containg "hidden" or an array with multiple patters
+     * @param string|array $types can be a string  containg "hidden" or an array with multiple patters
      * for example `['hidden']`. Further with statements upcoming.
      * @return \luya\cms\menu\Query
      */

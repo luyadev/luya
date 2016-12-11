@@ -17,8 +17,8 @@ class I18n
     /**
      * Encode from PHP to Json
      *
-     * @param string|array $field
-     * @return string Returns a string
+     * @param string|array $value The value to encode from php to json.
+     * @return string Returns the json encoded string.
      */
     public static function encode($value)
     {
@@ -28,10 +28,9 @@ class I18n
     /**
      * Decode from Json to PHP
      *
-     * @param string|array $field The value to decode (or if alreay is an array already)
+     * @param string|array $value The value to decode from json to php.
      * @param string $onEmptyValue Defines the value if the language could not be found and a value will be returns, this value will be used.
-     *
-     * @return array returns an array with decoded field value
+     * @return array Return the decoded php value.
      */
     public static function decode($value, $onEmptyValue = '')
     {
