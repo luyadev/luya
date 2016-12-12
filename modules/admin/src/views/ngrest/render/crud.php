@@ -247,9 +247,13 @@ use luya\admin\Module;
                     <div class="modal__content">
                         <?php foreach ($this->context->forEachGroups(RenderCrud::TYPE_UPDATE) as $key => $group): ?>
                             <?php if (!$group['is_default']): ?>
-                                <div ng-init="groupToggler[<?= $key; ?>] = <?= (int) !$group['collapsed']; ?>">
-                                <h5 ng-click="groupToggler[<?= $key; ?>] = !groupToggler[<?= $key; ?>]"><?= $group['name']; ?> +/- Toggler</h5>
-                                <div style="border:1px solid #F0F0F0; margin-bottom:20px;" ng-show="groupToggler[<?= $key; ?>]">
+                                <div class="form-group" ng-init="groupToggler[<?= $key; ?>] = <?= (int) !$group['collapsed']; ?>">
+                                <p class="form-group__title" ng-click="groupToggler[<?= $key; ?>] = !groupToggler[<?= $key; ?>]">
+                                    <?= $group['name']; ?>
+                                    <span class="material-icons right" ng-show="groupToggler[<?= $key; ?>]">keyboard_arrow_up</span>
+                                    <span class="material-icons right" ng-show="!groupToggler[<?= $key; ?>]">keyboard_arrow_down</span>
+                                </p>
+                                <div class="form-group__fields" ng-show="groupToggler[<?= $key; ?>]">
                             <?php endif; ?>
                             <?php foreach ($group['fields'] as $field => $fieldItem): ?>
                                 <div class="row">
