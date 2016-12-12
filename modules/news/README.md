@@ -35,20 +35,23 @@ After adding the persmissions to your group you will be able to edit and add new
 
 ## Example Views
 
-As the module will try to render a view for the news overview, here is what this could look like this in a very rude way:
+As the module will try to render a view for the news overview, here is what this could look like this in a very basic way:
 
-`index.php`
+#### views/news/default/index.php
 
 ```php
-<?php foreach($model::find()->all() as $item): ?>
-<pre>
-<?php print_r($item->toArray()); ?>
-</pre>
-<p><a href="<?php echo $item->getDetailUrl(); ?>">News Detail Url</a></p>
+<?php foreach($provider->getModels()->all() as $item): ?>
+    <?php /* @var $item \luya\news\models\Article */ ?>
+    <pre>
+        <?php print_r($item->toArray()); ?>
+    </pre>
+    <p>
+        <a href="<?= $item->getDetailUrl(); ?>">News Detail Link</a>
+    </p>
 <?php endforeach; ?>
 ```
 
-`detail.php`
+#### views/news/default/detail.php
 
 ```php
 <pre>
@@ -56,4 +59,4 @@ As the module will try to render a view for the news overview, here is what this
 </pre>
 ```
 
-This will dump all informtionas.
+The above examples will just dump all the data from the model active records.
