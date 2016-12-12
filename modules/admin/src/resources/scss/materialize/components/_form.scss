@@ -244,6 +244,7 @@ textarea {
 [type="radio"]:checked {
   position: absolute;
   left: -9999px;
+  top: 0;
   visibility: hidden;
 }
 
@@ -362,6 +363,7 @@ form p:last-child {
 [type="checkbox"]:checked {
   position: absolute;
   left: -9999px;
+  top: 0;
   visibility: hidden;
 }
 
