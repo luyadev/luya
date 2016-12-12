@@ -5,13 +5,39 @@ namespace luya\news\models;
 use luya\news\admin\Module;
 use Yii;
 
+/**
+ * This is the model class for table "news_article".
+ *
+ * @property integer $id
+ * @property string $title
+ * @property string $text
+ * @property integer $cat_id
+ * @property string $image_id
+ * @property string $image_list
+ * @property string $file_list
+ * @property integer $create_user_id
+ * @property integer $update_user_id
+ * @property integer $timestamp_create
+ * @property integer $timestamp_update
+ * @property integer $timestamp_display_from
+ * @property integer $timestamp_display_until
+ * @property integer $is_deleted
+ * @property integer $is_display_limit
+ * @property string $teaser_text
+ */
 class Article extends \luya\admin\ngrest\base\NgRestModel
 {
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'news_article';
     }
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -19,18 +45,27 @@ class Article extends \luya\admin\ngrest\base\NgRestModel
         $this->on(self::EVENT_BEFORE_UPDATE, [$this, 'eventBeforeUpdate']);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function scenarios()
     {
         return [
-           'restcreate' => ['title', 'text', 'cat_id', 'image_id', 'image_list', 'tags', 'timestamp_create', 'timestamp_display_from', 'timestamp_display_until', 'is_display_limit', 'file_list'],
-           'restupdate' => ['title', 'text', 'cat_id', 'image_id', 'image_list', 'tags', 'timestamp_create', 'timestamp_display_from', 'timestamp_display_until', 'is_display_limit', 'file_list'],
+           'restcreate' => ['title', 'text', 'cat_id', 'image_id', 'image_list', 'tags', 'timestamp_create', 'timestamp_display_from', 'timestamp_display_until', 'is_display_limit', 'file_list', 'teaser_text'],
+           'restupdate' => ['title', 'text', 'cat_id', 'image_id', 'image_list', 'tags', 'timestamp_create', 'timestamp_display_from', 'timestamp_display_until', 'is_display_limit', 'file_list', 'teaser_text'],
        ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
-            [['cat_id', 'title', 'text'], 'required'],
+            [['title', 'text'], 'required'],
+            [['title', 'text', 'image_list', 'file_list', 'teaser_text'], 'string'],
+            [['cat_id', 'create_user_id', 'update_user_id', 'timestamp_create', 'timestamp_update', 'timestamp_display_from', 'timestamp_display_until', 'is_deleted', 'is_display_limit'], 'integer'],
+            [['image_id'], 'string', 'max' => 200],
         ];
     }
 
@@ -39,6 +74,7 @@ class Article extends \luya\admin\ngrest\base\NgRestModel
         return [
             'title' => Module::t('article_title'),
             'text' => Module::t('article_text'),
+            'teaser_text' => Module::t('teaser_text'),
             'image_id' => Module::t('article_image_id'),
             'timestamp_create' => Module::t('article_timestamp_create'),
             'timestamp_display_from' => Module::t('article_timestamp_display_from'),
@@ -53,6 +89,7 @@ class Article extends \luya\admin\ngrest\base\NgRestModel
     {
         return [
             'title' => 'text',
+            'teaser_text' => 'textarea',
             'text' => 'textarea',
             'image_id' => 'image',
             'timestamp_create' => 'datetime',
@@ -122,9 +159,9 @@ class Article extends \luya\admin\ngrest\base\NgRestModel
 
     // ngrest
 
-    public $tags = []; // cause of extra fields - will pe parsed trough the ngrest plugins.
+    public $tags = [];
 
-    public $i18n = ['title', 'text', 'image_list'];
+    public $i18n = ['title', 'text', 'teaser_text', 'image_list'];
 
     public function extraFields()
     {
@@ -148,7 +185,7 @@ class Article extends \luya\admin\ngrest\base\NgRestModel
     {
         $this->ngRestConfigDefine($config, 'list', ['title', 'cat_id', 'timestamp_create', 'image_id']);
 
-        $this->ngRestConfigDefine($config, ['create', 'update'], ['title', 'cat_id', 'text', 'timestamp_create', 'timestamp_display_from', 'is_display_limit', 'timestamp_display_until', 'image_id', 'image_list', 'file_list']);
+        $this->ngRestConfigDefine($config, ['create', 'update'], ['cat_id', 'title', 'teaser_text', 'text', 'timestamp_create', 'timestamp_display_from', 'is_display_limit', 'timestamp_display_until', 'image_id', 'image_list', 'file_list']);
         
         $config->delete = true;
 

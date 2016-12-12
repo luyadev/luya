@@ -14,7 +14,8 @@ use yii\data\ActiveDataProvider;
 class DefaultController extends \luya\web\Controller
 {
     /**
-     * Index Action
+     * Get Article overview.
+     * 
      * @return string
      */
     public function actionIndex()
@@ -70,7 +71,7 @@ class DefaultController extends \luya\web\Controller
     }
     
     /**
-     * Detail Action of Article
+     * Detail Action of an article by Id.
      *
      * @param integer $id
      * @param string $title

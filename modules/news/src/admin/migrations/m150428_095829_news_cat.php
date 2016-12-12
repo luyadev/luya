@@ -4,7 +4,7 @@ use yii\db\Migration;
 
 class m150428_095829_news_cat extends Migration
 {
-    public function up()
+    public function safeUp()
     {
         $this->createTable('news_cat', [
             'id' => 'pk',
@@ -12,21 +12,8 @@ class m150428_095829_news_cat extends Migration
         ]);
     }
 
-    public function down()
-    {
-        echo "m150428_095829_news_cat cannot be reverted.\n";
-
-        return false;
-    }
-
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
-    public function safeUp()
-    {
-    }
-
     public function safeDown()
     {
+        $this->dropTable('news_cat');
     }
-    */
 }
