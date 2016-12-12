@@ -49,6 +49,8 @@ As the module will try to render a view for the news overview, here is what this
         <a href="<?= $item->getDetailUrl(); ?>">News Detail Link</a>
     </p>
 <?php endforeach; ?>
+
+<?= \yii\widgets\LinkPager::widget(['pagination' => $provider->pagination]); ?>
 ```
 
 #### views/news/default/detail.php
