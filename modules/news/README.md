@@ -40,22 +40,34 @@ As the module will try to render a view for the news overview, here is what this
 #### views/news/default/index.php
 
 ```php
-<?php foreach($provider->getModels()->all() as $item): ?>
+<?php
+use yii\widgets\LinkPager;
+
+/* @var $this \luya\web\View */
+/* @var $provider \yii\data\ActiveDataProvider */
+?>
+<h2>Latest News Articles</h2>
+<?php foreach($provider->models as $item): ?>
     <?php /* @var $item \luya\news\models\Article */ ?>
     <pre>
         <?php print_r($item->toArray()); ?>
     </pre>
     <p>
-        <a href="<?= $item->getDetailUrl(); ?>">News Detail Link</a>
+        <a href="<?= $item->detailUrl; ?>">News Detail Link</a>
     </p>
 <?php endforeach; ?>
 
-<?= \yii\widgets\LinkPager::widget(['pagination' => $provider->pagination]); ?>
+<?= LinkPager::widget(['pagination' => $provider->pagination]); ?>
 ```
 
 #### views/news/default/detail.php
 
 ```php
+<?php
+/* @var $this \luya\web\View */
+/* @var $model \luya\news\models\Article */
+?>
+<h1><?= $model->title; ?></h1>
 <pre>
 <?php print_r($model->toArray()); ?>
 </pre>

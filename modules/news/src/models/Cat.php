@@ -42,12 +42,21 @@ class Cat extends \luya\admin\ngrest\base\NgRestModel
 
     public function rules()
     {
-        return [['title', 'required', 'message' => Module::t('cat_title_create_error')]];
+        return [
+            [['title'], 'required'],
+        ];
     }
 
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \yii\base\Model::attributeLabels()
+     */
     public function attributeLabels()
     {
-        return ['title' => Module::t('cat_title')];
+        return [
+            'title' => Module::t('cat_title'),
+        ];
     }
 
     public function ngRestAttributeTypes()

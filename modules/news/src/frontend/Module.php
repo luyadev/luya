@@ -3,7 +3,7 @@
 namespace luya\news\frontend;
 
 /**
- * CMS Module
+ * News Frontend Module.
  *
  * @author Basil Suter <basil@nadar.io>
  */

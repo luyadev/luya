@@ -8,6 +8,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Changed
 
+- [#1102](https://github.com/luyadev/luya/issues/1102) Removed News Module Tag table and replace by admin modules Tag models.
 - [#1098](https://github.com/luyadev/luya/issues/1098) Changed luya\base\Widget view path behavior to default implementation with option to enable app view paths lookup.
 
 ### Added

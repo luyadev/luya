@@ -7,8 +7,8 @@ use luya\news\models\Cat;
 use yii\data\ActiveDataProvider;
 
 /**
- * News Module Defaul Controller contains actions to display and render views with predefined data.
- *
+ * News Module Default Controller contains actions to display and render views with predefined data.
+ * 
  * @author Basil Suter <basil@nadar.io>
  */
 class DefaultController extends \luya\web\Controller
@@ -16,12 +16,20 @@ class DefaultController extends \luya\web\Controller
     /**
      * Get Article overview.
      * 
+     * The index action will return an active data provider object inside the $provider variable:
+     * 
+     * ```php
+     * foreach ($provider->models as $item) {
+     *     var_dump($item);
+     * }
+     * ```
+     * 
      * @return string
      */
     public function actionIndex()
     {
         $provider = new ActiveDataProvider([
-            'query' => Article::find(),
+            'query' => Article::find()->andWhere(['is_deleted' => 0]),
         ]);
         
         return $this->render('index', [
@@ -32,6 +40,14 @@ class DefaultController extends \luya\web\Controller
 
     /**
      * Get the category Model for a specific ID.
+     *
+     * The most common way is to use the active data provider object inside the $provider variable:
+     * 
+     * ```php
+     * foreach ($provider->getModels() as $cat) {
+     *     var_dump($cat);
+     * }
+     * ```
      *
      * Inside the Cat Object you can then retrieve its articles:
      *
@@ -79,7 +95,7 @@ class DefaultController extends \luya\web\Controller
      */
     public function actionDetail($id, $title)
     {
-        $model = Article::findOne($id);
+        $model = Article::findOne(['id' => $id, 'is_deleted' => 0]);
         
         if (!$model) {
             return $this->goHome();

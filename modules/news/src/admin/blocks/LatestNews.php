@@ -50,9 +50,6 @@ class LatestNews extends \luya\cms\base\Block
         return '<ul>{% for item in extras.items %}<li>{{ item.title }}</li>{% endfor %}</ul>';
     }
 
-    /**
-     * to force a project custom twig render use: return $this->render('latest_news.twig');.
-     */
     public function twigFrontend()
     {
         return '<ul>{% for item in extras.items %}<li><a href="{{ item.getDetailUrl(cfgs.nav_item_id) }}">{{ item.title }}</a></li>{% endfor %}</ul>';
