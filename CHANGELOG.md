@@ -15,6 +15,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 - [#1096](https://github.com/luyadev/luya/issues/1096) New teaser_text field for news module article model.
 - [#1006](https://github.com/luyadev/luya/issues/1006) Added spanish translations to all luya core modules and administration interface.
+- [#1103](https://github.com/luyadev/luya/issues/1103) InfoActiveWindow make usage of the yii\widgets\DetailView in order to configure attributes.
 
 ### Fixed
 

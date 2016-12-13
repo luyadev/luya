@@ -166,7 +166,23 @@ class Logger extends NgRestModel
      */
     public function ngRestConfig($config)
     {
-        $config->aw->load(['class' => InfoActiveWindow::className()]);
+        $config->aw->load([
+            'class' => InfoActiveWindow::className(),
+            'attributes' => [
+                'id',
+                'time:datetime',
+                'message',
+                'typeBadge:html:Type',
+                'trace_file',
+                'trace_line',
+                'trace_function',
+                'trace_function_args',
+                'get:ntext',
+                'post:ntext',
+                'session:ntext',
+                'server:ntext',
+            ],
+        ]);
         $this->ngRestConfigDefine($config, ['list'], ['message', 'typeBadge', 'time', 'group_identifier', 'group_identifier_index']);
         $config->delete = true;
     }
