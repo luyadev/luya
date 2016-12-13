@@ -442,6 +442,7 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
                     if (array_key_exists('class', $definition)) {
                         $method = $definition['class'];
                         unset($definition['class']);
+                        $args = $definition;
                     } else {
                         $method = $config->prepandAdminPlugin($definition[0]);
                         $args = array_slice($definition, 1);
