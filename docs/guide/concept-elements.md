@@ -41,16 +41,12 @@ You can directly call the name of your element:
 echo Yii::$app->element->button('https://luya.io', 'Go to website');
 ```
 
-Where `button` is the name of the element closure defined in your elements.php file. In order to get and render an element in twig use the following function:
-
-```twig
-{{ element('button', 'https://luya.io', 'Go to website') }}
-```
+Where `button` is the name of the element closure defined in your elements.php file.
 
 ## Render view file
 
 
-When you have a more complex html element, the possibility to concate the html parts seems to look a little ugly, for this reason you can also render a view file with the function `render()`. This mehtod will render a defined TWIG file which is located in *@app/views/elements/__NAME__.twig*.
+When you have a more complex html element, the possibility to concate the html parts seems to look a little ugly, for this reason you can also render a view file with the function `render()`. This method will render a defined TWIG file which is located in *@app/views/elements/__NAME__.php*.
 
 ```php
 'myElementButton' => function($href, $name) {
@@ -64,27 +60,15 @@ The above example will render the file `button` with the paremeters `['href' => 
 <a href="<?= $href; ?>" class="btn btn-primary"><?= $name; ?></a>
 ```
 
-> You can also use twig by configuring the element component propertie `renderEngine = 'twig'`.
+### Recursive Rendering
 
-### Rekursives Rendering
-
-Sometimes you want to render another element component inside another template, you can use the above mentioned `element` twig function. Example recursiv rendering:
+Sometimes you want to render another element component inside another template, therefore just use the element component from the global Yii::$app scope. Example recursiv rendering:
 
 ```php
 <div class="teaser-box">
     <h1><?= $title; ?></h1>
     <p><?= $description; ?></p>
     <?= Yii::$app->element->button($buttonHref, $buttonName); ?>
-</div>
-```
-
-or in twig template syntax
-
-```twig
-<div class="teaser-box">
-    <h1>{{ title }}</h1>
-    <p>{{ description }}</p>
-    {{ element('button', buttonHref, buttonName) }}
 </div>
 ```
 
@@ -118,4 +102,41 @@ return [
 ]
 ```
 
-When you have successfull configure the styleguide module you can access it trough the url: `mywebsite.com/styleguide`
+When you have successfull configured the styleguide module you can access it trough the url: `mywebsite.com/styleguide`
+
+## Mocking Arguments
+
+The styleguide will automatically use default values for each element. Assuming you have an element argument `$foo` this argument will recieve the value `$foo` inside the styleguide.
+
+```php
+'test' => function($foo) {
+    return '<p>'.$foo.'</p>';
+}
+```
+
+The styleguide would print the element as:
+
+```php
+<p>$foo</p>
+```
+
+In order to mock the arguments with more meaning full values you can pass them when creating the element inside the `elements.php` file:
+
+```php
+<?php
+return [
+    'test' => [function($foo) {
+        return '<p>'.$foo.'</p>';
+    }, [
+        'foo' => 'Mocking value for $foo',
+    ]],
+];
+```
+
+As now the element `test` has a mocked $foo paremter and will return the following rendered content in the styleguide:
+
+```php
+<p>Mocking value for $foo</p>
+```
+
+> The mocking element options will not affect your elements in any way when using them in your application and is only used in the Styleguide
