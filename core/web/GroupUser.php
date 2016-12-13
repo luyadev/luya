@@ -8,9 +8,9 @@ use yii\web\User;
 
 /**
  * Group User Component.
- * 
+ *
  * User class to login based on {{yii\web\User}}, but allows you to check whether a user is in this group or not.
- * 
+ *
  * The {{luya\web\GroupUserIdentityInterface}} Interface must be implemented by the User Model used in {{yii\web\User::identityClass}}.
  *
  * Assume we have made 3 groups:

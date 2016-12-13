@@ -16,21 +16,21 @@ use luya\rest\UserBehaviorInterface;
  * This class overrides the default behaviors method of {{yii\rest\Controller}} controllers.
  *
  * The following changes are differ to the base implementation:
- * 
+ *
  * + If {{luya\rest\UserBehaviorInterface}} is **not** implemented, the `authenticator` behavior ({{yii\filters\auth\CompositeAuth}}) is removed.
  * + If {{luya\rest\UserBehaviorInterface}} **is** implemented, the `authenticator` behavior ({{yii\filters\auth\CompositeAuth}}) is enabled.
  * + If {{luya\rest\UserBehaviorInterface}} **is** implemented, the `contentNegotiator` behavior ({{yii\filters\ContentNegotiator}}) is enabled.
  * + The `rateLimiter` behavior filter is **removed** by default.
- * 
+ *
  * Read the {{luya\rest\UserBehaviorInterface}} about the configuration ability to protect the controller.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 trait RestBehaviorsTrait
 {
     /**
      * Whether the rest controller is protected or not.
-     * 
+     *
      * @return boolean|\yii\web\User
      */
     private function getUserAuthClass()
@@ -55,12 +55,12 @@ trait RestBehaviorsTrait
     /**
      * Override the default {{yii\rest\Controller::behaviors}} method.
      * The following changes are differ to the base implementation:
-     * 
+     *
      * + If {{luya\rest\UserBehaviorInterface}} is **not** implemented, the `authenticator` behavior ({{yii\filters\auth\CompositeAuth}}) is removed.
      * + If {{luya\rest\UserBehaviorInterface}} **is** implemented, the `authenticator` behavior ({{yii\filters\auth\CompositeAuth}}) is enabled.
      * + If {{luya\rest\UserBehaviorInterface}} **is** implemented, the `contentNegotiator` behavior ({{yii\filters\ContentNegotiator}}) is enabled.
      * + The `rateLimiter` behavior filter is **removed** by default.
-     * 
+     *
      * @return array Returns an array with regiered behavior filters based on the implementation type.
      */
     public function behaviors()

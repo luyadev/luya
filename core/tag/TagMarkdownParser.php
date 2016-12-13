@@ -6,14 +6,14 @@ use cebe\markdown\GithubMarkdown;
 
 /**
  * Tag Parser Markdown.
- * 
+ *
  * In order to fix conflicts with the TagParser the auto enabled url parser is disabled. This means the following will not genereate a link tag:
- * 
+ *
  * + http://luya.io
  * + www.luya.io
- * 
+ *
  * Otherwise those values would be automatiaclly converted to html link tags (<a href="www.luya.io">www.luya.io</a>).
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0-rc1
  */
@@ -26,8 +26,8 @@ class TagMarkdownParser extends GithubMarkdown
     
     /**
      * Disable the url parsing of markdown.
-     * 
-     *  * + http://luya.io
+     *
+     * + http://luya.io
      * + www.luya.io
      *
      * Will not be parsed to an a tag.

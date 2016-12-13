@@ -7,11 +7,11 @@ use yii\rest\ActiveController as BaseActiveController;
 
 /**
  * Active Rest Controller.
- * 
+ *
  * In order to run a ActiveController a `$modelClass` property must be set.
- * 
+ *
  * The {{luya\rest\ActiveController}} extends the Yii 2 {{\yii\rest\ActiveController}} by disabled the pagination and provided customized rest actions.
- * 
+ *
  * See the {{luya\traits\RestBehaviorsTrait}} documentation in order to read more about the default enabled behaviors and protection settings.
  *
  * @author Basil Suter <basil@nadar.io>
@@ -41,8 +41,8 @@ abstract class ActiveController extends BaseActiveController
     public $updateScenario = self::SCENARIO_RESTUPDATE;
 
     /**
-     * @var boolean|array|\yii\data\Pagination Whether the pagination is enabled for this ActiveController or not by default pagination for rest controllers is disabled. 
-     * 
+     * @var boolean|array|\yii\data\Pagination Whether the pagination is enabled for this ActiveController or not by default pagination for rest controllers is disabled.
+     *
      * An example of activatedpagination by setting it to 100 Records per Page:
      *
      * ```php

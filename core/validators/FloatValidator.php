@@ -7,9 +7,9 @@ use yii\validators\Validator;
 
 /**
  * Float Validator.
- * 
+ *
  * A validation rule to verify whether a value is a float or numeric value.
- * 
+ *
  * ```php
  * public function rules()
  * {
@@ -18,9 +18,9 @@ use yii\validators\Validator;
  *     ]
  * }
  * ```
- * 
+ *
  * The following values are valid:
- * 
+ *
  * + `'123'`
  * + `'123.00'`
  * + `123`

@@ -114,7 +114,7 @@ class ImportController extends Command implements ImportControllerInterface
 
     /**
      * Get all importer objects with the assigned queue position.
-     * 
+     *
      * @return array If no importer objects are provided the array will is returned empty.
      */
     public function buildImporterQueue()

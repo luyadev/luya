@@ -31,3 +31,4 @@ scripts/.subsplit
 scripts/.pid.*
 scripts/.sass_log
 .sass-cache
+/.php_cs.cache

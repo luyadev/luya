@@ -6,25 +6,25 @@ use yii\web\IdentityInterface;
 
 /**
  * Group User IdentityInterface.
- * 
+ *
  * When using the {{luya\web\GroupUser}} component to authorize users, each identity class must implement this Interface.
- * 
+ *
  * > The GroupUserIdentityInterface extends the {{yii\web\IdentityInterface}} Interface.
- * 
+ *
  * ```php
  * class User extends ActiveRecord implements GroupUserIdentityInterface
  * {
  *     // luya\web\GroupUserIdentityInterface
- *     
+ *
  *     public function authGroups()
  *     {
  *         return [
  *             'group-a',
  *         ];
  *     }
- * 
+ *
  *     // yii\web\IdentityInterface
- *     
+ *
  *     public static function findIdentity($id)
  *     {
  *         return static::findOne($id);

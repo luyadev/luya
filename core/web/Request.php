@@ -10,7 +10,7 @@ use Yii;
  * Extending the {{yii\web\Request}} class by predefine values and add ability to verify whether the request is in admin context or not.
  *
  * @property boolean $isAdmin Whether the request is admin or not.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  */
 class Request extends \yii\web\Request
@@ -40,7 +40,7 @@ class Request extends \yii\web\Request
     
     /**
      * Setter method to force isAdmin request.
-     * 
+     *
      * @param boolean $state Whether its an admin request or not
      */
     public function setIsAdmin($state)
@@ -69,7 +69,7 @@ class Request extends \yii\web\Request
                 if (preg_match('/admin/i', $first, $results)) {
                     $this->_isAdmin = true;
                 } else {
-                    $this->_isAdmin = false;   
+                    $this->_isAdmin = false;
                 }
             }
         }

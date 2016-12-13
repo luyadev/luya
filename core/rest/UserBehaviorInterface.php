@@ -6,19 +6,19 @@ namespace luya\rest;
  * REST User Behavior Interface.
  *
  * The iplementation of the UserBeavhiorInterface should come along with the {{luya\traits\RestBehaviorsTrait}}.
- * 
+ *
  * An example integration:
- * 
+ *
  * ```php
  * class MyRestController extends \luya\rest\Controller implements \luya\rest\UserBehaviorInterface
  * {
  *     use \luya\traits\RestBehaviorTrait; // Use is already done by the \luya\rest\Controller class.
- *     
+ *
  *     public function userAuthClass()
  *     {
  *         return Yii::$app->user;
  *     }
- *     
+ *
  *     // Is action is now secured by the `app\models\User` model.
  *     public function actionIndex()
  *     {
@@ -51,9 +51,9 @@ interface UserBehaviorInterface
      * ```php
      * return false;
      * ```
-     * 
+     *
      * It can also be an array with configurations:
-     * 
+     *
      * ```php
      * return [
      *     'class' => 'app\models\User',

@@ -186,9 +186,9 @@ abstract class Module extends \yii\base\Module
 
     /**
      * Define a last of importer class with an array or run code directily with the import() method.
-     * 
+     *
      * Can be either an array with classes:
-     * 
+     *
      * ```php
      * public function import(ImportControllerInterface $importer)
      * {
@@ -198,9 +198,9 @@ abstract class Module extends \yii\base\Module
      *     ];
      * }
      * ```
-     * 
+     *
      * Or a direct functional call which executes importer things:
-     * 
+     *
      * ```php
      * public function import(ImportControllerInterface $importer)
      * {

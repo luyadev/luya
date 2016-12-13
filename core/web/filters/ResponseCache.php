@@ -84,7 +84,7 @@ class ResponseCache extends ActionFilter
     
     /**
      * @var array|\yii\caching\Dependency The dependency that the cached content depends on.
-     * 
+     *
      * This can be either a [[Dependency]] object or a configuration array for creating the dependency object.
      *
      * ```php

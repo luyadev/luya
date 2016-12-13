@@ -11,7 +11,7 @@ use luya\traits\RestBehaviorsTrait;
  * Basic Rest Controller.
  *
  * The below test controller can be access for everyone and is public.
- * 
+ *
  * ```php
  * class TestPublicController extends \luya\rest\Controller
  * {
@@ -24,7 +24,7 @@ use luya\traits\RestBehaviorsTrait;
  * ```
  *
  * In order to provide secure rest controllers you have to implement the {{luya\rest\UserBehaviorInterface}}.
- * 
+ *
  * ```php
  * class TestSecureController extends \luya\rest\Controller implements \luya\rest\UserBehaviorInterface
  * {
@@ -32,7 +32,7 @@ use luya\traits\RestBehaviorsTrait;
  *     {
  *         return \app\models\User::class;
  *     }
- *     
+ *
  *     // this method is protected by the `app\models\User` model.
  *     public function actionIndex()
  *     {

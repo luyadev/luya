@@ -5,11 +5,9 @@ namespace luya\styleguide\controllers;
 use Yii;
 
 /**
- * @see http://stackoverflow.com/questions/19198804/deducing-php-closure-parameters
- *
- * $closure    = &$func;
- * $reflection = new ReflectionFunction($closure);
- * $arguments  = $reflection->getParameters();
+ * Display the Styleguide Elements.
+ * 
+ * @author Basil Suter <basil@nadar.io>
  */
 class DefaultController extends \luya\web\Controller
 {
@@ -25,19 +23,30 @@ class DefaultController extends \luya\web\Controller
         foreach (Yii::$app->element->getElements() as $name => $closure) {
             $reflection = new \ReflectionFunction($closure);
             $args = $reflection->getParameters();
+            
             $params = [];
+            $writtenParams = [];
             foreach ($args as $k => $v) {
-                $params[] = '$'.$v->name;
+                $writtenParams[] = '$'.$v->name;
+                $mock = Yii::$app->element->getMockedArgValue($name, $v->name);
+                if ($mock !== false) {
+                    $params[] = $mock;
+                } else {
+                    if($v->isArray()) {
+                        $params[] = ['$'.$v->name];
+                    } else {
+                        $params[] = '$'.$v->name;
+                    }
+                }
             }
-
+            
             $containers[] = [
                 'name' => $name,
-                'args' => $params,
+                'args' => $writtenParams,
                 'html' => Yii::$app->element->getElement($name, $params),
             ];
         }
         
-        // get controller based assets
         foreach ($this->module->assetFiles as $class) {
             $this->registerAsset($class);
         }
@@ -60,7 +69,9 @@ class DefaultController extends \luya\web\Controller
             $e = true;
         }
 
-        return $this->render('login', ['e' => $e]);
+        return $this->render('login', [
+            'e' => $e
+        ]);
     }
 
     private function hasAccess()
