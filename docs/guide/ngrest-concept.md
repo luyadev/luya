@@ -13,9 +13,12 @@ The word *NgRest* is explained as follows: A**Ng**ular**Rest** (Representational
 
 #### Steps to understand and create an NgRest Crud
 
-Preparations
-* [Create database table via migrations](luya-console.md)
-* [Create an Admin Module](app-admin-module.md) where you can put the NgRest Crud files.
+Preparations:
+
++ [Create database table via migrations](luya-console.md)
++ [Create an Admin Module](app-admin-module.md) where you can put the NgRest Crud files.
+
+Setup Crud:
 
 1. Create the base model class (combination of Active Record and NgRest Crud defintion) which is used for the api and the controllers
 2. Create the Controller and the Api
