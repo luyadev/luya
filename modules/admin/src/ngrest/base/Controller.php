@@ -99,6 +99,7 @@ class Controller extends \luya\admin\base\Controller
             $rel[] = ['label' => $item['label'], 'apiEndpoint' => $item['apiEndpoint'], 'arrayIndex' => $key, 'modelClass' => base64_encode($this->model->className())];
         }
 
+        $config->inline = (int) $inline;
         $config->relations = $rel;
         
         $ngrest = new NgRest($config);
