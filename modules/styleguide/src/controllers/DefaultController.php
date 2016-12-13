@@ -3,6 +3,7 @@
 namespace luya\styleguide\controllers;
 
 use Yii;
+use yii\helpers\Html;
 
 /**
  * Display the Styleguide Elements.
@@ -42,8 +43,8 @@ class DefaultController extends \luya\web\Controller
             
             $containers[] = [
                 'name' => $name,
+                'tag' => Html::tag('div', Yii::$app->element->getElement($name, $params), $this->module->divOptions),
                 'args' => $writtenParams,
-                'html' => Yii::$app->element->getElement($name, $params),
             ];
         }
         
@@ -53,6 +54,7 @@ class DefaultController extends \luya\web\Controller
 
         return $this->render('index', [
             'containers' => $containers,
+            'global' => Html::tag('div', $this->renderPartial('_global'), $this->module->divOptions),
         ]);
     }
 
