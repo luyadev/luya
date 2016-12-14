@@ -11,10 +11,16 @@ use luya\TagParser;
  * Example uf using the nl2br option
  *
  * ```php
- * ['mytext' => ['textarea', 'nl2br' => true]],
+ * ['mytext' => ['textarea', 'nl2br' => true]]
  * ```
  *
  * This will automatically generate nl2br on after find event (before display).
+ * 
+ * In order to enable the markdown parsing use the code below:
+ * 
+ * ```php
+ * ['mytext' => ['textarea', 'markdown' => true]]
+ * ```
  *
  * @author Basil Suter <basil@nadar.io>
  */
