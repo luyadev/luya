@@ -6,7 +6,7 @@ class m160602_125708_filemanagercaption extends Migration
 {
     public function safeUp()
     {
-        $this->addColumn('admin_storage_file', 'caption', 'text');
+        $this->addColumn('admin_storage_file', 'caption', $this->text());
     }
 
     public function safeDown()
