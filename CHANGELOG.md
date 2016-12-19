@@ -14,6 +14,7 @@ The changelog contains informations about bug fixes, new features or bc breaking
 
 ### Added
 
+- [#1010](https://github.com/luyadev/luya/issues/1010) Ability to soft delete admin languages if its not the system default language.
 - [#1110](https://github.com/luyadev/luya/issues/1110) Filemanager is sorting the directories alphabetically instead of chronologically.
 - [#1100](https://github.com/luyadev/luya/issues/1100) NgRestModel scenarios implements the restupdate and restcreate scenarios by default now.
 - [#1108](https://github.com/luyadev/luya/issues/1108) Added schema builder ability for migration files in order to support other shemes like postgreSQL.

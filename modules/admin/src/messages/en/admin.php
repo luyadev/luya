@@ -201,6 +201,7 @@ return [
     'model_lang_name' => 'Name',
     'model_lang_short_code' => 'Short Code',
     'model_lang_is_default' => 'Is default',
+    'model_lang_delete_error_is_default' => 'Unable to delete the Default language of the System.',
     'model_logger_time' => 'Time',
     'model_logger_message' => 'Message',
     'model_logger_type' => 'Type',

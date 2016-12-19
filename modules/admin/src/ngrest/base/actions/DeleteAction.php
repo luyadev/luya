@@ -33,8 +33,15 @@ class DeleteAction extends \yii\rest\DeleteAction
             
             // custom implementation of LUYA in order to throw more informations when delete errors happen.
             if ($model->hasErrors()) {
-                Yii::$app->getResponse()->setStatusCode(500);
-                return $model->getErrors();
+                Yii::$app->getResponse()->setStatusCode(422);
+                $errors = [];
+                foreach ($model->getErrors() as $field => $errorMessages) {
+                    foreach ($errorMessages as $message) {
+                        $errors[] = ['field' => $field, 'message' => $message];
+                    }
+                }
+                
+                return $errors;
             }
 
             throw new ServerErrorHttpException('Failed to delete the object for unknown reason.');

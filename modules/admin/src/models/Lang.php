@@ -5,6 +5,7 @@ namespace luya\admin\models;
 use Yii;
 use luya\admin\ngrest\base\NgRestModel;
 use luya\admin\Module;
+use luya\admin\traits\SoftDeleteTrait;
 
 /**
  * Language Model for Frontend/Admin.
@@ -16,10 +17,13 @@ use luya\admin\Module;
  * @property string $name
  * @property string $short_code
  * @property integer $is_default
+ * @property integer $is_deleted
  * @author Basil Suter <basil@nadar.io>
  */
 final class Lang extends NgRestModel
 {
+    use SoftDeleteTrait;
+    
     /**
      * @inheritdoc
      */
@@ -43,6 +47,13 @@ final class Lang extends NgRestModel
                 self::updateAll(['is_default' => 0]);
             }
         });
+        
+        $this->on(self::EVENT_BEFORE_DELETE, function($event) {
+            if ($this->is_default == 1) {
+                $this->addError('is_default', Module::t('model_lang_delete_error_is_default'));
+                $event->isValid = false;
+            }
+        });
     }
     
     /**
@@ -59,6 +70,7 @@ final class Lang extends NgRestModel
     public function rules()
     {
         return [
+            [['name', 'short_code'], 'required'],
             [['is_default'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['short_code'], 'string', 'max' => 15],
@@ -105,6 +117,8 @@ final class Lang extends NgRestModel
         $this->ngRestConfigDefine($config, ['list', 'create', 'update'], ['name', 'short_code', 'is_default']);
      
         $config->options = ['saveCallback' => 'function(ServiceLanguagesData) { ServiceLanguagesData.load(true).then(function() { $scope.AdminLangService.load(); }); }'];
+        
+        $config->delete = true;
         
         return $config;
     }
