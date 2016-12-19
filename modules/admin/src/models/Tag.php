@@ -29,17 +29,6 @@ class Tag extends NgRestModel
             [['name'], 'unique'],
         ];
     }
-
-    /**
-     * @inheritdoc
-     */
-    public function scenarios()
-    {
-        return [
-            'restcreate' => ['id', 'name'],
-            'restupdate' => ['id', 'name'],
-        ];
-    }
     
     /**
      * @inheritdoc

@@ -11,9 +11,14 @@ use luya\admin\behaviors\LogBehavior;
 use luya\admin\base\GenericSearchInterface;
 use luya\admin\ngrest\Config;
 use luya\admin\ngrest\ConfigBuilder;
+use luya\admin\base\RestActiveController;
 
 /**
- * Base Model for all NgRest Models extends yii\db\ActiveRecord.
+ * NgRest Model.
+ * 
+ * Read the Guide to understand [[ngrest-concept.md]].
+ * 
+ * This class extends the {{yii\db\ActiveRecord}}.
  *
  * @author Basil Suter <basil@nadar.io>
  */
@@ -62,6 +67,17 @@ abstract class NgRestModel extends ActiveRecord implements GenericSearchInterfac
                 'api' => static::ngRestApiEndpoint(),
             ],
         ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios[RestActiveController::SCENARIO_RESTCREATE] = $scenarios[self::SCENARIO_DEFAULT];
+        $scenarios[RestActiveController::SCENARIO_RESTUPDATE] = $scenarios[self::SCENARIO_DEFAULT];
+        return $scenarios;
     }
 
     /**
