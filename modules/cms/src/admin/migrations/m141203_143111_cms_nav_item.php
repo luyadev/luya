@@ -5,28 +5,28 @@ use yii\db\Migration;
 
 class m141203_143111_cms_nav_item extends Migration
 {
-    public function up()
+    public function safeUp()
     {
         $this->createTable('cms_nav_item', [
-            'id' => 'pk',
-            'nav_id' => 'INT(11) NOT NULL',
-            'lang_id' => 'INT(11) NOT NULL',
-            'nav_item_type' => 'INT(11) NOT NULL',
-            'nav_item_type_id' => 'INT(11) NOT NULL',
-            //"is_inactive" => Schema::TYPE_SMALLINT,
-            'create_user_id' => 'INT(11) NOT NULL',
-            'update_user_id' => 'INT(11) NOT NULL',
-            'timestamp_create' => 'INT(11) NULL',
-            'timestamp_update' => 'INT(11) NULL',
-            'title' => 'VARCHAR(180) NOT NULL',
-            'rewrite' => 'VARCHAR(80) NOT NULL', // renamed to alias
+            'id' => $this->primaryKey(),
+            'nav_id' => $this->integer(11)->notNull(),
+            'lang_id' => $this->integer(11)->notNull(),
+            'nav_item_type' => $this->integer(11)->notNull(),
+            'nav_item_type_id' => $this->integer(11)->notNull(),
+            'create_user_id' => $this->integer(11)->notNull(),
+            'update_user_id' => $this->integer(11)->notNull(),
+            'timestamp_create' => $this->integer(11)->defaultValue(0),
+            'timestamp_update' => $this->integer(11)->defaultValue(0),
+            'title' => $this->string(180)->notNull(),
+            'alias' => $this->string(80)->notNull(),
+            'description' => $this->text(),
+            'keywords' => $this->text(),
+            'title_tag' => $this->string(255),
         ]);
     }
 
-    public function down()
+    public function safeDown()
     {
-        echo "m141203_143111_cms_nav_item cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('cms_nav_item');
     }
 }

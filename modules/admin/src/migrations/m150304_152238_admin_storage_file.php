@@ -22,6 +22,11 @@ class m150304_152238_admin_storage_file extends Migration
             'file_size' => $this->integer(11)->defaultValue(0), // in bytes
             'upload_user_id' => $this->integer(11)->defaultValue(0),
             'is_deleted' => $this->boolean()->defaultValue(0),
+            'passthrough_file' => $this->boolean()->defaultValue(0),
+            'passthrough_file_password' => $this->string(40),
+            'passthrough_file_stats' => $this->integer(11)->defaultValue(0),
+            'caption' => $this->text(),
+            'internal_note' => $this->text(),
         ]);
     }
 

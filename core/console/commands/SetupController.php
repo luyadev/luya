@@ -163,6 +163,7 @@ class SetupController extends \luya\console\Command
     
         if (Yii::$app->hasModule('cms')) {
             // insert default page
+            $this->insert("cms_nav_container", ['id' => 1, 'name' => 'Default Container', 'alias' => 'default', 'is_deleted' => 0]);
             $this->insert("cms_nav", ['nav_container_id' => 1, 'parent_nav_id' => 0, 'sort_index' => 0, 'is_deleted' => 0, 'is_hidden' => 0, 'is_offline' => 0, 'is_home' => 1, 'is_draft' => 0]);
             $this->insert("cms_nav_item", ['nav_id' => 1, 'lang_id' => 1, 'nav_item_type' => 1, 'nav_item_type_id' => 1, 'create_user_id' => 1, 'update_user_id' => 1, 'timestamp_create' => time(), 'title' => 'Homepage', 'alias' => 'homepage']);
             $this->insert('cms_nav_item_page', ['layout_id' => 1, 'create_user_id' => 1, 'timestamp_create' => time(), 'version_alias' => 'Initial', 'nav_item_id' => 1]);
