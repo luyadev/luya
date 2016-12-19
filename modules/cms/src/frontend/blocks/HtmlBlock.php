@@ -11,7 +11,7 @@ use luya\cms\base\TwigBlock;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class HtmlBlock extends TwigBlock
+final class HtmlBlock extends TwigBlock
 {
     public $module = 'cms';
 

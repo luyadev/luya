@@ -13,7 +13,7 @@ use luya\cms\frontend\Module;
  * @author Basil Suter <basil@nadar.io>
  *
  */
-class FormBlock extends TwigBlock
+final class FormBlock extends TwigBlock
 {
     public $module = 'cms';
 

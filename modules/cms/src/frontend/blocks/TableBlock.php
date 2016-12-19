@@ -11,7 +11,7 @@ use luya\cms\base\TwigBlock;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class TableBlock extends TwigBlock
+final class TableBlock extends TwigBlock
 {
     public $module = 'cms';
     

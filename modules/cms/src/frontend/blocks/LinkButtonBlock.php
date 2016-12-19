@@ -11,7 +11,7 @@ use luya\cms\base\TwigBlock;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class LinkButtonBlock extends TwigBlock
+final class LinkButtonBlock extends TwigBlock
 {
     public $cacheEnabled = true;
 

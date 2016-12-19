@@ -12,7 +12,7 @@ use luya\cms\base\TwigBlock;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class TextBlock extends TwigBlock
+final class TextBlock extends TwigBlock
 {
     public $module = 'cms';
     

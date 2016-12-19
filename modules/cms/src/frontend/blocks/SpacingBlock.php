@@ -10,7 +10,7 @@ use luya\cms\base\TwigBlock;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class SpacingBlock extends TwigBlock
+final class SpacingBlock extends TwigBlock
 {
     public $module = 'cms';
     

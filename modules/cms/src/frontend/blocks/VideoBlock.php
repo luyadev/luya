@@ -11,7 +11,7 @@ use luya\cms\frontend\blockgroups\MediaGroup;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class VideoBlock extends TwigBlock
+final class VideoBlock extends TwigBlock
 {
     public $module = 'cms';
 

@@ -16,7 +16,7 @@ use luya\cms\helpers\BlockHelper;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class ModuleBlock extends TwigBlock
+final class ModuleBlock extends TwigBlock
 {
     public $module = 'cms';
 

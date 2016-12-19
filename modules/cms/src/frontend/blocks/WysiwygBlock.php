@@ -11,7 +11,7 @@ use luya\cms\base\TwigBlock;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class WysiwygBlock extends TwigBlock
+final class WysiwygBlock extends TwigBlock
 {
     /**
      * @inheritDoc

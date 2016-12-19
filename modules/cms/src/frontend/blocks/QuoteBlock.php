@@ -11,7 +11,7 @@ use luya\cms\base\TwigBlock;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class QuoteBlock extends TwigBlock
+final class QuoteBlock extends TwigBlock
 {
     public $module = 'cms';
 

@@ -10,7 +10,7 @@ use luya\cms\base\TwigBlock;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class LineBlock extends TwigBlock
+final class LineBlock extends TwigBlock
 {
     public $cacheEnabled = true;
     

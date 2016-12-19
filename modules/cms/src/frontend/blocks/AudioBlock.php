@@ -11,7 +11,7 @@ use luya\cms\frontend\blockgroups\MediaGroup;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class AudioBlock extends TwigBlock
+final class AudioBlock extends TwigBlock
 {
     /**
      * @inheritDoc

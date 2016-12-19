@@ -14,7 +14,7 @@ use luya\cms\helpers\BlockHelper;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class ImageTextBlock extends TwigBlock
+final class ImageTextBlock extends TwigBlock
 {
     public $module = 'cms';
 

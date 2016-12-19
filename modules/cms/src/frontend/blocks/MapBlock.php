@@ -10,7 +10,7 @@ use luya\cms\base\TwigBlock;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-class MapBlock extends TwigBlock
+final class MapBlock extends TwigBlock
 {
     public $module = 'cms';
     
