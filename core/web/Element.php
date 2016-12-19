@@ -47,9 +47,9 @@ use Twig_Loader_Filesystem;
  *    },
  * ];
  * ```
- * 
+ *
  * Its also possible to directly provided mocked arguments for the styleguide:
- * 
+ *
  * ```php
  * return [
  *    'button' => [function($value, $link) {
@@ -57,15 +57,15 @@ use Twig_Loader_Filesystem;
  *    }, ['value' => 'Value for Button', 'link' => 'Value for Link']],
  * ];
  * ```
- * 
+ *
  * Or directly from the add Element method:
- * 
+ *
  * ```php
  * Yii::$app->element->addElement('button', function($value, $link) {
  *     return '<a class="btn btn-primary" href="'.$link.'">'.$value.'</a>';
  * }, ['value' => 'Value for Button', 'link' => 'Value for Link']);
  * ```
- * 
+ *
  * The styleguide will now insert the mocked values instead of generic values.
  *
  * @author Basil Suter <basil@nadar.io>
@@ -142,7 +142,7 @@ class Element extends \yii\base\Component
      *     return 'foobar';
      * }
      * ```
-     * 
+     *
      * @param array $mockedArgs An array with key value pairing for the argument in order to render them for the styleguide.
      */
     public function addElement($name, $closure, $mockedArgs = [])
@@ -236,7 +236,7 @@ class Element extends \yii\base\Component
     
     /**
      * Mock arguments for an element in order to render those inside the styleguide.
-     * 
+     *
      * @param string $elementName The element name the arguments are defined for.
      * @param array $args Arguments where the key is the argument name value and value to mock.
      */
@@ -247,7 +247,7 @@ class Element extends \yii\base\Component
     
     /**
      * Find the mocked value for an element argument.
-     * 
+     *
      * @param string $elementName The name of the element.
      * @param string $argName The name of the argument.
      * @return mixed|boolean Whether the mocked argument value exists returns the value otherwise false.
