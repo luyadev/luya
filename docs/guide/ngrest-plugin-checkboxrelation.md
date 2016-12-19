@@ -4,6 +4,7 @@ The checkbox releation quickly adds the ability to make an checkbox input where 
 
 + Create public propertie (in order to communicate with the api) `$groups`
 + Define the attribute in the `$extraFields` array.
++ Add the extra field to the safe attributes.
 + Register the attribute type in the `ngrestExtraAttributeTypes()` method.
 
 Below an example of a User model where you can select the related Groups and stored in a via/ref table named `admin_user_group`:
@@ -21,14 +22,14 @@ class User extends \luya\admin\ngrest\base\NgRestModel
     }
     
 
-    public function scenarios()
+    public function rules()
     {
         return [
-           'restcreate' => ['title', 'text', 'image_id', 'groups'], // add the extraField to the safe attributes
-           'restupdate' => ['title', 'text', 'image_id', 'groups'], // add the extraField to the safe attributes
+            // ...
+            [['groups'], 'safe'],
         ];
     }
-    
+
     public function ngrestExtraAttributeTypes()
     {
         return [

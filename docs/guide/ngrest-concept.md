@@ -58,19 +58,6 @@ class Member extends \luya\admin\ngrest\base\NgRestModel
     }
     
     /**
-     * By default those rest scenarios will be used to multi assign post values. You should not forget to
-     * call the parent scenarios in order to make sure the default scenarios (for frontend implmentations) are
-     * also provided.
-     */
-    public function scenarios()
-    {
-        $scenarios = parent::scenarios();
-        $scenarios['restcreate'] = ['name', 'title', 'text'];
-        $scenarios['restupdate'] = ['name', 'title', 'text'];
-        return $scenarios;
-    }
-    
-    /**
      * Yii related ActiveRecord code
      */
     public function attributeLabels()

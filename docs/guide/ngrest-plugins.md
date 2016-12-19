@@ -128,3 +128,15 @@ class Product extends \luya\admin\ngrest\base\NgRestModel
     // ...
 }
 ```
+
+Make sure the the `field` extra field is part of the validation rules. For example:
+
+```php
+public function rules()
+{
+    return [
+        // ...
+        [['field'], 'safe'],
+    ];
+}
+```
